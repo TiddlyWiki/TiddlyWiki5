@@ -1542,7 +1542,7 @@ html body.tc-body.tc-single-tiddler-window {
 	}
 
 	.tc-story-river {
-		margin-right: calc(<<get.theme.metric sidebarwidth>> - <<get.theme.metric storypaddingright>>);
+		margin-right: clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.metric storypaddingright>>),calc(<<get.theme.metric sidebarwidth>> - <<get.theme.metric storypaddingright>>),calc(100% - <<get.theme.metric storyleft>> - <<get.theme.metric storyminwidth>> + <<get.theme.metric storypaddingright>>));
 	}
 
 	html[dir="rtl"] .tc-sidebar-left .tc-story-river, .tc-sidebar-left .tc-story-river {

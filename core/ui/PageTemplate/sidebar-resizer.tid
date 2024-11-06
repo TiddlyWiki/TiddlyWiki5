@@ -1,6 +1,7 @@
 title: $:/core/ui/PageTemplate/sidebar-resizer
 tags: $:/tags/PageTemplate
 list-after: $:/core/ui/PageTemplate/story
+code-body: yes
 
 \import [function[get.base.functions.theme],<get.current.theme>first[]is[tiddler]] :else[function[get.base.functions.theme],<get.current.theme>first[]is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/functions]] [[$:/core/procedures/sidebar-resizer]]
 \function resizer.state.tiddler() $:/state/sidebar/resizing
