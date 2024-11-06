@@ -9,7 +9,7 @@ tags: [[$:/tags/Stylesheet]]
 		text-align: center;
 	}
 
-	html .tc-story-river {
+	html .tc-story-river, html .tc-sidebar-left .tc-story-river {
 		position: relative;
 		width: min(<<get.theme.metric storywidth>>,calc(100% - (2 * <<get.theme.metric sidebarminwidth>>)));
 		padding: 42px <<get.theme.metric storypaddingright>> 42px <<get.theme.metric storypaddingleft>>;
@@ -41,7 +41,7 @@ tags: [[$:/tags/Stylesheet]]
 		padding-left: 42px;
 	}
 
-	html[dir="rtl"] .tc-sidebar-left .tc-sidebar-scrollable {
+	html[dir="rtl"] body.tc-body .tc-sidebar-left .tc-sidebar-scrollable {
 		padding-right: 42px;
 		padding-left: 0;
 	}
