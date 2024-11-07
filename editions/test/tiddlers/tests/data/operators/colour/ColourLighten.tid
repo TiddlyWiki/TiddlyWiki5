@@ -6,12 +6,11 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \parsermode inline
-\import [subfilter{$:/core/config/GlobalImportFilter}]
 <$text text={{{ [subfilter{Filter}] }}}/>
 +
 title: Filter
 
-[function[colour],[primary]colour-lighten[0.5]]
+[[#5778d8]colour-lighten[0.5]]
 +
 title: ExpectedResult
 

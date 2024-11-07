@@ -341,19 +341,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 		},
 		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables,
 		resolveVariableParameters: self.resolveVariableParameters,
-		wiki: self.wiki,
-		get variables() {
-			// We have to inefficiently fake the variables hashmap. It would be better to refactor the places
-			// that make direct access to the variables hashmap
-			const v = Object.create(self.parentWidget.variables || null);
-			$tw.utils.each(variables,function(value,name) {
-				v[name] = {value: value};
-			});
-			return v;
-		},
-		getAncestorCount: function() {
-			return 0;
-		}
+		wiki: self.wiki
 	};
 };
 
