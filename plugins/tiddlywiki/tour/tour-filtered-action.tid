@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/tour/filtered-action
+tags: $:/tags/FilteredActions
+filter: [{$:/config/ShowTour}!is[blank]else[show]match[show]then[$:/state/tour/step]get[text]get[step-success-filter]] :map[subfilter<currentTiddler>] :filter[<currentTiddler>!match[]]
+
+\import [[$:/plugins/tiddlywiki/tour/variables]]
+<$action-sendmessage $message="tm-confetti-launch"/>
+<<tour-next-step>>
