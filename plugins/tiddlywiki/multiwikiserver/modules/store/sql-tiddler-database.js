@@ -224,14 +224,6 @@ SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscon
 		$accesscontrol: accesscontrol,
 		$description: description
 	});
-
-	const admin = this.getRoleByName("ADMIN");
-	if(admin) {	
-		const readPermission = this.getPermissionByName("READ");
-		const writePermission = this.getPermissionByName("WRITE");
-		// this.createACL(bag_name, "bag", admin.role_id, readPermission.permission_id);
-		// this.createACL(bag_name, "bag", admin.role_id, writePermission.permission_id);
-	}
 	return updateBags.lastInsertRowid;
 };
 
@@ -296,15 +288,6 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,descr
 		$bag_names: JSON.stringify(bag_names)
 	});
 
-
-	// update the permissions on ACL records
-	const admin = this.getRoleByName("ADMIN");
-	if(admin) {
-		const readPermission = this.getPermissionByName("READ");
-		const writePermission = this.getPermissionByName("WRITE");
-		// this.createACL(recipe_name, "recipe", admin.role_id, readPermission.permission_id);
-		// this.createACL(recipe_name, "recipe", admin.role_id, writePermission.permission_id);
-	}
 	return updateRecipes.lastInsertRowid;
 };
 
@@ -1028,6 +1011,14 @@ SqlTiddlerDatabase.prototype.deleteUserSessions = function(userId) {
 	`, {
 			$userId: userId
 	});
+};
+
+// Set the user as an admin
+SqlTiddlerDatabase.prototype.setUserAdmin = function(userId) {
+	var admin = this.getRoleByName("ADMIN");
+	if(admin) {	
+		this.addRoleToUser(userId, admin.role_id);
+	}
 };
 
 // Group CRUD operations

@@ -87,7 +87,7 @@ exports.handler = function(request,response,state) {
 			"user-role": JSON.stringify(userRole),
 			"all-roles": JSON.stringify(allRoles),
 			"is-current-user-profile": state.authenticatedUser && state.authenticatedUser.user_id === $tw.utils.parseInt(user_id, 10) ? "yes" : "no",
-			"username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
+			"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Annonymous User" : "Guest",
 			"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no",
 			"user-id": user_id,
 		}

@@ -11,7 +11,9 @@ POST /admin/post-user
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
-
+if($tw.node) {
+	var crypto = require("crypto");
+}
 exports.method = "POST";
 
 exports.path = /^\/admin\/post-user\/?$/;
@@ -27,7 +29,7 @@ exports.handler = function(request, response, state) {
   var password = state.data.password;
   var confirmPassword = state.data.confirmPassword;
 
-  if(!state.authenticatedUser) {
+  if(!state.authenticatedUser && !state.firstGuestUser) {
     response.writeHead(401, "Unauthorized", { "Content-Type": "text/plain" });
     response.end("Unauthorized");
     return;
@@ -53,11 +55,32 @@ exports.handler = function(request, response, state) {
     return;
   }
 
-  // Create new user
-  var userId = sqlTiddlerDatabase.createUser(username, email, password);
+  var hasUsers = sqlTiddlerDatabase.listUsers().length > 0;
+	var hashedPassword = crypto.createHash("sha256").update(password).digest("hex");
 
-  response.writeHead(302, {"Location": "/admin/users/"+userId});
-  response.end();
+  // Create new user
+  var userId = sqlTiddlerDatabase.createUser(username, email, hashedPassword);
+
+  if(!hasUsers) {
+    // If this is the first guest user, assign admin privileges
+    sqlTiddlerDatabase.setUserAdmin(userId, true);
+    
+    // Create a session for the new admin user
+    var auth = require('$:/plugins/tiddlywiki/multiwikiserver/auth/authentication.js').Authenticator;
+    var authenticator = auth(sqlTiddlerDatabase);
+    var sessionId = authenticator.createSession(userId);
+    
+    // Set the session cookie and redirect
+    response.setHeader('Set-Cookie', `session=${sessionId}; HttpOnly; Path=/`);
+    response.writeHead(302, {
+        'Location': '/'
+    });
+    response.end();
+    return;
+  } else {
+    response.writeHead(302, {"Location": "/admin/users/"+userId});
+    response.end();
+  }
 };
 
 }());

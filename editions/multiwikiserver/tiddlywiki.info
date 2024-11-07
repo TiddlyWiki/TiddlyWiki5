@@ -11,15 +11,6 @@
 		"tiddlywiki/snowwhite"
 	],
 	"build": {
-		"mws-add-user": [
-			"--mws-add-permission", "READ", "Allows user to create tiddlers",
-			"--mws-add-permission", "WRITE", "Gives the user the permission to edit and delete tiddlers",
-			"--mws-add-role", "ADMIN", "System Administrator",
-			"--mws-assign-role-permission", "ADMIN", "READ",
-			"--mws-assign-role-permission", "ADMIN", "WRITE",
-			"--mws-add-user", "user", "pass123",
-			"--mws-assign-user-role", "user", "ADMIN"
-		],
 		"load-mws-demo-data": [
 			"--mws-load-wiki-folder","./editions/tw5.com","docs", "TiddlyWiki Documentation from https://tiddlywiki.com","docs","TiddlyWiki Documentation from https://tiddlywiki.com",
 			"--mws-load-wiki-folder","./editions/dev","dev","TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev","dev-docs", "TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev",

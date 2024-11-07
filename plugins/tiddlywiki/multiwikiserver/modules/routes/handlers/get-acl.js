@@ -85,7 +85,7 @@ exports.handler = function (request, response, state) {
 			"recipe": JSON.stringify(recipe),
 			"recipe-acl-records": JSON.stringify(recipeAclRecords),
 			"bag-acl-records": JSON.stringify(bagAclRecords),
-			"username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
+			"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Annonymous User" : "Guest",
 			"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"
 		}
 	});
