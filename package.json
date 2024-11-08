@@ -32,7 +32,7 @@
     "node": ">=0.8.2"
   },
   "scripts": {
-    "start": "npm run mws-add-user && node ./tiddlywiki.js ./editions/multiwikiserver --mws-load-plugin-bags --build load-mws-demo-data --mws-listen",
+    "start": "node ./tiddlywiki.js ./editions/multiwikiserver --mws-load-plugin-bags --build load-mws-demo-data --mws-listen",
     "build:test-edition": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
     "test:multiwikiserver-edition": "node ./tiddlywiki.js ./editions/multiwikiserver/ --build load-mws-demo-data --mws-listen --mws-test-server http://127.0.0.1:8080/ --quit",
     "mws-add-user": "node ./tiddlywiki.js ./editions/multiwikiserver --build load-mws-demo-data --mws-listen --build mws-add-user --quit",
