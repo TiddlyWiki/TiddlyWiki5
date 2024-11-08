@@ -22,8 +22,12 @@ exports.csrfDisable = true;
 
 exports.handler = function (request,response,state) {
   if(!state.authenticatedUser) {
-    response.writeHead(401, "Unauthorized", { "Content-Type": "text/plain" });
-    response.end("Unauthorized");
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/login/error",
+      text: "You must be logged in to update profiles"
+    }));
+    response.writeHead(302, { "Location": "/login" });
+    response.end();
     return;
   }
 
@@ -32,29 +36,39 @@ exports.handler = function (request,response,state) {
   var email = state.data.email;
   var roleId = state.data.role;
   var currentUserId = state.authenticatedUser.user_id;
-  
-  var hasPermission = ($tw.utils.parseInt(userId, 10) === currentUserId) || state.authenticatedUser.isAdmin;
+
+  var hasPermission = ($tw.utils.parseInt(userId) === currentUserId) || state.authenticatedUser.isAdmin;
 
   if(!hasPermission) {
-    response.writeHead(403, "Forbidden", { "Content-Type": "text/plain" });
-    response.end("Forbidden");
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/update-profile/" + userId + "/error",
+      text: "You don't have permission to update this profile"
+    }));
+    response.writeHead(302, { "Location": "/admin/users/" + userId });
+    response.end();
     return;
   }
 
   if(!state.authenticatedUser.isAdmin) {
-		var userRole = state.server.sqlTiddlerDatabase.getUserRoles(userId);
+    var userRole = state.server.sqlTiddlerDatabase.getUserRoles(userId);
     roleId = userRole.role_id;
   }
 
   var result = state.server.sqlTiddlerDatabase.updateUser(userId, username, email, roleId);
 
   if(result.success) {
-    response.setHeader("Set-Cookie", "flashMessage="+result.message+"; Path=/; HttpOnly; Max-Age=5");
-    response.writeHead(302, { "Location": "/admin/users/" + userId });
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/update-profile/" + userId + "/success",
+      text: result.message
+    }));
   } else {
-    response.setHeader("Set-Cookie", "flashMessage="+result.message+"; Path=/; HttpOnly; Max-Age=5");
-    response.writeHead(302, { "Location": "/admin/users/" + userId });
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/update-profile/" + userId + "/error",
+      text: result.message
+    }));
   }
+
+  response.writeHead(302, { "Location": "/admin/users/" + userId });
   response.end();
 };
 

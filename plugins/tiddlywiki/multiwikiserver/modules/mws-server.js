@@ -441,6 +441,8 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Check whether anonymous access is granted
 	state.allowAnon = false; //this.isAuthorized(state.authorizationType,null);
 
+	state.firstGuestUser = this.sqlTiddlerDatabase.listUsers().length === 0 && !state.authenticatedUser;
+
 	// Authorize with the authenticated username
 	if(!this.isAuthorized(state.authorizationType,state.authenticatedUsername) && !response.headersSent) {
 		response.writeHead(403,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");

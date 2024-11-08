@@ -43,11 +43,9 @@ Command.prototype.execute = function() {
 
 	var user = $tw.mws.store.sqlTiddlerDatabase.getUserByUsername(username);
 
-	if(user) {
-		self.callback("WARNING: An account with the username (" + username + ") already exists");
-	} else {
+	if(!user) {
 		$tw.mws.store.sqlTiddlerDatabase.createUser(username, email, hashedPassword);
-		console.log("User Account Created Successfully!")
+		console.log("User Account Created Successfully with username: " + username + " and password: " + password);
 		self.callback();
 	}
 	return null;

@@ -18,19 +18,19 @@ exports.path = /^\/admin\/users$/;
 
 exports.handler = function(request,response,state) {
 	var userList = state.server.sqlTiddlerDatabase.listUsers();
-		
+
 	// Ensure userList is an array
 	if (!Array.isArray(userList)) {
 		userList = [];
 		console.error("userList is not an array");
 	}
 
-	if(!state.authenticatedUser.isAdmin) {
+	if(!state.authenticatedUser.isAdmin && !state.firstGuestUser) {
 		response.writeHead(403, "Forbidden", { "Content-Type": "text/plain" });
 		response.end("Forbidden");
 		return;
 	}
-	
+
 	// Convert dates to strings and ensure all necessary fields are present
 	userList = userList.map(user => ({
 		user_id: user.user_id || '',
@@ -49,12 +49,13 @@ exports.handler = function(request,response,state) {
 		variables: {
 			"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/get-users",
 			"user-list": JSON.stringify(userList),
-			"username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
-			"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"
+			"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Annonymous User" : "Guest",
+			"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no",
+			"first-guest-user": state.firstGuestUser ? "yes" : "no"
 		}
 	});
 	response.write(html);
 	response.end();
 };
-	
+
 }());

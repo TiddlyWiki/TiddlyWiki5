@@ -12,7 +12,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 					<a href="/admin/roles">Manage Roles</a>
 				</div>
 			</div>
-		<% elseif [<username>!match[Guest]] %>
+		<% elseif [<username>!match[Guest]]+[<first-guest-user>match[no]] %>
 			<a href={{{ [<user>jsonget[user_id]addprefix[/admin/users/]] }}}>
 				<button class="mws-profile-btn">Profile</button>
 			</a>

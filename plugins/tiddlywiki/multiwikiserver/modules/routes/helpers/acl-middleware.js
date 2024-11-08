@@ -42,7 +42,7 @@ exports.middleware = function (request, response, state, entityType, permissionN
 		entityName = state.data ? (state.data[entityType+"_name"] || state.params[0]) : state.params[0];
 
 	// First, replace '%3A' with ':' to handle TiddlyWiki's system tiddlers
-	var partiallyDecoded = entityName.replace(/%3A/g, ":");
+	var partiallyDecoded = entityName?.replace(/%3A/g, ":");
 	// Then use decodeURIComponent for the rest
 	var decodedEntityName = decodeURIComponent(partiallyDecoded);
 	var aclRecord = sqlTiddlerDatabase.getACLByName(entityType, decodedEntityName);

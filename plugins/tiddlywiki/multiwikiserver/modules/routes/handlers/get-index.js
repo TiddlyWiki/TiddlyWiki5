@@ -41,10 +41,10 @@ exports.handler = function(request,response,state) {
 				"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/get-index",
 				"bag-list": JSON.stringify(allowedBags),
 				"recipe-list": JSON.stringify(allowedRecipes),
-				"username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
-        "user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"
-			}
-		});
+				"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Annonymous User" : "Guest",
+				"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no",
+				"first-guest-user": state.firstGuestUser ? "yes" : "no"
+			}});
 		response.write(html);
 		response.end();
 	}
