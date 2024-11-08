@@ -10,10 +10,10 @@ created: 20241105133737778
 Planned features include:
 
 * Hosting multiple wikis at once, using the [[Bags and Recipes]] mechanism for sharing data between them
-* [[Robust authentication and authorisation options|MWS: Security]]
-* [[Improved handling of file uploads and attachments|MWS: Attachments]], allowing gigabyte video files to be uploaded and streamed
-* [[Instantaneous synchronisation|MWS: Synchronisation]] of changes between the server and all connected clients
-* [[Workflow processing|MWS: Workflow]] on the server, for example to automatically compress images, or to archive webpages
+* Robust authentication and authorisation options
+* Improved handling of file uploads and attachments, allowing gigabyte video files to be uploaded and streamed
+* Instantaneous synchronisation of changes between the server and all connected clients
+* Workflow processing on the server, for example to automatically compress images, or to archive webpages
 
 MWS is currently [[under development at GitHub|https://github.com/TiddlyWiki/TiddlyWiki5/pull/7915]] but it is already functional and usable.
 

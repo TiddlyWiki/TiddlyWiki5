@@ -5,13 +5,9 @@ created: 20241105133737778
 
 Once MWS is successfully [[installed|MWS: Installation]], you can access it by visiting http://localhost:8080 in a browser on the same computer.
 
-! MWS Home
+By default, MWS is installed with full anonymous access enabled, meaning that anyone with access to the server has full access to read and modify anything. However, also by default, the server is only accessible to browsers on the same machine.
 
-The home page of MWS consists of the following elements:
+If you intend to put an MWS installation on a public network like the Internet, the server will need to be secured with the following steps:
 
-* A listing of the available wikis on this server
-* A form to create a new wiki recipe, or modify an existing one
-* A listing of the available bags on this server
-* A form to create a new bag, or modify an existing one
-* An "Advanced" section containing a checkbox to show system bags
-
+* Create and login with a new administrator account
+* Disable anonymouse access
