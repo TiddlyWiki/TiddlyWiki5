@@ -1,0 +1,7 @@
+title: $:/core/ui/Palettes/Preview/Tiddler/Subtitle
+tags: $:/tags/Preview/Tiddler
+
+\whitespace trim
+<$colour.div class="tc-palette-preview-thumbnail-tiddler-subtitle" styleName="color" styleColour="tiddler-subtitle-foreground">
+	Motovun Jack
+</$colour.div>
