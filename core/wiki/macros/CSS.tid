@@ -1,17 +1,44 @@
 title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
-<!-- Needs to stay that way for backwards compatibility. See GH issue: #8326 -->
-\define colour(name)
-\whitespace trim
-<$transclude tiddler={{$:/palette}} index="$name$">
-	<$transclude tiddler="$:/palettes/Vanilla" index="$name$">
-		<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
-	</$transclude>
-</$transclude>
-\end
+\procedure actions-compile-palette(inputTitle,outputTitle)
+<!-- Redefine colour function to use the input palette -->
+\function colour(name)
+	[<inputTitle>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]]
+\end colour
+<!-- Process modern filter-based palettes -->
+<%if [<inputTitle>get[palette-type]match[modern]] %>
+	<$list filter="[<inputTitle>indexes[]sort[]]" variable="colour-name">
+		<$let colour-filter={{{ [<inputTitle>getindex<colour-name>] }}}>
+			<!-- Note the join, needed to cope with palette entries containing spaces -->
+			<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value={{{ [subfilter<colour-filter>join[ ]] }}}/>
+		</$let>
+	</$list>
+<%else%>
+<!-- Process legacy wikified palettes -->
+	<$list filter="[<inputTitle>indexes[]sort[]]" variable="colour-name">
+		<$wikify name="colour-value" text={{{ [<inputTitle>getindex<colour-name>] }}} mode="inline">
+			<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value=<<colour-value>>/>
+		</$wikify>
+	</$list>
+<%endif%>
+\end actions-compile-palette
 
-\define color(name) <<colour $name$>>
+\procedure actions-switch-colour-palette(paletteTitle)
+<$action-log $msg="switching palette" $to=<<paletteTitle>> actions-compile-palette=<<actions-compile-palette>>/>
+<$action-deletetiddler $tiddler="$:/temp/palette-colours"/>
+<$action-setfield $tiddler="$:/palette" $field="text" $value=<<paletteTitle>>/>
+<$transclude $variable="actions-compile-palette" inputTitle="$:/palettes/Vanilla" outputTitle="$:/temp/palette-colours"/>
+<$transclude $variable="actions-compile-palette" inputTitle=<<paletteTitle>> outputTitle="$:/temp/palette-colours"/>
+\end actions-switch-colour-palette
+
+\function colour(name)
+[[$:/temp/palette-colours]getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]]
+\end colour
+
+\function color(name)
+[function[colour],<name>]
+\end color
 
 \define box-shadow(shadow)
 ``
