@@ -1,33 +1,69 @@
 title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
-\procedure actions-compile-palette(inputTitle,outputTitle)
-<!-- Redefine colour function to use the input palette -->
-<$let tv-palette-name=<<inputTitle>>>
-	<!-- Process modern filter-based palettes -->
+\procedure actions-compile-palette-filtered(tempPalette,outputTitle)
+<!-- Make the colour function use the input palette -->
+<$let
+	tv-palette-name=<<tempPalette>>
+>
+	<$list filter="[<tempPalette>indexes[]sort[]]" variable="colour-name">
+		<$let colour-filter={{{ [<tempPalette>getindex<colour-name>] }}}>
+			<!-- Note the join, needed to cope with palette entries containing spaces -->
+			<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value={{{ [subfilter<colour-filter>join[ ]] }}}/>
+		</$let>
+	</$list>
+</$let>
+\end actions-compile-palette-filtered
+
+\procedure actions-compile-palette-wikified(tempPalette,outputTitle)
+<!-- Define our own deeply backwards compatible local versions of the colour macro -->
+\define colour(name)
+\whitespace trim
+<$transclude tiddler=<<tempPalette>> index="$name$">
+	<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
+</$transclude>
+\end colour
+\define color(name) <<colour $name$>>
+<$list filter="[<tempPalette>indexes[]sort[]]" variable="colour-name" $debug="yes">
+	<$wikify name="colour-value" text={{{ [<tempPalette>getindex<colour-name>] }}} mode="inline">
+		<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value=<<colour-value>>/>
+	</$wikify>
+</$list>
+\end actions-compile-palette-wikified
+
+\procedure actions-compile-palette(inputTitle,outputTitle,defaultImport="$:/palettes/Vanilla")
+<$let
+	tempPalette="$:/temp/palette-source"
+>
+	<!-- Clear the temporary consolidated palette -->
+	<$action-deletetiddler $tiddler=<<tempPalette>>/>
+	<!-- Consolidate the imported palette -->
+	<$let importTitle={{{ [<inputTitle>get[palette-import]else<defaultImport>] }}}>
+		<%if [<importTitle>!match[]] %>
+			<$list filter="[<importTitle>indexes[]sort[]]" variable="colour-name">
+				<$action-setfield $tiddler=<<tempPalette>> $index=<<colour-name>> $value={{{ [<importTitle>getindex<colour-name>] }}}/>
+			</$list>
+		<%endif%>
+	</$let>
+	<!-- Consolidate the main palette -->
+	<$list filter="[<inputTitle>indexes[]sort[]]" variable="colour-name">
+		<$action-setfield $tiddler=<<tempPalette>> $index=<<colour-name>> $value={{{ [<inputTitle>getindex<colour-name>] }}}/>
+	</$list>
+	<!-- Compile the temporary palette to the output palette -->
 	<%if [<inputTitle>get[palette-type]match[modern]] %>
-		<$list filter="[<inputTitle>indexes[]sort[]]" variable="colour-name">
-			<$let colour-filter={{{ [<inputTitle>getindex<colour-name>] }}}>
-				<!-- Note the join, needed to cope with palette entries containing spaces -->
-				<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value={{{ [subfilter<colour-filter>join[ ]] }}}/>
-			</$let>
-		</$list>
+		<$transclude $variable="actions-compile-palette-filtered" tempPalette=<<tempPalette>> outputTitle=<<outputTitle>>/>
 	<%else%>
-	<!-- Process legacy wikified palettes -->
-		<$list filter="[<inputTitle>indexes[]sort[]]" variable="colour-name">
-			<$wikify name="colour-value" text={{{ [<inputTitle>getindex<colour-name>] }}} mode="inline">
-				<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value=<<colour-value>>/>
-			</$wikify>
-		</$list>
+		<$transclude $variable="actions-compile-palette-wikified" tempPalette=<<tempPalette>> outputTitle=<<outputTitle>>/>
 	<%endif%>
+	<!-- Remove the temporary consolidated palette -->
+	<!-- <$action-deletetiddler $tiddler=<<tempPalette>>/> -->
 </$let>
 \end actions-compile-palette
 
 \procedure actions-switch-colour-palette(paletteTitle)
-<$action-log $msg="switching palette" $to=<<paletteTitle>> actions-compile-palette=<<actions-compile-palette>>/>
+\procedure tv-action-refresh-policy() always
 <$action-deletetiddler $tiddler="$:/temp/palette-colours"/>
 <$action-setfield $tiddler="$:/palette" $field="text" $value=<<paletteTitle>>/>
-<$transclude $variable="actions-compile-palette" inputTitle="$:/palettes/Vanilla" outputTitle="$:/temp/palette-colours"/>
 <$transclude $variable="actions-compile-palette" inputTitle=<<paletteTitle>> outputTitle="$:/temp/palette-colours"/>
 \end actions-switch-colour-palette
 
