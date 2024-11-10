@@ -3,7 +3,7 @@ title: $:/snippets/currpalettepreview
 \whitespace trim
 
 \procedure colour-div-filtered(class,styleName,styleColour)
-\function colour(name) [<currentTiddler>getindex<name>] :map[subfilter<currentTiddler>]
+\function colour(name) [<currentTiddler>getindex<name>] :else[<currentTiddler>get[palette-import]getindex<name>] :else[[none]] :map[subfilter<currentTiddler>]
 <$let colour-filter={{{ [<currentTiddler>getindex<styleColour>] }}}>
 	<!-- Note the join, needed to cope with palette entries containing spaces -->
 	<$let colour-result={{{ [subfilter<colour-filter>join[ ]] }}}>
