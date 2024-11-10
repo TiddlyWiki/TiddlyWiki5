@@ -6,28 +6,82 @@ code-body: yes
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional html
 
+.tc-sidebar-resizer {
+	position: fixed;
+	top: 0;
+	height: 100%;
+	width: <<sidebar.resizer.width>>;
+	transition: opacity 100ms;
+	opacity: 0.1;
+	cursor: ew-resize;
+	background: linear-gradient(<<colour muted-foreground>>, <<colour muted-foreground>>) no-repeat center/2px 100%;
+}
+
+.tc-sidebar-resizer:hover {
+	opacity: 0.6;
+}
+
+.tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper {
+	height: 100%;
+}
+
+.tc-edit-texteditor-slider > .tc-sidebar-resizer-pointerdown-eventcatcher.tc-editor-preview-eventcatcher {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+
+.tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	z-index: -1;
+}
+
+.tc-sidebar-resizer-pointerdown-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+.tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
+	flex-direction: row;
+}
+
+.tc-sidebar-resizer-pointerdown-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
+	position: relative;
+}
+
+.tc-sidebar-resizer, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
+	touch-action: none;
+	user-select: none;
+}
+
+.tc-sidebar-resizer-pointermove-eventcatcher-wrapper.tc-resizer-active {
+	z-index: 801;
+}
+
+.tc-sidebar-resizer-pointermove-eventcatcher.tc-resizer-active {
+	z-index: 802;
+}
+
+.tc-sidebar-resizer-pointermove.tc-resizer-active {
+	z-index: 803;
+	cursor: ew-resize;
+}
+
+.tc-sidebar-resizer.tc-resizer-active {
+	opacity: 0.6;
+}
+
 <%if [<get.theme.explicit.option sidebarresizer>match[show]] %>
 
 	@media (min-width: <<sidebarbreakpoint>>) {
-
-		.tc-sidebar-resizer {
-			position: fixed;
-			top: 0;
-			height: 100%;
-			width: <<sidebar.resizer.width>>;
-			transition: opacity 100ms;
-			opacity: 0.1;
-			cursor: ew-resize;
-			background: linear-gradient(<<colour muted-foreground>>, <<colour muted-foreground>>) no-repeat center/2px 100%;
-		}
-
-		.tc-sidebar-resizer:hover {
-			opacity: 0.6;
-		}
-
-		.tc-sidebar-resizer.tc-main-sidebar-resizer {
-			z-index: 1;
-		}
 
 		@media (pointer: coarse) {
 
@@ -38,64 +92,6 @@ code-body: yes
 			.tc-sidebar-resizer.tc-main-sidebar-resizer:hover {
 				opacity: 0.1;
 			}
-		}
-
-		.tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper {
-			height: 100%;
-		}
-
-		.tc-edit-texteditor-slider > .tc-sidebar-resizer-pointerdown-eventcatcher.tc-editor-preview-eventcatcher {
-			position: absolute;
-			width: 100%;
-			top: 0;
-			left: 0;
-		}
-
-		.tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			width: 100%;
-			height: 100%;
-			min-height: 100%;
-			z-index: -1;
-		}
-
-		.tc-sidebar-resizer-pointerdown-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
-			display: flex;
-			flex-direction: column;
-			flex-grow: 1;
-		}
-
-		.tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
-			flex-direction: row;
-		}
-
-		.tc-sidebar-resizer-pointerdown-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
-			position: relative;
-		}
-
-		.tc-sidebar-resizer, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
-			touch-action: none;
-			user-select: none;
-		}
-
-		.tc-sidebar-resizer-pointermove-eventcatcher-wrapper.tc-resizer-active {
-			z-index: 801;
-		}
-
-		.tc-sidebar-resizer-pointermove-eventcatcher.tc-resizer-active {
-			z-index: 802;
-		}
-
-		.tc-sidebar-resizer-pointermove.tc-resizer-active {
-			z-index: 803;
-			cursor: ew-resize;
-		}
-
-		.tc-sidebar-resizer.tc-resizer-active {
-			opacity: 0.6;
 		}
 
 		<%if [[$:/state/sidebar/resizing]is[tiddler]] %>
@@ -168,45 +164,41 @@ code-body: yes
 
 <% endif %>
 
-@media (min-width: <<sidebarbreakpoint>>) {
-
-	.tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
-	.tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
-	.tc-tiddler-frame contenteditable[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor {
-		width: calc(100% - <<get.theme.metric previewsliderwidth>>);
-		min-width: 0px;
-	}
-
-	.tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview,
-	.tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview,
-	.tc-tiddler-frame contenteditable[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview {
-		min-width: 0px;
-	}
-
-	<$list filter="[all[tiddlers]prefix[$:/state/resizer/previewwidth-]]" variable="previewWidthTiddler">
-
-		<$let
-			identifier={{{ [<previewWidthTiddler>removeprefix[$:/state/resizer/previewwidth-]] }}}
-			width={{{ [<previewWidthTiddler>get[text]] }}}>
-
-			<%if [<width>compare:number:lteq[1]] %>
-
-				.tc-tiddler-preview-preview-identified-<<identifier>> {
-					display: none;
-				}
-
-			<% endif %>
-
-			<%if [<width>compare:number:gteq[99]] %>
-
-				.tc-edit-texteditor-identified-<<identifier>> {
-					display: none;
-				}
-
-			<% endif %>
-
-		</$let>
-
-	</$list>
-
+.tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
+.tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
+.tc-tiddler-frame contenteditable[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor {
+	width: calc(100% - <<get.theme.metric previewsliderwidth>>);
+	min-width: 0px;
 }
+
+.tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview,
+.tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview,
+.tc-tiddler-frame contenteditable[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview {
+	min-width: 0px;
+}
+
+<$list filter="[all[tiddlers]prefix[$:/state/resizer/previewwidth-]]" variable="previewWidthTiddler">
+
+	<$let
+		identifier={{{ [<previewWidthTiddler>removeprefix[$:/state/resizer/previewwidth-]] }}}
+		width={{{ [<previewWidthTiddler>get[text]] }}}>
+
+		<%if [<width>compare:number:lteq[1]] %>
+
+			.tc-tiddler-preview-preview-identified-<<identifier>> {
+				display: none;
+			}
+
+		<% endif %>
+
+		<%if [<width>compare:number:gteq[99]] %>
+
+			.tc-edit-texteditor-identified-<<identifier>> {
+				display: none;
+			}
+
+		<% endif %>
+
+	</$let>
+
+</$list>
