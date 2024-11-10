@@ -4,38 +4,38 @@ title: $:/core/ui/EditTemplate/body/editor
 
 <$edit
 
-  field="text"
-  class=<<get.tc-edit-texteditor.class>>
-  placeholder={{$:/language/EditTemplate/Body/Placeholder}}
-  tabindex={{$:/config/EditTabIndex}}
-  focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}
-  cancelPopups="yes"
-  fileDrop={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}}
+	field="text"
+	class=<<get.tc-edit-texteditor.class>>
+	placeholder={{$:/language/EditTemplate/Body/Placeholder}}
+	tabindex={{$:/config/EditTabIndex}}
+	focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}
+	cancelPopups="yes"
+	fileDrop={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}}
 
 ><$set
 
-  name="targetTiddler"
-  value=<<currentTiddler>>
+	name="targetTiddler"
+	value=<<currentTiddler>>
 
 ><$list
 
-  filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]"
+	filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]"
 
 ><$reveal
 
-  type="nomatch"
-  state=<<config-visibility-title>>
-  text="hide"
-  class="tc-text-editor-toolbar-item-wrapper"
+	type="nomatch"
+	state=<<config-visibility-title>>
+	text="hide"
+	class="tc-text-editor-toolbar-item-wrapper"
 
 ><$transclude
 
-  tiddler="$:/core/ui/EditTemplate/body/toolbar/button"
-  mode="inline"
+	tiddler="$:/core/ui/EditTemplate/body/toolbar/button"
+	mode="inline"
 
 /></$reveal></$list><$list
 
-  filter="[all[shadows+tiddlers]tag[$:/tags/EditorTools]!has[draft.of]]"
+	filter="[all[shadows+tiddlers]tag[$:/tags/EditorTools]!has[draft.of]]"
 
 ><$list
 	filter={{!!condition}}
