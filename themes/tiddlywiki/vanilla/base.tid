@@ -2825,6 +2825,10 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	white-space: pre-wrap;
 }
 
+.tc-chooser .tc-chooser-item.tc-chosen {
+	outline: 2px solid <<colour primary>>;
+}
+
 .tc-chooser.tc-chooser-cards {
 	display: flex;
 	flex-wrap: wrap;
