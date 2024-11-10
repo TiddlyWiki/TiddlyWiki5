@@ -31,7 +31,7 @@ Metrics/BodyLineHeight: Line height for tiddler body
 Metrics/PreviewSliderWidth: Preview slider width
 Metrics/PreviewSliderWidth/Hint: the width of the slider between editor and editor preview
 Metrics/SidebarPadding: Sidebar padding
-Metrics/SidebarPadding/Hint: the padding of the sidebar between sidebar and story river - determines the position of the sidebar resizer
+Metrics/SidebarPadding/Hint: the padding of the sidebar between sidebar and story river
 Metrics/SidebarResizer/Hint: the values for `storyleft`, `storyright`, `storywidth`, `storyminwidth`, `sidebarwidth` and `sidebarminwidth` need to be ''absolute'' CSS units, ''percentages'' or ''em'' units in order for the sidebar resizer to work
 Metrics/StoryLeft: Story left position
 Metrics/StoryLeft/Hint: how far the left margin of the story river<br>(tiddler area) is from the left of the page
@@ -40,7 +40,7 @@ Metrics/StoryMinWidth/Hint: controls the minimum width of the tiddlers in the st
 Metrics/StoryPaddingLeft: Story Padding Left
 Metrics/StoryPaddingLeft/Hint: the left padding of the story river
 Metrics/StoryPaddingRight: Story Padding Right
-Metrics/StoryPaddingRight/Hint: the right padding of the story river, also controls the width and positioning of the resizer
+Metrics/StoryPaddingRight/Hint: the right padding of the story river
 Metrics/StoryTop: Story top position
 Metrics/StoryTop/Hint: how far the top margin of the story river<br>is from the top of the page
 Metrics/StoryRight: Story right
