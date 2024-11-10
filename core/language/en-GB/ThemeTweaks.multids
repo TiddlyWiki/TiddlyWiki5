@@ -36,7 +36,7 @@ Metrics/SidebarResizer/Hint: the values for `storyleft`, `storyright`, `storywid
 Metrics/StoryLeft: Story left position
 Metrics/StoryLeft/Hint: how far the left margin of the story river<br>(tiddler area) is from the left of the page
 Metrics/StoryMinWidth: Minimum Story width
-Metrics/StoryMinWidth/Hint: the minimun width of the story river
+Metrics/StoryMinWidth/Hint: controls the minimum width of the tiddlers in the story river
 Metrics/StoryPaddingLeft: Story Padding Left
 Metrics/StoryPaddingLeft/Hint: the left padding of the story river
 Metrics/StoryPaddingRight: Story Padding Right
