@@ -12,6 +12,7 @@ code-body: yes
 \function get.story-padding.right() 0px
 \function get.story-padding.left() 0px
 \function get.story.left() 0
+\function drag.direction.reverse() no
 \whitespace trim
 
 <$let
@@ -48,6 +49,7 @@ code-body: yes
 \function set.throttling() no
 \function get.left.minwidth() [<leftMinWidth>]
 \function get.right.minwidth() [<rightMinWidth>]
+\function drag.direction.reverse() no
 \whitespace trim
 
 <div

@@ -326,7 +326,7 @@ title: $:/core/procedures/sidebar-resizer
 
 \function get.drag.diff()
 [<event-fromcatcher-posx>subtract<startPosX>]
-:map[<get.theme.option sidebarposition>match[left]then<currentTiddler>multiply[-1]else<currentTiddler>]
+:map[<drag.direction.reverse>match[yes]then<currentTiddler>multiply[-1]else<currentTiddler>]
 \end
 
 \procedure sidebar-resizer-pointermove-actions()

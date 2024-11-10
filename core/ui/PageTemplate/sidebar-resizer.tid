@@ -8,6 +8,7 @@ code-body: yes
 \function resizer.state() [{$:/state/sidebar}]
 \function resizer.class() tc-main-sidebar-resizer
 \function set.throttling() yes
+\function drag.direction.reverse() [<get.theme.option sidebarposition>match[left]then[yes]] :else[[no]]
 \whitespace trim
 
 <%if [<get.theme.explicit.option sidebarresizer>match[show]] %>
