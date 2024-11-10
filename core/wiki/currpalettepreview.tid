@@ -2,22 +2,41 @@ title: $:/snippets/currpalettepreview
 
 \whitespace trim
 
-\procedure colour(name)
+\procedure colour-div-filtered(class,styleName,styleColour)
+\function colour(name) [<currentTiddler>getindex<name>] :map[subfilter<currentTiddler>]
+<$let colour-filter={{{ [<currentTiddler>getindex<styleColour>] }}}>
+	<!-- Note the join, needed to cope with palette entries containing spaces -->
+	<$let colour-result={{{ [subfilter<colour-filter>join[ ]] }}}>
+		<div class=<<class>> style={{{ [<styleName>addsuffix[:]addsuffix<colour-result>addsuffix[;]] }}}>
+			<$slot $name="ts-raw" $depth="2"/>
+		</div>
+	</$let>
+</$let>
+\end colour-div-filtered
+
+\procedure colour-div-wikified(class,styleName,styleColour)
+<!-- Define our own deeply backwards compatible local versions of the colour macro -->
+\define colour(name)
 \whitespace trim
-<$transclude $tiddler=<<currentTiddler>> $index=<<name>>>
-	<$transclude $tiddler="$:/palettes/Vanilla" $index=<<name>>>
-		<$transclude $tiddler={{{ [[$:/config/DefaultColourMappings/]addsuffix<name>] }}}/>
-	</$transclude>
+<$transclude tiddler=<<currentTiddler>> index="$name$">
+	<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
 </$transclude>
 \end colour
+\define color(name) <<colour $name$>>
+<$wikify name="colour-result" text={{{ [[<<colour ]addsuffix<styleColour>addsuffix[>>]] }}} mode="inline">
+	<div class=<<class>> style={{{ [<styleName>addsuffix[:]addsuffix<colour-result>addsuffix[;]] }}}>
+		<$slot $name="ts-raw" $depth="2"/>
+	</div>
+</$wikify>
+\end colour-div-wikified
 
 \widget $colour.div(class,styleName,styleColour)
 <%if [<styleName>!match[]] %>
-<$wikify name="colour-result" text={{{ [[<<colour ]addsuffix<styleColour>addsuffix[>>]] }}} mode="inline">
-	<div class=<<class>> style={{{ [<styleName>addsuffix[:]addsuffix<colour-result>addsuffix[;]] }}}>
-		<$slot $name="ts-raw"/>
-	</div>
-</$wikify>
+	<%if [<currentTiddler>get[palette-type]match[modern]] %>
+		<$transclude $variable="colour-div-filtered" class=<<class>> styleName=<<styleName>> styleColour=<<styleColour>>/>
+	<%else%>
+		<$transclude $variable="colour-div-wikified" class=<<class>> styleName=<<styleName>> styleColour=<<styleColour>>/>
+	<%endif%>
 <%else%>
 	<div class=<<class>>>
 		<$slot $name="ts-raw"/>

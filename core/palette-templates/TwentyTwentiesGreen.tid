@@ -1,10 +1,10 @@
 title: $:/palettes/TwentyTwenties/Green
 name: TwentyTwenties (Green)
-description: Modern and flexible
+description: Modern and flexible, Greenish
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 color-scheme: light
 palette-type: modern
 palette-import: $:/palettes/TwentyTwenties
 
-page-background: #6e803c
+primary: #3c6e80
