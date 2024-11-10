@@ -107,3 +107,5 @@ code-body: yes
 \end
 
 \function get.current.theme() [{$:/theme}!is[blank]] :else[all[tiddlers+shadows]plugin-type[theme]plugin-priority[0]first[]]
+
+\function get.theme.storywidthoverlap() [[calc(abs(]addsuffix<get.theme.metric storyright>addsuffix[ - ]addsuffix<get.theme.metric storywidth>addsuffix[ - ]addsuffix<get.theme.metric storyleft>addsuffix[))]]

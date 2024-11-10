@@ -112,20 +112,12 @@ code-body: yes
 		<%if [<set.storywidth.storyright>match[yes]] %>
 
 			.tc-sidebar-resizer.tc-main-sidebar-resizer {
-				left: min(clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),clamp(calc(<<get.theme.metric storywidth>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),calc(<<get.theme.metric storyright>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric sidebarpadding>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3))),calc(100% - (2 * <<get.theme.metric sidebarpadding>> / 3)));
-			}
-
-			.tc-sidebar-resizer.tc-main-sidebar-resizer {
-				left: min(max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3))),calc(100% - (2 * <<get.theme.metric sidebarpadding>> / 3)));
+				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>> + <<get.theme.storywidthoverlap>>) - (2 * <<get.story-sidebar.overlap>> / 3));
 			}
 
 			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
-				right: max(clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),clamp(calc(<<get.theme.metric storywidth>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),calc(<<get.theme.metric storyright>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric sidebarpadding>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3))),calc(2 * <<get.theme.metric sidebarpadding>> / 3));
-			}
-
-			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
-				right: min(max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3))),calc(100% - (2 * <<get.theme.metric sidebarpadding>> / 3)));
+				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>> + <<get.theme.storywidthoverlap>>) - (2 * <<get.story-sidebar.overlap>> / 3));
 			}
 
 		<% endif %>
@@ -133,12 +125,12 @@ code-body: yes
 		<%if [<set.sidebarwidth>match[yes]] %>
 
 			.tc-sidebar-resizer.tc-main-sidebar-resizer {
-				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - <<get.theme.metric sidebarpadding>> + (<<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric sidebarpadding>> / 3)));
+				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - <<get.story-sidebar.overlap>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3)));
 			}
 
 			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
-				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - <<get.theme.metric sidebarpadding>> + (<<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric sidebarpadding>> / 3)));
+				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - <<get.story-sidebar.overlap>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3)));
 			}
 
 		<% endif %>
@@ -146,13 +138,13 @@ code-body: yes
 		<%if [<set.centralised>match[yes]] %>
 
 			.tc-sidebar-resizer.tc-main-sidebar-resizer {
-				left: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)));
+				left: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.story-sidebar.overlap>> / 3)));
 			}
 
 			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
 				z-index: 1;
-				right: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)));
+				right: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.story-sidebar.overlap>> / 3)));
 			}
 
 		<% endif %>
