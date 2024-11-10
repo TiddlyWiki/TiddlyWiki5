@@ -109,3 +109,7 @@ code-body: yes
 \function get.current.theme() [{$:/theme}!is[blank]] :else[all[tiddlers+shadows]plugin-type[theme]plugin-priority[0]first[]]
 
 \function get.theme.storywidthoverlap() [[calc(abs(]addsuffix<get.theme.metric storyright>addsuffix[ - ]addsuffix<get.theme.metric storywidth>addsuffix[ - ]addsuffix<get.theme.metric storyleft>addsuffix[))]]
+
+\function get.theme.storyleftpadding.excess() [[calc(]addsuffix<get.theme.metric storypaddingleft>addsuffix[ - ]addsuffix<get.story-sidebar.overlap>addsuffix[)]]
+
+\function get.theme.storyrightpadding.excess() [[calc(]addsuffix<get.theme.metric storypaddingright>addsuffix[ - ]addsuffix<get.story-sidebar.overlap>addsuffix[)]]

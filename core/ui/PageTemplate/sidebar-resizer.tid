@@ -8,7 +8,6 @@ code-body: yes
 \function resizer.state() [{$:/state/sidebar}]
 \function resizer.class() tc-main-sidebar-resizer
 \function set.throttling() yes
-\function get.story-sidebar.offset() 42px
 \whitespace trim
 
 <%if [<get.theme.explicit.option sidebarresizer>match[show]] %>

@@ -1046,34 +1046,34 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 
 	.tc-sidebar-scrollable {
-		left: clamp(calc(<<get.theme.metric storyminwidth>> + <<get.theme.metric storyleft>> - <<get.theme.storywidthoverlap>>),<<get.theme.metric storyright>>,calc(100% - <<get.theme.metric sidebarminwidth>> + 42px));
+		left: clamp(calc(<<get.theme.metric storyminwidth>> + <<get.theme.metric storyleft>> - <<get.theme.storywidthoverlap>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>>),<<get.theme.metric storyright>>,calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>>));
 	}
 
 	html[dir="rtl"] .tc-sidebar-left .tc-sidebar-scrollable, .tc-sidebar-left .tc-sidebar-scrollable {
-		right: clamp(calc(<<get.theme.metric storyminwidth>> + <<get.theme.metric storyleft>> - <<get.theme.storywidthoverlap>>),<<get.theme.metric storyright>>,calc(100% - <<get.theme.metric sidebarminwidth>> + 42px));
+		right: clamp(calc(<<get.theme.metric storyminwidth>> + <<get.theme.metric storyleft>> - <<get.theme.storywidthoverlap>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>>),<<get.theme.metric storyright>>,calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>>));
 	}
 
 	html[dir="rtl"] .tc-sidebar-scrollable:not(.tc-sidebar-left .tc-sidebar-scrollable) {
-		left: clamp(calc(<<get.theme.metric storyminwidth>> + <<get.theme.metric storyleft>> - <<get.theme.storywidthoverlap>>),<<get.theme.metric storyright>>,calc(100% - <<get.theme.metric sidebarminwidth>> + 42px));
+		left: clamp(calc(<<get.theme.metric storyminwidth>> + <<get.theme.metric storyleft>> - <<get.theme.storywidthoverlap>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>>),<<get.theme.metric storyright>>,calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>>));
 	}
 
 	.tc-story-river {
 		left: max(0px,<<get.theme.metric storyleft>>);
-		right: clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.storywidthoverlap>> - 42px),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
-		width: clamp(<<get.theme.metric storyminwidth>>,<<get.theme.metric storywidth>>,calc(100% - <<get.theme.metric sidebarminwidth>> + 42px - <<get.theme.metric storyleft>> + <<get.theme.storywidthoverlap>>));
+		right: clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.storywidthoverlap>> - <<get.story-sidebar.overlap>>),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
+		width: clamp(<<get.theme.metric storyminwidth>>,<<get.theme.metric storywidth>>,calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>> - <<get.theme.metric storyleft>> + <<get.theme.storywidthoverlap>>));
 	}
 
 	.tc-sidebar-left .tc-story-river {
 		display: flex;
 		align-items: flex-end;
 		flex-direction: column;
-		left: clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.storywidthoverlap>> - 42px),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
+		left: clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.storywidthoverlap>> - <<get.story-sidebar.overlap>>),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
 		right: max(0px,<<get.theme.metric storyleft>>);
 	}
 
 	html[dir="rtl"] .tc-sidebar-left .tc-story-river {
 		align-items: flex-start;
-		left: clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.storywidthoverlap>> - 42px),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
+		left: clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.storywidthoverlap>> - <<get.story-sidebar.overlap>>),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
 		right: max(0px,<<get.theme.metric storyleft>>);
 	}
 
@@ -1081,7 +1081,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		display: flex;
 		align-items: flex-end;
 		flex-direction: column;
-		right: clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.storywidthoverlap>> - 42px),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
+		right: clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.storywidthoverlap>> - <<get.story-sidebar.overlap>>),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
 	}
 
 <<if-no-sidebar """
@@ -1568,12 +1568,13 @@ html body.tc-body.tc-single-tiddler-window {
 		left: auto;
 		bottom: 0;
 		right: 0;
-		width: clamp(<<get.theme.metric sidebarminwidth>>,<<get.theme.metric sidebarwidth>>,(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>> + <<get.story-sidebar.overlap>>));
+		width: clamp(<<get.theme.metric sidebarminwidth>>,<<get.theme.metric sidebarwidth>>,(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>> + <<get.story-sidebar.overlap>> - <<get.theme.storyleftpadding.excess>> - <<get.theme.storyrightpadding.excess>>));
 	}
 
 	.tc-sidebar-left .tc-sidebar-scrollable {
 		left: 0;
 		right: auto;
+		width: clamp(<<get.theme.metric sidebarminwidth>>,<<get.theme.metric sidebarwidth>>,(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>> + <<get.story-sidebar.overlap>> - <<get.theme.storyleftpadding.excess>> - <<get.theme.storyrightpadding.excess>>));
 	}
 
 	html[dir="rtl"] .tc-sidebar-left .tc-sidebar-scrollable {
