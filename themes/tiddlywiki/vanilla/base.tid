@@ -1360,7 +1360,7 @@ html[dir="rtl"] .tc-tiddler-frame .tc-tiddler-controls {
 
 .tc-tiddler-frame .tc-edit-texteditor {
 	width: 100%;
-	margin: 4px 0 4px 0;
+	margin: 4px 0 3px 0;
 }
 
 .tc-tiddler-frame input.tc-edit-texteditor,
