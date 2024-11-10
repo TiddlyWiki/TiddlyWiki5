@@ -208,7 +208,7 @@ div[class*="tc-sidebar-resizer-identified-"]:not(.tc-main-sidebar-resizer) {
 		<%if [<width>compare:number:gteq[99]] %>
 
 			.tc-edit-texteditor-identified-<<identifier>> {
-				display: none;
+				display: none !important;
 			}
 
 		<% endif %>
