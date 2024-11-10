@@ -166,14 +166,14 @@ code-body: yes
 
 .tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
 .tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
-.tc-tiddler-frame contenteditable[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor {
+.tc-tiddler-frame div[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor {
 	width: calc(100% - <<get.theme.metric previewsliderwidth>>);
 	min-width: 0px;
 }
 
 .tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview,
 .tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview,
-.tc-tiddler-frame contenteditable[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview {
+.tc-tiddler-frame div[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview {
 	min-width: 0px;
 }
 
