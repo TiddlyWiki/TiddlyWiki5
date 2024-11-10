@@ -193,7 +193,7 @@ div[class*="tc-sidebar-resizer-identified-"]:not(.tc-main-sidebar-resizer) {
 			grid-template-columns: calc(100% - <<width>>) <<width>>;
 		}
 
-		.tc-sidebar-resizer.tc-sidebar-resizer-identified-<<identifier>> {
+		div.tc-sidebar-resizer.tc-sidebar-resizer-identified-<<identifier>> {
 			left: calc(100% - <<width>> - <<get.theme.metric previewsliderwidth>>);
 		}
 
