@@ -195,7 +195,7 @@ title: $:/core/procedures/sidebar-resizer
 	storyMinWidthValue={{{ [<storyMinWidthTiddler>!is[blank]is[tiddler]get[text]] :else[<storyMinWidthTiddler>!is[blank]is[missing]then<get.left.minwidth>] :else[<get.theme.metric storyminwidth>] }}}
 	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>] }}}
 	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]is[tiddler]get[text]] :else[<sidebarMinWidthTiddler>!is[blank]is[missing]then<get.right.minwidth>] :else[<get.theme.metric sidebarminwidth>] }}}
-	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]is[tiddler]get[text]] :else[<storyLeftTiddler>!is[blank]is[missing]then<get.sidebar.minwidth>] :else[<get.theme.metric storyleft>] }}}
+	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]is[tiddler]get[text]] :else[<storyLeftTiddler>!is[blank]is[missing]then<get.story.left>] :else[<get.theme.metric storyleft>] }}}
 	storyLeft={{{ [convert.to.pixels.locally<storyLeftValue>] }}}
 	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>] }}}
 	storySidebarOffset={{{ [convert.to.pixels.locally<get.story-sidebar.overlap>] :else[[0]] }}}
@@ -353,7 +353,7 @@ title: $:/core/procedures/sidebar-resizer
 <% endif %>
 \end
 
-\function get.resizer.class() tc-sidebar-resizer [<get.resizer.state>is[tiddler]then[tc-resizer-active]] [<resizer.class>] [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[tc-sidebar-resizer-]] +[join[ ]]
+\function get.resizer.class() tc-sidebar-resizer [<get.resizer.state>is[tiddler]then[tc-resizer-active]] [<resizer.class>] [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[tc-sidebar-resizer-identified-]] +[join[ ]]
 
 \function get.active.class(class) [<class>] [<resizer.class>] [<eventCatcherClass>] [<get.resizer.state>is[tiddler]then[tc-resizer-active]] +[join[ ]]
 
@@ -520,9 +520,6 @@ title: $:/core/procedures/sidebar-resizer
 
 				<div
 					class=<<get.resizer.class>>
-					style.position=<<get.resizer.style.position>>
-					style.left=<<get.resizer.style.left>>
-					style.width=<<get.resizer.style.width>>
 				/>
 
 			<% endif %>

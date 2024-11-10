@@ -177,11 +177,25 @@ code-body: yes
 	min-width: 0px;
 }
 
+div[class*="tc-sidebar-resizer-identified-"]:not(.tc-main-sidebar-resizer) {
+	position: absolute;
+	left: calc(50% - <<get.theme.metric previewsliderwidth>>);
+	width: <<get.theme.metric previewsliderwidth>>;
+}
+
 <$list filter="[all[tiddlers]prefix[$:/state/resizer/previewwidth-]]" variable="previewWidthTiddler">
 
 	<$let
 		identifier={{{ [<previewWidthTiddler>removeprefix[$:/state/resizer/previewwidth-]] }}}
 		width={{{ [<previewWidthTiddler>get[text]] }}}>
+
+		.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview.tc-tiddler-preview-identified-<<identifier>> {
+			grid-template-columns: calc(100% - <<width>>) <<width>>;
+		}
+
+		.tc-sidebar-resizer.tc-sidebar-resizer-identified-<<identifier>> {
+			left: calc(100% - <<width>> - <<get.theme.metric previewsliderwidth>>);
+		}
 
 		<%if [<width>compare:number:lteq[1]] %>
 

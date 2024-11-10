@@ -4,11 +4,7 @@ code-body: yes
 
 \procedure editor-preview-slider(class:"",width:"100%",minHeight:"10px",template:"",mode:"block",sliderWidth:"12px",padding:"12px",sliderCondition:"yes",leftMinWidth:"0%",rightMinWidth:"0%")
 \import $:/core/procedures/sidebar-resizer
-\function get.resizer.style.position() absolute
-\function get.template-right.width() [<sidebarWidthTiddler>get[text]] :else[[50%]]
-\function get.resizer.style.left() [[calc(100% - ]addsuffix<get.template-right.width>addsuffix[ - ]addsuffix<get.resizer.style.width>addsuffix[)]]
-\function get.resizer.style.width() [<sliderWidth>]
-\function set.throttling() no
+\function set.throttling() yes
 \function get.template.left()
 \function get.preview.slider.class() [<class>]
 \function get.left.minwidth() [<leftMinWidth>]
@@ -90,8 +86,4 @@ code-body: yes
 	</$let>
 
 </div>
-\end
-
-\procedure table-slider()
-
 \end
