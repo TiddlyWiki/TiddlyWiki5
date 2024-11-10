@@ -1595,18 +1595,17 @@ html body.tc-body.tc-single-tiddler-window {
 """ hiddenSidebarText:"""
 
 	.tc-story-river {
-		padding-right: 3em;
 		margin-right: 0;
 	}
 
 	.tc-sidebar-left .tc-story-river {
-		margin-left: max(<<get.theme.metric storypaddingleft>>,calc(<<get.theme.metric storypaddingleft>> + <<get.theme.metric storyleft>>));
+		margin-left: max(0px,<<get.theme.metric storyleft>>);
 		margin-right: 0;
 	}
 
 	html[dir="rtl"] .tc-sidebar-left .tc-story-river {
 		margin-left: 0;
-		margin-right: max(<<get.theme.metric storypaddingleft>>,calc(<<get.theme.metric storypaddingleft>> + <<get.theme.metric storyleft>>));
+		margin-right: max(0px,<<get.theme.metric storyleft>>);
 	}
 
 	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
