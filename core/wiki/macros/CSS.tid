@@ -1,5 +1,5 @@
 title: $:/core/macros/CSS
-tags: $:/tags/Macro $:/tags/Global
+tags: $:/tags/Macro
 
 <!-- Needs to stay that way for backwards compatibility. See GH issue: #8326 -->
 \define colour(name)
@@ -13,42 +13,54 @@ tags: $:/tags/Macro $:/tags/Global
 
 \define color(name) <<colour $name$>>
 
-\function box-shadow(shadow)
-[[ -webkit-box-shadow: $(shadow)$;
-	-moz-box-shadow: $(shadow)$;
-	box-shadow: $(shadow)$;]substitute[]]
+\define box-shadow(shadow)
+``
+-webkit-box-shadow: $shadow$;
+	-moz-box-shadow: $shadow$;
+		box-shadow: $shadow$;
+``
 \end
 
-\function filter(filter)
-[[ -webkit-filter: $(filter)$;
-	-moz-filter: $(filter)$;
-	filter: $(filter)$;]substitute[]]
+\define filter(filter)
+``
+-webkit-filter: $filter$;
+	-moz-filter: $filter$;
+		filter: $filter$;
+``
 \end
 
-\function transition(transition)
-[[ -webkit-transition: $(transition)$;
-	-moz-transition: $(transition)$;
-	transition: $(transition)$;]substitute[]]
+\define transition(transition)
+``
+-webkit-transition: $transition$;
+	-moz-transition: $transition$;
+		transition: $transition$;
+``
 \end
 
-\function transform-origin(origin)
-[[ -webkit-transform-origin: $(origin)$;
-	-moz-transform-origin: $(origin)$;
-	transform-origin: $(origin)$;]substitute[]]
+\define transform-origin(origin)
+``
+-webkit-transform-origin: $origin$;
+	-moz-transform-origin: $origin$;
+		transform-origin: $origin$;
+``
 \end
 
-\function background-linear-gradient(gradient)
-[[	background-image: linear-gradient($(gradient)$);
-	background-image: -o-linear-gradient($(gradient)$);
-	background-image: -moz-linear-gradient($(gradient)$);
-	background-image: -webkit-linear-gradient($(gradient)$);
-	background-image: -ms-linear-gradient($(gradient)$);]substitute[]]
+\define background-linear-gradient(gradient)
+``
+background-image: linear-gradient($gradient$);
+background-image: -o-linear-gradient($gradient$);
+background-image: -moz-linear-gradient($gradient$);
+background-image: -webkit-linear-gradient($gradient$);
+background-image: -ms-linear-gradient($gradient$);
+``
 \end
 
-\function column-count(columns)
-[[-moz-column-count: $(columns)$;
-	-webkit-column-count: $(columns)$;
-	column-count: $(columns)$;]substitute[]]
+\define column-count(columns)
+``
+-moz-column-count: $columns$;
+-webkit-column-count: $columns$;
+column-count: $columns$;
+``
 \end
 
 \procedure datauri(title)

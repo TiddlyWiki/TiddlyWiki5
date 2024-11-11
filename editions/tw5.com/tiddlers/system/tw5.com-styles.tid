@@ -117,9 +117,16 @@ type: text/vnd.tiddlywiki
 	-webkit-column-gap: 1em;
 }
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+/* Switch to 2 columns for 780x1280 displays which is 780p */
+@media (max-width: 1279px) {
 	.multi-columns {
 		column-count: 2;
+	}
+}
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+	.multi-columns {
+		column-count: 1;
 	}
 }
 
