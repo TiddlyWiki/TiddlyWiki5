@@ -108,12 +108,12 @@ code-body: yes
 		<%if [<set.storywidth.storyright>match[yes]] %>
 
 			.tc-sidebar-resizer.tc-main-sidebar-resizer {
-				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>> + <<get.theme.storywidthoverlap>>) - (2 * <<get.story-sidebar.overlap>> / 3));
+				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>> + <<get.theme.storywidthoverlap>> - (2 * <<get.story-sidebar.overlap>> / 3)));
 			}
 
 			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
-				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>> + <<get.theme.storywidthoverlap>>) - (2 * <<get.story-sidebar.overlap>> / 3));
+				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>> + <<get.theme.storywidthoverlap>> - (2 * <<get.story-sidebar.overlap>> / 3)));
 			}
 
 		<% endif %>
