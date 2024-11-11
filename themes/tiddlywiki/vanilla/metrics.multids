@@ -4,7 +4,7 @@ bodyfontsize: 15px
 bodylineheight: 22px
 fontsize: 14px
 lineheight: 20px
-previewsliderwidth: 6px
+previewsliderwidth: 10px
 sidebarbreakpoint: 960px
 sidebarminwidth: 350px
 sidebarpadding: 42px

@@ -5,8 +5,6 @@ code-body: yes
 \procedure editor-preview-slider(class:"",width:"100%",minHeight:"10px",template:"",mode:"block",sliderWidth:"12px",padding:"12px",sliderCondition:"yes",leftMinWidth:"0%",rightMinWidth:"0%")
 \import $:/core/procedures/sidebar-resizer
 \function set.throttling() yes
-\function get.template.left()
-\function get.preview.slider.class() [<class>]
 \function get.left.minwidth() [<leftMinWidth>]
 \function get.right.minwidth() [<rightMinWidth>]
 \function get.story-padding.right() 0px
