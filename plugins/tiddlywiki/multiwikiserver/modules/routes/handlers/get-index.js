@@ -43,7 +43,8 @@ exports.handler = function(request,response,state) {
 				"recipe-list": JSON.stringify(allowedRecipes),
 				"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Annonymous User" : "Guest",
 				"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no",
-				"first-guest-user": state.firstGuestUser ? "yes" : "no"
+				"first-guest-user": state.firstGuestUser ? "yes" : "no",
+				"show-annon-config": state.showAnnonConfig ? "yes" : "no",
 			}});
 		response.write(html);
 		response.end();

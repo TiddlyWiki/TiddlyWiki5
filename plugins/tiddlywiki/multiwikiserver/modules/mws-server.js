@@ -410,6 +410,14 @@ Server.prototype.requestAuthentication = function(response) {
 	}
 };
 
+// Check if the anonymous IO configuration is set to allow both reads and writes
+Server.prototype.isAnnonIOConfigured = function() {
+	const allowReadsTiddler = this.wiki.getTiddler("$:/config/MultiWikiServer/MultiWikiServerAllowAnnonymousReads");
+	const allowWritesTiddler = this.wiki.getTiddler("$:/config/MultiWikiServer/MultiWikiServerAllowAnnonymousWrites");
+
+	return allowReadsTiddler?.fields?.text !== "undefined" && allowWritesTiddler?.fields?.text !== "undefined";
+}
+
 
 Server.prototype.requestHandler = function(request,response,options) {
 	options = options || {};
@@ -440,6 +448,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	
 	// Check whether anonymous access is granted
 	state.allowAnon = false; //this.isAuthorized(state.authorizationType,null);
+	state.showAnnonConfig = !!state.authenticatedUser?.isAdmin && !this.isAnnonIOConfigured();
 
 	state.firstGuestUser = this.sqlTiddlerDatabase.listUsers().length === 0 && !state.authenticatedUser;
 
