@@ -1745,6 +1745,10 @@ html body.tc-body.tc-single-tiddler-window {
 	padding: 3px 3px 3px 3px;
 }
 
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-tiddler-preview-preview > iframe[sandbox] {
+	width: 100%;
+}
+
 <<if-editor-height-fixed then:"""
 
 .tc-tiddler-preview-preview {
