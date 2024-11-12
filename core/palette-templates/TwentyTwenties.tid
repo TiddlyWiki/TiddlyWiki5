@@ -104,7 +104,7 @@ tag-foreground: #ffffff
 testcase-accent-level-1: #c1eaff
 testcase-accent-level-2: #E3B740
 testcase-accent-level-3: #5FD564
-tiddler-background: [function[colour],[page-background]colour-oklch:c[.4]]
+tiddler-background: [function[colour],[page-background]colour-oklch:c[.3]]
 tiddler-border: [function[colour],[background]]
 tiddler-controls-foreground-hover: #888888
 tiddler-controls-foreground-selected: #444444
