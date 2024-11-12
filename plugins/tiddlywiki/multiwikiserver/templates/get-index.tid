@@ -350,17 +350,4 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 .mws-modal-button-primary:hover {
     background-color: #45a049;
 }
-
-.mws-modal-button-secondary {
-    background-color: #f44336;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.mws-modal-button-secondary:hover {
-    background-color: #da190b;
-}
 </style>

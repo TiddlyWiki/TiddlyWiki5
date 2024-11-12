@@ -2,29 +2,26 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/anon-config-modal
 subtitle: Anonymous Access Configuration
 class: mws-modal
 
-\define save-anon-config()
-<$action-setfield $tiddler="$:/config/MultiWikiServer/MultiWikiServerAllowAnnonymousReads" text={{{ [<allow-reads>match[yes]then[yes]else[no]] }}}/>
-<$action-setfield $tiddler="$:/config/MultiWikiServer/MultiWikiServerAllowAnnonymousWrites" text={{{ [<allow-writes>match[yes]then[yes]else[no]] }}}/>
-<$action-sendmessage $message="tm-close-tiddler"/>
-\end
-
 <div class="mws-modal-container">
-  <div class="mws-modal-content">
-    <h1>Anonymous Access Configuration</h1>
-    <p>This configuration allows anonymous users to read and write to the wiki.</p>
-    <div class="mws-modal-section">
-      <$checkbox tiddler="$:/temp/anon-reads" field="text" checked="yes" unchecked="no" default={{{ [[$:/config/MultiWikiServer/MultiWikiServerAllowAnnonymousReads]get[text]else[no]] }}}> Allow anonymous reads</$checkbox>
-    </div>
-    <div class="mws-modal-section">
-      <$checkbox tiddler="$:/temp/anon-writes" field="text" checked="yes" unchecked="no" default={{{ [[$:/config/MultiWikiServer/MultiWikiServerAllowAnnonymousWrites]get[text]else[no]] }}}> Allow anonymous writes</$checkbox>
-    </div>
-    <div class="mws-modal-buttons">
-      <$button actions=<<save-anon-config>> class="mws-modal-button-primary">
-        Save Changes
-      </$button>
-      <$button message="tm-close-tiddler" class="mws-modal-button-secondary">
-        Cancel
-      </$button>
-    </div>
-  </div>
+	<div class="mws-modal-content">
+		<h1>Anonymous Access Configuration</h1>
+		<p>This configuration allows anonymous users to read and write to the wiki.</p>
+		<form class="mws-anon-config-form" method="POST" action="/admin/post-anon-config">
+			<div class="mws-modal-section">
+				<$set name="isChecked" value={{{ [[$:/config/MultiWikiServer/AllowAnonymousReads]get[text]] }}}>
+					<input type="checkbox" name="allowReads" checked=<<isChecked>>/> Allow anonymous reads
+				</$set>
+			</div>
+			<div class="mws-modal-section">
+				<$set name="isChecked" value={{{ [[$:/config/MultiWikiServer/AllowAnonymousWrites]get[text]] }}}>
+					<input type="checkbox" name="allowWrites" checked=<<isChecked>>/> Allow anonymous writes
+				</$set>
+			</div>
+			<div class="mws-modal-buttons">
+				<button type="submit" class="mws-modal-button-primary">
+				Save Changes
+				</button>
+			</div>
+		</form>
+	</div>
 </div>

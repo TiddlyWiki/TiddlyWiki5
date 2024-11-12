@@ -31,8 +31,8 @@ exports.handler = function(request,response,state) {
 			"Content-Type":  "text/html"
 		});
 		// filter bags and recipies by user's read access from ACL
-		var allowedRecipes = recipeList.filter(recipe => sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, recipe.recipe_name, 'READ'));
-    var allowedBags = bagList.filter(bag => sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, bag.bag_name, 'READ'));
+		var allowedRecipes = recipeList.filter(recipe => sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, recipe.recipe_name, 'READ') || state.allowAnonReads);
+    var allowedBags = bagList.filter(bag => sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, bag.bag_name, 'READ') || state.allowAnonReads);
 
 		// Render the html
 		var html = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{
@@ -44,7 +44,7 @@ exports.handler = function(request,response,state) {
 				"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Annonymous User" : "Guest",
 				"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no",
 				"first-guest-user": state.firstGuestUser ? "yes" : "no",
-				"show-annon-config": state.showAnnonConfig ? "yes" : "no",
+				"show-annon-config": state.showAnonConfig ? "yes" : "no",
 			}});
 		response.write(html);
 		response.end();

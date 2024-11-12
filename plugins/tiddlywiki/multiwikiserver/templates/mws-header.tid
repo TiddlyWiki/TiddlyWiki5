@@ -10,6 +10,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 				<div class="mws-admin-dropdown-content">
 					<a href="/admin/users">Manage Users</a>
 					<a href="/admin/roles">Manage Roles</a>
+					<a href="/admin/anon">Reconfigure Anonymous Access</a>
 				</div>
 			</div>
 		<% elseif [<username>!match[Guest]]+[<first-guest-user>match[no]] %>
