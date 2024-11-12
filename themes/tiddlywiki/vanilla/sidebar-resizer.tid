@@ -121,12 +121,12 @@ code-body: yes
 		<%if [<set.sidebarwidth>match[yes]] %>
 
 			.tc-sidebar-resizer.tc-main-sidebar-resizer {
-				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - <<get.story-sidebar.overlap>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3)));
+				left: min(clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - <<get.story-sidebar.overlap>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3))),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3)));
 			}
 
 			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
-				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - <<get.story-sidebar.overlap>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3)));
+				right: min(clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - <<get.story-sidebar.overlap>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3))),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3)));
 			}
 
 		<% endif %>
