@@ -279,8 +279,7 @@ title: $:/core/procedures/sidebar-resizer
 	sidebarWidth={{{ [<sidebarWidth>subtract<clampedDiff>] }}}
 	sidebarWidth={{{ [<sidebarWidth>compare:number:gteq<sidebarMinWidth>] :else[<sidebarMinWidth>] }}}
 	sidebarMaxWidth={{{ [<sidebarMaxWidth>compare:number:gteq<sidebarMinWidth>] :else[<sidebarMinWidth>] }}}
-	storyWidth={{{ [<widgetNodeWidth>subtract<sidebarWidth>subtract<storyLeft>] }}}
-	innerStoryWidth={{{ [<widgetNodeWidth>subtract<sidebarWidth>subtract<storyLeft>subtract<storyPaddingLeft>subtract<storyPaddingRight>] }}}>
+>
 
 	<$let
 		sidebarWidthConverted={{{ [function[convert.to.result],<sidebarWidth>,<sidebarWidthMetric>] }}}
