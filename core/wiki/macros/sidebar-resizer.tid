@@ -235,9 +235,9 @@ title: $:/core/procedures/sidebar-resizer
 		</$let>
 	<% else %>
 		<$let
-			clampedDiff={{{ [<storyWidthStart>add<storyLeft>add<sidebarMinWidthWithoutOffset>add<storyRightOverlap>subtract<widgetNodeWidth>compare:number:gt[0]] :else[[0]] }}}
+			clampedDiff={{{ [<storyWidthStart>add<storyLeft>add<sidebarMinWidthWithoutOffset>subtract<storyRightOverlap>subtract<widgetNodeWidth>compare:number:gt[0]] :else[[0]] }}}
 			innerStoryWidthMax={{{ [<intermediateInnerStoryWidthMax>add<storyRightOverlap>] }}}
-			storyRightMin={{{ [<intermediateStoryRightMin>add<storyRightOverlap>add<storyLeft>] }}}
+			storyRightMin={{{ [<intermediateStoryRightMin>subtract<storyRightOverlap>add<storyLeft>] }}}
 			storyWidthMax={{{ [<intermediateStoryWidthMax>add<storyRightOverlap>] }}}
 		>
 			<<set-storywidth-storyright-actions-inner>>
