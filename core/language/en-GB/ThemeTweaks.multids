@@ -33,6 +33,10 @@ Metrics/PreviewSliderWidth/Hint: the width of the slider between editor and edit
 Metrics/SidebarPadding: Sidebar padding
 Metrics/SidebarPadding/Hint: the padding of the sidebar between sidebar and story river
 Metrics/SidebarResizer/Hint: the values for `storyleft`, `storyright`, `storywidth`, `storyminwidth`, `sidebarwidth` and `sidebarminwidth` need to be ''absolute'' CSS units, ''percentages'' or ''em'' units in order for the sidebar resizer to work
+Metrics/SliderOpacity: Slider opacity
+Metrics/SliderOpacity/Hint: the opacity of the sliders
+Metrics/SliderOpacityHover: Slider opacity hover
+Metrics/SliderOpacityHover/Hint: the opacity on hover of the sliders
 Metrics/StoryLeft: Story left position
 Metrics/StoryLeft/Hint: how far the left margin of the story river<br>(tiddler area) is from the left of the page
 Metrics/StoryMinWidth: Minimum Story width

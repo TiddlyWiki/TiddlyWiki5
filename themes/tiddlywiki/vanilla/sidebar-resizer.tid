@@ -11,14 +11,13 @@ code-body: yes
 	top: 0;
 	height: 100%;
 	width: <<sidebar.resizer.width>>;
-	transition: opacity 100ms;
-	opacity: 0.1;
+	opacity: <<get.theme.metric slideropacity>>;
 	cursor: ew-resize;
 	background: linear-gradient(<<colour muted-foreground>>, <<colour muted-foreground>>) no-repeat center/2px 100%;
 }
 
 .tc-sidebar-resizer:hover {
-	opacity: 0.6;
+	opacity: <<get.theme.metric slideropacityhover>>;
 }
 
 .tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper {
@@ -76,7 +75,7 @@ code-body: yes
 }
 
 .tc-sidebar-resizer.tc-resizer-active {
-	opacity: 0.6;
+	opacity: <<get.theme.metric slideropacityhover>>;
 }
 
 <%if [<get.theme.explicit.option sidebarresizer>match[show]] %>

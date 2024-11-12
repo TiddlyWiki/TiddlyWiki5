@@ -9,6 +9,8 @@ sidebarbreakpoint: 960px
 sidebarminwidth: 350px
 sidebarpadding: 42px
 sidebarwidth: 350px
+slideropacity: 0.1
+slideropacityhover: 0.6
 storyleft: 0px
 storypaddingleft: 42px
 storyminwidth: 168px
