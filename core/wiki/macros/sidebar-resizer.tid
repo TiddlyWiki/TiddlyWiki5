@@ -171,7 +171,7 @@ title: $:/core/procedures/sidebar-resizer
 	storyRightMax={{{ [<intermediateStoryRightMax>] }}}
 	tiddlerWidthStartPixels={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidthStart>multiply<innerStoryWidthStart>divide[100]] :else[convert.to.pixels.locally<tiddlerWidthStart>] }}}
 	tiddlerWidthStoryWidthDiff={{{ [<storyWidthStart>subtract<tiddlerWidthStartPixels>] }}}
-	tiddlerMinWidth={{{ [<storyMinWidth>subtract<storyPaddingLeft>subtract<storyPaddingRight>] }}}
+	tiddlerMinWidth={{{ [<storyMinWidth>subtract<storyPaddingLeft>subtract<storyPaddingRight>compare:number:lteq<tiddlerWidthStartPixels>] :else[<tiddlerWidthStartPixels>] }}}
 	tiddlerWidthMax={{{ [<storyWidthMax>subtract<tiddlerWidthStoryWidthDiff>] }}}
 	tiddlerWidth={{{ [<tiddlerWidthStartPixels>add<dragDiff>] }}}
 	tiddlerWidth={{{ [<storyWidth>compare:number:gt<storyMinWidth>compare:number:lt<storyWidthMax>then<tiddlerWidth>] :else[[]] }}}
