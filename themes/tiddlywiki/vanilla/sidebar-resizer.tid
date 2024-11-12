@@ -89,7 +89,7 @@ code-body: yes
 			}
 
 			.tc-sidebar-resizer.tc-main-sidebar-resizer:hover {
-				opacity: 0.1;
+				opacity: <<get.theme.metric slideropacity>>;
 			}
 		}
 
@@ -98,7 +98,7 @@ code-body: yes
 			@media (pointer: coarse) {
 
 				.tc-sidebar-resizer.tc-main-sidebar-resizer {
-					opacity: 0.25;
+					opacity: min(calc(3 * <<get.theme.metric slideropacity>>),1);
 				}
 			}
 
@@ -182,6 +182,18 @@ div[class*="tc-sidebar-resizer-identified-"]:not(.tc-main-sidebar-resizer) {
 	width: <<get.theme.metric previewsliderwidth>>;
 }
 
+@media (pointer: coarse) {
+
+	div[class*="tc-sidebar-resizer-identified-"]:not(.tc-main-sidebar-resizer) {
+		background-color: <<colour muted-foreground>>;
+	}
+
+	div[class*="tc-sidebar-resizer-identified-"]:not(.tc-main-sidebar-resizer):hover {
+		opacity: <<get.theme.metric slideropacityhover>>;
+	}
+
+}
+
 <$list filter="[all[tiddlers]prefix[$:/state/resizer/previewwidth-]]" variable="previewWidthTiddler">
 
 	<$let
@@ -195,6 +207,14 @@ div[class*="tc-sidebar-resizer-identified-"]:not(.tc-main-sidebar-resizer) {
 		div.tc-sidebar-resizer.tc-sidebar-resizer-identified-<<identifier>> {
 			left: calc(100% - <<width>> - <<get.theme.metric previewsliderwidth>>);
 		}
+
+		<%if [[$:/state/resizing/editor-preview-]addsuffix<identifier>is[tiddler]] %>
+
+			div.tc-sidebar-resizer.tc-sidebar-resizer-identified-<<identifier>> {
+				opacity: min(calc(3 * <<get.theme.metric slideropacity>>),1);
+			}
+
+		<% endif %>
 
 		<%if [<width>compare:number:lteq[1]] %>
 

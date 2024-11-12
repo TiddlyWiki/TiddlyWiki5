@@ -10,6 +10,8 @@ title: $:/core/ui/EditTemplate/body/default
 
 \function get.slider.condition() [<get.edit-preview-state>match[yes]] :else[[no]]
 
+\function resizer.state.tiddler() [[$:/state/resizing/editor-preview-]addsuffix<identifier>]
+
 \define config-visibility-title()
 $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 \end
