@@ -1213,17 +1213,17 @@ button.tc-btn-invisible.tc-remove-tag-button {
 @media (min-width: <<sidebarbreakpoint>>) {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
-		width: clamp(0px,calc(<<get.theme.metric tiddlerwidth>>),100%);
+		width: clamp(calc(<<get.theme.metric storyminwidth>> - 84px),calc(<<get.theme.metric tiddlerwidth>>),100%);
 		border-radius: 2px;
 	}
 
 	.tc-sidebar-left .tc-tiddler-frame {
-		width: clamp(0px,calc(<<get.theme.metric tiddlerwidth>>),100%);
+		width: clamp(calc(<<get.theme.metric storyminwidth>> - 84px),calc(<<get.theme.metric tiddlerwidth>>),100%);
 	}
 
 <<if-no-sidebar "
 
-	.tc-tiddler-frame {
+	.tc-tiddler-frame, .tc-sidebar-left .tc-tiddler-frame {
 		width: 100%;
 		left: auto;
 		right: auto;
