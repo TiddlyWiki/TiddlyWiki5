@@ -114,10 +114,10 @@ message-border: <<colour flexoki-black>>
 message-foreground: <<colour flexoki-black>>
 modal-backdrop: <<colour foreground>>
 modal-background: <<colour background>>
-modal-border: #999999
-modal-footer-background: #f5f5f5
-modal-footer-border: #dddddd
-modal-header-border: #eeeeee
+modal-border: <<colour flexoki-tx-3>>
+modal-footer-background: <<colour flexoki-bg>>
+modal-footer-border: <<colour flexoki-tx-3>>
+modal-header-border: <<colour flexoki-tx-3>>
 muted-foreground: <<colour flexoki-500>>
 network-activity-foreground: <<colour flexoki-cy-2>>
 notification-background: <<colour flexoki-bg>>
@@ -125,15 +125,15 @@ notification-border: <<color flexoki-black>>
 page-background: <<colour flexoki-bg-2>>
 pre-background: <<colour flexoki-bg>>
 pre-border: <<colour flexoki-ui-2>>
-primary: <<colour flexoki-cy>>
-selection-background: 
-selection-foreground: 
+primary: <<colour flexoki-cy-2>>
+selection-background: <<colour flexoki-cy-2>>
+selection-foreground: <<colour background>>
 select-tag-background: <<colour flexoki-bg>>
 select-tag-foreground: <<color flexoki-black>>
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: <<colour flexoki-tx>>
 sidebar-controls-foreground: <<colour flexoki-tx-3>>
-sidebar-foreground-shadow: rgba(255,255,255, 0.8)
+sidebar-foreground-shadow: transparent
 sidebar-foreground: <<colour flexoki-300>>
 sidebar-muted-foreground-hover: <<colour flexoki-700>>
 sidebar-muted-foreground: <<colour flexoki-200>>
@@ -182,7 +182,7 @@ tiddler-info-border: <<colour flexoki-200>>
 tiddler-info-tab-background: <<colour flexoki-bg>>
 tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
-tiddler-subtitle-foreground: <<colour flexoki-black>>
+tiddler-subtitle-foreground: <<colour flexoki-tx-3>>
 tiddler-title-foreground: <<colour flexoki-magenta-600>>
 toolbar-new-button: 
 toolbar-options-button: 
@@ -190,11 +190,11 @@ toolbar-save-button:
 toolbar-info-button: 
 toolbar-edit-button: 
 toolbar-close-button: 
-toolbar-delete-button: 
+toolbar-delete-button: <<colour flexoki-re-2>>
 toolbar-cancel-button: 
 toolbar-done-button: 
-untagged-background: #999999
-very-muted-foreground: #888888
+untagged-background: <<colour flexoki-tx-3>>
+very-muted-foreground: <<colour flexoki-500>>
 wikilist-background: <<colour flexoki-ui>>
 wikilist-item: #fff
 wikilist-info: #000

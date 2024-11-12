@@ -1,0 +1,37 @@
+created: 20140904140300000
+modified: 20241101121407637
+original-modified: 20160607153747195
+tags: [[Working with TiddlyWiki]]
+title: Creating and editing tiddlers
+ja-title: Tiddlerの作成と編集
+type: text/vnd.tiddlywiki
+
+! Tiddlerを作成する
+
+Tiddlerを作成するには、サイドバーの<<.icon $:/core/images/new-button>>ボタンをクリックするか、未作成Tiddlerへのリンクをクリックします。未作成Tiddlerへのリンクは、[[青い斜体|blue italics]]で表示されます。
+
+参照:
+
+* [[日誌（Journal Tiddler）の作成|Creating journal tiddlers]]
+
+! Tiddlerを編集する
+
+既存のTiddlerを編集するには、Tiddlerの右上にある<<.icon $:/core/images/edit-button>>ボタンをクリックします。
+
+!! ドラフトモード
+
+新しいTiddlerを作成したり、既存のTiddlerを編集したりすると、Tiddlerはドラフトモードになります。これにより、Tiddlerをさまざまな方法で修正するためのコントロールパネルが表示されます。コントロールパネルは、上から下までいくつかの部分で構成されています: 
+
+*''タイトルフィールド'' - Tiddlerのタイトルを変更できます
+*''タグセレクタ'' - タグを追加や削除できます。ボックスにタグ名を入力すると、一致する既存のタグがドロップダウンリストに表示されます。このリストから選択するか、まったく新しいタグを作成できます。次に、''追加''ボタンをクリックするか、<kbd>Enter</kbd>キーを押して、タグをTiddlerに追加します。各タグは、色付きのピルとして表示されます。ピルの"×"をクリックすると、そのタグが削除されます。
+*''テキストエリア'' - Tiddlerのメインコンテンツを編集できます。''プレビュー''ボタン (<<.icon $:/core/images/preview-closed>> / <<.icon $:/core/images/preview-open>>)をクリックすると、変更内容を確認できます。
+*''種類セレクタ'' - Tiddlerを画像などのように特別な方法で表示する必要がある場合に使用します。オプションのリストについては、ContentTypeを参照してください。デフォルトは`text/vnd.tiddlywiki`で、TiddlerにWikiTextが含まれていることを意味します。
+*''フィールドセレクタ'' - Tiddlerのフィールドを追加、削除できます。たとえば、他のTiddlerをタグ付けするために使用されているTiddlerを編集している場合は、[[''list''フィールド|ListField]]を追加して、それらのTiddlerがリストされる順序を変更できます。
+
+! 確定、破棄、削除
+
+編集が完了したら、Tiddlerの右上にあるボタンをクリックします:
+
+*''編集内容を確定します''ボタン(<<.icon $:/core/images/done-button>>)をクリックすると、このTiddlerへの変更が保存され、ドラフトモードが終了します。Wikiが[[自動保存|AutoSave]]に設定されている場合、変更は永続的に保存されます。設定されていない場合は、変更はWebブラウザに一時的に保存されているだけなので、サイドバーのマスター''Wikiを保存します''ボタン(<<.icon $:/core/images/save-button-dynamic>>)をクリックせずに~TiddlyWikiページを閉じると、変更は失われます。
+*''このTildderの変更を破棄します''ボタン(<<.icon $:/core/images/cancel-button>>)は、(確認を求めた後)、変更を破棄し、ドラフトモードを終了します。
+*''Tiddlerを削除します''ボタン(<<.icon $:/core/images/delete-button>>)は、削除ボタンは、Tiddlerを削除します(確認メッセージが表示された後)。
