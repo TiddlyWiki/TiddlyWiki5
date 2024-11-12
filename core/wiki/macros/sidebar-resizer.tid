@@ -206,6 +206,11 @@ title: $:/core/procedures/sidebar-resizer
 	tiddlerWidthStart={{{ [<get.resizer.state>get[start-tiddler-width]] }}}
 	storyMinWidth={{{ [<storyMinWidth>add<storyPaddingLeftExcess>add<storyPaddingRightExcess>] }}}
 
+	storyWidthOverlap={{{ [<storyWidthStart>add<storyLeft>subtract<storyRightStart>] }}}
+	storyRightOverlap={{{ [<storyRightStart>subtract<storyLeft>subtract<storyWidthStart>] }}}
+
+	storyWidthStart={{{ [<storyWidthStart>compare:number:gteq<storyMinWidth>] :else[<storyMinWidth>] }}}
+
 	intermediateStoryWidth={{{ [<storyWidthStart>add<dragDiff>] }}}
 	intermediateStoryRight={{{ [<storyRightStart>add<dragDiff>] }}}
 
@@ -219,9 +224,6 @@ title: $:/core/procedures/sidebar-resizer
 
 	intermediateInnerStoryWidthMin={{{ [<storyMinWidth>subtract<storyPaddingLeft>subtract<storyPaddingRight>] }}}
 	intermediateInnerStoryWidthMax={{{ [<intermediateStoryWidthMax>subtract<storyPaddingLeft>subtract<storyPaddingRight>] }}}
-
-	storyWidthOverlap={{{ [<storyWidthStart>add<storyLeft>subtract<storyRightStart>] }}}
-	storyRightOverlap={{{ [<storyRightStart>subtract<storyLeft>subtract<storyWidthStart>] }}}
 >
 
 	<%if [<storyWidthOverlap>compare:number:gteq[0]] %>
