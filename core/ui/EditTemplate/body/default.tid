@@ -12,6 +12,8 @@ title: $:/core/ui/EditTemplate/body/default
 
 \function resizer.state.tiddler() [[$:/state/resizing/editor-preview-]addsuffix<identifier>]
 
+\function resizer.class() [[tc-editor-preview-slider-identified-]addsuffix<identifier>]
+
 \define config-visibility-title()
 $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 \end

@@ -44,7 +44,7 @@ title: $:/core/procedures/sidebar-resizer
 
 \function get.resizer.state()
 [<resizer.state.tiddler>!is[blank]]
-:else[<qualify>addsuffix[-]addsuffix<get.sidebar.width.tiddler>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizing-]]
+:else[<qualify>addsuffix<get.sidebar.width.tiddler>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizing-]]
 \end
 
 \procedure set_theme_throttling(metric,tiddler)
@@ -356,7 +356,7 @@ title: $:/core/procedures/sidebar-resizer
 <% endif %>
 \end
 
-\function get.resizer.class() tc-sidebar-resizer [<get.resizer.state>is[tiddler]then[tc-resizer-active]] [<resizer.class>] [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[tc-sidebar-resizer-identified-]] +[join[ ]]
+\function get.resizer.class() tc-sidebar-resizer [<get.resizer.state>is[tiddler]then[tc-resizer-active]] [<resizer.class>] [<resizer.class>is[blank]then<qualify>addsuffix<currentTiddler>sha256[]addprefix[tc-sidebar-resizer-identified-]] +[join[ ]]
 
 \function get.active.class(class) [<class>] [<resizer.class>] [<eventCatcherClass>] [<get.resizer.state>is[tiddler]then[tc-resizer-active]] +[join[ ]]
 
