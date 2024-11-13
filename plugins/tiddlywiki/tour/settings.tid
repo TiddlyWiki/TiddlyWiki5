@@ -1,4 +1,6 @@
 title: $:/plugins/tiddlywiki/tour/settings
+caption: Tour
+tags: $:/tags/ControlPanel/SettingsTab
 
 \import [[$:/plugins/tiddlywiki/tour/variables]]
 \procedure button-expand-collapse-all(caption,text)
@@ -49,48 +51,50 @@ Select a tour:
 	currentTour={{{ [<stateCurrentTour>get[text]] :else[<defaultTour>] }}}
 	currentTourTag={{{ [<currentTour>get[tour-tag]] }}}
 >
-	<table class="tc-tour-settings-tour-details">
-		<tbody>
-			<tr>
-				<th>
-					Tour title
-				</th>
-				<td>
-					<$link to=<<currentTour>>><$text text=<<currentTour>>/></$link>
-				</td>
-			</tr>
-			<tr>
-				<th>
-					Tour description
-				</th>
-				<td>
-					<div class="tc-tour-settings-tour-details-description">
-						<$transclude $tiddler=<<currentTour>>>
-							(No description available)
-						</$transclude>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>
-					Tour logo
-				</th>
-				<td>
-					<div class="tc-tour-settings-tour-details-logo">
-						<$image source={{{ [<currentTour>get[logo]] }}}/>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>
-					Tour step tag
-				</th>
-				<td>
-					<$transclude $variable="tag" tag=<<currentTourTag>>/>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="tc-table-wrapper">
+		<table class="tc-tour-settings-tour-details">
+			<tbody>
+				<tr>
+					<th>
+						Tour title
+					</th>
+					<td>
+						<$link to=<<currentTour>>><$text text=<<currentTour>>/></$link>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Tour description
+					</th>
+					<td>
+						<div class="tc-tour-settings-tour-details-description">
+							<$transclude $tiddler=<<currentTour>>>
+								(No description available)
+							</$transclude>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Tour logo
+					</th>
+					<td>
+						<div class="tc-tour-settings-tour-details-logo">
+							<$image source={{{ [<currentTour>get[logo]] }}}/>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Tour step tag
+					</th>
+					<td>
+						<$transclude $variable="tag" tag=<<currentTourTag>>/>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	<$list filter="[<currentTour>has[settings]]" variable="ignore">
 		<p>
 		Custom tour settings:
@@ -127,21 +131,23 @@ Select a tour:
 					</$button>
 				</div>
 				<$reveal state=<<collapseState>> text="show" type="match" default="hide" animate="yes">
-					<table class="tc-tour-settings-tour-step-details">
-						<tbody>
-							<<display-tour-step-field-text "title" "Title">>
-							<<display-tour-step-field-text "caption" "Caption">>
-							<<display-tour-step-field-text "step-success-filter" "step-success-filter">>
-							<<display-tour-step-field-text "step-success-filter-var" "step-success-filter Variable">>
-							<<display-tour-step-field-text "display-mode" "Display Mode">>
-							<<display-tour-step-field-text "enter-actions" "Enter Actions">>
-							<<display-tour-step-field-text "hint-text" "Hint text">>
-							<<display-tour-step-field-text "hint-selector" "Hint selector">>
-							<<display-tour-step-field-text "hint-selector-fallback-1" "Hint selector Fallback 1">>
-							<<display-tour-step-field-text "hint-selector-fallback-2" "Hint selector Fallback 2">>
-							<<display-tour-step-field-text "condition" "Condition">>
-						</tbody>
-					</table>
+					<div class="tc-table-wrapper">
+						<table class="tc-tour-settings-tour-step-details">
+							<tbody>
+								<<display-tour-step-field-text "title" "Title">>
+								<<display-tour-step-field-text "caption" "Caption">>
+								<<display-tour-step-field-text "step-success-filter" "step-success-filter">>
+								<<display-tour-step-field-text "step-success-filter-var" "step-success-filter Variable">>
+								<<display-tour-step-field-text "display-mode" "Display Mode">>
+								<<display-tour-step-field-text "enter-actions" "Enter Actions">>
+								<<display-tour-step-field-text "hint-text" "Hint text">>
+								<<display-tour-step-field-text "hint-selector" "Hint selector">>
+								<<display-tour-step-field-text "hint-selector-fallback-1" "Hint selector Fallback 1">>
+								<<display-tour-step-field-text "hint-selector-fallback-2" "Hint selector Fallback 2">>
+								<<display-tour-step-field-text "condition" "Condition">>
+							</tbody>
+						</table>
+					</div>
 					<div class="tc-tour-settings-tour-step-body">
 						<$transclude $tiddler=<<currentStep>> $mode="block"/>
 					</div>

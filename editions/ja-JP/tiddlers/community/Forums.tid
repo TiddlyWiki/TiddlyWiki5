@@ -1,0 +1,38 @@
+created: 20140721121924384
+modified: 20241002115027813
+original-modified: 20240925113748341
+tags: Community
+title: Forums
+ja-title: フォーラム
+caption: フォーラム
+type: text/vnd.tiddlywiki
+
+! 公式フォーラム
+
+!! https://talk.tiddlywiki.org/
+
+<<<
+~TiddlyWikiについて話し合うための新しい公式フォーラムです。ヘルプのリクエスト、新しいリリースやプラグインの[[アナウンス|https://talk.tiddlywiki.org/c/announcements/20]]、新機能の議論、または単にエクスペリエンスを共有するなどできます。関連するWebサイトから参加することも、電子メールで購読することもできます。
+
+''talk.tiddlywiki.org''はコミュニティが運営するサービスであり、私たちが自らホストし維持しています。わずかな運営費はコミュニティからの寄付によって賄われています。
+<<<
+
+!!! Googleグループ
+
+<<<
+既存ユーザーの便宜を図るため、オリジナルの~TiddlyWikiグループ(2005年からGoogleグループでホストされている)も引き続き運営しています。: https://groups.google.com/group/TiddlyWiki
+<<<
+
+! 開発者フォーラム
+
+{{Developers}}
+
+! その他のフォーラム
+
+* [[TiddlyWikiサブレディット|https://www.reddit.com/r/TiddlyWiki5/]]
+* https://gitter.im/TiddlyWiki/public でGitterとチャット!
+* https://discord.gg/HFFZVQ8 でDiscordでチャット
+
+!! ドキュメンテーション
+
+TiddlyWikiのドキュメント改善の取り組みを議論するためのディスカッショングループもあります: https://groups.google.com/group/tiddlywikidocs

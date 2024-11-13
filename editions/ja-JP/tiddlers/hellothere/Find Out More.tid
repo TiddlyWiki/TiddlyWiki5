@@ -1,0 +1,18 @@
+color: #880
+created: 20241009150347613
+icon: $:/core/images/help
+modified: 20241010114029686
+original-modified: 20241009150430229
+tags: Welcome
+title: Find Out More
+ja-title: さらに詳しく
+type: text/vnd.tiddlywiki
+
+~TiddlyWikiとそのコミュニティについて、さらに詳しく知るのに役立つリソースです。
+
+<div class="tc-cards">
+<$list filter="[tag[HelloThumbnail]]">
+<$macrocall $name="flex-card" captionField="caption" descriptionField="text"/>
+</$list>
+</div>
+

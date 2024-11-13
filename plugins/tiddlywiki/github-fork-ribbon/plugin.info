@@ -4,5 +4,5 @@
 	"description": "GitHub-inspired corner ribbon",
 	"author": "Simon Whitaker",
 	"list": "readme usage",
-	"stability": "STABILITY_0_DEPRECATED"
+	"stability": "STABILITY_2_STABLE"
 }

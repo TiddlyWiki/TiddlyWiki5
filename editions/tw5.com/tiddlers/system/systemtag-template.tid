@@ -11,6 +11,7 @@ title: $:/editions/tw5.com/systemtag-template
 
 The following tiddlers are tagged with <<tag $(thisTag)$ >>
 
+<div class="tc-table-wrapper">
 <table>
 <tr><th></th><th>caption</th></tr>
 <$list filter='[all[tiddlers+shadows]tag<thisTag>sort[]]'>
@@ -18,4 +19,9 @@ The following tiddlers are tagged with <<tag $(thisTag)$ >>
 <td><$link/></td>
 <td><$transclude field="caption"><$transclude field="description"><$view field="title"/></$transclude></$transclude></td>
 </tr>
-</$list></table></$list></$let></$list>
+</$list>
+</table>
+</div>
+</$list>
+</$let>
+</$list>

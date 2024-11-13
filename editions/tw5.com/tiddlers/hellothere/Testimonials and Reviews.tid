@@ -1,0 +1,13 @@
+color: #088
+icon: $:/core/images/star-filled
+modified: 20241001141521924
+tags: Welcome
+title: Testimonials and Reviews
+type: text/vnd.tiddlywiki
+
+\parsermode inline
+<div class="tc-cards">
+<$list filter="[tag[Testimonial]]">
+<$macrocall $name="flex-card" class="tc-card-quote" captionField="caption" descriptionField="text"/>
+</$list>
+</div>
