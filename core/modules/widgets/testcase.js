@@ -33,6 +33,7 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create container DOM node
 	var domNode = this.document.createElement("div");
+	domNode.setAttribute("class", "tc-test-case");
 	this.domNodes.push(domNode);
 	parent.insertBefore(domNode,nextSibling);
 	// Render the children into a hidden DOM node
