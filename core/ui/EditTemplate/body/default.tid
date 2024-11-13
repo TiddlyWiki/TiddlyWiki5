@@ -1,18 +1,18 @@
 title: $:/core/ui/EditTemplate/body/default
 
-\function get.edit-preview-state()
+\function edit-preview-state()
 [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] +[get[text]] :else[[no]]
 \end
 
-\function get.tc-edit-texteditor.class() tc-edit-texteditor tc-edit-texteditor-body [<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]] +[join[ ]]
+\function get.tc-edit-texteditor.class() tc-edit-texteditor tc-edit-texteditor-body [<edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]] +[join[ ]]
 
 \function get.tc-tiddler-preview-preview.class() tc-tiddler-preview-preview [<identifier>addprefix[tc-tiddler-preview-preview-identified-]] +[join[ ]]
 
-\function get.slider.condition() [<get.edit-preview-state>match[yes]] :else[[no]]
+\function get.slider.condition() [<edit-preview-state>match[yes]] :else[[no]]
 
 \function resizer.state.tiddler() [[$:/state/resizing/editor-preview-]addsuffix<identifier>]
 
-\function resizer.class() [[tc-editor-preview-slider-identified-]addsuffix<identifier>]
+\function resizer.class() [[tc-editor-preview-slider-]addsuffix<identifier>]
 
 \define config-visibility-title()
 $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
@@ -24,7 +24,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 \procedure tp-tiddler-editor-preview()
 <div
-	class={{{ [<get.edit-preview-state>match[yes]then[tc-tiddler-preview]else[tc-tiddler-preview-hidden]] [<get.edit-preview-state>match[yes]then[tc-tiddler-preview-identified-]addsuffix<identifier>] [[tc-tiddler-editor]] +[join[ ]] }}}>
+	class={{{ [<edit-preview-state>match[yes]then[tc-tiddler-preview]else[tc-tiddler-preview-hidden]] [<edit-preview-state>match[yes]then[tc-tiddler-preview-identified-]addsuffix<identifier>] [[tc-tiddler-editor]] +[join[ ]] }}}>
 
 	<$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
 

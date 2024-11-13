@@ -358,7 +358,7 @@ title: $:/core/procedures/sidebar-resizer
 
 \function get.resizer.class() tc-sidebar-resizer [<get.resizer.state>is[tiddler]then[tc-resizer-active]] [<resizer.class>] [<resizer.class>is[blank]then<qualify>addsuffix<currentTiddler>sha256[]addprefix[tc-sidebar-resizer-identified-]] +[join[ ]]
 
-\function get.active.class(class) [<class>] [<resizer.class>] [<eventCatcherClass>] [<get.resizer.state>is[tiddler]then[tc-resizer-active]] +[join[ ]]
+\function get.active.class(class) [<class>] [<eventCatcherClass>] [<get.resizer.state>is[tiddler]then[tc-resizer-active]] +[join[ ]]
 
 \function get.sidebar-resizer.pointerdown.actions()
 [<get.resizer.state>match[$:/state/sidebar/resizing]then<sidebar-resizer-pointerdown-actions>]

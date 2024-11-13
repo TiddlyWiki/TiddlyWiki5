@@ -176,7 +176,7 @@ code-body: yes
 	min-width: 0px;
 }
 
-div[class*="tc-sidebar-resizer-identified-"]:not(.tc-main-sidebar-resizer) {
+div[class*="tc-editor-preview-slider-"] {
 	position: absolute;
 	left: calc(50% - <<get.theme.metric previewsliderwidth>>);
 	width: <<get.theme.metric previewsliderwidth>>;
@@ -184,11 +184,11 @@ div[class*="tc-sidebar-resizer-identified-"]:not(.tc-main-sidebar-resizer) {
 
 @media (pointer: coarse) {
 
-	div[class*="tc-sidebar-resizer-identified-"]:not(.tc-main-sidebar-resizer) {
+	div[class*="tc-editor-preview-slider-"] {
 		background-color: <<colour muted-foreground>>;
 	}
 
-	div[class*="tc-sidebar-resizer-identified-"]:not(.tc-main-sidebar-resizer):hover {
+	div[class*="tc-editor-preview-slider-"]:hover {
 		opacity: <<get.theme.metric slideropacityhover>>;
 	}
 
@@ -204,13 +204,13 @@ div[class*="tc-sidebar-resizer-identified-"]:not(.tc-main-sidebar-resizer) {
 			grid-template-columns: calc(100% - <<width>>) <<width>>;
 		}
 
-		div.tc-sidebar-resizer.tc-editor-preview-slider-identified-<<identifier>> {
+		div.tc-sidebar-resizer.tc-editor-preview-slider-<<identifier>> {
 			left: calc(100% - <<width>> - <<get.theme.metric previewsliderwidth>>);
 		}
 
 		<%if [[$:/state/resizing/editor-preview-]addsuffix<identifier>is[tiddler]] %>
 
-			div.tc-sidebar-resizer.tc-sidebar-resizer-identified-<<identifier>> {
+			div.tc-sidebar-resizer.tc-editor-preview-slider-<<identifier>> {
 				opacity: min(calc(3 * <<get.theme.metric slideropacity>>),1);
 			}
 
