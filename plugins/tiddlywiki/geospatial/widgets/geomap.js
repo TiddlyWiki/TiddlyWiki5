@@ -172,6 +172,7 @@ GeomapWidget.prototype.refreshMap = function() {
 		var jsonText = widget.getAttribute("json"),
 			popupTemplateTitle = widget.getAttribute("popupTemplate",defaultPopupTemplateTitle),
 			geoJson = [];
+		// Build up the geojson of the layer
 		if(jsonText) {
 			// Layer is defined by JSON blob
 			geoJson = $tw.utils.parseJSONSafe(jsonText,[]);
@@ -197,6 +198,7 @@ GeomapWidget.prototype.refreshMap = function() {
 				geoJson.features[0].properties = $tw.utils.parseJSONSafe(properties);
 			}
 		}
+		// Create and add layer for the geojson
 		var draggable = widget.getAttribute("draggable","no") === "yes",
 			layer = $tw.Leaflet.geoJSON(geoJson,{
 				style: function(geoJsonFeature) {
@@ -234,8 +236,20 @@ GeomapWidget.prototype.refreshMap = function() {
 						});
 						return container;
 					});
+					// Add event handlers
+					if(widget.hasAttribute("onclick")) {
+						layer.on("click",function(event) {
+							self.invokeActionString(widget.getAttribute("onclick"),null,event.originalEvent,{
+								lat: event.latlng.lat,
+								long: event.latlng.lng,
+								alt: event.latlng.alt,
+								properties: JSON.stringify(feature.properties)
+							});
+						});
+					}
 				}
 			}).addTo(self.map);
+		// Create a name for this layer
 		var name = widget.getAttribute("name") || ("Untitled " + untitledCount++);
 		self.renderedLayers.push({name: name, layer: layer});
 	});
