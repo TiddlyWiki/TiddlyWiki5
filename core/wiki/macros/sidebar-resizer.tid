@@ -204,7 +204,7 @@ title: $:/core/procedures/sidebar-resizer
 	sidebarMinWidthWithoutOffset={{{ [<sidebarMinWidth>subtract<storySidebarOffset>] }}}
 	tiddlerWidthMetric={{{ [<get.resizer.state>get[tiddler-width-metric]] }}}
 	tiddlerWidthStart={{{ [<get.resizer.state>get[start-tiddler-width]] }}}
-	storyMinWidth={{{ [<storyMinWidth>add<storyPaddingLeftExcess>add<storyPaddingRightExcess>] }}}
+	storyMinWidth={{{ [<storyMinWidth>add<storyPaddingLeftExcess>add<storyPaddingRightExcess>compare:number:gteq[0]] :else[[0]] }}}
 
 	storyWidthOverlap={{{ [<storyWidthStart>add<storyLeft>subtract<storyRightStart>] }}}
 	storyRightOverlap={{{ [<storyRightStart>subtract<storyLeft>subtract<storyWidthStart>] }}}
@@ -270,7 +270,7 @@ title: $:/core/procedures/sidebar-resizer
 	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]is[tiddler]get[text]] :else[<storyLeftTiddler>!is[blank]is[missing]then<get.story.left>] :else[<get.theme.metric storyleft>] }}}
 	storyLeft={{{ [convert.to.pixels.locally<storyLeftValue>] }}}
 	storyMinWidthValue={{{ [<storyMinWidthTiddler>!is[blank]is[tiddler]get[text]] :else[<storyMinWidthTiddler>!is[blank]is[missing]then<get.left.minwidth>] :else[<get.theme.metric storyminwidth>] }}}
-	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>] }}}
+	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>compare:number:gteq[0]] :else[[0]] }}}
 	storySidebarOffset={{{ [convert.to.pixels.locally<get.story-sidebar.overlap>] :else[[0]] }}}
 	storyPaddingLeftExcess={{{ [<storyPaddingLeft>subtract<storySidebarOffset>] }}}
 	storyPaddingRightExcess={{{ [<storyPaddingRight>subtract<storySidebarOffset>] }}}
@@ -302,7 +302,7 @@ title: $:/core/procedures/sidebar-resizer
 \procedure set-centralised-actions()
 <$let
 	storyMinWidthValue={{{ [<storyMinWidthTiddler>!is[blank]get[text]] :else[{$:/themes/tiddlywiki/centralised/metrics/storyminwidth}] }}}
-	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>] }}}
+	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>compare:number:gteq[0]] :else[[0]] }}}
 	storyWidthStart={{{ [<get.resizer.state>get[start-story-width]] }}}
 	storyWidthStart={{{ [convert.to.pixels.locally<storyWidthStart>] }}}
 	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]is[tiddler]get[text]] :else[<sidebarMinWidthTiddler>!is[blank]is[missing]then<get.right.minwidth>] :else[{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}] }}}
