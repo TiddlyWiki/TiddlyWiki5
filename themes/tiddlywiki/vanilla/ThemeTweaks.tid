@@ -2,6 +2,12 @@ title: $:/themes/tiddlywiki/vanilla/themetweaks
 tags: $:/tags/ControlPanel/Appearance
 caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 
+\function get.theme-tweaks.metric() [get.theme<metric>]
+
+\procedure get_theme-tweaks_lingo() <$transclude $variable="lingo" title={{{ [[Metrics/]addsuffix<metricName>] }}}/>
+
+\procedure get_theme-tweaks_lingo-hint() <$transclude $variable="lingo" title={{{ [[Metrics/]addsuffix<metricName>addsuffix[/Hint]] }}}/>
+
 \define lingo-base() $:/language/ThemeTweaks/
 
 \define replacement-text()
@@ -45,6 +51,8 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 </$select>
 \end
 
+\whitespace trim
+
 <<lingo ThemeTweaks/Hint>>
 
 ! <<lingo Options>>
@@ -68,22 +76,14 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 
 <<lingo Metrics/SidebarResizer/Hint>>
 
-|<$link to=<<get.theme fontsize>>><<lingo Metrics/FontSize>></$link> |<$edit-text tiddler=<<get.theme fontsize>> default="" tag="input"/> |
-|<$link to=<<get.theme lineheight>>><<lingo Metrics/LineHeight>></$link> |<$edit-text tiddler=<<get.theme lineheight>> default="" tag="input"/> |
-|<$link to=<<get.theme bodyfontsize>>><<lingo Metrics/BodyFontSize>></$link> |<$edit-text tiddler=<<get.theme bodyfontsize>> default="" tag="input"/> |
-|<$link to=<<get.theme bodylineheight>>><<lingo Metrics/BodyLineHeight>></$link> |<$edit-text tiddler=<<get.theme bodylineheight>> default="" tag="input"/> |
-|<$link to=<<get.theme storyleft>>><<lingo Metrics/StoryLeft>></$link><br>//<<lingo Metrics/StoryLeft/Hint>>// |^<$edit-text tiddler=<<get.theme storyleft>> default="" tag="input"/> |
-|<$link to=<<get.theme storytop>>><<lingo Metrics/StoryTop>></$link><br>//<<lingo Metrics/StoryTop/Hint>>// |^<$edit-text tiddler=<<get.theme storytop>> default="" tag="input"/> |
-|<$link to=<<get.theme storyright>>><<lingo Metrics/StoryRight>></$link><br>//<<lingo Metrics/StoryRight/Hint>>// |^<$edit-text tiddler=<<get.theme storyright>> default="" tag="input"/> |
-|<$link to=<<get.theme storywidth>>><<lingo Metrics/StoryWidth>></$link><br>//<<lingo Metrics/StoryWidth/Hint>>// |^<$edit-text tiddler=<<get.theme storywidth>> default="" tag="input"/> |
-|<$link to=<<get.theme storyminwidth>>><<lingo Metrics/StoryMinWidth>></$link><br>//<<lingo Metrics/StoryMinWidth/Hint>>// |^<$edit-text tiddler=<<get.theme storyminwidth>> default="" tag="input"/> |
-|<$link to=<<get.theme storypaddingleft>>><<lingo Metrics/StoryPaddingLeft>></$link><br>//<<lingo Metrics/StoryPaddingLeft/Hint>>// |^<$edit-text tiddler=<<get.theme storypaddingleft>> default="" tag="input"/> |
-|<$link to=<<get.theme storypaddingright>>><<lingo Metrics/StoryPaddingRight>></$link><br>//<<lingo Metrics/StoryPaddingRight/Hint>>// |^<$edit-text tiddler=<<get.theme storypaddingright>> default="" tag="input"/> |
-|<$link to=<<get.theme tiddlerwidth>>><<lingo Metrics/TiddlerWidth>></$link><br>//<<lingo Metrics/TiddlerWidth/Hint>>//<br> |^<$edit-text tiddler=<<get.theme tiddlerwidth>> default="" tag="input"/> |
-|<$link to=<<get.theme sidebarbreakpoint>>><<lingo Metrics/SidebarBreakpoint>></$link><br>//<<lingo Metrics/SidebarBreakpoint/Hint>>// |^<$edit-text tiddler=<<get.theme sidebarbreakpoint>> default="" tag="input"/> |
-|<$link to=<<get.theme sidebarwidth>>><<lingo Metrics/SidebarWidth>></$link><br>//<<lingo Metrics/SidebarWidth/Hint>>// |^<$edit-text tiddler=<<get.theme sidebarwidth>> default="" tag="input"/> |
-|<$link to=<<get.theme sidebarminwidth>>><<lingo Metrics/SidebarMinWidth>></$link><br>//<<lingo Metrics/SidebarMinWidth/Hint>>// |^<$edit-text tiddler=<<get.theme sidebarminwidth>> default="" tag="input"/> |
-|<$link to=<<get.theme sidebarpadding>>><<lingo Metrics/SidebarPadding>></$link><br>//<<lingo Metrics/SidebarPadding/Hint>>// |^<$edit-text tiddler=<<get.theme sidebarpadding>> default="" tag="input"/> |
-|<$link to=<<get.theme slideropacity>>><<lingo Metrics/SliderOpacity>></$link><br>//<<lingo Metrics/SliderOpacity/Hint>>// |^<$edit-text tiddler=<<get.theme slideropacity>> default="" tag="input"/> |
-|<$link to=<<get.theme slideropacityhover>>><<lingo Metrics/SliderOpacityHover>></$link><br>//<<lingo Metrics/SliderOpacityHover/Hint>>// |^<$edit-text tiddler=<<get.theme slideropacityhover>> default="" tag="input"/> |
-|<$link to=<<get.theme previewsliderwidth>>><<lingo Metrics/PreviewSliderWidth>></$link><br>//<<lingo Metrics/PreviewSliderWidth/Hint>>// |^<$edit-text tiddler=<<get.theme previewsliderwidth>> default="" tag="input"/> |
+<table>
+<tbody>
+<$list filter="FontSize LineHeight BodyFontSize BodyLineHeight StoryLeft StoryTop StoryRight StoryWidth StoryMinWidth StoryPaddingLeft StoryPaddingRight TiddlerWidth SidebarBreakpoint SidebarWidth SidebarPadding SliderOpacity SliderOpacityHover PreviewSliderWidth :except[<get.theme.option sidebarlayout>match[fluid-fixed]then[StoryRight StoryWidth TiddlerWidth]enlist-input[]] :except[<get.theme.option sidebarlayout>match[fixed-fluid]then[SidebarWidth]]" variable="metricName" counter="counter">
+<$set name="metric" value={{{ [<metricName>lowercase[]] }}}>
+<tr class={{{ [<counter>remainder[2]match[0]then[oddRow]] :else[[evenRow]] }}}>
+<td><$link to=<<get.theme-tweaks.metric>>><<get_theme-tweaks_lingo>></$link><br>//<<get_theme-tweaks_lingo-hint>>//  </td><td><$edit-text tiddler=<<get.theme-tweaks.metric>> default="" tag="input"/> </td>
+</tr>
+</$set>
+</$list>
+</tbody>
+</table>

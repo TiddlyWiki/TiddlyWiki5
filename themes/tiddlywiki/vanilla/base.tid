@@ -1394,7 +1394,6 @@ html[dir="rtl"] .tc-tiddler-frame .tc-tiddler-controls {
 
 .tc-tiddler-frame iframe.tc-edit-texteditor {
 	background-color: <<colour tiddler-background>>;
-	z-index: 1;
 }
 
 .tc-tiddler-frame .tc-edit-fields input.tc-edit-fieldeditor,
