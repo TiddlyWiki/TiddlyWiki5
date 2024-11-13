@@ -4,6 +4,7 @@ list-after: $:/core/ui/PageTemplate/story
 code-body: yes
 
 \import [function[get.base.functions.theme],<get.current.theme>first[]is[tiddler]] :else[function[get.base.functions.theme],<get.current.theme>first[]is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/functions]] [[$:/core/procedures/sidebar-resizer]]
+
 \function resizer.state.tiddler() $:/state/sidebar/resizing
 \function resizer.state() [{$:/state/sidebar}]
 \function resizer.class() tc-main-sidebar-resizer
@@ -12,7 +13,6 @@ code-body: yes
 \whitespace trim
 
 <%if [<get.theme.explicit.option sidebarresizer>match[show]] %>
-
 	<$let
 		tv-set-storywidth-storyright=<<set.storywidth.storyright>>
 		tv-set-sidebarwidth=<<set.sidebarwidth>>
@@ -28,9 +28,6 @@ code-body: yes
 		storyPaddingLeftTiddler=<<get.story-padding-left.tiddler>>
 		storyPaddingRightTiddler=<<get.story-padding-right.tiddler>>
 	>
-
 		<$transclude $variable="sidebar-resizer"/>
-
 	</$let>
-
 <% endif %>
