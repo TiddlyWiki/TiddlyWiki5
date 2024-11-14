@@ -1,0 +1,42 @@
+title: TiddlyWiki Privacy and Security
+created: 20241106165307259
+modified: 20241106165307259
+
+! Basic Principles
+
+<span class="tc-float-right">[img width=200 [TiddlyWiki Privacy Badge.png]]</span>
+If security and privacy are important to you then you need to take the best available advice, and the best place for that is specialist organisations that focus on this area. The Electronic Frontier Foundation in the US is well respected, and their advice would be a good place to start. It emphasises basics such as dealing with passwords and two factor authentication, but also explains more advanced topics such as making a security plan, and how to set up a device securely.
+
+https://ssd.eff.org/module-categories/basics
+
+! Introduction
+
+TiddlyWiki is unique in that ordinary people without special training can use it securely and privately. It is easy to apply the advice from the EFF to TiddlyWiki. The key is that TiddlyWiki is just a file, and so everything that users may have already learned about how to keep documents and images private can be applied to TiddlyWiki.
+
+Because data is stoerd in simple text files, people today choosing to use TiddlyWiki can be confident that their data will still be accessible in the decades to come.
+
+! Verifiable Trust
+
+An important aspect of TiddlyWiki's claims in the area of security and privacy is that these claims can be readily verified by anyone with basic technical skills. For example, the network monitoring tools built into browsers allow users to verify that TiddlyWiki doesn't send any data to other servers. Similarly anyone can open a TiddlyWiki HTML file in an editor and verify that their data is readily accessible.
+
+! Single File Configuration
+
+As a practical matter, using TiddlyWiki securely and privately in the single file configuration depends upon keeping that single file securely and privately.
+
+Users can employ the same tools that they use to keep any document and photograph secure. So, for many users, the simplest solution will be to use an existing file storage service such as Google Drive, Apple's iCloud, or Dropbox. Many users will already be relying on the privacy and security of these services.
+
+There are also open source alternatives such as [[Syncthing|https://syncthing.net/]] that allow users to synchronise files between their devices without using a third party service.
+
+Users may wish to use additional layers of security. TiddlyWiki in the single file configuration itself offers built-in encryption. It uses an industry standard encryption library to offer AES 128 bit encryption in CCM mode. All the data within the file is encrypted, and cannot be accessed without entering the correct password. The password is never stored in the file, and so if it is lost, the data is lost.
+
+It is important to understand that TiddlyWiki's built in encryption is our best endeavour to offer privacy and usability. However, the encryption feature has not been subject to the kind of rigorous third party testing that characterises secure services like Signal or Syncthing.
+
+So, cautious users may wish to use TiddlyWiki's built in encryption as an extra layer of security, but should take care not to rely on it as one would rely on industry standard encryption solutions that have been rigorously tested in a variety of situations.
+
+! Node.js Configuration
+
+Using TiddlyWiki in the Node.js configuration requires more technical knowledge than the single file edition. There are several important areas with respect to security and privacy.
+
+Firstly, and most obviously, there is the matter of how user data is stored on disc as individual `.tid` files. Just as with the single file configuration, these are just ordinary files, and so can be used with third party tools that provide encryption.
+
+Secondly, consideration must be given to how data is transmitted across the network. By default, the Node.js configuration does not use SSL and so traffic can be observed by others (the impact is mitigated by the fact that by default only users on the same machine can connect to the server). While TiddlyWiki itself does offer the option of setting up an SSL connection it is generally advised to use an external proxy server to provide SSL services. nginx is popular for this purpose.
