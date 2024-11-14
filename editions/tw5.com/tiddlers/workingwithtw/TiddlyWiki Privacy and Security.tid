@@ -13,7 +13,7 @@ https://ssd.eff.org/module-categories/basics
 
 TiddlyWiki is unique in that ordinary people without special training can use it securely and privately. It is easy to apply the advice from the EFF to TiddlyWiki. The key is that TiddlyWiki is just a file, and so everything that users may have already learned about how to keep documents and images private can be applied to TiddlyWiki.
 
-Because data is stoerd in simple text files, people today choosing to use TiddlyWiki can be confident that their data will still be accessible in the decades to come.
+Because data is stored in simple text files, people today choosing to use TiddlyWiki can be confident that their data will still be accessible in the decades to come.
 
 ! Verifiable Trust
 
@@ -27,7 +27,7 @@ Users can employ the same tools that they use to keep any document and photograp
 
 There are also open source alternatives such as [[Syncthing|https://syncthing.net/]] that allow users to synchronise files between their devices without using a third party service.
 
-Users may wish to use additional layers of security. TiddlyWiki in the single file configuration itself offers built-in encryption. It uses an industry standard encryption library to offer AES 128 bit encryption in CCM mode. All the data within the file is encrypted, and cannot be accessed without entering the correct password. The password is never stored in the file, and so if it is lost, the data is lost.
+Users may wish to use additional layers of security. TiddlyWiki in the single file configuration itself offers built-in [[encryption|Encryption]]. It uses an industry standard encryption library to offer AES 128 bit encryption in CCM mode. All the data within the file is encrypted, and cannot be accessed without entering the correct password. The password is never stored in the file, and so if it is lost, the data is lost. Instructions can be found [[here|Encryption]]
 
 It is important to understand that TiddlyWiki's built in encryption is our best endeavour to offer privacy and usability. However, the encryption feature has not been subject to the kind of rigorous third party testing that characterises secure services like Signal or Syncthing.
 
@@ -40,3 +40,11 @@ Using TiddlyWiki in the Node.js configuration requires more technical knowledge 
 Firstly, and most obviously, there is the matter of how user data is stored on disc as individual `.tid` files. Just as with the single file configuration, these are just ordinary files, and so can be used with third party tools that provide encryption.
 
 Secondly, consideration must be given to how data is transmitted across the network. By default, the Node.js configuration does not use SSL and so traffic can be observed by others (the impact is mitigated by the fact that by default only users on the same machine can connect to the server). While TiddlyWiki itself does offer the option of setting up an SSL connection it is generally advised to use an external proxy server to provide SSL services. nginx is popular for this purpose.
+
+! Community Tools
+
+There are also third party tools from the community that extend TiddlyWiki's built in encryption:
+
+* [["Encrypt single tiddler plugin" by Danielo Rodriguez]] allows individual tiddlers to be encrypted
+* [[TW5-CSEncryption|https://wiki.fspark.me/TW5-CSEncryption/]] offers client-side encryption for TiddlyWiki on Node.js
+
