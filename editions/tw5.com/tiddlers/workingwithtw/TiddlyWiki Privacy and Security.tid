@@ -7,7 +7,7 @@ modified: 20241106165307259
 <span class="tc-float-right">[img width=200 [TiddlyWiki Privacy Badge.png]]</span>
 TiddlyWiki is unique in that ordinary people without special training can use it securely and privately. It is easy to apply the advice from the EFF to ~TiddlyWiki. The key is that ~TiddlyWiki is just a file, and so everything that users may have already learned about how to keep documents and images private can be applied to ~TiddlyWiki.
 
-Because data is stored in simple text files, people today choosing to use ~TiddlyWiki can be confident that their data will still be accessible in the decades to come.
+Because data is stored in simple text files, people choosing to use ~TiddlyWiki today can be confident that their data will still be accessible in the decades to come.
 
 ! Verifiable Trust
 
@@ -21,7 +21,7 @@ Users can employ the same tools that they use to keep any document and photograp
 
 There are also open source alternatives such as [[Syncthing|https://syncthing.net/]] that allow users to synchronise files between their devices without using a third party service.
 
-Users may wish to use additional layers of security. ~TiddlyWiki in the single file configuration itself offers built-in [[encryption|Encryption]]. It uses an industry standard encryption library to offer AES 128 bit encryption in CCM mode. All the data within the file is encrypted, and cannot be accessed without entering the correct password. The password is never stored in the file, and so if it is lost, the data is lost. Instructions can be found [[here|Encryption]]
+Users may wish to use additional layers of security. ~TiddlyWiki in the single file configuration itself offers built-in encryption. It uses an industry standard encryption library to offer AES 128 bit encryption in CCM mode. All the data within the file is encrypted, and cannot be accessed without entering the correct password. The password is never stored in the file, and so if it is lost, the data is lost. Instructions can be found in [[Encryption]].
 
 It is important to understand that ~TiddlyWiki's built in encryption is our best endeavour to offer privacy and usability. However, the encryption feature has not been subject to the kind of rigorous third party testing that characterises secure services like Signal or Syncthing.
 
