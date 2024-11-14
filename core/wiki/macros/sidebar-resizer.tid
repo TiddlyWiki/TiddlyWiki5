@@ -356,9 +356,9 @@ title: $:/core/procedures/sidebar-resizer
 <% endif %>
 \end
 
-\function get.resizer.class() tc-sidebar-resizer [<get.resizer.state>is[tiddler]then[tc-resizer-active]] [<resizer.class>] [<resizer.class>is[blank]then<qualify>addsuffix<currentTiddler>sha256[]addprefix[tc-sidebar-resizer-identified-]] +[join[ ]]
+\function get.resizer.class() tc-slider [<get.resizer.state>is[tiddler]then[tc-resizer-active]] [<resizer.class>] [<resizer.class>is[blank]then<qualify>addsuffix<currentTiddler>sha256[]addprefix[tc-slider-identified-]] +[join[ ]]
 
-\function get.active.class(class) [<class>] [<resizer.class>match[tc-main-sidebar-resizer]] [<eventCatcherClass>] [<get.resizer.state>is[tiddler]then[tc-resizer-active]] +[join[ ]]
+\function get.active.class(class) [<class>] [<resizer.class>match[tc-main-slider]] [<eventCatcherClass>] [<get.resizer.state>is[tiddler]then[tc-resizer-active]] +[join[ ]]
 
 \function get.sidebar-resizer.pointerdown.actions()
 [<get.resizer.state>match[$:/state/sidebar/resizing]then<sidebar-resizer-pointerdown-actions>]
@@ -377,9 +377,9 @@ title: $:/core/procedures/sidebar-resizer
 
 	<$eventcatcher
 		tag="div"
-		class=<<get.active.class tc-sidebar-resizer-pointerdown-eventcatcher>>
-		selector=".tc-sidebar-resizer"
-		matchSelector=".tc-sidebar-resizer"
+		class=<<get.active.class tc-slider-pointerdown-eventcatcher>>
+		selector=".tc-slider"
+		matchSelector=".tc-slider"
 		$pointerdown=<<get.sidebar-resizer.pointerdown.actions>>
 		$pointerup=<<sidebar-resizer-pointercancel-actions>>>
 
@@ -387,16 +387,16 @@ title: $:/core/procedures/sidebar-resizer
 
 			<$eventcatcher
 				tag="div"
-				class=<<get.active.class tc-sidebar-resizer-pointermove-eventcatcher-wrapper>>
-				selector=".tc-sidebar-resizer"
-				matchSelector=".tc-sidebar-resizer"
+				class=<<get.active.class tc-slider-pointermove-eventcatcher-wrapper>>
+				selector=".tc-slider"
+				matchSelector=".tc-slider"
 				$pointerup={{{ [<get.resizer.state>is[tiddler]then<sidebar-resizer-pointercancel-actions>] }}}>
 
 				<$eventcatcher
 					tag="div"
-					selector=".tc-sidebar-resizer-pointermove"
-					matchSelector=".tc-sidebar-resizer-pointermove"
-					class=<<get.active.class tc-sidebar-resizer-pointermove-eventcatcher>>
+					selector=".tc-slider-pointermove"
+					matchSelector=".tc-slider-pointermove"
+					class=<<get.active.class tc-slider-pointermove-eventcatcher>>
 					$pointerup=<<sidebar-resizer-pointercancel-actions>>
 					$pointerleave=<<sidebar-resizer-pointercancel-actions>>
 					$pointerout=<<sidebar-resizer-pointercancel-actions>>
@@ -406,7 +406,7 @@ title: $:/core/procedures/sidebar-resizer
 					$pointermove=<<sidebar-resizer-pointermove-actions>>
 					$contextmenu=<<sidebar-resizer-pointercancel-actions>>>
 
-					<div class=<<get.active.class tc-sidebar-resizer-pointermove>>/>
+					<div class=<<get.active.class tc-slider-pointermove>>/>
 
 				</$eventcatcher>
 
@@ -486,9 +486,9 @@ title: $:/core/procedures/sidebar-resizer
 
 <$eventcatcher
 	tag="div"
-	class=<<get.active.class tc-sidebar-resizer-pointerdown-eventcatcher>>
-	selector=".tc-sidebar-resizer"
-	matchSelector=".tc-sidebar-resizer"
+	class=<<get.active.class tc-slider-pointerdown-eventcatcher>>
+	selector=".tc-slider"
+	matchSelector=".tc-slider"
 	$pointerdown=<<get.sidebar-resizer.pointerdown.actions>>
 	$pointerup=<<sidebar-resizer-pointercancel-actions>>>
 
@@ -496,16 +496,16 @@ title: $:/core/procedures/sidebar-resizer
 
 		<$eventcatcher
 			tag="div"
-			class=<<get.active.class tc-sidebar-resizer-pointermove-eventcatcher-wrapper>>
-			selector=".tc-sidebar-resizer"
-			matchSelector=".tc-sidebar-resizer"
+			class=<<get.active.class tc-slider-pointermove-eventcatcher-wrapper>>
+			selector=".tc-slider"
+			matchSelector=".tc-slider"
 			$pointerup={{{ [<get.resizer.state>is[tiddler]then<sidebar-resizer-pointercancel-actions>] }}}>
 
 			<$eventcatcher
 				tag="div"
-				selector=".tc-sidebar-resizer-pointermove"
-				matchSelector=".tc-sidebar-resizer-pointermove"
-				class=<<get.active.class tc-sidebar-resizer-pointermove-eventcatcher>>
+				selector=".tc-slider-pointermove"
+				matchSelector=".tc-slider-pointermove"
+				class=<<get.active.class tc-slider-pointermove-eventcatcher>>
 				$pointerup=<<sidebar-resizer-pointercancel-actions>>
 				$pointerleave=<<sidebar-resizer-pointercancel-actions>>
 				$pointerout=<<sidebar-resizer-pointercancel-actions>>
@@ -515,7 +515,7 @@ title: $:/core/procedures/sidebar-resizer
 				$pointermove=<<sidebar-resizer-pointermove-actions>>
 				$contextmenu=<<sidebar-resizer-pointercancel-actions>>>
 
-				<div class=<<get.active.class tc-sidebar-resizer-pointermove>>/>
+				<div class=<<get.active.class tc-slider-pointermove>>/>
 
 			</$eventcatcher>
 

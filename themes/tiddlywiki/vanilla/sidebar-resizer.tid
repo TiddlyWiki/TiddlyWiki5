@@ -6,7 +6,7 @@ code-body: yes
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional html
 
-.tc-sidebar-resizer {
+.tc-slider {
 	position: fixed;
 	top: 0;
 	height: 100%;
@@ -16,22 +16,22 @@ code-body: yes
 	background: linear-gradient(<<colour muted-foreground>>, <<colour muted-foreground>>) no-repeat center/2px 100%;
 }
 
-.tc-sidebar-resizer:hover {
+.tc-slider:hover {
 	opacity: <<get.theme.metric slideropacityhover>>;
 }
 
-.tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper {
+.tc-slider-pointerdown-eventcatcher, .tc-slider-pointermove-eventcatcher-wrapper {
 	height: 100%;
 }
 
-.tc-edit-texteditor-slider > .tc-sidebar-resizer-pointerdown-eventcatcher.tc-editor-preview-eventcatcher {
+.tc-edit-texteditor-slider > .tc-slider-pointerdown-eventcatcher.tc-editor-preview-eventcatcher {
 	position: absolute;
 	width: 100%;
 	top: 0;
 	left: 0;
 }
 
-.tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
+.tc-slider-pointermove-eventcatcher, .tc-slider-pointermove {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -42,39 +42,39 @@ code-body: yes
 	z-index: -1;
 }
 
-.tc-sidebar-resizer-pointerdown-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
+.tc-slider-pointerdown-eventcatcher:not(.tc-main-slider), .tc-slider-pointermove-eventcatcher:not(.tc-main-slider), .tc-slider-pointermove-eventcatcher-wrapper:not(.tc-main-slider) {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
 }
 
-.tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
+.tc-slider-pointermove-eventcatcher-wrapper:not(.tc-main-slider) {
 	flex-direction: row;
 }
 
-.tc-sidebar-resizer-pointerdown-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
+.tc-slider-pointerdown-eventcatcher:not(.tc-main-slider), .tc-slider-pointermove-eventcatcher-wrapper:not(.tc-main-slider) {
 	position: relative;
 }
 
-.tc-sidebar-resizer, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
+.tc-slider, .tc-slider-pointermove-eventcatcher, .tc-slider-pointermove {
 	touch-action: none;
 	user-select: none;
 }
 
-.tc-sidebar-resizer-pointermove-eventcatcher-wrapper.tc-resizer-active {
+.tc-slider-pointermove-eventcatcher-wrapper.tc-resizer-active {
 	z-index: 801;
 }
 
-.tc-sidebar-resizer-pointermove-eventcatcher.tc-resizer-active {
+.tc-slider-pointermove-eventcatcher.tc-resizer-active {
 	z-index: 802;
 }
 
-.tc-sidebar-resizer-pointermove.tc-resizer-active {
+.tc-slider-pointermove.tc-resizer-active {
 	z-index: 803;
 	cursor: ew-resize;
 }
 
-.tc-sidebar-resizer.tc-resizer-active {
+.tc-slider.tc-resizer-active {
 	opacity: <<get.theme.metric slideropacityhover>>;
 }
 
@@ -84,11 +84,11 @@ code-body: yes
 
 		@media (pointer: coarse) {
 
-			.tc-sidebar-resizer.tc-main-sidebar-resizer {
+			.tc-slider.tc-main-slider {
 				background: <<colour muted-foreground>>;
 			}
 
-			.tc-sidebar-resizer.tc-main-sidebar-resizer:hover {
+			.tc-slider.tc-main-slider:hover {
 				opacity: <<get.theme.metric slideropacity>>;
 			}
 		}
@@ -97,7 +97,7 @@ code-body: yes
 
 			@media (pointer: coarse) {
 
-				.tc-sidebar-resizer.tc-main-sidebar-resizer {
+				.tc-slider.tc-main-slider {
 					opacity: min(calc(3 * <<get.theme.metric slideropacity>>),1);
 				}
 			}
@@ -106,11 +106,11 @@ code-body: yes
 
 		<%if [<set.storywidth.storyright>match[yes]] %>
 
-			.tc-sidebar-resizer.tc-main-sidebar-resizer {
+			.tc-slider.tc-main-slider {
 				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>> + <<get.theme.storywidthoverlap>> - (2 * <<get.story-sidebar.overlap>> / 3)));
 			}
 
-			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
+			.tc-sidebar-left .tc-slider.tc-main-slider {
 				left: auto;
 				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>> + <<get.theme.storywidthoverlap>> - (2 * <<get.story-sidebar.overlap>> / 3)));
 			}
@@ -119,11 +119,11 @@ code-body: yes
 
 		<%if [<set.sidebarwidth>match[yes]] %>
 
-			.tc-sidebar-resizer.tc-main-sidebar-resizer {
+			.tc-slider.tc-main-slider {
 				left: min(clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - <<get.story-sidebar.overlap>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3))),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3)));
 			}
 
-			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
+			.tc-sidebar-left .tc-slider.tc-main-slider {
 				left: auto;
 				right: min(clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - <<get.story-sidebar.overlap>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3))),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3)));
 			}
@@ -132,11 +132,11 @@ code-body: yes
 
 		<%if [<set.centralised>match[yes]] %>
 
-			.tc-sidebar-resizer.tc-main-sidebar-resizer {
+			.tc-slider.tc-main-slider {
 				left: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.story-sidebar.overlap>> / 3)));
 			}
 
-			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
+			.tc-sidebar-left .tc-slider.tc-main-slider {
 				left: auto;
 				z-index: 1;
 				right: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.story-sidebar.overlap>> / 3)));
@@ -146,7 +146,7 @@ code-body: yes
 
 		<%if [{$:/state/sidebar}match[no]] %>
 
-			.tc-sidebar-resizer-pointerdown-eventcatcher.tc-main-sidebar-resizer, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper.tc-main-sidebar-resizer, .tc-sidebar-resizer-pointermove-eventcatcher.tc-main-sidebar-resizer, .tc-sidebar-resizer-pointermove.tc-main-sidebar-resizer, .tc-sidebar-resizer.tc-main-sidebar-resizer {
+			.tc-slider-pointerdown-eventcatcher.tc-main-slider, .tc-slider-pointermove-eventcatcher-wrapper.tc-main-slider, .tc-slider-pointermove-eventcatcher.tc-main-slider, .tc-slider-pointermove.tc-main-slider, .tc-slider.tc-main-slider {
 				display: none;
 			}
 
@@ -156,7 +156,7 @@ code-body: yes
 
 	@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
-		.tc-sidebar-resizer-pointerdown-eventcatcher.tc-main-sidebar-resizer, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper.tc-main-sidebar-resizer, .tc-sidebar-resizer-pointermove-eventcatcher.tc-main-sidebar-resizer, .tc-sidebar-resizer-pointermove.tc-main-sidebar-resizer, .tc-sidebar-resizer.tc-main-sidebar-resizer {
+		.tc-slider-pointerdown-eventcatcher.tc-main-slider, .tc-slider-pointermove-eventcatcher-wrapper.tc-main-slider, .tc-slider-pointermove-eventcatcher.tc-main-slider, .tc-slider-pointermove.tc-main-slider, .tc-slider.tc-main-slider {
 			display: none;
 		}
 	}
@@ -204,13 +204,13 @@ div[class*="tc-editor-preview-slider-"] {
 			grid-template-columns: calc(100% - <<width>>) <<width>>;
 		}
 
-		div.tc-sidebar-resizer.tc-editor-preview-slider-<<identifier>> {
+		div.tc-slider.tc-editor-preview-slider-<<identifier>> {
 			left: calc(100% - <<width>> - <<get.theme.metric previewsliderwidth>>);
 		}
 
 		<%if [[$:/state/resizing/editor-preview-]addsuffix<identifier>is[tiddler]] %>
 
-			div.tc-sidebar-resizer.tc-editor-preview-slider-<<identifier>> {
+			div.tc-slider.tc-editor-preview-slider-<<identifier>> {
 				opacity: min(calc(3 * <<get.theme.metric slideropacity>>),1);
 			}
 

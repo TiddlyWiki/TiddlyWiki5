@@ -7,7 +7,7 @@ code-body: yes
 
 \function resizer.state.tiddler() $:/state/sidebar/resizing
 \function resizer.state() [{$:/state/sidebar}]
-\function resizer.class() tc-main-sidebar-resizer
+\function resizer.class() tc-main-slider
 \function set.throttling() yes
 \function drag.direction.reverse() [<get.theme.option sidebarposition>match[left]then[yes]] :else[[no]]
 \whitespace trim
