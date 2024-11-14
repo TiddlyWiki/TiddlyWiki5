@@ -3,14 +3,15 @@ title: $:/snippets/currpalettepreview
 \whitespace trim
 
 \procedure colour-div-filtered(class,styleName,styleColour)
-\function colour(name) [<currentTiddler>getindex<name>] :else[<currentTiddler>get[palette-import]getindex<name>] :else[[none]] :map[subfilter<currentTiddler>]
-<$let colour-filter={{{ [<currentTiddler>getindex<styleColour>] }}}>
-	<!-- Note the join, needed to cope with palette entries containing spaces -->
-	<$let colour-result={{{ [subfilter<colour-filter>join[ ]] }}}>
-		<div class=<<class>> style={{{ [<styleName>addsuffix[:]addsuffix<colour-result>addsuffix[;]] }}}>
-			<$slot $name="ts-raw" $depth="2"/>
-		</div>
-	</$let>
+\function colour(name) [<colour-palette>getindex<name>] :else[<colour-palette>get[palette-import]getindex<name>] :else[[none]] :map[subfilter<currentTiddler>] +[join[ ]]
+<!-- Note the join, needed to cope with palette entries containing spaces -->
+<$let
+	colour-palette=<<currentTiddler>>
+	colour-result={{{ [function[colour],<styleColour>] +[join[ ]] }}}
+>
+	<div class=<<class>> style={{{ [<styleName>addsuffix[:]addsuffix<colour-result>addsuffix[;]] }}}>
+		<$slot $name="ts-raw" $depth="2"/>
+	</div>
 </$let>
 \end colour-div-filtered
 
