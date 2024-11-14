@@ -2,8 +2,6 @@ title: TiddlyWiki Privacy and Security
 created: 20241106165307259
 modified: 20241106165307259
 
-! Introduction
-
 <span class="tc-float-right">[img width=200 [TiddlyWiki Privacy Badge.png]]</span>
 TiddlyWiki is unique in that ordinary people without special training can use it securely and privately. It is easy to apply the advice from the EFF to ~TiddlyWiki. The key is that ~TiddlyWiki is just a file, and so everything that users may have already learned about how to keep documents and images private can be applied to ~TiddlyWiki.
 
