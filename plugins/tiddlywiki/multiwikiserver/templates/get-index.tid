@@ -41,6 +41,12 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 	</div>
 </$list>
 
+<$list filter="[<show-annon-config>match[yes]]">
+	<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/anon-config-modal">
+		<$transclude/>
+	</$tiddler>
+</$list>
+
 <ul class="mws-vertical-list">
 	<$list filter="[<recipe-list>jsonindexes[]] :sort[<currentTiddler>jsonget[recipe_name]]" variable="recipe-index">
 		<li>
@@ -283,5 +289,65 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 
 .mws-security-warning-button:hover {
 	background-color: #6d5204;
+}
+
+.mws-modal-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mws-modal-content {
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	max-width: 500px;
+}
+
+.mws-config-button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-bottom: 1rem;
+}
+
+.mws-config-button:hover {
+    background-color: #45a049;
+}
+
+.mws-modal-content {
+    padding: 20px;
+}
+
+.mws-modal-section {
+    margin-bottom: 15px;
+}
+
+.mws-modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.mws-modal-button-primary {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.mws-modal-button-primary:hover {
+    background-color: #45a049;
 }
 </style>

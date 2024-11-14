@@ -46,6 +46,8 @@ exports.middleware = function (request, response, state, entityType, permissionN
 	// Then use decodeURIComponent for the rest
 	var decodedEntityName = decodeURIComponent(partiallyDecoded);
 	var aclRecord = sqlTiddlerDatabase.getACLByName(entityType, decodedEntityName);
+	var isGetRequest = request.method === "GET";
+	var hasAnonymousAccess = isGetRequest ? state.allowAnonReads : state.allowAnonWrites;
 	// Get permission record
 	const permission = sqlTiddlerDatabase.getPermissionByName(permissionName);
 	// ACL Middleware will only apply if the entity has a middleware record
@@ -58,7 +60,7 @@ exports.middleware = function (request, response, state, entityType, permissionN
 			}
 		}
 		// Check if user is authenticated
-		if(!state.authenticatedUser && !response.headersSent) {
+		if(!state.authenticatedUser && !hasAnonymousAccess && !response.headersSent) {
 			response.writeHead(401, "Unauthorized");
 			response.end();
 			return;
@@ -66,7 +68,7 @@ exports.middleware = function (request, response, state, entityType, permissionN
 
 		// Check ACL permission
 		var hasPermission = request.method === "POST" || sqlTiddlerDatabase.checkACLPermission(state.authenticatedUser.user_id, entityType, decodedEntityName, permissionName)
-		if(!hasPermission) {
+		if(!hasPermission && !hasAnonymousAccess) {
 			if(!response.headersSent) {
 				response.writeHead(403, "Forbidden");
 				response.end();
