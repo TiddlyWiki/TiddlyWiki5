@@ -1,9 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-anon.js
+title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/post-anon.js
 type: application/javascript
 module-type: mws-route
 
-GET /admin/anon
+POST /admin/anon
 
 \*/
 (function() {
@@ -12,9 +12,13 @@ GET /admin/anon
 /*global $tw: false */
 "use strict";
 
-exports.method = "GET";
+exports.method = "POST";
 
 exports.path = /^\/admin\/anon\/?$/;
+
+exports.bodyFormat = "www-form-urlencoded";
+
+exports.csrfDisable = true;
 
 exports.handler = function(request, response, state) {
   // Check if user is authenticated and is admin
