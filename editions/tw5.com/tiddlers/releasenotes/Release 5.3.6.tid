@@ -1,20 +1,19 @@
 caption: 5.3.6
-created: 20240830144941926
-modified: 20240830144941926
+created: 20241115170824144
+modified: 20241115170824144
+released: 20241115170824144
 tags: ReleaseNotes
 title: Release 5.3.6
 type: text/vnd.tiddlywiki
 description: Under development
 
-//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.5...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.5...v5.3.6]]//
 
 <<.banner-credits
 	credit:"""Congratulations to [[pmario|https://talk.tiddlywiki.org/u/pmario]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/banner-image-competition-for-v5-3-6]]).
 """
 	url:"https://raw.githubusercontent.com/TiddlyWiki/TiddlyWiki5/fdafdba1b07032f3d777bd3f782c4e62cfbf3731/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
 >>
-
-! Major Improvements
 
 ! Translation improvements
 
@@ -72,10 +71,6 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 ! Widget Improvements
 
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8256">> DroppableWidget to allow actions to be triggered once passing all the items in the list rather than invoking the actions separately for each item in the list
-
-! Filter Improvements
-
-* 
 
 ! Usability Improvements
 
