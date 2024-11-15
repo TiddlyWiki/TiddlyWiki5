@@ -365,6 +365,8 @@ title: $:/core/procedures/sidebar-resizer
 :else[<sidebar-resizer-pointerdown-actions-inner>]
 \end
 
+\function get.sidebar-resizer.pointercancel.actions() [<get.resizer.state>is[tiddler]then<sidebar-resizer-pointercancel-actions>]
+
 \function get.template-right.style.left() [<sliderCondition>match[no]then[0px]] :else[[calc(2 * ]addsuffix<get.resizer.style.width>addsuffix[)]]
 
 \function get.template-left.style.flex-basis() [<sliderCondition>match[no]then[100%]] :else[[calc(]addsuffix<get.resizer.style.left>addsuffix[ - ]addsuffix<resizerWidthDivided>addsuffix[px)]]
@@ -491,7 +493,7 @@ title: $:/core/procedures/sidebar-resizer
 	class=<<get.active.class tc-slider-pointerdown-eventcatcher>>
 	selector=".tc-slider"
 	matchSelector=".tc-slider"
-	$pointerdown=<<get.sidebar-resizer.pointerdown.actions>>
+	$pointerdown=<<sidebar-resizer-pointerdown-actions-inner>>
 	$pointerup=<<sidebar-resizer-pointercancel-actions>>>
 
 	<%if [<resizer.state>!match[no]] %>
@@ -501,7 +503,7 @@ title: $:/core/procedures/sidebar-resizer
 			class=<<get.active.class tc-slider-pointermove-eventcatcher-wrapper>>
 			selector=".tc-slider"
 			matchSelector=".tc-slider"
-			$pointerup={{{ [<get.resizer.state>is[tiddler]then<sidebar-resizer-pointercancel-actions>] }}}>
+			$pointerup=<<sidebar-resizer-pointercancel-actions>>>
 
 			<$eventcatcher
 				tag="div"

@@ -53,8 +53,9 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 	editPreviewStateTiddler={{{ [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] }}}
 	importTitle=<<qualify $:/ImportImage>>
 	importState=<<qualify $:/state/ImportImage>>
-	identifier={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]] }}}
-	sidebarWidthTiddler={{{ [<identifier>addprefix[$:/state/resizer/previewwidth-]] }}} >
+	identifier={{{ [<qualify>addsuffix<currentTiddler>sha256[]] }}}
+	sidebarWidthTiddler={{{ [<identifier>addprefix[$:/state/resizer/previewwidth-]] }}}
+>
 <$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> >
 <div>
 
