@@ -30,6 +30,7 @@ This release includes improvements to the following translations:
 !! Geospatial Plugin
 
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8404">> support for custom wikitext popups to be attached to map features
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8740">> support for click actions to be attached to map features
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8437">> ordering of latitude and longitude in geospatial operators
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8484">> crash when geomap contains an empty geolayer widget
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8511">> loading map state from saved tiddlers
