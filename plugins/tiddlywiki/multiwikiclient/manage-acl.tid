@@ -1,10 +1,11 @@
 title: $:/core/ui/Buttons/manage-acl
 tags: $:/tags/PageControls
-caption: {{$:/core/images/globe}} {{$:/language/Buttons/ManageACL/Caption}}
-description: {{$:/language/Buttons/ManageACL/Hint}}
+caption: {{$:/core/images/globe}} manage access control
+description: Manage access control configuration for this wiki
+list-after: $:/core/ui/Buttons/encryption
 
 \whitespace trim
-<$button tooltip={{$:/language/Buttons/ManageACL/Hint}} aria-label={{$:/language/Buttons/ManageACL/Caption}} class=<<tv-config-toolbar-class>>>
+<$button tooltip="Manage access control configuration for this wiki" aria-label="manage access control" class=<<tv-config-toolbar-class>>>
 <$action-managetiddler tiddler=<<currentTiddler>>/>
 {{$:/core/images/globe}}
 <%if [<tv-config-toolbar-text>match[yes]] %>

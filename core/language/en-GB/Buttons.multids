@@ -159,8 +159,6 @@ ListBullet/Caption: bulleted list
 ListBullet/Hint: Apply bulleted list formatting to lines containing selection
 ListNumber/Caption: numbered list
 ListNumber/Hint: Apply numbered list formatting to lines containing selection
-ManageACL/Caption: manage access control
-ManageACL/Hint: Manage access control configuration for this wiki
 MonoBlock/Caption: monospaced block
 MonoBlock/Hint: Apply monospaced block formatting to lines containing selection
 MonoLine/Caption: monospaced
