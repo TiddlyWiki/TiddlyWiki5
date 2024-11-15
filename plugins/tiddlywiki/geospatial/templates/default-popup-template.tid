@@ -1,3 +1,0 @@
-title: $:/plugins/tiddlywiki/geospatial/templates/default-popup-template
-
-Feature: <$text text={{{ [<feature>] }}}/>

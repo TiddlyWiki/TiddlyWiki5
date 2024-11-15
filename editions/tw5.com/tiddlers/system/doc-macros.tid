@@ -228,3 +228,11 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 	</$list>
 </ol>
 \end
+
+\procedure .copy-code-to-clipboard(text)
+<div>
+<$transclude $variable="copy-to-clipboard-above-right" src=<<text>>/>
+<$codeblock code=<<text>>/>
+</div>
+\end .copy-code-to-clipboard
+

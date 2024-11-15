@@ -69,7 +69,7 @@ alert-background: <<colour flexoki-yellow-100>>
 alert-border: <<colour flexoki-ye-2>>
 alert-highlight: <<colour flexoki-re>>
 alert-muted-foreground: <<colour flexoki-ye>>
-background: #1C1B1A
+background: #100F0F
 blockquote-bar: <<colour flexoki-ma-2>>
 button-background: <<colour flexoki-bg-2>>
 button-foreground: <<colour flexoki-paper>>
@@ -102,7 +102,7 @@ external-link-foreground-hover: inherit
 external-link-foreground-visited: <<colour flexoki-bl>>
 external-link-foreground: <<colour flexoki-bl>>
 footnote-target-background: <<colour flexoki-bg-2>>
-foreground: #B7B5AC
+foreground: #CECDC3
 highlight-background: #ffff00
 highlight-foreground: #000000
 menubar-background: <<colour primary>>
@@ -135,11 +135,11 @@ sidebar-foreground-shadow: transparent
 sidebar-foreground: <<colour flexoki-tx>>
 sidebar-muted-foreground-hover: <<colour flexoki-tx>>
 sidebar-muted-foreground: <<colour flexoki-tx-3>>
-sidebar-tab-background-selected: <<colour flexoki-bg>>
+sidebar-tab-background-selected: <<colour flexoki-bg-2>>
 sidebar-tab-background: <<colour flexoki-ui-2>>
 sidebar-tab-border-selected: <<colour tab-border-selected>>
 sidebar-tab-border: <<colour tab-border>>
-sidebar-tab-divider: #e4e4e4
+sidebar-tab-divider: <<colour tab-divider>>
 sidebar-tab-foreground-selected: 
 sidebar-tab-foreground: <<colour tab-foreground>>
 sidebar-tiddler-link-foreground-hover: <<colour flexoki-tx>>
@@ -157,7 +157,7 @@ tab-border: <<colour flexoki-ui>>
 tab-divider: <<colour flexoki-ui-2>>
 tab-foreground-selected: <<colour tab-foreground>>
 tab-foreground: <<colour flexoki-tx-2>>
-table-border: <<colour flexoki-ui>>
+table-border: <<colour flexoki-ui-2>>
 table-footer-background: <<colour flexoki-ui>>
 table-header-background: <<colour flexoki-ui>>
 tag-background: #D0A215
@@ -169,7 +169,7 @@ tiddler-background: <<colour background>>
 tiddler-border: <<colour flexoki-ui-2>>
 tiddler-controls-foreground-hover: <<colour flexoki-tx-3>>
 tiddler-controls-foreground-selected: <<colour flexoki-tx-2>>
-tiddler-controls-foreground: <<colour flexoki-ui-2>>
+tiddler-controls-foreground: <<colour flexoki-tx-3>>
 tiddler-editor-background: <<colour flexoki-bg-2>>
 tiddler-editor-border-image: #ffffff
 tiddler-editor-border: <<colour flexoki-ui-2>>
@@ -188,10 +188,10 @@ toolbar-save-button:
 toolbar-info-button: 
 toolbar-edit-button: 
 toolbar-close-button: 
-toolbar-delete-button: 
+toolbar-delete-button: <<colour flexoki-re>>
 toolbar-cancel-button: 
 toolbar-done-button: 
-untagged-background: #999999
+untagged-background: <<colour flexoki-tx-3>>
 very-muted-foreground: <<colour flexoki-600>>
 wikilist-background: #e5e5e5
 wikilist-item: #fff

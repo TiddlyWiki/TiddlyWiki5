@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - tiddlywiki-com
+      - multi-wiki-support
 env:
   NODE_VERSION: "22"
 jobs:
@@ -80,5 +81,17 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}
       - run: "./bin/build-tw-org.sh"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}
+  build-mws-tiddlywiki-com:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/multi-wiki-support'
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_VERSION }}"
+      - run: "./bin/build-mws-site.sh"
         env:
           GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}
