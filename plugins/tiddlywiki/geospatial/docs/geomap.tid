@@ -107,7 +107,7 @@ If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>
 	text="Map with geomarker with actions"
 />
 <$data title="MarkerClickActions" text="""
-	<$action-setfield $tiddler="$:/clicked-marker" text={{{ [<properties>] }}}/>
+	<$action-setfield $tiddler="$:/clicked-marker" text={{{ =[<properties>] =[<lat>] =[<long>] =[<alt>] +[join[,]] }}}/>
 """/>
 <$data title="Output" text="""Marker: <$text text={{$:/clicked-marker}}/>
 
@@ -115,7 +115,7 @@ If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>
 	state=<<qualify "$:/state/demo-map">>
 >
 	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]">
-		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}} properties={{{ [[{}]jsonset[title],<currentTiddler>] }}} onclick={{MarkerClickActions}}/>
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}} properties={{{ [[{}]jsonset[title],<currentTiddler>] }}} clickActions={{MarkerClickActions}}/>
 	</$list>
 </$geomap>
 """/>

@@ -213,7 +213,8 @@ GeomapWidget.prototype.refreshMap = function() {
 						var latlng = event.sourceTarget.getLatLng();
 						self.invokeActionString(widget.getAttribute("updateActions"),null,event,{
 							lat: latlng.lat,
-							long: latlng.lng
+							long: latlng.lng,
+							alt: latlng.alt
 						});
 					});
 					return marker;
@@ -237,9 +238,9 @@ GeomapWidget.prototype.refreshMap = function() {
 						return container;
 					});
 					// Add event handlers
-					if(widget.hasAttribute("onclick")) {
+					if(widget.hasAttribute("clickActions")) {
 						layer.on("click",function(event) {
-							self.invokeActionString(widget.getAttribute("onclick"),null,event.originalEvent,{
+							self.invokeActionString(widget.getAttribute("clickActions"),null,event.originalEvent,{
 								lat: event.latlng.lat,
 								long: event.latlng.lng,
 								alt: event.latlng.alt,
