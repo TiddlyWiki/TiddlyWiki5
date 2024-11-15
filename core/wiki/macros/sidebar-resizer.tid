@@ -371,7 +371,7 @@ title: $:/core/procedures/sidebar-resizer
 
 \function get.template-right.style.flex-basis() [<sliderCondition>match[no]then[0%]] :else[[calc(]addsuffix<get.template-right.width>addsuffix[ - ]addsuffix<resizerWidthDivided>addsuffix[px)]]
 
-\procedure sidebar-resizer(templateLeft:"",templateRight:"",mode:"block",sliderCondition:"yes",eventCatcherClass:"",zIndexLeft:"")
+\procedure sidebar-resizer(templateLeft:"",templateRight:"",mode:"block",eventCatcherClass:"",zIndexLeft:"")
 
 <$set name="resizerWidthDivided" value={{{ [<get.resizer.style.width>divide[2]] }}}>
 
@@ -419,6 +419,7 @@ title: $:/core/procedures/sidebar-resizer
 						style.top="0"
 						style.left="0"
 						style.flex-basis=<<get.template-left.style.flex-basis>>
+						style.width=<<get.template-left.style.flex-basis>>
 						style.z-index=<<zIndexLeft>>
 					>
 
@@ -436,7 +437,7 @@ title: $:/core/procedures/sidebar-resizer
 
 				<% endif %>
 
-				<%if [<sliderCondition>match[yes]] %>
+				<%if [<get.slider.condition>match[yes]] %>
 
 					<div
 						class=<<get.resizer.class>>
@@ -456,6 +457,7 @@ title: $:/core/procedures/sidebar-resizer
 						style.top="0"
 						style.left=<<get.template-right.style.left>>
 						style.flex-basis=<<get.template-right.style.flex-basis>>
+						style.width=<<get.template-right.style.flex-basis>>
 					>
 
 						<%if [<templateRight>is[variable]] %>
@@ -519,7 +521,7 @@ title: $:/core/procedures/sidebar-resizer
 
 			</$eventcatcher>
 
-			<%if [<sliderCondition>match[yes]] %>
+			<%if [<get.slider.condition>match[yes]] %>
 
 				<div
 					class=<<get.resizer.class>>

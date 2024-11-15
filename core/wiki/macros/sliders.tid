@@ -1,11 +1,10 @@
 title: $:/core/procedures/sliders
-tags: $:/tags/Global
 code-body: yes
 
 \procedure editor-preview-slider(class:"",width:"100%",
 minHeight:"10px",template:"",
 mode:"block",sliderWidth:"12px",
-padding:"12px",sliderCondition:"yes",
+padding:"12px",
 leftMinWidth:"0%",rightMinWidth:"0%")
 
 \import $:/core/procedures/sidebar-resizer
@@ -35,7 +34,6 @@ leftMinWidth:"0%",rightMinWidth:"0%")
 	<$transclude
 		$variable="editor-resizer"
 		template=<<template>>
-		sliderCondition=<<sliderCondition>>
 		eventCatcherClass="tc-editor-preview-eventcatcher"
 		mode=<<mode>>
 	/>
@@ -43,20 +41,22 @@ leftMinWidth:"0%",rightMinWidth:"0%")
 </$let>
 \end
 
-\procedure two-cell-slider(width:"100%",minHeight:"10px",
+\procedure two-cell-slider(
 templateLeft:"",templateRight:"",
+width:"100%",minHeight:"22px",
 mode:"block",sliderWidth:"12px",
-padding:"12px",sliderCondition:"yes",
-leftMinWidth:"100px",rightMinWidth:"100px")
+padding:"12px",leftMinWidth:"100px",
+rightMinWidth:"100px",id:"1")
 
 \import $:/core/procedures/sidebar-resizer
 \function get.resizer.style.position() absolute
 \function get.template-right.width() [<sidebarWidthTiddler>get[text]] :else[[50%]]
-\function get.resizer.style.left() [[calc(100% - ]addsuffix<get.template-right.width>addsuffix[)]]
+\function get.resizer.style.left() [[clamp(]addsuffix<leftMinWidth>addsuffix[,]addsuffix[calc(100% - ]addsuffix<get.template-right.width>addsuffix[),calc(100% - ]addsuffix<rightMinWidth>addsuffix[))]]
 \function get.resizer.style.width() [<sliderWidth>]
 \function set.throttling() no
-\function get.left.minwidth() [<leftMinWidth>]
-\function get.right.minwidth() [<rightMinWidth>]
+\function get.modulo.minwidth(width) [<id>remainder[3]match[1]then<width>multiply[2]else<width>multiply[1]] :map[get.value.metric<width>addprefix<currentTiddler>]
+\function get.left.minwidth() [get.modulo.minwidth<leftMinWidth>]
+\function get.right.minwidth() [get.modulo.minwidth<rightMinWidth>]
 \function drag.direction.reverse() no
 \whitespace trim
 
@@ -75,21 +75,20 @@ leftMinWidth:"100px",rightMinWidth:"100px")
 		tv-set-storywidth-storyright="no"
 		tv-set-sidebarwidth="yes"
 		tv-set-centralised="no"
-		storyLeftTiddler={{{ [<storyLeftTiddler>!is[blank]] :else[<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyleft-]] }}}
-		storyRightTiddler={{{ [<storyRightTiddler>!is[blank]] :else[<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyright-]] }}}
-		sidebarWidthTiddler={{{ [<sidebarWidthTiddler>!is[blank]] :else[<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/rightwidth-]] }}}
-		tiddlerWidthTiddler={{{ [<tiddlerWidthTiddler>!is[blank]] :else[<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/tiddlerwidth-]] }}}
-		storyWidthTiddler={{{ [<storyWidthTiddler>!is[blank]] :else[<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
-		storyMinWidthTiddler={{{ [<storyMinWidthTiddler>!is[blank]] :else[<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
-		sidebarMinWidthTiddler={{{ [<sidebarMinWidthTiddler>!is[blank]] :else[<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyminwidth-]] }}}
-		storyPaddingLeftTiddler={{{ [<storyPaddingLeftTiddler>!is[blank]] :else[<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingleft-]] }}}
-		storyPaddingRightTiddler={{{ [<storyPaddingRightTiddler>!is[blank]] :else[<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingright-]] }}}>
+		storyLeftTiddler={{{ [<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyleft-]addsuffix<id>] }}}
+		storyRightTiddler={{{ [<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyright-]addsuffix<id>] }}}
+		sidebarWidthTiddler={{{ [<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/rightwidth-]addsuffix<id>] }}}
+		tiddlerWidthTiddler={{{ [<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/tiddlerwidth-]addsuffix<id>] }}}
+		storyWidthTiddler={{{ [<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]addsuffix<id>] }}}
+		storyMinWidthTiddler={{{ [<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]addsuffix<id>] }}}
+		sidebarMinWidthTiddler={{{ [<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyminwidth-]addsuffix<id>] }}}
+		storyPaddingLeftTiddler={{{ [<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingleft-]addsuffix<id>] }}}
+		storyPaddingRightTiddler={{{ [<qualify>addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingright-]addsuffix<id>] }}}>
 		
 		<$transclude
 			$variable="sidebar-resizer"
 			templateLeft=<<templateLeft>>
 			templateRight=<<templateRight>>
-			sliderCondition=<<sliderCondition>>
 			mode=<<mode>>
 		/>
 	

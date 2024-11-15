@@ -10,6 +10,7 @@ code-body: yes
 \function resizer.class() tc-main-slider
 \function set.throttling() yes
 \function drag.direction.reverse() [<get.theme.option sidebarposition>match[left]then[yes]] :else[[no]]
+\function get.slider.condition() [{$:/state/sidebar}!match[no]then[yes]]
 \whitespace trim
 
 <%if [<get.theme.explicit.option sidebarresizer>match[show]] %>

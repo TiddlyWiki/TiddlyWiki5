@@ -1,5 +1,7 @@
 title: $:/core/ui/EditTemplate/body/default
 
+\import $:/core/procedures/sliders
+
 \function get.edit-preview-state()
 [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] +[get[text]] :else[[no]]
 \end
@@ -60,7 +62,6 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 	$variable="editor-preview-slider"
 	class="tc-edit-texteditor-slider"
 	template="tp-tiddler-editor-preview"
-	sliderCondition=<<get.slider.condition>>
 	mode="inline"
 	padding="0px"
 	sliderWidth=<<get.theme.metric previewsliderwidth>>
