@@ -167,11 +167,12 @@ GeomapWidget.prototype.refreshMap = function() {
 	});
 	this.map.addLayer(markers);
 	// Process embedded geolayer widgets
-	var defaultPopupTemplateTitle = self.getAttribute("popupTemplate","$:/plugins/tiddlywiki/geospatial/templates/default-popup-template");
+	var defaultPopupTemplateTitle = self.getAttribute("popupTemplate");
 	this.findChildrenDataWidgets(this.contentRoot.children,"geolayer",function(widget) {
 		var jsonText = widget.getAttribute("json"),
 			popupTemplateTitle = widget.getAttribute("popupTemplate",defaultPopupTemplateTitle),
 			geoJson = [];
+		// Build up the geojson of the layer
 		if(jsonText) {
 			// Layer is defined by JSON blob
 			geoJson = $tw.utils.parseJSONSafe(jsonText,[]);
@@ -197,6 +198,7 @@ GeomapWidget.prototype.refreshMap = function() {
 				geoJson.features[0].properties = $tw.utils.parseJSONSafe(properties);
 			}
 		}
+		// Create and add layer for the geojson
 		var draggable = widget.getAttribute("draggable","no") === "yes",
 			layer = $tw.Leaflet.geoJSON(geoJson,{
 				style: function(geoJsonFeature) {
@@ -211,31 +213,46 @@ GeomapWidget.prototype.refreshMap = function() {
 						var latlng = event.sourceTarget.getLatLng();
 						self.invokeActionString(widget.getAttribute("updateActions"),null,event,{
 							lat: latlng.lat,
-							long: latlng.lng
+							long: latlng.lng,
+							alt: latlng.alt
 						});
 					});
 					return marker;
 				},
 				onEachFeature: function(feature,layer) {
-					layer.bindPopup(function() {
-						var widget = self.wiki.makeTranscludeWidget(popupTemplateTitle, {
-								document: self.document,
-								parentWidget: self,
-								parseAsInline: false,
-								importPageMacros: true,
-								variables: {
-									feature: JSON.stringify(feature)
-								}
+					if(popupTemplateTitle) {
+						layer.bindPopup(function() {
+							var widget = self.wiki.makeTranscludeWidget(popupTemplateTitle, {
+									document: self.document,
+									parentWidget: self,
+									parseAsInline: false,
+									importPageMacros: true,
+									variables: {
+										feature: JSON.stringify(feature)
+									}
+							});
+							var container = self.document.createElement("div");
+							widget.render(container,null);
+							self.wiki.addEventListener("change",function(changes) {
+								widget.refresh(changes,container,null);
+							});
+							return container;
 						});
-						var container = self.document.createElement("div");
-						widget.render(container,null);
-						self.wiki.addEventListener("change",function(changes) {
-							widget.refresh(changes,container,null);
+					}
+					// Add event handlers
+					if(widget.hasAttribute("clickActions")) {
+						layer.on("click",function(event) {
+							self.invokeActionString(widget.getAttribute("clickActions"),null,event.originalEvent,{
+								lat: event.latlng.lat,
+								long: event.latlng.lng,
+								alt: event.latlng.alt,
+								properties: JSON.stringify(feature.properties)
+							});
 						});
-						return container;
-					});
+					}
 				}
 			}).addTo(self.map);
+		// Create a name for this layer
 		var name = widget.getAttribute("name") || ("Untitled " + untitledCount++);
 		self.renderedLayers.push({name: name, layer: layer});
 	});

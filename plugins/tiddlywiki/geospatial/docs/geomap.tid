@@ -104,6 +104,36 @@ If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>
 <$testcase>
 <$data
 	title="Description"
+	text="Map with geomarker with actions"
+/>
+<$data title="MarkerClickActions" text="""
+	<$action-setfield $tiddler="$:/clicked-marker" text={{{ =[<properties>] =[<lat>] =[<long>] =[<alt>] +[join[,]] }}}/>
+"""/>
+<$data title="Output" text="""Marker: <$text text={{$:/clicked-marker}}/>
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}} properties={{{ [[{}]jsonset[title],<currentTiddler>] }}} clickActions={{MarkerClickActions}}/>
+	</$list>
+</$geomap>
+"""/>
+<$data
+	title="Oxford"
+	tags="$:/tags/GeoMarker"
+	caption="Oxford"
+	lat="51.751944"
+	long="-1.257778"
+	alt="0"
+	text="""{{$:/core/images/star-filled}} This is Oxford!"""/>
+	properties={{{ [[{}]jsonset[title],[Oxford] }}}/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
+
+<$testcase>
+<$data
+	title="Description"
 	text="Map with geofeature"
 />
 <$data
