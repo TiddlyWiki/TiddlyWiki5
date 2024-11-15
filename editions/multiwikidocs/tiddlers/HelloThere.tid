@@ -1,3 +1,14 @@
 title: HelloThere
 
-Hello! This is a test
+<span class="tc-float-right">[img width=200 [MWS Banner.png]]</span>
+~MultiWikiServer is a new development that drastically improves ~TiddlyWiki's capabilities when running as server under Node.js. It brings ~TiddlyWiki up to par with common web-based tools like ~WordPress or ~MediaWiki by supporting multiple wikis and multiple users at the same time.
+
+Planned features include:
+
+* Hosting multiple wikis at once, using the [[Bags and Recipes]] mechanism for sharing data between them
+* Robust authentication and authorisation options
+* Improved handling of file uploads and attachments, allowing gigabyte video files to be uploaded and streamed
+* Instantaneous synchronisation of changes between the server and all connected clients
+* Workflow processing on the server, for example to automatically compress images, or to archive webpages
+
+MWS is currently [[under development at GitHub|https://github.com/TiddlyWiki/TiddlyWiki5/pull/7915]] but it is already functional and usable.

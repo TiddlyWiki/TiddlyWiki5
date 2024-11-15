@@ -1,0 +1,14 @@
+title: Installation
+modified: 20241105133737778
+created: 20241105133737778
+
+These instructions require minimal knowledge of the terminal. There are also [[alternative instructions for those using Git|Installation using Git]].
+
+# Download the code [[direct from GitHub|https://github.com/TiddlyWiki/TiddlyWiki5/archive/refs/pull/7915/head.zip]]
+# Open a terminal window in the root of the downloaded folder
+# Install the dependencies with the command: <<.copy-code-to-clipboard "npm install">>
+# Start the server with the command: <<.copy-code-to-clipboard "npm start">>
+# To use MWS, visit http://localhost:8080 in a browser on the same computer
+# When you have finished using MWS, stop the server with <kbd>ctrl-C</kbd>
+
+To update your copy of MWS with newer changes will require re-downloading the code, taking care not to lose any changes you might have made.
