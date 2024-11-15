@@ -1,0 +1,229 @@
+title: Reference
+
+! Authentication & Authorization
+
+!! Overview
+
+Our application has transitioned from a conventional username/password authentication system to a more robust Authentication and Authorization implementation. This new system supports multiple user accounts, roles, permissions, and a comprehensive access control list.
+
+!! Key Features
+
+# Multiple User Accounts
+# Role-based Access Control
+# Granular Permissions
+# Access Control List (ACL)
+
+!! Application Access & Security
+
+!!! Initial Setup
+When you first launch the Multiwiki Server, it operates in an unauthenticated mode to facilitate initial configuration. During this initial state, the system creates a temporary anonymous administrator account. Upon accessing the landing page, you'll receive a prominent security warning with instructions to establish a permanent ADMIN account. It's crucial to create this account immediately to secure your installation.
+
+!!! User Types and Permissions
+
+!!!! Administrator (ADMIN)
+
+* Full system access and configuration rights
+* Can create, modify, and delete user accounts
+* Manages role assignments and permissions
+* Controls global system settings
+* Can configure guest access policies
+* Has complete control over all recipes and tiddlers
+
+!!!! Regular Users
+* Custom accounts created by administrators
+* Permissions determined by assigned roles
+* Access limited to specific recipes based on role permissions
+* Can have READ and/or WRITE permissions
+
+!!!! Guest Users
+* Default anonymous access level
+* No inherent permissions
+* Can only access recipes without Access Control Lists (ACLs)
+* Read/write capabilities configurable by ADMIN
+* Useful for public wikis or documentation sites
+
+!!! Access Control System
+
+!!!! Recipe-Level Security
+* Access control is implemented at the recipe level
+* Each recipe can have its own Access Control List (ACL)
+* Permissions are granular:
+** READ: Allows viewing recipe contents
+** WRITE: Allows modifications to recipe contents
+
+!!!! Role-Based Access Control (RBAC)
+* Administrators can create custom roles
+* Roles can be assigned specific READ/WRITE permissions
+* Users inherit permissions from their assigned roles
+* Multiple roles can be assigned to a single user
+* Provides flexible and scalable access management
+
+!!!! Permission Inheritance
+* Users receive combined permissions from all assigned roles
+* More permissive role takes precedence in conflicts
+* Guest access is overridden by recipe ACLs
+* System automatically enforces most restrictive access when conflicts occur
+
+This security model allows for fine-grained control over content access while maintaining flexibility for both private and public wiki deployments.
+
+!! User Management & Security Architecture
+
+!!! User Account Management
+
+Users can be administered through two interfaces:
+
+# Web-based Administrative Interface
+#* Accessible only to ADMIN users
+#* Provides graphical interface for user operations
+#* Real-time validation and feedback
+# Command-line Interface (CLI) Tools
+#* Suitable for automation and scripting
+#* Enables batch operations
+#* Useful for system initialization
+
+Each user account contains the following essential components:
+
+* ''Username''
+** Must be unique across the system
+** Case-sensitive
+** Used for authentication and audit trails
+* ''Password''
+** Stored using secure hashing algorithms
+** Never stored in plaintext
+** Subject to complexity requirements
+* ''Role Assignments''
+** Multiple roles can be assigned
+** Inherited permissions from all assigned roles
+** Dynamic permission calculation based on role combination
+
+!!! Role & Permission Framework
+
+!!!! Role Management
+
+Roles serve as permission containers and provide organized access control. The system includes:
+
+Built-in Roles:
+
+* `ADMIN`
+** Highest privilege level
+** Full system access
+** Cannot be modified or deleted
+** Can create and manage other roles
+** Controls guest access policies
+
+* `USER`
+** Basic access rights
+** Typically limited to specific recipes
+  
+**Custom Roles (Examples):**
+
+* `MANAGER`
+** Intermediate access level
+** Can manage subset of resources
+** Custom roles as needed for specific use cases
+
+!!!! Permission Architecture
+
+Core Permissions:
+
+* `READ` Permission
+** View recipe contents
+** Access tiddler data
+** View metadata
+** Export capabilities
+
+* `WRITE` Permission
+** Create new tiddlers
+** Modify existing content
+** Delete resources
+** Manage recipe contents
+
+**Guest Access:**
+
+* No default permissions
+* Access limited to non-ACL recipes
+* Configurable by ADMIN users
+* Suitable for public wikis
+
+!!! Access Control List (ACL) Implementation
+
+The ACL system provides granular security control through:
+
+!!!! Entity-Level Control
+
+* Recipe-based access control
+* Individual resource protection
+* Hierarchical permission inheritance
+
+!!! Authentication Process Flow
+
+* Initial Authentication
+** User submits credentials
+** System validates username existence
+** Password hash comparison
+** Session token generation
+
+* Session Management
+** Secure session storage
+** Token-based authentication
+** Automatic session expiration
+** Re-authentication requirements
+
+!!! Authorization Workflow
+
+* Request Processing
+** Capture user action request
+** Identify target resource
+** Extract required permissions
+
+* Permission Validation
+** Check user roles
+** Aggregate permissions
+** Verify ACL entries
+** Apply guest policies if applicable
+
+* Access Decision
+** Compare required vs. available permissions
+** Apply most restrictive policy
+** Return access decision
+
+!!! System Extension Guidelines
+
+!!!! Adding New Roles
+
+# Access administrative interface
+# Define role identifier
+# Assign base permissions
+# Configure ACL mappings
+# Test role functionality
+
+!!!! Permission Expansion
+
+# Define new permission type
+# Update ACL structure
+# Implement permission checks
+# Update validation logic
+# Document new permission
+
+!!!! Security Considerations
+
+* Regular permission audits
+* Role assignment reviews
+* Guest access monitoring
+* Security log analysis
+* Access pattern monitoring
+
+This comprehensive security model provides flexible, maintainable, and secure access control while supporting both authenticated and guest users within the Multiwiki Server environment.
+
+! HTTP API
+
+The ~MultiWikiServer HTTP API provides access to resources hosted by the MWS store. It is based on [[the API of TiddlyWeb|https://tank.peermore.com/tanks/tiddlyweb/HTTP%20API]], first developed in 2008 by Chris Dent.
+
+The design goals of the API are:
+
+* To follow the principles of REST where practical
+* To present resources as nouns, not verbs
+
+General points about the design:
+
+* In MWS there are no resources that end with / (except for the root path which is /)
