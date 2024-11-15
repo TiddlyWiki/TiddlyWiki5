@@ -86,7 +86,6 @@ jobs:
   build-mws-tiddlywiki-com:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/multi-wiki-support'
-    needs: test
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
