@@ -47,85 +47,193 @@ Our application has transitioned from a conventional username/password authentic
 3. Granular Permissions
 4. Access Control List (ACL)
 
-## Running the App
-By default, the Multiwiki Server starts up without the need for authentication. An admin user is created by default with the username `user` and password `pass123`.
-This user has the `ADMIN` role which grants full access to all recipes. This user is automatically assigned the `READ` and `WRITE` permissions.
-You can create additional users and roles through the admin interface.
+## Application Access & Security
 
-Access control is enforced at the recipe level. A user can read or write to a recipe if they have the `READ` or `WRITE` permission for that recipe.
-Roles can be assigned to users and can have the `READ` and `WRITE` permissions assigned to them.
+### Initial Setup
+When you first launch the Multiwiki Server, it operates in an unauthenticated mode to facilitate initial configuration. During this initial state, the system creates a temporary anonymous administrator account. Upon accessing the landing page, you'll receive a prominent security warning with instructions to establish a permanent ADMIN account. It's crucial to create this account immediately to secure your installation.
 
-Guest users have no permissions and can only access recipes that do not have an ACL assigned to them.
+### User Types and Permissions
 
-To start the app, run the following command:
+#### Administrator (ADMIN)
+- Full system access and configuration rights
+- Can create, modify, and delete user accounts
+- Manages role assignments and permissions
+- Controls global system settings
+- Can configure guest access policies
+- Has complete control over all recipes and tiddlers
 
-```bash
-npm run start
-```
+#### Regular Users
+- Custom accounts created by administrators
+- Permissions determined by assigned roles
+- Access limited to specific recipes based on role permissions
+- Can have READ and/or WRITE permissions
+
+#### Guest Users
+- Default anonymous access level
+- No inherent permissions
+- Can only access recipes without Access Control Lists (ACLs)
+- Read/write capabilities configurable by ADMIN
+- Useful for public wikis or documentation sites
+
+### Access Control System
+
+#### Recipe-Level Security
+- Access control is implemented at the recipe level
+- Each recipe can have its own Access Control List (ACL)
+- Permissions are granular:
+  - READ: Allows viewing recipe contents
+  - WRITE: Allows modifications to recipe contents
+
+#### Role-Based Access Control (RBAC)
+- Administrators can create custom roles
+- Roles can be assigned specific READ/WRITE permissions
+- Users inherit permissions from their assigned roles
+- Multiple roles can be assigned to a single user
+- Provides flexible and scalable access management
+
+#### Permission Inheritance
+- Users receive combined permissions from all assigned roles
+- More permissive role takes precedence in conflicts
+- Guest access is overridden by recipe ACLs
+- System automatically enforces most restrictive access when conflicts occur
+
+This security model allows for fine-grained control over content access while maintaining flexibility for both private and public wiki deployments.
+
+## User Management & Security Architecture
+
+### User Account Management
+
+Users can be administered through two interfaces:
+1. Web-based Administrative Interface
+   - Accessible only to ADMIN users
+   - Provides graphical interface for user operations
+   - Real-time validation and feedback
+2. Command-line Interface (CLI) Tools
+   - Suitable for automation and scripting
+   - Enables batch operations
+   - Useful for system initialization
+
+Each user account contains the following essential components:
+- **Username**
+  - Must be unique across the system
+  - Case-sensitive
+  - Used for authentication and audit trails
+- **Password**
+  - Stored using secure hashing algorithms
+  - Never stored in plaintext
+  - Subject to complexity requirements
+- **Role Assignments**
+  - Multiple roles can be assigned
+  - Inherited permissions from all assigned roles
+  - Dynamic permission calculation based on role combination
+
+### Role & Permission Framework
+
+#### Role Management
+Roles serve as permission containers and provide organized access control. The system includes:
+
+**Built-in Roles:**
+- `ADMIN`
+  - Highest privilege level
+  - Full system access
+  - Cannot be modified or deleted
+  - Can create and manage other roles
+  - Controls guest access policies
+
+- `USER`
+  - Basic access rights
+  - Typically limited to specific recipes
+  
+**Custom Roles (Examples):**
+- `MANAGER`
+  - Intermediate access level
+  - Can manage subset of resources
+- Custom roles as needed for specific use cases
+
+#### Permission Architecture
+
+**Core Permissions:**
+1. `READ` Permission
+   - View recipe contents
+   - Access tiddler data
+   - View metadata
+   - Export capabilities
+
+2. `WRITE` Permission
+   - Create new tiddlers
+   - Modify existing content
+   - Delete resources
+   - Manage recipe contents
+
+**Guest Access:**
+- No default permissions
+- Access limited to non-ACL recipes
+- Configurable by ADMIN users
+- Suitable for public wikis
+
+### Access Control List (ACL) Implementation
+
+The ACL system provides granular security control through:
+
+#### Entity-Level Control
+- Recipe-based access control
+- Individual resource protection
+- Hierarchical permission inheritance
 
 
-## Setting Up the Admin User
+### Authentication Process Flow
 
-To initialize the system with an admin user, use the following command:
+1. Initial Authentication
+   - User submits credentials
+   - System validates username existence
+   - Password hash comparison
+   - Session token generation
 
-```bash
-npm run mws-add-user
-```
+2. Session Management
+   - Secure session storage
+   - Token-based authentication
+   - Automatic session expiration
+   - Re-authentication requirements
 
-This command performs the following actions:
-- Creates a default admin user with the credentials:
-  - Username: `user`
-  - Password: `pass123`
-- Establishes `READ` and `WRITE` permissions
-- Creates an `ADMIN` role
-- Assigns `READ` and `WRITE` permissions to the `ADMIN` role
-- Assigns the `ADMIN` role to the newly created user
+### Authorization Workflow
 
-## User Management
+1. Request Processing
+   - Capture user action request
+   - Identify target resource
+   - Extract required permissions
 
-Users can be managed through the application interface or via command-line tools. Each user account consists of:
-- Unique username
-- Securely hashed password
-- Assigned role(s)
+2. Permission Validation
+   - Check user roles
+   - Aggregate permissions
+   - Verify ACL entries
+   - Apply guest policies if applicable
 
-## Roles and Permissions
+3. Access Decision
+   - Compare required vs. available permissions
+   - Apply most restrictive policy
+   - Return access decision
 
-### Roles
+### System Extension Guidelines
 
-Roles are used to group sets of permissions. The default setup includes an `ADMIN` role, but additional roles can be created as needed (e.g., `USER`, `MANAGER`).
+#### Adding New Roles
+1. Access administrative interface
+2. Define role identifier
+3. Assign base permissions
+4. Configure ACL mappings
+5. Test role functionality
 
-### Permissions
+#### Permission Expansion
+1. Define new permission type
+2. Update ACL structure
+3. Implement permission checks
+4. Update validation logic
+5. Document new permission
 
-Permissions define specific actions that can be performed. The default permissions are:
-- `READ`: Allows viewing of resources
-- `WRITE`: Allows creation, modification, and deletion of resources
+#### Security Considerations
+- Regular permission audits
+- Role assignment reviews
+- Guest access monitoring
+- Security log analysis
+- Access pattern monitoring
 
-Additional permissions can be created to suit specific application needs.
-
-## Access Control List (ACL)
-
-The ACL maintains a mapping between roles, permissions, and entities (such as recipes or bags). This allows for fine-grained control over who can perform what actions on which resources.
-
-## Authentication Flow
-
-1. User provides credentials (username and password)
-2. System verifies credentials against stored user data
-3. If valid, a session is created for the user
-
-## Authorization Flow
-
-1. User attempts to perform an action on a resource
-2. System checks the user's role
-3. System verifies if the role has the required permission for the action
-4. System checks the ACL to ensure the role has permission for the specific entity
-5. If all checks pass, the action is allowed; otherwise, it's denied
-
-## Extending the System
-
-To add new roles, permissions, or modify the ACL:
-
-1. Use the provided administrative interface or CLI tools
-2. Update the ACL structure in the application's configuration
-3. Implement new permission checks in the relevant parts of the application
-
-By following this documentation, you can effectively manage and utilize the new Authentication and Authorization system in your application.
+This comprehensive security model provides flexible, maintainable, and secure access control while supporting both authenticated and guest users within the Multiwiki Server environment.
