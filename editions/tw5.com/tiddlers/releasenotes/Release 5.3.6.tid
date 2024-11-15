@@ -1,11 +1,11 @@
 caption: 5.3.6
 created: 20241115170824144
-modified: 20241115170824144
+description: Improved Geospatial Plugin, Markdown Plugin, TestCaseWidget, Usability and Bug fixes
+modified: 20241115194033978
 released: 20241115170824144
 tags: ReleaseNotes
 title: Release 5.3.6
 type: text/vnd.tiddlywiki
-description: Under development
 
 //[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.5...v5.3.6]]//
 
