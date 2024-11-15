@@ -167,7 +167,7 @@ GeomapWidget.prototype.refreshMap = function() {
 	});
 	this.map.addLayer(markers);
 	// Process embedded geolayer widgets
-	var defaultPopupTemplateTitle = self.getAttribute("popupTemplate","$:/plugins/tiddlywiki/geospatial/templates/default-popup-template");
+	var defaultPopupTemplateTitle = self.getAttribute("popupTemplate");
 	this.findChildrenDataWidgets(this.contentRoot.children,"geolayer",function(widget) {
 		var jsonText = widget.getAttribute("json"),
 			popupTemplateTitle = widget.getAttribute("popupTemplate",defaultPopupTemplateTitle),
@@ -220,23 +220,25 @@ GeomapWidget.prototype.refreshMap = function() {
 					return marker;
 				},
 				onEachFeature: function(feature,layer) {
-					layer.bindPopup(function() {
-						var widget = self.wiki.makeTranscludeWidget(popupTemplateTitle, {
-								document: self.document,
-								parentWidget: self,
-								parseAsInline: false,
-								importPageMacros: true,
-								variables: {
-									feature: JSON.stringify(feature)
-								}
+					if(popupTemplateTitle) {
+						layer.bindPopup(function() {
+							var widget = self.wiki.makeTranscludeWidget(popupTemplateTitle, {
+									document: self.document,
+									parentWidget: self,
+									parseAsInline: false,
+									importPageMacros: true,
+									variables: {
+										feature: JSON.stringify(feature)
+									}
+							});
+							var container = self.document.createElement("div");
+							widget.render(container,null);
+							self.wiki.addEventListener("change",function(changes) {
+								widget.refresh(changes,container,null);
+							});
+							return container;
 						});
-						var container = self.document.createElement("div");
-						widget.render(container,null);
-						self.wiki.addEventListener("change",function(changes) {
-							widget.refresh(changes,container,null);
-						});
-						return container;
-					});
+					}
 					// Add event handlers
 					if(widget.hasAttribute("clickActions")) {
 						layer.on("click",function(event) {
