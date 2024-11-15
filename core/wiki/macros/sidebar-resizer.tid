@@ -517,6 +517,7 @@ title: $:/core/procedures/sidebar-resizer
 				$pointerdown=<<sidebar-resizer-pointercancel-actions>>
 				$touchstart=<<sidebar-resizer-pointercancel-actions>>
 				$pointermove=<<sidebar-resizer-pointermove-actions>>
+				$touchmove=<<sidebar-resizer-pointermove-actions>>
 				$contextmenu=<<sidebar-resizer-pointercancel-actions>>>
 
 				<div class=<<get.active.class tc-slider-pointermove>>/>
