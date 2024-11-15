@@ -365,7 +365,7 @@ Slicer.prototype.onCloseTag = function(name) {
 	// Render the tag
 	if(actions.isAnchor) {
 		this.onCloseAnchor(e);
-	} else if (!actions.dontRenderTag && !selfClosing) {
+	} else if(!actions.dontRenderTag && !selfClosing) {
 		var markupInfo = actions.markup && actions.markup[this.outputMode];
 		if(markupInfo) {
 			this.addTextToCurrentChunk(markupInfo.suffix);

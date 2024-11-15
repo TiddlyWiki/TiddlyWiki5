@@ -40,6 +40,7 @@ external-link-background: inherit
 external-link-foreground-hover: inherit
 external-link-foreground-visited: #d3869b
 external-link-foreground: #8ec07c
+footnote-target-background: #665c54
 foreground: #fbf1c7
 highlight-background: #ffff79
 highlight-foreground: #000000

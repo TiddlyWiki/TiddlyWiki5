@@ -1,0 +1,34 @@
+created: 20140214215718317
+modified: 20241016112045089
+original-modified: 20211127032217828
+tags: Learning
+title: Creating SubStories
+ja-title: サブストーリーを作成する
+type: text/vnd.tiddlywiki
+
+この例では、メイン[[ストーリー|Story River]]から独立したTiddler内にサブストーリーを作成する方法を示します。NavigatorWidgetとListWidgetを連携します:
+
+# リンクをクリックすると、[[ストーリー|Story River]]にTiddlerを追加します。リンクのクリックに対応するTiddlerに移動します(NavigatorWidgetの''story''属性)
+# Tiddlerの閉じるボタンがクリックされたときに、[[ストーリー|Story River]]からTiddlerを削除します(NavigatorWidgetの''story''属性)
+# Tiddlerの開閉をアニメーションします(ListWidgetの''storyview''属性)
+# 開いているTiddlerのリストを表示します(ListWidgetの''filter''属性と''template''属性)
+# Tiddlerを[[ドラフトモード|DraftMechanism]]で表示します(ListWidgetの''editTemplate''属性)
+# [[ナビゲーション履歴|HistoryMechanism]]を追跡します(NavigatorWidgetとListWidgetの両方の''history''属性)
+# そのほかいろいろ!
+
+コード例は次のとおりです(関連する議論については、StateMechanismも参照してください):
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$navigator story="$:/temp/DemoStoryList" history="$:/temp/DemoHistoryList">
+
+{{$:/core/ui/SideBarSegments/search}}
+
+<$list
+  filter="[list[$:/temp/DemoStoryList]]"
+  history="$:/temp/DemoHistoryList"
+  template={{$:/config/ui/ViewTemplate}}
+  editTemplate={{$:/config/ui/EditTemplate}}
+  storyview="classic"
+  emptyMessage="上の検索ボックスを使用してください。クリックした検索リンクは、メインストーリーではなくここで開きます<p>何を検索すればよいか浮かびませんか?では、このリンクをクリックしてください:[[こんにちは|HelloThere]]</p>"/>
+
+</$navigator>'>

@@ -1,4 +1,6 @@
 title: $:/plugins/tiddlywiki/comments/config
+caption: Comments
+tags: $:/tags/ControlPanel/SettingsTab
 
 \define select(description,filter)
 <$button>

@@ -1,5 +1,6 @@
 title: $:/geospatialdemo/features/harvard-volcanoes-of-the-world
 caption: Harvard Volcanoes of the World
 type: application/json
-tags: $:/tags/GeoFeature/Hidden
+tags: $:/tags/GeoFeature
 color: #f88
+popup-template: $:/geospatialdemo/features/harvard-volcanoes-of-the-world/popupTemplate

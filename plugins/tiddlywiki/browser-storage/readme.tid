@@ -6,7 +6,7 @@ At startup, the plugin reads tiddlers from local storage. Any tiddlers that are 
 
 !! Optional use with ~TiddlyWeb plugin
 
-For wikis served from a ~TiddlyWeb compatible server, including the ~TiddlyWiki Node JS server, this plugin may be added to provide temporary local storage of tiddler changes when the [[tiddlyweb sync adapter|https://github.com/Jermolene/TiddlyWiki5/tree/master/plugins/tiddlywiki/tiddlyweb]] is unable to successfully synchronise with the server, and to automatically synchronise tiddlers saved offline in browser storage once connection is re-established. The use of browser storage allows for tiddlers saved offline to be synchronised with the server even in the case where the browser is closed or the user (purposely, accidentally, or automatically in the case of a mobile browser periodically refreshing) navigates away from the wiki.
+For wikis served from a ~TiddlyWeb compatible server, including the ~TiddlyWiki Node JS server, this plugin may be added to provide temporary local storage of tiddler changes when the [[tiddlyweb sync adapter|https://github.com/TiddlyWiki/TiddlyWiki5/tree/master/plugins/tiddlywiki/tiddlyweb]] is unable to successfully synchronise with the server, and to automatically synchronise tiddlers saved offline in browser storage once connection is re-established. The use of browser storage allows for tiddlers saved offline to be synchronised with the server even in the case where the browser is closed or the user (purposely, accidentally, or automatically in the case of a mobile browser periodically refreshing) navigates away from the wiki.
 
 Changes will be synchronised with the server the next time the wiki is loaded in the browser. Tiddlers are removed from browser-storage once synchronised to the server.
 

@@ -27,11 +27,12 @@ This demo requires that the API keys needed to access external services be obtai
 		<$geobaselayer title=<<currentTiddler>>/>
 	</$list>
 	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]">
-		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}} name={{!!caption}}/>
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}} name={{!!caption}} properties={{{ [[{}]jsonset[title],<currentTiddler>] }}} 
+	popupTemplate="ui/PopupTemplate"/>
 	</$list>
-	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoFeature]]">
-		<$geolayer json={{!!text}} color={{!!color}} name={{!!caption}}/>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoFeature]] :filter[[$:/config/GeospatialDemo/FeatureVisibility/]addsuffix<currentTiddler>get[text]else[show]match[show]]">
+		<$geolayer json={{!!text}} color={{!!color}} name={{!!caption}} popupTemplate={{!!popup-template}}/>
 	</$list>
 </$geomap>
 
-<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"GeoMarkers">>
+<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"GeoFeatures">>

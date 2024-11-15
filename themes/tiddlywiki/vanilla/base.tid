@@ -71,10 +71,20 @@ $else$
 
 {{$:/themes/tiddlywiki/vanilla/reset}}
 
-*, input[type="search"] {
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
+input[type="search"] {
+	outline-offset: initial;
+}
+
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;
+	border-radius: 0.25em;
+}
+
+button:-moz-focusring, input:-moz-focusring, textarea:-moz-focusring, select:-moz-focusring {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;
+	border-radius: 0.25em;
 }
 
 /*
@@ -157,7 +167,7 @@ code {
 	color: <<colour code-foreground>>;
 	background-color: <<colour code-background>>;
 	border: 1px solid <<colour code-border>>;
-	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
+	white-space: pre-wrap;
 	padding: 0 3px 2px;
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
@@ -224,6 +234,11 @@ dl dt {
 textarea,
 input[type=text],
 input[type=search],
+input[type=number],
+input[type=password],
+input[type=email],
+input[type=tel],
+input[type=url],
 input[type=""],
 input:not([type]) {
 	color: <<colour foreground>>;
@@ -280,6 +295,13 @@ kbd {
 	color: <<colour highlight-foreground>>;
 }
 
+/* Markdown uses mark element to highlight */
+
+mark {
+	background: <<colour highlight-background>>;
+	color: <<colour highlight-foreground>>;
+}
+
 form.tc-form-inline {
 	display: inline;
 }
@@ -288,10 +310,13 @@ form.tc-form-inline {
 Markdown likes putting code elements inside pre elements
 */
 pre > code {
-	padding: 0;
+	display: block;
+	padding: 0.5em;
 	border: none;
+	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
 	background-color: inherit;
 	color: inherit;
+	overflow-x: auto;
 }
 
 /*
@@ -1183,6 +1208,20 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	color: <<colour muted-foreground>>;
 }
 
+.tc-tiddler-lazy-loading {
+	height: 4px;
+	width: 100%;
+	background: no-repeat linear-gradient(<<colour background>> 0 0),no-repeat linear-gradient(<<colour background>> 0 0),<<colour primary>>;
+	background-size: 60% 100%;
+	animation: animation-loading-progress 3s infinite;
+}
+
+@keyframes animation-loading-progress {
+	0%   {background-position:-150% 0,-150% 0}
+	66%  {background-position: 250% 0,-150% 0}
+	100% {background-position: 250% 0, 250% 0}
+}
+
 .tc-titlebar h2 {
 	font-size: 1em;
 	display: inline;
@@ -1332,10 +1371,6 @@ canvas.tc-edit-bitmapeditor  {
 	display: block;
 }
 
-.tc-tiddler-body {
-	clear: both;
-}
-
 .tc-single-tiddler-window .tc-tiddler-body,
 .tc-tiddler-frame .tc-tiddler-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
@@ -1343,7 +1378,7 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-titlebar, .tc-tiddler-edit-title {
-	overflow: hidden; /* https://github.com/Jermolene/TiddlyWiki5/issues/282 */
+	overflow: hidden; /* https://github.com/TiddlyWiki/TiddlyWiki5/issues/282 */
 }
 
 /*
@@ -2576,6 +2611,11 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 	fill: <<colour background>>;
 }
 
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	border: 1px solid <<colour background>>;
+	color: <<colour background>>;
+}
+
 .tc-plugin-info-chunk {
 	margin: 2px;
 }
@@ -2590,6 +2630,9 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 	flex-grow: 0;
 	flex-shrink: 0;
 	line-height: 1;
+	height: 2em;
+	width: 2em;
+	display: grid;
 }
 
 .tc-plugin-info-chunk.tc-plugin-info-description {
@@ -2656,8 +2699,9 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 }
 
 .tc-plugin-info-chunk.tc-plugin-info-icon img, .tc-plugin-info-chunk.tc-plugin-info-icon svg {
-	width: 2em;
-	height: 2em;
+	max-width: 2em;
+	max-height: 2em;
+	margin: auto;
 }
 
 .tc-plugin-info-dropdown {
@@ -2750,6 +2794,27 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 	float: right;
 }
 
+/* Float tc-clearfix. Needs to be used by elements that allow float:right in their content.
+** So the floating element does not overflow
+*/
+
+.tc-clearfix:after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+/* Fix overflow toc, manager and testcase output */
+.tc-tiddler-body .tc-tabbed-table-of-contents, .tc-manager-list-item-content, .tc-test-case-output {
+	overflow-x: auto;
+}
+
+/* A wrapper to fix table overflow */
+
+.tc-table-wrapper {
+	overflow-x: auto;
+}
+
 /*
 ** Chooser
 */
@@ -2803,13 +2868,16 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 
 .tc-chooser-item svg,
 .tc-chooser-item img{
-	width: 1em;
-	height: 1em;
+	max-width: 1em;
+	max-height: 1em;
 	vertical-align: middle;
 }
 
 .tc-language-chooser .tc-image-button img {
-	width: 2em;
+	max-width: 2em;
+	max-height: 1em;
+	width: auto;
+	height: auto;
 	vertical-align: -0.15em;
 }
 
@@ -3501,3 +3569,4 @@ span.tc-translink > a:first-child {
 .tc-tiny-v-gap-bottom {
 	margin-bottom: 3px;
 }
+

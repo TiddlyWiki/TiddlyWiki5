@@ -1,4 +1,6 @@
 title: $:/plugins/tiddlywiki/browser-storage/settings
+caption: Browser Storage
+tags: $:/tags/ControlPanel/SettingsTab
 
 ! Disable
 

@@ -6,4 +6,4 @@ It allows you to create content that is presented in a way that is responsive to
 
 For example, https://tiddlywiki.com uses this plugin to present the user with the best options for getting started depending on their browser.
 
-[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/browser-sniff]]
+[[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/browser-sniff]]

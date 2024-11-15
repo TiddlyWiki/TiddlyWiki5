@@ -15,6 +15,6 @@ title: Output
 +
 title: ExpectedResult
 
-<p>({"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[51.751875,-1.257875],[51.752,-1.257875],[51.752,-1.25775],[51.751875,-1.25775],[51.751875,-1.257875]]]}})
-({"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[51.7519375,-1.257765625]}})
+<p>({"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[-1.257875,51.751875],[-1.257875,51.752],[-1.25775,51.752],[-1.25775,51.751875],[-1.257875,51.751875]]]}})
+({"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[-1.257765625,51.7519375]}})
 </p>
