@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/menubar/items/search
 custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/search}}
-description: <<lingo Items/Search/Name $:/plugins/tiddlywiki/menubar/language/>>
-caption: <<lingo Items/Search/Name $:/plugins/tiddlywiki/menubar/language/>>
+description: Search
+caption: Search
 tags: $:/tags/MenuBar
 
 \define cancel-search-actions()

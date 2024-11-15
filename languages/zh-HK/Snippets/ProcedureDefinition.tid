@@ -1,0 +1,7 @@
+title: $:/language/Snippets/ProcedureDefinition
+tags: $:/tags/TextEditor/Snippet
+caption: 程序定義
+
+\procedure procName(param1:"預設值",param2)
+這裏就是您的文字了。
+\end

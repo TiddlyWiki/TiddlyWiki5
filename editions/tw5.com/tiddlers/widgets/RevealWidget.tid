@@ -1,7 +1,7 @@
 caption: reveal
 created: 20131024141900000
 jeremy: tiddlywiki
-modified: 20230803052644851
+modified: 20240721175716320
 tags: Widgets
 title: RevealWidget
 type: text/vnd.tiddlywiki
@@ -47,57 +47,10 @@ This is useful for edge-cases where titles may contain characters that are used 
 
 ! Examples
 
-!! Simple content reveal
+<<testcase TestCases/RevealWidget/SimpleReveal>>
 
-Here's a simple example of showing and hiding content with buttons:
+<<testcase TestCases/RevealWidget/AccordionSlider>>
 
-<<wikitext-example-without-html '<$button set="$:/state/SampleReveal1" setTo="show">Show me</$button>
-<$button set="$:/state/SampleReveal1" setTo="hide">Hide me</$button>
+<<testcase TestCases/RevealWidget/Popup>>
 
-<$reveal type="match" state="$:/state/SampleReveal1" text="show">
-
-! This is the revealed content
-And this is some text
-
-</$reveal>'>>
-
-!! Accordion or Slider
-
-An "accordion" or "slider" is a button that can be used to toggle the display of associated content.
-
-<<wikitext-example-without-html '<$reveal type="nomatch" state="$:/state/SampleReveal2" text="show">
-
-<$button set="$:/state/SampleReveal2" setTo="show">Show me</$button>
-
-</$reveal>
-<$reveal type="match" state="$:/state/SampleReveal2" text="show">
-
-<$button set="$:/state/SampleReveal2" setTo="hide">Hide me</$button>
-
-! This is the revealed content
-And this is some text
-
-</$reveal>'>>
-
-!! Popup
-
-Here is a simple example of a popup built with the RevealWidget:
-
-<<wikitext-example-without-html '<$button popup="$:/SamplePopupState">Pop me up!</$button>
-
-<$reveal type="popup" state="$:/SamplePopupState">
-<div class="tc-drop-down">
-
-! This is the popup
-And this is some text
-
-</div>
-</$reveal>'>>
-
-!! How to use text references with field content
-
-Here is a simple example how to use text references with field content to control the  RevealWidget. If the field ``jeremy`` is populated with text ``tiddlywiki``, a message will be displayed.
-
-<<wikitext-example-without-html '<$reveal type="match" state="!!jeremy" text="tiddlywiki">
-~TiddlyWiki!
-</$reveal>'>>
+<<testcase TestCases/RevealWidget/TextReference>>

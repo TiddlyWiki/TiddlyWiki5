@@ -1,105 +1,137 @@
 title: $:/core/macros/keyboard-driven-input
 tags: $:/tags/Macro
 
-\define change-input-tab(stateTitle,tag,beforeafter,defaultState,actions)
+\procedure prefix.bracket() [
+\procedure suffix.bracket() ]
+
+\function tf.change-input-tab.next-tab() [[all]addprefix<prefix.bracket>addsuffix<prefix.bracket>addsuffix[shadows+tiddlers]addsuffix<suffix.bracket>addsuffix[tag<tag>!has]addsuffix<prefix.bracket>addsuffix[draft.of]addsuffix<suffix.bracket>addsuffix<beforeafter>addsuffix[<currentState>]addsuffix<suffix.bracket>addsuffix[ :else]addsuffix<prefix.bracket>addsuffix<prefix.bracket>addsuffix<beforeafter>addsuffix<suffix.bracket>addsuffix[match]addsuffix<prefix.bracket>addsuffix[after]addsuffix<suffix.bracket>addsuffix[then<firstTab>]addsuffix<suffix.bracket>addsuffix[ :else]addsuffix<prefix.bracket>addsuffix<prefix.bracket>addsuffix<beforeafter>addsuffix<suffix.bracket>addsuffix[match]addsuffix<prefix.bracket>addsuffix[before]addsuffix<suffix.bracket>addsuffix[then<lastTab>]addsuffix<suffix.bracket>]
+
+\procedure change-input-tab(stateTitle,tag,beforeafter,defaultState,actions)
 \whitespace trim
-<$set name="tabsList" filter="[all[shadows+tiddlers]tag<__tag__>!has[draft.of]]">
+<$set name="tabsList" filter="[<explicitTabList>!is[blank]enlist-input[]] :else[all[shadows+tiddlers]tag<tag>!has[draft.of]]">
 	<$let
-		currentState={{{ [<__stateTitle__>!is[missing]get[text]] ~[<__defaultState__>] }}}
+		currentState={{{ [<stateTitle>!is[missing]get[text]] :else[<defaultState>] }}}
 		firstTab={{{ [enlist<tabsList>nth[1]] }}}
 		lastTab={{{ [enlist<tabsList>last[]] }}}
-		nextTab={{{ [all[shadows+tiddlers]tag<__tag__>!has[draft.of]$beforeafter$<currentState>] ~[[$beforeafter$]removeprefix[after]suffix[]addprefix<firstTab>] ~[[$beforeafter$]removeprefix[before]suffix[]addprefix<lastTab>] }}}
+		nextTabSubFilter=<<tf.change-input-tab.next-tab>>
+		nextTab={{{ [subfilter<nextTabSubFilter>] }}}
 	>
-		<$action-setfield $tiddler=<<__stateTitle__>> text=<<nextTab>>/>
-		$actions$
+		<$action-setfield $tiddler=<<stateTitle>> text=<<nextTab>>/>
+		<<actions>>
 	</$let>
 </$set>
 \end
 
-\define keyboard-input-actions()
+\procedure keyboard-input-actions()
 \whitespace trim
-<$list filter="[<__index__>match[]]">
-	<$action-setfield $tiddler=<<__storeTitle__>> text={{{ [<__tiddler__>get<__field__>] }}}/>
-</$list>
-<$list filter="[<__index__>!match[]]">
-	<$action-setfield $tiddler=<<__storeTitle__>> text={{{ [<__tiddler__>getindex<__index__>] }}}/>
-</$list>
+<%if [<index>match[]] %>
+	<$action-setfield $tiddler=<<storeTitle>> text={{{ [<tiddler>get<field>] }}}/>
+<% endif %>
+<%if [<index>!match[]] %>
+	<$action-setfield $tiddler=<<storeTitle>> text={{{ [<tiddler>getindex<index>] }}}/>
+<% endif %>
 \end
 
-\define input-next-actions-inner()
+\procedure input-next-actions-inner()
 \whitespace trim
-<$list filter="[<nextItem>minlength[1]]" variable="ignore">
-	<$action-setfield $tiddler=<<__selectionStateTitle__>> text=<<nextItem>>/>
-	<$list filter="[<__index__>match[]]">
-		<$action-setfield $tiddler=<<__tiddler__>> $field=<<__field__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
-	</$list>
-	<$list filter="[<__index__>!match[]]">
-		<$action-setfield $tiddler=<<__tiddler__>> $index=<<__index__>> $value={{{ [<nextItem>] +[splitregexp[(?:.(?!-))+$]] }}}/>
-	</$list>
-	<$action-setfield $tiddler=<<__refreshTitle__>> text="yes"/>
-</$list>
+<%if [<nextItem>minlength[1]] %>
+	<$action-setfield $tiddler=<<selectionStateTitle>> text=<<nextItem>>/>
+	<%if [<index>match[]] %>
+		<$action-setfield $tiddler=<<tiddler>> $field=<<field>> $value={{{ [<nextItem>] :and[splitregexp[(?:.(?!-))+$]] }}}/>
+	<% endif %>
+	<%if [<index>!match[]] %>
+		<$action-setfield $tiddler=<<tiddler>> $index=<<index>> $value={{{ [<nextItem>] :and[splitregexp[(?:.(?!-))+$]] }}}/>
+	<% endif %>
+	<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
+<% endif %>
 \end
 
-\define input-next-actions(afterOrBefore:"after",reverse:"")
+\procedure input-next-actions-after()
 \whitespace trim
-<$list
-	filter="[<__storeTitle__>get[text]minlength<__filterMinLength__>] [<__filterMinLength__>match[0]] +[limit[1]]"
-	variable="ignore"
->
+<%if [<storeTitle>get[text]minlength<filterMinLength>] [<filterMinLength>match[0]] %>
 	<$let
-		userInput={{{ [<__storeTitle__>get[text]] }}}
-		selectedItem={{{ [<__selectionStateTitle__>get[text]] }}}
-		configTiddler={{{ [subfilter<__configTiddlerFilter__>] }}}
-		primaryListFilter={{{ [<configTiddler>get<__firstSearchFilterField__>] }}}
-		secondaryListFilter={{{ [<configTiddler>get<__secondSearchFilterField__>] }}}
+		userInput={{{ [<storeTitle>get[text]] }}}
+		selectedItem={{{ [<selectionStateTitle>get[text]] }}}
+		configTiddler={{{ [subfilter<configTiddlerFilter>] }}}
+		primaryListFilter={{{ [<configTiddler>get<firstSearchFilterField>] }}}
+		secondaryListFilter={{{ [<configTiddler>get<secondSearchFilterField>] }}}
 	>
 		<$set
 			name="filteredList"
-			filter="[subfilter<primaryListFilter>addsuffix[-primaryList]] =[subfilter<secondaryListFilter>addsuffix[-secondaryList]]"
+			filter="[subfilter<primaryListFilter>addsuffix[-primaryList]] :all[subfilter<secondaryListFilter>addsuffix[-secondaryList]]"
 		>
 			<$let
-				nextItem={{{ [enlist<filteredList>$afterOrBefore$<selectedItem>] ~[enlist<filteredList>$reverse$nth[1]] }}}
+				nextItem={{{ [enlist<filteredList>after<selectedItem>] :else[enlist<filteredList>nth[1]] }}}
 				firstItem={{{ [enlist<filteredList>nth[1]] }}}
 				lastItem={{{ [enlist<filteredList>last[]] }}}
 			>
-				<$list filter="[<selectedItem>match<firstItem>!match<lastItem>]" variable="ignore">
-					<$set name="nextItem" value={{{ [[$afterOrBefore$]match[before]then<userInput>addsuffix[-userInput]] ~[<nextItem>] }}}>
-						<<input-next-actions-inner>>
-					</$set>
-				</$list>
-				<$list filter="[<selectedItem>match<lastItem>!match<firstItem>]" variable="ignore">
-					<$set name="nextItem" value={{{ [[$afterOrBefore$]match[after]then<userInput>addsuffix[-userInput]] ~[<nextItem>] }}}>
-						<<input-next-actions-inner>>
-					</$set>
-				</$list>
-				<$list filter="[<selectedItem>match<firstItem>match<lastItem>]" variable="ignore">
+				<%if [<selectedItem>match<firstItem>!match<lastItem>] [<selectedItem>!match<firstItem>!match<lastItem>] %>
+					<<input-next-actions-inner>>
+				<%elseif [<selectedItem>match<lastItem>!match<firstItem>] %>
 					<$set name="nextItem" value={{{ [<userInput>addsuffix[-userInput]] }}}>
 						<<input-next-actions-inner>>
 					</$set>
-				</$list>
-				<$list filter="[<selectedItem>!match<firstItem>!match<lastItem>]" variable="ignore">
-					<<input-next-actions-inner>>
-				</$list>
+				<%elseif [<selectedItem>match<firstItem>match<lastItem>] %>
+					<$set name="nextItem" value={{{ [<userInput>addsuffix[-userInput]] }}}>
+						<<input-next-actions-inner>>
+					</$set>
+				<% endif %>
 			</$let>
 		</$set>
 	</$let>
-</$list>
+<% endif %>
 \end
 
-\define keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle,cancelPopups:"",configTiddlerFilter,firstSearchFilterField:"first-search-filter",secondSearchFilterField:"second-search-filter")
+\procedure input-next-actions-before()
 \whitespace trim
-<$keyboard key="((input-accept))" actions=<<__inputAcceptActions__>>>
-<$keyboard key="((input-accept-variant))" actions=<<__inputAcceptVariantActions__>>>
-<$keyboard key="((input-up))" actions=<<input-next-actions "before" "reverse[]">>>
-<$keyboard key="((input-down))" actions=<<input-next-actions>>>
-<$keyboard key="((input-cancel))" actions=<<__inputCancelActions__>>>
+<%if [<storeTitle>get[text]minlength<filterMinLength>] [<filterMinLength>match[0]] %>
+	<$let
+		userInput={{{ [<storeTitle>get[text]] }}}
+		selectedItem={{{ [<selectionStateTitle>get[text]] }}}
+		configTiddler={{{ [subfilter<configTiddlerFilter>] }}}
+		primaryListFilter={{{ [<configTiddler>get<firstSearchFilterField>] }}}
+		secondaryListFilter={{{ [<configTiddler>get<secondSearchFilterField>] }}}
+	>
+		<$set
+			name="filteredList"
+			filter="[subfilter<primaryListFilter>addsuffix[-primaryList]] :all[subfilter<secondaryListFilter>addsuffix[-secondaryList]]"
+		>
+			<$let
+				nextItem={{{ [enlist<filteredList>before<selectedItem>] :else[enlist<filteredList>reverse[]nth[1]] }}}
+				firstItem={{{ [enlist<filteredList>nth[1]] }}}
+				lastItem={{{ [enlist<filteredList>last[]] }}}
+			>
+				<%if [<selectedItem>match<firstItem>!match<lastItem>] %>
+					<$set name="nextItem" value={{{ [<userInput>addsuffix[-userInput]] }}}>
+						<<input-next-actions-inner>>
+					</$set>
+				<%elseif [<selectedItem>match<lastItem>!match<firstItem>] [<selectedItem>!match<firstItem>!match<lastItem>] %>
+					<<input-next-actions-inner>>
+				<%elseif [<selectedItem>match<firstItem>match<lastItem>] %>
+					<$set name="nextItem" value={{{ [<userInput>addsuffix[-userInput]] }}}>
+						<<input-next-actions-inner>>
+					</$set>
+				<% endif %>
+			</$let>
+		</$set>
+	</$let>
+<% endif %>
+\end
+
+\procedure keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle,cancelPopups:"",configTiddlerFilter,firstSearchFilterField:"first-search-filter",secondSearchFilterField:"second-search-filter")
+\whitespace trim
+<$keyboard key="((input-accept))" actions=<<inputAcceptActions>>>
+<$keyboard key="((input-accept-variant))" actions=<<inputAcceptVariantActions>>>
+<$keyboard key="((input-up))" actions=<<input-next-actions-before>>>
+<$keyboard key="((input-down))" actions=<<input-next-actions-after>>>
+<$keyboard key="((input-cancel))" actions=<<inputCancelActions>>>
 	<$edit-text
-		tiddler=<<__tiddler__>> field=<<__field__>> index=<<__index__>>
-		inputActions=<<keyboard-input-actions>> tag=<<__tag__>> class=<<__class__>>
-		placeholder=<<__placeholder__>> default=<<__default__>> focusPopup=<<__focusPopup__>>
-		focus=<<__focus__>> type=<<__type__>> rows=<<__rows__>> minHeight=<<__minHeight__>>
-		tabindex=<<__tabindex__>> size=<<__size__>> autoHeight=<<__autoHeight__>>
-		refreshTitle=<<__refreshTitle__>> cancelPopups=<<__cancelPopups__>>
+		tiddler=<<tiddler>> field=<<field>> index=<<index>>
+		inputActions=<<keyboard-input-actions>> tag=<<tag>> class=<<class>>
+		placeholder=<<placeholder>> default=<<default>> focusPopup=<<focusPopup>>
+		focus=<<focus>> type=<<type>> rows=<<rows>> minHeight=<<minHeight>>
+		tabindex=<<tabindex>> size=<<size>> autoHeight=<<autoHeight>>
+		refreshTitle=<<refreshTitle>> cancelPopups=<<cancelPopups>>
 	/>
 </$keyboard>
 </$keyboard>

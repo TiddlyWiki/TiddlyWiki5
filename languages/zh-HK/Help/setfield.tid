@@ -1,0 +1,17 @@
+title: $:/language/Help/setfield
+description: 準備用於外部條目
+
+//請注意此命令是試驗性的，且可能會更改或在最終定稿前被替換//
+
+設定一羣條目的指定欄位到 wikifying 範本條目的結果，其中的 `currentTiddler` 變數設定為各該條目。
+
+```
+--setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+參數説明：
+
+* ''filter'' - 受影響的辨識條目的篩選條件
+* ''fieldname'' - 要修改的欄位（預設為 "text"）
+* ''templatetitle'' - 該條目 wikify 到指定欄位。若為空白或丟失，則刪除指定的欄位
+* ''rendertype'' - 要呈現的文本類型（預設為 "text/plain"; "text/html" 可以用於包含 HTML 標記)）

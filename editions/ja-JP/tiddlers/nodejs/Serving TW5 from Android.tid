@@ -1,0 +1,48 @@
+caption: Node.js on Termux
+color: #F06292
+created: 20200501120322327
+delivery: App with DIY steps
+description: Node.jsを使用してフラットファイルWikiを提供/作成する
+method: sync
+modified: 20241014103927503
+original-modified: 20200507112915801
+tags: Saving [[TiddlyWiki on Node.js]] Android
+title: Serving TW5 from Android
+ja-title: AndroidからTW5を提供する
+type: text/vnd.tiddlywiki
+
+[[Termux|https://termux.com/]]は、ユーザーがAndroidに[[Node.js]]とnpmモジュールをインストールできるようにする、限定されたUnix環境を提供するオープンソースのAndroidアプリケーションです。ユーザーは、[[Termux|https://termux.com/]]を使用して[[Node.js上のTiddlyWiki|TiddlyWiki on Node.js]]をインストールして実行できます。
+
+!! 説明書
+
+* [[Google Playストア|https://play.google.com/store/apps/details?id=com.termux]]や[[Fdroid|https://f-droid.org/en/packages/com.termux/]]からTermuxをダウンロードしてインストールします
+* termuxを開き、次のコマンドを1行ずつ実行します。
+
+  ```bash
+apt update
+apt upgrade
+apt install nodejs
+npm install -g tiddlywiki
+```
+
+* 内蔵ストレージから''Node.js上の~TiddlyWiki''を作成/提供する必要がある場合は、termuxで次のコマンドを実行してtermuxストレージ権限を与える必要があります
+
+```
+termux-setup-storage
+```
+
+* これで、内蔵ストレージから''Node.js上の~TiddlyWiki''を作成し、提供できるようになりました。以下の例では、ユーザーは内蔵フォルダーに"mynewwiki"という新しいWikiを作成します。
+
+```
+cd storage/shared
+tiddlywiki mynewwiki --init server
+tiddlywiki mynewwiki --listen
+```
+* ブラウザで http://127.0.0.1:8080/ にアクセスしてください
+* 以降、//Termux//が閉じられない限り、期待されるアドレスとポートを指定して、お気に入りのWebブラウザーからいつでもWikiにアクセスできます。
+---
+
+* Node.js上の~TiddlyWikiに関する詳細については、[[Node.jsにTiddlyWikiをインストールする|Installing TiddlyWiki on Node.js]]を参照してください
+* termuxに関する詳細情報とヒントについては、[[Termux wiki|https://wiki.termux.com/wiki/Main_Page]]を参照してください。
+
+<<.tip "//Termux//では、個々のTiddlerファイルを編集および管理するために、//git//、//emacs//または//vi//をインストールすることもできます。この場合、[[Hacker's Keyboard|https://github.com/klausw/hackerskeyboard/]]アプリケーションやBluetooth外部デバイスなど、より強力なキーボードをAndroidに接続する必要があるでしょう。">>

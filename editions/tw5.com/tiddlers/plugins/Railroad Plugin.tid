@@ -5,6 +5,12 @@ tags: OfficialPlugins [[Plugin Editions]]
 title: Railroad Plugin
 type: text/vnd.tiddlywiki
 
+!! Railroad Diagrams
+
+{{Railroad Diagrams}}
+
+!! Plugin
+
 {{$:/plugins/tiddlywiki/railroad/readme}}
 
-{{$:/plugins/tiddlywiki/railroad/syntax}}
+Learn more about the [[Railroad Plguin Syntax Description|$:/plugins/tiddlywiki/railroad/syntax]]

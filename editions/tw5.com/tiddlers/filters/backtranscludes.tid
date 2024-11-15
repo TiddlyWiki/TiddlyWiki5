@@ -1,13 +1,14 @@
+caption: backtranscludes
 created: 20211002204500000
+modified: 20240610085949413
+op-input: a [[selection of titles|Title Selection]]
+op-output: any non-[[system|SystemTiddlers]] titles that [[hard-transclude|Hard and Soft Transclusions]] the input titles
+op-parameter: none
+op-purpose: find the titles that transclude each input title
 tags: [[Filter Operators]]
 title: backtranscludes Operator
 type: text/vnd.tiddlywiki
-caption: backtranscludes
-op-purpose: find the titles that transcludes to each input title
-op-input: a [[selection of titles|Title Selection]]
-op-parameter: none
-op-output: any non-[[system|SystemTiddlers]] titles that contain [[transclusion|Transclusion]] to the input titles
 
-<<.from-version 5.3.4>> Similar to [[backlinks|backlinks Operator]]. Each input title is processed in turn. The corresponding tiddler's list of backtranscludes is generated, sorted alphabetically by title, and then [[dominantly appended|Dominant Append]] to the operator's overall output.
+<<.from-version 5.3.4>> Each input title is processed in turn. The corresponding tiddler's list of backtransclusions is generated, sorted alphabetically by title, and then [[dominantly appended|Dominant Append]] to the operator's overall output. Analogous to [[backlinks|backlinks Operator]].
 
 <<.operator-examples "backtranscludes">>

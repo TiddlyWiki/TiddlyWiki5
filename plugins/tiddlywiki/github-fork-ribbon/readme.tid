@@ -6,4 +6,4 @@ The ribbon can be positioned over any corner, and can incorporate user defined t
 
 The CSS stylesheet is adapted from work by [[Simon Whitaker|https://github.com/simonwhitaker/github-fork-ribbon-css/]]
 
-[[Plugin source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/github-fork-ribbon]]
+[[Plugin source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/github-fork-ribbon]]

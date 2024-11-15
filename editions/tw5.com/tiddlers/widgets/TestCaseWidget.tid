@@ -23,6 +23,11 @@ Notice also that clicking on links within the output pane will switch to the tab
 
 The text of the payload tiddlers listed on the left are editable, with the results being immediately reflected in the preview pane on the right. However, if the <<.wid testcase>> widget is refreshed then the modifications are lost.
 
+There is a dropdown menu at the top right of the menu that has two options:
+
+* Export the payload tiddlers to a file in the usual export formats
+* Import the payload tiddlers into the host wiki. This option loads the payload tiddlers into the $:/Import tiddler so that they can be renamed and/or individually selected
+
 The green tick at the top left of a test case indicates that a test has been set up and that it passes.
 
 If the test fails, a red cross is shown, and there is a display of the differences between the actual results and the expected results:
@@ -72,6 +77,7 @@ The test case wiki will inherit variables that are visible to the <<.wid testcas
 |!Variable |!Description |
 |<<.var linkTarget>> |Causes the test case description to be rendered as a link to the current tiddler |
 |<<.var displayFormat>> |Defaults to "wikitext", can also be "plaintext" to force plain text display |
+|<<.var testcaseTiddler>> |Title of the tiddler to be used as a link target for the testcase description |
 
 A custom template can be specified for special purposes. For example, the provided template $:/core/ui/testcases/RawJSONTemplate just displays the payload tiddlers in JSON, which can be used for debugging purposes.
 

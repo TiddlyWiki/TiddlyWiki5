@@ -1,10 +1,8 @@
 title: $:/plugins/tiddlywiki/tiddlyweb/syncer-actions/logout
 tags: $:/tags/SyncerDropdown
 
-\define lingo-base() $:/plugins/tiddlywiki/tiddlyweb/language/
-
 <$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
 <$button message="tm-logout" class="tc-btn-invisible">
-{{$:/core/images/cancel-button}} <<lingo Logout>>
+{{$:/core/images/cancel-button}} Logout
 </$button>
 </$reveal>

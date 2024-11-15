@@ -1,0 +1,23 @@
+color: #cc9
+created: 20241009163451663
+icon: $:/core/images/tip
+list: GettingStarted [[Getting Started Video]] [[Find Out More]] [[TiddlyWiki on the Web]] [[Testimonials and Reviews]]
+modified: 20241010112536263
+original-modified: 20241009163521037
+tags: Welcome
+title: Quick Start
+ja-title: クイックスタート
+type: text/vnd.tiddlywiki
+
+~TiddlyWikiをすぐに使い始める方法を選択してください。
+
+<div class="tc-cards tc-action-card">
+<$list filter="[[Quick Start: Tiddlyhost]] [[Quick Start: Desktop]] [[Quick Start: DIY]] [[Quick Start: Xememex]]">
+<$macrocall $name="flex-card" bordercolor={{!!color}} textcolor={{!!text-color}} backgroundcolor={{!!background-color}} captionField="caption" descriptionField="text"/>
+</$list>
+</div>
+<div class="tc-cards tc-small">
+<$link to="中文社区 - Chinese Community" class="tc-btn-big-green tc-card" aria-label="Chinese Community">
+中文社区<br/>Chinese Community
+</$link>
+</div>

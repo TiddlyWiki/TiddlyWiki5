@@ -6,12 +6,12 @@ description: {{$:/language/Buttons/UnfoldAll/Hint}}
 \whitespace trim
 <$button tooltip={{$:/language/Buttons/UnfoldAll/Hint}} aria-label={{$:/language/Buttons/UnfoldAll/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-sendmessage $message="tm-unfold-all-tiddlers" $param=<<currentTiddler>> foldedStatePrefix="$:/state/folded/"/>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="listItem">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/unfold-all-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/UnfoldAll/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>

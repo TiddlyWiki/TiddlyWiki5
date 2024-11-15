@@ -1,11 +1,9 @@
 title: $:/plugins/tiddlywiki/tiddlyweb/syncer-actions/login-status
 tags: $:/tags/SyncerDropdown
 
-\define lingo-base() $:/plugins/tiddlywiki/tiddlyweb/language/
-
 <$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
 <div class="tc-drop-down-info">
-<<lingo LoginAs>><<lingo Readonly>>
+You are logged in<$reveal state="$:/status/UserName" type="nomatch" text="" default=""> as <strong><$text text={{$:/status/UserName}}/></strong></$reveal><$reveal state="$:/status/IsReadOnly" type="match" text="yes" default="no"> (read-only)</$reveal>
 </div>
 <hr/>
 </$reveal>
