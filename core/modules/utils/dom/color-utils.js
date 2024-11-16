@@ -32,8 +32,7 @@ exports.parseCSSColor = function(colourString) {
 Preferred way to parse a Color.js colour
 */
 exports.parseCSSColorObject = function(colourString) {
-	var Color = require("$:/core/modules/utils/dom/color.js").Color,
-		c = null;
+	var c = null;
 	try {
 		c = new Color(colourString);
 	} catch(e) {
