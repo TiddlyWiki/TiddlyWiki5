@@ -503,7 +503,7 @@ title: $:/core/procedures/sidebar-resizer
 			class=<<get.active.class tc-slider-pointermove-eventcatcher-wrapper>>
 			selector=".tc-slider"
 			matchSelector=".tc-slider"
-			$pointerup=<<sidebar-resizer-pointercancel-actions>>>
+			$pointerup={{{ [<get.resizer.state>is[tiddler]then<sidebar-resizer-pointercancel-actions>] }}}>
 
 			<$eventcatcher
 				tag="div"
@@ -517,7 +517,6 @@ title: $:/core/procedures/sidebar-resizer
 				$pointerdown=<<sidebar-resizer-pointercancel-actions>>
 				$touchstart=<<sidebar-resizer-pointercancel-actions>>
 				$pointermove=<<sidebar-resizer-pointermove-actions>>
-				$touchmove=<<sidebar-resizer-pointermove-actions>>
 				$contextmenu=<<sidebar-resizer-pointercancel-actions>>>
 
 				<div class=<<get.active.class tc-slider-pointermove>>/>
@@ -532,17 +531,17 @@ title: $:/core/procedures/sidebar-resizer
 
 			<% endif %>
 
-			<%if [<template>is[variable]] %>
-
-				<$transclude $variable=<<template>> mode=<<mode>>/>
-
-			<% else %>
-
-				<$transclude $tiddler=<<template>> mode=<<mode>>/>
-
-			<% endif %>
-
 		</$eventcatcher>
+
+		<%if [<template>is[variable]] %>
+
+			<$transclude $variable=<<template>> mode=<<mode>>/>
+
+		<% else %>
+
+			<$transclude $tiddler=<<template>> mode=<<mode>>/>
+
+		<% endif %>
 
 	<% endif %>
 

@@ -1394,6 +1394,7 @@ html[dir="rtl"] .tc-tiddler-frame .tc-tiddler-controls {
 
 .tc-tiddler-frame iframe.tc-edit-texteditor {
 	background-color: <<colour tiddler-background>>;
+	z-index: 1;
 }
 
 .tc-tiddler-frame .tc-edit-fields input.tc-edit-fieldeditor,
@@ -1464,7 +1465,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-editor-toolbar {
 	background-color: <<colour tiddler-background>>;
-	z-index: 1;
+	z-index: 2;
 	padding-top: 8px;
 	margin-left: -2px;
 	margin-right: -2px;
@@ -1749,6 +1750,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border: 1px solid <<colour tiddler-editor-border>>;
 	margin: 4px 0 3px 0;
 	padding: 3px 3px 3px 3px;
+	z-index: 1;
 }
 
 .tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-tiddler-preview-preview > iframe[sandbox] {

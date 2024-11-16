@@ -46,13 +46,16 @@ code-body: yes
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+	align-items: stretch;
 }
 
 .tc-slider-pointermove-eventcatcher-wrapper:not(.tc-main-slider) {
+	position: absolute;
+	width: 100%;
 	flex-direction: row;
 }
 
-.tc-slider-pointerdown-eventcatcher:not(.tc-main-slider), .tc-slider-pointermove-eventcatcher-wrapper:not(.tc-main-slider) {
+.tc-slider-pointerdown-eventcatcher:not(.tc-main-slider) {
 	position: relative;
 }
 
@@ -61,17 +64,32 @@ code-body: yes
 	user-select: none;
 }
 
-.tc-slider-pointermove-eventcatcher-wrapper.tc-resizer-active {
+.tc-slider-pointermove-eventcatcher-wrapper.tc-main-slider.tc-resizer-active {
 	z-index: 801;
 }
 
-.tc-slider-pointermove-eventcatcher.tc-resizer-active {
+.tc-slider-pointermove-eventcatcher.tc-main-slider.tc-resizer-active {
 	z-index: 802;
 }
 
-.tc-slider-pointermove.tc-resizer-active {
+.tc-slider-pointermove.tc-main-slider.tc-resizer-active {
 	z-index: 803;
+}
+
+.tc-slider-pointermove.tc-resizer-active {
 	cursor: ew-resize;
+}
+
+.tc-slider-pointermove-eventcatcher-wrapper.tc-resizer-active:not(.tc-main-slider) {
+	z-index: 2;
+}
+
+.tc-slider-pointermove-eventcatcher.tc-resizer-active:not(.tc-main-slider) {
+	z-index: 3;
+}
+
+.tc-slider-pointermove.tc-resizer-active:not(.tc-main-slider) {
+	z-index: 4;
 }
 
 .tc-slider.tc-resizer-active {
@@ -211,7 +229,7 @@ div[class*="tc-editor-preview-slider-"] {
 		<%if [[$:/state/resizing/editor-preview-]addsuffix<identifier>is[tiddler]] %>
 
 			div.tc-slider.tc-editor-preview-slider-<<identifier>> {
-				opacity: min(calc(3 * <<get.theme.metric slideropacity>>),1);
+				opacity: min(<<get.theme.metric slideropacityhover>>,1);
 			}
 
 		<% endif %>
