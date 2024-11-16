@@ -1,0 +1,9 @@
+created: 20240907042443909
+modified: 20241116104031988
+original-modified: 20240907042629405
+tags: [[Hidden Settings]]
+title: Hidden Setting: Default Tiddler Colour
+ja-title: 隠し設定: TIddlerのデフォルト色
+type: text/vnd.tiddlywiki
+
+デフォルトのTiddler色は、$:/config/DefaultTiddlerColourというTiddlerを作成し、CSSの色の値を含むことによって指定できます。
