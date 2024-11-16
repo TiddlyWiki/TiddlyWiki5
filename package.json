@@ -44,6 +44,6 @@
   },
   "dependencies": {
     "better-sqlite3": "^11.5.0",
-    "node-sqlite3-wasm": "^0.8.10"
+    "node-sqlite3-wasm": "^0.8.25"
   }
 }
