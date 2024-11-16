@@ -27,6 +27,26 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 	</$set>
 </$tiddler>
 
+<$list filter="[<first-guest-user>match[yes]]">
+	<div class="mws-security-warning">
+		<div class="mws-security-warning-content">
+			<div class="mws-security-warning-icon">⚠️</div>
+			<div class="mws-security-warning-text">
+				<strong>Warning:</strong> TiddlyWiki is currently running in anonymous access mode which allows anyone with access to the server to read and modify data.
+			</div>
+			<div class="mws-security-warning-action">
+				<a href="/admin/users" class="mws-security-warning-button">Add Admin Account</a>
+			</div>
+		</div>
+	</div>
+</$list>
+
+<$list filter="[<show-annon-config>match[yes]]">
+	<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/anon-config-modal">
+		<$transclude/>
+	</$tiddler>
+</$list>
+
 <ul class="mws-vertical-list">
 	<$list filter="[<recipe-list>jsonindexes[]] :sort[<currentTiddler>jsonget[recipe_name]]" variable="recipe-index">
 		<li>
@@ -226,4 +246,108 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 .mws-admin-dropdown:hover .mws-admin-dropdown-content {display: block;}
 
 .mws-admin-dropdown:hover {background-color: #2980B9;}
+
+.mws-security-warning {
+	background-color: #fff3cd;
+	border: 1px solid #ffeeba;
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+	border-radius: 4px;
+}
+
+.mws-security-warning-content {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.mws-security-warning-icon {
+	font-size: 1.5rem;
+}
+
+.mws-security-warning-text {
+	flex-grow: 1;
+	color: #856404;
+}
+
+.mws-security-warning-button {
+	display: flex;
+	padding: 0.5rem 1rem;
+	background-color: #856404;
+	color: white;
+	text-decoration: none;
+	border-radius: 4px;
+	font-weight: bold;
+	transition: background-color 0.2s;
+	flex-direction: row;
+	align-items: center;
+	text-align: center;
+	text-wrap: nowrap;
+}
+
+.mws-security-warning-button:hover {
+	background-color: #6d5204;
+}
+
+.mws-modal-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mws-modal-content {
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	max-width: 500px;
+}
+
+.mws-config-button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-bottom: 1rem;
+}
+
+.mws-config-button:hover {
+    background-color: #45a049;
+}
+
+.mws-modal-content {
+    padding: 20px;
+}
+
+.mws-modal-section {
+    margin-bottom: 15px;
+}
+
+.mws-modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.mws-modal-button-primary {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.mws-modal-button-primary:hover {
+    background-color: #45a049;
+}
 </style>

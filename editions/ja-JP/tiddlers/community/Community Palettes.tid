@@ -16,7 +16,7 @@ caption: パレット
 
 ! <$link><$view field="title"/></$link>
 
-<div class="tc-subtitle"> <$view field="modified" format="relativedate"/> の投稿</div>
+<div class="tc-subtitle"> <$view field="original-modified" format="relativedate"><$view field="modified" format="relativedate"/></$view> の投稿</div>
 
 <$transclude/>
 

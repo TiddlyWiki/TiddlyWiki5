@@ -1,0 +1,50 @@
+caption: PHP
+color: #F06292
+created: 20140111091844267
+delivery: DIY
+description: DIY script you can install on your own server
+method: save
+modified: 20241103111839145 
+original-modified: 20200507110314202
+tags: Saving PHP
+title: Saving on a PHP Server
+ja-title: PHPサーバでの保存
+type: text/vnd.tiddlywiki
+
+組み込みの`TiddlySpot `セーバーを使用すると、多くのホスティングプロバイダーで実行できる単純なPHPスクリプトへ変更を保存することもできます。
+
+//このコードは数年間更新されていません。問題がある場合は、代わりに[[TWレシーバー|Saving with TW Receiver]]を使うことを検討してください//
+
+# https://code.google.com/archive/p/bidix/downloads から、`TiddlyHome_0.1.2.zip`をダウンロードします
+# 解凍(Unzip)します。
+# 解凍したサブディレクトリ`_th\lib`の下から`store.php`をコピーします
+# ''store.php''のコピーを編集して、ユーザー名とパスワードを追加します。`$USERS = array( 'UserName1'=>'Password1', etc)`という行を見つけて、Username1とPassword1を適切なユーザー名とパスワードに置き換えます。
+#* シングルクォートなどの区切りやコードはすべてそのまま残してください
+# ファイルを保存します
+# FTPやWebインターフェースを使用して、''store.php''をサーバにアップロードします。ファイル名が正しいことを確認します
+#* ファイルを正しくアップロードすると、ブラウザで表示できるようになります (例: http://example.com/store.php )
+# TiddlyWikiで、''コントロールパネル''<<.icon $:/core/images/options-button>>の''保存''タブに移動し、次の情報を入力します:
+#* ウィキ名としてのユーザー名
+#* パスワード
+#* ''store.php''ファイルのURL(//WikiのURL''ではなく''、''store.php''ファイルへの完全なURLである必要があります//)
+
+コントロールパネルの''保存''タブには、次の構成オプションが含まれています: 
+
+|!名前 |!説明 |
+|サーバーURL |サーバー上の''store.php''ファイルへの完全なURL |
+|アップロードファイル名 |TiddlyWikiを保存するために使用されるファイル名(デフォルトは''index.html'') |
+|アップロードディレクトリ |ファイルの保存に使用するディレクトリの''store.php''からの相対パス |
+|バックアップディレクトリ |バックアップに使用するディレクトリの''store.php''から相対パス |
+
+!!! 最大サイズに関する注意
+
+TWファイルのサイズが大きくなると、最大アップロードサイズや投稿サイズの値を増やすために、`.htaccess`または`htaccess`ファイル(システムによって異なります)を変更する必要があります。特定の設定については、Webホストプロバイダーに確認してください。試す前に必ずバックアップを作成してください。一部のシステムでは、設定は次のようになります: 
+
+```
+php_value upload_max_filesize 4M
+php_value post_max_size 6M
+```
+
+!!! エラーメッセージに関する注意
+
+`split()`に関するエラーメッセージが表示される場合は、''store.php''内の`split`への参照を関数`explode`に変更する必要があるかもしれません。

@@ -18,34 +18,36 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-users
 </$tiddler>
 
 <div class="users-container">
-	<div class="users-list">
-		<$list filter="[<user-list>jsonindexes[]]" variable="user-index">
-			<$let currentUser={{{ [<user-list>jsonextract<user-index>] }}}>
-				<$set name="user-id" value={{{ [<currentUser>jsonget[user_id]] }}}>
-					<a href={{{ [[/admin/users/]addsuffix<user-id>] }}} class="user-item">
-						<div class="user-info">
-							<span class="user-name">
-								<$text text={{{ [<currentUser>jsonget[username]] }}}/>
-							</span>
-							<span class="user-email">
-								<$text text={{{ [<currentUser>jsonget[email]] }}}/>
-							</span>
-						</div>
-						<div class="user-details">
-							<span class="user-created">
-								Created: <$text text={{{ [<currentUser>jsonget[created_at]] }}}/>
-							</span>
-							<span class="user-last-login">
-								Last Login: <$text text={{{ [<currentUser>jsonget[last_login]] }}}/>
-							</span>
-						</div>
-					</a>
-				</$set>
-			</$let>
-		</$list>
-	</div>
+	<$list filter="[<user-list>jsonindexes[]count[]!match[0]]">
+		<div class="users-list">
+			<$list filter="[<user-list>jsonindexes[]]" variable="user-index">
+				<$let currentUser={{{ [<user-list>jsonextract<user-index>] }}}>
+					<$set name="user-id" value={{{ [<currentUser>jsonget[user_id]] }}}>
+						<a href={{{ [[/admin/users/]addsuffix<user-id>] }}} class="user-item">
+							<div class="user-info">
+								<span class="user-name">
+									<$text text={{{ [<currentUser>jsonget[username]] }}}/>
+								</span>
+								<span class="user-email">
+									<$text text={{{ [<currentUser>jsonget[email]] }}}/>
+								</span>
+							</div>
+							<div class="user-details">
+								<span class="user-created">
+									Created: <$text text={{{ [<currentUser>jsonget[created_at]] }}}/>
+								</span>
+								<span class="user-last-login">
+									Last Login: <$text text={{{ [<currentUser>jsonget[last_login]] }}}/>
+								</span>
+							</div>
+						</a>
+					</$set>
+				</$let>
+			</$list>
+		</div>
+	</$list>
 
-	<$list filter="[<user-is-admin>match[yes]]">		
+	<$list filter="[<user-is-admin>match[yes]][<first-guest-user>match[yes]]">		
 		<div class="add-user-card">
 			<$transclude tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/add-user-form" mode="inline"/>
 		</div>
@@ -73,6 +75,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-users
 		border-radius: 8px;
 		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 		padding: 2rem;
+		margin: auto;
 	}
 	.user-item {
 		display: block;
@@ -120,5 +123,10 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-users
 	}
 	.tc-btn-big-green:hover {
 		background-color: #45a049;
+	}
+	.no-users-message {
+		text-align: center;
+		padding: 2rem;
+		color: #666;
 	}
 </style>

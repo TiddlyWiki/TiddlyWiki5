@@ -38,8 +38,6 @@ Command.prototype.execute = function() {
 	var description = this.params[1];
 
 	$tw.mws.store.sqlTiddlerDatabase.createRole(role_name, description);
-
-	console.log(role_name+" Role Created Successfully!")
 	self.callback(null, "Role Created Successfully!");
 	return null;
 };
