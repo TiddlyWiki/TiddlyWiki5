@@ -1,0 +1,10 @@
+created: 20210415112909844
+modified: 20210415113935964
+tags: 
+title: landing page download empty
+type: text/vnd.tiddlywiki
+
+<$button class="inline-flex items-center text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg">
+<$action-sendmessage $message="tm-download-file" $param="$:/editions/tw5.com/download-empty" filename="empty.html"/>
+Download Empty &nbsp; {{$:/core/images/save-button}}
+</$button>

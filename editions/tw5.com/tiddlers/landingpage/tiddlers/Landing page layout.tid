@@ -1,0 +1,24 @@
+created: 20210414165130837
+description: A landingpage for TiddlyWiki
+modified: 20210423114412387
+name: Landingpage
+tags: $:/tags/Layout
+title: Landing page layout
+
+{{landing page navbar}}
+
+{{landing page home}}
+
+{{landing page features}}
+
+{{landing page themes}}
+
+{{Landing page showcase}}
+
+{{landing page community}}
+
+{{Landing page getting started}}	
+
+{{landing page testemonials}}
+
+{{landing page footer}}
