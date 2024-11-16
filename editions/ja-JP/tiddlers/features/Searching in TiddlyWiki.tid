@@ -1,0 +1,24 @@
+created: 20140210160125905
+modified: 20241031115307429
+original-modified: 20160607163012344
+tags: Features [[Working with TiddlyWiki]]
+title: Searching in TiddlyWiki
+ja-title: TiddlyWikiでの検索
+type: text/vnd.tiddlywiki
+
+~TiddlyWikiの検索は、高速かつ柔軟です
+
+! 標準の検索
+
+サイドバーの検索ボックスにテキストを入力すると、そのテキストを含むすべてのTiddlerのリストが表示されます。
+
+://(検索ボックスの右側にある'x'をクリックして検索結果を削除するまで、サイドバーのタブは検索結果によって非表示になることに注意してください)//
+
+! 高度な検索
+
+検索ボックスの右側にある虫眼鏡アイコン<<.icon $:/core/images/advanced-search-button>>をクリックすると、[[$:/AdvancedSearch]]が開きます。このTiddlerには4つのタブが含まれています: 
+
+* ''一般''タブには、サイドバーにある検索ボックスの別のインスタンスが含まれています
+* ''システム''タブを使用すると、検索をシステムTiddlerに限定できます
+* ''隠し'' タブを使用すると、検索を隠しTiddlerに限定できます
+* ''フィルタ''タブは、それ自体は検索ボックスではありませんが、その[[フィルタ|Filters]]で記述された特定の条件(例えば、"システムタグを除くすべてのタグ")を満たすすべてのTiddlerのリストを取得する方法です

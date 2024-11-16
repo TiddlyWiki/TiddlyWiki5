@@ -1,0 +1,22 @@
+created: 20160817093933820
+modified: 20241104105233416
+original-modified: 20190118161349442
+tags: Features [[Formatting text in TiddlyWiki]]
+title: Editor toolbar
+ja-title: エディタツールバー
+type: text/vnd.tiddlywiki
+
+!! 使い方
+
+エディタツールバーは、テキストのフォーマットを簡単に設定するのに役立つツールバーです。編集モードの場合、Tiddlerのテキスト入力フィールドの上に表示されます。Microsoft WordやLibre Office Writeなどのデスクトップテキストエディターと似た外観をしています
+
+!! エディタツールバーの機能
+機能ボタンを押すと、テキストフィールドにWikiTextが挿入されます。例えば、太字のボタンを押すと、`'' ''`が挿入されます
+
+テキストの一部を''選択''していると、マークアップコードが選択されたテキストを自動的に囲みます
+
+[[MarkDown|Markdown Plugin]]などの別のモードを使用している場合は、ツールバーがその構文に変更され、適切なコードが挿入されます。ただし、以前に入力したテキストやマークアップは変更されません
+
+標準のWikiTextフォーマットに加えて、エディタツールバーには次のボタンがあります: 
+
+<<list-links "[tag[Editor toolbar]sort[title]]">>

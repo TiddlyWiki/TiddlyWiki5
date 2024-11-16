@@ -1,0 +1,13 @@
+caption: Safari
+created: 20140811171121022
+modified: 20241029110726936
+original-modified: 20211114031651879
+tags: GettingStarted
+title: GettingStarted - Safari
+ja-title: はじめに - Safari
+type: text/vnd.tiddlywiki
+
+Safari上のTiddlyWikiでは、手動のHTML5互換フォールバックセーバーモジュールを使用してのみ変更を保存できます。
+
+{{Saving on Safari}}
+
