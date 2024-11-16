@@ -4,11 +4,15 @@ caption: {{$:/core/images/cancel-button}} {{$:/language/Buttons/Cancel/Caption}}
 description: {{$:/language/Buttons/Cancel/Hint}}
 
 \whitespace trim
-<$button actions=<<cancel-delete-tiddler-actions "cancel">> tooltip={{$:/language/Buttons/Cancel/Hint}} aria-label={{$:/language/Buttons/Cancel/Caption}} class=<<tv-config-toolbar-class>>>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/cancel-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/Cancel/Caption}}/></span>
-<%endif%>
+<$button actions=<<cancel-delete-tiddler-actions "cancel">>
+	tooltip={{$:/language/Buttons/Cancel/Hint}}
+	aria-label={{$:/language/Buttons/Cancel/Hint}}
+	class=<<tv-config-toolbar-class>>
+>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		{{$:/core/images/cancel-button}}
+	<%endif%>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text"><$text text={{$:/language/Buttons/Cancel/Caption}}/></span>
+	<%endif%>
 </$button>

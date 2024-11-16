@@ -4,5 +4,5 @@
 	"plugin-type": "language",
 	"description": "Castellano. (España)",
 	"author": "Pau DeLuca,Joe Bordes",
-	"core-version": ">=5.1.23"
+	"core-version": ">=5.3"
 }

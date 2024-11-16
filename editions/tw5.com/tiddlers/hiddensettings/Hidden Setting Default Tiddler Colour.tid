@@ -1,0 +1,7 @@
+created: 20240907042443909
+modified: 20240907042629405
+tags: [[Hidden Settings]]
+title: Hidden Setting: Default Tiddler Colour
+type: text/vnd.tiddlywiki
+
+A default tiddler colour can be specified by creating a tiddler called $:/config/DefaultTiddlerColour containing the CSS color value.

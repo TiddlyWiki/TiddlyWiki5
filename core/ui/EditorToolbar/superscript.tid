@@ -11,4 +11,5 @@ shortcuts: ((superscript))
 	$param="wrap-selection"
 	prefix="^^"
 	suffix="^^"
+	trimSelection="yes"
 />

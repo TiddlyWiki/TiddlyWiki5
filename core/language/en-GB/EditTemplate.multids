@@ -26,7 +26,8 @@ Tags/ClearInput/Caption: clear input
 Tags/ClearInput/Hint: Clear tag input
 Tags/Dropdown/Caption: tag list
 Tags/Dropdown/Hint: Show tag list
-Tags/EmptyMessage: (no search result)
+Tags/EmptyMessage: No tags found
+Tags/EmptyMessage/System: No system tags found
 Title/BadCharacterWarning: Warning: avoid using any of the characters <<bad-chars>> in tiddler titles
 Title/Exists/Prompt: Target tiddler already exists
 Title/Relink/Prompt: Update ''<$text text=<<fromTitle>>/>'' to ''<$text text=<<toTitle>>/>'' in the //tags// and //list// fields of other tiddlers

@@ -1,5 +1,5 @@
 created: 20140610213500000
-modified: 20140912141341933
+modified: 20241030132047048
 tags: Concepts Features
 title: ExternalImages
 type: text/vnd.tiddlywiki
@@ -32,18 +32,18 @@ Note the image files must be saved before they are externalised. Externalising t
 For an example see the ''externalimages'' build target of the demo ''tw5.com'' wiki:
 
 ```
---savetiddlers [is[image]] images
+--save [is[image]] images
 --setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri-external-image text/plain
 --setfield [is[image]] text "" text/plain
---rendertiddler $:/core/save/all externalimages.html text/plain
+--render $:/core/save/all externalimages.html text/plain
 ```
 
 !! Saving Separate Image Files
 
-The following `--savetiddlers` command can be used to save the images of a wiki into an ''images'' subfolder:
+The following `--save` command (see [[SaveCommand]]) can be used to save the images of a wiki into an ''images'' subfolder:
 
 ```
---savetiddlers [is[image]] images
+--save [is[image]] images
 ```
 
 !! Externalising Image Tiddlers

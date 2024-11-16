@@ -1,10 +1,10 @@
 created: 20130825160900000
-modified: 20160610083350724
+modified: 20241106165307259
 tags: Features [[Working with TiddlyWiki]]
 title: Encryption
 type: text/vnd.tiddlywiki
 
-When used as a single HTML file, TiddlyWiki5 allows content to be encrypted using the [[Stanford JavaScript Crypto Library]].
+When used as a single HTML file, TiddlyWiki5 allows content to be encrypted with AES 128 bit encryption in CCM mode using the [[Stanford JavaScript Crypto Library]]. 
 
 # Switch to the ''Tools'' tab in the sidebar and look for the button with a padlock icon
 # If the button is labelled <<.icon $:/core/images/unlocked-padlock>> ''set password'' then the current wiki is not encrypted. Clicking the button will prompt for a password that will be used to encrypt subsequent saves

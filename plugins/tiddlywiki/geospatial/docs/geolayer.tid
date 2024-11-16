@@ -16,7 +16,8 @@ The following attributes are supported:
 |''long'' |Optional longitude of marker if json attribute missing |
 |''alt'' |Optional altitude of marker if json attribute missing |
 |''draggable'' |Set to "yes" to make the marker draggable |
-|''updateActions'' |Optional actions when the marker is dragged other otherwise modified. The variables ''lat'' and ''long'' contain the new coordinates of the marker |
+|''updateActions'' |Optional actions when the marker is dragged other otherwise modified. The variables ''lat'', ''long'' and ''alt'' contain the new coordinates of the marker |
+|''clickActions'' |<<.from-version "5.3.6">> Optional actions when the marker is clicked. The variable ''properties'' contains the JSON properties of the marker.  The variables ''lat'', ''long'' and ''alt'' contain the coordinates of the marker |
 |''properties'' |<<.from-version "5.3.6">> Optional JSON properties to be attached to the marker (only supported for non-JSON layers) |
 |''popupTemplate'' |<<.from-version "5.3.6">> Optional template to be used for popups. The template is rendered with the variable ''feature'' containing the JSON text of the feature |
 

@@ -4,13 +4,18 @@ caption: {{$:/core/images/clone-button}} {{$:/language/Buttons/Clone/Caption}}
 description: {{$:/language/Buttons/Clone/Hint}}
 
 \whitespace trim
-<$button message="tm-new-tiddler" param=<<currentTiddler>> tooltip={{$:/language/Buttons/Clone/Hint}} aria-label={{$:/language/Buttons/Clone/Caption}} class=<<tv-config-toolbar-class>>>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/clone-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/Clone/Caption}}/>
-</span>
-<%endif%>
+<$button message="tm-new-tiddler"
+	param=<<currentTiddler>>
+	tooltip={{$:/language/Buttons/Clone/Hint}}
+	aria-label={{$:/language/Buttons/Clone/Hint}}
+	class=<<tv-config-toolbar-class>>
+>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		{{$:/core/images/clone-button}}
+	<%endif%>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text">
+			<$text text={{$:/language/Buttons/Clone/Caption}}/>
+		</span>
+	<%endif%>
 </$button>
