@@ -31,7 +31,7 @@
   },
   "license": "BSD",
   "engines": {
-    "node": ">=22.10.0"
+    "node": ">=0.8.2"
   },
   "scripts": {
     "start": "node ./tiddlywiki.js ./editions/multiwikiserver --mws-load-plugin-bags --build load-mws-demo-data --mws-listen",
