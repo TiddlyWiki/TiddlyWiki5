@@ -1,12 +1,17 @@
 created: 20180306113011255
-modified: 20180306161225140
+modified: 20241116210134914
 tags: Concepts
 title: DefaultTiddlers
 type: text/vnd.tiddlywiki
 
-"Default tiddlers" refers to the list of tiddlers that is opened at startup in the browser if the address bar does not include a [[permalink|PermaLinks]]).
+"Default tiddlers" refers to the list of tiddlers that are opened at startup in the browser if the address bar does not include a [[permalink|PermaLinks]].
+
+There are two ways default tiddlers can be defined:
+
+* A [[title-list|Title List]] eg: `TiddlerTitles` and `[[Titles with spaces]]`
+* Filter expressions, using [[filter operators|Filter Operators]] eg: `[tag[HelloThere]]`
 
 At startup, the text of the system tiddler [[$:/DefaultTiddlers]] is retrieved and evaluated as a [[filter expression|Filter Expression]]. The resulting list of titles is then inserted into the [[story river|Story River]].
 
-The [[control panel|$:/ControlPanel]] ''info/basics'' tab includes a text box for direct access to [[$:/DefaultTiddlers]].
+The [[control panel|$:/ControlPanel]] ''-> Info -> Basics -> Default tiddler'' setting includes a text box for direct access to ~$:/DefaultTiddlers.
 
