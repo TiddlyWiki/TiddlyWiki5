@@ -130,6 +130,19 @@ type: text/vnd.tiddlywiki
 	}
 }
 
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+
+	.tc-flex-columns {
+		display: flex;
+		gap: 1em;
+	}
+
+	.tc-flex-columns.tc-flex-columns-2 > div {
+		width: 50%;
+	}
+
+}
+
 .tc-saving-sidebar-category { margin-bottom:10px; }
 .tc-saving-sidebar-category-title { margin-bottom:5px; font-weight:bold; }
 .tc-saving-sidebar-category-item { margin-left:10px; white-space:nowrap; }

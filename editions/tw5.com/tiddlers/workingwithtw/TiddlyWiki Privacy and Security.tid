@@ -5,7 +5,7 @@ title: TiddlyWiki Privacy and Security
 <span class="tc-float-right tc-bordered-image">[img width=200 [TiddlyWiki Privacy Badge.png]]</span>
 ''TiddlyWiki is unique in that ordinary people can use it securely and privately without any special training.''  The key is that ~TiddlyWiki is just a text file, or a folder of files, so everything that you may already know about how to keep your documents and images private can be applied to ~TiddlyWiki.  Also, because your ~TiddlyWiki data is stored in simple text files, you can be confident that it will still be securely accessible in the decades to come.
 
-! ~TiddlyWiki Configurations
+!! ~TiddlyWiki Configurations
 
 ~TiddlyWiki can be used in two main configurations:
 
@@ -18,38 +18,34 @@ title: TiddlyWiki Privacy and Security
 
 The security and privacy implications of the two configurations are different:
 
-<<<
+<div class="tc-flex-columns tc-flex-columns-2">
 
-!! Single File Configuration
+<div>
 
-As a practical matter, using ~TiddlyWiki in the single file configuration depends upon keeping that file secure and private.  Users can employ the same tools that they use to keep any document and photograph secure. For many users, the simplest solution will be to use an existing file storage service such as [[Google Drive|https://drive.google.com]], [[Apple's iCloud|https://www.icloud.com]], or [[Dropbox|https://www.dropbox.com]]. Many users already rely on the privacy and security of these services.  There are also open source alternatives such as [[Syncthing|https://syncthing.net/]] that allow users to synchronise files between their devices without using a third party service.
+{{TiddlyWiki Single File Privacy and Security}}
 
-Users may wish to use additional layers of security. ~TiddlyWiki in the single file configuration offers built-in encryption using an industry standard encryption library to offer AES 128-bit encryption in CCM mode. All the data within the file is encrypted and cannot be accessed without entering the correct password. The password is never stored in the file, and so if it is lost, the data is lost. Instructions can be found in [[Encryption]].
+</div>
 
-It is important to understand that ~TiddlyWiki's built in encryption is our best endeavour to offer privacy and usability. However, the encryption feature has not been subject to the kind of rigorous third party testing that characterises secure services like Signal or Syncthing.  Cautious users may wish to use ~TiddlyWiki's built in encryption as an extra layer of security, but should take care not to rely on it as one would rely on industry standard encryption solutions that have been rigorously tested in a variety of situations.
+<div>
 
-!! Node.js Configuration
+{{TiddlyWiki Node.js Privacy and Security}}
 
-Using ~TiddlyWiki in the Node.js configuration requires more technical knowledge than the single file configuration.  There are several important areas with respect to security and privacy.
+</div>
 
-* Most obviously, there is the matter of how user data is stored on disc as individual `.tid` files. Just as with the single file configuration, these are just ordinary files, and so can be used with third party tools that provide encryption.
-* Consideration must also be given to how data is transmitted across the network. By default, the Node.js configuration does not use SSL and so network traffic can be observed by others.
-** The impact of this is mitigated by the fact that, by default, only users on the same machine can connect to the server.
-** ~TiddlyWiki itself does offer the option of setting up an SSL connection.  However, it is generally advised to use an external proxy server to provide SSL services. nginx is popular for this purpose.
-<<<
+</div>
 
-! Verifiable Trust
+!! Verifiable Trust
 
 An important aspect of ~TiddlyWiki's security and privacy claims is that they can be readily confirmed by anyone with basic technical skills.  For example, the network monitoring tools built into most browsers allow you to verify that ~TiddlyWiki doesn't send any data to other servers. Similarly, you can open a ~TiddlyWiki HTML file in an editor and verify that your data is readily accessible.
 
-! Community Tools
+!! Community Tools
 
 There are also third party tools from the community that extend ~TiddlyWiki's built in encryption:
 
 * [["Encrypt single tiddler plugin" by Danielo Rodriguez]] allows individual tiddlers to be encrypted
 * [[TW5-CSEncryption|https://wiki.fspark.me/TW5-CSEncryption/]] offers client-side encryption for ~TiddlyWiki on Node.js
 
-! Further Information
+!! Further Information
 
 If security and privacy are important to you then you need to take the best available advice, and the best place for that is specialist organisations that focus on this area.
 
