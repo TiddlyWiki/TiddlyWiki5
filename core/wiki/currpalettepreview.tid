@@ -3,11 +3,11 @@ title: $:/snippets/currpalettepreview
 \whitespace trim
 
 \procedure colour-div-filtered(class,styleName,styleColour)
-\function colour(name) [<colour-palette>getindex<name>] :else[<colour-palette>get[palette-import]getindex<name>] :else[[none]] :map[subfilter<currentTiddler>] +[join[ ]]
 <!-- Note the join, needed to cope with palette entries containing spaces -->
+\function colour(name) [<colour-palette>getindex<name>] :else[<colour-palette>get[palette-import]getindex<name>] :else[[none]] :map[subfilter<currentTiddler>join[ ]]
 <$let
 	colour-palette=<<currentTiddler>>
-	colour-result={{{ [function[colour],<styleColour>] +[join[ ]] }}}
+	colour-result={{{ [function[colour],<styleColour>] }}}
 >
 	<div class=<<class>> style={{{ [<styleName>addsuffix[:]addsuffix<colour-result>addsuffix[;]] }}}>
 		<$slot $name="ts-raw" $depth="2"/>
@@ -45,20 +45,15 @@ title: $:/snippets/currpalettepreview
 <%endif%>
 \end $colour.div
 
+\procedure palette-preview-component-list(tag)
+<$list filter="[all[shadows+tiddlers]tag<tag>!has[draft.of]]" variable="componentTitle">
+	<$transclude $tiddler=<<componentTitle>> title=<<title>>/>
+</$list>
+\end palette-preview-component-list
+
 \procedure palette-preview-thumbnail()
 <$colour.div class="tc-palette-preview-thumbnail" styleName="background-color" styleColour="page-background">
-	<$colour.div class="tc-palette-preview-thumbnail-story">
-		<$list filter="HelloThere GettingStarted" variable="title">
-			<$list filter="[all[shadows+tiddlers]tag[$:/tags/Preview/Story]!has[draft.of]]" variable="componentTitle">
-				<$transclude $tiddler=<<componentTitle>> title=<<title>>/>
-			</$list>
-		</$list>
-	</$colour.div>
-	<$colour.div class="tc-palette-preview-thumbnail-sidebar" styleName="color" styleColour="sidebar-foreground">
-		<$list filter="[all[shadows+tiddlers]tag[$:/tags/Preview/SideBar]!has[draft.of]]" variable="componentTitle">
-			<$transclude $tiddler=<<componentTitle>> title=<<title>>/>
-		</$list>
-	</$colour.div>
+	<<palette-preview-component-list "$:/tags/Preview/Page">>
 </$colour.div>
 \end palette-preview-thumbnail
 

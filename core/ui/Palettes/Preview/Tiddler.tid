@@ -4,7 +4,5 @@ tags: $:/tags/Preview/Story
 \parameters (title)
 \whitespace trim
 <$colour.div class="tc-palette-preview-thumbnail-tiddler" styleName="background-color" styleColour="tiddler-background">
-	<$list filter="[all[shadows+tiddlers]tag[$:/tags/Preview/Tiddler]!has[draft.of]]" variable="componentTitle">
-		<$transclude $tiddler=<<componentTitle>> title=<<title>>/>
-	</$list>
+	<<palette-preview-component-list "$:/tags/Preview/Tiddler">>
 </$colour.div>
