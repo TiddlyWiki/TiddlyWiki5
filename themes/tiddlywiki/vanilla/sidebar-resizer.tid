@@ -247,7 +247,7 @@ div[class*="tc-editor-preview-slider-"] {
 		<%if [<width>compare:number:gteq[99]] %>
 
 			.tc-edit-texteditor-identified-<<identifier>> {
-				display: none !important;
+				display: none;
 			}
 
 		<% endif %>
