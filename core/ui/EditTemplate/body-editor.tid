@@ -5,7 +5,7 @@ title: $:/core/ui/EditTemplate/body/editor
 <$edit
 
 	field="text"
-	class=<<get.tc-edit-texteditor.class>>
+	class=<<get.tc-editor.class>>
 	placeholder={{$:/language/EditTemplate/Body/Placeholder}}
 	tabindex={{$:/config/EditTabIndex}}
 	focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}

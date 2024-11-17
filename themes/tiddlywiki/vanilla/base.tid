@@ -1775,6 +1775,7 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview-hidden canvas.tc-edit-bitmapeditor {
 	grid-area: editor;
 	max-width: 100%;
+	z-index: 1;
 }
 
 .tc-edit-fields {

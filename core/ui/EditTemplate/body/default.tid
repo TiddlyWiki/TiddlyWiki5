@@ -6,7 +6,7 @@ title: $:/core/ui/EditTemplate/body/default
 [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] +[get[text]] :else[[no]]
 \end
 
-\function get.tc-edit-texteditor.class() tc-edit-texteditor tc-edit-texteditor-body [<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]] +[join[ ]]
+\function get.tc-editor.class() [{!!type}is[blank]then[tc-edit-texteditor tc-edit-texteditor-body]] [{!!type}is[blank]then<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]] [{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]!match[bitmap]then[tc-edit-texteditor tc-edit-texteditor-body]] [{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]!match[bitmap]then<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]] [{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]match[bitmap]then[tc-edit-bitmapeditor tc-edit-bitmapeditor-body]] [{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]match[bitmap]then<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-bitmapeditor-identified-]] +[join[ ]]
 
 \function get.tc-tiddler-preview-preview.class() tc-tiddler-preview-preview [<identifier>addprefix[tc-tiddler-preview-preview-identified-]] +[join[ ]]
 
