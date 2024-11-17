@@ -4,14 +4,16 @@ tags: $:/tags/Preview/Page
 \whitespace trim
 <$colour.div class="tc-palette-preview-thumbnail-alert" styleName="background-color" styleColour="alert-background">
 	<$colour.div class="tc-palette-preview-thumbnail-alert-border" styleName="border-color" styleColour="alert-border">
-		<$colour.div class="tc-palette-preview-thumbnail-alert-subtitle">
-			Lorem Ipsum
-			<$colour.div class="tc-palette-preview-thumbnail-alert-highlight">
-				(Count: 1)
+		<$colour.div styleName="color" styleColour="foreground">
+			<$colour.div class="tc-palette-preview-thumbnail-alert-subtitle" styleName="color" styleColour="alert-muted-foreground">
+				Lorem Ipsum
+				<$colour.div class="tc-palette-preview-thumbnail-alert-highlight" styleName="color" styleColour="alert-highlight">
+					(Count: 1)
+				</$colour.div>
 			</$colour.div>
-		</$colour.div>
-		<$colour.div class="tc-palette-preview-thumbnail-alert-body">
-			Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do Eiusmod Tempor Incididunt.
+			<$colour.div class="tc-palette-preview-thumbnail-alert-body">
+				Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do Eiusmod Tempor Incididunt.
+			</$colour.div>
 		</$colour.div>
 	</$colour.div>
 </$colour.div>

@@ -1,0 +1,11 @@
+title: $:/core/ui/Palettes/Preview/Notification
+tags: $:/tags/Preview/Page
+
+\whitespace trim
+<$colour.div class="tc-palette-preview-thumbnail-notification" styleName="background-color" styleColour="notification-background">
+	<$colour.div class="tc-palette-preview-thumbnail-notification-border" styleName="border-color" styleColour="notification-border">
+		<$colour.div class="tc-palette-preview-thumbnail-notification-body" styleName="color" styleColour="foreground">
+			Lorem Ipsum Dolor Sit Amet Consectetur
+		</$colour.div>
+	</$colour.div>
+</$colour.div>
