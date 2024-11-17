@@ -4,7 +4,7 @@ title: $:/snippets/currpalettepreview
 
 \procedure colour-div-filtered(class,styleName,styleColour)
 <!-- Note the join, needed to cope with palette entries containing spaces -->
-\function colour(name) [<colour-palette>getindex<name>] :else[<colour-palette>get[palette-import]getindex<name>] :else[[none]] :map[subfilter<currentTiddler>join[ ]]
+\function colour(name) [<colour-palette>getindex<name>] :else[<colour-palette>get[palette-import]getindex<name>] :map[subfilter<currentTiddler>join[ ]]
 <$let
 	colour-palette=<<currentTiddler>>
 	colour-result={{{ [function[colour],<styleColour>] }}}
