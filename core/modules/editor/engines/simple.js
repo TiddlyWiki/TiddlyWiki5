@@ -68,6 +68,10 @@ function SimpleEngine(options) {
 	this.widget.domNodes.push(this.domNode);
 }
 
+SimpleEngine.prototype.assignDomNodeClasses = function() {
+	this.domNode.className = this.widget.getAttribute("class","");
+};
+
 /*
 Set the text of the engine if it doesn't currently have focus
 */
