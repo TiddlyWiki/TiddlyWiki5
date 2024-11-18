@@ -3,9 +3,8 @@ tags: Definitions
 modified: 20241105133737778
 created: 20241105133737778
 
-! Introduction
-
-~MultiWikiServer is a new development that drastically improves ~TiddlyWiki's capabilities when running as server under Node.js. It brings ~TiddlyWiki up to par with common web-based tools like ~WordPress or ~MediaWiki by supporting multiple wikis and multiple users at the same time.
+<span class="tc-float-right tc-bordered-image">[img width=200 [MWS Banner.png]]</span>
+~MultiWikiServer is a new development that drastically improves ~TiddlyWiki's capabilities when running as a server under Node.js. It brings ~TiddlyWiki up to par with common web-based tools like ~WordPress or ~MediaWiki by supporting multiple wikis and multiple users at the same time.
 
 Planned features include:
 
@@ -15,12 +14,13 @@ Planned features include:
 * Instantaneous synchronisation of changes between the server and all connected clients
 * Workflow processing on the server, for example to automatically compress images, or to archive webpages
 
-MWS is currently [[under development at GitHub|https://github.com/TiddlyWiki/TiddlyWiki5/pull/7915]] but it is already functional and usable.
+MWS does require basic knowledge of the command line and Node.js but is designed to be as simple as possible to setup and use. Once downloaded, just two commands are needed to complete the installation and start the server:
 
-! Installing MWS
+```
+npm install
+npm start
+```
 
-{{MWS: Installation}}
+MWS is currently [[under development at GitHub|https://github.com/TiddlyWiki/TiddlyWiki5/pull/7915]] but it is already functional and usable. Visit the MWS website for more information:
 
-! Using MWS
-
-{{MWS: Usage}}
+! https://mws.tiddlywiki.com/
