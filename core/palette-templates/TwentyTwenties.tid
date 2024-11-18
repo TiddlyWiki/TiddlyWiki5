@@ -17,6 +17,10 @@ base-secondary: rgb(236, 212, 58)
 # Tertiary base colour, used for monospaced text and other tertiary elements
 base-tertiary: rgb(135, 239, 70)
 
+# Contrast tests
+?background-foreground-contrast: [function[colour],[background]] [function[colour],[base-background]] +[colour-contrast:DeltaPhi[]compare:number:gt[25]then[ok]else[Foreground/background contrast is too low]]
+
+# Colour definitions
 alert-background: [function[colour],[base-secondary]colour-oklch:l[0.9]]
 alert-border: [function[colour],[base-secondary]colour-oklch:l[0.5]]
 alert-highlight: [function[colour],[base-primary]colour-oklch:l[0.6]]
