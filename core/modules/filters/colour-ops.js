@@ -14,15 +14,15 @@ Filter operators for colour operations
 
 var Color = require("$:/core/modules/utils/dom/color.js").Color;
 
-exports["colour-lighten"] = makeColourOperator(function (c, operator, options) {
+exports["colour-lighten"] = makeSerialColourOperator(function (c, operator, options) {
 	return c.lighten($tw.utils.parseNumber(operator.operand));
 });
 
-exports["colour-darken"] = makeColourOperator(function (c, operator, options) {
+exports["colour-darken"] = makeSerialColourOperator(function (c, operator, options) {
 	return c.darken($tw.utils.parseNumber(operator.operand));
 });
 
-exports["colour-oklch"] = makeColourOperator(function (c, operator, options) {
+exports["colour-oklch"] = makeSerialColourOperator(function (c, operator, options) {
 	var prop = ((operator.suffixes || [])[0] || ["l"])[0];
 	if(["l","c","h"].indexOf(prop) !== -1) {
 		c.oklch[prop] = $tw.utils.parseNumber(operator.operand);
@@ -30,7 +30,21 @@ exports["colour-oklch"] = makeColourOperator(function (c, operator, options) {
 	return c;
 });
 
-function makeColourOperator(fn) {
+exports["colour-contrast"] = makeParallelColourOperator(function (colours, operator, options) {
+	var colourContrasts = [];
+	$tw.utils.each(colours,function(colour,index) {
+		if(!colour) {
+			colour = $tw.utils.parseCSSColorObject("white");
+			colours[index] = colour;
+		}
+		if(index > 0) {
+			colourContrasts.push(colour.contrast(colours[index - 1],"DeltaPhi").toString());
+		}
+	});
+	return colourContrasts;
+});
+
+function makeSerialColourOperator(fn) {
 	return function (source, operator, options) {
 		var results = [];
 		source(function (tiddler, title) {
@@ -43,6 +57,16 @@ function makeColourOperator(fn) {
 			}
 		});
 		return results;
+	};
+}
+
+function makeParallelColourOperator(fn) {
+	return function (source, operator, options) {
+		var colours = [];
+		source(function (tiddler, title) {
+			colours.push($tw.utils.parseCSSColorObject(title));
+		});
+		return fn(colours, operator, options);
 	};
 }
 
