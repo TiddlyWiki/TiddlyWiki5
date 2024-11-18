@@ -130,18 +130,24 @@ type: text/vnd.tiddlywiki
 	}
 }
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
-
-	.tc-flex-columns {
-		display: flex;
-		gap: 1em;
-	}
-
-	.tc-flex-columns.tc-flex-columns-2 > div {
-		width: 50%;
-	}
-
+.tc-grid-columns {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(25em, 1fr));
+	gap: 1em;
+	width: 100%; /* Ensures container stretches fully */
 }
+
+.tc-grid-columns.tc-grid-columns-2 > div {
+	border-radius: 1em;
+	padding: 1em;
+	background-color: <<colour alert-background>>;
+}
+
+.tc-grid-columns.tc-grid-columns-2 > div:nth-child(odd) {
+	color: <<colour diff-delete-foreground>>;
+	background-color: <<colour diff-delete-background>>;
+}
+
 
 .tc-saving-sidebar-category { margin-bottom:10px; }
 .tc-saving-sidebar-category-title { margin-bottom:5px; font-weight:bold; }
