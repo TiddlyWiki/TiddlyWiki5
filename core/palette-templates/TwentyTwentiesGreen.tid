@@ -7,4 +7,5 @@ color-scheme: light
 palette-type: modern
 palette-import: $:/palettes/TwentyTwenties
 
-primary: #6e803c
+base-background: rgb(188, 255, 161)
+base-primary: #6e803c
