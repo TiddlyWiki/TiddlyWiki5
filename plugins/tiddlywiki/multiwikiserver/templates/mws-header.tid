@@ -8,8 +8,14 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 			<div class="mws-admin-dropdown">
 				<button class="mws-admin-dropbtn">⚙️</button>
 				<div class="mws-admin-dropdown-content">
-					<a href="/admin/users">Manage Users</a>
-					<a href="/admin/roles">Manage Roles</a>
+					<form action="/admin/users" method="get" class="mws-admin-form">
+						<input type="hidden" name="q" value="*" />
+						<input type="submit" value="Manage Users" class="mws-admin-form-button"/>
+					</form>
+					<form action="/admin/roles" method="get" class="mws-admin-form">
+						<input type="hidden" name="q" value="*" />
+						<input type="submit" value="Manage Roles" class="mws-admin-form-button"/>
+					</form>
 					<form action="/admin/anon" method="post" class="mws-admin-form">
 						<input type="submit" value="Reconfigure Anonymous Access" class="mws-admin-form-button"/>
 					</form>
