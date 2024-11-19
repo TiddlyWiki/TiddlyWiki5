@@ -24,3 +24,5 @@ title: $:/snippets/paletteswitcher
 		</$list>
 	</div>
 </$linkcatcher>
+
+{{$:/snippets/palettetests}}

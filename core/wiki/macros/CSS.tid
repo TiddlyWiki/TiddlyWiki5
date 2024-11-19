@@ -2,6 +2,8 @@ title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
 \procedure actions-compile-palette-filtered(tempPalette,outputTitle)
+<!-- Note the join, needed to cope with palette entries containing spaces -->
+\function colour(name) [<tv-palette-name>getindex<name>] :else[<tv-palette-name>get[palette-import]getindex<name>] :map[subfilter<currentTiddler>join[ ]]
 <!-- Make the colour function use the input palette -->
 <$let
 	tv-palette-name=<<tempPalette>>
@@ -76,6 +78,10 @@ tags: $:/tags/Macro
 \function color(name)
 [function[colour],<name>]
 \end color
+
+\function tf.check-colour-contrast(paletteEntryA,paletteEntryB,threshold)
+[function[colour],<paletteEntryA>] [function[colour],<paletteEntryB>] +[colour-contrast:DeltaPhi[]compare:number:gt<threshold>then[ok]] :else[<paletteEntryA>addsuffix[/]addsuffix<paletteEntryB>addsuffix[ contrast is too low]]
+\end tf.check-colour-contrast
 
 \define box-shadow(shadow)
 ``

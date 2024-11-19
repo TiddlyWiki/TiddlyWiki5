@@ -18,7 +18,9 @@ base-secondary: rgb(236, 212, 58)
 base-tertiary: rgb(135, 239, 70)
 
 # Contrast tests
-?background-foreground-contrast: [function[colour],[background]] [function[colour],[base-background]] +[colour-contrast:DeltaPhi[]compare:number:gt[25]then[ok]else[Foreground/background contrast is too low]]
+?background-foreground-contrast: [tf.check-colour-contrast[background],[foreground],[125]]
+?alert-contrast: [tf.check-colour-contrast[alert-background],[foreground],[25]]
+?code-contrast: [tf.check-colour-contrast[code-background],[code-foreground],[25]]
 
 # Colour definitions
 alert-background: [function[colour],[base-secondary]colour-oklch:l[0.9]]
