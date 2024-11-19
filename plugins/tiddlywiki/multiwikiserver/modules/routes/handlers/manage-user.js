@@ -86,6 +86,7 @@ exports.handler = function(request,response,state) {
 			"user-initials": user.username.split(" ").map(name => name[0]).join(""),
 			"user-role": JSON.stringify(userRole),
 			"all-roles": JSON.stringify(allRoles),
+			"first-guest-user": state.firstGuestUser ? "yes" : "no",
 			"is-current-user-profile": state.authenticatedUser && state.authenticatedUser.user_id === $tw.utils.parseInt(user_id, 10) ? "yes" : "no",
 			"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Annonymous User" : "Guest",
 			"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no",

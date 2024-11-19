@@ -78,6 +78,12 @@ exports.handler = function(request, response, state) {
     response.end();
     return;
   } else {
+    // assign role to user
+    const roles = sqlTiddlerDatabase.listRoles();
+    const roleId = roles.find(role => role.role_name.toUpperCase() !== "ADMIN")?.role_id;
+    if (roleId) {
+      sqlTiddlerDatabase.addRoleToUser(userId, roleId);
+    }
     response.writeHead(302, {"Location": "/admin/users/"+userId});
     response.end();
   }

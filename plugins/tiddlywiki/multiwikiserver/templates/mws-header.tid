@@ -1,7 +1,13 @@
 title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 
 <div class="mws-header">
-	<h1><$text text=<<page-title>>/></h1>
+	<h1>
+	<a href="/">
+		<span class="mws-logo">🏠</span>
+	</a>
+	<span class="divider">|</span>
+	<$text text=<<page-title>>/>
+	</h1>
 	<div class="mws-user-info">
 		<span>Hello, <$text text=<<username>>/></span>
 		<% if [<user-is-admin>match[yes]] %>
@@ -16,9 +22,11 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 				</div>
 			</div>
 		<% elseif [<username>!match[Guest]]+[<first-guest-user>match[no]] %>
-			<a href={{{ [<user>jsonget[user_id]addprefix[/admin/users/]] }}}>
-				<button class="mws-profile-btn">Profile</button>
-			</a>
+			<$set name="userId" value={{{ [<user>jsonget[user_id]] }}}>
+				<a href={{{ [<userId>addprefix[/admin/users/]] }}}>
+					<button class="mws-profile-btn">Profile</button>
+				</a>
+			</$set>
 		<% endif %>
 		<form action="/logout" method="post" class="mws-logout-form">
 			<input type="submit" value="Logout" class="mws-logout-button"/>
@@ -34,6 +42,17 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 	padding: 10px;
 	background-color: #f0f0f0;
 	margin-bottom: 20px;
+}
+
+.mws-header h1 {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.mws-header h1 .divider {
+	font-size: 16px;
+	color: #ccc;
 }
 
 .mws-user-info {
@@ -125,5 +144,9 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 
 .mws-admin-form-button:hover {
 	background-color: #ddd;
+}
+
+.mws-logo {
+	font-size: 24px;
 }
 </style>

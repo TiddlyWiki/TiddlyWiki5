@@ -45,6 +45,7 @@ exports.handler = function(request,response,state) {
 				"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no",
 				"first-guest-user": state.firstGuestUser ? "yes" : "no",
 				"show-annon-config": state.showAnonConfig ? "yes" : "no",
+				"user": JSON.stringify(state.authenticatedUser),
 			}});
 		response.write(html);
 		response.end();
