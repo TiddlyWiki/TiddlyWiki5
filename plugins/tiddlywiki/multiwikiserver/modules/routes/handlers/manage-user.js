@@ -23,7 +23,7 @@ exports.handler = function(request,response,state) {
 	// Clean up any existing error/success messages if the user_id is different from the "$:/temp/mws/user-info/preview-user-id"
 	var lastPreviewedUser = $tw.wiki.getTiddlerText("$:/temp/mws/user-info/" + user_id + "/preview-user-id");
 
-	if(user_id !== lastPreviewedUser) {
+	if(user_id !== lastPreviewedUser || request.url.includes("preview")) {
 		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + user_id + "/	error");
 		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + user_id + "/success");
 		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/login/error");
