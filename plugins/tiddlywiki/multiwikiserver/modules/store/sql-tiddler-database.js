@@ -137,7 +137,9 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 		CREATE TABLE IF NOT EXISTS recipes (
 			recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
 			recipe_name TEXT UNIQUE NOT NULL,
-			description TEXT NOT NULL
+			description TEXT NOT NULL,
+			owner_id INTEGER,
+			FOREIGN KEY (owner_id) REFERENCES users(user_id)
 		)
 	`,`
 		-- ...and recipes also have an ordered list of bags
@@ -260,7 +262,7 @@ SqlTiddlerDatabase.prototype.listRecipes = function() {
 Create or update a recipe
 Returns the recipe_id of the recipe
 */
-SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,description) {
+SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,description,owner_id) {
 	// Run the queries
 	this.engine.runStatement(`
 		-- Delete existing recipe_bags entries for this recipe
@@ -270,11 +272,12 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,descr
 	});
 	const updateRecipes = this.engine.runStatement(`
 		-- Create the entry in the recipes table if required
-		INSERT OR REPLACE INTO recipes (recipe_name, description)
-		VALUES ($recipe_name, $description)
+		INSERT OR REPLACE INTO recipes (recipe_name, description, owner_id)
+		VALUES ($recipe_name, $description, $owner_id)
 	`,{
 		$recipe_name: recipe_name,
-		$description: description
+		$description: description,
+		$owner_id: owner_id
 	});
 	this.engine.runStatement(`
 		INSERT INTO recipe_bags (recipe_id, bag_id, position)
@@ -486,6 +489,18 @@ SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipe_name) {
 Checks if a user has permission to access a recipe
 */
 SqlTiddlerDatabase.prototype.hasRecipePermission = function(userId, recipeName, permissionName) {
+	// check if the user is the owner of the entity
+	const recipe = this.engine.runStatementGet(`
+		SELECT owner_id 
+		FROM recipes 
+		WHERE recipe_name = $recipe_name
+		`, {
+			$recipe_name: recipeName
+		});
+
+	if(recipe?.owner_id) {
+		return recipe.owner_id === userId;
+	}
 	return this.checkACLPermission(userId, "recipe", recipeName, permissionName)
 };
 
@@ -556,7 +571,7 @@ SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, e
 		$permission_id: aclRecord.permission_id
 	});
 	
-	const hasPermission = result !== undefined;
+	let hasPermission = result !== undefined;
 
 	return hasPermission;
 };

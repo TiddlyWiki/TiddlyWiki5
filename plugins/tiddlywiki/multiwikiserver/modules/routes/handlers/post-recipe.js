@@ -32,7 +32,7 @@ exports.entityName = "recipe"
 
 exports.handler = function(request,response,state) {
 	if(state.data.recipe_name && state.data.bag_names) {
-		const result = $tw.mws.store.createRecipe(state.data.recipe_name,$tw.utils.parseStringArray(state.data.bag_names),state.data.description);
+		const result = $tw.mws.store.createRecipe(state.data.recipe_name,$tw.utils.parseStringArray(state.data.bag_names),state.data.description,state.authenticatedUser?.user_id);
 		if(!result) {
 			state.sendResponse(302,{
 				"Content-Type": "text/plain",
