@@ -23,7 +23,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-users
 			<$list filter="[<user-list>jsonindexes[]]" variable="user-index">
 				<$let currentUser={{{ [<user-list>jsonextract<user-index>] }}}>
 					<$set name="user-id" value={{{ [<currentUser>jsonget[user_id]] }}}>
-						<a href={{{ [[/admin/users/]addsuffix<user-id>] }}} class="user-item">
+						<a href={{{ [[/admin/users/]addsuffix<user-id>addsuffix[?q=preview]] }}} class="user-item">
 							<div class="user-info">
 								<span class="user-name">
 									<$text text={{{ [<currentUser>jsonget[username]] }}}/>
