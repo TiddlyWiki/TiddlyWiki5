@@ -133,6 +133,7 @@ Excise/Caption/Replace/Transclusion: Transklusion
 Excise/Caption/Tag: Tagge den neuen Tiddler mit dem Titel des aktuellen Tiddlers
 Excise/Caption/TiddlerExists: Warnung: Tiddler existiert bereits!
 Excise/Hint: Verschiebe den ausgewählten Text in einen neuen Tiddler
+Excise/DefaultTitle: Neuen "Text Verschieben"
 Heading1/Caption: Überschrift 1
 Heading1/Hint: Überschrift 1 auf die Zeilen anwenden, die eine Auswahl enthalten
 Heading2/Caption: Überschrift 2
