@@ -1,0 +1,15 @@
+title: Database Engines
+tags: Reference
+
+MWS uses [[SQLite]] for data storage. It supports choosing between two "database engines" that are based on two different npm modules:
+
+* [[better-sqlite3|https://www.npmjs.com/package/better-sqlite3]] is written partially in C/C++ and so requires compilation for the target platform
+* [[node-sqlite3-wasm|https://www.npmjs.com/package/node-sqlite3-wasm]] is written entirely in JavaScript and does not require compilation, but does require a WebAssembly-capable Node.js host. This is not currently possible on some platforms such as iOS/iPadOS
+
+By default `npm install` will install both database engines. By default it will use `better-sqlite3`. To switch to using `node-sqlite3-wasm`, set the system configuration tiddler `$:/config/MultiWikiServer/Engine` to `wasm` (the default value is `better`). Note that this tiddler resides in the [[Administration Wiki]].
+
+!! Avoiding Installation Errors
+
+If you encounter errors during `npm install` related to `gyp` or `prebuild`, you may be able to avoid them by using `node-sqlite3-wasm` instead of `better-sqlite3`. However, it will be necessary to manually install `node-sqlite3-wasm` and its dependencies. This can be done by running the following commands in your terminal:
+
+<<.copy-code-to-clipboard "npm install node-sqlite3-wasm">>
