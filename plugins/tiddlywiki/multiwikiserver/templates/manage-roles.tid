@@ -80,6 +80,17 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-roles
 				<form method="POST" action="/admin/post-role" class="add-role-form">
 					<input name="role_name" type="text" placeholder="Role Name" required/>
 					<input name="role_description" type="text" placeholder="Role Description" required/>
+					<$list filter="[[$:/temp/mws/post-role/error]!is[missing]]" variable="errorTiddler">
+						<div class="tc-error-message">
+							<$text text={{{[<errorTiddler>get[text]]}}}/>
+						</div>
+					</$list>
+
+					<$list filter="[[$:/temp/mws/post-role/success]!is[missing]]" variable="successTiddler">
+						<div class="tc-success-message">
+							<$text text={{{[<successTiddler>get[text]]}}}/>
+						</div>
+					</$list>
 					<button type="submit" class="tc-btn-invisible btn-add">Add Role</button>
 				</form>
 			</$list>
@@ -178,6 +189,18 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-roles
 		margin-top: 0;
 		margin-bottom: 1rem;
 		color: #333;
+	}
+	
+	.tc-error-message {
+		color: red;
+		font-weight: bold;
+		margin-top: 1rem;
+	}
+
+	.tc-success-message {
+		color: green;
+		font-weight: bold;
+		margin-top: 1rem;
 	}
 	@media (max-width: 768px) {
 		.roles-container {

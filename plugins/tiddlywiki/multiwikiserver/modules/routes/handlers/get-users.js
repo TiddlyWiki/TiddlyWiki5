@@ -18,6 +18,10 @@ exports.path = /^\/admin\/users$/;
 
 exports.handler = function(request,response,state) {
 	var userList = state.server.sqlTiddlerDatabase.listUsers();
+	if (request.url.includes("*")) {
+		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/error");
+		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");
+	}
 
 	// Ensure userList is an array
 	if (!Array.isArray(userList)) {

@@ -30,62 +30,103 @@ exports.handler = function(request, response, state) {
   var confirmPassword = state.data.confirmPassword;
 
   if(!state.authenticatedUser && !state.firstGuestUser) {
-    response.writeHead(401, "Unauthorized", { "Content-Type": "text/plain" });
-    response.end("Unauthorized");
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/post-user/error",
+      text: "Unauthorized access"
+    }));
+    response.writeHead(302, { "Location": "/login" });
+    response.end();
     return;
   }
 
   if(!username || !email || !password || !confirmPassword) {
-    response.writeHead(400, {"Content-Type": "application/json"});
-    response.end(JSON.stringify({error: "All fields are required"}));
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/post-user/error",
+      text: "All fields are required"
+    }));
+    response.writeHead(302, { "Location": "/admin/users" });
+    response.end();
     return;
   }
 
   if(password !== confirmPassword) {
-    response.writeHead(400, {"Content-Type": "application/json"});
-    response.end(JSON.stringify({error: "Passwords do not match"}));
-    return;
-  }
-
-  // Check if user already exists
-  var existingUser = sqlTiddlerDatabase.getUser(username);
-  if(existingUser) {
-    response.writeHead(400, {"Content-Type": "application/json"});
-    response.end(JSON.stringify({error: "Username already exists"}));
-    return;
-  }
-
-  var hasUsers = sqlTiddlerDatabase.listUsers().length > 0;
-	var hashedPassword = crypto.createHash("sha256").update(password).digest("hex");
-
-  // Create new user
-  var userId = sqlTiddlerDatabase.createUser(username, email, hashedPassword);
-
-  if(!hasUsers) {
-    // If this is the first guest user, assign admin privileges
-    sqlTiddlerDatabase.setUserAdmin(userId, true);
-    
-    // Create a session for the new admin user
-    var auth = require('$:/plugins/tiddlywiki/multiwikiserver/auth/authentication.js').Authenticator;
-    var authenticator = auth(sqlTiddlerDatabase);
-    var sessionId = authenticator.createSession(userId);
-    
-    // Set the session cookie and redirect
-    response.setHeader('Set-Cookie', `session=${sessionId}; HttpOnly; Path=/`);
-    response.writeHead(302, {
-        'Location': '/'
-    });
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/post-user/error",
+      text: "Passwords do not match"
+    }));
+    response.writeHead(302, { "Location": "/admin/users" });
     response.end();
     return;
-  } else {
-    // assign role to user
-    const roles = sqlTiddlerDatabase.listRoles();
-    const roleId = roles.find(role => role.role_name.toUpperCase() !== "ADMIN")?.role_id;
-    if (roleId) {
-      sqlTiddlerDatabase.addRoleToUser(userId, roleId);
+  }
+
+  try {
+    // Check if user already exists
+    var existingUser = sqlTiddlerDatabase.getUser(username);
+    if(existingUser) {
+      $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+        title: "$:/temp/mws/post-user/error",
+        text: "Username already exists"
+      }));
+      response.writeHead(302, { "Location": "/admin/users" });
+      response.end();
+      return;
     }
-    response.writeHead(302, {"Location": "/admin/users/"+userId});
+
+    var hasUsers = sqlTiddlerDatabase.listUsers().length > 0;
+    var hashedPassword = crypto.createHash("sha256").update(password).digest("hex");
+
+    // Create new user
+    var userId = sqlTiddlerDatabase.createUser(username, email, hashedPassword);
+
+    if(!hasUsers) {
+      try {
+        // If this is the first guest user, assign admin privileges
+        sqlTiddlerDatabase.setUserAdmin(userId, true);
+        
+        // Create a session for the new admin user
+        var auth = require('$:/plugins/tiddlywiki/multiwikiserver/auth/authentication.js').Authenticator;
+        var authenticator = auth(sqlTiddlerDatabase);
+        var sessionId = authenticator.createSession(userId);
+        
+        $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+          title: "$:/temp/mws/post-user/success",
+          text: "Admin user created successfully"
+        }));
+        response.setHeader('Set-Cookie', `session=${sessionId}; HttpOnly; Path=/`);
+        response.writeHead(302, {'Location': '/'});
+        response.end();
+        return;
+      } catch (adminError) {
+        $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+          title: "$:/temp/mws/post-user/error",
+          text: "Error creating admin user"
+        }));
+        response.writeHead(302, { "Location": "/admin/users" });
+        response.end();
+        return;
+      }
+    } else {
+      $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+        title: "$:/temp/mws/post-user/success",
+        text: "User created successfully"
+      }));
+      // assign role to user
+      const roles = sqlTiddlerDatabase.listRoles();
+      const roleId = roles.find(role => role.role_name.toUpperCase() !== "ADMIN")?.role_id;
+      if (roleId) {
+        sqlTiddlerDatabase.addRoleToUser(userId, roleId);
+      }
+      response.writeHead(302, {"Location": "/admin/users/"+userId});
+      response.end();
+    }
+  } catch (error) {
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/post-user/error",
+      text: "Error creating user: " + error.message
+    }));
+    response.writeHead(302, { "Location": "/admin/users" });
     response.end();
+    return;
   }
 };
 
