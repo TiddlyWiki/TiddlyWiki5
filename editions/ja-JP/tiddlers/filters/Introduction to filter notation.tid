@@ -1,0 +1,97 @@
+created: 20140410101941871
+modified: 20241016110639693
+original-modified: 20201103111438568
+tags: Learning Filters
+title: Introduction to filter notation
+ja-title: フィルタ表記の紹介
+type: text/vnd.tiddlywiki
+
+<<.preamble """ここでは、Tiddlerのセットを選択する[[フィルタ|Filters]]の書き方の基本を説明しています。より技術的なプレゼンテーションについては、[[フィルタのシンタックス|Filter Syntax]]を参照してください""">>
+
+<$macrocall $name=".tip" _="""フィルタを単独でTiddlerに入力するだけでは、フィルタは何も行いません。コンテキストが必要です。フィルタを試す簡単な方法は、[[詳細検索|$:/AdvancedSearch]]の<<.advancedsearch-tab Filter>>タブにフィルタを入力することです"""/>
+
+最も単純なケースは、どのTiddlerが必要かすでに正確にわかっている場合です。各タイトルを二重角括弧で囲み、各タイトルと次のタイトルの間にスペースを入れて入力します:
+
+> `[[Recipe book]] [[ScrambledEggs]] [[Mom's apple pie]]`
+
+タイトルにスペースが含まれていない場合は、角括弧を省略できます:
+
+> `[[Recipe book]] ScrambledEggs [[Mom's apple pie]]`
+
+二重角括弧は実際には次の表記の短縮形です:
+
+> `[title[ScrambledEggs]]`
+
+... 任意のフィルタの<<.def "一般的なモデル">>は次のようになります:
+
+> `[operator[parameter]]`
+
+例えば、<<.tag Recipe>>でタグ付けされたすべてのTiddlerを選択する方法は次のとおりです:
+
+> `[tag[Recipe]]`
+
+演算子の直前に感嘆符`!`を追加すると、意味を逆にすることができます。例えば、<<.tag Recipe>>タグのない任意のTiddlerを選択できます:
+
+> `[!tag[Recipe]]`
+
+Tiddlerは、タイトルとタグ以外の他のフィールドでもフィルタリングできます:
+
+> `[field:serving[4]]`
+
+この例では、<<.field serving>>フィールドに、<<.value 4>>を持つすべてのTiddlerを選択します:
+
+"serving"という単語は標準のフィルタ演算子ではない(また、標準のフィルタ演算子になる可能性も低い)ため、`field:`接頭辞を省略しても安全です:
+
+> `[serving[4]]`
+
+!組み合わせ
+
+これまで見てきたフィルタには、それぞれ1つのステップしか含まれていません。でも、次のように複数のステップを一緒に<<.def ラン>>できます:
+
+> `[tag[Vegetarian]!tag[soup]serving[4]]`
+
+1組の角括弧内にラン全体がどのように含まれているかに注目してください
+
+Tiddlerはランの中で<<.em すべて>>のステップを一致させなければなりません。したがって、上の例では、4人分のベジタリアンレシピ(スープ以外)を取得します
+
+一連の個別のランにより、<<.em いずれか>>のランに一致するTiddlerが選択されます。これを使用して、3人分、または、4人分、5人分のレシピを見つけることができます:
+
+> `[serving[3]] [serving[4]] [serving[5]]`
+
+4人分のベジタリアンレシピを無視したい場合は、次のように言えます:
+
+> `[serving[3]] [serving[4]!tag[Vegetarian]] [serving[5]]`
+
+デフォルトでは、各ランではWiki内のすべてのTiddlerが考慮されます。ただし、`+`記号を使用して、前の実行で選択されたTiddlerのみを考慮するようにランを強制することができます:
+
+> `[serving[3]] [serving[4]] [serving[5]] +[tag[Vegetarian]] +[sort[title]]`
+
+これにより、3人分、または、4人分、5人分のレシピが選択され、次に<<.em それら>>がフィルタリングされてベジタリアンレシピのみが残り、最後に残ったレシピがタイトルのアルファベット順に並べ替えられます
+
+同様の方法で、`-`符号を使用して、これまでの結果からランのTiddlerを<<.em 除外>>できます。次の表記では、2つを除くすべてのベジタリアンレシピを選択します:
+
+> `[tag[Vegetarian]] -[title[ScrambledEggs]] -BeansOnToast`
+
+!スペシャルパラメータ
+
+これまで見てきた各ステップのパラメータは角括弧内にあります。これは、~TiddlyWikiが括弧内にある正確な文字列をフィルターすることを意味します。でも、他に2種類の括弧も使用できます:
+
+<<.def "中括弧">>`{}`はパラメータはTextReferenceであり、別のTiddlerのコンテンツに置き換えられることを意味します。例えば、タイトルが<<.tid Preference>>であり、その内容が1つの単語<<.value Vegetarian>>であるTiddlerの場合、次のように言えます:
+
+> `[tag{Preference}]`
+
+この単純な形式では、TextReferenceはTiddlerの完全な内容(技術用語では、Tiddlerのテキストフィールド)を取得し、TextReferenceの代わりにそれを置き換えます。こうすることで、`[tag[Vegetarian]]`を記述した場合と同様に、Tiddlerの内容がフィルタパラメータになります。違いは、Preference Tiddlerの内容を変更することで、パラメータを変更する柔軟性が高まります
+
+<<.def "山括弧">>`<>`は、パラメータが[[変数|Variables]]の名前であり、その値が代わりに使用されることを意味します。現在のタイトルをテキストに含むTiddlerを選択するフィルターとして、<<.vlink currentTiddler>>組込み変数を使用します:
+
+山括弧は、パラメータが[[変数|Variables]]の名前であり、その値が代わりに使用されることを意味します。ここでは、テキストに現在のタイトルが含まれるTiddlerを選択するフィルタで、組込み変数<<.vlink currentTiddler>>を使用します:
+
+> `[search<currentTiddler>]`
+
+これらの特殊な括弧はネストできないことに注意してください。例えば、`[search{<currentTiddler>}]`と書くことはできません
+
+!複数のパラメータ
+
+<<.from-version "5.1.23">>一部のステップは、` , `文字で区切られた複数のパラメータを受け入れます
+
+> Example: `[param1],[param2]` or `<param1>,{param2}`

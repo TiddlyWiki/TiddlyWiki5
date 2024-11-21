@@ -1,6 +1,6 @@
 caption: HTML
 created: 20131205160816081
-modified: 20230615060119987
+modified: 20241025073517909
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -68,13 +68,13 @@ In an extension of conventional HTML syntax, attributes of elements and widgets 
 
 !! Style Attributes
 
-<<.from-version "5.2.2">> TiddlyWiki supports the usual HTML ''style'' attribute for assigning CSS styles to elements:
+TiddlyWiki supports the usual HTML ''style'' attribute for assigning CSS styles to elements:
 
 ```
 <div style="color:red;">Hello</div>
 ```
 
-In an extension to HTML, TiddlyWiki also supports accessing individual CSS styles as independent attributes. For example:
+<<.from-version "5.2.2">> In an extension to HTML, TiddlyWiki also supports accessing individual CSS styles as independent attributes. For example:
 
 ```
 <div style.color="red">Hello</div>
@@ -86,10 +86,8 @@ The advantage of this syntax is that it simplifies assigning computed values to 
 <div style.color={{!!color}}>Hello</div>
 ```
 
+<<.from-version "5.3.6">> TiddlyWiki also supports setting [[CSS custom properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties]] as independent attributes. For example:
 
-
-
-
-
-
-
+```
+<div --bg-color={{{ [[red]] }}}>Hello</div>
+```

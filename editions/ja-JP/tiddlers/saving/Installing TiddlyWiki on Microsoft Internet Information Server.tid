@@ -1,0 +1,70 @@
+caption: インターネットインフォメーションサービス
+color: #F06292
+created: 20180328120356008
+delivery: DIY
+description: Windows組み込みのWebサーバー
+method: sync
+modified: 20241012111541912
+original-modified: 20200507105855400
+tags: Saving [[TiddlyWiki on Node.js]] Windows
+title: Installing TiddlyWiki on Microsoft Internet Information Server
+ja-title: Microsoft インターネットインフォメーションサービスにTiddlyWikiをインストールする
+type: text/vnd.tiddlywiki
+
+\define example-file(title)
+<$transclude tiddler="$title$" mode="block"/> <$macrocall $name="copy-to-clipboard" src={{$title$}}/>
+\end
+
+Microsoftの[[インターネットインフォメーションサーバー|https://en.wikipedia.org/wiki/Internet_Information_Services]](IIS)は、Windowsに組み込まれているWebサーバーです。URLの書き換え、静的ファイルのホスティング、クラッシュ後の自動再起動などのIIS機能を利用するには、TiddlyWikiをIIS内でホストすると便利です。
+
+! 1. IISを有効にします
+
+# Windowsで、コントロールパネルにアクセスし、''プログラムの追加と削除''をクリックします
+# プログラムの追加と削除ウィンドウで、''Windowsコンポーネントの追加と削除''をクリックします
+# ''インターネット インフォメーション サービス（IIS）''のチェックボックスをオンにします
+# ''次へ''をクリックし、''完了''をクリックします
+
+! 2. 必要なツールをインストールします
+
+# https://www.iis.net/downloads/microsoft/httpplatformhandlerからIISモジュール~HttpPlatformHandlerをインストールします
+# https://nodejs.org/から[[Node.js]]をインストールします
+# https://git-scm.com/からGitをインストールします
+#* //オプション: 最新のTiddlyWikiリリースを使用するために~GitHubから直接取得する場合に必要です -- 以下を参照してください//
+
+! 3. TiddlyWikiをインストールして新しいWikiを設定します
+
+# Wiki用に使用するディレクトリを作成します (例: `C:\MyStuff`)
+# その中に、次の内容の`C:\MyStuff\package.json`ファイルを作成します:
+#> <<example-file "Example package.json for IIS">>
+# また、次の内容の`C:\MyStuff\web.config`ファイルを作成します:
+#> <<example-file "Example web.config for IIS">>
+# "wiki"というサブディレクトリを作成します (つまり、`C:\MyStuff\wiki`)
+# 次の内容の`C:\MyStuff\wiki\tiddlywiki.info`ファイルを作成します: 
+#> <<example-file "Example tiddlywiki.info for IIS">>
+# "tiddlers"というサブディレクトリを作成します (つまり、`C:\MyStuff\wiki\tiddlers`)
+# その中に、次の内容の`C:\MyStuff\wiki\tiddlers\config-tiddlyweb-host.tid`ファイルを作成します: 
+#> <<example-file "Example config-tiddlyweb-host for IIS">>
+#* （~HttpPlatformHandlerの設定フィールドの詳細については[[ドキュメント|https://docs.microsoft.com/en-us/iis/extensions/httpplatformhandler/httpplatformhandler-configuration-reference]]を参照してください
+# `C:/MyStuff`ディレクトリ内で、`npm install`コマンドを実行します
+
+! 4. IISでアプリケーションをセットアップします
+
+* Windowsで、IISマネージャーアプリケーションを実行します (`inetmgr.exe`を実行するためにスタートメニューを使用します）
+* 左側の''接続''でサーバーを探し、三角形をクリックして展開し、その内容を表示します
+* ''サイト''フォルダを開きます
+* ''Default Web Site''のエントリを右クリックし、メニューから''アプリケーションの追加''を選択します
+* ダイアログボックスに次の情報を入力します:
+*# ''エイリアス'': `MyApp`
+*# ''物理パス'': `C:\MyStuff`
+* ''OK''をクリックします
+
+! 5. アプリケーションをテストする
+
+ブラウザで http://localhost/MyApp/ にアクセスしてアプリをテストします。
+
+! 注意
+
+* 認証が必要な場合は、`web.config`内の`--listen`コマンドでユーザー名とパスワードを指定します。例: 
+** `arguments=".\node_modules\tiddlywiki\tiddlywiki.js ./wiki-server --listen username=joe &quot;password=bloggs&quot; port=PORT path-prefix=/MyApp">`
+** 英数字以外のパスワードは二重引用符で囲み、`&quot;`へHTMLエンコードする必要があることに注意してください
+* `web.config`ファイル内の設定を変更したり、アプリコードを修正したりした場合は、IISマネージャーアプリケーションを使用してサーバーを再起動する必要があります。

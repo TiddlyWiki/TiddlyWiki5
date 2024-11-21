@@ -6,8 +6,6 @@ module-type: library
 AWS utility functions
 
 \*/
-(function(){
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -72,5 +70,3 @@ function putFile(region,bucketName,title,text,type,callback) {
 
 exports.putFile = putFile;
 exports.getFile = getFile;
-
-})();
