@@ -25,7 +25,7 @@ exports.handler = function (request, response, state) {
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		data = $tw.utils.parseJSONSafe(state.data);
 	if(recipe_name && data) {
-		var result = $tw.mws.store.createRecipe(recipe_name, data.bag_names, data.description, state.authenticatedUser?.user_id);
+		var result = $tw.mws.store.createRecipe(recipe_name, data.bag_names, data.description);
 		if(!result) {
 			state.sendResponse(204, {
 				"Content-Type": "text/plain"

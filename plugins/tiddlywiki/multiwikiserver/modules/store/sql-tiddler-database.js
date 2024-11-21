@@ -262,7 +262,7 @@ SqlTiddlerDatabase.prototype.listRecipes = function() {
 Create or update a recipe
 Returns the recipe_id of the recipe
 */
-SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,description,owner_id) {
+SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,description) {
 	// Run the queries
 	this.engine.runStatement(`
 		-- Delete existing recipe_bags entries for this recipe
@@ -272,12 +272,11 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,descr
 	});
 	const updateRecipes = this.engine.runStatement(`
 		-- Create the entry in the recipes table if required
-		INSERT OR REPLACE INTO recipes (recipe_name, description, owner_id)
-		VALUES ($recipe_name, $description, $owner_id)
+		INSERT OR REPLACE INTO recipes (recipe_name, description)
+		VALUES ($recipe_name, $description)
 	`,{
 		$recipe_name: recipe_name,
-		$description: description,
-		$owner_id: owner_id
+		$description: description
 	});
 	this.engine.runStatement(`
 		INSERT INTO recipe_bags (recipe_id, bag_id, position)
@@ -292,6 +291,18 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,descr
 	});
 
 	return updateRecipes.lastInsertRowid;
+};
+
+/*
+Assign a recipe to a user
+*/
+SqlTiddlerDatabase.prototype.assignRecipeToUser = function(recipe_name,user_id) {
+	this.engine.runStatement(`
+		UPDATE recipes SET owner_id = $user_id WHERE recipe_name = $recipe_name
+	`,{
+		$recipe_name: recipe_name,
+		$user_id: user_id
+	});
 };
 
 /*
@@ -591,6 +602,19 @@ SqlTiddlerDatabase.prototype.getEntityAclRecords = function(entityName) {
 	});
 
 	return aclRecords
+}
+
+/*
+Get the entity by name
+*/
+SqlTiddlerDatabase.prototype.getEntityByName = function(entityType, entityName) {
+	const entityInfo = this.entityTypeToTableMap[entityType];
+	if (entityInfo) {
+	return this.engine.runStatementGet(`SELECT * FROM ${entityInfo.table} WHERE ${entityInfo.column} = $entity_name`, {
+		$entity_name: entityName
+		});
+	}
+	return null;
 }
 
 /*
