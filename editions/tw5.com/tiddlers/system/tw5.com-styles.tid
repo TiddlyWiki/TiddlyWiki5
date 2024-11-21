@@ -1,5 +1,5 @@
 created: 20200507002727378
-modified: 20220719132112414
+modified: 20241121163155272
 tags: $:/tags/Stylesheet
 title: $:/_tw5.com-styles
 type: text/vnd.tiddlywiki
@@ -140,10 +140,11 @@ type: text/vnd.tiddlywiki
 .tc-grid-columns.tc-grid-columns-2 > div {
 	border-radius: 1em;
 	padding: 1em;
-	background-color: <<colour alert-background>>;
+	color: <<colour diff-insert-foreground>>;
+	background-color: <<colour diff-insert-background>>;
 }
 
-.tc-grid-columns.tc-grid-columns-2 > div:nth-child(odd) {
+.tc-grid-columns.tc-grid-columns-2 > div:nth-child(even) {
 	color: <<colour diff-delete-foreground>>;
 	background-color: <<colour diff-delete-background>>;
 }
