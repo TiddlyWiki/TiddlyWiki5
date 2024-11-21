@@ -48,32 +48,43 @@ exports.middleware = function (request, response, state, entityType, permissionN
 	var aclRecord = sqlTiddlerDatabase.getACLByName(entityType, decodedEntityName);
 	var isGetRequest = request.method === "GET";
 	var hasAnonymousAccess = isGetRequest ? state.allowAnonReads : state.allowAnonWrites;
-	// Get permission record
-	const permission = sqlTiddlerDatabase.getPermissionByName(permissionName);
-	// ACL Middleware will only apply if the entity has a middleware record
-	if(aclRecord && aclRecord?.permission_id === permission?.permission_id) {
-		// If not authenticated and anonymous access is not allowed, request authentication
-		if(!state.authenticatedUsername && !state.allowAnon) {
-			if(state.urlInfo.pathname !== '/login') {
-				redirectToLogin(response, request.url);
-				return;
-			}
-		}
-		// Check if user is authenticated
-		if(!state.authenticatedUser && !hasAnonymousAccess && !response.headersSent) {
-			response.writeHead(401, "Unauthorized");
-			response.end();
-			return;
-		}
-
-		// Check ACL permission
-		var hasPermission = request.method === "POST" || sqlTiddlerDatabase.checkACLPermission(state.authenticatedUser.user_id, entityType, decodedEntityName, permissionName)
-		if(!hasPermission && !hasAnonymousAccess) {
+	var entity = sqlTiddlerDatabase.getEntityByName(entityType, decodedEntityName);
+	if(entity?.owner_id) {
+		if(state.authenticatedUser?.user_id !== entity.owner_id) {
 			if(!response.headersSent) {
 				response.writeHead(403, "Forbidden");
 				response.end();
 			}
 			return;
+		}
+	} else {
+		// Get permission record
+		const permission = sqlTiddlerDatabase.getPermissionByName(permissionName);
+		// ACL Middleware will only apply if the entity has a middleware record
+		if(aclRecord && aclRecord?.permission_id === permission?.permission_id) {
+			// If not authenticated and anonymous access is not allowed, request authentication
+			if(!state.authenticatedUsername && !state.allowAnon) {
+				if(state.urlInfo.pathname !== '/login') {
+					redirectToLogin(response, request.url);
+					return;
+				}
+			}
+			// Check if user is authenticated
+			if(!state.authenticatedUser && !hasAnonymousAccess && !response.headersSent) {
+				response.writeHead(401, "Unauthorized");
+				response.end();
+				return;
+			}
+
+			// Check ACL permission
+			var hasPermission = request.method === "POST" || sqlTiddlerDatabase.checkACLPermission(state.authenticatedUser.user_id, entityType, decodedEntityName, permissionName)
+			if(!hasPermission && !hasAnonymousAccess) {
+				if(!response.headersSent) {
+					response.writeHead(403, "Forbidden");
+					response.end();
+				}
+				return;
+			}
 		}
 	}
 };

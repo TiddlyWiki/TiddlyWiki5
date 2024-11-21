@@ -137,7 +137,9 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 		CREATE TABLE IF NOT EXISTS recipes (
 			recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
 			recipe_name TEXT UNIQUE NOT NULL,
-			description TEXT NOT NULL
+			description TEXT NOT NULL,
+			owner_id INTEGER,
+			FOREIGN KEY (owner_id) REFERENCES users(user_id)
 		)
 	`,`
 		-- ...and recipes also have an ordered list of bags
@@ -289,6 +291,18 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,descr
 	});
 
 	return updateRecipes.lastInsertRowid;
+};
+
+/*
+Assign a recipe to a user
+*/
+SqlTiddlerDatabase.prototype.assignRecipeToUser = function(recipe_name,user_id) {
+	this.engine.runStatement(`
+		UPDATE recipes SET owner_id = $user_id WHERE recipe_name = $recipe_name
+	`,{
+		$recipe_name: recipe_name,
+		$user_id: user_id
+	});
 };
 
 /*
@@ -486,6 +500,18 @@ SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipe_name) {
 Checks if a user has permission to access a recipe
 */
 SqlTiddlerDatabase.prototype.hasRecipePermission = function(userId, recipeName, permissionName) {
+	// check if the user is the owner of the entity
+	const recipe = this.engine.runStatementGet(`
+		SELECT owner_id 
+		FROM recipes 
+		WHERE recipe_name = $recipe_name
+		`, {
+			$recipe_name: recipeName
+		});
+
+	if(recipe?.owner_id) {
+		return recipe.owner_id === userId;
+	}
 	return this.checkACLPermission(userId, "recipe", recipeName, permissionName)
 };
 
@@ -556,7 +582,7 @@ SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, e
 		$permission_id: aclRecord.permission_id
 	});
 	
-	const hasPermission = result !== undefined;
+	let hasPermission = result !== undefined;
 
 	return hasPermission;
 };
@@ -576,6 +602,19 @@ SqlTiddlerDatabase.prototype.getEntityAclRecords = function(entityName) {
 	});
 
 	return aclRecords
+}
+
+/*
+Get the entity by name
+*/
+SqlTiddlerDatabase.prototype.getEntityByName = function(entityType, entityName) {
+	const entityInfo = this.entityTypeToTableMap[entityType];
+	if (entityInfo) {
+	return this.engine.runStatementGet(`SELECT * FROM ${entityInfo.table} WHERE ${entityInfo.column} = $entity_name`, {
+		$entity_name: entityName
+		});
+	}
+	return null;
 }
 
 /*
