@@ -17,7 +17,7 @@ tags: $:/tags/Macro
 <%endif%>
 <%if [<mode>match[inline]] %>
 <span class="tc-translink">
-<$link to=<<title>> class="tc-small-gap-right">
+<$link to=<<title>> class="tc-tiny-gap-right">
 <$text text=<<title>>/>
 </$link>
 (<$transclude tiddler=<<title>> mode="inline">

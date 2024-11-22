@@ -46,7 +46,7 @@ tags: $:/tags/Macro
 
 ---
 
-<$edit-text tiddler="$:/config/ColourPicker/New" tag="input" default="" placeholder="" class="tc-small-gap-right"/>
+<$edit-text tiddler="$:/config/ColourPicker/New" tag="input" default="" placeholder="" class="tc-tiny-gap-right"/>
 <$edit-text tiddler="$:/config/ColourPicker/New" type="color" tag="input"/>
 <$set name="colour-picker-value" value={{$:/config/ColourPicker/New}}>
 <%if [{$:/config/ColourPicker/New}!is[blank]] %>
