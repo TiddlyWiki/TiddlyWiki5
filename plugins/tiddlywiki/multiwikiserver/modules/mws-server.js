@@ -466,6 +466,20 @@ Server.prototype.requestHandler = function(request,response,options) {
 		return;
 	}
 
+	if (state.pathPrefix && !request.url.startsWith(state.pathPrefix)) {
+		// Prepend pathPrefix to request url
+		request.url = state.pathPrefix + request.url;
+		state.urlInfo = url.parse(request.url);
+		state.queryParameters = querystring.parse(state.urlInfo.query);
+
+		if(request.method === "GET") {
+			response.writeHead(301, {
+				'Location': request.url
+			});
+			response.end();
+			return;
+		}
+	}
 	// Find the route that matches this path
 	var route = self.findMatchingRoute(request,state);
 
