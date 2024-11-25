@@ -277,7 +277,8 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 	}
 	// Get the current value of the tiddler we're editing
 	var tiddler = this.wiki.getTiddler(targetTitle);
-	var defaultFields = { type: "text/markdown" };
+	var defaultType = this.wiki.getTiddler("$:/config/DefaultMissingType");
+	var defaultFields = { type: defaultType !== null ? defaultType.fields['text'].trim() : "" };
 	// Save the initial value of the draft tiddler
 	draftTitle = this.generateDraftTitle(targetTitle);
 	var draftTiddler = new $tw.Tiddler({
