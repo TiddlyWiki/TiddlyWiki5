@@ -99,3 +99,12 @@ When [[typographer|$:/config/markdown/typographer]] is enabled, markdown-it will
 --        → &ndash;
 ---       → &mdash;
 ```
+
+! Making Markdown the Default in TiddlyWiki
+
+!! Using Markdown for Missing Links
+
+By default, missing tiddlers are created with a blank content type, which
+implies WikiText. Setting [[$:/config/DefaultMissingType]] to `text/markdown`
+will make it so that tiddlers created from a missing tiddler link will be in
+Markdown rather than in WikiText.
