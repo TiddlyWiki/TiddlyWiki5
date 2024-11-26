@@ -102,6 +102,15 @@ When [[typographer|$:/config/markdown/typographer]] is enabled, markdown-it will
 
 ! Making Markdown the Default in TiddlyWiki
 
+!! Modifying Existing Actions
+
+Adding `type="text/markdown"` to the actions of the following buttons will
+override the default behavior.
+
+* New Journal - $:/core/ui/Actions/new-journal
+* New Tiddler Here - $:/core/ui/Buttons/new-here
+* New Tiddler - $:/core/ui/Actions/new-tiddler
+
 !! Using Markdown for Missing Links
 
 By default, missing tiddlers are created with a blank content type, which
