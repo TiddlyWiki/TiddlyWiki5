@@ -1,0 +1,25 @@
+title: MWS and SQLite
+tags: Architecture
+
+! Introduction
+
+SQLite is a very popular open source embedded SQL database with some [[unusual characteristics|https://www.sqlite.org/different.html]]. It has proved itself to be robust, fast and scalable, and has been widely adopted in a range of applications including web browsers, mobile devices, and embedded systems.
+
+The "embedded" part means that developers access SQLite as a library of C functions that run as part of a larger application. This contrasts with more familiar database applications like Microsoft's SQL Server or Oracle that are accessed as network services.
+
+MWS uses SQLite for the tiddler store and associated data. It brings many advantages:
+
+* ''Performance'': the optimising query engine inside SQLite makes it much faster and more efficient than could be achieved in plain JavaScript. In some cases, it is [[faster than writing directly to the file system||https://www.sqlite.org/fasterthanfs.html]]
+* ''Reliability'': SQLite uses protocols that [[ensure data integrity and consistency|https://www.sqlite.org/hirely.html]], even when the application crashes
+* ''Scalability'': SQLite can handle extremely [[large datasets and complex queries|https://www.sqlite.org/limits.html]]
+* ''Portability'': SQLite databases are stored as [[a single file|https://www.sqlite.org/fileformat.html]] that can be easily copied and moved between systems
+
+! Misconceptions
+
+TiddlyWiki 5 has always incorporated a database. Until MWS, that database has always been a custom tiddler database written in JavaScript. Over the years it has been enhanced and optimised with indexes and other database features that have given us reasonably decent performance for a range of common operations.
+
+In terms of the traditional architecture of TiddlyWiki, MWS uses SQLite as the basis for an internal API that is equivalent to that of the `$tw.Wiki` object: basic CRUD operations on a database of tiddlers stored by their titles.
+
+In the context of MWS, SQLite is just a fast and efficient equivalent of TiddlyWiki's existing JavaScript database engine. It gives us the option of persisting the database in file storage, but we also retain the option to run the database entirely within memory and rely on a file synchronisation process to save changes as individual `.tid` files in the file system, just as we do today.
+
+One particular misconception to avoid is the idea that SQLite replaces the folders of `.tid` files that characterise the Node.js configuration of TiddlyWiki. These are separate components with a different purpose. The tiddler files are the result of syncing a database to the filesystem, and that database can be conceptually interchanged between our custom JavaScript database or the new SQLite implementation in MWS.

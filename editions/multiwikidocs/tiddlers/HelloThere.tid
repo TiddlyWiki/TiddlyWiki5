@@ -6,10 +6,12 @@ tags: TableOfContents
 <span class="tc-float-right">[img width=200 [MWS Banner.png]]</span>
 ~MultiWikiServer is a new development that drastically improves ~TiddlyWiki's capabilities when running as a server under Node.js. It brings ~TiddlyWiki up to par with common web-based tools like ~WordPress or ~MediaWiki by supporting multiple wikis and multiple users at the same time.
 
-Planned features include:
+Features under development include:
 
 * Hosting multiple wikis at once, using the [[Bags and Recipes]] mechanism for sharing data between them
-* Robust authentication and authorisation options
+* Based on [[SQLite|MWS and SQLite]] for performance and reliability
+* Robust built-in synchronisation handlers for syncing data to the filesystem
+* Flexible authentication and authorisation options
 * Improved handling of file uploads and attachments, allowing gigabyte video files to be uploaded and streamed
 * Instantaneous synchronisation of changes between the server and all connected clients
 * Workflow processing on the server, for example to automatically compress images, or to archive webpages
