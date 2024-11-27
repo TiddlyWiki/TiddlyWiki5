@@ -1,5 +1,5 @@
 tags: [[Hidden Settings]]
-title: Hidden Setting: Default-Missing Type
+title: Hidden Setting: Default Type for Missing Tiddlers
 type: text/vnd.tiddlywiki
 
 By default new tiddlers are created with a blank content type.
