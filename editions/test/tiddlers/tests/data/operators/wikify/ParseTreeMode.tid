@@ -1,0 +1,64 @@
+title: Operators/Wikify/ParseTreeMode
+description: Simple wikify operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+<$text text={{{ [subfilter{Filter}] }}}/>
++
+title: Filter
+
+[{Text}wikify[parsetree],[inline],[text/vnd.tiddlywiki]]
++
+title: Text
+
+This is ''the text'' that is __wikified__
++
+title: ExpectedResult
+
+[
+    {
+        "type": "text",
+        "text": "This is ",
+        "start": 0,
+        "end": 8
+    },
+    {
+        "type": "element",
+        "tag": "strong",
+        "children": [
+            {
+                "type": "text",
+                "text": "the text",
+                "start": 10,
+                "end": 18
+            }
+        ],
+        "start": 8,
+        "end": 20,
+        "rule": "bold"
+    },
+    {
+        "type": "text",
+        "text": " that is ",
+        "start": 20,
+        "end": 29
+    },
+    {
+        "type": "element",
+        "tag": "u",
+        "children": [
+            {
+                "type": "text",
+                "text": "wikified",
+                "start": 31,
+                "end": 39
+            }
+        ],
+        "start": 29,
+        "end": 41,
+        "rule": "underscore"
+    }
+]
