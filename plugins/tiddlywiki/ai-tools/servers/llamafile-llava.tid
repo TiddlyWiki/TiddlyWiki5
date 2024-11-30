@@ -1,0 +1,85 @@
+title: $:/plugins/tiddlywiki/ai-tools/servers/llamafile-llava
+tags: $:/tags/AI/CompletionServer
+url: http://127.0.0.1:8080/completion
+caption: Local Llamafile server running LLaVA models
+
+<!--
+Wikified JSON text to be sent to server
+-->
+\procedure json-prompt()
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html conditional commentblock commentinline
+{
+	"image_data": [
+		<$list filter="[all[shadows+tiddlers]tag<conversationTitle>!is[draft]sort[created]]" counter="counter">
+			<%if [<currentTiddler>has[image]] %>
+				<%if [<counter-first>!match[yes]] %>,<%endif%>
+				{
+					"id": <$text text=<<counter>>/>,
+					"data": "<$text text={{{ [<currentTiddler>get[image]get[text]jsonstringify[]] +[join[]] }}}/>"
+				}
+			<%endif%>
+		</$list>
+	],
+	"prompt": "<<json-prompt-text>>",
+	"cache_prompt": false,
+	"frequency_penalty": 0,
+	"grammar": "",
+	"mirostat_eta": 0.1,
+	"mirostat_tau": 5,
+	"mirostat": 0,
+	"n_predict": 400,
+	"n_probs": 0,
+	"presence_penalty": 0,
+	"repeat_last_n": 256,
+	"repeat_penalty": 1.18,
+	"slot_id": -1,
+	"stop": ["</s>", "Llama:", "User:"],
+	"stream" : false,
+	"temperature": 0.7,
+	"tfs_z": 1,
+	"top_k": 40,
+	"top_p": 0.5,
+	"typical_p": 1
+}
+\end json-prompt
+
+\procedure json-prompt-text()
+\whitespace trim
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html conditional commentblock commentinline
+<$text text={{{ [<conversationTitle>get[system-prompt]jsonstringify[]] }}}/>
+\n
+<$list filter="[all[shadows+tiddlers]tag<conversationTitle>!is[draft]sort[created]]" counter="counter">
+\n
+<$text text={{{ [<currentTiddler>get[role]else[user]match[user]then[User:]else[Llama:]] }}}/>
+<%if [<currentTiddler>has[image]] %>
+[img-<$text text=<<counter>>/>]
+<%endif%>
+<<ai-tools-get-message>>
+</$list>
+\nLlama: 
+\end json-prompt-text
+
+<!--
+Callback for the HTTP response from the LLM
+-->
+\procedure completion-callback()
+	<%if [<status>compare:number:gteq[200]compare:number:lteq[299]] %>
+		<!-- Success -->
+		<$action-createtiddler
+			$basetitle=<<resultTitlePrefix>>
+			tags=<<resultTags>>
+			type="text/markdown"
+			role="assistant"
+			text={{{ [<data>jsonget[content]] }}}
+		/>
+	<%else%>
+		<!-- Error -->
+		<$action-createtiddler
+			$basetitle=<<resultTitlePrefix>>
+			tags=<<resultTags>>
+			type="text/markdown"
+			role="error"
+			text={{{ [[Error:]] [<statusText>] [<data>jsonget[error],[message]]  +[join[]] }}}
+		/>
+	<%endif%>
+\end completion-callback
