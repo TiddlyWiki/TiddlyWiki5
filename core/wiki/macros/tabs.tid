@@ -14,24 +14,24 @@ code-body: yes
 	data-tab-title=<<currentTab>>
 >
 	<$tiddler tiddler=<<save-currentTiddler>>>
-		<$set name="tv-wikilinks" value="no">
-			<$transclude tiddler=<<buttonTemplate>> mode="inline">
-				<$transclude tiddler=<<currentTab>> field="caption">
+		<$let tv-wikilinks="no">
+			<$transclude $tiddler=<<buttonTemplate>> $mode="inline">
+				<$transclude $tiddler=<<currentTab>> $field="caption">
 					<$transclude $variable="currentTab" $type="text/plain" $output="text/plain"/>
 				</$transclude>
 			</$transclude>
-		</$set>
+		</$let>
 	</$tiddler>
 	<<actions>>
 </$button>
 \end
 
 \procedure tabs-tab()
-<$set name="save-currentTiddler" value=<<currentTiddler>>>
+<$let save-currentTiddler=<<currentTiddler>>>
 	<$tiddler tiddler=<<currentTab>>>
 		<<tabs-button>>
 	</$tiddler>
-</$set>
+</$let>
 \end
 
 \procedure tabs-tab-list()
@@ -43,8 +43,8 @@ code-body: yes
 \procedure tabs-tab-body()
 <$list filter=<<tabsList>> variable="currentTab">
 	<$reveal type="match" state=<<tabsState>> text=<<currentTab>> default=<<default>> retain=<<retain>> tag="div">
-		<$transclude tiddler=<<template>> mode="block">
-			<$transclude tiddler=<<currentTab>> mode="block"/>
+		<$transclude $tiddler=<<template>> $mode="block">
+			<$transclude $tiddler=<<currentTab>> $mode="block"/>
 		</$transclude>
 	</$reveal>
 </$list>
