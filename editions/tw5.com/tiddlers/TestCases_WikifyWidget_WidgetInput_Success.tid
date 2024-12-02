@@ -1,0 +1,34 @@
+created: 20241202003148804
+description: Using a widget as an input
+modified: 20241202013741138
+tags: $:/tags/wiki-test-spec
+title: TestCases/WikifyWidget/WidgetInput/Success
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+If you use <<.wid wikify>>, you can get the rendered output and use it as a value!
++
+title: Output
+text:<$wikify name="wikified-color" text={{widget}} ><span style.color=<<wikified-color>> style.background={{target}}>{{widget}} text on  {{target}} is a good contrast</span></$wikify>
++
+title: widget
+
+<$transclude $variable="contrastcolour" 
+target={{target}}
+fallbackTarget=<<fallbackTarget>>
+colourA={{colourA}}
+colourB={{colourB}}
+/>
++
+title: target
+text: purple
++
+title: colourA
+text: white
++
+title: colourB
+text: black
++
+title: ExpectedResult
+text: <p><span style="color:white;background:purple;">white text on  purple is a good contrast</span></p>
