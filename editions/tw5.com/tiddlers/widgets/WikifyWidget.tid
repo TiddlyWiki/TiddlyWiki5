@@ -31,7 +31,7 @@ The available output types are:
 
 ! Examples
 
-!! Using a widget as an input
+!! Using a widget as a value
 
 <<testcase "TestCases/WikifyWidget/WidgetInput/Fail">>
 <<testcase "TestCases/WikifyWidget/WidgetInput/Success">>
