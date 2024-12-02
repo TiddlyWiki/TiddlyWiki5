@@ -1,0 +1,31 @@
+created: 20241202134158579
+modified: 20241202141135021
+tags: [[Operator Examples]] [[function Operator]] $:/tags/wiki-test-spec
+title: function Operator (Examples)
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+This example show how to use the function operator to examine changes made on shadow tiddlers (tiddlers that are loaded from Plugins at the wiki startup). In this example, the text field of $:/SiteTitle is modified, overriding the shadow tiddler.
++
+title: Output
+
+\function get.sourceFields(subTiddler) [<subTiddler>shadowsource[]]:map:flat[<subTiddler>subtiddlerfields{!!title}]
+
+\function get.sourceField(subTiddler,field) [<subTiddler>shadowsource[]get[text]jsonget[tiddlers],<subTiddler>,<field>]
+
+\function get.destField(subTiddler,field) [<subTiddler>get<field>]
+
+\function has.diff(subTiddler,field) [get.destField<subTiddler>,<field>]:filter[get.sourceField<subTiddler>,<field>!match{!!title}]
+
+\function diff.fields(subTiddler) [get.sourceFields<subTiddler>] [<subTiddler>fields:exclude[title created modified bag revision creator modifier]] :filter[has.diff<subTiddler>,{!!title}]
+
+
+<<.operator-example 1 "[get.sourceField[$:/SiteTitle],[text]]">>
+
+<<.operator-example 2 "[get.destField[$:/SiteTitle],[text]]">>
+
+<<.operator-example 3 "[diff.fields[$:/SiteTitle]]">>
++
+title: $:/SiteTitle
+text: My awesome wiki
