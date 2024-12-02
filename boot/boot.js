@@ -557,12 +557,15 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 	return $tw.utils.compareVersions(versionStringA,versionStringB) !== -1;
 };
 
-/*
-Register file type information
-options: {flags: flags,deserializerType: deserializerType}
-	flags:"image" for image types
-	deserializerType: defaults to type if not specified
-*/
+/**
+ * Register file type information in `$tw.config.contentTypeInfo[type]`
+ * @param {string} type - MIME-style content type string
+ * @param {string} encoding - Valid NodeJS-style file encoding
+ * @param {string[]} extension - File extensions that should match this filetype
+ * @param {Object=} options - Optional object to give some more info
+ * @param {Array=} options.flags - Useful flags to be used, "image" for image types
+ * @param {string} [options.deserializerType=type] - key to a deserializer to be used with this filetype, defaults to "type"
+ */
 $tw.utils.registerFileType = function(type,encoding,extension,options) {
 	options = options || {};
 	if($tw.utils.isArray(extension)) {
@@ -576,10 +579,27 @@ $tw.utils.registerFileType = function(type,encoding,extension,options) {
 	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: options.flags || [], deserializerType: options.deserializerType || type};
 };
 
-/*
-Given an extension, always access the $tw.config.fileExtensionInfo
-using a lowercase extension only.
-*/
+/**
+ * @typedef ContentTypeInfo
+ * @type {object}
+ * @property {string} encoding
+ * @property {string} extension
+ * @property {Array=} flags
+ * @property {string} deserializerType
+ */
+
+/**
+ * @typedef FileExtensionInfo
+ * @type {object}
+ * @property {string} type
+ */
+
+/**
+ * Given an extension, always access the $tw.config.fileExtensionInfo
+ * using a lowercase extension only.
+ * @param {string} ext - Extension to find a type for
+ * @returns {FileExtensionInfo | null | undefined}
+ */
 $tw.utils.getFileExtensionInfo = function(ext) {
 	return ext ? $tw.config.fileExtensionInfo[ext.toLowerCase()] : null;
 }
@@ -1596,9 +1616,15 @@ $tw.Wiki.prototype.processSafeMode = function() {
 	this.addTiddler(new $tw.Tiddler({title: "$:/DefaultTiddlers", text: "[[" + titleReportTiddler + "]]"}));
 };
 
-/*
-Extracts tiddlers from a typed block of text, specifying default field values
-*/
+/**
+ * Extracts tiddlers from a typed block of text, specifying default field values
+ * @param {str} type - MIME-style content type string or file extension
+ * @param {any} text - content to call the deserializer with
+ * @param {Array=} srcFields - a list of already-defined fields to add to the tiddler
+ * @param {Object=} options - Option object
+ * @param {string} options.deserializer - key of a deserializer registered in `$tw.Wiki.tiddlerDeserializerModules`
+ * @returns {Object[]}
+ */
 $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields,options) {
 	srcFields = srcFields || Object.create(null);
 	options = options || {};
@@ -1963,14 +1989,77 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 	return tiddlers;
 };
 
+$tw.deferredDirSpecs = [];
+
 /*
 Load all the tiddlers defined by a `tiddlywiki.files` specification file
 filepath: pathname of the directory containing the specification file
+options:
+	loadDeferred {bool|undefined}: wheter or not to load the tiddlers marked as "deferred" in the specification.
 */
-$tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
+$tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,options) {
+	options = options || {};
+	var loadDeferred = options.loadDeferred || false;
 	var tiddlers = [];
 	// Read the specification
 	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
+
+	/**
+	 * Helper to fill the tiddler fields with info given in combined fields.
+	 * The combined fields can derive info from file info.
+	 * @param {Object} tiddler tiddle-like object
+	 * @param {Object} combinedFields fields object
+	 * @param {str} filepath canonical path of the file
+	 * @param {str} filename canonical filename
+	 * @param {str} rootPath directory where the tiddler file is
+	 */
+	var fillCombinedFields = function (tiddler, combinedFields, filepath ,filename, rootPath) {
+		var pathname = path.resolve(filepath,filename) // Resolve canonical path of file
+		$tw.utils.each(combinedFields,function(fieldInfo,name) {
+			if(typeof fieldInfo === "string" || $tw.utils.isArray(fieldInfo)) {
+				tiddler[name] = fieldInfo;
+			} else {
+				var value = tiddler[name];
+				switch(fieldInfo.source) {
+					case "subdirectories":
+						value = path.relative(rootPath, filename).split(path.sep).slice(0, -1);
+						break;
+					case "filepath":
+						value = path.relative(rootPath, filename).split(path.sep).join('/');
+						break;
+					case "filename":
+						value = path.basename(filename);
+						break;
+					case "filename-uri-decoded":
+						value = $tw.utils.decodeURIComponentSafe(path.basename(filename));
+						break;
+					case "basename":
+						value = path.basename(filename,path.extname(filename));
+						break;
+					case "basename-uri-decoded":
+						value = $tw.utils.decodeURIComponentSafe(path.basename(filename,path.extname(filename)));
+						break;
+					case "extname":
+						value = path.extname(filename);
+						break;
+					case "created":
+						value = new Date(fs.statSync(pathname).birthtime);
+						break;
+					case "modified":
+						value = new Date(fs.statSync(pathname).mtime);
+						break;
+				}
+				if(fieldInfo.prefix) {
+					value = fieldInfo.prefix + value;
+				}
+				if(fieldInfo.suffix) {
+					value = value + fieldInfo.suffix;
+				}
+				tiddler[name] = value;
+			}
+		});
+	}
+
 	// Helper to process a file
 	var processFile = function(filename,isTiddlerFile,fields,isEditableFile,rootPath) {
 		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
@@ -1987,49 +2076,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 		}
 		var combinedFields = $tw.utils.extend({},fields,metadata);
 		$tw.utils.each(fileTiddlers,function(tiddler) {
-			$tw.utils.each(combinedFields,function(fieldInfo,name) {
-				if(typeof fieldInfo === "string" || $tw.utils.isArray(fieldInfo)) {
-					tiddler[name] = fieldInfo;
-				} else {
-					var value = tiddler[name];
-					switch(fieldInfo.source) {
-						case "subdirectories":
-							value = path.relative(rootPath, filename).split(path.sep).slice(0, -1);
-							break;
-						case "filepath":
-							value = path.relative(rootPath, filename).split(path.sep).join('/');
-							break;
-						case "filename":
-							value = path.basename(filename);
-							break;
-						case "filename-uri-decoded":
-							value = $tw.utils.decodeURIComponentSafe(path.basename(filename));
-							break;
-						case "basename":
-							value = path.basename(filename,path.extname(filename));
-							break;
-						case "basename-uri-decoded":
-							value = $tw.utils.decodeURIComponentSafe(path.basename(filename,path.extname(filename)));
-							break;
-						case "extname":
-							value = path.extname(filename);
-							break;
-						case "created":
-							value = new Date(fs.statSync(pathname).birthtime);
-							break;
-						case "modified":
-							value = new Date(fs.statSync(pathname).mtime);
-							break;
-					}
-					if(fieldInfo.prefix) {
-						value = fieldInfo.prefix + value;
-					}
-					if(fieldInfo.suffix) {
-						value = value + fieldInfo.suffix;
-					}
-					tiddler[name] = value;
-				}
-			});
+			fillCombinedFields(tiddler, combinedFields, filepath, filename, rootPath)
 		});
 		if(isEditableFile) {
 			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, isEditableFile: true, tiddlers: fileTiddlers});
@@ -2052,6 +2099,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 		return arrayOfFiles;
 	}
 	// Process the listed tiddlers
+	// TODO: Patch for deferred loading
 	$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 		if(tidInfo.prefix && tidInfo.suffix) {
 			tidInfo.fields.text = {prefix: tidInfo.prefix,suffix: tidInfo.suffix};
@@ -2073,6 +2121,11 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 		} else {
 			// Process directory specifier
 			var dirPath = path.resolve(filepath,dirSpec.path);
+			if(dirSpec.isDeferred && !loadDeferred){
+				$tw.deferredDirSpecs.push({filepath, dirSpec})
+				console.log("Found defer dir:", filepath)
+				return; //Do not process deferred dirs yet.
+			}
 			if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
 				var	files = getAllFiles(dirPath, dirSpec.searchSubdirectories),
 					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
@@ -2081,7 +2134,25 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 					var thisPath = path.relative(filepath, files[t]),
 					filename = path.basename(thisPath);
 					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
-						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile,dirSpec.path);
+						if(dirSpec.isDeferred && loadDeferred) {
+							// resolve file using parser...
+							// Bypasses processFile
+							var parser = new $tw.deserializerParsers[dirSpec.deferredType]();
+							pathname = path.resolve(filepath,thisPath)
+							var loadedTiddlers = parser.load(thisPath, fs.readFileSync(pathname, null), dirSpec)
+							var combinedFields = $tw.utils.extend({},dirSpec.fields)
+							$tw.utils.each(loadedTiddlers,
+								function(tiddler) {
+									fillCombinedFields(tiddler, combinedFields, filepath, filename, dirSpec.path)
+								});
+							if(dirSpec.isEditableFile) {
+								tiddlers.push({filepath: pathname, hasMetaFile: !dirSpec.isTiddlerFile, isEditableFile: true, tiddlers: loadedTiddlers});
+							} else {
+								tiddlers.push({tiddlers: loadedTiddlers});
+							}
+						} else {
+							processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile,dirSpec.path);
+						}
 					}
 				}
 			} else {
@@ -2609,6 +2680,7 @@ $tw.boot.executeNextStartupTask = function(callback) {
 				s.push("before:",task.before.join(","));
 			}
 			$tw.boot.log(s.join(" "));
+			console.log(s.join(" "))
 			// Execute task
 			if(!$tw.utils.hop(task,"synchronous") || task.synchronous) {
 				task.startup();
