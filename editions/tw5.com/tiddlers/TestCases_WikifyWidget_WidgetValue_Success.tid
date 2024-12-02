@@ -7,18 +7,23 @@ type: text/vnd.tiddlywiki-multiple
 
 title: Narrative
 
-If you use <<.wid wikify>>, you can get the rendered output and use it as a value!
+If you use <<.wid wikify>>, you can get the rendered output and use it as a value.
 +
 title: Output
-text:<$wikify name="wikified-color" text={{widget}} ><span style.color=<<wikified-color>> style.background={{target}}>{{widget}} text on  {{target}} is a good contrast</span></$wikify>
+
+<$wikify name="wikified-color" text={{widget}} >
+    <span style.color=<<wikified-color>> style.background={{target}}>
+        {{widget}} text on {{target}} is a good contrast
+    </span>
+</$wikify>
 +
 title: widget
 
 <$transclude $variable="contrastcolour" 
-target={{target}}
-fallbackTarget=<<fallbackTarget>>
-colourA={{colourA}}
-colourB={{colourB}}
+    target={{target}}
+    fallbackTarget=<<fallbackTarget>>
+    colourA={{colourA}}
+    colourB={{colourB}}
 />
 +
 title: target
@@ -31,4 +36,9 @@ title: colourB
 text: black
 +
 title: ExpectedResult
-text: <p><span style="color:white;background:purple;">white text on  purple is a good contrast</span></p>
+
+<p>
+    <span style="color:white;background:purple;">
+        white text on purple is a good contrast
+    </span>
+</p>
