@@ -309,8 +309,8 @@ Collect DOM variables
 */
 exports.collectDOMVariables = function(selectedNode,domNode,event) {
 	var variables = {},
-	    selectedNodeRect,
-	    domNodeRect;
+		selectedNodeRect,
+		domNodeRect;
 	if(selectedNode) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
@@ -369,7 +369,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 };
 
 /*
-Make sure the CSS selector is not invalid
+Make sure the CSS selector is valid
 */
 exports.querySelectorSafe = function(selector,baseElement) {
 	baseElement = baseElement || document;
@@ -387,6 +387,47 @@ exports.querySelectorAllSafe = function(selector,baseElement) {
 	} catch(e) {
 		console.log("Invalid selector: ",selector);
 	}
+};
+
+/*
+Sanitize HTML tag- and custom web component names
+	1. Check the string, if it is a valid html tag - using this spec: https://html.spec.whatwg.org/#syntax-tag-name
+		1.1 Tag names are "case insensitive"
+    2. Extend 1. and allow hyphens: "-"
+		2.1 Browsers allow "AA-AA", so do we. Be aware there may be styling problems
+
+	3. Sanitize input parameters - spec: https://html.spec.whatwg.org/#valid-custom-element-name
+    4. Implement a forbidden list: exports.htmlForbiddenTags - see: $:/core/modules/config.js
+    5. Check function parameters for invalid character ranges up to \uFFFF. This detects problems in a range JS RegExp can handle
+    6. We assume that everything out of js RegExp-range is valid, which is OK for \u10000-\uEFFFF according to the spec
+
+	Unicode overview: https://symbl.cc/en/unicode-table/
+*/
+exports.makeTagNameSafe = function(tag,defaultTag) {
+	// Custom web-components need to be "lowercase()"
+	var regxSanitizeChars = new RegExp($tw.config.htmlCustomPrimitives.sanitizePCENChar,"mg");
+	// Sanitize inputs to make the logic simple
+	defaultTag = (defaultTag) ? defaultTag.replace(regxSanitizeChars,"") : "SPAN";
+	tag = (tag) ? tag.replace(regxSanitizeChars,"") : defaultTag;
+
+	// RegExp for valid standard HTML element, extended including hyphen "-"
+	var regexStandardChars = /(?:[a-z]|[A-Z]|[0-9]|-)+/g,
+		result = "";
+
+	// Check if tag matches standard HTML spec
+	if(tag.match(regexStandardChars)[0] === tag) {
+		result = tag;
+	}
+	// Check for unsafe tag and unsafe defaultTag
+	if($tw.config.htmlUnsafeElements.indexOf(result.toLowerCase()) !== -1) {
+		result = ($tw.config.htmlUnsafeElements.indexOf(defaultTag.toLowerCase()) !== -1) ? "safe-" + defaultTag : defaultTag;
+	}
+	// Check for forbidden tag names according to spec and log info to help users
+	if($tw.config.htmlForbiddenTags.indexOf(result.toLowerCase()) >= 0) {
+		console.log("Forbidden custom element:\"" + result.toLowerCase() + "\" See: https://html.spec.whatwg.org/#valid-custom-element-name")
+		result = "safe-" + result;
+	}
+	return result;
 };
 
 })();
