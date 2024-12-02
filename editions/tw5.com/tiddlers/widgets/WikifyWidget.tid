@@ -33,13 +33,13 @@ The available output types are:
 
 !! Using a widget as a value
 
-<<testcase "TestCases/WikifyWidget/WidgetValue/Fail">>
 <<testcase "TestCases/WikifyWidget/WidgetValue/Success">>
+<<testcase "TestCases/WikifyWidget/WidgetValue/Fail">>
 
 !! Accurate word count
 
-<<testcase "TestCases/WikifyWidget/WordCount/Fail">>
 <<testcase "TestCases/WikifyWidget/WordCount/Success">>
+<<testcase "TestCases/WikifyWidget/WordCount/Fail">>
 
 !! Exporting rendered html
 
