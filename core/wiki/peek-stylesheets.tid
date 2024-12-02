@@ -1,67 +1,52 @@
 title: $:/snippets/peek-stylesheets
 
-\procedure expandable-stylesheets-list()
-\whitespace trim
-<ol>
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
-<$let openState=`$:/state/peek-tiddler/open/$(currentTiddler)$$(qualify)$` open={{{ [<openState>get[text]else[no]] }}}>
-<li>
-<$checkbox tiddler=<<openState>> field="text" checked="yes" style.appearance="none">
-<span style.cursor="pointer">
-<%if [<open>match[yes]]%>
-{{$:/core/images/down-arrow|1em}}
-<%else%>
-{{$:/core/images/right-arrow|1em}}
-<%endif%>
-</span>
-</$checkbox>
-<$link/>
-<%if [<open>match[yes]]%>
+\procedure expandable-content()
 <$wikify name="styles" text={{!!text}}>
 <$codeblock code=<<styles>> language="css"/>
 </$wikify>
-<%endif%>
-</li>
-</$let>
-</$list>
-</ol>
 \end
 
-\define stylesheets-list()
-\whitespace trim
-<ol>
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
-<li>
-<$link/>
-<$wikify name="styles" text={{!!text}}>
-<pre>
-<code>
-<$text text=<<styles>>/>
-</code>
-</pre>
-</$wikify>
-</li>
-</$list>
-</ol>
-\end
-\whitespace trim
-
-<$let modeState=`$:/state/peek-stylesheets/mode/$(qualify)$` mode={{{ [<modeState>get[text]else[expand]] }}}>
-
-<$checkbox tiddler=<<modeState>> field="text" checked="yes" style.appearance="none">
+\procedure toggle-content()
+<$parameters openState="" open="[<openState>substitute[]get[text]else[no]]" openImage="$:/core/images/down-arrow" closedImage="$:/core/images/right-arrow" openCaption="" closedCaption="">
+<%if [<openState>!is[blank]] %>
+<$checkbox tiddler={{{ [<openState>substitute[]] }}} field="text" checked="yes" style.appearance="none">
 <span style.cursor="pointer">
-<%if [<mode>match[expand]]%>
-{{$:/core/images/chevron-right|1em}} {{$:/language/ControlPanel/Stylesheets/Expand/Caption}}
+<%if [subfilter<open>match[yes]] %>
+<$transclude $tiddler=<<openImage>> size="1em" /> <<openCaption>>
 <%else%>
-{{$:/core/images/chevron-down|1em}} {{$:/language/ControlPanel/Stylesheets/Restore/Caption}}
+<$transclude $tiddler=<<closedImage>> size="1em" /> <<closedCaption>>
 <%endif%>
 </span>
 </$checkbox>
+<%endif%>
+</$parameters>
+\end
+
+\procedure expandable-list()
+\whitespace trim
+<$parameters filter="" openState="" open="[<openState>substitute[]get[text]else[no]]">
+<ol>
+<$list filter=<<filter>> >
+<li>
+<$transclude $variable="toggle-content" open=<<open>> openState=<<openState>> />
+<$link/>
+<%if [subfilter<open>match[yes]]%>
+<<expandable-content>>
+<%endif%>
+</li>
+</$list>
+</ol>
+</$parameters>
+\end
+
+<$let modeState=`$:/state/peek-stylesheets/mode/$(qualify)$` mode={{{ [<modeState>get[text]else[expand]] }}} listFilter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
+
+<$transclude $variable="toggle-content" openImage="$:/core/images/chevron-right" closedImage="$:/core/images/chevron-down" openState=<<modeState>> openCaption={{$:/language/ControlPanel/Stylesheets/Expand/Caption}} closedCaption={{$:/language/ControlPanel/Stylesheets/Restore/Caption}}/>
 
 <%if [<mode>match[expand]]%>
-<<expandable-stylesheets-list>>
+<$transclude $variable="expandable-list" filter=<<listFilter>> open="yes"/>
 <%else%>
-<<stylesheets-list>>
+<$transclude $variable="expandable-list" filter=<<listFilter>> openState="$:/state/peek-tiddler/open/$(currentTiddler)$$(qualify)$"/>
 <%endif%>
 
 </$let>
