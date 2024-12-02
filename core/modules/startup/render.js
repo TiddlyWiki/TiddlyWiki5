@@ -50,14 +50,77 @@ exports.startup = function() {
 	$tw.styleElement = document.createElement("style");
 	$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
 	document.head.insertBefore($tw.styleElement,document.head.firstChild);
-	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
-		if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
+	// Prepare refresh mechanism
+	var mainDeferredChanges = Object.create(null),
+		styleDeferredChanges = Object.create(null),
+		mainTimerId,
+		styleTimerId,
+		throttledRefreshFn = function(changes,options) {
+			options = options || {};
+			// Check if only tiddlers that are throttled have changed
+			var onlyThrottledTiddlersHaveChanged = true;
+			var deferredChanges = options.mainCondition ? mainDeferredChanges : styleDeferredChanges;
+			for(var title in changes) {
+				var tiddler = $tw.wiki.getTiddler(title);
+				if(!$tw.wiki.isVolatileTiddler(title) && (!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh") ||
+					(options.mainCondition && tiddler.hasField("throttle.refresh.main")) || (options.styleCondition && tiddler.hasField("throttle.refresh.style"))))) {
+					onlyThrottledTiddlersHaveChanged = false;
+				}
+			}
+			// Defer the change if only drafts have changed
+			if(options.mainCondition) {
+				if(mainTimerId) {
+					clearTimeout(mainTimerId);
+				}
+				mainTimerId = null;
+			} else if(options.styleCondition) {
+				if(styleTimerId) {
+					clearTimeout(styleTimerId);
+				}
+				styleTimerId = null;
+			}
+			if(onlyThrottledTiddlersHaveChanged) {
+				var timeout = parseInt($tw.wiki.getTiddlerText(DRAFT_TIDDLER_TIMEOUT_TITLE,""),10);
+				if(isNaN(timeout)) {
+					timeout = THROTTLE_REFRESH_TIMEOUT;
+				}
+				if(options.mainCondition) {
+					mainTimerId = setTimeout(options.throttledRefresh,timeout);
+				} else if(options.styleCondition) {
+					styleTimerId = setTimeout(options.throttledRefresh,timeout);
+				}
+				$tw.utils.extend(deferredChanges,changes);
+			} else {
+				$tw.utils.extend(deferredChanges,changes);
+				options.callback();
+			}
+		};
+	function refresh() {
+		// Process the refresh
+		$tw.hooks.invokeHook("th-page-refreshing");
+		$tw.pageWidgetNode.refresh(mainDeferredChanges);
+		mainDeferredChanges = Object.create(null);
+		$tw.hooks.invokeHook("th-page-refreshed");
+	}
+	function styleRefresh() {
+		if($tw.styleWidgetNode.refresh(styleDeferredChanges,$tw.styleContainer,null)) {
 			var newStyles = $tw.styleContainer.textContent;
 			if(newStyles !== $tw.styleWidgetNode.assignedStyles) {
 				$tw.styleWidgetNode.assignedStyles = newStyles;
 				$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
 			}
 		}
+		styleDeferredChanges = Object.create(null);
+	}
+	var mainThrottledRefresh = $tw.perf.report("throttledMainRefresh",refresh),
+		styleThrottledRefresh = $tw.perf.report("throttledStyleRefresh",styleRefresh);
+	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
+		throttledRefreshFn(changes,{
+			throttledRefresh: styleThrottledRefresh,
+			callback: styleRefresh,
+			mainCondition: false,
+			styleCondition: true
+		});
 	}));
 	// Display the $:/core/ui/PageTemplate tiddler to kick off the display
 	$tw.perf.report("mainRender",function() {
@@ -75,44 +138,14 @@ exports.startup = function() {
 			removeItem.parentNode.removeChild(removeItem);
 		}
 	});
-	// Prepare refresh mechanism
-	var deferredChanges = Object.create(null),
-		timerId;
-	function refresh() {
-		// Process the refresh
-		$tw.hooks.invokeHook("th-page-refreshing");
-		$tw.pageWidgetNode.refresh(deferredChanges);
-		deferredChanges = Object.create(null);
-		$tw.hooks.invokeHook("th-page-refreshed");
-	}
-	var throttledRefresh = $tw.perf.report("throttledRefresh",refresh);
-
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
-		// Check if only tiddlers that are throttled have changed
-		var onlyThrottledTiddlersHaveChanged = true;
-		for(var title in changes) {
-			var tiddler = $tw.wiki.getTiddler(title);
-			if(!$tw.wiki.isVolatileTiddler(title) && (!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh")))) {
-				onlyThrottledTiddlersHaveChanged = false;
-			}
-		}
-		// Defer the change if only drafts have changed
-		if(timerId) {
-			clearTimeout(timerId);
-		}
-		timerId = null;
-		if(onlyThrottledTiddlersHaveChanged) {
-			var timeout = parseInt($tw.wiki.getTiddlerText(DRAFT_TIDDLER_TIMEOUT_TITLE,""),10);
-			if(isNaN(timeout)) {
-				timeout = THROTTLE_REFRESH_TIMEOUT;
-			}
-			timerId = setTimeout(throttledRefresh,timeout);
-			$tw.utils.extend(deferredChanges,changes);
-		} else {
-			$tw.utils.extend(deferredChanges,changes);
-			refresh();
-		}
+		throttledRefreshFn(changes,{
+			throttledRefresh: mainThrottledRefresh,
+			callback: refresh,
+			mainCondition: true,
+			styleCondition: false
+		});
 	}));
 	// Fix up the link between the root widget and the page container
 	$tw.rootWidget.domNodes = [$tw.pageContainer];
