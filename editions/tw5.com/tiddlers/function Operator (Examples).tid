@@ -42,7 +42,7 @@ The function `get.destField` use the operator <<.olink get>> to get the override
 
 The function `get.sourceField` use the operator <<.olink shadowsource>> to get the title of the plugin in which the shadow tiddler is defined ({{{ [<subTiddler>shadowsource[]]}}}). It then use the operator <<.olink get>> to retrieve the content of the field <<.field text>>, in which is defined every tiddlers for that plugin, in a json format. Next, the operator <<.olink jsonget>> is used to retrieve the value of the original field <<.field text>> for <<subTiddler>>.
 
-<<.operator-example 2 "[function[get.sourceFields],<subTiddler>]" "get the original list of fields.">>
+<<.operator-example 3 "[function[get.sourceFields],<subTiddler>]" "get the original list of fields.">>
 
 The function `get.sourceFields` use the operator <<.olink shadowsource>> to get the title of the plugin in which the shadow tiddler is defined. The subsequent [[Map Filter Run Prefix]] iterate over the plugin title, and use the operator <<.olink subtiddlerfields>> to output every fields of the shadow tiddler <<subTiddler>>, whose title is retrieven using a [[TextReference]].
 
