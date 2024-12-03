@@ -5,8 +5,8 @@ tags: $:/tags/Macro
 <$link to=<<full-title>>><$text text=<<chunk>>/></$link>
 \end
 
-\procedure leaf-node(prefix,chunk)
 \whitespace trim
+\procedure leaf-node(prefix,chunk)
 <li>
 <$list filter="[<prefix>addsuffix<chunk>is[shadow]] [<prefix>addsuffix<chunk>is[tiddler]]" variable="full-title">
 <$list filter="[<full-title>removeprefix<prefix>]" variable="chunk">
@@ -17,7 +17,6 @@ tags: $:/tags/Macro
 \end
 
 \procedure branch-node(prefix,chunk,separator: "/")
-\whitespace trim
 <li>
 <$set name="reveal-state" value={{{ [[$:/state/tree/]addsuffix<prefix>addsuffix<chunk>] }}}>
 <$reveal type="nomatch" stateTitle=<<reveal-state>> text="show">
@@ -39,19 +38,17 @@ tags: $:/tags/Macro
 \end
 
 \procedure tree-node(prefix,separator: "/")
-\whitespace trim
 <ol>
 <$list filter="[all[shadows+tiddlers]removeprefix<prefix>splitbefore<separator>sort[]!suffix<separator>]" variable="chunk">
 <$transclude $variable="leaf-node" prefix=<<prefix>> chunk=<<chunk>> separator=<<separator>>/>
 </$list>
-<$list filter="[all[shadows+tiddlers]removeprefix<prefix>splitbefore<separator>sort[]suffix<__separator__>]" variable="chunk">
+<$list filter="[all[shadows+tiddlers]removeprefix<prefix>splitbefore<separator>sort[]suffix<separator>]" variable="chunk">
 <$transclude $variable="branch-node" prefix=<<prefix>> chunk=<<chunk>> separator=<<separator>>/>
 </$list>
 </ol>
 \end
 
 \procedure tree(prefix: "$:/",separator: "/")
-\whitespace trim
 <div class="tc-tree">
 <span><$text text=<<prefix>>/></span>
 <div>

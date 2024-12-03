@@ -16,15 +16,14 @@ tags: $:/tags/Macro
 </$button>
 \end
 
-\procedure colour-picker-recent-inner(actions)
 \whitespace trim
+\procedure colour-picker-recent-inner(actions)
 <$set name="colour-picker-value" value=<<recentColour>>>
 <$transclude $variable="colour-picker-inner" actions=<<actions>>/>
 </$set>
 \end
 
 \procedure colour-picker-recent(actions)
-\whitespace trim
 {{$:/language/ColourPicker/Recent}}<$list filter="[list[$:/config/ColourPicker/Recent]]" variable="recentColour">
 &#32;
 <$transclude $variable="colour-picker-recent-inner" actions=<<actions>>/>
@@ -32,7 +31,6 @@ tags: $:/tags/Macro
 \end
 
 \procedure colour-picker(actions)
-\whitespace trim
 <div class="tc-colour-chooser">
 
 <$transclude $variable="colour-picker-recent" actions=<<actions>>/>

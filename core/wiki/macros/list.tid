@@ -1,8 +1,12 @@
 title: $:/core/macros/list
 tags: $:/tags/Macro
 
-\procedure list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage,field:"caption")
+\procedure list-links-draggable-drop-actions()
+<$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
+\end
+
 \whitespace trim
+\procedure list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage,field:"caption")
 <$genesis $type=<<type>> class=<<class>>>
 	<$list filter=<<filter>> emptyMessage=<<emptyMessage>>>
 		<$genesis $type=<<subtype>>>
@@ -18,14 +22,9 @@ tags: $:/tags/Macro
 </$genesis>
 \end
 
-\procedure list-links-draggable-drop-actions()
-<$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
-\end
-
 \procedure list-links-draggable(tiddler,field:"list",emptyMessage,type:"ul",subtype:"li",class:"",itemTemplate)
-\whitespace trim
 <span class="tc-links-draggable-list">
-	<$vars targetTiddler=<<tiddler>> targetField=<<field>>>
+	<$let targetTiddler=<<tiddler>> targetField=<<field>>>
 		<$genesis $type=<<type>> class=<<class>>>
 			<$list filter="[<tiddler>get<field>enlist-input[]]" emptyMessage=<<emptyMessage>>>
 				<$droppable
@@ -60,12 +59,11 @@ tags: $:/tags/Macro
 				</$droppable>
 			</$tiddler>
 		</$genesis>
-	</$vars>
+	</$let>
 </span>
 \end
 
 \procedure list-tagged-draggable-drop-actions(tag)
-\whitespace trim
 <!-- Save the current ordering of the tiddlers with this tag -->
 <$set name="order" filter="[<tag>tagging[]]">
 	<!-- Remove any list-after or list-before fields from the tiddlers with this tag -->
@@ -77,7 +75,7 @@ tags: $:/tags/Macro
 	<$action-listops $tiddler=<<tag>> $field="list" $filter="+[enlist<order>] +[insertbefore<actionTiddler>,<currentTiddler>]"/>
 	<!-- Make sure the newly added item has the right tag -->
 	<!-- Removing this line makes dragging tags within the dropdown work as intended -->
-	<!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<__tag__>>/>-->
+	<!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<tag>>/>-->
 	<!-- Using the following 5 lines as replacement makes dragging titles from outside into the dropdown apply the tag -->
 	<$list filter="[<actionTiddler>!contains:tags<tag>]">
 		<$fieldmangler tiddler=<<actionTiddler>>>
@@ -88,7 +86,6 @@ tags: $:/tags/Macro
 \end
 
 \procedure list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"")
-\whitespace trim
 <span class="tc-tagged-draggable-list">
 	<$set name="tag" value=<<tag>>>
 		<$list
