@@ -20,7 +20,7 @@ These examples use the following predefined variable:
 
 * <<display-variable subTiddler>>
 
-They also use following predefined functions:
+They also use the following predefined functions:
 
 ```
 \function get.destField(subTiddler,field) [<subTiddler>get<field>]
