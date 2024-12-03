@@ -2,63 +2,67 @@ title: $:/core/macros/tabs
 tags: $:/tags/Macro
 code-body: yes
 
+\define tabs-button()
 \whitespace trim
-\procedure tabs-button()
 <$button
 	set=<<tabsState>>
 	setTo=<<currentTab>>
-	default=<<default>>
+	default=<<__default__>>
 	selectedClass="tc-tab-selected"
 	tooltip={{!!tooltip}}
 	role="switch"
 	data-tab-title=<<currentTab>>
 >
 	<$tiddler tiddler=<<save-currentTiddler>>>
-		<$let tv-wikilinks="no">
-			<$transclude $tiddler=<<buttonTemplate>> $mode="inline">
-				<$transclude $tiddler=<<currentTab>> $field="caption">
-					<$transclude $variable="currentTab" $type="text/plain" $output="text/plain"/>
+		<$set name="tv-wikilinks" value="no">
+			<$transclude tiddler=<<__buttonTemplate__>> mode="inline">
+				<$transclude tiddler=<<currentTab>> field="caption">
+					<$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/>
 				</$transclude>
 			</$transclude>
-		</$let>
+		</$set>
 	</$tiddler>
-	<<actions>>
+	<<__actions__>>
 </$button>
 \end
 
-\procedure tabs-tab()
-<$let save-currentTiddler=<<currentTiddler>>>
+\define tabs-tab()
+\whitespace trim
+<$set name="save-currentTiddler" value=<<currentTiddler>>>
 	<$tiddler tiddler=<<currentTab>>>
 		<<tabs-button>>
 	</$tiddler>
-</$let>
+</$set>
 \end
 
-\procedure tabs-tab-list()
-<$list filter=<<tabsList>> variable="currentTab" storyview="pop">
+\define tabs-tab-list()
+\whitespace trim
+<$list filter=<<__tabsList__>> variable="currentTab" storyview="pop">
 	<<tabs-tab>>
 </$list>
 \end
 
-\procedure tabs-tab-body()
-<$list filter=<<tabsList>> variable="currentTab">
-	<$reveal type="match" state=<<tabsState>> text=<<currentTab>> default=<<default>> retain=<<retain>> tag="div">
-		<$transclude $tiddler=<<template>> $mode="block">
-			<$transclude $tiddler=<<currentTab>> $mode="block"/>
+\define tabs-tab-body()
+\whitespace trim
+<$list filter=<<__tabsList__>> variable="currentTab">
+	<$reveal type="match" state=<<tabsState>> text=<<currentTab>> default=<<__default__>> retain=<<__retain__>> tag="div">
+		<$transclude tiddler=<<__template__>> mode="block">
+			<$transclude tiddler=<<currentTab>> mode="block"/>
 		</$transclude>
 	</$reveal>
 </$list>
 \end
 
-\procedure tabs(tabsList,default,state:"$:/state/tab",class,template,buttonTemplate,retain,actions,explicitState)
-<$qualify title=<<state>> name="qualifiedState">
-	<$let tabsState={{{ [<explicitState>minlength[1]] :else[<qualifiedState>] }}}>
-		<div class={{{ [[tc-tab-set]addsuffix[ ]addsuffix<class>] }}}>
-			<div class={{{ [[tc-tab-buttons]addsuffix[ ]addsuffix<class>] }}}>
+\define tabs(tabsList,default,state:"$:/state/tab",class,template,buttonTemplate,retain,actions,explicitState)
+\whitespace trim
+<$qualify title=<<__state__>> name="qualifiedState">
+	<$let tabsState={{{ [<__explicitState__>minlength[1]] ~[<qualifiedState>] }}}>
+		<div class={{{ [[tc-tab-set]addsuffix[ ]addsuffix<__class__>] }}}>
+			<div class={{{ [[tc-tab-buttons]addsuffix[ ]addsuffix<__class__>] }}}>
 				<<tabs-tab-list>>
 			</div>
-			<div class={{{ [[tc-tab-divider]addsuffix[ ]addsuffix<class>] }}}/>
-			<div class={{{ [[tc-tab-content]addsuffix[ ]addsuffix<class>] }}}>
+			<div class={{{ [[tc-tab-divider]addsuffix[ ]addsuffix<__class__>] }}}/>
+			<div class={{{ [[tc-tab-content]addsuffix[ ]addsuffix<__class__>] }}}>
 				<<tabs-tab-body>>
 			</div>
 		</div>
