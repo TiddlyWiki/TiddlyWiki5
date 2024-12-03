@@ -1,6 +1,5 @@
 created: 20241202000005087
 description: Using a widget as a value
-modified: 20241202005501191
 tags: $:/tags/wiki-test-spec-failing
 title: TestCases/WikifyWidget/WidgetValue/Fail
 type: text/vnd.tiddlywiki-multiple
