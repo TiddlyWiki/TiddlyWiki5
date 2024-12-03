@@ -40,11 +40,11 @@ The function `get.destField` use the operator <<.olink get>> to get the override
 
 <<.operator-example 2 "[function[get.sourceField],<subTiddler>,[text]]" "get the original value of the field <<.field text>>">>
 
-The function `get.sourceField` use the operator <<.olink shadowsource>> to get the title of the plugin in which the shadow tiddler is defined. It then use the operator <<.olink get>> to retrieve the content of the field <<.field text>>, in which is defined every tiddlers for that plugin, in a json format. Next, the operator <<.olink jsonget>> is used to retrieve the value of the original field <<.field text>> for <<subTiddler>>.
+The function `get.sourceField` use the operator <<.olink shadowsource>> to get the title of the plugin in which the shadow tiddler is defined ({{{ [<subTiddler>shadowsource[]]}}}). It then use the operator <<.olink get>> to retrieve the content of the field <<.field text>>, in which is defined every tiddlers for that plugin, in a json format. Next, the operator <<.olink jsonget>> is used to retrieve the value of the original field <<.field text>> for <<subTiddler>>.
 
 <<.operator-example 2 "[function[get.sourceFields],<subTiddler>]" "get the original list of fields.">>
 
-The function `get.sourceFields` use the operator <<.olink shadowsource>> to get the title of the plugin in which the shadow tiddler is defined. The subsequent [[Map Filter Run Prefix]] iterate over the plugin name, and use the operator <<.olink subtiddlerfields>> to output every fields of the shadow tiddler <<subTiddler>>, whose title is retrieven using a [[TextReference]].
+The function `get.sourceFields` use the operator <<.olink shadowsource>> to get the title of the plugin in which the shadow tiddler is defined. The subsequent [[Map Filter Run Prefix]] iterate over the plugin title, and use the operator <<.olink subtiddlerfields>> to output every fields of the shadow tiddler <<subTiddler>>, whose title is retrieven using a [[TextReference]].
 
 <<.operator-example 4 "[function[has.diff],<subTiddler>,[text]]" "compare the original value of the field <<.field text>> with the value set in the overriding tiddler. If the value is different, output the overriden value">>
 
@@ -57,7 +57,7 @@ The function `diff.fields` use the the function `get.sourceFields` to list every
 <<.tip """Theses functions can be used together to highlight the changes made to <<subTiddler>>:""">>
 
 <<wikitext-example-without-html """<$list filter="[diff.fields<subTiddler>]" variable=field>
-<$diff-text source={{{ [get.sourceField<subTiddler>,<field>] }}} dest={{{ [get.destField<subTiddler>,<field>] }}} >
-<code><<field>></code>: <<diff-count>> difference<%if [<diff-count>!match[1]]%>s<%endif%>
-</$diff-text>
+  <$diff-text source={{{ [get.sourceField<subTiddler>,<field>] }}} dest={{{ [get.destField<subTiddler>,<field>] }}} >
+    <code><<field>></code>: <<diff-count>> difference<%if [<diff-count>!match[1]]%>s<%endif%>
+  </$diff-text>
 </$list>""">>
