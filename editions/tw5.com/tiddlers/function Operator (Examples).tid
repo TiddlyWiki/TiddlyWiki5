@@ -44,7 +44,7 @@ The function `get.sourceField` use the operator <<.olink shadowsource>> to get t
 
 <<.operator-example 3 "[function[get.sourceFields],<subTiddler>]" "get the original list of fields.">>
 
-The function `get.sourceFields` use the operator <<.olink shadowsource>> to get the title of the plugin in which the shadow tiddler is defined. The subsequent [[Map Filter Run Prefix]] iterate over the plugin title, and use the operator <<.olink subtiddlerfields>> to output every fields of the shadow tiddler <<subTiddler>>, whose title is retrieven using a [[TextReference]].
+The function `get.sourceFields` use the operator <<.olink shadowsource>> to get the title of the plugin in which the shadow tiddler is defined. The subsequent [[Map Filter Run Prefix]] iterate over the plugin title, and use the operator <<.olink subtiddlerfields>> to output every fields of the shadow tiddler <<subTiddler>>, whose title is retrieved using a [[TextReference]].
 
 <<.operator-example 4 "[function[has.diff],<subTiddler>,[text]]" "compare the original value of the field <<.field text>> with the value set in the overriding tiddler. If the value is different, output the overriden value">>
 
