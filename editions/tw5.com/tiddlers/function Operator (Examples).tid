@@ -52,7 +52,7 @@ The function `has.diff` use the operator <<.olink get>> to retrieve the current 
 
 <<.operator-example 5 "[function[diff.fields],<subTiddler>]" "list the overriden fields">>
 
-The function `diff.fields` use the the function `get.sourceFields` to list every fields in the original <<subTiddler>>.  It then use the <<.olink fields>> operator to get every fields on the overriding tiddler, excluding the fields that are automatically set when a [[ShadowTiddler|ShadowTiddlers]] is overriden (<<.field created>>, <<.field creator>>, <<.field modified>>, <<.field modifier>>).
+The function `diff.fields` use the the function `get.sourceFields` to list every fields in the original <<subTiddler>>.  It then use the <<.olink fields>> operator to get every fields on the overriding tiddler, excluding the fields that are automatically set when a [[ShadowTiddler|ShadowTiddlers]] is overriden (<<.field created>>, <<.field creator>>, <<.field modified>>, <<.field modifier>>). The subsequent [[Filter Filter Run Prefix]] use the function `has.diff` to output only the title of the fields that were overidden.
 
 <<.tip """Theses functions can be used together to highlight the changes made to <<subTiddler>>:""">>
 
