@@ -1475,13 +1475,13 @@ $tw.Wiki = function(options) {
 			var priorityA = "plugin-priority" in a.fields ? a.fields["plugin-priority"] : 1;
 			var priorityB = "plugin-priority" in b.fields ? b.fields["plugin-priority"] : 1;
 			if (priorityA !== priorityB) {
-					return priorityA - priorityB;
+				return priorityA - priorityB;
 			} else if (a.fields.title < b.fields.title) {
-					return -1;
+				return -1;
 			} else if (a.fields.title === b.fields.title) {
-					return 0;
+				return 0;
 			} else {
-					return +1;
+				return +1;
 			}
 		});
 		// Now go through the plugins in ascending order and assign the shadows
