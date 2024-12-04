@@ -4,7 +4,7 @@ type: application/javascript
 module-type: filteroperator
 
 Filter operator that selects one tiddler for each unique value of the specified field.
-With suffix "list", selects all tiddlers that are values in a specified list field.
+With suffix "list-item", selects all tiddlers that are values in a specified list field.
 
 \*/
 (function(){
@@ -37,7 +37,7 @@ exports.each = function(source,operator,options) {
 			});
 		} else {
 			source(function(tiddler,title) {
-				if(tiddler) {
+				if(tiddler && tiddler.fields[field]) {
 					value = tiddler.getFieldString(field);
 					if(!$tw.utils.hop(values,value)) {
 						values[value] = true;
@@ -47,6 +47,7 @@ exports.each = function(source,operator,options) {
 			});
 		}
 	} else {
+		// suffix === "list-item"
 		source(function(tiddler,title) {
 			if(tiddler) {
 				$tw.utils.each(
