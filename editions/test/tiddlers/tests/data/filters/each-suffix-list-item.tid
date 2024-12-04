@@ -1,0 +1,20 @@
+title: Filters/each-suffix-list-item
+description: Test each:list-item[]
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: a
+test: a b
++
+title: c
+test: a cc
++
+title: Output
+
+\whitespace trim
+\function test() [has[test]each:list-item[test]] +[join[, ]]
+<$text text=<<test>>/>
++
+title: ExpectedResult
+
+<p>a, b, cc</p>

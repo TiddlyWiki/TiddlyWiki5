@@ -540,6 +540,18 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[each:list-item[authors]sort[title]]").join(",")).toBe("Bloggs,Joe,John Doe");
 		});
 	
+		it("should handle the each operator - test for unknown field values", function() {
+			expect(wiki.filterTiddlers("[each[mo]sort[title]]").join(",")).toBe("");
+			expect(wiki.filterTiddlers("[[Non existing]] [[TiddlerOne]] +[each:value[]] ").join(",")).toBe("Non existing,TiddlerOne");
+			expect(wiki.filterTiddlers("[[Non existing]] [[TiddlerOne]] +[each[]] ").join(",")).toBe("TiddlerOne");
+
+			// Improved code paths testing
+			expect(wiki.filterTiddlers("[[Non existing]] [[TiddlerOne]] +[each[modified]] ").join(",")).toBe("TiddlerOne");
+			expect(wiki.filterTiddlers("[[Non existing]] [[TiddlerOne]] +[each:value[modified]] ").join(",")).toBe("TiddlerOne");
+
+			//!!!!!!!!!!!!! Test for each:list-item[] are implemented at: ./data/filters/each-suffix-list-item.tid
+		});
+	
 		it("should handle the eachday operator", function() {
 			expect(wiki.filterTiddlers("[eachday[modified]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three");
 		});
