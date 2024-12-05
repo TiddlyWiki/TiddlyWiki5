@@ -1,14 +1,18 @@
 title: $:/core/macros/list
 tags: $:/tags/Macro
 
-\define list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage,field:"caption")
+\procedure list-links-draggable-drop-actions()
+<$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
+\end
+
 \whitespace trim
-<$genesis $type=<<__type__>> class=<<__class__>>>
-	<$list filter=<<__filter__>> emptyMessage=<<__emptyMessage__>>>
-		<$genesis $type=<<__subtype__>>>
+\procedure list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage,field:"caption")
+<$genesis $type=<<type>> class=<<class>>>
+	<$list filter=<<filter>> emptyMessage=<<emptyMessage>>>
+		<$genesis $type=<<subtype>>>
 			<$link to={{!!title}}>
 				<$let tv-wikilinks="no">
-					<$transclude field=<<__field__>>>
+					<$transclude field=<<field>>>
 						<$view field="title"/>
 					</$transclude>
 				</$let>
@@ -18,24 +22,19 @@ tags: $:/tags/Macro
 </$genesis>
 \end
 
-\define list-links-draggable-drop-actions()
-<$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
-\end
-
-\define list-links-draggable(tiddler,field:"list",emptyMessage,type:"ul",subtype:"li",class:"",itemTemplate)
-\whitespace trim
+\procedure list-links-draggable(tiddler,field:"list",emptyMessage,type:"ul",subtype:"li",class:"",itemTemplate)
 <span class="tc-links-draggable-list">
-	<$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
-		<$genesis $type=<<__type__>> class="$class$">
-			<$list filter="[list[$tiddler$!!$field$]]" emptyMessage=<<__emptyMessage__>>>
+	<$let targetTiddler=<<tiddler>> targetField=<<field>>>
+		<$genesis $type=<<type>> class=<<class>>>
+			<$list filter="[<tiddler>get<field>enlist-input[]]" emptyMessage=<<emptyMessage>>>
 				<$droppable
 					actions=<<list-links-draggable-drop-actions>>
-					tag="""$subtype$"""
+					tag=<<subtype>>
 					enable=<<tv-enable-drag-and-drop>>
 				>
 					<div class="tc-droppable-placeholder"/>
 					<div>
-						<$transclude tiddler="""$itemTemplate$""">
+						<$transclude tiddler=<<itemTemplate>>>
 							<$link to={{!!title}}>
 								<$let tv-wikilinks="no">
 									<$transclude field="caption">
@@ -60,50 +59,48 @@ tags: $:/tags/Macro
 				</$droppable>
 			</$tiddler>
 		</$genesis>
-	</$vars>
+	</$let>
 </span>
 \end
 
-\define list-tagged-draggable-drop-actions(tag)
-\whitespace trim
+\procedure list-tagged-draggable-drop-actions(tag)
 <!-- Save the current ordering of the tiddlers with this tag -->
-<$set name="order" filter="[<__tag__>tagging[]]">
+<$set name="order" filter="[<tag>tagging[]]">
 	<!-- Remove any list-after or list-before fields from the tiddlers with this tag -->
-	<$list filter="[<__tag__>tagging[]]">
+	<$list filter="[<tag>tagging[]]">
 		<$action-deletefield $field="list-before"/>
 		<$action-deletefield $field="list-after"/>
 	</$list>
 	<!-- Save the new order to the Tag Tiddler -->
-	<$action-listops $tiddler=<<__tag__>> $field="list" $filter="+[enlist<order>] +[insertbefore<actionTiddler>,<currentTiddler>]"/>
+	<$action-listops $tiddler=<<tag>> $field="list" $filter="+[enlist<order>] +[insertbefore<actionTiddler>,<currentTiddler>]"/>
 	<!-- Make sure the newly added item has the right tag -->
 	<!-- Removing this line makes dragging tags within the dropdown work as intended -->
-	<!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<__tag__>>/>-->
+	<!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<tag>>/>-->
 	<!-- Using the following 5 lines as replacement makes dragging titles from outside into the dropdown apply the tag -->
-	<$list filter="[<actionTiddler>!contains:tags<__tag__>]">
+	<$list filter="[<actionTiddler>!contains:tags<tag>]">
 		<$fieldmangler tiddler=<<actionTiddler>>>
-			<$action-sendmessage $message="tm-add-tag" $param=<<__tag__>>/>
+			<$action-sendmessage $message="tm-add-tag" $param=<<tag>>/>
 		</$fieldmangler>
 	</$list>
 </$set>
 \end
 
-\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"")
-\whitespace trim
+\procedure list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"")
 <span class="tc-tagged-draggable-list">
-	<$set name="tag" value=<<__tag__>>>
+	<$set name="tag" value=<<tag>>>
 		<$list
-			filter="[<__tag__>tagging[]$subFilter$]"
-			emptyMessage=<<__emptyMessage__>>
-			storyview=<<__storyview__>>
+			filter=`[<tag>tagging[]$(subFilter)$]`
+			emptyMessage=<<emptyMessage>>
+			storyview=<<storyview>>
 		>
-			<$genesis $type=<<__elementTag__>> class="tc-menu-list-item">
+			<$genesis $type=<<elementTag>> class="tc-menu-list-item">
 				<$droppable
-					actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>"""
+					actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<tag>>/>"""
 					enable=<<tv-enable-drag-and-drop>>
 				>
-					<$genesis $type=<<__elementTag__>> class="tc-droppable-placeholder"/>
-					<$genesis $type=<<__elementTag__>>>
-						<$transclude tiddler="""$itemTemplate$""">
+					<$genesis $type=<<elementTag>> class="tc-droppable-placeholder"/>
+					<$genesis $type=<<elementTag>>>
+						<$transclude tiddler=<<itemTemplate>>>
 							<$link to={{!!title}}>
 								<$view field="title"/>
 							</$link>
@@ -114,11 +111,11 @@ tags: $:/tags/Macro
 		</$list>
 		<$tiddler tiddler="">
 			<$droppable
-				actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>"""
+				actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<tag>>/>"""
 				enable=<<tv-enable-drag-and-drop>>
 			>
-				<$genesis $type=<<__elementTag__>> class="tc-droppable-placeholder"/>
-				<$genesis $type=<<__elementTag__>> style="height:0.5em;"/>
+				<$genesis $type=<<elementTag>> class="tc-droppable-placeholder"/>
+				<$genesis $type=<<elementTag>> style="height:0.5em;"/>
 			</$droppable>
 		</$tiddler>
 	</$set>
