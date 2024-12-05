@@ -1,13 +1,13 @@
 caption: wikify
 created: 20160321144949700
-modified: 20220122191540121
+modified: 20241202014354100
 tags: Widgets
 title: WikifyWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The wikify widget parses and renders a string of text and assigns the result to a specified [[variable|Variables]]. The new value of the variable is available to the content within the wikify widget.
+The <<.wid wikify>> widget parses and renders a string of text and assigns the result to a specified [[variable|Variables]]. The new value of the variable is available to the content within the wikify widget.
 
 ! Content and Attributes
 
@@ -28,3 +28,19 @@ The available output types are:
 |html |Return the rendered HTML of the output |
 |parsetree |Return a formatted JSON representation of the parse tree |
 |widgettree |Return a formatted JSON representation of the widget tree |
+
+! Examples
+
+!! Using a widget as a value
+
+<<testcase "TestCases/WikifyWidget/WidgetValue/Success">>
+<<testcase "TestCases/WikifyWidget/WidgetValue/Fail">>
+
+!! Accurate word count
+
+<<testcase "TestCases/WikifyWidget/WordCount/Success">>
+<<testcase "TestCases/WikifyWidget/WordCount/Fail">>
+
+!! Exporting rendered html
+
+<<testcase "TestCases/WikifyWidget/RenderHTML">>
