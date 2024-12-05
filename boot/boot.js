@@ -1469,7 +1469,6 @@ $tw.Wiki = function(options) {
 
 	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers
 	this.unpackPluginTiddlers = function() {
-		var self = this;
 		// Sort the plugin titles by the `plugin-priority` field
 		pluginTiddlers.sort(function(a,b) {
 			if("plugin-priority" in a.fields && "plugin-priority" in b.fields) {
@@ -1491,7 +1490,10 @@ $tw.Wiki = function(options) {
 		$tw.utils.each(pluginTiddlers,function(tiddler) {
 			// Extract the constituent tiddlers
 			if($tw.utils.hop(pluginInfo,tiddler.fields.title)) {
-				$tw.utils.each(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
+				var constituentTiddlers = pluginInfo[tiddler.fields.title].tiddlers;
+				$tw.utils.each(constituentTiddlers,function(constituentTiddler,constituentTitle) {
+					// Skip translation tiddlers of plugin that follows `$:/plugins/xxx/yyy/languages/` pattern, will handle it later
+					if(constituentTitle.split('/')[4] === 'languages') return;
 					// Save the tiddler object
 					if(constituentTitle) {
 						shadowTiddlers[constituentTitle] = {
@@ -1500,6 +1502,10 @@ $tw.Wiki = function(options) {
 						};
 					}
 				});
+				// Handle language tiddlers of plugin
+				if($tw.browser && $tw.language !== undefined) {
+					$tw.language.activatePluginTranslations(shadowTiddlers,tiddler.fields.title,constituentTiddlers);
+				}
 			}
 		});
 		shadowTiddlerTitles = null;
