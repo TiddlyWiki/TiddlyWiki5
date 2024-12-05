@@ -1156,7 +1156,7 @@ SqlTiddlerDatabase.prototype.deleteRole = function(roleId) {
 
 SqlTiddlerDatabase.prototype.listRoles = function() {
 	return this.engine.runStatementGetAll(`
-			SELECT * FROM roles ORDER BY role_name
+			SELECT * FROM roles ORDER BY role_name DESC
 	`);
 };
 
