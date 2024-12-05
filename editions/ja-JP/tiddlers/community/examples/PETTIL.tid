@@ -1,0 +1,21 @@
+created: 20140716085406905
+modified: 20241201105625382
+original-modified: 20140716084548184
+tags: Examples
+title: "PETTIL - Forth for the Commodore PET" by Charlie Hitselberger
+ja-title: Charlie Hitselbergerの"PETTIL - コモドールPET用Forth"
+type: text/vnd.tiddlywiki
+url: http://pettilmobile.com/tw/
+
+6502アセンブリ言語で書かれた、[[コモドールPET|https://en.wikipedia.org/wiki/Commodore_PET]]用の高速Forthインタープリタです。プログラムドキュメントを含むTiddlyWikiは、ソースコードから自動的に生成されます。https://github.com/chitselb/pettilを参照してください。
+
+{{!!url}}
+
+<<<
+プロジェクトの目的は、以下のとおりです(順不同): 
+
+* Commodore PET 2001で動作するForthを作成する
+* 楽しむ
+* "6502アセンブリゴルフ"のスキルを向上させる
+* このプロジェクトに興味のある人を見つける
+<<<
