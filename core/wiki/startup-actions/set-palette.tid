@@ -1,0 +1,5 @@
+title: $:/core/wiki/startup-actions/set-palette
+tags: $:/tags/StartupAction
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<$transclude $variable="actions-switch-colour-palette" paletteTitle={{$:/palette}}/>

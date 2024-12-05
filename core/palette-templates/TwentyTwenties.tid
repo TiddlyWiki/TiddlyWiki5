@@ -1,0 +1,167 @@
+title: $:/palettes/TwentyTwenties
+name: TwentyTwenties
+description: Modern and flexible
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+palette-type: modern
+
+# Background colour, used at different lightness levels
+base-background: #F0B8C8
+# Foreground colour, used for text and icons at different lightness levels
+base-foreground: #333344
+# Primary colour, used for links and other accented elements
+base-primary: #5778d8
+# Secondary colour, used for alerts and other secondary elements
+base-secondary: rgb(236, 212, 58)
+# Tertiary base colour, used for monospaced text and other tertiary elements
+base-tertiary: rgb(135, 239, 70)
+
+# Contrast tests
+?background-foreground-contrast: [tf.check-colour-contrast[background],[foreground],[125]]
+?alert-contrast: [tf.check-colour-contrast[alert-background],[foreground],[25]]
+?code-contrast: [tf.check-colour-contrast[code-background],[code-foreground],[25]]
+
+# Colour definitions
+alert-background: [function[colour],[base-secondary]colour-oklch:l[0.9]]
+alert-border: [function[colour],[base-secondary]colour-oklch:l[0.5]]
+alert-highlight: [function[colour],[base-primary]colour-oklch:l[0.6]]
+alert-muted-foreground: [function[colour],[foreground]colour-oklch:l[0.6]]
+background: [function[colour],[base-background]colour-oklch:l[0.9]]
+blockquote-bar: [function[colour],[muted-foreground]]
+button-background:
+button-foreground:
+button-border:
+code-background: [function[colour],[base-tertiary]colour-oklch:l[0.9]]
+code-border: [function[colour],[base-tertiary]color-oklch:l[0.5]]
+code-foreground: [function[colour],[base-tertiary]colour-oklch:l[0.3]]
+diff-delete-background: [function[colour],[]]
+diff-delete-foreground: [function[colour],[foreground]]
+diff-equal-background:
+diff-equal-foreground: [function[colour],[foreground]]
+diff-insert-background: [function[colour],[]]
+diff-insert-foreground: [function[colour],[foreground]]
+diff-invisible-background:
+diff-invisible-foreground: [function[colour],[muted-foreground]]
+dirty-indicator: [function[colour],[]]
+download-background: [function[colour],[]]
+download-foreground: [function[colour],[background]]
+dragger-background: [function[colour],[foreground]]
+dragger-foreground: [function[colour],[background]]
+dropdown-background: [function[colour],[background]]
+dropdown-border: [function[colour],[muted-foreground]]
+dropdown-tab-background-selected: [function[colour],[]]
+dropdown-tab-background: [function[colour],[]]
+dropzone-background: rgba(0,200,0,0.7)
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: [function[colour],[]]
+external-link-foreground: [function[colour],[]]
+footnote-target-background: [function[colour],[]]
+foreground: [function[colour],[base-foreground]]
+highlight-background: [function[colour],[]]
+highlight-foreground: [function[colour],[]]
+message-background: [function[colour],[]]
+message-border: [function[colour],[]]
+message-foreground: [function[colour],[]]
+modal-backdrop: [function[colour],[foreground]]
+modal-background: [function[colour],[background]]
+modal-border: [function[colour],[]]
+modal-footer-background: [function[colour],[]]
+modal-footer-border: [function[colour],[]]
+modal-header-border: [function[colour],[]]
+muted-foreground: [function[colour],[]]
+network-activity-foreground: [function[colour],[]]
+notification-background: [function[colour],[base-tertiary]colour-oklch:l[0.9]]
+notification-border: [function[colour],[base-tertiary]colour-oklch:l[0.2]]
+page-background: [function[colour],[base-background]colour-oklch:l[0.7]]
+pre-background: [function[colour],[base-tertiary]colour-oklch:l[0.98]]
+pre-border: [function[colour],[base-tertiary]colour-oklch:l[0.3]]
+selection-background:
+selection-foreground:
+select-tag-background:
+select-tag-foreground:
+sidebar-button-foreground: [function[colour],[foreground]]
+sidebar-controls-foreground-hover: [function[colour],[]]
+sidebar-controls-foreground: [function[colour],[]]
+sidebar-foreground-shadow: rgba(255,255,255, 0.8)
+sidebar-foreground: [function[colour],[]]
+sidebar-muted-foreground-hover: [function[colour],[]]
+sidebar-muted-foreground: [function[colour],[]]
+sidebar-tab-background-selected: [function[colour],[]]
+sidebar-tab-background: [function[colour],[]]
+sidebar-tab-border-selected: [function[colour],[tab-border-selected]]
+sidebar-tab-border: [function[colour],[tab-border]]
+sidebar-tab-divider: [function[colour],[]]
+sidebar-tab-foreground-selected:
+sidebar-tab-foreground: [function[colour],[tab-foreground]]
+sidebar-tiddler-link-foreground-hover: [function[colour],[]]
+sidebar-tiddler-link-foreground: [function[colour],[]]
+site-title-foreground: [function[colour],[tiddler-title-foreground]]
+stability-stable: [function[colour],[]]
+stability-experimental: [function[colour],[]]
+stability-deprecated: [function[colour],[]]
+stability-legacy: [function[colour],[]]
+static-alert-foreground: [function[colour],[]]
+tab-background-selected: [function[colour],[]]
+tab-background: [function[colour],[]]
+tab-border-selected: [function[colour],[]]
+tab-border: [function[colour],[]]
+tab-divider: [function[colour],[]]
+tab-foreground-selected: [function[colour],[tab-foreground]]
+tab-foreground: [function[colour],[]]
+table-border: [function[colour],[]]
+table-footer-background: [function[colour],[]]
+table-header-background: [function[colour],[]]
+tag-background: [function[colour],[]]
+tag-foreground: [function[colour],[]]
+testcase-accent-level-1: [function[colour],[]]
+testcase-accent-level-2: [function[colour],[]]
+testcase-accent-level-3: [function[colour],[]]
+tiddler-background: [function[colour],[base-background]colour-oklch:l[.9]]
+tiddler-border: [function[colour],[background]]
+tiddler-controls-foreground-hover: [function[colour],[]]
+tiddler-controls-foreground-selected: [function[colour],[]]
+tiddler-controls-foreground: [function[colour],[]]
+tiddler-editor-background: [function[colour],[]]
+tiddler-editor-border-image: [function[colour],[]]
+tiddler-editor-border: [function[colour],[]]
+tiddler-editor-fields-even: [function[colour],[]]
+tiddler-editor-fields-odd: [function[colour],[]]
+tiddler-info-background: [function[colour],[]]
+tiddler-info-border: [function[colour],[]]
+tiddler-info-tab-background: [function[colour],[]]
+tiddler-link-background: [function[colour],[background]]
+tiddler-link-foreground: [function[colour],[primary]]
+tiddler-subtitle-foreground: [function[colour],[]]
+tiddler-title-foreground: [function[colour],[]]
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
+untagged-background: [function[colour],[]]
+very-muted-foreground: [function[colour],[]]
+wikilist-background: [function[colour],[]]
+wikilist-item: [function[colour],[]]
+wikilist-info: [function[colour],[]]
+wikilist-title: [function[colour],[]]
+wikilist-title-svg: [function[colour],[wikilist-title]]
+wikilist-url: [function[colour],[]]
+wikilist-button-open: [function[colour],[]]
+wikilist-button-open-hover: green
+wikilist-button-reveal: [function[colour],[]]
+wikilist-button-reveal-hover: blue
+wikilist-button-remove: [function[colour],[]]
+wikilist-button-remove-hover: red
+wikilist-toolbar-background: [function[colour],[]]
+wikilist-toolbar-foreground: [function[colour],[]]
+wikilist-droplink-dragover: rgba(255,192,192,0.5)
+wikilist-button-background: [function[colour],[]]
+wikilist-button-foreground: [function[colour],[]]

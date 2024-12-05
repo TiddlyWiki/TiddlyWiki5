@@ -1,0 +1,7 @@
+title: $:/core/ui/Palettes/Preview/Sidebar/Subtitle
+tags: $:/tags/Preview/SideBar
+
+\whitespace trim
+<$colour.div class="tc-palette-preview-thumbnail-sidebar-subtitle">
+	a non-linear personal web notebook
+</$colour.div>
