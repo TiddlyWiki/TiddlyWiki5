@@ -105,7 +105,11 @@ tags: $:/tags/Macro
 					<$genesis $type=<<__elementTag__>>>
 						<$transclude tiddler="""$itemTemplate$""">
 							<$link to={{!!title}}>
-								<$view field="title"/>
+								<$let tv-wikilinks="no">
+									<$transclude field="caption">
+										<$view field="title"/>
+									</$transclude>
+								</$let>
 							</$link>
 						</$transclude>
 					</$genesis>
