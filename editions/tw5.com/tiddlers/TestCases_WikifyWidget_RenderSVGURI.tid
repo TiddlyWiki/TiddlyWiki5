@@ -1,0 +1,50 @@
+created: 20241206225533517
+description: Rendering parametrized svg for use in stylesheets
+modified: 20241206233219095
+tags: $:/tags/wiki-test-spec
+title: TestCases/WikifyWidget/RenderSVGURI
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+The core svg icons use a parameter widget, making their use in stylesheets impossible without wikify.
++
+title: Output
+
+https://tiddlywiki.com/
+
+<style>{{Stylesheet}}</style>
++
+title: Stylesheet
+
+\rules except dash
+\procedure mask(img)
+<$tiddler tiddler=<<img>> 
+><$wikify name="image" text={{!!text}} mode="inline" output="html"
+><$let
+        type={{!!type}}
+        uri={{!!_canonical_uri}}
+        external=`color:transparent;--mask:unset;--url:url($(uri)$)`
+        base64=`color:transparent;--mask:unset;--url:url(data:${[{!!type}]}$;base64,$(image)$)`
+        svg=`--mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg">${[<image>get[text]else<image>search-replace:g[#],[%23]search-replace:g[
+],[]]}$</svg>')`
+        ><$text text={{{ [<uri>!is[blank]then<external>]~[<type>!is[blank]!search[svg]then<base64>]~[<svg>] }}}
+/>;</$let></$wikify></$tiddler>
+\end
+
+<$text text=```
+.tc-tiddlylink-external{
+    &:after{
+        width:.7rem;
+        height:.7rem;
+        background:center/contain no-repeat var(--url);
+        background-color:currentColor;
+        display: inline-block;
+        -webkit-mask: center / contain no-repeat var(--mask);
+        mask: center / contain no-repeat var(--mask);
+        margin-inline:.5ch;
+        content:"";
+    }
+    ```/><<mask "$:/core/images/open-window">><$text text=```
+}
+```/>

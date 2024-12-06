@@ -1,6 +1,6 @@
 caption: wikify
 created: 20160321144949700
-modified: 20241202014354100
+modified: 20241206233352509
 tags: Widgets
 title: WikifyWidget
 type: text/vnd.tiddlywiki
@@ -44,3 +44,7 @@ The available output types are:
 !! Exporting rendered html
 
 <<testcase "TestCases/WikifyWidget/RenderHTML">>
+
+!! Rendering parametrized svg for use in stylesheets
+
+<<testcase "TestCases/WikifyWidget/RenderSVGURI">>
