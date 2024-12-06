@@ -1,0 +1,42 @@
+title: Core Icons
+ja-title: コアアイコン
+tags: Features
+modified: 20241206115817981
+original-modified: 20230423103154329
+created: 20230423103154329
+
+!! 紹介
+
+TiddlyWikiには100以上のカスタムベクターアイコンが含まれています。これらはユーザーインターフェイスに組み込まれており、作成者が独自のアプリケーションで使用することもできます。完全なリストについては、[[アイコンギャラリー|Icon Gallery]]を参照してください。
+
+!! 使用法
+
+コアアイコンはトランスクルージョンして使用します。例えば:
+
+<<wikitext-example-without-html """{{$:/core/images/new-image-button}}
+""">>
+
+コアアイコンはパラメータ化されています。最初のパラメータ`size`は、アイコンをレンダリングするサイズを指定します:
+
+<<wikitext-example-without-html """{{$:/core/images/picture|64px}}
+<$transclude $tiddler="$:/core/images/picture" size="32px"/>
+""">>
+
+アイコンのサイズを動的に変更する例を示します:
+
+<<wikitext-example-without-html """<$list filter="[range[24,56,8]]" variable=iconSize>
+<$text text={{{ [<iconSize>addsuffix[px]] }}} />
+<$transclude $tiddler="$:/core/icon" size=<<iconSize>>/>
+</$list>
+""">>
+
+一部のアイコンは、レンダリング方法をカスタマイズするためにさらにパラメーターを受け取ります。例えば、$:/core/images/new-journal-buttonアイコンは、カレンダーに表示する日付を指定する追加パラメータ`day`を取ります。指定しない場合、デフォルトで現在の日付が設定されます
+
+<<wikitext-example-without-html """{{$:/core/images/new-journal-button|48px|17}}
+<$transclude $tiddler="$:/core/images/new-journal-button" day="17"/>
+""">>
+
+コア アイコンは、本格的なSVG画像としてではなく、埋め込み[[SVG 要素|Using SVG]]として実装されています。これは、CSSを使用してスタイルを設定できることを意味します。例えば、CSSプロパティ`fill`を使用してアイコンの色を変更できます。例えば:
+
+<<wikitext-example-without-html """<span style="fill: red;">{{$:/core/images/opacity}}</span>
+""">>
