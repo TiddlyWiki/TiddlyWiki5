@@ -6,7 +6,23 @@ type: text/vnd.tiddlywiki
 \define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 
-! Welcome
+---
+
+! ~TiddlyWiki ~MultiWikiServer
+
+UNDER DEVELOPMENT
+
+This is a branch of TiddlyWiki that adds the ~MultiWikiServer plugin.
+
+!! Readme
+
+{{$:/plugins/tiddlywiki/multiwikiserver/readme}}
+
+!! Docs
+
+{{$:/plugins/tiddlywiki/multiwikiserver/docs}}
+
+---
 
 Welcome to TiddlyWiki, a non-linear personal web notebook that anyone can use and keep forever, independently of any corporation.
 
