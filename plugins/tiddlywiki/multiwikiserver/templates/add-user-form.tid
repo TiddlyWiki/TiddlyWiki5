@@ -1,22 +1,24 @@
 title: $:/plugins/tiddlywiki/multiwikiserver/templates/add-user-form
 
 <h1>Add New User</h1>
-<form method="POST" action="/admin/post-user">
-	<div class="form-group">
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username" class="form-input" required>
-	</div>
-	<div class="form-group">
-		<label for="email">Email:</label>
-		<input type="email" id="email" name="email" class="form-input" required>
-	</div>
+<form id="addUserForm" method="POST" action="/admin/post-user">
+	<$vars username={{{ [[$:/temp/mws/queryParams]get[username]] }}} email={{{ [[$:/temp/mws/queryParams]get[email]] }}}>
+		<div class="form-group">
+			<label for="username">Username:</label>
+			<input type="text" id="username" name="username" class="form-input" required value=<<username>> autocomplete="new-password" readonly>
+		</div>
+		<div class="form-group">
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" class="form-input" required value=<<email>> autocomplete="new-password" readonly>
+		</div>
+	</$vars>
 	<div class="form-group">
 		<label for="password">Password:</label>
-		<input type="password" id="password" name="password" class="form-input" required>
+		<input type="password" id="password" name="password" class="form-input" required autocomplete="new-password" readonly>
 	</div>
 	<div class="form-group">
 		<label for="confirmPassword">Confirm Password:</label>
-		<input type="password" id="confirmPassword" name="confirmPassword" class="form-input" required>
+		<input type="password" id="confirmPassword" name="confirmPassword" class="form-input" required autocomplete="new-password" readonly>
 	</div>
 
 	<$list filter="[[$:/temp/mws/post-user/error]!is[missing]]" variable="errorTiddler">
