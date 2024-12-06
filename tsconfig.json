@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "paths": {
+      // Allow `import('$:/core/modules/...')` instead of `import('../../core/modules/...')`. Only works inside this project.
+      "$:/core/*": ["core/*"]
+    },
+    "baseUrl": ".",
+    "rootDir": ".",
+    "noImplicitAny": false,
+    "strict": false,
+    "allowJs": true,
+    "checkJs": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "declarationDir": "types/",
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "Node16",
+    "outDir": "types/",
+    "skipLibCheck": true,
+    "target": "ESNext"
+  },
+  "include": ["./core/**/*.js", "./core/**/*.d.ts", "types/*.d.ts"],
+  // Exclude the generated types from the core folder
+  "exclude": ["types/core",]
+}

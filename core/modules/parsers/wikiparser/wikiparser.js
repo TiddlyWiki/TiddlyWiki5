@@ -25,16 +25,18 @@ Attributes are stored as hashmaps of the following objects:
 /*global $tw: false */
 "use strict";
 
-/*
-type: content type of text
-text: text to be parsed
-options: see below:
-	parseAsInline: true to parse text as inline instead of block
-	wiki: reference to wiki to use
-	_canonical_uri: optional URI of content if text is missing or empty
-	configTrimWhiteSpace: true to trim whitespace
-*/
-var WikiParser = function(type,text,options) {
+/**
+ * @typedef {import('../base').Parser} Parser
+ */
+
+/**
+ * WikiParser class for parsing text of a specified MIME type.
+ * 
+ * @class
+ * @extends {Parser}
+ * @constructor
+ */
+function WikiParser(type,text,options) {
 	this.wiki = options.wiki;
 	var self = this;
 	// Check for an externally linked tiddler
@@ -99,8 +101,11 @@ var WikiParser = function(type,text,options) {
 	// Return the parse tree
 };
 
-/*
-*/
+/**
+ * Load a remote tiddler from a given URL.
+ * 
+ * @param {string} url - The URL of the remote tiddler to load.
+ */
 WikiParser.prototype.loadRemoteTiddler = function(url) {
 	var self = this;
 	$tw.utils.httpRequest({
