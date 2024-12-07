@@ -103,8 +103,8 @@ external-link-foreground-visited: <<colour flexoki-bl>>
 external-link-foreground: <<colour flexoki-bl>>
 footnote-target-background: <<colour flexoki-bg-2>>
 foreground: #CECDC3
-highlight-background: #ffff00
-highlight-foreground: #000000
+highlight-background: <<colour flexoki-cyan-950>>
+highlight-foreground: <<colour flexoki-cyan-400>>
 menubar-background: <<colour primary>>
 menubar-foreground: <<colour flexoki-paper>>
 message-background: <<colour background>>
