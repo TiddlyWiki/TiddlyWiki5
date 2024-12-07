@@ -65,8 +65,8 @@ flexoki-bl-2: <<colour flexoki-blue-600>>
 flexoki-pu-2: <<colour flexoki-purple-600>>
 flexoki-ma-2: <<colour flexoki-magenta-600>>
 
-alert-background: <<colour flexoki-yellow-100>>
-alert-border: <<colour flexoki-ye-2>>
+alert-background: <<colour flexoki-yellow-900>>
+alert-border: <<colour flexoki-ye>>
 alert-highlight: <<colour flexoki-re>>
 alert-muted-foreground: <<colour flexoki-ye>>
 background: #100F0F
@@ -118,14 +118,14 @@ modal-footer-border: <<colour flexoki-ui-3>>
 modal-header-border: <<colour flexoki-ui-3>>
 muted-foreground: <<colour flexoki-tx-2>>
 network-activity-foreground: <<colour flexoki-cy>>
-notification-background: <<colour flexoki-ui-3>>
-notification-border: <<colour flexoki-ui>>
+notification-background: <<colour flexoki-bg>>
+notification-border: <<colour flexoki-paper>>
 page-background: <<colour flexoki-bg-2>>
-pre-background: <<colour flexoki-ui-3>>
+pre-background: <<colour flexoki-bg-2>>
 pre-border: <<colour flexoki-ui-2>>
 primary: <<colour flexoki-cy>>
-selection-background: #2b7b73
-selection-foreground: <<colour flexoki-tx>>
+selection-background: <<colour primary>>
+selection-foreground: <<colour background>>
 select-tag-background: <<colour flexoki-bg>>
 select-tag-foreground: <<colour flexoki-paper>>
 sidebar-button-foreground: <<colour foreground>>

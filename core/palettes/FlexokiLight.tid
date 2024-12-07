@@ -94,8 +94,8 @@ dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
 dropdown-background: <<colour background>>
 dropdown-border: <<colour muted-foreground>>
-dropdown-tab-background-selected: #fff
-dropdown-tab-background: #ececec
+dropdown-tab-background-selected: <<colour background>>
+dropdown-tab-background: <<colour flexoki-bg-2>>
 dropzone-background: <<colour flexoki-gr>>
 external-link-background-hover: inherit
 external-link-background-visited: inherit
@@ -123,7 +123,7 @@ network-activity-foreground: <<colour flexoki-cy-2>>
 notification-background: <<colour flexoki-bg>>
 notification-border: <<color flexoki-black>>
 page-background: <<colour flexoki-bg-2>>
-pre-background: <<colour flexoki-bg>>
+pre-background: <<colour flexoki-bg-2>>
 pre-border: <<colour flexoki-ui-2>>
 primary: <<colour flexoki-cy-2>>
 selection-background: <<colour flexoki-cy-2>>
