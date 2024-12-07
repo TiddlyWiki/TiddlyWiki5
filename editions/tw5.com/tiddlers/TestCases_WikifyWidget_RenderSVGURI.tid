@@ -21,7 +21,6 @@ title: Stylesheet
 
 \rules except dash
 \procedure link-icon(protocol,img)
-\procedure mask(img)
 <$tiddler tiddler=<<img>> >
   <$wikify name="image" text={{!!text}} mode="inline" output="html">
     <$let
@@ -31,28 +30,23 @@ title: Stylesheet
       base64=`color:transparent;--mask:unset;--url:url(data:${[{!!type}]}$;base64,$(image)$)`
       svg=`--mask:url('data:image/svg+xml;utf8,${[<image>get[text]]~[<image>search-replace:g[#],[%23]split[<svg]join[<svg xmlns="http://www.w3.org/2000/svg"]]}$')`
     >
-      <$text text={{{ [<uri>!is[blank]then<external>]~[<type>!is[blank]!search[svg]then<base64>]~[<svg>] }}}/>;
+      <$text text=`[href*="$(protocol)$"]{${ [<uri>!is[blank]then<external>]~[<type>!is[blank]!search[svg]then<base64>]~[<svg>] }$;}`/>
     </$let>
   </$wikify>
 </$tiddler>
-\end mask
-:where([href*="<<protocol>>"]){<$transclude $variable="mask" img=<<img>> />}
-\end protocol-icon
+\end
 
-.tc-tiddlylink-external{
-    &:after{
-        width:.7rem;
-        height:.7rem;
-        background:center/contain no-repeat var(--url);
-        background-color:currentColor;
-        display: inline-block;
-        -webkit-mask: center / contain no-repeat var(--mask);
-        mask: center / contain no-repeat var(--mask);
-        margin-inline:.5ch;
-        content:"";
-    }
-    <<link-icon "http:" "$:/core/images/open-window">>
-    <<link-icon "https:" "$:/core/images/locked-padlock">>
-    <<link-icon "mailto:" "$:/core/images/mail">>
-    <<link-icon "file:" "$:/core/images/file">>
+.tc-tiddlylink-external:after{
+  width:.7rem;
+  aspect-ratio:1;
+  background:currentColor;
+  display: inline-block;
+  mask: center / contain no-repeat var(--mask);
+  margin-inline:.5ch;
+  content:"";
 }
+
+<<link-icon "http:" "$:/core/images/open-window">>
+<<link-icon "https:" "$:/core/images/locked-padlock">>
+<<link-icon "mailto:" "$:/core/images/mail">>
+<<link-icon "file:" "$:/core/images/file">>
