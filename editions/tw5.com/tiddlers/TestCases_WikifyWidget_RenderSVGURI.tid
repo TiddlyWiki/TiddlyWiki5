@@ -23,15 +23,11 @@ title: Stylesheet
 \procedure link-icon(protocol,img)
 <$tiddler tiddler=<<img>> >
   <$wikify name="image" text={{!!text}} mode="inline" output="html">
-    <$let
-      type={{!!type}}
-      uri={{!!_canonical_uri}}
-      external=`color:transparent;--mask:unset;--url:url($(uri)$)`
-      base64=`color:transparent;--mask:unset;--url:url(data:${[{!!type}]}$;base64,$(image)$)`
-      svg=`--mask:url('data:image/svg+xml;utf8,${[<image>get[text]]~[<image>search-replace:g[#],[%23]split[<svg]join[<svg xmlns="http://www.w3.org/2000/svg"]]}$')`
-    >
-      <$text text=`[href*="$(protocol)$"]{${ [<uri>!is[blank]then<external>]~[<type>!is[blank]!search[svg]then<base64>]~[<svg>] }$;}`/>
-    </$let>
+    <$text text=```
+      [href*="$(protocol)$"]{
+        --mask:url('data:image/svg+xml;utf8,${ [<image>get[text]]~[<image>search-replace:g[#],[%23]split[<svg]join[<svg xmlns="http://www.w3.org/2000/svg"]] }$');
+      }
+    ```/>
   </$wikify>
 </$tiddler>
 \end
