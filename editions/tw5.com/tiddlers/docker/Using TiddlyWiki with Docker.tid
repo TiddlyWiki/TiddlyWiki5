@@ -1,0 +1,39 @@
+created: 20230403211230516
+modified: 20230403211230516
+tags: [[TiddlyWiki with Docker]]
+title: Using TiddlyWiki with Docker
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki5 can also be run using Docker. See the [[Dockerfile]] for details.
+
+The image can be built using the following command in the root of the TiddlyWiki git repo:
+```
+docker build --tag tiddlywiki .
+```
+
+It can be run like so:
+```
+# Create a data directory
+mkdir ~/tiddlywiki
+
+# Initialize the data directory
+docker run \
+    --rm \
+    --name tiddlywiki \
+    --volume ~/tiddlywiki:/tiddlywiki \
+    tiddlywiki \
+    mynewwiki --init server
+
+# Start the server with custom arguments
+docker run \
+    --rm \
+    --name tiddlywiki \
+    --volume ~/tiddlywiki:/tiddlywiki \
+    --publish 8080:8080 \
+    tiddlywiki \
+    mynewwiki --listen host=0.0.0.0 port=8080 "readers=(anon)" "writers=(authenticated)" admin=noah username=noah password=noah
+```
+
+If you'd prefer a pre-built image, there is a community-maintained image on Docker Hub: https://hub.docker.com/r/elasticdog/tiddlywiki/
+
+See [[Commands]] for a full listing of the available commands.
