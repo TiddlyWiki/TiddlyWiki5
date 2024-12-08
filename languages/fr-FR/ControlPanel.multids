@@ -67,7 +67,7 @@ Palette/Editor/Reset/Caption: Réinitialiser
 Palette/HideEditor/Caption: Masquer l'éditeur
 Palette/Prompt: Palette actuelle :
 Palette/ShowEditor/Caption: Afficher l'éditeur
-Parsing/Caption: Analyse
+Parsing/Caption: Analyseur
 Parsing/Hint: Ici, vous pouvez activer/désactiver globalement les règles de l'analyseur du wiki. Les changements seront effectifs après enregistrement et rechargement de votre wiki. Désactiver certaines règles peut empêcher <$text text="TiddlyWiki"/> de fonctionner correctement. Pour restaurer le fonctionnement normal, utilisez le [[safe mode|https://tiddlywiki.com/#SafeMode]].
 Parsing/Block/Caption: Règles d'analyse Block
 Parsing/Inline/Caption: Règles d'analyse Inline
@@ -241,3 +241,7 @@ ViewTemplateBody/Caption: Visualisation du corps
 ViewTemplateBody/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage du corps d'un tiddler.
 ViewTemplateTitle/Caption: Visualisation du titre
 ViewTemplateTitle/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage du titre d'un tiddler.
+ViewTemplateSubtitle/Caption: Visualisation du sous-titre
+ViewTemplateSubtitle/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage du sous-titre d'un tiddler.
+ViewTemplateTags/Caption: Visualisation des tags
+ViewTemplateTags/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage de la zone de tags d'un tiddler.
