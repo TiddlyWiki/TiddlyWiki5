@@ -22,12 +22,12 @@ title: Stylesheet
 \rules except dash
 \procedure link-icon(protocol,img)
 <$tiddler tiddler=<<img>> >
-  <$wikify name="image" text={{!!text}} mode="inline" output="html">
-    <$text text=```
+  <$wikify name="svg" text={{!!text}} mode="inline" output="html">
+    <$text text=`
       [href*="$(protocol)$"]{
-        --mask:url('data:image/svg+xml;utf8,${ [<image>get[text]]~[<image>search-replace:g[#],[%23]split[<svg]join[<svg xmlns="http://www.w3.org/2000/svg"]] }$');
+        --mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg">$(svg)$</svg>');
       }
-    ```/>
+    `/>
   </$wikify>
 </$tiddler>
 \end
