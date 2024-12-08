@@ -50,4 +50,13 @@ exports.parse = function() {
 	}
 };
 
+exports.serialize = function(tree,serialize) {
+	// Check if the link is suppressed
+	var isSuppressed = tree.children[0].text.substr(0,1) === "~";
+	var serialized = isSuppressed ? "~" : "";
+	// Append the link text
+	serialized += tree.attributes.to.value;
+	return serialized;
+};
+
 })();
