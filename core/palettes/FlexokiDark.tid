@@ -65,8 +65,8 @@ flexoki-bl-2: <<colour flexoki-blue-600>>
 flexoki-pu-2: <<colour flexoki-purple-600>>
 flexoki-ma-2: <<colour flexoki-magenta-600>>
 
-alert-background: <<colour flexoki-yellow-100>>
-alert-border: <<colour flexoki-ye-2>>
+alert-background: <<colour flexoki-yellow-900>>
+alert-border: <<colour flexoki-ye>>
 alert-highlight: <<colour flexoki-re>>
 alert-muted-foreground: <<colour flexoki-ye>>
 background: #100F0F
@@ -103,8 +103,8 @@ external-link-foreground-visited: <<colour flexoki-bl>>
 external-link-foreground: <<colour flexoki-bl>>
 footnote-target-background: <<colour flexoki-bg-2>>
 foreground: #CECDC3
-highlight-background: #ffff00
-highlight-foreground: #000000
+highlight-background: <<colour flexoki-cyan-950>>
+highlight-foreground: <<colour flexoki-cyan-400>>
 menubar-background: <<colour primary>>
 menubar-foreground: <<colour flexoki-paper>>
 message-background: <<colour background>>
@@ -118,14 +118,14 @@ modal-footer-border: <<colour flexoki-ui-3>>
 modal-header-border: <<colour flexoki-ui-3>>
 muted-foreground: <<colour flexoki-tx-2>>
 network-activity-foreground: <<colour flexoki-cy>>
-notification-background: <<colour flexoki-ui-3>>
-notification-border: <<colour flexoki-ui>>
+notification-background: <<colour flexoki-bg>>
+notification-border: <<colour flexoki-paper>>
 page-background: <<colour flexoki-bg-2>>
-pre-background: <<colour flexoki-ui-3>>
+pre-background: <<colour flexoki-bg-2>>
 pre-border: <<colour flexoki-ui-2>>
 primary: <<colour flexoki-cy>>
-selection-background: #2b7b73
-selection-foreground: <<colour flexoki-tx>>
+selection-background: <<colour primary>>
+selection-foreground: <<colour background>>
 select-tag-background: <<colour flexoki-bg>>
 select-tag-foreground: <<colour flexoki-paper>>
 sidebar-button-foreground: <<colour foreground>>
@@ -193,20 +193,20 @@ toolbar-cancel-button:
 toolbar-done-button: 
 untagged-background: <<colour flexoki-tx-3>>
 very-muted-foreground: <<colour flexoki-600>>
-wikilist-background: #e5e5e5
-wikilist-item: #fff
-wikilist-info: #000
-wikilist-title: #666
+wikilist-background: <<colour flexoki-ui>>
+wikilist-item: <<colour flexoki-black>>
+wikilist-info: <<colour flexoki-paper>>
+wikilist-title: <<colour flexoki-tx-2>>
 wikilist-title-svg: <<colour wikilist-title>>
-wikilist-url: #aaa
-wikilist-button-open: #4fb82b
-wikilist-button-open-hover: green
-wikilist-button-reveal: #5778d8
-wikilist-button-reveal-hover: blue
-wikilist-button-remove: #d85778
-wikilist-button-remove-hover: red
-wikilist-toolbar-background: #d3d3d3
-wikilist-toolbar-foreground: #888
-wikilist-droplink-dragover: rgba(255,192,192,0.5)
-wikilist-button-background: #acacac
-wikilist-button-foreground: #000
+wikilist-url: <<colour flexoki-tx-3>>
+wikilist-button-open: <<colour flexoki-gr>>
+wikilist-button-open-hover: <<colour flexoki-gr-2>>
+wikilist-button-reveal: <<colour flexoki-cy>>
+wikilist-button-reveal-hover: <<colour flexoki-cy-2>>
+wikilist-button-remove: <<colour flexoki-re>>
+wikilist-button-remove-hover: <<colour flexoki-re-2>>
+wikilist-toolbar-background: <<colour flexoki-ui-2>>
+wikilist-toolbar-foreground: <<colour flexoki-600>>
+wikilist-droplink-dragover: <<colour flexoki-pu>>
+wikilist-button-background: <<colour flexoki-tx-3>>
+wikilist-button-foreground: <<colour flexoki-paper>>
