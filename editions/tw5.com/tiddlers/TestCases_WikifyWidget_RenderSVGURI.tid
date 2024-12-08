@@ -1,5 +1,5 @@
 created: 20241206225533517
-description: Rendering parametrized svg for use in stylesheets
+description: Rendering parameterised SVG for use in stylesheets
 tags: $:/tags/wiki-test-spec
 title: TestCases/WikifyWidget/RenderSVGURI
 type: text/vnd.tiddlywiki-multiple
