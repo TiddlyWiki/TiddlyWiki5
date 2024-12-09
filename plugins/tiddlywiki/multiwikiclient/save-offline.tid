@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/multiwikiclient/save/offline
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+\define saveTiddlerFilter()
+[is[tiddler]] -[[$:/boot/boot.css]] -[prefix[$:/HistoryList]] -[status[pending]plugin-type[import]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/plugins/tiddlywiki/filesystem]] -[[$:/plugins/tiddlywiki/multiwikiclient]] -[prefix[$:/temp/]] +[sort[title]] $(publishFilter)$
+\end
+{{$:/core/templates/tiddlywiki5.html}}
