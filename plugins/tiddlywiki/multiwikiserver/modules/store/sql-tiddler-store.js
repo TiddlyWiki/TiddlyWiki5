@@ -152,7 +152,7 @@ SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields, exist
   const contentTypeInfo = $tw.config.contentTypeInfo[tiddlerFields.type || "text/vnd.tiddlywiki"];
   const isBinary = !!contentTypeInfo && contentTypeInfo.encoding === "base64";
 
-  let shouldProcessAttachment = tiddlerFields.text && tiddlerFields.text.length <= attachmentSizeLimit;
+  let shouldProcessAttachment = tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit;
 
   if(existing_attachment_blob) {
     const fileSize = this.attachmentStore.getAttachmentFileSize(existing_attachment_blob);
