@@ -1,0 +1,43 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/save-dom-to-image
+caption: tm-save-dom-to-image message
+tags: $:/tags/GeospatialDocs
+
+!! `tm-save-dom-to-image` message
+
+The `tm-save-dom-to-image` message uses a [[third-party library|https://github.com/1904labs/dom-to-image-more]] to save a DOM node as an image. The image can be saved to a file or to a tiddler.
+
+Note that there are some limitations to saving content loaded from external domains due to the same-origin policy. See the documentation for more details.
+
+The following parameters are supported:
+
+|!Parameters |!Description |
+|''selector'' |CSS selector identifying the DOM node to be saved as an image (defaults to `body`) |
+|''format'' |Save format: ''png'', ''jpeg'' or ''svg'' (defaults to ''png'') |
+|''quality'' |Optional quality 0 to 1 for JPEG images (defaults to 1) |
+|''scale'' |Optional scale factor for the image (defaults to 1) |
+|''width'' |Optional width of the image in pixels |
+|''height'' |Optional height of the image in pixels |
+|''save-file'' |Optional filename to save the image to |
+|''save-title'' |Optional title of tiddler to save the image to |
+
+!! Examples
+
+<$button>
+<$action-sendmessage
+	$message="tm-save-dom-to-image"
+	selector="body.tc-body"
+	scale="2"
+	save-file="screenshot.png"
+/>
+Save the screen as an image file
+</$button>
+
+<$button>
+<$action-sendmessage
+	$message="tm-save-dom-to-image"
+	selector="body.tc-body"
+	scale="2"
+	save-title="$:/temp/screenshot.png"
+/>
+Save the screen as an image tiddler
+</$button> [[$:/temp/screenshot.png]]
