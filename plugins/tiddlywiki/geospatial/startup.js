@@ -28,6 +28,50 @@ exports.startup = function() {
 		require("$:/plugins/tiddlywiki/geospatial/leaflet.markercluster.js");	
 	}
 	// Install geolocation message handler
+	$tw.rootWidget.addEventListener("tm-save-dom-to-image",function(event) {
+		var params = event.paramObject || {},
+			domToImage = require("$:/plugins/tiddlywiki/geospatial/dom-to-image-more.js"),
+			domNode = document.querySelector(params.selector || "body.tc-body");
+		if(domNode) {
+			var method = "toPng";
+			switch(params.format) {
+				case "jpeg":
+					method = "toJpeg";
+					break;
+				case "svg":
+					method = "toSvg";
+					break;
+			}
+			domToImage[method](domNode,{
+				height: $tw.utils.parseInt(params.height) || domNode.offsetHeight,
+				width: $tw.utils.parseInt(params.width) || domNode.offsetWidth,
+				quality: $tw.utils.parseNumber(params.quality),
+				scale: $tw.utils.parseNumber(params.scale)
+			})
+			.then(function(dataUrl) {
+				// Save the image
+				if(params["save-file"]) {
+					var link = document.createElement("a");
+					link.download = params["save-file"];
+					link.href = dataUrl;
+					link.click();
+				}
+				// Save the tiddler
+				if(params["save-title"]) {
+					var parts = dataUrl.split(";base64,");
+					$tw.wiki.addTiddler(new $tw.Tiddler({
+						title: params["save-title"],
+						type: parts[0].split(":")[1],
+						"text": parts[1]
+					}));
+				}
+			})
+			.catch(function(error) {
+				console.error('oops, something went wrong!', error);
+			});
+		}
+	});
+	// Install geolocation message handler
 	$tw.rootWidget.addEventListener("tm-request-geolocation",function(event) {
 		var widget = event.widget,
 			wiki = widget.wiki || $tw.wiki,
