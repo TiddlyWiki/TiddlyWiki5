@@ -35,7 +35,7 @@ exports.handler = function(request, response, state) {
 			"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/manage-roles",
 			"roles-list": JSON.stringify(roles),
 			"edit-role": editRole ? JSON.stringify(editRole) : "",
-			"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Annonymous User" : "Guest",
+			"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Anonymous User" : "Guest",
 			"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"
 		}
 	});

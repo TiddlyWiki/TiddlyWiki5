@@ -53,7 +53,7 @@ exports.handler = function(request,response,state) {
 		variables: {
 			"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/get-users",
 			"user-list": JSON.stringify(userList),
-			"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Annonymous User" : "Guest",
+			"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Anonymous User" : "Guest",
 			"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no",
 			"first-guest-user": state.firstGuestUser ? "yes" : "no"
 		}

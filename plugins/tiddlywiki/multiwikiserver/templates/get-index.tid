@@ -41,7 +41,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 	</div>
 </$list>
 
-<$list filter="[<show-annon-config>match[yes]]">
+<$list filter="[<show-anon-config>match[yes]]">
 	<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/anon-config-modal">
 		<$transclude/>
 	</$tiddler>
