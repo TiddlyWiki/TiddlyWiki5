@@ -6,7 +6,8 @@
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/geospatial/dom-to-image-more.js",
 				"module-type": "library",
-				"url": "https://github.com/1904labs/dom-to-image-more"
+				"url": "https://github.com/1904labs/dom-to-image-more",
+				"version": "3.5.0"
 			}
 		},
 		{
