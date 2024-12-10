@@ -36,6 +36,8 @@ exports.startup = function() {
 			var method = "toPng";
 			switch(params.format) {
 				case "jpeg":
+					// Intentional fallthrough
+				case "jpg":
 					method = "toJpeg";
 					break;
 				case "svg":
