@@ -847,6 +847,14 @@ SqlTiddlerDatabase.prototype.getUserByUsername = function(username) {
 	});
 };
 
+SqlTiddlerDatabase.prototype.getUserByEmail = function(email) {
+	return this.engine.runStatementGet(`
+			SELECT * FROM users WHERE email = $email
+	`, {
+			$email: email
+	});
+};
+
 SqlTiddlerDatabase.prototype.listUsersByRoleId = function(roleId) {
 	return this.engine.runStatementGetAll(`
 			SELECT u.*
