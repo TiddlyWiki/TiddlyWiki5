@@ -58,12 +58,21 @@ exports.startup = function() {
 				}
 				// Save the tiddler
 				if(params["save-title"]) {
-					var parts = dataUrl.split(";base64,");
-					$tw.wiki.addTiddler(new $tw.Tiddler({
-						title: params["save-title"],
-						type: parts[0].split(":")[1],
-						"text": parts[1]
-					}));
+					if(dataUrl.indexOf("data:image/svg+xml;") === 0) {
+						var commaIndex = dataUrl.indexOf(",");
+						$tw.wiki.addTiddler(new $tw.Tiddler({
+							title: params["save-title"],
+							type: "image/svg+xml",
+							"text": decodeURIComponent(dataUrl.substring(commaIndex + 1))
+						}));	
+					} else {
+						var parts = dataUrl.split(";base64,");
+						$tw.wiki.addTiddler(new $tw.Tiddler({
+							title: params["save-title"],
+							type: parts[0].split(":")[1],
+							"text": parts[1]
+						}));	
+					}
 				}
 			})
 			.catch(function(error) {
