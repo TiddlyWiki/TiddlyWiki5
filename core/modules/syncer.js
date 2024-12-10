@@ -257,7 +257,11 @@ Save an incoming tiddler in the store, and updates the associated tiddlerInfo
 Syncer.prototype.storeTiddler = function(tiddlerFields) {
 	// Save the tiddler
 	var tiddler = new $tw.Tiddler(tiddlerFields);
-	this.wiki.addTiddler(tiddler);
+	// Only save the tiddler if it has changed
+	var existingTiddler = this.wiki.getTiddler(tiddlerFields.title);
+	if(!existingTiddler || !existingTiddler.isEqual(tiddler)) {
+		this.wiki.addTiddler(tiddler);
+	}
 	// Save the tiddler revision and changeCount details
 	this.tiddlerInfo[tiddlerFields.title] = {
 		revision: this.getTiddlerRevision(tiddlerFields.title),
@@ -556,6 +560,7 @@ SaveTiddlerTask.prototype.run = function(callback) {
 			// Invoke the callback
 			callback(null);
 		},{
+			syncer: self.syncer,
 			tiddlerInfo: self.syncer.tiddlerInfo[self.title]
 		});
 	} else {
@@ -586,6 +591,7 @@ DeleteTiddlerTask.prototype.run = function(callback) {
 		// Invoke the callback
 		callback(null);
 	},{
+		syncer: self.syncer,
 		tiddlerInfo: self.syncer.tiddlerInfo[this.title]
 	});
 };
@@ -614,6 +620,8 @@ LoadTiddlerTask.prototype.run = function(callback) {
 		}
 		// Invoke the callback
 		callback(null);
+	},{
+		syncer: self.syncer
 	});
 };
 
