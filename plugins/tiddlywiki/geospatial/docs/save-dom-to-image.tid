@@ -41,3 +41,13 @@ Save the screen as an image file
 />
 Save the screen as an image tiddler
 </$button> [[$:/temp/screenshot.png]]
+
+<$button>
+<$action-sendmessage
+	$message="tm-save-dom-to-image"
+	selector="body.tc-body"
+	format="svg"
+	save-title="$:/temp/screenshot.svg"
+/>
+Save the screen as an image tiddler in SVG format
+</$button> [[$:/temp/screenshot.svg]]
