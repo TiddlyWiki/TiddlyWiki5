@@ -22,9 +22,11 @@ exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
 
-function deleteQueryParams() {
-  setTimeout(() => {
+function deleteTempTiddlers() {
+  setTimeout(function() {
     $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/queryParams");
+    $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/error");
+    $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");
   }, 1000);
 }
 
@@ -35,7 +37,7 @@ exports.handler = function(request, response, state) {
   var email = state.data.email;
   var password = state.data.password;
   var confirmPassword = state.data.confirmPassword;
-  var queryParamsTiddlerTitle = "$:/temp/mws/"+state.authenticatedUser.user_id+"/queryParams";
+  var queryParamsTiddlerTitle = "$:/temp/mws/queryParams";
 
   if(!state.authenticatedUser && !state.firstGuestUser) {
     $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
@@ -44,6 +46,7 @@ exports.handler = function(request, response, state) {
     }));
     response.writeHead(302, { "Location": "/login" });
     response.end();
+    deleteTempTiddlers();
     return;
   }
 
@@ -59,6 +62,7 @@ exports.handler = function(request, response, state) {
     }));
     response.writeHead(302, { "Location": "/admin/users" });
     response.end();
+    deleteTempTiddlers();
     return;
   }
 
@@ -74,26 +78,34 @@ exports.handler = function(request, response, state) {
     }));
     response.writeHead(302, { "Location": "/admin/users" });
     response.end();
-    deleteQueryParams();
+    deleteTempTiddlers();
     return;
   }
 
   try {
-    // Check if user already exists
-    var existingUser = sqlTiddlerDatabase.getUser(username);
-    if(existingUser) {
+    // Check if username or email already exists
+    var existingUser = sqlTiddlerDatabase.getUserByUsername(username);
+    var existingUserByEmail = sqlTiddlerDatabase.getUserByEmail(email);
+    
+    if(existingUser || existingUserByEmail) {
       $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
         title: "$:/temp/mws/post-user/error",
-        text: "Username already exists"
+        text: existingUser ? "User with this username already exists" : "User account with this email already exists"
       }));
       $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
         title: queryParamsTiddlerTitle,
         username: username,
         email: email,
       }));
+
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/queryParams",
+      username: username,
+        email: email,
+      }));
       response.writeHead(302, { "Location": "/admin/users" });
       response.end();
-      deleteQueryParams();
+      deleteTempTiddlers();
       return;
     }
 
@@ -109,7 +121,7 @@ exports.handler = function(request, response, state) {
         sqlTiddlerDatabase.setUserAdmin(userId, true);
         
         // Create a session for the new admin user
-        var auth = require('$:/plugins/tiddlywiki/multiwikiserver/auth/authentication.js').Authenticator;
+        var auth = require("$:/plugins/tiddlywiki/multiwikiserver/auth/authentication.js").Authenticator;
         var authenticator = auth(sqlTiddlerDatabase);
         var sessionId = authenticator.createSession(userId);
         
@@ -117,11 +129,12 @@ exports.handler = function(request, response, state) {
           title: "$:/temp/mws/post-user/success",
           text: "Admin user created successfully"
         }));
-        response.setHeader('Set-Cookie', `session=${sessionId}; HttpOnly; Path=/`);
-        response.writeHead(302, {'Location': '/'});
+        response.setHeader("Set-Cookie", "session="+sessionId+"; HttpOnly; Path=/");
+        response.writeHead(302, {"Location": "/"});
         response.end();
+        deleteTempTiddlers();
         return;
-      } catch (adminError) {
+      } catch(adminError) {
         $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
           title: "$:/temp/mws/post-user/error",
           text: "Error creating admin user"
@@ -133,7 +146,7 @@ exports.handler = function(request, response, state) {
         }));
         response.writeHead(302, { "Location": "/admin/users" });
         response.end();
-        deleteQueryParams();
+        deleteTempTiddlers();
         return;
       }
     } else {
@@ -147,16 +160,18 @@ exports.handler = function(request, response, state) {
         email: email,
       }));
       // assign role to user
-      const roles = sqlTiddlerDatabase.listRoles();
-      const roleId = roles.find(role => role.role_name.toUpperCase() !== "ADMIN")?.role_id;
-      if (roleId) {
-        sqlTiddlerDatabase.addRoleToUser(userId, roleId);
+      var roles = sqlTiddlerDatabase.listRoles();
+      var role = roles.find(function(role) {
+        return role.role_name.toUpperCase() !== "ADMIN";
+      });
+      if(role) {
+        sqlTiddlerDatabase.addRoleToUser(userId, role.role_id);
       }
       response.writeHead(302, {"Location": "/admin/users/"+userId});
       response.end();
-      deleteQueryParams();
+      deleteTempTiddlers();
     }
-  } catch (error) {
+  } catch(error) {
     $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/post-user/error",
       text: "Error creating user: " + error.message
@@ -168,7 +183,7 @@ exports.handler = function(request, response, state) {
     }));
     response.writeHead(302, { "Location": "/admin/users" });
     response.end();
-    deleteQueryParams();
+    deleteTempTiddlers();
     return;
   }
 };
