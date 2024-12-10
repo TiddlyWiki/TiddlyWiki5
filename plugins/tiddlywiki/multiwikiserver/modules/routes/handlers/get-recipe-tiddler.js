@@ -41,16 +41,23 @@ exports.handler = function(request,response,state) {
 			return;
 		} else {
 			// This is not a JSON API request, we should return the raw tiddler content
-			var type = tiddlerInfo.tiddler.type || "text/plain";
-			if(!response.headersSent) {
-				response.writeHead(200, "OK",{
-				Etag: state.makeTiddlerEtag(tiddlerInfo),
-					"Content-Type":  type
-				});
-				response.write(tiddlerInfo.tiddler.text || "",($tw.config.contentTypeInfo[type] ||{encoding: "utf8"}).encoding);
-				response.end();
+			const result = $tw.mws.store.getBagTiddlerStream(title,tiddlerInfo.bag_name);
+			if(result) {
+				if(!response.headersSent){
+					response.writeHead(200, "OK",{
+						Etag: state.makeTiddlerEtag(result),
+						"Content-Type":  result.type
+					});
+				}
+				result.stream.pipe(response);
+				return;
+			} else {
+				if(!response.headersSent){
+					response.writeHead(404);
+					response.end();
+				}
+				return;
 			}
-			return;
 		}
 	} else {
 		if(!response.headersSent) {
