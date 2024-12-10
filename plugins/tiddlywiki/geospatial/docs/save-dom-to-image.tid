@@ -13,7 +13,7 @@ The following parameters are supported:
 |!Parameters |!Description |
 |''selector'' |CSS selector identifying the DOM node to be saved as an image (defaults to `body`) |
 |''format'' |Save format: ''png'', ''jpeg'' or ''svg'' (defaults to ''png'') |
-|''quality'' |Optional quality 0 to 1 for JPEG images (defaults to 1) |
+|''quality'' |Optional quality 0 to 1 for JPEG images (note that the default quality is 1, and this default is applied even if the quality is explicitly specified as `0`. To force a low quality JPEG image it is therefore necessary to specify a small non-zero value such as `0.001`) |
 |''scale'' |Optional scale factor for the image (defaults to 1) |
 |''width'' |Optional width of the image in pixels |
 |''height'' |Optional height of the image in pixels |
@@ -29,7 +29,7 @@ The following parameters are supported:
 	scale="2"
 	save-file="screenshot.png"
 />
-Save the screen as an image file
+Save the screen as an image file in PNG format
 </$button>
 
 <$button>
@@ -39,8 +39,20 @@ Save the screen as an image file
 	scale="2"
 	save-title="$:/temp/screenshot.png"
 />
-Save the screen as an image tiddler
+Save the screen as an image tiddler in PNG format
 </$button> [[$:/temp/screenshot.png]]
+
+<$button>
+<$action-sendmessage
+	$message="tm-save-dom-to-image"
+	selector="body.tc-body"
+	format="jpeg"
+	scale="1"
+	quality="0.01"
+	save-title="$:/temp/screenshot.jpeg"
+/>
+Save the screen as an image tiddler in low quality JPEG format
+</$button> [[$:/temp/screenshot.jpeg]]
 
 <$button>
 <$action-sendmessage
