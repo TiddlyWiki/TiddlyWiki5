@@ -46,7 +46,7 @@ exports.startup = function() {
 				height: $tw.utils.parseInt(params.height) || domNode.offsetHeight,
 				width: $tw.utils.parseInt(params.width) || domNode.offsetWidth,
 				quality: $tw.utils.parseNumber(params.quality),
-				scale: $tw.utils.parseNumber(params.scale)
+				scale: $tw.utils.parseNumber(params.scale) || 1
 			})
 			.then(function(dataUrl) {
 				// Save the image
