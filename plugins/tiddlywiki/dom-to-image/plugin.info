@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/dom-to-image",
+	"name": "Dom-to-image",
+	"description": "Save DOM nodes as images",
+	"list": "readme docs",
+	"stability": "STABILITY_1_EXPERIMENTAL"
+}

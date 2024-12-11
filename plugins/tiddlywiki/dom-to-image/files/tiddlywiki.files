@@ -4,7 +4,7 @@
 			"file": "dom-to-image-more.min.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/geospatial/dom-to-image-more.js",
+				"title": "$:/plugins/tiddlywiki/dom-to-image/dom-to-image-more.js",
 				"module-type": "library",
 				"url": "https://github.com/1904labs/dom-to-image-more",
 				"version": "3.5.0"
@@ -14,7 +14,7 @@
 			"file": "LICENSE",
 			"fields": {
 				"type": "text/plain",
-				"title": "$:/plugins/tiddlywiki/geospatial/dom-to-image-more/LICENSE"
+				"title": "$:/plugins/tiddlywiki/dom-to-image/dom-to-image-more/LICENSE"
 			}
 		}
 	]

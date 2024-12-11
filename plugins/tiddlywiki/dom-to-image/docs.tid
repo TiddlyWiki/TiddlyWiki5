@@ -1,6 +1,5 @@
-title: $:/plugins/tiddlywiki/geospatial/docs/save-dom-to-image
+title: $:/plugins/tiddlywiki/dom-to-image/docs
 caption: tm-save-dom-to-image message
-tags: $:/tags/GeospatialDocs
 
 !! `tm-save-dom-to-image` message
 
