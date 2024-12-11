@@ -453,10 +453,10 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Check whether anonymous access is granted
 	state.allowAnon = false; //this.isAuthorized(state.authorizationType,null);
 	var {allowReads, allowWrites, isEnabled} = this.getAnonymousAccessConfig();
-	state.allowAnon = isEnabled;
+	state.allowAnon = isEnabled && (request.method === 'GET' ? allowReads : allowWrites);
 	state.allowAnonReads = allowReads;
 	state.allowAnonWrites = allowWrites;
-	state.showAnonConfig = !!state.authenticatedUser?.isAdmin && !state.allowAnon;
+	state.showAnonConfig = !!state.authenticatedUser?.isAdmin && !isEnabled;
 	state.firstGuestUser = this.sqlTiddlerDatabase.listUsers().length === 0 && !state.authenticatedUser;
 
 	// Authorize with the authenticated username

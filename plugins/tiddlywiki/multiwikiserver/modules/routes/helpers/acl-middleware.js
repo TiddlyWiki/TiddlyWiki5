@@ -47,10 +47,10 @@ exports.middleware = function (request, response, state, entityType, permissionN
 	var decodedEntityName = decodeURIComponent(partiallyDecoded);
 	var aclRecord = sqlTiddlerDatabase.getACLByName(entityType, decodedEntityName);
 	var isGetRequest = request.method === "GET";
-	var hasAnonymousAccess = isGetRequest ? state.allowAnonReads : state.allowAnonWrites;
+	var hasAnonymousAccess = state.allowAnon && (isGetRequest ? state.allowAnonReads : state.allowAnonWrites);
 	var entity = sqlTiddlerDatabase.getEntityByName(entityType, decodedEntityName);
 	if(entity?.owner_id) {
-		if(state.authenticatedUser?.user_id !== entity.owner_id) {
+		if(state.authenticatedUser?.user_id && (state.authenticatedUser?.user_id !== entity.owner_id) || !state.authenticatedUser?.user_id && !hasAnonymousAccess) {
 			if(!response.headersSent) {
 				response.writeHead(403, "Forbidden");
 				response.end();
@@ -58,22 +58,25 @@ exports.middleware = function (request, response, state, entityType, permissionN
 			return;
 		}
 	} else {
-		// Get permission record
-		const permission = sqlTiddlerDatabase.getPermissionByName(permissionName);
-		// ACL Middleware will only apply if the entity has a middleware record
-		if(aclRecord && aclRecord?.permission_id === permission?.permission_id) {
-			// If not authenticated and anonymous access is not allowed, request authentication
-			if(!state.authenticatedUsername && !state.allowAnon) {
-				if(state.urlInfo.pathname !== '/login') {
-					redirectToLogin(response, request.url);
-					return;
-				}
-			}
-			// Check if user is authenticated
-			if(!state.authenticatedUser && !hasAnonymousAccess && !response.headersSent) {
+		// First, we need to check if anonymous access is allowed
+		if(!state.authenticatedUser?.user_id && !hasAnonymousAccess && (isGetRequest && entity?.owner_id)) {
+			if(!response.headersSent) {
 				response.writeHead(401, "Unauthorized");
 				response.end();
-				return;
+			}
+			return;
+		} else {
+			// Get permission record
+			const permission = sqlTiddlerDatabase.getPermissionByName(permissionName);
+			// ACL Middleware will only apply if the entity has a middleware record
+			if(aclRecord && aclRecord?.permission_id === permission?.permission_id) {
+				// If not authenticated and anonymous access is not allowed, request authentication
+				if(!state.authenticatedUsername && !state.allowAnon) {
+					if(state.urlInfo.pathname !== '/login') {
+						redirectToLogin(response, request.url);
+						return;
+					}
+				}
 			}
 
 			// Check ACL permission
