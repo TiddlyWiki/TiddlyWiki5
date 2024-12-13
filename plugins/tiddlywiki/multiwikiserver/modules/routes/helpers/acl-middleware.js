@@ -47,7 +47,7 @@ exports.middleware = function (request, response, state, entityType, permissionN
 	var decodedEntityName = decodeURIComponent(partiallyDecoded);
 	var aclRecord = sqlTiddlerDatabase.getACLByName(entityType, decodedEntityName);
 	var isGetRequest = request.method === "GET";
-	var hasAnonymousAccess = state.allowAnon && (isGetRequest ? state.allowAnonReads : state.allowAnonWrites);
+	var hasAnonymousAccess = state.allowAnon ? (isGetRequest ? state.allowAnonReads : state.allowAnonWrites) : false;
 	var entity = sqlTiddlerDatabase.getEntityByName(entityType, decodedEntityName);
 	if(entity?.owner_id) {
 		if(state.authenticatedUser?.user_id && (state.authenticatedUser?.user_id !== entity.owner_id) || !state.authenticatedUser?.user_id && !hasAnonymousAccess) {
@@ -59,7 +59,7 @@ exports.middleware = function (request, response, state, entityType, permissionN
 		}
 	} else {
 		// First, we need to check if anonymous access is allowed
-		if(!state.authenticatedUser?.user_id && !hasAnonymousAccess && (isGetRequest && entity?.owner_id)) {
+		if(!state.authenticatedUser?.user_id && !hasAnonymousAccess) {
 			if(!response.headersSent) {
 				response.writeHead(401, "Unauthorized");
 				response.end();
