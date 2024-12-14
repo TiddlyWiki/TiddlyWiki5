@@ -56,6 +56,9 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	if(this.nwdirectory) {
 		domNode.setAttribute("nwdirectory",this.nwdirectory);
 	}
+	if(this.isDisabled === "yes") {
+		domNode.setAttribute("disabled", true);
+	}
 	// Add a click event handler
 	domNode.addEventListener("change",function (event) {
 		if(self.message) {
@@ -94,6 +97,7 @@ BrowseWidget.prototype.execute = function() {
 	this.accept = this.getAttribute("accept");
 	this.webkitdirectory = this.getAttribute("webkitdirectory");
 	this.nwdirectory = this.getAttribute("nwdirectory");
+	this.isDisabled = this.getAttribute("disabled", "no");
 };
 
 /*
