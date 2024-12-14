@@ -1,5 +1,5 @@
 title: $:/core/ui/Palettes/Preview/Notification
-tags: $:/tags/Preview/Page
+tags: $:/tags/Preview/PageOptional
 
 \whitespace trim
 <$colour.div class="tc-palette-preview-thumbnail-notification" styleName="background-color" styleColour="notification-background">
