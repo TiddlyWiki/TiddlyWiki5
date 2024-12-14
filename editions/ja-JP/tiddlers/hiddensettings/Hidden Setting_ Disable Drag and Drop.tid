@@ -1,0 +1,21 @@
+created: 20200315143638556
+modified: 20241116105232874
+original-modified: 20210519155433742
+tags: [[Hidden Settings]]
+title: Hidden Setting: Disable Drag and Drop
+ja-title: 隠し設定: ドラッグアンドドロップの無効化
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.22">>コア機能として組み込まれたドラッグアンドドロップ操作をすべて無効にするには、次のTiddlerを"no"に設定します。
+
+$:/config/DragAndDrop/Enable
+
+[[list-tagged-draggableマクロ|list-tagged-draggable Macro]]や[[list-links-draggableマクロ|list-links-draggable Macro]]のインスタンスでドラッグアンドドロップを選択的に再有効化するには、マクロ呼び出しのスコープにおいて、変数`tv-enable-drag-and-drop`に`yes`をセットします。たとえば、$:/config/DragAndDrop/Enableに"no"が設定されていても、このリスト内でドラッグアンドドロップを使用できることに注目してください。
+
+<$macrocall $name="wikitext-example-without-html" src="""<$set name="tv-enable-drag-and-drop" value="yes">
+
+<<list-tagged-draggable tag:"HelloThere">>
+
+</$set>"""/>
+
+DropzoneWidgetとDroppableWidgetを直接使用する場合、''enable''属性はグローバル設定とは独立して機能することに注意してください。
