@@ -47,6 +47,9 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	if(isChecked === undefined && this.checkboxIndeterminate === "yes") {
 		this.inputDomNode.indeterminate = true;
 	}
+	if(this.tabIndex) {
+		this.inputDomNode.setAttribute("tabindex", this.tabIndex);
+	}
 	if(this.isDisabled === "yes") {
 		this.inputDomNode.setAttribute("disabled",true);
 	}
@@ -305,6 +308,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxClass = this.getAttribute("class","");
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	this.isDisabled = this.getAttribute("disabled","no");
+	this.tabIndex = this.getAttribute();
 	// Make the child widgets
 	this.makeChildWidgets();
 };

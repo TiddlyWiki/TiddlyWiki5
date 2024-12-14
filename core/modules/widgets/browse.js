@@ -42,6 +42,9 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	if(this.tooltip) {
 		domNode.setAttribute("title",this.tooltip);
 	}
+	if(this.tabIndex) {
+		domNode.setAttribute("tabindex", this.tabIndex);
+	}
 	// Nw.js supports "nwsaveas" to force a "save as" dialogue that allows a new or existing file to be selected
 	if(this.nwsaveas) {
 		domNode.setAttribute("nwsaveas",this.nwsaveas);
@@ -94,6 +97,7 @@ BrowseWidget.prototype.execute = function() {
 	this.accept = this.getAttribute("accept");
 	this.webkitdirectory = this.getAttribute("webkitdirectory");
 	this.nwdirectory = this.getAttribute("nwdirectory");
+	this.tabIndex = this.getAttribute("tabindex");
 };
 
 /*
