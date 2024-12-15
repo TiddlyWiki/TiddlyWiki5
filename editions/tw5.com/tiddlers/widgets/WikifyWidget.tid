@@ -1,17 +1,17 @@
 caption: wikify
 created: 20160321144949700
-modified: 20241202014354100
+modified: 20241206233352509
 tags: Widgets
 title: WikifyWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The <<.wid wikify>> widget parses and renders a string of text and assigns the result to a specified [[variable|Variables]]. The new value of the variable is available to the content within the wikify widget.
+The <<.wid wikify>> widget parses and renders a string of text and assigns the result to a specified [[variable|Variables]]. The new value of the variable is available to the content within the <<.wid wikify>> widget.
 
 ! Content and Attributes
 
-The content of the `<$wikify>` widget is the scope for the value assigned to the variable.
+The content of the <<.wid wikify>> widget is the scope for the value assigned to the variable.
 
 |!Attribute |!Description |
 |name |The name of the variable to assign |
@@ -44,3 +44,7 @@ The available output types are:
 !! Exporting rendered html
 
 <<testcase "TestCases/WikifyWidget/RenderHTML">>
+
+!! Rendering parameterised SVG for use in stylesheets
+
+<<testcase "TestCases/WikifyWidget/RenderSVGURI">>
