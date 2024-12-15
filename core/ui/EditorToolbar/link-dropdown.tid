@@ -8,11 +8,6 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 <$action-deletetiddler $filter="[<dropdown-state>] [<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]"/>
 \end
 
-\procedure prefix.bracket() [
-\procedure suffix.bracket() ]
-
-\function tf.get-focus-selector() [[$(prefix.bracket)$data-tiddler-title=$(cssEscapedTitle)$$(suffix.bracket)$ .tc-create-wikitext-link input]substitute[]]
-
 \procedure cancel-search-actions-inner()
 <$let userInput={{{ [<storeTitle>get[text]] }}}><$list filter="[<searchTiddler>get[text]!match<userInput>]" emptyMessage="<$action-deletetiddler $filter='[<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]'/>"><$action-setfield $tiddler=<<searchTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/></$list></$let>
 \end
@@ -51,7 +46,7 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 <<external-link>>
 &#32;
 <$button class="tc-btn-invisible tc-btn-mini" style="width: auto; display: inline-block; background-colour: inherit;">
-<<cancel-search-actions>><$let cssEscapedTitle={{{ [<storyTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<tf.get-focus-selector>>/></$let>
+<<cancel-search-actions>><$action-sendmessage $message="tm-focus-selector" $param=`[data-tiddler-title=${[<storyTiddler>escapecss[]]}$] .tc-create-wikitext-link input`/>
 {{$:/core/images/close-button}}
 </$button>
 </$reveal>
