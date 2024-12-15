@@ -11,7 +11,7 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 \procedure prefix.bracket() [
 \procedure suffix.bracket() ]
 
-\function tf.get-focus-selector() [[data-tiddler-title=]addprefix[$(prefix.bracket)$]substitute[]addsuffix<cssEscapedTitle>addsuffix[$(suffix.bracket)$]substitute[]] .tc-create-wikitext-link input :and[join[ ]]
+\function tf.get-focus-selector() [[$(prefix.bracket)$data-tiddler-title=$(cssEscapedTitle)$$(suffix.bracket)$ .tc-create-wikitext-link input]substitute[]]
 
 \procedure cancel-search-actions-inner()
 <$set name="userInput" value={{{ [<storeTitle>get[text]] }}}><$list filter="[<searchTiddler>get[text]!match<userInput>]" emptyMessage="<$action-deletetiddler $filter='[<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]'/>"><$action-setfield $tiddler=<<searchTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/></$list></$set>
@@ -34,7 +34,7 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 \whitespace trim
 ''<<lingo Hint>>''
 
-<$vars searchTiddler={{{ [<config-title>addsuffix[/search]] }}} linkTiddler={{{ [<config-title>addsuffix[/link]] }}} linktext="" searchListState=<<qualify "$:/temp/link-search/selected-item">> refreshTitle=<<qualify "$:/temp/link-search/refresh">> storeTitle=<<qualify "$:/temp/link-search/input">>>
+<$vars searchTiddler=`$(config-title)$/search` linkTiddler=`$(config-title)$/link` linktext="" searchListState=<<qualify "$:/temp/link-search/selected-item">> refreshTitle=<<qualify "$:/temp/link-search/refresh">> storeTitle=<<qualify "$:/temp/link-search/input">>>
 
 <$vars linkTiddler=<<searchTiddler>>>
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
