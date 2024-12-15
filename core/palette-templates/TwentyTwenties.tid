@@ -23,18 +23,18 @@ base-tertiary: rgb(135, 239, 70)
 ?code-contrast: [tf.check-colour-contrast[code-background],[code-foreground],[25]]
 
 # Colour definitions
-alert-background: [function[colour],[base-secondary]colour-oklch:l[0.9]]
-alert-border: [function[colour],[base-secondary]colour-oklch:l[0.5]]
-alert-highlight: [function[colour],[base-primary]colour-oklch:l[0.6]]
-alert-muted-foreground: [function[colour],[foreground]colour-oklch:l[0.6]]
-background: [function[colour],[base-background]colour-oklch:l[0.9]]
+alert-background: [function[colour],[base-secondary]colour-set-oklch:l[0.9]]
+alert-border: [function[colour],[base-secondary]colour-set-oklch:l[0.5]]
+alert-highlight: [function[colour],[base-primary]colour-set-oklch:l[0.6]]
+alert-muted-foreground: [function[colour],[foreground]colour-set-oklch:l[0.6]]
+background: [function[colour],[base-background]colour-set-oklch:l[0.9]]
 blockquote-bar: [function[colour],[muted-foreground]]
 button-background:
 button-foreground:
 button-border:
-code-background: [function[colour],[base-tertiary]colour-oklch:l[0.9]]
+code-background: [function[colour],[base-tertiary]colour-set-oklch:l[0.9]]
 code-border: [function[colour],[base-tertiary]color-oklch:l[0.5]]
-code-foreground: [function[colour],[base-tertiary]colour-oklch:l[0.3]]
+code-foreground: [function[colour],[base-tertiary]colour-set-oklch:l[0.3]]
 diff-delete-background: [function[colour],[]]
 diff-delete-foreground: [function[colour],[foreground]]
 diff-equal-background:
@@ -74,11 +74,11 @@ modal-footer-border: [function[colour],[]]
 modal-header-border: [function[colour],[]]
 muted-foreground: [function[colour],[]]
 network-activity-foreground: [function[colour],[]]
-notification-background: [function[colour],[base-tertiary]colour-oklch:l[0.9]]
-notification-border: [function[colour],[base-tertiary]colour-oklch:l[0.2]]
-page-background: [function[colour],[base-background]colour-oklch:l[0.7]]
-pre-background: [function[colour],[base-tertiary]colour-oklch:l[0.98]]
-pre-border: [function[colour],[base-tertiary]colour-oklch:l[0.3]]
+notification-background: [function[colour],[base-tertiary]colour-set-oklch:l[0.9]]
+notification-border: [function[colour],[base-tertiary]colour-set-oklch:l[0.2]]
+page-background: [function[colour],[base-background]colour-set-oklch:l[0.7]]
+pre-background: [function[colour],[base-tertiary]colour-set-oklch:l[0.98]]
+pre-border: [function[colour],[base-tertiary]colour-set-oklch:l[0.3]]
 selection-background:
 selection-foreground:
 select-tag-background:
@@ -120,7 +120,7 @@ tag-foreground: [function[colour],[]]
 testcase-accent-level-1: [function[colour],[]]
 testcase-accent-level-2: [function[colour],[]]
 testcase-accent-level-3: [function[colour],[]]
-tiddler-background: [function[colour],[base-background]colour-oklch:l[.9]]
+tiddler-background: [function[colour],[base-background]colour-set-oklch:l[.9]]
 tiddler-border: [function[colour],[background]]
 tiddler-controls-foreground-hover: [function[colour],[]]
 tiddler-controls-foreground-selected: [function[colour],[]]

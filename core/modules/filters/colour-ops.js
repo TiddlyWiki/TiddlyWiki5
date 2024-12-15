@@ -22,7 +22,7 @@ exports["colour-darken"] = makeSerialColourOperator(function (colour, operator, 
 	return colour.darken($tw.utils.parseNumber(operator.operand));
 });
 
-exports["colour-oklch"] = makeSerialColourOperator(function (colour, operator, options) {
+exports["colour-set-oklch"] = makeSerialColourOperator(function (colour, operator, options) {
 	var prop = ((operator.suffixes || [])[0] || ["l"])[0];
 	if(["l","c","h"].indexOf(prop) !== -1) {
 		colour.oklch[prop] = $tw.utils.parseNumber(operator.operand);
