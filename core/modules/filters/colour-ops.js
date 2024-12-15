@@ -14,20 +14,20 @@ Filter operators for colour operations
 
 var Color = require("$:/core/modules/utils/dom/color.js").Color;
 
-exports["colour-lighten"] = makeSerialColourOperator(function (c, operator, options) {
-	return c.lighten($tw.utils.parseNumber(operator.operand));
+exports["colour-lighten"] = makeSerialColourOperator(function (colour, operator, options) {
+	return colour.lighten($tw.utils.parseNumber(operator.operand));
 });
 
-exports["colour-darken"] = makeSerialColourOperator(function (c, operator, options) {
-	return c.darken($tw.utils.parseNumber(operator.operand));
+exports["colour-darken"] = makeSerialColourOperator(function (colour, operator, options) {
+	return colour.darken($tw.utils.parseNumber(operator.operand));
 });
 
-exports["colour-oklch"] = makeSerialColourOperator(function (c, operator, options) {
+exports["colour-oklch"] = makeSerialColourOperator(function (colour, operator, options) {
 	var prop = ((operator.suffixes || [])[0] || ["l"])[0];
 	if(["l","c","h"].indexOf(prop) !== -1) {
-		c.oklch[prop] = $tw.utils.parseNumber(operator.operand);
+		colour.oklch[prop] = $tw.utils.parseNumber(operator.operand);
 	}
-	return c;
+	return colour;
 });
 
 exports["colour-contrast"] = makeParallelColourOperator(function (colours, operator, options) {
