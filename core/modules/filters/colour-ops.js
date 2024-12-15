@@ -52,6 +52,25 @@ exports["colour-contrast"] = makeParallelColourOperator(function (colours, opera
 	return colourContrasts;
 });
 
+exports["colour-interpolate"] = makeParallelColourOperator(function (colours, operator, options) {
+	// Special case for less than two colours
+	if(colours.length < 2) {
+		return [];
+	}
+	// Step through the indexes collecting the interpolated colours
+	var space = ((operator.suffixes || [])[0] || ["srgb"])[0],
+		rangefn = colours[0].range(colours[1],{space: space}),
+		outputColours = [];
+	$tw.utils.each(operator.operands,function(operand) {
+		// Get the index
+		var index = $tw.utils.parseNumber(operand);
+		// Calculate the interpolated colour
+		var colour = rangefn(index);
+		outputColours.push(colour.display().toString());
+	});
+	return outputColours;
+});
+
 function makeSerialColourOperator(fn) {
 	return function (source, operator, options) {
 		var results = [];

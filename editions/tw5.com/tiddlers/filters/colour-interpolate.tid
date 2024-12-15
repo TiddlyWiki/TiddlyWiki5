@@ -1,0 +1,33 @@
+created: 20241117161528913
+modified: 20241117161528913
+tags: [[Filter Operators]] [[Colour Operators]]
+title: colour-interpolate Operator
+caption: colour-interpolate
+op-purpose: smoothly interpolate between a set of colours
+op-input: a selection of colour values
+op-suffix: the name of the colour space to be used for the interpolation such as "OkLCh" or "sRGB"
+op-parameter: one or more indexes where 0 is the first colour and 1 is the last colour and intermediate values are smoothly interpolated
+op-output: the values of the interpolated colours
+
+<<.from-version "5.3.7">> See [[Colour Palettes]] for background.
+
+The <<.op colour-interpolate>> operator is used to interpolate colour values in a chosen colour space.
+
+The full list of colour spaces that can be used for interpolation is given in [[Colour Spaces]].
+
+Note that at least two input colours must be provided for interpolation to occur.
+
+Note that indexes outside the range 0 to 1 will extrapolate from the provided colour values.
+
+For example, this filter expression will return 4 colours that smoothly blend from red to green in the OKLCH colour space:
+
+```
+red green +[colour-interpolate:oklch[0],[0.333],[0.666],[1]]
+```
+
+See also the following related operators:
+
+* <<.olink colour-get-oklch>> to retrieve a component of a colour value in the OKLCH colour space
+* <<.olink colour-lighten>> to lighten a colour value
+* <<.olink colour-darken>> to lighten a colour value
+
