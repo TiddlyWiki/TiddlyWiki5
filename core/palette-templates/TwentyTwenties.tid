@@ -6,28 +6,53 @@ type: application/x-tiddler-dictionary
 color-scheme: light
 palette-type: modern
 
-# Background colour, used at different lightness levels
-base-background: #F0B8C8
-# Foreground colour, used for text and icons at different lightness levels
-base-foreground: #333344
+# Background and foreground colours, which are interpolated as required
+base-paper: #FCFFF0
+base-background: #f5f0f9
+base-ink: #333344
+?base-paper-ink: [tf.check-colour-contrast[base-paper],[base-ink],[45]]
+?base-background-ink: [tf.check-colour-contrast[base-background],[base-ink],[45]]
+
 # Primary colour, used for links and other accented elements
 base-primary: #5778d8
-# Secondary colour, used for alerts and other secondary elements
-base-secondary: rgb(236, 212, 58)
-# Tertiary base colour, used for monospaced text and other tertiary elements
-base-tertiary: rgb(135, 239, 70)
+?base-paper-primary: [tf.check-colour-contrast[base-paper],[base-primary],[45]]
+?base-background-primary: [tf.check-colour-contrast[base-background],[base-primary],[45]]
 
-# Contrast tests
-?background-foreground-contrast: [tf.check-colour-contrast[background],[foreground],[125]]
-?alert-contrast: [tf.check-colour-contrast[alert-background],[foreground],[25]]
-?code-contrast: [tf.check-colour-contrast[code-background],[code-foreground],[25]]
+# Secondary colour, used for alerts and other secondary elements
+base-secondary: #f0e48a
+?base-ink-secondary: [tf.check-colour-contrast[base-ink],[base-secondary],[45]]
+
+# Tertiary base colour, used for monospaced text and other tertiary elements
+base-tertiary: rgb(183, 95, 95)
+?base-paper-tertiary: [tf.check-colour-contrast[base-paper],[base-tertiary],[45]]
+
+# Basic spectrum colours
+base-black: #100F0F
+base-red: #D14D41
+base-orange: #DA702C
+base-yellow: #D0A215
+base-green: #879A39
+base-cyan: #3AA99F
+base-blue: #4385BE
+base-purple: #8B7EC8
+base-magenta: #CE5D97
+# Darker variants
+# base-red: #AF3029;
+# base-orange: #BC5215;
+# base-yellow: #AD8301;
+# base-green: #66800B;
+# base-cyan: #24837B;
+# base-blue: #205EA6;
+# base-purple: #5E409D;
+# base-magenta: #A02F6F;
 
 # Colour definitions
-alert-background: [function[colour],[base-secondary]colour-set-oklch:l[0.9]]
-alert-border: [function[colour],[base-secondary]colour-set-oklch:l[0.5]]
-alert-highlight: [function[colour],[base-primary]colour-set-oklch:l[0.6]]
-alert-muted-foreground: [function[colour],[foreground]colour-set-oklch:l[0.6]]
-background: [function[colour],[base-background]colour-set-oklch:l[0.9]]
+alert-background: [function[colour],[base-secondary]]
+alert-border: [function[colour],[base-ink]] [function[colour],[alert-background]] +[colour-interpolate:oklch[0.6]]
+alert-highlight: [function[colour],[base-ink]] [function[colour],[base-primary]] +[colour-interpolate:oklch[0.3]]
+alert-muted-foreground: [function[colour],[base-ink]] [function[colour],[alert-background]] +[colour-interpolate:oklch[0.4]]
+?alert-contrast: [tf.check-colour-contrast[alert-background],[foreground],[45]]
+background: [function[colour],[base-paper]]
 blockquote-bar: [function[colour],[muted-foreground]]
 button-background:
 button-foreground:
@@ -35,6 +60,7 @@ button-border:
 code-background: [function[colour],[base-tertiary]colour-set-oklch:l[0.9]]
 code-border: [function[colour],[base-tertiary]color-oklch:l[0.5]]
 code-foreground: [function[colour],[base-tertiary]colour-set-oklch:l[0.3]]
+?code-contrast: [tf.check-colour-contrast[code-background],[code-foreground],[45]]
 diff-delete-background: [function[colour],[]]
 diff-delete-foreground: [function[colour],[foreground]]
 diff-equal-background:
@@ -57,10 +83,11 @@ external-link-background-hover: inherit
 external-link-background-visited: inherit
 external-link-background: inherit
 external-link-foreground-hover: inherit
-external-link-foreground-visited: [function[colour],[]]
-external-link-foreground: [function[colour],[]]
+external-link-foreground-visited: [function[colour],[primary]]
+external-link-foreground: [function[colour],[primary]]
 footnote-target-background: [function[colour],[]]
-foreground: [function[colour],[base-foreground]]
+foreground: [function[colour],[base-ink]]
+?background-foreground-contrast: [tf.check-colour-contrast[background],[foreground],[45]]
 highlight-background: [function[colour],[]]
 highlight-foreground: [function[colour],[]]
 message-background: [function[colour],[]]
@@ -76,9 +103,10 @@ muted-foreground: [function[colour],[]]
 network-activity-foreground: [function[colour],[]]
 notification-background: [function[colour],[base-tertiary]colour-set-oklch:l[0.9]]
 notification-border: [function[colour],[base-tertiary]colour-set-oklch:l[0.2]]
-page-background: [function[colour],[base-background]colour-set-oklch:l[0.7]]
+page-background: [function[colour],[base-background]]
 pre-background: [function[colour],[base-tertiary]colour-set-oklch:l[0.98]]
 pre-border: [function[colour],[base-tertiary]colour-set-oklch:l[0.3]]
+primary: [function[colour],[base-primary]]
 selection-background:
 selection-foreground:
 select-tag-background:
@@ -120,8 +148,8 @@ tag-foreground: [function[colour],[]]
 testcase-accent-level-1: [function[colour],[]]
 testcase-accent-level-2: [function[colour],[]]
 testcase-accent-level-3: [function[colour],[]]
-tiddler-background: [function[colour],[base-background]colour-set-oklch:l[.9]]
-tiddler-border: [function[colour],[background]]
+tiddler-background: [function[colour],[background]]
+tiddler-border: [function[colour],[base-paper]] [function[colour],[base-background]] +[colour-interpolate:oklch[0.5]]
 tiddler-controls-foreground-hover: [function[colour],[]]
 tiddler-controls-foreground-selected: [function[colour],[]]
 tiddler-controls-foreground: [function[colour],[]]
