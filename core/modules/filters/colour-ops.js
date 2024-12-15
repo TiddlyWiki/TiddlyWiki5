@@ -15,11 +15,19 @@ Filter operators for colour operations
 var Color = require("$:/core/modules/utils/dom/color.js").Color;
 
 exports["colour-lighten"] = makeSerialColourOperator(function (colour, operator, options) {
-	return colour.lighten($tw.utils.parseNumber(operator.operand));
+	return colour.lighten($tw.utils.parseNumber(operator.operand)).display().toString();
 });
 
 exports["colour-darken"] = makeSerialColourOperator(function (colour, operator, options) {
-	return colour.darken($tw.utils.parseNumber(operator.operand));
+	return colour.darken($tw.utils.parseNumber(operator.operand)).display().toString();
+});
+
+exports["colour-get-oklch"] = makeSerialColourOperator(function (colour, operator, options) {
+	var prop = ((operator.suffixes || [])[0] || ["l"])[0];
+	if(["l","c","h"].indexOf(prop) !== -1) {
+		colour = colour.oklch[prop];
+	}
+	return colour.toString();
 });
 
 exports["colour-set-oklch"] = makeSerialColourOperator(function (colour, operator, options) {
@@ -27,7 +35,7 @@ exports["colour-set-oklch"] = makeSerialColourOperator(function (colour, operato
 	if(["l","c","h"].indexOf(prop) !== -1) {
 		colour.oklch[prop] = $tw.utils.parseNumber(operator.operand);
 	}
-	return colour;
+	return colour.display().toString();
 });
 
 exports["colour-contrast"] = makeParallelColourOperator(function (colours, operator, options) {
@@ -51,7 +59,7 @@ function makeSerialColourOperator(fn) {
 			var c = $tw.utils.parseCSSColorObject(title);
 			if (c) {
 				c = fn(c, operator, options);
-				results.push(c.display().toString());
+				results.push(c);
 			} else {
 				results.push("");
 			}

@@ -1,0 +1,33 @@
+created: 20241117161528913
+modified: 20241117161528913
+tags: [[Filter Operators]] [[Colour Operators]]
+title: colour-get-oklch Operator
+caption: colour-get-oklch
+op-purpose: retrieve components of colour values in the OKLCH colour space
+op-input: a selection of colour values
+op-suffix: "l", "c" or "h" to indicate which component of the colour to retrieve
+op-output: the values of the specified component of the input colours
+
+<<.from-version "5.3.7">> See [[Colour Palettes]] for background.
+
+The <<.op colour-get-oklch>> operator is used to retrieve components of colour values in the [[OKLCH|https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch]] colour space. The OKLCH colour space expresses colours as three numbers:
+
+|!Id |!Name |!Range |
+|l |Lightness |0 – 1 |
+|c |Chroma |0 – 0.4 |
+|h |Hue |0 – 360 |
+
+The advantage of the OKLCH space is that it is perceptually uniform, meaning that equal changes in the numbers correspond to equal changes in the perceived colour.
+
+For example, this filter expression will get the lightness of the colour current page background colour:
+
+```
+[function[colour],[page-background]colour-get-oklch:l[]]
+```
+
+See also the following related operators:
+
+* <<.olink colour-set-oklch>> to modify a component of a colour value in the OKLCH colour space
+* <<.olink colour-lighten>> to lighten a colour value
+* <<.olink colour-darken>> to lighten a colour value
+
