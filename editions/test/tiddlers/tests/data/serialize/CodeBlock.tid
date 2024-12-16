@@ -1,0 +1,17 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/CodeBlock
+type: text/vnd.tiddlywiki
+
+Simple `JS` and complex
+
+---
+
+```js
+var match = reEnd.exec(this.parser.source)
+```
+
+```tid
+<$list filter="[tag[ExampleTag]sort[title]]"/>
+```
+
+end
