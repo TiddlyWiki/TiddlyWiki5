@@ -1,0 +1,8 @@
+title: $:/core/ui/Palettes/Preview/Tiddler
+tags: $:/tags/Preview/Story
+
+\parameters (title)
+\whitespace trim
+<$colour.div class="tc-palette-preview-thumbnail-tiddler" styleName="background-color" styleColour="tiddler-background">
+	<<palette-preview-component-list "$:/tags/Preview/Tiddler">>
+</$colour.div>
