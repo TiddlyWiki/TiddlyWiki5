@@ -9,12 +9,22 @@ class: mws-modal
 		<form class="mws-anon-config-form" method="POST" action="/admin/post-anon-config">
 			<div class="mws-modal-section">
 				<$set name="isChecked" value={{{ [[$:/config/MultiWikiServer/AllowAnonymousReads]get[text]] }}}>
-					<input type="checkbox" name="allowReads" checked=<<isChecked>>/> Allow anonymous reads
+					<$list filter="[<isChecked>match[yes]]">
+						<input type="checkbox" name="allowReads" checked/> Allow anonymous reads
+					</$list>
+					<$list filter="[<isChecked>!match[yes]]">
+						<input type="checkbox" name="allowReads"/> Allow anonymous reads
+					</$list>
 				</$set>
 			</div>
 			<div class="mws-modal-section">
 				<$set name="isChecked" value={{{ [[$:/config/MultiWikiServer/AllowAnonymousWrites]get[text]] }}}>
-					<input type="checkbox" name="allowWrites" checked=<<isChecked>>/> Allow anonymous writes
+					<$list filter="[<isChecked>match[yes]]">
+						<input type="checkbox" name="allowWrites" checked/> Allow anonymous writes
+					</$list>
+					<$list filter="[<isChecked>!match[yes]]">
+						<input type="checkbox" name="allowWrites"/> Allow anonymous writes
+					</$list>
 				</$set>
 			</div>
 			<div class="mws-modal-buttons">
