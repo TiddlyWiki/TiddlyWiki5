@@ -18,6 +18,8 @@ The following parameters are supported:
 |''height'' |Optional height of the image in pixels |
 |''save-file'' |Optional filename to save the image to |
 |''save-title'' |Optional title of tiddler to save the image to |
+|''oncompletion'' |Optional action string to be invoked when the save operation has completed |
+|''var-*'' |Variables to be passed to the completion handler (without the "var-" prefix) |
 
 !! Examples
 

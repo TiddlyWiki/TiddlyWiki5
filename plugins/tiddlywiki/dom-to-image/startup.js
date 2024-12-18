@@ -19,10 +19,22 @@ exports.before = ["render"];
 exports.synchronous = true;
 
 exports.startup = function() {
+	var getPropertiesWithPrefix = function(properties,prefix) {
+		var result = Object.create(null);
+		$tw.utils.each(properties,function(value,name) {
+			if(name.indexOf(prefix) === 0) {
+				result[name.substring(prefix.length)] = properties[name];
+			}
+		});
+		return result;
+	};
 	$tw.rootWidget.addEventListener("tm-save-dom-to-image",function(event) {
+		var self=this; /* ELS */
 		var params = event.paramObject || {},
 			domToImage = require("$:/plugins/tiddlywiki/dom-to-image/dom-to-image-more.js"),
-			domNode = document.querySelector(params.selector || "body.tc-body");
+			domNode = document.querySelector(params.selector || "body.tc-body"),
+			oncompletion = params.oncompletion,
+			variables = getPropertiesWithPrefix(params,"var-");
 		if(domNode) {
 			var method = "toPng";
 			switch(params.format) {
@@ -67,6 +79,7 @@ exports.startup = function() {
 						}));	
 					}
 				}
+				self.wiki.invokeActionString(oncompletion,self,variables,{parentWidget: $tw.rootWidget});
 			})
 			.catch(function(error) {
 				console.error('oops, something went wrong!', error);
@@ -76,3 +89,4 @@ exports.startup = function() {
 };
 
 })();
+	
