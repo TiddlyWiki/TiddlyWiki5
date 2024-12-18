@@ -332,8 +332,14 @@ Server.prototype.findMatchingRoute = function(request,state) {
 		} else {
 			match = potentialRoute.path.exec(pathname);
 		}
-		// Allow POST as a synonym for PUT because HTML doesn't allow PUT forms
-		if(match && (request.method === potentialRoute.method || (request.method === "POST" && potentialRoute.method === "PUT"))) {
+		// Allow POST as a synonym for PUT and DELETE because HTML doesn't allow these methods in forms
+		if(match && (
+			request.method === potentialRoute.method || 
+			(request.method === "POST" && (
+				potentialRoute.method === "PUT" || 
+				potentialRoute.method === "DELETE"
+			))
+		)) {
 			state.params = [];
 			for(var p=1; p<match.length; p++) {
 				state.params.push(match[p]);
