@@ -1,0 +1,5 @@
+description: [prefix[.]] Documentation variables prefixed with a dot
+tags: $:/tags/Variables/Exclude/Snippet
+title: $:/variables/exclude/prefix-dot
+
+[prefix[.]]
