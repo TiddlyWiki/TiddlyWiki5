@@ -317,37 +317,37 @@ Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 };
 
 Server.prototype.findMatchingRoute = function(request,state) {
-    for(var t=0; t<this.routes.length; t++) {
-        var potentialRoute = this.routes[t],
-            pathRegExp = potentialRoute.path,
-            pathname = state.urlInfo.pathname,
-            match;
-        if(state.pathPrefix) {
-            if(pathname.substr(0,state.pathPrefix.length) === state.pathPrefix) {
-                pathname = pathname.substr(state.pathPrefix.length) || "/";
-                match = potentialRoute.path.exec(pathname);
-            } else {
-                match = false;
-            }
-        } else {
-            match = potentialRoute.path.exec(pathname);
-        }
-        // Allow POST as a synonym for PUT and DELETE because HTML doesn't allow these methods in forms
-        if(match && (
-            request.method === potentialRoute.method || 
-            (request.method === "POST" && (
-                potentialRoute.method === "PUT" || 
-                potentialRoute.method === "DELETE"
-            ))
-        )) {
-            state.params = [];
-            for(var p=1; p<match.length; p++) {
-                state.params.push(match[p]);
-            }
-            return potentialRoute;
-        }
-    }
-    return null;
+	for(var t=0; t<this.routes.length; t++) {
+		var potentialRoute = this.routes[t],
+			pathRegExp = potentialRoute.path,
+			pathname = state.urlInfo.pathname,
+			match;
+		if(state.pathPrefix) {
+			if(pathname.substr(0,state.pathPrefix.length) === state.pathPrefix) {
+				pathname = pathname.substr(state.pathPrefix.length) || "/";
+				match = potentialRoute.path.exec(pathname);
+			} else {
+				match = false;
+			}
+		} else {
+			match = potentialRoute.path.exec(pathname);
+		}
+		// Allow POST as a synonym for PUT and DELETE because HTML doesn't allow these methods in forms
+		if(match && (
+			request.method === potentialRoute.method || 
+			(request.method === "POST" && (
+				potentialRoute.method === "PUT" || 
+				potentialRoute.method === "DELETE"
+			))
+		)) {
+			state.params = [];
+			for(var p=1; p<match.length; p++) {
+				state.params.push(match[p]);
+			}
+			return potentialRoute;
+		}
+	}
+	return null;
 };
 
 Server.prototype.methodMappings = {

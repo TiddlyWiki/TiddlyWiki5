@@ -30,25 +30,25 @@ exports.useACL = true;
 exports.entityName = "bag"
 
 exports.handler = function(request,response,state) {
-    if(state.data.bag_name) {
-        const result = $tw.mws.store.createBag(state.data.bag_name,state.data.description);
-        if(!result) {
-            state.sendResponse(302,{
-                "Content-Type": "text/plain",
-                "Location": "/"
-            });
-        } else {
-            state.sendResponse(400,{
-                "Content-Type": "text/plain"
-            },
-            result.message,
-            "utf8");
-        }
-    } else {
-        state.sendResponse(400,{
-            "Content-Type": "text/plain"
-        });
-    }
+	if(state.data.bag_name) {
+		const result = $tw.mws.store.createBag(state.data.bag_name,state.data.description);
+		if(!result) {
+			state.sendResponse(302,{
+				"Content-Type": "text/plain",
+				"Location": "/"
+			});
+		} else {
+			state.sendResponse(400,{
+				"Content-Type": "text/plain"
+			},
+			result.message,
+			"utf8");
+		}
+	} else {
+		state.sendResponse(400,{
+			"Content-Type": "text/plain"
+		});
+	}
 };
 
 }());

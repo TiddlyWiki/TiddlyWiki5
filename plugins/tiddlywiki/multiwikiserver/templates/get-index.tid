@@ -88,10 +88,10 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 							<$text text={{{ [<recipe-info>jsonget[description]] }}}/>
 						</div>
 						<div class="mws-wiki-card-actions">
-    <form action={{{ [<recipe-info>jsonget[recipe_name]addprefix[/recipes/]] }}} method="post" onsubmit="return confirmRecipeDelete(this)">
-        <input type="hidden" name="_method" value="DELETE"/>
-        <button type="submit" class="mws-delete-button">Delete Recipe</button>
-    </form>
+	<form action={{{ [<recipe-info>jsonget[recipe_name]addprefix[/recipes/]] }}} method="post" onsubmit="return confirmRecipeDelete(this)">
+		<input type="hidden" name="_method" value="DELETE"/>
+		<button type="submit" class="mws-delete-button">Delete Recipe</button>
+	</form>
 </div>
 					</div>
 				</div>
@@ -133,19 +133,19 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 <ul class="mws-vertical-list">
 	<$list filter="[<bag-list>jsonindexes[]] :filter[<bag-list>jsonget<currentTiddler>,[bag_name].hide.system[]] :sort[<bag-list>jsonget<currentTiddler>,[bag_name]]" variable="bag-index" counter="counter">
 		<li class="mws-wiki-card">
-    <$let
-        bag-info={{{ [<bag-list>jsonextract<bag-index>] }}}
-        bag-name={{{ [<bag-info>jsonget[bag_name]] }}}
-    >
-        <$transclude $variable="bagPill"/>
-        <$text text={{{ [<bag-info>jsonget[description]] }}}/>
-        <div class="mws-wiki-card-actions">
-    <form action={{{ [<bag-info>jsonget[bag_name]addprefix[/bags/]] }}} method="post" onsubmit="return confirmBagDelete(this)">
-        <input type="hidden" name="_method" value="DELETE"/>
-        <button type="submit" class="mws-delete-button">Delete Bag</button>
-    </form>
+	<$let
+		bag-info={{{ [<bag-list>jsonextract<bag-index>] }}}
+		bag-name={{{ [<bag-info>jsonget[bag_name]] }}}
+	>
+		<$transclude $variable="bagPill"/>
+		<$text text={{{ [<bag-info>jsonget[description]] }}}/>
+		<div class="mws-wiki-card-actions">
+	<form action={{{ [<bag-info>jsonget[bag_name]addprefix[/bags/]] }}} method="post" onsubmit="return confirmBagDelete(this)">
+		<input type="hidden" name="_method" value="DELETE"/>
+		<button type="submit" class="mws-delete-button">Delete Bag</button>
+	</form>
 </div>
-    </$let>
+	</$let>
 </li>
 	</$list>
 </ul>
@@ -254,23 +254,23 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 }
 
 .mws-delete-button {
-    background-color: #f44336;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 10px;
+	background-color: #f44336;
+	color: white;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-left: 10px;
 }
 
 .mws-delete-button:hover {
-    background-color: #d32f2f;
+	background-color: #d32f2f;
 }
 
 .mws-wiki-card-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 10px;
 	margin-left: 1em;
 }
 
@@ -353,34 +353,34 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 }
 
 .mws-config-button:hover {
-    background-color: #45a049;
+	background-color: #45a049;
 }
 
 .mws-modal-content {
-    padding: 20px;
+	padding: 20px;
 }
 
 .mws-modal-section {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .mws-modal-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 20px;
+	display: flex;
+	gap: 10px;
+	justify-content: flex-end;
+	margin-top: 20px;
 }
 
 .mws-modal-button-primary {
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+	background-color: #4CAF50;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
 }
 
 .mws-modal-button-primary:hover {
-    background-color: #45a049;
+	background-color: #45a049;
 }
 </style>

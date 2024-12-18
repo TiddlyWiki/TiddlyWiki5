@@ -23,26 +23,26 @@ exports.useACL = true;
 exports.entityName = "bag"
 
 exports.handler = function(request,response,state) {
-    const bagName = state.params[0];
-    if(bagName) {
-        const result = $tw.mws.store.deleteBag(bagName);
-        if(!result) {
-            state.sendResponse(302,{
-                "Content-Type": "text/plain",
-                "Location": "/"
-            });
-        } else {
-            state.sendResponse(400,{
-                "Content-Type": "text/plain"
-            },
-            result.message,
-            "utf8");
-        }
-    } else {
-        state.sendResponse(400,{
-            "Content-Type": "text/plain"
-        });
-    }
+	const bagName = state.params[0];
+	if(bagName) {
+		const result = $tw.mws.store.deleteBag(bagName);
+		if(!result) {
+			state.sendResponse(302,{
+				"Content-Type": "text/plain",
+				"Location": "/"
+			});
+		} else {
+			state.sendResponse(400,{
+				"Content-Type": "text/plain"
+			},
+			result.message,
+			"utf8");
+		}
+	} else {
+		state.sendResponse(400,{
+			"Content-Type": "text/plain"
+		});
+	}
 };
 
 }());
