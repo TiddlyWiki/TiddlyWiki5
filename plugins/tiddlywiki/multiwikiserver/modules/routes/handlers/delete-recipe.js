@@ -1,14 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/post-bag.js
+title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/delete-recipe.js
 type: application/javascript
 module-type: mws-route
 
-POST /bags
-
-Parameters:
-
-bag_name
-description
+DELETE /recipes/:recipe-name
 
 \*/
 (function() {
@@ -17,21 +12,20 @@ description
 /*global $tw: false */
 "use strict";
 
-exports.method = "POST";
+exports.method = "DELETE";
 
-exports.path = /^\/bags$/;
-
-exports.bodyFormat = "www-form-urlencoded";
+exports.path = /^\/recipes\/([^\/]+)$/;
 
 exports.csrfDisable = true;
 
 exports.useACL = true;
 
-exports.entityName = "bag"
+exports.entityName = "recipe"
 
 exports.handler = function(request,response,state) {
-    if(state.data.bag_name) {
-        const result = $tw.mws.store.createBag(state.data.bag_name,state.data.description);
+    const recipeName = state.params[0];
+    if(recipeName) {
+        const result = $tw.mws.store.deleteRecipe(recipeName);
         if(!result) {
             state.sendResponse(302,{
                 "Content-Type": "text/plain",

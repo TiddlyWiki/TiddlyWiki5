@@ -88,10 +88,8 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 							<$text text={{{ [<recipe-info>jsonget[description]] }}}/>
 						</div>
 						<div class="mws-wiki-card-actions">
-    <form action="/recipes" method="post">
+    <form action={{{ [<recipe-info>jsonget[recipe_name]addprefix[/recipes/]] }}} method="post" onsubmit="return confirmRecipeDelete(this)">
         <input type="hidden" name="_method" value="DELETE"/>
-        <input type="hidden" name="recipe_name" value={{{ [<recipe-info>jsonget[recipe_name]] }}}/>
-        <input type="hidden" name="bag_names" value={{{ [<recipe-info>jsonget[bag_names]join[ ]] }}}/>
         <button type="submit" class="mws-delete-button">Delete Recipe</button>
     </form>
 </div>
@@ -142,12 +140,11 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
         <$transclude $variable="bagPill"/>
         <$text text={{{ [<bag-info>jsonget[description]] }}}/>
         <div class="mws-wiki-card-actions">
-            <form action="/bags" method="post" onsubmit="return confirmBagDelete(this)">
-                <input type="hidden" name="_method" value="DELETE"/>
-                <input type="hidden" name="bag_name" value={{{ [<bag-info>jsonget[bag_name]] }}}/>
-                <button type="submit" class="mws-delete-button">Delete Bag</button>
-            </form>
-        </div>
+    <form action={{{ [<bag-info>jsonget[bag_name]addprefix[/bags/]] }}} method="post" onsubmit="return confirmBagDelete(this)">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <button type="submit" class="mws-delete-button">Delete Bag</button>
+    </form>
+</div>
     </$let>
 </li>
 	</$list>

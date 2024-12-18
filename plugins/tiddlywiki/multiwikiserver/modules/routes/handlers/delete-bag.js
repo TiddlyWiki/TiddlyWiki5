@@ -1,14 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/post-bag.js
+title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/delete-bag.js
 type: application/javascript
 module-type: mws-route
 
-POST /bags
-
-Parameters:
-
-bag_name
-description
+DELETE /bags/:bag-name
 
 \*/
 (function() {
@@ -17,11 +12,9 @@ description
 /*global $tw: false */
 "use strict";
 
-exports.method = "POST";
+exports.method = "DELETE";
 
-exports.path = /^\/bags$/;
-
-exports.bodyFormat = "www-form-urlencoded";
+exports.path = /^\/bags\/([^\/]+)$/;
 
 exports.csrfDisable = true;
 
@@ -30,8 +23,9 @@ exports.useACL = true;
 exports.entityName = "bag"
 
 exports.handler = function(request,response,state) {
-    if(state.data.bag_name) {
-        const result = $tw.mws.store.createBag(state.data.bag_name,state.data.description);
+    const bagName = state.params[0];
+    if(bagName) {
+        const result = $tw.mws.store.deleteBag(bagName);
         if(!result) {
             state.sendResponse(302,{
                 "Content-Type": "text/plain",
