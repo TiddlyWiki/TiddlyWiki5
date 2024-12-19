@@ -29,8 +29,8 @@ exports.startup = function() {
 		return result;
 	};
 	$tw.rootWidget.addEventListener("tm-save-dom-to-image",function(event) {
-		var self=this; /* ELS */
-		var params = event.paramObject || {},
+		var self=this,
+			params = event.paramObject || {},
 			domToImage = require("$:/plugins/tiddlywiki/dom-to-image/dom-to-image-more.js"),
 			domNode = document.querySelector(params.selector || "body.tc-body"),
 			oncompletion = params.oncompletion,
