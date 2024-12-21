@@ -6,6 +6,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-bag
 	width="32px"
 /> Bag <$text text={{{ [<bag-name>]}}}/>
 
+<!-- Import form for Tiddlers -->
 <form
 	method="post"
 	action="tiddlers/"
@@ -35,11 +36,175 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-bag
 </form>
 
 <ul>
-<$list filter="[<bag-titles>jsonget[]sort[]]">
-<li>
-<a href=`/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/${ [<currentTiddler>encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
-<$text text=<<currentTiddler>>/>
-</a>
-</li>
-</$list>
-</ul>
+
+<!-- Filter input for list-->
+<div class="filter-section">
+	<form method="GET">
+		<label>Filter tiddlers:</label>
+		<select name="field">
+			<option value="title" selected={{{ [<current-field>match[title]then[selected]] }}}>Title</option>
+			<option value="tag" selected={{{ [<current-field>match[tag]then[selected]] }}}>Tags</option>
+			<option value="text" selected={{{ [<current-field>match[text]then[selected]] }}}>Text</option>
+		</select>
+		<input type="text" name="filter" value=<<current-filter>> placeholder="Enter search term..."/>
+		<input type="submit" value="Filter"/>
+		<a href={{{ [<bag-name>addprefix[/bags/]addsuffix[/]] }}} class="button">Show All</a>
+	</form>
+</div>
+
+
+
+<!-- Tiddler List with Checkboxes -->
+<form action="tiddlers/" method="post" class="mws-form" enctype="multipart/form-data">
+	<div class="mws-form-heading">
+		Move Selected Tiddlers
+	</div>
+	<div class="mws-form-fields">
+		<!-- Hidden operation field -->
+		<input type="hidden" name="operation" value="move"/>
+		
+		<!-- Hidden source bag field -->
+		<input type="hidden" name="source-bag" value=<<bag-name>>/>
+		
+		<!-- Tiddler List with Checkboxes -->
+		<div class="tiddler-list">
+			<$list filter="[<bag-titles>jsonget[]sort[]]">
+				<div class="tiddler-entry">
+					<$set name="tidID" value={{{ [<currentTiddler>encodeuricomponent[]] }}}>
+							<label for="chk_<<tidID>>">
+							<$link to=<<currentTiddler>>><<currentTiddler>></$link>
+						</label>
+					</$set>
+				</div>
+			</$list>
+		</div>
+
+
+
+
+
+<style>
+.bag-selector {
+	margin: 15px 0;
+	padding: 15px;
+	background-color: #f8f8f8;
+	border-radius: 4px;
+}
+
+.bag-selector label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+.bag-selector select {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+button {
+	background-color: #2d91ec;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+button:hover {
+	background-color: #1a7fd1;
+}
+
+button:active {
+	background-color: #166bb0;
+}
+
+.deselect-all {
+	margin-left: 10px;
+	background-color: #6c757d;
+}
+
+.filter-section {
+	margin-bottom: 15px;
+	display: flex;
+	gap: 10px;
+}
+
+.filter-section .button {
+	display: inline-block;
+	padding: 8px 16px;
+	background-color: #6c757d;
+	color: white;
+	text-decoration: none;
+	border-radius: 4px;
+	border: none;
+}
+
+.filter-section .button:hover {
+	background-color: #5a6268;
+}
+
+.filter-section input {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.filter-section select {
+	padding: 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.move-selected:disabled {
+	background-color: #cccccc;
+	cursor: not-allowed;
+}
+
+.mws-form-field input[readonly] {
+	background-color: #f5f5f5;
+	cursor: not-allowed;
+}
+
+.select-all {
+	margin: 15px 0;
+	padding: 10px;
+	background-color: #f8f8f8;
+	border-radius: 4px;
+}
+
+.selection-controls {
+	margin: 10px 0;
+	padding: 10px;
+	background: #f5f5f5;
+	border-radius: 4px;
+}
+
+.selection-controls button {
+	margin-right: 10px;
+}
+
+#selection-count {
+	font-weight: bold;
+	color: #2d91ec;
+}
+
+.tiddler-entry {
+	display: flex;
+	align-items: center;
+	padding: 5px;
+	border-bottom: 1px solid #eee;
+}
+
+.tiddler-entry:hover {
+	background-color: #f5f5f5;
+}
+
+.tiddler-entry input[type="checkbox"] {
+	margin-right: 10px;
+}
+</style>

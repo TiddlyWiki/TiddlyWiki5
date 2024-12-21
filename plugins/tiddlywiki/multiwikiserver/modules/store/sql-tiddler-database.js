@@ -41,6 +41,49 @@ SqlTiddlerDatabase.prototype.close = function() {
 	this.engine.close();
 };
 
+SqlTiddlerDatabase.prototype.getFilteredBagTiddlers = function(bag_name, filterText, filterField) {
+	let query = `
+		SELECT DISTINCT t.title, t.tiddler_id
+		FROM tiddlers t
+		LEFT JOIN fields f ON t.tiddler_id = f.tiddler_id
+		WHERE t.bag_id IN (
+			SELECT bag_id
+			FROM bags
+			WHERE bag_name = $bag_name
+		)
+		AND t.is_deleted = FALSE
+	`;
+	
+	const params = {
+		$bag_name: bag_name,
+		$filterText: '%' + filterText + '%'
+	};
+
+	// Add field-specific filtering
+	if (filterField === "tag") {
+		query += ` AND EXISTS (
+			SELECT 1 FROM fields 
+			WHERE tiddler_id = t.tiddler_id 
+			AND field_name = 'tags' 
+			AND field_value LIKE $filterText
+		)`;
+	} else if (filterField === "text") {
+		query += ` AND EXISTS (
+			SELECT 1 FROM fields 
+			WHERE tiddler_id = t.tiddler_id 
+			AND field_name = 'text' 
+			AND field_value LIKE $filterText
+		)`;
+	} else {
+		// Default to title search
+		query += ` AND t.title LIKE $filterText`;
+	}
+
+	query += ` ORDER BY t.title ASC`;
+	
+	return this.engine.runStatementGetAll(query, params);
+};
+
 
 SqlTiddlerDatabase.prototype.transaction = function(fn) {
 	return this.engine.transaction(fn);
