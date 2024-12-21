@@ -4,10 +4,10 @@ modified: 20240710163659672
 tags: $:/tags/ViewTemplate
 title: $:/editions/tw5.com/systemtag-template
 
-<$list filter='[all[current]prefix[SystemTag: ]]'>
+<%if [all[current]prefix[SystemTag: ]] %>
 <$let thisTag={{{ [all[current]removeprefix[SystemTag: ]] }}} >
 
-<$list filter='[all[tiddlers+shadows]tag<thisTag>limit[1]]' emptyMessage='(No tiddlers are currently tagged with <<tag>> )'>
+<$list filter='[all[tiddlers+shadows]tag<thisTag>limit[1]]' emptyMessage='(No tiddlers are currently tagged with <<tag $(thisTag)$ >>)'>
 
 The following tiddlers are tagged with <<tag $(thisTag)$ >>
 
@@ -24,4 +24,4 @@ The following tiddlers are tagged with <<tag $(thisTag)$ >>
 </div>
 </$list>
 </$let>
-</$list>
+<%endif%>
