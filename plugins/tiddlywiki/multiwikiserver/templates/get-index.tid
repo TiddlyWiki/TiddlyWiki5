@@ -114,7 +114,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 			<label class="mws-form-field-description">
 				Bags in recipe (space separated)
 			</label>
-			<input name="bag_names" type="text"/>
+			<input name="bag_names" type="text" required/>
 		</div>
 	</div>
 	<div class="mws-form-buttons">
