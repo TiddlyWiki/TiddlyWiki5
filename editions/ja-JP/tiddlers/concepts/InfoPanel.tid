@@ -1,0 +1,18 @@
+created: 20150917193630604
+modified: 20241212114212647 
+original-modified: 20201129183045031
+tags: Features
+title: InfoPanel
+ja-title: 情報パネル
+type: text/vnd.tiddlywiki
+
+各Tiddlerには追加情報のパネルがあります。それを表示するには、Tiddlerのツールバーの<<.icon $:/core/images/down-arrow>>ボタンをクリックし、ドロップダウンリストから<<.icon $:/core/images/info-button>> ''情報''を選択します。
+
+情報パネルには次のタブがあります。:
+
+* ''ツール'' - このTiddlerで実行できるさまざまなアクションのボタンがあります。各ボタンの横にあるチェックボックスを使用すると、アクションをTiddlerのツールバーに昇格できます。これは、Wiki内のすべてのTiddlerに影響します
+* ''参照''、''この名でタグ付''、''一覧''、''被リスト'' - これらはさまざまな種類の関連するTiddlerをリストします。[[リンクを使用してTiddler間を移動する|Using links to navigate between tiddlers]]ティドラー間の移動にリンクを使用するを参照してください
+* ''項目'' - Tiddlerの''テキスト''以外の[[フィールド|TiddlerFields]]をすべてまとめたものです
+* ''詳細'' - これは、Tiddlerが[[隠し|ShadowTiddlers]]であるかどうかを示します。隠しである場合、どのプラグインからのものか、通常のTiddlerによって上書きされているかどうかも明らかになります
+
+情報パネルを閉じるには、情報パネルの外側の任意の場所をクリックします。
