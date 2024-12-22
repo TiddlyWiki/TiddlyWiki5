@@ -397,6 +397,7 @@ Server.prototype.authenticateUser = function(request, response) {
 	delete user.password;
 	const userRole = this.sqlTiddlerDatabase.getUserRoles(user.user_id);
 	user['isAdmin'] = userRole?.role_name?.toLowerCase() === 'admin'
+	user['sessionId'] = session_id
 
 	return user
 };

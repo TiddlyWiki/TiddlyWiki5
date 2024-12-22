@@ -34,7 +34,7 @@ Authenticator.prototype.hashPassword = function(password) {
 Authenticator.prototype.createSession = function(userId) {
 	var sessionId = crypto.randomBytes(16).toString("hex");
 	// Store the session in your database or in-memory store
-	this.sqlTiddlerDatabase.createOrUpdateUserSession(userId, sessionId);
+	this.sqlTiddlerDatabase.createUserSession(userId, sessionId);
 	return sessionId;
 };
 
