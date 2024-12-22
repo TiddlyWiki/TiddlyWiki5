@@ -295,7 +295,10 @@ SqlTiddlerStore.prototype.createRecipe = function(recipe_name,bag_names,descript
 	}
 	var self = this;
 	return this.sqlTiddlerDatabase.transaction(function() {
-		self.sqlTiddlerDatabase.createRecipe(recipe_name,bag_names,description);
+		// Reverse the array to maintain the original order in the database
+		// since SQLite will return them in reverse order
+		const reversedBagNames = bag_names.slice().reverse();
+		self.sqlTiddlerDatabase.createRecipe(recipe_name,reversedBagNames,description);
 		self.dispatchEvent("change");
 		return null;
 	});
