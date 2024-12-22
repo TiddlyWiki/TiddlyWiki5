@@ -20,7 +20,7 @@ exports.method = "GET";
 
 exports.path = /^\/recipes\/([^\/]+)\/tiddlers\/(.+)$/;
 
-exports.useACL = true;
+// exports.useACL = true;
 
 exports.entityName = "recipe"
 
