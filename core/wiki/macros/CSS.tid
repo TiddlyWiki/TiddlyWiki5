@@ -1,17 +1,91 @@
 title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
-<!-- Needs to stay that way for backwards compatibility. See GH issue: #8326 -->
+\procedure actions-compile-palette-filtered(tempPalette,outputTitle)
+<!-- Note the join, needed to cope with palette entries containing spaces -->
+\function colour(name) [<tv-palette-name>getindex<name>] :else[<tv-palette-name>get[palette-import]getindex<name>] :map[subfilter<currentTiddler>join[ ]]
+<!-- Make the colour function use the input palette -->
+<$let
+	tv-palette-name=<<tempPalette>>
+>
+	<$list filter="[<tempPalette>indexes[]sort[]]" variable="colour-name">
+		<$let colour-filter={{{ [<tempPalette>getindex<colour-name>] }}}>
+			<!-- Note the join, needed to cope with palette entries containing spaces -->
+			<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value={{{ [subfilter<colour-filter>join[ ]] }}}/>
+		</$let>
+	</$list>
+</$let>
+\end actions-compile-palette-filtered
+
+\procedure actions-compile-palette-wikified(tempPalette,outputTitle)
+<!-- Define our own deeply backwards compatible local versions of the colour macro -->
 \define colour(name)
 \whitespace trim
-<$transclude tiddler={{$:/palette}} index="$name$">
-	<$transclude tiddler="$:/palettes/Vanilla" index="$name$">
-		<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
-	</$transclude>
+<$transclude tiddler=<<tempPalette>> index="$name$">
+	<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
 </$transclude>
-\end
-
+\end colour
 \define color(name) <<colour $name$>>
+<$list filter="[<tempPalette>indexes[]sort[]]" variable="colour-name" $debug="yes">
+	<$wikify name="colour-value" text={{{ [<tempPalette>getindex<colour-name>] }}} mode="inline">
+		<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value=<<colour-value>>/>
+	</$wikify>
+</$list>
+\end actions-compile-palette-wikified
+
+\procedure actions-compile-palette(inputTitle,outputTitle,defaultImport="$:/palettes/Vanilla")
+<$let
+	tempPalette="$:/temp/palette-source"
+>
+	<!-- Clear the temporary consolidated palette -->
+	<$action-deletetiddler $tiddler=<<tempPalette>>/>
+	<!-- Consolidate the imported palette -->
+	<$let importTitle={{{ [<inputTitle>get[palette-import]else<defaultImport>] }}}>
+		<%if [<importTitle>!match[]] %>
+			<$list filter="[<importTitle>indexes[]sort[]]" variable="colour-name">
+				<$action-setfield $tiddler=<<tempPalette>> $index=<<colour-name>> $value={{{ [<importTitle>getindex<colour-name>] }}}/>
+			</$list>
+		<%endif%>
+	</$let>
+	<!-- Consolidate the main palette -->
+	<$list filter="[<inputTitle>indexes[]sort[]]" variable="colour-name">
+		<$action-setfield $tiddler=<<tempPalette>> $index=<<colour-name>> $value={{{ [<inputTitle>getindex<colour-name>] }}}/>
+	</$list>
+	<!-- Compile the temporary palette to the output palette -->
+	<%if [<inputTitle>get[palette-type]match[modern]] %>
+		<$transclude $variable="actions-compile-palette-filtered" tempPalette=<<tempPalette>> outputTitle=<<outputTitle>>/>
+	<%else%>
+		<$transclude $variable="actions-compile-palette-wikified" tempPalette=<<tempPalette>> outputTitle=<<outputTitle>>/>
+	<%endif%>
+	<!-- Remove the temporary consolidated palette -->
+	<!-- <$action-deletetiddler $tiddler=<<tempPalette>>/> -->
+</$let>
+\end actions-compile-palette
+
+\procedure actions-switch-colour-palette(paletteTitle)
+\procedure tv-action-refresh-policy() always
+<$action-deletetiddler $tiddler="$:/temp/palette-colours"/>
+<$action-setfield $tiddler="$:/palette" $field="text" $value=<<paletteTitle>>/>
+<$transclude $variable="actions-compile-palette" inputTitle=<<paletteTitle>> outputTitle="$:/temp/palette-colours"/>
+\end actions-switch-colour-palette
+
+\procedure tv-palette-name() $:/temp/palette-colours
+
+\function colour(name)
+[<tv-palette-name>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]]
+\end colour
+
+\function color(name)
+[function[colour],<name>]
+\end color
+
+\function tf.check-colour-contrast-subfunction()
+[function[colour],<paletteEntryA>] [function[colour],<paletteEntryB>] +[colour-contrast:DeltaPhi[]fixed[3]]
+\end tf.check-colour-contrast-subfunction
+
+\function tf.check-colour-contrast(paletteEntryA,paletteEntryB,threshold)
+[function[tf.check-colour-contrast-subfunction]compare:number:gt<threshold>then[ok]] :else[function[tf.check-colour-contrast-subfunction]addsuffix[: ]addsuffix<paletteEntryA>addsuffix[/]addsuffix<paletteEntryB>addsuffix[ contrast is too low]]
+\end tf.check-colour-contrast
 
 \define box-shadow(shadow)
 ``
