@@ -204,6 +204,31 @@ SqlTiddlerDatabase.prototype.listBags = function() {
 };
 
 /*
+Delete a recipe and its bag associations
+*/
+SqlTiddlerDatabase.prototype.deleteRecipe = function(recipe_name) {
+	// Delete recipe_bags entries first (due to foreign key constraints)
+	this.engine.runStatement(`
+		DELETE FROM recipe_bags 
+		WHERE recipe_id = (
+			SELECT recipe_id 
+			FROM recipes 
+			WHERE recipe_name = $recipe_name
+		)
+	`, {
+		$recipe_name: recipe_name
+	});
+
+	// Then delete the recipe itself
+	this.engine.runStatement(`
+		DELETE FROM recipes 
+		WHERE recipe_name = $recipe_name
+	`, {
+		$recipe_name: recipe_name
+	});
+};
+
+/*
 Create or update a bag
 Returns the bag_id of the bag
 */
@@ -227,6 +252,19 @@ SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscon
 		$description: description
 	});
 	return updateBags.lastInsertRowid;
+};
+
+/*
+Delete a bag and all its associated data
+*/
+SqlTiddlerDatabase.prototype.deleteBag = function(bag_name) {
+	// Delete the bag (cascade will handle related records)
+	this.engine.runStatement(`
+		DELETE FROM bags 
+		WHERE bag_name = $bag_name
+	`, {
+		$bag_name: bag_name
+	});
 };
 
 /*

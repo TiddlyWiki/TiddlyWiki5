@@ -96,6 +96,46 @@ SqlTiddlerStore.prototype.validateItemName = function(name,allowPrivilegedCharac
 };
 
 /*
+Delete a recipe. Returns null on success, or {message:} on error
+*/
+SqlTiddlerStore.prototype.deleteRecipe = function(recipe_name) {
+	var self = this;
+	return this.sqlTiddlerDatabase.transaction(function() {
+		// Check if recipe exists
+		const recipes = self.sqlTiddlerDatabase.listRecipes();
+		const recipeExists = recipes.some(recipe => recipe.recipe_name === recipe_name);
+		if(!recipeExists) {
+			return {message: "Recipe does not exist"};
+		}
+		
+		// Delete the recipe
+		self.sqlTiddlerDatabase.deleteRecipe(recipe_name);
+		self.dispatchEvent("change");
+		return null;
+	});
+};
+
+/*
+Delete a bag. Returns null on success, or {message:} on error
+*/
+SqlTiddlerStore.prototype.deleteBag = function(bag_name) {
+	var self = this;
+	return this.sqlTiddlerDatabase.transaction(function() {
+		// Check if bag exists
+		const bags = self.sqlTiddlerDatabase.listBags();
+		const bagExists = bags.some(bag => bag.bag_name === bag_name);
+		if(!bagExists) {
+			return {message: "Bag does not exist"};
+		}
+		
+		// Delete the bag
+		self.sqlTiddlerDatabase.deleteBag(bag_name);
+		self.dispatchEvent("change");
+		return null;
+	});
+};
+
+/*
 Returns null if the argument is an array of valid bag/recipe names, or a string error message if not
 */
 SqlTiddlerStore.prototype.validateItemNames = function(names,allowPrivilegedCharacters) {
@@ -144,50 +184,50 @@ SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddle
 /*
 */
 SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields, existing_attachment_blob, existing_canonical_uri) {
-  let attachmentSizeLimit = $tw.utils.parseNumber(this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/AttachmentSizeLimit"));
+	let attachmentSizeLimit = $tw.utils.parseNumber(this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/AttachmentSizeLimit"));
 	if(attachmentSizeLimit < 100 * 1024) {
 		attachmentSizeLimit = 100 * 1024;
 	}
-  const attachmentsEnabled = this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/EnableAttachments", "yes") === "yes";
-  const contentTypeInfo = $tw.config.contentTypeInfo[tiddlerFields.type || "text/vnd.tiddlywiki"];
-  const isBinary = !!contentTypeInfo && contentTypeInfo.encoding === "base64";
+	const attachmentsEnabled = this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/EnableAttachments", "yes") === "yes";
+	const contentTypeInfo = $tw.config.contentTypeInfo[tiddlerFields.type || "text/vnd.tiddlywiki"];
+	const isBinary = !!contentTypeInfo && contentTypeInfo.encoding === "base64";
 
-  let shouldProcessAttachment = tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit;
+	let shouldProcessAttachment = tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit;
 
-  if(existing_attachment_blob) {
-    const fileSize = this.attachmentStore.getAttachmentFileSize(existing_attachment_blob);
-    if(fileSize <= attachmentSizeLimit) {
-      const existingAttachmentMeta = this.attachmentStore.getAttachmentMetadata(existing_attachment_blob);
-      const hasCanonicalField = !!tiddlerFields._canonical_uri;
-      const skipAttachment = hasCanonicalField && (tiddlerFields._canonical_uri === (existingAttachmentMeta ? existingAttachmentMeta._canonical_uri : existing_canonical_uri));
-      shouldProcessAttachment = !skipAttachment;
-    } else {
-      shouldProcessAttachment = false;
-    }
-  }
+	if(existing_attachment_blob) {
+	const fileSize = this.attachmentStore.getAttachmentFileSize(existing_attachment_blob);
+	if(fileSize <= attachmentSizeLimit) {
+		const existingAttachmentMeta = this.attachmentStore.getAttachmentMetadata(existing_attachment_blob);
+		const hasCanonicalField = !!tiddlerFields._canonical_uri;
+		const skipAttachment = hasCanonicalField && (tiddlerFields._canonical_uri === (existingAttachmentMeta ? existingAttachmentMeta._canonical_uri : existing_canonical_uri));
+		shouldProcessAttachment = !skipAttachment;
+	} else {
+		shouldProcessAttachment = false;
+	}
+	}
 
-  if(attachmentsEnabled && isBinary && shouldProcessAttachment) {
-    const attachment_blob = existing_attachment_blob || this.attachmentStore.saveAttachment({
-      text: tiddlerFields.text,
-      type: tiddlerFields.type,
-      reference: tiddlerFields.title,
-      _canonical_uri: tiddlerFields._canonical_uri
-    });
-    
-    if(tiddlerFields && tiddlerFields._canonical_uri) {
-      delete tiddlerFields._canonical_uri;
-    }
-    
-    return {
-      tiddlerFields: Object.assign({}, tiddlerFields, { text: undefined }),
-      attachment_blob: attachment_blob
-    };
-  } else {
-    return {
-      tiddlerFields: tiddlerFields,
-      attachment_blob: existing_attachment_blob
-    };
-  }
+	if(attachmentsEnabled && isBinary && shouldProcessAttachment) {
+	const attachment_blob = existing_attachment_blob || this.attachmentStore.saveAttachment({
+		text: tiddlerFields.text,
+		type: tiddlerFields.type,
+		reference: tiddlerFields.title,
+		_canonical_uri: tiddlerFields._canonical_uri
+	});
+	
+	if(tiddlerFields && tiddlerFields._canonical_uri) {
+		delete tiddlerFields._canonical_uri;
+	}
+	
+	return {
+		tiddlerFields: Object.assign({}, tiddlerFields, { text: undefined }),
+		attachment_blob: attachment_blob
+	};
+	} else {
+	return {
+		tiddlerFields: tiddlerFields,
+		attachment_blob: existing_attachment_blob
+	};
+	}
 };
 
 SqlTiddlerStore.prototype.saveTiddlersFromPath = function(tiddler_files_path,bag_name) {
@@ -255,7 +295,10 @@ SqlTiddlerStore.prototype.createRecipe = function(recipe_name,bag_names,descript
 	}
 	var self = this;
 	return this.sqlTiddlerDatabase.transaction(function() {
-		self.sqlTiddlerDatabase.createRecipe(recipe_name,bag_names,description);
+		// Reverse the array to maintain the original order in the database
+		// since SQLite will return them in reverse order
+		const reversedBagNames = bag_names.slice().reverse();
+		self.sqlTiddlerDatabase.createRecipe(recipe_name,reversedBagNames,description);
 		self.dispatchEvent("change");
 		return null;
 	});
