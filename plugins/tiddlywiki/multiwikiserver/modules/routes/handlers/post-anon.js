@@ -32,12 +32,8 @@ exports.handler = function(request, response, state) {
   // Update the configuration tiddlers
   var wiki = $tw.wiki;
   wiki.addTiddler({
-    title: "$:/config/MultiWikiServer/AllowAnonymousReads",
-    text: "undefined"
-  });
-  wiki.addTiddler({
-    title: "$:/config/MultiWikiServer/AllowAnonymousWrites",
-    text: "undefined"
+    title: "$:/config/MultiWikiServer/ShowAnonymousAccessModal",
+    text: "yes"
   });
 
   // Redirect back to admin page

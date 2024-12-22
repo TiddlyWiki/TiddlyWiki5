@@ -16,7 +16,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-acl
         <input type="hidden" name="entity_type" value="recipe" />
         <input type="hidden" name="recipe_name" value={{{ [<recipe>jsonget[recipe_name]] }}}/>
         <input type="hidden" name="bag_name" value={{{ [<bag>jsonget[bag_name]] }}}/>
-        <select name="role_id" class="tc-select">
+        <select name="role_id" class="tc-select" required>
           <option value="">Select Role</option>
           <$list filter="[<roles-list>jsonindexes[]]" variable="role-index">
             <$let role={{{ [<roles-list>jsonextract<role-index>] }}}>
@@ -25,7 +25,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-acl
           </$list>
         </select>
 
-        <select name="permission_id" class="tc-select">
+        <select name="permission_id" class="tc-select" required>
           <option value="">Select Permission</option>
           <$list filter="[<permissions-list>jsonindexes[]]" variable="permission-index">
             <$let permission={{{ [<permissions-list>jsonextract<permission-index>] }}}>
@@ -86,7 +86,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-acl
         <input type="hidden" name="entity_type" value="bag" />
         <input type="hidden" name="recipe_name" value={{{ [<recipe>jsonget[recipe_name]] }}}/>
         <input type="hidden" name="bag_name" value={{{ [<bag>jsonget[bag_name]] }}}/>
-        <select name="role_id" class="tc-select">
+        <select name="role_id" class="tc-select" required>
           <option value="">Select Role</option>
           <$list filter="[<roles-list>jsonindexes[]]" variable="role-index">
             <$let role={{{ [<roles-list>jsonextract<role-index>] }}}>
@@ -95,7 +95,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-acl
           </$list>
         </select>
   
-        <select name="permission_id" class="tc-select">
+        <select name="permission_id" class="tc-select" required>
           <option value="">Select Permission</option>
           <$list filter="[<permissions-list>jsonindexes[]]" variable="permission-index">
             <$let permission={{{ [<permissions-list>jsonextract<permission-index>] }}}>

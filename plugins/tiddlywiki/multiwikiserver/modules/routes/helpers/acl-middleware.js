@@ -36,9 +36,10 @@ function redirectToLogin(response, returnUrl) {
 };
 
 exports.middleware = function (request, response, state, entityType, permissionName) {
+  var extensionRegex = /\.[A-Za-z0-9]{1,4}$/;
 
 	var server = state.server,
-		sqlTiddlerDatabase = server.sqlTiddlerDatabase,
+		sqlTiddlerDatabase = $tw.mws.store.sqlTiddlerDatabase || server.sqlTiddlerDatabase,
 		entityName = state.data ? (state.data[entityType+"_name"] || state.params[0]) : state.params[0];
 
 	// First, replace '%3A' with ':' to handle TiddlyWiki's system tiddlers
@@ -48,10 +49,15 @@ exports.middleware = function (request, response, state, entityType, permissionN
 	var aclRecord = sqlTiddlerDatabase.getACLByName(entityType, decodedEntityName);
 	var isGetRequest = request.method === "GET";
 	var hasAnonymousAccess = state.allowAnon ? (isGetRequest ? state.allowAnonReads : state.allowAnonWrites) : false;
+	var anonymousAccessConfigured = state.anonAccessConfigured;
 	var entity = sqlTiddlerDatabase.getEntityByName(entityType, decodedEntityName);
 	if(entity?.owner_id) {
 		if(state.authenticatedUser?.user_id && (state.authenticatedUser?.user_id !== entity.owner_id) || !state.authenticatedUser?.user_id && !hasAnonymousAccess) {
-			if(!response.headersSent) {
+			const hasPermission = state.authenticatedUser?.user_id ? 
+				entityType === 'recipe' ? sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, decodedEntityName, isGetRequest ? 'READ' : 'WRITE')
+				: sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, decodedEntityName, isGetRequest ? 'READ' : 'WRITE')
+				: false
+			if(!response.headersSent && !hasPermission) {
 				response.writeHead(403, "Forbidden");
 				response.end();
 			}
@@ -59,8 +65,8 @@ exports.middleware = function (request, response, state, entityType, permissionN
 		}
 	} else {
 		// First, we need to check if anonymous access is allowed
-		if(!state.authenticatedUser?.user_id && !hasAnonymousAccess) {
-			if(!response.headersSent) {
+		if(!state.authenticatedUser?.user_id && (anonymousAccessConfigured && !hasAnonymousAccess)) {
+			if(!response.headersSent && !extensionRegex.test(request.url)) {
 				response.writeHead(401, "Unauthorized");
 				response.end();
 			}
@@ -80,7 +86,7 @@ exports.middleware = function (request, response, state, entityType, permissionN
 			}
 
 			// Check ACL permission
-			var hasPermission = request.method === "POST" || sqlTiddlerDatabase.checkACLPermission(state.authenticatedUser.user_id, entityType, decodedEntityName, permissionName)
+			var hasPermission = request.method === "POST" || sqlTiddlerDatabase.checkACLPermission(state.authenticatedUser.user_id, entityType, decodedEntityName, permissionName, entity?.owner_id)
 			if(!hasPermission && !hasAnonymousAccess) {
 				if(!response.headersSent) {
 					response.writeHead(403, "Forbidden");

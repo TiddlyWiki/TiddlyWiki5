@@ -42,6 +42,10 @@ exports.handler = function(request, response, state) {
     text: allowWrites ? "yes" : "no"
   });
 
+  wiki.addTiddler({
+    title: "$:/config/MultiWikiServer/ShowAnonymousAccessModal",
+    text: "no"
+  });
   // Redirect back to admin page
   response.writeHead(302, {"Location": "/"});
   response.end();

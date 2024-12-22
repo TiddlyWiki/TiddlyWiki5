@@ -500,19 +500,27 @@ SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipe_name) {
 Checks if a user has permission to access a recipe
 */
 SqlTiddlerDatabase.prototype.hasRecipePermission = function(userId, recipeName, permissionName) {
-	// check if the user is the owner of the entity
-	const recipe = this.engine.runStatementGet(`
-		SELECT owner_id 
-		FROM recipes 
-		WHERE recipe_name = $recipe_name
-		`, {
-			$recipe_name: recipeName
-		});
+	try {
+		// check if the user is the owner of the entity
+		const recipe = this.engine.runStatementGet(`
+			SELECT owner_id 
+			FROM recipes 
+			WHERE recipe_name = $recipe_name
+			`, {
+				$recipe_name: recipeName
+			});
 
-	if(recipe?.owner_id) {
-		return recipe.owner_id === userId;
+		if(!!recipe?.owner_id && recipe?.owner_id === userId) {
+			return true;
+		} else {
+			var permission = this.checkACLPermission(userId, "recipe", recipeName, permissionName, recipe?.owner_id)
+			return permission;
+		}
+			
+	} catch (error) {
+		console.error(error)
+		return false
 	}
-	return this.checkACLPermission(userId, "recipe", recipeName, permissionName)
 };
 
 /*
@@ -530,10 +538,11 @@ SqlTiddlerDatabase.prototype.getACLByName = function(entityType, entityName, fet
 
 	// First, check if there's an ACL record for the entity and get the permission_id
 	var checkACLExistsQuery = `
-		SELECT *
+		SELECT acl.*, permissions.permission_name
 		FROM acl
-		WHERE entity_type = $entity_type
-		AND entity_name = $entity_name
+		LEFT JOIN permissions ON acl.permission_id = permissions.permission_id
+		WHERE acl.entity_type = $entity_type
+		AND acl.entity_name = $entity_name
 	`;
 
 	if (!fetchAll) {
@@ -548,43 +557,50 @@ SqlTiddlerDatabase.prototype.getACLByName = function(entityType, entityName, fet
 	return aclRecord;
 }
 
-SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, entityName) {
-	// if the entityName starts with "$:/", we'll assume its a system bag/recipe, then grant the user permission
-	if(entityName.startsWith("$:/")) {
-		return true;
+SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, entityName, permissionName, ownerId) {
+	try {
+		// if the entityName starts with "$:/", we'll assume its a system bag/recipe, then grant the user permission
+		if(entityName.startsWith("$:/")) {
+			return true;
+		}
+
+		const aclRecords = this.getACLByName(entityType, entityName, true);
+		const aclRecord = aclRecords.find(record => record.permission_name === permissionName);
+
+		// If no ACL record exists, return true for hasPermission
+		if ((!aclRecord && !ownerId) || ((!!aclRecord && !!ownerId) && ownerId === userId)) {
+			return true;
+		}
+
+		// If ACL record exists, check for user permission using the retrieved permission_id
+		const checkPermissionQuery = `
+			SELECT *
+			FROM users u
+			JOIN user_roles ur ON u.user_id = ur.user_id
+			JOIN roles r ON ur.role_id = r.role_id
+			JOIN acl a ON r.role_id = a.role_id
+			WHERE u.user_id = $user_id
+			AND a.entity_type = $entity_type
+			AND a.entity_name = $entity_name
+			AND a.permission_id = $permission_id
+			LIMIT 1
+		`;
+
+		const result = this.engine.runStatementGet(checkPermissionQuery, {
+			$user_id: userId,
+			$entity_type: entityType,
+			$entity_name: entityName,
+			$permission_id: aclRecord?.permission_id
+		});
+		
+		let hasPermission = result !== undefined;
+
+		return hasPermission;
+			
+	} catch (error) {
+		console.error(error);
+		return false
 	}
-
-	const aclRecord = this.getACLByName(entityType, entityName);
-
-	// If no ACL record exists, return true for hasPermission
-	if (!aclRecord) {
-		return true;
-	}
-
-	// If ACL record exists, check for user permission using the retrieved permission_id
-	const checkPermissionQuery = `
-		SELECT 1
-		FROM users u
-		JOIN user_roles ur ON u.user_id = ur.user_id
-		JOIN roles r ON ur.role_id = r.role_id
-		JOIN acl a ON r.role_id = a.role_id
-		WHERE u.user_id = $user_id
-		AND a.entity_type = $entity_type
-		AND a.entity_name = $entity_name
-		AND a.permission_id = $permission_id
-		LIMIT 1
-	`;
-
-	const result = this.engine.runStatementGet(checkPermissionQuery, {
-		$user_id: userId,
-		$entity_type: entityType,
-		$entity_name: entityName,
-		$permission_id: aclRecord.permission_id
-	});
-	
-	let hasPermission = result !== undefined;
-
-	return hasPermission;
 };
 
 /**

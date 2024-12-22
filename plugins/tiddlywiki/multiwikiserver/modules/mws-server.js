@@ -415,11 +415,13 @@ Server.prototype.requestAuthentication = function(response) {
 Server.prototype.getAnonymousAccessConfig = function() {
 	const allowReadsTiddler = this.wiki.getTiddlerText("$:/config/MultiWikiServer/AllowAnonymousReads", "undefined");
 	const allowWritesTiddler = this.wiki.getTiddlerText("$:/config/MultiWikiServer/AllowAnonymousWrites", "undefined");
+	const showAnonymousAccessModal = this.wiki.getTiddlerText("$:/config/MultiWikiServer/ShowAnonymousAccessModal", "undefined");
 
 	return {
 		allowReads: allowReadsTiddler === "yes",
 		allowWrites: allowWritesTiddler === "yes",
-		isEnabled: allowReadsTiddler !== "undefined" && allowWritesTiddler !== "undefined"
+		isEnabled: allowReadsTiddler !== "undefined" && allowWritesTiddler !== "undefined",
+		showAnonConfig: showAnonymousAccessModal === "yes"
 	};
 }
 
@@ -453,11 +455,12 @@ Server.prototype.requestHandler = function(request,response,options) {
 	
 	// Check whether anonymous access is granted
 	state.allowAnon = false; //this.isAuthorized(state.authorizationType,null);
-	var {allowReads, allowWrites, isEnabled} = this.getAnonymousAccessConfig();
+	var {allowReads, allowWrites, isEnabled, showAnonConfig} = this.getAnonymousAccessConfig();
+	state.anonAccessConfigured = isEnabled;
 	state.allowAnon = isEnabled && (request.method === 'GET' ? allowReads : allowWrites);
 	state.allowAnonReads = allowReads;
 	state.allowAnonWrites = allowWrites;
-	state.showAnonConfig = !!state.authenticatedUser?.isAdmin && !isEnabled;
+	state.showAnonConfig = !!state.authenticatedUser?.isAdmin && showAnonConfig;
 	state.firstGuestUser = this.sqlTiddlerDatabase.listUsers().length === 0 && !state.authenticatedUser;
 
 	// Authorize with the authenticated username
