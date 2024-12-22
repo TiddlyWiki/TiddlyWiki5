@@ -1,13 +1,13 @@
 created: 20160107223425581
-list: 
+caption: {{!!ja-title}} - ^^deprecated^^
 modified: 20241222102055511
-original-modified: 20170228102531138
-tags: OfficialPlugins [[Plugin Editions]]
+original-modified: 20240913122437925
+tags: OfficialPlugins [[Plugin Editions]] $:/deprecated
 title: D3 Plugin
-ja-title: D3 プラグイン
+ja-title: D3プラグイン
 type: text/vnd.tiddlywiki
 
-D3プラグインは、D3ビジュアライゼーションライブラリをTiddlyWikiと統合します
+<<.deprecated-since "5.3.4">> D3プラグインは、D3ビジュアライゼーションライブラリをTiddlyWikiと統合します
 
 https://tiddlywiki.com/plugins/tiddlywiki/d3/ を参照してください
 
