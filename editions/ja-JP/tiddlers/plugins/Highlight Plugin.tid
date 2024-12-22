@@ -1,0 +1,14 @@
+created: 20160107223417655
+list: 
+modified: 20241222102315584
+original-modified: 20220222094354907
+tags: OfficialPlugins [[Plugin Editions]]
+title: Highlight Plugin
+ja-title: ハイライトプラグイン
+type: text/vnd.tiddlywiki
+
+ハイライトプラグインは、テキストに色付けする機能を提供します
+
+[ext[https://tiddlywiki.com/plugins/tiddlywiki/highlight|plugins/tiddlywiki/highlight]]を参照してください
+
+<<.warning """最新バージョンの[[ハイライトプラグイン|Highlight Plugin]]には、JavaScript ES6(2015年リリース)を完全にサポートする最新ブラウザが必要です。古いバージョンは、古いブラウザを使用する必要があるユーザー向けの''ハイライトレガシー''プラグインとして引き続き利用できます""">>
