@@ -64,7 +64,7 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 			session_id TEXT NOT NULL,
 			created_at TEXT NOT NULL,
 			last_accessed TEXT NOT NULL,
-			PRIMARY KEY (user_id),
+			PRIMARY KEY (session_id),
 			FOREIGN KEY (user_id) REFERENCES users(user_id)
 		)
 	`,`
@@ -990,6 +990,20 @@ SqlTiddlerDatabase.prototype.createOrUpdateUserSession = function(userId, sessio
 					$timestamp: currentTimestamp
 			});
 	}
+
+	return sessionId;
+};
+
+SqlTiddlerDatabase.prototype.createUserSession = function(userId, sessionId) {
+	const currentTimestamp = new Date().toISOString();
+	this.engine.runStatement(`
+			INSERT INTO sessions (user_id, session_id, created_at, last_accessed)
+			VALUES ($userId, $sessionId, $timestamp, $timestamp)
+	`, {
+			$userId: userId,
+			$sessionId: sessionId,
+			$timestamp: currentTimestamp
+	});
 
 	return sessionId;
 };
