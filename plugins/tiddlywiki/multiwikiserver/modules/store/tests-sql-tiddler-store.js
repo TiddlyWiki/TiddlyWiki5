@@ -96,7 +96,7 @@ function runSqlStoreTests(engine) {
 		expect(store.createRecipe("recipe-rho",["bag-alpha","bag-beta"],"Recipe rho")).toEqual(null);
 
 		expect(store.listRecipes()).toEqual([
-			{ recipe_name: "recipe-rho", recipe_id: 1, bag_names: ["bag-alpha","bag-beta"], description: "Recipe rho" }
+			{ recipe_name: "recipe-rho", recipe_id: 1, bag_names: ["bag-alpha","bag-beta"], description: "Recipe rho", owner_id: null }
 		]);
 	});
 

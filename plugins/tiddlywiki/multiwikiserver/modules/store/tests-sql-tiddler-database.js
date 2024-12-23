@@ -49,10 +49,10 @@ function runSqlDatabaseTests(engine) {
 		expect(sqlTiddlerDatabase.createRecipe("recipe-tau",["bag-alpha"],"Recipe tau")).toEqual(3);
 		expect(sqlTiddlerDatabase.createRecipe("recipe-upsilon",["bag-alpha","bag-gamma","bag-beta"],"Recipe upsilon")).toEqual(4);
 		expect(sqlTiddlerDatabase.listRecipes()).toEqual([
-			{ recipe_name: 'recipe-rho', recipe_id: 1, bag_names: ["bag-alpha","bag-beta"], description: "Recipe rho" },
-			{ recipe_name: 'recipe-sigma', recipe_id: 2, bag_names: ["bag-alpha","bag-gamma"], description: "Recipe sigma" },
-			{ recipe_name: 'recipe-tau', recipe_id: 3, bag_names: ["bag-alpha"], description: "Recipe tau" },
-			{ recipe_name: 'recipe-upsilon', recipe_id: 4, bag_names: ["bag-alpha","bag-gamma","bag-beta"], description: "Recipe upsilon" }
+			{ recipe_name: 'recipe-rho', recipe_id: 1, bag_names: ["bag-alpha","bag-beta"], description: "Recipe rho", owner_id: null },
+			{ recipe_name: 'recipe-sigma', recipe_id: 2, bag_names: ["bag-alpha","bag-gamma"], description: "Recipe sigma", owner_id: null },
+			{ recipe_name: 'recipe-tau', recipe_id: 3, bag_names: ["bag-alpha"], description: "Recipe tau", owner_id: null },
+			{ recipe_name: 'recipe-upsilon', recipe_id: 4, bag_names: ["bag-alpha","bag-gamma","bag-beta"], description: "Recipe upsilon", owner_id: null }
 		]);
 		expect(sqlTiddlerDatabase.getRecipeBags("recipe-rho")).toEqual(["bag-alpha","bag-beta"]);
 		expect(sqlTiddlerDatabase.getRecipeBags("recipe-sigma")).toEqual(["bag-alpha","bag-gamma"]);
