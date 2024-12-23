@@ -1,4 +1,4 @@
 title: $:/config/MultiWikiServer/AllowAnonymousWrites
-text: no
+text: undefined
 description: Controls whether anonymous users can write to the wiki
 type: text/plain

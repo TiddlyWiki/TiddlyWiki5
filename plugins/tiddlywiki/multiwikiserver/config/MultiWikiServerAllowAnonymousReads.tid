@@ -1,4 +1,4 @@
 title: $:/config/MultiWikiServer/AllowAnonymousReads
-text: no
+text: undefined
 description: Controls whether anonymous users can read wiki content
 type: text/plain
