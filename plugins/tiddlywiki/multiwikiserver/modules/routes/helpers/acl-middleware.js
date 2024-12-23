@@ -51,6 +51,12 @@ exports.middleware = function (request, response, state, entityType, permissionN
 	var hasAnonymousAccess = state.allowAnon ? (isGetRequest ? state.allowAnonReads : state.allowAnonWrites) : false;
 	var anonymousAccessConfigured = state.anonAccessConfigured;
 	var entity = sqlTiddlerDatabase.getEntityByName(entityType, decodedEntityName);
+	var isAdmin = state.authenticatedUser?.isAdmin;
+
+	if(isAdmin) {
+		return;
+	}
+
 	if(entity?.owner_id) {
 		if(state.authenticatedUser?.user_id && (state.authenticatedUser?.user_id !== entity.owner_id) || !state.authenticatedUser?.user_id && !hasAnonymousAccess) {
 			const hasPermission = state.authenticatedUser?.user_id ? 
