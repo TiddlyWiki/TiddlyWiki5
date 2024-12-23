@@ -128,10 +128,11 @@ var VideoParser = function (type, text, options) {
 				xhr.send();
 				
 				video.addEventListener('loadedmetadata', async () => {
-					// Use requestAnimationFrame instead of direct style changes
 					requestAnimationFrame(async () => {
 						const xhr = new XMLHttpRequest();
-						xhr.open('HEAD', video.currentSrc);
+						// Encode the URL to handle spaces and special characters
+						const encodedUrl = encodeURI(video.currentSrc);
+						xhr.open('HEAD', encodedUrl);
 								
 						xhr.onload = () => {
 							const observer = new MutationObserver((mutations) => {
