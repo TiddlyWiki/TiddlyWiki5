@@ -61,9 +61,9 @@ When you first launch the Multiwiki Server, it operates in an unauthenticated mo
 
 !!!! Permission Inheritance
 * Users receive combined permissions from all assigned roles
-* More permissive role takes precedence in conflicts
+* When roles grant different permission levels for the same resource, the higher access level is granted. For example, if one role grants "read" and another grants "write" access to a recipe, the user receives "write" access since it includes all lower-level permissions.
 * Guest access is overridden by recipe ACLs
-* System automatically enforces most restrictive access when conflicts occur
+* When different permission rules conflict, the system follows a "most restrictive wins" principle: if any applicable rule denies access or requires a higher security level, that restriction takes precedence over more permissive rules. This ensures security is maintained even when users have multiple overlapping role assignments or inherited permissions.
 
 This security model allows for fine-grained control over content access while maintaining flexibility for both private and public wiki deployments.
 
