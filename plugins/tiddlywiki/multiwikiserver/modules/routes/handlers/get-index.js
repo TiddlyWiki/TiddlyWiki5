@@ -33,7 +33,12 @@ exports.handler = function(request,response,state) {
 		// filter bags and recipies by user's read access from ACL
 		var allowedRecipes = recipeList.filter(recipe => recipe.recipe_name.startsWith("$:/") || state.authenticatedUser?.isAdmin || sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, recipe.recipe_name, 'READ') || state.allowAnon && state.allowAnonReads);
 		var allowedBags = bagList.filter(bag => bag.bag_name.startsWith("$:/") || state.authenticatedUser?.isAdmin || sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, bag.bag_name, 'READ') || state.allowAnon && state.allowAnonReads);
-
+		allowedRecipes = allowedRecipes.map(recipe => {
+			return {
+				...recipe,
+				has_acl_access: state.authenticatedUser?.isAdmin || recipe.owner_id === state.authenticatedUser?.user_id || sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, recipe.recipe_name, 'WRITE')
+			}
+		});
 		// Render the html
 		var html = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{
 			variables: {
