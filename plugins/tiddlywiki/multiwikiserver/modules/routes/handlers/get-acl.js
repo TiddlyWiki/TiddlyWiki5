@@ -39,7 +39,10 @@ exports.handler = function (request, response, state) {
 	var permissions = state.server.sqlTiddlerDatabase.listPermissions();
 
 	// This ensures that the user attempting to view the ACL management page has permission to do so
-	if(!state.authenticatedUser?.isAdmin && (!state.authenticatedUser || (recipeAclRecords.length > 0 && !sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser.user_id, recipeName, 'WRITE')))){
+	if(!state.authenticatedUser?.isAdmin && 
+		!state.firstGuestUser &&
+		(!state.authenticatedUser || (recipeAclRecords.length > 0 && !sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser.user_id, recipeName, 'WRITE')))
+	){
 		response.writeHead(403, "Forbidden");
 		response.end();
 		return

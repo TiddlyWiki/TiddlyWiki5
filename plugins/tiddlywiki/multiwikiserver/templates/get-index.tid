@@ -89,18 +89,20 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 						</div>
 					</div>
 					<div class="mws-wiki-card-actions">
-						<$set name="last-bag" value={{{ [<recipe-info>jsonget[bag_names]last[]] }}}>
-							<a 
-								href={{{ [<recipe-name>addprefix[/admin/acl/]addsuffix[/]addsuffix<last-bag>] }}}
-								class="mws-wiki-card-action"
-								title="Manage ACL"
-							>
-								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-									<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-									<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-								</svg>
-							</a>
-						</$set>
+					  <$list filter="[<recipe-info>jsonget[has_acl_access]match[true]]">
+							<$set name="last-bag" value={{{ [<recipe-info>jsonget[bag_names]last[]] }}}>
+								<a 
+									href={{{ [<recipe-name>addprefix[/admin/acl/]addsuffix[/]addsuffix<last-bag>] }}}
+									class="mws-wiki-card-action"
+									title="Manage ACL"
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+										<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+										<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+									</svg>
+								</a>
+							</$set>
+						</$list>
 					</div>
 				</div>
 			</$let>

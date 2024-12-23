@@ -234,7 +234,7 @@ Returns array of {recipe_name:,recipe_id:,description:,bag_names: []}
 */
 SqlTiddlerDatabase.prototype.listRecipes = function() {
 	const rows = this.engine.runStatementGetAll(`
-		SELECT r.recipe_name, r.recipe_id, r.description, b.bag_name, rb.position
+		SELECT r.recipe_name, r.recipe_id, r.description, r.owner_id, b.bag_name, rb.position
 		FROM recipes AS r
 		JOIN recipe_bags AS rb ON rb.recipe_id = r.recipe_id
 		JOIN bags AS b ON rb.bag_id = b.bag_id
@@ -250,6 +250,7 @@ SqlTiddlerDatabase.prototype.listRecipes = function() {
 				recipe_name: row.recipe_name,
 				recipe_id: row.recipe_id,
 				description: row.description,
+				owner_id: row.owner_id,
 				bag_names: []
 			});
 		}
