@@ -54,6 +54,10 @@ SqlTiddlerStore.prototype.removeEventListener = function(type,listener) {
 	}
 };
 
+SqlTiddlerStore.prototype.getFilteredBagTiddlers = function (bag_name, searchTerm) {
+	return this.sqlTiddlerDatabase.getFilteredBagTiddlers(bag_name, searchTerm);
+};
+
 SqlTiddlerStore.prototype.dispatchEvent = function(type /*, args */) {
 	const self = this;
 	if(!this.eventOutstanding[type]) {
@@ -144,50 +148,50 @@ SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddle
 /*
 */
 SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields, existing_attachment_blob, existing_canonical_uri) {
-  let attachmentSizeLimit = $tw.utils.parseNumber(this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/AttachmentSizeLimit"));
+	let attachmentSizeLimit = $tw.utils.parseNumber(this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/AttachmentSizeLimit"));
 	if(attachmentSizeLimit < 100 * 1024) {
 		attachmentSizeLimit = 100 * 1024;
 	}
-  const attachmentsEnabled = this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/EnableAttachments", "yes") === "yes";
-  const contentTypeInfo = $tw.config.contentTypeInfo[tiddlerFields.type || "text/vnd.tiddlywiki"];
-  const isBinary = !!contentTypeInfo && contentTypeInfo.encoding === "base64";
+	const attachmentsEnabled = this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/EnableAttachments", "yes") === "yes";
+	const contentTypeInfo = $tw.config.contentTypeInfo[tiddlerFields.type || "text/vnd.tiddlywiki"];
+	const isBinary = !!contentTypeInfo && contentTypeInfo.encoding === "base64";
 
-  let shouldProcessAttachment = tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit;
+	let shouldProcessAttachment = tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit;
 
-  if(existing_attachment_blob) {
-    const fileSize = this.attachmentStore.getAttachmentFileSize(existing_attachment_blob);
-    if(fileSize <= attachmentSizeLimit) {
-      const existingAttachmentMeta = this.attachmentStore.getAttachmentMetadata(existing_attachment_blob);
-      const hasCanonicalField = !!tiddlerFields._canonical_uri;
-      const skipAttachment = hasCanonicalField && (tiddlerFields._canonical_uri === (existingAttachmentMeta ? existingAttachmentMeta._canonical_uri : existing_canonical_uri));
-      shouldProcessAttachment = !skipAttachment;
-    } else {
-      shouldProcessAttachment = false;
-    }
-  }
+	if(existing_attachment_blob) {
+	const fileSize = this.attachmentStore.getAttachmentFileSize(existing_attachment_blob);
+	if(fileSize <= attachmentSizeLimit) {
+		const existingAttachmentMeta = this.attachmentStore.getAttachmentMetadata(existing_attachment_blob);
+		const hasCanonicalField = !!tiddlerFields._canonical_uri;
+		const skipAttachment = hasCanonicalField && (tiddlerFields._canonical_uri === (existingAttachmentMeta ? existingAttachmentMeta._canonical_uri : existing_canonical_uri));
+		shouldProcessAttachment = !skipAttachment;
+	} else {
+		shouldProcessAttachment = false;
+	}
+	}
 
-  if(attachmentsEnabled && isBinary && shouldProcessAttachment) {
-    const attachment_blob = existing_attachment_blob || this.attachmentStore.saveAttachment({
-      text: tiddlerFields.text,
-      type: tiddlerFields.type,
-      reference: tiddlerFields.title,
-      _canonical_uri: tiddlerFields._canonical_uri
-    });
-    
-    if(tiddlerFields && tiddlerFields._canonical_uri) {
-      delete tiddlerFields._canonical_uri;
-    }
-    
-    return {
-      tiddlerFields: Object.assign({}, tiddlerFields, { text: undefined }),
-      attachment_blob: attachment_blob
-    };
-  } else {
-    return {
-      tiddlerFields: tiddlerFields,
-      attachment_blob: existing_attachment_blob
-    };
-  }
+	if(attachmentsEnabled && isBinary && shouldProcessAttachment) {
+	const attachment_blob = existing_attachment_blob || this.attachmentStore.saveAttachment({
+		text: tiddlerFields.text,
+		type: tiddlerFields.type,
+		reference: tiddlerFields.title,
+		_canonical_uri: tiddlerFields._canonical_uri
+	});
+	
+	if(tiddlerFields && tiddlerFields._canonical_uri) {
+		delete tiddlerFields._canonical_uri;
+	}
+	
+	return {
+		tiddlerFields: Object.assign({}, tiddlerFields, { text: undefined }),
+		attachment_blob: attachment_blob
+	};
+	} else {
+	return {
+		tiddlerFields: tiddlerFields,
+		attachment_blob: existing_attachment_blob
+	};
+	}
 };
 
 SqlTiddlerStore.prototype.saveTiddlersFromPath = function(tiddler_files_path,bag_name) {
