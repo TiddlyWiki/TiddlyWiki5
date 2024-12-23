@@ -1,0 +1,11 @@
+created: 20161023202301847
+modified: 20241221103512732
+original-modified: 20161023202301847
+tags: Editions
+title: XLSX Utilities Edition
+ja-title: XLSXユーティリティエディション
+type: text/vnd.tiddlywiki
+
+TiddlyWikiの''XLSXユーティリティ''エディションには、Microsoft ExcelやGoogle Sheetsなどのアプリケーションによって生成された`.XLSX`スプレッドシートを操作するためのツールが含まれています。ブラウザーやNode.jsで使用できます
+
+https://tiddlywiki.com/editions/xlsx-utils/
