@@ -88,6 +88,20 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 							<$text text={{{ [<recipe-info>jsonget[description]] }}}/>
 						</div>
 					</div>
+					<div class="mws-wiki-card-actions">
+						<$set name="last-bag" value={{{ [<recipe-info>jsonget[bag_names]last[]] }}}>
+							<a 
+								href={{{ [<recipe-name>addprefix[/admin/acl/]addsuffix[/]addsuffix<last-bag>] }}}
+								class="mws-wiki-card-action"
+								title="Manage ACL"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+									<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+								</svg>
+							</a>
+						</$set>
+					</div>
 				</div>
 			</$let>
 		</li>
@@ -320,34 +334,73 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 }
 
 .mws-config-button:hover {
-    background-color: #45a049;
+	background-color: #45a049;
 }
 
 .mws-modal-content {
-    padding: 20px;
+	padding: 20px;
 }
 
 .mws-modal-section {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .mws-modal-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 20px;
+	display: flex;
+	gap: 10px;
+	justify-content: flex-end;
+	margin-top: 20px;
 }
 
 .mws-modal-button-primary {
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+	background-color: #4CAF50;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
 }
 
 .mws-modal-button-primary:hover {
-    background-color: #45a049;
+	background-color: #45a049;
+}
+
+.mws-wiki-card {
+	display: flex;
+	flex-direction: row;
+}
+
+.mws-wiki-card-content {
+}
+
+.mws-wiki-card-actions {
+	padding: 10px;
+	display: flex;
+	justify-content: flex-end;
+	margin-left: auto;
+	height: 50px;
+	width: 50px;
+}
+
+.mws-wiki-card-action {
+	display: inline-flex;
+	align-items: center;
+	padding: 8px 16px;
+	background-color: white;
+	border-radius: 6px;
+	text-decoration: none;
+	color: #333;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: all 0.2s ease;
+}
+
+.mws-wiki-card-action:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	transform: translateY(-1px);
+}
+
+.mws-wiki-card-action svg {
+	width: 16px;
+	height: 16px;
 }
 </style>

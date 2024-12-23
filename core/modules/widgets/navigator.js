@@ -44,8 +44,7 @@ NavigatorWidget.prototype.render = function(parent,nextSibling) {
 		{type: "tm-fold-tiddler", handler: "handleFoldTiddlerEvent"},
 		{type: "tm-fold-other-tiddlers", handler: "handleFoldOtherTiddlersEvent"},
 		{type: "tm-fold-all-tiddlers", handler: "handleFoldAllTiddlersEvent"},
-		{type: "tm-unfold-all-tiddlers", handler: "handleUnfoldAllTiddlersEvent"},
-		{type: "tm-manage-acl", handler: "handleManageACLTiddlersEvent"}
+		{type: "tm-unfold-all-tiddlers", handler: "handleUnfoldAllTiddlersEvent"}
 	]);
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -637,14 +636,6 @@ NavigatorWidget.prototype.handleUnfoldAllTiddlersEvent = function(event) {
 	$tw.utils.each(this.getStoryList(),function(title) {
 		self.wiki.setText(prefix + title,"text",null,"show");
 	});
-};
-
-NavigatorWidget.prototype.handleManageACLTiddlersEvent = function() {
-	var pathname = window.location.pathname;
-	var paths = pathname.split("/");
-	var recipeName = paths[paths.length - 1];
-	var bagName = document.querySelector("h1.tc-site-title").innerHTML;
-	window.location.href = "/admin/acl/"+recipeName+"/"+bagName
 };
 
 exports.navigator = NavigatorWidget;
