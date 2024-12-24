@@ -569,7 +569,7 @@ SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, e
 		const aclRecord = aclRecords.find(record => record.permission_name === permissionName);
 
 		// If no ACL record exists, return true for hasPermission
-		if ((!aclRecord && !ownerId) || ((!!aclRecord && !!ownerId) && ownerId === userId)) {
+		if ((!aclRecord && !ownerId && aclRecords.length === 0) || ((!!aclRecord && !!ownerId) && ownerId === userId)) {
 			return true;
 		}
 
