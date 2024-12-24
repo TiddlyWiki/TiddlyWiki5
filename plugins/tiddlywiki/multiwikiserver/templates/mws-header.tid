@@ -27,7 +27,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 					</form>
 				</div>
 			</div>
-		<% elseif [<username>!match[Guest]]+[<first-guest-user>match[no]] %>
+		<% elseif [<has-profile-access>match[yes]] %>
 			<$set name="userId" value={{{ [<user>jsonget[user_id]] }}}>
 				<a href={{{ [<userId>addprefix[/admin/users/]] }}}>
 					<button class="mws-profile-btn">Profile</button>
