@@ -1,3 +1,41 @@
 title: $:/plugins/tiddlywiki/multiwikiserver/auth/form/login/header
 
-<h1>TiddlyWiki Login</h1>
+<div class="login-header">
+  <h1>Be our Guest</h1>
+  <a class="" href="/">Explore as Guest</a>
+  <h2>TiddlyWiki Login</h2>
+</div>
+
+<style>
+.login-header {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-header h1 {
+  font-size: 30px;
+}
+
+.login-header h2 {
+  font-size: 28px;
+}
+
+.login-header h1,
+.login-header h2 {
+  font-weight: bold;
+}
+
+.login-header a {
+  padding: 10px 20px;
+  background-color: #1366a8;
+  color: #FFF;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 85%;
+  text-align: center;
+}
+</style>
