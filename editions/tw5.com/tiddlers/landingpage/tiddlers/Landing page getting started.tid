@@ -1,0 +1,20 @@
+created: 20210415094718280
+modified: 20210423113421188
+tags: 
+title: Landing page getting started
+
+<section id="get-started" class="text-gray-600 bg-white body-font">
+  <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+    <div class="text-center lg:w-2/3 w-full">
+    		<h2 class="mb-1 text-xs font-medium tracking-widest text-green-500 title-fon">Get started</h2>
+    		<h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900 mt-0">Choose a way to save</h1>
+    	<p class="mb-8 text-base leading-relaxed text-left text-gray-700">TiddlyWiki needs some help saving to file. By default, it writes the whole file every time you press save. To remedy this there's a wide variety of methods available, with different features and limitations. Click on the badge for a method to see more information about it. You can also click on one of the platform filters to restrict the listing to methods that work with that platform.</p>
+      <div class="flex justify-center items-center">
+				{{landing page download empty}}
+				<hr class="shadow">
+      </div>
+    </div>
+		<br>
+		{{Saving}}
+  </div>
+</section>
