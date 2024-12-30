@@ -91,6 +91,7 @@ exports.handler = function(request,response,state) {
 			"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Anonymous User" : "Guest",
 			"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no",
 			"user-id": user_id,
+			"user-is-logged-in": !!state.authenticatedUser ? "yes" : "no",
 			"has-profile-access": !!state.authenticatedUser ? "yes" : "no"
 		}
 	});

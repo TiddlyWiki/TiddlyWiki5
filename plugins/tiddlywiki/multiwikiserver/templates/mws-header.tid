@@ -27,16 +27,25 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 					</form>
 				</div>
 			</div>
-		<% elseif [<has-profile-access>match[yes]] %>
-			<$set name="userId" value={{{ [<user>jsonget[user_id]] }}}>
-				<a href={{{ [<userId>addprefix[/admin/users/]] }}}>
-					<button class="mws-profile-btn">Profile</button>
-				</a>
-			</$set>
 		<% endif %>
-		<form action="/logout" method="post" class="mws-logout-form">
-			<input type="submit" value="Logout" class="mws-logout-button"/>
-		</form>
+		<% if [<user-is-logged-in>match[yes]] %>
+			<%if [<first-guest-user>match[no]] %>
+				<%if [<user-is-admin>match[no]] %>
+					<$set name="userId" value={{{ [<user>jsonget[user_id]] }}}>
+						<a href={{{ [<userId>addprefix[/admin/users/]] }}}>
+							<button class="mws-profile-btn">Profile</button>
+						</a>
+					</$set>
+				<% endif %>
+			<% endif %>
+		<% endif %>
+		<% if [<user-is-logged-in>match[yes]] %>
+			<form action="/logout" method="post" class="mws-logout-form">
+				<input type="submit" value="Logout" class="mws-logout-button"/>
+			</form>
+		<% else %>
+		<a class="mws-login-btn" href="/login">Login</a>
+		<% endif %>
 	</div>
 </div>
 
@@ -80,6 +89,25 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 
 .mws-logout-button:hover {
 	background-color: #d32f2f;
+}
+
+.mws-login-btn {
+	margin-left: 5px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	cursor: pointer;
+	text-decoration: none;
+	height: 27px;
+	width: 62px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.mws-login-btn:hover {
+	background-color: #388e3c;
 }
 
 .mws-admin-dropdown {
