@@ -1,0 +1,5 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/MacroCallInline
+type: text/vnd.tiddlywiki
+
+These are macro calls in a line: <<name "value" "value2">> and <<.def "macro calls">> <<alert "primary" "primary alert" width:"60%">>

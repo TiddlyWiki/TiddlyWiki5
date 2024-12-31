@@ -47,4 +47,8 @@ exports.parse = function() {
 	}];
 };
 
+exports.serialize = function(tree,serialize) {
+	return "~~" + serialize(tree.children) + "~~";
+};
+
 })();
