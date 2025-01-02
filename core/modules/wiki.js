@@ -200,6 +200,7 @@ exports.runFilteredActions = function() {
 					tiddler.fields.text,
 					null,
 					{
+						filteredActionTitle: filteredActionTitle,
 						results: $tw.utils.stringifyList(results),
 						jsonResults: JSON.stringify(results)
 					},{
