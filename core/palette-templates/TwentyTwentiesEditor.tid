@@ -1,0 +1,18 @@
+title: $:/palette-editors/TwentyTwenties
+
+\procedure actionsRecompilePalette()
+<$transclude $variable="actions-compile-palette" inputTitle={{$:/palette}} outputTitle="$:/temp/palette-colours"/>
+\end actionsRecompilePalette
+
+paper: <$edit-text tiddler={{$:/palette}} index="base-paper" type="color" tag="input" inputActions=<<actionsRecompilePalette>>/>
+
+background: <$edit-text tiddler={{$:/palette}} index="base-background" type="color" tag="input" inputActions=<<actionsRecompilePalette>>/>
+
+ink: <$edit-text tiddler={{$:/palette}} index="base-ink" type="color" tag="input" inputActions=<<actionsRecompilePalette>>/>
+
+primary: <$edit-text tiddler={{$:/palette}} index="base-primary" type="color" tag="input" inputActions=<<actionsRecompilePalette>>/>
+
+secondary: <$edit-text tiddler={{$:/palette}} index="base-secondary" type="color" tag="input" inputActions=<<actionsRecompilePalette>>/>
+
+tertiary: <$edit-text tiddler={{$:/palette}} index="base-tertiary" type="color" tag="input" inputActions=<<actionsRecompilePalette>>/>
+

@@ -6,6 +6,12 @@ caption: {{$:/language/ControlPanel/Palette/Caption}}
 
 {{$:/snippets/paletteswitcher}}
 
+<$let paletteEditor={{{ [{$:/palette}get[editor]] :else[{$:/palette}get[palette-import]!match[]get[editor]] }}}>
+	<%if [<paletteEditor>!match[]] %>
+		<$transclude $tiddler=<<paletteEditor>> $mode="block"/>
+	<%endif%>
+</$let>
+
 <$reveal type="nomatch" state="$:/state/ShowPaletteEditor" text="yes">
 
 <$button set="$:/state/ShowPaletteEditor" setTo="yes"><<lingo ShowEditor/Caption>></$button>
