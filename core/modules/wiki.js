@@ -177,8 +177,11 @@ exports.runFilteredActions = function() {
 	}
 	var self = this;
 	var now = (new Date()).getTime();
-	this.timestampLastRunFilteredActions = this.timestampLastRunFilteredActions || now;
-	this.intervalFilteredActions = this.intervalFilteredActions || 500;
+	// Minimum interval between runs
+	this.intervalFilteredActions = this.intervalFilteredActions || 100;
+	// Time of the last run
+	this.timestampLastRunFilteredActions = this.timestampLastRunFilteredActions || now - this.intervalFilteredActions * 2;
+	// If we've run the filtered actions recently, queue another run
 	if((this.timestampLastRunFilteredActions + this.intervalFilteredActions) > now) {
 		if(!this.filterActionTimerId) {
 			this.filterActionTimerId = setTimeout(function() {
@@ -188,7 +191,9 @@ exports.runFilteredActions = function() {
 		}
 		return;
 	}
+	// Record the time of this run
 	this.timestampLastRunFilteredActions = now;
+	// Get the list of filtered action tiddlers and process each one
 	var filteredActions = $tw.wiki.getTiddlersWithTag("$:/tags/FilteredActions");
 	$tw.utils.each(filteredActions,function(filteredActionTitle) {
 		var tiddler = self.getTiddler(filteredActionTitle);
