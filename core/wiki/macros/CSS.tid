@@ -87,6 +87,10 @@ tags: $:/tags/Macro
 [function[tf.check-colour-contrast-subfunction]compare:number:gt<threshold>then[ok]] :else[function[tf.check-colour-contrast-subfunction]addsuffix[: ]addsuffix<paletteEntryA>addsuffix[/]addsuffix<paletteEntryB>addsuffix[ contrast is too low]]
 \end tf.check-colour-contrast
 
+\function tf.interpolate-colours(paletteEntryA,paletteEntryB,weight)
+[function[colour],<paletteEntryA>] [function[colour],<paletteEntryB>] +[colour-interpolate:oklch<weight>]
+\end tf.interpolate-colours
+
 \define box-shadow(shadow)
 ``
 -webkit-box-shadow: $shadow$;

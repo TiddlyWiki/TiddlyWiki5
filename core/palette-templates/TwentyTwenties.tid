@@ -37,41 +37,41 @@ base-blue: #4385BE
 base-purple: #8B7EC8
 base-magenta: #CE5D97
 # Darker variants
-# base-red: #AF3029;
-# base-orange: #BC5215;
-# base-yellow: #AD8301;
-# base-green: #66800B;
-# base-cyan: #24837B;
-# base-blue: #205EA6;
-# base-purple: #5E409D;
-# base-magenta: #A02F6F;
+# base-red: #AF3029
+# base-orange: #BC5215
+# base-yellow: #AD8301
+# base-green: #66800B
+# base-cyan: #24837B
+# base-blue: #205EA6
+# base-purple: #5E409D
+# base-magenta: #A02F6F
 
 # Colour definitions
 alert-background: [function[colour],[base-secondary]]
-alert-border: [function[colour],[base-ink]] [function[colour],[alert-background]] +[colour-interpolate:oklch[0.6]]
-alert-highlight: [function[colour],[base-ink]] [function[colour],[base-primary]] +[colour-interpolate:oklch[0.3]]
-alert-muted-foreground: [function[colour],[base-ink]] [function[colour],[alert-background]] +[colour-interpolate:oklch[0.4]]
+alert-border: [tf.interpolate-colours[base-ink],[alert-background],[0.6]]
+alert-highlight: [tf.interpolate-colours[base-ink],[base-primary],[0.3]]
+alert-muted-foreground: [tf.interpolate-colours[base-ink],[alert-background],[0.4]]
 ?alert-contrast: [tf.check-colour-contrast[alert-background],[foreground],[45]]
 background: [function[colour],[base-paper]]
 blockquote-bar: [function[colour],[muted-foreground]]
 button-background:
 button-foreground:
 button-border:
-code-background: [function[colour],[base-tertiary]colour-set-oklch:l[0.9]]
-code-border: [function[colour],[base-tertiary]color-oklch:l[0.5]]
-code-foreground: [function[colour],[base-tertiary]colour-set-oklch:l[0.3]]
+code-background: [tf.interpolate-colours[base-paper],[base-tertiary],[0.1]]
+code-border: [tf.interpolate-colours[base-paper],[base-tertiary],[0.6]]
+code-foreground: [function[colour],[base-tertiary]]
 ?code-contrast: [tf.check-colour-contrast[code-background],[code-foreground],[45]]
-diff-delete-background: [function[colour],[]]
+diff-delete-background: [function[colour],[base-red]]
 diff-delete-foreground: [function[colour],[foreground]]
 diff-equal-background:
 diff-equal-foreground: [function[colour],[foreground]]
-diff-insert-background: [function[colour],[]]
+diff-insert-background: [function[colour],[base-green]]
 diff-insert-foreground: [function[colour],[foreground]]
 diff-invisible-background:
 diff-invisible-foreground: [function[colour],[muted-foreground]]
-dirty-indicator: [function[colour],[]]
-download-background: [function[colour],[]]
-download-foreground: [function[colour],[background]]
+dirty-indicator: [function[colour],[base-tertiary]]
+download-background: [tf.interpolate-colours[base-paper],[base-green],[0.6]]
+download-foreground: [tf.interpolate-colours[base-ink],[base-green],[1]]
 dragger-background: [function[colour],[foreground]]
 dragger-foreground: [function[colour],[background]]
 dropdown-background: [function[colour],[background]]
@@ -104,8 +104,8 @@ network-activity-foreground: [function[colour],[]]
 notification-background: [function[colour],[base-tertiary]colour-set-oklch:l[0.9]]
 notification-border: [function[colour],[base-tertiary]colour-set-oklch:l[0.2]]
 page-background: [function[colour],[base-background]]
-pre-background: [function[colour],[base-tertiary]colour-set-oklch:l[0.98]]
-pre-border: [function[colour],[base-tertiary]colour-set-oklch:l[0.3]]
+pre-background: [tf.interpolate-colours[base-paper],[base-tertiary],[0.1]]
+pre-border: [tf.interpolate-colours[base-paper],[base-tertiary],[0.6]]
 primary: [function[colour],[base-primary]]
 selection-background:
 selection-foreground:
@@ -149,10 +149,10 @@ testcase-accent-level-1: [function[colour],[]]
 testcase-accent-level-2: [function[colour],[]]
 testcase-accent-level-3: [function[colour],[]]
 tiddler-background: [function[colour],[background]]
-tiddler-border: [function[colour],[base-paper]] [function[colour],[base-background]] +[colour-interpolate:oklch[0.5]]
-tiddler-controls-foreground-hover: [function[colour],[background]] [function[colour],[foreground]] +[colour-interpolate:oklch[0.7]]
-tiddler-controls-foreground-selected:  [function[colour],[background]] [function[colour],[foreground]] +[colour-interpolate:oklch[0.9]]
-tiddler-controls-foreground: [function[colour],[background]] [function[colour],[foreground]] +[colour-interpolate:oklch[0.5]]
+tiddler-border: [tf.interpolate-colours,[base-paper],[base-background],[0.5]]
+tiddler-controls-foreground-hover: [tf.interpolate-colours,[background],[foreground],[0.7]]
+tiddler-controls-foreground-selected: [tf.interpolate-colours,[background],[foreground],[0.9]]
+tiddler-controls-foreground: [tf.interpolate-colours,[background],[foreground],[0.5]]
 tiddler-editor-background: [function[colour],[]]
 tiddler-editor-border-image: [function[colour],[]]
 tiddler-editor-border: [function[colour],[]]
