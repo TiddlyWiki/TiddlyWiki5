@@ -9,13 +9,13 @@ description: {{$:/language/Buttons/SaveWiki/Hint}}
 <$action-sendmessage $message="tm-save-wiki" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
 </$wikify>
 <span class="tc-dirty-indicator">
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/save-button-dynamic}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/SaveWiki/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </span>
 </$button>

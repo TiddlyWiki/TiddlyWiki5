@@ -47,13 +47,13 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 	<h2>
 		<div>
 			<%if [<currentTiddler>get[stability]match[STABILITY_0_DEPRECATED]] %>
-				<span class="tc-plugin-info-stability tc-plugin-info-stability-deprecated">DEPRECATED</span>
+				<span class="tc-plugin-info-stability tc-plugin-info-stability-deprecated"><<lingo "Stability/Deprecated">></span>
 			<%elseif [<currentTiddler>get[stability]match[STABILITY_1_EXPERIMENTAL]] %>
-				<span class="tc-plugin-info-stability tc-plugin-info-stability-experimental">EXPERIMENTAL</span>
+				<span class="tc-plugin-info-stability tc-plugin-info-stability-experimental"><<lingo "Stability/Experimental">></span>
 			<%elseif [<currentTiddler>get[stability]match[STABILITY_2_STABLE]] %>
-				<span class="tc-plugin-info-stability tc-plugin-info-stability-stable">STABLE</span>
+				<span class="tc-plugin-info-stability tc-plugin-info-stability-stable"><<lingo "Stability/Stable">></span>
 			<%elseif [<currentTiddler>get[stability]match[STABILITY_3_LEGACY]] %>
-				<span class="tc-plugin-info-stability tc-plugin-info-stability-legacy">LEGACY</span>
+				<span class="tc-plugin-info-stability tc-plugin-info-stability-legacy"><<lingo "Stability/Legacy">></span>
 			<%endif%>
 			<em><$view field="version"/></em></div>
 	</h2>

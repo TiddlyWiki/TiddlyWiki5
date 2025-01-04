@@ -4,15 +4,14 @@ caption: {{$:/core/images/advanced-search-button}} {{$:/language/Buttons/Advance
 description: {{$:/language/Buttons/AdvancedSearch/Hint}}
 
 \whitespace trim
-\define advanced-search-button(class)
-\whitespace trim
-<$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="""$(tv-config-toolbar-class)$ $class$""">
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+\procedure advanced-search-button(class)
+<$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class=`$(tv-config-toolbar-class)$ $(class)$`>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/advanced-search-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/AdvancedSearch/Caption}}/></span>
-</$list>
+<%endif%>
 </$button>
 \end
 

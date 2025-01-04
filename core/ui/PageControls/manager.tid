@@ -4,17 +4,16 @@ caption: {{$:/core/images/list}} {{$:/language/Buttons/Manager/Caption}}
 description: {{$:/language/Buttons/Manager/Hint}}
 
 \whitespace trim
-\define manager-button(class)
-\whitespace trim
-<$button to="$:/Manager" tooltip={{$:/language/Buttons/Manager/Hint}} aria-label={{$:/language/Buttons/Manager/Caption}} class="""$(tv-config-toolbar-class)$ $class$""">
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+\procedure manager-button(class)
+<$button to="$:/Manager" tooltip={{$:/language/Buttons/Manager/Hint}} aria-label={{$:/language/Buttons/Manager/Caption}} class=`$(tv-config-toolbar-class)$ $(class)$`>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/list}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/Manager/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>
 \end
 

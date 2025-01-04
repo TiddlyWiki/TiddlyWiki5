@@ -52,7 +52,9 @@ exports.startup = function() {
 			basicAuthUsername: params["basic-auth-username"],
 			basicAuthUsernameFromStore: params["basic-auth-username-from-store"],
 			basicAuthPassword: params["basic-auth-password"],
-			basicAuthPasswordFromStore: params["basic-auth-password-from-store"]
+			basicAuthPasswordFromStore: params["basic-auth-password-from-store"],
+			bearerAuthToken: params["bearer-auth-token"],
+			bearerAuthTokenFromStore: params["bearer-auth-token-from-store"]
 		});
 	});
 	$tw.rootWidget.addEventListener("tm-http-cancel-all-requests",function(event) {

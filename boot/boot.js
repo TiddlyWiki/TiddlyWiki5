@@ -1470,17 +1470,15 @@ $tw.Wiki = function(options) {
 	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers
 	this.unpackPluginTiddlers = function() {
 		var self = this;
-		// Sort the plugin titles by the `plugin-priority` field
-		pluginTiddlers.sort(function(a,b) {
-			if("plugin-priority" in a.fields && "plugin-priority" in b.fields) {
-				return a.fields["plugin-priority"] - b.fields["plugin-priority"];
-			} else if("plugin-priority" in a.fields) {
+		// Sort the plugin titles by the `plugin-priority` field, if this field is missing, default to 1
+		pluginTiddlers.sort(function(a, b) {
+			var priorityA = "plugin-priority" in a.fields ? a.fields["plugin-priority"] : 1;
+			var priorityB = "plugin-priority" in b.fields ? b.fields["plugin-priority"] : 1;
+			if (priorityA !== priorityB) {
+				return priorityA - priorityB;
+			} else if (a.fields.title < b.fields.title) {
 				return -1;
-			} else if("plugin-priority" in b.fields) {
-				return +1;
-			} else if(a.fields.title < b.fields.title) {
-				return -1;
-			} else if(a.fields.title === b.fields.title) {
+			} else if (a.fields.title === b.fields.title) {
 				return 0;
 			} else {
 				return +1;

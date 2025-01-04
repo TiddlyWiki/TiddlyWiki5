@@ -1,0 +1,24 @@
+created: 20150325170720682
+modified: 20241129110246653
+original-modified: 20210519110623819
+tags: HelloThere
+title: A Gentle Guide to TiddlyWiki
+ja-title: TiddlyWikiの優しいガイド
+type: text/vnd.tiddlywiki
+
+TiddlyWikiは、他のソフトウェアとは異なる方法で考案され構築された、信じられないほど柔軟で多用途なツールです。そのため、クリックし、脳のシームレスな拡張になる瞬間まで、理解するのが困難です
+
+基礎から始めると、TiddlyWikiは、無料でダウンロードでき、好きな場所に保存し、好きなようにカスタマイズできる、Webアプリケーションノートです。これを使用すると、ワープロや他のノートツールとは異なる方法で、メモを取り、整理し、共有できます
+
+~TiddlyWikiは非線形になるように設計されており、ストーリー、タグ、ハイパーリンク、その他の機能を使用してコンテンツを構造化します。組織であらかじめ設定された一つの構造に縛られることなく、個人の思考パターンに応じた方法でノートを整理したり取得したりできます
+
+~TiddlyWikiは、オンラインでもオフラインでも、任意のWebブラウザで表示、編集できる単一のファイルとして使用できます。または、各ノートを個別のファイルとして保存する強力な[[Node.jsアプリケーション|TiddlyWiki on Node.js]]として使用することもできます
+
+~TiddlyWikiをどのように機能させることができるでしょうか? 以下にリストされている入門ドキュメントから始めて、サイドバーの目次タブにある[[目次|TableOfContents]]をブラウズすることをお勧めします。または、[[簡単なインストラクションに従って|GettingStarted]]、自分で試してみてください
+
+<<list-links "[tag[HelloThere]]">>
+
+以下も参照してください:
+
+* [[Soren Bjornstadの"Grok TiddlyWiki"|"Grok TiddlyWiki" by Soren Bjornstad]]
+* [[Francis MeetzeのTiddlyWiki動画チュートリアル|TiddlyWiki Video Tutorials by Francis Meetze]]
