@@ -1,0 +1,87 @@
+/*\
+title: $:/core/modules/filter-tracker.js
+type: application/javascript
+module-type: global
+
+Class to track the results of a filter string
+
+\*/
+(function(){
+
+/*jslint node: true, browser: true */
+/*global $tw: false */
+"use strict";
+
+function FilterTracker(wiki) {
+	this.wiki = wiki;
+	this.trackers = [];
+	this.wiki.addEventListener("change",this.handleChangeEvent.bind(this));
+}
+
+FilterTracker.prototype.handleChangeEvent = function(changes) {
+	this.processTrackers();
+	this.processChanges(changes);
+};
+
+/*
+Add a tracker to the filter tracker
+filterString: the filter string to track
+fnEnter: function to call when a title enters the filter results. Called even if the tiddler does not actually exist. Called as (title), and should return a truthy value that is stored in the tracker as the "enterValue"
+fnLeave: function to call when a title leaves the filter results. Called as (title,enterValue)
+fnChange: function to call when a tiddler changes in the filter results. Only called for filter results that identify a tiddler or shadow tiddler. Called as (title,enterValue), and may optionally return a replacement enterValue
+*/
+FilterTracker.prototype.track = function(filterString,fnEnter,fnLeave,fnChange) {
+	// Add the tracker details
+	var index = this.trackers.length;
+	this.trackers.push({
+		filterString: filterString,
+		fnEnter: fnEnter,
+		fnLeave: fnLeave,
+		fnChange: fnChange,
+		previousResults: [], // Results from the previous time the tracker was processed
+		resultValues: {} // Map by title to the value returned by fnEnter
+	});
+	// Process the tracker
+	this.processTracker(index);
+};
+
+FilterTracker.prototype.processTrackers = function() {
+	for(var t=0; t<this.trackers.length; t++) {
+		this.processTracker(t);
+	}
+};
+
+FilterTracker.prototype.processTracker = function(index) {
+	var tracker = this.trackers[index],
+		results = this.wiki.filterTiddlers(tracker.filterString);
+	// Process the results
+	$tw.utils.each(results,function(title) {
+		if(tracker.previousResults.indexOf(title) === -1 && !tracker.resultValues[title]) {
+			tracker.resultValues[title] = tracker.fnEnter(title) || true;
+		}
+	});
+	$tw.utils.each(tracker.previousResults,function(title) {
+		if(results.indexOf(title) === -1 && tracker.resultValues[title]) {
+			tracker.fnLeave(title,tracker.resultValues[title]);
+			delete tracker.resultValues[title];
+		}
+	});
+	// Update the previous results
+	tracker.previousResults = results;
+};
+
+FilterTracker.prototype.processChanges = function(changes) {
+	for(var t=0; t<this.trackers.length; t++) {
+		var tracker = this.trackers[t];
+		$tw.utils.each(changes,function(change,title) {
+			if(tracker.previousResults.indexOf(title) !== -1) {
+				// Call the change function and if it doesn't return a value then keep the old value
+				tracker.resultValues[title] = tracker.fnChange(title,tracker.resultValues[title]) || tracker.resultValues[title];
+			}
+		});
+	}
+};
+
+exports.FilterTracker = FilterTracker;
+
+})();
