@@ -6,10 +6,11 @@ delivery: Browser Extension
 description: Browser extension for Internet Explorer
 method: save
 modified: 20200507201415232
-tags: [[Internet Explorer]] Saving
+tags: [[Internet Explorer]] Saving $:/deprecated
 title: Saving with TiddlyIE
 type: text/vnd.tiddlywiki
 
+<<.deprecated-since "5.3.6">>
 # Install the TiddlyIE add-on from:
 #* https://github.com/davidjade/TiddlyIE/releases
 # Restart Internet Explorer. IE will prompt you to enable the TiddlyIE add-on.

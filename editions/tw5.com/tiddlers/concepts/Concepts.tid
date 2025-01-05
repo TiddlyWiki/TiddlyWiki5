@@ -1,11 +1,11 @@
 color: #FF8383
 created: 20130825144700000
 list: Cascades ColourPalettes Commands [[Current Tiddler]] DataTiddlers [[Date Fields]] DefaultTiddlers DictionaryTiddlers ExternalImages Filters [[Hard and Soft Links]] JSONTiddlers [[Keyboard Shortcut Tiddler]] Macros Messages Modules PermaLinks Plugins Pragma [[Railroad Diagrams]] ShadowTiddlers [[Story River]] SystemTags SystemTiddlers Tagging TemplateTiddlers TextReference TiddlerFields TiddlerLinks Tiddlers TiddlyWiki TiddlyWiki5 [[Title List]] [[Title Selection]] Transclusion Variables Widgets Wiki WikiText
-modified: 20211201100624625
+modified: 20250104110643596
 tags: Reference
 title: Concepts
 type: text/vnd.tiddlywiki
 
 These are the concepts underlying TiddlyWiki. Understanding how these ideas fit together is the key to getting the most from TiddlyWiki.
 
-<<list-links "[tag[Concepts]]">>
+<<list-links "[tag[Concepts]]" class:"multi-columns">>
