@@ -64,14 +64,19 @@ FilterTracker.prototype.processTrackers = function() {
 };
 
 FilterTracker.prototype.processTracker = function(index) {
-	var tracker = this.trackers[index],
-		results = this.wiki.filterTiddlers(tracker.filterString);
-	// Process the results
+	var tracker = this.trackers[index];
+	var results = [];
+	// Evaluate the filter and remove duplicate results
+	$tw.utils.each(this.wiki.filterTiddlers(tracker.filterString),function(title) {
+		$tw.utils.pushTop(results,title);
+	});
+	// Process the newly entered results
 	$tw.utils.each(results,function(title) {
 		if(tracker.previousResults.indexOf(title) === -1 && !tracker.resultValues[title] && tracker.fnEnter) {
 			tracker.resultValues[title] = tracker.fnEnter(title) || true;
 		}
 	});
+	// Process the results that have just left
 	$tw.utils.each(tracker.previousResults,function(title) {
 		if(results.indexOf(title) === -1 && tracker.resultValues[title] && tracker.fnLeave) {
 			tracker.fnLeave(title,tracker.resultValues[title]);
@@ -86,7 +91,7 @@ FilterTracker.prototype.processChanges = function(changes) {
 	for(var t=0; t<this.trackers.length; t++) {
 		var tracker = this.trackers[t];
 		$tw.utils.each(changes,function(change,title) {
-			if(tracker.previousResults.indexOf(title) !== -1 && tracker.fnChange) {
+			if(title && tracker.previousResults.indexOf(title) !== -1 && tracker.fnChange) {
 				// Call the change function and if it doesn't return a value then keep the old value
 				tracker.resultValues[title] = tracker.fnChange(title,tracker.resultValues[title]) || tracker.resultValues[title];
 			}
