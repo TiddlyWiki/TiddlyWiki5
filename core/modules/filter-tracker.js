@@ -15,6 +15,7 @@ Class to track the results of a filter string
 function FilterTracker(wiki) {
 	this.wiki = wiki;
 	this.trackers = [];
+	this.nextTrackerId = 1;
 	this.wiki.addEventListener("change",this.handleChangeEvent.bind(this));
 }
 
@@ -24,7 +25,7 @@ FilterTracker.prototype.handleChangeEvent = function(changes) {
 };
 
 /*
-Add a tracker to the filter tracker
+Add a tracker to the filter tracker. Returns null if any of the parameters are invalid, or a tracker id if the tracker was added successfully
 filterString: the filter string to track
 fnEnter: function to call when a title enters the filter results. Called even if the tiddler does not actually exist. Called as (title), and should return a truthy value that is stored in the tracker as the "enterValue"
 fnLeave: function to call when a title leaves the filter results. Called as (title,enterValue)
@@ -32,17 +33,28 @@ fnChange: function to call when a tiddler changes in the filter results. Only ca
 */
 FilterTracker.prototype.track = function(filterString,fnEnter,fnLeave,fnChange) {
 	// Add the tracker details
-	var index = this.trackers.length;
-	this.trackers.push({
+	var tracker = {
+		id: this.nextTrackerId++,
 		filterString: filterString,
 		fnEnter: fnEnter,
 		fnLeave: fnLeave,
 		fnChange: fnChange,
 		previousResults: [], // Results from the previous time the tracker was processed
 		resultValues: {} // Map by title to the value returned by fnEnter
-	});
+	};
+	this.trackers.push(tracker);
 	// Process the tracker
-	this.processTracker(index);
+	this.processTracker(this.trackers.length - 1);
+	return tracker.id;
+};
+
+FilterTracker.prototype.untrack = function(id) {
+	for(var t=0; t<this.trackers.length; t++) {
+		if(this.trackers[t].id === id) {
+			this.trackers.splice(t,1);
+			break;
+		}
+	}
 };
 
 FilterTracker.prototype.processTrackers = function() {
