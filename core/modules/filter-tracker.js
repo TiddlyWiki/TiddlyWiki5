@@ -68,12 +68,12 @@ FilterTracker.prototype.processTracker = function(index) {
 		results = this.wiki.filterTiddlers(tracker.filterString);
 	// Process the results
 	$tw.utils.each(results,function(title) {
-		if(tracker.previousResults.indexOf(title) === -1 && !tracker.resultValues[title]) {
+		if(tracker.previousResults.indexOf(title) === -1 && !tracker.resultValues[title] && tracker.fnEnter) {
 			tracker.resultValues[title] = tracker.fnEnter(title) || true;
 		}
 	});
 	$tw.utils.each(tracker.previousResults,function(title) {
-		if(results.indexOf(title) === -1 && tracker.resultValues[title]) {
+		if(results.indexOf(title) === -1 && tracker.resultValues[title] && tracker.fnLeave) {
 			tracker.fnLeave(title,tracker.resultValues[title]);
 			delete tracker.resultValues[title];
 		}
@@ -86,7 +86,7 @@ FilterTracker.prototype.processChanges = function(changes) {
 	for(var t=0; t<this.trackers.length; t++) {
 		var tracker = this.trackers[t];
 		$tw.utils.each(changes,function(change,title) {
-			if(tracker.previousResults.indexOf(title) !== -1) {
+			if(tracker.previousResults.indexOf(title) !== -1 && tracker.fnChange) {
 				// Call the change function and if it doesn't return a value then keep the old value
 				tracker.resultValues[title] = tracker.fnChange(title,tracker.resultValues[title]) || tracker.resultValues[title];
 			}
