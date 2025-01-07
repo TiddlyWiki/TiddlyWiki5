@@ -52,6 +52,30 @@ exports["colour-contrast"] = makeParallelColourOperator(function (colours, opera
 	return colourContrasts;
 });
 
+exports["colour-best-contrast"] = makeParallelColourOperator(function (colours, operator, options, originalColours) {
+	var bestContrast = 0,
+		bestColour = null;
+	if(colours.length < 2) {
+		return [];
+	}
+	var targetColour = colours[colours.length - 1];
+	for(var t=0; t<colours.length; t++) {
+		var colour = colours[t];
+		if(colour) {
+			var contrast = colour.contrast(targetColour,"DeltaPhi");
+			if(contrast > bestContrast) {
+				bestContrast = contrast;
+				bestColour = originalColours[t];
+			}
+		}
+	}
+	if(bestColour) {
+		return [bestColour];
+	} else {
+		return [];
+	}
+});
+
 exports["colour-interpolate"] = makeParallelColourOperator(function (colours, operator, options) {
 	// Special case for less than two colours
 	if(colours.length < 2) {
@@ -89,11 +113,13 @@ function makeSerialColourOperator(fn) {
 
 function makeParallelColourOperator(fn) {
 	return function (source, operator, options) {
-		var colours = [];
+		var originalColours = [],
+			colours = [];
 		source(function (tiddler, title) {
+			originalColours.push(title);
 			colours.push($tw.utils.parseCSSColorObject(title));
 		});
-		return fn(colours, operator, options);
+		return fn(colours, operator, options, originalColours);
 	};
 }
 

@@ -1,0 +1,17 @@
+title: Operators/Colour/ColourBestContrast
+description: Best contrast colour function
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+<$text text={{{ [subfilter{Filter}] }}}/>
++
+title: Filter
+
+[[black]] [[gray]] [[green]] +[colour-best-contrast:DeltaPhi[]]
++
+title: ExpectedResult
+
+black
