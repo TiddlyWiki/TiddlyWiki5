@@ -59,7 +59,12 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 			untrack(enterValue);
 			return track(title);
 		}
-		$tw.filterTracker.track("[all[tiddlers+shadows]tag[$:/tags/MediaQueryTracker]!is[draft]]",fnEnter,fnLeave,fnChange);
+		$tw.filterTracker.track({
+			filterString: "[all[tiddlers+shadows]tag[$:/tags/MediaQueryTracker]!is[draft]]",
+			fnEnter: fnEnter,
+			fnLeave: fnLeave,
+			fnChange: fnChange
+		});
 	}
 	return [];
 };
