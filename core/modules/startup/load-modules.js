@@ -49,6 +49,8 @@ exports.startup = function() {
 	$tw.wiki.addEventListener("change",function(changes) {
 		$tw.filterTracker.handleChangeEvent(changes);
 	});
+	// Kick off the background action dispatcher
+	$tw.backgroundActionDispatcher = new $tw.BackgroundActionDispatcher($tw.filterTracker,$tw.wiki);
 };
 
 })();
