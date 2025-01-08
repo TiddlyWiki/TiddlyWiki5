@@ -1,0 +1,14 @@
+title: $:/palette-editors/TwentyTwenties
+
+paper: <$edit-text tiddler={{$:/palette}} index="base-paper" type="color" tag="input" inputActions=<<actions-recompile-current-palette>>/>
+
+background: <$edit-text tiddler={{$:/palette}} index="base-background" type="color" tag="input" inputActions=<<actions-recompile-current-palette>>/>
+
+ink: <$edit-text tiddler={{$:/palette}} index="base-ink" type="color" tag="input" inputActions=<<actions-recompile-current-palette>>/>
+
+primary: <$edit-text tiddler={{$:/palette}} index="base-primary" type="color" tag="input" inputActions=<<actions-recompile-current-palette>>/>
+
+secondary: <$edit-text tiddler={{$:/palette}} index="base-secondary" type="color" tag="input" inputActions=<<actions-recompile-current-palette>>/>
+
+tertiary: <$edit-text tiddler={{$:/palette}} index="base-tertiary" type="color" tag="input" inputActions=<<actions-recompile-current-palette>>/>
+

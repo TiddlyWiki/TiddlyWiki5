@@ -10,7 +10,7 @@ name: tiddlywiki
 </$set>
 \end
 \define set-fat-cursor-background-colours(palette)
-<$macrocall $name="set-fat-cursor-background-css" colour={{$palette$##foreground}} colourA="#77ee77" colourB="#586e75"/>
+<$macrocall $name="set-fat-cursor-background-css" colour=<<colour foreground>> colourA="#77ee77" colourB="#586e75"/>
 \end
 \define set-fat-cursor-background()
 <$macrocall $name="set-fat-cursor-background-colours" palette={{$:/palette}}/>
@@ -28,7 +28,7 @@ name: tiddlywiki
 </$wikify>
 \end
 \define set-selection-background-colours(palette)
-<$macrocall $name="set-selection-background-css" colour={{$palette$##foreground}} colourA={{{ [{$palette$##selection-background}!match[]!prefix[<<]!suffix[>>]] ~#073642 }}} colourB={{{ [{$palette$##selection-background}!match[]!prefix[<<]!suffix[>>]] ~#eee8d5 }}} tiddlerEditorBackground={{$palette$##tiddler-editor-background}}/>
+<$macrocall $name="set-selection-background-css" colour=<<colour foreground>> colourA=<<colour selection-background>> colourB=<<colour selection-background>> tiddlerEditorBackground=<<colour tiddler-editor-background>>/>
 \end
 \define set-selection-background()
 <$macrocall $name="set-selection-background-colours" palette={{$:/palette}}/>
