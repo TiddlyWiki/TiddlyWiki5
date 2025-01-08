@@ -62,6 +62,10 @@ tags: $:/tags/Macro
 </$let>
 \end actions-compile-palette
 
+\procedure actions-recompile-current-palette()
+<$transclude $variable="actions-compile-palette" inputTitle={{$:/palette}} outputTitle="$:/temp/palette-colours"/>
+\end actions-recompile-current-palette
+
 \procedure actions-switch-colour-palette(paletteTitle)
 \procedure tv-action-refresh-policy() always
 <$action-deletetiddler $tiddler="$:/temp/palette-colours"/>
