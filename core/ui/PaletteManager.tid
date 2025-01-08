@@ -22,7 +22,7 @@ title: $:/PaletteManager
 \whitespace trim
 <$edit-text index=<<colourName>> tag="input" placeholder=<<edit-colour-placeholder>> default=""/>
 <br>
-<$edit-text index=<<colourName>> type="color" tag="input" class="tc-palette-manager-colour-input"/>
+<$edit-text index=<<colourName>> type="color" tag="input" class="tc-palette-manager-colour-input" inputActions=<<actions-recompile-current-palette>>/>
 <$list filter="[<currentTiddler>getindex<colourName>removeprefix[<<]removesuffix[>>]] [<currentTiddler>getindex<colourName>removeprefix[<$]removesuffix[/>]]" variable="ignore">
 <$set name="state" value={{{ [[$:/state/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>] }}}>
 <$wikify name="newColourName" text="""<$macrocall $name="resolve-colour" macrocall={{{ [<currentTiddler>getindex<colourName>] }}}/>""">
