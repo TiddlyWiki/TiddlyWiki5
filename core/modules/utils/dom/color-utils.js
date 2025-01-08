@@ -41,4 +41,20 @@ exports.parseCSSColorObject = function(colourString) {
 	return c;
 };
 
+/*
+Convert a Color.js colour to a CSS RGB string suitable for use with the <input type="color"> element
+*/
+exports.convertColorToCSSRGBString = function(colourString) {
+	var c = exports.parseCSSColorObject(colourString);
+	if(c) {
+		var hex = c.toString({format: "hex"});
+		if(hex.length === 4) {
+			hex = "#" + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];
+		}
+		return hex;
+	} else {
+		return null;
+	}
+};
+
 })();

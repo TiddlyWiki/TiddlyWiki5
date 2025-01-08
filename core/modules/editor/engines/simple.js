@@ -31,7 +31,12 @@ function SimpleEngine(options) {
 	if(this.widget.editTag === "textarea") {
 		this.domNode.appendChild(this.widget.document.createTextNode(this.value));
 	} else {
-		this.domNode.value = this.value;
+		if(this.widget.editType === "color") {
+			// The <input type="color"> element requires a six digit hex value
+			this.domNode.value = $tw.utils.convertColorToCSSRGBString(this.value);
+		} else {
+			this.domNode.value = this.value;
+		}
 	}
 	// Set the attributes
 	if(this.widget.editType && this.widget.editTag !== "textarea") {
