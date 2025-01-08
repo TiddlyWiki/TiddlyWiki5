@@ -50,6 +50,7 @@ exports.handler = function(request,response,state) {
 				"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no",
 				"first-guest-user": state.firstGuestUser ? "yes" : "no",
 				"show-anon-config": state.showAnonConfig ? "yes" : "no",
+				"user-is-logged-in": !!state.authenticatedUser ? "yes" : "no",
 				"user": JSON.stringify(state.authenticatedUser),
 				"has-profile-access": !!state.authenticatedUser ? "yes" : "no"
 			}});
