@@ -45,9 +45,9 @@ color:$(foregroundColor)$;
 	tag=<<__tag__>>
 	icon=<<__icon__>>
 	colour=<<__colour__>>
-	fallbackTarget={{$palette$##tag-background}}
-	colourA={{$palette$##foreground}}
-	colourB={{$palette$##background}}
+	fallbackTarget=<<colour tag-background>>
+	colourA=<<colour foreground>>
+	colourB=<<colour background>>
 	element-tag=<<__element-tag__>>
 	element-attributes=<<__element-attributes__>>
 	actions=<<__actions__>>
