@@ -1,0 +1,408 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
+
+
+\function .hide.system()
+[<show-system>match[on]]
+[all[]!prefix[$:/]]
+\end
+
+\procedure bagPill(element-tag:"span",is-topmost:"yes")
+	\whitespace trim
+	<$genesis $type=<<element-tag>> class={{{ mws-bag-pill [<is-topmost>match[yes]then[mws-bag-pill-topmost]] +[join[ ]] }}}>
+		<a class="mws-bag-pill-link" href=`/bags/${ [<bag-name>encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
+			<img
+				src=`/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico?fallback=/.system/missing-favicon.png`
+				class="mws-favicon-small"
+			/>
+			<span class="mws-bag-pill-label">
+				<$text text=<<bag-name>>/>
+			</span>
+		</a>
+	</$genesis>
+\end
+
+<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/mws-header">
+	<$set name="page-title" value="Wikis Available Here">
+		<$transclude/>
+	</$set>
+</$tiddler>
+
+<$list filter="[<first-guest-user>match[yes]]">
+	<div class="mws-security-warning">
+		<div class="mws-security-warning-content">
+			<div class="mws-security-warning-icon">⚠️</div>
+			<div class="mws-security-warning-text">
+				<strong>Warning:</strong> TiddlyWiki is currently running in anonymous access mode which allows anyone with access to the server to read and modify data.
+			</div>
+			<div class="mws-security-warning-action">
+				<a href="/admin/users" class="mws-security-warning-button">Add Admin Account</a>
+			</div>
+		</div>
+	</div>
+</$list>
+
+<$list filter="[<show-anon-config>match[yes]]">
+	<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/anon-config-modal">
+		<$transclude/>
+	</$tiddler>
+</$list>
+
+<ul class="mws-vertical-list">
+	<$list filter="[<recipe-list>jsonindexes[]] :sort[<currentTiddler>jsonget[recipe_name]]" variable="recipe-index">
+		<li>
+			<$let
+				recipe-info={{{ [<recipe-list>jsonextract<recipe-index>] }}}
+				recipe-name={{{ [<recipe-info>jsonget[recipe_name]] }}}
+			>
+				<div
+					class="mws-wiki-card"
+				>
+					<div class="mws-wiki-card-image">
+						<img
+							src=`/recipes/${ [<recipe-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico?fallback=/.system/missing-favicon.png`
+							class="mws-favicon"
+						/>
+					</div>
+					<div class="mws-wiki-card-content">
+						<div class="mws-wiki-card-header">
+							<a
+								href=`/wiki/${ [<recipe-name>encodeuricomponent[]] }$`
+								rel="noopener noreferrer"
+								target="_blank"
+							>
+								<$text text={{{ [<recipe-info>jsonget[recipe_name]] }}}/>
+							</a>
+						</div>
+						<div class="mws-wiki-card-meta">
+							<%if true %>
+								<ol class="mws-vertical-list">
+									<$list filter="[<recipe-info>jsonget[bag_names]reverse[]] :filter[.hide.system[]]" variable="bag-name" counter="counter">
+										<$transclude $variable="bagPill" is-topmost={{{ [<counter-first>match[yes]] }}} element-tag="li"/>
+									</$list>
+								</ol>
+							<%else%>
+								(no bags defined)
+							<%endif%>
+						</div>
+						<div class="mws-wiki-card-description">
+							<$text text={{{ [<recipe-info>jsonget[description]] }}}/>
+						</div>
+					</div>
+					<div class="mws-wiki-card-actions">
+					  <$list filter="[<recipe-info>jsonget[has_acl_access]match[true]]">
+							<$set name="last-bag" value={{{ [<recipe-info>jsonget[bag_names]last[]] }}}>
+								<a 
+									href={{{ [<recipe-name>addprefix[/admin/acl/]addsuffix[/]addsuffix<last-bag>] }}}
+									class="mws-wiki-card-action"
+									title="Manage ACL"
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+										<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+										<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+									</svg>
+								</a>
+							</$set>
+						</$list>
+					</div>
+				</div>
+			</$let>
+		</li>
+	</$list>
+</ul>
+<form action="/recipes" method="post" class="mws-form">
+	<div class="mws-form-heading">
+		Create a new recipe or modify and existing one
+	</div>
+	<div class="mws-form-fields">
+		<div class="mws-form-field">
+			<label class="mws-form-field-description">
+				Recipe name
+			</label>
+			<input name="recipe_name" type="text"/>
+		</div>
+		<div class="mws-form-field">
+			<label class="mws-form-field-description">
+				Recipe description
+			</label>
+			<input name="description" type="text"/>
+		</div>
+		<div class="mws-form-field">
+			<label class="mws-form-field-description">
+				Bags in recipe (space separated)
+			</label>
+			<input name="bag_names" type="text"/>
+		</div>
+	</div>
+	<div class="mws-form-buttons">
+		<input type="submit" value="Create or Update Recipe" formmethod="post"/>
+	</div>
+</form>
+
+! Bags
+
+<ul class="mws-vertical-list">
+	<$list filter="[<bag-list>jsonindexes[]] :filter[<bag-list>jsonget<currentTiddler>,[bag_name].hide.system[]] :sort[<bag-list>jsonget<currentTiddler>,[bag_name]]" variable="bag-index" counter="counter">
+		<li class="mws-wiki-card">
+			<$let
+				bag-info={{{ [<bag-list>jsonextract<bag-index>] }}}
+				bag-name={{{ [<bag-info>jsonget[bag_name]] }}}
+			>
+				<$transclude $variable="bagPill"/>
+				<$text text={{{ [<bag-info>jsonget[description]] }}}/>
+			</$let>
+		</li>
+	</$list>
+</ul>
+
+<form action="/bags" method="post" class="mws-form">
+	<div class="mws-form-heading">
+		Create a new bag or modify and existing one
+	</div>
+	<div class="mws-form-fields">
+		<div class="mws-form-field">
+			<label class="mws-form-field-description">
+				Bag name
+			</label>
+			<input name="bag_name" type="text"/>
+		</div>
+		<div class="mws-form-field">
+			<label class="mws-form-field-description">
+				Bag description
+			</label>
+			<input name="description" type="text"/>
+		</div>
+	</div>
+	<div class="mws-form-buttons">
+		<input type="submit" value="Create or Update Bag" formmethod="post"/>
+	</div>
+</form>
+
+! Advanced
+
+
+<form id="checkboxForm" action="." method="GET">
+<%if [<show-system>match[on]] %>
+<input type="checkbox" id="chkShowSystem" name="show_system" value="on" checked="checked"/>
+<%else%>
+<input type="checkbox" id="chkShowSystem" name="show_system" value="on"/>
+<%endif%>
+<label for="chkShowSystem">Show system bags</label>
+<button type="submit">Update</button>
+</form>
+
+<style>
+.mws-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	background-color: #f0f0f0;
+	margin-bottom: 20px;
+}
+
+.mws-user-info {
+	display: flex;
+	align-items: center;
+}
+
+.mws-logout-form {
+  margin-left: 10px;
+}
+
+.mws-logout-button {
+	padding: 5px 10px;
+	background-color: #f44336;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+.mws-logout-button:hover {
+  background-color: #d32f2f;
+}
+
+.mws-admin-dropdown {
+	position: relative;
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.mws-admin-dropbtn {
+	color: white;
+	padding: 5px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+
+.mws-admin-dropbtn:hover, .mws-admin-dropbtn:focus {
+  cursor: pointer;
+	opacity: 0.8;
+}
+
+.mws-admin-dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+	right: 0;
+}
+
+.mws-admin-dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.mws-admin-dropdown-content a:hover {background-color: #ddd;}
+
+.mws-admin-dropdown:hover .mws-admin-dropdown-content {display: block;}
+
+.mws-admin-dropdown:hover {background-color: #2980B9;}
+
+.mws-security-warning {
+	background-color: #fff3cd;
+	border: 1px solid #ffeeba;
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+	border-radius: 4px;
+}
+
+.mws-security-warning-content {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.mws-security-warning-icon {
+	font-size: 1.5rem;
+}
+
+.mws-security-warning-text {
+	flex-grow: 1;
+	color: #856404;
+}
+
+.mws-security-warning-button {
+	display: flex;
+	padding: 0.5rem 1rem;
+	background-color: #856404;
+	color: white;
+	text-decoration: none;
+	border-radius: 4px;
+	font-weight: bold;
+	transition: background-color 0.2s;
+	flex-direction: row;
+	align-items: center;
+	text-align: center;
+	text-wrap: nowrap;
+}
+
+.mws-security-warning-button:hover {
+	background-color: #6d5204;
+}
+
+.mws-modal-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mws-modal-content {
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	max-width: 500px;
+}
+
+.mws-config-button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-bottom: 1rem;
+}
+
+.mws-config-button:hover {
+	background-color: #45a049;
+}
+
+.mws-modal-content {
+	padding: 20px;
+}
+
+.mws-modal-section {
+	margin-bottom: 15px;
+}
+
+.mws-modal-buttons {
+	display: flex;
+	gap: 10px;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.mws-modal-button-primary {
+	background-color: #4CAF50;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.mws-modal-button-primary:hover {
+	background-color: #45a049;
+}
+
+.mws-wiki-card {
+	display: flex;
+	flex-direction: row;
+}
+
+.mws-wiki-card-content {
+}
+
+.mws-wiki-card-actions {
+	padding: 10px;
+	display: flex;
+	justify-content: flex-end;
+	margin-left: auto;
+	height: 50px;
+	width: 50px;
+}
+
+.mws-wiki-card-action {
+	display: inline-flex;
+	align-items: center;
+	padding: 8px 16px;
+	background-color: white;
+	border-radius: 6px;
+	text-decoration: none;
+	color: #333;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: all 0.2s ease;
+}
+
+.mws-wiki-card-action:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	transform: translateY(-1px);
+}
+
+.mws-wiki-card-action svg {
+	width: 16px;
+	height: 16px;
+}
+</style>
