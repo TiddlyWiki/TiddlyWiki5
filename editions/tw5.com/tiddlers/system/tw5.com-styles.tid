@@ -96,8 +96,8 @@ type: text/vnd.tiddlywiki
 	cursor: pointer;
 	font-size: 1.2em;
 	line-height: 1.4em;
-	color: #fff;
-	fill: #fff;
+	color: <<colour download-foreground>>;
+	fill: <<colour download-foreground>>;
 }
 
 .tc-btn-download:active {
