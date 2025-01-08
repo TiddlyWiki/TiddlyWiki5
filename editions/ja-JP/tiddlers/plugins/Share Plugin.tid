@@ -1,0 +1,14 @@
+created: 20201228143125000
+modified: 20241222103744408
+original-modified: 20201228143125000
+tags: OfficialPlugins
+title: Share Plugin
+ja-title: シェアプラグイン
+type: text/vnd.tiddlywiki
+
+<div class="tc-message-box">このプラグインの機能を正確に理解していない限り、このプラグインをインストールしないでください</div>
+
+この実験的なプラグインは、URL経由でTiddlerを共有するためのツールを提供します。これには以下が含まれます:
+
+* 起動時にブラウザのロケーションハッシュからTiddlerのグループをロードする機能
+* TiddlerのグループからURLを作成するためのウィザードとテンプレート
