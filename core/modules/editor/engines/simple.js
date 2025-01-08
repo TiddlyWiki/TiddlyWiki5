@@ -33,7 +33,7 @@ function SimpleEngine(options) {
 	} else {
 		if(this.widget.editType === "color") {
 			// The <input type="color"> element requires a six digit hex value
-			this.domNode.value = $tw.utils.convertColorToCSSRGBString(this.value);
+			this.domNode.value = $tw.utils.convertCSSColorToRGBString(this.value);
 		} else {
 			this.domNode.value = this.value;
 		}
