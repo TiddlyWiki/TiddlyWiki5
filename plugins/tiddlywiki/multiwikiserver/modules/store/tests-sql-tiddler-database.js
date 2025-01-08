@@ -13,6 +13,10 @@ if($tw.node) {
 /*global $tw: false */
 "use strict";
 
+describe("SQL tiddler database with node built-in sqlite", function() {
+	runSqlDatabaseTests("node");
+});
+
 describe("SQL tiddler database with node-sqlite3-wasm", function() {
 	runSqlDatabaseTests("wasm");
 });

@@ -24,7 +24,7 @@ function SqlEngine(options) {
 	// Initialise the statement cache
 	this.statements = Object.create(null); // Hashmap by SQL text of statement objects
 	// Choose engine
-	this.engine = options.engine || "better"; // wasm | better
+	this.engine = options.engine || "node"; // node | wasm | better
 	// Create the database file directories if needed
 	if(options.databasePath) {
 		$tw.utils.createFileDirectories(options.databasePath);
@@ -33,6 +33,9 @@ function SqlEngine(options) {
 	const databasePath = options.databasePath || ":memory:";
 	let Database;
 	switch(this.engine) {
+		case "node":
+			({ DatabaseSync: Database } = require("node:sqlite"));
+			break;
 		case "wasm":
 			({ Database } = require("node-sqlite3-wasm"));
 			break;

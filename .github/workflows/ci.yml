@@ -6,7 +6,7 @@ on:
       - tiddlywiki-com
       - multi-wiki-support
 env:
-  NODE_VERSION: "22"
+  NODE_VERSION: "23"
 jobs:
   test:
     runs-on: ubuntu-latest
