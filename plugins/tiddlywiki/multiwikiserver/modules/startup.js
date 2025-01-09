@@ -22,9 +22,7 @@ exports.startup = function() {
 	const store = setupStore();
 	$tw.mws = {
 		store: store,
-		serverManager: new ServerManager({
-			store: store
-		})
+		serverManager: new ServerManager()
 	};
 }
 
@@ -44,7 +42,7 @@ function setupStore() {
 	return store;
 }
 
-function ServerManager(store) {
+function ServerManager() {
 	this.servers = [];
 }
 
