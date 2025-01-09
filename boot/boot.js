@@ -2117,7 +2117,7 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			var tiddlers = pluginFiles[f].tiddlers;
 			for(var t=0; t<tiddlers.length; t++) {
 				var tiddler= tiddlers[t];
-				if(typeof process !== "undefined" && process.env.NODE_DEV_PATH) {
+				if(typeof process !== "undefined" && process.env.NODE_DEV_PATH && tiddlers.length === 1) {
 					tiddler.filepath = pluginFiles[f].filepath;
 				}
 				if(tiddler.title) {
