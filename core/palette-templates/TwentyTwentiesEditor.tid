@@ -1,14 +1,17 @@
 title: $:/palette-editors/TwentyTwenties
 
-paper: <$edit-text tiddler={{$:/palette}} index="base-paper" type="color" tag="input" inputActions=<<actions-recompile-current-palette>>/>
+\procedure entry(name,description)
+<$text text=<<description>>/>: <$edit-text tiddler={{$:/palette}} index=<<name>> type="color" tag="input" default={{{ [function[colour],<name>] }}} inputActions=<<actions-recompile-current-palette>>/>
+\end entry
 
-background: <$edit-text tiddler={{$:/palette}} index="base-background" type="color" tag="input" inputActions=<<actions-recompile-current-palette>>/>
+<<entry name:"base-paper" description:"Paper">>
 
-ink: <$edit-text tiddler={{$:/palette}} index="base-ink" type="color" tag="input" inputActions=<<actions-recompile-current-palette>>/>
+<<entry name:"base-background" description:"Page background">>
 
-primary: <$edit-text tiddler={{$:/palette}} index="base-primary" type="color" tag="input" inputActions=<<actions-recompile-current-palette>>/>
+<<entry name:"base-ink" description:"Ink">>
 
-secondary: <$edit-text tiddler={{$:/palette}} index="base-secondary" type="color" tag="input" inputActions=<<actions-recompile-current-palette>>/>
+<<entry name:"base-primary" description:"Primary">>
 
-tertiary: <$edit-text tiddler={{$:/palette}} index="base-tertiary" type="color" tag="input" inputActions=<<actions-recompile-current-palette>>/>
+<<entry name:"base-secondary" description:"Secondary">>
 
+<<entry name:"base-tertiary" description:"Tertiary">>
