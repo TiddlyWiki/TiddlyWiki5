@@ -19,21 +19,21 @@ exports.path = /^\/admin\/roles\/([^\/]+)\/?$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-
-exports.handler = function(request, response, state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function(request, response, state) {
   var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
   var role_id = state.params[0];
   var role_name = state.data.role_name;
   var role_description = state.data.role_description;
 
-  if(!state.authenticatedUser.isAdmin) {
+  if(!state.authenticatedUser?.isAdmin) {
     response.writeHead(403, "Forbidden");
     response.end();
     return;
   }
 
   // get the role
-  var role = sqlTiddlerDatabase.getRoleById(role_id);
+  var role = await sqlTiddlerDatabase.getRoleById(role_id);
 
   if(!role) {
     response.writeHead(404, "Role not found");
@@ -48,7 +48,7 @@ exports.handler = function(request, response, state) {
   }
 
   try {
-    sqlTiddlerDatabase.updateRole(
+    await sqlTiddlerDatabase.updateRole(
       role_id,
       role_name,
       role_description

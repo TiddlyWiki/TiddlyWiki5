@@ -14,34 +14,34 @@ GET /admin/acl
 exports.method = "GET";
 
 exports.path = /^\/admin\/acl\/(.+)$/;
-
-exports.handler = function (request, response, state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function (request, response, state) {
 	var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
 	var params = state.params[0].split("/")
 	var recipeName = params[0];
 	var bagName = params[params.length - 1];
 
-	var recipes = sqlTiddlerDatabase.listRecipes()
-	var bags = sqlTiddlerDatabase.listBags()
+	var recipes = await sqlTiddlerDatabase.listRecipes()
+	var bags = await sqlTiddlerDatabase.listBags()
 
-	var recipe = recipes.find((entry) => entry.recipe_name === recipeName && entry.bag_names.includes(bagName))
-	var bag = bags.find((entry) => entry.bag_name === bagName);
+	var recipe = recipes.find(entry => entry.recipe_name === recipeName && entry.bag_names.includes(bagName))
+	var bag = bags.find(entry => entry.bag_name === bagName);
 
-	if (!recipe || !bag) {
+	if(!recipe || !bag) {
 		response.writeHead(500, "Unable to handle request", { "Content-Type": "text/html" });
 		response.end();
 		return;
 	}
 
-	var recipeAclRecords = sqlTiddlerDatabase.getEntityAclRecords(recipe.recipe_name);
-	var bagAclRecords = sqlTiddlerDatabase.getEntityAclRecords(bag.bag_name);
-	var roles = state.server.sqlTiddlerDatabase.listRoles();
-	var permissions = state.server.sqlTiddlerDatabase.listPermissions();
+	var recipeAclRecords = await sqlTiddlerDatabase.getEntityAclRecords(recipe.recipe_name);
+	var bagAclRecords = await sqlTiddlerDatabase.getEntityAclRecords(bag.bag_name);
+	var roles = await state.server.sqlTiddlerDatabase.listRoles();
+	var permissions = await state.server.sqlTiddlerDatabase.listPermissions();
 
 	// This ensures that the user attempting to view the ACL management page has permission to do so
 	if(!state.authenticatedUser?.isAdmin && 
 		!state.firstGuestUser &&
-		(!state.authenticatedUser || (recipeAclRecords.length > 0 && !sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser.user_id, recipeName, 'WRITE')))
+		(!state.authenticatedUser || (recipeAclRecords.length > 0 && !await sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser.user_id, recipeName, "WRITE")))
 	){
 		response.writeHead(403, "Forbidden");
 		response.end();

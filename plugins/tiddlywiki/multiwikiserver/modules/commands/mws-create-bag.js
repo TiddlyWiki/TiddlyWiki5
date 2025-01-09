@@ -25,7 +25,7 @@ var Command = function(params,commander,callback) {
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = async function() {
 	var self = this;
 	// Check parameters
 	if(this.params.length < 1) {
@@ -34,7 +34,7 @@ Command.prototype.execute = function() {
 	var bagName = this.params[0],
 		bagDescription = this.params[1] || bagName;
 	// Create bag
-	var result = $tw.mws.store.createBag(bagName,bagDescription);
+	var result = await $tw.mws.store.createBag(bagName,bagDescription);
 	if(result) {
 		return result.message;
 	} else {

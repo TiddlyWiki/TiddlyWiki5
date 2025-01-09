@@ -19,8 +19,8 @@ exports.path = /^\/admin\/post-role\/?$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-
-exports.handler = function (request, response, state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function (request, response, state) {
 	var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
 	var role_name = state.data.role_name;
 	var role_description = state.data.role_description;
@@ -47,7 +47,7 @@ exports.handler = function (request, response, state) {
 
 	try {
 		// Check if role already exists
-		var existingRole = sqlTiddlerDatabase.getRole(role_name);
+		var existingRole = await sqlTiddlerDatabase.getRole(role_name);
 		if(existingRole) {
 			$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
 				title: "$:/temp/mws/post-role/error",
@@ -58,7 +58,7 @@ exports.handler = function (request, response, state) {
 			return;
 		}
 
-		sqlTiddlerDatabase.createRole(role_name, role_description);
+		await sqlTiddlerDatabase.createRole(role_name, role_description);
 
 		$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/post-role/success",

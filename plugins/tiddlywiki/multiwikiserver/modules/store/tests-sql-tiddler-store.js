@@ -26,11 +26,12 @@ function runSqlStoreTests(engine) {
 
 	var store;
 
-	beforeEach(function() {
+	beforeEach(async function() {
 		store = new SqlTiddlerStore({
 			databasePath: ":memory:",
 			engine: engine
 		});
+		await store.initCheck();
 	});
 
 	afterEach(function() {
@@ -38,14 +39,14 @@ function runSqlStoreTests(engine) {
 		store = null;
 	});
 
-	it("should return empty results without failure on an empty store", function() {
-		expect(store.listBags()).toEqual([]);
-		expect(store.listRecipes()).toEqual([]);
+	it("should return empty results without failure on an empty store", async function() {
+		expect(await store.listBags()).toEqual([]);
+		expect(await store.listRecipes()).toEqual([]);
 	});
 
-	it("should return a single bag after creating a bag", function() {
-		expect(store.createBag("bag-alpha", "Bag alpha")).toEqual(null);
-		expect(store.listBags()).toEqual([{
+	it("should return a single bag after creating a bag", async function() {
+		expect(await store.createBag("bag-alpha", "Bag alpha")).toEqual(null);
+		expect(await store.listBags()).toEqual([{
 			bag_name: "bag-alpha",
 			bag_id: 1,
 			accesscontrol: "",
@@ -53,17 +54,17 @@ function runSqlStoreTests(engine) {
 		}]);
 	});
 
-	it("should return empty results after failing to create a bag with an invalid name", function() {
-		expect(store.createBag("bag alpha", "Bag alpha")).toEqual({
+	it("should return empty results after failing to create a bag with an invalid name", async function() {
+		expect(await store.createBag("bag alpha", "Bag alpha")).toEqual({
 			message: "Invalid character(s)"
 		});
-		expect(store.listBags()).toEqual([]);
+		expect(await store.listBags()).toEqual([]);
 	});
 
-	it("should return a bag with new description after re-creating", function() {
-		expect(store.createBag("bag-alpha", "Bag alpha")).toEqual(null);
-		expect(store.createBag("bag-alpha", "Different description")).toEqual(null);
-		expect(store.listBags()).toEqual([{
+	it("should return a bag with new description after re-creating", async function() {
+		expect(await store.createBag("bag-alpha", "Bag alpha")).toEqual(null);
+		expect(await store.createBag("bag-alpha", "Different description")).toEqual(null);
+		expect(await store.listBags()).toEqual([{
 			bag_name: "bag-alpha",
 			bag_id: 1,
 			accesscontrol: "",
@@ -71,8 +72,8 @@ function runSqlStoreTests(engine) {
 		}]);
 	});
 
-	it("should return a saved tiddler within a bag", function() {
-		expect(store.createBag("bag-alpha", "Bag alpha")).toEqual(null);
+	it("should return a saved tiddler within a bag", async function() {
+		expect(await store.createBag("bag-alpha", "Bag alpha")).toEqual(null);
 		var saveBagResult = store.saveBagTiddler({
 			title: "Another Tiddler",
 			text:  "I'm in alpha",

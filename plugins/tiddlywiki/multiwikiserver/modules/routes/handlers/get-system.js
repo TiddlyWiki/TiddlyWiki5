@@ -23,7 +23,9 @@ exports.method = "GET";
 exports.path = /^\/\.system\/(.+)$/;
 
 const SYSTEM_FILE_TITLE_PREFIX = "$:/plugins/tiddlywiki/multiwikiserver/system-files/";
-
+/** @type {ServerRouteHandler} */	
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/promise-function-async
 exports.handler = function(request,response,state) {
 	// Get the  parameters
 	const filename = $tw.utils.decodeURIComponentSafe(state.params[0]),

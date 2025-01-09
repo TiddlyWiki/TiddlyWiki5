@@ -25,7 +25,7 @@ var Command = function(params,commander,callback) {
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = async function() {
 	var self = this;
 	// Check parameters
 	if(this.params.length < 3) {
@@ -35,7 +35,7 @@ Command.prototype.execute = function() {
 		tiddlerTitle = this.params[1],
 		tiddlerText = this.params[2];
 	// Save tiddler
-	$tw.mws.store.saveBagTiddler({title: tiddlerTitle,text: tiddlerText},bagName);
+	await $tw.mws.store.saveBagTiddler({title: tiddlerTitle,text: tiddlerText},bagName);
 	return null;
 };
 

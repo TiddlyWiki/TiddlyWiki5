@@ -15,21 +15,21 @@ GET /admin/users
 exports.method = "GET";
 
 exports.path = /^\/admin\/users$/;
-
-exports.handler = function(request,response,state) {
-	var userList = state.server.sqlTiddlerDatabase.listUsers();
-	if (request.url.includes("*")) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function(request,response,state) {
+	var userList = await state.server.sqlTiddlerDatabase.listUsers();
+	if(request.url.includes("*")) {
 		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/error");
 		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");
 	}
 
 	// Ensure userList is an array
-	if (!Array.isArray(userList)) {
+	if(!Array.isArray(userList)) {
 		userList = [];
 		console.error("userList is not an array");
 	}
 
-	if(!state.authenticatedUser.isAdmin && !state.firstGuestUser) {
+	if(!state.authenticatedUser?.isAdmin && !state.firstGuestUser) {
 		response.writeHead(403, "Forbidden", { "Content-Type": "text/plain" });
 		response.end("Forbidden");
 		return;
@@ -37,11 +37,11 @@ exports.handler = function(request,response,state) {
 
 	// Convert dates to strings and ensure all necessary fields are present
 	userList = userList.map(user => ({
-		user_id: user.user_id || '',
-		username: user.username || '',
-		email: user.email || '',
-		created_at: user.created_at ? new Date(user.created_at).toISOString() : '',
-		last_login: user.last_login ? new Date(user.last_login).toISOString() : ''
+		user_id: user.user_id || "",
+		username: user.username || "",
+		email: user.email || "",
+		created_at: user.created_at ? new Date(user.created_at).toISOString() : "",
+		last_login: user.last_login ? new Date(user.last_login).toISOString() : ""
 	}));
 
 	response.writeHead(200, "OK", {

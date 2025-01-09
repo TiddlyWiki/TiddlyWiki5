@@ -23,7 +23,7 @@ var Command = function(params,commander,callback) {
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = async function() {
 	var self = this;
 
 	if(this.params.length < 2) {
@@ -37,7 +37,7 @@ Command.prototype.execute = function() {
 	var permission_name = this.params[0];
 	var description = this.params[1];
 
-	$tw.mws.store.sqlTiddlerDatabase.createPermission(permission_name, description);
+	await $tw.mws.store.sqlTiddlerDatabase.createPermission(permission_name, description);
 	self.callback();
 	return null;
 };

@@ -20,22 +20,22 @@ exports.path = /^\/bags\/([^\/]+)(\/?)$/;
 exports.useACL = true;
 
 exports.entityName = "bag"
-
-exports.handler = function (request, response, state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function (request, response, state) {
 	// Redirect if there is no trailing slash. We do this so that the relative URL specified in the upload form works correctly
-	if (state.params[1] !== "/") {
+	if(state.params[1] !== "/") {
 		state.redirect(301, state.urlInfo.path + "/");
 		return;
 	}
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		bagTiddlers = bag_name && $tw.mws.store.getBagTiddlers(bag_name);
-	if (bag_name && bagTiddlers) {
+		bagTiddlers = bag_name && await $tw.mws.store.getBagTiddlers(bag_name);
+	if(bag_name && bagTiddlers) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
-		if (request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
+		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
 			state.sendResponse(200, { "Content-Type": "application/json" }, JSON.stringify(bagTiddlers), "utf8");
 		} else {
-			if (!response.headersSent) {
+			if(!response.headersSent) {
 				// This is not a JSON API request, we should return the raw tiddler content
 				response.writeHead(200, "OK", {
 					"Content-Type": "text/html"
@@ -53,7 +53,7 @@ exports.handler = function (request, response, state) {
 			}
 		}
 	} else {
-		if (!response.headersSent) {
+		if(!response.headersSent) {
 			response.writeHead(404);
 			response.end();
 		}

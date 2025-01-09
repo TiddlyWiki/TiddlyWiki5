@@ -19,8 +19,8 @@ exports.path = /^\/update-user-profile\/?$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-
-exports.handler = function (request,response,state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function (request,response,state) {
   if(!state.authenticatedUser) {
     $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/login/error",
@@ -50,11 +50,11 @@ exports.handler = function (request,response,state) {
   }
 
   if(!state.authenticatedUser.isAdmin) {
-    var userRole = state.server.sqlTiddlerDatabase.getUserRoles(userId);
+    var userRole = await state.server.sqlTiddlerDatabase.getUserRoles(userId);
     roleId = userRole.role_id;
   }
 
-  var result = state.server.sqlTiddlerDatabase.updateUser(userId, username, email, roleId);
+  var result = await state.server.sqlTiddlerDatabase.updateUser(userId, username, email, roleId);
 
   if(result.success) {
     $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({

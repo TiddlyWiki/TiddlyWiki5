@@ -21,7 +21,8 @@ exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
 
-exports.handler = function (request, response, state) {
+/** @type {ServerRouteHandler} */
+exports.handler = async function (request, response, state) {
   var userId = state.data.userId;
   // Clean up any existing error/success messages
   $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + userId + "/error");
@@ -65,7 +66,7 @@ exports.handler = function (request, response, state) {
     return;
   }
 
-  var userData = state.server.sqlTiddlerDatabase.getUser(userId);
+  var userData = await state.server.sqlTiddlerDatabase.getUser(userId);
 
   if(!userData) {
     $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
@@ -78,7 +79,7 @@ exports.handler = function (request, response, state) {
   }
 
   var newHash = auth.hashPassword(newPassword);
-  var result = state.server.sqlTiddlerDatabase.updateUserPassword(userId, newHash);
+  var result = await state.server.sqlTiddlerDatabase.updateUserPassword(userId, newHash);
 
   $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
     title: "$:/temp/mws/change-password/" + userId + "/success",

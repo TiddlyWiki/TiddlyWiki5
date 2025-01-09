@@ -20,7 +20,8 @@ if($tw.node) {
 		querystring = require("querystring"),
 		crypto = require("crypto"),
 		zlib = require("zlib"),
-		aclMiddleware = require('$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js').middleware;
+		aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/acl-middleware.js").middleware;
+
 }
 
 /*
@@ -29,14 +30,21 @@ options: variables - optional hashmap of variables to set (a misnomer - they are
 		 routes - optional array of routes to use
 		 wiki - reference to wiki object
 */
+/**
+ * 
+ * @param {ServerOptions} options
+ */
 function Server(options) {
 	var self = this;
+	/** @type {ServerRoute[]} */
 	this.routes = options.routes || [];
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
+	/** @type {SqlTiddlerDatabase} */
 	this.sqlTiddlerDatabase = options.sqlTiddlerDatabase || $tw.mws.store.sqlTiddlerDatabase;
 	// Initialise the variables
+	/** @type {ServerOptions["variables"]} */
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
 		for(var variable in options.variables) {
@@ -76,10 +84,12 @@ function Server(options) {
 	});
 	// Load route handlers
 	$tw.modules.forEachModuleOfType("mws-route", function(title,routeDefinition) {
-		self.addRoute(routeDefinition);
+		self.addRoute(routeDefinition, title);
 	});
 	// Initialise the http vs https
+	/** @type {import("https").ServerOptions} */
 	this.listenOptions = null;
+	/** @type {"http" | "https"} */
 	this.protocol = "http";
 	var tlsKeyFilepath = this.get("tls-key"),
 		tlsCertFilepath = this.get("tls-cert"),
@@ -92,6 +102,7 @@ function Server(options) {
 		};
 		this.protocol = "https";
 	}
+	/** @type {import("http")} */
 	this.transport = require(this.protocol);
 	// Name the server and init the boot state
 	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
@@ -132,7 +143,7 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 		// We do not implement "*" as it makes no sense here.
 		var ifNoneMatch = request.headers["if-none-match"];
 		if(ifNoneMatch) {
-			var matchParts = ifNoneMatch.split(",").map(function(etag) {
+			var matchParts = ifNoneMatch.split(",").map(function(/** @type {string} */ etag) {
 				return etag.replace(/^[ "]+|[ "]+$/g, "");
 			});
 			if(matchParts.indexOf(contentDigest) != -1) {
@@ -178,6 +189,15 @@ cbPartChunk(chunk) - invoked when a chunk of a file is received
 cbPartEnd() - invoked when a file finishes being received
 cbFinished(err) - invoked when the all the form data has been processed
 */
+/**
+ * 
+ * @param {import("http").IncomingMessage} request 
+ * @param {Object} options 
+ * @param {(headers: Object, name: string, filename: string) => void} options.cbPartStart
+ * @param {(chunk: Buffer) => void} options.cbPartChunk
+ * @param {() => void} options.cbPartEnd
+ * @param {(err: string) => void} options.cbFinished
+ */
 function streamMultipartData(request,options) {
 	// Check that the Content-Type is multipart/form-data
 	const contentType = request.headers['content-type'];
@@ -215,6 +235,7 @@ function streamMultipartData(request,options) {
 				}
 				// Extract and parse headers
 				const headersPart = Uint8Array.prototype.slice.call(buffer,boundaryIndex + boundaryBuffer.length,endOfHeaders).toString();
+				/** @type {Record<string, string>} */
 				const currentHeaders = {};
 				headersPart.split("\r\n").forEach(headerLine => {
 					const [key, value] = headerLine.split(": ");
@@ -292,16 +313,49 @@ Server.prototype.defaultVariables = {
 	"system-tiddler-render-type": "text/plain",
 	"system-tiddler-render-template": "$:/core/templates/wikified-tiddler",
 	"debug-level": "none",
+	/** @type {"yes" | "no"} */
 	"gzip": "no",
-	"use-browser-cache": "no"
-};
+	/** @type {"yes" | "no"} */
+	"use-browser-cache": "no",
+	"path-prefix": "",
+	/** @type {"yes" | "no"} */
+	"csrf-disable": "no",
+	/** @type {string | undefined} */
+	username: undefined,
+	/** @type {string | undefined} */
+	password: undefined,
+	/** @type {string | undefined} */
+	credentials: undefined,
+	/** @type {string | undefined} */
+	readers: undefined,
+	/** @type {string | undefined} */
+	writers: undefined,
+	/** @type {string | undefined} */
+	admin: undefined,
+	/** @type {string | undefined} TLS Private Key file path */
+	"tls-key": undefined,
+	/** @type {string | undefined} TLS Public Cert file path */
+	"tls-cert": undefined,
+	/** @type {string | undefined} TLS Private Key passphrase */
+	"tls-passphrase": undefined,
+	/** @type {string | undefined} Server name, mostly for 403 errors */
+	"server-name": undefined,
+	/** @type {string | undefined} the expected origin header */
+	"origin": undefined,
 
+};
+/** 
+ * @template {keyof Server["defaultVariables"]} K
+ * @param {K} name
+ * @returns {Server["defaultVariables"][K]} 
+ */
 Server.prototype.get = function(name) {
 	return this.variables[name];
 };
 
-Server.prototype.addRoute = function(route) {
-	this.routes.push(route);
+Server.prototype.addRoute = function(route, title) {
+	if(!route.path) $tw.utils.log("Warning: Route has no path: " + title);
+	else this.routes.push(route);
 };
 
 Server.prototype.addAuthenticator = function(AuthenticatorClass) {
@@ -315,9 +369,15 @@ Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 		this.authenticators.push(authenticator);
 	}
 };
-
-Server.prototype.findMatchingRoute = function(request,state) {
-	for(var t=0; t<this.routes.length; t++) {
+/**
+ * 
+ * @param {*} request 
+ * @param {*} state 
+ * @returns {ServerRoute | null}
+ */
+// eslint-disable-next-line @typescript-eslint/promise-function-async
+Server.prototype.findMatchingRoute = function findMatchingRoute(request, state) {
+	for(var t = 0; t < this.routes.length; t++) {
 		var potentialRoute = this.routes[t],
 			pathRegExp = potentialRoute.path,
 			pathname = state.urlInfo.pathname,
@@ -325,12 +385,12 @@ Server.prototype.findMatchingRoute = function(request,state) {
 		if(state.pathPrefix) {
 			if(pathname.substr(0,state.pathPrefix.length) === state.pathPrefix) {
 				pathname = pathname.substr(state.pathPrefix.length) || "/";
-				match = potentialRoute.path.exec(pathname);
+				match = pathRegExp.exec(pathname);
 			} else {
-				match = false;
+				match = null;
 			}
 		} else {
-			match = potentialRoute.path.exec(pathname);
+			match = pathRegExp.exec(pathname);
 		}
 		// Allow POST as a synonym for PUT because HTML doesn't allow PUT forms
 		if(match && (request.method === potentialRoute.method || (request.method === "POST" && potentialRoute.method === "PUT"))) {
@@ -384,22 +444,25 @@ Server.prototype.parseCookieString = function(cookieString) {
 	return cookies;
 }
 
-Server.prototype.authenticateUser = function(request, response) {
+Server.prototype.authenticateUser = async function(request, response) {
 	const {session: session_id} = this.parseCookieString(request.headers.cookie)
 	if (!session_id) {
-		return false;
+		return null;
 	}
 	// get user info
-	const user = this.sqlTiddlerDatabase.findUserBySessionId(session_id);
+	const user = await this.sqlTiddlerDatabase.findUserBySessionId(session_id);
 	if (!user) {
-		return false
+		return null;
 	}
 	delete user.password;
-	const userRole = this.sqlTiddlerDatabase.getUserRoles(user.user_id);
-	user['isAdmin'] = userRole?.role_name?.toLowerCase() === 'admin'
-	user['sessionId'] = session_id
+	const userRole = await this.sqlTiddlerDatabase.getUserRoles(user.user_id);
 
-	return user
+	return {
+		...user,
+		isAdmin: userRole?.role_name?.toLowerCase() === 'admin',
+		sessionId: session_id,
+		password: undefined, // for typing
+	};
 };
 
 Server.prototype.requestAuthentication = function(response) {
@@ -424,29 +487,30 @@ Server.prototype.getAnonymousAccessConfig = function() {
 		showAnonConfig: showAnonymousAccessModal === "yes"
 	};
 }
-
-
-Server.prototype.requestHandler = function(request,response,options) {
-	options = options || {};
-	const queryString = require("querystring");
+/**
+ * 
+ * @param {IncomingMessage} request 
+ * @param {ServerResponse} response 
+ * @param {*} options 
+ */
+Server.prototype.makeRequestState = async function(request, response, options) {
 
 	// Authenticate the user
-	const authenticatedUser = this.authenticateUser(request, response);
+	const authenticatedUser = await this.authenticateUser(request, response);
 	const authenticatedUsername = authenticatedUser?.username;
+	
 
-	// Compose the state object
-	var self = this;
 	var state = {};
-	state.wiki = options.wiki || self.wiki;
-	state.boot = options.boot || self.boot;
-	state.server = self;
+	state.wiki = options.wiki || this.wiki;
+	state.boot = options.boot || this.boot;
+	state.server = this;
 	state.urlInfo = url.parse(request.url);
 	state.queryParameters = querystring.parse(state.urlInfo.query);
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
-	state.sendResponse = sendResponse.bind(self,request,response);
-	state.redirect = redirect.bind(self,request,response);
-	state.streamMultipartData = streamMultipartData.bind(self,request);
-	state.makeTiddlerEtag = makeTiddlerEtag.bind(self);
+	state.sendResponse = sendResponse.bind(this,request,response);
+	state.redirect = redirect.bind(this,request,response);
+	state.streamMultipartData = streamMultipartData.bind(this,request);
+	state.makeTiddlerEtag = makeTiddlerEtag.bind(this);
 	state.authenticatedUser = authenticatedUser;
 	state.authenticatedUsername = authenticatedUsername;
 
@@ -461,7 +525,24 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.allowAnonReads = allowReads;
 	state.allowAnonWrites = allowWrites;
 	state.showAnonConfig = !!state.authenticatedUser?.isAdmin && showAnonConfig;
-	state.firstGuestUser = this.sqlTiddlerDatabase.listUsers().length === 0 && !state.authenticatedUser;
+	state.firstGuestUser = (await this.sqlTiddlerDatabase.listUsers()).length === 0 && !state.authenticatedUser;
+	/** @type {any} */
+	state.data = "";
+	return state;
+}
+/**
+ * 
+ * @param {import("http").IncomingMessage} request 
+ * @param {import("http").ServerResponse} response 
+ * @param {*} options 
+ * @returns 
+ */
+Server.prototype.requestHandler = async function(request,response,options) {
+	options = options || {};
+	var self = this;
+	const queryString = require("querystring");
+	// Compose the state object
+	const state = await this.makeRequestState(request, response, options);
 
 	// Authorize with the authenticated username
 	if(!this.isAuthorized(state.authorizationType,state.authenticatedUsername) && !response.headersSent) {
@@ -471,7 +552,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	}
 
 	// Find the route that matches this path
-	var route = self.findMatchingRoute(request,state);
+	var route = this.findMatchingRoute(request,state);
 
 	// If the route is configured to use ACL middleware, check that the user has permission
 	if(route?.useACL) {
@@ -480,14 +561,14 @@ Server.prototype.requestHandler = function(request,response,options) {
 	}
 	
 	// Optionally output debug info
-	if(self.get("debug-level") !== "none") {
+	if(this.get("debug-level") !== "none") {
 		console.log("Request path:",JSON.stringify(state.urlInfo));
 		console.log("Request headers:",JSON.stringify(request.headers));
 		console.log("authenticatedUsername:",state.authenticatedUsername);
 	}
 	
 	// Return a 404 if we didn't find a route
-	if(!route && !response.headersSent) {
+	if(!route) {
 		response.writeHead(404);
 		response.end();
 		return;
@@ -503,30 +584,38 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Receive the request body if necessary and hand off to the route handler
 	if(route.bodyFormat === "stream" || request.method === "GET" || request.method === "HEAD") {
 		// Let the route handle the request stream itself
-		route.handler(request,response,state);
+		await route.handler(request,response,state);
 	} else if(route.bodyFormat === "string" || route.bodyFormat === "www-form-urlencoded" || !route.bodyFormat) {
 		// Set the encoding for the incoming request
 		request.setEncoding("utf8");
-		var data = "";
-		request.on("data",function(chunk) {
-			data += chunk.toString();
-		});
-		request.on("end",function() {
-			if(route.bodyFormat === "www-form-urlencoded") {
-				data = queryString.parse(data);
-			}
-			state.data = data;
-			route.handler(request,response,state);
-		});
-	} else if(route.bodyFormat === "buffer") {
-		var data = [];
-		request.on("data",function(chunk) {
-			data.push(chunk);
-		});
-		request.on("end",function() {
-			state.data = Buffer.concat(data);
-			route.handler(request,response,state);
-		})
+		await /** @type {Promise<void>} */(new Promise((resolve) => {
+			/** @type {any} */
+			var data = "";
+			request.on("data", function (chunk) {
+				data += chunk.toString();
+			});
+			request.on("end", function () {
+				if (route.bodyFormat === "www-form-urlencoded") {
+					data = queryString.parse(data);
+				}
+				state.data = data;
+				resolve();
+			});
+		}));
+		await route.handler(request,response,state);
+	} else if (route.bodyFormat === "buffer") {
+		await /** @type {Promise<void>} */(new Promise((resolve) => {
+			/** @type {any} */
+			var data = [];
+			request.on("data", function (chunk) {
+				data.push(chunk);
+			});
+			request.on("end", function () {
+				state.data = Buffer.concat(data);
+				resolve();
+			})
+		}));
+		await route.handler(request, response, state);
 	} else {
 		response.writeHead(400,"Invalid bodyFormat " + route.bodyFormat + " in route " + route.method + " " + route.path.source);
 		response.end();
@@ -541,6 +630,8 @@ prefix: optional prefix (falls back to value of "path-prefix" variable)
 callback: optional callback(err) to be invoked when the listener is up and running
 */
 Server.prototype.listen = function(port,host,prefix,options) {
+	const { ok } = require("assert");
+
 	var self = this;
 	// Handle defaults for port and host
 	port = port || this.get("port");
@@ -563,6 +654,7 @@ Server.prototype.listen = function(port,host,prefix,options) {
 		$tw.utils.warning(error);
 	}
 	// Create the server
+	require("https").createServer
 	var server = this.transport.createServer(this.listenOptions || {},function(request,response,options) {
 		if(self.get("debug-level") !== "none") {
 			var start = $tw.utils.timer();
@@ -570,7 +662,7 @@ Server.prototype.listen = function(port,host,prefix,options) {
 				console.log("Response time:",request.method,request.url,$tw.utils.timer() - start);
 			});	
 		}
-		self.requestHandler(request,response,options);
+		void self.requestHandler(request,response,options);
 	});
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
 	server.on("listening",function() {
@@ -579,8 +671,9 @@ Server.prototype.listen = function(port,host,prefix,options) {
 			server.close();
 		});
 		// Log listening details
-		var address = server.address(),
-			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix;
+		var address = server.address();
+		ok(typeof address === "object", "Expected server.address() to return an object");
+		var url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix;
 		$tw.utils.log("Serving on " + url,"brown/orange");
 		$tw.utils.log("(press ctrl-C to exit)","red");
 		if(options.callback) {
@@ -592,5 +685,23 @@ Server.prototype.listen = function(port,host,prefix,options) {
 };
 
 exports.Server = Server;
+
+
+class ServerManager {
+	constructor() {
+		this.servers = [];
+	}
+
+	/**
+	 * @param {ServerOptions} options
+	 */
+	createServer(options) {
+		const server = new Server(options);
+		this.servers.push(server);
+		return server;
+	}
+}
+
+exports.ServerManager = ServerManager;
 
 })();

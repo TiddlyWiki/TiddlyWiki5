@@ -25,7 +25,7 @@ var Command = function(params,commander,callback) {
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = async function() {
 	var self = this;
 
 	if(this.params.length < 2) {
@@ -41,10 +41,10 @@ Command.prototype.execute = function() {
 	var email = this.params[2] || username + "@example.com";
 	var hashedPassword = crypto.createHash("sha256").update(password).digest("hex");
 
-	var user = $tw.mws.store.sqlTiddlerDatabase.getUserByUsername(username);
+	var user = await $tw.mws.store.sqlTiddlerDatabase.getUserByUsername(username);
 
 	if(!user) {
-		$tw.mws.store.sqlTiddlerDatabase.createUser(username, email, hashedPassword);
+		await $tw.mws.store.sqlTiddlerDatabase.createUser(username, email, hashedPassword);
 		console.log("User Account Created Successfully with username: " + username + " and password: " + password);
 		self.callback();
 	}

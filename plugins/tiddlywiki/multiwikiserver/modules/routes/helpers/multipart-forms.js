@@ -19,6 +19,15 @@ response - provided by server.js
 bag_name - name of bag to write to
 callback - invoked as callback(err,results). Results is an array of titles of imported tiddlers
 */
+/**
+ * 
+ * @param {Object} options 
+ * @param {SqlTiddlerStore} options.store
+ * @param {ServerState} options.state
+ * @param {ServerResponse} options.response
+ * @param {string} options.bag_name
+ * @param {function} options.callback
+ */
 exports.processIncomingStream = function(options) {
 	const self = this;
 	const path = require("path"),
@@ -72,7 +81,7 @@ exports.processIncomingStream = function(options) {
 			} else {
 				const partFile = parts.find(part => part.name === "file-to-upload" && !!part.filename);
 				if(!partFile) {
-					return state.sendResponse(400, {"Content-Type": "text/plain"},"Missing file to upload");
+					return options.state.sendResponse(400, {"Content-Type": "text/plain"},"Missing file to upload");
 				}
 				const type = partFile.headers["content-type"];
 				const tiddlerFields = {
@@ -89,9 +98,12 @@ exports.processIncomingStream = function(options) {
 					filepath: partFile.inboxFilename,
 					type: type,
 					hash: partFile.hash
+				}).then(() => {
+					$tw.utils.deleteDirectory(inboxPath);
+					options.callback(null,[tiddlerFields.title]);
+				}, err => {
+					options.callback(err);
 				});
-				$tw.utils.deleteDirectory(inboxPath);
-				options.callback(null,[tiddlerFields.title]);
 			}
 		}
 	});

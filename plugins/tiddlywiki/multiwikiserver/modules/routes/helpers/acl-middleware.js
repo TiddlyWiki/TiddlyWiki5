@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js
+title: $:/plugins/tiddlywiki/multiwikiserver/routes/helpers/acl-middleware.js
 type: application/javascript
 module-type: library
 
@@ -19,17 +19,17 @@ ACL Middleware factory function
 function redirectToLogin(response, returnUrl) {
 	if(!response.headersSent) {
 		var validReturnUrlRegex = /^\/(?!.*\.(ico|png|jpg|jpeg|gif|svg|css|js|woff|woff2|ttf|eot|json)$).*$/;
-		var sanitizedReturnUrl = '/';  // Default to home page
+		var sanitizedReturnUrl = "/";  // Default to home page
 
 		if(validReturnUrlRegex.test(returnUrl)) {
 			sanitizedReturnUrl = returnUrl;
-			response.setHeader('Set-Cookie', `returnUrl=${encodeURIComponent(sanitizedReturnUrl)}; HttpOnly; Secure; SameSite=Strict; Path=/`);			
-		} else{
+			response.setHeader("Set-Cookie", `returnUrl=${encodeURIComponent(sanitizedReturnUrl)}; HttpOnly; Secure; SameSite=Strict; Path=/`);			
+		} else {
 			console.log(`Invalid return URL detected: ${returnUrl}. Redirecting to home page.`);
 		}
-		const loginUrl = '/login';
+		const loginUrl = "/login";
 		response.writeHead(302, {
-			'Location': loginUrl
+			"Location": loginUrl
 		});
 		response.end();
 	}
@@ -60,8 +60,8 @@ exports.middleware = function (request, response, state, entityType, permissionN
 	if(entity?.owner_id) {
 		if(state.authenticatedUser?.user_id && (state.authenticatedUser?.user_id !== entity.owner_id) || !state.authenticatedUser?.user_id && !hasAnonymousAccess) {
 			const hasPermission = state.authenticatedUser?.user_id ? 
-				entityType === 'recipe' ? sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, decodedEntityName, isGetRequest ? 'READ' : 'WRITE')
-				: sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, decodedEntityName, isGetRequest ? 'READ' : 'WRITE')
+				entityType === "recipe" ? sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, decodedEntityName, isGetRequest ? "READ" : "WRITE")
+				: sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, decodedEntityName, isGetRequest ? "READ" : "WRITE")
 				: false
 			if(!response.headersSent && !hasPermission) {
 				response.writeHead(403, "Forbidden");
@@ -84,7 +84,7 @@ exports.middleware = function (request, response, state, entityType, permissionN
 			if(aclRecord && aclRecord?.permission_id === permission?.permission_id) {
 				// If not authenticated and anonymous access is not allowed, request authentication
 				if(!state.authenticatedUsername && !state.allowAnon) {
-					if(state.urlInfo.pathname !== '/login') {
+					if(state.urlInfo.pathname !== "/login") {
 						redirectToLogin(response, request.url);
 						return;
 					}

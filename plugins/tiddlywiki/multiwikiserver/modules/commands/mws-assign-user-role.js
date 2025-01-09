@@ -23,7 +23,7 @@ var Command = function(params,commander,callback) {
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = async function() {
 	var self = this;
 
 	if(this.params.length < 2) {
@@ -36,8 +36,8 @@ Command.prototype.execute = function() {
 
 	var username = this.params[0];
 	var role_name = this.params[1];
-	var role = $tw.mws.store.sqlTiddlerDatabase.getRoleByName(role_name);
-	var user = $tw.mws.store.sqlTiddlerDatabase.getUserByUsername(username);
+	var role = await $tw.mws.store.sqlTiddlerDatabase.getRoleByName(role_name);
+	var user = await $tw.mws.store.sqlTiddlerDatabase.getUserByUsername(username);
 	
 	if(!role) {
 		return "Error: Unable to find Role: "+role_name;
@@ -47,7 +47,7 @@ Command.prototype.execute = function() {
 		return "Error: Unable to find user with the username "+username;
 	}
 
-	$tw.mws.store.sqlTiddlerDatabase.addRoleToUser(user.user_id, role.role_id);
+	await $tw.mws.store.sqlTiddlerDatabase.addRoleToUser(user.user_id, role.role_id);
 
 	console.log(role_name+" role has been assigned to user with username "+username)
 	self.callback();

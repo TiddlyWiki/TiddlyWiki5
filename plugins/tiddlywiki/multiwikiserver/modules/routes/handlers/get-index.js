@@ -15,28 +15,28 @@ GET /?show_system=true
 exports.method = "GET";
 
 exports.path = /^\/$/;
-
-exports.handler = function(request,response,state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function(request,response,state) {
 	// Get the bag and recipe information
-	var bagList = $tw.mws.store.listBags(),
-		recipeList = $tw.mws.store.listRecipes(),
+	var bagList = await $tw.mws.store.listBags(),
+		recipeList = await $tw.mws.store.listRecipes(),
 		sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
 
 	// If application/json is requested then this is an API request, and gets the response in JSON
 	if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
-		state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(recipes),"utf8");
+		state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(recipeList),"utf8");
 	} else {
 		// This is not a JSON API request, we should return the raw tiddler content
 		response.writeHead(200, "OK",{
 			"Content-Type":  "text/html"
 		});
 		// filter bags and recipies by user's read access from ACL
-		var allowedRecipes = recipeList.filter(recipe => recipe.recipe_name.startsWith("$:/") || state.authenticatedUser?.isAdmin || sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, recipe.recipe_name, 'READ') || state.allowAnon && state.allowAnonReads);
-		var allowedBags = bagList.filter(bag => bag.bag_name.startsWith("$:/") || state.authenticatedUser?.isAdmin || sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, bag.bag_name, 'READ') || state.allowAnon && state.allowAnonReads);
+		var allowedRecipes = recipeList.filter(recipe => recipe.recipe_name.startsWith("$:/") || state.authenticatedUser?.isAdmin || sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, recipe.recipe_name, "READ") || state.allowAnon && state.allowAnonReads);
+		var allowedBags = bagList.filter(bag => bag.bag_name.startsWith("$:/") || state.authenticatedUser?.isAdmin || sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, bag.bag_name, "READ") || state.allowAnon && state.allowAnonReads);
 		allowedRecipes = allowedRecipes.map(recipe => {
 			return {
 				...recipe,
-				has_acl_access: state.authenticatedUser?.isAdmin || recipe.owner_id === state.authenticatedUser?.user_id || sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, recipe.recipe_name, 'WRITE')
+				has_acl_access: state.authenticatedUser?.isAdmin || recipe.owner_id === state.authenticatedUser?.user_id || sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, recipe.recipe_name, "WRITE")
 			}
 		});
 		// Render the html

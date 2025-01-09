@@ -19,11 +19,11 @@ exports.path = /^\/wiki\/([^\/]+)$/;
 exports.useACL = true;
 
 exports.entityName = "recipe"
-
-exports.handler = function(request,response,state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function(request,response,state) {
 	// Get the recipe name from the parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		recipeTiddlers = recipe_name && $tw.mws.store.getRecipeTiddlers(recipe_name);
+		recipeTiddlers = recipe_name && await $tw.mws.store.getRecipeTiddlers(recipe_name);
 	// Check request is valid
 	if(recipe_name && recipeTiddlers) {
 		// Start the response
@@ -47,7 +47,7 @@ exports.handler = function(request,response,state) {
 			}
 		});
 		// Splice in our tiddlers
-		var marker = `<` + `script class="tiddlywiki-tiddler-store" type="application/json">[`,
+		var marker = "<" + "script class=\"tiddlywiki-tiddler-store\" type=\"application/json\">[",
 			markerPos = template.indexOf(marker);
 		if(markerPos === -1) {
 			throw new Error("Cannot find tiddler store in template");
@@ -58,15 +58,21 @@ exports.handler = function(request,response,state) {
 		}
 		response.write(template.substring(0,markerPos + marker.length));
 		const bagInfo = {},
-			revisionInfo = {};
-		$tw.utils.each(recipeTiddlers,function(recipeTiddlerInfo) {
-			var result = $tw.mws.store.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
+			revisionInfo = {},
+			recipeTiddlerInfos = [];
+		
+		$tw.utils.each(recipeTiddlers, function(recipeTiddlerInfo) {
+			recipeTiddlerInfos.push(recipeTiddlerInfo);
+		});
+		for(const recipeTiddlerInfo of recipeTiddlerInfos){
+			var result = await $tw.mws.store.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
 			if(result) {
 				bagInfo[result.tiddler.title] = result.bag_name;
 				revisionInfo[result.tiddler.title] = result.tiddler_id.toString();
 				writeTiddler(result.tiddler);
 			}
-		});
+		}
+
 		writeTiddler({
 			title: "$:/state/multiwikiclient/tiddlers/bag",
 			text: JSON.stringify(bagInfo),
@@ -83,7 +89,7 @@ exports.handler = function(request,response,state) {
 		});
 		writeTiddler({
 			title: "$:/state/multiwikiclient/recipe/last_tiddler_id",
-			text: ($tw.mws.store.getRecipeLastTiddlerId(recipe_name) || 0).toString()
+			text: (await $tw.mws.store.getRecipeLastTiddlerId(recipe_name) || 0).toString()
 		});
 		response.write(template.substring(markerPos + marker.length))
 		// Finish response

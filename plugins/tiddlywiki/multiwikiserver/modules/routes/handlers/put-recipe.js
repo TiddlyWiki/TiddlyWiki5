@@ -19,13 +19,13 @@ exports.path = /^\/recipes\/(.+)$/;
 exports.useACL = true;
 
 exports.entityName = "recipe"
-
-exports.handler = function (request, response, state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function (request, response, state) {
 	// Get the  parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		data = $tw.utils.parseJSONSafe(state.data);
 	if(recipe_name && data) {
-		var result = $tw.mws.store.createRecipe(recipe_name, data.bag_names, data.description);
+		var result = await $tw.mws.store.createRecipe(recipe_name, data.bag_names, data.description);
 		if(!result) {
 			state.sendResponse(204, {
 				"Content-Type": "text/plain"
