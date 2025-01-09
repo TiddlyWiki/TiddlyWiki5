@@ -1,0 +1,27 @@
+created: 20151231083708980
+modified: 20241221105811581
+original-modified: 20211117212723856
+tags: Languages
+title: LanguageGallery Example
+ja-title: 言語ギャラリー
+type: text/vnd.tiddlywiki
+
+これは、ListWidgetとTranscludeWidgetを使用して、<<tag Language>>と<<tag Icon>>の[[タグ付け|Tagging]]された言語アイコンすべてをグリッド表示する例です。
+
+<style>
+.language-gallery img {
+width: 5em;
+height: auto;
+margin: 0.5em;
+-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    -moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+</style>
+<div class="language-gallery">
+<$list filter="[all[tiddlers+shadows]tag[Language]tag[Icon]]">
+<span title=<<currentTiddler>>>
+<$transclude/>
+</span>
+</$list>
+</div>

@@ -601,3 +601,7 @@ John Robinette, @jrbntt, 2024/11/25
 @DesignThinkerer, 2024/12/02
 
 Thomas E Tuoti, @well-noted, 2024/12/16
+
+@opn, 2025/01/04
+
+J. Ryan Stinnett, @jryans, 2025/01/04
