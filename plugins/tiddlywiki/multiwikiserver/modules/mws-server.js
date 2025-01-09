@@ -20,7 +20,7 @@ if($tw.node) {
 		querystring = require("querystring"),
 		crypto = require("crypto"),
 		zlib = require("zlib"),
-		aclMiddleware = require('$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js').middleware;
+		aclMiddleware = require('$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/acl-middleware.js').middleware;
 }
 
 /*
@@ -432,7 +432,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 
 	// Authenticate the user
 	const authenticatedUser = this.authenticateUser(request, response);
-	const authenticatedUsername = authenticatedUser?.username;
+	const authenticatedUsername = authenticatedUser && authenticatedUser.username;
 
 	// Compose the state object
 	var self = this;
