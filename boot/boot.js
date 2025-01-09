@@ -928,7 +928,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				moduleInfo.definition(moduleInfo,moduleInfo.exports,sandbox.require);
 			} else if(typeof moduleInfo.definition === "string") { // String
 				moduleInfo.exports = _exports;
-				$tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
+				$tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.filepath || tiddler.fields.title);
 				if(sandbox.module.exports) {
 					moduleInfo.exports = sandbox.module.exports; //more codemirror workaround
 				}
@@ -2117,6 +2117,9 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			var tiddlers = pluginFiles[f].tiddlers;
 			for(var t=0; t<tiddlers.length; t++) {
 				var tiddler= tiddlers[t];
+				if(typeof process !== "undefined" && process.env.NODE_DEV_PATH) {
+					tiddler.filepath = pluginFiles[f].filepath;
+				}
 				if(tiddler.title) {
 					pluginInfo.tiddlers[tiddler.title] = tiddler;
 				}
@@ -2584,7 +2587,7 @@ Execute the remaining eligible startup tasks
 $tw.boot.executeNextStartupTask = function(callback) {
 	// Find the next eligible task
 	var taskIndex = 0, task,
-		asyncTaskCallback = function() {
+		taskCallback = function() {
 			if(task.name) {
 				$tw.boot.executedStartupModules[task.name] = true;
 			}
@@ -2608,20 +2611,30 @@ $tw.boot.executeNextStartupTask = function(callback) {
 			}
 			$tw.boot.log(s.join(" "));
 			// Execute task
-			if(!$tw.utils.hop(task,"synchronous") || task.synchronous) {
-				task.startup();
-				if(task.name) {
-					$tw.boot.executedStartupModules[task.name] = true;
+			var isTaskSync = !$tw.utils.hop(task,"synchronous") || task.synchronous;
+			if(isTaskSync || task.startup.length === 0) {
+				var taskResult = task.startup();
+				if(taskResult && typeof taskResult.catch === "function") {
+					taskResult.catch(console.error.bind(console, task.name));
 				}
-				return $tw.boot.executeNextStartupTask(callback);
+				if(taskResult && typeof taskResult.then === "function"){
+					if(isTaskSync) $tw.utils.warning("Task "+task.name+" is returning a then-able, but is marked as synchronous, so we decided to await it.");
+					taskResult.then(taskCallback);
+				} else {
+					if(!isTaskSync) $tw.utils.warning("Task "+task.name+" is not returning a then-able, but is marked as asynchronous with zero arguments");
+					return taskCallback();
+				}
 			} else {
-				task.startup(asyncTaskCallback);
+				var taskResult = task.startup(taskCallback);
+				if(taskResult && typeof taskResult.catch === "function") {
+					taskResult.catch(console.error.bind(console, task.name));
+				}
 				return true;
 			}
 		}
 		taskIndex++;
 	}
-	if(typeof callback === 'function') {
+	if(typeof callback === "function") {
 		callback();
 	}
 	return false;
