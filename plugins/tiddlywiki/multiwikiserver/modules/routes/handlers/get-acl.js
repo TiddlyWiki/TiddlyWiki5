@@ -39,10 +39,17 @@ exports.handler = async function (request, response, state) {
 	var permissions = await state.server.sqlTiddlerDatabase.listPermissions();
 
 	// This ensures that the user attempting to view the ACL management page has permission to do so
-	if(!state.authenticatedUser?.isAdmin && 
-		!state.firstGuestUser &&
-		(!state.authenticatedUser || (recipeAclRecords.length > 0 && !await sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser.user_id, recipeName, "WRITE")))
-	){
+	async function canContinue() {
+		if(state.firstGuestUser) return true;
+		if(!state.authenticatedUser) return false;
+		if(state.authenticatedUser.isAdmin) return true;
+		if(recipeAclRecords.length === 0) return false;
+		return await sqlTiddlerDatabase.hasRecipePermission(
+			state.authenticatedUser.user_id, recipeName, "WRITE");
+	}
+
+	if(!await canContinue())
+	{
 		response.writeHead(403, "Forbidden");
 		response.end();
 		return

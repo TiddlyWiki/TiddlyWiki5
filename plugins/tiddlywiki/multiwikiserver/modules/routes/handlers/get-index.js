@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 /*\
 title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-index.js
 type: application/javascript
@@ -31,21 +32,43 @@ exports.handler = async function(request,response,state) {
 			"Content-Type":  "text/html"
 		});
 		// filter bags and recipies by user's read access from ACL
-		var allowedRecipes = recipeList.filter(recipe => recipe.recipe_name.startsWith("$:/") || state.authenticatedUser?.isAdmin || sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, recipe.recipe_name, 'READ') || state.allowAnon && state.allowAnonReads);
-		var allowedBags = bagList.filter(bag => bag.bag_name.startsWith("$:/") || state.authenticatedUser?.isAdmin || sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, bag.bag_name, 'READ') || state.allowAnon && state.allowAnonReads);
-		allowedRecipes = allowedRecipes.map(recipe => {
-			return {
-				...recipe,
-				has_acl_access: state.authenticatedUser?.isAdmin || recipe.owner_id === state.authenticatedUser?.user_id || sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, recipe.recipe_name, 'WRITE')
-			}
-		});
+		const allowedRecipes =await filterAsync(recipeList, async recipe =>
+			recipe.recipe_name.startsWith("$:/")
+			|| state.authenticatedUser?.isAdmin
+			|| await sqlTiddlerDatabase.hasRecipePermission(
+				state.authenticatedUser?.user_id,
+				recipe.recipe_name,
+				'READ'
+			)
+			|| state.allowAnon && state.allowAnonReads
+		);
+
+		const allowedBags = await filterAsync(bagList, async bag =>
+			bag.bag_name.startsWith("$:/")
+			|| state.authenticatedUser?.isAdmin
+			|| await sqlTiddlerDatabase.hasBagPermission(
+				state.authenticatedUser?.user_id,
+				bag.bag_name,
+				'READ'
+			)
+			|| state.allowAnon && state.allowAnonReads
+		);
+
+		const allowedRecipesWithWrite =  await mapAsync(allowedRecipes, async recipe => ({
+			...recipe,
+			has_acl_access: state.authenticatedUser?.isAdmin
+				|| recipe.owner_id === state.authenticatedUser?.user_id
+				|| await sqlTiddlerDatabase.hasRecipePermission(
+					state.authenticatedUser?.user_id, recipe.recipe_name, 'WRITE')
+		}))
+
 		// Render the html
 		var html = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{
 			variables: {
 				"show-system": state.queryParameters.show_system || "off",
 				"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/get-index",
 				"bag-list": JSON.stringify(allowedBags),
-				"recipe-list": JSON.stringify(allowedRecipes),
+				"recipe-list": JSON.stringify(allowedRecipesWithWrite),
 				"username": state.authenticatedUser ? state.authenticatedUser.username : state.firstGuestUser ? "Anonymous User" : "Guest",
 				"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no",
 				"first-guest-user": state.firstGuestUser ? "yes" : "no",
@@ -58,5 +81,38 @@ exports.handler = async function(request,response,state) {
 		response.end();
 	}
 };
+/**
+ * @template T
+ * @template U
+ * @template V
+ * @param {T[]} array 
+ * @param {(this: V, value: T, index: number, array: T[]) => U} callback 
+ * @param {V} [thisArg]
+ * @returns {Promise<U[]>}
+ */
+async function mapAsync (array, callback, thisArg) {
+	const results = new Array(array.length);
+	for (let index = 0; index < array.length; index++) {
+		results[index] = await callback.call(thisArg, array[index], index, array);
+	}
+	return results;
+};
+/**
+ * @template T
+ * @template U
+ * @param {T[]} array
+ * @param {(this: U, value: T, index: number, array: T[]) => Promise<boolean>} callback
+ * @param {U} [thisArg]
+ * @returns {Promise<T[]>}
+ */
+async function filterAsync (array, callback, thisArg) {
+	const results = [];
+	for (let index = 0; index < array.length; index++) {
+		if (await callback.call(thisArg, array[index], index, array)) {
+			results.push(array[index]);
+		}
+	}
+	return results;
+}
 
 }());
