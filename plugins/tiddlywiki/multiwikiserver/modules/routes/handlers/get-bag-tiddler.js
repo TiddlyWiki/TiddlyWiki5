@@ -16,7 +16,7 @@ fallback=<url> // Optional redirect if the tiddler is not found
 /*global $tw: false */
 "use strict";
 
-var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js").middleware;
+var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/acl-middleware.js").middleware;
 
 exports.method = "GET";
 

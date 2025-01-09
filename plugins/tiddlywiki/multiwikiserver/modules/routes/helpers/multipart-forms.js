@@ -72,7 +72,7 @@ exports.processIncomingStream = function(options) {
 			} else {
 				const partFile = parts.find(part => part.name === "file-to-upload" && !!part.filename);
 				if(!partFile) {
-					return state.sendResponse(400, {"Content-Type": "text/plain"},"Missing file to upload");
+					return options.state.sendResponse(400, {"Content-Type": "text/plain"},"Missing file to upload");
 				}
 				const type = partFile.headers["content-type"];
 				const tiddlerFields = {

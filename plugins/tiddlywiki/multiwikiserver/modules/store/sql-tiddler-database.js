@@ -885,7 +885,7 @@ SqlTiddlerDatabase.prototype.listUsersByRoleId = function(roleId) {
 };
 
 SqlTiddlerDatabase.prototype.updateUser = function (userId, username, email, roleId) {
-	const existingUser = this.engine.runStatement(`
+	const existingUser = this.engine.runStatementGet(`
 		SELECT user_id FROM users
 		WHERE email = $email AND user_id != $userId
 `, {
