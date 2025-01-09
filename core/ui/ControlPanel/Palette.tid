@@ -4,11 +4,18 @@ caption: {{$:/language/ControlPanel/Palette/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Palette/
 
-{{$:/snippets/paletteswitcher}}
+<$transclude $tiddler="$:/snippets/paletteswitcher" thumbnails="yes"/>
 
-<$let paletteEditor={{{ [{$:/palette}get[editor]] :else[{$:/palette}get[palette-import]!match[]get[editor]] }}}>
+{{$:/snippets/palettetests}}
+
+<$let
+	paletteEditor={{{ [{$:/palette}get[editor]] :else[{$:/palette}get[palette-import]!match[]get[editor]] }}}
+>
 	<%if [<paletteEditor>!match[]] %>
-		<$transclude $tiddler=<<paletteEditor>> $mode="block"/>
+		<div>
+			<<lingo CustomEditor/Prompt>>
+			<$transclude $tiddler=<<paletteEditor>> $mode="block"/>
+		</div>
 	<%endif%>
 </$let>
 

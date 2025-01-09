@@ -1,26 +1,25 @@
 title: $:/snippets/paletteswitcher
 
+\parameters (thumbnails)
+
 \whitespace trim
 \procedure actions()
 <$transclude $variable="actions-switch-colour-palette" paletteTitle=<<navigateTo>>/>
 \end actions
 
 <$linkcatcher actions=<<actions>>>
-	<div class="tc-chooser tc-chooser-cards">
+	<div class={{{ tc-chooser [<thumbnails>match[yes]then[tc-chooser-cards]] +[join[ ]] }}}>
 		<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]]">
 			<div class={{{ [<currentTiddler>match{$:/palette}then[tc-chosen]] tc-chooser-item +[join[ ]] }}}>
 				<$link to={{!!title}} aria-label=`${[[$:/language/ControlPanel/Palette/Caption]get[text]]}$ - ${[all[current]get[name]]}$. ${[all[current]get[description]]}$`>
-					{{||$:/snippets/currpalettepreview}}
-					<div class="tc-chooser-item-description">
-						''<$view field="name" format="text"/>''
-						<div class="tc-chooser-item-subtitle">
-							<$view field="description" format="text"/>
-						</div>
-					</div>
+					<%if [<thumbnails>match[yes]] %>
+						{{||$:/snippets/currpalettepreview}}
+					<%endif%>
+					''<$view field="name" format="text"/>''
+					<br>
+					<$view field="description" format="text"/>
 				</$link>
 			</div>
 		</$list>
 	</div>
 </$linkcatcher>
-
-{{$:/snippets/palettetests}}
