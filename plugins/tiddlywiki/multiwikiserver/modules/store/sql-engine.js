@@ -9,7 +9,8 @@ This class is intended to encapsulate all engine-specific logic.
 
 \*/
 
-(function() {
+(function () {
+	
 
 /*
 Create a database engine. Options include:
@@ -17,14 +18,17 @@ Create a database engine. Options include:
 databasePath - path to the database file (can be ":memory:" or missing to get a temporary database)
 engine - wasm | better
 */
-function SqlEngine(options) {
+class SqlEngine {
+constructor(options) {
 	options = options || {};
 	// Initialise transaction mechanism
 	this.transactionDepth = 0;
 	// Initialise the statement cache
 	this.statements = Object.create(null); // Hashmap by SQL text of statement objects
+
 	// Choose engine
 	this.engine = options.engine || "node"; // node | wasm | better
+
 	// Create the database file directories if needed
 	if(options.databasePath) {
 		$tw.utils.createFileDirectories(options.databasePath);
@@ -43,7 +47,7 @@ function SqlEngine(options) {
 			Database = require("better-sqlite3");
 			break;
 	}
-	this.db = new Database(databasePath,{
+	this.db = new Database(databasePath, {
 		verbose: undefined && console.log
 	});
 	// Turn on WAL mode for better-sqlite3
@@ -53,18 +57,18 @@ function SqlEngine(options) {
 	}
 }
 
-SqlEngine.prototype.close = function() {
+async close() {
 	for(const sql in this.statements) {
 		if(this.statements[sql].finalize) {
-			this.statements[sql].finalize();
+			await this.statements[sql].finalize();
 		}
 	}
 	this.statements = Object.create(null);
 	this.db.close();
 	this.db = undefined;
-};
+}
 
-SqlEngine.prototype.normaliseParams = function(params) {
+normaliseParams(params) {
 	params = params || {};
 	const result = Object.create(null);
 	for(const paramName in params) {
@@ -75,67 +79,88 @@ SqlEngine.prototype.normaliseParams = function(params) {
 		}
 	}
 	return result;
-};
+}
 
-SqlEngine.prototype.prepareStatement = function(sql) {
+async prepareStatement(sql) {
 	if(!(sql in this.statements)) {
-		this.statements[sql] = this.db.prepare(sql);
+		// node:sqlite supports bigint, causing an error here
+		this.statements[sql] = await this.db.prepare(sql);
 	}
 	return this.statements[sql];
-};
+}
 
-SqlEngine.prototype.runStatement = function(sql,params) {
+/**
+ * @returns  {Promise<import("better-sqlite3").RunResult>}
+ */
+async runStatement(sql, params) {
 	params = this.normaliseParams(params);
-	const statement = this.prepareStatement(sql);
-	return statement.run(params);
-};
+	const statement = await this.prepareStatement(sql);
+	return await statement.run(params);
+}
 
-SqlEngine.prototype.runStatementGet = function(sql,params) {
+/**
+ * @param {string} sql
+ * @returns  {Promise<any>}
+ */
+async runStatementGet(sql, params) {
 	params = this.normaliseParams(params);
-	const statement = this.prepareStatement(sql);
-	return statement.get(params);
-};
+	const statement = await this.prepareStatement(sql);
+	return await statement.get(params);
+}
 
-SqlEngine.prototype.runStatementGetAll = function(sql,params) {
+/**
+ * @returns  {Promise<any[]>}
+ */
+async runStatementGetAll(sql, params) {
 	params = this.normaliseParams(params);
-	const statement = this.prepareStatement(sql);
-	return statement.all(params);
-};
+	const statement = await this.prepareStatement(sql);
+	return await statement.all(params);
+}
 
-SqlEngine.prototype.runStatements = function(sqlArray) {
+/**
+ * @returns  {Promise<import("better-sqlite3").RunResult[]>}
+ */
+async runStatements(sqlArray) {
+	const res = [];
 	for(const sql of sqlArray) {
-		this.runStatement(sql);
+		res.push(await this.runStatement(sql));
 	}
-};
+	return res;
+}
 
-/*
+/**
 Execute the given function in a transaction, committing if successful but rolling back if an error occurs.  Returns whatever the given function returns.
 
 Calls to this function can be safely nested, but only the topmost call will actually take place in a transaction.
 
 TODO: better-sqlite3 provides its own transaction method which we should be using if available
+
+@param {() => Promise<T>} fn - function to execute in the transaction
+@returns {Promise<T>} - the result
+@template T
 */
-SqlEngine.prototype.transaction = function(fn) {
+async transaction(fn) {
 	const alreadyInTransaction = this.transactionDepth > 0;
 	this.transactionDepth++;
-        try {
+	try {
 		if(alreadyInTransaction) {
-			return fn();
+			return await fn();
 		} else {
-			this.runStatement(`BEGIN TRANSACTION`);
+			await this.runStatement("BEGIN TRANSACTION");
 			try {
-				var result = fn();
-				this.runStatement(`COMMIT TRANSACTION`);
+				var result = await fn();
+				await this.runStatement("COMMIT TRANSACTION");
 			} catch(e) {
-				this.runStatement(`ROLLBACK TRANSACTION`);
-				throw(e);
+				await this.runStatement("ROLLBACK TRANSACTION");
+				throw (e);
 			}
 			return result;
 		}
-	} finally {
+	} finally{
 		this.transactionDepth--;
 	}
-};
+}
+}
 
 exports.SqlEngine = SqlEngine;
 
