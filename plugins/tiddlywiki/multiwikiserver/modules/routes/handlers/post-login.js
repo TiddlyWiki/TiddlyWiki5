@@ -16,7 +16,7 @@ password
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
-var authenticator = require('$:/plugins/tiddlywiki/multiwikiserver/auth/authentication.js').Authenticator;
+var authenticator = require("$:/plugins/tiddlywiki/multiwikiserver/auth/authentication.js").Authenticator;
 
 exports.method = "POST";
 
@@ -25,12 +25,12 @@ exports.path = /^\/login$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-
-exports.handler = function(request,response,state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function(request,response,state) {
 	var auth = authenticator(state.server.sqlTiddlerDatabase);
 	var username = state.data.username;
 	var password = state.data.password;
-	var user = state.server.sqlTiddlerDatabase.getUserByUsername(username);
+	var user = await state.server.sqlTiddlerDatabase.getUserByUsername(username);
 	var isPasswordValid = auth.verifyPassword(password, user ? user.password : null)
 
 	if(user && isPasswordValid) {

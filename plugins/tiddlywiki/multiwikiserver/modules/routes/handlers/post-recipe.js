@@ -29,15 +29,15 @@ exports.csrfDisable = true;
 exports.useACL = true;
 
 exports.entityName = "recipe"
-
-exports.handler = function(request,response,state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function(request,response,state) {
 	var server = state.server,
 		sqlTiddlerDatabase = server.sqlTiddlerDatabase
 	if(state.data.recipe_name && state.data.bag_names) {
-		const result = $tw.mws.store.createRecipe(state.data.recipe_name,$tw.utils.parseStringArray(state.data.bag_names),state.data.description);
+		const result = await $tw.mws.store.createRecipe(state.data.recipe_name,$tw.utils.parseStringArray(state.data.bag_names),state.data.description);
 		if(!result) {
 			if(state.authenticatedUser) {
-				sqlTiddlerDatabase.assignRecipeToUser(state.data.recipe_name,state.authenticatedUser.user_id);
+				await sqlTiddlerDatabase.assignRecipeToUser(state.data.recipe_name,state.authenticatedUser.user_id);
 			}
 			state.sendResponse(302,{
 				"Content-Type": "text/plain",

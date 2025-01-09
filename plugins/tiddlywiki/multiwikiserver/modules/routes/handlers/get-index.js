@@ -15,16 +15,16 @@ GET /?show_system=true
 exports.method = "GET";
 
 exports.path = /^\/$/;
-
-exports.handler = function(request,response,state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function(request,response,state) {
 	// Get the bag and recipe information
-	var bagList = $tw.mws.store.listBags(),
-		recipeList = $tw.mws.store.listRecipes(),
+	var bagList = await $tw.mws.store.listBags(),
+		recipeList = await $tw.mws.store.listRecipes(),
 		sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
 
 	// If application/json is requested then this is an API request, and gets the response in JSON
 	if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
-		state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(recipes),"utf8");
+		state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(recipeList),"utf8");
 	} else {
 		// This is not a JSON API request, we should return the raw tiddler content
 		response.writeHead(200, "OK",{

@@ -20,21 +20,20 @@ exports.info = {
 var Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
-	this.callback = callback;
+	// this.callback = callback;
 };
 
-Command.prototype.execute = function() {
-	var self = this;
+Command.prototype.execute = async function() {
 	// Check parameters
 	if(this.params.length < 1) {
 		return "Missing pathname";
 	}
 	var archivePath = this.params[0];
-	loadBackupArchive(archivePath);
+	await loadBackupArchive(archivePath);
 	return null;
 };
 
-function loadBackupArchive(archivePath) {
+async function loadBackupArchive(archivePath) {
 	const fs = require("fs"),
 	path = require("path");
 	// Iterate the bags
@@ -43,7 +42,7 @@ function loadBackupArchive(archivePath) {
 		const bagName = decodeURIComponent(bagFilename);
 		console.log(`Reading bag ${bagName}`);
 		const bagInfo = JSON.parse(fs.readFileSync(path.resolve(archivePath,"bags",bagFilename,"meta.json"),"utf8"));
-		$tw.mws.store.createBag(bagName,bagInfo.description,bagInfo.accesscontrol);
+		await $tw.mws.store.createBag(bagName,bagInfo.description,bagInfo.accesscontrol);
 		if(fs.existsSync(path.resolve(archivePath,"bags",bagFilename,"tiddlers"))) {
 			const tiddlerFilenames = fs.readdirSync(path.resolve(archivePath,"bags",bagFilename,"tiddlers"));
 			for(const tiddlerFilename of tiddlerFilenames) {
@@ -52,7 +51,7 @@ function loadBackupArchive(archivePath) {
 						jsonTiddler = fs.readFileSync(tiddlerPath,"utf8"),
 						tiddler = sanitiseTiddler(JSON.parse(jsonTiddler));
 					if(tiddler && tiddler.title) {
-						$tw.mws.store.saveBagTiddler(tiddler,bagName);
+						await $tw.mws.store.saveBagTiddler(tiddler,bagName);
 					} else {
 						console.log(`Malformed JSON tiddler in file ${tiddlerPath}`);
 					}
@@ -66,7 +65,7 @@ function loadBackupArchive(archivePath) {
 		if(recipeFilename.endsWith(".json")) {
 			const recipeName = decodeURIComponent(recipeFilename.substring(0,recipeFilename.length - ".json".length));
 			const jsonInfo = JSON.parse(fs.readFileSync(path.resolve(archivePath,"recipes",recipeFilename),"utf8"));
-			$tw.mws.store.createRecipe(recipeName,jsonInfo.bag_names,jsonInfo.description,jsonInfo.accesscontrol);
+			await $tw.mws.store.createRecipe(recipeName,jsonInfo.bag_names,jsonInfo.description,jsonInfo.accesscontrol);
 		}
 	}
 };

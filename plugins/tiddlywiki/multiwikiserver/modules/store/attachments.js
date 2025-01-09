@@ -34,7 +34,8 @@ Class to handle an attachment store. Options include:
 
 storePath - path to the store
 */
-function AttachmentStore(options) {
+class AttachmentStore {
+constructor(options) {
 	options = options || {};
 	this.storePath = options.storePath;
 }
@@ -42,10 +43,10 @@ function AttachmentStore(options) {
 /*
 Check if an attachment name is valid
 */
-AttachmentStore.prototype.isValidAttachmentName = function(attachment_name) {
-    const re = new RegExp('^[a-f0-9]{64}$');
+isValidAttachmentName(attachment_name) {
+	const re = new RegExp("^[a-f0-9]{64}$");
 	return re.test(attachment_name);
-};
+}
 
 /*
 Saves an attachment to a file. Options include:
@@ -55,9 +56,8 @@ type: MIME type of content
 reference: reference to use for debugging
 _canonical_uri: canonical uri of the content
 */
-AttachmentStore.prototype.saveAttachment = function(options) {
-	const path = require("path"),
-		fs = require("fs");
+saveAttachment(options) {
+	const path = require("path"), fs = require("fs");
 	// Compute the content hash for naming the attachment
 	const contentHash = $tw.sjcl.codec.hex.fromBits($tw.sjcl.hash.sha256.hash(options.text)).slice(0,64).toString();
 	// Choose the best file extension for the attachment given its type
@@ -78,14 +78,13 @@ AttachmentStore.prototype.saveAttachment = function(options) {
 		type: options.type
 	},null,4));
 	return contentHash;
-};
+}
 
 /*
 Adopts an attachment file into the store
 */
-AttachmentStore.prototype.adoptAttachment = function(incomingFilepath,type,hash,_canonical_uri) {
-	const path = require("path"),
-		fs = require("fs");
+adoptAttachment(incomingFilepath, type, hash, _canonical_uri) {
+	const path = require("path"), fs = require("fs");
 	// Choose the best file extension for the attachment given its type
 	const contentTypeInfo = $tw.config.contentTypeInfo[type] || $tw.config.contentTypeInfo["application/octet-stream"];
 	// Creat the attachment directory
@@ -105,16 +104,15 @@ AttachmentStore.prototype.adoptAttachment = function(incomingFilepath,type,hash,
 		type: type
 	},null,4));
 	return hash;
-};
+}
 
 /*
 Get an attachment ready to stream. Returns null if there is an error or:
 stream: filestream of file
 type: type of file
 */
-AttachmentStore.prototype.getAttachmentStream = function(attachment_name) {
-	const path = require("path"),
-		fs = require("fs");
+getAttachmentStream(attachment_name) {
+	const path = require("path"), fs = require("fs");
 	// Check the attachment name
 	if(this.isValidAttachmentName(attachment_name)) {
 		// Construct the path to the attachment directory
@@ -138,15 +136,14 @@ AttachmentStore.prototype.getAttachmentStream = function(attachment_name) {
 	}
 	// An error occured
 	return null;
-};
+}
 
 /*
 Get the size of an attachment file given the contentHash.
 Returns the size in bytes, or null if the file doesn't exist.
 */
-AttachmentStore.prototype.getAttachmentFileSize = function(contentHash) {
-	const path = require("path"),
-		fs = require("fs");
+getAttachmentFileSize(contentHash) {
+	const path = require("path"), fs = require("fs");
 	// Construct the path to the attachment directory
 	const attachmentPath = path.resolve(this.storePath, "files", contentHash);
 	// Read the meta.json file
@@ -163,11 +160,10 @@ AttachmentStore.prototype.getAttachmentFileSize = function(contentHash) {
 	}
 	// Return null if the file doesn't exist or there was an error
 	return null;
-};
+}
 
-AttachmentStore.prototype.getAttachmentMetadata = function(attachmentBlob) {
-	const path = require("path"),
-		fs = require("fs");
+getAttachmentMetadata(attachmentBlob) {
+	const path = require("path"), fs = require("fs");
 	const attachmentPath = path.resolve(this.storePath, "files", attachmentBlob);
 	const metaJsonPath = path.resolve(attachmentPath, "meta.json");
 	if(fs.existsSync(metaJsonPath)) {
@@ -175,7 +171,9 @@ AttachmentStore.prototype.getAttachmentMetadata = function(attachmentBlob) {
 		return metadata;
 	}
 	return null;
-};
+}
+}
+
 exports.AttachmentStore = AttachmentStore;
 
 })();

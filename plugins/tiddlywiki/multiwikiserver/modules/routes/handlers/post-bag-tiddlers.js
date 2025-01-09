@@ -23,8 +23,9 @@ exports.csrfDisable = true;
 exports.useACL = true;
 
 exports.entityName = "bag"
-
-exports.handler = function(request,response,state) {
+/** @type {ServerRouteHandler} */	
+// eslint-disable-next-line require-await
+exports.handler = async function(request,response,state) {
 	const path = require("path"),
 		fs = require("fs"),
 		processIncomingStream = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/multipart-forms.js").processIncomingStream;

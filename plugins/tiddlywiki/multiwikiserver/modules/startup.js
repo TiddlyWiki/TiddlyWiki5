@@ -16,43 +16,29 @@ Multi wiki server initialisation
 exports.name = "multiwikiserver";
 exports.platforms = ["node"];
 exports.before = ["story"];
-exports.synchronous = true;
+exports.synchronous = false;
 
-exports.startup = function() {
-	const store = setupStore();
-	$tw.mws = {
-		store: store,
-		serverManager: new ServerManager({
-			store: store
-		})
-	};
-}
-
-function setupStore() {
+exports.startup = async function() {
 	const path = require("path");
 	// Create and initialise the attachment store and the tiddler store
-	const AttachmentStore = require("$:/plugins/tiddlywiki/multiwikiserver/store/attachments.js").AttachmentStore,
-		attachmentStore = new AttachmentStore({
-			storePath: path.resolve($tw.boot.wikiPath,"store/")
-		}),
-		SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-store.js").SqlTiddlerStore,
-		store = new SqlTiddlerStore({
-			databasePath: path.resolve($tw.boot.wikiPath,"store/database.sqlite"),
-			engine: $tw.wiki.getTiddlerText("$:/config/MultiWikiServer/Engine","better"), // better || wasm
-			attachmentStore: attachmentStore
-		});
-	return store;
-}
+	const { AttachmentStore } = require("$:/plugins/tiddlywiki/multiwikiserver/store/attachments.js")
+	const attachmentStore = new AttachmentStore({
+		storePath: path.resolve($tw.boot.wikiPath, "store/")
+	});
+	
+	const { SqlTiddlerStore } = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-store.js");
+	const store = new SqlTiddlerStore({
+		databasePath: path.resolve($tw.boot.wikiPath, "store/database.sqlite"),
+		engine: $tw.wiki.getTiddlerText("$:/config/MultiWikiServer/Engine", "better"), // better || wasm
+		attachmentStore: attachmentStore
+	});
+	await store.initCheck();
 
-function ServerManager(store) {
-	this.servers = [];
-}
-
-ServerManager.prototype.createServer = function(options) {
-	const MWSServer = require("$:/plugins/tiddlywiki/multiwikiserver/mws-server.js").Server,
-		server = new MWSServer(options);
-	this.servers.push(server);
-	return server;
+	const { ServerManager } = require("$:/plugins/tiddlywiki/multiwikiserver/mws-server.js");
+	const serverManager = new ServerManager();
+	
+	$tw.mws = { store, serverManager };
+	
 }
 
 })();

@@ -15,13 +15,13 @@ GET /admin/manage-roles
 exports.method = "GET";
 
 exports.path = /^\/admin\/roles\/?$/;
-
-exports.handler = function(request, response, state) {
-	if (request.url.includes("*")) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function(request, response, state) {
+	if(request.url.includes("*")) {
 		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-role/error");
 		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-role/success");
 	}
-	var roles = state.server.sqlTiddlerDatabase.listRoles();
+	var roles = await state.server.sqlTiddlerDatabase.listRoles();
 	var editRoleId = request.url.includes("?") ? request.url.split("?")[1]?.split("=")[1] : null;
 	var editRole = editRoleId ? roles.find(role => role.role_id === $tw.utils.parseInt(editRoleId, 10)) : null;
 

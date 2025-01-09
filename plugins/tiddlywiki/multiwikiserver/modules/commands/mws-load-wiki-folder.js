@@ -25,14 +25,14 @@ var Command = function(params,commander,callback) {
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = async function() {
 	var self = this;
 	// Check parameters
 	if(this.params.length < 5) {
 		return "Missing parameters for --mws-load-wiki-folder command";
 	}
 	var archivePath = this.params[0];
-	loadWikiFolder({
+	await loadWikiFolder({
 		wikiPath: this.params[0],
 		bagName: this.params[1],
 		bagDescription: this.params[2],
@@ -48,7 +48,7 @@ function makePluginBagName(type,publisher,name) {
 }
 
 // Copy TiddlyWiki core editions
-function loadWikiFolder(options) {
+async function loadWikiFolder(options) {
 	const path = require("path"),
 		fs = require("fs");
 	// Read the tiddlywiki.info file
@@ -59,7 +59,7 @@ function loadWikiFolder(options) {
 	}
 	if(wikiInfo) {
 		// Create the bag
-		const result = $tw.mws.store.createBag(options.bagName,options.bagDescription);
+		const result = await $tw.mws.store.createBag(options.bagName,options.bagDescription);
 		if(result) {
 			console.log(`Error creating bag ${options.bagName} for edition ${options.wikiPath}: ${JSON.stringify(result)}`);
 		}
@@ -83,8 +83,8 @@ function loadWikiFolder(options) {
 		processPlugins("languages",wikiInfo.languages);
 		// Create the recipe
 		recipeList.push(options.bagName);
-		$tw.mws.store.createRecipe(options.recipeName,recipeList,options.recipeDescription);
-		$tw.mws.store.saveTiddlersFromPath(path.resolve(options.wikiPath,$tw.config.wikiTiddlersSubDir),options.bagName);
+		await $tw.mws.store.createRecipe(options.recipeName,recipeList,options.recipeDescription);
+		await $tw.mws.store.saveTiddlersFromPath(path.resolve(options.wikiPath,$tw.config.wikiTiddlersSubDir),options.bagName);
 	}
 }
 

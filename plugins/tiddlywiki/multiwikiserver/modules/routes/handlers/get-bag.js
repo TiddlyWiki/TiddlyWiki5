@@ -20,8 +20,8 @@ exports.path = /^\/bags\/([^\/]+)(\/?)$/;
 exports.useACL = true;
 
 exports.entityName = "bag"
-
-exports.handler = function (request, response, state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function (request, response, state) {
 	// Redirect if there is no trailing slash. We do this so that the relative URL specified in the upload form works correctly
 	if (state.params[1] !== "/") {
 		state.redirect(301, state.urlInfo.path + "/");
@@ -29,7 +29,7 @@ exports.handler = function (request, response, state) {
 	}
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		bagTiddlers = bag_name && $tw.mws.store.getBagTiddlers(bag_name);
+		bagTiddlers = bag_name && await $tw.mws.store.getBagTiddlers(bag_name);
 	if (bag_name && bagTiddlers) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if (request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {

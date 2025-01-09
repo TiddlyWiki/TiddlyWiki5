@@ -15,10 +15,10 @@ GET /login
 exports.method = "GET";
 
 exports.path = /^\/login$/;
-
-exports.handler = function(request,response,state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function(request,response,state) {
 	// Check if the user already has a valid session
-	var authenticatedUser = state.server.authenticateUser(request, response);
+	var authenticatedUser = await state.server.authenticateUser(request, response);
 	if(authenticatedUser) {
 			// User is already logged in, redirect to home page
 			response.writeHead(302, { "Location": "/" });

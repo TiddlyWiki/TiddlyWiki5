@@ -19,8 +19,9 @@ exports.path = /^\/admin\/anon\/?$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-
-exports.handler = function(request, response, state) {
+/** @type {ServerRouteHandler} */	
+// eslint-disable-next-line require-await
+exports.handler = async function(request, response, state) {
   // Check if user is authenticated and is admin
   if(!state.authenticatedUser || !state.authenticatedUser.isAdmin) {
     response.writeHead(401, "Unauthorized", { "Content-Type": "text/plain" });
@@ -30,8 +31,7 @@ exports.handler = function(request, response, state) {
 
   
   // Update the configuration tiddlers
-  var wiki = $tw.wiki;
-  wiki.addTiddler({
+  $tw.wiki.addTiddler({
     title: "$:/config/MultiWikiServer/ShowAnonymousAccessModal",
     text: "yes"
   });

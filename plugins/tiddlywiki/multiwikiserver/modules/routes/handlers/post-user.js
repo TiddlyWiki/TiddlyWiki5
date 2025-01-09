@@ -29,9 +29,9 @@ function deleteTempTiddlers() {
     $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");
   }, 1000);
 }
+/** @type {ServerRouteHandler} */	
+exports.handler = async function(request, response, state) {
 
-exports.handler = function(request, response, state) {
-  var current_user_id = state.authenticatedUser.user_id;
   var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
   var username = state.data.username;
   var email = state.data.email;
@@ -84,8 +84,8 @@ exports.handler = function(request, response, state) {
 
   try {
     // Check if username or email already exists
-    var existingUser = sqlTiddlerDatabase.getUserByUsername(username);
-    var existingUserByEmail = sqlTiddlerDatabase.getUserByEmail(email);
+    var existingUser = await sqlTiddlerDatabase.getUserByUsername(username);
+    var existingUserByEmail = await sqlTiddlerDatabase.getUserByEmail(email);
     
     if(existingUser || existingUserByEmail) {
       $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
@@ -109,7 +109,7 @@ exports.handler = function(request, response, state) {
       return;
     }
 
-    var hasUsers = sqlTiddlerDatabase.listUsers().length > 0;
+    var hasUsers = (await sqlTiddlerDatabase.listUsers()).length > 0;
     var hashedPassword = crypto.createHash("sha256").update(password).digest("hex");
 
     // Create new user
@@ -118,7 +118,7 @@ exports.handler = function(request, response, state) {
     if(!hasUsers) {
       try {
         // If this is the first guest user, assign admin privileges
-        sqlTiddlerDatabase.setUserAdmin(userId, true);
+        await sqlTiddlerDatabase.setUserAdmin(userId);
         
         // Create a session for the new admin user
         var auth = require("$:/plugins/tiddlywiki/multiwikiserver/auth/authentication.js").Authenticator;
@@ -160,12 +160,12 @@ exports.handler = function(request, response, state) {
         email: email,
       }));
       // assign role to user
-      var roles = sqlTiddlerDatabase.listRoles();
+      var roles = await sqlTiddlerDatabase.listRoles();
       var role = roles.find(function(role) {
         return role.role_name.toUpperCase() !== "ADMIN";
       });
       if(role) {
-        sqlTiddlerDatabase.addRoleToUser(userId, role.role_id);
+        await sqlTiddlerDatabase.addRoleToUser(userId, role.role_id);
       }
       response.writeHead(302, {"Location": "/admin/users/"+userId});
       response.end();

@@ -12,7 +12,8 @@ POST /admin/delete-acl
 	/*global $tw: false */
 	"use strict";
 
-	var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js").middleware;
+
+	var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/acl-middleware.js").middleware;
 
 	exports.method = "POST";
 
@@ -23,7 +24,8 @@ POST /admin/delete-acl
 
 	exports.csrfDisable = true;
 
-	exports.handler = function (request, response, state) {
+	/** @type {ServerRouteHandler} */	
+	exports.handler = async function (request, response, state) {
 		var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
 		var recipe_name = state.data.recipe_name;
 		var bag_name = state.data.bag_name;
@@ -32,7 +34,7 @@ POST /admin/delete-acl
 
 		aclMiddleware(request, response, state, entity_type, "WRITE");
 
-		sqlTiddlerDatabase.deleteACL(acl_id);
+		await sqlTiddlerDatabase.deleteACL(acl_id);
 
 		response.writeHead(302, { "Location": "/admin/acl/" + recipe_name + "/" + bag_name });
 		response.end();

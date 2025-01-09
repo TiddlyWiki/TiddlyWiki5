@@ -15,10 +15,10 @@ GET /admin/users/:user_id
 exports.method = "GET";
 
 exports.path = /^\/admin\/users\/([^\/]+)\/?$/;
-
-exports.handler = function(request,response,state) {
+/** @type {ServerRouteHandler} */	
+exports.handler = async function(request,response,state) {
 	var user_id = $tw.utils.decodeURIComponentSafe(state.params[0]);
-	var userData = state.server.sqlTiddlerDatabase.getUser(user_id);
+	var userData = await state.server.sqlTiddlerDatabase.getUser(user_id);
 
 	// Clean up any existing error/success messages if the user_id is different from the "$:/temp/mws/user-info/preview-user-id"
 	var lastPreviewedUser = $tw.wiki.getTiddlerText("$:/temp/mws/user-info/" + user_id + "/preview-user-id");
@@ -63,8 +63,8 @@ exports.handler = function(request,response,state) {
 	};
 
 	// Get all roles which the user has been assigned
-	var userRole = state.server.sqlTiddlerDatabase.getUserRoles(user_id);
-	var allRoles = state.server.sqlTiddlerDatabase.listRoles();
+	var userRole = await state.server.sqlTiddlerDatabase.getUserRoles(user_id);
+	var allRoles = await state.server.sqlTiddlerDatabase.listRoles();
 
 	// sort allRoles by placing the user's role at the top of the list
 	allRoles.sort(function(a, b){ return (a.role_id === userRole?.role_id ? -1 : 1) });
