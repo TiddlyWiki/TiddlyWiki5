@@ -34,8 +34,16 @@ function redirectToLogin(response, returnUrl) {
 		response.end();
 	}
 };
-
-exports.middleware = function (request, response, state, entityType, permissionName) {
+/**
+ * 
+ * @param {IncomingMessage} request 
+ * @param {ServerResponse} response 
+ * @param {ServerState} state 
+ * @param {string} entityType 
+ * @param {string} permissionName 
+ * @returns 
+ */
+exports.middleware = async function (request, response, state, entityType, permissionName) {
   var extensionRegex = /\.[A-Za-z0-9]{1,4}$/;
 
 	var server = state.server,
@@ -46,11 +54,11 @@ exports.middleware = function (request, response, state, entityType, permissionN
 	var partiallyDecoded = entityName?.replace(/%3A/g, ":");
 	// Then use decodeURIComponent for the rest
 	var decodedEntityName = decodeURIComponent(partiallyDecoded);
-	var aclRecord = sqlTiddlerDatabase.getACLByName(entityType, decodedEntityName);
+	var aclRecord = await sqlTiddlerDatabase.getACLByName(entityType, decodedEntityName);
 	var isGetRequest = request.method === "GET";
 	var hasAnonymousAccess = state.allowAnon ? (isGetRequest ? state.allowAnonReads : state.allowAnonWrites) : false;
 	var anonymousAccessConfigured = state.anonAccessConfigured;
-	var entity = sqlTiddlerDatabase.getEntityByName(entityType, decodedEntityName);
+	var entity = await sqlTiddlerDatabase.getEntityByName(entityType, decodedEntityName);
 	var isAdmin = state.authenticatedUser?.isAdmin;
 
 	if(isAdmin) {
@@ -60,8 +68,8 @@ exports.middleware = function (request, response, state, entityType, permissionN
 	if(entity?.owner_id) {
 		if(state.authenticatedUser?.user_id && (state.authenticatedUser?.user_id !== entity.owner_id) || !state.authenticatedUser?.user_id && !hasAnonymousAccess) {
 			const hasPermission = state.authenticatedUser?.user_id ? 
-				entityType === 'recipe' ? sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, decodedEntityName, isGetRequest ? 'READ' : 'WRITE')
-				: sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, decodedEntityName, isGetRequest ? 'READ' : 'WRITE')
+				entityType === 'recipe' ? await sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, decodedEntityName, isGetRequest ? 'READ' : 'WRITE')
+				: await sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, decodedEntityName, isGetRequest ? 'READ' : 'WRITE')
 				: false
 			if(!response.headersSent && !hasPermission) {
 				response.writeHead(403, "Forbidden");
@@ -79,7 +87,7 @@ exports.middleware = function (request, response, state, entityType, permissionN
 			return;
 		} else {
 			// Get permission record
-			const permission = sqlTiddlerDatabase.getPermissionByName(permissionName);
+			const permission = await sqlTiddlerDatabase.getPermissionByName(permissionName);
 			// ACL Middleware will only apply if the entity has a middleware record
 			if(aclRecord && aclRecord?.permission_id === permission?.permission_id) {
 				// If not authenticated and anonymous access is not allowed, request authentication
@@ -92,7 +100,15 @@ exports.middleware = function (request, response, state, entityType, permissionN
 			}
 
 			// Check ACL permission
-			var hasPermission = request.method === "POST" || sqlTiddlerDatabase.checkACLPermission(state.authenticatedUser.user_id, entityType, decodedEntityName, permissionName, entity?.owner_id)
+			var hasPermission = request.method === "POST"
+				|| await sqlTiddlerDatabase.checkACLPermission(
+					state.authenticatedUser?.user_id, 
+					entityType, 
+					decodedEntityName, 
+					permissionName, 
+					entity?.owner_id
+				);
+
 			if(!hasPermission && !hasAnonymousAccess) {
 				if(!response.headersSent) {
 					response.writeHead(403, "Forbidden");

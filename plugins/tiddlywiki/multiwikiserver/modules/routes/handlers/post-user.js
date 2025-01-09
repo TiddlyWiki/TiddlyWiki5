@@ -113,7 +113,7 @@ exports.handler = async function(request, response, state) {
     var hashedPassword = crypto.createHash("sha256").update(password).digest("hex");
 
     // Create new user
-    var userId = sqlTiddlerDatabase.createUser(username, email, hashedPassword);
+    var userId = await sqlTiddlerDatabase.createUser(username, email, hashedPassword);
 
     if(!hasUsers) {
       try {

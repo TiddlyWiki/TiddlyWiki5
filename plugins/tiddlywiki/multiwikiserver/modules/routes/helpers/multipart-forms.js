@@ -94,6 +94,7 @@ exports.processIncomingStream = function(options) {
 						tiddlerFields[part.name.slice(tiddlerFieldPrefix.length)] = part.value.trim();
 					}
 				}
+				// eslint-disable-next-line custom-rules/always-await
 				options.store.saveBagTiddlerWithAttachment(tiddlerFields,options.bag_name,{
 					filepath: partFile.inboxFilename,
 					type: type,

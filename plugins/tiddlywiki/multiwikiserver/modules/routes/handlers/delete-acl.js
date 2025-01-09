@@ -32,7 +32,7 @@ POST /admin/delete-acl
 		var acl_id = state.data.acl_id;
 		var entity_type = state.data.entity_type;
 
-		aclMiddleware(request, response, state, entity_type, "WRITE");
+		await aclMiddleware(request, response, state, entity_type, "WRITE");
 
 		await sqlTiddlerDatabase.deleteACL(acl_id);
 

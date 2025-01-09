@@ -45,6 +45,7 @@ declare global {
     handler: ServerRouteHandler;
     method?: string;
     useACL?: boolean;
+    /** this is required if useACL is true */
     entityName?: string;
     csrfDisable?: boolean;
     bodyFormat?: string;

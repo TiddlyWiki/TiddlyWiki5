@@ -54,6 +54,10 @@ async function saveArchive(archivePath) {
 			const tiddlerInfo = await $tw.mws.store.getBagTiddler(title,bagInfo.bag_name);
 			const bagPart = $tw.utils.encodeURIComponentExtended(bagInfo.bag_name);
 			const titlePart = $tw.utils.encodeURIComponentExtended(title);
+			if(!tiddlerInfo) {
+				$tw.utils.warning(`Missing tiddler ${title} in bag ${bagInfo.bag_name}`);
+				continue;
+			}
 			saveJsonFile(`bags/${bagPart}/tiddlers/${titlePart}.json`,tiddlerInfo.tiddler);
 		}
 	}

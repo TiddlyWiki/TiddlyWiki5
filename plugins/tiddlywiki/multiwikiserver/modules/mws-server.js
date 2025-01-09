@@ -27,8 +27,8 @@ if($tw.node) {
 /*
 A simple HTTP server with regexp-based routes
 options: variables - optional hashmap of variables to set (a misnomer - they are really constant parameters)
-		 routes - optional array of routes to use
-		 wiki - reference to wiki object
+			routes - optional array of routes to use
+			wiki - reference to wiki object
 */
 /**
  * 
@@ -44,7 +44,7 @@ function Server(options) {
 	/** @type {SqlTiddlerDatabase} */
 	this.sqlTiddlerDatabase = options.sqlTiddlerDatabase || $tw.mws.store.sqlTiddlerDatabase;
 	// Initialise the variables
-	/** @type {ServerOptions["variables"]} */
+	/** @type {ServerOptions["variables"] & {}} */
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
 		for(var variable in options.variables) {
@@ -64,7 +64,7 @@ function Server(options) {
 	// Initialise authorization
 	var authorizedUserName;
 	if(this.get("username") && this.get("password")) {
-		authorizedUserName = this.get("username");
+		authorizedUserName = this.get("username") || ""; //redundant for type checker
 	} else if(this.get("credentials")) {
 		authorizedUserName = "(authenticated)";
 	} else {
@@ -87,7 +87,7 @@ function Server(options) {
 		self.addRoute(routeDefinition, title);
 	});
 	// Initialise the http vs https
-	/** @type {import("https").ServerOptions} */
+	/** @type {import("https").ServerOptions | null} */
 	this.listenOptions = null;
 	/** @type {"http" | "https"} */
 	this.protocol = "http";
@@ -193,15 +193,15 @@ cbFinished(err) - invoked when the all the form data has been processed
  * 
  * @param {import("http").IncomingMessage} request 
  * @param {Object} options 
- * @param {(headers: Object, name: string, filename: string) => void} options.cbPartStart
+ * @param {(headers: Object, name: string | null, filename: string | null) => void} options.cbPartStart
  * @param {(chunk: Buffer) => void} options.cbPartChunk
  * @param {() => void} options.cbPartEnd
- * @param {(err: string) => void} options.cbFinished
+ * @param {(err: string | null) => void} options.cbFinished
  */
 function streamMultipartData(request,options) {
 	// Check that the Content-Type is multipart/form-data
 	const contentType = request.headers['content-type'];
-	if(!contentType.startsWith("multipart/form-data")) {
+	if(!contentType?.startsWith("multipart/form-data")) {
 		return options.cbFinished("Expected multipart/form-data content type");
 	}
 	// Extract the boundary string from the Content-Type header
@@ -243,7 +243,9 @@ function streamMultipartData(request,options) {
 				});
 				// Parse the content disposition header
 				const contentDisposition = {
+					/** @type {string | null} */
 					name: null,
+					/** @type {string | null} */
 					filename: null
 				};
 				if(currentHeaders["content-disposition"]) {
@@ -355,6 +357,7 @@ Server.prototype.get = function(name) {
 
 Server.prototype.addRoute = function(route, title) {
 	if(!route.path) $tw.utils.log("Warning: Route has no path: " + title);
+	else if(route.useACL && !route.entityName) $tw.utils.log("Warning: Route has no entityName: " + title);
 	else this.routes.push(route);
 };
 
@@ -375,7 +378,6 @@ Server.prototype.addAuthenticator = function(AuthenticatorClass) {
  * @param {*} state 
  * @returns {ServerRoute | null}
  */
-// eslint-disable-next-line @typescript-eslint/promise-function-async
 Server.prototype.findMatchingRoute = function findMatchingRoute(request, state) {
 	for(var t = 0; t < this.routes.length; t++) {
 		var potentialRoute = this.routes[t],
@@ -433,12 +435,12 @@ Server.prototype.parseCookieString = function(cookieString) {
 	if (typeof cookieString !== 'string') return cookies;
 
 	cookieString.split(';').forEach(cookie => {
-			const parts = cookie.split('=');
+		const parts = cookie.split('=');
 			if (parts.length >= 2) {
-					const key = parts[0].trim();
-					const value = parts.slice(1).join('=').trim();
-					cookies[key] = decodeURIComponent(value);
-			}
+			const key = parts[0].trim();
+			const value = parts.slice(1).join('=').trim();
+			cookies[key] = decodeURIComponent(value);
+		}
 	});
 
 	return cookies;
@@ -498,14 +500,14 @@ Server.prototype.makeRequestState = async function(request, response, options) {
 	// Authenticate the user
 	const authenticatedUser = await this.authenticateUser(request, response);
 	const authenticatedUsername = authenticatedUser?.username;
-	
+
 
 	var state = {};
 	state.wiki = options.wiki || this.wiki;
 	state.boot = options.boot || this.boot;
 	state.server = this;
 	state.urlInfo = url.parse(request.url);
-	state.queryParameters = querystring.parse(state.urlInfo.query);
+	state.queryParameters = state.urlInfo.query ? querystring.parse(state.urlInfo.query) : {};
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
 	state.sendResponse = sendResponse.bind(this,request,response);
 	state.redirect = redirect.bind(this,request,response);
@@ -516,7 +518,7 @@ Server.prototype.makeRequestState = async function(request, response, options) {
 
 	// Get the principals authorized to access this resource
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
-	
+
 	// Check whether anonymous access is granted
 	state.allowAnon = false; //this.isAuthorized(state.authorizationType,null);
 	var {allowReads, allowWrites, isEnabled, showAnonConfig} = this.getAnonymousAccessConfig();
@@ -532,8 +534,8 @@ Server.prototype.makeRequestState = async function(request, response, options) {
 }
 /**
  * 
- * @param {import("http").IncomingMessage} request 
- * @param {import("http").ServerResponse} response 
+ * @param {IncomingMessage} request 
+ * @param {ServerResponse} response 
  * @param {*} options 
  * @returns 
  */
@@ -554,26 +556,31 @@ Server.prototype.requestHandler = async function(request,response,options) {
 	// Find the route that matches this path
 	var route = this.findMatchingRoute(request,state);
 
-	// If the route is configured to use ACL middleware, check that the user has permission
-	if(route?.useACL) {
-		const permissionName = this.methodACLPermMappings[route.method];
-		aclMiddleware(request,response,state,route.entityName,permissionName)
-	}
-	
-	// Optionally output debug info
-	if(this.get("debug-level") !== "none") {
-		console.log("Request path:",JSON.stringify(state.urlInfo));
-		console.log("Request headers:",JSON.stringify(request.headers));
-		console.log("authenticatedUsername:",state.authenticatedUsername);
-	}
-	
 	// Return a 404 if we didn't find a route
 	if(!route) {
 		response.writeHead(404);
 		response.end();
 		return;
 	}
-	
+
+	// If the route is configured to use ACL middleware, check that the user has permission
+	if(route?.useACL) {
+		if(!route.entityName) {
+			response.writeHead(500);
+			response.end();
+			return;
+		}
+		const permissionName = this.methodACLPermMappings[route.method];
+		await aclMiddleware(request,response,state,route.entityName,permissionName)
+	}
+
+	// Optionally output debug info
+	if(this.get("debug-level") !== "none") {
+		console.log("Request path:",JSON.stringify(state.urlInfo));
+		console.log("Request headers:",JSON.stringify(request.headers));
+		console.log("authenticatedUsername:",state.authenticatedUsername);
+	}
+
 	// If this is a write, check for the CSRF header unless globally disabled, or disabled for this route
 	if(!this.csrfDisable && !route.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki" && !response.headersSent) {
 		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
@@ -660,9 +667,10 @@ Server.prototype.listen = function(port,host,prefix,options) {
 			var start = $tw.utils.timer();
 			response.on("finish",function() {
 				console.log("Response time:",request.method,request.url,$tw.utils.timer() - start);
-			});	
+			});
 		}
-		void self.requestHandler(request,response,options);
+		// eslint-disable-next-line custom-rules/always-await
+		void self.requestHandler(request,response,options).catch(console.error);
 	});
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
 	server.on("listening",function() {

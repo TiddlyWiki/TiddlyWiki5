@@ -19,7 +19,7 @@ exports.method = "DELETE";
 exports.path = /^\/bags\/([^\/]+)\/tiddlers\/(.+)$/;
 /** @type {ServerRouteHandler} */	
 exports.handler = async function(request,response,state) {
-	aclMiddleware(request, response, state, "bag", "WRITE");
+	await aclMiddleware(request, response, state, "bag", "WRITE");
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]);
