@@ -216,7 +216,7 @@ SqlTiddlerStore.prototype.saveTiddlersFromPath = async function(tiddler_files_pa
 		// Save the tiddlers
 		for(const tiddlersFromFile of tiddlersFromPath) {
 			for(const tiddler of tiddlersFromFile.tiddlers) {
-				await self.saveBagTiddler(tiddler,bag_name,null);
+				await self.saveBagTiddler(tiddler,bag_name);
 			}
 		}
 	});

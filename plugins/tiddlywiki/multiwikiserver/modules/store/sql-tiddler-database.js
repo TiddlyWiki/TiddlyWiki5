@@ -903,7 +903,7 @@ SqlTiddlerDatabase.prototype.listUsersByRoleId = async function(roleId) {
 };
 
 SqlTiddlerDatabase.prototype.updateUser = async function (userId, username, email, roleId) {
-	const existingUser = await this.engine.runStatement(`
+	const existingUser = await this.engine.runStatementGet(`
 		SELECT user_id FROM users
 		WHERE email = $email AND user_id != $userId
 `, {
