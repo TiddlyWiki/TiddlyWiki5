@@ -20,7 +20,7 @@ engine - wasm | better
 */
 function SqlTiddlerDatabase(options) {
 	options = options || {};
-	const SqlEngine = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-engine.js").SqlEngine;
+	const {SqlEngine} = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-engine.js");
 	/** @type {SqlEngine} */
 	this.engine = new SqlEngine({
 		databasePath: options.databasePath,
@@ -37,10 +37,6 @@ function SqlTiddlerDatabase(options) {
 		}
 	};
 }
-
-SqlTiddlerDatabase.prototype.init = async function() {
-	await this.engine.init();
-};
 
 SqlTiddlerDatabase.prototype.close = async function() {
 	await this.engine.close();

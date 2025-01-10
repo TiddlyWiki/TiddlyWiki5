@@ -10,24 +10,27 @@ This class is intended to encapsulate all engine-specific logic.
 \*/
 
 (function() {
-const {Worker} = require('worker_threads');
-class SqlWorkerProxy {
+
+class SqlWorker {
 	/**
 	 * Create a database engine. 
 	 * 
 	 * @param {Object} options 
 	 * @param {string} [options.databasePath] path to the database file (can be ":memory:" or missing to get a temporary database)
 	 * @param {"node" | "wasm" | "better"} [options.engine] which engine to use, default is "node"
+	 * @param {string[]} [options.pragmas] list of PRAGMA statements to run
 	 */
 
 	constructor(options) {
 		options = options || {};
 		const workerTitle = "$:/plugins/tiddlywiki/multiwikiserver/store/sql-engine-worker.js";
+		const {Worker} = require('worker_threads');
 		this.worker = new Worker($tw.modules.titles[workerTitle].definition, {
 			eval: true,
 			workerData: {
 				databasePath: options.databasePath,
-				engine: options.engine
+				engine: options.engine,
+				pragmas: options.pragmas
 			}
 		});
 		this.worker.on('message', (message) => {
@@ -91,6 +94,8 @@ class SqlWorkerProxy {
 
 }
 
+exports.SqlWorker = SqlWorker;
+
 /**
  * Create a database engine. 
  * 
@@ -111,29 +116,16 @@ function SqlEngine(options) {
 	if(databasePath !== ":memory:") {
 		$tw.utils.createFileDirectories(databasePath);
 	}
-	this.db = new SqlWorkerProxy({
+	this.db = new SqlWorker({
 		databasePath,
-		engine: this.engine
+		engine: this.engine,
+		pragmas: this.engine === "better" ? [
+			"journal_mode = WAL"
+		] : []
 	});
-	const _syncError = new Error("init was not immediately called on SqlEngine")
-	/** @type {any} */
-	this._syncCheck = setTimeout(() => {
-		$tw.utils.warning(_syncError);
-	});
-
-	this.transactionQueue = [];
 
 }
 
-SqlEngine.prototype.init = async function() {
-	clearTimeout(this._syncCheck);
-	this._syncCheck = undefined;
-	// Turn on WAL mode for better-sqlite3
-	if(this.engine === "better") {
-		// See https://github.com/WiseLibs/better-sqlite3/blob/master/docs/performance.md
-		await this.db.pragma("journal_mode = WAL");
-	}
-}
 
 SqlEngine.prototype.close = async function() {
 	for(const sql in this.statements) {

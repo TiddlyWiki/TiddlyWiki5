@@ -50,7 +50,6 @@ function SqlTiddlerStore(options) {
 }
 
 SqlTiddlerStore.prototype.init = async function() {
-	await this.sqlTiddlerDatabase.init();
 	await this.sqlTiddlerDatabase.createTables();
 };
 

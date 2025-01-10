@@ -33,10 +33,8 @@ function runSqlDatabaseTests(engine) {
 	const sqlTiddlerDatabase = new SqlTiddlerDatabase({
 		engine: engine
 	});
-	// eslint-disable-next-line custom-rules/always-await
-	const beforeStart = sqlTiddlerDatabase.init();
+
 	beforeAll(async () => {
-		await beforeStart;
 		await sqlTiddlerDatabase.createTables();
 	});
 	// Tear down
