@@ -9,26 +9,23 @@ This class is intended to encapsulate all engine-specific logic.
 
 \*/
 
-(function () {
-	
+(function() {
 
-/*
-Create a database engine. Options include:
-
-databasePath - path to the database file (can be ":memory:" or missing to get a temporary database)
-engine - wasm | better
-*/
-class SqlEngine {
-constructor(options) {
+/**
+ * Create a database engine. 
+ * 
+ * @param {Object} options 
+ * @param {string} [options.databasePath] path to the database file (can be ":memory:" or missing to get a temporary database)
+ * @param {"node" | "wasm" | "better"} [options.engine] which engine to use, default is "node"
+ */
+function SqlEngine(options) {
 	options = options || {};
 	// Initialise transaction mechanism
 	this.transactionDepth = 0;
 	// Initialise the statement cache
 	this.statements = Object.create(null); // Hashmap by SQL text of statement objects
-
 	// Choose engine
 	this.engine = options.engine || "node"; // node | wasm | better
-
 	// Create the database file directories if needed
 	if(options.databasePath) {
 		$tw.utils.createFileDirectories(options.databasePath);
@@ -46,29 +43,43 @@ constructor(options) {
 		case "better":
 			Database = require("better-sqlite3");
 			break;
+		default:
+			throw new Error("Unknown database engine " + this.engine);
 	}
-	this.db = new Database(databasePath, {
+	this.db = new Database(databasePath,{
 		verbose: undefined && console.log
 	});
+	const _syncError = new Error("init was not immediately called on SqlEngine")
+	/** @type {any} */
+	this._syncCheck = setTimeout(() => {
+		$tw.utils.warning(_syncError);
+	});
+
+}
+
+SqlEngine.prototype.init = async function() {
+	clearTimeout(this._syncCheck);
+	this._syncCheck = undefined;
 	// Turn on WAL mode for better-sqlite3
 	if(this.engine === "better") {
 		// See https://github.com/WiseLibs/better-sqlite3/blob/master/docs/performance.md
-		this.db.pragma("journal_mode = WAL");
+		await this.db.pragma("journal_mode = WAL"); 
 	}
 }
 
-async close() {
+SqlEngine.prototype.close = async function() {
 	for(const sql in this.statements) {
 		if(this.statements[sql].finalize) {
 			await this.statements[sql].finalize();
 		}
 	}
 	this.statements = Object.create(null);
-	this.db.close();
+	await this.db.close();
 	this.db = undefined;
-}
+};
 
-normaliseParams(params) {
+// eslint-disable-next-line require-await -- we need to return a promise in case a replacement adapter needs it
+SqlEngine.prototype.normaliseParams = async function(params) {
 	params = params || {};
 	const result = Object.create(null);
 	for(const paramName in params) {
@@ -79,54 +90,45 @@ normaliseParams(params) {
 		}
 	}
 	return result;
-}
+};
 
-async prepareStatement(sql) {
+/**
+ * 
+ * @param {string} sql 
+ */
+SqlEngine.prototype.prepareStatement = async function(sql) {
 	if(!(sql in this.statements)) {
-		// node:sqlite supports bigint, causing an error here
 		this.statements[sql] = await this.db.prepare(sql);
 	}
-	return this.statements[sql];
-}
+	return /** @type {ReturnType<SqlEngine["db"]["prepare"]>} */(this.statements[sql]);
+};
 
-/**
- * @returns  {Promise<import("better-sqlite3").RunResult>}
- */
-async runStatement(sql, params) {
-	params = this.normaliseParams(params);
+SqlEngine.prototype.runStatement = async function(sql,params) {
+	params = await this.normaliseParams(params);
 	const statement = await this.prepareStatement(sql);
 	return await statement.run(params);
-}
+};
 
-/**
- * @param {string} sql
- * @returns  {Promise<any>}
- */
-async runStatementGet(sql, params) {
-	params = this.normaliseParams(params);
+SqlEngine.prototype.runStatementGet = async function(sql,params) {
+	params = await this.normaliseParams(params);
 	const statement = await this.prepareStatement(sql);
-	return await statement.get(params);
-}
+	return /** @type {Record<string, any>} */(await statement.get(params));
+};
 
-/**
- * @returns  {Promise<any[]>}
- */
-async runStatementGetAll(sql, params) {
-	params = this.normaliseParams(params);
+SqlEngine.prototype.runStatementGetAll = async function(sql,params) {
+	params = await this.normaliseParams(params);
 	const statement = await this.prepareStatement(sql);
-	return await statement.all(params);
-}
+	return /** @type {Record<string, any>[]} */(await statement.all(params));
+};
 
-/**
- * @returns  {Promise<import("better-sqlite3").RunResult[]>}
- */
-async runStatements(sqlArray) {
-	const res = [];
-	for(const sql of sqlArray) {
-		res.push(await this.runStatement(sql));
+SqlEngine.prototype.runStatements = async function(sqlArray) {
+	/** @type {Awaited<ReturnType<SqlEngine["runStatement"]>>[]} */
+	const results = new Array(sqlArray.length);
+	for(let t=0; t<sqlArray.length; t++) {
+		results[t] = await this.runStatement(sqlArray[t]);
 	}
-	return res;
-}
+	return results;
+};
 
 /**
 Execute the given function in a transaction, committing if successful but rolling back if an error occurs.  Returns whatever the given function returns.
@@ -135,32 +137,32 @@ Calls to this function can be safely nested, but only the topmost call will actu
 
 TODO: better-sqlite3 provides its own transaction method which we should be using if available
 
+@template T
 @param {() => Promise<T>} fn - function to execute in the transaction
 @returns {Promise<T>} - the result
-@template T
+
 */
-async transaction(fn) {
+SqlEngine.prototype.transaction = async function(fn) {
 	const alreadyInTransaction = this.transactionDepth > 0;
 	this.transactionDepth++;
-	try {
+        try {
 		if(alreadyInTransaction) {
 			return await fn();
 		} else {
-			await this.runStatement("BEGIN TRANSACTION");
+			await this.runStatement(`BEGIN TRANSACTION`);
 			try {
 				var result = await fn();
-				await this.runStatement("COMMIT TRANSACTION");
+				await this.runStatement(`COMMIT TRANSACTION`);
 			} catch(e) {
-				await this.runStatement("ROLLBACK TRANSACTION");
-				throw (e);
+				await this.runStatement(`ROLLBACK TRANSACTION`);
+				throw(e);
 			}
 			return result;
 		}
-	} finally{
+	} finally {
 		this.transactionDepth--;
 	}
-}
-}
+};
 
 exports.SqlEngine = SqlEngine;
 

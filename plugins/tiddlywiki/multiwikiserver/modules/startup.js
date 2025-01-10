@@ -32,7 +32,7 @@ exports.startup = async function() {
 		engine: $tw.wiki.getTiddlerText("$:/config/MultiWikiServer/Engine", "better"), // better || wasm
 		attachmentStore: attachmentStore
 	});
-	await store.initCheck();
+	await store.init();
 
 	const { ServerManager } = require("$:/plugins/tiddlywiki/multiwikiserver/mws-server.js");
 	const serverManager = new ServerManager();

@@ -15,17 +15,14 @@ if($tw.node) {
 "use strict";
 
 describe("SQL tiddler database with node built-in sqlite", function () {
-	// eslint-disable-next-line custom-rules/always-await
 	void runSqlDatabaseTests("node").catch(console.error);
 });
 
 describe("SQL tiddler database with node-sqlite3-wasm", function () {
-	// eslint-disable-next-line custom-rules/always-await
 	void runSqlDatabaseTests("wasm").catch(console.error);
 });
 
 describe("SQL tiddler database with better-sqlite3", function () {
-	// eslint-disable-next-line custom-rules/always-await
 	void runSqlDatabaseTests("better").catch(console.error);
 });
 

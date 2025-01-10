@@ -20,6 +20,7 @@ if($tw.node) {
 		querystring = require("querystring"),
 		crypto = require("crypto"),
 		zlib = require("zlib"),
+		{ok} = require("assert"),
 		aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/acl-middleware.js").middleware;
 
 }
@@ -354,7 +355,11 @@ Server.prototype.defaultVariables = {
 Server.prototype.get = function(name) {
 	return this.variables[name];
 };
-
+/**
+ * 
+ * @param {ServerRoute} route 
+ * @param {string} title 
+ */
 Server.prototype.addRoute = function(route, title) {
 	if(!route.path) $tw.utils.log("Warning: Route has no path: " + title);
 	else if(route.useACL && !route.entityName) $tw.utils.log("Warning: Route has no entityName: " + title);
@@ -602,6 +607,7 @@ Server.prototype.requestHandler = async function(request,response,options) {
 				data += chunk.toString();
 			});
 			request.on("end", function () {
+				ok(route);
 				if (route.bodyFormat === "www-form-urlencoded") {
 					data = queryString.parse(data);
 				}
@@ -637,8 +643,6 @@ prefix: optional prefix (falls back to value of "path-prefix" variable)
 callback: optional callback(err) to be invoked when the listener is up and running
 */
 Server.prototype.listen = function(port,host,prefix,options) {
-	const { ok } = require("assert");
-
 	var self = this;
 	// Handle defaults for port and host
 	port = port || this.get("port");
@@ -661,7 +665,6 @@ Server.prototype.listen = function(port,host,prefix,options) {
 		$tw.utils.warning(error);
 	}
 	// Create the server
-	require("https").createServer
 	var server = this.transport.createServer(this.listenOptions || {},function(request,response,options) {
 		if(self.get("debug-level") !== "none") {
 			var start = $tw.utils.timer();
@@ -669,7 +672,6 @@ Server.prototype.listen = function(port,host,prefix,options) {
 				console.log("Response time:",request.method,request.url,$tw.utils.timer() - start);
 			});
 		}
-		// eslint-disable-next-line custom-rules/always-await
 		void self.requestHandler(request,response,options).catch(console.error);
 	});
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
@@ -680,7 +682,7 @@ Server.prototype.listen = function(port,host,prefix,options) {
 		});
 		// Log listening details
 		var address = server.address();
-		ok(typeof address === "object", "Expected server.address() to return an object");
+		ok(typeof address === "object" && address, "Expected server.address() to return an object");
 		var url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix;
 		$tw.utils.log("Serving on " + url,"brown/orange");
 		$tw.utils.log("(press ctrl-C to exit)","red");
