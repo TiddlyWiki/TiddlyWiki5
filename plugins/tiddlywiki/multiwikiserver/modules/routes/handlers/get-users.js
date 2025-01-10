@@ -29,7 +29,7 @@ exports.handler = async function(request,response,state) {
 		console.error("userList is not an array");
 	}
 
-	if(!state.authenticatedUser.isAdmin && !state.firstGuestUser) {
+	if(!state.authenticatedUser?.isAdmin && !state.firstGuestUser) {
 		response.writeHead(403, "Forbidden", { "Content-Type": "text/plain" });
 		response.end("Forbidden");
 		return;

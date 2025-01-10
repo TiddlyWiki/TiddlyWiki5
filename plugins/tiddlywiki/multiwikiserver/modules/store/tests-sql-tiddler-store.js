@@ -29,9 +29,10 @@ function runSqlStoreTests(engine) {
 	beforeEach(async function() {
 		store = new SqlTiddlerStore({
 			databasePath: ":memory:",
-			engine: engine
+			engine: engine, 
+			attachmentStore: {}
 		});
-		await store.initCheck();
+		await store.init();
 	});
 
 	afterEach(async function() {

@@ -536,7 +536,19 @@ Checks if a user has permission to access a bag
 SqlTiddlerDatabase.prototype.hasBagPermission = async function(userId, bagName, permissionName) {
 	return await this.checkACLPermission(userId, "bag", bagName, permissionName)
 };
-
+/**
+ * @overload
+ * @param {string} entityType 
+ * @param {string} entityName 
+ * @param {false} [fetchAll] 
+ * @returns {Promise<Record<string, any>>}
+ * 
+ * @overload
+ * @param {string} entityType
+ * @param {string} entityName
+ * @param {true} fetchAll
+ * @returns {Promise<Record<string, any>[]>}
+ */
 SqlTiddlerDatabase.prototype.getACLByName = async function(entityType, entityName, fetchAll) {
 	const entityInfo = this.entityTypeToTableMap[entityType];
 	if (!entityInfo) {
@@ -1078,7 +1090,7 @@ SqlTiddlerDatabase.prototype.findUserBySessionId = async function(sessionId) {
 			$sessionId: sessionId,
 			$timestamp: currentTimestamp
 	});
-
+	/** @type {any} */
 	const userResult = await this.engine.runStatementGet(`
 			SELECT *
 			FROM users

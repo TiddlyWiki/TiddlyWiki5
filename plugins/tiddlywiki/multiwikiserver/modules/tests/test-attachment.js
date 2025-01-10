@@ -104,7 +104,7 @@ if(typeof window === "undefined" && typeof process !== "undefined" && process.ve
 				var contentHash = attachmentStore.saveAttachment(options);
 				var stream = attachmentStore.getAttachmentStream(contentHash);
 				expect(stream).not.toBeNull();
-				expect(stream.type).toBe("text/plain");
+				expect(stream?.type).toBe("text/plain");
 			});
 
 			it("getAttachmentFileSize", function() {
@@ -173,7 +173,7 @@ if(typeof window === "undefined" && typeof process !== "undefined" && process.ve
           var contentHash = attachmentStore.saveAttachment(options);
           var stream = attachmentStore.getAttachmentStream(contentHash);
           assert.notStrictEqual(stream, null);
-          assert.strictEqual(stream.type, "application/octet-stream");
+          assert.strictEqual(stream?.type, "application/octet-stream");
         }
       });
     });

@@ -46,7 +46,7 @@ exports.handler = async function(request,response,state) {
 	}
 
 	// Check if the user is trying to access their own profile or is an admin
-	var hasPermission = ($tw.utils.parseInt(user_id) === state.authenticatedUser.user_id) || state.authenticatedUser.isAdmin;
+	var hasPermission = ($tw.utils.parseInt(user_id) === state.authenticatedUser?.user_id) || state.authenticatedUser?.isAdmin;
 	if(!hasPermission) {
 		response.writeHead(403, "Forbidden", { "Content-Type": "text/plain" });
 		response.end("Forbidden");

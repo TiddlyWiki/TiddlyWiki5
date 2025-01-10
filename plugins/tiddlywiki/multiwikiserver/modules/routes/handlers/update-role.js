@@ -26,7 +26,7 @@ exports.handler = async function(request, response, state) {
   var role_name = state.data.role_name;
   var role_description = state.data.role_description;
 
-  if(!state.authenticatedUser.isAdmin) {
+  if(!state.authenticatedUser?.isAdmin) {
     response.writeHead(403, "Forbidden");
     response.end();
     return;
