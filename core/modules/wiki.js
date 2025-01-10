@@ -1701,9 +1701,12 @@ exports.generateDraftTitle = function(title) {
 	var c = 0,
 		draftTitle,
 		username = this.getTiddlerText("$:/status/UserName"),
-		attribution = username ? " by " + username : "";
+		draftBaseTitle = $tw.language.getRawString("DraftTitle"),
+		draftAuthor = $tw.language.getRawString("DraftAuthor"),
+		draftNumber = $tw.language.getRawString("DraftNumber"),
+		attribution = username ? draftAuthor.replace("$1$",username) : "";
 	do {
-		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'" + attribution;
+		draftTitle = draftBaseTitle.replace("$1$", (c ? draftNumber.replace(draftNumber, "$1$") : "")).replace("$2$", title).replace("$3$",attribution);
 		c++;
 	} while(this.tiddlerExists(draftTitle));
 	return draftTitle;

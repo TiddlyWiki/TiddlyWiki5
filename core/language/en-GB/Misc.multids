@@ -15,6 +15,8 @@ ConfirmAction: Do you wish to proceed?
 Count: count
 DefaultNewTiddlerTitle: New Tiddler
 Diffs/CountMessage: <<diff-count>> differences
+
+DraftTitle: Draft $1$of '$2$'$3$
 DropMessage: Drop now (or use the 'Escape' key to cancel)
 Encryption/Cancel: Cancel
 Encryption/ConfirmClearPassword: Do you wish to clear the password? This will remove the encryption applied when saving this wiki
