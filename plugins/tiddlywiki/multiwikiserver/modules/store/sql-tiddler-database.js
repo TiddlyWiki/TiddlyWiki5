@@ -911,7 +911,7 @@ SqlTiddlerDatabase.prototype.updateUser = async function (userId, username, emai
 		$userId: userId
 	});
 
-	if (existingUser.length > 0) {
+	if (existingUser) {
 		return {
 			success: false,
 			message: "Email address already in use by another user."

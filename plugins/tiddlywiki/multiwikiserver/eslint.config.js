@@ -165,9 +165,10 @@ module.exports = tsLint.config(
 			"id-length": "off",
 			"id-match": "error",
 			"implicit-arrow-linebreak": "error",
-			"indent": "off",
+			// "indent": "warn",
 			// "indent": ["warn", "tab", {
-			// 	"outerIIFEBody": 0 
+			// 	"outerIIFEBody": 0 ,
+			// 	"SwitchCase": 1,
 			// }],
 			"indent-legacy": "off",
 			"init-declarations": "off",

@@ -15,24 +15,30 @@ if($tw.node) {
 "use strict";
 
 describe("SQL tiddler database with node built-in sqlite", function () {
-	void runSqlDatabaseTests("node").catch(console.error);
+	// try {require("node:sqlite");} catch(e) {return;}
+	void runSqlDatabaseTests("node")
 });
 
 describe("SQL tiddler database with node-sqlite3-wasm", function () {
-	void runSqlDatabaseTests("wasm").catch(console.error);
+	void runSqlDatabaseTests("wasm")
 });
 
 describe("SQL tiddler database with better-sqlite3", function () {
-	void runSqlDatabaseTests("better").catch(console.error);
+	void runSqlDatabaseTests("better")
 });
 
-async function runSqlDatabaseTests(engine) {
+function runSqlDatabaseTests(engine) {
 	// Create and initialise the tiddler store
 	var SqlTiddlerDatabase = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-database.js").SqlTiddlerDatabase;
 	const sqlTiddlerDatabase = new SqlTiddlerDatabase({
 		engine: engine
 	});
-	await sqlTiddlerDatabase.createTables();
+	// eslint-disable-next-line custom-rules/always-await
+	const beforeStart = sqlTiddlerDatabase.init();
+	beforeAll(async () => {
+		await beforeStart;
+		await sqlTiddlerDatabase.createTables();
+	});
 	// Tear down
 	afterAll(async function() {
 		// Close the database
