@@ -43,7 +43,8 @@
     "mws-add-user": "node ./tiddlywiki.js ./editions/multiwikiserver --build load-mws-demo-data --mws-listen --build mws-add-user --quit",
     "test": "npm run build:test-edition && npm run test:multiwikiserver-edition",
     "lint:fix": "eslint . --fix",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prisma:generate": "(cd plugins/tiddlywiki/multiwikiserver && prisma generate)"
   },
   "dependencies": {
     "@prisma/client": "^6.2.1",

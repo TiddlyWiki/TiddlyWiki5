@@ -15,6 +15,7 @@ This class is largely a wrapper for the sql-tiddler-database.js class, adding th
 
 import { AttachmentStore } from "./attachments";
 import { SqlTiddlerDatabase } from "./sql-tiddler-database";
+import * as path from "path";
 
 type EventListener<T extends any[]> = (...args: T) => void;
 
@@ -22,13 +23,60 @@ interface SqlTiddlerStoreEvents {
 	[x: string]: any[];
 	change: [];
 }
+
+
+class Eventer<E extends Record<string, any[]>> {
+	constructor(public skipDuplicate: boolean) {
+
+	}
+	eventListeners: Record<keyof E, EventListener<any[]>[]> = {} as any;
+	eventOutstanding: Record<keyof E, boolean> = {} as any;
+	addEventListener<K extends keyof E>(
+		type: K, listener: EventListener<E[K]>
+	): void {
+		this.eventListeners[type] = this.eventListeners[type] || [];
+		this.eventListeners[type].push(listener);
+	}
+	removeEventListener<K extends keyof E>(
+		type: K, listener: EventListener<E[K]>
+	): void {
+		const listeners = this.eventListeners[type];
+		if (listeners) {
+			var p = listeners.indexOf(listener);
+			if (p !== -1) {
+				listeners.splice(p, 1);
+			}
+		}
+	}
+	dispatchEvent<K extends keyof E>(
+		type: K, ...args: E[K]
+	): void {
+		const self = this;
+		if (!this.eventOutstanding[type] || !this.skipDuplicate) {
+			$tw.utils.nextTick(function () {
+				self.eventOutstanding[type] = false;
+				const listeners = self.eventListeners[type];
+				if (listeners) {
+					for (var p = 0; p < listeners.length; p++) {
+						var listener = listeners[p];
+						listener.apply(listener, args);
+					}
+				}
+			});
+			this.eventOutstanding[type] = true;
+		}
+	}
+}
+
 interface EventSource<E extends Record<string, any[]>> {
 	addEventListener<K extends keyof E>(type: K, listener: EventListener<E[K]>): void;
 	removeEventListener<K extends keyof E>(type: K, listener: EventListener<E[K]>): void;
 	dispatchEvent<K extends keyof E>(type: K, ...args: E[K]): void;
 }
-
-
+type TxnType = "DEFERRED" | "IMMEDIATE" | "EXCLUSIVE";
+type DEFERRED = "DEFERRED" | "IMMEDIATE" | "EXCLUSIVE";
+type IMMEDIATE = "IMMEDIATE" | "EXCLUSIVE";
+type EXCLUSIVE = "EXCLUSIVE";
 
 /*
 Create a tiddler store. Options include:
@@ -38,12 +86,17 @@ adminWiki - reference to $tw.Wiki object used for configuration
 attachmentStore - reference to associated attachment store
 engine - wasm | better
 */
-export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
+export class SqlTiddlerStore<TXN extends DEFERRED> implements EventSource<SqlTiddlerStoreEvents> {
 	attachmentStore;
 	adminWiki;
-	sqlTiddlerDatabase;
+	sql;
 	databasePath;
+	transactionType: TXN = "DEFERRED" as any;
 
+	private eventer = new Eventer<SqlTiddlerStoreEvents>(true);
+	addEventListener = this.eventer.addEventListener.bind(this.eventer);
+	removeEventListener = this.eventer.removeEventListener.bind(this.eventer);
+	dispatchEvent = this.eventer.dispatchEvent.bind(this.eventer);
 
 
 	constructor(options: {
@@ -65,53 +118,13 @@ export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
 		// Create the database
 		this.databasePath = options.databasePath || ":memory:";
 
-		this.sqlTiddlerDatabase = new SqlTiddlerDatabase({
+		this.sql = new SqlTiddlerDatabase({
 			databasePath: this.databasePath,
 			engine: options.engine
 		});
 
 	}
-	async init() {
-		await this.sqlTiddlerDatabase.createTables();
-	}
 
-	eventListeners: Record<keyof SqlTiddlerStoreEvents, EventListener<any[]>[]> = {};
-	eventOutstanding: Record<keyof SqlTiddlerStoreEvents, boolean> = {};
-	addEventListener<K extends keyof SqlTiddlerStoreEvents>(
-		type: K, listener: EventListener<SqlTiddlerStoreEvents[K]>
-	): void {
-		this.eventListeners[type] = this.eventListeners[type] || [];
-		this.eventListeners[type].push(listener);
-	}
-	removeEventListener<K extends keyof SqlTiddlerStoreEvents>(
-		type: K, listener: EventListener<SqlTiddlerStoreEvents[K]>
-	): void {
-		const listeners = this.eventListeners[type];
-		if (listeners) {
-			var p = listeners.indexOf(listener);
-			if (p !== -1) {
-				listeners.splice(p, 1);
-			}
-		}
-	}
-	dispatchEvent<K extends keyof SqlTiddlerStoreEvents>(
-		type: K, ...args: SqlTiddlerStoreEvents[K]
-	): void {
-		const self = this;
-		if (!this.eventOutstanding[type]) {
-			$tw.utils.nextTick(function () {
-				self.eventOutstanding[type] = false;
-				const listeners = self.eventListeners[type];
-				if (listeners) {
-					for (var p = 0; p < listeners.length; p++) {
-						var listener = listeners[p];
-						listener.apply(listener, args);
-					}
-				}
-			});
-			this.eventOutstanding[type] = true;
-		}
-	}
 	/*
 	Returns null if a bag/recipe name is valid, or a string error message if not
 	*/
@@ -137,7 +150,7 @@ export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
 	/*
 	Returns null if the argument is an array of valid bag/recipe names, or a string error message if not
 	*/
-	validateItemNames(names, allowPrivilegedCharacters) {
+	validateItemNames(names: string[], allowPrivilegedCharacters?: boolean) {
 		if (!$tw.utils.isArray(names)) {
 			return "Not a valid array";
 		}
@@ -154,16 +167,13 @@ export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
 			return errors.join("\n");
 		}
 	}
-	async close() {
-		await this.sqlTiddlerDatabase.close();
-		this.sqlTiddlerDatabase = undefined;
-	}
+
 	/*
 	Given tiddler fields, tiddler_id and a bag_name, return the tiddler fields after the following process:
 	- Apply the tiddler_id as the revision field
 	- Apply the bag_name as the bag field
 	*/
-	processOutgoingTiddler(tiddlerFields: Record<string, any>, tiddler_id: any, bag_name: any, attachment_blob: null) {
+	processOutgoingTiddler(tiddlerFields: Record<string, any>, tiddler_id: any, bag_name: any, attachment_blob: any) {
 		if (attachment_blob !== null) {
 			const bagStr = $tw.utils.encodeURIComponentExtended(bag_name);
 			const titleStr = $tw.utils.encodeURIComponentExtended(tiddlerFields.title);
@@ -181,7 +191,7 @@ export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
 	}
 	/*
 	*/
-	processIncomingTiddler(tiddlerFields: { type: any; text: string | any[]; _canonical_uri: any; title: any; }, existing_attachment_blob: any, existing_canonical_uri: string | undefined) {
+	processIncomingTiddler(tiddlerFields: Record<string, string>, existing_attachment_blob: any, existing_canonical_uri: string | undefined) {
 		let attachmentSizeLimit = $tw.utils.parseNumber(this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/AttachmentSizeLimit"));
 		if (attachmentSizeLimit < 100 * 1024) {
 			attachmentSizeLimit = 100 * 1024;
@@ -227,25 +237,27 @@ export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
 			};
 		}
 	}
-	async saveTiddlersFromPath(tiddler_files_path: any, bag_name: any) {
-		var self = this;
-		await this.sqlTiddlerDatabase.transaction(async function () {
-			// Clear out the bag
-			await self.deleteAllTiddlersInBag(bag_name);
-			// Get the tiddlers
-			var path = require("path");
-			var tiddlersFromPath = $tw.loadTiddlersFromPath(path.resolve($tw.boot.corePath, $tw.config.editionsPath, tiddler_files_path));
-			// Save the tiddlers
-			for (const tiddlersFromFile of tiddlersFromPath) {
-				for (const tiddler of tiddlersFromFile.tiddlers) {
-					await self.saveBagTiddler(tiddler, bag_name);
-				}
+	/**
+	 * 
+	 * @param this Requires a transaction with at least IMMEDIATE isolation
+	 * @param tiddler_files_path `resolve($tw.boot.corePath, $tw.config.editionsPath, tiddler_files_path)`
+	 * @param bag_name 
+	 */
+	async saveTiddlersFromPath(this: SqlTiddlerStore<IMMEDIATE>, tiddler_files_path: string, bag_name: any) {
+		// Clear out the bag
+		await this.deleteAllTiddlersInBag(bag_name);
+		// Get the tiddlers
+		var tiddlersFromPath = $tw.loadTiddlersFromPath(path.resolve($tw.boot.corePath, $tw.config.editionsPath, tiddler_files_path));
+		// Save the tiddlers
+		for (const tiddlersFromFile of tiddlersFromPath) {
+			for (const tiddler of tiddlersFromFile.tiddlers) {
+				await this.saveBagTiddler(tiddler, bag_name);
 			}
-		});
-		self.dispatchEvent("change");
+		}
+		this.dispatchEvent("change");
 	}
 	async listBags() {
-		return await this.sqlTiddlerDatabase.listBags();
+		return await this.sql.listBags();
 	}
 	/*
 	Options include:
@@ -255,18 +267,16 @@ export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
 	async createBag(bag_name: string, description: string, options: { allowPrivilegedCharacters?: boolean; }) {
 		options = options || {};
 		var self = this;
-		return await this.sqlTiddlerDatabase.transaction(async function () {
-			const validationBagName = self.validateItemName(bag_name, options.allowPrivilegedCharacters);
-			if (validationBagName) {
-				return { message: validationBagName };
-			}
-			await self.sqlTiddlerDatabase.createBag(bag_name, description);
-			self.dispatchEvent("change");
-			return null;
-		});
+		const validationBagName = self.validateItemName(bag_name, options.allowPrivilegedCharacters);
+		if (validationBagName) {
+			return { message: validationBagName };
+		}
+		await self.sql.createBag(bag_name, description);
+		self.dispatchEvent("change");
+		return null;
 	}
 	async listRecipes() {
-		return await this.sqlTiddlerDatabase.listRecipes();
+		return await this.sql.listRecipes();
 	}
 	/*
 	Returns null on success, or {message:} on error
@@ -286,24 +296,24 @@ export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
 		if (bag_names.length === 0) {
 			return { message: "Recipes must contain at least one bag" };
 		}
-		var self = this;
-		return await this.sqlTiddlerDatabase.transaction(async function () {
-			await self.sqlTiddlerDatabase.createRecipe(recipe_name, bag_names, description);
-			self.dispatchEvent("change");
-			return null;
-		});
+
+		// return await this.sql.transaction(async function () {
+		await this.sql.createRecipe(recipe_name, bag_names, description);
+		this.dispatchEvent("change");
+		return null;
+		// });
 	}
 	/*
 	Returns {tiddler_id:}
 	*/
-	async saveBagTiddler(incomingTiddlerFields, bag_name) {
+	async saveBagTiddler(incomingTiddlerFields: Record<string, string>, bag_name: string) {
 		let _canonical_uri;
-		const existing_attachment_blob = await this.sqlTiddlerDatabase.getBagTiddlerAttachmentBlob(incomingTiddlerFields.title, bag_name);
+		const existing_attachment_blob = await this.sql.getBagTiddlerAttachmentBlob(incomingTiddlerFields.title, bag_name);
 		if (existing_attachment_blob) {
 			_canonical_uri = `/bags/${$tw.utils.encodeURIComponentExtended(bag_name)}/tiddlers/${$tw.utils.encodeURIComponentExtended(incomingTiddlerFields.title)}/blob`;
 		}
 		const { tiddlerFields, attachment_blob } = this.processIncomingTiddler(incomingTiddlerFields, existing_attachment_blob, _canonical_uri);
-		const result = await this.sqlTiddlerDatabase.saveBagTiddler(tiddlerFields, bag_name, attachment_blob);
+		const result = await this.sql.saveBagTiddler(tiddlerFields, bag_name, attachment_blob);
 		this.dispatchEvent("change");
 		return result;
 	}
@@ -317,10 +327,17 @@ export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
   
 	Returns {tiddler_id:}
 	*/
-	async saveBagTiddlerWithAttachment(incomingTiddlerFields, bag_name, options) {
+	async saveBagTiddlerWithAttachment(
+		this: SqlTiddlerStore<IMMEDIATE>,
+		incomingTiddlerFields: Record<string, string>,
+		bag_name: string,
+		options: {
+			filepath: any; type: any; hash: any; _canonical_uri: any;
+		}
+	) {
 		const attachment_blob = this.attachmentStore.adoptAttachment(options.filepath, options.type, options.hash, options._canonical_uri);
 		if (attachment_blob) {
-			const result = await this.sqlTiddlerDatabase.saveBagTiddler(incomingTiddlerFields, bag_name, attachment_blob);
+			const result = await this.sql.saveBagTiddler(incomingTiddlerFields, bag_name, attachment_blob);
 			this.dispatchEvent("change");
 			return result;
 		} else {
@@ -330,23 +347,27 @@ export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
 	/*
 	Returns {tiddler_id:,bag_name:}
 	*/
-	async saveRecipeTiddler(incomingTiddlerFields, recipe_name) {
-		const existing_attachment_blob = await this.sqlTiddlerDatabase.getRecipeTiddlerAttachmentBlob(incomingTiddlerFields.title, recipe_name);
-		const { tiddlerFields, attachment_blob } = this.processIncomingTiddler(incomingTiddlerFields, existing_attachment_blob, incomingTiddlerFields._canonical_uri);
-		const result = await this.sqlTiddlerDatabase.saveRecipeTiddler(tiddlerFields, recipe_name, attachment_blob);
+	async saveRecipeTiddler(incomingTiddlerFields: Record<string, string>, recipe_name: string) {
+		const existing_attachment_blob = await this.sql.getRecipeTiddlerAttachmentBlob(
+			incomingTiddlerFields.title, recipe_name);
+
+		const { tiddlerFields, attachment_blob } = this.processIncomingTiddler(
+			incomingTiddlerFields, existing_attachment_blob, incomingTiddlerFields._canonical_uri);
+
+		const result = await this.sql.saveRecipeTiddler(tiddlerFields, recipe_name, attachment_blob);
 		this.dispatchEvent("change");
 		return result;
 	}
-	async deleteTiddler(title, bag_name) {
-		const result = await this.sqlTiddlerDatabase.deleteTiddler(title, bag_name);
+	async deleteTiddler(title: string, bag_name: string) {
+		const result = await this.sql.deleteTiddler(title, bag_name);
 		this.dispatchEvent("change");
 		return result;
 	}
 	/*
 	returns {tiddler_id:,tiddler:}
 	*/
-	async getBagTiddler(title, bag_name) {
-		var tiddlerInfo = await this.sqlTiddlerDatabase.getBagTiddler(title, bag_name);
+	async getBagTiddler(title: string, bag_name: string) {
+		var tiddlerInfo = await this.sql.getBagTiddler(title, bag_name);
 		if (tiddlerInfo) {
 			return await Object.assign(
 				{},
@@ -365,8 +386,8 @@ export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
 	type: type of file
 	Returns {tiddler_id:,bag_name:}
 	*/
-	async getBagTiddlerStream(title, bag_name) {
-		const tiddlerInfo = await this.sqlTiddlerDatabase.getBagTiddler(title, bag_name);
+	async getBagTiddlerStream(title: string, bag_name: string) {
+		const tiddlerInfo = await this.sql.getBagTiddler(title, bag_name);
 		if (tiddlerInfo) {
 			if (tiddlerInfo.attachment_blob) {
 				return $tw.utils.extend(
@@ -401,15 +422,12 @@ export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
 	/*
 	Returns {bag_name:, tiddler: {fields}, tiddler_id:}
 	*/
-	async getRecipeTiddler(title, recipe_name) {
-		var tiddlerInfo = await this.sqlTiddlerDatabase.getRecipeTiddler(title, recipe_name);
+	async getRecipeTiddler(title: string, recipe_name: string) {
+		var tiddlerInfo = await this.sql.getRecipeTiddler(title, recipe_name);
 		if (tiddlerInfo) {
-			return Object.assign(
-				{},
-				tiddlerInfo,
-				{
-					tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler, tiddlerInfo.tiddler_id, tiddlerInfo.bag_name, tiddlerInfo.attachment_blob)
-				});
+			return Object.assign({}, tiddlerInfo, {
+				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler, tiddlerInfo.tiddler_id, tiddlerInfo.bag_name, tiddlerInfo.attachment_blob)
+			});
 		} else {
 			return null;
 		}
@@ -417,40 +435,40 @@ export class SqlTiddlerStore implements EventSource<SqlTiddlerStoreEvents> {
 	/*
 	Get the titles of the tiddlers in a bag. Returns an empty array for bags that do not exist
 	*/
-	async getBagTiddlers(bag_name) {
-		return await this.sqlTiddlerDatabase.getBagTiddlers(bag_name);
+	async getBagTiddlers(bag_name: string) {
+		return await this.sql.getBagTiddlers(bag_name);
 	}
 	/*
 	Get the tiddler_id of the newest tiddler in a bag. Returns null for bags that do not exist
 	*/
-	async getBagLastTiddlerId(bag_name) {
-		return await this.sqlTiddlerDatabase.getBagLastTiddlerId(bag_name);
+	async getBagLastTiddlerId(bag_name: string) {
+		return await this.sql.getBagLastTiddlerId(bag_name);
 	}
 	/*
 	Get the titles of the tiddlers in a recipe as {title:,bag_name:}. Returns null for recipes that do not exist
 	*/
-	async getRecipeTiddlers(recipe_name, options) {
-		return await this.sqlTiddlerDatabase.getRecipeTiddlers(recipe_name, options);
+	async getRecipeTiddlers(recipe_name: string, options: { limit?: number; last_known_tiddler_id?: number; include_deleted?: boolean; } | undefined) {
+		return await this.sql.getRecipeTiddlers(recipe_name, options);
 	}
 	/*
 	Get the tiddler_id of the newest tiddler in a recipe. Returns null for recipes that do not exist
 	*/
-	async getRecipeLastTiddlerId(recipe_name) {
-		return await this.sqlTiddlerDatabase.getRecipeLastTiddlerId(recipe_name);
+	async getRecipeLastTiddlerId(recipe_name: string) {
+		return await this.sql.getRecipeLastTiddlerId(recipe_name);
 	}
-	async deleteAllTiddlersInBag(bag_name) {
+	async deleteAllTiddlersInBag(bag_name: string) {
 		var self = this;
-		return await this.sqlTiddlerDatabase.transaction(async function () {
-			const result = await self.sqlTiddlerDatabase.deleteAllTiddlersInBag(bag_name);
-			self.dispatchEvent("change");
-			return result;
-		});
+		// return await this.sql.transaction(async function () {
+		const result = await self.sql.deleteAllTiddlersInBag(bag_name);
+		self.dispatchEvent("change");
+		return result;
+		// });
 	}
 	/*
 	Get the names of the bags in a recipe. Returns an empty array for recipes that do not exist
 	*/
-	async getRecipeBags(recipe_name) {
-		return await this.sqlTiddlerDatabase.getRecipeBags(recipe_name);
+	async getRecipeBags(recipe_name: any) {
+		return await this.sql.getRecipeBags(recipe_name);
 	}
 }
 

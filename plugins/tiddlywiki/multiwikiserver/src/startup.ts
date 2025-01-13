@@ -18,7 +18,7 @@ import { SqlTiddlerStore } from "./store/sql-tiddler-store";
 declare global {
 	interface $TW {
 		mws: {
-			store: SqlTiddlerStore;
+			store: SqlTiddlerStore<any>;
 			serverManager: ServerManager;
 		}
 	}

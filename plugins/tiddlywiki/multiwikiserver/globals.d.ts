@@ -1,12 +1,10 @@
 import { IncomingMessage as HTTPIncomingMessage, ServerResponse as HTTPServerResponse } from "http";
 import { Server as _Server } from "./src/server";
 import { Router } from "./src/router";
-import { SqlTiddlerStore as _SqlTiddlerStore } from "./modules/store/sql-tiddler-store";
-import { SqlTiddlerDatabase as _SqlTiddlerDatabase } from "./modules/store/sql-tiddler-database";
-import { Authenticator as _Authenticator } from "./auth/authentication";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { DefaultArgs } from "@prisma/client/runtime/library";
 import "./src/startup";
+import { SqlTiddlerStore } from "./src/store/sql-tiddler-store";
 
 declare global {
   const $tw: $TW;
@@ -49,10 +47,8 @@ declare global {
 
   }
 
-  type Server = _Server;
-  type SqlTiddlerStore = _SqlTiddlerStore;
-  type SqlTiddlerDatabase = _SqlTiddlerDatabase;
-  type Authenticator = _Authenticator;
+
+
 
   type HTTPVerb = "GET" | "OPTIONS" | "HEAD" | "PUT" | "POST" | "DELETE";
 
@@ -76,6 +72,7 @@ declare global {
     F extends "buffer" ? Buffer :
     F extends "stream" ? undefined :
     string;
+    store: SqlTiddlerStore<any>;
   }
 
   type PrismaTxnClient = Omit<PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use" | "$extends">

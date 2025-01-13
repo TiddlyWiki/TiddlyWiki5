@@ -10,10 +10,10 @@ model acl {
   acl_id        Int          @id @default(autoincrement())
   entity_name   String
   entity_type   String
-  role_id       Int?
-  permission_id Int?
-  permissions   permissions? @relation(fields: [permission_id], references: [permission_id], onDelete: NoAction, onUpdate: NoAction)
-  roles         roles?       @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction)
+  role_id       Int
+  permission_id Int
+  permission   permissions? @relation(fields: [permission_id], references: [permission_id], onDelete: NoAction, onUpdate: NoAction)
+  role         roles?       @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([entity_name], map: "idx_acl_entity_id")
 }
@@ -27,21 +27,11 @@ model bags {
   tiddlers      tiddlers[]
 }
 
-model fields {
-  tiddler_id  Int
-  field_name  String
-  field_value String
-  tiddlers    tiddlers? @relation(fields: [tiddler_id], references: [tiddler_id], onDelete: Cascade)
-
-  @@id([tiddler_id, field_name])
-  @@index([tiddler_id], map: "idx_fields_tiddler_id")
-}
-
 model group_roles {
   group_id Int
   role_id  Int
-  roles    roles  @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction)
-  groups   groups @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction)
+  role    roles  @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction)
+  group   groups @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([group_id, role_id])
 }
@@ -66,8 +56,8 @@ model recipe_bags {
   recipe_id Int
   bag_id    Int
   position  Int
-  bags      bags    @relation(fields: [bag_id], references: [bag_id], onDelete: Cascade)
-  recipes   recipes @relation(fields: [recipe_id], references: [recipe_id], onDelete: Cascade)
+  bag      bags    @relation(fields: [bag_id], references: [bag_id], onDelete: Cascade)
+  recipe   recipes @relation(fields: [recipe_id], references: [recipe_id], onDelete: Cascade)
 
   @@unique([recipe_id, bag_id], map: "sqlite_autoindex_recipe_bags_1")
   @@index([recipe_id], map: "idx_recipe_bags_recipe_id")
@@ -77,17 +67,17 @@ model recipes {
   recipe_id   Int           @id @default(autoincrement())
   recipe_name String        @unique(map: "sqlite_autoindex_recipes_1")
   description String
-  owner_id    Int?
   recipe_bags recipe_bags[]
-  users       users?        @relation(fields: [owner_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  owner_id    Int?
+  user       users?        @relation(fields: [owner_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model role_permissions {
   role_id       Int
   permission_id Int
-  permissions   permissions @relation(fields: [permission_id], references: [permission_id], onDelete: NoAction, onUpdate: NoAction)
-  roles         roles       @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction)
+  permission   permissions @relation(fields: [permission_id], references: [permission_id], onDelete: NoAction, onUpdate: NoAction)
+  role         roles       @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([role_id, permission_id])
 }
@@ -96,18 +86,18 @@ model roles {
   role_id          Int                @id @default(autoincrement())
   role_name        String             @unique(map: "sqlite_autoindex_roles_1")
   description      String?
-  acl              acl[]
+  acls             acl[]
   group_roles      group_roles[]
   role_permissions role_permissions[]
   user_roles       user_roles[]
 }
 
 model sessions {
-  user_id       Int
   session_id    String @id
   created_at    String
   last_accessed String
-  users         users  @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  user_id       Int
+  user          users  @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model tiddlers {
@@ -117,17 +107,29 @@ model tiddlers {
   is_deleted      Boolean
   attachment_blob String?
   fields          fields[]
-  bags            bags     @relation(fields: [bag_id], references: [bag_id], onDelete: Cascade)
+  // Deleting a referenced record (bag_id) will trigger the deletion of referencing record (tiddler).
+  bag             bags     @relation(fields: [bag_id], references: [bag_id], onDelete: Cascade)
 
   @@unique([bag_id, title], map: "sqlite_autoindex_tiddlers_1")
   @@index([bag_id], map: "idx_tiddlers_bag_id")
 }
 
+model fields {
+  tiddler_id  Int
+  field_name  String
+  field_value String
+  // Deleting a referenced record (tiddler_id) will trigger the deletion of referencing record (field).
+  tiddler    tiddlers? @relation(fields: [tiddler_id], references: [tiddler_id], onDelete: Cascade)
+
+  @@id([tiddler_id, field_name])
+  @@index([tiddler_id], map: "idx_fields_tiddler_id")
+}
+
 model user_groups {
   user_id  Int
   group_id Int
-  groups   groups @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction)
-  users    users  @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  group    groups @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction)
+  user     users  @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([user_id, group_id])
 
@@ -137,8 +139,8 @@ model user_groups {
 model user_roles {
   user_id Int
   role_id Int
-  roles   roles @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction)
-  users   users @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  role   roles @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction)
+  user   users @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([user_id, role_id])
 

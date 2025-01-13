@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noEmit": true,
     "target": "ES2015",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -15,12 +16,15 @@
         "./src/*"
       ],
     },
-    "allowJs": false,
+    "allowJs": true,
     "types":["./globals.d.ts", "node"],
     "strict": true,
   },
   "include": [
+    "./globals.d.ts",
     "./src/**/*.ts",
+    "./module/**/*.js",
+    "./auth/**/*.js",
   ],
  
 }
