@@ -19,9 +19,9 @@ exports.path = /^\/admin\/roles\/([^\/]+)\/?$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<1,"www-form-urlencoded">} */	
 exports.handler = async function(request, response, state) {
-  var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
+  var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
   var role_id = state.params[0];
   var role_name = state.data.role_name;
   var role_description = state.data.role_description;

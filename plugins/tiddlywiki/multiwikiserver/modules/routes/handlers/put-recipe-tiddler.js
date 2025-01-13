@@ -19,14 +19,14 @@ exports.path = /^\/recipes\/([^\/]+)\/tiddlers\/(.+)$/;
 exports.useACL = true;
 
 exports.entityName = "recipe"
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<2>} */	
 exports.handler = async function (request, response, state) {
 	// Get the  parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]),
 		fields = $tw.utils.parseJSONSafe(state.data);
 	if(recipe_name && title === fields.title) {
-		var result = await $tw.mws.store.saveRecipeTiddler(fields, recipe_name);
+		var result = await state.store.saveRecipeTiddler(fields, recipe_name);
 		if(!response.headersSent) {
 			if(result) {
 				response.writeHead(204, "OK", {

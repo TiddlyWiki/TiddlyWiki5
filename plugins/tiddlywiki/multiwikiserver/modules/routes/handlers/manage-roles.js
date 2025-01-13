@@ -15,13 +15,13 @@ GET /admin/manage-roles
 exports.method = "GET";
 
 exports.path = /^\/admin\/roles\/?$/;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<0>} */	
 exports.handler = async function(request, response, state) {
 	if(request.url.includes("*")) {
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-role/error");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-role/success");
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/post-role/error");
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/post-role/success");
 	}
-	var roles = await state.server.sqlTiddlerDatabase.listRoles();
+	var roles = await state.store.sqlTiddlerDatabase.listRoles();
 	var editRoleId = request.url.includes("?") ? request.url.split("?")[1]?.split("=")[1] : null;
 	var editRole = editRoleId ? roles.find(role => role.role_id === $tw.utils.parseInt(editRoleId, 10)) : null;
 
@@ -30,7 +30,7 @@ exports.handler = async function(request, response, state) {
 		editRoleId = null;
 	}
 
-	var html = $tw.mws.store.adminWiki.renderTiddler("text/plain", "$:/plugins/tiddlywiki/multiwikiserver/templates/page", {
+	var html = state.store.adminWiki.renderTiddler("text/plain", "$:/plugins/tiddlywiki/multiwikiserver/templates/page", {
 		variables: {
 			"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/manage-roles",
 			"roles-list": JSON.stringify(roles),

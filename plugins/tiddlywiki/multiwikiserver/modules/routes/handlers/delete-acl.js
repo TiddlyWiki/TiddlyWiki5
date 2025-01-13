@@ -24,9 +24,9 @@ POST /admin/delete-acl
 
 	exports.csrfDisable = true;
 
-	/** @type {ServerRouteHandler} */	
+	/** @type {ServerRouteHandler<0, "www-form-urlencoded">} */	
 	exports.handler = async function (request, response, state) {
-		var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
+		var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
 		var recipe_name = state.data.recipe_name;
 		var bag_name = state.data.bag_name;
 		var acl_id = state.data.acl_id;

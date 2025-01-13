@@ -19,14 +19,14 @@ exports.path = /^\/delete-user-account\/?$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
 exports.handler = async function (request, response, state) {
-	var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
+	var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
 	var userId = state.data.userId;
 
 	// Check if user is admin
 	if(!state.authenticatedUser || !state.authenticatedUser.isAdmin) {
-		$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/delete-user/error",
 			text: "You must be an administrator to delete user accounts"
 		}));
@@ -37,7 +37,7 @@ exports.handler = async function (request, response, state) {
 
 	// Prevent admin from deleting their own account
 	if(state.authenticatedUser.user_id === userId) {
-		$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/delete-user/error",
 			text: "Cannot delete your own account"
 		}));
@@ -49,7 +49,7 @@ exports.handler = async function (request, response, state) {
 	// Check if the user exists
 	var user = await sqlTiddlerDatabase.getUser(userId);
 	if(!user) {
-		$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/delete-user/error",
 			text: "User not found"
 		}));
@@ -61,7 +61,7 @@ exports.handler = async function (request, response, state) {
 	// Check if this is the last admin account
 	var adminRole = await sqlTiddlerDatabase.getRoleByName("ADMIN");
 	if(!adminRole) {
-		$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/delete-user/error",
 			text: "Admin role not found"
 		}));
@@ -72,7 +72,7 @@ exports.handler = async function (request, response, state) {
 
 	var adminUsers = await sqlTiddlerDatabase.listUsersByRoleId(adminRole.role_id);
 	if(adminUsers.length <= 1 && adminUsers.some(admin => admin.user_id === parseInt(userId))) {
-		$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/delete-user/error",
 			text: "Cannot delete the last admin account"
 		}));

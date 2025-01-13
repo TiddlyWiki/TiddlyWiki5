@@ -43,11 +43,11 @@ function redirectToLogin(response, returnUrl) {
  * @param {string} permissionName 
  * @returns 
  */
-exports.middleware = async function (request, response, state, entityType, permissionName) {
+exports.middleware = async function middleware(request, response, state, entityType, permissionName) {
   var extensionRegex = /\.[A-Za-z0-9]{1,4}$/;
 
-	var server = state.server,
-		sqlTiddlerDatabase = $tw.mws.store.sqlTiddlerDatabase || server.sqlTiddlerDatabase,
+	var
+		sqlTiddlerDatabase = state.store.sqlTiddlerDatabase,
 		entityName = state.data ? (state.data[entityType+"_name"] || state.params[0]) : state.params[0];
 
 	// First, replace '%3A' with ':' to handle TiddlyWiki's system tiddlers

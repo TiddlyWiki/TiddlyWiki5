@@ -19,9 +19,9 @@ exports.path = /^\/admin\/post-acl\/?$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
 exports.handler = async function (request, response, state) {
-	var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
+	var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
 	var entity_type = state.data.entity_type;
 	var recipe_name = state.data.recipe_name;
 	var bag_name = state.data.bag_name;

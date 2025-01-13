@@ -14,9 +14,9 @@ GET /admin/acl
 exports.method = "GET";
 
 exports.path = /^\/admin\/acl\/(.+)$/;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<1>} */	
 exports.handler = async function (request, response, state) {
-	var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
+	var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
 	var params = state.params[0].split("/")
 	var recipeName = params[0];
 	var bagName = params[params.length - 1];
@@ -35,8 +35,8 @@ exports.handler = async function (request, response, state) {
 
 	var recipeAclRecords = await sqlTiddlerDatabase.getEntityAclRecords(recipe.recipe_name);
 	var bagAclRecords = await sqlTiddlerDatabase.getEntityAclRecords(bag.bag_name);
-	var roles = await state.server.sqlTiddlerDatabase.listRoles();
-	var permissions = await state.server.sqlTiddlerDatabase.listPermissions();
+	var roles = await state.store.sqlTiddlerDatabase.listRoles();
+	var permissions = await state.store.sqlTiddlerDatabase.listPermissions();
 
 	// This ensures that the user attempting to view the ACL management page has permission to do so
 	async function canContinue() {
@@ -90,7 +90,7 @@ exports.handler = async function (request, response, state) {
 
 	response.writeHead(200, "OK", { "Content-Type": "text/html" });
 
-	var html = $tw.mws.store.adminWiki.renderTiddler("text/plain", "$:/plugins/tiddlywiki/multiwikiserver/templates/page", {
+	var html = state.store.adminWiki.renderTiddler("text/plain", "$:/plugins/tiddlywiki/multiwikiserver/templates/page", {
 		variables: {
 			"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/manage-acl",
 			"roles-list": JSON.stringify(roles),

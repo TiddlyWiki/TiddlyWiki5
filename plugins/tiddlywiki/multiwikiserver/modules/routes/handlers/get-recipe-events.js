@@ -21,7 +21,7 @@ const SSE_HEARTBEAT_INTERVAL_MS = 10 * 1000;
 exports.method = "GET";
 
 exports.path = /^\/recipes\/([^\/]+)\/events$/;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<1>} */	
 exports.handler = async function(request,response,state) {
 	// Get the  parameters
 	const recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]);
@@ -45,7 +45,7 @@ exports.handler = async function(request,response,state) {
 		// Method to get changed tiddler events and send to the client
 		async function sendUpdates() {
 			// Get the tiddlers in the recipe since the last known tiddler_id
-			var recipeTiddlers = await $tw.mws.store.getRecipeTiddlers(recipe_name,{
+			var recipeTiddlers = await state.store.getRecipeTiddlers(recipe_name,{
 				include_deleted: true,
 				last_known_tiddler_id: last_known_tiddler_id
 			});
@@ -59,7 +59,7 @@ exports.handler = async function(request,response,state) {
 					response.write(`event: change\n`)
 					let data = tiddlerInfo;
 					if(!tiddlerInfo.is_deleted) {
-						const tiddler = await $tw.mws.store.getRecipeTiddler(tiddlerInfo.title,recipe_name);
+						const tiddler = await state.store.getRecipeTiddler(tiddlerInfo.title,recipe_name);
 						if(tiddler) {
 							data = $tw.utils.extend({},data,{tiddler: tiddler.tiddler})
 						}	
@@ -72,11 +72,11 @@ exports.handler = async function(request,response,state) {
 		}
 		// Send current and future changes
 		await sendUpdates();
-		$tw.mws.store.addEventListener("change",sendUpdates);
+		state.store.addEventListener("change",sendUpdates);
 		// Clean up when the connection closes
 		response.on("close",function () {
 			clearInterval(heartbeatTimer);
-			$tw.mws.store.removeEventListener("change",sendUpdates);
+			state.store.removeEventListener("change",sendUpdates);
 		});
 		return;
 	}

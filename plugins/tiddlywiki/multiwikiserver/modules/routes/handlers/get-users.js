@@ -15,12 +15,12 @@ GET /admin/users
 exports.method = "GET";
 
 exports.path = /^\/admin\/users$/;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<0>} */	
 exports.handler = async function(request,response,state) {
-	var userList = await state.server.sqlTiddlerDatabase.listUsers();
+	var userList = await state.store.sqlTiddlerDatabase.listUsers();
 	if(request.url.includes("*")) {
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/error");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/error");
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");
 	}
 
 	// Ensure userList is an array
@@ -49,7 +49,7 @@ exports.handler = async function(request,response,state) {
 	});
 
 	// Render the html
-	var html = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{
+	var html = state.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{
 		variables: {
 			"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/get-users",
 			"user-list": JSON.stringify(userList),

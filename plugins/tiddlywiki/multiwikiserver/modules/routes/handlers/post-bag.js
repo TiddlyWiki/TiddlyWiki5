@@ -28,10 +28,10 @@ exports.csrfDisable = true;
 exports.useACL = true;
 
 exports.entityName = "bag"
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
 exports.handler = async function(request,response,state) {
 	if(state.data.bag_name) {
-		const result = await $tw.mws.store.createBag(state.data.bag_name,state.data.description);
+		const result = await state.store.createBag(state.data.bag_name,state.data.description);
 		if(!result) {
 			state.sendResponse(302,{
 				"Content-Type": "text/plain",

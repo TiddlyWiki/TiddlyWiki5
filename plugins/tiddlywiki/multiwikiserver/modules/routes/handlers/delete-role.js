@@ -19,9 +19,9 @@ POST /admin/delete-role
 	exports.bodyFormat = "www-form-urlencoded";
 
 	exports.csrfDisable = true;
-	/** @type {ServerRouteHandler} */	
+	/** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
 	exports.handler = async function (request, response, state) {
-		var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
+		var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
 		var role_id = state.data.role_id;
 
 		if(!state.authenticatedUser || !state.authenticatedUser.isAdmin) {

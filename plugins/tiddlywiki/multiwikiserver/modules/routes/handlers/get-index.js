@@ -16,12 +16,12 @@ GET /?show_system=true
 exports.method = "GET";
 
 exports.path = /^\/$/;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<0>} */	
 exports.handler = async function(request,response,state) {
 	// Get the bag and recipe information
-	var bagList = await $tw.mws.store.listBags(),
-		recipeList = await $tw.mws.store.listRecipes(),
-		sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
+	var bagList = await state.store.listBags(),
+		recipeList = await state.store.listRecipes(),
+		sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
 
 	// If application/json is requested then this is an API request, and gets the response in JSON
 	if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
@@ -63,7 +63,7 @@ exports.handler = async function(request,response,state) {
 		}))
 
 		// Render the html
-		var html = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{
+		var html = state.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{
 			variables: {
 				"show-system": state.queryParameters.show_system || "off",
 				"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/get-index",

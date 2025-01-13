@@ -19,7 +19,7 @@ exports.path = /^\/admin\/post-anon-config\/?$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
 // eslint-disable-next-line require-await
 exports.handler = async function(request, response, state) {
   // Check if user is authenticated and is admin

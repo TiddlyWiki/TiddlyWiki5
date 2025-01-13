@@ -25,12 +25,12 @@ exports.path = /^\/login$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
 exports.handler = async function(request,response,state) {
-	var auth = authenticator(state.server.sqlTiddlerDatabase);
+	var auth = authenticator(state.store.sqlTiddlerDatabase);
 	var username = state.data.username;
 	var password = state.data.password;
-	var user = await state.server.sqlTiddlerDatabase.getUserByUsername(username);
+	var user = await state.store.sqlTiddlerDatabase.getUserByUsername(username);
 	var isPasswordValid = auth.verifyPassword(password, user ? user.password : null)
 
 	if(user && isPasswordValid) {
@@ -47,7 +47,7 @@ exports.handler = async function(request,response,state) {
 			});
 		}
 	} else {
-		$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/login/error",
 			text: "Invalid username or password"
 		}));

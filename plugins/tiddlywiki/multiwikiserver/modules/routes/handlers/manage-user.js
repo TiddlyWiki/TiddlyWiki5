@@ -15,27 +15,27 @@ GET /admin/users/:user_id
 exports.method = "GET";
 
 exports.path = /^\/admin\/users\/([^\/]+)\/?$/;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<1>} */	
 exports.handler = async function(request,response,state) {
 	var user_id = $tw.utils.decodeURIComponentSafe(state.params[0]);
-	var userData = await state.server.sqlTiddlerDatabase.getUser(user_id);
+	var userData = await state.store.sqlTiddlerDatabase.getUser(user_id);
 
 	// Clean up any existing error/success messages if the user_id is different from the "$:/temp/mws/user-info/preview-user-id"
 	var lastPreviewedUser = $tw.wiki.getTiddlerText("$:/temp/mws/user-info/" + user_id + "/preview-user-id");
 
 	if(user_id !== lastPreviewedUser || request.url.includes("preview")) {
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + user_id + "/	error");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + user_id + "/success");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/login/error");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/delete-user/" + user_id + "/error");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/delete-user/" + user_id + "/success");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/update-profile/" + user_id + "/error");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/update-profile/" + user_id + "/success");
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + user_id + "/	error");
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + user_id + "/success");
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/login/error");
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/delete-user/" + user_id + "/error");
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/delete-user/" + user_id + "/success");
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/update-profile/" + user_id + "/error");
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/update-profile/" + user_id + "/success");
 	}
 
 	if(!userData) {
 		response.writeHead(404, "Not Found", {"Content-Type": "text/html"});
-		var errorHtml = $tw.mws.store.adminWiki.renderTiddler("text/plain", "$:/plugins/tiddlywiki/multiwikiserver/templates/error", {
+		var errorHtml = state.store.adminWiki.renderTiddler("text/plain", "$:/plugins/tiddlywiki/multiwikiserver/templates/error", {
 			variables: {
 				"error-message": "User not found"
 			}
@@ -63,13 +63,13 @@ exports.handler = async function(request,response,state) {
 	};
 
 	// Get all roles which the user has been assigned
-	var userRole = await state.server.sqlTiddlerDatabase.getUserRoles(user_id);
-	var allRoles = await state.server.sqlTiddlerDatabase.listRoles();
+	var userRole = await state.store.sqlTiddlerDatabase.getUserRoles(user_id);
+	var allRoles = await state.store.sqlTiddlerDatabase.listRoles();
 
 	// sort allRoles by placing the user's role at the top of the list
 	allRoles.sort(function(a, b){ return (a.role_id === userRole?.role_id ? -1 : 1) });
 
-	$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+	state.store.adminWiki.addTiddler(new $tw.Tiddler({
 		title: "$:/temp/mws/user-info/" + user_id + "/preview-user-id",
 		text: user_id
 	}));
@@ -79,7 +79,7 @@ exports.handler = async function(request,response,state) {
 	});
 
 	// Render the html
-	var html = $tw.mws.store.adminWiki.renderTiddler("text/plain", "$:/plugins/tiddlywiki/multiwikiserver/templates/page", {
+	var html = state.store.adminWiki.renderTiddler("text/plain", "$:/plugins/tiddlywiki/multiwikiserver/templates/page", {
 		variables: {
 			"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/manage-user",
 			"user": JSON.stringify(user),

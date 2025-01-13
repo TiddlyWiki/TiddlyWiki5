@@ -17,14 +17,14 @@ var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helper
 exports.method = "GET";
 
 exports.path = /^\/bags\/([^\/]+)\/tiddlers\/([^\/]+)\/blob$/;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<2>} */	
 exports.handler = async function(request,response,state) {
 	await aclMiddleware(request, response, state, "bag", "READ");
 	// Get the  parameters
 	const bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]);
 	if(bag_name) {
-		const result = await $tw.mws.store.getBagTiddlerStream(title,bag_name);
+		const result = await state.store.getBagTiddlerStream(title,bag_name);
 		if(result && !response.headersSent) {
 			response.writeHead(200, "OK",{
 				Etag: state.makeTiddlerEtag(result),

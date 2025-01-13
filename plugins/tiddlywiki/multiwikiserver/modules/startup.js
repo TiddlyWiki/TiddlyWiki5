@@ -36,6 +36,11 @@ exports.startup = async function() {
 
 	const { ServerManager } = require("$:/plugins/tiddlywiki/multiwikiserver/mws-server.js");
 	const serverManager = new ServerManager();
+
+	const prisma = require("@prisma/client");
+
+	// Create a new Prisma client
+	const db = new prisma.PrismaClient();
 	
 	$tw.mws = { store, serverManager };
 	

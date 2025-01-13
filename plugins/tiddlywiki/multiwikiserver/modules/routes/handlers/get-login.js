@@ -15,7 +15,7 @@ GET /login
 exports.method = "GET";
 
 exports.path = /^\/login$/;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<0>} */	
 exports.handler = async function(request,response,state) {
 	// Check if the user already has a valid session
 	var authenticatedUser = await state.server.authenticateUser(request, response);
@@ -25,9 +25,9 @@ exports.handler = async function(request,response,state) {
 			response.end();
 			return;
 	}
-	var loginTiddler = $tw.mws.store.adminWiki.getTiddler("$:/plugins/tiddlywiki/multiwikiserver/auth/form/login");
+	var loginTiddler = state.store.adminWiki.getTiddler("$:/plugins/tiddlywiki/multiwikiserver/auth/form/login");
 	if(loginTiddler) {
-		var text = $tw.mws.store.adminWiki.renderTiddler("text/html", loginTiddler.fields.title);
+		var text = state.store.adminWiki.renderTiddler("text/html", loginTiddler.fields.title);
 		response.writeHead(200, { "Content-Type": "text/html" });
 		response.end(text);
 	} else {

@@ -19,14 +19,14 @@ exports.path = /^\/admin\/post-role\/?$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
 exports.handler = async function (request, response, state) {
-	var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
+	var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
 	var role_name = state.data.role_name;
 	var role_description = state.data.role_description;
 
 	if(!state.authenticatedUser || !state.authenticatedUser.isAdmin) {
-		$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/post-role/error",
 			text: "Unauthorized access. Admin privileges required."
 		}));
@@ -36,7 +36,7 @@ exports.handler = async function (request, response, state) {
 	}
 
 	if(!role_name || !role_description) {
-		$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/post-role/error",
 			text: "Role name and description are required"
 		}));
@@ -49,7 +49,7 @@ exports.handler = async function (request, response, state) {
 		// Check if role already exists
 		var existingRole = await sqlTiddlerDatabase.getRole(role_name);
 		if(existingRole) {
-			$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+			state.store.adminWiki.addTiddler(new $tw.Tiddler({
 				title: "$:/temp/mws/post-role/error",
 				text: "Role already exists"
 			}));
@@ -60,7 +60,7 @@ exports.handler = async function (request, response, state) {
 
 		await sqlTiddlerDatabase.createRole(role_name, role_description);
 
-		$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/post-role/success",
 			text: "Role created successfully"
 		}));
@@ -69,7 +69,7 @@ exports.handler = async function (request, response, state) {
 
 	} catch(error) {
 		console.error("Error creating role:", error);
-		$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/post-role/error",
 			text: "Error creating role: " + error.message
 		}));

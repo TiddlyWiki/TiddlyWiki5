@@ -19,85 +19,89 @@ exports.path = /^\/wiki\/([^\/]+)$/;
 exports.useACL = true;
 
 exports.entityName = "recipe"
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<1>} */	
 exports.handler = async function(request,response,state) {
 	// Get the recipe name from the parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		recipeTiddlers = recipe_name && await $tw.mws.store.getRecipeTiddlers(recipe_name);
+		recipeTiddlers = recipe_name && await state.store.getRecipeTiddlers(recipe_name);
 	// Check request is valid
-	if(recipe_name && recipeTiddlers) {
-		// Start the response
-		response.writeHead(200, "OK",{
-			"Content-Type": "text/html"
-		});
-		// Get the tiddlers in the recipe
-		// Render the template
-		var template = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/core/templates/tiddlywiki5.html",{
-			variables: {
-				saveTiddlerFilter: `
-					$:/boot/boot.css
-					$:/boot/boot.js
-					$:/boot/bootprefix.js
-					$:/core
-					$:/library/sjcl.js
-					$:/plugins/tiddlywiki/multiwikiclient
-					$:/themes/tiddlywiki/snowwhite
-					$:/themes/tiddlywiki/vanilla
-				`
-			}
-		});
-		// Splice in our tiddlers
-		var marker = `<` + `script class="tiddlywiki-tiddler-store" type="application/json">[`,
-			markerPos = template.indexOf(marker);
-		if(markerPos === -1) {
-			throw new Error("Cannot find tiddler store in template");
-		}
-		function writeTiddler(tiddlerFields) {
-			response.write(JSON.stringify(tiddlerFields).replace(/</g,"\\u003c"));
-			response.write(",\n");
-		}
-		response.write(template.substring(0,markerPos + marker.length));
-		const bagInfo = {},
-			revisionInfo = {},
-			recipeTiddlerInfos = [];
-		
-		$tw.utils.each(recipeTiddlers, function(recipeTiddlerInfo) {
-			recipeTiddlerInfos.push(recipeTiddlerInfo);
-		});
-		for(const recipeTiddlerInfo of recipeTiddlerInfos){
-			var result = await $tw.mws.store.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
-			if(result) {
-				bagInfo[result.tiddler.title] = result.bag_name;
-				revisionInfo[result.tiddler.title] = result.tiddler_id.toString();
-				writeTiddler(result.tiddler);
-			}
-		}
-
-		writeTiddler({
-			title: "$:/state/multiwikiclient/tiddlers/bag",
-			text: JSON.stringify(bagInfo),
-			type: "application/json"
-		});
-		writeTiddler({
-			title: "$:/state/multiwikiclient/tiddlers/revision",
-			text: JSON.stringify(revisionInfo),
-			type: "application/json"
-		});
-		writeTiddler({
-			title: "$:/config/multiwikiclient/recipe",
-			text: recipe_name
-		});
-		writeTiddler({
-			title: "$:/state/multiwikiclient/recipe/last_tiddler_id",
-			text: (await $tw.mws.store.getRecipeLastTiddlerId(recipe_name) || 0).toString()
-		});
-		response.write(template.substring(markerPos + marker.length))
-		// Finish response
-		response.end();
-	} else {
+	if(!recipe_name || !recipeTiddlers) {
 		response.writeHead(404);
 		response.end();
+		return;
 	}
+
+	response.writeHead(200, "OK",{
+		"Content-Type": "text/html"
+	});
+	// Get the tiddlers in the recipe
+	// Render the template
+	var template = state.store.adminWiki.renderTiddler("text/plain","$:/core/templates/tiddlywiki5.html",{
+		variables: {
+			saveTiddlerFilter: `
+				$:/boot/boot.css
+				$:/boot/boot.js
+				$:/boot/bootprefix.js
+				$:/core
+				$:/library/sjcl.js
+				$:/plugins/tiddlywiki/multiwikiclient
+				$:/themes/tiddlywiki/snowwhite
+				$:/themes/tiddlywiki/vanilla
+			`
+		}
+	});
+	// Splice in our tiddlers
+	var marker = `<` + `script class="tiddlywiki-tiddler-store" type="application/json">[`,
+		markerPos = template.indexOf(marker);
+	if(markerPos === -1) {
+		throw new Error("Cannot find tiddler store in template");
+	}
+	/**
+	 * 
+	 * @param {Record<string, string>} tiddlerFields 
+	 */
+	function writeTiddler(tiddlerFields) {
+		response.write(JSON.stringify(tiddlerFields).replace(/</g,"\\u003c"));
+		response.write(",\n");
+	}
+	response.write(template.substring(0,markerPos + marker.length));
+	const 
+		/** @type {Record<string, string>} */
+		bagInfo = {},
+		/** @type {Record<string, string>} */
+		revisionInfo = {};
+	
+	for(const recipeTiddlerInfo of recipeTiddlers){
+		var result = await state.store.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
+		if(result) {
+			bagInfo[result.tiddler.title] = result.bag_name;
+			revisionInfo[result.tiddler.title] = result.tiddler_id.toString();
+			writeTiddler(result.tiddler);
+		}
+	}
+
+	writeTiddler({
+		title: "$:/state/multiwikiclient/tiddlers/bag",
+		text: JSON.stringify(bagInfo),
+		type: "application/json"
+	});
+	writeTiddler({
+		title: "$:/state/multiwikiclient/tiddlers/revision",
+		text: JSON.stringify(revisionInfo),
+		type: "application/json"
+	});
+	writeTiddler({
+		title: "$:/config/multiwikiclient/recipe",
+		text: recipe_name
+	});
+	writeTiddler({
+		title: "$:/state/multiwikiclient/recipe/last_tiddler_id",
+		text: (await state.store.getRecipeLastTiddlerId(recipe_name) || 0).toString()
+	});
+	response.write(template.substring(markerPos + marker.length))
+	// Finish response
+	response.end();
+
 };
 
 }());

@@ -448,6 +448,7 @@ SqlTiddlerDatabase.prototype.getBagTiddler = async function(title,bag_name) {
 		return null;
 	} else {
 		return {
+			bag_name: bag_name,
 			tiddler_id: rows[0].tiddler_id,
 			attachment_blob: rowTiddler.attachment_blob,
 			tiddler: rows.reduce((accumulator,value) => {
@@ -692,7 +693,7 @@ SqlTiddlerDatabase.prototype.getBagLastTiddlerId = async function(bag_name) {
 	}
 };
 
-/*
+/**
 Get the metadata of the tiddlers in a recipe as an array [{title:,tiddler_id:,bag_name:,is_deleted:}],
 sorted in ascending order of tiddler_id.
 
@@ -703,6 +704,8 @@ last_known_tiddler_id: tiddler_id of the last known update. Only returns tiddler
 include_deleted: boolean, defaults to false
 
 Returns null for recipes that do not exist
+
+@returns {Promise<{title:string,tiddler_id:string,bag_name:string,is_deleted:boolean}[] | null>}
 */
 SqlTiddlerDatabase.prototype.getRecipeTiddlers = async function(recipe_name,options) {
 	options = options || {};
@@ -726,6 +729,7 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlers = async function(recipe_name,opti
 	if(options.last_known_tiddler_id) {
 		params.$last_known_tiddler_id = options.last_known_tiddler_id;
 	}
+	/**	 * @type {any}	 */
 	const rows = await this.engine.runStatementGetAll(`
 		SELECT title, tiddler_id, is_deleted, bag_name
 		FROM (
@@ -741,6 +745,7 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlers = async function(recipe_name,opti
 			${options.limit ? "LIMIT $limit" : ""}
 		)
 	`,params);
+	
 	return rows;
 };
 

@@ -19,10 +19,10 @@ exports.path = /^\/update-user-profile\/?$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
 exports.handler = async function (request,response,state) {
   if(!state.authenticatedUser) {
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/login/error",
       text: "You must be logged in to update profiles"
     }));
@@ -40,7 +40,7 @@ exports.handler = async function (request,response,state) {
   var hasPermission = ($tw.utils.parseInt(userId) === currentUserId) || state.authenticatedUser.isAdmin;
 
   if(!hasPermission) {
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/update-profile/" + userId + "/error",
       text: "You don't have permission to update this profile"
     }));
@@ -50,19 +50,19 @@ exports.handler = async function (request,response,state) {
   }
 
   if(!state.authenticatedUser.isAdmin) {
-    var userRole = await state.server.sqlTiddlerDatabase.getUserRoles(userId);
+    var userRole = await state.store.sqlTiddlerDatabase.getUserRoles(userId);
     roleId = userRole.role_id;
   }
 
-  var result = await state.server.sqlTiddlerDatabase.updateUser(userId, username, email, roleId);
+  var result = await state.store.sqlTiddlerDatabase.updateUser(userId, username, email, roleId);
 
   if(result.success) {
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/update-profile/" + userId + "/success",
       text: result.message
     }));
   } else {
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/update-profile/" + userId + "/error",
       text: result.message
     }));

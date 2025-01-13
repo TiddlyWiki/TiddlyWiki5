@@ -24,15 +24,15 @@ exports.csrfDisable = true;
 
 function deleteTempTiddlers() {
   setTimeout(function() {
-    $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/queryParams");
-    $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/error");
-    $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");
+    state.store.adminWiki.deleteTiddler("$:/temp/mws/queryParams");
+    state.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/error");
+    state.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");
   }, 1000);
 }
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<0, "www-form-urlencoded">} */	
 exports.handler = async function(request, response, state) {
 
-  var sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
+  var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
   var username = state.data.username;
   var email = state.data.email;
   var password = state.data.password;
@@ -40,7 +40,7 @@ exports.handler = async function(request, response, state) {
   var queryParamsTiddlerTitle = "$:/temp/mws/queryParams";
 
   if(!state.authenticatedUser && !state.firstGuestUser) {
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/post-user/error",
       text: "Unauthorized access"
     }));
@@ -51,11 +51,11 @@ exports.handler = async function(request, response, state) {
   }
 
   if(!username || !email || !password || !confirmPassword) {
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/post-user/error",
       text: "All fields are required"
     }));
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: queryParamsTiddlerTitle,
       username: username,
       email: email,
@@ -67,11 +67,11 @@ exports.handler = async function(request, response, state) {
   }
 
   if(password !== confirmPassword) {
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/post-user/error",
       text: "Passwords do not match"
     }));
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/queryParams",
       username: username,
       email: email,
@@ -88,17 +88,17 @@ exports.handler = async function(request, response, state) {
     var existingUserByEmail = await sqlTiddlerDatabase.getUserByEmail(email);
     
     if(existingUser || existingUserByEmail) {
-      $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      state.store.adminWiki.addTiddler(new $tw.Tiddler({
         title: "$:/temp/mws/post-user/error",
         text: existingUser ? "User with this username already exists" : "User account with this email already exists"
       }));
-      $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      state.store.adminWiki.addTiddler(new $tw.Tiddler({
         title: queryParamsTiddlerTitle,
         username: username,
         email: email,
       }));
 
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/queryParams",
       username: username,
         email: email,
@@ -125,7 +125,7 @@ exports.handler = async function(request, response, state) {
         var authenticator = auth(sqlTiddlerDatabase);
         var sessionId = authenticator.createSession(userId);
         
-        $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+        state.store.adminWiki.addTiddler(new $tw.Tiddler({
           title: "$:/temp/mws/post-user/success",
           text: "Admin user created successfully"
         }));
@@ -135,11 +135,11 @@ exports.handler = async function(request, response, state) {
         deleteTempTiddlers();
         return;
       } catch(adminError) {
-        $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+        state.store.adminWiki.addTiddler(new $tw.Tiddler({
           title: "$:/temp/mws/post-user/error",
           text: "Error creating admin user"
         }));
-        $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+        state.store.adminWiki.addTiddler(new $tw.Tiddler({
           title: queryParamsTiddlerTitle,
           username: username,
           email: email,
@@ -150,11 +150,11 @@ exports.handler = async function(request, response, state) {
         return;
       }
     } else {
-      $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      state.store.adminWiki.addTiddler(new $tw.Tiddler({
         title: "$:/temp/mws/post-user/success",
         text: "User created successfully"
       }));
-      $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      state.store.adminWiki.addTiddler(new $tw.Tiddler({
         title: queryParamsTiddlerTitle,
         username: username,
         email: email,
@@ -172,11 +172,11 @@ exports.handler = async function(request, response, state) {
       deleteTempTiddlers();
     }
   } catch(error) {
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/post-user/error",
       text: "Error creating user: " + error.message
     }));
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: queryParamsTiddlerTitle,
       username: username,
       email: email,

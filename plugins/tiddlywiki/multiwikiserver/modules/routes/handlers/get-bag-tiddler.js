@@ -21,13 +21,13 @@ var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helper
 exports.method = "GET";
 
 exports.path = /^\/bags\/([^\/]+)\/tiddlers\/(.+)$/;
-/** @type {ServerRouteHandler} */	
+/** @type {ServerRouteHandler<2>} */	
 exports.handler = async function(request,response,state) {
 	await aclMiddleware(request, response, state, "bag", "READ");
 	// Get the  parameters
 	const bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]),
-		tiddlerInfo = await $tw.mws.store.getBagTiddler(title,bag_name);
+		tiddlerInfo = await state.store.getBagTiddler(title,bag_name);
 	if(tiddlerInfo && tiddlerInfo.tiddler) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
@@ -38,7 +38,7 @@ exports.handler = async function(request,response,state) {
 			return;
 		} else {
 			// This is not a JSON API request, we should return the raw tiddler content
-			const result = await $tw.mws.store.getBagTiddlerStream(title,bag_name);
+			const result = await state.store.getBagTiddlerStream(title,bag_name);
 			if(result) {
 				if(!response.headersSent){
 					response.writeHead(200, "OK",{

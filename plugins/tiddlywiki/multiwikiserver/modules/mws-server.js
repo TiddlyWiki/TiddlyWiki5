@@ -21,7 +21,8 @@ if($tw.node) {
 		crypto = require("crypto"),
 		zlib = require("zlib"),
 		{ok} = require("assert"),
-		aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/acl-middleware.js").middleware;
+		{middleware:aclMiddleware} = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/acl-middleware.js"),
+		{SqlTiddlerStore} = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-store.js");
 
 }
 
@@ -65,18 +66,20 @@ function Server(options) {
 	// Initialise authorization
 	var authorizedUserName;
 	if(this.get("username") && this.get("password")) {
-		authorizedUserName = this.get("username") || ""; //redundant for type checker
+		authorizedUserName = this.get("username") || "";
 	} else if(this.get("credentials")) {
 		authorizedUserName = "(authenticated)";
 	} else {
 		authorizedUserName = "(anon)";
 	}
-	this.authorizationPrincipals = {
+	this.authorizations = {
 		readers: (this.get("readers") || authorizedUserName).split(",").map($tw.utils.trim),
-		writers: (this.get("writers") || authorizedUserName).split(",").map($tw.utils.trim)
+		writers: (this.get("writers") || authorizedUserName).split(",").map($tw.utils.trim),
+		/** @type {string[] | undefined} */
+		admin: undefined
 	}
 	if(this.get("admin") || authorizedUserName !== "(anon)") {
-		this.authorizationPrincipals["admin"] = (this.get("admin") || authorizedUserName).split(',').map($tw.utils.trim)
+		this.authorizations["admin"] = (this.get("admin") || authorizedUserName).split(',').map($tw.utils.trim)
 	}
 	// Load and initialise authenticators
 	$tw.modules.forEachModuleOfType("authenticator", function(title,authenticatorDefinition) {
@@ -427,15 +430,18 @@ Server.prototype.methodACLPermMappings = {
 	"DELETE": "WRITE"
 }
 
-/*
-Check whether a given user is authorized for the specified authorizationType ("readers" or "writers"). Pass null or undefined as the username to check for anonymous access
+/**
+* Check whether a given user is authorized for the specified authorizationType ("readers" or "writers"). Pass null or undefined as the username to check for anonymous access
+* @param {"readers"|"writers"} authorizationType
+* @param {string | null | undefined} username
 */
 Server.prototype.isAuthorized = function(authorizationType,username) {
-	var principals = this.authorizationPrincipals[authorizationType] || [];
+	var principals = this.authorizations[authorizationType] || [];
 	return principals.indexOf("(anon)") !== -1 || (username && (principals.indexOf("(authenticated)") !== -1 || principals.indexOf(username) !== -1));
 }
 
 Server.prototype.parseCookieString = function(cookieString) {
+	/** @type {Record<string, string>} */
 	const cookies = {};
 	if (typeof cookieString !== 'string') return cookies;
 
@@ -451,6 +457,12 @@ Server.prototype.parseCookieString = function(cookieString) {
 	return cookies;
 }
 
+/**
+ * 
+ * @param {IncomingMessage} request 
+ * @param {ServerResponse} response 
+ * @returns 
+ */
 Server.prototype.authenticateUser = async function(request, response) {
 	const {session: session_id} = this.parseCookieString(request.headers.cookie)
 	if (!session_id) {
@@ -510,7 +522,13 @@ Server.prototype.makeRequestState = async function(request, response, options) {
 	var state = {};
 	state.wiki = options.wiki || this.wiki;
 	state.boot = options.boot || this.boot;
-	state.server = this;
+	
+	state.store = new SqlTiddlerStore({
+		attachmentStore: $tw.mws.store.attachmentStore,
+		adminWiki: $tw.mws.store.adminWiki,
+		databasePath: $tw.mws.store.databasePath
+	})
+	// state.server = this;
 	state.urlInfo = url.parse(request.url);
 	state.queryParameters = state.urlInfo.query ? querystring.parse(state.urlInfo.query) : {};
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
@@ -522,6 +540,7 @@ Server.prototype.makeRequestState = async function(request, response, options) {
 	state.authenticatedUsername = authenticatedUsername;
 
 	// Get the principals authorized to access this resource
+	/** @type {"readers" | "writers"} */
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
 
 	// Check whether anonymous access is granted
