@@ -46,7 +46,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@prisma/client": "^6.2.1",
+    "@types/node": "^22.10.5",
     "better-sqlite3": "^11.5.0",
-    "node-sqlite3-wasm": "^0.8.25"
+    "node-sqlite3-wasm": "^0.8.25",
+    "prisma": "^6.2.1"
   }
 }

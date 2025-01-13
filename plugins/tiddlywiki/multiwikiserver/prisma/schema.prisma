@@ -1,0 +1,159 @@
+datasource db {
+  provider = "sqlite"
+  url = env("DATABASE_URL")
+}
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native"]
+}
+model acl {
+  acl_id        Int          @id @default(autoincrement())
+  entity_name   String
+  entity_type   String
+  role_id       Int?
+  permission_id Int?
+  permissions   permissions? @relation(fields: [permission_id], references: [permission_id], onDelete: NoAction, onUpdate: NoAction)
+  roles         roles?       @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([entity_name], map: "idx_acl_entity_id")
+}
+
+model bags {
+  bag_id        Int           @id @default(autoincrement())
+  bag_name      String        @unique(map: "sqlite_autoindex_bags_1")
+  accesscontrol String
+  description   String
+  recipe_bags   recipe_bags[]
+  tiddlers      tiddlers[]
+}
+
+model fields {
+  tiddler_id  Int
+  field_name  String
+  field_value String
+  tiddlers    tiddlers? @relation(fields: [tiddler_id], references: [tiddler_id], onDelete: Cascade)
+
+  @@id([tiddler_id, field_name])
+  @@index([tiddler_id], map: "idx_fields_tiddler_id")
+}
+
+model group_roles {
+  group_id Int
+  role_id  Int
+  roles    roles  @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction)
+  groups   groups @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([group_id, role_id])
+}
+
+model groups {
+  group_id    Int           @id @default(autoincrement())
+  group_name  String        @unique(map: "sqlite_autoindex_groups_1")
+  description String?
+  group_roles group_roles[]
+  user_groups user_groups[]
+}
+
+model permissions {
+  permission_id    Int                @id @default(autoincrement())
+  permission_name  String             @unique(map: "sqlite_autoindex_permissions_1")
+  description      String?
+  acl              acl[]
+  role_permissions role_permissions[]
+}
+
+model recipe_bags {
+  recipe_id Int
+  bag_id    Int
+  position  Int
+  bags      bags    @relation(fields: [bag_id], references: [bag_id], onDelete: Cascade)
+  recipes   recipes @relation(fields: [recipe_id], references: [recipe_id], onDelete: Cascade)
+
+  @@unique([recipe_id, bag_id], map: "sqlite_autoindex_recipe_bags_1")
+  @@index([recipe_id], map: "idx_recipe_bags_recipe_id")
+}
+
+model recipes {
+  recipe_id   Int           @id @default(autoincrement())
+  recipe_name String        @unique(map: "sqlite_autoindex_recipes_1")
+  description String
+  owner_id    Int?
+  recipe_bags recipe_bags[]
+  users       users?        @relation(fields: [owner_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model role_permissions {
+  role_id       Int
+  permission_id Int
+  permissions   permissions @relation(fields: [permission_id], references: [permission_id], onDelete: NoAction, onUpdate: NoAction)
+  roles         roles       @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([role_id, permission_id])
+}
+
+model roles {
+  role_id          Int                @id @default(autoincrement())
+  role_name        String             @unique(map: "sqlite_autoindex_roles_1")
+  description      String?
+  acl              acl[]
+  group_roles      group_roles[]
+  role_permissions role_permissions[]
+  user_roles       user_roles[]
+}
+
+model sessions {
+  user_id       Int
+  session_id    String @id
+  created_at    String
+  last_accessed String
+  users         users  @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model tiddlers {
+  tiddler_id      Int      @id @default(autoincrement())
+  bag_id          Int
+  title           String
+  is_deleted      Boolean
+  attachment_blob String?
+  fields          fields[]
+  bags            bags     @relation(fields: [bag_id], references: [bag_id], onDelete: Cascade)
+
+  @@unique([bag_id, title], map: "sqlite_autoindex_tiddlers_1")
+  @@index([bag_id], map: "idx_tiddlers_bag_id")
+}
+
+model user_groups {
+  user_id  Int
+  group_id Int
+  groups   groups @relation(fields: [group_id], references: [group_id], onDelete: NoAction, onUpdate: NoAction)
+  users    users  @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([user_id, group_id])
+
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model user_roles {
+  user_id Int
+  role_id Int
+  roles   roles @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction)
+  users   users @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([user_id, role_id])
+
+}
+
+model users {
+  user_id     Int           @id @default(autoincrement())
+  username    String        @unique(map: "sqlite_autoindex_users_1")
+  email       String        @unique(map: "sqlite_autoindex_users_2")
+  password    String
+  created_at  String        @default("datetime('now')")
+  last_login  String?
+  recipes     recipes[]
+  sessions    sessions[]
+  user_groups user_groups[]
+  user_roles  user_roles[]
+}
+

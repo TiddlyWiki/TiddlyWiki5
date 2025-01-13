@@ -3,23 +3,24 @@
     "target": "ES2015",
     "module": "commonjs",
     "moduleResolution": "node",
+    "lib": ["ESNext"],
     "paths": {
       "$:/plugins/tiddlywiki/multiwikiserver/auth/*": [
         "./auth/*"
       ],
+      "$:/plugins/tiddlywiki/multiwikiserver/routes/*": [
+        "./modules/routes/*"
+      ],
       "$:/plugins/tiddlywiki/multiwikiserver/*": [
-        "./src/*",
-        "./modules/*",
+        "./src/*"
       ],
     },
-    "checkJs": true,
-    "strictNullChecks": true,
+    "allowJs": false,
+    "types":["./globals.d.ts", "node"],
     "strict": true,
   },
   "include": [
-    "./modules/routes/handlers/*.js",
-    "./modules/commands/*.js",
-    "./globals.d.ts"
+    "./src/**/*.ts",
   ],
  
 }
