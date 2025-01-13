@@ -20,6 +20,7 @@ exports.path = /^\/bags\/([^\/]+)\/tiddlers\/(.+)$/;
 /** @type {ServerRouteHandler<2>} */	
 exports.handler = async function(request,response,state) {
 	await aclMiddleware(request, response, state, "bag", "WRITE");
+	if(response.headersSent) return;
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]);

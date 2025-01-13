@@ -6,7 +6,7 @@ module-type: mws-route
 POST /admin/delete-acl
 
 \*/
-(function () {
+(function() {
 
 	/*jslint node: true, browser: true */
 	/*global $tw: false */
@@ -24,19 +24,20 @@ POST /admin/delete-acl
 
 	exports.csrfDisable = true;
 
-	/** @type {ServerRouteHandler<0, "www-form-urlencoded">} */	
-	exports.handler = async function (request, response, state) {
-		var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
-		var recipe_name = state.data.recipe_name;
-		var bag_name = state.data.bag_name;
-		var acl_id = state.data.acl_id;
-		var entity_type = state.data.entity_type;
+	/** @type {ServerRouteHandler<0, "www-form-urlencoded">} */
+	exports.handler = async function(request, response, state) {
+		var sqlTiddlerDatabase = state.store.sql;
+		var recipe_name = state.data.get("recipe_name");
+		var bag_name = state.data.get("bag_name");
+		var acl_id = state.data.get("acl_id");
+		var entity_type = state.data.get("entity_type");
 
 		await aclMiddleware(request, response, state, entity_type, "WRITE");
-
+		if(response.headersSent) return;
+		
 		await sqlTiddlerDatabase.deleteACL(acl_id);
 
-		response.writeHead(302, { "Location": "/admin/acl/" + recipe_name + "/" + bag_name });
+		response.writeHead(302, {"Location": "/admin/acl/" + recipe_name + "/" + bag_name});
 		response.end();
 	};
 
