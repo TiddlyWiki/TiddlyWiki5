@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "target": "ES2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["ESNext"],
+    "paths": {
+      "$:/plugins/tiddlywiki/multiwikiserver/auth/*": [
+        "./auth/*"
+      ],
+      "$:/plugins/tiddlywiki/multiwikiserver/routes/*": [
+        "./modules/routes/*"
+      ],
+      "$:/plugins/tiddlywiki/multiwikiserver/*": [
+        "./src/*"
+      ],
+    },
+    "types":["node"],
+    "strict": true,
+    "checkJs": true,
+    "allowJs": true,
+  },
+  "include": [
+    "./src/globals.d.ts",
+    "./src/**/*.ts",
+    "./**/*.js",
+  ],
+ 
+}

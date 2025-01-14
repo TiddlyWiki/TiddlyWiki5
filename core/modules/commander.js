@@ -109,25 +109,31 @@ Commander.prototype.executeNextCommand = function() {
 					}
 				}
 				if(command.info.synchronous) {
-					// Synchronous command
+					// Synchronous command (or returns a promise)
 					c = new command.Command(params,this);
 					err = c.execute();
-					if(err) {
+					if(err instanceof Promise){
+						err.catch(function(e){return e;}).then(function(err) {
+							if(err) self.callback(err);
+							else self.executeNextCommand();
+						});
+					} else if(err) {
 						this.callback(err);
 					} else {
 						this.executeNextCommand();
 					}
 				} else {
-					// Asynchronous command
+					// Asynchronous command requires a callback (but we still catch returned errors either way)
 					c = new command.Command(params,this,function(err) {
-						if(err) {
-							self.callback(err);
-						} else {
-							self.executeNextCommand();
-						}
+						if(err) self.callback(err);
+						else self.executeNextCommand();
 					});
 					err = c.execute();
-					if(err) {
+					if(err instanceof Promise){
+						err.catch(function(e){return e;}).then(function(err) {
+							if(err) self.callback(err);
+						});
+					} else if(err) {
 						this.callback(err);
 					}
 				}

@@ -19,8 +19,8 @@ exports.path = /^\/admin\/post-anon-config\/?$/;
 exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
-
-exports.handler = function(request, response, state) {
+/** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
+exports.handler = async function(request, response, state) {
   // Check if user is authenticated and is admin
   if(!state.authenticatedUser || !state.authenticatedUser.isAdmin) {
     response.writeHead(401, "Unauthorized", { "Content-Type": "text/plain" });
@@ -28,8 +28,8 @@ exports.handler = function(request, response, state) {
     return;
   }
 
-  var allowReads = state.data.allowReads === "on";
-  var allowWrites = state.data.allowWrites === "on";
+  var allowReads = state.data.get("allowReads") === "on";
+  var allowWrites = state.data.get("allowWrites") === "on";
 
   // Update the configuration tiddlers
   var wiki = $tw.wiki;

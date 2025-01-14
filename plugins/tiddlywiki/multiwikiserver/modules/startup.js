@@ -6,6 +6,7 @@ module-type: startup
 Multi wiki server initialisation
 
 \*/
+//@ts-check
 (function(){
 
 /*jslint node: true, browser: true */
@@ -16,43 +17,44 @@ Multi wiki server initialisation
 exports.name = "multiwikiserver";
 exports.platforms = ["node"];
 exports.before = ["story"];
-exports.synchronous = true;
+exports.synchronous = false;
 
-exports.startup = function() {
-	const store = setupStore();
-	$tw.mws = {
-		store: store,
-		serverManager: new ServerManager({
-			store: store
-		})
-	};
-}
-
-function setupStore() {
+exports.startup = async function() {
 	const path = require("path");
+
 	// Create and initialise the attachment store and the tiddler store
-	const AttachmentStore = require("$:/plugins/tiddlywiki/multiwikiserver/store/attachments.js").AttachmentStore,
-		attachmentStore = new AttachmentStore({
-			storePath: path.resolve($tw.boot.wikiPath,"store/")
-		}),
-		SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-store.js").SqlTiddlerStore,
-		store = new SqlTiddlerStore({
-			databasePath: path.resolve($tw.boot.wikiPath,"store/database.sqlite"),
-			engine: $tw.wiki.getTiddlerText("$:/config/MultiWikiServer/Engine","better"), // better || wasm
-			attachmentStore: attachmentStore
-		});
-	return store;
-}
+	/** @type {typeof import("../src/store/attachments")} */
+	const { AttachmentStore } = require("./store/attachments.js")
+	const attachmentStore = new AttachmentStore({
+		storePath: path.resolve($tw.boot.wikiPath, "store/")
+	});
 
-function ServerManager(store) {
-	this.servers = [];
-}
+	const databasePath = path.resolve($tw.boot.wikiPath, "store/database.sqlite");
 
-ServerManager.prototype.createServer = function(options) {
-	const MWSServer = require("$:/plugins/tiddlywiki/multiwikiserver/mws-server.js").Server,
-		server = new MWSServer(options);
-	this.servers.push(server);
-	return server;
+	$tw.utils.createFileDirectories(databasePath);
+
+	const {PrismaClient} = require("@prisma/client");
+	const connection = new PrismaClient({
+		datasourceUrl: `file:${databasePath}?connection_limit=5`,
+		log: [ "info", "warn", "error"]
+	});
+
+	const {SqlTiddlerStore} = require("./store/sql-tiddler-store.js");
+	const store = new SqlTiddlerStore({adminWiki: $tw.wiki, attachmentStore, prisma: connection});
+
+	const { ServerManager } = require("./server.js");
+	const serverManager = new ServerManager();
+    
+	// router will be set by the first mws-listen command
+	$tw.mws = {
+		store, serverManager, connection, databasePath,
+		transaction: async (type, fn) => {
+			return await connection.$transaction(async prisma => {
+				const store = new SqlTiddlerStore({adminWiki: $tw.wiki, attachmentStore, prisma, transactionType: type});
+				return await fn(store);
+			});
+		}
+	};
 }
 
 })();

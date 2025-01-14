@@ -23,8 +23,8 @@ exports.csrfDisable = true;
 exports.useACL = true;
 
 exports.entityName = "bag"
-
-exports.handler = function(request,response,state) {
+/** @type {ServerRouteHandler<1, "stream">} */	
+exports.handler = async function(request,response,state) {
 	const path = require("path"),
 		fs = require("fs"),
 		processIncomingStream = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/multipart-forms.js").processIncomingStream;
@@ -32,7 +32,7 @@ exports.handler = function(request,response,state) {
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]);
 	// Process the incoming data
 	processIncomingStream({
-		store: $tw.mws.store,
+		store: state.store,
 		state: state,
 		response: response,
 		bag_name: bag_name,
@@ -55,7 +55,7 @@ exports.handler = function(request,response,state) {
 						<body>
 					`);
 					// Render the html
-					var html = $tw.mws.store.adminWiki.renderTiddler("text/html","$:/plugins/tiddlywiki/multiwikiserver/templates/post-bag-tiddlers",{
+					var html = state.store.adminWiki.renderTiddler("text/html","$:/plugins/tiddlywiki/multiwikiserver/templates/post-bag-tiddlers",{
 						variables: {
 							"bag-name": bag_name,
 							"imported-titles": JSON.stringify(results)

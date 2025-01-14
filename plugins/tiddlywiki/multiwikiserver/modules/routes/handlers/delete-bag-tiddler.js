@@ -12,20 +12,21 @@ DELETE /bags/:bag_name/tiddler/:title
 /*global $tw: false */
 "use strict";
 
-var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js").middleware;
+var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/acl-middleware.js").middleware;
 
 exports.method = "DELETE";
 
 exports.path = /^\/bags\/([^\/]+)\/tiddlers\/(.+)$/;
-
-exports.handler = function(request,response,state) {
-	aclMiddleware(request, response, state, "bag", "WRITE");
+/** @type {ServerRouteHandler<2>} */	
+exports.handler = async function(request,response,state) {
+	await aclMiddleware(request, response, state, "bag", "WRITE");
+	if(response.headersSent) return;
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]);
 	if(bag_name) {
 		if(!response.headersSent) {
-			var result = $tw.mws.store.deleteTiddler(title,bag_name);
+			var result = await state.store.deleteTiddler(title,bag_name);
 			response.writeHead(204, "OK", {
 				"X-Revision-Number": result.tiddler_id.toString(),
 				Etag: state.makeTiddlerEtag(result),

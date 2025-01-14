@@ -15,12 +15,12 @@ GET /admin/users
 exports.method = "GET";
 
 exports.path = /^\/admin\/users$/;
-
-exports.handler = function(request,response,state) {
-	var userList = state.server.sqlTiddlerDatabase.listUsers();
-	if (request.url.includes("*")) {
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/error");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");
+/** @type {ServerRouteHandler<0>} */	
+exports.handler = async function(request,response,state) {
+	var userList = await state.store.sql.listUsers();
+	if(request.url.includes("*")) {
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/error");
+		state.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");
 	}
 
 	// Ensure userList is an array
@@ -29,7 +29,7 @@ exports.handler = function(request,response,state) {
 		console.error("userList is not an array");
 	}
 
-	if(!state.authenticatedUser.isAdmin && !state.firstGuestUser) {
+	if(!state.authenticatedUser?.isAdmin && !state.firstGuestUser) {
 		response.writeHead(403, "Forbidden", { "Content-Type": "text/plain" });
 		response.end("Forbidden");
 		return;
@@ -49,7 +49,7 @@ exports.handler = function(request,response,state) {
 	});
 
 	// Render the html
-	var html = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{
+	var html = state.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{
 		variables: {
 			"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/get-users",
 			"user-list": JSON.stringify(userList),

@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "paths": {
+      "$:/plugins/tiddlywiki/multiwikiserver/auth/*": [
+        "./auth/*"
+      ],
+      "$:/plugins/tiddlywiki/multiwikiserver/*": [
+        "./src/*",
+        "./modules/*",
+      ],
+    },
+    "checkJs": true,
+    "allowJs": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "noImplicitAny": false,
+  },
+  "include": [
+    "./modules/**/*.js",
+    "./src/globals.d.ts"
+  ],
+ 
+}

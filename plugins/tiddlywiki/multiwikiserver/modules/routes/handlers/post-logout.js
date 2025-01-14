@@ -17,11 +17,11 @@ exports.method = "POST";
 exports.path = /^\/logout$/;
 
 exports.csrfDisable = true;
-
-exports.handler = function(request,response,state) {
-	// if(state.authenticatedUser) {
-		state.server.sqlTiddlerDatabase.deleteSession(state.authenticatedUser.sessionId);
-	// }
+/** @type {ServerRouteHandler<0>} */	
+exports.handler = async function(request,response,state) {
+	if(state.authenticatedUser) {
+		await state.store.sql.deleteSession(state.authenticatedUser.sessionId);
+	}
 	var cookies = request.headers.cookie ? request.headers.cookie.split(";") : [];
 	for(var i = 0; i < cookies.length; i++) {
 		var cookie = cookies[i].trim().split("=")[0];

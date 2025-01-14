@@ -21,15 +21,11 @@ exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
 
-exports.handler = function (request, response, state) {
-  var userId = state.data.userId;
-  // Clean up any existing error/success messages
-  $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + userId + "/error");
-  $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + userId + "/success");
-  $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/login/error");
+/** @type {ServerRouteHandler<0, "www-form-urlencoded">} */
+exports.handler = async function (request, response, state) {
 
   if(!state.authenticatedUser) {
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/login/error",
       text: "You must be logged in to change passwords"
     }));
@@ -37,16 +33,27 @@ exports.handler = function (request, response, state) {
     response.end();
     return;
   }
+  var userId = state.data.get("userId");
+  var newPassword = state.data.get("newPassword");
+  var confirmPassword = state.data.get("confirmPassword");
+  if(!userId || !newPassword || !confirmPassword) {
+    response.writeHead(400);
+    response.end();
+    return;
+  }
+  // Clean up any existing error/success messages
+  state.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + userId + "/error");
+  state.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + userId + "/success");
+  state.store.adminWiki.deleteTiddler("$:/temp/mws/login/error");
 
-  var auth = authenticator(state.server.sqlTiddlerDatabase);
-  var newPassword = state.data.newPassword;
-  var confirmPassword = state.data.confirmPassword;
+  var auth = authenticator(state.store.sql);
+
   var currentUserId = state.authenticatedUser.user_id;
 
   var hasPermission = ($tw.utils.parseInt(userId) === currentUserId) || state.authenticatedUser.isAdmin;
 
   if(!hasPermission) {
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/change-password/" + userId + "/error",
       text: "You don't have permission to change this user's password"
     }));
@@ -56,7 +63,7 @@ exports.handler = function (request, response, state) {
   }
 
   if(newPassword !== confirmPassword) {
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/change-password/" + userId + "/error",
       text: "New passwords do not match"
     }));
@@ -65,10 +72,10 @@ exports.handler = function (request, response, state) {
     return;
   }
 
-  var userData = state.server.sqlTiddlerDatabase.getUser(userId);
+  var userData = await state.store.sql.getUser(userId);
 
   if(!userData) {
-    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    state.store.adminWiki.addTiddler(new $tw.Tiddler({
       title: "$:/temp/mws/change-password/" + userId + "/error",
       text: "User not found"
     }));
@@ -78,9 +85,9 @@ exports.handler = function (request, response, state) {
   }
 
   var newHash = auth.hashPassword(newPassword);
-  var result = state.server.sqlTiddlerDatabase.updateUserPassword(userId, newHash);
+  var result = await state.store.sql.updateUserPassword(userId, newHash);
 
-  $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+  state.store.adminWiki.addTiddler(new $tw.Tiddler({
     title: "$:/temp/mws/change-password/" + userId + "/success",
     text: result.message
   }));

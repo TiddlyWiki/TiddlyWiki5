@@ -21,15 +21,15 @@ const SSE_HEARTBEAT_INTERVAL_MS = 10 * 1000;
 exports.method = "GET";
 
 exports.path = /^\/recipes\/([^\/]+)\/events$/;
-
-exports.handler = function(request,response,state) {
+/** @type {ServerRouteHandler<1>} */	
+exports.handler = async function(request,response,state) {
 	// Get the  parameters
 	const recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]);
 	let last_known_tiddler_id = 0;
 	if(request.headers["Last-Event-ID"]) {
 		last_known_tiddler_id = $tw.utils.parseNumber(request.headers["Last-Event-ID"]);
-	} else if(state.queryParameters.last_known_tiddler_id) {
-		last_known_tiddler_id = $tw.utils.parseNumber(state.queryParameters.last_known_tiddler_id);
+	} else if(state.queryParameters.get("last_known_tiddler_id")) {
+		last_known_tiddler_id = $tw.utils.parseNumber(state.queryParameters.get("last_known_tiddler_id"));
 	}
 	if(recipe_name) {
 		// Start streaming the response
@@ -43,9 +43,9 @@ exports.handler = function(request,response,state) {
 			response.write(':keep-alive\n\n');
 		},SSE_HEARTBEAT_INTERVAL_MS);
 		// Method to get changed tiddler events and send to the client
-		function sendUpdates() {
+		async function sendUpdates() {
 			// Get the tiddlers in the recipe since the last known tiddler_id
-			var recipeTiddlers = $tw.mws.store.getRecipeTiddlers(recipe_name,{
+			var recipeTiddlers = await state.store.getRecipeTiddlers(recipe_name,{
 				include_deleted: true,
 				last_known_tiddler_id: last_known_tiddler_id
 			});
@@ -59,7 +59,7 @@ exports.handler = function(request,response,state) {
 					response.write(`event: change\n`)
 					let data = tiddlerInfo;
 					if(!tiddlerInfo.is_deleted) {
-						const tiddler = $tw.mws.store.getRecipeTiddler(tiddlerInfo.title,recipe_name);
+						const tiddler = await state.store.getRecipeTiddler(tiddlerInfo.title,recipe_name);
 						if(tiddler) {
 							data = $tw.utils.extend({},data,{tiddler: tiddler.tiddler})
 						}	
@@ -71,12 +71,14 @@ exports.handler = function(request,response,state) {
 			}
 		}
 		// Send current and future changes
-		sendUpdates();
-		$tw.mws.store.addEventListener("change",sendUpdates);
+		await sendUpdates();
+		// eslint-disable-next-line @typescript-eslint/no-misused-promises
+		state.store.addEventListener("change",sendUpdates);
 		// Clean up when the connection closes
 		response.on("close",function () {
 			clearInterval(heartbeatTimer);
-			$tw.mws.store.removeEventListener("change",sendUpdates);
+			// eslint-disable-next-line @typescript-eslint/no-misused-promises
+			state.store.removeEventListener("change",sendUpdates);
 		});
 		return;
 	}

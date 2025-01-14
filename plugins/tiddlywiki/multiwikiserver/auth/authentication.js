@@ -14,11 +14,16 @@ Handles authentication related operations
 "use strict";
 
 var crypto = require("crypto");
-
+/**
+ * 
+ * @param {import("../src/store/sql-tiddler-database").SqlTiddlerDatabase} database 
+ * @returns 
+ */
 function Authenticator(database) {
 	if(!(this instanceof Authenticator)) {
 		return new Authenticator(database);
 	}
+	/** @type {import("../src/store/sql-tiddler-database").SqlTiddlerDatabase} */
 	this.sqlTiddlerDatabase = database;
 }
 
@@ -31,10 +36,10 @@ Authenticator.prototype.hashPassword = function(password) {
 	return crypto.createHash("sha256").update(password).digest("hex");
 };
 
-Authenticator.prototype.createSession = function(userId) {
+Authenticator.prototype.createSession = async function(userId) {
 	var sessionId = crypto.randomBytes(16).toString("hex");
 	// Store the session in your database or in-memory store
-	this.sqlTiddlerDatabase.createUserSession(userId, sessionId);
+	await this.sqlTiddlerDatabase.createUserSession(userId, sessionId);
 	return sessionId;
 };
 

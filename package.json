@@ -24,10 +24,13 @@
     "wiki"
   ],
   "devDependencies": {
-    "@playwright/test": "^1.47.2",
-    "eslint": "^9.12.0",
     "@eslint/js": "^9.12.0",
-    "playwright": "^1.47.2"
+    "@playwright/test": "^1.47.2",
+    "@types/jest": "^29.5.14",
+    "eslint": "^9.12.0",
+    "playwright": "^1.47.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.19.1"
   },
   "license": "BSD",
   "engines": {
@@ -40,10 +43,22 @@
     "mws-add-user": "node ./tiddlywiki.js ./editions/multiwikiserver --build load-mws-demo-data --mws-listen --build mws-add-user --quit",
     "test": "npm run build:test-edition && npm run test:multiwikiserver-edition",
     "lint:fix": "eslint . --fix",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prisma:generate": "(cd ./plugins/tiddlywiki/multiwikiserver && prisma generate)",
+    "mws": "NODE_DEV_PATH=yes node ./tiddlywiki.js ./editions/multiwikiserver",
+    "mws:tsc": "(cd ./plugins/tiddlywiki/multiwikiserver && tsc -p tsconfig.build.json)",
+    "mws:jsc": "(cd ./plugins/tiddlywiki/multiwikiserver && tsc -p jsconfig.json --noEmit)",
+    "mws:eslint": "(cd ./plugins/tiddlywiki/multiwikiserver && npx eslint)",
+    "mws:clean": "rm -rf ./editions/multiwikiserver/store",
+    "mws:create": "npm run mws:clean && npm run mws -- --mws-create-db --mws-load-plugin-bags --build load-mws-demo-data",
+    "arlen": "npm run mws:tsc && npm run mws:eslint && npm run mws -- --mws-listen --mws-ctrl-c"
   },
   "dependencies": {
+    "@prisma/client": "^6.2.1",
+    "@types/node": "^22.10.5",
     "better-sqlite3": "^11.5.0",
-    "node-sqlite3-wasm": "^0.8.25"
+    "node-sqlite3-wasm": "^0.8.25",
+    "prisma": "^6.2.1",
+    "source-map-support": "^0.5.21"
   }
 }

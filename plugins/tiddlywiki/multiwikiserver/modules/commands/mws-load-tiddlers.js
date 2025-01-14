@@ -23,7 +23,7 @@ var Command = function(params,commander,callback) {
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = async function() {
 	var self = this;
 	// Check parameters
 	if(this.params.length < 2) {
@@ -31,7 +31,7 @@ Command.prototype.execute = function() {
 	}
 	var tiddlersPath = this.params[0],
 		bagName = this.params[1];
-	$tw.mws.store.saveTiddlersFromPath(tiddlersPath,bagName);
+	await $tw.mws.store.saveTiddlersFromPath(tiddlersPath,bagName);
 	return null;
 };
 
