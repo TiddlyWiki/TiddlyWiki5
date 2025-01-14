@@ -22,16 +22,16 @@ exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
 
-function deleteTempTiddlers() {
-  setTimeout(function() {
-    state.store.adminWiki.deleteTiddler("$:/temp/mws/queryParams");
-    state.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/error");
-    state.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");
-  }, 1000);
-}
+
 /** @type {ServerRouteHandler<0, "www-form-urlencoded">} */	
 exports.handler = async function(request, response, state) {
-
+  function deleteTempTiddlers() {
+    setTimeout(function() {
+      state.store.adminWiki.deleteTiddler("$:/temp/mws/queryParams");
+      state.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/error");
+      state.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");
+    }, 1000);
+  }
   var sqlTiddlerDatabase = state.store.sql;
   var username = state.data.get("username");
   var email = state.data.get("email");
@@ -98,9 +98,9 @@ exports.handler = async function(request, response, state) {
         email: email,
       }));
 
-    state.store.adminWiki.addTiddler(new $tw.Tiddler({
-      title: "$:/temp/mws/queryParams",
-      username: username,
+      state.store.adminWiki.addTiddler(new $tw.Tiddler({
+        title: "$:/temp/mws/queryParams",
+        username: username,
         email: email,
       }));
       response.writeHead(302, { "Location": "/admin/users" });
@@ -123,7 +123,7 @@ exports.handler = async function(request, response, state) {
         // Create a session for the new admin user
         var auth = require("$:/plugins/tiddlywiki/multiwikiserver/auth/authentication.js").Authenticator;
         var authenticator = auth(sqlTiddlerDatabase);
-        var sessionId = authenticator.createSession(userId);
+        var sessionId = await authenticator.createSession(userId);
         
         state.store.adminWiki.addTiddler(new $tw.Tiddler({
           title: "$:/temp/mws/post-user/success",

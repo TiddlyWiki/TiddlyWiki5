@@ -31,10 +31,10 @@ Command.prototype.execute = async function() {
 
 	// irony of all ironies, we still have to use the sqlite3 package to create the database
 	const sqlite = require("node-sqlite3-wasm");
-	const db = new sqlite.Database($tw.mws.store.databasePath);
+	const db = new sqlite.Database($tw.mws.databasePath);
 	db.exec($tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/multiwikiserver/prisma/schema.prisma.sql"));
 	db.close();
-	console.log("db created");
+	console.log("db created at", $tw.mws.databasePath);
 	return null;
 };
 

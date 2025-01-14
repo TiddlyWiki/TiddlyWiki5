@@ -13,13 +13,13 @@
       ],
     },
     "checkJs": true,
+    "allowJs": true,
     "strictNullChecks": true,
     "strict": true,
     "noImplicitAny": false,
   },
   "include": [
-    "./modules/routes/handlers/*.js",
-    "./modules/commands/*.js",
+    "./modules/**/*.js",
     "./src/globals.d.ts"
   ],
  

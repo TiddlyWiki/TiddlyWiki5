@@ -20,6 +20,7 @@ class Router {
     constructor(options) {
         var _a;
         this.routes = [];
+        this.authenticators = [];
         this.methodMappings = {
             "GET": "readers",
             "OPTIONS": "readers",
@@ -116,9 +117,22 @@ class Router {
         this.routes.push(route);
     }
     addAuthenticator(AuthenticatorClass, title) {
+        // Instantiate and initialise the authenticator
+        var authenticator = new AuthenticatorClass(this), result = authenticator.init();
+        if (typeof result === "string") {
+            $tw.utils.error("Error: " + result);
+        }
+        else if (result) {
+            // Only use the authenticator if it initialised successfully
+            this.authenticators.push(authenticator);
+        }
     }
     serverManagerRequestHandler(server, request, response) {
+        // $tw.mws.connection.$transaction(async (prisma) => {
+        // the database transaction gets committed when the promise resolves
+        // and rolled back if it rejects
         this.routeRequest(server, request, response).catch(console.error);
+        // },{maxWait: 30000, timeout: 20000}).catch(console.error);
     }
     async routeRequest(server, request, response, options) {
         // returning the response object in order to make sure we call response.end() because the route 
@@ -321,6 +335,18 @@ class Router {
             || this.methodMappings[request.method]
             || "readers";
         var { allowReads, allowWrites, isEnabled, showAnonConfig } = this.getAnonymousAccessConfig();
+        // // this is slightly hacky, but we're sending the connection off through the various channels.
+        // // I mean, we could just pass the connection to the handler, but that would be too easy.
+        // const { prisma, finish } = await new Promise<{
+        //   prisma: PrismaTxnClient,
+        //   finish: (value: void | PromiseLike<void>) => void
+        // }>((resolveInit) => {
+        //   $tw.mws.connection.$transaction(async (prisma) => {
+        //     await new Promise<void>((finish) => {
+        //       resolveInit({ prisma, finish });
+        //     });
+        //   });
+        // });
         const urlInfo = new URL(request.url, server.origin());
         return {
             authorizationType,
@@ -328,7 +354,7 @@ class Router {
             store: new sql_tiddler_store_1.SqlTiddlerStore({
                 attachmentStore: this.store.attachmentStore,
                 adminWiki: this.store.adminWiki,
-                databasePath: this.store.databasePath
+                prisma: $tw.mws.connection,
             }),
             urlInfo,
             queryParameters: urlInfo.searchParams,
@@ -347,8 +373,19 @@ class Router {
             data: undefined,
             params: [],
             end: () => {
-                this.store.sql.close();
-                response.end();
+                // if no response was sent, send a 500
+                if (!response.headersSent) {
+                    response.writeHead(500);
+                    response.end("Internal server error");
+                    $tw.utils.error("Response not sent " + request.method + " " + request.url);
+                }
+                else {
+                    response.write = () => {
+                        throw new Error("Cannot write to response after it has been ended");
+                    };
+                    response.end();
+                }
+                //
                 return { [FinishedResponse]: true };
             }
         };

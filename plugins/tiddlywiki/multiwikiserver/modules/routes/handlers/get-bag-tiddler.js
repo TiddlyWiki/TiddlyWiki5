@@ -48,6 +48,10 @@ exports.handler = async function(request,response,state) {
 					});
 				}
 				result.stream.pipe(response);
+				await new Promise((resolve,reject) => {
+					result.stream.on("end",resolve);
+					result.stream.on("error",reject);
+				});
 				return;
 			} else {
 				if(!response.headersSent){

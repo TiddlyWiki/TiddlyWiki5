@@ -34,7 +34,7 @@ exports.handler = async function(request,response,state) {
 	var isPasswordValid = auth.verifyPassword(password, user ? user.password : null)
 
 	if(user && isPasswordValid) {
-		var sessionId = auth.createSession(user.user_id);
+		var sessionId = await auth.createSession(user.user_id);
 		var returnUrl = state.server.parseCookieString(request.headers.cookie).returnUrl
 		response.setHeader('Set-Cookie', `session=${sessionId}; HttpOnly; Path=/`);
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {

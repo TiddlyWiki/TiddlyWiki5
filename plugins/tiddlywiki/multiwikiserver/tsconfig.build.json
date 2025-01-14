@@ -4,9 +4,9 @@
     "outDir": "./modules",
     "rootDir": "./src",
     "allowJs": false,
+    "checkJs": false,
     "noEmit": false,
     "sourceMap": true,
-
   },
   "exclude": ["*.js"]
 }

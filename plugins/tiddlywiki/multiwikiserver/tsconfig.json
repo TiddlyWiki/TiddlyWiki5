@@ -16,14 +16,15 @@
         "./src/*"
       ],
     },
-    "types":["./src/globals.d.ts", "node"],
+    "types":["node"],
     "strict": true,
+    "checkJs": true,
+    "allowJs": true,
   },
   "include": [
     "./src/globals.d.ts",
     "./src/**/*.ts",
-    "./module/**/*.js",
-    "./auth/**/*.js",
+    "./**/*.js",
   ],
  
 }

@@ -32,6 +32,10 @@ exports.handler = async function(request,response,state) {
 				"Content-Type":  result.type,
 			});
 			result.stream.pipe(response);
+			await new Promise((resolve,reject) => {
+				result.stream.on("end",resolve);
+				result.stream.on("error",reject);
+			});
 			return;
 		}
 	}

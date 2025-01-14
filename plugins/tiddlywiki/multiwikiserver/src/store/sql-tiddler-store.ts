@@ -13,6 +13,7 @@ This class is largely a wrapper for the sql-tiddler-database.js class, adding th
 
 \*/
 "use strict";
+import { PrismaClient } from "@prisma/client";
 import { AttachmentStore } from "./attachments";
 import { SqlTiddlerDatabase } from "./sql-tiddler-database";
 import * as path from "path";
@@ -73,7 +74,7 @@ interface EventSource<E extends Record<string, any[]>> {
 	removeEventListener<K extends keyof E>(type: K, listener: EventListener<E[K]>): void;
 	dispatchEvent<K extends keyof E>(type: K, ...args: E[K]): void;
 }
-type TxnType = "DEFERRED" | "IMMEDIATE" | "EXCLUSIVE";
+type TxnType = "DEFERRED" | "IMMEDIATE" | "EXCLUSIVE" | unknown;
 type DEFERRED = "DEFERRED" | "IMMEDIATE" | "EXCLUSIVE";
 type IMMEDIATE = "IMMEDIATE" | "EXCLUSIVE";
 type EXCLUSIVE = "EXCLUSIVE";
@@ -86,11 +87,10 @@ adminWiki - reference to $tw.Wiki object used for configuration
 attachmentStore - reference to associated attachment store
 engine - wasm | better
 */
-export class SqlTiddlerStore<TXN extends DEFERRED> implements EventSource<SqlTiddlerStoreEvents> {
+export class SqlTiddlerStore<TXN extends TxnType = unknown> implements EventSource<SqlTiddlerStoreEvents> {
 	attachmentStore;
 	adminWiki;
 	sql: SqlTiddlerDatabase;
-	databasePath;
 	transactionType: TXN = "DEFERRED" as any;
 
 	private eventer = new Eventer<SqlTiddlerStoreEvents>(true);
@@ -98,32 +98,26 @@ export class SqlTiddlerStore<TXN extends DEFERRED> implements EventSource<SqlTid
 	removeEventListener = this.eventer.removeEventListener.bind(this.eventer);
 	dispatchEvent = this.eventer.dispatchEvent.bind(this.eventer);
 
-
 	constructor(options: {
-		/** path to the database file (can be ":memory:" or missing to get a temporary database) */
-		databasePath?: string;
+		// /** path to the database file (can be ":memory:" or missing to get a temporary database) */
+		// databasePath?: string;
 		/** reference to $tw.Wiki object used for configuration */
 		adminWiki?: Wiki;
 		/** reference to associated attachment store */
 		attachmentStore: AttachmentStore;
-		/** which engine to use, default is "node" */
-		engine?: "node" | "wasm" | "better";
+		// /** which engine to use, default is "node" */
+		// engine?: "node" | "wasm" | "better";
+		prisma: PrismaTxnClient;
 	} = {} as any) {
 		if (!options?.attachmentStore) {
 			throw new Error("SqlTiddlerStore requires an attachment store");
 		}
 		this.attachmentStore = options.attachmentStore;
 		this.adminWiki = options.adminWiki || $tw.wiki;
-
-		// Create the database
-		this.databasePath = options.databasePath || ":memory:";
-
-		this.sql = new SqlTiddlerDatabase({
-			databasePath: this.databasePath,
-			engine: options.engine
-		});
+		this.sql = new SqlTiddlerDatabase(options.prisma);
 
 	}
+
 
 	/*
 	Returns null if a bag/recipe name is valid, or a string error message if not
@@ -447,7 +441,7 @@ export class SqlTiddlerStore<TXN extends DEFERRED> implements EventSource<SqlTid
 	/*
 	Get the titles of the tiddlers in a recipe as {title:,bag_name:}. Returns null for recipes that do not exist
 	*/
-	async getRecipeTiddlers(recipe_name: string, options: { limit?: number; last_known_tiddler_id?: number; include_deleted?: boolean; } ={}) {
+	async getRecipeTiddlers(recipe_name: string, options: { limit?: number; last_known_tiddler_id?: number; include_deleted?: boolean; } = {}) {
 		return await this.sql.getRecipeTiddlers(recipe_name, options);
 	}
 	/*

@@ -83,8 +83,11 @@ async function loadWikiFolder(options) {
 		processPlugins("languages",wikiInfo.languages);
 		// Create the recipe
 		recipeList.push(options.bagName);
-		await $tw.mws.store.createRecipe(options.recipeName,recipeList,options.recipeDescription);
-		await $tw.mws.store.saveTiddlersFromPath(path.resolve(options.wikiPath,$tw.config.wikiTiddlersSubDir),options.bagName);
+		await $tw.mws.transaction("IMMEDIATE", async store => {
+			await store.createRecipe(options.recipeName,recipeList,options.recipeDescription);
+			await store.saveTiddlersFromPath(path.resolve(options.wikiPath,$tw.config.wikiTiddlersSubDir),options.bagName);
+		});
+
 	}
 }
 

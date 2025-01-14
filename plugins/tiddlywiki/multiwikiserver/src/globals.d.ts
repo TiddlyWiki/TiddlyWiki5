@@ -22,9 +22,12 @@ declare global {
 
   interface $TW {
     mws: {
-      store: SqlTiddlerStore<any>;
+      store: SqlTiddlerStore<unknown>;
       serverManager: ServerManager;
       router: Router;
+      connection: PrismaClient;
+      databasePath: string;
+      transaction: <T extends "DEFERRED" | "IMMEDIATE">(type: T, callback: (store: SqlTiddlerStore<T>) => Promise<void>) => Promise<void>;
     }
   }
 
@@ -80,7 +83,7 @@ declare global {
     F extends "buffer" ? Buffer :
     F extends "stream" ? undefined :
     string;
-    store: SqlTiddlerStore<any>;
+    store: SqlTiddlerStore;
   }
 
   type PrismaTxnClient = Omit<PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use" | "$extends">

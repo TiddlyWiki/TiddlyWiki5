@@ -15,8 +15,6 @@ exports.SqlTiddlerDatabase = void 0;
 exports.okType = okType;
 exports.okTypeTruthy = okTypeTruthy;
 exports.okEntityType = okEntityType;
-// import { SqlEngine } from "$:/plugins/tiddlywiki/multiwikiserver/store/sql-engine";
-const client_1 = require("@prisma/client");
 const assert_1 = require("assert");
 const TYPEOF_ENUM = typeof "";
 function okType(value, type, msg) {
@@ -51,24 +49,9 @@ databasePath - path to the database file (can be ":memory:" to get a temporary d
 engine - wasm | better
 */
 class SqlTiddlerDatabase {
-    constructor(options = {}) {
-        if (options.databasePath === ":memory:") {
-            throw new Error("In-memory databases are not supported");
-        }
-        $tw.utils.createFileDirectories(options.databasePath);
-        this.connection = this.engine = new client_1.PrismaClient({
-            datasourceUrl: `file:${options.databasePath}`,
-        });
+    constructor(engine) {
+        this.engine = engine;
     }
-    async close() {
-        await this.connection.$disconnect();
-    }
-    // async transaction<T>(fn: (prisma: PrismaTxnClient) => Promise<T>): Promise<T> {
-    // 	return await this.engine.$transaction(fn);
-    // }
-    // async createTables() {
-    // 	throw new Error("Not implemented");
-    // }
     async listBags() {
         return await this.engine.bags.findMany({
             select: { bag_name: true, bag_id: true, accesscontrol: true, description: true },
@@ -558,7 +541,7 @@ class SqlTiddlerDatabase {
     async getACLByName(entityType, entityName, fetchAll) {
         okEntityType(entityType);
         okTypeTruthy(entityName, "string", "No entityName provided");
-        okType(fetchAll, "boolean", "fetchAll must be a boolean");
+        // okType(fetchAll, "boolean", "fetchAll must be a boolean");
         return await this.engine.acl.findMany({
             where: { entity_type: entityType, entity_name: entityName },
             include: { permission: true },
@@ -1269,6 +1252,7 @@ class SqlTiddlerDatabase {
     }
     async createUserSession(user_id, session_id) {
         const currentTimestamp = new Date().toISOString();
+        // throw new Error("how are we even here?");
         await this.engine.sessions.create({
             data: {
                 user_id,

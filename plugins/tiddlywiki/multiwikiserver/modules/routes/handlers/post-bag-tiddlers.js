@@ -24,7 +24,6 @@ exports.useACL = true;
 
 exports.entityName = "bag"
 /** @type {ServerRouteHandler<1, "stream">} */	
-// eslint-disable-next-line require-await
 exports.handler = async function(request,response,state) {
 	const path = require("path"),
 		fs = require("fs"),

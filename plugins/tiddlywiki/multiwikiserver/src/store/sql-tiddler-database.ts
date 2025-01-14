@@ -60,33 +60,11 @@ databasePath - path to the database file (can be ":memory:" to get a temporary d
 engine - wasm | better
 */
 export class SqlTiddlerDatabase {
-	engine: PrismaTxnClient;
-	connection: PrismaClient;
-	constructor(options: {
-		databasePath?: string,
-		engine?: "node" | "wasm" | "better"
-	} = {}) {
 
-		if (options.databasePath === ":memory:") {
-			throw new Error("In-memory databases are not supported");
-		}
-
-		$tw.utils.createFileDirectories(options.databasePath);
-
-		this.connection = this.engine = new PrismaClient({
-			datasourceUrl: `file:${options.databasePath}`,
-		});
+	constructor(public engine: PrismaTxnClient) {
 
 	}
-	async close() {
-		await this.connection.$disconnect();
-	}
-	// async transaction<T>(fn: (prisma: PrismaTxnClient) => Promise<T>): Promise<T> {
-	// 	return await this.engine.$transaction(fn);
-	// }
-	// async createTables() {
-	// 	throw new Error("Not implemented");
-	// }
+
 	async listBags() {
 		return await this.engine.bags.findMany({
 			select: { bag_name: true, bag_id: true, accesscontrol: true, description: true },
@@ -579,10 +557,10 @@ export class SqlTiddlerDatabase {
 	 * @param {true} fetchAll
 	 * @returns {Promise<Record<string, any>[]>}
 	 */
-	async getACLByName(entityType: EntityType, entityName: string, fetchAll: boolean) {
+	async getACLByName(entityType: EntityType, entityName: string, fetchAll?: boolean) {
 		okEntityType(entityType);
 		okTypeTruthy(entityName, "string", "No entityName provided");
-		okType(fetchAll, "boolean", "fetchAll must be a boolean");
+		// okType(fetchAll, "boolean", "fetchAll must be a boolean");
 
 		return await this.engine.acl.findMany({
 			where: { entity_type: entityType, entity_name: entityName },
@@ -1335,6 +1313,7 @@ export class SqlTiddlerDatabase {
 	}
 	async createUserSession(user_id: number, session_id: string) {
 		const currentTimestamp = new Date().toISOString();
+		// throw new Error("how are we even here?");
 		await this.engine.sessions.create({
 			data: {
 				user_id,

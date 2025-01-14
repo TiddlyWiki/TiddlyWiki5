@@ -23,7 +23,7 @@ $tw.utils = $tw.utils || Object.create(null);
 
 /////////////////////////// Standard node.js libraries
 
-var fs, path, vm;
+var fs, path, /** @type {import("vm")} */ vm;
 if($tw.node) {
 	fs = require("fs");
 	path = require("path");
@@ -212,7 +212,9 @@ $tw.utils.error = function(err) {
 	var errHeading = ( $tw.language == undefined ? "Internal JavaScript Error" : $tw.language.getString("InternalJavaScriptError/Title") ),
 		promptMsg = ( $tw.language == undefined ? "Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser" : $tw.language.getString("InternalJavaScriptError/Hint") );
 	// Log the error to the console
+	
 	console.error($tw.node ? "\x1b[1;31m" + err + "\x1b[0m" : err);
+	console.log(new Error().stack);
 	if($tw.browser && !$tw.node) {
 		// Display an error message to the user
 		var dm = $tw.utils.domMaker,
@@ -621,6 +623,7 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	// Add the code prologue and epilogue
 	code = [
 		"(function(" + contextNames.join(",") + ") {",
+		!$tw.browser ? "  require('source-map-support').install();" : "",
 		"  (function(){" + code + "\n;})();\n",
 		(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : "",
 		"\nreturn exports;\n",
@@ -873,6 +876,8 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 			setTimeout: setTimeout,
 			clearTimeout: clearTimeout,
 			Buffer: $tw.browser ? undefined : Buffer,
+			URL: URL, 
+			URLSearchParams: URLSearchParams,
 			$tw: $tw,
 			require: function(title) {
 				return $tw.modules.execute(title, name);

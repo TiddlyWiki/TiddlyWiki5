@@ -72,10 +72,12 @@ exports.handler = async function(request,response,state) {
 		}
 		// Send current and future changes
 		await sendUpdates();
+		// eslint-disable-next-line @typescript-eslint/no-misused-promises
 		state.store.addEventListener("change",sendUpdates);
 		// Clean up when the connection closes
 		response.on("close",function () {
 			clearInterval(heartbeatTimer);
+			// eslint-disable-next-line @typescript-eslint/no-misused-promises
 			state.store.removeEventListener("change",sendUpdates);
 		});
 		return;

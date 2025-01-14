@@ -73,12 +73,7 @@ class SqlTiddlerStore {
         }
         this.attachmentStore = options.attachmentStore;
         this.adminWiki = options.adminWiki || $tw.wiki;
-        // Create the database
-        this.databasePath = options.databasePath || ":memory:";
-        this.sql = new sql_tiddler_database_1.SqlTiddlerDatabase({
-            databasePath: this.databasePath,
-            engine: options.engine
-        });
+        this.sql = new sql_tiddler_database_1.SqlTiddlerDatabase(options.prisma);
     }
     /*
     Returns null if a bag/recipe name is valid, or a string error message if not

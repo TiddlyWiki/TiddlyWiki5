@@ -5,83 +5,6 @@ const tsLint = require("typescript-eslint");
 const utils_1 = require("@typescript-eslint/utils");
 const tsutils = require("ts-api-utils");
 const ts = require("typescript");
-const AlwaysAwaitRule = {
-	meta: {
-		type: 'suggestion',
-		messages: {
-			expression: 'Expected non-Promise value or awaited Promise in an expression.',
-			assignment: 'Add await operator.',
-			declaration: 'Add await operator.',
-			statement: 'Add await operator.',
-		},
-		fixable: 'code',
-		hasSuggestions: true,
-	},
-	create(context) {
-		const services = utils_1.ESLintUtils.getParserServices(context);
-		const checker = services.program.getTypeChecker();
-		const checks = new Set(["AwaitExpression", "VoidExpression"])
-		return {
-			":expression"(node) {
-				return;
-				if(checks.has(node.type)) return;
-				let parent = node; while(parent.expression && (parent = parent.parent)) if(checks.has(parent.type)) return;
-				console.log(node);
-				if(node.type === "VariableDeclarator") return;
-				if(node.parent.type === "VariableDeclarator" && node.parent.id === node) return;
-				if(node.parent.type === "AssignmentExpression" && node.parent.left === node) return;
-				if(isSometimesThenable(checker, node))
-					context.report({node: node, messageId: 'expression', });
-
-			},
-			AssignmentExpression: checkAll,
-			VariableDeclarator: checkAll,
-			ExpressionStatement: checkAll,
-			CallExpression: checkAll,
-			ReturnStatement: checkAll,
-		};
-
-		function addAwait(fixer, expression, node) {
-			// in keeping with the other rules, void signals that the await is being ignored
-			if(expression.type === utils_1.AST_NODE_TYPES.UnaryExpression && expression.operator === 'void')
-				return;
-			return fixer.insertTextBefore(expression, 'await ');
-		}
-
-		/** 
-		 * @param {import("estree").Node} node
-		 */
-		function checkAll(node) {
-			if(node.type === "AssignmentExpression" && isSometimesThenable(checker, node.right))
-				report((fixer) => addAwait(fixer, node.right, node));
-			else if(node.type === "VariableDeclarator" && isSometimesThenable(checker, node.init))
-				report((fixer) => addAwait(fixer, node.init, node));
-			else if(node.type === "ReturnStatement"
-				&& node.argument && node.argument.type === "CallExpression"
-				&& isSometimesThenable(checker, node.argument))
-				report((fixer) => addAwait(fixer, node.argument, node));
-			else if(node.type === "ExpressionStatement" && isSometimesThenable(checker, node.expression))
-				report((fixer) => addAwait(fixer, node.expression, node));
-
-			function report(fix) {return context.report({node: node, messageId: 'statement', fix, });}
-		}
-
-		function isAlwaysThenable(checker, node) {
-			const tsNode = services.esTreeNodeToTSNodeMap.get(node);
-			const type = checker.getTypeAtLocation(tsNode);
-			if(!tsutils.isThenableType(checker, tsNode, checker.getApparentType(type))) return false;
-			return true;
-		}
-		function isSometimesThenable(checker, node) {
-			const tsNode = services.esTreeNodeToTSNodeMap.get(node);
-			const type = checker.getTypeAtLocation(tsNode);
-			for(const subType of tsutils.unionTypeParts(checker.getApparentType(type))) {
-				if(tsutils.isThenableType(checker, tsNode, subType)) return true;
-			}
-			return false;
-		}
-	},
-};
 
 module.exports = tsLint.config(
 	{
@@ -94,11 +17,16 @@ module.exports = tsLint.config(
 			"core/modules/utils/diff-match-patch/diff_match_patch_uncompressed.js",
 			"core/modules/utils/dom/csscolorparser.js",
 			"plugins/tiddlywiki/*/files/",
+			"modules/store/attachments.js",
+			"modules/store/sql-tiddler-database.js",
+			"modules/store/sql-tiddler-store.js",
+			"modules/router.js",
+			"modules/server.js",
 		]
 	},
 	jsLint.configs.recommended,
 	tsLint.configs.base,
-	{plugins: {"custom-rules": {rules: {"always-await": AlwaysAwaitRule}}}},
+	{plugins: {"custom-rules": {rules: {"always-await": AlwaysAwaitRule()}}}},
 	{
 		languageOptions: {
 			globals: {
@@ -365,7 +293,7 @@ module.exports = tsLint.config(
 
 			radix: "off",
 			// "require-atomic-updates": "error",
-			"require-await": "error",
+
 			"require-jsdoc": "off",
 			"require-unicode-regexp": "off",
 			"rest-spread-spacing": "error",
@@ -421,6 +349,87 @@ module.exports = tsLint.config(
 			"@typescript-eslint/promise-function-async": "error",
 			"custom-rules/always-await": "error",
 			"arrow-body-style": "off",
+			"require-await": "off",
 		},
 	}
 );
+function AlwaysAwaitRule() {
+
+	return {
+		meta: {
+			type: 'suggestion',
+			messages: {
+				expression: 'Expected non-Promise value or awaited Promise in an expression.',
+				assignment: 'Add await operator.',
+				declaration: 'Add await operator.',
+				statement: 'Add await operator.',
+			},
+			fixable: 'code',
+			hasSuggestions: true,
+		},
+		create(context) {
+			const services = utils_1.ESLintUtils.getParserServices(context);
+			const checker = services.program.getTypeChecker();
+			const checks = new Set(["AwaitExpression", "VoidExpression"])
+			return {
+				":expression"(node) {
+					return;
+					if(checks.has(node.type)) return;
+					let parent = node; while(parent.expression && (parent = parent.parent)) if(checks.has(parent.type)) return;
+					console.log(node);
+					if(node.type === "VariableDeclarator") return;
+					if(node.parent.type === "VariableDeclarator" && node.parent.id === node) return;
+					if(node.parent.type === "AssignmentExpression" && node.parent.left === node) return;
+					if(isSometimesThenable(checker, node))
+						context.report({node: node, messageId: 'expression', });
+
+				},
+				AssignmentExpression: checkAll,
+				VariableDeclarator: checkAll,
+				ExpressionStatement: checkAll,
+				CallExpression: checkAll,
+				ReturnStatement: checkAll,
+			};
+
+			function addAwait(fixer, expression, node) {
+				// in keeping with the other rules, void signals that the await is being ignored
+				if(expression.type === utils_1.AST_NODE_TYPES.UnaryExpression && expression.operator === 'void')
+					return;
+				return fixer.insertTextBefore(expression, 'await ');
+			}
+
+			/** 
+			 * @param {import("estree").Node} node
+			 */
+			function checkAll(node) {
+				if(node.type === "AssignmentExpression" && isSometimesThenable(checker, node.right))
+					report((fixer) => addAwait(fixer, node.right, node));
+				else if(node.type === "VariableDeclarator" && isSometimesThenable(checker, node.init))
+					report((fixer) => addAwait(fixer, node.init, node));
+				else if(node.type === "ReturnStatement"
+					&& node.argument && node.argument.type === "CallExpression"
+					&& isSometimesThenable(checker, node.argument))
+					report((fixer) => addAwait(fixer, node.argument, node));
+				else if(node.type === "ExpressionStatement" && isSometimesThenable(checker, node.expression))
+					report((fixer) => addAwait(fixer, node.expression, node));
+
+				function report(fix) {return context.report({node: node, messageId: 'statement', fix, });}
+			}
+
+			function isAlwaysThenable(checker, node) {
+				const tsNode = services.esTreeNodeToTSNodeMap.get(node);
+				const type = checker.getTypeAtLocation(tsNode);
+				if(!tsutils.isThenableType(checker, tsNode, checker.getApparentType(type))) return false;
+				return true;
+			}
+			function isSometimesThenable(checker, node) {
+				const tsNode = services.esTreeNodeToTSNodeMap.get(node);
+				const type = checker.getTypeAtLocation(tsNode);
+				for(const subType of tsutils.unionTypeParts(checker.getApparentType(type))) {
+					if(tsutils.isThenableType(checker, tsNode, subType)) return true;
+				}
+				return false;
+			}
+		},
+	};
+}
