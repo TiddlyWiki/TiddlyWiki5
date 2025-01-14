@@ -9,8 +9,8 @@ This class is intended to encapsulate all the SQL queries used to access the dat
 Validation is for the most part left to the caller
 
 \*/
-
-import { SqlEngine } from "$:/plugins/tiddlywiki/multiwikiserver/store/sql-engine";
+"use strict";
+// import { SqlEngine } from "$:/plugins/tiddlywiki/multiwikiserver/store/sql-engine";
 import { PrismaClient } from "@prisma/client";
 import { ok } from "assert";
 const TYPEOF_ENUM = typeof "";
@@ -61,44 +61,56 @@ engine - wasm | better
 */
 export class SqlTiddlerDatabase {
 	engine: PrismaTxnClient;
-
+	connection: PrismaClient;
 	constructor(options: {
 		databasePath?: string,
 		engine?: "node" | "wasm" | "better"
 	} = {}) {
 
-		this.engine = new PrismaClient();
+		if (options.databasePath === ":memory:") {
+			throw new Error("In-memory databases are not supported");
+		}
+
+		$tw.utils.createFileDirectories(options.databasePath);
+
+		this.connection = this.engine = new PrismaClient({
+			datasourceUrl: `file:${options.databasePath}`,
+		});
 
 	}
-	// async close() {
-	// 	await this.engine.$disconnect();
-	// }
+	async close() {
+		await this.connection.$disconnect();
+	}
 	// async transaction<T>(fn: (prisma: PrismaTxnClient) => Promise<T>): Promise<T> {
 	// 	return await this.engine.$transaction(fn);
 	// }
-	async createTables() {
-		throw new Error("Not implemented");
-	}
+	// async createTables() {
+	// 	throw new Error("Not implemented");
+	// }
 	async listBags() {
 		return await this.engine.bags.findMany({
 			select: { bag_name: true, bag_id: true, accesscontrol: true, description: true },
 			orderBy: { bag_name: "asc" }
 		});
+		// const rows = await this.engine.runStatementGetAll(`
+		// 	SELECT bag_name, bag_id, accesscontrol, description
+		// 	FROM bags
+		// 	ORDER BY bag_name
+		// `);
+		// return rows;
 	}
 	/*
 	Create or update a bag
 	Returns the bag_id of the bag
 	*/
 	async createBag(bag_name: string, description: string, accesscontrol = "") {
-		// Run the queries
-		const update = await this.engine.bags.upsert({
-			create: { bag_name, accesscontrol, description },
-			update: { accesscontrol, description },
-			where: { bag_name }
+		// ignore if the bag already exists
+		const bag = await this.engine.bags.upsert({
+			create: { bag_name, description, accesscontrol },
+			update: { description, accesscontrol },
+			where: { bag_name },
 		});
-		return update.bag_id;
-		// this was a bug because lastInsertRowId is only set on insert
-		// return updateBags.lastInsertRowid;
+		return bag.bag_id;
 	}
 	/*
 	Returns array of {recipe_name:,recipe_id:,description:,bag_names: []}
@@ -232,6 +244,20 @@ export class SqlTiddlerDatabase {
 				attachment_blob,
 				fields: {
 					create: Object.entries(tiddlerFields).map(([field_name, field_value]) => {
+						if (field_value === null) field_value = "";
+						if (field_value === undefined) field_value = "";
+
+						switch (typeof field_value) {
+							case "string":
+								break;
+							case "number":
+							case "boolean":
+							case "bigint":
+								field_value = (field_value as any).toString();
+								break;
+							default:
+								$tw.utils.error("Invalid field value type: " + typeof field_value);
+						}
 						return { field_name, field_value };
 					})
 				}
@@ -505,7 +531,7 @@ export class SqlTiddlerDatabase {
 	/*
 	Checks if a user has permission to access a recipe
 	*/
-	async hasRecipePermission(user_id: number, recipe_name: string, permissionName: string) {
+	async hasRecipePermission(user_id: number | undefined, recipe_name: string, permissionName: string) {
 		const recipe = await this.engine.recipes.findUnique({
 			where: { recipe_name }, select: { owner_id: true }
 		});
@@ -590,12 +616,14 @@ export class SqlTiddlerDatabase {
 		// 	return aclRecord;
 	}
 	async checkACLPermission(
-		user_id: number,
+		user_id: number | undefined,
 		entityType: EntityType,
 		entityName: string,
 		permissionName: string,
 		ownerId: number | undefined
 	) {
+		if(user_id === undefined) return false;
+		
 		okType(user_id, "number", "No user_id provided");
 		okEntityType(entityType);
 		okTypeTruthy(entityName, "string", "No entityName provided");
@@ -617,7 +645,8 @@ export class SqlTiddlerDatabase {
 
 		const result = await this.engine.users.findUnique({
 			where: {
-				user_id, user_roles: {
+				user_id, 
+				user_roles: {
 					some: {
 						role: {
 							acls: {
@@ -816,9 +845,9 @@ export class SqlTiddlerDatabase {
 		const tiddlerMap = new Map<string, { tiddler: typeof tiddlers[number], position: number }>();
 		for (const tiddler of tiddlers) {
 			if (!tiddler.bag.recipe_bags.length)
-				$tw.utils.warn(`Tiddler '${tiddler.title}' is not in the recipe '${recipe_name}'???`);
+				$tw.utils.warning(`Tiddler '${tiddler.title}' is not in the recipe '${recipe_name}'???`);
 			if (tiddler.bag.recipe_bags.length > 1)
-				$tw.utils.warn(`Tiddler bag '${tiddler.bag.bag_name}' is specified multiple times in the recipe '${recipe_name}'???`);
+				$tw.utils.warning(`Tiddler bag '${tiddler.bag.bag_name}' is specified multiple times in the recipe '${recipe_name}'???`);
 
 			const { position } = tiddler.bag.recipe_bags.sort((a, b) => b.position - a.position)[0];
 			const current = tiddlerMap.get(tiddler.title);
@@ -1842,9 +1871,10 @@ export class SqlTiddlerDatabase {
 		// 	});
 	}
 	async getUserRoles(userId: number) {
-		return await this.engine.user_roles.findMany({
-			where: { user_id: userId }
-		});
+		return await this.engine.user_roles.findFirst({
+			where: { user_id: userId },
+			select: { role: { select: { role_name: true } } }
+		}).then(e => e && ({ role_name: e.role.role_name }));
 		// 	const query = `
 		// 		SELECT r.role_id, r.role_name
 		// 		FROM user_roles ur
@@ -1852,7 +1882,6 @@ export class SqlTiddlerDatabase {
 		// 		WHERE ur.user_id = $userId
 		// 		LIMIT 1
 		// `;
-
 		// 	return await this.engine.runStatementGet(query, { $userId: userId });
 	}
 	async deleteUserRolesByRoleId(roleId: number) {
