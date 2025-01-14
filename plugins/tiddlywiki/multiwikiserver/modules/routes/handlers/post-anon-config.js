@@ -29,8 +29,8 @@ exports.handler = async function(request, response, state) {
     return;
   }
 
-  var allowReads = state.data.allowReads === "on";
-  var allowWrites = state.data.allowWrites === "on";
+  var allowReads = state.data.get("allowReads") === "on";
+  var allowWrites = state.data.get("allowWrites") === "on";
 
   // Update the configuration tiddlers
   var wiki = $tw.wiki;

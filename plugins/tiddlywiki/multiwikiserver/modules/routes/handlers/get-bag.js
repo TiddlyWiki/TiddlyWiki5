@@ -24,7 +24,7 @@ exports.entityName = "bag"
 exports.handler = async function (request, response, state) {
 	// Redirect if there is no trailing slash. We do this so that the relative URL specified in the upload form works correctly
 	if (state.params[1] !== "/") {
-		state.redirect(301, state.urlInfo.path + "/");
+		state.redirect(301, state.urlInfo.pathname + "/");
 		return;
 	}
 	// Get the  parameters

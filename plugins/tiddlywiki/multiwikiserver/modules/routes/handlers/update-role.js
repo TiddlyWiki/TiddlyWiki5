@@ -21,10 +21,10 @@ exports.bodyFormat = "www-form-urlencoded";
 exports.csrfDisable = true;
 /** @type {ServerRouteHandler<1,"www-form-urlencoded">} */	
 exports.handler = async function(request, response, state) {
-  var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
+  var sqlTiddlerDatabase = state.store.sql;
   var role_id = state.params[0];
-  var role_name = state.data.role_name;
-  var role_description = state.data.role_description;
+  var role_name = state.data.get("role_name");
+  var role_description = state.data.get("role_description");
 
   if(!state.authenticatedUser?.isAdmin) {
     response.writeHead(403, "Forbidden");

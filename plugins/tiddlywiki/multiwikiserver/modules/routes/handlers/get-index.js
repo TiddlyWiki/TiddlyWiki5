@@ -20,8 +20,7 @@ exports.path = /^\/$/;
 exports.handler = async function(request,response,state) {
 	// Get the bag and recipe information
 	var bagList = await state.store.listBags(),
-		recipeList = await state.store.listRecipes(),
-		sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
+		recipeList = await state.store.listRecipes();
 
 	// If application/json is requested then this is an API request, and gets the response in JSON
 	if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
@@ -35,7 +34,7 @@ exports.handler = async function(request,response,state) {
 		const allowedRecipes =await filterAsync(recipeList, async recipe =>
 			recipe.recipe_name.startsWith("$:/")
 			|| state.authenticatedUser?.isAdmin
-			|| await sqlTiddlerDatabase.hasRecipePermission(
+			|| await state.store.sql.hasRecipePermission(
 				state.authenticatedUser?.user_id,
 				recipe.recipe_name,
 				'READ'
@@ -46,7 +45,7 @@ exports.handler = async function(request,response,state) {
 		const allowedBags = await filterAsync(bagList, async bag =>
 			bag.bag_name.startsWith("$:/")
 			|| state.authenticatedUser?.isAdmin
-			|| await sqlTiddlerDatabase.hasBagPermission(
+			|| await state.store.sql.hasBagPermission(
 				state.authenticatedUser?.user_id,
 				bag.bag_name,
 				'READ'
@@ -58,14 +57,14 @@ exports.handler = async function(request,response,state) {
 			...recipe,
 			has_acl_access: state.authenticatedUser?.isAdmin
 				|| recipe.owner_id === state.authenticatedUser?.user_id
-				|| await sqlTiddlerDatabase.hasRecipePermission(
+				|| await state.store.sql.hasRecipePermission(
 					state.authenticatedUser?.user_id, recipe.recipe_name, 'WRITE')
 		}))
 
 		// Render the html
 		var html = state.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{
 			variables: {
-				"show-system": state.queryParameters.show_system || "off",
+				"show-system": state.queryParameters.get("show_system") || "off",
 				"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/get-index",
 				"bag-list": JSON.stringify(allowedBags),
 				"recipe-list": JSON.stringify(allowedRecipesWithWrite),

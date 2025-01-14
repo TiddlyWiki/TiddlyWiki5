@@ -28,8 +28,8 @@ exports.handler = async function(request,response,state) {
 	let last_known_tiddler_id = 0;
 	if(request.headers["Last-Event-ID"]) {
 		last_known_tiddler_id = $tw.utils.parseNumber(request.headers["Last-Event-ID"]);
-	} else if(state.queryParameters.last_known_tiddler_id) {
-		last_known_tiddler_id = $tw.utils.parseNumber(state.queryParameters.last_known_tiddler_id);
+	} else if(state.queryParameters.get("last_known_tiddler_id")) {
+		last_known_tiddler_id = $tw.utils.parseNumber(state.queryParameters.get("last_known_tiddler_id"));
 	}
 	if(recipe_name) {
 		// Start streaming the response

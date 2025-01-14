@@ -31,10 +31,10 @@ exports.handler = async function (request,response,state) {
     return;
   }
 
-  var userId = state.data.userId;
-  var username = state.data.username;
-  var email = state.data.email;
-  var roleId = state.data.role;
+  var userId = state.data.get("userId");
+  var username = state.data.get("username");
+  var email = state.data.get("email");
+  var roleId = state.data.get("role");
   var currentUserId = state.authenticatedUser.user_id;
 
   var hasPermission = ($tw.utils.parseInt(userId) === currentUserId) || state.authenticatedUser.isAdmin;
@@ -50,11 +50,11 @@ exports.handler = async function (request,response,state) {
   }
 
   if(!state.authenticatedUser.isAdmin) {
-    var userRole = await state.store.sqlTiddlerDatabase.getUserRoles(userId);
+    var userRole = await state.store.sql.getUserRoles(userId);
     roleId = userRole.role_id;
   }
 
-  var result = await state.store.sqlTiddlerDatabase.updateUser(userId, username, email, roleId);
+  var result = await state.store.sql.updateUser(userId, username, email, roleId);
 
   if(result.success) {
     state.store.adminWiki.addTiddler(new $tw.Tiddler({

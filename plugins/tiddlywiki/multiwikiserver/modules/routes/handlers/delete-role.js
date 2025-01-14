@@ -21,8 +21,8 @@ POST /admin/delete-role
 	exports.csrfDisable = true;
 	/** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
 	exports.handler = async function (request, response, state) {
-		var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
-		var role_id = state.data.role_id;
+		var sqlTiddlerDatabase = state.store.sql;
+		var role_id = state.data.get("role_id");
 
 		if(!state.authenticatedUser || !state.authenticatedUser.isAdmin) {
       response.writeHead(403, "Forbidden");

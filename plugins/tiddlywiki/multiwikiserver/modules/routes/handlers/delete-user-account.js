@@ -21,8 +21,9 @@ exports.bodyFormat = "www-form-urlencoded";
 exports.csrfDisable = true;
 /** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
 exports.handler = async function (request, response, state) {
-	var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
-	var userId = state.data.userId;
+
+	var userId = state.data.get("userId");
+	
 
 	// Check if user is admin
 	if(!state.authenticatedUser || !state.authenticatedUser.isAdmin) {
@@ -47,7 +48,7 @@ exports.handler = async function (request, response, state) {
 	}
 
 	// Check if the user exists
-	var user = await sqlTiddlerDatabase.getUser(userId);
+	var user = await state.store.sql.getUser(userId);
 	if(!user) {
 		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/delete-user/error",
@@ -59,7 +60,7 @@ exports.handler = async function (request, response, state) {
 	}
 
 	// Check if this is the last admin account
-	var adminRole = await sqlTiddlerDatabase.getRoleByName("ADMIN");
+	var adminRole = await state.store.sql.getRoleByName("ADMIN");
 	if(!adminRole) {
 		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/delete-user/error",
@@ -70,7 +71,7 @@ exports.handler = async function (request, response, state) {
 		return;
 	}
 
-	var adminUsers = await sqlTiddlerDatabase.listUsersByRoleId(adminRole.role_id);
+	var adminUsers = await state.store.sql.listUsersByRoleId(adminRole.role_id);
 	if(adminUsers.length <= 1 && adminUsers.some(admin => admin.user_id === parseInt(userId))) {
 		state.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/delete-user/error",
@@ -81,9 +82,9 @@ exports.handler = async function (request, response, state) {
 		return;
 	}
 	
-	await sqlTiddlerDatabase.deleteUserRolesByUserId(userId);
-	await sqlTiddlerDatabase.deleteUserSessions(userId);
-	await sqlTiddlerDatabase.deleteUser(userId);
+	await state.store.sql.deleteUserRolesByUserId(userId);
+	await state.store.sql.deleteUserSessions(userId);
+	await state.store.sql.deleteUser(userId);
 
 	// Redirect back to the users management page
 	response.writeHead(302, { "Location": "/admin/users" });

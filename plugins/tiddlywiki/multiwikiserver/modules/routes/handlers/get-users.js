@@ -17,7 +17,7 @@ exports.method = "GET";
 exports.path = /^\/admin\/users$/;
 /** @type {ServerRouteHandler<0>} */	
 exports.handler = async function(request,response,state) {
-	var userList = await state.store.sqlTiddlerDatabase.listUsers();
+	var userList = await state.store.sql.listUsers();
 	if(request.url.includes("*")) {
 		state.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/error");
 		state.store.adminWiki.deleteTiddler("$:/temp/mws/post-user/success");

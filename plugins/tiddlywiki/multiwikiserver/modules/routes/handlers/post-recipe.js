@@ -33,11 +33,11 @@ exports.entityName = "recipe"
 exports.handler = async function(request,response,state) {
 	var server = state.server,
 		sqlTiddlerDatabase = server.sqlTiddlerDatabase
-	if(state.data.recipe_name && state.data.bag_names) {
-		const result = await state.store.createRecipe(state.data.recipe_name,$tw.utils.parseStringArray(state.data.bag_names),state.data.description);
+	if(state.data.get("recipe_name") && state.data.get("bag_names")) {
+		const result = await state.store.createRecipe(state.data.get("recipe_name"),$tw.utils.parseStringArray(state.data.get("bag_names")),state.data.get("description"));
 		if(!result) {
 			if(state.authenticatedUser) {
-				await sqlTiddlerDatabase.assignRecipeToUser(state.data.recipe_name,state.authenticatedUser.user_id);
+				await sqlTiddlerDatabase.assignRecipeToUser(state.data.get("recipe_name"),state.authenticatedUser.user_id);
 			}
 			state.sendResponse(302,{
 				"Content-Type": "text/plain",

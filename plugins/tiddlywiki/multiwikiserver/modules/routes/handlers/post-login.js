@@ -27,10 +27,10 @@ exports.bodyFormat = "www-form-urlencoded";
 exports.csrfDisable = true;
 /** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
 exports.handler = async function(request,response,state) {
-	var auth = authenticator(state.store.sqlTiddlerDatabase);
-	var username = state.data.username;
-	var password = state.data.password;
-	var user = await state.store.sqlTiddlerDatabase.getUserByUsername(username);
+	var auth = authenticator(state.store.sql);
+	var username = state.data.get("username");
+	var password = state.data.get("password");
+	var user = await state.store.sql.getUserByUsername(username);
 	var isPasswordValid = auth.verifyPassword(password, user ? user.password : null)
 
 	if(user && isPasswordValid) {

@@ -32,11 +32,11 @@ function deleteTempTiddlers() {
 /** @type {ServerRouteHandler<0, "www-form-urlencoded">} */	
 exports.handler = async function(request, response, state) {
 
-  var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
-  var username = state.data.username;
-  var email = state.data.email;
-  var password = state.data.password;
-  var confirmPassword = state.data.confirmPassword;
+  var sqlTiddlerDatabase = state.store.sql;
+  var username = state.data.get("username");
+  var email = state.data.get("email");
+  var password = state.data.get("password");
+  var confirmPassword = state.data.get("confirmPassword");
   var queryParamsTiddlerTitle = "$:/temp/mws/queryParams";
 
   if(!state.authenticatedUser && !state.firstGuestUser) {

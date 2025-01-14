@@ -21,7 +21,7 @@ exports.handler = async function(request, response, state) {
 		state.store.adminWiki.deleteTiddler("$:/temp/mws/post-role/error");
 		state.store.adminWiki.deleteTiddler("$:/temp/mws/post-role/success");
 	}
-	var roles = await state.store.sqlTiddlerDatabase.listRoles();
+	var roles = await state.store.sql.listRoles();
 	var editRoleId = request.url.includes("?") ? request.url.split("?")[1]?.split("=")[1] : null;
 	var editRole = editRoleId ? roles.find(role => role.role_id === $tw.utils.parseInt(editRoleId, 10)) : null;
 

@@ -21,9 +21,9 @@ exports.bodyFormat = "www-form-urlencoded";
 exports.csrfDisable = true;
 /** @type {ServerRouteHandler<0,"www-form-urlencoded">} */	
 exports.handler = async function (request, response, state) {
-	var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
-	var role_name = state.data.role_name;
-	var role_description = state.data.role_description;
+	var sqlTiddlerDatabase = state.store.sql;
+	var role_name = state.data.get("role_name");
+	var role_description = state.data.get("role_description");
 
 	if(!state.authenticatedUser || !state.authenticatedUser.isAdmin) {
 		state.store.adminWiki.addTiddler(new $tw.Tiddler({

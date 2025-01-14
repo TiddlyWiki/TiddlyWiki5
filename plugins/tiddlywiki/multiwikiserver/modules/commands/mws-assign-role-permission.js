@@ -30,14 +30,14 @@ Command.prototype.execute = async function() {
 		return "Usage: --mws-assign-role-permission <role_name> <permission_name>";
 	}
 
-	if(!$tw.mws || !$tw.mws.store || !$tw.mws.store.sqlTiddlerDatabase) {
+	if(!$tw.mws || !$tw.mws.store || !$tw.mws.store.sql) {
 		return "Error: MultiWikiServer or SQL database not initialized.";
 	}
 
 	var role_name = this.params[0];
 	var permission_name = this.params[1];
-	var role = await $tw.mws.store.sqlTiddlerDatabase.getRoleByName(role_name);
-	var permission = await $tw.mws.store.sqlTiddlerDatabase.getPermissionByName(permission_name);
+	var role = await $tw.mws.store.sql.getRoleByName(role_name);
+	var permission = await $tw.mws.store.sql.getPermissionByName(permission_name);
 	
 	if(!role) {
 		return "Error: Unable to find Role: "+role_name;
@@ -47,10 +47,10 @@ Command.prototype.execute = async function() {
 		return "Error: Unable to find Permission: "+permission_name;
 	}
 
-	var permission = await $tw.mws.store.sqlTiddlerDatabase.getPermissionByName(permission_name);
+	var permission = await $tw.mws.store.sql.getPermissionByName(permission_name);
 
 
-	await $tw.mws.store.sqlTiddlerDatabase.addPermissionToRole(role.role_id, permission.permission_id);
+	await $tw.mws.store.sql.addPermissionToRole(role.role_id, permission.permission_id);
 	self.callback();
 	return null;
 };

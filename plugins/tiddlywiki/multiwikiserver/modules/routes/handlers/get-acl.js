@@ -16,7 +16,7 @@ exports.method = "GET";
 exports.path = /^\/admin\/acl\/(.+)$/;
 /** @type {ServerRouteHandler<1>} */	
 exports.handler = async function (request, response, state) {
-	var sqlTiddlerDatabase = state.store.sqlTiddlerDatabase;
+	var sqlTiddlerDatabase = state.store.sql;
 	var params = state.params[0].split("/")
 	var recipeName = params[0];
 	var bagName = params[params.length - 1];
@@ -35,8 +35,8 @@ exports.handler = async function (request, response, state) {
 
 	var recipeAclRecords = await sqlTiddlerDatabase.getEntityAclRecords(recipe.recipe_name);
 	var bagAclRecords = await sqlTiddlerDatabase.getEntityAclRecords(bag.bag_name);
-	var roles = await state.store.sqlTiddlerDatabase.listRoles();
-	var permissions = await state.store.sqlTiddlerDatabase.listPermissions();
+	var roles = await state.store.sql.listRoles();
+	var permissions = await state.store.sql.listPermissions();
 
 	// This ensures that the user attempting to view the ACL management page has permission to do so
 	async function canContinue() {

@@ -33,9 +33,7 @@ exports.handler = async function (request, response, state) {
 		} else {
 			state.sendResponse(400, {
 				"Content-Type": "text/plain"
-			},
-				result.message,
-				"utf8");
+			}, result.message, "utf8");
 		}
 	} else {
 		if(!response.headersSent) {

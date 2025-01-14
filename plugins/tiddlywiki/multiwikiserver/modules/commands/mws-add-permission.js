@@ -30,14 +30,14 @@ Command.prototype.execute = async function() {
 		return "Usage: --mws-add-permission <permission_name> <description>";
 	}
 
-	if(!$tw.mws || !$tw.mws.store || !$tw.mws.store.sqlTiddlerDatabase) {
+	if(!$tw.mws || !$tw.mws.store || !$tw.mws.store.sql) {
 		return "Error: MultiWikiServer or SQL database not initialized.";
 	}
 
 	var permission_name = this.params[0];
 	var description = this.params[1];
 
-	await $tw.mws.store.sqlTiddlerDatabase.createPermission(permission_name, description);
+	await $tw.mws.store.sql.createPermission(permission_name, description);
 	self.callback();
 	return null;
 };

@@ -30,14 +30,14 @@ Command.prototype.execute = async function() {
 		return "Usage: --mws-add-role <role_name> <description>";
 	}
 
-	if(!$tw.mws || !$tw.mws.store || !$tw.mws.store.sqlTiddlerDatabase) {
+	if(!$tw.mws || !$tw.mws.store || !$tw.mws.store.sql) {
 		return "Error: MultiWikiServer or SQL database not initialized.";
 	}
 
 	var role_name = this.params[0];
 	var description = this.params[1];
 
-	await $tw.mws.store.sqlTiddlerDatabase.createRole(role_name, description);
+	await $tw.mws.store.sql.createRole(role_name, description);
 	self.callback(null, "Role Created Successfully!");
 	return null;
 };

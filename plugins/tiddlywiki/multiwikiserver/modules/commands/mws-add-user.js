@@ -32,7 +32,7 @@ Command.prototype.execute = async function() {
 		return "Usage: --mws-add-user <username> <password> [email]";
 	}
 
-	if(!$tw.mws || !$tw.mws.store || !$tw.mws.store.sqlTiddlerDatabase) {
+	if(!$tw.mws || !$tw.mws.store || !$tw.mws.store.sql) {
 		return "Error: MultiWikiServer or SQL database not initialized.";
 	}
 
@@ -41,10 +41,10 @@ Command.prototype.execute = async function() {
 	var email = this.params[2] || username + "@example.com";
 	var hashedPassword = crypto.createHash("sha256").update(password).digest("hex");
 
-	var user = await $tw.mws.store.sqlTiddlerDatabase.getUserByUsername(username);
+	var user = await $tw.mws.store.sql.getUserByUsername(username);
 
 	if(!user) {
-		await $tw.mws.store.sqlTiddlerDatabase.createUser(username, email, hashedPassword);
+		await $tw.mws.store.sql.createUser(username, email, hashedPassword);
 		console.log("User Account Created Successfully with username: " + username + " and password: " + password);
 		self.callback();
 	}

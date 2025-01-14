@@ -59,10 +59,10 @@ exports.handler = async function(request,response,state) {
 		}
 	} else {
 		// Redirect to fallback URL if tiddler not found
-		if(state.queryParameters.fallback) {
+		if(state.queryParameters.get("fallback")) {
 			if (!response.headersSent){
 				response.writeHead(302, "OK",{
-					"Location": state.queryParameters.fallback
+					"Location": state.queryParameters.get("fallback")
 				});
 				response.end();
 			}

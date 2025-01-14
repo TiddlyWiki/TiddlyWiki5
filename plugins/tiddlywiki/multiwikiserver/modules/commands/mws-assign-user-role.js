@@ -30,14 +30,14 @@ Command.prototype.execute = async function() {
 		return "Usage: --mws-assign-user-role <username> <role_name>";
 	}
 
-	if(!$tw.mws || !$tw.mws.store || !$tw.mws.store.sqlTiddlerDatabase) {
+	if(!$tw.mws || !$tw.mws.store || !$tw.mws.store.sql) {
 		return "Error: MultiWikiServer or SQL database not initialized.";
 	}
 
 	var username = this.params[0];
 	var role_name = this.params[1];
-	var role = await $tw.mws.store.sqlTiddlerDatabase.getRoleByName(role_name);
-	var user = await $tw.mws.store.sqlTiddlerDatabase.getUserByUsername(username);
+	var role = await $tw.mws.store.sql.getRoleByName(role_name);
+	var user = await $tw.mws.store.sql.getUserByUsername(username);
 	
 	if(!role) {
 		return "Error: Unable to find Role: "+role_name;
@@ -47,7 +47,7 @@ Command.prototype.execute = async function() {
 		return "Error: Unable to find user with the username "+username;
 	}
 
-	await $tw.mws.store.sqlTiddlerDatabase.addRoleToUser(user.user_id, role.role_id);
+	await $tw.mws.store.sql.addRoleToUser(user.user_id, role.role_id);
 
 	console.log(role_name+" role has been assigned to user with username "+username)
 	self.callback();
