@@ -6,14 +6,24 @@ module-type: library
 Serve tiddlers over http
 
 \*/
-
+"use strict";
 import { parse as parseQueryString } from "querystring";
-import * as acl from "$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/acl-middleware.js";
+
 import { ok } from "assert";
 import { deflateSync, gzipSync } from "zlib";
 import { createHash } from "crypto";
 import { SqlTiddlerStore } from "./store/sql-tiddler-store";
-import { defaultVariables, ServerVariables } from "./server";
+import { defaultVariables, Server, ServerVariables } from "./server";
+
+const acl: {
+  middleware: (
+    request: IncomingMessage,
+    response: ServerResponse,
+    state: ServerState<any, any>,
+    entityType: string,
+    permissionName: string
+  ) => Promise<void>;
+} = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/acl-middleware.js");
 
 const FinishedResponse: unique symbol = Symbol("FinishedResponse");
 type FinishedResponse = { [FinishedResponse]: boolean }
@@ -26,7 +36,8 @@ export class Router {
   csrfDisable: boolean;
   enableGzip: boolean;
   enableBrowserCache: boolean;
-  store: any;
+  store: SqlTiddlerStore<any>;
+  wiki: Wiki;
   authorizations: {
     readers: string[];
     writers: string[];
@@ -34,9 +45,13 @@ export class Router {
   };
   routes: ServerRoute[] = [];
   constructor(options: {
-    variables?: Partial<ServerVariables>
-    wiki: any
+    variables: Partial<ServerVariables>
+    wiki: any,
+    store: SqlTiddlerStore<any>
   }) {
+    this.store = options.store;
+    this.wiki = options.wiki;
+
     // delete falsy keys so that we can use the default values
     for (const key in options.variables) {
       if (!(options.variables as any)[key]) {
@@ -131,10 +146,19 @@ export class Router {
 
   }
 
+  serverManagerRequestHandler(
+    server: Server,
+    request: IncomingMessage,
+    response: ServerResponse
+  ) {
+    this.routeRequest(server, request, response).catch(console.error);
+  }
+
   async routeRequest(
+    server: Server,
     request: IncomingMessage,
     response: ServerResponse,
-    options: any,
+    options?: any,
   ): Promise<FinishedResponse> {
     // returning the response object in order to make sure we call response.end() because the route 
     // handler should never resolve the promise until it finishes writing the response. 
@@ -150,7 +174,7 @@ export class Router {
     }
 
     // Compose the state object
-    const state = await this.makeRequestState(request, response, options);
+    const state = await this.makeRequestState(server, request, response, options);
 
     // Authorize with the authenticated username
     if (!this.isAuthorized(state.authorizationType, state.authenticatedUsername)) {
@@ -214,7 +238,7 @@ export class Router {
       await route.handler(request, response, state);
       return state.end();
     } else {
-      $tw.utils.warn(`Invalid bodyFormat ${route.bodyFormat} in route ${route.method} ${route.path.source}`);
+      $tw.utils.warning(`Invalid bodyFormat ${route.bodyFormat} in route ${route.method} ${route.path.source}`);
       response.writeHead(500);
       return state.end();
     }
@@ -256,7 +280,7 @@ export class Router {
       });
       request.on("end", function () {
         if (route.bodyFormat === "www-form-urlencoded") {
-          state.data = parseQueryString(data);
+          state.data = new URLSearchParams(data);
         } else {
           state.data = data;
         }
@@ -284,12 +308,13 @@ export class Router {
       return null;
     }
     // get user info
-    const user = await this.store.sqlTiddlerDatabase.findUserBySessionId(session_id);
+    const user = await this.store.sql.findUserBySessionId(session_id);
     if (!user) {
       return null;
     }
+    //@ts-expect-error because password is not optional
     delete user.password;
-    const userRole = await this.store.sqlTiddlerDatabase.getUserRoles(user.user_id);
+    const userRole = await this.store.sql.getUserRoles(user.user_id);
 
     return {
       ...user,
@@ -299,7 +324,7 @@ export class Router {
     };
   };
 
-  isAuthorized(authorizationType: RequestState["authorizationType"], username: string) {
+  isAuthorized(authorizationType: RequestState["authorizationType"], username: string | undefined) {
     var principals = this.authorizations[authorizationType] || [];
     return principals.indexOf("(anon)") !== -1
       || (username && (principals.indexOf("(authenticated)") !== -1
@@ -345,7 +370,7 @@ export class Router {
     return cookies;
   }
 
-  async makeRequestState(request: IncomingMessage, response: ServerResponse, options: any) {
+  async makeRequestState(server: Server, request: IncomingMessage, response: ServerResponse, options: any = {}) {
 
     // Authenticate the user
     const authenticatedUser = await this.authenticateUser(request, response);
@@ -357,10 +382,11 @@ export class Router {
       || "readers";
 
     var { allowReads, allowWrites, isEnabled, showAnonConfig } = this.getAnonymousAccessConfig();
-    const urlInfo = new URL(request.url);
+
+    const urlInfo = new URL(request.url, server.origin()!);
     return {
       authorizationType,
-      pathPrefix: options.pathPrefix || this.get("path-prefix") || "",
+      pathPrefix: options.pathPrefix || server.pathPrefix || "",
       store: new SqlTiddlerStore({
         attachmentStore: this.store.attachmentStore,
         adminWiki: this.store.adminWiki,
@@ -379,11 +405,11 @@ export class Router {
       allowAnonReads: allowReads,
       allowAnonWrites: allowWrites,
       showAnonConfig: !!authenticatedUser?.isAdmin && showAnonConfig,
-      firstGuestUser: !authenticatedUser && (await this.store.sqlTiddlerDatabase.listUsers()).length === 0,
+      firstGuestUser: !authenticatedUser && (await this.store.sql.listUsers()).length === 0,
       data: undefined as any,
       params: [] as string[],
       end: () => {
-        this.store.close();
+        this.store.sql.close();
         response.end();
         return { [FinishedResponse]: true };
       }
@@ -428,12 +454,18 @@ export class Router {
    * @param {string | Buffer} data
    * @param {BufferEncoding} encoding
   */
-  sendResponse(request: IncomingMessage, response: ServerResponse, statusCode: number, headers: Record<string, string>, data: string | Buffer, encoding: BufferEncoding) {
+  sendResponse(request: IncomingMessage, response: ServerResponse, statusCode: number, headers: Record<string, string>, data?: Buffer): void;
+  sendResponse(request: IncomingMessage, response: ServerResponse, statusCode: number, headers: Record<string, string>, data: string, encoding: BufferEncoding): void;
+  sendResponse(request: IncomingMessage, response: ServerResponse, statusCode: number, headers: Record<string, string>, data?: string | Buffer, encoding?: BufferEncoding) {
+    if (typeof data === "string" && encoding === undefined) {
+      $tw.utils.error("Missing encoding for string data, we assume utf8");
+      encoding = "utf8";
+    }
     if (this.enableBrowserCache && (statusCode == 200)) {
       var hash = createHash('md5');
       // Put everything into the hash that could change and invalidate the data that
       // the browser already stored. The headers the data and the encoding.
-      hash.update(data);
+      if (data !== undefined) hash.update(data);
       hash.update(JSON.stringify(headers));
       if (encoding) {
         hash.update(encoding);
@@ -466,7 +498,7 @@ export class Router {
     to stay in the imperative style. The current `Server` doesn't depend on
     this, and we may just as well use the async versions.
     */
-    if (this.enableGzip && (data.length > 2048)) {
+    if (this.enableGzip && data && (data.length > 2048)) {
       var acceptEncoding = request.headers["accept-encoding"] || "";
       if (/\bdeflate\b/.test(acceptEncoding)) {
         headers["Content-Encoding"] = "deflate";
@@ -478,7 +510,10 @@ export class Router {
     }
     if (!response.headersSent) {
       response.writeHead(statusCode, headers);
-      response.end(data, encoding);
+      if (typeof data === "string")
+        response.end(data, encoding ?? "utf8");
+      else
+        response.end(data);
     }
   }
   /**
@@ -606,7 +641,7 @@ export class Router {
   @param {string} options.bag_name
   @param {string} options.tiddler_id
   */
-  makeTiddlerEtag(options: { bag_name: string; tiddler_id: string; }) {
+  makeTiddlerEtag(options: { bag_name: string; tiddler_id: number; }) {
     if (options.bag_name || options.tiddler_id) {
       return "\"tiddler:" + options.bag_name + "/" + options.tiddler_id + "\"";
     } else {

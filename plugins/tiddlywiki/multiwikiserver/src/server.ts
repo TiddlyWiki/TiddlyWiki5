@@ -6,12 +6,13 @@ module-type: library
 Serve tiddlers over http
 
 \*/
-
+"use strict";
 import { ok } from "assert";
 import { readFileSync } from "fs";
 import * as http from "http";
 import * as https from "https";
 import * as net from "net";
+import { Router } from "./router";
 
 
 
@@ -85,6 +86,7 @@ export const defaultVariables = {
 interface ServerDefinition {
   address: string,
   port: number,
+  path: string,
   /** Path to the key file on the file system */
   tlsKeyFile?: string;
   /** Path to the cert file on the file system */
@@ -110,40 +112,45 @@ export class ServerManager {
     $tw.utils.log("Serving on " + server.origin(), "brown/orange");
   };
   onError = (server: Server, err: Error) => {
-    $tw.utils.warn(`Error serving on ${server.origin()}: ${err.message}`);
+    $tw.utils.warning(`Error serving on ${server.origin()}: ${err.message}`);
   };
   onClose = (server: Server) => {
     if (this.isClosing) {
       $tw.utils.log(`Server closed: ${server.origin()}`, "green");
     } else {
-      $tw.utils.warn("Server closed unexpectedly: " + server.origin(), "red");
+      $tw.utils.warning("Server closed unexpectedly: " + server.origin(), "red");
       server.listen(); // Attempt to restart the listener
     }
   };
-  onRequest = (server: Server, request: IncomingMessage, response: ServerResponse, options?: any) => {
-    $tw.utils.warn(new Error("Server onRequest is supposed to be set by the mws-listen command"));
+  onRequest = (server: Server, request: IncomingMessage, response: ServerResponse) => {
+    $tw.utils.warning(new Error("The mws-listen command has not been run yet."));
     response.writeHead(500).end("Server is not started yet.");
   };
-
-  createServer(options: ServerDefinition) {
-    const server2 = this.mapServer(options);
+  /** require and create the router, attaching it to the server manager */
+  createRouter(params: ServerVariables) {
+    $tw.mws.router = new Router({ wiki: $tw.wiki, variables: params, store: $tw.mws.store });
+    this.onRequest = $tw.mws.router.serverManagerRequestHandler.bind($tw.mws.router);
+  }
+  createServer(options: ServerDefinition, listening?: () => void) {
+    const server2 = this.mapServer(options, listening);
     this.servers.set(options, server2);
     server2.listen();
     return server2;
   }
-  listenCommand(params: Partial<ServerVariables>) {
+  listenCommand(params: Partial<ServerVariables>, listening?: () => void) {
     // Handle defaults for port and host
     return this.createServer({
       address: params.host || defaultVariables.host,
       port: +(params.port ?? "") || +(process.env.PORT ?? "") || +defaultVariables.port,
+      path: params["path-prefix"] || "",
       tlsKeyFile: params["tls-key-file"],
       tlsCertFile: params["tls-cert-file"],
       tlsPass: params["tls-passphrase"],
-    })
+    }, listening)
   }
 
-  private mapServer(server: ServerDefinition) {
-    const { address, port, tlsKeyFile, tlsCertFile, tlsPass } = server;
+  private mapServer(server: ServerDefinition, listening?: () => void) {
+    const { address, port, path, tlsKeyFile, tlsCertFile, tlsPass } = server;
 
     if (tlsKeyFile || tlsCertFile || tlsPass) {
       if ((!tlsKeyFile || !tlsCertFile)) {
@@ -156,8 +163,8 @@ export class ServerManager {
           cert: readFileSync(tlsCertFile),
           passphrase: tlsPass,
         }),
-        "https", address, port, "",
-        this.onListen,
+        "https", address, port, path,
+        () => { this.onListen(server2); listening?.(); },
         this.onError,
         this.onClose,
         this.onRequest,
@@ -166,8 +173,8 @@ export class ServerManager {
     } else {
       const server2 = new Server(
         http.createServer(),
-        "http", address, port, "",
-        this.onListen,
+        "http", address, port, path,
+        () => { this.onListen(server2); listening?.(); },
         this.onError,
         this.onClose,
         this.onRequest,

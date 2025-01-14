@@ -109,7 +109,7 @@ module.exports = tsLint.config(
 			},
 
 			parserOptions: {
-				project: "./jsconfig.json",
+				project: "./tsconfig.json",
 			},
 			ecmaVersion: 8,
 			sourceType: "commonjs",

@@ -1,23 +1,30 @@
 import { IncomingMessage as HTTPIncomingMessage, ServerResponse as HTTPServerResponse } from "http";
-import { Server as _Server } from "./src/server";
-import { Router } from "./src/router";
+import { Server as _Server, ServerManager } from "./server";
+import { Router } from "./router";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { DefaultArgs } from "@prisma/client/runtime/library";
 import "./src/startup";
-import { SqlTiddlerStore } from "./src/store/sql-tiddler-store";
+import { SqlTiddlerStore } from "./store/sql-tiddler-store";
 
 declare global {
   const $tw: $TW;
 
-  namespace $TW {
-    interface Wiki extends Record<string, any> {
+  interface Wiki extends Record<string, any> {
 
-    }
-    interface Boot {
+  }
+  interface Boot extends Record<string, any> {
 
-    }
-    interface Tiddler {
+  }
+  interface Tiddler extends Record<string, any> {
 
+  }
+
+
+  interface $TW {
+    mws: {
+      store: SqlTiddlerStore<any>;
+      serverManager: ServerManager;
+      router: Router;
     }
   }
 
@@ -25,7 +32,7 @@ declare global {
     loadTiddlersFromPath: any;
     loadPluginFolder: any;
     getLibraryItemSearchPaths: any;
-    wiki: $TW.Wiki;
+    wiki: Wiki;
     utils: {
       [x: string]: any;
       decodeURIComponentSafe(str: string): string;
@@ -42,8 +49,8 @@ declare global {
     node: any;
     hooks: any;
     sjcl: any;
-    Wiki: { new(): $TW.Wiki };
-    Tiddler: { new(fields: Record<string, any>): $TW.Tiddler };
+    Wiki: { new(): Wiki };
+    Tiddler: { new(fields: Record<string, any>): Tiddler };
 
   }
 
@@ -56,6 +63,7 @@ declare global {
     url: string;
     method: string;
     headers: {
+      //@ts-ignore
       "set-cookie"?: string[];
       [x: string]: string | undefined;
     }

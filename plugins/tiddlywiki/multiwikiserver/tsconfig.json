@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "noEmit": true,
-    "target": "ES2015",
+    "target": "ES2017",
     "module": "commonjs",
     "moduleResolution": "node",
     "lib": ["ESNext"],
@@ -16,12 +16,11 @@
         "./src/*"
       ],
     },
-    "allowJs": true,
-    "types":["./globals.d.ts", "node"],
+    "types":["./src/globals.d.ts", "node"],
     "strict": true,
   },
   "include": [
-    "./globals.d.ts",
+    "./src/globals.d.ts",
     "./src/**/*.ts",
     "./module/**/*.js",
     "./auth/**/*.js",

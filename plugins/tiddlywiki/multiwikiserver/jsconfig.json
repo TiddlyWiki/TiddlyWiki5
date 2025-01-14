@@ -15,11 +15,12 @@
     "checkJs": true,
     "strictNullChecks": true,
     "strict": true,
+    "noImplicitAny": false,
   },
   "include": [
     "./modules/routes/handlers/*.js",
     "./modules/commands/*.js",
-    "./globals.d.ts"
+    "./src/globals.d.ts"
   ],
  
 }

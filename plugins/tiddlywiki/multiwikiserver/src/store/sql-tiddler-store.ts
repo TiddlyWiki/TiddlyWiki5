@@ -12,7 +12,7 @@ This class is largely a wrapper for the sql-tiddler-database.js class, adding th
 * Handling large tiddlers as attachments
 
 \*/
-
+"use strict";
 import { AttachmentStore } from "./attachments";
 import { SqlTiddlerDatabase } from "./sql-tiddler-database";
 import * as path from "path";
@@ -89,7 +89,7 @@ engine - wasm | better
 export class SqlTiddlerStore<TXN extends DEFERRED> implements EventSource<SqlTiddlerStoreEvents> {
 	attachmentStore;
 	adminWiki;
-	sql;
+	sql: SqlTiddlerDatabase;
 	databasePath;
 	transactionType: TXN = "DEFERRED" as any;
 
@@ -103,7 +103,7 @@ export class SqlTiddlerStore<TXN extends DEFERRED> implements EventSource<SqlTid
 		/** path to the database file (can be ":memory:" or missing to get a temporary database) */
 		databasePath?: string;
 		/** reference to $tw.Wiki object used for configuration */
-		adminWiki?: $TW.Wiki;
+		adminWiki?: Wiki;
 		/** reference to associated attachment store */
 		attachmentStore: AttachmentStore;
 		/** which engine to use, default is "node" */
@@ -191,7 +191,7 @@ export class SqlTiddlerStore<TXN extends DEFERRED> implements EventSource<SqlTid
 	}
 	/*
 	*/
-	processIncomingTiddler(tiddlerFields: Record<string, string>, existing_attachment_blob: any, existing_canonical_uri: string | undefined) {
+	processIncomingTiddler(tiddlerFields: Record<string, string>, existing_attachment_blob: string | null, existing_canonical_uri: string | undefined) {
 		let attachmentSizeLimit = $tw.utils.parseNumber(this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/AttachmentSizeLimit"));
 		if (attachmentSizeLimit < 100 * 1024) {
 			attachmentSizeLimit = 100 * 1024;
@@ -264,7 +264,7 @@ export class SqlTiddlerStore<TXN extends DEFERRED> implements EventSource<SqlTid
   
 	allowPrivilegedCharacters - allows "$", ":" and "/" to appear in recipe name
 	*/
-	async createBag(bag_name: string, description: string, options: { allowPrivilegedCharacters?: boolean; }) {
+	async createBag(bag_name: string, description: string, options?: { allowPrivilegedCharacters?: boolean; }) {
 		options = options || {};
 		var self = this;
 		const validationBagName = self.validateItemName(bag_name, options.allowPrivilegedCharacters);
@@ -285,7 +285,7 @@ export class SqlTiddlerStore<TXN extends DEFERRED> implements EventSource<SqlTid
   
 	allowPrivilegedCharacters - allows "$", ":" and "/" to appear in recipe name
 	*/
-	async createRecipe(recipe_name: string, bag_names: string[], description: string, options: { allowPrivilegedCharacters?: boolean; }) {
+	async createRecipe(recipe_name: string, bag_names: string[], description: string, options?: { allowPrivilegedCharacters?: boolean; }) {
 		bag_names = bag_names || [];
 		description = description || "";
 		options = options || {};
@@ -447,7 +447,7 @@ export class SqlTiddlerStore<TXN extends DEFERRED> implements EventSource<SqlTid
 	/*
 	Get the titles of the tiddlers in a recipe as {title:,bag_name:}. Returns null for recipes that do not exist
 	*/
-	async getRecipeTiddlers(recipe_name: string, options: { limit?: number; last_known_tiddler_id?: number; include_deleted?: boolean; } | undefined) {
+	async getRecipeTiddlers(recipe_name: string, options: { limit?: number; last_known_tiddler_id?: number; include_deleted?: boolean; } ={}) {
 		return await this.sql.getRecipeTiddlers(recipe_name, options);
 	}
 	/*

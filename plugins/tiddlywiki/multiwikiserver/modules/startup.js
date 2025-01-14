@@ -19,31 +19,29 @@ exports.before = ["story"];
 exports.synchronous = false;
 
 exports.startup = async function() {
-	const path = require("path");
+    const path = require("path");
+
 	// Create and initialise the attachment store and the tiddler store
-	const { AttachmentStore } = require("$:/plugins/tiddlywiki/multiwikiserver/store/attachments.js")
+    /** @type {typeof import("../src/store/attachments")} */
+	const { AttachmentStore } = require("./store/attachments.js")
 	const attachmentStore = new AttachmentStore({
 		storePath: path.resolve($tw.boot.wikiPath, "store/")
 	});
-	
-	const { SqlTiddlerStore } = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-store.js");
+    
+    /** @type {typeof import("../src/store/sql-tiddler-store")} */
+	const { SqlTiddlerStore } = require("./store/sql-tiddler-store.js");
 	const store = new SqlTiddlerStore({
 		databasePath: path.resolve($tw.boot.wikiPath, "store/database.sqlite"),
 		engine: $tw.wiki.getTiddlerText("$:/config/MultiWikiServer/Engine", "better"), // better || wasm
 		attachmentStore: attachmentStore
 	});
-	await store.init();
 
-	const { ServerManager } = require("$:/plugins/tiddlywiki/multiwikiserver/mws-server.js");
+    /** @type {typeof import("../src/server")} */
+    const { ServerManager } = require("./server.js");
 	const serverManager = new ServerManager();
-
-	const prisma = require("@prisma/client");
-
-	// Create a new Prisma client
-	const db = new prisma.PrismaClient();
-	
+    
+    // router will be set by the first mws-listen command
 	$tw.mws = { store, serverManager };
-	
 }
 
 })();

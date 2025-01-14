@@ -44,13 +44,18 @@
     "test": "npm run build:test-edition && npm run test:multiwikiserver-edition",
     "lint:fix": "eslint . --fix",
     "lint": "eslint .",
-    "prisma:generate": "(cd plugins/tiddlywiki/multiwikiserver && prisma generate)"
+    "prisma:generate": "(cd ./plugins/tiddlywiki/multiwikiserver && prisma generate)",
+    "mws:tsc": "(cd ./plugins/tiddlywiki/multiwikiserver && tsc -p tsconfig.build.json)",
+    "mws:clean": "rm -rf ./editions/multiwikiserver/store",
+    "mws:arlen": "NODE_DEV_PATH=yes node ./tiddlywiki.js ./editions/multiwikiserver --mws-create-db --mws-load-plugin-bags --build load-mws-demo-data --mws-listen --mws-ctrl-c",
+    "arlen": "npm run mws:clean && npm run mws:tsc && npm run mws:arlen"
   },
   "dependencies": {
     "@prisma/client": "^6.2.1",
     "@types/node": "^22.10.5",
     "better-sqlite3": "^11.5.0",
     "node-sqlite3-wasm": "^0.8.25",
-    "prisma": "^6.2.1"
+    "prisma": "^6.2.1",
+    "source-map-support": "^0.5.21"
   }
 }

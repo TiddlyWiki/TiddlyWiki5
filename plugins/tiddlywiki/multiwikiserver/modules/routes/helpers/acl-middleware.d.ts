@@ -1,1 +1,0 @@
-export const middleware: (request: IncomingMessage, response: ServerResponse, state: ServerState, entityType: string, permissionName: string) => Promise<void>;

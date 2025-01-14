@@ -15,31 +15,31 @@ import { PrismaClient } from "@prisma/client";
 import { ok } from "assert";
 const TYPEOF_ENUM = typeof "";
 type TYPEOF_ENUM = typeof TYPEOF_ENUM | "null" | "nully";
-function okType<T>(value: any, type: "string", msg?: string): asserts value is string;
-function okType<T>(value: any, type: "number", msg?: string): asserts value is number;
-function okType<T>(value: any, type: "bigint", msg?: string): asserts value is bigint;
-function okType<T>(value: any, type: "boolean", msg?: string): asserts value is boolean;
-function okType<T>(value: any, type: "symbol", msg?: string): asserts value is symbol;
-function okType<T>(value: any, type: "object", msg?: string): asserts value is object;
-function okType<T>(value: any, type: "function", msg?: string): asserts value is Function;
-function okType<T>(value: any, type: "null", msg?: string): asserts value is null;
-function okType<T>(value: any, type: "nully", msg?: string): asserts value is null | undefined;
-function okType<T>(value: any, type: "undefined", msg?: string): asserts value is undefined;
-function okType<T>(value: any, type: TYPEOF_ENUM, msg?: string) {
+export function okType<T>(value: any, type: "string", msg?: string): asserts value is string;
+export function okType<T>(value: any, type: "number", msg?: string): asserts value is number;
+export function okType<T>(value: any, type: "bigint", msg?: string): asserts value is bigint;
+export function okType<T>(value: any, type: "boolean", msg?: string): asserts value is boolean;
+export function okType<T>(value: any, type: "symbol", msg?: string): asserts value is symbol;
+export function okType<T>(value: any, type: "object", msg?: string): asserts value is object;
+export function okType<T>(value: any, type: "function", msg?: string): asserts value is Function;
+export function okType<T>(value: any, type: "null", msg?: string): asserts value is null;
+export function okType<T>(value: any, type: "nully", msg?: string): asserts value is null | undefined;
+export function okType<T>(value: any, type: "undefined", msg?: string): asserts value is undefined;
+export function okType<T>(value: any, type: TYPEOF_ENUM, msg?: string) {
 	switch (type) {
 		case "null": ok(value === null, msg); break;
 		case "nully": ok(value === null || value === undefined, msg); break;
 		default: ok(typeof value === type, msg);
 	}
 }
-function okTypeTruthy<T>(value: any, type: "string", msg?: string): asserts value is string & {};
-function okTypeTruthy<T>(value: any, type: "number", msg?: string): asserts value is number & {};
-function okTypeTruthy<T>(value: any, type: "bigint", msg?: string): asserts value is bigint & {};
-function okTypeTruthy<T>(value: any, type: "boolean", msg?: string): asserts value is boolean & {};
-function okTypeTruthy<T>(value: any, type: "symbol", msg?: string): asserts value is symbol & {};
-function okTypeTruthy<T>(value: any, type: "object", msg?: string): asserts value is object & {};
-function okTypeTruthy<T>(value: any, type: "function", msg?: string): asserts value is Function & {};
-function okTypeTruthy<T>(value: any, type: TYPEOF_ENUM, msg?: string) {
+export function okTypeTruthy<T>(value: any, type: "string", msg?: string): asserts value is string & {};
+export function okTypeTruthy<T>(value: any, type: "number", msg?: string): asserts value is number & {};
+export function okTypeTruthy<T>(value: any, type: "bigint", msg?: string): asserts value is bigint & {};
+export function okTypeTruthy<T>(value: any, type: "boolean", msg?: string): asserts value is boolean & {};
+export function okTypeTruthy<T>(value: any, type: "symbol", msg?: string): asserts value is symbol & {};
+export function okTypeTruthy<T>(value: any, type: "object", msg?: string): asserts value is object & {};
+export function okTypeTruthy<T>(value: any, type: "function", msg?: string): asserts value is Function & {};
+export function okTypeTruthy<T>(value: any, type: TYPEOF_ENUM, msg?: string) {
 	switch (type) {
 		case "null": ok(value === null, msg); break;
 		case "nully": ok(value === null || value === undefined, msg); break;
@@ -47,7 +47,7 @@ function okTypeTruthy<T>(value: any, type: TYPEOF_ENUM, msg?: string) {
 	}
 }
 
-function okEntityType(value: any): asserts value is EntityType {
+export function okEntityType(value: any): asserts value is EntityType {
 	ok(value === "bag" || value === "recipe", "Invalid entity type: " + value);
 }
 
@@ -563,7 +563,7 @@ export class SqlTiddlerDatabase {
 	/*
 	Checks if a user has permission to access a bag
 	*/
-	async hasBagPermission(userId: number, bagName: string, permissionName: string) {
+	async hasBagPermission(userId: number | undefined, bagName: string, permissionName: string) {
 		return await this.checkACLPermission(userId, "bag", bagName, permissionName, undefined);
 	}
 	/**
@@ -623,7 +623,7 @@ export class SqlTiddlerDatabase {
 		ownerId: number | undefined
 	) {
 		if(user_id === undefined) return false;
-		
+
 		okType(user_id, "number", "No user_id provided");
 		okEntityType(entityType);
 		okTypeTruthy(entityName, "string", "No entityName provided");
