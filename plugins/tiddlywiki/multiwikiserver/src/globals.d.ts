@@ -42,6 +42,8 @@ declare global {
       each<T>(object: T[], callback: (value: T, index: number, object: T[]) => void): void;
       each<T>(object: Record<string, T>, callback: (value: T, key: string, object: Record<string, T>) => void): void;
       parseJSONSafe(str: string, defaultJSON?: any): any;
+      parseNumber(string: string): number;
+      parseNumber(string: string | null): number | null;
     };
     modules: {
       [x: string]: any;

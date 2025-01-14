@@ -24,6 +24,8 @@ exports.handler = async function(request,response,state) {
 	// Get the recipe name from the parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		recipeTiddlers = recipe_name && await state.store.getRecipeTiddlers(recipe_name);
+
+	console.log("GET /wiki/:recipe_name",recipe_name,!!recipeTiddlers);
 	// Check request is valid
 	if(!recipe_name || !recipeTiddlers) {
 		response.writeHead(404);
