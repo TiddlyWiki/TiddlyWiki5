@@ -56,7 +56,7 @@ EditWidget.prototype.execute = function() {
 EditWidget.prototype.getEditorType = function() {
 	// Get the content type of the thing we're editing
 	var type;
-	if(this.getAttribute("field","text") === "text") {
+	if(editField === "text") {
 		var tiddler = this.wiki.getTiddler(this.editTitle);
 		if(tiddler) {
 			type = tiddler.fields.type;
