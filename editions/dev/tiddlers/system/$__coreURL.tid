@@ -1,4 +1,4 @@
 title: $:/coreURL
 tags: $:/tags/Global
 
-\function coreURL() [[https://tiddlywiki.com/tiddlywikicore-$1$.js]substitute<version>]
+\function coreURL() [[../tiddlywikicore-$1$.js]substitute<version>]
