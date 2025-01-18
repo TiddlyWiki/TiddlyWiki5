@@ -6,7 +6,6 @@ module-type: library
 Wraps up the markdown-it parser for use as a Parser in TiddlyWiki
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -535,5 +534,3 @@ module.exports = function tiddlyWikiPlugin(markdown,options) {
 	md.core.ruler.disable('text_join');
 	md.core.ruler.push('wikify',wikify);
 };
-
-})();
