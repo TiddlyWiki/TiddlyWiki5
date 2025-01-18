@@ -30,14 +30,6 @@
 			"--setfield","[tag[external-text]]","_canonical_uri","$:/core/templates/canonical-uri-external-text","text/plain",
 			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
 			"--render","$:/core/save/all","index.html","text/plain"],
-		"index-external": [
-			"--savetiddlers","[tag[external-image]]","images",
-			"--render","[tag[external-text]]","[encodeuricomponent[]addprefix[text/]addsuffix[.tid]]","text/plain","$:/core/templates/tid-tiddler",
-			"--setfield","[tag[external-image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",
-			"--setfield","[tag[external-text]]","_canonical_uri","$:/core/templates/canonical-uri-external-text","text/plain",
-			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
-			"--render","$:/core/save/all-external-js","index.html","text/plain",
-			"--render","$:/core/templates/tiddlywiki5.js","[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]","text/plain"],
 		"empty": [
 			"--render","$:/editions/tw5.com/download-empty","empty.html","text/plain",
 			"--render","$:/editions/tw5.com/download-empty","empty.hta","text/plain"],

@@ -148,7 +148,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/dev \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/dev \
-	--build index-external favicon static \
+	--build index favicon static \
 	|| exit 1
 
 # /tour.html			tour edition
