@@ -6,7 +6,14 @@ title: $:/core/ui/EditTemplate/body/default
 [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] +[get[text]] :else[[no]]
 \end
 
-\function get.tc-editor.class() [{!!type}is[blank]then[tc-edit-texteditor tc-edit-texteditor-body]] [{!!type}is[blank]then<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]] [{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]!match[bitmap]then[tc-edit-texteditor tc-edit-texteditor-body]] [{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]!match[bitmap]then<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]] [{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]match[bitmap]then[tc-edit-bitmapeditor tc-edit-bitmapeditor-body]] [{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]match[bitmap]then<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-bitmapeditor-identified-]] +[join[ ]]
+\function get.tc-editor.class()
+[{!!type}is[blank]then[tc-edit-texteditor tc-edit-texteditor-body]]
+[{!!type}is[blank]then<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]]
+[{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]!match[bitmap]then[tc-edit-texteditor tc-edit-texteditor-body]]
+[{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]!match[bitmap]then<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]]
+[{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]match[bitmap]then[tc-edit-bitmapeditor tc-edit-bitmapeditor-body]]
+[{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]match[bitmap]then<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-bitmapeditor-identified-]] +[join[ ]]
+\end
 
 \function get.tc-tiddler-preview-preview.class() tc-tiddler-preview-preview [<identifier>addprefix[tc-tiddler-preview-preview-identified-]] +[join[ ]]
 
@@ -56,20 +63,23 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 	identifier={{{ [<qualify>addsuffix<currentTiddler>sha256[]] }}}
 	sidebarWidthTiddler={{{ [<identifier>addprefix[$:/state/resizer/previewwidth-]] }}}
 >
-<$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> >
-<div>
-
-<$transclude
-	$variable="editor-preview-slider"
-	class="tc-edit-texteditor-slider"
-	template="tp-tiddler-editor-preview"
-	mode="inline"
-	padding="0px"
-	sliderWidth=<<get.theme.metric previewsliderwidth>>
-/>
-
-</div>
-
-</$dropzone>
-
+	<$dropzone importTitle=<<importTitle>>
+		autoOpenOnImport="no"
+		contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}}
+		class="tc-dropzone-editor"
+		enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}}
+		filesOnly="yes"
+		actions=<<importFileActions>>
+	>
+		<div>
+			<$transclude
+				$variable="editor-preview-slider"
+				class="tc-edit-texteditor-slider"
+				template="tp-tiddler-editor-preview"
+				mode="inline"
+				padding="0px"
+				sliderWidth=<<get.theme.metric previewsliderwidth>>
+			/>
+		</div>
+	</$dropzone>
 </$let>
