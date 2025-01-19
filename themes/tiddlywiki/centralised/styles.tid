@@ -15,6 +15,9 @@ tags: [[$:/tags/Stylesheet]]
 		padding: 42px <<get.theme.metric storypaddingright>> 42px <<get.theme.metric storypaddingleft>>;
 		margin: 0 auto;
 		text-align: left;
+		display: block;
+		left: auto;
+		right: auto;
 	}
 
 	html body.tc-body .tc-sidebar-left .tc-story-river {
@@ -50,7 +53,7 @@ tags: [[$:/tags/Stylesheet]]
 		text-align: right;
 	}
 
-	html .tc-tiddler-frame {
+	html .tc-tiddler-frame, html .tc-sidebar-left .tc-tiddler-frame {
 		width: 100%;
 	}
 
