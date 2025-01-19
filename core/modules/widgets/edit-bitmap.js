@@ -54,10 +54,14 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	this.toolbarNode.className = "tc-editor-toolbar";
 	parent.insertBefore(this.toolbarNode,nextSibling);
 	this.domNodes.push(this.toolbarNode);
+	var classes = this.getAttribute("class","").split(" ");
+	if(classes.indexOf("tc-edit-bitmapeditor") === -1) {
+		classes.push("tc-edit-bitmapeditor");
+	}
 	// Create the on-screen canvas
 	this.canvasDomNode = $tw.utils.domMaker("canvas",{
 		document: this.document,
-		"class":"tc-edit-bitmapeditor",
+		"class": classes.join(" "),
 		eventListeners: [{
 			name: "touchstart", handlerObject: this, handlerMethod: "handleTouchStartEvent"
 		},{
@@ -90,6 +94,14 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	]);
 };
 
+EditBitmapWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	if(classes.indexOf("tc-edit-bitmapeditor") === -1) {
+		classes.push("tc-edit-bitmapeditor");
+	}
+	this.canvasDomNode.className = classes.join(" ");
+};
+
 /*
 Handle an edit bitmap operation message from the toolbar
 */
@@ -115,6 +127,10 @@ EditBitmapWidget.prototype.execute = function() {
 Just refresh the toolbar
 */
 EditBitmapWidget.prototype.refresh = function(changedTiddlers) {
+	var changedAttributes = this.computeAttributes();
+	if(changedAttributes["class"]) {
+		this.assignDomNodeClasses();
+	}
 	return this.refreshChildren(changedTiddlers);
 };
 
