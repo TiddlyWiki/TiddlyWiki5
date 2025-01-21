@@ -1,4 +1,4 @@
-title: SampleBackgroundAction
+title: SampleBackgroundAction: Dark Mode
 tags: $:/tags/BackgroundAction
 track-filter: [{$:/info/browser/darkmode}]
 
