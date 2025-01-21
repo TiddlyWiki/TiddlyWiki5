@@ -91,7 +91,7 @@ type: text/vnd.tiddlywiki
 	border-radius: 5px;
 	background: <<colour "download-background">>;
 	border: none;
-	box-shadow: 1px 2px 2px 0 <<colour muted-foreground>>;
+	box-shadow: 1px 2px 2px 0 <<colour download-foreground>>;
 	overflow: hidden;
 	cursor: pointer;
 	font-size: 1.2em;

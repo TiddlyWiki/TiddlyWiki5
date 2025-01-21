@@ -8,8 +8,8 @@ palette-type: modern
 editor: $:/palette-editors/TwentyTwenties
 
 # Background and foreground colours, which are interpolated as required
-base-paper: #FCFFF0
-base-background: #f5f0f9
+base-paper: #FFFCF0
+base-background: #edcec1
 base-ink: #333344
 ?base-paper-ink: [tf.check-colour-contrast[base-paper],[base-ink],[45]]
 ?base-background-ink: [tf.check-colour-contrast[base-background],[base-ink],[45]]
@@ -100,7 +100,7 @@ modal-border: [function[colour],[]]
 modal-footer-background: [function[colour],[]]
 modal-footer-border: [function[colour],[]]
 modal-header-border: [function[colour],[]]
-muted-foreground: [tf.interpolate-colours[base-paper],[base-ink],[0.5]]
+muted-foreground: [tf.interpolate-colours[base-paper],[base-ink],[0.3]]
 network-activity-foreground: [function[colour],[]]
 notification-background: [function[colour],[base-tertiary]colour-set-oklch:l[0.9]]
 notification-border: [function[colour],[base-tertiary]colour-set-oklch:l[0.2]]
@@ -119,12 +119,12 @@ sidebar-foreground-shadow: rgba(255,255,255, 0.8)
 sidebar-foreground: =[function[colour],[base-ink]] =[function[colour],[base-paper]] =[function[colour],[base-background]] +[colour-best-contrast:DeltaPhi[]]
 sidebar-muted-foreground-hover: [function[colour],[]]
 sidebar-muted-foreground: [function[colour],[]]
-sidebar-tab-background-selected: [function[colour],[]]
-sidebar-tab-background: [function[colour],[]]
+sidebar-tab-background-selected: [function[colour],[page-background]]
+sidebar-tab-background: [tf.interpolate-colours[page-background],[sidebar-tab-foreground],[0.5]]
 sidebar-tab-border-selected: [function[colour],[tab-border-selected]]
 sidebar-tab-border: [function[colour],[tab-border]]
 sidebar-tab-divider: [function[colour],[]]
-sidebar-tab-foreground-selected:
+sidebar-tab-foreground-selected: [function[colour],[tab-foreground]]
 sidebar-tab-foreground: [function[colour],[tab-foreground]]
 sidebar-tiddler-link-foreground-hover: [function[colour],[]]
 sidebar-tiddler-link-foreground: [function[colour],[]]
@@ -141,9 +141,9 @@ tab-border: [function[colour],[muted-foreground]]
 tab-divider: [function[colour],[muted-foreground]]
 tab-foreground-selected: [function[colour],[tab-foreground]]
 tab-foreground: [function[colour],[foreground]]
-table-border: [function[colour],[]]
-table-footer-background: [function[colour],[]]
-table-header-background: [function[colour],[]]
+table-border: [function[colour],[foreground]]
+table-footer-background: [tf.interpolate-colours[background],[foreground],[0.2]]
+table-header-background: [tf.interpolate-colours[background],[foreground],[0.1]]
 tag-background: [tf.interpolate-colours[base-paper],[base-yellow],[0.9]]
 tag-foreground: [tf.interpolate-colours[base-yellow],[base-ink],[0.8]]
 testcase-accent-level-1: [function[colour],[]]
