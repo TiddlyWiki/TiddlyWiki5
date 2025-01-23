@@ -1,0 +1,9 @@
+created: 20201019084712096
+modified: 20241222103057478
+original-modified: 20201019084824422
+tags: OfficialPlugins
+title: JSZip Plugin
+ja-title: JSZipプラグイン
+type: text/vnd.tiddlywiki
+
+このプラグインは、ブラウザでZipファイルを作成するためのプリミティブを提供します。また、[[JSZip|https://stuk.github.io/jszip/]]ライブラリを他のプラグインで使用できるようになります
