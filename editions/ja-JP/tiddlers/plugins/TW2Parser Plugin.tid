@@ -1,0 +1,12 @@
+created: 20160107223340750
+list: 
+modified: 20241222103757551
+original-modified: 20170228102455677
+tags: OfficialPlugins [[Plugin Editions]]
+title: TW2Parser Plugin
+ja-title: TW2Parser プラグイン
+type: text/vnd.tiddlywiki
+
+この実験的なプラグインは、TiddlyWikiのオリジナルのクラシックバージョン用に書かれたWikiTextを表示する機能を追加します
+
+[ext[https://tiddlywiki.com/plugins/tiddlywiki/tw2parser|plugins/tiddlywiki/tw2parser]]を参照してください

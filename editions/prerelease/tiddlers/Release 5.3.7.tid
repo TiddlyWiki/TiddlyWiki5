@@ -13,7 +13,8 @@ description: Under development
 
 ! Translation improvements
 
-* 
+* French
+* German
 
 ! Plugin Improvements
 
@@ -28,19 +29,26 @@ description: Under development
 
 ! Usability Improvements
 
-* 
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8783"> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/commit/028c80782d105beb90f5d58a7f22e865c7e8c6f4">>) [[Hidden Setting: Default Type for Missing Tiddlers]]
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8661">> DiffTextWidget colours to several core palettes
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8807">> Flexoki palette with additional colours
 
 ! Hackability Improvements
 
-* 
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8768">> several macros such as [[colour-picker Macro]], [[dumpvariables Macro]], [[image-picker Macro]], [[translink Macro]], [[tree Macro]] and [[list-links-draggable Macro]] to use the newer syntax
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8780">> rendered plain text template to support more languages
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8816">> 'disabled' attribute to SelectWidget and BrowseWidget
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8819">> 'tabindex' attribute to BrowseWidget, RangeWidget, CheckboxWidget and RadioWidget
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8821">> the editor link dropdown to use newer syntax
 
 ! Bug Fixes
 
-* 
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8800">> problem with overwriting shadow tiddlers from plugins that do not have a `plugin-priority` field
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8831">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8835">>) problem with switching language not correctly updating the `lang` attribute of the root `<html>` element
 
 ! Node.js Improvements
 
-* 
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8789">> incorrect redirect when combining a custom [[path-prefix|WebServer Parameter: path-prefix]] with manual HTTP Basic Authentication via the [[/login-basic|WebServer API: Force Basic Authentication Login]] endpoint
 
 ! Developer Improvements
 
@@ -51,4 +59,13 @@ description: Under development
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+DesignThinkerer
+IchijikuIchigo
+jrbntt
+Leilei332
+linonetwo
+michaeljmcd
+pmario
+well-noted
+xcazin
 """>>

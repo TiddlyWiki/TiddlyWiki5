@@ -1132,6 +1132,7 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 			if(tiddler.fields.type) {
 				parserInfo.parserType = tiddler.fields.type;
 			}
+			parserInfo._canonical_uri = tiddler.fields._canonical_uri;
 		}
 	} else if(field) {
 		if(field === "title") {
