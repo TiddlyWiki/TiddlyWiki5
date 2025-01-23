@@ -16,6 +16,9 @@ Load core modules
 exports.name = "load-modules";
 exports.synchronous = true;
 
+// Set to `true` to enable performance instrumentation
+var PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE = "$:/config/Performance/Instrumentation";
+
 exports.startup = function() {
 	// Load modules
 	$tw.modules.applyMethods("utils",$tw.utils);
@@ -35,6 +38,19 @@ exports.startup = function() {
 	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
 	$tw.wiki.initParsers();
 	$tw.Commander.initCommands();
+	// --------------------------
+	// The rest of the startup process here is not strictly to do with loading modules, but are needed before other startup
+	// modules are executed. It is easier to put them here than to introduce a new startup module
+	// --------------------------
+	// Set up the performance framework
+	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
+	// Kick off the filter tracker
+	$tw.filterTracker = new $tw.FilterTracker($tw.wiki);
+	$tw.wiki.addEventListener("change",function(changes) {
+		$tw.filterTracker.handleChangeEvent(changes);
+	});
+	// Kick off the background action dispatcher
+	$tw.backgroundActionDispatcher = new $tw.BackgroundActionDispatcher($tw.filterTracker,$tw.wiki);
 };
 
 })();

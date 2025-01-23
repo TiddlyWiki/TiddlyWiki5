@@ -1,0 +1,9 @@
+title: SampleBackgroundAction: Dark Mode
+tags: $:/tags/BackgroundAction
+track-filter: [{$:/info/browser/darkmode}]
+
+<%if [{$:/info/browser/darkmode}match[no]] %>
+<$action-setfield $tiddler="$:/palette" text="$:/palettes/TwentyTwenties"/>
+<%else%>
+<$action-setfield $tiddler="$:/palette" text="$:/palettes/TwentyTwenties/Dark"/>
+<%endif%>
