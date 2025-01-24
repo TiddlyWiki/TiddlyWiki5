@@ -17,8 +17,6 @@ exports.name = "startup";
 exports.after = ["load-modules"];
 exports.synchronous = true;
 
-var widget = require("$:/core/modules/widgets/widget.js");
-
 exports.startup = function() {
 	// Minimal browser detection
 	if($tw.browser) {
@@ -54,14 +52,6 @@ exports.startup = function() {
 	}
 	// Initialise version
 	$tw.version = $tw.utils.extractVersionInfo();
-	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
-	$tw.rootWidget = new widget.widget({
-		type: "widget",
-		children: []
-	},{
-		wiki: $tw.wiki,
-		document: $tw.browser ? document : $tw.fakeDocument
-	});
 	// Execute any startup actions
 	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
 	if($tw.browser) {
