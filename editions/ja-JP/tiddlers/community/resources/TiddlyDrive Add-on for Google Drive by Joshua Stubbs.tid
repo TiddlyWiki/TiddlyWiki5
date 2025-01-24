@@ -1,0 +1,26 @@
+caption: ~TiddlyDrive
+color: #FFEB3B
+community-author: Joshua Stubbs
+created: 20171109172705241
+delivery: Google Drive Add-on
+description: TiddlyWikiを保存するGoogleドライブのアドオン
+method: save
+modified: 20241012124026136
+original-modified: 20210106151027582
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP [[Other Resources]] Safari Saving Windows iOS plugins Edge
+title: TiddlyDrive Add-on for Google Drive by Joshua Stubbs
+ja-title: Joshua StubbsによるGoogleドライブ用TiddlyDriveアドオン
+type: text/vnd.tiddlywiki
+url: https://github.com/tiddlydrive/tiddlydrive.github.io
+
+Googleドライブのアドオンで、そこに保存されているTiddlyWikiファイルを直接開いたり保存したりできるようになります
+
+詳細については、このプロジェクトのgithubページをご覧ください: 
+{{!!url}}
+
+<<<
+Googleドライブに保存されたTiddlyWikiファイルを編集し、自動的に保存することができるアプリを作成しました。ページはここ https://chrome.google.com/webstore/detail/tiddly-drive/oaphhjhbbabdjnpjpiliepphpmnioolo にありますが、GoogleドライブのWebインターフェースから追​​加する必要があると思います。
+
+I even added an optional ability to save with ctrl + s hotkeys.
+Ctrl + Sホットキーで保存するオプション機能も追加しました。
+<<< [[Joshuaのローンチ投稿|https://groups.google.com/d/topic/tiddlywiki/7pNJizR57e8/discussion]]

@@ -21,7 +21,7 @@ body:
     attributes:
       label: To Reproduce
       description: "Steps to reproduce the behavior:"
-      value: |
+      placeholder: |
         1. Go to '...'
         2. Click on '....'
         3. Scroll down to '....'
@@ -41,7 +41,7 @@ body:
     attributes:
       label: TiddlyWiki Configuration
       description: please complete the following information
-      value: |
+      placeholder: |
         - Version [e.g. v5.1.24]
         - Saving mechanism [e.g. Node.js, TiddlyDesktop, TiddlyHost etc]
         - Plugins installed [e.g. Freelinks, TiddlyMap]

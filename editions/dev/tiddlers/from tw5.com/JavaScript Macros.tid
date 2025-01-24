@@ -22,7 +22,7 @@ Note that if the ''params'' array is missing or blank, then all the supplied par
 
 There are several JavaScript macros built into the core which can serve as a jumping off point for your own macros:
 
-https://github.com/Jermolene/TiddlyWiki5/tree/master/core/modules/macros
+https://github.com/TiddlyWiki/TiddlyWiki5/tree/master/core/modules/macros
 
 Note that JavaScript macros work on both the client and the server, and so do not have access to the browser DOM.
 

@@ -270,6 +270,7 @@ Copy plain text to the clipboard on browsers that support it
 */
 exports.copyToClipboard = function(text,options) {
 	options = options || {};
+	text = text || "";
 	var textArea = document.createElement("textarea");
 	textArea.style.position = "fixed";
 	textArea.style.top = 0;
@@ -289,10 +290,12 @@ exports.copyToClipboard = function(text,options) {
 	var succeeded = false;
 	try {
 		succeeded = document.execCommand("copy");
-	} catch (err) {
+	} catch(err) {
 	}
 	if(!options.doNotNotify) {
-		$tw.notifier.display(succeeded ? "$:/language/Notifications/CopiedToClipboard/Succeeded" : "$:/language/Notifications/CopiedToClipboard/Failed");
+		var successNotification = options.successNotification || "$:/language/Notifications/CopiedToClipboard/Succeeded",
+			failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed"
+		$tw.notifier.display(succeeded ? successNotification : failureNotification);
 	}
 	document.body.removeChild(textArea);
 };
@@ -313,7 +316,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
 		
-		if(selectedNode.offsetLeft) {
+		if("offsetLeft" in selectedNode) {
 			// Add variables with a (relative and absolute) popup coordinate string for the selected node
 			var nodeRect = {
 				left: selectedNode.offsetLeft,
@@ -324,7 +327,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,nodeRect);
 
 			var absRect = $tw.utils.extend({}, nodeRect);
-			for (var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
+			for(var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
 				absRect.left += currentNode.offsetLeft;
 				absRect.top += currentNode.offsetTop;
 			}
@@ -338,12 +341,12 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		}
 	}
 	
-	if(domNode && domNode.offsetWidth) {
+	if(domNode && ("offsetWidth" in domNode)) {
 		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
 		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
 	}
 
-	if(event && event.clientX && event.clientY) {
+	if(event && ("clientX" in event) && ("clientY" in event)) {
 		if(selectedNode) {
 			// Add variables for event X and Y position relative to selected node
 			selectedNodeRect = selectedNode.getBoundingClientRect();

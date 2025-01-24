@@ -1,0 +1,5 @@
+import-spec-role: row
+list: $:/_importspec/RealEstate/PropertiesRow/Field/long $:/_importspec/RealEstate/PropertiesRow/Field/lat $:/_importspec/RealEstate/PropertiesRow/Field/price $:/_importspec/RealEstate/PropertiesRow/Field/broker $:/_importspec/RealEstate/PropertiesRow/Field/salesagent $:/_importspec/RealEstate/PropertiesRow/Field/zipcode $:/_importspec/RealEstate/PropertiesRow/Field/state $:/_importspec/RealEstate/PropertiesRow/Field/city $:/_importspec/RealEstate/PropertiesRow/Field/tags $:/_importspec/RealEstate/PropertiesRow/Field/title $:/_importspec/RealEstate/PropertiesRow/Field/address
+tags: 
+title: $:/_importspec/RealEstate/PropertiesRow
+type: text/vnd.tiddlywiki

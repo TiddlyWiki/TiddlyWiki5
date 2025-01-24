@@ -65,7 +65,7 @@ DynannotateWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(this.domWrapper);
 	// Apply the selection tracker data to the DOM
 	if(!isSnippetMode) {
-		this.applySelectionTrackerData();		
+		this.applySelectionTrackerData();
 	}
 	// Render our child widgets
 	this.renderChildren(this.domContent,null);
@@ -79,7 +79,7 @@ DynannotateWidget.prototype.render = function(parent,nextSibling) {
 			// Apply annotations
 			this.applyAnnotations();
 			// Apply search overlays
-			this.applySearch();		
+			this.applySearch();
 		}
 	}
 	// Save the width of the wrapper so that we can tell when it changes
@@ -205,10 +205,11 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 			if(self.hasAttribute("popup")) {
 				$tw.popup.triggerPopup({
 					domNode: domOverlay,
-					title: self.getAttribute("popup"),
+                    title: self.getAttribute("popup"),
+                    floating: self.getAttribute("floating"),
 					wiki: self.wiki
 				});
-			}			
+			}
 		};
 	};
 	// Draw the overlay for the "target" attribute
@@ -224,7 +225,7 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 				className: "tc-dynannotation-annotation-overlay",
 				onclick: clickHandlerFn(null)
 			});
-		}		
+		}
 	}
 	// Draw the overlays for each annotation tiddler
 	$tw.utils.each(this.annotationTiddlers,function(title) {
@@ -361,7 +362,7 @@ DynannotateWidget.prototype.applySnippets = function() {
 			if(!merged) {
 				container = null;
 			}
-		});		
+		});
 	}
 };
 
@@ -382,7 +383,7 @@ DynannotateWidget.prototype.refresh = function(changedTiddlers) {
 	var childrenDidRefresh = this.refreshChildren(changedTiddlers);
 	// Reapply the selection tracker data to the DOM
 	if(changedAttributes.selection || changedAttributes.selectionPrefix || changedAttributes.selectionSuffix || changedAttributes.selectionPopup) {
-		this.applySelectionTrackerData();		
+		this.applySelectionTrackerData();
 	}
 	// Reapply the annotations if the children refreshed or the main wrapper resized
 	var wrapperWidth = this.domWrapper.offsetWidth,
@@ -390,14 +391,14 @@ DynannotateWidget.prototype.refresh = function(changedTiddlers) {
 		oldAnnotationTiddlers = this.annotationTiddlers;
 	this.getAnnotationTiddlers();
 	if(!isSnippetMode && (
-		childrenDidRefresh || 
-		hasResized || 
-		changedAttributes.target || 
-		changedAttributes.targetPrefix || 
-		changedAttributes.targetSuffix || 
-		changedAttributes.filter || 
-		changedAttributes.actions || 
-		changedAttributes.popup || 
+		childrenDidRefresh ||
+		hasResized ||
+		changedAttributes.target ||
+		changedAttributes.targetPrefix ||
+		changedAttributes.targetSuffix ||
+		changedAttributes.filter ||
+		changedAttributes.actions ||
+		changedAttributes.popup ||
 		!$tw.utils.isArrayEqual(oldAnnotationTiddlers,this.annotationTiddlers) ||
 		this.annotationTiddlers.find(function(title) {
 			return changedTiddlers[title];
@@ -406,23 +407,23 @@ DynannotateWidget.prototype.refresh = function(changedTiddlers) {
 		this.applyAnnotations();
 	}
 	if(!isSnippetMode && (
-		childrenDidRefresh || 
-		hasResized || 
-		changedAttributes.search || 
-		changedAttributes.searchMinLength || 
-		changedAttributes.searchClass || 
-		changedAttributes.searchMode || 
+		childrenDidRefresh ||
+		hasResized ||
+		changedAttributes.search ||
+		changedAttributes.searchMinLength ||
+		changedAttributes.searchClass ||
+		changedAttributes.searchMode ||
 		changedAttributes.searchCaseSensitive
 	)) {
 		this.applySearch();
 	}
 	if(isSnippetMode && (
-		childrenDidRefresh || 
-		hasResized || 
-		changedAttributes.search || 
-		changedAttributes.searchMinLength || 
-		changedAttributes.searchClass || 
-		changedAttributes.searchMode || 
+		childrenDidRefresh ||
+		hasResized ||
+		changedAttributes.search ||
+		changedAttributes.searchMinLength ||
+		changedAttributes.searchClass ||
+		changedAttributes.searchMode ||
 		changedAttributes.searchCaseSensitive
 	)) {
 		this.applySnippets();

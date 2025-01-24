@@ -10,7 +10,7 @@ Ejecuta secuencialmente las instrucciones devueltas por un filtro
 Ejemplos
 
 ```
---commands "[enlist{$:/build-commands-as-text}]"
+--commands "[enlist:raw{$:/build-commands-as-text}]"
 ```
 
 ```

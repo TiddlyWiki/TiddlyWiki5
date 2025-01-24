@@ -1,0 +1,20 @@
+created: 20220427174702859
+modified: 20241021114009394
+original-modified: 20220427171707459
+tags: [[JSON in TiddlyWiki]] Learning
+title: Modifying JSON tiddlers
+ja-title: JSON Tiddlerの修正
+type: text/vnd.tiddlywiki
+
+TiddlyWikiでのJSONの扱い方の概要については、[[TiddlyWikiでのJSON|JSON in TiddlyWiki]]を参照してください
+
+注意 
+
+!! ActionSetFieldWidgetとActionListopsWidgetの使用について
+
+ウィジェットActionSetFieldWidgetとActionListopsWidgetは、$index属性でプロパティの名前を指定することにより、データTiddlerの名前付きプロパティを操作できます
+
+* ActionSetFieldWidgetを使用して名前付きプロパティを作成、変更するには、$value属性を指定します
+* ActionSetFieldWidgetを使用して名前付きプロパティを削除するには、$value属性を省略します
+
+ActionListopsWidgetは、$filter属性と$subfilter属性を通じて構築されたリストの名前付きプロパティを割り当てます

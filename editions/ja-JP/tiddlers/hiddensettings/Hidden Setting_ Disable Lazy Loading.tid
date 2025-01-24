@@ -1,0 +1,11 @@
+created: 20191025100113266
+modified: 20241116105821092
+original-modified: 20191025100113266
+tags: [[Hidden Settings]]
+title: Hidden Setting: Disable Lazy Loading
+ja-title: 隠し設定: 遅延ロードの無効化
+type: text/vnd.tiddlywiki
+
+[[遅延ロード|LazyLoading]]は、下記の値を`yes`に設定すると無効にできます
+
+$:/config/SyncDisableLazyLoading

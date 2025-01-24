@@ -1,13 +1,17 @@
 created: 20220917113002350
-modified: 20230419103154329
+modified: 20230921180332436
 tags: Pragmas
 title: Pragma: \whitespace
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.1.15">> The ''\whitespace'' [[pragma|Pragmas]] determines how spaces and newlines are treated within wikitext. Note that this only applies to the printable text, and not to other text, such as the values of attributes.
+<<.from-version "5.1.15">> The ''\whitespace'' [[pragma|Pragmas]] determines how spaces and newlines are treated within wikitext.
 
 * ''notrim'' -- whitespace text is not subject to special processing (the default)
-* ''trim'' -- whitespace text is removed
+* ''trim'' -- whitespace text is ignored
+
+Note that the processing only applies to the printable text, and not to other text, such as the values of attributes.
+
+The whitespace setting only applies to the parsed content in which it appears. The setting is inherited by embedded [[Procedure Definitions]] and [[Custom Widgets]] definitions, but is not inherited by [[Macro definitions]].
 
 ```
 \whitespace trim|notrim

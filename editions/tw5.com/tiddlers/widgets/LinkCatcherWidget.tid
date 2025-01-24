@@ -1,6 +1,6 @@
 caption: linkcatcher
 created: 20131024141900000
-modified: 20220226121122574
+modified: 20241031151342973
 tags: Widgets MessageHandlerWidgets TriggeringWidgets
 title: LinkCatcherWidget
 type: text/vnd.tiddlywiki
@@ -23,6 +23,10 @@ The content of the `<$linkcatcher>` widget is displayed normally.
 |message |Optional identifier for a [[widget message|Messages]] to be sent when a navigation is caught  |
 |set |Optional title of the tiddler to be set to a specified value when navigation occurs |
 |setTo |Value to be assigned by the `set` attribute |
-|actions |Actions to be performed when a link is caught. Within the action string, the variable "navigateTo" contains the title of the tiddler being navigated. <<.from-version "5.1.23">> the <<.def "modifier">> variable lists the modifier keys that are pressed when the action is invoked. The possible modifiers are ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' and ''ctrl-alt-shift'' |
+|actions |Actions to be performed when a link is caught. Within the action string, the variable <<.var navigateTo>> contains the title of the tiddler being navigated.<br><<.from-version "5.1.23">> the <<.var modifier>> variable lists the modifier keys that are pressed when the action is invoked.<br>The possible modifiers are ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' and ''ctrl-alt-shift'' |
+
+|!Action Variables |!Description |
+|`navigateTo` |Contains the tiddler title being navigated to  |
+|`modifier` |Contains the value of a modifier key, active while actions are activated |
 
 <<.tip """<<.from-version "5.2.0">> For more complex use cases involving trapping the <<.param tm-navigate>> message consider the MessageCatcherWidget which provides greater flexibility""">>

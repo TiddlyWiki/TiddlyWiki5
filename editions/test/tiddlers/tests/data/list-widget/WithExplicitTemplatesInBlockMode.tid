@@ -1,0 +1,32 @@
+title: ListWidget/WithExplicitTemplatesInBlockMode
+description: List widget with explicit templates in block mode
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
++
+title: Output
+
+\whitespace trim
+
+\procedure test(filter)
+<$list filter=<<filter>>>
+
+	<$list-template>
+		<$text text=<<currentTiddler>>/>
+	</$list-template>
+
+	<$list-empty>
+		None!
+	</$list-empty>
+
+</$list>
+\end
+
+<<test "1 2 3">>
+
+<<test "">>
+
++
+title: ExpectedResult
+
+123None!

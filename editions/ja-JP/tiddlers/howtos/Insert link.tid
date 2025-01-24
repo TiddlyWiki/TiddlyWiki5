@@ -1,0 +1,12 @@
+created: 20160817095829521
+modified: 20241104110119177
+original-modified: 20160817105713406
+tags: [[Editor toolbar]]
+title: Insert link
+ja-title: リンクを挿入
+
+Wiki内に存在するTiddlerを検索して選択するためのダイアログが表示されます。Tiddlerを選択すると、テキストフィールドのカーソルがある場所にWikiTextリンクとして挿入されます
+
+<<.icon $:/core/images/link>>を押すと、`[[Some link]]`が得られます
+
+外部のWebリンクや[[画像|Insert picture]]リンクは挿入され''ません''

@@ -1,0 +1,27 @@
+title: Widgets/DataAttributes/LinkWidget
+description: Data Attributes for LinkWidget
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$link data-id="mytiddler" style.color="red" to="Temp" onclick="clicked">
+link to Temp
+</$link>
+<$link tag="button" data-id={{Temp}} style.color={{{ [[Temp]get[color]] }}} to="SomeTiddler">
+some tiddler
+</$link>
++
+title: Actions
+
+<$action-setfield $tiddler="Temp" $field="text" $value="Title2" color="red"/>
++
+title: Temp
+color: black
+
+Title1
++
+title: ExpectedResult
+
+<p><a class="tc-tiddlylink tc-tiddlylink-resolves" data-id="mytiddler" href="#Temp" style="color:red;">link to Temp</a><button class="tc-tiddlylink tc-tiddlylink-missing" data-id="Title2" draggable="true" style="color:red;">some tiddler</button></p>

@@ -1,0 +1,15 @@
+caption: Online
+created: 20160216191710789
+modified: 20241029110255689
+original-modified: 20211114031651879
+tags: GettingStarted
+title: GettingStarted - Online
+ja-title: はじめに - オンライン
+type: text/vnd.tiddlywiki
+
+TiddlyWikiは、DropboxやCloudantなどのオンラインサービスでもホストできます。
+
+;Dropbox (HTML ファイル全体を同期)
+:Dropboxに保存されているファイルを編集するには、 http://tiny.cc/tw5inthesky/ にアクセスしてください。これにより、見つかったHTMLファイルを開くことができます。
+;Cloudant (または、別のCouchDBタイプのサーバー) (個々のTiddlerを同期)
+:http://noteself.github.io/

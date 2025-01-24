@@ -1,27 +1,31 @@
 created: 20140919155729620
-modified: 20230427125500432
+modified: 20240624102502089
 tags: Macros [[Core Macros]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
 
 ~TiddlyWiki provides several macros for generating a tree of tiddler links by analysing [[tags|Tagging]]:
 
-;<<.var toc>>
+; <<.var toc>>
 : A simple tree
-;<<.var toc-expandable>>
+
+; <<.var toc-expandable>>
 : A tree in which all the branches can be expanded and collapsed
-;<<.var toc-selective-expandable>>
+
+; <<.var toc-selective-expandable>>
 : A tree in which the non-empty branches can be expanded and collapsed
-;<<.var toc-tabbed-internal-nav>> and <<.var toc-tabbed-external-nav>>
+
+; <<.var toc-tabbed-internal-nav>> and <<.var toc-tabbed-external-nav>>
 : A two-panel browser:
 :* on the left, a selectively expandable tree that behaves like a set of vertical tabs
 :* on the right, the content of whichever tiddler the user selects in the tree
 
 The difference between the last two has to do with what happens when the user clicks a link in the right-hand panel:
 
-;<<.var toc-tabbed-internal-nav>>
+; <<.var toc-tabbed-internal-nav>>
 : The target tiddler appears in the right-hand panel, replacing the tiddler that contained the link
-;<<.var toc-tabbed-external-nav>>
+
+; <<.var toc-tabbed-external-nav>>
 : The target tiddler appears in the normal way (which depends on the user's configured storyview)
 
 !! Structure
@@ -42,9 +46,11 @@ To make a table of contents appear in the sidebar, see [[How to add a new tab to
 
 !! Parameters
 
-;tag
+; tag
 : The root tag that identifies the top level of the tree
-;sort
+: <<.from-version "5.3.5">> If the <<.param tag>> parameter is "missing" or "an empty" string, the <<.var curretTiddler>> variable is used
+
+; sort
 : An optional extra [[filter step|Filter Step]], e.g. `sort[title]`
 
 These two parameters are combined into a single [[filter expression|Filter Expression]] like this:

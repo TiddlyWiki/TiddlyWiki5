@@ -17,8 +17,9 @@ var jasmine = require("./jasmine-plugin.js");
 exports.name = "jasmine";
 
 if($tw.browser) {
-	// Jasmine is run automatically on the browser, so always add it here.
 	exports.startup = jasmine.runTests;
+	exports.before = ["render"];
+	exports.after = ["story"];
 } else {
 	// However, if we're on node.js, the tests are explciitly run with the
 	// --test command. This didn't used to be the case, so if they're

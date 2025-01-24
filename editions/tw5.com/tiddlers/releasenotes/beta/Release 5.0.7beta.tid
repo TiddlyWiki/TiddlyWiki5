@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 released: 201401262107
 caption: 5.0.7-beta
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.6-beta...v5.0.7-beta]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.0.6-beta...v5.0.7-beta]]//
 
 !! Incompatible Changes
 
@@ -32,19 +32,19 @@ These are changes that might affect users upgrading from previous betas.
 * Added emacs and vim keymapping support to the [[CodeMirror plugin|https://tiddlywiki.com/codemirrordemo.html]], (thanks to João Bolila, @jbolila on GitHub)
 * Added the [[highlight.js|http://highlightjs.org/]] syntax highlighting plugin: https://tiddlywiki.com/highlightdemo.html (thanks to João Bolila, @jbolila on GitHub)
 * Added the first export option to the ''Tools'' tab of the [[control panel|$:/ControlPanel]]
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ffcc215e8f8896be96093579abc5bcfb76335e66]] an ellipsis for [[advanced search|$:/AdvancedSearch]] next to the search box in the sidebar
-* [[Adjusted|https://github.com/Jermolene/TiddlyWiki5/commit/b326315b0e9959096b85aa716dd613f21605705a]] the password dialogue to make it narrower for smaller screens
-* [[Adjusted|https://github.com/Jermolene/TiddlyWiki5/commit/b7a1db1e9fb651928a4f86e1881959150dd66a55]] the display of tiddler dictionaries to make them display as plain text
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ffcc215e8f8896be96093579abc5bcfb76335e66]] an ellipsis for [[advanced search|$:/AdvancedSearch]] next to the search box in the sidebar
+* [[Adjusted|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b326315b0e9959096b85aa716dd613f21605705a]] the password dialogue to make it narrower for smaller screens
+* [[Adjusted|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b7a1db1e9fb651928a4f86e1881959150dd66a55]] the display of tiddler dictionaries to make them display as plain text
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b06e09a4d3e25087ca0495e624c8662ddb69224e]] problem with default format of ViewWidget substituting seconds for minutes in displayed times
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e0f428b9b2374487a0758ea80716f337e3c643ff]] problem that was causing several animations to fail in Safari
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/f2409d4245bbba0ccdf39186dca6a0cbf16d8759]] problem with unclickable sidebar under the Centralised theme
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/0fb13e649b6558961fd8436bc7aac83bfd991983]] problem with non-system tiddlers showing up in system tiddler [[advanced search|$:/AdvancedSearch]]
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b64b7982af4285be41cca85db1fa745fc009ca29]] problem with notifications not always disappearing in Firefox
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b04141fefd2c0103b525726e4f466c32f0385194]] problem with wiki folders including wiki files with tiddlers that do not have a title
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/12770ca3e694a8f4edeb065e054eddd5957353b8]] problem with ServerCommand logging "Serving on undefined:8080"
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b06e09a4d3e25087ca0495e624c8662ddb69224e]] problem with default format of ViewWidget substituting seconds for minutes in displayed times
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e0f428b9b2374487a0758ea80716f337e3c643ff]] problem that was causing several animations to fail in Safari
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f2409d4245bbba0ccdf39186dca6a0cbf16d8759]] problem with unclickable sidebar under the Centralised theme
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0fb13e649b6558961fd8436bc7aac83bfd991983]] problem with non-system tiddlers showing up in system tiddler [[advanced search|$:/AdvancedSearch]]
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b64b7982af4285be41cca85db1fa745fc009ca29]] problem with notifications not always disappearing in Firefox
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b04141fefd2c0103b525726e4f466c32f0385194]] problem with wiki folders including wiki files with tiddlers that do not have a title
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/12770ca3e694a8f4edeb065e054eddd5957353b8]] problem with ServerCommand logging "Serving on undefined:8080"
 
 
 

@@ -1,0 +1,11 @@
+created: 20130822173400000
+modified: 20241218111837188
+original-modified: 20211124215615812
+tags: Features
+title: Scalability
+ja-title: スケーラビリティ
+type: text/vnd.tiddlywiki
+
+TiddlyWikiの[[シングルページアプリケーション|SinglePageApplication]]としてのアーキテクチャは、大量のデータには適さないと思われるかもしれません。実際、TiddlyWikiユーザーは、数十あるいは100メガバイトを超えるファイルでも問題なく処理しています。また、ギガバイト単位のファイルでも実験に成功しています。
+
+大規模なWikiの[[パフォーマンスに関するティップス|Performance]]を参照してください。

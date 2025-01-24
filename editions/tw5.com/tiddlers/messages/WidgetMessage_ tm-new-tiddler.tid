@@ -1,6 +1,6 @@
 caption: tm-new-tiddler
 created: 20140226194405353
-modified: 20220521143507491
+modified: 20230723215831560
 tags: Messages navigator-message
 title: WidgetMessage: tm-new-tiddler
 type: text/vnd.tiddlywiki
@@ -9,12 +9,12 @@ The new tiddler message creates a new draft tiddler and adds it to the current s
 
 |!Name |!Description |
 |param |The optional title of a tiddler to use as a template for the new tiddler |
-|paramObject |Optional hashmap of additional tiddler fields |
+|//{any other params}// |The names and values of additional tiddler fields. |
 |navigateFromTitle |Title of the tiddler from which the navigation to the new tiddler was initiated |
 
 The title for the draft tiddler is chosen according to these rules:
 
-* If a hashmap was used and a title field was specified, use that title
+* If additional parameters  were used and a title field was specified, use that title
 * If a template tiddler was used, use the title of the template tiddler, making it unique with a numeric suffix
 * Otherwise, generate a new title based on the default new tiddler title with a numeric suffix to make it unique
 

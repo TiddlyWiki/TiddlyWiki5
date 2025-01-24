@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/geospatial/docs
+
+<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDocs]]" default:"$:/plugins/tiddlywiki/geospatial/docs/geomap" class:"tc-vertical">>

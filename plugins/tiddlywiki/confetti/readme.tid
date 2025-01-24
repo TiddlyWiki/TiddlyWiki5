@@ -1,0 +1,65 @@
+title: $:/plugins/tiddlywiki/confetti/readme
+
+\define show-example(name)
+<$let title={{{ [[$:/plugins/tiddlywiki/confetti/examples/]addsuffix<__name__>] }}}>
+
+For example:
+
+<$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/>
+
+<$codeblock code={{{ [<title>get[text]] }}}/>
+
+Renders as:
+
+<$transclude tiddler=<<title>> mode="block"/>
+
+</$let>
+\end
+
+! Introduction
+
+This plugin adds a programmable confetti cannon to your TiddlyWiki. It is based on https://www.kirilv.com/canvas-confetti/ by Kiril Vatev.
+
+! Usage
+
+The confetti cannon can be controlled using messages or via the `<$confetti>` widget. Use the message approach when triggering confetti in response to an action (such as clicking a button). Use the widget approach when confetti is to be triggered by a condition (such as a target number of words being reached).
+
+!! Messages: tm-confetti-launch and tm-confetti-reset
+
+The `tm-confetti-launch` message launches the confetti cannon. See below for the available parameters.
+
+The `tm-confetti-reset` message cancels any confetti that is in progress.
+
+<<show-example staggered>>
+
+!! Widget: `<$confetti>`
+
+The `<$confetti>` widget launches the confetti cannon when it is first rendered. See below for the available attributes.
+
+Typically it is used in conjunction with a `<$list>` or `<$reveal>` widget that shows the widget when the conditions required to trigger the confetti are satisfied.
+
+In this example, the confetti will be launched when the word "launch" in typed into the box.
+
+<<show-example typing-trigger>>
+
+!! Confetti Launch parameters
+
+The following options are supported:
+
+|!Name |!Description |!Default |
+|''delay'' |Number of milliseconds to delay the launch |0 |
+|''particleCount'' |The number of confetti to launch |50 |
+|''angle'' |The angle in which to launch the confetti, in degrees (90 is straight up) |90 |
+|''spread'' |How far off center the confetti can go, in degrees. 45 means the confetti will launch at the defined `angle` plus or minus 22.5 degrees |45 |
+|''startVelocity'' |How fast the confetti will start going, in pixels |45 |
+|''decay'' |How quickly the confetti will lose speed. Keep this number between 0 and 1, otherwise the confetti will gain speed |0.9 |
+|''gravity'' |How quickly the particles are pulled down. 1 is full gravity, 0.5 is half gravity, etc. |1 |
+|''drift'' |How much to the side the confetti will drift. The default is 0, meaning that they will fall straight down. Use a negative number for left and positive number for right |0 |
+|''ticks'' |How many times the confetti will move (this is an abstract quantity; the designed recommends playing with it if the confetti disappears too quickly for you) |200 |
+|''originX'' |The `x` position on the page, with `0` being the left edge and `1` being the right edge |0.5 |
+|''originY'' |The `y` position on the page, with `0` being the top edge and `1` being the bottom edge |0.5 |
+|''colors'' |A space separated list of color strings in hex format (eg `#bada55` or `#ce5`) | |
+|''shapes'' |A space separated list of shapes for the confetti. The possible values are `square`, `circle`, and `star`. The default is to use both squares and circles in an even mix. To use a single shape, you can provide just one shape in the list, such as `star`. You can also change the mix by providing a value such as `circle circle square` to use two third circles and one third squares | |
+|''scalar'' |Scale factor for each confetti particle. Use decimals to make the confetti smaller |1 |
+|''zIndex'' |Z-index of confetti. Increase the value if the confetti is appearing behind other on-screen elements|100 |
+|''disableForReducedMotion'' |Set to `yes` to entirely disable confetti for users that [[prefer reduced motion|https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion]] |`no` |

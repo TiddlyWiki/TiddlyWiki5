@@ -4,7 +4,15 @@ code-body: yes
 
 \define tabs-button()
 \whitespace trim
-<$button set=<<tabsState>> setTo=<<currentTab>> default=<<__default__>> selectedClass="tc-tab-selected" tooltip={{!!tooltip}} role="switch">
+<$button
+	set=<<tabsState>>
+	setTo=<<currentTab>>
+	default=<<__default__>>
+	selectedClass="tc-tab-selected"
+	tooltip={{!!tooltip}}
+	role="switch"
+	data-tab-title=<<currentTab>>
+>
 	<$tiddler tiddler=<<save-currentTiddler>>>
 		<$set name="tv-wikilinks" value="no">
 			<$transclude tiddler=<<__buttonTemplate__>> mode="inline">

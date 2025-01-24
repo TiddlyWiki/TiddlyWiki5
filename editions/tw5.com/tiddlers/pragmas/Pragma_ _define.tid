@@ -1,5 +1,5 @@
 created: 20220917112233317
-modified: 20230419103154328
+modified: 20231217185535715
 tags: Pragmas
 title: Pragma: \define
 type: text/vnd.tiddlywiki
@@ -47,5 +47,7 @@ $caption$
 
 <<special-button>>
 """>>
+
+<<.warning """If macros are nested, textual substitution will only occur for the outermost macro. Thi is because by the time the inner macros are processed all the substitutions will have already occurred""">>
 
 A more formal [[presentation|Macro Definition Syntax]] of this syntax is also available.

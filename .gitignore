@@ -5,4 +5,7 @@
 tmp/
 output/
 node_modules/
-
+/test-results/
+/playwright-report/
+/playwright/.cache/
+$__StoryList.tid

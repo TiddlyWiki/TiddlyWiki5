@@ -1,3 +1,0 @@
-title: $:/plugins/tiddlywiki/qrcode/examples
-
-<<tabs "[all[shadows+tiddlers]tag[$:/tags/MakeQR]!has[draft.of]]" "$:/plugins/tiddlywiki/qrcode/MakeGenericQR">>

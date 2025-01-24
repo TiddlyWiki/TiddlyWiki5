@@ -1,15 +1,15 @@
+caption: tm-download-file
 created: 20140811112201235
-modified: 20220123141646321
+modified: 20230723214745520
 tags: Messages
 title: WidgetMessage: tm-download-file
 type: text/vnd.tiddlywiki
-caption: tm-download-file
 
 The download file message causes the current saver module to prompt the user to download the result of parsing a specified template tiddler as a file. It requires the following properties on the `event` object:
 
 |!Name |!Description |
 |param |Title of a tiddler to use as a template for the new tiddler |
-|paramObject |Optional hashmap of variable values to use for the rendering |
+|//{any other params}// |Any other parameters are made available as variables within the context of the widget message. |
 
 The following variable names have special behaviour:
 

@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/qrcode/examples/read
+tags: $:/tags/QRCodeExample
+caption: Reading Barcodes
+
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/ReadQR]!has[draft.of]]" "$:/plugins/tiddlywiki/qrcode/examples/read/BarCodeReader">>

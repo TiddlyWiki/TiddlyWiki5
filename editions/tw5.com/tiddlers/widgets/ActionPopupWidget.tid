@@ -1,6 +1,6 @@
 caption: action-popup
 created: 20200303114556528
-modified: 20220815205132124
+modified: 20230731193016105
 tags: Widgets ActionWidgets
 title: ActionPopupWidget
 type: text/vnd.tiddlywiki
@@ -30,6 +30,6 @@ Here is an example of button that triggers the "more" button in the sidebar "Too
 <$macrocall $name='wikitext-example-without-html'
 src='<$button>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" $value="$:/core/ui/SideBar/Tools"/>
-<$action-popup $state="$:/state/popup/more-2053862905" $coords="(0,20,0,0)"/>
+<$action-popup $state="$:/state/popup/more--810643385" $coords="(0,20,0,0)"/>
 Click me!
 </$button>'/>

@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/welcome
+caption: Welcome
+tags: $:/tags/Tour/IntroductionToTiddlyWiki
+display-mode: fullscreen
+
+!! An interactive tour of {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}}
+
+Welcome to this tour of {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}}.
+
+We hope you'll find {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}} a helpful and supportive tool. Let's get started!

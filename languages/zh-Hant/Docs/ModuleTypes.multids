@@ -9,7 +9,7 @@ config: 加入 `$tw.config` 的資料。
 filteroperator: 個別篩選器運算元方法。
 global: 加入 `$tw` 的全域資料。
 info: 透過 [[$:/temp/info-plugin]] 偽插件，發佈系統資訊。
-isfilteroperator: ''is'' 篩選器運算元的運算子。
+isfilteroperator: ''is'' 篩選器運算子的參數。
 library: 一般用途的 JavaScript 模組的通用的模組類型。
 macro: JavaScript ''巨集''定義。
 parser: 不同內容類型的解析器。

@@ -9,6 +9,6 @@ tags: [[Filter Operators]] [[Special Operators]]
 title: modules Operator
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.2.0">>The <<.op modules>> filter allows two optional operands. When both are specified, it returns the modules with the module property specified in the first operand which has the value in the second operand.
+<<.from-version "5.2.0">>The <<.op modules>> filter allows two optional parameters. When both are specified, it returns the modules with the module property specified in the first parameter which has the value in the second parameter.
 
 <<.operator-examples "modules">>

@@ -1,6 +1,6 @@
 caption: tm-open-external-window
-created: 201701211823
-modified: 201701211825
+created: 20170121182300000
+modified: 20230723220850135
 tags: Messages
 title: WidgetMessage: tm-open-external-window
 type: text/vnd.tiddlywiki
@@ -11,7 +11,8 @@ The `tm-open-external-window` message opens an external link eg: "https://tiddly
 
 |!Name |!Description |
 |param |URL of the tiddler to be opened in a new browser window, defaults to the [[TiddlyWiki help|https://tiddlywiki.com/#WidgetMessage%3A%20tm-open-external-window if empty]] |
-|paramObject |Optional: Hashmap of variables that will be provided to the window. see below |
+|//{any other params}// |Any other parameters are made available as variables to the window. See below. |
+
 
 ''parmObject''
 

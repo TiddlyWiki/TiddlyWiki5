@@ -40,8 +40,15 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","radio");
+	this.assignAttributes(this.inputDomNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	if(isChecked) {
 		this.inputDomNode.checked = true;
+	}
+	if(this.tabIndex) {
+		this.inputDomNode.setAttribute("tabindex", this.tabIndex);
 	}
 	if(this.isDisabled === "yes") {
 		this.inputDomNode.setAttribute("disabled",true);
@@ -107,6 +114,7 @@ RadioWidget.prototype.execute = function() {
 	this.radioClass = this.getAttribute("class","");
 	this.radioDefault = this.getAttribute("default");
 	this.isDisabled = this.getAttribute("disabled","no");
+	this.tabIndex = this.getAttribute("tabindex");
 	this.radioActions = this.getAttribute("actions","");
 	// Make the child widgets
 	this.makeChildWidgets();

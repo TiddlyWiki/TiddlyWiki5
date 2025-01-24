@@ -114,7 +114,7 @@ exports.parseStringLiteral = function(source,pos) {
 	var match = reString.exec(source);
 	if(match && match.index === pos) {
 		node.value = match[1] !== undefined ? match[1] :(
-			match[2] !== undefined ? match[2] : match[3] 
+			match[2] !== undefined ? match[2] : match[3]
 					);
 		node.end = pos + match[0].length;
 		return node;
@@ -305,10 +305,11 @@ exports.parseAttribute = function(source,pos) {
 		start: pos
 	};
 	// Define our regexps
-	var reAttributeName = /([^\/\s>"'=]+)/g,
-		reUnquotedAttribute = /([^\/\s<>"'=]+)/g,
+	var reAttributeName = /([^\/\s>"'`=]+)/g,
+		reUnquotedAttribute = /([^\/\s<>"'`=]+)/g,
 		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/g,
-		reIndirectValue = /\{\{([^\}]+)\}\}/g;
+		reIndirectValue = /\{\{([^\}]+)\}\}/g,
+		reSubstitutedValue = /(?:```([\s\S]*?)```|`([^`]|[\S\s]*?)`)/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Get the attribute name
@@ -361,8 +362,15 @@ exports.parseAttribute = function(source,pos) {
 							node.type = "macro";
 							node.value = macroInvocation;
 						} else {
-							node.type = "string";
-							node.value = "true";
+							var substitutedValue = $tw.utils.parseTokenRegExp(source,pos,reSubstitutedValue);
+							if(substitutedValue) {
+								pos = substitutedValue.end;
+								node.type = "substituted";
+								node.rawValue = substitutedValue.match[1] || substitutedValue.match[2];
+							} else {
+								node.type = "string";
+								node.value = "true";
+							}
 						}
 					}
 				}

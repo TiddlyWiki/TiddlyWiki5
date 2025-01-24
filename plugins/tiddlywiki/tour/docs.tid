@@ -1,0 +1,25 @@
+title: $:/plugins/tiddlywiki/tour/docs
+
+Tour definition tiddlers have the following fields:
+
+|!Name |!Description |
+|tags |Must include $:/tags/Tour |
+|tour-tag |Name of tag used to define tour step sequence |
+|logo |Title of tiddler containing logo of tour |
+|description |Brief description of the tour |
+|text |Longer description of the tour |
+|class |(optional) additional class to apply to the tour wrapper |
+
+
+Tour step tiddlers have the following fields:
+
+|!Name |!Description |
+|tags|Must include the tag used to define the tour step sequence |
+|caption|Caption for the tour step |
+|display-mode|(optional) can be set to `fullscreen` |
+|enter-actions|(optional) action string invoked when the step is displayed |
+|hint-selector|(optional) selector to be highlighted by the hint button in steps with a step-success-filter |
+|hint-text|(optional) text to be displayed for the hint button |
+|condition|(optional) filter expression that must return a result for the step to be displayed |
+|step-success-filter|(optional) filter expression that must return a result for the step to be considered completed |
+|step-success-filtervar|(optional) filter expression evaluated to set the first result as the variable `step-success-filter-var` which can be used in the `step-success-filter` |

@@ -1,5 +1,4 @@
 title: $:/plugins/tiddlywiki/github-fork-ribbon/styles
-tags: [[$:/tags/Stylesheet]]
 
 /* Left will inherit from right (so we don't need to duplicate code */
 .github-fork-ribbon {
@@ -10,7 +9,7 @@ tags: [[$:/tags/Stylesheet]]
   padding: 2px 0;
 
   /* Set the base colour */
-  background-color: #a00;
+  background-color: <<color>>;
 
   /* Set a gradient: transparent black at the top to almost-transparent black at the bottom */
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.00)), to(rgba(0, 0, 0, 0.15)));
@@ -25,7 +24,7 @@ tags: [[$:/tags/Stylesheet]]
   -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
 
-  z-index: 999;
+  z-index: 700;
   pointer-events: auto;
 }
 
@@ -61,8 +60,8 @@ tags: [[$:/tags/Stylesheet]]
   height: 150px;
   position: absolute;
   overflow: hidden;
-  top: 0;
-  z-index: 999;
+  top: <<top>>;
+  z-index: 700;
   pointer-events: none;
 }
 
@@ -71,25 +70,25 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .github-fork-ribbon-wrapper.left {
-  left: 0;
+  left: <<left>>;
 }
 
 .github-fork-ribbon-wrapper.right {
-  right: 0;
+  right: <<right>>;
 }
 
 .github-fork-ribbon-wrapper.left-bottom {
   position: fixed;
   top: inherit;
-  bottom: 0;
-  left: 0;
+  bottom: <<bottom>>;
+  left: <<left>>;
 }
 
 .github-fork-ribbon-wrapper.right-bottom {
   position: fixed;
   top: inherit;
-  bottom: 0;
-  right: 0;
+  bottom: <<bottom>>;
+  right: <<right>>;
 }
 
 .github-fork-ribbon-wrapper.right .github-fork-ribbon {
