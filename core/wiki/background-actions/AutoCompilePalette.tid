@@ -1,5 +1,5 @@
 title: $:/core/background-actions/AutoCompilePalette
-tags: $:/tags/BackgroundAction
+tags: $:/tags/BackgroundAction $:/tags/StartupAction
 track-filter: [{$:/palette}indexes[]] :map[{$:/palette}getindex<currentTiddler>]
 
 \import [subfilter{$:/core/config/GlobalImportFilter}]
