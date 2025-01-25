@@ -76,14 +76,20 @@ input[type="search"] {
 }
 
 button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
-	outline: 2px solid <<colour primary>>;
-	outline-offset: -2px;
+	/* TODO: Use border at present for backward compatibility */
+	/* outline: 2px solid <<colour primary>>;
+	outline-offset: -2px; */
+	outline: none;
+	border: 2px solid <<colour primary>>;
 	border-radius: 0.25em;
 }
 
 button:-moz-focusring, input:-moz-focusring, textarea:-moz-focusring, select:-moz-focusring {
-	outline: 2px solid <<colour primary>>;
-	outline-offset: -2px;
+	/* TODO: Use border at present for backward compatibility */
+	/* outline: 2px solid <<colour primary>>;
+	outline-offset: -2px; */
+	outline: none;
+	border: 2px solid <<colour primary>>;
 	border-radius: 0.25em;
 }
 
