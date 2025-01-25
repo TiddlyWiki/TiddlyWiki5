@@ -23,7 +23,6 @@ exports.indexes = function(source,operator,options) {
 			$tw.utils.pushTop(results,Object.keys(data));
 		}
 	});
-	results.sort();
 	return results;
 };
 
