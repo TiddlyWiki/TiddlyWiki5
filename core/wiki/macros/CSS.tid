@@ -34,6 +34,7 @@ tags: $:/tags/Macro
 \end actions-compile-palette-wikified
 
 \procedure actions-compile-palette(inputTitle,outputTitle,defaultImport="$:/palettes/Vanilla")
+\procedure tv-action-refresh-policy() always
 <$let
 	tempPalette="$:/temp/palette-source"
 >
@@ -63,6 +64,7 @@ tags: $:/tags/Macro
 \end actions-compile-palette
 
 \procedure actions-recompile-current-palette()
+\procedure tv-action-refresh-policy() always
 <$transclude $variable="actions-compile-palette" inputTitle={{$:/palette}} outputTitle="$:/temp/palette-colours"/>
 \end actions-recompile-current-palette
 
@@ -70,7 +72,7 @@ tags: $:/tags/Macro
 \procedure tv-action-refresh-policy() always
 <$action-deletetiddler $tiddler="$:/temp/palette-colours"/>
 <$action-setfield $tiddler="$:/palette" $field="text" $value=<<paletteTitle>>/>
-<$transclude $variable="actions-compile-palette" inputTitle=<<paletteTitle>> outputTitle="$:/temp/palette-colours"/>
+<<actions-recompile-current-palette>>
 \end actions-switch-colour-palette
 
 \procedure tv-palette-name() $:/temp/palette-colours
