@@ -1,7 +1,7 @@
 title: $:/palette-editors/TwentyTwenties
 
 \procedure entry(name,description)
-<$text text=<<description>>/>: <$edit-text tiddler={{$:/palette}} index=<<name>> type="color" tag="input" default={{{ [function[colour],<name>] }}} inputActions=<<actions-recompile-current-palette>>/>
+<$text text=<<description>>/>: <$edit-text tiddler={{$:/palette}} index=<<name>> type="color" tag="input" default={{{ [function[colour],<name>] }}}/>
 \end entry
 
 <<entry name:"base-paper" description:"Paper">>
