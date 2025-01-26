@@ -78,7 +78,7 @@ exports.startup = function() {
 		$tw.utils.copyToClipboard(event.param,{
 			successNotification: event.paramObject && event.paramObject.successNotification,
 			failureNotification: event.paramObject && event.paramObject.failureNotification
-		});
+		},event.paramObject.type);
 	});
 	// Install the tm-focus-selector message
 	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
