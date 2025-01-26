@@ -1,19 +1,14 @@
 
-title: Operators/Palettes/BasicLookup
-description: Basic palette lookups
+title: Operators/Palettes/Accumulate
+description: Recursively accumulate palette definitions
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
 title: Output
 
 \import [subfilter{$:/core/config/GlobalImportFilter}]
-<<colour page-background>>
-<<colour background>>
-+
-title: Actions
-
-\import [subfilter{$:/core/config/GlobalImportFilter}]
-<<actions-recompile-current-palette>>
+\parsermode inline
+<$text text={{{ [accumulate-palette-entries[MyPalette]] }}}/>
 +
 title: $:/palette
 
@@ -42,4 +37,4 @@ background: red
 +
 title: ExpectedResult
 
-<p>#f4e4d4</p><p>red</p>
+["page-background:#d4e4f4","background:red","page-background:&lt;&lt;colour custom&gt;&gt;","custom:#f4e4d4"]{"title":"MyPalette","name":"My Palette","description":"My custom palette","tags":"$:/tags/Palette","type":"application/x-tiddler-dictionary","palette-import":"MyOtherPalette","color-scheme":"light","text":"page-background: &lt;&lt;colour custom&gt;&gt;\ncustom: #f4e4d4"}

@@ -1,6 +1,6 @@
 title: $:/core/background-actions/AutoCompilePalette
 tags: $:/tags/BackgroundAction $:/tags/StartupAction
-track-filter: [{$:/palette}indexes[]] :map[{$:/palette}getindex<currentTiddler>]
+track-filter: [accumulate-palette-entries[$:/palette]]
 
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 <<actions-recompile-current-palette>>
