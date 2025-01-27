@@ -20,7 +20,7 @@ This is the tiddler HelloThere
 +
 title: ExpectedResult
 
-<p>[
+<p dir="auto">[
     {
         "title": "RealTitle",
         "tags": "Definitions",

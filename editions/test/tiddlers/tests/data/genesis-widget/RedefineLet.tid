@@ -26,6 +26,6 @@ title: Output
 +
 title: ExpectedResult
 
-<p>(--Elephant--)
+<p dir="auto">(--Elephant--)
 (--Kangaroo--)
 (--Giraffe--)</p>

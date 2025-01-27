@@ -23,7 +23,7 @@ This is a payload tiddler from a compound tiddler
 +
 title: ExpectedResult
 
-<p>[
+<p dir="auto">[
     {
         "title": "Payload Tiddler",
         "tags": "Alpha Beta Gamma",

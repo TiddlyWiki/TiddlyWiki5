@@ -23,10 +23,10 @@ title: Output
 +
 title: ExpectedResult
 
-<p>
+<p dir="auto">
 This is a Elephant, I think.
-</p><p>
+</p><p dir="auto">
 This is a Antelope, I think.
-</p><p>
+</p><p dir="auto">
 This is a Crocodile, I think.
 </p>

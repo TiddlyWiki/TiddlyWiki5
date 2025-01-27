@@ -25,4 +25,4 @@ title: Output
 +
 title: ExpectedResult
 
-value 01<p>value 02</p>
+value 01<p dir="auto">value 02</p>

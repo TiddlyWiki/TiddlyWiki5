@@ -42,4 +42,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>Oxford</p>
+<p dir="auto">Oxford</p>

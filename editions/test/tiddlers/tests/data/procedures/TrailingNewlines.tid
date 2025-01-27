@@ -19,4 +19,4 @@ Paragraph 2
 +
 title: ExpectedResult
 
-<p>Paragraph 1</p><p>Paragraph 2</p>
+<p dir="auto">Paragraph 1</p><p dir="auto">Paragraph 2</p>

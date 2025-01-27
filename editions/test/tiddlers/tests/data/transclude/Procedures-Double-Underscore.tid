@@ -23,4 +23,4 @@ It is $one$ and $two$<<__one__>><<__two__>>.
 +
 title: ExpectedResult
 
-<p>It is $one$ and $two$.</p><p>It is $one$ and $two$.</p><p>It is $one$ and $two$.</p><p>It is $one$ and $two$.</p><p>It is $one$ and $two$.</p>
+<p dir="auto">It is $one$ and $two$.</p><p dir="auto">It is $one$ and $two$.</p><p dir="auto">It is $one$ and $two$.</p><p dir="auto">It is $one$ and $two$.</p><p dir="auto">It is $one$ and $two$.</p>

@@ -27,4 +27,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>(Functions:f1,f1,f1)(Macros:banana,banana,banana)</p>
+<p dir="auto">(Functions:f1,f1,f1)(Macros:banana,banana,banana)</p>

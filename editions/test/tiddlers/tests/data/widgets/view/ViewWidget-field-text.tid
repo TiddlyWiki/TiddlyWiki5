@@ -15,4 +15,4 @@ title: Output
 +
 title: ExpectedResult
 
-Some text<p>Some text</p>
+Some text<p dir="auto">Some text</p>
