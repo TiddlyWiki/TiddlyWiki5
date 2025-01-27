@@ -1,6 +1,6 @@
 title: $:/core/background-actions/AutoCompilePalette
 tags: $:/tags/BackgroundAction $:/tags/StartupAction
-track-filter: [accumulate-palette-entries[$:/palette]]
+track-filter: [[$:/palette]] +[changecount[]]
 
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 <<actions-recompile-current-palette>>
