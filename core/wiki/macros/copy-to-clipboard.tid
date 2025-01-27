@@ -5,7 +5,7 @@ tags: $:/tags/Macro
 
 \procedure copy-to-clipboard(src,class:"tc-btn-invisible",style,type:"text/plain",plain)
 \procedure copy-to-clipboard-actions()
-<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<src>> type=<<type>> plain=<<plain>>/>
+<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<src>> type=<<type>> plainText=<<plain>>/>
 \end copy-to-clipboard-actions
 <$button actions=<<copy-to-clipboard-actions>>
 	class=<<class>>
