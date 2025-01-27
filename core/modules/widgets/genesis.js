@@ -23,15 +23,21 @@ Inherit from the base widget class
 */
 GenesisWidget.prototype = new Widget();
 
+GenesisWidget.prototype.computeAttributes = function(options) {
+	options = options || Object.create(null);
+	options.filterFn = function(name) {
+		// Only compute our own attributes which start with a single dollar
+		return name.charAt(0) === "$" && name.charAt(1) !== "$";
+	}
+	return Widget.prototype.computeAttributes.call(this,options);
+};
+
 /*
 Render this widget into the DOM
 */
 GenesisWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
-	this.computeAttributes({filterFn: function(name) {
-		// Only compute our own attributes which start with a single dollar
-		return name.charAt(0) === "$" && name.charAt(1) !== "$";
-	}});
+	this.computeAttributes();
 	this.execute();
 	this.renderChildren(parent,nextSibling);
 };
