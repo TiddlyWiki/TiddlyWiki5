@@ -1,6 +1,8 @@
 title: $:/core/background-actions/AutoCompilePalette
 tags: $:/tags/BackgroundAction $:/tags/StartupAction
-track-filter: [[$:/palette]] +[changecount[]]
+platforms: browser
+track-filter: [[$:/palette]] +[changecount[]] 
 
 \import [subfilter{$:/core/config/GlobalImportFilter}]
+<$action-log $message="AutoCompilePalette" darkmode={{$:/info/browser/darkmode}} palette={{$:/palette}}/>
 <<actions-recompile-current-palette>>

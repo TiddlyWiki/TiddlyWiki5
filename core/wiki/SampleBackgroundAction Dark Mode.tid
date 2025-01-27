@@ -1,5 +1,6 @@
 title: SampleBackgroundAction: Dark Mode
-tags: $:/tags/BackgroundAction  $:/tags/StartupAction
+tags: $:/tags/BackgroundAction $:/tags/StartupAction/Browser
+platforms: browser
 track-filter: [{$:/info/browser/darkmode}]
 
 <%if [{$:/info/browser/darkmode}match[no]] %>

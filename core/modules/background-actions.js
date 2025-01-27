@@ -90,15 +90,27 @@ function BackgroundActionTracker(options) {
 		fnProcess: function(changes) {
 			if(self.hasChanged) {
 				self.hasChanged = false;
-				self.wiki.invokeActionString(
-					self.actions,
-					null,
-					{
-						title: self.title
-					},{
-						parentWidget: $tw.rootWidget
+				console.log("Processing background action",self.title);
+				var tiddler = self.wiki.getTiddler(self.title),
+					doActions = true;
+				if(tiddler && tiddler.fields.platforms) {
+					doActions = false;
+					var platforms = $tw.utils.parseStringArray(tiddler.fields.platforms);
+					if(($tw.browser && platforms.indexOf("browser") !== -1) || ($tw.node && platforms.indexOf("node") !== -1)) {
+						doActions = true;
 					}
-				);
+				}
+				if(doActions) {
+					self.wiki.invokeActionString(
+						self.actions,
+						null,
+						{
+							title: self.title
+						},{
+							parentWidget: $tw.rootWidget
+						}
+					);
+				}
 			}
 		}
 	});
