@@ -289,7 +289,7 @@ exports.copyToClipboard = function(text,options,type) {
 	textArea.setSelectionRange(0,text.length);
 	textArea.addEventListener("copy",function(event) {
 		event.preventDefault();
-		event.clipboardData.setData("text/plain",text);
+		event.clipboardData.setData("text/plain",options.plainText);
 		event.clipboardData.setData(type,text);
 	});
 	var succeeded = false;
