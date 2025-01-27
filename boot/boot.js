@@ -2463,6 +2463,7 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("image/webp","base64",".webp",{flags:["image"]});
 	$tw.utils.registerFileType("image/heic","base64",".heic",{flags:["image"]});
 	$tw.utils.registerFileType("image/heif","base64",".heif",{flags:["image"]});
+	$tw.utils.registerFileType("image/avif","base64",".avif",{flags:["image"]});
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
 	$tw.utils.registerFileType("image/vnd.microsoft.icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
