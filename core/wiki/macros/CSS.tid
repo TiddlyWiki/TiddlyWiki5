@@ -29,6 +29,19 @@ tags: $:/tags/Macro
 </$list>
 \end actions-compile-palette-wikified
 
+\procedure actions-compile-palette-import(inputTitle,outputTitle,exclusions:"")
+<%if [enlist<exclusions>!match<inputTitle>count[]] :map[enlist<exclusions>count[]compare:number:eq<currentTiddler>] +[!match[]] %>
+	<$set name="exclusions" filter="[enlist<exclusions>] [<inputTitle>]">
+		<%if [<inputTitle>get[palette-import]has[title]] %>
+			<$transclude $variable="actions-compile-palette-import" inputTitle={{{ [<inputTitle>get[palette-import]] }}} outputTitle=<<outputTitle>> exclusions=<<exclusions>>/>
+		<%endif%>
+		<$list filter="[<inputTitle>indexes[]sort[]]" variable="colour-name">
+			<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value={{{ [<inputTitle>getindex<colour-name>] }}}/>
+		</$list>
+	</$set>
+<%endif%>
+\end actions-compile-palette-import
+
 \procedure actions-compile-palette(inputTitle,outputTitle,defaultImport="$:/palettes/Vanilla")
 \procedure tv-action-refresh-policy() always
 <$let
@@ -36,18 +49,8 @@ tags: $:/tags/Macro
 >
 	<!-- Clear the temporary consolidated palette -->
 	<$action-deletetiddler $tiddler=<<tempPalette>>/>
-	<!-- Consolidate the imported palette -->
-	<$let importTitle={{{ [<inputTitle>get[palette-import]else<defaultImport>] }}}>
-		<%if [<importTitle>!match[]] %>
-			<$list filter="[<importTitle>indexes[]sort[]]" variable="colour-name">
-				<$action-setfield $tiddler=<<tempPalette>> $index=<<colour-name>> $value={{{ [<importTitle>getindex<colour-name>] }}}/>
-			</$list>
-		<%endif%>
-	</$let>
-	<!-- Consolidate the main palette -->
-	<$list filter="[<inputTitle>indexes[]sort[]]" variable="colour-name">
-		<$action-setfield $tiddler=<<tempPalette>> $index=<<colour-name>> $value={{{ [<inputTitle>getindex<colour-name>] }}}/>
-	</$list>
+	<!-- Consolidate the chain of palettes -->
+	<$transclude $variable="actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<tempPalette>>/>
 	<!-- Compile the temporary palette to the output palette -->
 	<%if [<inputTitle>get[palette-type]match[modern]] %>
 		<$transclude $variable="actions-compile-palette-filtered" tempPalette=<<tempPalette>> outputTitle=<<outputTitle>>/>
