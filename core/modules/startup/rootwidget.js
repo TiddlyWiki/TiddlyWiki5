@@ -79,7 +79,7 @@ exports.startup = function() {
 			successNotification: event.paramObject && event.paramObject.successNotification,
 			failureNotification: event.paramObject && event.paramObject.failureNotification,
 			plainText: event.paramObject && event.paramObject.plainText
-		},event.paramObject.type);
+		},event.paramObject && event.paramObject.type);
 	});
 	// Install the tm-focus-selector message
 	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
