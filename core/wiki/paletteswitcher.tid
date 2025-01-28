@@ -4,7 +4,7 @@ title: $:/snippets/paletteswitcher
 
 \whitespace trim
 \procedure actions()
-<$transclude $variable="actions-switch-colour-palette" paletteTitle=<<navigateTo>>/>
+<$action-setfield $tiddler="$:/palette" text=<<navigateTo>>/>
 \end actions
 
 <$linkcatcher actions=<<actions>>>

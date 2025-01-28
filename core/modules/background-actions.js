@@ -105,7 +105,7 @@ function BackgroundActionTracker(options) {
 						self.actions,
 						null,
 						{
-							title: self.title
+							currentTiddler: self.title
 						},{
 							parentWidget: $tw.rootWidget
 						}

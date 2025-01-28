@@ -3,18 +3,14 @@ tags: $:/tags/Macro
 
 \procedure actions-compile-palette-filtered(tempPalette,outputTitle)
 <!-- Note the join, needed to cope with palette entries containing spaces -->
-\function colour(name) [<tv-palette-name>getindex<name>] :else[<tv-palette-name>get[palette-import]getindex<name>] :map[subfilter<currentTiddler>join[ ]]
+\function colour(name) [<tempPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter<currentTiddler>join[ ]]
 <!-- Make the colour function use the input palette -->
-<$let
-	tv-palette-name=<<tempPalette>>
->
-	<$list filter="[<tempPalette>indexes[]sort[]]" variable="colour-name">
-		<$let colour-filter={{{ [<tempPalette>getindex<colour-name>] }}}>
-			<!-- Note the join, needed to cope with palette entries containing spaces -->
-			<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value={{{ [subfilter<colour-filter>join[ ]] }}}/>
-		</$let>
-	</$list>
-</$let>
+<$list filter="[<tempPalette>indexes[]sort[]]" variable="colour-name">
+	<$let colour-filter={{{ [<tempPalette>getindex<colour-name>] }}}>
+		<!-- Note the join, needed to cope with palette entries containing spaces -->
+		<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value={{{ [subfilter<colour-filter>join[ ]] }}}/>
+	</$let>
+</$list>
 \end actions-compile-palette-filtered
 
 \procedure actions-compile-palette-wikified(tempPalette,outputTitle)
@@ -36,7 +32,7 @@ tags: $:/tags/Macro
 \procedure actions-compile-palette(inputTitle,outputTitle,defaultImport="$:/palettes/Vanilla")
 \procedure tv-action-refresh-policy() always
 <$let
-	tempPalette="$:/temp/palette-source"
+	tempPalette="$:/temp/palette-consolidated"
 >
 	<!-- Clear the temporary consolidated palette -->
 	<$action-deletetiddler $tiddler=<<tempPalette>>/>
@@ -71,7 +67,6 @@ tags: $:/tags/Macro
 \procedure actions-switch-colour-palette(paletteTitle)
 \procedure tv-action-refresh-policy() always
 <$action-deletetiddler $tiddler="$:/temp/palette-colours"/>
-<$action-setfield $tiddler="$:/palette" $field="text" $value=<<paletteTitle>>/>
 <<actions-recompile-current-palette>>
 \end actions-switch-colour-palette
 
