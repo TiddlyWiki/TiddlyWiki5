@@ -311,48 +311,6 @@ exports.getLocationPath = function() {
 	return window.location.toString().split("#")[0];
 };
 
-exports.copyEventProperties = function(event) {
-	var seen = new Set();
-  
-	function isDOMElement(value) {
-	  return value instanceof Node || value instanceof Window;
-	}
-  
-	function safeCopy(obj) {
-		//skip ciruclar references
-		if(seen.has(obj)) {
-			return "[Circular reference]";
-		}
-		//skip functions
-		if(typeof obj !== "object" || obj === null) {
-			return obj;
-		}
-		//skip DOM elements
-		if(isDOMElement(obj)) {
-			return "[DOM Element]";
-		}
-		//copy each element of the array
-		if(Array.isArray(obj)) {
-			return obj.map(safeCopy);
-		}
-
-		seen.add(obj);
-		var copy = {}, key;
-		for(key in obj) {
-			try{
-				copy[key] = safeCopy(obj[key]);
-			} catch(e) {
-				copy[key] = "[Unserializable]";
-			}
-		}
-		return copy;
-	}
-
-	var result = safeCopy(event);
-	seen.clear();
-	return result;
-};
-
 /*
 Collect DOM variables
 */
@@ -395,7 +353,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
 	}
 	if(event) {
-		var eventProperties = $tw.utils.copyEventProperties(event);
+		var eventProperties = $tw.utils.copyObjectPropertiesSafe(event);
 		variables["event-properties"] = JSON.stringify(eventProperties,null,2);
 
 		if(("clientX" in event) && ("clientY" in event)) {

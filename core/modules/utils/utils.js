@@ -292,6 +292,48 @@ exports.extendDeepCopy = function(object,extendedProperties) {
 	return result;
 };
 
+exports.copyObjectPropertiesSafe = function(object) {
+	var seen = new Set();
+  
+	function isDOMElement(value) {
+	  return value instanceof Node || value instanceof Window;
+	}
+  
+	function safeCopy(obj) {
+		//skip ciruclar references
+		if(seen.has(obj)) {
+			return "[Circular reference]";
+		}
+		//skip functions
+		if(typeof obj !== "object" || obj === null) {
+			return obj;
+		}
+		//skip DOM elements
+		if(isDOMElement(obj)) {
+			return "[DOM Element]";
+		}
+		//copy each element of the array
+		if(Array.isArray(obj)) {
+			return obj.map(safeCopy);
+		}
+
+		seen.add(obj);
+		var copy = {}, key;
+		for(key in obj) {
+			try{
+				copy[key] = safeCopy(obj[key]);
+			} catch(e) {
+				copy[key] = "[Unserializable]";
+			}
+		}
+		return copy;
+	}
+
+	var result = safeCopy(object);
+	seen.clear();
+	return result;
+};
+
 exports.deepFreeze = function deepFreeze(object) {
 	var property, key;
 	if(object) {
