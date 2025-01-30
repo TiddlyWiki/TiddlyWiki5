@@ -23,6 +23,49 @@ Inherit from the base widget class
 */
 EventWidget.prototype = new Widget();
 
+
+function getEventPropertiesJSON(event) {
+	var seen = new Set();
+  
+	function isDOMElement(value) {
+	  return value instanceof Node || value instanceof Window;
+	}
+  
+	function safeCopy(obj) {
+		//skip ciruclar references
+		if(seen.has(obj)) {
+			return "[Circular reference]";
+		}
+		//skip functions
+		if(typeof obj !== "object" || obj === null) {
+			return obj;
+		}
+		//skip DOM elements
+		if(isDOMElement(obj)) {
+			return "[DOM Element]";
+		}
+		//copy each element of the array
+		if(Array.isArray(obj)) {
+			return obj.map(safeCopy);
+		}
+
+		seen.add(obj);
+		var copy = {}, key;
+		for(key in obj) {
+			try{
+				copy[key] = safeCopy(obj[key]);
+			} catch(e) {
+				copy[key] = "[Unserializable]";
+			}
+		}
+		return copy;
+	}
+
+	var result = safeCopy(event);
+	seen.clear();
+	return result;
+};
+
 /*
 Render this widget into the DOM
 */
@@ -50,8 +93,6 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 				actions = self.getAttribute("$"+type) || self.getAttribute("actions-"+type),
 				stopPropagation = self.getAttribute("stopPropagation","onaction"),
 				selectedNode = event.target,
-				selectedNodeRect,
-				catcherNodeRect,
 				variables = {};
 			// Firefox can fire dragover and dragenter events on text nodes instead of their parents
 			if(selectedNode.nodeType === 3) {
@@ -70,13 +111,10 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 				if(selectedNode === domNode) {
 					return false;
 				}
-				// Only set up variables if we have actions to invoke
-				if(actions) {
-					variables = $tw.utils.collectDOMVariables(selectedNode,self.domNode,event);
-				}
 			}
 			// Execute our actions with the variables
 			if(actions) {
+				variables = $tw.utils.collectDOMVariables(selectedNode,self.domNode,event);
 				// Add a variable for the modifier key
 				variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
 				// Add a variable for the mouse button
