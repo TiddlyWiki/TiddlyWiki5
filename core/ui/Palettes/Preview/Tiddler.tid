@@ -3,6 +3,8 @@ tags: $:/tags/Preview/Story
 
 \parameters (title)
 \whitespace trim
-<$colour.div class="tc-palette-preview-thumbnail-tiddler" styleName="background-color" styleColour="tiddler-background">
-	<<palette-preview-component-list "$:/tags/Preview/Tiddler">>
+<$colour.div class="tc-palette-preview-thumbnail-tiddler-border" styleName="border-color" styleColour="tiddler-border">
+	<$colour.div class="tc-palette-preview-thumbnail-tiddler" styleName="background-color" styleColour="tiddler-background">
+		<<palette-preview-component-list "$:/tags/Preview/Tiddler">>
+	</$colour.div>
 </$colour.div>

@@ -2979,8 +2979,13 @@ input.tc-palette-manager-colour-input {
 	flex-grow: 2;
 }
 
-.tc-palette-preview-thumbnail-tiddler {
+.tc-palette-preview-thumbnail-tiddler-border {
+	border-width: 1px;
+	border-style: solid;
 	margin-bottom: 0.5em;
+}
+
+.tc-palette-preview-thumbnail-tiddler {
 	padding: 0.5em;
 }
 
