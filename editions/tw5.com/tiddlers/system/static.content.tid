@@ -2,11 +2,11 @@ title: $:/core/templates/static.content
 
 \define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
 
-<% if [<savingEmpty>match[yes]] %>
+<%if [<savingEmpty>match[yes]] %>
 
 <$transclude tiddler="$:/core" subtiddler="$:/core/templates/static.content"/>
 
-<% else %>
+<%else%>
 
 <!-- Mastodon verification -->
 
@@ -23,4 +23,4 @@ It looks like this browser doesn't run JavaScript. You can use one of these stat
 
 {{TiddlyWiki}}
 
-<% endif %>
+<%endif%>
