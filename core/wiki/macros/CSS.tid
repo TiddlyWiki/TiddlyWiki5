@@ -1,43 +1,60 @@
 title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
-\procedure actions-compile-palette-filtered(tempPalette,outputTitle)
+\procedure actions-compile-palette-filtered(tempPalette,outputTitle,scheme)
 <!-- Note the join, needed to cope with palette entries containing spaces -->
-\function colour(name) [<tempPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter<currentTiddler>join[ ]]
+\function colour(name) [<name>addsuffix[@]addsuffix<scheme>] :map[<tempPalette>getindex<currentTiddler>] +[!match[]] :else[<tempPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>addsuffix[@]addsuffix<scheme>get[text]] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter<currentTiddler>join[ ]]
+\function color(name) [function[colour],<name>]
 <!-- Make the colour function use the input palette -->
 <$list filter="[<tempPalette>indexes[]sort[]]" variable="colour-name">
-	<$let colour-filter={{{ [<tempPalette>getindex<colour-name>] }}}>
+	<$let filter-text={{{ [<colour-name>addsuffix[@]addsuffix<scheme>] :map[<tempPalette>getindex<currentTiddler>] +[!match[]] :else[<tempPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>addsuffix[@]addsuffix<scheme>get[text]] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] }}}>
 		<!-- Note the join, needed to cope with palette entries containing spaces -->
-		<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value={{{ [subfilter<colour-filter>join[ ]] }}}/>
+		<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value={{{ [subfilter<filter-text>join[ ]] }}}/>
 	</$let>
 </$list>
 \end actions-compile-palette-filtered
 
-\procedure actions-compile-palette-wikified(tempPalette,outputTitle)
+\procedure actions-compile-palette-wikified(tempPalette,outputTitle,scheme)
 <!-- Define our own deeply backwards compatible local versions of the colour macro -->
 \define colour(name)
 \whitespace trim
-<$transclude tiddler=<<tempPalette>> index="$name$">
-	<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
+<$transclude tiddler=<<tempPalette>> index="$name$@$(scheme)$">
+	<$transclude tiddler=<<tempPalette>> index="$name$">
+		<$transclude tiddler="$:/config/DefaultColourMappings/$name$@$(scheme)$">
+			<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
+		</$transclude>
+	</$transclude>
 </$transclude>
 \end colour
 \define color(name) <<colour $name$>>
 <$list filter="[<tempPalette>indexes[]sort[]]" variable="colour-name" $debug="yes">
-	<$wikify name="colour-value" text={{{ [<tempPalette>getindex<colour-name>] }}} mode="inline">
-		<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value=<<colour-value>>/>
-	</$wikify>
+	<$let
+		palette-entry-text={{{ [<colour-name>addsuffix[@]addsuffix<scheme>] :map[<tempPalette>getindex<currentTiddler>] +[!match[]] :else[<tempPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] }}}
+	>
+		<$wikify name="colour-value" text=<<palette-entry-text>> mode="inline">
+			<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value=<<colour-value>>/>
+		</$wikify>
+	</$let>
 </$list>
 \end actions-compile-palette-wikified
 
-\procedure actions-compile-palette-import(inputTitle,outputTitle,exclusions:"")
+\procedure actions-compile-palette-import(inputTitle,outputTitle,exclusions:"",scheme)
+<$action-log $message="Inside actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<outputTitle>> exclusions=<<exclusions>> scheme=<<scheme>>/>
 <%if [enlist<exclusions>!match<inputTitle>count[]] :map[enlist<exclusions>count[]compare:number:eq<currentTiddler>] +[!match[]] %>
 	<$set name="exclusions" filter="[enlist<exclusions>] [<inputTitle>]">
-		<%if [<inputTitle>get[palette-import]has[title]] %>
-			<$transclude $variable="actions-compile-palette-import" inputTitle={{{ [<inputTitle>get[palette-import]] }}} outputTitle=<<outputTitle>> exclusions=<<exclusions>>/>
-		<%endif%>
-		<$list filter="[<inputTitle>indexes[]sort[]]" variable="colour-name">
-			<$action-setfield $tiddler=<<outputTitle>> $index=<<colour-name>> $value={{{ [<inputTitle>getindex<colour-name>] }}}/>
-		</$list>
+		<$let
+			prefixed-palette-import={{{ [[palette-import@]addsuffix<scheme>] }}}
+			inputTitle={{{ [<inputTitle>get<prefixed-palette-import>has[title]] :else[<inputTitle>get[palette-import]] }}}
+		>
+			<%if [<inputTitle>has[title]] %>
+				<$transclude $variable="actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<outputTitle>> exclusions=<<exclusions>> scheme=<<scheme>>/>
+			<%endif%>
+		</$let>
+		<$action-log $message="Back in actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<outputTitle>> exclusions=<<exclusions>> scheme=<<scheme>>/>
+		<$action-log $tiddler=<<outputTitle>> $indexes={{{ [<inputTitle>indexes[]sort[]] +[join[,]] }}} $values={{{ [<inputTitle>indexes[]sort[]] :map[<inputTitle>getindex<currentTiddler>] +[join[,]] }}}/>
+		<$action-setmultiplefields $tiddler=<<outputTitle>> $indexes="[<inputTitle>indexes[]sort[]]" $values="[<inputTitle>indexes[]sort[]] :map[<inputTitle>getindex<currentTiddler>]"/>
+		<$action-log $tiddler=<<outputTitle>> $fields={{{ [<inputTitle>fields[]sort[]] -title -tags -text +[join[,]] }}} $values={{{ [<inputTitle>fields[]sort[]] -title -tags -text :map[<inputTitle>get<currentTiddler>] +[join[,]] }}}/>
+		<$action-setmultiplefields $tiddler=<<outputTitle>> $fields="[<inputTitle>fields[]sort[]] -title -tags -text" $values="[<inputTitle>fields[]sort[]] -title -tags -text :map[<inputTitle>get<currentTiddler>]"/>
 	</$set>
 <%endif%>
 \end actions-compile-palette-import
@@ -47,18 +64,29 @@ tags: $:/tags/Macro
 <$let
 	tempPalette="$:/temp/palette-consolidated"
 >
-	<!-- Clear the temporary consolidated palette -->
-	<$action-deletetiddler $tiddler=<<tempPalette>>/>
-	<!-- Consolidate the chain of palettes -->
-	<$transclude $variable="actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<tempPalette>>/>
-	<!-- Compile the temporary palette to the output palette -->
-	<%if [<inputTitle>get[palette-type]match[modern]] %>
-		<$transclude $variable="actions-compile-palette-filtered" tempPalette=<<tempPalette>> outputTitle=<<outputTitle>>/>
-	<%else%>
-		<$transclude $variable="actions-compile-palette-wikified" tempPalette=<<tempPalette>> outputTitle=<<outputTitle>>/>
-	<%endif%>
-	<!-- Remove the temporary consolidated palette -->
-	<!-- <$action-deletetiddler $tiddler=<<tempPalette>>/> -->
+	<!-- Compute the current scheme -->
+	<$let
+		color-scheme-filter={{{ [<inputTitle>get[color-scheme]] :else[[light]] }}}
+		scheme={{{ [subfilter<color-scheme-filter>] }}}
+	>
+		<!-- Clear the temporary consolidated palette -->
+		<$action-deletetiddler $tiddler=<<tempPalette>>/>
+		<$action-setfield $tiddler=<<tempPalette>> type="application/x-tiddler-dictionary"/>
+		<$action-deletetiddler $tiddler=<<outputTitle>>/>
+		<$action-setfield $tiddler=<<outputTitle>> type="application/x-tiddler-dictionary"/>
+		<!-- Consolidate the chain of palettes -->
+		<$transclude $variable="actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<tempPalette>> scheme=<<scheme>>/>
+		<!-- Clear the output palette and assign the scheme -->
+		<$action-setfield $tiddler=<<outputTitle>> $field="color-scheme" $value=<<scheme>>/>
+		<!-- Compile the temporary palette to the output palette -->
+		<%if [<inputTitle>get[palette-type]match[modern]] %>
+			<$transclude $variable="actions-compile-palette-filtered" tempPalette=<<tempPalette>> outputTitle=<<outputTitle>> scheme=<<scheme>>/>
+		<%else%>
+			<$transclude $variable="actions-compile-palette-wikified" tempPalette=<<tempPalette>> outputTitle=<<outputTitle>> scheme=<<scheme>>/>
+		<%endif%>
+		<!-- Remove the temporary consolidated palette -->
+		<!-- <$action-deletetiddler $tiddler=<<tempPalette>>/> -->
+	</$let>
 </$let>
 \end actions-compile-palette
 
@@ -76,7 +104,7 @@ tags: $:/tags/Macro
 \procedure tv-palette-name() $:/temp/palette-colours
 
 \function colour(name)
-[<tv-palette-name>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]]
+[<tv-palette-name>get[colour-scheme]addprefix[@]addprefix<name>] :map[<tv-palette-name>getindex<currentTiddler>] +[!match[]] :else[<tv-palette-name>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]]
 \end colour
 
 \function color(name)

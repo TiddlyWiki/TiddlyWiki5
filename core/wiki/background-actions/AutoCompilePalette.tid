@@ -1,7 +1,7 @@
 title: $:/core/background-actions/AutoCompilePalette
 tags: $:/tags/BackgroundAction $:/tags/StartupAction
 platforms: browser
-track-filter: [[$:/palette]] +[changecount[]] 
+track-filter: [{$:/palette}get[color-scheme]] :map[subfilter<currentTiddler>] [[$:/palette]changecount[]]
 
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 <<actions-recompile-current-palette>>
