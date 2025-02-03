@@ -92,7 +92,7 @@ Update the DomNode with the new text
 SimpleEngine.prototype.updateDomNodeText = function(text) {
 	try {
 		if(this.widget.editType === "color") {
-			text = $tw.utils.convertRGBStringToCSSColor(text);
+			text = $tw.utils.convertCSSColorToRGBString(text);
 		}
 		this.domNode.value = text;
 	} catch(e) {
