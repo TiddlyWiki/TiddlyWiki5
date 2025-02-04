@@ -38,31 +38,33 @@ tags: $:/tags/Macro
 </$list>
 \end actions-compile-palette-wikified
 
-\procedure actions-compile-palette-import(inputTitle,outputTitle,exclusions:"",scheme)
+\procedure actions-compile-palette-import(inputTitle,outputTitle,exclusions:"",scheme,palette-type)
 <%if [enlist<exclusions>!match<inputTitle>count[]] :map[enlist<exclusions>count[]compare:number:eq<currentTiddler>] +[!match[]] %>
-	<$set name="exclusions" filter="[enlist<exclusions>] [<inputTitle>]">
-		<!-- Recursively import any imported palette -->
-		<$let
-			prefixed-palette-import={{{ [[palette-import@]addsuffix<scheme>] }}}
-			inputTitle={{{ [<inputTitle>get<prefixed-palette-import>has[title]] :else[<inputTitle>get[palette-import]] }}}
-		>
-			<%if [<inputTitle>has[title]] %>
-				<$transclude $variable="actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<outputTitle>> exclusions=<<exclusions>> scheme=<<scheme>>/>
-			<%endif%>
-		</$let>
-		<!-- Copy the suffixed palette entries with the suffix stripped -->
-		<%if [<scheme>!is[blank]] %>
+	<%if [<inputTitle>get[palette-type]!match[]else[classic]match<palette-type>] %>
+		<$set name="exclusions" filter="[enlist<exclusions>] [<inputTitle>]">
+			<!-- Recursively import any imported palette -->
 			<$let
-				prefixed-scheme={{{ [<scheme>addprefix[@]] }}}
+				prefixed-palette-import={{{ [[palette-import@]addsuffix<scheme>] }}}
+				inputTitle={{{ [<inputTitle>get<prefixed-palette-import>has[title]] :else[<inputTitle>get[palette-import]] }}}
 			>
-				<$action-setmultiplefields $tiddler=<<outputTitle>> $indexes="[<inputTitle>indexes[]suffix<prefixed-scheme>removesuffix<prefixed-scheme>sort[]]" $values="[<inputTitle>indexes[]suffix<prefixed-scheme>sort[]] :map[<inputTitle>getindex<currentTiddler>]"/>
+				<%if [<inputTitle>has[title]] %>
+					<$transclude $variable="actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<outputTitle>> exclusions=<<exclusions>> scheme=<<scheme>> palette-type=<<palette-type>>/>
+				<%endif%>
 			</$let>
-		<%endif%
-		<!-- Copy the unsuffixed palette entries -->
-		<$action-setmultiplefields $tiddler=<<outputTitle>> $indexes="[<inputTitle>indexes[]!regexp[@]sort[]]" $values="[<inputTitle>indexes[]!regexp[@]sort[]] :map[<inputTitle>getindex<currentTiddler>]"/>
-		<!-- Copy the fields from the palette -->
-		<$action-setmultiplefields $tiddler=<<outputTitle>> $fields="[<inputTitle>fields[]sort[]] -title -tags -text" $values="[<inputTitle>fields[]sort[]] -title -tags -text :map[<inputTitle>get<currentTiddler>]"/>
-	</$set>
+			<!-- Copy the suffixed palette entries with the suffix stripped -->
+			<%if [<scheme>!is[blank]] %>
+				<$let
+					prefixed-scheme={{{ [<scheme>addprefix[@]] }}}
+				>
+					<$action-setmultiplefields $tiddler=<<outputTitle>> $indexes="[<inputTitle>indexes[]suffix<prefixed-scheme>removesuffix<prefixed-scheme>sort[]]" $values="[<inputTitle>indexes[]suffix<prefixed-scheme>sort[]] :map[<inputTitle>getindex<currentTiddler>]"/>
+				</$let>
+			<%endif%
+			<!-- Copy the unsuffixed palette entries -->
+			<$action-setmultiplefields $tiddler=<<outputTitle>> $indexes="[<inputTitle>indexes[]!regexp[@]sort[]]" $values="[<inputTitle>indexes[]!regexp[@]sort[]] :map[<inputTitle>getindex<currentTiddler>]"/>
+			<!-- Copy the fields from the palette -->
+			<$action-setmultiplefields $tiddler=<<outputTitle>> $fields="[<inputTitle>fields[]sort[]] -title -tags -text" $values="[<inputTitle>fields[]sort[]] -title -tags -text :map[<inputTitle>get<currentTiddler>]"/>
+		</$set>
+	<%endif%>
 <%endif%>
 \end actions-compile-palette-import
 
@@ -73,6 +75,7 @@ tags: $:/tags/Macro
 >
 	<!-- Compute the current scheme -->
 	<$let
+		palette-type={{{ [<inputTitle>get[palette-type]] :else[[classic]] }}}
 		color-scheme-filter={{{ [<inputTitle>get[color-scheme]] :else[[light]] }}}
 		scheme={{{ [subfilter<color-scheme-filter>] }}}
 	>
@@ -82,7 +85,7 @@ tags: $:/tags/Macro
 		<$action-deletetiddler $tiddler=<<outputTitle>>/>
 		<$action-setfield $tiddler=<<outputTitle>> type="application/x-tiddler-dictionary"/>
 		<!-- Consolidate the chain of palettes -->
-		<$transclude $variable="actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<tempPalette>> scheme=<<scheme>>/>
+		<$transclude $variable="actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<tempPalette>> scheme=<<scheme>> palette-type=<<palette-type>>/>
 		<!-- Save the current scheme in the output tiddler -->
 		<$action-setfield $tiddler=<<outputTitle>> $field="color-scheme" $value=<<scheme>>/>
 		<!-- Compile the temporary palette to the output palette -->
