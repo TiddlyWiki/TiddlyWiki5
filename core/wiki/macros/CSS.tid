@@ -41,6 +41,7 @@ tags: $:/tags/Macro
 \procedure actions-compile-palette-import(inputTitle,outputTitle,exclusions:"",scheme)
 <%if [enlist<exclusions>!match<inputTitle>count[]] :map[enlist<exclusions>count[]compare:number:eq<currentTiddler>] +[!match[]] %>
 	<$set name="exclusions" filter="[enlist<exclusions>] [<inputTitle>]">
+		<!-- Recursively import any imported palette -->
 		<$let
 			prefixed-palette-import={{{ [[palette-import@]addsuffix<scheme>] }}}
 			inputTitle={{{ [<inputTitle>get<prefixed-palette-import>has[title]] :else[<inputTitle>get[palette-import]] }}}
@@ -49,7 +50,17 @@ tags: $:/tags/Macro
 				<$transclude $variable="actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<outputTitle>> exclusions=<<exclusions>> scheme=<<scheme>>/>
 			<%endif%>
 		</$let>
-		<$action-setmultiplefields $tiddler=<<outputTitle>> $indexes="[<inputTitle>indexes[]sort[]]" $values="[<inputTitle>indexes[]sort[]] :map[<inputTitle>getindex<currentTiddler>]"/>
+		<!-- Copy the suffixed palette entries with the suffix stripped -->
+		<%if [<scheme>!is[blank]] %>
+			<$let
+				prefixed-scheme={{{ [<scheme>addprefix[@]] }}}
+			>
+				<$action-setmultiplefields $tiddler=<<outputTitle>> $indexes="[<inputTitle>indexes[]suffix<prefixed-scheme>removesuffix<prefixed-scheme>sort[]]" $values="[<inputTitle>indexes[]suffix<prefixed-scheme>sort[]] :map[<inputTitle>getindex<currentTiddler>]"/>
+			</$let>
+		<%endif%
+		<!-- Copy the unsuffixed palette entries -->
+		<$action-setmultiplefields $tiddler=<<outputTitle>> $indexes="[<inputTitle>indexes[]!regexp[@]sort[]]" $values="[<inputTitle>indexes[]!regexp[@]sort[]] :map[<inputTitle>getindex<currentTiddler>]"/>
+		<!-- Copy the fields from the palette -->
 		<$action-setmultiplefields $tiddler=<<outputTitle>> $fields="[<inputTitle>fields[]sort[]] -title -tags -text" $values="[<inputTitle>fields[]sort[]] -title -tags -text :map[<inputTitle>get<currentTiddler>]"/>
 	</$set>
 <%endif%>
@@ -100,7 +111,7 @@ tags: $:/tags/Macro
 \procedure tv-palette-name() $:/temp/palette-colours
 
 \function colour(name)
-[<tv-palette-name>get[colour-scheme]addprefix[@]addprefix<name>] :map[<tv-palette-name>getindex<currentTiddler>] +[!match[]] :else[<tv-palette-name>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]]
+[<tv-palette-name>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]]
 \end colour
 
 \function color(name)
