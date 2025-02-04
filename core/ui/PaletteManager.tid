@@ -2,6 +2,16 @@ title: $:/PaletteManager
 
 \define lingo-base() $:/language/ControlPanel/Palette/
 
+\procedure palette-link()
+<$tiddler tiddler={{$:/palette}}>
+	<$link to={{!!title}}>
+		<$view field="name" format="text">
+			<$view field="title" format="text"/>
+		</$view>
+	</$link>
+</$tiddler>
+\end palette-link
+
 <$transclude $tiddler="$:/snippets/paletteswitcher" thumbnails="yes"/>
 
 {{$:/snippets/palettetests}}
