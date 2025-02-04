@@ -1,9 +1,13 @@
 {
-  "name": "tiddlywiki",
-  "preferGlobal": "true",
-  "version": "5.3.7-prerelease",
+  "name": "@oeyoews/tiddlywiki-lite",
+  "private": false,
+  "version": "5.3.6--lite",
   "author": "Jeremy Ruston <jeremy@jermolene.com>",
   "description": "a non-linear personal web notebook",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "contributors": [
     {
       "name": "Jeremy Ruston",
@@ -37,5 +41,13 @@
     "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
-  }
+  },
+  "files": [
+    "boot",
+    "core",
+    "themes",
+    "languages",
+    "plugins",
+    "tiddlywiki.js"
+  ]
 }
