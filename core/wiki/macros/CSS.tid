@@ -39,7 +39,6 @@ tags: $:/tags/Macro
 \end actions-compile-palette-wikified
 
 \procedure actions-compile-palette-import(inputTitle,outputTitle,exclusions:"",scheme)
-<$action-log $message="Inside actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<outputTitle>> exclusions=<<exclusions>> scheme=<<scheme>>/>
 <%if [enlist<exclusions>!match<inputTitle>count[]] :map[enlist<exclusions>count[]compare:number:eq<currentTiddler>] +[!match[]] %>
 	<$set name="exclusions" filter="[enlist<exclusions>] [<inputTitle>]">
 		<$let
@@ -50,10 +49,7 @@ tags: $:/tags/Macro
 				<$transclude $variable="actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<outputTitle>> exclusions=<<exclusions>> scheme=<<scheme>>/>
 			<%endif%>
 		</$let>
-		<$action-log $message="Back in actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<outputTitle>> exclusions=<<exclusions>> scheme=<<scheme>>/>
-		<$action-log $tiddler=<<outputTitle>> $indexes={{{ [<inputTitle>indexes[]sort[]] +[join[,]] }}} $values={{{ [<inputTitle>indexes[]sort[]] :map[<inputTitle>getindex<currentTiddler>] +[join[,]] }}}/>
 		<$action-setmultiplefields $tiddler=<<outputTitle>> $indexes="[<inputTitle>indexes[]sort[]]" $values="[<inputTitle>indexes[]sort[]] :map[<inputTitle>getindex<currentTiddler>]"/>
-		<$action-log $tiddler=<<outputTitle>> $fields={{{ [<inputTitle>fields[]sort[]] -title -tags -text +[join[,]] }}} $values={{{ [<inputTitle>fields[]sort[]] -title -tags -text :map[<inputTitle>get<currentTiddler>] +[join[,]] }}}/>
 		<$action-setmultiplefields $tiddler=<<outputTitle>> $fields="[<inputTitle>fields[]sort[]] -title -tags -text" $values="[<inputTitle>fields[]sort[]] -title -tags -text :map[<inputTitle>get<currentTiddler>]"/>
 	</$set>
 <%endif%>
