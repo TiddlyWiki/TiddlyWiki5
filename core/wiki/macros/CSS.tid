@@ -83,7 +83,7 @@ tags: $:/tags/Macro
 		<$action-setfield $tiddler=<<outputTitle>> type="application/x-tiddler-dictionary"/>
 		<!-- Consolidate the chain of palettes -->
 		<$transclude $variable="actions-compile-palette-import" inputTitle=<<inputTitle>> outputTitle=<<tempPalette>> scheme=<<scheme>>/>
-		<!-- Clear the output palette and assign the scheme -->
+		<!-- Save the current scheme in the output tiddler -->
 		<$action-setfield $tiddler=<<outputTitle>> $field="color-scheme" $value=<<scheme>>/>
 		<!-- Compile the temporary palette to the output palette -->
 		<%if [<inputTitle>get[palette-type]match[modern]] %>
