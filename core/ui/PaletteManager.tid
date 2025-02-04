@@ -17,12 +17,12 @@ title: $:/PaletteManager
 {{$:/snippets/palettetests}}
 
 <$let
-	paletteEditor={{{ [{$:/palette}get[editor]] :else[{$:/palette}get[palette-import]!match[]get[editor]] }}}
+	paletteSettings={{{ [{$:/palette}get[settings]] :else[{$:/palette}get[palette-import]!match[]get[settings]] }}}
 >
-	<%if [<paletteEditor>!match[]] %>
+	<%if [<paletteSettings>!match[]] %>
 		<div>
-			<<lingo CustomEditor/Prompt>>
-			<$transclude $tiddler=<<paletteEditor>> $mode="block"/>
+			<<lingo CustomSettings/Prompt>>
+			<$transclude $tiddler=<<paletteSettings>> $mode="block"/>
 		</div>
 	<%endif%>
 </$let>

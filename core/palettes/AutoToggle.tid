@@ -5,6 +5,6 @@ tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 color-scheme: [{$:/info/browser/darkmode}match[no]then[light]else[dark]]
 palette-type: classic
-editor: $:/palette-editors/AutoToggle
+settings: $:/palettes/AutoToggle/Settings
 palette-import@light: $:/palettes/FlexokiLight
 palette-import@dark: $:/palettes/FlexokiDark

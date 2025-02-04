@@ -5,7 +5,7 @@ tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 color-scheme: light
 palette-type: modern
-editor: $:/palette-editors/TwentyTwenties
+settings: $:/palettes/TwentyTwenties/Settings
 
 # Background and foreground colours, which are interpolated as required
 base-paper: #FFFCF0

@@ -1,4 +1,4 @@
-title: $:/palette-editors/TwentyTwenties
+title: $:/palettes/TwentyTwenties/Settings
 
 \procedure entry(name,description)
 <$text text=<<description>>/>: <$edit-text tiddler={{$:/palette}} index=<<name>> type="color" tag="input" default={{{ [function[colour],<name>] }}}/>
