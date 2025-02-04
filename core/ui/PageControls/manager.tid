@@ -5,6 +5,7 @@ description: {{$:/language/Buttons/Manager/Hint}}
 
 \whitespace trim
 \procedure manager-button(class)
+\whitespace trim
 <$button to="$:/Manager" tooltip={{$:/language/Buttons/Manager/Hint}} aria-label={{$:/language/Buttons/Manager/Caption}} class=`$(tv-config-toolbar-class)$ $(class)$`>
 <%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/list}}
