@@ -1,35 +1,31 @@
 title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
-\procedure actions-compile-palette-filtered(consolidatedPalette,outputPalette,scheme)
+\procedure actions-compile-palette-filtered(consolidatedPalette,outputPalette)
 <!-- Note the join, needed to cope with palette entries containing spaces -->
-\function colour(name) [<name>addsuffix[@]addsuffix<scheme>] :map[<consolidatedPalette>getindex<currentTiddler>] +[!match[]] :else[<consolidatedPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>addsuffix[@]addsuffix<scheme>get[text]] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter<currentTiddler>join[ ]]
+\function colour(name) [<consolidatedPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter<currentTiddler>join[ ]]
 \function color(name) [function[colour],<name>]
 <!-- Make the colour function use the input palette -->
 <$list filter="[<consolidatedPalette>indexes[]sort[]]" variable="colour-name">
-	<$let filter-text={{{ [<colour-name>addsuffix[@]addsuffix<scheme>] :map[<consolidatedPalette>getindex<currentTiddler>] +[!match[]] :else[<consolidatedPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>addsuffix[@]addsuffix<scheme>get[text]] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] }}}>
+	<$let filter-text={{{ [<consolidatedPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] }}}>
 		<!-- Note the join, needed to cope with palette entries containing spaces -->
 		<$action-setfield $tiddler=<<outputPalette>> $index=<<colour-name>> $value={{{ [subfilter<filter-text>join[ ]] }}}/>
 	</$let>
 </$list>
 \end actions-compile-palette-filtered
 
-\procedure actions-compile-palette-wikified(consolidatedPalette,outputPalette,scheme)
+\procedure actions-compile-palette-wikified(consolidatedPalette,outputPalette)
 <!-- Define our own deeply backwards compatible local versions of the colour macro -->
 \define colour(name)
 \whitespace trim
-<$transclude tiddler=<<consolidatedPalette>> index="$name$@$(scheme)$">
-	<$transclude tiddler=<<consolidatedPalette>> index="$name$">
-		<$transclude tiddler="$:/config/DefaultColourMappings/$name$@$(scheme)$">
-			<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
-		</$transclude>
-	</$transclude>
+<$transclude tiddler=<<consolidatedPalette>> index="$name$">
+	<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
 </$transclude>
 \end colour
 \define color(name) <<colour $name$>>
 <$list filter="[<consolidatedPalette>indexes[]sort[]]" variable="colour-name" $debug="yes">
 	<$let
-		palette-entry-text={{{ [<colour-name>addsuffix[@]addsuffix<scheme>] :map[<consolidatedPalette>getindex<currentTiddler>] +[!match[]] :else[<consolidatedPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] }}}
+		palette-entry-text={{{ [<consolidatedPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] }}}
 	>
 		<$wikify name="colour-value" text=<<palette-entry-text>> mode="inline">
 			<$action-setfield $tiddler=<<outputPalette>> $index=<<colour-name>> $value=<<colour-value>>/>
@@ -91,9 +87,9 @@ tags: $:/tags/Macro
 		<$action-setfield $tiddler=<<outputPalette>> $field="color-scheme" $value=<<scheme>>/>
 		<!-- Compile the temporary palette to the output palette -->
 		<%if [<inputPalette>get[palette-type]match[modern]] %>
-			<$transclude $variable="actions-compile-palette-filtered" consolidatedPalette=<<consolidatedPalette>> outputPalette=<<outputPalette>> scheme=<<scheme>>/>
+			<$transclude $variable="actions-compile-palette-filtered" consolidatedPalette=<<consolidatedPalette>> outputPalette=<<outputPalette>>/>
 		<%else%>
-			<$transclude $variable="actions-compile-palette-wikified" consolidatedPalette=<<consolidatedPalette>> outputPalette=<<outputPalette>> scheme=<<scheme>>/>
+			<$transclude $variable="actions-compile-palette-wikified" consolidatedPalette=<<consolidatedPalette>> outputPalette=<<outputPalette>>/>
 		<%endif%>
 		<!-- Remove the temporary consolidated palette -->
 		<!-- <$action-deletetiddler $tiddler=<<consolidatedPalette>>/> -->
