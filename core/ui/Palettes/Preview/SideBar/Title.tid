@@ -2,6 +2,6 @@ title: $:/core/ui/Palettes/Preview/Sidebar/Title
 tags: $:/tags/Preview/SideBar
 
 \whitespace trim
-<$colour.div class="tc-palette-preview-thumbnail-sidebar-title" styleName="color" styleColour="site-title-foreground">
+<div class="tc-palette-preview-thumbnail-sidebar-title" style.color=<<colour site-title-foreground>>>
 	~TiddlyWiki
-</$colour.div>
+</div>

@@ -1,19 +1,19 @@
 title: $:/core/ui/Palettes/Preview/Alert
-tags: $:/tags/Preview/PageOptional
+tags: $:/tags/Preview/Page
 
 \whitespace trim
-<$colour.div class="tc-palette-preview-thumbnail-alert" styleName="background-color" styleColour="alert-background">
-	<$colour.div class="tc-palette-preview-thumbnail-alert-border" styleName="border-color" styleColour="alert-border">
-		<$colour.div styleName="color" styleColour="foreground">
-			<$colour.div class="tc-palette-preview-thumbnail-alert-subtitle" styleName="color" styleColour="alert-muted-foreground">
+<div class="tc-palette-preview-thumbnail-alert" style.background-color=<<colour alert-background>>>
+	<div class="tc-palette-preview-thumbnail-alert-border" style.border-color=<<colour alert-border>>>
+		<div style.color=<<colour foreground>>>
+			<div class="tc-palette-preview-thumbnail-alert-subtitle" style.color=<<colour alert-muted-foreground>>>
 				Lorem Ipsum
-				<$colour.div class="tc-palette-preview-thumbnail-alert-highlight" styleName="color" styleColour="alert-highlight">
+				<div class="tc-palette-preview-thumbnail-alert-highlight" style.color=<<colour alert-highlight>>>
 					(Count: 1)
-				</$colour.div>
-			</$colour.div>
-			<$colour.div class="tc-palette-preview-thumbnail-alert-body">
+				</div>
+			</div>
+			<div class="tc-palette-preview-thumbnail-alert-body">
 				Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do Eiusmod Tempor Incididunt.
-			</$colour.div>
-		</$colour.div>
-	</$colour.div>
-</$colour.div>
+			</div>
+		</div>
+	</div>
+</div>

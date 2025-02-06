@@ -101,6 +101,33 @@ tags: $:/tags/Macro
 ]]
 \end colour-function-suffix
 
+\widget $palette.preview(paletteTitle)
+	\whitespace trim
+	\function colour-inner-get-imported-palette(name,paletteTitle)
+	[[palette-import@]addsuffix<scheme>] :map[<paletteTitle>get<currentTiddler>has[title]] +[!match[]] :else[<paletteTitle>get[palette-import]has[title]] :map[function[colour-inner-get-palette-entry],<name>,<currentTiddler>] +[!match[]] 
+	\end colour-inner-get-imported-palette
+
+	\function colour-inner-get-palette-entry(name,paletteTitle)
+	[<name>addprefix[@]addprefix<scheme>] :map[<paletteTitle>getindex<currentTiddler>] +[!match[]] :else[<paletteTitle>getindex<name>] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :else[function[colour-inner-get-imported-palette],<name>,<paletteTitle>]
+	\end colour-inner-get-palette-entry
+
+	<!-- Note the join, needed to cope with palette entries containing spaces -->
+	\function colour(name)
+	[function[colour-inner-get-palette-entry],<name>,<paletteTitle>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter<currentTiddler>join[ ]]
+	\end colour
+
+	\function color(name)
+	[function[colour],<name>]
+	\end color
+
+	<$let
+		color-scheme-filter={{{ [<paletteTitle>get[color-scheme]] :else[[light]] }}}
+		scheme={{{ [subfilter<color-scheme-filter>] }}}
+	>
+		<$slot $name="ts-raw"/>
+	</$let>
+\end $palette.preview
+
 \function tf.colour-inner-transform-classic-palette-entry(colour-result)
 [<colour-result>prefix[<<colour ]suffix[>>]removeprefix[<<colour ]removesuffix[>>]addprefix<colour-function-prefix>addsuffix<colour-function-suffix>] :else[<colour-result>]
 \end tf.colour-inner-transform-classic-palette-entry

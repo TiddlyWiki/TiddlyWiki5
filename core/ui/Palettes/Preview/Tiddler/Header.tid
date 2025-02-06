@@ -2,13 +2,13 @@ title: $:/core/ui/Palettes/Preview/Tiddler/Header
 tags: $:/tags/Preview/Tiddler
 
 \whitespace trim
-<$colour.div class="tc-palette-preview-thumbnail-tiddler-header">
-<$colour.div class="tc-palette-preview-thumbnail-tiddler-title" styleName="color" styleColour="tiddler-title-foreground">
-	<$text text=<<title>>/>
-</$colour.div>
-<$colour.div class="tc-palette-preview-thumbnail-tiddler-toolbar" styleName="fill" styleColour="tiddler-controls-foreground">
-	{{$:/core/images/down-arrow}}
-	{{$:/core/images/edit-button}}
-	{{$:/core/images/close-button}}
-</$colour.div>
-</$colour.div>
+<div class="tc-palette-preview-thumbnail-tiddler-header">
+	<div class="tc-palette-preview-thumbnail-tiddler-title" style.color=<<colour tiddler-title-foreground>>>
+		<$text text=<<title>>/>
+	</div>
+	<div class="tc-palette-preview-thumbnail-tiddler-toolbar" style.fill=<<colour tiddler-controls-foreground>>>
+		{{$:/core/images/down-arrow}}
+		{{$:/core/images/edit-button}}
+		{{$:/core/images/close-button}}
+	</div>
+</div>

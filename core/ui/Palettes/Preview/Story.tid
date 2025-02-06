@@ -2,8 +2,8 @@ title: $:/core/ui/Palettes/Preview/Story
 tags: $:/tags/Preview/Page
 
 \whitespace trim
-<$colour.div class="tc-palette-preview-thumbnail-story">
+<div class="tc-palette-preview-thumbnail-story">
 	<$list filter="HelloThere GettingStarted" variable="title">
 		<<palette-preview-component-list "$:/tags/Preview/Story">>
 	</$list>
-</$colour.div>
+</div>

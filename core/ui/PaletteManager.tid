@@ -2,6 +2,7 @@ title: $:/PaletteManager
 
 \define lingo-base() $:/language/ControlPanel/Palette/
 
+<!-- Used by the language string CustomSettings/Prompt -->
 \procedure palette-link()
 <$tiddler tiddler={{$:/palette}}>
 	<$link to={{!!title}}>

@@ -2,10 +2,10 @@ title: $:/core/ui/Palettes/Preview/Notification
 tags: $:/tags/Preview/PageOptional
 
 \whitespace trim
-<$colour.div class="tc-palette-preview-thumbnail-notification" styleName="background-color" styleColour="notification-background">
-	<$colour.div class="tc-palette-preview-thumbnail-notification-border" styleName="border-color" styleColour="notification-border">
-		<$colour.div class="tc-palette-preview-thumbnail-notification-body" styleName="color" styleColour="foreground">
+<div class="tc-palette-preview-thumbnail-notification" style.background-color=<<colour notification-background>>>
+	<div class="tc-palette-preview-thumbnail-notification-border" style.border-color=<<colour notification-border>>>
+		<div class="tc-palette-preview-thumbnail-notification-body" style.color=<<colour foreground>>>
 			Lorem Ipsum Dolor Sit Amet Consectetur
-		</$colour.div>
-	</$colour.div>
-</$colour.div>
+		</div>
+	</div>
+</div>
