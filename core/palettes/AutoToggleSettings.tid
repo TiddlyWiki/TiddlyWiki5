@@ -2,7 +2,7 @@ title: $:/palettes/AutoToggle/Settings
 
 \procedure set-imported-palette(field)
 <$select field=<<field>>>
-	<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]] :filter[{!!palette-type}!match[]else[classic]match<palette-type>] -[<currentTiddler>]">
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]] -[<currentTiddler>]">
 		<option value=<<currentTiddler>>><$view field="name"><$view field="title"/></$view></option>
 	</$list>
 </$select>
@@ -12,17 +12,8 @@ This palette can be used to automatically switch between two palettes based on t
 
 <$tiddler tiddler={{$:/palette}}>
 
-Palette type: <$select field="palette-type" default="classic">
-	<option value="classic">Classic</option>
-	<option value="modern">Modern</option>
-</$select>
-
-<$let palette-type={{!!palette-type}}>
-
 Light palette: <<set-imported-palette field:"palette-import@light">>
 
 Dark palette: <<set-imported-palette field:"palette-import@dark">>
-
-</$let>
 
 </$tiddler>
