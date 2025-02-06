@@ -17,7 +17,7 @@ title: $:/PaletteManager
 {{$:/snippets/palettetests}}
 
 <$let
-	paletteSettings={{{ [{$:/palette}get[settings]] :else[{$:/palette}get[palette-import]!match[]get[settings]] }}}
+	paletteSettings={{{ [[$:/temp/palette-consolidated]get[settings]] }}}
 >
 	<%if [<paletteSettings>!match[]] %>
 		<div>
