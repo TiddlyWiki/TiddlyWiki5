@@ -2943,6 +2943,39 @@ input.tc-palette-manager-colour-input {
 	line-height: 1.2;
 }
 
+.tc-palette-preview-thumbnail-tab-buttons {
+	font-size: 0.85em;
+	padding-top: 2em;
+}
+
+.tc-palette-preview-thumbnail-tab-button {
+	display: inline-block;
+	padding: 1px 1px 1px 1px;
+	margin-right: 0.3em;
+	font-weight: normal;
+	border: none;
+	background: inherit;
+	border-left-width: 0.5px;
+	border-left-style: solid;
+	border-top-width: 0.5px;
+	border-top-style: solid;
+	border-right-width: 0.5px;
+	border-right-style: solid;
+	border-top-left-radius: 1px;
+	border-top-right-radius: 1px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.tc-palette-preview-thumbnail-tab-divider {
+	border-top-width: 0.5px;
+	border-top-style: solid;
+}
+
+.tc-palette-preview-thumbnail-tab-content {
+	margin-top: 3px;
+}
+
 .tc-palette-preview-thumbnail-alert {
 	position: absolute;
 	top: 3px;

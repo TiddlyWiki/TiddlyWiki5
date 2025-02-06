@@ -9,11 +9,34 @@ tags: $:/tags/Preview/Tiddler
 </span>
 \end link
 
+\procedure tab-button(text)
+<span class="tc-palette-preview-thumbnail-tab-button" style.border-color=<<colour tab-border>> style.color=<<colour tab-foreground>> style.background-color=<<colour tab-background>>>
+	<$text text=<<text>>/>
+</span>
+\end tab-button
+
 <div class="tc-palette-preview-thumbnail-tiddler-body" style.color=<<colour foreground>>>
 	<%if [<title>match[HelloThere]] %>
 		Lorem ipsum dolor sit amet, <<link "consectetur adipiscing elit">>. Cras non arcu ultricies, egestas odio tempus, vestibulum ipsum. Praesent diam lorem, elementum in venenatis eget, tincidunt quis lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam efficitur velit tortor, sit amet tristique felis viverra sit amet. <<link "Nullam posuere facilisis purus sed">> consectetur. Integer vel elit euismod, posuere ligula et, dictum tellus. Donec in odio diam. Sed metus magna, placerat at ligula et, imperdiet sagittis ex.
 	<%else%>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
+		<div class="tc-palette-preview-thumbnail-tab-set">
+			<div class="tc-palette-preview-thumbnail-tab-buttons">
+				<span class="tc-palette-preview-thumbnail-tab-button" style.border-color=<<colour tab-border-selected>> style.color=<<colour tab-foreground-selected>> style.background-color=<<colour tab-background-selected>>>
+					Sed
+				</span>
+				<<tab-button Metus>>
+				<<tab-button Magna>>
+				<<tab-button Placerat>>
+				<<tab-button Ligula>>
+				<<tab-button Imperdiet>>
+			</div>
+			<div class="tc-palette-preview-thumbnail-tab-divider" style.border-color=<<colour tab-divider>>>
+			</div>
+			<div class="tc-palette-preview-thumbnail-tab-content">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non arcu ultricies, egestas odio tempus, vestibulum ipsum. Praesent diam lorem, elementum in venenatis eget, tincidunt quis lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+			</div>
+		</div>
 	<%endif%>
 </div>
+
