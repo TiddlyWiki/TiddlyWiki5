@@ -58,6 +58,10 @@ tags: $:/tags/Macro
 		<!-- Clear the output palette that stores the plain CSS values of palette entries -->
 		<$action-deletetiddler $tiddler=<<outputPalette>>/>
 		<$action-setfield $tiddler=<<outputPalette>> type="application/x-tiddler-dictionary"/>
+		<!-- Import the background palettes -->
+		<$list filter="[all[shadows+tiddlers]tag[$:/tags/BackgroundPalette]sort[]]" variable="palette-name">
+			<$transclude $variable="actions-compile-palette-import" inputPalette=<<palette-name>> outputPalette=<<consolidatedPalette>> scheme=<<scheme>>/>
+		</$list>
 		<!-- Consolidate the chain of palettes -->
 		<$transclude $variable="actions-compile-palette-import" inputPalette=<<inputPalette>> outputPalette=<<consolidatedPalette>> scheme=<<scheme>>/>
 		<!-- Save the current scheme in the output tiddler -->

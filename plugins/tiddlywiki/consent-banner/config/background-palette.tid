@@ -1,4 +1,6 @@
-title: $:/config/DefaultColourMappings/
+title: $:/plugins/tiddlywiki/consent-banner/background-palette
+type: application/x-tiddler-dictionary
+tags: $:/tags/BackgroundPalette
 
 consent-banner-backdrop-background: rgba(0,0,0,0.2)
 consent-banner-background: #009677
