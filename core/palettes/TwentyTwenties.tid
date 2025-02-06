@@ -4,7 +4,6 @@ description: Modern and flexible
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 color-scheme: light
-palette-type: modern
 settings: $:/palettes/TwentyTwenties/Settings
 
 # Background and foreground colours, which are interpolated as required

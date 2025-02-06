@@ -3,40 +3,19 @@ tags: $:/tags/Macro
 
 \procedure actions-compile-palette-filtered(consolidatedPalette,outputPalette)
 <!-- Note the join, needed to cope with palette entries containing spaces -->
-\function colour(name) [<consolidatedPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter<currentTiddler>join[ ]]
+\function colour(name) [<consolidatedPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :map[subfilter<currentTiddler>join[ ]]
 \function color(name) [function[colour],<name>]
 <!-- Make the colour function use the input palette -->
 <$list filter="[<consolidatedPalette>indexes[]sort[]]" variable="colour-name">
-	<$let filter-text={{{ [<consolidatedPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] }}}>
+	<$let filter-text={{{ [<consolidatedPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] }}}>
 		<!-- Note the join, needed to cope with palette entries containing spaces -->
 		<$action-setfield $tiddler=<<outputPalette>> $index=<<colour-name>> $value={{{ [subfilter<filter-text>join[ ]] }}}/>
 	</$let>
 </$list>
 \end actions-compile-palette-filtered
 
-\procedure actions-compile-palette-wikified(consolidatedPalette,outputPalette)
-<!-- Define our own deeply backwards compatible local versions of the colour macro -->
-\define colour(name)
-\whitespace trim
-<$transclude tiddler=<<consolidatedPalette>> index="$name$">
-	<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
-</$transclude>
-\end colour
-\define color(name) <<colour $name$>>
-<$list filter="[<consolidatedPalette>indexes[]sort[]]" variable="colour-name" $debug="yes">
-	<$let
-		palette-entry-text={{{ [<consolidatedPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] }}}
-	>
-		<$wikify name="colour-value" text=<<palette-entry-text>> mode="inline">
-			<$action-setfield $tiddler=<<outputPalette>> $index=<<colour-name>> $value=<<colour-value>>/>
-		</$wikify>
-	</$let>
-</$list>
-\end actions-compile-palette-wikified
-
-\procedure actions-compile-palette-import(inputPalette,outputPalette,exclusions:"",scheme,palette-type)
+\procedure actions-compile-palette-import(inputPalette,outputPalette,exclusions:"",scheme)
 <%if [enlist<exclusions>!match<inputPalette>count[]] :map[enlist<exclusions>count[]compare:number:eq<currentTiddler>] +[!match[]] %>
-	<%if [<inputPalette>get[palette-type]!match[]else[classic]match<palette-type>] %>
 		<$set name="exclusions" filter="[enlist<exclusions>] [<inputPalette>]">
 			<!-- Recursively import any imported palette -->
 			<$let
@@ -44,7 +23,7 @@ tags: $:/tags/Macro
 				inputPalette={{{ [<inputPalette>get<prefixed-palette-import>has[title]] :else[<inputPalette>get[palette-import]] }}}
 			>
 				<%if [<inputPalette>has[title]] %>
-					<$transclude $variable="actions-compile-palette-import" inputPalette=<<inputPalette>> outputPalette=<<outputPalette>> exclusions=<<exclusions>> scheme=<<scheme>> palette-type=<<palette-type>>/>
+					<$transclude $variable="actions-compile-palette-import" inputPalette=<<inputPalette>> outputPalette=<<outputPalette>> exclusions=<<exclusions>> scheme=<<scheme>>/>
 				<%endif%>
 			</$let>
 			<!-- Copy the suffixed palette entries with the suffix stripped -->
@@ -60,7 +39,6 @@ tags: $:/tags/Macro
 			<!-- Copy the fields from the palette -->
 			<$action-setmultiplefields $tiddler=<<outputPalette>> $fields="[<inputPalette>fields[]sort[]] -title -tags -text" $values="[<inputPalette>fields[]sort[]] -title -tags -text :map[<inputPalette>get<currentTiddler>]"/>
 		</$set>
-	<%endif%>
 <%endif%>
 \end actions-compile-palette-import
 
@@ -71,7 +49,6 @@ tags: $:/tags/Macro
 >
 	<!-- Compute the current scheme -->
 	<$let
-		palette-type={{{ [<inputPalette>get[palette-type]] :else[[classic]] }}}
 		color-scheme-filter={{{ [<inputPalette>get[color-scheme]] :else[[light]] }}}
 		scheme={{{ [subfilter<color-scheme-filter>] }}}
 	>
@@ -82,17 +59,11 @@ tags: $:/tags/Macro
 		<$action-deletetiddler $tiddler=<<outputPalette>>/>
 		<$action-setfield $tiddler=<<outputPalette>> type="application/x-tiddler-dictionary"/>
 		<!-- Consolidate the chain of palettes -->
-		<$transclude $variable="actions-compile-palette-import" inputPalette=<<inputPalette>> outputPalette=<<consolidatedPalette>> scheme=<<scheme>> palette-type=<<palette-type>>/>
+		<$transclude $variable="actions-compile-palette-import" inputPalette=<<inputPalette>> outputPalette=<<consolidatedPalette>> scheme=<<scheme>>/>
 		<!-- Save the current scheme in the output tiddler -->
 		<$action-setfield $tiddler=<<outputPalette>> $field="color-scheme" $value=<<scheme>>/>
 		<!-- Compile the temporary palette to the output palette -->
-		<%if [<inputPalette>get[palette-type]match[modern]] %>
-			<$transclude $variable="actions-compile-palette-filtered" consolidatedPalette=<<consolidatedPalette>> outputPalette=<<outputPalette>>/>
-		<%else%>
-			<$transclude $variable="actions-compile-palette-wikified" consolidatedPalette=<<consolidatedPalette>> outputPalette=<<outputPalette>>/>
-		<%endif%>
-		<!-- Remove the temporary consolidated palette -->
-		<!-- <$action-deletetiddler $tiddler=<<consolidatedPalette>>/> -->
+		<$transclude $variable="actions-compile-palette-filtered" consolidatedPalette=<<consolidatedPalette>> outputPalette=<<outputPalette>>/>
 	</$let>
 </$let>
 \end actions-compile-palette
@@ -117,6 +88,18 @@ tags: $:/tags/Macro
 \function color(name)
 [function[colour],<name>]
 \end color
+
+\procedure colour-function-prefix()
+[function[colour],[
+\end colour-function-prefix
+
+\procedure colour-function-suffix()
+]]
+\end colour-function-suffix
+
+\function tf.colour-inner-transform-classic-palette-entry(colour-result)
+[<colour-result>prefix[<<colour ]suffix[>>]removeprefix[<<colour ]removesuffix[>>]addprefix<colour-function-prefix>addsuffix<colour-function-suffix>] :else[<colour-result>]
+\end tf.colour-inner-transform-classic-palette-entry
 
 \function tf.check-colour-contrast-subfunction()
 [function[colour],<paletteEntryA>] [function[colour],<paletteEntryB>] +[colour-contrast:DeltaPhi[]fixed[3]]

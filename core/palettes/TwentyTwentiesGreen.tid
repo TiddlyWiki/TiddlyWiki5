@@ -4,7 +4,6 @@ description: Modern and flexible, Greenish
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 color-scheme: light
-palette-type: modern
 palette-import: $:/palettes/TwentyTwenties
 
 base-paper: rgb(188, 255, 161)

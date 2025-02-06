@@ -4,7 +4,6 @@ description: Modern and flexible, Darkish
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 color-scheme: dark
-palette-type: modern
 palette-import: $:/palettes/TwentyTwenties
 
 base-paper: #111122

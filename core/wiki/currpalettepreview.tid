@@ -9,12 +9,12 @@ title: $:/snippets/currpalettepreview
 \end colour-inner-get-imported-palette
 
 \function colour-inner-get-palette-entry(name,tv-palette-name)
-[<name>addprefix[@]addprefix<scheme>] :map[<tv-palette-name>getindex<currentTiddler>] +[!match[]] :else[<tv-palette-name>getindex<name>] :else[function[colour-inner-get-imported-palette],<name>,<tv-palette-name>]
+[<name>addprefix[@]addprefix<scheme>] :map[<tv-palette-name>getindex<currentTiddler>] +[!match[]] :else[<tv-palette-name>getindex<name>] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :else[function[colour-inner-get-imported-palette],<name>,<tv-palette-name>]
 \end colour-inner-get-palette-entry
 
 <!-- Note the join, needed to cope with palette entries containing spaces -->
 \function colour(name)
-[function[colour-inner-get-palette-entry],<name>,<tv-palette-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>addsuffix[@]addsuffix<scheme>get[text]] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter<currentTiddler>join[ ]]
+[function[colour-inner-get-palette-entry],<name>,<tv-palette-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter<currentTiddler>join[ ]]
 \end colour
 
 \function color(name)
@@ -30,42 +30,9 @@ title: $:/snippets/currpalettepreview
 </$let>
 \end colour-div-filtered
 
-\procedure colour-div-wikified(class,styleName,styleColour)
-<!-- Define our own deeply backwards compatible local versions of the colour macro -->
-\define colour(name)
-\whitespace trim
-<$transclude tiddler=<<tv-palette-name>> index="$name$@$(scheme)$">
-	<$transclude tiddler=<<tv-palette-name>> index="$name$">
-		<$let
-			prefixed-palette-import={{{ [[palette-import@]addsuffix<scheme>] }}}
-			tv-palette-name={{{ [<tv-palette-name>get<prefixed-palette-import>has[title]] :else[<tv-palette-name>get[palette-import]] }}}
-		>
-			<%if [<tv-palette-name>has[title]] %>
-				<$transclude $variable="colour" name=<<__name__>>/>
-			<%else%>
-				<$transclude tiddler="$:/config/DefaultColourMappings/$name$@$(scheme)$">
-					<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
-				</$transclude>
-			<%endif%>
-		</$let>
-	</$transclude>
-</$transclude>
-\end colour
-\define color(name) <<colour $name$>>
-<$wikify name="colour-result" text={{{ [[<<colour ]addsuffix<styleColour>addsuffix[>>]] }}} mode="inline">
-	<div class=<<class>> style={{{ [<styleName>addsuffix[:]addsuffix<colour-result>addsuffix[;]] }}}>
-		<$slot $name="ts-raw" $depth="2"/>
-	</div>
-</$wikify>
-\end colour-div-wikified
-
 \widget $colour.div(class,styleName,styleColour)
 <%if [<styleName>!match[]] %>
-	<%if [<tv-palette-name>get[palette-type]match[modern]] %>
-		<$transclude $variable="colour-div-filtered" class=<<class>> styleName=<<styleName>> styleColour=<<styleColour>>/>
-	<%else%>
-		<$transclude $variable="colour-div-wikified" class=<<class>> styleName=<<styleName>> styleColour=<<styleColour>>/>
-	<%endif%>
+	<$transclude $variable="colour-div-filtered" class=<<class>> styleName=<<styleName>> styleColour=<<styleColour>>/>
 <%else%>
 	<div class=<<class>>>
 		<$slot $name="ts-raw"/>
