@@ -3,7 +3,7 @@ name: AutoToggle
 description: Automatically switch between dark and light modes
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
-color-scheme: [{$:/info/browser/darkmode}match[no]then[light]else[dark]]
+color-scheme: [{$:/info/browser/darkmode}!match[yes]then[light]else[dark]]
 settings: $:/palettes/AutoToggle/Settings
 palette-import@light: $:/palettes/FlexokiLight
 palette-import@dark: $:/palettes/FlexokiDark
