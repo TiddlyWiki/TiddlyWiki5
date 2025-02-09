@@ -20,7 +20,7 @@ The <<.op colour-set-oklch>> operator is used to manipulate colour values in the
 
 The advantage of the OKLCH space is that it is perceptually uniform, meaning that equal changes in the numbers correspond to equal changes in the perceived colour.
 
-For example, this filter expression will alter the lightness of the colour current page background colour to 0.1:
+For example, this filter expression will alter the lightness of the current page background colour to 0.1:
 
 ```
 [function[colour],[page-background]colour-set-oklch:l[0.1]]
