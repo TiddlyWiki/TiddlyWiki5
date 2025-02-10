@@ -28,7 +28,7 @@ name: tiddlywiki
 </$wikify>
 \end
 \define set-selection-background-colours(palette)
-<$macrocall $name="set-selection-background-css" colour=<<colour foreground>> colourA=<<colour selection-background>> colourB=<<colour selection-background>> tiddlerEditorBackground=<<colour tiddler-editor-background>>/>
+<$macrocall $name="set-selection-background-css" colour=<<colour foreground>> colourA={{{ [function[colour],[selection-background]!match[]else[#073642]] }}} colourB={{{ [function[colour],[selection-background]!match[]else[#eee8d5]] }}} tiddlerEditorBackground=<<colour tiddler-editor-background>>/>
 \end
 \define set-selection-background()
 <$macrocall $name="set-selection-background-colours" palette={{$:/palette}}/>
