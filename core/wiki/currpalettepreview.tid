@@ -2,11 +2,7 @@ title: $:/snippets/currpalettepreview
 
 \whitespace trim
 
-\procedure palette-preview-component-list(tag)
-<$list filter="[all[shadows+tiddlers]tag<tag>!has[draft.of]]" variable="componentTitle">
-	<$transclude $tiddler=<<componentTitle>> title=<<title>>/>
-</$list>
-\end palette-preview-component-list
+\import [all[shadows+tiddlers]tag[$:/tags/Preview/Helpers]!is[draft]sort[title]]
 
 <!-- currentTiddler is the palette to use -->
 <$palette.preview paletteTitle=<<currentTiddler>>>

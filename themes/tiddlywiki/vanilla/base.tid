@@ -2944,9 +2944,14 @@ input.tc-palette-manager-colour-input {
 }
 
 .tc-palette-preview-thumbnail-tab-buttons {
-	font-size: 0.85em;
+	font-size: 0.55em;
 	padding-top: 2em;
 }
+
+.tc-palette-preview-thumbnail-sidebar .tc-palette-preview-thumbnail-tab-buttons {
+	font-size: 0.07em;
+}
+
 
 .tc-palette-preview-thumbnail-tab-button {
 	display: inline-block;
@@ -2970,10 +2975,12 @@ input.tc-palette-manager-colour-input {
 .tc-palette-preview-thumbnail-tab-divider {
 	border-top-width: 0.5px;
 	border-top-style: solid;
+	margin-bottom: 3px;
 }
 
-.tc-palette-preview-thumbnail-tab-content {
-	margin-top: 3px;
+.tc-palette-preview-thumbnail-sidebar-list {
+	font-size: 0.10em;
+	line-height: 1.5;
 }
 
 .tc-palette-preview-thumbnail-alert {
