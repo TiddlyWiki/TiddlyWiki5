@@ -160,8 +160,8 @@ tiddler-info-border: [function[colour],[]]
 tiddler-info-tab-background: [function[colour],[]]
 tiddler-link-background: [function[colour],[background]]
 tiddler-link-foreground: [function[colour],[primary]]
-tiddler-subtitle-foreground: [function[colour],[]]
-tiddler-title-foreground: [function[colour],[]]
+tiddler-subtitle-foreground: [tf.interpolate-colours[background],[foreground],[0.6]]
+tiddler-title-foreground: [tf.interpolate-colours[background],[foreground],[0.9]]
 toolbar-new-button:
 toolbar-options-button:
 toolbar-save-button:
