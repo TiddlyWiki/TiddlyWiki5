@@ -1,7 +1,7 @@
 caption: reveal
 created: 20131024141900000
 jeremy: tiddlywiki
-modified: 20240721175716320
+modified: 20250211091937860
 tags: Widgets
 title: RevealWidget
 type: text/vnd.tiddlywiki
@@ -28,7 +28,7 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |stateTitle |A title containing the state, ''without'' TextReference. Gets preferred over the <<.attr state>> attribute |
 |stateField |A ''field name'' which is used to look for the state, if the attribute <<.attr stateTitle>> is present |
 |stateIndex |An ''index'' which is used to look for the state, if the attribute <<.attr stateTitle>> is present |
-|tag |Overrides the default HTML element tag (`<div>` in block mode or `<span>` in inline mode) |
+|tag |Overrides the default [[HTML Tags]] (`<div>` in block mode or `<span>` in inline mode) |
 |type |The type of matching performed: ''match'', ''nomatch'', ''popup'', ''lt'', ''gt'', ''lteq'' or ''gteq'' |
 |text |The text to match when the type is ''match'', ''nomatch'', ''lt'', ''gt'', ''lteq'' or ''gteq'' |
 |class |An optional CSS class name to be assigned to the HTML element<br/>&raquo; Set to `tc-popup-keep` to make a popup "sticky", so it won't close when you click inside of it|
