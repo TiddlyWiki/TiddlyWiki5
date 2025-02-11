@@ -12,7 +12,9 @@ Filter operators for colour operations
 /*global $tw: false */
 "use strict";
 
-var Color = require("$:/core/modules/utils/dom/color.js").Color;
+var Color = require("$:/core/modules/utils/dom/color.js").Color,
+	colourSpacesList = Object.keys(Color.spaces),
+	hueAdjustersList = ["raw","increasing","decreasing","longer","shorter"];
 
 exports["colour-lighten"] = makeSerialColourOperator(function (colour, operator, options) {
 	return colour.lighten($tw.utils.parseNumber(operator.operand)).display().toString();
@@ -77,13 +79,22 @@ exports["colour-best-contrast"] = makeParallelColourOperator(function (colours, 
 });
 
 exports["colour-interpolate"] = makeParallelColourOperator(function (colours, operator, options) {
+	// Get the colour space suffix
+	var space = (((operator.suffixes || [])[0] || ["srgb"])[0]).toLowerCase();
+	if(colourSpacesList.indexOf(space) === -1) {
+		space = "srgb";
+	}
 	// Special case for less than two colours
 	if(colours.length < 2) {
 		return [];
 	}
-	// Step through the indexes collecting the interpolated colours
-	var space = ((operator.suffixes || [])[0] || ["srgb"])[0],
-		rangefn = colours[0].range(colours[1],{space: space}),
+	// Get the hue adjuster suffix
+	var hueAdjuster = (((operator.suffixes || [])[1] || ["shorter"])[0]).toLowerCase();
+	if(hueAdjustersList.indexOf(hueAdjuster) === -1) {
+		hueAdjuster = "shorter";
+	}
+	// Compute the range function
+	var rangefn = colours[0].range(colours[1],{space: space, hue: hueAdjuster}),
 		outputColours = [];
 	$tw.utils.each(operator.operands,function(operand) {
 		// Get the index
