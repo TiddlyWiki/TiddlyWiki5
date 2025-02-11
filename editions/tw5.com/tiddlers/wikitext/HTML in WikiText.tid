@@ -1,6 +1,6 @@
 caption: HTML
 created: 20131205160816081
-modified: 20241025073517909
+modified: 20250211164452594
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -62,7 +62,7 @@ In an extension of conventional HTML syntax, attributes of elements and widgets 
 
 * [[a literal string|Literal Attribute Values]]
 * [[a transclusion of a textReference|Transcluded Attribute Values]]
-* [[a transclusion of a macro/variable|Transcluded Attribute Values]]
+* [[a transclusion of a macro/variable|Variable Attribute Values]]
 * [[as the result of a filter expression|Filtered Attribute Values]]
 * <<.from-version "5.3.0">> [[as the result of performing filter and variable substitutions on the given string|Substituted Attribute Values]]
 
