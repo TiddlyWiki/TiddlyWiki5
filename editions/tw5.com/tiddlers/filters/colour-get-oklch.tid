@@ -8,7 +8,7 @@ op-input: a selection of colour values
 op-suffix: "l", "c" or "h" to indicate which component of the colour to retrieve
 op-output: the values of the specified component of the input colours
 
-<<.from-version "5.3.7">> See [[Colour Palettes]] for background.
+<<.from-version "5.4.0">> See [[Colour Palettes]] for background.
 
 The <<.op colour-get-oklch>> operator is used to retrieve components of colour values in the [[OKLCH|https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch]] colour space. The OKLCH colour space expresses colours as three numbers:
 
