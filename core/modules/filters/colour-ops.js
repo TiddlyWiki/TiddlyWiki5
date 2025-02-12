@@ -78,33 +78,33 @@ exports["colour-best-contrast"] = makeParallelColourOperator(function (colours, 
 	}
 });
 
-exports["colour-interpolate"] = makeParallelColourOperator(function (colours, operator, options) {
+exports["colour-interpolate"] = function(source,operator,options) {
 	// Get the colour space suffix
 	var space = (((operator.suffixes || [])[0] || ["srgb"])[0]).toLowerCase();
 	if(colourSpacesList.indexOf(space) === -1) {
 		space = "srgb";
-	}
-	// Special case for less than two colours
-	if(colours.length < 2) {
-		return [];
 	}
 	// Get the hue adjuster suffix
 	var hueAdjuster = (((operator.suffixes || [])[1] || ["shorter"])[0]).toLowerCase();
 	if(hueAdjustersList.indexOf(hueAdjuster) === -1) {
 		hueAdjuster = "shorter";
 	}
-	// Compute the range function
-	var rangefn = colours[0].range(colours[1],{space: space, hue: hueAdjuster}),
-		outputColours = [];
-	$tw.utils.each(operator.operands,function(operand) {
-		// Get the index
-		var index = $tw.utils.parseNumber(operand);
-		// Calculate the interpolated colour
+	// Get the colours
+	if(operator.operands.length < 2) {
+		return [];
+	}
+	var colourA = $tw.utils.parseCSSColorObject(operator.operands[0]),
+		colourB = $tw.utils.parseCSSColorObject(operator.operands[1]),
+		rangefn = colourA.range(colourB,{space: space, hue: hueAdjuster});
+	// Cycle through the weights
+	var results = [];
+	source(function(tiddler,title) {
+		var index = $tw.utils.parseNumber(title);
 		var colour = rangefn(index);
-		outputColours.push(colour.display().toString());
+		results.push(colour.display().toString());
 	});
-	return outputColours;
-});
+	return results;
+};
 
 function makeSerialColourOperator(fn) {
 	return function (source, operator, options) {

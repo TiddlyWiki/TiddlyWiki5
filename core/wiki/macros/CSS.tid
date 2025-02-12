@@ -141,7 +141,7 @@ tags: $:/tags/Macro
 \end tf.check-colour-contrast
 
 \function tf.interpolate-colours(paletteEntryA,paletteEntryB,weight)
-[function[colour],<paletteEntryA>] [function[colour],<paletteEntryB>] +[colour-interpolate:oklch<weight>]
+[function[colour],<paletteEntryA>] [function[colour],<paletteEntryB>] :apply[<weight>colour-interpolate:oklch<$1>,<$2>]
 \end tf.interpolate-colours
 
 \define box-shadow(shadow)

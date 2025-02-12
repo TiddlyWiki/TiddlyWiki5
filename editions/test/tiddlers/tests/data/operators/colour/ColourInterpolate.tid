@@ -10,9 +10,8 @@ title: Output
 +
 title: Filter
 
-=[[#5778d8]]
-=[[#d85757]]
-+[colour-interpolate:oklch[0.2],[0.5],[0.99]join[,]]
+0.2 0.5 0.99
++[colour-interpolate:oklch[#5778d8],[#d85757]join[,]]
 +
 title: ExpectedResult
 

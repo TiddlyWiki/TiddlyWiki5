@@ -4,31 +4,51 @@ tags: [[Filter Operators]] [[Colour Operators]]
 title: colour-interpolate Operator
 caption: colour-interpolate
 op-purpose: smoothly interpolate between a pair of colours
-op-input: two colour values. Additional values are ignored
+op-input: one or more indexes where 0 is the first colour and 1 is the last colour and intermediate values are smoothly interpolated
 op-suffix: the <<.op colour-interpolate>> operator uses a rich suffix, see below for details
-op-parameter: one or more indexes where 0 is the first colour and 1 is the last colour and intermediate values are smoothly interpolated
+op-parameter: two colour values
 op-output: the values of the interpolated colours
+
+\procedure interpolate-example(filter,description)
+<$transclude $variable="description"/>
+
+<$codeblock code=<<filter>>/>
+
+<$list filter=<<filter>>>
+<div style.display="inline-block" style.width="15px" style.height="15px" style.background-color=<<currentTiddler>>></div>
+</$list>
+\end interpolate-example
 
 <<.from-version "5.3.7">> See [[Colour Palettes]] for background.
 
 The <<.op colour-interpolate>> operator is used to interpolate colour values in a chosen colour space. It uses an extended syntax that permits multiple additional parameters to be passed:
 
 ```
-[colour-interpolate:<colour space>:<hue adjuster>[<parameter>]]
+[colour-interpolate:<colour space>:<hue adjuster>[<colourA>],[<colourB>]]
 ```
 
 * ''colour space'': The name of the colour space to be used for the interpolation such as "OkLCh" or "sRGB". The full list of colour spaces that can be used for interpolation is given in [[Colour Spaces]]
 * ''hue adjuster'': For color spaces with a hue angle there are multiple ways to interpolate, which can produce drastically different results. The hue adjuster suffix allows the interpolation type to be controlled. It can be set to "raw", "increasing", "decreasing", "longer" or "shorter" (the default). See [[Colour Interpolation Hues]] for more details
 
-Two input colours are required. If there are fewer than two input colours, the operator will return an empty result. If there are more than two input colours, the operator will ignore the additional colours.
+Two colour parameters are required. If there are fewer than two input colours, the operator will return an empty result. If there are more than two input colours, the operator will ignore the additional colours.
 
 Note that indexes outside the range 0 to 1 will extrapolate from the provided colour values.
 
-For example, this filter expression will return 4 colours that smoothly blend from red to green in the OKLCH colour space:
+<<interpolate-example "0 0.333 0.666 1 +[colour-interpolate:oklch[red],[purple]]" """
+For example, this filter expression will return 4 colours that smoothly blend from red to purple in the OKLCH colour space:
+""">>
 
-```
-red green +[colour-interpolate:oklch[0],[0.333],[0.666],[1]]
-```
+<<interpolate-example "[range[0],[1],[0.05]colour-interpolate:oklch[red],[purple]]" """
+The range operator can be used to generate a series of weights:
+""">>
+
+<<interpolate-example "[range[0],[1],[0.05]colour-interpolate:oklch:raw[red],[purple]]" """
+Notice how the ''raw'' hue adjuster produces a rainbow effect:
+""">>
+
+<<interpolate-example "[range[0],[1],[0.1]colour-interpolate[black],[white]] =[range[0.1],[1],[0.1]colour-interpolate[white],[black]]" """
+Interpolations can be appended together:
+""">>
 
 See also the following related operators:
 
