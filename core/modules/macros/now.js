@@ -26,7 +26,10 @@ exports.params = [
 Run the macro
 */
 exports.run = function(format) {
-	return String($tw.utils.formatDateString(new Date(),format || "0hh:0mm, DDth MMM YYYY"));
+    let formatString = format || "0hh:0mm, DDth MMM YYYY";
+    formatString = String(formatString);
+
+    return $tw.utils.formatDateString(new Date(), formatString);
 };
 
 })();
