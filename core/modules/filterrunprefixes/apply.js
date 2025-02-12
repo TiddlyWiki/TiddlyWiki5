@@ -3,7 +3,7 @@ title: $:/core/modules/filterrunprefixes/apply.js
 type: application/javascript
 module-type: filterrunprefix
 
-
+Filter run prefix to make input titles available as variables when evaluating the filter run
 
 \*/
 (function(){
