@@ -36,11 +36,54 @@ type: text/vnd.tiddlywiki
 		</h2>
 		<table class="tc-view-field-table">
 			<tbody>
-				<$list filter="[all[current]fields[]sort[title]] -title" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+				<$list filter="[all[current]fields[]sort[title]] -title -text" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
 			</tbody>
 		</table>
+		<$codeblock code={{{ [<currentTiddler>get[text]] }}}/>
 	</div>
 </$tiddler>
+\end
+
+\procedure .demo-tiddler(tidText)
+	\procedure create-tiddler-actions()
+		<$action-setmultiplefields $tiddler=<<title>> $fields="[<jsonTiddler>jsonindexes[0]sort[]]" $values="[<jsonTiddler>jsonindexes[0]sort[]] :map[<jsonTiddler>jsonget[0],<currentTiddler>]"/>
+	\end create-tiddler-actions
+	<$let
+		jsonTiddler={{{ [<tidText>deserialize[application/x-tiddler]] }}}
+		title={{{ [<jsonTiddler>jsonget[0],[title]] }}}
+	>
+		<div class="doc-tiddler-fields">
+			<h2>
+			<$link to=<<title>>>
+				<$text text=<<title>>/>
+			</$link>
+			</h2>
+			<table class="tc-view-field-table">
+				<tbody>
+					<$list filter="[<jsonTiddler>jsonindexes[0]sort[]] -title -text" variable="listItem">
+						<tr class="tc-view-field">
+							<td class="tc-view-field-name">
+								<$text text=<<listItem>>/>
+							</td>
+							<td class="tc-view-field-value">
+								<$text text={{{ [<jsonTiddler>jsonget[0],<listItem>] }}}/>
+							</td>
+						</tr>
+					</$list>
+				</tbody>
+			</table>
+			<$codeblock code={{{ [<jsonTiddler>jsonget[0],[text]] }}}/>
+			<div>
+				<%if [<title>has[title]] %>
+					The tiddler '<$link to=<<title>>><$text text=<<title>>/></$link>' already exists
+				<%else%>
+					<$button actions=<<create-tiddler-actions>> class="tc-btn-big-green">
+						Create this tiddler
+					</$button>
+				<%endif%>
+			</div>
+		</div>
+	</$let>
 \end
 
 \function .mtitle(_) [<_>] Macro +[join[ ]]

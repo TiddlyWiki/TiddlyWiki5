@@ -10,9 +10,8 @@ modified: 20250204130756749
 * Inspect the new palettes:
 ** $:/palettes/AutoToggle automatically switches between two user selected palettes according to the current operating system dark/light mode setting
 ** $:/palettes/TwentyTwenties derives all its colours from a small set of base colours, and provides a custom editor for tweaking those colours
-** $:/palettes/TwentyTwenties/Dark is a variant of the TwentyTwenties palette with a dark colour scheme
-** $:/palettes/TwentyTwenties/Green is a variant of the TwentyTwenties palette with a greenish colour scheme
-* [[SampleBackgroundAction: Story Change]] is a sample background action that displays a notification whenever the contents of the story river changes
+** $:/palettes/TwentyTwenties/Dark is a variant of the ~TwentyTwenties palette with a dark colour scheme
+** $:/palettes/TwentyTwenties/Green is a variant of the ~TwentyTwenties palette with a greenish colour scheme
 
 ! New and Revised Documentation
 
@@ -30,6 +29,7 @@ modified: 20250204130756749
 
 The following features are required for the new colour handling system, but are general purpose, and may be cherry picked for earlier merging:
 
+* [[Background Actions]]
 * MediaQueryTrackerMechanism
 * [[changecount Operator]]
 * [[Apply Filter Run Prefix]]
