@@ -3,8 +3,9 @@ tags: $:/tags/Macro
 
 \procedure actions-compile-palette-filtered(consolidatedPalette,outputPalette)
 <!-- Note the join, needed to cope with palette entries containing spaces -->
-\function colour(name) [<consolidatedPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :map[subfilter<currentTiddler>join[ ]]
-\function color(name) [function[colour],<name>]
+\function tf.colour(name) [<consolidatedPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :map[subfilter<currentTiddler>join[ ]]
+\function colour(name) [tf.colour<name>]
+\function color(name) [tf.colour<name>]
 <!-- Make the colour function use the input palette -->
 <$list filter="[<consolidatedPalette>indexes[]sort[]]" variable="colour-name">
 	<$let filter-text={{{ [<consolidatedPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] }}}>
@@ -85,16 +86,20 @@ tags: $:/tags/Macro
 
 \procedure tv-palette-name() $:/temp/palette-colours
 
-\function colour(name)
+\function tf.colour(name)
 [<tv-palette-name>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]]
+\end tf.colour
+
+\function colour(name)
+[tf.colour<name>]
 \end colour
 
 \function color(name)
-[function[colour],<name>]
+[tf.colour<name>]
 \end color
 
 \procedure colour-function-prefix()
-[function[colour],[
+[tf.colour[
 \end colour-function-prefix
 
 \procedure colour-function-suffix()
@@ -112,12 +117,16 @@ tags: $:/tags/Macro
 	\end colour-inner-get-palette-entry
 
 	<!-- Note the join, needed to cope with palette entries containing spaces -->
-	\function colour(name)
+	\function tf.colour(name)
 	[function[colour-inner-get-palette-entry],<name>,<paletteTitle>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter<currentTiddler>join[ ]]
+	\end tf.colour
+
+	\function colour(name)
+	[tf.colour<name>]
 	\end colour
 
 	\function color(name)
-	[function[colour],<name>]
+	[tf.colour<name>]
 	\end color
 
 	<$let
