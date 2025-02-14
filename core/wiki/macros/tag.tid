@@ -28,7 +28,8 @@ color:$(foregroundColor)$;
 </$let>
 \end
 
-\define tag-pill-body(tag,icon,colour,element-tag,element-attributes,actions)
+<!-- Note that the 'palette' parameter is unused and is only retained for backwards compatibility -->
+\define tag-pill-body(tag,icon,colour,palette,element-tag,element-attributes,actions)
 \whitespace trim
 <$macrocall $name="tag-pill-inner"
 	tag=<<__tag__>>

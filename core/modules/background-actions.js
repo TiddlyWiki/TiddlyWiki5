@@ -76,7 +76,7 @@ function BackgroundActionTracker(options) {
 	this.wiki = options.wiki;
 	this.title = options.title;
 	this.trackFilter = options.trackFilter;
-	this.actions = options.actions
+	this.actions = options.actions;
 	this.filterTracker = new $tw.FilterTracker(this.wiki);
 	this.hasChanged = false;
 	this.trackerID = this.filterTracker.track({
