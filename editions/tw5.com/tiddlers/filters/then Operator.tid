@@ -1,6 +1,6 @@
 caption: then
 created: 20190802112756430
-modified: 20250214134501357
+modified: 20230501174334627
 op-input: a [[selection of titles|Title Selection]]
 op-output: the input titles with each one replaced by the string <<.place T>>
 op-parameter: a string
