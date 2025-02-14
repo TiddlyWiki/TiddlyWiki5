@@ -15,3 +15,5 @@ type: text/vnd.tiddlywiki
 <<.tip "The [[Then Filter Run Prefix]] has a similar purpose to the <<.op then>> operator. See its documentation for a comparison of usage.">>
 
 <<.operator-examples "then">>
+
+Also see: [[else Operator]] | [[Then Filter Run Prefix]] and [[Else Filter Run Prefix]]
