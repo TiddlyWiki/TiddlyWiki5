@@ -1,6 +1,6 @@
 created: 20230318142408662
 from-version: 5.1.23
-modified: 20230322140756821
+modified: 20250214134609217
 rp-input: all titles from previous filter runs
 rp-output: if the filter output so far is an empty list then the output titles of the run are [[dominantly appended|Dominant Append]] to the filter's output.<br>if the filter output so far is not an empty list then the run is ignored.
 rp-purpose: the filter run is only evaluated if the filter output of all previous runs so far is an empty list
@@ -16,3 +16,5 @@ type: text/vnd.tiddlywiki
 """/>
 
 This prefix has a [[Shortcut Filter Run Prefix]] symbol `~run`
+
+Also see: [[Then Filter Run Prefix]] | [[then Operator]] and [[else Operator]]
