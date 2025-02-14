@@ -23,7 +23,7 @@ title: $:/snippets/paletteswitcher
 
 <$linkcatcher actions=<<actions>>>
 	<div class={{{ tc-chooser [<thumbnails>match[yes]then[tc-chooser-cards]] +[join[ ]] }}}>
-		<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]]">
+		<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]!is[draft]sort[name]]">
 			<$transclude $variable="palette-entry" thumbnails=<<thumbnails>>/>
 		</$list>
 	</div>
