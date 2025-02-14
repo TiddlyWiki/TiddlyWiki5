@@ -216,11 +216,11 @@ HttpClientRequest.prototype.send = function(callback) {
 				if(lengthComputable) {
 					setBinding(self.bindProgress,"" + Math.floor((loaded/total) * 100))
 				}
-				self.wiki.invokeActionString(self.progressActions,undefined,{
+				self.wiki.invokeActionString(self.progressActions,undefined,$tw.utils.extend({},self.variables,{
 					lengthComputable: lengthComputable ? "yes" : "no",
 					loaded: loaded,
 					total: total
-				},{parentWidget: $tw.rootWidget});
+				}),{parentWidget: $tw.rootWidget});
 			}
 		});
 	}
