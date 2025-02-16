@@ -242,7 +242,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/tw5.com-docs \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/tw5.com-docs/ \
-	--build index \
+	--build external \
 	|| exit 1
 
 # /editions/twitter-archivist/index.html	Twitter Archivist edition
