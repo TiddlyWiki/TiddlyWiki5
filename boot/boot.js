@@ -1162,21 +1162,21 @@ enableIndexers - Array of indexer names to enable, or null to use all available 
 $tw.Wiki = function(options) {
 	options = options || {};
 	var self = this,
-		tiddlers = Object.create(null), // Hashmap of tiddlers
+		tiddlerStore = Object.create(null), // Hashmap of tiddlers
 		tiddlerTitles = null, // Array of tiddler titles, calculated and cached when needed
 		getTiddlerTitles = function() {
 			if(!tiddlerTitles) {
-				tiddlerTitles = Object.keys(tiddlers).sort(function(a,b) {return a.localeCompare(b);});
+				tiddlerTitles = Object.keys(tiddlerStore).sort(function(a,b) {return a.localeCompare(b);});
 			}
 			return tiddlerTitles;
 		},
 		pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
-		pluginInfo = Object.create(null), // Hashmap of parsed plugin content
-		shadowTiddlers = Object.create(null), // Hashmap by title of {source:, tiddler:}
+		pluginContents = Object.create(null), // Hashmap of parsed plugin content
+		shadowTiddlerInfo = Object.create(null), // Hashmap by title of {source:, tiddler:}
 		shadowTiddlerTitles = null, // Array of tiddler titles, calculated and cached when needed
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
-				shadowTiddlerTitles = Object.keys(shadowTiddlers).sort(function(a,b) {return a.localeCompare(b);});
+				shadowTiddlerTitles = Object.keys(shadowTiddlerInfo).sort(function(a,b) {return a.localeCompare(b);});
 			}
 			return shadowTiddlerTitles;
 		},
@@ -1218,7 +1218,7 @@ $tw.Wiki = function(options) {
 					}
 				}
 				// Save the new tiddler
-				tiddlers[title] = tiddler;
+				tiddlerStore[title] = tiddler;
 				// Check we've got the title
 				tiddlerTitles = $tw.utils.insertSortedArray(tiddlerTitles || [],title);
 				// Record the new tiddler state
@@ -1243,7 +1243,7 @@ $tw.Wiki = function(options) {
 	this.deleteTiddler = function(title) {
 // Uncomment the following line for detailed logs of all tiddler deletions
 // console.log("Deleting",title)
-		if($tw.utils.hop(tiddlers,title)) {
+		if($tw.utils.hop(tiddlerStore,title)) {
 			// Record the old tiddler state
 			var updateDescriptor = {
 				old: {
@@ -1253,7 +1253,7 @@ $tw.Wiki = function(options) {
 				}
 			}
 			// Delete the tiddler
-			delete tiddlers[title];
+			delete tiddlerStore[title];
 			// Delete it from the list of titles
 			if(tiddlerTitles) {
 				var index = tiddlerTitles.indexOf(title);
@@ -1281,11 +1281,11 @@ $tw.Wiki = function(options) {
 	// Get a tiddler from the store
 	this.getTiddler = function(title) {
 		if(title) {
-			var t = tiddlers[title];
+			var t = tiddlerStore[title];
 			if(t !== undefined) {
 				return t;
 			} else {
-				var s = shadowTiddlers[title];
+				var s = shadowTiddlerInfo[title];
 				if(s !== undefined) {
 					return s.tiddler;
 				}
@@ -1305,7 +1305,7 @@ $tw.Wiki = function(options) {
 			index,titlesLength,title;
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			callback(tiddlers[title],title);
+			callback(tiddlerStore[title],title);
 		}
 	};
 
@@ -1320,10 +1320,10 @@ $tw.Wiki = function(options) {
 			index,titlesLength,title;
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			if(tiddlers[title]) {
-				callback(tiddlers[title],title);
+			if(tiddlerStore[title]) {
+				callback(tiddlerStore[title],title);
 			} else {
-				var shadowInfo = shadowTiddlers[title];
+				var shadowInfo = shadowTiddlerInfo[title];
 				callback(shadowInfo.tiddler,title);
 			}
 		}
@@ -1335,13 +1335,13 @@ $tw.Wiki = function(options) {
 			titles = getTiddlerTitles();
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			callback(tiddlers[title],title);
+			callback(tiddlerStore[title],title);
 		}
 		titles = getShadowTiddlerTitles();
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			if(!tiddlers[title]) {
-				var shadowInfo = shadowTiddlers[title];
+			if(!tiddlerStore[title]) {
+				var shadowInfo = shadowTiddlerInfo[title];
 				callback(shadowInfo.tiddler,title);
 			}
 		}
@@ -1353,35 +1353,35 @@ $tw.Wiki = function(options) {
 			titles = getShadowTiddlerTitles();
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			if(tiddlers[title]) {
-				callback(tiddlers[title],title);
+			if(tiddlerStore[title]) {
+				callback(tiddlerStore[title],title);
 			} else {
-				var shadowInfo = shadowTiddlers[title];
+				var shadowInfo = shadowTiddlerInfo[title];
 				callback(shadowInfo.tiddler,title);
 			}
 		}
 		titles = getTiddlerTitles();
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			if(!shadowTiddlers[title]) {
-				callback(tiddlers[title],title);
+			if(!shadowTiddlerInfo[title]) {
+				callback(tiddlerStore[title],title);
 			}
 		}
 	};
 
 	// Test for the existence of a tiddler (excludes shadow tiddlers)
 	this.tiddlerExists = function(title) {
-		return !!$tw.utils.hop(tiddlers,title);
+		return !!$tw.utils.hop(tiddlerStore,title);
 	};
 
 	// Determines if a tiddler is a shadow tiddler, regardless of whether it has been overridden by a real tiddler
 	this.isShadowTiddler = function(title) {
-		return $tw.utils.hop(shadowTiddlers,title);
+		return $tw.utils.hop(shadowTiddlerInfo,title);
 	};
 
 	this.getShadowSource = function(title) {
-		if($tw.utils.hop(shadowTiddlers,title)) {
-			return shadowTiddlers[title].source;
+		if($tw.utils.hop(shadowTiddlerInfo,title)) {
+			return shadowTiddlerInfo[title].source;
 		}
 		return null;
 	};
@@ -1398,22 +1398,22 @@ $tw.Wiki = function(options) {
 		return types;
 	};
 
-	// Read plugin info for all plugins, or just an array of titles. Returns the number of plugins updated or deleted
+	// Read plugin info for all plugins, or just an array of titles. Returns the list of updated plugin titles and the list of deleted plugin titles
 	this.readPluginInfo = function(titles) {
 		var results = {
 			modifiedPlugins: [],
 			deletedPlugins: []
 		};
 		$tw.utils.each(titles || getTiddlerTitles(),function(title) {
-			var tiddler = tiddlers[title];
+			var tiddler = tiddlerStore[title];
 			if(tiddler) {
 				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
-					pluginInfo[tiddler.fields.title] = $tw.utils.parseJSONSafe(tiddler.fields.text);
+					pluginContents[tiddler.fields.title] = $tw.utils.parseJSONSafe(tiddler.fields.text);
 					results.modifiedPlugins.push(tiddler.fields.title);
 				}
 			} else {
-				if(pluginInfo[title]) {
-					delete pluginInfo[title];
+				if(pluginContents[title]) {
+					delete pluginContents[title];
 					results.deletedPlugins.push(title);
 				}
 			}
@@ -1423,7 +1423,7 @@ $tw.Wiki = function(options) {
 
 	// Get plugin info for a plugin
 	this.getPluginInfo = function(title) {
-		return pluginInfo[title];
+		return pluginContents[title];
 	};
 
 	// Register the plugin tiddlers of a particular type, or null/undefined for any type, optionally restricting registration to an array of tiddler titles. Return the array of titles affected
@@ -1437,6 +1437,7 @@ $tw.Wiki = function(options) {
 						self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
 						pluginTiddlers.push(tiddler);
 						registeredTitles.push(tiddler.fields.title);
+						// Register any sub-plugins
 					}
 				}
 			};
@@ -1485,14 +1486,14 @@ $tw.Wiki = function(options) {
 			}
 		});
 		// Now go through the plugins in ascending order and assign the shadows
-		shadowTiddlers = Object.create(null);
+		shadowTiddlerInfo = Object.create(null);
 		$tw.utils.each(pluginTiddlers,function(tiddler) {
 			// Extract the constituent tiddlers
-			if($tw.utils.hop(pluginInfo,tiddler.fields.title)) {
-				$tw.utils.each(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
+			if($tw.utils.hop(pluginContents,tiddler.fields.title)) {
+				$tw.utils.each(pluginContents[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
 					// Save the tiddler object
 					if(constituentTitle) {
-						shadowTiddlers[constituentTitle] = {
+						shadowTiddlerInfo[constituentTitle] = {
 							source: tiddler.fields.title,
 							tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
 						};
@@ -1947,6 +1948,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp,excludePluginInfo) {
 			if(files.indexOf("tiddlywiki.files") !== -1) {
 				Array.prototype.push.apply(tiddlers,$tw.loadTiddlersFromSpecification(filepath,excludeRegExp));
 			} else if(files.indexOf("plugin.info") !== -1 && !excludePluginInfo) {
+				// Load sub-plugin
 				var tiddler = $tw.loadPluginFolder(filepath);
 				if(tiddler) {
 					tiddlers.push({tiddlers: [tiddler]});
