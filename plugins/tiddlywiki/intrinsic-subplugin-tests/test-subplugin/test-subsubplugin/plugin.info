@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/test-subsubplugin",
+	"name": "test-subsubplugin",
+	"description": "Test subsubplugin",
+	"list": "readme readme2",
+	"stability": "STABILITY_1_EXPERIMENTAL"
+}
