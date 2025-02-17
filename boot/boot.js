@@ -1398,7 +1398,7 @@ $tw.Wiki = function(options) {
 		return types;
 	};
 
-	// Read plugin info for all plugins, or just an array of titles. Returns the list of updated plugin titles and the list of deleted plugin titles
+	// Read plugin contents for all plugins, or just an array of titles. Returns the list of updated plugin titles and the list of deleted plugin titles
 	this.readPluginInfo = function(titles) {
 		var results = {
 			modifiedPlugins: [],
@@ -1408,7 +1408,8 @@ $tw.Wiki = function(options) {
 			var tiddler = tiddlerStore[title];
 			if(tiddler) {
 				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
-					pluginContents[tiddler.fields.title] = $tw.utils.parseJSONSafe(tiddler.fields.text);
+					var contents = $tw.utils.parseJSONSafe(tiddler.fields.text);
+					pluginContents[tiddler.fields.title] = contents;
 					results.modifiedPlugins.push(tiddler.fields.title);
 				}
 			} else {
@@ -1437,7 +1438,6 @@ $tw.Wiki = function(options) {
 						self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
 						pluginTiddlers.push(tiddler);
 						registeredTitles.push(tiddler.fields.title);
-						// Register any sub-plugins
 					}
 				}
 			};
