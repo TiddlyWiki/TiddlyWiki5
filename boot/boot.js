@@ -232,10 +232,10 @@ $tw.utils.error = function(err) {
 				var link = dm("a"),
 					text = JSON.stringify(tiddlers);
 				if(Blob !== undefined) {
-					var blob = new Blob([text], {type: "text/html"});
+					var blob = new Blob([text], {type: "application/json"});
 					link.setAttribute("href", URL.createObjectURL(blob));
 				} else {
-					link.setAttribute("href","data:text/html," + encodeURIComponent(text));
+					link.setAttribute("href","data:application/json," + encodeURIComponent(text));
 				}
 				link.setAttribute("download","emergency-tiddlers-" + (new Date()) + ".json");
 				document.body.appendChild(link);
