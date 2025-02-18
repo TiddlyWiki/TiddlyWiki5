@@ -1068,6 +1068,10 @@ $tw.Tiddler.prototype.hasField = function(field) {
 	return $tw.utils.hop(this.fields,field);
 };
 
+$tw.Tiddler.prototype.isPlugin = function() {
+	return this.fields.type === "application/json" && this.hasField("plugin-type") && !this.hasField("draft.of");
+};
+
 /*
 Compare two tiddlers for equality
 tiddler: the tiddler to compare
@@ -1407,7 +1411,7 @@ $tw.Wiki = function(options) {
 		$tw.utils.each(titles || getTiddlerTitles(),function(title) {
 			var tiddler = tiddlerStore[title];
 			if(tiddler) {
-				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
+				if(tiddler.isPlugin() && tiddler.fields.text) {
 					var contents = $tw.utils.parseJSONSafe(tiddler.fields.text);
 					pluginContents[tiddler.fields.title] = contents;
 					results.modifiedPlugins.push(tiddler.fields.title);
@@ -1445,7 +1449,7 @@ $tw.Wiki = function(options) {
 			if(!tiddler) {
 				tiddler = self.getTiddler(title);
 			}
-			if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType)) {
+			if(tiddler && tiddler.isPlugin() && (!pluginType || tiddler.fields["plugin-type"] === pluginType)) {
 				var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
 				if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
 					self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
@@ -1462,16 +1466,16 @@ $tw.Wiki = function(options) {
 			}
 		}
 		function checkSubTiddler(parentPluginTitle,title) {
-			var tiddler = new $tw.Tiddler(pluginContents[parentPluginTitle].tiddlers[title]);
-			if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType)) {
-				var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
+			var tiddlerFields = pluginContents[parentPluginTitle].tiddlers[title];
+			if(tiddlerFields.type === "application/json" && tiddlerFields["plugin-type"] && !tiddlerFields["draft.of"] && (!pluginType || tiddlerFields["plugin-type"] === pluginType)) {
+				var tiddler = new $tw.Tiddler(tiddlerFields,{title: title}),
+					disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
 				if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
 					self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
 					pluginTiddlersInfo.push({tiddler: tiddler,parentPluginTitle: parentPluginTitle});
 					registeredTitles.push(tiddler.fields.title);
 				}
 			}
-
 		}
 	};
 
