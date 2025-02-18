@@ -1,56 +1,56 @@
 {
-	"name": "tiddlywiki",
-	"preferGlobal": "true",
-	"version": "5.3.7-prerelease",
-	"author": "Jeremy Ruston <jeremy@jermolene.com>",
-	"description": "a non-linear personal web notebook",
-	"contributors": [
-		{
-			"name": "Jeremy Ruston",
-			"email": "jeremy@jermolene.com"
-		}
-	],
-	"bin": {
-		"tiddlywiki": "./tiddlywiki.js"
-	},
-	"main": "./boot/boot.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/TiddlyWiki/TiddlyWiki5.git"
-	},
-	"keywords": [
-		"tiddlywiki",
-		"tiddlywiki5",
-		"wiki"
-	],
-	"devDependencies": {
-		"eslint": "^9.12.0",
-		"@eslint/js": "^9.12.0"
-	},
-	"bundleDependencies": [],
-	"license": "BSD",
-	"engines": {
-		"node": ">=22.10.0"
-	},
-	"scripts": {
-		"start": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
-		"test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
+  "name": "tiddlywiki",
+  "preferGlobal": "true",
+  "version": "5.3.7-prerelease",
+  "author": "Jeremy Ruston <jeremy@jermolene.com>",
+  "description": "a non-linear personal web notebook",
+  "contributors": [
+    {
+      "name": "Jeremy Ruston",
+      "email": "jeremy@jermolene.com"
+    }
+  ],
+  "bin": {
+    "tiddlywiki": "./tiddlywiki.js"
+  },
+  "main": "./boot/boot.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TiddlyWiki/TiddlyWiki5.git"
+  },
+  "keywords": [
+    "tiddlywiki",
+    "tiddlywiki5",
+    "wiki"
+  ],
+  "devDependencies": {
+    "eslint": "^9.12.0",
+    "@eslint/js": "^9.12.0"
+  },
+  "bundleDependencies": [],
+  "license": "BSD",
+  "engines": {
+    "node": ">=22.10.0"
+  },
+  "scripts": {
+    "start": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
+    "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
 
-		"lazy": "node ./tiddlywiki.js ./editions/tw5.com-server --listen root-tiddler=$:/core/save/lazy-all",
-		"watch": "node --watch-path=./core --watch-preserve-output ./tiddlywiki.js ./editions/tw5.com-server --listen",
+    "lazy": "node ./tiddlywiki.js ./editions/tw5.com-server --listen root-tiddler=$:/core/save/lazy-all",
+    "watch": "node --watch-path=./core --watch-preserve-output ./tiddlywiki.js ./editions/tw5.com-server --listen",
 
-		"dev": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/dev --listen",
+    "dev": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/dev --listen",
 
-		"library:info": "echo The Warning: \"Plugin(s) required for client-server operation are missing\" is INTENTIONAL, so no files will be saved back.",
-		"library": "node ./tiddlywiki.js ./editions/pluginlibrary --build test-server",
+    "library:info": "echo The Warning: \"Plugin(s) required for client-server operation are missing\" is INTENTIONAL, so no files will be saved back.",
+    "library": "node ./tiddlywiki.js ./editions/pluginlibrary --build test-server",
 
-		"build": "node ./tiddlywiki.js ./editions/tw5.com --build",
+    "build": "node ./tiddlywiki.js ./editions/tw5.com --build",
 
-		"help": "node ./tiddlywiki.js --help",
+    "help": "node ./tiddlywiki.js --help",
 
-		"lint": "eslint .",
-		"lint:fix": "eslint . --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
 
-		"prelibrary": "npm run library:info -s"
-	}
+    "prelibrary": "npm run library:info -s"
+  }
 }
