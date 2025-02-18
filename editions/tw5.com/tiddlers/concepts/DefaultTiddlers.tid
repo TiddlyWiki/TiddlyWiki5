@@ -13,5 +13,5 @@ There are two ways default tiddlers can be defined:
 
 The resulting list of titles is then inserted into the [[story river|Story River]].
 
-The [[control panel|$:/ControlPanel]] ''-> Info -> Basics -> Default tiddler'' setting includes a text box for direct access to ~$:/DefaultTiddlers.
+The [[control panel|$:/ControlPanel]] ''-> Info -> Basics -> Default tiddler'' setting includes a text box for direct access to $:/DefaultTiddlers.
 
