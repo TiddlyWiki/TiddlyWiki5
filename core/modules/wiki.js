@@ -194,18 +194,24 @@ options.prefix must be a string
 */
 exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
-	var c = 0,
-		title = baseTitle,
-		template = options.template,
+	var title = baseTitle,
+		template = options.template || "",
+		// test if .startCount is a positive integer. If not set to 0
+		c = (parseInt(options.startCount,10) > 0) ? parseInt(options.startCount,10) : 0,
 		prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
+
 	if (template) {
 		// "count" is important to avoid an endless loop in while(...)!!
 		template = (/\$count:?(\d+)?\$/i.test(template)) ? template : template + "$count$";
-		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c});
+		// .formatTitleString() expects strings as input
+		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c+""});
 		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
-			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)});
+			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)+""});
 		}
 	} else {
+		if (c > 0) {
+			title = baseTitle + prefix + c;
+		}
 		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
 			title = baseTitle + prefix + (++c);
 		}
@@ -560,18 +566,22 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 			for(var t=0; t<parseTree.length; t++) {
 				var parseTreeNode = parseTree[t];
 				if(parseTreeNode.type === "transclude") {
-					if(parseTreeNode.attributes.$tiddler && parseTreeNode.attributes.$tiddler.type === "string") {
-						var value;
-						// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
-						if(parentNode && parentNode.type === "tiddler" && parentNode.attributes.tiddler && parentNode.attributes.tiddler.type === "string") {
-							// Empty value (like `{{!!field}}`) means self-referential transclusion. 
-							value = parentNode.attributes.tiddler.value || title;
-						} else {
-							value = parseTreeNode.attributes.$tiddler.value;
+					if(parseTreeNode.attributes.$tiddler) {
+						if(parseTreeNode.attributes.$tiddler.type === "string") {
+							var value;
+							// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
+							if(parentNode && parentNode.type === "tiddler" && parentNode.attributes.tiddler && parentNode.attributes.tiddler.type === "string") {
+								// Empty value (like `{{!!field}}`) means self-referential transclusion.
+								value = parentNode.attributes.tiddler.value || title;
+							} else {
+								value = parseTreeNode.attributes.$tiddler.value;
+							}
 						}
-					} else if(parseTreeNode.attributes.tiddler && parseTreeNode.attributes.tiddler.type === "string") {
-						// Old transclude widget usage
-						value = parseTreeNode.attributes.tiddler.value;
+					} else if(parseTreeNode.attributes.tiddler) {
+						if (parseTreeNode.attributes.tiddler.type === "string") {
+							// Old transclude widget usage
+							value = parseTreeNode.attributes.tiddler.value;
+						}
 					} else if(parseTreeNode.attributes.$field && parseTreeNode.attributes.$field.type === "string") {
 						// Empty value (like `<$transclude $field='created'/>`) means self-referential transclusion. 
 						value = title;

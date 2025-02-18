@@ -34,7 +34,7 @@ http://$(userName)$.tiddlyspot.com/$path$/
 
 ''<<lingo Advanced/Heading>>''
 
-|<<lingo ServerURL>>  |<$edit-text tiddler="$:/UploadURL" default="" tag="input"/> |
+|<<lingo ServerURL>>  |<$edit-text tiddler="$:/UploadURL" default="" tag="input" type="url"/> |
 |<<lingo Filename>> |<$edit-text tiddler="$:/UploadFilename" default="index.html" tag="input"/> |
 |<<lingo UploadDir>> |<$edit-text tiddler="$:/UploadDir" default="." tag="input"/> |
 |<<lingo BackupDir>> |<$edit-text tiddler="$:/UploadBackupDir" default="." tag="input"/> |

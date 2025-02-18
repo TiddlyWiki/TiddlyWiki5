@@ -2,4 +2,4 @@ title: $:/plugins/tiddlywiki/pluginlibrary/readme
 
 This plugin is used behind the scenes by TiddlyWiki to build the plugin library.
 
-[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/pluginlibrary]]
+[[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/pluginlibrary]]

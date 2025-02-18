@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 .tc-cards {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-evenly;
+	justify-content: center;
 	width: 100%;
 	padding: 0.5em;
 	background: <<colour background>>;

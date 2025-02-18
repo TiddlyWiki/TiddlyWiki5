@@ -1,4 +1,6 @@
 title: $:/plugins/tiddlywiki/consent-banner/config
+caption: Consent Banner
+tags: $:/tags/ControlPanel/SettingsTab
 
 ! [[Greeting Message|$:/config/plugins/tiddlywiki/consent-banner/greeting-message]]
 

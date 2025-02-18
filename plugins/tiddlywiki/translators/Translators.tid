@@ -15,6 +15,12 @@ title: $:/Translators
 
 Number of translated tiddlers: <$count filter=<<allTheTranslatedTiddlerTitles>>/> of <$count filter=<<allTheTranslatableTiddlerTitles>>/>
 
+<$wikify name="max" text="""<$count filter=<<allTheTranslatableTiddlerTitles>>/>""">
+<$wikify name="value" text="""<$count filter=<<allTheTranslatedTiddlerTitles>>/>""">
+<progress max=<<max>> value=<<value>>/>
+</$wikify>
+</$wikify>
+
 {{$:/core/ui/PageTemplate/pagecontrols}}
 
 <<tabs "[all[tiddlers+shadows]tag[$:/tags/TranslationGroup]sort[caption]]" "$:/plugins/tiddlywiki/translators/ui/group/Miscellaneous" "$:/state/translatorsTab" "tc-vertical">>

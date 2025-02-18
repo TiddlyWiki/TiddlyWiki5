@@ -1,0 +1,4 @@
+title: $:/config/GeospatialDemo/FeatureVisibility/$:/
+
+geospatialdemo/features/harvard-volcanoes-of-the-world: hide
+geospatialdemo/features/natural-earth-countries-low-res: hide

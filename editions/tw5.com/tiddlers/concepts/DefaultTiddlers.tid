@@ -1,5 +1,5 @@
 created: 20180306113011255
-modified: 20241116210134914
+modified: 20180306161225140
 tags: Concepts
 title: DefaultTiddlers
 type: text/vnd.tiddlywiki
@@ -13,5 +13,5 @@ There are two ways default tiddlers can be defined:
 
 The resulting list of titles is then inserted into the [[story river|Story River]].
 
-The [[control panel|$:/ControlPanel]] ''info/basics'' tab includes a text box for direct access to [[$:/DefaultTiddlers]].
+The [[control panel|$:/ControlPanel]] ''-> Info -> Basics -> Default tiddler'' setting includes a text box for direct access to ~$:/DefaultTiddlers.
 

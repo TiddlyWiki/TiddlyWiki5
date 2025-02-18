@@ -1,7 +1,8 @@
-title: CompoundTiddlers
-modified: 20240507221902644
 created: 20240507221902644
+modified: 20240729082610287
 tags: Concepts
+title: CompoundTiddlers
+type: text/vnd.tiddlywiki
 
 Compound tiddlers are a special type of tiddler that can store one or more payload tiddlers. The tiddlers within a compound tiddler are only accessible via special operations, typically with the TestCaseWidget.
 
@@ -29,3 +30,5 @@ tags: five six
 
 This is the third tiddler
 ```
+
+Also see: [[TestCaseTiddlers]]
