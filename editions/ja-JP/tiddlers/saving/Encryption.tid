@@ -1,0 +1,20 @@
+created: 20130825160900000
+modified: 20241110103519303
+original-modified: 20160610083350724
+tags: Features [[Working with TiddlyWiki]]
+title: Encryption
+ja-title: 暗号化
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5を単一のHTMLファイルとして使用すると、[[Stanford JavaScript Crypto Library]]を使用してコンテンツを暗号化できます。
+
+# サイドバーの''ツール''タブに切り替えて、南京錠アイコンのボタンを探します
+# ボタンに<<.icon $:/core/images/unlocked-padlock>> ''パスワードの設定''と表示されている場合、現在のウィキは暗号化されていません。ボタンをクリックすると、以降の保存を暗号化するために使用されるパスワードの入力を求められます
+# ボタンに<<.icon $:/core/images/locked-padlock>> ''パスワードの解除''と表示されている場合、現在のウィキはすでに暗号化されています。ボタンをクリックするとパスワードが削除され、その後の保存は暗号化されなくなります。
+# 必要に応じて、保存したファイルをテキストエディタで開き、データが暗号化されていることを確認します
+# ブラウザでファイルを開きます。コンテンツが表示される前にパスワードの入力を求められます。
+
+TiddlyWikiには、パスワード/暗号化に関連する、2つの無関係な機能があることに注意してください: 
+
+* TiddlySpotに保存するときにパスワードを設定する機能。これは、''コントロールパネル'' <<.icon $:/core/images/options-button>>の"保存"タブで行います。
+* [[Node.js|TiddlyWiki on Node.js]]のサーバ構成で標準のHTTP基本認証を使用する機能。これは、ServerCommandを使用してコマンドラインで実行されます。SSLと組み合わせると、GoogleやDropboxなどのオンラインサービスで得られるのと同じレベルの暗号化転送が実現されますが、ディスク上のデータは暗号化されません

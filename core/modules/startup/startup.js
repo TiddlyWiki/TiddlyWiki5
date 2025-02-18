@@ -88,8 +88,10 @@ exports.startup = function() {
 			if($tw.browser) {
 				var pluginTiddler = $tw.wiki.getTiddler(plugins[0]);
 				if(pluginTiddler) {
+					document.documentElement.setAttribute("lang",pluginTiddler.getFieldString("name"));
 					document.documentElement.setAttribute("dir",pluginTiddler.getFieldString("text-direction") || "auto");
 				} else {
+					document.documentElement.setAttribute("lang","en-GB");
 					document.documentElement.removeAttribute("dir");
 				}
 			}

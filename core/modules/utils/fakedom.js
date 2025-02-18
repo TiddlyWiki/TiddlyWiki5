@@ -56,36 +56,64 @@ Object.defineProperty(TW_TextNode.prototype, "formattedTextContent", {
 	}
 });
 
-var TW_Element = function(tag,namespace) {
+var TW_Style = function(el) {
+	// Define the internal style object
+	var styleObject = {
+		// Method to get the entire style object
+		get: function() {
+			return el._style;
+		},
+		// Method to set styles using a string (e.g. "color:red; background-color:blue;")
+		set: function(str) {
+			var self = this;
+			str = str || "";
+			$tw.utils.each(str.split(";"),function(declaration) {
+				var parts = declaration.split(":"),
+					name = $tw.utils.trim(parts[0]),
+					value = $tw.utils.trim(parts[1]);
+				if(name && value) {
+					el._style[$tw.utils.convertStyleNameToPropertyName(name)] = value;
+				}
+			});
+		},
+		// Method to set a specific property without transforming the property name, such as a custom property
+		setProperty: function(name, value) {
+			el._style[name] = value;
+		}
+	};
+
+	// Return a Proxy to handle direct access to individual style properties
+	return new Proxy(styleObject, {
+		get: function(target, property) {
+			// If the property exists on styleObject, return it (get, set, setProperty methods)
+			if (property in target) {
+				return target[property];
+			}
+			// Otherwise, return the corresponding property from _style
+			return el._style[$tw.utils.convertStyleNameToPropertyName(property)] || "";
+		},
+		set: function(target, property, value) {
+			// Set the property in _style
+			el._style[$tw.utils.convertStyleNameToPropertyName(property)] = value;
+			return true;
+		}
+	});
+};
+
+var TW_Element = function(tag, namespace) {
 	bumpSequenceNumber(this);
 	this.isTiddlyWikiFakeDom = true;
 	this.tag = tag;
 	this.attributes = {};
 	this.isRaw = false;
 	this.children = [];
-	this._style = {};
+	this._style = {}; // Internal style object
+	this.style = new TW_Style(this); // Proxy for style management
 	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
 };
 
-Object.setPrototypeOf(TW_Element.prototype,TW_Node.prototype);
 
-Object.defineProperty(TW_Element.prototype, "style", {
-	get: function() {
-		return this._style;
-	},
-	set: function(str) {
-		var self = this;
-		str = str || "";
-		$tw.utils.each(str.split(";"),function(declaration) {
-			var parts = declaration.split(":"),
-				name = $tw.utils.trim(parts[0]),
-				value = $tw.utils.trim(parts[1]);
-			if(name && value) {
-				self._style[$tw.utils.convertStyleNameToPropertyName(name)] = value;
-			}
-		});
-	}
-});
+Object.setPrototypeOf(TW_Element.prototype,TW_Node.prototype);
 
 Object.defineProperty(TW_Element.prototype, "nodeType", {
 	get: function() {
@@ -105,7 +133,7 @@ TW_Element.prototype.setAttribute = function(name,value) {
 		throw "Cannot setAttribute on a raw TW_Element";
 	}
 	if(name === "style") {
-		this.style = value;
+		this.style.set(value);
 	} else {
 		this.attributes[name] = value + "";
 	}

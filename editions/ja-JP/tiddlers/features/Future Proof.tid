@@ -1,0 +1,18 @@
+created: 20131213101024997
+modified: 20241210112855653
+original-modified: 20170329104438386
+tags: Features
+title: Future Proof
+ja-title: 将来性
+type: text/vnd.tiddlywiki
+
+2016年1月の[[Network World|http://www.networkworld.com/article/3028098/open-source-tools/tiddlywiki-a-free-open-source-wiki-revisited.html]]誌より:
+
+<<<
+はるか昔(正確には2009年1月)、私はTiddlyWikiという“個人用非線形Webノートブック”という非常に優れたツールについて[[書きました|http://www.networkworld.com/article/2272104/applications/an-amazing-free-microwiki.html]]。そして今日になって、私は幽体離脱体験をしました。偶然、その記事を書いたときに始めたTiddlyWikiを見つけたのですが、それはまだ機能しているのです。
+
+わずか2、3年後に完璧に動作するコードが見つかるだけでも十分魔法のようですが、7年も経ってます! TiddlyWikiは単一ページのWebアプリケーションとして作成されており、現在のブラウザーが2009年当時と大きく異なることを考えると、TiddlyWikiの古いバージョンがまだ動作しているという事実はまさに奇跡的です。
+<<<
+
+TiddlyWikiは、ユーザーの長期的なニーズを念頭に置いて設計されています。[[オープンソース|OpenSource]]であり、インフラストラクチャを必要としないため、遠い未来においても、~TiddlyWikiファイルにアクセスするために必要なのは、通常のHTMLブラウザーだけであると確信できます。キャリアの初期に~TiddlyWikiを使い始めたとしても、退職するまで~TiddlyWikiが役立つと確信できます。
+

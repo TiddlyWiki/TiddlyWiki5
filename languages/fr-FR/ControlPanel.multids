@@ -67,7 +67,7 @@ Palette/Editor/Reset/Caption: Réinitialiser
 Palette/HideEditor/Caption: Masquer l'éditeur
 Palette/Prompt: Palette actuelle :
 Palette/ShowEditor/Caption: Afficher l'éditeur
-Parsing/Caption: Analyse
+Parsing/Caption: Analyseur
 Parsing/Hint: Ici, vous pouvez activer/désactiver globalement les règles de l'analyseur du wiki. Les changements seront effectifs après enregistrement et rechargement de votre wiki. Désactiver certaines règles peut empêcher <$text text="TiddlyWiki"/> de fonctionner correctement. Pour restaurer le fonctionnement normal, utilisez le [[safe mode|https://tiddlywiki.com/#SafeMode]].
 Parsing/Block/Caption: Règles d'analyse Block
 Parsing/Inline/Caption: Règles d'analyse Inline
@@ -198,6 +198,12 @@ Settings/TitleLinks/Yes/Description: Afficher les titres des tiddlers comme des 
 Settings/MissingLinks/Caption: Liens wiki
 Settings/MissingLinks/Hint: Peut-on pointer vers des tiddlers qui n'existent pas encore ?
 Settings/MissingLinks/Description: Active les liens vers les tiddlers inexistants
+SocialCard/Caption: Cartel pour médias sociaux
+SocialCard/Domain/Prompt: Nom de domaine à afficher pour le lien (par exemple, ''tiddlywiki.com'')
+SocialCard/Hint: Cette information est utilisée par les services de messagerie et de médias sociaux pour afficher un cartel de prévisualisation des liens vers ce TiddlyWiki lorsqu'il est accessible en ligne
+SocialCard/PreviewUrl/Prompt: URL complète vers l'image de prévisualisation de ce TiddlyWiki
+SocialCard/PreviewUrl/Preview: Image de prévisualisation :
+SocialCard/Url/Prompt: URL complète pour ce TiddlyWiki
 StoryTiddler/Caption: Tiddlers du déroulé
 StoryTiddler/Hint: Cette cascade de règles sert à choisir dynamiquement le template d'affichage d'un tiddler dans le déroulé.
 StoryView/Caption: Vue sur le déroulé
@@ -235,3 +241,7 @@ ViewTemplateBody/Caption: Visualisation du corps
 ViewTemplateBody/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage du corps d'un tiddler.
 ViewTemplateTitle/Caption: Visualisation du titre
 ViewTemplateTitle/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage du titre d'un tiddler.
+ViewTemplateSubtitle/Caption: Visualisation du sous-titre
+ViewTemplateSubtitle/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage du sous-titre d'un tiddler.
+ViewTemplateTags/Caption: Visualisation des tags
+ViewTemplateTags/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage de la zone de tags d'un tiddler.

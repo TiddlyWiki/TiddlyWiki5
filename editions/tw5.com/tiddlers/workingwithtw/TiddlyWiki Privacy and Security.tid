@@ -1,0 +1,55 @@
+created: 20241106165307259
+modified: 20241117170845666
+title: TiddlyWiki Privacy and Security
+
+<span class="tc-float-right tc-bordered-image">[img width=200 [TiddlyWiki Privacy Badge.png]]</span>
+''TiddlyWiki is unique in that ordinary people can use it securely and privately without any special training.''  The key is that ~TiddlyWiki is just a text file, or a folder of files, so everything that you may already know about how to keep your documents and images private can be applied to ~TiddlyWiki.  Also, because your ~TiddlyWiki data is stored in simple text files, you can be confident that it will still be securely accessible in the decades to come.
+
+!! ~TiddlyWiki Configurations
+
+~TiddlyWiki can be used in two main configurations:
+
+* As a single HTML file that contains all the data and code. This is the easiest setup, and the most widely supported.
+** Popular services like [[Tiddlyhost]] are based on the single file configuration
+** See [[Saving]] for a listing of all the different ways to save a single file ~TiddlyWiki
+* As a Node.js application that runs a web server. This configuration is more powerful, but requires more technical knowledge to set up and maintain. See:
+** [[Installing TiddlyWiki on Node.js]]
+** [[Using TiddlyWiki on Node.js]]
+
+The security and privacy implications of the two configurations are different:
+
+<div class="tc-grid-columns tc-grid-columns-2">
+
+<div>
+
+{{TiddlyWiki Single File Privacy and Security}}
+
+</div>
+
+<div>
+
+{{TiddlyWiki Node.js Privacy and Security}}
+
+</div>
+
+</div>
+
+!! Verifiable Trust
+
+An important aspect of ~TiddlyWiki's security and privacy claims is that they can be readily confirmed by anyone with basic technical skills.  For example, the network monitoring tools built into most browsers allow you to verify that ~TiddlyWiki doesn't send any data to other servers. Similarly, you can open a ~TiddlyWiki HTML file in an editor and verify that your data is readily accessible.
+
+!! Community Tools
+
+There are also third party tools from the community that extend ~TiddlyWiki's built in encryption:
+
+* [["Encrypt single tiddler plugin" by Danielo Rodriguez]] allows individual tiddlers to be encrypted
+* [[TW5-CSEncryption|https://wiki.fspark.me/TW5-CSEncryption/]] offers client-side encryption for ~TiddlyWiki on Node.js
+
+!! Further Information
+
+If security and privacy are important to you then you need to take the best available advice, and the best place for that is specialist organisations that focus on this area.
+
+The [[Electronic Frontier Foundation (EFF)|https://eff.org]] in the US is well respected, and their advice would be a good place to start. It emphasises basics such as dealing with passwords and two factor authentication, but also explains more advanced topics such as making a security plan, and how to set up a device securely.
+
+* https://ssd.eff.org/module-categories/basics
+* //Please suggest other useful privacy and security resources//
