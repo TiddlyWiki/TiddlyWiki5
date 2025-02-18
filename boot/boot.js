@@ -1402,7 +1402,8 @@ $tw.Wiki = function(options) {
 		return types;
 	};
 
-	// Read plugin contents for all plugins, or just an array of titles. Returns the list of updated plugin titles and the list of deleted plugin titles
+	// Read plugin contents for all plugins, or just an array of titles. Returns the list of updated plugin titles and the list of deleted plugin titles.
+	// Clears the pluginContents cache for any plugins that have been deleted
 	this.readPluginInfo = function(titles) {
 		var results = {
 			modifiedPlugins: [],
