@@ -40,10 +40,10 @@ exports.getFieldString = function(field,defaultValue) {
 };
 
 /*
-Get the value of a field as a list
+Get the value of a field as an array / list
 */
 exports.getFieldList = function(field) {
-	var value = this.fields[field];
+	var value = this.getFieldString(field,null);
 	// Check for a missing field
 	if(value === undefined || value === null) {
 		return [];

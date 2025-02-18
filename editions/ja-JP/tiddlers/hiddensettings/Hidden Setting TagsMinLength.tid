@@ -1,0 +1,13 @@
+created: 201712032331
+modified: 20241127111343096
+original-modified: 201712032331
+tags: [[Hidden Settings]]
+title: Hidden Setting: Tags Minimum Length
+ja-title: 隠し設定: タグの最小長さ
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.16">> タグのドロップダウン: 結果が表示される前の入力文字列の最小長を制御します。
+
+デフォルトは"0"です。
+
+$:/config/Tags/MinLength

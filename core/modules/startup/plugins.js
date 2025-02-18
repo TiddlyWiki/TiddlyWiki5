@@ -75,7 +75,7 @@ exports.startup = function() {
 				$tw.wiki.unpackPluginTiddlers();
 				// Queue change events for the changed shadow tiddlers
 				$tw.utils.each(Object.keys(changedShadowTiddlers),function(title) {
-					$tw.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title]);
+					$tw.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title], true);
 				});
 			}
 		}

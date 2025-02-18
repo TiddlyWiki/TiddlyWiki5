@@ -1,0 +1,61 @@
+created: 20160424150551727
+modified: 20241018105413659
+original-modified: 20230615114519672
+tags: Learning
+title: Concatenating text and variables using macro substitution
+ja-title: マクロ置換を使用してテキストと変数を連結する
+type: text/vnd.tiddlywiki
+
+!! 重要
+
+<<.from-version "5.3.0">> テキストと変数を連結するには、[[置換された属性|Substituted Attribute Values]]や[[置換フィルター演算子|substitute Operator]]を使用することをお勧めします。
+
+~TiddlyWikiでは、変数の値をさまざまなテキスト文字列と組み合わせることがよくあります。一部のプログラミング言語では、このプロセスはテキストの"連結"と呼ばれることがよくあります。
+
+---
+
+!! 何があったのか
+
+例えば、顧客データベースのテンプレートを設定し、顧客に関する追加の連絡先情報をリンクによって自動的に参照するようにしたいとします。Tiddler内では、次のようなことを試すかもしれません:
+
+<<.bad-example "`[[Additional Info|<<currentTiddler>>-Contact]]`">>
+
+しかし、これは正しく機能しません。これを試すと、リンクは文字通りに解釈され、次の場所に移動しようとします: 
+
+```
+<<currentTiddler>>-Contact
+```
+
+解決策は、マクロを使用して、`<<currentTiddler>>`がレンダリングされた値と、追加のテキスト`-Contact`とを組み合わせることです。
+
+Tiddlerの冒頭で、次のようなマクロを作成します:
+
+```
+\define linkup(link) [[Additional Info|$link$-Contact]]
+```
+
+新しいマクロを次のように呼び出すること試すかもしれません:
+
+<<.bad-example "`<<linkup <<currentTiddler>> >>`">>
+
+しかし、そうすると、`<<currentTiddler>>`はレンダリングされずに、文字通り渡されることがわかります。
+
+代わりに、次のように[[MacroCallWidget]]ウィジェットを使用できます: 
+
+```
+<$macrocall $name="linkup" link=<<currentTiddler>> />
+```
+
+この場合、変数の値をマクロに直接渡しました。これは、このタスクを実行するための一般的な方法です。他の変数に基づいてさらにリンクを作成したい場合は、それぞれの状況でマクロを再利用できます。
+
+この場合のように、使用している変数が`currentTiddler`だけであれば、次のように、簡単にマクロを記述できます: 
+
+```
+\define linkup() [[Additional Info|$(currentTiddler)$-Contact]]
+```
+
+この場合、引数を渡さないことに注意してください。代わりに、特別な構文`$(variable)$`を使用して変数を参照します。引数を渡さないため、次のように`<$macrocall>`ウィジェットなしでより簡単に呼び出すことができます: 
+
+```
+<<linkup>>
+```

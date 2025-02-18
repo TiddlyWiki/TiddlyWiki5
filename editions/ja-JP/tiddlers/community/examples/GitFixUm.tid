@@ -1,0 +1,16 @@
+created: 20150621212120755
+modified: 20241201110715436
+original-modified: 20150621214507584
+tags: Examples
+title: Interactive Git Documentation by Devin Weaver
+ja-title: Devin WeaverのインタラクティブGitドキュメント
+url: http://sukima.github.io/GitFixUm/
+
+A git choose-your-own-adventure!ⓡ for walking yourself though fixing a //broken// Git repository.
+//壊れた//Gitリポジトリを自分で修復するための、git choose-your-own-adventure!ⓡ。
+
+{{!!url}}
+
+<<<
+このドキュメントは、gitの使用時に意図していなかった事態から回復するための、かなり包括的なガイドとなることを目指しています。gitが非常に複雑で、特定の問題に対処するために大きなドキュメントが必要なわけではありません。むしろ、実行した可能性のある操作のセットが非常に大きいため、実行した操作と実行したい操作に応じて異なるテクニックが必要になります。
+<<<
