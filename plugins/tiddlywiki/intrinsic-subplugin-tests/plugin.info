@@ -1,7 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/intrinsic-subplugin-tests",
-	"name": "intrinsic-subplugin-tests",
-	"description": "Intrinsic subplugin tests",
-	"list": "readme",
-	"stability": "STABILITY_1_EXPERIMENTAL"
-}
