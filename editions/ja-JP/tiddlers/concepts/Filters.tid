@@ -15,13 +15,13 @@ type: text/vnd.tiddlywiki
 
 TiddlyWikiは、レコードがTiddlerであるデータベースと考えることができます。データベースは通常、どのレコードが特定のパターンに一致するかを発見する方法を提供します。~TiddlyWikiでは、これはフィルタを使用して行われます
 
-<<.def filter>>は、その<<.def "output">>として特定の[[Tiddlerセット|Title Selection]]を選択するための簡潔な表記法です。~TiddlyWikiはフィルタに遭遇するたびに出力を計算します。その後、それらのTiddlerを使って、[[数を数え|CountWidget]]たり、[[リストし|ListWidget]]たりするなど、さらなる処理を行うことができます
+<<.def フィルタ>>は、その<<.def "アウトプット">>として特定の[[Tiddlerセット|Title Selection]]を選択するための簡潔な表記法です。~TiddlyWikiはフィルタに遭遇するたびにアウトプットを計算します。その後、それらのTiddlerを使って、[[数を数え|CountWidget]]たり、[[リストし|ListWidget]]たりするなど、さらなる処理を行うことができます
 
-次の例では、フィルタを<<.mlink list-links>>マクロに渡します。<<.olink2 tag tag>> <<.word Filters>>を使用してすべてのTiddlerのリストを表示します:
+次の例では、フィルタを<<.mlink list-links>>マクロに渡します。<<.olink2 tag tag>> <<.word フィルタ>>であるTiddlerのリストを表示します:
 
 <<wikitext-example-without-html """<<list-links "[tag[Filters]]">>""" >>
 
-Wiki内でTiddlerが追加や削除されると、フィルタの出力が変更される可能性があります。~TiddlyWikiは即再計算し、フィルタベースのカウントやリストも自動的に更新します
+Wiki内でTiddlerが追加や削除されると、フィルタのアウトプットが変更される可能性があります。~TiddlyWikiは即再計算し、フィルタベースのカウントやリストも自動的に更新します
 
 ''さらに詳細:''
 
