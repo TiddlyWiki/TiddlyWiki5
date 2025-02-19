@@ -1134,6 +1134,14 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[[<>:\"/\\|?*]encodeuricomponent[]]").join(",")).toBe("%3C%3E%3A%22%2F%5C%7C%3F%2A");
 		});
 	
+		it("should handle the moduleproperty operator", function() {
+			// We don't need to confirm them all, only it it finds at least one module name that we're sure is there.
+			expect(wiki.filterTiddlers("[[macro]modules[]moduleproperty[name]]")).toContain("qualify");
+			// No such property. Nothing to return.
+			expect(wiki.filterTiddlers("[[macro]modules[]moduleproperty[nonexistent]]").length).toBe(0);
+			// No such tiddlers. Nothing to return.
+			expect(wiki.filterTiddlers("[[nonexistent]moduleproperty[name]]").length).toBe(0);
+		});
 	}
 	
 	});
