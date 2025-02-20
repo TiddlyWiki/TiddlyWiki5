@@ -19,6 +19,9 @@
 			"--screenshot",
 			"[[$:/plugins/tiddlywiki/innerwiki/examples]]",
 			"4"
+		],
+		"external": [
+			"--render","$:/core/save/all-external-js","index.html","text/plain"
 		]
 	}
 }
