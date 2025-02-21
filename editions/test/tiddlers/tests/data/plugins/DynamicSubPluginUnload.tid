@@ -1,0 +1,43 @@
+title: Plugins/DynamicSubPluginUnload
+description: Dynamic sub-plugin unloading
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-specx]]
+
+title: Output
+
+{{$:/plugins/tiddlywiki/bundled-subplugin-tests/readme}}
++
+title: Actions
+
+<$action-deletetiddler $tiddler="$:/plugins/tiddlywiki/bundled-subplugin-tests"/>
++
+title: $:/plugins/tiddlywiki/bundled-subplugin-tests
+list: readme
+name: bundled-subplugin-tests
+plugin-type: plugin
+type: application/json
+
+{
+	"tiddlers": {
+		"$:/plugins/tiddlywiki/bundled-subplugin-tests/readme": {
+			"title": "$:/plugins/tiddlywiki/bundled-subplugin-tests/readme",
+			"text": "Readme from $:/plugins/tiddlywiki/bundled-subplugin-tests\n\n"
+		},
+		"$:/plugins/tiddlywiki/test-subplugin": {
+			"title": "$:/plugins/tiddlywiki/test-subplugin",
+			"name": "test-subplugin",
+			"description": "Test subplugin",
+			"list": "readme",
+			"stability": "STABILITY_1_EXPERIMENTAL",
+			"version": "5.3.7-prerelease",
+			"plugin-type": "plugin",
+			"dependents": "",
+			"type": "application/json",
+			"text": "{\"tiddlers\":{\"$:/plugins/tiddlywiki/test-subplugin/readme\":{\"title\":\"$:/plugins/tiddlywiki/test-subplugin/readme\",\"text\":\"Readme from $:/plugins/tiddlywiki/test-subplugin\"},\"$:/plugins/tiddlywiki/test-subsubplugin\":{\"title\":\"$:/plugins/tiddlywiki/test-subsubplugin\",\"name\":\"test-subsubplugin\",\"description\":\"Test subsubplugin\",\"list\":\"readme readme2\",\"stability\":\"STABILITY_1_EXPERIMENTAL\",\"version\":\"5.3.7-prerelease\",\"plugin-type\":\"plugin\",\"dependents\":\"\",\"type\":\"application/json\",\"text\":\"{\\\"tiddlers\\\":{\\\"$:/plugins/tiddlywiki/test-subsubplugin/readme\\\":{\\\"title\\\":\\\"$:/plugins/tiddlywiki/test-subsubplugin/readme\\\",\\\"text\\\":\\\"Readme from $:/plugins/tiddlywiki/test-subsubplugin\\\"}}}\"}}}"
+		}
+	}
+}
++
+title: ExpectedResult
+
+.

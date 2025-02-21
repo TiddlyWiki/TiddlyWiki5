@@ -1174,8 +1174,8 @@ $tw.Wiki = function(options) {
 			}
 			return tiddlerTitles;
 		},
-		pluginTiddlersInfo = [], // Array of {tiddler:<tiddler object>,parentPluginTitle:<title>} for all plugins and sub-plugins, ordered by priority
-		pluginContents = Object.create(null), // Hashmap of parsed plugin content
+		pluginTiddlersInfo = [], // Array of tiddler fields for all plugins and sub-plugins, ordered by priority
+		pluginContents = Object.create(null), // Hashmap by title of {contents:<parsed plugin contents>,fields:<fields>,subPluginTitles:<list>}
 		shadowTiddlerInfo = Object.create(null), // Hashmap by title of {source:, tiddler:}
 		shadowTiddlerTitles = null, // Array of tiddler titles, calculated and cached when needed
 		getShadowTiddlerTitles = function() {
@@ -1393,8 +1393,8 @@ $tw.Wiki = function(options) {
 	// Get an array of all the currently recognised plugin types
 	this.getPluginTypes = function() {
 		var types = [];
-		$tw.utils.each(pluginTiddlersInfo,function(pluginTiddlerInfo) {
-			var pluginType = pluginTiddlerInfo.tiddler.fields["plugin-type"];
+		$tw.utils.each(pluginTiddlersInfo,function(pluginTiddlerFields) {
+			var pluginType = pluginTiddlerFields["plugin-type"];
 			if(pluginType && types.indexOf(pluginType) === -1) {
 				types.push(pluginType);
 			}
@@ -1402,23 +1402,44 @@ $tw.Wiki = function(options) {
 		return types;
 	};
 
-	// Read plugin contents for all plugins, or just an array of titles. Returns the list of updated plugin titles and the list of deleted plugin titles.
-	// Clears the pluginContents cache for any plugins that have been deleted
+	// Read plugin contents for all plugins, or just an array of titles. Returns the list of updated plugin titles, the list of deleted plugin titles and
+	// a hashmap of the deleted plugin contents. Clears the pluginContents cache for any plugins that have been deleted
 	this.readPluginInfo = function(titles) {
-		var results = {
+		var self = this,
+			results = {
 			modifiedPlugins: [],
-			deletedPlugins: []
+			deletedPlugins: [],
+			deletedPluginContents: {}
 		};
 		$tw.utils.each(titles || getTiddlerTitles(),function(title) {
-			var tiddler = tiddlerStore[title];
+			var tiddler = self.getTiddler(title);
+			if(!tiddler) {
+				for(var t=0; t<pluginContents.length; t++) {
+					if(pluginContents[t].subPluginTitles.indexOf(title) !== -1) {
+						tiddler = new $tw.Tiddler(pluginContents[t].fields);
+						break;
+					}
+				}
+			}
 			if(tiddler) {
 				if(tiddler.isPlugin() && tiddler.fields.text) {
-					var contents = $tw.utils.parseJSONSafe(tiddler.fields.text);
-					pluginContents[tiddler.fields.title] = contents;
-					results.modifiedPlugins.push(tiddler.fields.title);
+					var contents = $tw.utils.parseJSONSafe(tiddler.fields.text).tiddlers;
+					var subPluginTitles = [];
+					// Read any sub-plugins
+					$tw.utils.each(contents,function(subPluginFields,subPluginTitle) {
+						if(subPluginFields["plugin-type"] && subPluginFields["type"] === "application/json") {
+							var contents = $tw.utils.parseJSONSafe(subPluginFields.text).tiddlers
+							pluginContents[subPluginTitle] = {contents: contents,fields: subPluginFields};
+							results.modifiedPlugins.push(subPluginTitle);
+							subPluginTitles.push(subPluginTitle)
+						}
+					});
+					pluginContents[title] = {contents: contents,fields: tiddler.fields,subPluginTitles: subPluginTitles};
+					results.modifiedPlugins.push(title);
 				}
 			} else {
 				if(pluginContents[title]) {
+					results.deletedPluginContents[title] = {tiddlers: pluginContents[title].contents};
 					delete pluginContents[title];
 					results.deletedPlugins.push(title);
 				}
@@ -1427,57 +1448,43 @@ $tw.Wiki = function(options) {
 		return results;
 	};
 
+	this.isSubPlugin = function(title) {
+		for(var t=0; t<pluginContents.length; t++) {
+			if(pluginContents[t].subPluginTitles.indexOf(title) !== -1) {
+				return true;
+			}
+		}
+		return false;
+	};
+
 	// Get plugin info for a plugin
 	this.getPluginInfo = function(title) {
-		return pluginContents[title];
+		var pluginContent = pluginContents[title];
+		if(pluginContent) {
+			return {tiddlers: pluginContent.contents, subPluginTitles: pluginContent.subPluginTitles, fields: pluginContent.fields};
+		} else {
+			return null;
+		}
 	};
 
 	// Register the plugin tiddlers of a particular type, or null/undefined for any type, optionally restricting registration to an array of tiddler titles. Return the array of titles affected
 	this.registerPluginTiddlers = function(pluginType,titles) {
 		var self = this,
 			registeredTitles = [];
-		if(titles) {
-			$tw.utils.each(titles,function(title) {
-				checkTiddler(null,title);
-			});
-		} else {
-			this.each(function(tiddler,title) {
-				checkTiddler(tiddler,title);
-			});
-		}
-		return registeredTitles;
-		function checkTiddler(tiddler,title) {
-			if(!tiddler) {
-				tiddler = self.getTiddler(title);
-			}
-			if(tiddler && tiddler.isPlugin() && (!pluginType || tiddler.fields["plugin-type"] === pluginType)) {
-				var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
-				if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
-					self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
-					pluginTiddlersInfo.push({tiddler: tiddler});
-					registeredTitles.push(tiddler.fields.title);
-					// Register any sub-plugins
-					var contents = pluginContents[tiddler.fields.title];
-					if(contents) {
-						$tw.utils.each(contents.tiddlers,function(subPluginFields,subPluginTitle) {
-							checkSubTiddler(title,subPluginTitle);
-						});
+		$tw.utils.each(pluginContents,function(pluginContent,pluginTitle) {
+			var pluginFields = pluginContent.fields;
+			if(!titles || titles.indexOf(pluginTitle) !== -1) {
+				if(!pluginType || pluginFields["plugin-type"] === pluginType) {
+					var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + pluginTitle);
+					if(pluginTitle === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
+						self.unregisterPluginTiddlers(null,[pluginTitle]); // Unregister the plugin if it's already registered
+						pluginTiddlersInfo.push(pluginFields);
+						registeredTitles.push(pluginTitle);
 					}
 				}
 			}
-		}
-		function checkSubTiddler(parentPluginTitle,title) {
-			var tiddlerFields = pluginContents[parentPluginTitle].tiddlers[title];
-			if(tiddlerFields.type === "application/json" && tiddlerFields["plugin-type"] && !tiddlerFields["draft.of"] && (!pluginType || tiddlerFields["plugin-type"] === pluginType)) {
-				var tiddler = new $tw.Tiddler(tiddlerFields,{title: title}),
-					disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
-				if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
-					self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
-					pluginTiddlersInfo.push({tiddler: tiddler,parentPluginTitle: parentPluginTitle});
-					registeredTitles.push(tiddler.fields.title);
-				}
-			}
-		}
+		});
+		return registeredTitles;
 	};
 
 	// Unregister the plugin tiddlers of a particular type, or null/undefined for any type, optionally restricting unregistering to an array of tiddler titles. Returns an array of the titles affected
@@ -1486,10 +1493,9 @@ $tw.Wiki = function(options) {
 			unregisteredTitles = [];
 		// Remove any previous registered plugins of this type
 		for(var t=pluginTiddlersInfo.length-1; t>=0; t--) {
-			var pluginInfo = pluginTiddlersInfo[t],
-				tiddler = pluginInfo.tiddler;
-			if(tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType) && (!titles || titles.indexOf(tiddler.fields.title) !== -1)) {
-				unregisteredTitles.push(tiddler.fields.title);
+			var pluginFields = pluginTiddlersInfo[t];
+			if(pluginFields["plugin-type"] && (!pluginType || pluginFields["plugin-type"] === pluginType) && (!titles || titles.indexOf(pluginFields.title) !== -1)) {
+				unregisteredTitles.push(pluginFields.title);
 				pluginTiddlersInfo.splice(t,1);
 			}
 		}
@@ -1501,15 +1507,13 @@ $tw.Wiki = function(options) {
 		var self = this;
 		// Sort the plugin titles by the `plugin-priority` field, if this field is missing, default to 1
 		pluginTiddlersInfo.sort(function(a, b) {
-			var fieldsA = a.tiddler.fields,
-				fieldsB = b.tiddler.fields,
-				priorityA = "plugin-priority" in fieldsA ? fieldsA["plugin-priority"] : 1,
-				priorityB = "plugin-priority" in fieldsB ? fieldsB["plugin-priority"] : 1;
+			var priorityA = "plugin-priority" in a ? a["plugin-priority"] : 1,
+				priorityB = "plugin-priority" in b ? b["plugin-priority"] : 1;
 			if (priorityA !== priorityB) {
 				return priorityA - priorityB;
-			} else if (fieldsA.title < fieldsB.title) {
+			} else if (a.title < b.title) {
 				return -1;
-			} else if (fieldsA.title === fieldsB.title) {
+			} else if (a.title === b.title) {
 				return 0;
 			} else {
 				return +1;
@@ -1517,26 +1521,16 @@ $tw.Wiki = function(options) {
 		});
 		// Now go through the plugins in ascending order and assign the shadows
 		shadowTiddlerInfo = Object.create(null);
-		$tw.utils.each(pluginTiddlersInfo,function(tiddlerInfo) {
-			var tiddler = tiddlerInfo.tiddler,
-				contents;
-			if(tiddlerInfo.parentPluginTitle) {
-				contents = $tw.utils.parseJSONSafe(pluginContents[tiddlerInfo.parentPluginTitle].tiddlers[tiddler.fields.title].text || "null");
-			} else {
-				contents = pluginContents[tiddler.fields.title];
-			}
+		$tw.utils.each(pluginTiddlersInfo,function(tiddlerFields) {
+			var contents = pluginContents[tiddlerFields.title].contents;
 			// Extract the constituent tiddlers
-			if(contents) {
-				$tw.utils.each(contents.tiddlers,function(constituentTiddler,constituentTitle) {
-					// Save the tiddler object
-					if(constituentTitle) {
-						shadowTiddlerInfo[constituentTitle] = {
-							source: tiddler.fields.title,
-							tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
-						};
-					}
-				});
-			}
+			$tw.utils.each(contents,function(constituentTiddler,constituentTitle) {
+				// Save the tiddler object
+				shadowTiddlerInfo[constituentTitle] = {
+					source: tiddlerFields.title,
+					tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
+				};
+			});
 		});
 		shadowTiddlerTitles = null; // Force regeneration of the shadow tiddler titles list
 		this.clearCache(null);
