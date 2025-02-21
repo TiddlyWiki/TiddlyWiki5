@@ -61,13 +61,13 @@ PluginSwitcher.prototype.switchPlugins = function() {
 		};
 	accumulatePlugin(selectedPluginTitle);
 	// Read the plugin info for the incoming plugins
-	var changes = $tw.wiki.readPluginInfo(plugins);
+	var changes = this.wiki.readPluginInfo(plugins);
 	// Unregister any existing theme tiddlers
-	var unregisteredTiddlers = $tw.wiki.unregisterPluginTiddlers(this.pluginType);
+	var unregisteredTiddlers = this.wiki.unregisterPluginTiddlers(this.pluginType);
 	// Register any new theme tiddlers
-	var registeredTiddlers = $tw.wiki.registerPluginTiddlers(this.pluginType,plugins);
+	var registeredTiddlers = this.wiki.registerPluginTiddlers(this.pluginType,plugins,plugins[0] === "$:/languages/fr-FR");
 	// Unpack the current theme tiddlers
-	$tw.wiki.unpackPluginTiddlers();
+	this.wiki.unpackPluginTiddlers();
 	// Call the switch handler
 	if(this.onSwitch) {
 		this.onSwitch(plugins);

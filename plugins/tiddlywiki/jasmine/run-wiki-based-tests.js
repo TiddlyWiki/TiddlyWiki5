@@ -39,10 +39,19 @@ describe("Wiki-based tests", function() {
 			wiki.registerPluginTiddlers("plugin");
 			wiki.unpackPluginTiddlers();
 			wiki.addIndexersToWiki();
-			// Clear changes queue
-			wiki.clearTiddlerEventQueue();
 			// Install the plugin change event handler
 			$tw.utils.installPluginChangeHandler(wiki);
+			// Install the language switcher
+			$tw.languageSwitcher = new $tw.PluginSwitcher({
+				wiki: wiki,
+				pluginType: "language",
+				controllerTitle: "$:/language",
+				defaultPlugins: [
+					"$:/languages/en-GB"
+				]
+			});
+			// Clear changes queue
+			wiki.clearTiddlerEventQueue();
 			// Complain if we don't have the ouput and expected results
 			if(!wiki.tiddlerExists("Output")) {
 				throw "Missing 'Output' tiddler";
@@ -53,8 +62,6 @@ describe("Wiki-based tests", function() {
 				var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 				// Render the widget node to the DOM
 				var wrapper = renderWidgetNode(widgetNode);
-				// Clear changes queue
-				wiki.clearTiddlerEventQueue();
 				// Run the actions if provided
 				if(wiki.tiddlerExists("Actions")) {
 					widgetNode.invokeActionString(wiki.getTiddlerText("Actions"));
@@ -65,7 +72,6 @@ describe("Wiki-based tests", function() {
 					wiki.processOutstandingTiddlerEvents();
 					refreshWidgetNode(widgetNode,wrapper);
 				}
-				wiki.processOutstandingTiddlerEvents();
 				// Test the rendering
 				refreshWidgetNode(widgetNode,wrapper);
 				expect(wrapper.innerHTML).toBe(wiki.getTiddlerText("ExpectedResult"));

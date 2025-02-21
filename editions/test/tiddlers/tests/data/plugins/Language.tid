@@ -1,0 +1,46 @@
+title: Plugins/Language
+description: Loading of correct language plugin at startup
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+{{First}}
++
+title: $:/language
+
+$:/languages/fr-FR
++
+title: $:/languages/en-GB
+list: readme
+name: en-GB
+plugin-type: language
+type: application/json
+
+{
+	"tiddlers": {
+		"First": {
+			"title": "First",
+			"text": "This is English"
+		}
+	}
+}
++
+title: $:/languages/fr-FR
+list: readme
+name: fr-FR
+plugin-type: language
+type: application/json
+
+{
+	"tiddlers": {
+		"First": {
+			"title": "First",
+			"text": "This is French"
+		}
+	}
+}
++
+title: ExpectedResult
+
+<p>This is French</p>
