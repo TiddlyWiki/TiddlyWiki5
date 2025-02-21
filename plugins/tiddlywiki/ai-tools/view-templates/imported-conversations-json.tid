@@ -1,0 +1,45 @@
+title: $:/plugins/tiddlywiki/ai-tools/view-templates/imported-conversations-json
+tags: $:/tags/ViewTemplate
+list-before: $:/core/ui/ViewTemplate/body
+
+\whitespace trim
+
+\procedure importer()
+<p>
+	<div>
+		<$link>
+			<$text text=`$(currentTiddler)$ appears to be a ChatGPT export containing $(numberOfConversations)$ conversations`/>
+		</$link>
+	</div>
+	<div>
+		<$button>
+			<$action-sendmessage $message="tm-import-conversations" $param=<<currentTiddler>>/>
+			{{$:/core/images/input-button}} Import
+		</$button>
+	</div>
+</p>
+\end importer
+
+<%if [<currentTiddler>type[application/json]] %>
+	<$let json={{{ [<currentTiddler>get[text]] }}} >
+		<%if [<json>jsontype[]match[array]] %>
+			<$let 
+				numberOfConversations={{{ [<json>jsonindexes[]count[]] }}}
+				json={{{ [<json>jsonextract[0]] }}}
+			>
+				<%if [<json>jsontype[]match[object]] %>
+					<%if
+						[<json>jsontype[title]match[string]]
+						:and[<json>jsontype[create_time]match[number]]
+						:and[<json>jsontype[update_time]match[number]]
+						:and[<json>jsontype[mapping]match[object]]
+						:and[<json>jsontype[id]match[string]]
+					%>
+						<<importer>>
+					<%endif%>
+				<%endif%>
+			</$let>
+		<%endif%>
+	</$let>
+<%endif%>
+
