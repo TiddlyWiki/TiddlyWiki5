@@ -24,17 +24,32 @@ describe("Wiki-based tests", function() {
 		var tiddler = $tw.wiki.getTiddler(title);
 		it(tiddler.fields.title + ": " + tiddler.fields.description, function() {
 			// Add our tiddlers
-			var wiki = new $tw.Wiki(),
-				coreTiddler = $tw.wiki.getTiddler("$:/core");
+			var wiki = new $tw.Wiki();
+			// Suppress next tick dispatch for wiki change events
+			wiki.setDispatchMode(true);
+			// Add the core plugin
+			var coreTiddler = $tw.wiki.getTiddler("$:/core")
 			if(coreTiddler) {
 				wiki.addTiddler(coreTiddler);
 			}
+			// Add other tiddlers
 			wiki.addTiddlers(readMultipleTiddlersTiddler(title));
 			// Unpack plugin tiddlers
 			wiki.readPluginInfo();
 			wiki.registerPluginTiddlers("plugin");
 			wiki.unpackPluginTiddlers();
 			wiki.addIndexersToWiki();
+			// Install the plugin change event handler
+			$tw.utils.installPluginChangeHandler(wiki);
+			// Install the language switcher
+			$tw.languageSwitcher = new $tw.PluginSwitcher({
+				wiki: wiki,
+				pluginType: "language",
+				controllerTitle: "$:/language",
+				defaultPlugins: [
+					"$:/languages/en-GB"
+				]
+			});
 			// Clear changes queue
 			wiki.clearTiddlerEventQueue();
 			// Complain if we don't have the ouput and expected results
@@ -47,14 +62,18 @@ describe("Wiki-based tests", function() {
 				var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 				// Render the widget node to the DOM
 				var wrapper = renderWidgetNode(widgetNode);
-				// Clear changes queue
-				wiki.clearTiddlerEventQueue();
 				// Run the actions if provided
 				if(wiki.tiddlerExists("Actions")) {
 					widgetNode.invokeActionString(wiki.getTiddlerText("Actions"));
 					refreshWidgetNode(widgetNode,wrapper);
 				}
+				// Make sure all wiki events have been cleared
+				while(wiki.eventsTriggered) {
+					wiki.processOutstandingTiddlerEvents();
+					refreshWidgetNode(widgetNode,wrapper);
+				}
 				// Test the rendering
+				refreshWidgetNode(widgetNode,wrapper);
 				expect(wrapper.innerHTML).toBe(wiki.getTiddlerText("ExpectedResult"));
 			}
 		});
