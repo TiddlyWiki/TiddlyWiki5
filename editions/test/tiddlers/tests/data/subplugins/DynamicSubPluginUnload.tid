@@ -1,21 +1,21 @@
-title: Plugins/DynamicSubPluginLoad
-description: Dynamic sub-plugin loading
+title: SubPlugins/DynamicSubPluginUnload
+description: Dynamic sub-plugin unloading
 type: text/vnd.tiddlywiki-multiple
-tags: [[$:/tags/wiki-test-spec]]
+tags: [[$:/tags/wiki-test-specx]]
 
 title: Output
 
-{{$:/plugins/tiddlywiki/test-subplugin/readme}}
+{{$:/plugins/tiddlywiki/bundled-subplugin-tests/readme}}
 +
 title: Actions
 
-<$action-createtiddler $basetitle="$:/plugins/tiddlywiki/bundled-subplugin-tests" $template="$:/plugins/tiddlywiki/bundled-subplugin-tests/raw" type="application/json"/>
+<$action-deletetiddler $tiddler="$:/plugins/tiddlywiki/bundled-subplugin-tests"/>
 +
-title: $:/plugins/tiddlywiki/bundled-subplugin-tests/raw
+title: $:/plugins/tiddlywiki/bundled-subplugin-tests
 list: readme
 name: bundled-subplugin-tests
 plugin-type: plugin
-type: text/plain
+type: application/json
 
 {
 	"tiddlers": {
@@ -40,4 +40,4 @@ type: text/plain
 +
 title: ExpectedResult
 
-<p>Readme from <a class="tc-tiddlylink tc-tiddlylink-shadow" href="#%24%3A%2Fplugins%2Ftiddlywiki%2Ftest-subplugin">$:/plugins/tiddlywiki/test-subplugin</a></p>
+.

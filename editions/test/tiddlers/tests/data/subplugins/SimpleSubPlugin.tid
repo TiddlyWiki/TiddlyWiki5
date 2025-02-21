@@ -1,4 +1,4 @@
-title: Plugins/SimpleSubPlugin
+title: SubPlugins/SimpleSubPlugin
 description: Simple sub-plugin
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
