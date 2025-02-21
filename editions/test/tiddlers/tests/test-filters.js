@@ -1141,6 +1141,8 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[[macro]modules[]moduleproperty[nonexistent]]").length).toBe(0);
 			// No such tiddlers. Nothing to return.
 			expect(wiki.filterTiddlers("[[nonexistent]moduleproperty[name]]").length).toBe(0);
+			// Non string properties should get toStringed.
+			expect(wiki.filterTiddlers("[[$:/core/modules/commands/init.js]moduleproperty[info]]").join(" ")).toBe('{"name":"init","synchronous":true}');
 		});
 	}
 	

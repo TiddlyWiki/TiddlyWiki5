@@ -21,6 +21,9 @@ exports.moduleproperty = function(source,operator,options) {
 		try {
 			var value = require(title)[operator.operand || ""];
 			if(value !== undefined) {
+				if(typeof value !== "string") {
+					value = JSON.stringify(value);
+				}
 				results.push(value);
 			}
 		} catch(e) {
