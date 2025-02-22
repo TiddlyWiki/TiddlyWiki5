@@ -220,12 +220,10 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
 			this.refreshSelf();
 			return true;
-		} else if (changedTiddlers[this.editRefreshTitle]) {
-			this.engine.updateDomNodeText(this.getEditInfo().value);
-		} else if(changedTiddlers[this.editTitle]) {
+		} else if (changedAttributes["default"] || changedTiddlers[this.editRefreshTitle] || changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
 		}
