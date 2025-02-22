@@ -1,8 +1,27 @@
 title: $:/core/ui/EditTemplate/body/default
 
-\function edit-preview-state()
+\import $:/core/procedures/sliders
+
+\function get.edit-preview-state()
 [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] +[get[text]] :else[[no]]
 \end
+
+\function get.tc-editor.class()
+[{!!type}is[blank]then[tc-edit-texteditor tc-edit-texteditor-body]]
+[{!!type}is[blank]then<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]]
+[{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]!match[bitmap]then[tc-edit-texteditor tc-edit-texteditor-body]]
+[{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]!match[bitmap]then<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]]
+[{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]match[bitmap]then[tc-edit-bitmapeditor tc-edit-bitmapeditor-body]]
+[{!!type}addprefix[$:/config/EditorTypeMappings/]get[text]match[bitmap]then<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-bitmapeditor-identified-]] +[join[ ]]
+\end
+
+\function get.tc-tiddler-preview-preview.class() tc-tiddler-preview-preview [<identifier>addprefix[tc-tiddler-preview-preview-identified-]] +[join[ ]]
+
+\function get.slider.condition() [<get.edit-preview-state>match[yes]] :else[[no]]
+
+\function resizer.state.tiddler() [[$:/state/resizing/editor-preview-]addsuffix<identifier>]
+
+\function resizer.class() [[tc-editor-preview-slider-]addsuffix<identifier>]
 
 \define config-visibility-title()
 $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
@@ -12,36 +31,55 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 <$action-popup $state=<<importState>> $coords="(0,0,0,0)" $floating="yes"/>
 \end
 
+\procedure tp-tiddler-editor-preview()
+<div
+	class={{{ [<get.edit-preview-state>match[yes]then[tc-tiddler-preview]else[tc-tiddler-preview-hidden]] [<get.edit-preview-state>match[yes]then[tc-tiddler-preview-identified-]addsuffix<identifier>] [[tc-tiddler-editor]] +[join[ ]] }}}>
+
+	<$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
+
+	<$list filter="[<editPreviewStateTiddler>get[text]match[yes]]" variable="ignore">
+
+		<div class=<<get.tc-tiddler-preview-preview.class>> data-tiddler-title={{!!draft.title}} data-tags={{!!tags}}>
+
+			<$transclude tiddler={{$:/state/editpreviewtype}} mode="inline">
+
+				<$transclude tiddler="$:/core/ui/EditTemplate/body/preview/output" mode="inline"/>
+
+			</$transclude>
+
+		</div>
+
+	</$list>
+
+</div>
+\end
+
 \whitespace trim
 <$let
 	qualified-preview-state=<<qualify "$:/state/showeditpreview">>
 	editPreviewStateTiddler={{{ [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] }}}
 	importTitle=<<qualify $:/ImportImage>>
-	importState=<<qualify $:/state/ImportImage>> >
-<$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> >
-<div>
-<div class={{{ [<edit-preview-state>match[yes]then[tc-tiddler-preview]else[tc-tiddler-preview-hidden]] [[tc-tiddler-editor]] +[join[ ]] }}}>
-
-<$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
-
-<$list filter="[<editPreviewStateTiddler>get[text]match[yes]]" variable="ignore">
-
-<div class="tc-tiddler-preview-preview" data-tiddler-title={{!!draft.title}} data-tags={{!!tags}}>
-
-<$transclude tiddler={{$:/state/editpreviewtype}} mode="inline">
-
-<$transclude tiddler="$:/core/ui/EditTemplate/body/preview/output" mode="inline"/>
-
-</$transclude>
-
-</div>
-
-</$list>
-
-</div>
-
-</div>
-
-</$dropzone>
-
+	importState=<<qualify $:/state/ImportImage>>
+	identifier={{{ [<qualify>addsuffix<currentTiddler>sha256[]] }}}
+	sidebarWidthTiddler={{{ [<identifier>addprefix[$:/state/resizer/previewwidth-]] }}}
+>
+	<$dropzone importTitle=<<importTitle>>
+		autoOpenOnImport="no"
+		contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}}
+		class="tc-dropzone-editor"
+		enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}}
+		filesOnly="yes"
+		actions=<<importFileActions>>
+	>
+		<div>
+			<$transclude
+				$variable="editor-preview-slider"
+				class="tc-edit-texteditor-slider"
+				template="tp-tiddler-editor-preview"
+				mode="inline"
+				padding="0px"
+				sliderWidth=<<get.theme.metric previewsliderwidth>>
+			/>
+		</div>
+	</$dropzone>
 </$let>
