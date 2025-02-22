@@ -26,6 +26,23 @@ Inherit from the base widget class
 ButtonWidget.prototype = new Widget();
 
 /*
+Detect nested buttons
+*/
+ButtonWidget.prototype.isNestedButton = function() {
+	var pointer = this.parentWidget,
+		depth = 0;
+	while(pointer) {
+		if(pointer instanceof ButtonWidget) {
+			// we allow 1 nested button
+			if(depth > 1) return true;
+			depth += 1;
+		}
+		pointer = pointer.parentWidget;
+	}
+	return false;
+}
+
+/*
 Render this widget into the DOM
 */
 ButtonWidget.prototype.render = function(parent,nextSibling) {
@@ -37,6 +54,17 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
+	// Check "button in button". Return early with an error message
+	// This check also prevents fatal recursion errors using the transclusion widget
+	if(this.isNestedButton()) {
+		var domNode = this.document.createElement("span");
+		var textNode = this.document.createTextNode($tw.language.getString("Error/RecursiveButton"));
+		domNode.appendChild(textNode);
+		domNode.className = "tc-error";
+		parent.insertBefore(domNode,nextSibling);
+		this.domNodes.push(domNode);
+		return;  // an error message
+	}
 	// Create element
 	if(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {
 		tag = this.buttonTag;
@@ -74,7 +102,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
-	if (this.role) {
+	if(this.role) {
 		domNode.setAttribute("role", this.role);
 	}
 	if(this.popup || this.popupTitle) {
