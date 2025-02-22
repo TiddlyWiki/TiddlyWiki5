@@ -1,0 +1,37 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/anon-config-modal
+subtitle: Anonymous Access Configuration
+class: mws-modal
+
+<div class="mws-modal-container">
+	<div class="mws-modal-content">
+		<h1>Anonymous Access Configuration</h1>
+		<p>This configuration allows anonymous users to read and write to the wiki.</p>
+		<form class="mws-anon-config-form" method="POST" action="/admin/post-anon-config">
+			<div class="mws-modal-section">
+				<$set name="isChecked" value={{{ [[$:/config/MultiWikiServer/AllowAnonymousReads]get[text]] }}}>
+					<$list filter="[<isChecked>match[yes]]">
+						<input type="checkbox" name="allowReads" checked/> Allow anonymous reads
+					</$list>
+					<$list filter="[<isChecked>!match[yes]]">
+						<input type="checkbox" name="allowReads"/> Allow anonymous reads
+					</$list>
+				</$set>
+			</div>
+			<div class="mws-modal-section">
+				<$set name="isChecked" value={{{ [[$:/config/MultiWikiServer/AllowAnonymousWrites]get[text]] }}}>
+					<$list filter="[<isChecked>match[yes]]">
+						<input type="checkbox" name="allowWrites" checked/> Allow anonymous writes
+					</$list>
+					<$list filter="[<isChecked>!match[yes]]">
+						<input type="checkbox" name="allowWrites"/> Allow anonymous writes
+					</$list>
+				</$set>
+			</div>
+			<div class="mws-modal-buttons">
+				<button type="submit" class="mws-modal-button-primary">
+				Save Changes
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
