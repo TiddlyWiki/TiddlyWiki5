@@ -24,4 +24,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>New Tiddler 0xx</p><p>New Tiddler 4xx</p><p>New Tiddler 11xx</p><p>emptyCount 00xx</p><p>invalid start 0xx</p><p>invalid count 0xx</p>
+<p dir="auto">New Tiddler 0xx</p><p dir="auto">New Tiddler 4xx</p><p dir="auto">New Tiddler 11xx</p><p dir="auto">emptyCount 00xx</p><p dir="auto">invalid start 0xx</p><p dir="auto">invalid count 0xx</p>

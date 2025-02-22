@@ -16,4 +16,4 @@ title: Output
 +
 title: ExpectedResult
 
-[[HelloThere]]<p>[[HelloThere]]</p>
+[[HelloThere]]<p dir="auto">[[HelloThere]]</p>

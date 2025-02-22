@@ -36,6 +36,7 @@ options: see below:
 */
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
+	this.parseAsInline = options.parseAsInline;
 	var self = this;
 	// Check for an externally linked tiddler
 	if($tw.browser && (text || "") === "" && options._canonical_uri) {
@@ -259,7 +260,7 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	var start = this.pos;
 	var children = this.parseInlineRun(terminatorRegExp);
 	var end = this.pos;
-	return [{type: "element", tag: "p", children: children, start: start, end: end }];
+	return [{type: "element", tag: "p", attributes: {dir: {type: "string", value: "auto"}}, children: children, start: start, end: end }];
 };
 
 /*

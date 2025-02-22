@@ -19,4 +19,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>|For a blank line after open tag|<div><ul><li>list is recognised</li><li>but the surrounding table row is not</li></ul></div>|</p>
+<p dir="auto">|For a blank line after open tag|<div><ul><li>list is recognised</li><li>but the surrounding table row is not</li></ul></div>|</p>

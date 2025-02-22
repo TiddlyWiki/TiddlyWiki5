@@ -31,4 +31,4 @@ title: TiddlerTwo
 +
 title: ExpectedResult
 
-<p>Ferret:Piranha(Leopard|Coelacanth)|Jaguar:Piranha(Leopard|Coelacanth)|Ferret:Osprey(Leopard|Coelacanth)|Jaguar:Falcon(Leopard|Coelacanth)</p>
+<p dir="auto">Ferret:Piranha(Leopard|Coelacanth)|Jaguar:Piranha(Leopard|Coelacanth)|Ferret:Osprey(Leopard|Coelacanth)|Jaguar:Falcon(Leopard|Coelacanth)</p>

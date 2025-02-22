@@ -12,7 +12,8 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 	tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}}
 	tv-show-missing-links={{$:/config/MissingLinks}}
 	storyviewTitle={{$:/view}}
-	languageTitle={{{ [{$:/language}get[name]] }}}>
+	languageTitle={{{ [{$:/language}get[name]] }}}
+	tv-text-direction={{$:/config/DefaultTextDirection}}>
 
 <div class=<<containerClasses>>>
 
