@@ -6,7 +6,6 @@ module-type: texteditoroperation
 Text editor operation to make a markdown link
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -39,5 +38,3 @@ exports["make-markdown-link"] = function(event,operation) {
 	operation.newSelStart = operation.selStart + operation.replacement.length;
 	operation.newSelEnd = operation.newSelStart;
 };
-
-})();
