@@ -25,7 +25,7 @@ exports.installPluginChangeHandler = function(wiki) {
 			var tiddler = wiki.getTiddler(title);
 			if(tiddler) {
 				// It is a plugin that has been added or modified and is of a type that we need to register
-				if(tiddler.isPlugin() && $tw.wiki.getTiddlerText(PREFIX_CONFIG_REGISTER_PLUGIN_TYPE + (tiddler.fields["plugin-type"] || ""),"no") === "yes") {
+				if(tiddler.isPlugin() && wiki.getTiddlerText(PREFIX_CONFIG_REGISTER_PLUGIN_TYPE + (tiddler.fields["plugin-type"] || ""),"no") === "yes") {
 					changesToProcess.push(title);
 				}
 			} else {
