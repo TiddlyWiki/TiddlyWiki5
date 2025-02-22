@@ -352,25 +352,29 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
 		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
 	}
+	if(event) {
+		var eventProperties = $tw.utils.copyObjectPropertiesSafe(event);
+		variables["event-properties"] = JSON.stringify(eventProperties,null,2);
 
-	if(event && ("clientX" in event) && ("clientY" in event)) {
-		if(selectedNode) {
-			// Add variables for event X and Y position relative to selected node
-			selectedNodeRect = selectedNode.getBoundingClientRect();
-			variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
-			variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
-		}
-		
-		if(domNode) {
-			// Add variables for event X and Y position relative to event catcher node
-			domNodeRect = domNode.getBoundingClientRect();
-			variables["event-fromcatcher-posx"] = (event.clientX - domNodeRect.left).toString();
-			variables["event-fromcatcher-posy"] = (event.clientY - domNodeRect.top).toString();
-		}
+		if(("clientX" in event) && ("clientY" in event)) {
+			if(selectedNode) {
+				// Add variables for event X and Y position relative to selected node
+				selectedNodeRect = selectedNode.getBoundingClientRect();
+				variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
+				variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
+			}
 
-		// Add variables for event X and Y position relative to the viewport
-		variables["event-fromviewport-posx"] = event.clientX.toString();
-		variables["event-fromviewport-posy"] = event.clientY.toString();
+			if(domNode) {
+				// Add variables for event X and Y position relative to event catcher node
+				domNodeRect = domNode.getBoundingClientRect();
+				variables["event-fromcatcher-posx"] = (event.clientX - domNodeRect.left).toString();
+				variables["event-fromcatcher-posy"] = (event.clientY - domNodeRect.top).toString();
+			}
+
+			// Add variables for event X and Y position relative to the viewport
+			variables["event-fromviewport-posx"] = event.clientX.toString();
+			variables["event-fromviewport-posy"] = event.clientY.toString();
+		}
 	}
 	return variables;
 };
