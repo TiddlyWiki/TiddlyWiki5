@@ -200,10 +200,18 @@ exports.parseFilter = function(filterString) {
 
 exports.getFilterOperators = function() {
 	if(!this.filterOperators) {
-		$tw.Wiki.prototype.filterOperators = {};
-		$tw.modules.applyMethods("filteroperator",this.filterOperators);
+		$tw.Wiki.prototype.oldFilterOperators = {};
+		$tw.modules.applyMethods("filteroperator",this.oldFilterOperators);
+		$tw.Wiki.prototype.newFilterOperators = {};
+		$tw.modules.applyMethods("newfilteroperator",this.newFilterOperators);
+		$tw.Wiki.prototype.filterOperators = $tw.utils.extend({},$tw.Wiki.prototype.oldFilterOperators,$tw.Wiki.prototype.newFilterOperators);
 	}
 	return this.filterOperators;
+};
+
+exports.isFilterOperatorNew = function(name) {
+	this.getFilterOperators();
+	return name in $tw.Wiki.prototype.newFilterOperators;
 };
 
 exports.getFilterRunPrefixes = function() {
@@ -214,9 +222,19 @@ exports.getFilterRunPrefixes = function() {
 	return this.filterRunPrefixes;
 }
 
-exports.filterTiddlers = function(filterString,widget,source) {
+exports.filterTiddlersPolymorphic = function(filterString,widget,source) {
 	var fn = this.compileFilter(filterString);
 	return fn.call(this,source,widget);
+};
+
+exports.filterTiddlers = function(filterString,widget,source) {
+	var results = this.filterTiddlersPolymorphic(filterString,widget,source);
+	for(var t=0; t<results.length; t++) {
+		if(typeof results[t] !== "string") {
+			results[t] = $tw.utils.filterItemToString(results[t]);
+		}
+	}
+	return results;
 };
 
 /*
@@ -255,16 +273,19 @@ exports.compileFilter = function(filterString) {
 				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 			$tw.utils.each(operation.operators,function(operator) {
 				var operands = [],
-					operatorFunction;
+					operatorFunction,
+					operatorName;
 				if(!operator.operator) {
 					// Use the "title" operator if no operator is specified
 					operatorFunction = filterOperators.title;
+					operatorName = "title";
 				} else if(!filterOperators[operator.operator]) {
 					// Unknown operators treated as "[unknown]" - at run time we can distinguish between a custom operator and falling back to the default "field" operator
 					operatorFunction = filterOperators["[unknown]"];
 				} else {
 					// Use the operator function
 					operatorFunction = filterOperators[operator.operator];
+					operatorName = operator.operator;
 				}
 				$tw.utils.each(operator.operands,function(operand) {
 					if(operand.indirect) {
@@ -277,7 +298,17 @@ exports.compileFilter = function(filterString) {
 					}
 					operands.push(operand.value);
 				});
-
+				// If this is a legacy monomorphic operator then wrap the accumulator source in a wrapper that converts each item to a string
+				if(!self.isFilterOperatorNew(operatorName)) {
+					var innerAccumulator = accumulator;
+					accumulator = function(iterator) {
+						innerAccumulator(function(ignored,item) {
+							var title = $tw.utils.filterItemToString(item),
+								tiddler = self.getTiddler(title);
+							iterator(tiddler,title);
+						});
+					};
+				}
 				// Invoke the appropriate filteroperator module
 				results = operatorFunction(accumulator,{
 							operator: operator.operator,
