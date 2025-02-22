@@ -1,0 +1,12 @@
+created: 20240826162020234
+modified: 20240826162157753
+tags: testTOC
+title: test-contacts-itemTemplate-parameter
+type: text/vnd.tiddlywiki
+
+* This tiddler was created to test [[contacts]] tiddler, which contains a `toc-include`
+* There is a [[Talk-thread|https://talk.tiddlywiki.org/t/proposal-toc-macros-rewrite-using-if-functions-and-procedures-new-fuctionality/9046/32?u=pmario]], where Scott posts his version as a JSON file.
+
+<<wikitext-example-without-html src:"""<div class="tc-table-of-contents">
+<<toc "root" item-template:"template">>
+</div>""">>
