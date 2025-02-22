@@ -1,0 +1,5 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/FilteredTranscludeInline
+type: text/vnd.tiddlywiki
+
+{{{ [tag[docs]] }}} {{{ [tag[docs]] |tooltip}}} {{{ [tag[docs]] ||TemplateTitle}}} {{{ [tag[docs]] |tooltip||TemplateTitle}}} {{{ [tag[docs]] }}width:40;height:50;}.class.class
