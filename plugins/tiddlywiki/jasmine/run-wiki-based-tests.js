@@ -49,7 +49,7 @@ describe("Wiki-based tests", function() {
 				]
 			});
 			// Install the plugin change event handler
-			$tw.utils.installPluginChangeHandler(wiki,doDebug);
+			$tw.utils.installPluginChangeHandler(wiki);
 			// Clear changes queue
 			wiki.clearTiddlerEventQueue();
 			// Complain if we don't have the ouput and expected results
