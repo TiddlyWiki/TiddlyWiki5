@@ -38,6 +38,7 @@ function PluginSwitcher(options) {
 }
 
 PluginSwitcher.prototype.switchPlugins = function() {
+	var self = this;
 	// Get the name of the current theme
 	var selectedPluginTitle = this.wiki.getTiddlerText(this.controllerTitle);
 	// If it doesn't exist, then fallback to one of the default themes
@@ -61,13 +62,37 @@ PluginSwitcher.prototype.switchPlugins = function() {
 		};
 	accumulatePlugin(selectedPluginTitle);
 	// Read the plugin info for the incoming plugins
-	var changes = this.wiki.readPluginInfo(plugins);
+	var changedPluginInfo = this.wiki.readPluginInfo(plugins);
+	// Collect the shadow tiddlers of any deleted plugins
+	var changedShadowTiddlers = {};
+	$tw.utils.each(changedPluginInfo.deletedPlugins,function(pluginTitle) {
+		var contents = changedPluginInfo.deletedPluginContents[pluginTitle];
+		if(contents && contents.tiddlers) {
+			$tw.utils.each(Object.keys(contents.tiddlers),function(title) {
+				changedShadowTiddlers[title] = true;
+			});
+		}
+	});
+	// Collect the shadow tiddlers of any modified plugins
+	$tw.utils.each(changedPluginInfo.modifiedPlugins,function(pluginTitle) {
+		var pluginInfo = self.wiki.getPluginInfo(pluginTitle);
+		if(pluginInfo && pluginInfo.tiddlers) {
+			$tw.utils.each(Object.keys(pluginInfo.tiddlers),function(title) {
+				changedShadowTiddlers[title] = false;
+			});
+		}
+	});
 	// Unregister any existing theme tiddlers
 	var unregisteredTiddlers = this.wiki.unregisterPluginTiddlers(this.pluginType);
 	// Register any new theme tiddlers
-	var registeredTiddlers = this.wiki.registerPluginTiddlers(this.pluginType,plugins,plugins[0] === "$:/languages/fr-FR");
+	var registeredTiddlers = this.wiki.registerPluginTiddlers(this.pluginType,plugins);
 	// Unpack the current theme tiddlers
-	this.wiki.unpackPluginTiddlers();
+	this.wiki.unpackPluginTiddlers(this.doDebug);
+	// Queue change events for the changed shadow tiddlers
+	$tw.utils.each(changedShadowTiddlers,function(status,title) {
+		self.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title], true);
+	});
+
 	// Call the switch handler
 	if(this.onSwitch) {
 		this.onSwitch(plugins);

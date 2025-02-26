@@ -39,10 +39,8 @@ describe("Wiki-based tests", function() {
 			wiki.registerPluginTiddlers("plugin");
 			wiki.unpackPluginTiddlers();
 			wiki.addIndexersToWiki();
-			// Install the plugin change event handler
-			$tw.utils.installPluginChangeHandler(wiki);
 			// Install the language switcher
-			$tw.languageSwitcher = new $tw.PluginSwitcher({
+			var languageSwitcher = new $tw.PluginSwitcher({
 				wiki: wiki,
 				pluginType: "language",
 				controllerTitle: "$:/language",
@@ -50,6 +48,8 @@ describe("Wiki-based tests", function() {
 					"$:/languages/en-GB"
 				]
 			});
+			// Install the plugin change event handler
+			$tw.utils.installPluginChangeHandler(wiki,doDebug);
 			// Clear changes queue
 			wiki.clearTiddlerEventQueue();
 			// Complain if we don't have the ouput and expected results
@@ -62,18 +62,19 @@ describe("Wiki-based tests", function() {
 				var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 				// Render the widget node to the DOM
 				var wrapper = renderWidgetNode(widgetNode);
+				// Install the wiki change event handler
+				wiki.addEventListener("change",function(changes) {
+					widgetNode.refresh(changes,wrapper);
+				});
 				// Run the actions if provided
 				if(wiki.tiddlerExists("Actions")) {
 					widgetNode.invokeActionString(wiki.getTiddlerText("Actions"));
-					refreshWidgetNode(widgetNode,wrapper);
 				}
 				// Make sure all wiki events have been cleared
 				while(wiki.eventsTriggered) {
 					wiki.processOutstandingTiddlerEvents();
-					refreshWidgetNode(widgetNode,wrapper);
 				}
 				// Test the rendering
-				refreshWidgetNode(widgetNode,wrapper);
 				expect(wrapper.innerHTML).toBe(wiki.getTiddlerText("ExpectedResult"));
 			}
 		});
@@ -110,11 +111,6 @@ describe("Wiki-based tests", function() {
 		widgetNode.render(wrapper,null);
 // console.log(require("util").inspect(wrapper,{depth: 8}));
 		return wrapper;
-	}
-
-	function refreshWidgetNode(widgetNode,wrapper) {
-		widgetNode.refresh(widgetNode.wiki.changedTiddlers,wrapper);
-// console.log(require("util").inspect(wrapper,{depth: 8}));
 	}
 
 });
