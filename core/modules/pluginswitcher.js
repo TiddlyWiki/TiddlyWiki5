@@ -60,6 +60,12 @@ PluginSwitcher.prototype.switchPlugins = function() {
 			}
 		};
 	accumulatePlugin(selectedPluginTitle);
+	var selectedPluginTiddler = this.wiki.getTiddler(selectedPluginTitle);
+	this.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
+		if(tiddler.isPlugin() && tiddler.fields["plugin-type"] === self.pluginType && tiddler.fields.name === selectedPluginTiddler.fields.name) {
+			accumulatePlugin(title);
+		}
+	});
 	// Read the plugin info for the incoming plugins
 	var changedPluginInfo = this.wiki.readPluginInfo(plugins);
 	// Collect the shadow tiddlers of any deleted plugins
@@ -86,7 +92,7 @@ PluginSwitcher.prototype.switchPlugins = function() {
 	// Register any new theme/language tiddlers
 	var registeredTiddlers = this.wiki.registerPluginTiddlers(this.pluginType,plugins);
 	// Unpack the current theme/language tiddlers
-	this.wiki.unpackPluginTiddlers(this.doDebug);
+	this.wiki.unpackPluginTiddlers();
 	// Queue change events for the changed shadow tiddlers
 	$tw.utils.each(changedShadowTiddlers,function(status,title) {
 		self.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title], true);

@@ -1,0 +1,45 @@
+title: Plugins/LanguageSubPlugin
+description: Loading of correct language subplugin at startup
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+{{First}}
+
+{{$:/languages/fr-FR-container/readme}}
++
+title: $:/language
+
+$:/languages/fr-FR-subplugin
++
+title: $:/languages/fr-FR-container
+list: readme
+name: fr-FR
+plugin-type: plugin
+type: application/json
+
+{
+	"tiddlers": {
+		"$:/languages/fr-FR-container/readme": {
+			"title": "$:/languages/fr-FR-container/readme",
+			"text": "Readme from ~$:/languages/fr-FR-container\n\n"
+		},
+		"$:/languages/fr-FR-subplugin": {
+			"title": "$:/languages/fr-FR-subplugin",
+			"name": "fr-FR",
+			"description": "fr-FR subplugin",
+			"list": "readme",
+			"stability": "STABILITY_1_EXPERIMENTAL",
+			"version": "5.3.7-prerelease",
+			"plugin-type": "language",
+			"dependents": "",
+			"type": "application/json",
+			"text": "{\"tiddlers\":{\"First\":{\"title\":\"First\",\"text\":\"First from ~$:/languages/fr-FR-subplugin\"}}}"
+		}
+	}
+}
++
+title: ExpectedResult
+
+<p>First from $:/languages/fr-FR-subplugin</p><p>Readme from $:/languages/fr-FR-container</p>
