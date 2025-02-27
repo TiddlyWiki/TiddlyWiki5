@@ -61,6 +61,7 @@ PluginSwitcher.prototype.switchPlugins = function() {
 		};
 	accumulatePlugin(selectedPluginTitle);
 	var selectedPluginTiddler = this.wiki.getTiddler(selectedPluginTitle);
+	// Accumulate any other plugins of the same type with the same name
 	this.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
 		if(tiddler.isPlugin() && tiddler.fields["plugin-type"] === self.pluginType && tiddler.fields.name === selectedPluginTiddler.fields.name) {
 			accumulatePlugin(title);
