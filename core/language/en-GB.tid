@@ -3,5 +3,7 @@ name: en-GB
 description: English (British)
 author: JeremyRuston
 core-version: >=5.0.0"
+plugin-type: language
+type: application/json
 
-Stub pseudo-plugin for the default language
+{tidddlers:{}}
