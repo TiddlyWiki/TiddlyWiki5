@@ -5,5 +5,6 @@ author: JeremyRuston
 core-version: >=5.0.0"
 plugin-type: language
 type: application/json
+hidden: yes
 
 {tidddlers:{}}
