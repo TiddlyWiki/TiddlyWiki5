@@ -1,11 +1,13 @@
 title: SubPlugins/DynamicSubPluginUnload
 description: Dynamic sub-plugin unloading
 type: text/vnd.tiddlywiki-multiple
-tags: [[$:/tags/wiki-test-specx]]
+tags: [[$:/tags/wiki-test-spec]]
 
 title: Output
 
-{{$:/plugins/tiddlywiki/bundled-subplugin-tests/readme}}
+<$transclude $tiddler="$:/plugins/tiddlywiki/test-subplugin/readme">
+NO
+</$transclude>
 +
 title: Actions
 
@@ -40,4 +42,6 @@ type: application/json
 +
 title: ExpectedResult
 
-.
+<p>
+NO
+</p>
