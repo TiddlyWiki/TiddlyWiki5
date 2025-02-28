@@ -4,5 +4,4 @@ url: https://api.siliconflow.cn/v1/chat/completions
 caption: SiliconFlow
 auth-token-store-key: siliconflow-secret-key
 models: deepseek-ai/DeepSeek-V3 deepseek-ai/DeepSeek-R1
-
-\import $:/plugins/tiddlywiki/ai-tools/servers/openai
+extends: $:/plugins/tiddlywiki/ai-tools/servers/openai

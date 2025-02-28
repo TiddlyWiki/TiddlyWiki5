@@ -19,7 +19,7 @@ completionModel - Optional model to use
 	completionServer={{{ [<completionServer>!is[blank]else<ai-tools-default-llm-completion-server>] }}}
 	completionModel={{{ [<completionModel>!is[blank]else<ai-tools-default-llm-completion-model>] }}}
 >
-	<$importvariables filter="[<completionServer>]">
+	<$importvariables filter="[<completionServer>get[extends]] [<completionServer>]">
 		<$wikify name="json" text=<<json-prompt>>>
 			<$action-log message="ai-tools-get-llm-completion"/>
 			<$action-log/>
