@@ -11,14 +11,17 @@ Wikified JSON text to be sent to server
 \procedure json-prompt()
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html conditional commentblock commentinline
 {
-	"model": <<completionModel>>,
+	"model": "<<completionModel>>",
 	"messages": [
 		{
 			"role": "system",
 			"content": "<$text text={{{ [<conversationTitle>get[system-prompt]jsonstringify[]] }}}/>"
 		}
-		<!-- Loop through the tiddlers tagged with this one to pick up all the messages in the conversation -->
-		<$list filter="[all[shadows+tiddlers]tag<conversationTitle>!is[draft]sort[created]]">
+		<!--
+		Loop through the tiddlers tagged with this one to pick up all the messages in the conversation.
+		Exclude 'error' to limit role in 'system', 'user', 'assistant', 'tool'.
+		-->
+		<$list filter="[all[shadows+tiddlers]tag<conversationTitle>!is[draft]!role[error]sort[created]]">
 			,
 			{
 				<!-- We use JSON stringify to escape the characters that can't be used directly in JSON -->
