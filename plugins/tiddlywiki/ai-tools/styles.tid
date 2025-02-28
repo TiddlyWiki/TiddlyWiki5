@@ -22,7 +22,7 @@ tags: [[$:/tags/Stylesheet]]
 
 .ai-conversation .ai-tools-message .ai-tools-message-toolbar {
 	background: <<colour sidebar-foreground-shadow>>;
-	color: white;
+	color: <<colour foreground>>;
 	padding: 0.25em 1em 0.25em 1em;
 	border-top-left-radius: 1em;
 	border-top-right-radius: 1em;
@@ -36,7 +36,7 @@ tags: [[$:/tags/Stylesheet]]
 
 .ai-conversation .ai-tools-message .ai-tools-message-toolbar .ai-tools-message-toolbar-button {
 	background: <<colour sidebar-foreground-shadow>>;
-	color: #333333;
+	color: <<colour foreground>>;
 	cursor: pointer;
 	display: inline-block;
 	outline: 0;
@@ -65,8 +65,8 @@ tags: [[$:/tags/Stylesheet]]
 
 .ai-conversation .ai-tools-message.ai-tools-message-role-system {
 	width: 60%;
-	background: #4c4c80;
-	color: white;
+	background: <<colour footnote-target-background>>;
+	color: <<colour foreground>>;
 }
 
 .ai-conversation .ai-tools-message.ai-tools-message-role-user {
@@ -76,11 +76,11 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .ai-conversation .ai-tools-message.ai-tools-message-role-assistant {
-	background: #dfd;
+	background: <<colour tiddler-editor-background>>;
 }
 
 .ai-conversation .ai-tools-message.ai-tools-message-role-error {
-	background: #fdd;
+	background: <<colour notification-background>>;
 }
 
 .ai-conversation .ai-user-prompt {
