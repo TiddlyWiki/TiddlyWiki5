@@ -14,16 +14,9 @@ See the ''settings'' tab for set up instructions.
 #* If using ~OpenAI it is possible to attach a single image to a prompt
 # Click "Send" and wait for the output of the LLM
 
-!! Import ~ChatGPT Conversation Archives
+!! Use utility
 
-# [[Follow the instructions|https://help.openai.com/en/articles/7260999-how-do-i-export-my-chatgpt-history-and-data]] to request an export of your ~ChatGPT data
-# You will receive a link to download your data as a ZIP file
-# Download and unzip the file
-# Locate the file `conversations.json` within the archive and import it into your TiddlyWiki
-# Visit the ''tools'' tab and locate your `conversations.json` tiddler
-# Click the associated ''import'' button
-# See the imported conversations listed in the ''tools'' tab
-# The imported tiddler `conversations.json` is no longer required and can be deleted
+For example, to import ~ChatGPT conversation archives, follow the instructions in the [[utilities tab|$:/plugins/tiddlywiki/ai-tools/utilities]].
 
 !! Conversation Format
 

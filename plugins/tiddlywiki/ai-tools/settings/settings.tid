@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/ai-tools/settings
+
+These settings let you customise the behaviour of the "AI Tools" plugin.
+
+<<tabs "[all[shadows]tag[$:/tags/AI/Setting]]">>
