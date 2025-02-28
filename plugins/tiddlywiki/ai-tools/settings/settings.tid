@@ -1,5 +1,8 @@
 title: $:/plugins/tiddlywiki/ai-tools/settings
-
+tags: $:/tags/ControlPanel/SettingsTab
+caption: AI Tools
 These settings let you customise the behaviour of the "AI Tools" plugin.
 
-<<tabs "[all[shadows]tag[$:/tags/AI/Setting]]">>
+!! Completion Servers
+
+<<tabs "[all[shadows]tag[$:/tags/AI/ServerSetting]]">>

@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/ai-tools/settings/openai
-tags: $:/tags/AI/Setting
+tags: $:/tags/AI/ServerSetting
 caption: OpenAI
 
 !! ~OpenAI API key
@@ -12,4 +12,4 @@ This plugin runs entirely in the browser, with no backend server component. A co
 # Visit https://platform.openai.com/api-keys to create a new secret API key
 # Copy and paste the value into the box below
 
-~OpenAI Secret API Key: <$password name="openai-secret-key"/>
+~OpenAI Secret API Key: <$password name={{$:/plugins/tiddlywiki/ai-tools/servers/openai!!auth-token-store-key}}/>

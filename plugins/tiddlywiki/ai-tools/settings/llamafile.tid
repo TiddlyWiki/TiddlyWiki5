@@ -1,6 +1,7 @@
 title: $:/plugins/tiddlywiki/ai-tools/settings/llamafile
-tags: $:/tags/AI/Setting
+tags: $:/tags/AI/ServerSetting
 caption: Llamafile
+models:
 
 !! Llamafile Setup
 
