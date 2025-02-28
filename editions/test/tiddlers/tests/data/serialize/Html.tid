@@ -10,6 +10,6 @@ This is an HTML5 aside element
 This is a widget invocation
 </$slider>
 
-<$list filter="[tag[ExampleTag]sort[title]]" />
+<$list filter="[tag[ExampleTag]sort[title]]"/>
 
 Plain text in next paragraph.
