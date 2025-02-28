@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-database.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/store/sql-tiddler-database.js
 type: application/javascript
 module-type: library
 
@@ -20,7 +20,7 @@ engine - wasm | better
 */
 function SqlTiddlerDatabase(options) {
 	options = options || {};
-	const SqlEngine = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-engine.js").SqlEngine;
+	const SqlEngine = require("$:/plugins/tiddlywiki/multiwikiserver/modules/store/sql-engine.js").SqlEngine;
 	this.engine = new SqlEngine({
 		databasePath: options.databasePath,
 		engine: options.engine
@@ -1041,7 +1041,7 @@ SqlTiddlerDatabase.prototype.findUserBySessionId = function(sessionId) {
 
 	const lastAccessed = new Date(sessionResult.last_accessed);
 	const expirationTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-	if (new Date() - lastAccessed > expirationTime) {
+	if (new Date().getTime() - lastAccessed.getTime() > expirationTime) {
 			// Session has expired
 			this.deleteSession(sessionId);
 			return null;

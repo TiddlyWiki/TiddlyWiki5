@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-login.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/get-login.js
 type: application/javascript
 module-type: mws-route
 

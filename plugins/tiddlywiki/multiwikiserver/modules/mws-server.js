@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/mws-server.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/mws-server.js
 type: application/javascript
 module-type: library
 
@@ -507,24 +507,26 @@ Server.prototype.requestHandler = function(request,response,options) {
 	} else if(route.bodyFormat === "string" || route.bodyFormat === "www-form-urlencoded" || !route.bodyFormat) {
 		// Set the encoding for the incoming request
 		request.setEncoding("utf8");
-		var data = "";
+		var rawData = "";
 		request.on("data",function(chunk) {
-			data += chunk.toString();
+			rawData += chunk.toString();
 		});
 		request.on("end",function() {
 			if(route.bodyFormat === "www-form-urlencoded") {
-				data = queryString.parse(data);
+				// Assign the parsed data directly to state.data.
+				state.data = queryString.parse(rawData);
+			} else {
+				state.data = rawData;
 			}
-			state.data = data;
 			route.handler(request,response,state);
 		});
 	} else if(route.bodyFormat === "buffer") {
-		var data = [];
+		var bufferData = [];
 		request.on("data",function(chunk) {
-			data.push(chunk);
+			bufferData.push(chunk);
 		});
 		request.on("end",function() {
-			state.data = Buffer.concat(data);
+			state.data = Buffer.concat(bufferData);
 			route.handler(request,response,state);
 		})
 	} else {

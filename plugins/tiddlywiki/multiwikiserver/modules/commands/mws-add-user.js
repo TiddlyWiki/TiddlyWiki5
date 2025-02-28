@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/commands/mws-add-user.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/commands/mws-add-user.js
 type: application/javascript
 module-type: command
 

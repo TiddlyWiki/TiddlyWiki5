@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/delete-user-account.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/delete-user-account.js
 type: application/javascript
 module-type: mws-route
 

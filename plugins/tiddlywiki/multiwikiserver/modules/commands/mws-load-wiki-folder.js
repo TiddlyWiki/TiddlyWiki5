@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/commands/mws-load-wiki-folder.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/commands/mws-load-wiki-folder.js
 type: application/javascript
 module-type: command
 

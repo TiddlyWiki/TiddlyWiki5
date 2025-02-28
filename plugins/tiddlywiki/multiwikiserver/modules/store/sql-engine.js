@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/store/sql-engine.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/store/sql-engine.js
 type: application/javascript
 module-type: library
 
@@ -16,6 +16,7 @@ Create a database engine. Options include:
 
 databasePath - path to the database file (can be ":memory:" or missing to get a temporary database)
 engine - wasm | better
+verbose - flag to turn on console logging, defaults to undefined
 */
 function SqlEngine(options) {
 	options = options || {};
@@ -37,6 +38,9 @@ function SqlEngine(options) {
 			({ DatabaseSync: Database } = require("node:sqlite"));
 			break;
 		case "wasm":
+			// "node-sqlite3-wasm" requires manual installation
+			// see https://mws.tiddlywiki.com/#Database%20Engines
+			// @ts-ignore
 			({ Database } = require("node-sqlite3-wasm"));
 			break;
 		case "better":
@@ -44,7 +48,7 @@ function SqlEngine(options) {
 			break;
 	}
 	this.db = new Database(databasePath,{
-		verbose: undefined && console.log
+		verbose: options.verbose ? console.log : undefined
 	});
 	// Turn on WAL mode for better-sqlite3
 	if(this.engine === "better") {

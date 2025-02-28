@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/delete-bag-tiddler.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/delete-bag-tiddler.js
 type: application/javascript
 module-type: mws-route
 

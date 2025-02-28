@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/commands/mws-save-tiddler-text.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/commands/mws-save-tiddler-text.js
 type: application/javascript
 module-type: command
 

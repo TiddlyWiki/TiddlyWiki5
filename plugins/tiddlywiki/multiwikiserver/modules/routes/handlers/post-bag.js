@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/post-bag.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/post-bag.js
 type: application/javascript
 module-type: mws-route
 

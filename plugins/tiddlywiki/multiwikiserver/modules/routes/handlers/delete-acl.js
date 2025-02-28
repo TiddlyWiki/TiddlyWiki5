@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/delete-acl.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/delete-acl.js
 type: application/javascript
 module-type: mws-route
 

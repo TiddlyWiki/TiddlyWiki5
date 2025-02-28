@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/post-logout.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/post-logout.js
 type: application/javascript
 module-type: mws-route
 

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/commands/mws-load-plugin-bags.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/commands/mws-load-plugin-bags.js
 type: application/javascript
 module-type: command
 
@@ -40,7 +40,7 @@ function loadPluginBags() {
 			const bagName = makePluginBagName(type,publisher,name);
 			const result = $tw.mws.store.createBag(bagName,pluginFields.description || "(no description)",{allowPrivilegedCharacters: true});
 			if(result) {
-				console.log(`Error creating plugin bag ${bagname}: ${JSON.stringify(result)}`);
+				console.log(`Error creating plugin bag ${bagName}: ${JSON.stringify(result)}`);
 			}
 			$tw.mws.store.saveBagTiddler(pluginFields,bagName);
 		},

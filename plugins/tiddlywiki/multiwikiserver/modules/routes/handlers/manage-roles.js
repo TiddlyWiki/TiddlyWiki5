@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/manage-roles.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/manage-roles.js
 type: application/javascript
 module-type: mws-route
 

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-index.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/get-index.js
 type: application/javascript
 module-type: mws-route
 
@@ -24,7 +24,7 @@ exports.handler = function(request,response,state) {
 
 	// If application/json is requested then this is an API request, and gets the response in JSON
 	if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
-		state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(recipes),"utf8");
+		state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(recipeList),"utf8");
 	} else {
 		// This is not a JSON API request, we should return the raw tiddler content
 		response.writeHead(200, "OK",{

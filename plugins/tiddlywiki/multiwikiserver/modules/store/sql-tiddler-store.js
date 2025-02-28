@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-store.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/store/sql-tiddler-store.js
 type: application/javascript
 module-type: library
 
@@ -31,7 +31,7 @@ function SqlTiddlerStore(options) {
 	this.eventOutstanding = {}; // Hashmap by type of boolean true of outstanding events
 	// Create the database
 	this.databasePath = options.databasePath || ":memory:";
-	var SqlTiddlerDatabase = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-database.js").SqlTiddlerDatabase;
+	var SqlTiddlerDatabase = require("$:/plugins/tiddlywiki/multiwikiserver/modules/store/sql-tiddler-database.js").SqlTiddlerDatabase;
 	this.sqlTiddlerDatabase = new SqlTiddlerDatabase({
 		databasePath: this.databasePath,
 		engine: options.engine
@@ -201,7 +201,7 @@ SqlTiddlerStore.prototype.saveTiddlersFromPath = function(tiddler_files_path,bag
 		// Save the tiddlers
 		for(const tiddlersFromFile of tiddlersFromPath) {
 			for(const tiddler of tiddlersFromFile.tiddlers) {
-				self.saveBagTiddler(tiddler,bag_name,null);
+				self.saveBagTiddler(tiddler,bag_name);
 			}
 		}
 	});
