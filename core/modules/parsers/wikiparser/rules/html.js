@@ -205,7 +205,7 @@ exports.serialize = function(tree,serialize) {
 	var result = "";
 	// Self-closing tag
 	if(tree.isSelfClosing) {
-			result += "<" + tag + (attributes ? " " + attributes : "") + " />";
+			result += "<" + tag + (attributes ? " " + attributes : "") + "/>";
 	} else {
 		// Opening and closing tags
 		result += "<" + tag + (attributes ? " " + attributes : "") + ">" + children + "</" + tag + ">";
