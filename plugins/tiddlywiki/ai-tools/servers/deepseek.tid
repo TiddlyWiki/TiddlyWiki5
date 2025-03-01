@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/ai-tools/servers/deepseek
+tags: $:/tags/AI/CompletionServer
+url: https://api.deepseek.com/chat/completions
+caption: DeepSeek
+auth-token-store-key: deepseek-secret-key
+models: deepseek-chat deepseek-reasoner
+extends: $:/plugins/tiddlywiki/ai-tools/servers/openai
