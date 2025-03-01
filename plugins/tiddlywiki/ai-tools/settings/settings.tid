@@ -5,4 +5,4 @@ These settings let you customise the behaviour of the "AI Tools" plugin.
 
 !! Completion Servers
 
-<<tabs "[all[shadows]tag[$:/tags/AI/ServerSetting]]">>
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/AI/ServerSetting]]">>
