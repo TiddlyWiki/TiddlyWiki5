@@ -5,3 +5,4 @@ caption: DeepSeek
 auth-token-store-key: deepseek-secret-key
 models: deepseek-chat deepseek-reasoner
 extends: $:/plugins/tiddlywiki/ai-tools/servers/openai
+settings: $:/plugins/tiddlywiki/ai-tools/settings/deepseek

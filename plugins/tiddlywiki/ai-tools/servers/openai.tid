@@ -4,6 +4,7 @@ url: https://api.openai.com/v1/chat/completions
 auth-token-store-key: openai-secret-key
 caption: OpenAI Service
 models: gpt-4o gpt-4.5-preview gpt-4o-mini o1 o1-mini o3-mini
+settings: $:/plugins/tiddlywiki/ai-tools/settings/openai
 
 <!--
 Wikified JSON text to be sent to server

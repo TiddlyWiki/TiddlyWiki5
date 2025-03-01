@@ -2,7 +2,10 @@ title: $:/plugins/tiddlywiki/ai-tools/globals
 tags: $:/tags/Global
 
 \function ai-tools-default-llm-completion-server()
-[all[shadows+tiddlers]tag[$:/tags/AI/CompletionServer]sort[caption]first[]]
+[[$:/plugins/tiddlywiki/ai-tools/configs/default-server]get[completion-server]]
+\end
+\function ai-tools-default-llm-completion-model()
+[[$:/plugins/tiddlywiki/ai-tools/configs/default-server]get[completion-model]]
 \end
 
 <!--
@@ -119,21 +122,6 @@ Procedure to display a message from an AI conversation. Current tiddler is the c
 Action procedure to get the next response from the LLM on a chat tiddler.
 -->
 \procedure ai-tools-action-get-response()
-<!-- Assign a server and model on tiddler if user forget to pick one. -->
-<% if [<currentTiddler>!has[completion-server]] %>
-	<$action-setfield
-		$tiddler=<<currentTiddler>>
-		$field="completion-server"
-		$value={{{[all[shadows+tiddlers]tag[$:/tags/AI/CompletionServer]sort[caption]first[]]}}}
-	/>
-<% endif %>
-<% if [<currentTiddler>!has[completion-model]] %>
-	<$action-setfield
-		$tiddler=<<currentTiddler>>
-		$field="completion-model"
-		$value={{{[{!!completion-server}get[models]enlist-input[]first[]]}}}
-	/>
-<% endif %>
 <!-- Get the response -->
 <$let
 	resultTitlePrefix={{{ [<currentTiddler>addsuffix[ - Prompt]] }}}
@@ -173,10 +161,15 @@ Action procedure to get the next response from the LLM on a chat tiddler.
 	</$list>
 	</$select>
 	Model: <$select tiddler=<<currentTiddler>> field="completion-model" default=<<ai-tools-default-llm-completion-model>>>
-	<$list filter="[{!!completion-server}get[models]enlist-input[]]">
+	<$list filter="[<ai-tools-default-llm-completion-server>get[models]enlist-input[]]">
 	<option value=<<currentTiddler>>><<currentTiddler>></option>
 	</$list>
 	</$select>
+	<$list filter="[<ai-tools-default-llm-completion-server>get[settings]]">
+		<$button to=<<currentTiddler>> class="tc-btn-invisible">
+			{{$:/core/images/options-button}}
+		</$button>
+	</$list>
 
 	<div class="ai-conversation">
 		<$transclude
