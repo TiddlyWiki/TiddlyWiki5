@@ -53,6 +53,7 @@ function SqlEngine(options) {
 	// Turn on WAL mode for better-sqlite3
 	if(this.engine === "better") {
 		// See https://github.com/WiseLibs/better-sqlite3/blob/master/docs/performance.md
+		// @ts-ignore
 		this.db.pragma("journal_mode = WAL");
 	}
 }

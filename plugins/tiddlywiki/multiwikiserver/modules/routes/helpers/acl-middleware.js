@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/modules/modules/routes/helpers/acl-middleware.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js
 type: application/javascript
 module-type: library
 
