@@ -1,0 +1,58 @@
+created: 20160424181300000
+modified: 20241230104855826
+original-modified: 20210803204659026
+tags: [[TiddlyWiki on Node.js]]
+title: Customising Tiddler File Naming
+ja-title: Tiddlerファイル名のカスタマイズ
+type: text/vnd.tiddlywiki
+
+デフォルトでは、[[Wikiフォルダー|TiddlyWikiFolders]]を使用する[[Node.js上のTiddlyWiki|TiddlyWiki on Node.js]]インスタンスは、サニタイズされ、曖昧さが解消されたタイトルをファイル名として使用して、新しいTiddlerファイルを作成します。すべてのファイルパス操作は、`default-tiddler-location`からの相対で、デフォルトではWikiフォルダーの`tiddlers/`ディレクトリです。`config`オブジェクトの`default-tiddler-location`プロパティを使用して、Wikiのtiddlywiki.infoファイル内のパスをマッピングすることで、これを上書きできます。
+
+デフォルトのファイル拡張子`.tid`は、`type`フィールドが欠落しているTiddlerや、"text/vnd.tiddlywiki"タイプが"text/vnd.tiddlywiki"のTiddlerに使用されます。他のタイプのTiddlerは、(ブートスタートアップ時に定義される)MIMEタイプに従って保存されます。
+
+オプションのTiddler[[$:/config/FileSystemPaths]]と[[$:/config/FileSystemExtensions]]を作成することにより、論理パス(ディレクトリとファイル名)とファイル拡張子を個別にカスタマイズできます。
+
+! ファイルシステムパス
+
+論理パスは、1つ以上の[[フィルター式|Filter Syntax]](各フィルター式は1行に1つずつ)を含む[[$:/config/FileSystemPaths]] Tiddlerを作成することでカスタマイズできます。Tiddlerがディスクに保存されるたびに、各フィルターが順番にテストされ、出力を生成する最初のフィルターの最初の出力が、Tiddlerファイルに使用される論理パスとして取得されます。論理パスが変更された場合は、新しいファイルが作成され、古いファイルは削除されます。
+
+Tiddlerは、[[Wikiフォルダ|TiddlyWikiFolders]]、`default-tiddler-location`設定で定義されたパス、または $:/config/OriginalTiddlerPaths Tiddlerに保存された特定のパス([[tiddlywiki.filesファイル|tiddlywiki.files Files]]を参照)にのみ書き込むことができます。Tiddlerをディスクに保存するときに、論理パスがWikiフォルダのパスで始まらない(最も一般的なエラー)と、ファイルパスがJavascriptの`encodeURIComponent()`メソッドによってエンコードされ、Wi​​kiフォルダの`default-tiddler-location`にTiddlerがファイルとして保存されます。
+
+論理パスにはディスク上のファイルの拡張子は含まれません(下記参照)。また、ディレクトリ区切り文字として`/`や`\`を使用できます(物理パスを生成するときに、~TiddlyWikiが動作しているプラ​​ットフォームの正しい区切り文字に置き換えられます)。フィルターがどれも一致しない場合、論理パスは、結果のパスがすべてのサポートされているプラ​​ットフォームで有効であることを保証するため、すべての`/\<>~:"|?*^`文字が`_`に置き換えられたタイトルになります。論理パスも200文字に制限されています。この名前のファイルがすでに存在する場合、スペースと数字が最終的なファイルパスに追加され、未使用のパスが見つかるまで数字が増加していきます。
+
+!! 例
+
+```
+[is[system]!has[draft.of]removeprefix[$:/]addprefix[_system/]]
+[is[draft]search-replace:g:regexp[/|\\],[_]addprefix[drafts/]]
+[tag[task]addprefix[mytasks/]]
+[!tag[externalnote]addprefix[wiki/]]
+```
+
+<<.note "すべてのパスはWikiの`default-tiddler-location`からの相対パスです。">>
+
+これにより、他のTiddlerの下書きではない、新しく作成されたシステムTiddlerが`./_system/`(`$:/`プレフィックスの削除後)に保存されます。次に、すべての下書きのタイトルのパス区切り文字が"_"に置き換えられ、`./drafts/`に保存されます。そして、[[task]]タグが付けられたTiddlerがサブディレクトリ`./mytasks/`に保存されます。最後に、"externalnote"タグが付けられていないすべてのTiddlerが最終的に`[!tag[externalnote]addprefix[wiki/]]`に一致し、これらが`./wiki/`に保存されます。この例では、"externalnote"タグが付けられたTiddlerが[[tiddlywiki.filesファイル|tiddlywiki.files Files]]を使用してインポートされています。"isEditableFile"フラグがtrueに設定されているファイルにより、サーバーは$:/config/OriginalTiddlerPaths Tiddlerに元のファイルパスを記憶します。
+
+Tiddlerが $:/config/FileSystemPaths フィルターのマッチを生成するたびに、Tiddlerのタイトル内の`/`や`\`がパス区切り文字にマップされます。上記のフィルターを使用すると、非システム、非ドラフトのTillder(タグなし)`some/thing/entirely/new`が`./wiki/some/thing/entirely/new.tid`に保存されます(つまり、`entirely/`というディレクトリ内の`new.tid`ファイル)。したがって、プラットフォームに応じて、 $:/config/FileSystemPaths 自体は`./_system/config/FileSystemPaths.tid`や`.\_system\config\FileSystemPaths.tid`に保存されます。
+
+! ファイルシステム拡張子
+
+通常、ディスク上のTiddlerのファイルシステム拡張子は、改行を含むフィールド値や空白で始まるか終わる(テキストフィールド以外の)フィールド値の存在によって決定されます。この場合、単一ファイル".json" Tiddlerファイル形式が使用されます。
+
+Tiddlerにこのようなフィールド値がない場合、`type`フィールドが参照され、一致するファイルタイプが検索されます。タイプ値のないTiddlerの場合は`.tid`が使用されます。ブートエンジンは、[[$:/boot/boot.js]] Tiddlerで、Tiddlerタイプとファイルタイプの関係のセットを定義します。これらの関係を定義するコードのセクションを見つけるには、`// Add file extension information`を検索してください。
+
+個々のTiddlerのファイル拡張子は、1つ以上の[[フィルタ式|Filter Syntax]](各行に1つずつ)を含むTiddler[[$:/config/FileSystemExtensions]]を作成することでカスタマイズできます。Tiddlerがディスクに保存されるたびに、これらのフィルタに対してテストされ、出力を生成する最初のフィルタの最初の出力が、Tiddlerファイルに使用されるファイル拡張子として使用されます。拡張子は常に先頭にドットを付ける必要があります(例を参照)。一致するフィルタがない場合は、デフォルトの拡張子が使用されます。拡張子が変更された場合は、新しいファイルが作成され、古いファイルは削除されます。
+
+<<.note """".tid"の結果は、Tiddlerを単一ファイルのテキストTiddlerとしてディスクに書き込むことを強制します。".json"の結果は、Tiddlerをjson形式(配列内の単一のTiddler フィールドオブジェクト)の単一ファイルTiddlerとしてディスクに書き込むことを強制します。"application/json"タイプのTiddlerとしては書き込まれません。認識されるその他のすべてのファイルタイプは、定義された拡張子を使用して保存され、"text"フィールド以外のすべてのフィールドを説明する同じ名前の *.meta ファイルが付随します。""">>
+
+!! 例
+
+```
+[tag[.txt]then[.txt]]
+[tag[.json]then[.json]]
+[tag[.tid]then[.tid]]
+```
+
+これにより、タグ".txt"を持つすべてのTiddlerが、ファイルシステムのパスフィルターによって決定されたファイルパスに保存されますが、テキストフィールドは *.txt ファイルとして保存され、その他のすべてのフィールドは *.txt.meta ファイルとして保存されます。
+
+次に、".json"タグを持つすべてのTiddlerが *.json ファイルとして保存されます。最後に、タグ".tid"を持つすべてのTiddlerが単一のファイルとして保存されます。Tiddlerがどのフィルターにも一致しない場合は、Tiddlerの`type`フィールドによって決定されるデフォルトの拡張子が使用されます。
