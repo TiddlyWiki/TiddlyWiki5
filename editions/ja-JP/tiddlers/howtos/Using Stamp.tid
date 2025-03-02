@@ -1,0 +1,59 @@
+created: 20160618090057124
+modified: 20241108105651649
+original-modified: 20230101114932775
+tags: [[Editor toolbar]]
+title: Using Stamp
+ja-title: スタンプの使用
+type: text/vnd.tiddlywiki
+
+スニペットは、[[ツールバー|Editor toolbar]]の''スタンプ'' (<<.icon $:/core/images/stamp>>)ボタンをクリックし、必要な項目をクリックすることでエディタに挿入できる、事前に構成されたテキストスニペットです。
+
+スニペットは、エディタで選択したテキストを''置き換え''たり、''その前や後に追加''したりできます。
+
+! スニペットを作成する
+!! Tiddlerの編集で
+
+# ツールバーの''スタンプ''（<<.icon $:/core/images/stamp>>）をクリックします
+# メニューの一番下にある"//自己紹介を追加します//"をクリックします
+# エディタにスニペットのテキストを入力します
+# `caption`フィールドにスニペットのメニュー項目のキャプションを入力します
+# <<.icon $:/core/images/done-button>> //編集内容を確定します// ボタンをクリックします
+
+!! 手動で
+
+# サイドバーの//新しいTiddlerを作成します// <<.icon $:/core/images/new-button>> ボタンをクリックして、新しいTiddlerを作成します
+
+# Tiddlerのタイトルを変更します (例: `New Tiddler 1`)。`caption`フィールドを設定しない場合は、Tiddlerのタイトルがスタンプのメニュー項目になります(下記参照)。<div><$macrocall $name=".tip" _="""''プロ技'' 新しいTiddlerを `$:/yourusername/snippets/My new stamp`のようなタイトルにし、通常の検索結果には表示されない[[システムTiddler|SystemTiddlers]]として'ファイル'します """ /></div>
+
+# `タグ名`タグボックスに`$:/tags/TextEditor/Snippet`と入力し、//追加//をクリック(または//Enter//キーを押下)して、<<tag-pill $:/tags/TextEditor/Snippet>>タグを追加します
+
+# エディタにスニペットコンテンツ(スタンプメニュー<<.icon $:/core/images/stamp>>をクリックしたときにエディタに入力するコンテンツ)を入力します。
+
+# フィールド名が`caption`、フィールドの値にスニペットのスタンプメニュー項目のテキストが設定されたフィールドを作成します: 
+## //新しいフィールドを追加//の`フィールド名`ボックスに`caption`と入力します
+## `フィールドの値`ボックスにスタンプメニュー項目のキャプションを入力します
+
+! スニペットの並べ替え
+新しいスニペットは、デフォルトではスタンプメニューの下部に追加されます。スニペットの順序を調整するには:
+
+# スニペットTiddlerに移動します
+# <<tag $:/tags/TextEditor/Snippet>>タグピルをクリックします
+# スニペットのメニューで項目を上下にドラッグします
+
+
+! 選択範囲に接頭辞や接尾辞を追加する方法 <span style="font-size:1rem;"><<.from-version "5.1.20">></span>
+
+デフォルトでは、スタンプボタンは、エディターで選択したテキスト(`選択テキスト`とします)をスニペット(`$:/my/snippet`とします)に''置き換え''ます。
+
+選択したテキストを//置き換える//代わりに、スタンプボタンで選択範囲の前または後に[[Wikiテキスト|WikiText]]を//追加//するためには:
+
+# 上記の2つの方法のいずれかを使用して、(<<tag-pill $:/tags/TextEditor/Snippet>>タグが付いた、`caption`フィールドにスタンプメニュー項目のテキストを設定した)スニペットTiddlerを作成します
+# スタンプでスニペットのコンテンツをエディタで選択したテキストの//前に//(`/prefix`)に挿入するか、//後に//(`/suffix`)( )に挿入するかに応じて、スニペットTiddlerのタイトルの末尾に`/prefix`、または`/suffix`を追加して新しいTiddlerを作成します
+#* そのTiddlerには<<tag-pill $:/tags/TextEditor/Snippet>>タグを付けないでください; captionフィールドは無視されます
+#* Tiddlerテキストに、選択範囲の前または後に挿入したいテキストを設定します
+
+|`snippet2`に接頭辞と接尾辞を構成する例|c
+|!Tiddler|!Tiddlerコンテンツ|!タグ|!`caption`フィールド|
+|`$:/snip/snippet2`||<<tag-pill $:/tags/TextEditor/Snippet>>|`My second stamp menu item`|
+|`$:/snip/snippet2/prefix`|`TextIWantPrependedToSelection`|||
+|`$:/snip/snippet2/suffix`|`TextIWantAppendedToSelection`|||

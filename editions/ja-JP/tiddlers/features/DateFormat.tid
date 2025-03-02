@@ -1,0 +1,89 @@
+created: 20140418142957325
+modified: 20241206120335412
+original-modified: 20230226144359284
+tags: Features
+title: DateFormat
+ja-title: 日付形式
+type: text/vnd.tiddlywiki
+
+日付のデフォルトの表現は、<<.value 20211002153802059>>のようなコンパクトな文字列です。関連するテンプレートは`[UTC]YYYY0MM0DD0hh0mm0ss0XXX`です。たとえば、<<.field created>>や<<.field modified>>のフィールドは次のように保存されます。
+
+この文字列の表示形式は、テンプレートで制御できます。たとえば、<<.field modified>>フィールドをトランスクルードすると、日付を<<.value "Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)">>として表示するテンプレートが自動的に適用されます。いくつかのウィジェットとフィルター演算子では、テンプレートを手動で指定できます。たとえば、ViewWidgetです: 
+
+`<$view field=modified format=date template="DDth mmm YYYY 0hh:0mm:0ss" />`
+
+日付文字列は次の置換で処理されます: 
+
+|!トークン |!置き換えられる値 |
+|`ddddd` |<<.from-version "5.2.0">> 年間日数 (1から365まで、うるう年の場合は366まで) |
+|`0ddddd` |<<.from-version "5.2.0">> 年間日数(ゼロ埋め) (001から 365まで、うるう年の場合は366まで) |
+|`DDD` |曜日 (例、"月曜") |
+|`ddd` |曜日(短縮) (例、"月") |
+|`dddd` |<<.from-version "5.2.0">> 月曜始まり日曜終わりの1から7までに曜日番号 |
+|`DD` |日付 |
+|`0DD` |日付(ゼロ埋め) |
+|`DDth` |日付('日'付き) |
+|`WW` |週番号(ISO-8601) |
+|`0WW` |週番号(ISO-8601)(ゼロ埋め) |
+|`MMM` |月 (例、"7月") |
+|`mmm` |月(短縮) (例、"7月") |
+|`MM` |月番号 |
+|`0MM` |月番号(ゼロ埋め) |
+|`YYYY` |年 |
+|`YY` |年(下2桁) |
+|`wYYYY` |週番号に関する年 |
+|`aYYYY` |<<.from-version "5.1.23">> 年(負の日付を正として表示) |
+|`wYY` |週番号に関する年(下2桁) |
+|`{era:BCE||CE}` |<<.from-version "5.1.23">> 負、ゼロ、正の年に対して異なる文字列を表示 (下記参照) |
+|`hh` |時 |
+|`0hh` |時(ゼロ埋め) |
+|`hh12` |時(12時間表記) |
+|`0hh12` |時(12時間表記)(ゼロ埋め) |
+|`mm` |分 |
+|`0mm` |分(ゼロ埋め) |
+|`ss` |秒 |
+|`0ss` |秒(ゼロ埋め) |
+|`XXX` |ミリ秒 |
+|`0XXX` |ミリ秒(ゼロ埋め) |
+|`am` or `pm` |AM/PMインジケータ(小文字) |
+|`AM` or `PM` |AM/PMインジケータ(大文字) |
+|`TZD` |タイムゾーンオフセット |
+|`TIMESTAMP` |<<.from-version "5.2.4">> 1970年1月1日([[ECMAScriptエポック|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_ecmascript_epoch_and_timestamps]])からのミリ秒数 |
+|`\x` |特別な意味を持つ文字をエスケープするために使用 |
+|`[UTC]`|表現された日付をUTCにタイムシフトします。フォーマット文字列の先頭になければなりません。|
+
+その他のテキストは変更されずに渡され、カンマ、コロン、またはその他の区切り文字が使用されることに注意してください。
+
+この`{era:BCE||CE}`表記法では、負、ゼロ、正の年に対して異なる文字列を指定できます。たとえば、`{era:BC|Z|AD}`は、負の年の場合は<<.value BC>>、正の年の場合は<<.value AD>>、0年の場合は<<.value Z>>が表示されます。
+
+
+! 例
+
+|!テンプレート |!Output |
+|`DDth MMM YYYY` |16日 2月 2011 |
+|`DDth MMM \M\M\M YYYY` |16日 2月 MMM 2011 |
+|`DDth mmm YYYY 0hh:0mm:0ss` |16日 2月 2011 11:38:42 |
+
+!! <<.value TIMESTAMP>>を時間差を計算するために使用する
+
+次のようにして、2つの日付の差を計算できます:
+
+# 両方の日付をタイムスタンプに変換します
+# 後の日付を前の日付から引きます -- どちらが早いかわからない場合は、減算後に絶対値を取得する<<.olink "abs">>演算子を使用します
+# 結果の数値を選択した間隔のミリ秒数で割ります
+
+以下は、現在のTiddlerの作成から最終更新までの経過日数を計算する例です:
+
+* <<.field created>>フィールドと<<.field modified>>フィールドをタイムスタンプに変換します
+* その差を1日のミリ秒数である<<.value 86400000>>で割ります
+** 1000ミリ秒/秒 × 60秒/分 × 60分/時 × 24時間/日 = 86,400,000 ミリ秒/日
+
+<$macrocall $name=".example" n="0" eg="""<$let
+	timestamp-modified={{{ [{!!modified}format:date[TIMESTAMP]] }}}
+	timestamp-created={{{ [{!!created}format:date[TIMESTAMP]] }}}
+	difference-days={{{ [<timestamp-modified>subtract<timestamp-created>divide[86400000]floor[]] }}}>
+
+* ''更新日:'' <$text text={{{ [{!!modified}format:date[YYYY-0MM-0DD]] }}}/>
+* ''作成日:'' <$text text={{{ [{!!created}format:date[YYYY-0MM-0DD]] }}}/>
+* ''日付の差:'' <<difference-days>>日
+</$let>"""/>

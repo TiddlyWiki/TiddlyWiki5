@@ -1,0 +1,15 @@
+title: HelloThumbnail - Latest Version
+ja-title: HelloThumbnail - 最新バージョン
+tags: HelloThumbnail
+caption: v<<version>>の新着情報
+link: Releases
+image: New Release Banner
+color: #fff
+
+\define prerelease-regexp() [0-9]+\.[0-9]+\.[0-9]+\-prerelease
+<$list filter="[<version>!regexp<prerelease-regexp>]" variable="ignore">
+~TiddlyWikiの最新バージョン v<<version>> (リリース日: <$view field="released" tiddler={{{ [<version>addprefix[Release ]] }}} format="date" template="YYYY/MM/DD"/>)
+</$list>
+<$list filter="[<version>regexp<prerelease-regexp>]" variable="ignore">
+テスト・レビュー用のプレリリースビルドです
+</$list>

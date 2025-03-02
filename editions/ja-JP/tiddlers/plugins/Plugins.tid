@@ -1,0 +1,32 @@
+created: 20140910215514237
+list: [[Installing a plugin from the plugin library]] [[Uninstalling a plugin]] [[Manually installing a plugin]] OfficialPlugins
+modified: 20241221110419644
+original-modified: 20220617133819755
+tags: Concepts TableOfContents
+title: Plugins
+ja-title: プラグイン
+type: text/vnd.tiddlywiki
+
+! 紹介
+
+TiddlyWiki5のプラグインを使用して、Wikiをカスタマイズ・拡張するオプションコンポーネントを配布できます。公式プラグインライブラリやコミュニティサイトからプラグインをインストールできます。
+
+内部的には、プラグインは1つのTiddlerとしてパッケージ化されたTiddler集であり、ユニットとしてインストール、コピー、無効化、削除することができます。プラグイン内の個々のTiddlerは、隠しTiddlerとして表示されます。
+
+プラグインには、JavaScriptモジュール、スタイルシート、テンプレートを含めることができます。プラグインを使用して、通常のテキスト、画像、その他のコンテンツを配布することもできます。
+
+! 単一ファイルWikiによるプラグインの処理
+
+<<list-links "[tag[Plugins]] -[has[draft.of]]">>
+
+! クライアント - サーバー構成(Node.js)でのプラグインの処理 
+
+<<list-links "[tag[PluginsCS]] -[has[draft.of]]">>
+
+! プラグインのメカニズム
+
+[[プラグインのメカニズム|PluginMechanism]]Tiddlerには、プラグインが内部でどのように実装されるかについての詳細が含まれています。
+
+プラグインの詳細は、<<controlPanel-plugin-link>>のサブタグ<<.controlpanel-tab Plugins>>で開けます。
+
+TiddlyWikiのメインコアコードを含む $:/core というプラグインがあります。これは常に存在し、デフォルトの[[隠しTiddler|ShadowTiddlers]]のソースです。

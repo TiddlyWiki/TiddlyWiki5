@@ -125,6 +125,14 @@ foreground: #657b83
         tiddler-link-foreground: <<colour primary>>
 
 alert-border: #b99e2f
+diff-delete-background: <<colour red>>
+diff-delete-foreground: <<colour background>>
+diff-equal-background: inherit
+diff-equal-foreground: inherit
+diff-insert-background: <<colour green>>
+diff-insert-foreground: <<colour background>>
+diff-invisible-background: <<colour yellow>>
+diff-invisible-foreground: <<colour background>>
 dirty-indicator: #ff0000
 dropzone-background: rgba(0,200,0,0.7)
 external-link-background-hover: inherit

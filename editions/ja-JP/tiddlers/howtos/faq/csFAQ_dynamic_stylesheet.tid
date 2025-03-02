@@ -1,0 +1,10 @@
+created: 201804111739
+modified: 20241120110107221
+original-modified: 201804111739
+title: Q: Is there a way to create dynamic stylesheets?
+ja-title: Q: 動的スタイルシートを作成する方法はありますか?
+tags: [[Custom Styles FAQ]]
+
+''回答:'' <<.from-version "5.1.16">>
+
+はい、[[Q: カスタムフィールドを使用してTiddlerのスタイルを設定するにはどうすればよいですか?|Q: How can I use a custom field to style a tiddler?]]を参照してください
