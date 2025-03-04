@@ -10,6 +10,7 @@ fi
 
 # tw5.com readmes
 node $TW5_BUILD_TIDDLYWIKI \
+	+plugins/tiddlywiki/multiwikiserver \
 	editions/tw5.com \
 	--verbose \
 	--output . \
