@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/commands/mws-create-recipe.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/commands/mws-create-recipe.js
 type: application/javascript
 module-type: command
 
@@ -35,7 +35,7 @@ Command.prototype.execute = function() {
 	}
 	var recipeName = this.params[0],
 		bagList = (this.params[1] || "").split(" "),
-		recipeDescription = this.params[2] || recipeNameName;
+		recipeDescription = this.params[2] || recipeName;
 	// Create recipe
 	var result = $tw.mws.store.createRecipe(recipeName,bagList,recipeDescription);
 	if(result) {

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/post-recipe.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/post-recipe.js
 type: application/javascript
 module-type: mws-route
 

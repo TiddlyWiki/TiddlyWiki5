@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/commands/mws-assign-role-permission.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/commands/mws-assign-role-permission.js
 type: application/javascript
 module-type: command
 

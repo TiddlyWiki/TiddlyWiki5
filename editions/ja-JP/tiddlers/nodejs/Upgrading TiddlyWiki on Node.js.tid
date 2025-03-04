@@ -1,0 +1,19 @@
+created: 20131219100544073
+modified: 20241228112745930
+original-modified: 20140912141800426
+tags: [[TiddlyWiki on Node.js]]
+title: Upgrading TiddlyWiki on Node.js
+ja-title: Node.js上のTiddlyWikiのアップグレード
+type: text/vnd.tiddlywiki
+
+通常の方法で[[Node.js上のTiddlyWiki|TiddlyWiki on Node.js]]をインストールした場合、新しいバージョンがリリースされたときに、次のコマンドでアップグレードできます: 
+
+```
+npm update -g tiddlywiki
+```
+
+MacやLinuxでは、次のように''sudo''を追加する必要があります: 
+
+```
+sudo npm update -g tiddlywiki
+```

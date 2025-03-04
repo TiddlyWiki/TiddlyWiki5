@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/post-anon.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/post-anon.js
 type: application/javascript
 module-type: mws-route
 

@@ -5,6 +5,7 @@ description: {{$:/language/Buttons/AdvancedSearch/Hint}}
 
 \whitespace trim
 \procedure advanced-search-button(class)
+\whitespace trim
 <$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class=`$(tv-config-toolbar-class)$ $(class)$`>
 <%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/advanced-search-button}}

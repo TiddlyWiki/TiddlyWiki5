@@ -1,0 +1,38 @@
+created: 20140209143652456
+modified: 20250123115055695
+original-modified: 20150621182140407
+tags: [[TiddlyWiki on Node.js]]
+title: MultiTiddlerFiles
+ja-title: マルチTiddlerファイル
+type: text/vnd.tiddlywiki
+
+MultiTiddlerFilesを使用すると、複数のTiddlerを1つのテキストファイルに簡潔に表現できます。
+
+この形式の目標は次のとおりです:
+
+* 入力しやすく、読みやすい
+* 単一行の文字列に最適化
+* Tiddlerのグループ内で共通のフィールドやタグを共有できるようにする
+* 外部ツールで簡単に処理できるようにする
+
+MultiTiddlerFilesの拡張子は`multids`です。ファイルは、共有フィールドのブロックとそれに続く空白行で構成されます。ファイルの残りの部分は、コメントとTiddlerのシーケンスです。Tiddlerはタイトルで指定され、その後にコロン、少なくとも1つのスペース文字が続き、行の残りの部分はTiddlerのテキストフィールドになります。
+
+例: 
+
+```
+title: $:/language/ControlPanel/
+tags: strings
+modifier: JoeBloggs
+
+Basics/Caption: Basics
+# This is a comment
+Basics/Version: ~TiddlyWiki Version
+```
+
+この例では、[[$:/language/ControlPanel/Basics/Caption]]と[[$:/language/ControlPanel/Basics/Version]]の2つのTiddlerを定義します。
+
+ヘッダーで`title`フィールドが指定されている場合、タイトルで定義された個々のTiddlerのプレフィックスとして扱われます。
+
+!! 構文の仕様
+
+{{MultiTiddlerFileSyntax}}

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/commands/mws-add-permission.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/commands/mws-add-permission.js
 type: application/javascript
 module-type: command
 

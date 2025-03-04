@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/post-bag-tiddlers.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/post-bag-tiddlers.js
 type: application/javascript
 module-type: mws-route
 
@@ -27,7 +27,7 @@ exports.entityName = "bag"
 exports.handler = function(request,response,state) {
 	const path = require("path"),
 		fs = require("fs"),
-		processIncomingStream = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/multipart-forms.js").processIncomingStream;
+		processIncomingStream = require("$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/multipart-forms.js").processIncomingStream;
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]);
 	// Process the incoming data

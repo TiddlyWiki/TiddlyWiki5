@@ -24,6 +24,10 @@ Inherit from the base widget class
 */
 FillWidget.prototype = new Widget();
 
+FillWidget.prototype.execute = function() {
+	// Do nothing. Make no child widgets. $Fill widgets should be invisible when naturally encountered. Instead, their parseTreeNodes are made available to $slot widgets that want it.
+};
+
 exports.fill = FillWidget;
 
 })();

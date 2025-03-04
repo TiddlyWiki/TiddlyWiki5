@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/commands/mws-create-bag.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/commands/mws-create-bag.js
 type: application/javascript
 module-type: command
 

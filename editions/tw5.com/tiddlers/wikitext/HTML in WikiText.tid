@@ -62,7 +62,7 @@ In an extension of conventional HTML syntax, attributes of elements and widgets 
 
 * [[a literal string|Literal Attribute Values]]
 * [[a transclusion of a textReference|Transcluded Attribute Values]]
-* [[a transclusion of a macro/variable|Transcluded Attribute Values]]
+* [[a transclusion of a macro/variable|Variable Attribute Values]]
 * [[as the result of a filter expression|Filtered Attribute Values]]
 * <<.from-version "5.3.0">> [[as the result of performing filter and variable substitutions on the given string|Substituted Attribute Values]]
 

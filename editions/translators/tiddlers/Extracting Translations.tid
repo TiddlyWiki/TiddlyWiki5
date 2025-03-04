@@ -12,7 +12,6 @@ Use this procedure if the language being submitted is not already present in the
 # Create the new language folder `languages/xx-XX`
 # Copy the language files into the language folder
 # Create a `plugin.info` file for the translation
-# Create an appropriate flag image in `icon.tid`
 # Add the new language to tw5.com
 # Submit a pull request
 

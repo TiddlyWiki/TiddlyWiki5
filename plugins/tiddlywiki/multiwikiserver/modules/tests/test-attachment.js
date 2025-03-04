@@ -11,7 +11,7 @@ if(typeof window === 'undefined' && typeof process !== 'undefined' && process.ve
   var fs = require('fs');
   var path = require('path');
   var assert = require('assert');
-  var AttachmentStore = require('$:/plugins/tiddlywiki/multiwikiserver/store/attachments.js').AttachmentStore;
+  var AttachmentStore = require('$:/plugins/tiddlywiki/multiwikiserver/modules/store/attachments.js').AttachmentStore;
   const {Buffer} = require('buffer');
 
 	function generateFileWithSize(filePath, sizeInBytes) {

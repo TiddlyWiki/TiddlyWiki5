@@ -78,13 +78,13 @@ code-background: <<colour background>>
 code-border: <<colour flexoki-tx>>
 code-foreground: <<colour flexoki-tx>>
 diff-delete-background: <<colour flexoki-re>>
-diff-delete-foreground: <<colour flexoki-paper>>
+diff-delete-foreground: <<colour flexoki-bg-2>>
 diff-equal-background: 
 diff-equal-foreground: inherit
 diff-insert-background: <<colour flexoki-gr>>
-diff-insert-foreground: <<colour flexoki-paper>>
+diff-insert-foreground: <<colour flexoki-bg-2>>
 diff-invisible-background: <<colour flexoki-ye>>
-diff-invisible-foreground: <<colour flexoki-paper>>
+diff-invisible-foreground: <<colour flexoki-bg-2>>
 dirty-indicator: <<colour flexoki-re>>
 download-background: <<colour flexoki-cy-2>>
 download-foreground: <<colour background>>
@@ -103,8 +103,8 @@ external-link-foreground-visited: <<colour flexoki-bl>>
 external-link-foreground: <<colour flexoki-bl>>
 footnote-target-background: <<colour flexoki-bg-2>>
 foreground: #CECDC3
-highlight-background: <<colour flexoki-cyan-950>>
-highlight-foreground: <<colour flexoki-cyan-400>>
+highlight-background: <<colour flexoki-yellow-900>>
+highlight-foreground: inherit
 menubar-background: <<colour primary>>
 menubar-foreground: <<colour flexoki-paper>>
 message-background: <<colour background>>

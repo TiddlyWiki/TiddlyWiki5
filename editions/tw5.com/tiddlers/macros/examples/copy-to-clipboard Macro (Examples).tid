@@ -1,8 +1,14 @@
 created: 20171216104946277
-modified: 20171216105109641
+modified: 20250127134344834
 tags: [[copy-to-clipboard Macro]] [[Macro Examples]]
 title: copy-to-clipboard Macro (Examples)
 type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1" eg="""<<copy-to-clipboard "Mary had a little lamb">>"""/>
-<$macrocall $name=".example" n="2" eg="""<$macrocall $name="copy-to-clipboard" src={{$:/SiteTitle}}/>"""/>
+<$macrocall $name=".example" n="2" eg="""<$transclude $variable="copy-to-clipboard" src={{$:/SiteTitle}}/>"""/>
+
+In the following examples, press <kbd>ctrl-V</kbd> / <kbd>cmd-V</kbd> in tiddlywiki after copying to see its effects.
+
+<$macrocall $name=".example" n="3" eg="""<<copy-to-clipboard src:"<em>Test</em>" type:"text/html" plain:"Test">> """/>
+<$macrocall $name=".example" n="4" eg="""<<copy-to-clipboard src:"The ''quick'' //brown// __fox__ jumps over a `lazy` @@dog@@." type:"text/vnd.tiddlywiki" plain:"The quick brown box jumps over a lazy dog.">> """/>
+<$macrocall $name=".example" n="5" eg="""<$transclude $variable="copy-to-clipboard" src=<<jsontiddlers filter:"[tag[Concepts]]">> type="text/vnd.tiddler"/>"""/>

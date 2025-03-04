@@ -79,6 +79,13 @@ Tests the checkbox widget thoroughly.
                 expectedChange: { "TiddlerOne": { expand: "yes" } }
             },
             {
+                testName: "field mode default when missing -> true",
+                tiddlers: [],
+                widgetText: "<$checkbox tiddler='TiddlerOne' field='expand' default='yes' checked='yes' unchecked='no' />",
+                startsOutChecked: true,
+                expectedChange: { "TiddlerOne": { expand: "no" } }
+            },
+            {
                 testName: "field mode indeterminate -> true",
                 tiddlers: [{title: "TiddlerOne", text: "Jolly Old World", expand: "some other value"}],
                 widgetText: "<$checkbox tiddler='TiddlerOne' field='expand' indeterminate='yes' checked='yes' unchecked='no' />",
@@ -98,19 +105,28 @@ Tests the checkbox widget thoroughly.
         var indexModeTests = fieldModeTests.map(data => {
             var newData = {...data};
             var newName = data.testName.replace('field mode', 'index mode');
+            var tiddlerOneAlreadyExists = false;
             var newTiddlers = data.tiddlers.map(tiddler => {
+                if(tiddler.title === "TiddlerOne") {
+                    tiddlerOneAlreadyExists = true;
+                }
                 return {title: tiddler.title, type: "application/x-tiddler-dictionary", text: `one: a\nexpand: ${tiddler.expand}\ntwo: b`}
             });
             var newWidgetText = data.widgetText.replace("field='expand'", "index='expand'");
             var newChange = {};
             for (var key of Object.keys(data.expectedChange)) {
                 var oldChange = data.expectedChange[key];
-                if (oldChange.expand) {
-                    newChange[key] = { text: `one: a\nexpand: ${oldChange.expand}\ntwo: b` }
+                var text;
+                if (!tiddlerOneAlreadyExists) {
+                    // If it wasn't there, the created one will be JSON
+                    text = `{\n    "expand": "${oldChange.expand}"\n}`;
+                } else if (oldChange.expand) {
+                    text = `one: a\nexpand: ${oldChange.expand}\ntwo: b`;
                 } else {
                     // In index tiddlers, the "expand" field gets completely removed, not turned into "expand: (undefined)"
-                    newChange[key] = { text: `one: a\ntwo: b` }
+                    text = `one: a\ntwo: b`;
                 }
+                newChange[key] = { text: text };
             }
             newData.testName = newName;
             newData.tiddlers = newTiddlers;
@@ -514,7 +530,9 @@ Tests the checkbox widget thoroughly.
         /*
          * Checkbox widget tests using the test data above
          */
-        for (var data of checkboxTestData) {
+        // MAKE SURE TO USE $tw.utils.each HERE!!!
+        // If you use a forloop, the closure of the tests will all use the last value "data" was assigned to, and thus all run the same test.
+        $tw.utils.each(checkboxTestData, function(data) {
             it('checkbox widget test: ' + data.testName, function() {
                 // Setup
     
@@ -553,7 +571,7 @@ Tests the checkbox widget thoroughly.
                     }
                 }
             })
-        }
+        });
     
     });
     

@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+      "target": "ES2019",
+      "module": "CommonJS",
+      "lib": ["dom", "es2019"],
+      "allowSyntheticDefaultImports": true,
+      "checkJs": true,
+      "baseUrl": ".",
+      "paths": {
+        "$:/plugins/*": ["plugins/*"],
+        "$:/core/*": ["core/*"],
+        "$:/editions/*": ["editions/*"]
+      }
+    },
+    "include": [
+      "globals.d.ts",
+      "core/**/*.js",
+      "plugins/**/*.js",
+      "editions/**/*.js"
+    ],
+    "exclude": [
+      "node_modules",
+      ".git",
+      "dist",
+      "tmp",
+      "output"
+    ]
+}
+  

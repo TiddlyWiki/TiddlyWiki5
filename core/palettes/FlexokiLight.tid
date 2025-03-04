@@ -105,7 +105,7 @@ external-link-foreground-visited: <<colour flexoki-bl>>
 external-link-foreground: <<colour flexoki-bl>>
 footnote-target-background: <<colour flexoki-bg-2>>
 foreground: #100F0F
-highlight-background: <<colour flexoki-cyan-050>>
+highlight-background: <<colour flexoki-yellow-100>>
 highlight-foreground: inherit
 menubar-background: <<colour primary>>
 menubar-foreground: <<colour flexoki-paper>>

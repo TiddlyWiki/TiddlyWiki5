@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/manage-user.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/manage-user.js
 type: application/javascript
 module-type: mws-route
 

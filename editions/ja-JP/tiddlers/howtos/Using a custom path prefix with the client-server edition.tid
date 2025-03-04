@@ -1,0 +1,16 @@
+created: 20140613133627669
+modified: 20241230102718926
+original-modified: 20140912141613393
+tags: [[TiddlyWiki on Node.js]]
+title: Using a custom path prefix with the client-server edition
+ja-title: クライアント-サーバーエディションでカスタムのパスプレフィックスを使用する
+type: text/vnd.tiddlywiki
+
+デフォルトでは、[[Node.js上のTiddlyWiki|TiddlyWiki on Node.js]]を実行すると、サーバーはプロトコル、ホスト、ポートから形成されたURI - 例えば、`http://127.0.0.1:8080/`でWikiを公開します。
+
+`http://127.0.0.1:8080/path/to/my/wiki/`のようなカスタムパスでWikiを実行するには、2つの手順があります: 
+
+# ServerCommandの''pathprefix''属性として`/path/to/my/wiki`を渡してサーバーを設定します
+# `$protocol$//$host$/path/to/my/wiki/`を含む、`$:/config/tiddlyweb/host`というTiddlerを作成してクライアントを設定します
+
+

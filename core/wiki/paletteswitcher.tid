@@ -3,7 +3,7 @@ title: $:/snippets/paletteswitcher
 \whitespace trim
 <$linkcatcher to="$:/palette">
 <div class="tc-chooser">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]!is[draft]sort[name]]">
 <$set name="cls" filter="[all[current]prefix{$:/palette}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
 <div class=<<cls>>>
 <$link to={{!!title}}>

@@ -6,7 +6,7 @@
 			"isTiddlerFile": false,
 			"fields": {
 				"title": {"source": "filename", "prefix": "$:/plugins/tiddlywiki/katex/fonts/"},
-				"type": "application/font-woff"
+				"type": "font/woff"
 			}
 		}
 	],

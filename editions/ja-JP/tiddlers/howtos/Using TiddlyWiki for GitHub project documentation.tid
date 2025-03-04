@@ -1,0 +1,31 @@
+created: 20130825150100000
+modified: 20250204104525288
+original-modified: 20140912141559011
+tags: [[TiddlyWiki on Node.js]]
+title: Using TiddlyWiki for GitHub project documentation
+ja-title: GitHubプロジェクトのドキュメントにTiddlyWikiを使用する
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5は、GitHubプロジェクトのドキュメントを作成するために使用できます。ソースコード管理下にある個別のTiddlerファイルを含む[[TiddlyWikiフォルダ|TiddlyWikiFolders]]として単一のドキュメントセットを維持し、それを使用してプロジェクトフォルダーに含める`readme.md`ファイルや[[GitHub Pages|http://pages.github.com/]]に保存するHTMLファイルを作成できます。両方の機能は、TiddlyWiki5自身によって実証されています。
+
+! `readme.md`ファイルの生成
+
+フォルダーの内容を表示する際、GitHubは`readme.md`ファイルを探して表示します。この方法では完全なHTMLファイルではなく、静的なMarkDownファイルのみが表示されることに注意してください(これはセキュリティ対策です)。幸いなことに、MarkDownはHTMLの安全なサブセットを許可しているため、GitHubに適した`readme.md`ファイルを生成するには、TiddlyWiki5がHTMLドキュメントの`<body>`要素の内容を生成し、適切なファイル名を付けるだけで済みます。
+
+これは次のコマンドで実行できます: 
+
+```
+--rendertiddler ReadMe ./readme.md text/html
+```
+
+ReadMe Tiddlerを`text/html`形式でファイル`./readme.md`に保存します。
+
+デフォルトでは、Tiddlerのリンクは、Tiddlerのタイトルで構成される相対URIへのリンクとしてレンダリングされます。この動作は、ReadMe Tiddlerの先頭で行われているように、マクロ`tv-wikilink-template`を定義することで上書きできます
+
+```
+\define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
+```
+
+詳細については、LinkWidgetを参照してください。
+
+この例では、Tiddlerのリンクはtw5.comの静的レンダリングへのリンクとしてレンダリングされます。

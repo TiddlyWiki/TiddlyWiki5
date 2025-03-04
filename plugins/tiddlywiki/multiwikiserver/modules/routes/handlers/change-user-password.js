@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/change-password.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/routes/handlers/change-password.js
 type: application/javascript
 module-type: mws-route
 
