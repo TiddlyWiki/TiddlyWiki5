@@ -287,7 +287,7 @@ MultiWikiClientAdaptor.prototype.checkLastRecordedUpdate = function(title,revisi
 		var numRevision = $tw.utils.getInt(revision);
 		console.log(`Checking for updates to ${title} since ${JSON.stringify(revision)} comparing to ${numRevision}`)
 		if(lru.tiddler_id > numRevision) {
-			options.syncer.enqueueLoadTiddler(title);
+			syncer.enqueueLoadTiddler(title);
 		}
 	}
 }
