@@ -6,7 +6,6 @@ module-type: parser
 Wraps up the markdown-it parser for use as a Parser in TiddlyWiki
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -261,4 +260,3 @@ function MarkdownParser(type,text,options) {
 
 exports["text/markdown"] = MarkdownParser;
 exports["text/x-markdown"] = MarkdownParser;
-})();
