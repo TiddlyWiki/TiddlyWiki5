@@ -128,7 +128,7 @@ exports.minall = makeNumericReducingOperator(
 exports.median = makeNumericArrayOperator(
 	function(values) {
 		var len = values.length, median;
-		values.sort();
+		values.sort(function(a,b) {return a-b});
 		if(len % 2) { 
 			// Odd, return the middle number
 			median = values[(len - 1) / 2];

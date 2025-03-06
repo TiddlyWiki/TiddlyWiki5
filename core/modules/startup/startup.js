@@ -52,14 +52,16 @@ exports.startup = function() {
 	}
 	// Initialise version
 	$tw.version = $tw.utils.extractVersionInfo();
-	// Execute any startup actions
-	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
-	if($tw.browser) {
-		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");
-	}
-	if($tw.node) {
-		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
-	}
+	// Set up the performance framework
+	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
+	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
+	$tw.rootWidget = new widget.widget({
+		type: "widget",
+		children: []
+	},{
+		wiki: $tw.wiki,
+		document: $tw.browser ? document : $tw.fakeDocument
+	});
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
 	$tw.languageSwitcher = new $tw.PluginSwitcher({
@@ -101,6 +103,14 @@ exports.startup = function() {
 			handlerObject: $tw.keyboardManager,
 			handlerMethod: "handleKeydownEvent"
 		}]);
+	}
+	// Execute any startup actions
+	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
+	if($tw.browser) {
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");
+	}
+	if($tw.node) {
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
 	}
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
