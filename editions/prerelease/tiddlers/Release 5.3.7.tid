@@ -15,6 +15,7 @@ description: Under development
 
 * French
 * German
+* Japanese
 
 ! Plugin Improvements
 
@@ -31,7 +32,8 @@ description: Under development
 
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8783"> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/commit/028c80782d105beb90f5d58a7f22e865c7e8c6f4">>) [[Hidden Setting: Default Type for Missing Tiddlers]]
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8661">> DiffTextWidget colours to several core palettes
-* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8807">> Flexoki palette with additional colours
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8807">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8911">>) Flexoki palette with additional colours
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8837">> [[incorrect|https://localizejs.com/articles/why-using-flag-icons-can-confuse-your-users/]] use of national flags to represent languages
 
 ! Hackability Improvements
 
@@ -40,11 +42,29 @@ description: Under development
 * <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8816">> 'disabled' attribute to SelectWidget and BrowseWidget
 * <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8819">> 'tabindex' attribute to BrowseWidget, RangeWidget, CheckboxWidget and RadioWidget
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8821">> the editor link dropdown to use newer syntax
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8911">> support for images in AVIF format
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8912">> support for custom MIME types to the [[WidgetMessage: tm-copy-to-clipboard]]
 
 ! Bug Fixes
 
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8800">> problem with overwriting shadow tiddlers from plugins that do not have a `plugin-priority` field
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8831">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8835">>) problem with switching language not correctly updating the `lang` attribute of the root `<html>` element
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8842">> bug with refreshing ExternalImages with a `_canonical_uri` field
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8882">> [[unusedtitle Macro]] to trim whitespace from the generated title
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8898">> file extensions and MIME types for font files
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8903">> bug where the wiki would be marked as dirty when a shadow tiddler is changed
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8895">> unnecessary refresh with GenesisWidget
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/d4bc3fcd998902c17cd6bcefdc8d380e5c224458">> [[WidgetMessage: tm-http-request]] to pass custom variables to the progress actions
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8930">> FillWidget to no longer display its content
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8921">> inconsistent whitespace in page toolbar "More" dropdown
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8931">> RSOD with [[contains Operator]] if created field is accessed
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8881">> incorrect .html file extension of exported tiddlers on Android
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8951">> Arabic text using sans-serif font by adding "system-ui" to default font family 
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8955">> refresh problem with "save" button
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8721">> [[list-tagged-draggable Macro]] to use the "caption" field if available
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8959">> problem with missing expandable arrow in [[toc-selective-expandable|Table-of-Contents Macros]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/5930">> the default value does not working for the CheckboxWidget if it is bound to an index in a data tiddler
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8970">> [[median Operator]] to order values as numbers, not strings
 
 ! Node.js Improvements
 
@@ -60,12 +80,19 @@ description: Under development
 
 <<.contributors """
 DesignThinkerer
+flibbles
+galenhuntington
 IchijikuIchigo
+jeremyredhead
 jrbntt
+jryans
 Leilei332
 linonetwo
 michaeljmcd
+opn
 pmario
+Rhys-T
+saqimtiaz
 well-noted
 xcazin
 """>>
