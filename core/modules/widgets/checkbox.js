@@ -157,7 +157,7 @@ CheckboxWidget.prototype.getValue = function() {
 		if(this.checkboxTag) {
 			return false;
 		}
-		if(this.checkboxField) {
+		if(this.checkboxField || this.checkboxIndex) {
 			if(this.checkboxDefault === this.checkboxChecked) {
 				return true;
 			}
