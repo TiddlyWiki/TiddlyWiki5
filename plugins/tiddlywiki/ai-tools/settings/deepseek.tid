@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/ai-tools/settings/deepseek
+tags: $:/tags/AI/ServerSetting
+caption: DeepSeek
+
+!! ~DeepSeek API key
+
+# Register for an account at https://deepseek.com/
+# Complete the KYC and charge your account with a minimum of ￥1 on https://platform.deepseek.com/top_up
+# Visit https://platform.deepseek.com/api_keys to create a new secret API key
+# Copy and paste the value into the box below
+
+~DeepSeek Secret API Key: <$password name={{$:/plugins/tiddlywiki/ai-tools/servers/deepseek!!auth-token-store-key}}/>

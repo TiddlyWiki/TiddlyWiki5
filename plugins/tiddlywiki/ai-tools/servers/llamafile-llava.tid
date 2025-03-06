@@ -2,6 +2,7 @@ title: $:/plugins/tiddlywiki/ai-tools/servers/llamafile-llava
 tags: $:/tags/AI/CompletionServer
 url: http://127.0.0.1:8080/completion
 caption: Local Llamafile server running LLaVA models
+settings: $:/plugins/tiddlywiki/ai-tools/settings/llamafile
 
 <!--
 Wikified JSON text to be sent to server

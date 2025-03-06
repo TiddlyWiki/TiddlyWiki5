@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/ai-tools/settings/siliconflow
+tags: $:/tags/AI/ServerSetting
+caption: SiliconFlow
+
+!! ~SiliconFlow API key
+
+# Register for an account at https://siliconflow.com/ or https://siliconflow.cn/
+#* Newly registered accounts can claim a small amount of credit, no payment info is required
+# Visit https://cloud.siliconflow.com/account/ak or https://cloud.siliconflow.cn/account/ak to create a new secret API key
+# Copy and paste the value into the box below
+
+~SiliconFlow Secret API Key: <$password name={{$:/plugins/tiddlywiki/ai-tools/servers/siliconflow!!auth-token-store-key}}/>

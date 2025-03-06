@@ -1,12 +1,21 @@
-title: $:/plugins/tiddlywiki/ai-tools/tools
-
-! Import ~ChatGPT Export Archive
+title: $$:/plugins/tiddlywiki/ai-tools/utilities/openai
+tags: $:/tags/AI/Utility
+caption: Import ChatGPT Export Archive
 
 These instructions allow you to import the conversations from a ~ChatGPT export archive.
 
+# [[Follow the instructions|https://help.openai.com/en/articles/7260999-how-do-i-export-my-chatgpt-history-and-data]] to request an export of your ~ChatGPT data
+# You will receive a link to download your data as a ZIP file
+# Download and unzip the file
+# Locate the file `conversations.json` within the archive and import it into your TiddlyWiki
+# Visit the ''tools'' tab and locate your `conversations.json` tiddler
+# Click the associated ''import'' button
+# See the imported conversations listed in the ''tools'' tab
+# The imported tiddler `conversations.json` is no longer required and can be deleted
+
 !! 1- Request your archive
 
-Visit the ~ChatGPT site to request your achive. You will be sent an email with a link to a ZIP file. Download the file and locate the file `conversations.json` within it.
+Visit the ~ChatGPT site to request your archive. You will be sent an email with a link to a ZIP file. Download the file and locate the file `conversations.json` within it.
 
 !! 2 - Import `conversations.json` as a tiddler
 
