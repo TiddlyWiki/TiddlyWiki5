@@ -5,6 +5,7 @@ tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 color-scheme: light
 settings: $:/palettes/TwentyTwenties/Settings
+palette-import: $:/palettes/Vanilla
 
 # Background and foreground colours, which are interpolated as required
 base-paper: #FFFCF0
@@ -53,19 +54,19 @@ alert-highlight: [tf.interpolate-colours[base-ink],[base-primary],[0.3]]
 alert-muted-foreground: [tf.interpolate-colours[base-ink],[alert-background],[0.4]]
 background: [tf.colour[base-paper]]
 blockquote-bar: [tf.colour[muted-foreground]]
-button-background:
-button-foreground:
-button-border:
+button-background: 
+button-border: 
+button-foreground: 
 code-background: [tf.interpolate-colours[base-paper],[base-tertiary],[0.1]]
 code-border: [tf.interpolate-colours[base-paper],[base-tertiary],[0.6]]
 code-foreground: [tf.colour[base-tertiary]]
 diff-delete-background: [tf.colour[base-red]]
 diff-delete-foreground: [tf.colour[foreground]]
-diff-equal-background:
+diff-equal-background: 
 diff-equal-foreground: [tf.colour[foreground]]
 diff-insert-background: [tf.colour[base-green]]
 diff-insert-foreground: [tf.colour[foreground]]
-diff-invisible-background:
+diff-invisible-background: 
 diff-invisible-foreground: [tf.colour[muted-foreground]]
 dirty-indicator: [tf.colour[base-tertiary]]
 download-background: [tf.interpolate-colours[base-paper],[base-green],[0.6]]
@@ -87,49 +88,51 @@ footnote-target-background: [tf.interpolate-colours[base-paper],[base-ink],[0.2]
 foreground: [tf.colour[base-ink]]
 highlight-background: [tf.interpolate-colours[base-paper],[base-yellow],[0.5]]
 highlight-foreground: [tf.interpolate-colours[base-yellow],[base-ink],[0.8]]
+menubar-background: #5778d8
+menubar-foreground: #fff
 message-background: [tf.interpolate-colours[base-paper],[base-blue],[0.2]]
 message-border: [tf.interpolate-colours[base-blue],[base-ink],[0.5]]
 message-foreground: [tf.interpolate-colours[base-blue],[base-ink],[0.8]]
 modal-backdrop: [tf.colour[foreground]]
 modal-background: [tf.colour[background]]
-modal-border: [tf.colour[]]
-modal-footer-background: [tf.colour[]]
-modal-footer-border: [tf.colour[]]
-modal-header-border: [tf.colour[]]
+modal-border: #999999
+modal-footer-background: #f5f5f5
+modal-footer-border: #dddddd
+modal-header-border: #eeeeee
 muted-foreground: [tf.interpolate-colours[base-paper],[base-ink],[0.3]]
-network-activity-foreground: [tf.colour[]]
+network-activity-foreground: #448844
 notification-background: [tf.colour[base-tertiary]colour-set-oklch:l[0.9]]
 notification-border: [tf.colour[base-tertiary]colour-set-oklch:l[0.2]]
 page-background: [tf.colour[base-background]]
 pre-background: [tf.interpolate-colours[base-paper],[base-tertiary],[0.1]]
 pre-border: [tf.interpolate-colours[base-paper],[base-tertiary],[0.6]]
 primary: [tf.colour[base-primary]]
-selection-background:
-selection-foreground:
-select-tag-background:
-select-tag-foreground:
+select-tag-background: 
+select-tag-foreground: 
+selection-background: 
+selection-foreground: 
 sidebar-button-foreground: [tf.colour[foreground]]
-sidebar-controls-foreground-hover: [tf.colour[]]
-sidebar-controls-foreground: [tf.colour[]]
+sidebar-controls-foreground-hover: #000000
+sidebar-controls-foreground: #aaaaaa
 sidebar-foreground-shadow: rgba(255,255,255, 0.8)
 sidebar-foreground: =[tf.colour[base-ink]] =[tf.colour[base-paper]] =[tf.colour[base-background]] +[colour-best-contrast:DeltaPhi[]]
-sidebar-muted-foreground-hover: [tf.colour[]]
-sidebar-muted-foreground: [tf.colour[]]
+sidebar-muted-foreground-hover: #444444
+sidebar-muted-foreground: #c0c0c0
 sidebar-tab-background-selected: [tf.colour[page-background]]
 sidebar-tab-background: [tf.interpolate-colours[page-background],[sidebar-tab-foreground],[0.5]]
 sidebar-tab-border-selected: [tf.colour[tab-border-selected]]
 sidebar-tab-border: [tf.colour[tab-border]]
-sidebar-tab-divider: [tf.colour[]]
+sidebar-tab-divider: #e4e4e4
 sidebar-tab-foreground-selected: [tf.colour[tab-foreground]]
 sidebar-tab-foreground: [tf.colour[tab-foreground]]
-sidebar-tiddler-link-foreground-hover: [tf.colour[]]
-sidebar-tiddler-link-foreground: [tf.colour[]]
+sidebar-tiddler-link-foreground-hover: #444444
+sidebar-tiddler-link-foreground: #999999
 site-title-foreground: [tf.colour[tiddler-title-foreground]]
-stability-stable: [tf.colour[]]
-stability-experimental: [tf.colour[]]
-stability-deprecated: [tf.colour[]]
-stability-legacy: [tf.colour[]]
-static-alert-foreground: [tf.colour[]]
+stability-deprecated: #ff0000
+stability-experimental: #c07c00
+stability-legacy: #0000ff
+stability-stable: #008000
+static-alert-foreground: #aaaaaa
 tab-background-selected: [tf.colour[background]]
 tab-background: [tf.interpolate-colours[base-paper],[base-ink],[0.2]]
 tab-border-selected: [tf.colour[muted-foreground]]
@@ -142,51 +145,80 @@ table-footer-background: [tf.interpolate-colours[background],[foreground],[0.2]]
 table-header-background: [tf.interpolate-colours[background],[foreground],[0.1]]
 tag-background: [tf.interpolate-colours[base-paper],[base-yellow],[0.9]]
 tag-foreground: [tf.interpolate-colours[base-yellow],[base-ink],[0.8]]
-testcase-accent-level-1: [tf.colour[]]
-testcase-accent-level-2: [tf.colour[]]
-testcase-accent-level-3: [tf.colour[]]
+testcase-accent-level-1: #c1eaff
+testcase-accent-level-2: #E3B740
+testcase-accent-level-3: #5FD564
 tiddler-background: [tf.colour[background]]
 tiddler-border: [tf.interpolate-colours[base-paper],[base-background],[0.5]]
 tiddler-controls-foreground-hover: [tf.interpolate-colours[background],[foreground],[0.7]]
 tiddler-controls-foreground-selected: [tf.interpolate-colours[background],[foreground],[0.9]]
 tiddler-controls-foreground: [tf.interpolate-colours[background],[foreground],[0.5]]
-tiddler-editor-background: [tf.colour[]]
-tiddler-editor-border-image: [tf.colour[]]
-tiddler-editor-border: [tf.colour[]]
-tiddler-editor-fields-even: [tf.colour[]]
-tiddler-editor-fields-odd: [tf.colour[]]
-tiddler-info-background: [tf.colour[]]
-tiddler-info-border: [tf.colour[]]
-tiddler-info-tab-background: [tf.colour[]]
+tiddler-editor-background: #f8f8f8
+tiddler-editor-border-image: #ffffff
+tiddler-editor-border: #cccccc
+tiddler-editor-fields-even: #e0e8e0
+tiddler-editor-fields-odd: #f0f4f0
+tiddler-info-background: #f8f8f8
+tiddler-info-border: #dddddd
+tiddler-info-tab-background: #f8f8f8
 tiddler-link-background: [tf.colour[background]]
 tiddler-link-foreground: [tf.colour[primary]]
 tiddler-subtitle-foreground: [tf.interpolate-colours[background],[foreground],[0.6]]
 tiddler-title-foreground: [tf.interpolate-colours[background],[foreground],[0.9]]
-toolbar-new-button:
-toolbar-options-button:
-toolbar-save-button:
-toolbar-info-button:
-toolbar-edit-button:
-toolbar-close-button:
-toolbar-delete-button:
-toolbar-cancel-button:
-toolbar-done-button:
-untagged-background: [tf.colour[]]
-very-muted-foreground: [tf.colour[]]
-wikilist-background: [tf.colour[]]
-wikilist-item: [tf.colour[]]
-wikilist-info: [tf.colour[]]
-wikilist-title: [tf.colour[]]
-wikilist-title-svg: [tf.colour[wikilist-title]]
-wikilist-url: [tf.colour[]]
-wikilist-button-open: [tf.colour[]]
+toolbar-cancel-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-done-button: 
+toolbar-edit-button: 
+toolbar-info-button: 
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+tour-chooser-button-foreground: <<colour very-muted-foreground>>
+tour-chooser-button-hover-background: <<colour muted-foreground>>
+tour-chooser-button-hover-foreground: : <<colour background>>
+tour-chooser-button-selected-background: <<colour primary>>
+tour-chooser-button-selected-foreground: <<colour background>>
+tour-chooser-dropdown-foreground: <<colour very-muted-foreground>>
+tour-chooser-item-background: <<colour background>>
+tour-chooser-item-border: <<colour muted-foreground>>
+tour-chooser-item-foreground: <<colour foreground>>
+tour-chooser-item-shadow: <<colour muted-foreground>>
+tour-chooser-item-start-background: <<colour download-background>>
+tour-chooser-item-start-foreground: <<colour background>>
+tour-chooser-item-start-hover-background: <<colour primary>>
+tour-chooser-item-start-hover-foreground: <<colour background>>
+tour-fullscreen-background: <<colour page-background>>
+tour-fullscreen-controls-foreground: <<colour muted-foreground>>
+tour-navigation-buttons-back-background: red
+tour-navigation-buttons-back-foreground: white
+tour-navigation-buttons-hint-background: purple
+tour-navigation-buttons-hint-foreground: white
+tour-navigation-buttons-hover-background: <<colour foreground>>
+tour-navigation-buttons-hover-foreground: <<colour background>>
+tour-navigation-buttons-next-background: purple
+tour-navigation-buttons-next-foreground: white
+tour-overlay-background: #cbfff8
+tour-overlay-border: #228877
+tour-step-heading-background: none
+tour-step-task-background: <<colour download-background>>
+tour-step-task-foreground: <<colour download-foreground>>
+untagged-background: #999999
+very-muted-foreground: #888888
+wikilist-background: #e5e5e5
+wikilist-button-background: #acacac
+wikilist-button-foreground: #000000
 wikilist-button-open-hover: green
-wikilist-button-reveal: [tf.colour[]]
-wikilist-button-reveal-hover: blue
-wikilist-button-remove: [tf.colour[]]
+wikilist-button-open: #4fb82b
 wikilist-button-remove-hover: red
-wikilist-toolbar-background: [tf.colour[]]
-wikilist-toolbar-foreground: [tf.colour[]]
+wikilist-button-remove: #d85778
+wikilist-button-reveal-hover: blue
+wikilist-button-reveal: #5778d8
 wikilist-droplink-dragover: rgba(255,192,192,0.5)
-wikilist-button-background: [tf.colour[]]
-wikilist-button-foreground: [tf.colour[]]
+wikilist-info: #000000
+wikilist-item: #ffffff
+wikilist-title-svg: [tf.colour[wikilist-title]]
+wikilist-title: #666666
+wikilist-toolbar-background: #d3d3d3
+wikilist-toolbar-foreground: #888888
+wikilist-url: #aaaaaa
