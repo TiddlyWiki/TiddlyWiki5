@@ -7,7 +7,9 @@
 		"tiddlywiki/menubar",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
-		"tiddlywiki/tour"
+		"tiddlywiki/tour",
+		"tiddlywiki/codemirror",
+		"tiddlywiki/bundled-subplugin-tests"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -21,6 +23,7 @@
 		"tiddlywiki/readonly"
 	],
 	"languages": [
+		"fr-FR"
 	],
 	"build": {
 		"index": [

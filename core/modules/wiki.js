@@ -136,6 +136,14 @@ exports.dispatchEvent = function(type /*, args */) {
 };
 
 /*
+false (default) to dispatch event tick as usual
+true to suppress dispatching the event tick and allow outstanding events to be processed manually
+*/
+exports.setDispatchMode = function(mode) {
+	this.dispatchMode = mode;
+}
+
+/*
 Causes a tiddler to be marked as changed, incrementing the change count, and triggers event handlers.
 This method should be called after the changes it describes have been made to the wiki.tiddlers[] array.
 	title: Title of tiddler
@@ -159,17 +167,18 @@ exports.enqueueTiddlerEvent = function(title,isDeleted,isShadow) {
 	}
 	// Trigger events
 	this.eventListeners = this.eventListeners || {};
-	if(!this.eventsTriggered) {
-		var self = this;
-		$tw.utils.nextTick(function() {
-			var changes = self.changedTiddlers;
-			self.changedTiddlers = Object.create(null);
-			self.eventsTriggered = false;
-			if($tw.utils.count(changes) > 0) {
-				self.dispatchEvent("change",changes);
-			}
-		});
-		this.eventsTriggered = true;
+	if(!this.eventsTriggered && !this.dispatchMode) {
+		$tw.utils.nextTick(this.processOutstandingTiddlerEvents.bind(this));
+	}
+	this.eventsTriggered = true;
+};
+
+exports.processOutstandingTiddlerEvents = function() {
+	var changes = this.changedTiddlers;
+	this.changedTiddlers = Object.create(null);
+	this.eventsTriggered = false;
+	if($tw.utils.count(changes) > 0) {
+		this.dispatchEvent("change",changes);
 	}
 };
 
@@ -1743,7 +1752,7 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 // Determine whether a plugin by title is dynamically loadable
 exports.doesPluginRequireReload = function(title) {
 	var tiddler = this.getTiddler(title);
-	if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"]) {
+	if(tiddler && tiddler.isPlugin()) {
 		if(tiddler.fields["plugin-type"] === "import") {
 			// The import plugin never requires reloading
 			return false;

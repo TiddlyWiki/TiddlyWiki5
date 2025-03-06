@@ -1,0 +1,36 @@
+title: Plugins/DynamicJSPluginLoad
+description: Dynamic JS plugin loading
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+{{$:/status/RequireReloadDueToPluginChange}}
++
+title: Actions
+
+<$action-createtiddler $basetitle="$:/plugins/tiddlywiki/test-js-plugin" $template="$:/plugins/tiddlywiki/test-js-plugin/raw" type="application/json"/>
++
+title: $:/plugins/tiddlywiki/test-js-plugin/raw
+list: readme
+name: bundled-subplugin-tests
+plugin-type: plugin
+type: text/plain
+
+{
+	"tiddlers": {
+		"$:/plugins/tiddlywiki/test-js-plugin/readme": {
+			"title": "$:/plugins/tiddlywiki/test-js-plugin/readme",
+			"text": "Readme from $:/plugins/tiddlywiki/test-js-plugin\n\n"
+		},
+		"$:/plugins/tiddlywiki/test-js-plugin/js": {
+			"title": "$:/plugins/tiddlywiki/test-js-plugin/js",
+			"text": "2+2",
+			"type": "application/javascript"
+		}
+	}
+}
++
+title: ExpectedResult
+
+<p>yes</p>
