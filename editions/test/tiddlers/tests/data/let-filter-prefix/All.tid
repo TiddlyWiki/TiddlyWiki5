@@ -1,0 +1,12 @@
+title: LetFilterRunPrefix/All
+description: Usage of "all[]" operator within "let" filter run prefix
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$text text={{{ [[colossus]] :let:another[all[]] [<another>] +[join[-]] }}}/>
++
+title: ExpectedResult
+
+<p>colossus</p>
