@@ -37,6 +37,7 @@ base-cyan: #3AA99F
 base-blue: #4385BE
 base-purple: #8B7EC8
 base-magenta: #CE5D97
+base-white: #FFFCF0
 # Darker variants
 # base-red: #AF3029
 # base-orange: #BC5215
@@ -47,7 +48,7 @@ base-magenta: #CE5D97
 # base-purple: #5E409D
 # base-magenta: #A02F6F
 
-# Colour definitions
+# Palette definitions
 alert-background: [tf.colour[base-secondary]]
 alert-border: [tf.interpolate-colours[base-ink],[alert-background],[0.6]]
 alert-highlight: [tf.interpolate-colours[base-ink],[base-primary],[0.3]]
@@ -77,7 +78,7 @@ dropdown-background: [tf.colour[background]]
 dropdown-border: [tf.colour[muted-foreground]]
 dropdown-tab-background-selected: [tf.colour[background]]
 dropdown-tab-background: [tf.interpolate-colours[base-paper],[base-ink],[0.9]]
-dropzone-background: rgba(0,200,0,0.7)
+dropzone-background: [tf.colour[base-secondary]colour-set-alpha[0.7]]
 external-link-background-hover: inherit
 external-link-background-visited: inherit
 external-link-background: inherit
@@ -103,7 +104,7 @@ muted-foreground: [tf.interpolate-colours[base-paper],[base-ink],[0.3]]
 network-activity-foreground: #448844
 notification-background: [tf.colour[base-tertiary]colour-set-oklch:l[0.9]]
 notification-border: [tf.colour[base-tertiary]colour-set-oklch:l[0.2]]
-page-background: [tf.colour[base-background]]
+page-background: [tf.colour[base-background]] /* mopthing */
 pre-background: [tf.interpolate-colours[base-paper],[base-tertiary],[0.1]]
 pre-border: [tf.interpolate-colours[base-paper],[base-tertiary],[0.6]]
 primary: [tf.colour[base-primary]]
@@ -111,22 +112,22 @@ select-tag-background:
 select-tag-foreground: 
 selection-background: 
 selection-foreground: 
-sidebar-button-foreground: [tf.colour[foreground]]
-sidebar-controls-foreground-hover: #000000
-sidebar-controls-foreground: #aaaaaa
-sidebar-foreground-shadow: rgba(255,255,255, 0.8)
+sidebar-button-foreground: [tf.colour[sidebar-controls-foreground]]
+sidebar-controls-foreground-hover: [tf.interpolate-colours[base-ink],[base-background],[0.2]]
+sidebar-controls-foreground: [tf.interpolate-colours[base-ink],[base-background],[0.8]]
+sidebar-foreground-shadow: inherit
 sidebar-foreground: =[tf.colour[base-ink]] =[tf.colour[base-paper]] =[tf.colour[base-background]] +[colour-best-contrast:DeltaPhi[]]
-sidebar-muted-foreground-hover: #444444
-sidebar-muted-foreground: #c0c0c0
-sidebar-tab-background-selected: [tf.colour[page-background]]
-sidebar-tab-background: [tf.interpolate-colours[page-background],[sidebar-tab-foreground],[0.5]]
+sidebar-muted-foreground-hover: [tf.colour[sidebar-muted-foreground]colour-set-oklch:l[0.3]]
+sidebar-muted-foreground: [tf.interpolate-colours[foreground],[page-background],[0.6]]
+sidebar-tab-background-selected: [tf.colour[tab-background-selected]]
+sidebar-tab-background: [tf.colour[tab-background]]
 sidebar-tab-border-selected: [tf.colour[tab-border-selected]]
 sidebar-tab-border: [tf.colour[tab-border]]
-sidebar-tab-divider: #e4e4e4
-sidebar-tab-foreground-selected: [tf.colour[tab-foreground]]
+sidebar-tab-divider: [tf.colour[tab-divider]]
+sidebar-tab-foreground-selected: [tf.colour[tab-foreground-selected]]
 sidebar-tab-foreground: [tf.colour[tab-foreground]]
-sidebar-tiddler-link-foreground-hover: #444444
-sidebar-tiddler-link-foreground: #999999
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-oklch:l[0.5]]
+sidebar-tiddler-link-foreground: =[tf.colour[base-primary]] =[tf.colour[base-secondary]] =[tf.colour[base-tertiary]] =[tf.colour[base-background]] +[colour-best-contrast:DeltaPhi[]]
 site-title-foreground: [tf.colour[tiddler-title-foreground]]
 stability-deprecated: #ff0000
 stability-experimental: #c07c00
@@ -214,7 +215,7 @@ wikilist-button-remove-hover: red
 wikilist-button-remove: #d85778
 wikilist-button-reveal-hover: blue
 wikilist-button-reveal: #5778d8
-wikilist-droplink-dragover: rgba(255,192,192,0.5)
+wikilist-droplink-dragover: [tf.colour[base-secondary]colour-set-alpha[0.7]]
 wikilist-info: #000000
 wikilist-item: #ffffff
 wikilist-title-svg: [tf.colour[wikilist-title]]
