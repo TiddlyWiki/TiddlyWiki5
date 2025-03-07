@@ -47,3 +47,9 @@ tags: $:/tags/Preview/Helpers
 	<$text text=<<text>>/>
 </span>
 \end link
+
+\procedure sidebar-link(text)
+<span class="tc-palette-preview-thumbnail-tiddler-link" style.color=<<colour sidebar-tiddler-link-foreground>>>
+	<$text text=<<text>>/>
+</span>
+\end sidebar-link

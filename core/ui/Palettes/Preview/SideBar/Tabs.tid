@@ -12,7 +12,7 @@ HelloThere Community Portal GettingStarted Development Download Filters Palettes
 <div class="tc-palette-preview-thumbnail-sidebar-list">
 	<$list filter="[enlist<recent-links>]">
 		<div>
-			<$transclude $variable="link" text=<<currentTiddler>>/>
+			<$transclude $variable="sidebar-link" text=<<currentTiddler>>/>
 		</div>
 	</$list>
 </div>
