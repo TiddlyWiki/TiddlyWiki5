@@ -42,4 +42,4 @@ background: red
 +
 title: ExpectedResult
 
-<p>#f4e4d4</p><p>red</p>
+<p>#f4e4d4 /* page-background */</p><p>red /* background */</p>

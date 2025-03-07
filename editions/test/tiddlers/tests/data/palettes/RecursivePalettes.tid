@@ -55,7 +55,7 @@ foreground: green
 +
 title: ExpectedResult
 
-<p>+#f4e4d4
-+red
-+#f4e4d4
-+green</p>
+<p>+#f4e4d4 /* page-background */
++red /* background */
++#f4e4d4 /* custom */
++green /* foreground */</p>
