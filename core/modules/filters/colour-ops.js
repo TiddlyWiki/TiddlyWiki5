@@ -99,8 +99,11 @@ exports["colour-interpolate"] = function(source,operator,options) {
 		return [];
 	}
 	var colourA = $tw.utils.parseCSSColorObject(operator.operands[0]),
-		colourB = $tw.utils.parseCSSColorObject(operator.operands[1]),
-		rangefn = colourA.range(colourB,{space: space, hue: hueAdjuster});
+		colourB = $tw.utils.parseCSSColorObject(operator.operands[1]);
+	if(!colourA || !colourB) {
+		return [];
+	}
+	var rangefn = colourA.range(colourB,{space: space, hue: hueAdjuster});
 	// Cycle through the weights
 	var results = [];
 	source(function(tiddler,title) {
