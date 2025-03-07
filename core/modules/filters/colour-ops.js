@@ -40,6 +40,11 @@ exports["colour-set-oklch"] = makeSerialColourOperator(function (colour, operato
 	return colour.display().toString();
 });
 
+exports["colour-set-alpha"] = makeSerialColourOperator(function (colour, operator, options) {
+	colour.alpha = $tw.utils.parseNumber(operator.operand);
+	return colour.display().toString();
+});
+
 exports["colour-contrast"] = makeParallelColourOperator(function (colours, operator, options) {
 	var colourContrasts = [];
 	$tw.utils.each(colours,function(colour,index) {
