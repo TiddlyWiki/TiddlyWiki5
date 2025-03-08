@@ -1,0 +1,12 @@
+title: LetFilterRunPrefix/UseInput
+description: Using the input of "let" filter run prefix
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$text text={{{ [[colossus]] :let:another[addprefix[something]] [<another>] +[join[-]] }}}/>
++
+title: ExpectedResult
+
+<p>colossus</p>
