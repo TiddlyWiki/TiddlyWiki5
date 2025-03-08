@@ -20,4 +20,4 @@ type: text/vnd.tiddlywiki
 
 The `:let` filter run prefix assigns the first result of a filter run to a variable that is made available to the remaining [[filter runs|Filter Run]] in the [[filter expression|Filter Expression]]. If the filter run does not return any results then the variable is set to an empty string.
 
-The output of the `:let` filter run prefix is an empty title list.
+Within the filter run the [[all Operator]] with an empty parameter retrieves all the titles from the previous filter runs, instead of the usual behaviour of retieving all the titles that were passed to the filter expression.
