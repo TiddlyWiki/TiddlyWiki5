@@ -348,7 +348,13 @@ exports.compileFilter = function(filterString) {
 		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
 		if(self.filterRecursionCount < MAX_FILTER_DEPTH) {
 			$tw.utils.each(operationFunctions,function(operationFunction) {
-				operationFunction(results,source,widget);
+				var operationResult = operationFunction(results,source,widget);
+				if(operationResult) {
+					if(operationResult.variables) {
+						// If the filter run prefix has returned variables, create a new fake widget with those variables
+						widget = widget.makeFakeWidgetWithVariables(operationResult.variables);
+					}
+				}
 			});
 		} else {
 			results.push("/**-- Excessive filter recursion --**/");
