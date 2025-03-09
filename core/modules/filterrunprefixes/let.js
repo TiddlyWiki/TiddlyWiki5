@@ -35,9 +35,7 @@ exports.let = function(operationSubFunction,options) {
 		};
 	} else {
 		// Return nothing if there is no variable name
-		return function(results,source,widget) {
-		};
-
+		return function(results,source,widget) {};
 	}
 };
 
