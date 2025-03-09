@@ -6,15 +6,3 @@ code-body: yes
 <$transclude tiddler="$:/language/MissingTiddler/Hint"/>
 
 </$transclude>
-<%if [[$:/info/browser]text[yes]] %>
-  <$wikify text={{!!text}} name=parsetree output=parsetree >
-    <$let text2={{{[<parsetree>serializeparsetree[]]}}}>
-      <$wikify name=rendered text=<<text2>> output=html >
-        <$diff-text source={{!!text}} dest=<<text2>>/>
-
-        <<rendered>>
-
-      </$wikify>
-    </$let>
-  </$wikify>
-<%endif%>
