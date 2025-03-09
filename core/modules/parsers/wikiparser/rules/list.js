@@ -186,7 +186,10 @@ exports.serialize = function (tree,serialize) {
 					var currentMarker = findMarker(node.tag, child.tag);
 					// Handle class attributes
 					var classAttr = child.attributes && child.attributes.class ? "." + child.attributes.class.value : "";
-					// same level text nodes may be split into multiple children, and separated by deeper list sub-tree. We collect same level text nodes into this list, and concat then submit them before enter deeper list.
+					/** 
+					 * same level text nodes may be split into multiple children, and separated by deeper list sub-tree.
+					 * We collect same level text nodes into this list, and concat then submit them before enter deeper list.
+					 */
 					var content = [];
 					$tw.utils.each(child.children,function (subNode) {
 						if(isListNode(subNode)) {
