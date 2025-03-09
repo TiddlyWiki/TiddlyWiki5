@@ -6,15 +6,15 @@ module-type: wikirule
 Wiki pragma rule for function, procedure and widget definitions
 
 ```
-\function name(param:defaultvalue,param2:defaultvalue)
+\function name(param:"defaultvalue", param2:"defaultvalue")
 definition text
 \end
 
-\procedure name(param:defaultvalue,param2:defaultvalue)
+\procedure name(param:"defaultvalue", param2:"defaultvalue")
 definition text
 \end
 
-\widget $mywidget(param:defaultvalue,param2:defaultvalue)
+\widget $mywidget(param:"defaultvalue", param2:"defaultvalue")
 definition text
 \end
 ```
@@ -100,8 +100,8 @@ exports.serialize = function(tree,serialize) {
 	var name = tree.attributes.name.value;
 	// Parameters with default values
 	var params = tree.params.map(function(param) {
-			return param.name + (param.default ? ":" + param.default : "");
-	}).join(",");
+			return param.name + (param.default ? ':"' + param.default + '"' : "");
+	}).join(", ");
 	// Definition text
 	var definition = tree.attributes.value.value;
 	// Construct the serialized string, concat the children because pragma rule wrap everything below it as children
