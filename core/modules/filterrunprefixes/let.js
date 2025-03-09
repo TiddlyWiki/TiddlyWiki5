@@ -25,7 +25,7 @@ exports.let = function(operationSubFunction,options) {
 			var inputSource = widget.wiki.makeTiddlerIterator(results.toArray());
 			// Assign the result of the subfunction to the variable
 			var variables = {};
-			variables[name] = operationSubFunction(inputSource,widget)[0] || "";
+			variables[name] = operationSubFunction(inputSource,widget);
 			// Clear the results
 			results.clear();
 			// Return the variables

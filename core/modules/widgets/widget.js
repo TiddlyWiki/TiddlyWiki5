@@ -83,7 +83,7 @@ Widget.prototype.execute = function() {
 /*
 Set the value of a context variable
 name: name of the variable
-value: value of the variable
+value: value of the variable, can be a string or an array
 params: array of {name:, default:} for each parameter
 isMacroDefinition: true if the variable is set via a \define macro pragma (and hence should have variable substitution performed)
 options includes:
@@ -93,8 +93,10 @@ options includes:
 */
 Widget.prototype.setVariable = function(name,value,params,isMacroDefinition,options) {
 	options = options || {};
+	var valueIsArray = $tw.utils.isArray(value);
 	this.variables[name] = {
-		value: value,
+		value: valueIsArray ? (value[0] || "") : value,
+		resultList: valueIsArray ? value : [value],
 		params: params,
 		isMacroDefinition: !!isMacroDefinition,
 		isFunctionDefinition: !!options.isFunctionDefinition,
@@ -164,6 +166,9 @@ Widget.prototype.getVariableInfo = function(name,options) {
 			resultList = this.wiki.filterTiddlers(value,this.makeFakeWidgetWithVariables(variables),options.source);
 			value = resultList[0] || "";
 		} else {
+			if(variable.resultList) {
+				resultList = variable.resultList;
+			}
 			params = variable.params;
 		}
 		return {
@@ -313,7 +318,7 @@ Widget.prototype.getStateQualifier = function(name) {
 };
 
 /*
-Make a fake widget with specified variables, suitable for variable lookup in filters
+Make a fake widget with specified variables, suitable for variable lookup in filters. Each variable can be a string or an array of strings
 */
 Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 	var self = this,
@@ -321,7 +326,12 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 	return {
 		getVariable: function(name,opts) {
 			if($tw.utils.hop(variables,name)) {
-				return variables[name];
+				var value = variables[name];
+				if($tw.utils.isArray(value)) {
+					return value[0];
+				} else {
+					return value;
+				}
 			} else {
 				opts = opts || {};
 				opts.variables = variables;
@@ -330,9 +340,18 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 		},
 		getVariableInfo: function(name,opts) {
 			if($tw.utils.hop(variables,name)) {
-				return {
-					text: variables[name]
-				};
+				var value = variables[name];
+				if($tw.utils.isArray(value)) {
+					return {
+						text: value[0],
+						resultList: value
+					};
+				} else {
+					return {
+						text: value,
+						resultList: [value]
+					};
+				}
 			} else {
 				opts = opts || {};
 				opts.variables = $tw.utils.extend({},variables,opts.variables);
