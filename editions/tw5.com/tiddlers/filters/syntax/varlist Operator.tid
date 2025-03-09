@@ -1,0 +1,14 @@
+caption: varlist
+created: 20250307212252946
+modified: 20250307212252946
+op-input: ignored
+op-output: the list items stored in the variable
+op-parameter: the name of a variable
+op-purpose: retrieve the value of a variable as a list
+tags: [[Filter Operators]] [[Selection Constructors]]
+title: varlist Operator
+type: text/vnd.tiddlywiki
+
+The parameter specifies the name of a variable that has been assigned a list of items by a [[let filter run prefix|Let Filter Run Prefix]]. The operator retrieves all the list items.
+
+<<.operator-examples "varlist">>
