@@ -53,11 +53,10 @@ exports.parse = function() {
 	// Return a node representing the comment that is not rendered
 	var commentStart = this.match.index;
 	var commentEnd = this.endMatch.index + this.endMatch[0].length;
-	var commentText = this.parser.source.slice(commentStart, commentEnd);
 	return [{
 			type: "void",
 			children: [],
-			text: commentText,
+			text: this.parser.source.slice(commentStart, commentEnd),
 			start: commentStart,
 			end: commentEnd
 	}];

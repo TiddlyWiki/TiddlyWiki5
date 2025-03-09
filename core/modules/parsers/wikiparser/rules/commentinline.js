@@ -46,10 +46,9 @@ exports.parse = function() {
 	// Return a node representing the inline comment
 	var commentStart = this.match.index;
 	var commentEnd = this.endMatch.index + this.endMatch[0].length;
-	var commentText = this.parser.source.slice(commentStart, commentEnd);
 	return [{
 			type: "void",
-			text: commentText,
+			text: this.parser.source.slice(commentStart, commentEnd),
 			start: commentStart,
 			end: commentEnd
 	}];
