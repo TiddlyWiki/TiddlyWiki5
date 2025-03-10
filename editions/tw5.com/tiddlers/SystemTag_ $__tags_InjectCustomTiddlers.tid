@@ -1,0 +1,12 @@
+caption: $:/tags/InjectCustomTiddlers
+created: 20240311144347147
+description: marks JSON serialized tiddlers to be injected into a custom store prior to a save-file action
+modified: 20240311153411624
+tags: SystemTags
+title: SystemTag: $:/tags/InjectCustomTiddlers
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]] `$:/tags/InjectCustomTiddlers` marks JSON serialized tiddlers to be injected [[into a custom store section|$:/core/templates/store.injected.template.html]] in the generated HTML file.
+
+Note that the wiki must be saved and reloaded in order for the tiddlers to be seen. More implementation details can be found in the [[developers wiki|https://tiddlywiki.com/dev/#SystemTag%3A %24%3A%2Ftags%2FInjectCustomTiddlers]]. 
+
