@@ -6,29 +6,37 @@ module-type: parser
 The video parser parses a video tiddler into an embeddable HTML element
 
 \*/
-(function(){
+(function () {
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
 
-var VideoParser = function(type,text,options) {
+var VideoParser = function (type, text, options) {
 	var element = {
-			type: "element",
-			tag: "video",
-			attributes: {
-				controls: {type: "string", value: "controls"},
-				style: {type: "string", value: "width: 100%; object-fit: contain"}
-			}
-		},
-		src;
-	if(options._canonical_uri) {
-		element.attributes.src = {type: "string", value: options._canonical_uri};
-	} else if(text) {
-		element.attributes.src = {type: "string", value: "data:" + type + ";base64," + text};
+		type: "element",
+		tag: "$video", // Changed to $video to enable widget interception
+		attributes: {
+			controls: { type: "string", value: "controls" },
+			style: { type: "string", value: "width: 100%; object-fit: contain" }
+		}
+	};
+
+	// Pass through source information
+	if (options._canonical_uri) {
+		element.attributes.src = { type: "string", value: options._canonical_uri };
+		element.attributes.type = { type: "string", value: type };
+	} else if (text) {
+		element.attributes.src = { type: "string", value: "data:" + type + ";base64," + text };
+		element.attributes.type = { type: "string", value: type };
 	}
+
+	// Pass through tiddler title if available
+	if (options.title) {
+		element.attributes.tiddler = { type: "string", value: options.title };
+	}
+
 	this.tree = [element];
-	this.source = text;
 	this.type = type;
 };
 
