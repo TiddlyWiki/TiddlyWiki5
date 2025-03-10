@@ -19,7 +19,7 @@ Export our filter function
 */
 exports.varlist = function(source,operator,options) {
 	// Check for common optimisations
-	var variableInfo = options.widget.getVariableInfo(operator.operand);
+	var variableInfo = operator.operand && options.widget.getVariableInfo(operator.operand);
 	if(variableInfo) {
 		return options.wiki.makeTiddlerIterator(variableInfo.resultList);
 	} else {
