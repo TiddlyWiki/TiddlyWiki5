@@ -12,22 +12,30 @@ Widget base class
 /*global $tw: false */
 "use strict";
 
-/*
-Create a widget object for a parse tree node
-	parseTreeNode: reference to the parse tree node to be rendered
-	options: see below
-Options include:
-	wiki: mandatory reference to wiki associated with this render tree
-	parentWidget: optional reference to a parent renderer node for the context chain
-	document: optional document object to use instead of global document
-*/
-var Widget = function(parseTreeNode,options) {
+/**
+ * Widget class for creating a widget object for a parse tree node.
+ * 
+ * @class
+ * @constructor
+ * @param {Object} parseTreeNode - Reference to the parse tree node to be rendered.
+ * @param {Object} options - Options for the widget.
+ * @param {Object} options.wiki - Mandatory reference to the wiki associated with this render tree.
+ * @param {Widget} [options.parentWidget] - Optional reference to a parent renderer node for the context chain.
+ * @param {Document} [options.document] - Optional document object to use instead of the global document.
+ */
+function Widget(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Initialise widget properties. These steps are pulled out of the constructor so that we can reuse them in subclasses
-*/
+/**
+ * Initialise widget properties. These steps are pulled out of the constructor so that we can reuse them in subclasses.
+ * 
+ * @param {Object} parseTreeNode - Reference to the parse tree node to be rendered.
+ * @param {Object} options - Options for the widget.
+ * @param {Object} options.wiki - Mandatory reference to the wiki associated with this render tree.
+ * @param {Widget} [options.parentWidget] - Optional reference to a parent renderer node for the context chain.
+ * @param {Document} [options.document] - Optional document object to use instead of the global document.
+ */
 Widget.prototype.initialise = function(parseTreeNode,options) {
 	// Bail if parseTreeNode is undefined, meaning  that the widget constructor was called without any arguments so that it can be subclassed
 	if(parseTreeNode === undefined) {
@@ -64,9 +72,12 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	}
 };
 
-/*
-Render this widget into the DOM
-*/
+/**
+ * Render this widget into the DOM.
+ * 
+ * @param {Element} parent - The parent DOM node to render into.
+ * @param {Element} nextSibling - The next sibling DOM node to render before.
+ */
 Widget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.execute();
