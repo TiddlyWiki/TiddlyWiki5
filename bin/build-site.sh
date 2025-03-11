@@ -105,6 +105,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 fi
 
 # /index.html			Main site
+# /external-(version).html External core version of main site
 # /favicon.ico			Favicon for main site
 # /static.html			Static rendering of default tiddlers
 # /alltiddlers.html		Static rendering of all tiddlers
@@ -117,7 +118,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--version \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--build favicon static index \
+	--build favicon static index external-js \
 	|| exit 1
 
 # /empty.html					Empty
