@@ -2,6 +2,8 @@
 
 # test TiddlyWiki5 for tiddlywiki.com
 
+npm install
+
 node ./tiddlywiki.js \
 	./editions/test \
 	--verbose \

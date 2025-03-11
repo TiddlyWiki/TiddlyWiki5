@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/readme
+
+This plugin extends the TiddlyWiki 5 server running on Node.js to be able to host multiple wikis that can share content or be independent.
+
+See https://mws.tiddlywiki.com/ for more information.

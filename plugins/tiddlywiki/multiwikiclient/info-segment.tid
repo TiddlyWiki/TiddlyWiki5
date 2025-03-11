@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/multiwikiclient/info-segment
+tags: $:/tags/TiddlerInfoSegment
+
+<$reveal type="nomatch" state=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
+<div class="tc-subtitle">
+Bag: <$view tiddler="$:/state/multiwikiclient/tiddlers/bag" index=<<currentTiddler>>>(none)</$view>
+</div>
+</$reveal>
