@@ -42,12 +42,12 @@ LetListWidget.prototype.computeAttributes = function() {
 		self = this;
 	this.currentValueFor = Object.create(null);
 	$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(this.parseTreeNode),function(attribute) {
-		var value = self.computeAttribute(attribute),
+		var value = self.computeAttribute(attribute,{asList: true}),
 			name = attribute.name;
 		// Now that it's prepped, we're allowed to look this variable up
 		// when defining later variables
 		if(value !== undefined) {
-			self.currentValueFor[name] = self.wiki.filterTiddlers(value,self);
+			self.currentValueFor[name] = value;
 		}
 	});
 	// Run through again, setting variables and looking for differences

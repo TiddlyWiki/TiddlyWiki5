@@ -6,8 +6,8 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 <$letlist
-	original="[all[tiddlers]sort[]]"
-	varname="[varlist[original]]"
+	original={{{ [all[tiddlers]sort[]] }}}
+	varname={{{ [varlist[original]] }}}
 >
 <$text text={{{ [varlist[varname]] +[join[-]] }}}/>
 </$letlist>

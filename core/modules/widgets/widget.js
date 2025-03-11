@@ -388,20 +388,43 @@ Widget.prototype.computeAttributes = function(options) {
 	return changedAttributes;
 };
 
-Widget.prototype.computeAttribute = function(attribute) {
+/*
+Compute the value of a single attribute. Options include:
+asList: boolean if true returns results as an array instead of a single value
+*/
+Widget.prototype.computeAttribute = function(attribute,options) {
+	options = options || {};
 	var self = this,
 		value;
 	if(attribute.type === "filtered") {
-		value = this.wiki.filterTiddlers(attribute.filter,this)[0] || "";
+		value = this.wiki.filterTiddlers(attribute.filter,this);
+		if(!options.asList) {
+			value = value[0] || "";
+		}
 	} else if(attribute.type === "indirect") {
-		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler")) || "";
+		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler"));
+		if(value && options.asList) {
+			value = [value];
+		}
 	} else if(attribute.type === "macro") {
 		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
-		value = variableInfo.text;
+		if(variableInfo) {
+			if(options.asList) {
+				value = variableInfo.resultList;
+			} else {
+				value = variableInfo.text || "";
+			}
+		}
 	} else if(attribute.type === "substituted") {
 		value = this.wiki.getSubstitutedText(attribute.rawValue,this) || "";
+		if(options.asList) {
+			value = [value];
+		}
 	} else { // String attribute
-		value = attribute.value;
+		value = attribute.value || "";
+		if(options.asList) {
+			value = [value];
+		}
 	}
 	return value;
 };
