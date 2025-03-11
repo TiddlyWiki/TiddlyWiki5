@@ -5,8 +5,6 @@ module-type: filteroperator
 
 Retrieve the value of a variable as a list
 
-[all[shadows+tiddlers]]
-
 \*/
 (function(){
 
@@ -18,9 +16,8 @@ Retrieve the value of a variable as a list
 Export our filter function
 */
 exports.varlist = function(source,operator,options) {
-	// Check for common optimisations
 	var variableInfo = operator.operand && options.widget.getVariableInfo(operator.operand);
-	if(variableInfo) {
+	if(variableInfo && variableInfo.text !== undefined) {
 		return options.wiki.makeTiddlerIterator(variableInfo.resultList);
 	} else {
 		return [];
