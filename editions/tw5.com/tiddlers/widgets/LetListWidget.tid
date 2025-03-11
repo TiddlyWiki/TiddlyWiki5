@@ -6,13 +6,21 @@ caption: letlist
 
 ! Introduction
 
-<<.from-version "5.3.7">> The <<.wid letlist>> widget allows multiple variables to be set in one operation, each to the list of results from evaluating a filter. It is similar to the <<.wlink LetWidget>> widget but assigns the complete list of results to the variable instead of just the first result.
+<<.from-version "5.3.7">> The <<.wid letlist>> widget allows multiple variables to be set in one operation, each to the list of results from evaluating an attribute. It is similar to the <<.wlink LetWidget>> widget but assigns the complete list of results to a multi-valued variable instead of just the first result.
 
 ! Content and Attributes
 
 The content of the <<.wid letlist>> widget is the scope for the value assigned to the variable.
 
 |!Attribute |!Description |
-|//{attributes}// |Each attribute name specifies a variable name. The attribute value is a filter whose results are is assigned to the variable |
+|//{attributes}// |Each attribute name specifies a variable name. The attribute value is a list that is assigned to the variable |
+
+The <<.wid letlist>> is primarily intended to be used with the filtered attribute syntax. This enables the result list of a filter to be assigned to a multi-valued variable:
+
+```
+<$letlist varname={{{ [all[tiddlers]sort[]] }}}>
+<$text text={{{ [varlist[varname]] +[join[-]] }}}/>
+</$letlist>
+```
 
 Attributes are evaluated in the order they are written. Attributes with the same name are allowed. Each time a duplicate attribute is encountered, it will replace the existing value set by the earlier duplicate.
