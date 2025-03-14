@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/filters/json-ops.js
 type: application/javascript
-module-type: filteroperator
+module-type: newfilteroperator
 
 Filter operators for JSON operations
 
@@ -57,9 +57,9 @@ exports["jsonindexes"] = function(source,operator,options) {
 exports["jsontype"] = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title,title);
-		if(data) {
-			var item = getDataItemType(data,operator.operands);
+		var data = $tw.utils.filterItemToObject(title,{defaultValue: title,parseStringsAsJson: true});
+		if(data !== undefined) {
+			var item = getFilterItemType(data,operator.operands);
 			if(item !== undefined) {
 				results.push(item);
 			}
@@ -196,7 +196,7 @@ function convertDataItemKeysToStrings(item) {
 	return [];
 }
 
-function getDataItemType(data,indexes) {
+function getFilterItemType(data,indexes) {
 	// Get the item
 	var item = getDataItem(data,indexes);
 	// Return the item type
@@ -281,4 +281,3 @@ function setDataItem(data,indexes,value) {
 }
 
 })();
-	

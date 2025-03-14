@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/filters/count.js
 type: application/javascript
-module-type: filteroperator
+module-type: newfilteroperator
 
 Filter operator returning the number of entries in the current list.
 
@@ -20,7 +20,7 @@ exports.count = function(source,operator,options) {
 	source(function(tiddler,title) {
 		count++;
 	});
-	return [count + ""];
+	return [count];
 };
 
 })();
