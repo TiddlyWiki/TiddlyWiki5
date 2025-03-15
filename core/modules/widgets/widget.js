@@ -628,36 +628,62 @@ Widget.prototype.addEventListeners = function(listeners) {
 };
 
 /*
-Add an event listener
+Add an event listener. Listener could return a boolean indicating whether 
+to further propagation or not.
 */
 Widget.prototype.addEventListener = function(type,handler) {
 	var self = this;
-	if(typeof handler === "string") { // The handler is a method name on this widget
-		this.eventListeners[type] = function(event) {
-			return self[handler].call(self,event);
-		};
-	} else { // The handler is a function
-		this.eventListeners[type] = function(event) {
-			return handler.call(self,event);
-		};
+	var listenerWrapper;
+	if(typeof handler === "string") { 
+		// keep the original function for comparing when remove.
+		listenerWrapper = { original: handler, listener: function(event) { return self[handler].call(self,event); } };
+	} else { 
+		listenerWrapper = { original: handler, listener: function(event) { return handler.call(self,event); } };
 	}
+	this.eventListeners[type] = this.eventListeners[type] || [];
+	this.eventListeners[type].push(listenerWrapper);
 };
 
 /*
-Dispatch an event to a widget. If the widget doesn't handle the event then it is also dispatched to the parent widget
+Remove an event listener
+*/
+Widget.prototype.removeEventListener = function(type,handler) {
+	if(!this.eventListeners[type]) return;
+	var self = this;
+	$tw.utils.each(this.eventListeners[type].slice(), function(listener) {
+		if(listener.original === handler) {
+			var index = self.eventListeners[type].indexOf(listener);
+			if(index !== -1) {
+				self.eventListeners[type].splice(index,1);
+			}
+		}
+	});
+};
+
+/*
+Dispatch an event to a widget. If the widget doesn't handle the event then it is also dispatched to the parent widget.
+
+An event listener can return a boolean "propagate" value, indicating whether to stop propagation. By default it is false (stop propagation).
 */
 Widget.prototype.dispatchEvent = function(event) {
 	event.widget = event.widget || this;
 	// Dispatch the event if this widget handles it
-	var listener = this.eventListeners[event.type];
-	if(listener) {
-		// Don't propagate the event if the listener returned false
-		if(!listener(event)) {
+	var listeners = this.eventListeners[event.type];
+	if(listeners) {
+		// Don't propagate the event if any of the listeners returned false
+		var self = this;
+		var shouldPropagate = true;
+		$tw.utils.each(listeners, function(listener) {
+			if(!listener.listener(event)) { 
+				shouldPropagate = false;
+			}
+		});
+		if (!shouldPropagate) {
 			return false;
 		}
 	}
 	// Dispatch the event to the parent widget
-	if(this.parentWidget) {
+	if (this.parentWidget) {
 		return this.parentWidget.dispatchEvent(event);
 	}
 	return true;
