@@ -8,6 +8,7 @@ module-type: startup
 Startup the dyannotate background daemon to track the selection
 
 \*/
+(function(){
 
 "use strict";
 
@@ -55,3 +56,5 @@ exports.startup = function() {
 		$tw.dynannotate.elementSpotlight.shineSpotlight(selectors);
 	});
 };
+
+})();
