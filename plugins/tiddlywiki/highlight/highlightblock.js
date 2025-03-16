@@ -6,7 +6,6 @@ module-type: widget
 Wraps up the fenced code blocks parser for highlight and use in TiddlyWiki5
 
 \*/
-(function() {
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -47,5 +46,3 @@ if(hljs.getLanguage !== undefined) {
 		}
 	};
 }	
-
-})();

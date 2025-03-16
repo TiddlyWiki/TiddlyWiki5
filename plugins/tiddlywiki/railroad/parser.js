@@ -33,7 +33,6 @@ pragmas:
 	\end single|double|none
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -448,5 +447,3 @@ Parser.prototype.readPragma = function(source,pos) {
 /////////////////////////// Exports
 
 exports.parser = Parser;
-
-})();

@@ -6,7 +6,6 @@ module-type: library
 A simple HTTP-over-window.postMessage implementation of a standard TiddlyWeb-compatible server. It uses real HTTP to load the individual tiddler JSON files.
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -86,5 +85,3 @@ function httpGet(url,callback) {
 	};
 	http.send();
 }
-
-})();

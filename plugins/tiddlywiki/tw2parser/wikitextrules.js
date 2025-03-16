@@ -6,7 +6,6 @@ module-type: module
 Rule modules for the wikitext parser
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -824,5 +823,3 @@ var rules = [
 ];
 
 exports.rules = rules;
-
-})();

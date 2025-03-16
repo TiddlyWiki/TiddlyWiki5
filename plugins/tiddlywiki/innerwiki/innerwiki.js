@@ -6,7 +6,6 @@ module-type: widget
 Widget to display an innerwiki in an iframe
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -347,5 +346,3 @@ InnerWikiWidget.prototype.saveScreenshot = function(options,callback) {
 };
 
 exports.innerwiki = InnerWikiWidget;
-
-})();

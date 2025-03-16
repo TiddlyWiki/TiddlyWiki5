@@ -28,7 +28,6 @@ HTML nodes look like this:
 `
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -196,5 +195,3 @@ WikiTextParser.prototype.subWikifyTerm = function(output,terminatorRegExp) {
 };
 
 exports["text/x-tiddlywiki"] = WikiTextParser;
-
-})();

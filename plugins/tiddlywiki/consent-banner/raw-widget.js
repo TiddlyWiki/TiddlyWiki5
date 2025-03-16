@@ -6,7 +6,6 @@ module-type: widget
 An override of the raw widget that blocks raw content until the user has consented to accept cookies
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -65,5 +64,3 @@ RawWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.raw = RawWidget;
-
-})();

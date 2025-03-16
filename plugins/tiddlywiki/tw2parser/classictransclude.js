@@ -6,7 +6,6 @@ module-type: widget
 Transclude widget
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -191,5 +190,3 @@ TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.classictransclude = TranscludeWidget;
-
-})();

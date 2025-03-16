@@ -6,7 +6,6 @@ module-type: global
 Confetti manager
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -52,5 +51,3 @@ ConfettiManager.prototype.reset = function () {
 };
 
 exports.ConfettiManager = ConfettiManager;
-
-})();

@@ -6,7 +6,6 @@ module-type: startup
 Initialisation
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -25,5 +24,3 @@ exports.startup = function() {
 		logger.alert("The plugin 'xlsx-utils' requires the 'jszip' plugin to be installed");
 	}
 };
-
-})();

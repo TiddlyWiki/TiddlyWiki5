@@ -6,7 +6,6 @@ module-type: library
 Components of a railroad diagram.
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -287,5 +286,3 @@ exports.components = {
 	Terminal: Terminal,
 	Transclusion: Transclusion
 };
-
-})();

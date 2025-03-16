@@ -6,7 +6,6 @@ module-type: widget
 Leaflet map widget
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -351,6 +350,3 @@ GeomapWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.geomap = GeomapWidget;
-
-})();
-

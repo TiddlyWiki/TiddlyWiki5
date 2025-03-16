@@ -6,7 +6,6 @@ module-type: library
 Structure for modelling mapping between a string and its representation in the DOM
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -178,5 +177,3 @@ exports.TextMap.prototype.extractContext = function(startContainer,startOffset,t
 		suffix: this.string.slice(startPos + text.length, Math.min(startPos + text.length + PREFIX_SUFFIX_LENGTH, this.string.length))
 	};
 };
-
-})();

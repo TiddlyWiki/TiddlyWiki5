@@ -6,7 +6,6 @@ module-type: startup
 A startup module to download every changed tiddler as a JSON file
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -149,5 +148,3 @@ function saveTiddlerFile(tiddler,options) {
 	link.click();
 	document.body.removeChild(link);
 }
-
-})();

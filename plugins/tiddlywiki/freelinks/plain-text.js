@@ -6,7 +6,6 @@ module-type: widget
 A copy of the core text widget under a different name
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -58,5 +57,3 @@ PlainTextNodeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["plain-text"] = PlainTextNodeWidget;
-
-})();

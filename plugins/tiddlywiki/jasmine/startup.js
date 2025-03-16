@@ -6,7 +6,6 @@ module-type: startup
 The main module of the Jasmine test plugin for TiddlyWiki5
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: true */
@@ -34,5 +33,3 @@ if($tw.browser) {
 	// We make this check after the commands are run.
 	exports.after = ["commands"];
 }
-
-})();

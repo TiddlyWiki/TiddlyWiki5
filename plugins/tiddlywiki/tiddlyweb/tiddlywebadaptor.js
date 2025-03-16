@@ -6,7 +6,6 @@ module-type: syncadaptor
 A sync adaptor module for synchronising with TiddlyWeb compatible servers
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -375,5 +374,3 @@ TiddlyWebAdaptor.prototype.parseEtag = function(etag) {
 if($tw.browser && document.location.protocol.substr(0,4) === "http" ) {
 	exports.adaptorClass = TiddlyWebAdaptor;
 }
-
-})();

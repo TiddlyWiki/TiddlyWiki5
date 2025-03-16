@@ -6,7 +6,6 @@ module-type: command
 Read tiddlers from an unzipped Twitter archive
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -49,5 +48,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

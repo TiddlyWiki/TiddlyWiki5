@@ -6,7 +6,6 @@ module-type: startup
 Runs Google Analytics with the measurement ID in the tiddler `$:/GoogleAnalyticsMeasurementID`
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -55,7 +54,3 @@ exports.startup = function() {
 		}
 	}
 };
-
-
-
-})();

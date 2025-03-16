@@ -6,7 +6,6 @@ module-type: filteroperator
 Filter operators for geospatial transformation
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -83,6 +82,3 @@ function geojsonOp(geojsonObjects, op) {
 	});
 	return turf.featureCollection(resultFeatures);
 }
-
-
-})();

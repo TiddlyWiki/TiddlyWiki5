@@ -6,7 +6,6 @@ module-type: syncadaptor
 A sync adaptor module for synchronising with the local filesystem via node.js APIs
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -167,5 +166,3 @@ FileSystemAdaptor.prototype.removeTiddlerFileInfo = function(title) {
 if(fs) {
 	exports.adaptorClass = FileSystemAdaptor;
 }
-
-})();

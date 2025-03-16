@@ -6,7 +6,6 @@ module-type: tiddlerdeserializer
 XLSX file deserializer
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -26,5 +25,3 @@ exports["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"] = f
 	// Return the output tiddlers
 	return importer.getResults();
 };
-
-})();

@@ -6,7 +6,6 @@ module-type: parser
 This parser wraps unadorned railroad syntax into a railroad widget
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -23,6 +22,3 @@ console.log(text);
 };
 
 exports["text/vnd.tiddlywiki.railroad"] = RailroadParser;
-
-})();
-

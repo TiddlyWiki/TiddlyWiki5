@@ -6,7 +6,6 @@ module-type: storyview
 Keeps tiddlers in a stack
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -84,5 +83,3 @@ StackedListView.prototype.remove = function(widget) {
 };
 
 exports.stacked = StackedListView;
-
-})();

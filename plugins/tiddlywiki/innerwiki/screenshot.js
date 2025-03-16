@@ -6,7 +6,6 @@ module-type: command
 Commands to render tiddlers identified by a filter and save any screenshots identified by <$innerwiki> widgets
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -79,5 +78,3 @@ Command.prototype.findInnerWikiWidgets = function(widgetNode) {
 };
 
 exports.Command = Command;
-
-})();

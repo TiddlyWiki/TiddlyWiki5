@@ -6,7 +6,6 @@ module-type: widget
 An override of the core text widget that automatically linkifies the text
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -164,5 +163,3 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.text = TextNodeWidget;
-
-})();

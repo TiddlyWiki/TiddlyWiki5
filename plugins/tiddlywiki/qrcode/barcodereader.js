@@ -6,7 +6,6 @@ module-type: widget
 barcodereader widget for reading barcodes
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -86,5 +85,3 @@ BarCodeReaderWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.barcodereader = BarCodeReaderWidget;
-
-})();

@@ -6,7 +6,6 @@ module-type: macro
 Macro to convert a string into a QR Code
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -69,6 +68,3 @@ function generateQrCode(text,options) {
 		margin = parseInt((size - qr.getModuleCount() * cellsize) / 2);
 	return qr.createImgTag(cellsize, margin, size);
 }
-
-
-})();

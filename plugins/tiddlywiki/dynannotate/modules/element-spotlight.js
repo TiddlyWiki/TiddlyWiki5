@@ -6,7 +6,6 @@ module-type: library
 Manages the element spotlight effect
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -132,5 +131,3 @@ ElementSpotlight.prototype.shineSpotlight = function(selectors) {
 };
 
 exports.ElementSpotlight = ElementSpotlight;
-
-})();

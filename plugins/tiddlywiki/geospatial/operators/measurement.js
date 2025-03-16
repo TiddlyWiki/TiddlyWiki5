@@ -6,7 +6,6 @@ module-type: filteroperator
 Filter operators for geospatial measurement
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -50,5 +49,3 @@ exports.geonearestpoint = function(source,operator,options) {
 		return [];
 	}
 };
-
-})();

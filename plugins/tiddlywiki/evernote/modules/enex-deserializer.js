@@ -8,7 +8,6 @@ ENEX file deserializer
 For details see: https://blog.evernote.com/tech/2013/08/08/evernote-export-format-enex/
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -134,6 +133,3 @@ function fixAttachmentReference(contentNode, md5Hash, mimeType, name) {
 		mediaNode.parentNode.replaceChild($tw.utils.domMaker("p", {text: "[["+ name + "]]"}), mediaNode);
 	}
 }
-
-
-})();

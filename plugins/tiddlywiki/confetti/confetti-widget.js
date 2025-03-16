@@ -6,7 +6,6 @@ module-type: widget
 Confetti widget
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -63,5 +62,3 @@ ConfettiWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.confetti = ConfettiWidget;
-
-})();

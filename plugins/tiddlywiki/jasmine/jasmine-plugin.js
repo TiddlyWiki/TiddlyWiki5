@@ -6,7 +6,6 @@ module-type: library
 The main module of the Jasmine test plugin for TiddlyWiki5
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: true */
@@ -157,5 +156,3 @@ exports.runTests = function(callback,specFilter) {
 		nodeJasmineWrapper.execute(null,specFilter);
 	}
 };
-
-})();
