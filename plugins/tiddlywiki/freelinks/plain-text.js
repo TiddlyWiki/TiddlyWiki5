@@ -7,9 +7,6 @@ A copy of the core text widget under a different name
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;

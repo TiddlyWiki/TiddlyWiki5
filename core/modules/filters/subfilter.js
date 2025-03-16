@@ -7,9 +7,6 @@ Filter operator returning its operand evaluated as a filter
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -29,4 +26,3 @@ exports.subfilter = function(source,operator,options) {
 		return list;
 	}
 };
-

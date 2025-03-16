@@ -9,9 +9,6 @@ Not intended to be used directly by end users, hence the square brackets around 
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var fieldFilterOperatorFn = require("$:/core/modules/filters/field.js").field;
@@ -45,4 +42,3 @@ exports["[unknown]"] = function(source,operator,options) {
 	// Otherwise, use the "field" operator
 	return fieldFilterOperatorFn(source,operator,options);
 };
-

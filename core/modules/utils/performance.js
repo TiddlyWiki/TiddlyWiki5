@@ -7,9 +7,6 @@ Performance measurement.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function Performance(enabled) {

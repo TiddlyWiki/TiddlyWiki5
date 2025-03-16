@@ -7,9 +7,6 @@ The video parser parses a video tiddler into an embeddable HTML element
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var VideoParser = function(type,text,options) {

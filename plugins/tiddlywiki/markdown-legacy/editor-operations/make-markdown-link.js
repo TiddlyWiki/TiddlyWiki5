@@ -7,9 +7,6 @@ Text editor operation to make a markdown link
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["make-markdown-link"] = function(event,operation) {

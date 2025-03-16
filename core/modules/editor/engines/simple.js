@@ -7,9 +7,6 @@ Text editor engine based on a simple input or textarea tag
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
@@ -172,4 +169,3 @@ SimpleEngine.prototype.executeTextOperation = function(operation) {
 };
 
 exports.SimpleEngine = SimpleEngine;
-

@@ -9,9 +9,6 @@ For details see: https://blog.evernote.com/tech/2013/08/08/evernote-export-forma
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // DOMParser = require("$:/plugins/tiddlywiki/xmldom/dom-parser").DOMParser;

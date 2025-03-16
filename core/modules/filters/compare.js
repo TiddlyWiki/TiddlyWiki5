@@ -7,9 +7,6 @@ General purpose comparison operator
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.compare = function(source,operator,options) {
@@ -36,4 +33,3 @@ var modes = {
 	"lteq": function(value) {return value <= 0;},
 	"lt": function(value) {return value < 0;}
 }
-

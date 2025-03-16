@@ -17,9 +17,6 @@ The skinnylisting specifies the title of the tiddler to which a JSON catalogue o
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -94,4 +91,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-

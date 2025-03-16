@@ -7,9 +7,6 @@ Insert an item before another item in a list
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -42,4 +39,3 @@ exports.insertbefore = function(source,operator,options) {
 	}
 	return results;
 };
-

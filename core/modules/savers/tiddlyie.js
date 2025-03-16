@@ -7,9 +7,6 @@ Handles saving changes via Internet Explorer BHO extenion (TiddlyIE)
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

@@ -7,9 +7,6 @@ Keyboard utilities; now deprecated. Instead, use $tw.keyboardManager
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 ["parseKeyDescriptor","checkKeyDescriptor"].forEach(function(method) {

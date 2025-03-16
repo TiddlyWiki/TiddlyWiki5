@@ -7,9 +7,6 @@ Filter operator that selects tiddlers with a modified date field on the same day
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -29,4 +26,3 @@ exports.sameday = function(source,operator,options) {
 	});
 	return results;
 };
-

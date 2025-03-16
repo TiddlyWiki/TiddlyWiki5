@@ -7,9 +7,6 @@ Transclude widget
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 var sliceSeparator = "::";
 var sectionSeparator = "##";

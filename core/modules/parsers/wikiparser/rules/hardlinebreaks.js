@@ -18,9 +18,6 @@ Not
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "hardlinebreaks";

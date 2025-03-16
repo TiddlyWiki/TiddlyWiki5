@@ -7,9 +7,6 @@ Dynannotate widget
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var TextMap = require("$:/plugins/tiddlywiki/dynannotate/textmap.js").TextMap;

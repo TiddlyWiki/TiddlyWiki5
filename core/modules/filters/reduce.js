@@ -7,9 +7,6 @@ Filter operator evaluates a subfilter for each item, making the running total av
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -44,4 +41,3 @@ exports.reduce = function(source,operator,options) {
 		return [];
 	}
 };
-

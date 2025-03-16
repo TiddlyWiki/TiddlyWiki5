@@ -9,9 +9,6 @@ The idea is to process the recipe file recursively, loading tiddlers into the ma
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["text/vnd.tiddlywiki2-recipe"] = function(text,fields) {

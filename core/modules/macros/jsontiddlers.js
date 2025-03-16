@@ -7,9 +7,6 @@ Macro to output tiddlers matching a filter to JSON
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

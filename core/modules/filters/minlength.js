@@ -7,9 +7,6 @@ Filter operator for filtering out titles that don't meet the minimum length in t
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -25,4 +22,3 @@ exports.minlength = function(source,operator,options) {
 	});
 	return results;
 };
-

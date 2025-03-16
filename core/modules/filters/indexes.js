@@ -7,9 +7,6 @@ Filter operator for returning the indexes of a data tiddler
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -26,4 +23,3 @@ exports.indexes = function(source,operator,options) {
 	results.sort();
 	return results;
 };
-

@@ -5,10 +5,7 @@ module-type: command
 
 --aws command
 
-\*/
-/*jslint node: true, browser: true */
-/*global $tw: false */
-"use strict";
+\*/"use strict";
 
 var async,
 	awsUtils;

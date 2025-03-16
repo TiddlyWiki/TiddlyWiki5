@@ -7,9 +7,6 @@ Filter function for [is[image]]
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -32,4 +29,3 @@ exports.image = function(source,prefix,options) {
 	}
 	return results;
 };
-

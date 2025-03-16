@@ -6,9 +6,6 @@ module-type: route
 DELETE /recipes/default/tiddlers/:title
 
 \*/
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.method = "DELETE";

@@ -7,9 +7,6 @@ Text editor operation to make a link
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["make-link"] = function(event,operation) {
@@ -25,4 +22,3 @@ exports["make-link"] = function(event,operation) {
 	operation.newSelStart = operation.selStart + operation.replacement.length;
 	operation.newSelEnd = operation.newSelStart;
 };
-

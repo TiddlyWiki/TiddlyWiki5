@@ -7,9 +7,6 @@ Wraps up the markdown-it parser for use as a Parser in TiddlyWiki
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var MarkdownIt = require("./markdown-it");

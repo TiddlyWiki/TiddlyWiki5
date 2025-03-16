@@ -7,9 +7,6 @@ Equivalent to a filter run with no prefix.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -20,4 +17,3 @@ exports.or = function(operationSubFunction) {
 		results.pushTop(operationSubFunction(source,widget));
 	};
 };
-

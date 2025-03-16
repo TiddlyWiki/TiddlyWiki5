@@ -7,9 +7,6 @@ XLSX file deserializer
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

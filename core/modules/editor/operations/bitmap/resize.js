@@ -7,9 +7,6 @@ Bitmap editor operation to resize the image
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["resize"] = function(event) {
@@ -25,4 +22,3 @@ exports["resize"] = function(event) {
 	// Save the image into the tiddler
 	this.saveChanges();
 };
-

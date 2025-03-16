@@ -7,9 +7,6 @@ Filter operator returning the tiddlers whose title is listed in the operand tidd
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -31,4 +28,3 @@ exports.list = function(source,operator,options) {
 	}
 	return results;
 };
-

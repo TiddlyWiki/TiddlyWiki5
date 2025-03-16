@@ -7,9 +7,6 @@ Text editor operation to save the current selection in a specified tiddler
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["save-selection"] = function(event,operation) {
@@ -19,4 +16,3 @@ exports["save-selection"] = function(event,operation) {
 		this.wiki.setText(tiddler,field,null,operation.text.substring(operation.selStart,operation.selEnd));
 	}
 };
-

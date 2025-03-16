@@ -7,9 +7,6 @@ Filter operator for removing a prefix from each title in the list. Titles that d
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -34,4 +31,3 @@ exports.removeprefix = function(source,operator,options) {
 	}
 	return results;
 };
-

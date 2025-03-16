@@ -7,9 +7,6 @@ Command to render a tiddler and save it to a file
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -53,4 +50,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-

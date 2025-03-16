@@ -7,9 +7,6 @@ Deprecated legacy command for serving tiddlers
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Server = require("$:/core/modules/server/server.js").Server;
@@ -51,4 +48,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-

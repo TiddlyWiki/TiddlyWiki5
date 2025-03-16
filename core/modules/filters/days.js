@@ -7,9 +7,6 @@ Filter operator that selects tiddlers with a specified date field within a speci
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -46,4 +43,3 @@ exports.days = function(source,operator,options) {
 	}
 	return results;
 };
-

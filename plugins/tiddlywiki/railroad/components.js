@@ -7,9 +7,6 @@ Components of a railroad diagram.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var railroad = require("$:/plugins/tiddlywiki/railroad/railroad-diagrams.js");

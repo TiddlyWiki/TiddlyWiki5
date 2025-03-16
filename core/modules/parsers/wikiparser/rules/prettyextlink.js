@@ -12,9 +12,6 @@ Wiki text inline rule for external links. For example:
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "prettyextlink";

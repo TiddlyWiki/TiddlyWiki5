@@ -8,9 +8,6 @@ Equivalent to - filter run prefix.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -21,4 +18,3 @@ exports.except = function(operationSubFunction) {
 		results.remove(operationSubFunction(source,widget));
 	};
 };
-

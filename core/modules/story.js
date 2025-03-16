@@ -7,9 +7,6 @@ Lightweight object for managing interactions with the story and history lists.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

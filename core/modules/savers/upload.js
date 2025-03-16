@@ -9,9 +9,6 @@ Designed to be compatible with BidiX's UploadPlugin at http://tiddlywiki.bidix.i
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

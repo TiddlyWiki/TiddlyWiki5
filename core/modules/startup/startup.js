@@ -7,9 +7,6 @@ Miscellaneous startup logic for both the client and server.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status

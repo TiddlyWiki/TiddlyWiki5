@@ -6,9 +6,6 @@ tags: [[$:/tags/test-spec]]
 Tests the backlinks mechanism.
 
 \*/
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe('CSV Parsing', function() {

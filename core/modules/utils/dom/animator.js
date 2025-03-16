@@ -7,9 +7,6 @@ Orchestrates animations and transitions
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function Animator() {

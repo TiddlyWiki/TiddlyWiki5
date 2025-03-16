@@ -15,9 +15,6 @@ Wiki text rule for block-level filtered transclusion. For example:
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "filteredtranscludeblock";

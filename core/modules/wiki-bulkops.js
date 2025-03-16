@@ -7,9 +7,6 @@ Bulk tiddler operations such as rename.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

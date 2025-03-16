@@ -7,9 +7,6 @@ Setup the root widget event handlers
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var textSlicer = require("$:/plugins/tiddlywiki/text-slicer/modules/slicer.js");

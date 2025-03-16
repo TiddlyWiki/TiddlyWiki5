@@ -7,9 +7,6 @@ The CSV text parser processes CSV files into a table wrapped in a scrollable wid
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var CsvParser = function(type,text,options) {

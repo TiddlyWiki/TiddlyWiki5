@@ -7,9 +7,6 @@ Saves wiki by pushing a commit to the gitea
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

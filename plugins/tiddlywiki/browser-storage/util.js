@@ -8,9 +8,6 @@ Utility methods for browser-storage plugin
 \*/
 
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function BrowserStorageUtil(wiki,options) {

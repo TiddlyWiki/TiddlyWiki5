@@ -7,9 +7,6 @@ Resolves a relative path for an absolute rootpath.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "resolvepath";

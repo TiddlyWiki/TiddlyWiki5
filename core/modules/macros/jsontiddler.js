@@ -7,9 +7,6 @@ Macro to output a single tiddler to JSON
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

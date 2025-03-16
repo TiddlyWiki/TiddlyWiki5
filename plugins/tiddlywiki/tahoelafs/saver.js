@@ -7,9 +7,6 @@ A bare bones saver for Tahoe-LAFS. It just PUTs the new HTML file back to the se
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

@@ -7,9 +7,6 @@ A startup module to download every changed tiddler as a JSON file
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status

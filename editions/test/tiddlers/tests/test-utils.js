@@ -7,9 +7,6 @@ Tests various utility functions.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Utility tests", function() {

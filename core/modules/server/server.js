@@ -7,9 +7,6 @@ Serve tiddlers over http
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 if($tw.node) {

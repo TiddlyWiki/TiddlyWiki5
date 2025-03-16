@@ -7,9 +7,6 @@ The plain text parser processes blocks of source text into a degenerate parse tr
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var TextParser = function(type,text,options) {

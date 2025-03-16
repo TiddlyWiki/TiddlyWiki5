@@ -7,9 +7,6 @@ Positions tiddlers on a 2D map
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var CecilyStoryView = function(listWidget) {

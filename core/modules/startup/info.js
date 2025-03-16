@@ -7,9 +7,6 @@ Initialise $:/info tiddlers via $:/temp/info-plugin pseudo-plugin
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status

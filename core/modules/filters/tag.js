@@ -7,9 +7,6 @@ Filter operator for checking for the presence of a tag
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -54,4 +51,3 @@ exports.tag = function(source,operator,options) {
 	}
 	return results;
 };
-

@@ -7,9 +7,6 @@ Filter operator for returning the names of the fields on the selected subtiddler
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -27,4 +24,3 @@ exports.subtiddlerfields = function(source,operator,options) {
 	});
 	return results;
 };
-

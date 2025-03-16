@@ -7,9 +7,6 @@ Command to load tiddlers from a file or directory
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -47,4 +44,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-

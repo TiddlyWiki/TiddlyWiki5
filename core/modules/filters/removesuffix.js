@@ -7,9 +7,6 @@ Filter operator for removing a suffix from each title in the list. Titles that d
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -38,4 +35,3 @@ exports.removesuffix = function(source,operator,options) {
 	}
 	return results;
 };
-

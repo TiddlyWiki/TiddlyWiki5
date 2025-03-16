@@ -7,9 +7,6 @@ Filter operator for returning the titles of the shadow tiddlers within a plugin
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -28,4 +25,3 @@ exports.plugintiddlers = function(source,operator,options) {
 	results.sort();
 	return results;
 };
-

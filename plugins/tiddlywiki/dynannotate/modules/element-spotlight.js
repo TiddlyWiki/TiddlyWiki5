@@ -7,9 +7,6 @@ Manages the element spotlight effect
 
 \*/
 (function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function ElementSpotlight() {

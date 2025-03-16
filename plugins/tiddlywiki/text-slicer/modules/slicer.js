@@ -17,9 +17,6 @@ var slicer = new textSlicer.Slicer(doc,{
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function Slicer(options) {

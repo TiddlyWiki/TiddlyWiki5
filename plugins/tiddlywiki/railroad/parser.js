@@ -34,9 +34,6 @@ pragmas:
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var components = require("$:/plugins/tiddlywiki/railroad/components.js").components;

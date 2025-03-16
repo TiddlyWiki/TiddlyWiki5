@@ -7,9 +7,6 @@ Read tiddlers from an unzipped Twitter archive
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");

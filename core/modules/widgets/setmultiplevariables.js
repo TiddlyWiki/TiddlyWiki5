@@ -7,9 +7,6 @@ Widget to set multiple variables at once from a list of names and a list of valu
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;

@@ -6,10 +6,7 @@ tags: $:/tags/test-spec
 Tests the backtranscludes mechanism.
 
 \*/
-(function(){
-/*jslint node: true, browser: true */
-/*global $tw: false */
-"use strict";
+(function(){"use strict";
 
 describe('Backtranscludes and transclude filter tests', function() {
 	describe('a tiddler with no transcludes to it', function() {

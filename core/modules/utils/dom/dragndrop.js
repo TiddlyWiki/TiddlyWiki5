@@ -7,9 +7,6 @@ Browser data transfer utilities, used with the clipboard and drag and drop
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

@@ -7,9 +7,6 @@ Filter function for [is[orphan]]
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -33,4 +30,3 @@ exports.orphan = function(source,prefix,options) {
 	}
 	return results;
 };
-

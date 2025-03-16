@@ -7,9 +7,6 @@ Various static utility functions.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");

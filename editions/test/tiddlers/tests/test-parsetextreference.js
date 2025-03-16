@@ -7,9 +7,6 @@ Tests for source attribute in parser returned from wiki.parseTextReference
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Wiki.parseTextReference tests", function() {

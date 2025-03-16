@@ -7,9 +7,6 @@ Structure for modelling mapping between a string and its representation in the D
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var PREFIX_SUFFIX_LENGTH = 50;

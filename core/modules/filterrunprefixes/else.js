@@ -7,9 +7,6 @@ Equivalent to ~ filter run prefix.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -23,4 +20,3 @@ exports.else = function(operationSubFunction) {
 		}
 	};
 };
-

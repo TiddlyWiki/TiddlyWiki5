@@ -7,9 +7,6 @@ Macro to output tiddlers matching a filter to CSV
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -75,4 +72,3 @@ exports.run = function(filter,format) {
 function quoteAndEscape(value) {
 	return "\"" + value.replace(/"/mg,"\"\"") + "\"";
 }
-

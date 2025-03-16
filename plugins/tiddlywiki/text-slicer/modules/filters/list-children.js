@@ -7,9 +7,6 @@ Filter operator returning all the descendents of a tiddler listed in the "list" 
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

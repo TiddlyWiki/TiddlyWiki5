@@ -7,9 +7,6 @@ Tests the tagging mechanism.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Tag tests", function() {

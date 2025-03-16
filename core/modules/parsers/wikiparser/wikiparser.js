@@ -20,9 +20,6 @@ Attributes are stored as hashmaps of the following objects:
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

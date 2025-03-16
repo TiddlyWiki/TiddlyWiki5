@@ -7,9 +7,6 @@ Legacy version of the dyannotate background daemon to track the selection
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var TextMap = require("$:/plugins/tiddlywiki/dynannotate/textmap.js").TextMap;

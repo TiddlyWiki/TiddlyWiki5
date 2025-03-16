@@ -13,9 +13,6 @@ If the second operand is missing it defaults to "text" for fields, and "0" for i
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -49,4 +46,3 @@ exports.lookup = function(source,operator,options) {
 	}
 	return results;
 };
-

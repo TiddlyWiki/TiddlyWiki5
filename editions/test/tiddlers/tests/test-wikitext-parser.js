@@ -7,9 +7,6 @@ Tests for wikitext parser
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("WikiText parser tests", function() {

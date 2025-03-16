@@ -7,9 +7,6 @@ A simple slide animation that varies the height of the element
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function slideOpen(domNode,options) {

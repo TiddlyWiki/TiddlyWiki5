@@ -9,9 +9,6 @@ Macro to convert a string of text to a data URI
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

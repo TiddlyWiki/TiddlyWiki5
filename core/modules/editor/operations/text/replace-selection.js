@@ -7,9 +7,6 @@ Text editor operation to replace the selection
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["replace-selection"] = function(event,operation) {
@@ -19,4 +16,3 @@ exports["replace-selection"] = function(event,operation) {
 	operation.newSelStart = operation.selStart;
 	operation.newSelEnd = operation.selStart + operation.replacement.length;
 };
-

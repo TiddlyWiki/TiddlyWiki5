@@ -27,9 +27,6 @@ This is a paragraph
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "styleblock";

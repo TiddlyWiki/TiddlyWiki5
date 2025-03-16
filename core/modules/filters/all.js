@@ -9,9 +9,6 @@ Filter operator for selecting tiddlers
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var allFilterOperators;
@@ -54,4 +51,3 @@ exports.all = function(source,operator,options) {
 	}
 	return results.makeTiddlerIterator(options.wiki);
 };
-

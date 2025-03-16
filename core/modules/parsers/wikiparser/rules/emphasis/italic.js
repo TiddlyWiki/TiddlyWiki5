@@ -18,9 +18,6 @@ This wikiparser can be modified using the rules eg:
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "italic";

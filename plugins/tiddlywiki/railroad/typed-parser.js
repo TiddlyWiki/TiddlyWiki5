@@ -7,9 +7,6 @@ This parser wraps unadorned railroad syntax into a railroad widget
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var RailroadParser = function(type,text,options) {

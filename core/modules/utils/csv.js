@@ -7,9 +7,6 @@ A barebones CSV parser
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var QUOTE = '"';

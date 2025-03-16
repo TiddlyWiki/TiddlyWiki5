@@ -7,9 +7,6 @@ Filter operator returning the tiddler from the current list that is before the t
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -27,4 +24,3 @@ exports.before = function(source,operator,options) {
 		return [results[index - 1]];
 	}
 };
-

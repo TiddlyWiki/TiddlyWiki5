@@ -7,9 +7,6 @@ Bitmap editor operation to rotate the image left by 90 degrees
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["rotate-left"] = function(event) {
@@ -20,4 +17,3 @@ exports["rotate-left"] = function(event) {
 	// Save the image into the tiddler
 	this.saveChanges();
 };
-

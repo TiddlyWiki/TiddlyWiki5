@@ -7,9 +7,6 @@ Filter [[module-name]moduleproperty[name]] retrieve a module property
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -33,4 +30,3 @@ exports.moduleproperty = function(source,operator,options) {
 	results.sort();
 	return results;
 };
-

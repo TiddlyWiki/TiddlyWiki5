@@ -11,9 +11,6 @@ Wiki rule for block macro calls
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "macrocallblock";

@@ -7,9 +7,6 @@ Filter operator for checking if a tiddler has the specified field or index
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -66,4 +63,3 @@ exports.has = function(source,operator,options) {
 	}
 	return results;
 };
-

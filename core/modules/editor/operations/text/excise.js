@@ -8,8 +8,7 @@ Text editor operation to excise the selection to a new tiddler
 \*/
 
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
+
 "use strict";
 
 function isMarkdown(mediaType) {
@@ -53,4 +52,3 @@ exports["excise"] = function(event,operation) {
 	operation.newSelStart = operation.selStart;
 	operation.newSelEnd = operation.selStart + operation.replacement.length;
 };
-

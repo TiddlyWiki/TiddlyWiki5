@@ -5,10 +5,7 @@ tags: [[$:/tags/test-spec]]
 
 Tests the tagging mechanism.
 
-\*/
-/*jslint node: true, browser: true */
-/*global $tw: false */
-"use strict";
+\*/"use strict";
 
 describe("Tags Operator tests", function() {
 

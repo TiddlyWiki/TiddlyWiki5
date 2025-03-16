@@ -7,9 +7,6 @@ Filter operator for returning the names of the deserializers in this wiki
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

@@ -7,9 +7,6 @@ Various static DOM-related utility functions.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");

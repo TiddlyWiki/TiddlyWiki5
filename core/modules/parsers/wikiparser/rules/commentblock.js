@@ -19,9 +19,6 @@ Note that the syntax for comments is simplified to an opening "<!--" sequence an
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "commentblock";

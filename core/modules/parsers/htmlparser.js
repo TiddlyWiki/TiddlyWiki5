@@ -7,9 +7,6 @@ The HTML parser displays text as raw HTML
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var HtmlParser = function(type,text,options) {

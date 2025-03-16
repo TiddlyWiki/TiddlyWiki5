@@ -7,9 +7,6 @@ Wrapper for `katex.min.js` that provides a `<$latex>` widget. It is also availab
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),

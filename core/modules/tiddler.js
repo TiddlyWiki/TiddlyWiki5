@@ -7,9 +7,6 @@ Extension methods for the $tw.Tiddler object (constructor and methods required a
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.hasTag = function(tag) {

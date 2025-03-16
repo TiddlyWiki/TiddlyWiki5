@@ -10,9 +10,6 @@ and the saver may define
 	priority: number
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var findSaver = function(window) {

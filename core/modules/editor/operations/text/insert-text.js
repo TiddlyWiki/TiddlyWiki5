@@ -7,9 +7,6 @@ Text editor operation insert text at the caret position. If there is a selection
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["insert-text"] = function(event,operation) {
@@ -19,4 +16,3 @@ exports["insert-text"] = function(event,operation) {
 	operation.newSelStart = operation.selStart + operation.replacement.length;
 	operation.newSelEnd = operation.newSelStart;
 };
-

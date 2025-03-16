@@ -7,9 +7,6 @@ The image parser parses an image into an embeddable HTML element
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var ImageParser = function(type,text,options) {

@@ -7,9 +7,6 @@ A barebones implementation of DOM interfaces needed by the rendering mechanism.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Sequence number used to enable us to track objects for testing

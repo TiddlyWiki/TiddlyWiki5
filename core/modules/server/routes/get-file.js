@@ -6,9 +6,6 @@ module-type: route
 GET /files/:filepath
 
 \*/
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.method = "GET";

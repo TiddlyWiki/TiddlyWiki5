@@ -9,9 +9,6 @@ and macro substitution isn't available.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -24,4 +21,3 @@ exports.addsuffix = function(source,operator,options) {
 	});
 	return results;
 };
-

@@ -7,9 +7,6 @@ Filter operators for open location code conversions
 
 \*/
 (function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var openlocationcode = require("$:/plugins/tiddlywiki/geospatial/openlocationcode.js"),

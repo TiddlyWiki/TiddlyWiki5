@@ -7,9 +7,6 @@ Background daemon to track the selection
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function SelectionTracker(wiki,options) {

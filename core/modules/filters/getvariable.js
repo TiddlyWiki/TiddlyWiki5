@@ -7,9 +7,6 @@ Filter operator for replacing input values by the value of the variable with the
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -22,4 +19,3 @@ exports.getvariable = function(source,operator,options) {
 	});
 	return results;
 };
-

@@ -7,9 +7,6 @@ Parse tree utility functions.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

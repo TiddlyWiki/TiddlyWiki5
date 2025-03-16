@@ -7,9 +7,6 @@ Text editor engine based on a CodeMirror instance
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",

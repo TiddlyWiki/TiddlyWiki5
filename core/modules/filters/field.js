@@ -7,9 +7,6 @@ Filter operator for comparing fields for equality
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -71,4 +68,3 @@ exports.field = function(source,operator,options) {
 	}
 	return results;
 };
-

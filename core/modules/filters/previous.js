@@ -7,9 +7,6 @@ Filter operator returning the tiddler whose title occurs immediately prior in th
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -28,4 +25,3 @@ exports.previous = function(source,operator,options) {
 	});
 	return results;
 };
-

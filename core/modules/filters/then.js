@@ -7,9 +7,6 @@ Filter operator for replacing any titles with a constant
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -22,4 +19,3 @@ exports.then = function(source,operator,options) {
 	});
 	return results;
 };
-

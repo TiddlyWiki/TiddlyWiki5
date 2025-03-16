@@ -7,9 +7,6 @@ Edit-binary widget; placeholder for editing binary tiddlers
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var BINARY_WARNING_MESSAGE = "$:/core/ui/BinaryWarning";

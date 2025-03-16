@@ -7,9 +7,6 @@ A widget for displaying stacked or grouped bar charts. Derived from http://bl.oc
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,

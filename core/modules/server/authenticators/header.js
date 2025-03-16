@@ -7,9 +7,6 @@ Authenticator for trusted header authentication
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function HeaderAuthenticator(server) {

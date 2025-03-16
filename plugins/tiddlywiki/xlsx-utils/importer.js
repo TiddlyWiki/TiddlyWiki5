@@ -7,9 +7,6 @@ Class to import an Excel file
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DEFAULT_IMPORT_SPEC_TITLE = "$:/config/plugins/tiddlywiki/xlsx-utils/default-import-spec";

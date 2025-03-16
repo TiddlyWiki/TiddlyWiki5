@@ -7,9 +7,6 @@ Macro to return the TiddlyWiki core version number
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

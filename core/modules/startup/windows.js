@@ -7,9 +7,6 @@ Setup root widget handlers for the messages concerned with opening external brow
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status

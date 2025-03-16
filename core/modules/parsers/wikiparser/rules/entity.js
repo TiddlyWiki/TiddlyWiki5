@@ -11,9 +11,6 @@ Wiki text inline rule for HTML entities. For example:
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "entity";

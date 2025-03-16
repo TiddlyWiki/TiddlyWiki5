@@ -7,9 +7,6 @@ Authenticator for WWW basic authentication
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 if($tw.node) {

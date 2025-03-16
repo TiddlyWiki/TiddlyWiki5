@@ -7,9 +7,6 @@ Wiki text block rule for headings
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "heading";

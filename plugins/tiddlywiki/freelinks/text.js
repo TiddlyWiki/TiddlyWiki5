@@ -7,9 +7,6 @@ An override of the core text widget that automatically linkifies the text
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var TITLE_TARGET_FILTER = "$:/config/Freelinks/TargetFilter";

@@ -7,9 +7,6 @@ Adds tiddler filtering methods to the $tw.Wiki object.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widgetClass = require("$:/core/modules/widgets/widget.js").widget;

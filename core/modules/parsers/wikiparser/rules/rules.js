@@ -12,9 +12,6 @@ Wiki pragma rule for rules specifications
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "rules";

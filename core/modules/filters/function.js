@@ -7,9 +7,6 @@ Filter operator returning those input titles that are returned from a function
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -37,4 +34,3 @@ exports.function = function(source,operator,options) {
 	// console.log(`function ${functionName} with params ${JSON.stringify(params)} results: ${JSON.stringify(results)}`);
 	return results;
 };
-

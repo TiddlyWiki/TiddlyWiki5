@@ -7,9 +7,6 @@ Filter operators for cryptography, using the Stanford JavaScript library
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.sha256 = function(source,operator,options) {
@@ -20,4 +17,3 @@ exports.sha256 = function(source,operator,options) {
 	});
 	return results;
 };
-

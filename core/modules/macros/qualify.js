@@ -7,9 +7,6 @@ Macro to qualify a state tiddler title according
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

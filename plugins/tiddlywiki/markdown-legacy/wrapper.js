@@ -7,9 +7,6 @@ Wraps up the remarkable parser for use as a Parser in TiddlyWiki
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var r = require("$:/plugins/tiddlywiki/markdown-legacy/remarkable.js");

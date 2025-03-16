@@ -7,9 +7,6 @@ Filter operator for checking if a title matches a string
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -49,4 +46,3 @@ exports.match = function(source,operator,options) {
 	}
 	return results;
 };
-

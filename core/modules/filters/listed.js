@@ -7,9 +7,6 @@ Filter operator returning all tiddlers that have the selected tiddlers in a list
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -23,4 +20,3 @@ exports.listed = function(source,operator,options) {
 	});
 	return results;
 };
-

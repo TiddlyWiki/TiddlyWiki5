@@ -8,9 +8,6 @@ With suffix "list", selects all tiddlers that are values in a specified list fie
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -63,4 +60,3 @@ exports.each = function(source,operator,options) {
 	}
 	return results;
 };
-

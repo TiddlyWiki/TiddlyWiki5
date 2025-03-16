@@ -41,9 +41,6 @@ A CSS class can be applied to a list item as follows:
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "list";

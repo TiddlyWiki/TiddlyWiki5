@@ -7,9 +7,6 @@ Wiki text inline rule for system tiddler links.
 Can be suppressed preceding them with `~`.
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "syslink";

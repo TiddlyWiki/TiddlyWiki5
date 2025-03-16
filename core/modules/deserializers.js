@@ -7,9 +7,6 @@ Functions to deserialise tiddlers from a block of text
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["application/x-tiddler-html-div"] = function(text,fields) {

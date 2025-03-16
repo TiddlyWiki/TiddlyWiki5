@@ -15,9 +15,6 @@ External links can be suppressed by preceding them with `~`.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "extlink";

@@ -11,9 +11,6 @@ Wiki text inline rule for suppressed wiki links. For example:
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "wikilinkprefix";

@@ -7,9 +7,6 @@ Tests for the internal components of the HTML tag parser
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function FakeParser() {

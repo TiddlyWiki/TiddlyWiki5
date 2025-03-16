@@ -7,9 +7,6 @@ Command to render several tiddlers to a folder of files
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -65,4 +62,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-

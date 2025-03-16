@@ -4,9 +4,6 @@ type: application/javascript
 module-type: formatfilteroperator
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -21,4 +18,3 @@ exports.titlelist = function(source,operand,options) {
 	});
 	return results;
 };
-

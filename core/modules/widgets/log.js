@@ -7,9 +7,6 @@ Widget to log debug messages
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.baseClass = "action-log";

@@ -7,9 +7,6 @@ Read tiddlers from the browser location hash
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Get the hash

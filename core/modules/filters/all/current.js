@@ -7,9 +7,6 @@ Filter function for [all[current]]
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -23,4 +20,3 @@ exports.current = function(source,prefix,options) {
 		return [];
 	}
 };
-

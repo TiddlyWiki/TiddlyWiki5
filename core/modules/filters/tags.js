@@ -7,9 +7,6 @@ Filter operator returning all the tags of the selected tiddlers
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -27,4 +24,3 @@ exports.tags = function(source,operator,options) {
 	});
 	return Object.keys(tags);
 };
-

@@ -7,9 +7,6 @@ Macro to return a formatted version of the current time
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

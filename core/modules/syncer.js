@@ -7,9 +7,6 @@ The syncer tracks changes to the store and synchronises them to a remote data st
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

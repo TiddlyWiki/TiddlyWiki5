@@ -7,9 +7,6 @@ The audio parser parses an audio tiddler into an embeddable HTML element
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var AudioParser = function(type,text,options) {

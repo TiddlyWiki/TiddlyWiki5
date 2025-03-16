@@ -7,9 +7,6 @@ Animates list insertions and removals
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var PopStoryView = function(listWidget) {

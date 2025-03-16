@@ -11,9 +11,6 @@ Wiki pragma rule for importing variable definitions
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "import";

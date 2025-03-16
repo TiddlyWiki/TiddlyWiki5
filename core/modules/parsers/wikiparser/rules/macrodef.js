@@ -13,9 +13,6 @@ definition text, including $param$ markers
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "macrodef";

@@ -7,9 +7,6 @@ Filter operator for sorting
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -52,4 +49,3 @@ var prepare_results = function (source) {
 	});
 	return results;
 };
-

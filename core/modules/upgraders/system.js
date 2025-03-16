@@ -7,9 +7,6 @@ Upgrader module that suppresses certain system tiddlers that shouldn't be import
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DONT_IMPORT_LIST = ["$:/Import", "$:/build"],

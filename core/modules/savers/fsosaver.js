@@ -10,9 +10,6 @@ However, if the wiki is loaded as an .HTA file (Windows HTML Applications) then 
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

@@ -7,9 +7,6 @@ Handles saving changes via HTML5's download APIs
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

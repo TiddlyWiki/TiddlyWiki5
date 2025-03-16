@@ -11,9 +11,6 @@ Wiki text block rule for rules. For example:
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "horizrule";

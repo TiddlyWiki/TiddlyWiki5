@@ -7,9 +7,6 @@ Filter function for [is[missing]]
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -32,4 +29,3 @@ exports.missing = function(source,prefix,options) {
 	}
 	return results;
 };
-

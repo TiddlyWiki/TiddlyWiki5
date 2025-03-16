@@ -7,9 +7,6 @@ returns the value at a given index of datatiddlers
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -28,4 +25,3 @@ exports.getindex = function(source,operator,options) {
 	}
 	return results;
 };
-

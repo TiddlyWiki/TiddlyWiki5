@@ -7,9 +7,6 @@ Module that creates a $tw.utils.Scroller object prototype that manages scrolling
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

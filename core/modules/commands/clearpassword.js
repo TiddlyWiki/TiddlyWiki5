@@ -7,8 +7,6 @@ Clear password for crypto operations
 
 \*/
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {

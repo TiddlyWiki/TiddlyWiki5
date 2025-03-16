@@ -7,9 +7,6 @@ Filter operator for finding values in array fields
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -41,4 +38,3 @@ exports.contains = function(source,operator,options) {
 	}
 	return results;
 };
-

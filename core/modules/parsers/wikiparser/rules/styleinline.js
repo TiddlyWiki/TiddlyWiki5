@@ -14,9 +14,6 @@ Wiki text inline rule for assigning styles and classes to inline runs. For examp
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "styleinline";

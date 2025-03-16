@@ -7,9 +7,6 @@ A sync adaptor module for synchronising with the local filesystem via node.js AP
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Get a reference to the file system

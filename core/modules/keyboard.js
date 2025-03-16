@@ -7,9 +7,6 @@ Keyboard handling utilities
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var namedKeys = {

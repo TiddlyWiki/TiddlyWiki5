@@ -29,9 +29,6 @@ HTML nodes look like this:
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

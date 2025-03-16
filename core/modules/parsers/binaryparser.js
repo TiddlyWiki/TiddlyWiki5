@@ -7,9 +7,6 @@ The binary parser parses a binary tiddler into a warning message and download li
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var BINARY_WARNING_MESSAGE = "$:/core/ui/BinaryWarning";

@@ -7,8 +7,6 @@ Filter operator for applying decodeURIComponent() to each item.
 
 \*/
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -115,4 +113,3 @@ exports.escapecss = function(source,operator,options) {
 	});
 	return results;
 };
-

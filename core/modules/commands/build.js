@@ -7,8 +7,6 @@ Command to build a build target
 
 \*/
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {

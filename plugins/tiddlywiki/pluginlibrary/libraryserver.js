@@ -7,9 +7,6 @@ A simple HTTP-over-window.postMessage implementation of a standard TiddlyWeb-com
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Listen for window messages

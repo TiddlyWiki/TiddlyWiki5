@@ -7,9 +7,6 @@ Filter operator for returning the names of the active variables
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -28,4 +25,3 @@ exports.variables = function(source,operator,options) {
 	}
 	return names.sort();
 };
-

@@ -7,9 +7,6 @@ Sub-widget used by the transclude widget for specifying values for slots within 
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;

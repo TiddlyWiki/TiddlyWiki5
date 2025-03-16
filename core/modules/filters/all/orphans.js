@@ -7,9 +7,6 @@ Filter function for [all[orphans]]
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -18,4 +15,3 @@ Export our filter function
 exports.orphans = function(source,prefix,options) {
 	return options.wiki.getOrphanTitles();
 };
-

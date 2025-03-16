@@ -6,9 +6,6 @@ module-type: route
 GET /recipes/default/tiddlers.json?filter=<filter>
 
 \*/
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DEFAULT_FILTER = "[all[tiddlers]!is[system]sort[title]]";

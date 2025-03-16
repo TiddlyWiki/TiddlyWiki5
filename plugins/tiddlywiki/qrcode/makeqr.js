@@ -7,9 +7,6 @@ Macro to convert a string into a QR Code
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

@@ -14,9 +14,6 @@ Note that strings are converted to numbers automatically. Trailing non-digits ar
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.negate = makeNumericBinaryOperator(
@@ -243,4 +240,3 @@ function makeNumericArrayOperator(fnCalc) {
 		return results;
 	};
 };
-

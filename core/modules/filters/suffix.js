@@ -7,9 +7,6 @@ Filter operator for checking if a title ends with a suffix
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -54,4 +51,3 @@ exports.suffix = function(source,operator,options) {
 	}
 	return results;
 };
-

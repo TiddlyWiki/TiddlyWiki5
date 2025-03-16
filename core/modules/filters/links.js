@@ -7,9 +7,6 @@ Filter operator for returning all the links from a tiddler
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -22,4 +19,3 @@ exports.links = function(source,operator,options) {
 	});
 	return results.makeTiddlerIterator(options.wiki);
 };
-

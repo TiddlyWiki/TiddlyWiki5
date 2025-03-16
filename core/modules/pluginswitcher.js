@@ -7,9 +7,6 @@ Manages switching plugins for themes and languages.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

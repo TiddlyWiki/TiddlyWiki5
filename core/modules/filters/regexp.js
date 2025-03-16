@@ -7,9 +7,6 @@ Filter operator for regexp matching
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -68,4 +65,3 @@ exports.regexp = function(source,operator,options) {
 	}
 	return results;
 };
-

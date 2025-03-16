@@ -7,9 +7,6 @@ A quick and dirty way to pack up plugins within the browser.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

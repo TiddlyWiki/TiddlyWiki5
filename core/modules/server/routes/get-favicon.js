@@ -6,9 +6,6 @@ module-type: route
 GET /favicon.ico
 
 \*/
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.method = "GET";

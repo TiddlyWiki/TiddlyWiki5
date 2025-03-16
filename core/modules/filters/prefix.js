@@ -7,9 +7,6 @@ Filter operator for checking if a title starts with a prefix
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -50,4 +47,3 @@ exports.prefix = function(source,operator,options) {
 	}
 	return results;
 };
-

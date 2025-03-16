@@ -7,9 +7,6 @@ Filter operator for checking tiddler properties
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var isFilterOperators;

@@ -7,9 +7,6 @@ The $tw.Language() manages translateable strings
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

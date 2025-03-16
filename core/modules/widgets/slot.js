@@ -7,9 +7,6 @@ Widget for definition of slots within transcluded content. The values provided b
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,

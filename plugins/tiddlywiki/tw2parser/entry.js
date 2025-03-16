@@ -3,9 +3,6 @@ title: $:/macros/tiddlywiki/entry.js
 type: application/javascript
 module-type: macro
 \*/
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 /*
 Information about this macro

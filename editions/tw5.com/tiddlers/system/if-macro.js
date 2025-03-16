@@ -4,9 +4,6 @@ type: application/javascript
 module-type: macro
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = ".if";

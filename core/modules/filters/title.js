@@ -7,9 +7,6 @@ Filter operator for comparing title fields for equality
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -28,4 +25,3 @@ exports.title = function(source,operator,options) {
 	}
 	return results;
 };
-

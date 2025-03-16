@@ -13,9 +13,6 @@ Implements the Dropbox URL converter macro.
 \*/
 
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "dropbox-url";

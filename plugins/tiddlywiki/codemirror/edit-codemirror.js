@@ -7,9 +7,6 @@ Edit-codemirror widget
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTextWidgetFactory,

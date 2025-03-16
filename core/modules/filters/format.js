@@ -5,9 +5,6 @@ module-type: filteroperator
 Filter operator for formatting strings
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var formatFilterOperators;

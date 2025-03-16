@@ -13,9 +13,6 @@ Wiki text rule for code blocks. For example:
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "codeblock";

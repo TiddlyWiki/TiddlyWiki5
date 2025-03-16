@@ -9,9 +9,6 @@ Sum/product/maxall/minall operate on the entire list, returning a single item.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.length = makeStringBinaryOperator(

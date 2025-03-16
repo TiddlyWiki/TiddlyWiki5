@@ -7,9 +7,6 @@ Filter operator for searching for the text in the operand tiddler
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -55,4 +52,3 @@ exports.search = function(source,operator,options) {
 		});
 	}
 };
-

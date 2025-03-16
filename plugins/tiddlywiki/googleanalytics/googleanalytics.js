@@ -7,9 +7,6 @@ Runs Google Analytics with the measurement ID in the tiddler `$:/GoogleAnalytics
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status

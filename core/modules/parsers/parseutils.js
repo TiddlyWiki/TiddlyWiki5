@@ -23,9 +23,6 @@ The exception is `skipWhiteSpace`, which just returns the position after the whi
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

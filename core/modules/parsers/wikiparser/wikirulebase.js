@@ -7,9 +7,6 @@ Base class for wiki parser rules
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

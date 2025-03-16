@@ -15,9 +15,6 @@ Precede a camel case word with `~` to prevent it from being recognised as a link
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "wikilink";

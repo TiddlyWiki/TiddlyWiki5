@@ -7,9 +7,6 @@ A sync adaptor module for synchronising with TiddlyWeb compatible servers
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",

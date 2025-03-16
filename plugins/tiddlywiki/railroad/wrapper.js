@@ -7,9 +7,6 @@ Wrapper for `railroad-diagrams.js` that provides a `<$railroad>` widget.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Parser = require("$:/plugins/tiddlywiki/railroad/parser.js").parser,

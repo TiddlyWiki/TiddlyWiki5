@@ -6,9 +6,6 @@ module-type: widget
 Action widget to apply list operations to any tiddler field (defaults to the 'list' field of the current tiddler)
 
 \*/
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var ActionListopsWidget = function(parseTreeNode, options) {

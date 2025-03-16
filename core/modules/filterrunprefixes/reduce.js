@@ -4,9 +4,6 @@ type: application/javascript
 module-type: filterrunprefix
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -36,4 +33,3 @@ exports.reduce = function(operationSubFunction,options) {
 		}
 	}
 };
-

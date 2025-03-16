@@ -7,9 +7,6 @@ Tests the tiddler object
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Tiddler tests", function() {

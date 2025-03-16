@@ -7,9 +7,6 @@ Indexes the tiddlers with each field value
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global modules: false */
 "use strict";
 
 var DEFAULT_MAXIMUM_INDEXED_VALUE_LENGTH = 128;
@@ -139,4 +136,3 @@ FieldIndexer.prototype.lookup = function(name,value) {
 };
 
 exports.FieldIndexer = FieldIndexer;
-

@@ -10,9 +10,6 @@ Adding new functionality will probably change the "expected" html structure.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Tabs-macro HTML tests", function() {

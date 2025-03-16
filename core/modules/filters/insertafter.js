@@ -7,9 +7,6 @@ Insert an item after another item in a list
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -42,4 +39,3 @@ exports.insertafter = function(source,operator,options) {
 	}
 	return results;
 };
-

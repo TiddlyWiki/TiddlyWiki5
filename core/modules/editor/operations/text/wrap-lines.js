@@ -7,9 +7,6 @@ Text editor operation to wrap the selected lines with a prefix and suffix
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["wrap-lines"] = function(event,operation) {
@@ -43,4 +40,3 @@ exports["wrap-lines"] = function(event,operation) {
 		operation.newSelEnd = operation.newSelStart + (operation.cutEnd - operation.cutStart);
 	}
 };
-

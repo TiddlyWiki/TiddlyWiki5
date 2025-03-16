@@ -7,9 +7,6 @@ Filter operator for replacing an empty input list with a constant, passing a non
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -26,4 +23,3 @@ exports.else = function(source,operator,options) {
 		return results;
 	}
 };
-

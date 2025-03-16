@@ -7,9 +7,6 @@ Utility class for manipulating Twitter archives
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function TwitterArchivist(options) {

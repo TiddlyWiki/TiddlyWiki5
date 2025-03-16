@@ -7,9 +7,6 @@ Text editor operation to replace the entire text
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["replace-all"] = function(event,operation) {
@@ -19,4 +16,3 @@ exports["replace-all"] = function(event,operation) {
 	operation.newSelStart = 0;
 	operation.newSelEnd = operation.replacement.length;
 };
-

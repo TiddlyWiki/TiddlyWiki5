@@ -5,9 +5,6 @@ module-type: filterrunprefix
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -35,4 +32,3 @@ exports.filter = function(operationSubFunction,options) {
 		}
 	}
 };
-

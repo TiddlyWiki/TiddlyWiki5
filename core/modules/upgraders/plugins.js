@@ -7,9 +7,6 @@ Upgrader module that checks that plugins are newer than any already installed ve
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var UPGRADE_LIBRARY_TITLE = "$:/UpgradeLibrary";

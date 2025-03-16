@@ -7,9 +7,6 @@ Replace results of previous runs unless empty
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -28,4 +25,3 @@ exports.then = function(operationSubFunction) {
 		}
 	};
 };
-

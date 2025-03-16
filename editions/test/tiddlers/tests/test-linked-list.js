@@ -22,9 +22,6 @@ NOTE TO FURTHER LINKED LIST DEVELOPERS:
 	adding undefined.
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("LinkedList class tests", function() {

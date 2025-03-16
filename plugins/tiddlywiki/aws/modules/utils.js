@@ -5,10 +5,7 @@ module-type: library
 
 AWS utility functions
 
-\*/
-/*jslint node: true, browser: true */
-/*global $tw: false */
-"use strict";
+\*/"use strict";
 
 /*
 Get a file from an S3 bucket

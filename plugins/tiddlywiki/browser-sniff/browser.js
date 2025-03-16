@@ -7,9 +7,6 @@ Initialise $:/info/browser tiddlers
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.getInfoTiddlerFields = function() {

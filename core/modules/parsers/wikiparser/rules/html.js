@@ -18,9 +18,6 @@ This is a widget invocation
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "html";

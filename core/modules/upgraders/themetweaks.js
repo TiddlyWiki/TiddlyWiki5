@@ -16,9 +16,6 @@ This upgrader copies any values from the old format to the new. The old data tid
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var MAPPINGS = {

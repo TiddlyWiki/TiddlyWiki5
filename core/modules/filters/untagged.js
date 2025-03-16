@@ -7,9 +7,6 @@ Filter operator returning all the selected tiddlers that are untagged
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -25,4 +22,3 @@ exports.untagged = function(source,operator,options) {
 	});
 	return results;
 };
-

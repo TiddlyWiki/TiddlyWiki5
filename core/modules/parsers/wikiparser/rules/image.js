@@ -18,9 +18,6 @@ Generates the `<$image>` widget.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "image";

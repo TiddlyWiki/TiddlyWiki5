@@ -7,9 +7,6 @@ Filter function for [duplicateslugs[]]
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -32,4 +29,3 @@ exports.duplicateslugs = function(source,operator,options) {
 	});
 	return results;
 };
-

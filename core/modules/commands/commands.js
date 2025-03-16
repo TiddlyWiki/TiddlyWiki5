@@ -7,8 +7,6 @@ Runs the commands returned from a filter
 
 \*/
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {

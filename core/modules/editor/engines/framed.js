@@ -7,9 +7,6 @@ Text editor engine based on a simple input or textarea within an iframe. This is
 
 \*/
 
-
-/*jslint node: true,browser: true */
-/*global $tw: false */
 "use strict";
 
 var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
@@ -200,7 +197,7 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 Handle a keydown event
  */
 FramedEngine.prototype.handleKeydownEvent = function(event) {
-	if($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
 		return true;
 	}
 
@@ -273,4 +270,3 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 };
 
 exports.FramedEngine = FramedEngine;
-

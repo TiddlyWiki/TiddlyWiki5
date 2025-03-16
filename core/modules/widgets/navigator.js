@@ -7,9 +7,6 @@ Navigator widget
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var IMPORT_TITLE = "$:/Import";

@@ -7,9 +7,6 @@ Saves wiki by pushing a commit to the GitHub v3 REST API
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

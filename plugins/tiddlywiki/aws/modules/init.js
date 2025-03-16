@@ -5,10 +5,7 @@ module-type: startup
 
 AWS initialisation
 
-\*/
-/*jslint node: true, browser: true */
-/*global $tw: false */
-"use strict";
+\*/"use strict";
 
 // Export name and synchronous status
 exports.name = "aws-init";

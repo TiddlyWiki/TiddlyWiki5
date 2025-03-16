@@ -7,9 +7,6 @@ Scrollable widget
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DEBOUNCE_INTERVAL = 100; // Delay after last scroll event before updating the bound tiddler

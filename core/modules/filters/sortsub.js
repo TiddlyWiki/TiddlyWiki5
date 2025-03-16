@@ -7,9 +7,6 @@ Filter operator for sorting by a subfilter
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -48,4 +45,3 @@ exports.sortsub = function(source,operator,options) {
 	});
 	return results;
 };
-

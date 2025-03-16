@@ -7,9 +7,6 @@ File system utilities
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var fs = require("fs"),

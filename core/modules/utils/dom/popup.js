@@ -7,9 +7,6 @@ Module that creates a $tw.utils.Popup object prototype that manages popups in th
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

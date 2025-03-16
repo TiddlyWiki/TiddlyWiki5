@@ -7,9 +7,6 @@ Macro to display a list of keyboard shortcuts in human readable form. Notably, i
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -41,4 +38,3 @@ exports.run = function(shortcuts,prefix,separator,suffix) {
 		return "";
 	}
 };
-

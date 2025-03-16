@@ -7,9 +7,6 @@ Rule modules for the wikitext parser
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 var macroadapter = require("$:/macros/classic/macroadapter.js");
 var textPrimitives = {

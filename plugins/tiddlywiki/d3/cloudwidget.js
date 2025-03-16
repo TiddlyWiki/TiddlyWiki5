@@ -7,9 +7,6 @@ A widget for displaying word clouds. Derived from https://github.com/jasondavies
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,

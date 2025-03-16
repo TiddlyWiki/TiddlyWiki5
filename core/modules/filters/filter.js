@@ -7,9 +7,6 @@ Filter operator returning those input titles that pass a subfilter
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -30,4 +27,3 @@ exports.filter = function(source,operator,options) {
 	});
 	return results;
 };
-
