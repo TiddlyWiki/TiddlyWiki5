@@ -7,8 +7,6 @@ Text editor operation to excise the selection to a new tiddler
 
 \*/
 
-
-
 "use strict";
 
 function isMarkdown(mediaType) {

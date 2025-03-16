@@ -5,7 +5,9 @@ module-type: command
 
 --aws command
 
-\*/"use strict";
+\*/
+
+"use strict";
 
 var async,
 	awsUtils;

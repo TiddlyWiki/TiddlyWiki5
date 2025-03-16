@@ -5,7 +5,9 @@ module-type: startup
 
 AWS initialisation
 
-\*/"use strict";
+\*/
+
+"use strict";
 
 // Export name and synchronous status
 exports.name = "aws-init";

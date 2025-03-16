@@ -5,7 +5,9 @@ module-type: library
 
 AWS utility functions
 
-\*/"use strict";
+\*/
+
+"use strict";
 
 /*
 Get a file from an S3 bucket

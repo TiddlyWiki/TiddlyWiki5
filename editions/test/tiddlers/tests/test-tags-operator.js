@@ -5,7 +5,9 @@ tags: [[$:/tags/test-spec]]
 
 Tests the tagging mechanism.
 
-\*/"use strict";
+\*/
+
+"use strict";
 
 describe("Tags Operator tests", function() {
 

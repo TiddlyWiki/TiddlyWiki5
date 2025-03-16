@@ -6,7 +6,7 @@ tags: $:/tags/test-spec
 Tests the backtranscludes mechanism.
 
 \*/
-(function(){"use strict";
+"use strict";
 
 describe('Backtranscludes and transclude filter tests', function() {
 	describe('a tiddler with no transcludes to it', function() {
@@ -250,5 +250,3 @@ describe('Backtranscludes and transclude filter tests', function() {
 		});
 	});
 });
-
-})();
