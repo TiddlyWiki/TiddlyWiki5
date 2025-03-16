@@ -6,9 +6,7 @@ module-type: widget
 geobaselayer widget to represent a base layer for a geomap widget. Clone of the data widget
 
 \*/
-(function(){
+
 "use strict";
 
 exports.geobaselayer = require("$:/core/modules/widgets/data.js").data;
-
-})();

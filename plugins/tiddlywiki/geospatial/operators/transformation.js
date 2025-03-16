@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operators for geospatial transformation
 
 \*/
-(function(){
+
 "use strict";
 
 var turf = require("$:/plugins/tiddlywiki/geospatial/turf.js"),
@@ -80,6 +80,3 @@ function geojsonOp(geojsonObjects, op) {
 	});
 	return turf.featureCollection(resultFeatures);
 }
-
-
-})();

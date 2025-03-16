@@ -6,7 +6,7 @@ module-type: widget
 Leaflet map widget
 
 \*/
-(function(){
+
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -348,6 +348,3 @@ GeomapWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.geomap = GeomapWidget;
-
-})();
-

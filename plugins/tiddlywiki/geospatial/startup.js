@@ -6,7 +6,7 @@ module-type: startup
 Geospatial initialisation
 
 \*/
-(function(){
+
 "use strict";
 
 // Export name and synchronous status
@@ -71,5 +71,3 @@ exports.startup = function() {
 		}
 	});
 };
-
-})();

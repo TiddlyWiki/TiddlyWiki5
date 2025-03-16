@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operators for geospatial measurement
 
 \*/
-(function(){
+
 "use strict";
 
 var turf = require("$:/plugins/tiddlywiki/geospatial/turf.js"),
@@ -47,5 +47,3 @@ exports.geonearestpoint = function(source,operator,options) {
 		return [];
 	}
 };
-
-})();
