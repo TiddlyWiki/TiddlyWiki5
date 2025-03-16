@@ -22,4 +22,3 @@ exports.startup = function() {
 		logger.alert("The plugin 'xlsx-utils' requires the 'jszip' plugin to be installed");
 	}
 };
-

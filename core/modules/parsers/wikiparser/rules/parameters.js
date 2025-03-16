@@ -53,4 +53,3 @@ exports.parse = function() {
 		orderedAttributes: orderedAttributes
 	}];
 };
-

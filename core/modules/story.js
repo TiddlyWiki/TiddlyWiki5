@@ -130,5 +130,3 @@ Story.prototype.storyNewTiddler = function(targetTitle) {
 };
 
 exports.Story = Story;
-
-

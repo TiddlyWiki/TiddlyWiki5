@@ -59,4 +59,3 @@ CodeBlockWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.codeblock = CodeBlockWidget;
-

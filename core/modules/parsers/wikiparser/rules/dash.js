@@ -33,4 +33,3 @@ exports.parse = function() {
 		entity: dash
 	}];
 };
-

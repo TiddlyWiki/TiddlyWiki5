@@ -7,7 +7,6 @@ Utility methods for browser-storage plugin
 
 \*/
 
-
 "use strict";
 
 function BrowserStorageUtil(wiki,options) {
@@ -106,4 +105,3 @@ BrowserStorageUtil.prototype.clearLocalStorage = function() {
 };
 
 exports.BrowserStorageUtil = BrowserStorageUtil;
-

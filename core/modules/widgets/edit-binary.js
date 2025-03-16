@@ -100,4 +100,3 @@ EditBinaryWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["edit-binary"] = EditBinaryWidget;
-

@@ -19,4 +19,3 @@ exports.startup = function() {
 	$tw.config.usePasswordVault = true;
 	$tw.config.disableAutoSave = true;
 };
-

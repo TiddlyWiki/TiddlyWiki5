@@ -22,4 +22,3 @@ Run the macro
 exports.run = function(source, root) {
 	return $tw.utils.resolvePath(source, root);
 };
-

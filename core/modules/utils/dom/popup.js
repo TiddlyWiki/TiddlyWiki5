@@ -232,7 +232,7 @@ This function is safe to call, even if the popup class was not initialized.
 */
 exports.buildCoordinates = function(prefix,position) {
 	var coord = prefix + "(" + position.left + "," + position.top + "," + position.width + "," + position.height + ")";
-	if(exports.popupLocationRegExp.test(coord)) {
+	if (exports.popupLocationRegExp.test(coord)) {
 		return coord;
 	} else {
 		return "(0,0,0,0)";
@@ -240,4 +240,3 @@ exports.buildCoordinates = function(prefix,position) {
 }
 
 exports.Popup = Popup;
-

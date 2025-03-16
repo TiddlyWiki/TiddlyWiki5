@@ -372,4 +372,3 @@ TiddlyWebAdaptor.prototype.parseEtag = function(etag) {
 if($tw.browser && document.location.protocol.substr(0,4) === "http" ) {
 	exports.adaptorClass = TiddlyWebAdaptor;
 }
-

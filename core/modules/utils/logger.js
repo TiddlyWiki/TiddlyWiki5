@@ -131,4 +131,3 @@ Logger.prototype.clearAlerts = function() {
 };
 
 exports.Logger = Logger;
-

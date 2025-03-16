@@ -76,4 +76,3 @@ Command.prototype.findInnerWikiWidgets = function(widgetNode) {
 };
 
 exports.Command = Command;
-

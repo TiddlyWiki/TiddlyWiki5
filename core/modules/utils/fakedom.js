@@ -350,4 +350,3 @@ var document = {
 };
 
 exports.fakeDocument = document;
-

@@ -75,4 +75,3 @@ SlotWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.slot = SlotWidget;
-

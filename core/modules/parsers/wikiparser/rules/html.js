@@ -191,4 +191,3 @@ exports.isLegalTag = function(tag) {
 		return true;
 	}
 };
-

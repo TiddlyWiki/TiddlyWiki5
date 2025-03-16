@@ -29,4 +29,3 @@ Run the macro
 exports.run = function(text,type,_canonical_uri) {
 	return $tw.utils.makeDataUri(text,type,_canonical_uri);
 };
-

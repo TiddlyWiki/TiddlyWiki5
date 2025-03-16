@@ -159,4 +159,3 @@ ImageWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.image = ImageWidget;
-

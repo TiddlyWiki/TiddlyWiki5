@@ -114,4 +114,3 @@ GenesisWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.genesis = GenesisWidget;
-

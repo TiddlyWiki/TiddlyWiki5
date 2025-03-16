@@ -350,4 +350,3 @@ exports.setQueryStringParameter = function(url,paramName,paramValue) {
 		return url;
 	}
 };
-

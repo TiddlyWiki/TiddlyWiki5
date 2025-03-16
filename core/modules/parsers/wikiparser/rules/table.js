@@ -184,4 +184,3 @@ exports.parse = function() {
 	}
 	return [table];
 };
-

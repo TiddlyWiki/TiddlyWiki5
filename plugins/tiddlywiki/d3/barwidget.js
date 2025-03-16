@@ -197,4 +197,3 @@ BarWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.d3bar = BarWidget;
-

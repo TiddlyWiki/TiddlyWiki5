@@ -20,4 +20,3 @@ exports.startup = function() {
 		logger.alert("The plugin 'tiddlywiki/twitter' is disabled until this wiki is saved and reloaded again");
 	}
 };
-

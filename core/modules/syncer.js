@@ -700,4 +700,3 @@ SyncFromServerTask.prototype.run = function(callback) {
 };
 
 exports.Syncer = Syncer;
-

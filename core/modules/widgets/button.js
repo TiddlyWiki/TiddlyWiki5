@@ -276,4 +276,3 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.button = ButtonWidget;
-

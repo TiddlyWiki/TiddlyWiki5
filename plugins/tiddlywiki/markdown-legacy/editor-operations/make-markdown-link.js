@@ -30,4 +30,3 @@ exports["make-markdown-link"] = function(event,operation) {
 	operation.newSelStart = operation.selStart + operation.replacement.length;
 	operation.newSelEnd = operation.newSelStart;
 };
-

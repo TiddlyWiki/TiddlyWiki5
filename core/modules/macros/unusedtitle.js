@@ -30,4 +30,3 @@ exports.run = function(baseName,separator,template,startCount) {
 	// options.prefix must be a string!
 	return this.wiki.generateNewTitle(baseName, {"prefix": separator, "template": template, "startCount": startCount}).trim();
 };
-

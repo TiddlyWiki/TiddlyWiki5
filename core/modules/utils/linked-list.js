@@ -1,12 +1,14 @@
 /*\
+module-type: utils
 title: $:/core/modules/utils/linkedlist.js
 type: application/javascript
-module-type: utils
 
 This is a doubly-linked indexed list intended for manipulation, particularly
 pushTop, which it does with significantly better performance than an array.
 
 \*/
+
+"use strict";
 
 function LinkedList() {
 	this.clear();
@@ -57,7 +59,7 @@ LinkedList.prototype.push = function(/* values */) {
 LinkedList.prototype.pushTop = function(value) {
 	var t;
 	if($tw.utils.isArray(value)) {
-		for(t=0; t<value.length; t++) {
+		for (t=0; t<value.length; t++) {
 			_assertString(value[t]);
 		}
 		for(t=0; t<value.length; t++) {

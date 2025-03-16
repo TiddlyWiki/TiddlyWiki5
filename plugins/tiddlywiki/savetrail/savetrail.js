@@ -146,4 +146,3 @@ function saveTiddlerFile(tiddler,options) {
 	link.click();
 	document.body.removeChild(link);
 }
-

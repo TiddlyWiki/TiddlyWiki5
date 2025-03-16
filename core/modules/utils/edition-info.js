@@ -41,4 +41,3 @@ exports.getEditionInfo = function() {
 	}
 	return editionInfo;
 };
-

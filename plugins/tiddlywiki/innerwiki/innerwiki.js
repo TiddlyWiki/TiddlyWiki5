@@ -344,4 +344,3 @@ InnerWikiWidget.prototype.saveScreenshot = function(options,callback) {
 };
 
 exports.innerwiki = InnerWikiWidget;
-

@@ -72,4 +72,3 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 	});
 	return messages;
 };
-

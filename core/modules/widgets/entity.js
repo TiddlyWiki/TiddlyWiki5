@@ -53,4 +53,3 @@ EntityWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.entity = EntityWidget;
-

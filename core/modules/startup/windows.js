@@ -107,4 +107,3 @@ exports.startup = function() {
 	// Close open windows when unloading main window
 	$tw.addUnloadTask(closeAllWindows);
 };
-

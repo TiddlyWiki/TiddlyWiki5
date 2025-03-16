@@ -78,4 +78,3 @@ ActionPopupWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 exports["action-popup"] = ActionPopupWidget;
-

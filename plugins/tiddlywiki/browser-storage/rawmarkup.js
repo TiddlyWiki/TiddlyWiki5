@@ -28,7 +28,7 @@ function hookBootTiddlersLoaded() {
 	// Check that browser storage is available
 	try {
 		window.localStorage;
-	} catch (e) {
+	} catch(e) {
 		return;
 	}
 	// Step through each browsder storage item
@@ -43,7 +43,7 @@ function hookBootTiddlersLoaded() {
 			if(jsonString) {
 				try {
 					jsonData = JSON.parse(jsonString);
-				} catch (e) {}
+				} catch(e) {}
 				if(jsonData) {
 					// Convert it to a tiddler
 					var incomingTiddler = new $tw.Tiddler(jsonData);

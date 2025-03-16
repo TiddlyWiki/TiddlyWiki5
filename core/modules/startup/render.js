@@ -117,4 +117,3 @@ exports.startup = function() {
 	// Run any post-render startup actions
 	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/PostRender");
 };
-

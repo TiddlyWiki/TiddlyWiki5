@@ -14,4 +14,3 @@ var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTex
 	SimpleEngine = require("$:/core/modules/editor/engines/simple.js").SimpleEngine;
 
 exports["edit-text"] = editTextWidgetFactory(FramedEngine,SimpleEngine);
-

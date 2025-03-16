@@ -7,9 +7,6 @@ Handles saving changes via the TWEdit iOS app
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: false, netscape: false, Components: false */
 "use strict";
 
 var TWEditSaver = function(wiki) {
@@ -87,4 +84,3 @@ exports.create = function(wiki) {
 if($tw.browser) {
 	window.version = {title: "TiddlyWiki"};
 }
-

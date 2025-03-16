@@ -150,4 +150,3 @@ WikifyWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.wikify = WikifyWidget;
-

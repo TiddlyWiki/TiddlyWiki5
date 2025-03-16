@@ -161,4 +161,3 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.text = TextNodeWidget;
-

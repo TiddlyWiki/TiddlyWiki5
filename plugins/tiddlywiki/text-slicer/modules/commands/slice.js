@@ -51,4 +51,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-

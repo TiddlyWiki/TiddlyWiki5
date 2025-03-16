@@ -36,4 +36,3 @@ function setFavicon() {
 		faviconLink.setAttribute("href",$tw.utils.makeDataUri(tiddler.fields.text,tiddler.fields.type,tiddler.fields._canonical_uri));
 	}
 }
-

@@ -87,4 +87,3 @@ BasicAuthenticator.prototype.authenticateRequest = function(request,response,sta
 };
 
 exports.AuthenticatorClass = BasicAuthenticator;
-

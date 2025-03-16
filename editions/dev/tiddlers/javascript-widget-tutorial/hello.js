@@ -28,4 +28,3 @@ MyWidget.prototype.render = function(parent,nextSibling) {
 };
 
 exports.hello = MyWidget;
-

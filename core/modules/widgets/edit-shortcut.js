@@ -151,4 +151,3 @@ EditShortcutWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["edit-shortcut"] = EditShortcutWidget;
-

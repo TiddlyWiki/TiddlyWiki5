@@ -26,4 +26,3 @@ Run the macro
 exports.run = function(filter,spaces) {
 	return this.wiki.getTiddlersAsJson(filter,$tw.utils.parseInt(spaces));
 };
-

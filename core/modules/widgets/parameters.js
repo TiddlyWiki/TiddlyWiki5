@@ -101,4 +101,3 @@ ParametersWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.parameters = ParametersWidget;
-

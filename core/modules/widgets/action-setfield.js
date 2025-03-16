@@ -68,4 +68,3 @@ SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 exports["action-setfield"] = SetFieldWidget;
-

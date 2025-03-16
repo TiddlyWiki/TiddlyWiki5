@@ -97,4 +97,3 @@ function downloadZipFile(title,filename) {
 		document.body.removeChild(link);
 	}
 }
-

@@ -96,4 +96,3 @@ PopStoryView.prototype.remove = function(widget) {
 };
 
 exports.pop = PopStoryView;
-

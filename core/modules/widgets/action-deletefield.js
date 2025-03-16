@@ -82,4 +82,3 @@ DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 exports["action-deletefield"] = DeleteFieldWidget;
-

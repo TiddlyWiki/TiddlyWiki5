@@ -313,4 +313,3 @@ CodeMirrorEngine.prototype.executeTextOperation = function(operation) {
 };
 
 exports.CodeMirrorEngine = $tw.browser ? CodeMirrorEngine : require("$:/core/modules/editor/engines/simple.js").SimpleEngine;
-

@@ -164,4 +164,3 @@ FileSystemAdaptor.prototype.removeTiddlerFileInfo = function(title) {
 if(fs) {
 	exports.adaptorClass = FileSystemAdaptor;
 }
-

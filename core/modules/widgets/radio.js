@@ -135,4 +135,3 @@ RadioWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.radio = RadioWidget;
-

@@ -33,4 +33,3 @@ exports.startup = function() {
 	$tw.wiki.initParsers();
 	$tw.Commander.initCommands();
 };
-

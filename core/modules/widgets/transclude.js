@@ -482,4 +482,3 @@ TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.transclude = TranscludeWidget;
-

@@ -15,7 +15,7 @@ and the saver may define
 var findSaver = function(window) {
 	try {
 		return window && window.$tw && window.$tw.customSaver;
-	} catch(err) {
+	} catch (err) {
 		// Catching the exception is the most reliable way to detect cross-origin iframe errors.
 		// For example, instead of saying that `window.parent.$tw` is undefined, Firefox will throw
 		//   Uncaught DOMException: Permission denied to access property "$tw" on cross-origin object

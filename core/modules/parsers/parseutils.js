@@ -381,4 +381,3 @@ exports.parseAttribute = function(source,pos) {
 	node.end = pos;
 	return node;
 };
-

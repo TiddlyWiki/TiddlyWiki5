@@ -55,5 +55,3 @@ exports.startup = function() {
 		$tw.dynannotate.elementSpotlight.shineSpotlight(selectors);
 	});
 };
-
-	

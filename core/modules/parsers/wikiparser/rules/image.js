@@ -126,4 +126,3 @@ exports.parseImage = function(source,pos) {
 	node.end = pos;
 	return node;
 };
-

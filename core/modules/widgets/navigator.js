@@ -636,4 +636,3 @@ NavigatorWidget.prototype.handleUnfoldAllTiddlersEvent = function(event) {
 };
 
 exports.navigator = NavigatorWidget;
-

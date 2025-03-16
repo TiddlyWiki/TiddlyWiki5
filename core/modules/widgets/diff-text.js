@@ -141,4 +141,3 @@ DiffTextWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["diff-text"] = DiffTextWidget;
-

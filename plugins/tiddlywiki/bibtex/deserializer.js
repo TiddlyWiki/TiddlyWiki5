@@ -43,4 +43,3 @@ exports["application/x-bibtex"] = function(text,fields) {
 	// Return the output tiddlers
 	return results;
 };
-

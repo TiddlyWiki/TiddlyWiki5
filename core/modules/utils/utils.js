@@ -1035,4 +1035,3 @@ exports.makeCompareFunction = function(type,options) {
 		};
 	return (types[type] || types[options.defaultType] || types.number);
 };
-

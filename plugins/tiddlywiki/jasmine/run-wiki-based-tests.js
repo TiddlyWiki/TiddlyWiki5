@@ -96,4 +96,3 @@ describe("Wiki-based tests", function() {
 	}
 
 });
-

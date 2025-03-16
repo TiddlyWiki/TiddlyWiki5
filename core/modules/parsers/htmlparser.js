@@ -31,5 +31,3 @@ var HtmlParser = function(type,text,options) {
 };
 
 exports["text/html"] = HtmlParser;
-
-

@@ -7,9 +7,6 @@ Action widget to create a new tiddler with a unique name and specified fields.
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw:false, require:false, exports:false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -82,14 +79,14 @@ CreateTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	}
 	if(this.hasBase && this.actionOverwrite === "no") {
 		title = this.wiki.generateNewTitle(this.actionBaseTitle);
-	} else if(this.hasBase && this.actionOverwrite === "yes") {
+	} else if (this.hasBase && this.actionOverwrite === "yes") {
 		title = this.actionBaseTitle
 	}
 	// NO $basetitle BUT $template parameter is available
 	// the title MUST be unique, otherwise the template would be overwritten
-	if(!this.hasBase && this.useTemplate) {
+	if (!this.hasBase && this.useTemplate) {
 		title = this.wiki.generateNewTitle(this.actionTemplate);
-	} else if(!this.hasBase && !this.useTemplate) {
+	} else if (!this.hasBase && !this.useTemplate) {
 		// If no $basetitle and no $template then use initial title
 		title = this.wiki.generateNewTitle(title);
 	}
@@ -109,4 +106,3 @@ CreateTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 exports["action-createtiddler"] = CreateTiddlerWidget;
-

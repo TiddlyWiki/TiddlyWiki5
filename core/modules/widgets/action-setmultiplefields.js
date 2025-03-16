@@ -78,5 +78,3 @@ SetMultipleFieldsWidget.prototype.invokeAction = function(triggeringWidget,event
 };
 
 exports["action-setmultiplefields"] = SetMultipleFieldsWidget;
-
-	

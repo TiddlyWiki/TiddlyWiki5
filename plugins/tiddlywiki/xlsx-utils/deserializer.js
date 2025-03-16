@@ -23,4 +23,3 @@ exports["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"] = f
 	// Return the output tiddlers
 	return importer.getResults();
 };
-

@@ -32,4 +32,3 @@ WikiRuleBase.prototype.findNextMatch = function(startPos) {
 };
 
 exports.WikiRuleBase = WikiRuleBase;
-

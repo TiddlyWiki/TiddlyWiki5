@@ -33,4 +33,3 @@ exports["video/ogg"] = VideoParser;
 exports["video/webm"] = VideoParser;
 exports["video/mp4"] = VideoParser;
 exports["video/quicktime"] = VideoParser;
-

@@ -170,4 +170,3 @@ Commander.initCommands = function(moduleType) {
 };
 
 exports.Commander = Commander;
-

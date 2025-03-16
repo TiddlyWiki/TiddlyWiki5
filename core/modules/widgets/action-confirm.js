@@ -71,4 +71,3 @@ ConfirmWidget.prototype.allowActionPropagation = function() {
 };
 
 exports["action-confirm"] = ConfirmWidget;
-

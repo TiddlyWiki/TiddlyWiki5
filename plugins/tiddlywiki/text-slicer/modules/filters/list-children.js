@@ -31,4 +31,3 @@ exports["list-children"] = function(source,operator,options) {
 	});
 	return Object.keys(children);
 };
-

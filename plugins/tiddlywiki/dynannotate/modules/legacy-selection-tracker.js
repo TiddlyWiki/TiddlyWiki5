@@ -97,4 +97,3 @@ LegacySelectionTracker.prototype.findSelectionContainer = function findSelection
 };
 
 exports.LegacySelectionTracker = LegacySelectionTracker;
-

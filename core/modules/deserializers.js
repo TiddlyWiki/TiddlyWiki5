@@ -178,4 +178,3 @@ var deserializeTiddlerDiv = function(text /* [,fields] */) {
 	}
 	return undefined;
 };
-

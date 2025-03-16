@@ -51,4 +51,3 @@ exports.startup = function() {
 	$tw.wiki.registerPluginTiddlers("info",[TITLE_INFO_PLUGIN]);
 	$tw.wiki.unpackPluginTiddlers();
 };
-

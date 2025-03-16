@@ -66,4 +66,3 @@ VarsWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["vars"] = VarsWidget;
-

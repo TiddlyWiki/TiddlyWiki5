@@ -132,4 +132,3 @@ PageScroller.prototype.scrollSelectorIntoView = function(baseElement,selector,ca
 };
 
 exports.PageScroller = PageScroller;
-

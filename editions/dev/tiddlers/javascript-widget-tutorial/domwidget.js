@@ -3,6 +3,7 @@
 Library function for creating widget using a dom creating function
 
 \*/
+
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;

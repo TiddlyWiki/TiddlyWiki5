@@ -380,4 +380,3 @@ KeyboardManager.prototype.handleShortcutChanges = function(changedTiddlers) {
 };
 
 exports.KeyboardManager = KeyboardManager;
-

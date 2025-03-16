@@ -73,5 +73,3 @@ SetMultipleVariablesWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["setmultiplevariables"] = SetMultipleVariablesWidget;
-
-        

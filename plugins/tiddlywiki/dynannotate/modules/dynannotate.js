@@ -430,4 +430,3 @@ DynannotateWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.dynannotate = DynannotateWidget;
-

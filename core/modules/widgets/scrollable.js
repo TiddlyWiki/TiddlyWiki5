@@ -259,4 +259,3 @@ ScrollableWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.scrollable = ScrollableWidget;
-

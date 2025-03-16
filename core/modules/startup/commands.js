@@ -30,4 +30,3 @@ exports.startup = function(callback) {
 	);
 	commander.execute();
 };
-

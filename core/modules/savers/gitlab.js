@@ -7,9 +7,6 @@ Saves wiki by pushing a commit to the GitLab REST API
 
 \*/
 
-
-/*jslint node: true, browser: true */
-/*global $tw: true */
 "use strict";
 
 /*
@@ -113,4 +110,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new GitLabSaver(wiki);
 };
-

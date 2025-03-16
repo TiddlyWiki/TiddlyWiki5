@@ -62,4 +62,3 @@ RawWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.raw = RawWidget;
-

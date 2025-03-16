@@ -87,4 +87,3 @@ EditWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.edit = EditWidget;
-

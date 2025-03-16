@@ -13,4 +13,3 @@ var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTex
 	CodeMirrorEngine = require("$:/plugins/tiddlywiki/codemirror/engine.js").CodeMirrorEngine;
 
 exports["edit-codemirror"] = editTextWidgetFactory(CodeMirrorEngine,CodeMirrorEngine);
-

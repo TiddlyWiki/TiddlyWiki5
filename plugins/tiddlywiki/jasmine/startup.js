@@ -8,8 +8,6 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 \*/
 
 
-/*jslint node: true, browser: true */
-/*global $tw: true */
 "use strict";
 
 var jasmine = require("./jasmine-plugin.js");
@@ -34,4 +32,3 @@ if($tw.browser) {
 	// We make this check after the commands are run.
 	exports.after = ["commands"];
 }
-

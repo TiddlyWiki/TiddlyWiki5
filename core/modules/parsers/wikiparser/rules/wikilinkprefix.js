@@ -33,4 +33,3 @@ exports.parse = function() {
 	// Return the link without unwikilink character as plain text
 	return [{type: "text", text: linkText.substr(1)}];
 };
-

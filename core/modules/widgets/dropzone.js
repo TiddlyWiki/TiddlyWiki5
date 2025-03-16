@@ -325,4 +325,3 @@ DropZoneWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.dropzone = DropZoneWidget;
-

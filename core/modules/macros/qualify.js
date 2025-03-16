@@ -25,4 +25,3 @@ Run the macro
 exports.run = function(title) {
 	return title + "-" + this.getStateQualifier();
 };
-

@@ -20,5 +20,3 @@ console.log(text);
 };
 
 exports["text/vnd.tiddlywiki.railroad"] = RailroadParser;
-
-

@@ -119,4 +119,3 @@ exports.getParseTreeText = function getParseTreeText(tree) {
 	}
 	return output.join("");
 };
-

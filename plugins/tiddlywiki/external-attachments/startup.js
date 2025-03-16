@@ -120,5 +120,3 @@ function test_makePathRelative() {
 	test("\\\\SHARE\\Users\\me\\something\\file.png","/SHARE/Users/me/somethingelse/index.html","../something/file.png",{isWindows: true});
 	test("\\\\SHARE\\Users\\me\\something\\file.png","/C:/Users/me/something/index.html","/SHARE/Users/me/something/file.png",{isWindows: true});
 }
-
-

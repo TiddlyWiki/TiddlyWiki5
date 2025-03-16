@@ -96,4 +96,3 @@ exports.getFieldDay = function(field) {
 	this.cache.day[field] = day;
 	return day;
 };
-

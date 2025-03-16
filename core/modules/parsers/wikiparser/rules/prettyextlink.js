@@ -113,4 +113,3 @@ exports.parseLink = function(source,pos) {
 	node.end = closePos + 2;
 	return node;
 };
-

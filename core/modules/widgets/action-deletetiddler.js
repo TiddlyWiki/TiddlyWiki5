@@ -66,4 +66,3 @@ DeleteTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 exports["action-deletetiddler"] = DeleteTiddlerWidget;
-

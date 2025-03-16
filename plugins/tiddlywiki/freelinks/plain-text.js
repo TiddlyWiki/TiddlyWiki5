@@ -55,4 +55,3 @@ PlainTextNodeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["plain-text"] = PlainTextNodeWidget;
-

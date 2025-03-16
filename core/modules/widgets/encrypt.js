@@ -62,4 +62,3 @@ EncryptWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.encrypt = EncryptWidget;
-

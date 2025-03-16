@@ -94,7 +94,7 @@ TranscludeWidget.prototype.execute = function() {
 	this.setVariable("transclusion",recursionMarker);
 	// Parse 
 	var text = this.wiki.getTiddlerText(this.transcludeTitle);
-	if(!!this.section||!!this.slice) {
+	if (!!this.section||!!this.slice) {
 		text =this.refineTiddlerText(text, this.section, this.slice);
 	}
 
@@ -152,7 +152,7 @@ TranscludeWidget.prototype.getTextSlice = function(text,sliceName)
 TranscludeWidget.prototype.refineTiddlerText = function(text,section,slice)
 {
 	var textsection = null;
-	if(slice) {
+	if (slice) {
 		var textslice = this.getTextSlice(text,slice);
 		if(textslice)
 			return textslice;
@@ -188,4 +188,3 @@ TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.classictransclude = TranscludeWidget;
-

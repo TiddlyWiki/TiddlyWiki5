@@ -164,4 +164,3 @@ SelectionTracker.prototype.performSelectionActions = function(chunks,variables,a
 };
 
 exports.SelectionTracker = SelectionTracker;
-

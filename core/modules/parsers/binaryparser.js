@@ -66,5 +66,3 @@ var BinaryParser = function(type,text,options) {
 };
 
 exports["application/octet-stream"] = BinaryParser;
-
-

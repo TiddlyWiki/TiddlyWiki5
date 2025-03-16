@@ -334,4 +334,3 @@ var MarkdownParser = function(type, text, options) {
 
 exports["text/x-markdown"] = MarkdownParser;
 exports["text/markdown"] = MarkdownParser;
-

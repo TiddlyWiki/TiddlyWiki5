@@ -127,4 +127,3 @@ FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
 };
 
 exports.fieldmangler = FieldManglerWidget;
-

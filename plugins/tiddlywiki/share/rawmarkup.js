@@ -105,4 +105,3 @@ function removeWarningBanner() {
 	warningWrapper.parentNode.removeChild(warningWrapper);
 	stylesWrapper.parentNode.removeChild(stylesWrapper);
 }
-

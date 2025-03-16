@@ -13,7 +13,7 @@ describe('CSV Parsing', function() {
 	var testCases = JSON.parse(tid.fields.text);
 	
 	$tw.utils.each(testCases, function(testCase) {
-		if(testCase.skip) {
+		if (testCase.skip) {
 			return;
 		}
 		it("Test case: " + testCase.name, function() {
@@ -26,4 +26,3 @@ describe('CSV Parsing', function() {
 	})
 	
 });
-

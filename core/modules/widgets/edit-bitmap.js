@@ -336,4 +336,3 @@ EditBitmapWidget.prototype.saveChanges = function() {
 };
 
 exports["edit-bitmap"] = EditBitmapWidget;
-

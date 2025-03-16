@@ -51,4 +51,3 @@ exports.parse = function() {
 	}
 	return [node];
 };
-

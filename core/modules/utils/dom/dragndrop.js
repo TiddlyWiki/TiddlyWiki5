@@ -272,4 +272,3 @@ exports.dragEventContainsFiles = function(event) {
 };
 
 exports.dragEventContainsType = dragEventContainsType;
-

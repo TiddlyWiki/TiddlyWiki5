@@ -94,4 +94,3 @@ TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.tiddler = TiddlerWidget;
-

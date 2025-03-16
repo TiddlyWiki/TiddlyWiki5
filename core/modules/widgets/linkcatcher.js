@@ -97,4 +97,3 @@ LinkCatcherWidget.prototype.handleNavigateEvent = function(event) {
 };
 
 exports.linkcatcher = LinkCatcherWidget;
-

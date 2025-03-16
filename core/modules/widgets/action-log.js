@@ -91,4 +91,3 @@ LogWidget.prototype.log = function() {
 }
 
 exports["action-log"] = LogWidget;
-

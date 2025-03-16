@@ -57,4 +57,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new NodeWebKitSaver(wiki);
 };
-

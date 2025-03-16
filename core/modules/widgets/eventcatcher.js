@@ -152,4 +152,3 @@ EventWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.eventcatcher = EventWidget;
-

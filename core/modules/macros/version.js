@@ -23,4 +23,3 @@ Run the macro
 exports.run = function() {
 	return $tw.version;
 };
-

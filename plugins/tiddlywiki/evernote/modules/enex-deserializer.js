@@ -44,7 +44,7 @@ exports["application/enex+xml"] = function(text,fields) {
 			try {
 				// may error if content is not valid XML
 				contentNode =	new DOMParser().parseFromString(contentText,"application/xml").querySelector("en-note") || contentNode;
-			} catch (e) {
+			} catch(e) {
 				// ignore
 			}
 		}

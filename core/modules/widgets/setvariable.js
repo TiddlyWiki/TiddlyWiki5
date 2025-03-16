@@ -119,4 +119,3 @@ SetWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.setvariable = SetWidget;
 exports.set = SetWidget;
-

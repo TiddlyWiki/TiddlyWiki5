@@ -46,4 +46,3 @@ exports.startup = function() {
 		}
 	});
 };
-

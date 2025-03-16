@@ -471,4 +471,3 @@ Slicer.prototype.makeTitle = function(prefix) {
 };
 
 exports.Slicer = Slicer;
-

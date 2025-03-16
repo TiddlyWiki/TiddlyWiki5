@@ -149,4 +149,3 @@ exports.parse = function() {
 	// Return the root element of the list
 	return [listStack[0]];
 };
-

@@ -193,4 +193,3 @@ WikiTextParser.prototype.subWikifyTerm = function(output,terminatorRegExp) {
 };
 
 exports["text/x-tiddlywiki"] = WikiTextParser;
-

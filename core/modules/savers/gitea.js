@@ -80,7 +80,7 @@ GiteaSaver.prototype.save = function(text,method,callback) {
 				callback: function(err,getResponseDataJson,xhr) {
 					if(xhr.status === 404) {
 						callback("Please ensure the branch in the Gitea repo exists");
-					} else {
+					}else{
 						data["branch"] = branch;
 						self.upload(uri + filename, use_put?"PUT":"POST", headers, data, callback);
 					}
@@ -129,4 +129,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new GiteaSaver(wiki);
 };
-

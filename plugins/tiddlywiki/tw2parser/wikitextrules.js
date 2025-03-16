@@ -821,4 +821,3 @@ var rules = [
 ];
 
 exports.rules = rules;
-

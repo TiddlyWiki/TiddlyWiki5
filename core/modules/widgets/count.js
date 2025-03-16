@@ -65,4 +65,3 @@ CountWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.count = CountWidget;
-

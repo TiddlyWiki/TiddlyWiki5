@@ -175,4 +175,3 @@ exports.TextMap.prototype.extractContext = function(startContainer,startOffset,t
 		suffix: this.string.slice(startPos + text.length, Math.min(startPos + text.length + PREFIX_SUFFIX_LENGTH, this.string.length))
 	};
 };
-

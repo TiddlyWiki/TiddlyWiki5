@@ -50,7 +50,7 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 };
 
 KeyboardWidget.prototype.handleChangeEvent = function(event) {
-	if($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
 		return true;
 	}
 
@@ -132,4 +132,3 @@ KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.keyboard = KeyboardWidget;
-

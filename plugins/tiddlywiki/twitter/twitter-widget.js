@@ -137,4 +137,3 @@ TwitterWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.twitter = TwitterWidget;
-

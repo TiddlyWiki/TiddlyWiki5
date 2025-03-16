@@ -198,4 +198,3 @@ XLSXImporter.prototype.findColumns = function(sheet,sheetSize) {
 };
 
 exports.XLSXImporter = XLSXImporter;
-

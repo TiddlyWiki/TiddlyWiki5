@@ -108,4 +108,3 @@ exports.slide = {
 	open: slideOpen,
 	close: slideClosed
 };
-

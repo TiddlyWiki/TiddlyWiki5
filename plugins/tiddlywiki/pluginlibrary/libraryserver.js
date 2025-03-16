@@ -83,4 +83,3 @@ function httpGet(url,callback) {
 	};
 	http.send();
 }
-

@@ -72,4 +72,3 @@ PluginSwitcher.prototype.switchPlugins = function() {
 };
 
 exports.PluginSwitcher = PluginSwitcher;
-

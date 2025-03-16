@@ -15,23 +15,23 @@ var getCellInfo = function(text, start, length, SEPARATOR) {
 	var isCellQuoted = text.charAt(start) === QUOTE;
 	var cellStart = isCellQuoted ? start + 1 : start;
 	
-	if(text.charAt(i) === SEPARATOR) {
+	if (text.charAt(i) === SEPARATOR) {
 		return [cellStart, cellStart, false];
 	}
 	
-	for(var i = cellStart; i < length; i++) {
+	for (var i = cellStart; i < length; i++) {
 		var cellCharacter = text.charAt(i);
 		var isEOL = cellCharacter === "\n" || cellCharacter === "\r";
 		
-		if(isEOL && !isCellQuoted) {
+		if (isEOL && !isCellQuoted) {
 			return [cellStart, i, false];
 			
-		} else if(cellCharacter === SEPARATOR && !isCellQuoted) {
+		} else if (cellCharacter === SEPARATOR && !isCellQuoted) {
 			return [cellStart, i, false];
 			
-		} else if(cellCharacter === QUOTE && isCellQuoted) {
+		} else if (cellCharacter === QUOTE && isCellQuoted) {
 			var nextCharacter = i + 1 < length ? text.charAt(i + 1) : '';
-			if(nextCharacter !== QUOTE) {
+			if (nextCharacter !== QUOTE) {
 				return [cellStart, i, true];
 			} else {
 				i++;
@@ -43,7 +43,7 @@ var getCellInfo = function(text, start, length, SEPARATOR) {
 }
 	
 exports.parseCsvString = function(text, options) {
-	if(!text) {
+	if (!text) {
 		return [];
 	}
 	
@@ -53,10 +53,10 @@ exports.parseCsvString = function(text, options) {
 		rows = [],
 		nextRow = [];
 		
-	for(var i = 0; i < length; i++) {
+	for (var i = 0; i < length; i++) {
 		var cellInfo = getCellInfo(text, i, length, SEPARATOR);
 		var cellText = text.substring(cellInfo[0], cellInfo[1]);
-		if(cellInfo[2]) {
+		if (cellInfo[2]) {
 			cellText = cellText.replace(/""/g, '"');
 			cellInfo[1]++;
 		}
@@ -67,18 +67,18 @@ exports.parseCsvString = function(text, options) {
 		var character = text.charAt(i);
 		var nextCharacter = i + 1 < length ? text.charAt(i + 1) : '';
 		
-		if(character === "\r" || character === "\n") {
+		if (character === "\r" || character === "\n") {
 			// Edge case for empty rows
-			if(nextRow.length === 1 && nextRow[0] === '') {
+			if (nextRow.length === 1 && nextRow[0] === '') {
 				nextRow.length = 0;
 			}
 			rows.push(nextRow);
 			nextRow = [];
 			
-			if(character === "\r") {
+			if (character === "\r") {
 				var nextCharacter = i + 1 < length ? text.charAt(i + 1) : '';
 				
-				if(nextCharacter === "\n") {
+				if (nextCharacter === "\n") {
 					i++;
 				}
 			}
@@ -86,7 +86,7 @@ exports.parseCsvString = function(text, options) {
 	}
 	
 	// Special case if last cell in last row is an empty cell
-	if(text.charAt(length - 1) === SEPARATOR) {
+	if (text.charAt(length - 1) === SEPARATOR) {
 		nextRow.push("");
 	}
 	
@@ -103,13 +103,13 @@ exports.parseCsvStringWithHeader = function(text,options) {
 	var headers = csv[0];
 	
 	csv = csv.slice(1);
-	for(var i = 0; i < csv.length; i++) {
+	for (var i = 0; i < csv.length; i++) {
 		var row = csv[i];
 		var rowObject = Object.create(null);
 
 		for(var columnIndex=0; columnIndex<headers.length; columnIndex++) {
 			var columnName = headers[columnIndex];
-			if(columnName) {
+			if (columnName) {
 				rowObject[columnName] = $tw.utils.trim(row[columnIndex] || "");
 			}
 		}
@@ -117,4 +117,3 @@ exports.parseCsvStringWithHeader = function(text,options) {
 	}
 	return csv;
 }
-

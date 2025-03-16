@@ -27,5 +27,3 @@ var ImageParser = function(type,text,options) {
 };
 
 exports["application/pdf"] = ImageParser;
-
-

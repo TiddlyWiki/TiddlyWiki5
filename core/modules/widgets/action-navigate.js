@@ -84,4 +84,3 @@ NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 exports["action-navigate"] = NavigateWidget;
-

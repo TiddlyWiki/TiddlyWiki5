@@ -26,5 +26,3 @@ FillWidget.prototype.execute = function() {
 };
 
 exports.fill = FillWidget;
-
-	

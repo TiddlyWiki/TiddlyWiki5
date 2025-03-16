@@ -157,4 +157,3 @@ exports.getFullScreenApis = function() {
 		return result;
 	}
 };
-

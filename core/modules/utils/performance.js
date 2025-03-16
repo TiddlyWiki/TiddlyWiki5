@@ -45,7 +45,7 @@ Performance.prototype.log = function() {
 		orderedMeasures = Object.keys(this.measures).sort(function(a,b) {
 			if(self.measures[a].time > self.measures[b].time) {
 				return -1;
-			} else if(self.measures[a].time < self.measures[b].time) {
+			} else if (self.measures[a].time < self.measures[b].time) {
 				return + 1;
 			} else {
 				return 0;
@@ -84,4 +84,3 @@ Performance.prototype.measure = function(name,fn) {
 };
 
 exports.Performance = Performance;
-

@@ -925,4 +925,3 @@ exports.transliterateToSafeASCII = function(str) {
 		return exports.transliterationPairs[ch] || ""
 	});
 };
-

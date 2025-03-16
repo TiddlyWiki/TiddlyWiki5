@@ -47,4 +47,3 @@ exports.parse = function() {
 		children: []
 	}];
 };
-

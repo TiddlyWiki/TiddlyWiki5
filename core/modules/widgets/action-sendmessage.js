@@ -92,4 +92,3 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 exports["action-sendmessage"] = SendMessageWidget;
-

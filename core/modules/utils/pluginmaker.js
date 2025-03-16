@@ -72,4 +72,3 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 	// Return a heartwarming confirmation
 	return "Plugin " + title + " successfully saved";
 };
-

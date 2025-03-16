@@ -87,4 +87,3 @@ exports.decryptStoreAreaInteractive = function(encryptedStoreArea,callback,optio
 		});
 	}
 };
-

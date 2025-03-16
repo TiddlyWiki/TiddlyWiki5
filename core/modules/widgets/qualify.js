@@ -59,4 +59,3 @@ QualifyWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.qualify = QualifyWidget;
-

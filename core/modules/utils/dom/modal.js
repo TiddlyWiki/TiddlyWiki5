@@ -250,4 +250,3 @@ Modal.prototype.adjustPageClass = function() {
 };
 
 exports.Modal = Modal;
-

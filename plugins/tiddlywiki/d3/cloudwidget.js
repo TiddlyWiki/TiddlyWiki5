@@ -126,4 +126,3 @@ CloudWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.d3cloud = CloudWidget;
-

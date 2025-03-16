@@ -199,7 +199,8 @@ exports.generateNewTitle = function(baseTitle,options) {
 		// test if .startCount is a positive integer. If not set to 0
 		c = (parseInt(options.startCount,10) > 0) ? parseInt(options.startCount,10) : 0,
 		prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
-	if(template) {
+
+	if (template) {
 		// "count" is important to avoid an endless loop in while(...)!!
 		template = (/\$count:?(\d+)?\$/i.test(template)) ? template : template + "$count$";
 		// .formatTitleString() expects strings as input
@@ -733,7 +734,7 @@ exports.findListingsOfTiddler = function(targetTitle,fieldName) {
 				for(var i = 0; i < list.length; i++) {
 					var listItem = list[i],
 						listing = listings[listItem] || [];
-					if(listing.indexOf(title) === -1) {
+					if (listing.indexOf(title) === -1) {
 						listing.push(title);
 					}
 					listings[listItem] = listing;
@@ -781,7 +782,7 @@ exports.sortByList = function(array,listTitle) {
 					}
 				}
 				// If a new position is specified, let's move it
-				if(newPos !== -1) {
+				if (newPos !== -1) {
 					// get its current Pos, and make sure
 					// sure that it's _actually_ in the list
 					// and that it would _actually_ move
@@ -1787,4 +1788,3 @@ exports.slugify = function(title,options) {
 	}
 	return slug;
 };
-

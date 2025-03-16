@@ -49,4 +49,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new ManualDownloadSaver(wiki);
 };
-

@@ -85,4 +85,3 @@ Notifier.prototype.display = function(title,options) {
 };
 
 exports.Notifier = Notifier;
-

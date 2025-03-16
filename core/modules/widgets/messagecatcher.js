@@ -103,4 +103,3 @@ MessageCatcherWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.messagecatcher = MessageCatcherWidget;
-

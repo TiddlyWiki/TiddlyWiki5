@@ -211,4 +211,3 @@ SaverHandler.prototype.updateDirtyStatus = function() {
 };
 
 exports.SaverHandler = SaverHandler;
-

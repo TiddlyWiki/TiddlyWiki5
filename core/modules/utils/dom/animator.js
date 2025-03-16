@@ -36,4 +36,3 @@ Animator.prototype.perform = function(type,domNode,options) {
 };
 
 exports.Animator = Animator;
-

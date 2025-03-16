@@ -312,4 +312,3 @@ function arrayBufferToBase64(arrayBuffer) {
 exports.TwitterArchivist = TwitterArchivist;
 exports.TwitterArchivistSourceNodeJs = TwitterArchivistSourceNodeJs;
 exports.TwitterArchivistSourceBrowser = TwitterArchivistSourceBrowser;
-

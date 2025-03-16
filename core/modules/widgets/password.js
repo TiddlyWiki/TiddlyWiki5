@@ -75,4 +75,3 @@ PasswordWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.password = PasswordWidget;
-

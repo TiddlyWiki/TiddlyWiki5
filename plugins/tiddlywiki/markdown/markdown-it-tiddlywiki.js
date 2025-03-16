@@ -532,4 +532,3 @@ module.exports = function tiddlyWikiPlugin(markdown,options) {
 	md.core.ruler.disable('text_join');
 	md.core.ruler.push('wikify',wikify);
 };
-

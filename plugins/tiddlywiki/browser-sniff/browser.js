@@ -75,4 +75,3 @@ exports.getInfoTiddlerFields = function() {
 	}
 	return infoTiddlerFields;
 };
-

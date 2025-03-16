@@ -138,4 +138,3 @@ CecilyStoryView.prototype.lookupTiddlerInMap = function(title,domNode) {
 };
 
 exports.cecily = CecilyStoryView;
-

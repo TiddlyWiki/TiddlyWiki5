@@ -9,7 +9,9 @@ Wraps up the fenced code blocks parser for highlight and use in TiddlyWiki5
 "use strict";
 
 var TYPE_MAPPINGS_BASE = "$:/config/HighlightPlugin/TypeMappings/";
+
 var CodeBlockWidget = require("$:/core/modules/widgets/codeblock.js").codeblock;
+
 var hljs = require("$:/plugins/tiddlywiki/highlight/highlight.js");
 
 if(hljs.getLanguage !== undefined) {
@@ -17,6 +19,7 @@ if(hljs.getLanguage !== undefined) {
 	$tw.utils.each($tw.modules.types["highlight"],function(moduleInfo,moduleName) {
 		$tw.utils.evalSandboxed(moduleInfo.definition,{hljs:hljs, exports:{}},moduleName);
 	});
+	
 	CodeBlockWidget.prototype.postRender = function() {
 		var domNode = this.domNodes[0],
 			language = this.language,

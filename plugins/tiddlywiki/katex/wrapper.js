@@ -91,5 +91,3 @@ KaTeXWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.latex = KaTeXWidget;
 exports.katex = KaTeXWidget;
-
-

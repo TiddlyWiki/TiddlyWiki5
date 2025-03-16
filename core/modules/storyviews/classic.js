@@ -114,4 +114,3 @@ ClassicStoryView.prototype.remove = function(widget) {
 };
 
 exports.classic = ClassicStoryView;
-

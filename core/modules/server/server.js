@@ -342,8 +342,8 @@ Server.prototype.listen = function(port,host,prefix) {
 	}
 	// Warn if required plugins are missing
 	var missing = [];
-	for(var index=0; index<this.requiredPlugins.length; index++) {
-		if(!this.wiki.getTiddler(this.requiredPlugins[index])) {
+	for (var index=0; index<this.requiredPlugins.length; index++) {
+		if (!this.wiki.getTiddler(this.requiredPlugins[index])) {
 			missing.push(this.requiredPlugins[index]);
 		}
 	}
@@ -371,4 +371,3 @@ Server.prototype.listen = function(port,host,prefix) {
 };
 
 exports.Server = Server;
-

@@ -18,4 +18,3 @@ Keyboard utilities; now deprecated. Instead, use $tw.keyboardManager
 		}
 	};
 });
-

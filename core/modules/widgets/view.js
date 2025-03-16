@@ -221,4 +221,3 @@ ViewWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.view = ViewWidget;
-

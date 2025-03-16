@@ -231,4 +231,3 @@ function updateLocationHash(options) {
 		}
 	}
 }
-

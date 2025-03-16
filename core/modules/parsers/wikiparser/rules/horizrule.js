@@ -27,4 +27,3 @@ exports.parse = function() {
 	this.parser.pos = this.matchRegExp.lastIndex;
 	return [{type: "element", tag: "hr"}];
 };
-

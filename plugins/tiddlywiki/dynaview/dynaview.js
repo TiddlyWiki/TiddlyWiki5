@@ -260,4 +260,3 @@ function saveViewportDimensions() {
 		}
 	}
 }
-

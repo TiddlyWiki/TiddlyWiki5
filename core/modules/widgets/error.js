@@ -56,4 +56,3 @@ ErrorWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.error = ErrorWidget;
-

@@ -84,4 +84,3 @@ MacroCallWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.macrocall = MacroCallWidget;
-

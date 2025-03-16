@@ -44,4 +44,3 @@ exports.startup = function() {
 		});
 	});
 };
-

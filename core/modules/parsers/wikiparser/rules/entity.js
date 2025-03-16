@@ -33,4 +33,3 @@ exports.parse = function() {
 	// Return the entity
 	return [{type: "entity", entity: this.match[0]}];
 };
-
