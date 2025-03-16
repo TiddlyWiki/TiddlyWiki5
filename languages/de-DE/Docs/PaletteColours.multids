@@ -67,6 +67,9 @@ sidebar-tiddler-link-foreground-hover: Seitenleiste Tiddler Link Vordergrund (ho
 sidebar-tiddler-link-foreground: Seitenleiste Tiddler Link Vordergrund
 site-title-foreground: Wiki Titel Vordergrund
 static-alert-foreground: Statische Warnung Vordergrund
+testcase-accent-level-1: Test Beispiel Akzent Farbe nicht "verschachtelt" - Ebene 1
+testcase-accent-level-2: Test Beispiel Akzent Farbe with Ebene 2
+testcase-accent-level-3: Test Beispiel Akzent Farbe with Ebene 3
 tab-background-selected: Reiter Hintergrund für selektierte Reiter
 tab-background: Reiter Hintergrund
 tab-border-selected: Reiter Rahmen für selektierte Reiter

@@ -1,0 +1,7 @@
+tags: [[Hidden Settings]]
+title: Hidden Setting: Default Type for Missing Tiddlers
+type: text/vnd.tiddlywiki
+
+By default new tiddlers are created with a blank content type.
+
+The hidden setting in $:/config/DefaultMissingType can be set to another content type which is used by default for new tiddlers created by clicking on a missing link (for example, `text/markdown` to default to Markdown for missing tiddlers). If no value is provided, the content type will be blank and WikiText will be used.

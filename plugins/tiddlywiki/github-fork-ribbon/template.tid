@@ -11,7 +11,7 @@ left: offset from left in px - No ;
 right: offset from right in px - No ;
 fixed: "fixed" .. If ribbon is at the top, it can be "fixed". Bottom is always fixed
 -->
-\parameters (position:"right", url:"https://github.com/Jermolene/TiddlyWiki5", text:"Fork me on ~GitHub" color:"#aa0000" top:"0" bottom:"0" left:"0" right:"0" fixed:"")
+\parameters (position:"right", url:"https://github.com/TiddlyWiki/TiddlyWiki5", text:"Fork me on ~GitHub" color:"#aa0000" top:"0" bottom:"0" left:"0" right:"0" fixed:"")
 
 <style>
 {{$:/plugins/tiddlywiki/github-fork-ribbon/styles}}

@@ -1,0 +1,10 @@
+created: 20170328173820802
+caption: {{!!ja-title}} - ^^deprecated^^
+modified: 20241223111912267
+original-modified: 20240913122844238
+tags: OfficialPlugins $:/deprecated
+title: Mobile Drag And Drop Shim Plugin
+ja-title: モバイルのドラッグアンドドロップ詰め木プラグイン
+type: text/vnd.tiddlywiki
+
+<<.deprecated-since "5.3.4">> モバイルのドラッグアンドドロップ詰め木プラグインは、iOSやAndroidなどのモバイルブラウザーでHTML 5互換のドラッグアンドドロップ操作を可能にする"詰め木"を提供します。この詰め木はTim Rufflesによって作成され、 https://github.com/timruffles/ios-html5-drag-drop-shim で公開されています。

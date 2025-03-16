@@ -26,11 +26,11 @@ var BrowserStorageUtil = require("$:/plugins/tiddlywiki/browser-storage/util.js"
 
 exports.startup = function() {
 	var self = this;
-	
-        // If not exists, add ENABLED tiddler with default value "yes"
-        if(!$tw.wiki.getTiddler(ENABLED_TITLE)) {
-                $tw.wiki.addTiddler({title: ENABLED_TITLE, text: "yes"});
-        }
+
+	// If not exists, add ENABLED tiddler with default value "yes"
+	if(!$tw.wiki.getTiddler(ENABLED_TITLE)) {
+		$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "yes"});
+	}
 	// Compute our prefix for local storage keys
 	var prefix = "tw5#" + window.location.pathname + "#";
 	// Make a logger
@@ -53,6 +53,13 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-clear-browser-storage",function(event) {
 		$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "no"});
 		$tw.browserStorage.clearLocalStorage();
+	});
+	// Seperate clear cookie and disable action
+	$tw.rootWidget.addEventListener("tm-delete-browser-storage",function(event) {
+		$tw.browserStorage.clearLocalStorage();
+	});
+	$tw.rootWidget.addEventListener("tm-disable-browser-storage",function(event) {
+		$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "no"});
 	});
 	// Helpers for protecting storage from eviction
 	var setPersistedState = function(state) {

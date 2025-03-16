@@ -67,14 +67,6 @@ exports.startup = function() {
 		wiki: $tw.wiki,
 		document: $tw.browser ? document : $tw.fakeDocument
 	});
-	// Execute any startup actions
-	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
-	if($tw.browser) {
-		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");
-	}
-	if($tw.node) {
-		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
-	}
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
 	$tw.languageSwitcher = new $tw.PluginSwitcher({
@@ -88,8 +80,10 @@ exports.startup = function() {
 			if($tw.browser) {
 				var pluginTiddler = $tw.wiki.getTiddler(plugins[0]);
 				if(pluginTiddler) {
+					document.documentElement.setAttribute("lang",pluginTiddler.getFieldString("name"));
 					document.documentElement.setAttribute("dir",pluginTiddler.getFieldString("text-direction") || "auto");
 				} else {
+					document.documentElement.setAttribute("lang","en-GB");
 					document.documentElement.removeAttribute("dir");
 				}
 			}
@@ -114,6 +108,14 @@ exports.startup = function() {
 			handlerObject: $tw.keyboardManager,
 			handlerMethod: "handleKeydownEvent"
 		}]);
+	}
+	// Execute any startup actions
+	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
+	if($tw.browser) {
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");
+	}
+	if($tw.node) {
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
 	}
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();

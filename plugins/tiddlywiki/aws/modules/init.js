@@ -6,8 +6,6 @@ module-type: startup
 AWS initialisation
 
 \*/
-
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -33,4 +31,3 @@ exports.startup = function() {
 		logger.alert("The plugin 'tiddlywiki/aws' requires the 'tiddlywiki/jszip' plugin to be installed");
 	}
 };
-

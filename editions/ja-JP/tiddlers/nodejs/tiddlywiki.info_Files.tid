@@ -1,0 +1,60 @@
+created: 20161015114042793
+modified: 20250201105445142
+original-modified: 20241030132156792
+tags: TiddlyWikiFolders [[TiddlyWiki on Node.js]]
+title: tiddlywiki.info Files
+ja-title: tiddlywiki.infoファイル
+type: text/vnd.tiddlywiki
+
+[[TiddlyWikiフォルダ|TiddlyWikiFolders]]はWikiフォルダーのルートにある1つの`tiddlywiki.info`ファイルで構成されます。このファイルには、次のプロパティを含むJSONオブジェクトが含まれている必要があります: 
+
+* ''plugins'' - Wikiに含めるプラグインの配列
+* ''themes'' - Wikiに含めるテーマの配列
+* ''languages'' - Wikiに含める言語の配列
+* ''includeWikis'' - Wikiに含める外部Wikiフォルダへの参照の配列
+* ''build'' - 名前付きビルドターゲットのハッシュマップ。それぞれはコマンドトークンの配列で定義されます(BuildCommandを参照)
+* ''config'' - 設定オプションのオプションのハッシュマップ(下記参照)
+
+!!! ''includeWikis''
+
+''includeWikis''配列のエントリは、Wikiへの相対パスを指定する文字列か、次のフィールドを持つオブジェクトのいずれかになります:
+
+* ''path'' - Wikiフォルダへの相対パス
+* ''read-only'' - //true//に設定すると、含まれているWiki内のTiddlerが変更されるのを防ぎます。変更は、以下で説明する''default-tiddler-location''で指定されたディレクトリに書き込まれます
+
+!!! ''build''
+
+現在の`tiddlywiki.info`ファイルでその名前のターゲットが定義されていない場合、含まれているWikiのビルドターゲットはマージされることに注意してください。
+
+!!! ''config''
+
+構成オプションには以下が含まれます: 
+
+* ''default-tiddler-location'' - ファイルシステムアダプタが新しいTiddlerを保存するためのデフォルトの場所への文字列パス(Wikiフォルダを基準に解決)
+* ''retain-original-tiddler-path'' - trueの場合、サーバーはWiki内の各Tiddlerの元のファイルパスを含むティドラー[[$:/config/OriginalTiddlerPaths]]を生成します
+
+!!! 例
+
+例:
+
+```
+{
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem"
+	],
+	"includeWikis": [
+		{"path": "../tw5.com", "read-only": true}
+	],
+	"build": {
+		"index": [
+			"--render","$:/core/save/all","index.html","text/plain"],
+		"favicon": [
+			"--save", "$:/favicon.ico", "favicon.ico",
+			"--save", "$:/green_favicon.ico", "static/favicon.ico"]
+	},
+	"config": {
+		"retain-original-tiddler-path": true	
+	}
+}
+```

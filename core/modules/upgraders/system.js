@@ -12,7 +12,7 @@ Upgrader module that suppresses certain system tiddlers that shouldn't be import
 /*global $tw: false */
 "use strict";
 
-var DONT_IMPORT_LIST = ["$:/Import"],
+var DONT_IMPORT_LIST = ["$:/Import", "$:/build"],
 	UNSELECT_PREFIX_LIST = ["$:/temp/","$:/state/","$:/StoryList","$:/HistoryList"],
 	WARN_IMPORT_PREFIX_LIST = ["$:/core/modules/"];
 

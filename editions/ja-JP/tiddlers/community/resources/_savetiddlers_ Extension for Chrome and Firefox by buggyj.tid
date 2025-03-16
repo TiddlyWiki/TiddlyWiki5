@@ -1,0 +1,18 @@
+caption: savetiddlers
+color: #4DB6AC
+community-author: Buggyj
+created: 20171109171935039
+delivery: Browser Extension
+description: ChromeとFirefoxのブラウザ拡張機能
+method: save
+modified: 20241014110546647 
+original-modified: 20210106151027189
+tags: Chrome Firefox Saving [[Other Resources]] plugins
+title: "savetiddlers" Extension for Chrome and Firefox by buggyj
+ja-title: buggyjによるChromeとFirefoxの"savetiddlers"拡張機能
+type: text/vnd.tiddlywiki
+url: https://github.com/buggyj/savetiddlers
+
+Google ChromeとMozilla Firefoxの拡張機能で、TiddlyWikiの組み込み[[HTML5セーバー|Saving with the HTML5 saver]]による使いにくさの一部を解消し、正しく設定すればTiddlyFoxとほぼ同じくらい簡単に使用できるようになります。
+
+https://github.com/buggyj/savetiddlers

@@ -22,7 +22,9 @@ function FileSystemAdaptor(options) {
 	this.boot = options.boot || $tw.boot;
 	this.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
 	// Create the <wiki>/tiddlers folder if it doesn't exist
-	$tw.utils.createDirectory(this.boot.wikiTiddlersPath);
+	if(this.boot.wikiTiddlersPath) {
+		$tw.utils.createDirectory(this.boot.wikiTiddlersPath);
+	}
 }
 
 FileSystemAdaptor.prototype.name = "filesystem";
@@ -52,6 +54,10 @@ The type is found by looking up the extension in $tw.config.fileExtensionInfo (e
 It is the responsibility of the filesystem adaptor to update this.boot.files for new files that are created.
 */
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
+	// Error if we don't have a this.boot.wikiTiddlersPath
+	if(!this.boot.wikiTiddlersPath) {
+		return callback("filesystemadaptor requires a valid wiki folder");
+	}
 	// Always generate a fileInfo object when this fuction is called
 	var title = tiddler.fields.title, newInfo, pathFilters, extFilters,
 		fileInfo = this.boot.files[title];

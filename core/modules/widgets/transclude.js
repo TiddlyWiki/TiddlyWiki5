@@ -101,6 +101,7 @@ TranscludeWidget.prototype.execute = function() {
 	}
 	this.sourceText = target.text;
 	this.parserType = target.type;
+	this._canonical_uri = target._canonical_uri;
 	// Set the legacy transclusion context variables only if we're not transcluding a variable
 	if(!this.transcludeVariable) {
 		var recursionMarker = this.makeRecursionMarker();
@@ -228,7 +229,8 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 						});
 		return {
 			text: parserInfo.text,
-			type: parserInfo.type
+			type: parserInfo.type,
+			_canonical_uri: parserInfo._canonical_uri
 		};
 	}
 };
@@ -455,8 +457,11 @@ TranscludeWidget.prototype.makeRecursionMarker = function() {
 
 TranscludeWidget.prototype.parserNeedsRefresh = function() {
 	// Doesn't need to consider transcluded variables because a parent variable can't change once a widget has been created
-	var parserInfo = this.wiki.getTextReferenceParserInfo(this.transcludeTitle,this.transcludeField,this.transcludeIndex,{subTiddler:this.transcludeSubTiddler});
-	return (this.sourceText === undefined || parserInfo.sourceText !== this.sourceText || parserInfo.parserType !== this.parserType)
+	var parserInfo = this.wiki.getTextReferenceParserInfo(this.transcludeTitle,this.transcludeField,this.transcludeIndex,{
+		subTiddler: this.transcludeSubTiddler,
+		defaultType: this.transcludeType
+	});
+	return (this.sourceText === undefined || parserInfo.sourceText !== this.sourceText || parserInfo.parserType !== this.parserType || parserInfo._canonical_uri !== this._canonical_uri);
 };
 
 TranscludeWidget.prototype.functionNeedsRefresh = function() {

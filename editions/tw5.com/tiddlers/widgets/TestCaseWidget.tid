@@ -1,6 +1,6 @@
 caption: testcase
 created: 20240507221902644
-modified: 20240507221902644
+modified: 20241113203728572
 tags: Widgets
 title: TestCaseWidget
 type: text/vnd.tiddlywiki
@@ -22,6 +22,11 @@ Here is an example of a test case showing the default split view with the source
 Notice also that clicking on links within the output pane will switch to the tab containing that tiddler.
 
 The text of the payload tiddlers listed on the left are editable, with the results being immediately reflected in the preview pane on the right. However, if the <<.wid testcase>> widget is refreshed then the modifications are lost.
+
+There is a dropdown menu at the top right of the menu that has two options:
+
+* Export the payload tiddlers to a file in the usual export formats
+* Import the payload tiddlers into the host wiki. This option loads the payload tiddlers into the $:/Import tiddler so that they can be renamed and/or individually selected
 
 The green tick at the top left of a test case indicates that a test has been set up and that it passes.
 
@@ -50,6 +55,7 @@ The content of the `<$testcase>` widget is not displayed but instead is scanned 
 |<<.attr testExpectedResult>> |Optional title of the tiddler whose content is the expected result of rendering the output tiddler (note that both <<.attr testOutput>> and  <<.attr testExpectedResult>> must be provided in order for testing to occur)  |
 |<<.attr testActions>> |Optional title of the tiddler containing actions that should be executed before the test occurs |
 |<<.attr testHideIfPass>> |If set to "yes", hides the <<.wid testcase>> widget if the test passes |
+|<<.attr class>> |<<.from-version "5.3.7">> Optional CSS classes in addition to the default `tc-test-case` class |
 
 ! Payload Tiddlers
 
@@ -72,6 +78,7 @@ The test case wiki will inherit variables that are visible to the <<.wid testcas
 |!Variable |!Description |
 |<<.var linkTarget>> |Causes the test case description to be rendered as a link to the current tiddler |
 |<<.var displayFormat>> |Defaults to "wikitext", can also be "plaintext" to force plain text display |
+|<<.var testcaseTiddler>> |Title of the tiddler to be used as a link target for the testcase description |
 
 A custom template can be specified for special purposes. For example, the provided template $:/core/ui/testcases/RawJSONTemplate just displays the payload tiddlers in JSON, which can be used for debugging purposes.
 

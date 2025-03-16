@@ -1,6 +1,6 @@
 caption: data
 created: 20240507221902644
-modified: 20240507221902644
+modified: 20240729084028713
 tags: Widgets
 title: DataWidget
 type: text/vnd.tiddlywiki
@@ -17,6 +17,7 @@ The content of the data widget is ignored. It supports the following attributes:
 |<<.attr $tiddler>> |Optional title of a tiddler to be used as a payload tiddler (optional) |
 |<<.attr $filter>> |Optional filter string identifying tiddlers to be used as payload tiddlers (optional) |
 |<<.attr $compound-tiddler>> |Optional title of a tiddler containing payload tiddlers in `text/vnd.tiddlywiki-multiple` format (see below) |
+|<<.attr $compound-filter>> |<<.from-version "5.3.6">> Optional filter, to create a list of tiddlers that contain compound tiddlers. <<.infoBox """Tiddlers will be imported in order. Existing testcase tiddlers will be overwritten, so the currentTiddler wins""">>|
 |//any attribute<br>not starting<br>with $// |Field values to be assigned to the payload tiddler(s) |
 
 The data widget is not rendered when used within the <<.wlink TestCaseWidget>> widget or the [[Innerwiki Plugin]] but for ease of testing, when used elsewhere it renders a JSON representation of the payload tiddlers.

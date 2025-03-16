@@ -571,3 +571,41 @@ Anders Jarmund, @andjar, 2024/04/05
 @sarna, 2024/04/28
 
 Fokzo Kat, @CyberFoxar, 2024/05/20
+
+Andrei Rybak, @rybak, 2024/06/09
+
+@Leilei332, 2024/06/28
+
+@springerspandrel, 2024/06/27
+
+@andrewgoz, 2024/07/10
+
+Michael McDermott, @michaeljmcd, 2024-07-09
+
+@webplusai, 2024/07/23
+
+Val Packett, @valpackett, 2024/07/26
+
+@wolfsprite, 2024/08/09
+
+@JDIGIO0213, 2024/08/29
+
+@IchijikuIchigo, 2024/09/29
+
+JC John Sese Cuneta, @techmagus, 2024/10/07
+
+@zorrox1024, 2024/10/20
+
+John Robinette, @jrbntt, 2024/11/25
+
+@DesignThinkerer, 2024/12/02
+
+Thomas E Tuoti, @well-noted, 2024/12/16
+
+@opn, 2025/01/04
+
+J. Ryan Stinnett, @jryans, 2025/01/04
+
+Galen Huntington, @galenhuntington, 2025/01/19
+
+@Rhys-T, 2025/01/23

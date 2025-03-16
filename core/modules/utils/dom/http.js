@@ -104,6 +104,8 @@ basicAuthUsername: plain username for basic authentication
 basicAuthUsernameFromStore: name of password store entry containing username
 basicAuthPassword: plain password for basic authentication
 basicAuthPasswordFromStore: name of password store entry containing password
+bearerAuthToken: plain text token for bearer authentication
+bearerAuthTokenFromStore: name of password store entry contain bear authorization token
 */
 function HttpClientRequest(options) {
 	var self = this;
@@ -135,8 +137,11 @@ function HttpClientRequest(options) {
 	});
 	this.basicAuthUsername = options.basicAuthUsername || (options.basicAuthUsernameFromStore && $tw.utils.getPassword(options.basicAuthUsernameFromStore)) || "";
 	this.basicAuthPassword = options.basicAuthPassword || (options.basicAuthPasswordFromStore && $tw.utils.getPassword(options.basicAuthPasswordFromStore)) || "";
+	this.bearerAuthToken = options.bearerAuthToken || (options.bearerAuthTokenFromStore && $tw.utils.getPassword(options.bearerAuthTokenFromStore)) || "";
 	if(this.basicAuthUsername && this.basicAuthPassword) {
 		this.requestHeaders.Authorization = "Basic " + $tw.utils.base64Encode(this.basicAuthUsername + ":" + this.basicAuthPassword);
+	} else if(this.bearerAuthToken) {
+		this.requestHeaders.Authorization = "Bearer " + this.bearerAuthToken;
 	}
 }
 
@@ -211,11 +216,11 @@ HttpClientRequest.prototype.send = function(callback) {
 				if(lengthComputable) {
 					setBinding(self.bindProgress,"" + Math.floor((loaded/total) * 100))
 				}
-				self.wiki.invokeActionString(self.progressActions,undefined,{
+				self.wiki.invokeActionString(self.progressActions,undefined,$tw.utils.extend({},self.variables,{
 					lengthComputable: lengthComputable ? "yes" : "no",
 					loaded: loaded,
 					total: total
-				},{parentWidget: $tw.rootWidget});
+				}),{parentWidget: $tw.rootWidget});
 			}
 		});
 	}
