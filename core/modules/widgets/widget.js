@@ -634,7 +634,9 @@ Listener could return a boolean indicating whether to further propagation or not
 */
 Widget.prototype.addEventListener = function(type,handler) {
 	this.eventListeners[type] = this.eventListeners[type] || [];
-	this.eventListeners[type].push(handler);
+	if(this.eventListeners[type].indexOf(handler) === -1) {
+		this.eventListeners[type].push(handler);
+	}
 };
 
 /*

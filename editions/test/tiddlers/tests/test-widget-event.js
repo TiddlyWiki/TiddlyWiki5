@@ -193,6 +193,32 @@ describe("Widget Event Listeners", function() {
 		expect(calls).not.toContain("listener1");
 	});
 
+	it("should prevent adding the same event listener multiple times", function() {
+		var calls = 0;
+		var wiki = new $tw.Wiki();
+		var widget = createWidgetNode({type:"widget", text:"text"}, wiki);
+		
+		function listener(e) {
+			calls++;
+			return true;
+		}
+		
+		// Add the same listener multiple times
+		widget.addEventListener("testEvent", listener);
+		widget.addEventListener("testEvent", listener);
+		widget.addEventListener("testEvent", listener);
+		
+		// Dispatch the event
+		var event = {type:"testEvent"};
+		widget.dispatchEvent(event);
+		
+		// The listener should only be called once
+		expect(calls).toBe(1);
+		
+		// Check the internal structure of eventListeners array
+		expect(widget.eventListeners["testEvent"].length).toBe(1);
+	});
+
 });
 
 })();
