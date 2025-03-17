@@ -1,0 +1,22 @@
+created: 20211128212902292
+from-version: 5.1.23
+modified: 20250317105829721
+original-modified: 20230710073322863
+rp-input: 前のフィルタランからのすべてのタイトル
+rp-output: このフィルタランの結果と前のランのアウトプットの両方に存在するタイトル
+rp-purpose: 前のランからのタイトルとこのフィルタのタイトルの共通部分を見つける
+tags: [[Named Filter Run Prefix]]
+title: Intersection Filter Run Prefix
+ja-title: intersectionフィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( ":intersection" | - )
+[["ラン"|"Filter Run"]]
+"""/>
+
+前のランからのフィルタアウトプットは保留されます。`:intersection`フィルタランは、すべてのTiddlerタイトルをインプットとして開始されます。この最後のフィルタランが完了すると、最後のアウトプットが保留アウトプットと比較されます。保留アウトプットと最新アウトプットの両方に表われるタイトルのみを含む新しいアウトプットが生成されます。
+
+[[intersectionフィルタランプレフィックス(例)|Intersection Filter Run Prefix (Examples)]]
