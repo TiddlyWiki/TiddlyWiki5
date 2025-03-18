@@ -3,7 +3,7 @@ from-version: 5.3.7
 modified: 20250307212252946
 rp-input: all titles from previous filter runs
 rp-output: an empty title list is always returned from the "let" filter run prefix
-rp-purpose: assign the results of a filter run to a variable
+rp-purpose: assign the title list resulting from previous filter runs to a multi-valued variable
 tags: [[Named Filter Run Prefix]]
 title: Let Filter Run Prefix
 type: text/vnd.tiddlywiki
@@ -11,14 +11,13 @@ type: text/vnd.tiddlywiki
 <$railroad text="""
 \start none
 \end none
-( ":let" ) 
-( ":" ) 
-( : "variable" )
-( ":" )
+( ":let" )
 [[run|"Filter Run"]]
 """/>
 
-<<.from-version "5.3.7">> The `:let` filter run prefix assigns the result list of a filter run to a variable which is made available to the remaining [[filter runs|Filter Run]] in the [[filter expression|Filter Expression]]. Only the first item in the result list is returned when the variable is accessed in the usual way (or an empty string if the result list is empty). The special [varlist Operator] is used to access all the items in the result list.
+The `:let` filter run prefix assigns the title list resulting from previous filter runs to a [[multi-valued variable|Multi-Valued Variable]]. The variable is named with the first result returned by the filter run.
+
+The variable is made available to the remaining [[filter runs|Filter Run]] in the [[filter expression|Filter Expression]]. Only the first item in the result list is returned when the variable is accessed in the usual way (or an empty string if the result list is empty). The special [varlist Operator] is used to access all the items in the result list.
 
 Within the filter run the [[all Operator]] with an empty parameter retrieves all the titles from the previous filter runs, instead of the usual behaviour of retieving all the titles that were passed to the filter expression.
 

@@ -5,7 +5,7 @@ tags: [[$:/tags/wiki-test-spec]]
 
 title: Output
 
-<$text text={{{ :let:varname[[magpie]] [<varname>] +[join[-]] }}}/>
+<$text text={{{ [[magpie]] :let[[varname]] [<varname>] +[join[-]] }}}/>
 +
 title: ExpectedResult
 

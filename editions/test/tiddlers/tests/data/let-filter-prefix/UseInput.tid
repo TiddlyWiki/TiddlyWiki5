@@ -5,7 +5,7 @@ tags: [[$:/tags/wiki-test-spec]]
 
 title: Output
 
-<$text text={{{ [[colossus]] :let:another[all[]] [<another>] +[join[-]] }}}/>
+<$text text={{{ [[colossus]] :let[[another]] [<another>] +[join[-]] }}}/>
 +
 title: ExpectedResult
 
