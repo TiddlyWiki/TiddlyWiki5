@@ -77,7 +77,7 @@ describe("Widget module", function() {
 		expect(childNode.getVariableInfo("$my.widget", {allowSelfAssigned:true}).params).toEqual([{name:"w",default:"ww"}]);
 
 		// no params expected
-		expect(childNode.getVariableInfo("abc", {allowSelfAssigned:true})).toEqual({text:"def"});
+		expect(childNode.getVariableInfo("abc", {allowSelfAssigned:true})).toEqual({text:"def", resultList: [ "def" ]});
 
 		// debugger; Find code in browser
 

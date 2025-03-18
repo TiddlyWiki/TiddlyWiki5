@@ -1,16 +1,15 @@
-title: LetListWidget/SelfReference
-description: Using self references with the "letlist" widget
+title: MultiValuedVariables/Functions
+description: Multi-valued functions
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
 title: Output
 
-<$letlist
-	original={{{ [all[tiddlers]sort[]] }}}
-	varname={{{ [varlist[original]] }}}
->
+\function myfunc() [all[tiddlers]sort[]]
+
+<$let varname=<<myfunc>>>
 <$text text={{{ [varlist[varname]] +[join[-]] }}}/>
-</$letlist>
+</$let>
 +
 title: ExpectedResult
 

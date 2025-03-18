@@ -49,7 +49,7 @@ LetWidget.prototype.computeAttributes = function() {
 		self = this;
 	this.currentValueFor = Object.create(null);
 	$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(this.parseTreeNode),function(attribute) {
-		var value = self.computeAttribute(attribute),
+		var value = self.computeAttribute(attribute,{asList: true}),
 			name = attribute.name;
 		// Now that it's prepped, we're allowed to look this variable up
 		// when defining later variables
@@ -59,7 +59,7 @@ LetWidget.prototype.computeAttributes = function() {
 	});
 	// Run through again, setting variables and looking for differences
 	$tw.utils.each(this.currentValueFor,function(value,name) {
-		if (self.attributes[name] !== value) {
+		if (!$tw.utils.isArrayEqual(self.attributes[name],value)) {
 			self.attributes[name] = value;
 			self.setVariable(name,value);
 			changedAttributes[name] = true;
@@ -72,8 +72,10 @@ LetWidget.prototype.getVariableInfo = function(name,options) {
 	// Special handling: If this variable exists in this very $let, we can
 	// use it, but only if it's been staged.
 	if ($tw.utils.hop(this.currentValueFor,name)) {
+		var value = this.currentValueFor[name];
 		return {
-			text: this.currentValueFor[name]
+			text: value[0] || "",
+			resultList: value
 		};
 	}
 	return Widget.prototype.getVariableInfo.call(this,name,options);
