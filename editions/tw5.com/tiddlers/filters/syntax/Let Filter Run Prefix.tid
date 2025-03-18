@@ -18,3 +18,5 @@ type: text/vnd.tiddlywiki
 The `:let` filter run prefix assigns the title list resulting from previous filter runs to a [[multi-valued variable|Multi-Valued Variable]]. The variable is named with the first result returned by the filter run.
 
 The variable is made available to the remaining [[filter runs|Filter Run]] in the [[filter expression|Filter Expression]]. Only the first item in the result list is returned when the variable is accessed in the usual way (or an empty string if the result list is empty). The special [varlist Operator] is used to access all the items in the result list.
+
+The `:let` filter run prefix always clears the current result list.
