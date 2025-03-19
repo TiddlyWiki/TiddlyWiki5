@@ -23,12 +23,12 @@ Attributes are evaluated in the order they are written. Attributes with the same
 
 <<.from-version "5.3.7">> The <<.wid let>> widget also allows [[multi-valued variables|Multi-Valued Variables]] to be set in one operation, each to the complete list of results obtained from evaluating an attribute.
 
-Almost all operations that work with variables only consider the first item in the list. The [[varlist Operator]] gives access to the complete list of results. For example:
+Almost all operations that work with variables only consider the first item in the list. Using round brackets instead of angle brackets around the variable name gives access to the complete list of results. For example:
 
 ```
-<$letlist varname={{{ [all[tiddlers]sort[]] }}}>
-<$text text={{{ [varlist[varname]] +[join[-]] }}}/>
-</$letlist>
+<$let varname={{{ [all[tiddlers]sort[]] }}}>
+<$text text={{{ [(varname)] +[join[-]] }}}/>
+</$let>
 ```
 
 ! Examples

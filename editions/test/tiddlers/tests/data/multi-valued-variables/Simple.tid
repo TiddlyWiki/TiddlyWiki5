@@ -7,7 +7,7 @@ title: Output
 
 <$let varname={{{ [all[tiddlers]sort[]] }}}
 	varname2=<<varname>>>
-<$text text={{{ [varlist[varname2]] +[join[-]] }}}/>
+<$text text={{{ [(varname2)] +[join[-]] }}}/>
 </$let>
 +
 title: ExpectedResult

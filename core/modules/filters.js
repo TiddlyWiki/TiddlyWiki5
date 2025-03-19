@@ -38,7 +38,7 @@ function parseFilterOperation(operators,filterString,p) {
 			operator.prefix = filterString.charAt(p++);
 		}
 		// Get the operator name
-		nextBracketPos = filterString.substring(p).search(/[\[\{<\/]/);
+		nextBracketPos = filterString.substring(p).search(/[\[\{<\/\(]/);
 		if(nextBracketPos === -1) {
 			throw "Missing [ in filter expression";
 		}
@@ -81,6 +81,10 @@ function parseFilterOperation(operators,filterString,p) {
 				case "<": // Angle brackets
 					operand.variable = true;
 					nextBracketPos = filterString.indexOf(">",p);
+					break;
+				case "(": // Round brackets
+					operand.multiValuedVariable = true;
+					nextBracketPos = filterString.indexOf(")",p);
 					break;
 				case "/": // regexp brackets
 					var rex = /^((?:[^\\\/]|\\.)*)\/(?:\(([mygi]+)\))?/g,
@@ -255,6 +259,8 @@ exports.compileFilter = function(filterString) {
 				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 			$tw.utils.each(operation.operators,function(operator) {
 				var operands = [],
+					multiValueOperands = [],
+					isMultiValueOperand = [],
 					operatorFunction;
 				if(!operator.operator) {
 					// Use the "title" operator if no operator is specified
@@ -269,13 +275,29 @@ exports.compileFilter = function(filterString) {
 				$tw.utils.each(operator.operands,function(operand) {
 					if(operand.indirect) {
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
+						operand.multiValue = [operand.value];
 					} else if(operand.variable) {
 						var varTree = $tw.utils.parseFilterVariable(operand.text);
 						operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source})[0] || "";
+						operand.multiValue = [operand.value];
+					} else if(operand.multiValuedVariable) {
+						var varTree = $tw.utils.parseFilterVariable(operand.text);
+						var resultList = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source});
+						if((resultList.length > 0 && resultList[0] !== undefined) || resultList.length === 0) {
+							operand.multiValue = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source}) || [];
+							operand.value = operand.multiValue[0] || "";
+						} else {
+							operand.value = "";
+							operand.multiValue = [];
+						}
+						operand.isMultiValueOperand = true;	
 					} else {
 						operand.value = operand.text;
+						operand.multiValue = [operand.value];
 					}
 					operands.push(operand.value);
+					multiValueOperands.push(operand.multiValue);
+					isMultiValueOperand.push(!!operand.isMultiValueOperand);
 				});
 
 				// Invoke the appropriate filteroperator module
@@ -283,6 +305,8 @@ exports.compileFilter = function(filterString) {
 							operator: operator.operator,
 							operand: operands.length > 0 ? operands[0] : undefined,
 							operands: operands,
+							multiValueOperands: multiValueOperands,
+							isMultiValueOperand: isMultiValueOperand,
 							prefix: operator.prefix,
 							suffix: operator.suffix,
 							suffixes: operator.suffixes,

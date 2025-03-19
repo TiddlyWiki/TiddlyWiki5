@@ -5,7 +5,7 @@ tags: [[$:/tags/wiki-test-spec]]
 
 title: Output
 
-<$text text={{{ [all[tiddlers]] :let[[varname]] [varlist[varname]sort[]join[,]] }}}/>
+<$text text={{{ [all[tiddlers]] :let[[varname]] [(varname)sort[]join[,]] }}}/>
 +
 title: ExpectedResult
 

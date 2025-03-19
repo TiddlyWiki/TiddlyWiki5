@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 * A <<.def variable>> is a ''snippet of text'' that can be accessed by name
 * The text is referred to as the variable's <<.def value>>
 
-<<.from-version "5.3.7">> In ordinary usage, variables contain a single spinnet of text. With the introduction of [[Multi-Valued Variables]] it is now possible to store a list of multiple values in a single variable. When accessed in the usual way, only the first value is returned, but the [[varlist Operator]] can be used to access all the values. This makes the existence of multi-valued variables largely invisible unless you specifically need to use them
+<<.from-version "5.3.7">> In ordinary usage, variables contain a single spinnet of text. With the introduction of [[Multi-Valued Variables]] it is now possible to store a list of multiple values in a single variable. When accessed in the usual way, only the first value is returned, but using round brackets instead of the usual angle brackets retrieves the complete list of values. This makes the existence of multi-valued variables largely invisible unless you specifically need to use them.
 
 Variables are defined by [[widgets|Widgets]]. Several core widgets define variables, the most common being the <<.wlink LetWidget>>, <<.wlink SetWidget>> and <<.wlink ListWidget>> widgets.
 

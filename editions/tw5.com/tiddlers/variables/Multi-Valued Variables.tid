@@ -3,14 +3,14 @@ created: 20250307212252946
 modified: 20250307212252946
 tags: Concepts Variables
 
-<<.from-version "5.3.7">> In ordinary usage, [[variables|Variables]] contain a single spinnet of text. With the introduction of multi-valued variables. it is now possible to store a list of multiple values in a single variable. When accessed in the usual way, only the first value is returned, but the [[varlist Operator]] can be used to access all the values. This makes the existence of multi-valued variables largely invisible unless you specifically need to use them.
+<<.from-version "5.3.7">> In ordinary usage, [[variables|Variables]] contain a single spinnet of text. With the introduction of multi-valued variables. it is now possible to store a list of multiple values in a single variable. When accessed in the usual way, only the first value is returned, but using round brackets instead of angle brackets around the variable name allows access to the complete list of the values. This makes the existence of multi-valued variables largely invisible unless you specifically need to use them.
 
 The <<.wid let>> widget also allows [[multi-valued variables|Multi-Valued Variables]] to be set in one operation, each to the complete list of results obtained from evaluating an attribute.
 
 For example:
 
 ```
-<$letlist varname={{{ [all[tiddlers]sort[]] }}}>
-<$text text={{{ [varlist[varname]] +[join[-]] }}}/>
-</$letlist>
+<$let varname={{{ [all[tiddlers]sort[]] }}}>
+<$text text={{{ [(varname)] +[join[-]] }}}/>
+</$let>
 ```
