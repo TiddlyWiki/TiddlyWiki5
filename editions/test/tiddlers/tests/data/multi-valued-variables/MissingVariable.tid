@@ -1,0 +1,12 @@
+title: MultiValuedVariables/MissingVariable
+description: Using varlist with a missing variable
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$text text={{{ [varlist[varname]] }}}/>
++
+title: ExpectedResult
+
+<p></p>

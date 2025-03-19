@@ -18,6 +18,10 @@ Export our filter prefix function
 exports.let = function(operationSubFunction,options) {
 	// Return the filter run prefix function
 	return function(results,source,widget) {
+		// Save the result list
+		var resultList = results.toArray();
+		// Clear the results
+		results.clear();
 		// Evaluate the subfunction to get the variable name
 		var subFunctionResults = operationSubFunction(source,widget);
 		if(subFunctionResults.length === 0) {
@@ -29,9 +33,7 @@ exports.let = function(operationSubFunction,options) {
 		}
 		// Assign the result of the subfunction to the variable
 		var variables = {};
-		variables[name] = results.toArray()
-		// Clear the results
-		results.clear();
+		variables[name] = resultList;
 		// Return the variables
 		return {
 			variables: variables
