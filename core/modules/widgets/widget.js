@@ -421,9 +421,13 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 			value = [value];
 		}
 	} else { // String attribute
-		value = attribute.value || "";
+		value = attribute.value;
 		if(options.asList) {
-			value = [value];
+			if(value === undefined) {
+				value = [];
+			} else {
+				value = [value];
+			}
 		}
 	}
 	return value;
