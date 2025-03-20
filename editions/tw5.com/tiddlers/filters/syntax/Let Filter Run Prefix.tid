@@ -19,4 +19,10 @@ The `:let` filter run prefix assigns the title list resulting from previous filt
 
 The variable is made available to the remaining [[filter runs|Filter Run]] in the [[filter expression|Filter Expression]]. Only the first item in the result list is returned when the variable is accessed in the usual way (or an empty string if the result list is empty). Using round brackets instead of angle brackets around a variable name as an operand retrieves the complete list of items in the result list.
 
+This prefix has an optional [[shortcut syntax|Shortcut Filter Run Prefix]] symbol `=>run`. For example:
+
+```
+=[<myfun1>] =[<myfun2>] =>myvar
+```
+
 The `:let` filter run prefix always clears the current result list.
