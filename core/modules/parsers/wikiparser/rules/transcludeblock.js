@@ -11,10 +11,7 @@ Wiki text rule for block-level transclusion. For example:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "transcludeblock";
@@ -85,5 +82,3 @@ exports.parse = function() {
 		}
 	}
 };
-
-})();

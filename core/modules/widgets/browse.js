@@ -6,10 +6,7 @@ module-type: widget
 Browse widget for browsing for files to import
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -117,5 +114,3 @@ BrowseWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.browse = BrowseWidget;
-
-})();

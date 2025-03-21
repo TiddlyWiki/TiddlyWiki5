@@ -11,10 +11,7 @@ Wiki pragma rule for parser mode specifications
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "parsermode";
@@ -64,5 +61,3 @@ exports.parse = function() {
 	// No parse tree nodes to return
 	return [];
 };
-
-})();

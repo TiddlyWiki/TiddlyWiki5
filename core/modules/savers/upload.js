@@ -8,10 +8,7 @@ Handles saving changes via upload to a server.
 Designed to be compatible with BidiX's UploadPlugin at http://tiddlywiki.bidix.info/#UploadPlugin
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -107,5 +104,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new UploadSaver(wiki);
 };
-
-})();

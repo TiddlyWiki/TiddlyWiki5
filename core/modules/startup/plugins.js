@@ -6,10 +6,7 @@ module-type: startup
 Startup logic concerned with managing plugins
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -22,4 +19,3 @@ exports.startup = function() {
 	$tw.utils.installPluginChangeHandler($tw.wiki);
 };
 
-})();

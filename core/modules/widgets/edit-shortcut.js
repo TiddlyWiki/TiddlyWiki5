@@ -6,10 +6,7 @@ module-type: widget
 Widget to display an editable keyboard shortcut
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -154,5 +151,3 @@ EditShortcutWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["edit-shortcut"] = EditShortcutWidget;
-
-})();

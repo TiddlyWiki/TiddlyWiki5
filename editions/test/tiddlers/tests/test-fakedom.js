@@ -7,9 +7,6 @@ Tests the fakedom that Tiddlywiki occasionally uses.
 
 \*/
 (function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("fakedom tests", function() {
