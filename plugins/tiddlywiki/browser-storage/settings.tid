@@ -22,13 +22,15 @@ This filter determines which tiddlers will be saved to local storage.
 * `[all[]]` - attempt to save all changed tiddlers. This means even popup state tiddlers and temporary tiddlers will be saved.
 * `[all[]] -[prefix[$:/state/popup/]] -[prefix[$:/temp/]] -[prefix[$:/HistoryList]]` - save all tiddlers except popup state tiddlers, temp tiddlers and the history list.
 
-<$link to="$:/config/BrowserStorage/SaveFilter">Browser Storage Save Filter</$link>: <$edit-text tiddler="$:/config/BrowserStorage/SaveFilter" default="" tag="input" size="50"/>
+|tc-table-no-border|k
+|<$link to="$:/config/BrowserStorage/SaveFilter">Browser Storage Save Filter</$link> |<$edit-text tiddler="$:/config/BrowserStorage/SaveFilter" default="" tag="input"/> |
 
 ! Custom Quota Exceeded Alert
 
 This setting allows a custom alert message to be displayed when an attempt to store a tiddler fails due to the storage quota being exceeded:
 
-<$link to="$:/config/BrowserStorage/QuotaExceededAlert">Quota Exceeded Alert</$link>: <$edit-text tiddler="$:/config/BrowserStorage/QuotaExceededAlert" default="" tag="input" size="50"/>
+|tc-table-no-border|k
+|<$link to="$:/config/BrowserStorage/QuotaExceededAlert">Quota Exceeded Alert</$link> |<$edit-text tiddler="$:/config/BrowserStorage/QuotaExceededAlert" default="" tag="input"/> |
 
 ! Prevent browser from evicting local storage
 

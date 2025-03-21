@@ -1,0 +1,23 @@
+created: 20191022095653896
+modified: 20250122105447127 
+original-modified: 20220617130125173
+tags: [[TiddlyWiki on Node.js]] PluginsCS
+title: Installing custom plugins on Node.js
+ja-title: Node.jsにカスタムプラグインをインストールする
+type: text/vnd.tiddlywiki
+
+\rules except wikilink
+
+! 紹介
+
+Node.jsクライアントサーバー構成でTiddlyWikiを使用する場合、公式プラグインとカスタムプラグインをインストールするにはいくつかの方法があります。
+
+注記
+<$macrocall $name=".note" _="""ライブラリから単一ファイルWikiにプラグインをインストールする手順については、[[プラグイン|Plugins]]で詳細を確認してください。
+"""/> 
+
+
+!! プラグインのロード順序
+
+{{Plugin Ordering}}
+

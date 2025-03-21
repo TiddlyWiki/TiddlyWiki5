@@ -19,6 +19,10 @@ var _bootprefix = (function($tw) {
 $tw = $tw || Object.create(null);
 $tw.boot = $tw.boot || Object.create(null);
 
+// Config
+$tw.config = $tw.config || Object.create(null);
+$tw.config.maxEditFileSize = 100 * 1024 * 1024; // 100MB
+
 // Detect platforms
 if(!("browser" in $tw)) {
 	$tw.browser = typeof(window) !== "undefined" && typeof(document) !== "undefined" ? {} : null;

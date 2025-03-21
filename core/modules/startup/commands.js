@@ -6,10 +6,7 @@ module-type: startup
 Command processing
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -37,5 +34,3 @@ exports.startup = function(callback) {
 	);
 	commander.execute();
 };
-
-})();
