@@ -17,9 +17,6 @@ exports.name = "startup";
 exports.after = ["load-modules"];
 exports.synchronous = true;
 
-// Set to `true` to enable performance instrumentation
-var PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE = "$:/config/Performance/Instrumentation";
-
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
@@ -57,8 +54,6 @@ exports.startup = function() {
 	}
 	// Initialise version
 	$tw.version = $tw.utils.extractVersionInfo();
-	// Set up the performance framework
-	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
 	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
 	$tw.rootWidget = new widget.widget({
 		type: "widget",
