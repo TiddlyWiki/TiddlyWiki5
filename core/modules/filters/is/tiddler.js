@@ -6,10 +6,7 @@ module-type: isfilteroperator
 Filter function for [is[tiddler]]
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -32,5 +29,3 @@ exports.tiddler = function(source,prefix,options) {
 	}
 	return results;
 };
-
-})();

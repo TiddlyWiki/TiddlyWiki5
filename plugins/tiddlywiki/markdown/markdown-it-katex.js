@@ -5,7 +5,7 @@ module-type: library
 
 Based on markdown-it-katex v2.0.0 by @waylonflinn https://github.com/waylonflinn/markdown-it-katex | MIT License
 \*/
-(function(){
+
 /* Process inline math */
 /*
 Like markdown-it-simplemath, this is a stripped down, simplified version of:
@@ -167,4 +167,3 @@ module.exports = function math_plugin(md, options) {
     md.inline.ruler.after('escape', 'math_inline', math_inline);
     md.inline.ruler.after('escape', 'math_inline_block', math_inline_block);
 };
-})();

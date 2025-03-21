@@ -6,12 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the filtering mechanism.
 
 \*/
-(function(){
 
-	/* jslint node: true, browser: true */
-	/* eslint-env node, browser, jasmine */
-	/* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"]*/
-	/* global $tw, require */
 	"use strict";
 	
 	describe("Filter tests", function() {
@@ -1147,6 +1142,4 @@ Tests the filtering mechanism.
 	}
 	
 	});
-	
-	})();
 	

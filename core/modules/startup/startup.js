@@ -6,10 +6,7 @@ module-type: startup
 Miscellaneous startup logic for both the client and server.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -148,5 +145,3 @@ exports.startup = function() {
 		$tw.anim = new $tw.utils.Animator();
 	}
 };
-
-})();

@@ -6,10 +6,7 @@ module-type: widget
 Checkbox widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -344,6 +341,3 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.checkbox = CheckboxWidget;
-
-})();
-	

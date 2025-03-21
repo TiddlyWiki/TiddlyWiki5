@@ -6,10 +6,7 @@ module-type: widget
 Widget base class
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -868,5 +865,3 @@ Widget.evaluateVariable  = function(widget,name,options) {
 };
 
 exports.widget = Widget;
-
-})();

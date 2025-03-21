@@ -6,10 +6,6 @@ module-type: route
 GET /files/:filepath
 
 \*/
-(function() {
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.method = "GET";
@@ -44,5 +40,3 @@ exports.handler = function(request,response,state) {
 		state.sendResponse(404,{"Content-Type": "text/plain"},"File '" + suppliedFilename + "' not found");
 	}
 };
-
-}());

@@ -6,10 +6,7 @@ module-type: utils
 HTTP support
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -353,5 +350,3 @@ exports.setQueryStringParameter = function(url,paramName,paramValue) {
 		return url;
 	}
 };
-
-})();
