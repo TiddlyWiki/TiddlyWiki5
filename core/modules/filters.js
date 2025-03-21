@@ -35,7 +35,7 @@ function parseFilterOperation(operators,filterString,p) {
 			operator.prefix = filterString.charAt(p++);
 		}
 		// Get the operator name
-		nextBracketPos = filterString.substring(p).search(/[\[\{<\/]/);
+		nextBracketPos = filterString.substring(p).search(/[\[\{<\/\(]/);
 		if(nextBracketPos === -1) {
 			throw "Missing [ in filter expression";
 		}
@@ -78,6 +78,10 @@ function parseFilterOperation(operators,filterString,p) {
 				case "<": // Angle brackets
 					operand.variable = true;
 					nextBracketPos = filterString.indexOf(">",p);
+					break;
+				case "(": // Round brackets
+					operand.multiValuedVariable = true;
+					nextBracketPos = filterString.indexOf(")",p);
 					break;
 				case "/": // regexp brackets
 					var rex = /^((?:[^\\\/]|\\.)*)\/(?:\(([mygi]+)\))?/g,
@@ -141,7 +145,7 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
-		operandRegExp = /((?:\+|\-|~|=|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
+		operandRegExp = /((?:\+|\-|~|(?:=>?)|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
@@ -152,37 +156,38 @@ exports.parseFilter = function(filterString) {
 		// Match the start of the operation
 		if(p < filterString.length) {
 			operandRegExp.lastIndex = p;
-			match = operandRegExp.exec(filterString);
-			if(!match || match.index !== p) {
-				throw $tw.language.getString("Error/FilterSyntax");
-			}
 			var operation = {
 				prefix: "",
 				operators: []
 			};
-			if(match[1]) {
-				operation.prefix = match[1];
-				p = p + operation.prefix.length;
-				if(match[2]) {
-					operation.namedPrefix = match[2];
-				}
-				if(match[3]) {
-					operation.suffixes = [];
-					 $tw.utils.each(match[3].split(":"),function(subsuffix) {
-						operation.suffixes.push([]);
-						$tw.utils.each(subsuffix.split(","),function(entry) {
-							entry = $tw.utils.trim(entry);
-							if(entry) {
-								operation.suffixes[operation.suffixes.length -1].push(entry);
-							}
+			match = operandRegExp.exec(filterString);
+			if(match && match.index === p) {
+				if(match[1]) {
+					operation.prefix = match[1];
+					p = p + operation.prefix.length;
+					if(match[2]) {
+						operation.namedPrefix = match[2];
+					}
+					if(match[3]) {
+						operation.suffixes = [];
+						$tw.utils.each(match[3].split(":"),function(subsuffix) {
+							operation.suffixes.push([]);
+							$tw.utils.each(subsuffix.split(","),function(entry) {
+								entry = $tw.utils.trim(entry);
+								if(entry) {
+									operation.suffixes[operation.suffixes.length -1].push(entry);
+								}
+							});
 						});
-					 });
+					}
 				}
-			}
-			if(match[4]) { // Opening square bracket
-				p = parseFilterOperation(operation.operators,filterString,p);
+				if(match[4]) { // Opening square bracket
+					p = parseFilterOperation(operation.operators,filterString,p);
+				} else {
+					p = match.index + match[0].length;
+				}
 			} else {
-				p = match.index + match[0].length;
+				p = parseFilterOperation(operation.operators,filterString,p);
 			}
 			if(match[5] || match[6] || match[7]) { // Double quoted string, single quoted string or unquoted title
 				operation.operators.push(
@@ -252,6 +257,8 @@ exports.compileFilter = function(filterString) {
 				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 			$tw.utils.each(operation.operators,function(operator) {
 				var operands = [],
+					multiValueOperands = [],
+					isMultiValueOperand = [],
 					operatorFunction;
 				if(!operator.operator) {
 					// Use the "title" operator if no operator is specified
@@ -266,13 +273,29 @@ exports.compileFilter = function(filterString) {
 				$tw.utils.each(operator.operands,function(operand) {
 					if(operand.indirect) {
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
+						operand.multiValue = [operand.value];
 					} else if(operand.variable) {
 						var varTree = $tw.utils.parseFilterVariable(operand.text);
 						operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source})[0] || "";
+						operand.multiValue = [operand.value];
+					} else if(operand.multiValuedVariable) {
+						var varTree = $tw.utils.parseFilterVariable(operand.text);
+						var resultList = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source});
+						if((resultList.length > 0 && resultList[0] !== undefined) || resultList.length === 0) {
+							operand.multiValue = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source}) || [];
+							operand.value = operand.multiValue[0] || "";
+						} else {
+							operand.value = "";
+							operand.multiValue = [];
+						}
+						operand.isMultiValueOperand = true;	
 					} else {
 						operand.value = operand.text;
+						operand.multiValue = [operand.value];
 					}
 					operands.push(operand.value);
+					multiValueOperands.push(operand.multiValue);
+					isMultiValueOperand.push(!!operand.isMultiValueOperand);
 				});
 
 				// Invoke the appropriate filteroperator module
@@ -280,6 +303,8 @@ exports.compileFilter = function(filterString) {
 							operator: operator.operator,
 							operand: operands.length > 0 ? operands[0] : undefined,
 							operands: operands,
+							multiValueOperands: multiValueOperands,
+							isMultiValueOperand: isMultiValueOperand,
 							prefix: operator.prefix,
 							suffix: operator.suffix,
 							suffixes: operator.suffixes,
@@ -319,6 +344,8 @@ exports.compileFilter = function(filterString) {
 					return filterRunPrefixes["and"](operationSubFunction, options);
 				case "~": // This operation is unioned into the result only if the main result so far is empty
 					return filterRunPrefixes["else"](operationSubFunction, options);
+				case "=>": // This operation is applied to the main results so far, and the results are assigned to a variable
+					return filterRunPrefixes["let"](operationSubFunction, options);
 				default: 
 					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
 						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
@@ -345,7 +372,13 @@ exports.compileFilter = function(filterString) {
 		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
 		if(self.filterRecursionCount < MAX_FILTER_DEPTH) {
 			$tw.utils.each(operationFunctions,function(operationFunction) {
-				operationFunction(results,source,widget);
+				var operationResult = operationFunction(results,source,widget);
+				if(operationResult) {
+					if(operationResult.variables) {
+						// If the filter run prefix has returned variables, create a new fake widget with those variables
+						widget = widget.makeFakeWidgetWithVariables(operationResult.variables);
+					}
+				}
 			});
 		} else {
 			results.push("/**-- Excessive filter recursion --**/");
