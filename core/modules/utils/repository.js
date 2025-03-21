@@ -7,9 +7,6 @@ Utilities for working with the TiddlyWiki repository file structure
 
 \*/
 (function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

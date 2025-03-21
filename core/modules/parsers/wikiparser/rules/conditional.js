@@ -11,9 +11,6 @@ This is a <%if [{something}] %>Elephant<%elseif [{else}] %>Pelican<%else%>Crocod
 
 \*/
 (function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "conditional";

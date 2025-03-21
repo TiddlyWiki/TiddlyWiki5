@@ -6,10 +6,7 @@ module-type: widget
 Transclude widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 var sliceSeparator = "::";
 var sectionSeparator = "##";
@@ -191,5 +188,3 @@ TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.classictransclude = TranscludeWidget;
-
-})();

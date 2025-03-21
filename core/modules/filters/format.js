@@ -4,10 +4,7 @@ type: application/javascript
 module-type: filteroperator
 Filter operator for formatting strings
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var formatFilterOperators;
@@ -42,5 +39,3 @@ exports.format = function(source,operator,options) {
 		return results;
 	}
 };
-
-})();

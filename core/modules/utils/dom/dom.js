@@ -6,10 +6,7 @@ module-type: utils
 Various static DOM-related utility functions.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
@@ -395,5 +392,3 @@ exports.querySelectorAllSafe = function(selector,baseElement) {
 		console.log("Invalid selector: ",selector);
 	}
 };
-
-})();

@@ -13,10 +13,7 @@ Note that strings are converted to numbers automatically. Trailing non-digits ar
 * "12kk" converts to 12
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.negate = makeNumericBinaryOperator(
@@ -243,5 +240,3 @@ function makeNumericArrayOperator(fnCalc) {
 		return results;
 	};
 };
-
-})();

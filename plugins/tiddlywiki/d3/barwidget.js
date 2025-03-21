@@ -6,10 +6,7 @@ module-type: widget
 A widget for displaying stacked or grouped bar charts. Derived from http://bl.ocks.org/mbostock/3943967
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
@@ -200,5 +197,3 @@ BarWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.d3bar = BarWidget;
-
-})();

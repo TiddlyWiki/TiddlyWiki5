@@ -6,10 +6,7 @@ module-type: widget
 Range widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -200,5 +197,3 @@ RangeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.range = RangeWidget;
-
-})();

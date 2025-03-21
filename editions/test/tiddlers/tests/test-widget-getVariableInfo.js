@@ -7,9 +7,6 @@ Tests the wikitext rendering pipeline end-to-end. We also need tests that indivi
 
 \*/
 (function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Widget module", function() {
