@@ -6,10 +6,7 @@ module-type: widget
 Sub-widget used by the transclude widget for specifying values for slots within transcluded content. It doesn't do anything by itself because the transclude widget only ever deals with the parse tree nodes, and doesn't instantiate the widget itself
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -29,6 +26,3 @@ FillWidget.prototype.execute = function() {
 };
 
 exports.fill = FillWidget;
-
-})();
-	

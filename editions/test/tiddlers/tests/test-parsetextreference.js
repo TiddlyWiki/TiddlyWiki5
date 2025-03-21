@@ -6,10 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests for source attribute in parser returned from wiki.parseTextReference
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Wiki.parseTextReference tests", function() {
@@ -129,4 +126,3 @@ describe("Wiki.parseTextReference tests", function() {
 
 });
 
-})();

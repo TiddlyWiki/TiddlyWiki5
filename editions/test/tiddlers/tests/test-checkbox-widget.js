@@ -6,7 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the checkbox widget thoroughly.
 
 \*/
-(function(){
+
 
     /*jslint node: true, browser: true */
     /*global $tw: false */
@@ -575,5 +575,4 @@ Tests the checkbox widget thoroughly.
     
     });
     
-})();
     

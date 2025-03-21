@@ -6,10 +6,7 @@ module-type: widget
 Navigator widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var IMPORT_TITLE = "$:/Import";
@@ -639,5 +636,3 @@ NavigatorWidget.prototype.handleUnfoldAllTiddlersEvent = function(event) {
 };
 
 exports.navigator = NavigatorWidget;
-
-})();

@@ -6,12 +6,10 @@ module-type: utils
 Provides CSS.escape() functionality.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false, window: false */
 "use strict";
 
+// TODO -- resolve this construction
 exports.escapeCSS = (function() {
 	// use browser's native CSS.escape() function if available
 	if ($tw.browser && window.CSS && window.CSS.escape) {
@@ -99,6 +97,4 @@ exports.escapeCSS = (function() {
 		}
 		return result;
 	};
-})();
-
 })();

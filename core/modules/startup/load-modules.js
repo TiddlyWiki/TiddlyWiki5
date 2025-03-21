@@ -6,10 +6,7 @@ module-type: startup
 Load core modules
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -62,5 +59,3 @@ exports.startup = function() {
 	// Kick off the background action dispatcher
 	$tw.backgroundActionDispatcher = new $tw.BackgroundActionDispatcher($tw.filterTracker,$tw.wiki);
 };
-
-})();

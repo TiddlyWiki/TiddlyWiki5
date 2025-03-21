@@ -6,10 +6,7 @@ module-type: macro
 Macro to choose which of two colours has the highest contrast with a base colour
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -52,5 +49,3 @@ exports.run = function(target,fallbackTarget,colourA,colourB) {
 		bContrast = rgbColourB.contrast(rgbTarget,"DeltaPhi");
 	return aContrast > bContrast ? colourA : colourB;
 };
-
-})();
