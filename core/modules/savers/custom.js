@@ -9,10 +9,7 @@ on the parent window (of an iframe). If present, the saver must define
 and the saver may define
 	priority: number
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var findSaver = function(window) {
@@ -57,4 +54,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new CustomSaver(wiki);
 };
-})();

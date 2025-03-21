@@ -6,10 +6,7 @@ module-type: widget
 Action widget to create a new tiddler with a unique name and specified fields.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw:false, require:false, exports:false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -109,5 +106,3 @@ CreateTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 exports["action-createtiddler"] = CreateTiddlerWidget;
-
-})();

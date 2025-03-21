@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operators for open location code conversions
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var openlocationcode = require("$:/plugins/tiddlywiki/geospatial/openlocationcode.js"),
@@ -51,5 +48,3 @@ exports["olc-encode"] = function(source,operator,options) {
 	}
 	return [olc];
 };
-
-})();

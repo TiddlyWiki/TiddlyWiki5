@@ -232,10 +232,10 @@ $tw.utils.error = function(err) {
 				var link = dm("a"),
 					text = JSON.stringify(tiddlers);
 				if(Blob !== undefined) {
-					var blob = new Blob([text], {type: "text/html"});
+					var blob = new Blob([text], {type: "application/json"});
 					link.setAttribute("href", URL.createObjectURL(blob));
 				} else {
-					link.setAttribute("href","data:text/html," + encodeURIComponent(text));
+					link.setAttribute("href","data:application/json," + encodeURIComponent(text));
 				}
 				link.setAttribute("download","emergency-tiddlers-" + (new Date()) + ".json");
 				document.body.appendChild(link);
@@ -1902,8 +1902,16 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 		extensionInfo = $tw.utils.getFileExtensionInfo(ext),
 		type = extensionInfo ? extensionInfo.type : null,
 		typeInfo = type ? $tw.config.contentTypeInfo[type] : null,
-		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8"),
-		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
+		fileSize = fs.statSync(filepath).size,
+		data;
+	if(fileSize > $tw.config.maxEditFileSize) {
+		data = "File " + filepath + "not loaded because it is too large";
+		console.log("Warning: " + data);
+		ext = ".txt";
+	} else {
+		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8");
+	}
+	var tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
 		metadata = $tw.loadMetadataForFile(filepath);
 	if(metadata) {
 		if(type === "application/json") {

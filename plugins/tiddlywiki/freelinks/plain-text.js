@@ -6,10 +6,7 @@ module-type: widget
 A copy of the core text widget under a different name
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -58,5 +55,3 @@ PlainTextNodeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["plain-text"] = PlainTextNodeWidget;
-
-})();

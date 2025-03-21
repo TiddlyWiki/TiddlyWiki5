@@ -6,10 +6,7 @@ module-type: isfilteroperator
 Filter function for [is[draft]] analagous to [has[draft.of]]
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -32,5 +29,3 @@ exports.draft = function(source,prefix,options) {
 	}
 	return results;
 };
-
-})();

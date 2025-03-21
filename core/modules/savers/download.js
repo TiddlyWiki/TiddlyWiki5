@@ -6,10 +6,7 @@ module-type: saver
 Handles saving changes via HTML5's download APIs
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -22,6 +19,7 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 	options = options || {};
 	// Get the current filename
 	var filename = options.variables.filename;
+	var type = options.variables.type;
 	if(!filename) {
 		var p = document.location.pathname.lastIndexOf("/");
 		if(p !== -1) {
@@ -32,13 +30,16 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 	if(!filename) {
 		filename = "tiddlywiki.html";
 	}
+	if(!type) {
+		type = "text/html";
+	}
 	// Set up the link
 	var link = document.createElement("a");
 	if(Blob !== undefined) {
-		var blob = new Blob([text], {type: "text/html"});
+		var blob = new Blob([text], {type: type});
 		link.setAttribute("href", URL.createObjectURL(blob));
 	} else {
-		link.setAttribute("href","data:text/html," + encodeURIComponent(text));
+		link.setAttribute("href","data:" + type + "," + encodeURIComponent(text));
 	}
 	link.setAttribute("download",filename);
 	document.body.appendChild(link);
@@ -80,5 +81,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new DownloadSaver(wiki);
 };
-
-})();

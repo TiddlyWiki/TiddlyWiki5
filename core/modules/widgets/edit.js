@@ -6,10 +6,7 @@ module-type: widget
 Edit widget is a meta-widget chooses the appropriate actual editting widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -90,5 +87,3 @@ EditWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.edit = EditWidget;
-
-})();
