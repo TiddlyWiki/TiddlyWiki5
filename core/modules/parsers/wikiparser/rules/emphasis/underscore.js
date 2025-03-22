@@ -43,3 +43,7 @@ exports.parse = function() {
 		children: tree
 	}];
 };
+
+exports.serialize = function(tree,serialize) {
+	return "__" + serialize(tree.children) + "__";
+};

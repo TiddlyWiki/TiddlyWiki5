@@ -29,7 +29,7 @@ exports.findNextMatch = function(startPos) {
 			var c = this.parser.source.charAt(nextCall.end);
 			// Ensure EOL after parsed macro
 			// If we didn't need to support IE, we'd just use /(?:\r?\n|$)/ym
-			if ((c === "") || (c === "\n") || ((c === "\r") && this.parser.source.charAt(nextCall.end+1) === "\n")) {
+			if((c === "") || (c === "\n") || ((c === "\r") && this.parser.source.charAt(nextCall.end+1) === "\n")) {
 				this.nextCall = nextCall;
 				return nextStart;
 			}
@@ -48,4 +48,25 @@ exports.parse = function() {
 	this.nextCall = null;
 	this.parser.pos = call.end;
 	return [call];
+};
+
+/*
+Serialize a macro call node to wikitext
+*/
+exports.serialize = function (node) {
+	var result = "<<";
+	// Macro name
+	if(node.attributes && node.attributes["$variable"]) {
+		result += node.attributes["$variable"].value;
+	}
+	// Append ordered arguments if any
+	if(node.orderedAttributes) {
+		node.orderedAttributes.forEach(function (attribute) {
+			if(attribute.name !== "$variable") {
+				result += " " + $tw.utils.serializeAttribute(attribute,{assignmentSymbol:":"});
+			}
+		});
+	}
+	result += ">>\n\n";
+	return result;
 };
