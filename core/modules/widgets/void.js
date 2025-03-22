@@ -6,10 +6,7 @@ module-type: widget
 Void widget that is not intended for render. It still renders all its children.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -50,5 +47,3 @@ VoidNodeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.void = VoidNodeWidget;
-
-})();
