@@ -13,4 +13,4 @@ Out: <<hello>>
 +
 title: ExpectedResult
 
-<p>Out:  hello \end</p>
+<p dir="auto">Out:  hello \end</p>

@@ -20,6 +20,6 @@ This is a sentence
 +
 title: ExpectedResult
 
-<p>This is a sentence
+<p dir="auto">This is a sentence
 [This is a sentence]
 [This is a sentence    ]</p>

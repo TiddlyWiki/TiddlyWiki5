@@ -33,4 +33,4 @@ $param$ with a ''buffalo''
 +
 title: ExpectedResult
 
-<p>Going to lunch with a ''buffalo''</p><p>Going to breakfastwith a<strong>buffalo</strong></p><p>Going to dinner with a <strong>buffalo</strong></p>Going to lunch with a ''buffalo''Going to breakfastwith abuffaloGoing to dinner with a buffalo
+<p dir="auto">Going to lunch with a ''buffalo''</p><p dir="auto">Going to breakfastwith a<strong>buffalo</strong></p><p dir="auto">Going to dinner with a <strong>buffalo</strong></p>Going to lunch with a ''buffalo''Going to breakfastwith abuffaloGoing to dinner with a buffalo

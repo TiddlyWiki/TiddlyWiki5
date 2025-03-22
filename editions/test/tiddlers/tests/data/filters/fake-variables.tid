@@ -7,21 +7,21 @@ title: Output
 
 \whitespace trim
 <$list variable="var" filter="[[existing variable should have output]] :filter[[..currentTiddler]is[variable]]">
-<p><<var>></p>
+<p dir="auto"><<var>></p>
 </$list>
 
 <$list variable="var" filter="[[non-existing variable should not have output]] :filter[[nonExistingVariable]is[variable]]">
-<p><<var>></p>
+<p dir="auto"><<var>></p>
 </$list>
 
 <$list variable="var" filter="[[existing variable negated should not have output]] :filter[[..currentTiddler]!is[variable]]">
-<p><<var>></p>
+<p dir="auto"><<var>></p>
 </$list>
 
 <$list variable="var" filter="[[non-existing variable negated should have output]] :filter[[nonExistingVariable]!is[variable]]">
-<p><<var>></p>
+<p dir="auto"><<var>></p>
 </$list>
 +
 title: ExpectedResult
 
-<p><p>existing variable should have output</p></p><p></p><p></p><p><p>non-existing variable negated should have output</p></p>
+<p dir="auto"><p dir="auto">existing variable should have output</p></p><p dir="auto"></p><p dir="auto"></p><p dir="auto"><p dir="auto">non-existing variable negated should have output</p></p>
