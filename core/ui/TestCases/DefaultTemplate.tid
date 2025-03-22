@@ -103,7 +103,8 @@ code-body: yes
 -Description
 -Narrative
 -[[$:/temp/testcase/draft-title]]
--[has[plugin-type]]
+-[[$:/status/RequireReloadDueToPluginChange]]
+-[[$:/core]]
 -[prefix<tf.state>]
 -[prefix[$:/state/popup/export]]
 -[prefix[$:/HistoryList]]

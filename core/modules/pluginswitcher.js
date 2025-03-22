@@ -35,6 +35,7 @@ function PluginSwitcher(options) {
 }
 
 PluginSwitcher.prototype.switchPlugins = function() {
+	var self = this;
 	// Get the name of the current theme
 	var selectedPluginTitle = this.wiki.getTiddlerText(this.controllerTitle);
 	// If it doesn't exist, then fallback to one of the default themes
@@ -49,22 +50,51 @@ PluginSwitcher.prototype.switchPlugins = function() {
 			var tiddler = self.wiki.getTiddler(title);
 			if(tiddler && tiddler.isPlugin() && plugins.indexOf(title) === -1) {
 				plugins.push(title);
-				var pluginInfo = $tw.utils.parseJSONSafe(self.wiki.getTiddlerText(title)),
-					dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
+				var dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
 				$tw.utils.each(dependents,function(title) {
 					accumulatePlugin(title);
 				});
 			}
 		};
 	accumulatePlugin(selectedPluginTitle);
+	var selectedPluginTiddler = this.wiki.getTiddler(selectedPluginTitle);
+	// Accumulate any other plugins of the same type with the same name
+	this.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
+		if(tiddler.isPlugin() && tiddler.fields["plugin-type"] === self.pluginType && tiddler.fields.name === selectedPluginTiddler.fields.name) {
+			accumulatePlugin(title);
+		}
+	});
 	// Read the plugin info for the incoming plugins
-	var changes = $tw.wiki.readPluginInfo(plugins);
-	// Unregister any existing theme tiddlers
-	var unregisteredTiddlers = $tw.wiki.unregisterPluginTiddlers(this.pluginType);
-	// Register any new theme tiddlers
-	var registeredTiddlers = $tw.wiki.registerPluginTiddlers(this.pluginType,plugins);
-	// Unpack the current theme tiddlers
-	$tw.wiki.unpackPluginTiddlers();
+	var changedPluginInfo = this.wiki.readPluginInfo(plugins);
+	// Collect the shadow tiddlers of any deleted plugins
+	var changedShadowTiddlers = {};
+	$tw.utils.each(changedPluginInfo.deletedPlugins,function(pluginTitle) {
+		var contents = changedPluginInfo.deletedPluginContents[pluginTitle];
+		if(contents && contents.tiddlers) {
+			$tw.utils.each(Object.keys(contents.tiddlers),function(title) {
+				changedShadowTiddlers[title] = true;
+			});
+		}
+	});
+	// Collect the shadow tiddlers of any modified plugins
+	$tw.utils.each(changedPluginInfo.modifiedPlugins,function(pluginTitle) {
+		var pluginInfo = self.wiki.getPluginInfo(pluginTitle);
+		if(pluginInfo && pluginInfo.tiddlers) {
+			$tw.utils.each(Object.keys(pluginInfo.tiddlers),function(title) {
+				changedShadowTiddlers[title] = false;
+			});
+		}
+	});
+	// Unregister any existing theme/language tiddlers
+	var unregisteredTiddlers = this.wiki.unregisterPluginTiddlers(this.pluginType);
+	// Register any new theme/language tiddlers
+	var registeredTiddlers = this.wiki.registerPluginTiddlers(this.pluginType,plugins);
+	// Unpack the current theme/language tiddlers
+	this.wiki.unpackPluginTiddlers();
+	// Queue change events for the changed shadow tiddlers
+	$tw.utils.each(changedShadowTiddlers,function(status,title) {
+		self.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title], true);
+	});
 	// Call the switch handler
 	if(this.onSwitch) {
 		this.onSwitch(plugins);
