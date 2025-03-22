@@ -11,10 +11,7 @@ Wiki text inline rule for code runs. For example:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "codeinline";
@@ -58,5 +55,3 @@ exports.parse = function() {
 exports.serialize = function(tree,serialize) {
 	return "`" + serialize(tree.children) + "`";
 }
-
-})();

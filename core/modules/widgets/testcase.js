@@ -7,9 +7,6 @@ Widget to display a test case
 
 \*/
 (function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -33,6 +30,7 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create container DOM node
 	var domNode = this.document.createElement("div");
+	domNode.setAttribute("class", "tc-test-case " + this.testcaseClass);
 	this.domNodes.push(domNode);
 	parent.insertBefore(domNode,nextSibling);
 	// Render the children into a hidden DOM node
@@ -145,6 +143,7 @@ TestCaseWidget.prototype.execute = function() {
 	this.testcaseTestActions = this.getAttribute("testActions");
 	this.testcaseTestExpectedResult = this.getAttribute("testExpectedResult");
 	this.testcaseHideIfPass = this.getAttribute("testHideIfPass");
+	this.testcaseClass = this.getAttribute("class","");
 };
 
 /*

@@ -22,10 +22,7 @@ $$$
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -104,5 +101,3 @@ exports.serialize = function (tree,serialize) {
 	}
 	return "";
 };
-
-})();

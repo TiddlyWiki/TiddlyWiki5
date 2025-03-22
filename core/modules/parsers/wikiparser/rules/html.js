@@ -17,10 +17,7 @@ This is a widget invocation
 }}}
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "html";
@@ -215,5 +212,3 @@ exports.serialize = function(tree,serialize) {
 	}
 	return result;
 };
-
-})();

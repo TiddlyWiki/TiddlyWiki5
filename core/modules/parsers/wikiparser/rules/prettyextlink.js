@@ -11,10 +11,7 @@ Wiki text inline rule for external links. For example:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "prettyextlink";
@@ -122,5 +119,3 @@ exports.serialize = function(tree,serialize) {
 	var url = tree.attributes.href.value;
 	return "[ext[" + (tooltip !== url ? tooltip + "|" : "") + url + "]]";
 };
-
-})();

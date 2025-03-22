@@ -10,10 +10,7 @@ Wiki rule for macro calls
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "macrocallinline";
@@ -54,5 +51,3 @@ exports.serialize = function (tree,serialize) {
 	var result = macrocallblock.serialize(tree,serialize);
 	return result.trimEnd();
 };
-
-})();

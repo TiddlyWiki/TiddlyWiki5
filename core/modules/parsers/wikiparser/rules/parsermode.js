@@ -11,10 +11,7 @@ Wiki pragma rule for parser mode specifications
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "parsermode";
@@ -75,5 +72,3 @@ exports.serialize = function(tree,serialize) {
 	var mode = tree.parseAsInline ? "inline" : "block";
 	return "\\parsermode " + mode + "\n\n" + serialize(tree.children);
 };
-
-})();

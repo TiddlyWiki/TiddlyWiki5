@@ -1,0 +1,34 @@
+created: 20230608121519758
+modified: 20241120111032165
+original-modified: 20230608123444591
+tags: [[How to apply custom styles]]
+title: Custom tag pill styles
+ja-title: タグピルのカスタムスタイル
+type: text/vnd.tiddlywiki
+
+! 属性: data-tag-title
+
+<<.from-version "5.2.0">> この属性<<.attr data-tag-title>>は、Tiddlerの表示用テンプレートに表示されるタグピルに追加されました。
+
+<<.from-version "5.3.0">> この属性は、標準の~TiddlyWiki UIに表示されるすべてのタグピルに追加されました。特に、編集用テンプレートのタグリスト、タグピッカーのドロップダウン、右側のサイドバー -> 詳しく -> タグ別タブ、そして、$:/TagManagerに追加されています
+
+HTML属性<<.attr data-tag-title>>には、タグピルに表示されるタグタイトルのみが含まれます。これを使用して、タグピルのスタイルを設定できます。
+
+Tiddler全体にスタイルを設定したい場合は、[[data-tiddler-titleによるカスタムスタイル|Custom styles by data-tiddler-title]]を参照してください。
+
+!! 例
+
+新しい `$:/tags/Stylesheet`タグ付きTiddlerで次のCSSを使用すると、`#`で始まるすべてのタグに新しい境界線の丸角半径が設定されます。そのため、これらのタグはデフォルトのタグとは対照的に目立ちます。
+
+既存のTW UI内のすべてのタグピルを捕捉するには、既存のUI構造のため、''両方のCSSルールを定義する必要があります''。
+
+```
+[data-tag-title^="#"] .tc-tag-label,
+[data-tag-title^="#"].tc-tag-label {
+   border-radius: 3px;
+}
+```
+
+!! さらに可能な設定
+
+{{Attribute Selectors}}

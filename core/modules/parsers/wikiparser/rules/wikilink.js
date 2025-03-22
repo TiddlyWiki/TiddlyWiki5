@@ -14,10 +14,7 @@ AnotherLink
 Precede a camel case word with `~` to prevent it from being recognised as a link.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "wikilink";
@@ -72,5 +69,3 @@ exports.serialize = function(tree,serialize) {
 	serialized += tree.attributes ? tree.attributes.to.value : tree.text;
 	return serialized;
 };
-
-})();

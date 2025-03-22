@@ -1,0 +1,16 @@
+created: 20150403104722092
+modified: 20241201111442269
+original-modified: 20150403105247619
+tags: Examples
+title: PESpot Lesson Planner by Patrick Detzner
+ja-title: Patrick DetznerのPESpotレッスンプランナー
+type: text/vnd.tiddlywiki
+url: http://pespot.tiddlyspot.com
+
+TiddlyWikiで構築されたレッスンプランニングシステム。
+
+{{!!url}}
+
+<<<
+私は、レッスンプラン情報を入力して保存し、実際のレッスンプラン文書の作成に伴う面倒な作業の一部を容易化/自動化するプログラムを構築しました。
+<<<

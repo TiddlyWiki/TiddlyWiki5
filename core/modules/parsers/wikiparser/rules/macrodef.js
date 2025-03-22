@@ -12,10 +12,7 @@ definition text, including $param$ markers
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "macrodef";
@@ -102,5 +99,3 @@ exports.serialize = function(tree,serialize) {
 	}
 	return "\\define " + name + "(" + params + ")\n" + definition + "\n\\end\n\n" + serialize(tree.children);
 };
-
-})();

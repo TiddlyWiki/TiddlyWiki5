@@ -10,10 +10,7 @@ Wiki rule for block macro calls
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "macrocallblock";
@@ -73,5 +70,3 @@ exports.serialize = function (node) {
 	result += ">>\n\n";
 	return result;
 };
-
-})();

@@ -6,10 +6,7 @@ module-type: wikirule
 Wiki text block rule for headings
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "heading";
@@ -53,5 +50,3 @@ exports.serialize = function(tree,serialize) {
 	var headingText = serialize(tree.children);
 	return Array(headingLevel + 1).join("!") + (classes ? "." + classes : "") + " " + headingText + "\n\n";
 };
-
-})();

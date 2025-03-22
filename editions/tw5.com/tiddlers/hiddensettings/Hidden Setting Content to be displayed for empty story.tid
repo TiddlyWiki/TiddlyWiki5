@@ -1,0 +1,12 @@
+created: 20240811052854726
+modified: 20240811053649554
+tags: [[Hidden Settings]]
+title: Hidden Setting: Content to be displayed for empty story
+
+To display content when the story is empty, create $:/config/EmptyStoryMessage and enter the desired contents.
+
+The following would show the GettingStarted tiddler when all others are closed.
+
+```
+{{GettingStarted||$:/core/ui/ViewTemplate}}
+```

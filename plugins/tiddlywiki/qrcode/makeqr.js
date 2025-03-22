@@ -6,10 +6,7 @@ module-type: macro
 Macro to convert a string into a QR Code
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -37,7 +34,7 @@ exports.run = function(text,size,errorCorrectLevel,fallback) {
 	var result;
 	try {
 		result = generateQrCode(text,{size: size, errorCorrectLevel: errorCorrectLevel});
-	} catch (ex) {
+	} catch(ex) {
 		console.log("makeqr error: " + ex);
 		result = fallback || ("data:image/svg+xml," + encodeURI(QRCODE_GENERATION_ERROR_PREFIX + ex + QRCODE_GENERATION_ERROR_SUFFIX));
 	}
@@ -54,7 +51,7 @@ function generateQrCode(text,options) {
 		qr = qrcode(typeNumber,errorCorrectLevel);
 		qr.addData(text);
 		qr.make();
-	} catch (e) {
+	} catch(e) {
 		if(typeNumber >= 40) {
 			throw new Error("Text too long to encode");
 		} else {
@@ -69,6 +66,3 @@ function generateQrCode(text,options) {
 		margin = parseInt((size - qr.getModuleCount() * cellsize) / 2);
 	return qr.createImgTag(cellsize, margin, size);
 }
-
-
-})();

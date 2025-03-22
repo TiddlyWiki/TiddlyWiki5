@@ -17,10 +17,7 @@ This wikiparser can be modified using the rules eg:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "subscript";
@@ -50,5 +47,3 @@ exports.parse = function() {
 exports.serialize = function(tree,serialize) {
 	return ",," + serialize(tree.children) + ",,";
 };
-
-})();

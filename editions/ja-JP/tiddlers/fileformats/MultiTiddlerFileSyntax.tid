@@ -1,0 +1,31 @@
+created: 20150621181334837
+modified: 20250124111732489
+original-modified: 20150621181400844
+tags: [[TiddlyWiki on Node.js]]
+title: MultiTiddlerFileSyntax
+ja-title: マルチTiddlerファイル構文
+type: text/vnd.tiddlywiki
+
+!!! [[マルチTiddlerファイル|MultiTiddlerFiles]]
+
+<$railroad text="""
+{<"ヘッダー行">} "空行" {(<"Tiddler記述行"> | <"コメント行">)}
+"""/>
+
+!!! ヘッダー行
+
+<$railroad text="""
+<"識別子"> ":" {"ホワイトスペース"} <"値"> "改行"
+"""/>
+
+!!! Tiddler記述行
+
+<$railroad text="""
+<"ファイルパス"> ":" {"ホワイトスペース"} <"Tiddlerタイトル"> "改行"
+"""/>
+
+!!! コメント行
+
+<$railroad text="""
+"#" {("テキスト" | "ホワイトスペース")} "改行"
+"""/>

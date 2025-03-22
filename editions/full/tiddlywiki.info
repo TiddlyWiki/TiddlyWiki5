@@ -2,14 +2,11 @@
 	"description": "Full edition, containing all languages, themes and plugins",
 	"plugins": [
 		"tiddlywiki/bibtex",
-		"tiddlywiki/blog",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/browser-storage",
-		"tiddlywiki/cecily",
 		"tiddlywiki/classictools",
 		"tiddlywiki/codemirror",
 		"tiddlywiki/comments",
-		"tiddlywiki/d3",
 		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/help",
 		"tiddlywiki/highlight",
@@ -18,7 +15,6 @@
 		"tiddlywiki/jszip",
 		"tiddlywiki/katex",
 		"tiddlywiki/markdown",
-		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/powered-by-tiddlywiki",
 		"tiddlywiki/qrcode",
 		"tiddlywiki/railroad",
@@ -37,6 +33,7 @@
 		"de-AT",
 		"de-DE",
 		"el-GR",
+		"en-PH",
 		"en-US",
 		"es-ES",
 		"fa-IR",
@@ -50,6 +47,7 @@
 		"mk-MK",
 		"nl-NL",
 		"pa-IN",
+		"pl-PL",
 		"pt-PT",
 		"pt-BR",
 		"ru-RU",
@@ -57,7 +55,8 @@
 		"sl-SI",
 		"sv-SE",
 		"zh-Hans",
-		"zh-Hant"
+		"zh-Hant",
+		"zh-HK"
 	],
 	"themes": [
 		"tiddlywiki/centralised",

@@ -2,7 +2,7 @@
 	"title": "$:/languages/mk-MK",
 	"name": "mk-MK",
 	"plugin-type": "language",
-	"description": "Macedonian (North Macedonia)",
+	"description": "Македонски (Македонија)",
 	"author": "Nikola Dio Petkovski",
 	"core-version": ">=5.1.4"
 }

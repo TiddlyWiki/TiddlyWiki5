@@ -1,0 +1,51 @@
+created: 20161209172820513
+modified: 20241020104954951
+original-modified: 20161220161653258
+tags: Learning
+title: Formatting List Results as Tables with CSS - Specified Columns Methods
+ja-title: CSSを使用してリスト結果を表フォーマットで出力する - 固定列メソッド
+type: text/vnd.tiddlywiki
+
+``<$list>``ウィジェットの結果を単純な1つのリストではなく、複数列の形式でフォーマットしたい場合があります。この方法では、~CSSを使用してリストを列として設定し、必要な列の数がわかっていることを前提としています。ここでの方法は、テーブルに含める列の数を反映するスタイルを作成し、そのスタイルを結果のリスト出力に適用することです
+
+他のテーブル作成テクニックについては、以下も参照してください: 
+
+* [[CSSを使用してリスト結果を表フォーマットで出力する - 可変列メソッド|Formatting List Results as Tables with CSS - Variable Column Method]]
+* [[リスト結果を表フォーマットで出力する(CSS無し)|Formatting List Results as Tables (no CSS)]]
+
+
+!!! 1) `$:/tags/Stylesheet`でタグ付けされた列に対して、以下を含むTiddlerを作成します:
+
+```
+/* FOUR COLUMN MODE */
+.fourcolumns {
+   display:block;
+   column-count:4;
+   column-gap:1em;
+   -moz-column-count:4;
+   -moz-column-gap:1em;
+   -webkit-column-count: 4;
+   -webkit-column-gap:1em;
+}
+```
+
+列数を示す値がさまざまな場所に必要なことに注意してください
+
+!!! 2) 次に、出力を次のようにフォーマットします: 
+
+```
+@@.fourcolumns
+<$list filter="[tag[Filter Operators]]" variable="foo">
+<<foo>><br>
+</$list>
+@@
+```
+
+!! フィルター演算子の一部のリストを示す例
+
+@@.fourcolumns
+<$list filter="[tag[Filter Operators]limit[24]]" variable="foo">
+<<foo>><br>
+</$list>
+@@
+

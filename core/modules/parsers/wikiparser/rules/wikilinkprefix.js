@@ -10,10 +10,7 @@ Wiki text inline rule for suppressed wiki links. For example:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "wikilinkprefix";
@@ -42,5 +39,3 @@ exports.serialize = function(tree,serialize) {
 	serialized += tree.text;
 	return serialized;
 };
-
-})();

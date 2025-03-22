@@ -14,10 +14,7 @@ Wiki text rule for block-level filtered transclusion. For example:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "filteredtranscludeblock";
@@ -85,5 +82,3 @@ exports.serialize = function(tree,serialize) {
 	if(tree.attributes.itemClass) serialized += "." + tree.attributes.itemClass.value.split(" ").join(".");
 	return serialized + "\n\n";
 };
-
-})();

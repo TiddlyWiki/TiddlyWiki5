@@ -26,6 +26,8 @@ Tags/ClearInput/Caption: 清除输入
 Tags/ClearInput/Hint: 清除标签输入
 Tags/Dropdown/Caption: 标签清单
 Tags/Dropdown/Hint: 显示标签清单
+Tags/EmptyMessage: 找不到标签
+Tags/EmptyMessage/System: 找不到系统标签
 Title/BadCharacterWarning: 请注意，避免在条目名称中使用这些字符：<<bad-chars>>
 Title/Exists/Prompt: 目标条目已经存在
 Title/Relink/Prompt: 将在其他条目的 //tags// 和 //list// 字段中的 ''<$text text=<<fromTitle>>/>'' 改为 ''<$text text=<<toTitle>>/>''

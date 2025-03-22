@@ -6,10 +6,7 @@ module-type: startup
 Setup the root widget and the core root widget handlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -52,7 +49,9 @@ exports.startup = function() {
 			basicAuthUsername: params["basic-auth-username"],
 			basicAuthUsernameFromStore: params["basic-auth-username-from-store"],
 			basicAuthPassword: params["basic-auth-password"],
-			basicAuthPasswordFromStore: params["basic-auth-password-from-store"]
+			basicAuthPasswordFromStore: params["basic-auth-password-from-store"],
+			bearerAuthToken: params["bearer-auth-token"],
+			bearerAuthTokenFromStore: params["bearer-auth-token-from-store"]
 		});
 	});
 	$tw.rootWidget.addEventListener("tm-http-cancel-all-requests",function(event) {
@@ -75,8 +74,9 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-copy-to-clipboard",function(event) {
 		$tw.utils.copyToClipboard(event.param,{
 			successNotification: event.paramObject && event.paramObject.successNotification,
-			failureNotification: event.paramObject && event.paramObject.failureNotification
-		});
+			failureNotification: event.paramObject && event.paramObject.failureNotification,
+			plainText: event.paramObject && event.paramObject.plainText
+		},event.paramObject && event.paramObject.type);
 	});
 	// Install the tm-focus-selector message
 	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
@@ -125,5 +125,3 @@ exports.startup = function() {
 		});
 	}
 };
-
-})();

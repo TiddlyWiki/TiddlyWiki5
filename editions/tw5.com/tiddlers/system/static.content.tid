@@ -2,13 +2,17 @@ title: $:/core/templates/static.content
 
 \define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
 
+<%if [<savingEmpty>match[yes]] %>
+
+<$transclude tiddler="$:/core" subtiddler="$:/core/templates/static.content"/>
+
+<%else%>
+
 <!-- Mastodon verification -->
 
-<a rel="me" href="https://fosstodon.org/@TiddlyWiki">Mastodon</a>
+<a rel="me" href="https://fosstodon.org/@TiddlyWiki">~TiddlyWiki on Mastodon</a>
 
 <!-- For Google, and people without JavaScript-->
-
-<$reveal default="yes" text=<<savingEmpty>> type="nomatch">
 
 It looks like this browser doesn't run JavaScript. You can use one of these static HTML versions to browse the same content:
 
@@ -19,4 +23,4 @@ It looks like this browser doesn't run JavaScript. You can use one of these stat
 
 {{TiddlyWiki}}
 
-</$reveal>
+<%endif%>

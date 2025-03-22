@@ -6,10 +6,7 @@ module-type: allfilteroperator
 Filter function for [all[current]]
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -23,5 +20,3 @@ exports.current = function(source,prefix,options) {
 		return [];
 	}
 };
-
-})();

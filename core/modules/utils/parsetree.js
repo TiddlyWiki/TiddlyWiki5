@@ -6,10 +6,7 @@ module-type: utils
 Parse tree utility functions.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -174,5 +171,3 @@ exports.serializeParseTree = function serializeParseTree(tree,tiddlerType,option
 	}
 	return output.join("");
 };
-
-})();

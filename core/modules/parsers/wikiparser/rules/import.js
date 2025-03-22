@@ -10,10 +10,7 @@ Wiki pragma rule for importing variable definitions
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "import";
@@ -56,5 +53,3 @@ exports.serialize = function(tree,serialize) {
 	// Sibling below the pragma become children, so we append the serialized children to the end..
 	return "\\import " + filter + "\n" + serialize(tree.children);
 };
-
-})();

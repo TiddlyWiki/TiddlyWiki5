@@ -6,10 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests for the internal components of the HTML tag parser
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function FakeParser() {
@@ -262,5 +259,3 @@ describe("HTML tag new parser tests", function() {
 	});
 
 });
-
-})();

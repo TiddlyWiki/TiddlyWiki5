@@ -12,10 +12,7 @@ Wiki text inline rule for HTML comments. For example:
 Note that the syntax for comments is simplified to an opening "<!--" sequence and a closing "-->" sequence -- HTML itself implements a more complex format (see http://ostermiller.org/findhtmlcomment.html)
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "commentinline";
@@ -57,5 +54,3 @@ exports.parse = function() {
 exports.serialize = function(tree,serialize) {
 	return tree.text;
 };
-
-})();

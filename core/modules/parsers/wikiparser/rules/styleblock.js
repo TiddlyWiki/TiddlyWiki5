@@ -26,10 +26,7 @@ This is a paragraph
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "styleblock";
@@ -121,5 +118,3 @@ exports.serialize = function(tree,serialize) {
 	result += "\n@@\n\n"
 	return result;
 };
-
-})();

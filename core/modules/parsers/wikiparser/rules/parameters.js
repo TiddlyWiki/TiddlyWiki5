@@ -11,10 +11,7 @@ definition text
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "parameters";
@@ -63,5 +60,3 @@ exports.serialize = function(tree,serialize) {
 	}).join(",");
 	return "\\parameters(" + params + ")\n\n" + serialize(tree.children);
 };
-
-})();

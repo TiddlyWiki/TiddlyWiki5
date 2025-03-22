@@ -14,10 +14,7 @@ Wiki text rule for inline filtered transclusion. For example:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "filteredtranscludeinline";
@@ -75,5 +72,3 @@ exports.serialize = function(tree,serialize) {
 	var result = filteredtranscludeblock.serialize(tree,serialize);
 	return result.trimEnd();
 };
-
-})();

@@ -10,10 +10,7 @@ Wiki text block rule for rules. For example:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "horizrule";
@@ -34,5 +31,3 @@ exports.parse = function() {
 exports.serialize = function(tree,serialize) {
 	return "---\n\n";
 }
-
-})();

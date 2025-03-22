@@ -1,28 +1,20 @@
 created: 20200131144828713
-modified: 20211113011036840
+modified: 20240602160133371
 tags: ActionCreateTiddlerWidget
 title: ActionCreateTiddlerWidget Example 2
 type: text/vnd.tiddlywiki
 
-\define testCreate()
-<$action-createtiddler $basetitle={{$:/language/DefaultNewTiddlerTitle}} $overwrite="yes"/>
-\end
+<$testcase>
+<$data title=Description text="Transcluded base title"/>
+<$data title=Narrative text="""The $action-createtiddler widget in this example uses the base title defined in [[$:/language/DefaultNewTiddlerTitle]].
 
-This example will use the base title defined in [[$:/language/DefaultNewTiddlerTitle]]. 
-
-It will overwrite the tiddler, if the button is clicked several times.
-
-```
-\define testCreate()
+It will overwrite the tiddler if the button is clicked several times."""/>
+<$data $tiddler="$:/language/DefaultNewTiddlerTitle"/>
+<$data title=Output text="""\procedure testCreate()
 <$action-createtiddler $basetitle={{$:/language/DefaultNewTiddlerTitle}} $overwrite="yes"/>
 \end
 
 <$button actions=<<testCreate>> >
 Create Tiddler
-</$button>
-```
-
-<$button actions=<<testCreate>> >
-<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
-Create Tiddler
-</$button> - Clicking this button, will also open the Right sidebar: Recent tab
+</$button>"""/>
+</$testcase>

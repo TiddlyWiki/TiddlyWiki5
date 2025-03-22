@@ -13,10 +13,7 @@ Wiki text inline rule for assigning styles and classes to inline runs. For examp
 
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "styleinline";
@@ -69,5 +66,3 @@ exports.serialize = function(tree,serialize) {
 	result += " " + serialize(tree.children) + "@@";
 	return result;
 };
-
-})();

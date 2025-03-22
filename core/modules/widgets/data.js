@@ -7,9 +7,6 @@ Widget to dynamically represent one or more tiddlers
 
 \*/
 (function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -123,7 +120,6 @@ DataWidget.prototype.computeDataTiddlerValues = function() {
 		}
 	} else {
 		// Apply the item fields to each of the tiddlers
-		delete item.title; // Do not overwrite the title
 		if(Object.keys(item).length > 0) {
 			$tw.utils.each(tiddlers,function(tiddler,index) {
 				tiddlers[index] = new $tw.Tiddler(tiddler,item);

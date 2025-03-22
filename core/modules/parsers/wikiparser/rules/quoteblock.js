@@ -6,10 +6,7 @@ module-type: wikirule
 Wiki text rule for quote blocks.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "quoteblock";
@@ -87,5 +84,3 @@ exports.serialize = function (tree,serialize) {
 	}
 	return result.join("\n") + "\n\n";
 };
-
-})();

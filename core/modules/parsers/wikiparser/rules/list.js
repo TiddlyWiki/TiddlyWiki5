@@ -40,10 +40,7 @@ A CSS class can be applied to a list item as follows:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "list";
@@ -218,5 +215,3 @@ exports.serialize = function (tree,serialize) {
 	// Begin serialization from the root node, with an empty string as the initial marker prefix
 	return serializeList(tree, "") + "\n\n";
 };
-
-})();

@@ -16,10 +16,7 @@ Adds the following properties to the wiki object:
 * `globalCache` is a hashmap by cache name of cache objects that are cleared whenever any tiddler change occurs
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -141,12 +138,15 @@ This method should be called after the changes it describes have been made to th
 	title: Title of tiddler
 	isDeleted: defaults to false (meaning the tiddler has been created or modified),
 		true if the tiddler has been deleted
+	isShadow: defaults to false (meaning the change applies to the normal tiddler),
+		true if the tiddler being changed is a shadow tiddler
 */
-exports.enqueueTiddlerEvent = function(title,isDeleted) {
+exports.enqueueTiddlerEvent = function(title,isDeleted,isShadow) {
 	// Record the touch in the list of changed tiddlers
 	this.changedTiddlers = this.changedTiddlers || Object.create(null);
 	this.changedTiddlers[title] = this.changedTiddlers[title] || Object.create(null);
 	this.changedTiddlers[title][isDeleted ? "deleted" : "modified"] = true;
+	this.changedTiddlers[title][isShadow ? "shadow" : "normal"] = true;
 	// Increment the change count
 	this.changeCount = this.changeCount || Object.create(null);
 	if($tw.utils.hop(this.changeCount,title)) {
@@ -194,18 +194,24 @@ options.prefix must be a string
 */
 exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
-	var c = 0,
-		title = baseTitle,
-		template = options.template,
+	var title = baseTitle,
+		template = options.template || "",
+		// test if .startCount is a positive integer. If not set to 0
+		c = (parseInt(options.startCount,10) > 0) ? parseInt(options.startCount,10) : 0,
 		prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
+
 	if (template) {
 		// "count" is important to avoid an endless loop in while(...)!!
 		template = (/\$count:?(\d+)?\$/i.test(template)) ? template : template + "$count$";
-		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c});
+		// .formatTitleString() expects strings as input
+		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c+""});
 		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
-			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)});
+			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)+""});
 		}
 	} else {
+		if (c > 0) {
+			title = baseTitle + prefix + c;
+		}
 		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
 			title = baseTitle + prefix + (++c);
 		}
@@ -1116,6 +1122,7 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 			if(tiddler.fields.type) {
 				parserInfo.parserType = tiddler.fields.type;
 			}
+			parserInfo._canonical_uri = tiddler.fields._canonical_uri;
 		}
 	} else if(field) {
 		if(field === "title") {
@@ -1771,5 +1778,3 @@ exports.slugify = function(title,options) {
 	}
 	return slug;
 };
-
-})();

@@ -26,6 +26,7 @@ The content of the `<$range>` widget is ignored.
 |actionsStart|<<.from-version "5.1.23">> Optional, A string containing ~ActionWidgets to be triggered when the "handle" is ''clicked''. <br>The variable: ''actionValueHasChanged'' is always `no` here|
 |actionsStop|<<.from-version "5.1.23">> Optional, A string containing ~ActionWidgets to be triggered when the "handle" is ''released''. <br>The variable: ''actionValueHasChanged'' is `yes`, ''if'' the new-value is different to the start-value |
 |disabled|<<.from-version "5.1.23">> Optional, disables the range input if set to "yes". Defaults to "no"|
+|tabindex |<<.from-version "5.3.7">> Optional. Sets the `tabindex` attribute of the HTML select element to the given value |
 |data-* |<<.from-version "5.3.2">> Optional [[data attributes|https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes]] to be assigned to the `<input>` HTML element |
 |style.* |<<.from-version "5.3.2">> Optional [[CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference]] to be assigned to the `<input>` HTML element |
 

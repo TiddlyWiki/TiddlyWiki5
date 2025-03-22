@@ -6,10 +6,7 @@ module-type: wikirule
 Wiki text block rule for tables.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "table";
@@ -217,5 +214,3 @@ exports.serialize = function(tree,serialize) {
 	// Return the completed block
 	return serialized + "\n";
 };
-
-})();

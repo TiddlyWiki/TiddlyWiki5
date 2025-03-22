@@ -17,10 +17,7 @@ Not
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "hardlinebreaks";
@@ -69,5 +66,3 @@ exports.serialize = function(tree,serialize) {
 	}
 	return text + serialize(tree.children);
 };
-
-})();
