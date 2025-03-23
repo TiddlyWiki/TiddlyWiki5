@@ -1,16 +1,16 @@
 /*\
-title: $:/plugins/tiddlywiki/editorjs/ast/wikiAstToEditorJSAst.js
+title: $:/plugins/tiddlywiki/prosemirror/ast/wikiAstToProsemirrorAst.js
 type: application/javascript
 module-type: library
 
-Get the EditorJS AST from a Wiki AST
+Get the Prosemirror AST from a Wiki AST
 
 \*/
-function wikiAstToEditorJSAst(node, options) {
+function wikiAstToProsemirrorAst(node, options) {
   return convertNodes({ ...initialContext, ...options }, Array.isArray(node) ? node : [node]);
 }
 
-exports.wikiAstToEditorJSAst = wikiAstToEditorJSAst;
+exports.wikiAstToProsemirrorAst = wikiAstToProsemirrorAst;
 
 const initialContext = {
   builders,
@@ -23,21 +23,21 @@ function convertNodes(context, nodes) {
   }
 
   return nodes.reduce((accumulator, node) => {
-    return [...accumulator, ...editorJSNode(context, node)];
+    return [...accumulator, ...prosemirrorNode(context, node)];
   }, []);
 }
 
-function editorJSNode(context, node) {
+function prosemirrorNode(context, node) {
   const id = context.idCreator?.();
   const withId = (nodeToAddId) => (id === undefined ? nodeToAddId : { ...nodeToAddId, id });
   if ('rule' in node && node.rule !== undefined && node.rule in context.builders) {
     const builder = context.builders[node.rule];
     if (typeof builder === 'function') {
       // basic elements
-      const builtEditorJSNodeOrNodes = builder(context, node);
-      return Array.isArray(builtEditorJSNodeOrNodes)
-        ? builtEditorJSNodeOrNodes.map((child) => withId(child))
-        : ([withId(builtEditorJSNodeOrNodes)]);
+      const builtProsemirrorNodeOrNodes = builder(context, node);
+      return Array.isArray(builtProsemirrorNodeOrNodes)
+        ? builtProsemirrorNodeOrNodes.map((child) => withId(child))
+        : ([withId(builtProsemirrorNodeOrNodes)]);
     }
   } else if ('text' in node) {
     // text node

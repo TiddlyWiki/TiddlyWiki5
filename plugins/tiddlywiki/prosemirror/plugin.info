@@ -1,6 +1,6 @@
 {
-	"title": "$:/plugins/tiddlywiki/editorjs",
-	"name": "EditorJS Visual Editor",
+	"title": "$:/plugins/tiddlywiki/prosemirror",
+	"name": "Prosemirror Visual Editor",
 	"description": "WYSIWYG editor (What You See Is What You Get) for TiddlyWiki",
 	"list": "readme",
 	"stability": "STABILITY_1_EXPERIMENTAL"

@@ -1,0 +1,47 @@
+{
+	"tiddlers": [
+		{
+			"file": "prosemirror-model.cjs",
+			"fields": {
+				"type": "application/javascript",
+				"title": "prosemirror-model",
+				"module-type": "library"
+			}
+		},{
+			"file": "prosemirror-state.cjs",
+			"fields": {
+				"type": "application/javascript",
+				"title": "prosemirror-state",
+				"module-type": "library"
+			}
+		},{
+			"file": "prosemirror-view.cjs",
+			"fields": {
+				"type": "application/javascript",
+				"title": "prosemirror-view",
+				"module-type": "library"
+			}
+		},{
+			"file": "prosemirror-schema-list.cjs",
+			"fields": {
+				"type": "application/javascript",
+				"title": "prosemirror-schema-list",
+				"module-type": "library"
+			}
+		},{
+			"file": "prosemirror-example-setup.cjs",
+			"fields": {
+				"type": "application/javascript",
+				"title": "prosemirror-example-setup",
+				"module-type": "library"
+			}
+		},{
+			"file": "prosemirror-schema-basic.cjs",
+			"fields": {
+				"type": "application/javascript",
+				"title": "prosemirror-schema-basic",
+				"module-type": "library"
+			}
+		}
+	]
+}
