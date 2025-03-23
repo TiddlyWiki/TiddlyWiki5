@@ -1,9 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/prosemirror/widget.js
 type: application/javascript
-module-type: widget
-
-Text node widget
+module-type: library
 
 \*/
 
