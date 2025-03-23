@@ -29,11 +29,25 @@
 				"tags": "[[$:/tags/Stylesheet]]"
 			}
 		},{
+			"file": "prosemirror-flat-list.cjs",
+			"fields": {
+				"type": "application/javascript",
+				"title": "prosemirror-flat-list",
+				"module-type": "library"
+			}
+		},{
 			"file": "prosemirror-schema-list.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "prosemirror-schema-list",
 				"module-type": "library"
+			}
+		},{
+			"file": "prosemirror-flat-list.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/prosemirror/lib/prosemirror-flat-list.css",
+				"tags": "[[$:/tags/Stylesheet]]"
 			}
 		},{
 			"file": "prosemirror-example-setup.cjs",
@@ -49,108 +63,102 @@
 				"title": "prosemirror-schema-basic",
 				"module-type": "library"
 			}
-		},
-		{
+		},{
 			"file": "orderedmap.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "orderedmap",
 				"module-type": "library"
 			}
-		},
-		{
+		},{
 			"file": "prosemirror-transform.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "prosemirror-transform",
 				"module-type": "library"
 			}
-		},
-		{
+		},{
 			"file": "prosemirror-keymap.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "prosemirror-keymap",
 				"module-type": "library"
 			}
-		},
-		{
+		},{
 			"file": "prosemirror-history.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "prosemirror-history",
 				"module-type": "library"
 			}
-		},
-		{
+		},{
 			"file": "prosemirror-commands.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "prosemirror-commands",
 				"module-type": "library"
 			}
-		},
-		{
+		},{
 			"file": "prosemirror-dropcursor.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "prosemirror-dropcursor",
 				"module-type": "library"
 			}
-		},
-		{
+		},{
 			"file": "prosemirror-gapcursor.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "prosemirror-gapcursor",
 				"module-type": "library"
 			}
-		},
-		{
+		},{
 			"file": "prosemirror-menu.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "prosemirror-menu",
 				"module-type": "library"
 			}
-		},
-		{
+		},{
 			"file": "menu.css",
 			"fields": {
 				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/prosemirror/lib/menu.css",
 				"tags": "[[$:/tags/Stylesheet]]"
 			}
-		},
-		{
+		},{
 			"file": "prosemirror-inputrules.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "prosemirror-inputrules",
 				"module-type": "library"
 			}
-		},
-		{
+		},{
 			"file": "w3c-keyname.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "w3c-keyname",
 				"module-type": "library"
 			}
-		},
-		{
+		},{
 			"file": "crelt.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "crelt",
 				"module-type": "library"
 			}
-		},
-		{
+		},{
 			"file": "rope-sequence.cjs",
 			"fields": {
 				"type": "application/javascript",
 				"title": "rope-sequence",
+				"module-type": "library"
+			}
+		},{
+			"file": "prosemirror-safari-ime-span.cjs",
+			"fields": {
+				"type": "application/javascript",
+				"title": "prosemirror-safari-ime-span",
 				"module-type": "library"
 			}
 		}
