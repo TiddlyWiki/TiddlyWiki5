@@ -17,7 +17,8 @@
 		"tiddlywiki/jszip",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
-		"tiddlywiki/tour"
+		"tiddlywiki/tour",
+		"tiddlywiki/prosemirror"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
