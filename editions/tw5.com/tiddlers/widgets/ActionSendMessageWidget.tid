@@ -1,6 +1,7 @@
 caption: action-sendmessage
 created: 20141008134309742
-modified: 20211023160110220
+modified: 20250323140735155
+see-also: Messages [[Core Messages]]
 tags: Widgets ActionWidgets
 title: ActionSendMessageWidget
 type: text/vnd.tiddlywiki

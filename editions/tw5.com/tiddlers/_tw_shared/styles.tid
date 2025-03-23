@@ -1,5 +1,5 @@
-title: $:/_tw_shared/styles
 tags: $:/tags/Stylesheet TiddlyWikiSitesMenu
+title: $:/_tw_shared/styles
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 

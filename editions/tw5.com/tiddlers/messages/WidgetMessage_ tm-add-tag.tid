@@ -1,9 +1,10 @@
+caption: tm-add-tag
 created: 20140908185153663
-modified: 20140908185153663
+modified: 20250323134938475
+see-also: ActionSendMessageWidget
 tags: Messages
 title: WidgetMessage: tm-add-tag
 type: text/vnd.tiddlywiki
-caption: tm-add-tag
 
 The `tm-add-tag` message is handled by the FieldManglerWidget. It adds the specified tag.
 

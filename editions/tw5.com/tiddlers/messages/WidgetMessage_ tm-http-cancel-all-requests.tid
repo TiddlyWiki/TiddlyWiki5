@@ -1,6 +1,7 @@
 caption: tm-http-cancel-all-requests
 created: 20230429161453032
-modified: 20230429161453032
+modified: 20250323134938475
+see-also: ActionSendMessageWidget
 tags: Messages
 title: WidgetMessage: tm-http-cancel-all-requests
 type: text/vnd.tiddlywiki
