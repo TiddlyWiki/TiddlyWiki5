@@ -39,30 +39,22 @@ function heading(context, node) {
   };
 }
 
-function bullet_list(context, node) {
+function list(context, node) {
+  const listType = node.attrs && node.attrs.kind === "ordered" ? "ol" : "ul";
+  
+  const listItems = node.content.map(item => {
+    return {
+      type: "element",
+      tag: "li",
+      children: convertANode(context, item)
+    };
+  });
+  
   return {
     type: "element",
-    tag: "ul",
+    tag: listType,
     rule: "list",
-    children: convertNodes(context, node.content)
-  };
-}
-
-function ordered_list(context, node) {
-  return {
-    type: "element",
-    tag: "ol",
-    rule: "list",
-    children: convertNodes(context, node.content)
-  };
-}
-
-function list_item(context, node) {
-  return {
-    type: "element",
-    tag: "li",
-    rule: "list",
-    children: convertNodes(context, node.content)
+    children: listItems
   };
 }
 
@@ -74,9 +66,7 @@ const builders = {
   paragraph,
   text,
   heading,
-  bullet_list,
-  ordered_list,
-  list_item,
+  list,
 };
 
 function wikiAstFromProseMirrorAst(input) {

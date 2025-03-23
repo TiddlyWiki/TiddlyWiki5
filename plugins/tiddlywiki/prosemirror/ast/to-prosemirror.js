@@ -61,26 +61,34 @@ const elementBuilders = {
   },
   ul: function(context, node) {
     return {
-      type: "bullet_list",
+      type: "list",
+      attrs: {
+        kind: "bullet",
+        order: null,
+        checked: false,
+        collapsed: false
+      },
       content: convertNodes(context, node.children)
     };
   },
   ol: function(context, node) {
     return {
-      type: "ordered_list",
+      type: "list",
+      attrs: {
+        kind: "ordered",
+        order: null,
+        checked: false,
+        collapsed: false
+      },
       content: convertNodes(context, node.children)
     };
   },
   li: function(context, node) {
-    // In ProseMirror, list items must contain block content (not bare text)
-    // TODO: find solution to https://discuss.prosemirror.net/t/removing-the-default-paragraph-p-inside-a-list-item-li/2745/17
+    // In ProseMirror, list items are converted to paragraphs or other block content
+    // directly under the list node, no special list_item type needed
     const processedContent = convertNodes(context, node.children);
-    const wrappedContent = wrapTextNodesInParagraphs(context, processedContent);
-    
-    return {
-      type: "list_item",
-      content: wrappedContent
-    };
+    // Ensure content starts with a block element (typically paragraph)
+    return wrapTextNodesInParagraphs(context, processedContent);
   }
 };
 
