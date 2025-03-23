@@ -1,40 +1,89 @@
 /*\
-title: $:/plugins/tiddlywiki/prosemirror/ast/wikiAstFromProsemirrorAst.js
+title: $:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js
 type: application/javascript
 module-type: library
 
-Get the Prosemirror AST from a Wiki AST
+Get the Wiki AST from a Prosemirror AST
 
 \*/
 
+function doc(context, node) {
+  return convertNodes(context, node.content);
+}
+
+function paragraph(context, node) {
+  return {
+    type: "element",
+    tag: "p",
+    rule: "parseblock",
+    children: convertNodes(context, node.content)
+  };
+}
+
+function text(context, node) {
+  return {
+    type: "text",
+    text: node.text
+  }
+}
+
+function heading(context, node) {
+  return {
+    type: "element",
+    tag: "h" + node.attrs.level,
+    rule: "heading",
+    attributes: {
+      // TODO: restore class if any
+    },
+    children: convertNodes(context, node.content)
+  };
+}
+
+function bullet_list(context, node) {
+  return {
+    type: "element",
+    tag: "ul",
+    rule: "list",
+    children: convertNodes(context, node.content)
+  };
+}
+
+function ordered_list(context, node) {
+  return {
+    type: "element",
+    tag: "ol",
+    rule: "list",
+    children: convertNodes(context, node.content)
+  };
+}
+
+function list_item(context, node) {
+  return {
+    type: "element",
+    tag: "li",
+    rule: "list",
+    children: convertNodes(context, node.content)
+  };
+}
 
 /**
  * Key is `node.type`, value is node converter function.
  */
 const builders = {
-  // auto parse basic element nodes
-  // eslint-disable-next-line unicorn/prefer-object-from-entries
-  ...(htmlTags).reduce(
-    (previousValue, currentValue) => {
-      previousValue[currentValue] = element;
-      return previousValue;
-    },
-    // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter, @typescript-eslint/consistent-type-assertions
-    {},
-  ),
-  [ELEMENT_CODE_BLOCK]: codeblock,
-  [ELEMENT_LIC]: lic,
+  doc,
+  paragraph,
   text,
-  widget,
-  macro: widget,
-  set,
+  heading,
+  bullet_list,
+  ordered_list,
+  list_item,
 };
 
-function wikiAstFromProsemirrorAst(input) {
+function wikiAstFromProseMirrorAst(input) {
   return convertNodes(builders, Array.isArray(input) ? input : [input]);
 }
 
-exports.wikiAstFromProsemirrorAst = wikiAstFromProsemirrorAst;
+exports.from = wikiAstFromProseMirrorAst;
 
 function convertNodes(builders, nodes) {
   if (nodes === undefined || nodes.length === 0) {
@@ -42,27 +91,22 @@ function convertNodes(builders, nodes) {
   }
 
   return nodes.reduce((accumulator, node) => {
-    return [...accumulator, ...convertWikiAstNode(builders, node)];
+    return [...accumulator, ...convertANode(builders, node)];
   }, []);
 }
 
-function convertWikiAstNode(builders, node) {
-  // only text and root node don't have a `type` field, deal with it first
-  if (isText(node)) {
-    return [builders.text(builders, node)];
+function restoreMetadata(node) {
+  // TODO: restore attributes, orderedAttributes, isBlock
+  return {};
+}
+function convertANode(builders, node) {
+  var builder = builders[node.type];
+  if (typeof builder === 'function') {
+    var convertedNode = builder(builders, node);
+    var arrayOfNodes = (Array.isArray(convertedNode)
+    ? convertedNode : [convertedNode]);
+    return arrayOfNodes.map((child) => ({ ...restoreMetadata(node), ...child }));
   }
-  if (isElement(node)) {
-    const builder = builders[node.type];
-    if (typeof builder === 'function') {
-      const builtSlateNodeOrNodes = builder(builders, node);
-      return Array.isArray(builtSlateNodeOrNodes)
-        ? builtSlateNodeOrNodes.map((child) => ({ ...getSlatePlateASTAdditionalProperties(node), ...child }))
-        : ([{ ...getSlatePlateASTAdditionalProperties(node), ...builtSlateNodeOrNodes }]);
-    }
-  }
-  // it might be a root or pure parent node, reduce it
-  if ('children' in node) {
-    return convertNodes(builders, node.children);
-  }
+  console.warn(`WikiAst get Unknown node type: ${JSON.stringify(node)}`);
   return [];
 }

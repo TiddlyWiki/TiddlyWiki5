@@ -9,6 +9,8 @@ module-type: library
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var debounce = require("$:/core/modules/utils/debounce.js").debounce;
+var wikiAstFromProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js").from;
+var wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js").to;
 
 var { EditorState } = require("prosemirror-state");
 var { EditorView } = require("prosemirror-view");
@@ -39,15 +41,26 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
   
   // Mix the nodes from prosemirror-schema-list into the basic schema to
   // create a schema with list support.
-  const mySchema = new Schema({
-    nodes: addListNodes(schema.spec.nodes, "paragraph block*", "block"),
+  var mySchema = new Schema({
+    // nodes: addListNodes(schema.spec.nodes, "paragraph block*", "block"),
+    nodes: addListNodes(schema.spec.nodes, "block*", "block"),
     marks: schema.spec.marks
   })
 
   var self = this;
+  var wikiAst = $tw.wiki.parseText(null, `* This is an unordered list
+* It has two items
+
+# This is a numbered list
+## With a subitem
+# And a third item`).tree;
+  var doc = wikiAstToProseMirrorAst(wikiAst);
+  // DEBUG: console doc
+  console.log(`initial doc`, doc);
   this.view = new EditorView(container, {
     state: EditorState.create({
-      doc: mySchema.node("doc", null, [mySchema.node("paragraph")]),
+      // doc: mySchema.node("doc", null, [mySchema.node("paragraph")]),
+      doc: mySchema.nodeFromJSON(doc),
       plugins: exampleSetup({schema: mySchema})
     }),
     dispatchTransaction: function(transaction) {
@@ -62,8 +75,12 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 };
 
 ProsemirrorWidget.prototype.saveEditorContent = function() {
-  const content = this.view.state.doc.toJSON();
-  console.log(JSON.stringify(content));
+  var content = this.view.state.doc.toJSON();
+  console.log(`ProseMirror: ${JSON.stringify(content)}`);
+  var wikiast = wikiAstFromProseMirrorAst(content);
+  console.log(`WikiAST: ${JSON.stringify(wikiast)}`);
+  var wikiText = $tw.utils.serializeParseTree(wikiast);
+  console.log(`WikiText: ${wikiText}`);
 }
 
 // Debounced save function for performance
