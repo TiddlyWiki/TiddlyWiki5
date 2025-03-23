@@ -1,9 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/editorjs/ast/wikiAstFromEditorJSAst.js
+title: $:/plugins/tiddlywiki/prosemirror/ast/wikiAstFromProsemirrorAst.js
 type: application/javascript
 module-type: library
 
-Get the EditorJS AST from a Wiki AST
+Get the Prosemirror AST from a Wiki AST
 
 \*/
 
@@ -30,11 +30,11 @@ const builders = {
   set,
 };
 
-function wikiAstFromEditorJSAst(input) {
+function wikiAstFromProsemirrorAst(input) {
   return convertNodes(builders, Array.isArray(input) ? input : [input]);
 }
 
-exports.wikiAstFromEditorJSAst = wikiAstFromEditorJSAst;
+exports.wikiAstFromProsemirrorAst = wikiAstFromProsemirrorAst;
 
 function convertNodes(builders, nodes) {
   if (nodes === undefined || nodes.length === 0) {

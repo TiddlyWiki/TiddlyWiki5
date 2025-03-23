@@ -5,7 +5,7 @@
 		"tiddlywiki/filesystem",
 		"tiddlywiki/highlight",
 		"tiddlywiki/internals",
-		"tiddlywiki/editorjs"
+		"tiddlywiki/prosemirror"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
