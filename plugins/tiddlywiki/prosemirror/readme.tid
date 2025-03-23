@@ -6,18 +6,21 @@ Test Test
 
 Downloaded from JsDelivr CDN (like `https://cdn.jsdelivr.net/npm/prosemirror-state@latest/dist/index.cjs` and store as `prosemirror-state.js`):
 
-* [ext[prosemirror-state|https://cdn.jsdelivr.net/npm/prosemirror-state@latest/dist/index.cjs]]: 1.4.3
-* [ext[prosemirror-view|https://cdn.jsdelivr.net/npm/prosemirror-view@latest/dist/index.cjs]]: 1.38.1
-* [ext[prosemirror-model|https://cdn.jsdelivr.net/npm/prosemirror-model@latest/dist/index.cjs]]: 1.25.0
-* [ext[prosemirror-schema-basic|https://cdn.jsdelivr.net/npm/prosemirror-schema-basic@latest/dist/index.cjs]]: 1.2.4
-* [ext[prosemirror-schema-list|https://cdn.jsdelivr.net/npm/prosemirror-schema-list@latest/dist/index.cjs]]: 1.5.1
-* [ext[prosemirror-example-setup|https://cdn.jsdelivr.net/npm/prosemirror-example-setup@latest/dist/index.cjs]]: 1.2.3
-* [ext[orderedmap|https://cdn.jsdelivr.net/npm/orderedmap@latest/dist/index.cjs]]: latest
-* [ext[prosemirror-transform|https://cdn.jsdelivr.net/npm/prosemirror-transform@latest/dist/index.cjs]]: latest
-* [ext[prosemirror-keymap|https://cdn.jsdelivr.net/npm/prosemirror-keymap@latest/dist/index.cjs]]: latest
-* [ext[prosemirror-history|https://cdn.jsdelivr.net/npm/prosemirror-history@latest/dist/index.cjs]]: latest
-* [ext[prosemirror-commands|https://cdn.jsdelivr.net/npm/prosemirror-commands@latest/dist/index.cjs]]: latest
-* [ext[prosemirror-dropcursor|https://cdn.jsdelivr.net/npm/prosemirror-dropcursor@latest/dist/index.cjs]]: latest
-* [ext[prosemirror-gapcursor|https://cdn.jsdelivr.net/npm/prosemirror-gapcursor@latest/dist/index.cjs]]: latest
-* [ext[prosemirror-menu|https://cdn.jsdelivr.net/npm/prosemirror-menu@latest/dist/index.cjs]]: latest
-* [ext[prosemirror-inputrules|https://cdn.jsdelivr.net/npm/prosemirror-inputrules@latest/dist/index.cjs]]: latest
+* [ext[prosemirror-state|https://cdn.jsdelivr.net/npm/prosemirror-state@latest/dist/index.cjs]]: v1.4.3
+* [ext[prosemirror-view|https://cdn.jsdelivr.net/npm/prosemirror-view@latest/dist/index.cjs]]: v1.38.1
+* [ext[prosemirror-model|https://cdn.jsdelivr.net/npm/prosemirror-model@latest/dist/index.cjs]]: v1.25.0
+* [ext[prosemirror-schema-basic|https://cdn.jsdelivr.net/npm/prosemirror-schema-basic@latest/dist/index.cjs]]: v1.2.4
+* [ext[prosemirror-schema-list|https://cdn.jsdelivr.net/npm/prosemirror-schema-list@latest/dist/index.cjs]]: v1.5.1
+* [ext[prosemirror-example-setup|https://cdn.jsdelivr.net/npm/prosemirror-example-setup@latest/dist/index.cjs]]: v1.2.3
+* [ext[orderedmap|https://cdn.jsdelivr.net/npm/orderedmap@latest/dist/index.cjs]]: v2.1.1
+* [ext[prosemirror-transform|https://cdn.jsdelivr.net/npm/prosemirror-transform@latest/dist/index.cjs]]: v1.10.3
+* [ext[prosemirror-keymap|https://cdn.jsdelivr.net/npm/prosemirror-keymap@latest/dist/index.cjs]]: v1.2.2
+* [ext[prosemirror-history|https://cdn.jsdelivr.net/npm/prosemirror-history@latest/dist/index.cjs]]: v1.4.1
+* [ext[prosemirror-commands|https://cdn.jsdelivr.net/npm/prosemirror-commands@latest/dist/index.cjs]]: v1.7.0
+* [ext[prosemirror-dropcursor|https://cdn.jsdelivr.net/npm/prosemirror-dropcursor@latest/dist/index.cjs]]: v1.8.1
+* [ext[prosemirror-gapcursor|https://cdn.jsdelivr.net/npm/prosemirror-gapcursor@latest/dist/index.cjs]]: v1.3.2
+* [ext[prosemirror-menu|https://cdn.jsdelivr.net/npm/prosemirror-menu@latest/dist/index.cjs]]: v1.2.4
+* [ext[prosemirror-inputrules|https://cdn.jsdelivr.net/npm/prosemirror-inputrules@latest/dist/index.cjs]]: v1.5.0
+* [ext[w3c-keyname|https://cdn.jsdelivr.net/npm/w3c-keyname@latest/dist/index.cjs]]: v2.2.8
+* [ext[crelt|https://cdn.jsdelivr.net/npm/crelt@latest/dist/index.cjs]]: v1.0.6
+* [ext[rope-sequence|https://cdn.jsdelivr.net/npm/rope-sequence@latest/dist/index.cjs]]: v1.3.4
