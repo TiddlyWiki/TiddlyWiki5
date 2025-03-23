@@ -10,6 +10,7 @@ Text node widget
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
+var debounce = require("$:/core/modules/utils/debounce.js").debounce;
 
 var EditorJSWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -38,19 +39,33 @@ EditorJSWidget.prototype.render = function(parent,nextSibling) {
     tools: {
       list: List,
       header: Header
-    }
+    },
+    onChange: this.debouncedSaveEditorContent.bind(this)
   });
+  this.editor = editor;
 
   editor.isReady
     .then(() => {
-      console.log('Editor.js is ready to work!')
+      console.log('Editor.js is ready to work!', editor.onChange);
     })
     .catch((reason) => {
       console.log('Editor.js initialization failed because of', reason)
     });
+  
 	parent.insertBefore(container,nextSibling);
 	this.domNodes.push(container);
 };
+
+EditorJSWidget.prototype.saveEditorContent = function() {
+  this.editor.save().then((outputData) => {
+    console.log('Article data: ', outputData)
+  }).catch((error) => {
+    console.log('Saving failed: ', error)
+  });
+}
+
+// Debounced save function for performance
+EditorJSWidget.prototype.debouncedSaveEditorContent = debounce(EditorJSWidget.prototype.saveEditorContent, 300);
 
 /*
 Compute the internal state of the widget
