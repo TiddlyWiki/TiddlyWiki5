@@ -49,7 +49,7 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
   var self = this;
   this.view = new EditorView(container, {
     state: EditorState.create({
-      doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
+      doc: mySchema.node("doc", null, [mySchema.node("paragraph")]),
       plugins: exampleSetup({schema: mySchema})
     }),
     dispatchTransaction: function(transaction) {
@@ -64,11 +64,8 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 };
 
 ProsemirrorWidget.prototype.saveEditorContent = function() {
-  this.editor.save().then((outputData) => {
-    console.log('Article data: ', outputData)
-  }).catch((error) => {
-    console.log('Saving failed: ', error)
-  });
+  const content = this.view.state.doc.toJSON();
+  console.log(JSON.stringify(content));
 }
 
 // Debounced save function for performance
