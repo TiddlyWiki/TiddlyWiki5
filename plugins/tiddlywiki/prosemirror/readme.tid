@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/prosemirror/readme
 
-Test `<$prosemirror />`, see console for content JSON.
+Test `<$prosemirror />` widget below, see console for content JSON.
 
 <$prosemirror />
