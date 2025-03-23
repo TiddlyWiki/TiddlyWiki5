@@ -15,9 +15,16 @@ var wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/to-
 var { EditorState } = require("prosemirror-state");
 var { EditorView } = require("prosemirror-view");
 var { Schema, DOMParser } = require("prosemirror-model");
-var { schema } = require("prosemirror-schema-basic");
-var { addListNodes } = require("prosemirror-schema-list");
+var { schema: basicSchema } = require("prosemirror-schema-basic");
+var {
+  createListPlugins,
+  createListSpec,
+  listInputRules,
+  listKeymap
+} = require("prosemirror-flat-list");
 var { exampleSetup } = require("prosemirror-example-setup");
+var { keymap } = require("prosemirror-keymap");
+var { inputRules } = require("prosemirror-inputrules");
 
 var ProsemirrorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -39,13 +46,14 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
     class: 'tc-prosemirror-container',
   });
   
-  // Mix the nodes from prosemirror-schema-list into the basic schema to
-  // create a schema with list support.
-  var mySchema = new Schema({
-    // nodes: addListNodes(schema.spec.nodes, "paragraph block*", "block"),
-    nodes: addListNodes(schema.spec.nodes, "block*", "block"),
-    marks: schema.spec.marks
+  var schema = new Schema({
+    nodes: basicSchema.spec.nodes.append({ list: createListSpec() }),
+    marks: basicSchema.spec.marks,
   })
+  
+  var listKeymapPlugin = keymap(listKeymap)
+  var listInputRulePlugin = inputRules({ rules: listInputRules })
+  var listPlugins = createListPlugins({ schema })
 
   var self = this;
   var wikiAst = $tw.wiki.parseText(null, `* This is an unordered list
@@ -59,9 +67,14 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
   console.log(`initial doc`, doc);
   this.view = new EditorView(container, {
     state: EditorState.create({
-      // doc: mySchema.node("doc", null, [mySchema.node("paragraph")]),
-      doc: mySchema.nodeFromJSON(doc),
-      plugins: exampleSetup({schema: mySchema})
+      // doc: schema.node("doc", null, [schema.node("paragraph")]),
+      doc: schema.nodeFromJSON(doc),
+      plugins: [
+        listKeymapPlugin,
+        listInputRulePlugin,
+        ...listPlugins,
+        ...exampleSetup({ schema }),
+      ],
     }),
     dispatchTransaction: function(transaction) {
       var newState = self.view.state.apply(transaction);

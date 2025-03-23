@@ -7,7 +7,9 @@ Downloaded from JsDelivr CDN (like `https://cdn.jsdelivr.net/npm/prosemirror-sta
 ** [ext[prosemirror.css|https://cdn.jsdelivr.net/npm/prosemirror-view@latest/style/prosemirror.css]]
 * [ext[prosemirror-model|https://cdn.jsdelivr.net/npm/prosemirror-model@latest/dist/index.cjs]]: v1.25.0
 * [ext[prosemirror-schema-basic|https://cdn.jsdelivr.net/npm/prosemirror-schema-basic@latest/dist/index.cjs]]: v1.2.4
-* [ext[prosemirror-schema-list|https://cdn.jsdelivr.net/npm/prosemirror-schema-list@latest/dist/index.cjs]]: v1.5.1
+* [ext[prosemirror-flat-list|https://cdn.jsdelivr.net/npm/prosemirror-flat-list@latest/dist/prosemirror-flat-list.cjs]]: v0.5.4
+** [ext[prosemirror-flat-list.css|https://cdn.jsdelivr.net/npm/prosemirror-flat-list@latest/dist/style.css]]
+** (Instead of [ext[prosemirror-schema-list|https://cdn.jsdelivr.net/npm/prosemirror-schema-list@latest/dist/index.cjs]])
 * [ext[prosemirror-example-setup|https://cdn.jsdelivr.net/npm/prosemirror-example-setup@latest/dist/index.cjs]]: v1.2.3
 * [ext[orderedmap|https://cdn.jsdelivr.net/npm/orderedmap@latest/dist/index.cjs]]: v2.1.1
 * [ext[prosemirror-transform|https://cdn.jsdelivr.net/npm/prosemirror-transform@latest/dist/index.cjs]]: v1.10.3
@@ -22,3 +24,9 @@ Downloaded from JsDelivr CDN (like `https://cdn.jsdelivr.net/npm/prosemirror-sta
 * [ext[w3c-keyname|https://cdn.jsdelivr.net/npm/w3c-keyname@latest/dist/index.cjs]]: v2.2.8
 * [ext[crelt|https://cdn.jsdelivr.net/npm/crelt@latest/dist/index.cjs]]: v1.0.6
 * [ext[rope-sequence|https://cdn.jsdelivr.net/npm/rope-sequence@latest/dist/index.cjs]]: v1.3.4
+* [ext[prosemirror-safari-ime-span|https://cdn.jsdelivr.net/npm/prosemirror-safari-ime-span@latest/dist/index.cjs]]: v1.0.2
+
+!! TODO
+
+* remove prosemirror-example-setup, move all configs here. And remove `prosemirror-schema-list` that it depends on.
+* prosemirror-flat-list only add dot style to list container, not each list item. Make it looks weird. And when creating new list, it will make each item to be a full new list, which is also weird.
