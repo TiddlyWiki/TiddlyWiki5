@@ -1,0 +1,26 @@
+{
+	"tiddlers": [
+		{
+			"file": "editorjs.umd.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/editorjs/lib/editorjs.js",
+				"module-type": "library"
+			}
+		},{
+			"file": "editorjs-list.umd.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/editorjs/lib/editorjs-list.js",
+				"module-type": "library"
+			}
+		},{
+			"file": "header.umd.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/editorjs/lib/header.js",
+				"module-type": "library"
+			}
+		}
+	]
+}
