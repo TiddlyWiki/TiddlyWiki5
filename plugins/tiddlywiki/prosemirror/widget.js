@@ -22,7 +22,7 @@ var {
   listInputRules,
   listKeymap
 } = require("prosemirror-flat-list");
-var { exampleSetup } = require("prosemirror-example-setup");
+var { exampleSetup } = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js");
 var { keymap } = require("prosemirror-keymap");
 var { inputRules } = require("prosemirror-inputrules");
 
