@@ -8,7 +8,7 @@ Downloaded from JsDelivr CDN (like `https://cdn.jsdelivr.net/npm/prosemirror-sta
 * [ext[prosemirror-model|https://cdn.jsdelivr.net/npm/prosemirror-model@latest/dist/index.cjs]]: v1.25.0
 * [ext[prosemirror-schema-basic|https://cdn.jsdelivr.net/npm/prosemirror-schema-basic@latest/dist/index.cjs]]: v1.2.4
 * [ext[prosemirror-flat-list|https://cdn.jsdelivr.net/npm/prosemirror-flat-list@latest/dist/prosemirror-flat-list.cjs]]: v0.5.4
-** [ext[prosemirror-flat-list.css|https://cdn.jsdelivr.net/npm/prosemirror-flat-list@latest/dist/style.css]]
+** [ext[prosemirror-flat-list.css|https://cdn.jsdelivr.net/npm/prosemirror-flat-list@latest/dist/style.css]] (modified, to solve its #243)
 ** (Instead of [ext[prosemirror-schema-list|https://cdn.jsdelivr.net/npm/prosemirror-schema-list@latest/dist/index.cjs]])
 * [ext[prosemirror-example-setup|https://cdn.jsdelivr.net/npm/prosemirror-example-setup@latest/dist/index.cjs]]: v1.2.3
 * [ext[orderedmap|https://cdn.jsdelivr.net/npm/orderedmap@latest/dist/index.cjs]]: v2.1.1
