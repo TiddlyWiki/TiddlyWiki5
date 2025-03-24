@@ -36,25 +36,11 @@
 				"module-type": "library"
 			}
 		},{
-			"file": "prosemirror-schema-list.cjs",
-			"fields": {
-				"type": "application/javascript",
-				"title": "prosemirror-schema-list",
-				"module-type": "library"
-			}
-		},{
 			"file": "prosemirror-flat-list.css",
 			"fields": {
 				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/prosemirror/lib/prosemirror-flat-list.css",
 				"tags": "[[$:/tags/Stylesheet]]"
-			}
-		},{
-			"file": "prosemirror-example-setup.cjs",
-			"fields": {
-				"type": "application/javascript",
-				"title": "prosemirror-example-setup",
-				"module-type": "library"
 			}
 		},{
 			"file": "prosemirror-schema-basic.cjs",
