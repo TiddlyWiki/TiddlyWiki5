@@ -56,7 +56,10 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
   var listPlugins = createListPlugins({ schema })
 
   var self = this;
-  var wikiAst = $tw.wiki.parseText(null, `* This is an unordered list
+  var wikiAst = $tw.wiki.parseText(null, `# asdf
+# asdf
+
+* This is an unordered list
 * It has two items
 
 # This is a numbered list
@@ -89,9 +92,9 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 
 ProsemirrorWidget.prototype.saveEditorContent = function() {
   var content = this.view.state.doc.toJSON();
-  console.log(`ProseMirror: ${JSON.stringify(content)}`);
+  console.log(`ProseMirror: ${JSON.stringify(content)}`, content);
   var wikiast = wikiAstFromProseMirrorAst(content);
-  console.log(`WikiAST: ${JSON.stringify(wikiast)}`);
+  console.log(`WikiAST: ${JSON.stringify(wikiast)}`, wikiast);
   var wikiText = $tw.utils.serializeParseTree(wikiast);
   console.log(`WikiText: ${wikiText}`);
 }
