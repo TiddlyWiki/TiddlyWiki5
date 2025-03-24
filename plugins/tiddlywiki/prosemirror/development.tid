@@ -25,8 +25,3 @@ Downloaded from JsDelivr CDN (like `https://cdn.jsdelivr.net/npm/prosemirror-sta
 * [ext[crelt|https://cdn.jsdelivr.net/npm/crelt@latest/dist/index.cjs]]: v1.0.6
 * [ext[rope-sequence|https://cdn.jsdelivr.net/npm/rope-sequence@latest/dist/index.cjs]]: v1.3.4
 * [ext[prosemirror-safari-ime-span|https://cdn.jsdelivr.net/npm/prosemirror-safari-ime-span@latest/dist/index.cjs]]: v1.0.2
-
-!! TODO
-
-* remove prosemirror-example-setup, move all configs here. And remove `prosemirror-schema-list` that it depends on.
-* prosemirror-flat-list only add dot style to list container, not each list item. Make it looks weird. And when creating new list, it will make each item to be a full new list, which is also weird.
