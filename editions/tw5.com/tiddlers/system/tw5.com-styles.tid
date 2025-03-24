@@ -1,5 +1,5 @@
 created: 20200507002727378
-modified: 20220719132112414
+modified: 20250324223852271
 tags: $:/tags/Stylesheet
 title: $:/_tw5.com-styles
 type: text/vnd.tiddlywiki
@@ -163,4 +163,8 @@ type: text/vnd.tiddlywiki
 	border: 3px solid transparent;
 	background: #ffd;
 	background: linear-gradient(#ffd, #ffd) padding-box, repeating-linear-gradient(-45deg, red 0, red 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+}
+
+ul.tc-related-footer {
+	column-width: 16em;
 }
