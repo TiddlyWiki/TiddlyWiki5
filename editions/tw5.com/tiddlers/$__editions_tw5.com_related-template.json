@@ -1,0 +1,12 @@
+[
+    {
+        "created": "20250324175606325",
+        "text": "\\whitespace trim\n<% if [<currentTiddler>has[related]] %>\n\n-----\n<details><summary>Related</summary>\n<ul class=\"tc-related-footer\">\n<$list filter=\"[enlist{!!related}]\"><li><$link/></li></$list>\n</ul>\n</details>\n\n<% endif %>\n\n\n<% if [contains:related<currentTiddler>] [<currentTiddler>backlinks[]] %>\n\n-----\n<details><summary>Linked here</summary>\n<ul class=\"tc-related-footer\"> \n<$list filter=\"[contains:related<currentTiddler>] [<currentTiddler>backlinks[]] +[unique[]sortan[]]\"><li><$link/></li></$list>\n</ul>\n</details>\n\n<% endif %>",
+        "tags": "$:/tags/ViewTemplate",
+        "title": "$:/editions/tw5.com/related-template",
+        "modified": "20250324220838935",
+        "type": "text/vnd.tiddlywiki",
+        "code-body": "yes",
+        "list-after": " $:/core/ui/ViewTemplate/body"
+    }
+]
