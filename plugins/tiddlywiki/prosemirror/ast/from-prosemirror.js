@@ -7,27 +7,27 @@ Get the Wiki AST from a Prosemirror AST
 
 \*/
 
-function doc(context, node) {
-	return convertNodes(context, node.content);
+function doc(builder, node) {
+	return convertNodes(builder, node.content);
 }
 
-function paragraph(context, node) {
+function paragraph(builder, node) {
 	return {
 		type: "element",
 		tag: "p",
 		rule: "parseblock",
-		children: convertNodes(context, node.content)
+		children: convertNodes(builder, node.content)
 	};
 }
 
-function text(context, node) {
+function text(builder, node) {
 	return {
 		type: "text",
 		text: node.text
 	}
 }
 
-function heading(context, node) {
+function heading(builder, node) {
 	return {
 		type: "element",
 		tag: "h" + node.attrs.level,
@@ -35,20 +35,49 @@ function heading(context, node) {
 		attributes: {
 			// TODO: restore class if any
 		},
-		children: convertNodes(context, node.content)
+		children: convertNodes(builder, node.content)
 	};
 }
 
-function list(context, node) {
+function list(builder, node, context) {
 	const listType = node.attrs && node.attrs.kind === "ordered" ? "ol" : "ul";
 	
-	const listItems = node.content.map(item => {
-		return {
+	// Prepare an array to store all list items
+	let listItems = [];
+	
+	// Add content from current node to list items
+	node.content.forEach(item => {
+		listItems.push({
 			type: "element",
 			tag: "li",
-			children: convertANode(context, item)
-		};
+			children: convertANode(builder, item)
+		});
 	});
+	
+	// Check if there are adjacent lists of the same type
+	while (context && context.nodes && context.nodes.length > 0) {
+		const nextNode = context.nodes[0];
+		
+		// If next node is also a list of the same type
+		if (nextNode.type === 'list' && 
+			((node.attrs && node.attrs.kind) === (nextNode.attrs && nextNode.attrs.kind))) {
+			
+			// Remove and consume the next node
+			const consumedNode = context.nodes.shift();
+			
+			// Merge its content into current list
+			consumedNode.content.forEach(item => {
+				listItems.push({
+					type: "element",
+					tag: "li",
+					children: convertANode(builder, item)
+				});
+			});
+		} else {
+			// If next node is not a list of the same type, stop merging
+			break;
+		}
+	}
 	
 	return {
 		type: "element",
@@ -80,19 +109,26 @@ function convertNodes(builders, nodes) {
 		return [];
 	}
 
-	return nodes.reduce((accumulator, node) => {
-		return [...accumulator, ...convertANode(builders, node)];
-	}, []);
+	const result = [];
+	const nodesCopy = [...nodes]; // Create a copy to avoid modifying the original array
+	
+	while (nodesCopy.length > 0) {
+		const node = nodesCopy.shift(); // Get and remove the first node
+		const convertedNodes = convertANode(builders, node, { nodes: nodesCopy });
+		result.push(...convertedNodes);
+	}
+	
+	return result;
 }
 
 function restoreMetadata(node) {
 	// TODO: restore attributes, orderedAttributes, isBlock
 	return {};
 }
-function convertANode(builders, node) {
+function convertANode(builders, node, context) {
 	var builder = builders[node.type];
 	if (typeof builder === 'function') {
-		var convertedNode = builder(builders, node);
+		var convertedNode = builder(builders, node, context);
 		var arrayOfNodes = (Array.isArray(convertedNode)
 		? convertedNode : [convertedNode]);
 		return arrayOfNodes.map((child) => ({ ...restoreMetadata(node), ...child }));
