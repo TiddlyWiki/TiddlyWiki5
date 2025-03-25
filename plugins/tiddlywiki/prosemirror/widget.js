@@ -42,6 +42,14 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
+
+  var tiddler = this.getAttribute("tiddler");
+  var initialText = this.wiki.getTiddlerText(tiddler, "");
+  var initialWikiAst = $tw.wiki.parseText(null, initialText).tree;
+  var doc = wikiAstToProseMirrorAst(initialWikiAst);
+  // DEBUG: console doc
+  console.log(`initial doc`, doc);
+
   var container = $tw.utils.domMaker('div', {
     class: 'tc-prosemirror-container',
   });
@@ -56,18 +64,6 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
   var listPlugins = createListPlugins({ schema })
 
   var self = this;
-  var wikiAst = $tw.wiki.parseText(null, `# asdf
-# asdf
-
-* This is an unordered list
-* It has two items
-
-# This is a numbered list
-## With a subitem
-# And a third item`).tree;
-  var doc = wikiAstToProseMirrorAst(wikiAst);
-  // DEBUG: console doc
-  console.log(`initial doc`, doc);
   this.view = new EditorView(container, {
     state: EditorState.create({
       // doc: schema.node("doc", null, [schema.node("paragraph")]),
@@ -97,6 +93,8 @@ ProsemirrorWidget.prototype.saveEditorContent = function() {
   console.log(`WikiAST: ${JSON.stringify(wikiast)}`, wikiast);
   var wikiText = $tw.utils.serializeParseTree(wikiast);
   console.log(`WikiText: ${wikiText}`);
+  var tiddler = this.getAttribute("tiddler");
+  this.wiki.setText(tiddler, "text", undefined, wikiText);
 }
 
 // Debounced save function for performance
