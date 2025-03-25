@@ -27,6 +27,8 @@ var { inputRules } = require("prosemirror-inputrules");
 
 var ProsemirrorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
+	// indicate the change is triggered by the widget itself
+	this.saveLock = false;
 };
 
 /*
@@ -87,13 +89,17 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 
 ProsemirrorWidget.prototype.saveEditorContent = function() {
 	var content = this.view.state.doc.toJSON();
-	console.log(`ProseMirror: ${JSON.stringify(content)}`, content);
 	var wikiast = wikiAstFromProseMirrorAst(content);
-	console.log(`WikiAST: ${JSON.stringify(wikiast)}`, wikiast);
 	var wikiText = $tw.utils.serializeParseTree(wikiast);
-	console.log(`WikiText: ${wikiText}`);
 	var tiddler = this.getAttribute("tiddler");
-	this.wiki.setText(tiddler, "text", undefined, wikiText);
+	var currentText = this.wiki.getTiddlerText(tiddler, "");
+	if (currentText !== wikiText) {
+		console.log(`ProseMirror: ${JSON.stringify(content)}`, content);
+		console.log(`WikiAST: ${JSON.stringify(wikiast)}`, wikiast);
+		console.log(`WikiText: ${wikiText}`);
+		this.saveLock = true;
+		this.wiki.setText(tiddler, "text", undefined, wikiText);
+	}
 }
 
 // Debounced save function for performance
@@ -111,12 +117,23 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ProsemirrorWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
+	// DEBUG: console this.saveLock
+	console.log(`this.saveLock`, this.saveLock);
 	if(changedAttributes.text) {
 		this.refreshSelf();
 		return true;
-	} else {
-		return false;
+	} else if (changedTiddlers[this.getAttribute("tiddler")]) {
+		if (this.saveLock) {
+			// Skip refresh if the change is triggered by the widget itself
+			this.saveLock = false;
+			return false;
+		}
+		// Not Re-render the widget, which will cause focus lost.
+		// We manually update the editor content.
+		this.refreshSelf();
+		return true;
 	}
+	return false;
 };
 
 exports.prosemirror = ProsemirrorWidget;
