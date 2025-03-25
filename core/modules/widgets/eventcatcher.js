@@ -67,13 +67,11 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 				if(selectedNode === domNode) {
 					return false;
 				}
-				// Only set up variables if we have actions to invoke
-				if(actions) {
-					variables = $tw.utils.collectDOMVariables(selectedNode,self.domNode,event);
-				}
 			}
 			// Execute our actions with the variables
 			if(actions) {
+				// Set up DOM variables
+				variables = $tw.utils.collectDOMVariables(selectedNode,self.domNode,event);
 				// Add a variable for the modifier key
 				variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
 				// Add a variable for the mouse button
