@@ -20,11 +20,55 @@ function paragraph(builder, node) {
 	};
 }
 
+// Map ProseMirror mark types to HTML tags
+const markTypeMap = {
+	strong: "strong",
+	em: "em",
+};
+const markRuleMap = {
+	em: "italic",
+	strong: "bold",
+};
+// Define mark priority (inner to outer)
+const markPriority = ["code", "strong", "bold", "em", "italic", "underline", "strike", "strikethrough", "superscript", "subscript"];
 function text(builder, node) {
+	if (!node.text) {
+		return {
+			type: "text",
+			text: ""
+		};
+	}
+	if (node.marks && node.marks.length > 0) {
+		// Create base text node
+		let textNode = {
+			type: "text",
+			text: node.text
+		};
+		const sortedMarks = [...node.marks].sort((a, b) => {
+			const indexA = markPriority.indexOf(a.type);
+			const indexB = markPriority.indexOf(b.type);
+				// Place unknown mark types at the end
+			if (indexA === -1) return 1;
+			if (indexB === -1) return -1;
+			return indexA - indexB;
+		});
+		
+		// Apply marks from inner to outer
+		return sortedMarks.reduce((wrappedNode, mark) => {
+			const tag = markTypeMap[mark.type];
+			const rule = markRuleMap[mark.type];
+			return {
+				type: "element",
+				tag: tag,
+				rule,
+				children: [wrappedNode]
+			};
+		}, textNode);
+	}
 	return {
 		type: "text",
 		text: node.text
-	}
+	};
 }
 
 function heading(builder, node) {
