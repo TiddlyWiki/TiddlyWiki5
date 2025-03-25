@@ -102,6 +102,49 @@ function buildListItem(context, node) {
 	return wrapTextNodesInParagraphs(context, processedContent);
 }
 
+function buildTextWithMark(context, node, markType) {
+	const content = convertNodes(context, node.children);
+	return content.map(childNode => {
+		if (childNode.type === "text") {
+			// Add the mark to the text node
+			const marks = childNode.marks || [];
+			return {
+				...childNode,
+				marks: [...marks, { type: markType }]
+			};
+		}
+		return childNode;
+	});
+}
+
+function buildStrong(context, node) {
+	return buildTextWithMark(context, node, "strong");
+}
+
+function buildEm(context, node) {
+	return buildTextWithMark(context, node, "em");
+}
+
+function buildCode(context, node) {
+	return buildTextWithMark(context, node, "code");
+}
+
+function buildUnderline(context, node) {
+	return buildTextWithMark(context, node, "underline");
+}
+
+function buildStrike(context, node) {
+	return buildTextWithMark(context, node, "strike");
+}
+
+function buildSup(context, node) {
+	return buildTextWithMark(context, node, "superscript");
+}
+
+function buildSub(context, node) {
+	return buildTextWithMark(context, node, "subscript");
+}
+
 /**
  * Many node shares same type `element` in wikiAst, we need to distinguish them by tag.
  */
@@ -115,7 +158,14 @@ const elementBuilders = {
 	h6: (context, node) => buildHeading(context, node, 6),
 	ul: buildUnorderedList,
 	ol: buildOrderedList,
-	li: buildListItem
+	li: buildListItem,
+	strong: buildStrong,
+	em: buildEm,
+	code: buildCode,
+	u: buildUnderline,
+	strike: buildStrike,
+	sup: buildSup,
+	sub: buildSub
 };
 
 function element(context, node) {
