@@ -46,7 +46,7 @@ function list(builder, node, context) {
 	let listItems = [];
 	
 	// Add content from current node to list items
-	node.content.forEach(item => {
+	node.content?.forEach?.(item => {
 		listItems.push({
 			type: "element",
 			tag: "li",
@@ -66,7 +66,7 @@ function list(builder, node, context) {
 			const consumedNode = context.nodes.shift();
 			
 			// Merge its content into current list
-			consumedNode.content.forEach(item => {
+			consumedNode.content?.forEach?.(item => {
 				listItems.push({
 					type: "element",
 					tag: "li",

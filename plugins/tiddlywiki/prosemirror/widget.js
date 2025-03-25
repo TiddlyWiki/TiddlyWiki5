@@ -19,7 +19,6 @@ var { schema: basicSchema } = require("prosemirror-schema-basic");
 var {
 	createListPlugins,
 	createListSpec,
-	listInputRules,
 	listKeymap
 } = require("prosemirror-flat-list");
 var { exampleSetup } = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js");
@@ -53,16 +52,15 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	console.log(`initial doc`, doc);
 
 	var container = $tw.utils.domMaker('div', {
-	class: 'tc-prosemirror-container',
+		class: 'tc-prosemirror-container',
 	});
 	
 	var schema = new Schema({
-	nodes: basicSchema.spec.nodes.append({ list: createListSpec() }),
-	marks: basicSchema.spec.marks,
+		nodes: basicSchema.spec.nodes.append({ list: createListSpec() }),
+		marks: basicSchema.spec.marks,
 	})
 	
 	var listKeymapPlugin = keymap(listKeymap)
-	var listInputRulePlugin = inputRules({ rules: listInputRules })
 	var listPlugins = createListPlugins({ schema })
 
 	var self = this;
@@ -72,7 +70,6 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 			doc: schema.nodeFromJSON(doc),
 			plugins: [
 				listKeymapPlugin,
-				listInputRulePlugin,
 				...listPlugins,
 				...exampleSetup({ schema }),
 			],
