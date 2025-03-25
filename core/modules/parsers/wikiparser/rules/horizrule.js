@@ -27,3 +27,7 @@ exports.parse = function() {
 	this.parser.pos = this.matchRegExp.lastIndex;
 	return [{type: "element", tag: "hr"}];
 };
+
+exports.serialize = function(tree,serialize) {
+	return "---\n\n";
+}
