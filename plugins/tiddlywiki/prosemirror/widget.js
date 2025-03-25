@@ -46,6 +46,8 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	var tiddler = this.getAttribute("tiddler");
 	var initialText = this.wiki.getTiddlerText(tiddler, "");
 	var initialWikiAst = $tw.wiki.parseText(null, initialText).tree;
+	// DEBUG: console initialWikiAst
+	console.log(`initialWikiAst`, initialWikiAst);
 	var doc = wikiAstToProseMirrorAst(initialWikiAst);
 	// DEBUG: console doc
 	console.log(`initial doc`, doc);
