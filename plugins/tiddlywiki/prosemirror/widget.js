@@ -17,10 +17,10 @@ var { EditorView } = require("prosemirror-view");
 var { Schema, DOMParser } = require("prosemirror-model");
 var { schema: basicSchema } = require("prosemirror-schema-basic");
 var {
-  createListPlugins,
-  createListSpec,
-  listInputRules,
-  listKeymap
+	createListPlugins,
+	createListSpec,
+	listInputRules,
+	listKeymap
 } = require("prosemirror-flat-list");
 var { exampleSetup } = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js");
 var { keymap } = require("prosemirror-keymap");
@@ -43,58 +43,58 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 
-  var tiddler = this.getAttribute("tiddler");
-  var initialText = this.wiki.getTiddlerText(tiddler, "");
-  var initialWikiAst = $tw.wiki.parseText(null, initialText).tree;
-  var doc = wikiAstToProseMirrorAst(initialWikiAst);
-  // DEBUG: console doc
-  console.log(`initial doc`, doc);
+	var tiddler = this.getAttribute("tiddler");
+	var initialText = this.wiki.getTiddlerText(tiddler, "");
+	var initialWikiAst = $tw.wiki.parseText(null, initialText).tree;
+	var doc = wikiAstToProseMirrorAst(initialWikiAst);
+	// DEBUG: console doc
+	console.log(`initial doc`, doc);
 
-  var container = $tw.utils.domMaker('div', {
-    class: 'tc-prosemirror-container',
-  });
-  
-  var schema = new Schema({
-    nodes: basicSchema.spec.nodes.append({ list: createListSpec() }),
-    marks: basicSchema.spec.marks,
-  })
-  
-  var listKeymapPlugin = keymap(listKeymap)
-  var listInputRulePlugin = inputRules({ rules: listInputRules })
-  var listPlugins = createListPlugins({ schema })
+	var container = $tw.utils.domMaker('div', {
+	class: 'tc-prosemirror-container',
+	});
+	
+	var schema = new Schema({
+	nodes: basicSchema.spec.nodes.append({ list: createListSpec() }),
+	marks: basicSchema.spec.marks,
+	})
+	
+	var listKeymapPlugin = keymap(listKeymap)
+	var listInputRulePlugin = inputRules({ rules: listInputRules })
+	var listPlugins = createListPlugins({ schema })
 
-  var self = this;
-  this.view = new EditorView(container, {
-    state: EditorState.create({
-      // doc: schema.node("doc", null, [schema.node("paragraph")]),
-      doc: schema.nodeFromJSON(doc),
-      plugins: [
-        listKeymapPlugin,
-        listInputRulePlugin,
-        ...listPlugins,
-        ...exampleSetup({ schema }),
-      ],
-    }),
-    dispatchTransaction: function(transaction) {
-      var newState = self.view.state.apply(transaction);
-      self.view.updateState(newState);
-      self.debouncedSaveEditorContent();
-    }
-  })
-  
+	var self = this;
+	this.view = new EditorView(container, {
+		state: EditorState.create({
+			// doc: schema.node("doc", null, [schema.node("paragraph")]),
+			doc: schema.nodeFromJSON(doc),
+			plugins: [
+				listKeymapPlugin,
+				listInputRulePlugin,
+				...listPlugins,
+				...exampleSetup({ schema }),
+			],
+		}),
+		dispatchTransaction: function(transaction) {
+			var newState = self.view.state.apply(transaction);
+			self.view.updateState(newState);
+			self.debouncedSaveEditorContent();
+		}
+	})
+		
 	parent.insertBefore(container,nextSibling);
 	this.domNodes.push(container);
 };
 
 ProsemirrorWidget.prototype.saveEditorContent = function() {
-  var content = this.view.state.doc.toJSON();
-  console.log(`ProseMirror: ${JSON.stringify(content)}`, content);
-  var wikiast = wikiAstFromProseMirrorAst(content);
-  console.log(`WikiAST: ${JSON.stringify(wikiast)}`, wikiast);
-  var wikiText = $tw.utils.serializeParseTree(wikiast);
-  console.log(`WikiText: ${wikiText}`);
-  var tiddler = this.getAttribute("tiddler");
-  this.wiki.setText(tiddler, "text", undefined, wikiText);
+	var content = this.view.state.doc.toJSON();
+	console.log(`ProseMirror: ${JSON.stringify(content)}`, content);
+	var wikiast = wikiAstFromProseMirrorAst(content);
+	console.log(`WikiAST: ${JSON.stringify(wikiast)}`, wikiast);
+	var wikiText = $tw.utils.serializeParseTree(wikiast);
+	console.log(`WikiText: ${wikiText}`);
+	var tiddler = this.getAttribute("tiddler");
+	this.wiki.setText(tiddler, "text", undefined, wikiText);
 }
 
 // Debounced save function for performance
