@@ -5,3 +5,5 @@ Test `<$prosemirror />` widget below, see console for content JSON.
 <$edit-prosemirror tiddler="$:/plugins/tiddlywiki/prosemirror/example"/>
 
 <$edit-text tiddler="$:/plugins/tiddlywiki/prosemirror/example" class="tc-edit-texteditor"/>
+
+{{$:/plugins/tiddlywiki/prosemirror/example}}

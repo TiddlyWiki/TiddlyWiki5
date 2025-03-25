@@ -7,59 +7,25 @@ Get the Prosemirror AST from a Wiki AST
 
 \*/
 
-/**
- * Many node shares same type `element` in wikiAst, we need to distinguish them by tag.
- */
-const elementBuilders = {
-	p: function(context, node) {
-		return {
-			type: "paragraph",
-			content: convertNodes(context, node.children)
-		};
-	},
-	h1: function(context, node) {
-		return {
-			type: "heading",
-			attrs: { level: 1 },
-			content: convertNodes(context, node.children)
-		};
-	},
-	h2: function(context, node) {
-		return {
-			type: "heading",
-			attrs: { level: 2 },
-			content: convertNodes(context, node.children)
-		};
-	},
-	h3: function(context, node) {
-		return {
-			type: "heading",
-			attrs: { level: 3 },
-			content: convertNodes(context, node.children)
-		};
-	},
-	h4: function(context, node) {
-		return {
-			type: "heading",
-			attrs: { level: 4 },
-			content: convertNodes(context, node.children)
-		};
-	},
-	h5: function(context, node) {
-		return {
-			type: "heading",
-			attrs: { level: 5 },
-			content: convertNodes(context, node.children)
-		};
-	},
-	h6: function(context, node) {
-		return {
-			type: "heading",
-			attrs: { level: 6 },
-			content: convertNodes(context, node.children)
-		};
-	},
-	ul: function(context, node) {
+function buildParagraph(context, node) {
+	return {
+		type: "paragraph",
+		content: convertNodes(context, node.children)
+	};
+}
+
+function buildHeading(context, node, level) {
+	return {
+		type: "heading",
+		attrs: { level: level },
+		content: convertNodes(context, node.children)
+	};
+}
+
+function buildUnorderedList(context, node) {
+	// Prosemirror requires split all lists into separate lists with single items
+	return node.children.map(item => {
+		const processedItem = convertANode({...context, level: context.level + 1}, item);
 		return {
 			type: "list",
 			attrs: {
@@ -68,10 +34,14 @@ const elementBuilders = {
 				checked: false,
 				collapsed: false
 			},
-			content: convertNodes(context, node.children)
+			content: processedItem
 		};
-	},
-	ol: function(context, node) {
+	});
+}
+
+function buildOrderedList(context, node) {
+	return node.children.map(item => {
+		const processedItem = convertANode({...context, level: context.level + 1}, item);
 		return {
 			type: "list",
 			attrs: {
@@ -80,17 +50,11 @@ const elementBuilders = {
 				checked: false,
 				collapsed: false
 			},
-			content: convertNodes(context, node.children)
+			content: processedItem
 		};
-	},
-	li: function(context, node) {
-		// In ProseMirror, list items are converted to paragraphs or other block content
-		// directly under the list node, no special list_item type needed
-		const processedContent = convertNodes(context, node.children);
-		// Ensure content starts with a block element (typically paragraph)
-		return wrapTextNodesInParagraphs(context, processedContent);
-	}
-};
+	});
+}
+
 
 /**
  * Helper function to ensure text nodes in list items are wrapped in paragraphs
@@ -132,6 +96,28 @@ function wrapTextNodesInParagraphs(context, nodes) {
 	return result;
 }
 
+function buildListItem(context, node) {
+	const processedContent = convertNodes({...context, level: context.level + 1}, node.children);
+	// Ensure content starts with a block element (typically paragraph)
+	return wrapTextNodesInParagraphs(context, processedContent);
+}
+
+/**
+ * Many node shares same type `element` in wikiAst, we need to distinguish them by tag.
+ */
+const elementBuilders = {
+	p: buildParagraph,
+	h1: (context, node) => buildHeading(context, node, 1),
+	h2: (context, node) => buildHeading(context, node, 2),
+	h3: (context, node) => buildHeading(context, node, 3),
+	h4: (context, node) => buildHeading(context, node, 4),
+	h5: (context, node) => buildHeading(context, node, 5),
+	h6: (context, node) => buildHeading(context, node, 6),
+	ul: buildUnorderedList,
+	ol: buildOrderedList,
+	li: buildListItem
+};
+
 function element(context, node) {
 	const builder = elementBuilders[node.tag];
 	if (builder) {
@@ -158,7 +144,8 @@ const builders = {
 };
 
 function wikiAstToProsemirrorAst(node, options) {
-	const context = { ...builders, ...options };
+	// Initialize context with level tracking
+	const context = { ...builders, ...options, level: 0 };
 	const result = convertNodes(context, Array.isArray(node) ? node : [node]);
 	
 	// Wrap in a doc if needed
