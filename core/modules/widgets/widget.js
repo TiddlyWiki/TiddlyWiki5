@@ -405,12 +405,10 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 		}
 	} else if(attribute.type === "macro") {
 		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
-		if(variableInfo) {
-			if(options.asList) {
-				value = variableInfo.resultList;
-			} else {
-				value = variableInfo.text || "";
-			}
+		if(options.asList) {
+			value = variableInfo.resultList;
+		} else {
+			value = variableInfo.text;
 		}
 	} else if(attribute.type === "substituted") {
 		value = this.wiki.getSubstitutedText(attribute.rawValue,this) || "";
