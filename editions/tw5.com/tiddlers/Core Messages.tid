@@ -1,7 +1,9 @@
 created: 20240421144407522
-modified: 20240422091247905
+modified: 20250326000209111
+related: ActionSendMessageWidget
 tags: Reference
 title: Core Messages
+type: text/vnd.tiddlywiki
 
 {{||Messages}}
 

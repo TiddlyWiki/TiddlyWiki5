@@ -1,6 +1,7 @@
 caption: tm-copy-to-clipboard
 created: 20171215150056004
-modified: 20250127134445040
+modified: 20250326000000406
+related: ActionSendMessageWidget
 tags: Messages
 title: WidgetMessage: tm-copy-to-clipboard
 type: text/vnd.tiddlywiki

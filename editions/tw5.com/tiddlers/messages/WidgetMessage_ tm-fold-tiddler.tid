@@ -1,6 +1,7 @@
 caption: tm-fold-tiddler
 created: 20160424232749223
-modified: 20191028113537119
+modified: 20250326000000406
+related: ActionSendMessageWidget
 tags: Messages
 title: WidgetMessage: tm-fold-tiddler
 type: text/vnd.tiddlywiki

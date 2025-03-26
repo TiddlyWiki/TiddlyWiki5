@@ -1,0 +1,7 @@
+created: 20250326003708725
+modified: 20250326004622985
+tags: 
+title: $:/editions/tw5.com/more-info-tab-button-template
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler={{{ [<currentTab>get[icon]] }}} size="64px"/> <$view tiddler=<<currentTab>> field="caption"><$view tiddler=<<currentTab>> field="title"/></$view>

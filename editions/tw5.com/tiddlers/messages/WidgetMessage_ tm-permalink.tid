@@ -1,9 +1,10 @@
+caption: tm-permalink
 created: 20140723103751357
-modified: 20240523174013095
+modified: 20250326000000407
+related: ActionSendMessageWidget
 tags: Messages
 title: WidgetMessage: tm-permalink
 type: text/vnd.tiddlywiki
-caption: tm-permalink
 
 The `tm-permalink` message changes the browser address bar to form a [[permalink|PermaLinks]] to a specified tiddler, defaulting to the current tiddler. The resulting link will be copied to the clipboard.
 

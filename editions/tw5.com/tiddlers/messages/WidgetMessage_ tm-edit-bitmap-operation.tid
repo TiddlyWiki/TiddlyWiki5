@@ -1,6 +1,7 @@
 caption: tm-edit-bitmap-operation
 created: 20160424204236050
-modified: 20230803045807664
+modified: 20250326000000406
+related: ActionSendMessageWidget
 tags: Messages
 title: WidgetMessage: tm-edit-bitmap-operation
 type: text/vnd.tiddlywiki
