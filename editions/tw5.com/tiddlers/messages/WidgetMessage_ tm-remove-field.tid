@@ -1,10 +1,10 @@
-caption: tm-remove-field
 created: 20140908185153663
-modified: 20250326000000407
+modified: 20140908185153663
 related: ActionSendMessageWidget
 tags: Messages
 title: WidgetMessage: tm-remove-field
 type: text/vnd.tiddlywiki
+caption: tm-remove-field
 
 The `tm-remove-field` message is handled by the FieldManglerWidget. It removes the specified field.
 

@@ -1,10 +1,10 @@
-caption: tm-navigate
 created: 20140226085215941
-modified: 20250326000000407
+modified: 20210705094948968
 related: ActionSendMessageWidget
 tags: Messages
 title: WidgetMessage: tm-navigate
 type: text/vnd.tiddlywiki
+caption: tm-navigate
 
 The `tm-navigate` message inserts the specified tiddler into the story and puts it at the top of the history stack. If the tiddler is not already present in the story then it will be positioned immediately after the tiddler specified in `event.navigateFromTitle`.
 

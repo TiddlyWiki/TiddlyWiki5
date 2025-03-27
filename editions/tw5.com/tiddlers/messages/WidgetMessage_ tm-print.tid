@@ -1,10 +1,10 @@
-caption: tm-print
 created: 20161008085627406
-modified: 20250326000000407
+modified: 20161008085627406
 related: ActionSendMessageWidget
 tags: Messages
 title: WidgetMessage: tm-print
 type: text/vnd.tiddlywiki
+caption: tm-print
 
 <<.from-version "5.1.14">> The `tm-print` message causes the browser to display the print dialog for the current page. It does not require any properties on the `event` object.
 

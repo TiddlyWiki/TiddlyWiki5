@@ -1,10 +1,10 @@
-caption: tm-close-all-tiddlers
 created: 20140226194242809
-modified: 20250326000000406
+modified: 20140226194341303
 related: ActionSendMessageWidget
 tags: Messages navigator-message
 title: WidgetMessage: tm-close-all-tiddlers
 type: text/vnd.tiddlywiki
+caption: tm-close-all-tiddlers
 
 The close all tiddlers message empties the story list.
 
