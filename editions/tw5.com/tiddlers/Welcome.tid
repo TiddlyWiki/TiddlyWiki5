@@ -1,4 +1,5 @@
 list: HelloThere [[Quick Start]] [[Find Out More]] [[TiddlyWiki on the Web]] [[Testimonials and Reviews]] GettingStarted Community
+skip-footer: yes
 tags: TableOfContents
 title: Welcome
 type: text/vnd.tiddlywiki

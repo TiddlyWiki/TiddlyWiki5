@@ -1,11 +1,11 @@
 created: 20250326000304980
 list-after: $:/core/ui/ViewTemplate/body
-modified: 20250326012903180
+modified: 20250327020654861
 tags: $:/tags/ViewTemplate
 title: $:/editions/tw5.com/more-info-view-template
 type: text/vnd.tiddlywiki
 
-<% if [<currentTiddler>!is[system]] %>
+<% if [<currentTiddler>!is[system]!skip-footer[yes]] %>
 
 <div class="tc-more-info-footer">
 <<tabs 

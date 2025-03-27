@@ -166,11 +166,7 @@ type: text/vnd.tiddlywiki
 }
 
 .tc-more-info-footer {
-	border-top: 1px solid <<colour tab-divider>>;
-	background-color: <<colour message-background>>;
-	padding: 0 1em .5em;
-}
-.tc-more-info-footer-list {
-	column-width: 20em;
+	margin-top: 2em;
+	.tc-tab-buttons {font-size: 100%;}
 }
 
