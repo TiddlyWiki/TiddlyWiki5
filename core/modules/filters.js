@@ -116,7 +116,7 @@ function parseFilterOperation(operators,filterString,p) {
 		// Check for multiple operands
 		while(filterString.charAt(p) === ",") {
 			p++;
-			if(/^[\[\{<\/]/.test(filterString.substring(p))) {
+			if(/^[\[\{<\/\(]/.test(filterString.substring(p))) {
 				nextBracketPos = p;
 				p++;
 				parseOperand(filterString.charAt(nextBracketPos));
@@ -145,6 +145,14 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
+		// Groups:
+		// 1 - entire filter run prefix
+		// 2 - filter run prefix itself
+		// 3 - filter run prefix suffixes
+		// 4 - opening square bracket following filter run prefix
+		// 5 - double quoted string following filter run prefix
+		// 6 - single quoted string following filter run prefix
+		// 7 - anything except for whitespace and square brackets
 		operandRegExp = /((?:\+|\-|~|(?:=>?)|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
@@ -162,12 +170,15 @@ exports.parseFilter = function(filterString) {
 			};
 			match = operandRegExp.exec(filterString);
 			if(match && match.index === p) {
+				// If there is a filter run prefix
 				if(match[1]) {
 					operation.prefix = match[1];
 					p = p + operation.prefix.length;
+					// Name for named prefixes
 					if(match[2]) {
 						operation.namedPrefix = match[2];
 					}
+					// Suffixes for filter run prefix
 					if(match[3]) {
 						operation.suffixes = [];
 						$tw.utils.each(match[3].split(":"),function(subsuffix) {
@@ -181,14 +192,17 @@ exports.parseFilter = function(filterString) {
 						});
 					}
 				}
-				if(match[4]) { // Opening square bracket
+				// Opening square bracket
+				if(match[4]) {
 					p = parseFilterOperation(operation.operators,filterString,p);
 				} else {
 					p = match.index + match[0].length;
 				}
 			} else {
+				// No filter run prefix
 				p = parseFilterOperation(operation.operators,filterString,p);
 			}
+			// Quoted strings and unquoted title
 			if(match[5] || match[6] || match[7]) { // Double quoted string, single quoted string or unquoted title
 				operation.operators.push(
 					{operator: "title", operands: [{text: match[5] || match[6] || match[7]}]}
