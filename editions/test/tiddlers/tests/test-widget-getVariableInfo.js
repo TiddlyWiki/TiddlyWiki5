@@ -61,10 +61,10 @@ describe("Widget module", function() {
 			childNode = childNode.children[0];
 		}
 
-		expect(childNode.getVariableInfo("macro",{allowSelfAssigned:true}).params).toEqual([{name:"a",value:"aa"}]);
+		expect(childNode.getVariableInfo("macro",{allowSelfAssigned:true}).params).toEqual([{name:"a",value:"aa",multiValue:["aa"]}]);
 
 		// function params
-		expect(childNode.getVariableInfo("fn",   {allowSelfAssigned:true}).params).toEqual([{name:"f",value:"ff"}]);
+		expect(childNode.getVariableInfo("fn",   {allowSelfAssigned:true}).params).toEqual([{name:"f",value:"ff",multiValue:["ff"]}]);
 		// functions have a text and a value
 		expect(childNode.getVariableInfo("x",   {allowSelfAssigned:true}).text).toBe("fff");
 		expect(childNode.getVariableInfo("x",   {allowSelfAssigned:true}).srcVariable.value).toBe("[<fn>]");

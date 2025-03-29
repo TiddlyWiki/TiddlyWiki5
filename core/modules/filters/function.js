@@ -16,8 +16,8 @@ exports.function = function(source,operator,options) {
 	var functionName = operator.operands[0],
 		params = [],
 		results;
-	$tw.utils.each(operator.operands.slice(1),function(param) {
-		params.push({value: param});
+	$tw.utils.each(operator.multiValueOperands.slice(1),function(paramList) {
+		params.push({value: paramList[0] || "",multiValue: paramList});
 	});
 	// console.log(`Calling ${functionName} with params ${JSON.stringify(params)}`);
 	var variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(functionName,{params: params, source: source});
