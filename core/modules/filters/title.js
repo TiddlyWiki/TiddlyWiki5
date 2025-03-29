@@ -16,7 +16,8 @@ exports.title = function(source,operator,options) {
 	var results = [];
 	if(operator.prefix === "!") {
 		source(function(tiddler,title) {
-			if(tiddler && tiddler.fields.title !== operator.operand) {
+			var titleList = operator.multiValueOperands[0] || [];
+			if(tiddler && titleList.indexOf(tiddler.fields.title) === -1) {
 				results.push(title);
 			}
 		});
