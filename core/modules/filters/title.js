@@ -21,11 +21,7 @@ exports.title = function(source,operator,options) {
 			}
 		});
 	} else {
-		if(operator.isMultiValueOperand[0]) {
-			Array.prototype.push.apply(results,operator.multiValueOperands[0]);
-		} else {
-			results.push(operator.operand);
-		}
+		Array.prototype.push.apply(results,operator.multiValueOperands[0]);
 	}
 	return results;
 };
