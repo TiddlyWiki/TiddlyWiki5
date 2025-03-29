@@ -6,14 +6,11 @@ module-type: texteditoroperation
 Text editor operation to excise the selection to a new tiddler
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function isMarkdown(mediaType) {
-	return mediaType === 'text/markdown' || mediatype === 'text/x-markdown';
+	return mediaType === 'text/markdown' || mediaType === 'text/x-markdown';
 }
 
 exports["excise"] = function(event,operation) {
@@ -53,5 +50,3 @@ exports["excise"] = function(event,operation) {
 	operation.newSelStart = operation.selStart;
 	operation.newSelEnd = operation.selStart + operation.replacement.length;
 };
-
-})();

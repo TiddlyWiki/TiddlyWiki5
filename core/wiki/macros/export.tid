@@ -1,5 +1,5 @@
 title: $:/core/macros/export
-tags: $:/tags/Macro $:/tags/Global
+tags: $:/tags/Macro
 
 \function exportButtonFilename(baseFilename)
 [<baseFilename>] [<extension>] +[join[]]
@@ -39,6 +39,7 @@ tags: $:/tags/Macro $:/tags/Global
 							$param=<<currentTiddler>>
 							exportFilter=<<exportFilter>>
 							filename={{{ [<baseFilename>addsuffix{!!extension}] }}}
+							type={{!!file-type}}
 						/>
 						<$action-deletetiddler $tiddler=<<qualify "$:/state/popup/export">>/>
 						<$transclude field="description"/>

@@ -1,0 +1,75 @@
+created: 20140912140651119
+modified: 20241005104741984
+original-modified: 20220812144516626
+saving-browser: Firefox Chrome Edge [[Internet Explorer]] Safari Opera [[Standalone App]]
+saving-os: Windows Mac Linux Android iOS
+tags: [[Working with TiddlyWiki]]
+title: Saving
+ja-title: 保存
+type: text/vnd.tiddlywiki
+
+
+\define alltagsfilter()  
+<$vars tag1="tag[" tag2="]" lb="[" rb="tag[Saving]sort[delivery]]">
+<$set filter="[list<stateTiddler>addprefix<tag1>addsuffix<tag2>]+[join[]addprefix<lb>addsuffix<rb>]" name="alltags" select=0>
+<$text text=<<alltags>>/>
+</$set>
+</$vars>
+\end
+
+\define saverssidebaritem(item:"Linux")
+<$checkbox tiddler=<<qualify $:/temp/$item$>> field="status" checked="selected" checkactions=<<checkactions "$item$">> uncheckactions=<<uncheckactions "$item$">> default="closed"> $item$</$checkbox><br/>
+\end
+
+\define saverssidebaritemlist(fieldname:"os")
+<$list filter="[enlist{!!$fieldname$}]" variable="currentItem">
+<$macrocall $name="saverssidebaritem" item=<<currentItem>>/>
+</$list>
+\end
+
+\define uncheckactions(item:"Linux")
+<$action-listops  $tiddler=<<stateTiddler>> $subfilter="-[[$item$]]"/>
+\end
+
+\define checkactions(item:"Linux")
+<$action-listops $tiddler=<<stateTiddler>>  $subfilter="[[$item$]]"/>
+\end
+
+\define introduction-message()
+<div class="tc-saving-introduction">
+<div>
+お使いのプラットフォームで動作する保存方法を確認するには、チェックボックスを使用してください
+</div>
+</div>
+\end
+
+<$vars stateTiddler=<<qualify "$:/state/gettingstarted">> >
+
+<div class="tc-wrapper-flex">
+<div class="tc-saving-sidebar">
+  <div class="tc-saving-sidebar-category">
+      <div class="tc-saving-sidebar-category-title">OS</div>
+     <div class="tc-saving-sidebar-category-item">
+                <<saverssidebaritemlist "saving-os">>
+      </div>
+   </div>
+   <div class="tc-saving-sidebar-category">
+       <div class="tc-saving-sidebar-category-title">ブラウザ</div>
+        <div class="tc-saving-sidebar-category-item">
+               <<saverssidebaritemlist "saving-browser">>
+        </div>
+  </div>
+  
+</div>
+
+<!-- Page content -->
+<div class="tc-cards">
+<$wikify text=<<alltagsfilter>> name="alltagsfilterwikified">
+<$list filter=<<alltagsfilterwikified>> emptyMessage=<<introduction-message>>>
+{{||$:/_tw5.com-card-template}}
+</$list>
+</$wikify>
+
+</div>
+</div>
+</$vars>

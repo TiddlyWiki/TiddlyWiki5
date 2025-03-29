@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for returning the names of the fields on the selected subtiddlers of the plugin named in the operand
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -27,5 +24,3 @@ exports.subtiddlerfields = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

@@ -12,10 +12,7 @@ definition text, including $param$ markers
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "macrodef";
@@ -88,5 +85,3 @@ exports.parse = function() {
 	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"value",text);
 	return parseTreeNodes;
 };
-
-})();

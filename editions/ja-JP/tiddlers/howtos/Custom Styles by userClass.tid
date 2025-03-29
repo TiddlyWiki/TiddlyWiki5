@@ -1,0 +1,28 @@
+created: 201804111739
+modified: 20241119113521083
+original-modified: 201804111739
+title: Custom styles by user-class
+ja-title: user-classによるカスタムスタイル
+tags: [[How to apply custom styles]]
+type: text/vnd.tiddlywiki
+
+''Tiddlerフィールド: `class`'' <<.from-version "5.1.16">>
+
+[[タグの管理|$:/TagManager]]を使用すると、"タグピル"の色を定義するために使用される`color`フィールドをTiddlerに設定できます。<<.from-version "5.1.16">>されたため、[[ViewTemplate|$:/core/ui/ViewTemplate]]に直接挿入され、スタイル設定に使用できる`class`フィールドを定義できます: 
+
+"""
+title: `anyName`
+tags: `$:/tags/Stylesheet`
+class: `myClass`
+"""
+
+`class`フィールドを持つすべてのTiddlerは次のようにスタイル設定できます!
+
+```
+.myClass {
+  border: 2px solid blue;
+}
+
+```
+
+詳細については、[[カスタムスタイルを適用する方法|How to apply custom styles]]を参照してください。

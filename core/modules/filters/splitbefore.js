@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator that splits each result on the first occurance of the specified separator and returns the unique values.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -27,5 +24,3 @@ exports.splitbefore = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

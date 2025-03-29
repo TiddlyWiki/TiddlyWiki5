@@ -5,7 +5,7 @@
 # Default to the current version number for building the plugin library
 
 if [  -z "$TW5_BUILD_VERSION" ]; then
-    TW5_BUILD_VERSION=v5.3.6
+    TW5_BUILD_VERSION=v5.3.7
 fi
 
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
@@ -97,7 +97,6 @@ if [ -n "$TW5_BUILD_ARCHIVE" ]; then
 
 node $TW5_BUILD_TIDDLYWIKI \
 	$TW5_BUILD_MAIN_EDITION \
-	--verbose \
 	--version \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_ARCHIVE \
@@ -115,7 +114,6 @@ fi
 
 node $TW5_BUILD_TIDDLYWIKI \
 	$TW5_BUILD_MAIN_EDITION \
-	--verbose \
 	--version \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
@@ -128,7 +126,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /tiddlywikicore-<version>.js	Core plugin javascript
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/empty \
-	--verbose \
 	--output $TW5_BUILD_OUTPUT \
 	--build empty emptyexternalcore \
 	|| exit 1
@@ -137,7 +134,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /test.html			Test edition
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/test \
-	--verbose \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all test.html text/plain \
 	|| exit 1
@@ -150,7 +146,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /dev/static/static.css	Static stylesheet
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/dev \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/dev \
 	--build index favicon static \
@@ -159,29 +154,13 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /tour.html			tour edition
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/tour \
-	--verbose \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all tour.html text/plain \
-	|| exit 1
-
-# /dev/index.html			Developer docs
-# /dev/favicon.ico			Favicon for dev site
-# /dev/static.html			Static rendering of default tiddlers
-# /dev/alltiddlers.html		Static rendering of all tiddlers
-# /dev/static/*				Static single tiddlers
-# /dev/static/static.css	Static stylesheet
-node $TW5_BUILD_TIDDLYWIKI \
-	./editions/dev \
-	--verbose \
-	--load $TW5_BUILD_OUTPUT/build.tid \
-	--output $TW5_BUILD_OUTPUT/dev \
-	--build index favicon static \
 	|| exit 1
 
 # /share.html				Custom edition for sharing via the URL
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/share \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--build share \
@@ -190,7 +169,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /upgrade.html				Custom edition for performing upgrades
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/upgrade \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--build upgrade \
@@ -199,7 +177,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /encrypted.html			Copy of the main file encrypted with the password "password"
 node $TW5_BUILD_TIDDLYWIKI \
 	$TW5_BUILD_MAIN_EDITION \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--build encrypted \
@@ -215,7 +192,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /editions/xlsx-utils/index.html	xlsx-utils edition
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/xlsx-utils \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/xlsx-utils/ \
 	--build index \
@@ -224,7 +200,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /editions/resumebuilder/index.html	Resume builder edition
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/resumebuilder \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/resumebuilder/ \
 	--build index \
@@ -233,7 +208,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /editions/text-slicer/index.html	Text slicer edition
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/text-slicer \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/text-slicer/ \
 	--build index \
@@ -242,7 +216,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /editions/translators/index.html	Translators edition
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/translators \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/translators/ \
 	--build index \
@@ -251,7 +224,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /editions/introduction/index.html	Introduction edition
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/introduction \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/introduction/ \
 	--build index \
@@ -260,7 +232,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /editions/full/index.html	Full edition
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/full \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/full/ \
 	--build index \
@@ -269,7 +240,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /editions/tw5.com-docs/index.html	tiddlywiki.com docs edition
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/tw5.com-docs \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/tw5.com-docs/ \
 	--build index \
@@ -278,7 +248,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /editions/twitter-archivist/index.html	Twitter Archivist edition
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/twitter-archivist \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/twitter-archivist/ \
 	--build index \
@@ -294,7 +263,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/innerwikidemo \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/innerwiki/index.html text/plain \
@@ -305,7 +273,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/dynaviewdemo \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/dynaview/index.html text/plain \
@@ -320,7 +287,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/katexdemo \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/katex/index.html text/plain \
@@ -331,7 +297,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /plugins/tiddlywiki/tahoelafs/empty.html	Empty wiki with Tahoe-LAFS plugin
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/tahoelafs \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/tahoelafs/index.html text/plain \
@@ -342,7 +307,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /plugins/tiddlywiki/d3/empty.html	Empty wiki with D3 plugin
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/d3demo \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/d3/index.html text/plain \
@@ -353,7 +317,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /plugins/tiddlywiki/codemirror/empty.html	Empty wiki with codemirror plugin
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/codemirrordemo \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/codemirror/index.html text/plain \
@@ -364,7 +327,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /plugins/tiddlywiki/markdown/empty.html		Empty wiki with Markdown plugin
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/markdowndemo \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/markdown/index.html text/plain \
@@ -375,7 +337,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /plugins/tiddlywiki/tw2parser/empty.html		Empty wiki with tw2parser plugin
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/classicparserdemo \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/tw2parser/index.html text/plain \
@@ -386,7 +347,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /plugins/tiddlywiki/highlight/empty.html		Empty wiki with highlight plugin
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/highlightdemo \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/highlight/index.html text/plain \
@@ -397,7 +357,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /plugins/tiddlywiki/geospatial/empty.html		Empty wiki with geospatial plugin
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/geospatialdemo \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/geospatial/index.html text/plain \
@@ -425,7 +384,6 @@ rm -rf $TW5_BUILD_OUTPUT/languages/zh-Hant/static/*
 # /languages/de-AT/empty.html		Empty wiki with de-AT language
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/de-AT \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/languages/de-AT \
 	--build favicon empty static index \
@@ -435,7 +393,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /languages/de-DE/empty.html		Empty wiki with de-DE language
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/de-DE \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/languages/de-DE \
 	--build favicon empty static index \
@@ -445,7 +402,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /languages/es-ES/empty.html		Empty wiki with es-ES language
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/es-ES \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/languages/es-ES \
 	--build favicon empty static index \
@@ -455,7 +411,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /languages/fr-FR/empty.html		Empty wiki with fr-FR language
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/fr-FR \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/languages/fr-FR \
 	--build favicon empty static index \
@@ -465,7 +420,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /languages/ja-JP/empty.html		Empty wiki with ja-JP language
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/ja-JP \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/languages/ja-JP \
 	--build empty index \
@@ -475,7 +429,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /languages/ko-KR/empty.html		Empty wiki with ko-KR language
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/ko-KR \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/languages/ko-KR \
 	--build favicon empty static index \
@@ -485,7 +438,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /languages/zh-Hans/empty.html		Empty wiki with zh-Hans language
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/zh-Hans \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/languages/zh-Hans \
 	--build empty index \
@@ -495,7 +447,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /languages/zh-Hant/empty.html		Empty wiki with zh-Hant language
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/zh-Hant \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/languages/zh-Hant \
 	--build empty index \
@@ -509,7 +460,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/pluginlibrary \
-	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/library/$TW5_BUILD_VERSION \
 	--build library\

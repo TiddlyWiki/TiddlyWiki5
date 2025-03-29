@@ -1,21 +1,9 @@
 created: 20130825161100000
-modified: 20230803051056946
+modified: 20241006202631647
 tags: Definitions
 title: TiddlyFox
 type: text/vnd.tiddlywiki
 
-<<.deprecated-since "FireFox 57" "Saving">>
-
-TiddlyFox is an extension for older versions of Firefox that allows standalone TiddlyWiki files to save their changes directly to the file system. TiddlyFox works on both desktop and smartphone versions of <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a>. See [[Saving with TiddlyFox]] or [[Saving with TiddlyFox on Android]] for detailed instructions.
+TiddlyFox was an extension for older versions of Firefox that allowed standalone TiddlyWiki files to save their changes directly to the file system.
 
 TiddlyFox is now obsolete due to its incompatibility with the latest versions of Firefox - see [[TiddlyFox Apocalypse]]. There are many alternatives to TiddlyFox, but none that work in precisely the same way -- see GettingStarted for details.
-
-TiddlyFox can be downloaded from the Mozilla Addons site:
-
-https://addons.mozilla.org/en-GB/firefox/addon/tiddlyfox/
-
-<<<
-You can also install the latest development version of TiddlyFox direct from GitHub:
-
-https://github.com/TiddlyWiki/TiddlyFox/raw/master/tiddlyfox.xpi
-<<<

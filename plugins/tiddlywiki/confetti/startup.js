@@ -7,9 +7,6 @@ Setup the root widget event handlers
 
 \*/
 (function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status

@@ -1,0 +1,27 @@
+caption: ~TiddlyIE
+color: #4DB6AC
+community-author: David Jade
+created: 20131211220000000
+delivery: Browser Extension
+description: Internet Explorer用のブラウザ拡張
+method: save
+modified: 20241009114650356
+original-modified: 20200507201415232
+tags: [[Internet Explorer]] Saving
+title: Saving with TiddlyIE
+ja-title: TiddlyIEでの保存
+type: text/vnd.tiddlywiki
+
+# TiddlyIEアドオンを次の場所からインストールします: 
+#* https://github.com/davidjade/TiddlyIE/releases
+# Internet Explorerを再起動します。IEはTiddlyIEアドオンを有効にするように要求します。
+#> //Microsoft Script Runtime//を有効にするプロンプトが表示される場合もあります。
+# 次のリンクを[[ダウンロード|Download]]し、空のTiddlyWikiを保存します: 
+#> https://tiddlywiki.com/empty.html
+# ダウンロードしたファイルを見つけます
+#* ファイル名を変更することもできますが、拡張子`.html`か`.htm`はそのままとしてください
+# Internet Explorerでファイルを開きます
+# サイドバーの''新しいTiddlerを作成します'' <<.icon $:/core/images/new-button>>ボタンを使用して、新しいTiddlerを作成してみてください。Tiddlerのコンテンツを入力し、<<.icon $:/core/images/done-button>> ''編集内容を確定します''ボタンをクリックします
+# サイドバーの<<.icon $:/core/images/save-button-dynamic>> ''Wikiを保存します''ボタンをクリックして変更を保存します。Internet Explorerは、''名前を付けて保存''ダイアログを表示して、ファイルをローカルに保存することに同意するかどうかを確認します。
+# ブラウザウィンドウを更新して、変更が正しく保存されたことを確認してください
+

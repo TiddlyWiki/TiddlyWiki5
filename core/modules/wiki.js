@@ -16,10 +16,7 @@ Adds the following properties to the wiki object:
 * `globalCache` is a hashmap by cache name of cache objects that are cleared whenever any tiddler change occurs
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -141,12 +138,15 @@ This method should be called after the changes it describes have been made to th
 	title: Title of tiddler
 	isDeleted: defaults to false (meaning the tiddler has been created or modified),
 		true if the tiddler has been deleted
+	isShadow: defaults to false (meaning the change applies to the normal tiddler),
+		true if the tiddler being changed is a shadow tiddler
 */
-exports.enqueueTiddlerEvent = function(title,isDeleted) {
+exports.enqueueTiddlerEvent = function(title,isDeleted,isShadow) {
 	// Record the touch in the list of changed tiddlers
 	this.changedTiddlers = this.changedTiddlers || Object.create(null);
 	this.changedTiddlers[title] = this.changedTiddlers[title] || Object.create(null);
 	this.changedTiddlers[title][isDeleted ? "deleted" : "modified"] = true;
+	this.changedTiddlers[title][isShadow ? "shadow" : "normal"] = true;
 	// Increment the change count
 	this.changeCount = this.changeCount || Object.create(null);
 	if($tw.utils.hop(this.changeCount,title)) {
@@ -1132,6 +1132,7 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 			if(tiddler.fields.type) {
 				parserInfo.parserType = tiddler.fields.type;
 			}
+			parserInfo._canonical_uri = tiddler.fields._canonical_uri;
 		}
 	} else if(field) {
 		if(field === "title") {
@@ -1787,5 +1788,3 @@ exports.slugify = function(title,options) {
 	}
 	return slug;
 };
-
-})();

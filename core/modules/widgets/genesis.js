@@ -6,10 +6,7 @@ module-type: widget
 Genesis widget for dynamically creating widgets
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -23,15 +20,21 @@ Inherit from the base widget class
 */
 GenesisWidget.prototype = new Widget();
 
+GenesisWidget.prototype.computeAttributes = function(options) {
+	options = options || Object.create(null);
+	options.filterFn = function(name) {
+		// Only compute our own attributes which start with a single dollar
+		return name.charAt(0) === "$" && name.charAt(1) !== "$";
+	}
+	return Widget.prototype.computeAttributes.call(this,options);
+};
+
 /*
 Render this widget into the DOM
 */
 GenesisWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
-	this.computeAttributes({filterFn: function(name) {
-		// Only compute our own attributes which start with a single dollar
-		return name.charAt(0) === "$" && name.charAt(1) !== "$";
-	}});
+	this.computeAttributes();
 	this.execute();
 	this.renderChildren(parent,nextSibling);
 };
@@ -65,6 +68,16 @@ GenesisWidget.prototype.execute = function() {
 		children: this.parseTreeNode.children || [],
 		isNotRemappable: !this.genesisRemappable
 	}];
+	// Apply attributes in $names/$values
+	this.attributeNames = [];
+	this.attributeValues = [];
+	if(this.genesisNames && this.genesisValues) {
+		this.attributeNames = this.wiki.filterTiddlers(self.genesisNames,this);
+		this.attributeValues = this.wiki.filterTiddlers(self.genesisValues,this);
+		$tw.utils.each(this.attributeNames,function(varname,index) {
+			$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],varname,self.attributeValues[index] || "");
+		});
+	}
 	// Apply explicit attributes
 	$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(this.parseTreeNode),function(attribute) {
 		var name = attribute.name;
@@ -79,16 +92,6 @@ GenesisWidget.prototype.execute = function() {
 		}
 		$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],$tw.utils.extend({},attribute,{name: name}));
 	});
-	// Apply attributes in $names/$values
-	this.attributeNames = [];
-	this.attributeValues = [];
-	if(this.genesisNames && this.genesisValues) {
-		this.attributeNames = this.wiki.filterTiddlers(self.genesisNames,this);
-		this.attributeValues = this.wiki.filterTiddlers(self.genesisValues,this);
-		$tw.utils.each(this.attributeNames,function(varname,index) {
-			$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],varname,self.attributeValues[index] || "");
-		});
-	}
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
 };
@@ -111,5 +114,3 @@ GenesisWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.genesis = GenesisWidget;
-
-})();

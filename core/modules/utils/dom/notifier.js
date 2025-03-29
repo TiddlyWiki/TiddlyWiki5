@@ -6,10 +6,7 @@ module-type: utils
 Notifier mechanism
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -88,5 +85,3 @@ Notifier.prototype.display = function(title,options) {
 };
 
 exports.Notifier = Notifier;
-
-})();

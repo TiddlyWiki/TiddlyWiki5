@@ -1,6 +1,6 @@
 title: $:/config/OfficialPluginLibrary
 tags: $:/tags/PluginLibrary
-url: https://tiddlywiki.com/prerelease/library/v5.3.6/index.html
+url: https://tiddlywiki.com/prerelease/library/v5.3.7/index.html
 caption: {{$:/language/OfficialPluginLibrary}} (Prerelease)
 
 The prerelease version of the official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
