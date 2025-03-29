@@ -1,5 +1,5 @@
 created: 20231218192649874
-modified: 20231219125925918
+modified: 20250329070425220
 tags: RevealWidget
 title: Popup Clamping Demo
 
@@ -34,7 +34,7 @@ title: Popup Clamping Demo
 	         position={{{ [{$:/temp/clamp-demo-position}else[below]] }}}
 			 state="$:/state/popup-clamping"
 			 class="grid-popup"
-			 clamp={{{ [{$:/temp/clamp-demo-active}else[no]] }}}
+			 clamp={{{ [{$:/temp/clamp-demo-active}else[none]] }}}
 			 positionAllowNegative={{{ [{$:/temp/clamp-demo-allow-negative}else[no]] }}}>
 		<div class="tc-drop-down">
 
@@ -44,11 +44,16 @@ title: Popup Clamping Demo
 	</$reveal>
 </div>
 
-<$checkbox tiddler="$:/temp/clamp-demo-active" field="text" checked="yes" unchecked="no" default="no"> Enable clamping</$checkbox>
+clamp=<$select tiddler="$:/temp/clamp-demo-active" field="text" default="none">
+<option value="none">none</option>
+<option value="right">right</option>
+<option value="bottom">bottom</option>
+<option value="both">both</option>
+</$select>
 
 <$checkbox tiddler="$:/temp/clamp-demo-allow-negative" field="text" checked="yes" unchecked="no" default="no"> positionAllowNegative</$checkbox>
 
-<$select tiddler="$:/temp/clamp-demo-position" field="text" default="below">
+position=<$select tiddler="$:/temp/clamp-demo-position" field="text" default="below">
 <option value="left">left</option>
 <option value="above">above</option>
 <option value="aboveleft">aboveleft</option>
