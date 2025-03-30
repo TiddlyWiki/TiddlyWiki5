@@ -51,14 +51,26 @@ exports.warning = function(text) {
 };
 
 /*
-Log a table of name: value pairs
+Log a table of name: value or name: [values...] pairs
 */
 exports.logTable = function(data) {
-	if(console.table) {
+	var hasArrays = false;
+	$tw.utils.each(data,function(value,name) {
+		if($tw.utils.isArray(value)) {
+			hasArrays = true;
+		}
+	});
+	if(console.table && !hasArrays) {
 		console.table(data);
 	} else {
 		$tw.utils.each(data,function(value,name) {
-			console.log(name + ": " + value);
+			if($tw.utils.isArray(value)) {
+				for(var t=0; t<value.length; t++) {
+					console.log(`${name}[${t}]: ${value[t]}`);
+				}
+			} else {
+				console.log(`${name}: ${value}`);
+			}
 		});
 	}
 }
