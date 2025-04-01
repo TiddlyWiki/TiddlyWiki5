@@ -220,13 +220,22 @@ exports.filterTiddlers = function(filterString,widget,source) {
 Compile a filter into a function with the signature fn(source,widget) where:
 source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
 widget: an optional widget node for retrieving the current tiddler etc.
+
+Parameters:
+filterString: the filter string to compile
+options: includes:
+
+wrappers: a hashmap of wrapper functions to apply to the compiled filter function
 */
-exports.compileFilter = function(filterString) {
+exports.compileFilter = function(filterString,options) {
+	options = options || {};
+	var self = this;
+	var wrappers = options.wrappers || {};
 	if(!this.filterCache) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
-	if(this.filterCache[filterString] !== undefined) {
+	if(this.filterCache[filterString] !== undefined && !wrappers) {
 		return this.filterCache[filterString];
 	}
 	var filterParseTree;
@@ -252,17 +261,18 @@ exports.compileFilter = function(filterString) {
 				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 			$tw.utils.each(operation.operators,function(operator) {
 				var operands = [],
-					operatorFunction;
+					operatorName,operatorFunction;
 				if(!operator.operator) {
 					// Use the "title" operator if no operator is specified
-					operatorFunction = filterOperators.title;
+					operatorName = "title";
 				} else if(!filterOperators[operator.operator]) {
 					// Unknown operators treated as "[unknown]" - at run time we can distinguish between a custom operator and falling back to the default "field" operator
-					operatorFunction = filterOperators["[unknown]"];
+					operatorName = "[unknown]";
 				} else {
 					// Use the operator function
-					operatorFunction = filterOperators[operator.operator];
+					operatorName = operator.operator;
 				}
+				operatorFunction = filterOperators[operatorName];
 				$tw.utils.each(operator.operands,function(operand) {
 					if(operand.indirect) {
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
@@ -274,10 +284,14 @@ exports.compileFilter = function(filterString) {
 					}
 					operands.push(operand.value);
 				});
-
+				// Wrap the filter operator module if required
+				if(wrappers.operator) {
+					operatorFunction = wrappers.operator.bind(self,operatorFunction);
+				}
 				// Invoke the appropriate filteroperator module
 				results = operatorFunction(accumulator,{
 							operator: operator.operator,
+							operatorName: operatorName,
 							operand: operands.length > 0 ? operands[0] : undefined,
 							operands: operands,
 							prefix: operator.prefix,
@@ -307,27 +321,44 @@ exports.compileFilter = function(filterString) {
 		var filterRunPrefixes = self.getFilterRunPrefixes();
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
-			var options = {wiki: self, suffixes: operation.suffixes || []};
+			var prefixName;
 			switch(operation.prefix || "") {
 				case "": // No prefix means that the operation is unioned into the result
-					return filterRunPrefixes["or"](operationSubFunction, options);
+					prefixName = "or";
+					break;
 				case "=": // The results of the operation are pushed into the result without deduplication
-					return filterRunPrefixes["all"](operationSubFunction, options);
+					prefixName = "all";
+					break;
 				case "-": // The results of this operation are removed from the main result
-					return filterRunPrefixes["except"](operationSubFunction, options);
+					prefixName = "except";
+					break;
 				case "+": // This operation is applied to the main results so far
-					return filterRunPrefixes["and"](operationSubFunction, options);
+					prefixName = "and";
+					break;
 				case "~": // This operation is unioned into the result only if the main result so far is empty
-					return filterRunPrefixes["else"](operationSubFunction, options);
-				default: 
-					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
-						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
-					} else {
-						return function(results,source,widget) {
-							results.clear();
-							results.push($tw.language.getString("Error/FilterRunPrefix"));
-						};
-					}
+					prefixName = "else";
+					break;
+				default:
+					prefixName = operation.namedPrefix;
+					break;
+			}
+			if(prefixName && filterRunPrefixes[prefixName]) {
+				var options = {
+						wiki: self,
+						suffixes: operation.suffixes || [],
+						prefixName: prefixName
+					},
+					filterRunPrefixFunction = filterRunPrefixes[prefixName];
+				// Wrap the filter operator module if required
+				if(wrappers.prefix) {
+					filterRunPrefixFunction = wrappers.prefix.bind(self,filterRunPrefixFunction);
+				}
+				return filterRunPrefixFunction(operationSubFunction,options);
+			} else {
+				return function(results,source,widget) {
+					results.clear();
+					results.push($tw.language.getString("Error/FilterRunPrefix"));
+				};
 			}
 		})());
 	});

@@ -1,0 +1,92 @@
+title: FiltersWrappers/Simple
+description: Test filter inspection
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+\procedure test-filter()
+1 2 3
+\end
+
+\function test-filter-wrapper()
+[inspect<test-filter>]
+\end
+
+<$text text=<<test-filter>>/>
+-
+<$text text=<<test-filter-wrapper>>/>
++
+title: ExpectedResult
+
+<p>1 2 3-{
+    "input": [
+        "$:/core",
+        "ExpectedResult",
+        "Output"
+    ],
+    "runs": [
+        {
+            "prefixName": "or",
+            "operators": [
+                {
+                    "operatorName": "title",
+                    "operands": [
+                        "1"
+                    ],
+                    "input": [
+                        "$:/core",
+                        "ExpectedResult",
+                        "Output"
+                    ]
+                }
+            ],
+            "output": [
+                "1"
+            ]
+        },
+        {
+            "prefixName": "or",
+            "operators": [
+                {
+                    "operatorName": "title",
+                    "operands": [
+                        "2"
+                    ],
+                    "input": [
+                        "$:/core",
+                        "ExpectedResult",
+                        "Output"
+                    ]
+                }
+            ],
+            "output": [
+                "2"
+            ]
+        },
+        {
+            "prefixName": "or",
+            "operators": [
+                {
+                    "operatorName": "title",
+                    "operands": [
+                        "3"
+                    ],
+                    "input": [
+                        "$:/core",
+                        "ExpectedResult",
+                        "Output"
+                    ]
+                }
+            ],
+            "output": [
+                "3"
+            ]
+        }
+    ],
+    "output": [
+        "3"
+    ]
+}</p>
