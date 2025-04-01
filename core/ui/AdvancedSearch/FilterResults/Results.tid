@@ -1,0 +1,13 @@
+title: $:/core/ui/AdvancedSearch/Filter/FilterResults/Results
+tags: $:/tags/AdvancedSearch/FilterResults
+caption: {{$:/language/Search/Filter/FilterResults/Results/Caption}}
+
+\procedure lingo-base() $:/language/Search/
+<$set name="resultCount" value="<$count filter={{$:/temp/advancedsearch}}/>">
+	<p><<lingo Filter/Matches>></p>
+	<$list filter={{$:/temp/advancedsearch}}>
+		<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] :and[then[]else[tc-list-item-selected]] }}}>
+			<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+		</span>
+	</$list>
+</$set>

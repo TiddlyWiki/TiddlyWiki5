@@ -1,0 +1,12 @@
+title: $:/core/ui/AdvancedSearch/Filter/FilterResults/Inspect
+tags: $:/tags/AdvancedSearch/FilterResults
+caption: {{$:/language/Search/Filter/FilterResults/Inspect/Caption}}
+
+\procedure lingo-base() $:/language/Search/
+
+
+<$let json={{{ [inspect{$:/temp/advancedsearch}] }}}>
+	<$transclude $variable="copy-to-clipboard-above-right" src=<<json>>/>
+	<$codeblock code=<<json>> language="application/json" }}}/>
+
+<$codeblock code=/>
