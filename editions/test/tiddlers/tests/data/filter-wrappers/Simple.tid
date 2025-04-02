@@ -31,6 +31,7 @@ title: ExpectedResult
         {
             "input": [],
             "prefixName": "or",
+            "suffixes": [],
             "operators": [
                 {
                     "operatorName": "title",
@@ -41,8 +42,14 @@ title: ExpectedResult
                         "$:/core",
                         "ExpectedResult",
                         "Output"
+                    ],
+                    "output": [
+                        "1"
                     ]
                 }
+            ],
+            "output": [
+                "1"
             ]
         },
         {
@@ -50,6 +57,7 @@ title: ExpectedResult
                 "1"
             ],
             "prefixName": "or",
+            "suffixes": [],
             "operators": [
                 {
                     "operatorName": "title",
@@ -60,8 +68,15 @@ title: ExpectedResult
                         "$:/core",
                         "ExpectedResult",
                         "Output"
+                    ],
+                    "output": [
+                        "2"
                     ]
                 }
+            ],
+            "output": [
+                "1",
+                "2"
             ]
         },
         {
@@ -70,6 +85,7 @@ title: ExpectedResult
                 "2"
             ],
             "prefixName": "or",
+            "suffixes": [],
             "operators": [
                 {
                     "operatorName": "title",
@@ -80,11 +96,20 @@ title: ExpectedResult
                         "$:/core",
                         "ExpectedResult",
                         "Output"
+                    ],
+                    "output": [
+                        "3"
                     ]
                 }
+            ],
+            "output": [
+                "1",
+                "2",
+                "3"
             ]
         }
     ],
+    "inputFilter": "1 2 3",
     "output": [
         "1",
         "2",
