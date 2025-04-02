@@ -27,20 +27,14 @@ exports.inspect = function(source,operator,options) {
 				prefix: function(filterRunPrefixFunction,operationFunction,innerOptions) {
 					return function(results,innerSource,innerWidget) {
 						var details ={
+								input: results.toArray(),
 								prefixName: innerOptions.prefixName,
 								operators: []
 							};
 						currentRun = details.operators;
-						var innerResults = filterRunPrefixFunction.call(this,operationFunction,innerOptions),
-							prefixOutput = new $tw.utils.LinkedList();
-						innerResults(prefixOutput,innerSource,innerWidget);
-						var prefixOutputArray = prefixOutput.toArray();
-						details.output = prefixOutputArray;
+						var innerResults = filterRunPrefixFunction.call(null,operationFunction,innerOptions);
+						innerResults(results,innerSource,innerWidget);
 						output.runs.push(details);
-						results.clear();
-						$tw.utils.each(prefixOutputArray,function(title) {
-							results.push(title);
-						});
 					};
 				},
 				operator: function(operatorFunction,innerSource,innerOperator,innerOptions) {
@@ -52,17 +46,17 @@ exports.inspect = function(source,operator,options) {
 							suffixes: innerOperator.suffixes,
 							regexp: innerOperator.regexp,
 							input: []
-						},
-						innerResults = operatorFunction.apply(self,Array.prototype.slice.call(arguments,1));
+						};
 					innerSource(function(tiddler,title) {
 						details.input.push(title);
 					});
 					currentRun.push(details);
+					var innerResults = operatorFunction.apply(null,Array.prototype.slice.call(arguments,1));
 					return innerResults;
 				}
 		}
 	});
-	output.output = compiledFilter.call(this,source,options.widget);
+	output.output = compiledFilter.call(options.wiki,source,options.widget);
 	var results = [];
 	results.push(JSON.stringify(output,null,4));
 	return results;

@@ -29,6 +29,7 @@ title: ExpectedResult
     ],
     "runs": [
         {
+            "input": [],
             "prefixName": "or",
             "operators": [
                 {
@@ -42,12 +43,12 @@ title: ExpectedResult
                         "Output"
                     ]
                 }
-            ],
-            "output": [
-                "1"
             ]
         },
         {
+            "input": [
+                "1"
+            ],
             "prefixName": "or",
             "operators": [
                 {
@@ -61,12 +62,13 @@ title: ExpectedResult
                         "Output"
                     ]
                 }
-            ],
-            "output": [
-                "2"
             ]
         },
         {
+            "input": [
+                "1",
+                "2"
+            ],
             "prefixName": "or",
             "operators": [
                 {
@@ -80,13 +82,12 @@ title: ExpectedResult
                         "Output"
                     ]
                 }
-            ],
-            "output": [
-                "3"
             ]
         }
     ],
     "output": [
+        "1",
+        "2",
         "3"
     ]
 }</p>
