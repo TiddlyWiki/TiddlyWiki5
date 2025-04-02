@@ -61,7 +61,7 @@ exports.inspect = function(source,operator,options) {
 	});
 	output.output = compiledFilter.call(options.wiki,source,options.widget);
 	var results = [];
-console.log(`Inspected ${JSON.stringify(output,null,4)}`);
+	// console.log(`Inspected ${JSON.stringify(output,null,4)}`);
 	results.push(JSON.stringify(output,null,4));
 	return results;
 };
