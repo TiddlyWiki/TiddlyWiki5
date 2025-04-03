@@ -3491,7 +3491,7 @@ span.tc-translink > a:first-child {
 }
 
 /*
-** Filter Inspection
+** Headed box and pills
 */
 
 .tc-box {
@@ -3501,31 +3501,6 @@ span.tc-translink > a:first-child {
 
 .tc-box .tc-box {
 	margin: 0.5em;
-}
-
-.tc-inspect-filter-box {
-	--box-background-color: <<colour code-border>>;
-	--box-foreground-color: <<colour code-foreground>>;
-}
-
-.tc-inspect-run-box {
-	--box-background-color: #ffc;
-	--box-foreground-color: #440;
-}
-
-.tc-inspect-operator-box {
-	--box-background-color: #fcc;
-	--box-foreground-color: #400;
-}
-
-.tc-inspect-input-box {
-	--box-background-color: #fcf;
-	--box-foreground-color: #404;
-}
-
-.tc-inspect-output-box {
-	--box-background-color: #cff;
-	--box-foreground-color: #044;
 }
 
 .tc-box-header {
@@ -3558,6 +3533,48 @@ span.tc-translink > a:first-child {
 	border-radius: 6px;
 	color: var(--box-foreground-color);
 	background-color: var(--box-background-color);
+}
+
+/*
+** Filter Inspection
+*/
+
+.tc-inspect-filter-box {
+	--box-background-color: <<colour code-border>>;
+	--box-foreground-color: <<colour code-foreground>>;
+}
+
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal {
+	overflow: scroll
+}
+
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal > .tc-box-content,
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-run-box > .tc-box-content,
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-operator-box > .tc-box-content {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.tc-inspect-run-box {
+	--box-background-color: #ffc;
+	--box-foreground-color: #440;
+}
+
+.tc-inspect-operator-box {
+	--box-background-color: #fcc;
+	--box-foreground-color: #400;
+}
+
+.tc-inspect-input-box {
+	--box-background-color: #fcf;
+	--box-foreground-color: #404;
+}
+
+.tc-inspect-output-box {
+	--box-background-color: #cff;
+	--box-foreground-color: #044;
 }
 
 /*

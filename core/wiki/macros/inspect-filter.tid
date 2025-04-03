@@ -77,9 +77,9 @@ tags: $:/tags/Macro
 </div>
 \end inspect-run
 
-\procedure inspect-filter(filter,inputFilter:"[all[tiddler]]")
+\procedure inspect-filter(filter,inputFilter:"[all[tiddler]]",orientation:"horizontal")
 <$let json={{{ [subfilter<inputFilter>inspect<filter>] }}}>
-	<div class="tc-box tc-inspect-filter-box">
+	<div class={{{ tc-box tc-inspect-filter-box [<orientation>match[horizontal]then[tc-inspect-filter-box-horizontal]] +[join[ ]] }}}>
 		<div class="tc-box-header">
 			Filter
 			<span class="tc-pill"><$text text={{{ [<json>jsonget[inputFilter]] }}}/></span>
