@@ -28,7 +28,7 @@ The JSON object contains the following properties:
 
 !! Examples
 
-<$transclude $variable="inspect-filter" filter="[list[$:/StoryList]] -$:/AdvancedSearch" inputFilter="[all[tiddler]]"/>
+<$transclude $variable="inspect-filter" filter="[list[$:/StoryList]] -$:/AdvancedSearch" inputFilter="[all[tiddlers]]"/>
 
-<$transclude $variable="inspect-filter" filter="[list[$:/StoryList]] -$:/AdvancedSearch" inputFilter="[all[tiddler]]" orientation="vertical"/>
+<$transclude $variable="inspect-filter" filter="[list[$:/StoryList]] -$:/AdvancedSearch" inputFilter="[all[tiddlers]]" orientation="vertical"/>
 

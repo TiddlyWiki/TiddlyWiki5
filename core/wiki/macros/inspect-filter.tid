@@ -77,7 +77,7 @@ tags: $:/tags/Macro
 </div>
 \end inspect-run
 
-\procedure inspect-filter(filter,inputFilter:"[all[tiddler]]",orientation:"horizontal")
+\procedure inspect-filter(filter,inputFilter:"[all[tiddlers]]",orientation:"horizontal")
 <$let json={{{ [subfilter<inputFilter>inspect<filter>] }}}>
 	<div class={{{ tc-box tc-inspect-filter-box [<orientation>match[horizontal]then[tc-inspect-filter-box-horizontal]] +[join[ ]] }}}>
 		<div class="tc-box-header">
