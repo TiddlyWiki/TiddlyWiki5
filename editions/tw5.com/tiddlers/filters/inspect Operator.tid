@@ -28,7 +28,7 @@ The JSON object contains the following properties:
 
 !! Examples
 
-<$transclude $variable="inspect-filter" filter="[list[$:/StoryList]] -$:/AdvancedSearch" inputFilter="[all[tiddlers]]"/>
+<$transclude $variable="inspect-filter" filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/toprightbar]]" inputFilter="[all[tiddlers]]"/>
 
-<$transclude $variable="inspect-filter" filter="[list[$:/StoryList]] -$:/AdvancedSearch" inputFilter="[all[tiddlers]]" orientation="vertical"/>
+<$transclude $variable="inspect-filter" filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/toprightbar]]" inputFilter="[all[tiddlers]]" orientation="vertical"/>
 
