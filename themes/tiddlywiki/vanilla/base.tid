@@ -3568,11 +3568,13 @@ span.tc-translink > a:first-child {
 }
 
 .tc-inspect-input-box {
+	min-width: 20em;
 	--box-background-color: #fcf;
 	--box-foreground-color: #404;
 }
 
 .tc-inspect-output-box {
+	min-width: 20em;
 	--box-background-color: #cff;
 	--box-foreground-color: #044;
 }
