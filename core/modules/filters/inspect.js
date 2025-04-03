@@ -54,7 +54,14 @@ exports.inspect = function(source,operator,options) {
 					});
 					currentRun.push(details);
 					var innerResults = operatorFunction.apply(null,Array.prototype.slice.call(arguments,1));
-					details.output = innerResults.slice(0);
+					if(!$tw.utils.isArray(innerResults)) {
+						var resultArray = [];
+						innerResults(function(tiddler,title) {
+							resultArray.push(title);
+						});
+						innerResults = resultArray;
+					}
+					details.output = innerResults;
 					return innerResults;
 				}
 		}
