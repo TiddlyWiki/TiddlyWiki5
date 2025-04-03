@@ -10,18 +10,20 @@ tags: $:/tags/Macro
 		<span class="tc-pill"><$text text={{{ [<jsonList>jsonindexes[]count[]] }}}/></span>
 	</div>
 	<div class="tc-box-content">
-		<$list filter="[<jsonList>jsonindexes[]limit[10]]" variable="indexList">
-			<$list-template>
-				<div class="tc-box-content-list-item">
-					<$text text={{{ [<jsonList>jsonget<indexList>] }}} />
-				</div>
-			</$list-template>
-			<$list-empty>
-				<div class="tc-box-content-list-empty">
-					(No items)
-				</div>
-			</$list-empty>
-		</$list>
+		<div class="tc-box-content-list">
+			<$list filter="[<jsonList>jsonindexes[]]" variable="indexList">
+				<$list-template>
+					<div class="tc-box-content-list-item">
+						<$text text={{{ [<jsonList>jsonget<indexList>] }}} />
+					</div>
+				</$list-template>
+				<$list-empty>
+					<div class="tc-box-content-list-empty">
+						(No items)
+					</div>
+				</$list-empty>
+			</$list>
+		</div>
 	</div>
 </div>
 \end inspect-list

@@ -3519,8 +3519,20 @@ span.tc-translink > a:first-child {
 	background-color: var(--box-background-color);
 }
 
-.tc-box-content-list-item {
+.tc-box-content-list {
+	margin: -0.25em;
+	max-height: 25vh;
+	overflow: scroll;
+}
 
+.tc-box-content-list-item {
+	font-size: 0.7em;
+	line-height: 1.1;
+	padding: 0.25em;
+}
+
+.tc-box-content-list-item:nth-child(even)  {
+	background: rgb(255, 255, 255, 0.5);
 }
 
 .tc-box-content-list-empty {
