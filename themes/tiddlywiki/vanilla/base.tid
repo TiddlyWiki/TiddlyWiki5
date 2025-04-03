@@ -3556,7 +3556,7 @@ span.tc-translink > a:first-child {
 	--box-foreground-color: <<colour code-foreground>>;
 }
 
-.tc-inspect-filter-box.tc-inspect-filter-box-horizontal {
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal > .tc-box-content {
 	overflow: scroll
 }
 
