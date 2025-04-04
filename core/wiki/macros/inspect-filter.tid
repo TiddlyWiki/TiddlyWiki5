@@ -4,40 +4,55 @@ tags: $:/tags/Macro
 \whitespace trim
 
 \procedure inspect-list(jsonList,prompt,class:"tc-box")
-<$let transclusion={{{ [[list-]addsuffix<class>] }}}>
+<$let
+	transclusion={{{ [[list-]addsuffix<class>] }}}
+>
 	<div class=<<class>>>
-		<div class="tc-box-header">
-			<$text text=<<prompt>>/>
-			<span class="tc-pill"><$text text={{{ [<jsonList>jsonindexes[]count[]] }}}/></span>
-		</div>
-		<div class="tc-box-content">
-			<div class="tc-box-content-list">
-				<$let
-					state=<<qualify "$:/temp/filter-inspector">>
-					stateMaxRows={{{ [<state>addsuffix[max-rows]] }}}
-					maxRows={{{ [<stateMaxRows>get[text]!match[]else[50]] }}}
-				>
-					<$list filter="[<jsonList>jsonindexes[]limit<maxRows>]" variable="indexList">
-						<$list-template>
-							<div class="tc-box-content-list-item">
-								<$text text={{{ [<jsonList>jsonget<indexList>] }}} />
-							</div>
-						</$list-template>
-						<$list-empty>
-							<div class="tc-box-content-list-empty">
-								(No items)
-							</div>
-						</$list-empty>
-					</$list>
-					<%if [<jsonList>jsonindexes[]count[]compare:number:gt<maxRows>] %>
-						<$button class="">
-							<$action-setfield $tiddler=<<stateMaxRows>> text={{{ [<maxRows>add[50]] }}}/>
-							Expand
-						</$button>
+		<$let
+			state=<<qualify "$:/temp/filter-inspector">>
+			stateFolded={{{ [<state>addsuffix[folded]] }}}
+			folded={{{ [<stateFolded>get[text]else[yes]match[yes]] }}}
+			stateMaxRows={{{ [<state>addsuffix[max-rows]] }}}
+			maxRows={{{ [<stateMaxRows>get[text]!match[]else[50]] }}}
+		>
+			<div class="tc-box-header">
+				<$button class="tc-btn-invisible" style.fill="inherit">
+					<%if [<folded>match[yes]] %>
+						<$action-setfield $tiddler=<<stateFolded>> text="no"/>
+						{{$:/core/images/right-arrow}}
+					<%else%>
+						<$action-setfield $tiddler=<<stateFolded>> text="yes"/>
+						{{$:/core/images/down-arrow}}
 					<%endif%>
-				</$let>
+				</$button>
+				<$text text=<<prompt>>/>
+				<span class="tc-pill"><$text text={{{ [<jsonList>jsonindexes[]count[]] }}}/></span>
 			</div>
-		</div>
+			<%if [<folded>!match[yes]] %>
+				<div class="tc-box-content">
+					<div class="tc-box-content-list">
+						<$list filter="[<jsonList>jsonindexes[]nsort[]limit<maxRows>]" variable="indexList">
+							<$list-template>
+								<div class="tc-box-content-list-item">
+									<$text text={{{ [<jsonList>jsonget<indexList>] }}} />
+								</div>
+							</$list-template>
+							<$list-empty>
+								<div class="tc-box-content-list-empty">
+									(No items)
+								</div>
+							</$list-empty>
+						</$list>
+						<%if [<jsonList>jsonindexes[]count[]compare:number:gt<maxRows>] %>
+							<$button class="tc-btn-invisible" style.fill="inherit">
+								<$action-setfield $tiddler=<<stateMaxRows>> text={{{ [<maxRows>add[50]] }}}/>
+								{{$:/core/images/chevron-down}}
+							</$button>
+						<%endif%>
+					</div>
+				</div>
+			<%endif%>
+		</$let>
 	</div>
 </$let>
 \end inspect-list
@@ -51,21 +66,21 @@ tags: $:/tags/Macro
 			<$text text={{{ [<jsonOperator>jsonget[operatorName]] }}} />
 		</span>
 		<%if [<jsonOperator>jsonindexes[suffixes]length[]compare:number:gt[0]] %>
-			<$list filter="[<jsonOperator>jsonindexes[suffixes]]" variable="indexSuffix">
+			<$list filter="[<jsonOperator>jsonindexes[suffixes]nsort[]]" variable="indexSuffix">
 				<span class="tc-pill">
 					:<$text text={{{ [<jsonOperator>jsonget[suffixes],<indexSuffix>] }}} />
 				</span>
 			</$list>
 		<%endif%>
-		<$list filter="[<jsonOperator>jsonindexes[operands]]" variable="indexOperand">
+		<$list filter="[<jsonOperator>jsonindexes[operands]nsort[]]" variable="indexOperand">
 			<span class="tc-pill">
 				<$text text={{{ [<jsonOperator>jsonget[operands],<indexOperand>] }}} />
 			</span>
 		</$list>
 	</div>
 	<div class="tc-box-content">
-		<$transclude $variable="inspect-list" jsonList={{{ [<jsonOperator>jsonextract[input]] }}} prompt="Operator Input" class="tc-box tc-inspect-input-box"/>
-		<$transclude $variable="inspect-list" jsonList={{{ [<jsonOperator>jsonextract[output]] }}} prompt="Operator Output" class="tc-box tc-inspect-output-box"/>
+		<$transclude $variable="inspect-list" jsonList={{{ [<jsonOperator>jsonextract[input]] }}} prompt="In" class="tc-box tc-inspect-input-box"/>
+		<$transclude $variable="inspect-list" jsonList={{{ [<jsonOperator>jsonextract[output]] }}} prompt="Out" class="tc-box tc-inspect-output-box"/>
 	</div>
 </div>
 \end inspect-operator
@@ -76,7 +91,7 @@ tags: $:/tags/Macro
 		Run
 		<span class="tc-pill">:<$text text={{{ [<jsonRun>jsonget[prefixName]] }}} /></span>
 		<%if [<jsonRun>jsonindexes[suffixes]length[]compare:number:gt[0]] %>
-			<$list filter="[<jsonRun>jsonindexes[suffixes]]" variable="indexSuffix">
+			<$list filter="[<jsonRun>jsonindexes[suffixes]nsort[]]" variable="indexSuffix">
 				<span class="tc-pill">
 					:<$text text={{{ [<jsonRun>jsonget[suffixes],<indexSuffix>] }}} />
 				</span>
@@ -84,13 +99,13 @@ tags: $:/tags/Macro
 		<%endif%>
 	</div>
 	<div class="tc-box-content">
-		<$transclude $variable="inspect-list" jsonList={{{ [<jsonRun>jsonextract[input]] }}} prompt="Run Input" class="tc-box tc-inspect-input-box"/>
-		<$list filter="[<jsonRun>jsonindexes[operators]]" variable="indexOperator">
+		<$transclude $variable="inspect-list" jsonList={{{ [<jsonRun>jsonextract[input]] }}} prompt="In" class="tc-box tc-inspect-input-box"/>
+		<$list filter="[<jsonRun>jsonindexes[operators]nsort[]]" variable="indexOperator">
 			<$let transclusion={{{ [[operator-]addsuffix<indexOperator>] }}}>
 				<$transclude $variable="inspect-operator" jsonOperator={{{ [<jsonRun>jsonextract[operators],<indexOperator>] }}}/>
 			</$let>
 		</$list>
-		<$transclude $variable="inspect-list" jsonList={{{ [<jsonRun>jsonextract[output]] }}} prompt="Run Output" class="tc-box tc-inspect-output-box">
+		<$transclude $variable="inspect-list" jsonList={{{ [<jsonRun>jsonextract[output]] }}} prompt="Out" class="tc-box tc-inspect-output-box">
 	</div>
 </div>
 \end inspect-run
@@ -103,13 +118,13 @@ tags: $:/tags/Macro
 			<span class="tc-pill"><$text text={{{ [<json>jsonget[inputFilter]] }}}/></span>
 		</div>
 		<div class="tc-box-content">
-			<$transclude $variable="inspect-list" jsonList={{{ [<json>jsonextract[input]] }}} prompt="Filter Input" class="tc-box tc-inspect-input-box"/>
-			<$list filter="[<json>jsonindexes[runs]]" variable="indexRun">
+			<$transclude $variable="inspect-list" jsonList={{{ [<json>jsonextract[input]] }}} prompt="In" class="tc-box tc-inspect-input-box"/>
+			<$list filter="[<json>jsonindexes[runs]nsort[]]" variable="indexRun">
 				<$let transclusion={{{ [[run-]addsuffix<indexRun>] }}}>
 					<$transclude $variable="inspect-run" jsonRun={{{ [<json>jsonextract[runs],<indexRun>] }}}/>
 				</$let>
 			</$list>
-			<$transclude $variable="inspect-list" jsonList={{{ [<json>jsonextract[output]] }}} prompt="Filter Output" class="tc-box tc-inspect-output-box"/>
+			<$transclude $variable="inspect-list" jsonList={{{ [<json>jsonextract[output]] }}} prompt="Out" class="tc-box tc-inspect-output-box"/>
 		</div>
 	</div>
 </$let>

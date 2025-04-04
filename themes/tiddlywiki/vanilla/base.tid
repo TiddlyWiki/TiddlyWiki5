@@ -3508,6 +3508,7 @@ span.tc-translink > a:first-child {
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 	color: var(--box-background-color);
+	fill: var(--box-background-color);
 	background-color: var(--box-foreground-color);
 }
 
@@ -3516,6 +3517,7 @@ span.tc-translink > a:first-child {
 	border-bottom-left-radius: 3px;
 	border-bottom-right-radius: 3px;
 	color: var(--box-foreground-color);
+	fill: var(--box-foreground-color);
 	background-color: var(--box-background-color);
 }
 
@@ -3565,7 +3567,7 @@ span.tc-translink > a:first-child {
 .tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-operator-box > .tc-box-content {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: flex-start;
 }
 
@@ -3580,13 +3582,11 @@ span.tc-translink > a:first-child {
 }
 
 .tc-inspect-input-box {
-	min-width: 20em;
 	--box-background-color: #fcf;
 	--box-foreground-color: #404;
 }
 
 .tc-inspect-output-box {
-	min-width: 20em;
 	--box-background-color: #cff;
 	--box-foreground-color: #044;
 }
