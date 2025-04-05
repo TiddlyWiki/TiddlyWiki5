@@ -6,6 +6,22 @@ tags: Welcome
 title: HelloThere
 type: text/vnd.tiddlywiki
 
+<$let json=`{"parseTree":{"input":[1,2,3]}}`>
+
+<$log 
+message="HelloThere"
+text1={{{[<json>jsonextract[parseTree]then[...]else[XXXX]]}}}
+text2={{{[<json>jsonextract[parsetree]then[...]else[XXXX]]}}}
+text3={{{[<json>jsonextract[parseTree]then[...]else[XXXX]]}}}
+text4={{{[<json>jsonextract[parsetree]then[...]else[XXXX]]}}}
+text5={{{[<json>jsonextract[parseTree]then[...]else[XXXX]]}}}
+text6={{{[<json>jsonextract[parsetree]then[...]else[XXXX]]}}}
+text7={{{[<json>jsonextract[parseTree]then[...]else[XXXX]]}}}
+text8={{{[<json>jsonextract[parsetree]then[...]else[XXXX]]}}}
+/>
+
+</$let>
+
 !!.tc-hero-heading ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
