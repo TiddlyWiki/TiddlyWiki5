@@ -1,0 +1,30 @@
+title: bug
+description: That bug
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$list filter="1" variable="indexOperand">
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+</$list>
++
+title: ExpectedResult
+
+<p>
+xxxx ....
+xxxx ....
+xxxx ....
+xxxx ....
+xxxx ....
+xxxx ....
+xxxx ....
+xxxx ....
+</p>

@@ -6,6 +6,17 @@ tags: Welcome
 title: HelloThere
 type: text/vnd.tiddlywiki
 
+<$list filter="1" variable="indexOperand">
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+xxxx <$text text={{{ [<indexOperand>then[....]else[XXXX]] }}}/>
+</$list>
+
 !!.tc-hero-heading ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
