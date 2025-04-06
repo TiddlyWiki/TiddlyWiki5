@@ -38,6 +38,15 @@ title: ExpectedResult
                     "operands": [
                         "1"
                     ],
+                    "parseTree": {
+                        "operator": "title",
+                        "operands": [
+                            {
+                                "text": "1",
+                                "value": "1"
+                            }
+                        ]
+                    },
                     "input": [
                         "$:/core",
                         "ExpectedResult",
@@ -64,6 +73,15 @@ title: ExpectedResult
                     "operands": [
                         "2"
                     ],
+                    "parseTree": {
+                        "operator": "title",
+                        "operands": [
+                            {
+                                "text": "2",
+                                "value": "2"
+                            }
+                        ]
+                    },
                     "input": [
                         "$:/core",
                         "ExpectedResult",
@@ -92,6 +110,15 @@ title: ExpectedResult
                     "operands": [
                         "3"
                     ],
+                    "parseTree": {
+                        "operator": "title",
+                        "operands": [
+                            {
+                                "text": "3",
+                                "value": "3"
+                            }
+                        ]
+                    },
                     "input": [
                         "$:/core",
                         "ExpectedResult",
