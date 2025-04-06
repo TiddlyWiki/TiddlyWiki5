@@ -235,7 +235,7 @@ exports.compileFilter = function(filterString,options) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
-	if(this.filterCache[filterString] !== undefined && !wrappers) {
+	if(this.filterCache[filterString] !== undefined && !wrappers.prefix && !wrappers.operator) {
 		return this.filterCache[filterString];
 	}
 	var filterParseTree;
@@ -290,6 +290,7 @@ exports.compileFilter = function(filterString,options) {
 				}
 				// Invoke the appropriate filteroperator module
 				results = operatorFunction(accumulator,{
+							parseTree: operator,
 							operator: operator.operator,
 							operatorName: operatorName,
 							operand: operands.length > 0 ? operands[0] : undefined,
@@ -391,7 +392,9 @@ exports.compileFilter = function(filterString,options) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
-	this.filterCache[filterString] = fnMeasured;
-	this.filterCacheCount++;
+	if(!wrappers.prefix && !wrappers.operator) {
+		this.filterCache[filterString] = fnMeasured;
+		this.filterCacheCount++;
+	}
 	return fnMeasured;
 };

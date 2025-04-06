@@ -43,6 +43,7 @@ exports.inspect = function(source,operator,options) {
 					var details = {
 							operatorName: innerOperator.operatorName,
 							operands: innerOperator.operands,
+							parseTree: innerOperator.parseTree,
 							prefix: innerOperator.prefix,
 							suffix: innerOperator.suffix,
 							suffixes: innerOperator.suffixes,

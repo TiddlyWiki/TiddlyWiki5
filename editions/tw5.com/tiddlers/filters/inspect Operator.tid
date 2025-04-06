@@ -28,7 +28,10 @@ The JSON object contains the following properties:
 
 !! Examples
 
-<$transclude $variable="inspect-filter" filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/toprightbar]]" inputFilter="[all[tiddlers]]"/>
+<$transclude $variable="inspect-filter" filter="1 2 3" inputFilter="[all[tiddlers]]"/>
 
-<$transclude $variable="inspect-filter" filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/toprightbar]]" inputFilter="[all[tiddlers]]" orientation="vertical"/>
+<$transclude $variable="inspect-filter" filter="[title<currentTiddler>] [{$:/palette}length[]] [[marker]]" inputFilter="[all[tiddlers]]"/>
 
+<$transclude $variable="inspect-filter" filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]]" inputFilter="[all[tiddlers]]"/>
+
+<$transclude $variable="inspect-filter" filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]]" inputFilter="[all[tiddlers]]" orientation="vertical"/>

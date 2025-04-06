@@ -3510,9 +3510,17 @@ span.tc-translink > a:first-child {
 	color: var(--box-background-color);
 	fill: var(--box-background-color);
 	background-color: var(--box-foreground-color);
+	display: flex;
+	align-items: center;
+}
+
+.tc-box-header button {
+	color: var(--box-background-color);
+	background-color: var(--box-foreground-color);
 }
 
 .tc-box-content {
+	min-width: 4em;
 	padding: 0.25em;
 	border-bottom-left-radius: 3px;
 	border-bottom-right-radius: 3px;
@@ -3549,6 +3557,24 @@ span.tc-translink > a:first-child {
 	background-color: var(--box-background-color);
 }
 
+.tc-split-pill {
+	display: inline-block;
+	padding: 0.125em 0.25em;
+	margin: 0 0.25em;
+	border-radius: 6px;
+	color: var(--box-foreground-color);
+	background-color: var(--box-background-color);
+}
+
+.tc-split-pill-top {
+	border-bottom: 1px solid var(--box-foreground-color);
+}
+
+.tc-split-pill-bottom {
+	
+}
+
+
 /*
 ** Filter Inspection
 */
@@ -3558,11 +3584,12 @@ span.tc-translink > a:first-child {
 	--box-foreground-color: <<colour code-foreground>>;
 }
 
-.tc-inspect-filter-box.tc-inspect-filter-box-horizontal > .tc-box-content {
-	overflow: scroll
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal {
+	overflow: scroll;
+	display: flex;
 }
 
-.tc-inspect-filter-box.tc-inspect-filter-box-horizontal > .tc-box-content,
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal > .tc-box > .tc-box-content,
 .tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-run-box > .tc-box-content,
 .tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-operator-box > .tc-box-content {
 	display: flex;
@@ -3581,12 +3608,12 @@ span.tc-translink > a:first-child {
 	--box-foreground-color: #400;
 }
 
-.tc-inspect-input-box {
+.tc-box.tc-inspect-input-box {
 	--box-background-color: #fcf;
 	--box-foreground-color: #404;
 }
 
-.tc-inspect-output-box {
+.tc-box.tc-inspect-output-box {
 	--box-background-color: #cff;
 	--box-foreground-color: #044;
 }
