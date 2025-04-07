@@ -3543,6 +3543,19 @@ span.tc-translink > a:first-child {
 	padding: 0.25em;
 }
 
+.tc-box-content-list-more {
+	font-size: 0.7em;
+	line-height: 1.1;
+	padding: 0.25em;
+}
+
+.tc-box-content-list-more,
+.tc-box-content-list-more .tc-btn-invisible  {
+	color: var(--box-background-color);
+	fill: var(--box-background-color);
+	background-color: var(--box-foreground-color);
+}
+
 .tc-box-content-list-item:nth-child(even)  {
 	background: rgb(255, 255, 255, 0.5);
 }

@@ -44,10 +44,13 @@ tags: $:/tags/Macro
 								</$list-empty>
 							</$list>
 							<%if [<jsonList>jsonindexes[]count[]compare:number:gt<maxRows>] %>
-								<$button class="tc-btn-invisible" style.fill="inherit">
-									<$action-setfield $tiddler=<<stateMaxRows>> text={{{ [<maxRows>add[10]] }}}/>
-									{{$:/core/images/chevron-down}}
-								</$button>
+								<div class="tc-box-content-list-more">
+									<$button class="tc-btn-invisible" style.fill="inherit">
+										<$action-setfield $tiddler=<<stateMaxRows>> text={{{ [<maxRows>add[10]] }}}/>
+										{{$:/core/images/chevron-down}}
+										<$text text="more"/>
+									</$button>
+								</div>
 							<%endif%>
 						</div>
 					</$scrollable>
