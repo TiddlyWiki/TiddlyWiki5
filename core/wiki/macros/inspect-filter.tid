@@ -9,11 +9,12 @@ tags: $:/tags/Macro
 >
 	<div class=<<class>>>
 		<$let
-			state=<<qualify "$:/temp/filter-inspector">>
+			state=<<qualify "$:/temp/filter-inspector/list">>
 			stateFolded={{{ [<state>addsuffix[folded]] }}}
 			folded={{{ [<stateFolded>get[text]else[no]match[yes]] }}}
 			stateMaxRows={{{ [<state>addsuffix[max-rows]] }}}
 			maxRows={{{ [<stateMaxRows>get[text]!match[]else[10]] }}}
+			stateScroll={{{ [<state>addsuffix[scroll]] }}}
 		>
 			<div class="tc-box-header">
 				<$button class="tc-btn-invisible" style.fill="inherit">
@@ -28,26 +29,28 @@ tags: $:/tags/Macro
 			</div>
 			<%if [<folded>!match[yes]] %>
 				<div class="tc-box-content">
-					<div class="tc-box-content-list">
-						<$list filter="[<jsonList>jsonindexes[]nsort[]limit<maxRows>]" variable="indexList">
-							<$list-template>
-								<div class="tc-box-content-list-item">
-									<$text text={{{ [<jsonList>jsonget<indexList>] }}} />
-								</div>
-							</$list-template>
-							<$list-empty>
-								<div class="tc-box-content-list-empty">
-									(No items)
-								</div>
-							</$list-empty>
-						</$list>
-						<%if [<jsonList>jsonindexes[]count[]compare:number:gt<maxRows>] %>
-							<$button class="tc-btn-invisible" style.fill="inherit">
-								<$action-setfield $tiddler=<<stateMaxRows>> text={{{ [<maxRows>add[10]] }}}/>
-								{{$:/core/images/chevron-down}}
-							</$button>
-						<%endif%>
-					</div>
+					<$scrollable class="tc-box-content-list-scollable" bind=<<stateScroll>>>
+						<div class="tc-box-content-list">
+							<$list filter="[<jsonList>jsonindexes[]nsort[]limit<maxRows>]" variable="indexList">
+								<$list-template>
+									<div class="tc-box-content-list-item">
+										<$text text={{{ [<jsonList>jsonget<indexList>] }}} />
+									</div>
+								</$list-template>
+								<$list-empty>
+									<div class="tc-box-content-list-empty">
+										(No items)
+									</div>
+								</$list-empty>
+							</$list>
+							<%if [<jsonList>jsonindexes[]count[]compare:number:gt<maxRows>] %>
+								<$button class="tc-btn-invisible" style.fill="inherit">
+									<$action-setfield $tiddler=<<stateMaxRows>> text={{{ [<maxRows>add[10]] }}}/>
+									{{$:/core/images/chevron-down}}
+								</$button>
+							<%endif%>
+						</div>
+					</$scrollable>
 				</div>
 			<%endif%>
 		</$let>
@@ -137,22 +140,24 @@ tags: $:/tags/Macro
 
 \procedure inspect-filter(filter,inputFilter:"[all[tiddlers]]",orientation:"horizontal")
 <$let json={{{ [subfilter<inputFilter>inspect<filter>] }}}>
-	<div class={{{ tc-inspect-filter-box [<orientation>match[horizontal]then[tc-inspect-filter-box-horizontal]] +[join[ ]] }}}>
-		<div class="tc-box">
-			<div class="tc-box-header">
-				Filter
-				<span class="tc-pill"><$text text={{{ [<json>jsonget[inputFilter]] }}}/></span>
-			</div>
-			<div class="tc-box-content">
-				<$transclude $variable="inspect-list" jsonList={{{ [<json>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
-				<$list filter="[<json>jsonindexes[runs]nsort[]]" variable="indexRun">
-					<$let transclusion={{{ [[run-]addsuffix<indexRun>] }}}>
-						<$transclude $variable="inspect-run" jsonRun={{{ [<json>jsonextract[runs],<indexRun>] }}}/>
-					</$let>
-				</$list>
-				<$transclude $variable="inspect-list" jsonList={{{ [<json>jsonextract[output]] }}} class="tc-box tc-inspect-output-box"/>
+	<$scrollable bind={{{ [<qualify "$:/temp/filter-inspector/">addsuffix<filter>] }}}>
+		<div class={{{ tc-inspect-filter-box [<orientation>match[horizontal]then[tc-inspect-filter-box-horizontal]] +[join[ ]] }}}>
+			<div class="tc-box">
+				<div class="tc-box-header">
+					Filter
+					<span class="tc-pill"><$text text={{{ [<json>jsonget[inputFilter]] }}}/></span>
+				</div>
+				<div class="tc-box-content">
+					<$transclude $variable="inspect-list" jsonList={{{ [<json>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
+					<$list filter="[<json>jsonindexes[runs]nsort[]]" variable="indexRun">
+						<$let transclusion={{{ [[run-]addsuffix<indexRun>] }}}>
+							<$transclude $variable="inspect-run" jsonRun={{{ [<json>jsonextract[runs],<indexRun>] }}}/>
+						</$let>
+					</$list>
+					<$transclude $variable="inspect-list" jsonList={{{ [<json>jsonextract[output]] }}} class="tc-box tc-inspect-output-box"/>
+				</div>
 			</div>
 		</div>
-	</div>
+	</$scrollable>
 </$let>
 \end inspect-filter

@@ -3529,10 +3529,12 @@ span.tc-translink > a:first-child {
 	background-color: var(--box-background-color);
 }
 
-.tc-box-content-list {
+.tc-box-content-list-scollable {
 	margin: -0.25em;
 	max-height: 25vh;
-	overflow: scroll;
+}
+
+.tc-box-content-list {
 }
 
 .tc-box-content-list-item {
@@ -3585,7 +3587,6 @@ span.tc-translink > a:first-child {
 }
 
 .tc-inspect-filter-box.tc-inspect-filter-box-horizontal {
-	overflow: scroll;
 	display: flex;
 }
 
