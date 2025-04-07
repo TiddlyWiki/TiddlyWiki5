@@ -105,6 +105,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 fi
 
 # /index.html			Main site
+# /external-(version).html External core version of main site
 # /favicon.ico			Favicon for main site
 # /static.html			Static rendering of default tiddlers
 # /alltiddlers.html		Static rendering of all tiddlers
@@ -117,7 +118,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--version \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--build favicon static index \
+	--build favicon static index external-js \
 	|| exit 1
 
 # /empty.html					Empty
@@ -155,7 +156,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/tour \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all tour.html text/plain \
+	--rendertiddler $:/core/save/all-external-js tour.html text/plain \
 	|| exit 1
 
 # /share.html				Custom edition for sharing via the URL
@@ -194,7 +195,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/xlsx-utils \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/xlsx-utils/ \
-	--build index \
+	--build external \
 	|| exit 1
 
 # /editions/resumebuilder/index.html	Resume builder edition
@@ -210,7 +211,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/text-slicer \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/text-slicer/ \
-	--build index \
+	--build external \
 	|| exit 1
 
 # /editions/translators/index.html	Translators edition
@@ -242,7 +243,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/tw5.com-docs \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/tw5.com-docs/ \
-	--build index \
+	--build external \
 	|| exit 1
 
 # /editions/twitter-archivist/index.html	Twitter Archivist edition
@@ -265,7 +266,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/innerwikidemo \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all plugins/tiddlywiki/innerwiki/index.html text/plain \
+	--rendertiddler $:/core/save/all-external-js plugins/tiddlywiki/innerwiki/index.html text/plain \
 	|| exit 1
 
 # /plugins/tiddlywiki/dynaview/index.html	Demo wiki with DynaView plugin
@@ -275,7 +276,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/dynaviewdemo \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all plugins/tiddlywiki/dynaview/index.html text/plain \
+	--rendertiddler $:/core/save/all-external-js plugins/tiddlywiki/dynaview/index.html text/plain \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/dynaview/empty.html text/plain \
 	|| exit 1
 
@@ -289,7 +290,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/katexdemo \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all plugins/tiddlywiki/katex/index.html text/plain \
+	--rendertiddler $:/core/save/all-external-js plugins/tiddlywiki/katex/index.html text/plain \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/katex/empty.html text/plain \
 	|| exit 1
 
@@ -319,7 +320,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/codemirrordemo \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all plugins/tiddlywiki/codemirror/index.html text/plain \
+	--rendertiddler $:/core/save/all-external-js plugins/tiddlywiki/codemirror/index.html text/plain \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/codemirror/empty.html text/plain \
 	|| exit 1
 
@@ -329,7 +330,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/markdowndemo \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all plugins/tiddlywiki/markdown/index.html text/plain \
+	--rendertiddler $:/core/save/all-external-js plugins/tiddlywiki/markdown/index.html text/plain \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/markdown/empty.html text/plain \
 	|| exit 1
 
@@ -339,7 +340,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/classicparserdemo \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all plugins/tiddlywiki/tw2parser/index.html text/plain \
+	--rendertiddler $:/core/save/all-external-js plugins/tiddlywiki/tw2parser/index.html text/plain \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/tw2parser/empty.html text/plain \
 	|| exit 1
 
@@ -349,7 +350,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/highlightdemo \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all plugins/tiddlywiki/highlight/index.html text/plain \
+	--rendertiddler $:/core/save/all-external-js plugins/tiddlywiki/highlight/index.html text/plain \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/highlight/empty.html text/plain \
 	|| exit 1
 
@@ -359,7 +360,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/geospatialdemo \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all plugins/tiddlywiki/geospatial/index.html text/plain \
+	--rendertiddler $:/core/save/all-external-js plugins/tiddlywiki/geospatial/index.html text/plain \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/geospatial/empty.html text/plain \
 	|| exit 1
 
