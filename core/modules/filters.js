@@ -235,7 +235,7 @@ exports.compileFilter = function(filterString,options) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
-	if(this.filterCache[filterString] !== undefined && !wrappers.prefix && !wrappers.operator) {
+	if(this.filterCache[filterString] !== undefined && !wrappers.prefix && !wrappers.operation && !wrappers.operator) {
 		return this.filterCache[filterString];
 	}
 	var filterParseTree;
@@ -258,58 +258,64 @@ exports.compileFilter = function(filterString,options) {
 		var operationSubFunction = function(source,widget) {
 			var accumulator = source,
 				results = [],
-				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
-			$tw.utils.each(operation.operators,function(operator) {
-				var operands = [],
-					operatorName,operatorFunction;
-				if(!operator.operator) {
-					// Use the "title" operator if no operator is specified
-					operatorName = "title";
-				} else if(!filterOperators[operator.operator]) {
-					// Unknown operators treated as "[unknown]" - at run time we can distinguish between a custom operator and falling back to the default "field" operator
-					operatorName = "[unknown]";
-				} else {
-					// Use the operator function
-					operatorName = operator.operator;
-				}
-				operatorFunction = filterOperators[operatorName];
-				$tw.utils.each(operator.operands,function(operand) {
-					if(operand.indirect) {
-						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
-					} else if(operand.variable) {
-						var varTree = $tw.utils.parseFilterVariable(operand.text);
-						operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source})[0] || "";
-					} else {
-						operand.value = operand.text;
-					}
-					operands.push(operand.value);
-				});
-				// Wrap the filter operator module if required
-				if(wrappers.operator) {
-					operatorFunction = wrappers.operator.bind(self,operatorFunction);
-				}
-				// Invoke the appropriate filteroperator module
-				results = operatorFunction(accumulator,{
-							parseTree: operator,
-							operator: operator.operator,
-							operatorName: operatorName,
-							operand: operands.length > 0 ? operands[0] : undefined,
-							operands: operands,
-							prefix: operator.prefix,
-							suffix: operator.suffix,
-							suffixes: operator.suffixes,
-							regexp: operator.regexp
-						},{
-							wiki: self,
-							widget: widget
+				currTiddlerTitle = widget && widget.getVariable("currentTiddler"),
+				handleOperation = function() {
+					$tw.utils.each(operation.operators,function(operator) {
+						var operands = [],
+							operatorName,operatorFunction;
+						if(!operator.operator) {
+							// Use the "title" operator if no operator is specified
+							operatorName = "title";
+						} else if(!filterOperators[operator.operator]) {
+							// Unknown operators treated as "[unknown]" - at run time we can distinguish between a custom operator and falling back to the default "field" operator
+							operatorName = "[unknown]";
+						} else {
+							// Use the operator function
+							operatorName = operator.operator;
+						}
+						operatorFunction = filterOperators[operatorName];
+						$tw.utils.each(operator.operands,function(operand) {
+							if(operand.indirect) {
+								operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
+							} else if(operand.variable) {
+								var varTree = $tw.utils.parseFilterVariable(operand.text);
+								operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source})[0] || "";
+							} else {
+								operand.value = operand.text;
+							}
+							operands.push(operand.value);
 						});
-				if($tw.utils.isArray(results)) {
-					accumulator = self.makeTiddlerIterator(results);
-				} else {
-					accumulator = results;
-				}
-			});
-			if($tw.utils.isArray(results)) {
+						// Wrap the filter operator module if required
+						if(wrappers.operator) {
+							operatorFunction = wrappers.operator.bind(self,operatorFunction);
+						}
+						// Invoke the appropriate filteroperator module
+						results = operatorFunction(accumulator,{
+									parseTree: operator,
+									operator: operator.operator,
+									operatorName: operatorName,
+									operand: operands.length > 0 ? operands[0] : undefined,
+									operands: operands,
+									prefix: operator.prefix,
+									suffix: operator.suffix,
+									suffixes: operator.suffixes,
+									regexp: operator.regexp
+								},{
+									wiki: self,
+									widget: widget
+								});
+						if($tw.utils.isArray(results)) {
+							accumulator = self.makeTiddlerIterator(results);
+						} else {
+							accumulator = results;
+						}
+					});
+				};
+		if(wrappers.operation) {
+			handleOperation = wrappers.operation.bind(self,handleOperation,operation);
+		}
+		handleOperation();
+		if($tw.utils.isArray(results)) {
 				return results;
 			} else {
 				var resultArray = [];

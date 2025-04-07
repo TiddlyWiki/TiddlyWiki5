@@ -93,6 +93,22 @@ tags: $:/tags/Macro
 </div>
 \end inspect-operator
 
+\procedure inspect-operation(jsonOperation,indexOperation)
+<div class="tc-box tc-inspect-operation-box">
+	<div class="tc-box-header">
+		<span class="">Evaluation</span>
+		<span class="tc-pill"><$text text=<<indexOperation>> /></span>
+	</div>
+	<div class="tc-box-content">
+		<$list filter="[<jsonOperation>jsonindexes[operators]nsort[]]" variable="indexOperator">
+			<$let transclusion={{{ [[operator-]addsuffix<indexOperator>] }}}>
+				<$transclude $variable="inspect-operator" jsonOperator={{{ [<jsonOperation>jsonextract[operators],<indexOperator>] }}}/>
+			</$let>
+		</$list>
+	</div>
+</div>
+\end inspect-operation
+
 \procedure inspect-run(jsonRun)
 <div class="tc-box tc-inspect-run-box">
 	<div class="tc-box-header">
@@ -107,11 +123,13 @@ tags: $:/tags/Macro
 	</div>
 	<div class="tc-box-content">
 		<$transclude $variable="inspect-list" jsonList={{{ [<jsonRun>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
-		<$list filter="[<jsonRun>jsonindexes[operators]nsort[]]" variable="indexOperator">
-			<$let transclusion={{{ [[operator-]addsuffix<indexOperator>] }}}>
-				<$transclude $variable="inspect-operator" jsonOperator={{{ [<jsonRun>jsonextract[operators],<indexOperator>] }}}/>
-			</$let>
-		</$list>
+		<div class="tc-inspect-operations-wrapper">
+			<$list filter="[<jsonRun>jsonindexes[operations]nsort[]]" variable="indexOperation">
+				<$let transclusion={{{ [[operation-]addsuffix<indexOperation>] }}}>
+					<$transclude $variable="inspect-operation" jsonOperation={{{ [<jsonRun>jsonextract[operations],<indexOperation>] }}} indexOperation=<<indexOperation>>/>
+				</$let>
+			</$list>
+		</div>
 		<$transclude $variable="inspect-list" jsonList={{{ [<jsonRun>jsonextract[output]] }}} class="tc-box tc-inspect-output-box">
 	</div>
 </div>

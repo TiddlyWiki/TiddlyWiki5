@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 
 <$macrocall $name=".example" n="1" eg="""
-<$transclude $variable="inspect-filter" filter="[tags[]prefix[$:/]] :sort[length[]] +[first[2]tagging[]]" inputFilter="[all[tiddlers]]"/>
+<$transclude $variable="inspect-filter" filter="[tags[]prefix[$:/]] :sort[length[]add[1]] +[first[2]tagging[]]" inputFilter="[all[tiddlers]]"/>
 """/>
 
 <$macrocall $name=".example" n="2" eg="""

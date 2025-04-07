@@ -25,4 +25,3 @@ The JSON object contains the following properties:
 *** `operands`: an array of string operands passed to the operator
 *** `input`: the input titles passed to the operator
 *** `output`: the output titles resulting from evaluating the operator
-

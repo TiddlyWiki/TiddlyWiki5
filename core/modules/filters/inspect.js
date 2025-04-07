@@ -15,8 +15,12 @@ Export our filter function
 exports.inspect = function(source,operator,options) {
 	var self = this,
 		inputFilter = operator.operands[0] || "",
-		output = {input: [],runs: [], inputFilter: inputFilter},
-		currentRun;
+		output = {
+			input: [],
+			runs: [],
+			inputFilter: inputFilter
+		},
+		currentRun,currentOperation;
 	// Save the input
 	source(function(tiddler,title) {
 		output.input.push(title);
@@ -30,14 +34,22 @@ exports.inspect = function(source,operator,options) {
 								input: results.toArray(),
 								prefixName: innerOptions.prefixName,
 								suffixes: innerOptions.suffixes,
-								operators: []
+								operations: []
 							};
-						currentRun = details.operators;
+						currentRun = details.operations;
 						var innerResults = filterRunPrefixFunction.call(null,operationFunction,innerOptions);
 						innerResults(results,innerSource,innerWidget);
 						details.output = results.toArray();
 						output.runs.push(details);
 					};
+				},
+				operation: function(operationFunction,operation) {
+					var details = {
+						operators: []
+					}
+					currentOperation = details.operators;
+					currentRun.push(details);
+					operationFunction();
 				},
 				operator: function(operatorFunction,innerSource,innerOperator,innerOptions) {
 					var details = {
@@ -53,7 +65,7 @@ exports.inspect = function(source,operator,options) {
 					innerSource(function(tiddler,title) {
 						details.input.push(title);
 					});
-					currentRun.push(details);
+					currentOperation.push(details);
 					var innerResults = operatorFunction.apply(null,Array.prototype.slice.call(arguments,1));
 					if(!$tw.utils.isArray(innerResults)) {
 						var resultArray = [];

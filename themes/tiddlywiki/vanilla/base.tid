@@ -3591,6 +3591,7 @@ span.tc-translink > a:first-child {
 
 .tc-inspect-filter-box.tc-inspect-filter-box-horizontal > .tc-box > .tc-box-content,
 .tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-run-box > .tc-box-content,
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-operation-box > .tc-box-content,
 .tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-operator-box > .tc-box-content {
 	display: flex;
 	flex-direction: row;
@@ -3598,9 +3599,21 @@ span.tc-translink > a:first-child {
 	align-items: flex-start;
 }
 
+.tc-inspect-operations-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+}
+
 .tc-inspect-run-box {
 	--box-background-color: #ffc;
 	--box-foreground-color: #440;
+}
+
+.tc-inspect-operation-box {
+	--box-background-color: #cfc;
+	--box-foreground-color: #040;
 }
 
 .tc-inspect-operator-box {
