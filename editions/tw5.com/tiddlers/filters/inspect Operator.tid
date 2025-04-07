@@ -20,8 +20,9 @@ The JSON object contains the following properties:
 * `runs`: an array of objects, each of which represents a single run of the filter. Each object contains the following properties:
 ** `prefixName`: the name of the prefix operator that was used in this run
 ** `input`: the input titles passed to the prefix operator
-** `operators`: an array of objects, each of which represents a single operator that was used in this run. Each object contains the following properties:
-*** `operatorName`: the name of the operator
-*** `operands`: an array of string operands passed to the operator
-*** `input`: the input titles passed to the operator
-*** `output`: the output titles resulting from evaluating the operator
+** `operations`: an array of objects, each of which represents the evaluation of a single operation that was performed in this run. Each object contains the following properties:
+*** `operators`: an array of objects, each of which represents a single operator that was used in this run. Each object contains the following properties:
+**** `operatorName`: the name of the operator
+**** `operands`: an array of string operands passed to the operator
+**** `input`: the input titles passed to the operator
+**** `output`: the output titles resulting from evaluating the operator
