@@ -27,7 +27,7 @@ diff-insert-foreground: #eee8d5
 diff-invisible-background: #b58900
 diff-invisible-foreground: #eee8d5
 dirty-indicator: #dc322f
-download-background: #859900
+download-background: #00910b
 download-foreground: #eee8d5
 dragger-background: #eee8d5
 dragger-foreground: #657b83
@@ -56,6 +56,7 @@ modal-footer-background: #eee8d5
 modal-footer-border: #93a1a1
 modal-header-border: #93a1a1
 muted-foreground: #586e75
+network-activity-foreground: <<colour primary>>
 notification-background: #fdf6e3
 notification-border: #93a1a1
 page-background: #eee8d5
@@ -81,10 +82,10 @@ sidebar-tab-foreground-selected: #586e75
 sidebar-tiddler-link-foreground: #2aa198
 sidebar-tiddler-link-foreground-hover: #002b36
 site-title-foreground: #d33682
-stability-deprecated: #dc322f
-stability-experimental: #b58900
-stability-legacy: #268bd2
-stability-stable: #859900
+stability-deprecated: #d21a1a
+stability-experimental: #771e00
+stability-legacy: #227abb
+stability-stable: #576400
 static-alert-foreground: #586e75
 tab-background: #eee8d5
 tab-background-selected: #fdf6e3
