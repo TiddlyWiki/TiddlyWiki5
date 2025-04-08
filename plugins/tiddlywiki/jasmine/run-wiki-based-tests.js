@@ -21,17 +21,32 @@ describe("Wiki-based tests", function() {
 		var tiddler = $tw.wiki.getTiddler(title);
 		it(tiddler.fields.title + ": " + tiddler.fields.description, function() {
 			// Add our tiddlers
-			var wiki = new $tw.Wiki(),
-				coreTiddler = $tw.wiki.getTiddler("$:/core");
+			var wiki = new $tw.Wiki();
+			// Suppress next tick dispatch for wiki change events
+			wiki.setDispatchMode(true);
+			// Add the core plugin
+			var coreTiddler = $tw.wiki.getTiddler("$:/core")
 			if(coreTiddler) {
 				wiki.addTiddler(coreTiddler);
 			}
+			// Add other tiddlers
 			wiki.addTiddlers(readMultipleTiddlersTiddler(title));
 			// Unpack plugin tiddlers
 			wiki.readPluginInfo();
 			wiki.registerPluginTiddlers("plugin");
 			wiki.unpackPluginTiddlers();
 			wiki.addIndexersToWiki();
+			// Install the language switcher
+			var languageSwitcher = new $tw.PluginSwitcher({
+				wiki: wiki,
+				pluginType: "language",
+				controllerTitle: "$:/language",
+				defaultPlugins: [
+					"$:/languages/en-GB"
+				]
+			});
+			// Install the plugin change event handler
+			$tw.utils.installPluginChangeHandler(wiki);
 			// Clear changes queue
 			wiki.clearTiddlerEventQueue();
 			// Complain if we don't have the ouput and expected results
@@ -44,12 +59,17 @@ describe("Wiki-based tests", function() {
 				var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 				// Render the widget node to the DOM
 				var wrapper = renderWidgetNode(widgetNode);
-				// Clear changes queue
-				wiki.clearTiddlerEventQueue();
+				// Install the wiki change event handler
+				wiki.addEventListener("change",function(changes) {
+					widgetNode.refresh(changes,wrapper);
+				});
 				// Run the actions if provided
 				if(wiki.tiddlerExists("Actions")) {
 					widgetNode.invokeActionString(wiki.getTiddlerText("Actions"));
-					refreshWidgetNode(widgetNode,wrapper);
+				}
+				// Make sure all wiki events have been cleared
+				while(wiki.eventsTriggered) {
+					wiki.processOutstandingTiddlerEvents();
 				}
 				// Test the rendering
 				expect(wrapper.innerHTML).toBe(wiki.getTiddlerText("ExpectedResult"));
@@ -88,11 +108,6 @@ describe("Wiki-based tests", function() {
 		widgetNode.render(wrapper,null);
 // console.log(require("util").inspect(wrapper,{depth: 8}));
 		return wrapper;
-	}
-
-	function refreshWidgetNode(widgetNode,wrapper) {
-		widgetNode.refresh(widgetNode.wiki.changedTiddlers,wrapper);
-// console.log(require("util").inspect(wrapper,{depth: 8}));
 	}
 
 });
