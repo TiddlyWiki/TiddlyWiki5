@@ -1,0 +1,8 @@
+caption: echo
+created: 20241019150907690
+modified: 20241019150907690
+tags: Commands
+title: EchoCommand
+type: text/vnd.tiddlywiki
+
+{{$:/language/Help/echo}}
