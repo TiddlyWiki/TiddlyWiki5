@@ -86,10 +86,10 @@ foreground: #657b83
         tiddler-title-foreground: <<colour muted-foreground>>
             site-title-foreground: <<colour tiddler-title-foreground>>
 # base2
-    stability-deprecated: #ff0000
-    stability-experimental: #ca8400
-    stability-legacy: #0000ff
-    stability-stable: #00bf00
+    stability-deprecated: <<colour red>>
+    stability-experimental: <<colour yellow>>
+    stability-legacy: <<colour blue-hot>>
+    stability-stable: <<colour green>>
     modal-footer-background: <<colour base2>>
     page-background: <<colour base2>>
         modal-backdrop: <<colour page-background>>
@@ -154,10 +154,6 @@ sidebar-controls-foreground-hover: #000000
 sidebar-muted-foreground-hover:
 sidebar-tab-background: #ded8c5
 sidebar-tiddler-link-foreground-hover:
-stability-deprecated: <<colour red>>
-stability-experimental: <<colour yellow>>
-stability-legacy: <<colour blue>>
-stability-stable: <<colour green>>
 static-alert-foreground: #aaaaaa
 tab-border: #cccccc
     modal-footer-border: <<colour tab-border>>
