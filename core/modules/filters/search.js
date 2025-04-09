@@ -43,7 +43,8 @@ exports.search = function(source,operator,options) {
 			whitespace: hasFlag("whitespace"),
 			anchored: hasFlag("anchored"),
 			regexp: hasFlag("regexp"),
-			words: hasFlag("words")
+			words: hasFlag("words"),
+			fuzzy: hasFlag("fuzzy")
 		});
 	} else {
 		return options.wiki.search(operator.operand,{
