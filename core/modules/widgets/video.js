@@ -51,11 +51,9 @@ VideoWidget.prototype.render = function(parent,nextSibling) {
 			videoElement.appendChild(sourceElement);
 		}
 	}
-	
-	// Insert the video into the DOM
+		// Insert the video into the DOM
 	parent.insertBefore(videoElement, nextSibling);
 	this.domNodes.push(videoElement);
-};
 };
 
 /*
