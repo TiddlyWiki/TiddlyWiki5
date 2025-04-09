@@ -1,4 +1,4 @@
-title: $:/core/macros/inspect-filter
+title: $:/plugins/tiddlywiki/internals/inspect-filter
 tags: $:/tags/Macro
 
 \whitespace trim

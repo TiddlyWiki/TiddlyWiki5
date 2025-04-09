@@ -3589,62 +3589,6 @@ span.tc-translink > a:first-child {
 	
 }
 
-
-/*
-** Filter Inspection
-*/
-
-.tc-inspect-filter-box {
-	--box-background-color: <<colour code-border>>;
-	--box-foreground-color: <<colour code-foreground>>;
-}
-
-.tc-inspect-filter-box.tc-inspect-filter-box-horizontal {
-	display: flex;
-}
-
-.tc-inspect-filter-box.tc-inspect-filter-box-horizontal > .tc-box > .tc-box-content,
-.tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-run-box > .tc-box-content,
-.tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-operation-box > .tc-box-content,
-.tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-operator-box > .tc-box-content {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: flex-start;
-}
-
-.tc-inspect-operations-wrapper {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: stretch;
-}
-
-.tc-inspect-run-box {
-	--box-background-color: #ffc;
-	--box-foreground-color: #440;
-}
-
-.tc-inspect-operation-box {
-	--box-background-color: #cfc;
-	--box-foreground-color: #040;
-}
-
-.tc-inspect-operator-box {
-	--box-background-color: #fcc;
-	--box-foreground-color: #400;
-}
-
-.tc-box.tc-inspect-input-box {
-	--box-background-color: #fcf;
-	--box-foreground-color: #404;
-}
-
-.tc-box.tc-inspect-output-box {
-	--box-background-color: #cff;
-	--box-foreground-color: #044;
-}
-
 /*
 ** Flexbox utility classes
 */

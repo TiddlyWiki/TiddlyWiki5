@@ -1,6 +1,7 @@
-title: $:/core/ui/AdvancedSearch/Filter/FilterResults/Inspect
+title: $:/plugins/tiddlywiki/internals/InspectResultsTab
 tags: $:/tags/AdvancedSearch/FilterResults
-caption: {{$:/language/Search/Filter/FilterResults/Inspect/Caption}}
+caption: Inspect
+list-after: $:/core/ui/AdvancedSearch/Filter/FilterResults/Results
 
 \whitespace trim
 

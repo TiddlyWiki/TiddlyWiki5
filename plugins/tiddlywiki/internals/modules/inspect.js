@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/filters/inspect.js
+title: $:/plugins/tiddlywiki/internals/filters/inspect.js
 type: application/javascript
 module-type: filteroperator
 

@@ -5,7 +5,6 @@ Filter/Caption: Filter
 Filter/Hint: Search via a [[filter expression|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> matches</small>//
 Filter/FilterResults/Results/Caption: Results
-Filter/FilterResults/Inspect/Caption: Inspect
 Matches: //<small><<resultCount>> matches</small>//
 Matches/All: All matches:
 Matches/NoMatch: //No match//
