@@ -3,6 +3,104 @@ tags: $:/tags/Stylesheet
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
+/*
+** Headed box and pills
+*/
+
+.tc-box {
+	border: 1px solid var(--box-foreground-color););
+	border-radius: 4px;
+}
+
+.tc-box .tc-box {
+	margin: 0.5em;
+}
+
+.tc-box-header {
+	padding: 0.25em;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	color: var(--box-background-color);
+	fill: var(--box-background-color);
+	background-color: var(--box-foreground-color);
+	display: flex;
+	align-items: center;
+}
+
+.tc-box-header button {
+	color: var(--box-background-color);
+	background-color: var(--box-foreground-color);
+}
+
+.tc-box-content {
+	min-width: 4em;
+	padding: 0.25em;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	color: var(--box-foreground-color);
+	fill: var(--box-foreground-color);
+	background-color: var(--box-background-color);
+}
+
+.tc-box-content-list-scollable {
+	margin: -0.25em;
+	max-height: 25vh;
+}
+
+.tc-box-content-list {
+}
+
+.tc-box-content-list-item {
+	font-size: 0.7em;
+	line-height: 1.1;
+	padding: 0.25em;
+}
+
+.tc-box-content-list-more {
+	font-size: 0.7em;
+	line-height: 1.1;
+	padding: 0.25em;
+}
+
+.tc-box-content-list-more,
+.tc-box-content-list-more .tc-btn-invisible  {
+	color: var(--box-background-color);
+	fill: var(--box-background-color);
+	background-color: var(--box-foreground-color);
+}
+
+.tc-box-content-list-item:nth-child(even)  {
+	background: rgb(255, 255, 255, 0.5);
+}
+
+.tc-box-content-list-empty {
+
+}
+
+.tc-pill {
+	padding: 0.125em 0.25em;
+	margin: 0 0.25em;
+	border-radius: 6px;
+	color: var(--box-foreground-color);
+	background-color: var(--box-background-color);
+}
+
+.tc-split-pill {
+	display: inline-block;
+	padding: 0.125em 0.25em;
+	margin: 0 0.25em;
+	border-radius: 6px;
+	color: var(--box-foreground-color);
+	background-color: var(--box-background-color);
+}
+
+.tc-split-pill-top {
+	border-bottom: 1px solid var(--box-foreground-color);
+}
+
+.tc-split-pill-bottom {
+	
+}
 
 /*
 ** Filter Inspection
