@@ -1,0 +1,3 @@
+title: $:/plugins/internals/templates/viewtemplatebody
+
+<$transclude $variable="inspect-filter-output" jsonOutput={{!!text}} />

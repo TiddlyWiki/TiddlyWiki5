@@ -231,11 +231,14 @@ exports.compileFilter = function(filterString,options) {
 	options = options || {};
 	var self = this;
 	var wrappers = options.wrappers || {};
+	// Invoke the hook to allow the filter to be inspected
+	wrappers = $tw.hooks.invokeHook("th-filter-evaluation",filterString,wrappers) || wrappers;
+	// Get the result from the cache if we can
 	if(!this.filterCache) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
-	if(this.filterCache[filterString] !== undefined && !wrappers.prefix && !wrappers.operation && !wrappers.operator) {
+	if(this.filterCache[filterString] !== undefined && !wrappers.prefix && !wrappers.operation && !wrappers.operator && !wrappers.start && !wrappers.done) {
 		return this.filterCache[filterString];
 	}
 	var filterParseTree;
@@ -379,6 +382,9 @@ exports.compileFilter = function(filterString,options) {
 		if(!widget) {
 			widget = $tw.rootWidget;
 		}
+		if(wrappers.start) {
+			wrappers.start(source);
+		}
 		var results = new $tw.utils.LinkedList();
 		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
 		if(self.filterRecursionCount < MAX_FILTER_DEPTH) {
@@ -389,7 +395,11 @@ exports.compileFilter = function(filterString,options) {
 			results.push("/**-- Excessive filter recursion --**/");
 		}
 		self.filterRecursionCount = self.filterRecursionCount - 1;
-		return results.toArray();
+		var resultsArray = results.toArray();
+		if(wrappers.done) {
+			wrappers.done(resultsArray);
+		}
+		return resultsArray;
 	});
 	if(this.filterCacheCount >= 2000) {
 		// To prevent memory leak, we maintain an upper limit for cache size.
