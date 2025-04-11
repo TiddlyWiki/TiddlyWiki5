@@ -1,0 +1,5 @@
+title: $:/plugins/internals/cascades/viewtemplatebody
+tags: $:/tags/ViewTemplateBodyFilter
+list-before:
+
+[tag[$:/tags/FilterInspectionOutput]type[application/json]then[$:/plugins/internals/templates/viewtemplatebody]]
