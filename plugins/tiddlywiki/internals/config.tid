@@ -1,0 +1,22 @@
+title: $:/plugins/internals/config
+tags: $:/tags/ControlPanel
+caption: Internals
+
+Configuration for the Internals Plugin.
+
+!! Logged Filters
+
+Until there is a UI to create them, you can clone an existing inspectable filter record and modify it.
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/InspectableFilter]!has[draft.of]sort[]]" variable="inspectableFilter">
+	<div>
+		<$link to=<<inspectableFilter>>><$text text=<<inspectableFilter>>/></$link>: <$text text={{{ [<inspectableFilter>get[text]] }}}/>
+	</div>
+	<ol>
+		<$list filter="[all[shadows+tiddlers]tag[$:/tags/FilterInspectionOutput]!has[draft.of]!sort[modified]] :filter[<inspectableFilter>get[text]match{!!filter}]" variable="inspectionOutput">
+			<li>
+				<$link to=<<inspectionOutput>>><$text text=<<inspectionOutput>>/></$link>
+			</li>
+		</$list>
+	</ol>
+</$list>

@@ -19,11 +19,14 @@ exports.startup = function() {
 	$tw.plugins.internals = {
 		getWrappers: getWrappers
 	};
-	var inspectedFilters = [
-		"[all[shadows+tiddlers]tag[$:/tags/ViewTemplate]!is[draft]]"
-	],
-		accumulator = [];
+	var accumulator = [];
 	$tw.hooks.addHook("th-filter-evaluation",function(filterString,wrappers) {
+		var inspectedFilters = [];
+		$tw.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
+			if(tiddler.fields.tags && tiddler.fields.tags.indexOf("$:/tags/InspectableFilter") !== -1 && !tiddler.fields["draft.of"] && tiddler.fields.text) {
+				inspectedFilters.push(tiddler.fields.text);
+			}
+		});
 		// Check whether this is a filter we want to inspect
 		if(inspectedFilters.indexOf(filterString) === -1) {
 			return wrappers;
