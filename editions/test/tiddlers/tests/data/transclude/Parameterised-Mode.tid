@@ -26,4 +26,4 @@ title: TiddlerOne
 +
 title: ExpectedResult
 
-<p>block</p><p>inline</p>
+<p dir="auto">block</p><p dir="auto">inline</p>

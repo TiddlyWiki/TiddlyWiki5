@@ -19,7 +19,7 @@ This is the Hello tiddler
 +
 title: ExpectedResult
 
-<p>[
+<p dir="auto">[
     {
         "title": "Hello",
         "modifier": "JoeBloggs",

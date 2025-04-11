@@ -31,4 +31,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>Default Header-First Body</p><p>Custom Header-Second Body</p>
+<p dir="auto">Default Header-First Body</p><p dir="auto">Custom Header-Second Body</p>
