@@ -138,12 +138,15 @@ This method should be called after the changes it describes have been made to th
 	title: Title of tiddler
 	isDeleted: defaults to false (meaning the tiddler has been created or modified),
 		true if the tiddler has been deleted
+	isShadow: defaults to false (meaning the change applies to the normal tiddler),
+		true if the tiddler being changed is a shadow tiddler
 */
-exports.enqueueTiddlerEvent = function(title,isDeleted) {
+exports.enqueueTiddlerEvent = function(title,isDeleted,isShadow) {
 	// Record the touch in the list of changed tiddlers
 	this.changedTiddlers = this.changedTiddlers || Object.create(null);
 	this.changedTiddlers[title] = this.changedTiddlers[title] || Object.create(null);
 	this.changedTiddlers[title][isDeleted ? "deleted" : "modified"] = true;
+	this.changedTiddlers[title][isShadow ? "shadow" : "normal"] = true;
 	// Increment the change count
 	this.changeCount = this.changeCount || Object.create(null);
 	if($tw.utils.hop(this.changeCount,title)) {
@@ -1129,6 +1132,7 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 			if(tiddler.fields.type) {
 				parserInfo.parserType = tiddler.fields.type;
 			}
+			parserInfo._canonical_uri = tiddler.fields._canonical_uri;
 		}
 	} else if(field) {
 		if(field === "title") {
@@ -1380,13 +1384,6 @@ exports.search = function(text,options) {
 			}
 			searchTermsRegExps.push(new RegExp("(" + regExpStr + ")",flags));
 		}
-	} else if(options.fuzzy) {
-		var dmp = require("$:/core/modules/utils/diff-match-patch/diff_match_patch.js"),
-			dmpObject = new dmp.diff_match_patch(),
-			fuzzyScores = {};
-		dmpObject.Match_Threshold = Number(this.getTiddlerText("$:/config/FuzzySearchThreshold")) || 0.5;
-		dmpObject.Match_Distance = 100000; // Large value to allow matches anywhere
-		searchTermsRegExps = null;
 	} else { // default: words
 		terms = text.split(/[^\S\xA0]+/);
 		if(terms.length === 1 && terms[0] === "") {
@@ -1398,7 +1395,7 @@ exports.search = function(text,options) {
 			}
 		}
 	}
-	// Accumulate the array of fields to be searched or excluded from the search
+// Accumulate the array of fields to be searched or excluded from the search
 	var fields = [];
 	if(options.field) {
 		if($tw.utils.isArray(options.field)) {
@@ -1419,6 +1416,11 @@ exports.search = function(text,options) {
 	}
 	// Function to check a given tiddler for the search term
 	var searchTiddler = function(title) {
+		if(!searchTermsRegExps) {
+			return true;
+		}
+		var notYetFound = searchTermsRegExps.slice();
+
 		var tiddler = self.getTiddler(title);
 		if(!tiddler) {
 			tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
@@ -1437,95 +1439,40 @@ exports.search = function(text,options) {
 		} else {
 			searchFields = fields;
 		}
-
-		if(!options.fuzzy) {
-			if(!searchTermsRegExps) {
-				return true;
+		for(var fieldIndex=0; notYetFound.length>0 && fieldIndex<searchFields.length; fieldIndex++) {
+			// Don't search the text field if the content type is binary
+			var fieldName = searchFields[fieldIndex];
+			if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
+				break;
 			}
-			var notYetFound = searchTermsRegExps.slice();
-
-			for(var fieldIndex=0; notYetFound.length>0 && fieldIndex<searchFields.length; fieldIndex++) {
-				// Don't search the text field if the content type is binary
-				var fieldName = searchFields[fieldIndex];
-				if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
-					break;
-				}
-				var str = tiddler.fields[fieldName],
-					t;
-				if(str) {
-					if($tw.utils.isArray(str)) {
-						// If the field value is an array, test each regexp against each field array entry and fail if each regexp doesn't match at least one field array entry
-						for(var s=0; s<str.length; s++) {
-							for(t=0; t<notYetFound.length;) {
-								if(notYetFound[t].test(str[s])) {
-									notYetFound.splice(t, 1);
-								} else {
-									t++;
-								}
-							}
-						}
-					} else {
-						// If the field isn't an array, force it to a string and test each regexp against it and fail if any do not match
-						str = tiddler.getFieldString(fieldName);
+			var str = tiddler.fields[fieldName],
+				t;
+			if(str) {
+				if($tw.utils.isArray(str)) {
+					// If the field value is an array, test each regexp against each field array entry and fail if each regexp doesn't match at least one field array entry
+					for(var s=0; s<str.length; s++) {
 						for(t=0; t<notYetFound.length;) {
-							if(notYetFound[t].test(str)) {
+							if(notYetFound[t].test(str[s])) {
 								notYetFound.splice(t, 1);
 							} else {
 								t++;
 							}
 						}
 					}
-				}
-			};
-			return notYetFound.length == 0;
-		} else {
-			var fuzzyMatched = false;
-    		var bestScore = 1; // Initialize with worst possible score
-			for(var fieldIndex=0; fieldIndex<searchFields.length; fieldIndex++) {
-        		var fieldName = searchFields[fieldIndex];
-				// Don't search the text field if content type is binary
-				if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
-					break;
-				}
-				var str = tiddler.fields[fieldName];
-				if(str) {
-					// Concatenate the contents of all fields if the field value is an array
-					if($tw.utils.isArray(str)) {
-						str = str.join(" ");
-					} else {
-						str = tiddler.getFieldString(fieldName);
-					}
-					if(!options.caseSensitive) {
-						str = str.toLowerCase();
-						text = text.toLowerCase();
-					}
-					// Perform the fuzzy search
-					var matchPosition = dmpObject.match_main(str, text, 0);
-					if(matchPosition !== -1) {
-						// Get the match score
-						const matchedSubstring = str.substr(matchPosition, text.length);
-						var diffs = dmpObject.diff_main(text, matchedSubstring);
-						dmpObject.diff_cleanupSemantic(diffs);
-						const distance = dmpObject.diff_levenshtein(diffs);
-
-						// Normalize score (lower distance = better match)
-						const maxLen = Math.max(text.length, matchedSubstring.length);
-						const score = (distance / maxLen);
-						// Lower score is better
-						if(score < bestScore) {
-							bestScore = score;
+				} else {
+					// If the field isn't an array, force it to a string and test each regexp against it and fail if any do not match
+					str = tiddler.getFieldString(fieldName);
+					for(t=0; t<notYetFound.length;) {
+						if(notYetFound[t].test(str)) {
+							notYetFound.splice(t, 1);
+						} else {
+							t++;
 						}
-						fuzzyMatched = true;
 					}
 				}
 			}
-			if(fuzzyMatched) {
-				// Store the score for potential later use
-				fuzzyScores[title] = bestScore;
-				return true;
-			}
-			return false;
-		}
+		};
+		return notYetFound.length == 0;
 	};
 	// Loop through all the tiddlers doing the search
 	var results = [],
@@ -1543,12 +1490,6 @@ exports.search = function(text,options) {
 				results.splice(p,1);
 			}
 		}
-	}
-	if(options.fuzzy && Object.keys(fuzzyScores).length > 0) {
-		// Sort results by score (best matches first)
-		results.sort(function(a, b) {
-			return fuzzyScores[a] - fuzzyScores[b];
-		});
 	}
 	return results;
 };
