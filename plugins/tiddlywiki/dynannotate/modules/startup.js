@@ -8,8 +8,6 @@ module-type: startup
 Startup the dyannotate background daemon to track the selection
 
 \*/
-(function(){
-
 "use strict";
 
 // Export name and synchronous status
@@ -56,5 +54,3 @@ exports.startup = function() {
 		$tw.dynannotate.elementSpotlight.shineSpotlight(selectors);
 	});
 };
-
-})();
