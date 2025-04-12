@@ -123,6 +123,7 @@ function fuzzySearch(text,options) {
 				if(str) {
 					if($tw.utils.isArray(str)) {
 						// If the field value is an array, test each regexp against each field array entry and fail if each regexp doesn't match at least one field array entry
+						str = str.slice(); // make a copy for lowercase mutation
 						for(var s=0; s<str.length; s++) {
 							str[s] = str[s].toLowerCase();
 							const matchPosition = dmpObject.match_main(str[s], terms[termIndex], 0);
