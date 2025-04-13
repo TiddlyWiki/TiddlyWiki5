@@ -22,6 +22,9 @@
 	],
 	"build": {
 		"index": [
-			"--rendertiddler","$:/core/save/all","codemirrordemo.html","text/plain"]
+			"--rendertiddler","$:/core/save/all","codemirrordemo.html","text/plain"],
+		"external": [
+			"--render","$:/core/save/all-external-js","codemirrordemo.html","text/plain"
+		]
 	}
 }
