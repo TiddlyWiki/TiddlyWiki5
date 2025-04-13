@@ -29,7 +29,7 @@ function fuzzySearch(text,options) {
 		if(text.length === 0) {
 			terms = null;
 		} else {
-			terms = text.slice().toLowerCase();
+			terms = [text.toLowerCase()];
 		}
 	} else { // words or some
 		terms = text.trim().toLowerCase().split(/[^\S\xA0]+/);
@@ -234,4 +234,3 @@ exports.fuzzy = function(source,operator,options) {
 		});
 	}
 };
-
