@@ -17,7 +17,7 @@ type: text/vnd.tiddlywiki
 	<$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/advancedsearch}}/>
 	<$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
 <% else %>
-	<$action-deletetiddler $filter='[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]] [[$:/state/Search/MaxMatches]]' />
+	<$action-deletetiddler $filter='[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]] [[$:/state/Search/MaxTitles]] [[$:/state/Search/MaxMatches]]' />
 <% endif %>
 <$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input"/>
 \end
