@@ -1,0 +1,63 @@
+caption: Fuzzy
+first-search-filter: 
+second-search-filter: 
+tags: $:/tags/SearchResults
+title: $:/core/ui/FuzzySearchResults
+type: text/vnd.tiddlywiki
+
+\define searchResultList()
+\whitespace trim
+
+<div class="fuzzy-threshold-description">
+	Match threshold:
+</div>
+<div class="fuzzy-threshold">
+	<$range tiddler="$:/config/FuzzySearchThreshold" min="0" max="1" default="0.4" increment=".05"/>
+	<span class="fuzzy-threshold-display tc-small-gap-left">
+		{{$:/config/FuzzySearchThreshold}}
+	</span>
+</div>
+
+//<small>{{$:/language/Search/Matches/Title}}</small>//
+
+<% if [<userInput>minlength{$:/config/Search/MinLength}] %>
+	<$let maxTitlesShown={{{ [[$:/state/Search/MaxMatches]get[text]else[25]] }}}
+		  allTitleMatches={{{ [!is[system]fuzzy:title<userInput>format:titlelist[]join[ ]] }}}>
+		<$list filter="[enlist<allTitleMatches>limit<maxTitlesShown>]" emptyMessage={{$:/language/Search/Matches/NoResult}}>
+			<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+				<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+			</span>
+		</$list>
+		<% if [enlist<allTitleMatches>count[]subtract<maxTitlesShown>compare:number:gt[0]] %>
+			<small>
+				<$text text=<<condition>> />&nbsp;more results not shown.<br />
+			</small>
+			<$button class="tc-btn-invisible"
+				  actions="""<$action-setfield $tiddler="$:/state/Search/MaxMatches" $value={{{ [[$:/state/Search/MaxMatches]get[text]else[25]add[25]] }}} />""" >
+				{{$:/core/images/down-arrow}} Show next 25 results
+			</$button>
+		<% endif %>
+	</$let>
+<% endif %>
+
+//<small>{{$:/language/Search/Matches/All}}</small>//
+
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[second-search-filter]] }}} emptyMessage={{$:/language/Search/Matches/NoResult}}>
+<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+\end
+
+<!-- styles are declared inline temporarily to reduce the number of changed tiddlers -->
+<style>
+.fuzzy-threshold {
+	align-items: center;
+	display: flex;
+	max-width: 25rem;
+}
+</style>
+
+<<searchResultList>>
