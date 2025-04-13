@@ -194,8 +194,9 @@ Export our filter function
 */
 exports.fuzzy = function(source,operator,options) {
 	var invert = operator.prefix === "!",
-		dmpObject = new dmp.diff_match_patch();
-	dmpObject.Match_Threshold = Number(options.wiki.getTiddlerText("$:/config/FuzzySearchThreshold")) || 0.4;
+		dmpObject = new dmp.diff_match_patch(),
+		threshold = Number(options.wiki.getTiddlerText("$:/config/FuzzySearchThreshold","0.4"));
+	dmpObject.Match_Threshold = Number.isNaN(threshold) ? 0.4 : threshold;
 	dmpObject.Match_Distance = 100000; // Large value to allow matches anywhere
 	if(operator.suffixes) {
 		var hasFlag = function(flag) {
@@ -233,3 +234,4 @@ exports.fuzzy = function(source,operator,options) {
 		});
 	}
 };
+
