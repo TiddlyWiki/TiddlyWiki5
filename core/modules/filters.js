@@ -247,7 +247,11 @@ exports.compileFilter = function(filterString,options) {
 	} catch(e) {
 		// We do not cache this result, so it adjusts along with localization changes
 		return function(source,widget) {
-			return [$tw.language.getString("Error/Filter") + ": " + e];
+			var resultsArray = [$tw.language.getString("Error/Filter") + ": " + e];
+			if(wrappers.done) {
+				wrappers.done(resultsArray);
+			}
+			return resultsArray;
 		};
 	}
 	// Get the hashmap of filter operator functions
