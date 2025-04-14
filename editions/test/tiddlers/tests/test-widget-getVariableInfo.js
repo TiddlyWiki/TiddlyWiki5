@@ -6,7 +6,6 @@ tags: [[$:/tags/test-spec]]
 Tests the wikitext rendering pipeline end-to-end. We also need tests that individually test parsers, rendertreenodes etc., but this gets us started.
 
 \*/
-(function(){
 "use strict";
 
 describe("Widget module", function() {
@@ -89,4 +88,3 @@ describe("Widget module", function() {
 
 });
 
-})();
