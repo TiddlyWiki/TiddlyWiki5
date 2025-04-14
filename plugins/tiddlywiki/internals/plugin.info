@@ -2,6 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/internals",
 	"name": "Internals",
 	"description": "Tools for exploring the internals of TiddlyWiki",
-	"list": "readme config",
+	"list": "readme docs config",
 	"stability": "STABILITY_2_STABLE"
 }

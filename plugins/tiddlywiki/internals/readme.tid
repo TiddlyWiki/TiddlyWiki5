@@ -1,10 +1,19 @@
 title: $:/plugins/tiddlywiki/internals/readme
 
-This plugin adds features to help explore the internals of TiddlyWiki:
+This plugin adds several features to help explore the internals of TiddlyWiki, and to debug issues with wikitext and filters.
 
-* New preview panes showing:
-** the parse tree
-** the widget tree
-** the raw HTML output
+!! Inspecting Filters
 
-The first two include a dropdown for choosing block vs. inline parsing mode.
+Filter inspection is based on a schematic visualisation that shows all the steps involved in evaluating a filter. These schematics can be generated and accessed in several ways:
+
+* A new "Inspect" tab under the Advanced Search filter results that shows the schematic for the current filter
+* The background filter inspection mechanism allows specific filters to be registered to be inspected whenever they are evaluated, regardless of the context. The output of the inspection is only saved if the results are different than previous evaluations
+* Directly using the `<<inspect-filter>>` procedure, or the underlying `inspect[]` operator
+
+!! Inspecting Parse Trees and Widget Trees
+
+New preview panes for the tiddler editor that show 
+
+* the parse tree
+* the widget tree
+* the raw HTML output
