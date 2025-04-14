@@ -1,5 +1,3 @@
-const { ElementSpotlight } = require("./element-spotlight");
-
 /*\
 title: $:/plugins/tiddlywiki/dynannotate/startup.js
 type: application/javascript
