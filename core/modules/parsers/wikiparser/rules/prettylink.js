@@ -32,7 +32,7 @@ exports.parse = function() {
 	var text = this.match[1],
 		link = this.match[2] || text,
 		textEndPos = this.parser.source.indexOf("|", start);
-	if (textEndPos < 0 || textEndPos > this.matchRegExp.lastIndex) {
+	if(textEndPos < 0 || textEndPos > this.matchRegExp.lastIndex) {
 		textEndPos = this.matchRegExp.lastIndex - 2;
 	}
 	var linkStart = this.match[2] ? (start + this.match[1].length + 1) : start;
@@ -62,4 +62,10 @@ exports.parse = function() {
 			}]
 		}];
 	}
+};
+
+exports.serialize = function(tree,serialize) {
+	var text = tree.children[0].text;
+	var target = tree.attributes.to ? tree.attributes.to.value : tree.attributes.href.value;
+	return "[[" + text + (text !== target ? "|" + target : "") + "]]";
 };
