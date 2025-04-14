@@ -15,4 +15,3 @@ By default the tabs are arranged horizontally above the content. To get vertical
 ;orientation
 : Optionally, the orientation of the schematic representation, defaulting to `horizontal`. Set to `vertical` to display the tabs vertically
 
-[[Examples|$:/plugins/tiddlywiki/internals/filterinspection/docs/inspectfiltermacro/examples]]
