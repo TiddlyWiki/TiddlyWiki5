@@ -1,4 +1,4 @@
-title: InspectFilter/Simple
+title: $:/plugins/tiddlywiki/internals/filterinspection/tests/wikitext/Simple
 description: Test filter inspection
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]

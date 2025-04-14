@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/internals/InspectResultsTab
+title: $:/plugins/tiddlywiki/internals/filterinspection/InspectResultsTab
 tags: $:/tags/AdvancedSearch/FilterResults
 caption: Inspect
 list-after: $:/core/ui/AdvancedSearch/Filter/FilterResults/Results

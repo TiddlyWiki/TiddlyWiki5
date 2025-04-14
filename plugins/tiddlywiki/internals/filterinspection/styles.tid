@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/internals/styles
+title: $:/plugins/tiddlywiki/internals/filterinspection/styles
 tags: $:/tags/Stylesheet
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock

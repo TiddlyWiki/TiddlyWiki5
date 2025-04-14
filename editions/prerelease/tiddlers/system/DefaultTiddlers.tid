@@ -2,8 +2,8 @@ created: 20131127215321439
 modified: 20140912135951542
 title: $:/DefaultTiddlers
 
-[[$:/plugins/internals/config]]
+[[$:/plugins/tiddlywiki/internals/config]]
 [[$:/AdvancedSearch]]
-[[inspect Operator]]
-[[inspect-filter Macro]]
-[[inspect-filter Macro (Examples)]]
+[[$:/plugins/tiddlywiki/internals/filterinspection/docs/inspectoperator]]
+[[$:/plugins/tiddlywiki/internals/filterinspection/docs/InspectFilterMacro]]
+[[$:/plugins/tiddlywiki/internals/filterinspection/docs/inspectfiltermacro/examples]]

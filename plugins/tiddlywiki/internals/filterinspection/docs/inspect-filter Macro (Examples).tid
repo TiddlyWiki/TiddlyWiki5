@@ -1,9 +1,6 @@
-created: 20250401094200994
-modified: 20250401094200994
+title: $:/plugins/tiddlywiki/internals/filterinspection/docs/inspectfiltermacro/examples
 tags: [[Macro Examples]]
-title: inspect-filter Macro (Examples)
 type: text/vnd.tiddlywiki
-
 
 <$macrocall $name=".example" n="1" eg="""
 <$transclude $variable="inspect-filter" filter="[tags[]prefix[$:/]] :sort[length[]add[1]] +[first[2]tagging[]]" inputFilter="[all[tiddlers]]"/>
