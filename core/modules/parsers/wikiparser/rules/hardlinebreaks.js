@@ -50,6 +50,19 @@ exports.parse = function() {
 			}
 		}
 	} while(match && !match[1]);
-	// Return the nodes
+	// Mark first and last node, and return the nodes
+	if(tree[0]) tree[0].isRuleStart = true;
+	if(tree[tree.length-1]) tree[tree.length-1].isRuleEnd = true;
 	return tree;
+};
+
+exports.serialize = function(tree,serialize) {
+	var text = tree.tag === "br" ? "\n" : (tree.text || "");
+	if(tree.isRuleStart) {
+		return '"""\n' + text;
+	}
+	if(tree.isRuleEnd) {
+		return text + '"""';
+	}
+	return text + serialize(tree.children);
 };

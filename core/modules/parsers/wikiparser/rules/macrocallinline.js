@@ -42,3 +42,12 @@ exports.parse = function() {
 	this.parser.pos = call.end;
 	return [call];
 };
+
+/*
+Same as macrocallblock but without \n\n
+*/
+exports.serialize = function (tree,serialize) {
+	var macrocallblock = require("$:/core/modules/parsers/wikiparser/rules/macrocallblock.js");
+	var result = macrocallblock.serialize(tree,serialize);
+	return result.trimEnd();
+};
