@@ -1,0 +1,47 @@
+title: Plugins/DynamicLoadLanguage
+description: Dynamically loading of language plugin
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+{{First}}
++
+title: Actions
+
+<$action-createtiddler $basetitle="$:/languages/fr-FR" $template="$:/languages/fr-FR/raw" type="application/json"/>
+<$action-setfield $tiddler="$:/languages/fr-FR" plugin-type="language"/>
+<$action-setfield $tiddler="$:/language" text="$:/languages/fr-FR"/>
++
+title: $:/languages/en-GB
+list: readme
+name: en-GB
+plugin-type: language
+type: application/json
+
+{
+	"tiddlers": {
+		"First": {
+			"title": "First",
+			"text": "This is English"
+		}
+	}
+}
++
+title: $:/languages/fr-FR/raw
+list: readme
+name: fr-FR
+type: plain/text
+
+{
+	"tiddlers": {
+		"First": {
+			"title": "First",
+			"text": "This is French"
+		}
+	}
+}
++
+title: ExpectedResult
+
+<p>This is French</p>

@@ -1,0 +1,21 @@
+title: SubPlugins/SimpleSubPlugin
+description: Simple sub-plugin
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+{{$:/plugins/tiddlywiki/test-subplugin/readme}}
+
++
+title: $:/plugins/tiddlywiki/bundled-subplugin-tests
+list: readme
+name: bundled-subplugin-tests
+plugin-type: plugin
+type: application/json
+
+{"tiddlers":{"$:/plugins/tiddlywiki/bundled-subplugin-tests/readme":{"title":"$:/plugins/tiddlywiki/bundled-subplugin-tests/readme","text":"Readme from $:/plugins/tiddlywiki/bundled-subplugin-tests\n\n"},"$:/plugins/tiddlywiki/test-subplugin":{"title":"$:/plugins/tiddlywiki/test-subplugin","name":"test-subplugin","description":"Test subplugin","list":"readme","stability":"STABILITY_1_EXPERIMENTAL","version":"5.3.7-prerelease","plugin-type":"plugin","dependents":"","type":"application/json","text":"{\"tiddlers\":{\"$:/plugins/tiddlywiki/test-subplugin/readme\":{\"title\":\"$:/plugins/tiddlywiki/test-subplugin/readme\",\"text\":\"Readme from $:/plugins/tiddlywiki/test-subplugin\"},\"$:/plugins/tiddlywiki/test-subsubplugin\":{\"title\":\"$:/plugins/tiddlywiki/test-subsubplugin\",\"name\":\"test-subsubplugin\",\"description\":\"Test subsubplugin\",\"list\":\"readme readme2\",\"stability\":\"STABILITY_1_EXPERIMENTAL\",\"version\":\"5.3.7-prerelease\",\"plugin-type\":\"plugin\",\"dependents\":\"\",\"type\":\"application/json\",\"text\":\"{\\\"tiddlers\\\":{\\\"$:/plugins/tiddlywiki/test-subsubplugin/readme\\\":{\\\"title\\\":\\\"$:/plugins/tiddlywiki/test-subsubplugin/readme\\\",\\\"text\\\":\\\"Readme from $:/plugins/tiddlywiki/test-subsubplugin\\\"}}}\"}}}"}}}
++
+title: ExpectedResult
+
+<p>Readme from <a class="tc-tiddlylink tc-tiddlylink-shadow" href="#%24%3A%2Fplugins%2Ftiddlywiki%2Ftest-subplugin">$:/plugins/tiddlywiki/test-subplugin</a></p>

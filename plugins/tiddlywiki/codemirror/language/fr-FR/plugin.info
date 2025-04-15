@@ -1,0 +1,7 @@
+{
+	"title": "$:/language/codemirror/fr-FR",
+	"name": "fr-FR",
+	"plugin-type": "language",
+	"description": "French translations for CodeMirror",
+	"list": "readme"
+}

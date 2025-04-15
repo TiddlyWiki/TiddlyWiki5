@@ -13,10 +13,6 @@ exports.hasTag = function(tag) {
 	return this.fields.tags && this.fields.tags.indexOf(tag) !== -1;
 };
 
-exports.isPlugin = function() {
-	return this.fields.type === "application/json" && this.hasField("plugin-type");
-};
-
 exports.isDraft = function() {
 	return this.hasField("draft.of");
 };
