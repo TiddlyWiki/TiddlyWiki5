@@ -1,6 +1,7 @@
 caption: tm-open-external-window
 created: 20170121182300000
 modified: 20230723220850135
+related: ActionSendMessageWidget
 tags: Messages
 title: WidgetMessage: tm-open-external-window
 type: text/vnd.tiddlywiki
