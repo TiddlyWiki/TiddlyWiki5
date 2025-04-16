@@ -2732,14 +2732,15 @@ $tw.hooks.removeHook = function(hookName,definition) {
 /*
 Invoke the hook by key
 */
-$tw.hooks.invokeHook = function(hookName /*, value,... */) {
-	var args = Array.prototype.slice.call(arguments,1);
-	if($tw.utils.hop($tw.hooks.names,hookName)) {
+$tw.hooks.invokeHook = function(hookName, firstArgument /*, value,... */) {
+	if(Object.prototype.hasOwnProperty.call($tw.hooks.names,hookName)) {
+		var args = Array.prototype.slice.call(arguments,1);
 		for(var i = 0; i < $tw.hooks.names[hookName].length; i++) {
 			args[0] = $tw.hooks.names[hookName][i].apply(null,args);
 		}
+		return args[0];
 	}
-	return args[0];
+	return firstArgument;
 };
 
 /////////////////////////// Main boot function to decrypt tiddlers and then startup
