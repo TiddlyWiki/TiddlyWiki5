@@ -122,8 +122,17 @@ SelectWidget.prototype.setSelectValue = function() {
 		value = value === undefined ? "" : value;
 		var select = this.getSelectDomNode();
 		var values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
+		var child;
 		for(var i=0; i < select.children.length; i++){
-			select.children[i].selected = values.indexOf(select.children[i].value) !== -1
+			child=select.children[i];
+			if (child.children.length === 0){
+				child.selected = values.indexOf(child.value) !== -1
+			} else {
+				// grouped options
+				for(var y=0; y < child.children.length; y++){
+					child.children[y].selected = values.indexOf(child.children[y].value) !== -1
+				}
+			}
 		}
 	} else {
 		var domNode = this.getSelectDomNode();
