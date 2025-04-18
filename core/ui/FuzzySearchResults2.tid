@@ -1,7 +1,7 @@
 caption: Fuzzy2
 created: 20250418111940347
 first-search-filter: 
-modified: 20250418114106013
+modified: 20250418114831431
 second-search-filter: 
 tags: $:/tags/SearchResults
 title: $:/core/ui/FuzzySearchResults2
@@ -47,7 +47,7 @@ type: text/vnd.tiddlywiki
 <% if [<userInput>minlength{$:/config/Search/MinLength}] %>
 	<$let maxTitlesShown={{{ [[$:/state/Search/MaxTitles]get[text]else[25]] }}}
 		  searchMode={{{ [[$:/config/FuzzySearchMode]get[text]else[words]] }}}
-		  allTitleMatches={{{ [!is[system].fuzzy-title<searchMode>] :sort[.dice-title<searchMode>] +[format:titlelist[]join[ ]] }}}>
+		  allTitleMatches={{{ [!is[system].fuzzy-title<searchMode>] :sort::reverse[.dice-title<searchMode>] +[format:titlelist[]join[ ]] }}}>
 		<$list filter="[enlist<allTitleMatches>limit<maxTitlesShown>]" emptyMessage={{$:/language/Search/Matches/NoResult}}>
 			<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 				<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
@@ -73,7 +73,7 @@ type: text/vnd.tiddlywiki
 <% if [<userInput>minlength{$:/config/Search/MinLength}] %>
 	<$let maxMatchesShown={{{ [[$:/state/Search/MaxMatches]get[text]else[25]] }}}
 		  searchMode={{{ [[$:/config/FuzzySearchMode]get[text]else[words]] }}}
-		  allTiddlerMatches={{{ [!is[system].fuzzy-tiddler<searchMode>.dice-tiddler<searchMode>format:titlelist[]join[ ]] }}}>
+		  allTiddlerMatches={{{ [!is[system].fuzzy-tiddler<searchMode>] :sort::reverse[.dice-tiddler<searchMode>] +[format:titlelist[]join[ ]] }}}>
 		<$list filter="[enlist<allTiddlerMatches>limit<maxMatchesShown>]" emptyMessage={{$:/language/Search/Matches/NoResult}}>
 			<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
 				<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
