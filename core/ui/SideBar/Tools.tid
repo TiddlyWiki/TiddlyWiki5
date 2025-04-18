@@ -2,31 +2,26 @@ title: $:/core/ui/SideBar/Tools
 tags: $:/tags/SideBar
 caption: {{$:/language/SideBar/Tools/Caption}}
 
-\define lingo-base() $:/language/ControlPanel/
-\define config-title()
-$:/config/PageControlButtons/Visibility/$(listItem)$
-\end
+\whitespace trim
+
+\procedure lingo-base() $:/language/ControlPanel/
+\function config-title() [[$:/config/PageControlButtons/Visibility/$(listItem)$]substitute[]]
 
 <<lingo Basics/Version/Prompt>> <<version>>
 
-<$set name="tv-config-toolbar-icons" value="yes">
-
-<$set name="tv-config-toolbar-text" value="yes">
-
-<$set name="tv-config-toolbar-class" value="">
-
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
-
-<div style="position:relative;" class={{{ [<listItem>encodeuricomponent[]addprefix[tc-btn-]] }}}>
-
-<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"/> <$transclude tiddler=<<listItem>>/> <i class="tc-muted"><$transclude tiddler=<<listItem>> field="description"/></i>
-
-</div>
-
-</$list>
-
-</$set>
-
-</$set>
-
-</$set>
+<$let tv-config-toolbar-icons="yes"
+	tv-config-toolbar-text="yes"
+	tv-config-toolbar-class=""
+>
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
+		<div class={{{ [<listItem>encodeuricomponent[]addprefix[tc-btn-]] tc-sidebar-tools-item +[join[ ]] }}}
+			data-title=<<listItem>>
+		>
+			<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show" class="tc-tiny-gap-right"/>
+				<$transclude $tiddler=<<listItem>>/>
+				<i class="tc-tiny-gap-left tc-muted">
+					<$transclude $tiddler=<<listItem>> $field="description"/>
+				</i>
+		</div>
+	</$list>
+</$let>
