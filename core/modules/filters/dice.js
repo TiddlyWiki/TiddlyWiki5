@@ -46,6 +46,7 @@ function calculateScore(title,terms) {
 	if(!terms) {
 		return score;
 	}
+	title = title.toLowerCase();
 	for(termIndex=0; termIndex<terms.length; termIndex++) { // iterate over all terms
 		score += diceCoefficient(title,terms[termIndex]);
 	}
