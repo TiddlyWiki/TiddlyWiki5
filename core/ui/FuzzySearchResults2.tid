@@ -1,0 +1,116 @@
+caption: Fuzzy2
+created: 20250418111940347
+first-search-filter: 
+modified: 20250418114106013
+second-search-filter: 
+tags: $:/tags/SearchResults
+title: $:/core/ui/FuzzySearchResults2
+type: text/vnd.tiddlywiki
+
+\define searchResultList()
+\whitespace trim
+\function .fuzzy-title-some() [<mode>match[some]] :then[all[]fuzzy2:title:some<userInput>else[]]
+\function .fuzzy-title-literal() [<mode>match[literal]] :then[all[]fuzzy2:title:literal<userInput>else[]]
+\function .fuzzy-title(mode) [.fuzzy-title-some[]] :else[all[].fuzzy-title-literal[]] :else[all[]fuzzy2:title:words<userInput>]
+\function .fuzzy-tiddler-some() [<mode>match[some]] :then[all[]fuzzy2::some<userInput>else[]]
+\function .fuzzy-tiddler-literal() [<mode>match[literal]] :then[all[]fuzzy2::literal<userInput>else[]]
+\function .fuzzy-tiddler(mode) [.fuzzy-tiddler-some[]] :else[all[].fuzzy-tiddler-literal[]] :else[all[]fuzzy2::words<userInput>]
+<!-- sort functions that are only ever called with a single input title -->
+\function .dice-title(mode) [<mode>match[words]] :then[all[]dice:words<userInput>else[0]] :else[all[]dice:literal<userInput>else[0]]
+\function .dice-tiddler-words() [all[]dice<userInput>else[0]] =[all[]get[text]dice<userInput>else[0]] =[all[]get[tags]dice<userInput>else[0]] +[sum[]]
+\function .dice-tiddler-literal() [all[]dice:literal<userInput>else[0]] =[all[]get[text]dice:literal<userInput>else[0]] =[all[]get[tags]dice:literal<userInput>else[0]] +[sum[]]
+\function .dice-tiddler(mode) [<mode>match[words]] :then[all[].dice-tiddler-words[]] :else[all[].dice-tiddler-literal[]]
+
+<div class="search-settings-description">
+	Match threshold:
+</div>
+<div class="fuzzy-threshold">
+	<!-- threshold of 0 would require the expected position (0) to also match -->
+	<$range tiddler="$:/config/FuzzySearchThreshold" min="0.05" max="1" default="0.4" increment="0.05"/>
+	<span class="fuzzy-threshold-display tc-small-gap-left">
+		<$text text={{{ [{$:/config/FuzzySearchThreshold}else[0.4]] }}} />
+	</span>
+</div>
+<div class="search-settings-description">
+	Search mode:
+</div>
+<div class="search-mode-setting">
+	<$tiddler tiddler="$:/config/FuzzySearchMode">
+		<$radio field="text" value="words" default="words">words</$radio>
+		<$radio field="text" value="some" default="words">some</$radio>
+		<$radio field="text" value="literal" default="words">literal</$radio>
+	</$tiddler>
+</div>
+
+//<small>{{$:/language/Search/Matches/Title}}</small>//
+
+<% if [<userInput>minlength{$:/config/Search/MinLength}] %>
+	<$let maxTitlesShown={{{ [[$:/state/Search/MaxTitles]get[text]else[25]] }}}
+		  searchMode={{{ [[$:/config/FuzzySearchMode]get[text]else[words]] }}}
+		  allTitleMatches={{{ [!is[system].fuzzy-title<searchMode>] :sort[.dice-title<searchMode>] +[format:titlelist[]join[ ]] }}}>
+		<$list filter="[enlist<allTitleMatches>limit<maxTitlesShown>]" emptyMessage={{$:/language/Search/Matches/NoResult}}>
+			<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+				<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+			</span>
+		</$list>
+		<% if [enlist<allTitleMatches>count[]subtract<maxTitlesShown>compare:number:gt[0]] %>
+			<small>
+				<$text text=<<condition>> />&nbsp;more results not shown.<br />
+			</small>
+			<$button class="tc-btn-invisible"
+				  actions="""<$action-setfield $tiddler="$:/state/Search/MaxTitles" $value={{{ [[$:/state/Search/MaxTitles]get[text]else[25]add[25]] }}} />""" >
+				{{$:/core/images/down-arrow}}
+				<span class="tc-small-gap-left">
+					Show next 25 results
+				</span>
+			</$button>
+		<% endif %>
+	</$let>
+<% endif %>
+
+//<small>{{$:/language/Search/Matches/All}}</small>//
+
+<% if [<userInput>minlength{$:/config/Search/MinLength}] %>
+	<$let maxMatchesShown={{{ [[$:/state/Search/MaxMatches]get[text]else[25]] }}}
+		  searchMode={{{ [[$:/config/FuzzySearchMode]get[text]else[words]] }}}
+		  allTiddlerMatches={{{ [!is[system].fuzzy-tiddler<searchMode>.dice-tiddler<searchMode>format:titlelist[]join[ ]] }}}>
+		<$list filter="[enlist<allTiddlerMatches>limit<maxMatchesShown>]" emptyMessage={{$:/language/Search/Matches/NoResult}}>
+			<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+				<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+			</span>
+		</$list>
+		<% if [enlist<allTiddlerMatches>count[]subtract<maxMatchesShown>compare:number:gt[0]] %>
+			<small>
+				<$text text=<<condition>> />&nbsp;more results not shown.<br />
+			</small>
+			<$button class="tc-btn-invisible"
+				  actions="""<$action-setfield $tiddler="$:/state/Search/MaxMatches" $value={{{ [[$:/state/Search/MaxMatches]get[text]else[25]add[25]] }}} />""" >
+				{{$:/core/images/down-arrow}}
+				<span class="tc-small-gap-left">
+					Show next 25 results
+				</span>
+			</$button>
+		<% endif %>
+	</$let>
+<% endif %>
+
+<!-- styles are declared inline temporarily to reduce the number of changed tiddlers -->
+<style>
+.fuzzy-threshold {
+	align-items: center;
+	display: flex;
+	max-width: 30rem;
+}
+.search-mode-setting {
+	align-items: center;
+	display: flex;
+	gap: 10px;
+	max-width: 25rem;
+}
+.search-mode-setting input {
+    width: auto;
+    margin-right: 5px;
+}
+</style>
+
+<<searchResultList>>
