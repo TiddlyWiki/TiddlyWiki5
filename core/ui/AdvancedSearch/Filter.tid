@@ -56,6 +56,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 				inputCancelActions=<<cancel-search-actions>>
 				minHeight="2em"
 				autoHeight="yes"
+				placeholder={{$:/language/Search/Filter/Placeholder}}
 			/>
 		</$keyboard>
 	</$keyboard>
