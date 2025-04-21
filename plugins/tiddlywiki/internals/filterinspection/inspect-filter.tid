@@ -17,7 +17,7 @@ tags: $:/tags/Macro
 			stateScroll={{{ [<state>addsuffix[scroll]] }}}
 		>
 			<div class="tc-box-header">
-				<$button class="tc-btn-invisible" style.fill="inherit">
+				<$button class="tc-btn-invisible tc-box-content-full-width-button" style.fill="inherit">
 					<%if [<folded>match[yes]] %>
 						<$action-setfield $tiddler=<<stateFolded>> text="no"/>
 					<%else%>
@@ -45,7 +45,7 @@ tags: $:/tags/Macro
 							</$list>
 							<%if [<jsonList>jsonindexes[]count[]compare:number:gt<maxRows>] %>
 								<div class="tc-box-content-list-more">
-									<$button class="tc-btn-invisible" style.fill="inherit">
+									<$button class="tc-btn-invisible tc-box-content-full-width-button" style.fill="inherit">
 										<$action-setfield $tiddler=<<stateMaxRows>> text={{{ [<maxRows>add[10]] }}}/>
 										{{$:/core/images/chevron-down}}
 										<$text text="more"/>

@@ -62,6 +62,12 @@ tags: $:/tags/Stylesheet
 	padding: 0.25em;
 }
 
+.tc-box-content-full-width-button {
+	display: block;
+	width: 100%;
+	text-align: left;
+}
+
 .tc-box-content-list-more,
 .tc-box-content-list-more .tc-btn-invisible  {
 	color: var(--box-background-color);
