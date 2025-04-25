@@ -107,19 +107,32 @@ fi
 # /index.html			Main site
 # /external-(version).html External core version of main site
 # /favicon.ico			Favicon for main site
-# /static.html			Static rendering of default tiddlers
-# /alltiddlers.html		Static rendering of all tiddlers
-# /static/*				Static single tiddlers
-# /static/static.css	Static stylesheet
-# /static/favicon.ico	Favicon for static pages
 
 node $TW5_BUILD_TIDDLYWIKI \
 	$TW5_BUILD_MAIN_EDITION \
 	--version \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--build favicon static index external-js \
+	--build favicon index external-js \
 	|| exit 1
+
+# /static.html			Static rendering of default tiddlers
+# /alltiddlers.html		Static rendering of all tiddlers
+# /static/*				Static single tiddlers
+# /static/static.css	Static stylesheet
+# /static/favicon.ico	Favicon for static pages
+
+# Conditionally build editions if $TW5_BUILD_STATIC variable is not set, otherwise do nothing
+if [ -z "$TW5_BUILD_STATIC" ]; then
+
+node $TW5_BUILD_TIDDLYWIKI \
+	$TW5_BUILD_MAIN_EDITION \
+	--version \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT \
+	--build static \
+	|| exit 1
+fi
 
 # /empty.html					Empty
 # /empty.hta					For Internet Explorer
@@ -190,6 +203,9 @@ node $TW5_BUILD_TIDDLYWIKI \
 #
 ######################################################
 
+# Conditionally build editions if $TW5_BUILD_EDITIONS variable is not set, otherwise do nothing
+if [ -z "$TW5_BUILD_EDITIONS" ]; then
+
 # /editions/xlsx-utils/index.html	xlsx-utils edition
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/xlsx-utils \
@@ -254,11 +270,17 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--build index \
 	|| exit 1
 
+fi
+
+
 ######################################################
 #
 # Plugin demos
 #
 ######################################################
+
+# Conditionally build plugin demos if $TW5_BUILD_PLUGIN_DEMOS variable is not set
+if [ -z "$TW5_BUILD_PLUGIN_DEMOS" ]; then
 
 # /plugins/tiddlywiki/innerwiki/index.html	Demo wiki with Innerwiki plugin
 
@@ -364,11 +386,16 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/geospatial/empty.html text/plain \
 	|| exit 1
 
+fi
+
 ######################################################
 #
 # Language editions
 #
 ######################################################
+
+# Conditionally build language editions if $TW5_BUILD_LANGUAGE_DEMOS variable is not set
+if [ -z "$TW5_BUILD_LANGUAGE_DEMOS" ]; then
 
 # Delete any existing static content
 
@@ -453,11 +480,16 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--build empty index \
 	|| exit 1
 
+fi
+
 ######################################################
 #
 # Plugin library
 #
 ######################################################
+
+# Conditionally build plugin library if $TW5_BUILD_PLUGIN_LIBRARY variable is not set
+if [ -z "$TW5_BUILD_PLUGIN_LIBRARY" ]; then
 
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/pluginlibrary \
@@ -465,6 +497,8 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--output $TW5_BUILD_OUTPUT/library/$TW5_BUILD_VERSION \
 	--build library\
 	|| exit 1
+
+fi
 
 # Delete the temporary build tiddler
 
