@@ -65,16 +65,18 @@ caption: {{$:/language/Search/Filter/Caption}}
 	</$list>
 </div>
 
-<$reveal state="$:/temp/advancedsearch" type="nomatch" text="" tag="div" class="tc-search-results">
-<%if [all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterResults]!has[draft.of]count[]compare:number:gt[1]] %>
-	<$macrocall
-		$name="tabs"
-		tabsList="[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterResults]!has[draft.of]]"
-		default="$:/core/ui/AdvancedSearch/Filter/FilterResults/Results"
-	/>
-<%else%>
-	<$list filter="[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterResults]!has[draft.of]]">
-		<$transclude/>
-	</$list>
+<%if [{$:/temp/advancedsearch}trim[]!match[]] %>
+	<div class="tc-search-results">
+		<%if [all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterResults]!has[draft.of]count[]compare:number:gt[1]] %>
+			<$macrocall
+				$name="tabs"
+				tabsList="[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterResults]!has[draft.of]]"
+				default="$:/core/ui/AdvancedSearch/Filter/FilterResults/Results"
+			/>
+		<%else%>
+			<$list filter="[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterResults]!has[draft.of]]">
+				<$transclude/>
+			</$list>
+		<%endif%>
+	</div>
 <%endif%>
-</$reveal>
