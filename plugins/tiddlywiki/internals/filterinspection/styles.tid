@@ -27,6 +27,12 @@ tags: $:/tags/Stylesheet
 	align-items: center;
 }
 
+.tc-box-header svg {
+	width: 1em;
+	height: 1em;
+	margin-left: 0.25em;
+}
+
 .tc-box-header button {
 	color: var(--box-background-color);
 	background-color: var(--box-foreground-color);
@@ -117,11 +123,22 @@ tags: $:/tags/Stylesheet
 	--box-foreground-color: <<colour code-foreground>>;
 }
 
+.tc-inspectable-filter-box {
+	--box-background-color: #ffebe1;
+	--box-foreground-color: #ff3f00;
+}
+
+.tc-inspectable-filter-trace-box {
+	--box-background-color: #ffdec1;
+	--box-foreground-color: #ff7a00;
+}
+
 .tc-inspect-filter-box.tc-inspect-filter-box-horizontal {
 	display: flex;
 }
 
 .tc-inspect-filter-box.tc-inspect-filter-box-horizontal > .tc-box > .tc-box-content,
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal.tc-inspect-filter-box-unframed,
 .tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-run-box > .tc-box-content,
 .tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-operation-box > .tc-box-content,
 .tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-operator-box > .tc-box-content {
@@ -129,6 +146,11 @@ tags: $:/tags/Stylesheet
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: flex-start;
+}
+
+.tc-inspectable-filter-box > .tc-box-content > ol {
+	list-style: none;
+	padding-left: 0;
 }
 
 .tc-inspect-operations-wrapper {
@@ -139,26 +161,26 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-inspect-run-box {
-	--box-background-color: #ffc;
-	--box-foreground-color: #440;
+	--box-background-color: #ffffcc;
+	--box-foreground-color: #444400;
 }
 
 .tc-inspect-operation-box {
-	--box-background-color: #cfc;
-	--box-foreground-color: #040;
+	--box-background-color: #ccffcc;
+	--box-foreground-color: #004400;
 }
 
 .tc-inspect-operator-box {
-	--box-background-color: #fcc;
-	--box-foreground-color: #400;
+	--box-background-color: #ffcccc;
+	--box-foreground-color: #440000;
 }
 
 .tc-box.tc-inspect-input-box {
-	--box-background-color: #fcf;
-	--box-foreground-color: #404;
+	--box-background-color: #ffccff;
+	--box-foreground-color: #440044;
 }
 
 .tc-box.tc-inspect-output-box {
-	--box-background-color: #cff;
-	--box-foreground-color: #044;
+	--box-background-color: #4fd3d3;
+	--box-foreground-color: #004444;
 }

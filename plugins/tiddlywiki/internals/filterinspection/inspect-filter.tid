@@ -141,6 +141,20 @@ tags: $:/tags/Macro
 </div>
 \end inspect-run
 
+\procedure inspect-filter-output-unframed(jsonOutput,orientation:"horizontal")
+<$scrollable bind={{{ [<qualify "$:/temp/filter-inspector/">addsuffix<filter>] }}}>
+	<div class={{{ tc-inspect-filter-box tc-inspect-filter-box-unframed [<orientation>match[horizontal]then[tc-inspect-filter-box-horizontal]] +[join[ ]] }}}>
+		<$transclude $variable="inspect-list" jsonList={{{ [<jsonOutput>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
+		<$list filter="[<jsonOutput>jsonindexes[runs]nsort[]]" variable="indexRun">
+			<$let transclusion={{{ [[run-]addsuffix<indexRun>] }}}>
+				<$transclude $variable="inspect-run" jsonRun={{{ [<jsonOutput>jsonextract[runs],<indexRun>] }}}/>
+			</$let>
+		</$list>
+		<$transclude $variable="inspect-list" jsonList={{{ [<jsonOutput>jsonextract[output]] }}} class="tc-box tc-inspect-output-box"/>
+	</div>
+</$scrollable>
+\end inspect-filter-output-unframed
+
 \procedure inspect-filter-output(jsonOutput,orientation:"horizontal")
 <$scrollable bind={{{ [<qualify "$:/temp/filter-inspector/">addsuffix<filter>] }}}>
 	<div class={{{ tc-inspect-filter-box [<orientation>match[horizontal]then[tc-inspect-filter-box-horizontal]] +[join[ ]] }}}>

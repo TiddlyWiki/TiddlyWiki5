@@ -3,8 +3,6 @@ tags: $:/tags/AdvancedSearch/FilterResults
 caption: Inspect
 list-after: $:/core/ui/AdvancedSearch/Filter/FilterResults/Results
 
-\whitespace trim
-
-\procedure lingo-base() $:/language/Search/
+Filter evaluation trace:
 
 <$transclude $variable="inspect-filter" filter={{$:/temp/advancedsearch}} />

@@ -1,0 +1,37 @@
+title: $:/plugins/tiddlywiki/internals/filterinspection/ObserveResultsTab
+tags: $:/tags/AdvancedSearch/FilterResults
+caption: Observe
+list-after: $:/plugins/tiddlywiki/internals/filterinspection/InspectResultsTab
+
+Log traces of this filter expression in the background. A trace will be generated every time the filter is evaluated, regardless of the context. The trace is only saved if the results are different from previous traces.
+
+<$button>
+<%if [all[shadows+tiddlers]tag[$:/tags/InspectableFilter]get[text]match{$:/temp/advancedsearch}count[]match[0]] %>
+	<$action-createtiddler $basetitle="$:/config/inspectable-filters/filter" tags="$:/tags/InspectableFilter" type="text/plain" text={{$:/temp/advancedsearch}}/>
+<%endif%>
+Enable logging for this filter
+</$button>
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/InspectableFilter]!has[draft.of]sort[]]" variable="inspectableFilter">
+	<div class="tc-box tc-inspectable-filter-box">
+		<div class="tc-box-header">
+			<$text text={{{ [<inspectableFilter>get[text]] }}}/> <$link to=<<inspectableFilter>>>{{$:/core/images/open-window}}</$link>
+		</div>
+		<div class="tc-box-content">
+			<ol>
+				<$list filter="[all[shadows+tiddlers]tag[$:/tags/FilterInspectionOutput]!has[draft.of]!sort[modified]] :filter[<inspectableFilter>get[text]match{!!filter}]" variable="inspectionOutput">
+					<li>
+						<div class="tc-box tc-inspectable-filter-trace-box">
+							<div class="tc-box-header">
+								<$text text={{{ [<inspectionOutput>get[modified]format:date[DDth mmm YYYY 0hh:0mm:0ss]] }}}/><$link to=<<inspectionOutput>>>{{$:/core/images/open-window}}</$link>
+							</div>
+							<div class="tc-box-content">
+								<$transclude $variable="inspect-filter-output-unframed" jsonOutput={{{ [<inspectionOutput>get[text]] }}} />
+							</div>
+						</div>
+					</li>
+				</$list>
+			</ol>
+		</div>
+	</div>
+</$list>
