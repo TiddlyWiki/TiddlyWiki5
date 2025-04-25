@@ -2,4 +2,4 @@ title: $:/plugins/tiddlywiki/internals/testfilter
 tags: $:/tags/InspectableFilter
 type: text/plain
 
-[all[shadows+tiddlers]tag[$:/tags/ViewTemplate]!is[draft]]
+[list[$:/StoryList]]
