@@ -122,8 +122,8 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /static/static.css	Static stylesheet
 # /static/favicon.ico	Favicon for static pages
 
-# Conditionally build editions if $TW5_BUILD_STATIC variable is not set, otherwise do nothing
-if [ -z "$TW5_BUILD_STATIC" ]; then
+# Conditionally build static files if $TW5_BUILD_STATIC variable is not set or is set to 0
+if [ -z "$TW5_BUILD_STATIC" ] || [ "$TW5_BUILD_STATIC" = "0" ]; then
 
 node $TW5_BUILD_TIDDLYWIKI \
 	$TW5_BUILD_MAIN_EDITION \
@@ -203,8 +203,8 @@ node $TW5_BUILD_TIDDLYWIKI \
 #
 ######################################################
 
-# Conditionally build editions if $TW5_BUILD_EDITIONS variable is not set, otherwise do nothing
-if [ -z "$TW5_BUILD_EDITIONS" ]; then
+# Conditionally build editions if $TW5_BUILD_EDITIONS variable is not set or is set to 0
+if [ -z "$TW5_BUILD_EDITIONS" ] || [ "$TW5_BUILD_EDITIONS" = "0" ]; then
 
 # /editions/xlsx-utils/index.html	xlsx-utils edition
 node $TW5_BUILD_TIDDLYWIKI \
@@ -280,7 +280,7 @@ fi
 ######################################################
 
 # Conditionally build plugin demos if $TW5_BUILD_PLUGIN_DEMOS variable is not set
-if [ -z "$TW5_BUILD_PLUGIN_DEMOS" ]; then
+if [ -z "$TW5_BUILD_PLUGIN_DEMOS" ] || [ "$TW5_BUILD_PLUGIN_DEMOS" = "0" ]; then
 
 # /plugins/tiddlywiki/innerwiki/index.html	Demo wiki with Innerwiki plugin
 
@@ -395,7 +395,7 @@ fi
 ######################################################
 
 # Conditionally build language editions if $TW5_BUILD_LANGUAGE_DEMOS variable is not set
-if [ -z "$TW5_BUILD_LANGUAGE_DEMOS" ]; then
+if [ -z "$TW5_BUILD_LANGUAGE_DEMOS" ] || [ "$TW5_BUILD_LANGUAGE_DEMOS" = "0" ]; then
 
 # Delete any existing static content
 
@@ -489,7 +489,7 @@ fi
 ######################################################
 
 # Conditionally build plugin library if $TW5_BUILD_PLUGIN_LIBRARY variable is not set
-if [ -z "$TW5_BUILD_PLUGIN_LIBRARY" ]; then
+if [ -z "$TW5_BUILD_PLUGIN_LIBRARY" ] || [ "$TW5_BUILD_PLUGIN_LIBRARY" = "0" ]; then
 
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/pluginlibrary \
