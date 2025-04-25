@@ -25,7 +25,7 @@ exports.startup = function() {
 	var accumulator = [];
 	// Add our hook for each filter evaluation
 	$tw.hooks.addHook("th-filter-evaluation",function(filterString,wrappers) {
-		// Get the list of tiddlers to be inspected
+		// Get the list of filters to be inspected
 		var inspectedFilters = [];
 		$tw.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
 			if(tiddler.fields.tags && tiddler.fields.tags.indexOf("$:/tags/InspectableFilter") !== -1 && !tiddler.fields["draft.of"] && tiddler.fields.text) {
