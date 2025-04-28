@@ -10,7 +10,6 @@ This is a <%if [{something}] %>Elephant<%elseif [{else}] %>Pelican<%else%>Crocod
 ```
 
 \*/
-(function(){
 "use strict";
 
 exports.name = "conditional";
@@ -146,5 +145,3 @@ exports.serialize = function(tree,serialize) {
 	}
 	return result;
 };
-
-})();

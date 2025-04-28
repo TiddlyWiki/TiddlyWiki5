@@ -28,5 +28,5 @@ Note that JavaScript macros work on both the client and the server, and so do no
 
 !! Macro Behaviour
 
-Macros are just used to return a chunk of wikitext for further processing. They should not make modifications to tiddlers in the wiki store. The reason is that you cannott control when the macro is called; it may be called repeatedly as part of refresh processing. So it is important that macros do not have any other side effects beyond generating their text.
+Macros are just used to return a chunk of wikitext for further processing. They should not make modifications to tiddlers in the wiki store. The reason is that you cannot control when the macro is called; it may be called repeatedly as part of refresh processing. So it is important that macros do not have any other side effects beyond generating their text.
 

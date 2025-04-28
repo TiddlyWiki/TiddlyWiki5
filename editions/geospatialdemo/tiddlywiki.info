@@ -15,6 +15,9 @@
 	"build": {
 		"index": [
 			"--render","$:/core/save/all","index.html","text/plain"],
+		"external": [
+			"--render","$:/core/save/all-external-js","index.html","text/plain"
+		],
 		"favicon": [],
 		"static": [],
 		"empty": [],
