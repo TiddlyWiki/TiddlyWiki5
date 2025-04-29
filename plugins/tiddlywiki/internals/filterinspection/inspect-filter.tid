@@ -93,8 +93,6 @@ tags: $:/tags/Macro
 		</$list>
 	</div>
 	<div class="tc-box-content">
-		<$transclude $variable="inspect-list" jsonList={{{ [<jsonOperator>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
-		<$transclude $variable="inspect-list" jsonList={{{ [<jsonOperator>jsonextract[output]] }}} class="tc-box tc-inspect-output-box"/>
 	</div>
 </div>
 \end inspect-operator
@@ -107,8 +105,20 @@ tags: $:/tags/Macro
 	</div>
 	<div class="tc-box-content">
 		<$list filter="[<jsonOperation>jsonindexes[operators]nsort[]]" variable="indexOperator">
-			<$let transclusion={{{ [[operator-]addsuffix<indexOperator>] }}}>
-				<$transclude $variable="inspect-operator" jsonOperator={{{ [<jsonOperation>jsonextract[operators],<indexOperator>] }}}/>
+			<$let 
+				transclusion={{{ [[operator-]addsuffix<indexOperator>] }}}
+				jsonOperator={{{ [<jsonOperation>jsonextract[operators],<indexOperator>] }}}
+			>
+				<$transclude $variable="inspect-list" jsonList={{{ [<jsonOperator>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
+				<$transclude $variable="inspect-operator" jsonOperator=<<jsonOperator>>/>
+			</$let>
+		</$list>
+		<$list filter="[<jsonOperation>jsonindexes[operators]nsort[]last[1]]" variable="indexOperator">
+			<$let 
+				transclusion={{{ [[operator-]addsuffix<indexOperator>] }}}
+				jsonOperator={{{ [<jsonOperation>jsonextract[operators],<indexOperator>] }}}
+			>
+				<$transclude $variable="inspect-list" jsonList={{{ [<jsonOperator>jsonextract[output]] }}} class="tc-box tc-inspect-output-box"/>
 			</$let>
 		</$list>
 	</div>
@@ -116,6 +126,7 @@ tags: $:/tags/Macro
 \end inspect-operation
 
 \procedure inspect-run(jsonRun)
+<$transclude $variable="inspect-list" jsonList={{{ [<jsonRun>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
 <div class="tc-box tc-inspect-run-box">
 	<div class="tc-box-header">
 		<span class="">:<$text text={{{ [<jsonRun>jsonget[prefixName]] }}} /></span>
@@ -128,7 +139,6 @@ tags: $:/tags/Macro
 		<%endif%>
 	</div>
 	<div class="tc-box-content">
-		<$transclude $variable="inspect-list" jsonList={{{ [<jsonRun>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
 		<div class="tc-inspect-operations-wrapper">
 			<$list filter="[<jsonRun>jsonindexes[operations]nsort[]]" variable="indexOperation">
 				<$let transclusion={{{ [[operation-]addsuffix<indexOperation>] }}}>
@@ -136,7 +146,6 @@ tags: $:/tags/Macro
 				</$let>
 			</$list>
 		</div>
-		<$transclude $variable="inspect-list" jsonList={{{ [<jsonRun>jsonextract[output]] }}} class="tc-box tc-inspect-output-box">
 	</div>
 </div>
 \end inspect-run
