@@ -20,16 +20,18 @@ Enable logging for this filter
 		<div class="tc-box-content">
 			<ol>
 				<$list filter="[all[shadows+tiddlers]tag[$:/tags/FilterInspectionOutput]!has[draft.of]!sort[modified]] :filter[<inspectableFilter>get[text]match{!!filter}]" variable="inspectionOutput">
-					<li>
-						<div class="tc-box tc-inspectable-filter-trace-box">
-							<div class="tc-box-header">
-								<$text text={{{ [<inspectionOutput>get[modified]format:date[DDth mmm YYYY 0hh:0mm:0ss]] }}}/><$link to=<<inspectionOutput>>>{{$:/core/images/open-window}}</$link>
+					<$let transclusion=<<inspectionOutput>>>
+						<li>
+							<div class="tc-box tc-inspectable-filter-trace-box">
+								<div class="tc-box-header">
+									<$text text={{{ [<inspectionOutput>get[modified]format:date[DDth mmm YYYY 0hh:0mm:0ss]] }}}/><$link to=<<inspectionOutput>>>{{$:/core/images/open-window}}</$link>
+								</div>
+								<div class="tc-box-content">
+									<$transclude $variable="inspect-filter-output-unframed" jsonOutput={{{ [<inspectionOutput>get[text]] }}} />
+								</div>
 							</div>
-							<div class="tc-box-content">
-								<$transclude $variable="inspect-filter-output-unframed" jsonOutput={{{ [<inspectionOutput>get[text]] }}} />
-							</div>
-						</div>
-					</li>
+						</li>
+					</$let>
 				</$list>
 			</ol>
 		</div>

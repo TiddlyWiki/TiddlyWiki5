@@ -10,6 +10,7 @@ tags: $:/tags/Stylesheet
 .tc-box {
 	border: 1px solid var(--box-foreground-color););
 	border-radius: 4px;
+	margin: 0 0 0.5em 0;
 }
 
 .tc-box .tc-box {
