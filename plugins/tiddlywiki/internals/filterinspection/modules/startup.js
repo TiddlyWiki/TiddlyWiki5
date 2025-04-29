@@ -52,7 +52,7 @@ exports.startup = function() {
 					// Check if the the output is the same as the last log with the same filter
 					var logTitles = [];
 					$tw.wiki.each(function(tiddler,title) {
-						if(title.substring(logPrefixLength) === filterString) {
+						if(title.substring(logPrefixLength) === jsonInspectionOutput.inputFilter) {
 							logTitles.push(title);
 						}
 					});
@@ -68,10 +68,10 @@ exports.startup = function() {
 					}
 					// Add the log tiddler
 					var tiddlerFields = {
-						title: `${logPrefix}${filterString}`,
+						title: `${logPrefix}${jsonInspectionOutput.inputFilter}`,
 						tags: ["$:/tags/FilterInspectionOutput"],
 						text: stringInspectionOutput,
-						filter: filterString,
+						filter: jsonInspectionOutput.inputFilter,
 						type: "application/json"
 					}
 					// console.log("Adding " + JSON.stringify(tiddlerFields));
