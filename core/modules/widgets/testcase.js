@@ -65,11 +65,24 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	});
 	var jsonPayload = JSON.stringify(tiddlers);
 	this.testcaseWiki.addTiddlers(tiddlers);
+	// Suppress next tick dispatch for wiki change events
+	this.testcaseWiki.setDispatchMode(true);
 	// Unpack plugin tiddlers
 	this.testcaseWiki.readPluginInfo();
 	this.testcaseWiki.registerPluginTiddlers("plugin");
 	this.testcaseWiki.unpackPluginTiddlers();
 	this.testcaseWiki.addIndexersToWiki();
+	// Install the plugin change event handler
+	$tw.utils.installPluginChangeHandler(this.testcaseWiki);
+	// Install the language switcher
+	var languageSwitcher = new $tw.PluginSwitcher({
+		wiki: this.testcaseWiki,
+		pluginType: "language",
+		controllerTitle: "$:/language",
+		defaultPlugins: [
+			"$:/languages/en-GB"
+		]
+	});
 	// Generate a `transclusion` variable that depends on the values of the payload tiddlers so that the template can easily make unique state tiddlers
 	this.setVariable("transclusion",$tw.utils.hashString(jsonPayload));
 	// Generate a `payloadTiddlers` variable that contains the payload in JSON format
@@ -91,13 +104,20 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 			}
 		});
 		testcaseOutputWidget.render(testcaseOutputContainer);
+		// Install the wiki change event handler
+		this.testcaseWiki.addEventListener("change",function(changes) {
+			testcaseOutputWidget.refresh(changes,testcaseOutputContainer);
+		});
 	}
 	// Clear changes queue
 	this.testcaseWiki.clearTiddlerEventQueue();
 	// Run the actions if provided
 	if(this.testcaseWiki.tiddlerExists(this.testcaseTestActions)) {
 		testcaseOutputWidget.invokeActionString(this.testcaseWiki.getTiddlerText(this.testcaseTestActions));
-		testcaseOutputWidget.refresh(this.testcaseWiki.changedTiddlers,testcaseOutputContainer);
+		// Make sure all wiki events have been cleared
+		while(this.testcaseWiki.eventsTriggered) {
+			this.testcaseWiki.processOutstandingTiddlerEvents();
+		}
 	}
 	// Set up the test result variables
 	var testResult = "",
@@ -127,6 +147,8 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 		parentWidget: this
 	});
 	rootWidget.render(domNode);
+	// Re-enable next tick dispatch for wiki change events
+	this.testcaseWiki.setDispatchMode(false);
 	// Trap changes in the wiki and refresh the rendering
 	this.testcaseWiki.addEventListener("change",function(changes) {
 		rootWidget.refresh(changes,domNode);

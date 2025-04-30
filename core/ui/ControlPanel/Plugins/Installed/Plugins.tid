@@ -1,5 +1,5 @@
 title: $:/core/ui/ControlPanel/Plugins/Installed/Plugins
 tags: $:/tags/ControlPanel/Plugins
-caption: {{$:/language/ControlPanel/Plugins/Plugins/Caption}} (<$count filter="[!has[draft.of]plugin-type[plugin]]"/>)
+caption: {{$:/language/ControlPanel/Plugins/Plugins/Caption}} (<$count filter="[all[tiddlers+shadows]is[plugin]plugin-type[plugin]]"/>)
 
 <<plugin-table plugin>>
