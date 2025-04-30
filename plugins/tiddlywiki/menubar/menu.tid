@@ -7,7 +7,7 @@ tags: $:/tags/PageTemplate
 <$list filter="[<currentTiddler>addprefix[$:/config/plugins/menubar/MenuItems/Visibility/]get[text]] ~show +[match[show]]" variable="ignore">
 <$list filter="[[$size$]match[wide]] ~[<currentTiddler>get[show-when]match[$size$]] ~[{$:/state/popup/menubar/hamburger}match[yes]]" variable="ignore">
 <li style={{!!custom-menu-styles-$size$}} class={{{ [<currentTiddler>get[show-when]addprefix[tc-menubar-]] tc-menubar-item +[join[ ]] }}}>
-<$list filter="[<currentTiddler>!is-dropdown[yes]]" variable="listItem" emptyMessage="""
+<%if [<currentTiddler>is-dropdown[yes]] %>
 	<!-- Dropdown -->
 	<$set name="dropdown-state" value=<<qualify "$:/state/popup/topmenu/dropdown/">>>
 	<$set name="dropdown-state" value={{{ [<dropdown-state>addsuffix<currentTiddler>] }}}>
@@ -22,19 +22,17 @@ tags: $:/tags/PageTemplate
 	</$button>
 	</$set>
 	</$set>
-""">
-<$list filter="[<currentTiddler>has[custom-menu-content]]" variable="listItem" emptyMessage="""
-	<!-- Link -->
+<%else%>
+<%if [<currentTiddler>has[custom-menu-content]] %>
+	<$transclude field="custom-menu-content" mode="inline"/>
+<%else%>
 	<$link to={{!!target}}>
 	<$set name="tv-wikilinks" value="no">
 	<$transclude field="caption" mode="inline"/>
 	</$set>
 	</$link>
-""">
-<!-- Custom content -->
-<$transclude field="custom-menu-content" mode="inline"/>
-</$list>
-</$list>
+<%endif%>
+<%endif%>
 </li>
 </$list>
 </$list>
