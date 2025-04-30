@@ -1,0 +1,53 @@
+title: $:/plugins/tiddlywiki/ai-tools/docs
+
+!! Setting Up
+
+See the ''settings'' tab for set up instructions.
+
+!! Live AI Conversations in ~TiddlyWiki
+
+# Click the {{||$:/plugins/tiddlywiki/ai-tools/page-menu}} icon in the sidebar to open a new conversation
+# Choose the server from the dropdown:
+#* ''Locally running Llamafile server''
+#* ''~OpenAI Service'' (requires API key to be specified in ''settings'')
+# Type a prompt for the LLM in the text box
+#* If using ~OpenAI it is possible to attach a single image to a prompt
+# Click "Send" and wait for the output of the LLM
+
+!! Import ~ChatGPT Conversation Archives
+
+# [[Follow the instructions|https://help.openai.com/en/articles/7260999-how-do-i-export-my-chatgpt-history-and-data]] to request an export of your ~ChatGPT data
+# You will receive a link to download your data as a ZIP file
+# Download and unzip the file
+# Locate the file `conversations.json` within the archive and import it into your TiddlyWiki
+# Visit the ''tools'' tab and locate your `conversations.json` tiddler
+# Click the associated ''import'' button
+# See the imported conversations listed in the ''tools'' tab
+# The imported tiddler `conversations.json` is no longer required and can be deleted
+
+!! Conversation Format
+
+This plugin defines a simple schema for representing conversations with an LLM.
+
+In a nutshell, tiddlers tagged <<tag $:/tags/AI/Conversation>> define conversations. The individual messages are tiddlers that are tagged with the title of the conversation tiddler.
+
+Currently, the ordering of the messages is determined by the value of their "created" field. The ordering defined by the tag mechanism is ignored. It is intended to change this behaviour so that the ordering of messages is defined by the tag mechanism.
+
+The fields with defined meanings for conversation tiddlers are:
+
+|!Field |!Description |
+|''system-prompt'' |Defines the system prompt for the conversation |
+|''tags'' |Must include <<tag $:/tags/AI/Conversation>> |
+|''text'' |Optional description or notes displayed at the top of the conversation |
+|''current-response-image'' |Optional title of an image tiddler to be attached to the current user response |
+|''current-response-text'' |Text of the current user response before it is sent |
+
+The fields with defined meanings for conversation tiddlers are:
+
+|!Field |!Description |
+|''created'' |Creation date of the message (currently used for ordering) |
+|''image'' |Optional image associated with this message |
+|''role'' |Possible values include ''user'' and ''assistant'' |
+|''tags'' |Must include the title of the parent conversation |
+|''type'' |Typically ''text/markdown'' |
+

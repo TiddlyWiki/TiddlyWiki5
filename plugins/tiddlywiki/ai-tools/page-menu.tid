@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/ai-tools/page-menu
+tags: $:/tags/PageControls
+caption: {{$:/plugins/tiddlywiki/ai-tools/icon}} AI Tools
+description: Tools for interactive AI services
+
+\whitespace trim
+<$button popup=<<qualify "$:/state/popup/ai-tools/page-menu">> tooltip="Tools for interactive AI services" aria-label="AI Tools" class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		{{$:/plugins/tiddlywiki/ai-tools/icon}}
+	<%endif%>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text"><$text text="AI Tools"/></span>
+	<%endif%>
+</$button>
+<$reveal state=<<qualify "$:/state/popup/ai-tools/page-menu">> type="popup" position="belowleft" animate="yes">
+	<div class="tc-drop-down">
+		<$list filter="[all[shadows+tiddlers]tag[$:/tags/AI/PageMenu]!has[draft.of]]" variable="listItem">
+			<$transclude tiddler=<<listItem>>/>
+		</$list>
+	</div>
+</$reveal>

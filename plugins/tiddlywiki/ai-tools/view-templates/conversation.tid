@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/ai-tools/view-templates/conversation
+tags: $:/tags/ViewTemplate
+list-after: $:/core/ui/ViewTemplate/body
+
+<%if [<currentTiddler>tag[$:/tags/AI/Conversation]] %>
+
+<$transclude
+	$variable="ai-tools-conversation"
+	$mode="block"
+	conversationTitle=<<currentTiddler>>
+/>
+
+<%endif%>
+
