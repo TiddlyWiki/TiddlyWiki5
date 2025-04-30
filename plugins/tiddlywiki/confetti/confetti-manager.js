@@ -6,7 +6,6 @@ module-type: global
 Confetti manager
 
 \*/
-(function(){
 "use strict";
 
 var confetti = require("$:/plugins/tiddlywiki/confetti/confetti.js");
@@ -49,5 +48,3 @@ ConfettiManager.prototype.reset = function () {
 };
 
 exports.ConfettiManager = ConfettiManager;
-
-})();

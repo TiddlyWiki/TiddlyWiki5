@@ -10,7 +10,6 @@ This is a <%if [{something}] %>Elephant<%elseif [{else}] %>Pelican<%else%>Crocod
 ```
 
 \*/
-(function(){
 "use strict";
 
 exports.name = "conditional";
@@ -113,5 +112,3 @@ exports.parseIfClause = function(filterCondition) {
 	// Return the parse tree node
 	return [listWidget];
 };
-
-})();

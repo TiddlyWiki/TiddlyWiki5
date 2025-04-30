@@ -6,7 +6,6 @@ module-type: widget
 Widget to dynamically represent one or more tiddlers
 
 \*/
-(function(){
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -187,5 +186,3 @@ function hasPayloadChanged(a,b) {
 }
 
 exports.data = DataWidget;
-
-})();
