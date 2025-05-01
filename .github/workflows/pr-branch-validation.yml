@@ -1,0 +1,34 @@
+name: PR Branch-Path Validation
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]  # Trigger on PR opened, updated or reopened
+
+jobs:
+  validate-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+          ref: 'master'
+          sparse-checkout: |
+            .github
+            bin/ci-pr-validation
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22'
+
+    - name: Install dependencies
+      run: npm install @actions/core @actions/github
+
+    - name: Validate PR file paths and post comments
+      run: node bin/ci-pr-validation/validate-branch.js
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        BASE_REF: ${{ github.base_ref }}
+        REPO: ${{ github.repository }}
