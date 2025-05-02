@@ -3,6 +3,7 @@ created: 20241009163451663
 icon: $:/core/images/tip
 list: GettingStarted [[Getting Started Video]] [[Find Out More]] [[TiddlyWiki on the Web]] [[Testimonials and Reviews]]
 modified: 20241115170824144
+skip-footer: yes
 tags: Welcome
 title: Quick Start
 type: text/vnd.tiddlywiki
