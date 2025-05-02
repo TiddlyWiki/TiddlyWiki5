@@ -69,6 +69,9 @@ function FramedEngine(options) {
 	if(this.widget.editRows) {
 		this.domNode.setAttribute("rows",this.widget.editRows);
 	}
+	if(this.widget.editDir) {
+		this.domNode.setAttribute("dir",this.widget.editDir);
+	}
 	if(this.widget.editTabIndex) {
 		this.iframeNode.setAttribute("tabindex",this.widget.editTabIndex);
 	}
@@ -117,6 +120,7 @@ FramedEngine.prototype.copyStyles = function() {
 	this.domNode.style["-webkit-text-fill-color"] = "currentcolor";
 	// Ensure we don't force text direction to LTR
 	this.domNode.style.removeProperty("direction");
+	this.domNode.style.removeProperty("unicodeBidi");
 };
 
 /*
