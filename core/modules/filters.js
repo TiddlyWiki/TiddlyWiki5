@@ -387,7 +387,7 @@ exports.compileFilter = function(filterString,options) {
 			widget = $tw.rootWidget;
 		}
 		if(wrappers.start) {
-			wrappers.start(source);
+			wrappers.start(source,widget);
 		}
 		var results = new $tw.utils.LinkedList();
 		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
