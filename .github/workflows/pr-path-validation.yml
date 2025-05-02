@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: Validate PR
-      uses: TiddlyWiki/cerebrus@v1
+      uses: TiddlyWiki/cerebrus@v2
       with:
         pr_number: ${{ github.event.pull_request.number }}
         repo: ${{ github.repository }}
