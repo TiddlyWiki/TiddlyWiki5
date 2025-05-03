@@ -1,7 +1,7 @@
 name: Validate PR Paths
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, reopened, synchronize]
 
 jobs:
