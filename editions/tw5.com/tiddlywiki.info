@@ -2,13 +2,13 @@
 	"description": "Documentation from https://tiddlywiki.com",
 	"plugins": [
 		"tiddlywiki/browser-sniff",
-		"tiddlywiki/railroad",
-		"tiddlywiki/internals",
-		"tiddlywiki/menubar",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
-		"tiddlywiki/tour",
-		"tiddlywiki/prosemirror"
+		"tiddlywiki/internals",
+		"tiddlywiki/menubar",
+		"tiddlywiki/prosemirror",
+		"tiddlywiki/railroad",
+		"tiddlywiki/tour"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
