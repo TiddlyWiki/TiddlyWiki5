@@ -1,18 +1,18 @@
-name: Validate PR Paths
-
+name: Calculate PR build size
 on:
-  pull_request_target:
+  pull_request:
     types: [opened, reopened, synchronize]
 
 jobs:
-  validate-pr:
+  calculate-build-size:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Validate PR
-      uses: TiddlyWiki/cerebrus@v3
+    - name: Build and check size
+      uses: saqimtiaz/cerebrus@v3
       with:
         pr_number: ${{ github.event.pull_request.number }}
         repo: ${{ github.repository }}
         base_ref: ${{ github.base_ref }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        mode: size:calc
