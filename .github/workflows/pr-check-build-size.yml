@@ -1,0 +1,18 @@
+name: Calculate PR build size
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  calculate-build-size:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Build and check size
+      uses: saqimtiaz/cerebrus@v3
+      with:
+        pr_number: ${{ github.event.pull_request.number }}
+        repo: ${{ github.repository }}
+        base_ref: ${{ github.base_ref }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        mode: size:calc
