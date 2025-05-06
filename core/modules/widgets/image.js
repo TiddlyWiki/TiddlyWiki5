@@ -132,7 +132,8 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 			variables["window-content-height"] = window.innerHeight.toString();
 			//this might be an excellent place to collect DOM node properties TODO:
 			//variables["dom-properties"] = $tw.utils.copyObjectPropertiesSafe(domNode);
-			self.invokeActionString(self.loadedActions,self,event,variables);		}
+			self.invokeActionString(self.loadedActions,self,event,variables);		
+	}
 	},false);
 	domNode.addEventListener("error",function() {
 		$tw.utils.removeClass(domNode,"tc-image-loading");
