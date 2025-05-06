@@ -133,7 +133,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 			//this might be an excellent place to collect DOM node properties TODO:
 			//variables["dom-properties"] = $tw.utils.copyObjectPropertiesSafe(domNode);
 			self.invokeActionString(self.loadedActions,self,event,variables);		
-	}
+		}
 	},false);
 	domNode.addEventListener("error",function() {
 		$tw.utils.removeClass(domNode,"tc-image-loading");
@@ -158,6 +158,7 @@ ImageWidget.prototype.execute = function() {
 	this.imageAlt = this.getAttribute("alt");
 	this.lazyLoading = this.getAttribute("loading");
 	this.loadedActions = this.getAttribute("loadActions");
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
