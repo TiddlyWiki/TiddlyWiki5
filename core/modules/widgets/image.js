@@ -115,11 +115,24 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	if(this.lazyLoading && tag === "img") {
 		domNode.setAttribute("loading",this.lazyLoading);
 	}
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Add classes when the image loads or fails
 	$tw.utils.addClass(domNode,"tc-image-loading");
-	domNode.addEventListener("load",function() {
+	domNode.addEventListener("load",function(event) {
 		$tw.utils.removeClass(domNode,"tc-image-loading");
 		$tw.utils.addClass(domNode,"tc-image-loaded");
+		if(this.loadedActions) {
+			var variables = $tw.utils.collectDOMVariables(domNode,null,event);
+			variables["image-natural-width"] = domNode.naturalWidth.toString();
+			variables["image-natural-height"] = domNode.naturalHeight.toString();
+			variables["window-content-width"] = window.innerWidth.toString();
+			variables["window-content-height"] = window.innerHeight.toString();
+			//this might be an excellent place to collect DOM node properties TODO:
+			//variables["dom-properties"] = $tw.utils.copyObjectPropertiesSafe(domNode);
+			self.invokeActionString(self.loadedActions,self,event,variables);		}
 	},false);
 	domNode.addEventListener("error",function() {
 		$tw.utils.removeClass(domNode,"tc-image-loading");
@@ -143,17 +156,30 @@ ImageWidget.prototype.execute = function() {
 	this.imageTooltip = this.getAttribute("tooltip");
 	this.imageAlt = this.getAttribute("alt");
 	this.lazyLoading = this.getAttribute("loading");
-};
+	this.loadedActions = this.getAttribute("loadActions");
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ImageWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.source || changedAttributes.width || changedAttributes.height || changedAttributes["class"] || changedAttributes.usemap || changedAttributes.tooltip || changedTiddlers[this.imageSource]) {
+	var changedAttributes = this.computeAttributes(),
+		hasChangedAttributes = $tw.utils.count(changedAttributes) > 0;
+	if(changedAttributes.source || changedAttributes["class"] || changedAttributes.usemap || changedAttributes.tooltip || changedTiddlers[this.imageSource] ||changedAttributes.loadActions) {
 		this.refreshSelf();
 		return true;
-	} else {
+	} else if(hasChangedAttributes) {
+		this.assignAttributes(this.domNodes[0],{
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
+		if(changedAttributes.width) {
+			this.domNodes[0].setAttribute("width",this.getAttribute("width"));
+		}
+		if(changedAttributes.height) {
+			this.domNodes[0].setAttribute("height",this.getAttribute("height"));
+		}
+	}
+	else {
 		return false;
 	}
 };
