@@ -129,7 +129,15 @@ tags: $:/tags/Macro
 <$transclude $variable="inspect-list" jsonList={{{ [<jsonRun>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
 <div class="tc-box tc-inspect-run-box">
 	<div class="tc-box-header">
-		<span class="">:<$text text={{{ [<jsonRun>jsonget[prefixName]] }}} /></span>
+		<span class="">
+		<%if [<jsonRun>jsonget[prefix]!match[]] %>
+			<$text text={{{ [<jsonRun>jsonget[prefix]] }}} />
+			<$text text=" shortcut for "/>
+			<$text text={{{ [<jsonRun>jsonget[prefixName]addprefix[:]] }}} />
+		<%else%>
+			<$text text={{{ [<jsonRun>jsonget[prefixName]addprefix[:]] }}} />
+		<%endif%>
+		</span>
 		<%if [<jsonRun>jsonindexes[suffixes]length[]compare:number:gt[0]] %>
 			<$list filter="[<jsonRun>jsonindexes[suffixes]nsort[]]" variable="indexSuffix">
 				<span class="tc-pill">

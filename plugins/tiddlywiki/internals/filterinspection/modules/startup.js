@@ -122,6 +122,7 @@ function getWrappers(fnDone,inputFilter) {
 				var details ={
 						input: results.toArray(),
 						prefixName: innerOptions.prefixName,
+						prefix: innerOptions.prefix,
 						suffixes: innerOptions.suffixes,
 						operations: []
 					};

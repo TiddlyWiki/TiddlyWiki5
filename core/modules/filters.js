@@ -360,7 +360,8 @@ exports.compileFilter = function(filterString,options) {
 				var options = {
 						wiki: self,
 						suffixes: operation.suffixes || [],
-						prefixName: prefixName
+						prefixName: prefixName,
+						prefix: operation.prefix
 					},
 					filterRunPrefixFunction = filterRunPrefixes[prefixName];
 				// Wrap the filter operator module if required
