@@ -1,0 +1,3 @@
+title: $:/temp/advancedsearch
+
+[all[shadows+tiddlers]tag[HelloThere]] -[all[shadows+tiddlers]prefix[A]] :filter[<currentTiddler>tag[Community]]

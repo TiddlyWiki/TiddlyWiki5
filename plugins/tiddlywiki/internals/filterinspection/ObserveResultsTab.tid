@@ -5,6 +5,11 @@ list-after: $:/plugins/tiddlywiki/internals/filterinspection/InspectResultsTab
 
 Log traces of this filter expression in the background. A trace will be generated every time the filter is evaluated, regardless of the context. The trace is only saved if the results are different from previous traces.
 
+<$checkbox tiddler="$:/config/FilterObservationionEnabled" field="text" checked="yes" unchecked="no" default="no">
+Enable background filter observation
+</$checkbox>
+
+
 <$button>
 <%if [all[shadows+tiddlers]tag[$:/tags/InspectableFilter]get[text]match{$:/temp/advancedsearch}count[]match[0]] %>
 	<$action-createtiddler $basetitle="$:/config/inspectable-filters/filter" tags="$:/tags/InspectableFilter" type="text/plain" text={{$:/temp/advancedsearch}}/>

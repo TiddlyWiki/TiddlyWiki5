@@ -25,6 +25,10 @@ exports.startup = function() {
 	var accumulator = [];
 	// Add our hook for each filter evaluation
 	$tw.hooks.addHook("th-filter-evaluation",function(filterString,wrappers) {
+		// Check that filter observation is enabled
+		if($tw.wiki.getTiddlerText("$:/config/FilterObservationionEnabled","no") !== "yes") {
+			return wrappers;
+		}
 		// Get the list of filters to be inspected
 		var inspectedFilters = [];
 		$tw.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
