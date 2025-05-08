@@ -3,7 +3,9 @@ title: $:/language/Search/
 DefaultResults/Caption: List
 Filter/Caption: Filter
 Filter/Hint: Search via a [[filter expression|https://tiddlywiki.com/static/Filters.html]]
+Filter/Placeholder: Filter expression
 Filter/Matches: //<small><<resultCount>> matches</small>//
+Filter/FilterResults/Results/Caption: Results
 Matches: //<small><<resultCount>> matches</small>//
 Matches/All: All matches:
 Matches/NoMatch: //No match//

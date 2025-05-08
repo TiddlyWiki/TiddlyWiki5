@@ -1,0 +1,188 @@
+title: $:/plugins/tiddlywiki/internals/filterinspection/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/*
+** Headed box and pills
+*/
+
+.tc-box {
+	border: 1px solid var(--box-foreground-color););
+	border-radius: 4px;
+	margin: 0 0 0.5em 0;
+}
+
+.tc-box .tc-box {
+	margin: 0.5em;
+}
+
+.tc-box-header {
+	padding: 0.25em;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	color: var(--box-background-color);
+	fill: var(--box-background-color);
+	background-color: var(--box-foreground-color);
+	display: flex;
+	align-items: center;
+}
+
+.tc-box-header svg {
+	width: 1em;
+	height: 1em;
+	margin-left: 0.25em;
+}
+
+.tc-box-header button {
+	color: var(--box-background-color);
+	background-color: var(--box-foreground-color);
+}
+
+.tc-box-content {
+	min-width: 4em;
+	padding: 0.25em;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	color: var(--box-foreground-color);
+	fill: var(--box-foreground-color);
+	background-color: var(--box-background-color);
+}
+
+.tc-box-content-list-scollable {
+	margin: -0.25em;
+	max-height: 25vh;
+	width: 12em;
+}
+
+.tc-box-content-list {
+}
+
+.tc-box-content-list-item {
+	font-size: 0.7em;
+	line-height: 1.1;
+	padding: 0.25em;
+}
+
+.tc-box-content-list-more {
+	font-size: 0.7em;
+	line-height: 1.1;
+	padding: 0.25em;
+}
+
+.tc-box-content-full-width-button {
+	display: block;
+	width: 100%;
+	text-align: left;
+}
+
+.tc-box-content-list-more,
+.tc-box-content-list-more .tc-btn-invisible  {
+	color: var(--box-background-color);
+	fill: var(--box-background-color);
+	background-color: var(--box-foreground-color);
+}
+
+.tc-box-content-list-item:nth-child(even)  {
+	background: rgb(255, 255, 255, 0.5);
+}
+
+.tc-box-content-list-empty {
+
+}
+
+.tc-pill {
+	padding: 0.125em 0.25em;
+	margin: 0 0.25em;
+	border-radius: 6px;
+	color: var(--box-foreground-color);
+	background-color: var(--box-background-color);
+}
+
+.tc-split-pill {
+	display: inline-block;
+	padding: 0.125em 0.25em;
+	margin: 0 0.25em;
+	border-radius: 6px;
+	color: var(--box-foreground-color);
+	background-color: var(--box-background-color);
+}
+
+.tc-split-pill-top {
+	border-bottom: 1px solid var(--box-foreground-color);
+}
+
+.tc-split-pill-bottom {
+	
+}
+
+/*
+** Filter Inspection
+*/
+
+.tc-inspect-filter-box {
+	--box-background-color: <<colour code-border>>;
+	--box-foreground-color: <<colour code-foreground>>;
+}
+
+.tc-inspectable-filter-box {
+	--box-background-color: #ffebe1;
+	--box-foreground-color: #ff3f00;
+}
+
+.tc-inspectable-filter-trace-box {
+	--box-background-color: #ffdec1;
+	--box-foreground-color: #ff7a00;
+}
+
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal {
+	display: flex;
+}
+
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal > .tc-box > .tc-box-content,
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal.tc-inspect-filter-box-unframed,
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-run-box > .tc-box-content,
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-operation-box > .tc-box-content,
+.tc-inspect-filter-box.tc-inspect-filter-box-horizontal .tc-inspect-operator-box > .tc-box-content {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.tc-inspectable-filter-box > .tc-box-content > ol {
+	list-style: none;
+	padding-left: 0;
+}
+
+.tc-inspect-operations-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+}
+
+.tc-inspect-run-box {
+	--box-background-color: #ffffcc;
+	--box-foreground-color: #444400;
+}
+
+.tc-inspect-operation-box {
+	--box-background-color: #ccffcc;
+	--box-foreground-color: #004400;
+}
+
+.tc-inspect-operator-box {
+	--box-background-color: #ffcccc;
+	--box-foreground-color: #440000;
+}
+
+.tc-box.tc-inspect-input-box {
+	--box-background-color: #ffccff;
+	--box-foreground-color: #440044;
+}
+
+.tc-box.tc-inspect-output-box {
+	--box-background-color: #4fd3d3;
+	--box-foreground-color: #004444;
+}

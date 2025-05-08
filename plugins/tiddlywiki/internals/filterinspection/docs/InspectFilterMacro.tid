@@ -1,0 +1,17 @@
+caption: inspect-filter
+title: $:/plugins/tiddlywiki/internals/filterinspection/docs/InspectFilterMacro
+type: text/vnd.tiddlywiki
+
+The <<.def inspect-filter>> procedure displays a schematic representation of the filter evaluation process, including the input, output and intermediate results of evaluating the specified filter. It is based on the [[inspect operator|$:/plugins/tiddlywiki/internals/filterinspection/docs/inspectoperator]].
+
+By default the tabs are arranged horizontally above the content. To get vertical tabs, set the `orientation` parameter to `vertical`. This is useful for narrow windows or when the content is too wide to fit in a horizontal tab layout.
+
+!! Parameters
+
+;filter
+: The filter to be inspected
+;inputFilter
+: Optionally, a filter defining the input titles for the filter to be inspected, defaulting to `[all[tiddlers]]`
+;orientation
+: Optionally, the orientation of the schematic representation, defaulting to `horizontal`. Set to `vertical` to display the tabs vertically
+

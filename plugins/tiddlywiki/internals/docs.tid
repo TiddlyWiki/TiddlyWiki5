@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/internals/docs
+
+!! `<<inspect-filter>>` Procedure
+
+{{$:/plugins/tiddlywiki/internals/filterinspection/docs/InspectFilterMacro}}
+
+!!! `<<inspect-filter>>` Procedure Examples
+
+{{$:/plugins/tiddlywiki/internals/filterinspection/docs/inspectfiltermacro/examples}}
+
+!! `inspect` Operator
+
+{{$:/plugins/tiddlywiki/internals/filterinspection/docs/inspectoperator}}
