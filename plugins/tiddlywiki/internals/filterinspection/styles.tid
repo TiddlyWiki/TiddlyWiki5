@@ -52,6 +52,7 @@ tags: $:/tags/Stylesheet
 .tc-box-content-list-scollable {
 	margin: -0.25em;
 	max-height: 25vh;
+	width: 12em;
 }
 
 .tc-box-content-list {
