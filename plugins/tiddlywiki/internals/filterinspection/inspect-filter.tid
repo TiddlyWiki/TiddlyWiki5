@@ -3,18 +3,51 @@ tags: $:/tags/Global
 
 \whitespace trim
 
-\procedure inspect-list(jsonList,class:"tc-box")
+\procedure inspect-list(jsonList)
 <$let
-	transclusion={{{ [[list-]addsuffix<class>] }}}
+	transclusion={{{ [<jsonList>indexes[]count[]addprefix[-list-]] }}}
+	state=<<qualify "$:/temp/filter-inspector/list">>
+	stateMaxRows={{{ [<state>addsuffix[max-rows]] }}}
+	maxRows={{{ [<stateMaxRows>get[text]!match[]else[10]] }}}
+	stateScroll={{{ [<state>addsuffix[scroll]] }}}
+>
+<$text text=<<stateScroll>>/>
+	<$scrollable class="tc-box-content-list-scollable" bind=<<stateScroll>>>
+		<div class="tc-box-content-list">
+			<$list filter="[<jsonList>jsonindexes[]nsort[]limit<maxRows>]" variable="indexList">
+				<$list-template>
+					<div class="tc-box-content-list-item">
+						<$slot $name="list-item"/>
+					</div>
+				</$list-template>
+				<$list-empty>
+					<div class="tc-box-content-list-empty">
+						(No items)
+					</div>
+				</$list-empty>
+			</$list>
+			<%if [<jsonList>jsonindexes[]count[]compare:number:gt<maxRows>] %>
+				<div class="tc-box-content-list-more">
+					<$button class="tc-btn-invisible tc-box-content-full-width-button" style.fill="inherit">
+						<$action-setfield $tiddler=<<stateMaxRows>> text={{{ [<maxRows>add[10]] }}}/>
+						{{$:/core/images/chevron-down}}
+						<$text text="more"/>
+					</$button>
+				</div>
+			<%endif%>
+		</div>
+	</$scrollable>
+\end inspect-list
+
+\procedure inspect-foldable-text-list(jsonList,class:"tc-box")
+<$let
+	transclusion={{{ [[link-list-]addsuffix<class>] }}}
 >
 	<div class=<<class>>>
 		<$let
 			state=<<qualify "$:/temp/filter-inspector/list">>
 			stateFolded={{{ [<state>addsuffix[folded]] }}}
 			folded={{{ [<stateFolded>get[text]else[no]match[yes]] }}}
-			stateMaxRows={{{ [<state>addsuffix[max-rows]] }}}
-			maxRows={{{ [<stateMaxRows>get[text]!match[]else[10]] }}}
-			stateScroll={{{ [<state>addsuffix[scroll]] }}}
 		>
 			<div class="tc-box-header">
 				<$button class="tc-btn-invisible tc-box-content-full-width-button" style.fill="inherit">
@@ -29,37 +62,17 @@ tags: $:/tags/Global
 			</div>
 			<%if [<folded>!match[yes]] %>
 				<div class="tc-box-content">
-					<$scrollable class="tc-box-content-list-scollable" bind=<<stateScroll>>>
-						<div class="tc-box-content-list">
-							<$list filter="[<jsonList>jsonindexes[]nsort[]limit<maxRows>]" variable="indexList">
-								<$list-template>
-									<div class="tc-box-content-list-item">
-										<$text text={{{ [<jsonList>jsonget<indexList>] }}} />
-									</div>
-								</$list-template>
-								<$list-empty>
-									<div class="tc-box-content-list-empty">
-										(No items)
-									</div>
-								</$list-empty>
-							</$list>
-							<%if [<jsonList>jsonindexes[]count[]compare:number:gt<maxRows>] %>
-								<div class="tc-box-content-list-more">
-									<$button class="tc-btn-invisible tc-box-content-full-width-button" style.fill="inherit">
-										<$action-setfield $tiddler=<<stateMaxRows>> text={{{ [<maxRows>add[10]] }}}/>
-										{{$:/core/images/chevron-down}}
-										<$text text="more"/>
-									</$button>
-								</div>
-							<%endif%>
-						</div>
-					</$scrollable>
+					<$transclude $variable="inspect-list" jsonList=<<jsonList>>>
+						<$fill $name="list-item">
+							<$text text={{{ [<jsonList>jsonget<indexList>] }}} />
+						</$fill>
+					</$transclude>
 				</div>
 			<%endif%>
 		</$let>
 	</div>
 </$let>
-\end inspect-list
+\end inspect-foldable-text-list
 
 \procedure inspect-operator(jsonOperator)
 <div class="tc-box tc-inspect-operator-box">
@@ -111,7 +124,7 @@ tags: $:/tags/Global
 				transclusion={{{ [[operator-]addsuffix<indexOperator>] }}}
 				jsonOperator={{{ [<jsonOperation>jsonextract[operators],<indexOperator>] }}}
 			>
-				<$transclude $variable="inspect-list" jsonList={{{ [<jsonOperator>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
+				<$transclude $variable="inspect-foldable-text-list" jsonList={{{ [<jsonOperator>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
 				<$transclude $variable="inspect-operator" jsonOperator=<<jsonOperator>>/>
 			</$let>
 		</$list>
@@ -120,7 +133,7 @@ tags: $:/tags/Global
 				transclusion={{{ [[operator-]addsuffix<indexOperator>] }}}
 				jsonOperator={{{ [<jsonOperation>jsonextract[operators],<indexOperator>] }}}
 			>
-				<$transclude $variable="inspect-list" jsonList={{{ [<jsonOperator>jsonextract[output]] }}} class="tc-box tc-inspect-output-box"/>
+				<$transclude $variable="inspect-foldable-text-list" jsonList={{{ [<jsonOperator>jsonextract[output]] }}} class="tc-box tc-inspect-output-box"/>
 			</$let>
 		</$list>
 	</div>
@@ -128,7 +141,7 @@ tags: $:/tags/Global
 \end inspect-operation
 
 \procedure inspect-run(jsonRun)
-<$transclude $variable="inspect-list" jsonList={{{ [<jsonRun>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
+<$transclude $variable="inspect-foldable-text-list" jsonList={{{ [<jsonRun>jsonextract[input]] }}} class="tc-box tc-inspect-input-box"/>
 <div class="tc-box tc-inspect-run-box">
 	<div class="tc-box-header">
 		<span class="">
@@ -169,7 +182,7 @@ tags: $:/tags/Global
 				<$transclude $variable="inspect-run" jsonRun={{{ [<jsonOutput>jsonextract[runs],<indexRun>] }}}/>
 			</$let>
 		</$list>
-		<$transclude $variable="inspect-list" jsonList={{{ [<jsonOutput>jsonextract[output]] }}} class="tc-box tc-inspect-output-box"/>
+		<$transclude $variable="inspect-foldable-text-list" jsonList={{{ [<jsonOutput>jsonextract[output]] }}} class="tc-box tc-inspect-output-box"/>
 	</div>
 </$scrollable>
 \end inspect-filter-output-unframed
@@ -189,7 +202,7 @@ tags: $:/tags/Global
 						<$transclude $variable="inspect-run" jsonRun={{{ [<jsonOutput>jsonextract[runs],<indexRun>] }}}/>
 					</$let>
 				</$list>
-				<$transclude $variable="inspect-list" jsonList={{{ [<jsonOutput>jsonextract[output]] }}} class="tc-box tc-inspect-output-box"/>
+				<$transclude $variable="inspect-foldable-text-list" jsonList={{{ [<jsonOutput>jsonextract[output]] }}} class="tc-box tc-inspect-output-box"/>
 			</div>
 		</div>
 	</div>
