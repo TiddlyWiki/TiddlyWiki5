@@ -15,6 +15,7 @@ The output JSON object contains the following properties:
 * `input`: the input titles passed to the filter
 * `inputFilter`: the filter being inspected
 * `output`: the output titles resulting from evaluating the filter
+* `evaluationTime`: the time taken to evaluate the filter, in milliseconds
 * `runs`: an array of objects, each of which represents a single run of the filter. Each object contains the following properties:
 ** `prefixName`: the name of the prefix operator that was used in this run. Shortcut prefixes like `+` and `-` are expanded to their full names, e.g. `and` and `except`
 ** `input`: the input titles passed to the prefix operator

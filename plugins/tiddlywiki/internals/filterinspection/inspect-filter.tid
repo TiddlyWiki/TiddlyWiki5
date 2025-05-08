@@ -1,5 +1,5 @@
-title: $:/plugins/tiddlywiki/internals/filterinspection/inspectfiltermacro
-tags: $:/tags/Macro
+title: $:/plugins/tiddlywiki/internals/filterinspection/InspectFilterProcedures
+tags: $:/tags/Global
 
 \whitespace trim
 
@@ -93,6 +93,7 @@ tags: $:/tags/Macro
 		</$list>
 	</div>
 	<div class="tc-box-content">
+		Evaluation time <span class="tc-pill"><$text text={{{ [<jsonOperator>jsonget[evaluationTime]fixed[8]] }}}/></span> milliseconds
 	</div>
 </div>
 \end inspect-operator
@@ -102,6 +103,7 @@ tags: $:/tags/Macro
 	<div class="tc-box-header">
 		<span class="">Evaluation</span>
 		<span class="tc-pill"><$text text=<<indexOperation>> /></span>
+		Evaluation time <span class="tc-pill"><$text text={{{ [<jsonOperation>jsonget[evaluationTime]fixed[8]] }}}/></span> milliseconds
 	</div>
 	<div class="tc-box-content">
 		<$list filter="[<jsonOperation>jsonindexes[operators]nsort[]]" variable="indexOperator">
@@ -145,6 +147,7 @@ tags: $:/tags/Macro
 				</span>
 			</$list>
 		<%endif%>
+		Evaluation time <span class="tc-pill"><$text text={{{ [<jsonRun>jsonget[evaluationTime]fixed[8]] }}}/></span> milliseconds
 	</div>
 	<div class="tc-box-content">
 		<div class="tc-inspect-operations-wrapper">
@@ -178,6 +181,7 @@ tags: $:/tags/Macro
 			<div class="tc-box-header">
 				Filter
 				<span class="tc-pill"><$text text={{{ [<jsonOutput>jsonget[inputFilter]] }}}/></span>
+				Evaluation time <span class="tc-pill"><$text text={{{ [<jsonOutput>jsonget[evaluationTime]fixed[8]] }}}/></span> milliseconds
 			</div>
 			<div class="tc-box-content">
 				<$list filter="[<jsonOutput>jsonindexes[runs]nsort[]]" variable="indexRun">

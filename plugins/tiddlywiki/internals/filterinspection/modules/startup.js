@@ -30,12 +30,7 @@ exports.startup = function() {
 			return wrappers;
 		}
 		// Get the list of filters to be inspected
-		var inspectedFilters = [];
-		$tw.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
-			if(tiddler.fields.tags && tiddler.fields.tags.indexOf("$:/tags/InspectableFilter") !== -1 && !tiddler.fields["draft.of"] && tiddler.fields.text) {
-				inspectedFilters.push(tiddler.fields.text);
-			}
-		});
+		var inspectedFilters = $tw.wiki.getTiddlersWithTag("$:/tags/InspectableFilter");
 		// Check whether this is a filter we want to inspect
 		if(inspectedFilters.indexOf(filterString) === -1) {
 			return wrappers;
@@ -111,6 +106,8 @@ function getWrappers(fnDone,inputFilter) {
 		};
 	// Keep track of where the current run and the current operation are being written
 	var currentRun,currentOperation;
+	// The starting evaluation time stamp
+	var filterStartTime;
 	// Compile the filter with wrapper functions to log the details
 	return {
 		start: function(source) {
@@ -118,6 +115,8 @@ function getWrappers(fnDone,inputFilter) {
 			source(function(tiddler,title) {
 				output.input.push(title);
 			});
+			// Start the timer
+			filterStartTime = $tw.utils.timer();
 		},
 		prefix: function(filterRunPrefixFunction,operationFunction,innerOptions) {
 			// Function to be called at the start of each filter run
@@ -132,10 +131,14 @@ function getWrappers(fnDone,inputFilter) {
 					};
 				// Save the current run so that we can add operations to it
 				currentRun = details.operations;
+				// Save the start time
+				var startTime = $tw.utils.timer();
 				// Get the filter run prefix function
 				var innerResults = filterRunPrefixFunction.call(null,operationFunction,innerOptions);
 				// Invoke the filter run
 				innerResults(results,innerSource,innerWidget);
+				// Save the end time
+				details.evaluationTime = $tw.utils.timer(startTime);
 				// Save the results of the filter run
 				details.output = results.toArray();
 				output.runs.push(details);
@@ -146,11 +149,16 @@ function getWrappers(fnDone,inputFilter) {
 			var details = {
 				operators: []
 			}
+			// Save the start time
+			var startTime = $tw.utils.timer();
 			// Keep track of where the current operation should be being written
 			currentOperation = details.operators;
-			currentRun.push(details);
 			// Invoke the operation
 			operationFunction();
+			// Save the end time
+			details.evaluationTime = $tw.utils.timer(startTime);
+			//  Save the results of the operation
+			currentRun.push(details);
 		},
 		operator: function(operatorFunction,innerSource,innerOperator,innerOptions) {
 			// Record the operator
@@ -170,8 +178,12 @@ function getWrappers(fnDone,inputFilter) {
 			});
 			// Save this operation
 			currentOperation.push(details);
+			// Save the start time
+			var startTime = $tw.utils.timer();
 			// Invoke the operator
 			var innerResults = operatorFunction.apply(null,Array.prototype.slice.call(arguments,1));
+			// Save the end time
+			details.evaluationTime = $tw.utils.timer(startTime);
 			// Make sure the results are an array so that we can store them
 			if(!$tw.utils.isArray(innerResults)) {
 				var resultArray = [];
@@ -186,6 +198,8 @@ function getWrappers(fnDone,inputFilter) {
 			return innerResults;
 		},
 		done: function(results) {
+			// Store evaluation time
+			output.evaluationTime = $tw.utils.timer(filterStartTime);
 			// Save the results of the filter evaluation
 			output.output = results;
 			// console.log(`Inspected ${JSON.stringify(output,null,4)}`);

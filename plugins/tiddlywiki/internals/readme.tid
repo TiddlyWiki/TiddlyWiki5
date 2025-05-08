@@ -11,6 +11,10 @@ Filter inspection is based on a schematic visualisation that traces all the step
 ** The ''Observe'' tab allows the current filter to be logged in the background. A new trace is generated every time the filter is evaluated, regardless of the context, if the results are different from previous evaluations
 * Directly using the `<<inspect-filter>>` procedure, or the underlying `inspect[]` operator
 
+Note that observing a filter is not the same as logging it. Observing a filter means that the filter is evaluated in the background, and a new trace is generated every time the filter is evaluated, regardless of the context. Logging a filter means that the filter is evaluated in the background, but only if the results are different from previous evaluations.
+
+Filter observation has a performance impact, and disables certain optimisations such as caching of compiled filters.
+
 !! Inspecting Parse Trees and Widget Trees
 
 New preview panes for the tiddler editor that show 

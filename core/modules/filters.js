@@ -247,6 +247,9 @@ exports.compileFilter = function(filterString,options) {
 	} catch(e) {
 		// We do not cache this result, so it adjusts along with localization changes
 		return function(source,widget) {
+			if(wrappers.start) {
+				wrappers.start(source,widget);
+			}
 			var resultsArray = [$tw.language.getString("Error/Filter") + ": " + e];
 			if(wrappers.done) {
 				wrappers.done(resultsArray);
