@@ -8,6 +8,20 @@ module-type: wikiruleserializer
 
 exports.name = "list";
 
+var listTypes = require("$:/core/modules/parsers/wikiparser/rules/list.js").listTypes;
+var listTags = Object.values(listTypes).map(function(type) {
+	return type.listTag;
+});
+/*
+Check if the child is a nested list or a simple line of list item
+*/
+function isListNode(node) {
+	return node && node.type === "element" && listTags.includes(node.tag);
+}
+var itemTags = Object.values(listTypes).map(function(type) {
+	return type.itemTag;
+});
+
 exports.serialize = function (tree,serialize) {
 	// Helper function to find the marker for a given list container tag and item tag
 	function findMarker(listTag, itemTag) {

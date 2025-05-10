@@ -59,19 +59,7 @@ var listTypes = {
 	":": {listTag: "dl", itemTag: "dd"},
 	">": {listTag: "blockquote", itemTag: "div"}
 };
-
-var listTags = Object.values(listTypes).map(function(type) {
-	return type.listTag;
-});
-/*
-Check if the child is a nested list or a simple line of list item
-*/
-function isListNode(node) {
-	return node && node.type === "element" && listTags.includes(node.tag);
-}
-var itemTags = Object.values(listTypes).map(function(type) {
-	return type.itemTag;
-});
+exports.listTypes = listTypes;
 
 /*
 Parse the most recent match
