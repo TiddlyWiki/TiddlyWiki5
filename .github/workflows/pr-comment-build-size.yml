@@ -1,0 +1,36 @@
+name: Comment on PR build size (Trusted workflow)
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        required: true
+        type: string
+      base_ref:
+        required: true
+        type: string
+      pr_size:
+        required: true
+        type: string
+      base_size:
+        required: true
+        type: string
+
+jobs:
+  comment-on-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+    - name: Build and check size
+      uses: TiddlyWiki/cerebrus@v4
+      with:
+        pr_number: ${{ inputs.pr_number }}
+        repo: ${{ github.repository }}
+        base_ref: ${{ inputs.base_ref }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        mode: size:comment
+        pr_size: ${{ inputs.pr_size }}
+        base_size: ${{ inputs.base_size }}
