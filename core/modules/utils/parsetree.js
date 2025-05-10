@@ -135,39 +135,3 @@ exports.getParser = function(type,options) {
 	}
 	return Parser;
 };
-
-/*
-Utility to get the (similarly but not 1:1 equal) original wikitext of a parse tree node or array of nodes.
-Based on `node.rule` metadata added in `wikiparser.js`.
-*/
-exports.serializeParseTree = function serializeParseTree(tree,tiddlerType,options) {
-	options = options || {};
-	var output = [];
-	if($tw.utils.isArray(tree)) {
-		$tw.utils.each(tree,function(node) {
-			output.push(serializeParseTree(node,tiddlerType));
-		});
-	} else if(tree) {
-		if(tree.type === "text" && !tree.rule) {
-			output.push(tree.text);
-		} else {
-			var Parser = $tw.utils.getParser(tiddlerType);
-			if(!Parser.prototype.blockRuleClasses && !Parser.prototype.inlineRuleClasses && !Parser.prototype.pragmaRuleClasses) {
-				// Wiki parser initialize blockRuleClasses when first new an instance
-				new Parser(tiddlerType,undefined,{wiki: options.wiki || $tw.wiki});
-			}
-			var Rule = Parser.prototype.blockRuleClasses[tree.rule] ||
-				Parser.prototype.inlineRuleClasses[tree.rule] ||
-				Parser.prototype.pragmaRuleClasses[tree.rule];
-			if(Rule && Rule.prototype.serialize) {
-				output.push(Rule.prototype.serialize(tree,serializeParseTree));
-			} else if(tree.rule === "parseblock") {
-				output.push(serializeParseTree(tree.children,tiddlerType),"\n\n");
-			} else {
-				// when no rule is found, just serialize the children
-				output.push(serializeParseTree(tree.children,tiddlerType));
-			}
-		}
-	}
-	return output.join("");
-};
