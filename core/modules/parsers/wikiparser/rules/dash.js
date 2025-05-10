@@ -33,7 +33,3 @@ exports.parse = function() {
 		entity: dash
 	}];
 };
-
-exports.serialize = function(tree,serialize) {
-	return tree.entity === "&ndash;" ? "--" : "---";
-};

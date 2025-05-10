@@ -49,24 +49,3 @@ exports.parse = function() {
 	this.parser.pos = call.end;
 	return [call];
 };
-
-/*
-Serialize a macro call node to wikitext
-*/
-exports.serialize = function (node) {
-	var result = "<<";
-	// Macro name
-	if(node.attributes && node.attributes["$variable"]) {
-		result += node.attributes["$variable"].value;
-	}
-	// Append ordered arguments if any
-	if(node.orderedAttributes) {
-		node.orderedAttributes.forEach(function (attribute) {
-			if(attribute.name !== "$variable") {
-				result += " " + $tw.utils.serializeAttribute(attribute,{assignmentSymbol:":"});
-			}
-		});
-	}
-	result += ">>\n\n";
-	return result;
-};

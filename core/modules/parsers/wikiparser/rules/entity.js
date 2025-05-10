@@ -33,7 +33,3 @@ exports.parse = function() {
 	// Return the entity
 	return [{type: "entity", entity: this.match[0]}];
 };
-
-exports.serialize = function(tree,serialize) {
-	return tree.entity;
-};

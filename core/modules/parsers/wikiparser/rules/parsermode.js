@@ -67,8 +67,3 @@ exports.parse = function() {
 		end: this.parser.pos
 	}];
 };
-
-exports.serialize = function(tree,serialize) {
-	var mode = tree.parseAsInline ? "inline" : "block";
-	return "\\parsermode " + mode + "\n\n" + serialize(tree.children);
-};

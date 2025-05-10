@@ -58,7 +58,3 @@ exports.parse = function() {
 			end: commentEnd
 	}];
 };
-
-exports.serialize = function(tree,serialize) {
-	return tree.text + "\n\n" + serialize(tree.children);
-};

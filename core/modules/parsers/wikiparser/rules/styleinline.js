@@ -51,18 +51,3 @@ exports.parse = function() {
 	}
 	return [node];
 };
-
-exports.serialize = function(tree,serialize) {
-	var result = "@@";
-	// Add styles if present
-	if(tree.attributes && tree.attributes.style) {
-		result += tree.attributes.style.value.trim();
-	}
-	// Add classes if present
-	if(tree.attributes && tree.attributes.class) {
-		result += "." + tree.attributes.class.value.trim().split(" ").join(".");
-	}
-	// Serialize children and append to result
-	result += " " + serialize(tree.children) + "@@";
-	return result;
-};
