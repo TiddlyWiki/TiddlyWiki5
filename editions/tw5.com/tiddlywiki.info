@@ -1,6 +1,8 @@
 {
 	"description": "Documentation from https://tiddlywiki.com",
 	"plugins": [
+		"tiddlywiki/prosemirror",
+		"tiddlywiki/wikitext-serialize",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
