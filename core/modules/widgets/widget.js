@@ -374,7 +374,21 @@ Widget.prototype.computeAttribute = function(attribute) {
 	} else if(attribute.type === "indirect") {
 		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler")) || "";
 	} else if(attribute.type === "macro") {
-		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
+		// Get the macro name
+		var macroName = attribute.value.attributes["$variable"].value;
+		// Collect macro parameters
+		var params = [];
+		$tw.utils.each(attribute.value.orderedAttributes,function(attr) {
+			var param = {
+				value: self.computeAttribute(attr)
+			};
+			if(attr.name && !attr.isPositional) {
+				param.name = attr.name;
+			}
+			params.push(param);
+		});
+		// Invoke the macro
+		var variableInfo = this.getVariableInfo(macroName,{params: params});
 		value = variableInfo.text;
 	} else if(attribute.type === "substituted") {
 		value = this.wiki.getSubstitutedText(attribute.rawValue,this) || "";

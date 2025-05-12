@@ -214,7 +214,7 @@ exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 			orderedAttributes: []
 		};
 	// Define our regexps
-	var reVarName = /([a-zA-Z0-9\-\$\._<]+)/g;
+	var reVarName = /([^\s>"'=:]+)/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a double opening angle bracket
@@ -260,6 +260,7 @@ exports.parseMacroParametersAsAttributes = function(node,source,pos) {
 	while(attribute) {
 		if(!attribute.name) {
 			attribute.name = (position++) + "";
+			attribute.isPositional = true;
 		}
 		node.orderedAttributes.push(attribute);
 		node.attributes[attribute.name] = attribute;
@@ -485,7 +486,7 @@ exports.parseAttribute = function(source,pos) {
 						node.value = unquotedValue.match[1];
 					} else {
 						// Look for a macro invocation value
-						var macroInvocation = $tw.utils.parseMacroInvocation(source,pos);
+						var macroInvocation = $tw.utils.parseMacroInvocationAsTransclusion(source,pos);
 						if(macroInvocation) {
 							pos = macroInvocation.end;
 							node.type = "macro";

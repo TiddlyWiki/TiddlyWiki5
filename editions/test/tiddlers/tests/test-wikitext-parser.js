@@ -281,23 +281,23 @@ describe("WikiText parser tests", function() {
 	it("should parse tricky macrocall parameters", function() {
 		expect(parse("<<john pa>am>>")).toEqual(
 
-			[{"type":"transclude","start":0,"end":14,"attributes":{"0":{"name":"0","type":"string","value":"pa>am","start":6,"end":12},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"pa>am","start":6,"end":12}],"isBlock":true,"rule":"macrocallblock"}]
+			[{"type":"transclude","start":0,"end":14,"attributes":{"0":{"name":"0","type":"string","value":"pa>am","start":6,"end":12,"isPositional":true},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"pa>am","start":6,"end":12,"isPositional":true}],"isBlock":true,"rule":"macrocallblock"}]
 
 		);
 		expect(parse("<<john param> >>")).toEqual(
 
-			[{"type":"transclude","start":0,"end":16,"attributes":{"0":{"name":"0","type":"string","value":"param>","start":6,"end":13},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"param>","start":6,"end":13}],"isBlock":true,"rule":"macrocallblock"}]
+			[{"type":"transclude","start":0,"end":16,"attributes":{"0":{"name":"0","type":"string","value":"param>","start":6,"end":13,"isPositional":true},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"param>","start":6,"end":13,"isPositional":true}],"isBlock":true,"rule":"macrocallblock"}]
 
 		);
 		expect(parse("<<john param>>>")).toEqual(
 
-			[{"type":"element","tag":"p","children":[{"type":"transclude","start":0,"end":14,"rule":"macrocallinline","attributes":{"0":{"name":"0","type":"string","value":"param","start":6,"end":12},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"param","start":6,"end":12}]},{"type":"text","text":">","start":14,"end":15}],"start":0,"end":15}]
+			[{"type":"element","tag":"p","children":[{"type":"transclude","start":0,"end":14,"rule":"macrocallinline","attributes":{"0":{"name":"0","type":"string","value":"param","start":6,"end":12,"isPositional":true},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"param","start":6,"end":12,"isPositional":true}]},{"type":"text","text":">","start":14,"end":15}],"start":0,"end":15}]
 
 		);
 		// equals signs should be allowed
 		expect(parse("<<john var>=4 >>")).toEqual(
 
-			[{"type":"transclude","start":0,"end":16,"attributes":{"0":{"name":"0","type":"string","value":"var>=4","start":6,"end":13},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"var>=4","start":6,"end":13}],"isBlock":true,"rule":"macrocallblock"}]
+			[{"type":"transclude","start":0,"end":16,"attributes":{"0":{"name":"0","type":"string","value":"var>=4","start":6,"end":13,"isPositional":true},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"var>=4","start":6,"end":13,"isPositional":true}],"isBlock":true,"rule":"macrocallblock"}]
 
 		);
 
