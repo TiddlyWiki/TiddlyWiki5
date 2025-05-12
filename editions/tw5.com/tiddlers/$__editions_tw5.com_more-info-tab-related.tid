@@ -1,0 +1,11 @@
+caption: Related
+created: 20250326000854162
+icon: $:/core/images/info-button
+modified: 20250326013228035
+tags: $:/tags/MoreInfoFooter
+title: $:/editions/tw5.com/more-info-tab-related
+type: text/vnd.tiddlywiki
+
+<div class="tc-more-info-footer-list"> 
+<$list filter="[enlist{!!related}]" emptyMessage="No titles explicitly listed as related to this." template="$:/core/ui/ListItemTemplate">
+</div>
