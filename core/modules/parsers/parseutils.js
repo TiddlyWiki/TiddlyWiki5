@@ -106,13 +106,14 @@ exports.parseStringLiteral = function(source,pos) {
 		type: "string",
 		start: pos
 	};
-	var reString = /(?:"""([\s\S]*?)"""|"([^"]*)")|(?:'([^']*)')/g;
+	var reString = /(?:"""([\s\S]*?)"""|"([^"]*)")|(?:'([^']*)')|\[\[([^\]]*)\]\]/g;
 	reString.lastIndex = pos;
 	var match = reString.exec(source);
 	if(match && match.index === pos) {
 		node.value = match[1] !== undefined ? match[1] :(
-			match[2] !== undefined ? match[2] : match[3]
-					);
+			match[2] !== undefined ? match[2] : (
+				match[3] !== undefined ? match[3] : match[4]
+					));
 		node.end = pos + match[0].length;
 		return node;
 	} else {
@@ -205,28 +206,159 @@ exports.parseMacroParameter = function(source,pos) {
 Look for a macro invocation. Returns null if not found, or {type: "transclude", attributes:, start:, end:}
 */
 exports.parseMacroInvocationAsTransclusion = function(source,pos) {
-	var node = $tw.utils.parseMacroInvocation(source,pos);
-	if(node) {
-		var positionalName = 0,
-			transclusion = {
-				type: "transclude",
-				start: node.start,
-				end: node.end
-			};
-		$tw.utils.addAttributeToParseTreeNode(transclusion,"$variable",node.name);
-		$tw.utils.each(node.params,function(param) {
-			var name = param.name;
-			if(name) {
-				if(name.charAt(0) === "$") {
-					name = "$" + name;
-				}
-				$tw.utils.addAttributeToParseTreeNode(transclusion,{name: name,type: "string", value: param.value, start: param.start, end: param.end});
-			} else {
-				$tw.utils.addAttributeToParseTreeNode(transclusion,{name: (positionalName++) + "",type: "string", value: param.value, start: param.start, end: param.end});
-			}
-		});
-		return transclusion;
+// console.log("parseMacroInvocationAsTransclusion",source,pos);
+	var node = {
+			type: "transclude",
+			start: pos,
+			attributes: {},
+			orderedAttributes: []
+		};
+	// Define our regexps
+	var reVarName = /([a-zA-Z0-9\-\$\._<]+)/g;
+	// Skip whitespace
+	pos = $tw.utils.skipWhiteSpace(source,pos);
+	// Look for a double opening angle bracket
+	var token = $tw.utils.parseTokenString(source,pos,"<<");
+	if(!token) {
+// console.log("No opening << in",source,"at",pos);
+		return null;
 	}
+	pos = token.end;
+	// Get the variable name for the macro
+	token = $tw.utils.parseTokenRegExp(source,pos,reVarName);
+	if(!token) {
+// console.log("No macro name");
+		return null;
+	}
+	$tw.utils.addAttributeToParseTreeNode(node,"$variable",token.match[1]);
+	pos = token.end;
+	// Check that the tag is terminated by a space or >>
+	if(!$tw.utils.parseWhiteSpace(source,pos) && !(source.charAt(pos) === ">" && source.charAt(pos + 1) === ">") ) {
+// console.log("No space or >> after macro name");
+		return null;
+	}
+	// Process attributes
+	pos = $tw.utils.parseMacroParametersAsAttributes(node,source,pos);
+	// Skip whitespace
+	pos = $tw.utils.skipWhiteSpace(source,pos);
+	// Look for a double closing angle bracket
+	token = $tw.utils.parseTokenString(source,pos,">>");
+	if(!token) {
+// console.log("No closing >>");
+		return null;
+	}
+	node.end = token.end;
+	return node;
+};
+
+/*
+Parse macro parameters as attributes. Returns the position after the last attribute
+*/
+exports.parseMacroParametersAsAttributes = function(node,source,pos) {
+	var position = 0,
+		attribute = $tw.utils.parseMacroParameterAsAttribute(source,pos);
+	while(attribute) {
+		if(!attribute.name) {
+			attribute.name = (position++) + "";
+		}
+		node.orderedAttributes.push(attribute);
+		node.attributes[attribute.name] = attribute;
+		pos = attribute.end;
+		// Get the next attribute
+		attribute = $tw.utils.parseMacroParameterAsAttribute(source,pos);
+	}
+	node.end = pos;
+	return pos;
+}
+
+/*
+Parse a macro parameter as an attribute. Returns null if not found, otherwise returns {name:, type: "filtered|string|indirect|macro", value|filter|textReference:, start:, end:,}, with the name being optional
+*/
+exports.parseMacroParameterAsAttribute = function(source,pos) {
+	var node = {
+		start: pos
+	};
+	// Define our regexps
+	var reAttributeName = /([^\/\s>"'`=:]+)/g,
+		reUnquotedAttribute = /((?:(?:>(?!>))|[^\s>"'])+)/g,
+		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/g,
+		reIndirectValue = /\{\{([^\}]+)\}\}/g,
+		reSubstitutedValue = /(?:```([\s\S]*?)```|`([^`]|[\S\s]*?)`)/g;
+	// Skip whitespace
+	pos = $tw.utils.skipWhiteSpace(source,pos);
+	// Get the attribute name and the separator token
+	var nameToken = $tw.utils.parseTokenRegExp(source,pos,reAttributeName),
+		namePos = nameToken && $tw.utils.skipWhiteSpace(source,nameToken.end),
+		separatorToken = nameToken && $tw.utils.parseTokenRegExp(source,namePos,/=|:/g);
+// console.log(`parseMacroParametersAtAttribute source is ${source} at ${pos} and namepos is ${namePos} with nameToken as ${JSON.stringify(nameToken)} and separatorToken as ${JSON.stringify(separatorToken)}`);
+	// If we have a name and a separator then we have a named attribute
+	if(nameToken && separatorToken) {
+		node.name = nameToken.match[1];
+		pos = separatorToken.end;
+	}
+	// Skip whitespace
+	pos = $tw.utils.skipWhiteSpace(source,pos);
+	// Look for a string literal
+	var stringLiteral = $tw.utils.parseStringLiteral(source,pos);
+	if(stringLiteral) {
+		pos = stringLiteral.end;
+		node.type = "string";
+		node.value = stringLiteral.value;
+	} else {
+// console.log(`Failed to parse string literal ${source} at ${pos} with node as ${JSON.stringify(node)}`);
+		// Look for a filtered value
+		var filteredValue = $tw.utils.parseTokenRegExp(source,pos,reFilteredValue);
+		if(filteredValue) {
+			pos = filteredValue.end;
+			node.type = "filtered";
+			node.filter = filteredValue.match[1];
+		} else {
+// console.log(`Failed to parse filtered value ${source} at ${pos} with node as ${JSON.stringify(node)}`);
+			// Look for an indirect value
+			var indirectValue = $tw.utils.parseTokenRegExp(source,pos,reIndirectValue);
+			if(indirectValue) {
+				pos = indirectValue.end;
+				node.type = "indirect";
+				node.textReference = indirectValue.match[1];
+			} else {
+// console.log(`Failed to parse indirect value ${source} at ${pos} with node as ${JSON.stringify(node)}`);
+				// Look for a unquoted value
+				var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
+				if(unquotedValue) {
+					pos = unquotedValue.end;
+					node.type = "string";
+					node.value = unquotedValue.match[1];
+// console.log(`Parsed unquoted value ${source} at ${pos} with node as ${JSON.stringify(node)}`);
+				} else {
+// console.log(`Failed to parse unquoted value ${source} at ${pos} with node as ${JSON.stringify(node)}`);
+					// Look for a macro invocation value
+					var macroInvocation = $tw.utils.parseMacroInvocationAsTransclusion(source,pos);
+					if(macroInvocation) {
+						pos = macroInvocation.end;
+						node.type = "macro";
+						node.value = macroInvocation;
+// console.log(`Parsed macro invocation ${source} at ${pos} with node as ${JSON.stringify(node)}`);
+					} else {
+// console.log(`Failed to parse macro invocation ${source} at ${pos} with node as ${JSON.stringify(node)}`);
+						var substitutedValue = $tw.utils.parseTokenRegExp(source,pos,reSubstitutedValue);
+						if(substitutedValue) {
+							pos = substitutedValue.end;
+							node.type = "substituted";
+							node.rawValue = substitutedValue.match[1] || substitutedValue.match[2];
+						} else {
+// console.log(`Failed to parse substituted value ${source} at ${pos} with node as ${JSON.stringify(node)}`);
+						}
+					}
+				}
+			}
+		}
+	}
+	// Bail if we don't have a value
+	if(!node.type) {
+		return null;
+	}
+	// Update the end position
+	node.end = pos;
 	return node;
 };
 
@@ -295,7 +427,7 @@ exports.parseFilterVariable = function(source) {
 };
 
 /*
-Look for an HTML attribute definition. Returns null if not found, otherwise returns {type: "attribute", name:, type: "filtered|string|indirect|macro", value|filter|textReference:, start:, end:,}
+Look for an HTML attribute definition. Returns null if not found, otherwise returns {name:, type: "filtered|string|indirect|macro", value|filter|textReference:, start:, end:,}
 */
 exports.parseAttribute = function(source,pos) {
 	var node = {
@@ -374,6 +506,7 @@ exports.parseAttribute = function(source,pos) {
 			}
 		}
 	} else {
+		// If there is no equals sign or colon, then this is an attribute with no value, defaulting to "true"
 		node.type = "string";
 		node.value = "true";
 	}
