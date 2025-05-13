@@ -85,6 +85,7 @@ table-footer-background: <<colour tiddler-editor-fields-odd>>
 table-header-background: <<colour tiddler-editor-fields-even>>
 tag-background: #48484A
 tag-foreground: #323232
+testcase-accent-level-1: #345173
 tiddler-background: <<colour background>>
 tiddler-border: transparent
 tiddler-controls-foreground-hover: <<colour sidebar-controls-foreground-hover>>
