@@ -30,4 +30,4 @@ title: Template
 +
 title: ExpectedResult
 
-<p>112233</p><p>Zero</p>
+<p dir="auto">112233</p><p dir="auto">Zero</p>

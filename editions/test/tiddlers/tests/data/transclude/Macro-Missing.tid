@@ -37,4 +37,4 @@ Fallback content
 +
 title: ExpectedResult
 
-<p>Fallback content</p><p>Fallback content</p><p>Fallback content</p><p>Fallback content</p><p>Fallback content</p><p>Fallback content</p>
+<p dir="auto">Fallback content</p><p dir="auto">Fallback content</p><p dir="auto">Fallback content</p><p dir="auto">Fallback content</p><p dir="auto">Fallback content</p><p dir="auto">Fallback content</p>

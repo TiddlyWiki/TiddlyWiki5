@@ -23,4 +23,4 @@ It is $one$ and $two$ or <<__one__>> and <<__two__>>.
 +
 title: ExpectedResult
 
-<p>It is red and green or red and green.</p><p>It is red and green or red and green.</p><p>It is orange and green or orange and green.</p><p>It is pink and green or pink and green.</p><p>It is purple and pink or purple and pink.</p>
+<p dir="auto">It is red and green or red and green.</p><p dir="auto">It is red and green or red and green.</p><p dir="auto">It is orange and green or orange and green.</p><p dir="auto">It is pink and green or pink and green.</p><p dir="auto">It is purple and pink or purple and pink.</p>
