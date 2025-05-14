@@ -1,0 +1,40 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/List
+type: text/vnd.tiddlywiki
+
+* This is an unordered list
+* It has two items
+
+# This is a numbered list
+## With a subitem
+# And a third item
+
+; This is a term that is being defined
+: This is the definition of that term
+
+#** One
+#* Two
+#** Three
+#**** Four
+#**# Five
+#**## Six
+## Seven
+### Eight
+## Nine
+
+* List item one
+*.active List item two has the class `active`
+* List item three
+
+# AAA
+## [[BBB]]
+### CCC
+# AAA
+## CCC
+## DDD
+## EEE
+# BBB
+## FF `/` FFF
+## FFF
+## GGG
+## 
