@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/markdown/settings/typographer
+tags: $:/tags/ControlPanel/Settings/Markdown
+caption: Typographer
+
+markdown-it library config: Enable some language-neutral replacement + quotes beautification
+
+<$checkbox tiddler="$:/config/markdown/typographer" field="text" checked="true" unchecked="false">
+    [[Typographer|$:/config/markdown/typographer]]
+</$checkbox>

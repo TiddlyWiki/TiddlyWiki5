@@ -6,10 +6,7 @@ module-type: authenticator
 Authenticator for trusted header authentication
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function HeaderAuthenticator(server) {
@@ -37,11 +34,12 @@ HeaderAuthenticator.prototype.authenticateRequest = function(request,response,st
 		return false;
 	} else {
 		// authenticatedUsername will be undefined for anonymous users
-		state.authenticatedUsername = $tw.utils.decodeURIComponentSafe(username);
+		if(username) {
+			state.authenticatedUsername = $tw.utils.decodeURIComponentSafe(username);
+		}
 		return true;
 	}
 };
 
 exports.AuthenticatorClass = HeaderAuthenticator;
 
-})();

@@ -1,0 +1,16 @@
+created: 20210411100148461
+modified: 20241123115717620
+original-modified: 20210411100148461
+tags: [[Hidden Settings]]
+title: Hidden Setting: HTML Parser Sandbox
+ja-title: 隠し設定: HTMLパーサーのサンドボックス
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.0">> デフォルトでは、`text/html`タイプのTiddlerは、[[サンドボックス属性|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-sandbox]]が空の文字列に設定されたiframe内に表示されます。これにより、すべてのセキュリティ制限が適用され、JavaScript、ダウンロード、外部ファイル参照などの多くの機能が無効になります。これは最も安全な設定です。
+
+サンドボックスをグローバルに無効にするには、$:/config/HtmlParser/DisableSandbox Tiddlerを`yes`に設定します。これにより、iframe内のコードがTiddlyWikiの内部に完全にアクセスできるようになり、悪意のあるHTMLページがプライベートwikiからデータを盗み出す可能性があります。
+
+サンドボックスを維持しながら適用される制限を制御するには、$:/config/HtmlParser/DisableSandboxが`yes`に設定されていないことを確認してから、$:/config/HtmlParser/SandboxTokensに[[MDNドキュメント|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-sandbox]]
+にあるトークンのリストを設定します。
+
+これらはグローバル設定であることに注意してください。個々のTiddlerごとにサンドボックスを制御するには、カスタム`<iframe>`を使用する必要があります。

@@ -6,10 +6,7 @@ module-type: utils-node
 File system utilities
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var fs = require("fs"),
@@ -238,7 +235,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 	} else {
 		// Save as a .tid or a text/binary file plus a .meta file
 		var tiddlerType = tiddler.fields.type || "text/vnd.tiddlywiki";
-		if(tiddlerType === "text/vnd.tiddlywiki" || tiddler.hasField("_canonical_uri")) {
+		if(tiddlerType === "text/vnd.tiddlywiki" || tiddlerType === "text/vnd.tiddlywiki-multiple" || tiddler.hasField("_canonical_uri")) {
 			// Save as a .tid file
 			fileInfo.type = "application/x-tiddler";
 			fileInfo.hasMetaFile = false;
@@ -543,5 +540,3 @@ exports.cleanupTiddlerFiles = function(options,callback) {
 		return callback(null,bootInfo);
 	}
 };
-
-})();

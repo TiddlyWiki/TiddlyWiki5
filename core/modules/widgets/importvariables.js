@@ -6,10 +6,7 @@ module-type: widget
 Import variable definitions from other tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -132,5 +129,3 @@ ImportVariablesWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.importvariables = ImportVariablesWidget;
-
-})();

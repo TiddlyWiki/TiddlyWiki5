@@ -17,10 +17,7 @@ This is a widget invocation
 }}}
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "html";
@@ -44,6 +41,10 @@ Parse the most recent match
 exports.parse = function() {
 	// Retrieve the most recent match so that recursive calls don't overwrite it
 	var tag = this.nextTag;
+	if (!tag.isSelfClosing) {
+		tag.openTagStart = tag.start;
+		tag.openTagEnd = tag.end;
+	}
 	this.nextTag = null;
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
@@ -59,6 +60,27 @@ exports.parse = function() {
 		} else {
 			var reEnd = new RegExp("(" + reEndString + ")","mg");
 			tag.children = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
+		}
+		tag.end = this.parser.pos;
+		tag.closeTagEnd = tag.end;
+		if (tag.closeTagEnd === tag.openTagEnd || this.parser.source[tag.closeTagEnd - 1] !== '>') {
+			tag.closeTagStart = tag.end;
+		} else {
+			tag.closeTagStart = tag.closeTagEnd - 2;
+			var closeTagMinPos = tag.children.length > 0 ? tag.children[tag.children.length-1].end : tag.openTagEnd;
+			if (!Number.isSafeInteger(closeTagMinPos)) closeTagMinPos = tag.openTagEnd;
+			while (tag.closeTagStart >= closeTagMinPos) {
+				var char = this.parser.source[tag.closeTagStart];
+				if (char === '>') {
+					tag.closeTagStart = -1;
+					break;
+				}
+				if (char === '<') break;
+				tag.closeTagStart -= 1;
+			}
+			if (tag.closeTagStart < closeTagMinPos) {
+				tag.closeTagStart = tag.end;
+			}
 		}
 	}
 	// Return the tag
@@ -169,5 +191,3 @@ exports.isLegalTag = function(tag) {
 		return true;
 	}
 };
-
-})();

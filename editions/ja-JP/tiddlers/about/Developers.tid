@@ -1,0 +1,31 @@
+created: 20150412191004348
+modified: 
+original-modified: 20240925114810504
+tags: Community Reference
+title: Developers
+ja-title: 開発者
+type: text/vnd.tiddlywiki
+
+! [[GitHubの統計|https://github.com/TiddlyWiki/TiddlyWiki5/graphs/contributors]]
+
+開発者がTiddlyWikiについて学び、開発について議論し、貢献するためのリソースがあります。
+
+> [img[https://repobeats.axiom.co/api/embed/b92b1b363e2b5f26837ae573a60d39b4248b50a0.svg]]
+
+* [[tiddlywiki.com/dev|https://tiddlywiki.com/dev]]は公式の開発者ドキュメントです
+
+* [[GitHubでの開発|https://github.com/TiddlyWiki/TiddlyWiki5]]に参加する
+
+* [[GitHubディスカッション|https://github.com/TiddlyWiki/TiddlyWiki5/discussions]]はQ&Aとオープンな形式のディスカッションです
+* [[GitHubイシュー|https://github.com/TiddlyWiki/TiddlyWiki5/issues]]は、バグレポートを作成し、具体的で実現可能な新しいアイデアを提案するためのものです
+
+* 古い~TiddlyWikiDevGoogleグループは閉鎖され、[[TiddlyWikiトーク|https://talk.tiddlywiki.org/]]と[[GitHubディスカッション|https://github.com/TiddlyWiki/TiddlyWiki5/discussions]]に代わりました
+** 有用なアーカイブとして残っています: https://groups.google.com/group/TiddlyWikiDev
+*** 強化されたグループ検索機能は[[mail-archive.com|https://www.mail-archive.com/tiddlywikidev@googlegroups.com/]]で利用できます
+
+* https://gitter.im/TiddlyWiki/public でチャットしてください(開発ルームは近日公開予定)
+
+! Twitter
+
+* 最新ニュースは[[Twitterで@TiddlyWiki|http://twitter.com/#!/TiddlyWiki]]をフォローしてください
+

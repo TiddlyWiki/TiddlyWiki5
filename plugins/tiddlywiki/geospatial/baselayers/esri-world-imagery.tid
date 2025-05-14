@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/geospatial/baselayers/esri-world-imagery
+caption: ESRI World Imagery
+tags: $:/tags/GeoBaseLayer
+tiles-url: https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}
+max-zoom: 18
+
+Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community

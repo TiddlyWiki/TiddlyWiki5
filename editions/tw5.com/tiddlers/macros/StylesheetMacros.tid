@@ -1,5 +1,5 @@
 created: 20150221181835000
-modified: 20150221223956000
+modified: 20230803034031256
 tags: Macros [[Core Macros]]
 title: Stylesheet Macros
 type: text/vnd.tiddlywiki
@@ -16,6 +16,8 @@ The following core [[macros|Macros]] make it easy to specify alternative browser
 : for the `x-transition-origin` properties
 ;`<<background-linear-gradient gradient>>`
 : for the `x-linear-gradient` values of the `background-image` property
+;`<<column-count columns>>`
+: for the `x-column-count` property
 
 The following macros are documented separately:
 

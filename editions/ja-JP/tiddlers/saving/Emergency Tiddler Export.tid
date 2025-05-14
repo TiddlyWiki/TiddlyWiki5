@@ -1,0 +1,31 @@
+caption: 緊急エクスポート
+color: #7986CB
+created: 20180309211328412
+delivery: Saver
+description: 保存がうまくいかないときにTiddlerを取得して保存する
+method: save
+modified: 20241014095849831
+original-modified: 20200507202809334
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows Edge
+title: Emergency Tiddler Export
+ja-title: 緊急Tiddlerエクスポート
+type: text/vnd.tiddlywiki
+
+この方法は、何らかの理由で現在のTiddlyWikiインスタンスが保存されない場合(例えば、プラグインやサーバーが動作を停止した場合など)に役立ちます。ほぼすべてのプラットフォームで動作するはずです。
+
+* 条件を付けて検索します{{$:/core/ui/Buttons/advanced-search}}を開きます
+** フィルタタブを表示します
+** 次のフィルターテキストを入力します: 
+
+
+```
+[!is[system]!sort[modified]limit[25]]
+```
+* TIddlerのリストを確認します。
+* フィルターの数字"25"を調整して、最近変更したTiddlerすべてが表示されるようにします。
+* 右側に表示される上矢印の付いたバケツ[<button class="tc-btn-invisible" disabled><<.icon $:/core/images/export-button>></button>]を押します 
+* ダイアログウィンドウが表示され、tiddler.jsonというファイルをダウンロードするローカルドライブ上の場所を尋ねられます。あるいは、ブラウザーの設定によっては、そのようなファイルがダウンロードされることを通知するだけのメッセージが表示されます。保存を押します。
+* ファイル`tiddlers.json`はインポート(サイドバーのツール)することも、別のTWのストーリーリバーの最上行にファイルをドラッグアンドドロップすることもできます。
+** Tiddlerを選択・選択解除できます。
+** 最後に`インポート`を押します。
+

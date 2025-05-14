@@ -21,9 +21,9 @@ diff-delete-foreground: <<colour foreground>>
 diff-equal-background: 
 diff-equal-foreground: <<colour foreground>>
 diff-insert-background: #b8bb26
-diff-insert-foreground: <<colour foreground>>
-diff-invisible-background: 
-diff-invisible-foreground: <<colour muted-foreground>>
+diff-insert-foreground: <<colour background>>
+diff-invisible-background: #ffff97
+diff-invisible-foreground: #444347
 dirty-indicator: #fb4934
 download-background: #b8bb26
 download-foreground: <<colour background>>
@@ -40,6 +40,7 @@ external-link-background: inherit
 external-link-foreground-hover: inherit
 external-link-foreground-visited: #d3869b
 external-link-foreground: #8ec07c
+footnote-target-background: #665c54
 foreground: #fbf1c7
 highlight-background: #ffff79
 highlight-foreground: #000000
@@ -82,6 +83,10 @@ sidebar-tab-foreground: <<colour tab-foreground>>
 sidebar-tiddler-link-foreground-hover: #458588
 sidebar-tiddler-link-foreground: #98971a
 site-title-foreground: <<colour tiddler-title-foreground>>
+stability-deprecated: #cc241d
+stability-experimental: #d79921
+stability-legacy: #458588
+stability-stable: #98971a
 static-alert-foreground: #B48EAD
 tab-background-selected: #ebdbb2
 tab-background: #665c54

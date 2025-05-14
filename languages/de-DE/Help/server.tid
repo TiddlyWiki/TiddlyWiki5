@@ -1,6 +1,11 @@
 title: $:/language/Help/server
 description: (Dieser Befehl ist abgekündigt! - Neu ist: "listen") -- Stellt einen HTTP server für TiddlyWiki zur Verfügung.
 
+''WICHTIG:''
+
+* Dieser Befehl ist abgekündigt!
+* Wird durch: "listen" ersetzt.
+
 TiddlyWiki bringt einen einfachen Web-Server mit.
 
 Der Server kann spezifische Tiddler im angegebenen Format anzeigen (rendern). Zudem können einzelne, oder mehrere Tiddler im JSON Format übertragen werden. Die unterstützten HTTP Funktionen sind: `GET`, `PUT` und `DELETE`

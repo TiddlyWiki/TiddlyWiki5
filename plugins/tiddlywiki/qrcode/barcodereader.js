@@ -6,10 +6,6 @@ module-type: widget
 barcodereader widget for reading barcodes
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -86,5 +82,3 @@ BarCodeReaderWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.barcodereader = BarCodeReaderWidget;
-
-})();

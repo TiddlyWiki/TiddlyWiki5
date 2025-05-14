@@ -6,10 +6,7 @@ module-type: widget
 Event handler widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -153,5 +150,3 @@ EventWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.eventcatcher = EventWidget;
-
-})();

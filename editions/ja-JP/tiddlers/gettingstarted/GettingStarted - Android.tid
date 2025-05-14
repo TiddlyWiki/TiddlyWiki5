@@ -1,0 +1,22 @@
+caption: Android
+created: 20140811171036268
+modified: 20241029105115486
+original-modified: 20211114031651878
+tags: GettingStarted
+title: GettingStarted - Android
+ja-title: はじめに - Android
+type: text/vnd.tiddlywiki
+
+AndroidでTiddlyWikiを使用するには、次の3つのオプションがあります:
+
+! FirefoxとTiddlyFoxの使用
+
+{{Saving with TiddlyFox on Android}}
+
+! AndTidWikiアプリの使用
+
+{{Saving on Android}}
+
+! TermuxでNode.jsを使用 
+
+{{Serving TW5 from Android}}

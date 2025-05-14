@@ -1,0 +1,12 @@
+created: 20171031172325817
+list: 
+modified: 20241222102153176
+original-modified: 20171031172440017
+tags: OfficialPlugins [[Plugin Editions]]
+title: External Attachments Plugin
+ja-title: 外部添付プラグイン
+type: text/vnd.tiddlywiki
+
+外部添付ファイルプラグインは、Tiddlerを外部添付ファイルとしてインポートするためのサポートを提供します。つまり、バイナリファイルを自己完結型Tiddlerとしてインポートするのではなく、''_canonical_uri''フィールドを介して元のファイルを参照する "スキニー" Tiddler としてインポートされます。これによりWikiのサイズが削減され、パフォーマンスが向上します。ただし、これはWikiが完全な自己完結型ではなくなったことを意味します
+
+このプラグインは、インポート/ドラッグされたファイルの''path''属性をサポートするTiddlyDesktopなどのプラットフォームでTiddlyWikiを使用する場合にのみ機能します

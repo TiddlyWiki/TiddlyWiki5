@@ -199,6 +199,12 @@ Settings/TitleLinks/Caption: 條目標題
 Settings/TitleLinks/Hint: 可選地顯示條目標題為鏈接
 Settings/TitleLinks/No/Description: 不顯示條目標題為鏈接
 Settings/TitleLinks/Yes/Description: 顯示條目標題為鏈接
+SocialCard/Caption: 社交媒體卡
+SocialCard/Domain/Prompt: 顯示連結的網域名稱（例如 ''tiddlywiki.com''）
+SocialCard/Hint: 社交和訊息服務使用此資訊來顯示線上託管時指向此 TiddlyWiki 的連結的預覽卡
+SocialCard/PreviewUrl/Prompt: 用於預覽此 TiddlyWiki 圖像的完整網址
+SocialCard/PreviewUrl/Preview: 預覽圖像：
+SocialCard/Url/Prompt: 此 TiddlyWiki 的完整網址
 StoryTiddler/Caption: 故事條目
 StoryTiddler/Hint: 此規則級聯用於動態選擇範本，以便在故事河中顯示條目。
 StoryView/Caption: 檢視模式
@@ -207,6 +213,12 @@ Stylesheets/Caption: 樣式表
 Stylesheets/Expand/Caption: 全部展開
 Stylesheets/Hint: 這是當前標籤為 <<tag "$:/tags/Stylesheet">> 的樣式表條目呈現的 CSS
 Stylesheets/Restore/Caption: 復原
+TestCases/Caption: 測試案例
+TestCases/Hint: 測試案例是用於測試和學習的自給自足的範例
+TestCases/All/Caption: 所有測試案例
+TestCases/All/Hint: 所有測試案例
+TestCases/Failed/Caption: 失敗的測試案例
+TestCases/Failed/Hint: 僅失敗的測試案例
 Theme/Caption: 佈景主題
 Theme/Prompt: 當前的佈景主題：
 TiddlerColour/Caption: 條目顏色
@@ -230,3 +242,7 @@ ViewTemplateBody/Caption: 檢視範本主體
 ViewTemplateBody/Hint: 預設的檢視範本使用此規則級聯，動態選擇範本以顯示條目的主體。
 ViewTemplateTitle/Caption: 檢視範本標題
 ViewTemplateTitle/Hint: 預設的檢視範本使用此規則級聯，動態選擇範本以顯示條目的標題。
+ViewTemplateSubtitle/Caption: 檢視範本副標題
+ViewTemplateSubtitle/Hint: 預設的檢視範本使用此規則級聯，動態選擇範本以顯示條目的副標題。
+ViewTemplateTags/Caption: 檢視範本標籤
+ViewTemplateTags/Hint: 預設的檢視範本使用此規則級聯，動態選擇範本以顯示條目的標籤。
