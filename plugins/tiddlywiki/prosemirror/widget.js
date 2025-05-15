@@ -90,7 +90,7 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 ProsemirrorWidget.prototype.saveEditorContent = function() {
 	var content = this.view.state.doc.toJSON();
 	var wikiast = wikiAstFromProseMirrorAst(content);
-	var wikiText = $tw.utils.serializeParseTree(wikiast);
+	var wikiText = $tw.utils.serializeWikitextParseTree(wikiast);
 	var tiddler = this.getAttribute("tiddler");
 	var currentText = this.wiki.getTiddlerText(tiddler, "");
 	if (currentText !== wikiText) {
