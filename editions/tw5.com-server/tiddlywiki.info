@@ -5,7 +5,8 @@
 		"tiddlywiki/filesystem",
 		"tiddlywiki/highlight",
 		"tiddlywiki/internals",
-		"tiddlywiki/prosemirror"
+		"tiddlywiki/prosemirror",
+		"tiddlywiki/wikitext-serialize"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
