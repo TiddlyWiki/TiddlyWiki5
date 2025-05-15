@@ -1139,6 +1139,15 @@ Tests the filtering mechanism.
 			// Non string properties should get toStringed.
 			expect(wiki.filterTiddlers("[[$:/core/modules/commands/init.js]moduleproperty[info]]").join(" ")).toBe('{"name":"init","synchronous":true}');
 		});
+
+		it("should minimize unnecessary variable lookup", function() {
+			var widget = wiki.makeWidget();
+			var getVar = spyOn(widget, "getVariableInfo").and.callThrough();
+			expect(wiki.filterTiddlers("[all[]prefix[anything]]", widget).length).toBe(0);
+			// We didn't use any indirect operands or variables.
+			// No variable lookup should have occurred.
+			expect(getVar).not.toHaveBeenCalled();
+		});
 	}
 	
 	});
