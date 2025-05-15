@@ -7,6 +7,7 @@
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",
 		"tiddlywiki/prosemirror",
+		"tiddlywiki/wikitext-serialize",
 		"tiddlywiki/railroad",
 		"tiddlywiki/tour"
 	],
