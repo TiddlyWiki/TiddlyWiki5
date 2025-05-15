@@ -6,7 +6,7 @@ src="""\define testmacro(one)
 Result: $one$.
 \end testmacro
 
-<<testmacro one:{{{ [[There]addprefix[Hello]] }}}>>
+<<testmacro one={{{ [[There]addprefix[Hello]] }}}>>
 """/>
 
 <$macrocall $name='wikitext-example-without-html'
@@ -14,7 +14,7 @@ src="""\function testfunction(one)
 [<one>addprefix[Hello]]
 \end testfunction
 
-<<testfunction one:{{{ [[re]addprefix[The]] }}}>>
+<<testfunction one={{{ [[re]addprefix[The]] }}}>>
 """/>
 
 <$macrocall $name='wikitext-example-without-html'
@@ -22,7 +22,7 @@ src="""\define testmacro(one)
 Result: $one$.
 \end testmacro
 
-<$text text=<<testmacro one:{{{ [[There]addprefix[Hello]] }}}>>/>
+<$text text=<<testmacro one={{{ [[There]addprefix[Hello]] }}}>>/>
 """/>
 
 <$macrocall $name='wikitext-example-without-html'
@@ -30,5 +30,5 @@ src="""\function testfunction(one)
 [<one>addprefix[Hello]]
 \end testfunction
 
-<$text text=<<testfunction one:{{{ [[re]addprefix[The]] }}}>>/>
+<$text text=<<testfunction one={{{ [[re]addprefix[The]] }}}>>/>
 """/>
