@@ -20,13 +20,13 @@ Wiki text rule for block-level filtered transclusion. For example:
 exports.name = "filteredtranscludeblock";
 exports.types = {block: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\{\{\{([^\|]+?)(?:\|([^\|\{\}]+))?(?:\|\|([^\|\{\}]+))?\}\}([^\}]*)\}(?:\.(\S+))?(?:\r?\n|$)/mg;
+	this.matchRegExp = /\{\{\{([^\|]+?)(?:\|([^\|\{\}]+))?(?:\|\|([^\|\{\}]+))?\}\}([^\}]*)\}(?:\.(\S+))?(?:\r?\n|$)/gm;
 };
 
-exports.parse = function() {
+exports.parse = function () {
 	// Move past the match
 	var filterStart = this.parser.pos + 3;
 	var filterEnd = filterStart + this.match[1].length;
@@ -49,21 +49,26 @@ exports.parse = function() {
 	var node = {
 		type: "list",
 		attributes: {
-			filter: {type: "string", value: filter, start: filterStart, end: filterEnd},
+			filter: {type: "string", value: filter, start: filterStart, end: filterEnd}
 		},
 		isBlock: true
 	};
-	if(tooltip) {
+	if (tooltip) {
 		node.attributes.tooltip = {type: "string", value: tooltip, start: toolTipStart, end: toolTipEnd};
 	}
-	if(template) {
+	if (template) {
 		node.attributes.template = {type: "string", value: template, start: templateStart, end: templateEnd};
 	}
-	if(style) {
+	if (style) {
 		node.attributes.style = {type: "string", value: style, start: styleStart, end: styleEnd};
 	}
-	if(classes) {
-		node.attributes.itemClass = {type: "string", value: classes.split(".").join(" "), start: classesStart, end: classesEnd};
+	if (classes) {
+		node.attributes.itemClass = {
+			type: "string",
+			value: classes.split(".").join(" "),
+			start: classesStart,
+			end: classesEnd
+		};
 	}
 	return [node];
 };

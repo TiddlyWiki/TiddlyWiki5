@@ -7,18 +7,18 @@ Filter operator for deserializing string data into JSON representing tiddlers
 
 "use strict";
 
-exports["deserialize"] = function(source,operator,options) {
+exports["deserialize"] = function (source, operator, options) {
 	var results = [],
 		deserializer;
-	if(operator.operand) {
+	if (operator.operand) {
 		// Get the deserializer identified by the operand
 		deserializer = $tw.Wiki.tiddlerDeserializerModules[operator.operand];
-		if(deserializer) {
-			source(function(tiddler,title) {
+		if (deserializer) {
+			source(function (tiddler, title) {
 				var tiddlers;
 				try {
 					tiddlers = deserializer(title);
-				} catch(e) {
+				} catch (e) {
 					// Return an empty array if we could not extract any tiddlers
 					tiddlers = [];
 				}
@@ -31,4 +31,4 @@ exports["deserialize"] = function(source,operator,options) {
 		return [$tw.language.getString("Error/DeserializeOperator/MissingOperand")];
 	}
 	return results;
-}
+};

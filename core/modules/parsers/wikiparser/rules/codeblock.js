@@ -18,14 +18,14 @@ Wiki text rule for code blocks. For example:
 exports.name = "codeblock";
 exports.types = {block: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match and get language if defined
-	this.matchRegExp = /```([\w-]*)\r?\n/mg;
+	this.matchRegExp = /```([\w-]*)\r?\n/gm;
 };
 
-exports.parse = function() {
-	var reEnd = /(\r?\n```$)/mg;
+exports.parse = function () {
+	var reEnd = /(\r?\n```$)/gm;
 	var languageStart = this.parser.pos + 3,
 		languageEnd = languageStart + this.match[1].length;
 	// Move past the match
@@ -37,19 +37,21 @@ exports.parse = function() {
 		text,
 		codeStart = this.parser.pos;
 	// Process the block
-	if(match) {
-		text = this.parser.source.substring(this.parser.pos,match.index);
+	if (match) {
+		text = this.parser.source.substring(this.parser.pos, match.index);
 		this.parser.pos = match.index + match[0].length;
 	} else {
 		text = this.parser.source.substr(this.parser.pos);
 		this.parser.pos = this.parser.sourceLength;
 	}
 	// Return the $codeblock widget
-	return [{
+	return [
+		{
 			type: "codeblock",
 			attributes: {
-					code: {type: "string", value: text, start: codeStart, end: this.parser.pos},
-					language: {type: "string", value: this.match[1], start: languageStart, end: languageEnd}
+				code: {type: "string", value: text, start: codeStart, end: this.parser.pos},
+				language: {type: "string", value: this.match[1], start: languageStart, end: languageEnd}
 			}
-	}];
+		}
+	];
 };

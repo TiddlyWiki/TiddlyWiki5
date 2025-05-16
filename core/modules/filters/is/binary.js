@@ -12,17 +12,17 @@ Filter function for [is[binary]]
 /*
 Export our filter function
 */
-exports.binary = function(source,prefix,options) {
+exports.binary = function (source, prefix, options) {
 	var results = [];
-	if(prefix === "!") {
-		source(function(tiddler,title) {
-			if(!options.wiki.isBinaryTiddler(title)) {
+	if (prefix === "!") {
+		source(function (tiddler, title) {
+			if (!options.wiki.isBinaryTiddler(title)) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
-			if(options.wiki.isBinaryTiddler(title)) {
+		source(function (tiddler, title) {
+			if (options.wiki.isBinaryTiddler(title)) {
 				results.push(title);
 			}
 		});

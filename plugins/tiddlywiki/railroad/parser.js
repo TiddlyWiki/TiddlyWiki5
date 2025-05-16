@@ -38,7 +38,7 @@ pragmas:
 
 var components = require("$:/plugins/tiddlywiki/railroad/components.js").components;
 
-var Parser = function(widget,source,options) {
+var Parser = function (widget, source, options) {
 	this.widget = widget;
 	this.source = source;
 	this.options = options;
@@ -52,32 +52,32 @@ var Parser = function(widget,source,options) {
 
 /////////////////////////// Parser dispatch
 
-Parser.prototype.parseContent = function() {
+Parser.prototype.parseContent = function () {
 	var content = [];
 	// Parse zero or more components
-	while(true) {
+	while (true) {
 		var component = this.parseComponent();
-		if(!component) {
+		if (!component) {
 			break;
 		}
-		if(!component.isPragma) {
+		if (!component.isPragma) {
 			content.push(component);
 		}
 	}
 	return content;
 };
 
-Parser.prototype.parseComponent = function() {
+Parser.prototype.parseComponent = function () {
 	var component = null;
-	if(this.token) {
-		if(this.at("string")) {
+	if (this.token) {
+		if (this.at("string")) {
 			component = this.parseTerminal();
-		} else if(this.at("name")) {
+		} else if (this.at("name")) {
 			component = this.parseName();
-		} else if(this.at("pragma")) {
+		} else if (this.at("pragma")) {
 			component = this.parsePragma();
 		} else {
-			switch(this.token.value) {
+			switch (this.token.value) {
 				case "[":
 					component = this.parseOptional();
 					break;
@@ -113,26 +113,26 @@ Parser.prototype.parseComponent = function() {
 
 /////////////////////////// Specific components
 
-Parser.prototype.parseChoice = function() {
+Parser.prototype.parseChoice = function () {
 	// Consume the (
 	this.advance();
 	var content = [],
 		colon = -1;
 	do {
 		// Allow at most one branch to be prefixed with a colon
-		if(colon === -1 && this.eat(":")) {
+		if (colon === -1 && this.eat(":")) {
 			colon = content.length;
 		}
 		// Parse the next branch
 		content.push(this.parseContent());
-	} while(this.eat("|"));
+	} while (this.eat("|"));
 	// Consume the closing bracket
 	this.close(")");
 	// Create a component
-	return new components.Choice(content,colon === -1 ? 0 : colon);
+	return new components.Choice(content, colon === -1 ? 0 : colon);
 };
 
-Parser.prototype.parseComment = function() {
+Parser.prototype.parseComment = function () {
 	// Consume the /
 	this.advance();
 	// The comment's content should be in a string literal
@@ -143,14 +143,14 @@ Parser.prototype.parseComment = function() {
 	return new components.Comment(content);
 };
 
-Parser.prototype.parseDummy = function() {
+Parser.prototype.parseDummy = function () {
 	// Consume the -
 	this.advance();
 	// Create a component
 	return new components.Dummy();
 };
 
-Parser.prototype.parseLink = function() {
+Parser.prototype.parseLink = function () {
 	// Consume the [[
 	this.advance();
 	// Parse the content
@@ -161,16 +161,16 @@ Parser.prototype.parseLink = function() {
 	var target = this.expectNameOrString("as link target");
 	// Prepare some attributes for the SVG "a" element to carry
 	var options = {"data-tw-target": target};
-	if($tw.utils.isLinkExternal(target)) {
+	if ($tw.utils.isLinkExternal(target)) {
 		options["data-tw-external"] = true;
 	}
 	// Consume the closing ]]
 	this.close("]]");
 	// Create a component
-	return new components.Link(content,options);
+	return new components.Link(content, options);
 };
 
-Parser.prototype.parseName = function() {
+Parser.prototype.parseName = function () {
 	// Create a component
 	var component = new components.Nonterminal(this.token.value);
 	// Consume the name
@@ -178,7 +178,7 @@ Parser.prototype.parseName = function() {
 	return component;
 };
 
-Parser.prototype.parseNonterminal = function() {
+Parser.prototype.parseNonterminal = function () {
 	// Consume the <
 	this.advance();
 	// The nonterminal's name should be in a string literal
@@ -189,7 +189,7 @@ Parser.prototype.parseNonterminal = function() {
 	return new components.Nonterminal(content);
 };
 
-Parser.prototype.parseOptional = function() {
+Parser.prototype.parseOptional = function () {
 	var wantArrow = this.options.arrow;
 	// Consume the [
 	this.advance();
@@ -201,20 +201,21 @@ Parser.prototype.parseOptional = function() {
 	var content = this.parseContent(),
 		separator = null;
 	// Parse the separator if there is one
-	if(repeated && this.eat("+")) {
+	if (repeated && this.eat("+")) {
 		separator = this.parseContent();
 	}
 	// Consume the closing brackets
-	if(repeated) {
+	if (repeated) {
 		this.close("}");
 	}
 	this.close("]");
 	// Create a component
-	return repeated ? new components.OptionalRepeated(content,separator,normal,wantArrow)
-		: new components.Optional(content,normal);
+	return repeated
+		? new components.OptionalRepeated(content, separator, normal, wantArrow)
+		: new components.Optional(content, normal);
 };
 
-Parser.prototype.parseRepeated = function() {
+Parser.prototype.parseRepeated = function () {
 	var wantArrow = this.options.arrow;
 	// Consume the {
 	this.advance();
@@ -222,16 +223,16 @@ Parser.prototype.parseRepeated = function() {
 	var content = this.parseContent(),
 		separator = null;
 	// Parse the separator if there is one
-	if(this.eat("+")) {
+	if (this.eat("+")) {
 		separator = this.parseContent();
 	}
 	// Consume the closing bracket
 	this.close("}");
 	// Create a component
-	return new components.Repeated(content,separator,wantArrow);
+	return new components.Repeated(content, separator, wantArrow);
 };
 
-Parser.prototype.parseSequence = function() {
+Parser.prototype.parseSequence = function () {
 	// Consume the <-
 	this.advance();
 	// Parse the content
@@ -242,14 +243,14 @@ Parser.prototype.parseSequence = function() {
 	return new components.Sequence(content);
 };
 
-Parser.prototype.parseTerminal = function() {
+Parser.prototype.parseTerminal = function () {
 	var component = new components.Terminal(this.token.value);
 	// Consume the string literal
 	this.advance();
-    return component;
+	return component;
 };
 
-Parser.prototype.parseTransclusion = function() {
+Parser.prototype.parseTransclusion = function () {
 	// Consume the {{
 	this.advance();
 	// Consume the text reference
@@ -257,160 +258,162 @@ Parser.prototype.parseTransclusion = function() {
 	// Consume the closing }}
 	this.close("}}");
 	// Retrieve the content of the text reference
-	var source = this.widget.wiki.getTextReference(textRef,"",this.widget.getVariable("currentTiddler"));
+	var source = this.widget.wiki.getTextReference(textRef, "", this.widget.getVariable("currentTiddler"));
 	// Parse the content
-	var content = new Parser(this.widget,source).content;
+	var content = new Parser(this.widget, source).content;
 	// Create a component
 	return new components.Transclusion(content);
 };
 
 /////////////////////////// Pragmas
 
-Parser.prototype.parsePragma = function() {
+Parser.prototype.parsePragma = function () {
 	// Create a dummy component
-	var component = { isPragma: true };
+	var component = {isPragma: true};
 	// Consume the pragma
 	var pragma = this.token.value;
 	this.advance();
 	// Apply the setting
-	if(pragma === "arrow") {
-		this.options.arrow = this.parseYesNo(pragma);		
-	} else if(pragma === "debug") {
+	if (pragma === "arrow") {
+		this.options.arrow = this.parseYesNo(pragma);
+	} else if (pragma === "debug") {
 		this.options.debug = true;
-	} else if(pragma === "start") {
-		this.options.start = this.parseTerminusStyle(pragma);		
-	} else if(pragma === "end") {
-		this.options.end = this.parseTerminusStyle(pragma);		
+	} else if (pragma === "start") {
+		this.options.start = this.parseTerminusStyle(pragma);
+	} else if (pragma === "end") {
+		this.options.end = this.parseTerminusStyle(pragma);
 	} else {
 		throw "Invalid pragma";
 	}
 	return component;
 };
 
-Parser.prototype.parseYesNo = function(pragma) {
-	return this.parseSetting(["yes","no"],pragma) === "yes";
-}
+Parser.prototype.parseYesNo = function (pragma) {
+	return this.parseSetting(["yes", "no"], pragma) === "yes";
+};
 
-Parser.prototype.parseTerminusStyle = function(pragma) {
-	return this.parseSetting(["single","double","none"],pragma);
-}
+Parser.prototype.parseTerminusStyle = function (pragma) {
+	return this.parseSetting(["single", "double", "none"], pragma);
+};
 
-Parser.prototype.parseSetting = function(options,pragma) {
-	if(this.at("name") && options.indexOf(this.token.value) !== -1) {
-		return this.tokenValueEaten();		
+Parser.prototype.parseSetting = function (options, pragma) {
+	if (this.at("name") && options.indexOf(this.token.value) !== -1) {
+		return this.tokenValueEaten();
 	}
 	throw options.join(" or ") + " expected after \\" + pragma;
-}
+};
 
 /////////////////////////// Token manipulation
 
-Parser.prototype.advance = function() {
-	if(this.tokenPos >= this.tokens.length) {
+Parser.prototype.advance = function () {
+	if (this.tokenPos >= this.tokens.length) {
 		this.token = null;
 	}
 	this.token = this.tokens[this.tokenPos++];
 };
 
-Parser.prototype.at = function(token) {
-	return this.token && (this.token.type === token || this.token.type === "token" && this.token.value === token);
+Parser.prototype.at = function (token) {
+	return this.token && (this.token.type === token || (this.token.type === "token" && this.token.value === token));
 };
 
-Parser.prototype.eat = function(token) {
+Parser.prototype.eat = function (token) {
 	var at = this.at(token);
-	if(at) {
+	if (at) {
 		this.advance();
 	}
 	return at;
 };
 
-Parser.prototype.tokenValueEaten = function() {
+Parser.prototype.tokenValueEaten = function () {
 	var output = this.token.value;
 	this.advance();
 	return output;
 };
 
-Parser.prototype.close = function(token) {
-	if(!this.eat(token)) {
+Parser.prototype.close = function (token) {
+	if (!this.eat(token)) {
 		throw "Closing " + token + " expected";
 	}
 };
 
-Parser.prototype.checkFinished = function() {
-	if(this.token) {
+Parser.prototype.checkFinished = function () {
+	if (this.token) {
 		throw "Syntax error at " + this.token.value;
 	}
 };
 
-Parser.prototype.expect = function(token) {
-	if(!this.eat(token)) {
+Parser.prototype.expect = function (token) {
+	if (!this.eat(token)) {
 		throw token + " expected";
 	}
 };
 
-Parser.prototype.expectString = function(context,token) {
-	if(!this.at("string")) {
+Parser.prototype.expectString = function (context, token) {
+	if (!this.at("string")) {
 		token = token || "String";
 		throw token + " expected " + context;
 	}
 	return this.tokenValueEaten();
 };
 
-Parser.prototype.expectNameOrString = function(context) {
-	if(this.at("name")) {
+Parser.prototype.expectNameOrString = function (context) {
+	if (this.at("name")) {
 		return this.tokenValueEaten();
 	}
-	return this.expectString(context,"Name or string");
+	return this.expectString(context, "Name or string");
 };
 
 /////////////////////////// Tokenisation
 
-Parser.prototype.tokenise = function(source) {
+Parser.prototype.tokenise = function (source) {
 	var tokens = [],
 		pos = 0,
-		c, s, token;
-	while(pos < source.length) {
+		c,
+		s,
+		token;
+	while (pos < source.length) {
 		// Initialise this iteration
 		s = token = null;
 		// Skip whitespace
-		pos = $tw.utils.skipWhiteSpace(source,pos);
+		pos = $tw.utils.skipWhiteSpace(source, pos);
 		// Avoid falling off the end of the string
-		if(pos >= source.length) {
+		if (pos >= source.length) {
 			break;
 		}
 		// Examine the next character
 		c = source.charAt(pos);
-		if("\"'".indexOf(c) !== -1) {
+		if ("\"'".indexOf(c) !== -1) {
 			// String literal
-			token = $tw.utils.parseStringLiteral(source,pos);
-			if(!token) {
+			token = $tw.utils.parseStringLiteral(source, pos);
+			if (!token) {
 				throw "Unterminated string literal";
 			}
-		} else if("[]{}".indexOf(c) !== -1) {
+		} else if ("[]{}".indexOf(c) !== -1) {
 			// Single or double character
-			s = source.charAt(pos+1) === c ? c + c : c;
-		} else if(c === "<") {
+			s = source.charAt(pos + 1) === c ? c + c : c;
+		} else if (c === "<") {
 			// < or <-
-			s = source.charAt(pos+1) === "-" ? "<-" : "<";
-		} else if(c === "-") {
+			s = source.charAt(pos + 1) === "-" ? "<-" : "<";
+		} else if (c === "-") {
 			// - or ->
-			s = source.charAt(pos+1) === ">" ? "->" : "-";
-		} else if("()>+/:|".indexOf(c) !== -1) {
+			s = source.charAt(pos + 1) === ">" ? "->" : "-";
+		} else if ("()>+/:|".indexOf(c) !== -1) {
 			// Single character
 			s = c;
-		} else if(c.match(/[a-zA-Z]/)) {
+		} else if (c.match(/[a-zA-Z]/)) {
 			// Name
-			token = this.readName(source,pos);
-		} else if(c.match(/\\/)) {
+			token = this.readName(source, pos);
+		} else if (c.match(/\\/)) {
 			// Pragma
-			token = this.readPragma(source,pos);
+			token = this.readPragma(source, pos);
 		} else {
 			throw "Syntax error at " + c;
 		}
 		// Add our findings to the return array
-		if(token) {
+		if (token) {
 			tokens.push(token);
 		} else {
-			token = $tw.utils.parseTokenString(source,pos,s);
+			token = $tw.utils.parseTokenString(source, pos, s);
 			tokens.push(token);
 		}
 		// Prepare for the next character
@@ -419,24 +422,24 @@ Parser.prototype.tokenise = function(source) {
 	return tokens;
 };
 
-Parser.prototype.readName = function(source,pos) {
+Parser.prototype.readName = function (source, pos) {
 	var re = /([a-zA-Z0-9_.-]+)/g;
 	re.lastIndex = pos;
 	var match = re.exec(source);
-	if(match && match.index === pos) {
-		return {type: "name", value: match[1], start: pos, end: pos+match[1].length};
+	if (match && match.index === pos) {
+		return {type: "name", value: match[1], start: pos, end: pos + match[1].length};
 	} else {
 		throw "Invalid name";
 	}
 };
 
-Parser.prototype.readPragma = function(source,pos) {
+Parser.prototype.readPragma = function (source, pos) {
 	var re = /([a-z]+)/g;
 	pos++;
 	re.lastIndex = pos;
 	var match = re.exec(source);
-	if(match && match.index === pos) {
-		return {type: "pragma", value: match[1], start: pos, end: pos+match[1].length};
+	if (match && match.index === pos) {
+		return {type: "pragma", value: match[1], start: pos, end: pos + match[1].length};
 	} else {
 		throw "Invalid pragma";
 	}

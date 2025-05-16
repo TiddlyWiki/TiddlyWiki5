@@ -15,13 +15,11 @@ Information about this macro
 
 exports.name = "qualify";
 
-exports.params = [
-	{name: "title"}
-];
+exports.params = [{name: "title"}];
 
 /*
 Run the macro
 */
-exports.run = function(title) {
+exports.run = function (title) {
 	return title + "-" + this.getStateQualifier();
 };

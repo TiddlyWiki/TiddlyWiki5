@@ -12,13 +12,13 @@ Filter function for [duplicateslugs[]]
 /*
 Export our filter function
 */
-exports.duplicateslugs = function(source,operator,options) {
+exports.duplicateslugs = function (source, operator, options) {
 	var slugs = Object.create(null), // Hashmap by slug of title, replaced with "true" if the duplicate title has already been output
 		results = [];
-	source(function(tiddler,title) {
+	source(function (tiddler, title) {
 		var slug = options.wiki.slugify(title);
-		if(slug in slugs) {
-			if(slugs[slug] !== true) {
+		if (slug in slugs) {
+			if (slugs[slug] !== true) {
 				results.push(slugs[slug]);
 				slugs[slug] = true;
 			}

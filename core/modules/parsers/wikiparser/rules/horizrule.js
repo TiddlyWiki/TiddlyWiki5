@@ -16,13 +16,13 @@ Wiki text block rule for rules. For example:
 exports.name = "horizrule";
 exports.types = {block: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /-{3,}\r?(?:\n|$)/mg;
+	this.matchRegExp = /-{3,}\r?(?:\n|$)/gm;
 };
 
-exports.parse = function() {
+exports.parse = function () {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	return [{type: "element", tag: "hr"}];

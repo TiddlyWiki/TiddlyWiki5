@@ -14,28 +14,28 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander) {
+var Command = function (params, commander) {
 	this.params = params;
 	this.commander = commander;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = function () {
 	// Get the build targets defined in the wiki
 	var buildTargets = $tw.boot.wikiInfo && $tw.boot.wikiInfo.build;
-	if(!buildTargets) {
+	if (!buildTargets) {
 		return "No build targets defined";
 	}
 	// Loop through each of the specified targets
 	var targets;
-	if(this.params.length > 0) {
+	if (this.params.length > 0) {
 		targets = this.params;
 	} else {
 		targets = Object.keys(buildTargets);
 	}
-	for(var targetIndex=0; targetIndex<targets.length; targetIndex++) {
+	for (var targetIndex = 0; targetIndex < targets.length; targetIndex++) {
 		var target = targets[targetIndex],
 			commands = buildTargets[target];
-		if(!commands) {
+		if (!commands) {
 			return "Build target '" + target + "' not found";
 		}
 		// Add the commands to the queue

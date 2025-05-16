@@ -11,8 +11,8 @@ HTML entity widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var EntityWidget = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
+var EntityWidget = function (parseTreeNode, options) {
+	this.initialise(parseTreeNode, options);
 };
 
 /*
@@ -23,28 +23,27 @@ EntityWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-EntityWidget.prototype.render = function(parent,nextSibling) {
+EntityWidget.prototype.render = function (parent, nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var entityString = this.getAttribute("entity",this.parseTreeNode.entity || ""),
+	var entityString = this.getAttribute("entity", this.parseTreeNode.entity || ""),
 		textNode = this.document.createTextNode($tw.utils.entityDecode(entityString));
-	parent.insertBefore(textNode,nextSibling);
+	parent.insertBefore(textNode, nextSibling);
 	this.domNodes.push(textNode);
 };
 
 /*
 Compute the internal state of the widget
 */
-EntityWidget.prototype.execute = function() {
-};
+EntityWidget.prototype.execute = function () {};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
-EntityWidget.prototype.refresh = function(changedTiddlers) {
+EntityWidget.prototype.refresh = function (changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.entity) {
+	if (changedAttributes.entity) {
 		this.refreshSelf();
 		return true;
 	} else {

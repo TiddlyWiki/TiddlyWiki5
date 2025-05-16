@@ -14,12 +14,12 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander) {
+var Command = function (params, commander) {
 	this.params = params;
 	this.commander = commander;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = function () {
 	this.commander.streams.output.write($tw.version + "\n");
 	return null; // No error
 };

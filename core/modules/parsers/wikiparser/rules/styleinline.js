@@ -19,13 +19,13 @@ Wiki text inline rule for assigning styles and classes to inline runs. For examp
 exports.name = "styleinline";
 exports.types = {inline: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?(\.(?:[^\r\n\s]+)\s+)?/mg;
+	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?(\.(?:[^\r\n\s]+)\s+)?/gm;
 };
 
-exports.parse = function() {
+exports.parse = function () {
 	var reEnd = /@@/g;
 	// Get the styles and class
 	var stylesString = this.match[1],
@@ -33,21 +33,21 @@ exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the run up to the terminator
-	var tree = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
+	var tree = this.parser.parseInlineRun(reEnd, {eatTerminator: true});
 	// Return the classed span
 	var node = {
 		type: "element",
 		tag: "span",
 		children: tree
 	};
-	if(classString) {
-		$tw.utils.addClassToParseTreeNode(node,classString);
+	if (classString) {
+		$tw.utils.addClassToParseTreeNode(node, classString);
 	}
-	if(stylesString) {
-		$tw.utils.addAttributeToParseTreeNode(node,"style",stylesString);
+	if (stylesString) {
+		$tw.utils.addAttributeToParseTreeNode(node, "style", stylesString);
 	}
-	if(!classString && !stylesString) {
-		$tw.utils.addClassToParseTreeNode(node,"tc-inline-style");
+	if (!classString && !stylesString) {
+		$tw.utils.addClassToParseTreeNode(node, "tc-inline-style");
 	}
 	return [node];
 };

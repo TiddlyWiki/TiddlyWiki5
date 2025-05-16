@@ -13,8 +13,8 @@ Equivalent to - filter run prefix.
 /*
 Export our filter prefix function
 */
-exports.except = function(operationSubFunction) {
-	return function(results,source,widget) {
-		results.remove(operationSubFunction(source,widget));
+exports.except = function (operationSubFunction) {
+	return function (results, source, widget) {
+		results.remove(operationSubFunction(source, widget));
 	};
 };

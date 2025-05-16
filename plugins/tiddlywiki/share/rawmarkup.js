@@ -13,18 +13,17 @@ Read tiddlers from the browser location hash
 var hash;
 try {
 	hash = decodeURIComponent(document.location.hash.substring(1));
-} catch(e) {
-}
-if(hash && hash.charAt(0) === "#") {
+} catch (e) {}
+if (hash && hash.charAt(0) === "#") {
 	// Try to parse the hash as JSON
-	if(hash) {
+	if (hash) {
 		var tiddlers;
 		try {
-			tiddlers= JSON.parse(hash.substr(1));
-		} catch(ex) {
-			console.log("Share plugin: Error parsing JSON from location hash",ex);
+			tiddlers = JSON.parse(hash.substr(1));
+		} catch (ex) {
+			console.log("Share plugin: Error parsing JSON from location hash", ex);
 		}
-		if(tiddlers) {
+		if (tiddlers) {
 			// Need to initialise these because we run before bootprefix.js and boot.js
 			window.$tw = window.$tw || {};
 			$tw.boot = $tw.boot || {};
@@ -40,21 +39,21 @@ if(hash && hash.charAt(0) === "#") {
 			warningWrapper.innerHTML = tiddlywikiSharePluginStartupWarningHtml;
 			document.documentElement.appendChild(warningWrapper);
 			// Add our event handlers
-			document.getElementById("startup-warning-proceed").addEventListener("click",actionProceed,false);
-			document.getElementById("startup-warning-cancel").addEventListener("click",actionCancel,false);
+			document.getElementById("startup-warning-proceed").addEventListener("click", actionProceed, false);
+			document.getElementById("startup-warning-cancel").addEventListener("click", actionCancel, false);
 			// Sort the incoming tiddlers by title
-			tiddlers = tiddlers.sort(function(a,b) {
-				if(a.title < b.title) {
+			tiddlers = tiddlers.sort(function (a, b) {
+				if (a.title < b.title) {
 					return -1;
-				} else if(a.title > b.title) {
+				} else if (a.title > b.title) {
 					return +1;
 				} else {
 					return 0;
 				}
 			});
-			// Load the tiddler preview						
+			// Load the tiddler preview
 			var previewWrapper = document.getElementById("startup-warning-preview");
-			for(var index=0; index < tiddlers.length; index++) {
+			for (var index = 0; index < tiddlers.length; index++) {
 				var tiddler = tiddlers[index],
 					tiddlerWrapper = document.createElement("li"),
 					titleTextWrapper = document.createElement("span"),
@@ -66,10 +65,10 @@ if(hash && hash.charAt(0) === "#") {
 				tiddlerWrapper.appendChild(titleTextWrapper);
 				fieldsTable.appendChild(fieldsTableBody);
 				var fields = Object.keys(tiddler).sort();
-				for(var fieldIndex = 0; fieldIndex < fields.length; fieldIndex++) {
+				for (var fieldIndex = 0; fieldIndex < fields.length; fieldIndex++) {
 					var fieldName = fields[fieldIndex],
 						fieldValue = tiddler[fieldName];
-					if(fieldName !== "title") {
+					if (fieldName !== "title") {
 						var fieldRow = document.createElement("tr"),
 							fieldRowHeader = document.createElement("th"),
 							fieldRowValue = document.createElement("td");

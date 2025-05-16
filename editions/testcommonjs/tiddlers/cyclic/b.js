@@ -7,10 +7,7 @@ Cycle require test B
 
 \*/
 
-
-
-var a = require('./a');
+var a = require("./a");
 exports.b = function () {
-    return a;
+	return a;
 };
-

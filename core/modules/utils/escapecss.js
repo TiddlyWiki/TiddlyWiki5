@@ -10,7 +10,7 @@ Provides CSS.escape() functionality.
 "use strict";
 
 // TODO -- resolve this construction
-exports.escapeCSS = (function() {
+exports.escapeCSS = (function () {
 	// use browser's native CSS.escape() function if available
 	if ($tw.browser && window.CSS && window.CSS.escape) {
 		return window.CSS.escape;
@@ -20,15 +20,15 @@ exports.escapeCSS = (function() {
 	// see also https://drafts.csswg.org/cssom/#serialize-an-identifier
 
 	/*! https://mths.be/cssescape v1.5.1 by @mathias | MIT license */
-	return function(value) {
+	return function (value) {
 		if (arguments.length == 0) {
-			throw new TypeError('`CSS.escape` requires an argument.');
+			throw new TypeError("`CSS.escape` requires an argument.");
 		}
 		var string = String(value);
 		var length = string.length;
 		var index = -1;
 		var codeUnit;
-		var result = '';
+		var result = "";
 		var firstCodeUnit = string.charCodeAt(0);
 		while (++index < length) {
 			codeUnit = string.charCodeAt(index);
@@ -38,27 +38,24 @@ exports.escapeCSS = (function() {
 			// If the character is NULL (U+0000), then the REPLACEMENT CHARACTER
 			// (U+FFFD).
 			if (codeUnit == 0x0000) {
-				result += '\uFFFD';
+				result += "\uFFFD";
 				continue;
 			}
 
 			if (
 				// If the character is in the range [\1-\1F] (U+0001 to U+001F) or is
 				// U+007F, […]
-				(codeUnit >= 0x0001 && codeUnit <= 0x001F) || codeUnit == 0x007F ||
+				(codeUnit >= 0x0001 && codeUnit <= 0x001f) ||
+				codeUnit == 0x007f ||
 				// If the character is the first character and is in the range [0-9]
 				// (U+0030 to U+0039), […]
 				(index == 0 && codeUnit >= 0x0030 && codeUnit <= 0x0039) ||
 				// If the character is the second character and is in the range [0-9]
 				// (U+0030 to U+0039) and the first character is a `-` (U+002D), […]
-				(
-					index == 1 &&
-					codeUnit >= 0x0030 && codeUnit <= 0x0039 &&
-					firstCodeUnit == 0x002D
-				)
+				(index == 1 && codeUnit >= 0x0030 && codeUnit <= 0x0039 && firstCodeUnit == 0x002d)
 			) {
 				// https://drafts.csswg.org/cssom/#escape-a-character-as-code-point
-				result += '\\' + codeUnit.toString(16) + ' ';
+				result += "\\" + codeUnit.toString(16) + " ";
 				continue;
 			}
 
@@ -67,9 +64,9 @@ exports.escapeCSS = (function() {
 				// there is no second character, […]
 				index == 0 &&
 				length == 1 &&
-				codeUnit == 0x002D
+				codeUnit == 0x002d
 			) {
-				result += '\\' + string.charAt(index);
+				result += "\\" + string.charAt(index);
 				continue;
 			}
 
@@ -79,11 +76,11 @@ exports.escapeCSS = (function() {
 			// U+005A), or [a-z] (U+0061 to U+007A), […]
 			if (
 				codeUnit >= 0x0080 ||
-				codeUnit == 0x002D ||
-				codeUnit == 0x005F ||
-				codeUnit >= 0x0030 && codeUnit <= 0x0039 ||
-				codeUnit >= 0x0041 && codeUnit <= 0x005A ||
-				codeUnit >= 0x0061 && codeUnit <= 0x007A
+				codeUnit == 0x002d ||
+				codeUnit == 0x005f ||
+				(codeUnit >= 0x0030 && codeUnit <= 0x0039) ||
+				(codeUnit >= 0x0041 && codeUnit <= 0x005a) ||
+				(codeUnit >= 0x0061 && codeUnit <= 0x007a)
 			) {
 				// the character itself
 				result += string.charAt(index);
@@ -92,8 +89,7 @@ exports.escapeCSS = (function() {
 
 			// Otherwise, the escaped character.
 			// https://drafts.csswg.org/cssom/#escape-a-character
-			result += '\\' + string.charAt(index);
-
+			result += "\\" + string.charAt(index);
 		}
 		return result;
 	};

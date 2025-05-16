@@ -14,21 +14,21 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
+var Command = function (params, commander, callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
-	if(this.params.length < 1) {
+Command.prototype.execute = function () {
+	if (this.params.length < 1) {
 		return "Missing filter";
 	}
 	var self = this,
 		wiki = this.commander.wiki,
 		filter = this.params[0],
 		tiddlers = wiki.filterTiddlers(filter);
-	$tw.utils.each(tiddlers,function(title) {
+	$tw.utils.each(tiddlers, function (title) {
 		wiki.deleteTiddler(title);
 	});
 	return null;

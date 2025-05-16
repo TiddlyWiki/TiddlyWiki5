@@ -11,8 +11,8 @@ Draggable widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var DraggableWidget = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
+var DraggableWidget = function (parseTreeNode, options) {
+	this.initialise(parseTreeNode, options);
 };
 
 /*
@@ -23,7 +23,7 @@ DraggableWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-DraggableWidget.prototype.render = function(parent,nextSibling) {
+DraggableWidget.prototype.render = function (parent, nextSibling) {
 	var self = this,
 		tag,
 		domNode,
@@ -36,33 +36,37 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Sanitise the specified tag
 	tag = this.draggableTag;
-	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
+	if ($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
 		tag = "div";
 	}
 	// Create our element
 	domNode = this.document.createElement(tag);
 	// Assign classes
-	if(this.draggableClasses) {
+	if (this.draggableClasses) {
 		classes.push(this.draggableClasses);
 	}
-	if(!this.dragHandleSelector && this.dragEnable) {
+	if (!this.dragHandleSelector && this.dragEnable) {
 		classes.push("tc-draggable");
 	}
-	domNode.setAttribute("class",classes.join(" "));
+	domNode.setAttribute("class", classes.join(" "));
 	// Assign data- attributes and style. attributes
-	this.assignAttributes(domNode,{
+	this.assignAttributes(domNode, {
 		sourcePrefix: "data-",
 		destPrefix: "data-"
 	});
 	// Insert the node into the DOM and render any children
-	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
+	parent.insertBefore(domNode, nextSibling);
+	this.renderChildren(domNode, null);
 	// Add event handlers
-	if(this.dragEnable) {
+	if (this.dragEnable) {
 		$tw.utils.makeDraggable({
 			domNode: domNode,
-			dragTiddlerFn: function() {return self.getAttribute("tiddler");},
-			dragFilterFn: function() {return self.getAttribute("filter");},
+			dragTiddlerFn: function () {
+				return self.getAttribute("tiddler");
+			},
+			dragFilterFn: function () {
+				return self.getAttribute("filter");
+			},
 			startActions: self.startActions,
 			endActions: self.endActions,
 			dragImageType: self.dragImageType,
@@ -76,49 +80,55 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-DraggableWidget.prototype.execute = function() {
+DraggableWidget.prototype.execute = function () {
 	// Pick up our attributes
-	this.draggableTag = this.getAttribute("tag","div");
+	this.draggableTag = this.getAttribute("tag", "div");
 	this.draggableClasses = this.getAttribute("class");
 	this.startActions = this.getAttribute("startactions");
 	this.endActions = this.getAttribute("endactions");
 	this.dragImageType = this.getAttribute("dragimagetype");
 	this.dragHandleSelector = this.getAttribute("selector");
-	this.dragEnable = this.getAttribute("enable","yes") === "yes";
+	this.dragEnable = this.getAttribute("enable", "yes") === "yes";
 	// Make the child widgets
 	this.makeChildWidgets();
 };
 
-
-DraggableWidget.prototype.updateDomNodeClasses = function() {
+DraggableWidget.prototype.updateDomNodeClasses = function () {
 	var domNodeClasses = this.domNodes[0].className.split(" "),
 		oldClasses = this.draggableClasses.split(" ");
 	this.draggableClasses = this.getAttribute("class");
 	//Remove classes assigned from the old value of class attribute
-	$tw.utils.each(oldClasses,function(oldClass){
+	$tw.utils.each(oldClasses, function (oldClass) {
 		var i = domNodeClasses.indexOf(oldClass);
-		if(i !== -1) {
-			domNodeClasses.splice(i,1);
+		if (i !== -1) {
+			domNodeClasses.splice(i, 1);
 		}
 	});
 	//Add new classes from updated class attribute.
-	$tw.utils.pushTop(domNodeClasses,this.draggableClasses);
-	this.domNodes[0].setAttribute("class",domNodeClasses.join(" "))
-}
+	$tw.utils.pushTop(domNodeClasses, this.draggableClasses);
+	this.domNodes[0].setAttribute("class", domNodeClasses.join(" "));
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
-DraggableWidget.prototype.refresh = function(changedTiddlers) {
+DraggableWidget.prototype.refresh = function (changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tag || changedAttributes.selector || changedAttributes.dragimagetype || changedAttributes.enable || changedAttributes.startactions || changedAttributes.endactions) {
+	if (
+		changedAttributes.tag ||
+		changedAttributes.selector ||
+		changedAttributes.dragimagetype ||
+		changedAttributes.enable ||
+		changedAttributes.startactions ||
+		changedAttributes.endactions
+	) {
 		this.refreshSelf();
 		return true;
 	} else {
-		if(changedAttributes["class"]) {
+		if (changedAttributes["class"]) {
 			this.updateDomNodeClasses();
 		}
-		this.assignAttributes(this.domNodes[0],{
+		this.assignAttributes(this.domNodes[0], {
 			changedAttributes: changedAttributes,
 			sourcePrefix: "data-",
 			destPrefix: "data-"

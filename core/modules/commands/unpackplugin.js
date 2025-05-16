@@ -14,23 +14,23 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
+var Command = function (params, commander, callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
-	if(this.params.length < 1) {
+Command.prototype.execute = function () {
+	if (this.params.length < 1) {
 		return "Missing plugin name";
 	}
 	var self = this,
 		title = this.params[0],
 		pluginData = this.commander.wiki.getTiddlerDataCached(title);
-	if(!pluginData) {
+	if (!pluginData) {
 		return "Plugin '" + title + "' not found";
 	}
-	$tw.utils.each(pluginData.tiddlers,function(tiddler) {
+	$tw.utils.each(pluginData.tiddlers, function (tiddler) {
 		self.commander.wiki.addTiddler(new $tw.Tiddler(tiddler));
 	});
 	return null;

@@ -9,7 +9,7 @@ The video parser parses a video tiddler into an embeddable HTML element
 
 "use strict";
 
-var VideoParser = function(type,text,options) {
+var VideoParser = function (type, text, options) {
 	var element = {
 			type: "element",
 			tag: "video",
@@ -19,9 +19,9 @@ var VideoParser = function(type,text,options) {
 			}
 		},
 		src;
-	if(options._canonical_uri) {
+	if (options._canonical_uri) {
 		element.attributes.src = {type: "string", value: options._canonical_uri};
-	} else if(text) {
+	} else if (text) {
 		element.attributes.src = {type: "string", value: "data:" + type + ";base64," + text};
 	}
 	this.tree = [element];

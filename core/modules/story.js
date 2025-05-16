@@ -20,32 +20,32 @@ function Story(options) {
 	this.wiki = options.wiki || $tw.wiki;
 	this.storyTitle = options.storyTitle || "$:/StoryList";
 	this.historyTitle = options.historyTitle || "$:/HistoryList";
+}
+
+Story.prototype.navigateTiddler = function (navigateTo, navigateFromTitle, navigateFromClientRect) {
+	this.addToStory(navigateTo, navigateFromTitle);
+	this.addToHistory(navigateTo, navigateFromClientRect);
 };
 
-Story.prototype.navigateTiddler = function(navigateTo,navigateFromTitle,navigateFromClientRect) {
-	this.addToStory(navigateTo,navigateFromTitle);
-	this.addToHistory(navigateTo,navigateFromClientRect);
-};
-
-Story.prototype.getStoryList = function() {
+Story.prototype.getStoryList = function () {
 	return this.wiki.getTiddlerList(this.storyTitle) || [];
 };
 
-Story.prototype.addToStory = function(navigateTo,navigateFromTitle,options) {
+Story.prototype.addToStory = function (navigateTo, navigateFromTitle, options) {
 	options = options || {};
 	var storyList = this.getStoryList();
 	// See if the tiddler is already there
 	var slot = storyList.indexOf(navigateTo);
 	// Quit if it already exists in the story river
-	if(slot >= 0) {
+	if (slot >= 0) {
 		return;
 	}
 	// First we try to find the position of the story element we navigated from
 	var fromIndex = storyList.indexOf(navigateFromTitle);
-	if(fromIndex >= 0) {
+	if (fromIndex >= 0) {
 		// The tiddler is added from inside the river
 		// Determine where to insert the tiddler; Fallback is "below"
-		switch(options.openLinkFromInsideRiver) {
+		switch (options.openLinkFromInsideRiver) {
 			case "top":
 				slot = 0;
 				break;
@@ -62,7 +62,7 @@ Story.prototype.addToStory = function(navigateTo,navigateFromTitle,options) {
 		}
 	} else {
 		// The tiddler is opened from outside the river. Determine where to insert the tiddler; default is "top"
-		if(options.openLinkFromOutsideRiver === "bottom") {
+		if (options.openLinkFromOutsideRiver === "bottom") {
 			// Insert at bottom
 			slot = storyList.length;
 		} else {
@@ -71,62 +71,64 @@ Story.prototype.addToStory = function(navigateTo,navigateFromTitle,options) {
 		}
 	}
 	// Add the tiddler
-	storyList.splice(slot,0,navigateTo);
+	storyList.splice(slot, 0, navigateTo);
 	// Save the story
 	this.saveStoryList(storyList);
 };
 
-Story.prototype.saveStoryList = function(storyList) {
+Story.prototype.saveStoryList = function (storyList) {
 	var storyTiddler = this.wiki.getTiddler(this.storyTitle);
-	this.wiki.addTiddler(new $tw.Tiddler(
-		this.wiki.getCreationFields(),
-		{title: this.storyTitle},
-		storyTiddler,
-		{list: storyList},
-		this.wiki.getModificationFields()
-	));
+	this.wiki.addTiddler(
+		new $tw.Tiddler(
+			this.wiki.getCreationFields(),
+			{title: this.storyTitle},
+			storyTiddler,
+			{list: storyList},
+			this.wiki.getModificationFields()
+		)
+	);
 };
 
-Story.prototype.addToHistory = function(navigateTo,navigateFromClientRect) {
+Story.prototype.addToHistory = function (navigateTo, navigateFromClientRect) {
 	var titles = $tw.utils.isArray(navigateTo) ? navigateTo : [navigateTo];
 	// Add a new record to the top of the history stack
-	var historyList = this.wiki.getTiddlerData(this.historyTitle,[]);
-	$tw.utils.each(titles,function(title) {
+	var historyList = this.wiki.getTiddlerData(this.historyTitle, []);
+	$tw.utils.each(titles, function (title) {
 		historyList.push({title: title, fromPageRect: navigateFromClientRect});
 	});
-	this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
+	this.wiki.setTiddlerData(this.historyTitle, historyList, {"current-tiddler": titles[titles.length - 1]});
 };
 
-Story.prototype.storyCloseTiddler = function(targetTitle) {
-// TBD
+Story.prototype.storyCloseTiddler = function (targetTitle) {
+	// TBD
 };
 
-Story.prototype.storyCloseAllTiddlers = function() {
-// TBD
+Story.prototype.storyCloseAllTiddlers = function () {
+	// TBD
 };
 
-Story.prototype.storyCloseOtherTiddlers = function(targetTitle) {
-// TBD
+Story.prototype.storyCloseOtherTiddlers = function (targetTitle) {
+	// TBD
 };
 
-Story.prototype.storyEditTiddler = function(targetTitle) {
-// TBD
+Story.prototype.storyEditTiddler = function (targetTitle) {
+	// TBD
 };
 
-Story.prototype.storyDeleteTiddler = function(targetTitle) {
-// TBD
+Story.prototype.storyDeleteTiddler = function (targetTitle) {
+	// TBD
 };
 
-Story.prototype.storySaveTiddler = function(targetTitle) {
-// TBD
+Story.prototype.storySaveTiddler = function (targetTitle) {
+	// TBD
 };
 
-Story.prototype.storyCancelTiddler = function(targetTitle) {
-// TBD
+Story.prototype.storyCancelTiddler = function (targetTitle) {
+	// TBD
 };
 
-Story.prototype.storyNewTiddler = function(targetTitle) {
-// TBD
+Story.prototype.storyNewTiddler = function (targetTitle) {
+	// TBD
 };
 
 exports.Story = Story;

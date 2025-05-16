@@ -15,12 +15,12 @@ exports.platforms = ["node"];
 exports.after = ["story"];
 exports.synchronous = false;
 
-exports.startup = function(callback) {
+exports.startup = function (callback) {
 	// On the server, start a commander with the command line arguments
 	var commander = new $tw.Commander(
 		$tw.boot.argv,
-		function(err) {
-			if(err) {
+		function (err) {
+			if (err) {
 				return $tw.utils.error("Error: " + err);
 			}
 			callback();

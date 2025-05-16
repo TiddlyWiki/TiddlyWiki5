@@ -12,9 +12,9 @@ Filter operator returning the number of entries in the current list.
 /*
 Export our filter function
 */
-exports.count = function(source,operator,options) {
+exports.count = function (source, operator, options) {
 	var count = 0;
-	source(function(tiddler,title) {
+	source(function (tiddler, title) {
 		count++;
 	});
 	return [count + ""];

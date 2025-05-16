@@ -12,9 +12,9 @@ Filter operator returning its operand parsed as a list
 /*
 Export our filter function
 */
-exports.enlist = function(source,operator,options) {
+exports.enlist = function (source, operator, options) {
 	var allowDuplicates = false;
-	switch(operator.suffix) {
+	switch (operator.suffix) {
 		case "raw":
 			allowDuplicates = true;
 			break;
@@ -22,11 +22,11 @@ exports.enlist = function(source,operator,options) {
 			allowDuplicates = false;
 			break;
 	}
-	var list = $tw.utils.parseStringArray(operator.operand,allowDuplicates);
-	if(operator.prefix === "!") {
+	var list = $tw.utils.parseStringArray(operator.operand, allowDuplicates);
+	if (operator.prefix === "!") {
 		var results = [];
-		source(function(tiddler,title) {
-			if(list.indexOf(title) === -1) {
+		source(function (tiddler, title) {
+			if (list.indexOf(title) === -1) {
 				results.push(title);
 			}
 		});
