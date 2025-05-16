@@ -189,8 +189,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	if($tw.dragInProgress) {
 		return false;
 	}
-	var self = this,
-		dataTransfer = event.dataTransfer;
+	var	dataTransfer = event.dataTransfer;
 	// Remove highlighting
 	this.resetState();
 	// Import any files in the drop
@@ -257,8 +256,7 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 		};
 	// Let the browser handle it if we're in a textarea or input box
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1 && !event.target.isContentEditable && !event.twEditor) {
-		var self = this,
-			items = event.clipboardData.items;
+		var	items = event.clipboardData.items;
 		// Enumerate the clipboard items
 		for(var t = 0; t<items.length; t++) {
 			var item = items[t];

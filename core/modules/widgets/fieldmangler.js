@@ -109,17 +109,18 @@ FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
 };
 
 FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
-	var tiddler = this.wiki.getTiddler(this.mangleTitle),
+	var tag,
+		tiddler = this.wiki.getTiddler(this.mangleTitle),
 		modification = this.wiki.getModificationFields();
 	if(tiddler && typeof event.param === "string") {
-		var tag = event.param.trim();
+		tag = event.param.trim();
 		if(tag !== "") {
 			modification.tags = (tiddler.fields.tags || []).slice(0);
 			$tw.utils.pushTop(modification.tags,tag);
 			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 		}
 	} else if(typeof event.param === "string" && event.param.trim() !== "" && this.mangleTitle.trim() !== "") {
-		var tag = [];
+		tag = [];
 		tag.push(event.param.trim());
 		this.wiki.addTiddler(new $tw.Tiddler({title: this.mangleTitle, tags: tag},modification));
 	}

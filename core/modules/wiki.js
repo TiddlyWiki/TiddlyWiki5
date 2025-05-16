@@ -859,8 +859,8 @@ exports.getTiddlerAsJson = function(title) {
 };
 
 exports.getTiddlersAsJson = function(filter,spaces) {
+	spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces;
 	var tiddlers = this.filterTiddlers(filter),
-		spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces,
 		data = [];
 	for(var t=0;t<tiddlers.length; t++) {
 		var tiddler = this.getTiddler(tiddlers[t]);

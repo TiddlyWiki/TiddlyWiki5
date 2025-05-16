@@ -573,12 +573,13 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	importTiddler = $tw.hooks.invokeHook("th-before-importing",importTiddler);
 	importData = this.wiki.getTiddlerDataCached(event.param,{tiddlers: {}}),
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
-		var title = tiddlerFields.title;
+		var tiddler,
+			title = tiddlerFields.title;
 		if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
 			if($tw.utils.hop(importTiddler.fields,["rename-" + title])) {
-				var tiddler = new $tw.Tiddler(tiddlerFields,{title : importTiddler.fields["rename-" + title]});
+				tiddler = new $tw.Tiddler(tiddlerFields,{title : importTiddler.fields["rename-" + title]});
 			} else {
-				var tiddler = new $tw.Tiddler(tiddlerFields);
+				tiddler = new $tw.Tiddler(tiddlerFields);
 			}
 			// th-importing-tiddler doesn't allow user interaction by default
 			// If you want to use the default UI then use: $:/core/modules/upgraders/ instead

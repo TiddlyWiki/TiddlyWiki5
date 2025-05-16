@@ -84,7 +84,7 @@ TranscludeWidget.prototype.execute = function() {
 			target = this.getTransclusionTarget();
 			parseTreeNodes = [{type: "text", text: target.text}];
 			break;
-		default:
+		default: {
 			// "text/plain" is the plain text result of wikifying the text
 			target = this.parseTransclusionTarget(parseAsInline);
 			var widgetNode = this.wiki.makeWidget(target.parser,{
@@ -95,6 +95,7 @@ TranscludeWidget.prototype.execute = function() {
 			widgetNode.render(container,null);
 			parseTreeNodes = [{type: "text", text: container.textContent}];
 			break;
+		}
 	}
 	this.sourceText = target.text;
 	this.parserType = target.type;
@@ -386,7 +387,7 @@ TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaul
 	if(name in this.stringParametersByName) {
 		return this.stringParametersByName[name];
 	} else {
-		var name = "" + index;
+		name = "" + index;
 		if(name in this.stringParametersByName) {
 			return this.stringParametersByName[name];
 		}

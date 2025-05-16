@@ -83,8 +83,7 @@ ListWidget.prototype.execute = function(changedAttributes) {
 	}
 	// Compose the list elements
 	this.list = this.getTiddlerList();
-	var members = [],
-		self = this;
+	var members = [];
 	// Check for an empty list
 	if(this.list.length === 0) {
 		members = this.getEmptyMessage();
@@ -302,7 +301,8 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			this.children = [];
 		}
 		// If we are providing an counter variable then we must refresh the items, otherwise we can rearrange them
-		var hasRefreshed = false,t;
+		var hasRefreshed = false,
+			t, refreshed;
 		if(this.counterName) {
 			var mustRefreshOldLast = false;
 			var oldLength = this.children.length;
@@ -319,7 +319,7 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 					hasRefreshed = true;
 				} else {
 					// Refresh the item we're reusing
-					var refreshed = this.children[t].refresh(changedTiddlers);
+					refreshed = this.children[t].refresh(changedTiddlers);
 					hasRefreshed = hasRefreshed || refreshed;
 				}
 			}
@@ -373,7 +373,7 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 						this.insertListItem(t,this.list[t]);
 						hasRefreshed = true;
 					} else {
-						var refreshed = this.children[t].refresh(changedTiddlers);
+						refreshed = this.children[t].refresh(changedTiddlers);
 						hasRefreshed = hasRefreshed || refreshed;
 					}
 				}

@@ -78,11 +78,12 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 Handle a change event
 */
 SelectWidget.prototype.handleChangeEvent = function(event) {
+	var value;
 	// Get the new value and assign it to the tiddler
 	if(this.selectMultiple == false) {
-		var value = this.getSelectDomNode().value;
+		value = this.getSelectDomNode().value;
 	} else {
-		var value = this.getSelectValues()
+		value = this.getSelectValues()
 				value = $tw.utils.stringifyList(value);
 	}
 	this.wiki.setText(this.selectTitle,this.selectField,this.selectIndex,value);
