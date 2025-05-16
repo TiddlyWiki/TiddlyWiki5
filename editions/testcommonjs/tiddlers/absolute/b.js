@@ -7,5 +7,4 @@ Absolute require test
 
 \*/
 
-
-exports.foo = function() {};
+exports.foo = function () {};

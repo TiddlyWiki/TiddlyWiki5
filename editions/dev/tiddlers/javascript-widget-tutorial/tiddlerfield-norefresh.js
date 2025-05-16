@@ -7,7 +7,7 @@ Hello, World widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var MyWidget = function(parseTreeNode, options) {
+var MyWidget = function (parseTreeNode, options) {
 	this.initialise(parseTreeNode, options);
 };
 
@@ -19,9 +19,9 @@ MyWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-MyWidget.prototype.render = function(parent, nextSibling) {
+MyWidget.prototype.render = function (parent, nextSibling) {
 	this.parentDomNode = parent;
-	var text = this.wiki.getTiddlerText("test", "<empty>")
+	var text = this.wiki.getTiddlerText("test", "<empty>");
 	var textNode = this.document.createTextNode(text);
 	parent.insertBefore(textNode, nextSibling);
 	this.domNodes.push(textNode);

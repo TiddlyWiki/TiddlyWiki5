@@ -8,9 +8,8 @@ Tests the fakedom that Tiddlywiki occasionally uses.
 \*/
 "use strict";
 
-describe("fakedom tests", function() {
-
-	it("properly assigns nodeType based on DOM standards", function() {
+describe("fakedom tests", function () {
+	it("properly assigns nodeType based on DOM standards", function () {
 		// According to MDN, ELEMENT_NODE == 1 && TEXT_NODE == 3
 		// There are others, but currently they're not implemented in fakedom
 		expect($tw.fakeDocument.createElement("div").nodeType).toBe(1);

@@ -7,6 +7,4 @@ Relative test B
 
 \*/
 
-exports.foo = function () {
-};
-
+exports.foo = function () {};
