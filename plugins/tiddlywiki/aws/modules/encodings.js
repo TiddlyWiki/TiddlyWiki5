@@ -13,10 +13,10 @@ Filter operator for applying encodeuricomponent() to each item, with the additio
 Export our filter functions
 */
 
-exports["aws-encodeuricomponent"] = function(source,operator,options) {
+exports["aws-encodeuricomponent"] = function (source, operator, options) {
 	var results = [];
-	source(function(tiddler,title) {
-		results.push(encodeURIComponent(title).replace(/'/g,"%27"));
+	source(function (tiddler, title) {
+		results.push(encodeURIComponent(title).replace(/'/g, "%27"));
 	});
 	return results;
 };

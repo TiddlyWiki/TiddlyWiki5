@@ -13,17 +13,16 @@ var TEST_WIKI_TIDDLER_FILTER = "[all[tiddlers+shadows]type[text/vnd.tiddlywiki-m
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
-describe("Wiki-based tests", function() {
-
+describe("Wiki-based tests", function () {
 	// Step through the test tiddlers
 	var tests = $tw.wiki.filterTiddlers(TEST_WIKI_TIDDLER_FILTER);
-	$tw.utils.each(tests,function(title) {
+	$tw.utils.each(tests, function (title) {
 		var tiddler = $tw.wiki.getTiddler(title);
-		it(tiddler.fields.title + ": " + tiddler.fields.description, function() {
+		it(tiddler.fields.title + ": " + tiddler.fields.description, function () {
 			// Add our tiddlers
 			var wiki = new $tw.Wiki(),
 				coreTiddler = $tw.wiki.getTiddler("$:/core");
-			if(coreTiddler) {
+			if (coreTiddler) {
 				wiki.addTiddler(coreTiddler);
 			}
 			wiki.addTiddlers(readMultipleTiddlersTiddler(title));
@@ -35,21 +34,21 @@ describe("Wiki-based tests", function() {
 			// Clear changes queue
 			wiki.clearTiddlerEventQueue();
 			// Complain if we don't have the ouput and expected results
-			if(!wiki.tiddlerExists("Output")) {
+			if (!wiki.tiddlerExists("Output")) {
 				throw "Missing 'Output' tiddler";
 			}
-			if(wiki.tiddlerExists("ExpectedResult")) {
+			if (wiki.tiddlerExists("ExpectedResult")) {
 				// Construct the widget node
 				var text = "{{Output}}\n\n";
-				var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+				var widgetNode = createWidgetNode(parseText(text, wiki), wiki);
 				// Render the widget node to the DOM
 				var wrapper = renderWidgetNode(widgetNode);
 				// Clear changes queue
 				wiki.clearTiddlerEventQueue();
 				// Run the actions if provided
-				if(wiki.tiddlerExists("Actions")) {
+				if (wiki.tiddlerExists("Actions")) {
 					widgetNode.invokeActionString(wiki.getTiddlerText("Actions"));
-					refreshWidgetNode(widgetNode,wrapper);
+					refreshWidgetNode(widgetNode, wrapper);
 				}
 				// Test the rendering
 				expect(wrapper.innerHTML).toBe(wiki.getTiddlerText("ExpectedResult"));
@@ -58,15 +57,15 @@ describe("Wiki-based tests", function() {
 	});
 
 	function readMultipleTiddlersTiddler(title) {
-		var rawTiddlers = $tw.wiki.getTiddlerText(title).split(/\r?\n\+\r?\n/mg);
+		var rawTiddlers = $tw.wiki.getTiddlerText(title).split(/\r?\n\+\r?\n/gm);
 		var tiddlers = [];
-		$tw.utils.each(rawTiddlers,function(rawTiddler) {
+		$tw.utils.each(rawTiddlers, function (rawTiddler) {
 			var fields = Object.create(null),
-				split = rawTiddler.split(/\r?\n\r?\n/mg);
-			if(split.length >= 1) {
-				fields = $tw.utils.parseFields(split[0],fields);
+				split = rawTiddler.split(/\r?\n\r?\n/gm);
+			if (split.length >= 1) {
+				fields = $tw.utils.parseFields(split[0], fields);
 			}
-			if(split.length >= 2) {
+			if (split.length >= 2) {
 				fields.text = split.slice(1).join("\n\n");
 			}
 			tiddlers.push(fields);
@@ -74,25 +73,24 @@ describe("Wiki-based tests", function() {
 		return tiddlers;
 	}
 
-	function createWidgetNode(parser,wiki) {
+	function createWidgetNode(parser, wiki) {
 		return wiki.makeWidget(parser);
 	}
 
-	function parseText(text,wiki,options) {
-		return wiki.parseText("text/vnd.tiddlywiki",text,options);
+	function parseText(text, wiki, options) {
+		return wiki.parseText("text/vnd.tiddlywiki", text, options);
 	}
 
 	function renderWidgetNode(widgetNode) {
 		$tw.fakeDocument.setSequenceNumber(0);
 		var wrapper = $tw.fakeDocument.createElement("div");
-		widgetNode.render(wrapper,null);
-// console.log(require("util").inspect(wrapper,{depth: 8}));
+		widgetNode.render(wrapper, null);
+		// console.log(require("util").inspect(wrapper,{depth: 8}));
 		return wrapper;
 	}
 
-	function refreshWidgetNode(widgetNode,wrapper) {
-		widgetNode.refresh(widgetNode.wiki.changedTiddlers,wrapper);
-// console.log(require("util").inspect(wrapper,{depth: 8}));
+	function refreshWidgetNode(widgetNode, wrapper) {
+		widgetNode.refresh(widgetNode.wiki.changedTiddlers, wrapper);
+		// console.log(require("util").inspect(wrapper,{depth: 8}));
 	}
-
 });

@@ -14,14 +14,14 @@ function TwitterArchivist(options) {
 	this.source = options.source;
 }
 
-TwitterArchivist.prototype.loadArchive = async function(options) {
+TwitterArchivist.prototype.loadArchive = async function (options) {
 	options = options || {};
 	const wiki = options.wiki;
 	await this.source.init();
 	// Process the manifest and profile
-	const manifestData = await this.loadTwitterJsData("data/manifest.js","window.__THAR_CONFIG = ",""),
-		profileData = await this.loadTwitterJsData("data/profile.js","window.YTD.profile.part0 = ",""),
-		accountData = await this.loadTwitterJsData("data/account.js","window.YTD.account.part0 = ",""),
+	const manifestData = await this.loadTwitterJsData("data/manifest.js", "window.__THAR_CONFIG = ", ""),
+		profileData = await this.loadTwitterJsData("data/profile.js", "window.YTD.profile.part0 = ", ""),
+		accountData = await this.loadTwitterJsData("data/account.js", "window.YTD.account.part0 = ", ""),
 		username = manifestData.userInfo.userName,
 		user_id = manifestData.userInfo.accountId;
 	wiki.addTiddler({
@@ -39,9 +39,9 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 		location: profileData[0].profile.description.location
 	});
 	// Process the media
-	await this.source.processFiles("data/tweets_media","base64",function(mediaItem) {
+	await this.source.processFiles("data/tweets_media", "base64", function (mediaItem) {
 		var ext = mediaItem.filename.split(".").slice(-1)[0];
-		if("jpg png".split(" ").indexOf(ext) !== -1) {
+		if ("jpg png".split(" ").indexOf(ext) !== -1) {
 			var extensionInfo = $tw.utils.getFileExtensionInfo("." + ext),
 				type = extensionInfo ? extensionInfo.type : null;
 			wiki.addTiddler({
@@ -54,12 +54,12 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 		}
 	});
 	// Process the favourites
-	const likeData = await this.loadTwitterJsData("data/like.js","window.YTD.like.part0 = ","");
-	$tw.utils.each(likeData,function(like) {
+	const likeData = await this.loadTwitterJsData("data/like.js", "window.YTD.like.part0 = ", "");
+	$tw.utils.each(likeData, function (like) {
 		// Create the tweet tiddler
 		var tiddler = {
 			title: "Tweet - " + like.like.tweetId,
-			text: "\\rules only html entity extlink\n" + (like.like.fullText || "").replace("\n","<br>"),
+			text: "\\rules only html entity extlink\n" + (like.like.fullText || "").replace("\n", "<br>"),
 			status_id: like.like.tweetId,
 			liked_by: user_id,
 			tags: "$:/tags/Tweet"
@@ -67,15 +67,15 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 		wiki.addTiddler(tiddler);
 	});
 	// Process the tweets
-	const tweetData = await this.loadTwitterJsData("data/tweets.js","window.YTD.tweets.part0 = ","");
-	$tw.utils.each(tweetData,function(tweet) {
+	const tweetData = await this.loadTwitterJsData("data/tweets.js", "window.YTD.tweets.part0 = ", "");
+	$tw.utils.each(tweetData, function (tweet) {
 		// Compile the tags for the tweet
 		var tags = ["$:/tags/Tweet"];
 		// Accumulate the replacements/insertions to the text as an array of {startPos:,endPos:,fnTransform:}
 		var modifications = [];
 		// Modifications for mentions
 		var mentions = [];
-		$tw.utils.each(tweet.tweet.entities.user_mentions,function(mention) {
+		$tw.utils.each(tweet.tweet.entities.user_mentions, function (mention) {
 			var title = "Tweeter - " + mention.id_str;
 			tags.push(title);
 			mentions.push(mention.id_str);
@@ -87,29 +87,37 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 				name: mention.name
 			});
 			modifications.push({
-				startPos: parseInt(mention.indices[0],10),
-				endPos: parseInt(mention.indices[1],10),
-				fnTransform: function(text) {
-					return "<$link to=\"" + title + "\">" +
-						$tw.utils.htmlEncode(text.substring(mention.indices[0],mention.indices[1])) +
-						"</$link>";
+				startPos: parseInt(mention.indices[0], 10),
+				endPos: parseInt(mention.indices[1], 10),
+				fnTransform: function (text) {
+					return (
+						'<$link to="' +
+						title +
+						'">' +
+						$tw.utils.htmlEncode(text.substring(mention.indices[0], mention.indices[1])) +
+						"</$link>"
+					);
 				}
 			});
 		});
 		// Modifications for URLs
-		$tw.utils.each(tweet.tweet.entities.urls,function(urlInfo) {
+		$tw.utils.each(tweet.tweet.entities.urls, function (urlInfo) {
 			modifications.push({
-				startPos: parseInt(urlInfo.indices[0],10),
-				endPos: parseInt(urlInfo.indices[1],10),
-				fnTransform: function(text) {
-					return "<a href=\"" + urlInfo.expanded_url + "\" rel=\"noopener noreferrer\" target=\"_blank\">" +
+				startPos: parseInt(urlInfo.indices[0], 10),
+				endPos: parseInt(urlInfo.indices[1], 10),
+				fnTransform: function (text) {
+					return (
+						'<a href="' +
+						urlInfo.expanded_url +
+						'" rel="noopener noreferrer" target="_blank">' +
 						$tw.utils.htmlEncode(urlInfo.display_url) +
-						"</a>";
+						"</a>"
+					);
 				}
 			});
 		});
 		// Modifications for hashtags
-		$tw.utils.each(tweet.tweet.entities.hashtags,function(hashtag) {
+		$tw.utils.each(tweet.tweet.entities.hashtags, function (hashtag) {
 			var title = "#" + hashtag.text;
 			tags.push(title);
 			wiki.addTiddler({
@@ -118,27 +126,25 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 				tags: "$:/tags/Hashtag"
 			});
 			modifications.push({
-				startPos: parseInt(hashtag.indices[0],10),
-				endPos: parseInt(hashtag.indices[1],10),
-				fnTransform: function(text) {
-					return "<$link to=\"" + title + "\">" +
-						"#" + $tw.utils.htmlEncode(hashtag.text) +
-						"</$link>";	
+				startPos: parseInt(hashtag.indices[0], 10),
+				endPos: parseInt(hashtag.indices[1], 10),
+				fnTransform: function (text) {
+					return '<$link to="' + title + '">' + "#" + $tw.utils.htmlEncode(hashtag.text) + "</$link>";
 				}
 			});
 		});
 		// Sort the modifications by start position
-		modifications.sort(function(a,b) {
+		modifications.sort(function (a, b) {
 			return a.startPos - b.startPos;
 		});
 		// Apply the modifications in reverse order
 		var rawText = tweet.tweet.full_text,
 			posText = 0,
 			chunks = [];
-		$tw.utils.each(modifications,function(modification) {
+		$tw.utils.each(modifications, function (modification) {
 			// Process any text before the modification
-			if(modification.startPos > posText) {
-				chunks.push($tw.utils.htmlEncode(rawText.substring(posText,modification.startPos)));
+			if (modification.startPos > posText) {
+				chunks.push($tw.utils.htmlEncode(rawText.substring(posText, modification.startPos)));
 			}
 			// Process the modification
 			chunks.push(modification.fnTransform(rawText));
@@ -146,11 +152,11 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 			posText = modification.endPos;
 		});
 		// Process any remaining text
-		if(posText < rawText.length) {
+		if (posText < rawText.length) {
 			chunks.push($tw.utils.htmlEncode(rawText.substring(posText)));
 		}
 		// Concatenate the chunks and replace newlines with <br>
-		var text = chunks.join("").replace("\n","<br>");
+		var text = chunks.join("").replace("\n", "<br>");
 		// Create the tweet tiddler
 		var tiddler = {
 			title: "Tweet - " + tweet.tweet.id_str,
@@ -163,29 +169,29 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 			created: $tw.utils.stringifyDate(new Date(tweet.tweet.created_at)),
 			modified: $tw.utils.stringifyDate(new Date(tweet.tweet.created_at))
 		};
-		if(tweet.tweet.in_reply_to_status_id_str) {
+		if (tweet.tweet.in_reply_to_status_id_str) {
 			tiddler.in_reply_to_status_id = tweet.tweet.in_reply_to_status_id_str;
 		}
-		if(mentions.length > 0) {
+		if (mentions.length > 0) {
 			tiddler.mention_user_ids = $tw.utils.stringifyList(mentions);
 		}
 		wiki.addTiddler(tiddler);
 	});
 };
 
-TwitterArchivist.prototype.loadTwitterJsData = async function(filePath,prefix,suffix) {
+TwitterArchivist.prototype.loadTwitterJsData = async function (filePath, prefix, suffix) {
 	var tweetFileData = await this.source.loadTwitterJsData(filePath);
-	if(prefix) {
-		if(tweetFileData.slice(0,prefix.length) !== prefix) {
+	if (prefix) {
+		if (tweetFileData.slice(0, prefix.length) !== prefix) {
 			throw "Reading Twitter JS file " + filePath + " missing prefix '" + prefix + "'";
 		}
 		tweetFileData = tweetFileData.slice(prefix.length);
 	}
-	if(suffix) {
-		if(tweetFileData.slice(-suffix.length) !== suffix) {
+	if (suffix) {
+		if (tweetFileData.slice(-suffix.length) !== suffix) {
 			throw "Reading Twitter JS file " + filePath + " missing suffix '" + suffix + "'";
 		}
-		tweetFileData = tweetFileData.slice(0,tweetFileData.length - suffix.length);
+		tweetFileData = tweetFileData.slice(0, tweetFileData.length - suffix.length);
 	}
 	return JSON.parse(tweetFileData);
 };
@@ -195,38 +201,37 @@ function TwitterArchivistSourceNodeJs(options) {
 	this.archivePath = options.archivePath;
 }
 
-TwitterArchivistSourceNodeJs.prototype.init = async function() {
-};
+TwitterArchivistSourceNodeJs.prototype.init = async function () {};
 
-TwitterArchivistSourceNodeJs.prototype.processFiles = async function(dirPath,encoding,callback) {
+TwitterArchivistSourceNodeJs.prototype.processFiles = async function (dirPath, encoding, callback) {
 	var fs = require("fs"),
 		path = require("path"),
-		dirPath = path.resolve(this.archivePath,dirPath),
+		dirPath = path.resolve(this.archivePath, dirPath),
 		filenames = fs.readdirSync(dirPath);
-	$tw.utils.each(filenames,function(filename) {
+	$tw.utils.each(filenames, function (filename) {
 		callback({
 			filename: filename,
-			contents: fs.readFileSync(path.resolve(dirPath,filename),encoding)
+			contents: fs.readFileSync(path.resolve(dirPath, filename), encoding)
 		});
 	});
 };
 
-TwitterArchivistSourceNodeJs.prototype.loadTwitterJsData = async function(filePath) {
+TwitterArchivistSourceNodeJs.prototype.loadTwitterJsData = async function (filePath) {
 	var fs = require("fs"),
 		path = require("path");
-	return fs.readFileSync(path.resolve(this.archivePath,filePath),"utf8");
+	return fs.readFileSync(path.resolve(this.archivePath, filePath), "utf8");
 };
 
 function TwitterArchivistSourceBrowser(options) {
 	options = options || {};
 }
 
-TwitterArchivistSourceBrowser.prototype.init = async function() {
+TwitterArchivistSourceBrowser.prototype.init = async function () {
 	// Open directory
 	this.rootDirHandle = await window.showDirectoryPicker();
 };
 
-TwitterArchivistSourceBrowser.prototype.processFiles = async function(dirPath,encoding,callback) {
+TwitterArchivistSourceBrowser.prototype.processFiles = async function (dirPath, encoding, callback) {
 	const dirHandle = await this.walkDirectory(dirPath.split("/"));
 	for await (const [filename, fileHandle] of dirHandle.entries()) {
 		const contents = await fileHandle.getFile();
@@ -237,18 +242,18 @@ TwitterArchivistSourceBrowser.prototype.processFiles = async function(dirPath,en
 	}
 };
 
-TwitterArchivistSourceBrowser.prototype.loadTwitterJsData = async function(filePath) {
+TwitterArchivistSourceBrowser.prototype.loadTwitterJsData = async function (filePath) {
 	const filePathParts = filePath.split("/");
-	const dirHandle = await this.walkDirectory(filePathParts.slice(0,-1));
+	const dirHandle = await this.walkDirectory(filePathParts.slice(0, -1));
 	const fileHandle = await dirHandle.getFileHandle(filePathParts.slice(-1)[0]);
 	const contents = await fileHandle.getFile();
 	return await contents.text();
 };
 
-TwitterArchivistSourceBrowser.prototype.walkDirectory = async function(arrayDirectoryEntries) {
+TwitterArchivistSourceBrowser.prototype.walkDirectory = async function (arrayDirectoryEntries) {
 	var entries = arrayDirectoryEntries.slice(0),
 		dirHandle = this.rootDirHandle;
-	while(entries.length > 0) {
+	while (entries.length > 0) {
 		dirHandle = await dirHandle.getDirectoryHandle(entries[0]);
 		entries.shift();
 	}
@@ -258,9 +263,8 @@ TwitterArchivistSourceBrowser.prototype.walkDirectory = async function(arrayDire
 // Thanks to MatheusFelipeMarinho
 // https://github.com/MatheusFelipeMarinho/venom/blob/43ead0bfffa57a536a5cff67dd909e55da9f0915/src/lib/wapi/helper/array-buffer-to-base64.js#L55
 function arrayBufferToBase64(arrayBuffer) {
-	var base64 = '';
-	var encodings =
-		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+	var base64 = "";
+	var encodings = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 	var bytes = new Uint8Array(arrayBuffer);
 	var byteLength = bytes.byteLength;
@@ -294,7 +298,7 @@ function arrayBufferToBase64(arrayBuffer) {
 		// Set the 4 least significant bits to zero
 		b = (chunk & 3) << 4; // 3   = 2^2 - 1
 
-		base64 += encodings[a] + encodings[b] + '==';
+		base64 += encodings[a] + encodings[b] + "==";
 	} else if (byteRemainder == 2) {
 		chunk = (bytes[mainLength] << 8) | bytes[mainLength + 1];
 
@@ -304,7 +308,7 @@ function arrayBufferToBase64(arrayBuffer) {
 		// Set the 2 least significant bits to zero
 		c = (chunk & 15) << 2; // 15    = 2^4 - 1
 
-		base64 += encodings[a] + encodings[b] + encodings[c] + '=';
+		base64 += encodings[a] + encodings[b] + encodings[c] + "=";
 	}
 	return base64;
 }

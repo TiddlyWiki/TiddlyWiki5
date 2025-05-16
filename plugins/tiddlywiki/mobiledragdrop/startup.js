@@ -15,6 +15,6 @@ exports.platforms = ["browser"];
 exports.after = ["startup"];
 exports.synchronous = true;
 
-exports.startup = function() {
-	window.addEventListener("touchmove", function() {});
+exports.startup = function () {
+	window.addEventListener("touchmove", function () {});
 };

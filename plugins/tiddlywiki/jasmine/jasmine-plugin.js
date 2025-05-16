@@ -7,13 +7,12 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 
 \*/
 
-
 "use strict";
 
 var TEST_TIDDLER_FILTER = "[all[tiddlers+shadows]type[application/javascript]tag[$:/tags/test-spec]]";
 var TESTS_DONE = false;
 
-exports.testsWereRun = function() {
+exports.testsWereRun = function () {
 	return TESTS_DONE;
 };
 
@@ -28,7 +27,7 @@ repository is https://github.com/jasmine/jasmine-npm.
 They're all locally checked into the `./files` directory.
 */
 
-exports.runTests = function(callback,specFilter) {
+exports.runTests = function (callback, specFilter) {
 	// Set up a shared context object.
 	var context = {
 		console: console,
@@ -62,19 +61,19 @@ exports.runTests = function(callback,specFilter) {
 	TESTS_DONE = true;
 
 	function evalInContext(title) {
-		var code = $tw.wiki.getTiddlerText(title,"");
+		var code = $tw.wiki.getTiddlerText(title, "");
 		var _exports = {};
 		context.exports = _exports;
 		context.module = {exports: _exports};
-		context.require = function(moduleTitle) {
+		context.require = function (moduleTitle) {
 			// mock out the 'glob' module required in
 			// "$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js"
 			if (moduleTitle === "glob") {
 				return {};
 			}
-			return $tw.modules.execute(moduleTitle,title);
+			return $tw.modules.execute(moduleTitle, title);
 		};
-		var contextExports = $tw.utils.evalSandboxed(code,context,title,true);
+		var contextExports = $tw.utils.evalSandboxed(code, context, title, true);
 		// jasmine/jasmine.js assigns directly to `module.exports`: check
 		// for it first.
 		return context.module.exports || contextExports;
@@ -89,15 +88,15 @@ exports.runTests = function(callback,specFilter) {
 	var jasmine;
 	// Node.js wrapper for calling `.execute()`
 	var nodeJasmineWrapper;
-	if($tw.browser) {
+	if ($tw.browser) {
 		window.jasmineRequire = jasmineCore;
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/jasmine-html.js");
 		// Prevent jasmine-core/boot.js from installing its own onload handler. We'll execute it explicitly when everything is ready
 		var previousOnloadHandler = window.onload;
-		window.onload = function() {};
+		window.onload = function () {};
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/boot.js");
 		var jasmineOnloadHandler = window.onload;
-		window.onload = function() {};
+		window.onload = function () {};
 		jasmine = window.jasmine;
 	} else {
 		// Add missing properties to `jasmineCore` in order to call the Jasmine
@@ -129,7 +128,7 @@ exports.runTests = function(callback,specFilter) {
 		// It will call 'exit' after it's done, which gives us an
 		// opportunity to resynchronize and finish any following commands.
 		context.process = Object.create(process);
-		context.process.exit = function(code) {
+		context.process.exit = function (code) {
 			// If jasmine's exit code is non-zero, tests failed. Abort any
 			// further commands. If they're important, they could have come
 			// before the testing suite.
@@ -142,16 +141,16 @@ exports.runTests = function(callback,specFilter) {
 	}
 	// Add Jasmine's DSL to our context
 	var env = jasmine.getEnv();
-	var jasmineInterface = jasmineCore.interface(jasmine,env)
-	context = $tw.utils.extend({},jasmineInterface,context);
+	var jasmineInterface = jasmineCore.interface(jasmine, env);
+	context = $tw.utils.extend({}, jasmineInterface, context);
 	// Iterate through all the test modules
 	var tests = $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
-	$tw.utils.each(tests,evalInContext);
+	$tw.utils.each(tests, evalInContext);
 	// In a browser environment, we use jasmine-core/boot.js to call `execute()` for us.
 	// In Node.js, we call it manually.
-	if($tw.browser) {
+	if ($tw.browser) {
 		jasmineOnloadHandler();
 	} else {
-		nodeJasmineWrapper.execute(null,specFilter);
+		nodeJasmineWrapper.execute(null, specFilter);
 	}
 };

@@ -23,42 +23,44 @@ This wikiparser can be modified using the rules eg:
 exports.name = "latex-parser";
 exports.types = {inline: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\$\$(?!\$)/mg;
+	this.matchRegExp = /\$\$(?!\$)/gm;
 };
 
-exports.parse = function() {
+exports.parse = function () {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
-	var reEnd = /\$\$/mg;
+	var reEnd = /\$\$/gm;
 	// Look for the end marker
 	reEnd.lastIndex = this.parser.pos;
 	var match = reEnd.exec(this.parser.source),
 		text,
 		displayMode;
 	// Process the text
-	if(match) {
-		text = this.parser.source.substring(this.parser.pos,match.index);
-		displayMode = text.indexOf('\n') != -1;
+	if (match) {
+		text = this.parser.source.substring(this.parser.pos, match.index);
+		displayMode = text.indexOf("\n") != -1;
 		this.parser.pos = match.index + match[0].length;
 	} else {
 		text = this.parser.source.substr(this.parser.pos);
 		displayMode = false;
 		this.parser.pos = this.parser.sourceLength;
 	}
-	return [{
-		type: "latex",
-		attributes: {
-			text: {
-				type: "text",
-				value: text
-			},
-			displayMode: {
-				type: "text",
-				value: displayMode ? "true" : "false"
+	return [
+		{
+			type: "latex",
+			attributes: {
+				text: {
+					type: "text",
+					value: text
+				},
+				displayMode: {
+					type: "text",
+					value: displayMode ? "true" : "false"
+				}
 			}
 		}
-	}];
+	];
 };

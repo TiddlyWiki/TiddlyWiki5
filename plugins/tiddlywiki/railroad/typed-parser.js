@@ -9,14 +9,14 @@ This parser wraps unadorned railroad syntax into a railroad widget
 
 "use strict";
 
-var RailroadParser = function(type,text,options) {
+var RailroadParser = function (type, text, options) {
 	var element = {
-			type: "railroad",
-			tag: "$railroad",
-			text: text
-		};
+		type: "railroad",
+		tag: "$railroad",
+		text: text
+	};
 	this.tree = [element];
-console.log(text);
+	console.log(text);
 };
 
 exports["text/vnd.tiddlywiki.railroad"] = RailroadParser;
