@@ -12,13 +12,13 @@ Wiki text rule for quote blocks.
 exports.name = "quoteblock";
 exports.types = {block: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /(<<<+)/mg;
+	this.matchRegExp = /(<<<+)/gm;
 };
 
-exports.parse = function() {
+exports.parse = function () {
 	var classes = ["tc-quote"];
 	// Get all the details of the match
 	var reEndString = "^\\s*" + this.match[1] + "(?!<)";
@@ -30,12 +30,12 @@ exports.parse = function() {
 	var classEnd = this.parser.pos;
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	var citeStart = this.parser.pos;
-	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
+	var cite = this.parser.parseInlineRun(/(\r?\n)/gm);
 	var citeEnd = this.parser.pos;
 	// before handling the cite, parse the body of the quote
 	var tree = this.parser.parseBlocks(reEndString);
 	// If we got a cite, put it before the text
-	if(cite.length > 0) {
+	if (cite.length > 0) {
 		tree.unshift({
 			type: "element",
 			tag: "cite",
@@ -47,10 +47,10 @@ exports.parse = function() {
 	// Parse any optional cite
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	citeStart = this.parser.pos;
-	cite = this.parser.parseInlineRun(/(\r?\n)/mg);
+	cite = this.parser.parseInlineRun(/(\r?\n)/gm);
 	citeEnd = this.parser.pos;
 	// If we got a cite, push it
-	if(cite.length > 0) {
+	if (cite.length > 0) {
 		tree.push({
 			type: "element",
 			tag: "cite",
@@ -60,12 +60,14 @@ exports.parse = function() {
 		});
 	}
 	// Return the blockquote element
-	return [{
-		type: "element",
-		tag: "blockquote",
-		attributes: {
-			class: { type: "string", value: classes.join(" "), start: classStart, end: classEnd },
-		},
-		children: tree
-	}];
+	return [
+		{
+			type: "element",
+			tag: "blockquote",
+			attributes: {
+				class: {type: "string", value: classes.join(" "), start: classStart, end: classEnd}
+			},
+			children: tree
+		}
+	];
 };

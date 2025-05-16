@@ -14,9 +14,9 @@ Filter operator for selecting tiddlers
 var allFilterOperators;
 
 function getAllFilterOperators() {
-	if(!allFilterOperators) {
+	if (!allFilterOperators) {
 		allFilterOperators = {};
-		$tw.modules.applyMethods("allfilteroperator",allFilterOperators);
+		$tw.modules.applyMethods("allfilteroperator", allFilterOperators);
 	}
 	return allFilterOperators;
 }
@@ -24,18 +24,18 @@ function getAllFilterOperators() {
 /*
 Export our filter function
 */
-exports.all = function(source,operator,options) {
+exports.all = function (source, operator, options) {
 	// Check for common optimisations
 	var subops = operator.operand.split("+");
-	if(subops.length === 1 && subops[0] === "") {
+	if (subops.length === 1 && subops[0] === "") {
 		return source;
-	} else if(subops.length === 1 && subops[0] === "tiddlers") {
+	} else if (subops.length === 1 && subops[0] === "tiddlers") {
 		return options.wiki.each;
-	} else if(subops.length === 1 && subops[0] === "shadows") {
+	} else if (subops.length === 1 && subops[0] === "shadows") {
 		return options.wiki.eachShadow;
-	} else if(subops.length === 2 && subops[0] === "tiddlers" && subops[1] === "shadows") {
+	} else if (subops.length === 2 && subops[0] === "tiddlers" && subops[1] === "shadows") {
 		return options.wiki.eachTiddlerPlusShadows;
-	} else if(subops.length === 2 && subops[0] === "shadows" && subops[1] === "tiddlers") {
+	} else if (subops.length === 2 && subops[0] === "shadows" && subops[1] === "tiddlers") {
 		return options.wiki.eachShadowPlusTiddlers;
 	}
 	// Do it the hard way
@@ -43,10 +43,10 @@ exports.all = function(source,operator,options) {
 	var allFilterOperators = getAllFilterOperators();
 	// Cycle through the suboperators accumulating their results
 	var results = new $tw.utils.LinkedList();
-	for(var t=0; t<subops.length; t++) {
+	for (var t = 0; t < subops.length; t++) {
 		var subop = allFilterOperators[subops[t]];
-		if(subop) {
-			results.pushTop(subop(source,operator.prefix,options));
+		if (subop) {
+			results.pushTop(subop(source, operator.prefix, options));
 		}
 	}
 	return results.makeTiddlerIterator(options.wiki);

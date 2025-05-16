@@ -23,23 +23,25 @@ This wikiparser can be modified using the rules eg:
 exports.name = "subscript";
 exports.types = {inline: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /,,/mg;
+	this.matchRegExp = /,,/gm;
 };
 
-exports.parse = function() {
+exports.parse = function () {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 
 	// Parse the run including the terminator
-	var tree = this.parser.parseInlineRun(/,,/mg,{eatTerminator: true});
+	var tree = this.parser.parseInlineRun(/,,/gm, {eatTerminator: true});
 
 	// Return the classed span
-	return [{
-		type: "element",
-		tag: "sub",
-		children: tree
-	}];
+	return [
+		{
+			type: "element",
+			tag: "sub",
+			children: tree
+		}
+	];
 };

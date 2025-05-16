@@ -17,15 +17,11 @@ Information about this macro
 
 exports.name = "makedatauri";
 
-exports.params = [
-	{name: "text"},
-	{name: "type"},
-	{name: "_canonical_uri"}
-];
+exports.params = [{name: "text"}, {name: "type"}, {name: "_canonical_uri"}];
 
 /*
 Run the macro
 */
-exports.run = function(text,type,_canonical_uri) {
-	return $tw.utils.makeDataUri(text,type,_canonical_uri);
+exports.run = function (text, type, _canonical_uri) {
+	return $tw.utils.makeDataUri(text, type, _canonical_uri);
 };

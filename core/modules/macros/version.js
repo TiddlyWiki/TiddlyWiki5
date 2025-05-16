@@ -20,6 +20,6 @@ exports.params = [];
 /*
 Run the macro
 */
-exports.run = function() {
+exports.run = function () {
 	return $tw.version;
 };

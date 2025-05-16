@@ -7,6 +7,6 @@ Simply focus the Text editor
 
 "use strict";
 
-exports["focus-editor"] = function(event,operation) {
+exports["focus-editor"] = function (event, operation) {
 	operation = null;
 };

@@ -16,20 +16,20 @@ Wiki rule for block macro calls
 exports.name = "macrocallblock";
 exports.types = {block: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 };
 
-exports.findNextMatch = function(startPos) {
+exports.findNextMatch = function (startPos) {
 	var nextStart = startPos;
 	// Try parsing at all possible macrocall openers until we match
-	while((nextStart = this.parser.source.indexOf("<<",nextStart)) >= 0) {
-		var nextCall = $tw.utils.parseMacroInvocationAsTransclusion(this.parser.source,nextStart);
-		if(nextCall) {
+	while ((nextStart = this.parser.source.indexOf("<<", nextStart)) >= 0) {
+		var nextCall = $tw.utils.parseMacroInvocationAsTransclusion(this.parser.source, nextStart);
+		if (nextCall) {
 			var c = this.parser.source.charAt(nextCall.end);
 			// Ensure EOL after parsed macro
 			// If we didn't need to support IE, we'd just use /(?:\r?\n|$)/ym
-			if ((c === "") || (c === "\n") || ((c === "\r") && this.parser.source.charAt(nextCall.end+1) === "\n")) {
+			if (c === "" || c === "\n" || (c === "\r" && this.parser.source.charAt(nextCall.end + 1) === "\n")) {
 				this.nextCall = nextCall;
 				return nextStart;
 			}
@@ -42,7 +42,7 @@ exports.findNextMatch = function(startPos) {
 /*
 Parse the most recent match
 */
-exports.parse = function() {
+exports.parse = function () {
 	var call = this.nextCall;
 	call.isBlock = true;
 	this.nextCall = null;

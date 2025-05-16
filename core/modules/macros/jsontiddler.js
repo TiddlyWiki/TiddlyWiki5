@@ -15,22 +15,19 @@ Information about this macro
 
 exports.name = "jsontiddler";
 
-exports.params = [
-	{name: "title"}
-];
+exports.params = [{name: "title"}];
 
 /*
 Run the macro
 */
-exports.run = function(title) {
+exports.run = function (title) {
 	title = title || this.getVariable("currentTiddler");
 	var tiddler = !!title && this.wiki.getTiddler(title),
 		fields = new Object();
-	if(tiddler) {
-		for(var field in tiddler.fields) {
+	if (tiddler) {
+		for (var field in tiddler.fields) {
 			fields[field] = tiddler.getFieldString(field);
 		}
 	}
-	return JSON.stringify(fields,null,$tw.config.preferences.jsonSpaces);
+	return JSON.stringify(fields, null, $tw.config.preferences.jsonSpaces);
 };
-

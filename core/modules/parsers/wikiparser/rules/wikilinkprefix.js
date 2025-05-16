@@ -16,16 +16,16 @@ Wiki text inline rule for suppressed wiki links. For example:
 exports.name = "wikilinkprefix";
 exports.types = {inline: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = new RegExp($tw.config.textPrimitives.unWikiLink + $tw.config.textPrimitives.wikiLink,"mg");
+	this.matchRegExp = new RegExp($tw.config.textPrimitives.unWikiLink + $tw.config.textPrimitives.wikiLink, "mg");
 };
 
 /*
 Parse the most recent match
 */
-exports.parse = function() {
+exports.parse = function () {
 	// Get the details of the match
 	var linkText = this.match[0];
 	// Move past the wikilink

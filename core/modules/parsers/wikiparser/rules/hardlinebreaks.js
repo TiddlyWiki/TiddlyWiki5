@@ -23,33 +23,33 @@ Not
 exports.name = "hardlinebreaks";
 exports.types = {inline: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /"""(?:\r?\n)?/mg;
+	this.matchRegExp = /"""(?:\r?\n)?/gm;
 };
 
-exports.parse = function() {
-	var reEnd = /(""")|(\r?\n)/mg,
+exports.parse = function () {
+	var reEnd = /(""")|(\r?\n)/gm,
 		tree = [],
 		match;
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	do {
 		// Parse the run up to the terminator
-		tree.push.apply(tree,this.parser.parseInlineRun(reEnd,{eatTerminator: false}));
+		tree.push.apply(tree, this.parser.parseInlineRun(reEnd, {eatTerminator: false}));
 		// Redo the terminator match
 		reEnd.lastIndex = this.parser.pos;
 		match = reEnd.exec(this.parser.source);
-		if(match) {
+		if (match) {
 			var start = this.parser.pos;
 			this.parser.pos = reEnd.lastIndex;
 			// Add a line break if the terminator was a line break
-			if(match[2]) {
+			if (match[2]) {
 				tree.push({type: "element", tag: "br", start: start, end: this.parser.pos});
 			}
 		}
-	} while(match && !match[1]);
+	} while (match && !match[1]);
 	// Return the nodes
 	return tree;
 };

@@ -11,8 +11,8 @@ Action widget to log debug messages
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var LogWidget = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
+var LogWidget = function (parseTreeNode, options) {
+	this.initialise(parseTreeNode, options);
 };
 
 /*
@@ -23,21 +23,21 @@ LogWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-LogWidget.prototype.render = function(parent,nextSibling) {
+LogWidget.prototype.render = function (parent, nextSibling) {
 	this.computeAttributes();
 	this.execute();
 };
 
-LogWidget.prototype.execute = function(){
-	this.message = this.getAttribute("$$message","debug");
-	this.logAll = this.getAttribute("$$all","no") === "yes" ? true : false;
+LogWidget.prototype.execute = function () {
+	this.message = this.getAttribute("$$message", "debug");
+	this.logAll = this.getAttribute("$$all", "no") === "yes" ? true : false;
 	this.filter = this.getAttribute("$$filter");
-}
+};
 
 /*
 Refresh the widget by ensuring our attributes are up to date
 */
-LogWidget.prototype.refresh = function(changedTiddlers) {
+LogWidget.prototype.refresh = function (changedTiddlers) {
 	this.refreshSelf();
 	return true;
 };
@@ -45,49 +45,49 @@ LogWidget.prototype.refresh = function(changedTiddlers) {
 /*
 Invoke the action associated with this widget
 */
-LogWidget.prototype.invokeAction = function(triggeringWidget,event) {
+LogWidget.prototype.invokeAction = function (triggeringWidget, event) {
 	this.log();
 	return true; // Action was invoked
 };
 
-LogWidget.prototype.log = function() {
+LogWidget.prototype.log = function () {
 	var data = {},
 		dataCount,
 		allVars = {},
 		filteredVars;
 
-	$tw.utils.each(this.attributes,function(attribute,name) {
-		if(name.substring(0,2) !== "$$") {
+	$tw.utils.each(this.attributes, function (attribute, name) {
+		if (name.substring(0, 2) !== "$$") {
 			data[name] = attribute;
 		}
 	});
 
-	for(var v in this.variables) {
+	for (var v in this.variables) {
 		var variable = this.parentWidget && this.parentWidget.variables[v];
-		if(variable && variable.isFunctionDefinition) {
+		if (variable && variable.isFunctionDefinition) {
 			allVars[v] = variable.value;
 		} else {
-			allVars[v]  = this.getVariable(v,{defaultValue:""});
+			allVars[v] = this.getVariable(v, {defaultValue: ""});
 		}
 	}
-	if(this.filter) {
-		filteredVars = this.wiki.compileFilter(this.filter).call(this.wiki,this.wiki.makeTiddlerIterator(allVars));
-		$tw.utils.each(filteredVars,function(name) {
+	if (this.filter) {
+		filteredVars = this.wiki.compileFilter(this.filter).call(this.wiki, this.wiki.makeTiddlerIterator(allVars));
+		$tw.utils.each(filteredVars, function (name) {
 			data[name] = allVars[name];
 		});
 	}
 	dataCount = $tw.utils.count(data);
 
 	console.group(this.message);
-	if(dataCount > 0) {
+	if (dataCount > 0) {
 		$tw.utils.logTable(data);
 	}
-	if(this.logAll || !dataCount) {
+	if (this.logAll || !dataCount) {
 		console.groupCollapsed("All variables");
 		$tw.utils.logTable(allVars);
 		console.groupEnd();
 	}
 	console.groupEnd();
-}
+};
 
 exports["action-log"] = LogWidget;

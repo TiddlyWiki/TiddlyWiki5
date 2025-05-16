@@ -15,17 +15,18 @@ However, if the wiki is loaded as an .HTA file (Windows HTML Applications) then 
 /*
 Select the appropriate saver module and set it up
 */
-var FSOSaver = function(wiki) {
-};
+var FSOSaver = function (wiki) {};
 
-FSOSaver.prototype.save = function(text,method,callback) {
+FSOSaver.prototype.save = function (text, method, callback) {
 	// Get the pathname of this document
 	var pathname = unescape(document.location.pathname);
 	// Test for a Windows path of the form /x:\blah...
-	if(/^\/[A-Z]\:\\[^\\]+/i.test(pathname)) {	// ie: ^/[a-z]:/[^/]+
+	if (/^\/[A-Z]\:\\[^\\]+/i.test(pathname)) {
+		// ie: ^/[a-z]:/[^/]+
 		// Remove the leading slash
 		pathname = pathname.substr(1);
-	} else if(document.location.hostname !== "" && /^\/\\[^\\]+\\[^\\]+/i.test(pathname)) {	// test for \\server\share\blah... - ^/[^/]+/[^/]+
+	} else if (document.location.hostname !== "" && /^\/\\[^\\]+\\[^\\]+/i.test(pathname)) {
+		// test for \\server\share\blah... - ^/[^/]+/[^/]+
 		// Remove the leading slash
 		pathname = pathname.substr(1);
 		// reconstruct UNC path
@@ -35,7 +36,7 @@ FSOSaver.prototype.save = function(text,method,callback) {
 	}
 	// Save the file (as UTF-16)
 	var fso = new ActiveXObject("Scripting.FileSystemObject");
-	var file = fso.OpenTextFile(pathname,2,-1,-1);
+	var file = fso.OpenTextFile(pathname, 2, -1, -1);
 	file.Write(text);
 	file.Close();
 	// Callback that we succeeded
@@ -55,15 +56,17 @@ FSOSaver.prototype.info = {
 /*
 Static method that returns true if this saver is capable of working
 */
-exports.canSave = function(wiki) {
+exports.canSave = function (wiki) {
 	try {
-		return (window.location.protocol === "file:") && !!(new ActiveXObject("Scripting.FileSystemObject"));
-	} catch(e) { return false; }
+		return window.location.protocol === "file:" && !!new ActiveXObject("Scripting.FileSystemObject");
+	} catch (e) {
+		return false;
+	}
 };
 
 /*
 Create an instance of this saver
 */
-exports.create = function(wiki) {
+exports.create = function (wiki) {
 	return new FSOSaver(wiki);
 };

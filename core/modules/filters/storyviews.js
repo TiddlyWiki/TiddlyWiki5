@@ -12,11 +12,11 @@ Filter operator for returning the names of the story views in this wiki
 /*
 Export our filter function
 */
-exports.storyviews = function(source,operator,options) {
+exports.storyviews = function (source, operator, options) {
 	var results = [],
 		storyviews = {};
-	$tw.modules.applyMethods("storyview",storyviews);
-	$tw.utils.each(storyviews,function(info,name) {
+	$tw.modules.applyMethods("storyview", storyviews);
+	$tw.utils.each(storyviews, function (info, name) {
 		results.push(name);
 	});
 	results.sort();

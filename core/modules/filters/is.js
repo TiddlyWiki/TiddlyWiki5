@@ -12,9 +12,9 @@ Filter operator for checking tiddler properties
 var isFilterOperators;
 
 function getIsFilterOperators() {
-	if(!isFilterOperators) {
+	if (!isFilterOperators) {
 		isFilterOperators = {};
-		$tw.modules.applyMethods("isfilteroperator",isFilterOperators);
+		$tw.modules.applyMethods("isfilteroperator", isFilterOperators);
 	}
 	return isFilterOperators;
 }
@@ -22,20 +22,20 @@ function getIsFilterOperators() {
 /*
 Export our filter function
 */
-exports.is = function(source,operator,options) {
+exports.is = function (source, operator, options) {
 	// Dispatch to the correct isfilteroperator
 	var isFilterOperators = getIsFilterOperators();
-	if(operator.operand) {
+	if (operator.operand) {
 		var isFilterOperator = isFilterOperators[operator.operand];
-		if(isFilterOperator) {
-			return isFilterOperator(source,operator.prefix,options);
+		if (isFilterOperator) {
+			return isFilterOperator(source, operator.prefix, options);
 		} else {
 			return [$tw.language.getString("Error/IsFilterOperator")];
 		}
 	} else {
 		// Return all tiddlers if the operand is missing
 		var results = [];
-		source(function(tiddler,title) {
+		source(function (tiddler, title) {
 			results.push(title);
 		});
 		return results;

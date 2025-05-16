@@ -12,8 +12,8 @@ Equivalent to a filter run with no prefix.
 /*
 Export our filter prefix function
 */
-exports.or = function(operationSubFunction) {
-	return function(results,source,widget) {
-		results.pushTop(operationSubFunction(source,widget));
+exports.or = function (operationSubFunction) {
+	return function (results, source, widget) {
+		results.pushTop(operationSubFunction(source, widget));
 	};
 };

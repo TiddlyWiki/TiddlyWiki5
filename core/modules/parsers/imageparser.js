@@ -9,16 +9,16 @@ The image parser parses an image into an embeddable HTML element
 
 "use strict";
 
-var ImageParser = function(type,text,options) {
+var ImageParser = function (type, text, options) {
 	var element = {
-			type: "element",
-			tag: "img",
-			attributes: {}
-		};
-	if(options._canonical_uri) {
+		type: "element",
+		tag: "img",
+		attributes: {}
+	};
+	if (options._canonical_uri) {
 		element.attributes.src = {type: "string", value: options._canonical_uri};
-	} else if(text) {
-		if(type === "image/svg+xml" || type === ".svg") {
+	} else if (text) {
+		if (type === "image/svg+xml" || type === ".svg") {
 			element.attributes.src = {type: "string", value: "data:image/svg+xml," + encodeURIComponent(text)};
 		} else {
 			element.attributes.src = {type: "string", value: "data:" + type + ";base64," + text};

@@ -12,12 +12,12 @@ Filter operator for replacing tiddler titles by the value of the field specified
 /*
 Export our filter function
 */
-exports.get = function(source,operator,options) {
+exports.get = function (source, operator, options) {
 	var results = [];
-	source(function(tiddler,title) {
-		if(tiddler) {
+	source(function (tiddler, title) {
+		if (tiddler) {
 			var value = tiddler.getFieldString(operator.operand);
-			if(value) {
+			if (value) {
 				results.push(value);
 			}
 		}

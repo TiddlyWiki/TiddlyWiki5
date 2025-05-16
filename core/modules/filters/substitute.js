@@ -12,20 +12,19 @@ Filter operator for substituting variables and embedded filter expressions with 
 /*
 Export our filter function
 */
-exports.substitute = function(source,operator,options) {
+exports.substitute = function (source, operator, options) {
 	var results = [],
 		operands = [];
-	$tw.utils.each(operator.operands,function(operand,index){
+	$tw.utils.each(operator.operands, function (operand, index) {
 		operands.push({
 			name: (index + 1).toString(),
 			value: operand
 		});
 	});
-	source(function(tiddler,title) {
-		if(title) {
-			results.push(options.wiki.getSubstitutedText(title,options.widget,{substitutions:operands}));
+	source(function (tiddler, title) {
+		if (title) {
+			results.push(options.wiki.getSubstitutedText(title, options.widget, {substitutions: operands}));
 		}
 	});
 	return results;
 };
-

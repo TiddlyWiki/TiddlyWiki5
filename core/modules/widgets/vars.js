@@ -18,9 +18,9 @@ This widget allows multiple variables to be set in one go:
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var VarsWidget = function(parseTreeNode,options) {
+var VarsWidget = function (parseTreeNode, options) {
 	// Initialise
-	this.initialise(parseTreeNode,options);
+	this.initialise(parseTreeNode, options);
 };
 
 /*
@@ -31,22 +31,22 @@ VarsWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-VarsWidget.prototype.render = function(parent,nextSibling) {
+VarsWidget.prototype.render = function (parent, nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	this.renderChildren(parent,nextSibling);
+	this.renderChildren(parent, nextSibling);
 };
 
 /*
 Compute the internal state of the widget
 */
-VarsWidget.prototype.execute = function() {
+VarsWidget.prototype.execute = function () {
 	// Parse variables
 	var self = this;
-	$tw.utils.each(this.attributes,function(val,key) {
-		if(key.charAt(0) !== "$") {
-			self.setVariable(key,val);
+	$tw.utils.each(this.attributes, function (val, key) {
+		if (key.charAt(0) !== "$") {
+			self.setVariable(key, val);
 		}
 	});
 	// Construct the child widgets
@@ -56,9 +56,9 @@ VarsWidget.prototype.execute = function() {
 /*
 Refresh the widget by ensuring our attributes are up to date
 */
-VarsWidget.prototype.refresh = function(changedTiddlers) {
+VarsWidget.prototype.refresh = function (changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if($tw.utils.count(changedAttributes) > 0) {
+	if ($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
 	}

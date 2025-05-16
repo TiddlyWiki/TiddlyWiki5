@@ -9,10 +9,10 @@ module-type: formatfilteroperator
 /*
 Export our filter function
 */
-exports.titlelist = function(source,operand,options) {
+exports.titlelist = function (source, operand, options) {
 	var results = [];
-	source(function(tiddler,title) {
-		if(title && title.length) {
+	source(function (tiddler, title) {
+		if (title && title.length) {
 			results.push($tw.utils.stringifyList([title]));
 		}
 	});

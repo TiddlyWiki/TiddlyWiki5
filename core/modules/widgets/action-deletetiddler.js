@@ -11,8 +11,8 @@ Action widget to delete a tiddler.
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var DeleteTiddlerWidget = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
+var DeleteTiddlerWidget = function (parseTreeNode, options) {
+	this.initialise(parseTreeNode, options);
 };
 
 /*
@@ -23,7 +23,7 @@ DeleteTiddlerWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-DeleteTiddlerWidget.prototype.render = function(parent,nextSibling) {
+DeleteTiddlerWidget.prototype.render = function (parent, nextSibling) {
 	this.computeAttributes();
 	this.execute();
 };
@@ -31,7 +31,7 @@ DeleteTiddlerWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-DeleteTiddlerWidget.prototype.execute = function() {
+DeleteTiddlerWidget.prototype.execute = function () {
 	this.actionFilter = this.getAttribute("$filter");
 	this.actionTiddler = this.getAttribute("$tiddler");
 };
@@ -39,9 +39,9 @@ DeleteTiddlerWidget.prototype.execute = function() {
 /*
 Refresh the widget by ensuring our attributes are up to date
 */
-DeleteTiddlerWidget.prototype.refresh = function(changedTiddlers) {
+DeleteTiddlerWidget.prototype.refresh = function (changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["$filter"] || changedAttributes["$tiddler"]) {
+	if (changedAttributes["$filter"] || changedAttributes["$tiddler"]) {
 		this.refreshSelf();
 		return true;
 	}
@@ -51,15 +51,15 @@ DeleteTiddlerWidget.prototype.refresh = function(changedTiddlers) {
 /*
 Invoke the action associated with this widget
 */
-DeleteTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
+DeleteTiddlerWidget.prototype.invokeAction = function (triggeringWidget, event) {
 	var tiddlers = [];
-	if(this.actionFilter) {
-		tiddlers = this.wiki.filterTiddlers(this.actionFilter,this);
+	if (this.actionFilter) {
+		tiddlers = this.wiki.filterTiddlers(this.actionFilter, this);
 	}
-	if(this.actionTiddler) {
+	if (this.actionTiddler) {
 		tiddlers.push(this.actionTiddler);
 	}
-	for(var t=0; t<tiddlers.length; t++) {
+	for (var t = 0; t < tiddlers.length; t++) {
 		this.wiki.deleteTiddler(tiddlers[t]);
 	}
 	return true; // Action was invoked

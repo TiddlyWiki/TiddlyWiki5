@@ -20,6 +20,6 @@ exports.params = [];
 /*
 Run the macro
 */
-exports.run = function() {
+exports.run = function () {
 	return this.wiki.getChangeCount(this.getVariable("currentTiddler")) + "";
 };

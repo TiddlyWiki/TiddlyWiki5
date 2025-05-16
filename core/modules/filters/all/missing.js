@@ -12,6 +12,6 @@ Filter function for [all[missing]]
 /*
 Export our filter function
 */
-exports.missing = function(source,prefix,options) {
+exports.missing = function (source, prefix, options) {
 	return options.wiki.getMissingTitles();
 };

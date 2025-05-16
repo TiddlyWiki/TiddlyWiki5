@@ -11,8 +11,8 @@ Action widget to navigate to a tiddler
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var NavigateWidget = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
+var NavigateWidget = function (parseTreeNode, options) {
+	this.initialise(parseTreeNode, options);
 };
 
 /*
@@ -23,7 +23,7 @@ NavigateWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-NavigateWidget.prototype.render = function(parent,nextSibling) {
+NavigateWidget.prototype.render = function (parent, nextSibling) {
 	this.computeAttributes();
 	this.execute();
 };
@@ -31,7 +31,7 @@ NavigateWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-NavigateWidget.prototype.execute = function() {
+NavigateWidget.prototype.execute = function () {
 	this.actionTo = this.getAttribute("$to");
 	this.actionScroll = this.getAttribute("$scroll");
 };
@@ -39,9 +39,9 @@ NavigateWidget.prototype.execute = function() {
 /*
 Refresh the widget by ensuring our attributes are up to date
 */
-NavigateWidget.prototype.refresh = function(changedTiddlers) {
+NavigateWidget.prototype.refresh = function (changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["$to"] || changedAttributes["$scroll"]) {
+	if (changedAttributes["$to"] || changedAttributes["$scroll"]) {
 		this.refreshSelf();
 		return true;
 	}
@@ -51,13 +51,13 @@ NavigateWidget.prototype.refresh = function(changedTiddlers) {
 /*
 Invoke the action associated with this widget
 */
-NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
+NavigateWidget.prototype.invokeAction = function (triggeringWidget, event) {
 	event = event || {};
 	var bounds = triggeringWidget && triggeringWidget.getBoundingClientRect && triggeringWidget.getBoundingClientRect(),
-		suppressNavigation = event.metaKey || event.ctrlKey || (event.button === 1);
-	if(this.actionScroll === "yes") {
+		suppressNavigation = event.metaKey || event.ctrlKey || event.button === 1;
+	if (this.actionScroll === "yes") {
 		suppressNavigation = false;
-	} else if(this.actionScroll === "no") {
+	} else if (this.actionScroll === "no") {
 		suppressNavigation = true;
 	}
 	this.dispatchEvent({
@@ -65,7 +65,13 @@ NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		navigateTo: this.actionTo === undefined ? this.getVariable("currentTiddler") : this.actionTo,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: triggeringWidget,
-		navigateFromClientRect: bounds && { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
+		navigateFromClientRect: bounds && {
+			top: bounds.top,
+			left: bounds.left,
+			width: bounds.width,
+			right: bounds.right,
+			bottom: bounds.bottom,
+			height: bounds.height
 		},
 		navigateFromClientTop: bounds && bounds.top,
 		navigateFromClientLeft: bounds && bounds.left,

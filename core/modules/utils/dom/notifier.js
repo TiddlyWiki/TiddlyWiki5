@@ -11,7 +11,7 @@ Notifier mechanism
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
-var Notifier = function(wiki) {
+var Notifier = function (wiki) {
 	this.wiki = wiki;
 };
 
@@ -21,7 +21,7 @@ Display a notification
 	options: see below
 Options include:
 */
-Notifier.prototype.display = function(title,options) {
+Notifier.prototype.display = function (title, options) {
 	options = options || {};
 	// Create the wrapper divs
 	var self = this,
@@ -30,58 +30,65 @@ Notifier.prototype.display = function(title,options) {
 		duration = $tw.utils.getAnimationDuration(),
 		refreshHandler;
 	// Don't do anything if the tiddler doesn't exist
-	if(!tiddler) {
+	if (!tiddler) {
 		return;
 	}
 	// Add classes and roles
-	$tw.utils.addClass(notification,"tc-notification");
-	notification.setAttribute("role","alert");
+	$tw.utils.addClass(notification, "tc-notification");
+	notification.setAttribute("role", "alert");
 	// Create the variables
-	var variables = $tw.utils.extend({currentTiddler: title},options.variables);
+	var variables = $tw.utils.extend({currentTiddler: title}, options.variables);
 	// Render the body of the notification
-	var widgetNode = this.wiki.makeTranscludeWidget(title,{
+	var widgetNode = this.wiki.makeTranscludeWidget(title, {
 		parentWidget: $tw.rootWidget,
 		document: document,
 		variables: variables,
-		importPageMacros: true});
-	widgetNode.render(notification,null);
-	refreshHandler = function(changes) {
-		widgetNode.refresh(changes,notification,null);
+		importPageMacros: true
+	});
+	widgetNode.render(notification, null);
+	refreshHandler = function (changes) {
+		widgetNode.refresh(changes, notification, null);
 	};
-	this.wiki.addEventListener("change",refreshHandler);
+	this.wiki.addEventListener("change", refreshHandler);
 	// Set the initial styles for the notification
-	$tw.utils.setStyle(notification,[
+	$tw.utils.setStyle(notification, [
 		{opacity: "0"},
 		{transformOrigin: "0% 0%"},
-		{transform: "translateY(" + (-window.innerHeight) + "px)"},
-		{transition: "opacity " + duration + "ms ease-out, " + $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out"}
+		{transform: "translateY(" + -window.innerHeight + "px)"},
+		{
+			transition:
+				"opacity " +
+				duration +
+				"ms ease-out, " +
+				$tw.utils.roundTripPropertyName("transform") +
+				" " +
+				duration +
+				"ms ease-in-out"
+		}
 	]);
 	// Add the notification to the DOM
 	document.body.appendChild(notification);
 	// Force layout
 	$tw.utils.forceLayout(notification);
 	// Set final animated styles
-	$tw.utils.setStyle(notification,[
-		{opacity: "1.0"},
-		{transform: "translateY(0px)"}
-	]);
+	$tw.utils.setStyle(notification, [{opacity: "1.0"}, {transform: "translateY(0px)"}]);
 	// Set a timer to remove the notification
-	window.setTimeout(function() {
+	window.setTimeout(function () {
 		// Remove our change event handler
-		self.wiki.removeEventListener("change",refreshHandler);
+		self.wiki.removeEventListener("change", refreshHandler);
 		// Force layout and animate the notification away
 		$tw.utils.forceLayout(notification);
-		$tw.utils.setStyle(notification,[
+		$tw.utils.setStyle(notification, [
 			{opacity: "0.0"},
-			{transform: "translateX(" + (notification.offsetWidth) + "px)"}
+			{transform: "translateX(" + notification.offsetWidth + "px)"}
 		]);
 		// Remove the modal message from the DOM once the transition ends
-		setTimeout(function() {
-			if(notification.parentNode) {
+		setTimeout(function () {
+			if (notification.parentNode) {
 				document.body.removeChild(notification);
 			}
-		},duration);
-	},$tw.config.preferences.notificationDuration);
+		}, duration);
+	}, $tw.config.preferences.notificationDuration);
 };
 
 exports.Notifier = Notifier;

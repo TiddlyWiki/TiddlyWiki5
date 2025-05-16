@@ -16,16 +16,18 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
+var Command = function (params, commander, callback) {
 	var self = this;
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
-	if(!$tw.boot.wikiTiddlersPath) {
-		$tw.utils.warning("Warning: Wiki folder '" + $tw.boot.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
+Command.prototype.execute = function () {
+	if (!$tw.boot.wikiTiddlersPath) {
+		$tw.utils.warning(
+			"Warning: Wiki folder '" + $tw.boot.wikiPath + "' does not exist or is missing a tiddlywiki.info file"
+		);
 	}
 	// Set up server
 	this.server = new Server({
@@ -43,7 +45,7 @@ Command.prototype.execute = function() {
 		}
 	});
 	var nodeServer = this.server.listen();
-	$tw.hooks.invokeHook("th-server-command-post-start",this.server,nodeServer,"tiddlywiki");
+	$tw.hooks.invokeHook("th-server-command-post-start", this.server, nodeServer, "tiddlywiki");
 	return null;
 };
 

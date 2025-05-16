@@ -13,13 +13,13 @@ exports.baseClass = "action-log";
 
 exports.name = "log";
 
-exports.constructor = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
-}
+exports.constructor = function (parseTreeNode, options) {
+	this.initialise(parseTreeNode, options);
+};
 
 exports.prototype = {};
 
-exports.prototype.render = function(event) {
-	Object.getPrototypeOf(Object.getPrototypeOf(this)).render.call(this,event);
+exports.prototype.render = function (event) {
+	Object.getPrototypeOf(Object.getPrototypeOf(this)).render.call(this, event);
 	Object.getPrototypeOf(Object.getPrototypeOf(this)).log.call(this);
-}
+};

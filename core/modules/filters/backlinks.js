@@ -12,9 +12,9 @@ Filter operator for returning all the backlinks from a tiddler
 /*
 Export our filter function
 */
-exports.backlinks = function(source,operator,options) {
+exports.backlinks = function (source, operator, options) {
 	var results = new $tw.utils.LinkedList();
-	source(function(tiddler,title) {
+	source(function (tiddler, title) {
 		results.pushTop(options.wiki.getTiddlerBacklinks(title));
 	});
 	return results.makeTiddlerIterator(options.wiki);

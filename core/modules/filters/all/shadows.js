@@ -12,6 +12,6 @@ Filter function for [all[shadows]]
 /*
 Export our filter function
 */
-exports.shadows = function(source,prefix,options) {
+exports.shadows = function (source, prefix, options) {
 	return options.wiki.allShadowTitles();
 };

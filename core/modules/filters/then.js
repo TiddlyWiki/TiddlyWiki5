@@ -12,9 +12,9 @@ Filter operator for replacing any titles with a constant
 /*
 Export our filter function
 */
-exports.then = function(source,operator,options) {
+exports.then = function (source, operator, options) {
 	var results = [];
-	source(function(tiddler,title) {
+	source(function (tiddler, title) {
 		results.push(operator.operand);
 	});
 	return results;

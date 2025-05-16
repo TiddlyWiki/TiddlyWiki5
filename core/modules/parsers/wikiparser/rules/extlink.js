@@ -20,32 +20,39 @@ External links can be suppressed by preceding them with `~`.
 exports.name = "extlink";
 exports.types = {inline: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /~?(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/mg;
+	this.matchRegExp = /~?(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/gm;
 };
 
-exports.parse = function() {
+exports.parse = function () {
 	// Move past the match
-    var start = this.parser.pos;
+	var start = this.parser.pos;
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Create the link unless it is suppressed
-	if(this.match[0].substr(0,1) === "~") {
+	if (this.match[0].substr(0, 1) === "~") {
 		return [{type: "text", text: this.match[0].substr(1)}];
 	} else {
-		return [{
-			type: "element",
-			tag: "a",
-			attributes: {
-				href: {type: "string", value: this.match[0]},
-				"class": {type: "string", value: "tc-tiddlylink-external"},
-				target: {type: "string", value: "_blank"},
-				rel: {type: "string", value: "noopener noreferrer"}
-			},
-			children: [{
-				type: "text", text: this.match[0], start: start, end: this.parser.pos
-			}]
-		}];
+		return [
+			{
+				type: "element",
+				tag: "a",
+				attributes: {
+					href: {type: "string", value: this.match[0]},
+					class: {type: "string", value: "tc-tiddlylink-external"},
+					target: {type: "string", value: "_blank"},
+					rel: {type: "string", value: "noopener noreferrer"}
+				},
+				children: [
+					{
+						type: "text",
+						text: this.match[0],
+						start: start,
+						end: this.parser.pos
+					}
+				]
+			}
+		];
 	}
 };

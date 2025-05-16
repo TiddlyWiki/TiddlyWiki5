@@ -12,12 +12,12 @@ Filter operator returning its operand evaluated as a filter
 /*
 Export our filter function
 */
-exports.subfilter = function(source,operator,options) {
-	var list = options.wiki.filterTiddlers(operator.operand,options.widget,source);
-	if(operator.prefix === "!") {
+exports.subfilter = function (source, operator, options) {
+	var list = options.wiki.filterTiddlers(operator.operand, options.widget, source);
+	if (operator.prefix === "!") {
 		var results = [];
-		source(function(tiddler,title) {
-			if(list.indexOf(title) === -1) {
+		source(function (tiddler, title) {
+			if (list.indexOf(title) === -1) {
 				results.push(title);
 			}
 		});

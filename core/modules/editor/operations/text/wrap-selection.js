@@ -9,7 +9,7 @@ Text editor operation to wrap the selection with the specified prefix and suffix
 
 "use strict";
 
-exports["wrap-selection"] = function(event,operation) {
+exports["wrap-selection"] = function (event, operation) {
 	var o = operation,
 		prefix = event.paramObject.prefix,
 		suffix = event.paramObject.suffix,
@@ -22,32 +22,30 @@ exports["wrap-selection"] = function(event,operation) {
 	//	start .. there are trailing spaces at the start
 	//	end .. there are trailing spaces at the end
 	//	no .. no trailing spaces are taken into account
-	var trailingSpaceAt = function(sel) {
-		var _start,
-			_end,
-			result;
+	var trailingSpaceAt = function (sel) {
+		var _start, _end, result;
 		// trimSelection is a user parameter, which this evaluations takes into account
-		switch(trimSelection) {
+		switch (trimSelection) {
 			case "end":
-				result = (sel.trimEnd().length !== selLength) ? "end" : "no";
+				result = sel.trimEnd().length !== selLength ? "end" : "no";
 				break;
 			case "yes":
 				_start = sel.trimStart().length !== selLength;
 				_end = sel.trimEnd().length !== selLength;
-				result = (_start && _end) ? "yes" : (_start) ? "start" : (_end) ? "end" : "no";
+				result = _start && _end ? "yes" : _start ? "start" : _end ? "end" : "no";
 				break;
 			case "start":
-				result = (sel.trimStart().length !== selLength) ? "start" : "no";
+				result = sel.trimStart().length !== selLength ? "start" : "no";
 				break;
 			default:
 				result = "no";
 				break;
 		}
 		return result;
-	}
+	};
 
 	function togglePrefixSuffix() {
-		if(o.text.substring(o.selStart - prefix.length, o.selStart + suffix.length) === prefix + suffix) {
+		if (o.text.substring(o.selStart - prefix.length, o.selStart + suffix.length) === prefix + suffix) {
 			// Remove the prefix and suffix
 			o.cutStart = o.selStart - prefix.length;
 			o.cutEnd = o.selEnd + suffix.length;
@@ -72,14 +70,17 @@ exports["wrap-selection"] = function(event,operation) {
 
 		o.cutStart = o.selStart - _lenPrefix;
 		o.cutEnd = o.selEnd + _lenSuffix;
-		o.replacement = (_lenPrefix || _lenSuffix) ? o.selection : o.selection.substring(prefix.length, o.selection.length - suffix.length);
+		o.replacement =
+			_lenPrefix || _lenSuffix
+				? o.selection
+				: o.selection.substring(prefix.length, o.selection.length - suffix.length);
 		o.newSelStart = o.cutStart;
 		o.newSelEnd = o.cutStart + o.replacement.length;
 	}
 
 	function addPrefixSuffix() {
 		// remove trailing space if requested
-		switch(trailingSpaceAt(o.selection)) {
+		switch (trailingSpaceAt(o.selection)) {
 			case "no":
 				// has no trailing spaces
 				o.cutStart = o.selStart;
@@ -90,7 +91,7 @@ exports["wrap-selection"] = function(event,operation) {
 				break;
 			case "yes":
 				// handle both ends
-				o.cutStart = o.selEnd - (o.selection.trimStart().length);
+				o.cutStart = o.selEnd - o.selection.trimStart().length;
 				o.cutEnd = o.selection.trimEnd().length + o.selStart;
 				o.replacement = prefix + o.selection.trim() + suffix;
 				o.newSelStart = o.cutStart;
@@ -98,7 +99,7 @@ exports["wrap-selection"] = function(event,operation) {
 				break;
 			case "start":
 				// handle leading
-				o.cutStart = o.selEnd - (o.selection.trimStart().length);
+				o.cutStart = o.selEnd - o.selection.trimStart().length;
 				o.cutEnd = o.selEnd;
 				o.replacement = prefix + o.selection.trimStart() + suffix;
 				o.newSelStart = o.cutStart;
@@ -115,17 +116,21 @@ exports["wrap-selection"] = function(event,operation) {
 		}
 	}
 
-	if(o.selStart === o.selEnd) {
+	if (o.selStart === o.selEnd) {
 		// No selection; Create prefix and suffix. Set cursor in between them: ""|""
 		togglePrefixSuffix();
-	} else if(o.text.substring(o.selStart, o.selStart + prefix.length) === prefix &&
-				o.text.substring(o.selEnd - suffix.length,o.selEnd) === suffix) {
+	} else if (
+		o.text.substring(o.selStart, o.selStart + prefix.length) === prefix &&
+		o.text.substring(o.selEnd - suffix.length, o.selEnd) === suffix
+	) {
 		// Prefix and suffix are already present, so remove them
 		removePrefixSuffix();
-	} else if(o.text.substring(o.selStart - prefix.length, o.selStart) === prefix &&
-				o.text.substring(o.selEnd, o.selEnd + suffix.length) === suffix) {
+	} else if (
+		o.text.substring(o.selStart - prefix.length, o.selStart) === prefix &&
+		o.text.substring(o.selEnd, o.selEnd + suffix.length) === suffix
+	) {
 		// Prefix and suffix are present BUT not selected -> remove them
-		removePrefixSuffix({"lenPrefix": prefix.length, "lenSuffix": suffix.length});
+		removePrefixSuffix({lenPrefix: prefix.length, lenSuffix: suffix.length});
 	} else {
 		// Add the prefix and suffix
 		addPrefixSuffix();

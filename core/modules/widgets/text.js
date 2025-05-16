@@ -11,8 +11,8 @@ Text node widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var TextNodeWidget = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
+var TextNodeWidget = function (parseTreeNode, options) {
+	this.initialise(parseTreeNode, options);
 };
 
 /*
@@ -23,30 +23,30 @@ TextNodeWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-TextNodeWidget.prototype.render = function(parent,nextSibling) {
+TextNodeWidget.prototype.render = function (parent, nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var text = this.getAttribute("text",this.parseTreeNode.text || "");
-	text = text.replace(/\r/mg,"");
+	var text = this.getAttribute("text", this.parseTreeNode.text || "");
+	text = text.replace(/\r/gm, "");
 	var textNode = this.document.createTextNode(text);
-	parent.insertBefore(textNode,nextSibling);
+	parent.insertBefore(textNode, nextSibling);
 	this.domNodes.push(textNode);
 };
 
 /*
 Compute the internal state of the widget
 */
-TextNodeWidget.prototype.execute = function() {
+TextNodeWidget.prototype.execute = function () {
 	// Nothing to do for a text node
 };
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
-TextNodeWidget.prototype.refresh = function(changedTiddlers) {
+TextNodeWidget.prototype.refresh = function (changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.text) {
+	if (changedAttributes.text) {
 		this.refreshSelf();
 		return true;
 	} else {

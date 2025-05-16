@@ -12,6 +12,6 @@ Filter function for [all[tags]]
 /*
 Export our filter function
 */
-exports.tags = function(source,prefix,options) {
+exports.tags = function (source, prefix, options) {
 	return Object.keys(options.wiki.getTagMap());
 };

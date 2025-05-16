@@ -12,14 +12,14 @@ Filter operator for finding values in array fields
 /*
 Export our filter function
 */
-exports.contains = function(source,operator,options) {
+exports.contains = function (source, operator, options) {
 	var results = [],
 		fieldname = operator.suffix || "list";
-	if(operator.prefix === "!") {
-		source(function(tiddler,title) {
-			if(tiddler) {
+	if (operator.prefix === "!") {
+		source(function (tiddler, title) {
+			if (tiddler) {
 				var list = tiddler.getFieldList(fieldname);
-				if(list.indexOf(operator.operand) === -1) {
+				if (list.indexOf(operator.operand) === -1) {
 					results.push(title);
 				}
 			} else {
@@ -27,10 +27,10 @@ exports.contains = function(source,operator,options) {
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
-			if(tiddler) {
+		source(function (tiddler, title) {
+			if (tiddler) {
 				var list = tiddler.getFieldList(fieldname);
-				if(list.indexOf(operator.operand) !== -1) {
+				if (list.indexOf(operator.operand) !== -1) {
 					results.push(title);
 				}
 			}

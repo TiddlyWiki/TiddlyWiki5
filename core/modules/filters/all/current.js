@@ -12,9 +12,9 @@ Filter function for [all[current]]
 /*
 Export our filter function
 */
-exports.current = function(source,prefix,options) {
+exports.current = function (source, prefix, options) {
 	var currTiddlerTitle = options.widget && options.widget.getVariable("currentTiddler");
-	if(currTiddlerTitle) {
+	if (currTiddlerTitle) {
 		return [currTiddlerTitle];
 	} else {
 		return [];

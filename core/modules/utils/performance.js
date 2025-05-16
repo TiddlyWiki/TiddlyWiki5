@@ -16,8 +16,8 @@ function Performance(enabled) {
 	this.showGreeting();
 }
 
-Performance.prototype.showGreeting = function() {
-	if($tw.browser) {
+Performance.prototype.showGreeting = function () {
+	if ($tw.browser) {
 		this.logger.log("Execute $tw.perf.log(); to see filter execution timings");
 	}
 };
@@ -25,12 +25,12 @@ Performance.prototype.showGreeting = function() {
 /*
 Wrap performance reporting around a top level function
 */
-Performance.prototype.report = function(name,fn) {
+Performance.prototype.report = function (name, fn) {
 	var self = this;
-	if(this.enabled) {
-		return function() {
+	if (this.enabled) {
+		return function () {
 			var startTime = $tw.utils.timer(),
-				result = fn.apply(this,arguments);
+				result = fn.apply(this, arguments);
 			self.logger.log(name + ": " + $tw.utils.timer(startTime).toFixed(2) + "ms");
 			return result;
 		};
@@ -39,25 +39,31 @@ Performance.prototype.report = function(name,fn) {
 	}
 };
 
-Performance.prototype.log = function() {
+Performance.prototype.log = function () {
 	var self = this,
 		totalTime = 0,
-		orderedMeasures = Object.keys(this.measures).sort(function(a,b) {
-			if(self.measures[a].time > self.measures[b].time) {
+		orderedMeasures = Object.keys(this.measures).sort(function (a, b) {
+			if (self.measures[a].time > self.measures[b].time) {
 				return -1;
 			} else if (self.measures[a].time < self.measures[b].time) {
-				return + 1;
+				return +1;
 			} else {
 				return 0;
 			}
 		});
-	$tw.utils.each(orderedMeasures,function(name) {
+	$tw.utils.each(orderedMeasures, function (name) {
 		totalTime += self.measures[name].time;
 	});
-	var results = []
-	$tw.utils.each(orderedMeasures,function(name) {
+	var results = [];
+	$tw.utils.each(orderedMeasures, function (name) {
 		var measure = self.measures[name];
-		results.push({name: name,invocations: measure.invocations, avgTime: measure.time / measure.invocations, totalTime: measure.time, percentTime: (measure.time / totalTime) * 100})
+		results.push({
+			name: name,
+			invocations: measure.invocations,
+			avgTime: measure.time / measure.invocations,
+			totalTime: measure.time,
+			percentTime: (measure.time / totalTime) * 100
+		});
 	});
 	self.logger.table(results);
 };
@@ -65,13 +71,13 @@ Performance.prototype.log = function() {
 /*
 Wrap performance measurements around a subfunction
 */
-Performance.prototype.measure = function(name,fn) {
+Performance.prototype.measure = function (name, fn) {
 	var self = this;
-	if(this.enabled) {
-		return function() {
+	if (this.enabled) {
+		return function () {
 			var startTime = $tw.utils.timer(),
-				result = fn.apply(this,arguments);
-			if(!(name in self.measures)) {
+				result = fn.apply(this, arguments);
+			if (!(name in self.measures)) {
 				self.measures[name] = {time: 0, invocations: 0};
 			}
 			self.measures[name].time += $tw.utils.timer(startTime);

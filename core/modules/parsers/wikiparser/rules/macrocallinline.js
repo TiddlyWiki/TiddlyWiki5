@@ -16,16 +16,16 @@ Wiki rule for macro calls
 exports.name = "macrocallinline";
 exports.types = {inline: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 };
 
-exports.findNextMatch = function(startPos) {
+exports.findNextMatch = function (startPos) {
 	var nextStart = startPos;
 	// Try parsing at all possible macrocall openers until we match
-	while((nextStart = this.parser.source.indexOf("<<",nextStart)) >= 0) {
-		this.nextCall = $tw.utils.parseMacroInvocationAsTransclusion(this.parser.source,nextStart);
-		if(this.nextCall) {
+	while ((nextStart = this.parser.source.indexOf("<<", nextStart)) >= 0) {
+		this.nextCall = $tw.utils.parseMacroInvocationAsTransclusion(this.parser.source, nextStart);
+		if (this.nextCall) {
 			return nextStart;
 		}
 		nextStart += 2;
@@ -36,7 +36,7 @@ exports.findNextMatch = function(startPos) {
 /*
 Parse the most recent match
 */
-exports.parse = function() {
+exports.parse = function () {
 	var call = this.nextCall;
 	this.nextCall = null;
 	this.parser.pos = call.end;

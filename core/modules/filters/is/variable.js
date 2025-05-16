@@ -12,17 +12,17 @@ Filter function for [is[variable]]
 /*
 Export our filter function
 */
-exports.variable = function(source,prefix,options) {
+exports.variable = function (source, prefix, options) {
 	var results = [];
-	if(prefix === "!") {
-		source(function(tiddler,title) {
-			if(options.widget.getVariable(title) === undefined) {
+	if (prefix === "!") {
+		source(function (tiddler, title) {
+			if (options.widget.getVariable(title) === undefined) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
-			if(options.widget.getVariable(title) !== undefined) {
+		source(function (tiddler, title) {
+			if (options.widget.getVariable(title) !== undefined) {
 				results.push(title);
 			}
 		});

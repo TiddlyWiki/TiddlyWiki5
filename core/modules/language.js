@@ -23,16 +23,16 @@ Return a wikified translateable string. The title is automatically prefixed with
 Options include:
 variables: optional hashmap of variables to supply to the language wikification
 */
-Language.prototype.getString = function(title,options) {
+Language.prototype.getString = function (title, options) {
 	options = options || {};
 	title = "$:/language/" + title;
-	return this.wiki.renderTiddler("text/plain",title,{variables: options.variables});
+	return this.wiki.renderTiddler("text/plain", title, {variables: options.variables});
 };
 
 /*
 Return a raw, unwikified translateable string. The title is automatically prefixed with "$:/language/"
 */
-Language.prototype.getRawString = function(title) {
+Language.prototype.getRawString = function (title) {
 	title = "$:/language/" + title;
 	return this.wiki.getTiddlerText(title);
 };

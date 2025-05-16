@@ -17,13 +17,13 @@ Wiki text rule for block-level transclusion. For example:
 exports.name = "transcludeblock";
 exports.types = {block: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\{\{([^\{\}\|]*)(?:\|\|([^\|\{\}]+))?(?:\|([^\{\}]+))?\}\}(?:\r?\n|$)/mg;
+	this.matchRegExp = /\{\{([^\{\}\|]*)(?:\|\|([^\|\{\}]+))?(?:\|([^\{\}]+))?\}\}(?:\r?\n|$)/gm;
 };
 
-exports.parse = function() {
+exports.parse = function () {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Get the match details
@@ -32,21 +32,21 @@ exports.parse = function() {
 		params = this.match[3] ? this.match[3].split("|") : [];
 	// Prepare the transclude widget
 	var transcludeNode = {
-			type: "transclude",
-			attributes: {},
-			isBlock: true
-		};
-	$tw.utils.each(params,function(paramValue,index) {
+		type: "transclude",
+		attributes: {},
+		isBlock: true
+	};
+	$tw.utils.each(params, function (paramValue, index) {
 		var name = "" + index;
 		transcludeNode.attributes[name] = {
 			name: name,
 			type: "string",
 			value: paramValue
-		}
+		};
 	});
 	// Prepare the tiddler widget
 	var tr, targetTitle, targetField, targetIndex, tiddlerNode;
-	if(textRef) {
+	if (textRef) {
 		tr = $tw.utils.parseTextReference(textRef);
 		targetTitle = tr.title;
 		targetField = tr.field;
@@ -60,20 +60,20 @@ exports.parse = function() {
 			children: [transcludeNode]
 		};
 	}
-	if(template) {
+	if (template) {
 		transcludeNode.attributes["$tiddler"] = {name: "$tiddler", type: "string", value: template};
-		if(textRef) {
+		if (textRef) {
 			return [tiddlerNode];
 		} else {
 			return [transcludeNode];
 		}
 	} else {
-		if(textRef) {
+		if (textRef) {
 			transcludeNode.attributes["$tiddler"] = {name: "$tiddler", type: "string", value: targetTitle};
-			if(targetField) {
+			if (targetField) {
 				transcludeNode.attributes["$field"] = {name: "$field", type: "string", value: targetField};
 			}
-			if(targetIndex) {
+			if (targetIndex) {
 				transcludeNode.attributes["$index"] = {name: "$index", type: "string", value: targetIndex};
 			}
 			return [tiddlerNode];

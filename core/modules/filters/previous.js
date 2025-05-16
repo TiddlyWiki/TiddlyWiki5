@@ -12,14 +12,14 @@ Filter operator returning the tiddler whose title occurs immediately prior in th
 /*
 Export our filter function
 */
-exports.previous = function(source,operator,options) {
+exports.previous = function (source, operator, options) {
 	var results = [],
 		list = options.wiki.getTiddlerList(operator.operand);
-	source(function(tiddler,title) {
+	source(function (tiddler, title) {
 		var match = list.indexOf(title);
 		// increment match and then test if result is in range
 		match--;
-		if(match >= 0) {
+		if (match >= 0) {
 			results.push(list[match]);
 		}
 	});

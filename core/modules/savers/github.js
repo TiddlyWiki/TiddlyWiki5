@@ -12,34 +12,34 @@ Saves wiki by pushing a commit to the GitHub v3 REST API
 /*
 Select the appropriate saver module and set it up
 */
-var GitHubSaver = function(wiki) {
+var GitHubSaver = function (wiki) {
 	this.wiki = wiki;
 };
 
-GitHubSaver.prototype.save = function(text,method,callback) {
+GitHubSaver.prototype.save = function (text, method, callback) {
 	var self = this,
 		username = this.wiki.getTiddlerText("$:/GitHub/Username"),
 		password = $tw.utils.getPassword("github"),
 		repo = this.wiki.getTiddlerText("$:/GitHub/Repo"),
-		path = this.wiki.getTiddlerText("$:/GitHub/Path",""),
+		path = this.wiki.getTiddlerText("$:/GitHub/Path", ""),
 		filename = this.wiki.getTiddlerText("$:/GitHub/Filename"),
 		branch = this.wiki.getTiddlerText("$:/GitHub/Branch") || "main",
 		endpoint = this.wiki.getTiddlerText("$:/GitHub/ServerURL") || "https://api.github.com",
 		headers = {
-			"Accept": "application/vnd.github.v3+json",
+			Accept: "application/vnd.github.v3+json",
 			"Content-Type": "application/json;charset=UTF-8",
-			"Authorization": "Basic " + $tw.utils.base64Encode(username + ":" + password),
+			Authorization: "Basic " + $tw.utils.base64Encode(username + ":" + password),
 			"If-None-Match": ""
 		};
 	// Bail if we don't have everything we need
-	if(!username || !password || !repo || !filename) {
+	if (!username || !password || !repo || !filename) {
 		return false;
 	}
 	// Make sure the path start and ends with a slash
-	if(path.substring(0,1) !== "/") {
+	if (path.substring(0, 1) !== "/") {
 		path = "/" + path;
 	}
-	if(path.substring(path.length - 1) !== "/") {
+	if (path.substring(path.length - 1) !== "/") {
 		path = path + "/";
 	}
 	// Compose the base URI
@@ -52,15 +52,16 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		data: {
 			ref: branch
 		},
-		callback: function(err,getResponseDataJson,xhr) {
-			var getResponseData,sha = "";
-			if(err && xhr.status !== 404) {
+		callback: function (err, getResponseDataJson, xhr) {
+			var getResponseData,
+				sha = "";
+			if (err && xhr.status !== 404) {
 				return callback(err);
 			}
-			if(xhr.status !== 404) {
+			if (xhr.status !== 404) {
 				getResponseData = $tw.utils.parseJSONSafe(getResponseDataJson);
-				$tw.utils.each(getResponseData,function(details) {
-					if(details.name === filename) {
+				$tw.utils.each(getResponseData, function (details) {
+					if (details.name === filename) {
 						sha = details.sha;
 					}
 				});
@@ -77,8 +78,8 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 				type: "PUT",
 				headers: headers,
 				data: JSON.stringify(data),
-				callback: function(err,putResponseDataJson,xhr) {
-					if(err) {
+				callback: function (err, putResponseDataJson, xhr) {
+					if (err) {
 						return callback(err);
 					}
 					var putResponseData = $tw.utils.parseJSONSafe(putResponseDataJson);
@@ -102,13 +103,13 @@ GitHubSaver.prototype.info = {
 /*
 Static method that returns true if this saver is capable of working
 */
-exports.canSave = function(wiki) {
+exports.canSave = function (wiki) {
 	return true;
 };
 
 /*
 Create an instance of this saver
 */
-exports.create = function(wiki) {
+exports.create = function (wiki) {
 	return new GitHubSaver(wiki);
 };

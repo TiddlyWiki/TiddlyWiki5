@@ -12,13 +12,13 @@ Filter operator returning the tiddler from the current list that is after the ti
 /*
 Export our filter function
 */
-exports.after = function(source,operator,options) {
+exports.after = function (source, operator, options) {
 	var results = [];
-	source(function(tiddler,title) {
+	source(function (tiddler, title) {
 		results.push(title);
 	});
 	var index = results.indexOf(operator.operand);
-	if(index === -1 || index > (results.length - 2)) {
+	if (index === -1 || index > results.length - 2) {
 		return [];
 	} else {
 		return [results[index + 1]];

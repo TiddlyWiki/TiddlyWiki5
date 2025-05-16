@@ -20,26 +20,26 @@ exports.types = {pragma: true};
 /*
 Instantiate parse rule
 */
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\\parameters\s*\(([^)]*)\)(\s*\r?\n)?/mg;
+	this.matchRegExp = /\\parameters\s*\(([^)]*)\)(\s*\r?\n)?/gm;
 };
 
 /*
 Parse the most recent match
 */
-exports.parse = function() {
+exports.parse = function () {
 	// Move past the macro name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the parameters
 	var params = $tw.utils.parseParameterDefinition(this.match[1]);
 	var attributes = Object.create(null),
 		orderedAttributes = [];
-	$tw.utils.each(params,function(param) {
+	$tw.utils.each(params, function (param) {
 		var name = param.name;
 		// Parameter names starting with dollar must be escaped to double dollars for the parameters widget
-		if(name.charAt(0) === "$") {
+		if (name.charAt(0) === "$") {
 			name = "$" + name;
 		}
 		var attribute = {name: name, type: "string", value: param["default"] || ""};
@@ -47,9 +47,11 @@ exports.parse = function() {
 		orderedAttributes.push(attribute);
 	});
 	// Save the macro definition
-	return [{
-		type: "parameters",
-		attributes: attributes,
-		orderedAttributes: orderedAttributes
-	}];
+	return [
+		{
+			type: "parameters",
+			attributes: attributes,
+			orderedAttributes: orderedAttributes
+		}
+	];
 };

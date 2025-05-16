@@ -32,36 +32,37 @@ This is a paragraph
 exports.name = "styleblock";
 exports.types = {block: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?(?:\.([^\r\n\s]+))?\r?\n/mg;
+	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?(?:\.([^\r\n\s]+))?\r?\n/gm;
 };
 
-exports.parse = function() {
+exports.parse = function () {
 	var reEndString = "^@@(?:\\r?\\n)?";
-	var classes = [], styles = [];
+	var classes = [],
+		styles = [];
 	do {
 		// Get the class and style
-		if(this.match[1]) {
+		if (this.match[1]) {
 			styles.push(this.match[1]);
 		}
-		if(this.match[2]) {
+		if (this.match[2]) {
 			classes.push(this.match[2].split(".").join(" "));
 		}
 		// Move past the match
 		this.parser.pos = this.matchRegExp.lastIndex;
 		// Look for another line of classes and styles
 		this.match = this.matchRegExp.exec(this.parser.source);
-	} while(this.match && this.match.index === this.parser.pos);
+	} while (this.match && this.match.index === this.parser.pos);
 	// Parse the body
 	var tree = this.parser.parseBlocks(reEndString);
-	for(var t=0; t<tree.length; t++) {
-		if(classes.length > 0) {
-			$tw.utils.addClassToParseTreeNode(tree[t],classes.join(" "));
+	for (var t = 0; t < tree.length; t++) {
+		if (classes.length > 0) {
+			$tw.utils.addClassToParseTreeNode(tree[t], classes.join(" "));
 		}
-		if(styles.length > 0) {
-			$tw.utils.addAttributeToParseTreeNode(tree[t],"style",styles.join(""));
+		if (styles.length > 0) {
+			$tw.utils.addAttributeToParseTreeNode(tree[t], "style", styles.join(""));
 		}
 	}
 	return tree;

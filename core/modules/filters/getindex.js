@@ -12,13 +12,15 @@ returns the value at a given index of datatiddlers
 /*
 Export our filter function
 */
-exports.getindex = function(source,operator,options) {
-	var data,title,results = [];
-	if(operator.operand){
-		source(function(tiddler,title) {
+exports.getindex = function (source, operator, options) {
+	var data,
+		title,
+		results = [];
+	if (operator.operand) {
+		source(function (tiddler, title) {
 			title = tiddler ? tiddler.fields.title : title;
-			data = options.wiki.extractTiddlerDataItem(tiddler,operator.operand);
-			if(data) {
+			data = options.wiki.extractTiddlerDataItem(tiddler, operator.operand);
+			if (data) {
 				results.push(data);
 			}
 		});

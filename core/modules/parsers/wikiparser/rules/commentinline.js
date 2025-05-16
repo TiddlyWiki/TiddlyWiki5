@@ -18,26 +18,26 @@ Note that the syntax for comments is simplified to an opening "<!--" sequence an
 exports.name = "commentinline";
 exports.types = {inline: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
-	this.matchRegExp = /<!--/mg;
-	this.endMatchRegExp = /-->/mg;
+	this.matchRegExp = /<!--/gm;
+	this.endMatchRegExp = /-->/gm;
 };
 
-exports.findNextMatch = function(startPos) {
+exports.findNextMatch = function (startPos) {
 	this.matchRegExp.lastIndex = startPos;
 	this.match = this.matchRegExp.exec(this.parser.source);
-	if(this.match) {
+	if (this.match) {
 		this.endMatchRegExp.lastIndex = this.match.index + this.match[0].length;
 		this.endMatch = this.endMatchRegExp.exec(this.parser.source);
-		if(this.endMatch) {
+		if (this.endMatch) {
 			return this.match.index;
 		}
 	}
 	return undefined;
 };
 
-exports.parse = function() {
+exports.parse = function () {
 	// Move past the match
 	this.parser.pos = this.endMatchRegExp.lastIndex;
 	// Don't return any elements
