@@ -124,12 +124,8 @@
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "double",
-			"arrowParentheses":"always",
-			"bracketSameLine": false,
 			"bracketSpacing": false,
-			"quoteProperties": "asNeeded",
-			"semicolons": "always",
-			"trailingCommas": "es5"
+			"trailingCommas": "none"
 		},
 		"globals": [
 			"OffscreenCanvas",
