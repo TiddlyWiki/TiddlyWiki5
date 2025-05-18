@@ -12,9 +12,9 @@ Filter operator for replacing input values by the value of the variable with the
 /*
 Export our filter function
 */
-exports.getvariable = function(source,operator,options) {
+exports.getvariable = function (source, operator, options) {
 	var results = [];
-	source(function(tiddler,title) {
+	source(function (tiddler, title) {
 		results.push(options.widget.getVariable(title) || "");
 	});
 	return results;

@@ -7,9 +7,9 @@ Custom errors for TiddlyWiki.
 
 \*/
 function TranscludeRecursionError() {
-	Error.apply(this,arguments);
+	Error.apply(this, arguments);
 	this.signatures = Object.create(null);
-};
+}
 
 /* Maximum permitted depth of the widget tree for recursion detection */
 TranscludeRecursionError.MAX_WIDGET_TREE_DEPTH = 1000;

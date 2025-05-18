@@ -16,16 +16,16 @@ Wiki text inline rule for HTML entities. For example:
 exports.name = "entity";
 exports.types = {inline: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /(&#?[a-zA-Z0-9]{2,8};)/mg;
+	this.matchRegExp = /(&#?[a-zA-Z0-9]{2,8};)/gm;
 };
 
 /*
 Parse the most recent match
 */
-exports.parse = function() {
+exports.parse = function () {
 	// Get all the details of the match
 	var entityString = this.match[1];
 	// Move past the macro call

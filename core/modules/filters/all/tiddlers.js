@@ -12,6 +12,6 @@ Filter function for [all[tiddlers]]
 /*
 Export our filter function
 */
-exports.tiddlers = function(source,prefix,options) {
+exports.tiddlers = function (source, prefix, options) {
 	return options.wiki.allTitles();
 };

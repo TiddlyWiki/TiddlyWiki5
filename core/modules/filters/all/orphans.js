@@ -12,6 +12,6 @@ Filter function for [all[orphans]]
 /*
 Export our filter function
 */
-exports.orphans = function(source,prefix,options) {
+exports.orphans = function (source, prefix, options) {
 	return options.wiki.getOrphanTitles();
 };

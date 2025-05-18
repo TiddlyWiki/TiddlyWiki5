@@ -9,21 +9,21 @@ module-type: formatfilteroperator
 /*
 Export our filter function
 */
-exports.json = function(source,operand,options) {
+exports.json = function (source, operand, options) {
 	var results = [],
 		spaces = null;
-	if(operand) {
-		spaces = /^\d+$/.test(operand) ? parseInt(operand,10) : operand;
+	if (operand) {
+		spaces = /^\d+$/.test(operand) ? parseInt(operand, 10) : operand;
 	}
-	source(function(tiddler,title) {
+	source(function (tiddler, title) {
 		var data = $tw.utils.parseJSONSafe(title);
 		try {
 			data = JSON.parse(title);
-		} catch(e) {
+		} catch (e) {
 			data = undefined;
 		}
-		if(data !== undefined) {
-			results.push(JSON.stringify(data,null,spaces));
+		if (data !== undefined) {
+			results.push(JSON.stringify(data, null, spaces));
 		}
 	});
 	return results;

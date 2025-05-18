@@ -1,4 +1,3 @@
-
 .startup-warning-wrapper {
 	font-family: sans-serif;
 	line-height: 1.4;
@@ -7,7 +6,8 @@
 	padding: 0 1em;
 	border: 6px solid transparent;
 	border-radius: 8px;
-	background: linear-gradient(white, white) padding-box, repeating-linear-gradient(-45deg, red 0, red 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+	background: linear-gradient(white, white) padding-box,
+		repeating-linear-gradient(-45deg, red 0, red 25%, transparent 0, transparent 50%) 0 / .6em .6em;
 	animation: marching-ants 20s linear infinite;
 }
 
@@ -18,13 +18,13 @@
 }
 
 #startup-warning-preview {
-    list-style-type: none;
-    padding-left: 0;
+	list-style-type: none;
+	padding-left: 0;
 }
 
 #startup-warning-preview .tiddler-title {
-    font-weight: bold;
-    font-size: 1.2em;
+	font-weight: bold;
+	font-size: 1.2em;
 }
 
 #startup-warning-preview table {
@@ -38,23 +38,23 @@
 
 #startup-warning-preview td {
 	font-family: monospace;
-    white-space: pre-wrap;
-    background: #f8f8f8;
+	white-space: pre-wrap;
+	background: #f8f8f8;
 }
 
 .startup-warning-wrapper button {
-    padding: 0.3em;
-    border-radius: 4px;
-    font-size: 1.5em;
+	padding: 0.3em;
+	border-radius: 4px;
+	font-size: 1.5em;
 }
 
 #startup-warning-cancel {
-	background: #DB2828;
+	background: #db2828;
 	color: #fff;
 }
 
 #startup-warning-cancel:hover {
-	background: #E75C60;
+	background: #e75c60;
 	color: #fff;
 }
 
@@ -64,7 +64,7 @@
 }
 
 #startup-warning-proceed {
-	background: #24BA4C;
+	background: #24ba4c;
 	color: #fff;
 }
 
@@ -74,7 +74,7 @@
 }
 
 #startup-warning-proceed:active {
-	background: #ABF5BD;
+	background: #abf5bd;
 	color: #fff;
 }
 
@@ -82,6 +82,9 @@
 .startup-warning-wrapper h2 {
 	font-weight: bold;
 }
- 
-@keyframes marching-ants { to { background-position: 100% 100% } }
 
+@keyframes marching-ants {
+	to {
+		background-position: 100% 100%;
+	}
+}

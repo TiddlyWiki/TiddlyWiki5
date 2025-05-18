@@ -12,17 +12,17 @@ Filter function for [is[system]]
 /*
 Export our filter function
 */
-exports.system = function(source,prefix,options) {
+exports.system = function (source, prefix, options) {
 	var results = [];
-	if(prefix === "!") {
-		source(function(tiddler,title) {
-			if(!options.wiki.isSystemTiddler(title)) {
+	if (prefix === "!") {
+		source(function (tiddler, title) {
+			if (!options.wiki.isSystemTiddler(title)) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
-			if(options.wiki.isSystemTiddler(title)) {
+		source(function (tiddler, title) {
+			if (options.wiki.isSystemTiddler(title)) {
 				results.push(title);
 			}
 		});

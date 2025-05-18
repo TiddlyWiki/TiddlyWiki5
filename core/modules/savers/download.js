@@ -12,36 +12,35 @@ Handles saving changes via HTML5's download APIs
 /*
 Select the appropriate saver module and set it up
 */
-var DownloadSaver = function(wiki) {
-};
+var DownloadSaver = function (wiki) {};
 
-DownloadSaver.prototype.save = function(text,method,callback,options) {
+DownloadSaver.prototype.save = function (text, method, callback, options) {
 	options = options || {};
 	// Get the current filename
 	var filename = options.variables.filename;
 	var type = options.variables.type;
-	if(!filename) {
+	if (!filename) {
 		var p = document.location.pathname.lastIndexOf("/");
-		if(p !== -1) {
+		if (p !== -1) {
 			// We decode the pathname because document.location is URL encoded by the browser
-			filename = $tw.utils.decodeURIComponentSafe(document.location.pathname.substr(p+1));
+			filename = $tw.utils.decodeURIComponentSafe(document.location.pathname.substr(p + 1));
 		}
 	}
-	if(!filename) {
+	if (!filename) {
 		filename = "tiddlywiki.html";
 	}
-	if(!type) {
+	if (!type) {
 		type = "text/html";
 	}
 	// Set up the link
 	var link = document.createElement("a");
-	if(Blob !== undefined) {
+	if (Blob !== undefined) {
 		var blob = new Blob([text], {type: type});
 		link.setAttribute("href", URL.createObjectURL(blob));
 	} else {
-		link.setAttribute("href","data:" + type + "," + encodeURIComponent(text));
+		link.setAttribute("href", "data:" + type + "," + encodeURIComponent(text));
 	}
-	link.setAttribute("download",filename);
+	link.setAttribute("download", filename);
 	document.body.appendChild(link);
 	link.click();
 	document.body.removeChild(link);
@@ -59,9 +58,9 @@ DownloadSaver.prototype.info = {
 };
 
 Object.defineProperty(DownloadSaver.prototype.info, "capabilities", {
-	get: function() {
+	get: function () {
 		var capabilities = ["save", "download"];
-		if(($tw.wiki.getTextReference("$:/config/DownloadSaver/AutoSave") || "").toLowerCase() === "yes") {
+		if (($tw.wiki.getTextReference("$:/config/DownloadSaver/AutoSave") || "").toLowerCase() === "yes") {
 			capabilities.push("autosave");
 		}
 		return capabilities;
@@ -71,13 +70,13 @@ Object.defineProperty(DownloadSaver.prototype.info, "capabilities", {
 /*
 Static method that returns true if this saver is capable of working
 */
-exports.canSave = function(wiki) {
+exports.canSave = function (wiki) {
 	return document.createElement("a").download !== undefined;
 };
 
 /*
 Create an instance of this saver
 */
-exports.create = function(wiki) {
+exports.create = function (wiki) {
 	return new DownloadSaver(wiki);
 };

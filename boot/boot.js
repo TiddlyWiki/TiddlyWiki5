@@ -177,7 +177,7 @@ document: defaults to current document
 eventListeners: array of event listeners (this option won't work until $tw.utils.addEventListeners() has been loaded)
 */
 $tw.utils.domMaker = function(tag,options) {
-	var options = options || {};
+	options = options || {};
 	var doc = options.document || document;
 	var element = doc.createElementNS(options.namespace || "http://www.w3.org/1999/xhtml",tag);
 	if(options["class"]) {
@@ -495,7 +495,7 @@ $tw.utils.resolvePath = function(sourcepath,rootpath) {
 	} else {
 		// If it isn't relative, just return the path
 		if(rootpath) {
-			var root = rootpath.split("/");
+			root = rootpath.split("/");
 			// Remove the filename part of the root
 			root.splice(root.length - 1, 1);
 			return root.join("/") + "/" + sourcepath;
@@ -741,7 +741,6 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 		form.elements[0].focus();
 	},10);
 	// Add a submit event handler
-	var self = this;
 	form.addEventListener("submit",function(event) {
 		// Collect the form data
 		var data = {},t;

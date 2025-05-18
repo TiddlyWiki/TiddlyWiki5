@@ -13,8 +13,8 @@ Equivalent to = filter run prefix.
 /*
 Export our filter prefix function
 */
-exports.all = function(operationSubFunction) {
-	return function(results,source,widget) {
-		results.push.apply(results, operationSubFunction(source,widget));
+exports.all = function (operationSubFunction) {
+	return function (results, source, widget) {
+		results.push.apply(results, operationSubFunction(source, widget));
 	};
 };

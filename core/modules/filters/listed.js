@@ -12,11 +12,11 @@ Filter operator returning all tiddlers that have the selected tiddlers in a list
 /*
 Export our filter function
 */
-exports.listed = function(source,operator,options) {
+exports.listed = function (source, operator, options) {
 	var field = operator.operand || "list",
 		results = [];
-	source(function(tiddler,title) {
-		$tw.utils.pushTop(results,options.wiki.findListingsOfTiddler(title,field));
+	source(function (tiddler, title) {
+		$tw.utils.pushTop(results, options.wiki.findListingsOfTiddler(title, field));
 	});
 	return results;
 };

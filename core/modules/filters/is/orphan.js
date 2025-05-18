@@ -12,18 +12,18 @@ Filter function for [is[orphan]]
 /*
 Export our filter function
 */
-exports.orphan = function(source,prefix,options) {
+exports.orphan = function (source, prefix, options) {
 	var results = [],
 		orphanTitles = options.wiki.getOrphanTitles();
-	if(prefix === "!") {
-		source(function(tiddler,title) {
-			if(orphanTitles.indexOf(title) === -1) {
+	if (prefix === "!") {
+		source(function (tiddler, title) {
+			if (orphanTitles.indexOf(title) === -1) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
-			if(orphanTitles.indexOf(title) !== -1) {
+		source(function (tiddler, title) {
+			if (orphanTitles.indexOf(title) !== -1) {
 				results.push(title);
 			}
 		});

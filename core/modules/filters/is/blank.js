@@ -12,17 +12,17 @@ Filter function for [is[blank]]
 /*
 Export our filter function
 */
-exports.blank = function(source,prefix,options) {
+exports.blank = function (source, prefix, options) {
 	var results = [];
-	if(prefix === "!") {
-		source(function(tiddler,title) {
-			if(title) {
+	if (prefix === "!") {
+		source(function (tiddler, title) {
+			if (title) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
-			if(!title) {
+		source(function (tiddler, title) {
+			if (!title) {
 				results.push(title);
 			}
 		});

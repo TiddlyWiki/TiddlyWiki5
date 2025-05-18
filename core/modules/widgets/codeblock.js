@@ -11,8 +11,8 @@ Code block node widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var CodeBlockWidget = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
+var CodeBlockWidget = function (parseTreeNode, options) {
+	this.initialise(parseTreeNode, options);
 };
 
 /*
@@ -23,7 +23,7 @@ CodeBlockWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-CodeBlockWidget.prototype.render = function(parent,nextSibling) {
+CodeBlockWidget.prototype.render = function (parent, nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -31,9 +31,9 @@ CodeBlockWidget.prototype.render = function(parent,nextSibling) {
 		domNode = this.document.createElement("pre");
 	codeNode.appendChild(this.document.createTextNode(this.getAttribute("code")));
 	domNode.appendChild(codeNode);
-	parent.insertBefore(domNode,nextSibling);
+	parent.insertBefore(domNode, nextSibling);
 	this.domNodes.push(domNode);
-	if(this.postRender) {
+	if (this.postRender) {
 		this.postRender();
 	}
 };
@@ -41,16 +41,16 @@ CodeBlockWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-CodeBlockWidget.prototype.execute = function() {
+CodeBlockWidget.prototype.execute = function () {
 	this.language = this.getAttribute("language");
 };
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
-CodeBlockWidget.prototype.refresh = function(changedTiddlers) {
+CodeBlockWidget.prototype.refresh = function (changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.code || changedAttributes.language) {
+	if (changedAttributes.code || changedAttributes.language) {
 		this.refreshSelf();
 		return true;
 	} else {

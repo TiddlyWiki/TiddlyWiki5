@@ -12,18 +12,18 @@ Filter function for [is[tag]]
 /*
 Export our filter function
 */
-exports.tag = function(source,prefix,options) {
+exports.tag = function (source, prefix, options) {
 	var results = [],
 		tagMap = options.wiki.getTagMap();
-	if(prefix === "!") {
-		source(function(tiddler,title) {
-			if(!$tw.utils.hop(tagMap,title)) {
+	if (prefix === "!") {
+		source(function (tiddler, title) {
+			if (!$tw.utils.hop(tagMap, title)) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
-			if($tw.utils.hop(tagMap,title)) {
+		source(function (tiddler, title) {
+			if ($tw.utils.hop(tagMap, title)) {
 				results.push(title);
 			}
 		});

@@ -20,7 +20,7 @@ var ENABLE_TIDDLER_TITLE = "$:/config/SaveTrailPlugin/enable",
 	ENABLE_DRAFTS_TIDDLER_TITLE = "$:/config/SaveTrailPlugin/enable-drafts",
 	SYNC_DRAFTS_FILTER_TIDDLER_TITLE = "$:/config/SaveTrailPlugin/sync-drafts-filter";
 
-exports.startup = function() {
+exports.startup = function () {
 	$tw.savetrail = $tw.savetrail || {};
 	// Create a syncer to handle autosaving
 	$tw.savetrail.syncadaptor = new SaveTrailSyncAdaptor();
@@ -32,47 +32,47 @@ exports.startup = function() {
 		disableUI: true
 	});
 	// Add hooks for trapping user actions
-	$tw.hooks.addHook("th-saving-tiddler",function(tiddler) {
-		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
+	$tw.hooks.addHook("th-saving-tiddler", function (tiddler) {
+		if ($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE, "yes")) {
 			var oldTiddler = $tw.wiki.getTiddler(tiddler.fields.title);
-			if(oldTiddler) {
-				saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+			if (oldTiddler) {
+				saveTiddlerFile(oldTiddler, {reason: "overwritten"});
 			}
-			saveTiddlerFile(tiddler,{reason: "saved"});
+			saveTiddlerFile(tiddler, {reason: "saved"});
 		}
 		return tiddler;
 	});
-	$tw.hooks.addHook("th-renaming-tiddler",function(newTiddler,oldTiddler) {
-		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
-			if(oldTiddler) {
-				saveTiddlerFile(oldTiddler,{reason: "deleted"});			
+	$tw.hooks.addHook("th-renaming-tiddler", function (newTiddler, oldTiddler) {
+		if ($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE, "yes")) {
+			if (oldTiddler) {
+				saveTiddlerFile(oldTiddler, {reason: "deleted"});
 			}
-			saveTiddlerFile(newTiddler,{reason: "renamed"});
+			saveTiddlerFile(newTiddler, {reason: "renamed"});
 		}
 		return newTiddler;
 	});
-	$tw.hooks.addHook("th-relinking-tiddler",function(newTiddler,oldTiddler) {
-		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
-			if(oldTiddler) {
-				saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+	$tw.hooks.addHook("th-relinking-tiddler", function (newTiddler, oldTiddler) {
+		if ($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE, "yes")) {
+			if (oldTiddler) {
+				saveTiddlerFile(oldTiddler, {reason: "overwritten"});
 			}
-			saveTiddlerFile(newTiddler,{reason: "relinked"});
+			saveTiddlerFile(newTiddler, {reason: "relinked"});
 		}
 		return newTiddler;
 	});
-	$tw.hooks.addHook("th-importing-tiddler",function(tiddler) {
-		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
+	$tw.hooks.addHook("th-importing-tiddler", function (tiddler) {
+		if ($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE, "yes")) {
 			var oldTiddler = $tw.wiki.getTiddler(tiddler.fields.title);
-			if(oldTiddler) {
-				saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+			if (oldTiddler) {
+				saveTiddlerFile(oldTiddler, {reason: "overwritten"});
 			}
-			saveTiddlerFile(tiddler,{reason: "imported"});
+			saveTiddlerFile(tiddler, {reason: "imported"});
 		}
 		return tiddler;
 	});
-	$tw.hooks.addHook("th-deleting-tiddler",function(tiddler) {
-		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
-			saveTiddlerFile(tiddler,{reason: "deleted"});
+	$tw.hooks.addHook("th-deleting-tiddler", function (tiddler) {
+		if ($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE, "yes")) {
+			saveTiddlerFile(tiddler, {reason: "deleted"});
 		}
 		return tiddler;
 	});
@@ -84,64 +84,64 @@ function SaveTrailSyncAdaptor(options) {
 
 SaveTrailSyncAdaptor.prototype.name = "savetrail";
 
-SaveTrailSyncAdaptor.prototype.isReady = function() {
+SaveTrailSyncAdaptor.prototype.isReady = function () {
 	// The savetrail adaptor is always ready
 	return true;
 };
 
-SaveTrailSyncAdaptor.prototype.getTiddlerInfo = function(tiddler) {
+SaveTrailSyncAdaptor.prototype.getTiddlerInfo = function (tiddler) {
 	return {};
 };
 
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
-SaveTrailSyncAdaptor.prototype.saveTiddler = function(tiddler,callback) {
-	if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
-		var isDraft = $tw.utils.hop(tiddler.fields,"draft.of");
-		if(!isDraft || $tw.wiki.checkTiddlerText(ENABLE_DRAFTS_TIDDLER_TITLE,"yes")) {
-			saveTiddlerFile(tiddler,{reason: "modified"});
+SaveTrailSyncAdaptor.prototype.saveTiddler = function (tiddler, callback) {
+	if ($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE, "yes")) {
+		var isDraft = $tw.utils.hop(tiddler.fields, "draft.of");
+		if (!isDraft || $tw.wiki.checkTiddlerText(ENABLE_DRAFTS_TIDDLER_TITLE, "yes")) {
+			saveTiddlerFile(tiddler, {reason: "modified"});
 		}
 	}
-	callback(null,null);
+	callback(null, null);
 };
 
 /*
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 */
-SaveTrailSyncAdaptor.prototype.loadTiddler = function(title,callback) {
-	callback(null,null);
+SaveTrailSyncAdaptor.prototype.loadTiddler = function (title, callback) {
+	callback(null, null);
 };
 
 /*
 Delete a tiddler and invoke the callback with (err)
 */
-SaveTrailSyncAdaptor.prototype.deleteTiddler = function(title,callback,options) {
-	callback(null,null);
+SaveTrailSyncAdaptor.prototype.deleteTiddler = function (title, callback, options) {
+	callback(null, null);
 };
 
-function saveTiddlerFile(tiddler,options) {
+function saveTiddlerFile(tiddler, options) {
 	options = options || {};
 	var reason = options.reason || "changed",
 		illegalFilenameCharacters = /<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,
-		fixedTitle = $tw.utils.transliterate(tiddler.fields.title).replace(illegalFilenameCharacters,"_"),
+		fixedTitle = $tw.utils.transliterate(tiddler.fields.title).replace(illegalFilenameCharacters, "_"),
 		formattedDate = $tw.utils.stringifyDate(new Date()),
-		filename =  fixedTitle + "." + formattedDate + "." + reason + ".json",
+		filename = fixedTitle + "." + formattedDate + "." + reason + ".json",
 		fields = new Object();
-	for(var field in tiddler.fields) {
+	for (var field in tiddler.fields) {
 		fields[field] = tiddler.getFieldString(field);
 	}
-	var text = JSON.stringify([fields],null,$tw.config.preferences.jsonSpaces),
+	var text = JSON.stringify([fields], null, $tw.config.preferences.jsonSpaces),
 		link = document.createElement("a");
-	link.setAttribute("target","_blank");
-	link.setAttribute("rel","noopener noreferrer");
-	if(Blob !== undefined) {
-		var blob = new Blob([text],{type: "text/plain"});
-		link.setAttribute("href",URL.createObjectURL(blob));
+	link.setAttribute("target", "_blank");
+	link.setAttribute("rel", "noopener noreferrer");
+	if (Blob !== undefined) {
+		var blob = new Blob([text], {type: "text/plain"});
+		link.setAttribute("href", URL.createObjectURL(blob));
 	} else {
-		link.setAttribute("href","data:text/plain," + encodeURIComponent(text));
+		link.setAttribute("href", "data:text/plain," + encodeURIComponent(text));
 	}
-	link.setAttribute("download",filename);
+	link.setAttribute("download", filename);
 	document.body.appendChild(link);
 	link.click();
 	document.body.removeChild(link);

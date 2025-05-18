@@ -12,17 +12,17 @@ Filter function for [is[missing]]
 /*
 Export our filter function
 */
-exports.missing = function(source,prefix,options) {
+exports.missing = function (source, prefix, options) {
 	var results = [];
-	if(prefix === "!") {
-		source(function(tiddler,title) {
-			if(options.wiki.tiddlerExists(title)) {
+	if (prefix === "!") {
+		source(function (tiddler, title) {
+			if (options.wiki.tiddlerExists(title)) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
-			if(!options.wiki.tiddlerExists(title)) {
+		source(function (tiddler, title) {
+			if (!options.wiki.tiddlerExists(title)) {
 				results.push(title);
 			}
 		});

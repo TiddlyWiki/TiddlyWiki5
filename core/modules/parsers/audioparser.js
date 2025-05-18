@@ -9,7 +9,7 @@ The audio parser parses an audio tiddler into an embeddable HTML element
 
 "use strict";
 
-var AudioParser = function(type,text,options) {
+var AudioParser = function (type, text, options) {
 	var element = {
 			type: "element",
 			tag: "audio",
@@ -19,9 +19,9 @@ var AudioParser = function(type,text,options) {
 			}
 		},
 		src;
-	if(options._canonical_uri) {
+	if (options._canonical_uri) {
 		element.attributes.src = {type: "string", value: options._canonical_uri};
-	} else if(text) {
+	} else if (text) {
 		element.attributes.src = {type: "string", value: "data:" + type + ";base64," + text};
 	}
 	this.tree = [element];

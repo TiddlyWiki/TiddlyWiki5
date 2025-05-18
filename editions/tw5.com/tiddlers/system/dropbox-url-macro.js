@@ -12,17 +12,13 @@ Implements the Dropbox URL converter macro.
 
 \*/
 
-
 "use strict";
 
 exports.name = "dropbox-url";
 
-exports.params = [
-	{name: "url", default: "https://www.dropbox.com/s/<gobbledegook>/mywiki.html"}
-];
+exports.params = [{name: "url", default: "https://www.dropbox.com/s/<gobbledegook>/mywiki.html"}];
 
-exports.run = function(url) {
-	url = url.replace("www.dropbox.com","dl.dropboxusercontent.com");
+exports.run = function (url) {
+	url = url.replace("www.dropbox.com", "dl.dropboxusercontent.com");
 	return "`" + url + "` <small>([[open|" + url + "]])</small>";
 };
-

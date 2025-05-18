@@ -18,18 +18,20 @@ This is an em-dash: ---
 exports.name = "dash";
 exports.types = {inline: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /-{2,3}(?!-)/mg;
+	this.matchRegExp = /-{2,3}(?!-)/gm;
 };
 
-exports.parse = function() {
+exports.parse = function () {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	var dash = this.match[0].length === 2 ? "&ndash;" : "&mdash;";
-	return [{
-		type: "entity",
-		entity: dash
-	}];
+	return [
+		{
+			type: "entity",
+			entity: dash
+		}
+	];
 };

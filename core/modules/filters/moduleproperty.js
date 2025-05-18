@@ -12,18 +12,18 @@ Filter [[module-name]moduleproperty[name]] retrieve a module property
 /*
 Export our filter function
 */
-exports.moduleproperty = function(source,operator,options) {
+exports.moduleproperty = function (source, operator, options) {
 	var results = [];
-	source(function(tiddler,title) {
+	source(function (tiddler, title) {
 		try {
 			var value = require(title)[operator.operand || ""];
-			if(value !== undefined) {
-				if(typeof value !== "string") {
+			if (value !== undefined) {
+				if (typeof value !== "string") {
 					value = JSON.stringify(value);
 				}
 				results.push(value);
 			}
-		} catch(e) {
+		} catch (e) {
 			// Do nothing. It probably wasn't a module.
 		}
 	});
