@@ -1,6 +1,7 @@
 title: $:/core/ui/AdvancedSearch/Standard
 tags: $:/tags/AdvancedSearch
 caption: {{$:/language/Search/Standard/Caption}}
+explicitState: $:/state/tab/search-results/advancedsearch
 
 \procedure lingo-base() $:/language/Search/
 \procedure set-next-input-tab() <$transclude $variable="change-input-tab" stateTitle="$:/state/tab--1498284803" tag="$:/tags/AdvancedSearch" beforeafter="after" defaultState="$:/core/ui/AdvancedSearch/System" actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
@@ -69,7 +70,7 @@ caption: {{$:/language/Search/Standard/Caption}}
 	tabsList="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]"
 	default={{$:/config/SearchResults/Default}}
 	actions="<$action-setfield $tiddler='$:/state/advancedsearch/standard/currentTab' text=<<currentTab>>/>"
-	explicitState="$:/state/tab/search-results/advancedsearch" />
+	explicitState={{!!explicitState}} />
 </$list>
 </$vars>
 </$list>
