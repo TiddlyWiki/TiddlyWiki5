@@ -559,7 +559,7 @@ $tw.utils.parse_json_gzip_base64 = function(text){
 	const compressed2 = $tw.utils.bufferFromBase64(text);
 	const decom = fflate.gunzipSync(compressed2);
 	const str = fflate.strFromU8(decom);
-	return $tw.utils.parseJSONSafe(str);
+	try { return JSON.parse(str); } catch (e) { }
 }
 
 $tw.utils.stringify_json_gzip_base64 = function(data){
@@ -1850,10 +1850,10 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 	}
 });
 
-
+// the fields in stringify may be frozen, do not write to them
 $tw.modules.define("$:/boot/plugininfo/json","plugininfo",{
 	name: "application/json",
-	parse: function(tiddler){ return $tw.utils.parseJSONSafe(tiddler.fields.text); },
+	parse: function(tiddler){ return $tw.utils.parseJSONSafe(tiddler.fields.text, function(){}); },
 	stringify: function(fields, data){ return JSON.stringify(data); },
 });
 $tw.modules.define("$:/boot/plugininfo/vnd.json.gz","plugininfo",{
