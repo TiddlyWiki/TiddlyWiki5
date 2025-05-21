@@ -83,6 +83,9 @@ ViewWidget.prototype.execute = function() {
 		case "jsencoded":
 			this.text = this.getValueAsJsEncoded();
 			break;
+		case "gzipped":
+			this.text = this.getValueAsStringGzipBase64();
+			break;
 		default: // "text"
 			this.text = this.getValueAsText();
 			break;
@@ -171,6 +174,10 @@ ViewWidget.prototype.getValueAsUrlEncoded = function() {
 ViewWidget.prototype.getValueAsDoubleUrlEncoded = function() {
 	return $tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(this.getValueAsText()));
 };
+
+ViewWidget.prototype.getValueAsStringGzipBase64 = function(){
+	return $tw.fflate.to_gzip_base64(this.getValueAsText());
+}
 
 ViewWidget.prototype.getValueAsDate = function(format) {
 	format = format || "YYYY MM DD 0hh:0mm";

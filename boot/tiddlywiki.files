@@ -29,6 +29,10 @@
 			"isTiddlerFile": true
 		},
 		{
+			"file": "preamble.tid",
+			"isTiddlerFile": true
+		},
+		{
 			"file": "fflate.js",
 			"fields": {
 				"title": "$:/library/fflate.js",
