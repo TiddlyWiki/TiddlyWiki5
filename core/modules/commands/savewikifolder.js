@@ -101,9 +101,7 @@ WikiFolderMaker.prototype.save = function() {
 				// Ignore the core plugin and the ephemeral info plugin
 				self.log("Ignoring tiddler: " + title);
 			} else {
-				var type = tiddler.fields.type,
-					pluginType = tiddler.fields["plugin-type"];
-				if(type === "application/json" && pluginType) {
+				if(tiddler.isPlugin()) {
 					// Plugin tiddler
 					var libraryDetails = self.findPluginInLibrary(title);
 					if(libraryDetails) {
