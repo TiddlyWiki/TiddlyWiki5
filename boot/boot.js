@@ -1856,11 +1856,6 @@ $tw.modules.define("$:/boot/plugininfo/json","plugininfo",{
 	parse: function(tiddler){ return $tw.utils.parseJSONSafe(tiddler.fields.text, function(){}); },
 	stringify: function(fields, data){ return JSON.stringify(data); },
 });
-$tw.modules.define("$:/boot/plugininfo/vnd.json.gz","plugininfo",{
-	name: "application/vnd.json.gz",
-	parse: function(tiddler){ return $tw.utils.parse_json_gzip_base64(tiddler.fields.text); } ,
-	stringify: function(fields, data){ return $tw.utils.stringify_json_gzip_base64(data); },
-});
 
 /////////////////////////// Browser definitions
 
@@ -2259,7 +2254,7 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			pluginInfo["plugin-type"] = "plugin";
 		}
 		pluginInfo.dependents = pluginInfo.dependents || [];
-		pluginInfo.type = "application/vnd.json.gz";
+		pluginInfo.type = "application/json";
 		pluginInfo.text = $tw.Wiki.pluginInfoModules[pluginInfo.type].stringify(pluginInfo, {tiddlers: pluginInfo.tiddlers});
 		delete pluginInfo.tiddlers;
 		// Deserialise array fields (currently required for the dependents field)
@@ -2620,7 +2615,6 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("application/x-bibtex","utf8",".bib");
 	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
 	$tw.utils.registerFileType("application/octet-stream","base64",".octet-stream");
-	$tw.utils.registerFileType("application/vnd.json.gz","base64",".json.gz");
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki($tw.safeMode && {enableIndexers: []});
 	// Install built in tiddler fields modules
