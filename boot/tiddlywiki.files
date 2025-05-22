@@ -27,14 +27,6 @@
 		{
 			"file": "boot.css.tid",
 			"isTiddlerFile": true
-		},
-		{
-			"file": "fflate.js",
-			"fields": {
-				"title": "$:/library/fflate.js",
-				"type": "application/javascript",
-				"library": "yes"
-			}
 		}
 	]
 }
