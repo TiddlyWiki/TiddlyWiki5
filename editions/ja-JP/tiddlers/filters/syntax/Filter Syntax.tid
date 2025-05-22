@@ -1,0 +1,26 @@
+created: 20140210141217955
+list: [[Filter Expression]] [[Filter Run]] [[Filter Step]] [[Filter Parameter]] [[Filter Whitespace]]
+modified: 20250219112710650
+original-modified: 20230710074340943
+tags: Filters
+title: Filter Syntax
+ja-title: フィルタのシンタックス
+type: text/vnd.tiddlywiki
+
+<<.preamble """[[フィルタ|Filters]]は、正式な構文の説明が役立つと思われる人向けに、[[Railroadダイアグラム|Railroad Diagrams]]を使用して示されている文法に従います。ただし、このグループのTiddlerを理解していなくても、[[フィルタの書き方を学ぶ|Introduction to filter notation]]ことができます""">>
+
+<<.def フィルタ>>は、<<.def インプット>>を<<.def アウトプット>>に変換するためのパイプラインです。インプットとアウトプットはどちらも、Tiddlerとフィールドの[[タイトルの順序付き集合|Title Selection]]です
+
+フィルタは、''ラン''と呼ばれる小さな構成要素から構成される''式''であり、''ラン''は''ステップ''を使用して構築されます。それぞれがインプットをアウトプットに変換します
+
+フィルタは空のアウトプットから始まります。その実行は左から右に処理され、アウトプットが徐々に修正されます。
+
+"フィルタのシンタックス"の記述は次で始まります:
+
+<$railroad text="""
+\start double
+\end double
+[[<"フィルタ式">|"Filter Expression"]]
+"""/>
+
+<<.tip "上記のようなRailroadボックスを使用して移動できます。">>

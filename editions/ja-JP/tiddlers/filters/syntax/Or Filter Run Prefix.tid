@@ -1,0 +1,20 @@
+created: 20230318135743766
+from-version: 5.1.23
+modified: 20250417105150020
+original-modified: 20230322140708372
+rp-input: 前回のフィルタランからのすべてのタイトル
+rp-output: アウトプットタイトルは主に、前回のフィルタランのアウトプットに[[重複排除して追加|Dominant Append]]されます。
+rp-purpose: Tiddlerセットの重複排除した結合
+tags: [[Named Filter Run Prefix]]
+title: Or Filter Run Prefix
+ja-title: orフィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( ":or" | - )
+[["ラン"|"Filter Run Prefix"]]
+"""/>
+
+:or プレフィックスはプレフィックスを全く使用しないのと同じです。[[フィルタランプレフィックスのショートカット|Shortcut Filter Run Prefix]]で`run`を参照してください

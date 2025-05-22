@@ -1,0 +1,29 @@
+created: 20211124151912931
+modified: 20250419111355942
+original-modified: 20230305125430544
+tags: [[Reduce Filter Run Prefix]]
+title: Reduce Filter Run Prefix (Examples)
+ja-title: reduceフィルタランプレフィックス(例)
+type: text/vnd.tiddlywiki
+
+\define multiply-input() [multiply<accumulator>]
+
+次の例では、これらのデータTiddlerを使用します:
+
+<ul>
+<$list filter="[tag[shopping]!has[draft.of]]">
+<li>
+''<$link><$text text=<<currentTiddler>>/></$link>'' quantity: <$text text={{!!quantity}}/>,  price: <$text text={{!!price}}/>
+</li>
+</$list>
+</ul>
+
+<<.operator-example 1 "[tag[shopping]] :reduce[get[quantity]add<accumulator>]">>
+<<.operator-example 2 "[tag[shopping]] :reduce[get[price]multiply{!!quantity}add<accumulator>]">>
+<<.operator-example 3 "[tag[shopping]] :reduce[<index>compare:number:gt[0]then<accumulator>addsuffix[, ]addsuffix<currentTiddler>else<currentTiddler>]" "最初の項目に対して他の項目とは異なる動作をさせるために`<index>`を使用します。これはあくまでもデモンストレーションです。このタスクを実行するには、[[joinオペレータ|join Operator]]を使うのがよいです">>
+<<.operator-example 4 "[tag[non-existent]] :reduce[get[price]multiply{!!quantity}add<accumulator>]" "空のインプットは空のアウトプットを生成します">>
+<<.operator-example 5 "[tag[non-existent]] :reduce[get[price]multiply{!!quantity}add<accumulator>] :else[[0]]" "インプットが空の場合に確実にアウトプットするために`:else`使用します">>
+
+<$macrocall $name=".tip" _="""[[reduceオペレータ|reduce Operator]]とは異なり、`:reduce`プレフィックスはaccumulatorの初期値を指定できないため、初期値は常に空(数学オペレータでは0として扱われます)になります。したがって`=1 =2 =3 :reduce[multiply<accumulator>]`は、6ではなく0が生成されます。accumulatorの初期値を指定する必要がある場合は、[[reduceオペレータ|reduce Operator]]を使用します。"""/>
+<<.operator-example 6 "=1 =2 =3 :reduce[multiply<accumulator>]" "空の初期値は数学オペレータによって0として扱われます">>
+<<.operator-example 7 "=1 =2 =3 +[reduce<multiply-input>,[1]]" "正しい結果を得るためには初期値の設定が必要な場合があります">>

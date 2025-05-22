@@ -1,0 +1,20 @@
+created: 20230316150731234
+from-version: 5.1.23
+modified: 20250303102704427
+original-modified: 20230711084644541
+rp-input: 前回のフィルタランからのすべてのタイトル
+rp-output: アウトプットタイトルは、重複を排除せずに以前のフィルタランの出力に追加されます。
+rp-purpose: 重複を排除しない和集合
+tags: [[Named Filter Run Prefix]]
+title: All Filter Run Prefix
+ja-title: allフィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( ":all" | - )
+[["ラン"|"Filter Run"]]
+"""/>
+
+このプレフィックスにはオプションの[[ショートカット構文|Shortcut Filter Run Prefix]]であるシンボル`=run`があります

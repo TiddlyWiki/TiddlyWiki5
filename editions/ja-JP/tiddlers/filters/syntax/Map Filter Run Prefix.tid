@@ -1,0 +1,35 @@
+created: 20210618133745003
+from-version: 5.2.0
+modified: 20250319105451115
+original-modified: 20240312202834547
+rp-input: 前回までのすべてのランのフィルタアウトプット
+rp-output: このフィルタランの結果によって変更されたインプットタイトル
+rp-purpose: 各項目に対してこのフィルタを実行した結果に基づいてインプットタイトルを変更
+rp-suffix: <<.from-version "5.2.3">> フィルタランからすべての結果を返す場合は<<.value flat>>、最初の結果のみを返す場合は省略(デフォルト)
+tags: [[Named Filter Run Prefix]]
+title: Map Filter Run Prefix
+ja-title: mapフィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( ":map" (: ":flat" | - ) | - )
+[["ラン"|"Filter Run"]]
+"""/>
+
+以前のランからの各インプットタイトルは、順番にこのランに渡されます。フィルタランはインプットタイトルを変換し、このランのアウトプットはインプットタイトルを置き換えます。たとえば、フィルタラン`[get[caption]else{!!title}]`は、タイトルが保持されるフィールドが存在しない場合以外、各インプットタイトルをそのキャプションフィールドに置き換えます。
+
+フィルタラン内では、<<.var currentTiddler>>変数は処理中のTiddlerのタイトルに設定されていることに注意してください。これにより、`:map[{!!price}multiply{!!cost}]`のようなフィルタランが計算に使用できるようになります。
+
+フィルタラン内では、次の変数を使用できます:
+
+* <<.var currentTiddler>> - インプットタイトル
+* <<.var ..currentTiddler>> - フィルタランの外での変数`currentTiddler`の値。
+* <<.var index>> - <<.from-version "5.2.1">> 現在のリスト項目の数値インデックス(リストの最初の項目はゼロ)。
+* <<.var revIndex>> - <<.from-version "5.2.1">> 現在のリスト項目の逆数値インデックス(リストの最後の項目はゼロ)。
+* <<.var length>> - <<.from-version "5.2.1">> インプットリストの合計の長さ。
+
+`:map`プレフィックス付きで使用されるフィルタランは、渡された項目と少なくとも同じ数の項目を返す必要があります。フィルタランがアウトプットを返さないインプットタイトルは、空の文字列に置き換えられます。特に、[[getオペレータ|get Operator]]を使用してフィールドの値を取得する場合は、[[elseオペレータ|else Operator]] を使用してフィールド値が欠落しないようにすると役立ちます。たとえば、`[get[myfield]else[default-value]...`のようにします。
+
+[[mapフィルタランプレフィックス(例)|Map Filter Run Prefix (Examples)]]

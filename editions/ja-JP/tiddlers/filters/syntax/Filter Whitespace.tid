@@ -1,0 +1,15 @@
+created: 20150124182304000
+modified: 20250510104756224
+original-modified: 20230710074447240
+tags: [[Filter Expression]]
+title: Filter Whitespace
+ja-title: フィルタホワイトスペース
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+{( "スペース" | "タブ" | "ラインフィード" | "リターン" | "垂直タブ" | "改ページ" )}
+"""/>
+
+[[フィルタ式|Filter Expression]]の各ランの間にはホワイトスペース文字が出現します。

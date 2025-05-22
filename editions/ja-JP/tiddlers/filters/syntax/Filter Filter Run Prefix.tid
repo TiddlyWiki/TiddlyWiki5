@@ -1,0 +1,34 @@
+created: 20211129022455873
+from-version: 5.1.23
+modified: 20250314105047035 
+original-modified: 20230710073334078
+rp-input: これまでのすべてのランのフィルタアウトプット
+rp-output: フィルタランが空でないインプットタイトル
+rp-purpose: フィルタランアウトプットが空のリストであるすべてのインプットタイトルを除外
+tags: [[Named Filter Run Prefix]]
+title: Filter Filter Run Prefix
+ja-title: filterフィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( ":filter" | - )
+[["ラン"|"Filter Run"]]
+"""/>
+
+これまでのフィルタアウトプットをインプットとして受け取ります。次のランはインプットの各タイトルに対して評価され、アウトプットが空のリストであるすべてのインプットタイトルが除かれます。
+
+フィルタラン内では、<<.var currentTiddler>>変数は処理中のTiddlerのタイトルに設定されていることに注意してください。これにより、`:filter[{!!price}multiply{!!cost}compare:integer:gteq[5]]`のようなフィルタランを計算に使用できるようになります。ラン外のcurrentTiddlerの値は、<<.var ..currentTiddler>>変数で使用できます。
+
+フィルターラン内では、次の変数を使用できます: 
+
+* <<.var currentTiddler>> - インプットタイトル
+* <<.var ..currentTiddler>> - フィルタラン外の変数`currentTiddler`の値。
+* <<.var index>> - <<.from-version "5.2.1">> 現在のリスト項目の数値インデックス(リストの最初の項目はゼロです)。
+* <<.var revIndex>> - <<.from-version "5.2.1">> 現在のリスト項目の逆数値インデックス(リストの最後の項目はゼロです)。
+* <<.var length>> - <<.from-version "5.2.1">> インプットリストの長さの合計。
+
+<<.tip "名前付きフィルタランプレフィックス`:filter`を、この演算子は、すべてのインプットタイトルにサブフィルタを適用し、サブフィルタから空の結果を返すタイトルを除外する[[filterオペレータ|filter Operator]]と比べてください。">>
+
+[[filterフィルタランプレフィックス(例)|Filter Filter Run Prefix (Examples)]]
