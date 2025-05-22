@@ -964,9 +964,6 @@ exports.setTiddlerData = function(title,data,fields,options) {
 		};
 	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
 		newFields.text = $tw.utils.makeTiddlerDictionary(data);
-	} else if (existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
-		console.log(new Error("Setting a gzipped data tiddler"));
-		newFields.text = $tw.utils.stringify_json_gzip_base64(data);
 	} else {
 		newFields.type = "application/json";
 		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
