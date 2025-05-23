@@ -73,7 +73,13 @@ tags: $:/tags/Global
 			<div class="tc-community-card-info">
 				<div class="tc-community-card-field-text">
 					<span class="tc-community-card-field-text-name">leader</span>
-					<span class="tc-community-card-field-text-value"><$transclude $variable="community-card-pill-person" title={{!!leader}}/></span>
+					<span class="tc-community-card-field-text-value">
+						<%if [<currentTiddler>has[leader]] %>
+							<$transclude $variable="community-card-pill-person" title={{!!leader}}/>
+						<%else%>
+							<$transclude $variable="community-card-vacancy"/>
+						<%endif%>
+					</span>
 				</div>
 				<div class="tc-community-card-field-text">
 					<span class="tc-community-card-field-text-name">team</span>
@@ -99,7 +105,25 @@ tags: $:/tags/Global
 \procedure community-card-pill-stack-person(personFilter:"[tag[Community/Person]]")
 	<div class="tc-community-card-pill-stack">
 		<$list filter=<<personFilter>>>
-			<$transclude $variable="community-card-pill-person" title=<<currentTiddler>> mode="block"/>
+			<$list-template>
+				<$transclude $variable="community-card-pill-person" title=<<currentTiddler>> mode="block"/>
+			</$list-template>
+			<$list-empty>
+				<$transclude $variable="community-card-vacancy"/>
+			</$list-empty>
 		</$list>
 	</div>
 \end community-card-pill-stack-person
+
+\procedure community-card-vacancy()
+	<$link to="Vacant Positions" class="tc-community-card-pill tc-community-card-pill-vacancy">
+		<span class="tc-community-card-field-image tc-community-card-field-image-avatar">
+			{{$:/core/images/help}}
+		</span>
+		<span class="tc-community-card-field-text tc-community-card-field-text-title">
+			<span class="tc-community-card-field-text-value">
+				Vacant
+			</span>
+		</span>
+	</$link>
+\end community-card-vacancy

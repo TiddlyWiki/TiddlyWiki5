@@ -34,8 +34,6 @@ tags: $:/tags/Stylesheet
 	fill: <<colour community-card-team-header-foreground>>;
 }
 
-
-
 .tc-community-card .tc-community-card-header-link:hover {
 	text-decoration: none;
 	background-color: <<colour community-card-header-foreground>>;
@@ -121,6 +119,12 @@ a.tc-community-card-pill {
 	fill: <<colour community-card-header-foreground>>;
 	box-shadow: 0 1px 3px 0 <<colour community-card-shadow>>, 0 0 0 1px <<colour community-card-shadow>>;
 	transition: box-shadow 0.3s ease,transform .3s ease;
+}
+
+a.tc-community-card-pill.tc-community-card-pill-vacancy {
+	background: <<colour community-card-vacancy-header-background>>;
+	color: <<colour community-card-vacancy-header-foreground>>;
+	fill: <<colour community-card-vacancy-header-foreground>>;
 }
 
 a.tc-community-card-pill:hover {
