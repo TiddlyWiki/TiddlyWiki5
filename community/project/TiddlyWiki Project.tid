@@ -29,7 +29,5 @@ The TiddlyWiki Project is the coordinated, ongoing effort to maintain and improv
 	</div>
 </div>
 
-<$transclude $mode="block"/>
-
 </$list>
 
