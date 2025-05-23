@@ -2,8 +2,8 @@ title: $:/config/DefaultColourMappings/
 
 community-card-background: #ffffee
 community-card-foreground: #441111
-community-card-dark-shadow: #bcbdbd
-community-card-shadow: #d4d4d5
+community-card-dark-shadow: rgba(188, 189, 189, 0.5)
+community-card-shadow: rgba(212, 212, 213, 0.5)
 community-card-header-background: #9e3060
 community-card-header-foreground: #ddddee
 community-card-team-header-background: #306090

@@ -11,6 +11,7 @@ tags: $:/tags/Stylesheet
 	margin-bottom: 8px;
 	background: <<colour community-card-background>>;
 	color: <<colour community-card-foreground>>;
+	fill: <<colour community-card-foreground>>;
 	box-shadow: 0 1px 3px 0 <<colour community-card-shadow>>, 0 0 0 1px <<colour community-card-shadow>>;
 	transition: box-shadow 0.3s ease,transform .3s ease;
 }
@@ -30,6 +31,7 @@ tags: $:/tags/Stylesheet
 .tc-community-card.tc-community-card-team .tc-community-card-header-link {
 	background: <<colour community-card-team-header-background>>;
 	color: <<colour community-card-team-header-foreground>>;
+	fill: <<colour community-card-team-header-foreground>>;
 }
 
 
