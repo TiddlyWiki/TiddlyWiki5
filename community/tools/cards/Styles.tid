@@ -8,6 +8,7 @@ tags: $:/tags/Stylesheet
 	justify-content: center;
 	border-radius: 8px;
 	width: 100%;
+	margin-bottom: 8px;
 	background: <<colour community-card-background>>;
 	color: <<colour community-card-foreground>>;
 	box-shadow: 0 1px 3px 0 <<colour community-card-shadow>>, 0 0 0 1px <<colour community-card-shadow>>;

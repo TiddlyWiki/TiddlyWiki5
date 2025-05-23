@@ -5,28 +5,4 @@ tags: Community
 
 The TiddlyWiki Project is the coordinated, ongoing effort to maintain and improve TiddlyWiki, and to support the TiddlyWiki community.
 
-<$list filter="[tag[Community/Team]]">
-
-<div class="tc-community-card tc-community-card-team">
-	<$link to=<<currentTiddler>> class="tc-community-card-header-link">
-		<div class="tc-community-card-header">
-			<<display-jpeg-field "avatar">>
-			<<display-text-field "title" showLabel:"no">>
-		</div>
-	</$link>
-	<div class="tc-community-card-info">
-		<div class="tc-community-card-field-text">
-			<span class="tc-community-card-field-text-name">leader</span>
-			<span class="tc-community-card-field-text-value"><$transclude $variable="community-card-pill" title={{!!leader}}/></span>
-		</div>
-		<div class="tc-community-card-field-text">
-			<span class="tc-community-card-field-text-name">team</span>
-			<span class="tc-community-card-field-text-value"><$transclude $variable="community-card-pill-stack" personFilter={{!!team}}/></span>
-		</div>
-	</div>
-	<div class="tc-community-card-body">
-		<$transclude $tiddler=<<currentTiddler>> $field="text" $mode="block"/>
-	</div>
-</div>
-
-</$list>
+<$list filter="[tag[Community/Team]]" template="$:/tiddlywiki/community/cards/ViewTemplateBodyTemplateTeam"/>

@@ -1,7 +1,7 @@
 title: $:/tiddlywiki/community/cards/Procedures
 tags: $:/tags/Global
 
-\procedure display-jpeg-field(fieldName,mode:"block")
+\procedure community-card-display-jpeg-field(fieldName,mode:"block")
 <$genesis $type={{{ [<mode>match[block]then[div]else[span]] }}} class={{{ tc-community-card-field-image [[tc-community-card-field-image-]addsuffix<fieldName>] +[join[ ]] }}}>
 	<%if [<currentTiddler>has<fieldName>] %>
 		<img src={{{ [<currentTiddler>get<fieldName>addprefix[data:image/jpeg;base64,]] }}} width="32"/>
@@ -9,9 +9,9 @@ tags: $:/tags/Global
 		{{$:/core/images/warning}}
 	<%endif%>
 </$genesis>
-\end display-jpeg-field
+\end community-card-display-jpeg-field
 
-\procedure display-text-field(fieldName,showLabel:"yes",linkPrefix,displayPrefix,mode:"block")
+\procedure community-card-display-text-field(fieldName,showLabel:"yes",linkPrefix,displayPrefix,mode:"block")
 <%if [<currentTiddler>has<fieldName>] :or[<fieldName>match[title]] %>
 	<$genesis $type={{{ [<mode>match[block]then[div]else[span]] }}} class={{{ tc-community-card-field-text [[tc-community-card-field-text-]addsuffix<fieldName>] +[join[ ]] }}}>
 		<%if [<showLabel>match[yes]] %>
@@ -33,47 +33,73 @@ tags: $:/tags/Global
 		<%endif%>
 	</$genesis>
 <%endif%>
-\end display-text-field
+\end community-card-display-text-field
 
-\procedure community-card(title)
+\procedure community-card-person(title)
 	<$let currentTiddler=<<title>>>
 		<div class="tc-community-card">
 			<$link to=<<currentTiddler>> class="tc-community-card-header-link">
 				<div class="tc-community-card-header">
-					<<display-jpeg-field "avatar">>
-					<<display-text-field "title" showLabel:"no">>
+					<<community-card-display-jpeg-field "avatar">>
+					<<community-card-display-text-field "title" showLabel:"no">>
 				</div>
 			</$link>
 			<div class="tc-community-card-info">
-				<<display-text-field "fullname">>
-				<<display-text-field "first-sighting">>
-				<<display-text-field "talk.tiddlywiki.org" linkPrefix:"https://talk.tiddlywiki.org/u/" displayPrefix:"@">>
-				<<display-text-field "github" linkPrefix:"https://github.com/" displayPrefix:"@">>
-				<<display-text-field "linkedin" linkPrefix:"https://">>
-				<<display-text-field "flickr" linkPrefix:"https://">>
-				<<display-text-field "homepage" linkPrefix:"https://">>
-				<<display-text-field "email" linkPrefix:"mailto:">>
+				<<community-card-display-text-field "fullname">>
+				<<community-card-display-text-field "first-sighting">>
+				<<community-card-display-text-field "talk.tiddlywiki.org" linkPrefix:"https://talk.tiddlywiki.org/u/" displayPrefix:"@">>
+				<<community-card-display-text-field "github" linkPrefix:"https://github.com/" displayPrefix:"@">>
+				<<community-card-display-text-field "linkedin" linkPrefix:"https://">>
+				<<community-card-display-text-field "flickr" linkPrefix:"https://">>
+				<<community-card-display-text-field "homepage" linkPrefix:"https://">>
+				<<community-card-display-text-field "email" linkPrefix:"mailto:">>
 			</div>
 			<div class="tc-community-card-body">
 				<$transclude $tiddler=<<currentTiddler>> $field="text" $mode="block"/>
 			</div>
 		</div>
 	</$let>
-\end community-card
+\end community-card-person
 
-\procedure community-card-pill(title)
+\procedure community-card-team(title)
+	<$let currentTiddler=<<title>>>
+		<div class="tc-community-card tc-community-card-team">
+			<$link to=<<currentTiddler>> class="tc-community-card-header-link">
+				<div class="tc-community-card-header">
+					<<community-card-display-jpeg-field "avatar">>
+					<<community-card-display-text-field "title" showLabel:"no">>
+				</div>
+			</$link>
+			<div class="tc-community-card-info">
+				<div class="tc-community-card-field-text">
+					<span class="tc-community-card-field-text-name">leader</span>
+					<span class="tc-community-card-field-text-value"><$transclude $variable="community-card-pill-person" title={{!!leader}}/></span>
+				</div>
+				<div class="tc-community-card-field-text">
+					<span class="tc-community-card-field-text-name">team</span>
+					<span class="tc-community-card-field-text-value"><$transclude $variable="community-card-pill-stack-person" personFilter={{!!team}}/></span>
+				</div>
+			</div>
+			<div class="tc-community-card-body">
+				<$transclude $tiddler=<<currentTiddler>> $field="text" $mode="block"/>
+			</div>
+		</div>
+	</$let>
+\end community-card-team
+
+\procedure community-card-pill-person(title)
 	<$let currentTiddler=<<title>>>
 		<$link to=<<currentTiddler>> class="tc-community-card-pill">
-			<<display-jpeg-field "avatar" mode:"inline">>
-			<<display-text-field "title" showLabel:"no" mode:"inline">>
+			<<community-card-display-jpeg-field "avatar" mode:"inline">>
+			<<community-card-display-text-field "title" showLabel:"no" mode:"inline">>
 		</$link>
 	</$let>
-\end community-card-pill
+\end community-card-pill-person
 
-\procedure community-card-pill-stack(personFilter:"[tag[Community/Person]]")
+\procedure community-card-pill-stack-person(personFilter:"[tag[Community/Person]]")
 	<div class="tc-community-card-pill-stack">
 		<$list filter=<<personFilter>>>
-			<$transclude $variable="community-card-pill" title=<<currentTiddler>> mode="block"/>
+			<$transclude $variable="community-card-pill-person" title=<<currentTiddler>> mode="block"/>
 		</$list>
 	</div>
-\end community-card-pill-stack
+\end community-card-pill-stack-person

@@ -3,3 +3,4 @@ tags: $:/tags/ViewTemplateBodyFilter
 list-before:
 
 [tag[Community/Person]then[$:/tiddlywiki/community/cards/ViewTemplateBodyTemplatePerson]]
+[tag[Community/Team]then[$:/tiddlywiki/community/cards/ViewTemplateBodyTemplateTeam]]
