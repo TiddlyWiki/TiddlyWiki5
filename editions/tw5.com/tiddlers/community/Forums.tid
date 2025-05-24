@@ -4,7 +4,9 @@ tags: Community
 title: Forums
 type: text/vnd.tiddlywiki
 
-TalkTW, the official TiddlyWiki forum is a place to talk about ~TiddlyWiki: requests for help, [[announcements|https://talk.tiddlywiki.org/c/announcements/20]] of new releases and plugins, debating new features, or just sharing experiences. You can participate via the associated website, or subscribe via email.
+!!! Users
+
+The official TiddlyWiki forum is a place to talk about ~TiddlyWiki: requests for help, [[announcements|https://talk.tiddlywiki.org/c/announcements/20]] of new releases and plugins, debating new features, or just sharing experiences. You can participate via the associated website, or subscribe via email.
 
 https://talk.tiddlywiki.org/
 
@@ -12,4 +14,7 @@ Other Forums:
 
 * Chat on Discord at https://discord.gg/HFFZVQ8
 * [[TiddlyWiki Subreddit|https://www.reddit.com/r/TiddlyWiki5/]]
-* Chat with Gitter at https://gitter.im/TiddlyWiki/public
+
+!! Developers
+
+{{Developers}}
