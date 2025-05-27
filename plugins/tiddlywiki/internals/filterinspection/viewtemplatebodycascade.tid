@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/internals/filterinspection/cascades/viewtemplatebody
+tags: $:/tags/ViewTemplateBodyFilter
+list-before:
+
+[tag[$:/tags/FilterInspectionOutput]type[application/json]then[$:/plugins/tiddlywiki/internals/filterinspection/viewtemplatebody]]

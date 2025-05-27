@@ -220,13 +220,25 @@ exports.filterTiddlers = function(filterString,widget,source) {
 Compile a filter into a function with the signature fn(source,widget) where:
 source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
 widget: an optional widget node for retrieving the current tiddler etc.
+
+Parameters:
+filterString: the filter string to compile
+options: includes:
+
+wrappers: a hashmap of wrapper functions to apply to the compiled filter function
 */
-exports.compileFilter = function(filterString) {
+exports.compileFilter = function(filterString,options) {
+	options = options || {};
+	var self = this;
+	var wrappers = options.wrappers || {};
+	// Invoke the hook to allow the filter to be inspected
+	wrappers = $tw.hooks.invokeHook("th-filter-evaluation",filterString,wrappers) || wrappers;
+	// Get the result from the cache if we can
 	if(!this.filterCache) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
-	if(this.filterCache[filterString] !== undefined) {
+	if(this.filterCache[filterString] !== undefined && !wrappers.prefix && !wrappers.operation && !wrappers.operator && !wrappers.start && !wrappers.done) {
 		return this.filterCache[filterString];
 	}
 	var filterParseTree;
@@ -235,7 +247,14 @@ exports.compileFilter = function(filterString) {
 	} catch(e) {
 		// We do not cache this result, so it adjusts along with localization changes
 		return function(source,widget) {
-			return [$tw.language.getString("Error/Filter") + ": " + e];
+			if(wrappers.start) {
+				wrappers.start(source,widget);
+			}
+			var resultsArray = [$tw.language.getString("Error/Filter") + ": " + e];
+			if(wrappers.done) {
+				wrappers.done(resultsArray);
+			}
+			return resultsArray;
 		};
 	}
 	// Get the hashmap of filter operator functions
@@ -249,52 +268,64 @@ exports.compileFilter = function(filterString) {
 		var operationSubFunction = function(source,widget) {
 			var accumulator = source,
 				results = [],
-				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
-			$tw.utils.each(operation.operators,function(operator) {
-				var operands = [],
-					operatorFunction;
-				if(!operator.operator) {
-					// Use the "title" operator if no operator is specified
-					operatorFunction = filterOperators.title;
-				} else if(!filterOperators[operator.operator]) {
-					// Unknown operators treated as "[unknown]" - at run time we can distinguish between a custom operator and falling back to the default "field" operator
-					operatorFunction = filterOperators["[unknown]"];
-				} else {
-					// Use the operator function
-					operatorFunction = filterOperators[operator.operator];
-				}
-				$tw.utils.each(operator.operands,function(operand) {
-					if(operand.indirect) {
-						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
-					} else if(operand.variable) {
-						var varTree = $tw.utils.parseFilterVariable(operand.text);
-						operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source})[0] || "";
-					} else {
-						operand.value = operand.text;
-					}
-					operands.push(operand.value);
-				});
-
-				// Invoke the appropriate filteroperator module
-				results = operatorFunction(accumulator,{
-							operator: operator.operator,
-							operand: operands.length > 0 ? operands[0] : undefined,
-							operands: operands,
-							prefix: operator.prefix,
-							suffix: operator.suffix,
-							suffixes: operator.suffixes,
-							regexp: operator.regexp
-						},{
-							wiki: self,
-							widget: widget
+				currTiddlerTitle = widget && widget.getVariable("currentTiddler"),
+				handleOperation = function() {
+					$tw.utils.each(operation.operators,function(operator) {
+						var operands = [],
+							operatorName,operatorFunction;
+						if(!operator.operator) {
+							// Use the "title" operator if no operator is specified
+							operatorName = "title";
+						} else if(!filterOperators[operator.operator]) {
+							// Unknown operators treated as "[unknown]" - at run time we can distinguish between a custom operator and falling back to the default "field" operator
+							operatorName = "[unknown]";
+						} else {
+							// Use the operator function
+							operatorName = operator.operator;
+						}
+						operatorFunction = filterOperators[operatorName];
+						$tw.utils.each(operator.operands,function(operand) {
+							if(operand.indirect) {
+								operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
+							} else if(operand.variable) {
+								var varTree = $tw.utils.parseFilterVariable(operand.text);
+								operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source})[0] || "";
+							} else {
+								operand.value = operand.text;
+							}
+							operands.push(operand.value);
 						});
-				if($tw.utils.isArray(results)) {
-					accumulator = self.makeTiddlerIterator(results);
-				} else {
-					accumulator = results;
-				}
-			});
-			if($tw.utils.isArray(results)) {
+						// Wrap the filter operator module if required
+						if(wrappers.operator) {
+							operatorFunction = wrappers.operator.bind(self,operatorFunction);
+						}
+						// Invoke the appropriate filteroperator module
+						results = operatorFunction(accumulator,{
+									parseTree: operator,
+									operator: operator.operator,
+									operatorName: operatorName,
+									operand: operands.length > 0 ? operands[0] : undefined,
+									operands: operands,
+									prefix: operator.prefix,
+									suffix: operator.suffix,
+									suffixes: operator.suffixes,
+									regexp: operator.regexp
+								},{
+									wiki: self,
+									widget: widget
+								});
+						if($tw.utils.isArray(results)) {
+							accumulator = self.makeTiddlerIterator(results);
+						} else {
+							accumulator = results;
+						}
+					});
+				};
+		if(wrappers.operation) {
+			handleOperation = wrappers.operation.bind(self,handleOperation,operation);
+		}
+		handleOperation();
+		if($tw.utils.isArray(results)) {
 				return results;
 			} else {
 				var resultArray = [];
@@ -307,27 +338,45 @@ exports.compileFilter = function(filterString) {
 		var filterRunPrefixes = self.getFilterRunPrefixes();
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
-			var options = {wiki: self, suffixes: operation.suffixes || []};
+			var prefixName;
 			switch(operation.prefix || "") {
 				case "": // No prefix means that the operation is unioned into the result
-					return filterRunPrefixes["or"](operationSubFunction, options);
+					prefixName = "or";
+					break;
 				case "=": // The results of the operation are pushed into the result without deduplication
-					return filterRunPrefixes["all"](operationSubFunction, options);
+					prefixName = "all";
+					break;
 				case "-": // The results of this operation are removed from the main result
-					return filterRunPrefixes["except"](operationSubFunction, options);
+					prefixName = "except";
+					break;
 				case "+": // This operation is applied to the main results so far
-					return filterRunPrefixes["and"](operationSubFunction, options);
+					prefixName = "and";
+					break;
 				case "~": // This operation is unioned into the result only if the main result so far is empty
-					return filterRunPrefixes["else"](operationSubFunction, options);
-				default: 
-					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
-						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
-					} else {
-						return function(results,source,widget) {
-							results.clear();
-							results.push($tw.language.getString("Error/FilterRunPrefix"));
-						};
-					}
+					prefixName = "else";
+					break;
+				default:
+					prefixName = operation.namedPrefix;
+					break;
+			}
+			if(prefixName && filterRunPrefixes[prefixName]) {
+				var options = {
+						wiki: self,
+						suffixes: operation.suffixes || [],
+						prefixName: prefixName,
+						prefix: operation.prefix
+					},
+					filterRunPrefixFunction = filterRunPrefixes[prefixName];
+				// Wrap the filter operator module if required
+				if(wrappers.prefix) {
+					filterRunPrefixFunction = wrappers.prefix.bind(self,filterRunPrefixFunction);
+				}
+				return filterRunPrefixFunction(operationSubFunction,options);
+			} else {
+				return function(results,source,widget) {
+					results.clear();
+					results.push($tw.language.getString("Error/FilterRunPrefix"));
+				};
 			}
 		})());
 	});
@@ -341,6 +390,9 @@ exports.compileFilter = function(filterString) {
 		if(!widget) {
 			widget = $tw.rootWidget;
 		}
+		if(wrappers.start) {
+			wrappers.start(source,widget);
+		}
 		var results = new $tw.utils.LinkedList();
 		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
 		if(self.filterRecursionCount < MAX_FILTER_DEPTH) {
@@ -351,7 +403,11 @@ exports.compileFilter = function(filterString) {
 			results.push("/**-- Excessive filter recursion --**/");
 		}
 		self.filterRecursionCount = self.filterRecursionCount - 1;
-		return results.toArray();
+		var resultsArray = results.toArray();
+		if(wrappers.done) {
+			wrappers.done(resultsArray);
+		}
+		return resultsArray;
 	});
 	if(this.filterCacheCount >= 2000) {
 		// To prevent memory leak, we maintain an upper limit for cache size.
@@ -360,7 +416,9 @@ exports.compileFilter = function(filterString) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
-	this.filterCache[filterString] = fnMeasured;
-	this.filterCacheCount++;
+	if(!wrappers.prefix && !wrappers.operator) {
+		this.filterCache[filterString] = fnMeasured;
+		this.filterCacheCount++;
+	}
 	return fnMeasured;
 };

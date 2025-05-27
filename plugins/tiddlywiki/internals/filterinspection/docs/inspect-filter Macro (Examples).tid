@@ -1,0 +1,38 @@
+title: $:/plugins/tiddlywiki/internals/filterinspection/docs/inspectfiltermacro/examples
+tags: [[Macro Examples]]
+type: text/vnd.tiddlywiki
+
+\procedure .example(n,eg,egvar)
+<$let eg={{{ [<egvar>!is[blank]getvariable[]] :else[<eg>] }}}>
+<div class="doc-example">
+	<$macrocall $name="copy-to-clipboard-above-right" src=<<eg>>/>
+	<$codeblock code=<<eg>>/>
+	<$list filter=`[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix[$(n)$]]` variable=".state">
+		<$reveal state=<<.state>> type="nomatch" text="show">
+			<dl>
+				<dd><$button set=<<.state>> setTo="show">Try it</$button></dd>
+			</dl>
+		</$reveal>
+		<$reveal state=<<.state>> type="match" text="show">
+			<dl>
+				<dd><$button set=<<.state>> setTo="">Hide</$button></dd>
+			</dl>
+			<blockquote class="doc-example-result">
+				<$transclude $variable="eg" $mode="block"/>
+			</blockquote>
+		</$reveal>
+	</$list>
+</div>
+</$let>
+\end .example
+
+<$macrocall $name=".example" eg="""<$transclude $variable="inspect-filter" filter="1 2 3" inputFilter="[all[tiddlers]]"/>"""/>
+
+<$macrocall $name=".example" eg="""<$transclude $variable="inspect-filter" filter="1 2 3" inputFilter="[all[tiddlers]]" orientation="vertical"/>"""/>
+
+<$macrocall $name=".example" eg="""<$transclude $variable="inspect-filter" filter="[title<currentTiddler>] [{$:/palette}length[]] [[marker]]" inputFilter="[all[tiddlers]]"/>"""/>
+
+<$macrocall $name=".example" eg="""<$transclude $variable="inspect-filter" filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBarlimit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]]" inputFilter="[all[tiddlers]]"/>
+"""/>
+
+<$macrocall $name=".example" eg="""<$transclude $variable="inspect-filter" filter="[tags[]prefix[$:/]] :sort[length[]add[1]] +[first[2]tagging[]]" inputFilter="[all[tiddlers]]"/>"""/>
