@@ -11,6 +11,16 @@ tags: $:/tags/Global
 </$genesis>
 \end community-card-display-jpeg-field
 
+\procedure community-card-display-transclusion(fieldName,mode:"inline",default)
+<$genesis $type={{{ [<mode>match[block]then[div]else[span]] }}} class={{{ tc-community-card-field-image [[tc-community-card-field-image-]addsuffix<fieldName>] +[join[ ]] }}}>
+	<%if [<currentTiddler>has<fieldName>] %>
+		<$transclude $tiddler={{{ [<currentTiddler>get<fieldName>] }}} $mode=<<mode>>/>
+	<%else%>
+		<$transclude $tiddler=<<default>> $mode=<<mode>>/>
+	<%endif%>
+</$genesis>
+\end community-card-display-transclusion
+
 \procedure community-card-display-text-field(fieldName,showLabel:"yes",linkPrefix,displayPrefix,mode:"block")
 <%if [<currentTiddler>has<fieldName>] :or[<fieldName>match[title]] %>
 	<$genesis $type={{{ [<mode>match[block]then[div]else[span]] }}} class={{{ tc-community-card-field-text [[tc-community-card-field-text-]addsuffix<fieldName>] +[join[ ]] }}}>
@@ -66,7 +76,7 @@ tags: $:/tags/Global
 		<div class="tc-community-card tc-community-card-team">
 			<$link to=<<currentTiddler>> class="tc-community-card-header-link">
 				<div class="tc-community-card-header">
-					<<community-card-display-jpeg-field "avatar">>
+					<<community-card-display-transclusion fieldName:"icon" default:"$:/tiddlywiki/community/icons/team">>
 					<<community-card-display-text-field "title" showLabel:"no">>
 				</div>
 			</$link>
