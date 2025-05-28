@@ -1,12 +1,12 @@
 title: $:/tiddlywiki/community/cards/Procedures
 tags: $:/tags/Global
 
-\procedure community-card-display-jpeg-field(fieldName,mode:"block")
+\procedure community-card-display-jpeg-field(fieldName,mode:"block",default)
 <$genesis $type={{{ [<mode>match[block]then[div]else[span]] }}} class={{{ tc-community-card-field-image [[tc-community-card-field-image-]addsuffix<fieldName>] +[join[ ]] }}}>
 	<%if [<currentTiddler>has<fieldName>] %>
 		<img src={{{ [<currentTiddler>get<fieldName>addprefix[data:image/jpeg;base64,]] }}} width="32"/>
 	<%else%>
-		{{$:/core/images/warning}}
+		<$transclude $tiddler=<<default>> $mode=<<mode>>/>
 	<%endif%>
 </$genesis>
 \end community-card-display-jpeg-field
@@ -50,7 +50,7 @@ tags: $:/tags/Global
 		<div class="tc-community-card">
 			<$link to=<<currentTiddler>> class="tc-community-card-header-link">
 				<div class="tc-community-card-header">
-					<<community-card-display-jpeg-field "avatar">>
+					<<community-card-display-jpeg-field "avatar" default:"$:/tiddlywiki/community/icons/person">>
 					<<community-card-display-text-field "title" showLabel:"no">>
 				</div>
 			</$link>
@@ -106,7 +106,7 @@ tags: $:/tags/Global
 \procedure community-card-pill-person(title)
 	<$let currentTiddler=<<title>>>
 		<$link to=<<currentTiddler>> class="tc-community-card-pill">
-			<<community-card-display-jpeg-field "avatar" mode:"inline">>
+			<<community-card-display-jpeg-field "avatar" default:"$:/tiddlywiki/community/icons/person" mode="inline">>
 			<<community-card-display-text-field "title" showLabel:"no" mode:"inline">>
 		</$link>
 	</$let>
