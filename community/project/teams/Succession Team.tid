@@ -6,10 +6,3 @@ leader: @Jermolene
 team: @saqimtiaz @ericshulman
 
 The Succession Team is responsible for ensuring that personnel changes do not impact access to the external infrastructure used by the project. This is achieved by ensuring that the members of the succession team share ownership of the resources. The Succession Team is not expected to use their access rights apart from managing access in the event of personnel changes.
-
-The infrastructure includes:
-
-* talk.tiddlywiki.org
-* github.com/TiddlyWiki
-* tiddlywiki.com DNS
-* Netlify account for PR previews
