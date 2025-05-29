@@ -124,7 +124,7 @@ describe("WikiText parser tests", function() {
 	it("should parse macro definitions with end statements followed by spaces", function() {
 		expect(parse("\\define myMacro()\nnothing\n\\end   \n")).toEqual(
 
-			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"start":0,"end":33,"rule":"macrodef"}]
+			[{"type":"set","isBlock": false,"attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"start":0,"end":33,"rule":"macrodef"}]
 
 		);
 	});
@@ -132,7 +132,7 @@ describe("WikiText parser tests", function() {
 	it("should parse macro definitions with named end statements followed by spaces", function() {
 		expect(parse("\\define myMacro()\nnothing\n\\end myMacro  \n")).toEqual(
 
-			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"start":0,"end":40,"rule":"macrodef"}]
+			[{"type":"set","isBlock": false,"attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"start":0,"end":40,"rule":"macrodef"}]
 
 		);
 	});
