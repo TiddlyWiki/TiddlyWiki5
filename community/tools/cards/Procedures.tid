@@ -63,6 +63,26 @@ tags: $:/tags/Global
 				<<community-card-display-text-field "flickr" linkPrefix:"https://">>
 				<<community-card-display-text-field "homepage" linkPrefix:"https://">>
 				<<community-card-display-text-field "email" linkPrefix:"mailto:">>
+				<%if [all[tiddlers+shadows]tag[Community/Team]sort[title]] :filter[{!!leader}match<..currentTiddler>] +[count[]compare:number:gt[0]] %>
+					<div class="tc-community-card-field-text">
+						<span class="tc-community-card-field-text-name">leader</span>
+						<span class="tc-community-card-field-text-value">
+							<$list filter="[all[tiddlers+shadows]tag[Community/Team]sort[title]] :filter[{!!leader}match<..currentTiddler>]">
+								<$transclude $variable="community-card-pill-team" title=<<currentTiddler>>/>
+							</$list>
+						</span>
+					</div>
+				<%endif%>
+				<%if [all[tiddlers+shadows]tag[Community/Team]sort[title]] :filter[enlist{!!team}match<..currentTiddler>] +[count[]compare:number:gt[0]] %>
+					<div class="tc-community-card-field-text">
+						<span class="tc-community-card-field-text-name">member</span>
+						<span class="tc-community-card-field-text-value">
+							<$list filter="[all[tiddlers+shadows]tag[Community/Team]sort[title]] :filter[enlist{!!team}match<..currentTiddler>]">
+								<$transclude $variable="community-card-pill-team" title=<<currentTiddler>>/>
+							</$list>
+						</span>
+					</div>
+				<%endif%>
 			</div>
 			<div class="tc-community-card-body">
 				<$transclude $tiddler=<<currentTiddler>> $field="text" $mode="block"/>
@@ -124,6 +144,15 @@ tags: $:/tags/Global
 		</$list>
 	</div>
 \end community-card-pill-stack-person
+
+\procedure community-card-pill-team(title)
+	<$let currentTiddler=<<title>>>
+		<$link to=<<currentTiddler>> class="tc-community-card-pill">
+			<<community-card-display-transclusion fieldName:"icon" default:"$:/tiddlywiki/community/icons/team">>
+			<<community-card-display-text-field "title" showLabel:"no" mode:"inline">>
+		</$link>
+	</$let>
+\end community-card-pill-team
 
 \procedure community-card-vacancy()
 	<$link to="Vacant Positions" class="tc-community-card-pill tc-community-card-pill-vacancy">
