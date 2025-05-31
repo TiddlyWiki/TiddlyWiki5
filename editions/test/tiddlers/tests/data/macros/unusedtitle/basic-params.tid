@@ -25,4 +25,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>New Tiddler</p><p>New Tiddler</p><p>anotherBase</p><p>About</p><p>New Tiddler 3</p><p>invalid start</p><p>invalid count</p>
+<p dir="auto">New Tiddler</p><p dir="auto">New Tiddler</p><p dir="auto">anotherBase</p><p dir="auto">About</p><p dir="auto">New Tiddler 3</p><p dir="auto">invalid start</p><p dir="auto">invalid count</p>

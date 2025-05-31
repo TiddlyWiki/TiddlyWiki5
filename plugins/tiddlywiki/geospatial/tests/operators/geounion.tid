@@ -51,4 +51,4 @@ type: application/json
 +
 title: ExpectedResult
 
-<p>{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[100,0],[102,0],[102,1],[103,1],[103,3],[101,3],[101,2],[100,2],[100,0]]]}}]}</p>
+<p dir="auto">{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[100,0],[102,0],[102,1],[103,1],[103,3],[101,3],[101,2],[100,2],[100,0]]]}}]}</p>

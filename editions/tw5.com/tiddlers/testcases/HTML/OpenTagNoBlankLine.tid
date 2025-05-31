@@ -23,7 +23,7 @@ This also is not a new paragraph.
 +
 title: ExpectedResult
 
-<p><div>
+<p dir="auto"><div>
 * Open tag without a blank line means
 * block mode punctuation (i.e. this list) will
 * NOT be recognised.
