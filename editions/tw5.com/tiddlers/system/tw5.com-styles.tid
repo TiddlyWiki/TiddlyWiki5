@@ -164,3 +164,9 @@ type: text/vnd.tiddlywiki
 	background: #ffd;
 	background: linear-gradient(#ffd, #ffd) padding-box, repeating-linear-gradient(-45deg, red 0, red 25%, transparent 0, transparent 50%) 0 / .6em .6em;
 }
+
+.tc-more-info-footer {
+	margin-top: 2em;
+	.tc-tab-buttons {font-size: 100%;}
+}
+
