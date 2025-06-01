@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/internals/filterinspection/viewtemplatebody
+
+<$transclude $variable="inspect-filter-output" jsonOutput={{!!text}} />

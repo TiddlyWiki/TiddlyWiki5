@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/internals/filterinspection/InspectResultsTab
+tags: $:/tags/AdvancedSearch/FilterResults
+caption: Inspect
+list-after: $:/core/ui/AdvancedSearch/Filter/FilterResults/Results
+
+Filter evaluation trace:
+
+<$transclude $variable="inspect-filter" filter={{$:/temp/advancedsearch}} />

@@ -1,0 +1,28 @@
+title: $:/plugins/tiddlywiki/internals/filterinspection/tests/wikitext/Simple
+description: Test filter inspection
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+\procedure test-filter()
+1 2 3 :sort[length[]add[1]]
+\end
+
+\function test-filter-wrapper()
+[inspect<test-filter>]
+\end
+
+<$text text=<<test-filter>>/>
+-
+<$text text={{{ [<test-filter-wrapper>jsonindexes[]join[,]] }}}/>
+-
+<$text text={{{ [<test-filter-wrapper>jsonindexes[inputFilter]join[,]] }}}/>
+-
+<$text text={{{ [<test-filter-wrapper>jsonindexes[runs]join[,]] }}}/>
++
+title: ExpectedResult
+
+<p>1 2 3 :sort[length[]add[1]]-evaluationTime,input,inputFilter,output,runs--0,1,2,3</p>

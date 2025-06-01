@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/internals/filterinspection/InspectFilterProcedures/Filters/SlowFilter
+tags: $:/tags/Filter
+filter: [all[tiddlers+shadows]limit[500]] :filter[<currentTiddler>length[]reverse[]multiply[3.14]]
+description: [Internals Plugin] A filter that takes a long time to process
+
