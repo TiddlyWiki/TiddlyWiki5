@@ -1,0 +1,9 @@
+created: 20210423115811312
+modified: 20210423121155832
+title: Landing page instructions
+
+Go to the control panel -> Appearance -> Layout. Then click on Landingpage to view it.
+
+Alternatively, press `ctrl`+`shift`+`L` to bring up a the page shift modal to select a layout.
+
+When on the landing page, pressing the `documentation` button on the navbar or the button or the `try it out` button brings you to the normal page layout.
