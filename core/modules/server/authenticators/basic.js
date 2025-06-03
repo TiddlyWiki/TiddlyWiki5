@@ -9,7 +9,7 @@ Authenticator for WWW basic authentication
 
 "use strict";
 
-if($tw.node) {
+if ($tw.node) {
 	var util = require("util"),
 		fs = require("fs"),
 		url = require("url"),
@@ -24,15 +24,15 @@ function BasicAuthenticator(server) {
 /*
 Returns true if the authenticator is active, false if it is inactive, or a string if there is an error
 */
-BasicAuthenticator.prototype.init = function() {
+BasicAuthenticator.prototype.init = function () {
 	// Read the credentials data
 	this.credentialsFilepath = this.server.get("credentials");
-	if(this.credentialsFilepath) {
-		var resolveCredentialsFilepath = path.resolve(this.server.boot.wikiPath,this.credentialsFilepath);
-		if(fs.existsSync(resolveCredentialsFilepath) && !fs.statSync(resolveCredentialsFilepath).isDirectory()) {
-			var credentialsText = fs.readFileSync(resolveCredentialsFilepath,"utf8"),
+	if (this.credentialsFilepath) {
+		var resolveCredentialsFilepath = path.resolve(this.server.boot.wikiPath, this.credentialsFilepath);
+		if (fs.existsSync(resolveCredentialsFilepath) && !fs.statSync(resolveCredentialsFilepath).isDirectory()) {
+			var credentialsText = fs.readFileSync(resolveCredentialsFilepath, "utf8"),
 				credentialsData = $tw.utils.parseCsvStringWithHeader(credentialsText);
-			if(typeof credentialsData === "string") {
+			if (typeof credentialsData === "string") {
 				return "Error: " + credentialsData + " reading credentials from '" + resolveCredentialsFilepath + "'";
 			} else {
 				this.credentialsData = credentialsData;
@@ -42,7 +42,7 @@ BasicAuthenticator.prototype.init = function() {
 		}
 	}
 	// Add the hardcoded username and password if specified
-	if(this.server.get("username") && this.server.get("password")) {
+	if (this.server.get("username") && this.server.get("password")) {
 		this.credentialsData = this.credentialsData || [];
 		this.credentialsData.push({
 			username: this.server.get("username"),
@@ -56,10 +56,10 @@ BasicAuthenticator.prototype.init = function() {
 Returns true if the request is authenticated and assigns the "authenticatedUsername" state variable.
 Returns false if the request couldn't be authenticated having sent an appropriate response to the browser
 */
-BasicAuthenticator.prototype.authenticateRequest = function(request,response,state) {
+BasicAuthenticator.prototype.authenticateRequest = function (request, response, state) {
 	// Extract the incoming username and password from the request
 	var header = request.headers.authorization || "";
-	if(!header && state.allowAnon) {
+	if (!header && state.allowAnon) {
 		// If there's no header and anonymous access is allowed then we don't set authenticatedUsername
 		return true;
 	}
@@ -69,17 +69,18 @@ BasicAuthenticator.prototype.authenticateRequest = function(request,response,sta
 		incomingUsername = parts[0],
 		incomingPassword = parts[1];
 	// Check that at least one of the credentials matches
-	var matchingCredentials = this.credentialsData.find(function(credential) {
+	var matchingCredentials = this.credentialsData.find(function (credential) {
 		return credential.username === incomingUsername && credential.password === incomingPassword;
 	});
-	if(matchingCredentials) {
+	if (matchingCredentials) {
 		// If so, add the authenticated username to the request state
 		state.authenticatedUsername = incomingUsername;
 		return true;
 	} else {
 		// If not, return an authentication challenge
-		response.writeHead(401,"Authentication required",{
-			"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + state.server.servername + '"'
+		response.writeHead(401, "Authentication required", {
+			"WWW-Authenticate":
+				'Basic realm="Please provide your username and password to login to ' + state.server.servername + '"'
 		});
 		response.end();
 		return false;

@@ -12,11 +12,11 @@ Filter operator for comparing title fields for equality
 /*
 Export our filter function
 */
-exports.title = function(source,operator,options) {
+exports.title = function (source, operator, options) {
 	var results = [];
-	if(operator.prefix === "!") {
-		source(function(tiddler,title) {
-			if(tiddler && tiddler.fields.title !== operator.operand) {
+	if (operator.prefix === "!") {
+		source(function (tiddler, title) {
+			if (tiddler && tiddler.fields.title !== operator.operand) {
 				results.push(title);
 			}
 		});

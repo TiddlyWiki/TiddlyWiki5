@@ -9,7 +9,7 @@ Bitmap editor operation to rotate the image left by 90 degrees
 
 "use strict";
 
-exports["rotate-left"] = function(event) {
+exports["rotate-left"] = function (event) {
 	// Rotate the canvas left by 90 degrees
 	this.rotateCanvasLeft();
 	// Update the input controls

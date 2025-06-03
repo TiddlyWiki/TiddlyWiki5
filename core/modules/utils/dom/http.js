@@ -26,10 +26,10 @@ function HttpClient(options) {
 /*
 Return the index into this.requests[] corresponding to a given ID. Returns null if not found
 */
-HttpClient.prototype.getRequestIndex = function(targetId) {
+HttpClient.prototype.getRequestIndex = function (targetId) {
 	var targetIndex = null;
-	$tw.utils.each(this.requests,function(requestInfo,index) {
-		if(requestInfo.id === targetId) {
+	$tw.utils.each(this.requests, function (requestInfo, index) {
+		if (requestInfo.id === targetId) {
 			targetIndex = index;
 		}
 	});
@@ -39,31 +39,31 @@ HttpClient.prototype.getRequestIndex = function(targetId) {
 /*
 Update the state tiddler that is tracking the outstanding requests
 */
-HttpClient.prototype.updateRequestTracker = function() {
+HttpClient.prototype.updateRequestTracker = function () {
 	this.wiki.addTiddler({title: this.stateTrackerTitle, text: "" + this.requests.length});
 };
 
-HttpClient.prototype.initiateHttpRequest = function(options) {
+HttpClient.prototype.initiateHttpRequest = function (options) {
 	var self = this,
 		id = this.nextId,
 		request = new HttpClientRequest(options);
 	this.nextId += 1;
 	this.requests.push({id: id, request: request});
 	this.updateRequestTracker();
-	request.send(function(err) {
+	request.send(function (err) {
 		var targetIndex = self.getRequestIndex(id);
-		if(targetIndex !== null) {
-			self.requests.splice(targetIndex,1);
+		if (targetIndex !== null) {
+			self.requests.splice(targetIndex, 1);
 			self.updateRequestTracker();
 		}
 	});
 	return id;
 };
 
-HttpClient.prototype.cancelAllHttpRequests = function() {
+HttpClient.prototype.cancelAllHttpRequests = function () {
 	var self = this;
-	if(this.requests.length > 0) {
-		for(var t=this.requests.length - 1; t--; t>=0) {
+	if (this.requests.length > 0) {
+		for (var t = this.requests.length - 1; t--; t >= 0) {
 			var requestInfo = this.requests[t];
 			requestInfo.request.cancel();
 		}
@@ -72,11 +72,11 @@ HttpClient.prototype.cancelAllHttpRequests = function() {
 	this.updateRequestTracker();
 };
 
-HttpClient.prototype.cancelHttpRequest = function(targetId) {
+HttpClient.prototype.cancelHttpRequest = function (targetId) {
 	var targetIndex = this.getRequestIndex(targetId);
-	if(targetIndex !== null) {
+	if (targetIndex !== null) {
 		this.requests[targetIndex].request.cancel();
-		this.requests.splice(targetIndex,1);
+		this.requests.splice(targetIndex, 1);
 		this.updateRequestTracker();
 	}
 };
@@ -106,7 +106,7 @@ bearerAuthTokenFromStore: name of password store entry contain bear authorizatio
 */
 function HttpClientRequest(options) {
 	var self = this;
-	console.log("Initiating an HTTP request",options)
+	console.log("Initiating an HTTP request", options);
 	this.wiki = options.wiki;
 	this.completionActions = options.oncompletion;
 	this.progressActions = options.onprogress;
@@ -115,43 +115,53 @@ function HttpClientRequest(options) {
 	this.method = options.method || "GET";
 	this.body = options.body || "";
 	this.binary = options.binary || "";
-	this.useDefaultHeaders = options.useDefaultHeaders !== "false" ? true : false,
-	this.variables = options.variables;
+	(this.useDefaultHeaders = options.useDefaultHeaders !== "false" ? true : false),
+		(this.variables = options.variables);
 	var url = options.url;
-	$tw.utils.each(options.queryStrings,function(value,name) {
-		url = $tw.utils.setQueryStringParameter(url,name,value);
+	$tw.utils.each(options.queryStrings, function (value, name) {
+		url = $tw.utils.setQueryStringParameter(url, name, value);
 	});
-	$tw.utils.each(options.passwordQueryStrings,function(value,name) {
-		url = $tw.utils.setQueryStringParameter(url,name,$tw.utils.getPassword(value) || "");
+	$tw.utils.each(options.passwordQueryStrings, function (value, name) {
+		url = $tw.utils.setQueryStringParameter(url, name, $tw.utils.getPassword(value) || "");
 	});
 	this.url = url;
 	this.requestHeaders = {};
-	$tw.utils.each(options.headers,function(value,name) {
+	$tw.utils.each(options.headers, function (value, name) {
 		self.requestHeaders[name] = value;
 	});
-	$tw.utils.each(options.passwordHeaders,function(value,name) {
+	$tw.utils.each(options.passwordHeaders, function (value, name) {
 		self.requestHeaders[name] = $tw.utils.getPassword(value) || "";
 	});
-	this.basicAuthUsername = options.basicAuthUsername || (options.basicAuthUsernameFromStore && $tw.utils.getPassword(options.basicAuthUsernameFromStore)) || "";
-	this.basicAuthPassword = options.basicAuthPassword || (options.basicAuthPasswordFromStore && $tw.utils.getPassword(options.basicAuthPasswordFromStore)) || "";
-	this.bearerAuthToken = options.bearerAuthToken || (options.bearerAuthTokenFromStore && $tw.utils.getPassword(options.bearerAuthTokenFromStore)) || "";
-	if(this.basicAuthUsername && this.basicAuthPassword) {
-		this.requestHeaders.Authorization = "Basic " + $tw.utils.base64Encode(this.basicAuthUsername + ":" + this.basicAuthPassword);
-	} else if(this.bearerAuthToken) {
+	this.basicAuthUsername =
+		options.basicAuthUsername ||
+		(options.basicAuthUsernameFromStore && $tw.utils.getPassword(options.basicAuthUsernameFromStore)) ||
+		"";
+	this.basicAuthPassword =
+		options.basicAuthPassword ||
+		(options.basicAuthPasswordFromStore && $tw.utils.getPassword(options.basicAuthPasswordFromStore)) ||
+		"";
+	this.bearerAuthToken =
+		options.bearerAuthToken ||
+		(options.bearerAuthTokenFromStore && $tw.utils.getPassword(options.bearerAuthTokenFromStore)) ||
+		"";
+	if (this.basicAuthUsername && this.basicAuthPassword) {
+		this.requestHeaders.Authorization =
+			"Basic " + $tw.utils.base64Encode(this.basicAuthUsername + ":" + this.basicAuthPassword);
+	} else if (this.bearerAuthToken) {
 		this.requestHeaders.Authorization = "Bearer " + this.bearerAuthToken;
 	}
 }
 
-HttpClientRequest.prototype.send = function(callback) {
+HttpClientRequest.prototype.send = function (callback) {
 	var self = this,
-		setBinding = function(title,text) {
-			if(title) {
+		setBinding = function (title, text) {
+			if (title) {
 				self.wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
 			}
 		};
-	if(this.url) {
-		setBinding(this.bindStatus,"pending");
-		setBinding(this.bindProgress,"0");
+	if (this.url) {
+		setBinding(this.bindStatus, "pending");
+		setBinding(this.bindProgress, "0");
 		// Set the request tracker tiddler
 		var requestTrackerTitle = this.wiki.generateNewTitle("$:/temp/HttpRequest");
 		this.wiki.addTiddler({
@@ -173,18 +183,18 @@ HttpClientRequest.prototype.send = function(callback) {
 			data: this.body,
 			returnProp: this.binary === "" ? "responseText" : "response",
 			responseType: this.binary === "" ? "text" : "arraybuffer",
-			callback: function(err,data,xhr) {
+			callback: function (err, data, xhr) {
 				var hasSucceeded = xhr.status >= 200 && xhr.status < 300,
 					completionCode = hasSucceeded ? "complete" : "error",
 					headers = {};
-				$tw.utils.each(xhr.getAllResponseHeaders().split("\r\n"),function(line) {
+				$tw.utils.each(xhr.getAllResponseHeaders().split("\r\n"), function (line) {
 					var pos = line.indexOf(":");
-					if(pos !== -1) {
-						headers[line.substr(0,pos)] = line.substr(pos + 1).trim();
+					if (pos !== -1) {
+						headers[line.substr(0, pos)] = line.substr(pos + 1).trim();
 					}
 				});
-				setBinding(self.bindStatus,completionCode);
-				setBinding(self.bindProgress,"100");
+				setBinding(self.bindStatus, completionCode);
+				setBinding(self.bindProgress, "100");
 				var resultVariables = {
 					status: xhr.status.toString(),
 					statusText: xhr.statusText,
@@ -197,34 +207,46 @@ HttpClientRequest.prototype.send = function(callback) {
 					var binary = "",
 						bytes = new Uint8Array(data),
 						len = bytes.byteLength;
-					for (var i=0; i<len; i++) {
+					for (var i = 0; i < len; i++) {
 						binary += String.fromCharCode(bytes[i]);
 					}
-					resultVariables.data = $tw.utils.base64Encode(binary,true);
+					resultVariables.data = $tw.utils.base64Encode(binary, true);
 				}
-				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(requestTrackerTitle),{
-					status: completionCode,
-				}));
-				self.wiki.invokeActionString(self.completionActions,undefined,$tw.utils.extend({},self.variables,resultVariables),{parentWidget: $tw.rootWidget});
+				self.wiki.addTiddler(
+					new $tw.Tiddler(self.wiki.getTiddler(requestTrackerTitle), {
+						status: completionCode
+					})
+				);
+				self.wiki.invokeActionString(
+					self.completionActions,
+					undefined,
+					$tw.utils.extend({}, self.variables, resultVariables),
+					{parentWidget: $tw.rootWidget}
+				);
 				callback(hasSucceeded ? null : xhr.statusText);
 				// console.log("Back!",err,data,xhr);
 			},
-			progress: function(lengthComputable,loaded,total) {
-				if(lengthComputable) {
-					setBinding(self.bindProgress,"" + Math.floor((loaded/total) * 100))
+			progress: function (lengthComputable, loaded, total) {
+				if (lengthComputable) {
+					setBinding(self.bindProgress, "" + Math.floor((loaded / total) * 100));
 				}
-				self.wiki.invokeActionString(self.progressActions,undefined,$tw.utils.extend({},self.variables,{
-					lengthComputable: lengthComputable ? "yes" : "no",
-					loaded: loaded,
-					total: total
-				}),{parentWidget: $tw.rootWidget});
+				self.wiki.invokeActionString(
+					self.progressActions,
+					undefined,
+					$tw.utils.extend({}, self.variables, {
+						lengthComputable: lengthComputable ? "yes" : "no",
+						loaded: loaded,
+						total: total
+					}),
+					{parentWidget: $tw.rootWidget}
+				);
 			}
 		});
 	}
 };
 
-HttpClientRequest.prototype.cancel = function() {
-	if(this.xhr) {
+HttpClientRequest.prototype.cancel = function () {
+	if (this.xhr) {
 		this.xhr.abort();
 	}
 };
@@ -241,34 +263,42 @@ Make an HTTP request. Options are:
 	returnProp: string name of the property to return as first argument of callback
 	responseType: "text" or "arraybuffer"
 */
-exports.httpRequest = function(options) {
+exports.httpRequest = function (options) {
 	var type = options.type || "GET",
 		url = options.url,
 		useDefaultHeaders = options.useDefaultHeaders !== false ? true : false,
 		headers = options.headers || (useDefaultHeaders ? {accept: "application/json"} : {}),
-		hasHeader = function(targetHeader) {
+		hasHeader = function (targetHeader) {
 			targetHeader = targetHeader.toLowerCase();
 			var result = false;
-			$tw.utils.each(headers,function(header,headerTitle,object) {
-				if(headerTitle.toLowerCase() === targetHeader) {
+			$tw.utils.each(headers, function (header, headerTitle, object) {
+				if (headerTitle.toLowerCase() === targetHeader) {
 					result = true;
 				}
 			});
 			return result;
 		},
-		getHeader = function(targetHeader) {
+		getHeader = function (targetHeader) {
 			return headers[targetHeader] || headers[targetHeader.toLowerCase()];
 		},
-		isSimpleRequest = function(type,headers) {
-			if(["GET","HEAD","POST"].indexOf(type) === -1) {
+		isSimpleRequest = function (type, headers) {
+			if (["GET", "HEAD", "POST"].indexOf(type) === -1) {
 				return false;
 			}
-			for(var header in headers) {
-				if(["accept","accept-language","content-language","content-type"].indexOf(header.toLowerCase()) === -1) {
+			for (var header in headers) {
+				if (
+					["accept", "accept-language", "content-language", "content-type"].indexOf(header.toLowerCase()) ===
+					-1
+				) {
 					return false;
 				}
 			}
-			if(hasHeader("Content-Type") && ["application/x-www-form-urlencoded","multipart/form-data","text/plain"].indexOf(getHeader["Content-Type"]) === -1) {
+			if (
+				hasHeader("Content-Type") &&
+				["application/x-www-form-urlencoded", "multipart/form-data", "text/plain"].indexOf(
+					getHeader["Content-Type"]
+				) === -1
+			) {
 				return false;
 			}
 			return true;
@@ -276,17 +306,20 @@ exports.httpRequest = function(options) {
 		returnProp = options.returnProp || "responseText",
 		request = new XMLHttpRequest(),
 		data = "",
-		f,results;
+		f,
+		results;
 	// Massage the data hashmap into a string
-	if(options.data) {
-		if(typeof options.data === "string") { // Already a string
+	if (options.data) {
+		if (typeof options.data === "string") {
+			// Already a string
 			data = options.data;
-		} else { // A hashmap of strings
+		} else {
+			// A hashmap of strings
 			results = [];
-			$tw.utils.each(options.data,function(dataItem,dataItemTitle) {
+			$tw.utils.each(options.data, function (dataItem, dataItemTitle) {
 				results.push(dataItemTitle + "=" + encodeURIComponent(dataItem));
 			});
-			if(type === "GET" || type === "HEAD") {
+			if (type === "GET" || type === "HEAD") {
 				url += "?" + results.join("&");
 			} else {
 				data = results.join("&");
@@ -295,56 +328,59 @@ exports.httpRequest = function(options) {
 	}
 	request.responseType = options.responseType || "text";
 	// Set up the state change handler
-	request.onreadystatechange = function() {
-		if(this.readyState === 4) {
-			if(this.status >= 200 && this.status < 300) {
+	request.onreadystatechange = function () {
+		if (this.readyState === 4) {
+			if (this.status >= 200 && this.status < 300) {
 				// Success!
-				options.callback(null,this[returnProp],this);
+				options.callback(null, this[returnProp], this);
 				return;
 			}
-		// Something went wrong
-		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,this[returnProp],this);
+			// Something went wrong
+			options.callback(
+				$tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,
+				this[returnProp],
+				this
+			);
 		}
 	};
 	// Handle progress
-	if(options.progress) {
-		request.onprogress = function(event) {
-			console.log("Progress event",event)
-			options.progress(event.lengthComputable,event.loaded,event.total);
+	if (options.progress) {
+		request.onprogress = function (event) {
+			console.log("Progress event", event);
+			options.progress(event.lengthComputable, event.loaded, event.total);
 		};
 	}
 	// Make the request
-	request.open(type,url,true);
+	request.open(type, url, true);
 	// Headers
-	if(headers) {
-		$tw.utils.each(headers,function(header,headerTitle,object) {
-			request.setRequestHeader(headerTitle,header);
+	if (headers) {
+		$tw.utils.each(headers, function (header, headerTitle, object) {
+			request.setRequestHeader(headerTitle, header);
 		});
 	}
-	if(data && !hasHeader("Content-Type") && useDefaultHeaders) {
-		request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
+	if (data && !hasHeader("Content-Type") && useDefaultHeaders) {
+		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	}
-	if(!hasHeader("X-Requested-With") && !isSimpleRequest(type,headers) && useDefaultHeaders) {
-		request.setRequestHeader("X-Requested-With","TiddlyWiki");
+	if (!hasHeader("X-Requested-With") && !isSimpleRequest(type, headers) && useDefaultHeaders) {
+		request.setRequestHeader("X-Requested-With", "TiddlyWiki");
 	}
 	// Send data
 	try {
 		request.send(data);
-	} catch(e) {
-		options.callback(e,null,this);
+	} catch (e) {
+		options.callback(e, null, this);
 	}
 	return request;
 };
 
-exports.setQueryStringParameter = function(url,paramName,paramValue) {
+exports.setQueryStringParameter = function (url, paramName, paramValue) {
 	var URL = $tw.browser ? window.URL : require("url").URL,
 		newUrl;
 	try {
 		newUrl = new URL(url);
-	} catch(e) {
-	}
-	if(newUrl && paramName) {
-		newUrl.searchParams.set(paramName,paramValue || "");
+	} catch (e) {}
+	if (newUrl && paramName) {
+		newUrl.searchParams.set(paramName, paramValue || "");
 		return newUrl.toString();
 	} else {
 		return url;

@@ -12,11 +12,11 @@ Filter operator for filtering out titles that don't meet the minimum length in t
 /*
 Export our filter function
 */
-exports.minlength = function(source,operator,options) {
+exports.minlength = function (source, operator, options) {
 	var results = [],
-		minLength = parseInt(operator.operand || "",10) || 0;
-	source(function(tiddler,title) {
-		if(title.length >= minLength) {
+		minLength = parseInt(operator.operand || "", 10) || 0;
+	source(function (tiddler, title) {
+		if (title.length >= minLength) {
 			results.push(title);
 		}
 	});

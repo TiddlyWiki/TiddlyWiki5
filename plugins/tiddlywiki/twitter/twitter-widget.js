@@ -11,8 +11,8 @@ Twitter widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var TwitterWidget = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
+var TwitterWidget = function (parseTreeNode, options) {
+	this.initialise(parseTreeNode, options);
 };
 
 /*
@@ -20,14 +20,17 @@ Inherit from the base widget class
 */
 TwitterWidget.prototype = new Widget();
 
-var optionAttributes = "align ariaPolite borderColor cards chrome conversation count dnt hashtags height height lang linkColor related size text theme tweetLimit via width".split(" "),
+var optionAttributes =
+		"align ariaPolite borderColor cards chrome conversation count dnt hashtags height height lang linkColor related size text theme tweetLimit via width".split(
+			" "
+		),
 	otherAttributes = "hashtag id ownerScreenName screenName slug tweetID type url userId widgetId".split(" "),
-	allAttributes = Array.prototype.slice.call(optionAttributes,0).concat(otherAttributes);
+	allAttributes = Array.prototype.slice.call(optionAttributes, 0).concat(otherAttributes);
 
 /*
 Render this widget into the DOM
 */
-TwitterWidget.prototype.render = function(parent,nextSibling) {
+TwitterWidget.prototype.render = function (parent, nextSibling) {
 	var self = this;
 	// Housekeeping
 	this.parentDomNode = parent;
@@ -36,10 +39,10 @@ TwitterWidget.prototype.render = function(parent,nextSibling) {
 	var method,
 		arg,
 		options = {};
-		$tw.utils.each(optionAttributes,function(attr) {
-			options[attr] = self.getAttribute(attr);
-		});
-	switch(this.getAttribute("type")) {
+	$tw.utils.each(optionAttributes, function (attr) {
+		options[attr] = self.getAttribute(attr);
+	});
+	switch (this.getAttribute("type")) {
 		case "shareButton":
 			method = "createShareButton";
 			arg = this.getAttribute("url");
@@ -109,30 +112,32 @@ TwitterWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Render the tweet into a div
 	var div = this.document.createElement("div");
-	if(!this.document.isTiddlyWikiFakeDom && window.twttr && method) {
-		twttr.ready(function(twttr) {
-			window.twttr.widgets[method](arg,div,options);
+	if (!this.document.isTiddlyWikiFakeDom && window.twttr && method) {
+		twttr.ready(function (twttr) {
+			window.twttr.widgets[method](arg, div, options);
 		});
 	} else {
 		div.appendChild(this.document.createTextNode("Can't render tweet"));
 	}
 	// Insert it into the DOM
-	parent.insertBefore(div,nextSibling);
+	parent.insertBefore(div, nextSibling);
 	this.domNodes.push(div);
 };
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
-TwitterWidget.prototype.refresh = function(changedTiddlers) {
+TwitterWidget.prototype.refresh = function (changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(allAttributes.find(function(attr) {
-		return $tw.utils.hop(changedAttributes,attr);
-	})) {
+	if (
+		allAttributes.find(function (attr) {
+			return $tw.utils.hop(changedAttributes, attr);
+		})
+	) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 

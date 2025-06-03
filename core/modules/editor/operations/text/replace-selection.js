@@ -9,7 +9,7 @@ Text editor operation to replace the selection
 
 "use strict";
 
-exports["replace-selection"] = function(event,operation) {
+exports["replace-selection"] = function (event, operation) {
 	operation.replacement = event.paramObject.text;
 	operation.cutStart = operation.selStart;
 	operation.cutEnd = operation.selEnd;

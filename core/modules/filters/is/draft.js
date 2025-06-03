@@ -12,17 +12,17 @@ Filter function for [is[draft]] analagous to [has[draft.of]]
 /*
 Export our filter function
 */
-exports.draft = function(source,prefix,options) {
+exports.draft = function (source, prefix, options) {
 	var results = [];
-	if(prefix === "!") {
-		source(function(tiddler,title) {
-			if(!tiddler || !tiddler.isDraft()) {
+	if (prefix === "!") {
+		source(function (tiddler, title) {
+			if (!tiddler || !tiddler.isDraft()) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
-			if(tiddler && tiddler.isDraft()) {
+		source(function (tiddler, title) {
+			if (tiddler && tiddler.isDraft()) {
 				results.push(title);
 			}
 		});

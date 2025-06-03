@@ -14,13 +14,13 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
+var Command = function (params, commander, callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = function () {
 	$tw.crypto.setPassword(null);
 	return null;
 };

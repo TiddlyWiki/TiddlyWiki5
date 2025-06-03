@@ -7,7 +7,7 @@ Hello, World widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var MyWidget = function(parseTreeNode, options) {
+var MyWidget = function (parseTreeNode, options) {
 	this.initialise(parseTreeNode, options);
 };
 
@@ -19,7 +19,7 @@ MyWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-MyWidget.prototype.render = function(parent, nextSibling) {
+MyWidget.prototype.render = function (parent, nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	var message = this.getAttribute("message", "World");
@@ -31,7 +31,7 @@ MyWidget.prototype.render = function(parent, nextSibling) {
 /*
 A widget with optimized performance will selectively refresh, but here we refresh always
 */
-MyWidget.prototype.refresh = function(changedTiddlers) {
+MyWidget.prototype.refresh = function (changedTiddlers) {
 	// Regenerate and rerender the widget and
 	// replace the existing DOM node
 	this.refreshSelf();

@@ -20,13 +20,13 @@ Wiki text rule for inline filtered transclusion. For example:
 exports.name = "filteredtranscludeinline";
 exports.types = {inline: true};
 
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\{\{\{([^\|]+?)(?:\|([^\|\{\}]+))?(?:\|\|([^\|\{\}]+))?\}\}([^\}]*)\}(?:\.(\S+))?/mg;
+	this.matchRegExp = /\{\{\{([^\|]+?)(?:\|([^\|\{\}]+))?(?:\|\|([^\|\{\}]+))?\}\}([^\}]*)\}(?:\.(\S+))?/gm;
 };
 
-exports.parse = function() {
+exports.parse = function () {
 	var filterStart = this.parser.pos + 3;
 	var filterEnd = filterStart + this.match[1].length;
 	var toolTipStart = filterEnd + 1;
@@ -49,20 +49,25 @@ exports.parse = function() {
 	var node = {
 		type: "list",
 		attributes: {
-			filter: {type: "string", value: filter, start: filterStart, end: filterEnd},
+			filter: {type: "string", value: filter, start: filterStart, end: filterEnd}
 		}
 	};
-	if(tooltip) {
+	if (tooltip) {
 		node.attributes.tooltip = {type: "string", value: tooltip, start: toolTipStart, end: toolTipEnd};
 	}
-	if(template) {
+	if (template) {
 		node.attributes.template = {type: "string", value: template, start: templateStart, end: templateEnd};
 	}
-	if(style) {
+	if (style) {
 		node.attributes.style = {type: "string", value: style, start: styleStart, end: styleEnd};
 	}
-	if(classes) {
-		node.attributes.itemClass = {type: "string", value: classes.split(".").join(" "), start: classesStart, end: classesEnd};
+	if (classes) {
+		node.attributes.itemClass = {
+			type: "string",
+			value: classes.split(".").join(" "),
+			start: classesStart,
+			end: classesEnd
+		};
 	}
 	return [node];
 };

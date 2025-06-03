@@ -12,9 +12,9 @@ Filter operator for returning the names of the module types in this wiki
 /*
 Export our filter function
 */
-exports.moduletypes = function(source,operator,options) {
+exports.moduletypes = function (source, operator, options) {
 	var results = [];
-	$tw.utils.each($tw.modules.types,function(moduleInfo,type) {
+	$tw.utils.each($tw.modules.types, function (moduleInfo, type) {
 		results.push(type);
 	});
 	results.sort();

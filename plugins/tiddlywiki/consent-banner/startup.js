@@ -23,59 +23,68 @@ var CHECK_CONSENT_INTERVAL = 1000, // Milliseconds between checking local storag
 	CONFIG_BLOCK_EMBEDDED_CONTENT_TITLE = "$:/config/plugins/tiddlywiki/consent-banner/block-embedded-content",
 	EMBEDDED_MESSAGE_WRAPPER_TITLE = "$:/plugins/tiddlywiki/consent-banner/blocked-embed-message-wrapper";
 
-exports.startup = function() { 
+exports.startup = function () {
 	var consentState = "",
-		setConsentStatus = function(state) {
-			if(consentState !== state) {
+		setConsentStatus = function (state) {
+			if (consentState !== state) {
 				consentState = state;
 				// Write to local storage
-				window.localStorage.setItem(CONSENT_KEY,state);
+				window.localStorage.setItem(CONSENT_KEY, state);
 				// Write to a state tiddler
-				$tw.wiki.addTiddler(new $tw.Tiddler({
-					title: CONSENT_TITLE,
-					text: state
-				}));
+				$tw.wiki.addTiddler(
+					new $tw.Tiddler({
+						title: CONSENT_TITLE,
+						text: state
+					})
+				);
 			}
 		},
-		calculateConsentStatus = function() {
+		calculateConsentStatus = function () {
 			// Consent is implied for logged in users, otherwise we check local storage
-			return ($tw.wiki.getTiddlerText(IS_LOGGED_IN_TITLE) === "yes" && "yes") || window.localStorage.getItem(CONSENT_KEY) || "";
+			return (
+				($tw.wiki.getTiddlerText(IS_LOGGED_IN_TITLE) === "yes" && "yes") ||
+				window.localStorage.getItem(CONSENT_KEY) ||
+				""
+			);
 		},
-		checkConsentStatus = function() {
+		checkConsentStatus = function () {
 			setConsentStatus(calculateConsentStatus());
-			if(consentState === "") {
+			if (consentState === "") {
 				pollConsentStatus();
 			}
 		},
-		pollConsentStatus = function() {
-			setTimeout(checkConsentStatus,CHECK_CONSENT_INTERVAL);
+		pollConsentStatus = function () {
+			setTimeout(checkConsentStatus, CHECK_CONSENT_INTERVAL);
 		};
 	// Set the current consent status
 	checkConsentStatus();
 	// Listen for consent messages
-	$tw.rootWidget.addEventListener("tm-consent-accept",function(event) {
+	$tw.rootWidget.addEventListener("tm-consent-accept", function (event) {
 		setConsentStatus("yes");
 	});
-	$tw.rootWidget.addEventListener("tm-consent-decline",function(event) {
+	$tw.rootWidget.addEventListener("tm-consent-decline", function (event) {
 		setConsentStatus("no");
 	});
-	$tw.rootWidget.addEventListener("tm-consent-clear",function(event) {
+	$tw.rootWidget.addEventListener("tm-consent-clear", function (event) {
 		setConsentStatus("");
 	});
 	// Add our element rendering hook
-	if($tw.wiki.getTiddlerText(CONFIG_BLOCK_EMBEDDED_CONTENT_TITLE,"no") === "yes") {
-		$tw.hooks.addHook("th-rendering-element",function(parseTreeNodes,widget) {
-			if(parseTreeNodes) {
+	if ($tw.wiki.getTiddlerText(CONFIG_BLOCK_EMBEDDED_CONTENT_TITLE, "no") === "yes") {
+		$tw.hooks.addHook("th-rendering-element", function (parseTreeNodes, widget) {
+			if (parseTreeNodes) {
 				return parseTreeNodes;
 			}
-			if(["iframe","object","embed"].indexOf(widget.tag) !== -1 && widget.getVariable("tv-block-embedded-content","no") === "yes") {
+			if (
+				["iframe", "object", "embed"].indexOf(widget.tag) !== -1 &&
+				widget.getVariable("tv-block-embedded-content", "no") === "yes"
+			) {
 				var url = widget.getAttribute("src"),
-					addUnitsIfMissing = function(str) {
+					addUnitsIfMissing = function (str) {
 						str = "" + str;
-						return str + (("" + parseInt(str,10)) === str ? "px" : "");
+						return str + ("" + parseInt(str, 10) === str ? "px" : "");
 					},
-					width = addUnitsIfMissing(widget.getAttribute("width","")),
-					height = addUnitsIfMissing(widget.getAttribute("height",""));
+					width = addUnitsIfMissing(widget.getAttribute("width", "")),
+					height = addUnitsIfMissing(widget.getAttribute("height", ""));
 				return [
 					{
 						type: "vars",

@@ -13,38 +13,40 @@ var openlocationcode = require("$:/plugins/tiddlywiki/geospatial/openlocationcod
 	turf = require("$:/plugins/tiddlywiki/geospatial/turf.js"),
 	geotools = require("$:/plugins/tiddlywiki/geospatial/geotools.js");
 
-exports["olc-decode"] = function(source,operator,options) {
+exports["olc-decode"] = function (source, operator, options) {
 	var olc;
 	try {
-		olc = openlocationcode.decode(operator.operands[0] || "")
-	} catch(e) {
+		olc = openlocationcode.decode(operator.operands[0] || "");
+	} catch (e) {
 		return [];
 	}
 	var suffixes = (operator.suffixes || [])[0] || [],
 		obj;
-	if(suffixes.indexOf("bounds") !== -1) {
-		obj = turf.polygon([[
-			[olc.longitudeLo, olc.latitudeLo],
-			[olc.longitudeLo, olc.latitudeHi],
-			[olc.longitudeHi, olc.latitudeHi],
-			[olc.longitudeHi, olc.latitudeLo],
-			[olc.longitudeLo, olc.latitudeLo]
-		]]);
+	if (suffixes.indexOf("bounds") !== -1) {
+		obj = turf.polygon([
+			[
+				[olc.longitudeLo, olc.latitudeLo],
+				[olc.longitudeLo, olc.latitudeHi],
+				[olc.longitudeHi, olc.latitudeHi],
+				[olc.longitudeHi, olc.latitudeLo],
+				[olc.longitudeLo, olc.latitudeLo]
+			]
+		]);
 	} else {
-		obj = turf.point([olc.longitudeCenter,olc.latitudeCenter]);
+		obj = turf.point([olc.longitudeCenter, olc.latitudeCenter]);
 	}
 	return [JSON.stringify(obj)];
 };
 
-exports["olc-encode"] = function(source,operator,options) {
+exports["olc-encode"] = function (source, operator, options) {
 	var lat = $tw.utils.parseNumber(operator.operands[0] || "0"),
 		long = $tw.utils.parseNumber(operator.operands[1] || "0"),
-		codelength =  $tw.utils.parseNumber(operator.operands[2] || "0") || openlocationcode.CODE_PRECISION_NORMAL,
+		codelength = $tw.utils.parseNumber(operator.operands[2] || "0") || openlocationcode.CODE_PRECISION_NORMAL,
 		olc;
 	try {
-		olc = openlocationcode.encode(lat,long,codelength);
-	} catch(e) {
-		return []
+		olc = openlocationcode.encode(lat, long, codelength);
+	} catch (e) {
+		return [];
 	}
 	return [olc];
 };

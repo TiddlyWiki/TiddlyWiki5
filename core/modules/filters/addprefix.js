@@ -14,9 +14,9 @@ and macro substitution isn't available.
 /*
 Export our filter function
 */
-exports.addprefix = function(source,operator,options) {
+exports.addprefix = function (source, operator, options) {
 	var results = [];
-	source(function(tiddler,title) {
+	source(function (tiddler, title) {
 		results.push(operator.operand + title);
 	});
 	return results;

@@ -12,11 +12,11 @@ Equivalent to ~ filter run prefix.
 /*
 Export our filter prefix function
 */
-exports.else = function(operationSubFunction) {
-	return function(results,source,widget) {
-		if(results.length === 0) {
+exports.else = function (operationSubFunction) {
+	return function (results, source, widget) {
+		if (results.length === 0) {
 			// Main result so far is empty
-			results.pushTop(operationSubFunction(source,widget));
+			results.pushTop(operationSubFunction(source, widget));
 		}
 	};
 };

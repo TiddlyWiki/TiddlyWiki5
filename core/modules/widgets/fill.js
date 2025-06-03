@@ -11,9 +11,9 @@ Sub-widget used by the transclude widget for specifying values for slots within 
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var FillWidget = function(parseTreeNode,options) {
+var FillWidget = function (parseTreeNode, options) {
 	// Initialise
-	this.initialise(parseTreeNode,options);
+	this.initialise(parseTreeNode, options);
 };
 
 /*
@@ -21,7 +21,7 @@ Inherit from the base widget class
 */
 FillWidget.prototype = new Widget();
 
-FillWidget.prototype.execute = function() {
+FillWidget.prototype.execute = function () {
 	// Do nothing. Make no child widgets. $Fill widgets should be invisible when naturally encountered. Instead, their parseTreeNodes are made available to $slot widgets that want it.
 };
 

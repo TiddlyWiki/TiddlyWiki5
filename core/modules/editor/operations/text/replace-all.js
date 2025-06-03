@@ -9,7 +9,7 @@ Text editor operation to replace the entire text
 
 "use strict";
 
-exports["replace-all"] = function(event,operation) {
+exports["replace-all"] = function (event, operation) {
 	operation.cutStart = 0;
 	operation.cutEnd = operation.text.length;
 	operation.replacement = event.paramObject.text;

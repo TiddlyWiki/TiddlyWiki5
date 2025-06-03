@@ -16,14 +16,14 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
+var Command = function (params, commander, callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
-	if(this.params.length < 1) {
+Command.prototype.execute = function () {
+	if (this.params.length < 1) {
 		return "Missing filename";
 	}
 	var self = this,
@@ -31,19 +31,19 @@ Command.prototype.execute = function() {
 		path = require("path"),
 		wiki = this.commander.wiki,
 		filter = this.params[0],
-		pathname = path.resolve(this.commander.outputPath,this.params[1]),
+		pathname = path.resolve(this.commander.outputPath, this.params[1]),
 		deleteDirectory = (this.params[2] || "").toLowerCase() !== "noclean",
 		tiddlers = wiki.filterTiddlers(filter);
-	if(deleteDirectory) {
+	if (deleteDirectory) {
 		$tw.utils.deleteDirectory(pathname);
 	}
 	$tw.utils.createDirectory(pathname);
-	$tw.utils.each(tiddlers,function(title) {
+	$tw.utils.each(tiddlers, function (title) {
 		var tiddler = self.commander.wiki.getTiddler(title),
 			type = tiddler.fields.type || "text/vnd.tiddlywiki",
 			contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"},
-			filename = path.resolve(pathname,$tw.utils.encodeURIComponentExtended(title));
-		fs.writeFileSync(filename,tiddler.fields.text || "",contentTypeInfo.encoding);
+			filename = path.resolve(pathname, $tw.utils.encodeURIComponentExtended(title));
+		fs.writeFileSync(filename, tiddler.fields.text || "", contentTypeInfo.encoding);
 	});
 	return null;
 };

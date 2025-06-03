@@ -11,8 +11,8 @@ Action widget to set a single field or index on a tiddler.
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var SetFieldWidget = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
+var SetFieldWidget = function (parseTreeNode, options) {
+	this.initialise(parseTreeNode, options);
 };
 
 /*
@@ -23,7 +23,7 @@ SetFieldWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-SetFieldWidget.prototype.render = function(parent,nextSibling) {
+SetFieldWidget.prototype.render = function (parent, nextSibling) {
 	this.computeAttributes();
 	this.execute();
 };
@@ -31,18 +31,20 @@ SetFieldWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-SetFieldWidget.prototype.execute = function() {
-	this.actionTiddler = this.getAttribute("$tiddler") || (!this.hasParseTreeNodeAttribute("$tiddler") && this.getVariable("currentTiddler"));
+SetFieldWidget.prototype.execute = function () {
+	this.actionTiddler =
+		this.getAttribute("$tiddler") ||
+		(!this.hasParseTreeNodeAttribute("$tiddler") && this.getVariable("currentTiddler"));
 	this.actionField = this.getAttribute("$field");
 	this.actionIndex = this.getAttribute("$index");
 	this.actionValue = this.getAttribute("$value");
-	this.actionTimestamp = this.getAttribute("$timestamp","yes") === "yes";
+	this.actionTimestamp = this.getAttribute("$timestamp", "yes") === "yes";
 };
 
 /*
 Refresh the widget by ensuring our attributes are up to date
 */
-SetFieldWidget.prototype.refresh = function(changedTiddlers) {
+SetFieldWidget.prototype.refresh = function (changedTiddlers) {
 	// Nothing to refresh
 	return this.refreshChildren(changedTiddlers);
 };
@@ -50,17 +52,21 @@ SetFieldWidget.prototype.refresh = function(changedTiddlers) {
 /*
 Invoke the action associated with this widget
 */
-SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
+SetFieldWidget.prototype.invokeAction = function (triggeringWidget, event) {
 	var self = this,
 		options = {};
-	if(this.actionTiddler) {
+	if (this.actionTiddler) {
 		options.suppressTimestamp = !this.actionTimestamp;
-		if((typeof this.actionField == "string") || (typeof this.actionIndex == "string")  || (typeof this.actionValue == "string")) {
-			this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue,options);
+		if (
+			typeof this.actionField == "string" ||
+			typeof this.actionIndex == "string" ||
+			typeof this.actionValue == "string"
+		) {
+			this.wiki.setText(this.actionTiddler, this.actionField, this.actionIndex, this.actionValue, options);
 		}
-		$tw.utils.each(this.attributes,function(attribute,name) {
-			if(name.charAt(0) !== "$") {
-				self.wiki.setText(self.actionTiddler,name,undefined,attribute,options);
+		$tw.utils.each(this.attributes, function (attribute, name) {
+			if (name.charAt(0) !== "$") {
+				self.wiki.setText(self.actionTiddler, name, undefined, attribute, options);
 			}
 		});
 	}

@@ -15,7 +15,7 @@ to the current URL, such as a WebDAV server.
 /*
 Retrieve ETag if available
 */
-var retrieveETag = function(self) {
+var retrieveETag = function (self) {
 	var headers = {
 		Accept: "*/*"
 	};
@@ -23,24 +23,23 @@ var retrieveETag = function(self) {
 		url: self.uri(),
 		type: "HEAD",
 		headers: headers,
-		callback: function(err,data,xhr) {
-			if(err) {
+		callback: function (err, data, xhr) {
+			if (err) {
 				return;
 			}
 			var etag = xhr.getResponseHeader("ETag");
-			if(!etag) {
+			if (!etag) {
 				return;
 			}
-			self.etag = etag.replace(/^W\//,"");
+			self.etag = etag.replace(/^W\//, "");
 		}
 	});
 };
 
-
 /*
 Select the appropriate saver module and set it up
 */
-var PutSaver = function(wiki) {
+var PutSaver = function (wiki) {
 	this.wiki = wiki;
 	var self = this;
 	var uri = this.uri();
@@ -49,9 +48,9 @@ var PutSaver = function(wiki) {
 	$tw.utils.httpRequest({
 		url: uri,
 		type: "OPTIONS",
-		callback: function(err,data,xhr) {
+		callback: function (err, data, xhr) {
 			// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
-			if(!err) {
+			if (!err) {
 				self.serverAcceptsPuts = xhr.status >= 200 && xhr.status < 300 && !!xhr.getResponseHeader("dav");
 			}
 		}
@@ -59,22 +58,22 @@ var PutSaver = function(wiki) {
 	retrieveETag(this);
 };
 
-PutSaver.prototype.uri = function() {
+PutSaver.prototype.uri = function () {
 	return document.location.toString().split("#")[0];
 };
 
 // TODO: in case of edit conflict
 // Prompt: Do you want to save over this? Y/N
 // Merging would be ideal, and may be possible using future generic merge flow
-PutSaver.prototype.save = function(text,method,callback) {
-	if(!this.serverAcceptsPuts) {
+PutSaver.prototype.save = function (text, method, callback) {
+	if (!this.serverAcceptsPuts) {
 		return false;
 	}
 	var self = this;
 	var headers = {
 		"Content-Type": "text/html;charset=UTF-8"
 	};
-	if(this.etag) {
+	if (this.etag) {
 		headers["If-Match"] = this.etag;
 	}
 	$tw.notifier.display("$:/language/Notifications/Save/Starting");
@@ -83,15 +82,18 @@ PutSaver.prototype.save = function(text,method,callback) {
 		type: "PUT",
 		headers: headers,
 		data: text,
-		callback: function(err,data,xhr) {
-			if(err) {
+		callback: function (err, data, xhr) {
+			if (err) {
 				var status = xhr.status,
 					errorMsg = err;
-				if(status === 412) { // file changed on server
+				if (status === 412) {
+					// file changed on server
 					errorMsg = $tw.language.getString("Error/PutEditConflict");
-				} else if(status === 401) { // authentication required
+				} else if (status === 401) {
+					// authentication required
 					errorMsg = $tw.language.getString("Error/PutUnauthorized");
-				} else if(status === 403) { // permission denied
+				} else if (status === 403) {
+					// permission denied
 					errorMsg = $tw.language.getString("Error/PutForbidden");
 				}
 				if (xhr.responseText) {
@@ -101,7 +103,7 @@ PutSaver.prototype.save = function(text,method,callback) {
 				callback(errorMsg); // fail
 			} else {
 				self.etag = xhr.getResponseHeader("ETag");
-				if(self.etag == null) {
+				if (self.etag == null) {
 					retrieveETag(self);
 				}
 				callback(null); // success
@@ -117,19 +119,19 @@ Information about this saver
 PutSaver.prototype.info = {
 	name: "put",
 	priority: 2000,
-	capabilities: ["save","autosave"]
+	capabilities: ["save", "autosave"]
 };
 
 /*
 Static method that returns true if this saver is capable of working
 */
-exports.canSave = function(wiki) {
+exports.canSave = function (wiki) {
 	return /^https?:/.test(location.protocol);
 };
 
 /*
 Create an instance of this saver
 */
-exports.create = function(wiki) {
+exports.create = function (wiki) {
 	return new PutSaver(wiki);
 };

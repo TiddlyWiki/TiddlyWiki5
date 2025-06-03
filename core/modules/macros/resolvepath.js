@@ -11,14 +11,11 @@ Resolves a relative path for an absolute rootpath.
 
 exports.name = "resolvepath";
 
-exports.params = [
-	{name: "source"},
-	{name: "root"}
-];
+exports.params = [{name: "source"}, {name: "root"}];
 
 /*
 Run the macro
 */
-exports.run = function(source, root) {
+exports.run = function (source, root) {
 	return $tw.utils.resolvePath(source, root);
 };

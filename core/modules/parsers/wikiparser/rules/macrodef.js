@@ -21,23 +21,24 @@ exports.types = {pragma: true};
 /*
 Instantiate parse rule
 */
-exports.init = function(parser) {
+exports.init = function (parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\\define\s+([^(\s]+)\(\s*([^)]*)\)(\s*\r?\n)?/mg;
+	this.matchRegExp = /\\define\s+([^(\s]+)\(\s*([^)]*)\)(\s*\r?\n)?/gm;
 };
 
 /*
 Parse the most recent match
 */
-exports.parse = function() {
+exports.parse = function () {
 	// Move past the macro name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the parameters
 	var paramString = this.match[2],
 		params = [];
 	if(paramString !== "") {
-		var reParam = /\s*([A-Za-z0-9\-_]+)(?:\s*:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))?/mg,
+		var reParam =
+				/\s*([A-Za-z0-9\-_]+)(?:\s*:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))?/gm,
 			paramMatch = reParam.exec(paramString);
 		while(paramMatch) {
 			// Save the parameter details
@@ -58,30 +59,32 @@ exports.parse = function() {
 		reEnd = new RegExp("((?:^|\\r?\\n)[^\\S\\n\\r]*\\\\end[^\\S\\n\\r]*(?:" + $tw.utils.escapeRegExp(this.match[1]) + ")?\\s*?(?:$|\\r?\\n))","mg");
 	} else {
 		// Otherwise, the end of the definition is marked by the end of the line
-		reEnd = /($|\r?\n)/mg;
+		reEnd = /($|\r?\n)/gm;
 		// Move past any whitespace
-		this.parser.pos = $tw.utils.skipWhiteSpace(this.parser.source,this.parser.pos);
+		this.parser.pos = $tw.utils.skipWhiteSpace(this.parser.source, this.parser.pos);
 	}
 	// Find the end of the definition
 	reEnd.lastIndex = this.parser.pos;
 	var text,
 		endMatch = reEnd.exec(this.parser.source);
 	if(endMatch) {
-		text = this.parser.source.substring(this.parser.pos,endMatch.index);
+		text = this.parser.source.substring(this.parser.pos, endMatch.index);
 		this.parser.pos = endMatch.index + endMatch[0].length;
 	} else {
 		// We didn't find the end of the definition, so we'll make it blank
 		text = "";
 	}
 	// Save the macro definition
-	var parseTreeNodes = [{
-		type: "set",
-		attributes: {},
-		children: [],
-		params: params,
-		isMacroDefinition: true
-	}];
-	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"name",this.match[1]);
-	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"value",text);
+	var parseTreeNodes = [
+		{
+			type: "set",
+			attributes: {},
+			children: [],
+			params: params,
+			isMacroDefinition: true
+		}
+	];
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0], "name", this.match[1]);
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0], "value", text);
 	return parseTreeNodes;
 };

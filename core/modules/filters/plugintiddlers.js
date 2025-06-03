@@ -12,12 +12,12 @@ Filter operator for returning the titles of the shadow tiddlers within a plugin
 /*
 Export our filter function
 */
-exports.plugintiddlers = function(source,operator,options) {
+exports.plugintiddlers = function (source, operator, options) {
 	var results = [];
-	source(function(tiddler,title) {
-		var pluginInfo = options.wiki.getPluginInfo(title) || options.wiki.getTiddlerDataCached(title,{tiddlers:[]});
-		if(pluginInfo && pluginInfo.tiddlers) {
-			$tw.utils.each(pluginInfo.tiddlers,function(fields,title) {
+	source(function (tiddler, title) {
+		var pluginInfo = options.wiki.getPluginInfo(title) || options.wiki.getTiddlerDataCached(title, {tiddlers: []});
+		if (pluginInfo && pluginInfo.tiddlers) {
+			$tw.utils.each(pluginInfo.tiddlers, function (fields, title) {
 				results.push(title);
 			});
 		}

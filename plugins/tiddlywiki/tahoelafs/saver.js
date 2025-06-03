@@ -12,16 +12,16 @@ A bare bones saver for Tahoe-LAFS. It just PUTs the new HTML file back to the se
 /*
 Select the appropriate saver module and set it up
 */
-var TahoeSaver = function(wiki) {
+var TahoeSaver = function (wiki) {
 	this.wiki = wiki;
 };
 
-TahoeSaver.prototype.save = function(text) {
+TahoeSaver.prototype.save = function (text) {
 	// Do the HTTP post
 	var http = new XMLHttpRequest();
-	http.open("PUT",document.location.toString(),true);
-	http.onreadystatechange = function() {
-		if(http.readyState == 4 && http.status == 200) {
+	http.open("PUT", document.location.toString(), true);
+	http.onreadystatechange = function () {
+		if (http.readyState == 4 && http.status == 200) {
 			window.alert("Saved to Tahoe-LAFS: " + http.responseText);
 		}
 	};
@@ -40,13 +40,13 @@ TahoeSaver.prototype.info = {
 /*
 Static method that returns true if this saver is capable of working
 */
-exports.canSave = function(wiki) {
+exports.canSave = function (wiki) {
 	return true;
 };
 
 /*
 Create an instance of this saver
 */
-exports.create = function(wiki) {
+exports.create = function (wiki) {
 	return new TahoeSaver(wiki);
 };
