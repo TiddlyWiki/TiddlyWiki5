@@ -1,0 +1,18 @@
+created: 20140908125500000
+list: [[Empty Edition]]
+modified: 20241220114652589
+original-modified: 20160107222125923
+tags: TableOfContents
+title: Editions
+ja-title: エディション
+type: text/vnd.tiddlywiki
+
+TiddlyWikiは、特定の目的に合わせて調整されたいくつかの異なるエディションで配布されています
+
+エディションは、できるだけ早く立ち上げて実行できるように、TiddlyWikiのコアコンポーネントとプラグイン、ドキュメント、およびサンプルコンテンツで構成されています
+
+これらのエディションのコンポーネントを組み合わせて、特定のアプリケーションに固有のソリューションを作成できます
+
+<<list-links "[tag[Editions]]">>
+
+<$macrocall $name=".tip" _="""エディションと、TiddlyWikiが実行される[[プラットフォーム|Platforms]]と混同しないように注意してください(例:[[単一HTMLファイル|Saving]] vs. [[Node.js|TiddlyWiki on Node.js]])"""/>

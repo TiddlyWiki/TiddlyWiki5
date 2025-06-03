@@ -6,10 +6,7 @@ module-type: widget
 Widget base class
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -628,31 +625,53 @@ Widget.prototype.addEventListeners = function(listeners) {
 };
 
 /*
-Add an event listener
+Add an event listener.
+
+Listener could return a boolean indicating whether to further propagation or not, default to `false`.
 */
 Widget.prototype.addEventListener = function(type,handler) {
-	var self = this;
-	if(typeof handler === "string") { // The handler is a method name on this widget
-		this.eventListeners[type] = function(event) {
-			return self[handler].call(self,event);
-		};
-	} else { // The handler is a function
-		this.eventListeners[type] = function(event) {
-			return handler.call(self,event);
-		};
+	this.eventListeners[type] = this.eventListeners[type] || [];
+	if(this.eventListeners[type].indexOf(handler) === -1) {
+		this.eventListeners[type].push(handler);
 	}
 };
 
 /*
-Dispatch an event to a widget. If the widget doesn't handle the event then it is also dispatched to the parent widget
+Remove an event listener
+*/
+Widget.prototype.removeEventListener = function(type,handler) {
+	if(!this.eventListeners[type]) return;
+	var index = this.eventListeners[type].indexOf(handler);
+	if(index !== -1) {
+		this.eventListeners[type].splice(index,1);
+	}
+};
+
+/*
+Dispatch an event to a widget.
+
+If the widget doesn't handle the event then it is also dispatched to the parent widget
 */
 Widget.prototype.dispatchEvent = function(event) {
 	event.widget = event.widget || this;
-	// Dispatch the event if this widget handles it
-	var listener = this.eventListeners[event.type];
-	if(listener) {
-		// Don't propagate the event if the listener returned false
-		if(!listener(event)) {
+	var listeners = this.eventListeners[event.type];
+	if(listeners) {
+		var self = this;
+		var shouldPropagate = true;
+		$tw.utils.each(listeners,function(handler) {
+			var propagate;
+			if(typeof handler === "string") {
+				 // If handler is a string, call it as a method on the widget
+				propagate = self[handler].call(self,event);
+			} else {
+				// Otherwise call the function handler directly
+				propagate = handler.call(self,event);
+			}
+			if(propagate === false) {
+				shouldPropagate = false;
+			}
+		});
+		if(!shouldPropagate) {
 			return false;
 		}
 	}
@@ -846,5 +865,3 @@ Widget.evaluateVariable  = function(widget,name,options) {
 };
 
 exports.widget = Widget;
-
-})();

@@ -20,6 +20,8 @@ The content of the <<.wid BrowseWidget>> widget is ignored.
 |accept |<<.from-version "5.1.23">> Optional comma delimited [[list of file accepted extensions|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Unique_file_type_specifiers]] and/or MIME types |
 |message |Optional override of widget message to be generated. The files will be passed in the JavaScript object `event.target.files` |
 |param |Optional parameter to be passed with the custom message |
+|disabled |<<.from-version "5.3.7">> Optional. Set to "yes" to disable file browser. Defaults to "no". |
+|tabindex |<<.from-version "5.3.7">> Optional. Sets the `tabindex` attribute of the HTML select element to the given value |
 |data-* |<<.from-version "5.3.2">> Optional [[data attributes|https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes]] to be assigned to the HTML element |
 |style.* |<<.from-version "5.3.2">> Optional [[CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference]] to be assigned to the HTML element |
 

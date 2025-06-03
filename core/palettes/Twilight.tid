@@ -19,13 +19,13 @@ code-background: rgba(0,0,0,0.03)
 code-border: rgba(0,0,0,0.08)
 code-foreground: rgb(255, 94, 94)
 diff-delete-background: #ffc9c9
-diff-delete-foreground: <<colour foreground>>
+diff-delete-foreground: <<colour background>>
 diff-equal-background: 
 diff-equal-foreground: <<colour foreground>>
 diff-insert-background: #aaefad
-diff-insert-foreground: <<colour foreground>>
-diff-invisible-background: 
-diff-invisible-foreground: <<colour muted-foreground>>
+diff-insert-foreground: <<colour background>>
+diff-invisible-background: #fdfcbd
+diff-invisible-foreground: <<colour background>>
 dirty-indicator: rgb(255, 94, 94)
 download-background: #19a974
 download-foreground: rgb(38, 38, 38)

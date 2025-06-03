@@ -1,0 +1,50 @@
+name: Calculate PR build size
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  calculate-build-size:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
+    outputs:
+      pr_size: ${{ steps.get_sizes.outputs.pr_size }}
+      base_size: ${{ steps.get_sizes.outputs.base_size }}
+    steps:
+    - name: build-size-check
+      id: get_sizes
+      uses: TiddlyWiki/cerebrus@v4
+      with:
+        pr_number: ${{ github.event.pull_request.number }}
+        repo: ${{ github.repository }}
+        base_ref: ${{ github.base_ref }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        mode: size:calc
+
+  dispatch-followup:
+    needs: calculate-build-size
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write  # Required to dispatch another workflow
+      pull-requests: write
+      contents: read
+    steps:
+    - name: Trigger follow-up workflow
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          await github.rest.actions.createWorkflowDispatch({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            workflow_id: 'pr-comment-build-size.yml',
+            ref: 'master',
+            inputs: {
+              pr_number: '${{ github.event.pull_request.number }}',
+              base_ref: '${{ github.event.pull_request.base.ref }}',
+              pr_size: '${{ needs.calculate-build-size.outputs.pr_size }}',
+              base_size: '${{ needs.calculate-build-size.outputs.base_size }}'
+            }
+          });

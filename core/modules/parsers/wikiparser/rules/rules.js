@@ -11,10 +11,7 @@ Wiki pragma rule for rules specifications
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "rules";
@@ -60,5 +57,3 @@ exports.parse = function() {
 	// No parse tree nodes to return
 	return [];
 };
-
-})();

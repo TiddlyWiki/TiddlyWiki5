@@ -6,10 +6,7 @@ module-type: utils
 Various static DOM-related utility functions.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
@@ -268,9 +265,10 @@ exports.copyStyles = function(srcDomNode,dstDomNode) {
 /*
 Copy plain text to the clipboard on browsers that support it
 */
-exports.copyToClipboard = function(text,options) {
-	options = options || {};
-	text = text || "";
+exports.copyToClipboard = function(text,options,type) {
+	var text = text || "";
+	var options = options || {};
+	var type = type || "text/plain";
 	var textArea = document.createElement("textarea");
 	textArea.style.position = "fixed";
 	textArea.style.top = 0;
@@ -283,10 +281,16 @@ exports.copyToClipboard = function(text,options) {
 	textArea.style.outline = "none";
 	textArea.style.boxShadow = "none";
 	textArea.style.background = "transparent";
-	textArea.value = text;
 	document.body.appendChild(textArea);
 	textArea.select();
 	textArea.setSelectionRange(0,text.length);
+	textArea.addEventListener("copy",function(event) {
+		event.preventDefault();
+		if (options.plainText) {
+			event.clipboardData.setData("text/plain",options.plainText);
+		}
+		event.clipboardData.setData(type,text);
+	});
 	var succeeded = false;
 	try {
 		succeeded = document.execCommand("copy");
@@ -388,5 +392,3 @@ exports.querySelectorAllSafe = function(selector,baseElement) {
 		console.log("Invalid selector: ",selector);
 	}
 };
-
-})();

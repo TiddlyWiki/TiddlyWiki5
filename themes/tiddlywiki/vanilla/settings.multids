@@ -1,6 +1,6 @@
 title: $:/themes/tiddlywiki/vanilla/settings/
 
-fontfamily: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"
+fontfamily: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", system-ui, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"
 codefontfamily: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace
 backgroundimageattachment: fixed
 backgroundimagesize: auto

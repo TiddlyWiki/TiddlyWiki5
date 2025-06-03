@@ -1,0 +1,42 @@
+created: 20141010093214683
+modified: 20241103101345607
+original-modified: 20181218180042029
+tags: [[Working with TiddlyWiki]]
+title: Creating journal tiddlers
+ja-title: 日誌（Journal Tiddler）の作成
+type: text/vnd.tiddlywiki
+
+! イントロダクション
+
+日誌（Journal Tiddler）は、タイトルとして日付や時刻を使用するTiddlerです。通常、タイムスタンプ付きの情報を素早く記録する手段として使用されます。
+
+日誌（Journal Tiddler）で追加のタグを使用して他のTiddlerにリンクし、情報項目間の関係を確立することができます。
+
+たとえば、''2014年10月10日''という日誌（Journal Tiddler）を使用して、その特定の日に捉えた考えや情報を記録できます。''ショッピング''と''ロンドン''のタグを使用して、ロンドンでのショッピングに関する記載であることを示すことができます。
+
+! 日誌（Journal Tiddler）を作成する
+
+日誌（Journal Tiddler）を作成する最も簡単な方法は、サイドバーの''ツール''タブにある''新しい日誌''ボタン<<.icon $:/core/images/new-journal-button>>を使用することです。ボタンを頻繁に使用する場合は、ボタンの横にあるチェックボックスをクリックして、検索ボックスのすぐ上にボタンが表示されるようにします。
+
+''新しい日誌''ボタンは、''Journal''タグと今日の日付から派生したタイトルを持つ空のTiddlerとして日誌エントリを作成します。そのタイトルの日誌（Journal Tiddler）がすでに存在する場合は、これが編集用に表示されます。
+
+! タグ付き日誌（Journal Tiddler）を作成する
+
+一般的な一連のアクションは、今日の日誌エントリを作成(または再表示)し、別のTiddlerのタイトルでタグ付けすることです。これは、他のTiddlerのツールバーにある''タグ付き日誌の作成''ボタン<<.icon $:/core/images/new-journal-button>>で実施できます。このボタンは、TiddlerのInfoPanelの''ツール''タブで見つけられます。
+
+たとえば、''Oxford Street''というTiddlerをレビューしていて、それがショッピング旅行の計画に関連していることに気付いたとします。''Oxford Street'' Tiddlerの''タグ付き日誌の作成''ボタンをクリックすると、 ''Oxford Street''でタグ付けされた日誌エントリが表示されます。
+
+! 日誌（Journal Tiddler）のカスタマイズ
+
+新しい日誌エントリの作成方法を構成するには、[[コントロールパネルの|$:/ControlPanel]] <<.icon $:/core/images/options-button>>の''情報''の中の''基本''タブに訪ずれます。 
+
+* "日誌（Journal Tiddlers）のデフォルトのタイトル"は、これらのTiddlerに名前を付ける方法を[[日付のフォーマット文字列|DateFormat]]として指定します。 デフォルト設定`YYYY年MM月DD日(ddd)`では、新しいエントリのタイトルは"2014年10月10日(金)"という形式になります
+* "日誌（Journal Tiddler）のタグ"は、新しい日誌エントリに自動的に付与されるタグを[[特定|Title List]]します。例: `Journal [[Summer vacation]]`
+
+ヒント: ''新しい日誌''をクリックするたびに別の日誌（Journal Tiddler）を作成したい場合(同じ日に何度も行う場合でも)、タイトル形式に時刻を含めることができます。日付形式として`YYYY年MM月DD日(ddd) 0hh:0mm:0ss`などを指定します。
+
+もう1つの便利なトリックは、タイトルフォーマットのどこかに`<<currentTiddler>>`を含めることです。つまり、複数の異なるTiddlerで''タグ付き日誌の作成''をクリックすると、それらの各Tiddlerのタイトルが、結果として得られる日誌エントリの名前の一部になります。
+
+! カスタムの新しい日誌（Journal Tiddler）ボタンを作成する
+
+独自のカスタム日誌ボタンを作成する方法については、[[カスタム日誌ボタンの作成|Making a custom journal button]] Tiddlerを参照してください

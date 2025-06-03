@@ -1,7 +1,7 @@
 created: 20130822170200000
 icon: $:/core/icon
 list: [[A Gentle Guide to TiddlyWiki]] [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[What happened to the original TiddlyWiki?]]
-modified: 20241009150333146
+modified: 20241115170824144
 tags: Welcome
 title: HelloThere
 type: text/vnd.tiddlywiki
@@ -10,8 +10,11 @@ type: text/vnd.tiddlywiki
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
 
-* ~TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today.
+* ~TiddlyWiki stores its data and code in a single HTML file, requiring no installs, no external dependencies, just a web browser
+
+* ~TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today
 
 * ~TiddlyWiki is infinitely customisable and extensible with many plugins that add new features
 
 * ~TiddlyWiki is the product of a collective of developers, part of an extensive community of users
+

@@ -6,10 +6,7 @@ module-type: startup
 Setup the root widget and the core root widget handlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -77,8 +74,9 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-copy-to-clipboard",function(event) {
 		$tw.utils.copyToClipboard(event.param,{
 			successNotification: event.paramObject && event.paramObject.successNotification,
-			failureNotification: event.paramObject && event.paramObject.failureNotification
-		});
+			failureNotification: event.paramObject && event.paramObject.failureNotification,
+			plainText: event.paramObject && event.paramObject.plainText
+		},event.paramObject && event.paramObject.type);
 	});
 	// Install the tm-focus-selector message
 	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
@@ -127,5 +125,3 @@ exports.startup = function() {
 		});
 	}
 };
-
-})();

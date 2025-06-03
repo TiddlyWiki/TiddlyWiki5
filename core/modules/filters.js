@@ -6,10 +6,7 @@ module-type: wikimethod
 Adds tiddler filtering methods to the $tw.Wiki object.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widgetClass = require("$:/core/modules/widgets/widget.js").widget;
@@ -367,5 +364,3 @@ exports.compileFilter = function(filterString) {
 	this.filterCacheCount++;
 	return fnMeasured;
 };
-
-})();
