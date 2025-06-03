@@ -657,6 +657,22 @@ describe("WikiText parser tests", function () {
 		]);
 	});
 
+	it("should parse macro definitions with end statements followed by spaces", function() {
+		expect(parse("\\define myMacro()\nnothing\n\\end   \n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"start":0,"end":33,"rule":"macrodef"}]
+
+		);
+	});
+
+	it("should parse macro definitions with named end statements followed by spaces", function() {
+		expect(parse("\\define myMacro()\nnothing\n\\end myMacro  \n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"start":0,"end":40,"rule":"macrodef"}]
+
+		);
+	});
+
 	it("should parse procedure definitions with no parameters", function () {
 		expect(parse("\\procedure myMacro()\nnothing\n\\end\n")).toEqual([
 			{
@@ -699,6 +715,22 @@ describe("WikiText parser tests", function () {
 				rule: "fnprocdef"
 			}
 		]);
+	});
+
+	it("should parse procedure definitions with end statements followed by spaces", function() {
+		expect(parse("\\procedure myMacro()\nnothing\n\\end   \n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isProcedureDefinition":true,"start":0,"end":36,"rule":"fnprocdef"}]
+
+		);
+	});
+
+	it("should parse procedure definitions with named end statements followed by spaces", function() {
+		expect(parse("\\procedure myMacro()\nnothing\n\\end myMacro  \n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isProcedureDefinition":true,"start":0,"end":43,"rule":"fnprocdef"}]
+
+		);
 	});
 
 	it("should parse procedure definitions with parameters", function () {
@@ -764,6 +796,22 @@ describe("WikiText parser tests", function () {
 				rule: "fnprocdef"
 			}
 		]);
+	});
+
+	it("should parse function definitions with end statements followed by spaces", function() {
+		expect(parse("\\function myMacro()\nnothing\n\\end   \n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isFunctionDefinition":true,"start":0,"end":35,"rule":"fnprocdef"}]
+
+		);
+	});
+
+	it("should parse function definitions with named end statements followed by spaces", function() {
+		expect(parse("\\function myMacro()\nnothing\n\\end myMacro  \n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isFunctionDefinition":true,"start":0,"end":42,"rule":"fnprocdef"}]
+
+		);
 	});
 
 	it("should parse single line function definitions with no parameters", function () {

@@ -43,19 +43,14 @@ exports.parse = function () {
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the parameters
 	var params = [];
-	if (this.match[3]) {
+	if(this.match[3]) {
 		params = $tw.utils.parseParameterDefinition(this.match[4]);
 	}
 	// Is the remainder of the line blank after the parameter close paren?
 	var reEnd;
-	if (this.match[5]) {
+	if(this.match[5]) {
 		// If so, it is a multiline definition and the end of the body is marked with \end
-		reEnd = new RegExp(
-			"((:?^|\\r?\\n)[^\\S\\n\\r]*\\\\end[^\\S\\n\\r]*(?:" +
-				$tw.utils.escapeRegExp(this.match[2]) +
-				")?(?:$|\\r?\\n))",
-			"mg"
-		);
+		reEnd = new RegExp("((:?^|\\r?\\n)[^\\S\\n\\r]*\\\\end[^\\S\\n\\r]*(?:" + $tw.utils.escapeRegExp(this.match[2]) + ")?\\s*?(?:$|\\r?\\n))","mg");
 	} else {
 		// Otherwise, the end of the definition is marked by the end of the line
 		reEnd = /($|\r?\n)/gm;
@@ -66,7 +61,7 @@ exports.parse = function () {
 	reEnd.lastIndex = this.parser.pos;
 	var text,
 		endMatch = reEnd.exec(this.parser.source);
-	if (endMatch) {
+	if(endMatch) {
 		text = this.parser.source.substring(this.parser.pos, endMatch.index);
 		this.parser.pos = endMatch.index + endMatch[0].length;
 	} else {
@@ -84,14 +79,14 @@ exports.parse = function () {
 	];
 	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0], "name", this.match[2]);
 	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0], "value", text);
-	if (this.match[1] === "function") {
+	if(this.match[1] === "function") {
 		parseTreeNodes[0].isFunctionDefinition = true;
-	} else if (this.match[1] === "procedure") {
+	} else if(this.match[1] === "procedure") {
 		parseTreeNodes[0].isProcedureDefinition = true;
-	} else if (this.match[1] === "widget") {
+	} else if(this.match[1] === "widget") {
 		parseTreeNodes[0].isWidgetDefinition = true;
 	}
-	if (this.parser.configTrimWhiteSpace) {
+	if(this.parser.configTrimWhiteSpace) {
 		parseTreeNodes[0].configTrimWhiteSpace = true;
 	}
 	return parseTreeNodes;
