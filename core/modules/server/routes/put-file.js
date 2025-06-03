@@ -12,35 +12,20 @@ exports.method = "PUT";
 
 exports.path = /^\/files\/(.+)$/;
 
+exports.bodyFormat = "buffer";
+
 exports.handler = function(request,response,state) {
-	var path = require("path"),
-		fs = require("fs"),
-		suppliedFilename = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		baseFilename = path.resolve(state.boot.wikiPath,"files"),
-		filename = path.resolve(baseFilename,suppliedFilename),
-		dirname = path.dirname(filename);
-	
-	// Check no trying to write to parent folders
-	if(path.relative(baseFilename,filename).indexOf("..") === 0) {
-		state.sendResponse(403,{"Content-Type": "text/plain"},"Access denied: File '" + suppliedFilename + "' is outside the allowed directory");
+	var path = require("path"),fs = require("fs"),
+		filename = $tw.utils.decodeURIComponentSafe(state.params[0]),
+		basePath = path.resolve(state.boot.wikiPath,"files"),
+		fullPath = path.resolve(basePath,filename);
+	if(path.relative(basePath,fullPath).indexOf("..") === 0) {
+		state.sendResponse(403,{"Content-Type": "text/plain"},"Access denied");
 	} else {
-		// Ensure the directory exists
-		fs.mkdir(dirname, { recursive: true }, function(mkdirErr) {
-			if(mkdirErr && mkdirErr.code !== 'EEXIST') {
-				console.log("Error creating directory " + dirname + ": " + mkdirErr.toString());
-				state.sendResponse(500,{"Content-Type": "text/plain"},"Error creating directory");
-				return;
-			}
-			
-			// Write the file
-			fs.writeFile(filename, state.data, function(err) {
-				if(err) {
-					console.log("Error writing file " + filename + ": " + err.toString());
-					state.sendResponse(500,{"Content-Type": "text/plain"},"Error writing file '" + suppliedFilename + "'");
-				} else {
-					console.log("File written: " + filename);
-					state.sendResponse(204,{"Content-Type": "text/plain"},"");
-				}
+		fs.mkdir(path.dirname(fullPath), {recursive:true}, function(err) {
+			if(err && err.code !== 'EEXIST') return state.sendResponse(500,{"Content-Type": "text/plain"},"Directory error");
+			fs.writeFile(fullPath, state.data, function(err) {
+				state.sendResponse(err ? 500 : 204,{"Content-Type": "text/plain"}, err ? "Write error" : "");
 			});
 		});
 	}
