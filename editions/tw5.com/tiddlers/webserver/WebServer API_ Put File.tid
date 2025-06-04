@@ -4,7 +4,7 @@ tags: [[WebServer API]]
 title: WebServer API: Put File
 type: text/vnd.tiddlywiki
 
-Upload or update a [[static file|Using the integrated static file server]].
+<<.from-version "5.3.7">> Upload or update a [[static file|Using the integrated static file server]].
 
 ```
 PUT /files/<pathname>
