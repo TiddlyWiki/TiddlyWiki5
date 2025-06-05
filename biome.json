@@ -3,16 +3,34 @@
 	"vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": ["**/*.min.js", "**/files/**", "./bin/**", "sjcl.js", "boot.js", "bootprefix.js"]
+		"ignore": [
+			"**/*.min.js",
+			"**/files/**",
+			"./bin/**",
+			"package-lock.json",
+			"sjcl.js",
+			"boot.js",
+			"bootprefix.js",
+			"core/modules/utils/base64-utf8/base64-utf8.module.js",
+			"core/modules/utils/base64-utf8/base64-utf8.module.min.js",
+			"core/modules/utils/diff-match-patch/diff_match_patch.js",
+			"core/modules/utils/diff-match-patch/diff_match_patch_uncompressed.js",
+			"core/modules/utils/dom/csscolorparser.js"
+		]
 	},
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab",
-		"indentWidth": 4,
 		"lineWidth": 120,
 		"lineEnding": "lf"
 	},
 	"organizeImports": { "enabled": true },
+	"json": {
+		"formatter": {
+			"lineWidth": 120,
+			"trailingCommas": "none"
+		}
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {
@@ -67,7 +85,7 @@
 				"noCommaOperator": "off",
 				"noNegationElse": "off",
 				"noParameterAssign": "off",
-				"noRestrictedGlobals": { "level": "error", "options": {} },
+				"noRestrictedGlobals": { "level": "error", "options": { } },
 				"noVar": "off",
 				"noYodaExpression": "off",
 				"useBlockStatements": "off",
@@ -115,13 +133,6 @@
 			}
 		},
 		"ignore": [
-			"boot/sjcl.js",
-			"core/modules/utils/base64-utf8/base64-utf8.module.js",
-			"core/modules/utils/base64-utf8/base64-utf8.module.min.js",
-			"core/modules/utils/diff-match-patch/diff_match_patch.js",
-			"core/modules/utils/diff-match-patch/diff_match_patch_uncompressed.js",
-			"core/modules/utils/dom/csscolorparser.js",
-			"plugins/tiddlywiki/*/files/"
 		]
 	},
 	"javascript": {
@@ -232,10 +243,5 @@
 			"onmousewheel",
 			"ononline"
 		]
-	},
-	"json": {
-		"formatter": {
-			"trailingCommas": "none"
-		}
 	}
 }
