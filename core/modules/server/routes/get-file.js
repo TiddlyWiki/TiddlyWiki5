@@ -15,28 +15,34 @@ exports.path = /^\/files\/(.+)$/;
 exports.handler = function(request,response,state) {
 	var path = require("path"),
 		fs = require("fs"),
-		util = require("util"),
-		suppliedFilename = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		baseFilename = path.resolve(state.boot.wikiPath,"files"),
-		filename = path.resolve(baseFilename,suppliedFilename),
-		extension = path.extname(filename);
+		filename = $tw.utils.decodeURIComponentSafe(state.params[0]),
+		basePath = path.resolve(state.boot.wikiPath,"files"),
+		fullPath = path.resolve(basePath,filename),
+		extension = path.extname(fullPath);
 	// Check that the filename is inside the wiki files folder
-	if(path.relative(baseFilename,filename).indexOf("..") !== 0) {
-		// Send the file
-		fs.readFile(filename,function(err,content) {
-			var status,content,type = "text/plain";
+	if(path.relative(basePath,fullPath).indexOf("..") !== 0) {
+		// Check if file exists first
+		fs.stat(fullPath, function(err, stats) {
 			if(err) {
-				console.log("Error accessing file " + filename + ": " + err.toString());
-				status = 404;
-				content = "File '" + suppliedFilename + "' not found";
+				console.log("Error accessing file " + fullPath + ": " + err.toString());
+				return state.sendResponse(404,{"Content-Type": "text/plain"},"File '" + filename + "' not found");
 			} else {
-				status = 200;
-				content = content;
-				type = ($tw.config.fileExtensionInfo[extension] ? $tw.config.fileExtensionInfo[extension].type : "application/octet-stream");
+				var type = ($tw.config.fileExtensionInfo[extension] ? $tw.config.fileExtensionInfo[extension].type : "application/octet-stream");
+				response.writeHead(200, {
+					"Content-Type": type,
+					"Content-Length": stats.size
+				});
+				var stream = fs.createReadStream(fullPath);
+				stream.on("error", function(err) {
+					console.log("Error reading file " + fullPath + ": " + err.toString());
+					if(!response.headersSent) {
+						return state.sendResponse(500,{"Content-Type": "text/plain"},"Read error");
+					}
+				});
+				stream.pipe(response);
 			}
-			state.sendResponse(status,{"Content-Type": type},content);
 		});
 	} else {
-		state.sendResponse(404,{"Content-Type": "text/plain"},"File '" + suppliedFilename + "' not found");
+		return state.sendResponse(404,{"Content-Type": "text/plain"},"File '" + filename + "' not found");
 	}
 };
