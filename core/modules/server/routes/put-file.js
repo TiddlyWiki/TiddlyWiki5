@@ -20,13 +20,13 @@ exports.handler = function(request,response,state) {
 		filename = $tw.utils.decodeURIComponentSafe(state.params[0]), 
 		basePath = path.resolve(state.boot.wikiPath,"files"),
 		fullPath = path.resolve(basePath,filename);
-
+	// Check that the filename is inside the wiki files folder
 	if(path.relative(basePath,fullPath).indexOf("..") === 0) {
 		return state.sendResponse(403,{"Content-Type": "text/plain"},"Access denied");
 	}
 	// Create directory if needed
-	fs.mkdir(path.dirname(fullPath), {recursive:true}, function(err) {
-		if(err && err.code !== 'EEXIST') {
+	fs.mkdir(path.dirname(fullPath),{recursive: true},function(err) {
+		if(err && err.code !== "EEXIST") {
 			$tw.utils.error("Error creating directory for file " + fullPath + ": " + err.toString());
 			return state.sendResponse(500,{"Content-Type": "text/plain"},"Directory error");  
 		}
