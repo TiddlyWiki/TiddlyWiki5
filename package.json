@@ -18,11 +18,14 @@
 		"type": "git",
 		"url": "https://github.com/TiddlyWiki/TiddlyWiki5.git"
 	},
-	"keywords": ["tiddlywiki", "tiddlywiki5", "wiki"],
+	"keywords": [
+		"tiddlywiki",
+		"tiddlywiki5",
+		"wiki"
+	],
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4"
 	},
-	"bundleDependencies": [],
 	"license": "BSD",
 	"engines": {
 		"node": ">=0.8.2"
