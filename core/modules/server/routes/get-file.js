@@ -15,19 +15,18 @@ exports.path = /^\/files\/(.+)$/;
 exports.handler = function(request,response,state) {
 	var path = require("path"),
 		fs = require("fs"),
-		filename = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		basePath = path.resolve(state.boot.wikiPath,"files"),
-		fullPath = path.resolve(basePath,filename),
-		extension = path.extname(fullPath);
+		suppliedFilename = $tw.utils.decodeURIComponentSafe(state.params[0]),
+		baseFilename = path.resolve(state.boot.wikiPath,"files"),
+		filename = path.resolve(baseFilename,suppliedFilename),
+		extension = path.extname(filename);
 
 	// Check that the filename is inside the wiki files folder
-	if(path.relative(basePath,fullPath).indexOf("..") === 0) {
+	if(path.relative(baseFilename,filename).indexOf("..") === 0) {
 		return state.sendResponse(403,{"Content-Type": "text/plain"},"Access denied");
 	}
-	fs.stat(fullPath, function(err, stats) {
+	fs.stat(filename, function(err, stats) {
 		if(err) {
-			state.sendResponse(404,{"Content-Type": "text/plain"},"File '" + filename + "' not found");
-			return;
+			return state.sendResponse(404,{"Content-Type": "text/plain"},"File '" + suppliedFilename + "' not found");
 		} else {
 			var type = ($tw.config.fileExtensionInfo[extension] ? $tw.config.fileExtensionInfo[extension].type : "application/octet-stream"),
 				responseHeaders = {
@@ -45,11 +44,11 @@ exports.handler = function(request,response,state) {
 				responseHeaders["Content-Range"] = "bytes " + start + "-" + end + "/" + stats.size;
 				responseHeaders["Content-Length"] = chunksize;
 				response.writeHead(206, responseHeaders);
-				stream = fs.createReadStream(fullPath, {start: start, end: end});
+				stream = fs.createReadStream(filename, {start: start, end: end});
 			} else {
 				responseHeaders["Content-Length"] = stats.size;
 				response.writeHead(200, responseHeaders);
-				stream = fs.createReadStream(fullPath);
+				stream = fs.createReadStream(filename);
 			}
 			// Common stream error handling
 			stream.on("error", function(err) {
