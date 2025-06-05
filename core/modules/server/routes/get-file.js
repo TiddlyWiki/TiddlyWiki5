@@ -19,7 +19,6 @@ exports.handler = function(request,response,state) {
 		baseFilename = path.resolve(state.boot.wikiPath,"files"),
 		filename = path.resolve(baseFilename,suppliedFilename),
 		extension = path.extname(filename);
-
 	// Check that the filename is inside the wiki files folder
 	if(path.relative(baseFilename,filename).indexOf("..") === 0) {
 		return state.sendResponse(403,{"Content-Type": "text/plain"},"Access denied");
