@@ -15,19 +15,24 @@ exports.path = /^\/files\/(.+)$/;
 exports.bodyFormat = "stream";
 
 exports.handler = function(request,response,state) {
-	var path = require("path"),fs = require("fs"),
-		filename = $tw.utils.decodeURIComponentSafe(state.params[0]),
+	var path = require("path"),
+		fs = require("fs"),
+		filename = $tw.utils.decodeURIComponentSafe(state.params[0]), 
 		basePath = path.resolve(state.boot.wikiPath,"files"),
 		fullPath = path.resolve(basePath,filename);
+
 	if(path.relative(basePath,fullPath).indexOf("..") === 0) {
-		state.sendResponse(403,{"Content-Type": "text/plain"},"Access denied");
-		return;
+		return state.sendResponse(403,{"Content-Type": "text/plain"},"Access denied");
 	}
+	// Create directory if needed
 	fs.mkdir(path.dirname(fullPath), {recursive:true}, function(err) {
-		if(err && err.code !== 'EEXIST') return state.sendResponse(500,{"Content-Type": "text/plain"},"Directory error");
+		if(err && err.code !== 'EEXIST') {
+			$tw.utils.error("Error creating directory for file " + fullPath + ": " + err.toString());
+			return state.sendResponse(500,{"Content-Type": "text/plain"},"Directory error");  
+		}
 		var stream = fs.createWriteStream(fullPath);
 		stream.on("error", function(err) {
-			console.log("Error writing file " + fullPath + ": " + err.toString());
+			$tw.utils.error("Error writing file " + fullPath + ": " + err.toString());
 			if(!response.headersSent) {
 				state.sendResponse(500,{"Content-Type": "text/plain"},"Write error");
 			}
@@ -38,7 +43,7 @@ exports.handler = function(request,response,state) {
 			}
 		});
 		request.on("error", function(err) {
-			console.log("Error reading request: " + err.toString());
+			$tw.utils.error("Error reading request for " + fullPath + ": " + err.toString());
 			stream.destroy();
 		});
 		request.pipe(stream);

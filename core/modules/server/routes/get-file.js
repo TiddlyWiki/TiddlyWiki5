@@ -19,30 +19,53 @@ exports.handler = function(request,response,state) {
 		basePath = path.resolve(state.boot.wikiPath,"files"),
 		fullPath = path.resolve(basePath,filename),
 		extension = path.extname(fullPath);
-	// Check that the filename is inside the wiki files folder
-	if(path.relative(basePath,fullPath).indexOf("..") !== 0) {
-		// Check if file exists first
-		fs.stat(fullPath, function(err, stats) {
-			if(err) {
-				console.log("Error accessing file " + fullPath + ": " + err.toString());
-				return state.sendResponse(404,{"Content-Type": "text/plain"},"File '" + filename + "' not found");
-			} else {
-				var type = ($tw.config.fileExtensionInfo[extension] ? $tw.config.fileExtensionInfo[extension].type : "application/octet-stream");
-				response.writeHead(200, {
-					"Content-Type": type,
-					"Content-Length": stats.size
-				});
-				var stream = fs.createReadStream(fullPath);
-				stream.on("error", function(err) {
-					console.log("Error reading file " + fullPath + ": " + err.toString());
-					if(!response.headersSent) {
-						return state.sendResponse(500,{"Content-Type": "text/plain"},"Read error");
-					}
-				});
-				stream.pipe(response);
-			}
-		});
-	} else {
-		return state.sendResponse(404,{"Content-Type": "text/plain"},"File '" + filename + "' not found");
+
+	if(path.relative(basePath,fullPath).indexOf("..") === 0) {
+		return state.sendResponse(403,{"Content-Type": "text/plain"},"Access denied");
 	}
+	fs.stat(fullPath, function(err, stats) {
+		if(err) {
+			$tw.utils.error("Error accessing file " + fullPath + ": " + err.toString());
+			return state.sendResponse(404,{"Content-Type": "text/plain"},"File '" + filename + "' not found");
+		}
+		var type = ($tw.config.fileExtensionInfo[extension] ? $tw.config.fileExtensionInfo[extension].type : "application/octet-stream");
+		var responseHeaders = {
+			"Content-Type": type,
+			"Accept-Ranges": "bytes" 
+		};
+		// Handle range requests
+		var rangeHeader = request.headers.range;
+		if(rangeHeader) {
+			var parts = rangeHeader.replace(/bytes=/, "").split("-"),
+				start = parseInt(parts[0], 10),
+				end = parts[1] ? parseInt(parts[1], 10) : stats.size - 1,
+				chunksize = (end - start) + 1;
+
+			responseHeaders["Content-Range"] = `bytes ${start}-${end}/${stats.size}`;
+			responseHeaders["Content-Length"] = chunksize;
+			response.writeHead(206, responseHeaders);
+			var stream = fs.createReadStream(fullPath, {start, end});
+			stream.on("error", function(err) {
+				$tw.utils.error("Error reading file " + fullPath + ": " + err.toString());
+				if(!response.headersSent) {
+					response.writeHead(500, {"Content-Type": "text/plain"});
+					response.end("Read error");
+				}
+			});
+			stream.pipe(response);
+		} else {
+			// Handle regular requests
+			responseHeaders["Content-Length"] = stats.size;
+			response.writeHead(200, responseHeaders);
+			var stream = fs.createReadStream(fullPath);
+			stream.on("error", function(err) {
+				$tw.utils.error("Error reading file " + fullPath + ": " + err.toString());
+				if(!response.headersSent) {
+					response.writeHead(500, {"Content-Type": "text/plain"});
+					response.end("Read error");
+				}
+			});
+			stream.pipe(response);
+		}
+	});
 };
