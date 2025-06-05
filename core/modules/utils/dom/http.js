@@ -115,8 +115,8 @@ function HttpClientRequest(options) {
 	this.method = options.method || "GET";
 	this.body = options.body || "";
 	this.binary = options.binary || "";
-	(this.useDefaultHeaders = options.useDefaultHeaders !== "false" ? true : false),
-		(this.variables = options.variables);
+	this.useDefaultHeaders = options.useDefaultHeaders !== "false" ? true : false;
+	this.variables = options.variables;
 	var url = options.url;
 	$tw.utils.each(options.queryStrings, function (value, name) {
 		url = $tw.utils.setQueryStringParameter(url, name, value);
@@ -286,10 +286,7 @@ exports.httpRequest = function (options) {
 				return false;
 			}
 			for (var header in headers) {
-				if (
-					["accept", "accept-language", "content-language", "content-type"].indexOf(header.toLowerCase()) ===
-					-1
-				) {
+				if (["accept", "accept-language", "content-language", "content-type"].indexOf(header.toLowerCase()) === -1) {
 					return false;
 				}
 			}
@@ -336,11 +333,7 @@ exports.httpRequest = function (options) {
 				return;
 			}
 			// Something went wrong
-			options.callback(
-				$tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,
-				this[returnProp],
-				this
-			);
+			options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status, this[returnProp], this);
 		}
 	};
 	// Handle progress
