@@ -56,26 +56,16 @@ exports.parse = function() {
 		text = this.parser.source.substr(this.parser.pos);
 		this.parser.pos = this.parser.sourceLength;
 	}
-	// Parse the block according to the specified type
-	var parser = this.parser.wiki.parseText(parseType,text,{defaultType: "text/plain"});
-	// If there's no render type, just return the parse tree
-	if(!renderType) {
-		return parser.tree;
-	} else {
-		// Otherwise, render to the rendertype and return in a <PRE> tag
-		var widgetNode = this.parser.wiki.makeWidget(parser),
-			container = $tw.fakeDocument.createElement("div");
-		widgetNode.render(container,null);
-		text = renderType === "text/html" ? container.innerHTML : container.textContent;
-		return [{
-			type: "element",
-			tag: "pre",
-			children: [{
-				type: "text",
-				text: text,
-				start: start,
-				end: this.parser.pos
-			}]
-		}];
-	}
+
+		var dataItemWidget = {
+		type: "dataitem",
+		tag: "$dataitem",
+		isBlock: this.is.block,
+		children: []
+	  };
+		$tw.utils.addAttributeToParseTreeNode(dataItemWidget,"text",text);
+		$tw.utils.addAttributeToParseTreeNode(dataItemWidget,"parseType",parseType);
+		$tw.utils.addAttributeToParseTreeNode(dataItemWidget,"renderType",renderType);
+	
+		return [dataItemWidget];
 };
