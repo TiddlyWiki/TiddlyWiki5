@@ -98,6 +98,7 @@ table-footer-background: #073642
 table-header-background: #073642
 tag-background: #b58900
 tag-foreground: #002b36
+testcase-accent-level-1: #073642
 tiddler-background: #002b36
 tiddler-border: #586e75
 tiddler-controls-foreground: inherit
