@@ -1,4 +1,6 @@
-title: $:/config/DefaultColourMappings/
+title: $:/plugins/tiddlywiki/tour/background-palette
+type: application/x-tiddler-dictionary
+tags: $:/tags/BackgroundPalette
 
 tour-chooser-button-foreground: <<colour very-muted-foreground>>
 tour-chooser-button-hover-background: <<colour muted-foreground>>
