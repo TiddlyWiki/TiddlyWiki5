@@ -166,6 +166,7 @@ tab-divider: #d8d8d8
     sidebar-tab-divider: <<colour tab-divider>>
 table-border: #dddddd
 table-footer-background: #a8a8a8
+testcase-accent-level-1: #bec8cc
 tiddler-controls-foreground-hover: #888888
 tiddler-controls-foreground-selected: #444444
 tiddler-editor-border-image: #ffffff
