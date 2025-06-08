@@ -69,7 +69,7 @@ select-tag-foreground:
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #000000
 sidebar-controls-foreground: #aaaaaa
-sidebar-foreground-shadow: rgba(255,255,255, 0.8)
+sidebar-foreground-shadow: #ffffff
 sidebar-foreground: #acacac
 sidebar-muted-foreground-hover: #444444
 sidebar-muted-foreground: #c0c0c0
@@ -83,7 +83,7 @@ sidebar-tab-foreground: <<colour tab-foreground>>
 sidebar-tiddler-link-foreground-hover: #444444
 sidebar-tiddler-link-foreground: #999999
 site-title-foreground: <<colour tiddler-title-foreground>>
-stability-stable: #008000
+stability-stable: #00b700
 stability-experimental: #c07c00
 stability-deprecated: #ff0000
 stability-legacy: #0000ff
@@ -138,13 +138,13 @@ wikilist-title: #666666
 wikilist-title-svg: <<colour wikilist-title>>
 wikilist-url: #aaaaaa
 wikilist-button-open: #4fb82b
-wikilist-button-open-hover: green
+wikilist-button-open-hover: #009300
 wikilist-button-reveal: #5778d8
-wikilist-button-reveal-hover: blue
+wikilist-button-reveal-hover: #0000ff
 wikilist-button-remove: #d85778
-wikilist-button-remove-hover: red
+wikilist-button-remove-hover: #ff0000
 wikilist-toolbar-background: #d3d3d3
 wikilist-toolbar-foreground: #888888
-wikilist-droplink-dragover: rgba(255,192,192,0.5)
+wikilist-droplink-dragover: #ffc0c0
 wikilist-button-background: #acacac
 wikilist-button-foreground: #000000
