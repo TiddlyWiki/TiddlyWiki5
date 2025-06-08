@@ -29,6 +29,7 @@ function escapeRegExp(str) {
 }
 
 // Aho-Corasick implementation with enhanced error handling
+var AhoCorasick = require("$:/plugins/tiddlywiki/freelinks/AhoCorasick.js").AhoCorasick;
 function AhoCorasick() {
 	this.trie = {};
 	this.failure = {};
@@ -170,12 +171,10 @@ TextNodeWidget.prototype.execute = function() {
 		var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
 		// Get the information about the current tiddler titles
 		this.tiddlerTitleInfo = persistCache ?
-			this.wiki.getPersistentCache(cacheKey, function() {
-				return computeTiddlerTitleInfo(self, ignoreCase);
-			}) :
-			this.wiki.getGlobalCache(cacheKey, function() {
-				return computeTiddlerTitleInfo(self, ignoreCase);
-			});
+			var usePersistent = this.wiki.getTiddlerText("$:/config/Freelinks/PersistAhoCorasickCache", "no").trim() === "yes";
+			this.wiki.getCache(cacheKey, function() {
+    				return computeTiddlerTitleInfo(self, ignoreCase);
+			}, usePersistent);
 		// Process titles to avoid overlapping matches
 		if(this.tiddlerTitleInfo.titles.length > 0) {
 			var text = childParseTree[0].text,
