@@ -167,7 +167,7 @@ TextNodeWidget.prototype.execute = function() {
 		// Get the current tiddler title
 		var currentTiddlerTitle = this.getVariable("currentTiddler") || "";
 		// Check if persistent caching is enabled
-		var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no").trim() === "yes";
+		var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no") === "yes";
 		var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
 		// Get the information about the current tiddler titles
 		this.tiddlerTitleInfo = persistCache ?
@@ -252,8 +252,8 @@ TextNodeWidget.prototype.execute = function() {
 			// Add remaining text
 			if(currentPos < text.length) {
 				newParseTree.push({
-					type: "plain-text",
-					text: text.slice(currentPos)
+					type: "text",
+        				text: text.substring(currentPos)
 				});
 			}
 			childParseTree = newParseTree;
@@ -308,8 +308,6 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 	for(var i = 0; i < titles.length; i += chunkSize) {
 		titleChunks.push(titles.slice(i, i + chunkSize));
 	}
-	// Log chunking details for debugging
-	console.log("Total titles:", titles.length, ", Chunk size:", chunkSize, ", Number of chunks:", titleChunks.length, ", Persistent cache:", self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no").trim());
 	return {
 		titles: titles,
 		ac: ac,
