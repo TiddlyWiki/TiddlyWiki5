@@ -100,6 +100,7 @@ table-footer-background: #2e3440
 table-header-background: #2e3440
 tag-background: #A3BE8C
 tag-foreground: #4C566A
+testcase-accent-level-1: #455e7d
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: 

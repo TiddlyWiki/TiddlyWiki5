@@ -6,7 +6,6 @@ module-type: widget
 Confetti widget
 
 \*/
-(function(){
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -60,5 +59,3 @@ ConfettiWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.confetti = ConfettiWidget;
-
-})();
