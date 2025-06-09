@@ -27,7 +27,7 @@ diff-insert-foreground: #073642
 diff-invisible-background: #b58900
 diff-invisible-foreground: #eee8d5
 dirty-indicator: #dc322f
-download-background: #2585cb
+download-background: #859900
 download-foreground: #073642
 dragger-background: #073642
 dragger-foreground: #839496
