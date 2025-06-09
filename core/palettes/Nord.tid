@@ -7,15 +7,15 @@ type: application/x-tiddler-dictionary
 license: MIT, arcticicestudio, https://github.com/arcticicestudio/nord/blob/develop/LICENSE.md
 
 alert-background: #D08770
-alert-border: #D08770
-alert-highlight: #B48EAD
-alert-muted-foreground: #4C566A
+alert-border: <<colour alert-background>>
+alert-highlight: #a3436f
+alert-muted-foreground: #495367
 background: #3b4252
 blockquote-bar: <<colour muted-foreground>>
 button-foreground: <<colour foreground>>
 code-background: #2E3440
 code-border: #2E3440
-code-foreground: #BF616A
+code-foreground: #c7747c
 diff-delete-background: #BF616A
 diff-delete-foreground: <<colour foreground>>
 diff-equal-background: 
@@ -48,31 +48,32 @@ menubar-background: #2E3440
 menubar-foreground: #d8dee9
 message-background: #2E3440
 message-border: #2E3440
-message-foreground: #547599
-modal-backdrop: <<colour foreground>>
+message-foreground: #6485aa
+modal-backdrop: #435678
 modal-background: <<colour background>>
 modal-border: #3b4252
 modal-footer-background: #3b4252
 modal-footer-border: #3b4252
 modal-header-border: #3b4252
-muted-foreground: #4C566A
+muted-foreground: #687693
+network-activity-foreground: <<colour primary>>
 notification-background: <<colour primary>>
 notification-border: #EBCB8B
 page-background: #2e3440
 pre-background: #2E3440
 pre-border: #2E3440
-primary: #5E81AC
+primary: #7b98bb
 select-tag-background: #3b4252
 select-tag-foreground: <<colour foreground>>
-selection-background: #5E81AC
+selection-background: #52749e
 selection-foreground: <<colour foreground>>
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #D8DEE9
-sidebar-controls-foreground: #4C566A
+sidebar-controls-foreground: #5e6a84
 sidebar-foreground-shadow: transparent
 sidebar-foreground: #D8DEE9
-sidebar-muted-foreground-hover: #4C566A
-sidebar-muted-foreground: #4C566A
+sidebar-muted-foreground-hover: #9fa8bb
+sidebar-muted-foreground: #6c7b97
 sidebar-tab-background-selected: #ECEFF4
 sidebar-tab-background: #4C566A
 sidebar-tab-border-selected: <<colour tab-border-selected>>
@@ -83,17 +84,17 @@ sidebar-tab-foreground: <<colour tab-foreground>>
 sidebar-tiddler-link-foreground-hover: #A3BE8C
 sidebar-tiddler-link-foreground: #81A1C1
 site-title-foreground: <<colour tiddler-title-foreground>>
-stability-deprecated: #bf616a
-stability-experimental: #d08770
-stability-legacy: #88c0d0
-stability-stable: #a3be8c
+stability-deprecated: #ff595e
+stability-experimental: #f29d00
+stability-legacy: #2ddbca
+stability-stable: #04ff04
 static-alert-foreground: #B48EAD
 tab-background-selected: #ECEFF4
 tab-background: #4C566A
 tab-border-selected: #4C566A
-tab-border: #4C566A
+tab-border: #5c6883
 tab-divider: #4C566A
-tab-foreground-selected: #4C566A
+tab-foreground-selected: #6c7a97
 tab-foreground: #D8DEE9
 table-border: #4C566A
 table-footer-background: #2e3440
@@ -105,18 +106,18 @@ tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: 
 tiddler-controls-foreground-selected: #EBCB8B
-tiddler-controls-foreground: #4C566A
+tiddler-controls-foreground: #5e6a84
 tiddler-editor-background: #2e3440
 tiddler-editor-border-image: #2e3440
-tiddler-editor-border: #3b4252
+tiddler-editor-border: #232732
 tiddler-editor-fields-even: #2e3440
-tiddler-editor-fields-odd: #2e3440
+tiddler-editor-fields-odd: #424a5b
 tiddler-info-background: #2e3440
 tiddler-info-border: #2e3440
 tiddler-info-tab-background: #2e3440
 tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
-tiddler-subtitle-foreground: #4C566A
+tiddler-subtitle-foreground: #5c6881
 tiddler-title-foreground: #81A1C1
 toolbar-new-button: 
 toolbar-options-button: 
