@@ -7,7 +7,6 @@ Aho-Corasick string matching algorithm implementation with enhanced error handli
 for TiddlyWiki freelinking functionality.
 
 \*/
-(function(){
 
 "use strict";
 
@@ -148,5 +147,3 @@ AhoCorasick.prototype.search = function(text) {
 
 // Export the AhoCorasick constructor
 exports.AhoCorasick = AhoCorasick;
-
-})();
