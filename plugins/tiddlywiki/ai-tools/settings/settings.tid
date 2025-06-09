@@ -1,0 +1,23 @@
+title: $:/plugins/tiddlywiki/ai-tools/settings
+tags: $:/tags/ControlPanel/SettingsTab
+caption: AI Tools
+These settings let you customise the behaviour of the "AI Tools" plugin.
+
+!! Completion Servers
+
+Default Server: <$select tiddler="$:/plugins/tiddlywiki/ai-tools/configs/default-server" field="completion-server">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/AI/CompletionServer]sort[caption]]">
+<option value=<<currentTiddler>>><$view field='caption'/></option>
+</$list>
+</$select>
+Default Model: <$select tiddler="$:/plugins/tiddlywiki/ai-tools/configs/default-server" field="completion-model">
+<$list filter="[{$:/plugins/tiddlywiki/ai-tools/configs/default-server!!completion-server}get[models]enlist-input[]]">
+<option value=<<currentTiddler>>><<currentTiddler>></option>
+</$list>
+</$select>
+
+<$transclude
+  $variable="tabs"
+  tabsList="[all[shadows+tiddlers]tag[$:/tags/AI/ServerSetting]]"
+  default={{{[{$:/plugins/tiddlywiki/ai-tools/configs/default-server!!completion-server}get[settings]]}}}
+/>

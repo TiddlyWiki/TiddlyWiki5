@@ -2,7 +2,10 @@ title: $:/plugins/tiddlywiki/ai-tools/globals
 tags: $:/tags/Global
 
 \function ai-tools-default-llm-completion-server()
-[all[shadows+tiddlers]tag[$:/tags/AI/CompletionServer]sort[caption]first[]]
+[[$:/plugins/tiddlywiki/ai-tools/configs/default-server]get[completion-server]]
+\end
+\function ai-tools-default-llm-completion-model()
+[[$:/plugins/tiddlywiki/ai-tools/configs/default-server]get[completion-model]]
 \end
 
 <!--
@@ -12,12 +15,14 @@ resultTitlePrefix - Prefix of the tiddler to be used for saving the result. If t
 resultTags - Tags to be applied to the result tiddler
 ai-tools-status-title - Optional title of a tiddler to which the status of the request will be bound: "pending", "complete", "error"
 completionServer - Optional URL of server
+completionModel - Optional model to use
 -->
-\procedure ai-tools-get-llm-completion(conversationTitle,resultTitlePrefix,resultTags,ai-tools-status-title,completionServer)
+\procedure ai-tools-get-llm-completion(conversationTitle,resultTitlePrefix,resultTags,ai-tools-status-title,completionServer,completionModel,authTokenStoreKey)
 <$let
 	completionServer={{{ [<completionServer>!is[blank]else<ai-tools-default-llm-completion-server>] }}}
+	completionModel={{{ [<completionModel>!is[blank]else<ai-tools-default-llm-completion-model>] }}}
 >
-	<$importvariables filter="[<completionServer>]">
+	<$importvariables filter="[<completionServer>get[extends]] [<completionServer>]">
 		<$wikify name="json" text=<<json-prompt>>>
 			<$action-log message="ai-tools-get-llm-completion"/>
 			<$action-log/>
@@ -26,7 +31,7 @@ completionServer - Optional URL of server
 				url={{{ [<completionServer>get[url]] }}}
 				body=<<json>>
 				header-content-type="application/json"
-				bearer-auth-token-from-store="openai-secret-key"
+				bearer-auth-token-from-store=<<authTokenStoreKey>>
 				method="POST"
 				oncompletion=<<completion-callback>>
 				bind-status=<<ai-tools-status-title>>
@@ -114,9 +119,10 @@ Procedure to display a message from an AI conversation. Current tiddler is the c
 \end
 
 <!--
-Action procedure to get the next response from the LLM
+Action procedure to get the next response from the LLM on a chat tiddler.
 -->
 \procedure ai-tools-action-get-response()
+<!-- Get the response -->
 <$let
 	resultTitlePrefix={{{ [<currentTiddler>addsuffix[ - Prompt]] }}}
 	resultTags={{{ [<currentTiddler>format:titlelist[]] }}}
@@ -136,6 +142,8 @@ Action procedure to get the next response from the LLM
 			$variable="ai-tools-get-llm-completion"
 			conversationTitle=<<currentTiddler>>
 			completionServer={{!!completion-server}}
+			completionModel={{!!completion-model}}
+			authTokenStoreKey={{{[{!!completion-server}get[auth-token-store-key]]}}}
 			resultTitlePrefix=<<resultTitlePrefix>>
 			resultTags=<<resultTags>>
 			ai-tools-status-title=<<ai-tools-status-title>>
@@ -152,6 +160,16 @@ Action procedure to get the next response from the LLM
 	<option value=<<currentTiddler>>><$view field='caption'/></option>
 	</$list>
 	</$select>
+	Model: <$select tiddler=<<currentTiddler>> field="completion-model" default=<<ai-tools-default-llm-completion-model>>>
+	<$list filter="[<ai-tools-default-llm-completion-server>get[models]enlist-input[]]">
+	<option value=<<currentTiddler>>><<currentTiddler>></option>
+	</$list>
+	</$select>
+	<$list filter="[<ai-tools-default-llm-completion-server>get[settings]]">
+		<$button to=<<currentTiddler>> class="tc-btn-invisible">
+			{{$:/core/images/options-button}}
+		</$button>
+	</$list>
 
 	<div class="ai-conversation">
 		<$transclude

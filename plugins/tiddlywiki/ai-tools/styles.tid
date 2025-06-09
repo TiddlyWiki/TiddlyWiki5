@@ -4,25 +4,25 @@ tags: [[$:/tags/Stylesheet]]
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
 .ai-conversation {
-	background: #f0eeff;
+	background: <<colour background>>;
 	border-radius: 2em;
 	padding: 1em 1em;
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
-	box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+	box-shadow: 2px 2px 5px <<colour muted-foreground>>;
 }
 
 .ai-conversation .ai-tools-message {
-	box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+	box-shadow: 2px 2px 5px <<colour muted-foreground>>;
 	border-radius: 1em;
 	display: flex;
 	flex-direction: column;
 }
 
 .ai-conversation .ai-tools-message .ai-tools-message-toolbar {
-	background: rgba(1,1,1,0.35);
-	color: white;
+	background: <<colour sidebar-foreground-shadow>>;
+	color: <<colour foreground>>;
 	padding: 0.25em 1em 0.25em 1em;
 	border-top-left-radius: 1em;
 	border-top-right-radius: 1em;
@@ -35,8 +35,8 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .ai-conversation .ai-tools-message .ai-tools-message-toolbar .ai-tools-message-toolbar-button {
-	background: rgba(255,255,255,0.35);
-	color: #333333;
+	background: <<colour sidebar-foreground-shadow>>;
+	color: <<colour foreground>>;
 	cursor: pointer;
 	display: inline-block;
 	outline: 0;
@@ -54,8 +54,8 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .ai-conversation .ai-tools-message .ai-tools-message-toolbar .ai-tools-message-toolbar-button:hover {
-	color: #ffffff;
-	background: rgba(255,255,255,0.55);
+	color: <<colour foreground>>;
+	background: <<colour sidebar-foreground-shadow>>;
 
 }
 
@@ -65,27 +65,27 @@ tags: [[$:/tags/Stylesheet]]
 
 .ai-conversation .ai-tools-message.ai-tools-message-role-system {
 	width: 60%;
-	background: #4c4c80;
-	color: white;
+	background: <<colour footnote-target-background>>;
+	color: <<colour foreground>>;
 }
 
 .ai-conversation .ai-tools-message.ai-tools-message-role-user {
 	width: 60%;
 	margin-left: auto;
-	background: #ffcde0;
+	background: <<colour code-background>>;
 }
 
 .ai-conversation .ai-tools-message.ai-tools-message-role-assistant {
-	background: #dfd;
+	background: <<colour tiddler-editor-background>>;
 }
 
 .ai-conversation .ai-tools-message.ai-tools-message-role-error {
-	background: #fdd;
+	background: <<colour notification-background>>;
 }
 
 .ai-conversation .ai-user-prompt {
 	padding: 1em;
-	background: #ffcde0;
+	background: <<colour code-background>>;
 	border-radius: 1em;
 	box-shadow: inset 3px 4px 2px rgba(0, 0, 0, 0.1);
 }
@@ -101,8 +101,8 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .ai-conversation .ai-user-prompt-text textarea {
-	color: #000;
-	background: #fff;
+	color: <<colour foreground>>;
+	background: <<colour background>>;
 }
 
 .ai-conversation .ai-user-prompt button.ai-user-prompt-send {
@@ -110,7 +110,7 @@ tags: [[$:/tags/Stylesheet]]
 	background-image: linear-gradient(-180deg, #e0c3ce, #963057);
 	border-radius: 1em;
 	box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
-	color: #FFFFFF;
+	color: <<colour foreground>>;
 	cursor: pointer;
 	display: inline-block;
 	outline: 0;
@@ -143,8 +143,8 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .ai-conversation .ai-user-prompt .ai-user-prompt-image button {
-	color: #000;
-	fill: #000;
+	color: <<colour foreground>>;
+	fill: <<colour foreground>>;
 }
 
 .ai-conversation .ai-user-prompt-type {
