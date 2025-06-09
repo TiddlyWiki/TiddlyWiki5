@@ -6,7 +6,6 @@ module-type: widget
 An override of the core text widget that automatically linkifies the text, with support for non-Latin languages like Chinese, prioritizing longer titles, skipping processed matches, excluding the current tiddler title from linking, and handling large title sets with Aho-Corasick algorithm and fixed chunking (100 titles per chunk). Includes optional persistent caching of Aho-Corasick automaton, controlled by $:/config/Freelinks/PersistAhoCorasickCache.
 
 \*/
-(function(){
 
 "use strict";
 
@@ -26,14 +25,7 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget,
  */
 function escapeRegExp(str) {
 	try {
-		return str.replace(/[\\^$*+?.()|[\]{}]/g, '\\function escapeRegExp(str) {
-	try {
 		return str.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
-	} catch(e) {
-		console.warn("Failed to escape title:", str, e);
-		return null; // Skip problematic titles
-	}
-}');
 	} catch(e) {
 		return null; // Skip problematic titles
 	}
@@ -63,17 +55,17 @@ Compute the internal state of the widget
 */
 TextNodeWidget.prototype.execute = function() {
 	var self = this,
-		ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}).trim() === "yes";
+		ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}) === "yes";
 	
 	// Get our parameters
 	var childParseTree = [{
-		type: "text",
+		type: "plain-text",
 		text: this.getAttribute("text",this.parseTreeNode.text || "")
 	}];
 	
 	// Only process links if not disabled and we're not within a button or link widget
-	if(this.getVariable("tv-wikilinks",{defaultValue:"yes"}).trim() !== "no" && 
-		this.getVariable("tv-freelinks",{defaultValue:"no"}).trim() === "yes" && 
+	if(this.getVariable("tv-wikilinks",{defaultValue:"yes"}) !== "no" && 
+		this.getVariable("tv-freelinks",{defaultValue:"no"}) === "yes" && 
 		!this.isWithinButtonOrLink()) {
 		
 		// Get the current tiddler title
@@ -83,7 +75,7 @@ TextNodeWidget.prototype.execute = function() {
 		var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no") === "yes";
 		var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
 		
-		// Get the information about the current tiddler titles using unified cache strategy
+		// Get the information about the current tiddler titles
 		this.tiddlerTitleInfo = persistCache ?
 			this.wiki.getPersistentCache(cacheKey, function() {
 				return computeTiddlerTitleInfo(self, ignoreCase);
@@ -142,7 +134,7 @@ TextNodeWidget.prototype.execute = function() {
 				// Add text before the match
 				if(matchStart > currentPos) {
 					newParseTree.push({
-						type: "text",
+						type: "plain-text",
 						text: text.slice(currentPos, matchStart)
 					});
 				}
@@ -154,7 +146,7 @@ TextNodeWidget.prototype.execute = function() {
 				if(matchedTitle === currentTiddlerTitle) {
 					// Skip linking, keep as plain text
 					newParseTree.push({
-						type: "text",
+						type: "plain-text",
 						text: text.slice(matchStart, matchEnd)
 					});
 				} else {
@@ -166,7 +158,7 @@ TextNodeWidget.prototype.execute = function() {
 							"class": {type: "string", value: "tc-freelink"}
 						},
 						children: [{
-							type: "text",
+							type: "plain-text",
 							text: text.slice(matchStart, matchEnd)
 						}]
 					});
@@ -177,7 +169,7 @@ TextNodeWidget.prototype.execute = function() {
 			// Add remaining text
 			if(currentPos < text.length) {
 				newParseTree.push({
-					type: "text",
+					type: "plain-text",
 					text: text.slice(currentPos)
 				});
 			}
@@ -293,7 +285,7 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.text || titlesHaveChanged) {
 		// Invalidate cache if titles changed and persistent cache is enabled
 		var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no") === "yes";
-		var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}).trim() === "yes";
+		var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}) === "yes";
 		var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
 		
 		if(titlesHaveChanged && persistCache) {
@@ -308,5 +300,3 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.text = TextNodeWidget;
-
-})();
