@@ -22,7 +22,7 @@ exports.handler = function(request,response,state) {
 		fullPath = path.resolve(basePath,filename);
 	// Check that the filename is inside the wiki files folder
 	if(path.relative(basePath,fullPath).indexOf("..") === 0) {
-		return state.sendResponse(403,{"Content-Type": "text/plain"},"Access denied");
+		return state.sendResponse(404,{"Content-Type": "text/plain"},"File '" + filename + "' not found");
 	}
 	// Create directory if needed
 	fs.mkdir(path.dirname(fullPath),{recursive: true},function(err) {
