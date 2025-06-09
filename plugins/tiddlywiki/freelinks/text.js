@@ -73,8 +73,8 @@ TextNodeWidget.prototype.execute = function() {
 	
 	// Only process links if not disabled and we're not within a button or link widget
 	if(this.getVariable("tv-wikilinks",{defaultValue:"yes"}).trim() !== "no" && 
-	   this.getVariable("tv-freelinks",{defaultValue:"no"}).trim() === "yes" && 
-	   !this.isWithinButtonOrLink()) {
+		this.getVariable("tv-freelinks",{defaultValue:"no"}).trim() === "yes" && 
+		!this.isWithinButtonOrLink()) {
 		
 		// Get the current tiddler title
 		var currentTiddlerTitle = this.getVariable("currentTiddler") || "";
