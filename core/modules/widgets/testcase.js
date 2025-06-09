@@ -6,10 +6,6 @@ module-type: widget
 Widget to display a test case
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -163,5 +159,3 @@ TestCaseWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["testcase"] = TestCaseWidget;
-
-})();

@@ -607,3 +607,13 @@ Thomas E Tuoti, @well-noted, 2024/12/16
 J. Ryan Stinnett, @jryans, 2025/01/04
 
 Galen Huntington, @galenhuntington, 2025/01/19
+
+@Rhys-T, 2025/01/23
+
+@Rumman157, 2025/03/17
+
+@bob.jansen@cultconv.com, 2025/03/22
+
+Matthew Salmon, @matthewsalmon, 2025/04/24
+
+@jbaldus, 2025/05/28

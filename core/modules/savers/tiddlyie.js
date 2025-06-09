@@ -6,10 +6,7 @@ module-type: saver
 Handles saving changes via Internet Explorer BHO extenion (TiddlyIE)
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -67,5 +64,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new TiddlyIESaver(wiki);
 };
-
-})();

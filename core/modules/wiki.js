@@ -16,10 +16,7 @@ Adds the following properties to the wiki object:
 * `globalCache` is a hashmap by cache name of cache objects that are cleared whenever any tiddler change occurs
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -1176,7 +1173,7 @@ exports.getSubstitutedText = function(text,widget,options) {
 		output = $tw.utils.replaceString(output,new RegExp("\\$" + $tw.utils.escapeRegExp(substitute.name) + "\\$","mg"),substitute.value);
 	});
 	// Substitute any variable references with their values
-	return output.replace(/\$\(([^\)\$]+)\)\$/g, function(match,varname) {
+	return output.replace(/\$\((.+?)\)\$/g, function(match,varname) {
 		return widget.getVariable(varname,{defaultValue: ""})
 	});
 };
@@ -1791,5 +1788,3 @@ exports.slugify = function(title,options) {
 	}
 	return slug;
 };
-
-})();

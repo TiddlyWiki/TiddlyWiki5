@@ -6,10 +6,7 @@ module-type: wikirule
 Wiki text block rule for headings
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "heading";
@@ -45,4 +42,3 @@ exports.parse = function() {
 		children: tree
 	}];
 };
-})();
