@@ -18,7 +18,7 @@ code-background: #f7f7f9
 code-border: #e1e1e8
 code-foreground: #dd1144
 dirty-indicator: #ff0000
-download-background: #444fd0
+download-background: #34c734
 download-foreground: <<colour background>>
 dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
