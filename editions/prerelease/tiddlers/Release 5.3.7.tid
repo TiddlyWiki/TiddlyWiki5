@@ -13,6 +13,7 @@ description: Under development
 
 ! Translation improvements
 
+* Chinese
 * French
 * German
 * Japanese
@@ -65,29 +66,45 @@ description: Under development
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8959">> problem with missing expandable arrow in [[toc-selective-expandable|Table-of-Contents Macros]]
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/5930">> the default value does not working for the CheckboxWidget if it is bound to an index in a data tiddler
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8970">> [[median Operator]] to order values as numbers, not strings
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8958">> red screen of embarrassment error with moduleproperty filter operator
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8946">> red screen of embarrassment when using a [[startup action|StartupActions]] with the [[now Macro]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9026">> some download file types not being specified
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9032">> configuration filter in $:/AdvancedSearch "Standard" tab
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9025">> stringification of derived fields for [[tiddlywiki.files Files]]
 
 ! Node.js Improvements
 
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8789">> incorrect redirect when combining a custom [[path-prefix|WebServer Parameter: path-prefix]] with manual HTTP Basic Authentication via the [[/login-basic|WebServer API: Force Basic Authentication Login]] endpoint
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/55dbce10f461c41240d2c6ee5a49bd6ed0edc15b">> crash loading large files
+
+! Performance Improvements
+
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8952">> plugin editions to use the external core
 
 ! Developer Improvements
 
-* 
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8978">> Widget.prototype.addEventListener not overwriting old listeners
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7596">> configurations for [[dprint|https://dprint.dev/]] and [[eslint|https://eslint.org/]] (partially reverted in [[#8987|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8987]])
 
 ! Acknowledgements
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+bobjtls
 DesignThinkerer
 flibbles
 galenhuntington
+hoelzro
 IchijikuIchigo
+jbaldus
 jeremyredhead
 jrbntt
 jryans
+kookma
 Leilei332
 linonetwo
+matthewsalmon
 michaeljmcd
 opn
 pmario
@@ -95,4 +112,5 @@ Rhys-T
 saqimtiaz
 well-noted
 xcazin
+yaisog
 """>>
