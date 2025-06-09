@@ -21,7 +21,7 @@ exports.handler = function(request,response,state) {
 		extension = path.extname(filename);
 	// Check that the filename is inside the wiki files folder
 	if(path.relative(baseFilename,filename).indexOf("..") === 0) {
-		return state.sendResponse(403,{"Content-Type": "text/plain"},"Access denied");
+		return state.sendResponse(404,{"Content-Type": "text/plain"},"File '" + suppliedFilename + "' not found");
 	}
 	fs.stat(filename, function(err, stats) {
 		if(err) {
