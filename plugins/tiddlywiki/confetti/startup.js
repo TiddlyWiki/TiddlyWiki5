@@ -6,7 +6,6 @@ module-type: startup
 Setup the root widget event handlers
 
 \*/
-(function(){
 "use strict";
 
 // Export name and synchronous status
@@ -56,5 +55,3 @@ exports.startup = function() {
 		$tw.confettiManager.reset();
 	});
 };
-
-})();
