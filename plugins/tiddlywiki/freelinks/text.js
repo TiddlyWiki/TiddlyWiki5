@@ -18,16 +18,14 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget,
 	ElementWidget = require("$:/core/modules/widgets/element.js").element,
 	AhoCorasick = require("$:/core/modules/utils/aho-corasick.js").AhoCorasick;
 
-/**
- * Escape only ASCII 127 and below metacharacters
- * @param {string} str - String to escape
- * @returns {string|null} Escaped string or null if failed
- */
+/*
+Escape only ASCII 127 and below metacharacters to avoid issues with Unicode titles
+*/
 function escapeRegExp(str) {
 	try {
 		return str.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
 	} catch(e) {
-		return null; // Skip problematic titles
+		return null;
 	}
 }
 
@@ -35,14 +33,8 @@ var TextNodeWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 TextNodeWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 TextNodeWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -50,32 +42,26 @@ TextNodeWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 TextNodeWidget.prototype.execute = function() {
 	var self = this,
 		ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}) === "yes";
 	
-	// Get our parameters
 	var childParseTree = [{
 		type: "plain-text",
 		text: this.getAttribute("text",this.parseTreeNode.text || "")
 	}];
 	
-	// Only process links if not disabled and we're not within a button or link widget
+	// Only process if freelinks enabled and not within interactive elements (prevents nested links)
 	if(this.getVariable("tv-wikilinks",{defaultValue:"yes"}) !== "no" && 
 		this.getVariable("tv-freelinks",{defaultValue:"no"}) === "yes" && 
 		!this.isWithinButtonOrLink()) {
 		
-		// Get the current tiddler title
 		var currentTiddlerTitle = this.getVariable("currentTiddler") || "";
 		
-		// Check if persistent caching is enabled
+		// Cache strategy: persistent vs session-based depending on configuration
 		var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no") === "yes";
 		var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
 		
-		// Get the information about the current tiddler titles
 		this.tiddlerTitleInfo = persistCache ?
 			this.wiki.getPersistentCache(cacheKey, function() {
 				return computeTiddlerTitleInfo(self, ignoreCase);
@@ -84,13 +70,11 @@ TextNodeWidget.prototype.execute = function() {
 				return computeTiddlerTitleInfo(self, ignoreCase);
 			});
 		
-		// Process titles to avoid overlapping matches
 		if(this.tiddlerTitleInfo.titles.length > 0) {
 			var text = childParseTree[0].text,
 				newParseTree = [],
 				currentPos = 0;
 			
-			// Use Aho-Corasick to find all matches
 			var searchText = ignoreCase ? text.toLowerCase() : text;
 			var matches;
 			try {
@@ -99,7 +83,7 @@ TextNodeWidget.prototype.execute = function() {
 				matches = [];
 			}
 			
-			// Sort matches by position and length (longer titles first)
+			// Prioritize longer matches first, then by position
 			matches.sort(function(a, b) {
 				if(a.index !== b.index) {
 					return a.index - b.index;
@@ -107,14 +91,13 @@ TextNodeWidget.prototype.execute = function() {
 				return b.length - a.length;
 			});
 			
-			// Process matches to avoid overlaps
+			// Prevent overlapping matches - longer titles take precedence
 			var processedPositions = new Set();
 			for(var i = 0; i < matches.length; i++) {
 				var match = matches[i];
 				var matchStart = match.index;
 				var matchEnd = matchStart + match.length;
 				
-				// Skip if position already processed (ensures longer titles take precedence)
 				var overlap = false;
 				for(var pos = matchStart; pos < matchEnd; pos++) {
 					if(processedPositions.has(pos)) {
@@ -126,12 +109,10 @@ TextNodeWidget.prototype.execute = function() {
 					continue;
 				}
 				
-				// Mark positions as processed
 				for(var pos = matchStart; pos < matchEnd; pos++) {
 					processedPositions.add(pos);
 				}
 				
-				// Add text before the match
 				if(matchStart > currentPos) {
 					newParseTree.push({
 						type: "plain-text",
@@ -139,18 +120,15 @@ TextNodeWidget.prototype.execute = function() {
 					});
 				}
 				
-				// Get matched title
 				var matchedTitle = this.tiddlerTitleInfo.titles[match.titleIndex];
 				
-				// Check if the matched title is the current tiddler title
+				// Self-referential links are rendered as plain text to avoid circular navigation
 				if(matchedTitle === currentTiddlerTitle) {
-					// Skip linking, keep as plain text
 					newParseTree.push({
 						type: "plain-text",
 						text: text.slice(matchStart, matchEnd)
 					});
 				} else {
-					// Add link for the match
 					newParseTree.push({
 						type: "link",
 						attributes: {
@@ -166,7 +144,6 @@ TextNodeWidget.prototype.execute = function() {
 				currentPos = matchEnd;
 			}
 			
-			// Add remaining text
 			if(currentPos < text.length) {
 				newParseTree.push({
 					type: "plain-text",
@@ -177,12 +154,11 @@ TextNodeWidget.prototype.execute = function() {
 		}
 	}
 	
-	// Make the child widgets
 	this.makeChildWidgets(childParseTree);
 };
 
 /*
-Helper function to compute tiddler title info
+Builds optimized title search structure with chunking for memory management
 */
 function computeTiddlerTitleInfo(self, ignoreCase) {
 	var targetFilterText = self.wiki.getTiddlerText(TITLE_TARGET_FILTER),
@@ -199,10 +175,10 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 		};
 	}
 	
+	// Longer titles prioritized for better matching, with Chinese locale support
 	var sortedTitles = titles.sort(function(a,b) {
 			var lenA = a.length,
 				lenB = b.length;
-			// Sort by length (longer first), then alphabetically for same length
 			if(lenA !== lenB) {
 				return lenB - lenA;
 			} else {
@@ -210,11 +186,12 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 			}
 		}),
 		validTitles = [],
-		chunkSize = 100; // Fixed chunk size
+		chunkSize = 100;
 	
 	var ac = new AhoCorasick();
 	
 	$tw.utils.each(sortedTitles,function(title, index) {
+		// Exclude system tiddlers from linking
 		if(title.substring(0,3) !== "$:/") {
 			var escapedTitle = escapeRegExp(title);
 			if(escapedTitle) {
@@ -235,7 +212,7 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 		};
 	}
 	
-	// Split titles into chunks for memory management
+	// Memory optimization through fixed-size chunking
 	var titleChunks = [];
 	for(var i = 0; i < validTitles.length; i += chunkSize) {
 		titleChunks.push(validTitles.slice(i, i + chunkSize));
@@ -250,7 +227,7 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 }
 
 /*
-Check if the widget is within a button or link
+Guards against nested interactive elements which break accessibility
 */
 TextNodeWidget.prototype.isWithinButtonOrLink = function() {
 	var withinButtonOrLink = false,
@@ -264,9 +241,6 @@ TextNodeWidget.prototype.isWithinButtonOrLink = function() {
 	return withinButtonOrLink;
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 	var self = this,
 		changedAttributes = this.computeAttributes(),
@@ -283,7 +257,7 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 	});
 	
 	if(changedAttributes.text || titlesHaveChanged) {
-		// Invalidate cache if titles changed and persistent cache is enabled
+		// Cache invalidation strategy for persistent vs session caches
 		var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no") === "yes";
 		var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}) === "yes";
 		var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
