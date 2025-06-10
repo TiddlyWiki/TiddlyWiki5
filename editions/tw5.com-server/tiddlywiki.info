@@ -4,7 +4,8 @@
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
 		"tiddlywiki/highlight",
-		"tiddlywiki/internals"
+		"tiddlywiki/internals",
+		"tiddlywiki/freelink"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
