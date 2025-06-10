@@ -7,7 +7,7 @@
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",
 		"tiddlywiki/railroad",
-		"tiddlywiki/tour"
+		"tiddlywiki/tour",
 		"tiddlywiki/freelink"
 	],
 	"themes": [
