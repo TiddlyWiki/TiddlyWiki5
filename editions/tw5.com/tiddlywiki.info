@@ -8,6 +8,7 @@
 		"tiddlywiki/menubar",
 		"tiddlywiki/railroad",
 		"tiddlywiki/tour"
+		"tiddlywiki/freelink"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
