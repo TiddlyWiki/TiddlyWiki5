@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/text.js
 type: application/javascript
 module-type: widget
 
-An override of the core text widget that automatically linkifies the text, with support for non-Latin languages like Chinese, prioritizing longer titles, skipping processed matches, excluding the current tiddler title from linking, and handling large title sets with Aho-Corasick algorithm and fixed chunking (100 titles per chunk). Includes optional persistent caching of Aho-Corasick automaton, controlled by $:/config/Freelinks/PersistAhoCorasickCache.
+An optimized override of the core text widget that automatically linkifies the text, with support for non-Latin languages like Chinese, prioritizing longer titles, skipping processed matches, excluding the current tiddler title from linking, and handling large title sets with enhanced Aho-Corasick algorithm and memory optimization.
 
 \*/
 
@@ -18,16 +18,28 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget,
 	ElementWidget = require("$:/core/modules/widgets/element.js").element,
 	AhoCorasick = require("$:/core/modules/utils/aho-corasick.js").AhoCorasick;
 
-/*
-Escape only ASCII 127 and below metacharacters to avoid issues with Unicode titles
-*/
+var ESCAPE_REGEX = /[\\^$*+?.()|[\]{}]/g;
+
 function escapeRegExp(str) {
 	try {
-		return str.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+		return str.replace(ESCAPE_REGEX, '\\$&');
 	} catch(e) {
 		return null;
 	}
 }
+
+/* Fast Set-like structure using native Set for reliability */
+function FastPositionSet() {
+	this.set = new Set();
+}
+
+FastPositionSet.prototype.add = function(pos) {
+	this.set.add(pos);
+};
+
+FastPositionSet.prototype.has = function(pos) {
+	return this.set.has(pos);
+};
 
 var TextNodeWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -51,14 +63,19 @@ TextNodeWidget.prototype.execute = function() {
 		text: this.getAttribute("text",this.parseTreeNode.text || "")
 	}];
 	
-	// Only process if freelinks enabled and not within interactive elements (prevents nested links)
+	var text = childParseTree[0].text;
+	
+	if(!text || text.length < 2) {
+		this.makeChildWidgets(childParseTree);
+		return;
+	}
+	
 	if(this.getVariable("tv-wikilinks",{defaultValue:"yes"}) !== "no" && 
-		this.getVariable("tv-freelinks",{defaultValue:"no"}) === "yes" && 
-		!this.isWithinButtonOrLink()) {
+	   this.getVariable("tv-freelinks",{defaultValue:"no"}) === "yes" && 
+	   !this.isWithinButtonOrLink()) {
 		
 		var currentTiddlerTitle = this.getVariable("currentTiddler") || "";
 		
-		// Cache strategy: persistent vs session-based depending on configuration
 		var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no") === "yes";
 		var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
 		
@@ -71,95 +88,112 @@ TextNodeWidget.prototype.execute = function() {
 			});
 		
 		if(this.tiddlerTitleInfo.titles.length > 0) {
-			var text = childParseTree[0].text,
-				newParseTree = [],
-				currentPos = 0;
-			
-			var searchText = ignoreCase ? text.toLowerCase() : text;
-			var matches;
-			try {
-				matches = this.tiddlerTitleInfo.ac.search(searchText);
-			} catch(e) {
-				matches = [];
+			var newParseTree = this.processTextWithMatches(text, currentTiddlerTitle, ignoreCase);
+			if(newParseTree.length > 1 || newParseTree[0].type !== "plain-text") {
+				childParseTree = newParseTree;
 			}
-			
-			// Prioritize longer matches first, then by position
-			matches.sort(function(a, b) {
-				if(a.index !== b.index) {
-					return a.index - b.index;
-				}
-				return b.length - a.length;
-			});
-			
-			// Prevent overlapping matches - longer titles take precedence
-			var processedPositions = new Set();
-			for(var i = 0; i < matches.length; i++) {
-				var match = matches[i];
-				var matchStart = match.index;
-				var matchEnd = matchStart + match.length;
-				
-				var overlap = false;
-				for(var pos = matchStart; pos < matchEnd; pos++) {
-					if(processedPositions.has(pos)) {
-						overlap = true;
-						break;
-					}
-				}
-				if(overlap) {
-					continue;
-				}
-				
-				for(var pos = matchStart; pos < matchEnd; pos++) {
-					processedPositions.add(pos);
-				}
-				
-				if(matchStart > currentPos) {
-					newParseTree.push({
-						type: "plain-text",
-						text: text.slice(currentPos, matchStart)
-					});
-				}
-				
-				var matchedTitle = this.tiddlerTitleInfo.titles[match.titleIndex];
-				
-				// Self-referential links are rendered as plain text to avoid circular navigation
-				if(matchedTitle === currentTiddlerTitle) {
-					newParseTree.push({
-						type: "plain-text",
-						text: text.slice(matchStart, matchEnd)
-					});
-				} else {
-					newParseTree.push({
-						type: "link",
-						attributes: {
-							to: {type: "string", value: matchedTitle},
-							"class": {type: "string", value: "tc-freelink"}
-						},
-						children: [{
-							type: "plain-text",
-							text: text.slice(matchStart, matchEnd)
-						}]
-					});
-				}
-				currentPos = matchEnd;
-			}
-			
-			if(currentPos < text.length) {
-				newParseTree.push({
-					type: "plain-text",
-					text: text.slice(currentPos)
-				});
-			}
-			childParseTree = newParseTree;
 		}
 	}
 	
 	this.makeChildWidgets(childParseTree);
 };
 
-/*
-Builds optimized title search structure with chunking for memory management
-*/
+TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerTitle, ignoreCase) {
+	var searchText = ignoreCase ? text.toLowerCase() : text;
+	var matches;
+	
+	try {
+		matches = this.tiddlerTitleInfo.ac.search(searchText);
+	} catch(e) {
+		return [{type: "plain-text", text: text}];
+	}
+	
+	if(!matches || matches.length === 0) {
+		return [{type: "plain-text", text: text}];
+	}
+	
+	matches.sort(function(a, b) {
+		var posDiff = a.index - b.index;
+		return posDiff !== 0 ? posDiff : b.length - a.length;
+	});
+	
+	var processedPositions = new FastPositionSet();
+	var validMatches = [];
+	
+	/* Pre-filter matches to remove overlaps */
+	for(var i = 0; i < matches.length; i++) {
+		var match = matches[i];
+		var matchStart = match.index;
+		var matchEnd = matchStart + match.length;
+		
+		var hasOverlap = false;
+		for(var pos = matchStart; pos < matchEnd && !hasOverlap; pos++) {
+			if(processedPositions.has(pos)) {
+				hasOverlap = true;
+			}
+		}
+		
+		if(!hasOverlap) {
+			for(var pos = matchStart; pos < matchEnd; pos++) {
+				processedPositions.add(pos);
+			}
+			validMatches.push(match);
+		}
+	}
+	
+	if(validMatches.length === 0) {
+		return [{type: "plain-text", text: text}];
+	}
+	
+	var newParseTree = [];
+	var currentPos = 0;
+	
+	for(var i = 0; i < validMatches.length; i++) {
+		var match = validMatches[i];
+		var matchStart = match.index;
+		var matchEnd = matchStart + match.length;
+		
+		if(matchStart > currentPos) {
+			newParseTree.push({
+				type: "plain-text",
+				text: text.slice(currentPos, matchStart)
+			});
+		}
+		
+		var matchedTitle = this.tiddlerTitleInfo.titles[match.titleIndex];
+		
+		if(matchedTitle === currentTiddlerTitle) {
+			newParseTree.push({
+				type: "plain-text",
+				text: text.slice(matchStart, matchEnd)
+			});
+		} else {
+			newParseTree.push({
+				type: "link",
+				attributes: {
+					to: {type: "string", value: matchedTitle},
+					"class": {type: "string", value: "tc-freelink"}
+				},
+				children: [{
+					type: "plain-text",
+					text: text.slice(matchStart, matchEnd)
+				}]
+			});
+		}
+		currentPos = matchEnd;
+	}
+	
+	if(currentPos < text.length) {
+		newParseTree.push({
+			type: "plain-text",
+			text: text.slice(currentPos)
+		});
+	}
+	
+	return newParseTree;
+};
+
+/* Compute tiddler title info with sorting and filtering optimizations */
 function computeTiddlerTitleInfo(self, ignoreCase) {
 	var targetFilterText = self.wiki.getTiddlerText(TITLE_TARGET_FILTER),
 		titles = !!targetFilterText ? 
@@ -175,31 +209,31 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 		};
 	}
 	
-	// Longer titles prioritized for better matching, with Chinese locale support
-	var sortedTitles = titles.sort(function(a,b) {
-			var lenA = a.length,
-				lenB = b.length;
-			if(lenA !== lenB) {
-				return lenB - lenA;
-			} else {
-				return a.localeCompare(b, 'zh', {sensitivity: 'base'});
-			}
-		}),
-		validTitles = [],
-		chunkSize = 100;
-	
-	var ac = new AhoCorasick();
-	
-	$tw.utils.each(sortedTitles,function(title, index) {
-		// Exclude system tiddlers from linking
-		if(title.substring(0,3) !== "$:/") {
-			var escapedTitle = escapeRegExp(title);
-			if(escapedTitle) {
-				validTitles.push(title);
-				ac.addPattern(ignoreCase ? title.toLowerCase() : title, validTitles.length - 1);
-			}
+	var filteredTitles = [];
+	for(var i = 0; i < titles.length; i++) {
+		var title = titles[i];
+		if(title && title.length > 0 && title.substring(0,3) !== "$:/") {
+			filteredTitles.push(title);
 		}
+	}
+	
+	var sortedTitles = filteredTitles.sort(function(a,b) {
+		var lenDiff = b.length - a.length;
+		return lenDiff !== 0 ? lenDiff : a.localeCompare(b, 'zh', {sensitivity: 'base'});
 	});
+	
+	var validTitles = [];
+	var ac = new AhoCorasick();
+	var chunkSize = 100;
+	
+	for(var i = 0; i < sortedTitles.length; i++) {
+		var title = sortedTitles[i];
+		var escapedTitle = escapeRegExp(title);
+		if(escapedTitle) {
+			validTitles.push(title);
+			ac.addPattern(ignoreCase ? title.toLowerCase() : title, validTitles.length - 1);
+		}
+	}
 	
 	try {
 		ac.buildFailureLinks();
@@ -212,7 +246,6 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 		};
 	}
 	
-	// Memory optimization through fixed-size chunking
 	var titleChunks = [];
 	for(var i = 0; i < validTitles.length; i += chunkSize) {
 		titleChunks.push(validTitles.slice(i, i + chunkSize));
@@ -226,19 +259,17 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 	};
 }
 
-/*
-Guards against nested interactive elements which break accessibility
-*/
 TextNodeWidget.prototype.isWithinButtonOrLink = function() {
-	var withinButtonOrLink = false,
-		widget = this.parentWidget;
-	while(!withinButtonOrLink && widget) {
-		withinButtonOrLink = widget instanceof ButtonWidget || 
-							widget instanceof LinkWidget || 
-							((widget instanceof ElementWidget) && widget.parseTreeNode.tag === "a");
+	var widget = this.parentWidget;
+	while(widget) {
+		if(widget instanceof ButtonWidget || 
+		   widget instanceof LinkWidget || 
+		   ((widget instanceof ElementWidget) && widget.parseTreeNode.tag === "a")) {
+			return true;
+		}
 		widget = widget.parentWidget;
 	}
-	return withinButtonOrLink;
+	return false;
 };
 
 TextNodeWidget.prototype.refresh = function(changedTiddlers) {
@@ -246,30 +277,33 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 		changedAttributes = this.computeAttributes(),
 		titlesHaveChanged = false;
 	
-	$tw.utils.each(changedTiddlers,function(change,title) {
-		if(change.isDeleted) {
-			titlesHaveChanged = true;
-		} else {
-			titlesHaveChanged = titlesHaveChanged || 
-							   !self.tiddlerTitleInfo || 
-							   self.tiddlerTitleInfo.titles.indexOf(title) === -1;
-		}
-	});
+	if(changedTiddlers) {
+		$tw.utils.each(changedTiddlers,function(change,title) {
+			if(change.isDeleted) {
+				titlesHaveChanged = true;
+			} else {
+				titlesHaveChanged = titlesHaveChanged || 
+								   !self.tiddlerTitleInfo || 
+								   self.tiddlerTitleInfo.titles.indexOf(title) === -1;
+			}
+		});
+	}
 	
 	if(changedAttributes.text || titlesHaveChanged) {
-		// Cache invalidation strategy for persistent vs session caches
-		var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no") === "yes";
-		var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}) === "yes";
-		var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
-		
-		if(titlesHaveChanged && persistCache) {
-			self.wiki.clearCache(cacheKey);
+		if(titlesHaveChanged) {
+			var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no") === "yes";
+			var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}) === "yes";
+			var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
+			
+			if(persistCache) {
+				self.wiki.clearCache(cacheKey);
+			}
 		}
 		
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 
