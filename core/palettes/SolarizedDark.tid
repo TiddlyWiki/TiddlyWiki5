@@ -40,7 +40,7 @@ external-link-background: inherit
 external-link-background-hover: inherit
 external-link-background-visited: inherit
 external-link-foreground: #268bd2
-external-link-foreground-hover:
+external-link-foreground-hover: #1d669c
 external-link-foreground-visited: #268bd2
 footnote-target-background: #073642
 foreground: #839496
@@ -56,6 +56,7 @@ modal-footer-background: #073642
 modal-footer-border: #586e75
 modal-header-border: #586e75
 muted-foreground: #93a1a1
+network-activity-foreground: <<colour primary>>
 notification-background: #002b36
 notification-border: #586e75
 page-background: #073642
@@ -81,10 +82,10 @@ sidebar-tab-foreground-selected: #93a1a1
 sidebar-tiddler-link-foreground: #2aa198
 sidebar-tiddler-link-foreground-hover: #eee8d5
 site-title-foreground: #d33682
-stability-deprecated: #dc322f
-stability-experimental: #b58900
-stability-legacy: #268bd2
-stability-stable: #859900
+stability-deprecated: #aa1a9f
+stability-experimental: #806000
+stability-legacy: #1d669c
+stability-stable: #00df11
 static-alert-foreground: #93a1a1
 tab-background: #073642
 tab-background-selected: #002b36
