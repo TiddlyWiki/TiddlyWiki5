@@ -3,8 +3,8 @@ title: $:/core/modules/utils/aho-corasick.js
 type: application/javascript
 module-type: utils
 
-Optimized Aho-Corasick string matching algorithm implementation with enhanced performance
-and error handling for TiddlyWiki freelinking functionality.
+Optimized Aho-Corasick string matching algorithm implementation with dynamic limits
+and performance enhancements for TiddlyWiki freelinking functionality.
 
 \*/
 
@@ -15,6 +15,7 @@ function AhoCorasick() {
 	this.trie = {};
 	this.failure = {};
 	this.maxFailureDepth = 100;
+	this.titlesLength = titlesLength || 0;
 }
 
 AhoCorasick.prototype.addPattern = function(pattern, index) {
@@ -56,7 +57,7 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 	}
 	
 	var processedNodes = 0;
-	var maxNodes = 100000;
+	var maxNodes = Math.min(200000, this.titlesLength * 15);
 	
 	while(queue.length > 0 && processedNodes < maxNodes) {
 		var node = queue.shift();
@@ -90,7 +91,7 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 	}
 	
 	if(processedNodes >= maxNodes) {
-		throw new Error("Aho-Corasick: buildFailureLinks exceeded maximum nodes");
+		throw new Error("Aho-Corasick: buildFailureLinks exceeded dynamic max nodes: " + maxNodes);
 	}
 };
 
@@ -102,19 +103,22 @@ AhoCorasick.prototype.search = function(text) {
 	var matches = [];
 	var node = this.trie;
 	var textLength = text.length;
-	var maxMatches = Math.min(textLength * 2, 10000);
+	var maxMatches = Math.min(textLength * 3, this.titlesLength * 2);
 	
 	for(var i = 0; i < textLength; i++) {
 		var char = text[i];
 		var transitionCount = 0;
 		
 		while(node && !node[char] && transitionCount < this.maxFailureDepth) {
+			var cachedNode = node[char] || (node[char] = this.trie); // 快取當前節點
+			if (cachedNode) {
+				node = cachedNode;
+				break;
+			}
 			node = this.failure[node];
 			transitionCount++;
 		}
-		
-		node = (node && node[char]) ? node[char] : this.trie;
-		
+
 		if(node && node.$) {
 			var outputs = node.$;
 			for(var j = 0; j < outputs.length && matches.length < maxMatches; j++) {
