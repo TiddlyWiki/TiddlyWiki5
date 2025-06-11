@@ -110,7 +110,7 @@ AhoCorasick.prototype.search = function(text) {
 		var transitionCount = 0;
 		
 		while(node && !node[char] && transitionCount < this.maxFailureDepth) {
-			var cachedNode = node[char] || (node[char] = this.trie); // 快取當前節點
+			var cachedNode = node[char] || (node[char] = this.trie);
 			if (cachedNode) {
 				node = cachedNode;
 				break;
