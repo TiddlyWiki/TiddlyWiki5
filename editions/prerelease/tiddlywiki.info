@@ -1,21 +1,20 @@
 {
 	"description": "Content for the current prerelease",
 	"plugins": [
-		"tiddlywiki/browser-sniff",
-		"tiddlywiki/help",
-		"tiddlywiki/powered-by-tiddlywiki",
-		"tiddlywiki/internals",
-		"tiddlywiki/highlight",
 		"tiddlywiki/bibtex",
-		"tiddlywiki/dynaview",
-		"tiddlywiki/dynannotate",
+		"tiddlywiki/browser-sniff",
 		"tiddlywiki/codemirror",
-		"tiddlywiki/menubar",
-		"tiddlywiki/jszip",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
-		"tiddlywiki/tour",
-		"tiddlywiki/freelink"
+		"tiddlywiki/dynaview",
+		"tiddlywiki/freelink",
+		"tiddlywiki/help",
+		"tiddlywiki/highlight",
+		"tiddlywiki/internals",
+		"tiddlywiki/jszip",
+		"tiddlywiki/menubar",
+		"tiddlywiki/powered-by-tiddlywiki",
+		"tiddlywiki/tour"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
