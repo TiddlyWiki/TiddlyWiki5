@@ -1,20 +1,10 @@
 {
 	"description": "Content for the current prerelease",
 	"plugins": [
-		"tiddlywiki/bibtex",
-		"tiddlywiki/browser-sniff",
-		"tiddlywiki/codemirror",
-		"tiddlywiki/confetti",
-		"tiddlywiki/dynannotate",
-		"tiddlywiki/dynaview",
 		"tiddlywiki/freelinks",
 		"tiddlywiki/help",
-		"tiddlywiki/highlight",
 		"tiddlywiki/internals",
-		"tiddlywiki/jszip",
-		"tiddlywiki/menubar",
-		"tiddlywiki/powered-by-tiddlywiki",
-		"tiddlywiki/tour"
+		"tiddlywiki/powered-by-tiddlywiki"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
