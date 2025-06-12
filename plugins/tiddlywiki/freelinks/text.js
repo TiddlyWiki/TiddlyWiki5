@@ -193,7 +193,7 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 	return newParseTree;
 };
 
-/* Compute tiddler title info with sorting and filtering optimizations */
+/* Compute tiddler title info with dynamic scaling */
 function computeTiddlerTitleInfo(self, ignoreCase) {
 	var targetFilterText = self.wiki.getTiddlerText(TITLE_TARGET_FILTER),
 		titles = !!targetFilterText ? 
@@ -203,9 +203,7 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 	if(!titles || titles.length === 0) {
 		return { 
 			titles: [], 
-			ac: new AhoCorasick(), 
-			chunkSize: 100, 
-			titleChunks: [] 
+			ac: new AhoCorasick()
 		};
 	}
 	
@@ -224,7 +222,6 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 	
 	var validTitles = [];
 	var ac = new AhoCorasick();
-	var chunkSize = 100;
 	
 	for(var i = 0; i < sortedTitles.length; i++) {
 		var title = sortedTitles[i];
@@ -240,22 +237,13 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 	} catch(e) {
 		return { 
 			titles: [], 
-			ac: new AhoCorasick(), 
-			chunkSize: 100, 
-			titleChunks: [] 
+			ac: new AhoCorasick()
 		};
-	}
-	
-	var titleChunks = [];
-	for(var i = 0; i < validTitles.length; i += chunkSize) {
-		titleChunks.push(validTitles.slice(i, i + chunkSize));
 	}
 	
 	return {
 		titles: validTitles,
-		ac: ac,
-		chunkSize: chunkSize,
-		titleChunks: titleChunks
+		ac: ac
 	};
 }
 
