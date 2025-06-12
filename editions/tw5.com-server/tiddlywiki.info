@@ -3,9 +3,9 @@
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
+		"tiddlywiki/freelink",
 		"tiddlywiki/highlight",
-		"tiddlywiki/internals",
-		"tiddlywiki/freelink"
+		"tiddlywiki/internals"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
