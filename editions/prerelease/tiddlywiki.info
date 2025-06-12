@@ -4,6 +4,7 @@
 		"tiddlywiki/freelinks",
 		"tiddlywiki/help",
 		"tiddlywiki/internals",
+		"tiddlywiki/menubar",
 		"tiddlywiki/powered-by-tiddlywiki"
 	],
 	"themes": [
