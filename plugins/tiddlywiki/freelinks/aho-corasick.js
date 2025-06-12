@@ -15,6 +15,7 @@ function AhoCorasick() {
 	this.trie = {};
 	this.failure = {};
 	this.maxFailureDepth = 100;
+	this.patternCount = 0;
 }
 
 AhoCorasick.prototype.addPattern = function(pattern, index) {
@@ -40,6 +41,8 @@ AhoCorasick.prototype.addPattern = function(pattern, index) {
 		index: index,
 		length: pattern.length
 	});
+	
+	this.patternCount++;
 };
 
 /* Build failure links with depth and node count limits */
@@ -56,7 +59,7 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 	}
 	
 	var processedNodes = 0;
-	var maxNodes = 100000;
+	var maxNodes = Math.max(100000, this.patternCount * 15);
 	
 	while(queue.length > 0 && processedNodes < maxNodes) {
 		var node = queue.shift();
@@ -90,7 +93,7 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 	}
 	
 	if(processedNodes >= maxNodes) {
-		throw new Error("Aho-Corasick: buildFailureLinks exceeded maximum nodes");
+		throw new Error("Aho-Corasick: buildFailureLinks exceeded maximum nodes (" + maxNodes + ")");
 	}
 };
 
@@ -135,6 +138,7 @@ AhoCorasick.prototype.search = function(text) {
 AhoCorasick.prototype.clear = function() {
 	this.trie = {};
 	this.failure = {};
+	this.patternCount = 0;
 };
 
 AhoCorasick.prototype.getStats = function() {
@@ -163,7 +167,7 @@ AhoCorasick.prototype.getStats = function() {
 	
 	return {
 		nodeCount: nodeCount,
-		patternCount: patternCount,
+		patternCount: this.patternCount,
 		failureLinks: failureCount
 	};
 };
