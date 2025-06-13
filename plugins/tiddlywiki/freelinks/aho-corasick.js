@@ -98,7 +98,7 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 	}
 };
 
-AhoCorasick.prototype.search = function(text) {
+AhoCorasick.prototype.search = function(text, useWordBoundary) {
 	if(!text || typeof text !== "string" || text.length === 0) {
 		return [];
 	}
@@ -137,9 +137,17 @@ AhoCorasick.prototype.search = function(text) {
 				var outputs = currentNode.$;
 				for(var j = 0; j < outputs.length && matches.length < maxMatches; j++) {
 					var output = outputs[j];
+					var matchStart = i - output.length + 1;
+					var matchEnd = i + 1;
+					
+					/* 檢查單字邊界 */
+					if(useWordBoundary && !this.isWordBoundaryMatch(text, matchStart, matchEnd)) {
+						continue;
+					}
+					
 					matches.push({
 						pattern: output.pattern,
-						index: i - output.length + 1,
+						index: matchStart,
 						length: output.length,
 						titleIndex: output.index
 					});
@@ -152,6 +160,23 @@ AhoCorasick.prototype.search = function(text) {
 	}
 	
 	return matches;
+};
+
+/* 檢查是否為有效的單字邊界匹配 */
+AhoCorasick.prototype.isWordBoundaryMatch = function(text, start, end) {
+	var beforeChar = start > 0 ? text[start - 1] : '';
+	var afterChar = end < text.length ? text[end] : '';
+	
+	/* 西文單字邊界：字母數字與非字母數字的交界 */
+	var isWordChar = function(char) {
+		return /[a-zA-Z0-9_]/.test(char);
+	};
+	
+	var beforeIsWord = beforeChar && isWordChar(beforeChar);
+	var afterIsWord = afterChar && isWordChar(afterChar);
+	
+	/* 匹配的文字前後至少要有一個非單字字符 */
+	return !beforeIsWord || !afterIsWord;
 };
 
 AhoCorasick.prototype.clear = function() {
