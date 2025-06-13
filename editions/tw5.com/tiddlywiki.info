@@ -1,6 +1,13 @@
 {
 	"description": "Documentation from https://tiddlywiki.com",
 	"plugins": [
+		"tiddlywiki/browser-sniff",
+		"tiddlywiki/confetti",
+		"tiddlywiki/dynannotate",
+		"tiddlywiki/internals",
+		"tiddlywiki/menubar",
+		"tiddlywiki/railroad",
+		"tiddlywiki/tour",
 		"tiddlywiki/freelinks"
 	],
 	"themes": [
