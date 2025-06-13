@@ -175,8 +175,8 @@ AhoCorasick.prototype.isWordBoundaryMatch = function(text, start, end) {
 	var beforeIsWord = beforeChar && isWordChar(beforeChar);
 	var afterIsWord = afterChar && isWordChar(afterChar);
 	
-	/* 匹配的文字前後至少要有一個非單字字符 */
-	return !beforeIsWord || !afterIsWord;
+	/* 匹配的文字前後都不能是單字字符（必須是單字邊界） */
+	return !beforeIsWord && !afterIsWord;
 };
 
 AhoCorasick.prototype.clear = function() {
