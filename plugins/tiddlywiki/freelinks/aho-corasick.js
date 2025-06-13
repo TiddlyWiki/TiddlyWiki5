@@ -49,7 +49,6 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 	var root = this.trie;
 	this.failure[root] = root;
 	
-	/* 初始化根節點的直接子節點 */
 	for(var char in root) {
 		if(root[char] && char !== '$') {
 			this.failure[root[char]] = root;
@@ -70,7 +69,6 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 				var fail = this.failure[node];
 				var failureDepth = 0;
 				
-				/* 尋找適當的失敗連結 */
 				while(fail && !fail[char] && failureDepth < this.maxFailureDepth) {
 					fail = this.failure[fail];
 					failureDepth++;
@@ -79,7 +77,6 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 				var failureLink = (fail && fail[char]) ? fail[char] : root;
 				this.failure[child] = failureLink;
 				
-				/* 複製失敗連結節點的輸出 */
 				var failureOutput = this.failure[child];
 				if(failureOutput && failureOutput.$) {
 					if(!child.$) {
@@ -112,24 +109,20 @@ AhoCorasick.prototype.search = function(text, useWordBoundary) {
 		var char = text[i];
 		var transitionCount = 0;
 		
-		/* 跟隨失敗連結直到找到匹配或回到根節點 */
 		while(node && !node[char] && node !== this.trie && transitionCount < this.maxFailureDepth) {
 			node = this.failure[node] || this.trie;
 			transitionCount++;
 		}
 		
-		/* 確保狀態轉換正確 */
 		if(node && node[char]) {
 			node = node[char];
 		} else {
 			node = this.trie;
-			/* 檢查根節點是否有這個字符的轉換 */
 			if(this.trie[char]) {
 				node = this.trie[char];
 			}
 		}
 		
-		/* 收集當前節點及其失敗連結的所有匹配輸出 */
 		var currentNode = node;
 		var collectCount = 0;
 		while(currentNode && collectCount < 10) {
@@ -140,7 +133,6 @@ AhoCorasick.prototype.search = function(text, useWordBoundary) {
 					var matchStart = i - output.length + 1;
 					var matchEnd = i + 1;
 					
-					/* 檢查單字邊界 */
 					if(useWordBoundary && !this.isWordBoundaryMatch(text, matchStart, matchEnd)) {
 						continue;
 					}
@@ -162,12 +154,10 @@ AhoCorasick.prototype.search = function(text, useWordBoundary) {
 	return matches;
 };
 
-/* 檢查是否為有效的單字邊界匹配 */
 AhoCorasick.prototype.isWordBoundaryMatch = function(text, start, end) {
 	var beforeChar = start > 0 ? text[start - 1] : '';
 	var afterChar = end < text.length ? text[end] : '';
 	
-	/* 西文單字邊界：字母數字與非字母數字的交界 */
 	var isWordChar = function(char) {
 		return /[a-zA-Z0-9_]/.test(char);
 	};
@@ -175,7 +165,6 @@ AhoCorasick.prototype.isWordBoundaryMatch = function(text, start, end) {
 	var beforeIsWord = beforeChar && isWordChar(beforeChar);
 	var afterIsWord = afterChar && isWordChar(afterChar);
 	
-	/* 匹配的文字前後都不能是單字字符（必須是單字邊界） */
 	return !beforeIsWord && !afterIsWord;
 };
 
