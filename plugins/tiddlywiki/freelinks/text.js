@@ -3,14 +3,13 @@ title: $:/core/modules/widgets/text.js
 type: application/javascript
 module-type: widget
 
-An optimized override of the core text widget that automatically linkifies the text, with support for non-Latin languages like Chinese, prioritizing longer titles, skipping processed matches, excluding the current tiddler title from linking, and handling large title sets with enhanced Aho-Corasick algorithm and memory optimization.
+An optimized override of the core text widget that automatically linkifies the text, with support for non-Latin languages like Chinese, prioritizing longer titles, skipping processed matches, excluding the current tiddler title from linking, and handling large title sets with enhanced Aho-Corasick algorithm.
 
 \*/
 
 "use strict";
 
 var TITLE_TARGET_FILTER = "$:/config/Freelinks/TargetFilter";
-var PERSIST_CACHE_TIDDLER = "$:/config/Freelinks/PersistAhoCorasickCache";
 var WORD_BOUNDARY_TIDDLER = "$:/config/Freelinks/WordBoundary";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
@@ -77,16 +76,11 @@ TextNodeWidget.prototype.execute = function() {
 		var currentTiddlerTitle = this.getVariable("currentTiddler") || "";
 		var useWordBoundary = self.wiki.getTiddlerText(WORD_BOUNDARY_TIDDLER, "no") === "yes";
 		
-		var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no") === "yes";
 		var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
 		
-		this.tiddlerTitleInfo = persistCache ?
-			this.wiki.getPersistentCache(cacheKey, function() {
-				return computeTiddlerTitleInfo(self, ignoreCase);
-			}) :
-			this.wiki.getGlobalCache(cacheKey, function() {
-				return computeTiddlerTitleInfo(self, ignoreCase);
-			});
+		this.tiddlerTitleInfo = this.wiki.getGlobalCache(cacheKey, function() {
+			return computeTiddlerTitleInfo(self, ignoreCase);
+		});
 		
 		if(this.tiddlerTitleInfo.titles.length > 0) {
 			var newParseTree = this.processTextWithMatches(text, currentTiddlerTitle, ignoreCase, useWordBoundary);
@@ -279,13 +273,9 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.text || titlesHaveChanged || 
 	   (changedTiddlers && changedTiddlers[WORD_BOUNDARY_TIDDLER])) {
 		if(titlesHaveChanged) {
-			var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no") === "yes";
 			var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}) === "yes";
 			var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
-			
-			if(persistCache) {
-				self.wiki.clearCache(cacheKey);
-			}
+			self.wiki.clearCache(cacheKey);
 		}
 		
 		this.refreshSelf();
