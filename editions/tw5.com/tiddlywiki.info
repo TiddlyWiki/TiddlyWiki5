@@ -4,11 +4,11 @@
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
+		"tiddlywiki/freelinks",
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",
 		"tiddlywiki/railroad",
-		"tiddlywiki/tour",
-		"tiddlywiki/freelinks"
+		"tiddlywiki/tour"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
