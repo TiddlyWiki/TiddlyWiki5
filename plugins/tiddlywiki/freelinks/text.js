@@ -11,6 +11,7 @@ An optimized override of the core text widget that automatically linkifies the t
 
 var TITLE_TARGET_FILTER = "$:/config/Freelinks/TargetFilter";
 var PERSIST_CACHE_TIDDLER = "$:/config/Freelinks/PersistAhoCorasickCache";
+var WORD_BOUNDARY_TIDDLER = "$:/config/Freelinks/WordBoundary";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
 	LinkWidget = require("$:/core/modules/widgets/link.js").link,
@@ -28,7 +29,6 @@ function escapeRegExp(str) {
 	}
 }
 
-/* Fast Set-like structure using native Set for reliability */
 function FastPositionSet() {
 	this.set = new Set();
 }
@@ -75,6 +75,7 @@ TextNodeWidget.prototype.execute = function() {
 	   !this.isWithinButtonOrLink()) {
 		
 		var currentTiddlerTitle = this.getVariable("currentTiddler") || "";
+		var useWordBoundary = self.wiki.getTiddlerText(WORD_BOUNDARY_TIDDLER, "no") === "yes";
 		
 		var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no") === "yes";
 		var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
@@ -88,7 +89,7 @@ TextNodeWidget.prototype.execute = function() {
 			});
 		
 		if(this.tiddlerTitleInfo.titles.length > 0) {
-			var newParseTree = this.processTextWithMatches(text, currentTiddlerTitle, ignoreCase);
+			var newParseTree = this.processTextWithMatches(text, currentTiddlerTitle, ignoreCase, useWordBoundary);
 			if(newParseTree.length > 1 || newParseTree[0].type !== "plain-text") {
 				childParseTree = newParseTree;
 			}
@@ -98,12 +99,12 @@ TextNodeWidget.prototype.execute = function() {
 	this.makeChildWidgets(childParseTree);
 };
 
-TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerTitle, ignoreCase) {
+TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerTitle, ignoreCase, useWordBoundary) {
 	var searchText = ignoreCase ? text.toLowerCase() : text;
 	var matches;
 	
 	try {
-		matches = this.tiddlerTitleInfo.ac.search(searchText);
+		matches = this.tiddlerTitleInfo.ac.search(searchText, useWordBoundary);
 	} catch(e) {
 		return [{type: "plain-text", text: text}];
 	}
@@ -120,7 +121,6 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 	var processedPositions = new FastPositionSet();
 	var validMatches = [];
 	
-	/* Pre-filter matches to remove overlaps */
 	for(var i = 0; i < matches.length; i++) {
 		var match = matches[i];
 		var matchStart = match.index;
@@ -193,7 +193,6 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 	return newParseTree;
 };
 
-/* Compute tiddler title info with dynamic scaling */
 function computeTiddlerTitleInfo(self, ignoreCase) {
 	var targetFilterText = self.wiki.getTiddlerText(TITLE_TARGET_FILTER),
 		titles = !!targetFilterText ? 
@@ -277,7 +276,8 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 		});
 	}
 	
-	if(changedAttributes.text || titlesHaveChanged) {
+	if(changedAttributes.text || titlesHaveChanged || 
+	   (changedTiddlers && changedTiddlers[WORD_BOUNDARY_TIDDLER])) {
 		if(titlesHaveChanged) {
 			var persistCache = self.wiki.getTiddlerText(PERSIST_CACHE_TIDDLER, "no") === "yes";
 			var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}) === "yes";
