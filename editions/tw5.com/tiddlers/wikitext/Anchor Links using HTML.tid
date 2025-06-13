@@ -1,13 +1,13 @@
 created: 20190311094603013
-modified: 20201130064330388
+modified: 20241002211330388
 tags: [[HTML in WikiText]]
 title: Anchor Links using HTML
 
 <a id=<<qualify "#Top">>></a>
 
+Here we describe a HTML way to link to a section. To use WikiText style anchor links, see [[Block Level Links in WikiText|Block Level Links in WikiText^BlockLevelLinksID1]].
+
 <h2 id="#Introduction:Anchor-Links-using-HTML">''HTML Anchor Links in Tiddlers''</h2>
-
-
 
 * <a href=<<qualify "##Introduction">>>What do they do?</a>
 * <a href=<<qualify "##How-do-I-make-them">>>How do I make them?</a>
