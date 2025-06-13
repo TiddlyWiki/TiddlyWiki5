@@ -10,7 +10,6 @@ and error handling for TiddlyWiki freelinking functionality.
 
 "use strict";
 
-/* Optimized Aho-Corasick implementation with performance enhancements */
 function AhoCorasick() {
 	this.trie = {};
 	this.failure = {};
@@ -45,12 +44,12 @@ AhoCorasick.prototype.addPattern = function(pattern, index) {
 	this.patternCount++;
 };
 
-/* Build failure links with depth and node count limits */
 AhoCorasick.prototype.buildFailureLinks = function() {
 	var queue = [];
 	var root = this.trie;
 	this.failure[root] = root;
 	
+	/* 初始化根節點的直接子節點 */
 	for(var char in root) {
 		if(root[char] && char !== '$') {
 			this.failure[root[char]] = root;
@@ -71,6 +70,7 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 				var fail = this.failure[node];
 				var failureDepth = 0;
 				
+				/* 尋找適當的失敗連結 */
 				while(fail && !fail[char] && failureDepth < this.maxFailureDepth) {
 					fail = this.failure[fail];
 					failureDepth++;
@@ -79,6 +79,7 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 				var failureLink = (fail && fail[char]) ? fail[char] : root;
 				this.failure[child] = failureLink;
 				
+				/* 複製失敗連結節點的輸出 */
 				var failureOutput = this.failure[child];
 				if(failureOutput && failureOutput.$) {
 					if(!child.$) {
@@ -111,24 +112,42 @@ AhoCorasick.prototype.search = function(text) {
 		var char = text[i];
 		var transitionCount = 0;
 		
-		while(node && !node[char] && transitionCount < this.maxFailureDepth) {
-			node = this.failure[node];
+		/* 跟隨失敗連結直到找到匹配或回到根節點 */
+		while(node && !node[char] && node !== this.trie && transitionCount < this.maxFailureDepth) {
+			node = this.failure[node] || this.trie;
 			transitionCount++;
 		}
 		
-		node = (node && node[char]) ? node[char] : this.trie;
-		
-		if(node && node.$) {
-			var outputs = node.$;
-			for(var j = 0; j < outputs.length && matches.length < maxMatches; j++) {
-				var output = outputs[j];
-				matches.push({
-					pattern: output.pattern,
-					index: i - output.length + 1,
-					length: output.length,
-					titleIndex: output.index
-				});
+		/* 確保狀態轉換正確 */
+		if(node && node[char]) {
+			node = node[char];
+		} else {
+			node = this.trie;
+			/* 檢查根節點是否有這個字符的轉換 */
+			if(this.trie[char]) {
+				node = this.trie[char];
 			}
+		}
+		
+		/* 收集當前節點及其失敗連結的所有匹配輸出 */
+		var currentNode = node;
+		var collectCount = 0;
+		while(currentNode && collectCount < 10) {
+			if(currentNode.$) {
+				var outputs = currentNode.$;
+				for(var j = 0; j < outputs.length && matches.length < maxMatches; j++) {
+					var output = outputs[j];
+					matches.push({
+						pattern: output.pattern,
+						index: i - output.length + 1,
+						length: output.length,
+						titleIndex: output.index
+					});
+				}
+			}
+			currentNode = this.failure[currentNode];
+			if(currentNode === this.trie) break;
+			collectCount++;
 		}
 	}
 	
