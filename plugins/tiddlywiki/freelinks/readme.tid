@@ -2,14 +2,14 @@ title: $:/plugins/tiddlywiki/freelinks/readme
 
 This plugin enhances TiddlyWiki by automatically generating links to existing tiddler titles within text, improving navigation and connectivity.
 
-''Note: Automatic link generation may experience performance slowdowns with a large number of tiddlers. For optimal performance, consider enabling the persistent cache option in the settings.''
+''Note: Automatic link generation may experience performance slowdowns with a large number of tiddlers. The plugin leverages an optimized Aho-Corasick algorithm to mitigate this, ensuring efficient handling of large datasets.''
 
 Freelinking is activated for text runs where the following variables are configured:
 
 * `tv-wikilinks` is NOT set to `no`
 * `tv-freelinks` is set to `yes`
 
-By default, freelinking is case-sensitive, but this can be toggled to ignore case via the settings tab. Additionally, a persistent Aho-Corasick cache can be enabled to boost performance, configurable under the Freelinks settings panel.
+By default, freelinking is case-sensitive, but this can be toggled to ignore case via the settings tab. Additionally, a Word Boundary Check can be enabled to control linking precision, configurable under the Freelinks settings panel.
 
 Within view templates, the variable `tv-freelinks` is automatically set to the value of `$:/config/Freelinks/Enable`, which can be adjusted through the plugin's settings interface.
 
@@ -41,10 +41,14 @@ You can also combine conditions, such as freelinking only for "HelloThere" with 
 <$set name="tv-freelinks" value={{{ [<currentTiddler>match[HelloThere]] ~[<currentTiddler>tag[MyTag]] +[then[yes]else[no]] }}}/>
 ```
 
-!! Additional Features
-- Use the settings panel to enable a persistent cache, leveraging an optimized Aho-Corasick algorithm to handle large tiddler sets efficiently.
-- Adjust the target filter (`$:/config/Freelinks/TargetFilter`) to define which tiddlers are considered for linking.
+!! Additional Features<br>
+- Adjust the target filter (`$:/config/Freelinks/TargetFilter`) to define which tiddlers are considered for linking.<br>
+- Enable "Word Boundary Check" in the settings to refine linking behavior:<br>
+  - **Enabled** (defalut): Only standalone words are linked (e.g., [[God]] gugod guGod → only "God" is linked).<br>
+  - **Disabled**: Partial matches within words are linked (e.g., [[God]] gugod gu[[God]] → "God" and gu"God" are linked).
 
-- Powered by Grok & Claude, enhancing development with advanced AI assistance.
+- Powered by [[Grok|https://grok.com/?referrer=website]] & [[Claude|https://claude.ai/new]], enhancing development with advanced AI assistance.
+
+With heartfelt sincerity, I want to express my gratitude to [[Grok|https://grok.com/?referrer=website]] (60%) and [[Claude|https://claude.ai/new]] (40%) for their incredible support in completing the entire revision of Freelinks.
 
 For further customization or troubleshooting, refer to the plugin's source code or consult the TiddlyWiki community.
