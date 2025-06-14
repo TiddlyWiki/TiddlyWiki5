@@ -98,6 +98,13 @@ html button {
 	border-color: <<colour button-border>>;
 }
 
+html button:disabled {
+	color: <<colour button-foreground>>80;
+	fill: <<colour button-foreground>>80;
+	background: <<colour button-background>>80;
+	border-color: <<colour button-border>>80;
+}
+
 button:disabled svg {
 	fill: <<colour muted-foreground>>;
 }
@@ -243,6 +250,11 @@ input[type=""],
 input:not([type]) {
 	color: <<colour foreground>>;
 	background: <<colour background>>;
+}
+
+textarea:disabled, input:disabled {
+	color: <<colour foreground>>80;
+	background: <<colour background>>80;
 }
 
 input[type="checkbox"] {
@@ -3255,6 +3267,11 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 select {
 	color: <<colour select-tag-foreground>>;
 	background: <<colour select-tag-background>>;
+}
+
+select:disabled {
+	color: <<colour select-tag-foreground>>80;
+	background: <<colour select-tag-background>>80;
 }
 
 /*
