@@ -9,7 +9,7 @@ Freelinking is activated for text runs where the following variables are configu
 * `tv-wikilinks` is NOT set to `no`
 * `tv-freelinks` is set to `yes`
 
-By default, freelinking is case-sensitive, but this can be toggled to ignore case via the settings tab. Additionally, a Word Boundary Check can be enabled to control linking precision, configurable under the Freelinks settings panel.
+By default, freelinking is case-sensitive, but this can be toggled to ignore case via the settings tab. Additionally, a Word Boundary Check can be enabled to control linking precision, configurable under the Freelinks settings panel. The plugin supports non-Western language tiddler titles (e.g., Chinese) and prioritizes longer tiddler titles for matching, ensuring accurate linking in diverse contexts. Furthermore, the current tiddler title within its own content is excluded from generating links to avoid self-referencing.
 
 Within view templates, the variable `tv-freelinks` is automatically set to the value of `$:/config/Freelinks/Enable`, which can be adjusted through the plugin's settings interface.
 
@@ -43,9 +43,10 @@ You can also combine conditions, such as freelinking only for "HelloThere" with 
 
 !! Additional Features<br>
 - Adjust the target filter (`$:/config/Freelinks/TargetFilter`) to define which tiddlers are considered for linking.<br>
-- Enable "Word Boundary Check" in the settings to refine linking behavior:<br>
-  - **Enabled** (defalut): Only standalone words are linked (e.g., [[God]] gugod guGod → only "God" is linked).<br>
-  - **Disabled**: Partial matches within words are linked (e.g., [[God]] gugod gu[[God]] → "God" and gu"God" are linked).
+- Enable "Word Boundary Check" in the settings to refine linking behavior (applies only to Western languages):<br>
+  - **Enabled** (defalut): Only standalone words are linked (e.g., @@__Yes__@@ eyes eYes → only "Yes" is linked).<br>
+  - **Disabled**: Partial matches within words are linked (e.g., @@__yes__@@ eyes e@@__Yes__@@ → "Yes" and e"Yes" are linked).
+- The plugin prioritizes longer tiddler titles for matching, ensuring that phrases like "Game Guide" are linked before "Game" alone.<br>
 
 - Powered by [[Grok|https://grok.com/?referrer=website]] & [[Claude|https://claude.ai/new]], enhancing development with advanced AI assistance.
 
