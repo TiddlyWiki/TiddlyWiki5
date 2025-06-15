@@ -1,0 +1,11 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Table
+type: text/vnd.tiddlywiki
+
+|!|!Alpha|!Beta|!Gamma|!Delta|
+|!One|||||
+|!Two|||||
+|!Three|||||
+
+|cell one|cell two|
+|cell three|cell four|
