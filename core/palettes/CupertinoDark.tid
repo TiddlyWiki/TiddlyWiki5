@@ -5,30 +5,30 @@ name: Cupertino Dark
 description: A macOS inspired dark palette
 type: application/x-tiddler-dictionary
 
-alert-background: #FF453A
-alert-border: #FF453A
+alert-background: #ff4b42
+alert-border: #950700
 alert-highlight: #FFD60A
-alert-muted-foreground: <<colour muted-foreground>>
+alert-muted-foreground: #323234
 background: #282828
-blockquote-bar: <<colour page-background>>
+blockquote-bar: #8d8d8d
 button-foreground: <<colour foreground>>
 code-background: <<colour pre-background>>
 code-border: <<colour pre-border>>
-code-foreground: rgba(255, 255, 255, 0.54)
+code-foreground: #c7c7c7
 dirty-indicator: #FF453A
 download-background: <<colour primary>>
-download-foreground: <<colour foreground>>
+download-foreground: <<colour background>>
 dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
 dropdown-background: <<colour tiddler-info-background>>
 dropdown-border: <<colour dropdown-background>>
 dropdown-tab-background-selected: #3F638B
-dropdown-tab-background: #323232
+dropdown-tab-background: #707070
 dropzone-background: #30D158
 external-link-background-hover: transparent
 external-link-background-visited: transparent
 external-link-background: transparent
-external-link-foreground-hover: 
+external-link-foreground-hover: #9511d5
 external-link-foreground-visited: #BF5AF2
 external-link-foreground: #32D74B
 footnote-target-background: #747474
@@ -60,29 +60,33 @@ sidebar-controls-foreground-hover: #FF9F0A
 sidebar-controls-foreground: #8E8E93
 sidebar-foreground-shadow: transparent
 sidebar-foreground: rgba(255, 255, 255, 0.54)
-sidebar-muted-foreground-hover: rgba(255, 255, 255, 0.54)
-sidebar-muted-foreground: rgba(255, 255, 255, 0.38)
+sidebar-muted-foreground-hover: #acacac
+sidebar-muted-foreground: #787878
 sidebar-tab-background-selected: #3F638B
 sidebar-tab-background: <<colour background>>
-sidebar-tab-border-selected: <<colour background>>
-sidebar-tab-border: <<colour background>>
-sidebar-tab-divider: <<colour background>>
-sidebar-tab-foreground-selected: rgba(255, 255, 255, 0.87)
-sidebar-tab-foreground: rgba(255, 255, 255, 0.54)
-sidebar-tiddler-link-foreground-hover: rgba(255, 255, 255, 0.7)
-sidebar-tiddler-link-foreground: rgba(255, 255, 255, 0.54)
+sidebar-tab-border-selected: #313131
+sidebar-tab-border: #404040
+sidebar-tab-divider: #282828
+sidebar-tab-foreground-selected: #d2d2d2
+sidebar-tab-foreground: #d2d2d2
+sidebar-tiddler-link-foreground-hover: #535353
+sidebar-tiddler-link-foreground: #949494
 site-title-foreground: #ffffff
+stability-stable: #009f00
+stability-experimental: #c07c00
+stability-deprecated: #ff0000
+stability-legacy: #6c6cff
 static-alert-foreground: #B4B4B4
 tab-background-selected: #3F638B
 tab-background: <<colour page-background>>
 tab-border-selected: <<colour page-background>>
-tab-border: <<colour page-background>>
+tab-border: #4a4a4a
 tab-divider: <<colour page-background>>
-tab-foreground-selected: rgba(255, 255, 255, 0.87)
-tab-foreground: rgba(255, 255, 255, 0.54)
+tab-foreground-selected: #ffffff
+tab-foreground: #adadad
 table-border: #464646
-table-footer-background: <<colour tiddler-editor-fields-odd>>
-table-header-background: <<colour tiddler-editor-fields-even>>
+table-footer-background: #7f7f7f
+table-header-background: <<colour table-border>>
 tag-background: #48484A
 tag-foreground: #323232
 testcase-accent-level-1: #345173
@@ -93,9 +97,9 @@ tiddler-controls-foreground-selected: <<colour sidebar-controls-foreground-hover
 tiddler-controls-foreground: #48484A
 tiddler-editor-background: <<colour background>>
 tiddler-editor-border-image: 
-tiddler-editor-border: rgba(255, 255, 255, 0.08)
-tiddler-editor-fields-even: rgba(255, 255, 255, 0.1)
-tiddler-editor-fields-odd: rgba(255, 255, 255, 0.04)
+tiddler-editor-border: #444444
+tiddler-editor-fields-even: #1f1f1f
+tiddler-editor-fields-odd: #464646
 tiddler-info-background: #1E1E1E
 tiddler-info-border: #1E1E1E
 tiddler-info-tab-background: #3F638B
@@ -112,8 +116,8 @@ toolbar-close-button:
 toolbar-delete-button: 
 toolbar-cancel-button: 
 toolbar-done-button: 
-untagged-background: <<colour very-muted-foreground>>
-very-muted-foreground: #464646
+untagged-background: #5f5f5f
+very-muted-foreground: #3f3f3f
 selection-background: #3F638B
 selection-foreground: #ffffff
 wikilist-background: <<colour page-background>>
@@ -132,3 +136,4 @@ wikilist-title: <<colour foreground>>
 wikilist-title-svg: <<colour foreground>>
 wikilist-toolbar-foreground: <<colour foreground>>
 wikilist-url: <<colour muted-foreground>>
+network-activity-foreground: <<colour primary>>
