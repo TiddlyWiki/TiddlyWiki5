@@ -47,6 +47,7 @@ InternalJavaScriptError/Title: Internal JavaScript Error
 InternalJavaScriptError/Hint: Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser
 LayoutSwitcher/Description: Open the layout switcher
 LazyLoadingWarning: <p>Trying to load external content from ''<$text text={{!!_canonical_uri}}/>''</p><p>If this message doesn't disappear, either the tiddler content type doesn't match the type of the external content, or you may be using a browser that doesn't support external content for wikis loaded as standalone files. See https://tiddlywiki.com/#ExternalText</p>
+Left: Left
 LoginToTiddlySpace: Login to TiddlySpace
 Manager/Controls/FilterByTag/None: (none)
 Manager/Controls/FilterByTag/Prompt: Filter by tag:
@@ -73,6 +74,7 @@ PageTemplate/Description: the default ~TiddlyWiki layout
 PageTemplate/Name: Standard Layout
 PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$:/core/ui/Buttons/refresh}} to allow changes to ~JavaScript plugins to take effect
 RecentChanges/DateFormat: DDth MMM YYYY
+Right: Right
 Shortcuts/Input/AdvancedSearch/Hint: Open the ~AdvancedSearch panel from within the sidebar search field
 Shortcuts/Input/Accept/Hint: Accept the selected item
 Shortcuts/Input/AcceptVariant/Hint: Accept the selected item (variant)
