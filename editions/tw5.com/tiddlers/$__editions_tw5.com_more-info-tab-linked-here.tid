@@ -1,0 +1,11 @@
+caption: Linked here
+created: 20250326001003637
+icon: $:/core/images/link
+modified: 20250326013143551
+tags: $:/tags/MoreInfoFooter
+title: $:/editions/tw5.com/more-info-tab-linked-here
+type: text/vnd.tiddlywiki
+
+<div class="tc-more-info-footer-list"> 
+<$list filter="[contains:related<currentTiddler>] [<currentTiddler>backlinks[]] +[unique[]sortan[]]" emptyMessage="No tiddlers directly linking here." template="$:/core/ui/ListItemTemplate" />
+</div>

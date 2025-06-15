@@ -1,0 +1,19 @@
+created: 20250326000304980
+list-after: $:/core/ui/ViewTemplate/body
+modified: 20250327020654861
+tags: $:/tags/ViewTemplate
+title: $:/editions/tw5.com/more-info-view-template
+type: text/vnd.tiddlywiki
+
+<% if [<currentTiddler>!is[system]!skip-footer[yes]] %>
+
+<div class="tc-more-info-footer">
+<<tabs 
+  "[tag[$:/tags/MoreInfoFooter]!has[draft.of]]"
+  $:/editions/tw5.com/more-info-tab-related
+  "$:/state/more-info-footer-tab"
+  buttonTemplate:"$:/editions/tw5.com/more-info-tab-button-template" 
+>>
+</div>
+
+<% endif %>

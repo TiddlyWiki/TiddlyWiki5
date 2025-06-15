@@ -1,0 +1,11 @@
+caption: Tagging
+created: 20250326012220025
+icon: $:/core/images/tag-button
+modified: 20250326013116440
+tags: $:/tags/MoreInfoFooter
+title: $:/editions/tw5.com/more-info-tab-tagging
+type: text/vnd.tiddlywiki
+
+<div class="tc-more-info-footer-list">
+<$list filter="[all[current]tagging[]]" emptyMessage="No tiddlers tagged with this one." template="$:/core/ui/ListItemTemplate" />
+</div>

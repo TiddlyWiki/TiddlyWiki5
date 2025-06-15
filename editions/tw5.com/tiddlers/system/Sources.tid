@@ -1,9 +1,11 @@
 caption: Sources
 code-body: yes
 created: 20240313090915565
+icon: $:/core/images/transcludify
 modified: 20240313115026563
-tags: $:/tags/TiddlerInfo
+tags: $:/tags/TiddlerInfo $:/tags/MoreInfoFooter
 title: $:/editions/tw5.com/TiddlerInfo/Sources
+
 
 \function static-link-base() [[https://tiddlywiki.com/static/$(title)$.html]substitute[]]
 
