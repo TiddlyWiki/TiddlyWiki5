@@ -496,27 +496,58 @@ exports.forEachTiddler = function(/* [options,]callback */) {
 };
 
 /*
-Return an array of tiddler titles that are directly linked within the given parse tree
- */
-exports.extractLinks = function(parseTreeRoot) {
-	// Count up the links
-	var links = [],
-		checkParseTree = function(parseTree) {
+Extracts values from selected nodes of a parse tree based on a predicate and value extractor.
+predicate: function(parseTreeNode, parentNode, title) => boolean
+extractValue: function(parseTreeNode, parentNode, title) => value
+*/
+exports.extractFromParseTree = function(parseTreeRoot, predicate, extractValue, title) {
+	var results = [],
+		checkParseTree = function(parseTree, parentNode) {
 			for(var t=0; t<parseTree.length; t++) {
 				var parseTreeNode = parseTree[t];
-				if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
-					var value = parseTreeNode.attributes.to.value;
-					if(links.indexOf(value) === -1) {
-						links.push(value);
+				if(predicate(parseTreeNode, parentNode, title)) {
+					var value = extractValue(parseTreeNode, parentNode, title);
+					if(value && results.indexOf(value) === -1) {
+						results.push(value);
 					}
 				}
 				if(parseTreeNode.children) {
-					checkParseTree(parseTreeNode.children);
+					checkParseTree(parseTreeNode.children, parseTreeNode);
 				}
 			}
 		};
-	checkParseTree(parseTreeRoot);
-	return links;
+	checkParseTree(parseTreeRoot, null);
+	return results;
+}
+
+/*
+Return an array of image tiddler titles that are directly referenced within the given parse tree using image widgets.
+*/
+exports.extractImages = function(parseTreeRoot) {
+	return this.extractFromParseTree(
+		parseTreeRoot,
+		function(node) {
+			return node.type === "image" && node.attributes.source && node.attributes.source.type === "string";
+		},
+		function(node) {
+			return node.attributes.source.value;
+		}
+	);
+};
+
+/*
+Return an array of tiddler titles that are directly linked within the given parse tree
+*/
+exports.extractLinks = function(parseTreeRoot) {
+	return this.extractFromParseTree(
+		parseTreeRoot,
+		function(node) {
+			return node.type === "link" && node.attributes.to && node.attributes.to.type === "string";
+		},
+		function(node) {
+			return node.attributes.to.value;
+		}
+	);
 };
 
 /*
@@ -558,51 +589,56 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 
 /*
 Return an array of tiddler titles that are directly transcluded within the given parse tree. `title` is the tiddler being parsed, we will ignore its self-referential transclusions, only return
- */
+*/
 exports.extractTranscludes = function(parseTreeRoot, title) {
-	// Count up the transcludes
-	var transcludes = [],
-		checkParseTree = function(parseTree, parentNode) {
-			for(var t=0; t<parseTree.length; t++) {
-				var parseTreeNode = parseTree[t];
-				if(parseTreeNode.type === "transclude") {
-					if(parseTreeNode.attributes.$tiddler) {
-						if(parseTreeNode.attributes.$tiddler.type === "string") {
-							var value;
-							// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
-							if(parentNode && parentNode.type === "tiddler" && parentNode.attributes.tiddler && parentNode.attributes.tiddler.type === "string") {
-								// Empty value (like `{{!!field}}`) means self-referential transclusion.
-								value = parentNode.attributes.tiddler.value || title;
-							} else {
-								value = parseTreeNode.attributes.$tiddler.value;
-							}
-						}
-					} else if(parseTreeNode.attributes.tiddler) {
-						if (parseTreeNode.attributes.tiddler.type === "string") {
-							// Old transclude widget usage
-							value = parseTreeNode.attributes.tiddler.value;
-						}
-					} else if(parseTreeNode.attributes.$field && parseTreeNode.attributes.$field.type === "string") {
-						// Empty value (like `<$transclude $field='created'/>`) means self-referential transclusion. 
-						value = title;
-					} else if(parseTreeNode.attributes.field && parseTreeNode.attributes.field.type === "string") {
-						// Old usage with Empty value (like `<$transclude field='created'/>`)
-						value = title;
-					}
-					// Deduplicate the result.
-					if(value && transcludes.indexOf(value) === -1) {
-						$tw.utils.pushTop(transcludes,value);
+	return this.extractFromParseTree(
+		parseTreeRoot,
+		function(node, parentNode) {
+			return node.type === "transclude";
+		},
+		function(node, parentNode) {
+			var value;
+			if(node.attributes.$tiddler) {
+				if(node.attributes.$tiddler.type === "string") {
+					// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
+					if(parentNode && parentNode.type === "tiddler" && parentNode.attributes.tiddler && parentNode.attributes.tiddler.type === "string") {
+						// Empty value (like `{{!!field}}`) means self-referential transclusion.
+						value = parentNode.attributes.tiddler.value || title;
+					} else {
+						value = node.attributes.$tiddler.value;
 					}
 				}
-				if(parseTreeNode.children) {
-					checkParseTree(parseTreeNode.children,parseTreeNode);
+			} else if(node.attributes.tiddler) {
+				// Old transclude widget usage
+				if(node.attributes.tiddler.type === "string") {
+					value = node.attributes.tiddler.value;
 				}
+			} else if(
+				(node.attributes.$field && node.attributes.$field.type === "string") ||
+				(node.attributes.field && node.attributes.field.type === "string")
+			) {
+				// Empty value (like `<$transclude $field='created'/>`) means self-referential transclusion. 
+				value = title;
 			}
-		};
-	checkParseTree(parseTreeRoot);
-	return transcludes;
+			return value;
+		},
+		title
+	);
 };
 
+/*
+Return an array of images that are used in image widgets in the specified tiddler
+*/
+exports.getTiddlerImages = function(title) {
+	var self = this;
+	return this.getCacheForTiddler(title,"images",function() {
+		var parser = self.parseTiddler(title);
+		if(parser) {
+			return self.extractImages(parser.tree);
+		}
+		return [];
+	});
+};
 
 /*
 Return an array of tiddler titles that are transcluded from the specified tiddler
