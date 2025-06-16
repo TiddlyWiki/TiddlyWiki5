@@ -23,7 +23,8 @@ description: Under development
 
 ! Widget Improvements
 
-* 
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8816">> 'disabled' attribute to SelectWidget and BrowseWidget
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8819">> 'tabindex' attribute to BrowseWidget, RangeWidget, CheckboxWidget and RadioWidget
 
 ! Filter Improvements
 
@@ -32,19 +33,27 @@ description: Under development
 ! Usability Improvements
 
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8783"> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/commit/028c80782d105beb90f5d58a7f22e865c7e8c6f4">>) [[Hidden Setting: Default Type for Missing Tiddlers]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8837">> [[incorrect|https://localizejs.com/articles/why-using-flag-icons-can-confuse-your-users/]] use of national flags to represent languages
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8078">> vertical spacing of sidebar "Tools" tab when displayed in the story river, and add some utility CSS classes
+
+! Palette Improvements
+
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8661">> DiffTextWidget colours to several core palettes
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8807">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8911">>) Flexoki palette with additional colours
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8837">> [[incorrect|https://localizejs.com/articles/why-using-flag-icons-can-confuse-your-users/]] use of national flags to represent languages
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9007">> Vanilla palette with resolvable #RRGGBB values
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9053">> test case palette entries to the remaining core palettes
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9020">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9020">>) ~SolarizedLight and ~SolarizedDark palettes to improve readability of stability badges and the download button
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9016">> Nord palette to improve accessibility and make the editor border visible
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9009">> ~ContrastDark palette to improve accessibility
 
 ! Hackability Improvements
 
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8768">> several macros such as [[colour-picker Macro]], [[dumpvariables Macro]], [[image-picker Macro]], [[translink Macro]], [[tree Macro]] and [[list-links-draggable Macro]] to use the newer syntax
 * <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8780">> rendered plain text template to support more languages
-* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8816">> 'disabled' attribute to SelectWidget and BrowseWidget
-* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8819">> 'tabindex' attribute to BrowseWidget, RangeWidget, CheckboxWidget and RadioWidget
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8821">> the editor link dropdown to use newer syntax
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8911">> support for images in AVIF format
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8912">> support for custom MIME types to the [[WidgetMessage: tm-copy-to-clipboard]]
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9076">> a CSS class to the import table
 
 ! Bug Fixes
 
@@ -71,6 +80,7 @@ description: Under development
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9026">> some download file types not being specified
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9032">> configuration filter in $:/AdvancedSearch "Standard" tab
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9025">> stringification of derived fields for [[tiddlywiki.files Files]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8739">> broken tag pill styling in edit mode after v5.3.3
 
 ! Node.js Improvements
 
