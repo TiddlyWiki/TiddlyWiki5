@@ -1,0 +1,88 @@
+title: $:/core/ui/ControlPanel/SystemInformation
+tags: $:/tags/ControlPanel/Info
+caption: <%if [[$:/language/ControlPanel/SystemInformation/Caption]is[shadow]] %>{{$:/language/ControlPanel/SystemInformation/Caption}}<%else%>System Information<%endif%>
+subtitle: <%if [[$:/language/ControlPanel/SystemInformation/Caption]is[shadow]] %>{{$:/language/ControlPanel/SystemInformation/Caption}}<%else%>System Information<%endif%>
+
+\procedure lingo-base() $:/language/ControlPanel/SystemInformation/
+
+<!--
+A custom implementation of the lingo macro that works even if this tiddler has been copied to an earlier version of TiddlyWiki that doesn't include the necessary lingo tiddlers in the core.
+-->
+
+\procedure intrinsic-lingo-Hint()
+This page summarises important information about this ~TiddlyWiki. It is designed to enable users to quickly share relevant aspects of the configuration of their ~TiddlyWiki with others, for example when seeking help in one of the forums. No private or personal information is included, and nothing is shared without you explicitly copying and pasting the information into a forum post or email
+\end intrinsic-lingo-Hint
+
+\procedure lingo(title,mode:"inline")
+<%if [<title>addprefix<lingo-base>is[shadow]] %>
+	<$transclude $tiddler={{{ [<title>addprefix<lingo-base>] }}} $mode=<<mode>>/>
+<%else%>
+	<$transclude $variable={{{ [<title>addprefix[intrinsic-lingo-]] }}} $mode=<<mode>>/>
+<%endif%>
+\end lingo
+
+\whitespace trim
+
+\procedure capture-item(label,value)
+<$action-setfield $tiddler=<<tempSystemInfo>> text={{{ [<tempSystemInfo>get[text]addsuffix<label>addsuffix[: ]addsuffix<value>addsuffix<crlf>] }}}/>
+\end capture-item
+
+\procedure capture-item-wikified(label,value)
+<$wikify name="text" text=<<value>> mode="inline">
+	<$transclude
+		$variable="capture-item"
+		label=<<label>>
+		value=<<text>>
+	/>
+</$wikify>
+\end capture-item-wikified
+
+\procedure capture-system-info(tempSystemInfo)
+<$transclude $variable="capture-item-wikified" label="TiddlyWiki Version" value="<<version>>"/>
+<$transclude $variable="capture-item" label="Current palette" value={{$:/palette}}/>
+<$transclude $variable="capture-item" label="Current theme" value={{$:/theme}}/>
+<$transclude $variable="capture-item" label="Current layout" value={{$:/layout}}/>
+<$transclude $variable="capture-item" label="Browser language setting" value={{$:/info/browser/language}}/>
+<$transclude $variable="capture-item" label="Default type for missing tiddlers" value={{$:/config/DefaultMissingType}}/>
+<$transclude $variable="capture-item" label="Plugins" value={{{ [has[plugin-type]sort[]] :filter[<currentTiddler>addprefix[$:/config/Plugins/Disabled/]get[text]else[no]!match[yes]] +[join[,]] }}}/>
+\end capture-system-info
+
+\procedure display-system-info-modal()
+<$let
+	tempSystemInfo="$:/temp/system-info"
+	crlf={{{ [charcode[13],[10]] }}}
+>
+	<$action-sendmessage
+		$message="tm-modal"
+		$param="$:/core/ui/ControlPanel/SystemInformation"
+		isModal="yes"
+		tempSystemInfo=<<tempSystemInfo>>
+	/>
+	<$action-deletetiddler $tiddler=<<tempSystemInfo>>/>
+	<$action-setfield $tiddler=<<tempSystemInfo>> text={{{ [[System Information]addsuffix<crlf>] }}}/>
+	<$transclude
+		$variable="capture-system-info"
+		tempSystemInfo=<<tempSystemInfo>>
+	/>
+</$let>
+\end display-system-info-modal
+
+\procedure story-content()
+<<lingo title:"Hint" mode:"block">>
+
+<$button>
+<<display-system-info-modal>>
+Click to generate system information report
+</$button>
+\end story-content
+
+\procedure modal-content()
+<p>
+	<$transclude $variable="copy-to-clipboard" src={{{ [<tempSystemInfo>get[text]] }}}/>
+</p>
+<p>
+	<$edit-text tiddler=<<tempSystemInfo>> tag="textarea" disabled="yes" class="tc-max-width"/>
+</p>
+\end modal-content
+
+<$transclude $variable={{{ [<isModal>match[yes]then[modal-content]else[story-content]] }}} $mode="block"/>
