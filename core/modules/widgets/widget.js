@@ -757,22 +757,59 @@ Widget.prototype.findFirstDomNode = function() {
 };
 
 /*
-Remove any DOM nodes created by this widget or its children
+Entry into destroy procedure
+options include:
+	removeDOMNodes: boolean (default true)
+*/
+Widget.prototype.destroyChildren = function(options) {
+	$tw.utils.each(this.children, function(childWidget) {
+		childWidget.destroy(options);
+	});
+};
+
+/*
+Legacy entry into destroy procedure
 */
 Widget.prototype.removeChildDomNodes = function() {
-	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
-	if(this.domNodes.length > 0) {
-		$tw.utils.each(this.domNodes,function(domNode) {
-			domNode.parentNode.removeChild(domNode);
-		});
-		this.domNodes = [];
-	} else {
-		// Otherwise, ask the child widgets to delete their DOM nodes
-		$tw.utils.each(this.children,function(childWidget) {
-			childWidget.removeChildDomNodes();
-		});
+	this.destroy({removeDOMNodes: true});
+};
+
+/*
+Default destroy
+options include:
+	removeDOMNodes: boolean (default true)
+*/
+Widget.prototype.destroy = function(options) {
+	if(this._destroyed) {
+		return;
+	}
+	this._destroyed = true;
+	const { removeDOMNodes = true } = options || {};
+	let removeChildDOMNodes = removeDOMNodes;
+	if(removeDOMNodes && this.domNodes.length > 0) {
+		// If this widget will remove its own DOM nodes, children should not remove theirs
+		removeChildDOMNodes = false;
+	}
+	// Destroy children first
+	this.destroyChildren({removeDOMNodes: removeChildDOMNodes});
+	this.children = [];
+	// Remove our DOM nodes if needed
+	if(removeDOMNodes) {
+		this.removeLocalDomNodes();	
 	}
 };
+
+/*
+Remove any DOM nodes created by this widget 
+*/
+Widget.prototype.removeLocalDomNodes = function() {
+	$tw.utils.each(this.domNodes, function(domNode) {
+		if(domNode.parentNode) {
+			domNode.parentNode.removeChild(domNode);
+		}
+	});
+	this.domNodes = [];
+}
 
 /*
 Invoke the action widgets that are descendents of the current widget.
