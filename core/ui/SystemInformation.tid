@@ -44,7 +44,7 @@ This page summarises important information about this ~TiddlyWiki. It is designe
 <$transclude $variable="capture-item" label="Current layout" value={{$:/layout}}/>
 <$transclude $variable="capture-item" label="Browser language setting" value={{$:/info/browser/language}}/>
 <$transclude $variable="capture-item" label="Default type for missing tiddlers" value={{$:/config/DefaultMissingType}}/>
-<$transclude $variable="capture-item" label="Plugins" value={{{ [has[plugin-type]sort[]] :filter[<currentTiddler>addprefix[$:/config/Plugins/Disabled/]get[text]else[no]!match[yes]] +[join[,]] }}}/>
+<$transclude $variable="capture-item" label="Plugins" value={{{ [has[plugin-type]sort[]] :filter[<currentTiddler>addprefix[$:/config/Plugins/Disabled/]get[text]else[no]!match[yes]] +[addprefix[  ]addprefix<crlf>join[]] }}}/>
 \end capture-system-info
 
 \procedure display-system-info-modal()
