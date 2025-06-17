@@ -32,7 +32,7 @@ description: Under development
 
 ! Usability Improvements
 
-* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8783"> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/commit/028c80782d105beb90f5d58a7f22e865c7e8c6f4">>) [[Hidden Setting: Default Type for Missing Tiddlers]]
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8783">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/commit/028c80782d105beb90f5d58a7f22e865c7e8c6f4">>) [[Hidden Setting: Default Type for Missing Tiddlers]]
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8837">> [[incorrect|https://localizejs.com/articles/why-using-flag-icons-can-confuse-your-users/]] use of national flags to represent languages
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8078">> vertical spacing of sidebar "Tools" tab when displayed in the story river, and add some utility CSS classes
 
@@ -80,7 +80,7 @@ description: Under development
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8955">> refresh problem with "save" button
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8721">> [[list-tagged-draggable Macro]] to use the "caption" field if available
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8959">> problem with missing expandable arrow in [[toc-selective-expandable|Table-of-Contents Macros]]
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/5930">> the default value does not working for the CheckboxWidget if it is bound to an index in a data tiddler
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/5930">> the default value does not work for the CheckboxWidget if it is bound to an index in a data tiddler
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8970">> [[median Operator]] to order values as numbers, not strings
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8958">> red screen of embarrassment error with moduleproperty filter operator
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8946">> red screen of embarrassment when using a [[startup action|StartupActions]] with the [[now Macro]]
