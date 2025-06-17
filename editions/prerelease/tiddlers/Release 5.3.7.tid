@@ -45,6 +45,14 @@ description: Under development
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9020">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9020">>) ~SolarizedLight and ~SolarizedDark palettes to improve readability of stability badges and the download button
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9016">> Nord palette to improve accessibility and make the editor border visible
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9009">> ~ContrastDark palette to improve accessibility
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9018">> ~SolarFlare palette, fix plugin button hover and sidebar icon hover
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9017">> Rocker palette, make toolbar buttons visible, sidebar tabs adjusted
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9014">> ~GruvboxDark palette, improve accessibility contrast, add network activity
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9013">> ~DesertSand palette, fix some errors, make values resolvable
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9012">> ~DarkPhotos palette, make colours resolvable
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9011">> Cupertino dark palette
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9010">> ~ContrastLight palette, slightly improved contrast
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9008">> Blanca palette with resolvable values, add missing indices, slight colour adjustments
 
 ! Hackability Improvements
 
@@ -52,7 +60,6 @@ description: Under development
 * <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8780">> rendered plain text template to support more languages
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8821">> the editor link dropdown to use newer syntax
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8911">> support for images in AVIF format
-* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8912">> support for custom MIME types to the [[WidgetMessage: tm-copy-to-clipboard]]
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9076">> a CSS class to the import table
 
 ! Bug Fixes
