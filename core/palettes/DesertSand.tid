@@ -22,9 +22,9 @@ diff-equal-foreground: <<colour foreground>>
 diff-insert-background: #91c093
 diff-insert-foreground: <<colour foreground>>
 diff-invisible-background: 
-diff-invisible-foreground: <<colour muted-foreground>>
+diff-invisible-foreground: #d3d2cb
 dirty-indicator: #ad3434
-download-background: #6ca16c
+download-background: #5eae62
 download-foreground: <<colour background>>
 dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
@@ -32,14 +32,13 @@ dropdown-background: <<colour background>>
 dropdown-border: <<colour muted-foreground>>
 dropdown-tab-background-selected: #E9E0C7
 dropdown-tab-background: #BAB29C
-dropzone-background: rgba(0,200,0,0.7)
+dropzone-background: #00c600
 external-link-background-hover: inherit
 external-link-background-visited: inherit
 external-link-background: inherit
-external-link-foreground-hover: inherit
+external-link-foreground-hover: #7474ba
 external-link-foreground-visited: #313163
 external-link-foreground: #555592
-footnote-target-background: #fff7d9
 foreground: #2D2A23
 highlight-background: #ffff00
 highlight-foreground: #000000
@@ -71,7 +70,7 @@ sidebar-controls-foreground: #867F69
 sidebar-foreground-shadow: transparent
 sidebar-foreground: #867F69
 sidebar-muted-foreground-hover: #706A58
-sidebar-muted-foreground: #B3A98C
+sidebar-muted-foreground: #aba081
 sidebar-tab-background-selected: #e0d3af
 sidebar-tab-background: #A6A193
 sidebar-tab-border-selected: #C3BAA1
@@ -82,6 +81,10 @@ sidebar-tab-foreground: #2D2A23
 sidebar-tiddler-link-foreground-hover: #433F35
 sidebar-tiddler-link-foreground: #706A58
 site-title-foreground: <<colour tiddler-title-foreground>>
+stability-deprecated: #dc322f
+stability-experimental: #b58900
+stability-legacy: #268bd2
+stability-stable: #859900
 static-alert-foreground: #A6A193
 tab-background-selected: #E9E0C7
 tab-background: #A6A193
@@ -141,3 +144,4 @@ wikilist-toolbar-foreground: #2D2A23
 wikilist-droplink-dragover: rgba(255,192,192,0.5)
 wikilist-button-background: #A6A193
 wikilist-button-foreground: #161512
+network-activity-foreground: <<colour primary>>
