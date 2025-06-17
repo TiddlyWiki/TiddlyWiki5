@@ -780,10 +780,6 @@ options include:
 	removeDOMNodes: boolean (default true)
 */
 Widget.prototype.destroy = function(options) {
-	if(this._destroyed) {
-		return;
-	}
-	this._destroyed = true;
 	const { removeDOMNodes = true } = options || {};
 	let removeChildDOMNodes = removeDOMNodes;
 	if(removeDOMNodes && this.domNodes.length > 0) {
