@@ -1,0 +1,12 @@
+created: 20211028083211182
+modified: 20241125110559718
+original-modified: 20211029090311444
+tags: [[Hidden Settings]]
+title: Hidden Setting: Show Edit Preview per Tiddler
+ja-title: 隠し設定: Tiddlerごとの編集プレビュー表示
+
+[[テキストプレビュー|Text preview]]をグローバルに制御するか(デフォルト)、Tiddlerごとに制御するかを制御します。
+
+Tiddlerごとのモードを有効にするには、次の値を''yes''に設定します。
+
+$:/config/ShowEditPreview/PerTiddler

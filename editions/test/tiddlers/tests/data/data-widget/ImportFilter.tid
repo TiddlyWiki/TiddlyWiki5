@@ -25,4 +25,4 @@ This is the tiddler AnotherDefinition
 +
 title: ExpectedResult
 
-<p><div><div>[{"title":"AnotherDefinition","tags":"Definitions","text":"This is the tiddler AnotherDefinition","custom":"Alpha"},{"title":"HelloThere","tags":"Definitions","text":"This is the tiddler HelloThere","custom":"Alpha"}]</div></div></p>
+<p><div class="tc-test-case "><div>[{"title":"AnotherDefinition","tags":"Definitions","text":"This is the tiddler AnotherDefinition","custom":"Alpha"},{"title":"HelloThere","tags":"Definitions","text":"This is the tiddler HelloThere","custom":"Alpha"}]</div></div></p>

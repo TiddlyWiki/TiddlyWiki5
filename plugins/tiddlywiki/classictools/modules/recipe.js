@@ -8,10 +8,7 @@ Module to deserialize tiddlers from an old school TiddlyWiki recipe file.
 The idea is to process the recipe file recursively, loading tiddlers into the main store using synchronous file operations. The tiddlers have their titles prefixed with the associated marker in curly brackets ("{shadow}", "{tiddler}" etc).
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["text/vnd.tiddlywiki2-recipe"] = function(text,fields) {
@@ -80,5 +77,3 @@ exports["text/vnd.tiddlywiki2-recipe"] = function(text,fields) {
 	});
 	return tiddlers;
 };
-
-})();

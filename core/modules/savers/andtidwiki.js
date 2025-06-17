@@ -6,10 +6,8 @@ module-type: saver
 Handles saving changes via the AndTidWiki Android app
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false, netscape: false, Components: false */
+
 "use strict";
 
 var AndTidWiki = function(wiki) {
@@ -86,5 +84,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new AndTidWiki(wiki);
 };
-
-})();

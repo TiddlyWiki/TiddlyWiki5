@@ -6,10 +6,7 @@ module-type: parser
 The plain text parser processes blocks of source text into a degenerate parse tree consisting of a single text node
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var TextParser = function(type,text,options) {
@@ -32,5 +29,3 @@ exports["application/javascript"] = TextParser;
 exports["application/json"] = TextParser;
 exports["text/css"] = TextParser;
 exports["application/x-tiddler-dictionary"] = TextParser;
-
-})();

@@ -34,13 +34,11 @@ Suppose we want to make a filter operator that returns every other tiddler from 
 We make a new tiddler, set its `type` and `module-type` appropriately, and begin writing the code:
 
 ```
-(function(){
 "use strict";
     
 exports.everyother = function(source, operator, options) {
     // TODO
 }
-})();
 ```
 
 For the example filter syntax, our function will be called with
@@ -54,7 +52,6 @@ As is usually the case, we don't care about `operator.operator` here (since that
 We could implement the operator by iterating over the input tiddlers and explicitly building a result array of titles:
 
 ```
-(function(){
 "use strict";
     
 exports.everyother = function(source, operator, options) {
@@ -66,7 +63,6 @@ exports.everyother = function(source, operator, options) {
     });
     return result;
 }
-})();
 ```
 
 That is, we supply a callback to `source` that negates `include` each time through (in order to grab every other result) and pushes the `title` of every other tiddler onto the result.
@@ -74,7 +70,6 @@ That is, we supply a callback to `source` that negates `include` each time throu
 Alternatively, we can return our own iterator, by returning a function that accepts a similar callback and only calls it on every other tiddler:
 
 ```
-(function(){
 "use strict";
     
 exports.everyother = function(source, operator, options) {
@@ -86,7 +81,6 @@ exports.everyother = function(source, operator, options) {
         });
     };
 }
-})();
 ```
 
 Either way, we could interpret the `!` flag on the filter, if present, to mean that we want the //other// half of the tiddlers, by using it to set the initial value of `include`: `var include = operator.prefix !== "!";`

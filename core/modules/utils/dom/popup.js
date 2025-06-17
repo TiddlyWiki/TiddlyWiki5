@@ -6,10 +6,7 @@ module-type: utils
 Module that creates a $tw.utils.Popup object prototype that manages popups in the browser
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -243,5 +240,3 @@ exports.buildCoordinates = function(prefix,position) {
 }
 
 exports.Popup = Popup;
-
-})();

@@ -7,9 +7,9 @@ title: Output
 
 \whitespace trim
 <$set name="var with spaces" value="spaces">
-<$let project="TiddlyWiki" disabled="true" var-with-dashes="dashes">
+<$let project="TiddlyWiki" disabled="true" $tiddler="Getting Started" var-with-dashes="dashes">
 <div class=`$(project)$ 
-${ [[Hello]addsuffix[There]] }$` attrib=`myvalue` otherattrib=`$(1)$` blankattrib=`` quoted="here" disabled=```$(disabled)$``` dashes=`$(var-with-dashes)$` spaces=`$(var with spaces)$`>
+${ [[Hello]addsuffix[There]] }$` attrib=`myvalue` otherattrib=`$(1)$` blankattrib=`` quoted="here" disabled=```$(disabled)$``` dollar=`p-$($tiddler)$-s` dashes=`$(var-with-dashes)$` spaces=`$(var with spaces)$`>
 </div>
 </$let>
 </$set>
@@ -18,4 +18,4 @@ ${ [[Hello]addsuffix[There]] }$` attrib=`myvalue` otherattrib=`$(1)$` blankattri
 title: ExpectedResult
 
 <p><div attrib="myvalue" blankattrib="" class="TiddlyWiki 
-HelloThere" dashes="dashes" disabled="true" otherattrib="" quoted="here" spaces="spaces"></div></p>
+HelloThere" dashes="dashes" disabled="true" dollar="p-Getting Started-s" otherattrib="" quoted="here" spaces="spaces"></div></p>

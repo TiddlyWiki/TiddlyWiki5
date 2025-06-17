@@ -4,10 +4,17 @@ caption: {{$:/core/images/save-button-dynamic}} {{$:/language/Buttons/SaveWiki/C
 description: {{$:/language/Buttons/SaveWiki/Hint}}
 
 \whitespace trim
-<$button tooltip={{$:/language/Buttons/SaveWiki/Hint}} aria-label={{$:/language/Buttons/SaveWiki/Caption}} class=<<tv-config-toolbar-class>>>
+\procedure saveActions()
 <$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
-<$action-sendmessage $message="tm-save-wiki" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
+	<$action-sendmessage $message="tm-save-wiki" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
 </$wikify>
+\end
+
+<$button actions=<<saveActions>>
+	tooltip={{$:/language/Buttons/SaveWiki/Hint}}
+	aria-label={{$:/language/Buttons/SaveWiki/Caption}}
+	class=<<tv-config-toolbar-class>>
+>
 <span class="tc-dirty-indicator">
 <%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/save-button-dynamic}}

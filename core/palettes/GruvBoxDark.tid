@@ -21,9 +21,9 @@ diff-delete-foreground: <<colour foreground>>
 diff-equal-background: 
 diff-equal-foreground: <<colour foreground>>
 diff-insert-background: #b8bb26
-diff-insert-foreground: <<colour foreground>>
-diff-invisible-background: 
-diff-invisible-foreground: <<colour muted-foreground>>
+diff-insert-foreground: <<colour background>>
+diff-invisible-background: #ffff97
+diff-invisible-foreground: #444347
 dirty-indicator: #fb4934
 download-background: #b8bb26
 download-foreground: <<colour background>>
@@ -100,6 +100,7 @@ table-footer-background: #665c54
 table-header-background: #504945
 tag-background: #d3869b
 tag-foreground: #282828
+testcase-accent-level-1: #456d88
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #7c6f64

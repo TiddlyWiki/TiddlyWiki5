@@ -2,6 +2,7 @@ title: $:/core/templates/exporters/TidFile
 tags: $:/tags/Exporter
 description: {{$:/language/Exporters/TidFile}}
 extension: .tid
+file-type: text/vnd.tiddlywiki
 condition: [<count>compare:lte[1]]
 
 \define renderContent()

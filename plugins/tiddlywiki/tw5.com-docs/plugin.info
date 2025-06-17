@@ -3,5 +3,5 @@
 	"name": "TW5.com Docs",
 	"description": "Documentation from tiddlywiki.com",
 	"list": "readme",
-	"stability": "STABILITY_1_EXPERIMENTAL"
+	"stability": "STABILITY_2_STABLE"
 }

@@ -1,0 +1,14 @@
+created: 20170227223209558
+modified: 20241222103812151
+original-modified: 20170328173919702
+tags: OfficialPlugins
+title: Twitter Plugin
+ja-title: Twitterプラグイン
+type: text/vnd.tiddlywiki
+
+
+このプラグインは、twitter.comからさまざまなエンティティを埋め込むことができる`<$twitter>`ウィジェットを追加します:
+
+* 個別のツイートと会話スレッド
+* ハッシュタグ/アカウントをツイートする、アカウントをフォロー/いいねする、URLを共有するためのボタン
+* ユーザー、ハッシュタグ、リスト、コレクションからのツイートを表示するタイムライン

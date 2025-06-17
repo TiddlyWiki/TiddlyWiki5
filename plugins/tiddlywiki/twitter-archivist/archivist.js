@@ -6,10 +6,7 @@ module-type: utils
 Utility class for manipulating Twitter archives
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function TwitterArchivist(options) {
@@ -315,5 +312,3 @@ function arrayBufferToBase64(arrayBuffer) {
 exports.TwitterArchivist = TwitterArchivist;
 exports.TwitterArchivistSourceNodeJs = TwitterArchivistSourceNodeJs;
 exports.TwitterArchivistSourceBrowser = TwitterArchivistSourceBrowser;
-
-})();

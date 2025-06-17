@@ -1,0 +1,13 @@
+created: 20190127104143725
+modified: 20241223111102675
+original-modified: 20190127104143725
+tags: OfficialPlugins
+title: Innerwiki Plugin
+ja-title: インナーウィキプラグイン
+type: text/vnd.tiddlywiki
+
+インナーウィキプラグインにより、TiddlyWikiは自身の変更されたコピー("innerwiki")を埋め込むことができます。主な目的は、時間の経過とともに変化するTiddlyWikiの外観に合わせて自動的に最新のスクリーンショットイラストを作成したり、異なる言語でスクリーンショットを作成したりできるようにすることです。
+
+ブラウザでは、インナーウィキは埋め込みiframeとして表示されます。Node.jsでは、[[GoogleのPuppeteer|https://pptr.dev/]]を使用してインナーウィキをオフスクリーンのWebページとして読み込み、PNG画像としてスナップショットを作成します。
+
+[ext[https://tiddlywiki.com/plugins/tiddlywiki/innerwiki|plugins/tiddlywiki/innerwiki]]でデモをご覧ください
