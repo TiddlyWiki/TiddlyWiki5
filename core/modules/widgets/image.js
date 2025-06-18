@@ -46,7 +46,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Determine what type of image it is
-	var tag = "img", src = "",
+	var self = this, tag = "img", src = "",
 		tiddler = this.wiki.getTiddler(this.imageSource);
 	if(!tiddler) {
 		// The source isn't the title of a tiddler, so we'll assume it's a URL
@@ -98,10 +98,17 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	if(this.imageClass) {
 		domNode.setAttribute("class",this.imageClass);
 	}
+	// Assign data- and direct DOM attributes that are not falsy
+	var nonBlankAttributes = {};
+    $tw.utils.each(Object.keys(directDOMAttributes),function(name) {
+        if(!!self.getAttribute(name)) {
+        	nonBlankAttributes[name] = directDOMAttributes[name];
+        }
+    });
 	this.assignAttributes(domNode,{
 		sourcePrefix: "data-",
 		destPrefix: "data-",
-		additionalAttributesMap: directDOMAttributes
+		additionalAttributesMap: nonBlankAttributes
 	});
 	if(this.lazyLoading && tag === "img") {
 		domNode.setAttribute("loading",this.lazyLoading);
@@ -136,12 +143,12 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 ImageWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes(),
 		hasChangedAttributes = $tw.utils.count(changedAttributes) > 0,
-		alwaysRerender = [
+		alwaysRerenderAttributes = [
 			"source",
 			"loading",
 			"class"
 		],
-		attributesNeedRerender = alwaysRerender.some(function(key) {return changedAttributes[key]});
+		attributesNeedRerender = alwaysRerenderAttributes.some(function(key) {return changedAttributes[key]});
 
 	if(changedTiddlers[this.imageSource] || attributesNeedRerender) {
 		this.refreshSelf();
