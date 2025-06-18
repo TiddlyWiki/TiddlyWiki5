@@ -66,11 +66,11 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	domNode.className = classes.join(" ");
 	// Assign data- and direct DOM attributes that are not falsy
 	var nonBlankAttributes = {};
-    $tw.utils.each(Object.keys(directDOMAttributes),function(name) {
-        if(!!self.getAttribute(name)) {
-        	nonBlankAttributes[name] = directDOMAttributes[name];
-        }
-    });
+	$tw.utils.each(Object.keys(directDOMAttributes),function(name) {
+		if(!!self.getAttribute(name)) {
+			nonBlankAttributes[name] = directDOMAttributes[name];
+		}
+	});
 	this.assignAttributes(domNode,{
 		sourcePrefix: "data-",
 		destPrefix: "data-",
@@ -79,6 +79,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Assign other attributes
 	if(this.popup || this.popupTitle) {
 		domNode.setAttribute("aria-expanded",isPoppedUp ? "true" : "false");
+	}
+	if(this.isDisabled === "yes") {
+		domNode.setAttribute("disabled",true);
 	}
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
@@ -139,7 +142,7 @@ ButtonWidget.prototype.getBoundingClientRect = function() {
 };
 
 ButtonWidget.prototype.isSelected = function() {
-    return this.setTitle ? (this.setField ? this.wiki.getTiddler(this.setTitle).getFieldString(this.setField) === this.setTo :
+	return this.setTitle ? (this.setField ? this.wiki.getTiddler(this.setTitle).getFieldString(this.setField) === this.setTo :
 		(this.setIndex ? this.wiki.extractTiddlerDataItem(this.setTitle,this.setIndex) === this.setTo :
 			this.wiki.getTiddlerText(this.setTitle))) || this.defaultSetValue || this.getVariable("currentTiddler") :
 		this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler")) === this.setTo;

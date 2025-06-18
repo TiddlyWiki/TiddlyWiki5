@@ -100,11 +100,11 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Assign data- and direct DOM attributes that are not falsy
 	var nonBlankAttributes = {};
-    $tw.utils.each(Object.keys(directDOMAttributes),function(name) {
-        if(!!self.getAttribute(name)) {
-        	nonBlankAttributes[name] = directDOMAttributes[name];
-        }
-    });
+	$tw.utils.each(Object.keys(directDOMAttributes),function(name) {
+		if(!!self.getAttribute(name)) {
+			nonBlankAttributes[name] = directDOMAttributes[name];
+		}
+	});
 	this.assignAttributes(domNode,{
 		sourcePrefix: "data-",
 		destPrefix: "data-",
