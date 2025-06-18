@@ -1,0 +1,23 @@
+title: Widgets/DataAttributes/ImageWidget
+description: Data Attributes for ImageWidget
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$image source="xyz" class="myclass" data-title="mytiddler" style.border="1px solid red" onclick="clicked"/>
+<$image source="abc" tooltip="my tooltip" data-title={{Temp}} style.border={{{ [[Temp]get[border]] }}}/>
++
+title: Actions
+
+<$action-setfield $tiddler="Temp" $field="text" $value="Title2" border="1px solid blue"/>
++
+title: Temp
+color: white
+
+Title1
++
+title: ExpectedResult
+
+<p><img class="myclass tc-image-loading" data-title="mytiddler" src="xyz" style="border:1px solid red;"><img class=" tc-image-loading" data-title="Title2" src="abc" title="my tooltip" style="border:1px solid blue;"></p>

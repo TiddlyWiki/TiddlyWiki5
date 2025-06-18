@@ -31,19 +31,20 @@ var ImageWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 ImageWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
+var directDOMAttributes =	{
+	width: true,
+	height: true,
+	usemap: true,
+	alt: true,
+	tooltip: "title"
+};
+
 ImageWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	// Create element
 	// Determine what type of image it is
 	var tag = "img", src = "",
 		tiddler = this.wiki.getTiddler(this.imageSource);
@@ -93,25 +94,15 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Create the element and assign the attributes
 	var domNode = this.document.createElement(tag);
-	domNode.setAttribute("src",src);
+	domNode.setAttribute("src", src);
 	if(this.imageClass) {
-		domNode.setAttribute("class",this.imageClass);
+		domNode.setAttribute("class", this.imageClass);
 	}
-	if(this.imageUsemap) {
-	    	domNode.setAttribute("usemap",this.imageUsemap);
-	}
-	if(this.imageWidth) {
-		domNode.setAttribute("width",this.imageWidth);
-	}
-	if(this.imageHeight) {
-		domNode.setAttribute("height",this.imageHeight);
-	}
-	if(this.imageTooltip) {
-		domNode.setAttribute("title",this.imageTooltip);
-	}
-	if(this.imageAlt) {
-		domNode.setAttribute("alt",this.imageAlt);
-	}
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-",
+		additionalAttributesMap: directDOMAttributes
+	});
 	if(this.lazyLoading && tag === "img") {
 		domNode.setAttribute("loading",this.lazyLoading);
 	}
@@ -125,7 +116,6 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 		$tw.utils.removeClass(domNode,"tc-image-loading");
 		$tw.utils.addClass(domNode,"tc-image-error");
 	},false);
-	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.domNodes.push(domNode);
 };
@@ -134,14 +124,8 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ImageWidget.prototype.execute = function() {
-	// Get our parameters
 	this.imageSource = this.getAttribute("source");
-	this.imageWidth = this.getAttribute("width");
-	this.imageHeight = this.getAttribute("height");
 	this.imageClass = this.getAttribute("class");
-    	this.imageUsemap = this.getAttribute("usemap");
-	this.imageTooltip = this.getAttribute("tooltip");
-	this.imageAlt = this.getAttribute("alt");
 	this.lazyLoading = this.getAttribute("loading");
 };
 
@@ -149,13 +133,27 @@ ImageWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ImageWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.source || changedAttributes.width || changedAttributes.height || changedAttributes["class"] || changedAttributes.usemap || changedAttributes.tooltip || changedTiddlers[this.imageSource]) {
+	var changedAttributes = this.computeAttributes(),
+		hasChangedAttributes = $tw.utils.count(changedAttributes) > 0,
+		alwaysRerender = [
+			"source",
+			"loading",
+			"class"
+		],
+		attributesNeedRerender = alwaysRerender.some(function(key) {return changedAttributes[key]});
+
+	if(changedTiddlers[this.imageSource] || attributesNeedRerender) {
 		this.refreshSelf();
 		return true;
-	} else {
-		return false;
+	} else if(hasChangedAttributes) {
+		this.assignAttributes(this.domNodes[0], {
+			sourcePrefix: "data-",
+			destPrefix: "data-",
+			changedAttributes: changedAttributes,
+			additionalAttributesMap: directDOMAttributes
+		});
 	}
+	return false;
 };
 
 exports.image = ImageWidget;
