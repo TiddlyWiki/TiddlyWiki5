@@ -94,9 +94,9 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Create the element and assign the attributes
 	var domNode = this.document.createElement(tag);
-	domNode.setAttribute("src", src);
+	domNode.setAttribute("src",src);
 	if(this.imageClass) {
-		domNode.setAttribute("class", this.imageClass);
+		domNode.setAttribute("class",this.imageClass);
 	}
 	this.assignAttributes(domNode,{
 		sourcePrefix: "data-",
@@ -124,6 +124,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ImageWidget.prototype.execute = function() {
+	//Get parameters not handled by assignAttributes call in render
 	this.imageSource = this.getAttribute("source");
 	this.imageClass = this.getAttribute("class");
 	this.lazyLoading = this.getAttribute("loading");
