@@ -143,6 +143,7 @@ Modal.prototype.display = function(title,options) {
 		link.setAttribute("href",tiddler.fields.help);
 		link.setAttribute("target","_blank");
 		link.setAttribute("rel","noopener noreferrer");
+		link.setAttribute("class","tc-tiddlylink-external");
 		link.appendChild(this.srcDocument.createTextNode("Help"));
 		modalFooterHelp.appendChild(link);
 		modalFooterHelp.style.float = "left";
