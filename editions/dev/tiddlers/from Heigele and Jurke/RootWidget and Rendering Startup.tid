@@ -1,9 +1,10 @@
 chapter.of: UI and Rendering Pipeline
 created: 20140717175203036
-modified: 20140717182314488
+modified: 20240802065804331
 sub.num: 5
 tags: doc
 title: RootWidget and Rendering Startup
+type: text/vnd.tiddlywiki
 
 The previous parts of this chapter showed how WikiText is transformed to DOM nodes which dynamically react to tiddler changes and a way to compose tiddlers from other tiddlers.
 This last part describes how the TiddlyWiki core plug-in starts up a UI build from tiddlers and WikiText.
@@ -29,6 +30,9 @@ and a listener is registered at the store which executes the refresh function of
 [[Techniques for including other tiddlers and Templates|Transclusion and TextReference]] are finally used in [[$:/core/ui/PageTemplate]] to build the TiddlyWiki UI only from tiddlers written in WikiText (with widgets implemented in javascript):
 
 For example to implement the list of open wiki pages the [[$:/core/ui/PageTemplate]] contains a [[navigator widget|$:/core/modules/widgets/navigator.js]] which maintains a list of open tiddlers in a field of [[$:/StoryList]] and handles events like ``tm-navigate`` by adding a tiddler specified as parameter to the top of the list in [[$:/StoryList]].
+
 The [[story tiddler|$:/core/ui/PageTemplate/story]] transcluded in [[$:/core/ui/PageTemplate]] then uses a ~ListWidget to transclude all tiddlers in [[$:/StoryList]] through a special template [[$:/core/ui/ViewTemplate]].
+The ViewTemplate here is a combination of different fragments, like title fragment and body fragment, each fragment can be override individually using [[Cascade Mechanism|How to Create a Custom Cascade Entry]].
+
 A event of the type ``tm-close-tiddler`` would remove a specified tiddler from [[$:/StoryList]].
 The [[Event Mechanism]] would trigger a changed event which triggers a call of the ~ListWidget's refresh function which would remove the tiddler from the list, closing the tiddler.
