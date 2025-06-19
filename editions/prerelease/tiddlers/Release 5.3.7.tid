@@ -8,6 +8,8 @@ description: Under development
 
 //[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.6...master]]//
 
+This is a minor bug fix release before introducing the major changes planned for v5.4.0. Those changes do involve some minor breaks in backwards compatibility so this release is intended to be a stable point for users before they upgrade.
+
 ! Translation improvements
 
 * Chinese
