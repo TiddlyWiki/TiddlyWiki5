@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for returning the names of the story views in this wiki
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -25,5 +22,3 @@ exports.storyviews = function(source,operator,options) {
 	results.sort();
 	return results;
 };
-
-})();

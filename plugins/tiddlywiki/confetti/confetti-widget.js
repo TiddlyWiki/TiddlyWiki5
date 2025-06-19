@@ -6,10 +6,6 @@ module-type: widget
 Confetti widget
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -63,5 +59,3 @@ ConfettiWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.confetti = ConfettiWidget;
-
-})();

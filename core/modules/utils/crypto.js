@@ -6,10 +6,7 @@ module-type: utils
 Utility functions related to crypto.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -90,5 +87,3 @@ exports.decryptStoreAreaInteractive = function(encryptedStoreArea,callback,optio
 		});
 	}
 };
-
-})();

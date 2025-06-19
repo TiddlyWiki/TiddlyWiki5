@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator returning the number of entries in the current list.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -22,5 +19,3 @@ exports.count = function(source,operator,options) {
 	});
 	return [count + ""];
 };
-
-})();

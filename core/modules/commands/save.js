@@ -6,10 +6,7 @@ module-type: command
 Saves individual tiddlers in their raw text or binary format to the specified files
 
 \*/
-(function(){
 
-	/*jslint node: true, browser: true */
-	/*global $tw: false */
 	"use strict";
 	
 	exports.info = {
@@ -64,6 +61,3 @@ Saves individual tiddlers in their raw text or binary format to the specified fi
 	};
 	
 	exports.Command = Command;
-	
-	})();
-	

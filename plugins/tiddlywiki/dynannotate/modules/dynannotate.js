@@ -6,10 +6,7 @@ module-type: widget
 Dynannotate widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var TextMap = require("$:/plugins/tiddlywiki/dynannotate/textmap.js").TextMap;
@@ -433,5 +430,3 @@ DynannotateWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.dynannotate = DynannotateWidget;
-
-})();

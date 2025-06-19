@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter function for [duplicateslugs[]]
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -32,5 +29,3 @@ exports.duplicateslugs = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

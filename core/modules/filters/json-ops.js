@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operators for JSON operations
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["jsonget"] = function(source,operator,options) {
@@ -279,6 +276,3 @@ function setDataItem(data,indexes,value) {
 	}
 	return data;
 }
-
-})();
-	

@@ -22,10 +22,7 @@ Most functions have the following pattern:
 The exception is `skipWhiteSpace`, which just returns the position after the whitespace.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -384,5 +381,3 @@ exports.parseAttribute = function(source,pos) {
 	node.end = pos;
 	return node;
 };
-
-})();

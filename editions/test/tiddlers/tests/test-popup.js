@@ -6,10 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests some utility function of the Popup prototype.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Popup tests", function() {
@@ -60,4 +57,3 @@ describe("Popup tests", function() {
 	});
 });
 
-})();

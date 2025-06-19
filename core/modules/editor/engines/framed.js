@@ -6,10 +6,7 @@ module-type: library
 Text editor engine based on a simple input or textarea within an iframe. This is done so that the selection is preserved even when clicking away from the textarea
 
 \*/
-(function(){
 
-/*jslint node: true,browser: true */
-/*global $tw: false */
 "use strict";
 
 var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
@@ -273,5 +270,3 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 };
 
 exports.FramedEngine = FramedEngine;
-
-})();

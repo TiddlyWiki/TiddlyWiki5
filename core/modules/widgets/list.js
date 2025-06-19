@@ -6,10 +6,7 @@ module-type: widget
 List and list item widgets
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -522,5 +519,3 @@ ListJoinWidget.prototype.render = function() {}
 ListJoinWidget.prototype.refresh = function() { return false; }
 
 exports["list-join"] = ListJoinWidget;
-
-})();

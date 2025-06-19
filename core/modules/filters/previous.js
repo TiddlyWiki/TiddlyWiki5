@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator returning the tiddler whose title occurs immediately prior in the list supplied in the operand tiddler
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -28,5 +25,3 @@ exports.previous = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

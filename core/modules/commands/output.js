@@ -6,10 +6,7 @@ module-type: command
 Command to set the default output location (defaults to current working directory)
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -34,5 +31,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

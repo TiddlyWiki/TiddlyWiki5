@@ -6,10 +6,7 @@ module-type: utils
 HTTP support
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -216,11 +213,11 @@ HttpClientRequest.prototype.send = function(callback) {
 				if(lengthComputable) {
 					setBinding(self.bindProgress,"" + Math.floor((loaded/total) * 100))
 				}
-				self.wiki.invokeActionString(self.progressActions,undefined,{
+				self.wiki.invokeActionString(self.progressActions,undefined,$tw.utils.extend({},self.variables,{
 					lengthComputable: lengthComputable ? "yes" : "no",
 					loaded: loaded,
 					total: total
-				},{parentWidget: $tw.rootWidget});
+				}),{parentWidget: $tw.rootWidget});
 			}
 		});
 	}
@@ -353,5 +350,3 @@ exports.setQueryStringParameter = function(url,paramName,paramValue) {
 		return url;
 	}
 };
-
-})();

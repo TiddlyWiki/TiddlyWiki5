@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator returning the tiddler from the current list that is after the tiddler named in the operand.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -27,5 +24,3 @@ exports.after = function(source,operator,options) {
 		return [results[index + 1]];
 	}
 };
-
-})();

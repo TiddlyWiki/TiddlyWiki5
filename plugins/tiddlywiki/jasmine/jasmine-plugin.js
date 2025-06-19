@@ -6,10 +6,8 @@ module-type: library
 The main module of the Jasmine test plugin for TiddlyWiki5
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: true */
+
 "use strict";
 
 var TEST_TIDDLER_FILTER = "[all[tiddlers+shadows]type[application/javascript]tag[$:/tags/test-spec]]";
@@ -157,5 +155,3 @@ exports.runTests = function(callback,specFilter) {
 		nodeJasmineWrapper.execute(null,specFilter);
 	}
 };
-
-})();

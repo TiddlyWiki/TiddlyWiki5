@@ -6,10 +6,7 @@ module-type: module
 Rule modules for the wikitext parser
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 var macroadapter = require("$:/macros/classic/macroadapter.js");
 var textPrimitives = {
@@ -824,5 +821,3 @@ var rules = [
 ];
 
 exports.rules = rules;
-
-})();

@@ -14,10 +14,7 @@ Wiki text rule for inline filtered transclusion. For example:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "filteredtranscludeinline";
@@ -69,5 +66,3 @@ exports.parse = function() {
 	}
 	return [node];
 };
-
-})();

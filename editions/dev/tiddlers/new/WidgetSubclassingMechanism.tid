@@ -26,10 +26,7 @@ module-type: widget-subclass
 Widget base class
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.baseClass = "checkbox"; // Extend the <$checkbox> widget
@@ -50,5 +47,4 @@ exports.prototype.handleChangeEvent = function(event) {
 	console.log("Checkbox status:",this.inputDomNode.checked);
 };
 
-})();
 ```

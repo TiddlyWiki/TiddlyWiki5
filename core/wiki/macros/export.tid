@@ -39,6 +39,7 @@ tags: $:/tags/Macro
 							$param=<<currentTiddler>>
 							exportFilter=<<exportFilter>>
 							filename={{{ [<baseFilename>addsuffix{!!extension}] }}}
+							type={{!!file-type}}
 						/>
 						<$action-deletetiddler $tiddler=<<qualify "$:/state/popup/export">>/>
 						<$transclude field="description"/>

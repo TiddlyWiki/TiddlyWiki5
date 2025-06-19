@@ -6,10 +6,7 @@ module-type: global
 The saver handler tracks changes to the store and handles saving the entire wiki via saver modules.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -46,8 +43,10 @@ function SaverHandler(options) {
 			// Filter the changes so that we only count changes to tiddlers that we care about
 			var filteredChanges = self.filterFn.call(self.wiki,function(iterator) {
 				$tw.utils.each(changes,function(change,title) {
-					var tiddler = self.wiki.getTiddler(title);
-					iterator(tiddler,title);
+					if(change.normal) {
+						var tiddler = self.wiki.getTiddler(title);
+						iterator(tiddler,title);
+					}
 				});
 			});
 			// Adjust the number of changes
@@ -183,7 +182,7 @@ SaverHandler.prototype.saveWiki = function(options) {
 	// Call the highest priority saver that supports this method
 	for(var t=this.savers.length-1; t>=0; t--) {
 		var saver = this.savers[t];
-		if(saver.info.capabilities.indexOf(method) !== -1 && saver.save(text,method,callback,{variables: {filename: variables.filename}})) {
+		if(saver.info.capabilities.indexOf(method) !== -1 && saver.save(text,method,callback,{variables: {filename: variables.filename, type: variables.type}})) {
 			this.logger.log("Saving wiki with method",method,"through saver",saver.info.name);
 			return true;
 		}
@@ -212,5 +211,3 @@ SaverHandler.prototype.updateDirtyStatus = function() {
 };
 
 exports.SaverHandler = SaverHandler;
-
-})();

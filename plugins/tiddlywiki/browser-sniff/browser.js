@@ -6,10 +6,7 @@ module-type: info
 Initialise $:/info/browser tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.getInfoTiddlerFields = function() {
@@ -78,5 +75,3 @@ exports.getInfoTiddlerFields = function() {
 	}
 	return infoTiddlerFields;
 };
-
-})();

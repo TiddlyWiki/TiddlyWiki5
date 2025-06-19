@@ -92,6 +92,10 @@ Plugins/PluginWillRequireReload: （需要重新加载）
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安装
+Plugins/Stability/Deprecated: 过时
+Plugins/Stability/Experimental: 实验性
+Plugins/Stability/Legacy: 老旧
+Plugins/Stability/Stable: 稳定
 Plugins/Themes/Caption: 布局主题
 Plugins/Themes/Hint: 布局主题插件
 Plugins/Update/Caption: 更新
@@ -186,6 +190,8 @@ Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: 以 引用链
 Settings/PerformanceInstrumentation/Caption: 性能检测
 Settings/PerformanceInstrumentation/Hint: 在浏览器的开发人员控制台，显示性能统计数据。需要重新加载才能生效。
 Settings/PerformanceInstrumentation/Description: 启用性能检测
+Settings/RecentLimit/Caption: “最近”标签页限制
+Settings/RecentLimit/Hint: 侧边栏“最近”标签页显示的最多条目数
 Settings/ToolbarButtonStyle/Caption: 工具栏按钮样式
 Settings/ToolbarButtonStyle/Hint: 选择工具栏按钮的样式:
 Settings/ToolbarButtonStyle/Styles/Borderless: 无边框

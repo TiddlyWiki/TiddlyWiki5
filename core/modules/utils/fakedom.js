@@ -6,10 +6,7 @@ module-type: global
 A barebones implementation of DOM interfaces needed by the rendering mechanism.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Sequence number used to enable us to track objects for testing
@@ -353,5 +350,3 @@ var document = {
 };
 
 exports.fakeDocument = document;
-
-})();

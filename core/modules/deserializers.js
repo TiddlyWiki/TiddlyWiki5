@@ -6,10 +6,7 @@ module-type: tiddlerdeserializer
 Functions to deserialise tiddlers from a block of text
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["application/x-tiddler-html-div"] = function(text,fields) {
@@ -181,5 +178,3 @@ var deserializeTiddlerDiv = function(text /* [,fields] */) {
 	}
 	return undefined;
 };
-
-})();

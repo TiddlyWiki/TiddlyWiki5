@@ -6,10 +6,7 @@ module-type: utils-node
 Information about the available editions
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var fs = require("fs"),
@@ -44,5 +41,3 @@ exports.getEditionInfo = function() {
 	}
 	return editionInfo;
 };
-
-})();

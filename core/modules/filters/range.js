@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for generating a numeric range.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -99,5 +96,3 @@ exports.range = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

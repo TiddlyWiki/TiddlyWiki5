@@ -1,0 +1,34 @@
+title: Transclude/CustomWidget/RawAndSlotted
+description: Custom widget can mix ts-raw and custom slots
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\widget $my.widget()
+\whitespace trim
+<$slot $name="ts-header">
+	Default Header
+</$slot>
+-
+<$slot $name="ts-raw"/>
+\end
+<$my.widget>
+	First Body
+</$my.widget>
+
+
+<$my.widget>
+	<$fill $name="ts-header">
+		Custom Header
+	</$fill>
+	<$fill $name="ts-never">
+		<$log RawAndSlotted="Transclude/CustomWidget/RawAndSlotted is actually failing. $fill slots are executing silently when they weren't invoked." />
+	</$fill>
+	Second Body
+</$my.widget>
++
+title: ExpectedResult
+
+<p>Default Header-First Body</p><p>Custom Header-Second Body</p>

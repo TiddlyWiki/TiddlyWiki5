@@ -10,10 +10,7 @@ Wiki pragma rule for importing variable definitions
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "import";
@@ -50,5 +47,3 @@ exports.parse = function() {
 		children: []
 	}];
 };
-
-})();

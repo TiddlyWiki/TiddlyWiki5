@@ -6,10 +6,7 @@ module-type: utils
 Transliteration static utility functions.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -928,5 +925,3 @@ exports.transliterateToSafeASCII = function(str) {
 		return exports.transliterationPairs[ch] || ""
 	});
 };
-
-})();

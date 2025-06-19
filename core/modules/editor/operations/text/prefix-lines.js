@@ -6,10 +6,7 @@ module-type: texteditoroperation
 Text editor operation to add a prefix to the selected lines
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["prefix-lines"] = function(event,operation) {
@@ -51,5 +48,3 @@ exports["prefix-lines"] = function(event,operation) {
 		operation.newSelEnd = operation.newSelStart + operation.replacement.length;
 	}
 };
-
-})();

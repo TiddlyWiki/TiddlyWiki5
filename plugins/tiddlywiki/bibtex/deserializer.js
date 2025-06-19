@@ -6,10 +6,7 @@ module-type: tiddlerdeserializer
 BibTeX file deserializer
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var bibtexParse = require("$:/plugins/tiddlywiki/bibtex/bibtexParse.js");
@@ -46,5 +43,3 @@ exports["application/x-bibtex"] = function(text,fields) {
 	// Return the output tiddlers
 	return results;
 };
-
-})();

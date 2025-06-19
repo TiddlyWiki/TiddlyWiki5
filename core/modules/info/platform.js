@@ -6,10 +6,7 @@ module-type: info
 Initialise basic platform $:/info/ tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
@@ -48,5 +45,3 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 	}
 	return infoTiddlerFields;
 };
-
-})();

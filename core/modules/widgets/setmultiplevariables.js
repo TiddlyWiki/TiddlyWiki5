@@ -6,10 +6,7 @@ module-type: widget
 Widget to set multiple variables at once from a list of names and a list of values
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -76,6 +73,3 @@ SetMultipleVariablesWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["setmultiplevariables"] = SetMultipleVariablesWidget;
-
-})();
-        

@@ -6,10 +6,7 @@ module-type: widget
 Wrapper for `railroad-diagrams.js` that provides a `<$railroad>` widget.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Parser = require("$:/plugins/tiddlywiki/railroad/parser.js").parser,
@@ -143,5 +140,3 @@ RailroadWidget.prototype.dispatchLink = function(to,event) {
 };
 
 exports.railroad = RailroadWidget;
-
-})();

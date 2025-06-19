@@ -6,10 +6,6 @@ module-type: route
 GET /login-basic -- force a Basic Authentication challenge
 
 \*/
-(function() {
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.method = "GET";
@@ -25,12 +21,10 @@ exports.handler = function(request,response,state) {
 		response.end();
 	} else {
 		// Redirect to the root wiki if login worked
-		var location = ($tw.syncadaptor && $tw.syncadaptor.host)? $tw.syncadaptor.host: "/";
+		var location = ($tw.syncadaptor && $tw.syncadaptor.host)? $tw.syncadaptor.host: `${state.pathPrefix}/`;
 		response.writeHead(302,{
 			Location: location
 		});
 		response.end();
 	}
 };
-
-}());

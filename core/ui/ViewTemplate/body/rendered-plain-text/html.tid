@@ -1,0 +1,4 @@
+title: $:/core/ui/ViewTemplate/body/rendered-plain-text/html
+code-body: yes
+
+{{||$:/core/ui/ViewTemplate/body/rendered-plain-text|html}}

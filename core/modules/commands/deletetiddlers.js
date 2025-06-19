@@ -6,10 +6,7 @@ module-type: command
 Command to delete tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -38,5 +35,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

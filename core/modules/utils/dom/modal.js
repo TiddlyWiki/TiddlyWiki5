@@ -6,10 +6,7 @@ module-type: utils
 Modal message mechanism
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -146,6 +143,7 @@ Modal.prototype.display = function(title,options) {
 		link.setAttribute("href",tiddler.fields.help);
 		link.setAttribute("target","_blank");
 		link.setAttribute("rel","noopener noreferrer");
+		link.setAttribute("class","tc-tiddlylink-external");
 		link.appendChild(this.srcDocument.createTextNode("Help"));
 		modalFooterHelp.appendChild(link);
 		modalFooterHelp.style.float = "left";
@@ -253,5 +251,3 @@ Modal.prototype.adjustPageClass = function() {
 };
 
 exports.Modal = Modal;
-
-})();

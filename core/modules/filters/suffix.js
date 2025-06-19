@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for checking if a title ends with a suffix
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -54,5 +51,3 @@ exports.suffix = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

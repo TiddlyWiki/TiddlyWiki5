@@ -6,10 +6,7 @@ module-type: saver
 Handles saving changes via HTML5's download APIs
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Title of the tiddler containing the download message
@@ -52,5 +49,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new ManualDownloadSaver(wiki);
 };
-
-})();

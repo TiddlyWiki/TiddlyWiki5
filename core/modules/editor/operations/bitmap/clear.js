@@ -6,10 +6,7 @@ module-type: bitmapeditoroperation
 Bitmap editor operation to clear the image
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["clear"] = function(event) {
@@ -20,5 +17,3 @@ exports["clear"] = function(event) {
 	// Save changes
 	this.strokeEnd();
 };
-
-})();

@@ -6,10 +6,7 @@ module-type: utils
 Browser feature detection
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -160,5 +157,3 @@ exports.getFullScreenApis = function() {
 		return result;
 	}
 };
-
-})();

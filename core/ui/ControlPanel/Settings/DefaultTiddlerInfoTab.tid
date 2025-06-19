@@ -1,0 +1,19 @@
+caption: {{$:/language/ControlPanel/Settings/DefaultTiddlerInfoTab/Caption}}
+tags: $:/tags/ControlPanel/Settings
+title: $:/core/ui/ControlPanel/Settings/DefaultTiddlerInfoTab
+
+\whitespace trim
+\define lingo-base() $:/language/ControlPanel/Settings/DefaultTiddlerInfoTab/
+
+<$link to="$:/config/TiddlerInfo/Default" class="tc-control-panel-item">
+	<<lingo Hint>>
+</$link>
+
+<$select tiddler="$:/config/TiddlerInfo/Default" class="tc-select">
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo]!is[draft]]">
+		<option value=<<currentTiddler>>><$transclude field="caption">
+			<$text text=<<currentTiddler>>/>
+			</$transclude>
+		</option>
+	</$list>
+</$select>

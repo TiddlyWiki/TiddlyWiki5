@@ -16,10 +16,7 @@ var slicer = new textSlicer.Slicer(doc,{
 	});
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function Slicer(options) {
@@ -474,5 +471,3 @@ Slicer.prototype.makeTitle = function(prefix) {
 };
 
 exports.Slicer = Slicer;
-
-})();

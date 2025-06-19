@@ -8,10 +8,7 @@ Macro to convert a string of text to a data URI
 <<makedatauri text:"Text to be converted" type:"text/vnd.tiddlywiki">>
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -32,5 +29,3 @@ Run the macro
 exports.run = function(text,type,_canonical_uri) {
 	return $tw.utils.makeDataUri(text,type,_canonical_uri);
 };
-
-})();

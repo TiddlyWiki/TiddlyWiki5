@@ -6,10 +6,7 @@ module-type: library
 Factory for constructing text editor widgets with specified engines for the toolbar and non-toolbar cases
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DEFAULT_MIN_TEXT_AREA_HEIGHT = "100px"; // Minimum height of textareas in pixels
@@ -386,5 +383,3 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 }
 
 exports.editTextWidgetFactory = editTextWidgetFactory;
-
-})();

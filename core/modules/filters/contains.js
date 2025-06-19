@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for finding values in array fields
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -41,5 +38,3 @@ exports.contains = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

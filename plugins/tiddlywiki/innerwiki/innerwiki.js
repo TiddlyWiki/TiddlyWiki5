@@ -6,10 +6,7 @@ module-type: widget
 Widget to display an innerwiki in an iframe
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DEFAULT_INNERWIKI_TEMPLATE = "$:/plugins/tiddlywiki/innerwiki/template";
@@ -347,5 +344,3 @@ InnerWikiWidget.prototype.saveScreenshot = function(options,callback) {
 };
 
 exports.innerwiki = InnerWikiWidget;
-
-})();

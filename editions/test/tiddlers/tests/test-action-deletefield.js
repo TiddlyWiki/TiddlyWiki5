@@ -6,12 +6,6 @@ tags: [[$:/tags/test-spec]]
 Tests <$action-deletefield />.
 
 \*/
-(function(){
-
-/* jslint node: true, browser: true */
-/* eslint-env node, browser, jasmine */
-/* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"]*/
-/* global $tw, require */
 "use strict";
 
 describe("<$action-deletefield /> tests", function() {
@@ -172,5 +166,3 @@ it("should correctly delete fields", function() {
 });
 
 });
-
-})();

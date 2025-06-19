@@ -1,6 +1,6 @@
 title: $:/config/OfficialPluginLibrary
 tags: $:/tags/PluginLibrary
-url: https://tiddlywiki.com/library/v5.3.6/index.html
+url: https://tiddlywiki.com/library/v5.3.7/index.html
 caption: {{$:/language/OfficialPluginLibrary}}
 
 {{$:/language/OfficialPluginLibrary/Hint}}

@@ -6,9 +6,6 @@ tags: [[$:/tags/test-spec]]
 Tests the backlinks mechanism.
 
 \*/
-(function(){
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe('Backlinks tests', function() {
@@ -141,5 +138,3 @@ describe('Backlinks tests', function() {
 		});
 	});
 });
-
-})();

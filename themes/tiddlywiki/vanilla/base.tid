@@ -935,7 +935,8 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	font-weight: normal;
 }
 
-.tc-sidebar-header .tc-sidebar-lists p {
+.tc-sidebar-header .tc-sidebar-lists p,
+.tc-sidebar-tools-item {
 	margin-top: 3px;
 	margin-bottom: 3px;
 }

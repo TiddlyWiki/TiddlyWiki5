@@ -1,39 +1,36 @@
-created: 20170715180840889
-modified: 20170715180914005
 tags: $:/tags/Macro
 title: $:/core/macros/image-picker
 type: text/vnd.tiddlywiki
 
-\define image-picker-thumbnail(actions)
-<$button tag="a" tooltip="""$(imageTitle)$"""><$transclude $variable="__actions__"/><$transclude tiddler=<<imageTitle>>/></$button>
+\procedure image-picker-thumbnail(actions)
+<$button tag="a" tooltip=<<imageTitle>>><$transclude $variable="actions"/><$transclude tiddler=<<imageTitle>>/></$button>
 \end
 
-\define image-picker-list(filter,actions)
+\procedure image-picker-list(filter,actions)
 \whitespace trim
-<$list filter="""$filter$""" variable="imageTitle">
-<$macrocall $name="image-picker-thumbnail" actions=<<__actions__>>/>
+<$list filter=<<filter>> variable="imageTitle">
+<$transclude $variable="image-picker-thumbnail" actions=<<actions>>/>
 &#32;
 </$list>
 \end
 
-\define image-picker(actions,filter:"[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[!has[draft.of]$subfilter$sort[title]]",subfilter:"")
+\procedure image-picker(actions,filter:"[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[!has[draft.of]$subfilter$sort[title]]",subfilter:"")
 \whitespace trim
 <div class="tc-image-chooser">
-<$vars state-system=<<qualify "$:/state/image-picker/system">>>
+<$let state-system=<<qualify "$:/state/image-picker/system">> tv-filter={{{ [<filter>search-replace[$subfilter$],<subfilter>] }}}>
 <$checkbox tiddler=<<state-system>> field="text" checked="show" unchecked="hide" default="hide">
-&#32;
-{{$:/language/SystemTiddlers/Include/Prompt}}
+<span class="tc-tiny-gap-left">{{$:/language/SystemTiddlers/Include/Prompt}}</span>
 </$checkbox>
 <$reveal state=<<state-system>> type="match" text="hide" default="hide" tag="div">
-<$macrocall $name="image-picker-list" filter="""$filter$ +[!is[system]]""" actions=<<__actions__>>/>
+<$transclude $variable="image-picker-list" filter=`$(tv-filter)$ +[!is[system]]` actions=<<actions>>/>
 </$reveal>
 <$reveal state=<<state-system>> type="nomatch" text="hide" default="hide" tag="div">
-<$macrocall $name="image-picker-list" filter="""$filter$""" actions=<<__actions__>>/>
+<$transclude $variable="image-picker-list" filter=<<tv-filter>> actions=<<actions>>/>
 </$reveal>
-</$vars>
+</$let>
 </div>
 \end
 
-\define image-picker-include-tagged-images(actions)
-<$macrocall $name="image-picker" filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[!has[draft.of]sort[title]]" actions=<<__actions__>>/>
+\procedure image-picker-include-tagged-images(actions)
+<$transclude $variable="image-picker" filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[!has[draft.of]sort[title]]" actions=<<actions>>/>
 \end

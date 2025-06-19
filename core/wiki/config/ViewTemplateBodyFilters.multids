@@ -3,6 +3,7 @@ tags: $:/tags/ViewTemplateBodyFilter
 
 testcase: [tag[$:/tags/wiki-test-spec]type[text/vnd.tiddlywiki-multiple]] [tag[$:/tags/wiki-test-spec-failing]type[text/vnd.tiddlywiki-multiple]] :then[[$:/core/ui/TestCaseTemplate]]
 stylesheet: [tag[$:/tags/Stylesheet]then[$:/core/ui/ViewTemplate/body/rendered-plain-text]]
+html: [tag[$:/tags/RawMarkupWikified]] [tag[$:/tags/RawMarkupWikified/TopHead]] [tag[$:/tags/RawMarkupWikified/TopBody]] [tag[$:/tags/RawMarkupWikified/BottomBody]] :then[[$:/core/ui/ViewTemplate/body/rendered-plain-text/html]]
 core-ui-tags: [tag[$:/tags/PageTemplate]] [tag[$:/tags/EditTemplate]] [tag[$:/tags/ViewTemplate]] [tag[$:/tags/KeyboardShortcut]] [tag[$:/tags/ImportPreview]] [tag[$:/tags/EditPreview]] [tag[$:/tags/EditorToolbar]] [tag[$:/EditorTools]] [tag[$:/tags/Actions]] [tag[$:/tags/ToolbarButtonStyle]] :then[[$:/core/ui/ViewTemplate/body/code]]
 system: [prefix[$:/boot/]] [prefix[$:/core/macros]] [prefix[$:/core/save/]] [prefix[$:/core/templates/]]  [prefix[$:/config/]] [prefix[$:/core/config/]] [prefix[$:/info/]] [prefix[$:/language/]] [prefix[$:/languages/]] [prefix[$:/snippets/]]  [prefix[$:/info/]] [prefix[$:/state/]] [prefix[$:/status/]] [prefix[$:/temp/]] :and[!is[image]]  :then[[$:/core/ui/ViewTemplate/body/code]]
 code-body: [field:code-body[yes]then[$:/core/ui/ViewTemplate/body/code]]

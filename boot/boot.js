@@ -232,10 +232,10 @@ $tw.utils.error = function(err) {
 				var link = dm("a"),
 					text = JSON.stringify(tiddlers);
 				if(Blob !== undefined) {
-					var blob = new Blob([text], {type: "text/html"});
+					var blob = new Blob([text], {type: "application/json"});
 					link.setAttribute("href", URL.createObjectURL(blob));
 				} else {
-					link.setAttribute("href","data:text/html," + encodeURIComponent(text));
+					link.setAttribute("href","data:application/json," + encodeURIComponent(text));
 				}
 				link.setAttribute("download","emergency-tiddlers-" + (new Date()) + ".json");
 				document.body.appendChild(link);
@@ -1470,17 +1470,15 @@ $tw.Wiki = function(options) {
 	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers
 	this.unpackPluginTiddlers = function() {
 		var self = this;
-		// Sort the plugin titles by the `plugin-priority` field
-		pluginTiddlers.sort(function(a,b) {
-			if("plugin-priority" in a.fields && "plugin-priority" in b.fields) {
-				return a.fields["plugin-priority"] - b.fields["plugin-priority"];
-			} else if("plugin-priority" in a.fields) {
+		// Sort the plugin titles by the `plugin-priority` field, if this field is missing, default to 1
+		pluginTiddlers.sort(function(a, b) {
+			var priorityA = "plugin-priority" in a.fields ? a.fields["plugin-priority"] : 1;
+			var priorityB = "plugin-priority" in b.fields ? b.fields["plugin-priority"] : 1;
+			if (priorityA !== priorityB) {
+				return priorityA - priorityB;
+			} else if (a.fields.title < b.fields.title) {
 				return -1;
-			} else if("plugin-priority" in b.fields) {
-				return +1;
-			} else if(a.fields.title < b.fields.title) {
-				return -1;
-			} else if(a.fields.title === b.fields.title) {
+			} else if (a.fields.title === b.fields.title) {
 				return 0;
 			} else {
 				return +1;
@@ -1904,8 +1902,16 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 		extensionInfo = $tw.utils.getFileExtensionInfo(ext),
 		type = extensionInfo ? extensionInfo.type : null,
 		typeInfo = type ? $tw.config.contentTypeInfo[type] : null,
-		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8"),
-		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
+		fileSize = fs.statSync(filepath).size,
+		data;
+	if(fileSize > $tw.config.maxEditFileSize) {
+		data = "File " + filepath + "not loaded because it is too large";
+		console.log("Warning: " + data);
+		ext = ".txt";
+	} else {
+		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8");
+	}
+	var tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
 		metadata = $tw.loadMetadataForFile(filepath);
 	if(metadata) {
 		if(type === "application/json") {
@@ -1994,7 +2000,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 					var value = tiddler[name];
 					switch(fieldInfo.source) {
 						case "subdirectories":
-							value = path.relative(rootPath, filename).split(path.sep).slice(0, -1);
+							value = $tw.utils.stringifyList(path.relative(rootPath, filename).split(path.sep).slice(0, -1));
 							break;
 						case "filepath":
 							value = path.relative(rootPath, filename).split(path.sep).join('/');
@@ -2015,10 +2021,10 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 							value = path.extname(filename);
 							break;
 						case "created":
-							value = new Date(fs.statSync(pathname).birthtime);
+							value = $tw.utils.stringifyDate(new Date(fs.statSync(pathname).birthtime));
 							break;
 						case "modified":
-							value = new Date(fs.statSync(pathname).mtime);
+							value = $tw.utils.stringifyDate(new Date(fs.statSync(pathname).mtime));
 							break;
 					}
 					if(fieldInfo.prefix) {
@@ -2465,13 +2471,15 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("image/webp","base64",".webp",{flags:["image"]});
 	$tw.utils.registerFileType("image/heic","base64",".heic",{flags:["image"]});
 	$tw.utils.registerFileType("image/heif","base64",".heif",{flags:["image"]});
+	$tw.utils.registerFileType("image/avif","base64",".avif",{flags:["image"]});
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
 	$tw.utils.registerFileType("image/vnd.microsoft.icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("application/wasm","base64",".wasm");
-	$tw.utils.registerFileType("application/font-woff","base64",".woff");
-	$tw.utils.registerFileType("application/x-font-ttf","base64",".woff");
-	$tw.utils.registerFileType("application/font-woff2","base64",".woff2");
+	$tw.utils.registerFileType("font/woff","base64",".woff");
+	$tw.utils.registerFileType("font/woff2","base64",".woff2");
+	$tw.utils.registerFileType("font/ttf","base64",".ttf");
+	$tw.utils.registerFileType("font/otf","base64",".otf");
 	$tw.utils.registerFileType("audio/ogg","base64",".ogg");
 	$tw.utils.registerFileType("audio/mp4","base64",[".mp4",".m4a"]);
 	$tw.utils.registerFileType("video/ogg","base64",[".ogm",".ogv",".ogg"]);

@@ -6,10 +6,7 @@ module-type: utils
 Keyboard utilities; now deprecated. Instead, use $tw.keyboardManager
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 ["parseKeyDescriptor","checkKeyDescriptor"].forEach(function(method) {
@@ -21,5 +18,3 @@ Keyboard utilities; now deprecated. Instead, use $tw.keyboardManager
 		}
 	};
 });
-
-})();

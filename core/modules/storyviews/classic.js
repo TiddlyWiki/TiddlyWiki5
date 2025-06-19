@@ -6,10 +6,7 @@ module-type: storyview
 Views the story as a linear sequence
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/#easeInOutCubic
@@ -117,5 +114,3 @@ ClassicStoryView.prototype.remove = function(widget) {
 };
 
 exports.classic = ClassicStoryView;
-
-})();

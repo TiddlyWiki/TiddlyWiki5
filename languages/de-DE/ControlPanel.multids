@@ -98,6 +98,10 @@ Plugins/Plugins/Hint: Erweiterungen
 Plugins/Reinstall/Caption: erneut installieren
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme Erweiterungen
+Plugins/Stability/Deprecated: ABGEKÜNDIGT
+Plugins/Stability/Experimental: EXPERIMENTELL
+Plugins/Stability/Legacy: VERALTET
+Plugins/Stability/Stable: STABIL
 Plugins/Update/Caption: aktualisieren
 Plugins/Updates/Caption: Aktualisieren
 Plugins/Updates/Hint: Verfügbare Erweiterungen zu bereits installierten "Plugins"
@@ -171,6 +175,8 @@ Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Adressleiste 
 Settings/PerformanceInstrumentation/Caption: Performance Messung
 Settings/PerformanceInstrumentation/Hint: Anzeige der Performance Statistik in der Browser Entwickler Konsole. ''Wichtig:'' Seite neu laden um die Einstellung zu aktivieren!
 Settings/PerformanceInstrumentation/Description: Aktiviere Performance Messung
+Settings/RecentLimit/Caption: Zuletzt Limit
+Settings/RecentLimit/Hint: Maximale Anzahl von angezeigten "Tiddlern" im "Zuletzt" Reiter
 Settings/ToolbarButtonStyle/Caption: Toolbar Button Stil
 Settings/ToolbarButtonStyle/Hint: Wählen Sie einen Stil:
 Settings/ToolbarButtonStyle/Styles/Borderless: Ohne Rand
@@ -198,6 +204,12 @@ Settings/TitleLinks/Yes/Description: Tiddler Titel als Link anzeigen.
 Settings/MissingLinks/Caption: Wiki-Links
 Settings/MissingLinks/Hint: Aktiviere Links zu fehlenden Tiddlern. zB: FehlenderTiddler [[Einführung]]
 Settings/MissingLinks/Description: Aktiviere Links zu fehlenden Tiddlern.
+SocialCard/Caption: Social Media Karte
+SocialCard/Domain/Prompt: Domain Name für Link Anzeige. Zb: ''tiddlywiki.com''
+SocialCard/Hint: Diese Information wird verwendet, wenn eine "Voransicht" eines Links angezeigt werden soll
+SocialCard/PreviewUrl/Prompt: Vollständige URL für die Media-Vorschau für dieses ~TiddlyWiki
+SocialCard/PreviewUrl/Preview: Vorschau Bild:
+SocialCard/Url/Prompt: Vollständige URL für dieses ~TiddlyWiki
 StoryTiddler/Caption: Story Tiddler
 StoryTiddler/Hint: Diese Filter-Kaskade wird verwendet, um die Vorlage für den Tiddler im "Story River" auszuwählen.
 StoryView/Caption: Anzeige

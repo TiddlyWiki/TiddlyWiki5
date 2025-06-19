@@ -40,10 +40,7 @@ A CSS class can be applied to a list item as follows:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "list";
@@ -152,5 +149,3 @@ exports.parse = function() {
 	// Return the root element of the list
 	return [listStack[0]];
 };
-
-})();

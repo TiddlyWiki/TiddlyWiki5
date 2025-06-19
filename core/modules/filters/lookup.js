@@ -12,10 +12,7 @@ field or index value. If the 2nd suffix does not exist, it defaults to field.
 If the second operand is missing it defaults to "text" for fields, and "0" for indexes
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -49,5 +46,3 @@ exports.lookup = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

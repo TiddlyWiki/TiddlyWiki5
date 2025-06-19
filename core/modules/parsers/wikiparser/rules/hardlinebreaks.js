@@ -17,10 +17,7 @@ Not
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "hardlinebreaks";
@@ -56,5 +53,3 @@ exports.parse = function() {
 	// Return the nodes
 	return tree;
 };
-
-})();

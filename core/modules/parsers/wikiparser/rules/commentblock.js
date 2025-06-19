@@ -18,10 +18,7 @@ xxxx
 Note that the syntax for comments is simplified to an opening "<!--" sequence and a closing "-->" sequence -- HTML itself implements a more complex format (see http://ostermiller.org/findhtmlcomment.html)
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "commentblock";
@@ -52,5 +49,3 @@ exports.parse = function() {
 	// Don't return any elements
 	return [];
 };
-
-})();

@@ -6,10 +6,7 @@ module-type: library
 Components of a railroad diagram.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var railroad = require("$:/plugins/tiddlywiki/railroad/railroad-diagrams.js");
@@ -287,5 +284,3 @@ exports.components = {
 	Terminal: Terminal,
 	Transclusion: Transclusion
 };
-
-})();

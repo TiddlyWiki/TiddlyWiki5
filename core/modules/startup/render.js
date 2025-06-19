@@ -6,10 +6,7 @@ module-type: startup
 Title, stylesheet and page rendering
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -120,5 +117,3 @@ exports.startup = function() {
 	// Run any post-render startup actions
 	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/PostRender");
 };
-
-})();

@@ -6,10 +6,7 @@ module-type: macro
 Macro to return a formatted version of the current time
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -28,5 +25,3 @@ Run the macro
 exports.run = function(format) {
 	return $tw.utils.formatDateString(new Date(),format || "0hh:0mm, DDth MMM YYYY");
 };
-
-})();

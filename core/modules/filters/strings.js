@@ -8,10 +8,7 @@ Filter operators for strings. Unary/binary operators work on each item in turn, 
 Sum/product/maxall/minall operate on the entire list, returning a single item.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.length = makeStringBinaryOperator(
@@ -293,5 +290,3 @@ exports.charcode = function(source,operator,options) {
 	});
 	return [chars.join("")];
 };
-
-})();

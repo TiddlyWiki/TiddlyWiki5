@@ -6,10 +6,7 @@ module-type: library
 Read tiddlers from the browser location hash
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Get the hash
@@ -108,5 +105,3 @@ function removeWarningBanner() {
 	warningWrapper.parentNode.removeChild(warningWrapper);
 	stylesWrapper.parentNode.removeChild(stylesWrapper);
 }
-
-})();

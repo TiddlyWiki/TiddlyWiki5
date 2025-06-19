@@ -6,10 +6,7 @@ module-type: command
 Render individual tiddlers and save the results to the specified files
 
 \*/
-(function(){
 
-	/*jslint node: true, browser: true */
-	/*global $tw: false */
 	"use strict";
 	
 	var widget = require("$:/core/modules/widgets/widget.js");
@@ -66,6 +63,3 @@ Render individual tiddlers and save the results to the specified files
 	};
 	
 	exports.Command = Command;
-	
-	})();
-	

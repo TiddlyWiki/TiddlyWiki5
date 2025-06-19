@@ -6,10 +6,7 @@ module-type: widget
 Widget to display a diff between two texts
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
@@ -144,5 +141,3 @@ DiffTextWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["diff-text"] = DiffTextWidget;
-
-})();

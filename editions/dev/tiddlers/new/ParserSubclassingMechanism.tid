@@ -11,10 +11,7 @@ The wikitext parser subclassing mechanism makes it possible for custom parsers t
 Here is an example of a subclass of the checkbox widget that adds logging to the event handler:
 
 ```js
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var WikiParser = require("$:/core/modules/parsers/wikiparser/wikiparser.js")["text/vnd.tiddlywiki"],
@@ -38,5 +35,4 @@ var MyCustomWikiParser = function(type,text,options) {
 
 exports["text/vnd.my-custom-type"] = MyCustomWikiParser;
 
-})();
 ```

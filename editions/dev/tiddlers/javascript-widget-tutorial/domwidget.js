@@ -3,10 +3,7 @@
 Library function for creating widget using a dom creating function
 
 \*/
-(function() {
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -44,4 +41,3 @@ function createDomWidget(domCreatorFunction) {
 	return MyWidget;
 }
 module.exports = createDomWidget;
-})();

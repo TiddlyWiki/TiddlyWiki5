@@ -16,10 +16,7 @@ The pathname specifies the pathname to the folder in which the JSON files should
 The skinnylisting specifies the title of the tiddler to which a JSON catalogue of the subtiddlers will be saved. The JSON file contains the same data as the bundle tiddler but with the `text` field removed.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -94,5 +91,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

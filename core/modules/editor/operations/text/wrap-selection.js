@@ -6,10 +6,7 @@ module-type: texteditoroperation
 Text editor operation to wrap the selection with the specified prefix and suffix
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["wrap-selection"] = function(event,operation) {
@@ -134,5 +131,3 @@ exports["wrap-selection"] = function(event,operation) {
 		addPrefixSuffix();
 	}
 };
-
-})();

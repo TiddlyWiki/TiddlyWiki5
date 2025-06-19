@@ -6,10 +6,7 @@ module-type: startup
 Load core modules
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -36,5 +33,3 @@ exports.startup = function() {
 	$tw.wiki.initParsers();
 	$tw.Commander.initCommands();
 };
-
-})();

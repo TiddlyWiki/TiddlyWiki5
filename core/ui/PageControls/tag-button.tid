@@ -5,6 +5,7 @@ description: {{$:/language/Buttons/TagManager/Hint}}
 
 \whitespace trim
 \procedure control-panel-button(class)
+\whitespace trim
 <$button to="$:/TagManager" tooltip={{$:/language/Buttons/TagManager/Hint}} aria-label={{$:/language/Buttons/TagManager/Caption}} class=`$(tv-config-toolbar-class)$ $(class)$`>
 <%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/tag-button}}

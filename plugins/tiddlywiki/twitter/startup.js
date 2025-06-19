@@ -6,10 +6,7 @@ module-type: startup
 Twitter initialisation
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -23,5 +20,3 @@ exports.startup = function() {
 		logger.alert("The plugin 'tiddlywiki/twitter' is disabled until this wiki is saved and reloaded again");
 	}
 };
-
-})();

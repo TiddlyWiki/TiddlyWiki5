@@ -6,10 +6,7 @@ module-type: parser
 The HTML parser displays text as raw HTML
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var HtmlParser = function(type,text,options) {
@@ -34,6 +31,3 @@ var HtmlParser = function(type,text,options) {
 };
 
 exports["text/html"] = HtmlParser;
-
-})();
-

@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for returning all the links from a tiddler
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -22,5 +19,3 @@ exports.links = function(source,operator,options) {
 	});
 	return results.makeTiddlerIterator(options.wiki);
 };
-
-})();

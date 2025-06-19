@@ -6,10 +6,7 @@ module-type: parser
 Wraps up the remarkable parser for use as a Parser in TiddlyWiki
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var r = require("$:/plugins/tiddlywiki/markdown-legacy/remarkable.js");
@@ -337,5 +334,3 @@ var MarkdownParser = function(type, text, options) {
 
 exports["text/x-markdown"] = MarkdownParser;
 exports["text/markdown"] = MarkdownParser;
-
-})();

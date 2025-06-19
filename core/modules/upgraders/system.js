@@ -6,10 +6,7 @@ module-type: upgrader
 Upgrader module that suppresses certain system tiddlers that shouldn't be imported
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DONT_IMPORT_LIST = ["$:/Import", "$:/build"],
@@ -47,5 +44,3 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 	}
 	return messages;
 };
-
-})();

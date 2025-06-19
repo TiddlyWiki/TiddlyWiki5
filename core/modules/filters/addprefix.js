@@ -8,10 +8,7 @@ especially useful in contexts where only a filter expression is allowed
 and macro substitution isn't available.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -24,5 +21,3 @@ exports.addprefix = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

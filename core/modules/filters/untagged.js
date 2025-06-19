@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator returning all the selected tiddlers that are untagged
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -25,5 +22,3 @@ exports.untagged = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

@@ -6,10 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the tagging mechanism.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Tag tests", function() {
@@ -179,4 +176,3 @@ function runTests(wiki,wikiOptions) {
 
 });
 
-})();

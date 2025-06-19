@@ -6,10 +6,7 @@ module-type: widget
 Wrapper for `katex.min.js` that provides a `<$latex>` widget. It is also available under the alias `<$katex>`
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),
@@ -94,6 +91,3 @@ KaTeXWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.latex = KaTeXWidget;
 exports.katex = KaTeXWidget;
-
-})();
-

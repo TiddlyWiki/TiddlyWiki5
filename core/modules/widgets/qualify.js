@@ -6,10 +6,7 @@ module-type: widget
 Qualify text to a variable 
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -62,5 +59,3 @@ QualifyWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.qualify = QualifyWidget;
-
-})();

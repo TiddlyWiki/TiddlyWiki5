@@ -7,10 +7,6 @@ Utility methods for browser-storage plugin
 
 \*/
 
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function BrowserStorageUtil(wiki,options) {
@@ -109,5 +105,3 @@ BrowserStorageUtil.prototype.clearLocalStorage = function() {
 };
 
 exports.BrowserStorageUtil = BrowserStorageUtil;
-
-})();

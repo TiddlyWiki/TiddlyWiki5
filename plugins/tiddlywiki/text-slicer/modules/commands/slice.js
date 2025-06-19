@@ -6,10 +6,7 @@ module-type: command
 Command to slice a specified tiddler
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js"),
@@ -54,5 +51,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

@@ -15,10 +15,7 @@ The following options are supported:
 Supports backward compatibility with --savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]*
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -221,5 +218,3 @@ WikiFolderMaker.prototype.saveFile = function(filename,encoding,data) {
 };
 
 exports.Command = Command;
-
-})();

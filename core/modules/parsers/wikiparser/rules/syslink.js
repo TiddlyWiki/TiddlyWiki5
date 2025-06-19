@@ -6,10 +6,7 @@ module-type: wikirule
 Wiki text inline rule for system tiddler links.
 Can be suppressed preceding them with `~`.
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "syslink";
@@ -49,5 +46,3 @@ exports.parse = function() {
 		}];
 	}
 };
-
-})();

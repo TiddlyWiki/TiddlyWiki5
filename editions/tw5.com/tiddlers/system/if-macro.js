@@ -3,10 +3,7 @@ title: $:/editions/tw5.com/if-macro.js
 type: application/javascript
 module-type: macro
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = ".if";
@@ -23,4 +20,3 @@ exports.run = function(cond, then, elze) {
 	return cond ? then : elze;
 };
 
-})();

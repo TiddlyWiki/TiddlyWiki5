@@ -6,8 +6,7 @@ module-type: filteroperator
 Filter operator for applying encodeuricomponent() to each item, with the addition of converting single quotes to %27, as required by AWS
 
 \*/
-/*jslint node: true, browser: true */
-/*global $tw: false */
+
 "use strict";
 
 /*

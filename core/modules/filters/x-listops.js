@@ -6,10 +6,7 @@ module-type: filteroperator
 Extended filter operators to manipulate the current list.
 
 \*/
-(function () {
 
-	/*jslint node: true, browser: true */
-	/*global $tw: false */
 	"use strict";
 
 	/*
@@ -231,5 +228,3 @@ Extended filter operators to manipulate the current list.
 		}
 		return cycleValueInArray(results,operands,step);
 	}
-
-})();

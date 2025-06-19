@@ -6,10 +6,7 @@ module-type: saver
 Saves wiki by pushing a commit to the gitea
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -132,5 +129,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new GiteaSaver(wiki);
 };
-
-})();

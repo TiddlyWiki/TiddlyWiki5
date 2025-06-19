@@ -6,10 +6,7 @@ module-type: global
 Lightweight object for managing interactions with the story and history lists.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -133,6 +130,3 @@ Story.prototype.storyNewTiddler = function(targetTitle) {
 };
 
 exports.Story = Story;
-
-
-})();
