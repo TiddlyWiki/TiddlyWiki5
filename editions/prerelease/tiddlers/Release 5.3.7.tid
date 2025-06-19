@@ -8,9 +8,6 @@ description: Under development
 
 //[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.6...master]]//
 
-
-! Major Improvements
-
 ! Translation improvements
 
 * Chinese
@@ -18,17 +15,10 @@ description: Under development
 * German
 * Japanese
 
-! Plugin Improvements
-
-
 ! Widget Improvements
 
 * <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8816">> 'disabled' attribute to SelectWidget and BrowseWidget
 * <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8819">> 'tabindex' attribute to BrowseWidget, RangeWidget, CheckboxWidget and RadioWidget
-
-! Filter Improvements
-
-* 
 
 ! Usability Improvements
 
@@ -90,6 +80,7 @@ description: Under development
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9032">> configuration filter in $:/AdvancedSearch "Standard" tab
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9025">> stringification of derived fields for [[tiddlywiki.files Files]]
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8739">> broken tag pill styling in edit mode after v5.3.3
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9105">> adding external themes to the [[Highlight Plugin]]
 
 ! Node.js Improvements
 
