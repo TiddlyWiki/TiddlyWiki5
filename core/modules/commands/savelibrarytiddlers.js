@@ -66,7 +66,7 @@ Command.prototype.execute = function() {
 		$tw.utils.createFileDirectories(pathname);
 		fs.writeFileSync(pathname,JSON.stringify(tiddler),"utf8");
 		// Collect the skinny list data
-		var pluginTiddlers = $tw.utils.parseJSONSafe(tiddler.text),
+		var pluginTiddlers = $tw.Wiki.pluginInfoModules[tiddler.type].parse(new $tw.Tiddler(tiddler)),
 			readmeContent = (pluginTiddlers.tiddlers[title + "/readme"] || {}).text,
 			doesRequireReload = !!self.commander.wiki.doesPluginInfoRequireReload(pluginTiddlers),
 			iconTiddler = pluginTiddlers.tiddlers[title + "/icon"] || {},
