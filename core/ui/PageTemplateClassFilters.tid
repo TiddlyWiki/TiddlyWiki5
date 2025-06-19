@@ -1,0 +1,4 @@
+title: $:/core/ui/PageTemplateClassFilters
+tags: $:/tags/ClassFilters/PageTemplate
+
+[<get.theme.option sidebarposition>match[left]then[tc-sidebar-left]]
