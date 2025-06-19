@@ -37,7 +37,7 @@ caption: {{$:/language/Search/Standard/Caption}}
 	inputCancelActions=<<cancel-search-actions>>
 	inputAcceptActions=<<input-accept-actions>>
 	inputAcceptVariantActions=<<input-accept-variant-actions>>
-	configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] :else[{$:/config/SearchResults/Default}]"
+	configTiddlerFilter="[[$:/state/advancedsearch/standard/currentTab]!is[missing]get[text]] :else[{$:/config/SearchResults/Default}]"
 	filterMinLength={{$:/config/Search/MinLength}}/>
 </$keyboard>
 </$keyboard>

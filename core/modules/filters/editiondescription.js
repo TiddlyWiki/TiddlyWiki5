@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for returning the descriptions of the specified edition names
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -29,5 +26,3 @@ exports.editiondescription = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

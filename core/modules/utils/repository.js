@@ -6,10 +6,6 @@ module-type: utils
 Utilities for working with the TiddlyWiki repository file structure
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -48,5 +44,3 @@ exports.getAllPlugins = function(options) {
 	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.languagesPath,options.ignoreEnvironmentVariables ? undefined : $tw.config.languagesEnvVar),collectPlugins);
 	return tiddlers;
 };
-
-})();

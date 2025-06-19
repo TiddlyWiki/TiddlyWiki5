@@ -6,10 +6,7 @@ module-type: storyview
 Zooms between individual tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/#easeInOutCubic
@@ -226,5 +223,3 @@ ZoominListView.prototype.logTextNodeRoot = function(node) {
 };
 
 exports.zoomin = ZoominListView;
-
-})();

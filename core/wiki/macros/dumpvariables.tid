@@ -1,7 +1,7 @@
 title: $:/core/macros/dumpvariables
 tags: $:/tags/Macro
 
-\define dumpvariables()
+\procedure dumpvariables()
 \whitespace trim
 <ul>
 <$list filter="[variables[]]" variable="varname">
