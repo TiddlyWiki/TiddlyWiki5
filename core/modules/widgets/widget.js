@@ -413,7 +413,11 @@ Widget.prototype.getAttribute = function(name,defaultText) {
 Assign the common attributes of the widget to a domNode
 options include:
 sourcePrefix: prefix of attributes that are to be directly assigned (defaults to the empty string meaning all attributes)
-destPrefix: prefix to be applied to attribute names that are to be directly assigned (defaults to the emtpy string which means no prefix is added)
+destPrefix: prefix to be applied to attribute names that are to be directly assigned (defaults to the empty string which means no prefix is added)
+additionalAttributesMap: hashmap of additional attributes to be assigned, where the key is the widget attribute name and the value determines how it is mapped:
+	If the value is a string, it is used as the DOM attribute name.
+	If the value is true (boolean), the widget attribute name is used as the DOM attribute name.
+	(If missing, only attributes allowed by sourcePrefix are assigned.)
 changedAttributes: hashmap by attribute name of attributes to process (if missing, process all attributes)
 excludeEventAttributes: ignores attributes whose name would begin with "on"
 */
@@ -423,6 +427,7 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 		changedAttributes = options.changedAttributes || this.attributes,
 		sourcePrefix = options.sourcePrefix || "",
 		destPrefix = options.destPrefix || "",
+		additionalAttributesMap = options.additionalAttributesMap || {},
 		EVENT_ATTRIBUTE_PREFIX = "on";
 	var assignAttribute = function(name,value) {
 		// Process any CSS custom properties
@@ -439,7 +444,13 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 		if(name.substr(0,sourcePrefix.length) === sourcePrefix) {
 			name = destPrefix + name.substr(sourcePrefix.length);
 		} else {
-			value = undefined;
+			if(additionalAttributesMap[name]) {
+				if(typeof additionalAttributesMap[name] === "string") {
+					name = additionalAttributesMap[name];
+				}
+			} else {
+				value = undefined;
+			}
 		}
 		// Check for excluded attribute names
 		if(options.excludeEventAttributes && name.substr(0,2).toLowerCase() === EVENT_ATTRIBUTE_PREFIX) {

@@ -1,6 +1,6 @@
 caption: image
 created: 20140416160234142
-modified: 20231121114351165
+modified: 20250618055002532
 tags: Widgets
 title: ImageWidget
 type: text/vnd.tiddlywiki
@@ -22,6 +22,8 @@ Any content of the `<$image>` widget is ignored.
 |class |CSS classes to be assigned to the `<img>` element |
 |loading|<<.from-version "5.2.3">>Optional. Set to `lazy` to enable lazy loading of images loaded from an external URI |
 |usemap|<<.from-version "5.3.2">>Optional usemap attribute to be assigned to the `<img>` element for use with HTML image maps |
+|data-* |<<.from-version "5.3.7">> Optional [[data attributes|https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes]] to be assigned to the HTML element |
+|style.* |<<.from-version "5.3.7">> Optional [[CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference]] to be assigned to the HTML element |
 
 The width and the height can be specified as pixel values (eg "23" or "23px") or percentages (eg "23%"). They are both optional; if not provided the browser will use CSS rules to size the image.
 
