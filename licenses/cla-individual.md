@@ -619,3 +619,5 @@ Matthew Salmon, @matthewsalmon, 2025/04/24
 @jbaldus, 2025/05/28
 
 Wu Peiyuan, @s793016, 2025/06/10
+
+Markus Sauermann, @Sauermann, 2025/06/20
