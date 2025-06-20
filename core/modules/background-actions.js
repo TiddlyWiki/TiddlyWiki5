@@ -6,10 +6,7 @@ module-type: global
 Class to dispatch actions when filters change
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function BackgroundActionDispatcher(filterTracker,wiki) {
@@ -125,5 +122,3 @@ BackgroundActionTracker.prototype.destroy = function() {
 };
 
 exports.BackgroundActionDispatcher = BackgroundActionDispatcher;
-
-})();

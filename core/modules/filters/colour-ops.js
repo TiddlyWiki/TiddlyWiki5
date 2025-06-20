@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operators for colour operations
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Color = require("$:/core/modules/utils/dom/color.js").Color,
@@ -141,5 +138,3 @@ function makeParallelColourOperator(fn) {
 		return fn(colours, operator, options, originalColours);
 	};
 }
-
-})();

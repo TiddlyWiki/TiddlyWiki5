@@ -6,10 +6,7 @@ module-type: filterrunprefix
 Filter run prefix to make input titles available as variables when evaluating the filter run
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.apply = function(operationSubFunction) {
@@ -25,5 +22,3 @@ exports.apply = function(operationSubFunction) {
 		results.pushTop(operationSubFunction(source,widget.makeFakeWidgetWithVariables(variables)));
 	};
 };
-
-})();

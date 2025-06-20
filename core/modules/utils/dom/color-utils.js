@@ -6,10 +6,7 @@ module-type: utils
 Color.js related utilities
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Color = require("$:/core/modules/utils/dom/color.js").Color;
@@ -56,5 +53,3 @@ exports.convertCSSColorToRGBString = function(colourString) {
 		return null;
 	}
 };
-
-})();

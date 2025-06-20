@@ -6,10 +6,7 @@ module-type: global
 Class to track the results of a filter string
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function FilterTracker(wiki) {
@@ -104,5 +101,3 @@ FilterTracker.prototype.processChanges = function(changes) {
 };
 
 exports.FilterTracker = FilterTracker;
-
-})();

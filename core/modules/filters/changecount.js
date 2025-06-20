@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for retrieving the changecount for each title in the list.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -22,5 +19,3 @@ exports.changecount = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

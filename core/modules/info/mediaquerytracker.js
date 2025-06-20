@@ -6,10 +6,7 @@ module-type: info
 Initialise $:/info/ tiddlers derived from media queries via 
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
@@ -68,5 +65,3 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 	}
 	return [];
 };
-
-})();
