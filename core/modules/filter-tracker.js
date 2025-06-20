@@ -12,7 +12,7 @@ Class to track the results of a filter string
 class FilterTracker {
 	constructor(wiki) {
 		this.wiki = wiki;
-		this.trackers = [];
+		this.trackers = new Map();
 		this.nextTrackerId = 1;
 	}
 
@@ -29,55 +29,58 @@ class FilterTracker {
 	fnChange: function to call when a tiddler changes in the filter results. Only called for filter results that identify a tiddler or shadow tiddler. Called as (title,enterValue), and may optionally return a replacement enterValue
 	fnProcess: function to call each time the tracker is processed, after any enter, leave or change functions are called. Called as (changes)
 	*/
-	track(options) {
-		// Add the tracker details
+	track(options = {}) {
+		const {
+			filterString,
+			fnEnter,
+			fnLeave,
+			fnChange,
+			fnProcess
+		} = options;
+		const id = this.nextTrackerId++;
 		const tracker = {
-			id: this.nextTrackerId++,
-			filterString: options.filterString,
-			fnEnter: options.fnEnter,
-			fnLeave: options.fnLeave,
-			fnChange: options.fnChange,
-			fnProcess: options.fnProcess,
-			previousResults: [], // Results from the previous time the tracker was processed
-			resultValues: {} // Map by title to the value returned by fnEnter
+			id,
+			filterString,
+			fnEnter,
+			fnLeave,
+			fnChange,
+			fnProcess,
+			previousResults: [],
+			resultValues: {}
 		};
-		this.trackers.push(tracker);
+		this.trackers.set(id, tracker);
 		// Process the tracker
-		this.processTracker(this.trackers.length - 1);
-		return tracker.id;
+		this.processTracker(id);
+		return id;
 	}
 
 	untrack(id) {
-		for(let t = 0; t < this.trackers.length; t++) {
-			if(this.trackers[t].id === id) {
-				this.trackers.splice(t, 1);
-				break;
-			}
-		}
+		this.trackers.delete(id);
 	}
 
 	processTrackers() {
-		for(let t = 0; t < this.trackers.length; t++) {
-			this.processTracker(t);
+		for (const id of this.trackers.keys()) {
+			this.processTracker(id);
 		}
 	}
 
-	processTracker(index) {
-		const tracker = this.trackers[index];
+	processTracker(id) {
+		const tracker = this.trackers.get(id);
+		if (!tracker) return;
 		const results = [];
 		// Evaluate the filter and remove duplicate results
-		$tw.utils.each(this.wiki.filterTiddlers(tracker.filterString), function(title) {
+		$tw.utils.each(this.wiki.filterTiddlers(tracker.filterString), title => {
 			$tw.utils.pushTop(results, title);
 		});
 		// Process the newly entered results
-		$tw.utils.each(results, function(title) {
-			if(tracker.previousResults.indexOf(title) === -1 && !tracker.resultValues[title] && tracker.fnEnter) {
+		results.forEach(title => {
+			if (!tracker.previousResults.includes(title) && !tracker.resultValues[title] && tracker.fnEnter) {
 				tracker.resultValues[title] = tracker.fnEnter(title) || true;
 			}
 		});
 		// Process the results that have just left
-		$tw.utils.each(tracker.previousResults, function(title) {
-			if(results.indexOf(title) === -1 && tracker.resultValues[title] && tracker.fnLeave) {
+		tracker.previousResults.forEach(title => {
+			if (!results.includes(title) && tracker.resultValues[title] && tracker.fnLeave) {
 				tracker.fnLeave(title, tracker.resultValues[title]);
 				delete tracker.resultValues[title];
 			}
@@ -87,15 +90,13 @@ class FilterTracker {
 	}
 
 	processChanges(changes) {
-		for(let t = 0; t < this.trackers.length; t++) {
-			const tracker = this.trackers[t];
-			$tw.utils.each(changes, function(change, title) {
-				if(title && tracker.previousResults.indexOf(title) !== -1 && tracker.fnChange) {
-					// Call the change function and if it doesn't return a value then keep the old value
+		for (const tracker of this.trackers.values()) {
+			Object.keys(changes).forEach(title => {
+				if (title && tracker.previousResults.includes(title) && tracker.fnChange) {
 					tracker.resultValues[title] = tracker.fnChange(title, tracker.resultValues[title]) || tracker.resultValues[title];
 				}
 			});
-			if(tracker.fnProcess) {
+			if (tracker.fnProcess) {
 				tracker.fnProcess(changes);
 			}
 		}

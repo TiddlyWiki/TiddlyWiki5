@@ -14,17 +14,17 @@ class BackgroundActionDispatcher {
 		this.filterTracker = filterTracker;
 		this.wiki = wiki;
 		this.nextTrackedFilterId = 1;
-		this.trackedFilters = Object.create(null); // Hashmap by id
+		this.trackedFilters = new Map(); // Use Map for better key management
 		// Track the filter for the background actions
 		this.filterTracker.track({
 			filterString: "[all[tiddlers+shadows]tag[$:/tags/BackgroundAction]!is[draft]]",
-			fnEnter: (title) => this.trackFilter(title),
+			fnEnter: title => this.trackFilter(title),
 			fnLeave: (title, enterValue) => this.untrackFilter(enterValue),
 			fnChange: (title, enterValue) => {
 				this.untrackFilter(enterValue);
 				return this.trackFilter(title);
 			},
-			fnProcess: (changes) => this.process(changes)
+			fnProcess: changes => this.process(changes)
 		});
 	}
 
@@ -33,25 +33,25 @@ class BackgroundActionDispatcher {
 		const id = this.nextTrackedFilterId++;
 		const tracker = new BackgroundActionTracker({
 			wiki: this.wiki,
-			title: title,
+			title,
 			trackFilter: tiddler.fields["track-filter"],
 			actions: tiddler.fields.text
 		});
-		this.trackedFilters[id] = tracker;
+		this.trackedFilters.set(id, tracker);
 		return id;
 	}
 
 	untrackFilter(enterValue) {
-		const tracker = this.trackedFilters[enterValue];
+		const tracker = this.trackedFilters.get(enterValue);
 		if(tracker) {
 			tracker.destroy();
 		}
-		delete this.trackedFilters[enterValue];
+		this.trackedFilters.delete(enterValue);
 	}
 
 	process(changes) {
-		for(const id in this.trackedFilters) {
-			this.trackedFilters[id].process(changes);
+		for(const tracker of this.trackedFilters.values()) {
+			tracker.process(changes);
 		}
 	}
 }
@@ -64,18 +64,18 @@ trackFilter: filter string to track changes
 actions: actions to be executed when the filter changes
 */
 class BackgroundActionTracker {
-	constructor(options) {
-		this.wiki = options.wiki;
-		this.title = options.title;
-		this.trackFilter = options.trackFilter;
-		this.actions = options.actions;
+	constructor({wiki, title, trackFilter, actions}) {
+		this.wiki = wiki;
+		this.title = title;
+		this.trackFilter = trackFilter;
+		this.actions = actions;
 		this.filterTracker = new $tw.FilterTracker(this.wiki);
 		this.hasChanged = false;
 		this.trackerID = this.filterTracker.track({
 			filterString: this.trackFilter,
-			fnEnter: (title) => { this.hasChanged = true; },
-			fnLeave: (title, enterValue) => { this.hasChanged = true; },
-			fnProcess: (changes) => {
+			fnEnter: () => { this.hasChanged = true; },
+			fnLeave: () => { this.hasChanged = true; },
+			fnProcess: changes => {
 				if(this.hasChanged) {
 					this.hasChanged = false;
 					console.log("Processing background action", this.title);
@@ -84,7 +84,7 @@ class BackgroundActionTracker {
 					if(tiddler && tiddler.fields.platforms) {
 						doActions = false;
 						const platforms = $tw.utils.parseStringArray(tiddler.fields.platforms);
-						if(($tw.browser && platforms.indexOf("browser") !== -1) || ($tw.node && platforms.indexOf("node") !== -1)) {
+						if(($tw.browser && platforms.includes("browser")) || ($tw.node && platforms.includes("node"))) {
 							doActions = true;
 						}
 					}
