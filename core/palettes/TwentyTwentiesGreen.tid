@@ -5,6 +5,7 @@ tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 color-scheme: light
 palette-import: $:/palettes/TwentyTwenties
+category: 2025
 
 base-paper: rgb(188, 255, 161)
 base-background: rgb(94, 192, 145)

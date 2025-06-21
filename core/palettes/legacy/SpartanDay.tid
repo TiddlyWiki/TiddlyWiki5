@@ -4,6 +4,7 @@ type: application/x-tiddler-dictionary
 description: Cold, spartan day colors
 name: Spartan Day
 color-scheme: light
+category: Legacy
 
 alert-background: <<colour background>>
 alert-border: <<colour very-muted-foreground>>

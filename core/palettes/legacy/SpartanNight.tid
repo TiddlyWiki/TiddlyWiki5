@@ -4,6 +4,7 @@ type: application/x-tiddler-dictionary
 description: Dark spartan colors
 name: Spartan Night
 color-scheme: dark
+category: Legacy
 
 alert-background: <<colour background>>
 alert-border: <<colour very-muted-foreground>>

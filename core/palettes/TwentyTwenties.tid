@@ -6,6 +6,7 @@ type: application/x-tiddler-dictionary
 color-scheme: light
 settings: $:/palettes/TwentyTwenties/Settings
 palette-import: $:/palettes/Vanilla
+category: 2025
 
 # Background and foreground colours, which are interpolated as required
 base-paper: #FFFCF0

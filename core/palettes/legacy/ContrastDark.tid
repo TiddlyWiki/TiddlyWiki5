@@ -1,5 +1,6 @@
 title: $:/palettes/ContrastDark
 name: Contrast (Dark)
+category: Legacy
 color-scheme: dark
 description: High contrast and unambiguous (dark version)
 tags: $:/tags/Palette

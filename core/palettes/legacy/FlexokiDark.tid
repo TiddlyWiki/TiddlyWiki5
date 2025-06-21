@@ -1,6 +1,7 @@
 color-scheme: dark
 description: An inky color scheme for prose and code
 name: FlexokiDark
+category: Legacy
 tags: $:/tags/Palette
 title: $:/palettes/FlexokiDark
 type: application/x-tiddler-dictionary

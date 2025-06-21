@@ -7,3 +7,4 @@ color-scheme: [{$:/info/browser/darkmode}!match[yes]then[light]else[dark]]
 settings: $:/palettes/AutoToggle/Settings
 palette-import@light: $:/palettes/FlexokiLight
 palette-import@dark: $:/palettes/FlexokiDark
+category: 2025

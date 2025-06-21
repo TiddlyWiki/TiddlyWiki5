@@ -2,6 +2,7 @@ created: 20150402111612188
 description: Good with dark photo backgrounds
 modified: 20150402112344080
 name: DarkPhotos
+category: Legacy
 tags: $:/tags/Palette
 title: $:/palettes/DarkPhotos
 type: application/x-tiddler-dictionary
