@@ -82,12 +82,12 @@ exports["colour-best-contrast"] = makeParallelColourOperator(function (colours, 
 
 exports["colour-interpolate"] = function(source,operator,options) {
 	// Get the colour space suffix
-	var space = (((operator.suffixes || [])[0] || ["srgb"])[0]).toLowerCase();
+	var space = ((((operator.suffixes || [])[0] || ["srgb"])[0]) || "").toLowerCase();
 	if(colourSpacesList.indexOf(space) === -1) {
-		space = "srgb";
+		space = "lch";
 	}
 	// Get the hue adjuster suffix
-	var hueAdjuster = (((operator.suffixes || [])[1] || ["shorter"])[0]).toLowerCase();
+	var hueAdjuster = ((((operator.suffixes || [])[1] || ["shorter"])[0]) || "").toLowerCase();
 	if(hueAdjustersList.indexOf(hueAdjuster) === -1) {
 		hueAdjuster = "shorter";
 	}

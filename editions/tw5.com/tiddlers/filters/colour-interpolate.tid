@@ -27,27 +27,31 @@ The <<.op colour-interpolate>> operator is used to interpolate colour values in 
 [colour-interpolate:<colour space>:<hue adjuster>[<colourA>],[<colourB>]]
 ```
 
-* ''colour space'': The name of the colour space to be used for the interpolation such as "OkLCh" or "sRGB". The full list of colour spaces that can be used for interpolation is given in [[Colour Spaces]]
+* ''colour space'': The name of the colour space to be used for the interpolation such as "LCh" (the default), "OkLCh" or "sRGB". The full list of colour spaces that can be used for interpolation is given in [[Colour Spaces]]
 * ''hue adjuster'': For color spaces with a hue angle there are multiple ways to interpolate, which can produce drastically different results. The hue adjuster suffix allows the interpolation type to be controlled. It can be set to "raw", "increasing", "decreasing", "longer" or "shorter" (the default). See [[Colour Interpolation Hues]] for more details
 
 Two colour parameters are required. If there are fewer than two input colours, the operator will return an empty result. If there are more than two input colours, the operator will ignore the additional colours.
 
 Note that indexes outside the range 0 to 1 will extrapolate from the provided colour values.
 
-<<interpolate-example "0 0.333 0.666 1 +[colour-interpolate:oklch[red],[purple]]" """
-For example, this filter expression will return 4 colours that smoothly blend from red to purple in the OKLCH colour space:
+<<interpolate-example "0 0.333 0.666 1 +[colour-interpolate:lch[red],[purple]]" """
+For example, this filter expression will return 4 colours that smoothly blend from red to purple in the LCh colour space:
 """>>
 
-<<interpolate-example "[range[0],[1],[0.05]colour-interpolate:oklch[red],[purple]]" """
+<<interpolate-example "[range[0],[1],[0.05]colour-interpolate:lch[red],[purple]]" """
 The range operator can be used to generate a series of weights:
 """>>
 
-<<interpolate-example "[range[0],[1],[0.05]colour-interpolate:oklch:raw[red],[purple]]" """
+<<interpolate-example "[range[0],[1],[0.05]colour-interpolate:lch:raw[red],[purple]]" """
 Notice how the ''raw'' hue adjuster produces a rainbow effect:
 """>>
 
 <<interpolate-example "[range[0],[1],[0.1]colour-interpolate[black],[white]] =[range[0.1],[1],[0.1]colour-interpolate[white],[black]]" """
 Interpolations can be appended together:
+""">>
+
+<<interpolate-example "[range[0],[1],[0.1]colour-interpolate:lch[#FAEEC6],[#BE9207]] =[range[0.1],[1],[0.1]colour-interpolate:lch[#BE9207],[#241E08]]" """
+Pleasing colour graduations can be created:
 """>>
 
 See also the following related operators:
