@@ -1,0 +1,115 @@
+color-scheme: dark
+description: based on Vanilla
+name: Luxury Black
+tags: $:/tags/Palette
+title: $:/palettes/LuxuryBlack
+type: application/x-tiddler-dictionary
+
+primary: #C1A84A
+alert-background: #6e3d46
+alert-border: #d5847080
+alert-highlight: #ba9e45
+alert-muted-foreground: #d58470
+background: #4A4147
+blockquote-bar: <<colour pre-background>>
+button-foreground: <<colour primary>>AA
+code-background: #EDECED1A
+code-border: <<colour code-background>>
+code-foreground: <<colour foreground>>
+dirty-indicator: #ff3c8c
+download-background: <<colour primary>>
+download-foreground: <<colour page-background>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: <<colour background>>
+dropdown-border: <<colour dropdown-background>>
+dropdown-tab-background-selected: <<colour dropdown-background>>
+dropdown-tab-background: <<colour tab-background>>
+dropzone-background: #FDEED780
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: #6A7E6D
+external-link-foreground-visited: #BAB3BC
+external-link-foreground: #99BEB4
+foreground: #FDEED7
+highlight-background: #e04666
+highlight-foreground: <<colour foreground>>
+message-background: <<colour tiddler-background>>
+message-border: <<colour table-border>>
+message-foreground: <<colour foreground>>
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour tiddler-background>>
+modal-border: <<colour modal-background>>
+modal-footer-background: <<colour table-header-background>>
+modal-footer-border: <<colour modal-header-border>>
+modal-header-border: <<colour table-border>>
+muted-foreground: #E0C8BC
+network-activity-foreground: #03a0df
+notification-background: <<colour background>>
+notification-border: <<colour primary>>80
+page-background: #3F3643
+pre-background: <<colour table-header-background>>
+pre-border: <<colour pre-background>>
+selection-background: 
+selection-foreground: 
+select-tag-background: 
+select-tag-foreground: <<colour button-foreground>>
+sidebar-button-foreground: <<colour button-foreground>>
+sidebar-controls-foreground-hover: #9F9BA1
+sidebar-controls-foreground: #655E69
+sidebar-foreground-shadow: transparent
+sidebar-foreground: #D5D5DC
+sidebar-muted-foreground-hover: #2C262F
+sidebar-muted-foreground: #BAB3BC
+sidebar-tab-background-selected: <<colour primary>>
+sidebar-tab-background: <<colour primary>>80
+sidebar-tab-border-selected: <<colour sidebar-tab-border>>
+sidebar-tab-border: <<colour foreground>>80
+sidebar-tab-divider: <<colour sidebar-tab-border-selected>>
+sidebar-tab-foreground-selected: <<colour page-background>>
+sidebar-tab-foreground: <<colour foreground>>
+sidebar-tiddler-link-foreground-hover: #827C85
+sidebar-tiddler-link-foreground: #F2DC6D
+site-title-foreground: <<colour primary>>
+static-alert-foreground: <<colour muted-foreground>>
+tab-background-selected: <<colour tiddler-background>>
+tab-background: <<colour table-header-background>>
+tab-border-selected: <<colour tab-border>>
+tab-border: <<colour table-border>>
+tab-divider: <<colour table-footer-background>>
+tab-foreground-selected: <<colour foreground>>
+tab-foreground: <<colour foreground>>
+table-border: #807A7E
+table-footer-background: #6E676C
+table-header-background: #5C5459
+tag-background: #906451
+tag-foreground: <<colour foreground>>
+tiddler-background: #4A4147
+tiddler-border: <<colour tiddler-background>>
+tiddler-controls-foreground-hover: #827C85
+tiddler-controls-foreground-selected: #BCB9BD
+tiddler-controls-foreground: #906451
+tiddler-editor-background: #433B40
+tiddler-editor-border-image: #FFFFFF
+tiddler-editor-border: <<colour table-header-background>>
+tiddler-editor-fields-even: <<colour table-header-background>>
+tiddler-editor-fields-odd: 
+tiddler-info-background: <<colour background>>
+tiddler-info-border: <<colour tiddler-info-background>>
+tiddler-info-tab-background: <<colour tab-background-selected>>
+tiddler-link-background: transparent
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: #898487
+tiddler-title-foreground: #F2DC6D
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+toolbar-info-button: 
+toolbar-edit-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-cancel-button: 
+toolbar-done-button: 
+untagged-background: #655E63
+very-muted-foreground: #D8C5AD
