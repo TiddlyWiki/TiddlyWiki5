@@ -1,0 +1,9 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/MacroDef
+type: text/vnd.tiddlywiki
+
+\define name(param:defaultvalue,param2:defaultvalue)
+definition text, including $param$ markers
+\end
+
+\define lingo-base() $:/language/ControlPanel/Basics/
