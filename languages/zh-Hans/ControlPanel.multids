@@ -135,7 +135,7 @@ Saving/TiddlySpot/BackupDir: 备份文件夹
 Saving/TiddlySpot/Backups: 备份
 Saving/TiddlySpot/Caption: ~TiddlyHost 保存模块
 Saving/TiddlySpot/ControlPanel: ~TiddlyHost 控制台
-Saving/TiddlySpot/Description: 这些设置只适用于保存到 [[TiddlyHost|https://tiddlyhost.com]]，或兼容的远程服务器。有 ~TiddlyHost 的保存设置信息，请参阅[[此处|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]]
+Saving/TiddlySpot/Description: 这些设置只适用于保存到 [[TiddlyHost|https://tiddlyhost.com]]，或兼容的远程服务器。有关 ~TiddlyHost 的保存设置信息，请参阅[[此处|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]]
 Saving/TiddlySpot/Filename: 上传文件名
 Saving/TiddlySpot/Heading: ~TiddlyHost
 Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyhost.com/`，可改为定制之服务器网址，例如 `http://example.com/store.php`。//
