@@ -22,12 +22,19 @@ Inherit from the base widget class
 */
 ButtonWidget.prototype = new Widget();
 
-var directDOMAttributes =	{
-	style: true,
-	tooltip: "title",
-	"aria-label": true,
-	role: true,
-	tabindex: true
+ButtonWidget.directDOMAttributes =	{
+	style: {},
+	tooltip: {
+		domAttribute: "title"
+	},
+	"aria-label": {},
+	role: {},
+	tabindex: {},
+	disabled: {
+		mapAttributeFn: function(widget) {
+			return widget.getAttribute("disabled","no") === "yes" ? true : undefined;
+		}
+	}
 }
 
 /*
@@ -64,11 +71,11 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		$tw.utils.pushTop(classes,"tc-popup-handle");
 	}
 	domNode.className = classes.join(" ");
-	// Assign data- and direct DOM attributes that are not falsy
+	// Assign data- and direct DOM attributes that are not empty or undefined
 	var nonBlankAttributes = {};
-	$tw.utils.each(Object.keys(directDOMAttributes),function(name) {
+	$tw.utils.each(Object.keys(ButtonWidget.directDOMAttributes),function(name) {
 		if(!!self.getAttribute(name)) {
-			nonBlankAttributes[name] = directDOMAttributes[name];
+			nonBlankAttributes[name] = ButtonWidget.directDOMAttributes[name];
 		}
 	});
 	this.assignAttributes(domNode,{
@@ -79,9 +86,6 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Assign other attributes
 	if(this.popup || this.popupTitle) {
 		domNode.setAttribute("aria-expanded",isPoppedUp ? "true" : "false");
-	}
-	if(this.isDisabled === "yes") {
-		domNode.setAttribute("disabled",true);
 	}
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
@@ -253,6 +257,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes(),
+		hasChangedAttributes = $tw.utils.count(changedAttributes) > 0,
 		alwaysRerenderAttributes = [
 			"actions",
 			"to",
@@ -272,23 +277,26 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 			"popupTitle",
 			"default",
 			"disabled"
-		],
-		attributesNeedRerender = alwaysRerenderAttributes.some(function(key) {return changedAttributes[key]});
+		];
 
-	if((this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || attributesNeedRerender) {
-		this.refreshSelf();
-		return true;
-	} else {
-		if(changedAttributes["class"]) {
-			this.updateDomNodeClasses();
+	if(changedAttributes) {
+		var	attributesNeedRerender = alwaysRerenderAttributes.some(function(key) {return changedAttributes[key]});
+		if((this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || attributesNeedRerender) {
+			this.refreshSelf();
+			return true;
+		} else {
+			if(changedAttributes["class"]) {
+				this.updateDomNodeClasses();
+			}
+			this.assignAttributes(this.domNodes[0],{
+				changedAttributes: changedAttributes,
+				sourcePrefix: "data-",
+				destPrefix: "data-",
+				additionalAttributesMap: ButtonWidget.directDOMAttributes
+			});
 		}
-		this.assignAttributes(this.domNodes[0],{
-			changedAttributes: changedAttributes,
-			sourcePrefix: "data-",
-			destPrefix: "data-",
-			additionalAttributesMap: directDOMAttributes
-		});
 	}
+
 	return this.refreshChildren(changedTiddlers);
 };
 

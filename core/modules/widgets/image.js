@@ -33,12 +33,15 @@ var ImageWidget = function(parseTreeNode,options) {
 
 ImageWidget.prototype = new Widget();
 
-var directDOMAttributes =	{
-	width: true,
-	height: true,
-	usemap: true,
-	alt: true,
-	tooltip: "title"
+ImageWidget.directDOMAttributes =	{
+	width: {},
+	height: {},
+	usemap: {},
+	alt: {},
+	tooltip: {
+		domAttribute: "title"
+	},
+	class: {}
 };
 
 ImageWidget.prototype.render = function(parent,nextSibling) {
@@ -95,14 +98,11 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	// Create the element and assign the attributes
 	var domNode = this.document.createElement(tag);
 	domNode.setAttribute("src",src);
-	if(this.imageClass) {
-		domNode.setAttribute("class",this.imageClass);
-	}
 	// Assign data- and direct DOM attributes that are not falsy
 	var nonBlankAttributes = {};
-	$tw.utils.each(Object.keys(directDOMAttributes),function(name) {
+	$tw.utils.each(Object.keys(ImageWidget.directDOMAttributes),function(name) {
 		if(!!self.getAttribute(name)) {
-			nonBlankAttributes[name] = directDOMAttributes[name];
+			nonBlankAttributes[name] = ImageWidget.directDOMAttributes[name];
 		}
 	});
 	this.assignAttributes(domNode,{
@@ -133,7 +133,6 @@ Compute the internal state of the widget
 ImageWidget.prototype.execute = function() {
 	//Get parameters not handled by assignAttributes call in render
 	this.imageSource = this.getAttribute("source");
-	this.imageClass = this.getAttribute("class");
 	this.lazyLoading = this.getAttribute("loading");
 };
 
@@ -158,7 +157,7 @@ ImageWidget.prototype.refresh = function(changedTiddlers) {
 			sourcePrefix: "data-",
 			destPrefix: "data-",
 			changedAttributes: changedAttributes,
-			additionalAttributesMap: directDOMAttributes
+			additionalAttributesMap: ImageWidget.directDOMAttributes
 		});
 	}
 	return false;
