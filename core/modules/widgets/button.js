@@ -35,7 +35,7 @@ ButtonWidget.prototype.attributesInfo = {
 			mapAttributeFn: function(widget) {
 				return widget.getAttribute("disabled","no") === "yes" ? true : undefined;
 			}
-		}		
+		}
 	},
 	notUpdateable: [
 			"actions",
