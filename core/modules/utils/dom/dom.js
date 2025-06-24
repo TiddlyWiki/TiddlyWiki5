@@ -81,6 +81,20 @@ exports.toggleClass = function(el,className,status) {
 	}
 };
 
+exports.updateClasses = function(el,classesToRemove,classedToAdd) {
+	var domNodeClasses = el.className.split(" ");
+	//Remove classes assigned from the old value of class attribute
+	$tw.utils.each(classesToRemove,function(oldClass){
+		var i = domNodeClasses.indexOf(oldClass);
+		if(i !== -1) {
+			domNodeClasses.splice(i,1);
+		}
+	});
+	//Add new classes from updated class attribute.
+	$tw.utils.pushTop(domNodeClasses,classedToAdd);
+	this.domNode.className = domNodeClasses.join(" ");
+}
+
 /*
 Get the first parent element that has scrollbars or use the body as fallback.
 */

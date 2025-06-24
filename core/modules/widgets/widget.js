@@ -703,8 +703,42 @@ Widget.prototype.dispatchEvent = function(event) {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 Widget.prototype.refresh = function(changedTiddlers) {
+	if(this.attributesInfo) {
+		const changedAttributes = this.computeAttributes(),
+			hasChangedAttributes = $tw.utils.count(changedAttributes) > 0,
+			attributesNeedRerender = this.attributesInfo.notUpdateable.some(function(key) {return changedAttributes[key]});
+
+		if(attributesNeedRerender) {
+			this.refreshSelf();
+			return true;
+		}
+		if(hasChangedAttributes) {
+			// Refresh any data-, stye. or other DOM attributes
+			if(this.domNodes.length) {
+				this.refreshDOMAttributes(changedAttributes);
+			}
+			// Handle custom-refreshable attributes
+			for (const attr in changedAttributes) {
+				const refreshHandler = this.attributesInfo.hasCustomRefresh[attr];
+				if (refreshHandler && typeof this[refreshHandler] === "function") {
+					this[refreshHandler](attr);
+				}
+			}
+		}
+	}
+
 	return this.refreshChildren(changedTiddlers);
 };
+
+Widget.prototype.refreshDOMAttributes = function(changedAttributes) {
+		const domNode = this.domNodes[0];
+		this.assignAttributes(domNode, {
+			changedAttributes: changedAttributes,
+			sourcePrefix: "data-",
+			destPrefix: "data-",
+			additionalAttributesMap: this.attributesInfo.dom || {}
+		});
+	}
 
 /*
 Rebuild a previously rendered widget

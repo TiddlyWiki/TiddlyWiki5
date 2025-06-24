@@ -33,16 +33,24 @@ var ImageWidget = function(parseTreeNode,options) {
 
 ImageWidget.prototype = new Widget();
 
-ImageWidget.directDOMAttributes =	{
-	width: {},
-	height: {},
-	usemap: {},
-	alt: {},
-	tooltip: {
-		domAttribute: "title"
+
+ImageWidget.prototype.attributesInfo = {
+	dom: {
+		width: {},
+		height: {},
+		usemap: {},
+		alt: {},
+		tooltip: {
+			domAttribute: "title"
+		}
 	},
-	class: {}
+	notUpdateable: [],
+	hasCustomRefresh: {
+		class: "updateDomNodeClasses"
+	}
 };
+
+
 
 ImageWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
@@ -98,11 +106,14 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	// Create the element and assign the attributes
 	var domNode = this.document.createElement(tag);
 	domNode.setAttribute("src",src);
+	if(this.imageClass) {
+		domNode.setAttribute("class",this.imageClass);
+	}
 	// Assign data- and direct DOM attributes that are not falsy
 	var nonBlankAttributes = {};
-	$tw.utils.each(Object.keys(ImageWidget.directDOMAttributes),function(name) {
+	$tw.utils.each(Object.keys(self.attributesInfo.dom),function(name) {
 		if(!!self.getAttribute(name)) {
-			nonBlankAttributes[name] = ImageWidget.directDOMAttributes[name];
+			nonBlankAttributes[name] = self.attributesInfo.dom[name];
 		}
 	});
 	this.assignAttributes(domNode,{
@@ -133,6 +144,7 @@ Compute the internal state of the widget
 ImageWidget.prototype.execute = function() {
 	//Get parameters not handled by assignAttributes call in render
 	this.imageSource = this.getAttribute("source");
+	this.imageClass = this.getAttribute("class");
 	this.lazyLoading = this.getAttribute("loading");
 };
 
@@ -140,27 +152,14 @@ ImageWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ImageWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		hasChangedAttributes = $tw.utils.count(changedAttributes) > 0,
-		alwaysRerenderAttributes = [
-			"source",
-			"loading",
-			"class"
-		],
-		attributesNeedRerender = alwaysRerenderAttributes.some(function(key) {return changedAttributes[key]});
-
-	if(changedTiddlers[this.imageSource] || attributesNeedRerender) {
+	const imageSource = this.getAttribute("source");
+	if(changedTiddlers[imageSource]) {
 		this.refreshSelf();
 		return true;
-	} else if(hasChangedAttributes) {
-		this.assignAttributes(this.domNodes[0], {
-			sourcePrefix: "data-",
-			destPrefix: "data-",
-			changedAttributes: changedAttributes,
-			additionalAttributesMap: ImageWidget.directDOMAttributes
-		});
+	} else {
+		//return super.refresh(changedTiddlers);
+		return Object.getPrototypeOf(ImageWidget.prototype).refresh.call(this,changedTiddlers);
 	}
-	return false;
 };
 
 exports.image = ImageWidget;

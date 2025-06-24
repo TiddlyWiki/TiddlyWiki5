@@ -22,20 +22,45 @@ Inherit from the base widget class
 */
 ButtonWidget.prototype = new Widget();
 
-ButtonWidget.directDOMAttributes =	{
-	style: {},
-	tooltip: {
-		domAttribute: "title"
+ButtonWidget.prototype.attributesInfo = {
+	dom: {
+		style: {},
+		tooltip: {
+			domAttribute: "title"
+		},
+		"aria-label": {},
+		role: {},
+		tabindex: {},
+		disabled: {
+			mapAttributeFn: function(widget) {
+				return widget.getAttribute("disabled","no") === "yes" ? true : undefined;
+			}
+		}		
 	},
-	"aria-label": {},
-	role: {},
-	tabindex: {},
-	disabled: {
-		mapAttributeFn: function(widget) {
-			return widget.getAttribute("disabled","no") === "yes" ? true : undefined;
-		}
+	notUpdateable: [
+			"actions",
+			"to",
+			"message",
+			"param",
+			"set",
+			"setTo",
+			"popup",
+			"hover",
+			"selectedClass",
+			"dragFilter",
+			"dragTiddler",
+			"popupAbsCoords",
+			"setTitle",
+			"setField",
+			"setIndex",
+			"popupTitle",
+			"default",
+			"disabled"
+		],
+	hasCustomRefresh: {
+		class: "updateDomNodeClasses"
 	}
-}
+};
 
 /*
 Render this widget into the DOM
@@ -71,11 +96,11 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		$tw.utils.pushTop(classes,"tc-popup-handle");
 	}
 	domNode.className = classes.join(" ");
-	// Assign data- and direct DOM attributes that are not empty or undefined
+	// Assign data- and direct DOM attributes that are not falsy
 	var nonBlankAttributes = {};
-	$tw.utils.each(Object.keys(ButtonWidget.directDOMAttributes),function(name) {
+	$tw.utils.each(Object.keys(self.attributesInfo.dom),function(name) {
 		if(!!self.getAttribute(name)) {
-			nonBlankAttributes[name] = ButtonWidget.directDOMAttributes[name];
+			nonBlankAttributes[name] = self.attributesInfo.dom[name];
 		}
 	});
 	this.assignAttributes(domNode,{
@@ -235,69 +260,21 @@ ButtonWidget.prototype.execute = function() {
 };
 
 ButtonWidget.prototype.updateDomNodeClasses = function() {
-	var domNodeClasses = this.domNode.className.split(" "),
-		oldClasses = this.class.split(" "),
-		newClasses;
-	this["class"] = this.getAttribute("class","");
-	newClasses = this.class.split(" ");
-	//Remove classes assigned from the old value of class attribute
-	$tw.utils.each(oldClasses,function(oldClass){
-		var i = domNodeClasses.indexOf(oldClass);
-		if(i !== -1) {
-			domNodeClasses.splice(i,1);
-		}
-	});
-	//Add new classes from updated class attribute.
-	$tw.utils.pushTop(domNodeClasses,newClasses);
-	this.domNode.className = domNodeClasses.join(" ");
+	let oldClasses = this.class.split(" ") || [];
+	this["class"] = this.getAttribute("class",[]);
+	$tw.utils.updateClasses(this.domNode,oldClasses,this["class"].split(" ")||[]);
 };
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		hasChangedAttributes = $tw.utils.count(changedAttributes) > 0,
-		alwaysRerenderAttributes = [
-			"actions",
-			"to",
-			"message",
-			"param",
-			"set",
-			"setTo",
-			"popup",
-			"hover",
-			"selectedClass",
-			"dragFilter",
-			"dragTiddler",
-			"popupAbsCoords",
-			"setTitle",
-			"setField",
-			"setIndex",
-			"popupTitle",
-			"default",
-			"disabled"
-		];
-
-	if(changedAttributes) {
-		var	attributesNeedRerender = alwaysRerenderAttributes.some(function(key) {return changedAttributes[key]});
-		if((this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || attributesNeedRerender) {
-			this.refreshSelf();
-			return true;
-		} else {
-			if(changedAttributes["class"]) {
-				this.updateDomNodeClasses();
-			}
-			this.assignAttributes(this.domNodes[0],{
-				changedAttributes: changedAttributes,
-				sourcePrefix: "data-",
-				destPrefix: "data-",
-				additionalAttributesMap: ButtonWidget.directDOMAttributes
-			});
-		}
+	if((this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle])) {
+		this.refreshSelf();
+		return true;
+	} else {
+		return Object.getPrototypeOf(Object.getPrototypeOf(this)).refresh.call(this,changedTiddlers);
 	}
-
-	return this.refreshChildren(changedTiddlers);
 };
 
 exports.button = ButtonWidget;
