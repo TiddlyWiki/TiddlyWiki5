@@ -475,10 +475,47 @@ Returns either:
 * the boolean true if there are pending sync tasks that aren't yet due
 * null if there's no pending sync tasks (just the next poll)
 */
+
 Syncer.prototype.chooseNextTask = function() {
+	var pending = this.getPendingTitles();
+
+	if(pending.savePending.length){
+		if(this.syncadaptor.saveTiddlers){
+			return new SaveAllTiddlersTask(this, pending.savePending);
+		} else {
+			return new SaveTiddlerTask(this, pending.savePending[0]);
+		}
+	}
+	if(pending.syncServer){
+		return new SyncFromServerTask(this);
+	}
+	if(pending.deletePending.length){
+		if(this.syncadaptor.deleteTiddlers){
+			return new DeleteAllTiddlersTask(this, pending.deletePending);
+		} else {
+			return new DeleteTiddlerTask(this, pending.deletePending[0]);
+		}
+	}
+	if(pending.loadPending.length){
+		if(this.syncadaptor.loadPending){
+			pending.loadPending.forEach(function(e){ delete this.titlesToBeLoaded[e]; });
+			return new LoadAllTiddlersTask(this, pending.loadPending);
+		} else {
+			delete this.titlesToBeLoaded[pending.loadPending[0]];
+			return new LoadTiddlerTask(this, pending.loadPending[0]);
+		}
+	}
+	return pending.havePending;
+};
+
+Syncer.prototype.getPendingTitles = function() {
 	var now = new Date(),
 		thresholdLastSaved = now - this.throttleInterval,
-		havePending = null;
+		havePending = null,
+		savePending = [],
+		syncServer = false,
+		deletePending = [],
+		loadPending = [];
 	// First we look for tiddlers that have been modified locally and need saving back to the server
 	var titles = this.getSyncedTiddlers();
 	for(var index=0; index<titles.length; index++) {
@@ -491,7 +528,8 @@ Syncer.prototype.chooseNextTask = function() {
 				isReadyToSave = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
 			if(hasChanged) {
 				if(isReadyToSave) {
-					return new SaveTiddlerTask(this,title);
+					// return new SaveTiddlerTask(this,title);
+					savePending.push(title);
 				} else {
 					havePending = true;
 				}
@@ -500,7 +538,8 @@ Syncer.prototype.chooseNextTask = function() {
 	}
 	// Second we check for an outstanding sync from server
 	if(this.forceSyncFromServer || (this.timestampLastSyncFromServer && (now.valueOf() >= (this.timestampLastSyncFromServer.valueOf() + this.pollTimerInterval)))) {
-		return new SyncFromServerTask(this);
+		// return new SyncFromServerTask(this);
+		syncServer = true;
 	}
 	// Third, we check tiddlers that are known from the server but not currently in the store, and so need deleting on the server
 	titles = Object.keys(this.tiddlerInfo);
@@ -509,17 +548,19 @@ Syncer.prototype.chooseNextTask = function() {
 		tiddlerInfo = this.tiddlerInfo[title];
 		tiddler = this.wiki.tiddlerExists(title) && this.wiki.getTiddler(title);
 		if(!tiddler) {
-			return new DeleteTiddlerTask(this,title);
+			// return new DeleteTiddlerTask(this,title);
+			deletePending.push(title);
 		}
 	}
 	// Finally, check for tiddlers that need loading
-	title = Object.keys(this.titlesToBeLoaded)[0];
-	if(title) {
-		delete this.titlesToBeLoaded[title];
-		return new LoadTiddlerTask(this,title);
-	}
+	// title = Object.keys(this.titlesToBeLoaded)[0];
+	// if(title) {
+	// 	delete this.titlesToBeLoaded[title];
+	// 	return new LoadTiddlerTask(this,title);
+	// }
+	loadPending.push(...Object.keys(this.titlesToBeLoaded));
 	// No tasks are ready now, but might be in the future
-	return havePending;
+	return {havePending: havePending, loadPending: loadPending, savePending: savePending, deletePending: deletePending, syncServer: syncServer};
 };
 
 function SaveTiddlerTask(syncer,title) {
@@ -560,6 +601,20 @@ SaveTiddlerTask.prototype.run = function(callback) {
 	}
 };
 
+function SaveAllTiddlersTask(syncer,titles) {
+	this.syncer = syncer;
+	this.titles = titles;
+	this.type = "save all";
+}
+
+SaveAllTiddlersTask.prototype.toString = function() {
+	return "SAVE ALL " + this.titles;
+}
+
+SaveAllTiddlersTask.prototype.run = function(callback) {
+	
+};
+
 function DeleteTiddlerTask(syncer,title) {
 	this.syncer = syncer;
 	this.title = title;
@@ -587,6 +642,20 @@ DeleteTiddlerTask.prototype.run = function(callback) {
 	});
 };
 
+function DeleteAllTiddlersTask(syncer,titles) {
+	this.syncer = syncer;
+	this.titles = titles;
+	this.type = "delete all";
+}
+
+DeleteAllTiddlersTask.prototype.toString = function() {
+	return "DELETE ALL " + this.title;
+}
+
+DeleteAllTiddlersTask.prototype.run = function(callback) {
+	
+};
+
 function LoadTiddlerTask(syncer,title) {
 	this.syncer = syncer;
 	this.title = title;
@@ -612,6 +681,20 @@ LoadTiddlerTask.prototype.run = function(callback) {
 		// Invoke the callback
 		callback(null);
 	});
+};
+
+function LoadAllTiddlersTask(syncer,titles) {
+	this.syncer = syncer;
+	this.titles = titles;
+	this.type = "load";
+}
+
+LoadAllTiddlersTask.prototype.toString = function() {
+	return "LOAD " + this.title;
+}
+
+LoadAllTiddlersTask.prototype.run = function(callback) {
+
 };
 
 function SyncFromServerTask(syncer) {
