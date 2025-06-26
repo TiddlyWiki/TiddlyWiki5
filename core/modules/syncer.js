@@ -612,7 +612,27 @@ SaveAllTiddlersTask.prototype.toString = function() {
 }
 
 SaveAllTiddlersTask.prototype.run = function(callback) {
-	
+	var self = this;
+	this.syncer.logger.log("Dispatching 'save all' task:",this.titles);
+	var changeCounts = this.titles.reduce(function (n,e) { n[e] = self.syncer.wiki.getChangeCount(e); return n; }, {});
+	var tiddlers = this.titles
+		.map(function(e){return self.syncer.wiki.tiddlerExists(e) && self.syncer.wiki.getTiddler(e);})
+		.filter(function(e){return e;});
+	if(!tiddlers.length) return void $tw.utils.nextTick(callback(null));
+	this.syncer.syncadaptor.saveTiddlers({
+		syncer: this.syncer,
+		tiddlers: tiddlers,
+		onNext: function(title,adaptorInfo,revision){
+			self.syncer.tiddlerInfo[title] = {
+				changeCount: changeCounts[title],
+				adaptorInfo: adaptorInfo,
+				revision: revision,
+				timestampLastSaved: new Date()
+			};
+		},
+		onDone: function(){callback(null);},
+		onError: function(err){callback(err);},
+	});
 };
 
 function DeleteTiddlerTask(syncer,title) {
@@ -649,11 +669,21 @@ function DeleteAllTiddlersTask(syncer,titles) {
 }
 
 DeleteAllTiddlersTask.prototype.toString = function() {
-	return "DELETE ALL " + this.title;
+	return "DELETE ALL " + this.titles;
 }
 
 DeleteAllTiddlersTask.prototype.run = function(callback) {
-	
+	var self = this;
+	this.syncer.logger.log("Dispatching 'delete all' task:",this.titles);
+	this.syncer.syncadaptor.deleteTiddlers({
+		syncer: this.syncer,
+		titles: this.titles,
+		onNext: function(title){
+			delete self.syncer.tiddlerInfo[title];
+		},
+		onDone: function(){callback(null);},
+		onError: function(err){callback(err);},
+	});
 };
 
 function LoadTiddlerTask(syncer,title) {
@@ -686,15 +716,25 @@ LoadTiddlerTask.prototype.run = function(callback) {
 function LoadAllTiddlersTask(syncer,titles) {
 	this.syncer = syncer;
 	this.titles = titles;
-	this.type = "load";
+	this.type = "load all";
 }
 
 LoadAllTiddlersTask.prototype.toString = function() {
-	return "LOAD " + this.title;
+	return "LOAD ALL" + this.titles;
 }
 
 LoadAllTiddlersTask.prototype.run = function(callback) {
-
+	var self = this;
+	this.syncer.logger.log("Dispatching 'load all' task:",this.titles);
+	this.syncer.syncadaptor.loadTiddlers({
+		syncer: this.syncer,
+		titles: this.titles,
+		onNext: function(tiddlerFields){
+			self.syncer.storeTiddler(tiddlerFields);
+		},
+		onDone: function(){callback(null);},
+		onError: function(err){callback(err);},
+	});
 };
 
 function SyncFromServerTask(syncer) {
