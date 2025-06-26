@@ -497,8 +497,9 @@ Syncer.prototype.chooseNextTask = function() {
 		}
 	}
 	if(pending.loadPending.length){
-		if(this.syncadaptor.loadPending){
-			pending.loadPending.forEach(function(e){ delete this.titlesToBeLoaded[e]; });
+		if(this.syncadaptor.loadTiddlers){
+			var self = this;
+			pending.loadPending.forEach(function(e){ delete self.titlesToBeLoaded[e]; });
 			return new LoadAllTiddlersTask(this, pending.loadPending);
 		} else {
 			delete this.titlesToBeLoaded[pending.loadPending[0]];
