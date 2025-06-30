@@ -1,9 +1,9 @@
-title: $:/core/ui/ControlPanel/SystemInformation
+title: $:/core/ui/ControlPanel/WikiInformation
 tags: $:/tags/ControlPanel/Info
-caption: <%if [[$:/language/ControlPanel/SystemInformation/Caption]is[shadow]] %>{{$:/language/ControlPanel/SystemInformation/Caption}}<%else%>System Information<%endif%>
-subtitle: <%if [[$:/language/ControlPanel/SystemInformation/Caption]is[shadow]] %>{{$:/language/ControlPanel/SystemInformation/Caption}}<%else%>System Information<%endif%>
+caption: <%if [[$:/language/ControlPanel/WikiInformation/Caption]is[shadow]] %>{{$:/language/ControlPanel/WikiInformation/Caption}}<%else%>Wiki Information<%endif%>
+subtitle: <%if [[$:/language/ControlPanel/WikiInformation/Caption]is[shadow]] %>{{$:/language/ControlPanel/WikiInformation/Caption}}<%else%>Wiki Information<%endif%>
 
-\procedure lingo-base() $:/language/ControlPanel/SystemInformation/
+\procedure lingo-base() $:/language/ControlPanel/WikiInformation/
 
 <!--
 A custom implementation of the lingo macro that works even if this tiddler has been copied to an earlier version of TiddlyWiki that doesn't include the necessary lingo tiddlers in the core.
@@ -24,7 +24,7 @@ This page summarises important information about this ~TiddlyWiki. It is designe
 \whitespace trim
 
 \procedure capture-item(label,value)
-<$action-setfield $tiddler=<<tempSystemInfo>> text={{{ [<tempSystemInfo>get[text]addsuffix<label>addsuffix[: ]addsuffix<value>addsuffix<crlf>] }}}/>
+<$action-setfield $tiddler=<<tempWikiInfo>> text={{{ [<tempWikiInfo>get[text]addsuffix<label>addsuffix[: ]addsuffix<value>addsuffix<crlf>] }}}/>
 \end capture-item
 
 \procedure capture-item-wikified(label,value)
@@ -37,7 +37,7 @@ This page summarises important information about this ~TiddlyWiki. It is designe
 </$wikify>
 \end capture-item-wikified
 
-\procedure capture-system-info(tempSystemInfo)
+\procedure capture-wiki-info(tempWikiInfo)
 <$transclude $variable="capture-item-wikified" label="TiddlyWiki Version" value="<<version>>"/>
 <$transclude $variable="capture-item" label="Current palette" value={{$:/palette}}/>
 <$transclude $variable="capture-item" label="Current theme" value={{$:/theme}}/>
@@ -45,43 +45,53 @@ This page summarises important information about this ~TiddlyWiki. It is designe
 <$transclude $variable="capture-item" label="Browser language setting" value={{$:/info/browser/language}}/>
 <$transclude $variable="capture-item" label="Default type for missing tiddlers" value={{$:/config/DefaultMissingType}}/>
 <$transclude $variable="capture-item" label="Plugins" value={{{ [has[plugin-type]sort[]] :filter[<currentTiddler>addprefix[$:/config/Plugins/Disabled/]get[text]else[no]!match[yes]] +[addprefix[  ]addprefix<crlf>join[]] }}}/>
-\end capture-system-info
+\end capture-wiki-info
 
-\procedure display-system-info-modal()
+\procedure template-header()
+<details><summary>Wiki Information</summary><pre><code>
+
+\end template-header
+
+\procedure template-footer()
+
+</code></pre></details>
+\end template-footer
+
+\procedure display-wiki-info-modal()
 <$let
-	tempSystemInfo="$:/temp/system-info"
+	tempWikiInfo="$:/temp/wiki-info"
 	crlf={{{ [charcode[13],[10]] }}}
 >
 	<$action-sendmessage
 		$message="tm-modal"
-		$param="$:/core/ui/ControlPanel/SystemInformation"
+		$param="$:/core/ui/ControlPanel/WikiInformation"
 		isModal="yes"
-		tempSystemInfo=<<tempSystemInfo>>
+		tempWikiInfo=<<tempWikiInfo>>
 	/>
-	<$action-deletetiddler $tiddler=<<tempSystemInfo>>/>
-	<$action-setfield $tiddler=<<tempSystemInfo>> text={{{ [[System Information]addsuffix<crlf>] }}}/>
+	<$action-deletetiddler $tiddler=<<tempWikiInfo>>/>
+	<$action-setfield $tiddler=<<tempWikiInfo>> text=<<template-header>>/>
 	<$transclude
-		$variable="capture-system-info"
-		tempSystemInfo=<<tempSystemInfo>>
+		$variable="capture-wiki-info"
+		tempWikiInfo=<<tempWikiInfo>>
 	/>
 </$let>
-\end display-system-info-modal
+\end display-wiki-info-modal
 
 \procedure story-content()
 <<lingo title:"Hint" mode:"block">>
 
 <$button>
-<<display-system-info-modal>>
-Click to generate system information report
+<<display-wiki-info-modal>>
+Click to generate wiki information report
 </$button>
 \end story-content
 
 \procedure modal-content()
 <p>
-	<$transclude $variable="copy-to-clipboard" src={{{ [<tempSystemInfo>get[text]] }}}/>
+	<$transclude $variable="copy-to-clipboard" src={{{ [<tempWikiInfo>get[text]] }}}/>
 </p>
 <p>
-	<$edit-text tiddler=<<tempSystemInfo>> tag="textarea" disabled="yes" class="tc-max-width"/>
+	<$edit-text tiddler=<<tempWikiInfo>> tag="textarea" disabled="yes" class="tc-max-width"/>
 </p>
 \end modal-content
 
