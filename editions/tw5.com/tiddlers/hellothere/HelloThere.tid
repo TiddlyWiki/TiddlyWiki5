@@ -6,7 +6,27 @@ tags: Welcome
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-!!.tc-hero-heading ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
+<h2
+style="
+	background: red;
+	padding: 0.5em;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 0.5em;
+	box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+	background-image: linear-gradient(90deg, rgb(34, 132, 224), rgb(95, 174, 248), rgb(34, 132, 224));
+">
+Make Something of Your Notes
+</h2>
+
+<h2
+class="tc-hero-heading"
+style="
+	text-align: center;
+">
+Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information
+</h2>
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
 

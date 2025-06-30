@@ -5,11 +5,11 @@ description: High contrast and unambiguous (dark version)
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 
-alert-background: #f00
+alert-background: #ff0000
 alert-border: <<colour background>>
 alert-highlight: <<colour foreground>>
-alert-muted-foreground: #800
-background: #000
+alert-muted-foreground: #880000
+background: #000000
 blockquote-bar: <<colour muted-foreground>>
 button-background: <<colour background>>
 button-foreground: <<colour foreground>>
@@ -17,24 +17,24 @@ button-border: <<colour foreground>>
 code-background: <<colour background>>
 code-border: <<colour foreground>>
 code-foreground: <<colour foreground>>
-dirty-indicator: #f00
-download-background: #080
+dirty-indicator: #ff0000
+download-background: #48ff48
 download-foreground: <<colour background>>
 dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
 dropdown-background: <<colour background>>
 dropdown-border: <<colour muted-foreground>>
-dropdown-tab-background-selected: <<colour foreground>>
-dropdown-tab-background: <<colour foreground>>
-dropzone-background: rgba(0,200,0,0.7)
+dropdown-tab-background-selected: #868686
+dropdown-tab-background: #515151
+dropzone-background: #1aff1a
 external-link-background-hover: inherit
 external-link-background-visited: inherit
 external-link-background: inherit
 external-link-foreground-hover: inherit
-external-link-foreground-visited: #00a
-external-link-foreground: #00e
+external-link-foreground-visited: #5353ff
+external-link-foreground: #9595ff
 footnote-target-background: #4c4c4c
-foreground: #fff
+foreground: #ffffff
 highlight-background: #ffff00
 highlight-foreground: #000000
 message-background: <<colour foreground>>
@@ -52,11 +52,11 @@ notification-border: <<colour foreground>>
 page-background: <<colour background>>
 pre-background: <<colour background>>
 pre-border: <<colour foreground>>
-primary: #00f
+primary: #8a8aff
 select-tag-background:
 select-tag-foreground:
 sidebar-button-foreground: <<colour foreground>>
-sidebar-controls-foreground-hover: <<colour background>>
+sidebar-controls-foreground-hover: #ffff00
 sidebar-controls-foreground: <<colour foreground>>
 sidebar-foreground-shadow: rgba(0,0,0, 0)
 sidebar-foreground: <<colour foreground>>
@@ -72,6 +72,10 @@ sidebar-tab-foreground: <<colour tab-foreground>>
 sidebar-tiddler-link-foreground-hover: <<colour foreground>>
 sidebar-tiddler-link-foreground: <<colour primary>>
 site-title-foreground: <<colour tiddler-title-foreground>>
+stability-stable: #00f400
+stability-experimental: #ffaf1c
+stability-deprecated: #ff2b2b
+stability-legacy: #ceceff
 static-alert-foreground: #aaaaaa
 tab-background-selected: <<colour background>>
 tab-background: <<colour foreground>>
@@ -81,15 +85,15 @@ tab-divider: <<colour foreground>>
 tab-foreground-selected: <<colour foreground>>
 tab-foreground: <<colour background>>
 table-border: #dddddd
-table-footer-background: #a8a8a8
-table-header-background: #f0f0f0
-tag-background: #fff
-tag-foreground: #000
+table-footer-background: #444444
+table-header-background: #444444
+tag-background: #ffffff
+tag-foreground: #000000
 testcase-accent-level-1: #144a8c
 tiddler-background: <<colour background>>
 tiddler-border: <<colour foreground>>
 tiddler-controls-foreground-hover: #ddd
-tiddler-controls-foreground-selected: #fdd
+tiddler-controls-foreground-selected: #ae0000
 tiddler-controls-foreground: <<colour foreground>>
 tiddler-editor-background: <<colour background>>
 tiddler-editor-border-image: <<colour foreground>>
@@ -103,14 +107,15 @@ tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: <<colour foreground>>
 tiddler-title-foreground: <<colour foreground>>
-toolbar-new-button: 
-toolbar-options-button: 
-toolbar-save-button: 
-toolbar-info-button: 
-toolbar-edit-button: 
-toolbar-close-button: 
-toolbar-delete-button: 
-toolbar-cancel-button: 
-toolbar-done-button: 
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
 untagged-background: <<colour foreground>>
 very-muted-foreground: #888888
+network-activity-foreground: <<colour primary>>

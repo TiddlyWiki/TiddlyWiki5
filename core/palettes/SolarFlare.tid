@@ -5,24 +5,24 @@ description: Warm, relaxing earth colours
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 
-: Background Tones
+# Background Tones
 
 base03: #002b36
 base02: #073642
 
-: Content Tones
+# Content Tones
 
 base01: #586e75
 base00: #657b83
 base0: #839496
 base1: #93a1a1
 
-: Background Tones
+# Background Tones
 
 base2: #eee8d5
 base3: #fdf6e3
 
-: Accent Colors
+# Accent Colors
 
 yellow: #b58900
 orange: #cb4b16
@@ -33,7 +33,7 @@ blue: #268bd2
 cyan: #2aa198
 green: #859900
 
-: Additional Tones (RA)
+# Additional Tones (RA)
 
 base10: #c0c4bb
 violet-muted: #7c81b0
@@ -45,9 +45,9 @@ red-hot: #ff2222
 blue-hot: #2298ee
 green-hot: #98ee22
 
-: Palette
+# Palette
 
-: Do not use colour macro for background and foreground
+# Do not use colour macro for background and foreground
 background: #fdf6e3
     download-foreground: <<colour background>>
     dragger-foreground: <<colour background>>
@@ -68,24 +68,28 @@ foreground: #657b83
     sidebar-button-foreground: <<colour foreground>>
     sidebar-controls-foreground: <<colour foreground>>
     sidebar-foreground: <<colour foreground>>
-: base03
-: base02
-: base01
+# base03
+# base02
+# base01
     alert-muted-foreground: <<colour base01>>
-: base00
+# base00
     code-foreground: <<colour base00>>
     message-foreground: <<colour base00>>
     tag-foreground: <<colour base00>>
-: base0
+# base0
     sidebar-tiddler-link-foreground: <<colour base0>>
-: base1
+# base1
     muted-foreground: <<colour base1>>
         blockquote-bar: <<colour muted-foreground>>
         dropdown-border: <<colour muted-foreground>>
         sidebar-muted-foreground: <<colour muted-foreground>>
         tiddler-title-foreground: <<colour muted-foreground>>
             site-title-foreground: <<colour tiddler-title-foreground>>
-: base2
+# base2
+    stability-deprecated: <<colour red>>
+    stability-experimental: <<colour yellow>>
+    stability-legacy: <<colour blue-hot>>
+    stability-stable: <<colour green>>
     modal-footer-background: <<colour base2>>
     page-background: <<colour base2>>
         modal-backdrop: <<colour page-background>>
@@ -99,31 +103,31 @@ foreground: #657b83
     tag-background: <<colour base2>>
     tiddler-editor-background: <<colour base2>>
     tiddler-info-background: <<colour base2>>
-    tiddler-info-tab-background: <<colour base2>>
+    tiddler-info-tab-background: <<colour tiddler-info-border>>
     tab-background: <<colour base2>>
-        dropdown-tab-background: <<colour tab-background>>
-: base3
+dropdown-tab-background: <<colour tab-background>>
+# base3
     alert-background: <<colour base3>>
     message-background: <<colour base3>>
-: yellow
-: orange
-: red
-: magenta
+# yellow
+# orange
+# red
+# magenta
     alert-highlight: <<colour magenta>>
-: violet
+# violet
     external-link-foreground: <<colour violet>>
-: blue
-: cyan
-: green
-: base10
-    tiddler-controls-foreground: <<colour base10>>
-: violet-muted
-    external-link-foreground-visited: <<colour violet-muted>>
-: blue-muted
-    primary: <<colour blue-muted>>
-        download-background: <<colour primary>>
-        tiddler-link-foreground: <<colour primary>>
 
+# blue
+# cyan
+# green
+# base10
+    tiddler-controls-foreground: <<colour base10>>
+# violet-muted
+    external-link-foreground-visited: <<colour violet-muted>>
+# blue-muted
+    primary: <<colour blue-muted>>
+        download-background: #5bb83d
+        tiddler-link-foreground: <<colour primary>>
 alert-border: #b99e2f
 diff-delete-background: <<colour red>>
 diff-delete-foreground: <<colour background>>
@@ -134,7 +138,7 @@ diff-insert-foreground: <<colour background>>
 diff-invisible-background: <<colour yellow>>
 diff-invisible-foreground: <<colour background>>
 dirty-indicator: #ff0000
-dropzone-background: rgba(0,200,0,0.7)
+dropzone-background: #008800
 external-link-background-hover: inherit
 external-link-background-visited: inherit
 external-link-background: inherit
@@ -146,14 +150,10 @@ message-border: #cfd6e6
 modal-border: #999999
 select-tag-background:
 select-tag-foreground:
-sidebar-controls-foreground-hover:
+sidebar-controls-foreground-hover: #000000
 sidebar-muted-foreground-hover:
 sidebar-tab-background: #ded8c5
 sidebar-tiddler-link-foreground-hover:
-stability-deprecated: <<colour red>>
-stability-experimental: <<colour yellow>>
-stability-legacy: <<colour blue>>
-stability-stable: <<colour green>>
 static-alert-foreground: #aaaaaa
 tab-border: #cccccc
     modal-footer-border: <<colour tab-border>>
@@ -186,3 +186,4 @@ toolbar-cancel-button:
 toolbar-done-button:
 untagged-background: #999999
 very-muted-foreground: #888888
+network-activity-foreground: <<colour primary>>

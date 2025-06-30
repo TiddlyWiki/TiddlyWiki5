@@ -131,15 +131,14 @@ Saving/GitService/Gitea/Caption: Gitea Saver
 Saving/GitService/Gitea/Password: Persönlicher "Zugriffs-Token" (siehe: Gitea’s web Seite: `Settings | Applications | Generate New Token`)
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
 Saving/TiddlySpot/BackupDir: Verzeichnis für das "Backup"
-Saving/TiddlySpot/ControlPanel: ~TiddlySpot Control Panel
+Saving/TiddlySpot/ControlPanel: ~TiddlyHost Control Panel
 Saving/TiddlySpot/Backups: "Backups"
-Saving/TiddlySpot/Caption: Speichern auf ~TiddlySpot
-Saving/TiddlySpot/Description: Diese Einstellungen sind nur für [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]], und kompatible Server aktiv! [[Diese Beschreibung|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] enthält weitergehende Informationen. 
+Saving/TiddlySpot/Caption: Speichern auf ~TiddlyHost
+Saving/TiddlySpot/Description: Diese Einstellungen sind nur für [[TiddlyHost|https://tiddlyhost.com]], und kompatible Server aktiv! [[Diese Beschreibung|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] enthält weitergehende Informationen.
 Saving/TiddlySpot/Filename: Dateiname für den "Upload"
-Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Heading: ~TiddlyHost
 Saving/TiddlySpot/Hint: //Die Standard-Server-URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server-URL' verändert werden. zB: http://example.com/store.php//
 Saving/TiddlySpot/Password: Passwort
-Saving/TiddlySpot/ReadOnly: ~TiddlySpot wurde durch https://tiddlyhost.com ersetzt. Neue Wikis können nur noch unter ~TiddlyHost erstellt werden. Bestehende Projekte können mit bekanntem Passwort gespeichert werden. Genaue Informationen finden Sie unter: http://tiddlyspot.com/ 
 Saving/TiddlySpot/ServerURL: Server-URL
 Saving/TiddlySpot/UploadDir: Verzeichnis für den "Upload"
 Saving/TiddlySpot/UserName: Name des Wikis
@@ -187,9 +186,11 @@ Settings/ToolbarButtons/Hint: Standard Toolbar Button Erscheinungsbild:
 Settings/ToolbarButtons/Icons/Description: Icon anzeigen
 Settings/ToolbarButtons/Text/Description: Text anzeigen
 Settings/DefaultSidebarTab/Caption: Standard Sidebar Tab
-Settings/DefaultSidebarTab/Hint: Definition, welcher "Sidebar Tab" standardmäßig aktiv ist.
+Settings/DefaultSidebarTab/Hint: Definition, welcher "Sidebar Tab" standardmäßig aktiv ist
 Settings/DefaultMoreSidebarTab/Caption: Standard "Mehr Sidebar Tab"
-Settings/DefaultMoreSidebarTab/Hint: Definition, welcher "Mehr Sidebar Tab" standardmäßig aktiv ist.
+Settings/DefaultMoreSidebarTab/Hint: Definition, welcher "Mehr Sidebar Tab" standardmäßig aktiv ist
+Settings/DefaultTiddlerInfoTab/Caption: Standard Tiddler Info Tab
+Settings/DefaultTiddlerInfoTab/Hint: Definition, welcher Tab in der Tiddler Info Section standardmäßig aktiv ist
 Settings/LinkToBehaviour/Caption: Tiddler Öffnen
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation bei Klicks //innerhalb// der Story
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation bei Klicks //außerhalb// der Story
@@ -247,3 +248,7 @@ ViewTemplateBody/Caption: View Template Text
 ViewTemplateBody/Hint: Diese Filter-Kaskade wird vom "View Template" dazu verwendet, um die Vorlage für den Tiddler Textbereich auszuwählen.
 ViewTemplateTitle/Caption: View Template Titel
 ViewTemplateTitle/Hint: Diese Filter-Kaskade wird vom "View Template" dazu verwendet, um die Vorlage für den Tiddler Titel auszuwählen.
+ViewTemplateSubtitle/Caption: View Template Subtitle
+ViewTemplateSubtitle/Hint: Diese Filter-Kaskade wird vom "View Template" dazu verwendet, um den "Sub-Titel" für den Tidddler Kopf auszuwählen. 
+ViewTemplateTags/Caption: View Template Tags
+ViewTemplateTags/Hint: Diese Filter-Kaskade wird vom "View Template" dazu verwendet, um das Template für den Tag auszuwählen

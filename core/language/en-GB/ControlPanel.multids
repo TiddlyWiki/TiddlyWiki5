@@ -131,15 +131,14 @@ Saving/GitService/Gitea/Caption: Gitea Saver
 Saving/GitService/Gitea/Password: Personal access token for API (via Gitea’s web interface: `Settings | Applications | Generate New Token`)
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
 Saving/TiddlySpot/BackupDir: Backup Directory
-Saving/TiddlySpot/ControlPanel: ~TiddlySpot Control Panel
+Saving/TiddlySpot/ControlPanel: ~TiddlyHost Control Panel
 Saving/TiddlySpot/Backups: Backups
-Saving/TiddlySpot/Caption: ~TiddlySpot Saver
-Saving/TiddlySpot/Description: These settings are only used when saving to [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]], or a compatible remote server. See [[here|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] for information on ~TiddlySpot and ~TiddlyHost saving configuration.
+Saving/TiddlySpot/Caption: ~TiddlyHost Saver
+Saving/TiddlySpot/Description: These settings are only used when saving to [[TiddlyHost|https://tiddlyhost.com]] or a compatible remote server. See [[here|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] for information on ~TiddlyHost saving configuration
 Saving/TiddlySpot/Filename: Upload Filename
-Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address, e.g. `http://example.com/store.php`.//
+Saving/TiddlySpot/Heading: ~TiddlyHost
+Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/` and can be changed to use a custom server address, e.g. `http://example.com/store.php`.//
 Saving/TiddlySpot/Password: Password
-Saving/TiddlySpot/ReadOnly: Note that [[TiddlySpot|http://tiddlyspot.com]] no longer allows the creation of new sites. For new sites, you can use [[TiddlyHost|https://tiddlyhost.com]], a new hosting service that replaces ~TiddlySpot.
 Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: Upload Directory
 Saving/TiddlySpot/UserName: Wiki Name
@@ -190,6 +189,8 @@ Settings/DefaultSidebarTab/Caption: Default Sidebar Tab
 Settings/DefaultSidebarTab/Hint: Specify which sidebar tab is displayed by default
 Settings/DefaultMoreSidebarTab/Caption: Default More Sidebar Tab
 Settings/DefaultMoreSidebarTab/Hint: Specify which More sidebar tab is displayed by default
+Settings/DefaultTiddlerInfoTab/Caption: Default Tiddler Info Tab
+Settings/DefaultTiddlerInfoTab/Hint: Specify which tab is displayed by default when tiddler info panel is opened
 Settings/LinkToBehaviour/Caption: Tiddler Opening Behaviour
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation from //within// the story river
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation from //outside// the story river
