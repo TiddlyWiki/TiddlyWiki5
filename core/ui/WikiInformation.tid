@@ -44,6 +44,19 @@ This page summarises important information about this ~TiddlyWiki. It is designe
 <$transclude $variable="capture-item" label="Current layout" value={{$:/layout}}/>
 <$transclude $variable="capture-item" label="Browser language setting" value={{$:/info/browser/language}}/>
 <$transclude $variable="capture-item" label="Default type for missing tiddlers" value={{$:/config/DefaultMissingType}}/>
+<$transclude $variable="capture-item" label="Auto save setting" value={{$:/config/AutoSave}}/>
+<$transclude $variable="capture-item" label="Code wrapping setting" value={{$:/themes/tiddlywiki/vanilla/options/codewrapping}}/>
+<$transclude $variable="capture-item" label="Sticky titles setting" value={{$:/themes/tiddlywiki/vanilla/options/stickytitles}}/>
+<$transclude $variable="capture-item" label="Sidebar layout setting" value={{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}}/>
+<$transclude $variable="capture-item" label="Auto focus field setting for new tiddlers" value={{$:/config/AutoFocus}}/>
+<$transclude $variable="capture-item" label="Current storyview setting" value={{$:/view}}/>
+<$transclude $variable="capture-item" label="Toolbar text setting" value={{$:/config/Toolbar/Text}}/>
+<$transclude $variable="capture-item" label="Toolbar icon setting" value={{$:/config/Toolbar/Icons}}/>
+<$transclude $variable="capture-item" label="Button class setting" value={{$:/config/Toolbar/ButtonClass}}/>
+<$transclude $variable="capture-item" label="Navigation address bar setting" value={{$:/config/Navigation/UpdateAddressBar}}/>
+<$transclude $variable="capture-item" label="Tiddler opening behaviour setting for navigations from outside the story river" value={{$:/config/Navigation/openLinkFromOutsideRiver}}/>
+<$transclude $variable="capture-item" label="Tiddler opening behaviour setting for navigations from within the story river" value={{$:/config/Navigation/openLinkFromInsideRiver}}/>
+<$transclude $variable="capture-item" label="CamelCase linking setting" value={{$:/config/WikiParserRules/Inline/wikilink}}/>
 <$transclude $variable="capture-item" label="Plugins" value={{{ [has[plugin-type]sort[]] :filter[<currentTiddler>addprefix[$:/config/Plugins/Disabled/]get[text]else[no]!match[yes]] +[addprefix[  ]addprefix<crlf>join[]] }}}/>
 \end capture-wiki-info
 
