@@ -156,8 +156,8 @@ Settings/DefaultSidebarTab/Caption: 默认侧边栏页签
 Settings/DefaultSidebarTab/Hint: 指定默认显示的侧边栏页签
 Settings/DefaultMoreSidebarTab/Caption: 更多侧边栏的默认页签
 Settings/DefaultMoreSidebarTab/Hint: 指定默认显示的更多侧栏页签
-Settings/DefaultTidderInfoTab/Caption: 默认条目信息标签页
-Settings/DefaultTidderInfoTab/Caption: 指定条目信息面板开启时默认显示的标签页
+Settings/DefaultTiddlerInfoTab/Caption: 默认条目信息标签页
+Settings/DefaultTiddlerInfoTab/Hint: 指定条目信息面板开启时默认显示的标签页
 Settings/EditorToolbar/Caption: 编辑器工具栏
 Settings/EditorToolbar/Hint: 启用或禁用编辑器工具栏︰
 Settings/EditorToolbar/Description: 显示编辑器工具栏
