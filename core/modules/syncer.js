@@ -139,11 +139,16 @@ function Syncer(options) {
 			self.handleLazyLoadEvent(title);
 		});		
 	}
+	if(this.syncadaptor.subscribe) this.syncadaptor.subscribe(function(){
+		self.syncFromServer();
+	});
+
 	// Get the login status
 	this.getStatus(function(err,isLoggedIn) {
 		// Do a sync from the server
 		self.syncFromServer();
 	});
+
 }
 
 /*
@@ -615,10 +620,10 @@ SaveAllTiddlersTask.prototype.toString = function() {
 SaveAllTiddlersTask.prototype.run = function(callback) {
 	var self = this;
 	this.syncer.logger.log("Dispatching 'save all' task:",this.titles);
-	var changeCounts = this.titles.reduce(function (n,e) { n[e] = self.syncer.wiki.getChangeCount(e); return n; }, {});
+	var changeCounts = this.titles.reduce(function (r,title) { r[title] = self.syncer.wiki.getChangeCount(title); return r; }, {});
 	var tiddlers = this.titles
-		.map(function(e){return self.syncer.wiki.tiddlerExists(e) && self.syncer.wiki.getTiddler(e);})
-		.filter(function(e){return e;});
+		.map(function(title){return self.syncer.wiki.tiddlerExists(title) && self.syncer.wiki.getTiddler(title);})
+		.filter(function(title){return title;});
 	if(!tiddlers.length) return void $tw.utils.nextTick(callback(null));
 	this.syncer.syncadaptor.saveTiddlers({
 		syncer: this.syncer,
