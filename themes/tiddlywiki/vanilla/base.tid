@@ -96,6 +96,12 @@ html button {
 	fill: <<colour button-foreground>>;
 	background: <<colour button-background>>;
 	border-color: <<colour button-border>>;
+	cursor: pointer;
+}
+
+button:disabled {
+	cursor: default;
+	color: <<colour muted-foreground>>;
 }
 
 button:disabled svg {
