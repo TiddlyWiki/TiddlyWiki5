@@ -2,6 +2,14 @@ title: The Great TiddlyWiki Interview Project (2010)
 
 The "Great TiddlyWiki Interview Project" was launched in 2010. The idea was to ask people about their use of TiddlyWiki. We used TiddlySpace to allow users to write their responses in their own spaces, and then we gathered their answers in a separate space. The interview ran until 2013 when TiddlySpace was closed down.
 
+From the original announcement:
+
+> Welcome to the great TiddlyWiki viral interview project.
+>
+> For many people that use it there is a distinct discovery moment when TiddlyWiki explodes in their brain. For others, it is a challenge to get their heads around TiddlyWiki at all
+>
+> This project explores how people think about TiddlyWiki by collecting together responses to a set of questions about it.
+
 Here are the questions we asked and the responses we received.
 
 <$let stateBase=<<qualify "$:/state/interview-2010/">>>
