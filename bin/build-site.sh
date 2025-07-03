@@ -163,7 +163,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/tiddlywiki-surveys \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all-external-js surveys.html text/plain \
+	--build index \
 	|| exit 1
 
 # /share.html				Custom edition for sharing via the URL

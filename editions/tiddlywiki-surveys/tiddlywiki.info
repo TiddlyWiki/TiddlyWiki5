@@ -5,6 +5,6 @@
 	],
 	"build": {
 		"index": [
-			"--render","$:/core/save/all","index.html","text/plain"]
+			"--render","$:/core/save/all","surveys.html","text/plain"]
 	}
 }
