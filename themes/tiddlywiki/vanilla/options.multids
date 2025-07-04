@@ -1,5 +1,5 @@
 title: $:/themes/tiddlywiki/vanilla/options/
 
 stickytitles: no
-sidebarlayout: fixed-fluid
+sidebarlayout: fluid-fixed
 codewrapping: pre-wrap
