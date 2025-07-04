@@ -38,10 +38,11 @@ Here are the questions we asked and the responses we received.
 							</$link>
 						</h2>
 						<div class="interview-2010-answer">
-						<h3>
-							//<$view tiddler=<<answer>> field="modified" format="date" template="DDth MMM YYYY" />//
-						</h3>
-						<$transclude $tiddler=<<answer>> mode="block" />
+							<h3>
+								//<$view tiddler=<<answer>> field="modified" format="date" template="DDth MMM YYYY" />//
+							</h3>
+							<$transclude $tiddler=<<answer>> mode="block" />
+						</div>
 					</$list>
 				<%endif%>
 			</$let>
