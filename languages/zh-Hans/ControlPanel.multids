@@ -94,7 +94,7 @@ Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安装
 Plugins/Stability/Deprecated: 过时
 Plugins/Stability/Experimental: 实验性
-Plugins/Stability/Legacy: 老旧
+Plugins/Stability/Legacy: 陈旧
 Plugins/Stability/Stable: 稳定
 Plugins/Themes/Caption: 布局主题
 Plugins/Themes/Hint: 布局主题插件
@@ -155,6 +155,8 @@ Settings/DefaultSidebarTab/Caption: 默认侧边栏页签
 Settings/DefaultSidebarTab/Hint: 指定默认显示的侧边栏页签
 Settings/DefaultMoreSidebarTab/Caption: 更多侧边栏的默认页签
 Settings/DefaultMoreSidebarTab/Hint: 指定默认显示的更多侧栏页签
+Settings/DefaultTiddlerInfoTab/Caption: 默认条目信息标签页
+Settings/DefaultTiddlerInfoTab/Hint: 指定条目信息面板开启时默认显示的标签页
 Settings/EditorToolbar/Caption: 编辑器工具栏
 Settings/EditorToolbar/Hint: 启用或禁用编辑器工具栏︰
 Settings/EditorToolbar/Description: 显示编辑器工具栏
@@ -206,10 +208,10 @@ Settings/TitleLinks/No/Description: 不显示条目标题为链接
 Settings/TitleLinks/Yes/Description: 显示条目标题为链接
 SocialCard/Caption: 社交媒体卡
 SocialCard/Domain/Prompt: 显示链接的网域名称（例如 ''tiddlywiki.com''）
-SocialCard/Hint: 社交和消息服务使用此信息来显示在线托管时指向此 TiddlyWiki 的链接的预览卡
-SocialCard/PreviewUrl/Prompt: 用于预览此 TiddlyWiki 图像的完整网址
+SocialCard/Hint: 社交和消息服务使用此信息来显示在线托管时指向此 ~TiddlyWiki 的链接的预览卡
+SocialCard/PreviewUrl/Prompt: 用于预览此 ~TiddlyWiki 图像的完整网址
 SocialCard/PreviewUrl/Preview: 预览图像：
-SocialCard/Url/Prompt: 此 TiddlyWiki 的完整网址
+SocialCard/Url/Prompt: 此 ~TiddlyWiki 的完整网址
 StoryTiddler/Caption: 故事条目
 StoryTiddler/Hint: 此规则级联用于动态选择模板，以便在故事河中显示条目。
 StoryView/Caption: 视图模式
