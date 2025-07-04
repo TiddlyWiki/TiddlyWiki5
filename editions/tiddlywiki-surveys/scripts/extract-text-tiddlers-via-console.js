@@ -22,7 +22,7 @@ for(const child of document.querySelector("#tiddlerDisplay").childNodes) {
 	const titlePrefix = "2010 - ";
 	const title = child.getAttribute("tiddler");
 	if(title !== "HelloThere") {
-		questions.push(title);
+		questions.push(titlePrefix + title);
 		const childTitles = [];
 		const children = title === "What do you think of the name TiddlyWiki and the term \"tiddler\"?" ? child.querySelectorAll("div.content > div.viewer > div.resultsArea > ul > li") : child.querySelectorAll("div.resultsArea > ul > li");
 		for(const answer of children) {
