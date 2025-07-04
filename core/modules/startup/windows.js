@@ -6,10 +6,7 @@ module-type: startup
 Setup root widget handlers for the messages concerned with opening external browser windows
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -110,5 +107,3 @@ exports.startup = function() {
 	// Close open windows when unloading main window
 	$tw.addUnloadTask(closeAllWindows);
 };
-
-})();

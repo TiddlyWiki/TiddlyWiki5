@@ -92,6 +92,10 @@ Plugins/PluginWillRequireReload: （需要重新加载）
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安装
+Plugins/Stability/Deprecated: 过时
+Plugins/Stability/Experimental: 实验性
+Plugins/Stability/Legacy: 老旧
+Plugins/Stability/Stable: 稳定
 Plugins/Themes/Caption: 布局主题
 Plugins/Themes/Hint: 布局主题插件
 Plugins/Update/Caption: 更新
@@ -129,14 +133,13 @@ Saving/GitService/Gitea/Password: 个人存取令牌的 API (通过 Gitea 的 We
 Saving/TiddlySpot/Advanced/Heading: 高级设置
 Saving/TiddlySpot/BackupDir: 备份文件夹
 Saving/TiddlySpot/Backups: 备份
-Saving/TiddlySpot/Caption: ~TiddlySpot 保存模块
-Saving/TiddlySpot/ControlPanel: ~TiddlySpot 控制台
-Saving/TiddlySpot/Description: 这些设置只适用于保存到 [[TiddlySpot|http://tiddlyspot.com]]、[[TiddlyHost|https://tiddlyhost.com]]，或兼容的远程服务器。有关 ~TiddlySpot 和 ~TiddlyHost 的保存设置信息，请参阅[[此处|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]]。
+Saving/TiddlySpot/Caption: ~TiddlyHost 保存模块
+Saving/TiddlySpot/ControlPanel: ~TiddlyHost 控制台
+Saving/TiddlySpot/Description: 这些设置只适用于保存到 [[TiddlyHost|https://tiddlyhost.com]]，或兼容的远程服务器。有关 ~TiddlyHost 的保存设置信息，请参阅[[此处|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]]
 Saving/TiddlySpot/Filename: 上传文件名
-Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改为定制之服务器网址，例如 `http://example.com/store.php`。//
+Saving/TiddlySpot/Heading: ~TiddlyHost
+Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyhost.com/`，可改为定制之服务器网址，例如 `http://example.com/store.php`。//
 Saving/TiddlySpot/Password: 密码
-Saving/TiddlySpot/ReadOnly: 请注意，[[TiddlySpot|http://tiddlyspot.com]] 不再允许创建新网站。对于新网站，您可以使用 [[TiddlyHost|https://tiddlyhost.com]]，一个新的取代 ~TiddlySpot 的讬管服务 。
 Saving/TiddlySpot/ServerURL: 服务器网址
 Saving/TiddlySpot/UploadDir: 上传文件夹
 Saving/TiddlySpot/UserName: 用户
@@ -186,6 +189,8 @@ Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: 以 引用链
 Settings/PerformanceInstrumentation/Caption: 性能检测
 Settings/PerformanceInstrumentation/Hint: 在浏览器的开发人员控制台，显示性能统计数据。需要重新加载才能生效。
 Settings/PerformanceInstrumentation/Description: 启用性能检测
+Settings/RecentLimit/Caption: “最近”标签页限制
+Settings/RecentLimit/Hint: 侧边栏“最近”标签页显示的最多条目数
 Settings/ToolbarButtonStyle/Caption: 工具栏按钮样式
 Settings/ToolbarButtonStyle/Hint: 选择工具栏按钮的样式:
 Settings/ToolbarButtonStyle/Styles/Borderless: 无边框

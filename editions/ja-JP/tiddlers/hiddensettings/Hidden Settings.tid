@@ -1,0 +1,13 @@
+created: 20150619162223882
+modified: 20241116102451779
+original-modified: 20150619162405141
+tags: [[Customise TiddlyWiki]]
+title: Hidden Settings
+ja-title: 隠し設定
+type: text/vnd.tiddlywiki
+
+TiddlyWikiの有益な構成設定は[[コントロールパネル|$:/ControlPanel]]に表示されますが、より高度な設定の一部にはユーザーインターフェイスがありません。その代わり、基礎となる構成Tiddlerを直接編集します。
+
+空のTiddlyWikiでこれらの設定を変更するには、個々の設定TiddlerへのリンクをこのWikiから自分のWikiにドラッグします。
+
+<<list-links "[tag[Hidden Settings]]">>

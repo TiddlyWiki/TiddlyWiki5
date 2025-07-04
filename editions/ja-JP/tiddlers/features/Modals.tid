@@ -1,0 +1,26 @@
+created: 20160107225427489
+modified: 20241215105515572
+original-modified: 20211221102625141
+tags: Features
+title: Modals
+ja-title: モーダル
+type: text/vnd.tiddlywiki
+
+モーダル(または"ウィザード")は、メインのTiddlyWikiウィンドウをフェードアウトして、ユーザーが明示的に閉じる必要がある独立したTiddlerを表示します。
+
+表示されるTiddlerには、モーダルをカスタマイズするために使用される次のオプションフィールドを含めることができます:
+
+|!フィールド |!説明 |
+|footer|モーダルのフッターテキスト|
+|subtitle|`h3`HTMLタグ内に表示されるモーダルのサブタイトルテキスト|
+|class|モーダルラッパーに適用する追加クラス|
+|help|フッターの左側に"Help"というテキストとともに表示されるオプションの外部リンク|
+|mask-closable|''yes''または''true''に設定すると、マスク(モーダルの外側の領域)がクリックされたときにモーダルダイアログが閉じます|
+
+フッターとサブタイトルのフィールドはプレーンテキストに限定されず、ウィジェットやトランスクルージョンなどのWikiテキスト機能も使用できることに注意してください。
+
+モーダルは[[WidgetMessage: tm-modal]]で表示されます。
+
+<$button message="tm-modal" param="SampleWizard">デモモーダルを開く</$button>
+
+<<.tip """<$macrocall $name=".from-version" version="5.2.4"/> "mask-closable"フィールドが使用できるようになりました""">>

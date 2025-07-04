@@ -1,0 +1,15 @@
+created: 20190903192324700
+modified: 20241125111612397
+original-modified: 20190903192324700
+tags: [[Hidden Settings]]
+title: Hidden Setting: Sync Logging
+ja-title: 隠し設定: ログの同期
+type: text/vnd.tiddlywiki
+
+[[Syncadaptor|https://tiddlywiki.com/dev/#Syncadaptor]]がブラウザのデベロッパーコンソールに情報を記録するかどうかを指定します。
+
+デフォルトは`yes`です。ログ記録を無効にするには`no`に設定します。
+
+変更を有効にするには再起動が必要です。
+
+$:/config/SyncLogging

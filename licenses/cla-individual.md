@@ -595,3 +595,27 @@ Val Packett, @valpackett, 2024/07/26
 JC John Sese Cuneta, @techmagus, 2024/10/07
 
 @zorrox1024, 2024/10/20
+
+John Robinette, @jrbntt, 2024/11/25
+
+@DesignThinkerer, 2024/12/02
+
+Thomas E Tuoti, @well-noted, 2024/12/16
+
+@opn, 2025/01/04
+
+J. Ryan Stinnett, @jryans, 2025/01/04
+
+Galen Huntington, @galenhuntington, 2025/01/19
+
+@Rhys-T, 2025/01/23
+
+@Rumman157, 2025/03/17
+
+@bob.jansen@cultconv.com, 2025/03/22
+
+Matthew Salmon, @matthewsalmon, 2025/04/24
+
+@jbaldus, 2025/05/28
+
+Wu Peiyuan, @s793016, 2025/06/10

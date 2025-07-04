@@ -7,7 +7,8 @@ This is a doubly-linked indexed list intended for manipulation, particularly
 pushTop, which it does with significantly better performance than an array.
 
 \*/
-(function(){
+
+"use strict";
 
 function LinkedList() {
 	this.clear();
@@ -204,5 +205,3 @@ LLMap.prototype = {
 };
 
 exports.LinkedList = LinkedList;
-
-})();

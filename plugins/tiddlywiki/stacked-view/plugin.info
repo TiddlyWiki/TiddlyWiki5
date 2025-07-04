@@ -3,5 +3,5 @@
 	"name": "Stacked View",
 	"description": "Stacked card storyview",
 	"list": "readme",
-	"stability": "STABILITY_1_EXPERIMENTAL"
+	"stability": "STABILITY_2_STABLE"
 }

@@ -11,10 +11,7 @@ Wiki text rule for inline-level transclusion. For example:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "transcludeinline";
@@ -83,5 +80,3 @@ exports.parse = function() {
 		}
 	}
 };
-
-})();

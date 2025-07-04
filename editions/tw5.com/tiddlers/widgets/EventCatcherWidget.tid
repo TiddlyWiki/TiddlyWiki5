@@ -44,8 +44,8 @@ The following variables are made available to the actions:
 |!Variables |!Description |
 |`dom-*` |All DOM attributes of the node matching the given selector are made available as variables, with the prefix `dom-` |
 |`modifier` |The [[modifier Variable]] contains the Modifier Key held during the event (can be "normal", "ctrl", "shift", "alt" or combinations thereof) |
-|`event-mousebutton` |The mouse button (if any) used to trigger the event (can be "left", "right" or "middle"). Note that not all event types support the mousebutton property |
-|`event-type` |The type property of the JavaScript event |
+|`event-mousebutton` |The mouse button (if any) used to trigger the event (can be "left", "right" or "middle"). Note that not all event types support the mousebutton property.  <<.infoBox """This property only guarantees to indicate which buttons are pressed during events caused by pressing or releasing one or multiple buttons. As such, it is not reliable for events such as mouseenter, mouseleave, mouseover, mouseout, or mousemove. More details at: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button""">> |
+|`event-type` |The type property of the JavaScript event.  |
 |`event-detail-*` |Any properties in the detail attribute of the event are made available with the prefix `event-detail-` |
 |`tv-popup-coords` |A relative co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the DOM node matching the selector where the event originated (see [[Coordinate Systems]] for more information) |
 |`tv-popup-abs-coords` |<<.from-version "5.2.4">> An absolute co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the DOM node matching the selector where the event originated (see [[Coordinate Systems]] for more information) |
