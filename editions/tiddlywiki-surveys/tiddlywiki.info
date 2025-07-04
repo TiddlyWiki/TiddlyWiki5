@@ -1,0 +1,10 @@
+{
+	"themes": [
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/vanilla"
+	],
+	"build": {
+		"index": [
+			"--render","$:/core/save/all","surveys.html","text/plain"]
+	}
+}
