@@ -1,0 +1,5 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/BoldEmphasis
+type: text/vnd.tiddlywiki
+
+This is ''bold'' text
