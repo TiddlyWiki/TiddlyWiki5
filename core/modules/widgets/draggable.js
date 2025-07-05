@@ -91,19 +91,9 @@ DraggableWidget.prototype.execute = function() {
 
 
 DraggableWidget.prototype.updateDomNodeClasses = function() {
-	var domNodeClasses = this.domNodes[0].className.split(" "),
-		oldClasses = this.draggableClasses.split(" ");
+	let oldClasses = this.draggableClasses.split(" ");
 	this.draggableClasses = this.getAttribute("class");
-	//Remove classes assigned from the old value of class attribute
-	$tw.utils.each(oldClasses,function(oldClass){
-		var i = domNodeClasses.indexOf(oldClass);
-		if(i !== -1) {
-			domNodeClasses.splice(i,1);
-		}
-	});
-	//Add new classes from updated class attribute.
-	$tw.utils.pushTop(domNodeClasses,this.draggableClasses);
-	this.domNodes[0].setAttribute("class",domNodeClasses.join(" "))
+	$tw.utils.updateClasses(this.domNodes[0],oldClasses,this.draggableClasses.split(" ")||[]);
 }
 
 /*
