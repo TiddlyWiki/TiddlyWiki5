@@ -1,15 +1,28 @@
 title: $:/language/Import/
 
-Imported/Hint: Τα ακόλουθα tiddler έχουν εισαχθεί:
-Listing/Cancel/Caption: Άκυρο
+Editor/Import/Heading: Κάνε εισαγωγή τις εικόνες και πρόσθεσέ τις στον επεξεργαστή.
+Listing/Cancel/Warning: Θέλεις να ακυρώσεις την εισαγωγή;
 Listing/Hint: Αυτά τα tiddlers είναι έτοιμα για εισαγωγή:
-Listing/Import/Caption: Εισαγωγή
-Listing/Select/Caption: Επιλογή
-Listing/Status/Caption: Κατάσταση
-Listing/Title/Caption: Τίτλος
-Upgrader/Plugins/Suppressed/Incompatible: Μπλοκαρισμένο ασύμβατο, ή παρωχημένο πρόσθετο
-Upgrader/Plugins/Suppressed/Version: Μπλοκαρισμένο πρόσθετο (επειδή το εισερχόμενο <<incoming>>  είναι παλαιότερο από το υπάρχον <<existing>>)
-Upgrader/Plugins/Upgraded: Αναβαθμισμένο πρόσθετο από <<incoming>> σε <<upgraded>>
-Upgrader/State/Suppressed: Μπλοκαρισμένο προσωρινά tiddler κατάστασης
-Upgrader/System/Suppressed: Μπλοκαρισμένο tiddler συστήματος
-Upgrader/ThemeTweaks/Created: Απόδημη μικρή αλλαγή θέματος από <$text text=<<from>>/>
+Listing/Preview: Προεπισκόπιση:
+Listing/Preview/Diff: Διαφορά
+Listing/Preview/DiffFields: Διαφορά (Πεδία)
+Listing/Preview/Fields: Πεδία
+Listing/Preview/Text: Κείμενο
+Listing/Preview/TextRaw: Κείμενο (ακατέργαστο)
+Listing/Rename/CancelRename: Άκυρο
+Listing/Rename/ConfirmRename: Μετονομασία tiddler
+Listing/Rename/OverwriteWarning: Υπάρχει ήδη ένα tiddler με αυτόν τον τίτλο.
+Listing/Rename/Prompt: Μετονομασία σε:
+Listing/Rename/Tooltip: Μετονομασία tiddler πριν την εισαγωγή
+Upgrader/Plugins/Suppressed/Incompatible: Μπλοκαρίστηκε ασύμβατο ή παρωχημένο πρόσθετο.
+Upgrader/Plugins/Suppressed/Version: Μπλοκαρίστηκε το πρόσθετο (επειδή το εισερχόμενο <<incoming>>  δεν είναι πιο καινούριο από το υπάρχον <<existing>>)
+Upgrader/Plugins/Upgraded: Αναβαθμίστηκε το πρόσθετο από <<incoming>> σε <<upgraded>>
+Upgrader/State/Suppressed: Μπλοκαρίστηκε προσωρινό tiddler κατάστασης.
+Upgrader/System/Alert: Πρόκειται να εισάγεις ένα tiddler που θα αντικαταστήσει tiddler του πυρήνα (core). Αυτό δεν συνιστάται, καθώς μπορεί να προκαλέσει αστάθεια στο σύστημα.
+Upgrader/System/Disabled: Απενεργοποιήθηκε tiddler συστήματος.
+Upgrader/System/Suppressed: Μπλοκαρίστηκε tiddler συστήματος.
+Upgrader/System/Warning: Tiddler του πυρήνα.
+Upgrader/ThemeTweaks/Created: Μεταφέρθηκε μικροαλλαγή θέματος από <$text text=<<from>>/>
+Upgrader/Tiddler/Disabled: Απενεργοποιήθηκε tiddler.
+Upgrader/Tiddler/Selected: Επιλέχτηκε το tiddler.
+Upgrader/Tiddler/Unselected: Από-επιλέχτηκε το tiddler.
