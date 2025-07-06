@@ -1,0 +1,122 @@
+title: $:/core/ui/ControlPanel/WikiInformation
+tags: $:/tags/ControlPanel/Info
+caption: <%if [[$:/language/ControlPanel/WikiInformation/Caption]is[shadow]] %>{{$:/language/ControlPanel/WikiInformation/Caption}}<%else%>Wiki Information<%endif%>
+subtitle: <%if [[$:/language/ControlPanel/WikiInformation/Caption]is[shadow]] %>{{$:/language/ControlPanel/WikiInformation/Caption}}<%else%>Wiki Information<%endif%>
+
+\procedure lingo-base() $:/language/ControlPanel/WikiInformation/
+
+<!--
+A custom implementation of the lingo macro that works even if this tiddler has been copied to an earlier version of TiddlyWiki that doesn't include the necessary lingo tiddlers in the core.
+-->
+
+\procedure intrinsic-lingo-Hint()
+This page summarises high level information about the configuration of this ~TiddlyWiki. It is designed to enable users to quickly share relevant aspects of the configuration of their ~TiddlyWiki with others, for example when seeking help in one of the forums. No private or personal information is included, and nothing is shared without being explicitly copied and pasted elsewhere
+\end intrinsic-lingo-Hint
+
+\procedure intrinsic-lingo-Drag/Caption()
+Drag this link to copy this tool to another wiki
+\end intrinsic-lingo-Drag/Caption
+
+\procedure lingo(title,mode:"inline")
+<%if [<title>addprefix<lingo-base>is[shadow]] %>
+	<$transclude $tiddler={{{ [<title>addprefix<lingo-base>] }}} $mode=<<mode>>/>
+<%else%>
+	<$transclude $variable={{{ [<title>addprefix[intrinsic-lingo-]] }}} $mode=<<mode>>/>
+<%endif%>
+\end lingo
+
+\whitespace trim
+
+\procedure capture-item(label,value)
+<$action-setfield $tiddler=<<tempWikiInfo>> text={{{ [<tempWikiInfo>get[text]addsuffix<label>addsuffix[: ]addsuffix<value>addsuffix<crlf>] }}}/>
+\end capture-item
+
+\procedure capture-item-wikified(label,value)
+<$wikify name="text" text=<<value>> mode="inline">
+	<$transclude
+		$variable="capture-item"
+		label=<<label>>
+		value=<<text>>
+	/>
+</$wikify>
+\end capture-item-wikified
+
+\procedure capture-wiki-info(tempWikiInfo)
+<$transclude $variable="capture-item-wikified" label="TiddlyWiki Version" value="<<version>>"/>
+<$transclude $variable="capture-item" label="Current palette" value={{$:/palette}}/>
+<$transclude $variable="capture-item" label="Current theme" value={{$:/theme}}/>
+<$transclude $variable="capture-item" label="Current layout" value={{$:/layout}}/>
+<$transclude $variable="capture-item" label="Browser language setting" value={{$:/info/browser/language}}/>
+<$transclude $variable="capture-item" label="Default type for missing tiddlers" value={{$:/config/DefaultMissingType}}/>
+<$transclude $variable="capture-item" label="Auto save setting" value={{$:/config/AutoSave}}/>
+<$transclude $variable="capture-item" label="Code wrapping setting" value={{$:/themes/tiddlywiki/vanilla/options/codewrapping}}/>
+<$transclude $variable="capture-item" label="Sticky titles setting" value={{$:/themes/tiddlywiki/vanilla/options/stickytitles}}/>
+<$transclude $variable="capture-item" label="Sidebar layout setting" value={{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}}/>
+<$transclude $variable="capture-item" label="Auto focus field setting for new tiddlers" value={{$:/config/AutoFocus}}/>
+<$transclude $variable="capture-item" label="Current storyview setting" value={{$:/view}}/>
+<$transclude $variable="capture-item" label="Toolbar text setting" value={{$:/config/Toolbar/Text}}/>
+<$transclude $variable="capture-item" label="Toolbar icon setting" value={{$:/config/Toolbar/Icons}}/>
+<$transclude $variable="capture-item" label="Button class setting" value={{$:/config/Toolbar/ButtonClass}}/>
+<$transclude $variable="capture-item" label="Navigation address bar setting" value={{$:/config/Navigation/UpdateAddressBar}}/>
+<$transclude $variable="capture-item" label="Tiddler opening behaviour setting for navigations from outside the story river" value={{$:/config/Navigation/openLinkFromOutsideRiver}}/>
+<$transclude $variable="capture-item" label="Tiddler opening behaviour setting for navigations from within the story river" value={{$:/config/Navigation/openLinkFromInsideRiver}}/>
+<$transclude $variable="capture-item" label="CamelCase linking setting" value={{$:/config/WikiParserRules/Inline/wikilink}}/>
+<$transclude $variable="capture-item" label="Keyboard shortcuts that have been customised" value={{{ [all[tiddlers]prefix[$:/config/shortcuts]] +[join[,]] }}}/>
+<$transclude $variable="capture-item" label="Disabled plugins" value={{{ [all[tiddlers]prefix[$:/config/Plugins/Disabled/]] :filter[{!!text}match[yes]] :map[<currentTiddler>removeprefix[$:/config/Plugins/Disabled/]] +[join[,]] }}}/>
+<$transclude $variable="capture-item" label="Plugins" value={{{ [has[plugin-type]sort[]] :filter[<currentTiddler>addprefix[$:/config/Plugins/Disabled/]get[text]else[no]!match[yes]] :map[{!!version}addprefix[ - ]addprefix<currentTiddler>] +[addprefix[  ]addprefix<crlf>join[]] }}}/>
+\end capture-wiki-info
+
+\procedure template-header()
+<details><summary>Wiki Information</summary><pre><code>
+
+\end template-header
+
+\procedure template-footer()
+
+</code></pre></details>
+\end template-footer
+
+\procedure display-wiki-info-modal()
+<$let
+	tempWikiInfo="$:/temp/wiki-info"
+	crlf={{{ [charcode[13],[10]] }}}
+>
+	<$action-sendmessage
+		$message="tm-modal"
+		$param="$:/core/ui/ControlPanel/WikiInformation"
+		isModal="yes"
+		tempWikiInfo=<<tempWikiInfo>>
+	/>
+	<$action-deletetiddler $tiddler=<<tempWikiInfo>>/>
+	<$action-setfield $tiddler=<<tempWikiInfo>> text=<<template-header>>/>
+	<$transclude
+		$variable="capture-wiki-info"
+		tempWikiInfo=<<tempWikiInfo>>
+	/>
+	<$action-setfield $tiddler=<<tempWikiInfo>> text={{{ [<tempWikiInfo>get[text]addsuffix<template-footer>] }}}/>
+</$let>
+\end display-wiki-info-modal
+
+\procedure story-content()
+<<lingo title:"Hint" mode:"block">>
+
+<$button>
+<<display-wiki-info-modal>>
+Click to generate wiki information report
+</$button>
+
+<$link to=<<thisTiddler>>>
+<<lingo title:"Drag/Caption" mode:"inline">>
+</$link>
+\end story-content
+
+\procedure modal-content()
+<p>
+	<$transclude $variable="copy-to-clipboard" src={{{ [<tempWikiInfo>get[text]] }}}/>
+</p>
+<p>
+	<$edit-text tiddler=<<tempWikiInfo>> tag="textarea" disabled="yes" class="tc-max-width"/>
+</p>
+\end modal-content
+
+<$transclude $variable={{{ [<isModal>match[yes]then[modal-content]else[story-content]] }}} $mode="block"/>
