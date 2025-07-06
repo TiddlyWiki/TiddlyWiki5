@@ -10,7 +10,7 @@ A custom implementation of the lingo macro that works even if this tiddler has b
 -->
 
 \procedure intrinsic-lingo-Hint()
-This page summarises important information about this ~TiddlyWiki. It is designed to enable users to quickly share relevant aspects of the configuration of their ~TiddlyWiki with others, for example when seeking help in one of the forums. No private or personal information is included, and nothing is shared without you explicitly copying and pasting the information into a forum post or email
+This page summarises high level information about the configuration of this ~TiddlyWiki. It is designed to enable users to quickly share relevant aspects of the configuration of their ~TiddlyWiki with others, for example when seeking help in one of the forums. No private or personal information is included, and nothing is shared without being explicitly copied and pasted elsewhere
 \end intrinsic-lingo-Hint
 
 \procedure intrinsic-lingo-Drag/Caption()
