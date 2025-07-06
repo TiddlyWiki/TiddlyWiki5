@@ -13,6 +13,10 @@ A custom implementation of the lingo macro that works even if this tiddler has b
 This page summarises important information about this ~TiddlyWiki. It is designed to enable users to quickly share relevant aspects of the configuration of their ~TiddlyWiki with others, for example when seeking help in one of the forums. No private or personal information is included, and nothing is shared without you explicitly copying and pasting the information into a forum post or email
 \end intrinsic-lingo-Hint
 
+\procedure intrinsic-lingo-Drag/Caption()
+Drag this link to copy this tool to another wiki
+\end intrinsic-lingo-Drag/Caption
+
 \procedure lingo(title,mode:"inline")
 <%if [<title>addprefix<lingo-base>is[shadow]] %>
 	<$transclude $tiddler={{{ [<title>addprefix<lingo-base>] }}} $mode=<<mode>>/>
@@ -89,6 +93,7 @@ This page summarises important information about this ~TiddlyWiki. It is designe
 		$variable="capture-wiki-info"
 		tempWikiInfo=<<tempWikiInfo>>
 	/>
+	<$action-setfield $tiddler=<<tempWikiInfo>> text={{{ [<tempWikiInfo>get[text]addsuffix<template-footer>] }}}/>
 </$let>
 \end display-wiki-info-modal
 
@@ -99,6 +104,10 @@ This page summarises important information about this ~TiddlyWiki. It is designe
 <<display-wiki-info-modal>>
 Click to generate wiki information report
 </$button>
+
+<$link to=<<thisTiddler>>>
+<<lingo title:"Drag/Caption" mode:"inline">>
+</$link>
 \end story-content
 
 \procedure modal-content()
