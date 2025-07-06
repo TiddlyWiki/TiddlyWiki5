@@ -8,7 +8,13 @@ description: Under development
 
 //[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.6...master]]//
 
-This is a minor bug fix release before introducing the major changes planned for v5.4.0. Those changes do involve some minor breaks in backwards compatibility so this release is intended to be a stable point for users before they upgrade.
+This is a minor bug fix release before introducing the major changes planned for v5.4.0. The changes planned for that release do involve some minor breaks in backwards compatibility so this release is intended to be a stable point for users before they upgrade.
+
+! New Features
+
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9130">> The new ~TiddlyWiki Surveys edition at https://tiddlywiki.com/surveys.html is a home for surveys and interviews with the TiddlyWiki community. There will be a new 2025 survey soon, but in the meantime you can read the results of the Great Viral ~TiddlyWiki Interview Project from 2010.
+
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9099">>The new Wiki Information tab in the control panel provides a convenient way to view and copy key configuration information about your wiki. This is useful for debugging and support purposes. Find it in $:/ControlPanel under the "Info" tab.
 
 ! Translation improvements
 
@@ -16,6 +22,10 @@ This is a minor bug fix release before introducing the major changes planned for
 * French
 * German
 * Japanese
+
+! Plugin Improvements
+
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9114">> [[CodeMirror Plugin]] to ~CodeMirror version to 5.65.19
 
 ! Widget Improvements
 
