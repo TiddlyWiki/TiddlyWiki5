@@ -105,7 +105,7 @@ Drag this link to copy this tool to another wiki
 Click to generate wiki information report
 </$button>
 
-<$link to=<<thisTiddler>>>
+<$link to="$:/core/ui/ControlPanel/WikiInformation">
 <<lingo title:"Drag/Caption" mode:"inline">>
 </$link>
 \end story-content
