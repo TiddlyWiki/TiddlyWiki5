@@ -1,0 +1,24 @@
+created: 20210415104647817
+modified: 20210423113404597
+tags: 
+title: landing page home
+
+<section id="home" class="text-gray-600 body-font">
+        <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+          <div id="transclusion-item" class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0 lg:p-5 sm:hidden mb:block lg:block xl:block 2xl:block ">
+						{{TiddlyWiki||$:/core/ui/ViewTemplate}}
+          </div>
+          <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+						<h2 class="mb-1 text-xs font-medium tracking-widest text-black title-font text-green-500">TiddlyWiki</h2>
+            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900 font-semibold mt-0">Looking for a customizable
+              <br class="hidden lg:inline-block">notetaking platform?
+            </h1>
+            <p class="mb-8 leading-relaxed"><strong>TiddlyWiki</strong> is designed to fit around your brain, helping you deal with the things that won't fit. The fundamental idea is that information is more useful and reusable if we cut it up into the smallest semantically meaningful chunks: <strong>Tiddlers</strong>. Tiddlers use a <strong>WikiText</strong> notation that concisely represents a wide range of text formatting and hypertext features. TiddlyWiki allows you to organise and retrieve your notes in ways that conform to your personal thought patterns, rather than chain you into one preset organisational structure.</p>
+            <div class="flex justify-center items-center gap-x-4">
+              <a href="#get-started" class="inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">Get started</a>
+							<$button class="inline-flex items-center text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg" set="$:/layout" setTo="$:/core/ui/PageTemplate">Try it out!</$button>
+							
+            </div>
+          </div>
+        </div>
+      </section>
