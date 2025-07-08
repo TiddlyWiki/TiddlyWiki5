@@ -11,6 +11,7 @@ An optimized override of the core text widget that automatically linkifies the t
 
 var TITLE_TARGET_FILTER = "$:/config/Freelinks/TargetFilter";
 var WORD_BOUNDARY_TIDDLER = "$:/config/Freelinks/WordBoundary";
+var LOCALE_CONFIG_TIDDLER = "$:/config/Freelinks/Locale";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
 	LinkWidget = require("$:/core/modules/widgets/link.js").link,
@@ -200,29 +201,34 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 		};
 	}
 	
-	var filteredTitles = [];
-	for(var i = 0; i < titles.length; i++) {
-		var title = titles[i];
-		if(title && title.length > 0 && title.substring(0,3) !== "$:/") {
-			filteredTitles.push(title);
-		}
-	}
-	
-	var sortedTitles = filteredTitles.sort(function(a,b) {
-		var lenDiff = b.length - a.length;
-		return lenDiff !== 0 ? lenDiff : a.localeCompare(b, 'zh', {sensitivity: 'base'});
-	});
+	// Get locale configuration for sorting
+	var locale = self.wiki.getTiddlerText(LOCALE_CONFIG_TIDDLER, "en");
 	
 	var validTitles = [];
 	var ac = new AhoCorasick();
 	
+	// Process titles in a single pass to avoid duplication
+	for(var i = 0; i < titles.length; i++) {
+		var title = titles[i];
+		if(title && title.length > 0 && title.substring(0,3) !== "$:/") {
+			var escapedTitle = escapeRegExp(title);
+			if(escapedTitle) {
+				validTitles.push(title);
+			}
+		}
+	}
+	
+	// Sort by length (descending) then alphabetically
+	// Longer titles are prioritized to avoid partial matches
+	var sortedTitles = validTitles.sort(function(a,b) {
+		var lenDiff = b.length - a.length;
+		return lenDiff !== 0 ? lenDiff : a.localeCompare(b, locale, {sensitivity: 'base'});
+	});
+	
+	// Build Aho-Corasick automaton
 	for(var i = 0; i < sortedTitles.length; i++) {
 		var title = sortedTitles[i];
-		var escapedTitle = escapeRegExp(title);
-		if(escapedTitle) {
-			validTitles.push(title);
-			ac.addPattern(ignoreCase ? title.toLowerCase() : title, validTitles.length - 1);
-		}
+		ac.addPattern(ignoreCase ? title.toLowerCase() : title, i);
 	}
 	
 	try {
@@ -235,7 +241,7 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 	}
 	
 	return {
-		titles: validTitles,
+		titles: sortedTitles,
 		ac: ac
 	};
 }
@@ -271,7 +277,7 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 	}
 	
 	if(changedAttributes.text || titlesHaveChanged || 
-	   (changedTiddlers && changedTiddlers[WORD_BOUNDARY_TIDDLER])) {
+	   (changedTiddlers && (changedTiddlers[WORD_BOUNDARY_TIDDLER] || changedTiddlers[LOCALE_CONFIG_TIDDLER]))) {
 		if(titlesHaveChanged) {
 			var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}).trim() === "yes";
 			var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
