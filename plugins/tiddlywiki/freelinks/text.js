@@ -11,7 +11,6 @@ An optimized override of the core text widget that automatically linkifies the t
 
 var TITLE_TARGET_FILTER = "$:/config/Freelinks/TargetFilter";
 var WORD_BOUNDARY_TIDDLER = "$:/config/Freelinks/WordBoundary";
-var LOCALE_CONFIG_TIDDLER = "$:/config/Freelinks/Locale";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
 	LinkWidget = require("$:/core/modules/widgets/link.js").link,
@@ -201,9 +200,6 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 		};
 	}
 	
-	// Get locale configuration for sorting
-	var locale = self.wiki.getTiddlerText(LOCALE_CONFIG_TIDDLER, "en");
-	
 	var validTitles = [];
 	var ac = new AhoCorasick();
 	
@@ -219,10 +215,10 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 	}
 	
 	// Sort by length (descending) then alphabetically
-	// Longer titles are prioritized to avoid partial matches
+	// Longer titles are prioritized to avoid partial matches (e.g., "JavaScript" before "Java")
 	var sortedTitles = validTitles.sort(function(a,b) {
 		var lenDiff = b.length - a.length;
-		return lenDiff !== 0 ? lenDiff : a.localeCompare(b, locale, {sensitivity: 'base'});
+		return lenDiff !== 0 ? lenDiff : (a < b ? -1 : a > b ? 1 : 0);
 	});
 	
 	// Build Aho-Corasick automaton
@@ -277,7 +273,7 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 	}
 	
 	if(changedAttributes.text || titlesHaveChanged || 
-	   (changedTiddlers && (changedTiddlers[WORD_BOUNDARY_TIDDLER] || changedTiddlers[LOCALE_CONFIG_TIDDLER]))) {
+	   (changedTiddlers && changedTiddlers[WORD_BOUNDARY_TIDDLER])) {
 		if(titlesHaveChanged) {
 			var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}).trim() === "yes";
 			var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
