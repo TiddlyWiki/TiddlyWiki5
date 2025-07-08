@@ -1,0 +1,19 @@
+created: 20241202011409888
+description: Accurate word count
+tags: $:/tags/wiki-test-spec
+title: TestCases/WikifyWidget/WordCount/Success
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+If you use wikify, you can calculate an accurate word count.
++
+title: Output
+
+<$wikify name="lorem" text={{lorem}} output="text">Word count = <$count filter="[<lorem>split[ ]!is[blank]]"/></$wikify>
++
+title: lorem
+text: <$list filter="[range[1],[3]]"><$text text=" word "/></$list>
++
+title: ExpectedResult
+text: <p>Word count = 3</p>

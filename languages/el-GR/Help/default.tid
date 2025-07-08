@@ -12,11 +12,13 @@ $:/language/Help/$(command)$
 
 <ul>
 <$list filter="[commands[]sort[title]]" variable="command">
-<li><$link to=<<commandTitle>>><$macrocall $name="command" $type="text/plain" $output="text/plain"/></$link>: <$transclude tiddler=<<commandTitle>> field="description"/></li>
+<li><$link to=<<commandTitle>>><$macrocall $name="command" $type="text/plain" $output="text/plain"/></$link>:
+&#32;
+<$transclude tiddler=<<commandTitle>> field="description"/></li>
 </$list>
 </ul>
 
-Για να βρείτε αναλυτική βοήθεια για μία συγκεκριμένη εντολή:
+Για να βρείς αναλυτική βοήθεια για μία συγκεκριμένη εντολή:
 
 ```
 tiddlywiki --help <εντολή>

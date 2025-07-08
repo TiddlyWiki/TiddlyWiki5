@@ -9,10 +9,7 @@ Works with any server which accepts a PUT request
 to the current URL, such as a WebDAV server.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -20,7 +17,7 @@ Retrieve ETag if available
 */
 var retrieveETag = function(self) {
 	var headers = {
-		Accept: "*/*;charset=UTF-8"
+		Accept: "*/*"
 	};
 	$tw.utils.httpRequest({
 		url: self.uri(),
@@ -136,5 +133,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new PutSaver(wiki);
 };
-
-})();

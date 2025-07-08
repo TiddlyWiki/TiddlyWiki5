@@ -6,10 +6,7 @@ module-type: utils
 Various static utility functions.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
@@ -330,16 +327,18 @@ exports.formatTitleString = function(template,options) {
 			}]
 		];
 	while(t.length){
-		var matchString = "";
+		var matchString = "",
+			found = false;
 		$tw.utils.each(matches, function(m) {
 			var match = m[0].exec(t);
 			if(match) {
+				found = true;
 				matchString = m[1].call(null,match);
 				t = t.substr(match[0].length);
 				return false;
 			}
 		});
-		if(matchString) {
+		if(found) {
 			result += matchString;
 		} else {
 			result += t.charAt(0);
@@ -1036,5 +1035,3 @@ exports.makeCompareFunction = function(type,options) {
 		};
 	return (types[type] || types[options.defaultType] || types.number);
 };
-
-})();

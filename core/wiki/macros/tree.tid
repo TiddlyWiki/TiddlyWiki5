@@ -1,62 +1,58 @@
 title: $:/core/macros/tree
 tags: $:/tags/Macro
 
-\define leaf-link(full-title,chunk,separator: "/")
-<$link to=<<__full-title__>>><$text text=<<__chunk__>>/></$link>
+\procedure leaf-link(full-title,chunk,separator: "/")
+<$link to=<<full-title>>><$text text=<<chunk>>/></$link>
 \end
 
-\define leaf-node(prefix,chunk)
 \whitespace trim
+\procedure leaf-node(prefix,chunk)
 <li>
-<$list filter="[<__prefix__>addsuffix<__chunk__>is[shadow]] [<__prefix__>addsuffix<__chunk__>is[tiddler]]" variable="full-title">
-<$list filter="[<full-title>removeprefix<__prefix__>]" variable="chunk">
-<span>{{$:/core/images/file}}</span>&#32;<$macrocall $name="leaf-link" full-title=<<full-title>> chunk=<<chunk>>/>
+<$list filter="[<prefix>addsuffix<chunk>is[shadow]] [<prefix>addsuffix<chunk>is[tiddler]]" variable="full-title">
+<$list filter="[<full-title>removeprefix<prefix>]" variable="chunk">
+<span class="tc-tiny-gap-right">{{$:/core/images/file}}</span><$transclude $variable="leaf-link" full-title=<<full-title>> chunk=<<chunk>>/>
 </$list>
 </$list>
 </li>
 \end
 
-\define branch-node(prefix,chunk,separator: "/")
-\whitespace trim
+\procedure branch-node(prefix,chunk,separator: "/")
 <li>
-<$set name="reveal-state" value={{{ [[$:/state/tree/]addsuffix<__prefix__>addsuffix<__chunk__>] }}}>
+<$set name="reveal-state" value={{{ [[$:/state/tree/]addsuffix<prefix>addsuffix<chunk>] }}}>
 <$reveal type="nomatch" stateTitle=<<reveal-state>> text="show">
 <$button setTitle=<<reveal-state>> setTo="show" class="tc-btn-invisible">
-{{$:/core/images/folder}}&#32;<$text text=<<__chunk__>>/>
+{{$:/core/images/folder}}&#32;<$text text=<<chunk>>/>
 </$button>
 </$reveal>
 <$reveal type="match" stateTitle=<<reveal-state>> text="show">
 <$button setTitle=<<reveal-state>> setTo="hide" class="tc-btn-invisible">
-{{$:/core/images/folder}}&#32;<$text text=<<__chunk__>>/>
+{{$:/core/images/folder}}&#32;<$text text=<<chunk>>/>
 </$button>
 </$reveal>
-&#32;
-<span>(<$count filter="[all[shadows+tiddlers]removeprefix<__prefix__>removeprefix<__chunk__>] -[<__prefix__>addsuffix<__chunk__>]"/>)</span>
+<span class="tc-tiny-gap-left">(<$count filter="[all[shadows+tiddlers]removeprefix<prefix>removeprefix<chunk>] -[<prefix>addsuffix<chunk>]"/>)</span>
 <$reveal type="match" stateTitle=<<reveal-state>> text="show">
-<$macrocall $name="tree-node" prefix={{{ [<__prefix__>addsuffix<__chunk__>] }}} separator=<<__separator__>>/>
+<$transclude $variable="tree-node" prefix={{{ [<prefix>addsuffix<chunk>] }}} separator=<<separator>>/>
 </$reveal>
 </$set>
 </li>
 \end
 
-\define tree-node(prefix,separator: "/")
-\whitespace trim
+\procedure tree-node(prefix,separator: "/")
 <ol>
-<$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore<__separator__>sort[]!suffix<__separator__>]" variable="chunk">
-<$macrocall $name="leaf-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>>/>
+<$list filter="[all[shadows+tiddlers]removeprefix<prefix>splitbefore<separator>sort[]!suffix<separator>]" variable="chunk">
+<$transclude $variable="leaf-node" prefix=<<prefix>> chunk=<<chunk>> separator=<<separator>>/>
 </$list>
-<$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore<__separator__>sort[]suffix<__separator__>]" variable="chunk">
-<$macrocall $name="branch-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>>/>
+<$list filter="[all[shadows+tiddlers]removeprefix<prefix>splitbefore<separator>sort[]suffix<separator>]" variable="chunk">
+<$transclude $variable="branch-node" prefix=<<prefix>> chunk=<<chunk>> separator=<<separator>>/>
 </$list>
 </ol>
 \end
 
-\define tree(prefix: "$:/",separator: "/")
-\whitespace trim
+\procedure tree(prefix: "$:/",separator: "/")
 <div class="tc-tree">
-<span><$text text=<<__prefix__>>/></span>
+<span><$text text=<<prefix>>/></span>
 <div>
-<$macrocall $name="tree-node" prefix=<<__prefix__>> separator=<<__separator__>>/>
+<$transclude $variable="tree-node" prefix=<<prefix>> separator=<<separator>>/>
 </div>
 </div>
 \end

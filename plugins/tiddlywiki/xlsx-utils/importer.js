@@ -6,10 +6,7 @@ module-type: library
 Class to import an Excel file
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DEFAULT_IMPORT_SPEC_TITLE = "$:/config/plugins/tiddlywiki/xlsx-utils/default-import-spec";
@@ -201,5 +198,3 @@ XLSXImporter.prototype.findColumns = function(sheet,sheetSize) {
 };
 
 exports.XLSXImporter = XLSXImporter;
-
-})();

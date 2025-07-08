@@ -6,10 +6,7 @@ module-type: library
 Serve tiddlers over http
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 if($tw.node) {
@@ -374,5 +371,3 @@ Server.prototype.listen = function(port,host,prefix) {
 };
 
 exports.Server = Server;
-
-})();

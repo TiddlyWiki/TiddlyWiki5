@@ -2,6 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/markdown",
 	"name": "Markdown",
 	"description": "Markdown parser based on markdown-it",
-	"list": "readme config syntax license",
+	"list": "readme settings syntax license",
 	"stability": "STABILITY_2_STABLE"
 }

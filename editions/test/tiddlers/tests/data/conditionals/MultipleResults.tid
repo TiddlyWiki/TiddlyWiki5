@@ -5,7 +5,7 @@ tags: [[$:/tags/wiki-test-spec]]
 
 title: Output
 
-This is a <% if 1 2 3 4 5 6 %>Elephant<% endif %>, I think.
+This is a <%if 1 2 3 4 5 6 %>Elephant<%endif%>, I think.
 +
 title: ExpectedResult
 

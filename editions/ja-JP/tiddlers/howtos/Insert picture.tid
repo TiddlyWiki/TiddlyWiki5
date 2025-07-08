@@ -1,0 +1,10 @@
+created: 20160817100415079
+modified: 20241104110350495
+original-modified: 20160817110210268
+tags: [[Editor toolbar]]
+title: Insert picture
+ja-title: 画像を挿入
+
+Wiki内に存在する画像Tiddlerを検索して選択するためのダイアログが表示されます。Tiddlerを選択すると、テキストフィールドのカーソルがある場所にWikiText画像リンクとして挿入されます
+
+<<.icon $:/core/images/picture>>を押すと、`[img[$:/favicon.ico]]`が得られます

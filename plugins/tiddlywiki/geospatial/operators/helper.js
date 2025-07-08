@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operators for geospatial helpers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var turf = require("$:/plugins/tiddlywiki/geospatial/turf.js");
@@ -20,5 +17,3 @@ exports.geopoint = function(source,operator,options) {
 		alt =  $tw.utils.parseNumber(operator.operands[2] || "0");
 	return [JSON.stringify(turf.point([long,lat,alt]))];
 };
-
-})();

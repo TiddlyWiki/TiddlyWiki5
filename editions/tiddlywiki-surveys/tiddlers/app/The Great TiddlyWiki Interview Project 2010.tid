@@ -1,0 +1,51 @@
+title: The Great TiddlyWiki Interview Project (2010)
+
+The "Great TiddlyWiki Interview Project" was launched in 2010. The idea was to ask people about their use of TiddlyWiki. We used TiddlySpace to allow users to write their responses in their own spaces, and then we gathered their answers in a separate space. The interview ran until 2013 when TiddlySpace was closed down.
+
+From the original announcement:
+
+> Welcome to the great TiddlyWiki viral interview project.
+>
+> For many people that use it there is a distinct discovery moment when TiddlyWiki explodes in their brain. For others, it is a challenge to get their heads around TiddlyWiki at all
+>
+> This project explores how people think about TiddlyWiki by collecting together responses to a set of questions about it.
+
+Here are the questions we asked and the responses we received.
+
+<$let stateBase=<<qualify "$:/state/interview-2010/">>>
+	<div class="interview-2010">
+		<$list filter="[tag[2010 - Interview Question]]">
+			<$let state={{{ [<state>addsuffix<currentTiddler>] }}}>
+				<h1>
+					<$button class="tc-btn-invisible">
+						<$action-setfield $tiddler=<<state>> $field="text" $value={{{ [<state>get[text]match[yes]then[no]else[yes]] }}}/>
+						<%if [<state>get[text]match[yes]] %>
+							{{$:/core/images/chevron-down}}
+						<%else%>
+							{{$:/core/images/chevron-right}}
+						<%endif%>
+					</$button>
+					<$link to=<<currentTiddler>>>
+						<$text text={{{ [<currentTiddler>removeprefix[2010 - ]] }}}/>
+					</$link>
+				</h1>
+				<%if [<state>get[text]match[yes]] %>
+					<$list filter="[tag[2010 - Interview Answer]tag<currentTiddler>]" variable="answer">
+						<h2>
+							<$link to=<<answer>>>
+								<$transclude $tiddler={{{ [<answer>get[modifier]addprefix[$:/avatars/]] }}}/>
+								<$text text={{{ [<answer>get[modifier]]  }}}/>
+							</$link>
+						</h2>
+						<div class="interview-2010-answer">
+							<h3>
+								//<$view tiddler=<<answer>> field="modified" format="date" template="DDth MMM YYYY" />//
+							</h3>
+							<$transclude $tiddler=<<answer>> mode="block" />
+						</div>
+					</$list>
+				<%endif%>
+			</$let>
+		</$list>
+	</div>
+</$let>

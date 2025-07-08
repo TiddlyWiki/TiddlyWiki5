@@ -1,4 +1,6 @@
 title: $:/plugins/tiddlywiki/geospatial/settings
+caption: Geospatial
+tags: $:/tags/ControlPanel/SettingsTab
 
 ! Geospatial Plugin Settings
 

@@ -1,0 +1,48 @@
+created: 20201123172925848
+modified: 20241111112628221
+original-modified: 20240801020629394
+tags: [[Customise TiddlyWiki]]
+title: Alternative page layouts
+ja-title: ページレイアウトを変更する
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.23">>複数のページレイアウトを用意し、切り替えることができます。使用可能なレイアウトのリストを表示し、レイアウトを切り替えるには、キーボードショートカット<kbd><<displayshortcuts ((layout-switcher))>></kbd>を使用します
+
+!ページレイアウトの作成
+
+代替のレイアウトを作成すると、デフォルトのインターフェイスである[[標準レイアウト|$:/core/ui/PageTemplate]]に[[機能の追加・削除|Customising TiddlyWiki's user interface]]だけでなく、まったく新しいレイアウトを作成することもできます。
+
+代替のページレイアウトを作成し、切り替えることができるようにするには、[[SystemTag: $:/tags/Layout]]を使用して代替ページテンプレートTiddlerを作成します。
+
+この代替ページテンプレートは、[[デフォルトのページテンプレート|$:/core/ui/PageTemplate]]を、微調整して修正したバージョンであることも、まったく異なるものを作成することもできます。レイアウト切り替えメカニズムでは、ページテンプレートTiddlerに`name`と`description` 
+フィールドが必要です。これらのフィールドは、ユーザーインターフェイス切り替えのリストで使用されます。
+
+!! 共通レイアウト設定
+
+```tid
+\whitespace trim
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+\define containerClasses()
+tc-page-container tc-language-$(languageTitle)$ your-plugin-name-container
+\end
+\procedure redirected-navigate-actions()
+  <$action-setfield $tiddler="$:/layout" text="" $timestamp="no" />
+  <$action-navigate $to=<<event-navigateTo>> $scroll="yes" />
+\end
+
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+	<$messagecatcher $tm-navigate=<<redirected-navigate-actions>>>
+		{{$:/core/ui/CommandPaletteTemplate}}
+		<div class=<<containerClasses>>>
+			<!-- Your layout content here -->
+		</div>
+	</$messagecatcher>
+</$navigator>
+```
+
+以下を含んでいます
+
+# 標準レイアウトでグローバルに使用できるマクロをインポートすると、標準レイアウトで機能するWikiテキストが独自レイアウトでも機能します。
+# トップレベルのCSSクラスを定義します。一部のスタイルはそれに依存する場合があります。ここで、CSSクラスにプラグインの名前を追加できます。
+# リンクをクリックしたときにナビゲーションを処理します。レイアウトにストーリービューが含まれていない場合(たとえば、カレンダーやホワイトボードレイアウトを作成している場合)、`redirected-navigate-actions` `$navigator`と`$messagecatcher`の組み合わせにより、ユーザーは標準レイアウトにリダイレクトされ、そこでTiddlerが表示されます。
+# 独自レイアウト上に、たとえば、`$:/core/ui/CommandPaletteTemplate`や`$:/core/ui/PageTemplate/sidebar`などを配置したい場合は、[[PageTemplate|$:/tags/PageTemplate]]を再度追加します。

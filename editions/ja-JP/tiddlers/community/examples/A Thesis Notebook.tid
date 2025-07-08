@@ -1,0 +1,19 @@
+created: 20130302085406905
+modified: 20241130111024987
+original-modified: 20130302084548184
+tags: Examples
+title: "A Thesis Notebook" by Alberto Molina
+ja-title: Alberto Molinaの"論文ノート"
+url: http://tesis.tiddlyspot.com/
+
+TiddlyWikiを使った論文ノート。
+
+{{!!url}}
+
+<<<
+これは、TiddlyWiki 5.0.8-betaを利用した論文ノートの例です。
+
+TiddlyWikiは、Jeremy Rustonが作成した優れたソフトウェアです。このソフトウェアを使用すると、メモを取ったり、アイデアを整理したり、情報を保存したり、すべてのものを好きなように表示したりできます。これは、ほぼすべてのニーズに合わせて調整できる、非常に柔軟なツールです。
+
+このTiddlyWikiは、著者、書籍や論文、概念や理論、個人的なメモを中心とした哲学ノートとして機能するようにカスタマイズされています。私はこれを、専用の参考文献ソフトウェアであるZoteroと一緒に使用しています。どちらも無料のオープンソースプロジェクトです。TiddlyWikiはhttps://tiddlywiki.comからダウンロードできます。
+<<<
