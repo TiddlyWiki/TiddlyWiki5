@@ -159,7 +159,7 @@ AhoCorasick.prototype.isWordBoundaryMatch = function(text, start, end) {
 	var afterChar = end < text.length ? text[end] : '';
 	
 	var isWordChar = function(char) {
-		return /[a-zA-Z0-9_]/.test(char);
+		return /[a-zA-Z0-9_\u00C0-\u00FF]/.test(char);
 	};
 	
 	var beforeIsWord = beforeChar && isWordChar(beforeChar);
