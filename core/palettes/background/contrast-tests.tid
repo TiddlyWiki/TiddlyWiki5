@@ -1,0 +1,7 @@
+title: $:/palettes/background/contrast-tests
+type: application/x-tiddler-dictionary
+tags: $:/tags/BackgroundPalette
+
+?background-foreground-contrast: [tf.check-colour-contrast[background],[foreground],[45]]
+?alert-contrast: [tf.check-colour-contrast[alert-background],[foreground],[45]]
+?code-contrast: [tf.check-colour-contrast[code-background],[code-foreground],[45]]
