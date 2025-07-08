@@ -64,7 +64,7 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 		processedNodes++;
 		
 		for(var char in node) {
-			if(node[char] && char !== '$') {
+			if(node[char] && char !== "$") {
 				var child = node[char];
 				var fail = this.failure[node];
 				var failureDepth = 0;
