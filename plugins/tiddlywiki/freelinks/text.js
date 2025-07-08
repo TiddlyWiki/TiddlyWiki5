@@ -51,7 +51,7 @@ TextNodeWidget.prototype.execute = function() {
 		// Get the information about the current tiddler titles, and construct a regexp
 		this.tiddlerTitleInfo = this.wiki.getGlobalCache("tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive"),function() {
 			var targetFilterText = self.wiki.getTiddlerText(TITLE_TARGET_FILTER),
-				titles = !!targetFilterText ? self.wiki.filterTiddlers(targetFilterText,$tw.rootWidget) : self.wiki.allTitles(),
+				titles = targetFilterText ? self.wiki.filterTiddlers(targetFilterText,$tw.rootWidget) : self.wiki.allTitles(),
 				sortedTitles = titles.sort(function(a,b) {
 					var lenA = a.length,
 						lenB = b.length;

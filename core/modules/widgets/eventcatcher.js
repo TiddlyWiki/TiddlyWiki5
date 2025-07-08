@@ -91,7 +91,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 					$tw.utils.each(event.detail,function(detailValue,detail) {
 						variables["event-detail-" + detail] = detailValue.toString();
 					});
-				} else if(!!event.detail) {
+				} else if(event.detail) {
 					variables["event-detail"] = event.detail.toString();
 				}
 				self.invokeActionString(actions,self,event,variables);

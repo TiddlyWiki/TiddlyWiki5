@@ -486,11 +486,11 @@ var rules = [
 			name = lookaheadMatch[1] || lookaheadMatch[2];
 			var params = lookaheadMatch[3], nameold =name;
 			if(name) {
-				if(!!macroadapter.paramadapter[name]) {
+				if(macroadapter.paramadapter[name]) {
 					params=macroadapter.paramadapter[name](params);
 					//alert("going out as "+params);
 				}
-				if(!!macroadapter.namedapter[name]) {
+				if(macroadapter.namedapter[name]) {
 					name=macroadapter.namedapter[name];
 				}
 				w.nextMatch = this.lookaheadRegExp.lastIndex;

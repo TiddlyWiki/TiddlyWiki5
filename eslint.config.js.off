@@ -98,7 +98,6 @@ module.exports = [{
         "init-declarations": "off",
         "jsx-quotes": "error",
         "key-spacing": "off",
-
         "keyword-spacing": ["error", {
             before: true,
             after: false,

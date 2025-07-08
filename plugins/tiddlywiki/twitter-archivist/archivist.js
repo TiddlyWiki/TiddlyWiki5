@@ -7,8 +7,8 @@ Utility class for manipulating Twitter archives
 
 \*/
 
-/* eslint-disable no-await-in-loop */
-/* eslint-disable require-await */
+ 
+ 
 "use strict";
 
 function TwitterArchivist(options) {

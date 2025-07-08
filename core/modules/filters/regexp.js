@@ -57,7 +57,7 @@ exports.regexp = function(source,operator,options) {
 		source(function(tiddler,title) {
 			var text = getFieldString(tiddler,title);
 			if(text !== null) {
-				if(!!regexp.exec(text)) {
+				if(regexp.exec(text)) {
 					results.push(title);
 				}
 			}
