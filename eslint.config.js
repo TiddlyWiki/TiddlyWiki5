@@ -1,5 +1,8 @@
 const globals = require("globals");
+/** @type {import("@eslint/js")} */
 const js = require("@eslint/js");
+/** @type {import("eslint")} */
+const eslint = require("eslint");
 
 const {
     FlatCompat,
@@ -21,6 +24,9 @@ module.exports = [{
         "core/modules/utils/diff-match-patch/diff_match_patch_uncompressed.js",
         "core/modules/utils/dom/csscolorparser.js",
         "plugins/tiddlywiki/*/files/",
+        "eslint.config.js",
+        "playwright.config.js",
+
     ],
 }, ...compat.extends("eslint:recommended"), {
     languageOptions: {
@@ -31,7 +37,7 @@ module.exports = [{
             $tw: "writable", // temporary
         },
 
-        ecmaVersion: 5,
+        ecmaVersion: 2017,
         sourceType: "commonjs",
     },
 
@@ -213,13 +219,13 @@ module.exports = [{
         "no-promise-executor-return": "error",
         "no-proto": "off",
         "no-restricted-exports": "error",
-        "no-restricted-globals": "error",
+        "no-restricted-globals": ["error", "self"],
         "no-restricted-imports": "error",
         "no-restricted-modules": "error",
         "no-restricted-properties": "error",
         "no-restricted-syntax": "error",
         "no-return-assign": "off",
-        "no-return-await": "error",
+        "no-return-await": "off",
         "no-script-url": "off",
         "no-self-compare": "off",
         "no-sequences": "off",
