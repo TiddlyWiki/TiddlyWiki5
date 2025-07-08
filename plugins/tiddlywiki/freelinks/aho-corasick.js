@@ -186,7 +186,7 @@ AhoCorasick.prototype.getStats = function() {
 			patternCount += node.$.length;
 		}
 		for(var key in node) {
-			if(node[key] && typeof node[key] === 'object' && key !== '$') {
+			if(node[key] && typeof node[key] === "object" && key !== "$") {
 				countNodes(node[key]);
 			}
 		}
