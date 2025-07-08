@@ -273,7 +273,7 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.text || titlesHaveChanged || 
 	   (changedTiddlers && changedTiddlers[WORD_BOUNDARY_TIDDLER])) {
 		if(titlesHaveChanged) {
-			var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}) === "yes";
+			var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}).trim() === "yes";
 			var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
 			self.wiki.clearCache(cacheKey);
 		}
