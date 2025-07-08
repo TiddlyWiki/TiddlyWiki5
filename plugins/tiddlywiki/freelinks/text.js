@@ -55,7 +55,7 @@ TextNodeWidget.prototype.render = function(parent,nextSibling) {
 
 TextNodeWidget.prototype.execute = function() {
 	var self = this,
-		ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}) === "yes";
+		ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}).trim() === "yes";
 	
 	var childParseTree = [{
 		type: "plain-text",
