@@ -50,7 +50,7 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 	this.failure[root] = root;
 	
 	for(var char in root) {
-		if(root[char] && char !== '$') {
+		if(root[char] && char !== "$") {
 			this.failure[root[char]] = root;
 			queue.push(root[char]);
 		}
