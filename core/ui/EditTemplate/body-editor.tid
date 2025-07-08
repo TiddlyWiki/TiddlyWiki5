@@ -15,7 +15,7 @@ title: $:/core/ui/EditTemplate/body/editor
 				state=<<config-visibility-title>>
 				text="hide"
 				class="tc-text-editor-toolbar-item-wrapper"
-				tag="div"
+				tag="span"
 			>
 				<$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/>
 			</$reveal>
