@@ -26,6 +26,7 @@ module.exports = [{
         "plugins/tiddlywiki/*/files/",
         "eslint.config.js",
         "playwright.config.js",
+        "eslint.config.mjs",
 
     ],
 }, ...compat.extends("eslint:recommended"), {
