@@ -320,6 +320,7 @@ pre > code {
 	padding: 0.5em;
 	border: none;
 	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
+	word-break: break-all;
 	background-color: inherit;
 	color: inherit;
 	overflow-x: auto;
