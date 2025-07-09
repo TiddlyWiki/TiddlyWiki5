@@ -9,9 +9,9 @@ Browse widget for browsing for files to import
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var BrowseWidget = function(parseTreeNode,options) {
+const BrowseWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -24,14 +24,14 @@ BrowseWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 BrowseWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	const self = this;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
 	// Create element
-	var domNode = this.document.createElement("input");
+	const domNode = this.document.createElement("input");
 	domNode.setAttribute("type","file");
 	if(this.browseMultiple) {
 		domNode.setAttribute("multiple","multiple");
@@ -40,7 +40,7 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("title",this.tooltip);
 	}
 	if(this.tabIndex) {
-		domNode.setAttribute("tabindex", this.tabIndex);
+		domNode.setAttribute("tabindex",this.tabIndex);
 	}
 	// Nw.js supports "nwsaveas" to force a "save as" dialogue that allows a new or existing file to be selected
 	if(this.nwsaveas) {
@@ -57,16 +57,16 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("nwdirectory",this.nwdirectory);
 	}
 	if(this.isDisabled === "yes") {
-		domNode.setAttribute("disabled", true);
+		domNode.setAttribute("disabled",true);
 	}
 	// Add a click event handler
-	domNode.addEventListener("change",function (event) {
+	domNode.addEventListener("change",(event) => {
 		if(self.message) {
-			self.dispatchEvent({type: self.message, param: self.param, files: event.target.files});
+			self.dispatchEvent({type: self.message,param: self.param,files: event.target.files});
 		} else {
 			self.wiki.readFiles(event.target.files,{
-				callback: function(tiddlerFieldsArray) {
-					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+				callback(tiddlerFieldsArray) {
+					self.dispatchEvent({type: "tm-import-tiddlers",param: JSON.stringify(tiddlerFieldsArray)});
 				},
 				deserializer: self.deserializer
 			});
@@ -98,17 +98,17 @@ BrowseWidget.prototype.execute = function() {
 	this.webkitdirectory = this.getAttribute("webkitdirectory");
 	this.nwdirectory = this.getAttribute("nwdirectory");
 	this.tabIndex = this.getAttribute("tabindex");
-	this.isDisabled = this.getAttribute("disabled", "no");
+	this.isDisabled = this.getAttribute("disabled","no");
 };
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 BrowseWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
-		return true;	
+		return true;
 	}
 	return false;
 };

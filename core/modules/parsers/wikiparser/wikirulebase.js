@@ -12,8 +12,7 @@ Base class for wiki parser rules
 /*
 This constructor is always overridden with a blank constructor, and so shouldn't be used
 */
-var WikiRuleBase = function() {
-};
+const WikiRuleBase = function() {};
 
 /*
 To be overridden by individual rules

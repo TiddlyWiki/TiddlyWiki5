@@ -14,15 +14,15 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander) {
+const Command = function(params,commander) {
 	this.params = params;
 	this.commander = commander;
 };
 
 Command.prototype.execute = function() {
-	var subhelp = this.params[0] || "default",
-		helpBase = "$:/language/Help/",
-		text;
+	let subhelp = this.params[0] || "default";
+	const helpBase = "$:/language/Help/";
+	let text;
 	if(!this.commander.wiki.getTiddler(helpBase + subhelp)) {
 		subhelp = "notfound";
 	}

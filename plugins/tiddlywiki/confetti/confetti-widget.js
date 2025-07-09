@@ -8,11 +8,11 @@ Confetti widget
 \*/
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var confetti = require("$:/plugins/tiddlywiki/confetti/confetti.js");
+const confetti = require("$:/plugins/tiddlywiki/confetti/confetti.js");
 
-var ConfettiWidget = function(parseTreeNode,options) {
+const ConfettiWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -25,7 +25,7 @@ ConfettiWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 ConfettiWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	const self = this;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
@@ -33,8 +33,8 @@ ConfettiWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Launch confetti
 	if($tw.browser) {
-		var options = {};
-		$tw.utils.each(this.attributes,function(attribute,name) {
+		const options = {};
+		$tw.utils.each(this.attributes,(attribute,name) => {
 			options[name] = self.getAttribute(name);
 		});
 		$tw.confettiManager.launch(options.delay,options);

@@ -13,15 +13,15 @@ Filter function for [is[blank]]
 Export our filter function
 */
 exports.blank = function(source,prefix,options) {
-	var results = [];
+	const results = [];
 	if(prefix === "!") {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(title) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(!title) {
 				results.push(title);
 			}

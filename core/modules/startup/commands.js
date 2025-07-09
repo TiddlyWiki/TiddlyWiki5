@@ -17,16 +17,16 @@ exports.synchronous = false;
 
 exports.startup = function(callback) {
 	// On the server, start a commander with the command line arguments
-	var commander = new $tw.Commander(
+	const commander = new $tw.Commander(
 		$tw.boot.argv,
-		function(err) {
+		((err) => {
 			if(err) {
-				return $tw.utils.error("Error: " + err);
+				return $tw.utils.error(`Error: ${err}`);
 			}
 			callback();
-		},
+		}),
 		$tw.wiki,
-		{output: process.stdout, error: process.stderr}
+		{output: process.stdout,error: process.stderr}
 	);
 	commander.execute();
 };

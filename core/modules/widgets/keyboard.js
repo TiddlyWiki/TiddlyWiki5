@@ -9,9 +9,9 @@ Keyboard shortcut widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var KeyboardWidget = function(parseTreeNode,options) {
+const KeyboardWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -24,24 +24,24 @@ KeyboardWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 KeyboardWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	const self = this;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
-	var tag = this.parseTreeNode.isBlock ? "div" : "span";
-	if(this.tag && $tw.config.htmlUnsafeElements.indexOf(this.tag) === -1) {
+	let tag = this.parseTreeNode.isBlock ? "div" : "span";
+	if(this.tag && !$tw.config.htmlUnsafeElements.includes(this.tag)) {
 		tag = this.tag;
 	}
 	// Create element
-	var domNode = this.document.createElement(tag);
+	const domNode = this.document.createElement(tag);
 	// Assign classes
 	this.domNode = domNode;
 	this.assignDomNodeClasses();
 	// Add a keyboard event handler
 	$tw.utils.addEventListeners(domNode,[
-		{name: "keydown", handlerObject: this, handlerMethod: "handleChangeEvent"}
+		{name: "keydown",handlerObject: this,handlerMethod: "handleChangeEvent"}
 	]);
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
@@ -50,19 +50,19 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 };
 
 KeyboardWidget.prototype.handleChangeEvent = function(event) {
-	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+	if($tw.keyboardManager.handleKeydownEvent(event,{onlyPriority: true})) {
 		return true;
 	}
 
-	var keyInfo = $tw.keyboardManager.getMatchingKeyDescriptor(event,this.keyInfoArray);
+	const keyInfo = $tw.keyboardManager.getMatchingKeyDescriptor(event,this.keyInfoArray);
 	if(keyInfo) {
-		var handled = this.invokeActions(this,event);
+		const handled = this.invokeActions(this,event);
 		if(this.actions) {
-			var variables = {
-					"event-key": event.key,
-					"event-code": event.code,
-					"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event)
-				};
+			const variables = {
+				"event-key": event.key,
+				"event-code": event.code,
+				"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event)
+			};
 			if(keyInfo.keyDescriptor) {
 				variables["event-key-descriptor"] = keyInfo.keyDescriptor;
 			}
@@ -76,17 +76,17 @@ KeyboardWidget.prototype.handleChangeEvent = function(event) {
 		return true;
 	}
 	return false;
-}
+};
 
 KeyboardWidget.prototype.dispatchMessage = function(event) {
-	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler")});
+	this.dispatchEvent({type: this.message,param: this.param,tiddlerTitle: this.getVariable("currentTiddler")});
 };
 
 /*
 Compute the internal state of the widget
 */
 KeyboardWidget.prototype.execute = function() {
-	var self = this;
+	const self = this;
 	// Get attributes
 	this.actions = this.getAttribute("actions","");
 	this.message = this.getAttribute("message","");
@@ -97,18 +97,18 @@ KeyboardWidget.prototype.execute = function() {
 		this.keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
 		if(this.key.substr(0,2) === "((" && this.key.substr(-2,2) === "))") {
 			this.shortcutTiddlers = [];
-			var name = this.key.substring(2,this.key.length -2);
-			$tw.utils.each($tw.keyboardManager.lookupNames,function(platformDescriptor) {
-				self.shortcutTiddlers.push("$:/config/" + platformDescriptor + "/" + name);
+			const name = this.key.substring(2,this.key.length - 2);
+			$tw.utils.each($tw.keyboardManager.lookupNames,(platformDescriptor) => {
+				self.shortcutTiddlers.push(`$:/config/${platformDescriptor}/${name}`);
 			});
-		}	
+		}
 	}
 	// Make child widgets
 	this.makeChildWidgets();
 };
 
 KeyboardWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
+	const classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-keyboard");
 	this.domNode.className = classes.join(" ");
 };
@@ -117,7 +117,7 @@ KeyboardWidget.prototype.assignDomNodeClasses = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 KeyboardWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes.tag) {
 		this.refreshSelf();
 		return true;

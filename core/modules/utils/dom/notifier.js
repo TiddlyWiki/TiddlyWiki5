@@ -9,9 +9,9 @@ Notifier mechanism
 
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
+const widget = require("$:/core/modules/widgets/widget.js");
 
-var Notifier = function(wiki) {
+const Notifier = function(wiki) {
 	this.wiki = wiki;
 };
 
@@ -24,11 +24,11 @@ Options include:
 Notifier.prototype.display = function(title,options) {
 	options = options || {};
 	// Create the wrapper divs
-	var self = this,
-		notification = document.createElement("div"),
-		tiddler = this.wiki.getTiddler(title),
-		duration = $tw.utils.getAnimationDuration(),
-		refreshHandler;
+	const self = this;
+	const notification = document.createElement("div");
+	const tiddler = this.wiki.getTiddler(title);
+	const duration = $tw.utils.getAnimationDuration();
+	let refreshHandler;
 	// Don't do anything if the tiddler doesn't exist
 	if(!tiddler) {
 		return;
@@ -37,13 +37,14 @@ Notifier.prototype.display = function(title,options) {
 	$tw.utils.addClass(notification,"tc-notification");
 	notification.setAttribute("role","alert");
 	// Create the variables
-	var variables = $tw.utils.extend({currentTiddler: title},options.variables);
+	const variables = $tw.utils.extend({currentTiddler: title},options.variables);
 	// Render the body of the notification
-	var widgetNode = this.wiki.makeTranscludeWidget(title,{
+	const widgetNode = this.wiki.makeTranscludeWidget(title,{
 		parentWidget: $tw.rootWidget,
-		document: document,
-		variables: variables,
-		importPageMacros: true});
+		document,
+		variables,
+		importPageMacros: true
+	});
 	widgetNode.render(notification,null);
 	refreshHandler = function(changes) {
 		widgetNode.refresh(changes,notification,null);
@@ -53,8 +54,8 @@ Notifier.prototype.display = function(title,options) {
 	$tw.utils.setStyle(notification,[
 		{opacity: "0"},
 		{transformOrigin: "0% 0%"},
-		{transform: "translateY(" + (-window.innerHeight) + "px)"},
-		{transition: "opacity " + duration + "ms ease-out, " + $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out"}
+		{transform: `translateY(${-window.innerHeight}px)`},
+		{transition: `opacity ${duration}ms ease-out, ${$tw.utils.roundTripPropertyName("transform")} ${duration}ms ease-in-out`}
 	]);
 	// Add the notification to the DOM
 	document.body.appendChild(notification);
@@ -66,17 +67,17 @@ Notifier.prototype.display = function(title,options) {
 		{transform: "translateY(0px)"}
 	]);
 	// Set a timer to remove the notification
-	window.setTimeout(function() {
+	window.setTimeout(() => {
 		// Remove our change event handler
 		self.wiki.removeEventListener("change",refreshHandler);
 		// Force layout and animate the notification away
 		$tw.utils.forceLayout(notification);
 		$tw.utils.setStyle(notification,[
 			{opacity: "0.0"},
-			{transform: "translateX(" + (notification.offsetWidth) + "px)"}
+			{transform: `translateX(${notification.offsetWidth}px)`}
 		]);
 		// Remove the modal message from the DOM once the transition ends
-		setTimeout(function() {
+		setTimeout(() => {
 			if(notification.parentNode) {
 				document.body.removeChild(notification);
 			}

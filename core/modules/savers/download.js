@@ -12,19 +12,18 @@ Handles saving changes via HTML5's download APIs
 /*
 Select the appropriate saver module and set it up
 */
-var DownloadSaver = function(wiki) {
-};
+const DownloadSaver = function(wiki) {};
 
 DownloadSaver.prototype.save = function(text,method,callback,options) {
 	options = options || {};
 	// Get the current filename
-	var filename = options.variables.filename;
-	var type = options.variables.type;
+	let {filename} = options.variables;
+	let {type} = options.variables;
 	if(!filename) {
-		var p = document.location.pathname.lastIndexOf("/");
+		const p = document.location.pathname.lastIndexOf("/");
 		if(p !== -1) {
 			// We decode the pathname because document.location is URL encoded by the browser
-			filename = $tw.utils.decodeURIComponentSafe(document.location.pathname.substr(p+1));
+			filename = $tw.utils.decodeURIComponentSafe(document.location.pathname.substr(p + 1));
 		}
 	}
 	if(!filename) {
@@ -34,12 +33,12 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 		type = "text/html";
 	}
 	// Set up the link
-	var link = document.createElement("a");
+	const link = document.createElement("a");
 	if(Blob !== undefined) {
-		var blob = new Blob([text], {type: type});
-		link.setAttribute("href", URL.createObjectURL(blob));
+		const blob = new Blob([text],{type});
+		link.setAttribute("href",URL.createObjectURL(blob));
 	} else {
-		link.setAttribute("href","data:" + type + "," + encodeURIComponent(text));
+		link.setAttribute("href",`data:${type},${encodeURIComponent(text)}`);
 	}
 	link.setAttribute("download",filename);
 	document.body.appendChild(link);
@@ -58,9 +57,9 @@ DownloadSaver.prototype.info = {
 	priority: 100
 };
 
-Object.defineProperty(DownloadSaver.prototype.info, "capabilities", {
-	get: function() {
-		var capabilities = ["save", "download"];
+Object.defineProperty(DownloadSaver.prototype.info,"capabilities",{
+	get() {
+		const capabilities = ["save","download"];
 		if(($tw.wiki.getTextReference("$:/config/DownloadSaver/AutoSave") || "").toLowerCase() === "yes") {
 			capabilities.push("autosave");
 		}

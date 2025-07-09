@@ -9,9 +9,9 @@ Import variable definitions from other tiddlers
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var ImportVariablesWidget = function(parseTreeNode,options) {
+const ImportVariablesWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -34,7 +34,7 @@ ImportVariablesWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ImportVariablesWidget.prototype.execute = function(tiddlerList) {
-	var widgetPointer = this;
+	let widgetPointer = this;
 	// Got to flush all the accumulated variables
 	this.variables = Object.create(null);
 	if(this.parentWidget) {
@@ -46,11 +46,11 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 	this.tiddlerList = tiddlerList || this.wiki.filterTiddlers(this.filter,this);
 	// Accumulate the <$set> widgets from each tiddler
 	$tw.utils.each(this.tiddlerList,function(title) {
-		var parser = widgetPointer.wiki.parseTiddler(title,{parseAsInline:true, configTrimWhiteSpace:false});
+		const parser = widgetPointer.wiki.parseTiddler(title,{parseAsInline: true,configTrimWhiteSpace: false});
 		if(parser) {
-			var parseTreeNode = parser.tree[0];
-			while(parseTreeNode && ["setvariable","set","parameters"].indexOf(parseTreeNode.type) !== -1) {
-				var node = {
+			let parseTreeNode = parser.tree[0];
+			while(parseTreeNode && ["setvariable","set","parameters"].includes(parseTreeNode.type)) {
+				const node = {
 					type: "set",
 					attributes: parseTreeNode.attributes,
 					params: parseTreeNode.params,
@@ -73,7 +73,7 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 						// $tw.utils.assign, because that copies
 						// up the prototype chain, which we
 						// don't want.
-						$tw.utils.each(Object.keys(widget.variables), function(key) {
+						$tw.utils.each(Object.keys(widget.variables),(key) => {
 							widgetPointer.variables[key] = widget.variables[key];
 						});
 					} else {
@@ -82,18 +82,18 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 						// this widget. If it needs to refresh,
 						// it'll do so along with the the whole
 						// importvariable tree.
-						if (widgetPointer != this) {
-							widgetPointer.makeChildWidgets = function(){};
+						if(widgetPointer != this) {
+							widgetPointer.makeChildWidgets = function() {};
 						}
 						widgetPointer = widgetPointer.children[0];
 					}
 				}
 				parseTreeNode = parseTreeNode.children && parseTreeNode.children[0];
 			}
-		} 
+		}
 	});
 
-	if (widgetPointer != this) {
+	if(widgetPointer != this) {
 		widgetPointer.parseTreeNode.children = this.parseTreeNode.children;
 	} else {
 		widgetPointer.makeChildWidgets();
@@ -105,12 +105,12 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ImportVariablesWidget.prototype.refresh = function(changedTiddlers) {
 	// Recompute our attributes and the filter list
-	var changedAttributes = this.computeAttributes(),
-		tiddlerList = this.wiki.filterTiddlers(this.getAttribute("filter"),this);
+	const changedAttributes = this.computeAttributes();
+	const tiddlerList = this.wiki.filterTiddlers(this.getAttribute("filter"),this);
 	// Refresh if the filter has changed, or the list of tiddlers has changed, or any of the tiddlers in the list has changed
 	function haveListedTiddlersChanged() {
-		var changed = false;
-		tiddlerList.forEach(function(title) {
+		let changed = false;
+		tiddlerList.forEach((title) => {
 			if(changedTiddlers[title]) {
 				changed = true;
 			}

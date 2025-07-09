@@ -13,11 +13,11 @@ Filter operator for returning the descriptions of the specified edition names
 Export our filter function
 */
 exports.editiondescription = function(source,operator,options) {
-	var results = [];
+	const results = [];
 	if($tw.node) {
-		var editionInfo = $tw.utils.getEditionInfo();
+		const editionInfo = $tw.utils.getEditionInfo();
 		if(editionInfo) {
-			source(function(tiddler,title) {
+			source((tiddler,title) => {
 				if($tw.utils.hop(editionInfo,title)) {
 					results.push(editionInfo[title].description || "");
 				}

@@ -15,19 +15,18 @@ exports.after = ["startup"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	$tw.rootWidget.addEventListener("tm-load-twitter-archive",function(event) {
+	$tw.rootWidget.addEventListener("tm-load-twitter-archive",(event) => {
 		// Load tweets
-		var archiveSource = new $tw.utils.TwitterArchivistSourceBrowser({
-		}),
-		archivist = new $tw.utils.TwitterArchivist({
+		const archiveSource = new $tw.utils.TwitterArchivistSourceBrowser({});
+		const archivist = new $tw.utils.TwitterArchivist({
 			source: archiveSource
 		});
 		archivist.loadArchive({
 			wiki: $tw.wiki
-		}).then(function() {
+		}).then(() => {
 			alert("Archived tweets imported");
-		}).catch(function(err) {
-			alert("Error importing archived tweets: " + err);
+		}).catch((err) => {
+			alert(`Error importing archived tweets: ${err}`);
 		});
 	});
 };

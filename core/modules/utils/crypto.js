@@ -13,10 +13,10 @@ Utility functions related to crypto.
 Look for an encrypted store area in the text of a TiddlyWiki file
 */
 exports.extractEncryptedStoreArea = function(text) {
-	var encryptedStoreAreaStartMarker = "<pre id=\"encryptedStoreArea\" type=\"text/plain\" style=\"display:none;\">",
-		encryptedStoreAreaStart = text.indexOf(encryptedStoreAreaStartMarker);
+	const encryptedStoreAreaStartMarker = "<pre id=\"encryptedStoreArea\" type=\"text/plain\" style=\"display:none;\">";
+	const encryptedStoreAreaStart = text.indexOf(encryptedStoreAreaStartMarker);
 	if(encryptedStoreAreaStart !== -1) {
-		var encryptedStoreAreaEnd = text.indexOf("</pre>",encryptedStoreAreaStart);
+		const encryptedStoreAreaEnd = text.indexOf("</pre>",encryptedStoreAreaStart);
 		if(encryptedStoreAreaEnd !== -1) {
 			return $tw.utils.htmlDecode(text.substring(encryptedStoreAreaStart + encryptedStoreAreaStartMarker.length,encryptedStoreAreaEnd));
 		}
@@ -28,11 +28,11 @@ exports.extractEncryptedStoreArea = function(text) {
 Attempt to extract the tiddlers from an encrypted store area using the current password. If the password is not provided then the password in the password store will be used
 */
 exports.decryptStoreArea = function(encryptedStoreArea,password) {
-	var decryptedText = $tw.crypto.decrypt(encryptedStoreArea,password);
+	const decryptedText = $tw.crypto.decrypt(encryptedStoreArea,password);
 	if(decryptedText) {
-		var json = $tw.utils.parseJSONSafe(decryptedText),
-			tiddlers = [];
-		for(var title in json) {
+		const json = $tw.utils.parseJSONSafe(decryptedText);
+		const tiddlers = [];
+		for(const title in json) {
 			if(title !== "$:/isEncrypted") {
 				tiddlers.push(json[title]);
 			}
@@ -55,7 +55,7 @@ $tw.config.usePasswordVault: causes any password entered by the user to also be 
 */
 exports.decryptStoreAreaInteractive = function(encryptedStoreArea,callback,options) {
 	// Try to decrypt with the current password
-	var tiddlers = $tw.utils.decryptStoreArea(encryptedStoreArea);
+	const tiddlers = $tw.utils.decryptStoreArea(encryptedStoreArea);
 	if(tiddlers) {
 		callback(tiddlers);
 	} else {
@@ -65,13 +65,13 @@ exports.decryptStoreAreaInteractive = function(encryptedStoreArea,callback,optio
 			noUserName: true,
 			canCancel: true,
 			submitText: "Decrypt",
-			callback: function(data) {
+			callback(data) {
 				// Exit if the user cancelled
 				if(!data) {
 					return false;
 				}
 				// Attempt to decrypt the tiddlers
-				var tiddlers = $tw.utils.decryptStoreArea(encryptedStoreArea,data.password);
+				const tiddlers = $tw.utils.decryptStoreArea(encryptedStoreArea,data.password);
 				if(tiddlers) {
 					if($tw.config.usePasswordVault) {
 						$tw.crypto.setPassword(data.password);

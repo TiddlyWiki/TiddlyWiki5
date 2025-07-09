@@ -18,7 +18,7 @@ This upgrader copies any values from the old format to the new. The old data tid
 
 "use strict";
 
-var MAPPINGS = {
+const MAPPINGS = {
 	"$:/themes/tiddlywiki/vanilla/metrics": {
 		"fontsize": "$:/themes/tiddlywiki/vanilla/metrics/fontsize",
 		"lineheight": "$:/themes/tiddlywiki/vanilla/metrics/lineheight",
@@ -34,24 +34,26 @@ var MAPPINGS = {
 };
 
 exports.upgrade = function(wiki,titles,tiddlers) {
-	var self = this,
-		messages = {};
+	const self = this;
+	const messages = {};
 	// Check for tiddlers on our list
-	$tw.utils.each(titles,function(title) {
-		var mapping = MAPPINGS[title];
+	$tw.utils.each(titles,(title) => {
+		const mapping = MAPPINGS[title];
 		if(mapping) {
-			var tiddler = new $tw.Tiddler(tiddlers[title]),
-				tiddlerData = wiki.getTiddlerDataCached(tiddler,{});
-			for(var index in mapping) {
-				var mappedTitle = mapping[index];
+			const tiddler = new $tw.Tiddler(tiddlers[title]);
+			const tiddlerData = wiki.getTiddlerDataCached(tiddler,{});
+			for(const index in mapping) {
+				const mappedTitle = mapping[index];
 				if(!tiddlers[mappedTitle] || tiddlers[mappedTitle].title !== mappedTitle) {
 					tiddlers[mappedTitle] = {
 						title: mappedTitle,
 						text: tiddlerData[index]
 					};
-					messages[mappedTitle] = $tw.language.getString("Import/Upgrader/ThemeTweaks/Created",{variables: {
-						from: title + "##" + index
-					}});
+					messages[mappedTitle] = $tw.language.getString("Import/Upgrader/ThemeTweaks/Created",{
+						variables: {
+							from: `${title}##${index}`
+						}
+					});
 				}
 			}
 		}

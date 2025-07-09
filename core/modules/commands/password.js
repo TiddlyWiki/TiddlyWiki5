@@ -14,7 +14,7 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
+const Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;

@@ -14,12 +14,12 @@ exports.platforms = ["browser"];
 exports.after = ["render"];
 exports.synchronous = true;
 
-var CONFIG_SELECTION_TRACKER_TITLE = "$:/config/Dynannotate/SelectionTracker/Enable",
-	CONFIG_LEGACY_SELECTION_TRACKER_TITLE = "$:/config/Dynannotate/LegacySelectionTracker/Enable";
+const CONFIG_SELECTION_TRACKER_TITLE = "$:/config/Dynannotate/SelectionTracker/Enable";
+const CONFIG_LEGACY_SELECTION_TRACKER_TITLE = "$:/config/Dynannotate/LegacySelectionTracker/Enable";
 
-var SelectionTracker = require("$:/plugins/tiddlywiki/dynannotate/selection-tracker.js").SelectionTracker,
-	LegacySelectionTracker = require("$:/plugins/tiddlywiki/dynannotate/legacy-selection-tracker.js").LegacySelectionTracker,
-	ElementSpotlight = require("$:/plugins/tiddlywiki/dynannotate/element-spotlight.js").ElementSpotlight;
+const {SelectionTracker} = require("$:/plugins/tiddlywiki/dynannotate/selection-tracker.js");
+const {LegacySelectionTracker} = require("$:/plugins/tiddlywiki/dynannotate/legacy-selection-tracker.js");
+const {ElementSpotlight} = require("$:/plugins/tiddlywiki/dynannotate/element-spotlight.js");
 
 exports.startup = function() {
 	$tw.dynannotate = {};
@@ -35,13 +35,13 @@ exports.startup = function() {
 	}
 	// Set up the element spotlight
 	$tw.dynannotate.elementSpotlight = new ElementSpotlight();
-	$tw.rootWidget.addEventListener("tm-spotlight-element",function(event) {
-		var selectors = [];
+	$tw.rootWidget.addEventListener("tm-spotlight-element",(event) => {
+		const selectors = [];
 		if(event.paramObject.selector) {
 			selectors.push(event.paramObject.selector);
 		}
-		$tw.utils.each(Object.keys(event.paramObject).sort(),function(name) {
-			var SELECTOR_PROPERTY_PREFIX = "selector-";
+		$tw.utils.each(Object.keys(event.paramObject).sort(),(name) => {
+			const SELECTOR_PROPERTY_PREFIX = "selector-";
 			if($tw.utils.startsWith(name,SELECTOR_PROPERTY_PREFIX)) {
 				selectors.push(event.paramObject[name]);
 			}

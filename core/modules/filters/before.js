@@ -13,11 +13,11 @@ Filter operator returning the tiddler from the current list that is before the t
 Export our filter function
 */
 exports.before = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
+	const results = [];
+	source((tiddler,title) => {
 		results.push(title);
 	});
-	var index = results.indexOf(operator.operand);
+	const index = results.indexOf(operator.operand);
 	if(index <= 0) {
 		return [];
 	} else {

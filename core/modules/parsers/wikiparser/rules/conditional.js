@@ -13,7 +13,7 @@ This is a <%if [{something}] %>Elephant<%elseif [{else}] %>Pelican<%else%>Crocod
 "use strict";
 
 exports.name = "conditional";
-exports.types = {inline: true, block: true};
+exports.types = {inline: true,block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
@@ -46,7 +46,7 @@ Parse the most recent match
 */
 exports.parse = function() {
 	// Get the filter condition
-	var filterCondition = this.parser.source.substring(this.match.index + this.match[0].length,this.terminateIfMatch.index);
+	const filterCondition = this.parser.source.substring(this.match.index + this.match[0].length,this.terminateIfMatch.index);
 	// Advance the parser position to past the %>
 	this.parser.pos = this.terminateIfMatch.index + this.terminateIfMatch[0].length;
 	// Parse the if clause
@@ -55,7 +55,7 @@ exports.parse = function() {
 
 exports.parseIfClause = function(filterCondition) {
 	// Create the list widget
-	var listWidget = {
+	const listWidget = {
 		type: "list",
 		tag: "$list",
 		isBlock: this.is.block,
@@ -74,10 +74,10 @@ exports.parseIfClause = function(filterCondition) {
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"variable","condition");
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"limit","1");
 	// Check for an immediately following double linebreak
-	var hasLineBreak = !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
+	let hasLineBreak = !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 	// Parse the body looking for else or endif
-	var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>|\\<\\%\\s*(else)\\s*\\%\\>|\\<\\%\\s*(elseif)\\s+([\\s\\S]+?)\\%\\>",
-		ex;
+	var reEndString = String.raw`\<\%\s*(endif)\s*\%\>|\<\%\s*(else)\s*\%\>|\<\%\s*(elseif)\s+([\s\S]+?)\%\>`;
+	var ex;
 	if(hasLineBreak) {
 		ex = this.parser.parseBlocksTerminatedExtended(reEndString);
 	} else {
@@ -94,8 +94,8 @@ exports.parseIfClause = function(filterCondition) {
 			// Check for an immediately following double linebreak
 			hasLineBreak = !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 			// If we found an else then we need to parse the body looking for the endif
-			var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>",
-			ex;
+			var reEndString = String.raw`\<\%\s*(endif)\s*\%\>`;
+			var ex;
 			if(hasLineBreak) {
 				ex = this.parser.parseBlocksTerminatedExtended(reEndString);
 			} else {

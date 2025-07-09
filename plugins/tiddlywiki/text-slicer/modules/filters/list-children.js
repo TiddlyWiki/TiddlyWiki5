@@ -13,20 +13,20 @@ Filter operator returning all the descendents of a tiddler listed in the "list" 
 Export our filter function
 */
 exports["list-children"] = function(source,operator,options) {
-	var children = {},
-		processTiddler = function(title) {
-			var tiddler = options.wiki.getTiddler(title);
-			if(tiddler && !$tw.utils.hop(children,title)) {
-				children[title] = true;
-				var list = options.wiki.getTiddlerList(title,operator.operand);
-				list.forEach(function(listItem) {
-					if(!$tw.utils.hop(children,listItem)) {
-						processTiddler(listItem);
-					}
-				});
-			}
-		};
-	source(function(tiddler,title) {
+	const children = {};
+	const processTiddler = function(title) {
+		const tiddler = options.wiki.getTiddler(title);
+		if(tiddler && !$tw.utils.hop(children,title)) {
+			children[title] = true;
+			const list = options.wiki.getTiddlerList(title,operator.operand);
+			list.forEach((listItem) => {
+				if(!$tw.utils.hop(children,listItem)) {
+					processTiddler(listItem);
+				}
+			});
+		}
+	};
+	source((tiddler,title) => {
 		processTiddler(title);
 	});
 	return Object.keys(children);

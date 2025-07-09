@@ -13,11 +13,11 @@ Filter operator for returning the names of the available editions in this wiki
 Export our filter function
 */
 exports.editions = function(source,operator,options) {
-	var results = [];
+	const results = [];
 	if($tw.node) {
-		var editionInfo = $tw.utils.getEditionInfo();
+		const editionInfo = $tw.utils.getEditionInfo();
 		if(editionInfo) {
-			$tw.utils.each(editionInfo,function(info,name) {
+			$tw.utils.each(editionInfo,(info,name) => {
 				results.push(name);
 			});
 		}

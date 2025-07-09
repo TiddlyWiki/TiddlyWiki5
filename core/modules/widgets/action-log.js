@@ -9,9 +9,9 @@ Action widget to log debug messages
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var LogWidget = function(parseTreeNode,options) {
+const LogWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -28,11 +28,11 @@ LogWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 };
 
-LogWidget.prototype.execute = function(){
+LogWidget.prototype.execute = function() {
 	this.message = this.getAttribute("$$message","debug");
-	this.logAll = this.getAttribute("$$all","no") === "yes" ? true : false;
+	this.logAll = this.getAttribute("$$all","no") === "yes";
 	this.filter = this.getAttribute("$$filter");
-}
+};
 
 /*
 Refresh the widget by ensuring our attributes are up to date
@@ -51,28 +51,28 @@ LogWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 LogWidget.prototype.log = function() {
-	var data = {},
-		dataCount,
-		allVars = {},
-		filteredVars;
+	const data = {};
+	let dataCount;
+	const allVars = {};
+	let filteredVars;
 
-	$tw.utils.each(this.attributes,function(attribute,name) {
+	$tw.utils.each(this.attributes,(attribute,name) => {
 		if(name.substring(0,2) !== "$$") {
 			data[name] = attribute;
 		}
 	});
 
-	for(var v in this.variables) {
-		var variable = this.parentWidget && this.parentWidget.variables[v];
+	for(const v in this.variables) {
+		const variable = this.parentWidget && this.parentWidget.variables[v];
 		if(variable && variable.isFunctionDefinition) {
 			allVars[v] = variable.value;
 		} else {
-			allVars[v]  = this.getVariable(v,{defaultValue:""});
+			allVars[v] = this.getVariable(v,{defaultValue: ""});
 		}
 	}
 	if(this.filter) {
 		filteredVars = this.wiki.compileFilter(this.filter).call(this.wiki,this.wiki.makeTiddlerIterator(allVars));
-		$tw.utils.each(filteredVars,function(name) {
+		$tw.utils.each(filteredVars,(name) => {
 			data[name] = allVars[name];
 		});
 	}
@@ -88,6 +88,6 @@ LogWidget.prototype.log = function() {
 		console.groupEnd();
 	}
 	console.groupEnd();
-}
+};
 
 exports["action-log"] = LogWidget;

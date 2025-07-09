@@ -9,15 +9,15 @@ Deprecated legacy command for serving tiddlers
 
 "use strict";
 
-var Server = require("$:/core/modules/server/server.js").Server;
+const {Server} = require("$:/core/modules/server/server.js");
 
 exports.info = {
 	name: "server",
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
-	var self = this;
+const Command = function(params,commander,callback) {
+	const self = this;
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
@@ -25,7 +25,7 @@ var Command = function(params,commander,callback) {
 
 Command.prototype.execute = function() {
 	if(!$tw.boot.wikiTiddlersPath) {
-		$tw.utils.warning("Warning: Wiki folder '" + $tw.boot.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
+		$tw.utils.warning(`Warning: Wiki folder '${$tw.boot.wikiPath}' does not exist or is missing a tiddlywiki.info file`);
 	}
 	// Set up server
 	this.server = new Server({
@@ -42,7 +42,7 @@ Command.prototype.execute = function() {
 			"debug-level": this.params[8]
 		}
 	});
-	var nodeServer = this.server.listen();
+	const nodeServer = this.server.listen();
 	$tw.hooks.invokeHook("th-server-command-post-start",this.server,nodeServer,"tiddlywiki");
 	return null;
 };

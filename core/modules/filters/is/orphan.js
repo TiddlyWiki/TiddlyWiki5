@@ -13,17 +13,17 @@ Filter function for [is[orphan]]
 Export our filter function
 */
 exports.orphan = function(source,prefix,options) {
-	var results = [],
-		orphanTitles = options.wiki.getOrphanTitles();
+	const results = [];
+	const orphanTitles = options.wiki.getOrphanTitles();
 	if(prefix === "!") {
-		source(function(tiddler,title) {
-			if(orphanTitles.indexOf(title) === -1) {
+		source((tiddler,title) => {
+			if(!orphanTitles.includes(title)) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
-			if(orphanTitles.indexOf(title) !== -1) {
+		source((tiddler,title) => {
+			if(orphanTitles.includes(title)) {
 				results.push(title);
 			}
 		});

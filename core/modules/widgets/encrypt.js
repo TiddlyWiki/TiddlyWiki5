@@ -9,9 +9,9 @@ Encrypt widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var EncryptWidget = function(parseTreeNode,options) {
+const EncryptWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -27,7 +27,7 @@ EncryptWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var textNode = this.document.createTextNode(this.encryptedText);
+	const textNode = this.document.createTextNode(this.encryptedText);
 	parent.insertBefore(textNode,nextSibling);
 	this.domNodes.push(textNode);
 };
@@ -39,13 +39,13 @@ EncryptWidget.prototype.execute = function() {
 	// Get parameters from our attributes
 	this.filter = this.getAttribute("filter","[!is[system]]");
 	// Encrypt the filtered tiddlers
-	var tiddlers = this.wiki.filterTiddlers(this.filter),
-		json = {},
-		self = this;
-	$tw.utils.each(tiddlers,function(title) {
-		var tiddler = self.wiki.getTiddler(title),
-			jsonTiddler = {};
-		for(var f in tiddler.fields) {
+	const tiddlers = this.wiki.filterTiddlers(this.filter);
+	const json = {};
+	const self = this;
+	$tw.utils.each(tiddlers,(title) => {
+		const tiddler = self.wiki.getTiddler(title);
+		const jsonTiddler = {};
+		for(const f in tiddler.fields) {
 			jsonTiddler[f] = tiddler.getFieldString(f);
 		}
 		json[title] = jsonTiddler;

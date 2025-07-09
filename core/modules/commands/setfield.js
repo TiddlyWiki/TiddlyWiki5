@@ -9,14 +9,14 @@ Command to modify selected tiddlers to set a field to the text of a template tid
 
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
+const widget = require("$:/core/modules/widgets/widget.js");
 
 exports.info = {
 	name: "setfield",
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
+const Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
@@ -26,20 +26,20 @@ Command.prototype.execute = function() {
 	if(this.params.length < 4) {
 		return "Missing parameters";
 	}
-	var self = this,
-		wiki = this.commander.wiki,
-		filter = this.params[0],
-		fieldname = this.params[1] || "text",
-		templatetitle = this.params[2],
-		rendertype = this.params[3] || "text/plain",
-		tiddlers = wiki.filterTiddlers(filter);
-	$tw.utils.each(tiddlers,function(title) {
-		var parser = wiki.parseTiddler(templatetitle),
-			newFields = {},
-			tiddler = wiki.getTiddler(title);
+	const self = this;
+	const {wiki} = this.commander;
+	const filter = this.params[0];
+	const fieldname = this.params[1] || "text";
+	const templatetitle = this.params[2];
+	const rendertype = this.params[3] || "text/plain";
+	const tiddlers = wiki.filterTiddlers(filter);
+	$tw.utils.each(tiddlers,(title) => {
+		const parser = wiki.parseTiddler(templatetitle);
+		const newFields = {};
+		const tiddler = wiki.getTiddler(title);
 		if(parser) {
-			var widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}});
-			var container = $tw.fakeDocument.createElement("div");
+			const widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}});
+			const container = $tw.fakeDocument.createElement("div");
 			widgetNode.render(container,null);
 			newFields[fieldname] = rendertype === "text/html" ? container.innerHTML : container.textContent;
 		} else {

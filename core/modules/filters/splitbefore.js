@@ -13,9 +13,9 @@ Filter operator that splits each result on the first occurance of the specified 
 Export our filter function
 */
 exports.splitbefore = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
-		var parts = title.split(operator.operand);
+	const results = [];
+	source((tiddler,title) => {
+		const parts = title.split(operator.operand);
 		if(parts.length === 1) {
 			$tw.utils.pushTop(results,parts[0]);
 		} else {

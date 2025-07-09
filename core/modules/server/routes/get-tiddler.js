@@ -13,16 +13,16 @@ exports.method = "GET";
 exports.path = /^\/recipes\/default\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
-	var title = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		tiddler = state.wiki.getTiddler(title),
-		tiddlerFields = {},
-		knownFields = [
-			"bag", "created", "creator", "modified", "modifier", "permissions", "recipe", "revision", "tags", "text", "title", "type", "uri"
-		];
+	const title = $tw.utils.decodeURIComponentSafe(state.params[0]);
+	const tiddler = state.wiki.getTiddler(title);
+	const tiddlerFields = {};
+	const knownFields = new Set([
+		"bag","created","creator","modified","modifier","permissions","recipe","revision","tags","text","title","type","uri"
+	]);
 	if(tiddler) {
-		$tw.utils.each(tiddler.fields,function(field,name) {
-			var value = tiddler.getFieldString(name);
-			if(knownFields.indexOf(name) !== -1) {
+		$tw.utils.each(tiddler.fields,(field,name) => {
+			const value = tiddler.getFieldString(name);
+			if(knownFields.has(name)) {
 				tiddlerFields[name] = value;
 			} else {
 				tiddlerFields.fields = tiddlerFields.fields || {};

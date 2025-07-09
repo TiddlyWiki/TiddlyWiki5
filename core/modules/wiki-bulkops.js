@@ -18,13 +18,13 @@ function renameTiddler(fromTitle,toTitle,options) {
 	options = options || {};
 	if(fromTitle && toTitle && fromTitle !== toTitle) {
 		// Rename the tiddler itself
-		var oldTiddler = this.getTiddler(fromTitle),
-			newTiddler = new $tw.Tiddler(oldTiddler,{title: toTitle},this.getModificationFields());
+		const oldTiddler = this.getTiddler(fromTitle);
+		let newTiddler = new $tw.Tiddler(oldTiddler,{title: toTitle},this.getModificationFields());
 		newTiddler = $tw.hooks.invokeHook("th-renaming-tiddler",newTiddler,oldTiddler);
 		this.addTiddler(newTiddler);
 		this.deleteTiddler(fromTitle);
 		// Rename any tags or lists that reference it
-		this.relinkTiddler(fromTitle,toTitle,options)
+		this.relinkTiddler(fromTitle,toTitle,options);
 	}
 }
 
@@ -32,35 +32,35 @@ function renameTiddler(fromTitle,toTitle,options) {
 Relink any tags or lists that reference a given tiddler
 */
 function relinkTiddler(fromTitle,toTitle,options) {
-	var self = this;
+	const self = this;
 	fromTitle = (fromTitle || "").trim();
 	toTitle = (toTitle || "").trim();
 	options = options || {};
 	if(fromTitle && toTitle && fromTitle !== toTitle) {
-		this.each(function(tiddler,title) {
-			var type = tiddler.fields.type || "";
+		this.each((tiddler,title) => {
+			const type = tiddler.fields.type || "";
 			// Don't touch plugins or JavaScript modules
 			if(!tiddler.fields["plugin-type"] && type !== "application/javascript") {
-				var tags = tiddler.fields.tags ? tiddler.fields.tags.slice(0) : undefined,
-					list = tiddler.fields.list ? tiddler.fields.list.slice(0) : undefined,
-					isModified = false,
-					processList = function(listField) {
-						if(listField && listField.indexOf(fromTitle) !== -1) {
-							// Remove any existing instances of the toTitle
-							var p = listField.indexOf(toTitle);
-							while(p !== -1) {
-								listField.splice(p,1);
-								p = listField.indexOf(toTitle);
-							}
-							// Replace the fromTitle with toTitle
-							$tw.utils.each(listField,function (title,index) {
-								if(title === fromTitle) {
-									listField[index] = toTitle;
-									isModified = true;
-								}
-							});
+				const tags = tiddler.fields.tags ? [...tiddler.fields.tags] : undefined;
+				const list = tiddler.fields.list ? [...tiddler.fields.list] : undefined;
+				let isModified = false;
+				const processList = function(listField) {
+					if(listField && listField.includes(fromTitle)) {
+						// Remove any existing instances of the toTitle
+						let p = listField.indexOf(toTitle);
+						while(p !== -1) {
+							listField.splice(p,1);
+							p = listField.indexOf(toTitle);
 						}
-					};
+						// Replace the fromTitle with toTitle
+						$tw.utils.each(listField,(title,index) => {
+							if(title === fromTitle) {
+								listField[index] = toTitle;
+								isModified = true;
+							}
+						});
+					}
+				};
 				if(!options.dontRenameInTags) {
 					// Rename tags
 					processList(tags);
@@ -70,7 +70,7 @@ function relinkTiddler(fromTitle,toTitle,options) {
 					processList(list);
 				}
 				if(isModified) {
-					var newTiddler = new $tw.Tiddler(tiddler,{tags: tags, list: list},self.getModificationFields())
+					let newTiddler = new $tw.Tiddler(tiddler,{tags,list},self.getModificationFields());
 					newTiddler = $tw.hooks.invokeHook("th-relinking-tiddler",newTiddler,tiddler);
 					self.addTiddler(newTiddler);
 				}

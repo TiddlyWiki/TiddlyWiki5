@@ -39,8 +39,8 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var reEndString = "^@@(?:\\r?\\n)?";
-	var classes = [], styles = [];
+	const reEndString = String.raw`^@@(?:\r?\n)?`;
+	const classes = []; const styles = [];
 	do {
 		// Get the class and style
 		if(this.match[1]) {
@@ -55,8 +55,8 @@ exports.parse = function() {
 		this.match = this.matchRegExp.exec(this.parser.source);
 	} while(this.match && this.match.index === this.parser.pos);
 	// Parse the body
-	var tree = this.parser.parseBlocks(reEndString);
-	for(var t=0; t<tree.length; t++) {
+	const tree = this.parser.parseBlocks(reEndString);
+	for(let t = 0;t < tree.length;t++) {
 		if(classes.length > 0) {
 			$tw.utils.addClassToParseTreeNode(tree[t],classes.join(" "));
 		}

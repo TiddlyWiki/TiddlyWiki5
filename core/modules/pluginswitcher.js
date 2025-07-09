@@ -26,8 +26,8 @@ function PluginSwitcher(options) {
 	// Switch to the current plugin
 	this.switchPlugins();
 	// Listen for changes to the selected plugin
-	var self = this;
-	this.wiki.addEventListener("change",function(changes) {
+	const self = this;
+	this.wiki.addEventListener("change",(changes) => {
 		if($tw.utils.hop(changes,self.controllerTitle)) {
 			self.switchPlugins();
 		}
@@ -36,33 +36,33 @@ function PluginSwitcher(options) {
 
 PluginSwitcher.prototype.switchPlugins = function() {
 	// Get the name of the current theme
-	var selectedPluginTitle = this.wiki.getTiddlerText(this.controllerTitle);
+	let selectedPluginTitle = this.wiki.getTiddlerText(this.controllerTitle);
 	// If it doesn't exist, then fallback to one of the default themes
-	var index = 0;
+	let index = 0;
 	while(!this.wiki.getTiddler(selectedPluginTitle) && index < this.defaultPlugins.length) {
 		selectedPluginTitle = this.defaultPlugins[index++];
 	}
 	// Accumulate the titles of the plugins that we need to load
-	var plugins = [],
-		self = this,
-		accumulatePlugin = function(title) {
-			var tiddler = self.wiki.getTiddler(title);
-			if(tiddler && tiddler.isPlugin() && plugins.indexOf(title) === -1) {
-				plugins.push(title);
-				var pluginInfo = $tw.utils.parseJSONSafe(self.wiki.getTiddlerText(title)),
-					dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
-				$tw.utils.each(dependents,function(title) {
-					accumulatePlugin(title);
-				});
-			}
-		};
+	const plugins = [];
+	const self = this;
+	const accumulatePlugin = function(title) {
+		const tiddler = self.wiki.getTiddler(title);
+		if(tiddler && tiddler.isPlugin() && !plugins.includes(title)) {
+			plugins.push(title);
+			const pluginInfo = $tw.utils.parseJSONSafe(self.wiki.getTiddlerText(title));
+			const dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
+			$tw.utils.each(dependents,(title) => {
+				accumulatePlugin(title);
+			});
+		}
+	};
 	accumulatePlugin(selectedPluginTitle);
 	// Read the plugin info for the incoming plugins
-	var changes = $tw.wiki.readPluginInfo(plugins);
+	const changes = $tw.wiki.readPluginInfo(plugins);
 	// Unregister any existing theme tiddlers
-	var unregisteredTiddlers = $tw.wiki.unregisterPluginTiddlers(this.pluginType);
+	const unregisteredTiddlers = $tw.wiki.unregisterPluginTiddlers(this.pluginType);
 	// Register any new theme tiddlers
-	var registeredTiddlers = $tw.wiki.registerPluginTiddlers(this.pluginType,plugins);
+	const registeredTiddlers = $tw.wiki.registerPluginTiddlers(this.pluginType,plugins);
 	// Unpack the current theme tiddlers
 	$tw.wiki.unpackPluginTiddlers();
 	// Call the switch handler

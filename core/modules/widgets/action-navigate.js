@@ -9,9 +9,9 @@ Action widget to navigate to a tiddler
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var NavigateWidget = function(parseTreeNode,options) {
+const NavigateWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -40,7 +40,7 @@ NavigateWidget.prototype.execute = function() {
 Refresh the widget by ensuring our attributes are up to date
 */
 NavigateWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes["$to"] || changedAttributes["$scroll"]) {
 		this.refreshSelf();
 		return true;
@@ -53,8 +53,8 @@ Invoke the action associated with this widget
 */
 NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	event = event || {};
-	var bounds = triggeringWidget && triggeringWidget.getBoundingClientRect && triggeringWidget.getBoundingClientRect(),
-		suppressNavigation = event.metaKey || event.ctrlKey || (event.button === 1);
+	const bounds = triggeringWidget && triggeringWidget.getBoundingClientRect && triggeringWidget.getBoundingClientRect();
+	let suppressNavigation = event.metaKey || event.ctrlKey || (event.button === 1);
 	if(this.actionScroll === "yes") {
 		suppressNavigation = false;
 	} else if(this.actionScroll === "no") {
@@ -65,7 +65,8 @@ NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		navigateTo: this.actionTo === undefined ? this.getVariable("currentTiddler") : this.actionTo,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: triggeringWidget,
-		navigateFromClientRect: bounds && { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
+		navigateFromClientRect: bounds && {
+			top: bounds.top,left: bounds.left,width: bounds.width,right: bounds.right,bottom: bounds.bottom,height: bounds.height
 		},
 		navigateFromClientTop: bounds && bounds.top,
 		navigateFromClientLeft: bounds && bounds.left,
@@ -78,7 +79,7 @@ NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		ctrlKey: event.ctrlKey,
 		altKey: event.altKey,
 		shiftKey: event.shiftKey,
-		event: event
+		event
 	});
 	return true; // Action was invoked
 };

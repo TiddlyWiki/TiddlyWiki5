@@ -9,16 +9,16 @@ A widget for displaying word clouds. Derived from https://github.com/jasondavies
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	d3 = require("$:/plugins/tiddlywiki/d3/d3.js").d3;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
+const {d3} = require("$:/plugins/tiddlywiki/d3/d3.js");
 
 if($tw.browser) {
 	// Frightful hack to give the cloud plugin the global d3 variable it needs
 	window.d3 = d3;
-	d3.layout.cloud  = require("$:/plugins/tiddlywiki/d3/d3.layout.cloud.js").cloud;
+	d3.layout.cloud = require("$:/plugins/tiddlywiki/d3/d3.layout.cloud.js").cloud;
 }
 
-var CloudWidget = function(parseTreeNode,options) {
+const CloudWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -38,7 +38,7 @@ CloudWidget.prototype.render = function(parent,nextSibling) {
 	// Execute our logic
 	this.execute();
 	// Create the chart
-	var chart = this.createChart(parent,nextSibling);
+	const chart = this.createChart(parent,nextSibling);
 	this.updateChart = chart.updateChart;
 	if(this.updateChart) {
 		this.updateChart();
@@ -49,52 +49,52 @@ CloudWidget.prototype.render = function(parent,nextSibling) {
 };
 
 CloudWidget.prototype.createChart = function(parent,nextSibling) {
-	var self = this,
-		fill = d3.scale.category20(),
-		data = this.wiki.getTiddlerData(this.cloudData);
+	const self = this;
+	const fill = d3.scale.category20();
+	let data = this.wiki.getTiddlerData(this.cloudData);
 	// Use dummy data if none provided
 	if(!data) {
-		data = "This word cloud does not have any data in it".split(" ").map(function(d) {
-			return {text: d, size: 10 + Math.random() * 90};
+		data = "This word cloud does not have any data in it".split(" ").map((d) => {
+			return {text: d,size: 10 + Math.random() * 90};
 		});
 	}
 	// Create the svg element
-	var svgElement = d3.select(parent).insert("svg",function() {return nextSibling;})
-		.attr("width", 600)
-		.attr("height", 400);
+	const svgElement = d3.select(parent).insert("svg",() => {return nextSibling;})
+		.attr("width",600)
+		.attr("height",400);
 	// Create the main group
-	var mainGroup = svgElement
+	const mainGroup = svgElement
 		.append("g")
-		.attr("transform", "translate(300,200)");
+		.attr("transform","translate(300,200)");
 	// Create the layout
-	var layout = d3.layout.cloud().size([600, 400])
+	const layout = d3.layout.cloud().size([600,400])
 		.words(data)
 		.padding(5)
-		.rotate(function() { return ~~(Math.random() * 5) * 30 - 60; })
+		.rotate(() => {return ~~(Math.random() * 5) * 30 - 60;})
 		.font("Impact")
-		.fontSize(function(d) { return d.size*2; })
-		.on("end", draw)
+		.fontSize((d) => {return d.size * 2;})
+		.on("end",draw)
 		.start();
 	// Function to draw all the words
 	function draw(words) {
 		mainGroup.selectAll("text")
 			.data(words)
 			.enter().append("text")
-			.style("font-size", function(d) { return d.size + "px"; })
-			.style("font-family", "Impact")
-			.style("fill", function(d, i) { return fill(i); })
-			.attr("text-anchor", "middle")
-			.attr("transform", function(d) {
-				return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+			.style("font-size",(d) => {return `${d.size}px`;})
+			.style("font-family","Impact")
+			.style("fill",(d,i) => {return fill(i);})
+			.attr("text-anchor","middle")
+			.attr("transform",(d) => {
+				return `translate(${[d.x,d.y]})rotate(${d.rotate})`;
 			})
-			.text(function(d) { return d.text; });
+			.text((d) => {return d.text;});
 	}
 	function updateChart() {
 		layout.spiral(self.spiral);
 	}
 	return {
 		domNode: svgElement[0][0],
-		updateChart: updateChart
+		updateChart
 	};
 };
 
@@ -111,7 +111,7 @@ CloudWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 CloudWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.data || changedTiddlers[this.cloudData]) {
 		this.refreshSelf();
 		return true;

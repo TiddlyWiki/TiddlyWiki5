@@ -24,10 +24,10 @@ Run the macro
 */
 exports.run = function(title) {
 	title = title || this.getVariable("currentTiddler");
-	var tiddler = !!title && this.wiki.getTiddler(title),
-		fields = new Object();
+	const tiddler = !!title && this.wiki.getTiddler(title);
+	const fields = new Object();
 	if(tiddler) {
-		for(var field in tiddler.fields) {
+		for(const field in tiddler.fields) {
 			fields[field] = tiddler.getFieldString(field);
 		}
 	}

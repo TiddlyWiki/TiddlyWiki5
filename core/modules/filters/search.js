@@ -13,28 +13,28 @@ Filter operator for searching for the text in the operand tiddler
 Export our filter function
 */
 exports.search = function(source,operator,options) {
-	var invert = operator.prefix === "!";
+	const invert = operator.prefix === "!";
 	if(operator.suffixes) {
-		var hasFlag = function(flag) {
-				return (operator.suffixes[1] || []).indexOf(flag) !== -1;
-			},
-			excludeFields = false,
-			fieldList = operator.suffixes[0] || [],
-			firstField = fieldList[0] || "", 
-			firstChar = firstField.charAt(0),
-			fields;
+		const hasFlag = function(flag) {
+			return (operator.suffixes[1] || []).includes(flag);
+		};
+		let excludeFields = false;
+		const fieldList = operator.suffixes[0] || [];
+		const firstField = fieldList[0] || "";
+		const firstChar = firstField.charAt(0);
+		let fields;
 		if(firstChar === "-") {
 			fields = [firstField.slice(1)].concat(fieldList.slice(1));
 			excludeFields = true;
-		} else if(fieldList[0] === "*"){
+		} else if(fieldList[0] === "*") {
 			fields = [];
 			excludeFields = true;
 		} else {
-			fields = fieldList.slice(0);
+			fields = [...fieldList];
 		}
 		return options.wiki.search(operator.operand,{
-			source: source,
-			invert: invert,
+			source,
+			invert,
 			field: fields,
 			excludeField: excludeFields,
 			some: hasFlag("some"),
@@ -47,8 +47,8 @@ exports.search = function(source,operator,options) {
 		});
 	} else {
 		return options.wiki.search(operator.operand,{
-			source: source,
-			invert: invert
+			source,
+			invert
 		});
 	}
 };

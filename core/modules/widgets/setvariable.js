@@ -9,9 +9,9 @@ Set variable widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var SetWidget = function(parseTreeNode,options) {
+const SetWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -50,9 +50,9 @@ SetWidget.prototype.execute = function() {
 	} else if(this.parseTreeNode.isFunctionDefinition) {
 		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isFunctionDefinition: true});
 	} else if(this.parseTreeNode.isProcedureDefinition) {
-		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isProcedureDefinition: true, configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isProcedureDefinition: true,configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
 	} else if(this.parseTreeNode.isWidgetDefinition) {
-		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isWidgetDefinition: true, configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isWidgetDefinition: true,configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
 	} else {
 		this.setVariable(this.setName,this.getValue());
 	}
@@ -64,9 +64,9 @@ SetWidget.prototype.execute = function() {
 Get the value to be assigned
 */
 SetWidget.prototype.getValue = function() {
-	var value = this.setValue;
+	let value = this.setValue;
 	if(this.setTiddler) {
-		var tiddler;
+		let tiddler;
 		if(this.setSubTiddler) {
 			tiddler = this.wiki.getSubTiddler(this.setTiddler,this.setSubTiddler);
 		} else {
@@ -79,12 +79,12 @@ SetWidget.prototype.getValue = function() {
 		} else if(this.setIndex) {
 			value = this.wiki.extractTiddlerDataItem(this.setTiddler,this.setIndex,this.setEmptyValue);
 		} else {
-			value = tiddler.fields.text || this.setEmptyValue ;
+			value = tiddler.fields.text || this.setEmptyValue;
 		}
 	} else if(this.setFilter) {
-		var results = this.wiki.filterTiddlers(this.setFilter,this);
+		const results = this.wiki.filterTiddlers(this.setFilter,this);
 		if(this.setValue == null) {
-			var select;
+			let select;
 			if(this.setSelect) {
 				select = parseInt(this.setSelect,10);
 			}
@@ -107,9 +107,9 @@ SetWidget.prototype.getValue = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 SetWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.name || changedAttributes.filter || changedAttributes.select || changedAttributes.tiddler || (this.setTiddler && changedTiddlers[this.setTiddler]) || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes.emptyValue ||
-	   (this.setFilter && this.getValue() != this.variables[this.setName].value)) {
+		(this.setFilter && this.getValue() != this.variables[this.setName].value)) {
 		this.refreshSelf();
 		return true;
 	} else {

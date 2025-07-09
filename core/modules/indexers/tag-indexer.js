@@ -20,19 +20,19 @@ TagIndexer.prototype.init = function() {
 		new TagSubIndexer(this,"eachTiddlerPlusShadows"),
 		new TagSubIndexer(this,"eachShadowPlusTiddlers")
 	];
-	$tw.utils.each(this.subIndexers,function(subIndexer) {
+	$tw.utils.each(this.subIndexers,(subIndexer) => {
 		subIndexer.addIndexMethod();
 	});
 };
 
 TagIndexer.prototype.rebuild = function() {
-	$tw.utils.each(this.subIndexers,function(subIndexer) {
+	$tw.utils.each(this.subIndexers,(subIndexer) => {
 		subIndexer.rebuild();
 	});
 };
 
 TagIndexer.prototype.update = function(updateDescriptor) {
-	$tw.utils.each(this.subIndexers,function(subIndexer) {
+	$tw.utils.each(this.subIndexers,(subIndexer) => {
 		subIndexer.update(updateDescriptor);
 	});
 };
@@ -44,21 +44,21 @@ function TagSubIndexer(indexer,iteratorMethod) {
 }
 
 TagSubIndexer.prototype.addIndexMethod = function() {
-	var self = this;
+	const self = this;
 	this.indexer.wiki[this.iteratorMethod].byTag = function(tag) {
-		return self.lookup(tag).slice(0);
+		return [...self.lookup(tag)];
 	};
 };
 
 TagSubIndexer.prototype.rebuild = function() {
-	var self = this;
+	const self = this;
 	// Hashmap by tag of array of {isSorted:, titles:[]}
 	this.index = Object.create(null);
 	// Add all the tags
-	this.indexer.wiki[this.iteratorMethod](function(tiddler,title) {
-		$tw.utils.each(tiddler.fields.tags,function(tag) {
+	this.indexer.wiki[this.iteratorMethod]((tiddler,title) => {
+		$tw.utils.each(tiddler.fields.tags,(tag) => {
 			if(!self.index[tag]) {
-				self.index[tag] = {isSorted: false, titles: [title]};
+				self.index[tag] = {isSorted: false,titles: [title]};
 			} else {
 				self.index[tag].titles.push(title);
 			}
@@ -75,7 +75,7 @@ TagSubIndexer.prototype.lookup = function(tag) {
 	if(this.index === null) {
 		this.rebuild();
 	}
-	var indexRecord = this.index[tag];
+	const indexRecord = this.index[tag];
 	if(indexRecord) {
 		if(!indexRecord.isSorted) {
 			if(this.indexer.wiki.sortByList) {

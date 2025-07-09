@@ -18,11 +18,11 @@ Implements the Dropbox URL converter macro.
 exports.name = "dropbox-url";
 
 exports.params = [
-	{name: "url", default: "https://www.dropbox.com/s/<gobbledegook>/mywiki.html"}
+	{name: "url",default: "https://www.dropbox.com/s/<gobbledegook>/mywiki.html"}
 ];
 
 exports.run = function(url) {
 	url = url.replace("www.dropbox.com","dl.dropboxusercontent.com");
-	return "`" + url + "` <small>([[open|" + url + "]])</small>";
+	return `\`${url}\` <small>([[open|${url}]])</small>`;
 };
 

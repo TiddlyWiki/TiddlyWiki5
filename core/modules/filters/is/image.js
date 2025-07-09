@@ -13,15 +13,15 @@ Filter function for [is[image]]
 Export our filter function
 */
 exports.image = function(source,prefix,options) {
-	var results = [];
+	const results = [];
 	if(prefix === "!") {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(!options.wiki.isImageTiddler(title)) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(options.wiki.isImageTiddler(title)) {
 				results.push(title);
 			}

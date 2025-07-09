@@ -6,12 +6,12 @@ Library function for creating widget using a dom creating function
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 function createDomWidget(domCreatorFunction) {
 
-	var MyWidget = function(parseTreeNode, options) {
-		this.initialise(parseTreeNode, options);
+	const MyWidget = function(parseTreeNode,options) {
+		this.initialise(parseTreeNode,options);
 	};
 
 	/*
@@ -22,10 +22,10 @@ function createDomWidget(domCreatorFunction) {
 	/*
 	Render this widget into the DOM
 	*/
-	MyWidget.prototype.render = function(parent, nextSibling) {
+	MyWidget.prototype.render = function(parent,nextSibling) {
 		this.parentDomNode = parent;
-		var domNode = domCreatorFunction(this.document);
-		parent.insertBefore(domNode, nextSibling);
+		const domNode = domCreatorFunction(this.document);
+		parent.insertBefore(domNode,nextSibling);
 		this.domNodes.push(domNode);
 	};
 

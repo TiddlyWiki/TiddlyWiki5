@@ -9,9 +9,9 @@ Genesis widget for dynamically creating widgets
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var GenesisWidget = function(parseTreeNode,options) {
+const GenesisWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -25,7 +25,7 @@ GenesisWidget.prototype.computeAttributes = function(options) {
 	options.filterFn = function(name) {
 		// Only compute our own attributes which start with a single dollar
 		return name.charAt(0) === "$" && name.charAt(1) !== "$";
-	}
+	};
 	return Widget.prototype.computeAttributes.call(this,options);
 };
 
@@ -43,7 +43,7 @@ GenesisWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 GenesisWidget.prototype.execute = function() {
-	var self = this;
+	const self = this;
 	// Collect attributes
 	this.genesisType = this.getAttribute("$type");
 	this.genesisRemappable = this.getAttribute("$remappable","yes") === "yes";
@@ -56,10 +56,10 @@ GenesisWidget.prototype.execute = function() {
 		return;
 	}
 	// Construct parse tree
-	var isElementWidget = this.genesisType.charAt(0) !== "$",
-		nodeType = isElementWidget ? "element" : this.genesisType.substr(1),
-		nodeTag = isElementWidget ? this.genesisType : undefined;
-	var parseTreeNodes = [{
+	const isElementWidget = this.genesisType.charAt(0) !== "$";
+	const nodeType = isElementWidget ? "element" : this.genesisType.substr(1);
+	const nodeTag = isElementWidget ? this.genesisType : undefined;
+	const parseTreeNodes = [{
 		type: nodeType,
 		tag: nodeTag,
 		attributes: {},
@@ -74,13 +74,13 @@ GenesisWidget.prototype.execute = function() {
 	if(this.genesisNames && this.genesisValues) {
 		this.attributeNames = this.wiki.filterTiddlers(self.genesisNames,this);
 		this.attributeValues = this.wiki.filterTiddlers(self.genesisValues,this);
-		$tw.utils.each(this.attributeNames,function(varname,index) {
+		$tw.utils.each(this.attributeNames,(varname,index) => {
 			$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],varname,self.attributeValues[index] || "");
 		});
 	}
 	// Apply explicit attributes
-	$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(this.parseTreeNode),function(attribute) {
-		var name = attribute.name;
+	$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(this.parseTreeNode),(attribute) => {
+		let {name} = attribute;
 		if(name.charAt(0) === "$") {
 			if(name.charAt(1) === "$") {
 				// Double $$ is changed to a single $
@@ -90,7 +90,7 @@ GenesisWidget.prototype.execute = function() {
 				return;
 			}
 		}
-		$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],$tw.utils.extend({},attribute,{name: name}));
+		$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],$tw.utils.extend({},attribute,{name}));
 	});
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
@@ -100,11 +100,11 @@ GenesisWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 GenesisWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		filterNames = this.getAttribute("$names",""),
-		filterValues = this.getAttribute("$values",""),
-		attributeNames = this.wiki.filterTiddlers(filterNames,this),
-		attributeValues = this.wiki.filterTiddlers(filterValues,this);
+	const changedAttributes = this.computeAttributes();
+	const filterNames = this.getAttribute("$names","");
+	const filterValues = this.getAttribute("$values","");
+	const attributeNames = this.wiki.filterTiddlers(filterNames,this);
+	const attributeValues = this.wiki.filterTiddlers(filterValues,this);
 	if($tw.utils.count(changedAttributes) > 0 || !$tw.utils.isArrayEqual(this.attributeNames,attributeNames) || !$tw.utils.isArrayEqual(this.attributeValues,attributeValues)) {
 		this.refreshSelf();
 		return true;

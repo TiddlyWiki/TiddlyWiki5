@@ -8,7 +8,7 @@ Transitive test C
 \*/
 
 
-exports.foo = function () {
-    return 1;
+exports.foo = function() {
+	return 1;
 };
 

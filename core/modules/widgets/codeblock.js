@@ -9,9 +9,9 @@ Code block node widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var CodeBlockWidget = function(parseTreeNode,options) {
+const CodeBlockWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -27,8 +27,8 @@ CodeBlockWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var codeNode = this.document.createElement("code"),
-		domNode = this.document.createElement("pre");
+	const codeNode = this.document.createElement("code");
+	const domNode = this.document.createElement("pre");
 	codeNode.appendChild(this.document.createTextNode(this.getAttribute("code")));
 	domNode.appendChild(codeNode);
 	parent.insertBefore(domNode,nextSibling);
@@ -49,7 +49,7 @@ CodeBlockWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 CodeBlockWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.code || changedAttributes.language) {
 		this.refreshSelf();
 		return true;

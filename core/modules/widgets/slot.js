@@ -9,10 +9,10 @@ Widget for definition of slots within transcluded content. The values provided b
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	TranscludeWidget = require("$:/core/modules/widgets/transclude.js").transclude;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
+const TranscludeWidget = require("$:/core/modules/widgets/transclude.js").transclude;
 
-var SlotWidget = function(parseTreeNode,options) {
+const SlotWidget = function(parseTreeNode,options) {
 	// Initialise
 	this.initialise(parseTreeNode,options);
 };
@@ -38,12 +38,12 @@ SlotWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 SlotWidget.prototype.execute = function() {
-	var self = this;
+	const self = this;
 	this.slotName = this.getAttribute("$name");
 	this.slotDepth = parseInt(this.getAttribute("$depth","1"),10) || 1;
 	// Find the parent transclusions
-	var pointer = this.parentWidget,
-		depth = this.slotDepth;
+	let pointer = this.parentWidget;
+	let depth = this.slotDepth;
 	while(pointer) {
 		if(pointer instanceof TranscludeWidget && pointer.hasVisibleSlots()) {
 			depth--;
@@ -53,7 +53,7 @@ SlotWidget.prototype.execute = function() {
 		}
 		pointer = pointer.parentWidget;
 	}
-	var parseTreeNodes = [{type: "text", attributes: {text: {type: "string", value: "Missing slot reference!"}}}];
+	let parseTreeNodes = [{type: "text",attributes: {text: {type: "string",value: "Missing slot reference!"}}}];
 	if(pointer instanceof TranscludeWidget) {
 		// Get the parse tree nodes comprising the slot contents
 		parseTreeNodes = pointer.getTransclusionSlotFill(this.slotName,this.parseTreeNode.children);
@@ -66,7 +66,7 @@ SlotWidget.prototype.execute = function() {
 Refresh the widget by ensuring our attributes are up to date
 */
 SlotWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes["$name"] || changedAttributes["$depth"]) {
 		this.refreshSelf();
 		return true;

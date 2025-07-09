@@ -18,30 +18,30 @@ exports.synchronous = true;
 // Global to keep track of open windows (hashmap by title)
 $tw.windows = {};
 // Default template to use for new windows
-var DEFAULT_WINDOW_TEMPLATE = "$:/core/templates/single.tiddler.window";
+const DEFAULT_WINDOW_TEMPLATE = "$:/core/templates/single.tiddler.window";
 
 exports.startup = function() {
 	// Handle open window message
-	$tw.rootWidget.addEventListener("tm-open-window",function(event) {
+	$tw.rootWidget.addEventListener("tm-open-window",(event) => {
 		// Get the parameters
-		var refreshHandler,
-			title = event.param || event.tiddlerTitle,
-			paramObject = event.paramObject || {},
-			windowTitle = paramObject.windowTitle || title,
-			windowID = paramObject.windowID || title,
-			template = paramObject.template || DEFAULT_WINDOW_TEMPLATE,
-			width = paramObject.width || "700",
-			height = paramObject.height || "600",
-			top = paramObject.top,
-			left = paramObject.left,
-			variables = $tw.utils.extend({},paramObject,{currentTiddler: title, "tv-window-id": windowID});
+		let refreshHandler;
+		const title = event.param || event.tiddlerTitle;
+		const paramObject = event.paramObject || {};
+		const windowTitle = paramObject.windowTitle || title;
+		const windowID = paramObject.windowID || title;
+		const template = paramObject.template || DEFAULT_WINDOW_TEMPLATE;
+		const width = paramObject.width || "700";
+		const height = paramObject.height || "600";
+		const {top} = paramObject;
+		const {left} = paramObject;
+		const variables = $tw.utils.extend({},paramObject,{currentTiddler: title,"tv-window-id": windowID});
 		// Open the window
-		var srcWindow,
-			srcDocument;
+		let srcWindow;
+		let srcDocument;
 		// In case that popup blockers deny opening a new window
 		try {
-			srcWindow = window.open("","external-" + windowID,"scrollbars,width=" + width + ",height=" + height + (top ? ",top=" + top : "" ) + (left ? ",left=" + left : "" )),
-			srcDocument = srcWindow.document;
+			srcWindow = window.open("",`external-${windowID}`,`scrollbars,width=${width},height=${height}${top ? `,top=${top}` : ""}${left ? `,left=${left}` : ""}`),
+				srcDocument = srcWindow.document;
 		}
 		catch(e) {
 			return;
@@ -56,23 +56,24 @@ exports.startup = function() {
 		srcDocument.write("<!DOCTYPE html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
 		srcDocument.close();
 		srcDocument.title = windowTitle;
-		srcWindow.addEventListener("beforeunload",function(event) {
+		srcWindow.addEventListener("beforeunload",(event) => {
 			delete $tw.windows[windowID];
 			$tw.wiki.removeEventListener("change",refreshHandler);
 		},false);
 		// Set up the styles
-		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
-				document: $tw.fakeDocument,
-				variables: variables,
-				importPageMacros: true}),
-			styleContainer = $tw.fakeDocument.createElement("style");
+		const styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
+			document: $tw.fakeDocument,
+			variables,
+			importPageMacros: true
+		});
+		const styleContainer = $tw.fakeDocument.createElement("style");
 		styleWidgetNode.render(styleContainer,null);
-		var styleElement = srcDocument.createElement("style");
+		const styleElement = srcDocument.createElement("style");
 		styleElement.innerHTML = styleContainer.textContent;
 		srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
 		// Render the text of the tiddler
-		var parser = $tw.wiki.parseTiddler(template),
-			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: variables});
+		const parser = $tw.wiki.parseTiddler(template);
+		const widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument,parentWidget: $tw.rootWidget,variables});
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
@@ -91,18 +92,18 @@ exports.startup = function() {
 		srcWindow.document.documentElement.addEventListener("click",$tw.popup,true);
 		srcWindow.haveInitialisedWindow = true;
 	});
-	$tw.rootWidget.addEventListener("tm-close-window",function(event) {
-		var windowID = event.param,
-			win = $tw.windows[windowID];
-			if(win) {
-				win.close();
-			}
+	$tw.rootWidget.addEventListener("tm-close-window",(event) => {
+		const windowID = event.param;
+		const win = $tw.windows[windowID];
+		if(win) {
+			win.close();
+		}
 	});
-	var closeAllWindows = function() {
-		$tw.utils.each($tw.windows,function(win) {
+	const closeAllWindows = function() {
+		$tw.utils.each($tw.windows,(win) => {
 			win.close();
 		});
-	}
+	};
 	$tw.rootWidget.addEventListener("tm-close-all-windows",closeAllWindows);
 	// Close open windows when unloading main window
 	$tw.addUnloadTask(closeAllWindows);

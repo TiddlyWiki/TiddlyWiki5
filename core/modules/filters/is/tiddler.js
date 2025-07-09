@@ -13,15 +13,15 @@ Filter function for [is[tiddler]]
 Export our filter function
 */
 exports.tiddler = function(source,prefix,options) {
-	var results = [];
+	const results = [];
 	if(prefix === "!") {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(!options.wiki.tiddlerExists(title)) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(options.wiki.tiddlerExists(title)) {
 				results.push(title);
 			}

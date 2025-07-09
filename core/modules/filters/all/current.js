@@ -13,7 +13,7 @@ Filter function for [all[current]]
 Export our filter function
 */
 exports.current = function(source,prefix,options) {
-	var currTiddlerTitle = options.widget && options.widget.getVariable("currentTiddler");
+	const currTiddlerTitle = options.widget && options.widget.getVariable("currentTiddler");
 	if(currTiddlerTitle) {
 		return [currTiddlerTitle];
 	} else {

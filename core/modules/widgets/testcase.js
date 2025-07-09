@@ -8,9 +8,9 @@ Widget to display a test case
 \*/
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var TestCaseWidget = function(parseTreeNode,options) {
+const TestCaseWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -23,17 +23,17 @@ TestCaseWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 TestCaseWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	const self = this;
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
 	// Create container DOM node
-	var domNode = this.document.createElement("div");
-	domNode.setAttribute("class", "tc-test-case " + this.testcaseClass);
+	const domNode = this.document.createElement("div");
+	domNode.setAttribute("class",`tc-test-case ${this.testcaseClass}`);
 	this.domNodes.push(domNode);
 	parent.insertBefore(domNode,nextSibling);
 	// Render the children into a hidden DOM node
-	var parser = {
+	const parser = {
 		tree: [{
 			type: "widget",
 			attributes: {},
@@ -50,20 +50,20 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	// Create a wiki
 	this.testcaseWiki = new $tw.Wiki();
 	// Always load the core plugin
-	var loadTiddler = function(title) {
-		var tiddler = self.wiki.getTiddler(title);
+	const loadTiddler = function(title) {
+		const tiddler = self.wiki.getTiddler(title);
 		if(tiddler) {
 			self.testcaseWiki.addTiddler(tiddler);
 		}
-	}
+	};
 	loadTiddler("$:/core");
 	loadTiddler("$:/plugins/tiddlywiki/codemirror");
 	// Load tiddlers from child data widgets
-	var tiddlers = [];
-	this.findChildrenDataWidgets(this.contentRoot.children,"data",function(widget) {
+	const tiddlers = [];
+	this.findChildrenDataWidgets(this.contentRoot.children,"data",(widget) => {
 		Array.prototype.push.apply(tiddlers,widget.readDataTiddlerValues());
 	});
-	var jsonPayload = JSON.stringify(tiddlers);
+	const jsonPayload = JSON.stringify(tiddlers);
 	this.testcaseWiki.addTiddlers(tiddlers);
 	// Unpack plugin tiddlers
 	this.testcaseWiki.readPluginInfo();
@@ -75,7 +75,7 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	// Generate a `payloadTiddlers` variable that contains the payload in JSON format
 	this.setVariable("payloadTiddlers",jsonPayload);
 	// Only run the tests if the testcase output and expected results were specified, and those tiddlers actually exist in the wiki
-	var shouldRunTests = false;
+	let shouldRunTests = false;
 	if(this.testcaseTestOutput && this.testcaseWiki.tiddlerExists(this.testcaseTestOutput) && this.testcaseTestExpectedResult && this.testcaseWiki.tiddlerExists(this.testcaseTestExpectedResult)) {
 		shouldRunTests = true;
 	}
@@ -100,9 +100,9 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 		testcaseOutputWidget.refresh(this.testcaseWiki.changedTiddlers,testcaseOutputContainer);
 	}
 	// Set up the test result variables
-	var testResult = "",
-		outputHTML = "",
-		expectedHTML = "";
+	let testResult = "";
+	let outputHTML = "";
+	let expectedHTML = "";
 	if(shouldRunTests) {
 		outputHTML = testcaseOutputContainer.children[0].innerHTML;
 		expectedHTML = this.testcaseWiki.getTiddlerText(this.testcaseTestExpectedResult);
@@ -121,14 +121,14 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 		return;
 	}
 	// Render the page root template of the subwiki
-	var rootWidget = this.testcaseWiki.makeTranscludeWidget(this.testcaseTemplate,{
+	const rootWidget = this.testcaseWiki.makeTranscludeWidget(this.testcaseTemplate,{
 		document: this.document,
 		parseAsInline: false,
 		parentWidget: this
 	});
 	rootWidget.render(domNode);
 	// Trap changes in the wiki and refresh the rendering
-	this.testcaseWiki.addEventListener("change",function(changes) {
+	this.testcaseWiki.addEventListener("change",(changes) => {
 		rootWidget.refresh(changes,domNode);
 	});
 };
@@ -149,7 +149,7 @@ TestCaseWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 TestCaseWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;

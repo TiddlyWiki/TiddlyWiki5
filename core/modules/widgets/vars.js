@@ -16,9 +16,9 @@ This widget allows multiple variables to be set in one go:
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var VarsWidget = function(parseTreeNode,options) {
+const VarsWidget = function(parseTreeNode,options) {
 	// Initialise
 	this.initialise(parseTreeNode,options);
 };
@@ -43,8 +43,8 @@ Compute the internal state of the widget
 */
 VarsWidget.prototype.execute = function() {
 	// Parse variables
-	var self = this;
-	$tw.utils.each(this.attributes,function(val,key) {
+	const self = this;
+	$tw.utils.each(this.attributes,(val,key) => {
 		if(key.charAt(0) !== "$") {
 			self.setVariable(key,val);
 		}
@@ -57,7 +57,7 @@ VarsWidget.prototype.execute = function() {
 Refresh the widget by ensuring our attributes are up to date
 */
 VarsWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;

@@ -9,10 +9,10 @@ A widget for displaying stacked or grouped bar charts. Derived from http://bl.oc
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	d3 = require("$:/plugins/tiddlywiki/d3/d3.js").d3;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
+const {d3} = require("$:/plugins/tiddlywiki/d3/d3.js");
 
-var BarWidget = function(parseTreeNode,options) {
+const BarWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -32,7 +32,7 @@ BarWidget.prototype.render = function(parent,nextSibling) {
 	// Execute our logic
 	this.execute();
 	// Create the chart
-	var chart = this.createChart(parent,nextSibling);
+	const chart = this.createChart(parent,nextSibling);
 	this.updateChart = chart.updateChart;
 	if(this.updateChart) {
 		this.updateChart();
@@ -44,8 +44,8 @@ BarWidget.prototype.render = function(parent,nextSibling) {
 
 BarWidget.prototype.createChart = function(parent,nextSibling) {
 	// Get the data we're plotting
-	var data = this.wiki.getTiddlerData(this.barData),
-		n,m,stack,layers;
+	const data = this.wiki.getTiddlerData(this.barData);
+	let n; let m; let stack; let layers;
 	if(data) {
 		n = data.layers;
 		m = data.samples;
@@ -54,71 +54,71 @@ BarWidget.prototype.createChart = function(parent,nextSibling) {
 		n = 4; // number of layers
 		m = 58; // number of samples per layer
 		stack = d3.layout.stack();
-		layers = stack(d3.range(n).map(function() { return bumpLayer(m, 0.1); }));
+		layers = stack(d3.range(n).map(() => {return bumpLayer(m,0.1);}));
 	}
 	// Calculate the maximum data values
-	var yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
-		yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
+	const yGroupMax = d3.max(layers,(layer) => {return d3.max(layer,(d) => {return d.y;});});
+	const yStackMax = d3.max(layers,(layer) => {return d3.max(layer,(d) => {return d.y0 + d.y;});});
 	// Calculate margins and width and height
-	var margin = {top: 40, right: 10, bottom: 20, left: 10},
-		width = 960 - margin.left - margin.right,
-		height = 500 - margin.top - margin.bottom;
+	const margin = {top: 40,right: 10,bottom: 20,left: 10};
+	const width = 960 - margin.left - margin.right;
+	const height = 500 - margin.top - margin.bottom;
 	// x-scale
-	var x = d3.scale.ordinal()
+	const x = d3.scale.ordinal()
 		.domain(d3.range(m))
-		.rangeRoundBands([0, width], 0.08);
+		.rangeRoundBands([0,width],0.08);
 	// y-scale
-	var y = d3.scale.linear()
-		.domain([0, yStackMax])
-		.range([height, 0]);
+	const y = d3.scale.linear()
+		.domain([0,yStackMax])
+		.range([height,0]);
 	// Array of colour values
-	var color = d3.scale.linear()
-		.domain([0, n - 1])
-		.range(["#aad", "#556"]);
+	const color = d3.scale.linear()
+		.domain([0,n - 1])
+		.range(["#aad","#556"]);
 	// x-axis
-	var xAxis = d3.svg.axis()
+	const xAxis = d3.svg.axis()
 		.scale(x)
 		.tickSize(0)
 		.tickPadding(6)
 		.orient("bottom");
 	// Create SVG element
-	var svgElement = d3.select(parent).insert("svg",function() {return nextSibling;})
-		.attr("viewBox", "0 0 960 500")
-		.attr("preserveAspectRatio", "xMinYMin meet")
-		.attr("width", width + margin.left + margin.right)
-		.attr("height", height + margin.top + margin.bottom);
+	const svgElement = d3.select(parent).insert("svg",() => {return nextSibling;})
+		.attr("viewBox","0 0 960 500")
+		.attr("preserveAspectRatio","xMinYMin meet")
+		.attr("width",width + margin.left + margin.right)
+		.attr("height",height + margin.top + margin.bottom);
 	// Create main group
-	var mainGroup = svgElement.append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	const mainGroup = svgElement.append("g")
+		.attr("transform",`translate(${margin.left},${margin.top})`);
 	// Create the layers
-	var layer = mainGroup.selectAll(".layer")
+	const layer = mainGroup.selectAll(".layer")
 		.data(layers)
-	.enter().append("g")
-		.attr("class", "layer")
-		.style("fill", function(d, i) { return color(i); });
+		.enter().append("g")
+		.attr("class","layer")
+		.style("fill",(d,i) => {return color(i);});
 	// Create the rectangles in each layer
-	var rect = layer.selectAll("rect")
-		.data(function(d) { return d; })
-	.enter().append("rect")
-		.attr("x", function(d) { return x(d.x); })
-		.attr("y", height)
-		.attr("width", x.rangeBand())
-		.attr("height", 0);
+	const rect = layer.selectAll("rect")
+		.data((d) => {return d;})
+		.enter().append("rect")
+		.attr("x",(d) => {return x(d.x);})
+		.attr("y",height)
+		.attr("width",x.rangeBand())
+		.attr("height",0);
 	// Transition the rectangles to their final height
 	rect.transition()
-		.delay(function(d, i) { return i * 10; })
-		.attr("y", function(d) { return y(d.y0 + d.y); })
-		.attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); });
+		.delay((d,i) => {return i * 10;})
+		.attr("y",(d) => {return y(d.y0 + d.y);})
+		.attr("height",(d) => {return y(d.y0) - y(d.y0 + d.y);});
 	// Add to the DOM
 	mainGroup.append("g")
-		.attr("class", "x axis")
-		.attr("transform", "translate(0," + height + ")")
+		.attr("class","x axis")
+		.attr("transform",`translate(0,${height})`)
 		.call(xAxis);
-	var self = this;
+	const self = this;
 	// Return the svg node
 	return {
 		domNode: svgElement[0][0],
-		updateChart: function() {
+		updateChart() {
 			if(self.barGrouped !== "no") {
 				transitionGrouped();
 			} else {
@@ -128,44 +128,44 @@ BarWidget.prototype.createChart = function(parent,nextSibling) {
 	};
 
 	function transitionGrouped() {
-		y.domain([0, yGroupMax]);
+		y.domain([0,yGroupMax]);
 		rect.transition()
 			.duration(500)
-			.delay(function(d, i) { return i * 10; })
-			.attr("x", function(d, i, j) { return x(d.x) + x.rangeBand() / n * j; })
-			.attr("width", x.rangeBand() / n)
+			.delay((d,i) => {return i * 10;})
+			.attr("x",(d,i,j) => {return x(d.x) + x.rangeBand() / n * j;})
+			.attr("width",x.rangeBand() / n)
 			.transition()
-			.attr("y", function(d) { return y(d.y); })
-			.attr("height", function(d) { return height - y(d.y); });
+			.attr("y",(d) => {return y(d.y);})
+			.attr("height",(d) => {return height - y(d.y);});
 	}
 
 	function transitionStacked() {
-		y.domain([0, yStackMax]);
+		y.domain([0,yStackMax]);
 		rect.transition()
 			.duration(500)
-			.delay(function(d, i) { return i * 10; })
-			.attr("y", function(d) { return y(d.y0 + d.y); })
-			.attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
+			.delay((d,i) => {return i * 10;})
+			.attr("y",(d) => {return y(d.y0 + d.y);})
+			.attr("height",(d) => {return y(d.y0) - y(d.y0 + d.y);})
 			.transition()
-			.attr("x", function(d) { return x(d.x); })
-			.attr("width", x.rangeBand());
+			.attr("x",(d) => {return x(d.x);})
+			.attr("width",x.rangeBand());
 	}
 
 	// Inspired by Lee Byron's test data generator.
-	function bumpLayer(n, o) {
+	function bumpLayer(n,o) {
 		function bump(a) {
-			var x = 1 / (0.1 + Math.random()),
-				y = 2 * Math.random() - 0.5,
-				z = 10 / (0.1 + Math.random());
-			for(var i = 0; i < n; i++) {
-			var w = (i / n - y) * z;
-			a[i] += x * Math.exp(-w * w);
+			const x = 1 / (0.1 + Math.random());
+			const y = 2 * Math.random() - 0.5;
+			const z = 10 / (0.1 + Math.random());
+			for(let i = 0;i < n;i++) {
+				const w = (i / n - y) * z;
+				a[i] += x * Math.exp(-w * w);
 			}
 		}
-		var a = [], i;
-		for(i = 0; i < n; ++i) a[i] = o + o * Math.random();
-		for(i = 0; i < 5; ++i) bump(a);
-		return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
+		const a = []; let i;
+		for(i = 0;i < n;++i) a[i] = o + o * Math.random();
+		for(i = 0;i < 5;++i) bump(a);
+		return a.map((d,i) => {return {x: i,y: Math.max(0,d)};});
 	}
 };
 
@@ -182,7 +182,7 @@ BarWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 BarWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.data || changedTiddlers[this.barData]) {
 		this.refreshSelf();
 		return true;

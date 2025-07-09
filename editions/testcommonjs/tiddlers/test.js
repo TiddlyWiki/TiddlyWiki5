@@ -8,16 +8,16 @@ testing lib
 \*/
 
 
-exports.assert = function(cond, msg) {
-  if(!cond) {
-    if(msg) {
-		throw msg
-	} else {
-		throw "ASSERT FAILED"
+exports.assert = function(cond,msg) {
+	if(!cond) {
+		if(msg) {
+			throw msg;
+		} else {
+			throw "ASSERT FAILED";
+		}
 	}
-  }
-}
+};
 
 exports.print = function() {
-  console.log.apply(console, arguments);
-}
+	console.log.apply(console,arguments);
+};

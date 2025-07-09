@@ -13,10 +13,10 @@ Filter operator for returning the names of the story views in this wiki
 Export our filter function
 */
 exports.storyviews = function(source,operator,options) {
-	var results = [],
-		storyviews = {};
+	const results = [];
+	const storyviews = {};
 	$tw.modules.applyMethods("storyview",storyviews);
-	$tw.utils.each(storyviews,function(info,name) {
+	$tw.utils.each(storyviews,(info,name) => {
 		results.push(name);
 	});
 	results.sort();

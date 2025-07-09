@@ -9,7 +9,7 @@ Keyboard handling utilities
 
 "use strict";
 
-var namedKeys = {
+const namedKeys = {
 	"cancel": 3,
 	"help": 6,
 	"backspace": 8,
@@ -124,27 +124,27 @@ var namedKeys = {
 };
 
 function KeyboardManager(options) {
-	var self = this;
+	const self = this;
 	options = options || "";
 	// Save the named key hashmap
 	this.namedKeys = namedKeys;
 	// Create a reverse mapping of code to keyname
 	this.keyNames = [];
-	$tw.utils.each(namedKeys,function(keyCode,name) {
+	$tw.utils.each(namedKeys,(keyCode,name) => {
 		self.keyNames[keyCode] = name.substr(0,1).toUpperCase() + name.substr(1);
 	});
 	// Save the platform-specific name of the "meta" key
 	this.metaKeyName = $tw.platform.isMac ? "cmd-" : "win-";
 	this.shortcutKeysList = [], // Stores the shortcut-key descriptors
-	this.shortcutActionList = [], // Stores the corresponding action strings
-	this.shortcutParsedList = []; // Stores the parsed key descriptors
+		this.shortcutActionList = [], // Stores the corresponding action strings
+		this.shortcutParsedList = []; // Stores the parsed key descriptors
 	this.shortcutPriorityList = []; // Stores the parsed shortcut priority
 	this.lookupNames = ["shortcuts"];
-	this.lookupNames.push($tw.platform.isMac ? "shortcuts-mac" : "shortcuts-not-mac")
+	this.lookupNames.push($tw.platform.isMac ? "shortcuts-mac" : "shortcuts-not-mac");
 	this.lookupNames.push($tw.platform.isWindows ? "shortcuts-windows" : "shortcuts-not-windows");
 	this.lookupNames.push($tw.platform.isLinux ? "shortcuts-linux" : "shortcuts-not-linux");
 	this.updateShortcutLists(this.getShortcutTiddlerList());
-	$tw.wiki.addEventListener("change",function(changes) {
+	$tw.wiki.addEventListener("change",(changes) => {
 		self.handleShortcutChanges(changes);
 	});
 }
@@ -161,7 +161,7 @@ KeyboardManager.prototype.getModifierKeys = function() {
 		91, // Meta (left)
 		93, // Meta (right)
 		224 // Meta (Firefox)
-	]
+	];
 };
 
 /*
@@ -178,17 +178,17 @@ Key descriptors have the following format:
 	ctrl+shift+alt+A
 */
 KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor,options) {
-	var components = keyDescriptor.split(/\+|\-/),
-		info = {
-			keyCode: 0,
-			shiftKey: false,
-			altKey: false,
-			ctrlKey: false,
-			metaKey: false
-		};
-	for(var t=0; t<components.length; t++) {
-		var s = components[t].toLowerCase(),
-			c = s.charCodeAt(0);
+	const components = keyDescriptor.split(/\+|\-/);
+	const info = {
+		keyCode: 0,
+		shiftKey: false,
+		altKey: false,
+		ctrlKey: false,
+		metaKey: false
+	};
+	for(let t = 0;t < components.length;t++) {
+		const s = components[t].toLowerCase();
+		const c = s.charCodeAt(0);
 		// Look for modifier keys
 		if(s === "ctrl") {
 			info.ctrlKey = true;
@@ -218,31 +218,31 @@ KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor,options) {
 Parse a list of key descriptors into an array of keyInfo objects. The key descriptors can be passed as an array of strings or a space separated string
 */
 KeyboardManager.prototype.parseKeyDescriptors = function(keyDescriptors,options) {
-	var self = this;
+	const self = this;
 	options = options || {};
 	options.stack = options.stack || [];
-	var wiki = options.wiki || $tw.wiki;
+	const wiki = options.wiki || $tw.wiki;
 	if(typeof keyDescriptors === "string" && keyDescriptors === "") {
 		return [];
 	}
 	if(!$tw.utils.isArray(keyDescriptors)) {
 		keyDescriptors = keyDescriptors.split(" ");
 	}
-	var result = [];
-	$tw.utils.each(keyDescriptors,function(keyDescriptor) {
+	const result = [];
+	$tw.utils.each(keyDescriptors,(keyDescriptor) => {
 		// Look for a named shortcut
 		if(keyDescriptor.substr(0,2) === "((" && keyDescriptor.substr(-2,2) === "))") {
-			if(options.stack.indexOf(keyDescriptor) === -1) {
+			if(!options.stack.includes(keyDescriptor)) {
 				options.stack.push(keyDescriptor);
-				var name = keyDescriptor.substring(2,keyDescriptor.length - 2),
-					lookupName = function(configName) {
-						var keyDescriptors = wiki.getTiddlerText("$:/config/" + configName + "/" + name);
-						if(keyDescriptors) {
-							options.keyDescriptor = keyDescriptor;
-							result.push.apply(result,self.parseKeyDescriptors(keyDescriptors,options));
-						}
-					};
-				$tw.utils.each(self.lookupNames,function(platformDescriptor) {
+				const name = keyDescriptor.substring(2,keyDescriptor.length - 2);
+				const lookupName = function(configName) {
+					const keyDescriptors = wiki.getTiddlerText(`$:/config/${configName}/${name}`);
+					if(keyDescriptors) {
+						options.keyDescriptor = keyDescriptor;
+						result.push.apply(result,self.parseKeyDescriptors(keyDescriptors,options));
+					}
+				};
+				$tw.utils.each(self.lookupNames,(platformDescriptor) => {
 					lookupName(platformDescriptor);
 				});
 			}
@@ -254,27 +254,27 @@ KeyboardManager.prototype.parseKeyDescriptors = function(keyDescriptors,options)
 };
 
 KeyboardManager.prototype.getPrintableShortcuts = function(keyInfoArray) {
-	var self = this,
-		result = [];
-	$tw.utils.each(keyInfoArray,function(keyInfo) {
+	const self = this;
+	const result = [];
+	$tw.utils.each(keyInfoArray,(keyInfo) => {
 		if(keyInfo) {
-			result.push((keyInfo.ctrlKey ? "ctrl-" : "") + 
-				   (keyInfo.shiftKey ? "shift-" : "") + 
-				   (keyInfo.altKey ? "alt-" : "") + 
-				   (keyInfo.metaKey ? self.metaKeyName : "") + 
-				   (self.keyNames[keyInfo.keyCode]));
+			result.push((keyInfo.ctrlKey ? "ctrl-" : "") +
+				(keyInfo.shiftKey ? "shift-" : "") +
+				(keyInfo.altKey ? "alt-" : "") +
+				(keyInfo.metaKey ? self.metaKeyName : "") +
+				(self.keyNames[keyInfo.keyCode]));
 		}
 	});
 	return result;
-}
+};
 
 KeyboardManager.prototype.checkKeyDescriptor = function(event,keyInfo) {
 	return keyInfo &&
-			event.keyCode === keyInfo.keyCode && 
-			event.shiftKey === keyInfo.shiftKey && 
-			event.altKey === keyInfo.altKey && 
-			event.ctrlKey === keyInfo.ctrlKey && 
-			event.metaKey === keyInfo.metaKey;
+		event.keyCode === keyInfo.keyCode &&
+		event.shiftKey === keyInfo.shiftKey &&
+		event.altKey === keyInfo.altKey &&
+		event.ctrlKey === keyInfo.ctrlKey &&
+		event.metaKey === keyInfo.metaKey;
 };
 
 KeyboardManager.prototype.checkKeyDescriptors = function(event,keyInfoArray) {
@@ -282,7 +282,7 @@ KeyboardManager.prototype.checkKeyDescriptors = function(event,keyInfoArray) {
 };
 
 KeyboardManager.prototype.getMatchingKeyDescriptor = function(event,keyInfoArray) {
-	for(var t=0; t<keyInfoArray.length; t++) {
+	for(let t = 0;t < keyInfoArray.length;t++) {
 		if(this.checkKeyDescriptor(event,keyInfoArray[t])) {
 			return keyInfoArray[t];
 		}
@@ -291,17 +291,17 @@ KeyboardManager.prototype.getMatchingKeyDescriptor = function(event,keyInfoArray
 };
 
 KeyboardManager.prototype.getEventModifierKeyDescriptor = function(event) {
-	return event.ctrlKey && !event.shiftKey	&& !event.altKey && !event.metaKey ? "ctrl" : 
-		event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey ? "shift" : 
-		event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey ? "ctrl-shift" : 
-		event.altKey && !event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt" : 
-		event.altKey && event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt-shift" : 
-		event.altKey && event.ctrlKey && !event.shiftKey && !event.metaKey ? "ctrl-alt" : 
-		event.altKey && event.shiftKey && event.ctrlKey && !event.metaKey ? "ctrl-alt-shift" : 
-		event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey ? "meta" : 
-		event.metaKey && event.ctrlKey && !event.shiftKey && !event.altKey ? "meta-ctrl" :
-		event.metaKey && event.ctrlKey && event.shiftKey && !event.altKey ? "meta-ctrl-shift" :
-		event.metaKey && event.ctrlKey && event.shiftKey && event.altKey ? "meta-ctrl-alt-shift" : "normal";
+	return event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey ? "ctrl" :
+		event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey ? "shift" :
+			event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey ? "ctrl-shift" :
+				event.altKey && !event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt" :
+					event.altKey && event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt-shift" :
+						event.altKey && event.ctrlKey && !event.shiftKey && !event.metaKey ? "ctrl-alt" :
+							event.altKey && event.shiftKey && event.ctrlKey && !event.metaKey ? "ctrl-alt-shift" :
+								event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey ? "meta" :
+									event.metaKey && event.ctrlKey && !event.shiftKey && !event.altKey ? "meta-ctrl" :
+										event.metaKey && event.ctrlKey && event.shiftKey && !event.altKey ? "meta-ctrl-shift" :
+											event.metaKey && event.ctrlKey && event.shiftKey && event.altKey ? "meta-ctrl-alt-shift" : "normal";
 };
 
 KeyboardManager.prototype.getShortcutTiddlerList = function() {
@@ -310,13 +310,13 @@ KeyboardManager.prototype.getShortcutTiddlerList = function() {
 
 KeyboardManager.prototype.updateShortcutLists = function(tiddlerList) {
 	this.shortcutTiddlers = tiddlerList;
-	for(var i=0; i<tiddlerList.length; i++) {
-		var title = tiddlerList[i],
-			tiddlerFields = $tw.wiki.getTiddler(title).fields;
+	for(let i = 0;i < tiddlerList.length;i++) {
+		const title = tiddlerList[i];
+		const tiddlerFields = $tw.wiki.getTiddler(title).fields;
 		this.shortcutKeysList[i] = tiddlerFields.key !== undefined ? tiddlerFields.key : undefined;
 		this.shortcutActionList[i] = tiddlerFields.text;
 		this.shortcutParsedList[i] = this.shortcutKeysList[i] !== undefined ? this.parseKeyDescriptors(this.shortcutKeysList[i]) : undefined;
-		this.shortcutPriorityList[i] = tiddlerFields.priority === "yes" ? true : false;
+		this.shortcutPriorityList[i] = tiddlerFields.priority === "yes";
 	}
 };
 
@@ -325,10 +325,10 @@ event: the keyboard event object
 options:
 	onlyPriority: true if only priority global shortcuts should be invoked
 */
-KeyboardManager.prototype.handleKeydownEvent = function(event, options) {
+KeyboardManager.prototype.handleKeydownEvent = function(event,options) {
 	options = options || {};
-	var key, action;
-	for(var i=0; i<this.shortcutTiddlers.length; i++) {
+	let key; let action;
+	for(let i = 0;i < this.shortcutTiddlers.length;i++) {
 		if(options.onlyPriority && this.shortcutPriorityList[i] !== true) {
 			continue;
 		}
@@ -348,12 +348,12 @@ KeyboardManager.prototype.handleKeydownEvent = function(event, options) {
 };
 
 KeyboardManager.prototype.detectNewShortcuts = function(changedTiddlers) {
-	var shortcutConfigTiddlers = [],
-		handled = false;
-	$tw.utils.each(this.lookupNames,function(platformDescriptor) {
-		var descriptorString = "$:/config/" + platformDescriptor + "/";
-		Object.keys(changedTiddlers).forEach(function(configTiddler) {
-			var configString = configTiddler.substr(0, configTiddler.lastIndexOf("/") + 1);
+	const shortcutConfigTiddlers = [];
+	let handled = false;
+	$tw.utils.each(this.lookupNames,(platformDescriptor) => {
+		const descriptorString = `$:/config/${platformDescriptor}/`;
+		Object.keys(changedTiddlers).forEach((configTiddler) => {
+			const configString = configTiddler.substr(0,configTiddler.lastIndexOf("/") + 1);
 			if(configString === descriptorString) {
 				shortcutConfigTiddlers.push(configTiddler);
 				handled = true;
@@ -368,11 +368,11 @@ KeyboardManager.prototype.detectNewShortcuts = function(changedTiddlers) {
 };
 
 KeyboardManager.prototype.handleShortcutChanges = function(changedTiddlers) {
-	var newList = this.getShortcutTiddlerList();
-	var hasChanged = $tw.utils.hopArray(changedTiddlers,this.shortcutTiddlers) ? true :
+	const newList = this.getShortcutTiddlerList();
+	const hasChanged = $tw.utils.hopArray(changedTiddlers,this.shortcutTiddlers) ? true :
 		($tw.utils.hopArray(changedTiddlers,newList) ? true :
-		(this.detectNewShortcuts(changedTiddlers))
-	);
+			(this.detectNewShortcuts(changedTiddlers))
+		);
 	// Re-cache shortcuts if something changed
 	if(hasChanged) {
 		this.updateShortcutLists(newList);

@@ -9,7 +9,7 @@ Indexes the tiddlers with each field value
 
 "use strict";
 
-var DEFAULT_MAXIMUM_INDEXED_VALUE_LENGTH = 128;
+const DEFAULT_MAXIMUM_INDEXED_VALUE_LENGTH = 128;
 
 function FieldIndexer(wiki) {
 	this.wiki = wiki;
@@ -19,7 +19,7 @@ FieldIndexer.prototype.init = function() {
 	this.index = null;
 	this.maxIndexedValueLength = DEFAULT_MAXIMUM_INDEXED_VALUE_LENGTH;
 	this.addIndexMethods();
-}
+};
 
 // Provided for testing
 FieldIndexer.prototype.setMaxIndexedValueLength = function(length) {
@@ -28,28 +28,28 @@ FieldIndexer.prototype.setMaxIndexedValueLength = function(length) {
 };
 
 FieldIndexer.prototype.addIndexMethods = function() {
-	var self = this;
+	const self = this;
 	// get all tiddlers, including those overwrite shadow tiddlers
 	this.wiki.each.byField = function(name,value) {
-		var lookup = self.lookup(name,value);
-		return lookup && lookup.filter(function(title) {
-			return self.wiki.tiddlerExists(title)
+		const lookup = self.lookup(name,value);
+		return lookup && lookup.filter((title) => {
+			return self.wiki.tiddlerExists(title);
 		});
 	};
 	// get shadow tiddlers, including shadow tiddlers that is overwritten
 	this.wiki.eachShadow.byField = function(name,value) {
-		var lookup = self.lookup(name,value);
-		return lookup && lookup.filter(function(title) {
-			return self.wiki.isShadowTiddler(title)
+		const lookup = self.lookup(name,value);
+		return lookup && lookup.filter((title) => {
+			return self.wiki.isShadowTiddler(title);
 		});
 	};
 	this.wiki.eachTiddlerPlusShadows.byField = function(name,value) {
-		var lookup = self.lookup(name,value);
-		return lookup ? lookup.slice(0) : null;
+		const lookup = self.lookup(name,value);
+		return lookup ? [...lookup] : null;
 	};
 	this.wiki.eachShadowPlusTiddlers.byField = function(name,value) {
-		var lookup = self.lookup(name,value);
-		return lookup ? lookup.slice(0) : null;
+		const lookup = self.lookup(name,value);
+		return lookup ? [...lookup] : null;
 	};
 };
 
@@ -65,15 +65,15 @@ FieldIndexer.prototype.rebuild = function() {
 Build the index for a particular field
 */
 FieldIndexer.prototype.buildIndexForField = function(name) {
-	var self = this;
+	const self = this;
 	// Hashmap by field name of hashmap by field value of array of tiddler titles
 	this.index = this.index || Object.create(null);
 	this.index[name] = Object.create(null);
-	var baseIndex = this.index[name];
+	const baseIndex = this.index[name];
 	// Update the index for each tiddler
-	this.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
+	this.wiki.eachTiddlerPlusShadows((tiddler,title) => {
 		if(name in tiddler.fields) {
-			var value = tiddler.getFieldString(name);
+			const value = tiddler.getFieldString(name);
 			// Skip any values above the maximum length
 			if(value.length < self.maxIndexedValueLength) {
 				baseIndex[value] = baseIndex[value] || [];
@@ -88,19 +88,19 @@ Update the index in the light of a tiddler value changing; note that the title m
 updateDescriptor: {old: {tiddler: <tiddler>, shadow: <boolean>, exists: <boolean>},new: {tiddler: <tiddler>, shadow: <boolean>, exists: <boolean>}}
 */
 FieldIndexer.prototype.update = function(updateDescriptor) {
-	var self = this;
+	const self = this;
 	// Don't do anything if the index hasn't been built yet
 	if(this.index === null) {
 		return;
 	}
 	// Remove the old tiddler from the index
 	if(updateDescriptor.old.tiddler) {
-		$tw.utils.each(this.index,function(indexEntry,name) {
+		$tw.utils.each(this.index,(indexEntry,name) => {
 			if(name in updateDescriptor.old.tiddler.fields) {
-				var value = updateDescriptor.old.tiddler.getFieldString(name),
-					tiddlerList = indexEntry[value];
+				const value = updateDescriptor.old.tiddler.getFieldString(name);
+				const tiddlerList = indexEntry[value];
 				if(tiddlerList) {
-					var index = tiddlerList.indexOf(updateDescriptor.old.tiddler.fields.title);
+					const index = tiddlerList.indexOf(updateDescriptor.old.tiddler.fields.title);
 					if(index !== -1) {
 						tiddlerList.splice(index,1);
 					}
@@ -110,9 +110,9 @@ FieldIndexer.prototype.update = function(updateDescriptor) {
 	}
 	// Add the new tiddler to the index
 	if(updateDescriptor["new"].tiddler) {
-		$tw.utils.each(this.index,function(indexEntry,name) {
+		$tw.utils.each(this.index,(indexEntry,name) => {
 			if(name in updateDescriptor["new"].tiddler.fields) {
-				var value = updateDescriptor["new"].tiddler.getFieldString(name);
+				const value = updateDescriptor["new"].tiddler.getFieldString(name);
 				if(value.length < self.maxIndexedValueLength) {
 					indexEntry[value] = indexEntry[value] || [];
 					indexEntry[value].push(updateDescriptor["new"].tiddler.fields.title);

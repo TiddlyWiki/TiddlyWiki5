@@ -9,9 +9,9 @@ Droppable widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var DroppableWidget = function(parseTreeNode,options) {
+const DroppableWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -24,15 +24,15 @@ DroppableWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DroppableWidget.prototype.render = function(parent,nextSibling) {
-	var self = this,
-		tag = this.parseTreeNode.isBlock ? "div" : "span",
-		domNode;
+	const self = this;
+	let tag = this.parseTreeNode.isBlock ? "div" : "span";
+	let domNode;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
-	if(this.droppableTag && $tw.config.htmlUnsafeElements.indexOf(this.droppableTag) === -1) {
+	if(this.droppableTag && !$tw.config.htmlUnsafeElements.includes(this.droppableTag)) {
 		tag = this.droppableTag;
 	}
 	// Create element and assign classes
@@ -47,10 +47,10 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	// Add event handlers
 	if(this.droppableEnable) {
 		$tw.utils.addEventListeners(domNode,[
-			{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
-			{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
-			{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
-			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"}
+			{name: "dragenter",handlerObject: this,handlerMethod: "handleDragEnterEvent"},
+			{name: "dragover",handlerObject: this,handlerMethod: "handleDragOverEvent"},
+			{name: "dragleave",handlerObject: this,handlerMethod: "handleDragLeaveEvent"},
+			{name: "drop",handlerObject: this,handlerMethod: "handleDropEvent"}
 		]);
 	} else {
 		$tw.utils.addClass(this.domNode,this.disabledClass);
@@ -64,7 +64,7 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 };
 
 DroppableWidget.prototype.enterDrag = function(event) {
-	if(this.currentlyEntered.indexOf(event.target) === -1) {
+	if(!this.currentlyEntered.includes(event.target)) {
 		this.currentlyEntered.push(event.target);
 	}
 	// If we're entering for the first time we need to apply highlighting
@@ -72,7 +72,7 @@ DroppableWidget.prototype.enterDrag = function(event) {
 };
 
 DroppableWidget.prototype.leaveDrag = function(event) {
-	var pos = this.currentlyEntered.indexOf(event.target);
+	const pos = this.currentlyEntered.indexOf(event.target);
 	if(pos !== -1) {
 		this.currentlyEntered.splice(pos,1);
 	}
@@ -85,7 +85,7 @@ DroppableWidget.prototype.leaveDrag = function(event) {
 	}
 };
 
-DroppableWidget.prototype.handleDragEnterEvent  = function(event) {
+DroppableWidget.prototype.handleDragEnterEvent = function(event) {
 	this.enterDrag(event);
 	// Tell the browser that we're ready to handle the drop
 	event.preventDefault();
@@ -94,9 +94,9 @@ DroppableWidget.prototype.handleDragEnterEvent  = function(event) {
 	return false;
 };
 
-DroppableWidget.prototype.handleDragOverEvent  = function(event) {
+DroppableWidget.prototype.handleDragOverEvent = function(event) {
 	// Check for being over a TEXTAREA or INPUT
-	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
+	if(["TEXTAREA","INPUT"].includes(event.target.tagName)) {
 		return false;
 	}
 	// Tell the browser that we're still interested in the drop
@@ -106,34 +106,34 @@ DroppableWidget.prototype.handleDragOverEvent  = function(event) {
 	return false;
 };
 
-DroppableWidget.prototype.handleDragLeaveEvent  = function(event) {
+DroppableWidget.prototype.handleDragLeaveEvent = function(event) {
 	this.leaveDrag(event);
 	return false;
 };
 
-DroppableWidget.prototype.handleDropEvent  = function(event) {
-	var self = this;
+DroppableWidget.prototype.handleDropEvent = function(event) {
+	const self = this;
 	this.leaveDrag(event);
 	// Check for being over a TEXTAREA or INPUT
-	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
+	if(["TEXTAREA","INPUT"].includes(event.target.tagName)) {
 		return false;
 	}
-	var dataTransfer = event.dataTransfer;
+	const {dataTransfer} = event;
 	// Remove highlighting
 	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 	// Try to import the various data types we understand
 	if(this.droppableActions) {
-		$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
-			fieldsArray.forEach(function(fields) {
+		$tw.utils.importDataTransfer(dataTransfer,null,(fieldsArray) => {
+			fieldsArray.forEach((fields) => {
 				self.performActions(fields.title || fields.text,event);
 			});
 		});
 	}
 	// Send a TitleList to performListActions
 	if(this.droppableListActions) {
-		$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
-			var titleList = [];
-			fieldsArray.forEach(function(fields) {
+		$tw.utils.importDataTransfer(dataTransfer,null,(fieldsArray) => {
+			const titleList = [];
+			fieldsArray.forEach((fields) => {
 				titleList.push(fields.title || fields.text);
 			});
 			self.performListActions($tw.utils.stringifyList(titleList),event);
@@ -148,15 +148,15 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 
 DroppableWidget.prototype.performListActions = function(titleList,event) {
 	if(this.droppableListActions) {
-		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
-		this.invokeActionString(this.droppableListActions,this,event,{actionTiddlerList: titleList, modifier: modifierKey});
+		const modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+		this.invokeActionString(this.droppableListActions,this,event,{actionTiddlerList: titleList,modifier: modifierKey});
 	}
 };
 
 DroppableWidget.prototype.performActions = function(title,event) {
 	if(this.droppableActions) {
-		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
-		this.invokeActionString(this.droppableActions,this,event,{actionTiddler: title, modifier: modifierKey});
+		const modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+		this.invokeActionString(this.droppableActions,this,event,{actionTiddler: title,modifier: modifierKey});
 	}
 };
 
@@ -175,7 +175,7 @@ DroppableWidget.prototype.execute = function() {
 };
 
 DroppableWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
+	const classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-droppable");
 	this.domNode.className = classes.join(" ");
 };
@@ -184,9 +184,9 @@ DroppableWidget.prototype.assignDomNodeClasses = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DroppableWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.tag || changedAttributes.enable || changedAttributes.disabledClass ||
-		changedAttributes.actions|| changedAttributes.listActions || changedAttributes.effect) {
+		changedAttributes.actions || changedAttributes.listActions || changedAttributes.effect) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -194,7 +194,7 @@ DroppableWidget.prototype.refresh = function(changedTiddlers) {
 			this.assignDomNodeClasses();
 		}
 		this.assignAttributes(this.domNodes[0],{
-			changedAttributes: changedAttributes,
+			changedAttributes,
 			sourcePrefix: "data-",
 			destPrefix: "data-"
 		});

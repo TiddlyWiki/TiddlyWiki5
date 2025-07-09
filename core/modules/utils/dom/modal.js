@@ -9,10 +9,10 @@ Modal message mechanism
 
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
-var navigator = require("$:/core/modules/widgets/navigator.js");
+const widget = require("$:/core/modules/widgets/widget.js");
+const navigator = require("$:/core/modules/widgets/navigator.js");
 
-var Modal = function(wiki) {
+const Modal = function(wiki) {
 	this.wiki = wiki;
 	this.modalCount = 0;
 };
@@ -29,35 +29,35 @@ Options include:
 Modal.prototype.display = function(title,options) {
 	options = options || {};
 	this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
-				options.variables.rootwindow === "yes") ? document :
-				(options.event && options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
+		options.variables.rootwindow === "yes") ? document :
+		(options.event && options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
 	this.srcWindow = this.srcDocument.defaultView;
-	var self = this,
-		refreshHandler,
-		duration = $tw.utils.getAnimationDuration(),
-		tiddler = this.wiki.getTiddler(title);
+	const self = this;
+	let refreshHandler;
+	const duration = $tw.utils.getAnimationDuration();
+	const tiddler = this.wiki.getTiddler(title);
 	// Don't do anything if the tiddler doesn't exist
 	if(!tiddler) {
 		return;
 	}
 	// Create the variables
-	var variables = $tw.utils.extend({
-			currentTiddler: title,
-			"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
-			"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "")
-		},options.variables);
+	const variables = $tw.utils.extend({
+		currentTiddler: title,
+		"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
+		"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "")
+	},options.variables);
 
 	// Create the wrapper divs
-	var wrapper = this.srcDocument.createElement("div"),
-		modalBackdrop = this.srcDocument.createElement("div"),
-		modalWrapper = this.srcDocument.createElement("div"),
-		modalHeader = this.srcDocument.createElement("div"),
-		headerTitle = this.srcDocument.createElement("h3"),
-		modalBody = this.srcDocument.createElement("div"),
-		modalLink = this.srcDocument.createElement("a"),
-		modalFooter = this.srcDocument.createElement("div"),
-		modalFooterHelp = this.srcDocument.createElement("span"),
-		modalFooterButtons = this.srcDocument.createElement("span");
+	const wrapper = this.srcDocument.createElement("div");
+	const modalBackdrop = this.srcDocument.createElement("div");
+	const modalWrapper = this.srcDocument.createElement("div");
+	const modalHeader = this.srcDocument.createElement("div");
+	const headerTitle = this.srcDocument.createElement("h3");
+	const modalBody = this.srcDocument.createElement("div");
+	const modalLink = this.srcDocument.createElement("a");
+	const modalFooter = this.srcDocument.createElement("div");
+	const modalFooterHelp = this.srcDocument.createElement("span");
+	const modalFooterButtons = this.srcDocument.createElement("span");
 	// Up the modal count and adjust the body class
 	this.modalCount++;
 	this.adjustPageClass();
@@ -80,7 +80,7 @@ Modal.prototype.display = function(title,options) {
 	modalFooter.appendChild(modalFooterHelp);
 	modalFooter.appendChild(modalFooterButtons);
 	modalWrapper.appendChild(modalFooter);
-	var navigatorTree = {
+	const navigatorTree = {
 		"type": "navigator",
 		"attributes": {
 			"story": {
@@ -98,15 +98,15 @@ Modal.prototype.display = function(title,options) {
 		"isBlock": true,
 		"children": []
 	};
-	var navigatorWidgetNode = new navigator.navigator(navigatorTree, {
+	const navigatorWidgetNode = new navigator.navigator(navigatorTree,{
 		wiki: this.wiki,
-		document : this.srcDocument,
+		document: this.srcDocument,
 		parentWidget: $tw.rootWidget
 	});
 	navigatorWidgetNode.render(modalBody,null);
 
 	// Render the title of the message
-	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
+	const headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "subtitle",
 		mode: "inline",
 		children: [{
@@ -115,18 +115,20 @@ Modal.prototype.display = function(title,options) {
 				text: {
 					type: "string",
 					value: title
-		}}}],
+				}
+			}
+		}],
 		parentWidget: navigatorWidgetNode,
 		document: this.srcDocument,
-		variables: variables,
+		variables,
 		importPageMacros: true
 	});
 	headerWidgetNode.render(headerTitle,null);
 	// Render the body of the message
-	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
+	const bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		parentWidget: navigatorWidgetNode,
 		document: this.srcDocument,
-		variables: variables,
+		variables,
 		importPageMacros: true
 	});
 
@@ -139,7 +141,7 @@ Modal.prototype.display = function(title,options) {
 	}
 	// Render the footer of the message
 	if(tiddler.fields && tiddler.fields.help) {
-		var link = this.srcDocument.createElement("a");
+		const link = this.srcDocument.createElement("a");
 		link.setAttribute("href",tiddler.fields.help);
 		link.setAttribute("target","_blank");
 		link.setAttribute("rel","noopener noreferrer");
@@ -148,7 +150,7 @@ Modal.prototype.display = function(title,options) {
 		modalFooterHelp.appendChild(link);
 		modalFooterHelp.style.float = "left";
 	}
-	var footerWidgetNode = this.wiki.makeTranscludeWidget(title,{
+	const footerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "footer",
 		mode: "inline",
 		children: [{
@@ -165,11 +167,14 @@ Modal.prototype.display = function(title,options) {
 					text: {
 						type: "string",
 						value: $tw.language.getString("Buttons/Close/Caption")
-			}}}
-		]}],
+					}
+				}
+			}
+			]
+		}],
 		parentWidget: navigatorWidgetNode,
 		document: this.srcDocument,
-		variables: variables,
+		variables,
 		importPageMacros: true
 	});
 	footerWidgetNode.render(modalFooterButtons,null);
@@ -181,7 +186,7 @@ Modal.prototype.display = function(title,options) {
 	};
 	this.wiki.addEventListener("change",refreshHandler);
 	// Add the close event handler
-	var closeHandler = function(event) {
+	const closeHandler = function(event) {
 		// Remove our refresh handler
 		self.wiki.removeEventListener("change",refreshHandler);
 		// Decrease the modal count and adjust the body class
@@ -194,10 +199,10 @@ Modal.prototype.display = function(title,options) {
 			{opacity: "0"}
 		]);
 		$tw.utils.setStyle(modalWrapper,[
-			{transform: "translateY(" + self.srcWindow.innerHeight + "px)"}
+			{transform: `translateY(${self.srcWindow.innerHeight}px)`}
 		]);
 		// Set up an event for the transition end
-		self.srcWindow.setTimeout(function() {
+		self.srcWindow.setTimeout(() => {
 			if(wrapper.parentNode) {
 				// Remove the modal message from the DOM
 				self.srcDocument.body.removeChild(wrapper);
@@ -219,16 +224,16 @@ Modal.prototype.display = function(title,options) {
 	]);
 	$tw.utils.setStyle(modalWrapper,[
 		{transformOrigin: "0% 0%"},
-		{transform: "translateY(" + (-this.srcWindow.innerHeight) + "px)"}
+		{transform: `translateY(${-this.srcWindow.innerHeight}px)`}
 	]);
 	// Put the message into the document
 	this.srcDocument.body.appendChild(wrapper);
 	// Set up animation for the styles
 	$tw.utils.setStyle(modalBackdrop,[
-		{transition: "opacity " + duration + "ms ease-out"}
+		{transition: `opacity ${duration}ms ease-out`}
 	]);
 	$tw.utils.setStyle(modalWrapper,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out"}
+		{transition: `${$tw.utils.roundTripPropertyName("transform")} ${duration}ms ease-in-out`}
 	]);
 	// Force layout
 	$tw.utils.forceLayout(modalBackdrop);
@@ -243,7 +248,7 @@ Modal.prototype.display = function(title,options) {
 };
 
 Modal.prototype.adjustPageClass = function() {
-	var windowContainer = $tw.pageContainer ? ($tw.pageContainer === this.srcDocument.body.firstChild ? $tw.pageContainer : this.srcDocument.body.firstChild) : null;
+	const windowContainer = $tw.pageContainer ? ($tw.pageContainer === this.srcDocument.body.firstChild ? $tw.pageContainer : this.srcDocument.body.firstChild) : null;
 	if(windowContainer) {
 		$tw.utils.toggleClass(windowContainer,"tc-modal-displayed",this.modalCount > 0);
 	}

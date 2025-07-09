@@ -10,13 +10,13 @@ module-type: formatfilteroperator
 Export our filter function
 */
 exports.json = function(source,operand,options) {
-	var results = [],
-		spaces = null;
+	const results = [];
+	let spaces = null;
 	if(operand) {
 		spaces = /^\d+$/.test(operand) ? parseInt(operand,10) : operand;
 	}
-	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title);
+	source((tiddler,title) => {
+		let data = $tw.utils.parseJSONSafe(title);
 		try {
 			data = JSON.parse(title);
 		} catch(e) {

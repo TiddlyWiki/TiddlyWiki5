@@ -8,23 +8,23 @@ Confetti manager
 \*/
 "use strict";
 
-var confetti = require("$:/plugins/tiddlywiki/confetti/confetti.js");
+const confetti = require("$:/plugins/tiddlywiki/confetti/confetti.js");
 
 function ConfettiManager() {
 	this.outstandingTimers = [];
 }
 
-ConfettiManager.prototype.launch = function (delay,options) {
-	var self = this,
-		defaultOptions = {
-			scalar: 1.2,
-			particleCount: 400,
-			zIndex: 2000
-		};
+ConfettiManager.prototype.launch = function(delay,options) {
+	const self = this;
+	const defaultOptions = {
+		scalar: 1.2,
+		particleCount: 400,
+		zIndex: 2000
+	};
 	options = $tw.utils.extend(defaultOptions,options);
 	if(delay > 0) {
-		var id = setTimeout(function() {
-			var p = self.outstandingTimers.indexOf(id);
+		var id = setTimeout(() => {
+			const p = self.outstandingTimers.indexOf(id);
 			if(p !== -1) {
 				self.outstandingTimers.splice(p,1);
 			} else {
@@ -39,8 +39,8 @@ ConfettiManager.prototype.launch = function (delay,options) {
 	}
 };
 
-ConfettiManager.prototype.reset = function () {
-	$tw.utils.each(this.outstandingTimers,function(id) {
+ConfettiManager.prototype.reset = function() {
+	$tw.utils.each(this.outstandingTimers,(id) => {
 		clearTimeout(id);
 	});
 	this.outstandingTimers = [];

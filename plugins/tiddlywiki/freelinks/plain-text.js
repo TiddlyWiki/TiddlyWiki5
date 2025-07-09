@@ -9,9 +9,9 @@ A copy of the core text widget under a different name
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var PlainTextNodeWidget = function(parseTreeNode,options) {
+const PlainTextNodeWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -27,9 +27,9 @@ PlainTextNodeWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var text = this.getAttribute("text",this.parseTreeNode.text || "");
+	let text = this.getAttribute("text",this.parseTreeNode.text || "");
 	text = text.replace(/\r/mg,"");
-	var textNode = this.document.createTextNode(text);
+	const textNode = this.document.createTextNode(text);
 	parent.insertBefore(textNode,nextSibling);
 	this.domNodes.push(textNode);
 };
@@ -45,12 +45,12 @@ PlainTextNodeWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 PlainTextNodeWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.text) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 

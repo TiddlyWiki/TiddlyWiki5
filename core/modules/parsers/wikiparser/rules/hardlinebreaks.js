@@ -30,9 +30,9 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var reEnd = /(""")|(\r?\n)/mg,
-		tree = [],
-		match;
+	const reEnd = /(""")|(\r?\n)/mg;
+	const tree = [];
+	let match;
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	do {
@@ -42,11 +42,11 @@ exports.parse = function() {
 		reEnd.lastIndex = this.parser.pos;
 		match = reEnd.exec(this.parser.source);
 		if(match) {
-			var start = this.parser.pos;
+			const start = this.parser.pos;
 			this.parser.pos = reEnd.lastIndex;
 			// Add a line break if the terminator was a line break
 			if(match[2]) {
-				tree.push({type: "element", tag: "br", start: start, end: this.parser.pos});
+				tree.push({type: "element",tag: "br",start,end: this.parser.pos});
 			}
 		}
 	} while(match && !match[1]);

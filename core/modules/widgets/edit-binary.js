@@ -9,12 +9,12 @@ Edit-binary widget; placeholder for editing binary tiddlers
 
 "use strict";
 
-var BINARY_WARNING_MESSAGE = "$:/core/ui/BinaryWarning";
-var EXPORT_BUTTON_IMAGE = "$:/core/images/export-button";
+const BINARY_WARNING_MESSAGE = "$:/core/ui/BinaryWarning";
+const EXPORT_BUTTON_IMAGE = "$:/core/images/export-button";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var EditBinaryWidget = function(parseTreeNode,options) {
+const EditBinaryWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -27,7 +27,7 @@ EditBinaryWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 EditBinaryWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	const self = this;
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -42,52 +42,52 @@ Compute the internal state of the widget
 */
 EditBinaryWidget.prototype.execute = function() {
 	// Get our parameters
-	var editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
-	var tiddler = this.wiki.getTiddler(editTitle);
-	var type = tiddler.fields.type;
-	var text = tiddler.fields.text;
+	const editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	const tiddler = this.wiki.getTiddler(editTitle);
+	const {type} = tiddler.fields;
+	const {text} = tiddler.fields;
 	// Transclude the binary data tiddler warning message
-	var warn = {
+	const warn = {
 		type: "element",
 		tag: "p",
 		children: [{
 			type: "transclude",
 			attributes: {
-				tiddler: {type: "string", value: BINARY_WARNING_MESSAGE}
+				tiddler: {type: "string",value: BINARY_WARNING_MESSAGE}
 			}
 		}]
 	};
 	// Create download link based on draft tiddler title
-	var link = {
+	const link = {
 		type: "element",
 		tag: "a",
 		attributes: {
-			title: {type: "indirect", textReference: "!!draft.title"},
-			download: {type: "indirect", textReference: "!!draft.title"}
+			title: {type: "indirect",textReference: "!!draft.title"},
+			download: {type: "indirect",textReference: "!!draft.title"}
 		},
 		children: [{
-		type: "transclude",
+			type: "transclude",
 			attributes: {
-				tiddler: {type: "string", value: EXPORT_BUTTON_IMAGE}
+				tiddler: {type: "string",value: EXPORT_BUTTON_IMAGE}
 			}
 		}]
 	};
 	// Set the link href to internal data URI (no external)
 	if(text) {
 		link.attributes.href = {
-			type: "string", 
-			value: "data:" + type + ";base64," + text
+			type: "string",
+			value: `data:${type};base64,${text}`
 		};
 	}
 	// Combine warning message and download link in a div
-	var element = {
+	const element = {
 		type: "element",
 		tag: "div",
 		attributes: {
-			class: {type: "string", value: "tc-binary-warning"}
+			class: {type: "string",value: "tc-binary-warning"}
 		},
-		children: [warn, link]
-	}
+		children: [warn,link]
+	};
 	// Construct the child widgets
 	this.makeChildWidgets([element]);
 };

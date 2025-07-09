@@ -36,9 +36,9 @@ pragmas:
 
 "use strict";
 
-var components = require("$:/plugins/tiddlywiki/railroad/components.js").components;
+const {components} = require("$:/plugins/tiddlywiki/railroad/components.js");
 
-var Parser = function(widget,source,options) {
+const Parser = function(widget,source,options) {
 	this.widget = widget;
 	this.source = source;
 	this.options = options;
@@ -53,10 +53,10 @@ var Parser = function(widget,source,options) {
 /////////////////////////// Parser dispatch
 
 Parser.prototype.parseContent = function() {
-	var content = [];
+	const content = [];
 	// Parse zero or more components
 	while(true) {
-		var component = this.parseComponent();
+		const component = this.parseComponent();
 		if(!component) {
 			break;
 		}
@@ -68,7 +68,7 @@ Parser.prototype.parseContent = function() {
 };
 
 Parser.prototype.parseComponent = function() {
-	var component = null;
+	let component = null;
 	if(this.token) {
 		if(this.at("string")) {
 			component = this.parseTerminal();
@@ -78,33 +78,42 @@ Parser.prototype.parseComponent = function() {
 			component = this.parsePragma();
 		} else {
 			switch(this.token.value) {
-				case "[":
+				case "[": {
 					component = this.parseOptional();
 					break;
-				case "{":
+				}
+				case "{": {
 					component = this.parseRepeated();
 					break;
-				case "<":
+				}
+				case "<": {
 					component = this.parseNonterminal();
 					break;
-				case "(":
+				}
+				case "(": {
 					component = this.parseChoice();
 					break;
-				case "/":
+				}
+				case "/": {
 					component = this.parseComment();
 					break;
-				case "[[":
+				}
+				case "[[": {
 					component = this.parseLink();
 					break;
-				case "{{":
+				}
+				case "{{": {
 					component = this.parseTransclusion();
 					break;
-				case "<-":
+				}
+				case "<-": {
 					component = this.parseSequence();
 					break;
-				case "-":
+				}
+				case "-": {
 					component = this.parseDummy();
 					break;
+				}
 			}
 		}
 	}
@@ -116,8 +125,8 @@ Parser.prototype.parseComponent = function() {
 Parser.prototype.parseChoice = function() {
 	// Consume the (
 	this.advance();
-	var content = [],
-		colon = -1;
+	const content = [];
+	let colon = -1;
 	do {
 		// Allow at most one branch to be prefixed with a colon
 		if(colon === -1 && this.eat(":")) {
@@ -136,7 +145,7 @@ Parser.prototype.parseComment = function() {
 	// Consume the /
 	this.advance();
 	// The comment's content should be in a string literal
-	var content = this.expectString("after /");
+	const content = this.expectString("after /");
 	// Consume the closing /
 	this.close("/");
 	// Create a component
@@ -154,13 +163,13 @@ Parser.prototype.parseLink = function() {
 	// Consume the [[
 	this.advance();
 	// Parse the content
-	var content = this.parseContent();
+	const content = this.parseContent();
 	// Consume the |
 	this.expect("|");
 	// Consume the target
-	var target = this.expectNameOrString("as link target");
+	const target = this.expectNameOrString("as link target");
 	// Prepare some attributes for the SVG "a" element to carry
-	var options = {"data-tw-target": target};
+	const options = {"data-tw-target": target};
 	if($tw.utils.isLinkExternal(target)) {
 		options["data-tw-external"] = true;
 	}
@@ -172,7 +181,7 @@ Parser.prototype.parseLink = function() {
 
 Parser.prototype.parseName = function() {
 	// Create a component
-	var component = new components.Nonterminal(this.token.value);
+	const component = new components.Nonterminal(this.token.value);
 	// Consume the name
 	this.advance();
 	return component;
@@ -182,7 +191,7 @@ Parser.prototype.parseNonterminal = function() {
 	// Consume the <
 	this.advance();
 	// The nonterminal's name should be in a string literal
-	var content = this.expectString("after <");
+	const content = this.expectString("after <");
 	// Consume the closing bracket
 	this.close(">");
 	// Create a component
@@ -190,16 +199,16 @@ Parser.prototype.parseNonterminal = function() {
 };
 
 Parser.prototype.parseOptional = function() {
-	var wantArrow = this.options.arrow;
+	const wantArrow = this.options.arrow;
 	// Consume the [
 	this.advance();
 	// Consume the { if there is one
-	var repeated = this.eat("{");
+	const repeated = this.eat("{");
 	// Note whether omission is the normal route
-	var normal = this.eat(":");
+	const normal = this.eat(":");
 	// Parse the content
-	var content = this.parseContent(),
-		separator = null;
+	const content = this.parseContent();
+	let separator = null;
 	// Parse the separator if there is one
 	if(repeated && this.eat("+")) {
 		separator = this.parseContent();
@@ -215,12 +224,12 @@ Parser.prototype.parseOptional = function() {
 };
 
 Parser.prototype.parseRepeated = function() {
-	var wantArrow = this.options.arrow;
+	const wantArrow = this.options.arrow;
 	// Consume the {
 	this.advance();
 	// Parse the content
-	var content = this.parseContent(),
-		separator = null;
+	const content = this.parseContent();
+	let separator = null;
 	// Parse the separator if there is one
 	if(this.eat("+")) {
 		separator = this.parseContent();
@@ -235,7 +244,7 @@ Parser.prototype.parseSequence = function() {
 	// Consume the <-
 	this.advance();
 	// Parse the content
-	var content = this.parseContent();
+	const content = this.parseContent();
 	// Consume the closing ->
 	this.close("->");
 	// Create a component
@@ -243,23 +252,23 @@ Parser.prototype.parseSequence = function() {
 };
 
 Parser.prototype.parseTerminal = function() {
-	var component = new components.Terminal(this.token.value);
+	const component = new components.Terminal(this.token.value);
 	// Consume the string literal
 	this.advance();
-    return component;
+	return component;
 };
 
 Parser.prototype.parseTransclusion = function() {
 	// Consume the {{
 	this.advance();
 	// Consume the text reference
-	var textRef = this.expectNameOrString("as transclusion source");
+	const textRef = this.expectNameOrString("as transclusion source");
 	// Consume the closing }}
 	this.close("}}");
 	// Retrieve the content of the text reference
-	var source = this.widget.wiki.getTextReference(textRef,"",this.widget.getVariable("currentTiddler"));
+	const source = this.widget.wiki.getTextReference(textRef,"",this.widget.getVariable("currentTiddler"));
 	// Parse the content
-	var content = new Parser(this.widget,source).content;
+	const {content} = new Parser(this.widget,source);
 	// Create a component
 	return new components.Transclusion(content);
 };
@@ -268,19 +277,19 @@ Parser.prototype.parseTransclusion = function() {
 
 Parser.prototype.parsePragma = function() {
 	// Create a dummy component
-	var component = { isPragma: true };
+	const component = {isPragma: true};
 	// Consume the pragma
-	var pragma = this.token.value;
+	const pragma = this.token.value;
 	this.advance();
 	// Apply the setting
 	if(pragma === "arrow") {
-		this.options.arrow = this.parseYesNo(pragma);		
+		this.options.arrow = this.parseYesNo(pragma);
 	} else if(pragma === "debug") {
 		this.options.debug = true;
 	} else if(pragma === "start") {
-		this.options.start = this.parseTerminusStyle(pragma);		
+		this.options.start = this.parseTerminusStyle(pragma);
 	} else if(pragma === "end") {
-		this.options.end = this.parseTerminusStyle(pragma);		
+		this.options.end = this.parseTerminusStyle(pragma);
 	} else {
 		throw "Invalid pragma";
 	}
@@ -289,18 +298,18 @@ Parser.prototype.parsePragma = function() {
 
 Parser.prototype.parseYesNo = function(pragma) {
 	return this.parseSetting(["yes","no"],pragma) === "yes";
-}
+};
 
 Parser.prototype.parseTerminusStyle = function(pragma) {
 	return this.parseSetting(["single","double","none"],pragma);
-}
+};
 
 Parser.prototype.parseSetting = function(options,pragma) {
-	if(this.at("name") && options.indexOf(this.token.value) !== -1) {
-		return this.tokenValueEaten();		
+	if(this.at("name") && options.includes(this.token.value)) {
+		return this.tokenValueEaten();
 	}
-	throw options.join(" or ") + " expected after \\" + pragma;
-}
+	throw `${options.join(" or ")} expected after \\${pragma}`;
+};
 
 /////////////////////////// Token manipulation
 
@@ -316,7 +325,7 @@ Parser.prototype.at = function(token) {
 };
 
 Parser.prototype.eat = function(token) {
-	var at = this.at(token);
+	const at = this.at(token);
 	if(at) {
 		this.advance();
 	}
@@ -324,33 +333,33 @@ Parser.prototype.eat = function(token) {
 };
 
 Parser.prototype.tokenValueEaten = function() {
-	var output = this.token.value;
+	const output = this.token.value;
 	this.advance();
 	return output;
 };
 
 Parser.prototype.close = function(token) {
 	if(!this.eat(token)) {
-		throw "Closing " + token + " expected";
+		throw `Closing ${token} expected`;
 	}
 };
 
 Parser.prototype.checkFinished = function() {
 	if(this.token) {
-		throw "Syntax error at " + this.token.value;
+		throw `Syntax error at ${this.token.value}`;
 	}
 };
 
 Parser.prototype.expect = function(token) {
 	if(!this.eat(token)) {
-		throw token + " expected";
+		throw `${token} expected`;
 	}
 };
 
 Parser.prototype.expectString = function(context,token) {
 	if(!this.at("string")) {
 		token = token || "String";
-		throw token + " expected " + context;
+		throw `${token} expected ${context}`;
 	}
 	return this.tokenValueEaten();
 };
@@ -365,9 +374,9 @@ Parser.prototype.expectNameOrString = function(context) {
 /////////////////////////// Tokenisation
 
 Parser.prototype.tokenise = function(source) {
-	var tokens = [],
-		pos = 0,
-		c, s, token;
+	const tokens = [];
+	let pos = 0;
+	let c; let s; let token;
 	while(pos < source.length) {
 		// Initialise this iteration
 		s = token = null;
@@ -379,22 +388,22 @@ Parser.prototype.tokenise = function(source) {
 		}
 		// Examine the next character
 		c = source.charAt(pos);
-		if("\"'".indexOf(c) !== -1) {
+		if("\"'".includes(c)) {
 			// String literal
 			token = $tw.utils.parseStringLiteral(source,pos);
 			if(!token) {
 				throw "Unterminated string literal";
 			}
-		} else if("[]{}".indexOf(c) !== -1) {
+		} else if("[]{}".includes(c)) {
 			// Single or double character
-			s = source.charAt(pos+1) === c ? c + c : c;
+			s = source.charAt(pos + 1) === c ? c + c : c;
 		} else if(c === "<") {
 			// < or <-
-			s = source.charAt(pos+1) === "-" ? "<-" : "<";
+			s = source.charAt(pos + 1) === "-" ? "<-" : "<";
 		} else if(c === "-") {
 			// - or ->
-			s = source.charAt(pos+1) === ">" ? "->" : "-";
-		} else if("()>+/:|".indexOf(c) !== -1) {
+			s = source.charAt(pos + 1) === ">" ? "->" : "-";
+		} else if("()>+/:|".includes(c)) {
 			// Single character
 			s = c;
 		} else if(c.match(/[a-zA-Z]/)) {
@@ -404,7 +413,7 @@ Parser.prototype.tokenise = function(source) {
 			// Pragma
 			token = this.readPragma(source,pos);
 		} else {
-			throw "Syntax error at " + c;
+			throw `Syntax error at ${c}`;
 		}
 		// Add our findings to the return array
 		if(token) {
@@ -420,23 +429,23 @@ Parser.prototype.tokenise = function(source) {
 };
 
 Parser.prototype.readName = function(source,pos) {
-	var re = /([a-zA-Z0-9_.-]+)/g;
+	const re = /([a-zA-Z0-9_.-]+)/g;
 	re.lastIndex = pos;
-	var match = re.exec(source);
+	const match = re.exec(source);
 	if(match && match.index === pos) {
-		return {type: "name", value: match[1], start: pos, end: pos+match[1].length};
+		return {type: "name",value: match[1],start: pos,end: pos + match[1].length};
 	} else {
 		throw "Invalid name";
 	}
 };
 
 Parser.prototype.readPragma = function(source,pos) {
-	var re = /([a-z]+)/g;
+	const re = /([a-z]+)/g;
 	pos++;
 	re.lastIndex = pos;
-	var match = re.exec(source);
+	const match = re.exec(source);
 	if(match && match.index === pos) {
-		return {type: "pragma", value: match[1], start: pos, end: pos+match[1].length};
+		return {type: "pragma",value: match[1],start: pos,end: pos + match[1].length};
 	} else {
 		throw "Invalid pragma";
 	}

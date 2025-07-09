@@ -14,7 +14,7 @@ exports.info = {
 	synchronous: false
 };
 
-var Command = function(params,commander,callback) {
+const Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
@@ -25,7 +25,7 @@ Command.prototype.execute = function() {
 		return "Missing subcommand and url";
 	}
 	switch(this.params[0]) {
-		case "raw-file":
+		case "raw-file": {
 			return this.fetchFiles({
 				raw: true,
 				url: this.params[1],
@@ -33,7 +33,8 @@ Command.prototype.execute = function() {
 				callback: this.callback
 			});
 			break;
-		case "file":
+		}
+		case "file": {
 			return this.fetchFiles({
 				url: this.params[1],
 				importFilter: this.params[2],
@@ -41,7 +42,8 @@ Command.prototype.execute = function() {
 				callback: this.callback
 			});
 			break;
-		case "raw-files":
+		}
+		case "raw-files": {
 			return this.fetchFiles({
 				raw: true,
 				urlFilter: this.params[1],
@@ -49,7 +51,8 @@ Command.prototype.execute = function() {
 				callback: this.callback
 			});
 			break;
-		case "files":
+		}
+		case "files": {
 			return this.fetchFiles({
 				urlFilter: this.params[1],
 				importFilter: this.params[2],
@@ -57,24 +60,25 @@ Command.prototype.execute = function() {
 				callback: this.callback
 			});
 			break;
+		}
 	}
 	return null;
 };
 
 Command.prototype.fetchFiles = function(options) {
-	var self = this;
+	const self = this;
 	// Get the list of URLs
-	var urls;
+	let urls;
 	if(options.url) {
-		urls = [options.url]
+		urls = [options.url];
 	} else if(options.urlFilter) {
 		urls = this.commander.wiki.filterTiddlers(options.urlFilter);
 	} else {
 		return "Missing URL";
 	}
 	// Process each URL in turn
-	var next = 0;
-	var getNextFile = function(err) {
+	let next = 0;
+	const getNextFile = function(err) {
 		if(err) {
 			return options.callback(err);
 		}
@@ -91,80 +95,80 @@ Command.prototype.fetchFiles = function(options) {
 
 Command.prototype.fetchFile = function(url,options,callback,redirectCount) {
 	if(redirectCount > 10) {
-		return callback("Error too many redirects retrieving " + url);
+		return callback(`Error too many redirects retrieving ${url}`);
 	}
-	var self = this,
-		lib = url.substr(0,8) === "https://" ? require("https") : require("http");
-	lib.get(url).on("response",function(response) {
-	    var type = (response.headers["content-type"] || "").split(";")[0],
-	    	data = [];
-	    self.commander.write("Reading " + url + ": ");
-	    response.on("data",function(chunk) {
-	        data.push(chunk);
-	        self.commander.write(".");
-	    });
-	    response.on("end",function() {
-	        self.commander.write("\n");
-	        if(response.statusCode === 200) {
-		        self.processBody(Buffer.concat(data),type,options,url);
-		        callback(null);
-	        } else {
-	        	if(response.statusCode === 302 || response.statusCode === 303 || response.statusCode === 307) {
-	        		return self.fetchFile(response.headers.location,options,callback,redirectCount + 1);
-	        	} else {
-		        	return callback("Error " + response.statusCode + " retrieving " + url)
-	        	}
-	        }
-	   	});
-	   	response.on("error",function(e) {
-			console.log("Error on GET request: " + e);
+	const self = this;
+	const lib = url.substr(0,8) === "https://" ? require("https") : require("http");
+	lib.get(url).on("response",(response) => {
+		const type = (response.headers["content-type"] || "").split(";")[0];
+		const data = [];
+		self.commander.write(`Reading ${url}: `);
+		response.on("data",(chunk) => {
+			data.push(chunk);
+			self.commander.write(".");
+		});
+		response.on("end",() => {
+			self.commander.write("\n");
+			if(response.statusCode === 200) {
+				self.processBody(Buffer.concat(data),type,options,url);
+				callback(null);
+			} else {
+				if(response.statusCode === 302 || response.statusCode === 303 || response.statusCode === 307) {
+					return self.fetchFile(response.headers.location,options,callback,redirectCount + 1);
+				} else {
+					return callback(`Error ${response.statusCode} retrieving ${url}`);
+				}
+			}
+		});
+		response.on("error",(e) => {
+			console.log(`Error on GET request: ${e}`);
 			callback(e);
-	   	});
+		});
 	});
 	return null;
 };
 
 Command.prototype.processBody = function(body,type,options,url) {
-	var self = this;
+	const self = this;
 	// Collect the tiddlers in a wiki
-	var incomingWiki = new $tw.Wiki();
+	const incomingWiki = new $tw.Wiki();
 	if(options.raw) {
-		var typeInfo = type ? $tw.config.contentTypeInfo[type] : null,
-			encoding = typeInfo ? typeInfo.encoding : "utf8";
+		const typeInfo = type ? $tw.config.contentTypeInfo[type] : null;
+		const encoding = typeInfo ? typeInfo.encoding : "utf8";
 		incomingWiki.addTiddler(new $tw.Tiddler({
 			title: url,
-			type: type,
+			type,
 			text: body.toString(encoding)
 		}));
 	} else {
 		// Deserialise the file to extract the tiddlers
-		var tiddlers = this.commander.wiki.deserializeTiddlers(type || "text/html",body.toString("utf8"),{});
-		$tw.utils.each(tiddlers,function(tiddler) {
+		const tiddlers = this.commander.wiki.deserializeTiddlers(type || "text/html",body.toString("utf8"),{});
+		$tw.utils.each(tiddlers,(tiddler) => {
 			incomingWiki.addTiddler(new $tw.Tiddler(tiddler));
 		});
 	}
 	// Filter the tiddlers to select the ones we want
-	var filteredTitles = incomingWiki.filterTiddlers(options.importFilter || "[all[tiddlers]]");
+	const filteredTitles = incomingWiki.filterTiddlers(options.importFilter || "[all[tiddlers]]");
 	// Import the selected tiddlers
-	var count = 0;
-	incomingWiki.each(function(tiddler,title) {
-		if(filteredTitles.indexOf(title) !== -1) {
-			var newTiddler;
+	let count = 0;
+	incomingWiki.each((tiddler,title) => {
+		if(filteredTitles.includes(title)) {
+			let newTiddler;
 			if(options.transformFilter) {
-				var transformedTitle = (incomingWiki.filterTiddlers(options.transformFilter,null,self.commander.wiki.makeTiddlerIterator([title])) || [""])[0];
+				const transformedTitle = (incomingWiki.filterTiddlers(options.transformFilter,null,self.commander.wiki.makeTiddlerIterator([title])) || [""])[0];
 				if(transformedTitle) {
-					self.commander.log("Importing " + title + " as " + transformedTitle)
+					self.commander.log(`Importing ${title} as ${transformedTitle}`);
 					newTiddler = new $tw.Tiddler(tiddler,{title: transformedTitle});
 				}
 			} else {
-				self.commander.log("Importing " + title)
+				self.commander.log(`Importing ${title}`);
 				newTiddler = tiddler;
 			}
 			self.commander.wiki.importTiddler(newTiddler);
 			count++;
 		}
 	});
-	self.commander.log("Imported " + count + " tiddlers")
+	self.commander.log(`Imported ${count} tiddlers`);
 };
 
 exports.Command = Command;

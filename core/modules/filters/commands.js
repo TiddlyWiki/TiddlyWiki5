@@ -13,8 +13,8 @@ Filter operator for returning the names of the commands available in this wiki
 Export our filter function
 */
 exports.commands = function(source,operator,options) {
-	var results = [];
-	$tw.utils.each($tw.commands,function(commandInfo,name) {
+	const results = [];
+	$tw.utils.each($tw.commands,(commandInfo,name) => {
 		results.push(name);
 	});
 	results.sort();

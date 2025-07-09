@@ -9,9 +9,9 @@ Widget to wikify text into a variable
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var WikifyWidget = function(parseTreeNode,options) {
+const WikifyWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -42,13 +42,13 @@ WikifyWidget.prototype.execute = function() {
 	this.wikifyOutput = this.getAttribute("output","text");
 	// Create the parse tree
 	this.wikifyParser = this.wiki.parseText(this.wikifyType,this.wikifyText,{
-			parseAsInline: this.wikifyMode === "inline"
-		});
+		parseAsInline: this.wikifyMode === "inline"
+	});
 	// Create the widget tree 
 	this.wikifyWidgetNode = this.wiki.makeWidget(this.wikifyParser,{
-			document: $tw.fakeDocument,
-			parentWidget: this
-		});
+		document: $tw.fakeDocument,
+		parentWidget: this
+	});
 	// Render the widget tree to the container
 	this.wikifyContainer = $tw.fakeDocument.createElement("div");
 	this.wikifyWidgetNode.render(this.wikifyContainer,null);
@@ -63,23 +63,28 @@ WikifyWidget.prototype.execute = function() {
 Return the result string
 */
 WikifyWidget.prototype.getResult = function() {
-	var result;
+	let result;
 	switch(this.wikifyOutput) {
-		case "text":
+		case "text": {
 			result = this.wikifyContainer.textContent;
 			break;
-		case "formattedtext":
+		}
+		case "formattedtext": {
 			result = this.wikifyContainer.formattedTextContent;
 			break;
-		case "html":
+		}
+		case "html": {
 			result = this.wikifyContainer.innerHTML;
 			break;
-		case "parsetree":
+		}
+		case "parsetree": {
 			result = JSON.stringify(this.wikifyParser.tree,0,$tw.config.preferences.jsonSpaces);
 			break;
-		case "widgettree":
+		}
+		case "widgettree": {
 			result = JSON.stringify(this.getWidgetTree(),0,$tw.config.preferences.jsonSpaces);
 			break;
+		}
 	}
 	return result;
 };
@@ -88,33 +93,35 @@ WikifyWidget.prototype.getResult = function() {
 Return a string of the widget tree
 */
 WikifyWidget.prototype.getWidgetTree = function() {
-	var copyNode = function(widgetNode,resultNode) {
-			var type = widgetNode.parseTreeNode.type;
-			resultNode.type = type;
-			switch(type) {
-				case "element":
-					resultNode.tag = widgetNode.parseTreeNode.tag;
-					break;
-				case "text":
-					resultNode.text = widgetNode.parseTreeNode.text;
-					break;
+	const copyNode = function(widgetNode,resultNode) {
+		const {type} = widgetNode.parseTreeNode;
+		resultNode.type = type;
+		switch(type) {
+			case "element": {
+				resultNode.tag = widgetNode.parseTreeNode.tag;
+				break;
 			}
-			if(Object.keys(widgetNode.attributes || {}).length > 0) {
-				resultNode.attributes = {};
-				$tw.utils.each(widgetNode.attributes,function(attr,attrName) {
-					resultNode.attributes[attrName] = widgetNode.getAttribute(attrName);
-				});
+			case "text": {
+				resultNode.text = widgetNode.parseTreeNode.text;
+				break;
 			}
-			if(Object.keys(widgetNode.children || {}).length > 0) {
-				resultNode.children = [];
-				$tw.utils.each(widgetNode.children,function(widgetChildNode) {
-					var node = {};
-					resultNode.children.push(node);
-					copyNode(widgetChildNode,node);
-				});
-			}
-		},
-		results = {};
+		}
+		if(Object.keys(widgetNode.attributes || {}).length > 0) {
+			resultNode.attributes = {};
+			$tw.utils.each(widgetNode.attributes,(attr,attrName) => {
+				resultNode.attributes[attrName] = widgetNode.getAttribute(attrName);
+			});
+		}
+		if(Object.keys(widgetNode.children || {}).length > 0) {
+			resultNode.children = [];
+			$tw.utils.each(widgetNode.children,(widgetChildNode) => {
+				const node = {};
+				resultNode.children.push(node);
+				copyNode(widgetChildNode,node);
+			});
+		}
+	};
+	const results = {};
 	copyNode(this.wikifyWidgetNode,results);
 	return results;
 };
@@ -123,7 +130,7 @@ WikifyWidget.prototype.getWidgetTree = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 WikifyWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	// Refresh ourselves entirely if any of our attributes have changed
 	if(changedAttributes.name || changedAttributes.text || changedAttributes.type || changedAttributes.mode || changedAttributes.output) {
 		this.refreshSelf();
@@ -132,13 +139,13 @@ WikifyWidget.prototype.refresh = function(changedTiddlers) {
 		// Refresh the widget tree
 		if(this.wikifyWidgetNode.refresh(changedTiddlers)) {
 			// Check if there was any change
-			var result = this.getResult();
+			const result = this.getResult();
 			if(result !== this.wikifyResult) {
 				// If so, save the change
 				this.wikifyResult = result;
 				this.setVariable(this.wikifyName,this.wikifyResult);
 				// Refresh each of our child widgets
-				$tw.utils.each(this.children,function(childWidget) {
+				$tw.utils.each(this.children,(childWidget) => {
 					childWidget.refreshSelf();
 				});
 				return true;

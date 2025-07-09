@@ -5,10 +5,10 @@ Hello, World widget
 \*/
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var MyWidget = function(parseTreeNode, options) {
-	this.initialise(parseTreeNode, options);
+const MyWidget = function(parseTreeNode,options) {
+	this.initialise(parseTreeNode,options);
 };
 
 /*
@@ -19,12 +19,12 @@ MyWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-MyWidget.prototype.render = function(parent, nextSibling) {
+MyWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
-	var message = this.getAttribute("message", "World");
-	var textNode = this.document.createTextNode("Hello, " + message + "!");
-	parent.insertBefore(textNode, nextSibling);
+	const message = this.getAttribute("message","World");
+	const textNode = this.document.createTextNode(`Hello, ${message}!`);
+	parent.insertBefore(textNode,nextSibling);
 	this.domNodes.push(textNode);
 };
 

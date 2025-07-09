@@ -15,19 +15,19 @@ to the current URL, such as a WebDAV server.
 /*
 Retrieve ETag if available
 */
-var retrieveETag = function(self) {
-	var headers = {
+const retrieveETag = function(self) {
+	const headers = {
 		Accept: "*/*"
 	};
 	$tw.utils.httpRequest({
 		url: self.uri(),
 		type: "HEAD",
-		headers: headers,
-		callback: function(err,data,xhr) {
+		headers,
+		callback(err,data,xhr) {
 			if(err) {
 				return;
 			}
-			var etag = xhr.getResponseHeader("ETag");
+			const etag = xhr.getResponseHeader("ETag");
 			if(!etag) {
 				return;
 			}
@@ -40,16 +40,16 @@ var retrieveETag = function(self) {
 /*
 Select the appropriate saver module and set it up
 */
-var PutSaver = function(wiki) {
+const PutSaver = function(wiki) {
 	this.wiki = wiki;
-	var self = this;
-	var uri = this.uri();
+	const self = this;
+	const uri = this.uri();
 	// Async server probe. Until probe finishes, save will fail fast
 	// See also https://github.com/TiddlyWiki/TiddlyWiki5/issues/2276
 	$tw.utils.httpRequest({
 		url: uri,
 		type: "OPTIONS",
-		callback: function(err,data,xhr) {
+		callback(err,data,xhr) {
 			// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
 			if(!err) {
 				self.serverAcceptsPuts = xhr.status >= 200 && xhr.status < 300 && !!xhr.getResponseHeader("dav");
@@ -70,8 +70,8 @@ PutSaver.prototype.save = function(text,method,callback) {
 	if(!this.serverAcceptsPuts) {
 		return false;
 	}
-	var self = this;
-	var headers = {
+	const self = this;
+	const headers = {
 		"Content-Type": "text/html;charset=UTF-8"
 	};
 	if(this.etag) {
@@ -81,12 +81,12 @@ PutSaver.prototype.save = function(text,method,callback) {
 	$tw.utils.httpRequest({
 		url: this.uri(),
 		type: "PUT",
-		headers: headers,
+		headers,
 		data: text,
-		callback: function(err,data,xhr) {
+		callback(err,data,xhr) {
 			if(err) {
-				var status = xhr.status,
-					errorMsg = err;
+				const {status} = xhr;
+				let errorMsg = err;
 				if(status === 412) { // file changed on server
 					errorMsg = $tw.language.getString("Error/PutEditConflict");
 				} else if(status === 401) { // authentication required
@@ -94,9 +94,9 @@ PutSaver.prototype.save = function(text,method,callback) {
 				} else if(status === 403) { // permission denied
 					errorMsg = $tw.language.getString("Error/PutForbidden");
 				}
-				if (xhr.responseText) {
+				if(xhr.responseText) {
 					// treat any server response like a plain text error explanation
-					errorMsg = errorMsg + "\n\n" + xhr.responseText;
+					errorMsg = `${errorMsg}\n\n${xhr.responseText}`;
 				}
 				callback(errorMsg); // fail
 			} else {

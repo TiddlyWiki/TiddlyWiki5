@@ -19,9 +19,9 @@ Select widget:
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var SelectWidget = function(parseTreeNode,options) {
+const SelectWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -38,7 +38,7 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	//Create element
-	var domNode = this.document.createElement("select");
+	const domNode = this.document.createElement("select");
 	if(this.selectClass) {
 		domNode.className = this.selectClass;
 	}
@@ -51,7 +51,7 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("multiple","multiple");
 	}
 	if(this.isDisabled === "yes") {
-		domNode.setAttribute("disabled", true);
+		domNode.setAttribute("disabled",true);
 	}
 	if(this.selectSize) {
 		domNode.setAttribute("size",this.selectSize);
@@ -70,7 +70,7 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 		this.getSelectDomNode().focus();
 	}
 	$tw.utils.addEventListeners(this.getSelectDomNode(),[
-		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
+		{name: "change",handlerObject: this,handlerMethod: "handleChangeEvent"}
 	]);
 };
 
@@ -80,10 +80,10 @@ Handle a change event
 SelectWidget.prototype.handleChangeEvent = function(event) {
 	// Get the new value and assign it to the tiddler
 	if(this.selectMultiple == false) {
-		var value = this.getSelectDomNode().value;
+		var {value} = this.getSelectDomNode();
 	} else {
-		var value = this.getSelectValues()
-				value = $tw.utils.stringifyList(value);
+		var value = this.getSelectValues();
+		value = $tw.utils.stringifyList(value);
 	}
 	this.wiki.setText(this.selectTitle,this.selectField,this.selectIndex,value);
 	// Trigger actions
@@ -96,12 +96,12 @@ SelectWidget.prototype.handleChangeEvent = function(event) {
 If necessary, set the value of the select element to the current value
 */
 SelectWidget.prototype.setSelectValue = function() {
-	var value = this.selectDefault;
+	let value = this.selectDefault;
 	// Get the value
 	if(this.selectIndex) {
 		value = this.wiki.extractTiddlerDataItem(this.selectTitle,this.selectIndex,value);
 	} else {
-		var tiddler = this.wiki.getTiddler(this.selectTitle);
+		const tiddler = this.wiki.getTiddler(this.selectTitle);
 		if(tiddler) {
 			if(this.selectField === "text") {
 				// Calling getTiddlerText() triggers lazy loading of skinny tiddlers
@@ -118,15 +118,15 @@ SelectWidget.prototype.setSelectValue = function() {
 		}
 	}
 	// Assign it to the select element if it's different than the current value
-	if (this.selectMultiple) {
+	if(this.selectMultiple) {
 		value = value === undefined ? "" : value;
-		var select = this.getSelectDomNode();
-		var values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
-		for(var i=0; i < select.children.length; i++){
-			select.children[i].selected = values.indexOf(select.children[i].value) !== -1
+		const select = this.getSelectDomNode();
+		const values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
+		for(let i = 0;i < select.children.length;i++) {
+			select.children[i].selected = values.includes(select.children[i].value);
 		}
 	} else {
-		var domNode = this.getSelectDomNode();
+		const domNode = this.getSelectDomNode();
 		if(domNode.value !== value) {
 			domNode.value = value;
 		}
@@ -143,18 +143,18 @@ SelectWidget.prototype.getSelectDomNode = function() {
 // Return an array of the selected opion values
 // select is an HTML select element
 SelectWidget.prototype.getSelectValues = function() {
-	var select, result, options, opt;
+	let select; let result; let options; let opt;
 	select = this.getSelectDomNode();
 	result = [];
 	options = select && select.options;
-	for (var i=0; i<options.length; i++) {
+	for(let i = 0;i < options.length;i++) {
 		opt = options[i];
-		if (opt.selected) {
+		if(opt.selected) {
 			result.push(opt.value || opt.text);
 		}
 	}
 	return result;
-}
+};
 
 /*
 Compute the internal state of the widget
@@ -167,7 +167,7 @@ SelectWidget.prototype.execute = function() {
 	this.selectIndex = this.getAttribute("index");
 	this.selectClass = this.getAttribute("class");
 	this.selectDefault = this.getAttribute("default");
-	this.selectMultiple = this.getAttribute("multiple", false);
+	this.selectMultiple = this.getAttribute("multiple",false);
 	this.selectSize = this.getAttribute("size");
 	this.selectTabindex = this.getAttribute("tabindex");
 	this.selectTooltip = this.getAttribute("tooltip");
@@ -181,7 +181,7 @@ SelectWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 SelectWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	// If we're using a different tiddler/field/index then completely refresh ourselves
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip || changedAttributes.tabindex || changedAttributes.disabled) {
 		this.refreshSelf();
@@ -189,18 +189,18 @@ SelectWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		if(changedAttributes.class) {
 			this.selectClass = this.getAttribute("class");
-			this.getSelectDomNode().setAttribute("class",this.selectClass); 
+			this.getSelectDomNode().setAttribute("class",this.selectClass);
 		}
 		this.assignAttributes(this.getSelectDomNode(),{
-			changedAttributes: changedAttributes,
+			changedAttributes,
 			sourcePrefix: "data-",
 			destPrefix: "data-"
 		});
-		var childrenRefreshed = this.refreshChildren(changedTiddlers);
+		const childrenRefreshed = this.refreshChildren(changedTiddlers);
 		// If the target tiddler value has changed, just update setting and refresh the children
 		if(changedTiddlers[this.selectTitle] || childrenRefreshed) {
 			this.setSelectValue();
-		} 
+		}
 		return childrenRefreshed;
 	}
 };

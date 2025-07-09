@@ -12,8 +12,8 @@ Filter operator for returning all the backtranscludes from a tiddler
 Export our filter function
 */
 exports.backtranscludes = function(source,operator,options) {
-	var results = new $tw.utils.LinkedList();
-	source(function(tiddler,title) {
+	const results = new $tw.utils.LinkedList();
+	source((tiddler,title) => {
 		results.pushTop(options.wiki.getTiddlerBacktranscludes(title));
 	});
 	return results.makeTiddlerIterator(options.wiki);

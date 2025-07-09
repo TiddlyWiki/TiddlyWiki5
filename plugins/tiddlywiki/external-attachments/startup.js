@@ -9,9 +9,9 @@ Startup initialisation
 
 "use strict";
 
-var ENABLE_EXTERNAL_ATTACHMENTS_TITLE = "$:/config/ExternalAttachments/Enable",
-	USE_ABSOLUTE_FOR_DESCENDENTS_TITLE = "$:/config/ExternalAttachments/UseAbsoluteForDescendents",
-	USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE = "$:/config/ExternalAttachments/UseAbsoluteForNonDescendents";
+const ENABLE_EXTERNAL_ATTACHMENTS_TITLE = "$:/config/ExternalAttachments/Enable";
+const USE_ABSOLUTE_FOR_DESCENDENTS_TITLE = "$:/config/ExternalAttachments/UseAbsoluteForDescendents";
+const USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE = "$:/config/ExternalAttachments/UseAbsoluteForNonDescendents";
 
 // Export name and synchronous status
 exports.name = "external-attachments";
@@ -21,10 +21,10 @@ exports.synchronous = true;
 
 exports.startup = function() {
 	test_makePathRelative();
-	$tw.hooks.addHook("th-importing-file",function(info) {
+	$tw.hooks.addHook("th-importing-file",(info) => {
 		if(document.location.protocol === "file:" && info.isBinary && info.file.path && $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE,"") === "yes") {
-console.log("Wiki location",document.location.pathname)
-console.log("File location",info.file.path)
+			console.log("Wiki location",document.location.pathname);
+			console.log("File location",info.file.path);
 			info.callback([
 				{
 					title: info.file.name,
@@ -65,7 +65,7 @@ function makePathRelative(sourcepath,rootpath,options) {
 		sourcepath = sourcepath.replace(/\\/g,"/");
 		// If it's a local file like C:/path/to/file.ext then add a leading slash
 		if(sourcepath.charAt(0) !== "/") {
-			sourcepath = "/" + sourcepath;
+			sourcepath = `/${sourcepath}`;
 		}
 		// If it's a network share then remove one of the leading slashes
 		if(sourcepath.substring(0,2) === "//") {
@@ -73,16 +73,16 @@ function makePathRelative(sourcepath,rootpath,options) {
 		}
 	}
 	// Split the path into parts
-	var sourceParts = sourcepath.split("/"),
-		rootParts = rootpath.split("/"),
-		outputParts = [];
+	const sourceParts = sourcepath.split("/");
+	const rootParts = rootpath.split("/");
+	const outputParts = [];
 	// urlencode the parts of the sourcepath
-	$tw.utils.each(sourceParts,function(part,index) {
+	$tw.utils.each(sourceParts,(part,index) => {
 		sourceParts[index] = encodeURI(part);
 	});
 	// Identify any common portion from the start
-	var c = 0,
-		p;
+	let c = 0;
+	let p;
 	while(c < sourceParts.length && c < rootParts.length && sourceParts[c] === rootParts[c]) {
 		c += 1;
 	}
@@ -91,21 +91,21 @@ function makePathRelative(sourcepath,rootpath,options) {
 		return sourcepath;
 	}
 	// Move up a directory for each directory left in the root
-	for(p = c; p < rootParts.length - 1; p++) {
+	for(p = c;p < rootParts.length - 1;p++) {
 		outputParts.push("..");
-	}		
+	}
 	// Add on the remaining parts of the source path
-	for(p = c; p < sourceParts.length; p++) {
+	for(p = c;p < sourceParts.length;p++) {
 		outputParts.push(sourceParts[p]);
 	}
 	return outputParts.join("/");
 }
 
 function test_makePathRelative() {
-	var test = function(sourcepath,rootpath,result,options) {
-		var actualResult = makePathRelative(sourcepath,rootpath,options);
+	const test = function(sourcepath,rootpath,result,options) {
+		const actualResult = makePathRelative(sourcepath,rootpath,options);
 		if(actualResult !== result) {
-			console.log("makePathRelative test failed: makePathRelative(" + sourcepath + "," + rootpath + "," + JSON.stringify(options) + ") is " + actualResult + " and not equal to " + result);			
+			console.log(`makePathRelative test failed: makePathRelative(${sourcepath},${rootpath},${JSON.stringify(options)}) is ${actualResult} and not equal to ${result}`);
 		}
 	};
 	test("/Users/me/something/file.png","/Users/you/something/index.html","../../me/something/file.png");
@@ -116,7 +116,7 @@ function test_makePathRelative() {
 	test("/Users/me/something/file.png","/Users/me/something/index.html","file.png");
 	test("/Users/jeremyruston/Downloads/Screenshot 2020-10-18 at 15.33.40.png","/Users/jeremyruston/git/Jermolene/TiddlyWiki5/editions/prerelease/output/index.html","../../../../../../Downloads/Screenshot%202020-10-18%20at%2015.33.40.png");
 	test("/Users/me/nothing/image.png","/Users/me/something/a/b/c/d/e/index.html","../../../../../../nothing/image.png");
-	test("C:\\Users\\me\\something\\file.png","/C:/Users/me/something/index.html","file.png",{isWindows: true});
-	test("\\\\SHARE\\Users\\me\\something\\file.png","/SHARE/Users/me/somethingelse/index.html","../something/file.png",{isWindows: true});
-	test("\\\\SHARE\\Users\\me\\something\\file.png","/C:/Users/me/something/index.html","/SHARE/Users/me/something/file.png",{isWindows: true});
+	test(String.raw`C:\Users\me\something\file.png`,"/C:/Users/me/something/index.html","file.png",{isWindows: true});
+	test(String.raw`\\SHARE\Users\me\something\file.png`,"/SHARE/Users/me/somethingelse/index.html","../something/file.png",{isWindows: true});
+	test(String.raw`\\SHARE\Users\me\something\file.png`,"/C:/Users/me/something/index.html","/SHARE/Users/me/something/file.png",{isWindows: true});
 }

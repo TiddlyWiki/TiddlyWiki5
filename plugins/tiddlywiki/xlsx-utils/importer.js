@@ -9,12 +9,12 @@ Class to import an Excel file
 
 "use strict";
 
-var DEFAULT_IMPORT_SPEC_TITLE = "$:/config/plugins/tiddlywiki/xlsx-utils/default-import-spec";
+const DEFAULT_IMPORT_SPEC_TITLE = "$:/config/plugins/tiddlywiki/xlsx-utils/default-import-spec";
 
-var XLSX = require("$:/plugins/tiddlywiki/xlsx-utils/xlsx.js"),
-	JSZip = require("$:/plugins/tiddlywiki/jszip/jszip.js");
+const XLSX = require("$:/plugins/tiddlywiki/xlsx-utils/xlsx.js");
+const JSZip = require("$:/plugins/tiddlywiki/jszip/jszip.js");
 
-var XLSXImporter = function(options) {
+const XLSXImporter = function(options) {
 	this.wiki = options.wiki;
 	this.filename = options.filename;
 	this.text = options.text;
@@ -22,7 +22,7 @@ var XLSXImporter = function(options) {
 	this.logger = new $tw.utils.Logger("xlsx-utils");
 	this.results = [];
 	if(JSZip) {
-		this.processWorkbook();		
+		this.processWorkbook();
 	}
 };
 
@@ -33,9 +33,9 @@ XLSXImporter.prototype.getResults = function() {
 XLSXImporter.prototype.processWorkbook = function() {
 	// Read the workbook
 	if(this.filename) {
-		this.workbook = XLSX.readFile(this.filename);	
+		this.workbook = XLSX.readFile(this.filename);
 	} else if(this.text) {
-		this.workbook = XLSX.read(this.text,{type:"base64"});
+		this.workbook = XLSX.read(this.text,{type: "base64"});
 	}
 	// Read the root import specification
 	this.rootImportSpec = this.wiki.getTiddler(this.importSpec);
@@ -52,16 +52,16 @@ XLSXImporter.prototype.processSheet = function(sheetImportSpecTitle) {
 		this.sheetName = this.sheetImportSpec.fields["import-sheet-name"];
 		this.sheet = this.workbook.Sheets[this.sheetName];
 		if(!this.sheet) {
-			this.logger.alert("Missing sheet '" + this.sheetName + "'");
+			this.logger.alert(`Missing sheet '${this.sheetName}'`);
 		} else {
 			// Get the size of the sheet
 			this.sheetSize = this.measureSheet(this.sheet);
 			// Read the column names from the first row
 			this.columnsByName = this.findColumns(this.sheet,this.sheetSize);
 			// Iterate through the rows
-			for(this.row=this.sheetSize.startRow+1; this.row<=this.sheetSize.endRow; this.row++) {
+			for(this.row = this.sheetSize.startRow + 1;this.row <= this.sheetSize.endRow;this.row++) {
 				// Iterate through the row import specifiers
-				$tw.utils.each(this.sheetImportSpec.fields.list || [],this.processRow.bind(this));					
+				$tw.utils.each(this.sheetImportSpec.fields.list || [],this.processRow.bind(this));
 			}
 		}
 	}
@@ -75,31 +75,33 @@ XLSXImporter.prototype.processRow = function(rowImportSpecTitle) {
 		// Determine the type of row
 		this.rowType = this.rowImportSpec.fields["import-row-type"] || "by-field";
 		switch(this.rowType) {
-			case "by-column":
+			case "by-column": {
 				this.processRowByColumn();
 				break;
-			case "by-field":
+			}
+			case "by-field": {
 				this.processRowByField();
 				break;
+			}
 		}
 		// Save the tiddler if not skipped
 		if(!this.skipTiddler) {
 			if(!this.tiddlerFields.title) {
-				this.logger.alert("Missing title field for " + JSON.stringify(this.tiddlerFields));
+				this.logger.alert(`Missing title field for ${JSON.stringify(this.tiddlerFields)}`);
 			}
-			this.results.push(this.tiddlerFields);								
+			this.results.push(this.tiddlerFields);
 		}
 	}
 };
 
 XLSXImporter.prototype.processRowByColumn = function() {
-	var self = this;
+	const self = this;
 	// Iterate through the columns for the row
-	$tw.utils.each(this.columnsByName,function(index,name) {
-		var cell = self.sheet[XLSX.utils.encode_cell({c: self.columnsByName[name], r: self.row})];
+	$tw.utils.each(this.columnsByName,(index,name) => {
+		const cell = self.sheet[XLSX.utils.encode_cell({c: self.columnsByName[name],r: self.row})];
 		name = name.toLowerCase();
 		if(cell && cell.w && $tw.utils.isValidFieldName(name)) {
-			self.tiddlerFields[name] = cell.w;		
+			self.tiddlerFields[name] = cell.w;
 		}
 	});
 	// Skip the tiddler entirely if it doesn't have a title
@@ -114,35 +116,40 @@ XLSXImporter.prototype.processRowByField = function() {
 };
 
 XLSXImporter.prototype.processField = function(fieldImportSpecTitle) {
-	var fieldImportSpec = this.wiki.getTiddler(fieldImportSpecTitle);
+	const fieldImportSpec = this.wiki.getTiddler(fieldImportSpecTitle);
 	if(fieldImportSpec) {
-		var fieldName = fieldImportSpec.fields["import-field-name"],
-			value;
+		const fieldName = fieldImportSpec.fields["import-field-name"];
+		let value;
 		switch(fieldImportSpec.fields["import-field-source"]) {
-			case "column":
-				var columnName = fieldImportSpec.fields["import-field-column"],
-					cell = this.sheet[XLSX.utils.encode_cell({c: this.columnsByName[columnName], r: this.row})];
+			case "column": {
+				const columnName = fieldImportSpec.fields["import-field-column"];
+				const cell = this.sheet[XLSX.utils.encode_cell({c: this.columnsByName[columnName],r: this.row})];
 				if(cell) {
 					switch(fieldImportSpec.fields["import-field-type"] || "string") {
-						case "date":
+						case "date": {
 							if(cell.t === "n") {
 								value = $tw.utils.stringifyDate(new Date((cell.v - (25567 + 2)) * 86400 * 1000));
 							}
 							break;
-						case "number":
+						}
+						case "number": {
 							value = cell.v.toString();
 							break;
+						}
 						case "string":
-							// falls through
-						default:
+						// falls through
+						default: {
 							value = cell.w;
 							break;
+						}
 					}
 				}
 				break;
-			case "constant":
-				value = fieldImportSpec.fields["import-field-value"]
+			}
+			case "constant": {
+				value = fieldImportSpec.fields["import-field-value"];
 				break;
+			}
 		}
 		value = (value || "").trim();
 		if(value === "") {
@@ -157,40 +164,42 @@ XLSXImporter.prototype.processField = function(fieldImportSpecTitle) {
 			value = fieldImportSpec.fields["import-field-prefix"] + value;
 		}
 		if(fieldImportSpec.fields["import-field-suffix"]) {
-			value = value + fieldImportSpec.fields["import-field-suffix"];
+			value += fieldImportSpec.fields["import-field-suffix"];
 		}
 		switch(fieldImportSpec.fields["import-field-list-op"] || "none") {
-			case "none":
+			case "none": {
 				this.tiddlerFields[fieldName] = value;
 				break;
-			case "append":
-				var list = $tw.utils.parseStringArray(this.tiddlerFields[fieldName] || "");
-				$tw.utils.pushTop(list,value)
+			}
+			case "append": {
+				const list = $tw.utils.parseStringArray(this.tiddlerFields[fieldName] || "");
+				$tw.utils.pushTop(list,value);
 				this.tiddlerFields[fieldName] = list;
 				break;
+			}
 		}
 	}
-}
+};
 
 XLSXImporter.prototype.measureSheet = function(sheet) {
-	var sheetRange = XLSX.utils.decode_range(sheet["!ref"]);
+	const sheetRange = XLSX.utils.decode_range(sheet["!ref"]);
 	return {
 		startRow: Math.min(sheetRange.s.r,sheetRange.e.r),
 		endRow: Math.max(sheetRange.s.r,sheetRange.e.r),
 		startCol: Math.min(sheetRange.s.c,sheetRange.e.c),
 		endCol: Math.max(sheetRange.s.c,sheetRange.e.c)
-	}
+	};
 };
 
 XLSXImporter.prototype.findColumns = function(sheet,sheetSize) {
-	var columnsByName = {};
-	for(var col=sheetSize.startCol; col<=sheetSize.endCol; col++) {
-		var cell = sheet[XLSX.utils.encode_cell({c: col, r: sheetSize.startRow})],
-			columnName;
+	const columnsByName = {};
+	for(let col = sheetSize.startCol;col <= sheetSize.endCol;col++) {
+		const cell = sheet[XLSX.utils.encode_cell({c: col,r: sheetSize.startRow})];
+		var columnName;
 		if(cell) {
 			columnName = cell.w;
 			if(columnName) {
-				columnsByName[columnName] = col;							
+				columnsByName[columnName] = col;
 			}
 		}
 	}

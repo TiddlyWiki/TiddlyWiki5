@@ -9,9 +9,9 @@ An override of the raw widget that blocks raw content until the user has consent
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var RawWidget = function(parseTreeNode,options) {
+const RawWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -31,14 +31,14 @@ RawWidget.prototype.render = function(parent,nextSibling) {
 		this.makeChildWidgets([{
 			type: "transclude",
 			attributes: {
-				tiddler: {type: "string", value: "$:/config/plugins/tiddlywiki/consent-banner/blocked-raw-message"}
+				tiddler: {type: "string",value: "$:/config/plugins/tiddlywiki/consent-banner/blocked-raw-message"}
 			}
 		}]);
 		// Render child widgets
 		this.renderChildren(parent,null);
 	} else {
-		var div = this.document.createElement("div");
-		div.innerHTML=this.parseTreeNode.html;
+		const div = this.document.createElement("div");
+		div.innerHTML = this.parseTreeNode.html;
 		parent.insertBefore(div,nextSibling);
 		this.domNodes.push(div);
 	}
@@ -47,8 +47,7 @@ RawWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-RawWidget.prototype.execute = function() {
-};
+RawWidget.prototype.execute = function() {};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
@@ -57,7 +56,7 @@ RawWidget.prototype.refresh = function(changedTiddlers) {
 	if(this.blocked) {
 		return this.refreshChildren(changedTiddlers);
 	} else {
-		return false;		
+		return false;
 	}
 };
 

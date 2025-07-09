@@ -13,13 +13,13 @@ Filter operator for finding values in array fields
 Export our filter function
 */
 exports.contains = function(source,operator,options) {
-	var results = [],
-		fieldname = operator.suffix || "list";
+	const results = [];
+	const fieldname = operator.suffix || "list";
 	if(operator.prefix === "!") {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(tiddler) {
-				var list = tiddler.getFieldList(fieldname);
-				if(list.indexOf(operator.operand) === -1) {
+				const list = tiddler.getFieldList(fieldname);
+				if(!list.includes(operator.operand)) {
 					results.push(title);
 				}
 			} else {
@@ -27,10 +27,10 @@ exports.contains = function(source,operator,options) {
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(tiddler) {
-				var list = tiddler.getFieldList(fieldname);
-				if(list.indexOf(operator.operand) !== -1) {
+				const list = tiddler.getFieldList(fieldname);
+				if(list.includes(operator.operand)) {
 					results.push(title);
 				}
 			}

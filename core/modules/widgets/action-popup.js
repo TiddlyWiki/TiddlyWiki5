@@ -9,11 +9,11 @@ Action widget to trigger a popup.
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var Popup = require("$:/core/modules/utils/dom/popup.js");
+const Popup = require("$:/core/modules/utils/dom/popup.js");
 
-var ActionPopupWidget = function(parseTreeNode,options) {
+const ActionPopupWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -43,7 +43,7 @@ ActionPopupWidget.prototype.execute = function() {
 Refresh the widget by ensuring our attributes are up to date
 */
 ActionPopupWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes["$state"] || changedAttributes["$coords"]) {
 		this.refreshSelf();
 		return true;
@@ -56,7 +56,7 @@ Invoke the action associated with this widget
 */
 ActionPopupWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	// Trigger the popup
-	var coordinates = Popup.parseCoordinates(this.actionCoords || "");
+	const coordinates = Popup.parseCoordinates(this.actionCoords || "");
 	if(coordinates) {
 		$tw.popup.triggerPopup({
 			domNode: null,

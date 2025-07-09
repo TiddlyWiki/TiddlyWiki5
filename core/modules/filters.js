@@ -9,10 +9,10 @@ Adds tiddler filtering methods to the $tw.Wiki object.
 
 "use strict";
 
-var widgetClass = require("$:/core/modules/widgets/widget.js").widget;
+const widgetClass = require("$:/core/modules/widgets/widget.js").widget;
 
 /* Maximum permitted filter recursion depth */
-var MAX_FILTER_DEPTH = 300;
+const MAX_FILTER_DEPTH = 300;
 
 /*
 Parses an operation (i.e. a run) within a filter string
@@ -22,7 +22,7 @@ Parses an operation (i.e. a run) within a filter string
 Returns the new start position, after the parsed operation
 */
 function parseFilterOperation(operators,filterString,p) {
-	var nextBracketPos, operator;
+	let nextBracketPos; let operator;
 	// Skip the starting square bracket
 	if(filterString.charAt(p++) !== "[") {
 		throw "Missing [ in filter expression";
@@ -40,22 +40,22 @@ function parseFilterOperation(operators,filterString,p) {
 			throw "Missing [ in filter expression";
 		}
 		nextBracketPos += p;
-		var bracket = filterString.charAt(nextBracketPos);
+		const bracket = filterString.charAt(nextBracketPos);
 		operator.operator = filterString.substring(p,nextBracketPos);
 		// Any suffix?
-		var colon = operator.operator.indexOf(':');
+		const colon = operator.operator.indexOf(':');
 		if(colon > -1) {
 			// The raw suffix for older filters
 			operator.suffix = operator.operator.substring(colon + 1);
 			operator.operator = operator.operator.substring(0,colon) || "field";
 			// The processed suffix for newer filters
 			operator.suffixes = [];
-			$tw.utils.each(operator.suffix.split(":"),function(subsuffix) {
+			$tw.utils.each(operator.suffix.split(":"),(subsuffix) => {
 				operator.suffixes.push([]);
-				$tw.utils.each(subsuffix.split(","),function(entry) {
+				$tw.utils.each(subsuffix.split(","),(entry) => {
 					entry = $tw.utils.trim(entry);
 					if(entry) {
-						operator.suffixes[operator.suffixes.length - 1].push(entry); 
+						operator.suffixes[operator.suffixes.length - 1].push(entry);
 					}
 				});
 			});
@@ -65,33 +65,37 @@ function parseFilterOperation(operators,filterString,p) {
 			operator.operator = "title";
 		}
 		operator.operands = [];
-		var parseOperand = function(bracketType) {
-			var operand = {};
-			switch (bracketType) {
-				case "{": // Curly brackets
+		const parseOperand = function(bracketType) {
+			const operand = {};
+			switch(bracketType) {
+				case "{": { // Curly brackets
 					operand.indirect = true;
 					nextBracketPos = filterString.indexOf("}",p);
 					break;
-				case "[": // Square brackets
+				}
+				case "[": { // Square brackets
 					nextBracketPos = filterString.indexOf("]",p);
 					break;
-				case "<": // Angle brackets
+				}
+				case "<": { // Angle brackets
 					operand.variable = true;
 					nextBracketPos = filterString.indexOf(">",p);
 					break;
-				case "/": // regexp brackets
-					var rex = /^((?:[^\\\/]|\\.)*)\/(?:\(([mygi]+)\))?/g,
-						rexMatch = rex.exec(filterString.substring(p));
+				}
+				case "/": { // regexp brackets
+					const rex = /^((?:[^\\\/]|\\.)*)\/(?:\(([mygi]+)\))?/g;
+					const rexMatch = rex.exec(filterString.substring(p));
 					if(rexMatch) {
-						operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
-	// DEPRECATION WARNING
-	console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
+						operator.regexp = new RegExp(rexMatch[1],rexMatch[2]);
+						// DEPRECATION WARNING
+						console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
 						nextBracketPos = p + rex.lastIndex - 1;
 					}
 					else {
 						throw "Unterminated regular expression in filter expression";
 					}
 					break;
+				}
 			}
 
 			if(nextBracketPos === -1) {
@@ -104,7 +108,7 @@ function parseFilterOperation(operators,filterString,p) {
 			}
 			operator.operands.push(operand);
 			p = nextBracketPos + 1;
-		}
+		};
 
 		p = nextBracketPos + 1;
 		parseOperand(bracket);
@@ -137,17 +141,17 @@ Parse a filter string
 */
 exports.parseFilter = function(filterString) {
 	filterString = filterString || "";
-	var results = [], // Array of arrays of operator nodes {operator:,operand:}
-		p = 0, // Current position in the filter string
-		match;
-	var whitespaceRegExp = /(\s+)/mg,
-		operandRegExp = /((?:\+|\-|~|=|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
+	const results = []; // Array of arrays of operator nodes {operator:,operand:}
+	let p = 0; // Current position in the filter string
+	let match;
+	const whitespaceRegExp = /(\s+)/mg;
+	const operandRegExp = /((?:\+|\-|~|=|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
 		match = whitespaceRegExp.exec(filterString);
 		if(match && match.index === p) {
-			p = p + match[0].length;
+			p += match[0].length;
 		}
 		// Match the start of the operation
 		if(p < filterString.length) {
@@ -162,21 +166,21 @@ exports.parseFilter = function(filterString) {
 			};
 			if(match[1]) {
 				operation.prefix = match[1];
-				p = p + operation.prefix.length;
+				p += operation.prefix.length;
 				if(match[2]) {
 					operation.namedPrefix = match[2];
 				}
 				if(match[3]) {
 					operation.suffixes = [];
-					 $tw.utils.each(match[3].split(":"),function(subsuffix) {
+					$tw.utils.each(match[3].split(":"),(subsuffix) => {
 						operation.suffixes.push([]);
-						$tw.utils.each(subsuffix.split(","),function(entry) {
+						$tw.utils.each(subsuffix.split(","),(entry) => {
 							entry = $tw.utils.trim(entry);
 							if(entry) {
-								operation.suffixes[operation.suffixes.length -1].push(entry);
+								operation.suffixes[operation.suffixes.length - 1].push(entry);
 							}
 						});
-					 });
+					});
 				}
 			}
 			if(match[4]) { // Opening square bracket
@@ -186,7 +190,7 @@ exports.parseFilter = function(filterString) {
 			}
 			if(match[5] || match[6] || match[7]) { // Double quoted string, single quoted string or unquoted title
 				operation.operators.push(
-					{operator: "title", operands: [{text: match[5] || match[6] || match[7]}]}
+					{operator: "title",operands: [{text: match[5] || match[6] || match[7]}]}
 				);
 			}
 			results.push(operation);
@@ -209,10 +213,10 @@ exports.getFilterRunPrefixes = function() {
 		$tw.modules.applyMethods("filterrunprefix",this.filterRunPrefixes);
 	}
 	return this.filterRunPrefixes;
-}
+};
 
 exports.filterTiddlers = function(filterString,widget,source) {
-	var fn = this.compileFilter(filterString);
+	const fn = this.compileFilter(filterString);
 	return fn.call(this,source,widget);
 };
 
@@ -229,29 +233,29 @@ exports.compileFilter = function(filterString) {
 	if(this.filterCache[filterString] !== undefined) {
 		return this.filterCache[filterString];
 	}
-	var filterParseTree;
+	let filterParseTree;
 	try {
 		filterParseTree = this.parseFilter(filterString);
 	} catch(e) {
 		// We do not cache this result, so it adjusts along with localization changes
 		return function(source,widget) {
-			return [$tw.language.getString("Error/Filter") + ": " + e];
+			return [`${$tw.language.getString("Error/Filter")}: ${e}`];
 		};
 	}
 	// Get the hashmap of filter operator functions
-	var filterOperators = this.getFilterOperators();
+	const filterOperators = this.getFilterOperators();
 	// Assemble array of functions, one for each operation
-	var operationFunctions = [];
+	const operationFunctions = [];
 	// Step through the operations
-	var self = this;
-	$tw.utils.each(filterParseTree,function(operation) {
+	const self = this;
+	$tw.utils.each(filterParseTree,(operation) => {
 		// Create a function for the chain of operators in the operation
-		var operationSubFunction = function(source,widget) {
-			var accumulator = source,
-				results = [];
-			$tw.utils.each(operation.operators,function(operator) {
-				var operands = [],
-					operatorFunction;
+		const operationSubFunction = function(source,widget) {
+			let accumulator = source;
+			let results = [];
+			$tw.utils.each(operation.operators,(operator) => {
+				const operands = [];
+				let operatorFunction;
 				if(!operator.operator) {
 					// Use the "title" operator if no operator is specified
 					operatorFunction = filterOperators.title;
@@ -262,13 +266,13 @@ exports.compileFilter = function(filterString) {
 					// Use the operator function
 					operatorFunction = filterOperators[operator.operator];
 				}
-				$tw.utils.each(operator.operands,function(operand) {
+				$tw.utils.each(operator.operands,(operand) => {
 					if(operand.indirect) {
-						var currTiddlerTitle = widget && widget.getVariable("currentTiddler");
+						const currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
 					} else if(operand.variable) {
-						var varTree = $tw.utils.parseFilterVariable(operand.text);
-						operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source})[0] || "";
+						const varTree = $tw.utils.parseFilterVariable(operand.text);
+						operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params,source})[0] || "";
 					} else {
 						operand.value = operand.text;
 					}
@@ -277,17 +281,17 @@ exports.compileFilter = function(filterString) {
 
 				// Invoke the appropriate filteroperator module
 				results = operatorFunction(accumulator,{
-							operator: operator.operator,
-							operand: operands.length > 0 ? operands[0] : undefined,
-							operands: operands,
-							prefix: operator.prefix,
-							suffix: operator.suffix,
-							suffixes: operator.suffixes,
-							regexp: operator.regexp
-						},{
-							wiki: self,
-							widget: widget
-						});
+					operator: operator.operator,
+					operand: operands.length > 0 ? operands[0] : undefined,
+					operands,
+					prefix: operator.prefix,
+					suffix: operator.suffix,
+					suffixes: operator.suffixes,
+					regexp: operator.regexp
+				},{
+					wiki: self,
+					widget
+				});
 				if($tw.utils.isArray(results)) {
 					accumulator = self.makeTiddlerIterator(results);
 				} else {
@@ -297,42 +301,48 @@ exports.compileFilter = function(filterString) {
 			if($tw.utils.isArray(results)) {
 				return results;
 			} else {
-				var resultArray = [];
-				results(function(tiddler,title) {
+				const resultArray = [];
+				results((tiddler,title) => {
 					resultArray.push(title);
 				});
 				return resultArray;
 			}
 		};
-		var filterRunPrefixes = self.getFilterRunPrefixes();
+		const filterRunPrefixes = self.getFilterRunPrefixes();
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
-			var options = {wiki: self, suffixes: operation.suffixes || []};
+			const options = {wiki: self,suffixes: operation.suffixes || []};
 			switch(operation.prefix || "") {
-				case "": // No prefix means that the operation is unioned into the result
-					return filterRunPrefixes["or"](operationSubFunction, options);
-				case "=": // The results of the operation are pushed into the result without deduplication
-					return filterRunPrefixes["all"](operationSubFunction, options);
-				case "-": // The results of this operation are removed from the main result
-					return filterRunPrefixes["except"](operationSubFunction, options);
-				case "+": // This operation is applied to the main results so far
-					return filterRunPrefixes["and"](operationSubFunction, options);
-				case "~": // This operation is unioned into the result only if the main result so far is empty
-					return filterRunPrefixes["else"](operationSubFunction, options);
-				default: 
+				case "": { // No prefix means that the operation is unioned into the result
+					return filterRunPrefixes["or"](operationSubFunction,options);
+				}
+				case "=": { // The results of the operation are pushed into the result without deduplication
+					return filterRunPrefixes["all"](operationSubFunction,options);
+				}
+				case "-": { // The results of this operation are removed from the main result
+					return filterRunPrefixes["except"](operationSubFunction,options);
+				}
+				case "+": { // This operation is applied to the main results so far
+					return filterRunPrefixes["and"](operationSubFunction,options);
+				}
+				case "~": { // This operation is unioned into the result only if the main result so far is empty
+					return filterRunPrefixes["else"](operationSubFunction,options);
+				}
+				default: {
 					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
-						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
+						return filterRunPrefixes[operation.namedPrefix](operationSubFunction,options);
 					} else {
 						return function(results,source,widget) {
 							results.clear();
 							results.push($tw.language.getString("Error/FilterRunPrefix"));
 						};
 					}
+				}
 			}
 		})());
 	});
 	// Return a function that applies the operations to a source iterator of tiddler titles
-	var fnMeasured = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
+	const fnMeasured = $tw.perf.measure(`filter: ${filterString}`,(source,widget) => {
 		if(!source) {
 			source = self.each;
 		} else if(typeof source === "object") { // Array or hashmap
@@ -341,16 +351,16 @@ exports.compileFilter = function(filterString) {
 		if(!widget) {
 			widget = $tw.rootWidget;
 		}
-		var results = new $tw.utils.LinkedList();
+		const results = new $tw.utils.LinkedList();
 		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
 		if(self.filterRecursionCount < MAX_FILTER_DEPTH) {
-			$tw.utils.each(operationFunctions,function(operationFunction) {
+			$tw.utils.each(operationFunctions,(operationFunction) => {
 				operationFunction(results,source,widget);
 			});
 		} else {
 			results.push("/**-- Excessive filter recursion --**/");
 		}
-		self.filterRecursionCount = self.filterRecursionCount - 1;
+		self.filterRecursionCount -= 1;
 		return results.toArray();
 	});
 	if(this.filterCacheCount >= 2000) {

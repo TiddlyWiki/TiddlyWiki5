@@ -11,7 +11,7 @@ Filter operator for selecting tiddlers
 
 "use strict";
 
-var allFilterOperators;
+let allFilterOperators;
 
 function getAllFilterOperators() {
 	if(!allFilterOperators) {
@@ -26,7 +26,7 @@ Export our filter function
 */
 exports.all = function(source,operator,options) {
 	// Check for common optimisations
-	var subops = operator.operand.split("+");
+	const subops = operator.operand.split("+");
 	if(subops.length === 1 && subops[0] === "") {
 		return source;
 	} else if(subops.length === 1 && subops[0] === "tiddlers") {
@@ -40,11 +40,11 @@ exports.all = function(source,operator,options) {
 	}
 	// Do it the hard way
 	// Get our suboperators
-	var allFilterOperators = getAllFilterOperators();
+	const allFilterOperators = getAllFilterOperators();
 	// Cycle through the suboperators accumulating their results
-	var results = new $tw.utils.LinkedList();
-	for(var t=0; t<subops.length; t++) {
-		var subop = allFilterOperators[subops[t]];
+	const results = new $tw.utils.LinkedList();
+	for(let t = 0;t < subops.length;t++) {
+		const subop = allFilterOperators[subops[t]];
 		if(subop) {
 			results.pushTop(subop(source,operator.prefix,options));
 		}

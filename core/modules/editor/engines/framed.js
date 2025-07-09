@@ -9,7 +9,7 @@ Text editor engine based on a simple input or textarea within an iframe. This is
 
 "use strict";
 
-var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
+const HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
 
 function FramedEngine(options) {
 	// Save our options
@@ -31,10 +31,10 @@ function FramedEngine(options) {
 	this.parentNode.insertBefore(this.iframeNode,this.nextSibling);
 	this.iframeDoc = this.iframeNode.contentWindow.document;
 	// (Firefox requires us to put some empty content in the iframe)
-	var paletteTitle = this.widget.wiki.getTiddlerText("$:/palette");
-	var colorScheme = (this.widget.wiki.getTiddler(paletteTitle) || {fields: {}}).fields["color-scheme"] || "light";
+	const paletteTitle = this.widget.wiki.getTiddlerText("$:/palette");
+	const colorScheme = (this.widget.wiki.getTiddler(paletteTitle) || {fields: {}}).fields["color-scheme"] || "light";
 	this.iframeDoc.open();
-	this.iframeDoc.write("<meta name='color-scheme' content='" + colorScheme + "'>");
+	this.iframeDoc.write(`<meta name='color-scheme' content='${colorScheme}'>`);
 	this.iframeDoc.close();
 	// Style the iframe
 	this.iframeNode.className = this.dummyTextArea.className;
@@ -45,8 +45,8 @@ function FramedEngine(options) {
 	this.iframeDoc.body.style.padding = "0";
 	this.widget.domNodes.push(this.iframeNode);
 	// Construct the textarea or input node
-	var tag = this.widget.editTag;
-	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
+	let tag = this.widget.editTag;
+	if($tw.config.htmlUnsafeElements.includes(tag)) {
 		tag = "input";
 	}
 	this.domNode = this.iframeDoc.createElement(tag);
@@ -94,8 +94,8 @@ function FramedEngine(options) {
 			{name: "dragover",handlerObject: this.widget,handlerMethod: "handleDragOverEvent"},
 			{name: "dragleave",handlerObject: this.widget,handlerMethod: "handleDragLeaveEvent"},
 			{name: "dragend",handlerObject: this.widget,handlerMethod: "handleDragEndEvent"},
-			{name: "drop", handlerObject: this.widget,handlerMethod: "handleDropEvent"},
-			{name: "paste", handlerObject: this.widget,handlerMethod: "handlePasteEvent"},
+			{name: "drop",handlerObject: this.widget,handlerMethod: "handleDropEvent"},
+			{name: "paste",handlerObject: this.widget,handlerMethod: "handlePasteEvent"},
 			{name: "click",handlerObject: this.widget,handlerMethod: "handleClickEvent"}
 		]);
 	}
@@ -160,14 +160,14 @@ FramedEngine.prototype.fixHeight = function() {
 	if(this.widget.editTag === "textarea") {
 		if(this.widget.editAutoHeight) {
 			if(this.domNode && !this.domNode.isTiddlyWikiFakeDom) {
-				var newHeight = $tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);
-				this.iframeNode.style.height = newHeight + "px";
+				const newHeight = $tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);
+				this.iframeNode.style.height = `${newHeight}px`;
 			}
 		} else {
-			var fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
+			let fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
 			fixedHeight = Math.max(fixedHeight,20);
-			this.domNode.style.height = fixedHeight + "px";
-			this.iframeNode.style.height = fixedHeight + "px";
+			this.domNode.style.height = `${fixedHeight}px`;
+			this.iframeNode.style.height = `${fixedHeight}px`;
 		}
 	}
 };
@@ -175,7 +175,7 @@ FramedEngine.prototype.fixHeight = function() {
 /*
 Focus the engine node
 */
-FramedEngine.prototype.focus  = function() {
+FramedEngine.prototype.focus = function() {
 	if(this.domNode.focus) {
 		this.domNode.focus();
 	}
@@ -197,7 +197,7 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 Handle a keydown event
  */
 FramedEngine.prototype.handleKeydownEvent = function(event) {
-	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+	if($tw.keyboardManager.handleKeydownEvent(event,{onlyPriority: true})) {
 		return true;
 	}
 
@@ -228,7 +228,7 @@ FramedEngine.prototype.handleInputEvent = function(event) {
 Create a blank structure representing a text operation
 */
 FramedEngine.prototype.createTextOperation = function() {
-	var operation = {
+	const operation = {
 		text: this.domNode.value,
 		selStart: this.domNode.selectionStart,
 		selEnd: this.domNode.selectionEnd,
@@ -247,7 +247,7 @@ Execute a text operation
 */
 FramedEngine.prototype.executeTextOperation = function(operation) {
 	// Perform the required changes to the text area and the underlying tiddler
-	var newText = operation.text;
+	let newText = operation.text;
 	if(operation.replacement !== null) {
 		newText = operation.text.substring(0,operation.cutStart) + operation.replacement + operation.text.substring(operation.cutEnd);
 		// Attempt to use a execCommand to modify the value of the control

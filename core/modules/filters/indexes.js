@@ -13,9 +13,9 @@ Filter operator for returning the indexes of a data tiddler
 Export our filter function
 */
 exports.indexes = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
-		var data = options.wiki.getTiddlerDataCached(title);
+	const results = [];
+	source((tiddler,title) => {
+		const data = options.wiki.getTiddlerDataCached(title);
 		if(data) {
 			$tw.utils.pushTop(results,Object.keys(data));
 		}

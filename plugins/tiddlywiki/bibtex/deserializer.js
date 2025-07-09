@@ -9,17 +9,17 @@ BibTeX file deserializer
 
 "use strict";
 
-var bibtexParse = require("$:/plugins/tiddlywiki/bibtex/bibtexParse.js");
+const bibtexParse = require("$:/plugins/tiddlywiki/bibtex/bibtexParse.js");
 
 /*
 Parse an BibTeX file into tiddlers
 */
 exports["application/x-bibtex"] = function(text,fields) {
-	var data,
-		results = [];
+	let data;
+	const results = [];
 	// Parse the text
 	try {
-		data = bibtexParse.toJSON(text)
+		data = bibtexParse.toJSON(text);
 	} catch(ex) {
 		data = ex.toString();
 	}
@@ -30,13 +30,13 @@ exports["application/x-bibtex"] = function(text,fields) {
 		}];
 	}
 	// Convert each entry
-	$tw.utils.each(data,function(entry) {
-		var fields = {
+	$tw.utils.each(data,(entry) => {
+		const fields = {
 			title: entry.citationKey,
 			"bibtex-entry-type": entry.entryType
 		};
-		$tw.utils.each(entry.entryTags,function(value,name) {
-			fields["bibtex-" + name.toLowerCase()] = value;
+		$tw.utils.each(entry.entryTags,(value,name) => {
+			fields[`bibtex-${name.toLowerCase()}`] = value;
 		});
 		results.push(fields);
 	});

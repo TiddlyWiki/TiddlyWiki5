@@ -11,11 +11,11 @@ Text editor operation to make a link
 
 exports["make-link"] = function(event,operation) {
 	if(operation.selection) {
-		operation.replacement = "[[" + operation.selection + "|" + event.paramObject.text + "]]";
+		operation.replacement = `[[${operation.selection}|${event.paramObject.text}]]`;
 		operation.cutStart = operation.selStart;
 		operation.cutEnd = operation.selEnd;
 	} else {
-		operation.replacement = "[[" + event.paramObject.text + "]]";
+		operation.replacement = `[[${event.paramObject.text}]]`;
 		operation.cutStart = operation.selStart;
 		operation.cutEnd = operation.selEnd;
 	}

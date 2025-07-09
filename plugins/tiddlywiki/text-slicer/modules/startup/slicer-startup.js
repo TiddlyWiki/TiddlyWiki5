@@ -9,7 +9,7 @@ Setup the root widget event handlers
 
 "use strict";
 
-var textSlicer = require("$:/plugins/tiddlywiki/text-slicer/modules/slicer.js");
+const textSlicer = require("$:/plugins/tiddlywiki/text-slicer/modules/slicer.js");
 
 // Export name and synchronous status
 exports.name = "slicer";
@@ -26,17 +26,17 @@ exports.startup = function() {
 		logger.alert("The plugin 'text-slicer' requires the 'sax' plugin to be installed");
 	}
 	// Add tm-slice-tiddler event handler
-	$tw.rootWidget.addEventListener("tm-slice-tiddler",function(event) {
-		var slicer = new textSlicer.Slicer({
+	$tw.rootWidget.addEventListener("tm-slice-tiddler",(event) => {
+		const slicer = new textSlicer.Slicer({
 			sourceTiddlerTitle: event.param,
 			slicerRules: event.paramObject && event.paramObject.slicerRules,
 			outputMode: event.paramObject && event.paramObject.outputMode,
 			baseTiddlerTitle: event.paramObject && event.paramObject.destTitle,
 			role: event.paramObject && event.paramObject.role,
 			wiki: $tw.wiki,
-			callback: function(err,tiddlers) {
+			callback(err,tiddlers) {
 				if(err) {
-					logger.alert("Slicer error: " + err);
+					logger.alert(`Slicer error: ${err}`);
 				} else {
 					$tw.wiki.addTiddlers(tiddlers);
 				}

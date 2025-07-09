@@ -11,8 +11,8 @@ Bitmap editor operation to resize the image
 
 exports["resize"] = function(event) {
 	// Get the new width
-	var newWidth = parseInt(event.paramObject.width || this.canvasDomNode.width,10),
-		newHeight = parseInt(event.paramObject.height || this.canvasDomNode.height,10);
+	const newWidth = parseInt(event.paramObject.width || this.canvasDomNode.width,10);
+	const newHeight = parseInt(event.paramObject.height || this.canvasDomNode.height,10);
 	// Update if necessary
 	if(newWidth > 0 && newHeight > 0 && !(newWidth === this.currCanvas.width && newHeight === this.currCanvas.height)) {
 		this.changeCanvasSize(newWidth,newHeight);

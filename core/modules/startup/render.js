@@ -16,17 +16,17 @@ exports.after = ["story"];
 exports.synchronous = true;
 
 // Default story and history lists
-var PAGE_TITLE_TITLE = "$:/core/wiki/title";
-var PAGE_STYLESHEET_TITLE = "$:/core/ui/PageStylesheet";
-var PAGE_TEMPLATE_TITLE = "$:/core/ui/RootTemplate";
+const PAGE_TITLE_TITLE = "$:/core/wiki/title";
+const PAGE_STYLESHEET_TITLE = "$:/core/ui/PageStylesheet";
+const PAGE_TEMPLATE_TITLE = "$:/core/ui/RootTemplate";
 
 // Time (in ms) that we defer refreshing changes to draft tiddlers
-var DRAFT_TIDDLER_TIMEOUT_TITLE = "$:/config/Drafts/TypingTimeout";
-var THROTTLE_REFRESH_TIMEOUT = 400;
+const DRAFT_TIDDLER_TIMEOUT_TITLE = "$:/config/Drafts/TypingTimeout";
+const THROTTLE_REFRESH_TIMEOUT = 400;
 
 exports.startup = function() {
 	// Set up the title
-	$tw.titleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TITLE_TITLE, {
+	$tw.titleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TITLE_TITLE,{
 		document: $tw.fakeDocument,
 		parseAsInline: true,
 		importPageMacros: true,
@@ -34,7 +34,7 @@ exports.startup = function() {
 	$tw.titleContainer = $tw.fakeDocument.createElement("div");
 	$tw.titleWidgetNode.render($tw.titleContainer,null);
 	document.title = $tw.titleContainer.textContent;
-	$tw.wiki.addEventListener("change",function(changes) {
+	$tw.wiki.addEventListener("change",(changes) => {
 		if($tw.titleWidgetNode.refresh(changes,$tw.titleContainer,null)) {
 			document.title = $tw.titleContainer.textContent;
 		}
@@ -47,9 +47,9 @@ exports.startup = function() {
 	$tw.styleElement = document.createElement("style");
 	$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
 	document.head.insertBefore($tw.styleElement,document.head.firstChild);
-	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
+	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",(changes) => {
 		if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
-			var newStyles = $tw.styleContainer.textContent;
+			const newStyles = $tw.styleContainer.textContent;
 			if(newStyles !== $tw.styleWidgetNode.assignedStyles) {
 				$tw.styleWidgetNode.assignedStyles = newStyles;
 				$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
@@ -57,24 +57,24 @@ exports.startup = function() {
 		}
 	}));
 	// Display the $:/core/ui/PageTemplate tiddler to kick off the display
-	$tw.perf.report("mainRender",function() {
-		$tw.pageWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TEMPLATE_TITLE,{document: document, parentWidget: $tw.rootWidget, recursionMarker: "no"});
+	$tw.perf.report("mainRender",() => {
+		$tw.pageWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TEMPLATE_TITLE,{document,parentWidget: $tw.rootWidget,recursionMarker: "no"});
 		$tw.pageContainer = document.createElement("div");
 		$tw.utils.addClass($tw.pageContainer,"tc-page-container-wrapper");
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
 		$tw.pageWidgetNode.render($tw.pageContainer,null);
-   		$tw.hooks.invokeHook("th-page-refreshed");
+		$tw.hooks.invokeHook("th-page-refreshed");
 	})();
 	// Remove any splash screen elements
-	var removeList = document.querySelectorAll(".tc-remove-when-wiki-loaded");
-	$tw.utils.each(removeList,function(removeItem) {
+	const removeList = document.querySelectorAll(".tc-remove-when-wiki-loaded");
+	$tw.utils.each(removeList,(removeItem) => {
 		if(removeItem.parentNode) {
 			removeItem.parentNode.removeChild(removeItem);
 		}
 	});
 	// Prepare refresh mechanism
-	var deferredChanges = Object.create(null),
-		timerId;
+	let deferredChanges = Object.create(null);
+	let timerId;
 	function refresh() {
 		// Process the refresh
 		$tw.hooks.invokeHook("th-page-refreshing");
@@ -82,14 +82,14 @@ exports.startup = function() {
 		deferredChanges = Object.create(null);
 		$tw.hooks.invokeHook("th-page-refreshed");
 	}
-	var throttledRefresh = $tw.perf.report("throttledRefresh",refresh);
+	const throttledRefresh = $tw.perf.report("throttledRefresh",refresh);
 
 	// Add the change event handler
-	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
+	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",(changes) => {
 		// Check if only tiddlers that are throttled have changed
-		var onlyThrottledTiddlersHaveChanged = true;
-		for(var title in changes) {
-			var tiddler = $tw.wiki.getTiddler(title);
+		let onlyThrottledTiddlersHaveChanged = true;
+		for(const title in changes) {
+			const tiddler = $tw.wiki.getTiddler(title);
 			if(!$tw.wiki.isVolatileTiddler(title) && (!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh")))) {
 				onlyThrottledTiddlersHaveChanged = false;
 			}
@@ -100,7 +100,7 @@ exports.startup = function() {
 		}
 		timerId = null;
 		if(onlyThrottledTiddlersHaveChanged) {
-			var timeout = parseInt($tw.wiki.getTiddlerText(DRAFT_TIDDLER_TIMEOUT_TITLE,""),10);
+			let timeout = parseInt($tw.wiki.getTiddlerText(DRAFT_TIDDLER_TIMEOUT_TITLE,""),10);
 			if(isNaN(timeout)) {
 				timeout = THROTTLE_REFRESH_TIMEOUT;
 			}

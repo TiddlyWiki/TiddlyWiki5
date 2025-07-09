@@ -9,11 +9,11 @@ Navigator widget
 
 "use strict";
 
-var IMPORT_TITLE = "$:/Import";
+const IMPORT_TITLE = "$:/Import";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var NavigatorWidget = function(parseTreeNode,options) {
+const NavigatorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -27,21 +27,21 @@ Render this widget into the DOM
 */
 NavigatorWidget.prototype.render = function(parent,nextSibling) {
 	this.addEventListeners([
-		{type: "tm-navigate", handler: "handleNavigateEvent"},
-		{type: "tm-edit-tiddler", handler: "handleEditTiddlerEvent"},
-		{type: "tm-delete-tiddler", handler: "handleDeleteTiddlerEvent"},
-		{type: "tm-save-tiddler", handler: "handleSaveTiddlerEvent"},
-		{type: "tm-cancel-tiddler", handler: "handleCancelTiddlerEvent"},
-		{type: "tm-close-tiddler", handler: "handleCloseTiddlerEvent"},
-		{type: "tm-close-all-tiddlers", handler: "handleCloseAllTiddlersEvent"},
-		{type: "tm-close-other-tiddlers", handler: "handleCloseOtherTiddlersEvent"},
-		{type: "tm-new-tiddler", handler: "handleNewTiddlerEvent"},
-		{type: "tm-import-tiddlers", handler: "handleImportTiddlersEvent"},
-		{type: "tm-perform-import", handler: "handlePerformImportEvent"},
-		{type: "tm-fold-tiddler", handler: "handleFoldTiddlerEvent"},
-		{type: "tm-fold-other-tiddlers", handler: "handleFoldOtherTiddlersEvent"},
-		{type: "tm-fold-all-tiddlers", handler: "handleFoldAllTiddlersEvent"},
-		{type: "tm-unfold-all-tiddlers", handler: "handleUnfoldAllTiddlersEvent"}
+		{type: "tm-navigate",handler: "handleNavigateEvent"},
+		{type: "tm-edit-tiddler",handler: "handleEditTiddlerEvent"},
+		{type: "tm-delete-tiddler",handler: "handleDeleteTiddlerEvent"},
+		{type: "tm-save-tiddler",handler: "handleSaveTiddlerEvent"},
+		{type: "tm-cancel-tiddler",handler: "handleCancelTiddlerEvent"},
+		{type: "tm-close-tiddler",handler: "handleCloseTiddlerEvent"},
+		{type: "tm-close-all-tiddlers",handler: "handleCloseAllTiddlersEvent"},
+		{type: "tm-close-other-tiddlers",handler: "handleCloseOtherTiddlersEvent"},
+		{type: "tm-new-tiddler",handler: "handleNewTiddlerEvent"},
+		{type: "tm-import-tiddlers",handler: "handleImportTiddlersEvent"},
+		{type: "tm-perform-import",handler: "handlePerformImportEvent"},
+		{type: "tm-fold-tiddler",handler: "handleFoldTiddlerEvent"},
+		{type: "tm-fold-other-tiddlers",handler: "handleFoldOtherTiddlersEvent"},
+		{type: "tm-fold-all-tiddlers",handler: "handleFoldAllTiddlersEvent"},
+		{type: "tm-unfold-all-tiddlers",handler: "handleUnfoldAllTiddlersEvent"}
 	]);
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -71,7 +71,7 @@ NavigatorWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 NavigatorWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.story || changedAttributes.history) {
 		this.refreshSelf();
 		return true;
@@ -86,7 +86,7 @@ NavigatorWidget.prototype.getStoryList = function() {
 
 NavigatorWidget.prototype.saveStoryList = function(storyList) {
 	if(this.storyTitle) {
-		var storyTiddler = this.wiki.getTiddler(this.storyTitle);
+		const storyTiddler = this.wiki.getTiddler(this.storyTitle);
 		this.wiki.addTiddler(new $tw.Tiddler(
 			{title: this.storyTitle},
 			storyTiddler,
@@ -97,7 +97,7 @@ NavigatorWidget.prototype.saveStoryList = function(storyList) {
 
 NavigatorWidget.prototype.removeTitleFromStory = function(storyList,title) {
 	if(storyList) {
-		var p = storyList.indexOf(title);
+		let p = storyList.indexOf(title);
 		while(p !== -1) {
 			storyList.splice(p,1);
 			p = storyList.indexOf(title);
@@ -107,7 +107,7 @@ NavigatorWidget.prototype.removeTitleFromStory = function(storyList,title) {
 
 NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle,newTitle) {
 	if(storyList) {
-		var pos = storyList.indexOf(oldTitle);
+		let pos = storyList.indexOf(oldTitle);
 		if(pos !== -1) {
 			storyList[pos] = newTitle;
 			do {
@@ -157,8 +157,8 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 // Close a specified tiddler
 NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
 	event = $tw.hooks.invokeHook("th-closing-tiddler",event);
-	var title = event.param || event.tiddlerTitle,
-		storyList = this.getStoryList();
+	const title = event.param || event.tiddlerTitle;
+	const storyList = this.getStoryList();
 	// Look for tiddlers with this title to close
 	this.removeTitleFromStory(storyList,title);
 	this.saveStoryList(storyList);
@@ -173,40 +173,41 @@ NavigatorWidget.prototype.handleCloseAllTiddlersEvent = function(event) {
 
 // Close other tiddlers
 NavigatorWidget.prototype.handleCloseOtherTiddlersEvent = function(event) {
-	var title = event.param || event.tiddlerTitle;
+	const title = event.param || event.tiddlerTitle;
 	this.saveStoryList([title]);
 	return false;
 };
 
 // Place a tiddler in edit mode
 NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
-	var editTiddler = $tw.hooks.invokeHook("th-editing-tiddler",event),
-		win = event.event && event.event.view ? event.event.view : window;
+	const editTiddler = $tw.hooks.invokeHook("th-editing-tiddler",event);
+	const win = event.event && event.event.view ? event.event.view : window;
 	if(!editTiddler) {
 		return false;
 	}
-	var self = this;
+	const self = this;
 	function isUnmodifiedShadow(title) {
 		return self.wiki.isShadowTiddler(title) && !self.wiki.tiddlerExists(title);
 	}
 	function confirmEditShadow(title) {
 		return win.confirm($tw.language.getString(
 			"ConfirmEditShadowTiddler",
-			{variables:
-				{title: title}
+			{
+				variables:
+					{title}
 			}
 		));
 	}
-	var title = event.param || event.tiddlerTitle;
+	const title = event.param || event.tiddlerTitle;
 	if(isUnmodifiedShadow(title) && !confirmEditShadow(title)) {
 		return false;
 	}
 	// Replace the specified tiddler with a draft in edit mode
-	var draftTiddler = this.makeDraftTiddler(title);
+	const draftTiddler = this.makeDraftTiddler(title);
 	// Update the story and history if required
 	if(!event.paramObject || event.paramObject.suppressNavigation !== "yes") {
-		var draftTitle = draftTiddler.fields.title,
-			storyList = this.getStoryList();
+		const draftTitle = draftTiddler.fields.title;
+		const storyList = this.getStoryList();
 		this.removeTitleFromStory(storyList,draftTitle);
 		this.replaceFirstTitleInStory(storyList,title,draftTitle);
 		this.addToHistory(draftTitle,event.navigateFromClientRect);
@@ -218,13 +219,13 @@ NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 // Delete a tiddler
 NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	// Get the tiddler we're deleting
-	var title = event.param || event.tiddlerTitle,
-		tiddler = this.wiki.getTiddler(title),
-		storyList = this.getStoryList(),
-		originalTitle = tiddler ? tiddler.fields["draft.of"] : "",
-		originalTiddler = originalTitle ? this.wiki.getTiddler(originalTitle) : undefined,
-		confirmationTitle,
-		win = event.event && event.event.view ? event.event.view : window;
+	const title = event.param || event.tiddlerTitle;
+	const tiddler = this.wiki.getTiddler(title);
+	const storyList = this.getStoryList();
+	const originalTitle = tiddler ? tiddler.fields["draft.of"] : "";
+	const originalTiddler = originalTitle ? this.wiki.getTiddler(originalTitle) : undefined;
+	let confirmationTitle;
+	const win = event.event && event.event.view ? event.event.view : window;
 	// Check if the tiddler we're deleting is in draft mode
 	if(originalTitle) {
 		// If so, we'll prompt for confirmation referencing the original tiddler
@@ -235,11 +236,12 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	}
 	// Seek confirmation
 	if(((originalTitle && this.wiki.getTiddler(originalTitle)) || (tiddler && ((tiddler.fields.text || "") !== ""))) && !win.confirm($tw.language.getString(
-				"ConfirmDeleteTiddler",
-				{variables:
-					{title: confirmationTitle}
-				}
-			))) {
+		"ConfirmDeleteTiddler",
+		{
+			variables:
+				{title: confirmationTitle}
+		}
+	))) {
 		return false;
 	}
 	// Delete the original tiddler
@@ -253,7 +255,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	// Invoke the hook function and delete this tiddler
 	if(tiddler) {
 		$tw.hooks.invokeHook("th-deleting-tiddler",tiddler);
-		this.wiki.deleteTiddler(title);	
+		this.wiki.deleteTiddler(title);
 	}
 	// Remove the closed tiddler from the story
 	this.removeTitleFromStory(storyList,title);
@@ -268,28 +270,28 @@ Create/reuse the draft tiddler for a given title
 */
 NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 	// See if there is already a draft tiddler for this tiddler
-	var draftTitle = this.wiki.findDraft(targetTitle);
+	let draftTitle = this.wiki.findDraft(targetTitle);
 	if(draftTitle) {
 		return this.wiki.getTiddler(draftTitle);
 	}
 	// Get the current value of the tiddler we're editing
-	var tiddler = this.wiki.getTiddler(targetTitle);
-	var defaultType = this.wiki.getTiddlerText("$:/config/DefaultMissingType", "").trim();
-	var defaultFields = { type: defaultType };
+	const tiddler = this.wiki.getTiddler(targetTitle);
+	const defaultType = this.wiki.getTiddlerText("$:/config/DefaultMissingType","").trim();
+	const defaultFields = {type: defaultType};
 	// Save the initial value of the draft tiddler
 	draftTitle = this.generateDraftTitle(targetTitle);
-	var draftTiddler = new $tw.Tiddler({
-				text: "",
-			},
-			tiddler,
-			{
-				title: draftTitle,
-				"draft.title": targetTitle,
-				"draft.of": targetTitle
-			},
-			this.wiki.getModificationFields(),
-			tiddler === null || tiddler === undefined ? defaultFields : {}
-		);
+	const draftTiddler = new $tw.Tiddler({
+		text: "",
+	},
+		tiddler,
+		{
+			title: draftTitle,
+			"draft.title": targetTitle,
+			"draft.of": targetTitle
+		},
+		this.wiki.getModificationFields(),
+		tiddler === null || tiddler === undefined ? defaultFields : {}
+	);
 	this.wiki.addTiddler(draftTiddler);
 	return draftTiddler;
 };
@@ -303,28 +305,29 @@ NavigatorWidget.prototype.generateDraftTitle = function(title) {
 
 // Take a tiddler out of edit mode, saving the changes
 NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
-	var title = event.param || event.tiddlerTitle,
-		tiddler = this.wiki.getTiddler(title),
-		storyList = this.getStoryList(),
-		win = event.event && event.event.view ? event.event.view : window;
+	const title = event.param || event.tiddlerTitle;
+	const tiddler = this.wiki.getTiddler(title);
+	const storyList = this.getStoryList();
+	const win = event.event && event.event.view ? event.event.view : window;
 	// Replace the original tiddler with the draft
 	if(tiddler) {
-		var draftTitle = (tiddler.fields["draft.title"] || "").trim(),
-			draftOf = (tiddler.fields["draft.of"] || "").trim();
+		const draftTitle = (tiddler.fields["draft.title"] || "").trim();
+		const draftOf = (tiddler.fields["draft.of"] || "").trim();
 		if(draftTitle) {
-			var isRename = draftOf !== draftTitle,
-				isConfirmed = true;
+			const isRename = draftOf !== draftTitle;
+			let isConfirmed = true;
 			if(isRename && this.wiki.tiddlerExists(draftTitle)) {
 				isConfirmed = win.confirm($tw.language.getString(
 					"ConfirmOverwriteTiddler",
-					{variables:
-						{title: draftTitle}
+					{
+						variables:
+							{title: draftTitle}
 					}
 				));
 			}
 			if(isConfirmed) {
 				// Create the new tiddler and pass it through the th-saving-tiddler hook
-				var newTiddler = new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,{
+				let newTiddler = new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,{
 					title: draftTitle,
 					"draft.title": undefined,
 					"draft.of": undefined
@@ -332,7 +335,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				newTiddler = $tw.hooks.invokeHook("th-saving-tiddler",newTiddler,tiddler);
 				this.wiki.addTiddler(newTiddler);
 				// If enabled, relink references to renamed tiddler
-				var shouldRelink = this.getAttribute("relinkOnRename","no").toLowerCase().trim() === "yes";
+				const shouldRelink = this.getAttribute("relinkOnRename","no").toLowerCase().trim() === "yes";
 				if(isRename && shouldRelink && this.wiki.tiddlerExists(draftOf)) {
 					this.wiki.relinkTiddler(draftOf,draftTitle);
 				}
@@ -363,22 +366,23 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 
 // Take a tiddler out of edit mode without saving the changes
 NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
-	event = $tw.hooks.invokeHook("th-cancelling-tiddler", event);
-	var win = event.event && event.event.view ? event.event.view : window;
+	event = $tw.hooks.invokeHook("th-cancelling-tiddler",event);
+	const win = event.event && event.event.view ? event.event.view : window;
 	// Flip the specified tiddler from draft back to the original
-	var draftTitle = event.param || event.tiddlerTitle,
-		draftTiddler = this.wiki.getTiddler(draftTitle),
-		originalTitle = draftTiddler && draftTiddler.fields["draft.of"];
+	const draftTitle = event.param || event.tiddlerTitle;
+	const draftTiddler = this.wiki.getTiddler(draftTitle);
+	const originalTitle = draftTiddler && draftTiddler.fields["draft.of"];
 	if(draftTiddler && originalTitle) {
 		// Ask for confirmation if the tiddler text has changed
-		var isConfirmed = true,
-			originalTiddler = this.wiki.getTiddler(originalTitle),
-			storyList = this.getStoryList();
+		let isConfirmed = true;
+		const originalTiddler = this.wiki.getTiddler(originalTitle);
+		const storyList = this.getStoryList();
 		if(this.wiki.isDraftModified(draftTitle)) {
 			isConfirmed = win.confirm($tw.language.getString(
 				"ConfirmCancelTiddler",
-				{variables:
-					{title: draftTitle}
+				{
+					variables:
+						{title: draftTitle}
 				}
 			));
 		}
@@ -409,11 +413,11 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 //
 // If a draft of the target tiddler already exists then it is reused
 NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
-	event = $tw.hooks.invokeHook("th-new-tiddler", event);
+	event = $tw.hooks.invokeHook("th-new-tiddler",event);
 	// Get the story details
-	var storyList = this.getStoryList(),
-		templateTiddler, additionalFields, title, draftTitle, existingTiddler,
-		templateHasTags = false;
+	const storyList = this.getStoryList();
+	let templateTiddler; let additionalFields; let title; let draftTitle; let existingTiddler;
+	let templateHasTags = false;
 	// Get the template tiddler (if any)
 	if(typeof event.param === "string") {
 		// Get the template tiddler
@@ -432,8 +436,8 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		title = additionalFields.title;
 	}
 	// Make a copy of the additional fields excluding any blank ones
-	var filteredAdditionalFields = $tw.utils.extend({},additionalFields);
-	Object.keys(filteredAdditionalFields).forEach(function(fieldName) {
+	const filteredAdditionalFields = $tw.utils.extend({},additionalFields);
+	Object.keys(filteredAdditionalFields).forEach((fieldName) => {
 		if(filteredAdditionalFields[fieldName] === "") {
 			delete filteredAdditionalFields[fieldName];
 		}
@@ -450,7 +454,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		existingTiddler = this.wiki.getTiddler(title);
 	}
 	// Merge the tags
-	var mergedTags = [];
+	let mergedTags = [];
 	if(existingTiddler && existingTiddler.fields.tags) {
 		$tw.utils.pushTop(mergedTags,existingTiddler.fields.tags);
 	}
@@ -458,17 +462,17 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		// Merge tags
 		mergedTags = $tw.utils.pushTop(mergedTags,$tw.utils.parseStringArray(additionalFields.tags));
 	}
-	var additionalFieldsHasTags = !!(additionalFields && (additionalFields.tags === ""));
+	const additionalFieldsHasTags = !!(additionalFields && (additionalFields.tags === ""));
 	if(templateTiddler && templateTiddler.fields.tags) {
 		// Merge tags
 		templateHasTags = true;
 		mergedTags = $tw.utils.pushTop(mergedTags,templateTiddler.fields.tags);
 	}
 	// Save the draft tiddler
-	var draftTiddler = new $tw.Tiddler({
-			text: "",
-			"draft.title": title
-		},
+	const draftTiddler = new $tw.Tiddler({
+		text: "",
+		"draft.title": title
+	},
 		templateTiddler,
 		additionalFields,
 		this.wiki.getCreationFields(),
@@ -482,14 +486,14 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		},this.wiki.getModificationFields());
 	this.wiki.addTiddler(draftTiddler);
 	// Update the story to insert the new draft at the top and remove any existing tiddler
-	if(storyList && storyList.indexOf(draftTitle) === -1) {
-		var slot = storyList.indexOf(event.navigateFromTitle);
+	if(storyList && !storyList.includes(draftTitle)) {
+		let slot = storyList.indexOf(event.navigateFromTitle);
 		if(slot === -1) {
 			slot = this.getAttribute("openLinkFromOutsideRiver","top") === "bottom" ? storyList.length - 1 : slot;
 		}
 		storyList.splice(slot + 1,0,draftTitle);
 	}
-	if(storyList && storyList.indexOf(title) !== -1) {
+	if(storyList && storyList.includes(title)) {
 		storyList.splice(storyList.indexOf(title),1);
 	}
 	this.saveStoryList(storyList);
@@ -501,56 +505,56 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 // Import JSON tiddlers into a pending import tiddler
 NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	// Get the tiddlers
-	var tiddlers = $tw.utils.parseJSONSafe(event.param,[]);
+	const tiddlers = $tw.utils.parseJSONSafe(event.param,[]);
 	// Get the current $:/Import tiddler
-	var paramObject = event.paramObject || {},
-		importTitle = event.importTitle || paramObject.importTitle || IMPORT_TITLE,
-		importTiddler = this.wiki.getTiddler(importTitle),
-		importData = this.wiki.getTiddlerData(importTitle,{}),
-		newFields = new Object({
-			title: importTitle,
-			type: "application/json",
-			"plugin-type": "import",
-			"status": "pending"
-		}),
-		incomingTiddlers = [];
+	const paramObject = event.paramObject || {};
+	const importTitle = event.importTitle || paramObject.importTitle || IMPORT_TITLE;
+	const importTiddler = this.wiki.getTiddler(importTitle);
+	const importData = this.wiki.getTiddlerData(importTitle,{});
+	const newFields = new Object({
+		title: importTitle,
+		type: "application/json",
+		"plugin-type": "import",
+		"status": "pending"
+	});
+	const incomingTiddlers = [];
 	// Process each tiddler
 	importData.tiddlers = importData.tiddlers || {};
-	$tw.utils.each(tiddlers,function(tiddlerFields) {
+	$tw.utils.each(tiddlers,(tiddlerFields) => {
 		tiddlerFields.title = $tw.utils.trim(tiddlerFields.title);
-		var title = tiddlerFields.title;
+		const {title} = tiddlerFields;
 		if(title) {
 			incomingTiddlers.push(title);
 			importData.tiddlers[title] = tiddlerFields;
 		}
 	});
 	// Give the active upgrader modules a chance to process the incoming tiddlers
-	var messages = this.wiki.invokeUpgraders(incomingTiddlers,importData.tiddlers);
+	const messages = this.wiki.invokeUpgraders(incomingTiddlers,importData.tiddlers);
 	// Deselect any disabled, but _not_ suppressed tiddlers
-	var systemMessage = $tw.language.getString("Import/Upgrader/Tiddler/Unselected");
-	$tw.utils.each(messages,function(message,title) {
-		newFields["message-" + title] = message;
-		if(message.indexOf(systemMessage) !== -1) {
-			newFields["selection-" + title] = "unchecked";
+	const systemMessage = $tw.language.getString("Import/Upgrader/Tiddler/Unselected");
+	$tw.utils.each(messages,(message,title) => {
+		newFields[`message-${title}`] = message;
+		if(message.includes(systemMessage)) {
+			newFields[`selection-${title}`] = "unchecked";
 		}
 	});
 	// Deselect suppressed tiddlers ... they have been removed and can't be selected anymore
-	$tw.utils.each(importData.tiddlers,function(tiddler,title) {
+	$tw.utils.each(importData.tiddlers,(tiddler,title) => {
 		if($tw.utils.count(tiddler) === 0) {
-			newFields["selection-" + title] = "unchecked";
-			newFields["suppressed-" + title] = "yes";
+			newFields[`selection-${title}`] = "unchecked";
+			newFields[`suppressed-${title}`] = "yes";
 		}
 	});
 	// Save the $:/Import tiddler
 	newFields.text = JSON.stringify(importData,null,$tw.config.preferences.jsonSpaces);
 	this.wiki.addTiddler(new $tw.Tiddler(importTiddler,newFields));
 	// Update the story and history details
-	var autoOpenOnImport = event.autoOpenOnImport || paramObject.autoOpenOnImport || this.getVariable("tv-auto-open-on-import");
+	const autoOpenOnImport = event.autoOpenOnImport || paramObject.autoOpenOnImport || this.getVariable("tv-auto-open-on-import");
 	if(autoOpenOnImport !== "no") {
-		var storyList = this.getStoryList(),
-			history = [];
+		const storyList = this.getStoryList();
+		const history = [];
 		// Add it to the story
-		if(storyList && storyList.indexOf(importTitle) === -1) {
+		if(storyList && !storyList.includes(importTitle)) {
 			storyList.unshift(importTitle);
 		}
 		// And to history
@@ -564,30 +568,30 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 
 //
 NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
-	var self = this,
-		importTiddler = this.wiki.getTiddler(event.param),
-		importData,
-		importReport = [];
-	importReport.push($tw.language.getString("Import/Imported/Hint") + "\n");
+	const self = this;
+	let importTiddler = this.wiki.getTiddler(event.param);
+	let importData;
+	const importReport = [];
+	importReport.push(`${$tw.language.getString("Import/Imported/Hint")}\n`);
 	// If you need to modify the import tiddler payload then consider th-importing-tiddler instead
 	importTiddler = $tw.hooks.invokeHook("th-before-importing",importTiddler);
 	importData = this.wiki.getTiddlerDataCached(event.param,{tiddlers: {}}),
-	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
-		var title = tiddlerFields.title;
-		if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
-			if($tw.utils.hop(importTiddler.fields,["rename-" + title])) {
-				var tiddler = new $tw.Tiddler(tiddlerFields,{title : importTiddler.fields["rename-" + title]});
-			} else {
-				var tiddler = new $tw.Tiddler(tiddlerFields);
+		$tw.utils.each(importData.tiddlers,(tiddlerFields) => {
+			const {title} = tiddlerFields;
+			if(title && importTiddler && importTiddler.fields[`selection-${title}`] !== "unchecked") {
+				if($tw.utils.hop(importTiddler.fields,[`rename-${title}`])) {
+					var tiddler = new $tw.Tiddler(tiddlerFields,{title: importTiddler.fields[`rename-${title}`]});
+				} else {
+					var tiddler = new $tw.Tiddler(tiddlerFields);
+				}
+				// th-importing-tiddler doesn't allow user interaction by default
+				// If you want to use the default UI then use: $:/core/modules/upgraders/ instead
+				tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
+				// Add the tiddlers to the store
+				self.wiki.addTiddler(tiddler);
+				importReport.push(`# [[${tiddler.fields.title}]]`);
 			}
-			// th-importing-tiddler doesn't allow user interaction by default
-			// If you want to use the default UI then use: $:/core/modules/upgraders/ instead
-			tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
-			// Add the tiddlers to the store
-			self.wiki.addTiddler(tiddler);
-			importReport.push("# [[" + tiddler.fields.title + "]]");
-		}
-	});
+		});
 	// Replace the $:/Import tiddler with an import report
 	this.wiki.addTiddler(new $tw.Tiddler({
 		title: event.param,
@@ -601,36 +605,36 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 };
 
 NavigatorWidget.prototype.handleFoldTiddlerEvent = function(event) {
-	var paramObject = event.paramObject || {};
+	const paramObject = event.paramObject || {};
 	if(paramObject.foldedState) {
-		var foldedState = this.wiki.getTiddlerText(paramObject.foldedState,"show") === "show" ? "hide" : "show";
+		const foldedState = this.wiki.getTiddlerText(paramObject.foldedState,"show") === "show" ? "hide" : "show";
 		this.wiki.setText(paramObject.foldedState,"text",null,foldedState);
 	}
 };
 
 NavigatorWidget.prototype.handleFoldOtherTiddlersEvent = function(event) {
-	var self = this,
-		paramObject = event.paramObject || {},
-		prefix = paramObject.foldedStatePrefix;
-	$tw.utils.each(this.getStoryList(),function(title) {
+	const self = this;
+	const paramObject = event.paramObject || {};
+	const prefix = paramObject.foldedStatePrefix;
+	$tw.utils.each(this.getStoryList(),(title) => {
 		self.wiki.setText(prefix + title,"text",null,event.param === title ? "show" : "hide");
 	});
 };
 
 NavigatorWidget.prototype.handleFoldAllTiddlersEvent = function(event) {
-	var self = this,
-		paramObject = event.paramObject || {},
-		prefix = paramObject.foldedStatePrefix || "$:/state/folded/";
-	$tw.utils.each(this.getStoryList(),function(title) {
+	const self = this;
+	const paramObject = event.paramObject || {};
+	const prefix = paramObject.foldedStatePrefix || "$:/state/folded/";
+	$tw.utils.each(this.getStoryList(),(title) => {
 		self.wiki.setText(prefix + title,"text",null,"hide");
 	});
 };
 
 NavigatorWidget.prototype.handleUnfoldAllTiddlersEvent = function(event) {
-	var self = this,
-		paramObject = event.paramObject || {},
-		prefix = paramObject.foldedStatePrefix;
-	$tw.utils.each(this.getStoryList(),function(title) {
+	const self = this;
+	const paramObject = event.paramObject || {};
+	const prefix = paramObject.foldedStatePrefix;
+	$tw.utils.each(this.getStoryList(),(title) => {
 		self.wiki.setText(prefix + title,"text",null,"show");
 	});
 };

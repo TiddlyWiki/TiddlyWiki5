@@ -22,15 +22,15 @@ exports.startup = function() {
 	if($tw.browser) {
 		$tw.Leaflet = require("$:/plugins/tiddlywiki/geospatial/leaflet.js");
 		// Add Leaflet Marker Cluster Plugin
-		require("$:/plugins/tiddlywiki/geospatial/leaflet.markercluster.js");	
+		require("$:/plugins/tiddlywiki/geospatial/leaflet.markercluster.js");
 	}
 	// Install geolocation message handler
-	$tw.rootWidget.addEventListener("tm-request-geolocation",function(event) {
-		var widget = event.widget,
-			wiki = widget.wiki || $tw.wiki,
-			params = event.paramObject || {},
-			actionsSuccess = params.actionsSuccess,
-			actionsError = params.actionsError;
+	$tw.rootWidget.addEventListener("tm-request-geolocation",(event) => {
+		const {widget} = event;
+		const wiki = widget.wiki || $tw.wiki;
+		const params = event.paramObject || {};
+		const {actionsSuccess} = params;
+		const {actionsError} = params;
 		// Assemble the options for getCurrentPosition()
 		const opts = {
 			enableHighAccuracy: params.accuracy !== "low",
@@ -45,28 +45,28 @@ exports.startup = function() {
 		}
 		// Get the current position
 		try {
-			navigator.geolocation.getCurrentPosition(function successHandler(pos) {
+			navigator.geolocation.getCurrentPosition((pos) => {
 				// Invoke the success actions
 				wiki.invokeActionString(actionsSuccess,undefined,{
 					timestamp: $tw.utils.stringifyDate(new Date(pos.timestamp)),
-					latitude:  "" + pos.coords.latitude,
-					longitude:  "" + pos.coords.longitude,
-					altitude:  "" + pos.coords.altitude,
-					accuracy:  "" + pos.coords.accuracy,
-					altitudeAccuracy:  "" + pos.coords.altitudeAccuracy,
-					heading:  "" + pos.coords.heading,
-					speed:  "" + pos.coords.speed
+					latitude: `${pos.coords.latitude}`,
+					longitude: `${pos.coords.longitude}`,
+					altitude: `${pos.coords.altitude}`,
+					accuracy: `${pos.coords.accuracy}`,
+					altitudeAccuracy: `${pos.coords.altitudeAccuracy}`,
+					heading: `${pos.coords.heading}`,
+					speed: `${pos.coords.speed}`
 				},{parentWidget: $tw.rootWidget});
-			},function errorHandler(err) {
+			},(err) => {
 				// Invoke the error actions
 				wiki.invokeActionString(actionsError,undefined,{
-					"error": "" + err.message
+					"error": `${err.message}`
 				},{parentWidget: $tw.rootWidget});
 			},opts);
 		} catch(ex) {
 			// Invoke the error actions
 			wiki.invokeActionString(actionsError,undefined,{
-				"error": "" + ex
+				"error": `${ex}`
 			},{parentWidget: $tw.rootWidget});
 		}
 	});

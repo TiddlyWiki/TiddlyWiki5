@@ -16,14 +16,14 @@ exports.after = ["startup"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	$tw.rootWidget.addEventListener("tm-set-password",function(event) {
+	$tw.rootWidget.addEventListener("tm-set-password",(event) => {
 		$tw.passwordPrompt.createPrompt({
 			serviceName: $tw.language.getString("Encryption/PromptSetPassword"),
 			noUserName: true,
 			submitText: $tw.language.getString("Encryption/SetPassword"),
 			canCancel: true,
 			repeatPassword: true,
-			callback: function(data) {
+			callback(data) {
 				if(data) {
 					$tw.crypto.setPassword(data.password);
 				}
@@ -31,7 +31,7 @@ exports.startup = function() {
 			}
 		});
 	});
-	$tw.rootWidget.addEventListener("tm-clear-password",function(event) {
+	$tw.rootWidget.addEventListener("tm-clear-password",(event) => {
 		if($tw.browser) {
 			if(!confirm($tw.language.getString("Encryption/ConfirmClearPassword"))) {
 				return;
@@ -40,7 +40,7 @@ exports.startup = function() {
 		$tw.crypto.setPassword(null);
 	});
 	// Ensure that $:/isEncrypted is maintained properly
-	$tw.wiki.addEventListener("change",function(changes) {
+	$tw.wiki.addEventListener("change",(changes) => {
 		if($tw.utils.hop(changes,"$:/isEncrypted")) {
 			$tw.crypto.updateCryptoStateTiddler();
 		}

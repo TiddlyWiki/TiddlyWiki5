@@ -14,8 +14,8 @@ Export our filter functions
 */
 
 exports["aws-encodeuricomponent"] = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
+	const results = [];
+	source((tiddler,title) => {
 		results.push(encodeURIComponent(title).replace(/'/g,"%27"));
 	});
 	return results;

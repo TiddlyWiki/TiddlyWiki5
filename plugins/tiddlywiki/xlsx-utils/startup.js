@@ -18,7 +18,7 @@ exports.startup = function() {
 	// Check JSZip is installed
 	if(!$tw.utils.hop($tw.modules.titles,"$:/plugins/tiddlywiki/jszip/jszip.js")) {
 		// Make a logger
-		var logger = new $tw.utils.Logger("xlsx-utils");
+		const logger = new $tw.utils.Logger("xlsx-utils");
 		logger.alert("The plugin 'xlsx-utils' requires the 'jszip' plugin to be installed");
 	}
 };

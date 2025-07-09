@@ -9,9 +9,9 @@ Tiddler widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var TiddlerWidget = function(parseTreeNode,options) {
+const TiddlerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -51,7 +51,7 @@ TiddlerWidget.prototype.computeTiddlerState = function() {
 	// Get our parameters
 	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	// Compute the state
-	var state = {
+	const state = {
 		currentTiddler: this.tiddlerTitle || "",
 		missingTiddlerClass: (this.wiki.tiddlerExists(this.tiddlerTitle) || this.wiki.isShadowTiddler(this.tiddlerTitle)) ? "tc-tiddler-exists" : "tc-tiddler-missing",
 		shadowTiddlerClass: this.wiki.isShadowTiddler(this.tiddlerTitle) ? "tc-tiddler-shadow" : "",
@@ -67,11 +67,11 @@ TiddlerWidget.prototype.computeTiddlerState = function() {
 Create a string of CSS classes derived from the tags of the current tiddler
 */
 TiddlerWidget.prototype.getTagClasses = function() {
-	var tiddler = this.wiki.getTiddler(this.tiddlerTitle);
+	const tiddler = this.wiki.getTiddler(this.tiddlerTitle);
 	if(tiddler) {
-		var tags = [];
-		$tw.utils.each(tiddler.fields.tags,function(tag) {
-			tags.push("tc-tagged-" + encodeURIComponent(tag));
+		const tags = [];
+		$tw.utils.each(tiddler.fields.tags,(tag) => {
+			tags.push(`tc-tagged-${encodeURIComponent(tag)}`);
 		});
 		return tags.join(" ");
 	} else {
@@ -83,8 +83,8 @@ TiddlerWidget.prototype.getTagClasses = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 TiddlerWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		newTiddlerState = this.computeTiddlerState();
+	const changedAttributes = this.computeAttributes();
+	const newTiddlerState = this.computeTiddlerState();
 	if(changedAttributes.tiddler || newTiddlerState.hash !== this.tiddlerState.hash) {
 		this.refreshSelf();
 		return true;

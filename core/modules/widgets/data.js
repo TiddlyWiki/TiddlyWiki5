@@ -8,9 +8,9 @@ Widget to dynamically represent one or more tiddlers
 \*/
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var DataWidget = function(parseTreeNode,options) {
+const DataWidget = function(parseTreeNode,options) {
 	this.dataWidgetTag = parseTreeNode.type;
 	this.initialise(parseTreeNode,options);
 };
@@ -44,8 +44,8 @@ DataWidget.prototype.execute = function() {
 Read the tiddler value(s) from a data widget as an array of tiddler field objects (not $tw.Tiddler objects)
 */
 DataWidget.prototype.readDataTiddlerValues = function() {
-	var results = [];
-	$tw.utils.each(this.dataPayload,function(tiddler,index) {
+	const results = [];
+	$tw.utils.each(this.dataPayload,(tiddler,index) => {
 		results.push(tiddler.getFieldStrings());
 	});
 	return results;
@@ -62,22 +62,22 @@ DataWidget.prototype.readDataTiddlerValuesAsJson = function() {
 Compute list of tiddlers from a data widget
 */
 DataWidget.prototype.computeDataTiddlerValues = function() {
-	var self = this;
+	const self = this;
 	// Read any attributes not prefixed with $
-	var item = Object.create(null);
-	$tw.utils.each(this.attributes,function(value,name) {
+	const item = Object.create(null);
+	$tw.utils.each(this.attributes,(value,name) => {
 		if(name.charAt(0) !== "$") {
-			item[name] = value;	
+			item[name] = value;
 		}
 	});
 	// Deal with $tiddler, $filter or $compound-tiddler attributes
-	var tiddlers = [],
-		compoundTiddlers,
-		title;
+	const tiddlers = [];
+	let compoundTiddlers;
+	let title;
 	if(this.hasAttribute("$tiddler")) {
 		title = this.getAttribute("$tiddler");
 		if(title) {
-			var tiddler = this.wiki.getTiddler(title);
+			const tiddler = this.wiki.getTiddler(title);
 			if(tiddler) {
 				tiddlers.push(tiddler);
 			}
@@ -86,9 +86,9 @@ DataWidget.prototype.computeDataTiddlerValues = function() {
 	if(this.hasAttribute("$filter")) {
 		var filter = this.getAttribute("$filter");
 		if(filter) {
-			var titles = this.wiki.filterTiddlers(filter);
-			$tw.utils.each(titles,function(title) {
-				var tiddler = self.wiki.getTiddler(title);
+			const titles = this.wiki.filterTiddlers(filter);
+			$tw.utils.each(titles,(title) => {
+				const tiddler = self.wiki.getTiddler(title);
 				if(tiddler) {
 					tiddlers.push(tiddler);
 				}
@@ -105,7 +105,7 @@ DataWidget.prototype.computeDataTiddlerValues = function() {
 		filter = this.getAttribute("$compound-filter");
 		if(filter) {
 			compoundTiddlers = this.wiki.filterTiddlers(filter);
-			$tw.utils.each(compoundTiddlers, function(title){
+			$tw.utils.each(compoundTiddlers,(title) => {
 				tiddlers.push.apply(tiddlers,self.extractCompoundTiddler(title));
 			});
 		}
@@ -120,7 +120,7 @@ DataWidget.prototype.computeDataTiddlerValues = function() {
 	} else {
 		// Apply the item fields to each of the tiddlers
 		if(Object.keys(item).length > 0) {
-			$tw.utils.each(tiddlers,function(tiddler,index) {
+			$tw.utils.each(tiddlers,(tiddler,index) => {
 				tiddlers[index] = new $tw.Tiddler(tiddler,item);
 			});
 		}
@@ -132,14 +132,14 @@ DataWidget.prototype.computeDataTiddlerValues = function() {
 Helper to extract tiddlers from text/vnd.tiddlywiki-multiple tiddlers
 */
 DataWidget.prototype.extractCompoundTiddler = function(title) {
-	var tiddler = this.wiki.getTiddler(title);
+	const tiddler = this.wiki.getTiddler(title);
 	if(tiddler && tiddler.fields.type === "text/vnd.tiddlywiki-multiple") {
-		var text = tiddler.fields.text || "",
-			rawTiddlers = text.split(/\r?\n\+\r?\n/),
-			tiddlers = [];
-		$tw.utils.each(rawTiddlers,function(rawTiddler) {
-			var fields = Object.create(null),
-				split = rawTiddler.split(/\r?\n\r?\n/mg);
+		const text = tiddler.fields.text || "";
+		const rawTiddlers = text.split(/\r?\n\+\r?\n/);
+		const tiddlers = [];
+		$tw.utils.each(rawTiddlers,(rawTiddler) => {
+			let fields = Object.create(null);
+			const split = rawTiddler.split(/\r?\n\r?\n/mg);
 			if(split.length >= 1) {
 				fields = $tw.utils.parseFields(split[0],fields);
 			}
@@ -158,8 +158,8 @@ DataWidget.prototype.extractCompoundTiddler = function(title) {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DataWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	var newPayload = this.computeDataTiddlerValues();
+	const changedAttributes = this.computeAttributes();
+	const newPayload = this.computeDataTiddlerValues();
 	if(hasPayloadChanged(this.dataPayload,newPayload)) {
 		this.dataPayload = newPayload;
 		this.domNode.textContent = this.readDataTiddlerValuesAsJson();
@@ -174,7 +174,7 @@ Compare two arrays of tiddlers and return true if they are different
 */
 function hasPayloadChanged(a,b) {
 	if(a.length === b.length) {
-		for(var t=0; t<a.length; t++) {
+		for(let t = 0;t < a.length;t++) {
 			if(!(a[t].isEqual(b[t]))) {
 				return true;
 			}

@@ -9,7 +9,7 @@ Filter operator for checking tiddler properties
 
 "use strict";
 
-var isFilterOperators;
+let isFilterOperators;
 
 function getIsFilterOperators() {
 	if(!isFilterOperators) {
@@ -24,9 +24,9 @@ Export our filter function
 */
 exports.is = function(source,operator,options) {
 	// Dispatch to the correct isfilteroperator
-	var isFilterOperators = getIsFilterOperators();
+	const isFilterOperators = getIsFilterOperators();
 	if(operator.operand) {
-		var isFilterOperator = isFilterOperators[operator.operand];
+		const isFilterOperator = isFilterOperators[operator.operand];
 		if(isFilterOperator) {
 			return isFilterOperator(source,operator.prefix,options);
 		} else {
@@ -34,8 +34,8 @@ exports.is = function(source,operator,options) {
 		}
 	} else {
 		// Return all tiddlers if the operand is missing
-		var results = [];
-		source(function(tiddler,title) {
+		const results = [];
+		source((tiddler,title) => {
 			results.push(title);
 		});
 		return results;

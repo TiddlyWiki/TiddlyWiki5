@@ -33,23 +33,23 @@ exports.parse = function() {
 	// Move past the macro name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the parameters
-	var params = $tw.utils.parseParameterDefinition(this.match[1]);
-	var attributes = Object.create(null),
-		orderedAttributes = [];
-	$tw.utils.each(params,function(param) {
-		var name = param.name;
+	const params = $tw.utils.parseParameterDefinition(this.match[1]);
+	const attributes = Object.create(null);
+	const orderedAttributes = [];
+	$tw.utils.each(params,(param) => {
+		let {name} = param;
 		// Parameter names starting with dollar must be escaped to double dollars for the parameters widget
 		if(name.charAt(0) === "$") {
-			name = "$" + name;
+			name = `$${name}`;
 		}
-		var attribute = {name: name, type: "string", value: param["default"] || ""};
+		const attribute = {name,type: "string",value: param["default"] || ""};
 		attributes[name] = attribute;
 		orderedAttributes.push(attribute);
 	});
 	// Save the macro definition
 	return [{
 		type: "parameters",
-		attributes: attributes,
-		orderedAttributes: orderedAttributes
+		attributes,
+		orderedAttributes
 	}];
 };

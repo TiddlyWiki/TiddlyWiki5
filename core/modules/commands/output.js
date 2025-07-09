@@ -14,15 +14,15 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
+const Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
 };
 
 Command.prototype.execute = function() {
-	var fs = require("fs"),
-		path = require("path");
+	const fs = require("fs");
+	const path = require("path");
 	if(this.params.length < 1) {
 		return "Missing output path";
 	}

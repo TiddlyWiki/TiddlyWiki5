@@ -25,5 +25,5 @@ exports.init = function(parser) {
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
-	return [{type: "element", tag: "hr"}];
+	return [{type: "element",tag: "hr"}];
 };

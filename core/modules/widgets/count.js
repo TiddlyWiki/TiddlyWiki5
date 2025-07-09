@@ -9,9 +9,9 @@ Count widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var CountWidget = function(parseTreeNode,options) {
+const CountWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -27,7 +27,7 @@ CountWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var textNode = this.document.createTextNode(this.currentCount);
+	const textNode = this.document.createTextNode(this.currentCount);
 	parent.insertBefore(textNode,nextSibling);
 	this.domNodes.push(textNode);
 };
@@ -52,7 +52,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 CountWidget.prototype.refresh = function(changedTiddlers) {
 	// Re-execute the filter to get the count
 	this.computeAttributes();
-	var oldCount = this.currentCount;
+	const oldCount = this.currentCount;
 	this.execute();
 	if(this.currentCount !== oldCount) {
 		// Regenerate and rerender the widget and replace the existing DOM node

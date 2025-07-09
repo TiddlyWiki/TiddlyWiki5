@@ -36,7 +36,7 @@ exports.findNextMatch = function(startPos) {
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.nextImage.end;
-	var node = {
+	const node = {
 		type: "image",
 		attributes: this.nextImage.attributes
 	};
@@ -48,13 +48,13 @@ Find the next image from the current position
 */
 exports.findNextImage = function(source,pos) {
 	// A regexp for finding candidate HTML tags
-	var reLookahead = /(\[img)/g;
+	const reLookahead = /(\[img)/g;
 	// Find the next candidate
 	reLookahead.lastIndex = pos;
-	var match = reLookahead.exec(source);
+	let match = reLookahead.exec(source);
 	while(match) {
 		// Try to parse the candidate as a tag
-		var tag = this.parseImage(source,match.index);
+		const tag = this.parseImage(source,match.index);
 		// Return success
 		if(tag) {
 			return tag;
@@ -71,12 +71,12 @@ exports.findNextImage = function(source,pos) {
 Look for an image at the specified position. Returns null if not found, otherwise returns {type: "image", attributes: [], isSelfClosing:, start:, end:,}
 */
 exports.parseImage = function(source,pos) {
-	var token,
-		node = {
-			type: "image",
-			start: pos,
-			attributes: {}
-		};
+	let token;
+	const node = {
+		type: "image",
+		start: pos,
+		attributes: {}
+	};
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for the `[img`
@@ -89,7 +89,7 @@ exports.parseImage = function(source,pos) {
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Process attributes
 	if(source.charAt(pos) !== "[") {
-		var attribute = $tw.utils.parseAttribute(source,pos);
+		let attribute = $tw.utils.parseAttribute(source,pos);
 		while(attribute) {
 			node.attributes[attribute.name] = attribute;
 			pos = attribute.end;
@@ -119,9 +119,9 @@ exports.parseImage = function(source,pos) {
 	}
 	pos = token.end;
 	if(token.match[1]) {
-		node.attributes.tooltip = {type: "string", value: token.match[1].trim(),start: token.start,end:token.start + token.match[1].length - 1};
+		node.attributes.tooltip = {type: "string",value: token.match[1].trim(),start: token.start,end: token.start + token.match[1].length - 1};
 	}
-	node.attributes.source = {type: "string", value: (token.match[2] || "").trim(), start: token.start + (token.match[1] ? token.match[1].length : 0), end: token.end - 2};
+	node.attributes.source = {type: "string",value: (token.match[2] || "").trim(),start: token.start + (token.match[1] ? token.match[1].length : 0),end: token.end - 2};
 	// Update the end position
 	node.end = pos;
 	return node;

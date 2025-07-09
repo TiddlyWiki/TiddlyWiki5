@@ -9,9 +9,9 @@ Error widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var ErrorWidget = function(parseTreeNode,options) {
+const ErrorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -27,8 +27,8 @@ ErrorWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var message = this.getAttribute("$message","Unknown error"),
-		domNode = this.document.createElement("span");
+	const message = this.getAttribute("$message","Unknown error");
+	const domNode = this.document.createElement("span");
 	domNode.appendChild(this.document.createTextNode(message));
 	domNode.className = "tc-error";
 	parent.insertBefore(domNode,nextSibling);
@@ -46,7 +46,7 @@ ErrorWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ErrorWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes["$message"]) {
 		this.refreshSelf();
 		return true;

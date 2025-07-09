@@ -14,20 +14,20 @@ exports["application/x-tiddler-html-div"] = function(text,fields) {
 };
 
 exports["application/json"] = function(text,fields) {
-	var results = [],
-		incoming = $tw.utils.parseJSONSafe(text,function(err) {
-			return [{
-				title: "JSON error: " + err,
-				text: ""
-			}];
-		});
+	const results = [];
+	let incoming = $tw.utils.parseJSONSafe(text,(err) => {
+		return [{
+			title: `JSON error: ${err}`,
+			text: ""
+		}];
+	});
 	if(!$tw.utils.isArray(incoming)) {
 		incoming = [incoming];
 	}
-	for(var t=0; t<incoming.length; t++) {
-		var incomingFields = incoming[t],
-			fields = {};
-		for(var f in incomingFields) {
+	for(let t = 0;t < incoming.length;t++) {
+		const incomingFields = incoming[t];
+		var fields = {};
+		for(const f in incomingFields) {
 			if(typeof incomingFields[f] === "string") {
 				fields[f] = incomingFields[f];
 			}
@@ -44,18 +44,18 @@ Parse an HTML file into tiddlers. There are three possibilities:
 # An ordinary HTML file
 */
 exports["text/html"] = function(text,fields) {
-	var results = [];
+	const results = [];
 	// Check if we've got an old-style store area
-	var storeAreaMarkerRegExp = /<div id=["']?storeArea['"]?( style=["']?display:none;["']?)?>/gi,
-		storeAreaMatch = storeAreaMarkerRegExp.exec(text);
+	const storeAreaMarkerRegExp = /<div id=["']?storeArea['"]?( style=["']?display:none;["']?)?>/gi;
+	const storeAreaMatch = storeAreaMarkerRegExp.exec(text);
 	if(storeAreaMatch) {
 		// If so, we've got tiddlers in classic TiddlyWiki format or unencrypted old-style TW5 format
 		results.push.apply(results,deserializeStoreArea(text,storeAreaMarkerRegExp.lastIndex,!!storeAreaMatch[1],fields));
 	}
 	// Check for new-style store areas
-	var newStoreAreaMarkerRegExp = /<script class="tiddlywiki-tiddler-store" type="([^"]*)">/gi,
-		newStoreAreaMatch = newStoreAreaMarkerRegExp.exec(text),
-		haveHadNewStoreArea = !!newStoreAreaMatch;
+	const newStoreAreaMarkerRegExp = /<script class="tiddlywiki-tiddler-store" type="([^"]*)">/gi;
+	let newStoreAreaMatch = newStoreAreaMarkerRegExp.exec(text);
+	const haveHadNewStoreArea = !!newStoreAreaMatch;
 	while(newStoreAreaMatch) {
 		results.push.apply(results,deserializeNewStoreArea(text,newStoreAreaMarkerRegExp.lastIndex,newStoreAreaMatch[1],fields));
 		newStoreAreaMatch = newStoreAreaMarkerRegExp.exec(text);
@@ -65,7 +65,7 @@ exports["text/html"] = function(text,fields) {
 		return results;
 	}
 	// Otherwise, check whether we've got an encrypted file
-	var encryptedStoreArea = $tw.utils.extractEncryptedStoreArea(text);
+	const encryptedStoreArea = $tw.utils.extractEncryptedStoreArea(text);
 	if(encryptedStoreArea) {
 		// If so, attempt to decrypt it using the current password
 		return $tw.utils.decryptStoreArea(encryptedStoreArea);
@@ -76,8 +76,8 @@ exports["text/html"] = function(text,fields) {
 };
 
 function deserializeHtmlFile(text,fields) {
-	var result = {};
-	$tw.utils.each(fields,function(value,name) {
+	const result = {};
+	$tw.utils.each(fields,(value,name) => {
 		result[name] = value;
 	});
 	result.text = text;
@@ -86,11 +86,11 @@ function deserializeHtmlFile(text,fields) {
 }
 
 function deserializeNewStoreArea(text,storeAreaEnd,type,fields) {
-	var endOfScriptRegExp = /<\/script>/gi;
+	const endOfScriptRegExp = /<\/script>/gi;
 	endOfScriptRegExp.lastIndex = storeAreaEnd;
-	var match = endOfScriptRegExp.exec(text);
+	const match = endOfScriptRegExp.exec(text);
 	if(match) {
-		var scriptContent = text.substring(storeAreaEnd,match.index);
+		const scriptContent = text.substring(storeAreaEnd,match.index);
 		return $tw.wiki.deserializeTiddlers(type,scriptContent);
 	} else {
 		return [];
@@ -98,19 +98,19 @@ function deserializeNewStoreArea(text,storeAreaEnd,type,fields) {
 }
 
 function deserializeStoreArea(text,storeAreaEnd,isTiddlyWiki5,fields) {
-	var results = [],
-		endOfDivRegExp = /(<\/div>\s*)/gi,
-		startPos = storeAreaEnd,
-		defaultType = isTiddlyWiki5 ? undefined : "text/x-tiddlywiki";
+	const results = [];
+	const endOfDivRegExp = /(<\/div>\s*)/gi;
+	let startPos = storeAreaEnd;
+	const defaultType = isTiddlyWiki5 ? undefined : "text/x-tiddlywiki";
 	endOfDivRegExp.lastIndex = startPos;
-	var match = endOfDivRegExp.exec(text);
+	let match = endOfDivRegExp.exec(text);
 	while(match) {
-		var endPos = endOfDivRegExp.lastIndex,
-			tiddlerFields = deserializeTiddlerDiv(text.substring(startPos,endPos),fields,{type: defaultType});
+		const endPos = endOfDivRegExp.lastIndex;
+		var tiddlerFields = deserializeTiddlerDiv(text.substring(startPos,endPos),fields,{type: defaultType});
 		if(!tiddlerFields) {
 			break;
 		}
-		$tw.utils.each(tiddlerFields,function(value,name) {
+		$tw.utils.each(tiddlerFields,(value,name) => {
 			if(typeof value === "string") {
 				tiddlerFields[name] = $tw.utils.htmlDecode(value);
 			}
@@ -138,19 +138,19 @@ When these tiddler DIVs are encountered within a TiddlyWiki HTML file then the b
 */
 var deserializeTiddlerDiv = function(text /* [,fields] */) {
 	// Slot together the default results
-	var result = {};
+	const result = {};
 	if(arguments.length > 1) {
-		for(var f=1; f<arguments.length; f++) {
-			var fields = arguments[f];
-			for(var t in fields) {
-				result[t] = fields[t];		
+		for(let f = 1;f < arguments.length;f++) {
+			const fields = arguments[f];
+			for(const t in fields) {
+				result[t] = fields[t];
 			}
 		}
 	}
 	// Parse the DIV body
-	var startRegExp = /^\s*<div\s+([^>]*)>(\s*<pre>)?/gi,
-		endRegExp,
-		match = startRegExp.exec(text);
+	const startRegExp = /^\s*<div\s+([^>]*)>(\s*<pre>)?/gi;
+	let endRegExp;
+	const match = startRegExp.exec(text);
 	if(match) {
 		// Old-style DIVs don't have the <pre> tag
 		if(match[2]) {
@@ -158,18 +158,18 @@ var deserializeTiddlerDiv = function(text /* [,fields] */) {
 		} else {
 			endRegExp = /<\/div>\s*$/gi;
 		}
-		var endMatch = endRegExp.exec(text);
+		const endMatch = endRegExp.exec(text);
 		if(endMatch) {
 			// Extract the text
 			result.text = text.substring(match.index + match[0].length,endMatch.index);
 			// Process the attributes
-			var attrRegExp = /\s*([^=\s]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi,
-				attrMatch;
+			const attrRegExp = /\s*([^=\s]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi;
+			let attrMatch;
 			do {
 				attrMatch = attrRegExp.exec(match[1]);
 				if(attrMatch) {
-					var name = attrMatch[1];
-					var value = attrMatch[2] !== undefined ? attrMatch[2] : attrMatch[3];
+					const name = attrMatch[1];
+					const value = attrMatch[2] !== undefined ? attrMatch[2] : attrMatch[3];
 					result[name] = value;
 				}
 			} while(attrMatch);

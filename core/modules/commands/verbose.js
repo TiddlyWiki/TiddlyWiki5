@@ -14,7 +14,7 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander) {
+const Command = function(params,commander) {
 	this.params = params;
 	this.commander = commander;
 };
@@ -22,7 +22,7 @@ var Command = function(params,commander) {
 Command.prototype.execute = function() {
 	this.commander.verbose = true;
 	// Output the boot message log
-	this.commander.streams.output.write("Boot log:\n  " + $tw.boot.logMessages.join("\n  ") + "\n");
+	this.commander.streams.output.write(`Boot log:\n  ${$tw.boot.logMessages.join("\n  ")}\n`);
 	return null; // No error
 };
 

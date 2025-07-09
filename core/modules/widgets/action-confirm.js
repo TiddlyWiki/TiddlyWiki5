@@ -8,9 +8,9 @@ module-type: widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var ConfirmWidget = function(parseTreeNode,options) {
+const ConfirmWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -34,7 +34,7 @@ Compute the internal state of the widget
 */
 ConfirmWidget.prototype.execute = function() {
 	this.message = this.getAttribute("$message",$tw.language.getString("ConfirmAction"));
-	this.prompt = (this.getAttribute("$prompt","yes") == "no" ? false : true);
+	this.prompt = (this.getAttribute("$prompt","yes") != "no");
 	this.makeChildWidgets();
 };
 
@@ -42,7 +42,7 @@ ConfirmWidget.prototype.execute = function() {
 Refresh the widget by ensuring our attributes are up to date
 */
 ConfirmWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes["$message"] || changedAttributes["$prompt"]) {
 		this.refreshSelf();
 		return true;
@@ -54,9 +54,9 @@ ConfirmWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 ConfirmWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	var invokeActions = true,
-		handled = true,
-	    	win = event && event.event && event.event.view ? event.event.view : window;
+	let invokeActions = true;
+	let handled = true;
+	const win = event && event.event && event.event.view ? event.event.view : window;
 	if(this.prompt) {
 		invokeActions = win.confirm(this.message);
 	}

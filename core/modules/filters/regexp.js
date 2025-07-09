@@ -13,18 +13,18 @@ Filter operator for regexp matching
 Export our filter function
 */
 exports.regexp = function(source,operator,options) {
-	var results = [],
-		fieldname = operator.suffix || "title",
-		regexpString, regexp, flags = "", match,
-		getFieldString = function(tiddler,title) {
-			if(tiddler) {
-				return tiddler.getFieldString(fieldname);
-			} else if(fieldname === "title") {
-				return title;
-			} else {
-				return null;
-			}
-		};
+	const results = [];
+	const fieldname = operator.suffix || "title";
+	let regexpString; let regexp; let flags = ""; let match;
+	const getFieldString = function(tiddler,title) {
+		if(tiddler) {
+			return tiddler.getFieldString(fieldname);
+		} else if(fieldname === "title") {
+			return title;
+		} else {
+			return null;
+		}
+	};
 	// Process flags and construct regexp
 	regexpString = operator.operand;
 	match = /^\(\?([gim]+)\)/.exec(regexpString);
@@ -41,12 +41,12 @@ exports.regexp = function(source,operator,options) {
 	try {
 		regexp = new RegExp(regexpString,flags);
 	} catch(e) {
-		return ["" + e];
+		return [`${e}`];
 	}
 	// Process the incoming tiddlers
 	if(operator.prefix === "!") {
-		source(function(tiddler,title) {
-			var text = getFieldString(tiddler,title);
+		source((tiddler,title) => {
+			const text = getFieldString(tiddler,title);
 			if(text !== null) {
 				if(!regexp.exec(text)) {
 					results.push(title);
@@ -54,8 +54,8 @@ exports.regexp = function(source,operator,options) {
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
-			var text = getFieldString(tiddler,title);
+		source((tiddler,title) => {
+			const text = getFieldString(tiddler,title);
 			if(text !== null) {
 				if(regexp.exec(text)) {
 					results.push(title);

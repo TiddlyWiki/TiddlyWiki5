@@ -9,17 +9,17 @@ Factory for constructing text editor widgets with specified engines for the tool
 
 "use strict";
 
-var DEFAULT_MIN_TEXT_AREA_HEIGHT = "100px"; // Minimum height of textareas in pixels
+const DEFAULT_MIN_TEXT_AREA_HEIGHT = "100px"; // Minimum height of textareas in pixels
 
 // Configuration tiddlers
-var HEIGHT_MODE_TITLE = "$:/config/TextEditor/EditorHeight/Mode";
-var ENABLE_TOOLBAR_TITLE = "$:/config/TextEditor/EnableToolbar";
+const HEIGHT_MODE_TITLE = "$:/config/TextEditor/EditorHeight/Mode";
+const ENABLE_TOOLBAR_TITLE = "$:/config/TextEditor/EnableToolbar";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 
-	var EditTextWidget = function(parseTreeNode,options) {
+	const EditTextWidget = function(parseTreeNode,options) {
 		// Initialise the editor operations if they've not been done already
 		if(!this.editorOperations) {
 			EditTextWidget.prototype.editorOperations = {};
@@ -52,15 +52,15 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			this.domNodes.push(this.toolbarNode);
 		}
 		// Create our element
-		var editInfo = this.getEditInfo(),
-			Engine = this.editShowToolbar ? toolbarEngine : nonToolbarEngine;
+		const editInfo = this.getEditInfo();
+		const Engine = this.editShowToolbar ? toolbarEngine : nonToolbarEngine;
 		this.engine = new Engine({
-				widget: this,
-				value: editInfo.value,
-				type: editInfo.type,
-				parentNode: parent,
-				nextSibling: nextSibling
-			});
+			widget: this,
+			value: editInfo.value,
+			type: editInfo.type,
+			parentNode: parent,
+			nextSibling
+		});
 		// Call the postRender hook
 		if(this.postRender) {
 			this.postRender();
@@ -73,7 +73,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		}
 		// Add widget message listeners
 		this.addEventListeners([
-			{type: "tm-edit-text-operation", handler: "handleEditTextOperationMessage"}
+			{type: "tm-edit-text-operation",handler: "handleEditTextOperationMessage"}
 		]);
 	};
 
@@ -82,14 +82,14 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	*/
 	EditTextWidget.prototype.getEditInfo = function() {
 		// Get the edit value
-		var self = this,
-			value,
-			type = "text/plain",
-			update;
+		const self = this;
+		let value;
+		let type = "text/plain";
+		let update;
 		if(this.editIndex) {
 			value = this.wiki.extractTiddlerDataItem(this.editTitle,this.editIndex,this.editDefault);
 			update = function(value) {
-				var data = self.wiki.getTiddlerData(self.editTitle,{});
+				const data = self.wiki.getTiddlerData(self.editTitle,{});
 				if(data[self.editIndex] !== value) {
 					data[self.editIndex] = value;
 					self.wiki.setTiddlerData(self.editTitle,data);
@@ -97,7 +97,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			};
 		} else {
 			// Get the current tiddler and the field name
-			var tiddler = this.wiki.getTiddler(this.editTitle);
+			const tiddler = this.wiki.getTiddler(this.editTitle);
 			if(tiddler) {
 				// If we've got a tiddler, the value to display is the field string value
 				if(tiddler.hasField(this.editField)) {
@@ -111,26 +111,29 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			} else {
 				// Otherwise, we need to construct a default value for the editor
 				switch(this.editField) {
-					case "text":
+					case "text": {
 						value = "";
 						type = "text/vnd.tiddlywiki";
 						break;
-					case "title":
+					}
+					case "title": {
 						value = this.editTitle;
 						break;
-					default:
+					}
+					default: {
 						value = "";
 						break;
+					}
 				}
 				if(this.editDefault !== undefined) {
 					value = this.editDefault;
 				}
 			}
 			update = function(value) {
-				var tiddler = self.wiki.getTiddler(self.editTitle),
-					updateFields = {
-						title: self.editTitle
-					};
+				const tiddler = self.wiki.getTiddler(self.editTitle);
+				const updateFields = {
+					title: self.editTitle
+				};
 				updateFields[self.editField] = value;
 				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
 			};
@@ -138,7 +141,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		if(this.editType) {
 			type = this.editType;
 		}
-		return {value: value || "", type: type, update: update};
+		return {value: value || "",type,update};
 	};
 
 	/*
@@ -146,14 +149,14 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	*/
 	EditTextWidget.prototype.handleEditTextOperationMessage = function(event) {
 		// Prepare information about the operation
-		var operation = this.engine.createTextOperation();
+		const operation = this.engine.createTextOperation();
 		// Invoke the handler for the selected operation
-		var handler = this.editorOperations[event.param];
+		const handler = this.editorOperations[event.param];
 		if(handler) {
 			handler.call(this,event,operation);
 		}
 		// Execute the operation via the engine
-		var newText = this.engine.executeTextOperation(operation);
+		const newText = this.engine.executeTextOperation(operation);
 		// Fix the tiddler height and save changes
 		this.engine.fixHeight();
 		this.saveChanges(newText);
@@ -187,12 +190,12 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.isDisabled = this.getAttribute("disabled","no");
 		this.isFileDropEnabled = this.getAttribute("fileDrop","no") === "yes";
 		// Get the default editor element tag and type
-		var tag,type;
+		let tag; let type;
 		if(this.editField === "text") {
 			tag = "textarea";
 		} else {
 			tag = "input";
-			var fieldModule = $tw.Tiddler.fieldModules[this.editField];
+			const fieldModule = $tw.Tiddler.fieldModules[this.editField];
 			if(fieldModule && fieldModule.editTag) {
 				tag = fieldModule.editTag;
 			}
@@ -215,15 +218,15 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 	*/
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
-		var changedAttributes = this.computeAttributes();
+		const changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup || changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
 			this.refreshSelf();
 			return true;
-		} else if (changedTiddlers[this.editRefreshTitle]) {
+		} else if(changedTiddlers[this.editRefreshTitle]) {
 			this.engine.updateDomNodeText(this.getEditInfo().value);
 		} else if(changedTiddlers[this.editTitle]) {
-			var editInfo = this.getEditInfo();
+			const editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
 		}
 		this.engine.fixHeight();
@@ -253,7 +256,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Save changes back to the tiddler store
 	*/
 	EditTextWidget.prototype.saveChanges = function(text) {
-		var editInfo = this.getEditInfo();
+		const editInfo = this.getEditInfo();
 		if(text !== editInfo.value) {
 			editInfo.update(text);
 		}
@@ -265,17 +268,17 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.handleKeydownEvent = function(event) {
 		// Check for a keyboard shortcut
 		if(this.toolbarNode) {
-			var shortcutElements = this.toolbarNode.querySelectorAll("[data-tw-keyboard-shortcut]");
-			for(var index=0; index<shortcutElements.length; index++) {
-				var el = shortcutElements[index],
-					shortcutData = el.getAttribute("data-tw-keyboard-shortcut"),
-					keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(shortcutData,{
-						wiki: this.wiki
-					});
+			const shortcutElements = this.toolbarNode.querySelectorAll("[data-tw-keyboard-shortcut]");
+			for(let index = 0;index < shortcutElements.length;index++) {
+				const el = shortcutElements[index];
+				const shortcutData = el.getAttribute("data-tw-keyboard-shortcut");
+				const keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(shortcutData,{
+					wiki: this.wiki
+				});
 				if($tw.keyboardManager.checkKeyDescriptors(event,keyInfoArray)) {
-					var clickEvent = this.document.createEvent("Events");
-				    clickEvent.initEvent("click",true,false);
-				    el.dispatchEvent(clickEvent);
+					const clickEvent = this.document.createEvent("Events");
+					clickEvent.initEvent("click",true,false);
+					el.dispatchEvent(clickEvent);
 					event.preventDefault();
 					event.stopPropagation();
 					return true;
@@ -297,24 +300,24 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Propogate keydown events to our container for the keyboard widgets benefit
 	*/
 	EditTextWidget.prototype.propogateKeydownEvent = function(event) {
-		var newEvent = this.cloneEvent(event,["keyCode","code","which","key","metaKey","ctrlKey","altKey","shiftKey"]);
+		const newEvent = this.cloneEvent(event,["keyCode","code","which","key","metaKey","ctrlKey","altKey","shiftKey"]);
 		return !this.parentDomNode.dispatchEvent(newEvent);
 	};
 
 	EditTextWidget.prototype.cloneEvent = function(event,propertiesToCopy) {
-		var propertiesToCopy = propertiesToCopy || [],
-			newEvent = this.document.createEventObject ? this.document.createEventObject() : this.document.createEvent("Events");
+		var propertiesToCopy = propertiesToCopy || [];
+		const newEvent = this.document.createEventObject ? this.document.createEventObject() : this.document.createEvent("Events");
 		if(newEvent.initEvent) {
-			newEvent.initEvent(event.type, true, true);
+			newEvent.initEvent(event.type,true,true);
 		}
-		$tw.utils.each(propertiesToCopy,function(prop){
+		$tw.utils.each(propertiesToCopy,(prop) => {
 			newEvent[prop] = event[prop];
 		});
 		return newEvent;
 	};
 
 	EditTextWidget.prototype.dispatchDOMEvent = function(newEvent) {
-		var dispatchNode = this.engine.iframeNode || this.engine.parentNode;
+		const dispatchNode = this.engine.iframeNode || this.engine.parentNode;
 		return dispatchNode.dispatchEvent(newEvent);
 	};
 
@@ -327,7 +330,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			event.preventDefault();
 			event.stopPropagation();
 			this.dispatchDOMEvent(this.cloneEvent(event,["dataTransfer"]));
-		} 
+		}
 	};
 
 	EditTextWidget.prototype.handlePasteEvent = function(event) {
@@ -341,7 +344,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.handleDragEnterEvent = function(event) {
 		if($tw.utils.dragEventContainsFiles(event)) {
 			// Ignore excessive events fired by FF when entering and leaving text nodes in a text area.
-			if( event.relatedTarget && (event.relatedTarget.nodeType === 3 || event.target === event.relatedTarget)) {
+			if(event.relatedTarget && (event.relatedTarget.nodeType === 3 || event.target === event.relatedTarget)) {
 				return true;
 			}
 			event.preventDefault();

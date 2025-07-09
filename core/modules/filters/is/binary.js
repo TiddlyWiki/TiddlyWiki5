@@ -13,15 +13,15 @@ Filter function for [is[binary]]
 Export our filter function
 */
 exports.binary = function(source,prefix,options) {
-	var results = [];
+	const results = [];
 	if(prefix === "!") {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(!options.wiki.isBinaryTiddler(title)) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(options.wiki.isBinaryTiddler(title)) {
 				results.push(title);
 			}

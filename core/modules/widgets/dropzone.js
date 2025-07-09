@@ -9,11 +9,11 @@ Dropzone widget
 
 "use strict";
 
-var IMPORT_TITLE = "$:/Import";
+const IMPORT_TITLE = "$:/Import";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var DropZoneWidget = function(parseTreeNode,options) {
+const DropZoneWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -26,25 +26,25 @@ DropZoneWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DropZoneWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	const self = this;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
 	// Create element
-	var domNode = this.document.createElement("div");
+	const domNode = this.document.createElement("div");
 	this.domNode = domNode;
 	domNode.className = this.dropzoneClass || "tc-dropzone";
 	// Add event handlers
 	if(this.dropzoneEnable) {
 		$tw.utils.addEventListeners(domNode,[
-			{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
-			{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
-			{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
-			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"},
-			{name: "paste", handlerObject: this, handlerMethod: "handlePasteEvent"},
-			{name: "dragend", handlerObject: this, handlerMethod: "handleDragEndEvent"}
+			{name: "dragenter",handlerObject: this,handlerMethod: "handleDragEnterEvent"},
+			{name: "dragover",handlerObject: this,handlerMethod: "handleDragOverEvent"},
+			{name: "dragleave",handlerObject: this,handlerMethod: "handleDragLeaveEvent"},
+			{name: "drop",handlerObject: this,handlerMethod: "handleDropEvent"},
+			{name: "paste",handlerObject: this,handlerMethod: "handlePasteEvent"},
+			{name: "dragend",handlerObject: this,handlerMethod: "handleDragEndEvent"}
 		]);
 	}
 	// Insert element
@@ -84,7 +84,7 @@ DropZoneWidget.prototype.resetState = function() {
 };
 
 DropZoneWidget.prototype.enterDrag = function(event) {
-	if(this.currentlyEntered.indexOf(event.target) === -1) {
+	if(!this.currentlyEntered.includes(event.target)) {
 		this.currentlyEntered.push(event.target);
 	}
 	if(!this.dragInProgress) {
@@ -98,7 +98,7 @@ DropZoneWidget.prototype.enterDrag = function(event) {
 };
 
 DropZoneWidget.prototype.leaveDrag = function(event) {
-	var pos = this.currentlyEntered.indexOf(event.target);
+	const pos = this.currentlyEntered.indexOf(event.target);
 	if(pos !== -1) {
 		this.currentlyEntered.splice(pos,1);
 	}
@@ -108,7 +108,7 @@ DropZoneWidget.prototype.leaveDrag = function(event) {
 	}
 };
 
-DropZoneWidget.prototype.handleDragEnterEvent  = function(event) {
+DropZoneWidget.prototype.handleDragEnterEvent = function(event) {
 	if($tw.dragInProgress) {
 		return false;
 	}
@@ -122,9 +122,9 @@ DropZoneWidget.prototype.handleDragEnterEvent  = function(event) {
 	event.stopPropagation();
 };
 
-DropZoneWidget.prototype.handleDragOverEvent  = function(event) {
+DropZoneWidget.prototype.handleDragOverEvent = function(event) {
 	// Check for being over a TEXTAREA or INPUT
-	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
+	if(["TEXTAREA","INPUT"].includes(event.target.tagName)) {
 		return false;
 	}
 	// Check for this window being the source of the drag
@@ -139,7 +139,7 @@ DropZoneWidget.prototype.handleDragOverEvent  = function(event) {
 	}
 };
 
-DropZoneWidget.prototype.handleDragLeaveEvent  = function(event) {
+DropZoneWidget.prototype.handleDragLeaveEvent = function(event) {
 	this.leaveDrag(event);
 };
 
@@ -148,15 +148,15 @@ DropZoneWidget.prototype.handleDragEndEvent = function(event) {
 };
 
 DropZoneWidget.prototype.filterByContentTypes = function(tiddlerFieldsArray) {
-	var filteredTypes,
-		filtered = [],
-		types = [];
-	$tw.utils.each(tiddlerFieldsArray,function(tiddlerFields) {
+	let filteredTypes;
+	const filtered = [];
+	const types = [];
+	$tw.utils.each(tiddlerFieldsArray,(tiddlerFields) => {
 		types.push(tiddlerFields.type || "");
 	});
 	filteredTypes = this.wiki.filterTiddlers(this.contentTypesFilter,this,this.wiki.makeTiddlerIterator(types));
-	$tw.utils.each(tiddlerFieldsArray,function(tiddlerFields) {
-		if(filteredTypes.indexOf(tiddlerFields.type) !== -1) {
+	$tw.utils.each(tiddlerFieldsArray,(tiddlerFields) => {
+		if(filteredTypes.includes(tiddlerFields.type)) {
 			filtered.push(tiddlerFields);
 		}
 	});
@@ -168,33 +168,33 @@ DropZoneWidget.prototype.readFileCallback = function(tiddlerFieldsArray) {
 		tiddlerFieldsArray = this.filterByContentTypes(tiddlerFieldsArray);
 	}
 	if(tiddlerFieldsArray.length) {
-		this.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray), autoOpenOnImport: this.autoOpenOnImport, importTitle: this.importTitle});
+		this.dispatchEvent({type: "tm-import-tiddlers",param: JSON.stringify(tiddlerFieldsArray),autoOpenOnImport: this.autoOpenOnImport,importTitle: this.importTitle});
 		if(this.actions) {
 			this.invokeActionString(this.actions,this,event,{importTitle: this.importTitle});
 		}
 	}
 };
 
-DropZoneWidget.prototype.handleDropEvent  = function(event) {
-	var self = this,
-		readFileCallback = function(tiddlerFieldsArray) {
-			self.readFileCallback(tiddlerFieldsArray);
-		};
+DropZoneWidget.prototype.handleDropEvent = function(event) {
+	var self = this;
+	const readFileCallback = function(tiddlerFieldsArray) {
+		self.readFileCallback(tiddlerFieldsArray);
+	};
 	this.leaveDrag(event);
 	// Check for being over a TEXTAREA or INPUT
-	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
+	if(["TEXTAREA","INPUT"].includes(event.target.tagName)) {
 		return false;
 	}
 	// Check for this window being the source of the drag
 	if($tw.dragInProgress) {
 		return false;
 	}
-	var self = this,
-		dataTransfer = event.dataTransfer;
+	var self = this;
+	const {dataTransfer} = event;
 	// Remove highlighting
 	this.resetState();
 	// Import any files in the drop
-	var numFiles = 0;
+	let numFiles = 0;
 	// If we have type text/vnd.tiddlywiki then skip trying to import files
 	if(dataTransfer.files && !$tw.utils.dragEventContainsType(event,"text/vnd.tiddler")) {
 		numFiles = this.wiki.readFiles(dataTransfer.files,{
@@ -204,18 +204,18 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	}
 	// Try to import the various data types we understand
 	if(numFiles === 0) {
-		var fallbackTitle = self.wiki.generateNewTitle("Untitled");
+		const fallbackTitle = self.wiki.generateNewTitle("Untitled");
 		//Use the deserializer specified if any
 		if(this.dropzoneDeserializer) {
-			for(var t= 0; t<dataTransfer.items.length; t++) {
-				var item = dataTransfer.items[t];
+			for(let t = 0;t < dataTransfer.items.length;t++) {
+				const item = dataTransfer.items[t];
 				if(item.kind === "string") {
-					item.getAsString(function(str){
-						var tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: fallbackTitle},{deserializer:self.dropzoneDeserializer});
+					item.getAsString((str) => {
+						const tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: fallbackTitle},{deserializer: self.dropzoneDeserializer});
 						if(tiddlerFields && tiddlerFields.length) {
 							readFileCallback(tiddlerFields);
 						}
-					})
+					});
 				}
 			}
 		} else {
@@ -228,53 +228,53 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	event.stopPropagation();
 };
 
-DropZoneWidget.prototype.handlePasteEvent  = function(event) {
+DropZoneWidget.prototype.handlePasteEvent = function(event) {
 	var self = this;
-	var	readFileCallback = function(tiddlerFieldsArray) {
-			self.readFileCallback(tiddlerFieldsArray);
-		};
-	var getItem = function(type) {
-			type = type || "text/plain";
-			return function(str) {
-				// Use the deserializer specified if any
-				if(self.dropzoneDeserializer) {
-					tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: self.wiki.generateNewTitle("Untitled " + type)},{deserializer:self.dropzoneDeserializer});
-					if(tiddlerFields && tiddlerFields.length) {
-						readFileCallback(tiddlerFields);
-					}
-				} else {
-					tiddlerFields = {
-						title: self.wiki.generateNewTitle("Untitled " + type),
-						text: str,
-						type: type
-					};
-					if($tw.log.IMPORT) {
-						console.log("Importing string '" + str + "', type: '" + type + "'");
-					}
-					readFileCallback([tiddlerFields]);
+	const readFileCallback = function(tiddlerFieldsArray) {
+		self.readFileCallback(tiddlerFieldsArray);
+	};
+	const getItem = function(type) {
+		type = type || "text/plain";
+		return function(str) {
+			// Use the deserializer specified if any
+			if(self.dropzoneDeserializer) {
+				tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: self.wiki.generateNewTitle(`Untitled ${type}`)},{deserializer: self.dropzoneDeserializer});
+				if(tiddlerFields && tiddlerFields.length) {
+					readFileCallback(tiddlerFields);
 				}
+			} else {
+				tiddlerFields = {
+					title: self.wiki.generateNewTitle(`Untitled ${type}`),
+					text: str,
+					type
+				};
+				if($tw.log.IMPORT) {
+					console.log(`Importing string '${str}', type: '${type}'`);
+				}
+				readFileCallback([tiddlerFields]);
 			}
 		};
+	};
 	// Let the browser handle it if we're in a textarea or input box
-	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1 && !event.target.isContentEditable && !event.twEditor) {
-		var self = this,
-			items = event.clipboardData.items;
+	if(!["TEXTAREA","INPUT"].includes(event.target.tagName) && !event.target.isContentEditable && !event.twEditor) {
+		var self = this;
+		const {items} = event.clipboardData;
 		// Enumerate the clipboard items
-		for(var t = 0; t<items.length; t++) {
-			var item = items[t];
+		for(let t = 0;t < items.length;t++) {
+			const item = items[t];
 			if(item.kind === "file") {
 				// Import any files
 				this.wiki.readFile(item.getAsFile(),{
 					callback: readFileCallback,
 					deserializer: this.dropzoneDeserializer
 				});
-			} else if(item.kind === "string" && !["text/html", "text/plain", "Text"].includes(item.type) && $tw.utils.itemHasValidDataType(item)) {
+			} else if(item.kind === "string" && !["text/html","text/plain","Text"].includes(item.type) && $tw.utils.itemHasValidDataType(item)) {
 				// Try to import the various data types we understand
 				var fallbackTitle = self.wiki.generateNewTitle("Untitled");
 				//Use the deserializer specified if any
 				if(this.dropzoneDeserializer) {
-					item.getAsString(function(str){
-						var tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: fallbackTitle},{deserializer:self.dropzoneDeserializer});
+					item.getAsString((str) => {
+						const tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: fallbackTitle},{deserializer: self.dropzoneDeserializer});
 						if(tiddlerFields && tiddlerFields.length) {
 							readFileCallback(tiddlerFields);
 						}
@@ -316,7 +316,7 @@ DropZoneWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DropZoneWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;

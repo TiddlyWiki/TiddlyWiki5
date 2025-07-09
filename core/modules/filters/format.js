@@ -7,7 +7,7 @@ Filter operator for formatting strings
 
 "use strict";
 
-var formatFilterOperators;
+let formatFilterOperators;
 
 function getFormatFilterOperators() {
 	if(!formatFilterOperators) {
@@ -22,9 +22,9 @@ Export our filter function
 */
 exports.format = function(source,operator,options) {
 	// Dispatch to the correct formatfilteroperator
-	var formatFilterOperators = getFormatFilterOperators();
+	const formatFilterOperators = getFormatFilterOperators();
 	if(operator.suffix) {
-		var formatFilterOperator = formatFilterOperators[operator.suffix];
+		const formatFilterOperator = formatFilterOperators[operator.suffix];
 		if(formatFilterOperator) {
 			return formatFilterOperator(source,operator.operand,options);
 		} else {
@@ -32,8 +32,8 @@ exports.format = function(source,operator,options) {
 		}
 	} else {
 		// Return all unchanged if the suffix is missing
-		var results = [];
-		source(function(tiddler,title) {
+		const results = [];
+		source((tiddler,title) => {
 			results.push(title);
 		});
 		return results;

@@ -9,21 +9,21 @@ Geospatial utilities
 
 "use strict";
 
-var turf = require("$:/plugins/tiddlywiki/geospatial/turf.js");
+const turf = require("$:/plugins/tiddlywiki/geospatial/turf.js");
 
 /*
 Parse a string as a GeoJSON Point
 */
 exports.parsePoint = function(str) {
-	var defaultResult = function() {
+	const defaultResult = function() {
 		return turf.point([0,0,0]);
-	}
+	};
 	// If the string is missing then return 0,0,0
 	if(!str) {
 		return defaultResult();
 	}
 	// Convert to an object
-	var json = $tw.utils.parseJSONSafe(str,null);
+	const json = $tw.utils.parseJSONSafe(str,null);
 	if(json === null) {
 		return defaultResult();
 	}
@@ -33,4 +33,4 @@ exports.parsePoint = function(str) {
 	}
 	// Return the string now we know it is a valid GeoJSON Point
 	return json;
-}
+};

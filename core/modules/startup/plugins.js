@@ -15,23 +15,23 @@ exports.after = ["load-modules"];
 exports.before = ["startup"];
 exports.synchronous = true;
 
-var TITLE_REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE = "$:/status/RequireReloadDueToPluginChange";
+const TITLE_REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE = "$:/status/RequireReloadDueToPluginChange";
 
-var PREFIX_CONFIG_REGISTER_PLUGIN_TYPE = "$:/config/RegisterPluginType/";
+const PREFIX_CONFIG_REGISTER_PLUGIN_TYPE = "$:/config/RegisterPluginType/";
 
 exports.startup = function() {
 	$tw.wiki.addTiddler({title: TITLE_REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE,text: "no"});
-	$tw.wiki.addEventListener("change",function(changes) {
+	$tw.wiki.addEventListener("change",(changes) => {
 		// Work out which of the changed tiddlers are plugins that we need to reregister
-		var changesToProcess = [],
-			requireReloadDueToPluginChange = false;
-		$tw.utils.each(Object.keys(changes),function(title) {
-			var tiddler = $tw.wiki.getTiddler(title),
-				requiresReload = $tw.wiki.doesPluginRequireReload(title);
+		const changesToProcess = [];
+		let requireReloadDueToPluginChange = false;
+		$tw.utils.each(Object.keys(changes),(title) => {
+			const tiddler = $tw.wiki.getTiddler(title);
+			const requiresReload = $tw.wiki.doesPluginRequireReload(title);
 			if(requiresReload) {
 				requireReloadDueToPluginChange = true;
 			} else if(tiddler) {
-				var pluginType = tiddler.fields["plugin-type"];
+				const pluginType = tiddler.fields["plugin-type"];
 				if($tw.wiki.getTiddlerText(PREFIX_CONFIG_REGISTER_PLUGIN_TYPE + (tiddler.fields["plugin-type"] || ""),"no") === "yes") {
 					changesToProcess.push(title);
 				}
@@ -45,21 +45,21 @@ exports.startup = function() {
 		if(changesToProcess.length > 0) {
 			var changes = $tw.wiki.readPluginInfo(changesToProcess);
 			if(changes.modifiedPlugins.length > 0 || changes.deletedPlugins.length > 0) {
-				var changedShadowTiddlers = {};
+				const changedShadowTiddlers = {};
 				// Collect the shadow tiddlers of any deleted plugins
-				$tw.utils.each(changes.deletedPlugins,function(pluginTitle) {
-					var pluginInfo = $tw.wiki.getPluginInfo(pluginTitle);
+				$tw.utils.each(changes.deletedPlugins,(pluginTitle) => {
+					const pluginInfo = $tw.wiki.getPluginInfo(pluginTitle);
 					if(pluginInfo) {
-						$tw.utils.each(Object.keys(pluginInfo.tiddlers),function(title) {
+						$tw.utils.each(Object.keys(pluginInfo.tiddlers),(title) => {
 							changedShadowTiddlers[title] = true;
 						});
 					}
 				});
 				// Collect the shadow tiddlers of any modified plugins
-				$tw.utils.each(changes.modifiedPlugins,function(pluginTitle) {
-					var pluginInfo = $tw.wiki.getPluginInfo(pluginTitle);
+				$tw.utils.each(changes.modifiedPlugins,(pluginTitle) => {
+					const pluginInfo = $tw.wiki.getPluginInfo(pluginTitle);
 					if(pluginInfo && pluginInfo.tiddlers) {
-						$tw.utils.each(Object.keys(pluginInfo.tiddlers),function(title) {
+						$tw.utils.each(Object.keys(pluginInfo.tiddlers),(title) => {
 							changedShadowTiddlers[title] = false;
 						});
 					}
@@ -71,8 +71,8 @@ exports.startup = function() {
 				// Unpack the shadow tiddlers
 				$tw.wiki.unpackPluginTiddlers();
 				// Queue change events for the changed shadow tiddlers
-				$tw.utils.each(Object.keys(changedShadowTiddlers),function(title) {
-					$tw.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title], true);
+				$tw.utils.each(Object.keys(changedShadowTiddlers),(title) => {
+					$tw.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title],true);
 				});
 			}
 		}

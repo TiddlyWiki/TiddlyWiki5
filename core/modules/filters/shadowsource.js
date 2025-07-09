@@ -13,9 +13,9 @@ Filter operator for returning the source plugins for shadow tiddlers
 Export our filter function
 */
 exports.shadowsource = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
-		var source = options.wiki.getShadowSource(title);
+	const results = [];
+	source((tiddler,title) => {
+		const source = options.wiki.getShadowSource(title);
 		if(source) {
 			$tw.utils.pushTop(results,source);
 		}

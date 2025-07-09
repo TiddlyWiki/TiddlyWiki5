@@ -9,13 +9,13 @@ Dynannotate widget
 
 "use strict";
 
-var TextMap = require("$:/plugins/tiddlywiki/dynannotate/textmap.js").TextMap;
+const {TextMap} = require("$:/plugins/tiddlywiki/dynannotate/textmap.js");
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var Popup = require("$:/core/modules/utils/dom/popup.js");
+const Popup = require("$:/core/modules/utils/dom/popup.js");
 
-var DynannotateWidget = function(parseTreeNode,options) {
+const DynannotateWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -28,12 +28,12 @@ DynannotateWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DynannotateWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	const self = this;
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
 	// Create our DOM nodes
-	var isSnippetMode = this.isSnippetMode();
+	const isSnippetMode = this.isSnippetMode();
 	this.domContent = $tw.utils.domMaker("div",{
 		"class": "tc-dynannotation-selection-container",
 		document: this.document
@@ -57,7 +57,7 @@ DynannotateWidget.prototype.render = function(parent,nextSibling) {
 		"class": "tc-dynannotation-wrapper",
 		children: [this.domContent,this.domAnnotations,this.domSnippets,this.domSearches],
 		document: this.document
-	})
+	});
 	parent.insertBefore(this.domWrapper,nextSibling);
 	this.domNodes.push(this.domWrapper);
 	// Apply the selection tracker data to the DOM
@@ -93,7 +93,7 @@ DynannotateWidget.prototype.execute = function() {
 
 DynannotateWidget.prototype.isSnippetMode = function() {
 	return this.getAttribute("searchDisplay") === "snippet";
-}
+};
 
 /*
 Save the data attributes required by the selection tracker
@@ -136,28 +136,28 @@ options include:
 	onclick: Optional click event handler for the overlay
 */
 DynannotateWidget.prototype.createOverlay = function(options) {
-	var self = this;
+	const self = this;
 	// Create a range covering the text
-	var range = this.document.createRange();
+	const range = this.document.createRange();
 	range.setStart(options.startNode,options.startOffset);
 	range.setEnd(options.endNode,options.endOffset);
 	// Get the position of the range
-	var rects = range.getClientRects();
+	const rects = range.getClientRects();
 	if(rects) {
 		// Paint each rectangle
-		var parentRect = this.domContent.getBoundingClientRect();
-		$tw.utils.each(rects,function(rect) {
-			var domOverlay = self.document.createElement("div");
-			domOverlay.className = (options.className || "") + " tc-dynaview-request-refresh-on-resize";
-			domOverlay.style.top = (rect.top - parentRect.top) + "px";
-			domOverlay.style.left = (rect.left - parentRect.left) + "px";
-			domOverlay.style.width = rect.width + "px";
-			domOverlay.style.height = rect.height + "px";
+		const parentRect = this.domContent.getBoundingClientRect();
+		$tw.utils.each(rects,(rect) => {
+			const domOverlay = self.document.createElement("div");
+			domOverlay.className = `${options.className || ""} tc-dynaview-request-refresh-on-resize`;
+			domOverlay.style.top = `${rect.top - parentRect.top}px`;
+			domOverlay.style.left = `${rect.left - parentRect.left}px`;
+			domOverlay.style.width = `${rect.width}px`;
+			domOverlay.style.height = `${rect.height}px`;
 			domOverlay.style.backgroundColor = options.colour;
 			domOverlay.style.mixBlendMode = options.blendMode;
 			if(options.onclick) {
-				domOverlay.addEventListener("click",function(event) {
-					var modifierKey = event.ctrlKey && !event.shiftKey ? "ctrl" : event.shiftKey && !event.ctrlKey ? "shift" : event.ctrlKey && event.shiftKey ? "ctrl-shift" : "normal";
+				domOverlay.addEventListener("click",(event) => {
+					const modifierKey = event.ctrlKey && !event.shiftKey ? "ctrl" : event.shiftKey && !event.ctrlKey ? "shift" : event.ctrlKey && event.shiftKey ? "ctrl-shift" : "normal";
 					options.onclick(event,domOverlay,modifierKey);
 				},false);
 			}
@@ -177,7 +177,7 @@ DynannotateWidget.prototype.removeAnnotations = function() {
 };
 
 DynannotateWidget.prototype.applyAnnotations = function() {
-	var self = this;
+	const self = this;
 	// Remove any previous annotation overlays
 	this.removeAnnotations();
 	// Don't do anything if there are no annotations to apply
@@ -185,11 +185,11 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 		return;
 	}
 	// Build the map of the text content
-	var textMap = new TextMap(this.domContent);
+	const textMap = new TextMap(this.domContent);
 	// We'll dynamically build the click event handler so that we can reuse it
-	var clickHandlerFn = function(title) {
+	const clickHandlerFn = function(title) {
 		return function(event,domOverlay,modifierKey) {
-			var bounds = domOverlay.getBoundingClientRect();
+			const bounds = domOverlay.getBoundingClientRect();
 			self.invokeActionString(self.getAttribute("actions"),self,event,{
 				annotationTiddler: title,
 				modifier: modifierKey,
@@ -202,8 +202,8 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 			if(self.hasAttribute("popup")) {
 				$tw.popup.triggerPopup({
 					domNode: domOverlay,
-                    title: self.getAttribute("popup"),
-                    floating: self.getAttribute("floating"),
+					title: self.getAttribute("popup"),
+					floating: self.getAttribute("floating"),
 					wiki: self.wiki
 				});
 			}
@@ -211,7 +211,7 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 	};
 	// Draw the overlay for the "target" attribute
 	if(this.hasAttribute("target")) {
-		var result = textMap.findText(this.getAttribute("target"),this.getAttribute("targetPrefix"),this.getAttribute("targetSuffix"));
+		const result = textMap.findText(this.getAttribute("target"),this.getAttribute("targetPrefix"),this.getAttribute("targetSuffix"));
 		if(result) {
 			this.createOverlay({
 				startNode: result.startNode,
@@ -225,13 +225,13 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 		}
 	}
 	// Draw the overlays for each annotation tiddler
-	$tw.utils.each(this.annotationTiddlers,function(title) {
-		var tiddler = self.wiki.getTiddler(title),
-			annotateText = tiddler.fields["annotate-text"],
-			annotatePrefix = tiddler.fields["annotate-prefix"],
-			annotateSuffix = tiddler.fields["annotate-suffix"];
+	$tw.utils.each(this.annotationTiddlers,(title) => {
+		const tiddler = self.wiki.getTiddler(title);
+		const annotateText = tiddler.fields["annotate-text"];
+		const annotatePrefix = tiddler.fields["annotate-prefix"];
+		const annotateSuffix = tiddler.fields["annotate-suffix"];
 		if(tiddler && annotateText) {
-			var result = textMap.findText(annotateText,annotatePrefix,annotateSuffix);
+			const result = textMap.findText(annotateText,annotatePrefix,annotateSuffix);
 			if(result) {
 				self.createOverlay({
 					startNode: result.startNode,
@@ -256,34 +256,34 @@ DynannotateWidget.prototype.removeSearch = function() {
 };
 
 DynannotateWidget.prototype.applySearch = function() {
-	var self = this;
+	const self = this;
 	// Remove any previous search overlays
 	this.removeSearch();
 	// Gather parameters
-	var searchString = this.getAttribute("search",""),
-		searchMode = this.getAttribute("searchMode"),
-		searchCaseSensitive = this.getAttribute("searchCaseSensitive","yes") === "yes",
-		searchMinLength = parseInt(this.getAttribute("searchMinLength","1"),10) || 1;
+	const searchString = this.getAttribute("search","");
+	const searchMode = this.getAttribute("searchMode");
+	const searchCaseSensitive = this.getAttribute("searchCaseSensitive","yes") === "yes";
+	const searchMinLength = parseInt(this.getAttribute("searchMinLength","1"),10) || 1;
 	// Bail if search string too short
 	if(searchString.length < searchMinLength) {
 		return;
 	}
 	// Build the map of the text content
-	var textMap = new TextMap(this.domContent);
+	const textMap = new TextMap(this.domContent);
 	// Search for the string
-	var matches = textMap.search(this.getAttribute("search",""),{
+	const matches = textMap.search(this.getAttribute("search",""),{
 		mode: this.getAttribute("searchMode"),
 		caseSensitive: this.getAttribute("searchCaseSensitive","yes") === "yes"
 	});
 	// Create overlays for each match
-	$tw.utils.each(matches,function(match) {
+	$tw.utils.each(matches,(match) => {
 		self.createOverlay({
 			startNode: match.startNode,
 			startOffset: match.startOffset,
 			endNode: match.endNode,
 			endOffset: match.endOffset,
 			wrapper: self.domSearches,
-			className: "tc-dynannotation-search-overlay " + self.getAttribute("searchClass","")
+			className: `tc-dynannotation-search-overlay ${self.getAttribute("searchClass","")}`
 		});
 	});
 };
@@ -295,30 +295,30 @@ DynannotateWidget.prototype.removeSnippets = function() {
 };
 
 DynannotateWidget.prototype.applySnippets = function() {
-	var self = this,
-		contextLength = parseInt(this.getAttribute("snippetContextLength","33"),10) || 0;
+	const self = this;
+	const contextLength = parseInt(this.getAttribute("snippetContextLength","33"),10) || 0;
 	// Build the map of the text content
 	var textMap = new TextMap(this.domContent);
 	// Remove any previous snippets
 	this.removeSnippets();
 	// Gather parameters
-	var searchString = this.getAttribute("search",""),
-		searchMode = this.getAttribute("searchMode"),
-		searchCaseSensitive = this.getAttribute("searchCaseSensitive","yes") === "yes",
-		searchMinLength = parseInt(this.getAttribute("searchMinLength","1"),10) || 1;
+	const searchString = this.getAttribute("search","");
+	const searchMode = this.getAttribute("searchMode");
+	const searchCaseSensitive = this.getAttribute("searchCaseSensitive","yes") === "yes";
+	const searchMinLength = parseInt(this.getAttribute("searchMinLength","1"),10) || 1;
 	// Build the map of the text content
 	var textMap = new TextMap(this.domContent);
 	// Search for the string
-	var matches = textMap.search(this.getAttribute("search",""),{
+	const matches = textMap.search(this.getAttribute("search",""),{
 		mode: this.getAttribute("searchMode"),
 		caseSensitive: this.getAttribute("searchCaseSensitive","no") === "yes"
 	});
 	// Output a snippet for each match
 	if(matches && matches.length > 0) {
-		var merged = false, // Keep track of whether the context of the previous match merges into this one
-			ellipsis = String.fromCharCode(8230),
-			container = null; // Track the container so that we can reuse the same container for merged matches
-		$tw.utils.each(matches,function(match,index) {
+		let merged = false; // Keep track of whether the context of the previous match merges into this one
+		const ellipsis = String.fromCharCode(8230);
+		let container = null; // Track the container so that we can reuse the same container for merged matches
+		$tw.utils.each(matches,(match,index) => {
 			// Create a container if we're not reusing it
 			if(!container) {
 				container = $tw.utils.domMaker("div",{
@@ -337,7 +337,7 @@ DynannotateWidget.prototype.applySnippets = function() {
 			// Output the match
 			container.appendChild($tw.utils.domMaker("span",{
 				text: textMap.string.slice(match.startPos,match.endPos),
-				"class": "tc-dynannotate-snippet-highlight " + self.getAttribute("searchClass","")
+				"class": `tc-dynannotate-snippet-highlight ${self.getAttribute("searchClass","")}`
 			}));
 			// Does the context of this match merge into the next?
 			merged = index < matches.length - 1 && matches[index + 1].startPos - match.endPos <= 2 * contextLength;
@@ -368,24 +368,24 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DynannotateWidget.prototype.refresh = function(changedTiddlers) {
 	// Get the changed attributes
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	// Refresh completely if the "searchDisplay" attribute has changed
 	if(changedAttributes.searchDisplay) {
 		this.refreshSelf();
 		return true;
 	}
 	// Check whether we're in snippet mode
-	var isSnippetMode = this.isSnippetMode();
+	const isSnippetMode = this.isSnippetMode();
 	// Refresh the child widgets
-	var childrenDidRefresh = this.refreshChildren(changedTiddlers);
+	const childrenDidRefresh = this.refreshChildren(changedTiddlers);
 	// Reapply the selection tracker data to the DOM
 	if(changedAttributes.selection || changedAttributes.selectionPrefix || changedAttributes.selectionSuffix || changedAttributes.selectionPopup) {
 		this.applySelectionTrackerData();
 	}
 	// Reapply the annotations if the children refreshed or the main wrapper resized
-	var wrapperWidth = this.domWrapper.offsetWidth,
-		hasResized = wrapperWidth !== this.wrapperWidth || changedTiddlers["$:/state/DynaView/ViewportDimensions/ResizeCount"],
-		oldAnnotationTiddlers = this.annotationTiddlers;
+	const wrapperWidth = this.domWrapper.offsetWidth;
+	const hasResized = wrapperWidth !== this.wrapperWidth || changedTiddlers["$:/state/DynaView/ViewportDimensions/ResizeCount"];
+	const oldAnnotationTiddlers = this.annotationTiddlers;
 	this.getAnnotationTiddlers();
 	if(!isSnippetMode && (
 		childrenDidRefresh ||
@@ -397,7 +397,7 @@ DynannotateWidget.prototype.refresh = function(changedTiddlers) {
 		changedAttributes.actions ||
 		changedAttributes.popup ||
 		!$tw.utils.isArrayEqual(oldAnnotationTiddlers,this.annotationTiddlers) ||
-		this.annotationTiddlers.find(function(title) {
+		this.annotationTiddlers.find((title) => {
 			return changedTiddlers[title];
 		}) !== undefined
 	)) {

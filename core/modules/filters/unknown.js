@@ -11,25 +11,25 @@ Not intended to be used directly by end users, hence the square brackets around 
 
 "use strict";
 
-var fieldFilterOperatorFn = require("$:/core/modules/filters/field.js").field;
+const fieldFilterOperatorFn = require("$:/core/modules/filters/field.js").field;
 
 /*
 Export our filter function
 */
 exports["[unknown]"] = function(source,operator,options) {
 	// Check for a user defined filter operator
-	if(operator.operator.indexOf(".") !== -1) {
-		var params = [];
-		$tw.utils.each(operator.operands,function(param) {
+	if(operator.operator.includes(".")) {
+		const params = [];
+		$tw.utils.each(operator.operands,(param) => {
 			params.push({value: param});
-		});	
-		var variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(operator.operator,{params: params, source: source});
+		});
+		const variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(operator.operator,{params,source});
 		if(variableInfo && variableInfo.srcVariable) {
-			var list = variableInfo.resultList ? variableInfo.resultList : [variableInfo.text];
+			const list = variableInfo.resultList ? variableInfo.resultList : [variableInfo.text];
 			if(operator.prefix === "!") {
-				var results = [];
-				source(function(tiddler,title) {
-					if(list.indexOf(title) === -1) {
+				const results = [];
+				source((tiddler,title) => {
+					if(!list.includes(title)) {
 						results.push(title);
 					}
 				});

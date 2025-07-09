@@ -10,11 +10,11 @@ A simple HTTP-over-window.postMessage implementation of a standard TiddlyWeb-com
 "use strict";
 
 // Listen for window messages
-window.addEventListener("message",function listener(event){
+window.addEventListener("message",(event) => {
 	console.log("plugin library: Received message from",event.origin);
 	console.log("plugin library: Message content",event.data);
 	switch(event.data.verb) {
-		case "GET":
+		case "GET": {
 			if(event.data.url === "recipes/library/tiddlers.json") {
 				// Route for recipes/library/tiddlers.json
 				event.source.postMessage({
@@ -26,9 +26,9 @@ window.addEventListener("message",function listener(event){
 					body: JSON.stringify(assetList,null,4)
 				},"*");
 			} else if(event.data.url.indexOf("recipes/library/tiddlers/") === 0) {
-				var url = "recipes/library/tiddlers/" + encodeURIComponent(removePrefix(event.data.url,"recipes/library/tiddlers/"));
+				const url = `recipes/library/tiddlers/${encodeURIComponent(removePrefix(event.data.url,"recipes/library/tiddlers/"))}`;
 				// Route for recipes/library/tiddlers/<uri-encoded-tiddler-title>.json
-				httpGet(url,function(err,responseText) {
+				httpGet(url,(err,responseText) => {
 					if(err) {
 						event.source.postMessage({
 							verb: "GET-RESPONSE",
@@ -60,6 +60,7 @@ window.addEventListener("message",function listener(event){
 				},"*");
 			}
 			break;
+		}
 	}
 },false);
 
@@ -74,7 +75,7 @@ function removePrefix(string,prefix) {
 
 // Helper for HTTP GET
 function httpGet(url,callback) {
-	var http = new XMLHttpRequest();
+	const http = new XMLHttpRequest();
 	http.open("GET",url,true);
 	http.onreadystatechange = function() {
 		if(http.readyState == 4 && http.status == 200) {

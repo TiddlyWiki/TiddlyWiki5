@@ -8,9 +8,9 @@ Relative test
 \*/
 
 
-var test = require('test');
-var a = require('submodule/a');
-var b = require('submodule/b');
-test.assert(a.foo == b.foo, 'a and b share foo through a relative require');
-test.print('DONE', 'info');
+const test = require('test');
+const a = require('submodule/a');
+const b = require('submodule/b');
+test.assert(a.foo == b.foo,'a and b share foo through a relative require');
+test.print('DONE','info');
 

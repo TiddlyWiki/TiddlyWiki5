@@ -9,9 +9,9 @@ Qualify text to a variable
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var QualifyWidget = function(parseTreeNode,options) {
+const QualifyWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -39,7 +39,7 @@ QualifyWidget.prototype.execute = function() {
 	this.qualifyTitle = this.getAttribute("title");
 	// Set context variable
 	if(this.qualifyName) {
-		this.setVariable(this.qualifyName,this.qualifyTitle + "-" + this.getStateQualifier());
+		this.setVariable(this.qualifyName,`${this.qualifyTitle}-${this.getStateQualifier()}`);
 	}
 	// Construct the child widgets
 	this.makeChildWidgets();
@@ -49,7 +49,7 @@ QualifyWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 QualifyWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.name || changedAttributes.title) {
 		this.refreshSelf();
 		return true;

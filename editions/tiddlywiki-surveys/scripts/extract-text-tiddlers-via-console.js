@@ -1,10 +1,10 @@
 function stringifyList(value) {
 	if(Array.isArray(value)) {
-		var result = new Array(value.length);
-		for(var t=0, l=value.length; t<l; t++) {
-			var entry = value[t] || "";
+		const result = new Array(value.length);
+		for(let t = 0,l = value.length;t < l;t++) {
+			const entry = value[t] || "";
 			if(entry.match(/[^\S\xA0]/mg)) {
-				result[t] = "[[" + entry + "]]";
+				result[t] = `[[${entry}]]`;
 			} else {
 				result[t] = entry;
 			}
@@ -15,7 +15,7 @@ function stringifyList(value) {
 	}
 };
 
-const tiddlers=[];
+const tiddlers = [];
 const questions = [];
 const siteIconByUsername = {};
 for(const child of document.querySelector("#tiddlerDisplay").childNodes) {
@@ -30,7 +30,7 @@ for(const child of document.querySelector("#tiddlerDisplay").childNodes) {
 			const username = answer.innerText.split("\n\n")[0].split(" ")[1];
 			const answerDate = new Date(answer.innerText.split("\n\n")[0].split(" on ")[1]);
 			const answerHTML = answer.querySelector("blockquote").innerHTML;
-			const childTitle = titlePrefix + title + " - " + username + " - " + answerDate.toISOString();
+			const childTitle = `${titlePrefix + title} - ${username} - ${answerDate.toISOString()}`;
 			// console.log(`${username} has site icon ${siteIconName}`);
 			siteIconByUsername[username] = siteIconName;
 			childTitles.push(childTitle);
@@ -39,7 +39,7 @@ for(const child of document.querySelector("#tiddlerDisplay").childNodes) {
 				text: answerHTML,
 				icon: `$:/avatars/${username}`,
 				modifier: username,
-				modified: answerDate.toISOString().slice(0, 10).replace(/-/g, '') + "000000000",
+				modified: `${answerDate.toISOString().slice(0,10).replace(/-/g,'')}000000000`,
 				tags: stringifyList([titlePrefix + title,"2010 - Interview Answer"])
 			});
 		}
@@ -53,7 +53,7 @@ for(const child of document.querySelector("#tiddlerDisplay").childNodes) {
 tiddlers.push({
 	title: "2010 - Interview Question",
 	list: stringifyList(questions)
-})
+});
 copy(JSON.stringify(tiddlers,null,4));
 
 const commands = [
@@ -62,12 +62,12 @@ const commands = [
 for(const username in siteIconByUsername) {
 
 	commands.push(`cp './editions/tiddlywiki-surveys/great-interview-project-2010/The great TiddlyWiki interview project_files/${siteIconByUsername[username]}' './editions/tiddlywiki-surveys/tiddlers/2010-great-interview-project/images/${username}.jpg'`);
-const metafile = `title: $:/avatars/${username}
+	const metafile = `title: $:/avatars/${username}
 type: image/jpeg
 tags: $:/tags/Avatar
 modifier: ${username}
 `;
 
-commands.push(`echo "${metafile}" > './editions/tiddlywiki-surveys/tiddlers/2010-great-interview-project/images/${username}.jpg.meta'`);
+	commands.push(`echo "${metafile}" > './editions/tiddlywiki-surveys/tiddlers/2010-great-interview-project/images/${username}.jpg.meta'`);
 }
 console.log(commands.join(" && "));

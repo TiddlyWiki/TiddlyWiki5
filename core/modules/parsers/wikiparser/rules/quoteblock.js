@@ -19,21 +19,21 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var classes = ["tc-quote"];
+	const classes = ["tc-quote"];
 	// Get all the details of the match
-	var reEndString = "^\\s*" + this.match[1] + "(?!<)";
+	const reEndString = `${String.raw`^\s*` + this.match[1]}(?!<)`;
 	// Move past the <s
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse any classes, whitespace and then the optional cite itself
-	var classStart = this.parser.pos;
-	classes.push.apply(classes, this.parser.parseClasses());
-	var classEnd = this.parser.pos;
+	const classStart = this.parser.pos;
+	classes.push.apply(classes,this.parser.parseClasses());
+	const classEnd = this.parser.pos;
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
-	var citeStart = this.parser.pos;
-	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
-	var citeEnd = this.parser.pos;
+	let citeStart = this.parser.pos;
+	let cite = this.parser.parseInlineRun(/(\r?\n)/mg);
+	let citeEnd = this.parser.pos;
 	// before handling the cite, parse the body of the quote
-	var tree = this.parser.parseBlocks(reEndString);
+	const tree = this.parser.parseBlocks(reEndString);
 	// If we got a cite, put it before the text
 	if(cite.length > 0) {
 		tree.unshift({
@@ -64,7 +64,7 @@ exports.parse = function() {
 		type: "element",
 		tag: "blockquote",
 		attributes: {
-			class: { type: "string", value: classes.join(" "), start: classStart, end: classEnd },
+			class: {type: "string",value: classes.join(" "),start: classStart,end: classEnd},
 		},
 		children: tree
 	}];

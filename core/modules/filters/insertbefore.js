@@ -13,14 +13,14 @@ Insert an item before another item in a list
 Order a list
 */
 exports.insertbefore = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
+	const results = [];
+	source((tiddler,title) => {
 		results.push(title);
 	});
-	var target = operator.operands[1] || (options.widget && options.widget.getVariable(operator.suffix || "currentTiddler"));
+	const target = operator.operands[1] || (options.widget && options.widget.getVariable(operator.suffix || "currentTiddler"));
 	if(target !== operator.operand) {
 		// Remove the entry from the list if it is present
-		var pos = results.indexOf(operator.operand);
+		let pos = results.indexOf(operator.operand);
 		if(pos !== -1) {
 			results.splice(pos,1);
 		}
@@ -29,7 +29,7 @@ exports.insertbefore = function(source,operator,options) {
 		if(pos !== -1) {
 			results.splice(pos,0,operator.operand);
 		} else {
-			var suffix = operator.operands.length > 1 ? operator.suffix : "";
+			const suffix = operator.operands.length > 1 ? operator.suffix : "";
 			if(suffix == "start") {
 				results.splice(0,0,operator.operand);
 			} else {

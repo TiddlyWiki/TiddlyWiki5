@@ -26,12 +26,12 @@ Performance.prototype.showGreeting = function() {
 Wrap performance reporting around a top level function
 */
 Performance.prototype.report = function(name,fn) {
-	var self = this;
+	const self = this;
 	if(this.enabled) {
 		return function() {
-			var startTime = $tw.utils.timer(),
-				result = fn.apply(this,arguments);
-			self.logger.log(name + ": " + $tw.utils.timer(startTime).toFixed(2) + "ms");
+			const startTime = $tw.utils.timer();
+			const result = fn.apply(this,arguments);
+			self.logger.log(`${name}: ${$tw.utils.timer(startTime).toFixed(2)}ms`);
 			return result;
 		};
 	} else {
@@ -40,24 +40,24 @@ Performance.prototype.report = function(name,fn) {
 };
 
 Performance.prototype.log = function() {
-	var self = this,
-		totalTime = 0,
-		orderedMeasures = Object.keys(this.measures).sort(function(a,b) {
-			if(self.measures[a].time > self.measures[b].time) {
-				return -1;
-			} else if (self.measures[a].time < self.measures[b].time) {
-				return + 1;
-			} else {
-				return 0;
-			}
-		});
-	$tw.utils.each(orderedMeasures,function(name) {
+	const self = this;
+	let totalTime = 0;
+	const orderedMeasures = Object.keys(this.measures).sort((a,b) => {
+		if(self.measures[a].time > self.measures[b].time) {
+			return -1;
+		} else if(self.measures[a].time < self.measures[b].time) {
+			return + 1;
+		} else {
+			return 0;
+		}
+	});
+	$tw.utils.each(orderedMeasures,(name) => {
 		totalTime += self.measures[name].time;
 	});
-	var results = []
-	$tw.utils.each(orderedMeasures,function(name) {
-		var measure = self.measures[name];
-		results.push({name: name,invocations: measure.invocations, avgTime: measure.time / measure.invocations, totalTime: measure.time, percentTime: (measure.time / totalTime) * 100})
+	const results = [];
+	$tw.utils.each(orderedMeasures,(name) => {
+		const measure = self.measures[name];
+		results.push({name,invocations: measure.invocations,avgTime: measure.time / measure.invocations,totalTime: measure.time,percentTime: (measure.time / totalTime) * 100});
 	});
 	self.logger.table(results);
 };
@@ -66,13 +66,13 @@ Performance.prototype.log = function() {
 Wrap performance measurements around a subfunction
 */
 Performance.prototype.measure = function(name,fn) {
-	var self = this;
+	const self = this;
 	if(this.enabled) {
 		return function() {
-			var startTime = $tw.utils.timer(),
-				result = fn.apply(this,arguments);
+			const startTime = $tw.utils.timer();
+			const result = fn.apply(this,arguments);
 			if(!(name in self.measures)) {
-				self.measures[name] = {time: 0, invocations: 0};
+				self.measures[name] = {time: 0,invocations: 0};
 			}
 			self.measures[name].time += $tw.utils.timer(startTime);
 			self.measures[name].invocations++;

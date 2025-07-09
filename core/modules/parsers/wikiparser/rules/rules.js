@@ -33,10 +33,10 @@ exports.parse = function() {
 	// Move past the pragma invocation
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse whitespace delimited tokens terminated by a line break
-	var reMatch = /[^\S\n]*(\S+)|(\r?\n)/mg,
-		tokens = [];
+	const reMatch = /[^\S\n]*(\S+)|(\r?\n)/mg;
+	const tokens = [];
 	reMatch.lastIndex = this.parser.pos;
-	var match = reMatch.exec(this.parser.source);
+	let match = reMatch.exec(this.parser.source);
 	while(match && match.index === this.parser.pos) {
 		this.parser.pos = reMatch.lastIndex;
 		// Exit if we've got the line break

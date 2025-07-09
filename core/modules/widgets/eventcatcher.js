@@ -9,9 +9,9 @@ Event handler widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var EventWidget = function(parseTreeNode,options) {
+const EventWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -24,32 +24,32 @@ EventWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 EventWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	const self = this;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
 	// Create element
-	var tag = this.parseTreeNode.isBlock ? "div" : "span";
-	if(this.elementTag && $tw.config.htmlUnsafeElements.indexOf(this.elementTag) === -1) {
+	let tag = this.parseTreeNode.isBlock ? "div" : "span";
+	if(this.elementTag && !$tw.config.htmlUnsafeElements.includes(this.elementTag)) {
 		tag = this.elementTag;
 	}
-	var domNode = this.document.createElement(tag);
+	const domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	// Assign classes
 	this.assignDomNodeClasses();
 	// Add our event handler
-	$tw.utils.each(this.types,function(type) {
-		domNode.addEventListener(type,function(event) {
-			var selector = self.getAttribute("selector"),
-				matchSelector = self.getAttribute("matchSelector"),
-				actions = self.getAttribute("$"+type) || self.getAttribute("actions-"+type),
-				stopPropagation = self.getAttribute("stopPropagation","onaction"),
-				selectedNode = event.target,
-				selectedNodeRect,
-				catcherNodeRect,
-				variables = {};
+	$tw.utils.each(this.types,(type) => {
+		domNode.addEventListener(type,(event) => {
+			const selector = self.getAttribute("selector");
+			const matchSelector = self.getAttribute("matchSelector");
+			const actions = self.getAttribute(`$${type}`) || self.getAttribute(`actions-${type}`);
+			const stopPropagation = self.getAttribute("stopPropagation","onaction");
+			let selectedNode = event.target;
+			let selectedNodeRect;
+			let catcherNodeRect;
+			let variables = {};
 			// Firefox can fire dragover and dragenter events on text nodes instead of their parents
 			if(selectedNode.nodeType === 3) {
 				selectedNode = selectedNode.parentNode;
@@ -88,8 +88,8 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 				}
 				variables["event-type"] = event.type.toString();
 				if(typeof event.detail === "object" && !!event.detail) {
-					$tw.utils.each(event.detail,function(detailValue,detail) {
-						variables["event-detail-" + detail] = detailValue.toString();
+					$tw.utils.each(event.detail,(detailValue,detail) => {
+						variables[`event-detail-${detail}`] = detailValue.toString();
 					});
 				} else if(event.detail) {
 					variables["event-detail"] = event.detail.toString();
@@ -114,10 +114,10 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 EventWidget.prototype.execute = function() {
-	var self = this;
+	const self = this;
 	// Get attributes that require a refresh on change
 	this.types = [];
-	$tw.utils.each(this.attributes,function(value,key) {
+	$tw.utils.each(this.attributes,(value,key) => {
 		if(key.charAt(0) === "$") {
 			self.types.push(key.slice(1));
 		}
@@ -131,7 +131,7 @@ EventWidget.prototype.execute = function() {
 };
 
 EventWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
+	const classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-eventcatcher");
 	this.domNode.className = classes.join(" ");
 };
@@ -140,8 +140,8 @@ EventWidget.prototype.assignDomNodeClasses = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 EventWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		changedAttributesCount = $tw.utils.count(changedAttributes);
+	const changedAttributes = this.computeAttributes();
+	const changedAttributesCount = $tw.utils.count(changedAttributes);
 	if(changedAttributesCount === 1 && changedAttributes["class"]) {
 		this.assignDomNodeClasses();
 	} else if(changedAttributesCount > 0) {

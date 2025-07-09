@@ -13,9 +13,9 @@ Filter operator returning all the selected tiddlers that are untagged
 Export our filter function
 */
 exports.untagged = function(source,operator,options) {
-	var results = [],
-		expected = (operator.prefix === "!");
-	source(function(tiddler,title) {
+	const results = [];
+	const expected = (operator.prefix === "!");
+	source((tiddler,title) => {
 		if(((tiddler && $tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length > 0) === expected) || (!tiddler && !expected)) {
 			results.push(title);
 		}

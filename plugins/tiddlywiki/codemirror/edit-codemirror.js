@@ -9,7 +9,7 @@ Edit-codemirror widget
 
 "use strict";
 
-var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTextWidgetFactory,
-	CodeMirrorEngine = require("$:/plugins/tiddlywiki/codemirror/engine.js").CodeMirrorEngine;
+const {editTextWidgetFactory} = require("$:/core/modules/editor/factory.js");
+const {CodeMirrorEngine} = require("$:/plugins/tiddlywiki/codemirror/engine.js");
 
 exports["edit-codemirror"] = editTextWidgetFactory(CodeMirrorEngine,CodeMirrorEngine);

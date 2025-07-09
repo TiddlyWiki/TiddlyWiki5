@@ -14,7 +14,7 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
+const Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
@@ -24,13 +24,13 @@ Command.prototype.execute = function() {
 	if(this.params.length < 1) {
 		return "Missing plugin name";
 	}
-	var self = this,
-		title = this.params[0],
-		pluginData = this.commander.wiki.getTiddlerDataCached(title);
+	const self = this;
+	const title = this.params[0];
+	const pluginData = this.commander.wiki.getTiddlerDataCached(title);
 	if(!pluginData) {
-		return "Plugin '" + title + "' not found";
+		return `Plugin '${title}' not found`;
 	}
-	$tw.utils.each(pluginData.tiddlers,function(tiddler) {
+	$tw.utils.each(pluginData.tiddlers,(tiddler) => {
 		self.commander.wiki.addTiddler(new $tw.Tiddler(tiddler));
 	});
 	return null;

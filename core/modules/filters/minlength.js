@@ -13,9 +13,9 @@ Filter operator for filtering out titles that don't meet the minimum length in t
 Export our filter function
 */
 exports.minlength = function(source,operator,options) {
-	var results = [],
-		minLength = parseInt(operator.operand || "",10) || 0;
-	source(function(tiddler,title) {
+	const results = [];
+	const minLength = parseInt(operator.operand || "",10) || 0;
+	source((tiddler,title) => {
 		if(title.length >= minLength) {
 			results.push(title);
 		}

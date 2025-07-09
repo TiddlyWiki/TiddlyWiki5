@@ -10,14 +10,14 @@ General purpose comparison operator
 "use strict";
 
 exports.compare = function(source,operator,options) {
-	var suffixes = operator.suffixes || [],
-		type = (suffixes[0] || [])[0],
-		mode = (suffixes[1] || [])[0],
-		typeFn = $tw.utils.makeCompareFunction(type,{defaultType: "number"}),
-		modeFn = modes[mode] || modes.eq,
-		invert = operator.prefix === "!",
-		results = [];
-	source(function(tiddler,title) {
+	const suffixes = operator.suffixes || [];
+	const type = (suffixes[0] || [])[0];
+	const mode = (suffixes[1] || [])[0];
+	const typeFn = $tw.utils.makeCompareFunction(type,{defaultType: "number"});
+	const modeFn = modes[mode] || modes.eq;
+	const invert = operator.prefix === "!";
+	const results = [];
+	source((tiddler,title) => {
 		if(modeFn(typeFn(title,operator.operand)) !== invert) {
 			results.push(title);
 		}
@@ -26,10 +26,10 @@ exports.compare = function(source,operator,options) {
 };
 
 var modes = {
-	"eq": function(value) {return value === 0;},
-	"ne": function(value) {return value !== 0;},
-	"gteq": function(value) {return value >= 0;},
-	"gt": function(value) {return value > 0;},
-	"lteq": function(value) {return value <= 0;},
-	"lt": function(value) {return value < 0;}
-}
+	"eq"(value) {return value === 0;},
+	"ne"(value) {return value !== 0;},
+	"gteq"(value) {return value >= 0;},
+	"gt"(value) {return value > 0;},
+	"lteq"(value) {return value <= 0;},
+	"lt"(value) {return value < 0;}
+};
