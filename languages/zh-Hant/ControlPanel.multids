@@ -253,3 +253,6 @@ ViewTemplateSubtitle/Caption: 檢視範本副標題
 ViewTemplateSubtitle/Hint: 預設的檢視範本使用此規則級聯，動態選擇範本以顯示條目的副標題。
 ViewTemplateTags/Caption: 檢視範本標籤
 ViewTemplateTags/Hint: 預設的檢視範本使用此規則級聯，動態選擇範本以顯示條目的標籤。
+WikiInformation/Caption: 維基資訊
+WikiInformation/Hint: 此頁面總結了有關此 ~TiddlyWiki 配置的高階資訊。旨在讓使用者能夠快速與他人共享其 ~TiddlyWiki 配置的相關資訊，例如，在其中一個論壇中尋求幫助時。不包含隱私或個人資訊，沒有明確複製和粘貼在其他地方的情況
+WikiInformation/Drag/Caption: 拖動此連結可將此工具複製到另一個維基
