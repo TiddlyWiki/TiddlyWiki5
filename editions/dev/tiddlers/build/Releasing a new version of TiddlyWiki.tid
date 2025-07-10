@@ -15,12 +15,14 @@ type: text/vnd.tiddlywiki
 # Adjust the modified time of HelloThere
 # Make sure ''master'' is fully committed
 
-!! Update Readmes
+!! Update Readmes and release note
 
 # Edit `package.json` to the new version number
 # Run `./bin/readme-bld.sh` to build the readme files
 # Commit the new readme files to ''master''
 # Restore `package.json` to the previous version number
+# Adjust the link for "GitHub for detailed change history of this release" in the release note
+# Add the credits for the new release banner to the release note, including a link to the GitHub instance of the image from the commit history
 
 !! Make New Release
 
@@ -42,6 +44,6 @@ type: text/vnd.tiddlywiki
 # Adjust version number in `package.json`
 # Adjust version number in `bin/build-site.sh`
 # Adjust version number in [[$:/config/OfficialPluginLibrary]] (both in `editions/tw5.com` and `editions/prerelease/tiddlers/system`) and [[$:/config/LocalPluginLibrary]]
-# Adjust new release banner
+# Create temporary new release banner
 # Create the release note for the new release
 # Commit changes to ''master'' and push to ~GitHub
