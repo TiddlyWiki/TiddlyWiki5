@@ -42,15 +42,15 @@ exports.parse = function() {
 	// Move past the macro name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the parameters
-	var params = [];
+	let params = [];
 	if(this.match[3]) {
 		params = $tw.utils.parseParameterDefinition(this.match[4]);
 	}
 	// Is the remainder of the line blank after the parameter close paren?
-	var reEnd;
+	let reEnd;
 	if(this.match[5]) {
 		// If so, it is a multiline definition and the end of the body is marked with \end
-		reEnd = new RegExp("((:?^|\\r?\\n)[^\\S\\n\\r]*\\\\end[^\\S\\n\\r]*(?:" + $tw.utils.escapeRegExp(this.match[2]) + ")?\\s*?(?:$|\\r?\\n))","mg");
+		reEnd = new RegExp(String.raw`((:?^|\r?\n)[^\S\n\r]*\\end[^\S\n\r]*(?:` + $tw.utils.escapeRegExp(this.match[2]) + String.raw`)?\s*?(?:$|\r?\n))`,"mg");
 	} else {
 		// Otherwise, the end of the definition is marked by the end of the line
 		reEnd = /($|\r?\n)/mg;
@@ -59,8 +59,8 @@ exports.parse = function() {
 	}
 	// Find the end of the definition
 	reEnd.lastIndex = this.parser.pos;
-	var text,
-		endMatch = reEnd.exec(this.parser.source);
+	let text;
+	const endMatch = reEnd.exec(this.parser.source);
 	if(endMatch) {
 		text = this.parser.source.substring(this.parser.pos,endMatch.index);
 		this.parser.pos = endMatch.index + endMatch[0].length;
@@ -69,11 +69,11 @@ exports.parse = function() {
 		text = "";
 	}
 	// Save the macro definition
-	var parseTreeNodes = [{
+	const parseTreeNodes = [{
 		type: "set",
 		attributes: {},
 		children: [],
-		params: params
+		params
 	}];
 	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"name",this.match[2]);
 	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"value",text);

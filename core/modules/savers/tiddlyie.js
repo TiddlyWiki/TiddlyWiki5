@@ -12,14 +12,13 @@ Handles saving changes via Internet Explorer BHO extenion (TiddlyIE)
 /*
 Select the appropriate saver module and set it up
 */
-var TiddlyIESaver = function(wiki) {
-};
+const TiddlyIESaver = function(wiki) {};
 
 TiddlyIESaver.prototype.save = function(text,method,callback) {
 	// Check existence of TiddlyIE BHO extension (note: only works after document is complete)
-	if(typeof(window.TiddlyIE) != "undefined") {
+	if(typeof (window.TiddlyIE) != "undefined") {
 		// Get the pathname of this document
-		var pathname = unescape(document.location.pathname);
+		let pathname = unescape(document.location.pathname);
 		// Test for a Windows path of the form /x:/blah...
 		if(/^\/[A-Z]\:\/[^\/]+/i.test(pathname)) {	// ie: ^/[a-z]:/[^/]+ (is this better?: ^/[a-z]:/[^/]+(/[^/]+)*\.[^/]+ )
 			// Remove the leading slash
@@ -30,10 +29,10 @@ TiddlyIESaver.prototype.save = function(text,method,callback) {
 			// Convert slashes to backslashes
 			pathname = pathname.replace(/\//g,"\\");
 			// reconstruct UNC path
-			pathname = "\\\\" + document.location.hostname + pathname;
+			pathname = `\\\\${document.location.hostname}${pathname}`;
 		} else return false;
 		// Prompt the user to save the file
-		window.TiddlyIE.save(pathname, text);
+		window.TiddlyIE.save(pathname,text);
 		// Callback that we succeeded
 		callback(null);
 		return true;

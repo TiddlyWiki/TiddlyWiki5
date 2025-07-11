@@ -52,12 +52,12 @@ exports.init = function(parser) {
 	this.matchRegExp = /([\*#;:>]+)/mg;
 };
 
-var listTypes = {
-	"*": {listTag: "ul", itemTag: "li"},
-	"#": {listTag: "ol", itemTag: "li"},
-	";": {listTag: "dl", itemTag: "dt"},
-	":": {listTag: "dl", itemTag: "dd"},
-	">": {listTag: "blockquote", itemTag: "div"}
+const listTypes = {
+	"*": {listTag: "ul",itemTag: "li"},
+	"#": {listTag: "ol",itemTag: "li"},
+	";": {listTag: "dl",itemTag: "dt"},
+	":": {listTag: "dl",itemTag: "dd"},
+	">": {listTag: "blockquote",itemTag: "div"}
 };
 
 /*
@@ -65,26 +65,26 @@ Parse the most recent match
 */
 exports.parse = function() {
 	// Array of parse tree nodes for the previous row of the list
-	var listStack = [];
+	const listStack = [];
 	// Cycle through the items in the list
 	while(true) {
 		// Match the list marker
-		var reMatch = /([\*#;:>]+)/mg;
+		const reMatch = /([\*#;:>]+)/mg;
 		reMatch.lastIndex = this.parser.pos;
-		var start = this.parser.pos;
-		var match = reMatch.exec(this.parser.source);
+		const start = this.parser.pos;
+		const match = reMatch.exec(this.parser.source);
 		if(!match || match.index !== this.parser.pos) {
 			break;
 		}
 		// Check whether the list type of the top level matches
-		var listInfo = listTypes[match[0].charAt(0)];
+		let listInfo = listTypes[match[0].charAt(0)];
 		if(listStack.length > 0 && listStack[0].tag !== listInfo.listTag) {
 			break;
 		}
 		// Move past the list marker
 		this.parser.pos = match.index + match[0].length;
 		// Walk through the list markers for the current row
-		for(var t=0; t<match[0].length; t++) {
+		for(let t = 0;t < match[0].length;t++) {
 			listInfo = listTypes[match[0].charAt(t)];
 			// Remove any stacked up element if we can't re-use it because the list type doesn't match
 			if(listStack.length > t && listStack[t].tag !== listInfo.listTag) {
@@ -92,7 +92,7 @@ exports.parse = function() {
 			}
 			// Construct the list element or reuse the previous one at this level
 			if(listStack.length <= t) {
-				var listElement = {
+				const listElement = {
 					type: "element",
 					tag: listInfo.listTag,
 					children: [
@@ -100,16 +100,16 @@ exports.parse = function() {
 							type: "element",
 							tag: listInfo.itemTag,
 							children: [],
-							start: start,
+							start,
 							end: this.parser.pos,
 						}
 					],
-					start: start,
+					start,
 					end: this.parser.pos,
 				};
 				// Link this list element into the last child item of the parent list item
 				if(t) {
-					var prevListItem = listStack[t-1].children[listStack[t-1].children.length-1];
+					const prevListItem = listStack[t - 1].children[listStack[t - 1].children.length - 1];
 					prevListItem.children.push(listElement);
 				}
 				// Save this element in the stack
@@ -119,7 +119,7 @@ exports.parse = function() {
 					type: "element",
 					tag: listInfo.itemTag,
 					children: [],
-					start: start,
+					start,
 					end: this.parser.pos,
 				});
 			}
@@ -128,16 +128,16 @@ exports.parse = function() {
 			listStack.splice(match[0].length,listStack.length - match[0].length);
 		}
 		// Process the body of the list item into the last list item
-		var classStart = this.parser.pos;
-		var lastListChildren = listStack[listStack.length-1].children,
-			lastListItem = lastListChildren[lastListChildren.length-1],
-			classes = this.parser.parseClasses();
-		var classEnd = this.parser.pos;
+		const classStart = this.parser.pos;
+		const lastListChildren = listStack[listStack.length - 1].children;
+		const lastListItem = lastListChildren[lastListChildren.length - 1];
+		const classes = this.parser.parseClasses();
+		const classEnd = this.parser.pos;
 		this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
-		var tree = this.parser.parseInlineRun(/(\r?\n)/mg);
-		lastListItem.children.push.apply(lastListItem.children,tree);
+		const tree = this.parser.parseInlineRun(/(\r?\n)/mg);
+		lastListItem.children.push(...tree);
 		lastListItem.end = this.parser.pos;
-		listStack[listStack.length-1].end = this.parser.pos;
+		listStack[listStack.length - 1].end = this.parser.pos;
 		if(classes.length > 0) {
 			$tw.utils.addClassToParseTreeNode(lastListItem,classes.join(" "));
 			lastListItem.attributes.class.start = classStart;

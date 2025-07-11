@@ -14,7 +14,7 @@ exports.info = {
 	synchronous: false
 };
 
-var Command = function(params,commander,callback) {
+const Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
@@ -24,16 +24,16 @@ Command.prototype.execute = function() {
 	if(this.params.length < 2) {
 		return "Missing filename";
 	}
-	var self = this,
-		fs = require("fs"),
-		path = require("path"),
-		title = this.params[0],
-		filename = path.resolve(this.commander.outputPath,this.params[1]),
-		type = this.params[2] || "text/html",
-		template = this.params[3],
-		name = this.params[4],
-		value = this.params[5],
-		variables = {};
+	const self = this;
+	const fs = require("fs");
+	const path = require("path");
+	let title = this.params[0];
+	const filename = path.resolve(this.commander.outputPath,this.params[1]);
+	const type = this.params[2] || "text/html";
+	const template = this.params[3];
+	const name = this.params[4];
+	const value = this.params[5];
+	const variables = {};
 	$tw.utils.createFileDirectories(filename);
 	if(template) {
 		variables.currentTiddler = title;
@@ -43,7 +43,7 @@ Command.prototype.execute = function() {
 	if(name && value) {
 		variables[name] = value;
 	}
-	fs.writeFile(filename,this.commander.wiki.renderTiddler(type,title,{variables: variables}),"utf8",function(err) {
+	fs.writeFile(filename,this.commander.wiki.renderTiddler(type,title,{variables}),"utf8",(err) => {
 		self.callback(err);
 	});
 	return null;

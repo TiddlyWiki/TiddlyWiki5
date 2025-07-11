@@ -13,17 +13,17 @@ Filter operator for substituting variables and embedded filter expressions with 
 Export our filter function
 */
 exports.substitute = function(source,operator,options) {
-	var results = [],
-		operands = [];
-	$tw.utils.each(operator.operands,function(operand,index){
+	const results = [];
+	const operands = [];
+	$tw.utils.each(operator.operands,(operand,index) => {
 		operands.push({
 			name: (index + 1).toString(),
 			value: operand
 		});
 	});
-	source(function(tiddler,title) {
+	source((tiddler,title) => {
 		if(title) {
-			results.push(options.wiki.getSubstitutedText(title,options.widget,{substitutions:operands}));
+			results.push(options.wiki.getSubstitutedText(title,options.widget,{substitutions: operands}));
 		}
 	});
 	return results;

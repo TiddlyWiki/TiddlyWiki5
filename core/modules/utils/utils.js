@@ -9,7 +9,7 @@ Various static utility functions.
 
 "use strict";
 
-var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
+const base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
 
 /*
 Display a message, in colour if we're on a terminal
@@ -21,9 +21,9 @@ exports.log = function(text,colour) {
 exports.terminalColour = function(colour) {
 	if(!$tw.browser && $tw.node && process.stdout.isTTY) {
 		if(colour) {
-			var code = exports.terminalColourLookup[colour];
+			const code = exports.terminalColourLookup[colour];
 			if(code) {
-				return "\x1b[" + code + "m";
+				return `\x1b[${code}m`;
 			}
 		} else {
 			return "\x1b[0m"; // Cancel colour
@@ -57,26 +57,26 @@ exports.logTable = function(data) {
 	if(console.table) {
 		console.table(data);
 	} else {
-		$tw.utils.each(data,function(value,name) {
-			console.log(name + ": " + value);
+		$tw.utils.each(data,(value,name) => {
+			console.log(`${name}: ${value}`);
 		});
 	}
-}
+};
 
 /*
 Return the integer represented by the str (string).
 Return the dflt (default) parameter if str is not a base-10 number.
 */
 exports.getInt = function(str,deflt) {
-	var i = parseInt(str,10);
+	const i = parseInt(str,10);
 	return isNaN(i) ? deflt : i;
-}
+};
 
 /*
 Repeatedly replaces a substring within a string. Like String.prototype.replace, but without any of the default special handling of $ sequences in the replace string
 */
 exports.replaceString = function(text,search,replace) {
-	return text.replace(search,function() {
+	return text.replace(search,() => {
 		return replace;
 	});
 };
@@ -85,8 +85,8 @@ exports.replaceString = function(text,search,replace) {
 Repeats a string
 */
 exports.repeat = function(str,count) {
-	var result = "";
-	for(var t=0;t<count;t++) {
+	let result = "";
+	for(let t = 0;t < count;t++) {
 		result += str;
 	}
 	return result;
@@ -96,7 +96,7 @@ exports.repeat = function(str,count) {
 Check if a string starts with another string
 */
 exports.startsWith = function(str,search) {
-	return str.substring(0, search.length) === search;
+	return str.substring(0,search.length) === search;
 };
 
 /*
@@ -112,7 +112,7 @@ Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-j
 */
 exports.trim = function(str) {
 	if(typeof str === "string") {
-		return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+		return str.replace(/^\s\s*/,'').replace(/\s\s*$/,'');
 	} else {
 		return str;
 	}
@@ -121,12 +121,12 @@ exports.trim = function(str) {
 exports.trimPrefix = function(str,unwanted) {
 	if(typeof str === "string" && typeof unwanted === "string") {
 		if(unwanted === "") {
-			return str.replace(/^\s\s*/, '');
+			return str.replace(/^\s\s*/,'');
 		} else {
 			// Safely regexp-escape the unwanted text
-			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
-			var regex = new RegExp('^(' + unwanted + ')+');
-			return str.replace(regex, '');
+			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g,String.raw`\$&`);
+			const regex = new RegExp(`^(${unwanted})+`);
+			return str.replace(regex,'');
 		}
 	} else {
 		return str;
@@ -136,12 +136,12 @@ exports.trimPrefix = function(str,unwanted) {
 exports.trimSuffix = function(str,unwanted) {
 	if(typeof str === "string" && typeof unwanted === "string") {
 		if(unwanted === "") {
-			return str.replace(/\s\s*$/, '');
+			return str.replace(/\s\s*$/,'');
 		} else {
 			// Safely regexp-escape the unwanted text
-			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
-			var regex = new RegExp('(' + unwanted + ')+$');
-			return str.replace(regex, '');
+			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g,String.raw`\$&`);
+			const regex = new RegExp(`(${unwanted})+$`);
+			return str.replace(regex,'');
 		}
 	} else {
 		return str;
@@ -152,22 +152,22 @@ exports.trimSuffix = function(str,unwanted) {
 Convert a string to sentence case (ie capitalise first letter)
 */
 exports.toSentenceCase = function(str) {
-	return (str || "").replace(/^\S/, function(c) {return c.toUpperCase();});
-}
+	return (str || "").replace(/^\S/,(c) => {return c.toUpperCase();});
+};
 
 /*
 Convert a string to title case (ie capitalise each initial letter)
 */
 exports.toTitleCase = function(str) {
-	return (str || "").replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
-}
+	return (str || "").replace(/(^|\s)\S/g,(c) => {return c.toUpperCase();});
+};
 
 /*
 Find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string
 */
 exports.findPrecedingLineBreak = function(text,pos) {
-	var result = text.lastIndexOf("\n",pos - 1);
+	let result = text.lastIndexOf("\n",pos - 1);
 	if(result === -1) {
 		result = 0;
 	} else {
@@ -184,7 +184,7 @@ Find the line break following a given position in a string
 */
 exports.findFollowingLineBreak = function(text,pos) {
 	// Cut to just past the following line break, or to the end of the text
-	var result = text.indexOf("\n",pos);
+	let result = text.indexOf("\n",pos);
 	if(result === -1) {
 		result = text.length;
 	} else {
@@ -206,7 +206,7 @@ exports.count = function(object) {
 Determine whether an array-item is an object-property
 */
 exports.hopArray = function(object,array) {
-	for(var i=0; i<array.length; i++) {
+	for(let i = 0;i < array.length;i++) {
 		if($tw.utils.hop(object,array[i])) {
 			return true;
 		}
@@ -220,9 +220,9 @@ Remove entries from an array
 	value: a single value to remove, or an array of values to remove
 */
 exports.removeArrayEntries = function(array,value) {
-	var t,p;
+	let t; let p;
 	if($tw.utils.isArray(value)) {
-		for(t=0; t<value.length; t++) {
+		for(t = 0;t < value.length;t++) {
 			p = array.indexOf(value[t]);
 			if(p !== -1) {
 				array.splice(p,1);
@@ -241,8 +241,8 @@ exports.removeArrayEntries = function(array,value) {
 Check whether any members of a hashmap are present in another hashmap
 */
 exports.checkDependencies = function(dependencies,changes) {
-	var hit = false;
-	$tw.utils.each(changes,function(change,title) {
+	let hit = false;
+	$tw.utils.each(changes,(change,title) => {
 		if($tw.utils.hop(dependencies,title)) {
 			hit = true;
 		}
@@ -251,9 +251,9 @@ exports.checkDependencies = function(dependencies,changes) {
 };
 
 exports.extend = function(object /* [, src] */) {
-	$tw.utils.each(Array.prototype.slice.call(arguments, 1), function(source) {
+	$tw.utils.each(Array.prototype.slice.call(arguments,1),(source) => {
 		if(source) {
-			for(var property in source) {
+			for(const property in source) {
 				object[property] = source[property];
 			}
 		}
@@ -262,10 +262,10 @@ exports.extend = function(object /* [, src] */) {
 };
 
 exports.deepCopy = function(object) {
-	var result,t;
+	let result; let t;
 	if($tw.utils.isArray(object)) {
 		// Copy arrays
-		result = object.slice(0);
+		result = [...object];
 	} else if(typeof object === "object") {
 		result = {};
 		for(t in object) {
@@ -280,7 +280,7 @@ exports.deepCopy = function(object) {
 };
 
 exports.extendDeepCopy = function(object,extendedProperties) {
-	var result = $tw.utils.deepCopy(object),t;
+	const result = $tw.utils.deepCopy(object); let t;
 	for(t in extendedProperties) {
 		if(extendedProperties[t] !== undefined) {
 			result[t] = $tw.utils.deepCopy(extendedProperties[t]);
@@ -290,7 +290,7 @@ exports.extendDeepCopy = function(object,extendedProperties) {
 };
 
 exports.deepFreeze = function deepFreeze(object) {
-	var property, key;
+	let property; let key;
 	if(object) {
 		Object.freeze(object);
 		for(key in object) {
@@ -307,30 +307,30 @@ exports.slowInSlowOut = function(t) {
 };
 
 exports.formatTitleString = function(template,options) {
-	var base = options.base || "",
-		separator = options.separator || "",
-		counter = options.counter || "";
-	var result = "",
-		t = template,
-		matches = [
-			[/^\$basename\$/i, function() {
-				return base;
-			}],
-			[/^\$count:(\d+)\$/i, function(match) {
-				return $tw.utils.pad(counter,match[1]);
-			}],
-			[/^\$separator\$/i, function() {
-				return separator;
-			}],
-			[/^\$count\$/i, function() {
-				return counter + "";
-			}]
-		];
-	while(t.length){
-		var matchString = "",
-			found = false;
-		$tw.utils.each(matches, function(m) {
-			var match = m[0].exec(t);
+	const base = options.base || "";
+	const separator = options.separator || "";
+	const counter = options.counter || "";
+	let result = "";
+	let t = template;
+	const matches = [
+		[/^\$basename\$/i,function() {
+			return base;
+		}],
+		[/^\$count:(\d+)\$/i,function(match) {
+			return $tw.utils.pad(counter,match[1]);
+		}],
+		[/^\$separator\$/i,function() {
+			return separator;
+		}],
+		[/^\$count\$/i,function() {
+			return `${counter}`;
+		}]
+	];
+	while(t.length) {
+		var matchString = "";
+		var found = false;
+		$tw.utils.each(matches,(m) => {
+			const match = m[0].exec(t);
 			if(match) {
 				found = true;
 				matchString = m[1].call(null,match);
@@ -350,129 +350,129 @@ exports.formatTitleString = function(template,options) {
 };
 
 exports.formatDateString = function(date,template) {
-	var result = "",
-		t = template,
-		matches = [
-			[/^TIMESTAMP/, function() {
-				return date.getTime();
-			}],
-			[/^0hh12/, function() {
-				return $tw.utils.pad($tw.utils.getHours12(date));
-			}],
-			[/^wYYYY/, function() {
-				return $tw.utils.pad($tw.utils.getYearForWeekNo(date),4);
-			}],
-			[/^hh12/, function() {
-				return $tw.utils.getHours12(date);
-			}],
-			[/^DDth/, function() {
-				return date.getDate() + $tw.utils.getDaySuffix(date);
-			}],
-			[/^YYYY/, function() {
-				return $tw.utils.pad(date.getFullYear(),4);
-			}],
-			[/^aYYYY/, function() {
-				return $tw.utils.pad(Math.abs(date.getFullYear()),4);
-			}],
-			[/^\{era:([^,\|}]*)\|([^}\|]*)\|([^}]*)\}/, function(match) {
-				var year = date.getFullYear();
-				return year === 0 ? match[2] : (year < 0 ? match[1] : match[3]);
-			}],
-			[/^0hh/, function() {
-				return $tw.utils.pad(date.getHours());
-			}],
-			[/^0mm/, function() {
-				return $tw.utils.pad(date.getMinutes());
-			}],
-			[/^0ss/, function() {
-				return $tw.utils.pad(date.getSeconds());
-			}],
-			[/^0XXX/, function() {
-				return $tw.utils.pad(date.getMilliseconds(),3);
-			}],
-			[/^0DD/, function() {
-				return $tw.utils.pad(date.getDate());
-			}],
-			[/^0MM/, function() {
-				return $tw.utils.pad(date.getMonth()+1);
-			}],
-			[/^0WW/, function() {
-				return $tw.utils.pad($tw.utils.getWeek(date));
-			}],
-			[/^0ddddd/, function() {
-				return $tw.utils.pad(Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24),3);
-			}],
-			[/^ddddd/, function() {
-				return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-			}],
-			[/^dddd/, function() {
-				return [7,1,2,3,4,5,6][date.getDay()];
-			}],
-			[/^ddd/, function() {
-				return $tw.language.getString("Date/Short/Day/" + date.getDay());
-			}],
-			[/^mmm/, function() {
-				return $tw.language.getString("Date/Short/Month/" + (date.getMonth() + 1));
-			}],
-			[/^DDD/, function() {
-				return $tw.language.getString("Date/Long/Day/" + date.getDay());
-			}],
-			[/^MMM/, function() {
-				return $tw.language.getString("Date/Long/Month/" + (date.getMonth() + 1));
-			}],
-			[/^TZD/, function() {
-				var tz = date.getTimezoneOffset(),
-				atz = Math.abs(tz);
-				return (tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60)) + ':' + $tw.utils.pad(atz % 60);
-			}],
-			[/^wYY/, function() {
-				return $tw.utils.pad($tw.utils.getYearForWeekNo(date) - 2000);
-			}],
-			[/^[ap]m/, function() {
-				return $tw.utils.getAmPm(date).toLowerCase();
-			}],
-			[/^hh/, function() {
-				return date.getHours();
-			}],
-			[/^mm/, function() {
-				return date.getMinutes();
-			}],
-			[/^ss/, function() {
-				return date.getSeconds();
-			}],
-			[/^XXX/, function() {
-				return date.getMilliseconds();
-			}],
-			[/^[AP]M/, function() {
-				return $tw.utils.getAmPm(date).toUpperCase();
-			}],
-			[/^DD/, function() {
-				return date.getDate();
-			}],
-			[/^MM/, function() {
-				return date.getMonth() + 1;
-			}],
-			[/^WW/, function() {
-				return $tw.utils.getWeek(date);
-			}],
-			[/^YY/, function() {
-				return $tw.utils.pad(date.getFullYear() - 2000);
-			}]
-		];
+	let result = "";
+	let t = template;
+	const matches = [
+		[/^TIMESTAMP/,function() {
+			return date.getTime();
+		}],
+		[/^0hh12/,function() {
+			return $tw.utils.pad($tw.utils.getHours12(date));
+		}],
+		[/^wYYYY/,function() {
+			return $tw.utils.pad($tw.utils.getYearForWeekNo(date),4);
+		}],
+		[/^hh12/,function() {
+			return $tw.utils.getHours12(date);
+		}],
+		[/^DDth/,function() {
+			return date.getDate() + $tw.utils.getDaySuffix(date);
+		}],
+		[/^YYYY/,function() {
+			return $tw.utils.pad(date.getFullYear(),4);
+		}],
+		[/^aYYYY/,function() {
+			return $tw.utils.pad(Math.abs(date.getFullYear()),4);
+		}],
+		[/^\{era:([^,\|}]*)\|([^}\|]*)\|([^}]*)\}/,function(match) {
+			const year = date.getFullYear();
+			return year === 0 ? match[2] : (year < 0 ? match[1] : match[3]);
+		}],
+		[/^0hh/,function() {
+			return $tw.utils.pad(date.getHours());
+		}],
+		[/^0mm/,function() {
+			return $tw.utils.pad(date.getMinutes());
+		}],
+		[/^0ss/,function() {
+			return $tw.utils.pad(date.getSeconds());
+		}],
+		[/^0XXX/,function() {
+			return $tw.utils.pad(date.getMilliseconds(),3);
+		}],
+		[/^0DD/,function() {
+			return $tw.utils.pad(date.getDate());
+		}],
+		[/^0MM/,function() {
+			return $tw.utils.pad(date.getMonth() + 1);
+		}],
+		[/^0WW/,function() {
+			return $tw.utils.pad($tw.utils.getWeek(date));
+		}],
+		[/^0ddddd/,function() {
+			return $tw.utils.pad(Math.floor((date - new Date(date.getFullYear(),0,0)) / 1000 / 60 / 60 / 24),3);
+		}],
+		[/^ddddd/,function() {
+			return Math.floor((date - new Date(date.getFullYear(),0,0)) / 1000 / 60 / 60 / 24);
+		}],
+		[/^dddd/,function() {
+			return [7,1,2,3,4,5,6][date.getDay()];
+		}],
+		[/^ddd/,function() {
+			return $tw.language.getString(`Date/Short/Day/${date.getDay()}`);
+		}],
+		[/^mmm/,function() {
+			return $tw.language.getString(`Date/Short/Month/${date.getMonth() + 1}`);
+		}],
+		[/^DDD/,function() {
+			return $tw.language.getString(`Date/Long/Day/${date.getDay()}`);
+		}],
+		[/^MMM/,function() {
+			return $tw.language.getString(`Date/Long/Month/${date.getMonth() + 1}`);
+		}],
+		[/^TZD/,function() {
+			const tz = date.getTimezoneOffset();
+			const atz = Math.abs(tz);
+			return `${(tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60))}:${$tw.utils.pad(atz % 60)}`;
+		}],
+		[/^wYY/,function() {
+			return $tw.utils.pad($tw.utils.getYearForWeekNo(date) - 2000);
+		}],
+		[/^[ap]m/,function() {
+			return $tw.utils.getAmPm(date).toLowerCase();
+		}],
+		[/^hh/,function() {
+			return date.getHours();
+		}],
+		[/^mm/,function() {
+			return date.getMinutes();
+		}],
+		[/^ss/,function() {
+			return date.getSeconds();
+		}],
+		[/^XXX/,function() {
+			return date.getMilliseconds();
+		}],
+		[/^[AP]M/,function() {
+			return $tw.utils.getAmPm(date).toUpperCase();
+		}],
+		[/^DD/,function() {
+			return date.getDate();
+		}],
+		[/^MM/,function() {
+			return date.getMonth() + 1;
+		}],
+		[/^WW/,function() {
+			return $tw.utils.getWeek(date);
+		}],
+		[/^YY/,function() {
+			return $tw.utils.pad(date.getFullYear() - 2000);
+		}]
+	];
 	// If the user wants everything in UTC, shift the datestamp
 	// Optimize for format string that essentially means
 	// 'return raw UTC (tiddlywiki style) date string.'
-	if(t.indexOf("[UTC]") == 0 ) {
+	if(t.indexOf("[UTC]") == 0) {
 		if(t == "[UTC]YYYY0MM0DD0hh0mm0ssXXX")
 			return $tw.utils.stringifyDate(date || new Date());
-		var offset = date.getTimezoneOffset() ; // in minutes
-		date = new Date(date.getTime()+offset*60*1000) ;
-		t = t.substr(5) ;
+		const offset = date.getTimezoneOffset(); // in minutes
+		date = new Date(date.getTime() + offset * 60 * 1000);
+		t = t.substr(5);
 	}
-	while(t.length){
+	while(t.length) {
 		var matchString = "";
-		$tw.utils.each(matches, function(m) {
-			var match = m[0].exec(t);
+		$tw.utils.each(matches,(m) => {
+			const match = m[0].exec(t);
 			if(match) {
 				matchString = m[1].call(null,match);
 				t = t.substr(match[0].length);
@@ -491,28 +491,28 @@ exports.formatDateString = function(date,template) {
 };
 
 exports.getAmPm = function(date) {
-	return $tw.language.getString("Date/Period/" + (date.getHours() >= 12 ? "pm" : "am"));
+	return $tw.language.getString(`Date/Period/${date.getHours() >= 12 ? "pm" : "am"}`);
 };
 
 exports.getDaySuffix = function(date) {
-	return $tw.language.getString("Date/DaySuffix/" + date.getDate());
+	return $tw.language.getString(`Date/DaySuffix/${date.getDate()}`);
 };
 
 exports.getWeek = function(date) {
-	var dt = new Date(date.getTime());
-	var d = dt.getDay();
+	const dt = new Date(date.getTime());
+	let d = dt.getDay();
 	if(d === 0) {
 		d = 7; // JavaScript Sun=0, ISO Sun=7
 	}
 	dt.setTime(dt.getTime() + (4 - d) * 86400000);// shift day to Thurs of same week to calculate weekNo
-	var x = new Date(dt.getFullYear(),0,1);
-	var n = Math.floor((dt.getTime() - x.getTime()) / 86400000);
+	const x = new Date(dt.getFullYear(),0,1);
+	const n = Math.floor((dt.getTime() - x.getTime()) / 86400000);
 	return Math.floor(n / 7) + 1;
 };
 
 exports.getYearForWeekNo = function(date) {
-	var dt = new Date(date.getTime());
-	var d = dt.getDay();
+	const dt = new Date(date.getTime());
+	let d = dt.getDay();
 	if(d === 0) {
 		d = 7; // JavaScript Sun=0, ISO Sun=7
 	}
@@ -521,8 +521,8 @@ exports.getYearForWeekNo = function(date) {
 };
 
 exports.getHours12 = function(date) {
-	var h = date.getHours();
-	return h > 12 ? h-12 : ( h > 0 ? h : 12 );
+	const h = date.getHours();
+	return h > 12 ? h - 12 : (h > 0 ? h : 12);
 };
 
 /*
@@ -533,28 +533,29 @@ Returns an object with these members:
 	updatePeriod: time in millisecond until the string will be inaccurate
 */
 exports.getRelativeDate = function(delta) {
-	var futurep = false;
+	let futurep = false;
 	if(delta < 0) {
 		delta = -1 * delta;
 		futurep = true;
 	}
-	var units = [
-		{name: "Years",   duration:      365 * 24 * 60 * 60 * 1000},
-		{name: "Months",  duration: (365/12) * 24 * 60 * 60 * 1000},
-		{name: "Days",    duration:            24 * 60 * 60 * 1000},
-		{name: "Hours",   duration:                 60 * 60 * 1000},
-		{name: "Minutes", duration:                      60 * 1000},
-		{name: "Seconds", duration:                           1000}
+	const units = [
+		{name: "Years",duration: 365 * 24 * 60 * 60 * 1000},
+		{name: "Months",duration: (365 / 12) * 24 * 60 * 60 * 1000},
+		{name: "Days",duration: 24 * 60 * 60 * 1000},
+		{name: "Hours",duration: 60 * 60 * 1000},
+		{name: "Minutes",duration: 60 * 1000},
+		{name: "Seconds",duration: 1000}
 	];
-	for(var t=0; t<units.length; t++) {
-		var result = Math.floor(delta / units[t].duration);
+	for(let t = 0;t < units.length;t++) {
+		const result = Math.floor(delta / units[t].duration);
 		if(result >= 2) {
 			return {
-				delta: delta,
+				delta,
 				description: $tw.language.getString(
-					"RelativeDate/" + (futurep ? "Future" : "Past") + "/" + units[t].name,
-					{variables:
-						{period: result.toString()}
+					`RelativeDate/${futurep ? "Future" : "Past"}/${units[t].name}`,
+					{
+						variables:
+							{period: result.toString()}
 					}
 				),
 				updatePeriod: units[t].duration
@@ -562,11 +563,12 @@ exports.getRelativeDate = function(delta) {
 		}
 	}
 	return {
-		delta: delta,
+		delta,
 		description: $tw.language.getString(
-			"RelativeDate/" + (futurep ? "Future" : "Past") + "/Second",
-			{variables:
-				{period: "1"}
+			`RelativeDate/${futurep ? "Future" : "Past"}/Second`,
+			{
+				variables:
+					{period: "1"}
 			}
 		),
 		updatePeriod: 1000
@@ -593,9 +595,9 @@ exports.htmlTextEncode = function(s) {
 
 // Converts all HTML entities to their character equivalents
 exports.entityDecode = function(s) {
-	var converter = String.fromCodePoint || String.fromCharCode,
-		e = s.substr(1,s.length-2), // Strip the & and the ;
-		c;
+	const converter = String.fromCodePoint || String.fromCharCode;
+	const e = s.substr(1,s.length - 2); // Strip the & and the ;
+	let c;
 	if(e.charAt(0) === "#") {
 		if(e.charAt(1) === "x" || e.charAt(1) === "X") {
 			c = parseInt(e.substr(2),16);
@@ -630,17 +632,17 @@ exports.unescapeLineBreaks = function(s) {
  */
 // Copied from peg.js, thanks to David Majda
 exports.escape = function(ch) {
-	var charCode = ch.charCodeAt(0);
+	const charCode = ch.charCodeAt(0);
 	if(charCode <= 0xFF) {
-		return '\\x' + $tw.utils.pad(charCode.toString(16).toUpperCase());
+		return String.raw`\x` + $tw.utils.pad(charCode.toString(16).toUpperCase());
 	} else {
-		return '\\u' + $tw.utils.pad(charCode.toString(16).toUpperCase(),4);
+		return String.raw`\u` + $tw.utils.pad(charCode.toString(16).toUpperCase(),4);
 	}
 };
 
 // Turns a string into a legal JavaScript string
 // Copied from peg.js, thanks to David Majda
-exports.stringify = function(s, rawUnicode) {
+exports.stringify = function(s,rawUnicode) {
 	/*
 	* ECMA-262, 5th ed., 7.8.4: All characters may appear literally in a string
 	* literal except for the closing quote character, backslash, carriage return,
@@ -649,31 +651,31 @@ exports.stringify = function(s, rawUnicode) {
 	*
 	* For portability, we also escape all non-ASCII characters.
 	*/
-	var regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
+	const regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
 	return (s || "")
-		.replace(/\\/g, '\\\\')            // backslash
-		.replace(/"/g, '\\"')              // double quote character
-		.replace(/'/g, "\\'")              // single quote character
-		.replace(/\r/g, '\\r')             // carriage return
-		.replace(/\n/g, '\\n')             // line feed
-		.replace(regex, exports.escape);   // non-ASCII characters
+		.replace(/\\/g,'\\\\')            // backslash
+		.replace(/"/g,String.raw`\"`)              // double quote character
+		.replace(/'/g,String.raw`\'`)              // single quote character
+		.replace(/\r/g,String.raw`\r`)             // carriage return
+		.replace(/\n/g,String.raw`\n`)             // line feed
+		.replace(regex,exports.escape);   // non-ASCII characters
 };
 
 // Turns a string into a legal JSON string
 // Derived from peg.js, thanks to David Majda
-exports.jsonStringify = function(s, rawUnicode) {
+exports.jsonStringify = function(s,rawUnicode) {
 	// See http://www.json.org/
-	var regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
+	const regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
 	return (s || "")
-		.replace(/\\/g, '\\\\')            // backslash
-		.replace(/"/g, '\\"')              // double quote character
-		.replace(/\r/g, '\\r')             // carriage return
-		.replace(/\n/g, '\\n')             // line feed
-		.replace(/\x08/g, '\\b')           // backspace
-		.replace(/\x0c/g, '\\f')           // formfeed
-		.replace(/\t/g, '\\t')             // tab
-		.replace(regex,function(s) {
-			return '\\u' + $tw.utils.pad(s.charCodeAt(0).toString(16).toUpperCase(),4);
+		.replace(/\\/g,'\\\\')            // backslash
+		.replace(/"/g,String.raw`\"`)              // double quote character
+		.replace(/\r/g,String.raw`\r`)             // carriage return
+		.replace(/\n/g,String.raw`\n`)             // line feed
+		.replace(/\x08/g,String.raw`\b`)           // backspace
+		.replace(/\x0c/g,String.raw`\f`)           // formfeed
+		.replace(/\t/g,String.raw`\t`)             // tab
+		.replace(regex,(s) => {
+			return String.raw`\u` + $tw.utils.pad(s.charCodeAt(0).toString(16).toUpperCase(),4);
 		}); // non-ASCII characters
 };
 
@@ -681,7 +683,7 @@ exports.jsonStringify = function(s, rawUnicode) {
 Escape the RegExp special characters with a preceding backslash
 */
 exports.escapeRegExp = function(s) {
-    return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, '\\$&');
+	return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g,String.raw`\$&`);
 };
 
 /*
@@ -689,19 +691,19 @@ Extended version of encodeURIComponent that encodes additional characters includ
 those that are illegal within filepaths on various platforms including Windows
 */
 exports.encodeURIComponentExtended = function(s) {
-	return encodeURIComponent(s).replace(/[!'()*]/g,function(c) {
-		return "%" + c.charCodeAt(0).toString(16).toUpperCase();
+	return encodeURIComponent(s).replace(/[!'()*]/g,(c) => {
+		return `%${c.charCodeAt(0).toString(16).toUpperCase()}`;
 	});
 };
 
 // Checks whether a link target is external, i.e. not a tiddler title
 exports.isLinkExternal = function(to) {
-	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|obsidian|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
+	const externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|obsidian|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 
 exports.nextTick = function(fn) {
-/*global window: false */
+	/*global window: false */
 	if(typeof process === "undefined") {
 		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
 		window.setTimeout(fn,0);
@@ -714,7 +716,7 @@ exports.nextTick = function(fn) {
 Convert a hyphenated CSS property name into a camel case one
 */
 exports.unHyphenateCss = function(propName) {
-	return propName.replace(/-([a-z])/gi, function(match0,match1) {
+	return propName.replace(/-([a-z])/gi,(match0,match1) => {
 		return match1.toUpperCase();
 	});
 };
@@ -723,8 +725,8 @@ exports.unHyphenateCss = function(propName) {
 Convert a camelcase CSS property name into a dashed one ("backgroundColor" --> "background-color")
 */
 exports.hyphenateCss = function(propName) {
-	return propName.replace(/([A-Z])/g, function(match0,match1) {
-		return "-" + match1.toLowerCase();
+	return propName.replace(/([A-Z])/g,(match0,match1) => {
+		return `-${match1.toLowerCase()}`;
 	});
 };
 
@@ -742,9 +744,9 @@ Returns an object with the following fields, all optional:
 */
 exports.parseTextReference = function(textRef) {
 	// Separate out the title, field name and/or JSON indices
-	var reTextRef = /(?:(.*?)!!(.+))|(?:(.*?)##(.+))|(.*)/mg,
-		match = reTextRef.exec(textRef),
-		result = {};
+	const reTextRef = /(?:(.*?)!!(.+))|(?:(.*?)##(.+))|(.*)/mg;
+	const match = reTextRef.exec(textRef);
+	const result = {};
 	if(match && reTextRef.lastIndex === textRef.length) {
 		// Return the parts
 		if(match[1]) {
@@ -764,7 +766,7 @@ exports.parseTextReference = function(textRef) {
 		}
 	} else {
 		// If we couldn't parse it
-		result.title = textRef
+		result.title = textRef;
 	}
 	return result;
 };
@@ -789,9 +791,9 @@ exports.extractVersionInfo = function() {
 	if($tw.packageInfo) {
 		return $tw.packageInfo.version;
 	} else {
-		var metatags = document.getElementsByTagName("meta");
-		for(var t=0; t<metatags.length; t++) {
-			var m = metatags[t];
+		const metatags = document.getElementsByTagName("meta");
+		for(let t = 0;t < metatags.length;t++) {
+			const m = metatags[t];
 			if(m.name === "tiddlywiki-version") {
 				return m.content;
 			}
@@ -812,7 +814,7 @@ Hash a string to a number
 Derived from http://stackoverflow.com/a/15710692
 */
 exports.hashString = function(str) {
-	return str.split("").reduce(function(a,b) {
+	return str.split("").reduce((a,b) => {
 		a = ((a << 5) - a) + b.charCodeAt(0);
 		return a & a;
 	},0);
@@ -822,32 +824,32 @@ exports.hashString = function(str) {
 Cryptographic hash function as used by sha256 filter operator
 options.length .. number of characters returned defaults to 64
 */
-exports.sha256 = function(str, options) {
-	options = options || {}
+exports.sha256 = function(str,options) {
+	options = options || {};
 	return $tw.sjcl.codec.hex.fromBits($tw.sjcl.hash.sha256.hash(str)).substr(0,options.length || 64);
-}
+};
 
 /*
 Base64 utility functions that work in either browser or Node.js
 */
 if(typeof window !== 'undefined') {
-	exports.btoa = function(binstr) { return window.btoa(binstr); }
-	exports.atob = function(b64) { return window.atob(b64); }
+	exports.btoa = function(binstr) {return window.btoa(binstr);};
+	exports.atob = function(b64) {return window.atob(b64);};
 } else {
 	exports.btoa = function(binstr) {
-		return Buffer.from(binstr, 'binary').toString('base64');
-	}
+		return Buffer.from(binstr,'binary').toString('base64');
+	};
 	exports.atob = function(b64) {
-		return Buffer.from(b64, 'base64').toString('binary');
-	}
+		return Buffer.from(b64,'base64').toString('binary');
+	};
 }
 
 /*
 Decode a base64 string
 */
 exports.base64Decode = function(string64,binary,urlsafe) {
-	var encoded = urlsafe ? string64.replace(/_/g,'/').replace(/-/g,'+') : string64;
-	if(binary) return exports.atob(encoded)
+	const encoded = urlsafe ? string64.replace(/_/g,'/').replace(/-/g,'+') : string64;
+	if(binary) return exports.atob(encoded);
 	else return base64utf8.base64.decode.call(base64utf8,encoded);
 };
 
@@ -855,7 +857,7 @@ exports.base64Decode = function(string64,binary,urlsafe) {
 Encode a string to base64
 */
 exports.base64Encode = function(string64,binary,urlsafe) {
-	var encoded;
+	let encoded;
 	if(binary) encoded = exports.btoa(string64);
 	else encoded = base64utf8.base64.encode.call(base64utf8,string64);
 	if(urlsafe) {
@@ -868,9 +870,9 @@ exports.base64Encode = function(string64,binary,urlsafe) {
 Convert a hashmap into a tiddler dictionary format sequence of name:value pairs
 */
 exports.makeTiddlerDictionary = function(data) {
-	var output = [];
-	for(var name in data) {
-		output.push(name + ": " + data[name]);
+	const output = [];
+	for(const name in data) {
+		output.push(`${name}: ${data[name]}`);
 	}
 	return output.join("\n");
 };
@@ -879,17 +881,17 @@ exports.makeTiddlerDictionary = function(data) {
 High resolution microsecond timer for profiling
 */
 exports.timer = function(base) {
-	var m;
+	let m;
 	if($tw.node) {
-		var r = process.hrtime();
-		m =  r[0] * 1e3 + (r[1] / 1e6);
+		const r = process.hrtime();
+		m = r[0] * 1e3 + (r[1] / 1e6);
 	} else if(window.performance) {
 		m = performance.now();
 	} else {
 		m = Date.now();
 	}
 	if(typeof base !== "undefined") {
-		m = m - base;
+		m -= base;
 	}
 	return m;
 };
@@ -899,9 +901,9 @@ Convert text and content type to a data URI
 */
 exports.makeDataUri = function(text,type,_canonical_uri) {
 	type = type || "text/vnd.tiddlywiki";
-	var typeInfo = $tw.config.contentTypeInfo[type] || $tw.config.contentTypeInfo["text/plain"],
-		isBase64 = typeInfo.encoding === "base64",
-		parts = [];
+	const typeInfo = $tw.config.contentTypeInfo[type] || $tw.config.contentTypeInfo["text/plain"];
+	const isBase64 = typeInfo.encoding === "base64";
+	const parts = [];
 	if(_canonical_uri) {
 		parts.push(_canonical_uri);
 	} else {
@@ -920,9 +922,9 @@ Useful for finding out the fully escaped CSS selector equivalent to a given tag.
 $tw.utils.tagToCssSelector("$:/tags/Stylesheet") --> tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet
 */
 exports.tagToCssSelector = function(tagName) {
-	return "tc-tagged-" + encodeURIComponent(tagName).replace(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^`{\|}~,]/mg,function(c) {
-		return "\\" + c;
-	});
+	return `tc-tagged-${encodeURIComponent(tagName).replace(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^`{\|}~,]/mg,(c) => {
+		return `\\${c}`;
+	})}`;
 };
 
 /*
@@ -947,7 +949,7 @@ exports.strEndsWith = function(str,ending,position) {
 			position = str.length;
 		}
 		position -= ending.length;
-		var lastIndex = str.indexOf(ending, position);
+		const lastIndex = str.indexOf(ending,position);
 		return lastIndex !== -1 && lastIndex === position;
 	}
 };
@@ -956,10 +958,10 @@ exports.strEndsWith = function(str,ending,position) {
 Return system information useful for debugging
 */
 exports.getSystemInfo = function(str,ending,position) {
-	var results = [],
-		save = function(desc,value) {
-			results.push(desc + ": " + value);
-		};
+	const results = [];
+	const save = function(desc,value) {
+		results.push(`${desc}: ${value}`);
+	};
 	if($tw.browser) {
 		save("User Agent",navigator.userAgent);
 		save("Online Status",window.navigator.onLine);
@@ -979,59 +981,59 @@ exports.parseInt = function(str) {
 };
 
 exports.stringifyNumber = function(num) {
-	return num + "";
+	return `${num}`;
 };
 
 exports.makeCompareFunction = function(type,options) {
 	options = options || {};
 	// set isCaseSensitive to true if not defined in options
-	var isCaseSensitive = (options.isCaseSensitive === false) ? false : true,
-		gt = options.invert ? -1 : +1,
-		lt = options.invert ? +1 : -1,
-		compare = function(a,b) {
-			if(a > b) {
-				return gt ;
-			} else if(a < b) {
-				return lt;
-			} else {
-				return 0;
-			}
+	const isCaseSensitive = options.isCaseSensitive !== false;
+	const gt = options.invert ? -1 : +1;
+	const lt = options.invert ? +1 : -1;
+	const compare = function(a,b) {
+		if(a > b) {
+			return gt;
+		} else if(a < b) {
+			return lt;
+		} else {
+			return 0;
+		}
+	};
+	const types = {
+		"number"(a,b) {
+			return compare($tw.utils.parseNumber(a),$tw.utils.parseNumber(b));
 		},
-		types = {
-			"number": function(a,b) {
-				return compare($tw.utils.parseNumber(a),$tw.utils.parseNumber(b));
-			},
-			"integer": function(a,b) {
-				return compare($tw.utils.parseInt(a),$tw.utils.parseInt(b));
-			},
-			"string": function(a,b) {
-				if(!isCaseSensitive) {
-					a = a.toLowerCase();
-					b = b.toLowerCase();
-				}
-				return compare("" + a,"" + b);
-			},
-			"date": function(a,b) {
-				var dateA = $tw.utils.parseDate(a),
-					dateB = $tw.utils.parseDate(b);
-				if(!isFinite(dateA)) {
-					dateA = new Date(0);
-				}
-				if(!isFinite(dateB)) {
-					dateB = new Date(0);
-				}
-				return compare(dateA,dateB);
-			},
-			"version": function(a,b) {
-				return $tw.utils.compareVersions(a,b);
-			},
-			"alphanumeric": function(a,b) {
-				if(!isCaseSensitive) {
-					a = a.toLowerCase();
-					b = b.toLowerCase();
-				}
-				return options.invert ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+		"integer"(a,b) {
+			return compare($tw.utils.parseInt(a),$tw.utils.parseInt(b));
+		},
+		"string"(a,b) {
+			if(!isCaseSensitive) {
+				a = a.toLowerCase();
+				b = b.toLowerCase();
 			}
-		};
+			return compare(`${a}`,`${b}`);
+		},
+		"date"(a,b) {
+			let dateA = $tw.utils.parseDate(a);
+			let dateB = $tw.utils.parseDate(b);
+			if(!isFinite(dateA)) {
+				dateA = new Date(0);
+			}
+			if(!isFinite(dateB)) {
+				dateB = new Date(0);
+			}
+			return compare(dateA,dateB);
+		},
+		"version"(a,b) {
+			return $tw.utils.compareVersions(a,b);
+		},
+		"alphanumeric"(a,b) {
+			if(!isCaseSensitive) {
+				a = a.toLowerCase();
+				b = b.toLowerCase();
+			}
+			return options.invert ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+		}
+	};
 	return (types[type] || types[options.defaultType] || types.number);
 };

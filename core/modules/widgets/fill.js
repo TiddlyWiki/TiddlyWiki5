@@ -9,9 +9,9 @@ Sub-widget used by the transclude widget for specifying values for slots within 
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var FillWidget = function(parseTreeNode,options) {
+const FillWidget = function(parseTreeNode,options) {
 	// Initialise
 	this.initialise(parseTreeNode,options);
 };

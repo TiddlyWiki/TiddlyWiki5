@@ -10,13 +10,13 @@ Serve tiddlers over http
 "use strict";
 
 if($tw.node) {
-	var util = require("util"),
-		fs = require("fs"),
-		url = require("url"),
-		path = require("path"),
-		querystring = require("querystring"),
-		crypto = require("crypto"),
-		zlib = require("zlib");
+	const util = require("util");
+	var fs = require("fs");
+	var url = require("url");
+	var path = require("path");
+	var querystring = require("querystring");
+	var crypto = require("crypto");
+	var zlib = require("zlib");
 }
 
 /*
@@ -26,7 +26,7 @@ options: variables - optional hashmap of variables to set (a misnomer - they are
 		 wiki - reference to wiki object
 */
 function Server(options) {
-	var self = this;
+	const self = this;
 	this.routes = options.routes || [];
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
@@ -34,7 +34,7 @@ function Server(options) {
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
-		for(var variable in options.variables) {
+		for(const variable in options.variables) {
 			if(options.variables[variable]) {
 				this.variables[variable] = options.variables[variable];
 			}
@@ -49,7 +49,7 @@ function Server(options) {
 	// Initialize browser-caching
 	this.enableBrowserCache = this.get("use-browser-cache") === "yes";
 	// Initialise authorization
-	var authorizedUserName;
+	let authorizedUserName;
 	if(this.get("username") && this.get("password")) {
 		authorizedUserName = this.get("username");
 	} else if(this.get("credentials")) {
@@ -60,26 +60,26 @@ function Server(options) {
 	this.authorizationPrincipals = {
 		readers: (this.get("readers") || authorizedUserName).split(",").map($tw.utils.trim),
 		writers: (this.get("writers") || authorizedUserName).split(",").map($tw.utils.trim)
-	}
+	};
 	if(this.get("admin") || authorizedUserName !== "(anon)") {
-		this.authorizationPrincipals["admin"] = (this.get("admin") || authorizedUserName).split(',').map($tw.utils.trim)
+		this.authorizationPrincipals["admin"] = (this.get("admin") || authorizedUserName).split(',').map($tw.utils.trim);
 	}
 	// Load and initialise authenticators
-	$tw.modules.forEachModuleOfType("authenticator", function(title,authenticatorDefinition) {
+	$tw.modules.forEachModuleOfType("authenticator",(title,authenticatorDefinition) => {
 		// console.log("Loading authenticator " + title);
 		self.addAuthenticator(authenticatorDefinition.AuthenticatorClass);
 	});
 	// Load route handlers
-	$tw.modules.forEachModuleOfType("route", function(title,routeDefinition) {
+	$tw.modules.forEachModuleOfType("route",(title,routeDefinition) => {
 		// console.log("Loading server route " + title);
 		self.addRoute(routeDefinition);
 	});
 	// Initialise the http vs https
 	this.listenOptions = null;
 	this.protocol = "http";
-	var tlsKeyFilepath = this.get("tls-key"),
-		tlsCertFilepath = this.get("tls-cert"),
-		tlsPassphrase = this.get("tls-passphrase");
+	const tlsKeyFilepath = this.get("tls-key");
+	const tlsCertFilepath = this.get("tls-cert");
+	const tlsPassphrase = this.get("tls-passphrase");
 	if(tlsCertFilepath && tlsKeyFilepath) {
 		this.listenOptions = {
 			key: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsKeyFilepath),"utf8"),
@@ -91,7 +91,7 @@ function Server(options) {
 	this.transport = require(this.protocol);
 	// Name the server and init the boot state
 	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
-	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
+	this.boot.origin = this.get("origin") ? this.get("origin") : `${this.protocol}://${this.get("host")}:${this.get("port")}`;
 	this.boot.pathPrefix = this.get("path-prefix") || "";
 }
 
@@ -109,7 +109,7 @@ encoding: the encoding of the data to send (passed to the end method of the resp
 */
 function sendResponse(request,response,statusCode,headers,data,encoding) {
 	if(this.enableBrowserCache && (statusCode == 200)) {
-		var hash = crypto.createHash('md5');
+		const hash = crypto.createHash('md5');
 		// Put everything into the hash that could change and invalidate the data that
 		// the browser already stored. The headers the data and the encoding.
 		hash.update(data);
@@ -117,21 +117,21 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 		if(encoding) {
 			hash.update(encoding);
 		}
-		var contentDigest = hash.digest("hex");
+		const contentDigest = hash.digest("hex");
 		// RFC 7232 section 2.3 mandates for the etag to be enclosed in quotes
-		headers["Etag"] = '"' + contentDigest + '"';
+		headers["Etag"] = `"${contentDigest}"`;
 		headers["Cache-Control"] = "max-age=0, must-revalidate";
 		// Check if any of the hashes contained within the if-none-match header
 		// matches the current hash.
 		// If one matches, do not send the data but tell the browser to use the
 		// cached data.
 		// We do not implement "*" as it makes no sense here.
-		var ifNoneMatch = request.headers["if-none-match"];
+		const ifNoneMatch = request.headers["if-none-match"];
 		if(ifNoneMatch) {
-			var matchParts = ifNoneMatch.split(",").map(function(etag) {
-				return etag.replace(/^[ "]+|[ "]+$/g, "");
+			const matchParts = ifNoneMatch.split(",").map((etag) => {
+				return etag.replace(/^[ "]+|[ "]+$/g,"");
 			});
-			if(matchParts.indexOf(contentDigest) != -1) {
+			if(matchParts.includes(contentDigest)) {
 				response.writeHead(304,headers);
 				response.end();
 				return;
@@ -151,7 +151,7 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 	this, and we may just as well use the async versions.
 	*/
 	if(this.enableGzip && (data.length > 2048)) {
-		var acceptEncoding = request.headers["accept-encoding"] || "";
+		const acceptEncoding = request.headers["accept-encoding"] || "";
 		if(/\bdeflate\b/.test(acceptEncoding)) {
 			headers["Content-Encoding"] = "deflate";
 			data = zlib.deflateSync(data);
@@ -191,10 +191,10 @@ Server.prototype.addRoute = function(route) {
 
 Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 	// Instantiate and initialise the authenticator
-	var authenticator = new AuthenticatorClass(this),
-		result = authenticator.init();
+	const authenticator = new AuthenticatorClass(this);
+	const result = authenticator.init();
 	if(typeof result === "string") {
-		$tw.utils.error("Error: " + result);
+		$tw.utils.error(`Error: ${result}`);
 	} else if(result) {
 		// Only use the authenticator if it initialised successfully
 		this.authenticators.push(authenticator);
@@ -202,11 +202,11 @@ Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 };
 
 Server.prototype.findMatchingRoute = function(request,state) {
-	for(var t=0; t<this.routes.length; t++) {
-		var potentialRoute = this.routes[t],
-			pathRegExp = potentialRoute.path,
-			pathname = state.urlInfo.pathname,
-			match;
+	for(let t = 0;t < this.routes.length;t++) {
+		const potentialRoute = this.routes[t];
+		const pathRegExp = potentialRoute.path;
+		let {pathname} = state.urlInfo;
+		var match;
 		if(state.pathPrefix) {
 			if(pathname.substr(0,state.pathPrefix.length) === state.pathPrefix) {
 				pathname = pathname.substr(state.pathPrefix.length) || "/";
@@ -219,7 +219,7 @@ Server.prototype.findMatchingRoute = function(request,state) {
 		}
 		if(match && request.method === potentialRoute.method) {
 			state.params = [];
-			for(var p=1; p<match.length; p++) {
+			for(let p = 1;p < match.length;p++) {
 				state.params.push(match[p]);
 			}
 			return potentialRoute;
@@ -241,15 +241,15 @@ Server.prototype.methodMappings = {
 Check whether a given user is authorized for the specified authorizationType ("readers" or "writers"). Pass null or undefined as the username to check for anonymous access
 */
 Server.prototype.isAuthorized = function(authorizationType,username) {
-	var principals = this.authorizationPrincipals[authorizationType] || [];
-	return principals.indexOf("(anon)") !== -1 || (username && (principals.indexOf("(authenticated)") !== -1 || principals.indexOf(username) !== -1));
-}
+	const principals = this.authorizationPrincipals[authorizationType] || [];
+	return principals.includes("(anon)") || (username && (principals.includes("(authenticated)") || principals.includes(username)));
+};
 
 Server.prototype.requestHandler = function(request,response,options) {
 	options = options || {};
 	// Compose the state object
-	var self = this;
-	var state = {};
+	const self = this;
+	const state = {};
 	state.wiki = options.wiki || self.wiki;
 	state.boot = options.boot || self.boot;
 	state.server = self;
@@ -261,7 +261,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
 	// Check for the CSRF header if this is a write
 	if(!this.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
-		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
+		response.writeHead(403,`'X-Requested-With' header required to login to '${this.servername}'`);
 		response.end();
 		return;
 	}
@@ -276,12 +276,12 @@ Server.prototype.requestHandler = function(request,response,options) {
 	}
 	// Authorize with the authenticated username
 	if(!this.isAuthorized(state.authorizationType,state.authenticatedUsername)) {
-		response.writeHead(401,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
+		response.writeHead(401,`'${state.authenticatedUsername}' is not authorized to access '${this.servername}'`);
 		response.end();
 		return;
 	}
 	// Find the route that matches this path
-	var route = self.findMatchingRoute(request,state);
+	const route = self.findMatchingRoute(request,state);
 	// Optionally output debug info
 	if(self.get("debug-level") !== "none") {
 		console.log("Request path:",JSON.stringify(state.urlInfo));
@@ -302,24 +302,24 @@ Server.prototype.requestHandler = function(request,response,options) {
 		// Set the encoding for the incoming request
 		request.setEncoding("utf8");
 		var data = "";
-		request.on("data",function(chunk) {
+		request.on("data",(chunk) => {
 			data += chunk.toString();
 		});
-		request.on("end",function() {
+		request.on("end",() => {
 			state.data = data;
 			route.handler(request,response,state);
 		});
 	} else if(route.bodyFormat === "buffer") {
 		var data = [];
-		request.on("data",function(chunk) {
+		request.on("data",(chunk) => {
 			data.push(chunk);
 		});
-		request.on("end",function() {
+		request.on("end",() => {
 			state.data = Buffer.concat(data);
 			route.handler(request,response,state);
-		})
+		});
 	} else {
-		response.writeHead(400,"Invalid bodyFormat " + route.bodyFormat + " in route " + route.method + " " + route.path.source);
+		response.writeHead(400,`Invalid bodyFormat ${route.bodyFormat} in route ${route.method} ${route.path.source}`);
 		response.end();
 	}
 };
@@ -331,7 +331,7 @@ host: optional host address (falls back to value of "host" variable)
 prefix: optional prefix (falls back to value of "path-prefix" variable)
 */
 Server.prototype.listen = function(port,host,prefix) {
-	var self = this;
+	const self = this;
 	// Handle defaults for port and host
 	port = port || this.get("port");
 	host = host || this.get("host");
@@ -341,29 +341,29 @@ Server.prototype.listen = function(port,host,prefix) {
 		port = process.env[port] || 8080;
 	}
 	// Warn if required plugins are missing
-	var missing = [];
-	for (var index=0; index<this.requiredPlugins.length; index++) {
-		if (!this.wiki.getTiddler(this.requiredPlugins[index])) {
+	const missing = [];
+	for(let index = 0;index < this.requiredPlugins.length;index++) {
+		if(!this.wiki.getTiddler(this.requiredPlugins[index])) {
 			missing.push(this.requiredPlugins[index]);
 		}
 	}
 	if(missing.length > 0) {
-		var error = "Warning: Plugin(s) required for client-server operation are missing.\n"+
-			"\""+ missing.join("\", \"")+"\"";
+		const error = `Warning: Plugin(s) required for client-server operation are missing.\n` +
+			`"${missing.join("\", \"")}"`;
 		$tw.utils.warning(error);
 	}
 	// Create the server
-	var server;
+	let server;
 	if(this.listenOptions) {
 		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
 	} else {
 		server = this.transport.createServer(this.requestHandler.bind(this));
 	}
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
-	server.on("listening",function() {
-		var address = server.address(),
-			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix;
-		$tw.utils.log("Serving on " + url,"brown/orange");
+	server.on("listening",() => {
+		const address = server.address();
+		const url = `${self.protocol}://${address.family === "IPv6" ? `[${address.address}]` : address.address}:${address.port}${prefix}`;
+		$tw.utils.log(`Serving on ${url}`,"brown/orange");
 		$tw.utils.log("(press ctrl-C to exit)","red");
 	});
 	// Listen

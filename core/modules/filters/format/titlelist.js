@@ -10,8 +10,8 @@ module-type: formatfilteroperator
 Export our filter function
 */
 exports.titlelist = function(source,operand,options) {
-	var results = [];
-	source(function(tiddler,title) {
+	const results = [];
+	source((tiddler,title) => {
 		if(title && title.length) {
 			results.push($tw.utils.stringifyList([title]));
 		}

@@ -13,8 +13,8 @@ Filter operator for replacing any titles with a constant
 Export our filter function
 */
 exports.then = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
+	const results = [];
+	source((tiddler,title) => {
 		results.push(operator.operand);
 	});
 	return results;

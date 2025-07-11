@@ -38,13 +38,13 @@ Find the next link from the current position
 */
 exports.findNextLink = function(source,pos) {
 	// A regexp for finding candidate links
-	var reLookahead = /(\[ext\[)/g;
+	const reLookahead = /(\[ext\[)/g;
 	// Find the next candidate
 	reLookahead.lastIndex = pos;
-	var match = reLookahead.exec(source);
+	let match = reLookahead.exec(source);
 	while(match) {
 		// Try to parse the candidate as a link
-		var link = this.parseLink(source,match.index);
+		const link = this.parseLink(source,match.index);
 		// Return success
 		if(link) {
 			return link;
@@ -61,19 +61,19 @@ exports.findNextLink = function(source,pos) {
 Look for an link at the specified position. Returns null if not found, otherwise returns {type: "element", tag: "a", attributes: [], isSelfClosing:, start:, end:,}
 */
 exports.parseLink = function(source,pos) {
-	var token,
-		textNode = {
-			type: "text"
+	let token;
+	const textNode = {
+		type: "text"
+	};
+	const node = {
+		type: "element",
+		tag: "a",
+		start: pos,
+		attributes: {
+			"class": {type: "string",value: "tc-tiddlylink-external"},
 		},
-		node = {
-			type: "element",
-			tag: "a",
-			start: pos,
-			attributes: {
-				"class": {type: "string", value: "tc-tiddlylink-external"},
-			},
-			children: [textNode]
-		};
+		children: [textNode]
+	};
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for the `[ext[`
@@ -83,17 +83,17 @@ exports.parseLink = function(source,pos) {
 	}
 	pos = token.end;
 	// Look ahead for the terminating `]]`
-	var closePos = source.indexOf("]]",pos);
+	const closePos = source.indexOf("]]",pos);
 	if(closePos === -1) {
 		return null;
 	}
 	// Look for a `|` separating the tooltip
-	var splitPos = source.indexOf("|",pos);
+	let splitPos = source.indexOf("|",pos);
 	if(splitPos === -1 || splitPos > closePos) {
 		splitPos = null;
 	}
 	// Pull out the tooltip and URL
-	var tooltip, URL, urlStart;
+	let tooltip; let URL; let urlStart;
 	textNode.start = pos;
 	if(splitPos) {
 		urlStart = splitPos + 1;
@@ -106,9 +106,9 @@ exports.parseLink = function(source,pos) {
 		textNode.text = URL;
 		textNode.end = closePos;
 	}
-	node.attributes.href = {type: "string", value: URL, start: urlStart, end: closePos};
-	node.attributes.target = {type: "string", value: "_blank"};
-	node.attributes.rel = {type: "string", value: "noopener noreferrer"};
+	node.attributes.href = {type: "string",value: URL,start: urlStart,end: closePos};
+	node.attributes.target = {type: "string",value: "_blank"};
+	node.attributes.rel = {type: "string",value: "noopener noreferrer"};
 	// Update the end position
 	node.end = closePos + 2;
 	return node;

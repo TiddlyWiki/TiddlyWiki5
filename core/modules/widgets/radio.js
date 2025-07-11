@@ -9,8 +9,8 @@ Set a field or index at a given tiddler via radio buttons
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
-var RadioWidget = function(parseTreeNode,options) {
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
+const RadioWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -29,11 +29,11 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
-	var isChecked = this.getValue() === this.radioValue;
+	const isChecked = this.getValue() === this.radioValue;
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
 	this.labelDomNode.setAttribute("class",
-		"tc-radio " + this.radioClass + (isChecked ? " tc-radio-selected" : "")
+		`tc-radio ${this.radioClass}${isChecked ? " tc-radio-selected" : ""}`
 	);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","radio");
@@ -45,7 +45,7 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 		this.inputDomNode.checked = true;
 	}
 	if(this.tabIndex) {
-		this.inputDomNode.setAttribute("tabindex", this.tabIndex);
+		this.inputDomNode.setAttribute("tabindex",this.tabIndex);
 	}
 	if(this.isDisabled === "yes") {
 		this.inputDomNode.setAttribute("disabled",true);
@@ -55,7 +55,7 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	this.labelDomNode.appendChild(this.spanDomNode);
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
-		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
+		{name: "change",handlerObject: this,handlerMethod: "handleChangeEvent"}
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.labelDomNode,nextSibling);
@@ -64,8 +64,8 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 };
 
 RadioWidget.prototype.getValue = function() {
-	var value,
-		tiddler = this.wiki.getTiddler(this.radioTitle);
+	let value;
+	const tiddler = this.wiki.getTiddler(this.radioTitle);
 	if(tiddler) {
 		if(this.radioIndex) {
 			value = this.wiki.extractTiddlerDataItem(this.radioTitle,this.radioIndex,this.radioDefault);
@@ -82,8 +82,8 @@ RadioWidget.prototype.setValue = function() {
 	if(this.radioIndex) {
 		this.wiki.setText(this.radioTitle,"",this.radioIndex,this.radioValue);
 	} else {
-		var tiddler = this.wiki.getTiddler(this.radioTitle),
-			addition = {};
+		const tiddler = this.wiki.getTiddler(this.radioTitle);
+		const addition = {};
 		addition[this.radioField] = this.radioValue;
 		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),{title: this.radioTitle},tiddler,addition,this.wiki.getModificationFields()));
 	}
@@ -121,7 +121,7 @@ RadioWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 RadioWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(($tw.utils.count(changedAttributes) > 0)) {
 		this.refreshSelf();
 		return true;

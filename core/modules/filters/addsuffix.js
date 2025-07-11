@@ -15,8 +15,8 @@ and macro substitution isn't available.
 Export our filter function
 */
 exports.addsuffix = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
+	const results = [];
+	source((tiddler,title) => {
 		results.push(title + operator.operand);
 	});
 	return results;

@@ -13,11 +13,11 @@ Filter operator that selects tiddlers with a modified date field on the same day
 Export our filter function
 */
 exports.sameday = function(source,operator,options) {
-	var results = [],
-		fieldName = operator.suffix || "modified",
-		targetDate = (new Date($tw.utils.parseDate(operator.operand))).setHours(0,0,0,0);
+	const results = [];
+	const fieldName = operator.suffix || "modified";
+	const targetDate = (new Date($tw.utils.parseDate(operator.operand))).setHours(0,0,0,0);
 	// Function to convert a date/time to a date integer
-	source(function(tiddler,title) {
+	source((tiddler,title) => {
 		if(tiddler) {
 			if(tiddler.getFieldDay(fieldName) === targetDate) {
 				results.push(title);

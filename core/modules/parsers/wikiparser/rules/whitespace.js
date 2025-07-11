@@ -30,14 +30,14 @@ exports.init = function(parser) {
 Parse the most recent match
 */
 exports.parse = function() {
-	var self = this;
+	const self = this;
 	// Move past the pragma invocation
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse whitespace delimited tokens terminated by a line break
-	var reMatch = /[^\S\n]*(\S+)|(\r?\n)/mg,
-		tokens = [];
+	const reMatch = /[^\S\n]*(\S+)|(\r?\n)/mg;
+	const tokens = [];
 	reMatch.lastIndex = this.parser.pos;
-	var match = reMatch.exec(this.parser.source);
+	let match = reMatch.exec(this.parser.source);
 	while(match && match.index === this.parser.pos) {
 		this.parser.pos = reMatch.lastIndex;
 		// Exit if we've got the line break
@@ -52,14 +52,16 @@ exports.parse = function() {
 		match = reMatch.exec(this.parser.source);
 	}
 	// Process the tokens
-	$tw.utils.each(tokens,function(token) {
+	$tw.utils.each(tokens,(token) => {
 		switch(token) {
-			case "trim":
+			case "trim": {
 				self.parser.configTrimWhiteSpace = true;
 				break;
-			case "notrim":
+			}
+			case "notrim": {
 				self.parser.configTrimWhiteSpace = false;
 				break;
+			}
 		}
 	});
 	// No parse tree nodes to return

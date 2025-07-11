@@ -10,8 +10,8 @@ Filter operator for slugifying a tiddler title
 "use strict";
 
 exports.slugify = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
+	const results = [];
+	source((tiddler,title) => {
 		results.push(options.wiki.slugify(title));
 	});
 	return results;

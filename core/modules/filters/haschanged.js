@@ -13,15 +13,15 @@ Filter operator returns tiddlers from the list that have a non-zero changecount.
 Export our filter function
 */
 exports.haschanged = function(source,operator,options) {
-	var results = [];
+	const results = [];
 	if(operator.prefix === "!") {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(options.wiki.getChangeCount(title) === 0) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(options.wiki.getChangeCount(title) > 0) {
 				results.push(title);
 			}

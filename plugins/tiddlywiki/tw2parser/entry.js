@@ -12,15 +12,15 @@ note that macros are not connected with the refresh mechanism -use with caution.
 exports.name = "entryof";
 
 exports.params = [
-	{ name: "key" }, { name: "map" }
+	{name: "key"},{name: "map"}
 ];
 /*
 Run the macro
 */
 exports.run = function(key,map) {
 	try {
-		return  JSON.parse(map)[key];
+		return JSON.parse(map)[key];
 	} catch(e) {
 		return "";
 	}
-}
+};

@@ -8,19 +8,19 @@ Filter operators for geospatial lookup
 \*/
 "use strict";
 
-var turf = require("$:/plugins/tiddlywiki/geospatial/turf.js"),
-	geotools = require("$:/plugins/tiddlywiki/geospatial/geotools.js");
+const turf = require("$:/plugins/tiddlywiki/geospatial/turf.js");
+const geotools = require("$:/plugins/tiddlywiki/geospatial/geotools.js");
 
 exports.geolookup = function(source,operator,options) {
 	// Get the GeoJSON object
-	var output = [],
-		jsonObject = $tw.utils.parseJSONSafe(operator.operands[0],null);
+	const output = [];
+	const jsonObject = $tw.utils.parseJSONSafe(operator.operands[0],null);
 	if(jsonObject) {
 		// Process the input points
-		source(function(tiddler,title) {
-			var point = geotools.parsePoint(title),
-				result = getPolygonsContainingPoint(jsonObject,point);
-			output.push(JSON.stringify(result))
+		source((tiddler,title) => {
+			const point = geotools.parsePoint(title);
+			const result = getPolygonsContainingPoint(jsonObject,point);
+			output.push(JSON.stringify(result));
 		});
 	}
 	// Perform the transformation
@@ -30,7 +30,7 @@ exports.geolookup = function(source,operator,options) {
 function getPolygonsContainingPoint(featureCollection,point) {
 	// Filter the GeoJSON feature collection to only include polygon features containing the point
 	const properties = [];
-	turf.featureEach(featureCollection,function(feature) {
+	turf.featureEach(featureCollection,(feature) => {
 		if(feature.geometry.type === "Polygon" && turf.booleanPointInPolygon(point,feature)) {
 			properties.push(feature.properties);
 		}

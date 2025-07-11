@@ -9,9 +9,9 @@ Password widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var PasswordWidget = function(parseTreeNode,options) {
+const PasswordWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -31,14 +31,14 @@ PasswordWidget.prototype.render = function(parent,nextSibling) {
 	// Execute our logic
 	this.execute();
 	// Get the current password
-	var password = $tw.browser ? $tw.utils.getPassword(this.passwordName) || "" : "";
+	const password = $tw.browser ? $tw.utils.getPassword(this.passwordName) || "" : "";
 	// Create our element
-	var domNode = this.document.createElement("input");
+	const domNode = this.document.createElement("input");
 	domNode.setAttribute("type","password");
 	domNode.setAttribute("value",password);
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
-		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
+		{name: "change",handlerObject: this,handlerMethod: "handleChangeEvent"}
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
@@ -47,7 +47,7 @@ PasswordWidget.prototype.render = function(parent,nextSibling) {
 };
 
 PasswordWidget.prototype.handleChangeEvent = function(event) {
-	var password = this.domNodes[0].value;
+	const password = this.domNodes[0].value;
 	return $tw.utils.savePassword(this.passwordName,password);
 };
 
@@ -65,7 +65,7 @@ PasswordWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 PasswordWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.name) {
 		this.refreshSelf();
 		return true;

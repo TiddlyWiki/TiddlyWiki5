@@ -8,7 +8,7 @@ The command which executes jasmine on the command line for TiddlyWiki5
 \*/
 "use strict";
 
-var jasmine = require("./jasmine-plugin.js");
+const jasmine = require("./jasmine-plugin.js");
 
 exports.info = {
 	name: "test",
@@ -16,14 +16,14 @@ exports.info = {
 	namedParameterMode: true
 };
 
-var Command = function(params,commander,callback) {
+const Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
 };
 
 Command.prototype.execute = function() {
-	var specFilter = this.params.spec;
+	const specFilter = this.params.spec;
 	jasmine.runTests(this.callback,specFilter);
 };
 

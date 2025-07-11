@@ -34,7 +34,7 @@ exports.parse = function() {
 	this.parser.pos = this.matchRegExp.lastIndex;
 
 	// Parse the run including the terminator
-	var tree = this.parser.parseInlineRun(/\^\^/mg,{eatTerminator: true});
+	const tree = this.parser.parseInlineRun(/\^\^/mg,{eatTerminator: true});
 
 	// Return the classed span
 	return [{

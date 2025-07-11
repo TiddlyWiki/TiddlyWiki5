@@ -9,7 +9,7 @@ Listen for HTTP requests and serve tiddlers
 
 "use strict";
 
-var Server = require("$:/core/modules/server/server.js").Server;
+const {Server} = require("$:/core/modules/server/server.js");
 
 exports.info = {
 	name: "listen",
@@ -18,24 +18,24 @@ exports.info = {
 	mandatoryParameters: []
 };
 
-var Command = function(params,commander,callback) {
-	var self = this;
+const Command = function(params,commander,callback) {
+	const self = this;
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
 };
 
 Command.prototype.execute = function() {
-	var self = this;
+	const self = this;
 	if(!$tw.boot.wikiTiddlersPath) {
-		$tw.utils.warning("Warning: Wiki folder '" + $tw.boot.wikiPath + "' does not exist or is missing a tiddlywiki.info file");
+		$tw.utils.warning(`Warning: Wiki folder '${$tw.boot.wikiPath}' does not exist or is missing a tiddlywiki.info file`);
 	}
 	// Set up server
 	this.server = new Server({
 		wiki: this.commander.wiki,
 		variables: self.params
 	});
-	var nodeServer = this.server.listen();
+	const nodeServer = this.server.listen();
 	$tw.hooks.invokeHook("th-server-command-post-start",this.server,nodeServer,"tiddlywiki");
 	return null;
 };

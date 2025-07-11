@@ -13,8 +13,8 @@ Filter operator returning all tiddlers that are tagged with the selected tiddler
 Export our filter function
 */
 exports.tagging = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
+	const results = [];
+	source((tiddler,title) => {
 		$tw.utils.pushTop(results,options.wiki.getTiddlersWithTag(title));
 	});
 	return results;

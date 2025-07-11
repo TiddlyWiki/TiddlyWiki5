@@ -13,19 +13,19 @@ Filter operator that selects tiddlers with a specified date field within a speci
 Export our filter function
 */
 exports.days = function(source,operator,options) {
-	var results = [],
-		fieldName = operator.suffix || "modified",
-		dayInterval = (parseInt(operator.operand,10)||0),
-		dayIntervalSign = $tw.utils.sign(dayInterval),
-		targetTimeStamp = (new Date()).setHours(0,0,0,0) + 1000*60*60*24*dayInterval,
-		isWithinDays = function(dateField) {
-			var sign = $tw.utils.sign(targetTimeStamp - (new Date(dateField)).setHours(0,0,0,0));
-			return sign === 0 || sign === dayIntervalSign;
-		};
+	const results = [];
+	const fieldName = operator.suffix || "modified";
+	const dayInterval = (parseInt(operator.operand,10) || 0);
+	const dayIntervalSign = $tw.utils.sign(dayInterval);
+	let targetTimeStamp = (new Date()).setHours(0,0,0,0) + 1000 * 60 * 60 * 24 * dayInterval;
+	const isWithinDays = function(dateField) {
+		const sign = $tw.utils.sign(targetTimeStamp - (new Date(dateField)).setHours(0,0,0,0));
+		return sign === 0 || sign === dayIntervalSign;
+	};
 
 	if(operator.prefix === "!") {
-		targetTimeStamp = targetTimeStamp - 1000*60*60*24*dayIntervalSign;
-		source(function(tiddler,title) {
+		targetTimeStamp -= 1000 * 60 * 60 * 24 * dayIntervalSign;
+		source((tiddler,title) => {
 			if(tiddler && tiddler.fields[fieldName]) {
 				if(!isWithinDays($tw.utils.parseDate(tiddler.fields[fieldName]))) {
 					results.push(title);
@@ -33,7 +33,7 @@ exports.days = function(source,operator,options) {
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(tiddler && tiddler.fields[fieldName]) {
 				if(isWithinDays($tw.utils.parseDate(tiddler.fields[fieldName]))) {
 					results.push(title);

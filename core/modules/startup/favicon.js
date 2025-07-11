@@ -16,13 +16,13 @@ exports.after = ["startup"];
 exports.synchronous = true;
 
 // Favicon tiddler
-var FAVICON_TITLE = "$:/favicon.ico";
+const FAVICON_TITLE = "$:/favicon.ico";
 
 exports.startup = function() {
 	// Set up the favicon
 	setFavicon();
 	// Reset the favicon when the tiddler changes
-	$tw.wiki.addEventListener("change",function(changes) {
+	$tw.wiki.addEventListener("change",(changes) => {
 		if($tw.utils.hop(changes,FAVICON_TITLE)) {
 			setFavicon();
 		}
@@ -30,9 +30,9 @@ exports.startup = function() {
 };
 
 function setFavicon() {
-	var tiddler = $tw.wiki.getTiddler(FAVICON_TITLE);
+	const tiddler = $tw.wiki.getTiddler(FAVICON_TITLE);
 	if(tiddler) {
-		var faviconLink = document.getElementById("faviconLink");
+		const faviconLink = document.getElementById("faviconLink");
 		faviconLink.setAttribute("href",$tw.utils.makeDataUri(tiddler.fields.text,tiddler.fields.type,tiddler.fields._canonical_uri));
 	}
 }

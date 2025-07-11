@@ -16,53 +16,53 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 	additionalTiddlers = additionalTiddlers || [];
 	excludeTiddlers = excludeTiddlers || [];
 	// Get the plugin tiddler
-	var pluginTiddler = $tw.wiki.getTiddler(title);
+	const pluginTiddler = $tw.wiki.getTiddler(title);
 	if(!pluginTiddler) {
-		throw "No such tiddler as " + title;
+		throw `No such tiddler as ${title}`;
 	}
 	// Extract the JSON
-	var jsonPluginTiddler = $tw.utils.parseJSONSafe(pluginTiddler.fields.text,null);
+	const jsonPluginTiddler = $tw.utils.parseJSONSafe(pluginTiddler.fields.text,null);
 	if(!jsonPluginTiddler) {
-		throw "Cannot parse plugin tiddler " + title + "\n" + $tw.language.getString("Error/Caption") + ": " + e;
+		throw `Cannot parse plugin tiddler ${title}\n${$tw.language.getString("Error/Caption")}: ${e}`;
 	}
 	// Get the list of tiddlers
-	var tiddlers = Object.keys(jsonPluginTiddler.tiddlers);
+	const tiddlers = Object.keys(jsonPluginTiddler.tiddlers);
 	// Add the additional tiddlers
 	$tw.utils.pushTop(tiddlers,additionalTiddlers);
 	// Remove any excluded tiddlers
-	for(var t=tiddlers.length-1; t>=0; t--) {
-		if(excludeTiddlers.indexOf(tiddlers[t]) !== -1) {
+	for(let t = tiddlers.length - 1;t >= 0;t--) {
+		if(excludeTiddlers.includes(tiddlers[t])) {
 			tiddlers.splice(t,1);
 		}
 	}
 	// Pack up the tiddlers into a block of JSON
-	var plugins = {};
-	$tw.utils.each(tiddlers,function(title) {
-		var tiddler = $tw.wiki.getTiddler(title),
-			fields = {};
-		$tw.utils.each(tiddler.fields,function (value,name) {
+	const plugins = {};
+	$tw.utils.each(tiddlers,(title) => {
+		const tiddler = $tw.wiki.getTiddler(title);
+		const fields = {};
+		$tw.utils.each(tiddler.fields,(value,name) => {
 			fields[name] = tiddler.getFieldString(name);
 		});
 		plugins[title] = fields;
 	});
 	// Retrieve and bump the version number
-	var pluginVersion = $tw.utils.parseVersion(pluginTiddler.getFieldString("version") || "0.0.0") || {
-			major: "0",
-			minor: "0",
-			patch: "0"
-		};
+	const pluginVersion = $tw.utils.parseVersion(pluginTiddler.getFieldString("version") || "0.0.0") || {
+		major: "0",
+		minor: "0",
+		patch: "0"
+	};
 	pluginVersion.patch++;
-	var version = pluginVersion.major + "." + pluginVersion.minor + "." + pluginVersion.patch;
+	let version = `${pluginVersion.major}.${pluginVersion.minor}.${pluginVersion.patch}`;
 	if(pluginVersion.prerelease) {
-		version += "-" + pluginVersion.prerelease;
+		version += `-${pluginVersion.prerelease}`;
 	}
 	if(pluginVersion.build) {
-		version += "+" + pluginVersion.build;
+		version += `+${pluginVersion.build}`;
 	}
 	// Save the tiddler
-	$tw.wiki.addTiddler(new $tw.Tiddler(pluginTiddler,{text: JSON.stringify({tiddlers: plugins},null,4), version: version}));
+	$tw.wiki.addTiddler(new $tw.Tiddler(pluginTiddler,{text: JSON.stringify({tiddlers: plugins},null,4),version}));
 	// Delete any non-shadow constituent tiddlers
-	$tw.utils.each(tiddlers,function(title) {
+	$tw.utils.each(tiddlers,(title) => {
 		if($tw.wiki.tiddlerExists(title)) {
 			$tw.wiki.deleteTiddler(title);
 		}
@@ -70,5 +70,5 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 	// Trigger an autosave
 	$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki"});
 	// Return a heartwarming confirmation
-	return "Plugin " + title + " successfully saved";
+	return `Plugin ${title} successfully saved`;
 };

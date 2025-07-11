@@ -9,15 +9,15 @@ module-type: command
 
 "use strict";
 
-var async,
-	awsUtils;
+let async;
+let awsUtils;
 
 exports.info = {
 	name: "aws",
 	synchronous: false
 };
 
-var Command = function(params,commander,callback) {
+const Command = function(params,commander,callback) {
 	async = require("$:/plugins/tiddlywiki/async/async.js");
 	awsUtils = require("$:/plugins/tiddlywiki/aws/utils.js");
 	this.params = params;
@@ -26,12 +26,12 @@ var Command = function(params,commander,callback) {
 };
 
 Command.prototype.execute = function() {
-	var self = this,
-		wiki = this.commander.wiki,
-		subCommand = this.params[0],
-		fn = this.subCommands[subCommand];
+	const self = this;
+	const {wiki} = this.commander;
+	const subCommand = this.params[0];
+	const fn = this.subCommands[subCommand];
 	if(!fn) {
-		return this.callback("AWS: Unknown subcommand")
+		return this.callback("AWS: Unknown subcommand");
 	}
 	fn.bind(this)();
 	return null;
@@ -41,20 +41,20 @@ Command.prototype.subCommands = {};
 
 // Set credentials profile
 Command.prototype.subCommands["profile"] = function() {
-	var AWS = require("aws-sdk"),
-		profile = this.params[1],
-		credentials = new AWS.SharedIniFileCredentials({profile: profile});
-	AWS.config.update({credentials: credentials});
+	const AWS = require("aws-sdk");
+	const profile = this.params[1];
+	const credentials = new AWS.SharedIniFileCredentials({profile});
+	AWS.config.update({credentials});
 	this.callback(null);
 };
 
 // Load tiddlers from files in an S3 bucket
 Command.prototype.subCommands["s3-load"] = function() {
-	var self = this,
-		wiki = this.commander.wiki,
-		region = this.params[1],
-		bucket = this.params[2],
-		filepaths = this.params.slice(3);
+	const self = this;
+	const {wiki} = this.commander;
+	const region = this.params[1];
+	const bucket = this.params[2];
+	const filepaths = this.params.slice(3);
 	// Check parameters
 	if(!region || !bucket) {
 		self.callback("Missing parameters");
@@ -62,19 +62,19 @@ Command.prototype.subCommands["s3-load"] = function() {
 	async.eachLimit(
 		filepaths,
 		20,
-		function(filepath,callback) {
-			awsUtils.getFile(region,bucket,filepath,function(err,data) {
+		(filepath,callback) => {
+			awsUtils.getFile(region,bucket,filepath,(err,data) => {
 				if(err) {
 					return callback(err);
 				}
-				var tiddlers = self.commander.wiki.deserializeTiddlers(data.type,data.body,{});
-				$tw.utils.each(tiddlers,function(tiddler) {
+				const tiddlers = self.commander.wiki.deserializeTiddlers(data.type,data.body,{});
+				$tw.utils.each(tiddlers,(tiddler) => {
 					self.commander.wiki.importTiddler(new $tw.Tiddler(tiddler));
 				});
 				callback(null);
 			});
 		},
-		function(err,results) {
+		(err,results) => {
 			self.callback(err,results);
 		}
 	);
@@ -83,17 +83,17 @@ Command.prototype.subCommands["s3-load"] = function() {
 
 // Render a tiddler to an S3 bucket
 Command.prototype.subCommands["s3-rendertiddler"] = function() {
-	var self = this,
-		wiki = this.commander.wiki,
-		title = this.params[1],
-		region = this.params[2],
-		bucket = this.params[3],
-		filename = this.params[4],
-		type = this.params[5] || "text/html",
-		template = this.params[6],
-		zipfilename = this.params[7],
-		saveType = this.params[8] || type,
-		variables = {};
+	const self = this;
+	const {wiki} = this.commander;
+	let title = this.params[1];
+	const region = this.params[2];
+	const bucket = this.params[3];
+	let filename = this.params[4];
+	var type = this.params[5] || "text/html";
+	const template = this.params[6];
+	const zipfilename = this.params[7];
+	const saveType = this.params[8] || type;
+	const variables = {};
 	// Check parameters
 	if(!title || !region || !bucket || !filename) {
 		throw "Missing parameters";
@@ -104,13 +104,13 @@ Command.prototype.subCommands["s3-rendertiddler"] = function() {
 		title = template;
 	}
 	// Render the tiddler
-	var text = this.commander.wiki.renderTiddler(type,title,{variables: variables}),
-		type = "text/plain",
-		encoding = ($tw.config.contentTypeInfo[type] || {encoding: "utf8"}).encoding;
+	let text = this.commander.wiki.renderTiddler(type,title,{variables});
+	var type = "text/plain";
+	const {encoding} = $tw.config.contentTypeInfo[type] || {encoding: "utf8"};
 	// Zip it if needed
 	if(zipfilename) {
-		var JSZip = require("$:/plugins/tiddlywiki/jszip/jszip.js"),
-			zip = new JSZip();
+		const JSZip = require("$:/plugins/tiddlywiki/jszip/jszip.js");
+		const zip = new JSZip();
 		zip.file(filename,new Buffer(text,encoding));
 		text = zip.generate({type: "base64"});
 		type = "application/zip";
@@ -120,23 +120,23 @@ Command.prototype.subCommands["s3-rendertiddler"] = function() {
 	async.series([
 		awsUtils.putFile.bind(null,region,bucket,filename,text,saveType)
 	],
-	function(err,results){
-		self.callback(err,results);
-	});
+		(err,results) => {
+			self.callback(err,results);
+		});
 	return null;
 };
 
 Command.prototype.subCommands["s3-rendertiddlers"] = function() {
-	var self = this,
-		wiki = this.commander.wiki,
-		filter = this.params[1],
-		template = this.params[2],
-		region = this.params[3],
-		bucket = this.params[4],
-		filenameFilter = this.params[5],
-		type = this.params[6] || "text/html",
-		saveTypeFilter = this.params[7] || "[[" + type + "]]",
-		tiddlers = wiki.filterTiddlers(filter);
+	const self = this;
+	const {wiki} = this.commander;
+	const filter = this.params[1];
+	const template = this.params[2];
+	const region = this.params[3];
+	const bucket = this.params[4];
+	const filenameFilter = this.params[5];
+	const type = this.params[6] || "text/html";
+	const saveTypeFilter = this.params[7] || `[[${type}]]`;
+	const tiddlers = wiki.filterTiddlers(filter);
 	// Check parameters
 	if(!filter || !region || !bucket || !filenameFilter) {
 		throw "Missing parameters";
@@ -144,17 +144,17 @@ Command.prototype.subCommands["s3-rendertiddlers"] = function() {
 	async.eachLimit(
 		tiddlers,
 		20,
-		function(title,callback) {
-			var parser = wiki.parseTiddler(template || title),
-				widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}}),
-				container = $tw.fakeDocument.createElement("div");
+		(title,callback) => {
+			const parser = wiki.parseTiddler(template || title);
+			const widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}});
+			const container = $tw.fakeDocument.createElement("div");
 			widgetNode.render(container,null);
-			var text = type === "text/html" ? container.innerHTML : container.textContent,
-				filename = wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0],
-				saveType = wiki.filterTiddlers(saveTypeFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0];
+			const text = type === "text/html" ? container.innerHTML : container.textContent;
+			const filename = wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0];
+			const saveType = wiki.filterTiddlers(saveTypeFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0];
 			awsUtils.putFile(region,bucket,filename,text,saveType,callback);
 		},
-		function(err,results) {
+		(err,results) => {
 			self.callback(err,results);
 		}
 	);
@@ -163,26 +163,22 @@ Command.prototype.subCommands["s3-rendertiddlers"] = function() {
 
 // Save a tiddler to an S3 bucket
 Command.prototype.subCommands["s3-savetiddler"] = function() {
-	var self = this,
-		wiki = this.commander.wiki,
-		title = this.params[1],
-		region = this.params[2],
-		bucket = this.params[3],
-		filename = this.params[4],
-		zipfilename = this.params[5],
-		saveType = this.params[6],
-		tiddler = wiki.getTiddler(title),
-		text = tiddler.fields.text,
-		type = tiddler.fields.type,
-		encoding = ($tw.config.contentTypeInfo[type] || {encoding: "utf8"}).encoding;
+	const self = this;
+	const {wiki} = this.commander;
+	const [,title,region,bucket,filenameInit,zipfilename,saveType] = this.params;
+	let filename = filenameInit;
+	const tiddler = wiki.getTiddler(title);
+	let {text} = tiddler.fields;
+	let {type} = tiddler.fields;
+	const {encoding} = $tw.config.contentTypeInfo[type] || {encoding: "utf8"};
 	// Check parameters
 	if(!title || !region || !bucket || !filename) {
 		throw "Missing parameters";
 	}
 	// Zip it if needed
 	if(zipfilename) {
-		var JSZip = require("$:/plugins/tiddlywiki/jszip/jszip.js"),
-			zip = new JSZip();
+		const JSZip = require("$:/plugins/tiddlywiki/jszip/jszip.js");
+		const zip = new JSZip();
 		zip.file(filename,new Buffer(text,encoding));
 		text = zip.generate({type: "base64"});
 		type = "application/zip";
@@ -192,22 +188,22 @@ Command.prototype.subCommands["s3-savetiddler"] = function() {
 	async.series([
 		awsUtils.putFile.bind(null,region,bucket,filename,text,saveType || type)
 	],
-	function(err,results){
-		self.callback(err,results);
-	});
+		(err,results) => {
+			self.callback(err,results);
+		});
 	return null;
 };
 
 // Save a tiddler to an S3 bucket
 Command.prototype.subCommands["s3-savetiddlers"] = function() {
-	var self = this,
-		wiki = this.commander.wiki,
-		filter = this.params[1],
-		region = this.params[2],
-		bucket = this.params[3],
-		filenameFilter = this.params[4],
-		saveTypeFilter = this.params[5] || "[is[tiddler]get[type]]",
-		tiddlers = wiki.filterTiddlers(filter);
+	const self = this;
+	const {wiki} = this.commander;
+	const filter = this.params[1];
+	const region = this.params[2];
+	const bucket = this.params[3];
+	const filenameFilter = this.params[4];
+	const saveTypeFilter = this.params[5] || "[is[tiddler]get[type]]";
+	const tiddlers = wiki.filterTiddlers(filter);
 	// Check parameters
 	if(!filter || !region || !bucket || !filenameFilter) {
 		throw "Missing parameters";
@@ -215,19 +211,19 @@ Command.prototype.subCommands["s3-savetiddlers"] = function() {
 	async.eachLimit(
 		tiddlers,
 		20,
-		function(title,callback) {
-			var tiddler = wiki.getTiddler(title);
+		(title,callback) => {
+			const tiddler = wiki.getTiddler(title);
 			if(tiddler) {
-				var text = tiddler.fields.text || "",
-					type = tiddler.fields.type || "text/vnd.tiddlywiki",
-					filename = wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0],
-					saveType = wiki.filterTiddlers(saveTypeFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0];
-				awsUtils.putFile(region,bucket,filename,text,saveType || type,callback);				
+				const text = tiddler.fields.text || "";
+				const type = tiddler.fields.type || "text/vnd.tiddlywiki";
+				const filename = wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0];
+				const saveType = wiki.filterTiddlers(saveTypeFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0];
+				awsUtils.putFile(region,bucket,filename,text,saveType || type,callback);
 			} else {
 				process.nextTick(callback,null);
 			}
 		},
-		function(err,results) {
+		(err,results) => {
 			self.callback(err,results);
 		}
 	);

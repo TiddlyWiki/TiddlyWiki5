@@ -13,13 +13,13 @@ Filter operator for returning the names of the active variables
 Export our filter function
 */
 exports.variables = function(source,operator,options) {
-	var names = [],
-		widget = options.widget;
+	const names = [];
+	let {widget} = options;
 	while(widget && !widget.hasOwnProperty("variables")) {
 		widget = widget.parentWidget;
 	}
 	if(widget && widget.variables) {
-		for(var variable in widget.variables) {
+		for(const variable in widget.variables) {
 			names.push(variable);
 		}
 	}

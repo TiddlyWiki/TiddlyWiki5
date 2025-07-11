@@ -9,9 +9,9 @@ Fields widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var FieldsWidget = function(parseTreeNode,options) {
+const FieldsWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -27,7 +27,7 @@ FieldsWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var textNode = this.document.createTextNode(this.text);
+	const textNode = this.document.createTextNode(this.text);
 	parent.insertBefore(textNode,nextSibling);
 	this.domNodes.push(textNode);
 };
@@ -45,39 +45,39 @@ FieldsWidget.prototype.execute = function() {
 	this.include = this.getAttribute("include",null);
 	this.stripTitlePrefix = this.getAttribute("stripTitlePrefix","no") === "yes";
 	// Get the value to display
-	var tiddler = this.wiki.getTiddler(this.tiddlerTitle);
+	const tiddler = this.wiki.getTiddler(this.tiddlerTitle);
 
 	// Get the inclusion and exclusion list
-	var excludeArr = (this.exclude) ? this.exclude.split(" ") : ["text"];
+	const excludeArr = (this.exclude) ? this.exclude.split(" ") : ["text"];
 	// Include takes precedence
-	var includeArr = (this.include) ? this.include.split(" ") : null;
+	const includeArr = (this.include) ? this.include.split(" ") : null;
 
 	// Compose the template
-	var text = [];
+	const text = [];
 	if(this.template && tiddler) {
-		var fields = [];
-		if (includeArr) { // Include takes precedence
-			for(var i=0; i<includeArr.length; i++) {
+		const fields = [];
+		if(includeArr) { // Include takes precedence
+			for(let i = 0;i < includeArr.length;i++) {
 				if(tiddler.fields[includeArr[i]]) {
 					fields.push(includeArr[i]);
 				}
 			}
 		} else {
 			for(var fieldName in tiddler.fields) {
-				if(excludeArr.indexOf(fieldName) === -1) {
+				if(!excludeArr.includes(fieldName)) {
 					fields.push(fieldName);
 				}
 			}
 		}
-		if (this.sort) fields.sort();
-		if (this.sortReverse) fields.reverse();
-		for(var f=0, fmax=fields.length; f<fmax; f++) {
+		if(this.sort) fields.sort();
+		if(this.sortReverse) fields.reverse();
+		for(let f = 0,fmax = fields.length;f < fmax;f++) {
 			fieldName = fields[f];
-			var row = this.template,
-				value = tiddler.getFieldString(fieldName);
+			let row = this.template;
+			let value = tiddler.getFieldString(fieldName);
 			if(this.stripTitlePrefix && fieldName === "title") {
-				var reStrip = /^\{[^\}]+\}(.+)/mg,
-					reMatch = reStrip.exec(value);
+				const reStrip = /^\{[^\}]+\}(.+)/mg;
+				const reMatch = reStrip.exec(value);
 				if(reMatch) {
 					value = reMatch[1];
 				}
@@ -95,12 +95,12 @@ FieldsWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 FieldsWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if( changedAttributes.tiddler || changedAttributes.template || changedAttributes.exclude ||
+	const changedAttributes = this.computeAttributes();
+	if(changedAttributes.tiddler || changedAttributes.template || changedAttributes.exclude ||
 		changedAttributes.include || changedAttributes.sort || changedAttributes.sortReverse ||
 		changedTiddlers[this.tiddlerTitle] || changedAttributes.stripTitlePrefix) {
-			this.refreshSelf();
-			return true;
+		this.refreshSelf();
+		return true;
 	} else {
 		return false;
 	}

@@ -13,15 +13,15 @@ Filter function for [is[shadow]]
 Export our filter function
 */
 exports.shadow = function(source,prefix,options) {
-	var results = [];
+	const results = [];
 	if(prefix === "!") {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(!options.wiki.isShadowTiddler(title)) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(options.wiki.isShadowTiddler(title)) {
 				results.push(title);
 			}

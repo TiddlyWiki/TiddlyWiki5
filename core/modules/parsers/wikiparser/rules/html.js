@@ -21,7 +21,7 @@ This is a widget invocation
 "use strict";
 
 exports.name = "html";
-exports.types = {inline: true, block: true};
+exports.types = {inline: true,block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
@@ -40,8 +40,8 @@ Parse the most recent match
 */
 exports.parse = function() {
 	// Retrieve the most recent match so that recursive calls don't overwrite it
-	var tag = this.nextTag;
-	if (!tag.isSelfClosing) {
+	const tag = this.nextTag;
+	if(!tag.isSelfClosing) {
 		tag.openTagStart = tag.start;
 		tag.openTagEnd = tag.end;
 	}
@@ -49,36 +49,36 @@ exports.parse = function() {
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
 	// Check for an immediately following double linebreak
-	var hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
+	const hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 	// Set whether we're in block mode
 	tag.isBlock = this.is.block || hasLineBreak;
 	// Parse the body if we need to
-	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
-		var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">";
+	if(!tag.isSelfClosing && !$tw.config.htmlVoidElements.includes(tag.tag)) {
+		const reEndString = `</${$tw.utils.escapeRegExp(tag.tag)}>`;
 		if(hasLineBreak) {
 			tag.children = this.parser.parseBlocks(reEndString);
 		} else {
-			var reEnd = new RegExp("(" + reEndString + ")","mg");
+			const reEnd = new RegExp(`(${reEndString})`,"mg");
 			tag.children = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
 		}
 		tag.end = this.parser.pos;
 		tag.closeTagEnd = tag.end;
-		if (tag.closeTagEnd === tag.openTagEnd || this.parser.source[tag.closeTagEnd - 1] !== '>') {
+		if(tag.closeTagEnd === tag.openTagEnd || this.parser.source[tag.closeTagEnd - 1] !== '>') {
 			tag.closeTagStart = tag.end;
 		} else {
 			tag.closeTagStart = tag.closeTagEnd - 2;
-			var closeTagMinPos = tag.children.length > 0 ? tag.children[tag.children.length-1].end : tag.openTagEnd;
-			if (!Number.isSafeInteger(closeTagMinPos)) closeTagMinPos = tag.openTagEnd;
-			while (tag.closeTagStart >= closeTagMinPos) {
-				var char = this.parser.source[tag.closeTagStart];
-				if (char === '>') {
+			let closeTagMinPos = tag.children.length > 0 ? tag.children[tag.children.length - 1].end : tag.openTagEnd;
+			if(!Number.isSafeInteger(closeTagMinPos)) closeTagMinPos = tag.openTagEnd;
+			while(tag.closeTagStart >= closeTagMinPos) {
+				const char = this.parser.source[tag.closeTagStart];
+				if(char === '>') {
 					tag.closeTagStart = -1;
 					break;
 				}
-				if (char === '<') break;
+				if(char === '<') break;
 				tag.closeTagStart -= 1;
 			}
-			if (tag.closeTagStart < closeTagMinPos) {
+			if(tag.closeTagStart < closeTagMinPos) {
 				tag.closeTagStart = tag.end;
 			}
 		}
@@ -92,15 +92,15 @@ Look for an HTML tag. Returns null if not found, otherwise returns {type: "eleme
 */
 exports.parseTag = function(source,pos,options) {
 	options = options || {};
-	var token,
-		node = {
-			type: "element",
-			start: pos,
-			attributes: {},
-			orderedAttributes: []
-		};
+	let token;
+	const node = {
+		type: "element",
+		start: pos,
+		attributes: {},
+		orderedAttributes: []
+	};
 	// Define our regexps
-	var reTagName = /([a-zA-Z0-9\-\$\.]+)/g;
+	const reTagName = /([a-zA-Z0-9\-\$\.]+)/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a less than sign
@@ -120,11 +120,11 @@ exports.parseTag = function(source,pos,options) {
 	}
 	pos = token.end;
 	// Check that the tag is terminated by a space, / or >
-	if(!$tw.utils.parseWhiteSpace(source,pos) && !(source.charAt(pos) === "/") && !(source.charAt(pos) === ">") ) {
+	if(!$tw.utils.parseWhiteSpace(source,pos) && !(source.charAt(pos) === "/") && !(source.charAt(pos) === ">")) {
 		return null;
 	}
 	// Process attributes
-	var attribute = $tw.utils.parseAttribute(source,pos);
+	let attribute = $tw.utils.parseAttribute(source,pos);
 	while(attribute) {
 		node.orderedAttributes.push(attribute);
 		node.attributes[attribute.name] = attribute;
@@ -160,13 +160,13 @@ exports.parseTag = function(source,pos,options) {
 
 exports.findNextTag = function(source,pos,options) {
 	// A regexp for finding candidate HTML tags
-	var reLookahead = /<([a-zA-Z\-\$\.]+)/g;
+	const reLookahead = /<([a-zA-Z\-\$\.]+)/g;
 	// Find the next candidate
 	reLookahead.lastIndex = pos;
-	var match = reLookahead.exec(source);
+	let match = reLookahead.exec(source);
 	while(match) {
 		// Try to parse the candidate as a tag
-		var tag = this.parseTag(source,match.index,options);
+		const tag = this.parseTag(source,match.index,options);
 		// Return success
 		if(tag && this.isLegalTag(tag)) {
 			return tag;
@@ -183,7 +183,7 @@ exports.isLegalTag = function(tag) {
 	// Widgets are always OK
 	if(tag.type !== "element") {
 		return true;
-	// If it's an HTML tag that starts with a dash then it's not legal
+		// If it's an HTML tag that starts with a dash then it's not legal
 	} else if(tag.tag.charAt(0) === "-") {
 		return false;
 	} else {

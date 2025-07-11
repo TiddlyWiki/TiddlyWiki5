@@ -13,20 +13,20 @@ Filter operator for returning the names of the fields on the selected tiddlers
 Export our filter function
 */
 exports.fields = function(source,operator,options) {
-	var results = [],
-		fieldName,
-		suffixes = (operator.suffixes || [])[0] || [],
-		operand = $tw.utils.parseStringArray(operator.operand);
+	const results = [];
+	let fieldName;
+	const suffixes = (operator.suffixes || [])[0] || [];
+	const operand = $tw.utils.parseStringArray(operator.operand);
 
-	source(function(tiddler,title) {
+	source((tiddler,title) => {
 		if(tiddler) {
-			if(suffixes.indexOf("include") !== -1) {
+			if(suffixes.includes("include")) {
 				for(fieldName in tiddler.fields) {
-					(operand.indexOf(fieldName) !== -1) ? $tw.utils.pushTop(results,fieldName) : "";
+					(operand.includes(fieldName)) ? $tw.utils.pushTop(results,fieldName) : "";
 				}
-			} else if (suffixes.indexOf("exclude") !== -1) {
+			} else if(suffixes.includes("exclude")) {
 				for(fieldName in tiddler.fields) {
-					(operand.indexOf(fieldName) !== -1) ? "" : $tw.utils.pushTop(results,fieldName);
+					(operand.includes(fieldName)) ? "" : $tw.utils.pushTop(results,fieldName);
 				}
 			} // else if
 			else {

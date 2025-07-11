@@ -24,17 +24,17 @@ exports.params = [
 Run the macro
 */
 exports.run = function(filter,format) {
-	var self = this,
-		tiddlers = this.wiki.filterTiddlers(filter),
-		tiddler,
-		fields = [],
-		t,f;
+	const self = this;
+	const tiddlers = this.wiki.filterTiddlers(filter);
+	let tiddler;
+	const fields = [];
+	var t; let f;
 	// Collect all the fields
-	for(t=0;t<tiddlers.length; t++) {
+	for(t = 0;t < tiddlers.length;t++) {
 		tiddler = this.wiki.getTiddler(tiddlers[t]);
 		if(tiddler) {
 			for(f in tiddler.fields) {
-				if(fields.indexOf(f) === -1) {
+				if(!fields.includes(f)) {
 					fields.push(f);
 				}
 			}
@@ -42,33 +42,33 @@ exports.run = function(filter,format) {
 	}
 	// Sort the fields and bring the standard ones to the front
 	fields.sort();
-	"title text modified modifier created creator".split(" ").reverse().forEach(function(value,index) {
-		var p = fields.indexOf(value);
+	"title text modified modifier created creator".split(" ").reverse().forEach((value,index) => {
+		const p = fields.indexOf(value);
 		if(p !== -1) {
 			fields.splice(p,1);
-			fields.unshift(value)
+			fields.unshift(value);
 		}
 	});
 	// Output the column headings
-	var output = [], row = [];
-	fields.forEach(function(value) {
-		row.push(quoteAndEscape(value))
+	const output = []; let row = [];
+	fields.forEach((value) => {
+		row.push(quoteAndEscape(value));
 	});
 	output.push(row.join(","));
 	// Output each tiddler
-	for(var t=0;t<tiddlers.length; t++) {
+	for(var t = 0;t < tiddlers.length;t++) {
 		row = [];
 		tiddler = this.wiki.getTiddler(tiddlers[t]);
-			if(tiddler) {
-				for(f=0; f<fields.length; f++) {
-					row.push(quoteAndEscape(tiddler ? tiddler.getFieldString(fields[f]) || "" : ""));
-				}	
+		if(tiddler) {
+			for(f = 0;f < fields.length;f++) {
+				row.push(quoteAndEscape(tiddler ? tiddler.getFieldString(fields[f]) || "" : ""));
 			}
+		}
 		output.push(row.join(","));
 	}
 	return output.join("\n");
 };
 
 function quoteAndEscape(value) {
-	return "\"" + value.replace(/"/mg,"\"\"") + "\"";
+	return `"${value.replace(/"/mg,"\"\"")}"`;
 }

@@ -15,9 +15,9 @@ exports.after = ["load-modules"];
 exports.synchronous = true;
 
 // Set to `true` to enable performance instrumentation
-var PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE = "$:/config/Performance/Instrumentation";
+const PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE = "$:/config/Performance/Instrumentation";
 
-var widget = require("$:/core/modules/widgets/widget.js");
+const widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
 	// Minimal browser detection
@@ -26,7 +26,7 @@ exports.startup = function() {
 		$tw.browser.isFirefox = !!document.mozFullScreenEnabled;
 		// 2023-07-21 Edge returns UA below. So we use "isChromeLike"
 		//'mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/114.0.0.0 safari/537.36 edg/114.0.1823.82'
-		$tw.browser.isChromeLike = navigator.userAgent.toLowerCase().indexOf("chrome") > -1;
+		$tw.browser.isChromeLike = navigator.userAgent.toLowerCase().includes("chrome");
 		$tw.browser.hasTouch = !!window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
 		$tw.browser.isMobileChrome = $tw.browser.isChromeLike && $tw.browser.hasTouch;
 	}
@@ -38,18 +38,22 @@ exports.startup = function() {
 		$tw.platform.isLinux = /Linux/i.test(navigator.platform);
 	} else {
 		switch(require("os").platform()) {
-			case "darwin":
+			case "darwin": {
 				$tw.platform.isMac = true;
 				break;
-			case "win32":
+			}
+			case "win32": {
 				$tw.platform.isWindows = true;
 				break;
-			case "freebsd":
+			}
+			case "freebsd": {
 				$tw.platform.isLinux = true;
 				break;
-			case "linux":
+			}
+			case "linux": {
 				$tw.platform.isLinux = true;
 				break;
+			}
 		}
 	}
 	// Initialise version
@@ -73,9 +77,9 @@ exports.startup = function() {
 		defaultPlugins: [
 			"$:/languages/en-GB"
 		],
-		onSwitch: function(plugins) {
+		onSwitch(plugins) {
 			if($tw.browser) {
-				var pluginTiddler = $tw.wiki.getTiddler(plugins[0]);
+				const pluginTiddler = $tw.wiki.getTiddler(plugins[0]);
 				if(pluginTiddler) {
 					document.documentElement.setAttribute("lang",pluginTiddler.getFieldString("name"));
 					document.documentElement.setAttribute("dir",pluginTiddler.getFieldString("text-direction") || "auto");
@@ -118,7 +122,7 @@ exports.startup = function() {
 	$tw.wiki.clearTiddlerEventQueue();
 	// Find a working syncadaptor
 	$tw.syncadaptor = undefined;
-	$tw.modules.forEachModuleOfType("syncadaptor",function(title,module) {
+	$tw.modules.forEachModuleOfType("syncadaptor",(title,module) => {
 		if(!$tw.syncadaptor && module.adaptorClass) {
 			$tw.syncadaptor = new module.adaptorClass({wiki: $tw.wiki});
 		}
@@ -128,7 +132,7 @@ exports.startup = function() {
 		$tw.syncer = new $tw.Syncer({
 			wiki: $tw.wiki,
 			syncadaptor: $tw.syncadaptor,
-			logging: $tw.wiki.getTiddlerText('$:/config/SyncLogging', "yes") === "yes"
+			logging: $tw.wiki.getTiddlerText('$:/config/SyncLogging',"yes") === "yes"
 		});
 	}
 	// Setup the saver handler

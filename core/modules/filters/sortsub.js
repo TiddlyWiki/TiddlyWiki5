@@ -14,33 +14,33 @@ Export our filter function
 */
 exports.sortsub = function(source,operator,options) {
 	// Compile the subfilter
-	var filterFn = options.wiki.compileFilter(operator.operand);
+	const filterFn = options.wiki.compileFilter(operator.operand);
 	// Collect the input titles and the corresponding sort keys
-	var inputTitles = [],
-		sortKeys = [];
-	source(function(tiddler,title) {
+	const inputTitles = [];
+	const sortKeys = [];
+	source((tiddler,title) => {
 		inputTitles.push(title);
-		var r = filterFn.call(options.wiki,function(iterator) {
+		const r = filterFn.call(options.wiki,(iterator) => {
 			iterator(options.wiki.getTiddler(title),title);
 		},options.widget.makeFakeWidgetWithVariables({
-			"currentTiddler": "" + title,
+			"currentTiddler": `${title}`,
 			"..currentTiddler": options.widget.getVariable("currentTiddler")
 		}));
 		sortKeys.push(r[0] || "");
 	});
 	// Rather than sorting the titles array, we'll sort the indexes so that we can consult both arrays
-	var indexes = new Array(inputTitles.length);
-	for(var t=0; t<inputTitles.length; t++) {
+	let indexes = new Array(inputTitles.length);
+	for(let t = 0;t < inputTitles.length;t++) {
 		indexes[t] = t;
 	}
 	// Sort the indexes
-	var compareFn = $tw.utils.makeCompareFunction(operator.suffix,{defaultType: "string",invert: operator.prefix === "!"});
-	indexes = indexes.sort(function(a,b) {
+	const compareFn = $tw.utils.makeCompareFunction(operator.suffix,{defaultType: "string",invert: operator.prefix === "!"});
+	indexes = indexes.sort((a,b) => {
 		return compareFn(sortKeys[a],sortKeys[b]);
 	});
 	// Make the results array in order
-	var results = [];
-	$tw.utils.each(indexes,function(index) {
+	const results = [];
+	$tw.utils.each(indexes,(index) => {
 		results.push(inputTitles[index]);
 	});
 	return results;
