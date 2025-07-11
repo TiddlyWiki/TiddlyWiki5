@@ -6,6 +6,40 @@ module-type: utils
 Optimized Aho-Corasick string matching algorithm implementation with enhanced performance
 and error handling for TiddlyWiki freelinking functionality.
 
+Useage:
+
+Initialization:
+ Create an AhoCorasick instance: var ac = new AhoCorasick();
+ After initialization, the trie and failure structures are automatically created to store patterns and failure links.
+
+Adding Patterns:
+ Call addPattern(pattern, index) to add a pattern, e.g., ac.addPattern("[[Link]]", 0);.
+ pattern is the string to match, and index is an identifier for tracking results.
+ Multiple patterns can be added, stored in the trie structure.
+
+Building Failure Links:
+ Call buildFailureLinks() to construct failure links for efficient multi-pattern matching.
+ Includes a maximum node limit (default 100,000 or 15 times the pattern count) to prevent excessive computation.
+
+Performing Search:
+ Use search(text, useWordBoundary) to find pattern matches in the text.
+ text is the input string, and useWordBoundary (boolean) controls whether to enforce word boundary checks.
+ Returns an array of match results, each containing pattern (matched pattern), index (start position), length (pattern length), and titleIndex (pattern identifier).
+
+Word Boundary Check:
+ If useWordBoundary is true, only matches surrounded by non-word characters (letters, digits, or underscores) are returned.
+
+Cleanup and Statistics:
+ Use clear() to reset the trie and failure links, freeing memory.
+ Use getStats() to retrieve statistics, including node count (nodeCount), pattern count (patternCount), and failure link count (failureLinks).
+
+Notes
+ Performance Considerations: The Aho-Corasick trie may consume significant memory with a large number of patterns. Limit the number of patterns (e.g., <10,000) for optimal performance.
+ Error Handling: The module includes maximum node and failure depth limits (maxFailureDepth) to prevent infinite loops or memory overflow.
+ Word Boundary: Enabling useWordBoundary ensures more precise matches, ideal for link detection scenarios.
+ Compatibility: Ensure compatibility with other TiddlyWiki modules (e.g., wikiparser.js) when processing WikiText.
+ Debugging: Use getStats() to inspect the trie structure's size and ensure it does not overload browser memory.
+
 \*/
 
 "use strict";
