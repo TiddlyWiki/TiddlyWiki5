@@ -38,7 +38,7 @@ function createSlashMenuPlugin(menuElements, options) {
 	var allIgnoredKeys = defaultIgnoredKeys.concat(ignoredKeys);
 	
 	var initialState = {
-		selected: menuElements[0].id,
+		selected: menuElements.length > 0 ? menuElements[0].id : null,
 		open: false,
 		filter: "",
 		filteredElements: menuElements.filter(function(element) { return !element.locked; }),
@@ -118,25 +118,26 @@ function createSlashMenuPlugin(menuElements, options) {
 			return "CloseMenu";
 		}
 		if (state.open) {
-			if (event.key === "ArrowDown") {
+			// Handle arrow keys even when event.key is "Process" (IME)
+			if (event.code === "ArrowDown" || event.key === "ArrowDown") {
 				return "NextItem";
 			}
-			if (event.key === "ArrowUp") {
+			if (event.code === "ArrowUp" || event.key === "ArrowUp") {
 				return "PrevItem";
 			}
-			if (event.key === "Enter" || event.key === "Tab") {
+			if (event.code === "Enter" || event.key === "Enter" || event.code === "Tab" || event.key === "Tab") {
 				return "Execute";
 			}
-			if (event.key === "Escape" || (event.key === "Backspace" && state.filter.length === 0)) {
+			if (event.code === "Escape" || event.key === "Escape" || (event.code === "Backspace" || event.key === "Backspace") && state.filter.length === 0) {
 				return "CloseMenu";
 			}
-			if (state.filter.length > 0 && event.key === "Backspace") {
+			if (state.filter.length > 0 && (event.code === "Backspace" || event.key === "Backspace")) {
 				return "removeChar";
 			}
-			if (!allIgnoredKeys.includes(event.key)) {
+			if (!allIgnoredKeys.includes(event.key) && event.key !== "Process") {
 				return "addChar";
 			}
-			if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+			if (event.code === "ArrowLeft" || event.key === "ArrowLeft" || event.code === "ArrowRight" || event.key === "ArrowRight") {
 				return "Catch";
 			}
 		}
@@ -194,6 +195,25 @@ function createSlashMenuPlugin(menuElements, options) {
 					case "Ignore":
 					default:
 						return false;
+				}
+			},
+			handleDOMEvents: {
+				compositionend: function(view, event) {
+					var state = SlashMenuKey.getState(view.state);
+					if (state && state.open) {
+						// Check if the composed text should trigger menu close
+						var data = event.data;
+						if (data && (data === '、' || data === '/')) {
+							// Remove the composed character that was just inserted
+							setTimeout(function() {
+								var currentState = view.state;
+								var tr = currentState.tr.delete(currentState.selection.from - data.length, currentState.selection.from);
+								view.dispatch(tr);
+							}, 0);
+							// Don't return true - let other handlers process this event
+						}
+					}
+					return false; // Always return false to allow normal processing
 				}
 			}
 		},

@@ -26,6 +26,7 @@ var { keymap } = require("prosemirror-keymap");
 var { inputRules } = require("prosemirror-inputrules");
 var { SlashMenuPlugin } = require("$:/plugins/tiddlywiki/prosemirror/slash-menu.js");
 var { SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/slash-menu-ui.js");
+var { getAllMenuElements } = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js");
 
 var ProsemirrorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -63,24 +64,7 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	var listKeymapPlugin = keymap(listKeymap)
 	var listPlugins = createListPlugins({ schema })
 
-	var defaultMenuElements = [
-		{
-			id: "paragraph",
-			label: "Paragraph",
-			type: "command",
-			available: function() { return true; },
-			command: function(view) {
-				// Example command: insert a paragraph with text "Test"
-				var state = view.state;
-				var dispatch = view.dispatch;
-				var $from = state.selection.$from;
-				var paragraph = view.state.schema.nodes.paragraph.create(null, view.state.schema.text("Test"));
-				var tr = state.tr.insert($from.pos, paragraph);
-				dispatch(tr);
-				return true;
-			}
-		}
-	];
+	var allMenuElements = getAllMenuElements(this.wiki, schema);
 
 	var self = this;
 	this.view = new EditorView(container, {
@@ -90,7 +74,7 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 			plugins: [
 				listKeymapPlugin,
 				...listPlugins,
-				SlashMenuPlugin(defaultMenuElements, {
+				SlashMenuPlugin(allMenuElements, {
 					triggerCodes: ['Slash', 'Backslash'] // Support both / (、) and \ keys
 				}),
 				...exampleSetup({ schema }),

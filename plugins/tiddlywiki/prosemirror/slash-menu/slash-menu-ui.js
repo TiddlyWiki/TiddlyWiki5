@@ -34,16 +34,14 @@ SlashMenuUI.prototype.createContainer = function() {
 SlashMenuUI.prototype.setupStateListener = function() {
 	var self = this;
 	
-	// Create a mutation observer to watch for state changes
-	var checkState = function() {
+	function checkState() {
 		self.updateMenu();
-	};
+		// Continue checking on next frame
+		requestAnimationFrame(checkState);
+	}
 	
-	// Check state periodically (not ideal but works for debugging)
-	setInterval(checkState, 100);
-	
-	// Also check on initial load
-	setTimeout(checkState, 100);
+	// Start the animation frame loop
+	requestAnimationFrame(checkState);
 };
 
 SlashMenuUI.prototype.updateMenu = function() {
@@ -157,7 +155,7 @@ SlashMenuUI.prototype.getIconForElement = function(element) {
 	// Simple text icons for now - can be enhanced with SVG later
 	switch (element.type) {
 		case 'command':
-			return '▶';
+			return '';
 		case 'submenu':
 			return '▶';
 		default:
