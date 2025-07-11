@@ -1,0 +1,10 @@
+created: 20240216232121176
+modified: 20240216232450714
+tags: 
+title: TiddlerOne
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$parameters $parseTreeNodes="@parseTreeNodes">
+	<$text text=<<@parseTreeNodes>>/>
+</$parameters>

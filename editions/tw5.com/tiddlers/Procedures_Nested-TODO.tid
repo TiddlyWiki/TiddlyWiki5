@@ -1,0 +1,15 @@
+created: 20240217011056204
+modified: 20240217011324931
+tags: 
+title: Procedures/Nested-TODO
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\procedure alpha(x)
+  \procedure beta(y)
+    <$text text=<<y>>/>
+  \end beta
+<$transclude $variable="beta" y={{{ [<x>addprefix<x>] }}}/>
+\end alpha
+
+<<alpha "Elephant">>

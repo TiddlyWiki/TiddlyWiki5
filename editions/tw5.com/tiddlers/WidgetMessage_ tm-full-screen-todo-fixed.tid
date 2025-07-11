@@ -1,0 +1,15 @@
+created: 20221123145138791
+modified: 20240901184911513
+tags: 
+title: WidgetMessage: tm-full-screen-todo-fixed
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+Renders as -- 3 buttons are in 1 row instead of below
+
+[img[3-buttons-list-old.png]]
+
+---
+
+[img[3-buttons-list-new.png]]

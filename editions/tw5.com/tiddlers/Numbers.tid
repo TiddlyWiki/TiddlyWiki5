@@ -1,0 +1,8 @@
+created: 20240216224314133
+list: 1 3 4
+modified: 20240216230619816
+tags: 
+title: Numbers
+type: text/vnd.tiddlywiki
+
+<$list filter='[list[Numbers]]' variable='item' join=', '><<item>></$list>
