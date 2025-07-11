@@ -24,6 +24,7 @@ var {
 var { exampleSetup } = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js");
 var { keymap } = require("prosemirror-keymap");
 var { inputRules } = require("prosemirror-inputrules");
+var { SlashMenuPlugin } = require("$:/plugins/tiddlywiki/prosemirror/slash-menu.js");
 
 var ProsemirrorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -47,11 +48,7 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	var tiddler = this.getAttribute("tiddler");
 	var initialText = this.wiki.getTiddlerText(tiddler, "");
 	var initialWikiAst = $tw.wiki.parseText(null, initialText).tree;
-	// DEBUG: console initialWikiAst
-	console.log(`initialWikiAst`, initialWikiAst);
 	var doc = wikiAstToProseMirrorAst(initialWikiAst);
-	// DEBUG: console doc
-	console.log(`initial doc`, doc);
 
 	var container = $tw.utils.domMaker('div', {
 		class: 'tc-prosemirror-container',
@@ -65,6 +62,25 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	var listKeymapPlugin = keymap(listKeymap)
 	var listPlugins = createListPlugins({ schema })
 
+	var defaultMenuElements = [
+		{
+			id: "paragraph",
+			label: "Paragraph",
+			type: "command",
+			available: function() { return true; },
+			command: function(view) {
+				// Example command: insert a paragraph with text "Test"
+				var state = view.state;
+				var dispatch = view.dispatch;
+				var $from = state.selection.$from;
+				var paragraph = view.state.schema.nodes.paragraph.create(null, view.state.schema.text("Test"));
+				var tr = state.tr.insert($from.pos, paragraph);
+				dispatch(tr);
+				return true;
+			}
+		}
+	];
+
 	var self = this;
 	this.view = new EditorView(container, {
 		state: EditorState.create({
@@ -73,6 +89,9 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 			plugins: [
 				listKeymapPlugin,
 				...listPlugins,
+				SlashMenuPlugin(defaultMenuElements, {
+					triggerCodes: ['Slash', 'Backslash'] // Support both / (、) and \ keys
+				}),
 				...exampleSetup({ schema }),
 			],
 		}),
@@ -94,9 +113,6 @@ ProsemirrorWidget.prototype.saveEditorContent = function() {
 	var tiddler = this.getAttribute("tiddler");
 	var currentText = this.wiki.getTiddlerText(tiddler, "");
 	if (currentText !== wikiText) {
-		console.log(`ProseMirror: ${JSON.stringify(content)}`, content);
-		console.log(`WikiAST: ${JSON.stringify(wikiast)}`, wikiast);
-		console.log(`WikiText: ${wikiText}`);
 		this.saveLock = true;
 		this.wiki.setText(tiddler, "text", undefined, wikiText);
 	}
@@ -117,8 +133,6 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ProsemirrorWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	// DEBUG: console this.saveLock
-	console.log(`this.saveLock`, this.saveLock);
 	if(changedAttributes.text) {
 		this.refreshSelf();
 		return true;

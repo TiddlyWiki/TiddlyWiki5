@@ -25,3 +25,4 @@ Downloaded from JsDelivr CDN (like `https://cdn.jsdelivr.net/npm/prosemirror-sta
 * [ext[crelt|https://cdn.jsdelivr.net/npm/crelt@latest/dist/index.cjs]]: v1.0.6
 * [ext[rope-sequence|https://cdn.jsdelivr.net/npm/rope-sequence@latest/dist/index.cjs]]: v1.3.4
 * [ext[prosemirror-safari-ime-span|https://cdn.jsdelivr.net/npm/prosemirror-safari-ime-span@latest/dist/index.cjs]]: v1.0.2
+* [ext[prosemirror-slash-menu|https://cdn.jsdelivr.net/npm/prosemirror-slash-menu@latest/dist/index.js]]: v0.4.5
