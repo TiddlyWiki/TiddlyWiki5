@@ -50,7 +50,6 @@ function createSlashMenuPlugin(menuElements, options) {
 		return {
 			shouldOpen: function(state, event, view) {
 				// Support configurable trigger codes (default: 'Slash' for both '/' and '、')
-				console.log('shouldOpen called:', { key: event.key, code: event.code, keyCode: event.keyCode });
 				var isSlashTrigger = triggerCodes.includes(event.code);
 				
 				if (!isSlashTrigger) return false;
