@@ -38,7 +38,7 @@ The full list of KeyboardShortcuts can be found in the $:/ControlPanel -> ''Keyb
 |Double underscores are used for `__underlined text__`|Double underscores are used for `<u>underlined text<u>` |
 |Double circumflex accents are used for `^^superscripted^^` text |Double circumflex accents are used for `<sup>superscripted</sup>` text |
 |Double commas are used for `,,subscripted,,` text |Double commas are used for `<sub>subscripted</sub>` text |
-|Double tilde signs are used for `~~strikethrough~~` text |Double tilde signs are used for `<strike>strikethrough</strike>` text |
+|Double tilde signs are used for `~~strikethrough~~` text |Double tilde signs are used for `<s>strikethrough</s>` text |
 |Single backticks are used for ```code` `` |Single backticks are used for `<code>code</code>` |
 |Double @ characters are used to create a `@@highlight@@` |Double @ characters are used to create a `<span class="tc-inline-style">highlighted</span>` |
 
