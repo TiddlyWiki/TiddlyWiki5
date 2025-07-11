@@ -158,6 +158,8 @@ function createSlashMenuPlugin(menuElements, options) {
 				switch (slashCase) {
 					case "OpenMenu":
 						dispatchWithMeta(view, { type: SlashMetaTypes.open });
+						// For non-IME input (like /), the character hasn't been inserted yet due to return true
+						// For IME input (like 、), the character will be handled by compositionend
 						return true; // Always prevent character input when opening menu
 					case "CloseMenu":
 						if (!state.open) return false;
@@ -182,14 +184,14 @@ function createSlashMenuPlugin(menuElements, options) {
 							type: SlashMetaTypes.inputChange,
 							filter: state.filter + event.key
 						});
-						return false; // Allow character to be added for filtering
+						return true; // Prevent character from being added to document
 					case "removeChar":
 						var newFilter = state.filter.length === 1 ? "" : state.filter.slice(0, -1);
 						dispatchWithMeta(view, {
 							type: SlashMetaTypes.inputChange,
 							filter: newFilter
 						});
-						return false;
+						return true; // Prevent backspace from affecting document
 					case "Catch":
 						return true;
 					case "Ignore":
@@ -198,6 +200,29 @@ function createSlashMenuPlugin(menuElements, options) {
 				}
 			},
 			handleDOMEvents: {
+				compositionstart: function(view, event) {
+					var state = SlashMenuKey.getState(view.state);
+					if (state && state.open) {
+						// Store that we're in composition mode for menu filtering
+						view._slashMenuComposing = true;
+					}
+					return false;
+				},
+				compositionupdate: function(view, event) {
+					var state = SlashMenuKey.getState(view.state);
+					if (state && state.open && view._slashMenuComposing) {
+						// Update filter with composition text
+						var data = event.data;
+						if (data && data !== '、' && data !== '/') {
+							dispatchWithMeta(view, {
+								type: SlashMetaTypes.inputChange,
+								filter: data
+							});
+						}
+						return true; // Prevent the composition from being inserted
+					}
+					return false;
+				},
 				compositionend: function(view, event) {
 					var state = SlashMenuKey.getState(view.state);
 					if (state && state.open) {
@@ -210,8 +235,20 @@ function createSlashMenuPlugin(menuElements, options) {
 								var tr = currentState.tr.delete(currentState.selection.from - data.length, currentState.selection.from);
 								view.dispatch(tr);
 							}, 0);
-							// Don't return true - let other handlers process this event
+						} else if (view._slashMenuComposing && data) {
+							// For composition text used for filtering, update the filter and prevent insertion
+							setTimeout(function() {
+								var currentState = view.state;
+								var tr = currentState.tr.delete(currentState.selection.from - data.length, currentState.selection.from);
+								view.dispatch(tr);
+								dispatchWithMeta(view, {
+									type: SlashMetaTypes.inputChange,
+									filter: data
+								});
+							}, 0);
 						}
+						// Reset composition flag
+						view._slashMenuComposing = false;
 					}
 					return false; // Always return false to allow normal processing
 				}

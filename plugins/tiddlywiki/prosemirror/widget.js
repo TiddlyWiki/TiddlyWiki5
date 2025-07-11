@@ -72,11 +72,11 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 			// doc: schema.node("doc", null, [schema.node("paragraph")]),
 			doc: schema.nodeFromJSON(doc),
 			plugins: [
-				listKeymapPlugin,
-				...listPlugins,
 				SlashMenuPlugin(allMenuElements, {
 					triggerCodes: ['Slash', 'Backslash'] // Support both / (、) and \ keys
 				}),
+				listKeymapPlugin,
+				...listPlugins,
 				...exampleSetup({ schema }),
 			],
 		}),
