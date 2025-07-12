@@ -149,6 +149,7 @@ function code_block(builder, node) {
 	
 	return {
 		type: "codeblock",
+		rule: "codeblock",
 		attributes: {
 			code: {
 				type: "string", 
