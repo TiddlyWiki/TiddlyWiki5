@@ -9,6 +9,7 @@ Custom slash menu implementation based on prosemirror-slash-menu
 "use strict";
 
 var { Plugin, PluginKey } = require("prosemirror-state");
+var { flattenMenuElementsWithGroup } = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js");
 
 var SlashMenuKey = new PluginKey("slash-menu-plugin");
 
@@ -41,7 +42,7 @@ function createSlashMenuPlugin(menuElements, options) {
 		selected: menuElements.length > 0 ? menuElements[0].id : null,
 		open: false,
 		filter: "",
-		filteredElements: menuElements.filter(function(element) { return !element.locked; }),
+		filteredElements: flattenMenuElementsWithGroup(menuElements),
 		elements: menuElements,
 		ignoredKeys: allIgnoredKeys
 	};
@@ -82,28 +83,36 @@ function createSlashMenuPlugin(menuElements, options) {
 	}
 	
 	function getElementById(id, state) {
-		return state.filteredElements.find(function(element) { return element.id === id; });
+		return state.filteredElements.find(function(element) {
+			return element.id === id && element.type !== 'group';
+		});
 	}
-	
+
 	function getNextItemId(state) {
 		var currentIndex = state.filteredElements.findIndex(function(element) { return element.id === state.selected; });
-		if (currentIndex >= 0 && currentIndex < state.filteredElements.length - 1) {
-			return state.filteredElements[currentIndex + 1].id;
+		for (var i = currentIndex + 1; i < state.filteredElements.length; i++) {
+			if (state.filteredElements[i].type !== 'group') {
+				return state.filteredElements[i].id;
+			}
 		}
 		return undefined;
 	}
 	
 	function getPreviousItemId(state) {
 		var currentIndex = state.filteredElements.findIndex(function(element) { return element.id === state.selected; });
-		if (currentIndex > 0) {
-			return state.filteredElements[currentIndex - 1].id;
+		for (var i = currentIndex - 1; i >= 0; i--) {
+			if (state.filteredElements[i].type !== 'group') {
+				return state.filteredElements[i].id;
+			}
 		}
 		return undefined;
 	}
 	
 	function getFilteredItems(state, input) {
+		var allElements = flattenMenuElementsWithGroup(state.elements);
 		var regExp = new RegExp(input.toLowerCase().replace(/\s/g, "\\s"));
-		return state.elements.filter(function(element) {
+		return allElements.filter(function(element) {
+			if (element.type === "group") return true; // 分组标题始终显示
 			return element.label.toLowerCase().match(regExp) !== null && !element.locked;
 		});
 	}
@@ -204,13 +213,13 @@ function createSlashMenuPlugin(menuElements, options) {
 					var state = SlashMenuKey.getState(view.state);
 					if (state && state.open) {
 						// Store that we're in composition mode for menu filtering
-						view._slashMenuComposing = true;
+						this._slashMenuComposing = true;
 					}
 					return false;
 				},
 				compositionupdate: function(view, event) {
 					var state = SlashMenuKey.getState(view.state);
-					if (state && state.open && view._slashMenuComposing) {
+					if (state && state.open && this._slashMenuComposing) {
 						// Update filter with composition text
 						var data = event.data;
 						if (data && data !== '、' && data !== '/') {
@@ -235,7 +244,7 @@ function createSlashMenuPlugin(menuElements, options) {
 								var tr = currentState.tr.delete(currentState.selection.from - data.length, currentState.selection.from);
 								view.dispatch(tr);
 							}, 0);
-						} else if (view._slashMenuComposing && data) {
+						} else if (this._slashMenuComposing && data) {
 							// For composition text used for filtering, update the filter and prevent insertion
 							setTimeout(function() {
 								var currentState = view.state;
@@ -248,7 +257,7 @@ function createSlashMenuPlugin(menuElements, options) {
 							}, 0);
 						}
 						// Reset composition flag
-						view._slashMenuComposing = false;
+						this._slashMenuComposing = false;
 					}
 					return false; // Always return false to allow normal processing
 				}
@@ -278,7 +287,7 @@ function createSlashMenuPlugin(menuElements, options) {
 						if (!prevId) return state;
 						return Object.assign({}, state, { selected: prevId });
 					case SlashMetaTypes.inputChange:
-						var newElements = meta.filter ? getFilteredItems(state, meta.filter) : initialState.elements;
+						var newElements = meta.filter ? getFilteredItems(state, meta.filter) : flattenMenuElementsWithGroup(initialState.elements);
 						var selectedId = newElements[0] ? newElements[0].id : state.selected;
 						return Object.assign({}, state, {
 							selected: selectedId,

@@ -73,3 +73,15 @@
 	padding: 16px 12px;
 	font-style: italic;
 }
+
+.tw-slash-menu-group-title {
+	font-size: 13px;
+	font-weight: bold;
+	color: #374151;
+	padding: 8px 12px 2px 12px;
+	margin-top: 8px;
+	margin-bottom: 2px;
+	border-bottom: 1px solid #e5e7eb;
+	background: #f3f4f6;
+	letter-spacing: 0.5px;
+}

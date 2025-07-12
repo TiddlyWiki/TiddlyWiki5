@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/prosemirror/menu-elements.js
 type: application/javascript
 module-type: library
 
-Exports a function to get all menu elements for SlashMenu (default + snippets)
+Exports functions to get all menu elements for SlashMenu (default + snippets)
 \*/
 
 "use strict";
@@ -59,8 +59,28 @@ function getBlockTypeMenuElements(schema) {
 	}];
 }
 
+function flattenMenuElementsWithGroup(elements) {
+	var result = [];
+	elements.forEach(function(item) {
+		if (item.type === "submenu" && Array.isArray(item.elements)) {
+			// Insert group title before submenu items
+			result.push({
+				id: "group-" + item.id,
+				label: item.label,
+				type: "group",
+				available: function() { return true; }
+			});
+			result = result.concat(flattenMenuElementsWithGroup(item.elements));
+		} else {
+			result.push(item);
+		}
+	});
+	return result;
+}
+
 exports.getAllMenuElements = function(wiki, schema) {
 	return getSnippetMenuElements(wiki)
 		.concat(getBlockTypeMenuElements(schema))
 		.filter(function(item) { return !!item; });
 };
+exports.flattenMenuElementsWithGroup = flattenMenuElementsWithGroup;

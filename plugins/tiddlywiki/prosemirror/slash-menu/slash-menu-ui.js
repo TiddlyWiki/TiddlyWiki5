@@ -16,12 +16,23 @@ function SlashMenuUI(view, options) {
 	this.container = null;
 	this.isVisible = false;
 	this.lastState = null;
-	
+	this.lastNavByKey = false;
+
 	// Create and append the menu container
 	this.createContainer();
-	
+
 	// Listen to state changes
 	this.setupStateListener();
+
+	// Listen for keydown events to track navigation method
+	var self = this;
+	document.addEventListener('keydown', function(e) {
+		if (self.isVisible && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+			self.lastNavByKey = true;
+		} else if (self.isVisible) {
+			self.lastNavByKey = false;
+		}
+	});
 }
 
 SlashMenuUI.prototype.createContainer = function() {
@@ -119,27 +130,40 @@ SlashMenuUI.prototype.renderMenu = function(state) {
 
 SlashMenuUI.prototype.createMenuItem = function(element, state) {
 	var self = this;
+	if (element.type === 'group') {
+		var groupTitle = document.createElement('div');
+		groupTitle.className = 'tw-slash-menu-group-title';
+		groupTitle.textContent = element.label;
+		return groupTitle;
+	}
 	var menuItem = document.createElement('div');
 	menuItem.className = 'tw-slash-menu-item';
 	menuItem.id = 'menu-item-' + element.id;
-	
+
 	// Add selected class if this is the selected item
 	if (element.id === state.selected) {
 		menuItem.classList.add('tw-slash-menu-item-selected');
+		// Only auto scroll if last navigation was via keyboard
+		if (self.lastNavByKey) {
+			setTimeout(function() {
+				menuItem.scrollIntoView({ block: 'nearest' });
+				self.lastNavByKey = false; // Reset after scroll
+			}, 0);
+		}
 	}
-	
+
 	// Create icon placeholder
 	var icon = document.createElement('div');
 	icon.className = 'tw-slash-menu-item-icon';
 	icon.textContent = this.getIconForElement(element);
 	menuItem.appendChild(icon);
-	
+
 	// Create label
 	var label = document.createElement('div');
 	label.className = 'tw-slash-menu-item-label';
 	label.textContent = element.label;
 	menuItem.appendChild(label);
-	
+
 	// Add click handler if clickable
 	if (this.options.clickable) {
 		menuItem.classList.add('tw-slash-menu-item-clickable');
@@ -147,7 +171,7 @@ SlashMenuUI.prototype.createMenuItem = function(element, state) {
 			self.executeCommand(element);
 		};
 	}
-	
+
 	return menuItem;
 };
 
