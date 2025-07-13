@@ -1,0 +1,86 @@
+title: $:/themes/tiddlywiki/vanilla/language
+tags: [[$:/tags/Stylesheet]]
+
+/* Language specific settings */
+
+/* Bidirectional */
+
+.tc-tiny-gap-left:dir(rtl) {
+	margin-right: .25em;
+    margin-left: 0;
+}
+
+.tc-tiny-gap-right:dir(rtl) {
+	margin-left: .25em;
+    margin-right: 0;
+}
+
+.tc-small-gap-left:dir(rtl) {
+	margin-right: .5em;
+    margin-left: 0;
+}
+
+.tc-small-gap-right:dir(rtl) {
+	margin-left: .5em;
+    margin-right: 0;
+}
+
+.tc-big-gap-left:dir(rtl) {
+	margin-right: 1em;
+    margin-left: 0;
+}
+
+.tc-big-gap-right:dir(rtl) {
+	margin-left: 1em;
+    margin-right: 0;
+}
+
+/* Chooser */
+
+.tc-viewswitcher .tc-image-button:dir(rtl) {
+	margin-right: 0;
+    margin-left: .3em;
+}
+
+.tc-chosen > .tc-tiddlylink:dir(rtl)::before {
+    margin-left: 0;
+    margin-right: -10px;
+}
+
+.tc-chooser-item:dir(rtl) {
+    padding: 2px 14px 2px 4px;
+}
+
+/* Tabs */
+
+.tc-tab-content.tc-vertical:dir(rtl) {
+    padding-left: 0;
+    padding-right: 14px;
+    border-left: none;
+    border-right: 1px solid #cccccc;
+}
+
+.tc-tab-buttons.tc-vertical button:dir(rtl) {
+    text-align: left;
+    border-left: none;
+    border-right: 1px solid <<colour tab-border>>;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+/* Button */
+
+svg.tc-image-button:dir(rtl) {
+    padding: 0px 0px 1px 1px;
+}
+
+.tc-btn-text:dir(rtl) {
+    margin-left: 0;
+    margin-right: 7px;
+}
+
+.tc-drop-down a:dir(rtl), .tc-drop-down button:dir(rtl) {
+    text-align: right;
+}
