@@ -19,10 +19,10 @@ var mac = typeof navigator != "undefined" ? /Mac|iP(hone|[oa]d)/.test(navigator.
 function buildKeymap(schema, mapKeys) {
 	var keys = {}, type;
 	function bind(key, cmd) {
-		if (mapKeys) {
+		if(mapKeys) {
 			var mapped = mapKeys[key];
-			if (mapped === false) return;
-			if (mapped) key = mapped;
+			if(mapped === false) return;
+			if(mapped) key = mapped;
 		}
 		keys[key] = cmd;
 	}
@@ -30,48 +30,58 @@ function buildKeymap(schema, mapKeys) {
 	bind("Mod-z", prosemirrorHistory.undo);
 	bind("Shift-Mod-z", prosemirrorHistory.redo);
 	bind("Backspace", prosemirrorInputrules.undoInputRule);
-	if (!mac) bind("Mod-y", prosemirrorHistory.redo);
+	if(!mac) bind("Mod-y", prosemirrorHistory.redo);
 
 	bind("Alt-ArrowUp", prosemirrorCommands.joinUp);
 	bind("Alt-ArrowDown", prosemirrorCommands.joinDown);
 	bind("Mod-BracketLeft", prosemirrorCommands.lift);
 	bind("Escape", prosemirrorCommands.selectParentNode);
 
-	if (type = schema.marks.strong) {
+	type = schema.marks.strong;
+	if(type) {
 		bind("Mod-b", prosemirrorCommands.toggleMark(type));
 		bind("Mod-B", prosemirrorCommands.toggleMark(type));
 	}
-	if (type = schema.marks.em) {
+	type = schema.marks.em;
+	if(type) {
 		bind("Mod-i", prosemirrorCommands.toggleMark(type));
 		bind("Mod-I", prosemirrorCommands.toggleMark(type));
 	}
-	if (type = schema.marks.code)
+	type = schema.marks.code;
+	if(type)
 		bind("Mod-`", prosemirrorCommands.toggleMark(type));
-	if (type = schema.nodes.blockquote)
+	type = schema.nodes.blockquote;
+	if(type)
 		bind("Ctrl->", prosemirrorCommands.wrapIn(type));
-	if (type = schema.nodes.hard_break) {
+	type = schema.nodes.hard_break;
+	if(type) {
 		var br = type, cmd = prosemirrorCommands.chainCommands(prosemirrorCommands.exitCode, function(state, dispatch) {
-			if (dispatch) dispatch(state.tr.replaceSelectionWith(br.create()).scrollIntoView());
+			if(dispatch) dispatch(state.tr.replaceSelectionWith(br.create()).scrollIntoView());
 			return true;
 		});
 		bind("Mod-Enter", cmd);
 		bind("Shift-Enter", cmd);
-		if (mac) bind("Ctrl-Enter", cmd);
+		if(mac) bind("Ctrl-Enter", cmd);
 	}
-	if (type = schema.nodes.list) {
+	type = schema.nodes.list;
+	if(type) {
 		bind("Shift-Tab", prosemirrorFlatList.createDedentListCommand(type));
 		bind("Tab", prosemirrorFlatList.createIndentListCommand(type));
 	}
-	if (type = schema.nodes.paragraph)
+	type = schema.nodes.paragraph;
+	if(type)
 		bind("Shift-Ctrl-0", prosemirrorCommands.setBlockType(type));
-	if (type = schema.nodes.code_block)
+	type = schema.nodes.code_block;
+	if(type)
 		bind("Shift-Ctrl-\\", prosemirrorCommands.setBlockType(type));
-	if (type = schema.nodes.heading)
-		for (var i = 1; i <= 6; i++) bind("Shift-Ctrl-" + i, prosemirrorCommands.setBlockType(type, {level: i}));
-	if (type = schema.nodes.horizontal_rule) {
+	type = schema.nodes.heading;
+	if(type)
+		for(var i = 1; i <= 6; i++) bind("Shift-Ctrl-" + i, prosemirrorCommands.setBlockType(type, {level: i}));
+	type = schema.nodes.horizontal_rule;
+	if(type) {
 		var hr = type;
 		bind("Mod-_", function(state, dispatch) {
-			if (dispatch) dispatch(state.tr.replaceSelectionWith(hr.create()).scrollIntoView());
+			if(dispatch) dispatch(state.tr.replaceSelectionWith(hr.create()).scrollIntoView());
 			return true;
 		});
 	}

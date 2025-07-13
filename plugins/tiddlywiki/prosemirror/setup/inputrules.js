@@ -7,9 +7,15 @@ module-type: library
 
 "use strict";
 
-var { inputRules, wrappingInputRule, textblockTypeInputRule, smartQuotes, emDash, ellipsis } = require("prosemirror-inputrules");
-var { wrappingListInputRule } = require("prosemirror-flat-list");
-var { NodeType, Schema } = require("prosemirror-model");
+var inputRules = require("prosemirror-inputrules").inputRules;
+var wrappingInputRule = require("prosemirror-inputrules").wrappingInputRule;
+var textblockTypeInputRule = require("prosemirror-inputrules").textblockTypeInputRule;
+var smartQuotes = require("prosemirror-inputrules").smartQuotes;
+var emDash = require("prosemirror-inputrules").emDash;
+var ellipsis = require("prosemirror-inputrules").ellipsis;
+var wrappingListInputRule = require("prosemirror-flat-list").wrappingListInputRule;
+var NodeType = require("prosemirror-model").NodeType;
+var Schema = require("prosemirror-model").Schema;
 
 function blockQuoteRule(nodeType) {
 	return wrappingInputRule(/^\s*>\s$/, nodeType);
@@ -25,23 +31,28 @@ function headingRule(nodeType, maxLevel) {
 
 function buildInputRules(schema) {
 	var rules = smartQuotes.concat(ellipsis, emDash), type;
-	if (type = schema.nodes.blockquote) rules.push(blockQuoteRule(type));
-	if (type = schema.nodes.list) {
+	type = schema.nodes.blockquote;
+	if(type) rules.push(blockQuoteRule(type));
+	type = schema.nodes.list;
+	if(type) {
 		rules.push(wrappingListInputRule(/^\s?([*-])\s$/, {
-			kind: 'bullet',
-			collapsed: false,
+			kind: "bullet",
+			collapsed: false
 		}));
-		rules.push(wrappingListInputRule(/^\s?(#)\s$|^\s?(\d+)\.\s$/, ({ match }) => {
-			const order = match[1] === "#" ? 1 : parseInteger(match[1]);
+		rules.push(wrappingListInputRule(/^\s?(#)\s$|^\s?(\d+)\.\s$/, function(params) {
+			var match = params.match;
+			var order = match[1] === "#" ? 1 : parseInt(match[1], 10);
 			return {
-				kind: 'ordered',
+				kind: "ordered",
 				collapsed: false,
-				order: order != null && order >= 2 ? order : null,
+				order: order != null && order >= 2 ? order : null
 			};
 		}));
 	}
-	if (type = schema.nodes.code_block) rules.push(codeBlockRule(type));
-	if (type = schema.nodes.heading) rules.push(headingRule(type, 6));
+	type = schema.nodes.code_block;
+	if(type) rules.push(codeBlockRule(type));
+	type = schema.nodes.heading;
+	if(type) rules.push(headingRule(type, 6));
 	return inputRules({ rules: rules });
 }
 exports.buildInputRules = buildInputRules;

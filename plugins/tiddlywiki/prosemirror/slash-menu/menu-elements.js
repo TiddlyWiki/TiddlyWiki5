@@ -12,10 +12,10 @@ function getSnippetMenuElements(wiki) {
 	return wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]]")
 		.map(function(title) {
 			var tiddler = wiki.getTiddler(title);
-			if (!tiddler) return null;
+			if(!tiddler) return null;
 			var label = tiddler.fields.caption || title;
 			var snippetText = tiddler.fields.text;
-			if (!snippetText) return null;
+			if(!snippetText) return null;
 			return {
 				id: "snippet-" + title,
 				label: label,
@@ -62,7 +62,7 @@ function getBlockTypeMenuElements(schema) {
 function flattenMenuElementsWithGroup(elements) {
 	var result = [];
 	elements.forEach(function(item) {
-		if (item.type === "submenu" && Array.isArray(item.elements)) {
+		if(item.type === "submenu" && Array.isArray(item.elements)) {
 			// Insert group title before submenu items
 			result.push({
 				id: "group-" + item.id,

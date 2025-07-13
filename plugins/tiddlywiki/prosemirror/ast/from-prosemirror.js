@@ -21,24 +21,24 @@ function paragraph(builder, node) {
 }
 
 // Map ProseMirror mark types to HTML tags
-const markTypeMap = {
+var markTypeMap = {
 	strong: "strong",
-	em: "em",
+	em: "em"
 };
-const markRuleMap = {
+var markRuleMap = {
 	em: "italic",
-	strong: "bold",
+	strong: "bold"
 };
 // Define mark priority (inner to outer)
-const markPriority = ["code", "strong", "bold", "em", "italic", "underline", "strike", "strikethrough", "superscript", "subscript"];
+var markPriority = ["code", "strong", "bold", "em", "italic", "underline", "strike", "strikethrough", "superscript", "subscript"];
 function text(builder, node) {
-	if (!node.text) {
+	if(!node.text) {
 		return {
 			type: "text",
 			text: ""
 		};
 	}
-	if (node.marks && node.marks.length > 0) {
+	if(node.marks && node.marks.length > 0) {
 		// Create base text node
 		var textNode = {
 			type: "text",
@@ -48,8 +48,8 @@ function text(builder, node) {
 			var indexA = markPriority.indexOf(a.type);
 			var indexB = markPriority.indexOf(b.type);
 			// Place unknown mark types at the end
-			if (indexA === -1) return 1;
-			if (indexB === -1) return -1;
+			if(indexA === -1) return 1;
+			if(indexB === -1) return -1;
 			return indexA - indexB;
 		});
 		
@@ -90,7 +90,7 @@ function list(builder, node, context) {
 	var listItems = [];
 	
 	// Add content from current node to list items
-	if (node.content && node.content.forEach) {
+	if(node.content && node.content.forEach) {
 		node.content.forEach(function(item) {
 			listItems.push({
 				type: "element",
@@ -101,18 +101,18 @@ function list(builder, node, context) {
 	}
 	
 	// Check if there are adjacent lists of the same type
-	while (context && context.nodes && context.nodes.length > 0) {
+	while(context && context.nodes && context.nodes.length > 0) {
 		var nextNode = context.nodes[0];
 		
 		// If next node is also a list of the same type
-		if (nextNode.type === 'list' && 
+		if(nextNode.type === "list" && 
 			((node.attrs && node.attrs.kind) === (nextNode.attrs && nextNode.attrs.kind))) {
 			
 			// Remove and consume the next node
 			var consumedNode = context.nodes.shift();
 			
 			// Merge its content into current list
-			if (consumedNode.content && consumedNode.content.forEach) {
+			if(consumedNode.content && consumedNode.content.forEach) {
 				consumedNode.content.forEach(function(item) {
 					listItems.push({
 						type: "element",
@@ -138,7 +138,7 @@ function list(builder, node, context) {
 function code_block(builder, node) {
 	// Extract text content from the node
 	var textContent = "";
-	if (node.content && node.content.length > 0) {
+	if(node.content && node.content.length > 0) {
 		textContent = node.content.map(function(child) {
 			return child.text || "";
 		}).join("");
@@ -166,13 +166,13 @@ function code_block(builder, node) {
 /**
  * Key is `node.type`, value is node converter function.
  */
-const builders = {
-	doc,
-	paragraph,
-	text,
-	heading,
-	list,
-	code_block,
+var builders = {
+	doc: doc,
+	paragraph: paragraph,
+	text: text,
+	heading: heading,
+	list: list,
+	code_block: code_block
 };
 
 function wikiAstFromProseMirrorAst(input) {
@@ -182,14 +182,14 @@ function wikiAstFromProseMirrorAst(input) {
 exports.from = wikiAstFromProseMirrorAst;
 
 function convertNodes(builders, nodes) {
-	if (nodes === undefined || nodes.length === 0) {
+	if(nodes === undefined || nodes.length === 0) {
 		return [];
 	}
 
 	var result = [];
 	var nodesCopy = nodes.slice(); // Create a copy to avoid modifying the original array
 	
-	while (nodesCopy.length > 0) {
+	while(nodesCopy.length > 0) {
 		var node = nodesCopy.shift(); // Get and remove the first node
 		var convertedNodes = convertANode(builders, node, { nodes: nodesCopy });
 		result = result.concat(convertedNodes);
@@ -204,7 +204,7 @@ function restoreMetadata(node) {
 }
 function convertANode(builders, node, context) {
 	var builder = builders[node.type];
-	if (typeof builder === 'function') {
+	if(typeof builder === "function") {
 		var convertedNode = builder(builders, node, context);
 		var arrayOfNodes = (Array.isArray(convertedNode)
 		? convertedNode : [convertedNode]);
@@ -212,13 +212,13 @@ function convertANode(builders, node, context) {
 			var metadata = restoreMetadata(node);
 			var result = {};
 			// Manual object merge instead of spread operator
-			for (var key in metadata) {
-				if (metadata.hasOwnProperty(key)) {
+			for(var key in metadata) {
+				if(metadata.hasOwnProperty(key)) {
 					result[key] = metadata[key];
 				}
 			}
-			for (var key in child) {
-				if (child.hasOwnProperty(key)) {
+			for(var key in child) {
+				if(child.hasOwnProperty(key)) {
 					result[key] = child[key];
 				}
 			}

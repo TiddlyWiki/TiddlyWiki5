@@ -7,7 +7,6 @@ module-type: library
 
 "use strict";
 
-var { Attrs } = require("prosemirror-model");
 
 var prefix = "ProseMirror-prompt";
 
@@ -15,15 +14,15 @@ function openPrompt(options) {
 	var wrapper = document.body.appendChild(document.createElement("div"));
 	wrapper.className = prefix;
 
-	var mouseOutside = function(e) { if (!wrapper.contains(e.target)) close(); };
+	var mouseOutside = function(e) { if(!wrapper.contains(e.target)) close(); };
 	setTimeout(function() { window.addEventListener("mousedown", mouseOutside); }, 50);
 	var close = function() {
 		window.removeEventListener("mousedown", mouseOutside);
-		if (wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
+		if(wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
 	};
 
 	var domFields = [];
-	for (var name in options.fields) domFields.push(options.fields[name].render());
+	for(var name in options.fields) domFields.push(options.fields[name].render());
 
 	var submitButton = document.createElement("button");
 	submitButton.type = "submit";
@@ -36,7 +35,7 @@ function openPrompt(options) {
 	cancelButton.addEventListener("click", close);
 
 	var form = wrapper.appendChild(document.createElement("form"));
-	if (options.title) form.appendChild(document.createElement("h5")).textContent = options.title;
+	if(options.title) form.appendChild(document.createElement("h5")).textContent = options.title;
 	domFields.forEach(function(field) {
 		form.appendChild(document.createElement("div")).appendChild(field);
 	});
@@ -52,7 +51,7 @@ function openPrompt(options) {
 
 	var submit = function() {
 		var params = getValues(options.fields, domFields);
-		if (params) {
+		if(params) {
 			close();
 			options.callback(params);
 		}
@@ -64,29 +63,29 @@ function openPrompt(options) {
 	});
 
 	form.addEventListener("keydown", function(e) {
-		if (e.keyCode == 27) {
+		if(e.keyCode == 27) {
 			e.preventDefault();
 			close();
-		} else if (e.keyCode == 13 && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
+		} else if(e.keyCode == 13 && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
 			e.preventDefault();
 			submit();
-		} else if (e.keyCode == 9) {
+		} else if(e.keyCode == 9) {
 			window.setTimeout(function() {
-				if (!wrapper.contains(document.activeElement)) close();
+				if(!wrapper.contains(document.activeElement)) close();
 			}, 500);
 		}
 	});
 
 	var input = form.elements[0];
-	if (input) input.focus();
+	if(input) input.focus();
 }
 
 function getValues(fields, domFields) {
 	var result = Object.create(null), i = 0;
-	for (var name in fields) {
+	for(var name in fields) {
 		var field = fields[name], dom = domFields[i++];
 		var value = field.read(dom), bad = field.validate(value);
-		if (bad) {
+		if(bad) {
 			reportInvalid(dom, bad);
 			return null;
 		}
@@ -114,7 +113,7 @@ Field.prototype.read = function(dom) { return dom.value; };
 Field.prototype.validateType = function(value) { return null; };
 
 Field.prototype.validate = function(value) {
-	if (!value && this.options.required)
+	if(!value && this.options.required)
 		return "Required field";
 	return this.validateType(value) || (this.options.validate ? this.options.validate(value) : null);
 };
@@ -146,12 +145,13 @@ SelectField.prototype = Object.create(Field.prototype);
 
 SelectField.prototype.render = function() {
 	var select = document.createElement("select");
-	this.options.options.forEach(function(o) {
+	for(var i = 0; i < this.options.options.length; i++) {
+		var o = this.options.options[i];
 		var opt = select.appendChild(document.createElement("option"));
 		opt.value = o.value;
 		opt.selected = o.value == this.options.value;
 		opt.label = o.label;
-	}, this);
+	}
 	return select;
 };
 

@@ -8,8 +8,9 @@ Custom slash menu implementation based on prosemirror-slash-menu
 
 "use strict";
 
-var { Plugin, PluginKey } = require("prosemirror-state");
-var { flattenMenuElementsWithGroup } = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js");
+var Plugin = require("prosemirror-state").Plugin;
+var PluginKey = require("prosemirror-state").PluginKey;
+var flattenMenuElementsWithGroup = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js").flattenMenuElementsWithGroup;
 
 var SlashMenuKey = new PluginKey("slash-menu-plugin");
 
@@ -26,8 +27,8 @@ function createSlashMenuPlugin(menuElements, options) {
 	options = options || {};
 	var ignoredKeys = options.ignoredKeys || [];
 	var customConditions = options.customConditions;
-	var triggerCodes = options.triggerCodes || ['Slash']; // Allow custom trigger codes
-	
+	var triggerCodes = options.triggerCodes || ["Slash"];
+
 	var defaultIgnoredKeys = [
 		"Unidentified", "Alt", "AltGraph", "CapsLock", "Control", "Fn", "FnLock",
 		"F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12",
@@ -35,9 +36,9 @@ function createSlashMenuPlugin(menuElements, options) {
 		"Symbol", "SymbolLock", "Enter", "Tab", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowUp",
 		"End", "Home", "PageDown", "PageUp"
 	];
-	
+
 	var allIgnoredKeys = defaultIgnoredKeys.concat(ignoredKeys);
-	
+
 	var initialState = {
 		selected: menuElements.length > 0 ? menuElements[0].id : null,
 		open: false,
@@ -46,15 +47,18 @@ function createSlashMenuPlugin(menuElements, options) {
 		elements: menuElements,
 		ignoredKeys: allIgnoredKeys
 	};
-	
+
 	function defaultConditions() {
 		return {
 			shouldOpen: function(state, event, view) {
-				// Support configurable trigger codes (default: 'Slash' for both '/' and '、')
-				var isSlashTrigger = triggerCodes.includes(event.code);
-				
-				if (!isSlashTrigger) return false;
-				
+				var isSlashTrigger = false;
+				for(var i = 0; i < triggerCodes.length; i++) {
+					if(triggerCodes[i] === event.code) {
+						isSlashTrigger = true;
+						break;
+					}
+				}
+				if(!isSlashTrigger) return false;
 				var editorState = view.state;
 				var resolvedPos = editorState.doc.resolve(editorState.selection.from);
 				var parentNode = resolvedPos.parent;
@@ -63,7 +67,6 @@ function createSlashMenuPlugin(menuElements, options) {
 				var posInLine = editorState.selection.$head.parentOffset;
 				var prevCharacter = editorState.selection.$head.parent.textContent.slice(posInLine - 1, posInLine);
 				var spaceBeforePos = prevCharacter === " " || prevCharacter === "" || prevCharacter === "　";
-				
 				return (
 					!state.open &&
 					inParagraph &&
@@ -71,113 +74,142 @@ function createSlashMenuPlugin(menuElements, options) {
 				);
 			},
 			shouldClose: function(state, event, view) {
+				var isTrigger = false;
+				for(var i = 0; i < triggerCodes.length; i++) {
+					if(triggerCodes[i] === event.code) {
+						isTrigger = true;
+						break;
+					}
+				}
 				return state.open &&
-					(triggerCodes.includes(event.code) || event.key === "Escape" || event.key === "Backspace") &&
+					(isTrigger || event.key === "Escape" || event.key === "Backspace") &&
 					state.filter.length === 0;
 			}
 		};
 	}
-	
+
 	function dispatchWithMeta(view, meta) {
 		view.dispatch(view.state.tr.setMeta(SlashMenuKey, meta));
 	}
-	
+
 	function getElementById(id, state) {
-		return state.filteredElements.find(function(element) {
-			return element.id === id && element.type !== 'group';
-		});
+		for(var i = 0; i < state.filteredElements.length; i++) {
+			var element = state.filteredElements[i];
+			if(element.id === id && element.type !== "group") {
+				return element;
+			}
+		}
+		return undefined;
 	}
 
 	function getNextItemId(state) {
-		var currentIndex = state.filteredElements.findIndex(function(element) { return element.id === state.selected; });
-		for (var i = currentIndex + 1; i < state.filteredElements.length; i++) {
-			if (state.filteredElements[i].type !== 'group') {
+		var currentIndex = -1;
+		for(var i = 0; i < state.filteredElements.length; i++) {
+			if(state.filteredElements[i].id === state.selected) {
+				currentIndex = i;
+				break;
+			}
+		}
+		for(var i = currentIndex + 1; i < state.filteredElements.length; i++) {
+			if(state.filteredElements[i].type !== "group") {
 				return state.filteredElements[i].id;
 			}
 		}
 		return undefined;
 	}
-	
+
 	function getPreviousItemId(state) {
-		var currentIndex = state.filteredElements.findIndex(function(element) { return element.id === state.selected; });
-		for (var i = currentIndex - 1; i >= 0; i--) {
-			if (state.filteredElements[i].type !== 'group') {
+		var currentIndex = -1;
+		for(var i = 0; i < state.filteredElements.length; i++) {
+			if(state.filteredElements[i].id === state.selected) {
+				currentIndex = i;
+				break;
+			}
+		}
+		for(var i = currentIndex - 1; i >= 0; i--) {
+			if(state.filteredElements[i].type !== "group") {
 				return state.filteredElements[i].id;
 			}
 		}
 		return undefined;
 	}
-	
+
 	function getFilteredItems(state, input) {
 		var allElements = flattenMenuElementsWithGroup(state.elements);
 		var regExp = new RegExp(input.toLowerCase().replace(/\s/g, "\\s"));
-		return allElements.filter(function(element) {
-			if (element.type === "group") return true; // 分组标题始终显示
-			return element.label.toLowerCase().match(regExp) !== null && !element.locked;
-		});
+		var result = [];
+		for(var i = 0; i < allElements.length; i++) {
+			var element = allElements[i];
+			if(element.type === "group") {
+				result.push(element);
+			} else if(element.label.toLowerCase().match(regExp) !== null && !element.locked) {
+				result.push(element);
+			}
+		}
+		return result;
 	}
-	
+
 	function getCase(state, event, view) {
 		var condition = customConditions || defaultConditions();
-		
-		if (condition.shouldOpen(state, event, view)) {
+		if(condition.shouldOpen(state, event, view)) {
 			return "OpenMenu";
 		}
-		if (condition.shouldClose(state, event, view)) {
+		if(condition.shouldClose(state, event, view)) {
 			return "CloseMenu";
 		}
-		if (state.open) {
-			// Handle arrow keys even when event.key is "Process" (IME)
-			if (event.code === "ArrowDown" || event.key === "ArrowDown") {
+		if(state.open) {
+			if(event.code === "ArrowDown" || event.key === "ArrowDown") {
 				return "NextItem";
 			}
-			if (event.code === "ArrowUp" || event.key === "ArrowUp") {
+			if(event.code === "ArrowUp" || event.key === "ArrowUp") {
 				return "PrevItem";
 			}
-			if (event.code === "Enter" || event.key === "Enter" || event.code === "Tab" || event.key === "Tab") {
+			if(event.code === "Enter" || event.key === "Enter" || event.code === "Tab" || event.key === "Tab") {
 				return "Execute";
 			}
-			if (event.code === "Escape" || event.key === "Escape" || (event.code === "Backspace" || event.key === "Backspace") && state.filter.length === 0) {
+			if(event.code === "Escape" || event.key === "Escape" || (event.code === "Backspace" || event.key === "Backspace") && state.filter.length === 0) {
 				return "CloseMenu";
 			}
-			if (state.filter.length > 0 && (event.code === "Backspace" || event.key === "Backspace")) {
+			if(state.filter.length > 0 && (event.code === "Backspace" || event.key === "Backspace")) {
 				return "removeChar";
 			}
-			if (!allIgnoredKeys.includes(event.key) && event.key !== "Process") {
+			var isIgnored = false;
+			for(var i = 0; i < allIgnoredKeys.length; i++) {
+				if(allIgnoredKeys[i] === event.key) {
+					isIgnored = true;
+					break;
+				}
+			}
+			if(!isIgnored && event.key !== "Process") {
 				return "addChar";
 			}
-			if (event.code === "ArrowLeft" || event.key === "ArrowLeft" || event.code === "ArrowRight" || event.key === "ArrowRight") {
+			if(event.code === "ArrowLeft" || event.key === "ArrowLeft" || event.code === "ArrowRight" || event.key === "ArrowRight") {
 				return "Catch";
 			}
 		}
-		
 		return "Ignore";
 	}
-	
+
 	return new Plugin({
 		key: SlashMenuKey,
 		props: {
 			handleKeyDown: function(view, event) {
 				var editorState = view.state;
 				var state = SlashMenuKey.getState(editorState);
-				if (!state) return false;
-				
+				if(!state) return false;
 				var slashCase = getCase(state, event, view);
-				
-				switch (slashCase) {
+				switch(slashCase) {
 					case "OpenMenu":
 						dispatchWithMeta(view, { type: SlashMetaTypes.open });
-						// For non-IME input (like /), the character hasn't been inserted yet due to return true
-						// For IME input (like 、), the character will be handled by compositionend
-						return true; // Always prevent character input when opening menu
+						return true;
 					case "CloseMenu":
-						if (!state.open) return false;
+						if(!state.open) return false;
 						dispatchWithMeta(view, { type: SlashMetaTypes.close });
 						return true;
 					case "Execute":
 						var menuElement = getElementById(state.selected, state);
-						if (!menuElement) return false;
-						if (menuElement.type === "command") {
+						if(!menuElement) return false;
+						if(menuElement.type === "command") {
 							menuElement.command(view);
 							dispatchWithMeta(view, { type: SlashMetaTypes.execute });
 						}
@@ -193,14 +225,14 @@ function createSlashMenuPlugin(menuElements, options) {
 							type: SlashMetaTypes.inputChange,
 							filter: state.filter + event.key
 						});
-						return true; // Prevent character from being added to document
+						return true;
 					case "removeChar":
 						var newFilter = state.filter.length === 1 ? "" : state.filter.slice(0, -1);
 						dispatchWithMeta(view, {
 							type: SlashMetaTypes.inputChange,
 							filter: newFilter
 						});
-						return true; // Prevent backspace from affecting document
+						return true;
 					case "Catch":
 						return true;
 					case "Ignore":
@@ -211,41 +243,36 @@ function createSlashMenuPlugin(menuElements, options) {
 			handleDOMEvents: {
 				compositionstart: function(view, event) {
 					var state = SlashMenuKey.getState(view.state);
-					if (state && state.open) {
-						// Store that we're in composition mode for menu filtering
+					if(state && state.open) {
 						this._slashMenuComposing = true;
 					}
 					return false;
 				},
 				compositionupdate: function(view, event) {
 					var state = SlashMenuKey.getState(view.state);
-					if (state && state.open && this._slashMenuComposing) {
-						// Update filter with composition text
+					if(state && state.open && this._slashMenuComposing) {
 						var data = event.data;
-						if (data && data !== '、' && data !== '/') {
+						if(data && data !== "、" && data !== "/") {
 							dispatchWithMeta(view, {
 								type: SlashMetaTypes.inputChange,
 								filter: data
 							});
 						}
-						return true; // Prevent the composition from being inserted
+						return true;
 					}
 					return false;
 				},
 				compositionend: function(view, event) {
 					var state = SlashMenuKey.getState(view.state);
-					if (state && state.open) {
-						// Check if the composed text should trigger menu close
+					if(state && state.open) {
 						var data = event.data;
-						if (data && (data === '、' || data === '/')) {
-							// Remove the composed character that was just inserted
+						if(data && (data === "、" || data === "/")) {
 							setTimeout(function() {
 								var currentState = view.state;
 								var tr = currentState.tr.delete(currentState.selection.from - data.length, currentState.selection.from);
 								view.dispatch(tr);
 							}, 0);
-						} else if (this._slashMenuComposing && data) {
-							// For composition text used for filtering, update the filter and prevent insertion
+						} else if(this._slashMenuComposing && data) {
 							setTimeout(function() {
 								var currentState = view.state;
 								var tr = currentState.tr.delete(currentState.selection.from - data.length, currentState.selection.from);
@@ -256,10 +283,9 @@ function createSlashMenuPlugin(menuElements, options) {
 								});
 							}, 0);
 						}
-						// Reset composition flag
 						this._slashMenuComposing = false;
 					}
-					return false; // Always return false to allow normal processing
+					return false;
 				}
 			}
 		},
@@ -269,31 +295,57 @@ function createSlashMenuPlugin(menuElements, options) {
 			},
 			apply: function(tr, state) {
 				var meta = tr.getMeta(SlashMenuKey);
-				if (!meta) return state;
-				
-				switch (meta.type) {
+				if(!meta) return state;
+				var newState;
+				switch(meta.type) {
 					case SlashMetaTypes.open:
-						return Object.assign({}, initialState, { open: true });
+						newState = {};
+						for(var key in initialState) {
+							if(initialState.hasOwnProperty(key)) {
+								newState[key] = initialState[key];
+							}
+						}
+						newState.open = true;
+						return newState;
 					case SlashMetaTypes.close:
 						return initialState;
 					case SlashMetaTypes.execute:
 						return initialState;
 					case SlashMetaTypes.nextItem:
 						var nextId = getNextItemId(state);
-						if (!nextId) return state;
-						return Object.assign({}, state, { selected: nextId });
+						if(!nextId) return state;
+						newState = {};
+						for(var key in state) {
+							if(state.hasOwnProperty(key)) {
+								newState[key] = state[key];
+							}
+						}
+						newState.selected = nextId;
+						return newState;
 					case SlashMetaTypes.prevItem:
 						var prevId = getPreviousItemId(state);
-						if (!prevId) return state;
-						return Object.assign({}, state, { selected: prevId });
+						if(!prevId) return state;
+						newState = {};
+						for(var key in state) {
+							if(state.hasOwnProperty(key)) {
+								newState[key] = state[key];
+							}
+						}
+						newState.selected = prevId;
+						return newState;
 					case SlashMetaTypes.inputChange:
 						var newElements = meta.filter ? getFilteredItems(state, meta.filter) : flattenMenuElementsWithGroup(initialState.elements);
 						var selectedId = newElements[0] ? newElements[0].id : state.selected;
-						return Object.assign({}, state, {
-							selected: selectedId,
-							filteredElements: newElements,
-							filter: meta.filter || ""
-						});
+						newState = {};
+						for(var key in state) {
+							if(state.hasOwnProperty(key)) {
+								newState[key] = state[key];
+							}
+						}
+						newState.selected = selectedId;
+						newState.filteredElements = newElements;
+						newState.filter = meta.filter || "";
+						return newState;
 					default:
 						return state;
 				}

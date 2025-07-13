@@ -7,18 +7,18 @@ module-type: library
 
 "use strict";
 
-var { keymap } = require("prosemirror-keymap");
-var { history } = require("prosemirror-history");
-var { baseKeymap } = require("prosemirror-commands");
-var { Plugin } = require("prosemirror-state");
-var { dropCursor } = require("prosemirror-dropcursor");
-var { gapCursor } = require("prosemirror-gapcursor");
-var { menuBar } = require("prosemirror-menu");
-var { Schema } = require("prosemirror-model");
+var keymap = require("prosemirror-keymap").keymap;
+var history = require("prosemirror-history").history;
+var baseKeymap = require("prosemirror-commands").baseKeymap;
+var Plugin = require("prosemirror-state").Plugin;
+var dropCursor = require("prosemirror-dropcursor").dropCursor;
+var gapCursor = require("prosemirror-gapcursor").gapCursor;
+var menuBar = require("prosemirror-menu").menuBar;
+var Schema = require("prosemirror-model").Schema;
 
-var { buildMenuItems } = require("$:/plugins/tiddlywiki/prosemirror/setup/menu.js");
-var { buildKeymap } = require("$:/plugins/tiddlywiki/prosemirror/setup/keymap.js");
-var { buildInputRules } = require("$:/plugins/tiddlywiki/prosemirror/setup/inputrules.js");
+var buildMenuItems = require("$:/plugins/tiddlywiki/prosemirror/setup/menu.js").buildMenuItems;
+var buildKeymap = require("$:/plugins/tiddlywiki/prosemirror/setup/keymap.js").buildKeymap;
+var buildInputRules = require("$:/plugins/tiddlywiki/prosemirror/setup/inputrules.js").buildInputRules;
 
 exports.buildMenuItems = buildMenuItems;
 exports.buildKeymap = buildKeymap;
@@ -32,9 +32,9 @@ function exampleSetup(options) {
 		dropCursor(),
 		gapCursor()
 	];
-	if (options.menuBar !== false)
+	if(options.menuBar !== false)
 		plugins.push(menuBar({ floating: options.floatingMenu !== false, content: options.menuContent || buildMenuItems(options.schema).fullMenu }));
-	if (options.history !== false)
+	if(options.history !== false)
 		plugins.push(history());
 
 	return plugins.concat(new Plugin({

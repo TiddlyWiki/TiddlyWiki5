@@ -26,8 +26,8 @@ function buildUnorderedList(context, node) {
 	// Prosemirror requires split all lists into separate lists with single items
 	return node.children.map(function(item) {
 		var newContext = {};
-		for (var key in context) {
-			if (context.hasOwnProperty(key)) {
+		for(var key in context) {
+			if(context.hasOwnProperty(key)) {
 				newContext[key] = context[key];
 			}
 		}
@@ -49,8 +49,8 @@ function buildUnorderedList(context, node) {
 function buildOrderedList(context, node) {
 	return node.children.map(function(item) {
 		var newContext = {};
-		for (var key in context) {
-			if (context.hasOwnProperty(key)) {
+		for(var key in context) {
+			if(context.hasOwnProperty(key)) {
 				newContext[key] = context[key];
 			}
 		}
@@ -75,7 +75,7 @@ function buildOrderedList(context, node) {
  * ProseMirror requires list items to contain block content, not bare text
  */
 function wrapTextNodesInParagraphs(context, nodes) {
-	if (!nodes || nodes.length === 0) {
+	if(!nodes || nodes.length === 0) {
 		return [];
 	}
 
@@ -83,7 +83,7 @@ function wrapTextNodesInParagraphs(context, nodes) {
 	var currentTextNodes = [];
 
 	function flushTextNodes() {
-		if (currentTextNodes.length > 0) {
+		if(currentTextNodes.length > 0) {
 			result.push({
 				type: "paragraph",
 				content: currentTextNodes
@@ -94,7 +94,7 @@ function wrapTextNodesInParagraphs(context, nodes) {
 
 	nodes.forEach(function(node) {
 		// If it's a text node, collect it
-		if (node.type === "text") {
+		if(node.type === "text") {
 			currentTextNodes.push(node);
 		} else {
 			// If we encounter a non-text node, flush any collected text nodes
@@ -112,8 +112,8 @@ function wrapTextNodesInParagraphs(context, nodes) {
 
 function buildListItem(context, node) {
 	var newContext = {};
-	for (var key in context) {
-		if (context.hasOwnProperty(key)) {
+	for(var key in context) {
+		if(context.hasOwnProperty(key)) {
 			newContext[key] = context[key];
 		}
 	}
@@ -126,14 +126,14 @@ function buildListItem(context, node) {
 function buildTextWithMark(context, node, markType) {
 	var content = convertNodes(context, node.children);
 	return content.map(function(childNode) {
-		if (childNode.type === "text") {
+		if(childNode.type === "text") {
 			// Add the mark to the text node
 			var marks = childNode.marks || [];
 			var newMarks = marks.slice();
 			newMarks.push({ type: markType });
 			var result = {};
-			for (var key in childNode) {
-				if (childNode.hasOwnProperty(key)) {
+			for(var key in childNode) {
+				if(childNode.hasOwnProperty(key)) {
 					result[key] = childNode[key];
 				}
 			}
@@ -174,13 +174,22 @@ function buildSub(context, node) {
 
 function buildCodeBlock(context, node) {
 	// Extract text content from the code element inside pre
-	const codeElement = node.children && node.children.find(child => child.tag === "code");
-	if (codeElement && codeElement.children) {
-		const textContent = codeElement.children
-			.filter(child => child.type === "text")
-			.map(child => child.text)
-			.join("");
-		
+	var codeElement = null;
+	if(node.children && node.children.length > 0) {
+		for(var i = 0; i < node.children.length; i++) {
+			if(node.children[i].tag === "code") {
+				codeElement = node.children[i];
+				break;
+			}
+		}
+	}
+	if(codeElement && codeElement.children) {
+		var textContent = "";
+		for(var j = 0; j < codeElement.children.length; j++) {
+			if(codeElement.children[j].type === "text") {
+				textContent += codeElement.children[j].text;
+			}
+		}
 		return {
 			type: "code_block",
 			content: [{
@@ -189,20 +198,20 @@ function buildCodeBlock(context, node) {
 			}]
 		};
 	}
-	
 	// Fallback: extract all text from children
-	const textContent = node.children
-		? node.children
-			.filter(child => child.type === "text")
-			.map(child => child.text)
-			.join("")
-		: "";
-	
+	var fallbackText = "";
+	if(node.children) {
+		for(var k = 0; k < node.children.length; k++) {
+			if(node.children[k].type === "text") {
+				fallbackText += node.children[k].text;
+			}
+		}
+	}
 	return {
 		type: "code_block",
 		content: [{
 			type: "text",
-			text: textContent
+			text: fallbackText
 		}]
 	};
 }
@@ -210,7 +219,7 @@ function buildCodeBlock(context, node) {
 /**
  * Many node shares same type `element` in wikiAst, we need to distinguish them by tag.
  */
-const elementBuilders = {
+var elementBuilders = {
 	p: buildParagraph,
 	h1: function(context, node) { return buildHeading(context, node, 1); },
 	h2: function(context, node) { return buildHeading(context, node, 2); },
@@ -233,7 +242,7 @@ const elementBuilders = {
 
 function element(context, node) {
 	var builder = elementBuilders[node.tag];
-	if (builder) {
+	if(builder) {
 		return builder(context, node);
 	} else {
 		console.warn("Unknown element tag: " + node.tag);
@@ -275,14 +284,14 @@ var builders = {
 function wikiAstToProsemirrorAst(node, options) {
 	// Initialize context with level tracking
 	var context = {};
-	for (var key in builders) {
-		if (builders.hasOwnProperty(key)) {
+	for(var key in builders) {
+		if(builders.hasOwnProperty(key)) {
 			context[key] = builders[key];
 		}
 	}
-	if (options) {
-		for (var key in options) {
-			if (options.hasOwnProperty(key)) {
+	if(options) {
+		for(var key in options) {
+			if(options.hasOwnProperty(key)) {
 				context[key] = options[key];
 			}
 		}
@@ -291,7 +300,7 @@ function wikiAstToProsemirrorAst(node, options) {
 	var result = convertNodes(context, Array.isArray(node) ? node : [node]);
 	
 	// Wrap in a doc if needed
-	if (result.length > 0 && result[0].type !== "doc") {
+	if(result.length > 0 && result[0].type !== "doc") {
 		return {
 			type: "doc",
 			content: result
@@ -304,7 +313,7 @@ function wikiAstToProsemirrorAst(node, options) {
 exports.to = wikiAstToProsemirrorAst;
 
 function convertNodes(context, nodes) {
-	if (nodes === undefined || nodes.length === 0) {
+	if(nodes === undefined || nodes.length === 0) {
 		return [];
 	}
 
@@ -316,7 +325,7 @@ function convertNodes(context, nodes) {
 
 function convertANode(context, node) {
 	var builder = context[node.type];
-	if (typeof builder === 'function') {
+	if(typeof builder === "function") {
 		var convertedNode = builder(context, node);
 		var arrayOfNodes = (Array.isArray(convertedNode)
 		? convertedNode : [convertedNode]);

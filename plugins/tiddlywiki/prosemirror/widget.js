@@ -12,21 +12,20 @@ var debounce = require("$:/core/modules/utils/debounce.js").debounce;
 var wikiAstFromProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js").from;
 var wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js").to;
 
-var { EditorState } = require("prosemirror-state");
-var { EditorView } = require("prosemirror-view");
-var { Schema, DOMParser } = require("prosemirror-model");
-var { schema: basicSchema } = require("prosemirror-schema-basic");
-var {
-	createListPlugins,
-	createListSpec,
-	listKeymap
-} = require("prosemirror-flat-list");
-var { exampleSetup } = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js");
-var { keymap } = require("prosemirror-keymap");
-var { inputRules } = require("prosemirror-inputrules");
-var { SlashMenuPlugin } = require("$:/plugins/tiddlywiki/prosemirror/slash-menu.js");
-var { SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/slash-menu-ui.js");
-var { getAllMenuElements } = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js");
+var EditorState = require("prosemirror-state").EditorState;
+var EditorView = require("prosemirror-view").EditorView;
+var Schema = require("prosemirror-model").Schema;
+var DOMParser = require("prosemirror-model").DOMParser;
+var basicSchema = require("prosemirror-schema-basic").schema;
+var createListPlugins = require("prosemirror-flat-list").createListPlugins;
+var createListSpec = require("prosemirror-flat-list").createListSpec;
+var listKeymap = require("prosemirror-flat-list").listKeymap;
+var exampleSetup = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js").exampleSetup;
+var keymap = require("prosemirror-keymap").keymap;
+var inputRules = require("prosemirror-inputrules").inputRules;
+var SlashMenuPlugin = require("$:/plugins/tiddlywiki/prosemirror/slash-menu.js").SlashMenuPlugin;
+var SlashMenuUI = require("$:/plugins/tiddlywiki/prosemirror/slash-menu-ui.js").SlashMenuUI;
+var getAllMenuElements = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js").getAllMenuElements;
 
 var ProsemirrorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -52,17 +51,17 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	var initialWikiAst = $tw.wiki.parseText(null, initialText).tree;
 	var doc = wikiAstToProseMirrorAst(initialWikiAst);
 
-	var container = $tw.utils.domMaker('div', {
-		class: 'tc-prosemirror-container',
+	var container = $tw.utils.domMaker("div", {
+		class: "tc-prosemirror-container"
 	});
 	
 	var schema = new Schema({
 		nodes: basicSchema.spec.nodes.append({ list: createListSpec() }),
-		marks: basicSchema.spec.marks,
-	})
+		marks: basicSchema.spec.marks
+	});
 	
-	var listKeymapPlugin = keymap(listKeymap)
-	var listPlugins = createListPlugins({ schema })
+	var listKeymapPlugin = keymap(listKeymap);
+	var listPlugins = createListPlugins({ schema: schema });
 
 	var allMenuElements = getAllMenuElements(this.wiki, schema);
 
@@ -73,19 +72,19 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 			doc: schema.nodeFromJSON(doc),
 			plugins: [
 				SlashMenuPlugin(allMenuElements, {
-					triggerCodes: ['Slash', 'Backslash'] // Support both / (、) and \ keys
+					triggerCodes: ["Slash", "Backslash"] // Support both / (、) and \ keys
 				}),
-				listKeymapPlugin,
-				...listPlugins,
-				...exampleSetup({ schema }),
-			],
+				listKeymapPlugin
+			]
+			.concat(listPlugins)
+			.concat(exampleSetup({ schema: schema })),
 		}),
 		dispatchTransaction: function(transaction) {
 			var newState = self.view.state.apply(transaction);
 			self.view.updateState(newState);
 			self.debouncedSaveEditorContent();
 		}
-	})
+	});
 	
 	// Initialize SlashMenu UI
 	this.slashMenuUI = new SlashMenuUI(this.view, {
@@ -102,7 +101,7 @@ ProsemirrorWidget.prototype.saveEditorContent = function() {
 	var wikiText = $tw.utils.serializeWikitextParseTree(wikiast);
 	var tiddler = this.getAttribute("tiddler");
 	var currentText = this.wiki.getTiddlerText(tiddler, "");
-	if (currentText !== wikiText) {
+	if(currentText !== wikiText) {
 		this.saveLock = true;
 		this.wiki.setText(tiddler, "text", undefined, wikiText);
 	}
@@ -126,8 +125,8 @@ ProsemirrorWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.text) {
 		this.refreshSelf();
 		return true;
-	} else if (changedTiddlers[this.getAttribute("tiddler")]) {
-		if (this.saveLock) {
+	} else if(changedTiddlers[this.getAttribute("tiddler")]) {
+		if(this.saveLock) {
 			// Skip refresh if the change is triggered by the widget itself
 			this.saveLock = false;
 			return false;

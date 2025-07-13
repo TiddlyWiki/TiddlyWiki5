@@ -7,31 +7,33 @@ module-type: library
 
 "use strict";
 
-var {
-	wrapItem,
-	blockTypeItem,
-	Dropdown,
-	DropdownSubmenu,
-	joinUpItem,
-	liftItem,
-	selectParentNodeItem,
-	undoItem,
-	redoItem,
-	icons,
-	MenuItem,
-	MenuElement
-} = require("prosemirror-menu");
-var { NodeSelection, EditorState } = require("prosemirror-state");
-var { Schema, NodeType, MarkType } = require("prosemirror-model");
-var { toggleMark } = require("prosemirror-commands");
-var { wrapInList } = require("prosemirror-flat-list");
-var { TextField, openPrompt } = require("$:/plugins/tiddlywiki/prosemirror/setup/prompt.js");
+var wrapItem = require("prosemirror-menu").wrapItem;
+var blockTypeItem = require("prosemirror-menu").blockTypeItem;
+var Dropdown = require("prosemirror-menu").Dropdown;
+var DropdownSubmenu = require("prosemirror-menu").DropdownSubmenu;
+var joinUpItem = require("prosemirror-menu").joinUpItem;
+var liftItem = require("prosemirror-menu").liftItem;
+var selectParentNodeItem = require("prosemirror-menu").selectParentNodeItem;
+var undoItem = require("prosemirror-menu").undoItem;
+var redoItem = require("prosemirror-menu").redoItem;
+var icons = require("prosemirror-menu").icons;
+var MenuItem = require("prosemirror-menu").MenuItem;
+var MenuElement = require("prosemirror-menu").MenuElement;
+var NodeSelection = require("prosemirror-state").NodeSelection;
+var EditorState = require("prosemirror-state").EditorState;
+var Schema = require("prosemirror-model").Schema;
+var NodeType = require("prosemirror-model").NodeType;
+var MarkType = require("prosemirror-model").MarkType;
+var toggleMark = require("prosemirror-commands").toggleMark;
+var wrapInList = require("prosemirror-flat-list").wrapInList;
+var TextField = require("$:/plugins/tiddlywiki/prosemirror/setup/prompt.js").TextField;
+var openPrompt = require("$:/plugins/tiddlywiki/prosemirror/setup/prompt.js").openPrompt;
 
 function canInsert(state, nodeType) {
 	var $from = state.selection.$from;
-	for (var d = $from.depth; d >= 0; d--) {
+	for(var d = $from.depth; d >= 0; d--) {
 		var index = $from.index(d);
-		if ($from.node(d).canReplaceWith(index, index, nodeType)) return true;
+		if($from.node(d).canReplaceWith(index, index, nodeType)) return true;
 	}
 	return false;
 }
@@ -43,7 +45,7 @@ function insertImageItem(nodeType) {
 		enable: function(state) { return canInsert(state, nodeType); },
 		run: function(state, _, view) {
 			var from = state.selection.from, to = state.selection.to, attrs = null;
-			if (state.selection instanceof NodeSelection && state.selection.node.type == nodeType)
+			if(state.selection instanceof NodeSelection && state.selection.node.type == nodeType)
 				attrs = state.selection.node.attrs;
 			openPrompt({
 				title: "Insert image",
@@ -66,8 +68,8 @@ function cmdItem(cmd, options) {
 		label: options.title,
 		run: cmd
 	};
-	for (var prop in options) passedOptions[prop] = options[prop];
-	if (!options.enable && !options.select)
+	for(var prop in options) passedOptions[prop] = options[prop];
+	if(!options.enable && !options.select)
 		passedOptions[options.enable ? "enable" : "select"] = function(state) { return cmd(state); };
 
 	return new MenuItem(passedOptions);
@@ -75,7 +77,7 @@ function cmdItem(cmd, options) {
 
 function markActive(state, type) {
 	var from = state.selection.from, $from = state.selection.$from, to = state.selection.to, empty = state.selection.empty;
-	if (empty) return !!type.isInSet(state.storedMarks || $from.marks());
+	if(empty) return !!type.isInSet(state.storedMarks || $from.marks());
 	else return state.doc.rangeHasMark(from, to, type);
 }
 
@@ -83,7 +85,7 @@ function markItem(markType, options) {
 	var passedOptions = {
 		active: function(state) { return markActive(state, markType); }
 	};
-	for (var prop in options) passedOptions[prop] = options[prop];
+	for(var prop in options) passedOptions[prop] = options[prop];
 	return cmdItem(toggleMark(markType), passedOptions);
 }
 
@@ -94,7 +96,7 @@ function linkItem(markType) {
 		active: function(state) { return markActive(state, markType); },
 		enable: function(state) { return !state.selection.empty; },
 		run: function(state, dispatch, view) {
-			if (markActive(state, markType)) {
+			if(markActive(state, markType)) {
 				toggleMark(markType)(state, dispatch);
 				return true;
 			}
@@ -120,32 +122,44 @@ function wrapListItem(nodeType, options) {
 function buildMenuItems(schema) {
 	var r = {};
 	var mark;
-	if (mark = schema.marks.strong)
+	mark = schema.marks.strong;
+	if(mark)
 		r.toggleStrong = markItem(mark, {title: "Toggle strong style", icon: icons.strong});
-	if (mark = schema.marks.em)
+	mark = schema.marks.em;
+	if(mark)
 		r.toggleEm = markItem(mark, {title: "Toggle emphasis", icon: icons.em});
-	if (mark = schema.marks.code)
+	mark = schema.marks.code;
+	if(mark)
 		r.toggleCode = markItem(mark, {title: "Toggle code font", icon: icons.code});
-	if (mark = schema.marks.link)
+	mark = schema.marks.link;
+	if(mark)
 		r.toggleLink = linkItem(mark);
 
 	var node;
-	if (node = schema.nodes.image)
+	node = schema.nodes.image;
+	if(node)
 		r.insertImage = insertImageItem(node);
-	if (node = schema.nodes.bullet_list)
+	node = schema.nodes.bullet_list;
+	if(node)
 		r.wrapBulletList = wrapListItem(node, {title: "Wrap in bullet list", icon: icons.bulletList});
-	if (node = schema.nodes.ordered_list)
+	node = schema.nodes.ordered_list;
+	if(node)
 		r.wrapOrderedList = wrapListItem(node, {title: "Wrap in ordered list", icon: icons.orderedList});
-	if (node = schema.nodes.blockquote)
+	node = schema.nodes.blockquote;
+	if(node)
 		r.wrapBlockQuote = wrapItem(node, {title: "Wrap in block quote", icon: icons.blockquote});
-	if (node = schema.nodes.paragraph)
+	node = schema.nodes.paragraph;
+	if(node)
 		r.makeParagraph = blockTypeItem(node, {title: "Change to paragraph", label: "Plain"});
-	if (node = schema.nodes.code_block)
+	node = schema.nodes.code_block;
+	if(node)
 		r.makeCodeBlock = blockTypeItem(node, {title: "Change to code block", label: "Code"});
-	if (node = schema.nodes.heading)
-		for (var i = 1; i <= 10; i++)
+	node = schema.nodes.heading;
+	if(node)
+		for(var i = 1; i <= 10; i++)
 			r["makeHead" + i] = blockTypeItem(node, {title: "Change to heading " + i, label: "Level " + i, attrs: {level: i}});
-	if (node = schema.nodes.horizontal_rule) {
+	node = schema.nodes.horizontal_rule;
+	if(node) {
 		var hr = node;
 		r.insertHorizontalRule = new MenuItem({
 			title: "Insert horizontal rule",
