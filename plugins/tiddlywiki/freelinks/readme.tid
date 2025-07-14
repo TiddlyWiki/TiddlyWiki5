@@ -1,85 +1,63 @@
 title: $:/plugins/tiddlywiki/freelinks/readme
 
-This plugin transforms TiddlyWiki into a more connected experience by intelligently auto-linking text to existing tiddler titles, creating a web of knowledge that emerges naturally as you write.
+This plugin adds automatic generation of links to tiddler titles.
 
-''✨ Built with cutting-edge Aho-Corasick algorithm optimization - handles thousands of tiddlers without breaking a sweat!''
+The plugin uses the Aho-Corasick algorithm for efficient pattern matching with large numbers of tiddlers.
 
-!! ⚙️ Quick Setup
+!! Configuration
 
-The magic happens when these conditions are met:
-* `tv-wikilinks` is NOT set to `no` 
+Freelinking is activated for runs of text that have the following variables set:
+
+* `tv-wikilinks` is NOT equal to `no`
 * `tv-freelinks` is set to `yes`
 
-''Pro tip'': Toggle case sensitivity and word boundary checking in the settings panel to fine-tune your linking experience!
+Freelinks are case sensitive by default but can be configured to ignore case in the settings panel.
 
-🌍 ''Universal Language Support'': Works seamlessly with any language - English, 中文, 日本語, العربية, русский - you name it! The plugin intelligently handles Unicode characters and uses locale-aware sorting to prioritize longer, more specific matches.
+Word boundary checking can be configured in the settings panel. When enabled (default for Western languages), links are created only for complete words. When disabled, partial matches within words are also linked.
 
-🎯 ''Smart Matching'': Longer titles take precedence (so "Machine Learning Guide" links before just "Machine"), and the plugin cleverly avoids self-referential links within the current tiddler.
+When multiple tiddler titles match the same text, longer titles take precedence over shorter ones.
 
-Within view templates, the variable `tv-freelinks` is automatically set to the value of `$:/config/Freelinks/Enable`, which can be adjusted through the plugin's settings interface.
+Tiddlers do not create links to themselves.
 
-!! 🔧 Advanced Configuration
+Use `$:/config/Freelinks/TargetFilter` to define which tiddlers are eligible for auto-linking.
 
-To customize which tiddlers trigger freelinking, modify the shadow tiddler [[$:/plugins/tiddlywiki/freelinks/macros/view]]. This tiddler is tagged `$:/tags/Macro/View`, ensuring it acts as a local macro in each view template. The default content is:
+Within view templates, the variable `tv-freelinks` is automatically set to the content of `$:/config/Freelinks/Enable`, which can be set via the settings panel of this plugin.
+
+!! Notes
+
+To change within which tiddlers freelinking occurs requires customising the shadow tiddler [[$:/plugins/tiddlywiki/freelinks/macros/view]]. This tiddler is tagged `$:/tags/Macro/View` which means that it will be included as a local macro in each view template. By default, its content is:
 
 ```
 <$set name="tv-freelinks" value={{$:/config/Freelinks/Enable}}/>
 ```
 
-This sets `tv-freelinks` to the value of `$:/config/Freelinks/Enable` (either "yes" or "no") for each tiddler, as defined in the control panel settings.
+That means that for each tiddler the variable `tv-freelinks` will be set to the tiddler `$:/config/Freelinks/Enable`, which is set to "yes" or "no" by the settings in control panel.
 
-For more specific control, you can use filter expressions. For example, to enable freelinking only within the tiddler titled "HelloThere":
+Instead, we can use a filter expression to, say, only freelink within the tiddler with the title "HelloThere":
 
 ```
 <$set name="tv-freelinks" value={{{ [<currentTiddler>match[HelloThere]then[yes]else[no]] }}}/>
 ```
 
-To limit freelinking to tiddlers tagged "MyTag":
+Or, we can make a filter that will only freelink within tiddlers with the tag "MyTag":
 
 ```
 <$set name="tv-freelinks" value={{{ [<currentTiddler>tag[MyTags]then[yes]else[no]] }}}/>
 ```
 
-You can also combine conditions, such as freelinking only for "HelloThere" with the "MyTag" tag:
+Or we can combine both approaches:
 
 ```
 <$set name="tv-freelinks" value={{{ [<currentTiddler>match[HelloThere]] ~[<currentTiddler>tag[MyTag]] +[then[yes]else[no]] }}}/>
 ```
 
-!! 🎨 Feature Highlights
+!! Implementation Details
 
-''🎯 Target Filter'': Use `$:/config/Freelinks/TargetFilter` to define which tiddlers get the auto-link treatment
+The Aho-Corasick algorithm implementation includes:
 
-''🔤 Word Boundary Intelligence'' (Western languages):<br>
-  - ''Enabled'' (default): Links only complete words → @@__Yes__@@ eyes eYes (only "Yes" gets linked)<br>
-  - ''Disabled'': Links partial matches too → @@__Yes__@@ eyes e@@__Yes__@@ (both "Yes" instances get linked)
+* Unicode character support for international text
+* Prevention of self-referential links within the current tiddler
+* Performance safeguards including depth protection and result limiting
+* Graceful fallback handling for invalid patterns
 
-''🧠 Smart Prioritization'': "Machine Learning Tutorial" gets linked before just "Machine" - context matters!
-
-''🚫 Self-Link Prevention'': No awkward self-references - tiddlers don't link to themselves
-
-!! ⚡ Under the Hood
-
-''Lightning-Fast Algorithm'': Powered by optimized Aho-Corasick with smart safeguards:<br>
-* ''Depth Protection'': Max 100 failure link transitions per character<br>
-* ''Scale Handling'': Processes up to 100K nodes (or 15× your pattern count)<br>
-* ''Result Limiting'': Cap of 10,000 matches per text block<br>
-* ''Memory Smart'': Uses TiddlyWiki's global cache for blazing performance
-
-''Bulletproof Reliability'':<br>
-* Invalid patterns? Skipped automatically<br>
-* Algorithm hiccups? Falls back gracefully to normal text<br>
-* Unicode chaos? Properly escaped and handled
-
-//Perfect for wikis with thousands of tiddlers - stress tested and ready for action!//
-
-!! 🙏 Credits & Thanks
-
-Built with love and powered by AI collaboration:<br>
-- 🤖 ''[[Grok|https://grok.com/?referrer=website]]'' (60%) - The creative spark<br>
-- 🧠 ''[[Claude|https://claude.ai/new]]'' (40%) - The technical precision
-
-*A heartfelt thank you to both AI assistants for making this ambitious rewrite possible!*
-
----
-*Questions? Issues? The TiddlyWiki community is here to help! 🚀*
+Longer tiddler titles take precedence over shorter ones when multiple matches are possible.
