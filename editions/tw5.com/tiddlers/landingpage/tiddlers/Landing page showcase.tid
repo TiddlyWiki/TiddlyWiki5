@@ -1,0 +1,43 @@
+created: 20210423103059225
+modified: 20210423114750267
+tags: 
+title: Landing page showcase
+
+<section id="showcase" class="text-gray-600 body-font bg-white">
+  <div class="container px-5 py-24 mx-auto">
+		<h2 class="mb-1 text-xs font-medium tracking-widest text-green-500 title-font text-center pb-2">WikiText</h2>
+    <h1 class="text-3xl font-medium title-font text-gray-900 mb-12 text-center mt-0">Use wigdets to add rich functionality</h1>
+		<div class="flex flex-wrap -m-4">
+      <div class="p-4 md:w-1/2 w-full">
+        <div class="h-full p-2">
+
+```
+! Outstanding tasks
+
+<<list-tagged-draggable tag:"task" subFilter:"!has[draft.of]!tag[done]" itemTemplate:"TaskManagementExampleDraggableTemplate" emptyMessage:"You don't have any active tasks">>
+
+! Completed tasks
+
+//(Listed in reverse order of completion)//
+
+<$list filter="[!has[draft.of]tag[task]tag[done]sort[created]]">
+<div>
+<$checkbox tag="done"> ~~<$link/>~~</$checkbox>
+</div>
+</$list>
+```
+
+
+        </div>
+      </div>
+      <div class="p-4 md:w-1/2 w-full">
+        <div class="h-full p-8 bg-gray-100 rounded">
+{{TaskManagementExample (Draggable)}}
+
+
+        </div>
+      </div>
+    </div>
+	
+  </div>
+</section>
