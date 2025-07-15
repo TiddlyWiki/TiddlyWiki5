@@ -82,6 +82,7 @@ exports.parseTokenString = function(source,pos,token) {
 
 /*
 Look for a token matching a regex. Returns null if not found, otherwise returns {type: "regexp", match:, start:, end:,}
+Use the "Y" (sticky) flag to avoid searching the entire rest of the string
 */
 exports.parseTokenRegExp = function(source,pos,reToken) {
 	var node = {
@@ -172,7 +173,7 @@ exports.parseMacroParameter = function(source,pos) {
 		start: pos
 	};
 	// Define our regexp
-	var reMacroParameter = /(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|((?:(?:>(?!>))|[^\s>"'])+)))/g;
+	const reMacroParameter = /(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|((?:(?:>(?!>))|[^\s>"'])+)))/y;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for the parameter
@@ -240,7 +241,7 @@ exports.parseMacroInvocation = function(source,pos) {
 		params: []
 	};
 	// Define our regexps
-	var reMacroName = /([^\s>"'=]+)/g;
+	const reMacroName = /([^\s>"'=]+)/y;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a double less than sign
@@ -277,7 +278,7 @@ exports.parseFilterVariable = function(source) {
 			params: [],
 		},
 		pos = 0,
-		reName = /([^\s"']+)/g;
+		reName = /([^\s"']+)/y;
 	// If there is no whitespace or it is an empty string then there are no macro parameters
 	if(/^\S*$/.test(source)) {
 		node.name = source;
@@ -302,11 +303,11 @@ exports.parseAttribute = function(source,pos) {
 		start: pos
 	};
 	// Define our regexps
-	var reAttributeName = /([^\/\s>"'`=]+)/g,
-		reUnquotedAttribute = /([^\/\s<>"'`=]+)/g,
-		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/g,
-		reIndirectValue = /\{\{([^\}]+)\}\}/g,
-		reSubstitutedValue = /(?:```([\s\S]*?)```|`([^`]|[\S\s]*?)`)/g;
+	const reAttributeName = /([^\/\s>"'`=]+)/y,
+		reUnquotedAttribute = /([^\/\s<>"'`=]+)/y,
+		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/y,
+		reIndirectValue = /\{\{([^\}]+)\}\}/y,
+		reSubstitutedValue = /(?:```([\s\S]*?)```|`([^`]|[\S\s]*?)`)/y;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Get the attribute name
