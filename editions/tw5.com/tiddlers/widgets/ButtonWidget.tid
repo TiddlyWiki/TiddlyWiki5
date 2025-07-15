@@ -1,6 +1,6 @@
 caption: button
 created: 20131024141900000
-modified: 20231113093304323
+modified: 20250715111925411
 tags: Widgets TriggeringWidgets
 title: ButtonWidget
 type: text/vnd.tiddlywiki
@@ -9,11 +9,11 @@ type: text/vnd.tiddlywiki
 
 The button widget displays an HTML `<button>` element that can perform a combination of optional actions when clicked:
 
-* Executing any ActionWidgets passed in the `actions` attribute
-* Executing any ActionWidgets that are immediate children of the button widget
+* Executing any ActionWidgets passed in the `actions` attribute, which is the preferred approach
+* Executing any ActionWidgets that are immediate children of the button widget, which is now deprecated in favour of using the `actions` attribute
 * Execute any integrated actions:
 ** Navigate to a specified tiddler
-** Dispatch a user defined [[widget message|Messages]]
+** Dispatch a user defined [[widget message|Core Messages]]
 ** Trigger a user defined [[popup|PopupMechanism]]
 ** Assign new text to a specified tiddler
 
