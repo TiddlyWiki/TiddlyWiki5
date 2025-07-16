@@ -2550,6 +2550,10 @@ html body.tc-body.tc-single-tiddler-window {
 	padding: 4px;
 }
 
+.tc-control-panel table > tbody > tr > td {
+	text-align: left;
+}
+
 .tc-control-panel table, .tc-control-panel table input, .tc-control-panel table textarea {
 	width: 100%;
 }

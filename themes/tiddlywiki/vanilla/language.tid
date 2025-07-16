@@ -84,3 +84,9 @@ svg.tc-image-button:dir(rtl) {
 .tc-drop-down a:dir(rtl), .tc-drop-down button:dir(rtl) {
     text-align: right;
 }
+
+/* Control Panel */
+
+.tc-control-panel table > tbody > tr > td:dir(rtl) {
+	text-align: right;
+}
