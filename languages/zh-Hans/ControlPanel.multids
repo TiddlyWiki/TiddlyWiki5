@@ -253,3 +253,6 @@ ViewTemplateSubtitle/Caption: 查看模板副标题
 ViewTemplateSubtitle/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的副标题。
 ViewTemplateTags/Caption: 查看模板标签区
 ViewTemplateTags/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的标签区域。
+WikiInformation/Caption: 维基信息
+WikiInformation/Hint: 此页面总结了有关此 ~TiddlyWiki 配置的高阶信息。旨在让用户能够快速与他人共享其 ~TiddlyWiki 配置的相关信息，例如，在其中一个论坛中寻求帮助时。不包含隐私或个人信息，没有明确复制和粘贴在其他地方的情况
+WikiInformation/Drag/Caption: 拖动此链接可将此工具复制到另一个维基

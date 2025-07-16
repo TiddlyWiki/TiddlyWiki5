@@ -1,0 +1,11 @@
+title: Community Survey 2025 Sidebar Segment
+created: 20250708130030654
+modified: 20250708130030654
+tags: $:/tags/SideBarSegment
+list-after: $:/core/ui/SideBarSegments/site-subtitle
+
+<div style.padding-right="3em" style.max-width="20em">
+<$link to="Community Survey 2025">
+<$image source="Community Survey 2025.png" alt="Shape the future by taking the TiddlyWiki Community Survey 2025" class="community-survey-sidebar-image"/>
+</$link>
+</div>
