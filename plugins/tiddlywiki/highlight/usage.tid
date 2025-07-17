@@ -2,9 +2,6 @@ title: $:/plugins/tiddlywiki/highlight/usage
 
 \import $:/plugins/tiddlywiki/highlight/readme
 
-\define jsDelivrLink() https://www.jsdelivr.com/package/gh/highlightjs/cdn-release?path=build%2Flanguages&version=$(highlightVersion)$
-\define unpkgLink() https://unpkg.com/browse/@highlightjs/cdn-assets@$(highlightVersion)$/languages/
-
 ! Usage
 
 Syntax highlighting is triggered when you add language information to code blocks defined with triple backticks or with the `<$codeblock>` widget. For fenced code blocks, specify the code's language immediately after the first set of backticks:
@@ -17,9 +14,20 @@ Syntax highlighting is triggered when you add language information to code block
 
 ! Adding Themes
 
-You can add themes from highlight.js by copying the CSS to a new tiddler and tagging it with [[$:/tags/Stylesheet]]. The available themes can be found on GitHub:
+The available themes can be found from the following CDNs:
 
-https://github.com/isagalaev/highlight.js/tree/master/src/styles
+* <a href=`https://www.jsdelivr.com/package/gh/highlightjs/cdn-release?path=build%2Fstyles&version=$(highlightVersion)$` class="tc-tiddlylink-external" target="_blank">jsDelivr</a>
+* <a href=`https://unpkg.com/browse/@highlightjs/cdn-assets@$(highlightVersion)$/styles/` class="tc-tiddlylink-external" target="_blank">unpkg</a>
+
+You can add themes from highlight.js by copying the CSS to a new tiddler and tagging it with [[$:/tags/Stylesheet/Highlight]], with type set to `text/css`.
+
+Then, check the new theme in the following list and uncheck others: 
+
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Stylesheet/Highlight]]">
+
+<$checkbox tag="$:/tags/Stylesheet"> <<currentTiddler>></$checkbox>
+
+</$list>
 
 ! Supporting Additional Languages
 
@@ -31,8 +39,8 @@ You can import language definitions into <$text text="JavaScript"/> tiddlers, wi
 
 First, locate the language file(s) you need. You can fetch the files from the following CDNs:
 
-* <a href=<<jsDelivrLink>> class="tc-tiddlylink-external" target="_blank">jsDelivr</a>
-* <a href=<<unpkgLink>> class="tc-tiddlylink-external" target="_blank">unpkg</a>
+* <a href=`https://www.jsdelivr.com/package/gh/highlightjs/cdn-release?path=build%2Flanguages&version=$(highlightVersion)$` class="tc-tiddlylink-external" target="_blank">jsDelivr</a>
+* <a href=`https://unpkg.com/browse/@highlightjs/cdn-assets@$(highlightVersion)$/languages/` class="tc-tiddlylink-external" target="_blank">unpkg</a>
 
 Then, click the button below to create a "highlight" module. Copy and paste the content of a language file into the the text area. Give your tiddler a meaningful title so you can keep track of the languages you've installed. You may choose to either create one tiddler per language or lump all language definitions into one tiddler. Save and reload your wiki.
 

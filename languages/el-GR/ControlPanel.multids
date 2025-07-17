@@ -1,177 +1,201 @@
 title: $:/language/ControlPanel/
 
-Advanced/Caption: Προηγμένα
-Advanced/Hint: Εσωτερικές πληροφορίες σχετικά με αυτό το TiddlyWiki
-Appearance/Caption: Εμφάνιση
-Appearance/Hint: Τρόποι για να παραμετροποιήσετε την εμφάνιση του δικού σας TiddlyWiki.
-Basics/AnimDuration/Prompt: Διάρκεια κινούμενων εφέ:
-Basics/Caption: Βασικά
-Basics/DefaultTiddlers/BottomHint: Χρησιμοποιήστε &#91;&#91;διπλές αγκύλες &#93;&#93; για τίτλους με κενά. Ή, μπορείτε να διαλέξετε τη {{διατήρηση της διάταξης της ιστορίας||$:/snippets/retain-story-ordering-button}}
-Basics/DefaultTiddlers/Prompt: Προκαθορισμένα tiddler:
-Basics/DefaultTiddlers/TopHint: Επιλέξτε τα tiddler που θα εμφανίζονται κατά την έναρξη:
-Basics/Language/Prompt: Γεια σας! Τρέχουσα γλώσσα:
-Basics/NewJournal/Tags/Prompt: Ετικέτες για νέα ημερολογιακά tiddler
-Basics/NewJournal/Text/Prompt: Κείμενο για τα νέα ημερολογιακά tiddler
-Basics/NewJournal/Title/Prompt: Τίτλος των νέων ημερολογιακών tiddler
-Basics/OverriddenShadowTiddlers/Prompt: Πλήθος σκιώδων tiddlers που έχουν παρακαμφθεί:
-Basics/ShadowTiddlers/Prompt: Πλήθος σκιώδων tiddlers:
-Basics/Subtitle/Prompt: Υπότιτλος:
-Basics/SystemTiddlers/Prompt: Πλήθος tiddlers συστήματος:
-Basics/Tags/Prompt: Πλήθος ετικετών:
-Basics/Tiddlers/Prompt: Πλήθος tiddlers:
-Basics/Title/Prompt: Τίτλος αυτού του ~TiddlyWiki:
-Basics/Username/Prompt: Όνομα χρήστη για την υπογραφή των τροποποιήσεων:
-Basics/Version/Prompt: ~TiddlyWiki έκδοση:
-EditorTypes/Caption: Τύποι επεξεργαστών
+Appearance/Hint: Τρόποι για να παραμετροποιήσεις την εμφάνιση του TiddlyWiki σου
+Basics/AnimDuration/Prompt: Διάρκεια κινούμενων εφέ
+Basics/DefaultTiddlers/BottomHint: Χρησιμοποίησε &#91;&#91;διπλές αγκύλες&#93;&#93; για τίτλους με κενά. Ή, μπορείς να διαλέξεις να {{διατηρήσεις τη διάταξη της ιστορίας||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/Prompt: Προκαθορισμένα tiddlers
+Basics/DefaultTiddlers/TopHint: Επέλεξε τα tiddler που θα εμφανίζονται κατά την έναρξη
+Basics/Language/Prompt: Γεια! Τρέχουσα γλώσσα:
+Basics/NewJournal/Tags/Prompt: Ετικέτες για νέα ημερολογιακά tiddlers
+Basics/NewJournal/Text/Prompt: Κείμενο για νέα ημερολογιακά tiddlers
+Basics/NewJournal/Title/Prompt: Τίτλος για νέα ημερολογιακά tiddlers
+Basics/NewTiddler/Tags/Prompt: Ετικέτες για νέα tiddlers
+Basics/NewTiddler/Title/Prompt: Τίτλος για νέα tiddlers
+Basics/OverriddenShadowTiddlers/Prompt: Απαρίθμηση σκιώδων tiddlers που έχουν παρακαμφθεί
+Basics/RemoveTags: Ενημέρωση στην πιο πρόσφατη μορφή
+Basics/RemoveTags/Hint: Ενημέρωση τη διαμόρφωση των ετικετών στην πιο πρόσφατη μορφή
+Basics/ShadowTiddlers/Prompt: Απαρίθμηση των σκιώδων tiddlers
+Basics/Subtitle/Prompt: Υπότιτλος
+Basics/SystemTiddlers/Prompt: Απαρίθμηση των tiddlers συστήματος
+Basics/Tags/Prompt: Αριθμός ετικετών
+Basics/Tiddlers/Prompt: Απαρίθμηση των tiddlers
+Basics/Title/Prompt: Τίτλος αυτού του ~TiddlyWiki
+Basics/Username/Prompt: Όνομα χρήστη για την υπογραφή των τροποποιήσεων
+Basics/Version/Prompt: Έκδοση ~TiddlyWiki
+Cascades/Caption: Συζεύξεις
+Cascades/Hint: Αυτοί οι καθολικοί κανόνες χρησιμοποιούνται για τη δυναμική επιλογή ορισμένων προτύπων. Το αποτέλεσμα της σύζευξης είναι το αποτέλεσμα του πρώτου φίλτρου στην ακολουθία που επιστρέφει αποτέλεσμα.
+Cascades/TagPrompt: Φίλτρα με ετικέτα <$macrocall $name="tag" tag=<<currentTiddler>>/>
+EditorTypes/Caption: Τύποι Επεξεργαστών
 EditorTypes/Editor/Caption: Επεξεργαστής
-EditorTypes/Hint: Αυτά τα tiddlers καθορίζουν ποιος κειμενογράφος  θα χρησιμοποιηθεί για την επεξεργασία συγκεκριμένων τύπων tiddler.
-EditorTypes/Type/Caption: Τύπος
-Info/Caption: Πληροφορίες
-Info/Hint: Πληροφορίες σχετικα με αυτό το TiddlyWiki
-KeyboardShortcuts/Add/Caption: πρόσθεσε συντόμευση
-KeyboardShortcuts/Add/Prompt: Πληκτρολογήστε εδώ την συντόμευση
-KeyboardShortcuts/Caption: Συντομεύσεις πληκτρολογίου
-KeyboardShortcuts/Hint: Διαχείριση των αντιστοιχήσεων στις συντομεύσεις πληκτρολογίου
+EditorTypes/Hint: Αυτά τα tiddlers καθορίζουν τον επεξεργαστή που θα χρησιμοποιηθεί για την επεξεργασία συγκεκριμένων τύπων tiddler.
+EditTemplateBody/Caption: Κυρίως Κείμενο Προτύπου Επεξεργασίας
+EditTemplateBody/Hint: Αυτή η σύζευξη κανόνων χρησιμοποιείται από το προεπιλεγμένο πρότυπο επεξεργασίας για να επιλέξει δυναμικά το πρότυπο για την επεξεργασία του κυρίως κειμένου ενός tiddler.
+FieldEditor/Caption: Επεξεργαστής Πεδίων
+FieldEditor/Hint: Αυτή η σύζευξη κανόνων χρησιμοποιείται για να επελεκτεί δυναμικά το πρότυπο για την απόδοση ενός πεδίου tiddler, με βάση το όνομά του. Χρησιμοποιείται εντός του Προτύπου Επεξεργασίας.
+KeyboardShortcuts/Add/Prompt: Πληκτρολόγησε εδώ την συντόμευση
+KeyboardShortcuts/Caption: Συντομεύσεις Πληκτρολογίου
+KeyboardShortcuts/Hint: Διαχείριση των αντιστοιχίσεων στις συντομεύσεις πληκτρολογίου
 KeyboardShortcuts/NoShortcuts/Caption: Δεν έχουν αντιστοιχηθεί συντομεύσεις πληκτρολογίου
-KeyboardShortcuts/Platform/All: Όλες οι πλατφόρμες
-KeyboardShortcuts/Platform/Linux: Μόνο για πλατφόρμα Linux
-KeyboardShortcuts/Platform/Mac: Μόνο για πλατφόρμα Macintosh
-KeyboardShortcuts/Platform/NonLinux: Μόνο για μη-Linux πλατφόρμες
-KeyboardShortcuts/Platform/NonMac: Μόνο για μη-Macintosh πλατφόρμες
-KeyboardShortcuts/Platform/NonWindows: Μόνο για μη-Windows πλατφόρμες
-KeyboardShortcuts/Platform/Windows: Μόνο για πλατφόρμα Windows
-KeyboardShortcuts/Remove/Hint: αφαίρεση την συντόμευση πληκτρολογίου
-LoadedModules/Caption: Φορτωμένες μονάδες
-LoadedModules/Hint: Αυτές είναι οι τρέχουσες φορτωμένες μονάδες tiddler που συνδέονται με τα αντίστοιχα τους πηγαία tiddler. Οι πλάγια γραμμένες μονάδες δεν έχουν πηγαίο tiddler, συνήθως επειδή αρχικοποιούνται κατά την διαδικασία εκκίνησης.
-Palette/Caption: Παλέτα
-Palette/Editor/Clone/Caption: κλωνοποίησε
-Palette/Editor/Clone/Prompt: Συνιστάτε να κλωνοποιήσετε αυτήν την σκιώδη παλέτα πριν την τροποποιήσετε
-Palette/Editor/Prompt: Επεξεργασία
-Palette/Editor/Prompt/Modified: Αυτή η σκιώδη παλέτα έχει τροποποιηθεί
-Palette/Editor/Reset/Caption: επαναφορά
-Palette/HideEditor/Caption: απόκρυψη επεξεργαστή
-Palette/Prompt: Τρέχουσα παλέτα:
-Palette/ShowEditor/Caption: εμφάνισε επεξεργαστή
-Parsing/Block/Caption: Κανόνες συντακτικής ανάλυσης τμημάτων
-Parsing/Caption: Συντακτική ανάλυση
-Parsing/Hint: Εδώ μπορείτε να απενεργοποιήσετε ή να ενεργοποιήσετε καθολικά τους κανόνες τις συντακτικής ανάλυσης του wiki. Για να εφαρμοστούν οι αλλαγές σας αποθηκεύστε και επαναφορτώστε το wiki σας.  Η απενεργοποίηση συγκεκριμένων κανόνων συντακτικής ανάλυσης ενδέχεται να δημιουργήσει πρόβλημα στην ορθή λειτουργία του <$text text="TiddlyWiki"/>. Χρησιμοποιήστε [[ασφαλή κατάσταση|https://tiddlywiki.com/#SafeMode]] για να επανέλθετε στην κανονική λειτουργία..
-Parsing/Inline/Caption: Inline κανόνες συντακτικής ανάλυσης
-Parsing/Pragma/Caption: Pragma κανόνες συντακτικής ανάλυσης
-Plugins/Add/Caption: Βρείτε περισσότερα πρόσθετα
-Plugins/Add/Hint: Εγκαθιστά πρόσθετα από την επίσημη βιβλιοθήκη
-Plugins/AlreadyInstalled/Hint: Το πρόσθετο αυτό έχει ήδη εγκατασταθεί στην έκδοση <$text text=<<installedVersion>>/>
-Plugins/Caption: Πρόσθετα
-Plugins/ClosePluginLibrary: κλείσε την βιβλιοθήκη πρόσθετων
-Plugins/Disable/Caption: απενεργοποίησε
-Plugins/Disable/Hint: Να απενεργοποιηθεί αυτό το πρόσθετο όταν φορτωθεί ξανά η σελίδα
-Plugins/Disabled/Status: (απενεργοποιημένο)
-Plugins/Empty/Hint: Κενό
-Plugins/Enable/Caption: ενεργοποίησε
-Plugins/Enable/Hint: Ενεργοποίησε αυτό το πρόσθετο όταν φορτωθεί ξανά η σελίδα
-Plugins/Install/Caption: εγκατέστησε
-Plugins/Installed/Hint: Τρέχοντα εγκατεστημένα πρόσθετα:
-Plugins/Language/Prompt: Γλώσσες
-Plugins/Languages/Caption: Γλώσσες
-Plugins/Languages/Hint: Πρόσθετα γλωσσικά πακέτα
-Plugins/NoInfoFound/Hint: Δεν βρέθηκε το  ''"<$text text=<<currentTab>>/>"''
-Plugins/NoInformation/Hint: Δεν παρέχονται πληροφορίες
-Plugins/NotInstalled/Hint: Το πρόσθετο αυτό δεν είναι εγκατεστημένο
-Plugins/OpenPluginLibrary: άνοιξε την βιβλιοθήκη πρόσθετων
-Plugins/Plugin/Prompt: Πρόσθετα
-Plugins/Plugins/Caption: Πρόσθετα
-Plugins/Plugins/Hint: Πρόσθετα
+KeyboardShortcuts/Platform/NonLinux: Μόνο για πλατφόρμες εκτός του Linux
+KeyboardShortcuts/Platform/NonMac: Μόνο για πλατφόρμες εκτός του Macintosh
+KeyboardShortcuts/Platform/NonWindows: Μόνο για πλατφόρμες εκτός του Windows
+KeyboardShortcuts/Remove/Hint: αφαίρεσε την συντόμευση
+LayoutSwitcher/Caption: Διάταξη
+LoadedModules/Caption: Φορτωμένες Μονάδες
+LoadedModules/Hint: Αυτές είναι οι τρέχουσες φορτωμένες tiddler μονάδας που συνδέονται με τα αντίστοιχα τους πηγαία tiddler. Οι μονάδες σε πλάγια γραγή δεν έχουν πηγαίο tiddler, συνήθως επειδή αρχικοποιούνται κατά την διαδικασία εκκίνησης.
+Palette/Editor/Clone/Prompt: Συνιστάτε να κλωνοποιήσεις αυτήν τη σκιώδη παλέτα πριν τη τροποποιήσεις
+Palette/Editor/Delete/Hint: διαγραφή αυτήν τη καταχώρηση από την τρέχουσα παλέτα
+Palette/Editor/Names/External/Show: Εμφάνιση ονομάτων χρωμάτων που δεν αποτελούν μέρος της τρέχουσας παλέτας
+Palette/Editor/Prompt: Τροποποιείς
+Palette/ShowEditor/Caption: εμφάνισε τον επεξεργαστή
+Parsing/Block/Caption: Κανόνες Συντακτικής Ανάλυσης Τμημάτων
+Parsing/Caption: Συντακτική Ανάλυση
+Parsing/Hint: Εδώ μπορείς να ενεργοποιήσεις ή να απενεργοποιήσεις καθολικά τους κανόνες τις συντακτικής ανάλυσης του wiki. Για να εφαρμοστούν οι αλλαγές σου, αποθήκευσε και επαναφόρτωσε το wiki.  Η απενεργοποίηση συγκεκριμένων κανόνων συντακτικής ανάλυσης ενδέχεται να δημιουργήσει πρόβλημα στην ορθή λειτουργία του <$text text="TiddlyWiki"/>. Χρησιμοποίησε [[ασφαλής λειτουργία|https://tiddlywiki.com/#SafeMode]] για να επανέλθεις στην κανονική λειτουργία..
+Parsing/Inline/Caption: Ενσωματωμένοι Κανόνες Συντακτικής Ανάλυσης
+Parsing/Pragma/Caption: Κανόνες Συντακτικής Ανάλυσης Για Pragma
+Plugins/Add/Caption: Απόκτησε περισσότερα πρόσθετα
+Plugins/Add/Hint: Εγκατέστησε πρόσθετα από την επίσημη βιβλιοθήκη
+Plugins/AlreadyInstalled/Hint: Το πρόσθετο αυτό έχει ήδη εγκατασταθεί με την έκδοση <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: Επίσης απαιτεί:
+Plugins/ClosePluginLibrary: Κλείσε τη βιβλιοθήκη πρόσθετων
+Plugins/Downgrade/Caption: υποβάθμισε
+Plugins/Empty/Hint: Κανένα
+Plugins/Languages/Hint: Πρόσθετα πακέτα γλώσσας
+Plugins/NoInfoFound/Hint: Δεν βρέθηκε το ''«<$text text=<<currentTab>>/>»''
+Plugins/OpenPluginLibrary: Άνοιξε την βιβλιοθήκη πρόσθετων
+Plugins/PluginWillRequireReload: (απαιτείται επαναφόρτωση)
 Plugins/Reinstall/Caption: επανεγκατέστησε
-Plugins/Theme/Prompt: Θέματα
-Plugins/Themes/Caption: Θέματα
-Plugins/Themes/Hint: Πρόσθετα θεμάτων
-Saving/Caption: Αποθήκευση
-Saving/DownloadSaver/AutoSave/Description: Επιτρέπει αυτόματη αποθήκευση για τον αποθηκευτή μεταφορτώσεων
-Saving/DownloadSaver/AutoSave/Hint: Ενεργοποιεί την αυτόματη αποθήκευση στον αποθηκευτή μεταφορτώσεων
-Saving/DownloadSaver/Caption: Αποθηκευτής μεταφορτώσεων
-Saving/DownloadSaver/Hint: Αυτές οι ρυθμίσεις εφαρμόζονται σε αποθηκευτή μεταφορτώσεων που είναι συμβατός με  HTML5
-Saving/General/Caption: Γενικά
-Saving/General/Hint: Αυτές οι ρυθμίσεις εφαρμόζονται σε όλους τους φορτωμένους αποθηκευτές
-Saving/Heading: Αποθήκευση
-Saving/Hint: Ρυθμίσεις που χρησιμοποιούνται για την αποθήκευση ολόκληρου του TiddlyWiki σε ένα μοναδικό αρχείο μέσω ένος αποθηκευτικού τμήματος
-Saving/TiddlySpot/Advanced/Heading: Προηγμένες ρυθμίσεις
-Saving/TiddlySpot/BackupDir: Φάκελος αντιγράφων ασφαλείας
-Saving/TiddlySpot/Backups: Αντίγραφα ασφαλείας
-Saving/TiddlySpot/Caption: ~TiddlySpot Αποθηκευτής
-Saving/TiddlySpot/Description: Αυτές οι ρυθμίσεις χρησιμοποιούνται μόνο όταν γίνεται αποθήκευση στο http://tiddlyspot.com, ή σε συμβατό απομακρυσμένο εξυπηρετητή
-Saving/TiddlySpot/Filename: ανέβασμα αρχείου ως
-Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: // Το τυπικό URL του εξυπηρετητή είναι το  `http://<wikiname>.tiddlyspot.com/store.cgi` και μπορεί να αλλαχθεί για να χρησιμοποιηθεί μια διαφορετική διεύθυνση εξυπηρετητή, π.χ.  `http://example.com/store.php`.//
-Saving/TiddlySpot/Password: Συνθηματικό
-Saving/TiddlySpot/ServerURL: URL Εξυπηρετητή
-Saving/TiddlySpot/UploadDir: Φάκελος ανεβάσματος
-Saving/TiddlySpot/UserName: Όνομα Wiki
-Settings/AutoSave/Caption: Αυτόματη αποθήκευση
+Plugins/Stability/Deprecated: ΥΠΟ ΑΠΟΣΥΡΣΗ
+Plugins/Stability/Experimental: ΠΕΙΡΑΜΑΤΙΚΟ
+Plugins/Stability/Legacy: ΠΑΡΩΧΗΜΕΝΟ
+Plugins/Stability/Stable: ΣΤΑΘΕΡΟ
+Plugins/SubPluginPrompt: Με <<count>> διαθέσιμα δευτερεύοντα πρόσθετα
+Plugins/Themes/Hint: Πρόσθετα θέματα
+Plugins/Update/Caption: ενημέρωσε
+Plugins/Updates/Caption: Ενημερώσεις
+Plugins/Updates/Hint: Διαθέσιμες ενημερώσεις για εγκατεστημένα πρόσθετα
+Plugins/Updates/UpdateAll/Caption: Ενημέρωσε <<update-count>> πρόσθετα
+Saving/Caption: Αποθηκεύεται
+Saving/DownloadSaver/AutoSave/Description: Επέτρεψε αυτόματη αποθήκευση για τον Αποθηκευτή Λήψης
+Saving/DownloadSaver/AutoSave/Hint: Ενεργοποιεί την αυτόματη αποθήκευση στον Αποθηκευτή Λήψης
+Saving/DownloadSaver/Caption: Αποθηκευτής Λήψης
+Saving/DownloadSaver/Hint: Αυτές οι ρυθμίσεις εφαρμόζονται στον Αποθηκευτή Λήψεων, ο οποίος είναι συμβατός με  HTML5
+Saving/GitService/Branch: Διακλάδωση προορισμού για αποθήκευση
+Saving/GitService/CommitMessage: Αποθηκεύτηκε από το TiddlyWiki
+Saving/GitService/Description: Αυτές οι ρυθμίσεις χρησιμοποιούνται μόνο κατά την αποθήκευση στο <<service-name>>
+Saving/GitService/Filename: Όνομα αρχείου προορισμού (π.χ. `index.html`)
+Saving/GitService/Gitea/Caption: Αποθηκευτής Gitea
+Saving/GitService/Gitea/Password: Προσωπικό διακριτικό πρόσβασης για API (μέσω της διεπαφής ιστού του Gitea: `Ρυθμίσεις | Εφαρμογές | Δημιουργία Νέου Διακριτικού`)
+Saving/GitService/GitHub/Caption: Αποθηκευτής ~GitHub
+Saving/GitService/GitHub/Password: Κωδικός πρόσβασης, διακριτικό ~OAuth ή προσωπικό διακριτικό πρόσβασης (δες τη [[σελίδα βοήθειας GitHub|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] για λεπτομέρειες)
+Saving/GitService/GitLab/Caption: Αποθηκευτής ~GitLab
+Saving/GitService/GitLab/Password: Προσωπικό διακριτικό πρόσβασης για το API (δες τη [[σελίδα βοήθειας του GitLab|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] για λεπτομέρειες)
+Saving/GitService/Path: Διαδρομή για αρχείο προορισμού (π.χ. `/wiki/`)
+Saving/GitService/Repo: Αποθητήριο προορισμού (π.χ. `Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: URL του API του διακομιστή
+Saving/GitService/UserName: Όνομα χρήστη
+Saving/Hint: Ρυθμίσεις που χρησιμοποιούνται για την αποθήκευση ολόκληρου του TiddlyWiki σε ένα αυτοτελής αρχείο μέσω μιας μονάδας αποθήκευσης
+Saving/TiddlySpot/Advanced/Heading: Προηγμένες Ρυθμίσεις
+Saving/TiddlySpot/BackupDir: Φάκελος Αντιγράφων Ασφαλείας
+Saving/TiddlySpot/Backups: Αντίγραφα Ασφαλείας
+Saving/TiddlySpot/Caption: Αποθηκευτής ~TiddlyHost
+Saving/TiddlySpot/ControlPanel: Πίνακας Ελέγχου ~TiddlyHost
+Saving/TiddlySpot/Description: Αυτές οι ρυθμίσεις χρησιμοποιούνται μόνο όταν γίνεται αποθήκευση στο [[TiddlyHost|https://tiddlyhost.com]], ή σε συμβατό απομακρυσμένο εξυπηρετητή. Δες [[τεκμηρίωση στο GitHub|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] για πληροφορίες περί την ρύθμιση της αποθήκευσης στο ~TiddlyHost
+Saving/TiddlySpot/Filename: Αποστολή Αρχείου Με Όνομα
+Saving/TiddlySpot/Heading: ~TiddlyHost
+Saving/TiddlySpot/Hint: //Το τυπικό URL του εξυπηρετητή είναι  `http://<όνομαwiki>.tiddlyspot.com/` και μπορεί να αλλαχθεί για να χρησιμοποιεί διαφορετική διεύθυνση εξυπηρετητή, π.χ.  `http://παράδειγμα.com/store.php`.//
+Saving/TiddlySpot/Password: Κωδικός
+Saving/TiddlySpot/ServerURL: URL Διακομιστή
+Saving/TiddlySpot/UploadDir: Αποστολή Σε Φάκελο
+Settings/AutoSave/Caption: Αυτόματη Αποθήκευση
 Settings/AutoSave/Disabled/Description: Μην αποθηκεύσεις αυτόματα τις αλλαγές
-Settings/AutoSave/Enabled/Description: Αυτόματα αποθήκευσε τις αλλαγές
-Settings/AutoSave/Hint: Αυτόματη αποθήκευση αλλαγών κατά την επεξεργασία
-Settings/CamelCase/Caption: Camel Case Wiki σύνδεσμοι
-Settings/CamelCase/Description: Ενεργοποίηση αυτόματης δημιουργίας ~CamelCase συνδέσμων
-Settings/CamelCase/Hint: Μπορείτε να απενεργοποιήσετε καθολικά την αυτόματη δημιουργία συνδέσμων σε ~CamelCase φράσεις. Απαιτείται όμως επαναφόρτωση για να εφαρμοστεί.
-Settings/Caption: Ρυθμίσεις
-Settings/DefaultSidebarTab/Caption: Προκαθορισμένη καρτέλα πλευρικής-εργαλειοθήκης 
-Settings/DefaultSidebarTab/Hint: Καθορίστε ποια καρτέλα πλευρικής-εργαλειοθήκης θα εμφανίζεται αυτομάτως
-Settings/EditorToolbar/Caption: εργαλειοθήκη επεξεργασίας
-Settings/EditorToolbar/Description: Εμφανίζει την εργαλειοθήκη επεξεργασίας
-Settings/EditorToolbar/Hint: Ενεργοποιεί ή απενεργοποιεί την εργαλειοθήκη επεξεργασίας:
-Settings/Hint: Αυτές οι ρυθμίσεις σας επιτρέπουν να παραμετροποιήσετε την συμπεριφορά του TiddlyWiki.
-Settings/InfoPanelMode/Caption: Κατάσταση πάνελ πληροφορικών Tiddler
-Settings/InfoPanelMode/Hint: Ελέγχει το πότε θα κλείνει το πάνελ πληροφοριών του tiddler:
-Settings/InfoPanelMode/Popup/Description: Αυτόματο κλείσιμο του πάνελ πληροφορικών του Tiddler
-Settings/InfoPanelMode/Sticky/Description: Παραμένει ανοιχτό μέχρι το πάνελ πληροφοριών του Tiddler μέχρι κάποιος να το κλείσει
-Settings/LinkToBehaviour/Caption: Συμπεριφορά ανοίγματος του Tiddler
-Settings/LinkToBehaviour/InsideRiver/Hint: Πλοήγηση εσωτερικά από την ροή της ιστορίας
-Settings/LinkToBehaviour/OpenAbove: Άνοιγμα πάνω από το τρέχων tiddler
-Settings/LinkToBehaviour/OpenAtBottom: Άνοιγμα στο κάτω μέρος της ροής της ιστορίας
-Settings/LinkToBehaviour/OpenAtTop: Άνοιγμα στο άνω μέρος της ροής της ιστορίας
-Settings/LinkToBehaviour/OpenBelow: Άνοιγμα κάτω αόπ το τρέχων tiddler
-Settings/LinkToBehaviour/OutsideRiver/Hint: Πλοήγηση εξώτερικά από την ροής της ιστορίας
-Settings/MissingLinks/Caption: Wiki σύνδεσμοι
-Settings/MissingLinks/Description: Ενεργοποίηση συνδέσμων σε μη υπαρκτά tiddlers
-Settings/MissingLinks/Hint: Επιλέξτε το αν θα δημιουργούνται σύνδεσμοι σε tiddler που δεν έχουν ακόμα δημιουργηθεί
-Settings/NavigationAddressBar/Caption: Γραμμή διεύθυνσης πλοήγησης
-Settings/NavigationAddressBar/Hint: Η συμπεριφορά της γραμμής διεύθυνσης του προγράμματος πλοήγησης ιστοσελίδων όταν μεταβαίνετε σε κάποιο tiddler:
-Settings/NavigationAddressBar/No/Description: Μην ενημερώνεις την γραμμή διευθύνσεων
-Settings/NavigationAddressBar/Permalink/Description: Συμπεριέλαβε το tiddler προορισμού
-Settings/NavigationAddressBar/Permaview/Description: Συμπεριέλαβε το tiddler προορισμού και την τρέχουσα ακολουθία της ιστορίας
-Settings/NavigationHistory/Caption: Ιστορικό πλοήγησης
-Settings/NavigationHistory/Hint: Ενημέρωση του ιστορικού στο πρόγραμμα πλοήγησης όταν μεταβαίνουμε σε κάποιο tiddler:
-Settings/NavigationHistory/No/Description: Μην ενημερώσεις το ιστορικό
-Settings/NavigationHistory/Yes/Description: Ενημέρωσε το ιστορικό
-Settings/PerformanceInstrumentation/Caption: επισκόπηση επιδόσεων
-Settings/PerformanceInstrumentation/Description: Ενεργοποίηση της επισκόπησης των επιδόσεων
-Settings/PerformanceInstrumentation/Hint: Εμφανίζει στατιστικά στοιχεία επιδόσεων στην κονσόλα προγραμματιστών του προγράμματος πλοήγησης. Απαιτείται ανανέωση της σελίδα για να ενεργοποιηθεί.
-Settings/TitleLinks/Caption: Tiddler Τίτλοι
-Settings/TitleLinks/Hint: Προαιρετικά εμφανίζει τους τίτλους από τα  tiddler ως συνδέσμους
-Settings/TitleLinks/No/Description: Να μην εμφανίζονται οι τίτλοι των tiddler ως σύνδεσμοι
-Settings/TitleLinks/Yes/Description: Να εμφανίζονται οι τίττλοι των tiddler ως σύνδεσμοι
-Settings/ToolbarButtons/Caption: Κουμπιά γραμμής εργαλείων
-Settings/ToolbarButtons/Hint: Τυπική εμφάνιση κουμπιού γραμμής εργαλείων:
-Settings/ToolbarButtons/Icons/Description: Συμπεριέλαβε εικόνα
-Settings/ToolbarButtons/Text/Description: Συμπεριέλαβε κείμενο
-Settings/ToolbarButtonStyle/Caption: Στυλ κουμπιών εργαλειοθήκης
-Settings/ToolbarButtonStyle/Hint: Επιλέξτε το στυλ των κουμπιών της εργαλειοθήκης:
-Settings/ToolbarButtonStyle/Styles/Borderless: Χωρίς περιθώρια
-Settings/ToolbarButtonStyle/Styles/Boxed: Εγκιβωτισμένα
-Settings/ToolbarButtonStyle/Styles/Rounded: Στρογγυλοποιημένα
-StoryView/Caption: Ιστορική όψη
-StoryView/Prompt: Τρέχουσα όψη:
-Theme/Caption: Θέμα
-Theme/Prompt: Τρέχον θέμα:
-TiddlerFields/Caption: Πεδία Tiddler
-TiddlerFields/Hint: Αυτό είναι το πλήρες σύνολο από TiddlerFields που χρησιμοποιούνται σε αυτό το wiki (συμπεριλαμβανομένων των tiddler συστήματος, αλλά εξαιρούνται τα σκιώδη tiddler).
-Toolbars/Caption: Γραμμές εργαλείων
-Toolbars/EditorToolbar/Caption: Εργαλειοθήκη επεξεργασίας
-Toolbars/EditorToolbar/Hint: Επιλέξτε ποια κουμπιά θα εμφανίζονται στην εργαλειοθήκη επεξεργασίας. Σημειώστε πως μερικά κουμπιά θα εμφανίζονται μόνο όταν επεξεργάζεστε tiddler συγκεκριμένων τύπων. Μπορείτε να αλλάξετε την σειρά με σύρε και άσε
-Toolbars/EditToolbar/Caption: Γραμμή τροποποιήσεων
-Toolbars/EditToolbar/Hint: Επιλέξτε ποια κουμπιά θα εμφανίζονται στα tiddler που βρίσκονται σε κατάσταση τροποποίησης
-Toolbars/Hint: Επιλέξτε ποια κουμπιά της γραμμής εργαλείων θα εμφανίζονται
-Toolbars/PageControls/Caption: Γραμμή εργαλείων σελίδας
-Toolbars/PageControls/Hint: Επιλέξτε ποια κουμπιά θα εμφανίζονται στην γραμμή εργαλείων της κεντρικής σελίδας
-Toolbars/ViewToolbar/Caption: Εμφάνιση γραμμής εργαλείων
-Toolbars/ViewToolbar/Hint: Επιλέξτε ποια κουμπιά θα εμφανίζονται για tiddler σε κατάσταση προβολής
-Tools/Download/Full/Caption: Λήψη του πλήρους wiki
+Settings/AutoSave/Enabled/Description: Αποθήκευσε αυτόματα τις αλλαγές
+Settings/AutoSave/Hint: Προσπάθησε να αποθηκεύσεις αυτόματα τις αλλαγές κατά την επεξεργασία, όταν χρησιμοποιώ αποθηκευτή που το υποστηρίζει
+Settings/CamelCase/Caption: Σύνδεσμοι Σε Γραφή Με Ενδιάμεσα Κεφαλαία (Camel Case)
+Settings/CamelCase/Description: Ενεργοποίηση αυτόματης δημιουργίας συνδέσμων ~CamelCase
+Settings/CamelCase/Hint: Μπορείς να απενεργοποιήσεις καθολικά την αυτόματη δημιουργία συνδέσμων σε φράσεις ~CamelCase. Απαιτείται επαναφόρτωση για να εφαρμοστεί
+Settings/DefaultMoreSidebarTab/Caption: Προκαθορισμένη Καρτέλα «Περισσότερα» Της Πλευρικής Εργαλειοθήκης
+Settings/DefaultMoreSidebarTab/Hint: Καθόρισε ποιες καρτέλες εμφανίζεται από προεπιλογή υπό «Περισσότερα» στη πλευρική εργαλειοθήκη
+Settings/DefaultSidebarTab/Caption: Προκαθορισμένη Καρτέλα Πλευρικής Εργαλειοθήκης
+Settings/DefaultSidebarTab/Hint: Καθόρισε ποια καρτέλα της πλευρικής εργαλειοθήκης εμφανίζεται αυτομάτως
+Settings/DefaultTiddlerInfoTab/Caption: Προκαθορισμένη Καρτέλα Στον Πίνακα Πληροφοριών
+Settings/DefaultTiddlerInfoTab/Hint: Καθόρισε ποια καρτέλα στον πίνακα πληροφοριών εμφανίζεται αυτομάτως
+Settings/EditorToolbar/Caption: Εργαλειοθήκη Επεξεργασίας
+Settings/EditorToolbar/Description: Προβολή εργαλειοθήκης επεξεργασίας
+Settings/EditorToolbar/Hint: Ενεργοποίησε ή απενεργοποίησε την εργαλειοθήκη επεξεργασίας:
+Settings/Hint: Αυτές οι ρυθμίσεις σου επιτρέπουν να προσαρμόσεις την συμπεριφορά του TiddlyWiki.
+Settings/InfoPanelMode/Caption: Λειτουργία Πίνακα Πληροφοριών Tiddler
+Settings/InfoPanelMode/Hint: Ελέγχει το πότε θα κλείνει ο πίνακας πληροφοριών του tiddler:
+Settings/InfoPanelMode/Popup/Description: Ο πίνακας πληροφοριών του tiddler κλείνει αυτόματα
+Settings/InfoPanelMode/Sticky/Description: Ο πίνακας πληροφοριών του tiddler παραμένει ανοιχτός εκτός εάν είναι κλειστεί επίτηδες
+Settings/LinkToBehaviour/Caption: Συμπεριφορά Ανοίγματος Του Tiddler
+Settings/LinkToBehaviour/InsideRiver/Hint: Πλοήγηση από //εντός// της ροής της ιστορίας
+Settings/LinkToBehaviour/OpenAbove: Άνοιγμα πάνω από το παρόν tiddler
+Settings/LinkToBehaviour/OpenBelow: Άνοιγμα κάτω από το παρόν tiddler
+Settings/LinkToBehaviour/OutsideRiver/Hint: Πλοήγηση από //εκτός// της ροής της ιστορίας
+Settings/MissingLinks/Caption: Σύνδεσμοι Wiki
+Settings/MissingLinks/Hint: Επέλεξε αν επιτρέπεται να προσθέσεις συνδέσμους σε tiddler που δεν έχουν ακόμα δημιουργηθεί
+Settings/NavigationAddressBar/Caption: Γραμμή Διευθύνσεων Του Περιηγητή
+Settings/NavigationAddressBar/Hint: Η συμπεριφορά της γραμμής διεύθυνσης του προγράμματος περιήγησης όταν μεταβαίνεις σε κάποιο tiddler:
+Settings/NavigationAddressBar/Permaview/Description: Συμπεριέλαβε το tiddler προορισμού και τη τρέχουσα ακολουθία της ιστορίας
+Settings/NavigationHistory/Caption: Ιστορικό Περιήγησης
+Settings/NavigationHistory/Hint: Ενημέρωση του ιστορικού στο πρόγραμμα περιήγησης όταν μεταβαίνεις σε κάποιο tiddler:
+Settings/NavigationHistory/No/Description: Μην ενημερώνεις το ιστορικό
+Settings/NavigationHistory/Yes/Description: Ενημέρωνε το ιστορικό
+Settings/NavigationPermalinkviewMode/Caption: Λειτουργία Μόνιμου Σύνδεσμου/Μόνιμης Όψης
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Αντέγραψε το URL μόνιμου συνδέσμου/μόνιμης όψης στο πρόχειρο
+Settings/NavigationPermalinkviewMode/Hint: Επέλεξε πως χειρίζονται οι μόνιμοι σύνδεσμοι/μόνιμες όψεις:
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Ενημέρωσε τη γραμμή διευθύνσεων με URL μόνιμου συνδέσμου/μόνιμης όψης
+Settings/PerformanceInstrumentation/Caption: Επισκόπηση Επιδόσεων
+Settings/PerformanceInstrumentation/Description: Ενεργοποίησε τα όργανα επισκόπησης για την επίδοση
+Settings/PerformanceInstrumentation/Hint: Εμφανίζει στατιστικά στοιχεία επίδοσης στην κονσόλα προγραμματιστών του προγράμματος περιήγησης. Απαιτείται επαναφόρτωση της σελίδας για να ενεργοποιηθεί.
+Settings/RecentLimit/Caption: Όριο Στην Καρτέλα «Προσφάτα»
+Settings/RecentLimit/Hint: Μέγιστος αριθμός tiddlers που θα εμφανίζονται υπό την καρτέλα «Πρόσφατα» της πλευρικής εργαλιοθήκης
+Settings/TitleLinks/Caption: Τίτλοι Των Tiddler
+Settings/TitleLinks/Hint: Προαιρετικά εμφάνισε τους τίτλους των  tiddler ως συνδέσμους
+Settings/TitleLinks/Yes/Description: Να εμφανίζονται οι τίτλοι των tiddler ως σύνδεσμοι
+Settings/ToolbarButtons/Caption: Κουμπιά Εργαλειοθηκών
+Settings/ToolbarButtonStyle/Caption: Στυλ Κουμπιών Εργαλειοθήκης
+Settings/ToolbarButtonStyle/Hint: Επέλεξε το ύφος των κουμπιών της εργαλειοθήκης:
+SocialCard/Caption: Κάρτα Κοινωνικών Δικτύων
+SocialCard/Domain/Prompt: Domain name (όνομα τομέα) που θα εμφανίζεται για τον σύνδεσμο (για παράδειγμα ''tiddlywiki.com'')
+SocialCard/Hint: Αυτές οι πληροφορίες χρησιμοποιούνται από τις υπηρεσίες κοινωνικής δικτύωσης και ανταλλαγής μηνυμάτων για να εμφανίσουν κάρτα προεπισκόπησης για συνδέσμους προς αυτό το ~TiddlyWiki, όταν το wiki φιλοξενείται στο διαδίκτυο
+SocialCard/PreviewUrl/Preview: Εικόνα προεπισκόπησης:
+SocialCard/PreviewUrl/Prompt: Πλήρης διεύθυνση URL προς εικόνα προεπισκόπηση για αυτό το ~TiddlyWiki
+SocialCard/Url/Prompt: Πλήρης διεύθυνση URL για αυτό το ~TiddlyWiki
+StoryTiddler/Caption: Tiddler Ιστορίας
+StoryTiddler/Hint: Αυτή η σύζευξη κανόνων χρησιμοποιείται για να επελεκτεί δυναμικά το πρότυπο για τη προβολή του tiddler στην ιστορική ροή.
+StoryView/Caption: Ιστορική Όψη
+Stylesheets/Caption: Φύλλα στυλ (stylesheets)
+Stylesheets/Expand/Caption: Ανάπτυξη Όλων
+Stylesheets/Hint: Αυτό είναι το CSS που αποδίδεται από τα τρέχοντα tiddlers φύλλου στυλ που έχουν την ετικέτα <<tag "$:/tags/Stylesheet">>
+Stylesheets/Restore/Caption: Επαναφορά
+TestCases/All/Caption: Όλες οι Δοκιμαστικές Περιπτώσεις
+TestCases/All/Hint: Όλες οι Δοκιμαστικές Περιπτώσεις
+TestCases/Caption: Δοκιμαστικές Περιπτώσεις
+TestCases/Failed/Caption: Αποτυχημένες Δοκιμαστικές Περιπτώσεις
+TestCases/Failed/Hint: Μόνο Αποτυχημένες Δοκιμαστικές Περιπτώσεις
+TestCases/Hint: Οι δοκιμαστικές περιπτώσεις είναι αυτοτελή παραδείγματα για δοκιμές και μάθηση
+TiddlerColour/Caption: Χρώμα Tiddler
+TiddlerColour/Hint: Αυτή η σύζευξη κανόνων χρησιμοποιείται για τη δυναμική επιλογή του χρώματος ενός tiddler (χρησιμοποιείται για το εικονίδιο και το συσχετισμένο χάπι ετικέτας).
+
+TiddlerFields/Hint: Αυτή είναι πλήρης καταχώριση από TiddlerFields που χρησιμοποιούνται σε αυτό το wiki· συμπεριλαμβάνονται τα tiddler συστήματος, αλλά εξαιρούνται τα σκιώδη tiddler.
+TiddlerIcon/Caption: Εικονίδιο Tiddler
+TiddlerIcon/Hint: Αυτή η σύζευξη κανόνων χρησιμοποιείται για να επελεκτεί δυναμικά το εικονίδιο για τα tiddler.
+Toolbars/Caption: Γραμμές Εργαλείων
+Toolbars/EditorToolbar/Caption: Εργαλειοθήκη Επεξεργασίας
+Toolbars/EditorToolbar/Hint: Επέλεξε ποια κουμπιά θα εμφανίζονται στην εργαλειοθήκη επεξεργασίας. Σημειώνουμε πως μερικά κουμπιά θα εμφανίζονται μόνο όταν επεξεργαστείς tiddler συγκεκριμένων τύπων. Μπορείς να αλλάξεις την σειρά με μεταφορά και απόθεση
+Toolbars/EditToolbar/Caption: Εργαλειοθήκη Τροποποιήσεων
+Toolbars/EditToolbar/Hint: Επιλέξτε ποια κουμπιά θα εμφανίζονται στα tiddler που βρίσκονται σε κατάσταση τροποποίησης. Μπορείς να αλλάξεις την σειρά με μεταφορά και απόθεση
+Toolbars/PageControls/Caption: Εργαλειοθήκη Σελίδας
+Toolbars/PageControls/Hint: Επέλεξε ποια κουμπιά θα εμφανίζονται στην κύρια εργαλειοθήκη της σελίδας. Μπορείς να αλλάξεις την σειρά με μεταφορά και απόθεση
+Toolbars/ViewToolbar/Caption: Εργαλειοθήκη Προβολής
+Toolbars/ViewToolbar/Hint: Επιλέξτε ποια κουμπιά θα εμφανίζονται για tiddler σε κατάσταση προβολής. Μπορείς να αλλάξεις την σειρά με μεταφορά και απόθεση
+ViewTemplateBody/Caption: Κυρίως Κείμενο Προτύπου Προβολής
+ViewTemplateBody/Hint: Αυτή η σύζευξη κανόνων χρησιμοποιείται από το προεπιλεγμένο πρότυπο προβολής ώστε να επιλέξει δυναμικά το πρότυπο για να προβάλλει το κυρίως κείμενο ενός tiddler.
+ViewTemplateSubtitle/Caption: Υπότιτλος Προτύπου Προβολής
+ViewTemplateSubtitle/Hint: Αυτή η σύζευξη κανόνων χρησιμοποιείται από το προεπιλεγμένο πρότυπο προβολής ώστε να επιλέξει δυναμικά το πρότυπο για να προβάλλει τον υπότιτλο ενός tiddler.
+ViewTemplateTags/Caption: Ετικέτες Προτύπου Προβολής
+ViewTemplateTags/Hint: Αυτή η σύζευξη κανόνων χρησιμοποιείται από το προεπιλεγμένο πρότυπο προβολής ώστε να επιλέξει δυναμικά το πρότυπο για να προβάλλει την ενότητα με ετικέτες ενός tiddler.
+ViewTemplateTitle/Caption: Τίτλοι Προτύπου Προβολής
+ViewTemplateTitle/Hint: Αυτή η σύζευξη κανόνων χρησιμοποιείται από το προεπιλεγμένο πρότυπο προβολής ώστε να επιλέξει δυναμικά το πρότυπο για να προβάλλει τον τίτλο ενός tiddler.

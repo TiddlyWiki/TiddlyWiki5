@@ -1,71 +1,62 @@
 title: $:/language/
 
-AboveStory/ClassicPlugin/Warning: Φαίνεται πως προσπαθείτε να φορτώσετε ένα πρόσθετο που έχει σχεδιαστεί για την έκδοση  ~TiddlyWiki Classic. Παρακαλώ σημειώστε ότι [[αυτά τα πρόσθετα δεν λειτουργούν με την έκδοση 5.x.x του TiddlyWiki|https://tiddlywiki.com/#TiddlyWikiClassic]]. Εντοπίστηκε πρόσθετο για την έκδοση ~TiddlyWiki Classic:
-BinaryWarning/Prompt: Αυτό το tiddler περιέχει δυαδικά δεδομένα
-ClassicWarning/Hint: Αυτό το tiddler έχει γραφτεί με την TiddlyWiki κλασική μορφή κειμένου, που δεν είναι πλήρως συμβατή με αυτήν του TiddlyWiki 5ης έκδοσης. Δείτε στο  https://tiddlywiki.com/static/Upgrading.html για περισσότερες λεπτομέρειες.
-ClassicWarning/Upgrade/Caption: αναβάθμιση
-CloseAll/Button: κλείστα όλα
-ColourPicker/Recent: Πρόσφατα:
-ConfirmCancelTiddler: Θέλετε να απορριφθούν οι όποιες τροποποιήσεις έχετε κάνει για το tiddler "<$text text=<<title>>/>"?
-ConfirmDeleteTiddler: Θέλετε να διαγραφεί το tiddler "<$text text=<<title>>/>"?
-ConfirmEditShadowTiddler: Πρόκειται να τροποποιήσετε ένα Σκιώδη Tiddler. Οποιεσδήποτε τροποποιήσεις θα αντικαταστήσουν το τυπικό σύστημα και υπάρχει κίνδυνος να δυσκολευτείτε σε σε μελλοντική αναβάθμιση. Είστε σίγουροι ότι θέλετε να τροποποιήσετε το "<$text text=<<title>>/>"?
-ConfirmOverwriteTiddler: Θέλετε να αντικαταστήσετε το tiddler "<$text text=<<title>>/>"?
-Count: απαρίθμηση
-DefaultNewTiddlerTitle: Νέο tiddler
-DropMessage: Ρίχτε εδώ (ή πατήστε το πλήκτρο Esc για ακύρωση)
-Encryption/Cancel: Άκυρο
-Encryption/ConfirmClearPassword: Θέλετε να καθαρίσετε το συνθηματικό; Αυτό θα έχει ως συνέπεια να μην κρυπτογραφητε το wiki όταν κάνετε αποθήκευση
-Encryption/Password: Συνθηματικό
-Encryption/PasswordNoMatch: Τα συνθηματικά δεν ταιριάζουν
-Encryption/PromptSetPassword: Ορίστε το νέο συνθηματικό για αυτό το TiddlyWiki
-Encryption/RepeatPassword: Επαναλάβατε το συνθηματικό
-Encryption/SetPassword: Ορίστε το συνθηματικό
-Encryption/Username: Όνομα χρήστη
-Error/Caption: Σφάλμα
-Error/Filter: Σφάλμα φίλτρου
-Error/FilterSyntax: Συντακτικό σφάλμα στην έκφραση του φίλτρου
-Error/IsFilterOperator: Σφάλμα φίλτρου: Άγνωστος τελεστέος για τον τελεστή φίλτρου 'is'
-Error/LoadingPluginLibrary: Σφάλμα κατά την φόρτωση της βιβλιοθήκης του πρόσθετου
-Error/PutEditConflict: Το αρχείο στον εξυπηρετητή είναι διαφορετικό
-Error/RecursiveTransclusion: Σφάλμα αναδρομής σε transclusion στο transclude widget
-Error/RetrievingSkinny: Σφάλμα κατά την ανάκληση της skinny tiddler λίστας
-Error/SavingToTWEdit: Σφάλμα κατά την αποθήκευση στο TWEdit
-Error/WhileSaving: Σφάλμα κατά την αποθήκευση
-Error/XMLHttpRequest: XMLHttpRequest κωδικός σφάλματος
-InternalJavaScriptError/Hint: Λοιπόν, αυτό είναι αδιέξοδο. Συνιστάτε να επανεκκινήσετε το TiddlyWiki κάνοντας ανανέωση στον φυλλομετρητή σας
-InternalJavaScriptError/Title: Εσωτερικό σφάλμα σε JavaScript
-LazyLoadingWarning: <p>Γίνεται φόρτωση εξωτερικού κειμένου από ''<$text text={{!!_canonical_uri}}/>''</p><p>Αν αυτό το μήνυμα δεν εξαφανιστεί ίσως το πρόγραμμα περιήγησης που χρησιμοποιείται να μην υποστηρίζει εξωτερικό κείμενο στις τρέχουσες του ρυθμίσεις. Δείτε σχετικά στο  https://tiddlywiki.com/#ExternalText</p>
-LoginToTiddlySpace: Είσοδος χρήστη στο TiddlySpace
-Manager/Controls/FilterByTag/None: (κανένα)
-Manager/Controls/FilterByTag/Prompt: Φιλτράρισμα με ετικέτα:
-Manager/Controls/Order/Prompt: Αντιστροφή σειράς
-Manager/Controls/Search/Placeholder: Αναζήτηση
-Manager/Controls/Search/Prompt: Αναζήτηση:
-Manager/Controls/Show/Option/Tags: ετικέτες
-Manager/Controls/Show/Prompt: Δείξε:
-Manager/Controls/Sort/Prompt: Ταξινόμηση βάσει:
-Manager/Item/Colour: Χρώμα
-Manager/Item/Fields: Πεδία
-Manager/Item/Icon: Εικονίδιο
-Manager/Item/Icon/None: (κανένα)
-Manager/Item/RawText: ακατέργαστο κείμενο
-Manager/Item/Tags: Ετικέτες
-Manager/Item/Tools: Εργαλεία
-Manager/Item/WikifiedText: Wikified κείμενο
-MissingTiddler/Hint: Ανύπαρκτο tiddler "<$text text=<<currentTiddler>>/>" - κάντε κλικ {{||$:/core/ui/Buttons/edit}} για να δημιουργηθεί
-No: Όχι
-OfficialPluginLibrary: Επίσημη ~TiddlyWiki βιβλιοθήκη πρόσθετων
-OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
-PluginReloadWarning: Παρακαλώ αποθηκεύστε {{$:/core/ui/Buttons/save-wiki}} και ξαναφορτώστε {{$:/core/ui/Buttons/refresh}} προκειμένου να ενεργοποιηθούν οι αλλαγές στα πρόσθετα
-RecentChanges/DateFormat: DDth MMM YYYY
-SystemTiddler/Tooltip: Αυτό είναι ένα tiddler συστήματος
-SystemTiddlers/Include/Prompt: Συμπεριέλαβε συστεμικά tiddlers
-TagManager/Colour/Heading: Χρώμα
-TagManager/Count/Heading: Μέτρα
-TagManager/Icon/Heading: Εικονίδιο
-TagManager/Info/Heading: Πληροφορίες
-TagManager/Tag/Heading: Ετικέτα
-Tiddler/DateFormat: DDth MMM YYYY στις hh12:0mmam
-UnsavedChangesWarning: Έχετε μη αποθηκευμένες αλλαγές στο TiddlyWiki
-Yes: Ναι
-Εντοπίστηκε πρόσθετο για την έκδοση ~TiddlyWiki Classic: 
+AboveStory/ClassicPlugin/Warning: Φαίνεται πως προσπαθείς να φορτώσεις ένα πρόσθετο που έχει σχεδιαστεί για το ~TiddlyWiki Classic. Σημειώνουμε ότι [[αυτά τα πρόσθετα δεν λειτουργούν με την έκδοση 5.χ.χ του TiddlyWiki|https://tiddlywiki.com/#TiddlyWikiClassic]]. Πρόσθετα ~TiddlyWiki Classic που εντοπίστηκαν:
+ClassicWarning/Hint: Αυτό το tiddler έχει γραφτεί με την wiki-γραφή του TiddlyWiki Classic, που δεν είναι πλήρως συμβατή με τη γραφή της 5ης έκδοσης του TiddlyWiki. Δες το https://tiddlywiki.com/static/Upgrading.html για περισσότερες λεπτομέρειες.
+CloseAll/Button: κλείσε τα όλα
+ConfirmAction: Θέλεις να συνεχίσεις;
+ConfirmCancelTiddler: Θέλεις να απορριφθούν οι όποιες τροποποιήσεις έχεις κάνει στο tiddler «<$text text=<<title>>/>»;
+ConfirmDeleteTiddler: Θέλεις να διαγράψεις το tiddler «<$text text=<<title>>/>»;
+ConfirmDeleteTiddlers: Σίγουρα θέλεις να διαγράψεις <<resultCount>> tiddlers;
+ConfirmEditShadowTiddler: Πρόκειται να τροποποιήσεις ένα σκιώδη tiddler. Οποιεσδήποτε τροποποιήσεις θα αντικαταστήσουν το τυπικό σύστημα και υπάρχει κίνδυνος να δυσκολευτείτε σε σε μελλοντική αναβάθμιση. Είστε σίγουροι ότι θέλετε να τροποποιήσετε το «<$text text=<<title>>/>»;
+ConfirmOverwriteTiddler: Θέλετε να αντικαταστήσετε το tiddler «<$text text=<<title>>/>»?
+Diffs/CountMessage: <<diff-count>> διαφορές
+DropMessage: Άφησε εδώ (ή πάτησε το πλήκτρο Esc για να ακύρωσεις)
+Encryption/ConfirmClearPassword: Θέλεις να αφαιρέσεις τον κωδικό; Αυτό θα έχει ως συνέπεια να μην κρυπτογραφείται το wiki όταν αποθηκεύεται
+Encryption/Password: Κωδικός
+Encryption/PasswordNoMatch: Οι κωδικοί δεν ταιριάζουν
+Encryption/PromptSetPassword: Όρισε τον νέο κωδικό για αυτό το TiddlyWiki
+Encryption/RepeatPassword: Επανέλαβε τον κωδικό
+Encryption/SetPassword: Όρισε κωδικό
+Error/DeserializeOperator/MissingOperand: Σφάλμα Φίλτρου: Λείπει ο τελεστής για τον τελεστή «deserialize»
+Error/DeserializeOperator/UnknownDeserializer: Σφάλμα Φίλτρου: Άγνωστος αποσειριοποιητής παρέχεται ως τελεστής για τον τελεστή «deserialize»
+Error/FilterRunPrefix: Σφάλμα Φίλτρου: Άγνωστο πρόθεμα για την εκτέλεση φίλτρου
+Error/FormatFilterOperator: Σφάλμα Φίλτρου: Άγνωστο επίθημα για τον τελεστή φίλτρου «format»
+Error/IsFilterOperator: Σφάλμα Φίλτρου: Άγνωστη παράμετρος για τον τελεστή φίλτρου «is»
+Error/NetworkErrorAlert: `<h2>''Σφάλμα δικτύου''</h2>Φαίνεται ότι η σύνδεση με τον διακομιστή έχει χαθεί. Αυτό μπορεί να υποδηλώνει πρόβλημα με τη σύνδεση του δικτύου. Προσπάθησε να επαναφέρεις τη σύνδεση δικτύου πριν συνεχίσεις.<br><br>''Οποιεσδήποτε αποθηκευμένες αλλαγές που δεν έχουν αποθηκευτεί θα συγχρονιστούν αυτόματα όταν αποκατασταθεί η σύνδεση''.`
+Error/PutEditConflict: Το αρχείο άλλαξε στον εξυπηρετητή
+Error/PutForbidden: Η άδεια απερρίφθη
+Error/PutUnauthorized: Απαιτείται ταυτοποίηση
+Error/RetrievingSkinny: Σφάλμα κατά την ανάκληση της λίστας λεπτών tiddler
+Error/XMLHttpRequest: Κωδικός σφάλματος XMLHttpRequest
+Error/ZoominTextNode: Σφάλμα Προβολής Ιστορίας: Φαίνεται ότι προσπάθησες να αλληλεπιδράσεις με ένα tiddler που εμφανίζεται σε προσαρμοσμένο δοχείο. Αυτό πιθανότατα προκαλείται από τη χρήση του φίλτρου `$:/tags/StoryTiddlerTemplateFilter` με ένα πρότυπο που περιέχει κείμενο ή κενό/α στην αρχή. Παρακαλούμε χρησιμοποίησε το pragma `\whitespace trim` και βεβαίωσε ότι όλο το περιεχόμενο του tiddler περιλαμβάνεται σε μόνο ένα στοιχείο HTML. Το κείμενο που προκάλεσε αυτό το πρόβλημα:
+InternalJavaScriptError/Hint:  Λοιπόν, αυτό είναι ντροπιαστικό. Συνιστάμε να επανεκκινήσεις το TiddlyWiki, πατώντας ανανέωση στον περιηγητή σου
+InternalJavaScriptError/Title: Εσωτερικό Σφάλμα JavaScript
+LayoutSwitcher/Description: Άνοιξε τον εναλλάκτη διατάξεων
+LazyLoadingWarning: <p>Γίνεται φόρτωση εξωτερικού περιεχόμενο από ''<$text text={{!!_canonical_uri}}/>''</p><p>Αν αυτό το μήνυμα δεν εξαφανιστεί, ενδέχεται ότι ο τύπος tiddler δεν ταιριάζει με τον τύπο του εξωτερικού περιεχομένου, ή πως το πρόγραμμα περιήγησης που χρησιμοποιείς δεν υποστηρίζει εξωτερικό περιεχόμενο για wiki που φορτώθηκαν ως αυτοτελή Δες σχετικά στο https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Είσοδος στο TiddlySpace
+Manager/Controls/FilterByTag/None: (καμία)
+Manager/Item/RawText: Ακατέργαστο κείμενο
+Manager/Item/WikifiedText: Wiki-ποιημένο κείμενο
+MissingTiddler/Hint: Ανύπαρκτο tiddler «<$text text=<<currentTiddler>>/>» - πάτησε {{||$:/core/ui/Buttons/edit}} για να το δημιουργήσεις
+OfficialPluginLibrary: Επίσημη Βιβλιοθήκη Πρόσθετων ~TiddlyWiki
+OfficialPluginLibrary/Hint: Η επίσημη βιβλιοθήκη πρόσθετων του ~TiddlyWiki στο tiddlywiki.com. Τα πρόσθετα, τα θέματα και τα πακέτα γλωσσών συντηρούνται από την κεντρική ομάδα.
+PageTemplate/Description: η προκαθορισμένη διάταξη του ~TiddlyWiki
+PageTemplate/Name: Τυπική Διάταξη
+PluginReloadWarning: Παρακαλούμε αποθήκευσε {{$:/core/ui/Buttons/save-wiki}} και επαναφόρτωσε {{$:/core/ui/Buttons/refresh}} προκειμένου να ενεργοποιηθούν οι αλλαγές στα πρόσθετα
+Shortcuts/Input/Accept/Hint: Αποδέξου το επιλεγμένο στοιχείο
+Shortcuts/Input/AcceptVariant/Hint: Αποδέξου το επιλεγμένο στοιχείο (παραλλαγή)
+Shortcuts/Input/AdvancedSearch/Hint: Άνοιξε τη ~AdvancedSearch από το πεδίο αναζήτησης στη πλευρική εργαλειοθήκη
+Shortcuts/Input/Cancel/Hint: Εκκαθάρισε το πεδίο εισαγωγής
+Shortcuts/Input/Down/Hint: Επέλεξε την επόμενη καρτέλα
+Shortcuts/Input/Tab-Left/Hint: Επέλεξε την προηγούμενη καρτέλα
+Shortcuts/Input/Tab-Right/Hint: Επέλεξε την επόμενη καρτέλα
+Shortcuts/Input/Up/Hint: Επέλεξε το προηγούμενο αντικείμενο
+Shortcuts/SidebarLayout/Hint: Άλλαξε τη διάταξη της πλευρικής εργαλειοθήκης
+Switcher/Subtitle/language: Άλλαξε Γλώσσα
+Switcher/Subtitle/layout: Άλλαξε Διάταξη
+Switcher/Subtitle/palette: Άλλαξε Παλέτα
+Switcher/Subtitle/theme: Άλλαξε Θέμα
+TagManager/Count/Heading: Απαρίθμηση
+TagManager/Icons/None: Κανένα
+UnsavedChangesWarning: Έχεις μη αποθηκευμένες αλλαγές στο TiddlyWiki
+Εντοπίστηκε πρόσθετο για την έκδοση ~TiddlyWiki Classic: Εντοπίστηκε πρόσθετο για την έκδοση ~TiddlyWiki Classic

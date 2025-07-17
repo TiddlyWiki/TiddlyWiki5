@@ -1,0 +1,191 @@
+body {
+	font-size: 62.5%;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+a {
+	color: #BC4378;
+}
+
+.ts-loggedin .ts-openidlogin,
+.ts-loggedin .ts-login {
+	display: none;
+}
+
+form input {
+	width: 90px;
+	border: solid 1px #CCC;
+	height: 24px;
+}
+
+.ts-login input,
+.ts-logout input {
+    font-size: 11px;
+}
+
+form input[type=text],
+form input[type=password] {
+	border-radius: 2px;
+	padding: 0.1em 0.5em;
+}
+
+form input[type=submit] {
+	width: auto;
+}
+
+.ts-logout,
+.ts-logout form {
+	font-size: 1.6em;
+	text-align: center;
+}
+
+.ts-logout form {
+	display: inline;
+}
+
+#app-list {
+	background: #F0F4F8;
+	list-style: none;
+	padding: 0; margin: 0;
+}
+
+#app-list li {
+	height: 4.5em;
+	line-height: 4.5em;
+	background: url(/bags/common/tiddlers/double_angle_lightblue_42x42.png) no-repeat 90% #F0F4F8;
+	background-size: 24px 24px;
+}
+
+#app-list li:hover {
+	cursor: pointer;
+	background: url(/bags/common/tiddlers/double_angle_lightblue_42x42.png) no-repeat 90% #0082AF;
+	background-size: 24px 24px;
+}
+
+#app-list li form,
+#app-list li a {
+	display: block;
+	height: 100%;
+	font-size: 2em;
+	text-decoration: none;
+	color: #8C9DA7;
+	width: 100%;
+	font-weight: normal;
+}
+
+#app-list li input {
+    width: 50%;
+}
+
+#app-list li:hover a {
+	color: #E56AA0;
+}
+
+.tsbackstage #app-list li:hover a {
+	color: #fff;
+}
+
+#app-list .app-img {
+	position: relative;
+	top: 0.2125em;
+	margin: 0 1.25em 0 1em;
+	height: 1.25em;
+	width: 1.25em;
+}
+
+#app-list .search .app-img {
+	margin-right: 10px;
+}
+
+.ts-loggedin .login-method:target,
+.login-method {
+	display: none;
+}
+
+.login-method {
+	display: block;
+}
+.login-method-hide {
+	display: none;
+}
+.login-method p {
+	padding-bottom: 5px;
+}
+
+.tsbackstage .message {
+	color: #4C4A54;
+	display: block;
+	text-align: center;
+}
+
+.tsbackstage .message a {
+	text-decoration: none;
+}
+
+.btn {
+	border-radius: 2px;
+}
+
+.btn-action {
+	background: #0082AF;
+	color: #fff;
+	border: none;
+}
+
+.btn-action:hover {
+	box-shadow: 0 0 3px rgba(0,0,0,.5);
+}
+
+form input.btn-system {
+	background: #F8F9F9;
+	color: #4C4A54;
+	border: 1px solid rgba(0,0,0,.2);
+}
+
+.btn-system:hover {
+	color: #000;
+	cursor: pointer;
+	box-shadow: 0 0 3px rgba(0,0,0,.25);
+}
+
+.search form {
+	height: 4.5em;
+}
+
+.search input {
+	font-size: 1em;
+	border: none;
+	outline: none;
+	padding: 0.2em 0.5em;
+	background: transparent;
+	border-radius: 2px;
+}
+
+.search:hover input {
+	color: #fff;
+}
+
+.search input:focus {
+	-webkit-box-shadow: inset 0 0 8px  rgba(140,157,167,0.75);
+	-moz-box-shadow: inset 0 0 8px  rgba(140,157,167,0.75);
+	box-shadow: inset 0 0 8px  rgba(140,157,167,0.75);
+}
+
+.search:hover input:focus {
+	-webkit-box-shadow: inset 0 0 8px  rgba(255,255,255,0.5);
+	-moz-box-shadow: inset 0 0 8px  rgba(255,255,255,0.5);
+	box-shadow: inset 0 0 8px  rgba(255,255,255,0.5);
+}
+
+.logindetails {
+	background: #fff;
+	padding: 1em 1em 2em;
+	box-shadow: 0 0 6px 0px rgba(0, 0, 0, 0.25);
+	z-index: 1;
+	position: relative;
+	text-align: center;
+}
+
+.logindetails p {
+    margin: 0;
+}
