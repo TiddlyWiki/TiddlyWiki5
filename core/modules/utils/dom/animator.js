@@ -18,8 +18,8 @@ function Animator() {
 Animator.prototype.perform = function(type,domNode,options) {
 	options = options || {};
 	// Find an animation that can handle this type
-	var chosenAnimation;
-	$tw.utils.each(this.animations,function(animation,name) {
+	let chosenAnimation;
+	$tw.utils.each(this.animations,(animation,name) => {
 		if($tw.utils.hop(animation,type)) {
 			chosenAnimation = animation[type];
 		}

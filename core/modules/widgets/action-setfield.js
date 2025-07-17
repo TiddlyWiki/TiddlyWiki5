@@ -9,9 +9,9 @@ Action widget to set a single field or index on a tiddler.
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var SetFieldWidget = function(parseTreeNode,options) {
+const SetFieldWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -51,14 +51,14 @@ SetFieldWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	var self = this,
-		options = {};
+	const self = this;
+	const options = {};
 	if(this.actionTiddler) {
 		options.suppressTimestamp = !this.actionTimestamp;
-		if((typeof this.actionField == "string") || (typeof this.actionIndex == "string")  || (typeof this.actionValue == "string")) {
+		if((typeof this.actionField == "string") || (typeof this.actionIndex == "string") || (typeof this.actionValue == "string")) {
 			this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue,options);
 		}
-		$tw.utils.each(this.attributes,function(attribute,name) {
+		$tw.utils.each(this.attributes,(attribute,name) => {
 			if(name.charAt(0) !== "$") {
 				self.wiki.setText(self.actionTiddler,name,undefined,attribute,options);
 			}

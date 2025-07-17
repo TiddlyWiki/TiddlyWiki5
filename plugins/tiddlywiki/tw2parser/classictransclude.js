@@ -8,22 +8,22 @@ Transclude widget
 \*/
 
 "use strict";
-var sliceSeparator = "::";
-var sectionSeparator = "##";
+const sliceSeparator = "::";
+const sectionSeparator = "##";
 
 function getsectionname(title) {
 	if(!title)
 		return "";
-	var pos = title.indexOf(sectionSeparator);
+	const pos = title.indexOf(sectionSeparator);
 	if(pos != -1) {
 		return title.substr(pos + sectionSeparator.length);
 	}
 	return "";
 }
-function getslicename(title) { 
+function getslicename(title) {
 	if(!title)
 		return "";
-	var pos = title.indexOf(sliceSeparator);
+	const pos = title.indexOf(sliceSeparator);
 	if(pos != -1) {
 		return title.substr(pos + sliceSeparator.length);
 	}
@@ -32,7 +32,7 @@ function getslicename(title) {
 function gettiddlername(title) {
 	if(!title)
 		return "";
-	var pos = title.indexOf(sectionSeparator);
+	let pos = title.indexOf(sectionSeparator);
 
 	if(pos != -1) {
 		return title.substr(0,pos);
@@ -43,9 +43,9 @@ function gettiddlername(title) {
 	}
 	return title;
 }
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var TranscludeWidget = function(parseTreeNode,options) {
+const TranscludeWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -74,34 +74,34 @@ TranscludeWidget.prototype.execute = function() {
 	this.section = getsectionname(this.rawTitle);
 	this.slice = getslicename(this.rawTitle);
 	// Check for recursion
-	var recursionMarker = this.makeRecursionMarker();
+	const recursionMarker = this.makeRecursionMarker();
 	if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
-		this.makeChildWidgets([{type: "text", text: $tw.language.getString("Error/RecursiveTransclusion")}]);
+		this.makeChildWidgets([{type: "text",text: $tw.language.getString("Error/RecursiveTransclusion")}]);
 		return;
 	}
 	// Check for correct type
-	var existingTiddler = this.wiki.getTiddler(this.transcludeTitle);
+	const existingTiddler = this.wiki.getTiddler(this.transcludeTitle);
 	// Check if we're dealing with a classic tiddler
 	if(existingTiddler && existingTiddler.hasField("type") && existingTiddler.fields.type !== "text/x-tiddlywiki") {
-		this.makeChildWidgets([{type: "text", text: "Tiddler not of type 'text/x-tiddlywiki'"}]);
+		this.makeChildWidgets([{type: "text",text: "Tiddler not of type 'text/x-tiddlywiki'"}]);
 		return;
 	}
 	if(existingTiddler && !existingTiddler.hasField("type")) {
-		this.makeChildWidgets([{type: "text", text: "Tiddler not of type 'text/x-tiddlywiki'"}]);
+		this.makeChildWidgets([{type: "text",text: "Tiddler not of type 'text/x-tiddlywiki'"}]);
 		return;
-	}		
+	}
 	// Set context variables for recursion detection
 	this.setVariable("transclusion",recursionMarker);
 	// Parse 
-	var text = this.wiki.getTiddlerText(this.transcludeTitle);
-	if (!!this.section||!!this.slice) {
-		text =this.refineTiddlerText(text, this.section, this.slice);
+	let text = this.wiki.getTiddlerText(this.transcludeTitle);
+	if(!!this.section || !!this.slice) {
+		text = this.refineTiddlerText(text,this.section,this.slice);
 	}
 
-	this.options  ={};
+	this.options = {};
 	this.options.parseAsInline = false;
-	var parser = this.wiki.parseText("text/x-tiddlywiki",text,{});
-	var	parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
+	const parser = this.wiki.parseText("text/x-tiddlywiki",text,{});
+	const parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
 };
@@ -109,7 +109,7 @@ TranscludeWidget.prototype.execute = function() {
 Compose a string comprising the title, field and/or index to identify this transclusion for recursion detection
 */
 TranscludeWidget.prototype.makeRecursionMarker = function() {
-	var output = [];
+	const output = [];
 	output.push("{");
 	output.push(this.getVariable("currentTiddler",{defaultValue: ""}));
 	output.push("|");
@@ -128,11 +128,10 @@ TranscludeWidget.prototype.makeRecursionMarker = function() {
 
 TranscludeWidget.prototype.slicesRE = /(?:^([\'\/]{0,2})~?([\.\w]+)\:\1[\t\x20]*([^\n]*)[\t\x20]*$)|(?:^\|([\'\/]{0,2})~?([\.\w]+)\:?\4\|[\t\x20]*([^\|\n]*)[\t\x20]*\|$)/gm;
 
-TranscludeWidget.prototype.calcAllSlices = function(text)
-{
-	var slices = {};
+TranscludeWidget.prototype.calcAllSlices = function(text) {
+	const slices = {};
 	this.slicesRE.lastIndex = 0;
-	var m = this.slicesRE.exec(text);
+	let m = this.slicesRE.exec(text);
 	while(m) {
 		if(m[2])
 			slices[m[2]] = m[3];
@@ -144,46 +143,44 @@ TranscludeWidget.prototype.calcAllSlices = function(text)
 };
 
 // Returns the slice of text of the given name
-TranscludeWidget.prototype.getTextSlice = function(text,sliceName)
-{
+TranscludeWidget.prototype.getTextSlice = function(text,sliceName) {
 	return (this.calcAllSlices(text))[sliceName];
 };
 
-TranscludeWidget.prototype.refineTiddlerText = function(text,section,slice)
-{
-	var textsection = null;
-	if (slice) {
-		var textslice = this.getTextSlice(text,slice);
+TranscludeWidget.prototype.refineTiddlerText = function(text,section,slice) {
+	const textsection = null;
+	if(slice) {
+		const textslice = this.getTextSlice(text,slice);
 		if(textslice)
 			return textslice;
 	}
 	if(!section)
 		return text;
-	var re = new RegExp("(^!{1,6}[ \t]*" + $tw.utils.escapeRegExp(section) + "[ \t]*\n)","mg");
+	const re = new RegExp(`(^!{1,6}[ \t]*${$tw.utils.escapeRegExp(section)}[ \t]*\n)`,"mg");
 	re.lastIndex = 0;
-	var match = re.exec(text);
+	let match = re.exec(text);
 	if(match) {
-		var t = text.substr(match.index+match[1].length);
-		var re2 = /^!/mg;
+		let t = text.substr(match.index + match[1].length);
+		const re2 = /^!/mg;
 		re2.lastIndex = 0;
 		match = re2.exec(t); //# search for the next heading
 		if(match)
-			t = t.substr(0,match.index-1);//# don't include final \n
+			t = t.substr(0,match.index - 1);//# don't include final \n
 		return t;
 	}
 	return "";
-}
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 TranscludeWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler ||changedTiddlers[this.transcludeTitle]) {
+	const changedAttributes = this.computeAttributes();
+	if(changedAttributes.tiddler || changedTiddlers[this.transcludeTitle]) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);		
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 

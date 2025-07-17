@@ -12,109 +12,109 @@ See Boot.js for further details of the boot process.
 
 \*/
 
-var _bootprefix = (function($tw) {
+const _bootprefix = (function($tw) {
 
-"use strict";
+	"use strict";
 
-$tw = $tw || Object.create(null);
-$tw.boot = $tw.boot || Object.create(null);
+	$tw = $tw || Object.create(null);
+	$tw.boot = $tw.boot || Object.create(null);
 
-// Config
-$tw.config = $tw.config || Object.create(null);
-$tw.config.maxEditFileSize = 100 * 1024 * 1024; // 100MB
+	// Config
+	$tw.config = $tw.config || Object.create(null);
+	$tw.config.maxEditFileSize = 100 * 1024 * 1024; // 100MB
 
-// Detect platforms
-if(!("browser" in $tw)) {
-	$tw.browser = typeof(window) !== "undefined" && typeof(document) !== "undefined" ? {} : null;
-}
-if(!("node" in $tw)) {
-	$tw.node = typeof(process) === "object" ? {} : null;
-}
-if(!("nodeWebKit" in $tw)) {
-	$tw.nodeWebKit = $tw.node && global.window && global.window.nwDispatcher ? {} : null;
-}
+	// Detect platforms
+	if(!("browser" in $tw)) {
+		$tw.browser = typeof (window) !== "undefined" && typeof (document) !== "undefined" ? {} : null;
+	}
+	if(!("node" in $tw)) {
+		$tw.node = typeof (process) === "object" ? {} : null;
+	}
+	if(!("nodeWebKit" in $tw)) {
+		$tw.nodeWebKit = $tw.node && global.window && global.window.nwDispatcher ? {} : null;
+	}
 
-// Set default boot tasks
-$tw.boot.tasks = {
-	trapErrors: !!($tw.browser && !$tw.node),
-	readBrowserTiddlers: !!($tw.browser && !$tw.node)
-};
-
-/*
-Information about each module is kept in an object with these members:
-	moduleType: type of module
-	definition: object, function or string defining the module; see below
-	exports: exports of the module, filled in after execution
-
-The `definition` can be of several types:
-
-* An object can be used to directly specify the exports of the module
-* A function with the arguments `module,require,exports` that returns `exports`
-* A string function body with the same arguments
-
-Each moduleInfo object is stored in two hashmaps: $tw.modules.titles and $tw.modules.types. The first is indexed by title and the second is indexed by type and then title
-*/
-$tw.modules = {
-	titles: {}, // hashmap by module name of moduleInfo
-	types: {} // hashmap by module type and then name of moduleInfo
-};
-
-/*
-Define a JavaScript tiddler module for later execution
-	moduleName: name of module being defined
-	moduleType: type of module
-	definition: module definition; see discussion above
-*/
-$tw.modules.define = function(moduleName,moduleType,definition) {
-	// Create the moduleInfo
-	var moduleInfo = {
-		moduleType: moduleType,
-		definition: definition,
-		exports: undefined
+	// Set default boot tasks
+	$tw.boot.tasks = {
+		trapErrors: !!($tw.browser && !$tw.node),
+		readBrowserTiddlers: !!($tw.browser && !$tw.node)
 	};
-	// If the definition is already an object we can use it as the exports
-	if(typeof moduleInfo.definition === "object") {
-		moduleInfo.exports = definition;
-	}
-	// Store the module in the titles hashmap
-	if(Object.prototype.hasOwnProperty.call($tw.modules.titles,moduleName)) {
-		console.log("Warning: Redefined module - " + moduleName);
-	}
-	$tw.modules.titles[moduleName] = moduleInfo;
-	// Store the module in the types hashmap
-	if(!Object.prototype.hasOwnProperty.call($tw.modules.types,moduleType)) {
-		$tw.modules.types[moduleType] = {};
-	}
-	if(Object.prototype.hasOwnProperty.call($tw.modules.types[moduleType],moduleName)) {
-		console.log("Warning: Redefined module - " + moduleName);
-	}
-	$tw.modules.types[moduleType][moduleName] = moduleInfo;
-};
 
-/*
-External JavaScript can populate this array before calling boot.js in order to preload tiddlers
-*/
-$tw.preloadTiddlers = $tw.preloadTiddlers || [];
+	/*
+	Information about each module is kept in an object with these members:
+		moduleType: type of module
+		definition: object, function or string defining the module; see below
+		exports: exports of the module, filled in after execution
+	
+	The `definition` can be of several types:
+	
+	* An object can be used to directly specify the exports of the module
+	* A function with the arguments `module,require,exports` that returns `exports`
+	* A string function body with the same arguments
+	
+	Each moduleInfo object is stored in two hashmaps: $tw.modules.titles and $tw.modules.types. The first is indexed by title and the second is indexed by type and then title
+	*/
+	$tw.modules = {
+		titles: {}, // hashmap by module name of moduleInfo
+		types: {} // hashmap by module type and then name of moduleInfo
+	};
 
-/*
-Convenience function for pushing a tiddler onto the preloading array
-*/
-$tw.preloadTiddler = function(fields) {
-	$tw.preloadTiddlers.push(fields);
-};
+	/*
+	Define a JavaScript tiddler module for later execution
+		moduleName: name of module being defined
+		moduleType: type of module
+		definition: module definition; see discussion above
+	*/
+	$tw.modules.define = function(moduleName,moduleType,definition) {
+		// Create the moduleInfo
+		const moduleInfo = {
+			moduleType,
+			definition,
+			exports: undefined
+		};
+		// If the definition is already an object we can use it as the exports
+		if(typeof moduleInfo.definition === "object") {
+			moduleInfo.exports = definition;
+		}
+		// Store the module in the titles hashmap
+		if(Object.prototype.hasOwnProperty.call($tw.modules.titles,moduleName)) {
+			console.log(`Warning: Redefined module - ${moduleName}`);
+		}
+		$tw.modules.titles[moduleName] = moduleInfo;
+		// Store the module in the types hashmap
+		if(!Object.prototype.hasOwnProperty.call($tw.modules.types,moduleType)) {
+			$tw.modules.types[moduleType] = {};
+		}
+		if(Object.prototype.hasOwnProperty.call($tw.modules.types[moduleType],moduleName)) {
+			console.log(`Warning: Redefined module - ${moduleName}`);
+		}
+		$tw.modules.types[moduleType][moduleName] = moduleInfo;
+	};
 
-/*
-Convenience function for pushing an array of tiddlers onto the preloading array
-*/
-$tw.preloadTiddlerArray = function(fieldsArray) {
-	$tw.preloadTiddlers.push.apply($tw.preloadTiddlers,fieldsArray);
-};
+	/*
+	External JavaScript can populate this array before calling boot.js in order to preload tiddlers
+	*/
+	$tw.preloadTiddlers = $tw.preloadTiddlers || [];
 
-return $tw;
+	/*
+	Convenience function for pushing a tiddler onto the preloading array
+	*/
+	$tw.preloadTiddler = function(fields) {
+		$tw.preloadTiddlers.push(fields);
+	};
+
+	/*
+	Convenience function for pushing an array of tiddlers onto the preloading array
+	*/
+	$tw.preloadTiddlerArray = function(fieldsArray) {
+		$tw.preloadTiddlers.push.apply($tw.preloadTiddlers,fieldsArray);
+	};
+
+	return $tw;
 
 });
 
-if(typeof(exports) === "undefined") {
+if(typeof (exports) === "undefined") {
 	// Set up $tw global for the browser
 	window.$tw = _bootprefix(window.$tw);
 } else {

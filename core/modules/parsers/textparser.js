@@ -9,14 +9,14 @@ The plain text parser processes blocks of source text into a degenerate parse tr
 
 "use strict";
 
-var TextParser = function(type,text,options) {
+const TextParser = function(type,text,options) {
 	this.tree = [{
 		type: "genesis",
 		attributes: {
-			$type: {name: "$type", type: "string", value: "$codeblock"},
-			code: {name: "code", type: "string", value: text},
-			language: {name: "language", type: "string", value: type},
-			$remappable: {name: "$remappable", type:"string", value: "no"}
+			$type: {name: "$type",type: "string",value: "$codeblock"},
+			code: {name: "code",type: "string",value: text},
+			language: {name: "language",type: "string",value: type},
+			$remappable: {name: "$remappable",type: "string",value: "no"}
 		}
 	}];
 	this.source = text;

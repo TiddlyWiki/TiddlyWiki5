@@ -9,47 +9,47 @@ Commands to render tiddlers identified by a filter and save any screenshots iden
 
 "use strict";
 
-var InnerWikiWidget = require("$:/plugins/tiddlywiki/innerwiki/innerwiki.js").innerwiki;
+const InnerWikiWidget = require("$:/plugins/tiddlywiki/innerwiki/innerwiki.js").innerwiki;
 
 exports.info = {
 	name: "screenshot",
 	synchronous: false
 };
 
-var Command = function(params,commander,callback) {
+const Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
 };
 
 Command.prototype.execute = function() {
-	var self = this;
+	const self = this;
 	if(this.params.length < 1) {
 		return "Missing filter";
 	}
-	var filter = this.params[0],
-		deviceScaleFactor = parseInt(this.params[1],10) || 1,
-		tiddlers = this.commander.wiki.filterTiddlers(filter);
+	const filter = this.params[0];
+	const deviceScaleFactor = parseInt(this.params[1],10) || 1;
+	const tiddlers = this.commander.wiki.filterTiddlers(filter);
 	// Render each tiddler into a widget tree
-	var innerWikiWidgets = [];
-	$tw.utils.each(tiddlers,function(title) {
-		var parser = self.commander.wiki.parseTiddler(title),
-			variables = {currentTiddler: title},
-			widgetNode = self.commander.wiki.makeWidget(parser,{variables: variables}),
-			container = $tw.fakeDocument.createElement("div");
+	const innerWikiWidgets = [];
+	$tw.utils.each(tiddlers,(title) => {
+		const parser = self.commander.wiki.parseTiddler(title);
+		const variables = {currentTiddler: title};
+		const widgetNode = self.commander.wiki.makeWidget(parser,{variables});
+		const container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
 		// Find any innerwiki widgets
 		Array.prototype.push.apply(innerWikiWidgets,self.findInnerWikiWidgets(widgetNode));
 	});
 	// Asynchronously tell each innerwiki widget to save a screenshot
-	var processNextInnerWikiWidget = function() {
+	const processNextInnerWikiWidget = function() {
 		if(innerWikiWidgets.length > 0) {
-			var widget = innerWikiWidgets[0];
+			const widget = innerWikiWidgets[0];
 			innerWikiWidgets.shift();
 			widget.saveScreenshot({
 				basepath: self.commander.outputPath,
-				deviceScaleFactor: deviceScaleFactor
-			},function(err) {
+				deviceScaleFactor
+			},(err) => {
 				if(err) {
 					self.callback(err);
 				}
@@ -64,12 +64,12 @@ Command.prototype.execute = function() {
 };
 
 Command.prototype.findInnerWikiWidgets = function(widgetNode) {
-	var self = this,
-		results = [];
+	const self = this;
+	const results = [];
 	if(widgetNode.saveScreenshot) {
-		results.push(widgetNode)
+		results.push(widgetNode);
 	}
-	$tw.utils.each(widgetNode.children,function(childWidget) {
+	$tw.utils.each(widgetNode.children,(childWidget) => {
 		Array.prototype.push.apply(results,self.findInnerWikiWidgets(childWidget));
 	});
 	return results;

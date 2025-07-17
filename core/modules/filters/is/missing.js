@@ -13,15 +13,15 @@ Filter function for [is[missing]]
 Export our filter function
 */
 exports.missing = function(source,prefix,options) {
-	var results = [];
+	const results = [];
 	if(prefix === "!") {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(options.wiki.tiddlerExists(title)) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(!options.wiki.tiddlerExists(title)) {
 				results.push(title);
 			}

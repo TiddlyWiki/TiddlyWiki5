@@ -9,9 +9,9 @@ Checkbox widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var CheckboxWidget = function(parseTreeNode,options) {
+const CheckboxWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -24,7 +24,7 @@ CheckboxWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 CheckboxWidget.prototype.render = function(parent,nextSibling) {
-	var isChecked;
+	let isChecked;
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -33,7 +33,7 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
-	this.labelDomNode.setAttribute("class","tc-checkbox " + this.checkboxClass);
+	this.labelDomNode.setAttribute("class",`tc-checkbox ${this.checkboxClass}`);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","checkbox");
 	isChecked = this.getValue();
@@ -45,7 +45,7 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 		this.inputDomNode.indeterminate = true;
 	}
 	if(this.tabIndex) {
-		this.inputDomNode.setAttribute("tabindex", this.tabIndex);
+		this.inputDomNode.setAttribute("tabindex",this.tabIndex);
 	}
 	if(this.isDisabled === "yes") {
 		this.inputDomNode.setAttribute("disabled",true);
@@ -60,7 +60,7 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	});
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
-		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
+		{name: "change",handlerObject: this,handlerMethod: "handleChangeEvent"}
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.labelDomNode,nextSibling);
@@ -69,7 +69,7 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 };
 
 CheckboxWidget.prototype.getValue = function() {
-	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
+	const tiddler = this.wiki.getTiddler(this.checkboxTitle);
 	if(tiddler || this.checkboxFilter) {
 		if(tiddler && this.checkboxTag) {
 			if(this.checkboxInvertTag === "yes") {
@@ -80,7 +80,7 @@ CheckboxWidget.prototype.getValue = function() {
 		}
 		if(tiddler && (this.checkboxField || this.checkboxIndex)) {
 			// Same logic applies to fields and indexes
-			var value;
+			let value;
 			if(this.checkboxField) {
 				if($tw.utils.hop(tiddler.fields,this.checkboxField)) {
 					value = tiddler.fields[this.checkboxField] || "";
@@ -114,7 +114,7 @@ CheckboxWidget.prototype.getValue = function() {
 		}
 		if(this.checkboxListField || this.checkboxListIndex || this.checkboxFilter) {
 			// Same logic applies to lists and filters
-			var list;
+			let list;
 			if(this.checkboxListField) {
 				if($tw.utils.hop(tiddler.fields,this.checkboxListField)) {
 					list = tiddler.getFieldList(this.checkboxListField) || [];
@@ -126,10 +126,10 @@ CheckboxWidget.prototype.getValue = function() {
 			} else {
 				list = this.wiki.filterTiddlers(this.checkboxFilter,this) || [];
 			}
-			if(list.indexOf(this.checkboxChecked) !== -1) {
+			if(list.includes(this.checkboxChecked)) {
 				return true;
 			}
-			if(list.indexOf(this.checkboxUnchecked) !== -1) {
+			if(list.includes(this.checkboxUnchecked)) {
 				return false;
 			}
 			// Neither one present
@@ -167,15 +167,15 @@ CheckboxWidget.prototype.getValue = function() {
 };
 
 CheckboxWidget.prototype.handleChangeEvent = function(event) {
-	var checked = this.inputDomNode.checked,
-		tiddler = this.wiki.getTiddler(this.checkboxTitle),
-		fallbackFields = {text: ""},
-		newFields = {title: this.checkboxTitle},
-		hasChanged = false,
-		tagCheck = false,
-		hasTag = tiddler && tiddler.hasTag(this.checkboxTag),
-		value = checked ? this.checkboxChecked : this.checkboxUnchecked,
-		notValue = checked ? this.checkboxUnchecked : this.checkboxChecked;
+	const {checked} = this.inputDomNode;
+	const tiddler = this.wiki.getTiddler(this.checkboxTitle);
+	const fallbackFields = {text: ""};
+	const newFields = {title: this.checkboxTitle};
+	let hasChanged = false;
+	let tagCheck = false;
+	const hasTag = tiddler && tiddler.hasTag(this.checkboxTag);
+	const value = checked ? this.checkboxChecked : this.checkboxUnchecked;
+	const notValue = checked ? this.checkboxUnchecked : this.checkboxChecked;
 	if(this.checkboxTag && this.checkboxInvertTag === "yes") {
 		tagCheck = hasTag === checked;
 	} else {
@@ -183,8 +183,8 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	}
 	// Set the tag if specified
 	if(this.checkboxTag && (!tiddler || tagCheck)) {
-		newFields.tags = tiddler ? (tiddler.fields.tags || []).slice(0) : [];
-		var pos = newFields.tags.indexOf(this.checkboxTag);
+		newFields.tags = tiddler ? [...(tiddler.fields.tags || [])] : [];
+		const pos = newFields.tags.indexOf(this.checkboxTag);
 		if(pos !== -1) {
 			newFields.tags.splice(pos,1);
 		}
@@ -204,14 +204,14 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	}
 	// Set the index if specified
 	if(this.checkboxIndex) {
-		var indexValue = this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxIndex);
+		const indexValue = this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxIndex);
 		if(!tiddler || indexValue !== value) {
 			hasChanged = true;
 		}
 	}
 	// Set the list field (or index) if specified
 	if(this.checkboxListField || this.checkboxListIndex) {
-		var fieldContents, listContents, oldPos, newPos;
+		let fieldContents; var listContents; let oldPos; let newPos;
 		if(this.checkboxListField) {
 			fieldContents = (tiddler ? tiddler.fields[this.checkboxListField] : undefined) || [];
 		} else {
@@ -219,7 +219,7 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		}
 		if($tw.utils.isArray(fieldContents)) {
 			// Make a copy so we can modify it without changing original that's refrenced elsewhere
-			listContents = fieldContents.slice(0);
+			listContents = [...fieldContents];
 		} else if(fieldContents === undefined) {
 			listContents = [];
 		} else if(typeof fieldContents === "string") {
@@ -248,12 +248,12 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 				listContents[oldPos] = value;
 				hasChanged = true;
 			} else {
-				listContents.splice(oldPos, 1)
+				listContents.splice(oldPos,1);
 				hasChanged = true;
 			}
 		} else {
 			// both were present: just remove the old one, leave new alone
-			listContents.splice(oldPos, 1)
+			listContents.splice(oldPos,1);
 			hasChanged = true;
 		}
 		if(this.checkboxListField) {
@@ -265,7 +265,7 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		if(this.checkboxIndex) {
 			this.wiki.setText(this.checkboxTitle,"",this.checkboxIndex,value);
 		} else if(this.checkboxListIndex) {
-			var listIndexValue = (listContents && listContents.length) ? $tw.utils.stringifyList(listContents) : undefined;
+			const listIndexValue = (listContents && listContents.length) ? $tw.utils.stringifyList(listContents) : undefined;
 			this.wiki.setText(this.checkboxTitle,"",this.checkboxListIndex,listIndexValue);
 		} else {
 			this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),fallbackFields,tiddler,newFields,this.wiki.getModificationFields()));
@@ -314,14 +314,14 @@ CheckboxWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 CheckboxWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.index || changedAttributes.listField || changedAttributes.listIndex || changedAttributes.filter || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes.indeterminate || changedAttributes["class"] || changedAttributes.disabled || changedAttributes.tabindex) {
 		this.refreshSelf();
 		return true;
 	} else {
-		var refreshed = false;
+		let refreshed = false;
 		if(changedTiddlers[this.checkboxTitle]) {
-			var isChecked = this.getValue();
+			const isChecked = this.getValue();
 			this.inputDomNode.checked = !!isChecked;
 			this.inputDomNode.indeterminate = (isChecked === undefined);
 			refreshed = true;
@@ -332,7 +332,7 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 			}
 		}
 		this.assignAttributes(this.inputDomNode,{
-			changedAttributes: changedAttributes,
+			changedAttributes,
 			sourcePrefix: "data-",
 			destPrefix: "data-"
 		});

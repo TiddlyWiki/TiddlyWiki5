@@ -9,34 +9,34 @@ Animates list insertions and removals
 
 "use strict";
 
-var PopStoryView = function(listWidget) {
+const PopStoryView = function(listWidget) {
 	this.listWidget = listWidget;
 };
 
 PopStoryView.prototype.navigateTo = function(historyInfo) {
-	var listElementIndex = this.listWidget.findListItem(0,historyInfo.title);
+	const listElementIndex = this.listWidget.findListItem(0,historyInfo.title);
 	if(listElementIndex === undefined) {
 		return;
 	}
-	var listItemWidget = this.listWidget.children[listElementIndex],
-		targetElement = listItemWidget.findFirstDomNode();
+	const listItemWidget = this.listWidget.children[listElementIndex];
+	const targetElement = listItemWidget.findFirstDomNode();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	// Scroll the node into view
-	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
+	this.listWidget.dispatchEvent({type: "tm-scroll",target: targetElement});
 };
 
 PopStoryView.prototype.insert = function(widget) {
-	var targetElement = widget.findFirstDomNode(),
-		duration = $tw.utils.getAnimationDuration();
+	const targetElement = widget.findFirstDomNode();
+	const duration = $tw.utils.getAnimationDuration();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	// Reset once the transition is over
-	setTimeout(function() {
+	setTimeout(() => {
 		$tw.utils.setStyle(targetElement,[
 			{transition: "none"},
 			{transform: "none"}
@@ -58,21 +58,23 @@ PopStoryView.prototype.insert = function(widget) {
 	$tw.utils.forceLayout(targetElement);
 	// Transition to the final position
 	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out, " +
-					"opacity " + duration + "ms ease-in-out"},
+		{
+			transition: `${$tw.utils.roundTripPropertyName("transform")} ${duration}ms ease-in-out, ` +
+				`opacity ${duration}ms ease-in-out`
+		},
 		{transform: "scale(1)"},
 		{opacity: "1.0"}
 	]);
 };
 
 PopStoryView.prototype.remove = function(widget) {
-	var targetElement = widget.findFirstDomNode(),
-		duration = $tw.utils.getAnimationDuration(),
-		removeElement = function() {
-			if(targetElement && targetElement.parentNode) {
-				widget.removeChildDomNodes();
-			}
-		};
+	const targetElement = widget.findFirstDomNode();
+	const duration = $tw.utils.getAnimationDuration();
+	const removeElement = function() {
+		if(targetElement && targetElement.parentNode) {
+			widget.removeChildDomNodes();
+		}
+	};
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		removeElement();
@@ -88,8 +90,10 @@ PopStoryView.prototype.remove = function(widget) {
 	]);
 	$tw.utils.forceLayout(targetElement);
 	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out, " +
-					"opacity " + duration + "ms ease-in-out"},
+		{
+			transition: `${$tw.utils.roundTripPropertyName("transform")} ${duration}ms ease-in-out, ` +
+				`opacity ${duration}ms ease-in-out`
+		},
 		{transform: "scale(0.1)"},
 		{opacity: "0.0"}
 	]);

@@ -9,9 +9,9 @@ Message catcher widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var MessageCatcherWidget = function(parseTreeNode,options) {
+const MessageCatcherWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -24,38 +24,38 @@ MessageCatcherWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	const self = this;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
 	// Helper to add an event handler
-	var addEventHandler = function(type,actions) {
+	const addEventHandler = function(type,actions) {
 		if(type && actions) {
-			var isActionStringExecuting = false;
+			let isActionStringExecuting = false;
 			self.addEventListener(
 				type,
-				function(event) {
+				(event) => {
 					// Don't trap the event if it came from one of our action handlers
 					if(isActionStringExecuting) {
 						return true;
 					}
 					// Collect all the event properties into variables
-					var collectProps = function(obj,prefix) {
+					const collectProps = function(obj,prefix) {
 						prefix = prefix || "";
-						var props = {},
-							names = [];
-						$tw.utils.each(obj,function(value,name) {
-							if(["string","boolean","number"].indexOf(typeof value) !== -1) {
+						const props = {};
+						const names = [];
+						$tw.utils.each(obj,(value,name) => {
+							if(["string","boolean","number"].includes(typeof value)) {
 								names.push(name);
-								props[prefix + "-" + name] = value.toString();
+								props[`${prefix}-${name}`] = value.toString();
 							}
 						});
-						props["list-" + prefix] = $tw.utils.stringifyList(names);
+						props[`list-${prefix}`] = $tw.utils.stringifyList(names);
 						return props;
 					};
-					var variables = $tw.utils.extend(
+					const variables = $tw.utils.extend(
 						{},
 						collectProps(event.paramObject,"event-paramObject"),
 						collectProps(event,"event"),
@@ -69,11 +69,11 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 				}
 			);
 		}
-	}
+	};
 	// Add the main event handler
 	addEventHandler(this.getAttribute("type"),this.getAttribute("actions"));
 	// Add any other event handlers
-	$tw.utils.each(this.attributes,function(value,key) {
+	$tw.utils.each(this.attributes,(value,key) => {
 		if(key.charAt(0) === "$") {
 			addEventHandler(key.slice(1),value);
 		}
@@ -94,7 +94,7 @@ MessageCatcherWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 MessageCatcherWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;

@@ -13,8 +13,8 @@ Filter operator for replacing an empty input list with a constant, passing a non
 Export our filter function
 */
 exports.else = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
+	const results = [];
+	source((tiddler,title) => {
 		results.push(title);
 	});
 	if(results.length === 0) {

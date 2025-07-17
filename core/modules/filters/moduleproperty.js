@@ -13,10 +13,10 @@ Filter [[module-name]moduleproperty[name]] retrieve a module property
 Export our filter function
 */
 exports.moduleproperty = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
+	const results = [];
+	source((tiddler,title) => {
 		try {
-			var value = require(title)[operator.operand || ""];
+			let value = require(title)[operator.operand || ""];
 			if(value !== undefined) {
 				if(typeof value !== "string") {
 					value = JSON.stringify(value);

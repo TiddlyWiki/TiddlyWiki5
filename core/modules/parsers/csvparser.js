@@ -9,38 +9,38 @@ The CSV text parser processes CSV files into a table wrapped in a scrollable wid
 
 "use strict";
 
-var CsvParser = function(type,text,options) {
+const CsvParser = function(type,text,options) {
 	// Special handler for tab-delimited files
-	if (type === 'text/tab-delimited-values' && !options.separator) {
+	if(type === 'text/tab-delimited-values' && !options.separator) {
 		options.separator = "\t";
 	}
-	
+
 	// Table framework
 	this.tree = [{
-		"type": "scrollable", "children": [{
-			"type": "element", "tag": "table", "children": [{
-				"type": "element", "tag": "tbody", "children": []
-			}], "attributes": {
-				"class": {"type": "string", "value": "tc-csv-table"}
+		"type": "scrollable","children": [{
+			"type": "element","tag": "table","children": [{
+				"type": "element","tag": "tbody","children": []
+			}],"attributes": {
+				"class": {"type": "string","value": "tc-csv-table"}
 			}
 		}]
 	}];
 	// Split the text into lines
-	var lines = $tw.utils.parseCsvString(text, options),
-		tag = "th";
-	var maxColumns = 0;
-	$tw.utils.each(lines, function(columns) {
-		maxColumns = Math.max(columns.length, maxColumns);
+	const lines = $tw.utils.parseCsvString(text,options);
+	let tag = "th";
+	let maxColumns = 0;
+	$tw.utils.each(lines,(columns) => {
+		maxColumns = Math.max(columns.length,maxColumns);
 	});
-	
-	for(var line=0; line<lines.length; line++) {
-		var columns = lines[line];
-		var row = {
-			"type": "element", "tag": "tr", "children": []
+
+	for(let line = 0;line < lines.length;line++) {
+		const columns = lines[line];
+		const row = {
+			"type": "element","tag": "tr","children": []
 		};
-		for(var column=0; column<maxColumns; column++) {
+		for(let column = 0;column < maxColumns;column++) {
 			row.children.push({
-				"type": "element", "tag": tag, "children": [{
+				"type": "element",tag,"children": [{
 					"type": "text",
 					"text": columns[column] || ''
 				}]

@@ -9,9 +9,9 @@ Widget to display an editable keyboard shortcut
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var EditShortcutWidget = function(parseTreeNode,options) {
+const EditShortcutWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -46,13 +46,13 @@ EditShortcutWidget.prototype.render = function(parent,nextSibling) {
 		this.inputNode.setAttribute("aria-label",this.shortcutAriaLabel);
 	}
 	if(this.isDisabled === "yes") {
-		this.inputNode.setAttribute("disabled", true);
+		this.inputNode.setAttribute("disabled",true);
 	}
 	// Assign the current shortcut
 	this.updateInputNode();
 	// Add event handlers
 	$tw.utils.addEventListeners(this.inputNode,[
-		{name: "keydown", handlerObject: this, handlerMethod: "handleKeydownEvent"}
+		{name: "keydown",handlerObject: this,handlerMethod: "handleKeydownEvent"}
 	]);
 	// Link into the DOM
 	parent.insertBefore(this.inputNode,nextSibling);
@@ -77,7 +77,7 @@ EditShortcutWidget.prototype.execute = function() {
 	this.shortcutTooltip = this.getAttribute("tooltip");
 	this.shortcutAriaLabel = this.getAttribute("aria-label");
 	this.shortcutFocus = this.getAttribute("focus");
-	this.isDisabled = this.getAttribute("disabled", "no");
+	this.isDisabled = this.getAttribute("disabled","no");
 };
 
 /*
@@ -85,7 +85,7 @@ Update the value of the input node
 */
 EditShortcutWidget.prototype.updateInputNode = function() {
 	if(this.shortcutField) {
-		var tiddler = this.wiki.getTiddler(this.shortcutTiddler);
+		const tiddler = this.wiki.getTiddler(this.shortcutTiddler);
 		if(tiddler && $tw.utils.hop(tiddler.fields,this.shortcutField)) {
 			this.inputNode.value = tiddler.getFieldString(this.shortcutField);
 		} else {
@@ -103,9 +103,9 @@ Handle a dom "keydown" event
 */
 EditShortcutWidget.prototype.handleKeydownEvent = function(event) {
 	// Ignore shift, ctrl, meta, alt
-	if(event.keyCode && $tw.keyboardManager.getModifierKeys().indexOf(event.keyCode) === -1) {
+	if(event.keyCode && !$tw.keyboardManager.getModifierKeys().includes(event.keyCode)) {
 		// Get the shortcut text representation
-		var value = $tw.keyboardManager.getPrintableShortcuts([{
+		const value = $tw.keyboardManager.getPrintableShortcuts([{
 			ctrlKey: event.ctrlKey,
 			shiftKey: event.shiftKey,
 			altKey: event.altKey,
@@ -138,7 +138,7 @@ EditShortcutWidget.prototype.focus = function() {
 Selectively refreshes the widget if needed. Returns true if the widget needed re-rendering
 */
 EditShortcutWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.placeholder || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.style || changedAttributes.tooltip || changedAttributes["aria-label"] || changedAttributes.focus || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;

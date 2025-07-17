@@ -9,13 +9,13 @@ Widget to display an innerwiki in an iframe
 
 "use strict";
 
-var DEFAULT_INNERWIKI_TEMPLATE = "$:/plugins/tiddlywiki/innerwiki/template";
+const DEFAULT_INNERWIKI_TEMPLATE = "$:/plugins/tiddlywiki/innerwiki/template";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	DataWidget = require("$:/core/modules/widgets/data.js").data,
-	dm = $tw.utils.domMaker;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
+const DataWidget = require("$:/core/modules/widgets/data.js").data;
+const dm = $tw.utils.domMaker;
 
-var InnerWikiWidget = function(parseTreeNode,options) {
+const InnerWikiWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -28,14 +28,14 @@ InnerWikiWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 InnerWikiWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	const self = this;
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
 	// Create wrapper
 	this.domWrapper = dm("div",{
 		document: this.document,
-		"class": (this.innerWikiClass || "").split(" ").concat(["tc-innerwiki-wrapper"]).join(" "),
+		"class": [...(this.innerWikiClass || "").split(" "),"tc-innerwiki-wrapper"].join(" "),
 		style: {
 			overflow: "hidden",
 			position: "relative",
@@ -53,7 +53,7 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 			pointerEvents: "none"
 		},
 		attributes: {
-			"viewBox": "0 0 " + this.innerWikiClipWidth + " " + this.innerWikiClipHeight
+			"viewBox": `0 0 ${this.innerWikiClipWidth} ${this.innerWikiClipHeight}`
 		}
 	});
 	this.domWrapper.appendChild(this.domSVG);
@@ -113,7 +113,7 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 				position: "relative",
 				zIndex: "2",
 				transformOrigin: "0 0",
-				transform:  "scale(" + this.scale + ")"
+				transform: `scale(${this.scale})`
 			}
 		});
 		this.domAnchorBackdrop = dm("div",{
@@ -129,9 +129,9 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Scale the iframe and adjust the height of the wrapper
 	if(!this.document.isTiddlyWikiFakeDom) {
-		this.domIFrame.style.transformOrigin = this.clipLeft + "px " + this.clipTop + "px";
-		this.domIFrame.style.transform = "translate(" + (-this.clipLeft) + "px," + (-this.clipTop) + "px) scale(" + this.scale + ")";
-		this.domWrapper.style.height = (this.clipHeight * this.scale) + "px";
+		this.domIFrame.style.transformOrigin = `${this.clipLeft}px ${this.clipTop}px`;
+		this.domIFrame.style.transform = `translate(${-this.clipLeft}px,${-this.clipTop}px) scale(${this.scale})`;
+		this.domWrapper.style.height = `${this.clipHeight * this.scale}px`;
 	}
 };
 
@@ -139,70 +139,70 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 Create the anchors
 */
 InnerWikiWidget.prototype.createAnchors = function() {
-	var self = this;
-	this.findChildrenDataWidgets(this.children,"anchor",function(widget) {
-		var anchorWidth = 40,
-			anchorHeight = 40,
-			getAnchorCoordinate = function(name) {
-				return parseInt(self.wiki.getTiddlerText(widget.getAttribute(name)),10) || 0;
-			},
-			setAnchorCoordinate = function(name,value) {
-				self.wiki.addTiddler({
-					title: widget.getAttribute(name),
-					text: value + ""
-				});
-			},
-			domAnchor = dm("img",{
-				document: self.document,
-				style: {
-					position: "absolute",
-					width: anchorWidth + "px",
-					height: anchorHeight + "px",
-					transformOrigin: "50% 50%",
-					transform: "scale(" + (1 / self.scale) + ")",
-					left: (getAnchorCoordinate("x") - anchorWidth / 2) + "px",
-					top: (getAnchorCoordinate("y") - anchorHeight / 2) + "px"
-				},
-				attributes: {
-					draggable: false,
-					src: "data:image/svg+xml," + encodeURIComponent(self.wiki.getTiddlerText("$:/plugins/tiddlywiki/innerwiki/crosshairs.svg"))
-				}
+	const self = this;
+	this.findChildrenDataWidgets(this.children,"anchor",(widget) => {
+		const anchorWidth = 40;
+		const anchorHeight = 40;
+		const getAnchorCoordinate = function(name) {
+			return parseInt(self.wiki.getTiddlerText(widget.getAttribute(name)),10) || 0;
+		};
+		const setAnchorCoordinate = function(name,value) {
+			self.wiki.addTiddler({
+				title: widget.getAttribute(name),
+				text: `${value}`
 			});
+		};
+		const domAnchor = dm("img",{
+			document: self.document,
+			style: {
+				position: "absolute",
+				width: `${anchorWidth}px`,
+				height: `${anchorHeight}px`,
+				transformOrigin: "50% 50%",
+				transform: `scale(${1 / self.scale})`,
+				left: `${getAnchorCoordinate("x") - anchorWidth / 2}px`,
+				top: `${getAnchorCoordinate("y") - anchorHeight / 2}px`
+			},
+			attributes: {
+				draggable: false,
+				src: `data:image/svg+xml,${encodeURIComponent(self.wiki.getTiddlerText("$:/plugins/tiddlywiki/innerwiki/crosshairs.svg"))}`
+			}
+		});
 		self.domAnchorContainer.appendChild(domAnchor);
-		var posX,posY,dragStartX,dragStartY,deltaX,deltaY,
-			fnMouseDown = function(event) {
-				self.domAnchorBackdrop.style.width = self.clipWidth + "px";
-				self.domAnchorBackdrop.style.height = self.clipHeight + "px";
-				self.domAnchorBackdrop.style.display = "block";
-				posX = domAnchor.offsetLeft;
-				posY = domAnchor.offsetTop;
-				dragStartX = event.clientX;
-				dragStartY = event.clientY;
-				deltaX = 0;
-				deltaY = 0;
-				self.document.addEventListener("mousemove",fnMouseMove,false);
-				self.document.addEventListener("mouseup",fnMouseUp,false);
-			},
-			fnMouseMove = function(event) {
-				deltaX = (event.clientX - dragStartX) / self.scale;
-				deltaY = (event.clientY - dragStartY) / self.scale;
-				domAnchor.style.left = (posX + deltaX) + "px";
-				domAnchor.style.top = (posY + deltaY) + "px";
-			},
-			fnMouseUp = function(event) {
-				var x = getAnchorCoordinate("x") + deltaX,
-					y = getAnchorCoordinate("y") + deltaY;
-				if(x >= 0 && x < self.clipWidth && y >= 0 && y < self.clipHeight) {
-					setAnchorCoordinate("x",x);
-					setAnchorCoordinate("y",y);
-				} else {
-					domAnchor.style.left = posX + "px";
-					domAnchor.style.top = posY + "px";
-				}
-				self.domAnchorBackdrop.style.display = "none";
-				self.document.removeEventListener("mousemove",fnMouseMove,false);
-				self.document.removeEventListener("mouseup",fnMouseUp,false);
-			};
+		let posX; let posY; let dragStartX; let dragStartY; let deltaX; let deltaY;
+		const fnMouseDown = function(event) {
+			self.domAnchorBackdrop.style.width = `${self.clipWidth}px`;
+			self.domAnchorBackdrop.style.height = `${self.clipHeight}px`;
+			self.domAnchorBackdrop.style.display = "block";
+			posX = domAnchor.offsetLeft;
+			posY = domAnchor.offsetTop;
+			dragStartX = event.clientX;
+			dragStartY = event.clientY;
+			deltaX = 0;
+			deltaY = 0;
+			self.document.addEventListener("mousemove",fnMouseMove,false);
+			self.document.addEventListener("mouseup",fnMouseUp,false);
+		};
+		var fnMouseMove = function(event) {
+			deltaX = (event.clientX - dragStartX) / self.scale;
+			deltaY = (event.clientY - dragStartY) / self.scale;
+			domAnchor.style.left = `${posX + deltaX}px`;
+			domAnchor.style.top = `${posY + deltaY}px`;
+		};
+		var fnMouseUp = function(event) {
+			const x = getAnchorCoordinate("x") + deltaX;
+			const y = getAnchorCoordinate("y") + deltaY;
+			if(x >= 0 && x < self.clipWidth && y >= 0 && y < self.clipHeight) {
+				setAnchorCoordinate("x",x);
+				setAnchorCoordinate("y",y);
+			} else {
+				domAnchor.style.left = `${posX}px`;
+				domAnchor.style.top = `${posY}px`;
+			}
+			self.domAnchorBackdrop.style.display = "none";
+			self.document.removeEventListener("mousemove",fnMouseMove,false);
+			self.document.removeEventListener("mouseup",fnMouseUp,false);
+		};
 		domAnchor.addEventListener("mousedown",fnMouseDown,false);
 	});
 };
@@ -211,8 +211,8 @@ InnerWikiWidget.prototype.createAnchors = function() {
 Delete the anchors
 */
 InnerWikiWidget.prototype.deleteAnchors = function() {
-	for(var index=this.domAnchorContainer.childNodes.length-1; index>=0; index--) {
-		var node = this.domAnchorContainer.childNodes[index];
+	for(let index = this.domAnchorContainer.childNodes.length - 1;index >= 0;index--) {
+		const node = this.domAnchorContainer.childNodes[index];
 		if(node.tagName === "IMG") {
 			node.parentNode.removeChild(node);
 		}
@@ -224,14 +224,14 @@ Create the HTML of the innerwiki
 */
 InnerWikiWidget.prototype.createInnerHTML = function() {
 	// Get the HTML of the iframe
-	var html = this.wiki.renderTiddler("text/plain",this.innerWikiTemplate);
+	let html = this.wiki.renderTiddler("text/plain",this.innerWikiTemplate);
 	// Insert the overlay tiddlers
-	var SPLIT_MARKER = "<!--~~ Boot" + " kernel ~~-->\n",
-		IMPLANT_PREFIX = "<" + "script>\n$tw.preloadTiddlerArray(",
-		IMPLANT_SUFFIX = ");\n</" + "script>\n",
-		parts = html.split(SPLIT_MARKER),
-		tiddlers = [];
-	this.findChildrenDataWidgets(this.children,"data",function(widget) {
+	const SPLIT_MARKER = "<!--~~ Boot" + " kernel ~~-->\n";
+	const IMPLANT_PREFIX = "<" + "script>\n$tw.preloadTiddlerArray(";
+	const IMPLANT_SUFFIX = ");\n</" + "script>\n";
+	const parts = html.split(SPLIT_MARKER);
+	const tiddlers = [];
+	this.findChildrenDataWidgets(this.children,"data",(widget) => {
 		Array.prototype.push.apply(tiddlers,widget.readDataTiddlerValues());
 	});
 	if(parts.length === 2) {
@@ -244,12 +244,12 @@ InnerWikiWidget.prototype.createInnerHTML = function() {
 Compute the internal state of the widget
 */
 InnerWikiWidget.prototype.execute = function() {
-	var parseStringAsNumber = function(num,defaultValue) {
-		num = parseInt(num + "",10);
+	const parseStringAsNumber = function(num,defaultValue) {
+		num = parseInt(`${num}`,10);
 		if(!isNaN(num)) {
 			return num;
 		} else {
-			return parseInt(defaultValue + "",10);
+			return parseInt(`${defaultValue}`,10);
 		}
 	};
 	// Get our parameters
@@ -271,17 +271,17 @@ InnerWikiWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 InnerWikiWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.template || changedAttributes.width || changedAttributes.height || changedAttributes.style || changedAttributes.class) {
 		this.refreshSelf();
 		return true;
 	} else {
-		var childrenRefreshed = this.refreshChildren(changedTiddlers);
+		const childrenRefreshed = this.refreshChildren(changedTiddlers);
 		if(childrenRefreshed) {
 			this.deleteAnchors();
 			this.createAnchors();
 		}
-		return childrenRefreshed
+		return childrenRefreshed;
 	}
 };
 
@@ -289,19 +289,19 @@ InnerWikiWidget.prototype.refresh = function(changedTiddlers) {
 Use Puppeteer to save a screenshot to a file
 */
 InnerWikiWidget.prototype.saveScreenshot = function(options,callback) {
-	var self = this,
-		basepath = options.basepath || ".",
-		deviceScaleFactor = options.deviceScaleFactor || 1;
+	const self = this;
+	const basepath = options.basepath || ".";
+	const deviceScaleFactor = options.deviceScaleFactor || 1;
 	// Don't do anything if we don't have a filename
 	if(!this.innerWikiFilename) {
 		return callback(null);
 	}
-	var path = require("path"),
-		filepath = path.resolve(basepath,this.innerWikiFilename);
+	const path = require("path");
+	const filepath = path.resolve(basepath,this.innerWikiFilename);
 	$tw.utils.createFileDirectories(filepath);
 	console.log("Taking screenshot",filepath);
 	// Fire up Puppeteer
-	var puppeteer;
+	let puppeteer;
 	try {
 		puppeteer = require("puppeteer");
 	} catch(e) {
@@ -317,7 +317,7 @@ InnerWikiWidget.prototype.saveScreenshot = function(options,callback) {
 		await page.setViewport({
 			width: Math.trunc(self.innerWikiWidth),
 			height: Math.trunc(self.innerWikiHeight),
-			deviceScaleFactor: deviceScaleFactor
+			deviceScaleFactor
 		});
 		// PDF generation isn't great: there's no clipping, and pagination is hard to control
 		// await page.emulateMedia("screen");

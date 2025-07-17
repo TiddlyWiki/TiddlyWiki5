@@ -10,10 +10,10 @@ module-type: formatfilteroperator
 Export our filter function
 */
 exports.timestamp = function(source,operand,options) {
-	var results = [];
-	source(function(tiddler,title) {
-		if (title.match(/^-?\d+$/)) {
-			var value = new Date(Number(title));
+	const results = [];
+	source((tiddler,title) => {
+		if(title.match(/^-?\d+$/)) {
+			const value = new Date(Number(title));
 			results.push($tw.utils.formatDateString(value,operand || "[UTC]YYYY0MM0DD0hh0mm0ss0XXX"));
 		}
 	});

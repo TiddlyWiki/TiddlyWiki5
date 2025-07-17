@@ -22,7 +22,7 @@ Note that the syntax for comments is simplified to an opening "<!--" sequence an
 "use strict";
 
 exports.name = "commentblock";
-exports.types = {block:true, pragma:true};
+exports.types = {block: true,pragma: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

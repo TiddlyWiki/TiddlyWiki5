@@ -9,7 +9,7 @@ Various static DOM-related utility functions.
 
 "use strict";
 
-var Popup = require("$:/core/modules/utils/dom/popup.js");
+const Popup = require("$:/core/modules/utils/dom/popup.js");
 
 /*
 Determines whether element 'a' contains element 'b'
@@ -50,20 +50,20 @@ exports.removeChildren = function(node) {
 };
 
 exports.hasClass = function(el,className) {
-	return el && el.hasAttribute && el.hasAttribute("class") && el.getAttribute("class").split(" ").indexOf(className) !== -1;
+	return el && el.hasAttribute && el.hasAttribute("class") && el.getAttribute("class").split(" ").includes(className);
 };
 
 exports.addClass = function(el,className) {
-	var c = (el.getAttribute("class") || "").split(" ");
-	if(c.indexOf(className) === -1) {
+	const c = (el.getAttribute("class") || "").split(" ");
+	if(!c.includes(className)) {
 		c.push(className);
 		el.setAttribute("class",c.join(" "));
 	}
 };
 
 exports.removeClass = function(el,className) {
-	var c = (el.getAttribute("class") || "").split(" "),
-		p = c.indexOf(className);
+	const c = (el.getAttribute("class") || "").split(" ");
+	const p = c.indexOf(className);
 	if(p !== -1) {
 		c.splice(p,1);
 		el.setAttribute("class",c.join(" "));
@@ -85,7 +85,7 @@ exports.toggleClass = function(el,className,status) {
 Get the first parent element that has scrollbars or use the body as fallback.
 */
 exports.getScrollContainer = function(el) {
-	var doc = el.ownerDocument;
+	const doc = el.ownerDocument;
 	while(el.parentNode) {
 		el = el.parentNode;
 		if(el.scrollTop) {
@@ -104,11 +104,11 @@ Returns:
 	}
 */
 exports.getScrollPosition = function(srcWindow) {
-	var scrollWindow = srcWindow || window;
+	const scrollWindow = srcWindow || window;
 	if("scrollX" in scrollWindow) {
-		return {x: scrollWindow.scrollX, y: scrollWindow.scrollY};
+		return {x: scrollWindow.scrollX,y: scrollWindow.scrollY};
 	} else {
-		return {x: scrollWindow.document.documentElement.scrollLeft, y: scrollWindow.document.documentElement.scrollTop};
+		return {x: scrollWindow.document.documentElement.scrollLeft,y: scrollWindow.document.documentElement.scrollTop};
 	}
 };
 
@@ -117,18 +117,18 @@ Adjust the height of a textarea to fit its content, preserving scroll position, 
 */
 exports.resizeTextAreaToFit = function(domNode,minHeight) {
 	// Get the scroll container and register the current scroll position
-	var container = $tw.utils.getScrollContainer(domNode),
-		scrollTop = container.scrollTop;
-    // Measure the specified minimum height
+	const container = $tw.utils.getScrollContainer(domNode);
+	const {scrollTop} = container;
+	// Measure the specified minimum height
 	domNode.style.height = minHeight;
-	var measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
+	const measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
 	// Set its height to auto so that it snaps to the correct height
 	domNode.style.height = "auto";
 	// Calculate the revised height
-	var newHeight = Math.max(domNode.scrollHeight + domNode.offsetHeight - domNode.clientHeight,measuredHeight);
+	const newHeight = Math.max(domNode.scrollHeight + domNode.offsetHeight - domNode.clientHeight,measuredHeight);
 	// Only try to change the height if it has changed
 	if(newHeight !== domNode.offsetHeight) {
-		domNode.style.height = newHeight + "px";
+		domNode.style.height = `${newHeight}px`;
 		// Make sure that the dimensions of the textarea are recalculated
 		$tw.utils.forceLayout(domNode);
 		// Set the container to the position we registered at the beginning
@@ -141,8 +141,8 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 Gets the bounding rectangle of an element in absolute page coordinates
 */
 exports.getBoundingPageRect = function(element) {
-	var scrollPos = $tw.utils.getScrollPosition(element.ownerDocument.defaultView),
-		clientRect = element.getBoundingClientRect();
+	const scrollPos = $tw.utils.getScrollPosition(element.ownerDocument.defaultView);
+	const clientRect = element.getBoundingClientRect();
 	return {
 		left: clientRect.left + scrollPos.x,
 		width: clientRect.width,
@@ -157,12 +157,11 @@ exports.getBoundingPageRect = function(element) {
 Saves a named password in the browser
 */
 exports.savePassword = function(name,password) {
-	var done = false;
+	let done = false;
 	try {
-		window.localStorage.setItem("tw5-password-" + name,password);
+		window.localStorage.setItem(`tw5-password-${name}`,password);
 		done = true;
-	} catch(e) {
-	}
+	} catch(e) {}
 	if(!done) {
 		$tw.savedPasswords = $tw.savedPasswords || Object.create(null);
 		$tw.savedPasswords[name] = password;
@@ -173,11 +172,10 @@ exports.savePassword = function(name,password) {
 Retrieve a named password from the browser
 */
 exports.getPassword = function(name) {
-	var value;
+	let value;
 	try {
-		value = window.localStorage.getItem("tw5-password-" + name);
-	} catch(e) {
-	}
+		value = window.localStorage.getItem(`tw5-password-${name}`);
+	} catch(e) {}
 	if(value !== undefined) {
 		return value;
 	} else {
@@ -189,7 +187,7 @@ exports.getPassword = function(name) {
 Force layout of a dom node and its descendents
 */
 exports.forceLayout = function(element) {
-	var dummy = element.offsetWidth;
+	const dummy = element.offsetWidth;
 };
 
 /*
@@ -217,8 +215,8 @@ handlerObject: optional event handler object
 handlerMethod: optionally specifies object handler method name (defaults to `handleEvent`)
 */
 exports.addEventListeners = function(domNode,events) {
-	$tw.utils.each(events,function(eventInfo) {
-		var handler;
+	$tw.utils.each(events,(eventInfo) => {
+		let handler;
 		if(eventInfo.handlerFunction) {
 			handler = eventInfo.handlerFunction;
 		} else if(eventInfo.handlerObject) {
@@ -238,12 +236,12 @@ exports.addEventListeners = function(domNode,events) {
 Get the computed styles applied to an element as an array of strings of individual CSS properties
 */
 exports.getComputedStyles = function(domNode) {
-	var textAreaStyles = window.getComputedStyle(domNode,null),
-		styleDefs = [],
-		name;
-	for(var t=0; t<textAreaStyles.length; t++) {
+	const textAreaStyles = window.getComputedStyle(domNode,null);
+	const styleDefs = [];
+	let name;
+	for(let t = 0;t < textAreaStyles.length;t++) {
 		name = textAreaStyles[t];
-		styleDefs.push(name + ": " + textAreaStyles.getPropertyValue(name) + ";");
+		styleDefs.push(`${name}: ${textAreaStyles.getPropertyValue(name)};`);
 	}
 	return styleDefs;
 };
@@ -268,7 +266,7 @@ Copy plain text to the clipboard on browsers that support it
 exports.copyToClipboard = function(text,options) {
 	options = options || {};
 	text = text || "";
-	var textArea = document.createElement("textarea");
+	const textArea = document.createElement("textarea");
 	textArea.style.position = "fixed";
 	textArea.style.top = 0;
 	textArea.style.left = 0;
@@ -284,14 +282,13 @@ exports.copyToClipboard = function(text,options) {
 	document.body.appendChild(textArea);
 	textArea.select();
 	textArea.setSelectionRange(0,text.length);
-	var succeeded = false;
+	let succeeded = false;
 	try {
 		succeeded = document.execCommand("copy");
-	} catch(err) {
-	}
+	} catch(err) {}
 	if(!options.doNotNotify) {
-		var successNotification = options.successNotification || "$:/language/Notifications/CopiedToClipboard/Succeeded",
-			failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed"
+		const successNotification = options.successNotification || "$:/language/Notifications/CopiedToClipboard/Succeeded";
+		const failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed";
 		$tw.notifier.display(succeeded ? successNotification : failureNotification);
 	}
 	document.body.removeChild(textArea);
@@ -305,17 +302,17 @@ exports.getLocationPath = function() {
 Collect DOM variables
 */
 exports.collectDOMVariables = function(selectedNode,domNode,event) {
-	var variables = {},
-	    selectedNodeRect,
-	    domNodeRect;
+	const variables = {};
+	let selectedNodeRect;
+	let domNodeRect;
 	if(selectedNode) {
-		$tw.utils.each(selectedNode.attributes,function(attribute) {
-			variables["dom-" + attribute.name] = attribute.value.toString();
+		$tw.utils.each(selectedNode.attributes,(attribute) => {
+			variables[`dom-${attribute.name}`] = attribute.value.toString();
 		});
-		
+
 		if("offsetLeft" in selectedNode) {
 			// Add variables with a (relative and absolute) popup coordinate string for the selected node
-			var nodeRect = {
+			const nodeRect = {
 				left: selectedNode.offsetLeft,
 				top: selectedNode.offsetTop,
 				width: selectedNode.offsetWidth,
@@ -323,8 +320,8 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			};
 			variables["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,nodeRect);
 
-			var absRect = $tw.utils.extend({}, nodeRect);
-			for(var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
+			const absRect = $tw.utils.extend({},nodeRect);
+			for(let currentNode = selectedNode.offsetParent;currentNode;currentNode = currentNode.offsetParent) {
 				absRect.left += currentNode.offsetLeft;
 				absRect.top += currentNode.offsetTop;
 			}
@@ -337,7 +334,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
 		}
 	}
-	
+
 	if(domNode && ("offsetWidth" in domNode)) {
 		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
 		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
@@ -350,7 +347,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
 			variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
 		}
-		
+
 		if(domNode) {
 			// Add variables for event X and Y position relative to event catcher node
 			domNodeRect = domNode.getBoundingClientRect();

@@ -18,13 +18,13 @@ BackIndexer.prototype.init = function() {
 };
 
 BackIndexer.prototype.rebuild = function() {
-	$tw.utils.each(this.subIndexers,function(subIndexer) {
+	$tw.utils.each(this.subIndexers,(subIndexer) => {
 		subIndexer.rebuild();
 	});
 };
 
 BackIndexer.prototype.update = function(updateDescriptor) {
-	$tw.utils.each(this.subIndexers,function(subIndexer) {
+	$tw.utils.each(this.subIndexers,(subIndexer) => {
 		subIndexer.update(updateDescriptor);
 	});
 };
@@ -46,25 +46,25 @@ function BackSubIndexer(indexer,extractor) {
 BackSubIndexer.prototype.init = function() {
 	// lazy init until first lookup
 	this.index = null;
-}
+};
 
 BackSubIndexer.prototype._init = function() {
 	this.index = Object.create(null);
-	var self = this;
-	this.wiki.forEachTiddler(function(sourceTitle,tiddler) {
-		var newTargets = self._getTarget(tiddler);
-		$tw.utils.each(newTargets, function(target) {
+	const self = this;
+	this.wiki.forEachTiddler((sourceTitle,tiddler) => {
+		const newTargets = self._getTarget(tiddler);
+		$tw.utils.each(newTargets,(target) => {
 			if(!self.index[target]) {
 				self.index[target] = Object.create(null);
 			}
 			self.index[target][sourceTitle] = true;
 		});
 	});
-}
+};
 
 BackSubIndexer.prototype.rebuild = function() {
 	this.index = null;
-}
+};
 
 /*
 * Get things that is being referenced in the text, e.g. tiddler names in the link syntax.
@@ -73,21 +73,21 @@ BackSubIndexer.prototype._getTarget = function(tiddler) {
 	if(this.wiki.isBinaryTiddler(tiddler.fields.text)) {
 		return [];
 	}
-	var parser = this.wiki.parseText(tiddler.fields.type, tiddler.fields.text, {});
+	const parser = this.wiki.parseText(tiddler.fields.type,tiddler.fields.text,{});
 	if(parser) {
-		return this.wiki[this.extractor](parser.tree, tiddler.fields.title);
+		return this.wiki[this.extractor](parser.tree,tiddler.fields.title);
 	}
 	return [];
-}
+};
 
 BackSubIndexer.prototype.update = function(updateDescriptor) {
 	// lazy init/update until first lookup
 	if(!this.index) {
 		return;
 	}
-	var newTargets = [],
-	    oldTargets = [],
-	    self = this;
+	let newTargets = [];
+	let oldTargets = [];
+	const self = this;
 	if(updateDescriptor.old.exists) {
 		oldTargets = this._getTarget(updateDescriptor.old.tiddler);
 	}
@@ -95,18 +95,18 @@ BackSubIndexer.prototype.update = function(updateDescriptor) {
 		newTargets = this._getTarget(updateDescriptor.new.tiddler);
 	}
 
-	$tw.utils.each(oldTargets,function(target) {
+	$tw.utils.each(oldTargets,(target) => {
 		if(self.index[target]) {
 			delete self.index[target][updateDescriptor.old.tiddler.fields.title];
 		}
 	});
-	$tw.utils.each(newTargets,function(target) {
+	$tw.utils.each(newTargets,(target) => {
 		if(!self.index[target]) {
 			self.index[target] = Object.create(null);
 		}
 		self.index[target][updateDescriptor.new.tiddler.fields.title] = true;
 	});
-}
+};
 
 BackSubIndexer.prototype.lookup = function(title) {
 	if(!this.index) {
@@ -117,6 +117,6 @@ BackSubIndexer.prototype.lookup = function(title) {
 	} else {
 		return [];
 	}
-}
+};
 
 exports.BackIndexer = BackIndexer;

@@ -24,7 +24,7 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
+const Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
@@ -34,45 +34,45 @@ Command.prototype.execute = function() {
 	if(this.params.length < 2) {
 		return "Missing filename";
 	}
-	var self = this,
-		fs = require("fs"),
-		path = require("path"),
-		containerTitle = this.params[0],
-		filter = this.params[1],
-		basepath = this.params[2],
-		skinnyListTitle = this.params[3];
+	const self = this;
+	const fs = require("fs");
+	const path = require("path");
+	const containerTitle = this.params[0];
+	const filter = this.params[1];
+	const basepath = this.params[2];
+	const skinnyListTitle = this.params[3];
 	// Get the container tiddler as data
-	var containerData = self.commander.wiki.getTiddlerDataCached(containerTitle,undefined);
+	const containerData = self.commander.wiki.getTiddlerDataCached(containerTitle,undefined);
 	if(!containerData) {
-		return "'" + containerTitle + "' is not a tiddler bundle";
+		return `'${containerTitle}' is not a tiddler bundle`;
 	}
 	// Filter the list of plugins
-	var pluginList = [];
-	$tw.utils.each(containerData.tiddlers,function(tiddler,title) {
+	const pluginList = [];
+	$tw.utils.each(containerData.tiddlers,(tiddler,title) => {
 		pluginList.push(title);
 	});
-	var filteredPluginList;
+	let filteredPluginList;
 	if(filter) {
 		filteredPluginList = self.commander.wiki.filterTiddlers(filter,null,self.commander.wiki.makeTiddlerIterator(pluginList));
 	} else {
 		filteredPluginList = pluginList;
 	}
 	// Iterate through the plugins
-	var skinnyList = [];
-	$tw.utils.each(filteredPluginList,function(title) {
-		var tiddler = containerData.tiddlers[title];
+	const skinnyList = [];
+	$tw.utils.each(filteredPluginList,(title) => {
+		const tiddler = containerData.tiddlers[title];
 		// Save each JSON file and collect the skinny data
-		var pathname = path.resolve(self.commander.outputPath,basepath + $tw.utils.encodeURIComponentExtended(title) + ".json");
+		const pathname = path.resolve(self.commander.outputPath,`${basepath + $tw.utils.encodeURIComponentExtended(title)}.json`);
 		$tw.utils.createFileDirectories(pathname);
 		fs.writeFileSync(pathname,JSON.stringify(tiddler),"utf8");
 		// Collect the skinny list data
-		var pluginTiddlers = $tw.utils.parseJSONSafe(tiddler.text),
-			readmeContent = (pluginTiddlers.tiddlers[title + "/readme"] || {}).text,
-			doesRequireReload = !!self.commander.wiki.doesPluginInfoRequireReload(pluginTiddlers),
-			iconTiddler = pluginTiddlers.tiddlers[title + "/icon"] || {},
-			iconType = iconTiddler.type,
-			iconText = iconTiddler.text,
-			iconContent;
+		const pluginTiddlers = $tw.utils.parseJSONSafe(tiddler.text);
+		const readmeContent = (pluginTiddlers.tiddlers[`${title}/readme`] || {}).text;
+		const doesRequireReload = !!self.commander.wiki.doesPluginInfoRequireReload(pluginTiddlers);
+		const iconTiddler = pluginTiddlers.tiddlers[`${title}/icon`] || {};
+		const iconType = iconTiddler.type;
+		const iconText = iconTiddler.text;
+		let iconContent;
 		if(iconType && iconText) {
 			iconContent = $tw.utils.makeDataUri(iconText,iconType);
 		}

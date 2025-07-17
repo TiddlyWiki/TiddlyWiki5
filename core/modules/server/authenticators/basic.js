@@ -10,10 +10,10 @@ Authenticator for WWW basic authentication
 "use strict";
 
 if($tw.node) {
-	var util = require("util"),
-		fs = require("fs"),
-		url = require("url"),
-		path = require("path");
+	const util = require("util");
+	var fs = require("fs");
+	const url = require("url");
+	var path = require("path");
 }
 
 function BasicAuthenticator(server) {
@@ -28,17 +28,17 @@ BasicAuthenticator.prototype.init = function() {
 	// Read the credentials data
 	this.credentialsFilepath = this.server.get("credentials");
 	if(this.credentialsFilepath) {
-		var resolveCredentialsFilepath = path.resolve(this.server.boot.wikiPath,this.credentialsFilepath);
+		const resolveCredentialsFilepath = path.resolve(this.server.boot.wikiPath,this.credentialsFilepath);
 		if(fs.existsSync(resolveCredentialsFilepath) && !fs.statSync(resolveCredentialsFilepath).isDirectory()) {
-			var credentialsText = fs.readFileSync(resolveCredentialsFilepath,"utf8"),
-				credentialsData = $tw.utils.parseCsvStringWithHeader(credentialsText);
+			const credentialsText = fs.readFileSync(resolveCredentialsFilepath,"utf8");
+			const credentialsData = $tw.utils.parseCsvStringWithHeader(credentialsText);
 			if(typeof credentialsData === "string") {
-				return "Error: " + credentialsData + " reading credentials from '" + resolveCredentialsFilepath + "'";
+				return `Error: ${credentialsData} reading credentials from '${resolveCredentialsFilepath}'`;
 			} else {
 				this.credentialsData = credentialsData;
 			}
 		} else {
-			return "Error: Unable to load user credentials from '" + resolveCredentialsFilepath + "'";
+			return `Error: Unable to load user credentials from '${resolveCredentialsFilepath}'`;
 		}
 	}
 	// Add the hardcoded username and password if specified
@@ -58,18 +58,18 @@ Returns false if the request couldn't be authenticated having sent an appropriat
 */
 BasicAuthenticator.prototype.authenticateRequest = function(request,response,state) {
 	// Extract the incoming username and password from the request
-	var header = request.headers.authorization || "";
+	const header = request.headers.authorization || "";
 	if(!header && state.allowAnon) {
 		// If there's no header and anonymous access is allowed then we don't set authenticatedUsername
 		return true;
 	}
-	var token = header.split(/\s+/).pop() || "",
-		auth = $tw.utils.base64Decode(token),
-		parts = auth.split(/:/),
-		incomingUsername = parts[0],
-		incomingPassword = parts[1];
+	const token = header.split(/\s+/).pop() || "";
+	const auth = $tw.utils.base64Decode(token);
+	const parts = auth.split(/:/);
+	const incomingUsername = parts[0];
+	const incomingPassword = parts[1];
 	// Check that at least one of the credentials matches
-	var matchingCredentials = this.credentialsData.find(function(credential) {
+	const matchingCredentials = this.credentialsData.find((credential) => {
 		return credential.username === incomingUsername && credential.password === incomingPassword;
 	});
 	if(matchingCredentials) {
@@ -79,7 +79,7 @@ BasicAuthenticator.prototype.authenticateRequest = function(request,response,sta
 	} else {
 		// If not, return an authentication challenge
 		response.writeHead(401,"Authentication required",{
-			"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + state.server.servername + '"'
+			"WWW-Authenticate": `Basic realm="Please provide your username and password to login to ${state.server.servername}"`
 		});
 		response.end();
 		return false;

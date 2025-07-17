@@ -27,7 +27,7 @@ exports.init = function(parser) {
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
-	var dash = this.match[0].length === 2 ? "&ndash;" : "&mdash;";
+	const dash = this.match[0].length === 2 ? "&ndash;" : "&mdash;";
 	return [{
 		type: "entity",
 		entity: dash

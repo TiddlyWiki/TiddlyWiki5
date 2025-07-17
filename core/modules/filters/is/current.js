@@ -13,16 +13,16 @@ Filter function for [is[current]]
 Export our filter function
 */
 exports.current = function(source,prefix,options) {
-	var results = [],
-		currTiddlerTitle = options.widget && options.widget.getVariable("currentTiddler");
+	const results = [];
+	const currTiddlerTitle = options.widget && options.widget.getVariable("currentTiddler");
 	if(prefix === "!") {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(title !== currTiddlerTitle) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(title === currTiddlerTitle) {
 				results.push(title);
 			}

@@ -19,6 +19,6 @@ exports.params = [
 /*
 Run the macro
 */
-exports.run = function(source, root) {
-	return $tw.utils.resolvePath(source, root);
+exports.run = function(source,root) {
+	return $tw.utils.resolvePath(source,root);
 };

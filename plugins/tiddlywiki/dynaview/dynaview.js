@@ -15,28 +15,28 @@ exports.platforms = ["browser"];
 exports.before = ["story"];
 exports.synchronous = true;
 
-var STATE_OUT_OF_VIEW = "0",
-	STATE_NEAR_VIEW = "1",
-	STATE_IN_VIEW = "2";
+const STATE_OUT_OF_VIEW = "0";
+const STATE_NEAR_VIEW = "1";
+const STATE_IN_VIEW = "2";
 
-var isWaitingForAnimationFrame = 0, // Bitmask:
-	ANIM_FRAME_CAUSED_BY_LOAD = 1, // Animation frame was requested because of page load
-	ANIM_FRAME_CAUSED_BY_SCROLL = 2, // Animation frame was requested because of page scroll
-	ANIM_FRAME_CAUSED_BY_RESIZE = 4; // Animation frame was requested because of window resize
+let isWaitingForAnimationFrame = 0; // Bitmask:
+const ANIM_FRAME_CAUSED_BY_LOAD = 1; // Animation frame was requested because of page load
+const ANIM_FRAME_CAUSED_BY_SCROLL = 2; // Animation frame was requested because of page scroll
+const ANIM_FRAME_CAUSED_BY_RESIZE = 4; // Animation frame was requested because of window resize
 
-var LOCAL_STORAGE_KEY_PREFIX = "tw5-dynaview-scroll-position#";
+const LOCAL_STORAGE_KEY_PREFIX = "tw5-dynaview-scroll-position#";
 
-var hasRestoredScrollPosition = false;
+let hasRestoredScrollPosition = false;
 
-var localStorageHasFailed = false;
+let localStorageHasFailed = false;
 
 exports.startup = function() {
-	var topmost = null, lastScrollY;
+	let topmost = null; let lastScrollY;
 	$tw.boot.disableStartupNavigation = true;
 	window.addEventListener("load",onLoad,false);
 	window.addEventListener("scroll",onScroll,false);
 	window.addEventListener("resize",onResize,false);
-	$tw.hooks.addHook("th-page-refreshing",function() {
+	$tw.hooks.addHook("th-page-refreshing",() => {
 		if(!hasRestoredScrollPosition) {
 			topmost = restoreScrollPosition();
 		} else if(shouldPreserveScrollPosition()) {
@@ -44,7 +44,7 @@ exports.startup = function() {
 		}
 		lastScrollY = window.scrollY;
 	});
-	$tw.hooks.addHook("th-page-refreshed",function() {
+	$tw.hooks.addHook("th-page-refreshed",() => {
 		if(lastScrollY === window.scrollY) { // Don't do scroll anchoring if the scroll position got changed
 			if(shouldPreserveScrollPosition() || !hasRestoredScrollPosition) {
 				scrollToTiddler(topmost);
@@ -91,8 +91,8 @@ function worker() {
 }
 
 function setZoomClasses() {
-	var zoomFactor = document.body.scrollWidth / window.innerWidth,
-		classList = document.body.classList;
+	const zoomFactor = document.body.scrollWidth / window.innerWidth;
+	const {classList} = document.body;
 	classList.add("tc-dynaview");
 	classList.toggle("tc-dynaview-zoom-factor-1",zoomFactor <= 2);
 	classList.toggle("tc-dynaview-zoom-factor-1-and-above",zoomFactor >= 1);
@@ -109,33 +109,33 @@ function setZoomClasses() {
 }
 
 function checkVisibility() {
-	var elements = document.querySelectorAll(".tc-dynaview-track-tiddler-when-visible");
-	$tw.utils.each(elements,function(element) {
+	const elements = document.querySelectorAll(".tc-dynaview-track-tiddler-when-visible");
+	$tw.utils.each(elements,(element) => {
 		// Calculate whether the element is visible
-		var elementRect = element.getBoundingClientRect(),
-			viewportWidth = window.innerWidth || document.documentElement.clientWidth,
-			viewportHeight = window.innerHeight || document.documentElement.clientHeight,
-			viewportRect = {
-				left: 0,
-				right: viewportWidth,
-				top: 0,
-				bottom: viewportHeight
-			},
-			title = element.getAttribute("data-dynaview-track-tiddler");
+		const elementRect = element.getBoundingClientRect();
+		const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+		const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+		const viewportRect = {
+			left: 0,
+			right: viewportWidth,
+			top: 0,
+			bottom: viewportHeight
+		};
+		const title = element.getAttribute("data-dynaview-track-tiddler");
 		if(title) {
-			var currValue = $tw.wiki.getTiddlerText(title),
-				newValue = currValue;
+			const currValue = $tw.wiki.getTiddlerText(title);
+			let newValue = currValue;
 			// Within viewport
-			if(!(elementRect.left > viewportRect.right || 
-								elementRect.right < viewportRect.left || 
-								elementRect.top > viewportRect.bottom ||
-								elementRect.bottom < viewportRect.top)) {
+			if(!(elementRect.left > viewportRect.right ||
+				elementRect.right < viewportRect.left ||
+				elementRect.top > viewportRect.bottom ||
+				elementRect.bottom < viewportRect.top)) {
 				newValue = STATE_IN_VIEW;
-			// Near viewport
-			} else if(!(elementRect.left > (viewportRect.right + viewportWidth) || 
-								elementRect.right < (viewportRect.left - viewportWidth) || 
-								elementRect.top > (viewportRect.bottom + viewportHeight) ||
-								elementRect.bottom < (viewportRect.top - viewportHeight))) {
+				// Near viewport
+			} else if(!(elementRect.left > (viewportRect.right + viewportWidth) ||
+				elementRect.right < (viewportRect.left - viewportWidth) ||
+				elementRect.top > (viewportRect.bottom + viewportHeight) ||
+				elementRect.bottom < (viewportRect.top - viewportHeight))) {
 				newValue = STATE_NEAR_VIEW;
 			} else {
 				// Outside viewport
@@ -144,7 +144,7 @@ function checkVisibility() {
 				}
 			}
 			if(newValue !== currValue) {
-				$tw.wiki.addTiddler(new $tw.Tiddler({title: title, text: newValue}));				
+				$tw.wiki.addTiddler(new $tw.Tiddler({title,text: newValue}));
 			}
 		}
 	});
@@ -152,12 +152,12 @@ function checkVisibility() {
 
 function updateAddressBar() {
 	if($tw.wiki.getTiddlerText("$:/config/DynaView/UpdateAddressBar") === "yes") {
-		var top = findTopmostTiddler();
+		const top = findTopmostTiddler();
 		if(top.element) {
-			var hash = "#" + encodeURIComponent(top.title) + ":" + encodeURIComponent("[list[$:/StoryList]]");
+			const hash = `#${encodeURIComponent(top.title)}:${encodeURIComponent("[list[$:/StoryList]]")}`;
 			if(title && $tw.locationHash !== hash) {
 				$tw.locationHash = hash;
-				window.location.hash = hash;			
+				window.location.hash = hash;
 			}
 		}
 	}
@@ -166,7 +166,7 @@ function updateAddressBar() {
 function saveScrollPosition() {
 	if(!localStorageHasFailed) {
 		if(hasRestoredScrollPosition && $tw.wiki.getTiddlerText("$:/config/DynaView/RestoreScrollPositionAtStartup") === "yes") {
-			var top = findTopmostTiddler();
+			const top = findTopmostTiddler();
 			if(top.element) {
 				try {
 					window.localStorage.setItem(LOCAL_STORAGE_KEY_PREFIX + window.location.pathname,JSON.stringify({
@@ -182,13 +182,13 @@ function saveScrollPosition() {
 }
 
 function restoreScrollPosition() {
-	var json;
+	let json;
 	if(!localStorageHasFailed) {
 		try {
 			json = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY_PREFIX + window.location.pathname));
 		} catch(e) {
 			localStorageHasFailed = true;
-		};		
+		};
 	}
 	return json;
 }
@@ -198,18 +198,18 @@ tiddlerDetails: {title: <title of tiddler to scroll to>, offset: <offset in pixe
 */
 function scrollToTiddler(tiddlerDetails) {
 	if(!$tw.pageScroller.isScrolling() && tiddlerDetails) {
-		var elements = document.querySelectorAll(".tc-tiddler-frame[data-tiddler-title]"),
-			topmostTiddlerElement = null;
-		$tw.utils.each(elements,function(element) {
+		const elements = document.querySelectorAll(".tc-tiddler-frame[data-tiddler-title]");
+		let topmostTiddlerElement = null;
+		$tw.utils.each(elements,(element) => {
 			if(element.getAttribute("data-tiddler-title") === tiddlerDetails.title) {
 				topmostTiddlerElement = element;
 			}
 		});
 		if(topmostTiddlerElement) {
-			var rect = topmostTiddlerElement.getBoundingClientRect(),
-				scrollY = Math.round(window.scrollY + rect.top + tiddlerDetails.offset);
+			const rect = topmostTiddlerElement.getBoundingClientRect();
+			const scrollY = Math.round(window.scrollY + rect.top + tiddlerDetails.offset);
 			if(scrollY !== window.scrollY) {
-				window.scrollTo(window.scrollX,scrollY);					
+				window.scrollTo(window.scrollX,scrollY);
 			}
 		}
 	}
@@ -220,12 +220,12 @@ function shouldPreserveScrollPosition() {
 }
 
 function findTopmostTiddler() {
-	var elements = document.querySelectorAll(".tc-tiddler-frame[data-tiddler-title]"),
-		topmostElement = null,
-		topmostElementTop = 1 * 1000 * 1000;
-	$tw.utils.each(elements,function(element) {
+	const elements = document.querySelectorAll(".tc-tiddler-frame[data-tiddler-title]");
+	let topmostElement = null;
+	let topmostElementTop = 1 * 1000 * 1000;
+	$tw.utils.each(elements,(element) => {
 		// Check if the element is visible
-		var elementRect = element.getBoundingClientRect();
+		const elementRect = element.getBoundingClientRect();
 		if((elementRect.top < topmostElementTop) && (elementRect.bottom > 0)) {
 			topmostElement = element;
 			topmostElementTop = elementRect.top;
@@ -238,15 +238,15 @@ function findTopmostTiddler() {
 	};
 }
 
-var previousViewportWidth, previousViewportHeight;
+let previousViewportWidth; let previousViewportHeight;
 
 function saveViewportDimensions() {
-	var viewportWidth = window.innerWidth || document.documentElement.clientWidth,
-		viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+	const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+	const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 	if(document.querySelector(".tc-dynaview-request-refresh-on-resize")) {
 		if(previousViewportWidth !== viewportWidth || previousViewportHeight !== viewportHeight) {
-			var count = parseInt($tw.wiki.getTiddlerText("$:/state/DynaView/ViewportDimensions/ResizeCount","0"),10) || 0;
-			$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/state/DynaView/ViewportDimensions/ResizeCount", text: (count + 1) + ""}));
+			const count = parseInt($tw.wiki.getTiddlerText("$:/state/DynaView/ViewportDimensions/ResizeCount","0"),10) || 0;
+			$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/state/DynaView/ViewportDimensions/ResizeCount",text: `${count + 1}`}));
 			previousViewportWidth = viewportWidth;
 			previousViewportHeight = viewportHeight;
 		}

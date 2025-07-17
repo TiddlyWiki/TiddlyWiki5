@@ -9,7 +9,7 @@ Text editor engine based on a simple input or textarea tag
 
 "use strict";
 
-var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
+const HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
 
 function SimpleEngine(options) {
 	// Save our options
@@ -19,8 +19,8 @@ function SimpleEngine(options) {
 	this.parentNode = options.parentNode;
 	this.nextSibling = options.nextSibling;
 	// Construct the textarea or input node
-	var tag = this.widget.editTag;
-	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
+	let tag = this.widget.editTag;
+	if($tw.config.htmlUnsafeElements.includes(tag)) {
 		tag = "input";
 	}
 	this.domNode = this.widget.document.createElement(tag);
@@ -57,8 +57,8 @@ function SimpleEngine(options) {
 	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
-		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
-		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"},
+		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"}
 	]);
 	// Insert the element into the DOM
 	this.parentNode.insertBefore(this.domNode,this.nextSibling);
@@ -106,9 +106,9 @@ SimpleEngine.prototype.fixHeight = function() {
 				$tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);
 			}
 		} else {
-			var fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
+			let fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
 			fixedHeight = Math.max(fixedHeight,20);
-			this.domNode.style.height = fixedHeight + "px";
+			this.domNode.style.height = `${fixedHeight}px`;
 		}
 	}
 };
@@ -165,7 +165,6 @@ SimpleEngine.prototype.createTextOperation = function() {
 /*
 Execute a text operation
 */
-SimpleEngine.prototype.executeTextOperation = function(operation) {
-};
+SimpleEngine.prototype.executeTextOperation = function(operation) {};
 
 exports.SimpleEngine = SimpleEngine;

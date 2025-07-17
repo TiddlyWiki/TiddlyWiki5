@@ -9,11 +9,11 @@ Button widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var Popup = require("$:/core/modules/utils/dom/popup.js");
+const Popup = require("$:/core/modules/utils/dom/popup.js");
 
-var ButtonWidget = function(parseTreeNode,options) {
+const ButtonWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -26,27 +26,27 @@ ButtonWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 ButtonWidget.prototype.render = function(parent,nextSibling) {
-	var self = this,
-		tag = "button",
-		domNode;
+	const self = this;
+	let tag = "button";
+	let domNode;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
 	// Create element
-	if(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {
+	if(this.buttonTag && !$tw.config.htmlUnsafeElements.includes(this.buttonTag)) {
 		tag = this.buttonTag;
 	}
 	domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	// Assign classes
-	var classes = this["class"].split(" ") || [],
-		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
+	const classes = this["class"].split(" ") || [];
+	const isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
 	if(this.selectedClass) {
 		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
-			$tw.utils.pushTop(classes, this.selectedClass.split(" "));
-			domNode.setAttribute("aria-checked", "true");
+			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
+			domNode.setAttribute("aria-checked","true");
 		}
 		if(isPoppedUp) {
 			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
@@ -71,8 +71,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
-	if (this.role) {
-		domNode.setAttribute("role", this.role);
+	if(this.role) {
+		domNode.setAttribute("role",this.role);
 	}
 	if(this.popup || this.popupTitle) {
 		domNode.setAttribute("aria-expanded",isPoppedUp ? "true" : "false");
@@ -85,8 +85,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("disabled",true);
 	}
 	// Add a click event handler
-	domNode.addEventListener("click",function (event) {
-		var handled = false;
+	domNode.addEventListener("click",(event) => {
+		let handled = false;
 		if(self.invokeActions(self,event)) {
 			handled = true;
 		}
@@ -107,7 +107,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 			handled = true;
 		}
 		if(self.actions) {
-			var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+			const modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
 			self.invokeActionString(self.actions,self,event,{modifier: modifierKey});
 		}
 		if(handled) {
@@ -119,9 +119,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Make it draggable if required
 	if(this.dragTiddler || this.dragFilter) {
 		$tw.utils.makeDraggable({
-			domNode: domNode,
-			dragTiddlerFn: function() {return self.dragTiddler;},
-			dragFilterFn: function() {return self.dragFilter;},
+			domNode,
+			dragTiddlerFn() {return self.dragTiddler;},
+			dragFilterFn() {return self.dragFilter;},
 			widget: this
 		});
 	}
@@ -143,34 +143,35 @@ ButtonWidget.prototype.getBoundingClientRect = function() {
 };
 
 ButtonWidget.prototype.isSelected = function() {
-    return this.setTitle ? (this.setField ? this.wiki.getTiddler(this.setTitle).getFieldString(this.setField) === this.setTo :
+	return this.setTitle ? (this.setField ? this.wiki.getTiddler(this.setTitle).getFieldString(this.setField) === this.setTo :
 		(this.setIndex ? this.wiki.extractTiddlerDataItem(this.setTitle,this.setIndex) === this.setTo :
 			this.wiki.getTiddlerText(this.setTitle))) || this.defaultSetValue || this.getVariable("currentTiddler") :
 		this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler")) === this.setTo;
 };
 
 ButtonWidget.prototype.isPoppedUp = function() {
-	var tiddler = this.popupTitle ? this.wiki.getTiddler(this.popupTitle) : this.wiki.getTiddler(this.popup);
-	var result = tiddler && tiddler.fields.text ? Popup.readPopupState(tiddler.fields.text) : false;
+	const tiddler = this.popupTitle ? this.wiki.getTiddler(this.popupTitle) : this.wiki.getTiddler(this.popup);
+	const result = tiddler && tiddler.fields.text ? Popup.readPopupState(tiddler.fields.text) : false;
 	return result;
 };
 
 ButtonWidget.prototype.navigateTo = function(event) {
-	var bounds = this.getBoundingClientRect();
+	const bounds = this.getBoundingClientRect();
 	this.dispatchEvent({
 		type: "tm-navigate",
 		navigateTo: this.to,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,
-		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
+		navigateFromClientRect: {
+			top: bounds.top,left: bounds.left,width: bounds.width,right: bounds.right,bottom: bounds.bottom,height: bounds.height
 		},
 		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1),
-		event: event
+		event
 	});
 };
 
 ButtonWidget.prototype.dispatchMessage = function(event) {
-	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler"), event: event});
+	this.dispatchEvent({type: this.message,param: this.param,tiddlerTitle: this.getVariable("currentTiddler"),event});
 };
 
 ButtonWidget.prototype.triggerPopup = function(event) {
@@ -195,7 +196,7 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 ButtonWidget.prototype.setTiddler = function() {
 	if(this.setTitle) {
 		this.setField ? this.wiki.setText(this.setTitle,this.setField,undefined,this.setTo) :
-				(this.setIndex ? this.wiki.setText(this.setTitle,undefined,this.setIndex,this.setTo) :
+			(this.setIndex ? this.wiki.setText(this.setTitle,undefined,this.setIndex,this.setTo) :
 				this.wiki.setText(this.setTitle,"text",undefined,this.setTo));
 	} else {
 		this.wiki.setTextReference(this.set,this.setTo,this.getVariable("currentTiddler"));
@@ -229,7 +230,7 @@ ButtonWidget.prototype.execute = function() {
 	this.setField = this.getAttribute("setField");
 	this.setIndex = this.getAttribute("setIndex");
 	this.popupTitle = this.getAttribute("popupTitle");
-	this.popupAbsCoords = this.getAttribute("popupAbsCoords", "no");
+	this.popupAbsCoords = this.getAttribute("popupAbsCoords","no");
 	this.tabIndex = this.getAttribute("tabindex");
 	this.isDisabled = this.getAttribute("disabled","no");
 	// Make child widgets
@@ -237,14 +238,14 @@ ButtonWidget.prototype.execute = function() {
 };
 
 ButtonWidget.prototype.updateDomNodeClasses = function() {
-	var domNodeClasses = this.domNode.className.split(" "),
-		oldClasses = this.class.split(" "),
-		newClasses;
+	const domNodeClasses = this.domNode.className.split(" ");
+	const oldClasses = this.class.split(" ");
+	let newClasses;
 	this["class"] = this.getAttribute("class","");
 	newClasses = this.class.split(" ");
 	//Remove classes assigned from the old value of class attribute
-	$tw.utils.each(oldClasses,function(oldClass){
-		var i = domNodeClasses.indexOf(oldClass);
+	$tw.utils.each(oldClasses,(oldClass) => {
+		const i = domNodeClasses.indexOf(oldClass);
 		if(i !== -1) {
 			domNodeClasses.splice(i,1);
 		}
@@ -258,7 +259,7 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.tooltip || changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
 		this.refreshSelf();
 		return true;
@@ -267,7 +268,7 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 			this.updateDomNodeClasses();
 		}
 		this.assignAttributes(this.domNodes[0],{
-			changedAttributes: changedAttributes,
+			changedAttributes,
 			sourcePrefix: "data-",
 			destPrefix: "data-"
 		});

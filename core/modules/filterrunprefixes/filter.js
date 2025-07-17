@@ -13,15 +13,15 @@ Export our filter function
 exports.filter = function(operationSubFunction,options) {
 	return function(results,source,widget) {
 		if(results.length > 0) {
-			var resultsToRemove = [],
-				index = 0;
-			results.each(function(title) {
-				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
-					"currentTiddler": "" + title,
+			const resultsToRemove = [];
+			let index = 0;
+			results.each((title) => {
+				const filtered = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
+					"currentTiddler": `${title}`,
 					"..currentTiddler": widget.getVariable("currentTiddler",""),
-					"index": "" + index,
-					"revIndex": "" +  (results.length - 1 - index),
-					"length": "" + results.length
+					"index": `${index}`,
+					"revIndex": `${results.length - 1 - index}`,
+					"length": `${results.length}`
 				}));
 				if(filtered.length === 0) {
 					resultsToRemove.push(title);
@@ -30,5 +30,5 @@ exports.filter = function(operationSubFunction,options) {
 			});
 			results.remove(resultsToRemove);
 		}
-	}
+	};
 };

@@ -9,9 +9,9 @@ Render a tiddler as JSON text
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var JSONTiddlerWidget = function(parseTreeNode,options) {
+const JSONTiddlerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -24,26 +24,26 @@ JSONTiddlerWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 JSONTiddlerWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	const self = this;
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
 	// Collect the fields from the optional base tiddler
-	var fields = this.getTiddlerFields();
+	const fields = this.getTiddlerFields();
 	// Add custom fields specified in attributes starting with $
-	$tw.utils.each(this.attributes,function(attribute,name) {
+	$tw.utils.each(this.attributes,(attribute,name) => {
 		if(name.charAt(0) === "$") {
 			fields[name.slice(1)] = attribute;
 		}
 	});
 	// JSONify
-	var json = JSON.stringify(fields);
+	let json = JSON.stringify(fields);
 	// Escape unsafe script characters
 	if(this.attEscapeUnsafeScriptChars) {
-		json = json.replace(/</g,"\\u003C");
+		json = json.replace(/</g,String.raw`\u003C`);
 	}
 	// Update the DOM
-	var textNode = this.document.createTextNode(json);
+	const textNode = this.document.createTextNode(json);
 	parent.insertBefore(textNode,nextSibling);
 	this.domNodes.push(textNode);
 };
@@ -61,7 +61,7 @@ JSONTiddlerWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 JSONTiddlerWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0 || (this.attTiddler && changedTiddlers[this.attTiddler])) {
 		this.refreshSelf();
 		return true;
@@ -71,9 +71,9 @@ JSONTiddlerWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 JSONTiddlerWidget.prototype.getTiddlerFields = function() {
-	var fields = {};
+	let fields = {};
 	if(this.attTiddler) {
-		var tiddler = this.wiki.getTiddler(this.attTiddler);
+		const tiddler = this.wiki.getTiddler(this.attTiddler);
 		if(tiddler) {
 			fields = tiddler.getFieldStrings({exclude: this.attExclude.split(" ")});
 		} else {

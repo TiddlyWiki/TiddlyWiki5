@@ -10,11 +10,11 @@ Filter operators for JSON operations
 "use strict";
 
 exports["jsonget"] = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title,title);
+	const results = [];
+	source((tiddler,title) => {
+		const data = $tw.utils.parseJSONSafe(title,title);
 		if(data) {
-			var items = getDataItemValueAsStrings(data,operator.operands);
+			const items = getDataItemValueAsStrings(data,operator.operands);
 			if(items !== undefined) {
 				results.push.apply(results,items);
 			}
@@ -24,11 +24,11 @@ exports["jsonget"] = function(source,operator,options) {
 };
 
 exports["jsonextract"] = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title,title);
+	const results = [];
+	source((tiddler,title) => {
+		const data = $tw.utils.parseJSONSafe(title,title);
 		if(data) {
-			var item = getDataItem(data,operator.operands);
+			const item = getDataItem(data,operator.operands);
 			if(item !== undefined) {
 				results.push(JSON.stringify(item));
 			}
@@ -38,11 +38,11 @@ exports["jsonextract"] = function(source,operator,options) {
 };
 
 exports["jsonindexes"] = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title,title);
+	const results = [];
+	source((tiddler,title) => {
+		const data = $tw.utils.parseJSONSafe(title,title);
 		if(data) {
-			var items = getDataItemKeysAsStrings(data,operator.operands);
+			const items = getDataItemKeysAsStrings(data,operator.operands);
 			if(items !== undefined) {
 				results.push.apply(results,items);
 			}
@@ -52,11 +52,11 @@ exports["jsonindexes"] = function(source,operator,options) {
 };
 
 exports["jsontype"] = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title,title);
+	const results = [];
+	source((tiddler,title) => {
+		const data = $tw.utils.parseJSONSafe(title,title);
 		if(data) {
-			var item = getDataItemType(data,operator.operands);
+			const item = getDataItemType(data,operator.operands);
 			if(item !== undefined) {
 				results.push(item);
 			}
@@ -66,45 +66,53 @@ exports["jsontype"] = function(source,operator,options) {
 };
 
 exports["jsonset"] = function(source,operator,options) {
-	var suffixes = operator.suffixes || [],
-		type = suffixes[0] && suffixes[0][0],
-		indexes = operator.operands.slice(0,-1),
-		value = operator.operands[operator.operands.length - 1],
-		results = [];
+	const suffixes = operator.suffixes || [];
+	const type = suffixes[0] && suffixes[0][0];
+	let indexes = operator.operands.slice(0,-1);
+	let value = operator.operands[operator.operands.length - 1];
+	const results = [];
 	if(operator.operands.length === 1 && operator.operands[0] === "") {
 		value = undefined; // Prevents the value from being assigned
 	}
 	switch(type) {
-		case "string":
+		case "string": {
 			// Use value unchanged
 			break;
-		case "boolean":
+		}
+		case "boolean": {
 			value = (value === "true" ? true : (value === "false" ? false : undefined));
 			break;
-		case "number":
+		}
+		case "number": {
 			value = $tw.utils.parseNumber(value);
 			break;
-		case "array":
+		}
+		case "array": {
 			indexes = operator.operands;
 			value = [];
 			break;
-		case "object":
+		}
+		case "object": {
 			indexes = operator.operands;
 			value = {};
 			break;
-		case "null":
+		}
+		case "null": {
 			indexes = operator.operands;
 			value = null;
 			break;
-		case "json":
-			value = $tw.utils.parseJSONSafe(value,function() {return undefined;});
+		}
+		case "json": {
+			value = $tw.utils.parseJSONSafe(value,() => {return undefined;});
 			break;
-		default:
+		}
+		default: {
 			// Use value unchanged
 			break;
+		}
 	}
-	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title,title);
+	source((tiddler,title) => {
+		let data = $tw.utils.parseJSONSafe(title,title);
 		if(data) {
 			data = setDataItem(data,indexes,value);
 			results.push(JSON.stringify(data));
@@ -118,7 +126,7 @@ Given a JSON data structure and an array of index strings, return an array of th
 */
 function getDataItemValueAsStrings(data,indexes) {
 	// Get the item
-	var item = getDataItem(data,indexes);
+	const item = getDataItem(data,indexes);
 	// Return the item as a string list
 	return convertDataItemValueToStrings(item);
 }
@@ -128,7 +136,7 @@ Given a JSON data structure and an array of index strings, return an array of th
 */
 function getDataItemKeysAsStrings(data,indexes) {
 	// Get the item
-	var item = getDataItem(data,indexes);
+	const item = getDataItem(data,indexes);
 	// Return the item keys as a string
 	return convertDataItemKeysToStrings(item);
 }
@@ -141,20 +149,20 @@ function convertDataItemValueToStrings(item) {
 	if(item === undefined) {
 		return undefined;
 	} else if(item === null) {
-		return ["null"]
+		return ["null"];
 	} else if(typeof item === "object") {
-		var results = [],i,t;
+		const results = []; let i; let t;
 		if($tw.utils.isArray(item)) {
 			// Return all the items in arrays recursively
-			for(i=0; i<item.length; i++) {
-				t = convertDataItemValueToStrings(item[i])
+			for(i = 0;i < item.length;i++) {
+				t = convertDataItemValueToStrings(item[i]);
 				if(t !== undefined) {
 					results.push.apply(results,t);
 				}
 			}
 		} else {
 			// Return all the values in objects recursively
-			$tw.utils.each(Object.keys(item).sort(),function(key) {
+			$tw.utils.each(Object.keys(item).sort(),(key) => {
 				t = convertDataItemValueToStrings(item[key]);
 				if(t !== undefined) {
 					results.push.apply(results,t);
@@ -177,14 +185,14 @@ function convertDataItemKeysToStrings(item) {
 		if(item === null) {
 			return [];
 		}
-		var results = [];
+		const results = [];
 		if($tw.utils.isArray(item)) {
-			for(var i=0; i<item.length; i++) {
+			for(let i = 0;i < item.length;i++) {
 				results.push(i.toString());
 			}
 			return results;
 		} else {
-			$tw.utils.each(Object.keys(item).sort(),function(key) {
+			$tw.utils.each(Object.keys(item).sort(),(key) => {
 				results.push(key);
 			});
 			return results;
@@ -195,7 +203,7 @@ function convertDataItemKeysToStrings(item) {
 
 function getDataItemType(data,indexes) {
 	// Get the item
-	var item = getDataItem(data,indexes);
+	const item = getDataItem(data,indexes);
 	// Return the item type
 	if(item === undefined) {
 		return item;
@@ -215,7 +223,7 @@ function getItemAtIndex(item,index) {
 		return item[index];
 	} else if($tw.utils.isArray(item)) {
 		index = $tw.utils.parseInt(index);
-		if(index < 0) { index = index + item.length };
+		if(index < 0) {index += item.length;};
 		return item[index]; // Will be undefined if index was out-of-bounds
 	} else {
 		return undefined;
@@ -230,10 +238,10 @@ function getDataItem(data,indexes) {
 		return data;
 	}
 	// Get the item
-	var item = data;
-	for(var i=0; i<indexes.length; i++) {
+	let item = data;
+	for(let i = 0;i < indexes.length;i++) {
 		if(item !== undefined) {
-			if(item !== null && ["number","string","boolean"].indexOf(typeof item) === -1) {
+			if(item !== null && !["number","string","boolean"].includes(typeof item)) {
 				item = getItemAtIndex(item,indexes[i]);
 			} else {
 				item = undefined;
@@ -256,8 +264,8 @@ function setDataItem(data,indexes,value) {
 		return value;
 	}
 	// Traverse the JSON data structure using the index chain
-	var current = data;
-	for(var i = 0; i < indexes.length - 1; i++) {
+	let current = data;
+	for(let i = 0;i < indexes.length - 1;i++) {
 		current = getItemAtIndex(current,indexes[i]);
 		if(current === undefined) {
 			// Return the original JSON data structure if any of the index strings are invalid
@@ -265,10 +273,10 @@ function setDataItem(data,indexes,value) {
 		}
 	}
 	// Add the value to the end of the index chain
-	var lastIndex = indexes[indexes.length - 1];
+	let lastIndex = indexes[indexes.length - 1];
 	if($tw.utils.isArray(current)) {
 		lastIndex = $tw.utils.parseInt(lastIndex);
-		if(lastIndex < 0) { lastIndex = lastIndex + current.length };
+		if(lastIndex < 0) {lastIndex += current.length;};
 	}
 	// Only set indexes on objects and arrays
 	if(typeof current === "object") {

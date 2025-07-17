@@ -26,12 +26,12 @@ exports.init = function(parser) {
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
-	var reEnd = new RegExp(this.match[1], "mg");
+	const reEnd = new RegExp(this.match[1],"mg");
 	// Look for the end marker
 	reEnd.lastIndex = this.parser.pos;
-	var match = reEnd.exec(this.parser.source),
-		text,
-		start = this.parser.pos;
+	const match = reEnd.exec(this.parser.source);
+	let text;
+	const start = this.parser.pos;
 	// Process the text
 	if(match) {
 		text = this.parser.source.substring(this.parser.pos,match.index);
@@ -45,8 +45,8 @@ exports.parse = function() {
 		tag: "code",
 		children: [{
 			type: "text",
-			text: text,
-			start: start,
+			text,
+			start,
 			end: this.parser.pos
 		}]
 	}];

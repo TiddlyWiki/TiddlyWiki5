@@ -19,17 +19,17 @@ LinkedList.prototype.clear = function() {
 	this.next = new LLMap();
 	this.prev = new LLMap();
 	// Linked list head initially points to itself
-	this.next.set(null, null);
-	this.prev.set(null, null);
+	this.next.set(null,null);
+	this.prev.set(null,null);
 	this.length = 0;
 };
 
 LinkedList.prototype.remove = function(value) {
 	if($tw.utils.isArray(value)) {
-		for(var t=0; t<value.length; t++) {
+		for(var t = 0;t < value.length;t++) {
 			_assertString(value[t]);
 		}
-		for(var t=0; t<value.length; t++) {
+		for(var t = 0;t < value.length;t++) {
 			_removeOne(this,value[t]);
 		}
 	} else {
@@ -43,29 +43,29 @@ Push behaves like array.push and accepts multiple string arguments. But it also
 accepts a single array argument too, to be consistent with its other methods.
 */
 LinkedList.prototype.push = function(/* values */) {
-	var i, values = arguments;
+	let i; let values = arguments;
 	if($tw.utils.isArray(values[0])) {
 		values = values[0];
 	}
-	for(i = 0; i < values.length; i++) {
+	for(i = 0;i < values.length;i++) {
 		_assertString(values[i]);
 	}
-	for(i = 0; i < values.length; i++) {
+	for(i = 0;i < values.length;i++) {
 		_linkToEnd(this,values[i]);
 	}
 	return this.length;
 };
 
 LinkedList.prototype.pushTop = function(value) {
-	var t;
+	let t;
 	if($tw.utils.isArray(value)) {
-		for (t=0; t<value.length; t++) {
+		for(t = 0;t < value.length;t++) {
 			_assertString(value[t]);
 		}
-		for(t=0; t<value.length; t++) {
+		for(t = 0;t < value.length;t++) {
 			_removeOne(this,value[t]);
 		}
-		for(t=0; t<value.length; t++) {
+		for(t = 0;t < value.length;t++) {
 			_linkToEnd(this,value[t]);
 		}
 	} else {
@@ -76,14 +76,14 @@ LinkedList.prototype.pushTop = function(value) {
 };
 
 LinkedList.prototype.each = function(callback) {
-	var visits = Object.create(null),
-		value = this.next.get(null);
+	const visits = Object.create(null);
+	let value = this.next.get(null);
 	while(value !== null) {
 		callback(value);
-		var next = this.next.get(value);
+		const next = this.next.get(value);
 		if(Array.isArray(next)) {
-			var i = visits[value] || 0;
-			visits[value] = i+1;
+			const i = visits[value] || 0;
+			visits[value] = i + 1;
 			value = next[i];
 		} else {
 			value = next;
@@ -92,30 +92,30 @@ LinkedList.prototype.each = function(callback) {
 };
 
 LinkedList.prototype.toArray = function() {
-	var output = new Array(this.length),
-		index = 0;
-	this.each(function(value) { output[index++] = value; });
+	const output = new Array(this.length);
+	let index = 0;
+	this.each((value) => {output[index++] = value;});
 	return output;
 };
 
 LinkedList.prototype.makeTiddlerIterator = function(wiki) {
-	var self = this;
+	const self = this;
 	return function(callback) {
-		self.each(function(title) {
+		self.each((title) => {
 			callback(wiki.getTiddler(title),title);
 		});
 	};
 };
 
 function _removeOne(list,value) {
-	var nextEntry = list.next.get(value);
+	const nextEntry = list.next.get(value);
 	if(nextEntry === undefined) {
 		return;
 	}
-	var prevEntry = list.prev.get(value),
-		prev = prevEntry,
-		next = nextEntry,
-		ref;
+	const prevEntry = list.prev.get(value);
+	let prev = prevEntry;
+	let next = nextEntry;
+	let ref;
 	if(Array.isArray(nextEntry)) {
 		next = nextEntry[0];
 		prev = prevEntry[0];
@@ -151,8 +151,8 @@ function _removeOne(list,value) {
 
 // Sticks the given node onto the end of the list.
 function _linkToEnd(list,value) {
-	var old = list.next.get(value);
-	var last = list.prev.get(null);
+	let old = list.next.get(value);
+	const last = list.prev.get(null);
 	// Does it already exists?
 	if(old !== undefined) {
 		if(!Array.isArray(old)) {
@@ -170,7 +170,7 @@ function _linkToEnd(list,value) {
 	if(value !== last) {
 		var array = list.next.get(last);
 		if(Array.isArray(array)) {
-			array[array.length-1] = value;
+			array[array.length - 1] = value;
 		} else {
 			list.next.set(last,value);
 		}
@@ -179,14 +179,14 @@ function _linkToEnd(list,value) {
 		// Edge case, the pushed value was already the last value.
 		// The second-to-last nextPtr for that value must point to itself now.
 		var array = list.next.get(last);
-		array[array.length-2] = value;
+		array[array.length - 2] = value;
 	}
 	list.length += 1;
 };
 
 function _assertString(value) {
 	if(typeof value !== "string") {
-		throw "Linked List only accepts string values, not " + value;
+		throw `Linked List only accepts string values, not ${value}`;
 	}
 };
 
@@ -196,10 +196,10 @@ var LLMap = function() {
 
 // Just a wrapper so our object map can also accept null.
 LLMap.prototype = {
-	set: function(key,val) {
+	set(key,val) {
 		(key === null) ? (this.null = val) : (this.map[key] = val);
 	},
-	get: function(key) {
+	get(key) {
 		return (key === null) ? this.null : this.map[key];
 	}
 };

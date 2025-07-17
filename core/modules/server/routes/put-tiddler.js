@@ -13,11 +13,11 @@ exports.method = "PUT";
 exports.path = /^\/recipes\/default\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
-	var title = $tw.utils.decodeURIComponentSafe(state.params[0]),
-	fields = $tw.utils.parseJSONSafe(state.data);
+	const title = $tw.utils.decodeURIComponentSafe(state.params[0]);
+	const fields = $tw.utils.parseJSONSafe(state.data);
 	// Pull up any subfields in the `fields` object
 	if(fields.fields) {
-		$tw.utils.each(fields.fields,function(field,name) {
+		$tw.utils.each(fields.fields,(field,name) => {
 			fields[name] = field;
 		});
 		delete fields.fields;
@@ -30,16 +30,16 @@ exports.handler = function(request,response,state) {
 	// version of the tiddler to edit. So we must preserve whatever text
 	// already exists on the server, or else we'll inadvertently delete it.
 	if(fields._is_skinny !== undefined) {
-		var tiddler = state.wiki.getTiddler(title);
+		const tiddler = state.wiki.getTiddler(title);
 		if(tiddler) {
 			fields.text = tiddler.fields.text;
 		}
 		delete fields._is_skinny;
 	}
-	state.wiki.addTiddler(new $tw.Tiddler(fields,{title: title}));
-	var changeCount = state.wiki.getChangeCount(title).toString();
-	response.writeHead(204, "OK",{
-		Etag: "\"default/" + encodeURIComponent(title) + "/" + changeCount + ":\"",
+	state.wiki.addTiddler(new $tw.Tiddler(fields,{title}));
+	const changeCount = state.wiki.getChangeCount(title).toString();
+	response.writeHead(204,"OK",{
+		Etag: `"default/${encodeURIComponent(title)}/${changeCount}:"`,
 		"Content-Type": "text/plain"
 	});
 	response.end();

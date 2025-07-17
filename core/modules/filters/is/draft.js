@@ -13,15 +13,15 @@ Filter function for [is[draft]] analagous to [has[draft.of]]
 Export our filter function
 */
 exports.draft = function(source,prefix,options) {
-	var results = [];
+	const results = [];
 	if(prefix === "!") {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(!tiddler || !tiddler.isDraft()) {
 				results.push(title);
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(tiddler && tiddler.isDraft()) {
 				results.push(title);
 			}

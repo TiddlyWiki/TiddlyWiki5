@@ -12,74 +12,74 @@ Saves wiki by pushing a commit to the GitLab REST API
 /*
 Select the appropriate saver module and set it up
 */
-var GitLabSaver = function(wiki) {
+const GitLabSaver = function(wiki) {
 	this.wiki = wiki;
 };
 
 GitLabSaver.prototype.save = function(text,method,callback) {
 	/* See https://docs.gitlab.com/ee/api/repository_files.html */
-	var self = this,
-		username = this.wiki.getTiddlerText("$:/GitLab/Username"),
-		password = $tw.utils.getPassword("gitlab"),
-		repo = this.wiki.getTiddlerText("$:/GitLab/Repo"),
-		path = this.wiki.getTiddlerText("$:/GitLab/Path",""),
-		filename = this.wiki.getTiddlerText("$:/GitLab/Filename"),
-		branch = this.wiki.getTiddlerText("$:/GitLab/Branch") || "master",
-		endpoint = this.wiki.getTiddlerText("$:/GitLab/ServerURL") || "https://gitlab.com/api/v4",
-		headers = {
-			"Content-Type": "application/json;charset=UTF-8",
-			"Private-Token": password
-		};
+	const self = this;
+	const username = this.wiki.getTiddlerText("$:/GitLab/Username");
+	const password = $tw.utils.getPassword("gitlab");
+	const repo = this.wiki.getTiddlerText("$:/GitLab/Repo");
+	let path = this.wiki.getTiddlerText("$:/GitLab/Path","");
+	const filename = this.wiki.getTiddlerText("$:/GitLab/Filename");
+	const branch = this.wiki.getTiddlerText("$:/GitLab/Branch") || "master";
+	const endpoint = this.wiki.getTiddlerText("$:/GitLab/ServerURL") || "https://gitlab.com/api/v4";
+	const headers = {
+		"Content-Type": "application/json;charset=UTF-8",
+		"Private-Token": password
+	};
 	// Bail if we don't have everything we need
 	if(!username || !password || !repo || !filename) {
 		return false;
 	}
 	// Make sure the path start and ends with a slash
 	if(path.substring(0,1) !== "/") {
-		path = "/" + path;
+		path = `/${path}`;
 	}
 	if(path.substring(path.length - 1) !== "/") {
-		path = path + "/";
+		path += "/";
 	}
 	// Compose the base URI
-	var uri = endpoint + "/projects/" + encodeURIComponent(repo) + "/repository/";
+	const uri = `${endpoint}/projects/${encodeURIComponent(repo)}/repository/`;
 	// Perform a get request to get the details (inc shas) of files in the same path as our file
 	$tw.utils.httpRequest({
-		url: uri + "tree/?path=" + encodeURIComponent(path.replace(/^\/+|\/$/g, '')) + "&branch=" + encodeURIComponent(branch.replace(/^\/+|\/$/g, '')),
+		url: `${uri}tree/?path=${encodeURIComponent(path.replace(/^\/+|\/$/g,''))}&branch=${encodeURIComponent(branch.replace(/^\/+|\/$/g,''))}`,
 		type: "GET",
-		headers: headers,
-		callback: function(err,getResponseDataJson,xhr) {
-			var getResponseData,sha = "";
+		headers,
+		callback(err,getResponseDataJson,xhr) {
+			let getResponseData; let sha = "";
 			if(err && xhr.status !== 404) {
 				return callback(err);
 			}
-			var requestType = "POST";
+			let requestType = "POST";
 			if(xhr.status !== 404) {
 				getResponseData = $tw.utils.parseJSONSafe(getResponseDataJson);
-				$tw.utils.each(getResponseData,function(details) {
+				$tw.utils.each(getResponseData,(details) => {
 					if(details.name === filename) {
 						requestType = "PUT";
 						sha = details.sha;
 					}
 				});
 			}
-			var data = {
+			const data = {
 				commit_message: $tw.language.getString("ControlPanel/Saving/GitService/CommitMessage"),
 				content: text,
-				branch: branch,
-				sha: sha
+				branch,
+				sha
 			};
 			// Perform a request to save the file
 			$tw.utils.httpRequest({
-				url: uri + "files/" + encodeURIComponent(path.replace(/^\/+/, '') + filename),
+				url: `${uri}files/${encodeURIComponent(path.replace(/^\/+/,'') + filename)}`,
 				type: requestType,
-				headers: headers,
+				headers,
 				data: JSON.stringify(data),
-				callback: function(err,putResponseDataJson,xhr) {
+				callback(err,putResponseDataJson,xhr) {
 					if(err) {
 						return callback(err);
 					}
-					var putResponseData = $tw.utils.parseJSONSafe(putResponseDataJson);
+					const putResponseData = $tw.utils.parseJSONSafe(putResponseDataJson);
 					callback(null);
 				}
 			});
@@ -94,7 +94,7 @@ Information about this saver
 GitLabSaver.prototype.info = {
 	name: "gitlab",
 	priority: 2000,
-	capabilities: ["save", "autosave"]
+	capabilities: ["save","autosave"]
 };
 
 /*
