@@ -1,6 +1,6 @@
 caption: button
 created: 20131024141900000
-modified: 20250716235604083
+modified: 20250717031336610
 tags: Widgets TriggeringWidgets
 title: ButtonWidget
 type: text/vnd.tiddlywiki
@@ -38,7 +38,7 @@ The content of the `<$button>` widget is displayed within the button.
 |popup |Title of a state tiddler for a popup that is toggled when the button is clicked. See PopupMechanism for details |
 |popupTitle |Title of a state tiddler for a popup that is toggled when the button is clicked. In difference to the <<.attr popup>> attribute, ''no'' TextReference is used. See PopupMechanism for details |
 |popupAbsCoords |<<.from-version "5.2.4">> If set to ''yes'' writes absolute coordinates to the tiddler referenced by the <<.attr popup>>. If set to ''no'' (the default) uses relative coordinates. See [[Coordinate Systems]] for details |
-|aria-* |<<.from-version "5.4.0">> Optional ARIA attributes. Before v5.4.0, only `aria-label` is supported |
+|aria-* |<<.from-version "5.4.0">> Optional [[ARIA attributes|https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes]]. Before v5.4.0, only `aria-label` is supported |
 |tooltip |Optional tooltip |
 |class |An optional CSS class name to be assigned to the HTML element|
 |data-* |<<.from-version "5.3.2">> Optional [[data attributes|https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes]] to be assigned to the HTML element |
