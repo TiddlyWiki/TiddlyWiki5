@@ -40,7 +40,7 @@ description: Under development
 
 ! Bug Fixes
 
-* <<.link-badge-reverted "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9156">> the [[change in v5.3.7|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8768]] that broke the [[list-tagged-draggable Macro]]
+* <<.link-badge-reverted "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9156">> the [[change in v5.3.7|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8768]] that broke the [[list-tagged-draggable Macro]]. The change involved updating some core macros to use procedures
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/93d30f374da4a6b2037b335f7f7d4eddce8192db">> display of field names longer than the available width in the info panel
 
 ! Node.js Improvements
