@@ -19,4 +19,4 @@ title: Output
 +
 title: ExpectedResult
 
-hello world<p>hello world</p>hello <p>hello </p>
+hello world<p dir="auto">hello world</p>hello <p dir="auto">hello </p>

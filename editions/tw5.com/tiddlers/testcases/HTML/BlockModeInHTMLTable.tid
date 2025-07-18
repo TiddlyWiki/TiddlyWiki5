@@ -25,6 +25,6 @@ title: Output
 +
 title: ExpectedResult
 
-<p><table>
+<p dir="auto"><table>
 <tr><td><ul><li>list item one</li><li>list item two</li></ul></td><td><table><tbody><tr class="evenRow"><td>nested</td><td>table</td></tr></tbody></table></td></tr>
 </table></p>
