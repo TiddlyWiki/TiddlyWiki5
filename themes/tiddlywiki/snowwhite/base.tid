@@ -105,6 +105,14 @@ canvas.tc-edit-bitmapeditor  {
 	<<background-linear-gradient "left, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%">>
 }
 
+.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button:dir(rtl) {
+    <<background-linear-gradient "left, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.01) 100%">>
+}
+
+.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected:dir(rtl) {
+    <<background-linear-gradient "left, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.05) 100%">>
+}
+
 .tc-message-box img {
 	<<box-shadow "1px 1px 3px rgba(0,0,0,0.5)">>
 }
