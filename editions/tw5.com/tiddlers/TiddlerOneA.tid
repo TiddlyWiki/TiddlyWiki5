@@ -1,0 +1,9 @@
+created: 20240217003745035
+modified: 20240217003756359
+tags: 
+title: TiddlerOneA
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\parameters(zero:Jaguar,one:'Lizard',two:'Mole')
+[{<$text text=<<zero>>/>}{<$text text=<<one>>/>}{<$text text=<<two>>/>}]

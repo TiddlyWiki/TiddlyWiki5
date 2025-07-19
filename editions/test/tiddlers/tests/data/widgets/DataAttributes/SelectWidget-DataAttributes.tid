@@ -24,4 +24,4 @@ Title1
 +
 title: ExpectedResult
 
-<p><select class="myclass" data-title="Title2" value="Choose a new text" style="color:red;"><option disabled="true">Choose a new text</option><option>A Tale of Two Cities</option><option>A New Kind of Science</option><option>The Dice Man</option></select></p>
+<select class="myclass" data-title="Title2" value="Choose a new text" style="color:red;"><option disabled="true">Choose a new text</option><option>A Tale of Two Cities</option><option>A New Kind of Science</option><option>The Dice Man</option></select>

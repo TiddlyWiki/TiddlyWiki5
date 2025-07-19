@@ -1,0 +1,9 @@
+created: 20221123150547572
+modified: 20240901192038667
+tags: 
+title: moduletypes Operator-todo-fixed
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+same problem as "commnds operator" see: [[commands Operator-todo]]

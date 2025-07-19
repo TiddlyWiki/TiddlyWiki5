@@ -1,0 +1,24 @@
+created: 20240217001636123
+modified: 20240217002008520
+tags: 
+title: ListWidget/WithJoinTemplateInBlockMode
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\procedure test(filter)
+<$list filter=<<filter>>>
+
+	Item:<<currentTiddler>>
+
+	<$list-empty>
+		None!
+	</$list-empty>
+
+	<$list-join><br></$list-join>
+</$list>
+\end
+
+<<test "1 2 3">>
+
+<<test "">>

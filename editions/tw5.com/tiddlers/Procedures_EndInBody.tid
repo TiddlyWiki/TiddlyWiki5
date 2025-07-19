@@ -1,0 +1,11 @@
+created: 20240216234248448
+modified: 20240216234310698
+tags: 
+title: Procedures/EndInBody
+type: text/vnd.tiddlywiki
+
+\procedure hello()
+ hello \end
+\end
+
+Out: <<hello>>

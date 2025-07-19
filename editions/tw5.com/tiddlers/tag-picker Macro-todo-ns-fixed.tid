@@ -1,0 +1,11 @@
+created: 20221123155152836
+modified: 20240901193735489
+tags: 
+title: tag-picker Macro-todo-ns-fixed
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+Examples are missing
+
+There is a pending PR: tag-picker-new-syntax

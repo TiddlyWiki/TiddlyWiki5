@@ -27,4 +27,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>Item:1,Item:2,Item:3</p><p>None!</p>
+Item:1,Item:2,Item:3None!
