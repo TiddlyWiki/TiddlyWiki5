@@ -4,4 +4,4 @@ TiddlyWiki incorporates code from these fine OpenSource projects:
 
 * [[The Stanford Javascript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]]
 * [[The Jasmine JavaScript Test Framework|https://jasmine.github.io/]]
-* [[Normalize.css by Nicolas Gallagher|http://necolas.github.io/normalize.css/]]
+* [[modern-normalize by Sindre Sorhus|https://github.com/sindresorhus/modern-normalize]]
