@@ -9,10 +9,10 @@ Widget for definition of transclusion parameters
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	TranscludeWidget = require("$:/core/modules/widgets/transclude.js").transclude;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
+const TranscludeWidget = require("$:/core/modules/widgets/transclude.js").transclude;
 
-var ParametersWidget = function(parseTreeNode,options) {
+const ParametersWidget = function(parseTreeNode,options) {
 	// Initialise
 	this.initialise(parseTreeNode,options);
 };
@@ -38,11 +38,11 @@ ParametersWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ParametersWidget.prototype.execute = function() {
-	var self = this;
+	const self = this;
 	this.parametersDepth = Math.max(parseInt(this.getAttribute("$depth","1"),10) || 1,1);
 	// Find the parent transclusions
-	var pointer = this.parentWidget,
-		depth = this.parametersDepth;
+	let pointer = this.parentWidget;
+	let depth = this.parametersDepth;
 	while(pointer) {
 		if(pointer instanceof TranscludeWidget) {
 			depth--;
@@ -55,18 +55,18 @@ ParametersWidget.prototype.execute = function() {
 	// Process each parameter
 	if(pointer instanceof TranscludeWidget) {
 		// Get the value for each defined parameter
-		$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(self.parseTreeNode),function(attr,index) {
-			var name = attr.name;
+		$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(self.parseTreeNode),(attr,index) => {
+			let {name} = attr;
 			// If the attribute name starts with $$ then reduce to a single dollar
 			if(name.substr(0,2) === "$$") {
 				name = name.substr(1);
 			}
-			var value = pointer.getTransclusionParameter(name,index,self.getAttribute(attr.name,""));
+			const value = pointer.getTransclusionParameter(name,index,self.getAttribute(attr.name,""));
 			self.setVariable(name,value);
 		});
 		// Assign any metaparameters
-		$tw.utils.each(pointer.getTransclusionMetaParameters(),function(getValue,name) {
-			var variableName = self.getAttribute("$" + name);
+		$tw.utils.each(pointer.getTransclusionMetaParameters(),(getValue,name) => {
+			const variableName = self.getAttribute(`$${name}`);
 			if(variableName) {
 				self.setVariable(variableName,getValue(name));
 			}
@@ -74,13 +74,13 @@ ParametersWidget.prototype.execute = function() {
 	} else {
 		// There is no parent transclude. i.e. direct rendering.
 		// We use default values only.
-		$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(self.parseTreeNode),function(attr,index) {
-			var name = attr.name;
+		$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(self.parseTreeNode),(attr,index) => {
+			let {name} = attr;
 			// If the attribute name starts with $$ then reduce to a single dollar
 			if(name.substr(0,2) === "$$") {
 				name = name.substr(1);
 			}
-			var value = self.getAttribute(attr.name,"");
+			const value = self.getAttribute(attr.name,"");
 			self.setVariable(name,value);
 		});
 	}
@@ -92,7 +92,7 @@ ParametersWidget.prototype.execute = function() {
 Refresh the widget by ensuring our attributes are up to date
 */
 ParametersWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(Object.keys(changedAttributes).length) {
 		this.refreshSelf();
 		return true;

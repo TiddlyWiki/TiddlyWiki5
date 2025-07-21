@@ -13,10 +13,10 @@ Filter operator for replacing tiddler titles by the value of the field specified
 Export our filter function
 */
 exports.get = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
+	const results = [];
+	source((tiddler,title) => {
 		if(tiddler) {
-			var value = tiddler.getFieldString(operator.operand);
+			const value = tiddler.getFieldString(operator.operand);
 			if(value) {
 				results.push(value);
 			}

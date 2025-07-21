@@ -19,17 +19,17 @@ exports.synchronous = true;
 exports.startup = function() {
 	// Install the HTTP client event handler
 	$tw.httpClient = new $tw.utils.HttpClient();
-	var getPropertiesWithPrefix = function(properties,prefix) {
-		var result = Object.create(null);
-		$tw.utils.each(properties,function(value,name) {
+	const getPropertiesWithPrefix = function(properties,prefix) {
+		const result = Object.create(null);
+		$tw.utils.each(properties,(value,name) => {
 			if(name.indexOf(prefix) === 0) {
 				result[name.substring(prefix.length)] = properties[name];
 			}
 		});
 		return result;
 	};
-	$tw.rootWidget.addEventListener("tm-http-request",function(event) {
-		var params = event.paramObject || {};
+	$tw.rootWidget.addEventListener("tm-http-request",(event) => {
+		const params = event.paramObject || {};
 		$tw.httpClient.initiateHttpRequest({
 			wiki: event.widget.wiki,
 			url: params.url,
@@ -54,48 +54,48 @@ exports.startup = function() {
 			bearerAuthTokenFromStore: params["bearer-auth-token-from-store"]
 		});
 	});
-	$tw.rootWidget.addEventListener("tm-http-cancel-all-requests",function(event) {
+	$tw.rootWidget.addEventListener("tm-http-cancel-all-requests",(event) => {
 		$tw.httpClient.cancelAllHttpRequests();
 	});
 	// Install the modal message mechanism
 	$tw.modal = new $tw.utils.Modal($tw.wiki);
-	$tw.rootWidget.addEventListener("tm-modal",function(event) {
-		$tw.modal.display(event.param,{variables: event.paramObject, event: event});
+	$tw.rootWidget.addEventListener("tm-modal",(event) => {
+		$tw.modal.display(event.param,{variables: event.paramObject,event});
 	});
-	$tw.rootWidget.addEventListener("tm-show-switcher",function(event) {
-		$tw.modal.display("$:/core/ui/SwitcherModal",{variables: event.paramObject, event: event});
+	$tw.rootWidget.addEventListener("tm-show-switcher",(event) => {
+		$tw.modal.display("$:/core/ui/SwitcherModal",{variables: event.paramObject,event});
 	});
 	// Install the notification  mechanism
 	$tw.notifier = new $tw.utils.Notifier($tw.wiki);
-	$tw.rootWidget.addEventListener("tm-notify",function(event) {
+	$tw.rootWidget.addEventListener("tm-notify",(event) => {
 		$tw.notifier.display(event.param,{variables: event.paramObject});
 	});
 	// Install the copy-to-clipboard  mechanism
-	$tw.rootWidget.addEventListener("tm-copy-to-clipboard",function(event) {
+	$tw.rootWidget.addEventListener("tm-copy-to-clipboard",(event) => {
 		$tw.utils.copyToClipboard(event.param,{
 			successNotification: event.paramObject && event.paramObject.successNotification,
 			failureNotification: event.paramObject && event.paramObject.failureNotification
 		});
 	});
 	// Install the tm-focus-selector message
-	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
-		var selector = event.param || "",
-			element,
-		    	baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
+	$tw.rootWidget.addEventListener("tm-focus-selector",(event) => {
+		const selector = event.param || "";
+		let element;
+		const baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
 		element = $tw.utils.querySelectorSafe(selector,baseElement);
 		if(element && element.focus) {
 			element.focus(event.paramObject);
 		}
 	});
 	// Install the tm-rename-tiddler and tm-relink-tiddler messages
-	var makeRenameHandler = function(method) {
+	const makeRenameHandler = function(method) {
 		return function(event) {
-			var options = {},
-				paramObject = event.paramObject || {},
-				from = paramObject.from || event.tiddlerTitle,
-				to = paramObject.to;
-			options.dontRenameInTags = (paramObject.renameInTags === "false" || paramObject.renameInTags === "no") ? true : false;
-			options.dontRenameInLists = (paramObject.renameInLists === "false" || paramObject.renameInLists === "no") ? true : false;
+			const options = {};
+			const paramObject = event.paramObject || {};
+			const from = paramObject.from || event.tiddlerTitle;
+			const {to} = paramObject;
+			options.dontRenameInTags = !!((paramObject.renameInTags === "false" || paramObject.renameInTags === "no"));
+			options.dontRenameInLists = !!((paramObject.renameInLists === "false" || paramObject.renameInLists === "no"));
 			$tw.wiki[method](from,to,options);
 		};
 	};
@@ -103,13 +103,13 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-relink-tiddler",makeRenameHandler("relinkTiddler"));
 	// Install the scroller
 	$tw.pageScroller = new $tw.utils.PageScroller();
-	$tw.rootWidget.addEventListener("tm-scroll",function(event) {
+	$tw.rootWidget.addEventListener("tm-scroll",(event) => {
 		$tw.pageScroller.handleEvent(event);
 	});
-	var fullscreen = $tw.utils.getFullScreenApis();
+	const fullscreen = $tw.utils.getFullScreenApis();
 	if(fullscreen) {
-		$tw.rootWidget.addEventListener("tm-full-screen",function(event) {
-			var fullScreenDocument = event.event ? event.event.target.ownerDocument : document;
+		$tw.rootWidget.addEventListener("tm-full-screen",(event) => {
+			const fullScreenDocument = event.event ? event.event.target.ownerDocument : document;
 			if(event.param === "enter") {
 				fullScreenDocument.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
 			} else if(event.param === "exit") {

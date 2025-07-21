@@ -9,9 +9,9 @@ Action widget to create a new tiddler with a unique name and specified fields.
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var CreateTiddlerWidget = function(parseTreeNode,options) {
+const CreateTiddlerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -52,7 +52,7 @@ CreateTiddlerWidget.prototype.execute = function() {
 Refresh the widget by ensuring our attributes are up to date
 */
 CreateTiddlerWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
@@ -64,11 +64,11 @@ CreateTiddlerWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 CreateTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	var title = this.wiki.getTiddlerText("$:/language/DefaultNewTiddlerTitle"), // Get the initial new-tiddler title
-		fields = {},
-		creationFields,
-		modificationFields;
-	$tw.utils.each(this.attributes,function(attribute,name) {
+	let title = this.wiki.getTiddlerText("$:/language/DefaultNewTiddlerTitle"); // Get the initial new-tiddler title
+	const fields = {};
+	let creationFields;
+	let modificationFields;
+	$tw.utils.each(this.attributes,(attribute,name) => {
 		if(name.charAt(0) !== "$") {
 			fields[name] = attribute;
 		}
@@ -79,20 +79,20 @@ CreateTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	}
 	if(this.hasBase && this.actionOverwrite === "no") {
 		title = this.wiki.generateNewTitle(this.actionBaseTitle);
-	} else if (this.hasBase && this.actionOverwrite === "yes") {
-		title = this.actionBaseTitle
+	} else if(this.hasBase && this.actionOverwrite === "yes") {
+		title = this.actionBaseTitle;
 	}
 	// NO $basetitle BUT $template parameter is available
 	// the title MUST be unique, otherwise the template would be overwritten
-	if (!this.hasBase && this.useTemplate) {
+	if(!this.hasBase && this.useTemplate) {
 		title = this.wiki.generateNewTitle(this.actionTemplate);
-	} else if (!this.hasBase && !this.useTemplate) {
+	} else if(!this.hasBase && !this.useTemplate) {
 		// If no $basetitle and no $template then use initial title
 		title = this.wiki.generateNewTitle(title);
 	}
-	var templateTiddler = this.wiki.getTiddler(this.actionTemplate) || {};
-	this.wiki.addTiddler(new $tw.Tiddler(templateTiddler.fields,creationFields,fields,modificationFields,{title: title}));
-	var draftTitle = this.wiki.generateDraftTitle(title);
+	const templateTiddler = this.wiki.getTiddler(this.actionTemplate) || {};
+	this.wiki.addTiddler(new $tw.Tiddler(templateTiddler.fields,creationFields,fields,modificationFields,{title}));
+	const draftTitle = this.wiki.generateDraftTitle(title);
 	if(this.actionSaveTitle) {
 		this.wiki.setTextReference(this.actionSaveTitle,title,this.getVariable("currentTiddler"));
 	}

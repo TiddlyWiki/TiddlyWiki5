@@ -16,29 +16,29 @@ ignoreEnvironmentVariables: defaults to false
 */
 exports.getAllPlugins = function(options) {
 	options = options || {};
-	var fs = require("fs"),
-		path = require("path"),
-		tiddlers = {};
+	const fs = require("fs");
+	const path = require("path");
+	const tiddlers = {};
 	// Collect up the library plugins
-	var collectPlugins = function(folder) {
-			var pluginFolders = $tw.utils.getSubdirectories(folder) || [];
-			for(var p=0; p<pluginFolders.length; p++) {
-				if(!$tw.boot.excludeRegExp.test(pluginFolders[p])) {
-					var pluginFields = $tw.loadPluginFolder(path.resolve(folder,"./" + pluginFolders[p]));
-					if(pluginFields && pluginFields.title) {
-						tiddlers[pluginFields.title] = pluginFields;
-					}
+	const collectPlugins = function(folder) {
+		const pluginFolders = $tw.utils.getSubdirectories(folder) || [];
+		for(let p = 0;p < pluginFolders.length;p++) {
+			if(!$tw.boot.excludeRegExp.test(pluginFolders[p])) {
+				const pluginFields = $tw.loadPluginFolder(path.resolve(folder,`./${pluginFolders[p]}`));
+				if(pluginFields && pluginFields.title) {
+					tiddlers[pluginFields.title] = pluginFields;
 				}
 			}
-		},
-		collectPublisherPlugins = function(folder) {
-			var publisherFolders = $tw.utils.getSubdirectories(folder) || [];
-			for(var t=0; t<publisherFolders.length; t++) {
-				if(!$tw.boot.excludeRegExp.test(publisherFolders[t])) {
-					collectPlugins(path.resolve(folder,"./" + publisherFolders[t]));
-				}
+		}
+	};
+	const collectPublisherPlugins = function(folder) {
+		const publisherFolders = $tw.utils.getSubdirectories(folder) || [];
+		for(let t = 0;t < publisherFolders.length;t++) {
+			if(!$tw.boot.excludeRegExp.test(publisherFolders[t])) {
+				collectPlugins(path.resolve(folder,`./${publisherFolders[t]}`));
 			}
-		};
+		}
+	};
 	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.pluginsPath,options.ignoreEnvironmentVariables ? undefined : $tw.config.pluginsEnvVar),collectPublisherPlugins);
 	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.themesPath,options.ignoreEnvironmentVariables ? undefined : $tw.config.themesEnvVar),collectPublisherPlugins);
 	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.languagesPath,options.ignoreEnvironmentVariables ? undefined : $tw.config.languagesEnvVar),collectPlugins);

@@ -16,8 +16,8 @@ Set style properties of an element
 */
 exports.setStyle = function(element,styles) {
 	if(element.nodeType === 1) { // Element.ELEMENT_NODE
-		for(var t=0; t<styles.length; t++) {
-			for(var styleName in styles[t]) {
+		for(let t = 0;t < styles.length;t++) {
+			for(const styleName in styles[t]) {
 				element.style[$tw.utils.convertStyleNameToPropertyName(styleName)] = styles[t][styleName];
 			}
 		}
@@ -30,7 +30,7 @@ Converts a standard CSS property name into the local browser-specific equivalent
 	"transition" --> "webkitTransition"
 */
 
-var styleNameCache = {}; // We'll cache the style name conversions
+const styleNameCache = {}; // We'll cache the style name conversions
 
 exports.convertStyleNameToPropertyName = function(styleName) {
 	// Return from the cache if we can
@@ -38,12 +38,12 @@ exports.convertStyleNameToPropertyName = function(styleName) {
 		return styleNameCache[styleName];
 	}
 	// Convert it by first removing any hyphens
-	var propertyName = $tw.utils.unHyphenateCss(styleName);
+	let propertyName = $tw.utils.unHyphenateCss(styleName);
 	// Then check if it needs a prefix
 	if($tw.browser && document.body.style[propertyName] === undefined) {
-		var prefixes = ["O","MS","Moz","webkit"];
-		for(var t=0; t<prefixes.length; t++) {
-			var prefixedName = prefixes[t] + propertyName.substr(0,1).toUpperCase() + propertyName.substr(1);
+		const prefixes = ["O","MS","Moz","webkit"];
+		for(let t = 0;t < prefixes.length;t++) {
+			const prefixedName = prefixes[t] + propertyName.substr(0,1).toUpperCase() + propertyName.substr(1);
 			if(document.body.style[prefixedName] !== undefined) {
 				propertyName = prefixedName;
 				break;
@@ -62,12 +62,12 @@ Converts a JS format CSS property name back into the dashed form used in CSS dec
 */
 exports.convertPropertyNameToStyleName = function(propertyName) {
 	// Rehyphenate the name
-	var styleName = $tw.utils.hyphenateCss(propertyName);
+	let styleName = $tw.utils.hyphenateCss(propertyName);
 	// If there's a webkit prefix, add a dash (other browsers have uppercase prefixes, and so get the dash automatically)
 	if(styleName.indexOf("webkit") === 0) {
-		styleName = "-" + styleName;
+		styleName = `-${styleName}`;
 	} else if(styleName.indexOf("-m-s") === 0) {
-		styleName = "-ms" + styleName.substr(4);
+		styleName = `-ms${styleName.substr(4)}`;
 	}
 	return styleName;
 };
@@ -85,9 +85,9 @@ Converts a standard event name into the local browser specific equivalent. For e
 	"animationEnd" --> "webkitAnimationEnd"
 */
 
-var eventNameCache = {}; // We'll cache the conversions
+const eventNameCache = {}; // We'll cache the conversions
 
-var eventNameMappings = {
+const eventNameMappings = {
 	"transitionEnd": {
 		correspondingCssProperty: "transition",
 		mappings: {
@@ -114,10 +114,10 @@ exports.convertEventName = function(eventName) {
 	if(eventNameCache[eventName]) {
 		return eventNameCache[eventName];
 	}
-	var newEventName = eventName,
-		mappings = eventNameMappings[eventName];
+	let newEventName = eventName;
+	const mappings = eventNameMappings[eventName];
 	if(mappings) {
-		var convertedProperty = $tw.utils.convertStyleNameToPropertyName(mappings.correspondingCssProperty);
+		const convertedProperty = $tw.utils.convertStyleNameToPropertyName(mappings.correspondingCssProperty);
 		if(mappings.mappings[convertedProperty]) {
 			newEventName = mappings.mappings[convertedProperty];
 		}
@@ -131,25 +131,25 @@ exports.convertEventName = function(eventName) {
 Return the names of the fullscreen APIs
 */
 exports.getFullScreenApis = function() {
-	var d = document,
-		db = d.body,
-		result = {
+	const d = document;
+	const db = d.body;
+	const result = {
 		"_requestFullscreen": db.webkitRequestFullscreen !== undefined ? "webkitRequestFullscreen" :
-							db.mozRequestFullScreen !== undefined ? "mozRequestFullScreen" :
-							db.msRequestFullscreen !== undefined ? "msRequestFullscreen" :
-							db.requestFullscreen !== undefined ? "requestFullscreen" : "",
+			db.mozRequestFullScreen !== undefined ? "mozRequestFullScreen" :
+				db.msRequestFullscreen !== undefined ? "msRequestFullscreen" :
+					db.requestFullscreen !== undefined ? "requestFullscreen" : "",
 		"_exitFullscreen": d.webkitExitFullscreen !== undefined ? "webkitExitFullscreen" :
-							d.mozCancelFullScreen !== undefined ? "mozCancelFullScreen" :
-							d.msExitFullscreen !== undefined ? "msExitFullscreen" :
-							d.exitFullscreen !== undefined ? "exitFullscreen" : "",
+			d.mozCancelFullScreen !== undefined ? "mozCancelFullScreen" :
+				d.msExitFullscreen !== undefined ? "msExitFullscreen" :
+					d.exitFullscreen !== undefined ? "exitFullscreen" : "",
 		"_fullscreenElement": d.webkitFullscreenElement !== undefined ? "webkitFullscreenElement" :
-							d.mozFullScreenElement !== undefined ? "mozFullScreenElement" :
-							d.msFullscreenElement !== undefined ? "msFullscreenElement" :
-							d.fullscreenElement !== undefined ? "fullscreenElement" : "",
+			d.mozFullScreenElement !== undefined ? "mozFullScreenElement" :
+				d.msFullscreenElement !== undefined ? "msFullscreenElement" :
+					d.fullscreenElement !== undefined ? "fullscreenElement" : "",
 		"_fullscreenChange": d.webkitFullscreenElement !== undefined ? "webkitfullscreenchange" :
-							d.mozFullScreenElement !== undefined ? "mozfullscreenchange" :
-							d.msFullscreenElement !== undefined ? "MSFullscreenChange" :
-							d.fullscreenElement !== undefined ? "fullscreenchange" : ""
+			d.mozFullScreenElement !== undefined ? "mozfullscreenchange" :
+				d.msFullscreenElement !== undefined ? "MSFullscreenChange" :
+					d.fullscreenElement !== undefined ? "fullscreenchange" : ""
 	};
 	if(!result._requestFullscreen || !result._exitFullscreen || !result._fullscreenElement || !result._fullscreenChange) {
 		return null;

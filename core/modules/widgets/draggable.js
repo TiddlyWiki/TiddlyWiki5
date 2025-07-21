@@ -9,9 +9,9 @@ Draggable widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var DraggableWidget = function(parseTreeNode,options) {
+const DraggableWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -24,10 +24,10 @@ DraggableWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DraggableWidget.prototype.render = function(parent,nextSibling) {
-	var self = this,
-		tag,
-		domNode,
-		classes = [];
+	const self = this;
+	let tag;
+	let domNode;
+	const classes = [];
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -36,7 +36,7 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Sanitise the specified tag
 	tag = this.draggableTag;
-	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
+	if($tw.config.htmlUnsafeElements.includes(tag)) {
 		tag = "div";
 	}
 	// Create our element
@@ -60,9 +60,9 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	// Add event handlers
 	if(this.dragEnable) {
 		$tw.utils.makeDraggable({
-			domNode: domNode,
-			dragTiddlerFn: function() {return self.getAttribute("tiddler");},
-			dragFilterFn: function() {return self.getAttribute("filter");},
+			domNode,
+			dragTiddlerFn() {return self.getAttribute("tiddler");},
+			dragFilterFn() {return self.getAttribute("filter");},
 			startActions: self.startActions,
 			endActions: self.endActions,
 			dragImageType: self.dragImageType,
@@ -91,26 +91,26 @@ DraggableWidget.prototype.execute = function() {
 
 
 DraggableWidget.prototype.updateDomNodeClasses = function() {
-	var domNodeClasses = this.domNodes[0].className.split(" "),
-		oldClasses = this.draggableClasses.split(" ");
+	const domNodeClasses = this.domNodes[0].className.split(" ");
+	const oldClasses = this.draggableClasses.split(" ");
 	this.draggableClasses = this.getAttribute("class");
 	//Remove classes assigned from the old value of class attribute
-	$tw.utils.each(oldClasses,function(oldClass){
-		var i = domNodeClasses.indexOf(oldClass);
+	$tw.utils.each(oldClasses,(oldClass) => {
+		const i = domNodeClasses.indexOf(oldClass);
 		if(i !== -1) {
 			domNodeClasses.splice(i,1);
 		}
 	});
 	//Add new classes from updated class attribute.
 	$tw.utils.pushTop(domNodeClasses,this.draggableClasses);
-	this.domNodes[0].setAttribute("class",domNodeClasses.join(" "))
-}
+	this.domNodes[0].setAttribute("class",domNodeClasses.join(" "));
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DraggableWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.tag || changedAttributes.selector || changedAttributes.dragimagetype || changedAttributes.enable || changedAttributes.startactions || changedAttributes.endactions) {
 		this.refreshSelf();
 		return true;
@@ -119,7 +119,7 @@ DraggableWidget.prototype.refresh = function(changedTiddlers) {
 			this.updateDomNodeClasses();
 		}
 		this.assignAttributes(this.domNodes[0],{
-			changedAttributes: changedAttributes,
+			changedAttributes,
 			sourcePrefix: "data-",
 			destPrefix: "data-"
 		});

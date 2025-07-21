@@ -9,9 +9,9 @@ Edit widget is a meta-widget chooses the appropriate actual editting widget
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var EditWidget = function(parseTreeNode,options) {
+const EditWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -31,7 +31,7 @@ EditWidget.prototype.render = function(parent,nextSibling) {
 };
 
 // Mappings from content type to editor type are stored in tiddlers with this prefix
-var EDITOR_MAPPING_PREFIX = "$:/config/EditorTypeMappings/";
+const EDITOR_MAPPING_PREFIX = "$:/config/EditorTypeMappings/";
 
 /*
 Compute the internal state of the widget
@@ -44,7 +44,7 @@ EditWidget.prototype.execute = function() {
 	this.editorType = this.getEditorType();
 	// Make the child widgets
 	this.makeChildWidgets([{
-		type: "edit-" + this.editorType,
+		type: `edit-${this.editorType}`,
 		attributes: this.parseTreeNode.attributes,
 		children: this.parseTreeNode.children
 	}]);
@@ -52,17 +52,17 @@ EditWidget.prototype.execute = function() {
 
 EditWidget.prototype.getEditorType = function() {
 	// Get the content type of the thing we're editing
-	var type;
+	let type;
 	if(this.editField === "text") {
-		var tiddler = this.wiki.getTiddler(this.editTitle);
+		const tiddler = this.wiki.getTiddler(this.editTitle);
 		if(tiddler) {
 			type = tiddler.fields.type;
 		}
 	}
 	type = type || "text/vnd.tiddlywiki";
-	var editorType = this.wiki.getTiddlerText(EDITOR_MAPPING_PREFIX + type);
+	let editorType = this.wiki.getTiddlerText(EDITOR_MAPPING_PREFIX + type);
 	if(!editorType) {
-		var typeInfo = $tw.config.contentTypeInfo[type];
+		const typeInfo = $tw.config.contentTypeInfo[type];
 		if(typeInfo && typeInfo.encoding === "base64") {
 			editorType = "binary";
 		} else {
@@ -76,7 +76,7 @@ EditWidget.prototype.getEditorType = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 EditWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	// Refresh if the editor type has changed
 	if(changedAttributes.tiddler || changedAttributes.field || (this.getEditorType() !== this.editorType)) {
 		this.refreshSelf();

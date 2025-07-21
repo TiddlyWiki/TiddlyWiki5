@@ -13,10 +13,10 @@ Filter operator returning the tiddler whose title occurs next in the list suppli
 Export our filter function
 */
 exports.next = function(source,operator,options) {
-	var results = [],
-		list = options.wiki.getTiddlerList(operator.operand);
-	source(function(tiddler,title) {
-		var match = list.indexOf(title);
+	const results = [];
+	const list = options.wiki.getTiddlerList(operator.operand);
+	source((tiddler,title) => {
+		let match = list.indexOf(title);
 		// increment match and then test if result is in range
 		match++;
 		if(match > 0 && match < list.length) {

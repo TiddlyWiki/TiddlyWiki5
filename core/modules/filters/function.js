@@ -13,23 +13,23 @@ Filter operator returning those input titles that are returned from a function
 Export our filter function
 */
 exports.function = function(source,operator,options) {
-	var functionName = operator.operands[0],
-		params = [],
-		results;
-	$tw.utils.each(operator.operands.slice(1),function(param) {
+	const functionName = operator.operands[0];
+	const params = [];
+	let results;
+	$tw.utils.each(operator.operands.slice(1),(param) => {
 		params.push({value: param});
 	});
 	// console.log(`Calling ${functionName} with params ${JSON.stringify(params)}`);
-	var variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(functionName,{params: params, source: source});
+	const variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(functionName,{params,source});
 	if(variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
 		results = variableInfo.resultList ? variableInfo.resultList : [variableInfo.text];
 	}
 	// Return the input list if the function wasn't found
 	if(!results) {
 		results = [];
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			results.push(title);
-		});	
+		});
 	}
 	// console.log(`function ${functionName} with params ${JSON.stringify(params)} results: ${JSON.stringify(results)}`);
 	return results;

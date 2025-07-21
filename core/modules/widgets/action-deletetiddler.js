@@ -9,9 +9,9 @@ Action widget to delete a tiddler.
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var DeleteTiddlerWidget = function(parseTreeNode,options) {
+const DeleteTiddlerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -40,7 +40,7 @@ DeleteTiddlerWidget.prototype.execute = function() {
 Refresh the widget by ensuring our attributes are up to date
 */
 DeleteTiddlerWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes["$filter"] || changedAttributes["$tiddler"]) {
 		this.refreshSelf();
 		return true;
@@ -52,14 +52,14 @@ DeleteTiddlerWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 DeleteTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	var tiddlers = [];
+	let tiddlers = [];
 	if(this.actionFilter) {
 		tiddlers = this.wiki.filterTiddlers(this.actionFilter,this);
 	}
 	if(this.actionTiddler) {
 		tiddlers.push(this.actionTiddler);
 	}
-	for(var t=0; t<tiddlers.length; t++) {
+	for(let t = 0;t < tiddlers.length;t++) {
 		this.wiki.deleteTiddler(tiddlers[t]);
 	}
 	return true; // Action was invoked

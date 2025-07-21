@@ -26,16 +26,16 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var reEnd = /@@/g;
+	const reEnd = /@@/g;
 	// Get the styles and class
-	var stylesString = this.match[1],
-		classString = this.match[2] ? this.match[2].split(".").join(" ") : undefined;
+	const stylesString = this.match[1];
+	const classString = this.match[2] ? this.match[2].split(".").join(" ") : undefined;
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the run up to the terminator
-	var tree = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
+	const tree = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
 	// Return the classed span
-	var node = {
+	const node = {
 		type: "element",
 		tag: "span",
 		children: tree

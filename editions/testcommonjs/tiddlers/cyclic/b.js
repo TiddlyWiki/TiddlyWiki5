@@ -9,8 +9,8 @@ Cycle require test B
 
 
 
-var a = require('./a');
-exports.b = function () {
-    return a;
+const a = require('./a');
+exports.b = function() {
+	return a;
 };
 

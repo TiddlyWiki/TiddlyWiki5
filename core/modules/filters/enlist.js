@@ -13,20 +13,22 @@ Filter operator returning its operand parsed as a list
 Export our filter function
 */
 exports.enlist = function(source,operator,options) {
-	var allowDuplicates = false;
+	let allowDuplicates = false;
 	switch(operator.suffix) {
-		case "raw":
+		case "raw": {
 			allowDuplicates = true;
 			break;
-		case "dedupe":
+		}
+		case "dedupe": {
 			allowDuplicates = false;
 			break;
+		}
 	}
-	var list = $tw.utils.parseStringArray(operator.operand,allowDuplicates);
+	const list = $tw.utils.parseStringArray(operator.operand,allowDuplicates);
 	if(operator.prefix === "!") {
-		var results = [];
-		source(function(tiddler,title) {
-			if(list.indexOf(title) === -1) {
+		const results = [];
+		source((tiddler,title) => {
+			if(!list.includes(title)) {
 				results.push(title);
 			}
 		});

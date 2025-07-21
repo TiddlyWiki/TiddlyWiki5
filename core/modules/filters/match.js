@@ -13,17 +13,17 @@ Filter operator for checking if a title matches a string
 Export our filter function
 */
 exports.match = function(source,operator,options) {
-	var results = [],
-		suffixes = (operator.suffixes || [])[0] || [];
-	if(suffixes.indexOf("caseinsensitive") !== -1) {
+	const results = [];
+	const suffixes = (operator.suffixes || [])[0] || [];
+	if(suffixes.includes("caseinsensitive")) {
 		if(operator.prefix === "!") {
-			source(function(tiddler,title) {
+			source((tiddler,title) => {
 				if(title.toLowerCase() !== (operator.operand || "").toLowerCase()) {
 					results.push(title);
 				}
 			});
 		} else {
-			source(function(tiddler,title) {
+			source((tiddler,title) => {
 				if(title.toLowerCase() === (operator.operand || "").toLowerCase()) {
 					results.push(title);
 				}
@@ -31,13 +31,13 @@ exports.match = function(source,operator,options) {
 		}
 	} else {
 		if(operator.prefix === "!") {
-			source(function(tiddler,title) {
+			source((tiddler,title) => {
 				if(title !== operator.operand) {
 					results.push(title);
 				}
 			});
 		} else {
-			source(function(tiddler,title) {
+			source((tiddler,title) => {
 				if(title === operator.operand) {
 					results.push(title);
 				}

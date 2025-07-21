@@ -10,11 +10,11 @@ A sync adaptor module for synchronising with the local filesystem via node.js AP
 "use strict";
 
 // Get a reference to the file system
-var fs = $tw.node ? require("fs") : null,
-	path = $tw.node ? require("path") : null;
+const fs = $tw.node ? require("fs") : null;
+const path = $tw.node ? require("path") : null;
 
 function FileSystemAdaptor(options) {
-	var self = this;
+	const self = this;
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
 	this.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
@@ -35,7 +35,7 @@ FileSystemAdaptor.prototype.isReady = function() {
 
 FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	//Returns the existing fileInfo for the tiddler. To regenerate, call getTiddlerFileInfo().
-	var title = tiddler.fields.title;
+	const {title} = tiddler.fields;
 	return this.boot.files[title];
 };
 
@@ -56,8 +56,8 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 		return callback("filesystemadaptor requires a valid wiki folder");
 	}
 	// Always generate a fileInfo object when this fuction is called
-	var title = tiddler.fields.title, newInfo, pathFilters, extFilters,
-		fileInfo = this.boot.files[title];
+	const {title} = tiddler.fields; let newInfo; let pathFilters; let extFilters;
+	const fileInfo = this.boot.files[title];
 	if(this.wiki.tiddlerExists("$:/config/FileSystemPaths")) {
 		pathFilters = this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n");
 	}
@@ -66,10 +66,10 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	}
 	newInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
 		directory: this.boot.wikiTiddlersPath,
-		pathFilters: pathFilters,
-		extFilters: extFilters,
+		pathFilters,
+		extFilters,
 		wiki: this.wiki,
-		fileInfo: fileInfo
+		fileInfo
 	});
 	callback(null,newInfo);
 };
@@ -79,19 +79,19 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
-	var self = this;
-	var syncerInfo = options.tiddlerInfo || {};
-	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
+	const self = this;
+	const syncerInfo = options.tiddlerInfo || {};
+	this.getTiddlerFileInfo(tiddler,(err,fileInfo) => {
 		if(err) {
 			return callback(err);
 		}
-		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err,fileInfo) {
+		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,(err,fileInfo) => {
 			if(err) {
 				if((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
 					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
 					fileInfo.writeError = true;
 					self.boot.files[tiddler.fields.title] = fileInfo;
-					$tw.syncer.logger.log("Sync failed for \""+tiddler.fields.title+"\" and will be retried with encoded filepath",encodeURIComponent(fileInfo.filepath));
+					$tw.syncer.logger.log(`Sync failed for "${tiddler.fields.title}" and will be retried with encoded filepath`,encodeURIComponent(fileInfo.filepath));
 					return callback(err);
 				} else {
 					return callback(err);
@@ -100,12 +100,12 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			// Store new boot info only after successful writes
 			self.boot.files[tiddler.fields.title] = fileInfo;
 			// Cleanup duplicates if the file moved or changed extensions
-			var options = {
+			const options = {
 				adaptorInfo: syncerInfo.adaptorInfo || {},
 				bootInfo: fileInfo || {},
 				title: tiddler.fields.title
 			};
-			$tw.utils.cleanupTiddlerFiles(options,function(err,fileInfo) {
+			$tw.utils.cleanupTiddlerFiles(options,(err,fileInfo) => {
 				if(err) {
 					return callback(err);
 				}
@@ -128,15 +128,15 @@ FileSystemAdaptor.prototype.loadTiddler = function(title,callback) {
 Delete a tiddler and invoke the callback with (err)
 */
 FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
-	var self = this,
-		fileInfo = this.boot.files[title];
+	const self = this;
+	const fileInfo = this.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
-		$tw.utils.deleteTiddlerFile(fileInfo,function(err,fileInfo) {
+		$tw.utils.deleteTiddlerFile(fileInfo,(err,fileInfo) => {
 			if(err) {
 				if((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the file on disk, should fail gracefully
-					$tw.syncer.displayError("Server desynchronized. Error deleting file for deleted tiddler \"" + title + "\"",err);
+					$tw.syncer.displayError(`Server desynchronized. Error deleting file for deleted tiddler "${title}"`,err);
 					return callback(null,fileInfo);
 				} else {
 					return callback(err);

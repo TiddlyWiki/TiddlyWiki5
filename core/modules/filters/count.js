@@ -13,9 +13,9 @@ Filter operator returning the number of entries in the current list.
 Export our filter function
 */
 exports.count = function(source,operator,options) {
-	var count = 0;
-	source(function(tiddler,title) {
+	let count = 0;
+	source((tiddler,title) => {
 		count++;
 	});
-	return [count + ""];
+	return [`${count}`];
 };

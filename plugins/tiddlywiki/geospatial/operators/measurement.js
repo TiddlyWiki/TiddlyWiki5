@@ -9,30 +9,30 @@ Filter operators for geospatial measurement
 
 "use strict";
 
-var turf = require("$:/plugins/tiddlywiki/geospatial/turf.js"),
-	geotools = require("$:/plugins/tiddlywiki/geospatial/geotools.js");
+const turf = require("$:/plugins/tiddlywiki/geospatial/turf.js");
+const geotools = require("$:/plugins/tiddlywiki/geospatial/geotools.js");
 
-var VALID_UNITS = ["miles","kilometers","radians","degrees"],
-	DEFAULT_UNITS = "miles";
+const VALID_UNITS = new Set(["miles","kilometers","radians","degrees"]);
+const DEFAULT_UNITS = "miles";
 
 exports.geodistance = function(source,operator,options) {
-	var from = geotools.parsePoint(operator.operands[0]),
-		to = geotools.parsePoint(operator.operands[1]),
-		units = operator.operands[2] || DEFAULT_UNITS;
-	if(VALID_UNITS.indexOf(units) === -1) {
+	const from = geotools.parsePoint(operator.operands[0]);
+	const to = geotools.parsePoint(operator.operands[1]);
+	let units = operator.operands[2] || DEFAULT_UNITS;
+	if(!VALID_UNITS.has(units)) {
 		units = DEFAULT_UNITS;
 	}
-	return [JSON.stringify(turf.distance(from,to,{units: units}))];
+	return [JSON.stringify(turf.distance(from,to,{units}))];
 };
 
 exports.geonearestpoint = function(source,operator,options) {
-	var target = geotools.parsePoint(operator.operands[0]),
-		featureCollection = {
-			"type": "FeatureCollection",
-			"features": []
-		};
-	source(function(tiddler,title) {
-		var fc = $tw.utils.parseJSONSafe(title);
+	const target = geotools.parsePoint(operator.operands[0]);
+	const featureCollection = {
+		"type": "FeatureCollection",
+		"features": []
+	};
+	source((tiddler,title) => {
+		const fc = $tw.utils.parseJSONSafe(title);
 		if(fc) {
 			if(fc.type === "FeatureCollection" && $tw.utils.isArray(fc.features)) {
 				Array.prototype.push.apply(featureCollection.features,fc.features);

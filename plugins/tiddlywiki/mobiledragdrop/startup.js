@@ -16,5 +16,5 @@ exports.after = ["startup"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	window.addEventListener("touchmove", function() {});
+	window.addEventListener("touchmove",() => {});
 };

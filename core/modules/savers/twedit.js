@@ -9,8 +9,7 @@ Handles saving changes via the TWEdit iOS app
 
 "use strict";
 
-var TWEditSaver = function(wiki) {
-};
+const TWEditSaver = function(wiki) {};
 
 TWEditSaver.prototype.save = function(text,method,callback) {
 	// Bail if we're not running under TWEdit
@@ -18,9 +17,9 @@ TWEditSaver.prototype.save = function(text,method,callback) {
 		return false;
 	}
 	// Get the pathname of this document
-	var pathname = $tw.utils.decodeURIComponentSafe(document.location.pathname);
+	let pathname = $tw.utils.decodeURIComponentSafe(document.location.pathname);
 	// Strip any query or location part
-	var p = pathname.indexOf("?");
+	let p = pathname.indexOf("?");
 	if(p !== -1) {
 		pathname = pathname.substr(0,p);
 	}
@@ -29,21 +28,21 @@ TWEditSaver.prototype.save = function(text,method,callback) {
 		pathname = pathname.substr(0,p);
 	}
 	// Remove the leading "/Documents" from path
-	var prefix = "/Documents";
+	const prefix = "/Documents";
 	if(pathname.indexOf(prefix) === 0) {
 		pathname = pathname.substr(prefix.length);
 	}
 	// Error handler
-	var errorHandler = function(event) {
+	const errorHandler = function(event) {
 		// Error
-		callback($tw.language.getString("Error/SavingToTWEdit") + ": " + event.target.error.code);
+		callback(`${$tw.language.getString("Error/SavingToTWEdit")}: ${event.target.error.code}`);
 	};
 	// Get the file system
-	window.requestFileSystem(LocalFileSystem.PERSISTENT,0,function(fileSystem) {
+	window.requestFileSystem(LocalFileSystem.PERSISTENT,0,(fileSystem) => {
 		// Now we've got the filesystem, get the fileEntry
-		fileSystem.root.getFile(pathname, {create: true}, function(fileEntry) {
+		fileSystem.root.getFile(pathname,{create: true},(fileEntry) => {
 			// Now we've got the fileEntry, create the writer
-			fileEntry.createWriter(function(writer) {
+			fileEntry.createWriter((writer) => {
 				writer.onerror = errorHandler;
 				writer.onwrite = function() {
 					callback(null);
@@ -51,8 +50,8 @@ TWEditSaver.prototype.save = function(text,method,callback) {
 				writer.position = 0;
 				writer.write(text);
 			},errorHandler);
-		}, errorHandler);
-	}, errorHandler);
+		},errorHandler);
+	},errorHandler);
 	return true;
 };
 
@@ -62,7 +61,7 @@ Information about this saver
 TWEditSaver.prototype.info = {
 	name: "twedit",
 	priority: 1600,
-	capabilities: ["save", "autosave"]
+	capabilities: ["save","autosave"]
 };
 
 /*

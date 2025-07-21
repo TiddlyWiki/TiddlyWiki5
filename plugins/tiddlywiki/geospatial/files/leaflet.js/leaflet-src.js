@@ -2040,7 +2040,7 @@
   	var supportsPassiveOption = false;
   	try {
   		var opts = Object.defineProperty({}, 'passive', {
-  			get: function () { // eslint-disable-line getter-return
+  			get: function () {  
   				supportsPassiveOption = true;
   			}
   		});
@@ -2542,9 +2542,9 @@
   // (used by Leaflet internally to position its layers).
   function setPosition(el, point) {
 
-  	/*eslint-disable */
+  	 
   	el._leaflet_pos = point;
-  	/* eslint-enable */
+  	 
 
   	if (Browser.any3d) {
   		setTransform(el, point);
@@ -3865,9 +3865,9 @@
   			delete this._container._leaflet_id;
   			delete this._containerId;
   		} catch (e) {
-  			/*eslint-disable */
+  			 
   			this._container._leaflet_id = undefined;
-  			/* eslint-enable */
+  			 
   			this._containerId = undefined;
   		}
 

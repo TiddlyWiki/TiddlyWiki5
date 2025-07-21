@@ -9,34 +9,34 @@ Positions tiddlers on a 2D map
 
 "use strict";
 
-var CecilyStoryView = function(listWidget) {
-	var self = this;
+const CecilyStoryView = function(listWidget) {
+	const self = this;
 	this.listWidget = listWidget;
 	// Load the map
 	this.loadMap();
 	// Position the existing tiddlers
-	$tw.utils.each(this.listWidget.children,function(itemWidget,index) {
-		var domNode = itemWidget.findFirstDomNode();
+	$tw.utils.each(this.listWidget.children,(itemWidget,index) => {
+		const domNode = itemWidget.findFirstDomNode();
 		domNode.style.position = "absolute";
-		var title = itemWidget.parseTreeNode.itemTitle;
+		const title = itemWidget.parseTreeNode.itemTitle;
 		self.positionTiddler(title,domNode);
 	});
 };
 
 CecilyStoryView.prototype.navigateTo = function(historyInfo) {
-	var listElementIndex = this.listWidget.findListItem(0,historyInfo.title);
+	const listElementIndex = this.listWidget.findListItem(0,historyInfo.title);
 	if(listElementIndex === undefined) {
 		return;
 	}
-	var listItemWidget = this.listWidget.children[listElementIndex],
-		targetElement = listItemWidget.findFirstDomNode();
+	const listItemWidget = this.listWidget.children[listElementIndex];
+	const targetElement = listItemWidget.findFirstDomNode();
 	// Scroll the node into view
-	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
+	this.listWidget.dispatchEvent({type: "tm-scroll",target: targetElement});
 };
 
 CecilyStoryView.prototype.insert = function(widget) {
-	var domNode = widget.findFirstDomNode(),
-		duration = $tw.utils.getAnimationDuration();
+	const domNode = widget.findFirstDomNode();
+	const duration = $tw.utils.getAnimationDuration();
 	// Make the newly inserted node position absolute
 	$tw.utils.setStyle(domNode,[
 		{position: "absolute"},
@@ -44,21 +44,21 @@ CecilyStoryView.prototype.insert = function(widget) {
 		{opacity: "0.0"}
 	]);
 	// Position it
-	var title = widget.parseTreeNode.itemTitle;
+	const title = widget.parseTreeNode.itemTitle;
 	this.positionTiddler(title,domNode);
 	$tw.utils.forceLayout(domNode);
 	// Animate it in
 	$tw.utils.setStyle(domNode,[
-		{transition: "opacity " + duration + "ms ease-out"},
+		{transition: `opacity ${duration}ms ease-out`},
 		{opacity: "1.0"}
 	]);
 };
 
 CecilyStoryView.prototype.remove = function(widget) {
-	var targetElement = widget.findFirstDomNode(),
-		duration = $tw.utils.getAnimationDuration();
+	const targetElement = widget.findFirstDomNode();
+	const duration = $tw.utils.getAnimationDuration();
 	// Remove the widget at the end of the transition
-	setTimeout(function() {
+	setTimeout(() => {
 		widget.removeChildDomNodes();
 	},duration);
 	// Animate the closure
@@ -68,8 +68,10 @@ CecilyStoryView.prototype.remove = function(widget) {
 	]);
 	$tw.utils.forceLayout(targetElement);
 	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out, " +
-					"opacity " + duration + "ms ease-in-out"},
+		{
+			transition: `${$tw.utils.roundTripPropertyName("transform")} ${duration}ms ease-in-out, ` +
+				`opacity ${duration}ms ease-in-out`
+		},
 		{transform: "scale(0.01)"},
 		{opacity: "0.0"}
 	]);
@@ -81,7 +83,7 @@ Load the current map
 CecilyStoryView.prototype.loadMap = function() {
 	this.map = this.listWidget.wiki.getTiddlerData(this.getMapTiddlerTitle(),{
 		positions: {},
-		newTiddlerPosition: {x: 0, y: 0},
+		newTiddlerPosition: {x: 0,y: 0},
 		width: parseInt(this.listWidget.getAttribute("cecily-width","600"),10)
 	});
 };
@@ -94,21 +96,21 @@ CecilyStoryView.prototype.getMapTiddlerTitle = function() {
 Position a tiddler according to the map
 */
 CecilyStoryView.prototype.positionTiddler = function(title,domNode) {
-	var pos = this.lookupTiddlerInMap(title,domNode),
-		scale = pos.w/domNode.offsetWidth;
+	const pos = this.lookupTiddlerInMap(title,domNode);
+	const scale = pos.w / domNode.offsetWidth;
 	$tw.utils.setStyle(domNode,[
-		{width: this.map.width + "px"},
+		{width: `${this.map.width}px`},
 		{transformOrigin: "0% 0%"},
-		{transform: "translateX(" + pos.x + "px) translateY(" + pos.y + "px) scale(" + scale + ") translateX(-50%) rotate(" + (pos.r || 0) + "deg) translateX(50%)"}
+		{transform: `translateX(${pos.x}px) translateY(${pos.y}px) scale(${scale}) translateX(-50%) rotate(${pos.r || 0}deg) translateX(50%)`}
 	]);
 };
 
 // Get the position of a particular tiddler
 CecilyStoryView.prototype.lookupTiddlerInMap = function(title,domNode) {
 	// If this is a draft tiddler then look for the position of the original tiddler
-	var tiddler = this.listWidget.wiki.getTiddler(title);
+	const tiddler = this.listWidget.wiki.getTiddler(title);
 	if(tiddler) {
-		var draftOf = tiddler.fields["draft.of"];
+		const draftOf = tiddler.fields["draft.of"];
 		if(draftOf && this.map.positions[draftOf]) {
 			return this.map.positions[draftOf];
 		}
@@ -118,9 +120,9 @@ CecilyStoryView.prototype.lookupTiddlerInMap = function(title,domNode) {
 		return this.map.positions[title];
 	}
 	// If the tiddler wasn't in the map we'll have to compute it
-	var newPosition;
+	let newPosition;
 	switch(this.map.positionNew) {
-		default: // "right"
+		default: { // "right"
 			newPosition = {
 				x: this.map.newTiddlerPosition.x,
 				y: this.map.newTiddlerPosition.y,
@@ -129,6 +131,7 @@ CecilyStoryView.prototype.lookupTiddlerInMap = function(title,domNode) {
 			};
 			this.map.newTiddlerPosition.x += newPosition.w * 1.1;
 			break;
+		}
 	}
 	// A default position
 	newPosition = newPosition || {x: 0,y: 0,w: 100,h: 100};

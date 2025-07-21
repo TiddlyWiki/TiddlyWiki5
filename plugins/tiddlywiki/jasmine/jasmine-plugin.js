@@ -10,8 +10,8 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 
 "use strict";
 
-var TEST_TIDDLER_FILTER = "[all[tiddlers+shadows]type[application/javascript]tag[$:/tags/test-spec]]";
-var TESTS_DONE = false;
+const TEST_TIDDLER_FILTER = "[all[tiddlers+shadows]type[application/javascript]tag[$:/tags/test-spec]]";
+let TESTS_DONE = false;
 
 exports.testsWereRun = function() {
 	return TESTS_DONE;
@@ -30,13 +30,13 @@ They're all locally checked into the `./files` directory.
 
 exports.runTests = function(callback,specFilter) {
 	// Set up a shared context object.
-	var context = {
-		console: console,
-		setInterval: setInterval,
-		clearInterval: clearInterval,
-		setTimeout: setTimeout,
-		clearTimeout: clearTimeout,
-		$tw: $tw
+	let context = {
+		console,
+		setInterval,
+		clearInterval,
+		setTimeout,
+		clearTimeout,
+		$tw
 	};
 	// The `global` property is needed in two places:
 	// 1. jasmine-core/node_boot.js: extends the global object with jasmine interface.
@@ -62,19 +62,19 @@ exports.runTests = function(callback,specFilter) {
 	TESTS_DONE = true;
 
 	function evalInContext(title) {
-		var code = $tw.wiki.getTiddlerText(title,"");
-		var _exports = {};
+		const code = $tw.wiki.getTiddlerText(title,"");
+		const _exports = {};
 		context.exports = _exports;
 		context.module = {exports: _exports};
 		context.require = function(moduleTitle) {
 			// mock out the 'glob' module required in
 			// "$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js"
-			if (moduleTitle === "glob") {
+			if(moduleTitle === "glob") {
 				return {};
 			}
 			return $tw.modules.execute(moduleTitle,title);
 		};
-		var contextExports = $tw.utils.evalSandboxed(code,context,title,true);
+		const contextExports = $tw.utils.evalSandboxed(code,context,title,true);
 		// jasmine/jasmine.js assigns directly to `module.exports`: check
 		// for it first.
 		return context.module.exports || contextExports;
@@ -84,16 +84,16 @@ exports.runTests = function(callback,specFilter) {
 	// We load 'jasmine-core/jasmine.js' here in order to start with a module
 	// that is shared between browser and Node.js environments. Browser-specific
 	// and Node-specific modules are loaded next.
-	var jasmineCore = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/jasmine.js");
+	const jasmineCore = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/jasmine.js");
 	// The core Jasmine instance
-	var jasmine;
+	let jasmine;
 	// Node.js wrapper for calling `.execute()`
-	var nodeJasmineWrapper;
+	let nodeJasmineWrapper;
 	if($tw.browser) {
 		window.jasmineRequire = jasmineCore;
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/jasmine-html.js");
 		// Prevent jasmine-core/boot.js from installing its own onload handler. We'll execute it explicitly when everything is ready
-		var previousOnloadHandler = window.onload;
+		const previousOnloadHandler = window.onload;
 		window.onload = function() {};
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/boot.js");
 		var jasmineOnloadHandler = window.onload;
@@ -133,19 +133,19 @@ exports.runTests = function(callback,specFilter) {
 			// If jasmine's exit code is non-zero, tests failed. Abort any
 			// further commands. If they're important, they could have come
 			// before the testing suite.
-			callback(code ? "Tests failed with code " + code : undefined);
+			callback(code ? `Tests failed with code ${code}` : undefined);
 		};
 
-		var NodeJasmine = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js");
-		nodeJasmineWrapper = new NodeJasmine({jasmineCore: jasmineCore});
+		const NodeJasmine = evalInContext("$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js");
+		nodeJasmineWrapper = new NodeJasmine({jasmineCore});
 		jasmine = nodeJasmineWrapper.jasmine;
 	}
 	// Add Jasmine's DSL to our context
-	var env = jasmine.getEnv();
-	var jasmineInterface = jasmineCore.interface(jasmine,env)
+	const env = jasmine.getEnv();
+	const jasmineInterface = jasmineCore.interface(jasmine,env);
 	context = $tw.utils.extend({},jasmineInterface,context);
 	// Iterate through all the test modules
-	var tests = $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
+	const tests = $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
 	$tw.utils.each(tests,evalInContext);
 	// In a browser environment, we use jasmine-core/boot.js to call `execute()` for us.
 	// In Node.js, we call it manually.

@@ -19,17 +19,17 @@ Adds the following properties to the wiki object:
 
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
+const widget = require("$:/core/modules/widgets/widget.js");
 
-var USER_NAME_TITLE = "$:/status/UserName",
-	TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
+const USER_NAME_TITLE = "$:/status/UserName";
+const TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
 
 /*
 Add available indexers to this wiki
 */
 exports.addIndexersToWiki = function() {
-	var self = this;
-	$tw.utils.each($tw.modules.applyMethods("indexer"),function(Indexer,name) {
+	const self = this;
+	$tw.utils.each($tw.modules.applyMethods("indexer"),(Indexer,name) => {
 		self.addIndexer(new Indexer(self),name);
 	});
 };
@@ -42,10 +42,10 @@ Get the value of a text reference. Text references can have any of these forms:
 	<tiddlertitle>##<index>
 */
 exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
-	var tr = $tw.utils.parseTextReference(textRef),
-		title = tr.title || currTiddlerTitle;
+	const tr = $tw.utils.parseTextReference(textRef);
+	const title = tr.title || currTiddlerTitle;
 	if(tr.field) {
-		var tiddler = this.getTiddler(title);
+		const tiddler = this.getTiddler(title);
 		if(tr.field === "title") { // Special case so we can return the title of a non-existent tiddler
 			return title || defaultText;
 		} else if(tiddler && $tw.utils.hop(tiddler.fields,tr.field)) {
@@ -61,18 +61,18 @@ exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 };
 
 exports.setTextReference = function(textRef,value,currTiddlerTitle) {
-	var tr = $tw.utils.parseTextReference(textRef),
-		title = tr.title || currTiddlerTitle;
+	const tr = $tw.utils.parseTextReference(textRef);
+	const title = tr.title || currTiddlerTitle;
 	this.setText(title,tr.field,tr.index,value);
 };
 
 exports.setText = function(title,field,index,value,options) {
 	options = options || {};
-	var creationFields = options.suppressTimestamp ? {} : this.getCreationFields(),
-		modificationFields = options.suppressTimestamp ? {} : this.getModificationFields();
+	const creationFields = options.suppressTimestamp ? {} : this.getCreationFields();
+	const modificationFields = options.suppressTimestamp ? {} : this.getModificationFields();
 	// Check if it is a reference to a tiddler field
 	if(index) {
-		var data = this.getTiddlerData(title,Object.create(null));
+		const data = this.getTiddlerData(title,Object.create(null));
 		if(value !== undefined) {
 			data[index] = value;
 		} else {
@@ -80,20 +80,20 @@ exports.setText = function(title,field,index,value,options) {
 		}
 		this.setTiddlerData(title,data,{},{suppressTimestamp: options.suppressTimestamp});
 	} else {
-		var tiddler = this.getTiddler(title),
-			fields = {title: title};
+		const tiddler = this.getTiddler(title);
+		const fields = {title};
 		fields[field || "text"] = value;
 		this.addTiddler(new $tw.Tiddler(creationFields,tiddler,fields,modificationFields));
 	}
 };
 
 exports.deleteTextReference = function(textRef,currTiddlerTitle) {
-	var tr = $tw.utils.parseTextReference(textRef),
-		title,tiddler,fields;
+	const tr = $tw.utils.parseTextReference(textRef);
+	let title; let tiddler; let fields;
 	// Check if it is a reference to a tiddler
 	if(tr.title && !tr.field) {
 		this.deleteTiddler(tr.title);
-	// Else check for a field reference
+		// Else check for a field reference
 	} else if(tr.field) {
 		title = tr.title || currTiddlerTitle;
 		tiddler = this.getTiddler(title);
@@ -107,14 +107,14 @@ exports.deleteTextReference = function(textRef,currTiddlerTitle) {
 
 exports.addEventListener = function(type,listener) {
 	this.eventListeners = this.eventListeners || {};
-	this.eventListeners[type] = this.eventListeners[type]  || [];
+	this.eventListeners[type] = this.eventListeners[type] || [];
 	this.eventListeners[type].push(listener);
 };
 
 exports.removeEventListener = function(type,listener) {
-	var listeners = this.eventListeners[type];
+	const listeners = this.eventListeners[type];
 	if(listeners) {
-		var p = listeners.indexOf(listener);
+		const p = listeners.indexOf(listener);
 		if(p !== -1) {
 			listeners.splice(p,1);
 		}
@@ -122,11 +122,11 @@ exports.removeEventListener = function(type,listener) {
 };
 
 exports.dispatchEvent = function(type /*, args */) {
-	var args = Array.prototype.slice.call(arguments,1),
-		listeners = this.eventListeners[type];
+	const args = Array.prototype.slice.call(arguments,1);
+	const listeners = this.eventListeners[type];
 	if(listeners) {
-		for(var p=0; p<listeners.length; p++) {
-			var listener = listeners[p];
+		for(let p = 0;p < listeners.length;p++) {
+			const listener = listeners[p];
 			listener.apply(listener,args);
 		}
 	}
@@ -157,9 +157,9 @@ exports.enqueueTiddlerEvent = function(title,isDeleted,isShadow) {
 	// Trigger events
 	this.eventListeners = this.eventListeners || {};
 	if(!this.eventsTriggered) {
-		var self = this;
-		$tw.utils.nextTick(function() {
-			var changes = self.changedTiddlers;
+		const self = this;
+		$tw.utils.nextTick(() => {
+			const changes = self.changedTiddlers;
 			self.changedTiddlers = Object.create(null);
 			self.eventsTriggered = false;
 			if($tw.utils.count(changes) > 0) {
@@ -194,22 +194,22 @@ options.prefix must be a string
 */
 exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
-	var title = baseTitle,
-		template = options.template || "",
-		// test if .startCount is a positive integer. If not set to 0
-		c = (parseInt(options.startCount,10) > 0) ? parseInt(options.startCount,10) : 0,
-		prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
+	let title = baseTitle;
+	let template = options.template || "";
+	// test if .startCount is a positive integer. If not set to 0
+	let c = (parseInt(options.startCount,10) > 0) ? parseInt(options.startCount,10) : 0;
+	const prefix = (typeof (options.prefix) === "string") ? options.prefix : " ";
 
-	if (template) {
+	if(template) {
 		// "count" is important to avoid an endless loop in while(...)!!
-		template = (/\$count:?(\d+)?\$/i.test(template)) ? template : template + "$count$";
+		template = (/\$count:?(\d+)?\$/i.test(template)) ? template : `${template}$count$`;
 		// .formatTitleString() expects strings as input
-		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c+""});
+		title = $tw.utils.formatTitleString(template,{"base": baseTitle,"separator": prefix,"counter": `${c}`});
 		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
-			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)+""});
+			title = $tw.utils.formatTitleString(template,{"base": baseTitle,"separator": prefix,"counter": `${++c}`});
 		}
 	} else {
-		if (c > 0) {
+		if(c > 0) {
 			title = baseTitle + prefix + c;
 		}
 		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
@@ -232,19 +232,19 @@ exports.isVolatileTiddler = function(title) {
 };
 
 exports.isImageTiddler = function(title) {
-	var tiddler = this.getTiddler(title);
+	const tiddler = this.getTiddler(title);
 	if(tiddler) {
-		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
-		return !!contentTypeInfo && contentTypeInfo.flags.indexOf("image") !== -1;
+		const contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
+		return !!contentTypeInfo && contentTypeInfo.flags.includes("image");
 	} else {
 		return null;
 	}
 };
 
 exports.isBinaryTiddler = function(title) {
-	var tiddler = this.getTiddler(title);
+	const tiddler = this.getTiddler(title);
 	if(tiddler) {
-		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
+		const contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
 		return !!contentTypeInfo && contentTypeInfo.encoding === "base64";
 	} else {
 		return null;
@@ -255,7 +255,7 @@ exports.isBinaryTiddler = function(title) {
 Like addTiddler() except it will silently reject any plugin tiddlers that are older than the currently loaded version. Returns true if the tiddler was imported
 */
 exports.importTiddler = function(tiddler) {
-	var existingTiddler = this.getTiddler(tiddler.fields.title);
+	const existingTiddler = this.getTiddler(tiddler.fields.title);
 	// Check if we're dealing with a plugin
 	if(tiddler && tiddler.hasField("plugin-type") && tiddler.hasField("version") && existingTiddler && existingTiddler.hasField("plugin-type") && existingTiddler.hasField("version")) {
 		// Reject the incoming plugin if it is older
@@ -273,10 +273,10 @@ Return a hashmap of the fields that should be set when a tiddler is created
 */
 exports.getCreationFields = function() {
 	if(this.getTiddlerText(TIMESTAMP_DISABLE_TITLE,"").toLowerCase() !== "yes") {
-		var fields = {
-				created: new Date()
-			},
-			creator = this.getTiddlerText(USER_NAME_TITLE);
+		const fields = {
+			created: new Date()
+		};
+		const creator = this.getTiddlerText(USER_NAME_TITLE);
 		if(creator) {
 			fields.creator = creator;
 		}
@@ -291,8 +291,8 @@ Return a hashmap of the fields that should be set when a tiddler is modified
 */
 exports.getModificationFields = function() {
 	if(this.getTiddlerText(TIMESTAMP_DISABLE_TITLE,"").toLowerCase() !== "yes") {
-		var fields = Object.create(null),
-			modifier = this.getTiddlerText(USER_NAME_TITLE);
+		const fields = Object.create(null);
+		const modifier = this.getTiddlerText(USER_NAME_TITLE);
 		fields.modified = new Date();
 		if(modifier) {
 			fields.modifier = modifier;
@@ -311,19 +311,19 @@ includeSystem: whether to include system tiddlers (defaults to false)
 */
 exports.getTiddlers = function(options) {
 	options = options || Object.create(null);
-	var self = this,
-		sortField = options.sortField || "title",
-		tiddlers = [], t, titles = [];
-	this.each(function(tiddler,title) {
+	const self = this;
+	const sortField = options.sortField || "title";
+	const tiddlers = []; let t; const titles = [];
+	this.each((tiddler,title) => {
 		if(options.includeSystem || !self.isSystemTiddler(title)) {
 			if(!options.excludeTag || !tiddler.hasTag(options.excludeTag)) {
 				tiddlers.push(tiddler);
 			}
 		}
 	});
-	tiddlers.sort(function(a,b) {
-		var aa = a.fields[sortField].toLowerCase() || "",
-			bb = b.fields[sortField].toLowerCase() || "";
+	tiddlers.sort((a,b) => {
+		const aa = a.fields[sortField].toLowerCase() || "";
+		const bb = b.fields[sortField].toLowerCase() || "";
 		if(aa < bb) {
 			return -1;
 		} else {
@@ -334,14 +334,14 @@ exports.getTiddlers = function(options) {
 			}
 		}
 	});
-	for(t=0; t<tiddlers.length; t++) {
+	for(t = 0;t < tiddlers.length;t++) {
 		titles.push(tiddlers[t].fields.title);
 	}
 	return titles;
 };
 
 exports.countTiddlers = function(excludeTag) {
-	var tiddlers = this.getTiddlers({excludeTag: excludeTag});
+	const tiddlers = this.getTiddlers({excludeTag});
 	return $tw.utils.count(tiddlers);
 };
 
@@ -349,14 +349,14 @@ exports.countTiddlers = function(excludeTag) {
 Returns a function iterator(callback) that iterates through the specified titles, and invokes the callback with callback(tiddler,title)
 */
 exports.makeTiddlerIterator = function(titles) {
-	var self = this;
+	const self = this;
 	if(!$tw.utils.isArray(titles)) {
 		titles = Object.keys(titles);
 	} else {
-		titles = titles.slice(0);
+		titles = [...titles];
 	}
 	return function(callback) {
-		titles.forEach(function(title) {
+		titles.forEach((title) => {
 			callback(self.getTiddler(title),title);
 		});
 	};
@@ -370,33 +370,33 @@ Sort an array of tiddler titles by a specified field
 	isCaseSensitive: true if the sort should consider upper and lower case letters to be different
 */
 exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric,isAlphaNumeric) {
-	var self = this;
+	const self = this;
 	if(sortField === "title") {
 		if(!isNumeric && !isAlphaNumeric) {
 			if(isCaseSensitive) {
 				if(isDescending) {
-					titles.sort(function(a,b) {
+					titles.sort((a,b) => {
 						return b.localeCompare(a);
 					});
 				} else {
-					titles.sort(function(a,b) {
+					titles.sort((a,b) => {
 						return a.localeCompare(b);
 					});
-				}	
+				}
 			} else {
 				if(isDescending) {
-					titles.sort(function(a,b) {
+					titles.sort((a,b) => {
 						return b.toLowerCase().localeCompare(a.toLowerCase());
 					});
 				} else {
-					titles.sort(function(a,b) {
+					titles.sort((a,b) => {
 						return a.toLowerCase().localeCompare(b.toLowerCase());
 					});
-				}	
+				}
 			}
 		} else {
-			titles.sort(function(a,b) {
-				var x,y;
+			titles.sort((a,b) => {
+				let x; let y;
 				if(isNumeric) {
 					x = Number(a);
 					y = Number(b);
@@ -410,7 +410,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 						if(isNaN(y)) {
 							return isDescending ? 1 : -1;
 						} else {
-							return isDescending ? y - x :  x - y;
+							return isDescending ? y - x : x - y;
 						}
 					}
 				}
@@ -425,11 +425,11 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			});
 		}
 	} else {
-		titles.sort(function(a,b) {
-			var x,y;
+		titles.sort((a,b) => {
+			let x; let y;
 			if(sortField !== "title") {
-				var tiddlerA = self.getTiddler(a),
-					tiddlerB = self.getTiddler(b);
+				const tiddlerA = self.getTiddler(a);
+				const tiddlerB = self.getTiddler(b);
 				if(tiddlerA) {
 					a = tiddlerA.fields[sortField] || "";
 				} else {
@@ -454,7 +454,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 					if(isNaN(y)) {
 						return isDescending ? 1 : -1;
 					} else {
-						return isDescending ? y - x :  x - y;
+						return isDescending ? y - x : x - y;
 					}
 				}
 			}
@@ -482,12 +482,12 @@ excludeTag: tag to exclude
 includeSystem: whether to include system tiddlers (defaults to false)
 */
 exports.forEachTiddler = function(/* [options,]callback */) {
-	var arg = 0,
-		options = arguments.length >= 2 ? arguments[arg++] : {},
-		callback = arguments[arg++],
-		titles = this.getTiddlers(options),
-		t, tiddler;
-	for(t=0; t<titles.length; t++) {
+	let arg = 0;
+	const options = arguments.length >= 2 ? arguments[arg++] : {};
+	const callback = arguments[arg++];
+	const titles = this.getTiddlers(options);
+	let t; let tiddler;
+	for(t = 0;t < titles.length;t++) {
 		tiddler = this.getTiddler(titles[t]);
 		if(tiddler) {
 			callback.call(this,tiddler.fields.title,tiddler);
@@ -500,21 +500,21 @@ Return an array of tiddler titles that are directly linked within the given pars
  */
 exports.extractLinks = function(parseTreeRoot) {
 	// Count up the links
-	var links = [],
-		checkParseTree = function(parseTree) {
-			for(var t=0; t<parseTree.length; t++) {
-				var parseTreeNode = parseTree[t];
-				if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
-					var value = parseTreeNode.attributes.to.value;
-					if(links.indexOf(value) === -1) {
-						links.push(value);
-					}
-				}
-				if(parseTreeNode.children) {
-					checkParseTree(parseTreeNode.children);
+	const links = [];
+	const checkParseTree = function(parseTree) {
+		for(let t = 0;t < parseTree.length;t++) {
+			const parseTreeNode = parseTree[t];
+			if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
+				const {value} = parseTreeNode.attributes.to;
+				if(!links.includes(value)) {
+					links.push(value);
 				}
 			}
-		};
+			if(parseTreeNode.children) {
+				checkParseTree(parseTreeNode.children);
+			}
+		}
+	};
 	checkParseTree(parseTreeRoot);
 	return links;
 };
@@ -523,11 +523,11 @@ exports.extractLinks = function(parseTreeRoot) {
 Return an array of tiddler titles that are directly linked from the specified tiddler
 */
 exports.getTiddlerLinks = function(title) {
-	var self = this;
+	const self = this;
 	// We'll cache the links so they only get computed if the tiddler changes
-	return this.getCacheForTiddler(title,"links",function() {
+	return this.getCacheForTiddler(title,"links",() => {
 		// Parse the tiddler
-		var parser = self.parseTiddler(title);
+		const parser = self.parseTiddler(title);
 		if(parser) {
 			return self.extractLinks(parser.tree);
 		}
@@ -539,15 +539,15 @@ exports.getTiddlerLinks = function(title) {
 Return an array of tiddler titles that link to the specified tiddler
 */
 exports.getTiddlerBacklinks = function(targetTitle) {
-	var self = this,
-		backIndexer = this.getIndexer("BackIndexer"),
-		backlinks = backIndexer && backIndexer.subIndexers.link.lookup(targetTitle);
+	const self = this;
+	const backIndexer = this.getIndexer("BackIndexer");
+	let backlinks = backIndexer && backIndexer.subIndexers.link.lookup(targetTitle);
 
 	if(!backlinks) {
 		backlinks = [];
-		this.forEachTiddler(function(title,tiddler) {
-			var links = self.getTiddlerLinks(title);
-			if(links.indexOf(targetTitle) !== -1) {
+		this.forEachTiddler((title,tiddler) => {
+			const links = self.getTiddlerLinks(title);
+			if(links.includes(targetTitle)) {
 				backlinks.push(title);
 			}
 		});
@@ -559,46 +559,46 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 /*
 Return an array of tiddler titles that are directly transcluded within the given parse tree. `title` is the tiddler being parsed, we will ignore its self-referential transclusions, only return
  */
-exports.extractTranscludes = function(parseTreeRoot, title) {
+exports.extractTranscludes = function(parseTreeRoot,title) {
 	// Count up the transcludes
-	var transcludes = [],
-		checkParseTree = function(parseTree, parentNode) {
-			for(var t=0; t<parseTree.length; t++) {
-				var parseTreeNode = parseTree[t];
-				if(parseTreeNode.type === "transclude") {
-					if(parseTreeNode.attributes.$tiddler) {
-						if(parseTreeNode.attributes.$tiddler.type === "string") {
-							var value;
-							// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
-							if(parentNode && parentNode.type === "tiddler" && parentNode.attributes.tiddler && parentNode.attributes.tiddler.type === "string") {
-								// Empty value (like `{{!!field}}`) means self-referential transclusion.
-								value = parentNode.attributes.tiddler.value || title;
-							} else {
-								value = parseTreeNode.attributes.$tiddler.value;
-							}
+	const transcludes = [];
+	const checkParseTree = function(parseTree,parentNode) {
+		for(let t = 0;t < parseTree.length;t++) {
+			const parseTreeNode = parseTree[t];
+			if(parseTreeNode.type === "transclude") {
+				if(parseTreeNode.attributes.$tiddler) {
+					if(parseTreeNode.attributes.$tiddler.type === "string") {
+						var value;
+						// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
+						if(parentNode && parentNode.type === "tiddler" && parentNode.attributes.tiddler && parentNode.attributes.tiddler.type === "string") {
+							// Empty value (like `{{!!field}}`) means self-referential transclusion.
+							value = parentNode.attributes.tiddler.value || title;
+						} else {
+							value = parseTreeNode.attributes.$tiddler.value;
 						}
-					} else if(parseTreeNode.attributes.tiddler) {
-						if (parseTreeNode.attributes.tiddler.type === "string") {
-							// Old transclude widget usage
-							value = parseTreeNode.attributes.tiddler.value;
-						}
-					} else if(parseTreeNode.attributes.$field && parseTreeNode.attributes.$field.type === "string") {
-						// Empty value (like `<$transclude $field='created'/>`) means self-referential transclusion. 
-						value = title;
-					} else if(parseTreeNode.attributes.field && parseTreeNode.attributes.field.type === "string") {
-						// Old usage with Empty value (like `<$transclude field='created'/>`)
-						value = title;
 					}
-					// Deduplicate the result.
-					if(value && transcludes.indexOf(value) === -1) {
-						$tw.utils.pushTop(transcludes,value);
+				} else if(parseTreeNode.attributes.tiddler) {
+					if(parseTreeNode.attributes.tiddler.type === "string") {
+						// Old transclude widget usage
+						value = parseTreeNode.attributes.tiddler.value;
 					}
+				} else if(parseTreeNode.attributes.$field && parseTreeNode.attributes.$field.type === "string") {
+					// Empty value (like `<$transclude $field='created'/>`) means self-referential transclusion. 
+					value = title;
+				} else if(parseTreeNode.attributes.field && parseTreeNode.attributes.field.type === "string") {
+					// Old usage with Empty value (like `<$transclude field='created'/>`)
+					value = title;
 				}
-				if(parseTreeNode.children) {
-					checkParseTree(parseTreeNode.children,parseTreeNode);
+				// Deduplicate the result.
+				if(value && !transcludes.includes(value)) {
+					$tw.utils.pushTop(transcludes,value);
 				}
 			}
-		};
+			if(parseTreeNode.children) {
+				checkParseTree(parseTreeNode.children,parseTreeNode);
+			}
+		}
+	};
 	checkParseTree(parseTreeRoot);
 	return transcludes;
 };
@@ -608,11 +608,11 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 Return an array of tiddler titles that are transcluded from the specified tiddler
 */
 exports.getTiddlerTranscludes = function(title) {
-	var self = this;
+	const self = this;
 	// We'll cache the transcludes so they only get computed if the tiddler changes
-	return this.getCacheForTiddler(title,"transcludes",function() {
+	return this.getCacheForTiddler(title,"transcludes",() => {
 		// Parse the tiddler
-		var parser = self.parseTiddler(title);
+		const parser = self.parseTiddler(title);
 		if(parser) {
 			// this will ignore self-referential transclusions from `title`
 			return self.extractTranscludes(parser.tree,title);
@@ -625,9 +625,9 @@ exports.getTiddlerTranscludes = function(title) {
 Return an array of tiddler titles that transclude to the specified tiddler
 */
 exports.getTiddlerBacktranscludes = function(targetTitle) {
-	var self = this,
-		backIndexer = this.getIndexer("BackIndexer"),
-		backtranscludes = backIndexer && backIndexer.subIndexers.transclude.lookup(targetTitle);
+	const self = this;
+	const backIndexer = this.getIndexer("BackIndexer");
+	let backtranscludes = backIndexer && backIndexer.subIndexers.transclude.lookup(targetTitle);
 
 	if(!backtranscludes) {
 		backtranscludes = [];
@@ -639,13 +639,13 @@ exports.getTiddlerBacktranscludes = function(targetTitle) {
 Return a hashmap of tiddler titles that are referenced but not defined. Each value is the number of times the missing tiddler is referenced
 */
 exports.getMissingTitles = function() {
-	var self = this,
-		missing = [];
-// We should cache the missing tiddler list, even if we recreate it every time any tiddler is modified
-	this.forEachTiddler(function(title,tiddler) {
-		var links = self.getTiddlerLinks(title);
-		$tw.utils.each(links,function(link) {
-			if((!self.tiddlerExists(link) && !self.isShadowTiddler(link)) && missing.indexOf(link) === -1) {
+	const self = this;
+	const missing = [];
+	// We should cache the missing tiddler list, even if we recreate it every time any tiddler is modified
+	this.forEachTiddler((title,tiddler) => {
+		const links = self.getTiddlerLinks(title);
+		$tw.utils.each(links,(link) => {
+			if((!self.tiddlerExists(link) && !self.isShadowTiddler(link)) && !missing.includes(link)) {
 				missing.push(link);
 			}
 		});
@@ -654,12 +654,12 @@ exports.getMissingTitles = function() {
 };
 
 exports.getOrphanTitles = function() {
-	var self = this,
-		orphans = this.getTiddlers();
-	this.forEachTiddler(function(title,tiddler) {
-		var links = self.getTiddlerLinks(title);
-		$tw.utils.each(links,function(link) {
-			var p = orphans.indexOf(link);
+	const self = this;
+	const orphans = this.getTiddlers();
+	this.forEachTiddler((title,tiddler) => {
+		const links = self.getTiddlerLinks(title);
+		$tw.utils.each(links,(link) => {
+			const p = orphans.indexOf(link);
 			if(p !== -1) {
 				orphans.splice(p,1);
 			}
@@ -673,13 +673,13 @@ Retrieves a list of the tiddler titles that are tagged with a given tag
 */
 exports.getTiddlersWithTag = function(tag) {
 	// Try to use the indexer
-	var self = this,
-		tagIndexer = this.getIndexer("TagIndexer"),
-		results = tagIndexer && tagIndexer.subIndexers[3].lookup(tag);
+	const self = this;
+	const tagIndexer = this.getIndexer("TagIndexer");
+	let results = tagIndexer && tagIndexer.subIndexers[3].lookup(tag);
 	if(!results) {
 		// If not available, perform a manual scan
-		results = this.getGlobalCache("taglist-" + tag,function() {
-			var tagmap = self.getTagMap();
+		results = this.getGlobalCache(`taglist-${tag}`,() => {
+			const tagmap = self.getTagMap();
 			return self.sortByList(tagmap[tag],tag);
 		});
 	}
@@ -690,30 +690,30 @@ exports.getTiddlersWithTag = function(tag) {
 Get a hashmap by tag of arrays of tiddler titles
 */
 exports.getTagMap = function() {
-	var self = this;
-	return this.getGlobalCache("tagmap",function() {
-		var tags = Object.create(null),
-			storeTags = function(tagArray,title) {
-				if(tagArray) {
-					for(var index=0; index<tagArray.length; index++) {
-						var tag = tagArray[index];
-						if($tw.utils.hop(tags,tag)) {
-							tags[tag].push(title);
-						} else {
-							tags[tag] = [title];
-						}
+	const self = this;
+	return this.getGlobalCache("tagmap",() => {
+		const tags = Object.create(null);
+		const storeTags = function(tagArray,title) {
+			if(tagArray) {
+				for(let index = 0;index < tagArray.length;index++) {
+					const tag = tagArray[index];
+					if($tw.utils.hop(tags,tag)) {
+						tags[tag].push(title);
+					} else {
+						tags[tag] = [title];
 					}
 				}
-			},
-			title, tiddler;
+			}
+		};
+		let title; let tiddler;
 		// Collect up all the tags
-		self.eachShadow(function(tiddler,title) {
+		self.eachShadow((tiddler,title) => {
 			if(!self.tiddlerExists(title)) {
 				tiddler = self.getTiddler(title);
 				storeTags(tiddler.fields.tags,title);
 			}
 		});
-		self.each(function(tiddler,title) {
+		self.each((tiddler,title) => {
 			storeTags(tiddler.fields.tags,title);
 		});
 		return tags;
@@ -725,16 +725,16 @@ Lookup a given tiddler and return a list of all the tiddlers that include it in 
 */
 exports.findListingsOfTiddler = function(targetTitle,fieldName) {
 	fieldName = fieldName || "list";
-	var wiki = this;
-	var listings = this.getGlobalCache("listings-" + fieldName,function() {
-		var listings = Object.create(null);
-		wiki.each(function(tiddler,title) {
-			var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
+	const wiki = this;
+	const listings = this.getGlobalCache(`listings-${fieldName}`,() => {
+		const listings = Object.create(null);
+		wiki.each((tiddler,title) => {
+			const list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
 			if(list) {
-				for(var i = 0; i < list.length; i++) {
-					var listItem = list[i],
-						listing = listings[listItem] || [];
-					if (listing.indexOf(title) === -1) {
+				for(let i = 0;i < list.length;i++) {
+					const listItem = list[i];
+					const listing = listings[listItem] || [];
+					if(!listing.includes(title)) {
 						listing.push(title);
 					}
 					listings[listItem] = listing;
@@ -750,18 +750,18 @@ exports.findListingsOfTiddler = function(targetTitle,fieldName) {
 Sorts an array of tiddler titles according to an ordered list
 */
 exports.sortByList = function(array,listTitle) {
-	var self = this,
-		replacedTitles = Object.create(null);
+	const self = this;
+	const replacedTitles = Object.create(null);
 	// Given a title, this function will place it in the correct location
 	// within titles.
 	function moveItemInList(title) {
-		if(!$tw.utils.hop(replacedTitles, title)) {
+		if(!$tw.utils.hop(replacedTitles,title)) {
 			replacedTitles[title] = true;
-			var newPos = -1,
-				tiddler = self.getTiddler(title);
+			let newPos = -1;
+			const tiddler = self.getTiddler(title);
 			if(tiddler) {
-				var beforeTitle = tiddler.fields["list-before"],
-					afterTitle = tiddler.fields["list-after"];
+				const beforeTitle = tiddler.fields["list-before"];
+				const afterTitle = tiddler.fields["list-after"];
 				if(beforeTitle === "") {
 					newPos = 0;
 				} else if(afterTitle === "") {
@@ -782,14 +782,14 @@ exports.sortByList = function(array,listTitle) {
 					}
 				}
 				// If a new position is specified, let's move it
-				if (newPos !== -1) {
+				if(newPos !== -1) {
 					// get its current Pos, and make sure
 					// sure that it's _actually_ in the list
 					// and that it would _actually_ move
 					// (#4275) We don't bother calling
 					//         indexOf unless we have a new
 					//         position to work with
-					var currPos = titles.indexOf(title);
+					const currPos = titles.indexOf(title);
 					if(currPos >= 0 && newPos !== currPos) {
 						// move it!
 						titles.splice(currPos,1);
@@ -802,28 +802,28 @@ exports.sortByList = function(array,listTitle) {
 			}
 		}
 	}
-	var list = this.getTiddlerList(listTitle);
+	const list = this.getTiddlerList(listTitle);
 	if(!array || array.length === 0) {
 		return [];
 	} else {
-		var titles = [], t, title;
+		var titles = []; let t; let title;
 		// First place any entries that are present in the list
-		for(t=0; t<list.length; t++) {
+		for(t = 0;t < list.length;t++) {
 			title = list[t];
-			if(array.indexOf(title) !== -1) {
+			if(array.includes(title)) {
 				titles.push(title);
 			}
 		}
 		// Then place any remaining entries
-		for(t=0; t<array.length; t++) {
+		for(t = 0;t < array.length;t++) {
 			title = array[t];
-			if(list.indexOf(title) === -1) {
+			if(!list.includes(title)) {
 				titles.push(title);
 			}
 		}
 		// Finally obey the list-before and list-after fields of each tiddler in turn
-		var sortedTitles = titles.slice(0);
-		for(t=0; t<sortedTitles.length; t++) {
+		const sortedTitles = [...titles];
+		for(t = 0;t < sortedTitles.length;t++) {
 			title = sortedTitles[t];
 			moveItemInList(title);
 		}
@@ -832,9 +832,9 @@ exports.sortByList = function(array,listTitle) {
 };
 
 exports.getSubTiddler = function(title,subTiddlerTitle) {
-	var bundleInfo = this.getPluginInfo(title) || this.getTiddlerDataCached(title);
+	const bundleInfo = this.getPluginInfo(title) || this.getTiddlerDataCached(title);
 	if(bundleInfo && bundleInfo.tiddlers) {
-		var subTiddler = bundleInfo.tiddlers[subTiddlerTitle];
+		const subTiddler = bundleInfo.tiddlers[subTiddlerTitle];
 		if(subTiddler) {
 			return new $tw.Tiddler(subTiddler);
 		}
@@ -846,27 +846,27 @@ exports.getSubTiddler = function(title,subTiddlerTitle) {
 Retrieve a tiddler as a JSON string of the fields
 */
 exports.getTiddlerAsJson = function(title) {
-	var tiddler = this.getTiddler(title);
+	const tiddler = this.getTiddler(title);
 	if(tiddler) {
-		var fields = Object.create(null);
-		$tw.utils.each(tiddler.fields,function(value,name) {
+		const fields = Object.create(null);
+		$tw.utils.each(tiddler.fields,(value,name) => {
 			fields[name] = tiddler.getFieldString(name);
 		});
 		return JSON.stringify(fields);
 	} else {
-		return JSON.stringify({title: title});
+		return JSON.stringify({title});
 	}
 };
 
 exports.getTiddlersAsJson = function(filter,spaces) {
-	var tiddlers = this.filterTiddlers(filter),
-		spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces,
-		data = [];
-	for(var t=0;t<tiddlers.length; t++) {
-		var tiddler = this.getTiddler(tiddlers[t]);
+	const tiddlers = this.filterTiddlers(filter);
+	var spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces;
+	const data = [];
+	for(let t = 0;t < tiddlers.length;t++) {
+		const tiddler = this.getTiddler(tiddlers[t]);
 		if(tiddler) {
-			var fields = new Object();
-			for(var field in tiddler.fields) {
+			const fields = new Object();
+			for(const field in tiddler.fields) {
 				fields[field] = tiddler.getFieldString(field);
 			}
 			data.push(fields);
@@ -889,15 +889,15 @@ defaultData: default data to be returned if the tiddler is missing or doesn't co
 Note that the same value is returned for repeated calls for the same tiddler data. The value is frozen to prevent modification; otherwise modifications would be visible to all callers
 */
 exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
-	var self = this,
-		tiddler = titleOrTiddler;
+	const self = this;
+	let tiddler = titleOrTiddler;
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = this.getTiddler(tiddler);
 	}
 	if(tiddler) {
-		return this.getCacheForTiddler(tiddler.fields.title,"data",function() {
+		return this.getCacheForTiddler(tiddler.fields.title,"data",() => {
 			// Return the frozen value
-			var value = self.getTiddlerData(tiddler.fields.title,undefined);
+			const value = self.getTiddlerData(tiddler.fields.title,undefined);
 			$tw.utils.deepFreeze(value);
 			return value;
 		}) || defaultData;
@@ -910,18 +910,20 @@ exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 Alternative, uncached version of getTiddlerDataCached(). The return value can be mutated freely and reused
 */
 exports.getTiddlerData = function(titleOrTiddler,defaultData) {
-	var tiddler = titleOrTiddler,
-		data;
+	let tiddler = titleOrTiddler;
+	let data;
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = this.getTiddler(tiddler);
 	}
 	if(tiddler && tiddler.fields.text) {
 		switch(tiddler.fields.type) {
-			case "application/json":
+			case "application/json": {
 				// JSON tiddler
 				return $tw.utils.parseJSONSafe(tiddler.fields.text,defaultData);
-			case "application/x-tiddler-dictionary":
+			}
+			case "application/x-tiddler-dictionary": {
 				return $tw.utils.parseFields(tiddler.fields.text);
+			}
 		}
 	}
 	return defaultData;
@@ -931,8 +933,8 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 Extract an indexed field from within a data tiddler
 */
 exports.extractTiddlerDataItem = function(titleOrTiddler,index,defaultText) {
-	var data = this.getTiddlerDataCached(titleOrTiddler,Object.create(null)),
-		text;
+	const data = this.getTiddlerDataCached(titleOrTiddler,Object.create(null));
+	let text;
 	if(data && $tw.utils.hop(data,index)) {
 		text = data[index];
 	}
@@ -953,12 +955,12 @@ options: optional hashmap of options including:
 */
 exports.setTiddlerData = function(title,data,fields,options) {
 	options = options || {};
-	var existingTiddler = this.getTiddler(title),
-		creationFields = options.suppressTimestamp ? {} : this.getCreationFields(),
-		modificationFields = options.suppressTimestamp ? {} : this.getModificationFields(),
-		newFields = {
-			title: title
-		};
+	const existingTiddler = this.getTiddler(title);
+	const creationFields = options.suppressTimestamp ? {} : this.getCreationFields();
+	const modificationFields = options.suppressTimestamp ? {} : this.getModificationFields();
+	const newFields = {
+		title
+	};
 	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
 		newFields.text = $tw.utils.makeTiddlerDictionary(data);
 	} else {
@@ -976,9 +978,9 @@ exports.getTiddlerList = function(title,field,index) {
 		return $tw.utils.parseStringArray(this.extractTiddlerDataItem(title,index,""));
 	}
 	field = field || "list";
-	var tiddler = this.getTiddler(title);
+	const tiddler = this.getTiddler(title);
 	if(tiddler) {
-		return ($tw.utils.parseStringArray(tiddler.fields[field]) || []).slice(0);
+		return [...($tw.utils.parseStringArray(tiddler.fields[field]) || [])];
 	}
 	return [];
 };
@@ -1001,7 +1003,7 @@ exports.clearGlobalCache = function() {
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
 exports.getCacheForTiddler = function(title,cacheName,initializer) {
 	this.caches = this.caches || Object.create(null);
-	var caches = this.caches[title];
+	let caches = this.caches[title];
 	if(caches && caches[cacheName] !== undefined) {
 		return caches[cacheName];
 	} else {
@@ -1029,9 +1031,9 @@ exports.clearCache = function(title) {
 exports.initParsers = function(moduleType) {
 	// Install the parser modules
 	$tw.Wiki.parsers = {};
-	var self = this;
-	$tw.modules.forEachModuleOfType("parser",function(title,module) {
-		for(var f in module) {
+	const self = this;
+	$tw.modules.forEachModuleOfType("parser",(title,module) => {
+		for(const f in module) {
 			if($tw.utils.hop(module,f)) {
 				$tw.Wiki.parsers[f] = module[f]; // Store the parser class
 			}
@@ -1039,7 +1041,7 @@ exports.initParsers = function(moduleType) {
 	});
 	// Use the generic binary parser for any binary types not registered so far
 	if($tw.Wiki.parsers["application/octet-stream"]) {
-		Object.keys($tw.config.contentTypeInfo).forEach(function(type) {
+		Object.keys($tw.config.contentTypeInfo).forEach((type) => {
 			if(!$tw.utils.hop($tw.Wiki.parsers,type) && $tw.config.contentTypeInfo[type].encoding === "base64") {
 				$tw.Wiki.parsers[type] = $tw.Wiki.parsers["application/octet-stream"];
 			}
@@ -1060,7 +1062,7 @@ exports.parseText = function(type,text,options) {
 	text = text || "";
 	options = options || {};
 	// Select a parser
-	var Parser = $tw.Wiki.parsers[type];
+	let Parser = $tw.Wiki.parsers[type];
 	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
 		Parser = $tw.Wiki.parsers[$tw.utils.getFileExtensionInfo(type).type];
 	}
@@ -1084,28 +1086,28 @@ Parse a tiddler according to its MIME type
 */
 exports.parseTiddler = function(title,options) {
 	options = $tw.utils.extend({},options);
-	var cacheType = options.parseAsInline ? "inlineParseTree" : "blockParseTree",
-		tiddler = this.getTiddler(title),
-		self = this;
-	return tiddler ? this.getCacheForTiddler(title,cacheType,function() {
-			if(tiddler.hasField("_canonical_uri")) {
-				options._canonical_uri = tiddler.fields._canonical_uri;
-			}
-			return self.parseText(tiddler.fields.type,tiddler.fields.text,options);
-		}) : null;
+	const cacheType = options.parseAsInline ? "inlineParseTree" : "blockParseTree";
+	const tiddler = this.getTiddler(title);
+	const self = this;
+	return tiddler ? this.getCacheForTiddler(title,cacheType,() => {
+		if(tiddler.hasField("_canonical_uri")) {
+			options._canonical_uri = tiddler.fields._canonical_uri;
+		}
+		return self.parseText(tiddler.fields.type,tiddler.fields.text,options);
+	}) : null;
 };
 
 exports.parseTextReference = function(title,field,index,options) {
-	var tiddler,
-		text,
-		parserInfo;
+	let tiddler;
+	let text;
+	let parserInfo;
 	if(!options.subTiddler) {
 		tiddler = this.getTiddler(title);
 		if(field === "text" || (!field && !index)) {
 			this.getTiddlerText(title); // Force the tiddler to be lazily loaded
 			return this.parseTiddler(title,options);
 		}
-	} 
+	}
 	parserInfo = this.getTextReferenceParserInfo(title,field,index,options);
 	if(parserInfo.sourceText !== null) {
 		return this.parseText(parserInfo.parserType,parserInfo.sourceText,options);
@@ -1115,12 +1117,12 @@ exports.parseTextReference = function(title,field,index,options) {
 };
 
 exports.getTextReferenceParserInfo = function(title,field,index,options) {
-	var defaultType = options.defaultType || "text/vnd.tiddlywiki",
-		tiddler,
-		parserInfo = {
-			sourceText : null,
-			parserType : defaultType
-		};
+	const defaultType = options.defaultType || "text/vnd.tiddlywiki";
+	let tiddler;
+	const parserInfo = {
+		sourceText: null,
+		parserType: defaultType
+	};
 	if(options.subTiddler) {
 		tiddler = this.getSubTiddler(title,options.subTiddler);
 	} else {
@@ -1148,7 +1150,7 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 		parserInfo.parserType = null;
 	}
 	return parserInfo;
-}
+};
 
 /*
 Parse a block of text of a specified MIME type
@@ -1161,20 +1163,20 @@ Options include:
 exports.getSubstitutedText = function(text,widget,options) {
 	options = options || {};
 	text = text || "";
-	var self = this,
-		substitutions = options.substitutions || [],
-		output;
+	const self = this;
+	const substitutions = options.substitutions || [];
+	let output;
 	// Evaluate embedded filters and substitute with first result
-	output = text.replace(/\$\{([\S\s]+?)\}\$/g, function(match,filter) {
+	output = text.replace(/\$\{([\S\s]+?)\}\$/g,(match,filter) => {
 		return self.filterTiddlers(filter,widget)[0] || "";
 	});
 	// Process any substitutions provided in options
-	$tw.utils.each(substitutions,function(substitute) {
-		output = $tw.utils.replaceString(output,new RegExp("\\$" + $tw.utils.escapeRegExp(substitute.name) + "\\$","mg"),substitute.value);
+	$tw.utils.each(substitutions,(substitute) => {
+		output = $tw.utils.replaceString(output,new RegExp(String.raw`\$` + $tw.utils.escapeRegExp(substitute.name) + String.raw`\$`,"mg"),substitute.value);
 	});
 	// Substitute any variable references with their values
-	return output.replace(/\$\((.+?)\)\$/g, function(match,varname) {
-		return widget.getVariable(varname,{defaultValue: ""})
+	return output.replace(/\$\((.+?)\)\$/g,(match,varname) => {
+		return widget.getVariable(varname,{defaultValue: ""});
 	});
 };
 
@@ -1189,21 +1191,20 @@ parentWidget: optional parent widget for the root node
 */
 exports.makeWidget = function(parser,options) {
 	options = options || {};
-	var widgetNode = {
-			type: "widget",
-			children: []
-		},
-		currWidgetNode = widgetNode;
+	const widgetNode = {
+		type: "widget",
+		children: []
+	};
+	let currWidgetNode = widgetNode;
 	// Create let variable widget for variables
 	if($tw.utils.count(options.variables) > 0) {
-		var letVariableWidget = {
+		const letVariableWidget = {
 			type: "let",
-			attributes: {
-			},
+			attributes: {},
 			children: []
 		};
-		$tw.utils.each(options.variables,function(value,name) {
-			$tw.utils.addAttributeToParseTreeNode(letVariableWidget,name,"" + value);
+		$tw.utils.each(options.variables,(value,name) => {
+			$tw.utils.addAttributeToParseTreeNode(letVariableWidget,name,`${value}`);
 		});
 		currWidgetNode.children = [letVariableWidget];
 		currWidgetNode = letVariableWidget;
@@ -1231,35 +1232,40 @@ options.importPageMacros: optional boolean; if true, equivalent to passing "[[$:
 */
 exports.makeTranscludeWidget = function(title,options) {
 	options = options || {};
-	var parseTreeDiv = {tree: [{
+	const parseTreeDiv = {
+		tree: [{
 			type: "element",
 			tag: "div",
-			children: []}]},
-		parseTreeImportVariables = {
-			type: "importvariables",
-			attributes: {
-				filter: {
-					name: "filter",
-					type: "string"
-				}
+			children: []
+		}]
+	};
+	const parseTreeImportVariables = {
+		type: "importvariables",
+		attributes: {
+			filter: {
+				name: "filter",
+				type: "string"
+			}
+		},
+		isBlock: false,
+		children: []
+	};
+	const parseTreeTransclude = {
+		type: "transclude",
+		attributes: {
+			recursionMarker: {
+				name: "recursionMarker",
+				type: "string",
+				value: options.recursionMarker || "yes"
 			},
-			isBlock: false,
-			children: []},
-		parseTreeTransclude = {
-			type: "transclude",
-			attributes: {
-				recursionMarker: {
-					name: "recursionMarker",
-					type: "string",
-					value: options.recursionMarker || "yes"
-					},
-				tiddler: {
-					name: "tiddler",
-					type: "string",
-					value: title
-				}
-			},
-			isBlock: !options.parseAsInline};
+			tiddler: {
+				name: "tiddler",
+				type: "string",
+				value: title
+			}
+		},
+		isBlock: !options.parseAsInline
+	};
 	if(options.importVariables || options.importPageMacros) {
 		if(options.importVariables) {
 			parseTreeImportVariables.attributes.filter.value = options.importVariables;
@@ -1272,10 +1278,10 @@ exports.makeTranscludeWidget = function(title,options) {
 		parseTreeDiv.tree[0].children.push(parseTreeTransclude);
 	}
 	if(options.field) {
-		parseTreeTransclude.attributes.field = {type: "string", value: options.field};
+		parseTreeTransclude.attributes.field = {type: "string",value: options.field};
 	}
 	if(options.mode) {
-		parseTreeTransclude.attributes.mode = {type: "string", value: options.mode};
+		parseTreeTransclude.attributes.mode = {type: "string",value: options.mode};
 	}
 	if(options.children) {
 		parseTreeTransclude.children = options.children;
@@ -1295,9 +1301,9 @@ parentWidget: optional parent widget for the root node
 */
 exports.renderText = function(outputType,textType,text,options) {
 	options = options || {};
-	var parser = this.parseText(textType,text,options),
-		widgetNode = this.makeWidget(parser,options);
-	var container = $tw.fakeDocument.createElement("div");
+	const parser = this.parseText(textType,text,options);
+	const widgetNode = this.makeWidget(parser,options);
+	const container = $tw.fakeDocument.createElement("div");
 	widgetNode.render(container,null);
 	return outputType === "text/html" ? container.innerHTML : container.textContent;
 };
@@ -1313,9 +1319,9 @@ parentWidget: optional parent widget for the root node
 */
 exports.renderTiddler = function(outputType,title,options) {
 	options = options || {};
-	var parser = this.parseTiddler(title,options),
-		widgetNode = this.makeWidget(parser,options);
-	var container = $tw.fakeDocument.createElement("div");
+	const parser = this.parseTiddler(title,options);
+	const widgetNode = this.makeWidget(parser,options);
+	const container = $tw.fakeDocument.createElement("div");
 	widgetNode.render(container,null);
 	return outputType === "text/html" ? container.innerHTML : (outputType === "text/plain-formatted" ? container.formattedTextContent : container.textContent);
 };
@@ -1344,34 +1350,34 @@ Options available:
 */
 exports.search = function(text,options) {
 	options = options || {};
-	var self = this,
-		t,
-		regExpStr="",
-		invert = !!options.invert;
+	const self = this;
+	let t;
+	let regExpStr = "";
+	const invert = !!options.invert;
 	// Convert the search string into a regexp for each term
-	var terms, searchTermsRegExps,
-		flags = options.caseSensitive ? "" : "i",
-		anchor = options.anchored ? "^" : "";
+	let terms; let searchTermsRegExps;
+	const flags = options.caseSensitive ? "" : "i";
+	const anchor = options.anchored ? "^" : "";
 	if(options.literal) {
 		if(text.length === 0) {
 			searchTermsRegExps = null;
 		} else {
-			searchTermsRegExps = [new RegExp("(" + anchor + $tw.utils.escapeRegExp(text) + ")",flags)];
+			searchTermsRegExps = [new RegExp(`(${anchor}${$tw.utils.escapeRegExp(text)})`,flags)];
 		}
 	} else if(options.whitespace) {
 		terms = [];
-		$tw.utils.each(text.split(/\s+/g),function(term) {
+		$tw.utils.each(text.split(/\s+/g),(term) => {
 			if(term) {
 				terms.push($tw.utils.escapeRegExp(term));
 			}
 		});
-		searchTermsRegExps = [new RegExp("(" + anchor + terms.join("\\s+") + ")",flags)];
+		searchTermsRegExps = [new RegExp(`(${anchor}${terms.join(String.raw`\s+`)})`,flags)];
 	} else if(options.regexp) {
 		try {
-			searchTermsRegExps = [new RegExp("(" + text + ")",flags)];
+			searchTermsRegExps = [new RegExp(`(${text})`,flags)];
 		} catch(e) {
 			searchTermsRegExps = null;
-			console.log("Regexp error parsing /(" + text + ")/" + flags + ": ",e);
+			console.log(`Regexp error parsing /(${text})/${flags}: `,e);
 		}
 	} else if(options.some) {
 		terms = text.trim().split(/[^\S\xA0]+/);
@@ -1379,10 +1385,10 @@ exports.search = function(text,options) {
 			searchTermsRegExps = null;
 		} else {
 			searchTermsRegExps = [];
-			for(t=0; t<terms.length; t++) {
-				regExpStr += (t===0) ? anchor + $tw.utils.escapeRegExp(terms[t]) : "|" + anchor + $tw.utils.escapeRegExp(terms[t]);
+			for(t = 0;t < terms.length;t++) {
+				regExpStr += (t === 0) ? anchor + $tw.utils.escapeRegExp(terms[t]) : `|${anchor}${$tw.utils.escapeRegExp(terms[t])}`;
 			}
-			searchTermsRegExps.push(new RegExp("(" + regExpStr + ")",flags));
+			searchTermsRegExps.push(new RegExp(`(${regExpStr})`,flags));
 		}
 	} else { // default: words
 		terms = text.split(/[^\S\xA0]+/);
@@ -1390,16 +1396,16 @@ exports.search = function(text,options) {
 			searchTermsRegExps = null;
 		} else {
 			searchTermsRegExps = [];
-			for(t=0; t<terms.length; t++) {
-				searchTermsRegExps.push(new RegExp("(" + anchor + $tw.utils.escapeRegExp(terms[t]) + ")",flags));
+			for(t = 0;t < terms.length;t++) {
+				searchTermsRegExps.push(new RegExp(`(${anchor}${$tw.utils.escapeRegExp(terms[t])})`,flags));
 			}
 		}
 	}
-// Accumulate the array of fields to be searched or excluded from the search
-	var fields = [];
+	// Accumulate the array of fields to be searched or excluded from the search
+	const fields = [];
 	if(options.field) {
 		if($tw.utils.isArray(options.field)) {
-			$tw.utils.each(options.field,function(fieldName) {
+			$tw.utils.each(options.field,(fieldName) => {
 				if(fieldName) {
 					fields.push(fieldName);
 				}
@@ -1415,23 +1421,23 @@ exports.search = function(text,options) {
 		fields.push("text");
 	}
 	// Function to check a given tiddler for the search term
-	var searchTiddler = function(title) {
+	const searchTiddler = function(title) {
 		if(!searchTermsRegExps) {
 			return true;
 		}
-		var notYetFound = searchTermsRegExps.slice();
+		const notYetFound = [...searchTermsRegExps];
 
-		var tiddler = self.getTiddler(title);
+		let tiddler = self.getTiddler(title);
 		if(!tiddler) {
-			tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
+			tiddler = new $tw.Tiddler({title,text: "",type: "text/vnd.tiddlywiki"});
 		}
-		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"],
-			searchFields;
+		const contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"];
+		let searchFields;
 		// Get the list of fields we're searching
 		if(options.excludeField) {
 			searchFields = Object.keys(tiddler.fields);
-			$tw.utils.each(fields,function(fieldName) {
-				var p = searchFields.indexOf(fieldName);
+			$tw.utils.each(fields,(fieldName) => {
+				const p = searchFields.indexOf(fieldName);
 				if(p !== -1) {
 					searchFields.splice(p,1);
 				}
@@ -1439,21 +1445,21 @@ exports.search = function(text,options) {
 		} else {
 			searchFields = fields;
 		}
-		for(var fieldIndex=0; notYetFound.length>0 && fieldIndex<searchFields.length; fieldIndex++) {
+		for(let fieldIndex = 0;notYetFound.length > 0 && fieldIndex < searchFields.length;fieldIndex++) {
 			// Don't search the text field if the content type is binary
-			var fieldName = searchFields[fieldIndex];
+			const fieldName = searchFields[fieldIndex];
 			if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
 				break;
 			}
-			var str = tiddler.fields[fieldName],
-				t;
+			let str = tiddler.fields[fieldName];
+			var t;
 			if(str) {
 				if($tw.utils.isArray(str)) {
 					// If the field value is an array, test each regexp against each field array entry and fail if each regexp doesn't match at least one field array entry
-					for(var s=0; s<str.length; s++) {
-						for(t=0; t<notYetFound.length;) {
+					for(let s = 0;s < str.length;s++) {
+						for(t = 0;t < notYetFound.length;) {
 							if(notYetFound[t].test(str[s])) {
-								notYetFound.splice(t, 1);
+								notYetFound.splice(t,1);
 							} else {
 								t++;
 							}
@@ -1462,9 +1468,9 @@ exports.search = function(text,options) {
 				} else {
 					// If the field isn't an array, force it to a string and test each regexp against it and fail if any do not match
 					str = tiddler.getFieldString(fieldName);
-					for(t=0; t<notYetFound.length;) {
+					for(t = 0;t < notYetFound.length;) {
 						if(notYetFound[t].test(str)) {
-							notYetFound.splice(t, 1);
+							notYetFound.splice(t,1);
 						} else {
 							t++;
 						}
@@ -1475,17 +1481,17 @@ exports.search = function(text,options) {
 		return notYetFound.length == 0;
 	};
 	// Loop through all the tiddlers doing the search
-	var results = [],
-		source = options.source || this.each;
-	source(function(tiddler,title) {
+	const results = [];
+	const source = options.source || this.each;
+	source((tiddler,title) => {
 		if(searchTiddler(title) !== invert) {
 			results.push(title);
 		}
 	});
 	// Remove any of the results we have to exclude
 	if(options.exclude) {
-		for(t=0; t<options.exclude.length; t++) {
-			var p = results.indexOf(options.exclude[t]);
+		for(t = 0;t < options.exclude.length;t++) {
+			const p = results.indexOf(options.exclude[t]);
 			if(p !== -1) {
 				results.splice(p,1);
 			}
@@ -1498,7 +1504,7 @@ exports.search = function(text,options) {
 Trigger a load for a tiddler if it is skinny. Returns the text, or undefined if the tiddler is missing, null if the tiddler is being lazily loaded.
 */
 exports.getTiddlerText = function(title,defaultText) {
-	var tiddler = this.getTiddler(title);
+	const tiddler = this.getTiddler(title);
 	// Return undefined if the tiddler isn't found
 	if(!tiddler) {
 		return defaultText;
@@ -1519,7 +1525,7 @@ Check whether the text of a tiddler matches a given value. By default, the compa
 */
 exports.checkTiddlerText = function(title,targetText,options) {
 	options = options || {};
-	var text = this.getTiddlerText(title,"");
+	let text = this.getTiddlerText(title,"");
 	if(!options.noTrim) {
 		text = text.trim();
 	}
@@ -1528,13 +1534,13 @@ exports.checkTiddlerText = function(title,targetText,options) {
 		targetText = targetText.toLowerCase();
 	}
 	return text === targetText;
-}
+};
 
 /*
 Execute an action string without an associated context widget
 */
 exports.invokeActionString = function(actions,event,variables,options) {
-	var widget = this.makeWidget(null,{parentWidget: options.parentWidget});
+	const widget = this.makeWidget(null,{parentWidget: options.parentWidget});
 	widget.invokeActionString(actions,null,event,variables);
 };
 
@@ -1542,22 +1548,22 @@ exports.invokeActionString = function(actions,event,variables,options) {
 Read an array of browser File objects, invoking callback(tiddlerFieldsArray) once they're all read
 */
 exports.readFiles = function(files,options) {
-	var callback;
+	let callback;
 	if(typeof options === "function") {
 		callback = options;
 		options = {};
 	} else {
 		callback = options.callback;
 	}
-	var result = [],
-		outstanding = files.length,
-		readFileCallback = function(tiddlerFieldsArray) {
-			result.push.apply(result,tiddlerFieldsArray);
-			if(--outstanding === 0) {
-				callback(result);
-			}
-		};
-	for(var f=0; f<files.length; f++) {
+	const result = [];
+	let outstanding = files.length;
+	const readFileCallback = function(tiddlerFieldsArray) {
+		result.push.apply(result,tiddlerFieldsArray);
+		if(--outstanding === 0) {
+			callback(result);
+		}
+	};
+	for(let f = 0;f < files.length;f++) {
 		this.readFile(files[f],$tw.utils.extend({},options,{callback: readFileCallback}));
 	}
 	return files.length;
@@ -1567,7 +1573,7 @@ exports.readFiles = function(files,options) {
 Read a browser File object, invoking callback(tiddlerFieldsArray) with an array of tiddler fields objects
 */
 exports.readFile = function(file,options) {
-	var callback;
+	let callback;
 	if(typeof options === "function") {
 		callback = options;
 		options = {};
@@ -1575,30 +1581,30 @@ exports.readFile = function(file,options) {
 		callback = options.callback;
 	}
 	// Get the type, falling back to the filename extension
-	var self = this,
-		type = file.type;
+	const self = this;
+	let {type} = file;
 	if(type === "" || !type) {
-		var dotPos = file.name.lastIndexOf(".");
+		const dotPos = file.name.lastIndexOf(".");
 		if(dotPos !== -1) {
-			var fileExtensionInfo = $tw.utils.getFileExtensionInfo(file.name.substr(dotPos));
+			const fileExtensionInfo = $tw.utils.getFileExtensionInfo(file.name.substr(dotPos));
 			if(fileExtensionInfo) {
 				type = fileExtensionInfo.type;
 			}
 		}
 	}
 	// Figure out if we're reading a binary file
-	var contentTypeInfo = $tw.config.contentTypeInfo[type],
-		isBinary = contentTypeInfo ? contentTypeInfo.encoding === "base64" : false;
+	const contentTypeInfo = $tw.config.contentTypeInfo[type];
+	const isBinary = contentTypeInfo ? contentTypeInfo.encoding === "base64" : false;
 	// Log some debugging information
 	if($tw.log.IMPORT) {
-		console.log("Importing file '" + file.name + "', type: '" + type + "', isBinary: " + isBinary);
+		console.log(`Importing file '${file.name}', type: '${type}', isBinary: ${isBinary}`);
 	}
 	// Give the hook a chance to process the drag
 	if($tw.hooks.invokeHook("th-importing-file",{
-		file: file,
-		type: type,
-		isBinary: isBinary,
-		callback: callback
+		file,
+		type,
+		isBinary,
+		callback
 	}) !== true) {
 		this.readFileContent(file,type,isBinary,options.deserializer,callback);
 	}
@@ -1608,29 +1614,29 @@ exports.readFile = function(file,options) {
 Lower level utility to read the content of a browser File object, invoking callback(tiddlerFieldsArray) with an array of tiddler fields objects
 */
 exports.readFileContent = function(file,type,isBinary,deserializer,callback) {
-	var self = this;
+	const self = this;
 	// Create the FileReader
-	var reader = new FileReader();
+	const reader = new FileReader();
 	// Onload
 	reader.onload = function(event) {
-		var text = event.target.result,
-			tiddlerFields = {title: file.name || "Untitled"};
+		let text = event.target.result;
+		const tiddlerFields = {title: file.name || "Untitled"};
 		if(isBinary) {
-			var commaPos = text.indexOf(",");
+			const commaPos = text.indexOf(",");
 			if(commaPos !== -1) {
 				text = text.substr(commaPos + 1);
 			}
 		}
 		// Check whether this is an encrypted TiddlyWiki file
-		var encryptedJson = $tw.utils.extractEncryptedStoreArea(text);
+		const encryptedJson = $tw.utils.extractEncryptedStoreArea(text);
 		if(encryptedJson) {
 			// If so, attempt to decrypt it with the current password
-			$tw.utils.decryptStoreAreaInteractive(encryptedJson,function(tiddlers) {
+			$tw.utils.decryptStoreAreaInteractive(encryptedJson,(tiddlers) => {
 				callback(tiddlers);
 			});
 		} else {
 			// Otherwise, just try to deserialise any tiddlers in the file
-			callback(self.deserializeTiddlers(type,text,tiddlerFields,{deserializer: deserializer}));
+			callback(self.deserializeTiddlers(type,text,tiddlerFields,{deserializer}));
 		}
 	};
 	// Kick off the read
@@ -1645,14 +1651,14 @@ exports.readFileContent = function(file,type,isBinary,deserializer,callback) {
 Find any existing draft of a specified tiddler
 */
 exports.findDraft = function(targetTitle) {
-	var draftTitle = undefined;
-	this.forEachTiddler({includeSystem: true},function(title,tiddler) {
+	let draftTitle = undefined;
+	this.forEachTiddler({includeSystem: true},(title,tiddler) => {
 		if(tiddler.fields["draft.title"] && tiddler.fields["draft.of"] === targetTitle) {
 			draftTitle = title;
 		}
 	});
 	return draftTitle;
-}
+};
 
 /*
 Check whether the specified draft tiddler has been modified.
@@ -1660,13 +1666,13 @@ If the original tiddler doesn't exist, create  a vanilla tiddler variable,
 to check if additional fields have been added.
 */
 exports.isDraftModified = function(title) {
-	var tiddler = this.getTiddler(title);
+	const tiddler = this.getTiddler(title);
 	if(!tiddler.isDraft()) {
 		return false;
 	}
-	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of"],
-		origTiddler = this.getTiddler(tiddler.fields["draft.of"]) || new $tw.Tiddler({text:"", tags:[]}),
-		titleModified = tiddler.fields["draft.title"] !== tiddler.fields["draft.of"];
+	const ignoredFields = ["created","modified","title","draft.title","draft.of"];
+	const origTiddler = this.getTiddler(tiddler.fields["draft.of"]) || new $tw.Tiddler({text: "",tags: []});
+	const titleModified = tiddler.fields["draft.title"] !== tiddler.fields["draft.of"];
 	return titleModified || !tiddler.isEqual(origTiddler,ignoredFields);
 };
 
@@ -1677,9 +1683,9 @@ fromPageRect: page coordinates of the origin of the navigation
 historyTitle: title of history tiddler (defaults to $:/HistoryList)
 */
 exports.addToHistory = function(title,fromPageRect,historyTitle) {
-	var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
+	const story = new $tw.Story({wiki: this,historyTitle});
 	story.addToHistory(title,fromPageRect);
-	console.log("$tw.wiki.addToHistory() is deprecated since V5.1.23! Use the this.story.addToHistory() from the story-object!")
+	console.log("$tw.wiki.addToHistory() is deprecated since V5.1.23! Use the this.story.addToHistory() from the story-object!");
 };
 
 /*
@@ -1690,21 +1696,21 @@ storyTitle: title of story tiddler (defaults to $:/StoryList)
 options: see story.js
 */
 exports.addToStory = function(title,fromTitle,storyTitle,options) {
-	var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
+	const story = new $tw.Story({wiki: this,storyTitle});
 	story.addToStory(title,fromTitle,options);
-	console.log("$tw.wiki.addToStory() is deprecated since V5.1.23! Use the this.story.addToStory() from the story-object!")
+	console.log("$tw.wiki.addToStory() is deprecated since V5.1.23! Use the this.story.addToStory() from the story-object!");
 };
 
 /*
 Generate a title for the draft of a given tiddler
 */
 exports.generateDraftTitle = function(title) {
-	var c = 0,
-		draftTitle,
-		username = this.getTiddlerText("$:/status/UserName"),
-		attribution = username ? " by " + username : "";
+	let c = 0;
+	let draftTitle;
+	const username = this.getTiddlerText("$:/status/UserName");
+	const attribution = username ? ` by ${username}` : "";
 	do {
-		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'" + attribution;
+		draftTitle = `Draft ${c ? `${c + 1} ` : ""}of '${title}'${attribution}`;
 		c++;
 	} while(this.tiddlerExists(draftTitle));
 	return draftTitle;
@@ -1718,20 +1724,20 @@ Returns a hashmap of messages keyed by tiddler title.
 */
 exports.invokeUpgraders = function(titles,tiddlers) {
 	// Collect up the available upgrader modules
-	var self = this;
+	const self = this;
 	if(!this.upgraderModules) {
 		this.upgraderModules = [];
-		$tw.modules.forEachModuleOfType("upgrader",function(title,module) {
+		$tw.modules.forEachModuleOfType("upgrader",(title,module) => {
 			if(module.upgrade) {
 				self.upgraderModules.push(module);
 			}
 		});
 	}
 	// Invoke each upgrader in turn
-	var messages = {};
-	for(var t=0; t<this.upgraderModules.length; t++) {
-		var upgrader = this.upgraderModules[t],
-			upgraderMessages = upgrader.upgrade(this,titles,tiddlers);
+	const messages = {};
+	for(let t = 0;t < this.upgraderModules.length;t++) {
+		const upgrader = this.upgraderModules[t];
+		const upgraderMessages = upgrader.upgrade(this,titles,tiddlers);
 		$tw.utils.extend(messages,upgraderMessages);
 	}
 	return messages;
@@ -1739,7 +1745,7 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 
 // Determine whether a plugin by title is dynamically loadable
 exports.doesPluginRequireReload = function(title) {
-	var tiddler = this.getTiddler(title);
+	const tiddler = this.getTiddler(title);
 	if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"]) {
 		if(tiddler.fields["plugin-type"] === "import") {
 			// The import plugin never requires reloading
@@ -1752,8 +1758,8 @@ exports.doesPluginRequireReload = function(title) {
 // Determine whether a plugin info structure is dynamically loadable
 exports.doesPluginInfoRequireReload = function(pluginInfo) {
 	if(pluginInfo) {
-		var foundModule = false;
-		$tw.utils.each(pluginInfo.tiddlers,function(tiddler) {
+		let foundModule = false;
+		$tw.utils.each(pluginInfo.tiddlers,(tiddler) => {
 			if(tiddler.type === "application/javascript" && $tw.utils.hop(tiddler,"module-type")) {
 				foundModule = true;
 			}
@@ -1765,8 +1771,8 @@ exports.doesPluginInfoRequireReload = function(pluginInfo) {
 };
 
 exports.slugify = function(title,options) {
-	var tiddler = this.getTiddler(title),
-		slug;
+	const tiddler = this.getTiddler(title);
+	let slug;
 	if(tiddler && tiddler.fields.slug) {
 		slug = tiddler.fields.slug;
 	} else {
@@ -1780,8 +1786,8 @@ exports.slugify = function(title,options) {
 	// If the resulting slug is blank (eg because the title is just punctuation characters)
 	if(!slug) {
 		// ...then just use the character codes of the title
-		var result = [];
-		$tw.utils.each(title.split(""),function(char) {
+		const result = [];
+		$tw.utils.each(title.split(""),(char) => {
 			result.push(char.charCodeAt(0).toString());
 		});
 		slug = result.join("-");

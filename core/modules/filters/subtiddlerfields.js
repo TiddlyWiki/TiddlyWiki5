@@ -13,11 +13,11 @@ Filter operator for returning the names of the fields on the selected subtiddler
 Export our filter function
 */
 exports.subtiddlerfields = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
-		var subtiddler = options.wiki.getSubTiddler(operator.operand,title);
+	const results = [];
+	source((tiddler,title) => {
+		const subtiddler = options.wiki.getSubTiddler(operator.operand,title);
 		if(subtiddler) {
-			for(var fieldName in subtiddler.fields) {
+			for(const fieldName in subtiddler.fields) {
 				$tw.utils.pushTop(results,fieldName);
 			}
 		}

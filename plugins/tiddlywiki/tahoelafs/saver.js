@@ -12,17 +12,17 @@ A bare bones saver for Tahoe-LAFS. It just PUTs the new HTML file back to the se
 /*
 Select the appropriate saver module and set it up
 */
-var TahoeSaver = function(wiki) {
+const TahoeSaver = function(wiki) {
 	this.wiki = wiki;
 };
 
 TahoeSaver.prototype.save = function(text) {
 	// Do the HTTP post
-	var http = new XMLHttpRequest();
+	const http = new XMLHttpRequest();
 	http.open("PUT",document.location.toString(),true);
 	http.onreadystatechange = function() {
 		if(http.readyState == 4 && http.status == 200) {
-			window.alert("Saved to Tahoe-LAFS: " + http.responseText);
+			window.alert(`Saved to Tahoe-LAFS: ${http.responseText}`);
 		}
 	};
 	http.send(text);

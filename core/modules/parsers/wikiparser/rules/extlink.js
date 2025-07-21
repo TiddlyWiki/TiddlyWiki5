@@ -28,23 +28,23 @@ exports.init = function(parser) {
 
 exports.parse = function() {
 	// Move past the match
-    var start = this.parser.pos;
+	const start = this.parser.pos;
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Create the link unless it is suppressed
 	if(this.match[0].substr(0,1) === "~") {
-		return [{type: "text", text: this.match[0].substr(1)}];
+		return [{type: "text",text: this.match[0].substr(1)}];
 	} else {
 		return [{
 			type: "element",
 			tag: "a",
 			attributes: {
-				href: {type: "string", value: this.match[0]},
-				"class": {type: "string", value: "tc-tiddlylink-external"},
-				target: {type: "string", value: "_blank"},
-				rel: {type: "string", value: "noopener noreferrer"}
+				href: {type: "string",value: this.match[0]},
+				"class": {type: "string",value: "tc-tiddlylink-external"},
+				target: {type: "string",value: "_blank"},
+				rel: {type: "string",value: "noopener noreferrer"}
 			},
 			children: [{
-				type: "text", text: this.match[0], start: start, end: this.parser.pos
+				type: "text",text: this.match[0],start,end: this.parser.pos
 			}]
 		}];
 	}

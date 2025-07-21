@@ -33,32 +33,36 @@ Story.prototype.getStoryList = function() {
 
 Story.prototype.addToStory = function(navigateTo,navigateFromTitle,options) {
 	options = options || {};
-	var storyList = this.getStoryList();
+	const storyList = this.getStoryList();
 	// See if the tiddler is already there
-	var slot = storyList.indexOf(navigateTo);
+	let slot = storyList.indexOf(navigateTo);
 	// Quit if it already exists in the story river
 	if(slot >= 0) {
 		return;
 	}
 	// First we try to find the position of the story element we navigated from
-	var fromIndex = storyList.indexOf(navigateFromTitle);
+	const fromIndex = storyList.indexOf(navigateFromTitle);
 	if(fromIndex >= 0) {
 		// The tiddler is added from inside the river
 		// Determine where to insert the tiddler; Fallback is "below"
 		switch(options.openLinkFromInsideRiver) {
-			case "top":
+			case "top": {
 				slot = 0;
 				break;
-			case "bottom":
+			}
+			case "bottom": {
 				slot = storyList.length;
 				break;
-			case "above":
+			}
+			case "above": {
 				slot = fromIndex;
 				break;
+			}
 			case "below": // Intentional fall-through
-			default:
+			default: {
 				slot = fromIndex + 1;
 				break;
+			}
 		}
 	} else {
 		// The tiddler is opened from outside the river. Determine where to insert the tiddler; default is "top"
@@ -77,7 +81,7 @@ Story.prototype.addToStory = function(navigateTo,navigateFromTitle,options) {
 };
 
 Story.prototype.saveStoryList = function(storyList) {
-	var storyTiddler = this.wiki.getTiddler(this.storyTitle);
+	const storyTiddler = this.wiki.getTiddler(this.storyTitle);
 	this.wiki.addTiddler(new $tw.Tiddler(
 		this.wiki.getCreationFields(),
 		{title: this.storyTitle},
@@ -88,45 +92,45 @@ Story.prototype.saveStoryList = function(storyList) {
 };
 
 Story.prototype.addToHistory = function(navigateTo,navigateFromClientRect) {
-	var titles = $tw.utils.isArray(navigateTo) ? navigateTo : [navigateTo];
+	const titles = $tw.utils.isArray(navigateTo) ? navigateTo : [navigateTo];
 	// Add a new record to the top of the history stack
-	var historyList = this.wiki.getTiddlerData(this.historyTitle,[]);
-	$tw.utils.each(titles,function(title) {
-		historyList.push({title: title, fromPageRect: navigateFromClientRect});
+	const historyList = this.wiki.getTiddlerData(this.historyTitle,[]);
+	$tw.utils.each(titles,(title) => {
+		historyList.push({title,fromPageRect: navigateFromClientRect});
 	});
-	this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
+	this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": titles[titles.length - 1]});
 };
 
 Story.prototype.storyCloseTiddler = function(targetTitle) {
-// TBD
+	// TBD
 };
 
 Story.prototype.storyCloseAllTiddlers = function() {
-// TBD
+	// TBD
 };
 
 Story.prototype.storyCloseOtherTiddlers = function(targetTitle) {
-// TBD
+	// TBD
 };
 
 Story.prototype.storyEditTiddler = function(targetTitle) {
-// TBD
+	// TBD
 };
 
 Story.prototype.storyDeleteTiddler = function(targetTitle) {
-// TBD
+	// TBD
 };
 
 Story.prototype.storySaveTiddler = function(targetTitle) {
-// TBD
+	// TBD
 };
 
 Story.prototype.storyCancelTiddler = function(targetTitle) {
-// TBD
+	// TBD
 };
 
 Story.prototype.storyNewTiddler = function(targetTitle) {
-// TBD
+	// TBD
 };
 
 exports.Story = Story;

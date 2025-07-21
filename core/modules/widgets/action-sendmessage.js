@@ -9,9 +9,9 @@ Action widget to send a message
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var SendMessageWidget = function(parseTreeNode,options) {
+const SendMessageWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -44,7 +44,7 @@ SendMessageWidget.prototype.execute = function() {
 Refresh the widget by ensuring our attributes are up to date
 */
 SendMessageWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(Object.keys(changedAttributes).length) {
 		this.refreshSelf();
 		return true;
@@ -57,19 +57,19 @@ Invoke the action associated with this widget
 */
 SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	// Get the string parameter
-	var param = this.actionParam;
+	const param = this.actionParam;
 	// Assemble the parameters as a hashmap
-	var paramObject = Object.create(null);
+	const paramObject = Object.create(null);
 	// Add names/values pairs if present
 	if(this.actionNames && this.actionValues) {
-		var names = this.wiki.filterTiddlers(this.actionNames,this),
-			values = this.wiki.filterTiddlers(this.actionValues,this);
-		$tw.utils.each(names,function(name,index) {
+		const names = this.wiki.filterTiddlers(this.actionNames,this);
+		const values = this.wiki.filterTiddlers(this.actionValues,this);
+		$tw.utils.each(names,(name,index) => {
 			paramObject[name] = values[index] || "";
 		});
 	}
 	// Add raw parameters
-	$tw.utils.each(this.attributes,function(attribute,name) {
+	$tw.utils.each(this.attributes,(attribute,name) => {
 		if(name.charAt(0) !== "$") {
 			paramObject[name] = attribute;
 		}
@@ -79,11 +79,11 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		paramObject[this.actionName] = this.actionValue;
 	}
 	// Dispatch the message
-	var params = {
+	const params = {
 		type: this.actionMessage,
-		param: param,
-		paramObject: paramObject,
-		event: event,
+		param,
+		paramObject,
+		event,
 		tiddlerTitle: this.getVariable("currentTiddler"),
 		navigateFromTitle: this.getVariable("storyTiddler")
 	};

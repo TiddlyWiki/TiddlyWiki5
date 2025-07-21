@@ -5,11 +5,11 @@ widget to count the number of times this widget refreshes
 \*/
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var MyWidget = function(parseTreeNode, options) {
+const MyWidget = function(parseTreeNode,options) {
 	this.refreshCount = 0;
-	this.initialise(parseTreeNode, options);
+	this.initialise(parseTreeNode,options);
 };
 
 /*
@@ -20,10 +20,10 @@ MyWidget.prototype = new Widget();
 /*
 Render this widget into the DOM
 */
-MyWidget.prototype.render = function(parent, nextSibling) {
+MyWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
-	var textNode = this.document.createTextNode(this.refreshCount + " refreshes");
-	parent.insertBefore(textNode, nextSibling);
+	const textNode = this.document.createTextNode(`${this.refreshCount} refreshes`);
+	parent.insertBefore(textNode,nextSibling);
 	this.domNodes.push(textNode);
 };
 

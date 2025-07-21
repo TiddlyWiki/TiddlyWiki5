@@ -9,9 +9,9 @@ Action widget to delete fields of a tiddler.
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var DeleteFieldWidget = function(parseTreeNode,options) {
+const DeleteFieldWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -41,7 +41,7 @@ DeleteFieldWidget.prototype.execute = function() {
 Refresh the widget by ensuring our attributes are up to date
 */
 DeleteFieldWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes["$tiddler"]) {
 		this.refreshSelf();
 		return true;
@@ -53,10 +53,10 @@ DeleteFieldWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	var self = this,
-		tiddler = this.wiki.getTiddler(self.actionTiddler),
-		removeFields = {},
-		hasChanged = false;
+	const self = this;
+	const tiddler = this.wiki.getTiddler(self.actionTiddler);
+	const removeFields = {};
+	let hasChanged = false;
 	if((this.actionField !== null) && tiddler) {
 		removeFields[this.actionField] = undefined;
 		if(this.actionField in tiddler.fields) {
@@ -64,7 +64,7 @@ DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		}
 	}
 	if(tiddler) {
-		$tw.utils.each(this.attributes,function(attribute,name) {
+		$tw.utils.each(this.attributes,(attribute,name) => {
 			if(name.charAt(0) !== "$" && name !== "title") {
 				removeFields[name] = undefined;
 				if(name in tiddler.fields) {
@@ -73,8 +73,8 @@ DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 			}
 		});
 		if(hasChanged) {
-			var creationFields = this.actionTimestamp ? this.wiki.getCreationFields() : {};
-			var modificationFields = this.actionTimestamp ? this.wiki.getModificationFields() : {};
+			const creationFields = this.actionTimestamp ? this.wiki.getCreationFields() : {};
+			const modificationFields = this.actionTimestamp ? this.wiki.getModificationFields() : {};
 			this.wiki.addTiddler(new $tw.Tiddler(creationFields,tiddler,removeFields,modificationFields));
 		}
 	}

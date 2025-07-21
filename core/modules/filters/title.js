@@ -13,9 +13,9 @@ Filter operator for comparing title fields for equality
 Export our filter function
 */
 exports.title = function(source,operator,options) {
-	var results = [];
+	const results = [];
 	if(operator.prefix === "!") {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			if(tiddler && tiddler.fields.title !== operator.operand) {
 				results.push(title);
 			}

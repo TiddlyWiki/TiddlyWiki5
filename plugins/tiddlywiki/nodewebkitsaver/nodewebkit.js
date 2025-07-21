@@ -12,8 +12,7 @@ Handles saving changes in the NW.js environment. Not required by TiddlyDesktop, 
 /*global $tw: false, netscape: false, Components: false */
 "use strict";
 
-var NodeWebKitSaver = function(wiki) {
-};
+const NodeWebKitSaver = function(wiki) {};
 
 NodeWebKitSaver.prototype.save = function(text,method,callback) {
 	// Bail out unless this is a save (rather than a download)
@@ -21,7 +20,7 @@ NodeWebKitSaver.prototype.save = function(text,method,callback) {
 		return false;
 	}
 	// Get the pathname of this document
-	var pathname = document.location.pathname;
+	let {pathname} = document.location;
 	// Test for a Windows path of the form /x:/blah/blah
 	if(/^\/[A-Z]\:\//i.test(pathname)) {
 		// Remove the leading slash
@@ -30,7 +29,7 @@ NodeWebKitSaver.prototype.save = function(text,method,callback) {
 		pathname = pathname.replace(/\//g,"\\");
 	}
 	// Try to save
-	var fs = require("fs");
+	const fs = require("fs");
 	fs.writeFile(pathname,text,callback);
 	return true;
 };

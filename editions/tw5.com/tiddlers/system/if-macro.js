@@ -9,12 +9,12 @@ module-type: macro
 exports.name = ".if";
 
 exports.params = [
-	{ name: "cond" },
-	{ name: "then" },
-	{ name: "else" }
+	{name: "cond"},
+	{name: "then"},
+	{name: "else"}
 ];
 
-exports.run = function(cond, then, elze) {
+exports.run = function(cond,then,elze) {
 	then = then || "";
 	elze = elze || "";
 	return cond ? then : elze;

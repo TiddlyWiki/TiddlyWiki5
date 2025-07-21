@@ -25,7 +25,7 @@ $$$
 
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
+const widget = require("$:/core/modules/widgets/widget.js");
 
 exports.name = "typedblock";
 exports.types = {block: true};
@@ -37,17 +37,17 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var reEnd = /\r?\n\$\$\$\r?(?:\n|$)/mg;
+	const reEnd = /\r?\n\$\$\$\r?(?:\n|$)/mg;
 	// Save the type
-	var parseType = this.match[1],
-		renderType = this.match[2];
+	const parseType = this.match[1];
+	const renderType = this.match[2];
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
-	var start = this.parser.pos;
+	const start = this.parser.pos;
 	// Look for the end of the block
 	reEnd.lastIndex = this.parser.pos;
-	var match = reEnd.exec(this.parser.source),
-		text;
+	const match = reEnd.exec(this.parser.source);
+	let text;
 	// Process the block
 	if(match) {
 		text = this.parser.source.substring(this.parser.pos,match.index);
@@ -57,14 +57,14 @@ exports.parse = function() {
 		this.parser.pos = this.parser.sourceLength;
 	}
 	// Parse the block according to the specified type
-	var parser = this.parser.wiki.parseText(parseType,text,{defaultType: "text/plain"});
+	const parser = this.parser.wiki.parseText(parseType,text,{defaultType: "text/plain"});
 	// If there's no render type, just return the parse tree
 	if(!renderType) {
 		return parser.tree;
 	} else {
 		// Otherwise, render to the rendertype and return in a <PRE> tag
-		var widgetNode = this.parser.wiki.makeWidget(parser),
-			container = $tw.fakeDocument.createElement("div");
+		const widgetNode = this.parser.wiki.makeWidget(parser);
+		const container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
 		text = renderType === "text/html" ? container.innerHTML : container.textContent;
 		return [{
@@ -72,8 +72,8 @@ exports.parse = function() {
 			tag: "pre",
 			children: [{
 				type: "text",
-				text: text,
-				start: start,
+				text,
+				start,
 				end: this.parser.pos
 			}]
 		}];

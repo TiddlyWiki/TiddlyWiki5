@@ -18,21 +18,21 @@ exports.init = function(parser) {
 	this.matchRegExp = /^\|(?:[^\n]*)\|(?:[fhck]?)\r?(?:\n|$)/mg;
 };
 
-var processRow = function(prevColumns) {
-	var cellRegExp = /(?:\|([^\n\|]*)\|)|(\|[fhck]?\r?(?:\n|$))/mg,
-		cellTermRegExp = /((?:\x20*)\|)/mg,
-		tree = [],
-		col = 0,
-		colSpanCount = 1,
-		prevCell,
-		vAlign;
+const processRow = function(prevColumns) {
+	const cellRegExp = /(?:\|([^\n\|]*)\|)|(\|[fhck]?\r?(?:\n|$))/mg;
+	const cellTermRegExp = /((?:\x20*)\|)/mg;
+	const tree = [];
+	let col = 0;
+	let colSpanCount = 1;
+	let prevCell;
+	let vAlign;
 	// Match a single cell
 	cellRegExp.lastIndex = this.parser.pos;
-	var cellMatch = cellRegExp.exec(this.parser.source);
+	let cellMatch = cellRegExp.exec(this.parser.source);
 	while(cellMatch && cellMatch.index === this.parser.pos) {
 		if(cellMatch[1] === "~") {
 			// Rowspan
-			var last = prevColumns[col];
+			const last = prevColumns[col];
 			if(last) {
 				last.rowSpanCount++;
 				$tw.utils.addAttributeToParseTreeNode(last.element,"rowspan",last.rowSpanCount);
@@ -60,7 +60,7 @@ var processRow = function(prevColumns) {
 			// End of row
 			if(prevCell && colSpanCount > 1) {
 				if(prevCell.attributes && prevCell.attributes && prevCell.attributes.colspan) {
-						colSpanCount += prevCell.attributes.colspan.value;
+					colSpanCount += prevCell.attributes.colspan.value;
 				} else {
 					colSpanCount -= 1;
 				}
@@ -72,7 +72,7 @@ var processRow = function(prevColumns) {
 			// For ordinary cells, step beyond the opening `|`
 			this.parser.pos++;
 			// Look for a space at the start of the cell
-			var spaceLeft = false;
+			let spaceLeft = false;
 			vAlign = null;
 			if(this.parser.source.substr(this.parser.pos).search(/^\^([^\^]|\^\^)/) === 0) {
 				vAlign = "top";
@@ -82,7 +82,7 @@ var processRow = function(prevColumns) {
 			if(vAlign) {
 				this.parser.pos++;
 			}
-			var chr = this.parser.source.substr(this.parser.pos,1);
+			let chr = this.parser.source.substr(this.parser.pos,1);
 			while(chr === " ") {
 				spaceLeft = true;
 				this.parser.pos++;
@@ -90,17 +90,17 @@ var processRow = function(prevColumns) {
 			}
 			// Check whether this is a heading cell
 			var cell;
-			var start = this.parser.pos;
+			const start = this.parser.pos;
 			if(chr === "!") {
 				this.parser.pos++;
-				cell = {type: "element", tag: "th", start: start, children: []};
+				cell = {type: "element",tag: "th",start,children: []};
 			} else {
-				cell = {type: "element", tag: "td", start: start, children: []};
+				cell = {type: "element",tag: "td",start,children: []};
 			}
 			tree.push(cell);
 			// Record information about this cell
 			prevCell = cell;
-			prevColumns[col] = {rowSpanCount:1,element:cell};
+			prevColumns[col] = {rowSpanCount: 1,element: cell};
 			// Check for a colspan
 			if(colSpanCount > 1) {
 				$tw.utils.addAttributeToParseTreeNode(cell,"colspan",colSpanCount);
@@ -129,19 +129,19 @@ var processRow = function(prevColumns) {
 };
 
 exports.parse = function() {
-	var rowContainerTypes = {"c":"caption", "h":"thead", "":"tbody", "f":"tfoot"},
-		table = {type: "element", tag: "table", children: []},
-		rowRegExp = /^\|([^\n]*)\|([fhck]?)\r?(?:\n|$)/mg,
-		rowTermRegExp = /(\|(?:[fhck]?)\r?(?:\n|$))/mg,
-		prevColumns = [],
-		currRowType,
-		rowContainer,
-		rowCount = 0;
+	const rowContainerTypes = {"c": "caption","h": "thead","": "tbody","f": "tfoot"};
+	const table = {type: "element",tag: "table",children: []};
+	const rowRegExp = /^\|([^\n]*)\|([fhck]?)\r?(?:\n|$)/mg;
+	const rowTermRegExp = /(\|(?:[fhck]?)\r?(?:\n|$))/mg;
+	const prevColumns = [];
+	let currRowType;
+	let rowContainer;
+	let rowCount = 0;
 	// Match the row
 	rowRegExp.lastIndex = this.parser.pos;
-	var rowMatch = rowRegExp.exec(this.parser.source);
+	let rowMatch = rowRegExp.exec(this.parser.source);
 	while(rowMatch && rowMatch.index === this.parser.pos) {
-		var rowType = rowMatch[2];
+		const rowType = rowMatch[2];
 		// Check if it is a class assignment
 		if(rowType === "k") {
 			$tw.utils.addClassToParseTreeNode(table,rowMatch[1]);
@@ -149,7 +149,7 @@ exports.parse = function() {
 		} else {
 			// Otherwise, create a new row if this one is of a different type
 			if(rowType !== currRowType) {
-				rowContainer = {type: "element", tag: rowContainerTypes[rowType], children: [], start: this.parser.pos, end: this.parser.pos};
+				rowContainer = {type: "element",tag: rowContainerTypes[rowType],children: [],start: this.parser.pos,end: this.parser.pos};
 				table.children.push(rowContainer);
 				currRowType = rowType;
 			}
@@ -163,13 +163,13 @@ exports.parse = function() {
 					table.children.splice(0,0,rowContainer); // Insert it at the bottom
 				}
 				// Set the alignment - TODO: figure out why TW did this
-//				rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
+				//				rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
 				// Parse the caption
 				rowContainer.children = this.parser.parseInlineRun(rowTermRegExp,{eatTerminator: true});
 			} else {
 				// Create the row
-				var theRow = {type: "element", tag: "tr", children: [], start: rowMatch.index};
-				$tw.utils.addClassToParseTreeNode(theRow,rowCount%2 ? "oddRow" : "evenRow");
+				const theRow = {type: "element",tag: "tr",children: [],start: rowMatch.index};
+				$tw.utils.addClassToParseTreeNode(theRow,rowCount % 2 ? "oddRow" : "evenRow");
 				rowContainer.children.push(theRow);
 				// Process the row
 				theRow.children = processRow.call(this,prevColumns);

@@ -9,10 +9,10 @@ Widget to display a diff between two texts
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	dmp = require("$:/core/modules/utils/diff-match-patch/diff_match_patch.js");
+const Widget = require("$:/core/modules/widgets/widget.js").widget;
+const dmp = require("$:/core/modules/utils/diff-match-patch/diff_match_patch.js");
 
-var DiffTextWidget = function(parseTreeNode,options) {
+const DiffTextWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
@@ -35,26 +35,29 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Create the diff
-	var dmpObject = new dmp.diff_match_patch(),
-		diffs = dmpObject.diff_main(this.getAttribute("source",""),this.getAttribute("dest",""));
+	const dmpObject = new dmp.diff_match_patch();
+	const diffs = dmpObject.diff_main(this.getAttribute("source",""),this.getAttribute("dest",""));
 	// Apply required cleanup
 	switch(this.getAttribute("cleanup","semantic")) {
-		case "none":
+		case "none": {
 			// No cleanup
 			break;
-		case "efficiency":
+		}
+		case "efficiency": {
 			dmpObject.diff_cleanupEfficiency(diffs);
 			break;
-		default: // case "semantic"
+		}
+		default: { // case "semantic"
 			dmpObject.diff_cleanupSemantic(diffs);
 			break;
+		}
 	}
 	// Create the elements
-	var domContainer = this.document.createElement("div"), 
-		domDiff = this.createDiffDom(diffs);
+	const domContainer = this.document.createElement("div");
+	const domDiff = this.createDiffDom(diffs);
 	parent.insertBefore(domContainer,nextSibling);
 	// Set variables
-	this.setVariable("diff-count",diffs.reduce(function(acc,diff) {
+	this.setVariable("diff-count",diffs.reduce((acc,diff) => {
 		if(diff[0] !== dmp.DIFF_EQUAL) {
 			acc++;
 		}
@@ -72,20 +75,20 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 Create DOM elements representing a list of diffs
 */
 DiffTextWidget.prototype.createDiffDom = function(diffs) {
-	var self = this;
+	const self = this;
 	// Create the element and assign the attributes
-	var domPre = this.document.createElement("pre"),
-		domCode = this.document.createElement("code");
-	$tw.utils.each(diffs,function(diff) {
-		var tag = diff[0] === dmp.DIFF_INSERT ? "ins" : (diff[0] === dmp.DIFF_DELETE ? "del" : "span"),
-			className = diff[0] === dmp.DIFF_INSERT ? "tc-diff-insert" : (diff[0] === dmp.DIFF_DELETE ? "tc-diff-delete" : "tc-diff-equal"),
-			dom = self.document.createElement(tag),
-			text = diff[1],
-			currPos = 0,
-			re = /([\x00-\x1F])/mg,
-			match = re.exec(text),
-			span,
-			printable;
+	const domPre = this.document.createElement("pre");
+	const domCode = this.document.createElement("code");
+	$tw.utils.each(diffs,(diff) => {
+		const tag = diff[0] === dmp.DIFF_INSERT ? "ins" : (diff[0] === dmp.DIFF_DELETE ? "del" : "span");
+		const className = diff[0] === dmp.DIFF_INSERT ? "tc-diff-insert" : (diff[0] === dmp.DIFF_DELETE ? "tc-diff-delete" : "tc-diff-equal");
+		const dom = self.document.createElement(tag);
+		const text = diff[1];
+		let currPos = 0;
+		const re = /([\x00-\x1F])/mg;
+		let match = re.exec(text);
+		let span;
+		let printable;
 		dom.className = className;
 		while(match) {
 			if(currPos < match.index) {
@@ -93,7 +96,7 @@ DiffTextWidget.prototype.createDiffDom = function(diffs) {
 			}
 			span = self.document.createElement("span");
 			span.className = "tc-diff-invisible";
-			printable = self.invisibleCharacters[match[0]] || ("[0x" + match[0].charCodeAt(0).toString(16) + "]");
+			printable = self.invisibleCharacters[match[0]] || (`[0x${match[0].charCodeAt(0).toString(16)}]`);
 			span.appendChild(self.document.createTextNode(printable));
 			dom.appendChild(span);
 			currPos = match.index + match[0].length;
@@ -113,14 +116,14 @@ Compute the internal state of the widget
 */
 DiffTextWidget.prototype.execute = function() {
 	// Make child widgets
-	var parseTreeNodes;
+	let parseTreeNodes;
 	if(this.parseTreeNode && this.parseTreeNode.children && this.parseTreeNode.children.length > 0) {
 		parseTreeNodes = this.parseTreeNode.children;
 	} else {
 		parseTreeNodes = [{
 			type: "transclude",
 			attributes: {
-				tiddler: {type: "string", value: "$:/language/Diffs/CountMessage"}
+				tiddler: {type: "string",value: "$:/language/Diffs/CountMessage"}
 			}
 		}];
 	}
@@ -131,7 +134,7 @@ DiffTextWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DiffTextWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup) {
 		this.refreshSelf();
 		return true;

@@ -10,86 +10,86 @@ A barebones implementation of DOM interfaces needed by the rendering mechanism.
 "use strict";
 
 // Sequence number used to enable us to track objects for testing
-var sequenceNumber = null;
+let sequenceNumber = null;
 
-var bumpSequenceNumber = function(object) {
+const bumpSequenceNumber = function(object) {
 	if(sequenceNumber !== null) {
 		object.sequenceNumber = sequenceNumber++;
 	}
 };
 
-var TW_Node = function (){
+const TW_Node = function() {
 	throw TypeError("Illegal constructor");
 };
 
-Object.defineProperty(TW_Node.prototype, 'ELEMENT_NODE', {
-	get: function() {
+Object.defineProperty(TW_Node.prototype,'ELEMENT_NODE',{
+	get() {
 		return 1;
 	}
 });
 
-Object.defineProperty(TW_Node.prototype, 'TEXT_NODE', {
-	get: function() {
+Object.defineProperty(TW_Node.prototype,'TEXT_NODE',{
+	get() {
 		return 3;
 	}
 });
 
-var TW_TextNode = function(text) {
+const TW_TextNode = function(text) {
 	bumpSequenceNumber(this);
-	this.textContent = text + "";
+	this.textContent = `${text}`;
 };
 
 Object.setPrototypeOf(TW_TextNode.prototype,TW_Node.prototype);
 
-Object.defineProperty(TW_TextNode.prototype, "nodeType", {
-	get: function() {
+Object.defineProperty(TW_TextNode.prototype,"nodeType",{
+	get() {
 		return this.TEXT_NODE;
 	}
 });
 
-Object.defineProperty(TW_TextNode.prototype, "formattedTextContent", {
-	get: function() {
+Object.defineProperty(TW_TextNode.prototype,"formattedTextContent",{
+	get() {
 		return this.textContent.replace(/(\r?\n)/g,"");
 	}
 });
 
-var TW_Style = function(el) {
+const TW_Style = function(el) {
 	// Define the internal style object
-	var styleObject = {
+	const styleObject = {
 		// Method to get the entire style object
-		get: function() {
+		get() {
 			return el._style;
 		},
 		// Method to set styles using a string (e.g. "color:red; background-color:blue;")
-		set: function(str) {
-			var self = this;
+		set(str) {
+			const self = this;
 			str = str || "";
-			$tw.utils.each(str.split(";"),function(declaration) {
-				var parts = declaration.split(":"),
-					name = $tw.utils.trim(parts[0]),
-					value = $tw.utils.trim(parts[1]);
+			$tw.utils.each(str.split(";"),(declaration) => {
+				const parts = declaration.split(":");
+				const name = $tw.utils.trim(parts[0]);
+				const value = $tw.utils.trim(parts[1]);
 				if(name && value) {
 					el._style[$tw.utils.convertStyleNameToPropertyName(name)] = value;
 				}
 			});
 		},
 		// Method to set a specific property without transforming the property name, such as a custom property
-		setProperty: function(name, value) {
+		setProperty(name,value) {
 			el._style[name] = value;
 		}
 	};
 
 	// Return a Proxy to handle direct access to individual style properties
-	return new Proxy(styleObject, {
-		get: function(target, property) {
+	return new Proxy(styleObject,{
+		get(target,property) {
 			// If the property exists on styleObject, return it (get, set, setProperty methods)
-			if (property in target) {
+			if(property in target) {
 				return target[property];
 			}
 			// Otherwise, return the corresponding property from _style
 			return el._style[$tw.utils.convertStyleNameToPropertyName(property)] || "";
 		},
-		set: function(target, property, value) {
+		set(target,property,value) {
 			// Set the property in _style
 			el._style[$tw.utils.convertStyleNameToPropertyName(property)] = value;
 			return true;
@@ -97,7 +97,7 @@ var TW_Style = function(el) {
 	});
 };
 
-var TW_Element = function(tag, namespace) {
+const TW_Element = function(tag,namespace) {
 	bumpSequenceNumber(this);
 	this.isTiddlyWikiFakeDom = true;
 	this.tag = tag;
@@ -112,8 +112,8 @@ var TW_Element = function(tag, namespace) {
 
 Object.setPrototypeOf(TW_Element.prototype,TW_Node.prototype);
 
-Object.defineProperty(TW_Element.prototype, "nodeType", {
-	get: function() {
+Object.defineProperty(TW_Element.prototype,"nodeType",{
+	get() {
 		return this.ELEMENT_NODE;
 	}
 });
@@ -132,7 +132,7 @@ TW_Element.prototype.setAttribute = function(name,value) {
 	if(name === "style") {
 		this.style.set(value);
 	} else {
-		this.attributes[name] = value + "";
+		this.attributes[name] = `${value}`;
 	}
 };
 
@@ -156,7 +156,7 @@ TW_Element.prototype.appendChild = function(node) {
 
 TW_Element.prototype.insertBefore = function(node,nextSibling) {
 	if(nextSibling) {
-		var p = this.children.indexOf(nextSibling);
+		const p = this.children.indexOf(nextSibling);
 		if(p !== -1) {
 			this.children.splice(p,0,node);
 			node.parentNode = this;
@@ -169,7 +169,7 @@ TW_Element.prototype.insertBefore = function(node,nextSibling) {
 };
 
 TW_Element.prototype.removeChild = function(node) {
-	var p = this.children.indexOf(node);
+	const p = this.children.indexOf(node);
 	if(p !== -1) {
 		this.children.splice(p,1);
 	}
@@ -179,14 +179,14 @@ TW_Element.prototype.hasChildNodes = function() {
 	return !!this.children.length;
 };
 
-Object.defineProperty(TW_Element.prototype, "childNodes", {
-	get: function() {
+Object.defineProperty(TW_Element.prototype,"childNodes",{
+	get() {
 		return this.children;
 	}
 });
 
-Object.defineProperty(TW_Element.prototype, "firstChild", {
-	get: function() {
+Object.defineProperty(TW_Element.prototype,"firstChild",{
+	get() {
 		return this.children[0];
 	}
 });
@@ -195,33 +195,33 @@ TW_Element.prototype.addEventListener = function(type,listener,useCapture) {
 	// Do nothing
 };
 
-Object.defineProperty(TW_Element.prototype, "tagName", {
-	get: function() {
+Object.defineProperty(TW_Element.prototype,"tagName",{
+	get() {
 		return this.tag || "";
 	}
 });
 
-Object.defineProperty(TW_Element.prototype, "className", {
-	get: function() {
+Object.defineProperty(TW_Element.prototype,"className",{
+	get() {
 		return this.attributes["class"] || "";
 	},
-	set: function(value) {
-		this.attributes["class"] = value + "";
+	set(value) {
+		this.attributes["class"] = `${value}`;
 	}
 });
 
-Object.defineProperty(TW_Element.prototype, "value", {
-	get: function() {
+Object.defineProperty(TW_Element.prototype,"value",{
+	get() {
 		return this.attributes.value || "";
 	},
-	set: function(value) {
-		this.attributes.value = value + "";
+	set(value) {
+		this.attributes.value = `${value}`;
 	}
 });
 
-Object.defineProperty(TW_Element.prototype, "outerHTML", {
-	get: function() {
-		var output = [],attr,a,v;
+Object.defineProperty(TW_Element.prototype,"outerHTML",{
+	get() {
+		const output = []; let attr; let a; let v;
 		output.push("<",this.tag);
 		if(this.attributes) {
 			attr = [];
@@ -229,7 +229,7 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 				attr.push(a);
 			}
 			attr.sort();
-			for(a=0; a<attr.length; a++) {
+			for(a = 0;a < attr.length;a++) {
 				v = this.attributes[attr[a]];
 				if(v !== undefined) {
 					output.push(" ",attr[a],"=\"",$tw.utils.htmlEncode(v),"\"");
@@ -237,16 +237,16 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 			}
 		}
 		if(this._style) {
-			var style = [];
-			for(var s in this._style) {
-				style.push($tw.utils.convertPropertyNameToStyleName(s) + ":" + this._style[s] + ";");
+			const style = [];
+			for(const s in this._style) {
+				style.push(`${$tw.utils.convertPropertyNameToStyleName(s)}:${this._style[s]};`);
 			}
 			if(style.length > 0) {
 				output.push(" style=\"",style.join(""),"\"");
 			}
 		}
 		output.push(">");
-		if($tw.config.htmlVoidElements.indexOf(this.tag) === -1) {
+		if(!$tw.config.htmlVoidElements.includes(this.tag)) {
 			output.push(this.innerHTML);
 			output.push("</",this.tag,">");
 		}
@@ -254,13 +254,13 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 	}
 });
 
-Object.defineProperty(TW_Element.prototype, "innerHTML", {
-	get: function() {
+Object.defineProperty(TW_Element.prototype,"innerHTML",{
+	get() {
 		if(this.isRaw) {
 			return this.rawHTML;
 		} else {
-			var b = [];
-			$tw.utils.each(this.children,function(node) {
+			const b = [];
+			$tw.utils.each(this.children,(node) => {
 				if(node instanceof TW_Element) {
 					b.push(node.outerHTML);
 				} else if(node instanceof TW_TextNode) {
@@ -270,15 +270,15 @@ Object.defineProperty(TW_Element.prototype, "innerHTML", {
 			return b.join("");
 		}
 	},
-	set: function(value) {
+	set(value) {
 		this.isRaw = true;
 		this.rawHTML = value;
 		this.rawTextContent = null;
 	}
 });
 
-Object.defineProperty(TW_Element.prototype, "textInnerHTML", {
-	set: function(value) {
+Object.defineProperty(TW_Element.prototype,"textInnerHTML",{
+	set(value) {
 		if(this.isRaw) {
 			this.rawTextContent = value;
 		} else {
@@ -287,8 +287,8 @@ Object.defineProperty(TW_Element.prototype, "textInnerHTML", {
 	}
 });
 
-Object.defineProperty(TW_Element.prototype, "textContent", {
-	get: function() {
+Object.defineProperty(TW_Element.prototype,"textContent",{
+	get() {
 		if(this.isRaw) {
 			if(this.rawTextContent === null) {
 				return "";
@@ -296,32 +296,32 @@ Object.defineProperty(TW_Element.prototype, "textContent", {
 				return this.rawTextContent;
 			}
 		} else {
-			var b = [];
-			$tw.utils.each(this.children,function(node) {
+			const b = [];
+			$tw.utils.each(this.children,(node) => {
 				b.push(node.textContent);
 			});
 			return b.join("");
 		}
 	},
-	set: function(value) {
+	set(value) {
 		this.children = [new TW_TextNode(value)];
 	}
 });
 
-Object.defineProperty(TW_Element.prototype, "formattedTextContent", {
-	get: function() {
+Object.defineProperty(TW_Element.prototype,"formattedTextContent",{
+	get() {
 		if(this.isRaw) {
 			return "";
 		} else {
-			var b = [],
-				isBlock = $tw.config.htmlBlockElements.indexOf(this.tag) !== -1;
+			const b = [];
+			const isBlock = $tw.config.htmlBlockElements.includes(this.tag);
 			if(isBlock) {
 				b.push("\n");
 			}
 			if(this.tag === "li") {
 				b.push("* ");
 			}
-			$tw.utils.each(this.children,function(node) {
+			$tw.utils.each(this.children,(node) => {
 				b.push(node.formattedTextContent);
 			});
 			if(isBlock) {
@@ -332,17 +332,17 @@ Object.defineProperty(TW_Element.prototype, "formattedTextContent", {
 	}
 });
 
-var document = {
-	setSequenceNumber: function(value) {
+const document = {
+	setSequenceNumber(value) {
 		sequenceNumber = value;
 	},
-	createElementNS: function(namespace,tag) {
+	createElementNS(namespace,tag) {
 		return new TW_Element(tag,namespace);
 	},
-	createElement: function(tag) {
+	createElement(tag) {
 		return new TW_Element(tag);
 	},
-	createTextNode: function(text) {
+	createTextNode(text) {
 		return new TW_TextNode(text);
 	},
 	compatMode: "CSS1Compat", // For KaTeX to know that we're not a browser in quirks mode

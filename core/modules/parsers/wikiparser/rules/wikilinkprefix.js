@@ -27,9 +27,9 @@ Parse the most recent match
 */
 exports.parse = function() {
 	// Get the details of the match
-	var linkText = this.match[0];
+	const linkText = this.match[0];
 	// Move past the wikilink
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Return the link without unwikilink character as plain text
-	return [{type: "text", text: linkText.substr(1)}];
+	return [{type: "text",text: linkText.substr(1)}];
 };
