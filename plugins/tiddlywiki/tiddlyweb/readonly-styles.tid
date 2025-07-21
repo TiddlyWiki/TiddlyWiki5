@@ -1,27 +1,30 @@
 title: $:/plugins/tiddlywiki/tiddlyweb/readonly
 tags: [[$:/tags/Stylesheet]]
 
-\define button-selector(title)
-button.$title$, .tc-drop-down button.$title$, div.$title$
+\procedure button-selector(title)
+\whitespace trim
+<$let formatted-title={{{ [<title>encodeuricomponent[]escapecss[]addprefix[tc-btn-]] }}} >
+button.<<formatted-title>>, .tc-drop-down button.<<formatted-title>>, div.<<formatted-title>>
+</$let>
 \end
 
-\define hide-edit-controls()
+\procedure hide-edit-controls()
 <$reveal state="$:/status/IsReadOnly" type="match" text="yes" default="yes">
-<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fclone>>`,`
-<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fdelete>>`,`
-<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fedit>>`,`
-<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-here>>`,`
-<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-journal-here>>`,`
-<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fimport>>`,`
-<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fmanager>>`,`
-<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-image>>`,`
-<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-journal>>`,`
-<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-tiddler>> `{
+<<button-selector "$:/core/ui/Buttons/clone">>,
+<<button-selector "$:/core/ui/Buttons/delete">>,
+<<button-selector "$:/core/ui/Buttons/edit">>,
+<<button-selector "$:/core/ui/Buttons/new-here">>,
+<<button-selector "$:/core/ui/Buttons/new-journal-here">>,
+<<button-selector "$:/core/ui/Buttons/import">>,
+<<button-selector "$:/core/ui/Buttons/manager">>,
+<<button-selector "$:/core/ui/Buttons/new-image">>,
+<<button-selector "$:/core/ui/Buttons/new-journal">>,
+<<button-selector "$:/core/ui/Buttons/new-tiddler">>{
 	display: none;
-}`
+}
 </$reveal>
 \end
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
-<<hide-edit-controls>>
+<<hide-edit-controls>>`
