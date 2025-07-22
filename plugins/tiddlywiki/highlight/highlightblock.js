@@ -8,11 +8,11 @@ Wraps up the fenced code blocks parser for highlight and use in TiddlyWiki5
 \*/
 "use strict";
 
-var TYPE_MAPPINGS_BASE = "$:/config/HighlightPlugin/TypeMappings/";
+const TYPE_MAPPINGS_BASE = "$:/config/HighlightPlugin/TypeMappings/";
 
-var CodeBlockWidget = require("$:/core/modules/widgets/codeblock.js").codeblock;
+const CodeBlockWidget = require("$:/core/modules/widgets/codeblock.js").codeblock;
 
-var hljs = require("$:/plugins/tiddlywiki/highlight/highlight.js");
+const hljs = require("$:/plugins/tiddlywiki/highlight/highlight.js");
 
 if(hljs.getLanguage !== undefined) {
 	// load language definitions
@@ -33,7 +33,7 @@ if(hljs.getLanguage !== undefined) {
 			if($tw.browser && !domNode.isTiddlyWikiFakeDom) {
 				hljs.highlightElement(domNode.children[0]);
 			} else {
-				var text = domNode.textContent;
+				const text = domNode.textContent;
 				domNode.children[0].innerHTML = hljs.highlight(text,{language: language, ignoreIllegals: true}).value;
 				// If we're using the fakedom then specially save the original raw text
 				if(domNode.isTiddlyWikiFakeDom) {
