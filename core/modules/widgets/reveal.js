@@ -89,6 +89,26 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 			top = this.popup.top + this.popup.height;
 			break;
 	}
+	// if requested, clamp the popup so that it will always be fully inside its parent (the first upstream element with position:relative), as long as the popup is smaller than its parent
+	// if position is absolute then clamping is done to the canvas boundary, since there is no "parent"
+	if(this.clampToParent !== "none") {
+		if(this.popup.absolute) {
+			var parentWidth = window.innerWidth,
+				parentheight = window.innerHeight;
+		} else {
+			var parentWidth = domNode.offsetParent.offsetWidth,
+				parentHeight = domNode.offsetParent.offsetHeight
+		}
+		var right = left + domNode.offsetWidth,
+			bottom = top + domNode.offsetHeight;
+		if((this.clampToParent === "both" || this.clampToParent === "right") && right > parentWidth) {
+			left = parentWidth - domNode.offsetWidth;
+		}
+		if((this.clampToParent === "both" || this.clampToParent === "bottom") && bottom > parentHeight) {
+			top = parentHeight - domNode.offsetHeight;
+		}
+		// clamping on left and top sides is taken care of by positionAllowNegative
+	}
 	if(!this.positionAllowNegative) {
 		left = Math.max(0,left);
 		top = Math.max(0,top);
@@ -123,6 +143,7 @@ RevealWidget.prototype.execute = function() {
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
+	this.clampToParent = this.getAttribute("clamp","none");
 	// Compute the title of the state tiddler and read it
 	this.stateTiddlerTitle = this.state;
 	this.stateTitle = this.getAttribute("stateTitle");
