@@ -1,0 +1,107 @@
+title: Pull request for TiddlyWiki
+
+!! Changelog categories
+
+These are the categories used by Pull Request Summary lines as outlined in the [ext[PR Template|https://github.com/Jermolene/TiddlyWiki5/blob/master/.github/PULL_REQUEST_TEMPLATE/pull_request_template.md]]
+In the end, it's up to the author to decide where ''they'' want their change to be listed, these are only guidelines, not rules.
+
+!!! None
+
+Please consider a summary of "SUMMARY: None" for minor additions, fixes, and documentation changes. There are far too many changes made to the core to feature anything approaching all of them in the changelog. (Do not add any description in quotes - e.g., SUMMARY: None "whatever" - after a summary of "None".)
+
+!!! Usability
+
+Adding new functionality to the wiki is a feature. These will generally be edits to the JS code in the core, though new wikitext may be involved as well.
+
+!!! Widget
+
+Make changes to core widgets, to support new attributes or improve performances.
+
+!!! Filter
+
+Add new core filters, or improve existing ones to support new parameters.
+
+!!! Hackability
+
+Usually this means extends what is capable to do within a community plugin. Or refactor the wikitext to make it easier to read and modify by the community.
+
+!!! Document
+
+Improving documents in editions/ folder.
+
+!!! Plugin
+
+If a change is either contained within an official plugin, it goes in this category.
+
+!!! Server
+
+Client-server improvements, or changes to the server code itself, including new command line options.
+
+!!! Performance
+
+When there's no functional change at all except for less execution time, it's performance.
+
+These will almost always happen in JS code.
+
+!!! Infrastructure
+
+These are changes for programmers, by programmers.
+Most users will never even know these happened, but they'll appreciate the improved stability and features that this kind of things enables.
+
+All manner of refactor and overhaul oriented at making the wiki easier to work on, and improvements to developer experiences fit in this category.
+
+These will frequently be JS changes, but wikitext reorganization also fits, as does development of tools that run outside the wiki.
+
+!!! Translation
+
+We want everyone to enjoy TiddlyWiki, so we do translations.
+
+Changes oriented at letting everyone use TiddlyWiki no matter what their language go here.
+
+!!! Accessibility
+
+Make wiki accessible to users without colour vision, or with other disabilities.
+
+!!! Theme
+
+About theme and palette.
+
+!! Change types
+
+!!! added
+
+This is for major new features, new plugins, new filters, new commands, new wikitext, new anything.
+
+!!! modified
+
+This might be breaking changes that will require users to update their wikis, or 
+
+!!! fixed
+
+If it was broken before, and it isn't anymore, that's a bugfix.
+
+This applies equally to JS and WikiText changes.
+
+!!! extended
+
+Add minor new features to existing plugins, filters, commands, wikitext, etc.
+
+!!! updated
+
+Update a dependency or resource to a newer version.
+
+!!! improved
+
+It might be a change to the way something works, that doesn't break anything. Only makes it works better.
+
+!!! renamed
+
+Simply change the name of widget, macro, or concept in the documentation.
+
+!!! removed
+
+This feature is not exist anymore.
+
+!!! hide
+
+This feature is still exist, but it's hidden from the user interface.
