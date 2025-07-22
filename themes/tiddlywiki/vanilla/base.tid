@@ -23,14 +23,6 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 </$set>
 \end
 
-\define sidebarbreakpoint()
-<$text text={{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}/>
-\end
-
-\define sidebarbreakpoint-minus-one()
-<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
-\end
-
 \define if-fluid-fixed(text,hiddenSidebarText)
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
 $text$
@@ -62,6 +54,8 @@ $else$
 
 </$set>
 \end
+
+\import [function[get.base.functions.theme],<get.current.theme>first[]is[tiddler]] :else[function[get.base.functions.theme],<get.current.theme>first[]is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/functions]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
@@ -1041,36 +1035,91 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	.tc-sidebar-scrollable {
 		position: fixed;
 		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
-		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
 		bottom: 0;
 		right: 0;
 		overflow-y: auto;
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
 		margin: 0 0 0 -42px;
-		padding: 71px 0 28px 42px;
+		padding: 71px 0 28px <<get.theme.metric sidebarpadding>>;
+	}
+
+	.tc-story-river {
+		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+		padding: 42px <<get.theme.metric storypaddingright>> 42px <<get.theme.metric storypaddingleft>>;
+	}
+
+	html[dir="rtl"] .tc-sidebar-left .tc-sidebar-scrollable, .tc-sidebar-left .tc-sidebar-scrollable {
+		left: 0;
+		margin: 0 -42px 0 0;
 	}
 
 	html[dir="rtl"] .tc-sidebar-scrollable {
-		left: auto;
-		right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+		padding-right: <<get.theme.metric sidebarpadding>>;
+		padding-left: 0;
+	}
+
+	.tc-sidebar-scrollable {
+		left: clamp(min(calc(<<get.theme.metric storyminwidth>> + <<get.theme.metric storyleft>> - <<get.theme.storywidthoverlap>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>>),calc(100% - <<get.theme.metric sidebarminwidth>>)),<<get.theme.metric storyright>>,calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>>));
+	}
+
+	html[dir="rtl"] .tc-sidebar-left .tc-sidebar-scrollable, .tc-sidebar-left .tc-sidebar-scrollable {
+		right: clamp(min(calc(<<get.theme.metric storyminwidth>> + <<get.theme.metric storyleft>> - <<get.theme.storywidthoverlap>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>>),calc(100% - <<get.theme.metric sidebarminwidth>>)),<<get.theme.metric storyright>>,calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>>));
+	}
+
+	html[dir="rtl"] .tc-sidebar-scrollable:not(.tc-sidebar-left .tc-sidebar-scrollable) {
+		left: clamp(min(calc(<<get.theme.metric storyminwidth>> + <<get.theme.metric storyleft>> - <<get.theme.storywidthoverlap>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>>),calc(100% - <<get.theme.metric sidebarminwidth>>)),<<get.theme.metric storyright>>,calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>>));
 	}
 
 	.tc-story-river {
-		position: relative;
-		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
-		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
-		width: {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}};
-		padding: 42px 42px 42px 42px;
+		left: max(0px,<<get.theme.metric storyleft>>);
+		right: min(clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.storywidthoverlap>> - <<get.story-sidebar.overlap>>),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>)),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
+		width: clamp(<<get.theme.metric storyminwidth>>,<<get.theme.metric storywidth>>,calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>> - <<get.theme.metric storyleft>> + <<get.theme.storywidthoverlap>>));
 	}
 
-<<if-no-sidebar "
+	.tc-sidebar-left .tc-story-river {
+		display: flex;
+		align-items: flex-end;
+		flex-direction: column;
+		left: min(clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.storywidthoverlap>> - <<get.story-sidebar.overlap>>),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>)),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
+		right: max(0px,<<get.theme.metric storyleft>>);
+	}
+
+	html[dir="rtl"] .tc-sidebar-left .tc-story-river {
+		align-items: flex-start;
+		left: min(clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.storywidthoverlap>> - <<get.story-sidebar.overlap>>),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>)),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
+		right: max(0px,<<get.theme.metric storyleft>>);
+	}
+
+	html[dir="rtl"] .tc-story-river:not(.tc-sidebar-left .tc-story-river) {
+		display: flex;
+		align-items: flex-end;
+		flex-direction: column;
+		right: min(clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.storywidthoverlap>> - <<get.story-sidebar.overlap>>),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>)),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
+	}
+
+<<if-no-sidebar """
 
 	.tc-story-river {
-		width: calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+		width: calc(100% - max(0px,{{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
 	}
 
-">>
+	.tc-sidebar-left .tc-story-river {
+		right: max(0px,{{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+		left: 0;
+	}
+
+	html[dir="rtl"] .tc-sidebar-left .tc-story-river {
+		left: 0;
+		right: max(0px,{{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+	}
+
+	html[dir="rtl"] .tc-story-river:not(.tc-sidebar-left .tc-story-river) {
+		right: 0;
+		left: max(0px,{{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+	}
+
+""">>
 
 	.tc-story-river.tc-static-story-river {
 		margin-right: 0;
@@ -1170,14 +1219,20 @@ button.tc-btn-invisible.tc-remove-tag-button {
 @media (min-width: <<sidebarbreakpoint>>) {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
-		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
+		width: clamp(calc(<<get.theme.metric storyminwidth>> - 84px),calc(<<get.theme.metric tiddlerwidth>>),100%);
 		border-radius: 2px;
+	}
+
+	.tc-sidebar-left .tc-tiddler-frame {
+		width: clamp(calc(<<get.theme.metric storyminwidth>> - 84px),calc(<<get.theme.metric tiddlerwidth>>),100%);
 	}
 
 <<if-no-sidebar "
 
-	.tc-tiddler-frame {
+	.tc-tiddler-frame, .tc-sidebar-left .tc-tiddler-frame {
 		width: 100%;
+		left: auto;
+		right: auto;
 	}
 
 ">>
@@ -1257,6 +1312,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	padding: 3px; /* make space for outline */
 }
 
+html[dir="rtl"] .tc-tiddler-frame .tc-tiddler-controls {
+	float: left;
+}
+
 .tc-tiddler-controls .tc-drop-down {
 	font-size: 0.6em;
 }
@@ -1314,7 +1373,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-frame .tc-edit-texteditor {
 	width: 100%;
-	margin: 4px 0 4px 0;
+	margin: 4px 0 3px 0;
 }
 
 .tc-tiddler-frame input.tc-edit-texteditor,
@@ -1341,6 +1400,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-frame iframe.tc-edit-texteditor {
 	background-color: <<colour tiddler-background>>;
+	z-index: 1;
 }
 
 .tc-tiddler-frame .tc-edit-fields input.tc-edit-fieldeditor,
@@ -1410,7 +1470,11 @@ html body.tc-body.tc-single-tiddler-window {
 */
 
 .tc-editor-toolbar {
-	margin-top: 8px;
+	background-color: <<colour tiddler-background>>;
+	z-index: 2;
+	padding-top: 8px;
+	margin-left: -2px;
+	margin-right: -2px;
 }
 
 .tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-editor-toolbar,
@@ -1489,15 +1553,27 @@ html body.tc-body.tc-single-tiddler-window {
 <<if-fluid-fixed text:"""
 
 	.tc-story-river {
-		padding-right: 0;
 		position: relative;
 		width: auto;
 		left: 0;
-		margin-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
-		margin-right: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+		margin-left: max(0px,<<get.theme.metric storyleft>>);
+		margin-right: clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.story-sidebar.overlap>>),calc(<<get.theme.metric sidebarwidth>> - <<get.story-sidebar.overlap>>),calc(100% - <<get.theme.metric storyleft>> - <<get.theme.metric storyminwidth>> + <<get.story-sidebar.overlap>>));
 	}
 
-	.tc-tiddler-frame {
+	html[dir="rtl"] .tc-sidebar-left .tc-story-river, .tc-sidebar-left .tc-story-river {
+		margin-right: max(0px,<<get.theme.metric storyleft>>);
+		margin-left: clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.story-sidebar.overlap>>),calc(<<get.theme.metric sidebarwidth>> - <<get.story-sidebar.overlap>>),calc(100% - <<get.theme.metric storyleft>> - <<get.theme.metric storyminwidth>>));
+		left: auto;
+		width: auto;
+		right: 0;
+	}
+
+	html[dir="rtl"] .tc-story-river:not(.tc-sidebar-left .tc-story-river) {
+		left: auto;
+		right: 0;
+	}
+
+	.tc-tiddler-frame, .tc-sidebar-left .tc-tiddler-frame {
 		width: 100%;
 	}
 
@@ -1505,7 +1581,23 @@ html body.tc-body.tc-single-tiddler-window {
 		left: auto;
 		bottom: 0;
 		right: 0;
-		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+		width: clamp(<<get.theme.metric sidebarminwidth>>,<<get.theme.metric sidebarwidth>>,(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>> + <<get.story-sidebar.overlap>> - <<get.theme.storyleftpadding.excess>> - <<get.theme.storyrightpadding.excess>>));
+	}
+
+	.tc-sidebar-left .tc-sidebar-scrollable {
+		left: 0;
+		right: auto;
+		width: clamp(<<get.theme.metric sidebarminwidth>>,<<get.theme.metric sidebarwidth>>,(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>> + <<get.story-sidebar.overlap>> - <<get.theme.storyleftpadding.excess>> - <<get.theme.storyrightpadding.excess>>));
+	}
+
+	html[dir="rtl"] .tc-sidebar-left .tc-sidebar-scrollable {
+		padding-right: <<get.theme.metric sidebarpadding>>;
+		right: auto;
+	}
+
+	html[dir="rtl"] .tc-sidebar-scrollable:not(.tc-sidebar-left .tc-sidebar-scrollable) {
+		padding-right: <<get.theme.metric sidebarpadding>>;
+		padding-left: 0;
 	}
 
 	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
@@ -1516,8 +1608,17 @@ html body.tc-body.tc-single-tiddler-window {
 """ hiddenSidebarText:"""
 
 	.tc-story-river {
-		padding-right: 3em;
 		margin-right: 0;
+	}
+
+	.tc-sidebar-left .tc-story-river {
+		margin-left: max(0px,<<get.theme.metric storyleft>>);
+		margin-right: 0;
+	}
+
+	html[dir="rtl"] .tc-sidebar-left .tc-story-river {
+		margin-left: 0;
+		margin-right: max(0px,<<get.theme.metric storyleft>>);
 	}
 
 	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
@@ -1635,6 +1736,7 @@ html body.tc-body.tc-single-tiddler-window {
 		"editor preview";
 	grid-template-columns: repeat(2, minmax(0px, 1fr));
 	grid-template-rows: auto 1fr;
+	width: 100%;
 }
 
 .tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview-hidden {
@@ -1643,15 +1745,22 @@ html body.tc-body.tc-single-tiddler-window {
 		"editor";
 	grid-template-columns: 1fr;
 	grid-template-rows: auto 1fr;
+	width: 100%;
 }
 
 .tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-tiddler-preview-preview {
 	grid-area: preview;
 	overflow-wrap: anywhere;
+	min-height: 100px;
 	word-break: normal;
 	border: 1px solid <<colour tiddler-editor-border>>;
-	margin: 4px 0 3px 3px;
+	margin: 4px 0 3px 0;
 	padding: 3px 3px 3px 3px;
+	z-index: 1;
+}
+
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-tiddler-preview-preview > iframe[sandbox] {
+	width: 100%;
 }
 
 <<if-editor-height-fixed then:"""
@@ -1672,6 +1781,7 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview-hidden canvas.tc-edit-bitmapeditor {
 	grid-area: editor;
 	max-width: 100%;
+	z-index: 1;
 }
 
 .tc-edit-fields {
@@ -3568,6 +3678,36 @@ span.tc-translink > a:first-child {
 
 .tc-word-break {
 	word-break: break-all;
+}
+
+html[dir="rtl"] .tc-tiny-gap-left {
+	margin-right: .25em;
+	margin-left: auto;
+}
+
+html[dir="rtl"] .tc-tiny-gap-right {
+	margin-left: .25em;
+	margin-right: auto;
+}
+
+html[dir="rtl"] .tc-small-gap-left {
+	margin-right: .5em;
+	margin-left: auto;
+}
+
+html[dir="rtl"] .tc-small-gap-right {
+	margin-left: .5em;
+	margin-right: auto;
+}
+
+html[dir="rtl"] .tc-big-gap-left {
+	margin-right: 1em;
+	margin-left: auto;
+}
+
+html[dir="rtl"] .tc-big-gap-right {
+	margin-left: 1em;
+	margin-right: auto;
 }
 
 /* Vertical gaps */
