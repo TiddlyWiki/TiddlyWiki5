@@ -87,7 +87,7 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"")
+\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"",field:"title")
 \whitespace trim
 <span class="tc-tagged-draggable-list">
 	<$set name="tag" value=<<__tag__>>>
@@ -106,7 +106,7 @@ tags: $:/tags/Macro
 						<$transclude tiddler="""$itemTemplate$""">
 							<$link to={{!!title}}>
 								<$let tv-wikilinks="no">
-									<$transclude field="caption">
+									<$transclude field=<<__field__>>>
 										<$view field="title"/>
 									</$transclude>
 								</$let>
