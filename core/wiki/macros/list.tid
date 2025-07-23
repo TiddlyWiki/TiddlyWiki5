@@ -22,7 +22,7 @@ tags: $:/tags/Macro
 <$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
 \end
 
-\define list-links-draggable(tiddler,field:"list",emptyMessage,type:"ul",subtype:"li",class:"",itemTemplate)
+\define list-links-draggable(tiddler,field:"list",emptyMessage,type:"ul",subtype:"li",class:"",itemTemplate, field:"")
 \whitespace trim
 <span class="tc-links-draggable-list">
 	<$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
@@ -38,7 +38,7 @@ tags: $:/tags/Macro
 						<$transclude tiddler="""$itemTemplate$""">
 							<$link to={{!!title}}>
 								<$let tv-wikilinks="no">
-									<$transclude field="caption">
+									<$transclude field=<<__field__>>>
 										<$view field="title"/>
 									</$transclude>
 								</$let>
