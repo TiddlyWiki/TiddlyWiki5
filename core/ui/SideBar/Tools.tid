@@ -7,7 +7,7 @@ caption: {{$:/language/SideBar/Tools/Caption}}
 \procedure lingo-base() $:/language/ControlPanel/
 \function config-title() [[$:/config/PageControlButtons/Visibility/$(listItem)$]substitute[]]
 
-<<lingo Basics/Version/Prompt>> <<version>>
+<<lingo Basics/Version/Prompt>><span class="tc-tiny-gap-left"><<version>></span>
 
 <$let tv-config-toolbar-icons="yes"
 	tv-config-toolbar-text="yes"
