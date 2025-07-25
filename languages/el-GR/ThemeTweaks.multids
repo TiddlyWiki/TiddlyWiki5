@@ -1,20 +1,42 @@
 title: $:/language/ThemeTweaks/
 
+Metrics: Μεγέθη
 Metrics/BodyFontSize: Μέγεθος γραμματοσειράς για το κυρίως κείμενο του tiddler
 Metrics/BodyLineHeight: Ύψος γραμμής για το κυρίως κείμενο του tiddler
+Metrics/FontSize: Μέγεθος γραμματοσειράς
+Metrics/LineHeight: Ύψος γραμμής
 Metrics/SidebarBreakpoint: Σημείο διακοπής της πλευρικής εργαλειοθήκης
 Metrics/SidebarBreakpoint/Hint: το ελάχιστο πλάτος σελίδας στο οποίο η ιστορική<br>ροή και η πλευρική εργαλειοθήκη εμφανίζονται η μία δίπλα στην άλλη
 Metrics/SidebarWidth: Πλάτος της πλευρικής εργαλειοθήκης
 Metrics/SidebarWidth/Hint: το πλάτος της πλευρικής εργαλειοθήκης σε ρευστή-στερεοποιημένη διάταξη
+Metrics/StoryLeft: Αριστερή θέση ιστορικού
 Metrics/StoryLeft/Hint: πόσο απέχει το αριστερό περιθώριο (margin) της ιστορικής ροής<br>(περιοχή με tiddlers) από το αριστερό μέρος της σελίδας
+Metrics/StoryRight: Δεξιά θέση ιστορικού
 Metrics/StoryRight/Hint: Πόσο απέχει το αριστερό περιθώριο (margin) της πλευρικής εργαλειοθήκης<br>από το αριστερό μέρος της σελίδας
+Metrics/StoryTop: Θέση κορυφής ιστορικού
 Metrics/StoryTop/Hint: πόσο απέχει το περιθώριο (margin) της ιστορικής ροής<br>από την κορυφή της σελίδας
+Metrics/StoryWidth: Το συνολικό πλάτος της ιστορικής ροής
 Metrics/StoryWidth/Hint: το συνολικό πλάτος της ιστορικής ροής
 Metrics/TiddlerWidth: Πλάτος κάθε tiddler
+Metrics/TiddlerWidth/Hint: εντός της ιστορικής ροής
+Options: Επιλογές
+Options/CodeWrapping: Αναδίπλωση μεγάλων γραμμών σε τμήματα κώδικα
+Options/SidebarLayout: Διάταξη πλευρικής εργαλειοθήκης
 Options/SidebarLayout/Fixed-Fluid: Στερεοποιημένο ιστορικό, ρευστή πλευρική εργαλειοθήκη
 Options/SidebarLayout/Fluid-Fixed: Ρευστό ιστορικό, στερεοποιημένη πλευρική εργαλειοθήκη
+Options/StickyTitles: Κολλώδεις τίτλοι
 Options/StickyTitles/Hint: Αναγκάζει τους τίτλους των tiddler να «κολλάνε» στην κορυφή του παραθύρου του προγράμματος περιήγησης.
+Settings: Ρυθμίσεις
+Settings/BackgroundImage: Εικόνα υποβάθρου σελίδας
+Settings/BackgroundImageAttachment: Επισύναψη εικόνας υποβάθρου σελίδας
 Settings/BackgroundImageAttachment/Fixed: Στερεωμένη στο παράθυρο
+Settings/BackgroundImageAttachment/Scroll: Κύλιση με tiddlers
+Settings/BackgroundImageSize: Μέγεθος εικόνας υποβάθρου της σελίδας
 Settings/BackgroundImageSize/Auto: Αυτόματο
+Settings/BackgroundImageSize/Contain: Περιέχει
+Settings/BackgroundImageSize/Cover: Εξώφυλλο
+Settings/CodeFontFamily: Οικογένεια γραμματοσειράς για κώδικα
+Settings/EditorFontFamily: Οικογένεια γραμματοσειράς για επεξεργασία
+Settings/FontFamily: Οικογένεια γραμματοσειράς
 ThemeTweaks: Προσαρμογές Στο Θέμα
 ThemeTweaks/Hint: Μπορείς να κάνεις κάποιες αλλαγές στο θέμα  ''Vanilla''.
