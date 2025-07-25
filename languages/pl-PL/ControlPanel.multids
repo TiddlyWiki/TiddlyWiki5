@@ -250,3 +250,6 @@ ViewTemplateSubtitle/Caption: Podtytuł Wyświetlanego Tiddlera
 ViewTemplateSubtitle/Hint: Ta kaskada określa szablon wyświetlania podtytułu tiddlera.
 ViewTemplateTags/Caption: Tagi Wyświetlanego Tiddlera
 ViewTemplateTags/Hint: Ta kaskada określa szablon wyświetlania tagów tiddlera.
+WikiInformation/Caption: Informacje o Wiki
+WikiInformation/Hint: Na tej stronie znajduje się skrót konfiguracji tej ~TiddlyWiki. Jej celem jest ułatwienie łatwego dzielenia się najważniejszymi informacjami przykładowo w celu ułatwienia szukania pomocy na forach. Strona nie zawiera żadnych prywatnych informacji i nie wysyła niczego na żaden serwer - przesłanie czegokolwiek dalej wymagana ręcznego skopiowania
+WikiInformation/Drag/Caption: Przeciągnij ten link by skopiować to narzędzie do innej wiki
