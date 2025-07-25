@@ -131,15 +131,14 @@ Saving/GitService/Gitea/Caption: Zapisywacz Gitea
 Saving/GitService/Gitea/Password: Osobisty token do API (przez interfejs webowy Gitea: `Settings | Applications | Generate New Token`)
 Saving/TiddlySpot/Advanced/Heading: Zaawansowane Ustawienia
 Saving/TiddlySpot/BackupDir: Folder z kopią zapasową
-Saving/TiddlySpot/ControlPanel: Panel Sterowania ~TiddlySpot
+Saving/TiddlySpot/ControlPanel: Panel Sterowania ~TiddlyHost
 Saving/TiddlySpot/Backups: Kopie zapasowe
-Saving/TiddlySpot/Caption: Zapisywacz ~TiddlySpot
-Saving/TiddlySpot/Description: Te ustawienia działają tylko gdy zapisujesz do [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]], lub do kompatyblinego serwra. Sprawdź [[tutaj|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] by uzyskać więcej informacji na temat konfiguracji zapisywania do ~TiddlySpot lub ~TiddlyHost.
+Saving/TiddlySpot/Caption: Zapisywacz ~TiddlyHost
+Saving/TiddlySpot/Description: Te ustawienia działają tylko gdy zapisujesz do [[TiddlyHost|https://tiddlyhost.com]], lub do kompatyblinego serwera. Sprawdź [[tutaj|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] by uzyskać więcej informacji na temat konfiguracji zapisywania do ~TiddlyHost.
 Saving/TiddlySpot/Filename: Nazwa Pliku
-Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //URL serwera to domyślnie `http://<wikiname>.tiddlyspot.com/store.cgi` ale może być zmienione by użyć własnego, np. `http://example.com/store.php`.//
+Saving/TiddlySpot/Heading: ~TiddlyHost
+Saving/TiddlySpot/Hint: //URL serwera to domyślnie `http://<wikiname>.tiddlyspot.com` ale może być zmienione by użyć własnego, np. `http://example.com/store.php`.//
 Saving/TiddlySpot/Password: Hasło
-Saving/TiddlySpot/ReadOnly: Uwaga: [[TiddlySpot|http://tiddlyspot.com]] obecnie nie pozwala tworzyć nowych stron. Sprawdź [[TiddlyHost|https://tiddlyhost.com]], nową usługę hostingową kompatybilną z ~TiddlySpot.
 Saving/TiddlySpot/ServerURL: URL serwera
 Saving/TiddlySpot/UploadDir: Folder Docelowy
 Saving/TiddlySpot/UserName: Nazwa Wiki
