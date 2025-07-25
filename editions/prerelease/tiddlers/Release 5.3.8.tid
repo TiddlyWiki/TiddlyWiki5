@@ -8,56 +8,28 @@ description: Under development
 
 //[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.7...master]]//
 
-
-
-! New Features
-
--
+This is a bug fix release for TiddlyWiki [[Release 5.3.7]].
 
 ! Translation improvements
 
 * Chinese
-
-! Plugin Improvements
-
-* 
-
-! Widget Improvements
-
-* 
-
-! Usability Improvements
-
-*
-
-! Palette Improvements
-
-*
-
-! Hackability Improvements
-
-*
+* Polish
+* Greek
 
 ! Bug Fixes
 
-* <<.link-badge-reverted "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9156">> the [[change in v5.3.7|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8768]] that broke the [[list-tagged-draggable Macro]]. The change involved updating some core macros to use procedures
+* <<.link-badge-reverted "https://github.com/TiddlyWiki/TiddlyWiki5/commit/32caeb69c3e7b75a80a84a1e14363e87175b164e">> the [[change in v5.3.7|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8721]] that broke the [[list-tagged-draggable Macro]]. The change involved updating some core macros to use procedures
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/93d30f374da4a6b2037b335f7f7d4eddce8192db">> display of field names longer than the available width in the info panel
-
-! Node.js Improvements
-
-* 
-
-! Performance Improvements
-
-* 
-
-! Developer Improvements
-
-* 
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9185">> [[Highlight Plugin]] theme listing
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9175">> Flexoki palette regressions
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/9166">> name field of fa-IR language plugin
 
 ! Acknowledgements
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+EvidentlyCube
+Leilei332
+pmario
 """>>
