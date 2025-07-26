@@ -1,31 +1,5 @@
 title: TiddlyWiki Community Survey (2025)
 
+The survey result XLSX file can be downloaded from https://ec.europa.eu/eusurvey/publication/tiddlywiki-users-2025. Drag and drop the file here to import it into TiddlyWiki.
 
-<$let stateBase=<<qualify "$:/state/survey-2025/">>>
-	<div class="interview">
-		<$list filter="[tag[Community Survey 2025]fields[]sort[]] -tags -title">
-			<$let state={{{ [<stateBase>addsuffix<currentTiddler>] }}}>
-				<h1>
-					<$button class="tc-btn-invisible">
-						<$action-setfield $tiddler=<<state>> $field="text" $value={{{ [<state>get[text]match[yes]then[no]else[yes]] }}}/>
-						<%if [<state>get[text]match[yes]] %>
-							{{$:/core/images/chevron-down}}
-						<%else%>
-							{{$:/core/images/chevron-right}}
-						<%endif%>
-					</$button>
-					<$link to=<<currentTiddler>>>
-						<$text text=<<currentTiddler>>/>
-					</$link>
-				</h1>
-				<%if [<state>get[text]match[yes]] %>
-					<$list filter="[tag[Community Survey 2025]]" variable="answer">
-						<div class="interview-answer">
-							<$transclude $tiddler=<<answer>> $field=<<currentTiddler>> $mode="block" />
-						</div>
-					</$list>
-				<%endif%>
-			</$let>
-		</$list>
-	</div>
-</$let>
+<<survey-2025-list-questions>>

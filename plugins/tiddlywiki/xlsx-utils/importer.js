@@ -92,12 +92,17 @@ XLSXImporter.prototype.processRow = function(rowImportSpecTitle) {
 		// Save the tiddler if not skipped
 		if(!this.skipTiddler) {
 			if(!this.tiddlerFields.title) {
-				this.tiddlerFields.title = "Imported " + $tw.utils.pad(this.nextAutoTitle++,5);
+				var titleTemplate = this.rowImportSpec.fields["import-title-template"] || "Imported $autoindex$";
+				this.tiddlerFields.title = this.wiki.getSubstitutedText(titleTemplate,$tw.rootWidget,{
+					substitutions: [
+						{name: "autoindex", value: $tw.utils.pad(this.nextAutoTitle++,5)}
+					]
+				});
 			}
 			if(this.applyTags) {
 				this.tiddlerFields.tags = this.applyTags;
 			}
-			this.results.push(this.tiddlerFields);								
+			this.results.push(this.tiddlerFields);
 		}
 	}
 };

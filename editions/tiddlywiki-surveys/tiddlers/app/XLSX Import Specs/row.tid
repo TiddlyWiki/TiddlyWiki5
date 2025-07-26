@@ -1,7 +1,7 @@
 created: 20250711121107617
 import-spec-role: row
 import-row-type: by-column
-list: [[$:/_importspec/Community Survey 2025/Content/Row/title]]
+import-title-template: Community Survey 2025 Answer $autoindex$
 modified: 20250711121107617
 tags: 
 title: $:/_importspec/Community Survey 2025/Content/Row
