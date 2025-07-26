@@ -31,7 +31,7 @@ title: Output
 +
 title: ExpectedResult
 
-<p>()
+<p dir="auto">()
 (Hello There, welcome to $TiddlyWiki$)
 (Welcome to TiddlyWiki)
 (Welcome to TiddlyWiki today)

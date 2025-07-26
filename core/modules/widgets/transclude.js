@@ -267,6 +267,9 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 						parser.tree[0] = {
 							type: "element",
 							tag: "p",
+							attributes: {
+								dir: {type: "string", value: "auto"}
+							},
 							children: [{
 								type: "text",
 								text: this.transcludeFunctionResult

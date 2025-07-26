@@ -47,4 +47,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>New Tiddler 1</p><p>xxx-y-1</p><p>01-New Tiddler</p><p>0002 asdf</p><p>0001 abc</p>
+<p dir="auto">New Tiddler 1</p><p dir="auto">xxx-y-1</p><p dir="auto">01-New Tiddler</p><p dir="auto">0002 asdf</p><p dir="auto">0001 abc</p>
