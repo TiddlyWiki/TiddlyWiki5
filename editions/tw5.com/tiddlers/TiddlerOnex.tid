@@ -1,0 +1,10 @@
+created: 20240217001032546
+modified: 20240217001051272
+tags: 
+title: TiddlerOnex
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$parameters one='Jaguar' $$two='Piranha'>
+	<$text text=<<one>>/>:<$text text=<<$two>>/>
+</$parameters>
