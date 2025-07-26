@@ -3,23 +3,23 @@ tags: $:/tags/Stylesheet
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
-.interview-2010 h1 button svg {
+.interview h1 button svg {
 	width: 16px;
 	height: 16px;
 	vertical-align: middle;
 }
 
-.interview-2010 h2 img {
+.interview h2 img {
 	width: 32px;
 	height: 32px;
 	vertical-align: middle;
 }
 
-.interview-2010 h3 {
+.interview h3 {
 	font-size: 0.9em;
 	line-height: 1;
 }
 
-.interview-2010-answer {
+.interview-answer {
 	margin-left: 32px;
 }

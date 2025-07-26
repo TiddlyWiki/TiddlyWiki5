@@ -2,6 +2,17 @@ title: HelloThere
 
 This page gathers the responses to surveys that we have run for the TiddlyWiki community. 
 
+<%if [tag[Community Survey 2025]] %>
+
+Surveys available:
+
+* [[TiddlyWiki Community Survey (2025)]]
+* [[The Great TiddlyWiki Interview Project (2010)]]
+
+<%else%>
+
 Currently, there is one survey: [[The Great TiddlyWiki Interview Project (2010)]]
+
+<%endif%>
 
 Thank you to https://yatagarasu.tiddlyhost.com for creating the palette used on this page.

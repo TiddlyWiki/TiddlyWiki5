@@ -21,6 +21,7 @@ var XLSXImporter = function(options) {
 	this.importSpec = options.importSpec || this.wiki.getTiddlerText(DEFAULT_IMPORT_SPEC_TITLE);
 	this.logger = new $tw.utils.Logger("xlsx-utils");
 	this.results = [];
+	this.nextAutoTitle = 1;
 	if(JSZip) {
 		this.processWorkbook();		
 	}
@@ -50,6 +51,8 @@ XLSXImporter.prototype.processSheet = function(sheetImportSpecTitle) {
 	this.sheetImportSpec = this.wiki.getTiddler(sheetImportSpecTitle);
 	if(this.sheetImportSpec) {
 		this.sheetName = this.sheetImportSpec.fields["import-sheet-name"];
+		this.skipRowsTop = $tw.utils.parseInt(this.sheetImportSpec.fields["skip-rows-top"] || "0");
+		this.applyTags = this.sheetImportSpec.fields["import-tags"] || "";
 		this.sheet = this.workbook.Sheets[this.sheetName];
 		if(!this.sheet) {
 			this.logger.alert("Missing sheet '" + this.sheetName + "'");
@@ -57,11 +60,15 @@ XLSXImporter.prototype.processSheet = function(sheetImportSpecTitle) {
 			// Get the size of the sheet
 			this.sheetSize = this.measureSheet(this.sheet);
 			// Read the column names from the first row
-			this.columnsByName = this.findColumns(this.sheet,this.sheetSize);
+			this.columnsByName = this.findColumns(this.sheet,this.sheetSize,this.skipRowsTop);
 			// Iterate through the rows
-			for(this.row=this.sheetSize.startRow+1; this.row<=this.sheetSize.endRow; this.row++) {
-				// Iterate through the row import specifiers
-				$tw.utils.each(this.sheetImportSpec.fields.list || [],this.processRow.bind(this));					
+			const startRow = this.sheetSize.startRow + this.skipRowsTop + 1;
+			const endRow = this.sheetSize.endRow;
+			if(startRow < endRow) {
+				for(this.row=startRow; this.row<=endRow; this.row++) {
+					// Iterate through the row import specifiers
+					$tw.utils.each(this.sheetImportSpec.fields.list || [],this.processRow.bind(this));					
+				}
 			}
 		}
 	}
@@ -85,9 +92,17 @@ XLSXImporter.prototype.processRow = function(rowImportSpecTitle) {
 		// Save the tiddler if not skipped
 		if(!this.skipTiddler) {
 			if(!this.tiddlerFields.title) {
-				this.logger.alert("Missing title field for " + JSON.stringify(this.tiddlerFields));
+				var titleTemplate = this.rowImportSpec.fields["import-title-template"] || "Imported $autoindex$";
+				this.tiddlerFields.title = this.wiki.getSubstitutedText(titleTemplate,$tw.rootWidget,{
+					substitutions: [
+						{name: "autoindex", value: $tw.utils.pad(this.nextAutoTitle++,5)}
+					]
+				});
 			}
-			this.results.push(this.tiddlerFields);								
+			if(this.applyTags) {
+				this.tiddlerFields.tags = this.applyTags;
+			}
+			this.results.push(this.tiddlerFields);
 		}
 	}
 };
@@ -102,10 +117,6 @@ XLSXImporter.prototype.processRowByColumn = function() {
 			self.tiddlerFields[name] = cell.w;		
 		}
 	});
-	// Skip the tiddler entirely if it doesn't have a title
-	if(!this.tiddlerFields.title) {
-		this.skipTiddler = true;
-	}
 };
 
 XLSXImporter.prototype.processRowByField = function() {
@@ -182,15 +193,16 @@ XLSXImporter.prototype.measureSheet = function(sheet) {
 	}
 };
 
-XLSXImporter.prototype.findColumns = function(sheet,sheetSize) {
+XLSXImporter.prototype.findColumns = function(sheet,sheetSize,skipRowsTop) {
+	skipRowsTop = skipRowsTop || 0;
 	var columnsByName = {};
 	for(var col=sheetSize.startCol; col<=sheetSize.endCol; col++) {
-		var cell = sheet[XLSX.utils.encode_cell({c: col, r: sheetSize.startRow})],
+		var cell = sheet[XLSX.utils.encode_cell({c: col, r: sheetSize.startRow + skipRowsTop})],
 			columnName;
 		if(cell) {
 			columnName = cell.w;
 			if(columnName) {
-				columnsByName[columnName] = col;							
+				columnsByName[columnName] = col;
 			}
 		}
 	}

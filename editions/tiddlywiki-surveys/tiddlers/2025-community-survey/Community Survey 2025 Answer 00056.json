@@ -1,0 +1,28 @@
+[
+    {
+        "where did you first come across this survey?": "Discord",
+        "would you consider yourself to be a programmer or software developer? you can consider yourself a programmer/developer without studying either discipline or doing it as a job.": "Yes, I would",
+        "when did you first use tiddlywiki?": "2025",
+        "do you currently participate, or have you previously participated in the tiddlywiki community? by \"community\" we refer to official spaces such as talk tiddlywiki as well as online-based third-party communities like the public discord server.": "No",
+        "have you ever published a plugin or tiddlywiki extension of another type, which others can find, import and use? we define these as being publicly-hosted on your own webspace, or a host such as tiddlyhost.": "No",
+        "how would you describe your main use cases for tiddlywiki?": "Note-taking;Journalling;Task and project management (including CRMs);As a knowledge base (including technical, non-fiction and encyclopaedic content);Other",
+        "as you selected other: what are other primary use cases of tiddlywiki for you?": "personal organization. I have ADHD, always have a hundred projects going at once, and need a lot of help remembering and prioritizing",
+        "do you use tiddlywiki to support with your job or programme of education?": "Not applicable (as retired, etc)",
+        "do you share your tiddlywiki(s) with other people? please select 'yes' if there is more than one person who can directly view your wiki.": "No, my TiddlyWiki is for personal use only",
+        "putting it all together, what value does tiddlywiki provide for you in your day to day work, or in your life?": "tiddlywiki helps me track and organize all the facets of my life - what I'm cooking, what I'm crafting, friends I want to stay in touch with, things I want to learn, goals I want to work on...",
+        "what is your level of ability with tiddlywiki? this question assumes you can navigate tiddlywiki, use basic wikitext and save changes.": "My use is basic; I use TiddlyWiki in a configuration close to standard, without plugins",
+        "how do you save changes in tiddlywiki?": "Single-file wiki with TiddlyDesktop",
+        "how do you back up/sync changes between systems?": "DIY (any other solution)",
+        "as you selected diy, would be grateful for more details on the system you use to back up and synchronise your tiddlywiki across devices/systems.": "primarily file backups on external drives along with other backups",
+        "we would love to know what your basic setup looks like in your most-used wiki. you can import the wiki info tiddler and paste the output below. find the wiki information tool here.": "prefer not to answer",
+        "outside of plugins, palettes and other information captured above; are there any customisations you make to your tiddlywiki? these included but are not limited to: stylesheets, macros/functions/procedures, javascript, and direct edits to the core. please also mention if you used or built on customisations from the community.": "not yet, but I will be exploring these customizations in the future",
+        "are you positive about the future prospects of tiddlywiki?": "Yes",
+        "are you confident that tiddlywiki will continue to meet your needs with future development?": "Yes",
+        "are you satisfied with the way the project makes decisions?": "Yes",
+        "what are we doing well? prompts for thinking: what are the aspects of tiddlywiki as a project and community that you find appealing? is there anything you are excited for in the future of tiddlywiki?": "I am new to tiddlywiki so I can't help much here but I deeply appreciate open source projects and the way it helps me",
+        "what could we do better? prompts for thinking: could you imagine yourself leaving tiddlywiki? is there something you are afraid of in the future of tiddlywiki? what could change your relationship with tw and its community? what might encourage you to contribute more to the project?": "I am new to tiddlywiki so I can't help much here, but I am disabled and would struggle to pay or subscribe to use the service. I also care a lot about privacy and would leave if I suspected my data could be compromised.",
+        "with your consent, we would like to publish responses to this survey on tiddlywiki.com, in the spirit of open development. are you happy for your responses to be available online? we will not include information on your age or country of birth in the public results. those items of information will be kept strictly to a small and trusted group of regular contributors and administrators.": "Yes, I am happy for my responses to be published",
+        "title": "Community Survey 2025 Answer 00056",
+        "tags": "[[Community Survey 2025]]"
+    }
+]

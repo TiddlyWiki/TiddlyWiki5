@@ -1,0 +1,33 @@
+[
+    {
+        "where did you first come across this survey?": "Discord",
+        "would you consider yourself to be a programmer or software developer? you can consider yourself a programmer/developer without studying either discipline or doing it as a job.": "Yes, I would",
+        "when did you first use tiddlywiki?": "2015",
+        "do you currently participate, or have you previously participated in the tiddlywiki community? by \"community\" we refer to official spaces such as talk tiddlywiki as well as online-based third-party communities like the public discord server.": "Yes",
+        "when did you begin taking part in the tiddlywiki community?": "2022",
+        "we would be interested in knowing how you engage with the different communities of tw.: talk tiddlywiki": "I do not engage with this community",
+        "we would be interested in knowing how you engage with the different communities of tw.: old mailing list (google group)": "I do not engage with this community",
+        "we would be interested in knowing how you engage with the different communities of tw.: r/tiddlywiki5 on reddit": "I do not engage with this community",
+        "we would be interested in knowing how you engage with the different communities of tw.: discord": "I read/lurk, but do not post",
+        "we would be interested in knowing how you engage with the different communities of tw.: github discussions": "I read/lurk, but do not post",
+        "have you ever published a plugin or tiddlywiki extension of another type, which others can find, import and use? we define these as being publicly-hosted on your own webspace, or a host such as tiddlyhost.": "No",
+        "how would you describe your main use cases for tiddlywiki?": "Note-taking;As a knowledge base (including technical, non-fiction and encyclopaedic content);Worldbuilding (e.g. for role-playing games);Programming",
+        "do you use tiddlywiki to support with your job or programme of education?": "No",
+        "do you share your tiddlywiki(s) with other people? please select 'yes' if there is more than one person who can directly view your wiki.": "Yes, and I am the only editor/administrator of my wiki(s)",
+        "do you publish your wiki(s) online?: to the world wide web": "Yes, using a single-file wiki",
+        "do you publish your wiki(s) online?: to an intranet": "Not publishing to this location",
+        "putting it all together, what value does tiddlywiki provide for you in your day to day work, or in your life?": "I use TiddlyWiki to organize for knowledge collection and sharing, but not on a day to day basis.\n\nHaving said that, I do find TiddlyWiki very valuable in how to think about, and organize various topics under a certain subject.",
+        "what is your level of ability with tiddlywiki? this question assumes you can navigate tiddlywiki, use basic wikitext and save changes.": "I have customised TiddlyWiki through options and plugins;I am comfortable using WikiText widgets (e.g. <$transclude>, <$list>...);I am comfortable writing filter expressions;I have written custom HTML",
+        "how do you save changes in tiddlywiki?": "Single-file wiki with custom saver (e.g. TiddlyPWA, Timimi, tw5-browser-nativesaver)",
+        "how do you back up/sync changes between systems?": "Git forge (GitHub, Gitea/Forgejo, GitLab)",
+        "outside of plugins, palettes and other information captured above; are there any customisations you make to your tiddlywiki? these included but are not limited to: stylesheets, macros/functions/procedures, javascript, and direct edits to the core. please also mention if you used or built on customisations from the community.": "I create own macros, functions and procedures. Or at least I try to",
+        "are you positive about the future prospects of tiddlywiki?": "Yes",
+        "are you confident that tiddlywiki will continue to meet your needs with future development?": "Yes",
+        "are you satisfied with the way the project makes decisions?": "Yes",
+        "what are we doing well? prompts for thinking: what are the aspects of tiddlywiki as a project and community that you find appealing? is there anything you are excited for in the future of tiddlywiki?": "The TiddlyWiki base is very robust with a plethora of plugins.",
+        "what could we do better? prompts for thinking: could you imagine yourself leaving tiddlywiki? is there something you are afraid of in the future of tiddlywiki? what could change your relationship with tw and its community? what might encourage you to contribute more to the project?": "Learning the intricated details of TiddlyWiki is sometimes challenging. There are excellent resources out there, that are findable as wel and TiddlyWiki is amendable to introspection. But more and different perspectives on how TiddlyWiki works would be amazing",
+        "with your consent, we would like to publish responses to this survey on tiddlywiki.com, in the spirit of open development. are you happy for your responses to be available online? we will not include information on your age or country of birth in the public results. those items of information will be kept strictly to a small and trusted group of regular contributors and administrators.": "Yes, I am happy for my responses to be published",
+        "title": "Community Survey 2025 Answer 00130",
+        "tags": "[[Community Survey 2025]]"
+    }
+]

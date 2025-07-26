@@ -1,0 +1,32 @@
+[
+    {
+        "where did you first come across this survey?": "Official newsletter",
+        "would you consider yourself to be a programmer or software developer? you can consider yourself a programmer/developer without studying either discipline or doing it as a job.": "Yes, I would",
+        "when did you first use tiddlywiki?": "2022",
+        "do you currently participate, or have you previously participated in the tiddlywiki community? by \"community\" we refer to official spaces such as talk tiddlywiki as well as online-based third-party communities like the public discord server.": "Yes",
+        "when did you begin taking part in the tiddlywiki community?": "2023",
+        "we would be interested in knowing how you engage with the different communities of tw.: talk tiddlywiki": "I read/lurk, but do not post",
+        "we would be interested in knowing how you engage with the different communities of tw.: old mailing list (google group)": "I read/lurk, but do not post",
+        "we would be interested in knowing how you engage with the different communities of tw.: r/tiddlywiki5 on reddit": "I do not engage with this community",
+        "we would be interested in knowing how you engage with the different communities of tw.: discord": "I do not engage with this community",
+        "we would be interested in knowing how you engage with the different communities of tw.: github discussions": "I read/lurk, but do not post",
+        "have you ever published a plugin or tiddlywiki extension of another type, which others can find, import and use? we define these as being publicly-hosted on your own webspace, or a host such as tiddlyhost.": "No",
+        "how would you describe your main use cases for tiddlywiki?": "Note-taking;Journalling;As a knowledge base (including technical, non-fiction and encyclopaedic content)",
+        "do you use tiddlywiki to support with your job or programme of education?": "Yes",
+        "do you share your tiddlywiki(s) with other people? please select 'yes' if there is more than one person who can directly view your wiki.": "No, my TiddlyWiki is for personal use only",
+        "putting it all together, what value does tiddlywiki provide for you in your day to day work, or in your life?": "Ideas and knowledge don't get lost and become a very valuable resource to me.",
+        "what is your level of ability with tiddlywiki? this question assumes you can navigate tiddlywiki, use basic wikitext and save changes.": "I have customised TiddlyWiki through options and plugins;I am comfortable using WikiText widgets (e.g. <$transclude>, <$list>...);I am comfortable writing filter expressions;I have written custom HTML;I have written custom CSS styles;I have written custom JavaScript",
+        "how do you save changes in tiddlywiki?": "Multi-file wiki served through Node.js;Single-file wiki with TiddlyDesktop",
+        "how do you back up/sync changes between systems?": "Web or cloud hosting (other than TiddlyHost/TiddlySpot e.g. Netlify, AWS, OVH, Google Cloud...)",
+        "we would love to know what your basic setup looks like in your most-used wiki. you can import the wiki info tiddler and paste the output below. find the wiki information tool here.": "A docker container starts a node process for every wiki i have on a different port, around 15. A reverse proxy is configured to connect to those ports depending on the subdomain accessed. The data of all wikis lives in a folder that is shared using Syncthing. The other machines receiving the folder don't run Tiddlywiki, it's just nice to know access to the data does not depend on a single machine being available.",
+        "outside of plugins, palettes and other information captured above; are there any customisations you make to your tiddlywiki? these included but are not limited to: stylesheets, macros/functions/procedures, javascript, and direct edits to the core. please also mention if you used or built on customisations from the community.": "I did quite some customizing for certain use cases i wanted to cover with Tiddlywiki. In every case, after it was done and some time has passed, i came to the conclusion i should focus on content, not on \"features\". I want to keep it simple.",
+        "are you positive about the future prospects of tiddlywiki?": "Yes",
+        "are you confident that tiddlywiki will continue to meet your needs with future development?": "Yes",
+        "are you satisfied with the way the project makes decisions?": "Yes",
+        "what are we doing well? prompts for thinking: what are the aspects of tiddlywiki as a project and community that you find appealing? is there anything you are excited for in the future of tiddlywiki?": "Communication is great, i can follow topics i am interested in on the talk.tiddlywiki.org and GitHub.\n\nThe community of TW is outstanding.\n\nMWS is important to me, but i am unsure if it's ready for everyone yet. I want to be sure before breaking my current setup, so i still wait for it to become more mature.",
+        "what could we do better? prompts for thinking: could you imagine yourself leaving tiddlywiki? is there something you are afraid of in the future of tiddlywiki? what could change your relationship with tw and its community? what might encourage you to contribute more to the project?": "I hope Tiddlywiki doesn't become too \"heavy\". The possibilities with filters/procedures/macros/widgets are surely great, but very overwhelming and sometimes quite frustrating, even with experience. Simple and powerful at the same time might be impossible. In some cases, maybe you should go with simple rather than powerful.\n\nI'd like the sidebar to look like a part of the application, visually.\n\nI fear that Jeremy could quit and development stops.\n\nI can't see myself stop using TW anyway.",
+        "with your consent, we would like to publish responses to this survey on tiddlywiki.com, in the spirit of open development. are you happy for your responses to be available online? we will not include information on your age or country of birth in the public results. those items of information will be kept strictly to a small and trusted group of regular contributors and administrators.": "Yes, I am happy for my responses to be published",
+        "title": "Community Survey 2025 Answer 00014",
+        "tags": "[[Community Survey 2025]]"
+    }
+]
