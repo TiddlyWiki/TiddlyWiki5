@@ -1,0 +1,25 @@
+[
+    {
+        "where did you first come across this survey?": "Official newsletter",
+        "would you consider yourself to be a programmer or software developer? you can consider yourself a programmer/developer without studying either discipline or doing it as a job.": "Yes, I would",
+        "when did you first use tiddlywiki?": "2010",
+        "do you currently participate, or have you previously participated in the tiddlywiki community? by \"community\" we refer to official spaces such as talk tiddlywiki as well as online-based third-party communities like the public discord server.": "No",
+        "have you ever published a plugin or tiddlywiki extension of another type, which others can find, import and use? we define these as being publicly-hosted on your own webspace, or a host such as tiddlyhost.": "No",
+        "how would you describe your main use cases for tiddlywiki?": "Note-taking;As a knowledge base (including technical, non-fiction and encyclopaedic content)",
+        "do you use tiddlywiki to support with your job or programme of education?": "Yes",
+        "do you share your tiddlywiki(s) with other people? please select 'yes' if there is more than one person who can directly view your wiki.": "No, my TiddlyWiki is for personal use only",
+        "putting it all together, what value does tiddlywiki provide for you in your day to day work, or in your life?": "Searchable thoughts with links to other captured thoughts ",
+        "what is your level of ability with tiddlywiki? this question assumes you can navigate tiddlywiki, use basic wikitext and save changes.": "I have customised TiddlyWiki through options and plugins",
+        "how do you save changes in tiddlywiki?": "Single-file wiki with custom saver (e.g. TiddlyPWA, Timimi, tw5-browser-nativesaver)",
+        "how do you back up/sync changes between systems?": "DIY (any other solution)",
+        "as you selected diy, would be grateful for more details on the system you use to back up and synchronise your tiddlywiki across devices/systems.": "A python server and saver",
+        "are you positive about the future prospects of tiddlywiki?": "Yes",
+        "are you confident that tiddlywiki will continue to meet your needs with future development?": "Yes",
+        "are you satisfied with the way the project makes decisions?": "Yes",
+        "what are we doing well? prompts for thinking: what are the aspects of tiddlywiki as a project and community that you find appealing? is there anything you are excited for in the future of tiddlywiki?": "A native non node.js saver and hoster ",
+        "what could we do better? prompts for thinking: could you imagine yourself leaving tiddlywiki? is there something you are afraid of in the future of tiddlywiki? what could change your relationship with tw and its community? what might encourage you to contribute more to the project?": "Who will lead if not Jeremy?",
+        "with your consent, we would like to publish responses to this survey on tiddlywiki.com, in the spirit of open development. are you happy for your responses to be available online? we will not include information on your age or country of birth in the public results. those items of information will be kept strictly to a small and trusted group of regular contributors and administrators.": "Yes, I am happy for my responses to be published",
+        "title": "Community Survey 2025 Answer 00036",
+        "tags": "[[Community Survey 2025]]"
+    }
+]

@@ -1,0 +1,31 @@
+[
+    {
+        "where did you first come across this survey?": "Talk TiddlyWiki",
+        "would you consider yourself to be a programmer or software developer? you can consider yourself a programmer/developer without studying either discipline or doing it as a job.": "Yes, I would",
+        "when did you first use tiddlywiki?": "2019",
+        "do you currently participate, or have you previously participated in the tiddlywiki community? by \"community\" we refer to official spaces such as talk tiddlywiki as well as online-based third-party communities like the public discord server.": "Yes",
+        "when did you begin taking part in the tiddlywiki community?": "2021",
+        "we would be interested in knowing how you engage with the different communities of tw.: talk tiddlywiki": "I read/lurk, but do not post",
+        "we would be interested in knowing how you engage with the different communities of tw.: old mailing list (google group)": "I do not engage with this community",
+        "we would be interested in knowing how you engage with the different communities of tw.: r/tiddlywiki5 on reddit": "I do not engage with this community",
+        "we would be interested in knowing how you engage with the different communities of tw.: discord": "I read/lurk, but do not post",
+        "we would be interested in knowing how you engage with the different communities of tw.: github discussions": "I read/lurk, but do not post",
+        "have you ever published a plugin or tiddlywiki extension of another type, which others can find, import and use? we define these as being publicly-hosted on your own webspace, or a host such as tiddlyhost.": "No",
+        "how would you describe your main use cases for tiddlywiki?": "Note-taking;Task and project management (including CRMs);As a knowledge base (including technical, non-fiction and encyclopaedic content)",
+        "do you use tiddlywiki to support with your job or programme of education?": "Yes",
+        "do you share your tiddlywiki(s) with other people? please select 'yes' if there is more than one person who can directly view your wiki.": "No, but I may export content into other formats and share individual tiddlers, the whole wiki, or an extract of the wiki",
+        "putting it all together, what value does tiddlywiki provide for you in your day to day work, or in your life?": "TW's flexible format makes it ideal for me - keeping all my non linear notes easisly accessible when I need it. ",
+        "what is your level of ability with tiddlywiki? this question assumes you can navigate tiddlywiki, use basic wikitext and save changes.": "I have customised TiddlyWiki through options and plugins;I am comfortable using WikiText widgets (e.g. <$transclude>, <$list>...)",
+        "how do you save changes in tiddlywiki?": "Multi-file wiki served through Node.js",
+        "how do you back up/sync changes between systems?": "Web or cloud hosting (other than TiddlyHost/TiddlySpot e.g. Netlify, AWS, OVH, Google Cloud...);DIY (any other solution)",
+        "as you selected diy, would be grateful for more details on the system you use to back up and synchronise your tiddlywiki across devices/systems.": "I periodically sync my tiddlers to an encryted s3 bucket. ",
+        "are you positive about the future prospects of tiddlywiki?": "Yes",
+        "are you confident that tiddlywiki will continue to meet your needs with future development?": "Yes",
+        "are you satisfied with the way the project makes decisions?": "Yes",
+        "what are we doing well? prompts for thinking: what are the aspects of tiddlywiki as a project and community that you find appealing? is there anything you are excited for in the future of tiddlywiki?": "I love the userbase - My questions are always answere",
+        "what could we do better? prompts for thinking: could you imagine yourself leaving tiddlywiki? is there something you are afraid of in the future of tiddlywiki? what could change your relationship with tw and its community? what might encourage you to contribute more to the project?": "I would love a way to host the wiki in a serverless cloud (lambda) method.   I see that others have done it in the past, but I am not knowledgeable enough to get it working. ",
+        "with your consent, we would like to publish responses to this survey on tiddlywiki.com, in the spirit of open development. are you happy for your responses to be available online? we will not include information on your age or country of birth in the public results. those items of information will be kept strictly to a small and trusted group of regular contributors and administrators.": "Yes, I am happy for my responses to be published",
+        "title": "Community Survey 2025 Answer 00065",
+        "tags": "[[Community Survey 2025]]"
+    }
+]
