@@ -17,7 +17,7 @@
   },
   {
     "import-field-name": "are-you-a-dev",
-    "import-field-column": "Would you consider yourself to be a programmer or software developer?",
+    "import-field-column": "Would you consider yourself to be a programmer or software developer? You can consider yourself a programmer/developer without studying either discipline or doing it as a job.",
     "title": "$:/2025 Community Survey/Questions/are-you-a-dev",
     "import-field-source": "column",
     "import-spec-role": "field",
@@ -33,7 +33,7 @@
   },
   {
     "import-field-name": "joined-tw-community",
-    "import-field-column": "Do you currently participate, or have you previously participated in the TiddlyWiki Community?",
+    "import-field-column": "Do you currently participate, or have you previously participated in the TiddlyWiki Community? By \"community\" we refer to official spaces such as Talk TiddlyWiki as well as online-based third-party communities like the public Discord server.",
     "title": "$:/2025 Community Survey/Questions/joined-tw-community",
     "import-field-source": "column",
     "import-spec-role": "field",
@@ -49,7 +49,7 @@
   },
   {
     "import-field-name": "use-ttw",
-    "import-field-column": "How you engage with TW: Talk TiddlyWiki",
+    "import-field-column": "We would be interested in knowing how you engage with the different communities of TW.: Talk TiddlyWiki",
     "title": "$:/2025 Community Survey/Questions/use-ttw",
     "import-field-source": "column",
     "import-spec-role": "field",
@@ -57,7 +57,7 @@
   },
   {
     "import-field-name": "use-mailing-list",
-    "import-field-column": "How you engage with TW: Old mailing list (Google Group)",
+    "import-field-column": "We would be interested in knowing how you engage with the different communities of TW.: Old mailing list (Google Group)",
     "title": "$:/2025 Community Survey/Questions/use-mailing-list",
     "import-field-source": "column",
     "import-spec-role": "field",
@@ -65,7 +65,7 @@
   },
   {
     "import-field-name": "use-reddit",
-    "import-field-column": "How you engage with TW: r/TiddlyWiki5 on Reddit",
+    "import-field-column": "We would be interested in knowing how you engage with the different communities of TW.: r/TiddlyWiki5 on Reddit",
     "title": "$:/2025 Community Survey/Questions/use-reddit",
     "import-field-source": "column",
     "import-spec-role": "field",
@@ -73,7 +73,7 @@
   },
   {
     "import-field-name": "use-discord",
-    "import-field-column": "How you engage with TW: Discord",
+    "import-field-column": "We would be interested in knowing how you engage with the different communities of TW.: Discord",
     "title": "$:/2025 Community Survey/Questions/use-discord",
     "import-field-source": "column",
     "import-spec-role": "field",
@@ -81,7 +81,7 @@
   },
   {
     "import-field-name": "use-github-discuss",
-    "import-field-column": "How you engage with TW: GitHub Discussions",
+    "import-field-column": "We would be interested in knowing how you engage with the different communities of TW.: GitHub Discussions",
     "title": "$:/2025 Community Survey/Questions/use-github-discuss",
     "import-field-source": "column",
     "import-spec-role": "field",
@@ -89,7 +89,7 @@
   },
   {
     "import-field-name": "published-plugin",
-    "import-field-column": "Have you ever published a plugin or TiddlyWiki extension of another type, which others can find, import and use?",
+    "import-field-column": "Have you ever published a plugin or TiddlyWiki extension of another type, which others can find, import and use? We define these as being publicly-hosted on your own webspace, or a host such as TiddlyHost.",
     "title": "$:/2025 Community Survey/Questions/published-plugin",
     "import-field-source": "column",
     "import-spec-role": "field",
@@ -121,7 +121,7 @@
   },
   {
     "import-field-name": "share-wikis",
-    "import-field-column": "Do you share your TiddlyWiki(s) with other people?",
+    "import-field-column": "Do you share your TiddlyWiki(s) with other people? Please select 'yes' if there is more than one person who can directly view your wiki.",
     "title": "$:/2025 Community Survey/Questions/share-wikis",
     "import-field-source": "column",
     "import-spec-role": "field",
@@ -145,56 +145,56 @@
   },
   {
     "import-field-name": "value-of-tw",
-    "import-field-column": "What value does TiddlyWiki provide for you in your day to day work, or in your life?",
+    "import-field-column": "Putting it all together, what value does TiddlyWiki provide for you in your day to day work, or in your life?",
     "title": "$:/2025 Community Survey/Questions/value-of-tw",
     "import-field-source": "column",
     "import-spec-role": "field",
     "tag": "[[$:/2025 Community Survey/Question]]"
   },
   {
-    "import-field-name": "tw-skill-level",
-    "import-field-column": "What is your level of ability with TiddlyWiki?",
-    "title": "$:/2025 Community Survey/Questions/tw-skill-level",
+    "import-field-name": "tw-ability-level",
+    "import-field-column": "What is your level of ability with TiddlyWiki? This question assumes you can navigate TiddlyWiki, use basic WikiText and save changes.",
+    "title": "$:/2025 Community Survey/Questions/tw-ability-level",
     "import-field-source": "column",
     "import-spec-role": "field",
     "tag": "[[$:/2025 Community Survey/Question]]"
   },
   {
-    "import-field-name": "how-save-changes",
+    "import-field-name": "save-method",
     "import-field-column": "How do you save changes in TiddlyWiki?",
-    "title": "$:/2025 Community Survey/Questions/how-save-changes",
+    "title": "$:/2025 Community Survey/Questions/save-method",
     "import-field-source": "column",
     "import-spec-role": "field",
     "tag": "[[$:/2025 Community Survey/Question]]"
   },
   {
-    "import-field-name": "how-backup-sync",
+    "import-field-name": "backup-method",
     "import-field-column": "How do you back up/sync changes between systems?",
-    "title": "$:/2025 Community Survey/Questions/how-backup-sync",
+    "title": "$:/2025 Community Survey/Questions/backup-method",
     "import-field-source": "column",
     "import-spec-role": "field",
     "tag": "[[$:/2025 Community Survey/Question]]"
   },
   {
-    "import-field-name": "diy-sync-details",
-    "import-field-column": "As you selected DIY, would be grateful for more details on the system you use to back up and synchronise your TiddlyWiki.",
-    "title": "$:/2025 Community Survey/Questions/diy-sync-details",
+    "import-field-name": "diy-backup-info",
+    "import-field-column": "As you selected DIY, would be grateful for more details on the system you use to back up and synchronise your TiddlyWiki across devices/systems.",
+    "title": "$:/2025 Community Survey/Questions/diy-backup-info",
     "import-field-source": "column",
     "import-spec-role": "field",
     "tag": "[[$:/2025 Community Survey/Question]]"
   },
   {
-    "import-field-name": "describe-setup",
-    "import-field-column": "What your basic setup looks like in your most-used wiki?",
-    "title": "$:/2025 Community Survey/Questions/describe-setup",
+    "import-field-name": "wiki-setup-info",
+    "import-field-column": "We would love to know what your basic setup looks like in your most-used wiki. You can import the Wiki Info tiddler and paste the output below. Find the Wiki Information tool here.",
+    "title": "$:/2025 Community Survey/Questions/wiki-setup-info",
     "import-field-source": "column",
     "import-spec-role": "field",
     "tag": "[[$:/2025 Community Survey/Question]]"
   },
   {
-    "import-field-name": "customisations",
-    "import-field-column": "Customisations to your TiddlyWiki (e.g. stylesheets, JavaScript, macros, etc.)",
-    "title": "$:/2025 Community Survey/Questions/customisations",
+    "import-field-name": "tw-customisations",
+    "import-field-column": "Outside of plugins, palettes and other information captured above; are there any customisations you make to your TiddlyWiki? These included but are not limited to: stylesheets, macros/functions/procedures, JavaScript, and direct edits to the core. Please also mention if you used or built on customisations from the community.",
+    "title": "$:/2025 Community Survey/Questions/tw-customisations",
     "import-field-source": "column",
     "import-spec-role": "field",
     "tag": "[[$:/2025 Community Survey/Question]]"
@@ -208,41 +208,41 @@
     "tag": "[[$:/2025 Community Survey/Question]]"
   },
   {
-    "import-field-name": "confident-in-future",
+    "import-field-name": "tw-future-confidence",
     "import-field-column": "Are you confident that TiddlyWiki will continue to meet your needs with future development?",
-    "title": "$:/2025 Community Survey/Questions/confident-in-future",
+    "title": "$:/2025 Community Survey/Questions/tw-future-confidence",
     "import-field-source": "column",
     "import-spec-role": "field",
     "tag": "[[$:/2025 Community Survey/Question]]"
   },
   {
-    "import-field-name": "satisfied-with-decisions",
+    "import-field-name": "project-decision-trust",
     "import-field-column": "Are you satisfied with the way the project makes decisions?",
-    "title": "$:/2025 Community Survey/Questions/satisfied-with-decisions",
+    "title": "$:/2025 Community Survey/Questions/project-decision-trust",
     "import-field-source": "column",
     "import-spec-role": "field",
     "tag": "[[$:/2025 Community Survey/Question]]"
   },
   {
-    "import-field-name": "what-doing-well",
-    "import-field-column": "What are we doing well?",
-    "title": "$:/2025 Community Survey/Questions/what-doing-well",
+    "import-field-name": "project-strengths",
+    "import-field-column": "What are we doing well? Prompts for thinking: What are the aspects of TiddlyWiki as a project and community that you find appealing? Is there anything you are excited for in the future of TiddlyWIki?",
+    "title": "$:/2025 Community Survey/Questions/project-strengths",
     "import-field-source": "column",
     "import-spec-role": "field",
     "tag": "[[$:/2025 Community Survey/Question]]"
   },
   {
-    "import-field-name": "what-do-better",
-    "import-field-column": "What could we do better?",
-    "title": "$:/2025 Community Survey/Questions/what-do-better",
+    "import-field-name": "project-weaknesses",
+    "import-field-column": "What could we do better? Prompts for thinking: Could you imagine yourself leaving TiddlyWiki? Is there something you are afraid of in the future of TiddlyWIki? What could change your relationship with TW and its community? What might encourage you to contribute more to the project?",
+    "title": "$:/2025 Community Survey/Questions/project-weaknesses",
     "import-field-source": "column",
     "import-spec-role": "field",
     "tag": "[[$:/2025 Community Survey/Question]]"
   },
   {
-    "import-field-name": "okay-to-publish",
-    "import-field-column": "Are you happy for your responses to be available online?",
-    "title": "$:/2025 Community Survey/Questions/okay-to-publish",
+    "import-field-name": "ok-to-publish",
+    "import-field-column": "With your consent, we would like to publish responses to this survey on tiddlywiki.com, in the spirit of open development. Are you happy for your responses to be available online? We will not include information on your age or country of birth in the public results. Those items of information will be kept strictly to a small and trusted group of regular contributors and administrators.",
+    "title": "$:/2025 Community Survey/Questions/ok-to-publish",
     "import-field-source": "column",
     "import-spec-role": "field",
     "tag": "[[$:/2025 Community Survey/Question]]"

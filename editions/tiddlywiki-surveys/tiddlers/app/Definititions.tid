@@ -26,7 +26,7 @@ tags: $:/tags/Global
 \procedure survey-2025-list-questions()
 	<$let stateBase=<<qualify "$:/state/survey-2025/">>>
 		<div class="interview">
-			<$list filter="[tag[Community Survey 2025]fields[]sort[]] -tags -title">
+			<$list filter="[list[$:/_importspec/Community Survey 2025/Content/Row]]">
 				<$let state={{{ [<stateBase>addsuffix<currentTiddler>] }}}>
 					<h1>
 						<$button class="tc-btn-invisible" style="text-align:left;">
@@ -36,13 +36,14 @@ tags: $:/tags/Global
 							<%else%>
 								{{$:/core/images/chevron-right}}
 							<%endif%>
-							<$text text=<<currentTiddler>>/>
+							<$text text={{!!import-field-name}}/>:
+							<$text text={{!!import-field-column}}/>
 						</$button>
 					</h1>
 					<%if [<state>get[text]match[yes]] %>
 						<ol>
 							<$list filter="[tag[Community Survey 2025]]" variable="answerTitle">
-								<$transclude $variable="survey-2025-display-answer" answerTitle=<<answerTitle>> answerField=<<currentTiddler>>/>
+								<$transclude $variable="survey-2025-display-answer" answerTitle=<<answerTitle>> answerField={{{ [<currentTiddler>get[import-field-name]] }}}/>
 							</$list>
 						</ol>
 					<%endif%>
