@@ -1,33 +1,22 @@
-are-you-a-dev: 
-confident-in-future: No
-customisations: 
-describe-setup: 
-diy-sync-details: 
+are-you-a-dev: Yes, I would
 first-heard-survey: tiddlywiki.com
 first-used-tw: 2020
-how-backup-sync: TiddlySpot / TiddlyHost;Git forge (GitHub, Gitea/Forgejo, GitLab)
-how-save-changes: Multi-file wiki served through Node.js;Single-file wiki third-party mobile app (e.g. Tiddloid, Quine)
-joined-tw-community: 
+joined-tw-community: Yes
 main-use-cases: Note-taking;Journalling;As a knowledge base (including technical, non-fiction and encyclopaedic content)
-okay-to-publish: 
 other-survey-source: 
 other-use-cases: 
 positive-about-future: No
 publish-to-intranet: Not publishing to this location
 publish-to-web: Yes, using a single-file wiki;Yes, served through Node.js
-published-plugin: 
-satisfied-with-decisions: Yes
-share-wikis: 
+published-plugin: No
+share-wikis: Yes, and I am the only editor/administrator of my wiki(s)
 started-tw-community: 2020
 tags: [[Community Survey 2025]]
 title: Community Survey 2025 Answer 00127
-tw-skill-level: 
-use-discord: 
+use-discord: I read/lurk, but do not post
 use-for-work-or-study: No
-use-github-discuss: 
-use-mailing-list: 
-use-reddit: 
-use-ttw: 
-value-of-tw: 
-what-do-better: 
-what-doing-well: 
+use-github-discuss: I do not engage with this community
+use-mailing-list: I read and post in this community
+use-reddit: I do not engage with this community
+use-ttw: I read/lurk, but do not post
+value-of-tw: as plan B for bundle info sharing

@@ -1,33 +1,22 @@
-are-you-a-dev: 
-confident-in-future: Yes
-customisations: 
-describe-setup: 
-diy-sync-details: 
+are-you-a-dev: No, I would not
 first-heard-survey: Other
 first-used-tw: 2022
-how-backup-sync: WebDAV
-how-save-changes: Single-file wiki through web browser with Download Saver (default saving mechanism);Single-file wiki with TiddlyDesktop;Single-file wiki third-party mobile app (e.g. Tiddloid, Quine)
-joined-tw-community: 
+joined-tw-community: Yes
 main-use-cases: Note-taking;Journalling;Task and project management (including CRMs);As a knowledge base (including technical, non-fiction and encyclopaedic content)
-okay-to-publish: 
 other-survey-source: I proposed and helped write this survey
 other-use-cases: 
 positive-about-future: Yes
 publish-to-intranet: 
 publish-to-web: 
-published-plugin: 
-satisfied-with-decisions: Yes
-share-wikis: 
+published-plugin: No
+share-wikis: No, but I may export content into other formats and share individual tiddlers, the whole wiki, or an extract of the wiki
 started-tw-community: 2023
 tags: [[Community Survey 2025]]
 title: Community Survey 2025 Answer 00022
-tw-skill-level: 
-use-discord: 
+use-discord: I read/lurk, but do not post
 use-for-work-or-study: Yes
-use-github-discuss: 
-use-mailing-list: 
-use-reddit: 
-use-ttw: 
-value-of-tw: 
-what-do-better: 
-what-doing-well: 
+use-github-discuss: I do not engage with this community
+use-mailing-list: I do not engage with this community
+use-reddit: I do not engage with this community
+use-ttw: I read and post in this community
+value-of-tw: It is flexible to make any database I need for personal use. For example, I track every piece of media I consume for example, and I prefer having it locally. I know I can always depend on TiddlyWiki, and I find it helpful to follow link to link, which TiddlyWiki makes v. natural.
