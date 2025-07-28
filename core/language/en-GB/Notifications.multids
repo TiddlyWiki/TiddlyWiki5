@@ -2,5 +2,7 @@ title: $:/language/Notifications/
 
 Save/Done: Saved wiki
 Save/Starting: Starting to save wiki
+SecretsVaultAutoLocked: Secrets vault has been automatically locked due to inactivity
+SecretsVaultCreated: Secrets vault has been created and password set
 CopiedToClipboard/Succeeded: Copied to clipboard!
 CopiedToClipboard/Failed: Failed to copy to clipboard!
