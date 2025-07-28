@@ -19,7 +19,18 @@
         "publish-to-web": "Not publishing to this location",
         "publish-to-intranet": "Yes, using a single-file wiki",
         "value-of-tw": "Used on scientific production systems which cannot connect to internet and seldom can be updated. \nWorks without internet by customers. \nOn Dropbox, works even in China, as Journal, Ticket and operation manual. \nI wish could be like advanced ticketing system.",
+        "tw-ability-level": "I have customised TiddlyWiki through options and plugins;I am comfortable using WikiText widgets (e.g. <$transclude>, <$list>...);I have written custom HTML",
+        "save-method": "Single-file wiki with custom saver (e.g. TiddlyPWA, Timimi, tw5-browser-nativesaver)",
+        "backup-method": "Consumer online storage (e.g. Google Drive, Dropbox);DIY (any other solution)",
+        "diy-backup-info": "task scheduler :  weekly powershell backup script. -> xcopy to archive\\wiki.week.0x.html",
+        "wiki-setup-info": "",
+        "tw-customisations": "No.",
         "positive-about-future": "Yes",
+        "tw-future-confidence": "Yes",
+        "project-decision-trust": "Yes",
+        "project-strengths": "It will continue working after 10 years\nIt is open source\nIt can be easily updated.",
+        "project-weaknesses": "1) Timini plug-in was difficult to install in chrome in a closed env. (No internet). Grok TW seems good. \n2) I would like to have a kind of Demo Wiki. Showing a minimal Jira ticketing system. With : tool name & model & serial, part numbers, incident or ticket number, issue description, status: open, ongoing, cancelled,  closed. Your community size would increase. \n3) with Dropbox on my iPhone, I can see my wiki, but not work on it.",
+        "ok-to-publish": "Yes, I am happy for my responses to be published",
         "title": "Community Survey 2025 Answer 00089",
         "tags": "[[Community Survey 2025]]"
     }

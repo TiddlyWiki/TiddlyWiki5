@@ -19,7 +19,18 @@
         "publish-to-web": "Yes, using a single-file wiki",
         "publish-to-intranet": "Not publishing to this location",
         "value-of-tw": "I use TiddlyWiki to organize for knowledge collection and sharing, but not on a day to day basis.\n\nHaving said that, I do find TiddlyWiki very valuable in how to think about, and organize various topics under a certain subject.",
+        "tw-ability-level": "I have customised TiddlyWiki through options and plugins;I am comfortable using WikiText widgets (e.g. <$transclude>, <$list>...);I am comfortable writing filter expressions;I have written custom HTML",
+        "save-method": "Single-file wiki with custom saver (e.g. TiddlyPWA, Timimi, tw5-browser-nativesaver)",
+        "backup-method": "Git forge (GitHub, Gitea/Forgejo, GitLab)",
+        "diy-backup-info": "",
+        "wiki-setup-info": "",
+        "tw-customisations": "I create own macros, functions and procedures. Or at least I try to",
         "positive-about-future": "Yes",
+        "tw-future-confidence": "Yes",
+        "project-decision-trust": "Yes",
+        "project-strengths": "The TiddlyWiki base is very robust with a plethora of plugins.",
+        "project-weaknesses": "Learning the intricated details of TiddlyWiki is sometimes challenging. There are excellent resources out there, that are findable as wel and TiddlyWiki is amendable to introspection. But more and different perspectives on how TiddlyWiki works would be amazing",
+        "ok-to-publish": "Yes, I am happy for my responses to be published",
         "title": "Community Survey 2025 Answer 00130",
         "tags": "[[Community Survey 2025]]"
     }
