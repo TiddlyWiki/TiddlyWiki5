@@ -27,7 +27,10 @@ tags: $:/tags/Global
 	<$let stateBase=<<qualify "$:/state/survey-2025/">>>
 		<div class="interview">
 			<$list filter="[list[$:/_importspec/Community Survey 2025/Content/Row]]">
-				<$let state={{{ [<stateBase>addsuffix<currentTiddler>] }}}>
+				<$let
+					state={{{ [<stateBase>addsuffix<currentTiddler>] }}}
+					answerField={{{ [<currentTiddler>get[import-field-name]] }}}
+				>
 					<h1>
 						<$button class="tc-btn-invisible" style="text-align:left;">
 							<$action-setfield $tiddler=<<state>> $field="text" $value={{{ [<state>get[text]match[yes]then[no]else[yes]] }}}/>
@@ -36,14 +39,14 @@ tags: $:/tags/Global
 							<%else%>
 								{{$:/core/images/chevron-right}}
 							<%endif%>
-							<$text text={{!!import-field-name}}/>:
 							<$text text={{!!import-field-column}}/>
+							(<$text text={{{ [tag[Community Survey 2025]get<answerField>else[]!match[]] +[count[]] }}}/>)
 						</$button>
 					</h1>
 					<%if [<state>get[text]match[yes]] %>
 						<ol>
-							<$list filter="[tag[Community Survey 2025]]" variable="answerTitle">
-								<$transclude $variable="survey-2025-display-answer" answerTitle=<<answerTitle>> answerField={{{ [<currentTiddler>get[import-field-name]] }}}/>
+							<$list filter="[tag[Community Survey 2025]] :filter[get<answerField>else[]!match[]]" variable="answerTitle">
+								<$transclude $variable="survey-2025-display-answer" answerTitle=<<answerTitle>> answerField=<<answerField>>/>
 							</$list>
 						</ol>
 					<%endif%>
