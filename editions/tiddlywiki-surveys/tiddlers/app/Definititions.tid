@@ -1,14 +1,6 @@
 title: $:/Community Survey 2025/Definitions
 tags: $:/tags/Global
 
-\procedure survey-2025-display-answer(answerTitle,answerField)
-	<li class="interview-answer">
-		<$link to=<<answerTitle>>>
-			<$text text={{{ [<answerTitle>get<answerField>] }}}/>
-		</$link>
-	</li>
-\end survey-2025-display-answer
-
 \procedure survey-2025-list-answers(answerTitle)
 	<div class="interview-answers">
 		<table class="tc-view-field-table">
@@ -45,8 +37,15 @@ tags: $:/tags/Global
 					</h1>
 					<%if [<state>get[text]match[yes]] %>
 						<ol>
-							<$list filter="[tag[Community Survey 2025]] :filter[get<answerField>else[]!match[]]" variable="answerTitle">
-								<$transclude $variable="survey-2025-display-answer" answerTitle=<<answerTitle>> answerField=<<answerField>>/>
+							<$list filter="[tag[Community Survey 2025]] :filter[get<answerField>else[]!match[]] +[each<answerField>sort<answerField>]" variable="answerTitle">
+								<$let answerText={{{ [<answerTitle>get<answerField>] }}}>
+									<li class="interview-answer">
+										<$link to=<<answerTitle>>>
+											<$text text={{{ [<answerTitle>get<answerField>] }}}/>
+											(<$text text={{{ [tag[Community Survey 2025]get<answerField>match<answerText>count[]] }}}/>)
+										</$link>
+									</li>
+								</$let>
 							</$list>
 						</ol>
 					<%endif%>
