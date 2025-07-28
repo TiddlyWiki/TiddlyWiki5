@@ -122,6 +122,8 @@ RevealWidget.prototype.execute = function() {
 	this.retain = this.getAttribute("retain","no");
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
+	this.animationDuration = parseInt(this.getAttribute("animationDuration")) || $tw.utils.getAnimationDuration();
+	this.animationDirection = this.getAttribute("animationDirection");
 	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
 	// Compute the title of the state tiddler and read it
 	this.stateTiddlerTitle = this.state;
@@ -259,15 +261,30 @@ RevealWidget.prototype.updateState = function() {
 	}
 	if(this.isOpen) {
 		domNode.removeAttribute("hidden");
-        $tw.anim.perform(this.openAnimation,domNode);
+		var animOptions = {};
+		if(this.animationDuration) {
+			animOptions.duration = this.animationDuration;
+		}
+		if(this.animationDirection) {
+			animOptions.direction = this.animationDirection;
+		}
+        $tw.anim.perform(this.openAnimation,domNode,animOptions);
 	} else {
-		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
+		var animOptions = {};
+		if(this.animationDuration) {
+			animOptions.duration = this.animationDuration;
+		}
+		if(this.animationDirection) {
+			animOptions.direction = this.animationDirection;
+		}
+		animOptions.callback = function() {
 			//make sure that the state hasn't changed during the close animation
 			self.readState()
 			if(!self.isOpen) {
 				domNode.setAttribute("hidden","true");
 			}
-		}});
+		};
+		$tw.anim.perform(self.closeAnimation,domNode,animOptions);
 	}
 };
 
