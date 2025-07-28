@@ -24,3 +24,4 @@ core/ui/Buttons/timestamp: hide
 core/ui/Buttons/theme: hide
 core/ui/Buttons/layout: hide
 core/ui/Buttons/unfold-all: hide
+core/ui/Buttons/secrets-manager: hide
