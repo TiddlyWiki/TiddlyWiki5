@@ -97,6 +97,10 @@ Save/Caption: ok
 Save/Hint: Confirm changes to this tiddler
 SaveWiki/Caption: save changes
 SaveWiki/Hint: Save changes
+Secrets/Caption: secrets
+Secrets/Hint: Insert a secret reference
+SecretsManager/Caption: secrets manager
+SecretsManager/Hint: Open secrets manager
 StoryView/Caption: storyview
 StoryView/Hint: Choose the story visualisation
 HideSideBar/Caption: hide sidebar
