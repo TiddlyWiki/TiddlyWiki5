@@ -2534,6 +2534,42 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 /*
+** Secrets editor dropdown
+*/
+
+.tc-editor-secrets-dropdown {
+	min-width: 200px;
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+.tc-editor-secrets-dropdown .tc-btn-invisible {
+	display: block;
+	width: 100%;
+	text-align: left;
+	padding: 4px 10px;
+	border-radius: 3px;
+}
+
+.tc-editor-secrets-dropdown .tc-btn-invisible:hover {
+	background-color: <<colour tiddler-selected-background>>;
+	color: <<colour tiddler-selected-foreground>>;
+}
+
+.tc-editor-secrets-locked .tc-btn-invisible {
+	display: block;
+	width: 100%;
+	text-align: left;
+	padding: 4px 10px;
+	border-radius: 3px;
+}
+
+.tc-editor-secrets-locked .tc-btn-invisible:hover {
+	background-color: <<colour tiddler-selected-background>>;
+	color: <<colour tiddler-selected-foreground>>;
+}
+
+/*
 ** Import table
 */
 
