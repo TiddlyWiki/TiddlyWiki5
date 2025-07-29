@@ -122,7 +122,7 @@ RevealWidget.prototype.execute = function() {
 	this.retain = this.getAttribute("retain","no");
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
-	this.animationDuration = parseInt(this.getAttribute("animationDuration")) || $tw.utils.getAnimationDuration();
+	this.animationDuration = parseInt(this.getAttribute("animationDuration") || $tw.utils.getAnimationDuration());
 	this.animationDirection = this.getAttribute("animationDirection");
 	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
 	// Compute the title of the state tiddler and read it
