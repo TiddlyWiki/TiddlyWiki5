@@ -267,7 +267,12 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 svg.tc-image-button {
-	padding: 0px 1px 1px 0px;
+	padding-top: 0px;
+	padding-bottom: 1px;
+	padding-inline-start: 0px;
+	padding-inline-end: 1px;
+	-webkit-padding-start: 0px;
+	-webkit-padding-end: 1px;
 }
 
 .tc-icon-wrapper > svg {
@@ -672,7 +677,8 @@ html body.tc-body .tc-btn-rounded:hover svg {
 
 
 .tc-btn-text {
-	margin-left: 7px;
+	-webkit-margin-start: 7px;
+	margin-inline-start: 7px;
 }
 
 /* used for documentation "fake" buttons */
@@ -1796,7 +1802,8 @@ html body.tc-body.tc-single-tiddler-window {
 */
 
 .tc-viewswitcher .tc-image-button {
-	margin-right: .3em;
+	-webkit-margin-end: .3em;
+	margin-inline-end: .3em;
 }
 
 .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
@@ -1879,7 +1886,7 @@ html body.tc-body.tc-single-tiddler-window {
 	display: block;
 	padding: 0 14px 0 14px;
 	width: 100%;
-	text-align: left;
+	text-align: start;
 	color: <<colour foreground>>;
 	line-height: 1.4;
 }
@@ -2183,7 +2190,7 @@ html body.tc-body.tc-single-tiddler-window {
 	display: block;
 	padding-top: 14px;
 	vertical-align: top;
-	text-align: right;
+	text-align: end;
 	margin-bottom: inherit;
 	margin-right: -1px;
 	max-width: 33%;
@@ -2221,7 +2228,7 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 100%;
 	margin-top: 3px;
 	margin-right: 0;
-	text-align: right;
+	text-align: end;
 	background-color: <<colour tab-background>>;
 	border-left: 1px solid <<colour tab-border>>;
 	border-bottom: 1px solid <<colour tab-border>>;
@@ -2253,7 +2260,8 @@ html body.tc-body.tc-single-tiddler-window {
 	display: inline-block;
 	vertical-align: top;
 	padding-top: 0;
-	padding-left: 14px;
+	-webkit-padding-start: 14px;
+	padding-inline-start: 14px;
 	border-left: 1px solid <<colour tab-border>>;
 	-webkit-flex: 1 0 70%;
 	flex: 1 0 70%;
@@ -2551,7 +2559,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-control-panel table > tbody > tr > td {
-	text-align: left;
+	text-align: start;
 }
 
 .tc-control-panel table, .tc-control-panel table input, .tc-control-panel table textarea {
@@ -2838,7 +2846,12 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 .tc-chooser-item {
 	border-bottom: 1px solid <<colour table-header-background>>;
 	border-top: 1px solid <<colour table-header-background>>;
-	padding: 2px 4px 2px 14px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-inline-start: 14px;
+	padding-inline-end: 4px;
+	-webkit-padding-start: 14px;
+	-webkit-padding-end: 4px;
 }
 
 .tc-drop-down .tc-chooser-item {
@@ -2871,7 +2884,8 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 }
 
 .tc-chosen > .tc-tiddlylink:before {
-	margin-left: -10px;
+	-webkit-margin-start: -10px
+	margin-inline-start: -10px;
 	position: relative;
 	content: "» ";
 }
@@ -3537,11 +3551,13 @@ span.tc-translink > a:first-child {
 }
 
 .tc-tiny-gap-left {
-	margin-left: .25em;
+	-webkit-margin-start: .25em;
+	margin-inline-start: .25em;
 }
 
 .tc-tiny-gap-right {
-	margin-right: .25em;
+	-webkit-margin-end: .25em;
+	margin-inline-end: .25em;
 }
 
 .tc-small-gap {
@@ -3550,11 +3566,11 @@ span.tc-translink > a:first-child {
 }
 
 .tc-small-gap-left {
-	margin-left: .5em;
+	margin-inline-start: .5em;
 }
 
 .tc-small-gap-right {
-	margin-right: .5em;
+	margin-inline-end: .5em;
 }
 
 .tc-big-gap {
@@ -3563,11 +3579,13 @@ span.tc-translink > a:first-child {
 }
 
 .tc-big-gap-left {
-	margin-left: 1em;
+	-webkit-margin-start: 1em;
+	margin-inline-start: 1em;
 }
 
 .tc-big-gap-right {
-	margin-right: 1em;
+	-webkit-margin-end: 1em;
+	margin-inline-end: 1em;
 }
 
 .tc-word-break {
