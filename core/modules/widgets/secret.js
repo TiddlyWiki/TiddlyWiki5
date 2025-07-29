@@ -345,7 +345,7 @@ SecretWidget.prototype.handleClick = function() {
 				
 				// Verify password
 				if($tw.utils.verifySecretsPassword(data.password)) {
-					$tw.crypto.setPassword(data.password);
+					$tw.cryptovault.setPassword(data.password);
 					// Try again now that we're unlocked
 					self.handleClick();
 					return true;
