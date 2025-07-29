@@ -17,7 +17,7 @@ Returns: "unencrypted", "locked", or "unlocked"
 */
 exports.getSecretsStoreState = function() {
 	var vault = $tw.wiki.getTiddler("$:/secrets/vault");
-	var hasPassword = $tw.crypto && $tw.crypto.hasPassword();
+	var hasPassword = $tw.cryptovault && $tw.cryptovault.hasPassword();
 	
 	if (!vault) {
 		return "unencrypted"; // No secrets vault exists yet
@@ -77,8 +77,8 @@ exports.encryptSecret = function(value, password) {
 	if(!value) return null;
 	
 	// Use provided password or current password
-	var pwd = password || ($tw.crypto && $tw.crypto.hasPassword() ? undefined : null);
-	if(pwd === null && !$tw.crypto.hasPassword()) {
+	var pwd = password || ($tw.crypto && $tw.cryptovault.hasPassword() ? undefined : null);
+	if(pwd === null && !$tw.cryptovault.hasPassword()) {
 		return null; // No password available
 	}
 	
@@ -92,8 +92,8 @@ exports.decryptSecret = function(encryptedValue, password) {
 	if(!encryptedValue) return null;
 	
 	// Use provided password or current password
-	var pwd = password || ($tw.crypto && $tw.crypto.hasPassword() ? undefined : null);
-	if(pwd === null && !$tw.crypto.hasPassword()) {
+	var pwd = password || ($tw.crypto && $tw.cryptovault.hasPassword() ? undefined : null);
+	if(pwd === null && !$tw.cryptovault.hasPassword()) {
 		return null; // No password available
 	}
 	
@@ -214,7 +214,7 @@ exports.changeSecretsPassword = function(oldPassword, newPassword) {
 	}
 	
 	// Set the new password
-	$tw.crypto.setPassword(newPassword);
+	$tw.cryptovault.setPassword(newPassword);
 	
 	// Re-encrypt all secrets with new password
 	var newFields = {
