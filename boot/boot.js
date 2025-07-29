@@ -852,6 +852,9 @@ $tw.utils.Cryptovault = function() {
 			}
 		}
 	};
+	this.hasPassword = function() {
+		return !!currentPassword;
+	}
 };
 
 /////////////////////////// Module mechanism
