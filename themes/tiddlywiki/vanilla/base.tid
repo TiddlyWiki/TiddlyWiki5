@@ -3566,10 +3566,12 @@ span.tc-translink > a:first-child {
 }
 
 .tc-small-gap-left {
+	-webkit-margin-start: .5em;
 	margin-inline-start: .5em;
 }
 
 .tc-small-gap-right {
+	-webkit-margin-end: .5em;
 	margin-inline-end: .5em;
 }
 
