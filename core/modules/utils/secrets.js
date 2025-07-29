@@ -77,7 +77,7 @@ exports.encryptSecret = function(value, password) {
 	if(!value) return null;
 	
 	// Use provided password or current password
-	var pwd = password || ($tw.crypto && $tw.cryptovault.hasPassword() ? undefined : null);
+	var pwd = password || ($tw.cryptovault && $tw.cryptovault.hasPassword() ? undefined : null);
 	if(pwd === null && !$tw.cryptovault.hasPassword()) {
 		return null; // No password available
 	}
@@ -92,7 +92,7 @@ exports.decryptSecret = function(encryptedValue, password) {
 	if(!encryptedValue) return null;
 	
 	// Use provided password or current password
-	var pwd = password || ($tw.crypto && $tw.cryptovault.hasPassword() ? undefined : null);
+	var pwd = password || ($tw.cryptovault && $tw.cryptovault.hasPassword() ? undefined : null);
 	if(pwd === null && !$tw.cryptovault.hasPassword()) {
 		return null; // No password available
 	}
