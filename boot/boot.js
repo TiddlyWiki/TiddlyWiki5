@@ -837,6 +837,23 @@ $tw.utils.Crypto = function() {
 	};
 };
 
+$tw.utils.Cryptovault = function() {
+	var currentPassword = null;
+	this.setPassword = function(newPassword) {
+		currentPassword = newPassword;
+		this.updateCryptoStateTiddler();
+	};
+	this.updateCryptoStateTiddler = function() {
+		if($tw.wiki) {
+			var state = currentPassword ? "yes" : "no",
+				tiddler = $tw.wiki.getTiddler("$:/vault/isEncrypted");
+			if(!tiddler || tiddler.fields.text !== state) {
+				$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/vault/isEncrypted", text: state}));
+			}
+		}
+	};
+};
+
 /////////////////////////// Module mechanism
 
 /*
@@ -2747,6 +2764,7 @@ $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 $tw.boot.boot = function(callback) {
 	// Initialise crypto object
 	$tw.crypto = new $tw.utils.Crypto();
+	$tw.cryptovault = new $tw.utils.Cryptovault();
 	// Initialise password prompter
 	if($tw.browser && !$tw.node) {
 		$tw.passwordPrompt = new $tw.utils.PasswordPrompt();
