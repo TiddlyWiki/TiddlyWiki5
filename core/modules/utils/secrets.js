@@ -49,8 +49,8 @@ exports.verifySecretsPassword = function(password) {
 	if(!vault) return true; // No vault yet, any password is valid
 	
 	// Check if there's a password verification field
-	if(vault.fields["$:/secrets/verification"]) {
-		var decrypted = $tw.crypto.decrypt(vault.fields["$:/secrets/verification"], password);
+	if(vault.fields["secrets-verification"]) {
+		var decrypted = $tw.crypto.decrypt(vault.fields["secrets-verification"], password);
 		return decrypted === "VALID_PASSWORD";
 	}
 	
@@ -59,7 +59,7 @@ exports.verifySecretsPassword = function(password) {
 		return field !== "title" && field !== "text" && field !== "tags" && 
 			   field !== "modified" && field !== "created" && field !== "modifier" && 
 			   field !== "creator" && field !== "type" && field !== "bag" && 
-			   field !== "revision" && field !== "$:/secrets/verification";
+			   field !== "revision" && field !== "secrets-verification";
 	});
 	
 	if(testField && vault.fields[testField]) {
@@ -116,10 +116,10 @@ exports.storeSecret = function(name, value) {
 	fields[name] = encrypted;
 	
 	// If this is the first secret (no verification field), add one
-	if(!vault.fields["$:/secrets/verification"]) {
+	if(!vault.fields["secrets-verification"]) {
 		var verificationEncrypted = exports.encryptSecret("VALID_PASSWORD");
 		if(verificationEncrypted) {
-			fields["$:/secrets/verification"] = verificationEncrypted;
+			fields["secrets-verification"] = verificationEncrypted;
 		}
 	}
 	
@@ -172,7 +172,7 @@ exports.listSecrets = function() {
 		return field !== "title" && field !== "text" && field !== "tags" && 
 			   field !== "modified" && field !== "created" && field !== "modifier" && 
 			   field !== "creator" && field !== "type" && field !== "bag" && 
-			   field !== "revision" && field !== "$:/secrets/verification";
+			   field !== "revision" && field !== "secrets-verification";
 	}).sort();
 };
 
@@ -225,12 +225,12 @@ exports.changeSecretsPassword = function(oldPassword, newPassword) {
 	// Add verification field first
 	var verificationEncrypted = exports.encryptSecret("VALID_PASSWORD", newPassword);
 	if(verificationEncrypted) {
-		newFields["$:/secrets/verification"] = verificationEncrypted;
+		newFields["secrets-verification"] = verificationEncrypted;
 	}
 	
 	// Re-encrypt each secret
 	Object.keys(decryptedSecrets).forEach(function(field) {
-		if(field !== "$:/secrets/verification") {
+		if(field !== "secrets-verification") {
 			var encrypted = exports.encryptSecret(decryptedSecrets[field], newPassword);
 			if(encrypted) {
 				newFields[field] = encrypted;
