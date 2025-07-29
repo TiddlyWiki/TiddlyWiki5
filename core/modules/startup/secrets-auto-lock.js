@@ -6,7 +6,6 @@ module-type: startup
 Auto-lock secrets vault after inactivity
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -79,5 +78,3 @@ exports.startup = function() {
 	// Initial setup
 	resetAutoLockTimer();
 };
-
-})();
