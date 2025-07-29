@@ -6,7 +6,6 @@ module-type: wikirule
 Wiki text inline rule for secret references using §[secret:name] syntax
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -36,5 +35,3 @@ exports.parse = function() {
 		}
 	}];
 };
-
-})();

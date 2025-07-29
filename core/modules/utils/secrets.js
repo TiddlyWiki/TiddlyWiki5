@@ -6,7 +6,6 @@ module-type: utils
 Utility functions for managing encrypted secrets
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -243,5 +242,3 @@ exports.changeSecretsPassword = function(oldPassword, newPassword) {
 	
 	return {success: true};
 };
-
-})();
