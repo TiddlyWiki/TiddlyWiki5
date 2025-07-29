@@ -26,8 +26,8 @@ exports.startup = function() {
 	var getAutoLockTimeout = function() {
 		var timeout = $tw.wiki.getTiddlerText("$:/config/SecretsAutoLockTimeout");
 		if(timeout) {
-			var minutes = parseFloat(timeout);
-			if(!isNaN(minutes) && minutes > 0) {
+			var minutes = $tw.utils.parseNumber(timeout);
+			if(minutes > 0) {
 				return minutes * 60 * 1000;
 			}
 		}
