@@ -2412,6 +2412,128 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 /*
+** Secrets Manager
+*/
+
+.tc-secrets-manager {
+	padding: 1em;
+	max-width: 600px;
+}
+
+.tc-secrets-manager h2 {
+	margin-top: 0;
+	border-bottom: 1px solid <<colour tiddler-border>>;
+	padding-bottom: 0.5em;
+}
+
+.tc-secrets-state {
+	padding: 0.75em;
+	margin: 1em 0;
+	border-radius: 4px;
+	font-weight: 500;
+}
+
+.tc-secrets-state-unencrypted {
+	background: <<colour notification-background>>;
+	color: <<colour notification-foreground>>;
+}
+
+.tc-secrets-state-locked {
+	background: <<colour message-background>>;
+	color: <<colour message-foreground>>;
+}
+
+.tc-secrets-state-unlocked {
+	background: <<colour tag-background>>;
+	color: <<colour tag-foreground>>;
+}
+
+.tc-secrets-setup,
+.tc-secrets-unlock {
+	text-align: center;
+	padding: 2em 0;
+}
+
+.tc-secret-item {
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	padding: 0.5em;
+	border-bottom: 1px solid <<colour muted-foreground>>;
+}
+
+.tc-secret-item:hover {
+	background: <<colour tiddler-background>>;
+}
+
+.tc-secret-reference {
+	font-size: 0.85em;
+	background: <<colour code-background>>;
+	color: <<colour code-foreground>>;
+	padding: 2px 6px;
+	border-radius: 3px;
+	white-space: nowrap;
+}
+
+/* Ensure code elements inside secret items have proper styling */
+.tc-secret-item code {
+	background: <<colour code-background>>;
+	color: <<colour code-foreground>>;
+}
+
+.tc-secret-name {
+	flex: 1;
+	font-weight: 500;
+}
+
+.tc-secret-delete {
+	opacity: 0.5;
+	transition: opacity 0.2s;
+}
+
+.tc-secret-delete:hover {
+	opacity: 1;
+}
+
+.tc-secrets-settings {
+	padding: 1em;
+	background: <<colour code-background>>;
+	border-radius: 4px;
+	margin-top: 1em;
+}
+
+.tc-secrets-settings label {
+	font-weight: 500;
+}
+
+.tc-secrets-settings input {
+	margin-left: 0.5em;
+	padding: 0.25em;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: 3px;
+}
+
+.tc-settings-note {
+	font-size: 0.9em;
+	margin-top: 0.5em;
+}
+
+.tc-secrets-password-section {
+	margin-top: 1.5em;
+	padding-top: 1em;
+	border-top: 1px solid <<colour tiddler-border>>;
+}
+
+.tc-secrets-password-section h4 {
+	margin-top: 0;
+	margin-bottom: 0.5em;
+}
+
+.tc-secrets-password-section p {
+	margin: 0.5em 0;
+}
+
+/*
 ** Import table
 */
 
