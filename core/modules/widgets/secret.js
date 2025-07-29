@@ -469,7 +469,7 @@ SecretWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(Object.keys(changedAttributes).length > 0 || 
 	   changedTiddlers["$:/secrets/vault"] || 
-	   changedTiddlers["$:/isEncrypted"]) {
+	   changedTiddlers["$:/vault/isEncrypted"]) {
 		this.refreshSelf();
 		return true;
 	}
