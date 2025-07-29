@@ -182,11 +182,11 @@ This re-encrypts all secrets with the new password
 */
 exports.changeSecretsPassword = function(oldPassword, newPassword) {
 	var vault = $tw.wiki.getTiddler("$:/secrets/vault");
-	if(!vault) return {success: false, error: "No secrets vault exists"};
+	if(!vault) return {success: false, error: $tw.wiki.getTiddlerText("$:/language/Secrets/NoVaultExists")};
 	
 	// Verify old password
 	if(!exports.verifySecretsPassword(oldPassword)) {
-		return {success: false, error: "Current password is incorrect"};
+		return {success: false, error: $tw.wiki.getTiddlerText("$:/language/Secrets/VerificationFailed")};
 	}
 	
 	// Get all secret fields
@@ -211,7 +211,7 @@ exports.changeSecretsPassword = function(oldPassword, newPassword) {
 	});
 	
 	if(failed) {
-		return {success: false, error: "Failed to decrypt some secrets"};
+		return {success: false, error: $tw.wiki.getTiddlerText("$:/lanugage/Secrets/DecryptFailed")};
 	}
 	
 	// Set the new password
