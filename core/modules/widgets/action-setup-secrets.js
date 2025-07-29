@@ -59,7 +59,7 @@ ActionSetupSecretsWidget.prototype.invokeAction = function(triggeringWidget,even
 		callback: function(data) {
 			if(data) {
 				// Set the password
-				$tw.crypto.setPassword(data.password);
+				$tw.cryptovault.setPassword(data.password);
 				
 				// Create the vault with verification field
 				var verificationEncrypted = $tw.utils.encryptSecret("VALID_PASSWORD");
