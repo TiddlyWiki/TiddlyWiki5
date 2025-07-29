@@ -8,7 +8,6 @@ This is a simple implementation that can be overridden by plugins
 for more advanced functionality.
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -101,4 +100,4 @@ AudioWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.audio = AudioWidget;
 
-})();
+
