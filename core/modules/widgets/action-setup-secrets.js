@@ -66,7 +66,7 @@ ActionSetupSecretsWidget.prototype.invokeAction = function(triggeringWidget,even
 				if(verificationEncrypted) {
 					$tw.wiki.addTiddler(new $tw.Tiddler({
 						title: "$:/secrets/vault",
-						"$:/secrets/verification": verificationEncrypted
+						"secrets-verification": verificationEncrypted
 					}));
 				}
 				
