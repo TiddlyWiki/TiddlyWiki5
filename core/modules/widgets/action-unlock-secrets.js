@@ -58,7 +58,7 @@ ActionUnlockSecretsWidget.prototype.invokeAction = function(triggeringWidget,eve
 		callback: function(data) {
 			if(!data) return true;
 			if($tw.utils.verifySecretsPassword(data.password)) {
-				$tw.crypto.setPassword(data.password);
+				$tw.cryptovault.setPassword(data.password);
 				// Force refresh
 				self.wiki.dispatchEvent({type: "tm-refresh"});
 				return true;
