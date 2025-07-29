@@ -62,7 +62,7 @@ ActionSetupSecretsWidget.prototype.invokeAction = function(triggeringWidget,even
 				$tw.cryptovault.setPassword(data.password);
 				
 				// Create the vault with verification field
-				var verificationEncrypted = $tw.utils.encryptSecret("VALID_PASSWORD");
+				var verificationEncrypted = $tw.utils.encryptSecret("VALID_PASSWORD", data.password);
 				if(verificationEncrypted) {
 					$tw.wiki.addTiddler(new $tw.Tiddler({
 						title: "$:/secrets/vault",
