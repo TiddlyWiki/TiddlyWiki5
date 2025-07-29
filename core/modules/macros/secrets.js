@@ -6,7 +6,6 @@ module-type: macro
 Macro to get secrets store state
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -19,5 +18,3 @@ exports.params = [];
 exports.run = function() {
 	return $tw.utils.getSecretsStoreState();
 };
-
-})();

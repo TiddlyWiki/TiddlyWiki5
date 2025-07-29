@@ -6,7 +6,6 @@ module-type: macro
 Macro to list secret names
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -20,5 +19,3 @@ exports.run = function() {
 	var secrets = $tw.utils.listSecrets();
 	return secrets.join(" ");
 };
-
-})();
