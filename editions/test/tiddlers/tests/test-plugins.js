@@ -6,7 +6,6 @@ tags: [[$:/tags/test-spec]]
 Tests for integrity of the core plugins, languages, themes and editions
 
 \*/
-(function(){
 "use strict";
 
 if($tw.node) {
@@ -47,6 +46,3 @@ if($tw.node) {
 		});
 	});
 }
-
-
-})();

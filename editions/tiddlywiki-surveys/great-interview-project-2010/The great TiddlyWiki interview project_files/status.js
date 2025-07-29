@@ -1,0 +1,2 @@
+var tiddlyweb = tiddlyweb || {};
+tiddlyweb.status = {"username": "jermolene", "tiddlyspace_version": "1.2.26", "space": {"recipe": "interview_private", "name": "interview"}, "challengers": ["tiddlywebplugins.tiddlyspace.cookie_form", "tiddlywebplugins.tiddlyspace.openid"], "server_host": {"host": "tiddlyspace.com", "scheme": "http", "port": "80"}, "version": "1.4.18"};

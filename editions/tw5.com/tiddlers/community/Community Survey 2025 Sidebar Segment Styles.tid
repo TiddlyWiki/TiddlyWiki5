@@ -1,0 +1,9 @@
+title: Community Survey 2025 Sidebar Segment Styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.community-survey-sidebar-image {
+	width: 100%;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}

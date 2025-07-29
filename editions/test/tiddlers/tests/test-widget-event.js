@@ -3,10 +3,7 @@ title: test-widget-event.js
 type: application/javascript
 tags: [[$:/tags/test-spec]]
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Widget Event Listeners", function() {
@@ -220,5 +217,3 @@ describe("Widget Event Listeners", function() {
 	});
 
 });
-
-})();

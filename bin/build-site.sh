@@ -5,7 +5,7 @@
 # Default to the current version number for building the plugin library
 
 if [  -z "$TW5_BUILD_VERSION" ]; then
-    TW5_BUILD_VERSION=v5.3.7
+    TW5_BUILD_VERSION=v5.3.8
 fi
 
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
@@ -157,6 +157,13 @@ node $TW5_BUILD_TIDDLYWIKI \
 	./editions/tour \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all-external-js tour.html text/plain \
+	|| exit 1
+
+# /surveys.html			surveys edition
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/tiddlywiki-surveys \
+	--output $TW5_BUILD_OUTPUT \
+	--build index \
 	|| exit 1
 
 # /share.html				Custom edition for sharing via the URL

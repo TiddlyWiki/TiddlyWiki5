@@ -44,7 +44,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	}
 	// Construct the url if not provided
 	if(!url) {
-		url = "http://" + username + ".tiddlyspot.com/store.cgi";
+		url = "http://" + username + ".tiddlyhost.com/";
 	}
 	// Assemble the header
 	var boundary = "---------------------------" + "AaB03x";
