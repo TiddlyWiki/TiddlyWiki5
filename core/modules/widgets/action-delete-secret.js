@@ -6,7 +6,6 @@ module-type: widget
 Action widget to delete a secret
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -63,5 +62,3 @@ ActionDeleteSecretWidget.prototype.invokeAction = function(triggeringWidget,even
 };
 
 exports["action-delete-secret"] = ActionDeleteSecretWidget;
-
-})();

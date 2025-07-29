@@ -6,7 +6,6 @@ module-type: widget
 Secure input widget for the Secrets Manager using Shadow DOM
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -427,5 +426,3 @@ SecretManagerInputWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["secret-manager-input"] = SecretManagerInputWidget;
-
-})();

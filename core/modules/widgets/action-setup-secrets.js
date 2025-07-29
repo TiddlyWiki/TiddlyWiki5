@@ -6,7 +6,6 @@ module-type: widget
 Action widget to set up the secrets vault with a password
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -85,5 +84,3 @@ ActionSetupSecretsWidget.prototype.invokeAction = function(triggeringWidget,even
 };
 
 exports["action-setup-secrets"] = ActionSetupSecretsWidget;
-
-})();

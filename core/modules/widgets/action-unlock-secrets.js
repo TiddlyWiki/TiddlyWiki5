@@ -6,7 +6,6 @@ module-type: widget
 Action widget to unlock the secrets vault
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -72,5 +71,3 @@ ActionUnlockSecretsWidget.prototype.invokeAction = function(triggeringWidget,eve
 };
 
 exports["action-unlock-secrets"] = ActionUnlockSecretsWidget;
-
-})();

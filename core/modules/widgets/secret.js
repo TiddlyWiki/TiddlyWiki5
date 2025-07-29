@@ -6,7 +6,6 @@ module-type: widget
 Secret widget for displaying encrypted secrets using Shadow DOM
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -495,5 +494,3 @@ SecretWidget.prototype.removeChildDomNodes = function() {
 };
 
 exports.secret = SecretWidget;
-
-})();

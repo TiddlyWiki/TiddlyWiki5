@@ -6,7 +6,6 @@ module-type: widget
 Action widget to change the secrets vault password
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -136,5 +135,3 @@ ActionChangePasswordWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["action-change-password"] = ActionChangePasswordWidget;
-
-})();
