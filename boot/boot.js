@@ -2000,7 +2000,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 					var value = tiddler[name];
 					switch(fieldInfo.source) {
 						case "subdirectories":
-							value = path.relative(rootPath, filename).split(path.sep).slice(0, -1);
+							value = $tw.utils.stringifyList(path.relative(rootPath, filename).split(path.sep).slice(0, -1));
 							break;
 						case "filepath":
 							value = path.relative(rootPath, filename).split(path.sep).join('/');
@@ -2021,10 +2021,10 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 							value = path.extname(filename);
 							break;
 						case "created":
-							value = new Date(fs.statSync(pathname).birthtime);
+							value = $tw.utils.stringifyDate(new Date(fs.statSync(pathname).birthtime));
 							break;
 						case "modified":
-							value = new Date(fs.statSync(pathname).mtime);
+							value = $tw.utils.stringifyDate(new Date(fs.statSync(pathname).mtime));
 							break;
 					}
 					if(fieldInfo.prefix) {

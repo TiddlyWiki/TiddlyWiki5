@@ -50,7 +50,7 @@ exports.parse = function() {
 	var reEnd;
 	if(this.match[5]) {
 		// If so, it is a multiline definition and the end of the body is marked with \end
-		reEnd = new RegExp("((:?^|\\r?\\n)[^\\S\\n\\r]*\\\\end[^\\S\\n\\r]*(?:" + $tw.utils.escapeRegExp(this.match[2]) + ")?(?:$|\\r?\\n))","mg");
+		reEnd = new RegExp("((:?^|\\r?\\n)[^\\S\\n\\r]*\\\\end[^\\S\\n\\r]*(?:" + $tw.utils.escapeRegExp(this.match[2]) + ")?\\s*?(?:$|\\r?\\n))","mg");
 	} else {
 		// Otherwise, the end of the definition is marked by the end of the line
 		reEnd = /($|\r?\n)/mg;

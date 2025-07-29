@@ -1,0 +1,35 @@
+created: 20210428074912172
+modified: 20250420104606860
+original-modified: 20230315165343329
+tags: [[Sort Filter Run Prefix]]
+title: Sort Filter Run Prefix (Examples)
+ja-title: sortフィルタランプレフィックス(例)
+type: text/vnd.tiddlywiki
+
+タイトルの長さで並べ替え:
+
+<<.operator-example 1 "[all[tiddlers]] :sort:number[length[]] +[limit[10]]">>
+
+タイトルの長さを逆順に並べ替え:
+
+<<.operator-example 2 "[all[tiddlers]] :sort:number:reverse[length[]] +[limit[10]]">>
+
+テキストの長さで並べ替え:
+
+<<.operator-example 3 "[all[tiddlers]] :sort:number[get[text]length[]] +[limit[10]]">>
+
+修正日の新しい順に並べ替え:
+
+<<.operator-example 4 "[tag[Field Operators]] :sort:date[get[modified]else[19700101]] +[limit[10]]">>
+
+タイトルで並べ替え:
+<<.operator-example 5 "[tag[Field Operators]] :sort:string:casesensitive[get[caption]] +[limit[10]]">>
+
+タイトルの逆順に並べ替え:
+<<.operator-example 6 "[tag[Field Operators]] :sort:string:casesensitive,reverse[get[caption]] +[limit[10]]">>
+
+大文字と小文字を区別してテキストとして並べ替え:
+<<.operator-example 7 "Apple Banana Orange Grapefruit guava DragonFruit Kiwi apple orange  :sort:string:casesensitive[{!!title}]">>
+
+大文字と小文字を区別せずにテキストとして並べ替え:
+<<.operator-example 8 "Apple Banana Orange Grapefruit guava DragonFruit Kiwi apple orange :sort:string:caseinsensitive[{!!title}]">>

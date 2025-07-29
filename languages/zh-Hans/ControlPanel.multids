@@ -94,7 +94,7 @@ Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安装
 Plugins/Stability/Deprecated: 过时
 Plugins/Stability/Experimental: 实验性
-Plugins/Stability/Legacy: 老旧
+Plugins/Stability/Legacy: 陈旧
 Plugins/Stability/Stable: 稳定
 Plugins/Themes/Caption: 布局主题
 Plugins/Themes/Hint: 布局主题插件
@@ -133,14 +133,13 @@ Saving/GitService/Gitea/Password: 个人存取令牌的 API (通过 Gitea 的 We
 Saving/TiddlySpot/Advanced/Heading: 高级设置
 Saving/TiddlySpot/BackupDir: 备份文件夹
 Saving/TiddlySpot/Backups: 备份
-Saving/TiddlySpot/Caption: ~TiddlySpot 保存模块
-Saving/TiddlySpot/ControlPanel: ~TiddlySpot 控制台
-Saving/TiddlySpot/Description: 这些设置只适用于保存到 [[TiddlySpot|http://tiddlyspot.com]]、[[TiddlyHost|https://tiddlyhost.com]]，或兼容的远程服务器。有关 ~TiddlySpot 和 ~TiddlyHost 的保存设置信息，请参阅[[此处|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]]。
+Saving/TiddlySpot/Caption: ~TiddlyHost 保存模块
+Saving/TiddlySpot/ControlPanel: ~TiddlyHost 控制台
+Saving/TiddlySpot/Description: 这些设置只适用于保存到 [[TiddlyHost|https://tiddlyhost.com]]，或兼容的远程服务器。有关 ~TiddlyHost 的保存设置信息，请参阅[[此处|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]]
 Saving/TiddlySpot/Filename: 上传文件名
-Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改为定制之服务器网址，例如 `http://example.com/store.php`。//
+Saving/TiddlySpot/Heading: ~TiddlyHost
+Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyhost.com/`，可改为定制之服务器网址，例如 `http://example.com/store.php`。//
 Saving/TiddlySpot/Password: 密码
-Saving/TiddlySpot/ReadOnly: 请注意，[[TiddlySpot|http://tiddlyspot.com]] 不再允许创建新网站。对于新网站，您可以使用 [[TiddlyHost|https://tiddlyhost.com]]，一个新的取代 ~TiddlySpot 的讬管服务 。
 Saving/TiddlySpot/ServerURL: 服务器网址
 Saving/TiddlySpot/UploadDir: 上传文件夹
 Saving/TiddlySpot/UserName: 用户
@@ -156,6 +155,8 @@ Settings/DefaultSidebarTab/Caption: 默认侧边栏页签
 Settings/DefaultSidebarTab/Hint: 指定默认显示的侧边栏页签
 Settings/DefaultMoreSidebarTab/Caption: 更多侧边栏的默认页签
 Settings/DefaultMoreSidebarTab/Hint: 指定默认显示的更多侧栏页签
+Settings/DefaultTiddlerInfoTab/Caption: 默认条目信息标签页
+Settings/DefaultTiddlerInfoTab/Hint: 指定条目信息面板开启时默认显示的标签页
 Settings/EditorToolbar/Caption: 编辑器工具栏
 Settings/EditorToolbar/Hint: 启用或禁用编辑器工具栏︰
 Settings/EditorToolbar/Description: 显示编辑器工具栏
@@ -207,10 +208,10 @@ Settings/TitleLinks/No/Description: 不显示条目标题为链接
 Settings/TitleLinks/Yes/Description: 显示条目标题为链接
 SocialCard/Caption: 社交媒体卡
 SocialCard/Domain/Prompt: 显示链接的网域名称（例如 ''tiddlywiki.com''）
-SocialCard/Hint: 社交和消息服务使用此信息来显示在线托管时指向此 TiddlyWiki 的链接的预览卡
-SocialCard/PreviewUrl/Prompt: 用于预览此 TiddlyWiki 图像的完整网址
+SocialCard/Hint: 社交和消息服务使用此信息来显示在线托管时指向此 ~TiddlyWiki 的链接的预览卡
+SocialCard/PreviewUrl/Prompt: 用于预览此 ~TiddlyWiki 图像的完整网址
 SocialCard/PreviewUrl/Preview: 预览图像：
-SocialCard/Url/Prompt: 此 TiddlyWiki 的完整网址
+SocialCard/Url/Prompt: 此 ~TiddlyWiki 的完整网址
 StoryTiddler/Caption: 故事条目
 StoryTiddler/Hint: 此规则级联用于动态选择模板，以便在故事河中显示条目。
 StoryView/Caption: 视图模式
@@ -252,3 +253,6 @@ ViewTemplateSubtitle/Caption: 查看模板副标题
 ViewTemplateSubtitle/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的副标题。
 ViewTemplateTags/Caption: 查看模板标签区
 ViewTemplateTags/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的标签区域。
+WikiInformation/Caption: 维基信息
+WikiInformation/Hint: 此页面总结了有关此 ~TiddlyWiki 配置的高阶信息。旨在让用户能够快速与他人共享其 ~TiddlyWiki 配置的相关信息，例如，在其中一个论坛中寻求帮助时。不包含隐私或个人信息，没有明确复制和粘贴在其他地方的情况
+WikiInformation/Drag/Caption: 拖动此链接可将此工具复制到另一个维基

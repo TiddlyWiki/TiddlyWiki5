@@ -1,5 +1,5 @@
 created: 20190809095728085
-modified: 20190809123445125
+modified: 20250707151538845
 title: Releasing a new version of TiddlyWiki
 type: text/vnd.tiddlywiki
 
@@ -15,32 +15,35 @@ type: text/vnd.tiddlywiki
 # Adjust the modified time of HelloThere
 # Make sure ''master'' is fully committed
 
-!! Update Readmes
+!! Update Readmes and release note
 
 # Edit `package.json` to the new version number
 # Run `./bin/readme-bld.sh` to build the readme files
 # Commit the new readme files to ''master''
 # Restore `package.json` to the previous version number
+# Adjust the link for "GitHub for detailed change history of this release" in the release note
+# Add the credits for the new release banner to the release note, including a link to the GitHub instance of the image from the commit history
 
 !! Make New Release
 
-# Run `./bin/verbump "5.1.3"` (substituting the correct version number) to update the version number, assign it a tag 
+# Run `./bin/verbump "5.1.3"` (substituting the correct version number) to update the version number and assign it a tag 
 # Run `./bin/npm-publish.sh` to publish the release to npm
 # Verify that the new release of TiddlyWiki is available at https://www.npmjs.org/package/tiddlywiki
 
 !! Update tiddlywiki.com release
 
 # Update ''tiddlywiki-com'' from ''master'' and push to ~GitHub
+# Wait until https://tiddlywiki.com is updated with the new release
 
-!! Cleaning Up
+!! Announcements
 
-# Tweet the release with the text "TiddlyWiki v5.x.x released to https://tiddlywiki.com #newtiddlywikirelease"
+# Announce the new release on [[TalkTW|https://talk.tiddlywiki.org]]
 
 !! Preparation for the next release in ''master''
 
 # Adjust version number in `package.json`
 # Adjust version number in `bin/build-site.sh`
 # Adjust version number in [[$:/config/OfficialPluginLibrary]] (both in `editions/tw5.com` and `editions/prerelease/tiddlers/system`) and [[$:/config/LocalPluginLibrary]]
-# Adjust new release banner
+# Create temporary new release banner
 # Create the release note for the new release
 # Commit changes to ''master'' and push to ~GitHub

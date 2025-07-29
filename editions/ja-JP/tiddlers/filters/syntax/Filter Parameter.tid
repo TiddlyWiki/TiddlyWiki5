@@ -1,0 +1,40 @@
+created: 20150220152540000
+modified: 20250223102930110
+original-modified: 20240708202234843
+tags: [[Filter Step]]
+title: Filter Parameter
+ja-title: フィルタパラメータ
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( "[" [: <-"ハード"-> /"]以外"/] "]"
+  |
+  "{" [: <-"間接"-> /"}以外"/] "}"
+  |
+  "<" [: <-"変数"-> /">以外"/] ">"
+)
+"""/>
+
+[[フィルタオペレータ|Filter Operators]]のパラメーターは次のようになります: 
+
+;<<.def ハード>>
+: `[パラメータ例]`
+: パラメータは、角括弧内のテキストそのものです。
+;<<.def ソフト>>
+: <<.def 間接>>
+:: `{パラメータ例}`
+:: パラメータは、中括弧内の名前の[[テキスト参照|TextReference]]によって示されるテキスト、つまり、指定されたTiddlerの[[フィールド|TiddlerFields]]、または指定された[[データTiddler|DataTiddlers]]のプロパティの値です。
+: <<.def 変数>>
+:: `<パラメータ例>`
+:: パラメータは、山括弧内の[[変数|Variables]]の現在値です。マクロパラメータは、v5.2.0まではサポートされて<<.em いません>>。
+::<<.from-version "5.2.0">> リテラルマクロパラメータがサポートされています。例: `[<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>]`。
+
+<<.note """すべての[[フィルタオペレータ|filter Operator]]の後にはパラメータ式が続く必要があります。[[パラメータの無いオペレータ|Operators without parameters]]の場合、その式は空になります(`[<currentTiddler>links[]]`のフィルタオペレータ<<.olink links>>と同様)。""">>
+
+---
+
+<<.from-version "5.1.23">>  [[フィルタステップ|Filter Step]]では、`,`文字で区切られた複数のパラメータがサポートされます。
+
+例えば: `[param1],[param2]`や`<param1>,{param2}`
