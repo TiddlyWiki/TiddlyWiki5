@@ -52,6 +52,7 @@ function slideOpen(domNode,options) {
 	var duration = options.duration || $tw.utils.getAnimationDuration();
 	var direction = options.direction || "vertical";
 	var isHorizontal = direction === "horizontal";
+	var origin = options.origin || (isHorizontal ? "left" : "top");
 	
 	// If currently animating, capture current state
 	var startState;
@@ -166,28 +167,88 @@ function slideOpen(domNode,options) {
 	// Set up the initial position
 	$tw.utils.setStyle(domNode,[{transition: "none"}]);
 	
+	var targets = domNode._slideTargetDimensions;
+	
 	if(isHorizontal) {
-		$tw.utils.setStyle(domNode,[
-			{marginLeft: startState.marginStart + "px"},
-			{marginRight: startState.marginEnd + "px"},
-			{paddingLeft: startState.paddingStart + "px"},
-			{paddingRight: startState.paddingEnd + "px"},
-			{width: startState.size + "px"},
-			{opacity: startState.opacity},
-			{overflow: "hidden"},
-			{willChange: "width, opacity, margin-left, margin-right, padding-left, padding-right"}
-		]);
+		// For horizontal slides, the approach depends on origin
+		if(origin === "right") {
+			// For right origin, we use negative margin-left to hide the element
+			$tw.utils.setStyle(domNode,[
+				{marginLeft: (-targets.width - targets.marginLeft - targets.marginRight - targets.paddingLeft - targets.paddingRight) + "px"},
+				{marginRight: targets.marginRight + "px"},
+				{paddingLeft: targets.paddingLeft + "px"},
+				{paddingRight: targets.paddingRight + "px"},
+				{width: targets.width + "px"},
+				{opacity: startState.opacity},
+				{overflow: "hidden"},
+				{willChange: "margin-left, opacity"}
+			]);
+		} else if(origin === "center") {
+			// For center origin, start with zero width and center margins
+			var totalWidth = targets.width + targets.paddingLeft + targets.paddingRight;
+			$tw.utils.setStyle(domNode,[
+				{marginLeft: (totalWidth / 2) + targets.marginLeft + "px"},
+				{marginRight: (totalWidth / 2) + targets.marginRight + "px"},
+				{paddingLeft: startState.paddingStart + "px"},
+				{paddingRight: startState.paddingEnd + "px"},
+				{width: startState.size + "px"},
+				{opacity: startState.opacity},
+				{overflow: "hidden"},
+				{willChange: "width, opacity, margin-left, margin-right, padding-left, padding-right"}
+			]);
+		} else {
+			// Default left origin
+			$tw.utils.setStyle(domNode,[
+				{marginLeft: startState.marginStart + "px"},
+				{marginRight: startState.marginEnd + "px"},
+				{paddingLeft: startState.paddingStart + "px"},
+				{paddingRight: startState.paddingEnd + "px"},
+				{width: startState.size + "px"},
+				{opacity: startState.opacity},
+				{overflow: "hidden"},
+				{willChange: "width, opacity, margin-left, margin-right, padding-left, padding-right"}
+			]);
+		}
 	} else {
-		$tw.utils.setStyle(domNode,[
-			{marginTop: startState.marginStart + "px"},
-			{marginBottom: startState.marginEnd + "px"},
-			{paddingTop: startState.paddingStart + "px"},
-			{paddingBottom: startState.paddingEnd + "px"},
-			{height: startState.size + "px"},
-			{opacity: startState.opacity},
-			{overflow: "hidden"},
-			{willChange: "height, opacity, margin-top, margin-bottom, padding-top, padding-bottom"}
-		]);
+		// For vertical slides
+		if(origin === "bottom") {
+			// For bottom origin, use negative margin-top to hide the element
+			$tw.utils.setStyle(domNode,[
+				{marginTop: (-targets.height - targets.marginTop - targets.marginBottom - targets.paddingTop - targets.paddingBottom) + "px"},
+				{marginBottom: targets.marginBottom + "px"},
+				{paddingTop: targets.paddingTop + "px"},
+				{paddingBottom: targets.paddingBottom + "px"},
+				{height: targets.height + "px"},
+				{opacity: startState.opacity},
+				{overflow: "hidden"},
+				{willChange: "margin-top, opacity"}
+			]);
+		} else if(origin === "center") {
+			// For center origin, start with zero height and center margins
+			var totalHeight = targets.height + targets.paddingTop + targets.paddingBottom;
+			$tw.utils.setStyle(domNode,[
+				{marginTop: (totalHeight / 2) + targets.marginTop + "px"},
+				{marginBottom: (totalHeight / 2) + targets.marginBottom + "px"},
+				{paddingTop: startState.paddingStart + "px"},
+				{paddingBottom: startState.paddingEnd + "px"},
+				{height: startState.size + "px"},
+				{opacity: startState.opacity},
+				{overflow: "hidden"},
+				{willChange: "height, opacity, margin-top, margin-bottom, padding-top, padding-bottom"}
+			]);
+		} else {
+			// Default top origin
+			$tw.utils.setStyle(domNode,[
+				{marginTop: startState.marginStart + "px"},
+				{marginBottom: startState.marginEnd + "px"},
+				{paddingTop: startState.paddingStart + "px"},
+				{paddingBottom: startState.paddingEnd + "px"},
+				{height: startState.size + "px"},
+				{opacity: startState.opacity},
+				{overflow: "hidden"},
+				{willChange: "height, opacity, margin-top, margin-bottom, padding-top, padding-bottom"}
+			]);
+		}
 	}
 	
 	$tw.utils.forceLayout(domNode);
@@ -197,38 +258,93 @@ function slideOpen(domNode,options) {
 	
 	// Transition to the final position
 	var easing = options.easing || "cubic-bezier(0.4, 0.0, 0.2, 1)";
-	var targets = domNode._slideTargetDimensions;
 	
 	if(isHorizontal) {
-		$tw.utils.setStyle(domNode,[
-			{transition: "margin-left " + duration + "ms " + easing + ", " +
-						"margin-right " + duration + "ms " + easing + ", " +
-						"padding-left " + duration + "ms " + easing + ", " +
-						"padding-right " + duration + "ms " + easing + ", " +
-						"width " + duration + "ms " + easing + ", " +
-						"opacity " + duration + "ms " + easing},
-			{marginLeft: targets.marginLeft + "px"},
-			{marginRight: targets.marginRight + "px"},
-			{paddingLeft: targets.paddingLeft + "px"},
-			{paddingRight: targets.paddingRight + "px"},
-			{width: targets.width + "px"},
-			{opacity: "1"}
-		]);
+		// Different transitions based on origin
+		if(origin === "right") {
+			// For right origin, we only animate margin-left
+			$tw.utils.setStyle(domNode,[
+				{transition: "margin-left " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{marginLeft: targets.marginLeft + "px"},
+				{opacity: "1"}
+			]);
+		} else if(origin === "center") {
+			// For center origin, animate width and margins
+			$tw.utils.setStyle(domNode,[
+				{transition: "margin-left " + duration + "ms " + easing + ", " +
+							"margin-right " + duration + "ms " + easing + ", " +
+							"padding-left " + duration + "ms " + easing + ", " +
+							"padding-right " + duration + "ms " + easing + ", " +
+							"width " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{marginLeft: targets.marginLeft + "px"},
+				{marginRight: targets.marginRight + "px"},
+				{paddingLeft: targets.paddingLeft + "px"},
+				{paddingRight: targets.paddingRight + "px"},
+				{width: targets.width + "px"},
+				{opacity: "1"}
+			]);
+		} else {
+			// Default left origin
+			$tw.utils.setStyle(domNode,[
+				{transition: "margin-left " + duration + "ms " + easing + ", " +
+							"margin-right " + duration + "ms " + easing + ", " +
+							"padding-left " + duration + "ms " + easing + ", " +
+							"padding-right " + duration + "ms " + easing + ", " +
+							"width " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{marginLeft: targets.marginLeft + "px"},
+				{marginRight: targets.marginRight + "px"},
+				{paddingLeft: targets.paddingLeft + "px"},
+				{paddingRight: targets.paddingRight + "px"},
+				{width: targets.width + "px"},
+				{opacity: "1"}
+			]);
+		}
 	} else {
-		$tw.utils.setStyle(domNode,[
-			{transition: "margin-top " + duration + "ms " + easing + ", " +
-						"margin-bottom " + duration + "ms " + easing + ", " +
-						"padding-top " + duration + "ms " + easing + ", " +
-						"padding-bottom " + duration + "ms " + easing + ", " +
-						"height " + duration + "ms " + easing + ", " +
-						"opacity " + duration + "ms " + easing},
-			{marginBottom: targets.marginBottom + "px"},
-			{marginTop: targets.marginTop + "px"},
-			{paddingBottom: targets.paddingBottom + "px"},
-			{paddingTop: targets.paddingTop + "px"},
-			{height: targets.height + "px"},
-			{opacity: "1"}
-		]);
+		// Different transitions based on origin for vertical
+		if(origin === "bottom") {
+			// For bottom origin, we only animate margin-top
+			$tw.utils.setStyle(domNode,[
+				{transition: "margin-top " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{marginTop: targets.marginTop + "px"},
+				{opacity: "1"}
+			]);
+		} else if(origin === "center") {
+			// For center origin, animate height and margins
+			$tw.utils.setStyle(domNode,[
+				{transition: "margin-top " + duration + "ms " + easing + ", " +
+							"margin-bottom " + duration + "ms " + easing + ", " +
+							"padding-top " + duration + "ms " + easing + ", " +
+							"padding-bottom " + duration + "ms " + easing + ", " +
+							"height " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{marginTop: targets.marginTop + "px"},
+				{marginBottom: targets.marginBottom + "px"},
+				{paddingTop: targets.paddingTop + "px"},
+				{paddingBottom: targets.paddingBottom + "px"},
+				{height: targets.height + "px"},
+				{opacity: "1"}
+			]);
+		} else {
+			// Default top origin
+			$tw.utils.setStyle(domNode,[
+				{transition: "margin-top " + duration + "ms " + easing + ", " +
+							"margin-bottom " + duration + "ms " + easing + ", " +
+							"padding-top " + duration + "ms " + easing + ", " +
+							"padding-bottom " + duration + "ms " + easing + ", " +
+							"height " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{marginBottom: targets.marginBottom + "px"},
+				{marginTop: targets.marginTop + "px"},
+				{paddingBottom: targets.paddingBottom + "px"},
+				{paddingTop: targets.paddingTop + "px"},
+				{height: targets.height + "px"},
+				{opacity: "1"}
+			]);
+		}
 	}
 }
 
@@ -237,6 +353,7 @@ function slideClosed(domNode,options) {
 	var duration = options.duration || $tw.utils.getAnimationDuration();
 	var direction = options.direction || "vertical";
 	var isHorizontal = direction === "horizontal";
+	var origin = options.origin || (isHorizontal ? "left" : "top");
 	
 	// If currently animating, capture current state
 	var startState;
@@ -330,36 +447,109 @@ function slideClosed(domNode,options) {
 	// Transition to the final position
 	var easing = options.easing || "cubic-bezier(0.4, 0.0, 0.2, 1)";
 	
+	// Get computed style for calculating negative margins
+	var computedStyle = window.getComputedStyle(domNode);
+	var currentWidth = domNode.offsetWidth;
+	var currentHeight = domNode.offsetHeight;
+	var marginLeft = parseInt(computedStyle.marginLeft, 10) || 0;
+	var marginRight = parseInt(computedStyle.marginRight, 10) || 0;
+	var marginTop = parseInt(computedStyle.marginTop, 10) || 0;
+	var marginBottom = parseInt(computedStyle.marginBottom, 10) || 0;
+	var paddingLeft = parseInt(computedStyle.paddingLeft, 10) || 0;
+	var paddingRight = parseInt(computedStyle.paddingRight, 10) || 0;
+	var paddingTop = parseInt(computedStyle.paddingTop, 10) || 0;
+	var paddingBottom = parseInt(computedStyle.paddingBottom, 10) || 0;
+	
 	if(isHorizontal) {
-		$tw.utils.setStyle(domNode,[
-			{transition: "margin-left " + duration + "ms " + easing + ", " +
-						"margin-right " + duration + "ms " + easing + ", " +
-						"padding-left " + duration + "ms " + easing + ", " +
-						"padding-right " + duration + "ms " + easing + ", " +
-						"width " + duration + "ms " + easing + ", " +
-						"opacity " + duration + "ms " + easing},
-			{marginLeft: "0px"},
-			{marginRight: "0px"},
-			{paddingLeft: "0px"},
-			{paddingRight: "0px"},
-			{width: "0px"},
-			{opacity: "0"}
-		]);
+		// Different transitions based on origin
+		if(origin === "right") {
+			// For right origin, slide out to the right using negative margin-left
+			var totalWidth = currentWidth + marginLeft + marginRight + paddingLeft + paddingRight;
+			$tw.utils.setStyle(domNode,[
+				{transition: "margin-left " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{marginLeft: (-totalWidth) + "px"},
+				{opacity: "0"}
+			]);
+		} else if(origin === "center") {
+			// For center origin, collapse width and expand margins
+			var halfWidth = (currentWidth + paddingLeft + paddingRight) / 2;
+			$tw.utils.setStyle(domNode,[
+				{transition: "margin-left " + duration + "ms " + easing + ", " +
+							"margin-right " + duration + "ms " + easing + ", " +
+							"padding-left " + duration + "ms " + easing + ", " +
+							"padding-right " + duration + "ms " + easing + ", " +
+							"width " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{marginLeft: (marginLeft + halfWidth) + "px"},
+				{marginRight: (marginRight + halfWidth) + "px"},
+				{paddingLeft: "0px"},
+				{paddingRight: "0px"},
+				{width: "0px"},
+				{opacity: "0"}
+			]);
+		} else {
+			// Default left origin
+			$tw.utils.setStyle(domNode,[
+				{transition: "margin-left " + duration + "ms " + easing + ", " +
+							"margin-right " + duration + "ms " + easing + ", " +
+							"padding-left " + duration + "ms " + easing + ", " +
+							"padding-right " + duration + "ms " + easing + ", " +
+							"width " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{marginLeft: "0px"},
+				{marginRight: "0px"},
+				{paddingLeft: "0px"},
+				{paddingRight: "0px"},
+				{width: "0px"},
+				{opacity: "0"}
+			]);
+		}
 	} else {
-		$tw.utils.setStyle(domNode,[
-			{transition: "margin-top " + duration + "ms " + easing + ", " +
-						"margin-bottom " + duration + "ms " + easing + ", " +
-						"padding-top " + duration + "ms " + easing + ", " +
-						"padding-bottom " + duration + "ms " + easing + ", " +
-						"height " + duration + "ms " + easing + ", " +
-						"opacity " + duration + "ms " + easing},
-			{marginTop: "0px"},
-			{marginBottom: "0px"},
-			{paddingTop: "0px"},
-			{paddingBottom: "0px"},
-			{height: "0px"},
-			{opacity: "0"}
-		]);
+		// Different transitions based on origin for vertical
+		if(origin === "bottom") {
+			// For bottom origin, slide out to the bottom using negative margin-top
+			var totalHeight = currentHeight + marginTop + marginBottom + paddingTop + paddingBottom;
+			$tw.utils.setStyle(domNode,[
+				{transition: "margin-top " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{marginTop: (-totalHeight) + "px"},
+				{opacity: "0"}
+			]);
+		} else if(origin === "center") {
+			// For center origin, collapse height and expand margins
+			var halfHeight = (currentHeight + paddingTop + paddingBottom) / 2;
+			$tw.utils.setStyle(domNode,[
+				{transition: "margin-top " + duration + "ms " + easing + ", " +
+							"margin-bottom " + duration + "ms " + easing + ", " +
+							"padding-top " + duration + "ms " + easing + ", " +
+							"padding-bottom " + duration + "ms " + easing + ", " +
+							"height " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{marginTop: (marginTop + halfHeight) + "px"},
+				{marginBottom: (marginBottom + halfHeight) + "px"},
+				{paddingTop: "0px"},
+				{paddingBottom: "0px"},
+				{height: "0px"},
+				{opacity: "0"}
+			]);
+		} else {
+			// Default top origin
+			$tw.utils.setStyle(domNode,[
+				{transition: "margin-top " + duration + "ms " + easing + ", " +
+							"margin-bottom " + duration + "ms " + easing + ", " +
+							"padding-top " + duration + "ms " + easing + ", " +
+							"padding-bottom " + duration + "ms " + easing + ", " +
+							"height " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{marginTop: "0px"},
+				{marginBottom: "0px"},
+				{paddingTop: "0px"},
+				{paddingBottom: "0px"},
+				{height: "0px"},
+				{opacity: "0"}
+			]);
+		}
 	}
 }
 
@@ -411,10 +601,16 @@ function slideOpenTransform(domNode,options) {
 	domNode._slideTransitionHandler = transitionEndHandler;
 	
 	// Set initial state
+	var transformOrigin;
+	if(isHorizontal) {
+		transformOrigin = (options.origin || "left") + " center";
+	} else {
+		transformOrigin = "center " + (options.origin || "top");
+	}
 	$tw.utils.setStyle(domNode,[
 		{transition: "none"},
 		{transform: isHorizontal ? "scaleX(" + startScale + ")" : "scaleY(" + startScale + ")"},
-		{transformOrigin: isHorizontal ? "left center" : "top center"},
+		{transformOrigin: transformOrigin},
 		{opacity: startOpacity},
 		{willChange: "transform, opacity"}
 	]);
@@ -482,10 +678,16 @@ function slideClosedTransform(domNode,options) {
 	domNode._slideTransitionHandler = transitionEndHandler;
 	
 	// Set initial state
+	var transformOrigin;
+	if(isHorizontal) {
+		transformOrigin = (options.origin || "left") + " center";
+	} else {
+		transformOrigin = "center " + (options.origin || "top");
+	}
 	$tw.utils.setStyle(domNode,[
 		{transition: "none"},
 		{transform: isHorizontal ? "scaleX(" + startScale + ")" : "scaleY(" + startScale + ")"},
-		{transformOrigin: isHorizontal ? "left center" : "top center"},
+		{transformOrigin: transformOrigin},
 		{opacity: startOpacity},
 		{willChange: "transform, opacity"}
 	]);

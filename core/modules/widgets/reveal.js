@@ -124,6 +124,7 @@ RevealWidget.prototype.execute = function() {
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	this.animationDuration = parseInt(this.getAttribute("animationDuration") || $tw.utils.getAnimationDuration());
 	this.animationDirection = this.getAttribute("animationDirection");
+	this.animationOrigin = this.getAttribute("animationOrigin");
 	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
 	// Compute the title of the state tiddler and read it
 	this.stateTiddlerTitle = this.state;
@@ -213,7 +214,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex || changedAttributes.animationOrigin) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -271,6 +272,9 @@ RevealWidget.prototype.updateState = function() {
 		if(this.animationDirection) {
 			animOptions.direction = this.animationDirection;
 		}
+		if(this.animationOrigin) {
+			animOptions.origin = this.animationOrigin;
+		}
         $tw.anim.perform(this.openAnimation,domNode,animOptions);
 	} else {
 		var animOptions = {};
@@ -279,6 +283,9 @@ RevealWidget.prototype.updateState = function() {
 		}
 		if(this.animationDirection) {
 			animOptions.direction = this.animationDirection;
+		}
+		if(this.animationOrigin) {
+			animOptions.origin = this.animationOrigin;
 		}
 		animOptions.callback = function() {
 			//make sure that the state hasn't changed during the close animation
