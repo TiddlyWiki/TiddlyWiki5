@@ -1,0 +1,17 @@
+title: Operators/Colour/ColourContrast
+description: Contrast colour function
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+<$text text={{{ [subfilter{Filter}] }}}/>
++
+title: Filter
+
+[[black]] [[gray]] +[colour-contrast:DeltaPhi[]trunc[]]
++
+title: ExpectedResult
+
+35
