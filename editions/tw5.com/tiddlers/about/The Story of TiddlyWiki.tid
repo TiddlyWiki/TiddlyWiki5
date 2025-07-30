@@ -1,0 +1,67 @@
+title: The Story of TiddlyWiki
+tags: [[History of TiddlyWiki]]
+modifier: Jeremy Ruston
+
+This is a personal account of the story of TiddlyWiki, its origins and its evolution since it was first released on 20th September 2004.
+
+! Origins of TiddlyWiki
+
+Back in 1997 a colleague introduced me to [[Ward Cunningham's original wiki|http://c2.com/cgi/wiki]]. I was impressed that something so powerful could fit into just 700 lines of Perl, and fascinated by the radical reimagining of security and permissions. Like many other developers, I took every opportunity I could to try out various wikis, and to explore their use at work.
+
+The allure of the wiki for me was the feeling that it could eventually disrupt the prevailing paradigm of print-oriented documents and emails.
+
+After watching people use wikis for a few years, I noticed that power users made extensive use of the ability to open multiple wiki pages at once in several browser tabs, making it easier for them to compare and review pages, to copy text between them and to act as a sort of queue of pages yet to be read.
+
+I felt that this ability to manipulate multiple pages at once was central to the ability to refactor a wiki, and it is generally accepted that a wiki that is lovingly refactored tends to be more useful. And yet, standard wiki user interfaces have always been designed exclusively for the presentation and manipulation of single pages at once.
+
+All of these thoughts came together when I saw GMail in April 2004, which used Ajax cleverly to blend individual emails into threaded conversations.
+
+I started experimenting with HTML and JavaScript to explore the idea further. I'd had virtually no experience of either, just having put together some static pages and simple ASP sites in previous lives. Getting my head around these client-side technologies was painful; like everyone else, I was horrified to discover how appalling were the incompatibilities and inconsistencies of web programming.
+
+! Launch of TiddlyWiki
+
+So, in September 2004 I released a primitive [[first version of TiddlyWiki|https://classic.tiddlywiki.com/firstversion.html]]. It was the smallest possible thing that demonstrated the idea: it was a simple, self-contained static 48KB HTML file.
+
+The downside of writing the first version of TiddlyWiki in this way was that it made it completely impractical to use for editing - when you click 'save changes' it just pops up a window showing the data that would be saved if it were possible for an HTML page to write to the file system.
+
+Much of the early feedback was that TiddlyWiki was neat, but that it would be more useful when it was possible to properly save changes. I was a little frustrated, as I thought I knew that it was impossible for an HTML file running in the browser to save changes to the local file system.
+
+Within a few months I saw an experimental Firefox extension that enabled TiddlyWiki to save changes in the browser. Examining the code, I realised that the APIs that it used to write to the file system were actually available in ordinary HTML files - as long as they were loaded via a `file://` URI.
+
+I adapted the Firefox code into the core of TiddlyWiki, and soon added a similar ability for Internet Explorer (making use of an old [[ActiveX|https://en.wikipedia.org/wiki/ActiveX]] control that Microsoft distributed with Internet Explorer).
+
+! Growth of TiddlyWiki
+
+A major milestone in the growth of TiddlyWiki was the creation of "GTDTiddlyWiki" by Nathan Bowers. He took the vanilla TiddlyWiki product and adapted it for the specific application of keeping track of tasks using the popular Getting Things Done methodology. GTDTiddlyWiki was an immediate hit, being enthusiastically greeted on websites like [[LifeHacker|https://lifehacker.com/]].
+
+Over the next couple of years TiddlyWiki continued to grow in popularity, and gained new features and capabilities. Within a year I was able to support myself by performing bespoke development work on TiddlyWiki, notably working with wiki pioneer [[SocialText|https://en.wikipedia.org/wiki/Socialtext]] on the ability to synchronise changes with an online server
+
+! BT Acquisition
+
+In May 2007, [[BT]] acquired [[Osmosoft]], my consultancy company. It was an unusual decision to acquire a company with a single employee and a tiny trickle of revenue - [[Osmosoft]] didn't even own the intellectual property in TiddlyWiki since I had handed it over to [[UnaMesa]] to assure its future for the community.
+
+[[BT]]'s motivation was to help them understand community-based ecosystems. I joined the organisation as "Head of Open Source Innovation", taking responsibility for open source governance, and providing advice and expertise on how to participate in open soure communities.
+
+! [[Osmosoft]] and TiddlySpace
+
+I built a team in BT under the name [[Osmosoft]]. Our purpose was to evangelise the benefits of open source, and to help other teams realise those benefits in practice. We also found that it was necessary to evangelise the use of the web in general, and web standards in particular.
+
+Our approach was to focus on showing rather than telling. We worked with the TiddlyWiki community to extend the ecosystem and we built numerous internal systems for BT (some based on TiddlyWiki and some not).
+
+[[Osmosoft]]'s chief contribution to the TiddlyWiki community was the creation of TiddlyWeb and TiddlySpace. TiddlyWeb was a robust, internet scale server for tiddlers that could also compose TiddlyWiki views of those tiddlers. TiddlySpace was an attempt to package TiddlyWeb into a more directly usable form.
+
+! Leaving BT
+
+By the end of 2011 I was increasingly feeling that I would be better placed to realise the potential of TiddlyWiki outside of the corporate confines BT. Accordingly, I left and started work as an independent developer, primarily working on a brand new reboot of TiddlyWiki in the shape of TiddlyWiki5.
+
+! Development of TiddlyWiki5
+
+I worked on new release of TiddlyWiki from November 2011. As a programmer, working on "version 2.0" of something that I had already written is a very attractive proposition. It means that the requirements were fully understood, allowing me to focus on evolving the architecture needed to support the desired functionality.
+
+! The Future
+
+Back in 2014, shortly after TiddlyWiki5 was first released, I wrote:
+
+> Now that TiddlyWiki5 has finally left "beta" status behind, my hope is that it will have a long life. Because it only uses standard features of HTML5 and Node.js, there is no reason why it cannot be fully operational for many years to come. My goal is for it to last for at least 25 years.
+
+As I write this, TiddlyWiki5 is 44% of the way to that goal. With the support and enthusiasm of the community I am confident the project will continue to thrive and evolve.
