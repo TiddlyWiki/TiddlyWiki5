@@ -235,6 +235,9 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 		if(changedAttributes["class"]) {
 			this.assignDomNodeClasses();
 		}
+		if(changedAttributes.animationDuration || changedTiddlers["$:/config/AnimationDuration"]) {
+			this.animationDuration = parseInt(this.getAttribute("animationDuration") || $tw.utils.getAnimationDuration());
+		}
 		return this.refreshChildren(changedTiddlers);
 	}
 };
