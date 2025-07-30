@@ -7,7 +7,22 @@ tags: [[$:/tags/Stylesheet]]
 
 /* Tabs */
 
+/* HACK: [dir="rtl"] rules are used to support browsers released before 2023 */
 /* HACK: border-* properties should use logical properties as a better practice. Current way is used to be compatible with browsers released before 2017 */
+
+[dir="rtl"] .tc-tab-content.tc-vertical {
+    border-left: none;
+    border-right: 1px solid #cccccc;
+}
+
+[dir="rtl"] .tc-tab-buttons.tc-vertical button {
+    border-left: none;
+    border-right: 1px solid <<colour tab-border>>;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
 
 .tc-tab-content.tc-vertical:dir(rtl) {
     border-left: none;
