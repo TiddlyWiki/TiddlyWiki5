@@ -1,5 +1,5 @@
 created: 20150124182127000
-modified: 20230710074414361
+modified: 20250731101041336
 tags: [[Filter Run]]
 title: Filter Step
 type: text/vnd.tiddlywiki
@@ -11,10 +11,10 @@ In programming terms, it is akin to a function call to which the step's input is
 <$railroad text="""
 \start none
 \end none
-[:"!"]
+["!"]
 ( / "if omitted, defaults to: title" /|:
-( - | :[[operator|"Filter Operators"]] )
-{ [:":" [[suffix|"Filter Operators"]] ] } )
+( :[[operator|"Filter Operators"]] )
+[ {":" [: [[suffix|"Filter Operators"]] ] }] )
 { [[parameter|"Filter Parameter"]] + "," }
 """/>
 
