@@ -8,7 +8,7 @@ DELETE /recipes/default/tiddlers/:title
 \*/
 "use strict";
 
-exports.method = "DELETE";
+exports.methods = ["DELETE"];
 
 exports.path = /^\/bags\/default\/tiddlers\/(.+)$/;
 
