@@ -9,11 +9,11 @@ type: text/vnd.tiddlywiki
 \end none
 ( "[" { [[<"Filter Step">|"Filter Step"]] } "]"
   |
-  [:{/"anything but [ ] or whitespace"/}]
+  {[:/"anything but [ ] or whitespace"/]}
   |
-  '"' [:{/'anything but "'/}] '"'
+  '"' {[:/'anything but "'/]} '"'
   |
-  "'" [:{/"anything but '"/}] "'"
+  "'" {[:/"anything but '"/]} "'"
 )
 """/>
 
