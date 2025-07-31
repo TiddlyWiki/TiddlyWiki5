@@ -8,7 +8,7 @@ PUT /recipes/default/tiddlers/:title
 \*/
 "use strict";
 
-exports.method = "PUT";
+exports.methods = ["PUT"];
 
 exports.path = /^\/recipes\/default\/tiddlers\/(.+)$/;
 

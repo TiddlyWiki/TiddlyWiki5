@@ -8,7 +8,7 @@ GET /login-basic -- force a Basic Authentication challenge
 \*/
 "use strict";
 
-exports.method = "GET";
+exports.methods = ["GET"];
 
 exports.path = /^\/login-basic$/;
 
