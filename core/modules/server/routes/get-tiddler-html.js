@@ -12,6 +12,10 @@ exports.method = "GET";
 
 exports.path = /^\/([^\/]+)$/;
 
+exports.info = {
+	priority: 100
+};
+
 exports.handler = function(request,response,state) {
 	var title = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		tiddler = state.wiki.getTiddler(title);
