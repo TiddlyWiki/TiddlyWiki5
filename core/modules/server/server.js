@@ -74,6 +74,11 @@ function Server(options) {
 		// console.log("Loading server route " + title);
 		self.addRoute(routeDefinition);
 	});
+	this.routes.sort((a, b) => {
+		const priorityA = a.info?.priority ?? 100,
+			priorityB = b.info?.priority ?? 100;
+		return priorityB - priorityA;
+	});
 	// Initialise the http vs https
 	this.listenOptions = null;
 	this.protocol = "http";
