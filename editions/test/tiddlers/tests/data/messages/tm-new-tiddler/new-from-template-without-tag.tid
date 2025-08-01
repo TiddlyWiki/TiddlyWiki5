@@ -48,7 +48,7 @@ title: output-template
 +
 title: ExpectedResult
 
-<p><pre>asdf: asdf
+<p dir="auto"><pre>asdf: asdf
 draft.of: new-tiddler-template 1
 draft.title: new-tiddler-template 1
 title: Draft of 'new-tiddler-template 1'
