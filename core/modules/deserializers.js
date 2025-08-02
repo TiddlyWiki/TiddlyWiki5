@@ -53,7 +53,7 @@ exports["text/html"] = function(text,fields) {
 		results.push.apply(results,deserializeStoreArea(text,storeAreaMarkerRegExp.lastIndex,!!storeAreaMatch[1],fields));
 	}
 	// Check for new-style store areas
-	var newStoreAreaMarkerRegExp = /<script class="tiddlywiki-tiddler-store" type="([^"]*)">/gi,
+	var newStoreAreaMarkerRegExp = /<script class=["']?tiddlywiki-tiddler-store["']?[\s]+type=["']?(.*?)["']?>/gi,
 		newStoreAreaMatch = newStoreAreaMarkerRegExp.exec(text),
 		haveHadNewStoreArea = !!newStoreAreaMatch;
 	while(newStoreAreaMatch) {
