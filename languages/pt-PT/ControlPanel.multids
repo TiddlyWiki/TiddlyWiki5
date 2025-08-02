@@ -129,7 +129,7 @@ Settings/AutoSave/Enabled/Description: Fazer gravação automática
 Settings/AutoSave/Hint: Guardar alterações automaticamente durante a edição
 Settings/CamelCase/Caption: Ligações Wiki em Camel Case
 Settings/CamelCase/Description: Activar ligações em frases ~CamelCase automaticamente
-Settings/CamelCase/Hint: Pode desactivar a criação automática de ligações em frases em ~CamelCase. Requer recarregar o texto para que tome efeito
+Settings/CamelCase/Hint: Requer recarregar o texto para que tome efeito
 Settings/Caption: Definições
 Settings/DefaultMoreSidebarTab/Caption: Separador Mais da Barra Lateral pré Definido
 Settings/DefaultMoreSidebarTab/Hint: Especificar que separador Mais é exibido por defeito
