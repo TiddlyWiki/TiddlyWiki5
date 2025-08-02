@@ -506,14 +506,15 @@ exports.extractFromParseTree = function(parseTreeRoot, predicate, extractValue, 
 			for(const parseTreeNode of parseTree) {
 				if(predicate(parseTreeNode, parentNode, title)) {
 					const value = extractValue(parseTreeNode, parentNode, title);
-					if(value) results.add(value);
+					if(value) {
+						results.add(value);
+					}
 				}
 				if(parseTreeNode.children) {
 					checkParseTree(parseTreeNode.children, parseTreeNode);
 				}
 			}
 		};
-
 	checkParseTree(parseTreeRoot);
 	return [...results];
 };
