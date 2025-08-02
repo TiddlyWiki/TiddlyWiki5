@@ -2230,13 +2230,24 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-right: 0;
 	text-align: end;
 	background-color: <<colour tab-background>>;
-	border-left: 1px solid <<colour tab-border>>;
+	border-inline-start: 1px solid <<colour tab-border>>;
 	border-bottom: 1px solid <<colour tab-border>>;
-	border-right: none;
-	border-top-left-radius: 2px;
-	border-bottom-left-radius: 2px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+	border-inline-end: none;
+	border-start-start-radius: 2px;
+	border-end-start-radius: 2px;
+	border-start-end-radius: 0;
+	border-end-end-radius: 0;
+}
+
+@supports not ((border-inline-start: 1px solid #000000) and (border-start-start-radius: 2px)) {
+	.tc-tab-buttons.tc-vertical button {
+		border-left: 1px solid <<colour tab-border>>;
+		border-right: none;
+		border-top-left-radius: 2px;
+		border-bottom-left-radius: 2px;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
 }
 
 .tc-tab-buttons.tc-vertical button.tc-tab-selected {
@@ -2262,10 +2273,16 @@ html body.tc-body.tc-single-tiddler-window {
 	padding-top: 0;
 	-webkit-padding-start: 14px;
 	padding-inline-start: 14px;
-	border-left: 1px solid <<colour tab-border>>;
+	border-inline-start: 1px solid <<colour tab-border>>;
 	-webkit-flex: 1 0 70%;
 	flex: 1 0 70%;
 	overflow: auto;
+}
+
+@supports not (border-inline-start: 1px solid #000000) {
+	.tc-tab-content.tc-vertical {
+		border-left: 1px solid <<colour tab-border>>;
+	}
 }
 
 .tc-sidebar-lists .tc-tab-buttons {
