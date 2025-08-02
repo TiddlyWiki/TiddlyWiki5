@@ -501,24 +501,22 @@ predicate: function(parseTreeNode, parentNode, title) => boolean
 extractValue: function(parseTreeNode, parentNode, title) => value
 */
 exports.extractFromParseTree = function(parseTreeRoot, predicate, extractValue, title) {
-	var results = [],
-		checkParseTree = function(parseTree, parentNode) {
-			for(var t=0; t<parseTree.length; t++) {
-				var parseTreeNode = parseTree[t];
+	const results = new Set(),
+		checkParseTree = (parseTree, parentNode = null) => {
+			for(const parseTreeNode of parseTree) {
 				if(predicate(parseTreeNode, parentNode, title)) {
-					var value = extractValue(parseTreeNode, parentNode, title);
-					if(value && results.indexOf(value) === -1) {
-						results.push(value);
-					}
+					const value = extractValue(parseTreeNode, parentNode, title);
+					if(value) results.add(value);
 				}
 				if(parseTreeNode.children) {
 					checkParseTree(parseTreeNode.children, parseTreeNode);
 				}
 			}
 		};
-	checkParseTree(parseTreeRoot, null);
-	return results;
-}
+
+	checkParseTree(parseTreeRoot);
+	return [...results];
+};
 
 /*
 Return an array of image tiddler titles that are directly referenced within the given parse tree using image widgets.
@@ -526,12 +524,8 @@ Return an array of image tiddler titles that are directly referenced within the 
 exports.extractImages = function(parseTreeRoot) {
 	return this.extractFromParseTree(
 		parseTreeRoot,
-		function(node) {
-			return node.type === "image" && node.attributes.source && node.attributes.source.type === "string";
-		},
-		function(node) {
-			return node.attributes.source.value;
-		}
+		(node) => node.type === "image" && node.attributes.source && node.attributes.source.type === "string",
+		(node) => node.attributes.source.value
 	);
 };
 
@@ -541,12 +535,8 @@ Return an array of tiddler titles that are directly linked within the given pars
 exports.extractLinks = function(parseTreeRoot) {
 	return this.extractFromParseTree(
 		parseTreeRoot,
-		function(node) {
-			return node.type === "link" && node.attributes.to && node.attributes.to.type === "string";
-		},
-		function(node) {
-			return node.attributes.to.value;
-		}
+		(node) => node.type === "link" && node.attributes.to && node.attributes.to.type === "string",
+		(node) => node.attributes.to.value
 	);
 };
 
@@ -586,18 +576,15 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 	return backlinks;
 };
 
-
 /*
 Return an array of tiddler titles that are directly transcluded within the given parse tree. `title` is the tiddler being parsed, we will ignore its self-referential transclusions, only return
 */
 exports.extractTranscludes = function(parseTreeRoot, title) {
 	return this.extractFromParseTree(
 		parseTreeRoot,
-		function(node, parentNode) {
-			return node.type === "transclude";
-		},
-		function(node, parentNode) {
-			var value;
+		(node, parentNode) => node.type === "transclude",
+		(node, parentNode) => {
+			let value;
 			if(node.attributes.$tiddler) {
 				if(node.attributes.$tiddler.type === "string") {
 					// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
@@ -630,9 +617,9 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 Return an array of images that are used in image widgets in the specified tiddler
 */
 exports.getTiddlerImages = function(title) {
-	var self = this;
-	return this.getCacheForTiddler(title,"images",function() {
-		var parser = self.parseTiddler(title);
+	const self = this;
+	return this.getCacheForTiddler(title,"images",() => {
+		const parser = self.parseTiddler(title);
 		if(parser) {
 			return self.extractImages(parser.tree);
 		}
