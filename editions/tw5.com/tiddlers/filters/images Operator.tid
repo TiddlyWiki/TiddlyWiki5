@@ -1,0 +1,16 @@
+caption: images
+created: 20250802195117221
+modified: 20250802195911642
+op-input: a [[selection of titles|Title Selection]]
+op-output: the image tiddlers to which the input tiddlers contain hard references using image widgets
+op-parameter: none
+op-purpose: find the images used by each input title
+tags: [[Filter Operators]] [[Common Operators]]
+title: images Operator
+type: text/vnd.tiddlywiki
+
+Each input title is processed in turn. The corresponding tiddler's list of images is generated, in the order in which they appear in the tiddler's text, and [[dominantly appended|Dominant Append]] to the operator's overall output.
+
+Images used as hard references in an image widget or the `[img[title]]` syntax are detected.
+
+<<.operator-examples "images">>

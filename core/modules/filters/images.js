@@ -3,7 +3,7 @@ title: $:/core/modules/filters/images.js
 type: application/javascript
 module-type: filteroperator
 
-Filter operator for returning all the images used in a image widgets in a tiddler
+Filter operator for returning all the images used in image widgets in a tiddler
 
 \*/
 
@@ -13,7 +13,7 @@ Filter operator for returning all the images used in a image widgets in a tiddle
 Export our filter function
 */
 exports.images = function(source,operator,options) {
-	var results = new $tw.utils.LinkedList();
+	const results = new $tw.utils.LinkedList();
 	source(function(tiddler,title) {
 		results.pushTop(options.wiki.getTiddlerImages(title));
 	});
