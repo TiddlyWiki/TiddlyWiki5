@@ -3280,17 +3280,20 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 */
 
 .tc-tree div {
-	padding-left: 14px;
+	-webkit-padding-start: 14px;
+	padding-inline-start: 14px;
 }
 
 .tc-tree ol {
 	list-style-type: none;
-	padding-left: 0;
+	-webkit-padding-start: 0;
+	padding-inline-start: 0;
 	margin-top: 0;
 }
 
 .tc-tree ol ol {
-	padding-left: 1em;
+	-webkit-padding-start: 1em;
+	padding-inline-start: 1em;
 }
 
 .tc-tree button {
@@ -3421,7 +3424,8 @@ span.tc-translink > a:first-child {
 	line-height: 0;
 	border-radius: 1em;
 	vertical-align: text-bottom;
-	margin-right: 0.25em;
+	-webkit-margin-end: 0.25em;
+	margin-inline-end: 0.25em;
 }
 
 .tc-test-case-result-icon-pass {
@@ -3453,7 +3457,13 @@ span.tc-translink > a:first-child {
 }
 
 .tc-test-case-toolbar {
-	float: right;
+	float: inline-end;
+}
+
+@supports not (float: inline-end) {
+	.tc-test-case-toolbar {
+		float: right;
+	}
 }
 
 .tc-test-case-toolbar svg {
