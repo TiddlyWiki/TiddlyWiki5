@@ -1259,8 +1259,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-tiddler-frame .tc-tiddler-controls {
-	float: right;
+	float: inline-end;
 	padding: 3px; /* make space for outline */
+}
+
+@supports not (float: inline-end) {
+	.tc-tiddler-frame .tc-tiddler-controls {
+		float: right;
+	}
 }
 
 .tc-tiddler-controls .tc-drop-down {
@@ -2239,6 +2245,11 @@ html body.tc-body.tc-single-tiddler-window {
 	border-end-end-radius: 0;
 }
 
+.tc-tab-buttons.tc-vertical button.tc-tab-selected {
+	background-color: <<colour tab-background-selected>>;
+	border-inline-end: 1px solid <<colour tab-background-selected>>;
+}
+
 @supports not ((border-inline-start: 1px solid #000000) and (border-start-start-radius: 2px)) {
 	.tc-tab-buttons.tc-vertical button {
 		border-left: 1px solid <<colour tab-border>>;
@@ -2248,11 +2259,10 @@ html body.tc-body.tc-single-tiddler-window {
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
 	}
-}
 
-.tc-tab-buttons.tc-vertical button.tc-tab-selected {
-	background-color: <<colour tab-background-selected>>;
-	border-right: 1px solid <<colour tab-background-selected>>;
+	.tc-tab-buttons.tc-vertical button.tc-tab-selected {
+		border-right: 1px solid <<colour tab-background-selected>>;
+	}
 }
 
 .tc-tab-divider {
@@ -2489,8 +2499,14 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-alert-toolbar {
 	position: absolute;
 	top: 7px;
-	right: 7px;
+	inset-inline-end: 7px;
 	line-height: 0;
+}
+
+@supports not (inset-inline-end: 7px) {
+	.tc-alert-toolbar {
+		right: 7px;
+	}
 }
 
 .tc-alert-toolbar svg {
@@ -2967,11 +2983,13 @@ input.tc-palette-manager-colour-input {
 
 .tc-table-of-contents ol {
 	list-style-type: none;
-	padding-left: 0;
+	-webkit-padding-start: 0;
+	padding-inline-start: 0;
 }
 
 .tc-table-of-contents ol ol {
-	padding-left: 1em;
+	-webkit-padding-start: 1em;
+	padding-inline-start: 1em;
 }
 
 .tc-table-of-contents li {
@@ -3012,7 +3030,8 @@ input.tc-palette-manager-colour-input {
 .tc-tabbed-table-of-contents .tc-table-of-contents {
 	z-index: 100;
 	display: inline-block;
-	padding-left: 1em;
+	-webkit-padding-start: 1em;
+	padding-inline-start: 1em;
 	max-width: 50%;
 	-webkit-flex: 0 0 auto;
 	flex: 0 0 auto;
