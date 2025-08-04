@@ -53,11 +53,11 @@ exports["text/html"] = function(text,fields) {
 		results.push.apply(results,deserializeStoreArea(text,storeAreaMarkerRegExp.lastIndex,!!storeAreaMatch[1],fields));
 	}
 	// Check for new-style store areas
-	var newStoreAreaMarkerRegExp = /<script class=["']?tiddlywiki-tiddler-store["']?[\s]+type=["']?(.*?)["']?>/gi,
+	var newStoreAreaMarkerRegExp = /<script class=(["']?)tiddlywiki-tiddler-store\1[\s]+type=(["']?)([^"']*)\2>/gi,
 		newStoreAreaMatch = newStoreAreaMarkerRegExp.exec(text),
 		haveHadNewStoreArea = !!newStoreAreaMatch;
 	while(newStoreAreaMatch) {
-		results.push.apply(results,deserializeNewStoreArea(text,newStoreAreaMarkerRegExp.lastIndex,newStoreAreaMatch[1],fields));
+		results.push.apply(results,deserializeNewStoreArea(text,newStoreAreaMarkerRegExp.lastIndex,newStoreAreaMatch[3],fields));
 		newStoreAreaMatch = newStoreAreaMarkerRegExp.exec(text);
 	}
 	// Return if we had either an old-style or a new-style store area
