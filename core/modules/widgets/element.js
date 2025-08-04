@@ -9,6 +9,8 @@ Element widget
 
 "use strict";
 
+const { transclude } = require("./transclude");
+
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var ElementWidget = function(parseTreeNode,options) {
@@ -74,6 +76,11 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	// Create the DOM node and render children
 	var domNode = this.document.createElementNS(this.namespace,this.tag);
 	this.assignAttributes(domNode,{excludeEventAttributes: true});
+	if (this.getVariable("tv-debug") === "yes") {
+		if (domNode) {
+			domNode.setAttribute("data-debug-xxxx", this.getVariable("transclusion"));
+		}
+	}
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
