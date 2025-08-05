@@ -464,3 +464,4 @@ ClassicStoryView.prototype.refreshEnd = function(changedTiddlers,changedAttribut
 };
 
 exports.classic = ClassicStoryView;
+
