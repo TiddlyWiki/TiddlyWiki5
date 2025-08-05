@@ -203,13 +203,17 @@ ClassicStoryView.prototype.insert = function(widget) {
 		
 		// For slide-down animation, we need special handling
 		if(self.config.insertAnimation === "slide-down") {
-			// Use height animation with proper overflow handling
+			// For new insertions, we want to start from 0 height
+			// But we need to make sure the element is truly collapsed initially
 			initialStyles.push({height: "0px"});
 			initialStyles.push({overflow: "hidden"});
 			initialStyles.push({marginTop: currMarginTop + "px"});
 			initialStyles.push({marginBottom: currMarginBottom + "px"});
 			// Ensure clearfix doesn't interfere
 			initialStyles.push({minHeight: "0"});
+			// Also collapse padding initially for smoother animation
+			initialStyles.push({paddingTop: "0px"});
+			initialStyles.push({paddingBottom: "0px"});
 			
 			// If there are elements below that are animating, push them smoothly
 			if(elementsToAdjust.length > 0) {
@@ -244,9 +248,17 @@ ClassicStoryView.prototype.insert = function(widget) {
 				});
 			}
 			
+			// Get padding values for animation
+			var currPaddingTop = parseFloat(computedStyle.paddingTop) || 0;
+			var currPaddingBottom = parseFloat(computedStyle.paddingBottom) || 0;
+			
 			finalStyles.push({height: currHeight + "px"});
+			finalStyles.push({paddingTop: currPaddingTop + "px"});
+			finalStyles.push({paddingBottom: currPaddingBottom + "px"});
 			transitions.push("height " + duration + "ms " + self.config.insertEasing);
-			willChange.push("height");
+			transitions.push("padding-top " + duration + "ms " + self.config.insertEasing);
+			transitions.push("padding-bottom " + duration + "ms " + self.config.insertEasing);
+			willChange.push("height", "padding-top", "padding-bottom");
 		} else {
 			// Handle other animation types as before
 			switch(self.config.insertAnimation) {
@@ -291,9 +303,12 @@ ClassicStoryView.prototype.insert = function(widget) {
 					{marginBottom: ""},
 					{marginTop: ""},
 					{height: ""},
+					{paddingTop: ""},
+					{paddingBottom: ""},
 					{opacity: ""},
 					{transform: ""},
 					{overflow: ""},
+					{minHeight: ""},
 					{willChange: ""}
 				]);
 				if(targetElement.dataset) {
