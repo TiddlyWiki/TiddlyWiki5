@@ -166,8 +166,15 @@ ClassicStoryView.prototype.insert = function(widget) {
 		var computedStyle = window.getComputedStyle(targetElement);
 		var currMarginBottom = parseFloat(computedStyle.marginBottom) || 0;
 		var currMarginTop = parseFloat(computedStyle.marginTop) || 0;
-		var currHeight = targetElement.offsetHeight;
+		
+		// Use scrollHeight for more accurate height including clearfix
+		var currHeight = targetElement.scrollHeight;
 		var currWidth = targetElement.offsetWidth;
+		
+		// Ensure minimum height to prevent collapse issues
+		if(currHeight < 1) {
+			currHeight = targetElement.offsetHeight;
+		}
 		
 		// Find elements below that might be animating
 		var nextSibling = targetElement.nextElementSibling;
@@ -196,11 +203,13 @@ ClassicStoryView.prototype.insert = function(widget) {
 		
 		// For slide-down animation, we need special handling
 		if(self.config.insertAnimation === "slide-down") {
-			// Use transform instead of margin for smoother animation
+			// Use height animation with proper overflow handling
 			initialStyles.push({height: "0px"});
 			initialStyles.push({overflow: "hidden"});
 			initialStyles.push({marginTop: currMarginTop + "px"});
 			initialStyles.push({marginBottom: currMarginBottom + "px"});
+			// Ensure clearfix doesn't interfere
+			initialStyles.push({minHeight: "0"});
 			
 			// If there are elements below that are animating, push them smoothly
 			if(elementsToAdjust.length > 0) {
@@ -332,7 +341,8 @@ ClassicStoryView.prototype.remove = function(widget) {
 		var computedStyle = window.getComputedStyle(targetElement);
 		var currMarginBottom = parseFloat(computedStyle.marginBottom) || 0;
 		var currMarginTop = parseFloat(computedStyle.marginTop) || 0;
-		var currHeight = targetElement.offsetHeight + currMarginTop;
+		// Use scrollHeight for accurate measurement including clearfix
+		var currHeight = targetElement.scrollHeight + currMarginTop;
 		
 		// Set up initial state
 		var initialStyles = [{transition: "none"}, {opacity: "1"}];
