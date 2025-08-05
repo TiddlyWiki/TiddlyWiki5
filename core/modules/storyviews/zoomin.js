@@ -41,6 +41,12 @@ var ZoominListView = function(listWidget) {
 };
 
 ZoominListView.prototype.navigateTo = function(historyInfo) {
+	// Check if storyview scrolling is enabled
+	var enableScroll = this.listWidget.getVariable("tv-enable-storyview-scroll");
+	if(enableScroll !== "yes") {
+		return;
+	}
+	
 	var duration = $tw.utils.getAnimationDuration(),
 		listElementIndex = this.listWidget.findListItem(0,historyInfo.title);
 	if(listElementIndex === undefined) {
