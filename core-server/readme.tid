@@ -1,0 +1,6 @@
+title: $:/core-server/readme
+
+This plugin contains TiddlyWiki's core components that are only needed on the server, comprising:
+
+* Commands
+* HTTP server code
