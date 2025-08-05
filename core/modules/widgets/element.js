@@ -78,7 +78,9 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.assignAttributes(domNode,{excludeEventAttributes: true});
 	if (this.getVariable("tv-debug") === "yes") {
 		if (domNode) {
-			domNode.setAttribute("data-debug-xxxx", this.getVariable("transclusion"));
+			var test = this.getVariable("transclusion");
+			domNode.setAttribute("data-debug-xxxx", test);
+			domNode.setAttribute("title", test);
 		}
 	}
 	parent.insertBefore(domNode,nextSibling);
