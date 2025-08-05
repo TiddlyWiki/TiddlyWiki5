@@ -91,38 +91,32 @@ ClassicStoryView.prototype.insert = function(widget) {
 		var animId = "anim_" + Date.now() + "_" + Math.random();
 		self.animationsInProgress[animId] = true;
 		
-		// Get precise measurements
-		var rect = targetElement.getBoundingClientRect();
+		// Get the current height of the tiddler
 		var computedStyle = window.getComputedStyle(targetElement);
 		var currMarginBottom = parseFloat(computedStyle.marginBottom) || 0;
 		var currMarginTop = parseFloat(computedStyle.marginTop) || 0;
 		var currPaddingTop = parseFloat(computedStyle.paddingTop) || 0;
 		var currPaddingBottom = parseFloat(computedStyle.paddingBottom) || 0;
-		var currHeight = rect.height;
-		var totalHeight = currHeight + currMarginTop + currMarginBottom;
+		var currHeight = targetElement.offsetHeight;
 		
-		// Set up GPU-accelerated initial state
+		// Set up initial state - collapsed with negative margin
 		$tw.utils.setStyle(targetElement,[
 			{transition: "none"},
-			{transform: "translate3d(0, 0, 0) scaleY(0.001)"},
-			{transformOrigin: "center top"},
+			{marginBottom: (-currHeight - currMarginTop) + "px"},
 			{opacity: "0"},
-			{maxHeight: "0px"},
-			{overflow: "hidden"},
-			{willChange: self.insertWillChange}
+			{transform: "translate3d(0, 0, 0)"}, // Force GPU layer
+			{willChange: "margin-bottom, opacity"}
 		]);
 		
 		// Force layout recalculation
 		$tw.utils.forceLayout(targetElement);
 		
-		// Apply GPU-accelerated transition
+		// Apply transition
 		$tw.utils.setStyle(targetElement,[
-			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", " +
-						"opacity " + duration + "ms " + easing + ", " +
-						"max-height " + duration + "ms " + easing},
-			{transform: "translate3d(0, 0, 0) scaleY(1)"},
-			{opacity: "1"},
-			{maxHeight: totalHeight + "px"}
+			{transition: "margin-bottom " + duration + "ms " + easing + ", " +
+						"opacity " + duration + "ms " + easing},
+			{marginBottom: currMarginBottom + "px"},
+			{opacity: "1"}
 		]);
 		
 		// Clean up after animation
@@ -130,11 +124,9 @@ ClassicStoryView.prototype.insert = function(widget) {
 			if(targetElement.parentNode) {
 				$tw.utils.setStyle(targetElement,[
 					{transition: ""},
-					{transform: ""},
-					{transformOrigin: ""},
+					{marginBottom: ""},
 					{opacity: ""},
-					{maxHeight: ""},
-					{overflow: ""},
+					{transform: ""},
 					{willChange: ""}
 				]);
 			}
@@ -165,37 +157,33 @@ ClassicStoryView.prototype.remove = function(widget) {
 		var animId = "anim_" + Date.now() + "_" + Math.random();
 		self.animationsInProgress[animId] = true;
 		
-		// Get precise measurements
-		var rect = targetElement.getBoundingClientRect();
+		// Get the current width for slide animation
+		var currWidth = targetElement.offsetWidth;
 		var computedStyle = window.getComputedStyle(targetElement);
-		var currWidth = rect.width;
-		var currHeight = rect.height;
-		var currMarginTop = parseFloat(computedStyle.marginTop) || 0;
 		var currMarginBottom = parseFloat(computedStyle.marginBottom) || 0;
-		var totalHeight = currHeight + currMarginTop + currMarginBottom;
+		var currMarginTop = parseFloat(computedStyle.marginTop) || 0;
+		var currHeight = targetElement.offsetHeight + currMarginTop;
 		
-		// Prepare for GPU-accelerated animation
+		// Prepare for animation
 		$tw.utils.setStyle(targetElement,[
 			{transition: "none"},
-			{transform: "translate3d(0, 0, 0) scale(1)"},
-			{transformOrigin: "center center"},
+			{transform: "translate3d(0, 0, 0)"}, // Force GPU layer
+			{marginBottom: currMarginBottom + "px"},
 			{opacity: "1"},
-			{maxHeight: totalHeight + "px"},
-			{overflow: "hidden"},
-			{willChange: self.removeWillChange}
+			{willChange: $tw.utils.roundTripPropertyName("transform") + ", opacity, margin-bottom"}
 		]);
 		
 		// Force layout recalculation
 		$tw.utils.forceLayout(targetElement);
 		
-		// Apply GPU-accelerated exit animation
+		// Apply exit animation
 		$tw.utils.setStyle(targetElement,[
 			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", " +
 						"opacity " + duration + "ms " + easing + ", " +
-						"max-height " + duration + "ms " + easing},
-			{transform: "translate3d(-" + currWidth + "px, 0, 0) scale(0.8)"},
-			{opacity: "0"},
-			{maxHeight: "0px"}
+						"margin-bottom " + duration + "ms " + easing},
+			{transform: "translate3d(-" + currWidth + "px, 0, 0)"},
+			{marginBottom: (-currHeight) + "px"},
+			{opacity: "0"}
 		]);
 		
 		// Remove element after animation completes
