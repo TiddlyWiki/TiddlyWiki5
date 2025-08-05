@@ -203,12 +203,15 @@ ClassicStoryView.prototype.insert = function(widget) {
 		
 		// For slide-down animation, we need special handling
 		if(self.config.insertAnimation === "slide-down") {
-			// For new insertions, we want to start from 0 height
-			// But we need to make sure the element is truly collapsed initially
+			// Get padding values for animation
+			var currPaddingTop = parseFloat(computedStyle.paddingTop) || 0;
+			var currPaddingBottom = parseFloat(computedStyle.paddingBottom) || 0;
+			
+			// For new insertions, we want to start from completely collapsed state
 			initialStyles.push({height: "0px"});
 			initialStyles.push({overflow: "hidden"});
-			initialStyles.push({marginTop: currMarginTop + "px"});
-			initialStyles.push({marginBottom: currMarginBottom + "px"});
+			initialStyles.push({marginTop: "0px"});
+			initialStyles.push({marginBottom: "0px"});
 			// Ensure clearfix doesn't interfere
 			initialStyles.push({minHeight: "0"});
 			// Also collapse padding initially for smoother animation
@@ -230,9 +233,11 @@ ClassicStoryView.prototype.insert = function(widget) {
 					self.elementsBeingPushed[pushId] = elem;
 					
 					// Apply smooth push down
+					// Total space = height + padding + margins (all starting from 0)
+					var totalSpace = currHeight + currPaddingTop + currPaddingBottom + currMarginTop + currMarginBottom;
 					$tw.utils.setStyle(elem, [
 						{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + self.config.insertEasing},
-						{transform: "translate3d(0, " + (currentY + currHeight + currMarginTop + currMarginBottom) + "px, 0)"}
+						{transform: "translate3d(0, " + (currentY + totalSpace) + "px, 0)"}
 					]);
 					
 					// Clean up after animation
@@ -248,17 +253,17 @@ ClassicStoryView.prototype.insert = function(widget) {
 				});
 			}
 			
-			// Get padding values for animation
-			var currPaddingTop = parseFloat(computedStyle.paddingTop) || 0;
-			var currPaddingBottom = parseFloat(computedStyle.paddingBottom) || 0;
-			
 			finalStyles.push({height: currHeight + "px"});
+			finalStyles.push({marginTop: currMarginTop + "px"});
+			finalStyles.push({marginBottom: currMarginBottom + "px"});
 			finalStyles.push({paddingTop: currPaddingTop + "px"});
 			finalStyles.push({paddingBottom: currPaddingBottom + "px"});
 			transitions.push("height " + duration + "ms " + self.config.insertEasing);
+			transitions.push("margin-top " + duration + "ms " + self.config.insertEasing);
+			transitions.push("margin-bottom " + duration + "ms " + self.config.insertEasing);
 			transitions.push("padding-top " + duration + "ms " + self.config.insertEasing);
 			transitions.push("padding-bottom " + duration + "ms " + self.config.insertEasing);
-			willChange.push("height", "padding-top", "padding-bottom");
+			willChange.push("height", "margin-top", "margin-bottom", "padding-top", "padding-bottom");
 		} else {
 			// Handle other animation types as before
 			switch(self.config.insertAnimation) {
