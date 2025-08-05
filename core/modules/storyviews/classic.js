@@ -35,21 +35,21 @@ ClassicStoryView.prototype.loadConfig = function() {
 	// Animation configuration
 	this.config = {
 		// Insert animation settings
-		insertAnimation: wiki.getTiddlerText("$:/config/storyview/classic/insert-animation", "slide-down"), // slide-down, fade, slide-right, zoom
-		insertEasing: wiki.getTiddlerText("$:/config/storyview/classic/insert-easing", easing),
+		insertAnimation: wiki.getTiddlerText("$:/config/StoryView/Classic/InsertAnimation", "slide-down"), // slide-down, fade, slide-right, zoom
+		insertEasing: wiki.getTiddlerText("$:/config/StoryView/Classic/InsertEasing", easing),
 		
 		// Remove animation settings  
-		removeAnimation: wiki.getTiddlerText("$:/config/storyview/classic/remove-animation", "slide-left"), // slide-left, fade, slide-right, shrink
-		removeEasing: wiki.getTiddlerText("$:/config/storyview/classic/remove-easing", easing),
+		removeAnimation: wiki.getTiddlerText("$:/config/StoryView/Classic/RemoveAnimation", "slide-left"), // slide-left, fade, slide-right, shrink
+		removeEasing: wiki.getTiddlerText("$:/config/StoryView/Classic/RemoveEasing", easing),
 		
 		// Navigate settings
-		navigateScrollBehavior: wiki.getTiddlerText("$:/config/storyview/classic/navigate-scroll-behavior", "smooth"), // smooth, instant
-		navigateScrollOffset: parseInt(wiki.getTiddlerText("$:/config/storyview/classic/navigate-scroll-offset", "0"), 10) || 0,
+		navigateScrollBehavior: wiki.getTiddlerText("$:/config/StoryView/Classic/NavigateScrollBehavior", "smooth"), // smooth, instant
+		navigateScrollOffset: parseInt(wiki.getTiddlerText("$:/config/StoryView/Classic/NavigateScrollOffset", "0"), 10) || 0,
 		
 		// Performance settings
-		useGPU: wiki.getTiddlerText("$:/config/storyview/classic/use-gpu", "yes") === "yes",
-		animateSimultaneous: wiki.getTiddlerText("$:/config/storyview/classic/animate-simultaneous", "yes") === "yes",
-		maxSimultaneousAnimations: parseInt(wiki.getTiddlerText("$:/config/storyview/classic/max-simultaneous-animations", "5"), 10) || 5
+		useGPU: wiki.getTiddlerText("$:/config/StoryView/Classic/UseGPU", "yes") === "yes",
+		animateSimultaneous: wiki.getTiddlerText("$:/config/StoryView/Classic/AnimateSimultaneous", "yes") === "yes",
+		maxSimultaneousAnimations: parseInt(wiki.getTiddlerText("$:/config/StoryView/Classic/MaxSimultaneousAnimations", "5"), 10) || 5
 	};
 	
 	// Check if configuration changed
@@ -403,15 +403,15 @@ ClassicStoryView.prototype.remove = function(widget) {
 ClassicStoryView.prototype.refreshStart = function(changedTiddlers,changedAttributes) {
 	// Check if any configuration tiddlers have changed
 	var configTiddlers = [
-		"$:/config/storyview/classic/insert-animation",
-		"$:/config/storyview/classic/insert-easing",
-		"$:/config/storyview/classic/remove-animation",
-		"$:/config/storyview/classic/remove-easing",
-		"$:/config/storyview/classic/navigate-scroll-behavior",
-		"$:/config/storyview/classic/navigate-scroll-offset",
-		"$:/config/storyview/classic/use-gpu",
-		"$:/config/storyview/classic/animate-simultaneous",
-		"$:/config/storyview/classic/max-simultaneous-animations"
+		"$:/config/StoryView/Classic/InsertAnimation",
+		"$:/config/StoryView/Classic/InsertEasing",
+		"$:/config/StoryView/Classic/RemoveAnimation",
+		"$:/config/StoryView/Classic/RemoveEasing",
+		"$:/config/StoryView/Classic/NavigateScrollBehavior",
+		"$:/config/StoryView/Classic/NavigateScrollOffset",
+		"$:/config/StoryView/Classic/UseGPU",
+		"$:/config/StoryView/Classic/AnimateSimultaneous",
+		"$:/config/StoryView/Classic/MaxSimultaneousAnimations"
 	];
 	
 	var configChanged = false;
