@@ -81,15 +81,39 @@ PopStoryView.prototype.navigateTo = function(historyInfo) {
 	// Highlight the target element briefly if enabled
 	if(this.config.enableNavigationHighlight) {
 		var duration = $tw.utils.getAnimationDuration() * this.config.animationScale;
+		var halfDuration = duration / 2;
+		
+		// Pulse pop effect - slightly scale up with glow
 		$tw.utils.setStyle(targetElement,[
 			{transition: "none"},
-			{filter: "brightness(1.2)"}
+			{transform: this.config.useGPUAcceleration ? "scale3d(1.05, 1.05, 1)" : "scale(1.05)"},
+			{filter: "brightness(1.1) drop-shadow(0 0 10px rgba(70, 130, 255, 0.4))"},
+			{transformOrigin: "center center"},
+			{zIndex: "999"}
 		]);
 		$tw.utils.forceLayout(targetElement);
+		
+		// Animate back to normal state
 		$tw.utils.setStyle(targetElement,[
-			{transition: "filter " + duration + "ms " + this.config.easingFunction},
-			{filter: "brightness(1)"}
+			{transition: $tw.utils.roundTripPropertyName("transform") + " " + halfDuration + "ms " + this.config.easingFunction + 
+			            ", filter " + duration + "ms " + this.config.easingFunction + 
+			            ", z-index 0ms " + duration + "ms"},
+			{transform: this.config.useGPUAcceleration ? "scale3d(1, 1, 1)" : "scale(1)"},
+			{filter: "brightness(1) drop-shadow(0 0 0px rgba(70, 130, 255, 0))"}
 		]);
+		
+		// Clean up after animation
+		setTimeout(function() {
+			if(targetElement.parentNode) {
+				$tw.utils.setStyle(targetElement,[
+					{transition: "none"},
+					{transform: ""},
+					{filter: ""},
+					{transformOrigin: ""},
+					{zIndex: ""}
+				]);
+			}
+		}, duration + 50);
 	}
 	
 	// Scroll the node into view with a small delay to let the highlight start
