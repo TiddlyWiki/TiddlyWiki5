@@ -251,10 +251,10 @@ ClassicStoryView.prototype.insert = function(widget) {
 			cleanupTimeout = setTimeout(function() {
 				delete self.animatingElements[elementId];
 				if(targetElement.parentNode) {
-					self.applyGPUStyles(targetElement,[
+					$tw.utils.setStyle(targetElement,[
 						{transition: "none"},
 						{transform: ""},
-						{willChange: "auto"}
+						{willChange: ""}
 					]);
 					targetElement.removeAttribute("data-animation-id");
 				}
@@ -282,10 +282,11 @@ ClassicStoryView.prototype.insert = function(widget) {
 			cleanupTimeout = setTimeout(function() {
 				delete self.animatingElements[elementId];
 				if(targetElement.parentNode) {
-					self.applyGPUStyles(targetElement,[
+					$tw.utils.setStyle(targetElement,[
 						{transition: "none"},
+						{transform: ""},
 						{marginBottom: ""},
-						{willChange: "auto"}
+						{willChange: ""}
 					]);
 					targetElement.removeAttribute("data-animation-id");
 				}
