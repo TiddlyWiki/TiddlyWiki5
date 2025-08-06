@@ -215,21 +215,23 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		setTimeout(function() {
 			if(self.currentTiddlerDomNode !== prevCurrentTiddler) {
 				prevCurrentTiddler.style.display = "none";
-				// Clean up will-change
-				if(self.config.useWillChange) {
-					$tw.utils.setStyle(prevCurrentTiddler,[
-						{willChange: "auto"}
-					]);
-				}
+				// Clean up transform and will-change
+				$tw.utils.setStyle(prevCurrentTiddler,[
+					{transition: "none"},
+					{transform: ""},
+					{willChange: ""}
+				]);
 			}
 		}, duration);
 	}
 	
-	// Clean up will-change after animation
+	// Clean up transform and will-change after animation
 	setTimeout(function() {
-		if(self.config.useWillChange && targetElement.parentNode) {
+		if(targetElement.parentNode) {
 			$tw.utils.setStyle(targetElement,[
-				{willChange: "auto"}
+				{transition: "none"},
+				{transform: ""},
+				{willChange: ""}
 			]);
 		}
 	}, duration + 100);
@@ -361,12 +363,6 @@ ZoominListView.prototype.remove = function(widget) {
 	var self = this;
 	setTimeout(function() {
 		removeElement();
-		// Clean up will-change
-		if(self.config.useWillChange && targetElement.parentNode) {
-			$tw.utils.setStyle(targetElement,[
-				{willChange: "auto"}
-			]);
-		}
 	}, duration);
 	
 	// Now the tiddler we're going back to
@@ -380,11 +376,13 @@ ZoominListView.prototype.remove = function(widget) {
 			{opacity: "1"}
 		]);
 		
-		// Clean up will-change after animation
+		// Clean up transform and will-change after animation
 		setTimeout(function() {
-			if(self.config.useWillChange && toWidgetDomNode.parentNode) {
+			if(toWidgetDomNode.parentNode) {
 				$tw.utils.setStyle(toWidgetDomNode,[
-					{willChange: "auto"}
+					{transition: "none"},
+					{transform: ""},
+					{willChange: ""}
 				]);
 			}
 		}, duration + 100);
