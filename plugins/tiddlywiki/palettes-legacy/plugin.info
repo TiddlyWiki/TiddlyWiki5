@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/palettes-legacy",
+	"name": "Legacy Palettes",
+	"description": "Legacy colour palettes from prior to v5.4.0",
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
+}

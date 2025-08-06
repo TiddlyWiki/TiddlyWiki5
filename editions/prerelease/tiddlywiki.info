@@ -13,7 +13,9 @@
 		"tiddlywiki/menubar",
 		"tiddlywiki/jszip",
 		"tiddlywiki/confetti",
-		"tiddlywiki/tour"
+		"tiddlywiki/tour",
+		"tiddlywiki/palettes-legacy",
+		"tiddlywiki/palettes-2025"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
