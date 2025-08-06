@@ -146,14 +146,15 @@ PopStoryView.prototype.insert = function(widget) {
 		if(targetElement.parentNode) {
 			targetElement.removeAttribute("data-animation-id");
 			$tw.utils.setStyle(targetElement,[
-				{transition: ""},
+				{transition: "none"},
 				{transform: ""},
 				{filter: ""},
 				{opacity: ""},
 				{willChange: ""},
 				{marginBottom: ""},
 				{zIndex: ""},
-				{position: ""}
+				{position: ""},
+				{transformOrigin: ""}
 			]);
 			$tw.utils.setStyle(widget.document.body,[
 				{"overflow-x": ""}
