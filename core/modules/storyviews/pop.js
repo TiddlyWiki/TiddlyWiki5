@@ -78,8 +78,12 @@ PopStoryView.prototype.navigateTo = function(historyInfo) {
 		return;
 	}
 	
-	// Highlight the target element briefly if enabled
-	if(this.config.enableNavigationHighlight) {
+	// Check if this element is currently being animated (inserted)
+	var animationId = targetElement.getAttribute("data-animation-id");
+	var isAnimating = animationId && this.animatingElements[animationId];
+	
+	// Highlight the target element briefly if enabled (but not if it's being inserted)
+	if(this.config.enableNavigationHighlight && !isAnimating) {
 		var duration = $tw.utils.getAnimationDuration() * this.config.animationScale;
 		var halfDuration = duration / 2;
 		
@@ -139,7 +143,10 @@ PopStoryView.prototype.insert = function(widget) {
 	var computedStyle = window.getComputedStyle(targetElement),
 		currMarginBottom = parseInt(computedStyle.marginBottom,10),
 		currMarginTop = parseInt(computedStyle.marginTop,10),
-		currHeight = targetElement.offsetHeight + currMarginTop;
+		currMarginLeft = parseInt(computedStyle.marginLeft,10),
+		currMarginRight = parseInt(computedStyle.marginRight,10),
+		currHeight = targetElement.offsetHeight + currMarginTop,
+		currWidth = targetElement.offsetWidth + currMarginLeft;
 	
 	// Build transform string with GPU acceleration
 	var transformStart;
@@ -159,7 +166,7 @@ PopStoryView.prototype.insert = function(widget) {
 	var filterStart = this.config.enableBlur ? "blur(5px)" : "none";
 	
 	// Build will-change property list
-	var willChangeProps = ["transform", "opacity", "margin-bottom"];
+	var willChangeProps = ["transform", "opacity", "margin-bottom", "margin-right"];
 	if(this.config.enableBlur) {
 		willChangeProps.push("filter");
 	}
@@ -176,6 +183,8 @@ PopStoryView.prototype.insert = function(widget) {
 				{opacity: ""},
 				{willChange: ""},
 				{marginBottom: ""},
+				{marginRight: ""},
+				{marginLeft: ""},
 				{zIndex: ""},
 				{position: ""},
 				{transformOrigin: ""}
@@ -206,6 +215,7 @@ PopStoryView.prototype.insert = function(widget) {
 		{opacity: String(this.config.insertOpacity)},
 		{transformOrigin: "center center"},
 		{marginBottom: (-currHeight) + "px"},
+		{marginRight: (-currWidth) + "px"},
 		{position: "relative"},
 		{zIndex: "1000"}
 	];
@@ -220,7 +230,8 @@ PopStoryView.prototype.insert = function(widget) {
 		var transitions = [
 			$tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + self.config.easingFunction,
 			"opacity " + duration + "ms " + self.config.easingFunction,
-			"margin-bottom " + duration + "ms " + self.config.easingFunction
+			"margin-bottom " + duration + "ms " + self.config.easingFunction,
+			"margin-right " + duration + "ms " + self.config.easingFunction
 		];
 		if(self.config.enableBlur) {
 			transitions.push("filter " + duration + "ms " + self.config.easingFunction);
@@ -233,7 +244,8 @@ PopStoryView.prototype.insert = function(widget) {
 			{transform: finalTransform},
 			{filter: "none"},
 			{opacity: "1"},
-			{marginBottom: currMarginBottom + "px"}
+			{marginBottom: currMarginBottom + "px"},
+			{marginRight: currMarginRight + "px"}
 		]);
 	}, 10);
 };
@@ -266,6 +278,7 @@ PopStoryView.prototype.remove = function(widget) {
 		var currentTransform = currentStyle.transform;
 		var currentFilter = currentStyle.filter;
 		var currentMarginBottom = currentStyle.marginBottom;
+		var currentMarginRight = currentStyle.marginRight;
 		
 		// Apply the current computed values to freeze the animation
 		$tw.utils.setStyle(targetElement,[
@@ -273,7 +286,8 @@ PopStoryView.prototype.remove = function(widget) {
 			{opacity: currentOpacity},
 			{transform: currentTransform},
 			{filter: currentFilter},
-			{marginBottom: currentMarginBottom}
+			{marginBottom: currentMarginBottom},
+			{marginRight: currentMarginRight}
 		]);
 		$tw.utils.forceLayout(targetElement);
 	}
@@ -282,7 +296,10 @@ PopStoryView.prototype.remove = function(widget) {
 	var computedStyle = window.getComputedStyle(targetElement),
 		currMarginBottom = parseInt(computedStyle.marginBottom,10),
 		currMarginTop = parseInt(computedStyle.marginTop,10),
-		currHeight = targetElement.offsetHeight + currMarginTop;
+		currMarginLeft = parseInt(computedStyle.marginLeft,10),
+		currMarginRight = parseInt(computedStyle.marginRight,10),
+		currHeight = targetElement.offsetHeight + currMarginTop,
+		currWidth = targetElement.offsetWidth + currMarginLeft;
 	
 	// Build transform string with GPU acceleration
 	var transformEnd;
@@ -302,7 +319,7 @@ PopStoryView.prototype.remove = function(widget) {
 	var filterEnd = this.config.enableBlur ? "blur(5px)" : "none";
 	
 	// Build will-change property list
-	var willChangeProps = ["transform", "opacity", "margin-bottom"];
+	var willChangeProps = ["transform", "opacity", "margin-bottom", "margin-right"];
 	if(this.config.enableBlur) {
 		willChangeProps.push("filter");
 	}
@@ -316,7 +333,8 @@ PopStoryView.prototype.remove = function(widget) {
 			{filter: "none"},
 			{opacity: "1"},
 			{transformOrigin: "center center"},
-			{marginBottom: currMarginBottom + "px"}
+			{marginBottom: currMarginBottom + "px"},
+			{marginRight: currMarginRight + "px"}
 		];
 		if(this.config.useWillChange) {
 			initialStyles.push({willChange: willChangeProps.join(", ")});
@@ -333,7 +351,8 @@ PopStoryView.prototype.remove = function(widget) {
 		var transitions = [
 			$tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + self.config.easingFunction,
 			"opacity " + duration + "ms " + self.config.easingFunction,
-			"margin-bottom " + duration + "ms " + self.config.easingFunction
+			"margin-bottom " + duration + "ms " + self.config.easingFunction,
+			"margin-right " + duration + "ms " + self.config.easingFunction
 		];
 		if(self.config.enableBlur) {
 			transitions.push("filter " + duration + "ms " + self.config.easingFunction);
@@ -344,7 +363,8 @@ PopStoryView.prototype.remove = function(widget) {
 			{transform: transformEnd},
 			{filter: filterEnd},
 			{opacity: String(self.config.removeOpacity)},
-			{marginBottom: (-currHeight) + "px"}
+			{marginBottom: (-currHeight) + "px"},
+			{marginRight: (-currWidth) + "px"}
 		]);
 	}, 10);
 };
