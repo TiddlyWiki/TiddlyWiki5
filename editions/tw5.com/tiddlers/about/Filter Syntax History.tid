@@ -1,0 +1,28 @@
+title: Filter Syntax History
+tags: [[History of TiddlyWiki]]
+modifier: Jeremy Ruston
+
+In response to [[a discussion|https://talk.tiddlywiki.org/t/filter-syntax-history/13058]] about the filter syntax in TiddlyWiki5 I posted this brief personal history.
+
+For context, before TiddlyWikIi, I only had practical experience of a very small number of languages: machine code, assembly language, BASIC, FORTH, C, C++ and of course JavaScript. I had a smattering of Java, Pascal and one or two other ancient languages but no experience of actor based languages like Erlang, or modern functional languages.
+
+The story starts with the double square bracket syntax used in wikitext for links. In 2004 this was already an established usage in wikis. However, I switched the ordering of pretty links because I thought Wikipedia's `[[link address|link text]]` was the wrong way around. It broke up sentences: `The file is [[https://site.com/thing|here]]` seems less readable than `The file is [[here|https://site.com/thing]]`. For a long time I regretted this decision, and wished that I had just gone with Wikipedia's established usage. Others have since pointed out that TiddlyWiki's ordering is consistent with [[Markdown]].
+
+One way to look at the double square bracket link syntax is that it establishes a way to quote page/tiddler titles so that they may contain spaces, and don't have to use CamelCase. Thus, in TiddlyWiki Classic, when I was implementing the DefaultTiddlers feature it was natural to use double square brackets to quote titles containing spaces. 
+
+Then, when I was starting to think about TiddlyWiki 5 I wanted to extend the implementation of DefaultTiddlers so that more complex logic could be expressed while retaining backwards compatibility. A trick that I am apt to use in such situations is to try to engineer things so that the current behaviour is re-interpreted as a shortcut syntax for a new, richer syntax that provides more flexibility. In this case, the idea was that in filters we would  interpret `[[mytiddler]]` as a shortcut for `[title[mytiddler]]`. Then we could put any keywords we like in place of "title", giving us an infinitely extensible syntax. A similar example is the way that we implemented filter run prefixes by retrospectively defining the absence of a prefix as implying a default prefix.
+
+We implemented a very, very simple first version of the filter syntax in TiddlyWiki Classic that supported things like `[tag[mytag]]`, but it wasn't until TiddlyWiki 5 that it evolved into something approaching a programming language. As others have probably expressed much more eloquently, a characteristic of the programming languages that I love is that they start with a small number of principles that are consistently applied and combined. In the case of TiddlyWiki, the list would be very roughly:
+
+* Double square brackets for linking and quoting
+* Curly braces for transclusion
+* Angle brackets for macros (which evolved into variables)
+* Double exclamation marks to indicate fields `{{!!myfield}}`
+* Double hashes to indicate indexes `{{##myindex}}`
+* Smashing together adjacent filter operations by removing the combining `][`
+* The dollar sign as a rough signifier of data owned by the system rather than the user
+
+As I have written about elsewhere I was privileged to know Joe Armstrong, the co-inventor of Erlang, in the last few years of his life – we were working together on a book about TiddlyWiki when he passed away in 2019. Joe had contacted me out of the blue ten years before to express his admiration for TiddlyWiki, and we had developed a friendship. He was actually a big fan of TW5's filter syntax, and used to make me feel better about it by joking that I had (re-)invented the monad, which sounded impressive to me. That doesn't make the filter language any easier to learn, but it does mean that it is *worth* learning: it's a real language, based on the same principles as other languages.
+
+I find it pleasing that the TW5 filter language has its roots in decisions that were taken in the TWC days. It's still hard to learn, but that's an ongoing paradox of programming: people want to do complicated things, and complicated things are complicated. It's hard to see how we could have made filters any simpler without depriving users of the possibility of doing complicated things.
+

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)http://interview.tiddlyspace.com/bags/common/tiddlers/backstage#userpass-login -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="./normalize.css">
+<link rel="stylesheet" href="./app.css">
+</head>
+<body class="tsbackstage ts-loggedin ts-member">
+<div class="logindetails">
+	<form class="ts-login login login-method" action="http://interview.tiddlyspace.com/bags/common/tiddlers/backstage" autocomplete="off" id="userpass-login">
+	<p>login via <a class="toggle-form" href="http://interview.tiddlyspace.com/bags/common/tiddlers/backstage#openid-login">openid</a></p>
+	<input autocapitalize="off" autocorrect="off" type="text" name="username" placeholder="username">
+	<input autocapitalize="off" autocorrect="off" type="password" name="password" placeholder="password"> 
+	<input type="hidden" name="redirect" value="/bags/common/tiddlers/backstage?action=login#refreshParent">
+	<input type="submit" class="btn btn-action" value="Log In">
+</form>
+<form class="ts-openidlogin login-method login-method-hide" id="openid-login" method="post" action="http://interview.tiddlyspace.com/challenge/tiddlywebplugins.tiddlyspace.openid">
+	<p>login with <a class="toggle-form" href="http://interview.tiddlyspace.com/bags/common/tiddlers/backstage#userpass-login">username and password</a></p>
+	<input name="tiddlyweb_redirect" type="hidden" value="/bags/common/tiddlers/backstage">
+	<input class="openid" autocapitalize="off" autocorrect="off" type="text" name="openid" placeholder="your openid">
+	<input class="button btn btn-action" type="submit" value="Sign In">
+	<a class="openid-help" href="http://openid.net/get-an-openid/">What is an open id?</a>
+</form>
+<div class="ts-logout logout"><span class="message">Welcome back <a href="http://jermolene.tiddlyspace.com/" target="_parent">jermolene</a><span>!</span></span>
+	<form method="post" action="http://interview.tiddlyspace.com/logout">
+		<input type="hidden" name="tiddlyweb_redirect" value="/bags/common/tiddlers/backstage?action=login#refreshParent">
+		<input type="submit" class="btn btn-system" value="Log out">
+	<input type="hidden" name="csrf_token" value="2016120917:jermolene:8cef480d1bd2bf774327ae085b2efa8bb7937fd1"></form>
+</div>
+</div>
+<div><ul id="app-list">
+        <li class="search">
+                <form method="GET" target="_blank" action="http://interview.tiddlyspace.com/hsearch">
+                <img src="./search.png" alt="Search Icon" class="app-img">
+                <input type="text" name="q" placeholder="Search">
+                
+        </form></li>
+	<li class="help">
+		<a href="http://help.tiddlyspace.com/" target="_blank">
+			<img src="./help.png" alt="Help SiteIcon" class="app-img">Help
+		</a>
+	</li>
+	<li class="space">
+		<a href="http://interview.tiddlyspace.com/_space" target="_blank">
+			<img src="./SiteIcon(24)" alt="Space SiteIcon" class="app-img">This space
+		</a>
+	</li>
+<li class="account"><a target="_blank" href="http://jermolene.tiddlyspace.com/_account"><img class="app-img" alt="SiteIcon for jermolene" src="./SiteIcon">Your account</a></li></ul></div>
+<script type="text/javascript" src="./jquery.js"></script>
+<script type="text/javascript" src="./chrjs"></script>
+<script type="text/javascript" src="./chrjs.users"></script>
+<script type="text/javascript" src="./chrjs.space"></script>
+<script type="text/javascript" src="./chrjs.identities"></script>
+<script type="text/javascript" src="./ts.js"></script>
+<script src="./status.js"></script>
+<script type="text/javascript">
+	if(window.location.hash === "#refreshParent") {
+		window.location.hash = "";
+		window.parent.location.reload();
+	}
+	var li, siteiconurl, link, host;
+	ts.init(function(ts) {
+		host = ts.getHost(ts.user.name);
+		$(document.body).show();
+		window.location.hash = "#userpass-login";
+		if (ts.user.anon) {
+			$('.toggle-form').click(function(ev) {
+				$(this).closest('form').addClass('login-method-hide')
+					.siblings('form').removeClass('login-method-hide');
+				ev.preventDefault();
+			});
+		}
+		if ($(document.body).hasClass('ts-nonmember')) {
+			$('.write').remove();
+		}
+		if(!ts.user.anon) {
+			li = $('<li class="account" />').appendTo("#app-list")[0];
+			siteiconurl = host + '/bags/' + ts.user.name + '_public/tiddlers/SiteIcon';
+			link = $('<a target="_blank" />').attr("href", host + "/_account").
+				text("Your account").appendTo(li);
+			$('<img class="app-img">').attr("alt",  'SiteIcon for ' + ts.user.name).
+				attr("src", siteiconurl).prependTo(link);
+		}
+	}, {});
+	(function($) {
+		$(function() {
+			// send doc height to parent window
+			var totalHeight = $("html").height();
+			if(self !== top && !!window.postMessage) {
+				parent.postMessage(totalHeight, "*");
+			}
+		});
+	}(jQuery));
+</script>
+
+</body></html>
