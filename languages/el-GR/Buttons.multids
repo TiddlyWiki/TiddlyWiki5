@@ -1,13 +1,22 @@
 title: $:/language/Buttons/
 
+AdvancedSearch/Caption: προηγμένη αναζήτηση
+AdvancedSearch/Hint: Προηγμένη αναζήτηση
+Bold/Caption: έντονα
 Bold/Hint: Εφάρμοσε μορφοποίηση έντονης γραφής στην επιλογή
+Cancel/Caption: άκυρο
 Cancel/Hint: Ακύρωσε την τροποποίηση αυτού του tiddler
 Clear/Caption: εκκαθάρισε
 Clear/Hint: Καθάρισε την εικόνα και αντικαθιστά με συμπαγή χρωματισμό
+Clone/Caption: κλωνοποίησε
 Clone/Hint: Κλωνοποίησε αυτό το tiddler
+Close/Caption: κλείσε
 Close/Hint: Κλείσε αυτό το tiddler
+CloseAll/Caption: κλείσε τα όλα
 CloseAll/Hint: Κλείσε όλα τα tiddlers
+CloseOthers/Caption: κλείσε τα υπόλοιπα
 CloseOthers/Hint: Κλείσε όλα τα άλλα tiddlers
+ControlPanel/Caption: πίνακας ελέγχου
 ControlPanel/Hint: Άνοιξε τον πίνακα ελέγχου
 CopyToClipboard/Caption: αντίγραψε στο πρόχειρο
 CopyToClipboard/Hint: Αντίγραψε αυτό το κείμενο στο πρόχειρο
@@ -15,10 +24,14 @@ Delete/Caption: διάγραψε
 Delete/Hint: Διάγραψε αυτό το tiddler
 DeleteTiddlers/Caption: διάγραψε τα tiddlers
 DeleteTiddlers/Hint: Διάγραψε τα tiddlers
+Edit/Caption: τροποποίησε
 Edit/Hint: Τροποποίησε αυτό το tiddler
+EditorHeight/Caption: ύψος επεξεργαστή
 EditorHeight/Caption/Auto: Να ρυθμίζεται το ύψος αυτόματα ώστε να χωράει το περιεχόμενο
+EditorHeight/Caption/Fixed: Προκαθορισμένο ύψος:
 EditorHeight/Hint: Θέσε το ύψος του επεξεργαστή κειμένου
 EmergencyDownload/Caption: λήψη tiddlers σε μορφή json
+Encryption/Caption: κρυπτογράφηση
 Encryption/ClearPassword/Caption: εκκαθάρισε τον κωδικό
 Encryption/ClearPassword/Hint: Απάλειψε τον κωδικό και αποθήκευσε αυτό το wiki χωρίς κρυπτογράφηση
 Encryption/Hint: Όρισε ή απάλειψε το συνθηματικό για την αποθήκευση αυτού του wiki
@@ -26,90 +39,145 @@ Encryption/SetPassword/Caption: όρισε κωδικό
 Encryption/SetPassword/Hint: Ορίζει έναν κωδικό για να να αποθηκεύσεις αυτό το wiki κρυπτογραφημένο
 Excise/Caption: μετακίνησε
 Excise/Caption/Excise: Μετακίνησε το κείμενο
+Excise/Caption/MacroName: Όνομα μακροεντολής:
+Excise/Caption/NewTitle: Τίτλος νέου tiddler:
 Excise/Caption/Replace: Αντικατέστησε το κείμενο που μετακινήθηκε με:
 Excise/Caption/Replace/Link: δεσμό
+Excise/Caption/Replace/Macro: μακροεντολή
 Excise/Caption/Replace/Transclusion: διασυμπερίληψη
 Excise/Caption/Tag: Πρόσθεσε τον τίτλο αυτού του tiddler ως ετικέτα στο νέο tiddler
+Excise/Caption/TiddlerExists: Προειδοποίηση: Το tiddler υπάρχει ήδη
 Excise/DefaultTitle: Νέα αφαίρεση
 Excise/Hint: Μετακίνησε το επιλεγμένο κείμενο σε νέο tiddler
+ExportPage/Caption: εξαγωγή όλων
 ExportPage/Hint: Κάνε εξαγωγή όλα τα tiddlers
+ExportTiddler/Caption: εξαγωγή του tiddler
 ExportTiddler/Hint: Κάνε εξαγωγή το tiddler
+ExportTiddlers/Caption: εξαγωγή των tiddlers
 ExportTiddlers/Hint: Κάνε εξαγωγή τα tiddlers
+Fold/Caption: δίπλωσε το tiddler
+Fold/FoldBar/Caption: ράβδος διπλώματος
 Fold/FoldBar/Hint: Προαιρετικές ράβδοι για να δίπλωνες και να ξεδιπλώνεις τα tiddler
 Fold/Hint: Δίπλωσε το κυρίως κείμενο αυτού του tiddler
+FoldAll/Caption: δίπλωσε όλα τα tiddlers
 FoldAll/Hint: Δίπλωσε τα κυρίως κείμενα όλων των ανοιχτών tiddler
+FoldOthers/Caption: δίπλωσε τα υπόλοιπα tiddlers
 FoldOthers/Hint: Δίπλωσε τα κείμενα όλων τον άλλων ανοιχτών tiddlers
 FullScreen/Caption: πλήρης οθόνη
 FullScreen/Hint: Ενάλλαξε λειτουργίας πλήρους οθόνης
+Heading1/Caption: επικεφαλίδα 1
 Heading1/Hint: Εφάρμοσε μορφοποίηση επικεφαλίδας 1 στις επιλεγμένες γραμμές
+Heading2/Caption: επικεφαλίδα 2
 Heading2/Hint: Εφάρμοσε μορφοποίηση επικεφαλίδας 2 στις επιλεγμένες γραμμές
+Heading3/Caption: επικεφαλίδα 3
 Heading3/Hint: Εφάρμοσε μορφοποίηση επικεφαλίδας 3 στις επιλεγμένες γραμμές
+Heading4/Caption: επικεφαλίδα 4
 Heading4/Hint: Εφάρμοσε μορφοποίηση επικεφαλίδας 4 στις επιλεγμένες γραμμές
+Heading5/Caption: επικεφαλίδα 5
 Heading5/Hint: Εφάρμοσε μορφοποίηση επικεφαλίδας 5 στις επιλεγμένες γραμμές
+Heading6/Caption: επικεφαλίδα 6
 Heading6/Hint: Εφάρμοσε μορφοποίηση επικεφαλίδας 6 στις επιλεγμένες γραμμές
+Help/Caption: βοήθεια
 Help/Hint: Εμφάνισε το παράθυρο βοήθειας
+HideSideBar/Caption: κρύψε την πλευρική εργαλειοθήκη
 HideSideBar/Hint: Απόκρυψε την πλευρική εργαλειοθήκη
+Home/Caption: αρχική
 Home/Hint: Άνοιξε τα προκαθορισμένα tiddlers
+Import/Caption: εισαγωγή
+Import/Hint: Εισαγωγή διαφόρων τύπων αρχείων όπως αρχεία κειμένου, εικόνας, TiddlyWiki, ή JSON
+Info/Caption: πληροφορίες
 Info/Hint: Δείξε πληροφορίες για αυτό το tiddler
+Italic/Caption: πλάγια
 Italic/Hint: Εφάρμοσε πλάγια μορφοποίηση στην επιλογή
+Language/Caption: γλώσσα
 Language/Hint: Επέλεξε την γλώσσα για το περιβάλλον εργασίας
 LayoutSwitcher/Caption: διάταξη
 LayoutSwitcher/Hint: Άνοιξε τον εναλλακτή διατάξεων
+LineWidth/Caption: πλάτος γραμμής
 LineWidth/Hint: Καθόρισε το πλάτος της γραμμής για βάψιμο
 Link/Caption: δέσμευσε
 Link/Hint: Δημιούργησε δεσμό με wiki-γραφή
 Linkify/Caption: σύνδεσμος wiki
 Linkify/Hint: Περιλάμβανε το επιλεγμένο κείμενο σε αγκύλες
+ListBullet/Caption: λίστα με κουκίδες
 ListBullet/Hint: Εφάρμοσε μορφοποίηση λίστας με κουκίδες στις επιλεγμένες γραμμές
+ListNumber/Caption: αριθμημένη λίστα
 ListNumber/Hint: Εφάρμοσε μορφοποίηση αριθμημένης λίστας στις επιλεγμένες γραμμές
+Manager/Caption: διαχειριστής tiddler
 Manager/Hint: Άνοιξε το εργαλείο διαχείρισης των tiddler
 MonoBlock/Caption: μονοδιαστήματη ενότητα
 MonoBlock/Hint: Εφάρμοσε μορφοποίηση ενομένου μονοδιαστήματου κειμένου στις επιλεγμένες γραμμές
 MonoLine/Caption: μονοδιαστήματα
 MonoLine/Hint: Εφάρμοσε μορφοποίηση μονοδιαστήματων χαρακτήρων στο επιλεγμένο κείμενο
+More/Caption: περισσότερα
+More/Hint: Περισσότερες ενέργειες
 NetworkActivity/Caption: δραστηριότητα δικτύου
 NetworkActivity/Hint: Ακύρωσε όλη τη δραστηριότητα δικτύου
+NewHere/Caption: νέο εδώ
 NewHere/Hint: Δημιούργησε ένα νέο tiddler που έχει το τλε tiddler ως ετικέτα του
+NewImage/Caption: νέα εικόνα
 NewImage/Hint: Δημιούργησε ένα νέο tiddler εικόνας
+NewJournal/Caption: νέο ημερολόγιο
 NewJournal/Hint: Δημιούργησε ένα νέο ημερολογιακό tiddler
+NewJournalHere/Caption: νέο ημερολόγιο εδώ
 NewJournalHere/Hint: Δημιούργησε ένα νέο ημερολογιακό tiddler που έχει το τρέχον tiddler ως ετικέτα του
 NewMarkdown/Caption: νέο Markdown tiddler
 NewMarkdown/Hint: Δημιούργησε ένα νέο Markdown tiddler
+NewTiddler/Caption: νέο tiddler
 NewTiddler/Hint: Δημιούργησε ένα νέο tiddler
+Opacity/Caption: αδιαφάνεια
 Opacity/Hint: Καθόρισε τόν βαθμό αδιαφάνειας κατά το βάψιμο
 OpenControlPanel/Hint: Άνοιξε τον πίνακα ελέγχου
+OpenWindow/Caption: άνοιξε σε νέο παράθυρο
 OpenWindow/Hint: Άνοιξε το tiddler σε νέο παράθυρο
+Paint/Caption: χρώμα βαφής
 Paint/Hint: Καθόρισε το χρώμα βαφής
+Palette/Caption: παλέτα
 Palette/Hint: Επέλεξε την παλέτα των χρωμάτων
+Permalink/Caption: μόνιμος σύνδεσμος
 Permalink/Hint: Θέσε άμεσο σύνδεσμο προς αυτό το tiddler στη γραμμή διεύθυνσης του προγράμματος περιήγησης
+Permaview/Caption: μόνιμη όψη
 Permaview/Hint: Θέσε άμεσο σύνδεσμο για όλα τα tiddlers σε αυτήν την ιστορία στην γραμμή διεύθυνσης του προγράμματος περιήγησης
+Picture/Caption: εικόνα
 Picture/Hint: Κάνε εισαγωγή μια εικόνα
 Preview/Caption: προεπισκόπηση
 Preview/Hint: Πρόβαλλε το παράθυρο προεπισκόπησης
 PreviewType/Caption: τύπος προεπισκόπησης
 PreviewType/Hint: Επέλεξε τύπου προεπισκόπησης
+Print/Caption: τύπωσε σελίδα
 Print/Hint: Εκτύπωσε την παρόν σελίδα
+Quote/Caption: εισαγωγικά αναφοράς
 Quote/Hint: Εφάρμοσε μορφοποίηση εισαγωγικών αναφοράς κειμένου στις επιλεγμένες γραμμές
+Refresh/Caption: ανανέωση
 Refresh/Hint: Να εκτελέσεις μια πλήρη ανανέωση (επαναφόρτωση) του wiki
 RotateLeft/Caption: περίστρεψε αριστερά
 RotateLeft/Hint: Περίστρεψε την εικόνα αριστεράαπό 90 μοίρες
 Save/Caption: αποθήκευση
+Save/Hint: Αποθήκευσε αυτό το tiddler
 SaveWiki/Caption: αποθήκευσε τις αλλαγές
 SaveWiki/Hint: Κάνε αποθήκευση τις αλλαγές
 ShowSideBar/Caption: εμφάνιση εργαλειοθήκης
 ShowSideBar/Hint: Εμφάνισε τη πλευρική εργαλειοθήκη
 SidebarSearch/Hint: Επέλεξε την αναζήτηση στη πλευρική εργαλειοθήκη
+Size/Caption: μέγεθος εικόνας
+Size/Caption/Height: Ύψος:
 Size/Caption/Resize: Άλλαξε το μέγεθος της εικόνας
+Size/Caption/Width: Πλάτος:
 Size/Hint: Καθόρισε του μεγέθος της εικόνας
+Stamp/Caption: σφραγγίδα
 Stamp/Caption/New: Πρόσθεσε τη δική σου
 Stamp/Hint: Κάνε εισαγωγή ενός προκαθορισμένου αποσπάσματος κειμένου
 Stamp/New/Text: Κείμενο αποσπάσματος. (Να θυμηθείς να προσθέσεις έναν περιγραφικό τίτλο στο πεδίο caption).
 Stamp/New/Title: Όνομα που θα εμφανίζεται στον κατάλογο
+StoryView/Caption: ιστορική όψη
 StoryView/Hint: Επέλεξε οπτικοποίηση για την προβολή της ιστορικής ροής
+Strikethrough/Caption: διαγραμμένο
 Strikethrough/Hint: Εφάρμοσε μορφοποίηση διαγραμμένου κειμένου στην επιλογή
 Subscript/Caption: δείκτης / υπογεγραμμένα
 Subscript/Hint: Εφάρμοσε μορφοποίηση δείκτη / υπογεγραμμένων στην επιλογή
+Superscript/Caption: εκθέτης
 Superscript/Hint: Εφάρμοσε μορφοποίηση εκθέτη στην επιλογή
+TagManager/Caption: διαχειριστής ετικετών
 TagManager/Hint: Άνοιξε τον διαχειριστή ετικετών
 TestCaseImport/Caption: εισαγωγή tiddlers
 TestCaseImport/Hint: Κάνε εισαγωγή tiddlers
@@ -117,11 +185,16 @@ Theme/Caption: θέμα
 Theme/Hint: Διάλεξε οπτικό θέμα
 Timestamp/Caption: χρονικές σημάνσεις
 Timestamp/Hint: Επέλεξε αν οι τροποποιήσεις θα ενημερώνουν τις χρονικές σημάνσεις
+Timestamp/Off/Caption: χρονικές σημάνσεις εκτός λειτουργίας
+Timestamp/Off/Hint: Να μην ενημερώνονται οι χρονικές σημάνσεις όταν τροποποιούνται τα tiddler
+Timestamp/On/Caption: χρονικές σημάνσεις λειτουργούν
+Timestamp/On/Hint: Οι χρονικές σημάνσεις ενημερώνονται όταν τροποποιούνται τα tiddler
 ToggleSidebar/Hint: Ενάλλαξε ορατότητα της πλευρικής εργαλειοθήκης
 Transcludify/Caption: διασυμπερίληψη
 Transcludify/Hint: Περιλάμβανε  το επιλεγμένο κείμενο σε άγκιστρα
 Underline/Caption: υπογράμμισε
 Underline/Hint: Εφάρμοσε μορφοποίηση υπογράμμισης στην επιλογή
+Unfold/Caption: ξεδίπλωσε το tiddler
 Unfold/Hint: Ξεδίπλωσε το κυρίως κείμενο αυτού του tiddler
 UnfoldAll/Caption: ξεδίπλωσε όλα τα tiddler
 UnfoldAll/Hint: Ξεδίπλωσε το κυρίως κείμενο σε όλα τα ανοιχτά tiddler

@@ -1,0 +1,43 @@
+caption: 5.3.8
+created: 20250807084952911
+description: Bugfix release for 5.3.7
+modified: 20250807100514203
+released: 20250807084952911
+tags: ReleaseNotes
+title: Release 5.3.8
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.7...master]]//
+
+<<.banner-credits
+	credit:"""Congratulations to [[Christian Byron|https://talk.tiddlywiki.org/u/Christian_Byron]] for their winning design for the banner for this release (here is the [[discussion|https://talk.tiddlywiki.org/t/planning-a-v5-3-8-bug-fix-release/12963]]).
+"""
+	url:"https://raw.githubusercontent.com/TiddlyWiki/TiddlyWiki5/e8a7bbf14e078d83ab6ba55a80cb8d9ba5290303/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
+This is a bug fix release for TiddlyWiki [[Release 5.3.7]] that fixes problems introduced in that release.
+
+! Translation improvements
+
+* Chinese
+* Polish
+* Greek
+
+! Bug Fixes
+
+* <<.link-badge-reverted "https://github.com/TiddlyWiki/TiddlyWiki5/commit/32caeb69c3e7b75a80a84a1e14363e87175b164e">> the [[change in v5.3.7|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8721]] that broke the [[list-tagged-draggable Macro]]. The change involved updating some core macros to use procedures
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/93d30f374da4a6b2037b335f7f7d4eddce8192db">> display of field names longer than the available width in the info panel
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9185">> [[Highlight Plugin]] theme listing
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9175">> Flexoki palette regressions
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/9166">> name field of fa-IR language plugin
+
+! Acknowledgements
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+<<.contributors """
+CeeBeeTree
+EvidentlyCube
+Leilei332
+pmario
+""">>
