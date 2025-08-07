@@ -1,18 +1,32 @@
 title: Filter Syntax History
 tags: [[History of TiddlyWiki]]
 modifier: Jeremy Ruston
+created: 20250730154331065
+modified: 20250730154331065
 
 In response to [[a discussion|https://talk.tiddlywiki.org/t/filter-syntax-history/13058]] about the filter syntax in TiddlyWiki5 I posted this brief personal history.
 
-For context, before TiddlyWikIi, I only had practical experience of a very small number of languages: machine code, assembly language, BASIC, FORTH, C, C++ and of course JavaScript. I had a smattering of Java, Pascal and one or two other ancient languages but no experience of actor based languages like Erlang, or modern functional languages.
+For context, before TiddlyWiki, I only had practical experience of a very small number of languages: machine code, assembly language, BASIC, FORTH, C, C++ and of course JavaScript. I had a smattering of Java, Pascal and one or two other ancient languages but no experience of actor based languages like Erlang, or modern functional languages.
 
-The story starts with the double square bracket syntax used in wikitext for links. In 2004 this was already an established usage in wikis. However, I switched the ordering of pretty links because I thought Wikipedia's `[[link address|link text]]` was the wrong way around. It broke up sentences: `The file is [[https://site.com/thing|here]]` seems less readable than `The file is [[here|https://site.com/thing]]`. For a long time I regretted this decision, and wished that I had just gone with Wikipedia's established usage. Others have since pointed out that TiddlyWiki's ordering is consistent with [[Markdown]].
+The story starts with the double square bracket syntax used in wikitext for links. In 2004 this was already an established usage in wikis. However, I switched the ordering of pretty links because I thought Wikipedia's `[[link address|link text]]` was the wrong way around. It broke up sentences: `The file is [[https://site.com/thing|here]]` seems less readable than `The file is [[here|https://site.com/thing]]`. For a long time I regretted this decision, and wished that I had just gone with Wikipedia's established usage. Others have since pointed out that TiddlyWiki's ordering is actually consistent with [[Markdown]], which might be regarded as the winner of the markup wars.
 
-One way to look at the double square bracket link syntax is that it establishes a way to quote page/tiddler titles so that they may contain spaces, and don't have to use CamelCase. Thus, in TiddlyWiki Classic, when I was implementing the DefaultTiddlers feature it was natural to use double square brackets to quote titles containing spaces. 
+I looked at the double square bracket link syntax is that it establishes a way to quote page/tiddler titles so that they may contain spaces, and don't have to use CamelCase. Thus, right at the start of TiddlyWiki Classic when I was implementing the first iteration of the DefaultTiddlers feature it was natural to use double square brackets to quote titles containing spaces, making a list of titles to be opened at startup.
 
-Then, when I was starting to think about TiddlyWiki 5 I wanted to extend the implementation of DefaultTiddlers so that more complex logic could be expressed while retaining backwards compatibility. A trick that I am apt to use in such situations is to try to engineer things so that the current behaviour is re-interpreted as a shortcut syntax for a new, richer syntax that provides more flexibility. In this case, the idea was that in filters we would  interpret `[[mytiddler]]` as a shortcut for `[title[mytiddler]]`. Then we could put any keywords we like in place of "title", giving us an infinitely extensible syntax. A similar example is the way that we implemented filter run prefixes by retrospectively defining the absence of a prefix as implying a default prefix.
+Soon, I wanted to extend the implementation of DefaultTiddlers so that it could be used to open all tiddlers with a particular tag while retaining backwards compatibility.
 
-We implemented a very, very simple first version of the filter syntax in TiddlyWiki Classic that supported things like `[tag[mytag]]`, but it wasn't until TiddlyWiki 5 that it evolved into something approaching a programming language. As others have probably expressed much more eloquently, a characteristic of the programming languages that I love is that they start with a small number of principles that are consistently applied and combined. In the case of TiddlyWiki, the list would be very roughly:
+A trick that I am apt to use in such situations is to try to engineer things so that the current behaviour is re-interpreted as a shortcut syntax for a new, richer syntax that provides more flexibility. In this case, the idea was that in filters we would  interpret `[[mytiddler]]` as a shortcut for `[title[mytiddler]]`. Then we could put any keywords we like in place of "title", giving us an infinitely extensible syntax. A similar example is the way that we implemented filter run prefixes by retrospectively defining the absence of a prefix as implying a default prefix.
+
+The new syntax was first [introduced in 2007] (see [this commit](https://github.com/TiddlyWiki/TiddlyWikiClassic/commit/1928962ea6811b1ca67378ed3cd62059a9806ae9)), with a simplified syntax that only supported a single `tag` operator but was just about sufficient for intended purpose. The only documentation was a comment in the source code (complete with a typo):
+
+```
+// Filter a list of tiddlers
+//#   filter - filter expression (eg "tidlertitle [[multi word tiddler title]] [tag[systemConfig]]")
+//# Returns an array of Tiddler() objects that match the filter expression
+```
+
+Provision to combine the filter operators had been on my mind from the beginning. When TiddlyWiki 5 started in 2011 I reused the simple implementation from TiddlyWiki Classic. Smashing operators [was finally implemented in May 2012](https://github.com/TiddlyWiki/TiddlyWiki5/commit/8b0703b694e982b2bc448bdb133742164723dd8a).  By the time of the launch the filter language had grown into pretty much what it is today -- see the [documentation for TiddlyWiki v5.1.0](https://tiddlywiki.com/archive/full/TiddlyWiki-5.1.0#Introduction%20to%20Filters).
+
+The filter syntax had undoubtedly evolved into something approaching a programming language. As others have probably expressed much more eloquently, a characteristic of the programming languages that I love is that they start with a small number of principles that are consistently applied and combined. In the case of TiddlyWiki, the list would be very roughly:
 
 * Double square brackets for linking and quoting
 * Curly braces for transclusion
