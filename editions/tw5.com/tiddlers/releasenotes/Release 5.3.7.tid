@@ -1,19 +1,13 @@
 caption: 5.3.7
 created: 20250707115023707
-modified: 20250707115023707
+description: $:/ControlPanel Wiki Information Tab, Updated [[CodeMirror Plugin]]s to v5.65.19, Support AVIF Images and Bug Fixes
+modified: 20250707165341181
 released: 20250707115023707
 tags: ReleaseNotes
 title: Release 5.3.7
 type: text/vnd.tiddlywiki
-description: Under development
 
-//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.6...v5.3.7]]//
-
-<<.banner-credits
-	credit:"""Congratulations to [[Christian Byron|https://talk.tiddlywiki.org/u/Christian_Byron]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/banner-image-competition-for-v5-3-7]]).
-"""
-	url:"https://raw.githubusercontent.com/TiddlyWiki/TiddlyWiki5/71232fbea2632280029de29147ec9cde4aebaae5/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
->>
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.6...master]]//
 
 This is a minor bug fix release before introducing the major changes planned for v5.4.0. The changes planned for that release do involve some minor breaks in backwards compatibility so this release is intended to be a stable point for users before they upgrade.
 
