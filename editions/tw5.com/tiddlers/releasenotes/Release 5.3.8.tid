@@ -1,6 +1,7 @@
 caption: 5.3.8
-created: 20250717140646135
-modified: 20250717140646135
+created: 20250807084952911
+modified: 20250807084952911
+released: 20250807084952911
 tags: ReleaseNotes
 title: Release 5.3.8
 type: text/vnd.tiddlywiki
@@ -8,7 +9,7 @@ description: Under development
 
 //[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.7...master]]//
 
-This is a bug fix release for TiddlyWiki [[Release 5.3.7]].
+This is a bug fix release for TiddlyWiki [[Release 5.3.7]] that fixes problems introduced in that release.
 
 ! Translation improvements
 
@@ -29,6 +30,7 @@ This is a bug fix release for TiddlyWiki [[Release 5.3.7]].
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+CeeBeeTree
 EvidentlyCube
 Leilei332
 pmario
