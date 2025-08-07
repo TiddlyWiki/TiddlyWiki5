@@ -4,6 +4,7 @@ color: purple
 background-color: #fff
 caption: ~MultiWikiServer
 link: MultiWikiServer
-image: MWS Banner.png
+image: MWS Banner
+type: text/vnd.tiddlywiki
 
 Find out more about the new ~MultiWikiServer plugin that turns ~TiddlyWiki into a full-fledged server system supporting multiple user accounts and tiddler sharing
