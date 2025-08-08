@@ -147,7 +147,7 @@ Settings/AutoSave/Disabled/Description: Nie zapisuj zmian automatycznie
 Settings/AutoSave/Enabled/Description: Zapisuj zmiany automatycznie
 Settings/AutoSave/Hint: Próbuj automatycznie zapisać zmiany podczas edycji, gdy używasz wspierającego to modułu zapisującego
 Settings/CamelCase/Caption: Camel Case WikiLinki
-Settings/CamelCase/Hint: Możesz wyłączyć automatyczne linkowanie fraz w ~CamelCase; wymaga ponownego uruchomienia
+Settings/CamelCase/Hint: Wymaga ponownego uruchomienia
 Settings/CamelCase/Description: Włącz automatyczne linkowanie ~CamelCase
 Settings/Caption: Ustawienia
 Settings/EditorToolbar/Caption: Pasek Narzędzi Edytora
