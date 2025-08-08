@@ -81,8 +81,8 @@ color:$(foregroundColor)$;
 \end
 
 <$let storyTiddler=<<currentTiddler>>>
-	<div class="tc-tiddler-frame tc-tiddler-view-frame tc-tiddler-exists tc-tiddler-shadow " role="article">
-		<div class="tc-tiddler-title">
+	<div class="tc-tiddler-frame tc-tiddler-view-frame tc-tiddler-exists tc-tiddler-shadow tc-clearfix" role="article">
+		<div class="tc-tiddler-title tc-clearfix">
 			<div class="tc-titlebar">
 				<span class="tc-tiddler-controls">
 					<$list filter="[<tour-simplified-tiddler-close-button>match[yes]]" variable="ignore">
@@ -94,12 +94,12 @@ color:$(foregroundColor)$;
 				</span>
 			</div>
 		</div>
-		<div class="tc-tags-wrapper">
+		<div class="tc-tags-wrapper tc-clearfix">
 			<$list filter="[all[current]tags[]sort[title]]" storyview="pop">
 				<<simplified-tag "$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/">>
 			</$list>
 		</div>
-		<div class="tc-tiddler-body">
+		<div class="tc-tiddler-body tc-clearfix">
 			<$transclude field="text" mode="block"/>
 		</div>
 	</div>

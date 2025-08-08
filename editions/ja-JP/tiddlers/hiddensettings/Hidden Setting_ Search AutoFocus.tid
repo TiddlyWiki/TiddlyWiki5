@@ -1,0 +1,11 @@
+created: 20150619162518761
+modified: 20241125105614310
+original-modified: 20150619162605652
+tags: [[Hidden Settings]]
+title: Hidden Setting: Search AutoFocus
+ja-title: 隠し設定: 検索へのオートフォーカス
+type: text/vnd.tiddlywiki
+
+TiddlyWikiがブラウザで開かれると、デフォルトで自動的に検索ボックスにフォーカスされます。これで問題が発生する場合は、次の値を''true''から''false''に変更してデフォルトを変えます: 
+
+$:/config/Search/AutoFocus

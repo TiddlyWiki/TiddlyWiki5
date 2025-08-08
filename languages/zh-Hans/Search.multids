@@ -6,6 +6,8 @@ Filter/Hint: 以[[筛选表达式|https://tiddlywiki.com/static/Filters.html]]�
 Filter/Matches: //<small><<resultCount>> 个条目符合条件</small>//
 Matches: //<small><<resultCount>> 个条目符合条件</small>//
 Matches/All: 所有匹配：
+Matches/NoMatch: //无匹配//
+Matches/NoResult: //找不到//
 Matches/Title: 条目名称匹配：
 Search: 搜索
 Search/TooShort: 搜索文本太短

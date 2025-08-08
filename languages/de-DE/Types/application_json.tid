@@ -2,3 +2,4 @@ title: $:/language/Docs/Types/application/json
 description: JSON - Daten
 name: application/json
 group: Entwickler
+group-sort: 2

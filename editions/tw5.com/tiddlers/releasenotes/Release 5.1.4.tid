@@ -7,30 +7,30 @@ type: text/vnd.tiddlywiki
 released: 20141022155524581
 description: Dragging links into text boxes, coloured errors and warnings under Node.js
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.3...v5.1.4]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.3...v5.1.4]]//
 
 This is a small release with documentation improvements and some important bug fixes from [[Release 5.1.3]].
 
 !! Usability Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6681a8e1f2fd3f39d92a1480b5b573a6c831515d]] a toolbar button for advanced search
-* [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/53d834c86be2f97599a9486c0eae4777c51d9093]] dragging behaviour so that you can drag a tiddler title into an edit box to insert the title, making link creation easier. (This change doesn't affect the behaviour of dragging tiddler links between TiddlyWiki windows)
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/6681a8e1f2fd3f39d92a1480b5b573a6c831515d]] a toolbar button for advanced search
+* [[Changed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/53d834c86be2f97599a9486c0eae4777c51d9093]] dragging behaviour so that you can drag a tiddler title into an edit box to insert the title, making link creation easier. (This change doesn't affect the behaviour of dragging tiddler links between TiddlyWiki windows)
 
 !! Hackability Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/26e50b81e579b7f2d190ca3662cadcf82764c8a7]] additional theme tweaks for the body text size and line height
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/1b620387dda2d16bf387a89071188762455890c4]] the ViewWidget to work with subtiddlers
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/26e50b81e579b7f2d190ca3662cadcf82764c8a7]] additional theme tweaks for the body text size and line height
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1b620387dda2d16bf387a89071188762455890c4]] the ViewWidget to work with subtiddlers
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/ddc74955427f8a7291ee964c42a771a112007789]] problem with search counts
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ddc74955427f8a7291ee964c42a771a112007789]] problem with search counts
 
 !! Node.js Changes
 
 //These changes are only relevant to people using TiddlyWiki under Node.js//
 
-* Fixed problem with missing wiki folder warnings by [[removing|https://github.com/Jermolene/TiddlyWiki5/commit/9fedf3865778fd3aa50c2f049c2b81061c8cd778]] and [[re-implementing|https://github.com/Jermolene/TiddlyWiki5/commit/e62e38d66c6eb447bbd8f16b5beec0fe0276ea0d]] the fix from [[Release 5.1.3]]
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/5d600ce31b1d1162529ae8043bb342e2165c4b13]] coloured warnings and errors under Node.js
+* Fixed problem with missing wiki folder warnings by [[removing|https://github.com/TiddlyWiki/TiddlyWiki5/commit/9fedf3865778fd3aa50c2f049c2b81061c8cd778]] and [[re-implementing|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e62e38d66c6eb447bbd8f16b5beec0fe0276ea0d]] the fix from [[Release 5.1.3]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5d600ce31b1d1162529ae8043bb342e2165c4b13]] coloured warnings and errors under Node.js
 
 !! Contributors
 

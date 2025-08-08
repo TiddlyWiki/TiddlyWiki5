@@ -1,0 +1,12 @@
+created: 20140904101600000
+list: [[Adding a table of contents to the sidebar]] [[Alternative page layouts]] [[Configuring startup tiddlers]] [[Configuring the default TiddlerInfo tab]] [[Creating a custom export format]] [[Creating a splash screen]] [[Creating new toolbar buttons]] [[Customising search results]] [[Customising TiddlyWiki's user interface]] [[Hidden Settings]] [[How to add a new tab to the sidebar]] [[How to apply custom styles]] [[How to create a custom story tiddler template]] [[How to create a custom tiddler icon rule]] [[How to create a custom tiddler colour rule]] [[How to create keyboard shortcuts]] [[How to turn off camel case linking]] [[How to widen tiddlers (aka storyriver)]] [[Making a custom journal button]] [[Preserving open tiddlers at startup]] [[Setting a favicon]] [[Setting a page background image]] [[Using Stylesheets]]
+modified: 20241110115757128
+original-modified: 20211206162235300
+tags: TableOfContents
+title: Customise TiddlyWiki
+ja-title: TiddlyWikiのカスタマイズ
+type: text/vnd.tiddlywiki
+
+TiddlyWikiのカスタマイズに関する情報。採用されているメカニズムの概要については、[[TiddlyWikiのユーザーインターフェイスをカスタマイズする|Customising TiddlyWiki's user interface]]を参照してください。
+
+<<list-links "[tag[Customise TiddlyWiki]]">>

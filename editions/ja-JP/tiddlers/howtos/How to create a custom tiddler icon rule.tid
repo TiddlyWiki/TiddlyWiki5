@@ -1,0 +1,38 @@
+created: 20211204161649863
+modified: 20241020111248598
+original-modified: 20211206165129215
+tags: Learning Cascades [[Tiddler Icon Cascade]] [[Customise TiddlyWiki]]
+title: How to create a custom tiddler icon rule
+ja-title: カスタムのTiddlerアイコンルールを作成する方法
+type: text/vnd.tiddlywiki
+
+ここでは、[[Tiddlerアイコンカスケード|Tiddler Icon Cascade]]に、<<tag "TableOfContents">>タグを持つTiddlerに"地球"アイコン<<.icon $:/core/images/globe>>を、<<tag "Working with TiddlyWiki">>タグを持つTiddlerに"ヘルプ"アイコン<<.icon $:/core/images/help>>を、付与するルールの追加方法を示します。
+
+<<.tip "[[カスタムのTiddlerカラールールを作成する方法|How to create a custom tiddler colour rule]]では、同じTiddlerにカスタムカラーを与える方法について説明します。">>
+
+まず、Tiddlerアイコンカスケードに新しいステップを追加します。新しいフィルターステップは次のとおりです。:
+
+```
+[tag[TableOfContents]then[$:/core/images/globe]]
+[tag[Working with TiddlyWiki]then[$:/core/images/help]] 
+```
+
+これは次のように読み取れます。:
+
+```
+もしTiddlerが"TableOfContents"タグを持つなら、$:/core/images/globeを返します
+もしTiddlerが"Working with TiddlyWiki"タグを持つなら、$:/core/images/helpを返します
+```
+
+Tiddlerアイコンカスケードは<<tag "$:/tags/TiddlerIconFilter">>タグによって定義されます。したがって、そのタグを使用して設定Tiddlerを作成する必要があります。
+
+また、カスケード内の正しい位置に挿入されていることを確認する必要があります。:
+
+* 新しいルールは、明示的な''icon''フィールドを持つTiddlerがそのフィールドの値を確実に尊重するように、"icon-field"ルールの後に置く必要があります。
+* 新しいルールは"default"アイコンの前になければなりません。そうしないと、デフォルトのアイコンが指定されていると、表示されることはありません。
+
+コントロールパネルの"カスケード"タブには、`list-before`フィールドを使用してデフォルトステップの直前に新しいステップを挿入することでこれを実現できることが示されています。
+
+設定Tiddlerの完全なフィールドリストは次のとおりです。:
+
+<<.tiddler-fields "$:/_tw5.com/CustomTiddlerIconCascadeDemo">>

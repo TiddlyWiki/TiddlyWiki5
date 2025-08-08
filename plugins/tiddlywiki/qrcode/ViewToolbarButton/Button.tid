@@ -8,50 +8,28 @@ description: Generate QR code for this tiddler
 \whitespace trim
 <span class="tc-popup-keep">
 <$button popup=<<qualify "$:/state/popup/qrcode">> tooltip={{$:/plugins/tiddlywiki/qrcode/ViewToolbarButton!!description}} aria-label={{$:/plugins/tiddlywiki/qrcode/ViewToolbarButton!!short-caption}} class=<<tv-config-toolbar-class>> class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/plugins/tiddlywiki/qrcode/icon}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/plugins/tiddlywiki/qrcode/ViewToolbarButton!!short-caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>
 </span>
 <$reveal state=<<qualify "$:/state/popup/qrcode">> type="popup" position="below" animate="yes">
+    <div class="tc-drop-down">
 
-<div class="tc-drop-down">
+    {{$:/plugins/tiddlywiki/qrcode/ViewToolbarButton||description}}
 
-{{$:/plugins/tiddlywiki/qrcode/ViewToolbarButton||description}}
-
-<$set name="tv-config-toolbar-icons" value="yes">
-
-<$set name="tv-config-toolbar-text" value="yes">
-
-<$set name="tv-config-toolbar-class" value="tc-btn-invisible">
-
-<$set name="targetTiddler" value=<<currentTiddler>>>
-
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbarButton/QRcode]!has[draft.of]]">
-
-<$button popup=<<qualify "$:/state/popup/qrcode/type">> class="tc-btn-invisible" selectedClass="tc-selected">
-
-<$action-sendmessage $message="tm-modal" $param=<<currentTiddler>> currentTiddler=<<targetTiddler>>/>
-
-<$transclude field="caption" mode="inline"/>
-
-</$button>
-
-</$list>
-
-</$set>
-
-</$set>
-
-</$set>
-
-</$set>
-
-</div>
-
+        <$let tv-config-toolbar-icons="yes" tv-config-toolbar-text="yes" tv-config-toolbar-class="tc-btn-invisible" targetTiddler=<<currentTiddler>>>
+            <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbarButton/QRcode]!has[draft.of]]">
+                <$button popup=<<qualify "$:/state/popup/qrcode/type">> class="tc-btn-invisible" selectedClass="tc-selected">
+                    <$action-sendmessage $message="tm-modal" $param=<<currentTiddler>> currentTiddler=<<targetTiddler>>/>
+                    <$transclude field="caption" mode="inline"/>
+                </$button>
+            </$list>
+        </$let>
+    </div>
 </$reveal>

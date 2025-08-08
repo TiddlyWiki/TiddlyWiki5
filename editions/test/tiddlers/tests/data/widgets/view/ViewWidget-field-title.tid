@@ -1,0 +1,17 @@
+title: Widgets/ViewWidget/Parameter/field-title
+description: Test view-widget parameters tiddler and field=title
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: input
+
+Some text
++
+title: Output
+
+<$view tiddler="input" field="title"/>
+
++
+title: ExpectedResult
+
+input

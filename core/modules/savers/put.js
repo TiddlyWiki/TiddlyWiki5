@@ -9,10 +9,7 @@ Works with any server which accepts a PUT request
 to the current URL, such as a WebDAV server.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -20,7 +17,7 @@ Retrieve ETag if available
 */
 var retrieveETag = function(self) {
 	var headers = {
-		Accept: "*/*;charset=UTF-8"
+		Accept: "*/*"
 	};
 	$tw.utils.httpRequest({
 		url: self.uri(),
@@ -48,14 +45,14 @@ var PutSaver = function(wiki) {
 	var self = this;
 	var uri = this.uri();
 	// Async server probe. Until probe finishes, save will fail fast
-	// See also https://github.com/Jermolene/TiddlyWiki5/issues/2276
+	// See also https://github.com/TiddlyWiki/TiddlyWiki5/issues/2276
 	$tw.utils.httpRequest({
 		url: uri,
 		type: "OPTIONS",
 		callback: function(err,data,xhr) {
 			// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
 			if(!err) {
-				self.serverAcceptsPuts = xhr.status === 200 && !!xhr.getResponseHeader("dav");
+				self.serverAcceptsPuts = xhr.status >= 200 && xhr.status < 300 && !!xhr.getResponseHeader("dav");
 			}
 		}
 	});
@@ -136,5 +133,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new PutSaver(wiki);
 };
-
-})();

@@ -6,10 +6,7 @@ module-type: startup
 Title, stylesheet and page rendering
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -30,7 +27,11 @@ var THROTTLE_REFRESH_TIMEOUT = 400;
 
 exports.startup = function() {
 	// Set up the title
-	$tw.titleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TITLE_TITLE,{document: $tw.fakeDocument, parseAsInline: true});
+	$tw.titleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TITLE_TITLE, {
+		document: $tw.fakeDocument,
+		parseAsInline: true,
+		importPageMacros: true,
+	});
 	$tw.titleContainer = $tw.fakeDocument.createElement("div");
 	$tw.titleWidgetNode.render($tw.titleContainer,null);
 	document.title = $tw.titleContainer.textContent;
@@ -108,5 +109,3 @@ exports.startup = function() {
 	// Run any post-render startup actions
 	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/PostRender");
 };
-
-})();

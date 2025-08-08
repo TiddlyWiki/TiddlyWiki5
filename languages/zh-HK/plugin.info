@@ -2,7 +2,7 @@
 	"title": "$:/languages/zh-HK",
 	"name": "zh-HK",
 	"plugin-type": "language",
-	"description": "Chinese (Hong Kong)",
+	"description": "繁體中文 (香港)",
 	"author": "BramChen",
 	"core-version": ">=5.0.8",
 	"dependents": ["$:/languages/zh-Hant"],

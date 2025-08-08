@@ -1,0 +1,22 @@
+title: How to add a banner for GitHub contributions
+ja-title: GitHub投稿のバナーを追加する方法
+modified: 20241023113051454 
+original-modified: 20141123094403948
+created: 20141123094403948
+tags: Learning
+
+https://tiddlywiki.com でTiddlerを編集すると、GitHubでTiddlerのソースを編集するように促す小さなリボンが表示されます。
+
+Node.jsを使用している場合は、次のようにして、この機能を独自のTiddlyWikiベースのサイトに複製できます:
+
+# [[Wikiフォルダー|TiddlyWikiFolders]]の<$link to="tiddlywiki.info Files">`tiddlywiki.info`</$link>ファイルに次の設定が含まれていることを確認してください: 
+#> <pre><code>	"config": {
+		"retain-original-tiddler-path": true
+	}</code></pre>
+# Wikiに[[$:/ContributionBanner]]Tiddlerをコピーします
+# 次のように編集します:
+## https://github.com/TiddlyWiki/TiddlyWiki5/edit/master/editions/tw5.com/tiddlers/ から、自分のGitHubリポジトリを指すように、GitHubリンクURLを修正します
+## "Can you help us improve this documentation?"で始まるテキストの文言が訪問者にとって適切であることを確認してください
+## [[Improving TiddlyWiki Documentation]]へのリンクを調整して、投稿の手順の説明が記載された独自のTiddlerを指すようにします。
+
+

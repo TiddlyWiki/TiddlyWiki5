@@ -6,7 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the JSON filters and the format:json operator
 
 \*/
-(function(){
+
 
 /* jslint node: true, browser: true */
 /* eslint-env node, browser, jasmine */
@@ -151,4 +151,3 @@ describe("json filter tests", function() {
 
 });
 
-})();
