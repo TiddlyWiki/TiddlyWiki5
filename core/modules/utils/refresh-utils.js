@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/utils/refresh-utilities.js
+title: $:/core/modules/utils/refresh-utils.js
 type: application/javascript
 module-type: utils
 
