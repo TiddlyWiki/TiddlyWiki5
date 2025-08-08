@@ -172,16 +172,16 @@ function slideOpen(domNode,options) {
 	if(isHorizontal) {
 		// For horizontal slides, the approach depends on origin
 		if(origin === "right") {
-			// For right origin, we use negative margin-left to hide the element
+			// For right origin, element slides in from the right
 			$tw.utils.setStyle(domNode,[
-				{marginLeft: (-targets.width - targets.marginLeft - targets.marginRight - targets.paddingLeft - targets.paddingRight) + "px"},
-				{marginRight: targets.marginRight + "px"},
+				{marginLeft: targets.marginLeft + "px"},
+				{marginRight: (-targets.width - targets.marginLeft - targets.marginRight - targets.paddingLeft - targets.paddingRight) + "px"},
 				{paddingLeft: targets.paddingLeft + "px"},
 				{paddingRight: targets.paddingRight + "px"},
 				{width: targets.width + "px"},
 				{opacity: startState.opacity},
 				{overflow: "hidden"},
-				{willChange: "margin-left, opacity"}
+				{willChange: "margin-right, opacity"}
 			]);
 		} else if(origin === "center") {
 			// For center origin, start with zero width and center margins
@@ -262,11 +262,11 @@ function slideOpen(domNode,options) {
 	if(isHorizontal) {
 		// Different transitions based on origin
 		if(origin === "right") {
-			// For right origin, we only animate margin-left
+			// For right origin, we only animate margin-right
 			$tw.utils.setStyle(domNode,[
-				{transition: "margin-left " + duration + "ms " + easing + ", " +
+				{transition: "margin-right " + duration + "ms " + easing + ", " +
 							"opacity " + duration + "ms " + easing},
-				{marginLeft: targets.marginLeft + "px"},
+				{marginRight: targets.marginRight + "px"},
 				{opacity: "1"}
 			]);
 		} else if(origin === "center") {
@@ -463,12 +463,12 @@ function slideClosed(domNode,options) {
 	if(isHorizontal) {
 		// Different transitions based on origin
 		if(origin === "right") {
-			// For right origin, slide out to the right using negative margin-left
+			// For right origin, slide out to the right using negative margin-right
 			var totalWidth = currentWidth + marginLeft + marginRight + paddingLeft + paddingRight;
 			$tw.utils.setStyle(domNode,[
-				{transition: "margin-left " + duration + "ms " + easing + ", " +
+				{transition: "margin-right " + duration + "ms " + easing + ", " +
 							"opacity " + duration + "ms " + easing},
-				{marginLeft: (-totalWidth) + "px"},
+				{marginRight: (-totalWidth) + "px"},
 				{opacity: "0"}
 			]);
 		} else if(origin === "center") {
@@ -609,7 +609,7 @@ function slideOpenTransform(domNode,options) {
 	}
 	$tw.utils.setStyle(domNode,[
 		{transition: "none"},
-		{transform: isHorizontal ? "scaleX(" + startScale + ")" : "scaleY(" + startScale + ")"},
+		{transform: isHorizontal ? "scale3d(" + startScale + ", 1, 1)" : "scale3d(1, " + startScale + ", 1)"},
 		{transformOrigin: transformOrigin},
 		{opacity: startOpacity},
 		{willChange: "transform, opacity"}
@@ -624,7 +624,7 @@ function slideOpenTransform(domNode,options) {
 	var easing = options.easing || "cubic-bezier(0.4, 0.0, 0.2, 1)";
 	$tw.utils.setStyle(domNode,[
 		{transition: "transform " + duration + "ms " + easing + ", opacity " + duration + "ms " + easing},
-		{transform: "scale(1)"},
+		{transform: "scale3d(1, 1, 1)"},
 		{opacity: "1"}
 	]);
 }
@@ -686,7 +686,7 @@ function slideClosedTransform(domNode,options) {
 	}
 	$tw.utils.setStyle(domNode,[
 		{transition: "none"},
-		{transform: isHorizontal ? "scaleX(" + startScale + ")" : "scaleY(" + startScale + ")"},
+		{transform: isHorizontal ? "scale3d(" + startScale + ", 1, 1)" : "scale3d(1, " + startScale + ", 1)"},
 		{transformOrigin: transformOrigin},
 		{opacity: startOpacity},
 		{willChange: "transform, opacity"}
@@ -701,7 +701,182 @@ function slideClosedTransform(domNode,options) {
 	var easing = options.easing || "cubic-bezier(0.4, 0.0, 0.2, 1)";
 	$tw.utils.setStyle(domNode,[
 		{transition: "transform " + duration + "ms " + easing + ", opacity " + duration + "ms " + easing},
-		{transform: isHorizontal ? "scaleX(0)" : "scaleY(0)"},
+		{transform: isHorizontal ? "scale3d(0, 1, 1)" : "scale3d(1, 0, 1)"},
+		{opacity: "0"}
+	]);
+}
+
+// GPU-accelerated versions using clip-path and transforms
+function slideOpenGPU(domNode, options) {
+	options = options || {};
+	var duration = options.duration || $tw.utils.getAnimationDuration();
+	var direction = options.direction || "vertical";
+	var isHorizontal = direction === "horizontal";
+	var origin = options.origin || (isHorizontal ? "left" : "top");
+	
+	// Get dimensions for clip-path
+	var rect = domNode.getBoundingClientRect();
+	var width = rect.width;
+	var height = rect.height;
+	
+	// Check if already animating
+	var startOpacity = 0;
+	if(isAnimating(domNode)) {
+		var computedStyle = window.getComputedStyle(domNode);
+		startOpacity = parseFloat(computedStyle.opacity) || 0;
+		// Remove existing handler
+		var oldHandler = domNode._slideTransitionHandler;
+		if(oldHandler) {
+			domNode.removeEventListener("transitionend", oldHandler);
+		}
+	}
+	
+	// Mark as animating
+	setAnimating(domNode, true);
+	
+	// Reset after animation
+	var transitionEndHandler = function() {
+		domNode.removeEventListener("transitionend", transitionEndHandler);
+		delete domNode._slideTransitionHandler;
+		setAnimating(domNode, false);
+		$tw.utils.setStyle(domNode,[
+			{transition: ""},
+			{clipPath: ""},
+			{transform: ""},
+			{opacity: ""},
+			{willChange: ""}
+		]);
+		if(options.callback) {
+			options.callback();
+		}
+	};
+	
+	domNode._slideTransitionHandler = transitionEndHandler;
+	
+	// Set initial clip-path based on origin
+	var initialClip, finalClip = "inset(0 0 0 0)";
+	if(isHorizontal) {
+		if(origin === "right") {
+			initialClip = "inset(0 0 0 100%)";
+		} else if(origin === "center") {
+			initialClip = "inset(0 50% 0 50%)";
+		} else {
+			initialClip = "inset(0 100% 0 0)";
+		}
+	} else {
+		if(origin === "bottom") {
+			initialClip = "inset(100% 0 0 0)";
+		} else if(origin === "center") {
+			initialClip = "inset(50% 0 50% 0)";
+		} else {
+			initialClip = "inset(0 0 100% 0)";
+		}
+	}
+	
+	// Set initial state
+	$tw.utils.setStyle(domNode,[
+		{transition: "none"},
+		{clipPath: initialClip},
+		{transform: "translate3d(0, 0, 0)"},
+		{opacity: startOpacity},
+		{willChange: "clip-path, opacity"}
+	]);
+	
+	$tw.utils.forceLayout(domNode);
+	
+	// Add transition end listener
+	domNode.addEventListener("transitionend", transitionEndHandler);
+	
+	// Animate to final state
+	var easing = options.easing || "cubic-bezier(0.4, 0.0, 0.2, 1)";
+	$tw.utils.setStyle(domNode,[
+		{transition: "clip-path " + duration + "ms " + easing + ", opacity " + duration + "ms " + easing},
+		{clipPath: finalClip},
+		{opacity: "1"}
+	]);
+}
+
+function slideClosedGPU(domNode, options) {
+	options = options || {};
+	var duration = options.duration || $tw.utils.getAnimationDuration();
+	var direction = options.direction || "vertical";
+	var isHorizontal = direction === "horizontal";
+	var origin = options.origin || (isHorizontal ? "left" : "top");
+	
+	// Check if already animating
+	var startOpacity = 1;
+	if(isAnimating(domNode)) {
+		var computedStyle = window.getComputedStyle(domNode);
+		startOpacity = parseFloat(computedStyle.opacity) || 1;
+		duration = Math.round(duration * startOpacity);
+		// Remove existing handler
+		var oldHandler = domNode._slideTransitionHandler;
+		if(oldHandler) {
+			domNode.removeEventListener("transitionend", oldHandler);
+		}
+	}
+	
+	// Mark as animating
+	setAnimating(domNode, true);
+	
+	// Reset after animation
+	var transitionEndHandler = function() {
+		domNode.removeEventListener("transitionend", transitionEndHandler);
+		delete domNode._slideTransitionHandler;
+		setAnimating(domNode, false);
+		$tw.utils.setStyle(domNode,[
+			{transition: ""},
+			{clipPath: ""},
+			{transform: ""},
+			{opacity: ""},
+			{willChange: ""}
+		]);
+		if(options.callback) {
+			options.callback();
+		}
+	};
+	
+	domNode._slideTransitionHandler = transitionEndHandler;
+	
+	// Set final clip-path based on origin
+	var finalClip;
+	if(isHorizontal) {
+		if(origin === "right") {
+			finalClip = "inset(0 0 0 100%)";
+		} else if(origin === "center") {
+			finalClip = "inset(0 50% 0 50%)";
+		} else {
+			finalClip = "inset(0 100% 0 0)";
+		}
+	} else {
+		if(origin === "bottom") {
+			finalClip = "inset(100% 0 0 0)";
+		} else if(origin === "center") {
+			finalClip = "inset(50% 0 50% 0)";
+		} else {
+			finalClip = "inset(0 0 100% 0)";
+		}
+	}
+	
+	// Set initial state
+	$tw.utils.setStyle(domNode,[
+		{transition: "none"},
+		{clipPath: "inset(0 0 0 0)"},
+		{transform: "translate3d(0, 0, 0)"},
+		{opacity: startOpacity},
+		{willChange: "clip-path, opacity"}
+	]);
+	
+	$tw.utils.forceLayout(domNode);
+	
+	// Add transition end listener
+	domNode.addEventListener("transitionend", transitionEndHandler);
+	
+	// Animate to final state
+	var easing = options.easing || "cubic-bezier(0.4, 0.0, 0.2, 1)";
+	$tw.utils.setStyle(domNode,[
+		{transition: "clip-path " + duration + "ms " + easing + ", opacity " + duration + "ms " + easing},
+		{clipPath: finalClip},
 		{opacity: "0"}
 	]);
 }
@@ -710,5 +885,7 @@ exports.slide = {
 	open: slideOpen,
 	close: slideClosed,
 	openTransform: slideOpenTransform,
-	closeTransform: slideClosedTransform
+	closeTransform: slideClosedTransform,
+	openGPU: slideOpenGPU,
+	closeGPU: slideClosedGPU
 };

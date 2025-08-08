@@ -10,7 +10,7 @@ $:/config/SideBarSegments/Visibility/$(listItem)$
 
 <div class="tc-sidebar-header">
 
-<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes" animate="yes">
+<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes" animate="yes" animationDirection="horizontal" animationType="transform" animationOrigin="right">
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/SideBarSegment]!has[draft.of]]" variable="listItem">
 
