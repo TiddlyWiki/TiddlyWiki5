@@ -1,0 +1,10 @@
+created: 20240216233422203
+modified: 20240216233526220
+tags: 
+title: Widgets/LetWidgetSelfReferences
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$let default={{{ [[default]is[variable]then[aa]else[bb]] }}} >
+<<default>>
+</$let>

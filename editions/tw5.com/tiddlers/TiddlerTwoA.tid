@@ -1,0 +1,9 @@
+created: 20240217003806216
+modified: 20240217004107461
+tags: 
+title: TiddlerTwoA
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\parameters(zero:'Mouse',one:Horse,two:'Owl')
+(<$transclude $tiddler=<<currentTiddler>> zero=<<zero>> one=<<one>> two=<<two>>/>)

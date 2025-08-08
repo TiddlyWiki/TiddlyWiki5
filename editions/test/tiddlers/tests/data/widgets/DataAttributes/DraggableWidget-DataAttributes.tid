@@ -24,4 +24,4 @@ Title1
 +
 title: ExpectedResult
 
-<p><div class="myclass tc-draggable" data-title="mytiddler" draggable="true" style="color:red;">my tiddler</div><div class="myclass tc-draggable" data-title="Title2" draggable="true" style="color:red;">hello</div></p>
+<div class="myclass tc-draggable" data-title="mytiddler" draggable="true" style="color:red;">my tiddler</div><div class="myclass tc-draggable" data-title="Title2" draggable="true" style="color:red;">hello</div>

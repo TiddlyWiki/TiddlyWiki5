@@ -23,4 +23,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>Undefined widget 'non-existent-widget'Undefined widget 'non-existent-widget'</p>
+Undefined widget 'non-existent-widget'Undefined widget 'non-existent-widget'
