@@ -66,15 +66,10 @@ exports.startup = function() {
 			$tw.wiki.removeEventListener("change",mainRefreshHandler);
 		},false);
 		// Set up the styles
-		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
-				document: $tw.fakeDocument,
-				variables: variables,
-				importPageMacros: true}),
-			styleContainer = $tw.fakeDocument.createElement("style");
-		styleWidgetNode.render(styleContainer,null);
-		var styleElement = srcDocument.createElement("style");
-		styleElement.innerHTML = styleContainer.textContent;
-		styleWidgetNode.assignedStyles = styleContainer.textContent;
+		var styleSetup = $tw.utils.setupStyleElements($tw.wiki, srcDocument, "$:/core/ui/PageStylesheet", variables, true);
+		var styleWidgetNode = styleSetup.styleWidgetNode,
+			styleContainer = styleSetup.styleContainer,
+			styleElement = styleSetup.styleElement;
 		srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
@@ -83,58 +78,10 @@ exports.startup = function() {
 		// Prepare refresh mechanism
 		var mainDeferredChanges = Object.create(null),
 			styleDeferredChanges = Object.create(null),
-			mainTimerId,
-			styleTimerId,
-			throttledRefreshFn = function(changes,options) {
-				options = options || {};
-				// Check if only tiddlers that are throttled have changed
-				var onlyThrottledTiddlersHaveChanged = true;
-				var deferredChanges = options.mainCondition ? mainDeferredChanges : styleDeferredChanges;
-				for(var title in changes) {
-					var tiddler = $tw.wiki.getTiddler(title);
-					if(!$tw.wiki.isVolatileTiddler(title) && (!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh") ||
-						(options.mainCondition && tiddler.hasField("throttle.refresh.main")) || (options.styleCondition && tiddler.hasField("throttle.refresh.style"))))) {
-						onlyThrottledTiddlersHaveChanged = false;
-					}
-				}
-				// Defer the change if only drafts have changed
-				if(options.mainCondition) {
-					if(mainTimerId) {
-						clearTimeout(mainTimerId);
-					}
-					mainTimerId = null;
-				} else if(options.styleCondition) {
-					if(styleTimerId) {
-						clearTimeout(styleTimerId);
-					}
-					styleTimerId = null;
-				}
-				if(onlyThrottledTiddlersHaveChanged) {
-					var timeout = parseInt($tw.wiki.getTiddlerText(DRAFT_TIDDLER_TIMEOUT_TITLE,""),10);
-					if(isNaN(timeout)) {
-						timeout = THROTTLE_REFRESH_TIMEOUT;
-					}
-					if(options.mainCondition) {
-						mainTimerId = setTimeout(options.throttledRefresh,timeout);
-					} else if(options.styleCondition) {
-						styleTimerId = setTimeout(options.throttledRefresh,timeout);
-					}
-					$tw.utils.extend(deferredChanges,changes);
-				} else {
-					$tw.utils.extend(deferredChanges,changes);
-					options.callback();
-				}
-			};
-		var styleRefresh = function() {
-			if(styleWidgetNode.refresh(styleDeferredChanges,styleContainer,null)) {
-				var newStyles = styleContainer.textContent;
-				if(newStyles !== styleWidgetNode.assignedStyles) {
-					styleWidgetNode.assignedStyles = newStyles;
-					styleElement.innerHTML = styleWidgetNode.assignedStyles;
-				}
-			}
-			styleDeferredChanges = Object.create(null);
-		};
+			mainTimerId = {id: null},
+			styleTimerId = {id: null},
+			throttledRefreshFn = $tw.utils.createThrottledRefreshManager($tw.wiki);
+		var styleRefresh = $tw.utils.createStyleRefreshHandler(styleWidgetNode, styleContainer, styleElement, styleDeferredChanges);
 		var mainRefresh = function() {
 			widgetNode.refresh(mainDeferredChanges);
 			mainDeferredChanges = Object.create(null);
@@ -146,7 +93,9 @@ exports.startup = function() {
 				throttledRefresh: styleThrottledRefresh,
 				callback: styleRefresh,
 				mainCondition: false,
-				styleCondition: true
+				styleCondition: true,
+				deferredChanges: styleDeferredChanges,
+				timerId: styleTimerId
 			});
 		};
 		mainRefreshHandler = function(changes) {
@@ -154,7 +103,9 @@ exports.startup = function() {
 				throttledRefresh: mainThrottledRefresh,
 				callback: mainRefresh,
 				mainCondition: true,
-				styleCondition: false
+				styleCondition: false,
+				deferredChanges: mainDeferredChanges,
+				timerId: mainTimerId
 			});
 		};
 		$tw.wiki.addEventListener("change",styleRefreshHandler);
