@@ -74,6 +74,13 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	// Create the DOM node and render children
 	var domNode = this.document.createElementNS(this.namespace,this.tag);
 	this.assignAttributes(domNode,{excludeEventAttributes: true});
+	if(this.getVariable("tv-debug") === "yes") {
+		if(domNode) {
+			var test = this.getVariable("transclusion");
+			domNode.setAttribute("data-debug-xxxx", test);
+			domNode.setAttribute("title", test);
+		}
+	}
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
