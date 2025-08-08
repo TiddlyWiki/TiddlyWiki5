@@ -1,8 +1,16 @@
 created: 20240206215732068
-modified: 20240723104117247
+modified: 20250802170222859
 tags: testTOC
 title: test-parent-field-toc
 type: text/vnd.tiddlywiki
+
+''toc''
+
+<<wikitext-example-without-html src:"""<div class="tc-table-of-contents">
+<<toc tag:"root" parentField:"parent" >>
+</div>""">>
+
+---
 
 ''toc-selective expandable''
 
