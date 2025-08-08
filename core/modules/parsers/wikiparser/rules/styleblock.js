@@ -64,5 +64,8 @@ exports.parse = function() {
 			$tw.utils.addAttributeToParseTreeNode(tree[t],"style",styles.join(""));
 		}
 	}
-	return tree;
+	return [{
+		type: "void",
+		children: tree
+	}]
 };
