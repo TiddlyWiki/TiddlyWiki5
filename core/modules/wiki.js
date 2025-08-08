@@ -880,6 +880,7 @@ Get the content of a tiddler as a JavaScript object. How this is done depends on
 
 application/json: the tiddler JSON is parsed into an object
 application/x-tiddler-dictionary: the tiddler is parsed as sequence of name:value pairs
+application/vnd.json.gz: the tiddler is decompressed and then parsed as JSON
 
 Other types currently just return null.
 
@@ -922,6 +923,9 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 				return $tw.utils.parseJSONSafe(tiddler.fields.text,defaultData);
 			case "application/x-tiddler-dictionary":
 				return $tw.utils.parseFields(tiddler.fields.text);
+			case "application/vnd.json.gz":
+				($tw.utils.warn || console.log)(new Error("Parsing a vnd.json.gz.b64 tiddler"));
+				return $tw.utils.parse_json_gzip_base64(tiddler.fields.text);
 		}
 	}
 	return defaultData;
@@ -961,6 +965,9 @@ exports.setTiddlerData = function(title,data,fields,options) {
 		};
 	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
 		newFields.text = $tw.utils.makeTiddlerDictionary(data);
+	} else if (existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
+		console.log(new Error("Setting a gzipped data tiddler"));
+		newFields.text = $tw.utils.stringify_json_gzip_base64(data);
 	} else {
 		newFields.type = "application/json";
 		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
@@ -1740,7 +1747,7 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 // Determine whether a plugin by title is dynamically loadable
 exports.doesPluginRequireReload = function(title) {
 	var tiddler = this.getTiddler(title);
-	if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"]) {
+	if(tiddler && tiddler.isPlugin()) {
 		if(tiddler.fields["plugin-type"] === "import") {
 			// The import plugin never requires reloading
 			return false;
