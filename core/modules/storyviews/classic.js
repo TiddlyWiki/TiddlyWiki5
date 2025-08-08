@@ -26,8 +26,6 @@ ClassicStoryView.prototype.loadConfig = function() {
 		useGPUAcceleration: $tw.wiki.getTiddlerText("$:/config/AnimationGPUAcceleration") !== "no",
 		usePreciseCalculations: $tw.wiki.getTiddlerText("$:/config/AnimationPreciseCalculations") !== "no",
 		easingFunction: $tw.wiki.getTiddlerText("$:/config/AnimationEasing") || easing,
-		insertAnimation: $tw.wiki.getTiddlerText("$:/config/ClassicStoryView/InsertAnimation") || "slide",
-		removeAnimation: $tw.wiki.getTiddlerText("$:/config/ClassicStoryView/RemoveAnimation") || "slide",
 		slideDirection: $tw.wiki.getTiddlerText("$:/config/ClassicStoryView/SlideDirection") || "left",
 		animationScale: parseFloat($tw.wiki.getTiddlerText("$:/config/AnimationScale") || "1.0"),
 		useWillChange: $tw.wiki.getTiddlerText("$:/config/AnimationWillChange") !== "no"
@@ -40,8 +38,6 @@ ClassicStoryView.prototype.refreshStart = function(changedTiddlers) {
 	if(changedTiddlers["$:/config/AnimationGPUAcceleration"] ||
 	   changedTiddlers["$:/config/AnimationPreciseCalculations"] ||
 	   changedTiddlers["$:/config/AnimationEasing"] ||
-	   changedTiddlers["$:/config/ClassicStoryView/InsertAnimation"] ||
-	   changedTiddlers["$:/config/ClassicStoryView/RemoveAnimation"] ||
 	   changedTiddlers["$:/config/ClassicStoryView/SlideDirection"] ||
 	   changedTiddlers["$:/config/AnimationScale"] ||
 	   changedTiddlers["$:/config/AnimationWillChange"]) {
@@ -209,89 +205,40 @@ ClassicStoryView.prototype.insert = function(widget) {
 			currHeight = targetElement.offsetHeight + currMarginTop,
 			currWidth = targetElement.offsetWidth;
 		
-		// Choose animation based on configuration
-		var animationType = this.config.insertAnimation;
-		
 		// Track cleanup timeout
 		var cleanupTimeout;
 		
-		if(animationType === "fade") {
-			// Fade in animation
-			this.applyGPUStyles(targetElement,[
-				{transition: "none"},
-				{opacity: "0.0"}
-			]);
-			$tw.utils.forceLayout(targetElement);
-			this.applyGPUStyles(targetElement,[
-				{transition: "opacity " + duration + "ms " + this.config.easingFunction},
-				{opacity: "1.0"}
-			]);
-			// Clean up after animation
-			cleanupTimeout = setTimeout(function() {
-				delete self.animatingElements[elementId];
-				if(targetElement.parentNode) {
-					targetElement.removeAttribute("data-animation-id");
-				}
-			}, duration);
-		} else if(animationType === "zoom") {
-			// Zoom in animation with GPU acceleration
-			this.applyGPUStyles(targetElement,[
-				{transition: "none"},
-				{transform: "scale3d(0.8, 0.8, 1)"},
-				{opacity: "0.0"}
-			]);
-			$tw.utils.forceLayout(targetElement);
-			this.applyGPUStyles(targetElement,[
-				{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + this.config.easingFunction + ", " +
-							"opacity " + duration + "ms " + this.config.easingFunction},
-				{transform: "scale3d(1, 1, 1)"},
-				{opacity: "1.0"}
-			]);
-			// Clean up after animation
-			cleanupTimeout = setTimeout(function() {
-				delete self.animatingElements[elementId];
-				if(targetElement.parentNode) {
-					$tw.utils.setStyle(targetElement,[
-						{transition: "none"},
-						{transform: ""},
-						{willChange: ""}
-					]);
-					targetElement.removeAttribute("data-animation-id");
-				}
-			}, duration);
-		} else {
-			// Default slide animation with GPU acceleration
-			// Set up the initial position of the element
-			this.applyGPUStyles(targetElement,[
-				{transition: "none"},
-				{marginBottom: (-currHeight) + "px"},
-				{opacity: "0.0"},
-				{transform: "translate3d(0, 0, 0)"} // Force GPU layer
-			]);
-			$tw.utils.forceLayout(targetElement);
-			// Transition to the final position
-			this.applyGPUStyles(targetElement,[
-				{transition: "opacity " + duration + "ms " + this.config.easingFunction + ", " +
-							"margin-bottom " + duration + "ms " + this.config.easingFunction + ", " +
-							$tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + this.config.easingFunction},
-				{marginBottom: currMarginBottom + "px"},
-				{opacity: "1.0"},
-				{transform: "translate3d(0, 0, 0)"}
-			]);
-			// Reset the margin once the transition is over
-			cleanupTimeout = setTimeout(function() {
-				delete self.animatingElements[elementId];
-				if(targetElement.parentNode) {
-					$tw.utils.setStyle(targetElement,[
-						{transition: "none"},
-						{transform: ""},
-						{marginBottom: ""},
-						{willChange: ""}
-					]);
-					targetElement.removeAttribute("data-animation-id");
-				}
-			}, duration);
-		}
+		// Slide animation with GPU acceleration
+		// Set up the initial position of the element
+		this.applyGPUStyles(targetElement,[
+			{transition: "none"},
+			{marginBottom: (-currHeight) + "px"},
+			{opacity: "0.0"},
+			{transform: "translate3d(0, 0, 0)"} // Force GPU layer
+		]);
+		$tw.utils.forceLayout(targetElement);
+		// Transition to the final position
+		this.applyGPUStyles(targetElement,[
+			{transition: "opacity " + duration + "ms " + this.config.easingFunction + ", " +
+						"margin-bottom " + duration + "ms " + this.config.easingFunction + ", " +
+						$tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + this.config.easingFunction},
+			{marginBottom: currMarginBottom + "px"},
+			{opacity: "1.0"},
+			{transform: "translate3d(0, 0, 0)"}
+		]);
+		// Reset the margin once the transition is over
+		cleanupTimeout = setTimeout(function() {
+			delete self.animatingElements[elementId];
+			if(targetElement.parentNode) {
+				$tw.utils.setStyle(targetElement,[
+					{transition: "none"},
+					{transform: ""},
+					{marginBottom: ""},
+					{willChange: ""}
+				]);
+				targetElement.removeAttribute("data-animation-id");
+			}
+		}, duration);
 		
 		// Store the cleanup timeout so we can cancel it if needed
 		this.animatingElements[elementId] = {
@@ -349,71 +296,26 @@ ClassicStoryView.prototype.remove = function(widget) {
 			currMarginTop = parseInt(computedStyle.marginTop,10),
 			currHeight = targetElement.offsetHeight + currMarginTop;
 		
-		// Choose animation based on configuration
-		var animationType = this.config.removeAnimation;
-		
 		// Remove the dom nodes of the widget at the end of the transition
 		setTimeout(removeElement, duration);
 		
-		if(animationType === "fade") {
-			// Fade out animation
-			this.applyGPUStyles(targetElement,[
-				{transition: "none"},
-				{opacity: "1.0"}
-			]);
-			$tw.utils.forceLayout(targetElement);
-			this.applyGPUStyles(targetElement,[
-				{transition: "opacity " + duration + "ms " + this.config.easingFunction},
-				{opacity: "0.0"}
-			]);
-		} else if(animationType === "zoom") {
-			// Zoom out animation with GPU acceleration
-			this.applyGPUStyles(targetElement,[
-				{transition: "none"},
-				{transform: "scale3d(1, 1, 1)"},
-				{opacity: "1.0"}
-			]);
-			$tw.utils.forceLayout(targetElement);
-			this.applyGPUStyles(targetElement,[
-				{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + this.config.easingFunction + ", " +
-							"opacity " + duration + "ms " + this.config.easingFunction},
-				{transform: "scale3d(0.8, 0.8, 1)"},
-				{opacity: "0.0"}
-			]);
-		} else if(animationType === "slideOut") {
-			// Slide out horizontally with GPU acceleration (no collapse)
-			var slideX = this.config.slideDirection === "right" ? currWidth : -currWidth;
-			this.applyGPUStyles(targetElement,[
-				{transition: "none"},
-				{transform: "translate3d(0, 0, 0)"},
-				{opacity: "1.0"}
-			]);
-			$tw.utils.forceLayout(targetElement);
-			this.applyGPUStyles(targetElement,[
-				{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + this.config.easingFunction + ", " +
-							"opacity " + duration + "ms " + this.config.easingFunction},
-				{transform: "translate3d(" + slideX + "px, 0, 0)"},
-				{opacity: "0.0"}
-			]);
-		} else {
-			// Default slide animation with GPU acceleration and collapse
-			var slideX = this.config.slideDirection === "right" ? currWidth : -currWidth;
-			this.applyGPUStyles(targetElement,[
-				{transition: "none"},
-				{transform: "translate3d(0, 0, 0)"},
-				{marginBottom: currMarginBottom + "px"},
-				{opacity: "1.0"}
-			]);
-			$tw.utils.forceLayout(targetElement);
-			this.applyGPUStyles(targetElement,[
-				{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + this.config.easingFunction + ", " +
-							"opacity " + duration + "ms " + this.config.easingFunction + ", " +
-							"margin-bottom " + duration + "ms " + this.config.easingFunction},
-				{transform: "translate3d(" + slideX + "px, 0, 0)"},
-				{marginBottom: (-currHeight) + "px"},
-				{opacity: "0.0"}
-			]);
-		}
+		// Slide animation with GPU acceleration and collapse
+		var slideX = this.config.slideDirection === "right" ? currWidth : -currWidth;
+		this.applyGPUStyles(targetElement,[
+			{transition: "none"},
+			{transform: "translate3d(0, 0, 0)"},
+			{marginBottom: currMarginBottom + "px"},
+			{opacity: "1.0"}
+		]);
+		$tw.utils.forceLayout(targetElement);
+		this.applyGPUStyles(targetElement,[
+			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + this.config.easingFunction + ", " +
+						"opacity " + duration + "ms " + this.config.easingFunction + ", " +
+						"margin-bottom " + duration + "ms " + this.config.easingFunction},
+			{transform: "translate3d(" + slideX + "px, 0, 0)"},
+			{marginBottom: (-currHeight) + "px"},
+			{opacity: "0.0"}
+		]);
 	} else {
 		widget.removeChildDomNodes();
 	}
