@@ -1,4 +1,4 @@
 title: $:/core/ui/ViewTemplate/subtitle/modified
 tags: $:/tags/ViewTemplate/Subtitle
 
-<span class="tc-tiny-gap-right"><$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/></span><%if [all[current]has[modified]] %>(<<relative-date>>)<% endif %>
+<%if [all[current]has[modified]] %><span class="tc-tiny-gap-right"><$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/></span>(<<relative-date>>)<% endif %>
