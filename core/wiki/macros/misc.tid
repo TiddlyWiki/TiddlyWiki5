@@ -3,7 +3,7 @@ tags: $:/tags/Global
 
 \procedure relative-date(date,field:"modified")
 \whitespace trim
-<$let fieldValue={{{ [all[current]get<field>] }}} days={{{ [<date>format:date[TIMESTAMP]subtract<fieldValue>divide[86400000]floor[]] }}}>
+<$let dateValue={{{ [<now [UTC]YYYY0MM0DD0hh0mm0ss0XXX>format:date[TIMESTAMP]] }}} fieldValue={{{ [all[current]get<field>] }}} days={{{ [<dateValue>subtract<fieldValue>divide[86400000]floor[]] }}}>
 	<$list filter="[<days>compare:number:lt[1]]" emptyMessage="""<$text text={{{ [<days>] [<lingo DaysAgo>] +[join[ ]] }}}/>""">
 		<<lingo Today>>
 	</$list>
