@@ -1,6 +1,15 @@
 title: $:/core/macros/misc
 tags: $:/tags/Global
 
+\procedure relative-date(date,field:"modified")
+\whitespace trim
+<$let fieldValue={{{ [all[current]get<field>] }}} days={{{ [<date>format:date[TIMESTAMP]subtract<fieldValue>divide[86400000]floor[]] }}}>
+	<$list filter="[<days>compare:number:lt[1]]" emptyMessage="""<$text text={{{ [<days>] [<lingo DaysAgo>] +[join[ ]] }}}/>""">
+		<<lingo Today>>
+	</$list>
+</$let>
+\end
+
 \procedure toggle-field(tiddler,field,value1:"yes",value2:"no")
 <$action-setfield $tiddler=<<tiddler>> $field=<<field>> $value={{{ [<tiddler>get<field>match<value1>then<value2>else<value1>] }}}/>
 \end
