@@ -1,4 +1,4 @@
-title: $:/core/macros/misc
+title: $:/core/macros/utilities
 tags: $:/tags/Global
 
 \procedure relative-date(date,field:"modified")
