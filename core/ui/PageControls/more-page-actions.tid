@@ -13,8 +13,10 @@ description: {{$:/language/Buttons/More/Hint}}
 	popup=<<qualify "$:/state/popup/more">>
 	selectedClass="tc-selected"
 />
-<$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">
-	<div class="tc-drop-down">
+<$transclude $variable="reveal-animate-dropdown"
+	state=<<qualify "$:/state/popup/more">>
+	position="below"
+	content="""
 		<$let tv-config-toolbar-icons="yes" tv-config-toolbar-text="yes" tv-config-toolbar-class="tc-btn-invisible">
 			<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]] -[[$:/core/ui/Buttons/more-page-actions]]"
 				variable="listItem"
@@ -28,5 +30,5 @@ description: {{$:/language/Buttons/More/Hint}}
 				</$reveal>
 			</$list>
 		</$let>
-	</div>
-</$reveal>
+	"""
+/>

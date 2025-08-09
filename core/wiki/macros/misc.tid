@@ -21,11 +21,8 @@ tags: $:/tags/Global
 <$link><$view field="title"/></$link>
 \end
 
-\procedure conditional-class(base,condition,trueClass,falseClass:"")
-\whitespace trim
-<$let class={{{ [<base>] [<condition>then<trueClass>else<falseClass>] +[join[ ]] }}}>
-	<<class>>
-</$let>
+\function conditional-class(base,condition,trueClass,falseClass:"")
+[<base>] [<condition>then<trueClass>else<falseClass>] +[join[ ]]
 \end
 
 \procedure template-switcher(fallback:"$:/core/ui/ViewTemplate")
@@ -51,18 +48,22 @@ tags: $:/tags/Global
 </$let>
 \end
 
-\procedure toggle-state-button(state,openIcon,closeIcon,openTooltip,closeTooltip,openText,closeText,openValue:"open",closeValue:"close",default:"close",actions:"")
+\procedure toggle-state-button(state,openIcon,closeIcon,openTooltip,closeTooltip,openText:"",closeText:"",openValue:"open",closeValue:"close",default:"close",actions:"",openAriaLabel:"",closeAriaLabel:"")
 \whitespace trim
 <$reveal type="nomatch" stateTitle=<<state>> text=<<openValue>> default=<<default>>>
-	<$button setTitle=<<state>> setTo=<<openValue>> class="tc-btn-invisible" tooltip=<<openTooltip>> actions=<<actions>>>
+	<$button setTitle=<<state>> setTo=<<openValue>> class="tc-btn-invisible" tooltip=<<openTooltip>> actions=<<actions>> aria-label=<<openAriaLabel>>>
 		<$transclude tiddler=<<openIcon>>/>
-		<$text text=<<openText>>/>
+		<%if [<openText>!is[blank]] %>
+			<$text text=<<openText>>/>
+		<% endif %>
 	</$button>
 </$reveal>
 <$reveal type="match" stateTitle=<<state>> text=<<openValue>> default=<<default>>>
-	<$button setTitle=<<state>> setTo=<<closeValue>> class="tc-btn-invisible" tooltip=<<closeTooltip>> actions=<<actions>>>
+	<$button setTitle=<<state>> setTo=<<closeValue>> class="tc-btn-invisible" tooltip=<<closeTooltip>> actions=<<actions>> aria-label=<<closeAriaLabel>>>
 		<$transclude tiddler=<<closeIcon>>/>
-		<$text text=<<closeText>>/>
+		<%if [<closeText>!is[blank]] %>
+			<$text text=<<closeText>>/>
+		<% endif %>
 	</$button>
 </$reveal>
 \end
@@ -153,14 +154,14 @@ tags: $:/tags/Global
 </$checkbox>
 \end
 
-\function tf.cascade-filter(tag)
+\function cascade-filter(tag)
 [<currentTiddler>] :cascade[all[shadows+tiddlers]tag<tag>!is[draft]get[text]]
 \end
 
-\procedure reveal-animate-dropdown(state,content,position:"below",class:"tc-drop-down")
+\procedure reveal-animate-dropdown(state,content,position:"below",class:"tc-drop-down",style:"")
 \whitespace trim
 <$reveal state=<<state>> type="popup" position=<<position>> animate="yes" retain="yes">
-	<div class=<<class>>>
+	<div class=<<class>> style=<<style>>>
 		<<content>>
 	</div>
 </$reveal>

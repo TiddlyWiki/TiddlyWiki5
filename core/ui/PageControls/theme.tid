@@ -13,10 +13,9 @@ description: {{$:/language/Buttons/Theme/Hint}}
 	selectedClass="tc-selected"
 />
 </span>
-<$reveal state=<<qualify "$:/state/popup/theme">> type="popup" position="below" animate="yes">
-<div class="tc-drop-down">
-<$linkcatcher to="$:/theme">
+<$transclude $variable="reveal-animate-dropdown"
+	state=<<qualify "$:/state/popup/theme">>
+	content="""<$linkcatcher to="$:/theme">
 {{$:/snippets/themeswitcher}}
-</$linkcatcher>
-</div>
-</$reveal>
+</$linkcatcher>"""
+/>

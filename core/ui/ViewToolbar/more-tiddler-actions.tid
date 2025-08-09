@@ -12,20 +12,20 @@ description: {{$:/language/Buttons/More/Hint}}
 	popup=<<qualify "$:/state/popup/more">>
 	selectedClass="tc-selected"
 />
-<$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="belowleft" animate="yes">
-	<div class="tc-drop-down">
-		<$let tv-config-toolbar-icons="yes" tv-config-toolbar-text="yes" tv-config-toolbar-class="tc-btn-invisible">
-			<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/Buttons/more-tiddler-actions]]"
-				variable="listItem"
-			>
-				<$reveal type="match" state=`$:/config/ViewToolbarButtons/Visibility/$(listItem)$` text="hide">
-					<$set name="tv-config-toolbar-class"
-						filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]"
-					>
-						<$transclude tiddler=<<listItem>> mode="inline"/>
-					</$set>
-				</$reveal>
-			</$list>
-		</$let>
-	</div>
-</$reveal>
+<$transclude $variable="reveal-animate-dropdown"
+	state=<<qualify "$:/state/popup/more">>
+	position="belowleft"
+	content="""<$let tv-config-toolbar-icons="yes" tv-config-toolbar-text="yes" tv-config-toolbar-class="tc-btn-invisible">
+		<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/Buttons/more-tiddler-actions]]"
+			variable="listItem"
+		>
+			<$reveal type="match" state=`$:/config/ViewToolbarButtons/Visibility/$(listItem)$` text="hide">
+				<$set name="tv-config-toolbar-class"
+					filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]"
+				>
+					<$transclude tiddler=<<listItem>> mode="inline"/>
+				</$set>
+			</$reveal>
+		</$list>
+	</$let>"""
+/>
