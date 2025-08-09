@@ -14,6 +14,8 @@ description: {{$:/language/Buttons/TagManager/Hint}}
 />
 \end
 
-<$list filter="[list[$:/StoryList]] +[field:title[$:/TagManager]]" emptyMessage=<<control-panel-button>>>
-<<control-panel-button "tc-selected">>
-</$list>
+<$transclude $variable="list-with-empty" 
+	filter="[list[$:/StoryList]] +[field:title[$:/TagManager]]" 
+	emptyMessage=<<control-panel-button>>
+	template="""<<control-panel-button "tc-selected">>"""
+/>

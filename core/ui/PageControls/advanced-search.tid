@@ -14,6 +14,8 @@ description: {{$:/language/Buttons/AdvancedSearch/Hint}}
 />
 \end
 
-<$list filter="[list[$:/StoryList]] +[field:title[$:/AdvancedSearch]]" emptyMessage=<<advanced-search-button>>>
-<<advanced-search-button "tc-selected">>
-</$list>
+<$transclude $variable="list-with-empty" 
+	filter="[list[$:/StoryList]] +[field:title[$:/AdvancedSearch]]" 
+	emptyMessage=<<advanced-search-button>>
+	template="""<<advanced-search-button "tc-selected">>"""
+/>

@@ -154,7 +154,7 @@ tags: $:/tags/Global
 </$checkbox>
 \end
 
-\function cascade-filter(tag)
+\function tf.cascade-filter(tag)
 [<currentTiddler>] :cascade[all[shadows+tiddlers]tag<tag>!is[draft]get[text]]
 \end
 
@@ -244,4 +244,60 @@ tags: $:/tags/Global
 <span class={{{ [<currentTiddler>addsuffix<suffix>] :except[<selectionState>get[text]] :and[then[]else[tc-list-item-selected]] }}}>
 	<$transclude tiddler=<<itemTemplate>>/>
 </span>
+\end
+
+\procedure list-with-empty(filter,emptyMessage:"",template:"",variable:"currentTiddler")
+\whitespace trim
+<$list filter=<<filter>> variable=<<variable>> emptyMessage=<<emptyMessage>>>
+	<%if [<template>!is[blank]] %>
+		<$transclude tiddler=<<template>>/>
+	<%else%>
+		<$transclude/>
+	<%endif%>
+</$list>
+\end
+
+\procedure conditional-action(condition,trueActions:"",falseActions:"")
+\whitespace trim
+<%if [subfilter<condition>] %>
+	<<trueActions>>
+<%else%>
+	<<falseActions>>
+<%endif%>
+\end
+
+\procedure draggable-item(tiddler,content,dragFilter:"",tag:"div",class:"",startActions:"",endActions:"")
+\whitespace trim
+<$draggable tiddler=<<tiddler>> filter=<<dragFilter>> tag=<<tag>> class=<<class>> startactions=<<startActions>> endactions=<<endActions>>>
+	<<content>>
+</$draggable>
+\end
+
+\procedure icon-text-button(actions:"",tooltip:"",ariaLabel:"",icon:"",text:"",class:"tc-btn-invisible",popup:"",to:"")
+\whitespace trim
+<$button actions=<<actions>> tooltip=<<tooltip>> aria-label=<<ariaLabel>> class=<<class>> popup=<<popup>> to=<<to>>>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		<%if [<icon>!is[blank]] %>
+			<$transclude tiddler=<<icon>>/>
+		<%endif%>
+	<%endif%>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<%if [<text>!is[blank]] %>
+			<span class="tc-btn-text"><$text text=<<text>>/></span>
+		<%endif%>
+	<%endif%>
+</$button>
+\end
+
+\procedure navigate-or-edit-button(tiddler,navigateText:"Open",editText:"Edit",class:"tc-btn-invisible")
+\whitespace trim
+<%if [<tiddler>is[missing]] %>
+	<$button to=<<tiddler>> class=<<class>>>
+		{{$:/core/images/new-button}} <$text text=<<editText>>/>
+	</$button>
+<%else%>
+	<$button to=<<tiddler>> class=<<class>>>
+		{{$:/core/images/open-window}} <$text text=<<navigateText>>/>
+	</$button>
+<%endif%>
 \end

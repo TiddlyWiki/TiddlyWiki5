@@ -14,6 +14,8 @@ description: {{$:/language/Buttons/Manager/Hint}}
 />
 \end
 
-<$list filter="[list[$:/StoryList]] +[field:title[$:/Manager]]" emptyMessage=<<manager-button>>>
-<<manager-button "tc-selected">>
-</$list>
+<$transclude $variable="list-with-empty" 
+	filter="[list[$:/StoryList]] +[field:title[$:/Manager]]" 
+	emptyMessage=<<manager-button>>
+	template="""<<manager-button "tc-selected">>"""
+/>

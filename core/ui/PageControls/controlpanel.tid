@@ -14,6 +14,8 @@ description: {{$:/language/Buttons/ControlPanel/Hint}}
 />
 \end
 
-<$list filter="[list<tv-story-list>] +[field:title[$:/ControlPanel]]" emptyMessage=<<control-panel-button>>>
-<<control-panel-button "tc-selected">>
-</$list>
+<$transclude $variable="list-with-empty" 
+	filter="[list<tv-story-list>] +[field:title[$:/ControlPanel]]" 
+	emptyMessage=<<control-panel-button>>
+	template="""<<control-panel-button "tc-selected">>"""
+/>
