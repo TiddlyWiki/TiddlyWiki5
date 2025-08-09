@@ -5,15 +5,13 @@ description: {{$:/language/Buttons/ControlPanel/Hint}}
 
 \whitespace trim
 \procedure control-panel-button(class)
-\whitespace trim
-<$button to="$:/ControlPanel" tooltip={{$:/language/Buttons/ControlPanel/Hint}} aria-label={{$:/language/Buttons/ControlPanel/Caption}} class=`$(tv-config-toolbar-class)$ $(class)$`>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/options-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/ControlPanel/Caption}}/></span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	to="$:/ControlPanel"
+	tooltip={{$:/language/Buttons/ControlPanel/Hint}}
+	label={{$:/language/Buttons/ControlPanel/Caption}}
+	icon="$:/core/images/options-button"
+	class=<<class>>
+/>
 \end
 
 <$list filter="[list<tv-story-list>] +[field:title[$:/ControlPanel]]" emptyMessage=<<control-panel-button>>>

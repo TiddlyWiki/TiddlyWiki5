@@ -4,16 +4,9 @@ caption: {{$:/core/images/new-journal-button}} {{$:/language/Buttons/NewJournal/
 description: {{$:/language/Buttons/NewJournal/Hint}}
 
 \whitespace trim
-\procedure journalButton()
-<$button tooltip={{$:/language/Buttons/NewJournal/Hint}} aria-label={{$:/language/Buttons/NewJournal/Caption}} class=<<tv-config-toolbar-class>> actions={{$:/core/ui/Actions/new-journal}}>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/new-journal-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/NewJournal/Caption}}/>
-</span>
-<%endif%>
-</$button>
-\end
-<<journalButton>>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/NewJournal/Hint}}
+	label={{$:/language/Buttons/NewJournal/Caption}}
+	icon="$:/core/images/new-journal-button"
+	actions={{$:/core/ui/Actions/new-journal}}
+/>

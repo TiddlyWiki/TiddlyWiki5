@@ -4,14 +4,9 @@ caption: {{$:/core/images/unfold-all-button}} {{$:/language/Buttons/UnfoldAll/Ca
 description: {{$:/language/Buttons/UnfoldAll/Hint}}
 
 \whitespace trim
-<$button tooltip={{$:/language/Buttons/UnfoldAll/Hint}} aria-label={{$:/language/Buttons/UnfoldAll/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-unfold-all-tiddlers" $param=<<currentTiddler>> foldedStatePrefix="$:/state/folded/"/>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/unfold-all-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/UnfoldAll/Caption}}/>
-</span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/UnfoldAll/Hint}}
+	label={{$:/language/Buttons/UnfoldAll/Caption}}
+	icon="$:/core/images/unfold-all-button"
+	actions="<$action-sendmessage $message='tm-unfold-all-tiddlers' $param=<<currentTiddler>> foldedStatePrefix='$:/state/folded/'/>"
+/>

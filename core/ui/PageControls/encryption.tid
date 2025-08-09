@@ -5,26 +5,18 @@ description: {{$:/language/Buttons/Encryption/Hint}}
 
 \whitespace trim
 <$reveal type="match" state="$:/isEncrypted" text="yes">
-<$button message="tm-clear-password" tooltip={{$:/language/Buttons/Encryption/ClearPassword/Hint}} aria-label={{$:/language/Buttons/Encryption/ClearPassword/Caption}} class=<<tv-config-toolbar-class>>>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/locked-padlock}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/Encryption/ClearPassword/Caption}}/>
-</span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/Encryption/ClearPassword/Hint}}
+	label={{$:/language/Buttons/Encryption/ClearPassword/Caption}}
+	icon="$:/core/images/locked-padlock"
+	actions="<$action-sendmessage $message='tm-clear-password'/>"
+/>
 </$reveal>
 <$reveal type="nomatch" state="$:/isEncrypted" text="yes">
-<$button message="tm-set-password" tooltip={{$:/language/Buttons/Encryption/SetPassword/Hint}} aria-label={{$:/language/Buttons/Encryption/SetPassword/Caption}} class=<<tv-config-toolbar-class>>>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/unlocked-padlock}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/Encryption/SetPassword/Caption}}/>
-</span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/Encryption/SetPassword/Hint}}
+	label={{$:/language/Buttons/Encryption/SetPassword/Caption}}
+	icon="$:/core/images/unlocked-padlock"
+	actions="<$action-sendmessage $message='tm-set-password'/>"
+/>
 </$reveal>

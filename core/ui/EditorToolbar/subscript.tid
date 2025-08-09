@@ -6,10 +6,8 @@ description: {{$:/language/Buttons/Subscript/Hint}}
 condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 shortcuts: ((subscript))
 
-<$action-sendmessage
-	$message="tm-edit-text-operation"
-	$param="wrap-selection"
+<$transclude $variable="editor-text-operation"
+	operation="wrap-selection"
 	prefix=",,"
 	suffix=",,"
-	trimSelection="yes"
 />

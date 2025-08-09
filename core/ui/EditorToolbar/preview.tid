@@ -12,5 +12,5 @@ shortcuts: ((preview))
 <span>
 	<$transclude $tiddler={{{ [<edit-preview-state>match[yes]then[$:/core/images/preview-open]else[$:/core/images/preview-closed]] }}} />
 </span>
-<$action-setfield $tiddler=<<editPreviewStateTiddler>> $value={{{ [<editPreviewStateTiddler>get[text]toggle[yes],[no]] }}} />
+<$transclude $variable="toggle-field" tiddler=<<editPreviewStateTiddler>> field="text" value1="yes" value2="no"/>
 <$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/>

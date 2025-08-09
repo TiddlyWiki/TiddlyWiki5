@@ -6,21 +6,13 @@ description: {{$:/language/Buttons/More/Hint}}
 \whitespace trim
 \define config-title() $:/config/PageControlButtons/Visibility/$(listItem)$
 
-<$button popup=<<qualify "$:/state/popup/more">>
+<$transclude $variable="toolbar-button-conditional"
 	tooltip={{$:/language/Buttons/More/Hint}}
-	aria-label={{$:/language/Buttons/More/Caption}}
-	class=<<tv-config-toolbar-class>>
+	label={{$:/language/Buttons/More/Caption}}
+	icon="$:/core/images/down-arrow"
+	popup=<<qualify "$:/state/popup/more">>
 	selectedClass="tc-selected"
->
-	<%if [<tv-config-toolbar-icons>match[yes]] %>
-		{{$:/core/images/down-arrow}}
-	<%endif%>
-	<%if [<tv-config-toolbar-text>match[yes]] %>
-		<span class="tc-btn-text">
-			<$text text={{$:/language/Buttons/More/Caption}}/>
-		</span>
-	<%endif%>
-</$button>
+/>
 <$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">
 	<div class="tc-drop-down">
 		<$let tv-config-toolbar-icons="yes" tv-config-toolbar-text="yes" tv-config-toolbar-class="tc-btn-invisible">

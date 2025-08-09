@@ -6,8 +6,8 @@ caption: {{$:/language/ControlPanel/Settings/MissingLinks/Caption}}
 \define lingo-base() $:/language/ControlPanel/Settings/MissingLinks/
 <<lingo Hint>>
 
-<$checkbox tiddler="$:/config/MissingLinks" field="text" checked="yes" unchecked="no" default="yes">
-	<$link to="$:/config/MissingLinks" class="tc-control-panel-item">
-		<span class="tc-tiny-gap-left"><<lingo Description>></span>
-	</$link>
-</$checkbox>
+<$transclude $variable="control-panel-checkbox"
+	config="$:/config/MissingLinks"
+	label=<<lingo Description>>
+	default="yes"
+/>

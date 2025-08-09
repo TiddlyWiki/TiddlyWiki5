@@ -1,2 +1,174 @@
 title: $:/core/macros/misc
 tags: $:/tags/Global
+
+\procedure toggle-field(tiddler,field,value1:"yes",value2:"no")
+<$action-setfield $tiddler=<<tiddler>> $field=<<field>> $value={{{ [<tiddler>get<field>match<value1>then<value2>else<value1>] }}}/>
+\end
+
+\procedure progress-bar(current,total,color:"green",height:"20px")
+\whitespace trim
+<div style.width="100%" style.height=<<height>> style.background=<<colour muted-foreground>> style.border-radius="4px">
+	<div style.width={{{ [<current>divide<total>multiply[100]addsuffix[%]] }}} style.height="100%" style.background=<<color>> style.border-radius="4px"/>
+</div>
+\end
+
+\procedure breadcrumb(separator:" > ",field:"parent")
+\whitespace trim
+<%if [<currentTiddler>has<field>] %>
+	<$macrocall $name="breadcrumb" field=<<field>>/>
+	<$text text=<<separator>>/>
+<% endif %>
+<$link><$view field="title"/></$link>
+\end
+
+\procedure conditional-class(base,condition,trueClass,falseClass:"")
+\whitespace trim
+<$let class={{{ [<base>] [<condition>then<trueClass>else<falseClass>] +[join[ ]] }}}>
+	<<class>>
+</$let>
+\end
+
+\procedure template-switcher(fallback:"$:/core/ui/ViewTemplate")
+\whitespace trim
+<$let template={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TemplateFilter]get[text]] :else[<fallback>] }}}>
+	<$transclude tiddler=<<template>>/>
+</$let>
+\end
+
+\procedure field-aggregator(filter,field,operation:"sum")
+\whitespace trim
+<$let result={{{ [<filter>get<field>] :reduce[<accumulator>add<currentTiddler>] }}}>
+	<<result>>
+</$let>
+\end
+
+\procedure relative-date(date,field:"modified")
+\whitespace trim
+<$let fieldValue={{{ [all[current]get<field>] }}} days={{{ [<date>format:date[TIMESTAMP]subtract<fieldValue>divide[86400000]floor[]] }}}>
+	<$list filter="[<days>compare:number:lt[1]]" emptyMessage="""<$text text={{{ [<days>] [<lingo DaysAgo>] +[join[ ]] }}}/>""">
+		<<lingo Today>>
+	</$list>
+</$let>
+\end
+
+\procedure toggle-state-button(state,openIcon,closeIcon,openTooltip,closeTooltip,openText,closeText,openValue:"open",closeValue:"close",default:"close",actions:"")
+\whitespace trim
+<$reveal type="nomatch" stateTitle=<<state>> text=<<openValue>> default=<<default>>>
+	<$button setTitle=<<state>> setTo=<<openValue>> class="tc-btn-invisible" tooltip=<<openTooltip>> actions=<<actions>>>
+		<$transclude tiddler=<<openIcon>>/>
+		<$text text=<<openText>>/>
+	</$button>
+</$reveal>
+<$reveal type="match" stateTitle=<<state>> text=<<openValue>> default=<<default>>>
+	<$button setTitle=<<state>> setTo=<<closeValue>> class="tc-btn-invisible" tooltip=<<closeTooltip>> actions=<<actions>>>
+		<$transclude tiddler=<<closeIcon>>/>
+		<$text text=<<closeText>>/>
+	</$button>
+</$reveal>
+\end
+
+\procedure tm-message-button(message,param,tooltip,label,icon,class:"tc-btn-invisible",actions:"")
+\whitespace trim
+<$button tooltip=<<tooltip>> class=<<class>>>
+	<$action-sendmessage $message=<<message>> $param=<<param>>/>
+	<<actions>>
+	<$transclude tiddler=<<icon>>/>
+	<$text text=<<label>>/>
+</$button>
+\end
+
+\procedure list-or-empty(filter,emptyMessage,template:"")
+<$list filter=<<filter>> emptyMessage=<<emptyMessage>>>
+	<$transclude $tiddler=<<template>> $mode="block">
+		<<currentTiddler>>
+	</$transclude>
+</$list>
+\end
+
+\procedure qualified-state(base:"$:/state/",suffix:"")
+\whitespace trim
+<$qualify title={{{ [<base>addsuffix<suffix>] }}} name="qualifiedState">
+	<<qualifiedState>>
+</$qualify>
+\end
+
+\procedure toolbar-button(actions,tooltip,icon,caption)
+\whitespace trim
+<$button tooltip=<<tooltip>> class=<<tv-config-toolbar-class>> actions=<<actions>>>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		<$transclude tiddler=<<icon>>/>
+	<% endif %>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text"><$text text=<<caption>>/></span>
+	<% endif %>
+</$button>
+\end
+
+\procedure field-editor-wrapper(field,placeholder:"",class:"",actions:"")
+\whitespace trim
+<$edit-text tiddler=<<currentTiddler>> field=<<field>> placeholder=<<placeholder>> class=<<class>>/>
+<<actions>>
+\end
+
+\procedure dropdown-wrapper(state,button,content,class:"tc-popup-keep")
+\whitespace trim
+<$button popup=<<state>> class=<<class>>>
+	<<button>>
+</$button>
+<$reveal state=<<state>> type="popup" position="below" animate="yes" retain="yes">
+	<div class="tc-drop-down">
+		<<content>>
+	</div>
+</$reveal>
+\end
+
+\procedure toolbar-button-conditional(tooltip,label,icon,actions:"",to:"",class:"",selectedClass:"",popup:"")
+\whitespace trim
+<$button to=<<to>> tooltip=<<tooltip>> aria-label=<<label>> class={{{ [<tv-config-toolbar-class>] [<class>] +[unique[ ]] +[join[ ]] }}} actions=<<actions>> popup=<<popup>> selectedClass=<<selectedClass>>>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		<$transclude tiddler=<<icon>>/>
+	<% endif %>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text"><$text text=<<label>>/></span>
+	<% endif %>
+</$button>
+\end
+
+\procedure editor-text-operation(operation,param,prefix:"",suffix:"",character:"",count:"")
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param=<<operation>>
+	prefix=<<prefix>>
+	suffix=<<suffix>>
+	character=<<character>>
+	count=<<count>>
+	trimSelection="yes"
+/>
+\end
+
+\procedure control-panel-checkbox(config,label,default:"no",checkedValue:"yes",uncheckedValue:"no")
+\whitespace trim
+<$checkbox tiddler=<<config>> field="text" checked=<<checkedValue>> unchecked=<<uncheckedValue>> default=<<default>>>
+	<$link to=<<config>> class="tc-tiny-gap-left"><<label>></$link>
+</$checkbox>
+\end
+
+\function tf.cascade-filter(tag)
+[<currentTiddler>] :cascade[all[shadows+tiddlers]tag<tag>!is[draft]get[text]]
+\end
+
+\procedure reveal-animate-dropdown(state,content,position:"below",class:"tc-drop-down")
+\whitespace trim
+<$reveal state=<<state>> type="popup" position=<<position>> animate="yes" retain="yes">
+	<div class=<<class>>>
+		<<content>>
+	</div>
+</$reveal>
+\end
+
+\procedure list-filter-empty(filter,emptyMessage:"",variable:"currentTiddler")
+\whitespace trim
+<$list filter=<<filter>> variable=<<variable>> emptyMessage=<<emptyMessage>>>
+	<<variable>>
+</$list>
+\end

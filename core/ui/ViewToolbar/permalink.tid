@@ -4,13 +4,9 @@ caption: {{$:/core/images/permalink-button}} {{$:/language/Buttons/Permalink/Cap
 description: {{$:/language/Buttons/Permalink/Hint}}
 
 \whitespace trim
-<$button message="tm-permalink" tooltip={{$:/language/Buttons/Permalink/Hint}} aria-label={{$:/language/Buttons/Permalink/Caption}} class=<<tv-config-toolbar-class>>>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/permalink-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/Permalink/Caption}}/>
-</span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/Permalink/Hint}}
+	label={{$:/language/Buttons/Permalink/Caption}}
+	icon="$:/core/images/permalink-button"
+	actions="<$action-sendmessage $message='tm-permalink'/>"
+/>
