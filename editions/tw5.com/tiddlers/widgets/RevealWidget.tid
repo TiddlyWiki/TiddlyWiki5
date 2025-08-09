@@ -37,6 +37,11 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |positionAllowNegative |Set to "yes" to prevent computed popup positions from being clamped to be above zero |
 |default |Default value to use when the state tiddler is missing |
 |animate |Set to "yes" to animate opening and closure (defaults to "no"; requires "retain" to be set to "yes") |
+|animationType |<<.from-version "5.4.0">>The type of animation implementation to use: ''default'', ''transform'', or ''gpu'' (defaults to "default") |
+|animationDuration |<<.from-version "5.4.0">>Duration of the animation in milliseconds (defaults to the global animation duration) |
+|animationDirection |<<.from-version "5.4.0">>Direction of the animation effect |
+|animationOrigin |<<.from-version "5.4.0">>Origin point for the animation (e.g., "left", "right", "top", "bottom") |
+|animationEasing |<<.from-version "5.4.0">>Easing function for the animation |
 |retain |Set to "yes" to force the content to be retained even when hidden (defaults to "no") |
 |updatePopupPosition|<<.from-version "5.1.23">>Set to "yes" to update the popup position when the state tiddler is updated (defaults to "no")|
 
