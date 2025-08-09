@@ -252,14 +252,14 @@ RevealWidget.prototype.updateState = function() {
 		this.renderChildren(domNode,null);
 	}
 	// Animate our DOM node
-	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
-		this.positionPopup(domNode);
-		$tw.utils.addClass(domNode,"tc-popup"); // Make sure that clicks don't dismiss popups within the revealed content
-
-	}
 	if(this.isOpen) {
 		domNode.removeAttribute("hidden");
-        $tw.anim.perform(this.openAnimation,domNode);
+		// Position popup after making it visible to ensure correct dimensions
+		if(!domNode.isTiddlyWikiFakeDom && this.type === "popup") {
+			this.positionPopup(domNode);
+			$tw.utils.addClass(domNode,"tc-popup"); // Make sure that clicks don't dismiss popups within the revealed content
+		}
+		$tw.anim.perform(this.openAnimation,domNode);
 	} else {
 		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
 			//make sure that the state hasn't changed during the close animation
