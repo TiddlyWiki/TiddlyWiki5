@@ -23,7 +23,7 @@ description: {{$:/language/Buttons/More/Hint}}
 			>
 				<$reveal type="match" state=<<config-title>> text="hide">
 					<$set name="tv-config-toolbar-class"
-						filter="[tf.toolbar-button-classes<tv-config-toolbar-class>,<listItem>]"
+						value={{{ [tf.toolbar-button-classes<tv-config-toolbar-class>,<listItem>] }}}
 					>
 						<$transclude tiddler=<<listItem>> mode="inline"/>
 					</$set>

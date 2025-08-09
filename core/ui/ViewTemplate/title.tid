@@ -11,7 +11,7 @@ tags: $:/tags/ViewTemplate
 				storyview="pop"
 				variable="listItem"
 			>
-				<$set name="tv-config-toolbar-class" filter="[tf.toolbar-button-classes<tv-config-toolbar-class>,<listItem>]">
+				<$set name="tv-config-toolbar-class" value={{{ [tf.toolbar-button-classes<tv-config-toolbar-class>,<listItem>] }}}>
 					<$transclude tiddler=<<listItem>>/>
 				</$set>
 			</$list>
