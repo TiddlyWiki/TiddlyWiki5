@@ -158,6 +158,25 @@ tags: $:/tags/Global
 [<currentTiddler>] :cascade[all[shadows+tiddlers]tag<tag>!is[draft]get[text]]
 \end
 
+\function tf.tiddler-frame-classes(type:"view")
+[all[shadows+tiddlers]tag[$:/tags/ClassFilters/TiddlerTemplate]!is[draft]] :map:flat[subfilter{!!text}] 
+[[tc-tiddler-frame]] 
+[<type>match[view]then[tc-tiddler-view-frame]] 
+[<type>match[edit]then[tc-tiddler-edit-frame]] 
+[<currentTiddler>is[tiddler]then[tc-tiddler-exists]] 
+[<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] 
+[<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] 
+[<currentTiddler>is[shadow]is[tiddler]then[tc-tiddler-overridden-shadow]] 
+[<currentTiddler>is[system]then[tc-tiddler-system]] 
+[{!!class}] 
+[<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] 
++[join[ ]]
+\end
+
+\function tf.toolbar-button-classes(baseClass,item)
+[enlist<baseClass>] [<item>encodeuricomponent[]addprefix[tc-btn-]] +[join[ ]]
+\end
+
 \procedure reveal-animate-dropdown(state,content,position:"below",class:"tc-drop-down",style:"")
 \whitespace trim
 <$reveal state=<<state>> type="popup" position=<<position>> animate="yes" retain="yes">
@@ -172,4 +191,57 @@ tags: $:/tags/Global
 <$list filter=<<filter>> variable=<<variable>> emptyMessage=<<emptyMessage>>>
 	<<variable>>
 </$list>
+\end
+
+\procedure search-min-length-guard(searchTiddler,content,minLengthConfig:"$:/config/Search/MinLength")
+\whitespace trim
+<%if [<searchTiddler>get[text]minlength{$:/config/Search/MinLength}limit[1]] %>
+	<<content>>
+<%else%>
+	<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>
+<%endif%>
+\end
+
+\procedure search-cancel-actions(searchTiddler,inputTiddler,refreshTiddler,additionalActions:"")
+\whitespace trim
+<%if [<searchTiddler>get[text]!match<inputTiddler>get[text]] %>
+	<$action-setfield $tiddler=<<inputTiddler>> text={{{ [<searchTiddler>get[text]] }}}/>
+	<$action-setfield $tiddler=<<refreshTiddler>> text="yes"/>
+<%else%>
+	<$action-deletetiddler $filter="[<searchTiddler>] [<inputTiddler>] [<refreshTiddler>]"/>
+	<<additionalActions>>
+<%endif%>
+\end
+
+\procedure search-navigate-actions(targetTiddler)
+\whitespace trim
+<%if [{$:/config/Search/NavigateOnEnter/enable}match[yes]] %>
+	<$action-navigate $to={{{ [<targetTiddler>get[text]] }}}/>
+<%else%>
+	<%if [<targetTiddler>get[text]!is[missing]] :else[<targetTiddler>get[text]is[shadow]] %>
+		<$action-navigate $to={{{ [<targetTiddler>get[text]] }}}/>
+	<%endif%>
+<%endif%>
+\end
+
+\procedure search-navigate-variant-actions(targetTiddler)
+\whitespace trim
+<%if [{$:/config/Search/NavigateOnEnter/enable}match[yes]] %>
+	<%if [<targetTiddler>get[text]minlength[1]] %>
+		<$action-sendmessage $message="tm-edit-tiddler" $param={{{ [<targetTiddler>get[text]] }}}/>
+	<%endif%>
+<%else%>
+	<%if [<targetTiddler>get[text]!is[missing]] :else[<targetTiddler>get[text]is[shadow]] %>
+		<%if [<targetTiddler>get[text]minlength[1]] %>
+			<$action-sendmessage $message="tm-edit-tiddler" $param={{{ [<targetTiddler>get[text]] }}}/>
+		<%endif%>
+	<%endif%>
+<%endif%>
+\end
+
+\procedure search-results-item(selectionState,suffix:"-primaryList",itemTemplate:"$:/core/ui/ListItemTemplate")
+\whitespace trim
+<span class={{{ [<currentTiddler>addsuffix<suffix>] :except[<selectionState>get[text]] :and[then[]else[tc-list-item-selected]] }}}>
+	<$transclude tiddler=<<itemTemplate>>/>
+</span>
 \end

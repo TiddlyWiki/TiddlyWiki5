@@ -7,7 +7,7 @@ tags: $:/tags/EditTemplate
 	<$view field="title"/>
 	<span class="tc-tiddler-controls tc-titlebar">
 		<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditToolbar]!has[draft.of]]" variable="listItem">
-			<$let tv-config-toolbar-class={{{ [enlist<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] +[join[ ]] }}}>
+			<$let tv-config-toolbar-class={{{ [tf.toolbar-button-classes<tv-config-toolbar-class>,<listItem>] }}}>
 				<$reveal type="nomatch" state=<<config-title>> text="hide">
 					<$transclude $tiddler=<<listItem>>/>
 				</$reveal>
