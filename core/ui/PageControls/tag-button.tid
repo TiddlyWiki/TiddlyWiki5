@@ -5,19 +5,17 @@ description: {{$:/language/Buttons/TagManager/Hint}}
 
 \whitespace trim
 \procedure control-panel-button(class)
-\whitespace trim
-<$button to="$:/TagManager" tooltip={{$:/language/Buttons/TagManager/Hint}} aria-label={{$:/language/Buttons/TagManager/Caption}} class=`$(tv-config-toolbar-class)$ $(class)$`>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/tag-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/TagManager/Caption}}/>
-</span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	to="$:/TagManager"
+	tooltip={{$:/language/Buttons/TagManager/Hint}}
+	label={{$:/language/Buttons/TagManager/Caption}}
+	icon="$:/core/images/tag-button"
+	class=<<class>>
+/>
 \end
 
-<$list filter="[list[$:/StoryList]] +[field:title[$:/TagManager]]" emptyMessage=<<control-panel-button>>>
-<<control-panel-button "tc-selected">>
-</$list>
+<$transclude $variable="list-with-empty" 
+	filter="[list[$:/StoryList]] +[field:title[$:/TagManager]]" 
+	emptyMessage=<<control-panel-button>>
+	template="""<<control-panel-button "tc-selected">>"""
+/>

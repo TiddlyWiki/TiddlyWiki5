@@ -23,44 +23,8 @@ caption: {{$:/language/Search/Filter/Caption}}
 />
 \end
 
-\procedure cancel-search-actions()
-\whitespace trim
-<$list filter="[{$:/temp/advancedsearch/input}!match{$:/temp/advancedsearch}]">
-	<$list-empty>
-		<$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]"/>
-	</$list-empty>
-	<$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/advancedsearch}}/>
-	<$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
-</$list>
-\end
 
-\procedure input-accept-actions()
-\whitespace trim
-<$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]">
-	<$list-empty>
-		<$list filter="[<tiddler>get[text]!is[missing]] :else[<tiddler>get[text]is[shadow]]">
-			<$action-navigate $to={{{ [<tiddler>get[text]] }}}/>
-		</$list>
-	<$/list-empty>
-	<$action-navigate $to={{{ [<tiddler>get[text]] }}}/>
-</$list>
-\end
 
-\procedure input-accept-variant-actions()
-\whitespace trim
-<$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]">
-	<$list-empty>
-		<$list filter="[<tiddler>get[text]!is[missing]] :else[<tiddler>get[text]is[shadow]]">
-			<$list filter="[<__tiddler__>get[text]minlength[1]]">
-				<$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<tiddler>get[text]] }}}/>
-			</$list>
-		</$list>
-	</$list-empty>
-	<$list filter="[<tiddler>get[text]minlength[1]]">
-		<$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<tiddler>get[text]] }}}/>
-	</$list>
-</$list>
-\end
 
 \whitespace trim
 
@@ -79,9 +43,9 @@ caption: {{$:/language/Search/Filter/Caption}}
 				focus={{$:/config/Search/AutoFocus}}
 				configTiddlerFilter="[[$:/temp/advancedsearch]]"
 				firstSearchFilterField="text"
-				inputAcceptActions=<<input-accept-actions>>
-				inputAcceptVariantActions=<<input-accept-variant-actions>>
-				inputCancelActions=<<cancel-search-actions>>
+				inputAcceptActions="<$transclude $variable='search-navigate-actions' targetTiddler={{{ [<tiddler>get[text]] }}}/>"
+				inputAcceptVariantActions="<$transclude $variable='search-navigate-variant-actions' targetTiddler={{{ [<tiddler>get[text]] }}}/>"
+				inputCancelActions="<$transclude $variable='search-cancel-actions' searchTiddler='$:/temp/advancedsearch' inputTiddler='$:/temp/advancedsearch/input' refreshTiddler='$:/temp/advancedsearch/refresh'/>"
 			/>
 		</$keyboard>
 	</$keyboard>
@@ -94,9 +58,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 	<$set name="resultCount" value="<$count filter={{$:/temp/advancedsearch}}/>">
 		<p><<lingo Filter/Matches>></p>
 		<$list filter={{$:/temp/advancedsearch}}>
-			<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] :and[then[]else[tc-list-item-selected]] }}}>
-				<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
-			</span>
+			<$transclude $variable="search-results-item" selectionState="$:/temp/advancedsearch/selected-item"/>
 		</$list>
 	</$set>
 </$reveal>

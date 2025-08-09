@@ -4,13 +4,9 @@ caption: {{$:/core/images/full-screen-button}} {{$:/language/Buttons/FullScreen/
 description: {{$:/language/Buttons/FullScreen/Hint}}
 
 \whitespace trim
-<$button message="tm-full-screen" tooltip={{$:/language/Buttons/FullScreen/Hint}} aria-label={{$:/language/Buttons/FullScreen/Caption}} class=<<tv-config-toolbar-class>>>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/full-screen-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/FullScreen/Caption}}/>
-</span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/FullScreen/Hint}}
+	label={{$:/language/Buttons/FullScreen/Caption}}
+	icon="$:/core/images/full-screen-button"
+	actions="<$action-sendmessage $message='tm-full-screen'/>"
+/>

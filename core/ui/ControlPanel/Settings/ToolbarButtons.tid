@@ -6,20 +6,14 @@ caption: {{$:/language/ControlPanel/Settings/ToolbarButtons/Caption}}
 \define lingo-base() $:/language/ControlPanel/Settings/ToolbarButtons/
 <<lingo Hint>>
 
-<$checkbox tiddler="$:/config/Toolbar/Icons"
-	field="text" checked="yes" unchecked="no" default="yes"
-	class="tc-control-panel-item"
->
-	<$link to="$:/config/Toolbar/Icons" class="tc-tiny-gap-left">
-		<<lingo Icons/Description>>
-	</$link>
-</$checkbox>
+<$transclude $variable="control-panel-checkbox"
+	config="$:/config/Toolbar/Icons"
+	label=<<lingo Icons/Description>>
+	default="yes"
+/>
 
-<$checkbox tiddler="$:/config/Toolbar/Text"
-	field="text" checked="yes" unchecked="no" default="no"
-	class="tc-control-panel-item"
->
-	<$link to="$:/config/Toolbar/Text" class="tc-tiny-gap-left">
-		<<lingo Text/Description>>
-	</$link>
-</$checkbox>
+<$transclude $variable="control-panel-checkbox"
+	config="$:/config/Toolbar/Text"
+	label=<<lingo Text/Description>>
+	default="no"
+/>

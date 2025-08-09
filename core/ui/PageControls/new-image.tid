@@ -4,13 +4,9 @@ caption: {{$:/core/images/new-image-button}} {{$:/language/Buttons/NewImage/Capt
 description: {{$:/language/Buttons/NewImage/Hint}}
 
 \whitespace trim
-<$button tooltip={{$:/language/Buttons/NewImage/Hint}} aria-label={{$:/language/Buttons/NewImage/Caption}} class=<<tv-config-toolbar-class>> actions={{$:/core/ui/Actions/new-image}}>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/new-image-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/NewImage/Caption}}/>
-</span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/NewImage/Hint}}
+	label={{$:/language/Buttons/NewImage/Caption}}
+	icon="$:/core/images/new-image-button"
+	actions={{$:/core/ui/Actions/new-image}}
+/>

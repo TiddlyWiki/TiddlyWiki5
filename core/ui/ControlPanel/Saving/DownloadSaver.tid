@@ -11,10 +11,9 @@ caption: {{$:/language/ControlPanel/Saving/DownloadSaver/Caption}}
 
 !!.tc-control-panel-accent <$link to="$:/config/DownloadSaver/AutoSave"><<lingo AutoSave/Hint>></$link>
 
-<$checkbox tiddler="$:/config/DownloadSaver/AutoSave"
-	field="text" checked="yes" unchecked="no" default="no"
-	class="tc-control-panel-item"
->
-	<span class="tc-tiny-gap-left"><<lingo AutoSave/Description>></span>
-</$checkbox>
+<$transclude $variable="control-panel-checkbox"
+	config="$:/config/DownloadSaver/AutoSave"
+	label=<<lingo AutoSave/Description>>
+	default="no"
+/>
 </div>
