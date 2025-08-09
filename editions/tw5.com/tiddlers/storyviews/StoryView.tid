@@ -107,11 +107,11 @@ All story views share these common configuration options:
 
 The story views have been optimized for performance with:
 
-* **GPU Acceleration**: Uses `translate3d()` and `scale3d()` transforms to leverage hardware acceleration
-* **Will-Change Hints**: Informs the browser about properties that will animate
-* **Precise Calculations**: Optional high-precision animation using `requestAnimationFrame`
-* **Cleanup Management**: Proper cleanup of animations and styles after completion
-* **Animation Interruption Handling**: Gracefully handles cases where animations are interrupted
+* ''GPU Acceleration'': Uses `translate3d()` and `scale3d()` transforms to leverage hardware acceleration
+* ''Will-Change Hints'': Informs the browser about properties that will animate
+* ''Precise Calculations'': Optional high-precision animation using `requestAnimationFrame`
+* ''Cleanup Management'': Proper cleanup of animations and styles after completion
+* ''Animation Interruption Handling'': Gracefully handles cases where animations are interrupted
 
 ! Variables
 
