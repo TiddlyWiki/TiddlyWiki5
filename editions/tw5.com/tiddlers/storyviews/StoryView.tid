@@ -1,0 +1,170 @@
+caption: StoryView
+created: 20250809075939101
+modified: 20250809075939101
+tags: Concepts [[Story River]]
+title: StoryView
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+A ''story view'' is a module that controls how tiddlers in the [[story river|Story River]] are animated and displayed when they are opened, closed, or navigated between. ~TiddlyWiki provides three built-in story views: ''classic'', ''pop'', and ''zoomin''.
+
+Story views are implemented as [[JavaScript modules|Modules]] with a <<.field module-type>> of <<.value storyview>>. Each story view provides methods to handle:
+
+* ''insert'' - Animation when a new tiddler is added to the story
+* ''remove'' - Animation when a tiddler is removed from the story
+* ''navigateTo'' - Behavior when navigating to an existing tiddler
+
+! Built-in Story Views
+
+!! Classic Story View
+
+The ''classic'' story view provides a traditional linear layout with slide and fade animations.
+
+!!! Features
+
+* Tiddlers appear in a vertical sequence
+* New tiddlers slide in from the side with a fade effect
+* Removed tiddlers slide out and collapse
+* GPU acceleration support for smooth animations
+* Configurable slide direction (left or right)
+* Precise animation calculations with cubic-bezier easing
+* Navigation scrolling to bring tiddlers into view
+
+!!! Configuration
+
+The classic story view can be configured through several system tiddlers:
+
+|!Tiddler |!Description |!Default |
+|$:/config/AnimationGPUAcceleration |Enable GPU acceleration for animations |yes |
+|$:/config/AnimationPreciseCalculations |Use precise animation calculations |yes |
+|$:/config/AnimationEasing |CSS easing function for animations |cubic-bezier(0.645, 0.045, 0.355, 1) |
+|$:/config/ClassicStoryView/SlideDirection |Direction for slide animations (left or right) |left |
+|$:/config/AnimationScale |Scale factor for animation duration |1.0 |
+|$:/config/AnimationWillChange |Use CSS will-change property for optimization |yes |
+
+!! Pop Story View
+
+The ''pop'' story view creates dynamic pop-in and pop-out effects with scaling and rotation.
+
+!!! Features
+
+* Tiddlers scale and rotate when appearing/disappearing
+* Optional blur effects during transitions
+* Navigation highlighting with a pulse effect
+* Configurable scale factors and rotation angles
+* GPU acceleration support
+* Prevents horizontal overflow during animations
+
+!!! Configuration
+
+The pop story view offers extensive customization options:
+
+|!Tiddler |!Description |!Default |
+|$:/config/PopStoryView/InsertScale |Scale factor for new tiddlers |2 |
+|$:/config/PopStoryView/InsertRotation |Rotation angle (degrees) for new tiddlers |0 |
+|$:/config/PopStoryView/InsertOpacity |Initial opacity for new tiddlers |0 |
+|$:/config/PopStoryView/RemoveScale |Scale factor when removing tiddlers |0.1 |
+|$:/config/PopStoryView/RemoveRotation |Rotation angle when removing tiddlers |0 |
+|$:/config/PopStoryView/RemoveOpacity |Final opacity when removing tiddlers |0 |
+|$:/config/PopStoryView/EnableBlur |Enable blur effect during animations |no |
+|$:/config/PopStoryView/EnableNavigationHighlight |Highlight tiddlers when navigating |yes |
+
+!! Zoomin Story View
+
+The ''zoomin'' story view displays only one tiddler at a time with zoom transitions between them.
+
+!!! Features
+
+* Single tiddler display mode
+* Smooth zoom transitions between tiddlers
+* Configurable scale factors for navigation
+* GPU acceleration support
+* Transform origin based on title position
+* History-aware initial tiddler selection
+
+!!! Configuration
+
+The zoomin story view can be customized with:
+
+|!Tiddler |!Description |!Default |
+|$:/config/ZoominStoryView/NavigateFromScale |Scale factor when zooming from a tiddler |1 |
+|$:/config/ZoominStoryView/NavigateToScale |Scale factor when zooming to a tiddler |1 |
+|$:/config/ZoominStoryView/RemoveScale |Scale factor when removing a tiddler |0.1 |
+|$:/config/ZoominStoryView/ReturnScale |Scale factor when returning to previous tiddler |10 |
+
+! Common Configuration
+
+All story views share these common configuration options:
+
+|!Tiddler |!Description |!Default |
+|$:/config/AnimationGPUAcceleration |Enable GPU acceleration using 3D transforms |yes |
+|$:/config/AnimationEasing |CSS easing function for all animations |varies by view |
+|$:/config/AnimationScale |Global scale factor for animation durations |1.0 |
+|$:/config/AnimationWillChange |Use CSS will-change for performance hints |yes |
+
+! Animation Performance
+
+The story views have been optimized for performance with:
+
+* **GPU Acceleration**: Uses `translate3d()` and `scale3d()` transforms to leverage hardware acceleration
+* **Will-Change Hints**: Informs the browser about properties that will animate
+* **Precise Calculations**: Optional high-precision animation using `requestAnimationFrame`
+* **Cleanup Management**: Proper cleanup of animations and styles after completion
+* **Animation Interruption Handling**: Gracefully handles cases where animations are interrupted
+
+! Variables
+
+Story views can access the following variables:
+
+|!Variable |!Description |
+|tv-enable-storyview-scroll |Set to "yes" to enable scrolling and navigation behaviors |
+|tv-story-list |The list widget managing the story river |
+|tv-history-list |The navigation history list |
+
+! Creating Custom Story Views
+
+To create a custom story view, export a JavaScript constructor function with:
+
+```javascript
+exports.myview = MyStoryView;
+
+function MyStoryView(listWidget) {
+    this.listWidget = listWidget;
+}
+
+MyStoryView.prototype.navigateTo = function(historyInfo) {
+    // Handle navigation
+};
+
+MyStoryView.prototype.insert = function(widget) {
+    // Handle insertion
+};
+
+MyStoryView.prototype.remove = function(widget) {
+    // Handle removal
+};
+```
+
+The module must have `module-type: storyview` in its header.
+
+! Examples
+
+To change the current story view, modify the `$:/view` tiddler:
+
+```
+classic
+```
+
+To list all available story views, use the [[storyviews Operator]]:
+
+```
+<<list-links "[storyviews[]]">>
+```
+
+! See Also
+
+* [[Story River]]
+* [[storyviews Operator]]
+* [[HistoryMechanism]]
+* [[Modules]]
