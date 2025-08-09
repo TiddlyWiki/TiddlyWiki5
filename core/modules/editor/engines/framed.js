@@ -103,6 +103,10 @@ function FramedEngine(options) {
 	this.iframeDoc.body.appendChild(this.domNode);
 }
 
+FramedEngine.prototype.assignDomNodeClasses = function() {
+	this.iframeNode.className = this.widget.getAttribute("class","");
+};
+
 /*
 Copy styles from the dummy text area to the textarea in the iframe
 */

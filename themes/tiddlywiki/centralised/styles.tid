@@ -9,18 +9,52 @@ tags: [[$:/tags/Stylesheet]]
 		text-align: center;
 	}
 
-	html .tc-story-river {
+	html .tc-story-river, html .tc-sidebar-left .tc-story-river {
 		position: relative;
-		width: 770px;
-		padding: 42px;
+		width: min(<<get.theme.metric storywidth>>,calc(100% - (2 * <<get.theme.metric sidebarminwidth>>)));
+		padding: 42px <<get.theme.metric storypaddingright>> 42px <<get.theme.metric storypaddingleft>>;
 		margin: 0 auto;
 		text-align: left;
+		display: block;
+		left: auto;
+		right: auto;
+	}
+
+	html body.tc-body .tc-sidebar-left .tc-story-river {
+		margin: 0 auto;
+		padding-right: <<get.theme.metric storypaddingright>>;
+		padding-left: <<get.theme.metric storypaddingleft>>;
 	}
 
 	html .tc-sidebar-scrollable {
 		text-align: left;
 		left: 50%;
 		right: 0;
-		margin-left: 343px;
+		margin-left: min(calc((100% - (2 * <<get.theme.metric sidebarminwidth>>)) / 2 - <<get.theme.metric storypaddingright>>),calc(<<get.theme.metric storywidth>> / 2 - <<get.theme.metric storypaddingright>>));
+		width: auto;
 	}
+
+	body.tc-body .tc-sidebar-left .tc-sidebar-scrollable {
+		margin-left: 0;
+		right: 50%;
+		left: 0;
+		z-index: 1;
+		margin-right: min(calc((100% - (2 * <<get.theme.metric sidebarminwidth>>)) / 2 - <<get.theme.metric storypaddingleft>>),calc(<<get.theme.metric storywidth>> / 2 - <<get.theme.metric storypaddingleft>>));
+		padding-right: 0px;
+		padding-left: 42px;
+	}
+
+	html[dir="rtl"] body.tc-body .tc-sidebar-left .tc-sidebar-scrollable {
+		padding-right: 42px;
+		padding-left: 0;
+	}
+
+	html[dir="rtl"] .tc-story-river, html[dir="rtl"] .tc-sidebar-scrollable {
+		text-align: right;
+	}
+
+	html .tc-tiddler-frame, html .tc-sidebar-left .tc-tiddler-frame {
+		width: 100%;
+	}
+
 }
