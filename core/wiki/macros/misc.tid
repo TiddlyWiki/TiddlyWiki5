@@ -5,49 +5,6 @@ tags: $:/tags/Global
 <$action-setfield $tiddler=<<tiddler>> $field=<<field>> $value={{{ [<tiddler>get<field>match<value1>then<value2>else<value1>] }}}/>
 \end
 
-\procedure progress-bar(current,total,color:"green",height:"20px")
-\whitespace trim
-<div style.width="100%" style.height=<<height>> style.background=<<colour muted-foreground>> style.border-radius="4px">
-	<div style.width={{{ [<current>divide<total>multiply[100]addsuffix[%]] }}} style.height="100%" style.background=<<color>> style.border-radius="4px"/>
-</div>
-\end
-
-\procedure breadcrumb(separator:" > ",field:"parent")
-\whitespace trim
-<%if [<currentTiddler>has<field>] %>
-	<$macrocall $name="breadcrumb" field=<<field>>/>
-	<$text text=<<separator>>/>
-<% endif %>
-<$link><$view field="title"/></$link>
-\end
-
-\function conditional-class(base,condition,trueClass,falseClass:"")
-[<base>] [<condition>then<trueClass>else<falseClass>] +[join[ ]]
-\end
-
-\procedure template-switcher(fallback:"$:/core/ui/ViewTemplate")
-\whitespace trim
-<$let template={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TemplateFilter]get[text]] :else[<fallback>] }}}>
-	<$transclude tiddler=<<template>>/>
-</$let>
-\end
-
-\procedure field-aggregator(filter,field,operation:"sum")
-\whitespace trim
-<$let result={{{ [<filter>get<field>] :reduce[<accumulator>add<currentTiddler>] }}}>
-	<<result>>
-</$let>
-\end
-
-\procedure relative-date(date,field:"modified")
-\whitespace trim
-<$let fieldValue={{{ [all[current]get<field>] }}} days={{{ [<date>format:date[TIMESTAMP]subtract<fieldValue>divide[86400000]floor[]] }}}>
-	<$list filter="[<days>compare:number:lt[1]]" emptyMessage="""<$text text={{{ [<days>] [<lingo DaysAgo>] +[join[ ]] }}}/>""">
-		<<lingo Today>>
-	</$list>
-</$let>
-\end
-
 \procedure toggle-state-button(state,openIcon,closeIcon,openTooltip,closeTooltip,openText:"",closeText:"",openValue:"open",closeValue:"close",default:"close",actions:"",openAriaLabel:"",closeAriaLabel:"")
 \whitespace trim
 <$reveal type="nomatch" stateTitle=<<state>> text=<<openValue>> default=<<default>>>
@@ -86,13 +43,6 @@ tags: $:/tags/Global
 </$list>
 \end
 
-\procedure qualified-state(base:"$:/state/",suffix:"")
-\whitespace trim
-<$qualify title={{{ [<base>addsuffix<suffix>] }}} name="qualifiedState">
-	<<qualifiedState>>
-</$qualify>
-\end
-
 \procedure toolbar-button(actions,tooltip,icon,caption)
 \whitespace trim
 <$button tooltip=<<tooltip>> class=<<tv-config-toolbar-class>> actions=<<actions>>>
@@ -103,12 +53,6 @@ tags: $:/tags/Global
 		<span class="tc-btn-text"><$text text=<<caption>>/></span>
 	<% endif %>
 </$button>
-\end
-
-\procedure field-editor-wrapper(field,placeholder:"",class:"",actions:"")
-\whitespace trim
-<$edit-text tiddler=<<currentTiddler>> field=<<field>> placeholder=<<placeholder>> class=<<class>>/>
-<<actions>>
 \end
 
 \procedure dropdown-wrapper(state,button,content,class:"tc-popup-keep")
@@ -300,4 +244,11 @@ tags: $:/tags/Global
 		{{$:/core/images/open-window}} <$text text=<<navigateText>>/>
 	</$button>
 <%endif%>
+\end
+
+\procedure simple-icon-button(icon,tooltip:"",ariaLabel:"",class:"tc-btn-invisible",actions:"",message:"",param:"",set:"",setTo:"",popup:"",to:"")
+\whitespace trim
+<$button class=<<class>> tooltip=<<tooltip>> aria-label=<<ariaLabel>> actions=<<actions>> message=<<message>> param=<<param>> set=<<set>> setTo=<<setTo>> popup=<<popup>> to=<<to>>>
+	<$transclude tiddler=<<icon>>/>
+</$button>
 \end
