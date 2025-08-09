@@ -6,7 +6,6 @@ module-type: utils
 Shared utilities for managing refresh operations with throttling support
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -118,5 +117,3 @@ exports.setupStyleElements = function(wiki, targetDocument, title, variables, im
 		styleElement: styleElement
 	};
 };
-
-})();
