@@ -7,10 +7,7 @@ code-body: yes
 	<style type="text/css">
 		<$view tiddler="$:/themes/tiddlywiki/vanilla/reset" format="text" mode="block"/>
 	</style>
-	<style type="text/css">
-		<$view tiddler="$:/themes/tiddlywiki/vanilla/base" format="plainwikified" mode="block"/>
-	</style>
-	<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!is[draft]] -[[$:/themes/tiddlywiki/vanilla/reset]] -[[$:/themes/tiddlywiki/vanilla/base]]">
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!is[draft]] -[[$:/themes/tiddlywiki/vanilla/reset]]">
 		<style type="text/css">
 			<$view format={{{ [<currentTiddler>tag[$:/tags/Stylesheet/Static]then[text]else[plainwikified]] }}} mode="block"/>
 		</style>
