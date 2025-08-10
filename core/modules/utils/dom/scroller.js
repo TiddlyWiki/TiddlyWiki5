@@ -98,13 +98,17 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	if(toolbar) {
 		offset = toolbar.offsetHeight;
 	}
-	// Get the scroll-margin-top value from the element
-	var scrollMarginTop = 0;
+	// Get the scroll-margin-top and scroll-margin-left values from the element
+	var scrollMarginTop = 0, scrollMarginLeft = 0;
 	if(element) {
 		var computedStyle = srcWindow.getComputedStyle(element);
 		var marginTop = computedStyle.getPropertyValue("scroll-margin-top");
 		if(marginTop) {
 			scrollMarginTop = parseFloat(marginTop) || 0;
+		}
+		var marginLeft = computedStyle.getPropertyValue("scroll-margin-left");
+		if(marginLeft) {
+			scrollMarginLeft = parseFloat(marginLeft) || 0;
 		}
 	}
 	// Get the client bounds of the element and adjust by the scroll position
@@ -115,7 +119,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 			if(isWindowScroll) {
 				scrollPosition = $tw.utils.getScrollPosition(srcWindow);
 				return {
-					left: clientBounds.left + scrollPosition.x,
+					left: clientBounds.left + scrollPosition.x - scrollMarginLeft,
 					top: clientBounds.top + scrollPosition.y - offset - scrollMarginTop,
 					width: clientBounds.width,
 					height: clientBounds.height
@@ -128,7 +132,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 					y: scrollContainer.scrollTop
 				};
 				return {
-					left: clientBounds.left - containerBounds.left + scrollPosition.x,
+					left: clientBounds.left - containerBounds.left + scrollPosition.x - scrollMarginLeft,
 					top: clientBounds.top - containerBounds.top + scrollPosition.y - offset - scrollMarginTop,
 					width: clientBounds.width,
 					height: clientBounds.height
