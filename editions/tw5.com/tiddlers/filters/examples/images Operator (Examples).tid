@@ -1,0 +1,12 @@
+created: 20250802195938592
+modified: 20250802195948223
+tags: [[Operator Examples]] [[images Operator]]
+title: images Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[all[current]images[]]" "image tiddlers embedded in the current one using hard references">>
+
+Here are some images using hard references:
+
+* [img[Motovun Jack.jpg]]
+* <$image source="Favicon template.svg"/>
