@@ -12,6 +12,10 @@ exports.method = "PUT";
 
 exports.path = /^\/recipes\/default\/tiddlers\/(.+)$/;
 
+exports.info = {
+	priority: 100
+};
+
 exports.handler = function(request,response,state) {
 	var title = $tw.utils.decodeURIComponentSafe(state.params[0]),
 	fields = $tw.utils.parseJSONSafe(state.data);
