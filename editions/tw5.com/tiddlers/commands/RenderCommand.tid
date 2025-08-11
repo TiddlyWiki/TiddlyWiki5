@@ -1,6 +1,6 @@
 caption: render
 created: 20170919131752774
-modified: 20170919131805871
+modified: 20250811164528905
 tags: Commands
 title: RenderCommand
 type: text/vnd.tiddlywiki
@@ -10,6 +10,7 @@ type: text/vnd.tiddlywiki
 <$button class="tc-btn-invisible" style="text-decoration:underline">
 Show available rendering templates
 <$action-setfield $tiddler="$:/temp/advancedsearch" text="[all[shadows]prefix[$:/core/templates/]]"/>
+<$action-setfield $tiddler="$:/temp/advancedsearch/input" text="[all[shadows]prefix[$:/core/templates/]]"/>
 <$action-setfield $tiddler="$:/state/tab--1498284803" text="$:/core/ui/AdvancedSearch/Filter"/>
 <$action-navigate $to="$:/AdvancedSearch"/>
 </$button>
