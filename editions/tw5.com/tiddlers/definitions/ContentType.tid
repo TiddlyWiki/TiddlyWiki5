@@ -1,5 +1,5 @@
 created: 20130828185900000
-modified: 20150221120839000
+modified: 20250814073940003
 tags: Definitions
 title: ContentType
 type: text/vnd.tiddlywiki
@@ -11,19 +11,20 @@ In TiddlyWiki, the `type` field gives the content type to apply to the main `tex
 !! List of Common Content Types
 
 |!Group |!Type |!Content of `type` field |
-|^''Developer'' |Data dictionary |application/x-tiddler-dictionary|
-|~|~JavaScript code |application/javascript|
-|~|JSON data |application/json|
-|~|Static stylesheet |text/css|
+|^''Developer'' |[[Data dictionary|DictionaryTiddlers]] |application/x-tiddler-dictionary|
+|~|[[Compound Tiddler|CompoundTiddlers]] |text/vnd.tiddlywiki-multiple|
+|~|JavaScript code |application/javascript|
+|~|[[JSON data|JSONTiddlers]] |application/json|
+|~|[[Static stylesheet|Using Stylesheets]] |text/css|
 |^''Image''|GIF image |image/gif|
 |~|ICO format icon file |image/x-icon|
 |~|JPEG image |image/jpeg|
 |~|PDF image |application/pdf|
 |~|PNG image |image/png|
 |~|Structured Vector Graphics image |image/svg+xml|
-|^''Text''|HTML markup |text/html|
+|^''Text''|[[HTML markup|HyperText Markup Language]] |text/html|
 |~|[[CSS|Cascading Style Sheets]] stylesheet |text/css|
 |~|[[Comma-separated values|Comma-Separated Values]] |text/csv|
 |~|Plain text |text/plain|
-|~|~TiddlyWiki 5 |text/vnd.tiddlywiki|
-|~|~TiddlyWiki Classic |text/x-tiddlywiki|
+|~|[[TiddlyWiki 5|WikiText]] |text/vnd.tiddlywiki|
+|~|[[TiddlyWiki Classic|TiddlyWikiClassic]] |text/x-tiddlywiki|
