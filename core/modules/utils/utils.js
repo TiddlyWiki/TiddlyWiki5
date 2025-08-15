@@ -82,28 +82,28 @@ exports.replaceString = function(text,search,replace) {
 };
 
 /*
-Deprecated: Repeats a string
+Deprecated: Use str.repeat instead
 */
 exports.repeat = function(str,count) {
 	return str.repeat(count);
 };
 
 /*
-Deprecated: Check if a string starts with another string
+Deprecated: Use str.startsWith instead
 */
 exports.startsWith = function(str,search) {
 	return str.startsWith(search);
 };
 
 /*
-Deprecated: Check if a string ends with another string
+Deprecated: Use str.endsWith instead
 */
 exports.endsWith = function(str,search) {
 	return str.endsWith(search);
 };
 
 /*
-Deprecated: Trim whitespace from the start and end of a string
+Deprecated: Use str.trim instead
 */
 exports.trim = function(str) {
 	if(typeof str === "string") {
