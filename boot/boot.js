@@ -47,9 +47,7 @@ $tw.utils.hop = function(object,property) {
 /*
 Deprecated: Use Array.isArray instead
 */
-$tw.utils.isArray = function(value) {
-	return Array.isArray(value);
-};
+$tw.utils.isArray = value => Array.isArray(value);
 
 /*
 Check if an array is equal by value and by reference.

@@ -84,23 +84,17 @@ exports.replaceString = function(text,search,replace) {
 /*
 Deprecated: Use str.repeat instead
 */
-exports.repeat = function(str,count) {
-	return str.repeat(count);
-};
+exports.repeat = (str,count) => str.repeat(count);
 
 /*
 Deprecated: Use str.startsWith instead
 */
-exports.startsWith = function(str,search) {
-	return str.startsWith(search);
-};
+exports.startsWith = (str,search) => str.startsWith(search);
 
 /*
 Deprecated: Use str.endsWith instead
 */
-exports.endsWith = function(str,search) {
-	return str.endsWith(search);
-};
+exports.endsWith = (str,search) => str.endsWith(search);
 
 /*
 Deprecated: Use str.trim instead
@@ -922,9 +916,7 @@ exports.tagToCssSelector = function(tagName) {
 
 exports.sign = Math.sign;
 
-exports.strEndsWith = function(str,ending,position) {
-	return str.endsWith(ending,position);
-};
+exports.strEndsWith = (str,ending,position) => str.endsWith(ending,position);
 
 /*
 Return system information useful for debugging
