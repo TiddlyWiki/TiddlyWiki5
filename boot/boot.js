@@ -332,7 +332,7 @@ $tw.utils.htmlDecode = function(s) {
 /*
 Deprecated. Use window.location.hash instead.
 */
-$tw.utils.getLocationHash = window.location.hash;
+$tw.utils.getLocationHash = () => window.location.hash;
 
 /*
 Depercated: Pad a string to a given length with "0"s. Length defaults to 2
