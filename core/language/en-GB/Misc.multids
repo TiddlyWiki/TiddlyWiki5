@@ -95,5 +95,27 @@ TagManager/Icons/None: None
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
 Tiddler/DateFormat: DDth MMM YYYY at hh12:0mmam
+Time/YearsAgo: <<ago-years>> years ago
+Time/YearsShort: y
+Time/OneYearAgo: One year ago
+Time/MonthsAgo: <<ago-months>> months ago
+Time/MonthsShort: m
+Time/OneMonthAgo: One month ago
+Time/WeeksAgo: <<ago-weeks>> weeks ago
+Time/WeeksShort: w
+Time/OneWeekAgo: One week ago
+Time/DaysAgo: <<ago-total-days>> days ago
+Time/DaysShort: d
+Time/OneDayAgo: One day ago
+Time/HoursAgo: <<ago-total-hours>> hours ago
+Time/HoursShort: h
+Time/OneHourAgo: One hour ago
+Time/MinutesAgo: <<ago-total-minutes>> minutes ago
+Time/MinutesShort: m
+Time/OneMinuteAgo: One minute ago
+Time/SecondsAgo: <<ago-total-seconds>> seconds ago
+Time/SecondsShort: s
+Time/OneSecondAgo: One second ago
+Time/JustNow: Now
 UnsavedChangesWarning: You have unsaved changes in TiddlyWiki
 Yes: Yes
