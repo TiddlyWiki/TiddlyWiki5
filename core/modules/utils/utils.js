@@ -82,37 +82,32 @@ exports.replaceString = function(text,search,replace) {
 };
 
 /*
-Repeats a string
+Deprecated: Repeats a string
 */
 exports.repeat = function(str,count) {
-	var result = "";
-	for(var t=0;t<count;t++) {
-		result += str;
-	}
-	return result;
+	return str.repeat(count);
 };
 
 /*
-Check if a string starts with another string
+Deprecated: Check if a string starts with another string
 */
 exports.startsWith = function(str,search) {
-	return str.substring(0, search.length) === search;
+	return str.startsWith(search);
 };
 
 /*
-Check if a string ends with another string
+Deprecated: Check if a string ends with another string
 */
 exports.endsWith = function(str,search) {
-	return str.substring(str.length - search.length) === search;
+	return str.endsWith(search);
 };
 
 /*
-Trim whitespace from the start and end of a string
-Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-javascript
+Deprecated: Trim whitespace from the start and end of a string
 */
 exports.trim = function(str) {
 	if(typeof str === "string") {
-		return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+		return str.trim();
 	} else {
 		return str;
 	}

@@ -348,15 +348,11 @@ $tw.utils.getLocationHash = function() {
 };
 
 /*
-Pad a string to a given length with "0"s. Length defaults to 2
+Depercated: Pad a string to a given length with "0"s. Length defaults to 2
 */
-$tw.utils.pad = function(value,length) {
-	length = length || 2;
-	var s = value.toString();
-	if(s.length < length) {
-		s = "000000000000000000000000000".substr(0,length - s.length) + s;
-	}
-	return s;
+$tw.utils.pad = function(value,length = 2) {
+	const s = value.toString();
+	return s.padStart(length, "0");
 };
 
 // Convert a date into UTC YYYYMMDDHHMMSSmmm format
