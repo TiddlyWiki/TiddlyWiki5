@@ -9,7 +9,7 @@ Various static utility functions.
 
 "use strict";
 
-var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
+// var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
 
 /*
 Display a message, in colour if we're on a terminal
@@ -842,22 +842,36 @@ if(typeof window !== 'undefined') {
 	}
 }
 
+exports.base64ToBytes = function(base64) {
+	const binString = exports.atob(base64);
+	return Uint8Array.from(binString, (m) => m.codePointAt(0));
+};
+
+exports.bytesToBase64 = function(bytes) {
+	const binString = Array.from(bytes, (byte) => String.fromCodePoint(byte)).join("");
+	return exports.btoa(binString);
+};
+
+exports.nativeBase64Encode = str => exports.bytesToBase64(new TextEncoder().encode(str));
+
+exports.nativeBase64Decode = str => new TextDecoder().decode(exports.base64ToBytes(str));
+
 /*
 Decode a base64 string
 */
 exports.base64Decode = function(string64,binary,urlsafe) {
-	var encoded = urlsafe ? string64.replace(/_/g,'/').replace(/-/g,'+') : string64;
+	const encoded = urlsafe ? string64.replace(/_/g,'/').replace(/-/g,'+') : string64;
 	if(binary) return exports.atob(encoded)
-	else return base64utf8.base64.decode.call(base64utf8,encoded);
+	else return exports.nativeBase64Decode(encoded);
 };
 
 /*
 Encode a string to base64
 */
 exports.base64Encode = function(string64,binary,urlsafe) {
-	var encoded;
+	let encoded;
 	if(binary) encoded = exports.btoa(string64);
-	else encoded = base64utf8.base64.encode.call(base64utf8,string64);
+	else encoded = exports.nativeBase64Encode(string64);
 	if(urlsafe) {
 		encoded = encoded.replace(/\+/g,'-').replace(/\//g,'_');
 	}
