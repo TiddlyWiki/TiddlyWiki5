@@ -51,17 +51,9 @@ exports.warning = function(text) {
 };
 
 /*
-Log a table of name: value pairs
+Deprecated: Use console.table instead
 */
-exports.logTable = function(data) {
-	if(console.table) {
-		console.table(data);
-	} else {
-		$tw.utils.each(data,function(value,name) {
-			console.log(name + ": " + value);
-		});
-	}
-}
+exports.logTable = data => console.table(data);
 
 /*
 Return the integer represented by the str (string).
