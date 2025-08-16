@@ -9,8 +9,6 @@ Various static utility functions.
 
 "use strict";
 
-// var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
-
 /*
 Display a message, in colour if we're on a terminal
 */
@@ -852,9 +850,23 @@ exports.bytesToBase64 = function(bytes) {
 	return exports.btoa(binString);
 };
 
-exports.nativeBase64Encode = str => exports.bytesToBase64(new TextEncoder().encode(str));
+exports.base64EncodeUtf8 = function(str) {
+	if ($tw.browser) {
+		return exports.bytesToBase64(new TextEncoder().encode(str));
+	} else {
+		const buff = Buffer.from(str, "utf-8");
+		return buff.toString("base64");
+	}
+};
 
-exports.nativeBase64Decode = str => new TextDecoder().decode(exports.base64ToBytes(str));
+exports.base64DecodeUtf8 = function(str) {
+	if ($tw.browser) {
+		return new TextDecoder().decode(exports.base64ToBytes(str));
+	} else {
+		const buff = Buffer.from(str, "base64");
+		return buff.toString("utf-8");
+	}
+};
 
 /*
 Decode a base64 string
@@ -862,7 +874,7 @@ Decode a base64 string
 exports.base64Decode = function(string64,binary,urlsafe) {
 	const encoded = urlsafe ? string64.replace(/_/g,'/').replace(/-/g,'+') : string64;
 	if(binary) return exports.atob(encoded)
-	else return exports.nativeBase64Decode(encoded);
+	else return exports.base64DecodeUtf8(encoded);
 };
 
 /*
@@ -871,7 +883,7 @@ Encode a string to base64
 exports.base64Encode = function(string64,binary,urlsafe) {
 	let encoded;
 	if(binary) encoded = exports.btoa(string64);
-	else encoded = exports.nativeBase64Encode(string64);
+	else encoded = exports.base64EncodeUtf8(string64);
 	if(urlsafe) {
 		encoded = encoded.replace(/\+/g,'-').replace(/\//g,'_');
 	}
