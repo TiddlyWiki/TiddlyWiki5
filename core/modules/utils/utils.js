@@ -51,17 +51,9 @@ exports.warning = function(text) {
 };
 
 /*
-Log a table of name: value pairs
+Deprecated: Use console.table instead
 */
-exports.logTable = function(data) {
-	if(console.table) {
-		console.table(data);
-	} else {
-		$tw.utils.each(data,function(value,name) {
-			console.log(name + ": " + value);
-		});
-	}
-}
+exports.logTable = data => console.table(data);
 
 /*
 Return the integer represented by the str (string).
@@ -82,37 +74,26 @@ exports.replaceString = function(text,search,replace) {
 };
 
 /*
-Repeats a string
+Deprecated: Use str.repeat instead
 */
-exports.repeat = function(str,count) {
-	var result = "";
-	for(var t=0;t<count;t++) {
-		result += str;
-	}
-	return result;
-};
+exports.repeat = (str,count) => str.repeat(count);
 
 /*
-Check if a string starts with another string
+Deprecated: Use str.startsWith instead
 */
-exports.startsWith = function(str,search) {
-	return str.substring(0, search.length) === search;
-};
+exports.startsWith = (str,search) => str.startsWith(search);
 
 /*
-Check if a string ends with another string
+Deprecated: Use str.endsWith instead
 */
-exports.endsWith = function(str,search) {
-	return str.substring(str.length - search.length) === search;
-};
+exports.endsWith = (str,search) => str.endsWith(search);
 
 /*
-Trim whitespace from the start and end of a string
-Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-javascript
+Deprecated: Use str.trim instead
 */
 exports.trim = function(str) {
 	if(typeof str === "string") {
-		return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+		return str.trim();
 	} else {
 		return str;
 	}
@@ -925,32 +906,9 @@ exports.tagToCssSelector = function(tagName) {
 	});
 };
 
-/*
-IE does not have sign function
-*/
-exports.sign = Math.sign || function(x) {
-	x = +x; // convert to a number
-	if(x === 0 || isNaN(x)) {
-		return x;
-	}
-	return x > 0 ? 1 : -1;
-};
+exports.sign = Math.sign;
 
-/*
-IE does not have an endsWith function
-*/
-exports.strEndsWith = function(str,ending,position) {
-	if(str.endsWith) {
-		return str.endsWith(ending,position);
-	} else {
-		if(typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
-			position = str.length;
-		}
-		position -= ending.length;
-		var lastIndex = str.indexOf(ending, position);
-		return lastIndex !== -1 && lastIndex === position;
-	}
-};
+exports.strEndsWith = (str,ending,position) => str.endsWith(ending,position);
 
 /*
 Return system information useful for debugging
