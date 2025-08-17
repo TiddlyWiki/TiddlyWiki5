@@ -8,7 +8,7 @@ GET /recipes/default/tiddlers/:title
 \*/
 "use strict";
 
-exports.method = "GET";
+exports.methods = ["GET"];
 
 exports.path = /^\/recipes\/default\/tiddlers\/(.+)$/;
 
