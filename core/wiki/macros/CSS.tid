@@ -4,7 +4,7 @@ tags: $:/tags/Macro
 <!-- Needs to stay that way for backwards compatibility. See GH issue: #8326 -->
 \define colour(name)
 \whitespace trim
-<$transclude tiddler={{$:/palette}} index="$name$">
+<$transclude tiddler={{{ [[$:/palettedark]mediaquery[(prefers-color-scheme: dark)]get[text]] :else[[$:/palette]get[text]] }}} index="$name$">
 	<$transclude tiddler="$:/palettes/Vanilla" index="$name$">
 		<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
 	</$transclude>
