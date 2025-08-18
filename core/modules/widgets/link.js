@@ -139,10 +139,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			dragTiddlerFn: function() {return self.to;},
 			widget: this
 		});
-	} else {
-                //set the resulting <a> tag draggable attribute to false
-                //to improve browser's compliance with user's intent
-                domNode.setAttribute("draggable","false");
+	} else if(this.draggable === "no") {
+		domNode.setAttribute("draggable","false");
 	}
 	// Assign data- attributes
 	this.assignAttributes(domNode,{
