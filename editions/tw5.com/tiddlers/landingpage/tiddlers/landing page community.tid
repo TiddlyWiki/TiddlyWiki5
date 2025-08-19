@@ -1,0 +1,25 @@
+created: 20210415075843432
+modified: 20210423114643419
+tags: 
+title: landing page community
+
+<section id="community" class="md:m-14 px-6 py-6 bg-green-500 dark:bg-gray-800 rounded-lg md:py-12 md:px-12 lg:py-16 lg:px-16 xl:flex xl:items-center">
+			<div class="xl:w-0 xl:flex-1">
+					<h2 class="text-2xl leading-8 font-extrabold tracking-tight text-white sm:text-3xl sm:leading-9">
+							TiddlyWiki has a fibrant community and a plugin library maintained by its users 
+					</h2>
+					<p class="mt-3 max-w-3xl text-lg leading-6 text-white">
+							Over the years users have made and shared many plugins, palletes themes and editions. Installing is as simple as drag and drop into your own wiki. Head over to the <strong>TiddlyWiki Community Links Aggregator</strong> to check them out.
+					</p>
+			</div>
+			<div class="mt-8 sm:w-full sm:max-w-md xl:mt-0 xl:ml-8">
+					<div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
+							<button href="https://links.tiddlywiki.com/" class="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-green-300 hover:bg-green-200 focus:outline-none focus:bg-purple-400 transition duration-150 ease-in-out">
+									Go to the Community Links Aggregator
+							</button>
+					</div>
+					<p class="mt-3 text-sm leading-5 text-white">
+							Visit the plugin's website to try out the plugin. Carefully read the installing instructions and back up before installing. These plugins may not always be up to date and may contain bugs or unwanted behaviour!
+					</p>
+			</div>
+</section>

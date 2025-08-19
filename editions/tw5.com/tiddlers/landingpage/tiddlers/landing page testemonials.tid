@@ -1,0 +1,40 @@
+created: 20210415131406020
+modified: 20210423114217652
+tags: 
+title: landing page testemonials
+
+<section id="testemonials" class="text-gray-600 body-font bg-white">
+  <div class="container px-5 py-24 mx-auto">
+		<h2 class="mb-1 text-xs font-medium tracking-widest text-black title-font text-green-500  text-center">Reviews</h2>
+    <h1 class="text-3xl font-medium title-font text-gray-900 mb-12 mt-0 text-center">Testimonials</h1>
+    <div class="flex flex-wrap -m-4">
+      <div class="p-4 md:w-1/2 w-full">
+        <div class="h-full bg-gray-100 p-8 rounded">
+          {{landing page qoute icon}}
+          <p class="leading-relaxed mb-6"><strong>The TiddlyWiki is the best software I've ever found for organising my ideas.</strong> It's well worth spending an hour or so playing with it to see how it can help you. This will be time well-spent and will change how you think and how you organise your ideas.</p>
+          <a href="https://joearms.github.io/#Index" class="inline-flex items-center ">
+            <span class="flex-grow flex flex-col pl-4 hover:text-blue-500">
+              <span class="title-font font-medium text-gray-900">Joe Armstrong</span>
+              <span class="text-gray-500 text-sm">Co-inventor of Erlang</span>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="p-4 md:w-1/2 w-full">
+        <div class="h-full bg-gray-100 p-8 rounded">
+          {{landing page qoute icon}}
+          <p class="leading-relaxed mb-6"><strong>TiddlyWiki gets a Gearhead rating of 6 out of 5 (it's that good).</strong>
+
+Finding code that works flawlessly after just two or three years is magical enough but after seven years?!</p>
+          <a href="https://www.networkworld.com/article/3028098/tiddlywiki-a-free-open-source-wiki-revisited.html" class="inline-flex items-center pt-4">
+            <span class="flex-grow flex flex-col pl-4 pt-8 hover:text-blue-500">
+              <span class="title-font font-medium text-gray-900">Mark Gibbs</span>
+              <span class="text-gray-500 text-sm">Network World</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+				<div class="flex justify-center items-center pb-8" style="font-size:0.7em;text-align:center;margin:3em auto;">{{Product Hunt Link}}</div>
+</section>

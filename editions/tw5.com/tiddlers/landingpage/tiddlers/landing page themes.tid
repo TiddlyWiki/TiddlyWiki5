@@ -1,0 +1,23 @@
+created: 20210415093249376
+modified: 20210423114034868
+tags: 
+title: landing page themes
+
+   <section id="theme" class="text-gray-700 body-font">
+            <div class="container flex flex-col px-5 py-16 mx-auto lg:items-center md:flex-row lg:px-28">
+                <div class="flex flex-col items-start text-left lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16">
+                    <h2 class="mb-1 text-xs font-medium tracking-widest text-black title-font text-green-500">Customize</h2>
+                    <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900 mt-0">
+                        Add a little color</h1>
+                    <p class="mb-8 text-base leading-relaxed text-left text-gray-700">Use themes and palletes to customize TiddlyWiki to your tastes. Use one from the prebundled palettes, install a community made or create your own.</p>
+                    <div class="flex flex-col justify-left lg:flex-row">
+
+                    </div>
+                </div>
+								                <div class="w-full mb-10 lg:w-5/6 lg:max-w-lg md:w-1/2">
+                    <img class="object-cover object-center rounded" alt="example of themes"
+                        src="https://i.imgur.com/klxNpR9.png">
+                </div>
+            </div>
+        </section>
+                  
