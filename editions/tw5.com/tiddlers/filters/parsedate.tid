@@ -1,0 +1,22 @@
+caption: parsedate
+created: 20220110203115000
+modified: 20220110203115000
+op-input: a [[selection of titles|Title Selection]]
+op-output: the date stored within the input string converted to the default [[date format|DateFormat]] <<.place B>>
+op-parameter: source format
+op-parameter-name: B
+op-purpose: parse the input string and convert it into the default [[date format|DateFormat]]
+tags: [[Filter Operators]] [[Date Operators]]
+title: parsedate Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.2">>
+
+The parameter <<.place B>> is one of the following supported input formats:
+
+|!Format |!Description |
+|^`JS` |The input string is interpreted as a date in [[ECMAScript date format|https://tc39.es/ecma262/#sec-date-time-string-format]]. This format is a subset of ISO 8601. It is used for example by the HTML5 date/time input fields. Expanded years are ''not supported''.|
+
+If the input string does not contain a valid date, the output is an empty list.
+
+<<.operator-examples "parsedate">>
