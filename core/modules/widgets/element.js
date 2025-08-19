@@ -79,6 +79,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 			var test = this.getVariable("transclusion");
 			var data = Object.create(null);
 			var allVars = Object.create(null);
+			var filter;
 			domNode.setAttribute("data-debug-xxxx", test);
 			var output = [];
 
@@ -90,7 +91,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 					allVars[v]  = this.getVariable(v,{defaultValue:""});
 				}
 			}
-			var filter = this.getVariable("tv-debug-filter",{defaultValue:"[limit[20]]"});
+			filter = this.getVariable("tv-debug-filter",{defaultValue:"[limit[20]]"});
 			if(filter) {
 				var filteredVars = this.wiki.compileFilter(filter).call(this.wiki,this.wiki.makeTiddlerIterator(allVars));
 				$tw.utils.each(filteredVars,function(name) {
