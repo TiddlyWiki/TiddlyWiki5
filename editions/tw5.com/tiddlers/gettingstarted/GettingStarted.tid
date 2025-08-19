@@ -8,6 +8,33 @@ The easiest way to use ~TiddlyWiki is to sign up for a free account with [[Tiddl
 
 Click here to download an empty copy of ~TiddlyWiki: {{$:/editions/tw5.com/snippets/download-empty-button}}
 
+<!-- TODO: The messages should be localized -->
+<%if [{$:/info/browser/language}match[zh-CN]] :or[{$:/info/browser/language}match[zh-Hans]] %>
+''你可以在此处下载带有简体中文翻译的空白版本：[[https://tiddlywiki.com/languages/zh-Hans/empty.html]]''
+<%elseif [{$:/info/browser/language}match[zh-TW]] :or[{$:/info/browser/language}match[zh-Hant]] %>
+''你可以在此處下載帶有繁體中文翻譯的空白版本：[[https://tiddlywiki.com/languages/zh-Hant/empty.html]]''
+<%elseif [{$:/info/browser/language}match[de-DE]] %>
+''You can download an empty copy of Tiddlywiki with German (Germany) translation here: [[https://tiddlywiki.com/languages/de-DE/empty.html]]''
+<%elseif [{$:/info/browser/language}match[de-AT]] %>
+''You can download an empty copy of Tiddlywiki with German (Austria) translation here: [[https://tiddlywiki.com/languages/de-AT/empty.html]]''
+<%elseif [{$:/info/browser/language}match[fr-FR]] %>
+''You can download an empty copy of Tiddlywiki with French translation here: [[https://tiddlywiki.com/languages/fr-FR/empty.html]]''
+<%elseif [{$:/info/browser/language}prefix[es]] %>
+''You can download an empty copy of Tiddlywiki with Spanish translation here: [[https://tiddlywiki.com/languages/es-ES/empty.html]]''
+<%elseif [{$:/info/browser/language}match[ja-JP]] %>
+''You can download an empty copy of Tiddlywiki with Japanese translation here: [[https://tiddlywiki.com/languages/ja-JP/empty.html]]''
+<%elseif [{$:/info/browser/language}match[ko-KR]] %>
+''You can download an empty copy of Tiddlywiki with Korean translation here: [[https://tiddlywiki.com/languages/ko-KR/empty.html]]''
+<%elseif [{$:/info/browser/language}match[en-US]] %>
+''After you downloaded tiddlywiki, you can install the English (USA) language plugin in Control Panel → Plugins → Get more plugins → Open plugin library → Languages.''
+<%elseif [{$:/info/browser/language}match[en-PH]] %>
+''After you downloaded tiddlywiki, you can install the English (Philippines) language plugin in Control Panel → Plugins → Get more plugins → Open plugin library → Languages.''
+<%elseif [{$:/info/browser/language}match[pl-PL]] %>
+''After you downloaded tiddlywiki, you can install the Polish language plugin in Control Panel → Plugins → Get more plugins → Open plugin library → Languages.''
+<%elseif [{$:/info/browser/language}match[el-GR]] %>
+''After you downloaded tiddlywiki, you can install the Greek language plugin in Control Panel → Plugins → Get more plugins → Languages.''
+<% endif %>
+
 The next step is to choose a method for saving changes. There's a wide variety of methods available, with different features and limitations. Click on the badge for a method to see more information about it. You can also click on one of the platform filters to restrict the listing to methods that work with that platform.
 
 <<.warning "Don't attempt to use the browser ''File''/''Save'' menu option to save changes (it doesn't work)">><br/><br/>
