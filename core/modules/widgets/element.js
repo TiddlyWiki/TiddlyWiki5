@@ -90,7 +90,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 					allVars[v]  = this.getVariable(v,{defaultValue:""});
 				}
 			}
-			var filter = this.getVariable("tv-debug-filter","");
+			var filter = this.getVariable("tv-debug-filter",{defaultValue:"[limit[20]]"});
 			if(filter) {
 				var filteredVars = this.wiki.compileFilter(filter).call(this.wiki,this.wiki.makeTiddlerIterator(allVars));
 				$tw.utils.each(filteredVars,function(name) {
@@ -107,7 +107,8 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 				}
 				if (str) output.push(title + ":\t" + str);
 			});
-			output = output.slice(0,20).join("\n");
+			// output = output.slice(0,20).join("\n");
+			output = output.join("\n");
 
 			domNode.setAttribute("title", "transclusion:\t" + test + "\n" + output);
 		}
