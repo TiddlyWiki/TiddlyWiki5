@@ -9,61 +9,76 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 		return [];
 	}
 
-	const resizeHandlers = new Map();
+	class WindowDimensionsTracker {
+		constructor(updateCallback) {
+			this.updateCallback = updateCallback;
+			this.resizeHandlers = new Map();
+			this.dimensionsInfo = [
+				["outer/width", win => win.outerWidth],
+				["outer/height", win => win.outerHeight],
+				["inner/width", win => win.innerWidth],
+				["inner/height", win => win.innerHeight],
+				["client/width", win => win.document.documentElement.clientWidth],
+				["client/height", win => win.document.documentElement.clientHeight]
+			];
+		}
 
-	const dimensionsInfo = [
-		["outer/width", win => win.outerWidth],
-		["outer/height", win => win.outerHeight],
-		["inner/width", win => win.innerWidth],
-		["inner/height", win => win.innerHeight],
-		["client/width", win => win.document.documentElement.clientWidth],
-		["client/height", win => win.document.documentElement.clientHeight]
-	];
+		buildTiddlers(win,windowId) {
+			const prefix = `$:/info/browser/window/${windowId}/`;
+			return this.dimensionsInfo.map(([suffix, getter]) => ({
+				title: prefix + suffix,
+				text: String(getter(win))
+			}));
+		}
 
-	const buildTiddlers = function(win,windowId) {
-		const prefix = `$:/info/browser/window/${windowId}/`;
-		return dimensionsInfo.map(info => ({title: prefix + info[0], text: String(info[1](win))}));
-	};
+		clearTiddlers(windowId) {
+			const prefix = `$:/info/browser/window/${windowId}/`,
+				deletions = this.dimensionsInfo.map(([suffix]) => prefix + suffix);
+			this.updateCallback([], deletions);
+		}
 
-	const clearTiddlers = function(windowId) {
-		const prefix = `$:/info/browser/window/${windowId}/`,
-			deletions = [];
-		dimensionsInfo.forEach(info => deletions.push(prefix + info[0]));
-		updateInfoTiddlersCallback([],deletions);
-	};
+		getUpdateHandler(win,windowId) {
+			let scheduled = false;
+			return () => {
+				if(!scheduled) {
+					scheduled = true;
+					requestAnimationFrame(() => {
+						this.updateCallback(this.buildTiddlers(win,windowId), []);
+						scheduled = false;
+					});
+				}
+			};
+		}
 
-	const getUpdateHandler = function(win,windowId) {
-		let scheduled = false;
-		return () => {
-			if(!scheduled) {
-				scheduled = true;
-				requestAnimationFrame(() => {
-					updateInfoTiddlersCallback(buildTiddlers(win,windowId),[]);
-					scheduled = false;
-				});
+		trackWindow(win,windowId) {
+			const handler = this.getUpdateHandler(win, windowId);
+			handler(); // initial update
+			win.addEventListener("resize",handler,{passive:true});
+			this.resizeHandlers.set(windowId,{win, handler});
+		}
+
+		untrackWindow(windowId) {
+			const entry = this.resizeHandlers.get(windowId);
+			if(entry) {
+				entry.win.removeEventListener("resize", entry.handler);
+				this.resizeHandlers.delete(windowId);
 			}
-		};
-	};
+			this.clearTiddlers(windowId);
+		}
+	}
 
-	const trackWindow = function(win,windowId) {
-		const handler = getUpdateHandler(win,windowId);
-		handler(); // initial update
-		win.addEventListener("resize",handler,{passive:true});
-		resizeHandlers.set(windowId,{win,handler});
-	};
+	const tracker = new WindowDimensionsTracker(updateInfoTiddlersCallback);
 
 	// Track main window
-	trackWindow(window,"main");
+	tracker.trackWindow(window,"system/main");
 
-	if($tw.multiWindowBus){
-		$tw.multiWindowBus.on("opened", ({window:win, windowID}) => trackWindow(win,windowID));
-		$tw.multiWindowBus.on("closed", ({windowID}) => {
-			const entry = resizeHandlers.get(windowID);
-			if(entry) {
-				entry.win.removeEventListener("resize",entry.handler);
-				resizeHandlers.delete(windowID);
-			}
-			clearTiddlers(windowID);
+	// Hook into event bus for user windows
+	if($tw.eventBus) {
+		$tw.eventBus.on("window:opened", ({window: win, windowID}) => {
+			tracker.trackWindow(win, "user/" + windowID);
+		});
+		$tw.eventBus.on("window:closed", ({windowID}) => {
+			tracker.untrackWindow("user/" + windowID);
 		});
 	}
 

@@ -20,27 +20,6 @@ $tw.windows = {};
 // Default template to use for new windows
 var DEFAULT_WINDOW_TEMPLATE = "$:/core/templates/single.tiddler.window";
 
-// Initialize multiWindowBus if it doesn't exist
-$tw.multiWindowBus = $tw.multiWindowBus || {
-	handlers: {},
-	on: function(eventName, handler) {
-		this.handlers[eventName] = this.handlers[eventName] || [];
-		this.handlers[eventName].push(handler);
-	},
-	emit: function(eventName, data) {
-		(this.handlers[eventName] || []).forEach(fn => fn(data));
-	},
-	off: function(eventName, handler) {
-		const list = this.handlers[eventName];
-		if(list) {
-			const index = list.indexOf(handler);
-			if(index !== -1) {
-				list.splice(index, 1);
-			}
-		}
-	}
-};
-
 exports.startup = function() {
 	// Handle open window message
 	$tw.rootWidget.addEventListener("tm-open-window",function(event) {
@@ -77,11 +56,11 @@ exports.startup = function() {
 		srcDocument.write("<!DOCTYPE html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
 		srcDocument.close();
 		srcDocument.title = windowTitle;
-		$tw.multiWindowBus.emit("opened",{windowID, window: srcWindow});
+		$tw.eventBus.emit("window:opened",{windowID, window: srcWindow});
 		srcWindow.addEventListener("beforeunload",function(event) {
 			delete $tw.windows[windowID];
 			$tw.wiki.removeEventListener("change",refreshHandler);
-			$tw.multiWindowBus.emit("closed",{windowID});
+			$tw.eventBus.emit("window:closed",{windowID});
 		},false);
 		// Set up the styles
 		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
