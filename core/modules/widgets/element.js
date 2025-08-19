@@ -77,8 +77,39 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	if(this.getVariable("tv-debug") === "yes") {
 		if(domNode) {
 			var test = this.getVariable("transclusion");
+			var data = Object.create(null);
+			var allVars = Object.create(null);
 			domNode.setAttribute("data-debug-xxxx", test);
-			domNode.setAttribute("title", test);
+			var output = [];
+
+			for(var v in this.variables) {
+				let variable = this.parentWidget && this.parentWidget.variables[v];
+				if(variable && variable.isFunctionDefinition) {
+					allVars[v] = variable.value;
+				} else {
+					allVars[v]  = this.getVariable(v,{defaultValue:""});
+				}
+			}
+			var filter = this.getVariable("tv-debug-filter","");
+			if(filter) {
+				var filteredVars = this.wiki.compileFilter(filter).call(this.wiki,this.wiki.makeTiddlerIterator(allVars));
+				$tw.utils.each(filteredVars,function(name) {
+					data[name] = allVars[name];
+				});
+			}
+
+			$tw.utils.each((filter) ? data : allVars, function(el, title) {
+				let str = "";
+				if (typeof el === "string" && el.includes("\n")) {
+					str = el.split("\n").slice(0,1).join("\n")
+				} else {
+					str = (el) ? el : "";
+				}
+				if (str) output.push(title + ":\t" + str);
+			});
+			output = output.slice(0,20).join("\n");
+
+			domNode.setAttribute("title", "transclusion:\t" + test + "\n" + output);
 		}
 	}
 	parent.insertBefore(domNode,nextSibling);

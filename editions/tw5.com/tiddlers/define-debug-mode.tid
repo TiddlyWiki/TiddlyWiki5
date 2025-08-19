@@ -1,7 +1,10 @@
+code-body: yes
 created: 20250804121707719
-modified: 20250804121722010
+modified: 20250819121906184
 tags: $:/tags/Global
 title: define-debug-mode
 type: text/vnd.tiddlywiki
 
 \define tv-debug() yes
+\define tv-debug-filterX() [prefix[list-links]]
+\define tv-debug-filter() [prefix[listItem]]
