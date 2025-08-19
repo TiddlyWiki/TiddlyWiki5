@@ -1,0 +1,19 @@
+created: 20250819105142686
+filter: [limit[10]]
+modified: 20250819143043414
+tags: 
+title: test-dynamic-filter
+type: text/vnd.tiddlywiki
+
+''Important:''
+
+* ATM a browser reload is needed, if this option is used
+* The following filter in the [[debug-mode]] tiddler needs to be enabled to use the input
+
+```
+\define tv-debug-filter() [subfilter{test-dynamic-filter!!filter}]
+```
+
+Define a new subfilter. Start with `[limit[20]]` to activate the subfilter:
+
+<$edit field="filter" tag=input class="tc-edit-texteditor " />

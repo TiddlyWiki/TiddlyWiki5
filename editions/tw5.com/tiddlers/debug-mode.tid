@@ -1,6 +1,6 @@
 code-body: yes
 created: 20250804121707719
-modified: 20250819140607124
+modified: 20250819142950479
 tags: $:/tags/Global
 title: debug-mode
 type: text/vnd.tiddlywiki
@@ -9,10 +9,8 @@ type: text/vnd.tiddlywiki
 \define tv-debug() yes
 
 <!-- Define a custom filter to reduce the number of variables shown. Defaults to: [limit[20]] -->
-
 \define tv-debug-filterXXX() [prefix[list-links]]
 \define tv-debug-filterXXX() [prefix[listItem]]
-
 \define tv-debug-filterXXX() [limit[100]]  -[prefix[colour]] -[prefix[tv-]]  -[prefix[tf.change-input]]
 
 <!-- [limit[XX]] is needed otherwise the subfilter does not work -->
