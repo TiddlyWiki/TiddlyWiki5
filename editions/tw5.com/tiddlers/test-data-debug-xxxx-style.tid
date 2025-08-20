@@ -1,0 +1,9 @@
+created: 20250820131507992
+modified: 20250820131616869
+tags: $:/tags/Stylesheet
+title: test-data-debug-xxxx-style
+type: text/vnd.tiddlywiki
+
+[data-debug-xxxx]:hover {
+  outline: 1px solid blue;
+}

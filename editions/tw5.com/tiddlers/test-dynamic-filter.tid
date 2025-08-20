@@ -1,6 +1,6 @@
 created: 20250819105142686
-filter: [limit[10]]
-modified: 20250819143043414
+filter: [limit[30]]
+modified: 20250820132147900
 tags: 
 title: test-dynamic-filter
 type: text/vnd.tiddlywiki
@@ -14,6 +14,6 @@ type: text/vnd.tiddlywiki
 \define tv-debug-filter() [subfilter{test-dynamic-filter!!filter}]
 ```
 
-Define a new subfilter. Start with `[limit[20]]` to activate the subfilter:
+Define a new subfilter. Start with `[limit[30]]` to activate the subfilter:
 
 <$edit field="filter" tag=input class="tc-edit-texteditor " />
