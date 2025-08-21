@@ -1,12 +1,12 @@
 code-body: yes
 created: 20250804121707719
-modified: 20250821135151007
+modified: 20250821195216607
 tags: $:/tags/Global
-title: debug-mode
+title: debug-popup-config
 type: text/vnd.tiddlywiki
 
 <!-- Globally enable or disable the debug option -->
-\define tv-debug() yes
+\define tv-debug() yesXXX
 
 <!-- Add function, macro, proc and widget definitions to the tooltip -->
 \define tv-debug-functions() yes

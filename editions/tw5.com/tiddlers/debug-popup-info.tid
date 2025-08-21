@@ -1,0 +1,82 @@
+created: 20250820133555580
+modified: 20250821203632337
+tags: 
+title: debug-popup-info
+type: text/vnd.tiddlywiki
+
+\define tv-debug() yes
+
+\function tf.storyList-list() [{$:/StoryList!!list}]
+
+\procedure showStoryList-list()
+<$transclude $tiddler="$:/StoryList" $field="list" $mode="block"/>
+\end
+
+! Introduction
+
+This tiddler contains: 
+
+```
+\define tv-debug() yes
+```
+
+* The elements in this tiddler will show a debug popup if the mouse cursor is ''not moved for one second''
+
+* If you hover a new element, that popup will disappear in 900ms. This makes it possible to copy / paste content from the popup <<.infoBox """''Inside the popup'' use ''double-click'' or ''tripple clicks'' to ''select'' words or the whole sentence """>>
+
+* The <kbd>ESC</kbd> key will hide the popup
+
+* Moving the mouse outside of the tiddler boundaries will also hide the popup here in this tiddler
+
+<<.tip """If you did set `tc-debug` globally, you need to move the mouse into a "neutral area" to hide the popup. There is one in between the right tiddler border and the right sidebar. ''Or'' you move the mouse to the left or right border of your screen. """>>
+
+<<.warning """If `tv-debug` is set ''globally'' navigating the wiki can get tricky. The <kbd>ESC</kbd> key is your "friend" here. """>>
+
+! Variables 
+
+`tv-debug` variables need to be set to `yes` that they are active.
+
+|Variable |Description |h
+|tv-debug |If set to `yes` the debug mode is active. Usually this variable is set for ''debugging only''. It does add a lot of DOM elements, especially custom event handlers to every DOM element. So it can show a popup dialogue "at hover"  |
+|tv-debug-functions |If set to `yes` function definitions ''and'' values are shown in the popup |
+|tv-debug-macros |If set to `yes` macro definitions are shown in the popup |
+|tv-debug-procedures |If set to `yes` procedure definitions are shown in the popup |
+|tv-debug-widgets |If set to `yes` widgets definitions are shown in the popup |
+|tv-debug-filter|Defaults to `[limit[100]]`. A limited number of N elements elements are shown in the popup |
+
+! Configuration Examples
+
+More configuration options can be seen at: [[debug-popup-config]]
+
+! Popup Search Filter Input
+
+The filter string searches all elements in the table. There are some "search prefixes" that can be use ''additionally'' to search text. 
+
+Possible prefixes are:
+
+|Prefix |Description |h
+|`:-` |Only show standard variables |
+|`:f` |Only show function definitions and evaluated values |
+|`:m` |Only show macro definitions  |
+|`:f` |Only show procedure definitions |
+|`:w` |Only show widget definitions |
+
+! Debug Data Attribute for Styling
+
+The debug overlay adds a `data-debug-xxxx={transclusion}` attribute to every DOM element, that is able to show a debug popup. 
+
+Currently this data-attribute is used to add a blue outline to "active" DOM elements using some CSS. See: [[debug-popup-styles]]
+
+<pre><$tiddler tiddler="debug-popup-styles"><$transclude /></$tiddler></pre>
+
+! Example
+
+Use the `showStoryList-list` procedure:
+
+<<wikitext-example """<<showStoryList-list>>""">>
+
+
+
+
+
+

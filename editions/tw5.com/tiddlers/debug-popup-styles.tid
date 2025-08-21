@@ -1,7 +1,8 @@
+code-body: yes
 created: 20250820131507992
-modified: 20250820131616869
+modified: 20250821191356778
 tags: $:/tags/Stylesheet
-title: test-data-debug-xxxx-style
+title: debug-popup-styles
 type: text/vnd.tiddlywiki
 
 [data-debug-xxxx]:hover {
