@@ -113,18 +113,22 @@ exports.startup = function() {
 				table.setAttribute("class", "debug-popup-table");
 
 				const thead = document.createElement("thead");
-				thead.innerHTML = "<tr><th>Variable</th><th>Value</th></tr>";
+				thead.innerHTML = "<tr><th></th><th>Variable</th><th>Value</th></tr>";
 				table.append(thead);
 
 				const tbody = document.createElement("tbody");
 				for (const key in data) {
 					if (Object.prototype.hasOwnProperty.call(data, key)) {
 						const row = document.createElement("tr");
+						const typeCell = document.createElement("td");
 						const keyCell = document.createElement("td");
 						const valueCell = document.createElement("td");
+
+						typeCell.textContent = data[key].type || "";
 						keyCell.textContent = key;
-						valueCell.textContent = data[key];
-						row.append(keyCell, valueCell);
+						valueCell.textContent = data[key].value;
+
+						row.append(typeCell, keyCell, valueCell);
 						tbody.append(row);
 					}
 				}
@@ -243,44 +247,65 @@ exports.startup = function() {
 
 				var test = widget.getVariable("transclusion");
 				var data = Object.create(null);
-				var allVars = Object.create(null);
-				var filter;
+            var allVars = Object.create(null);
+            var filter;
 
-				for (var v in widget.variables) {
-					let variable = widget.parentWidget && widget.parentWidget.variables[v];
-					if (variable && variable.isFunctionDefinition) {
-						if (widget.getVariable("tv-debug-functions") === "yes") allVars[v] = variable.value;
-					} else if (variable && variable.isProcedureDefinition) {
-						if (widget.getVariable("tv-debug-procedures") === "yes") allVars[v] = widget.getVariable(v, { defaultValue: "" });
-					} else if (variable && variable.isMacroDefinition) {
-						if (widget.getVariable("tv-debug-macros") === "yes") allVars[v] = widget.getVariable(v, { defaultValue: "" });
-					} else if (variable && variable.isWidgetDefinition) {
-						if (widget.getVariable("tv-debug-widgets") === "yes") allVars[v] = widget.getVariable(v, { defaultValue: "" });
-					} else {
-						allVars[v] = widget.getVariable(v, { defaultValue: "" });
-					}
-				}
+            for (var v in widget.variables) {
+                let variable = widget.parentWidget && widget.parentWidget.variables[v];
+                let type = '';
+                let value;
 
-				filter = widget.getVariable("tv-debug-filter", { defaultValue: "[limit[30]]" });
-				if (filter) {
-					var filteredVars = widget.wiki.compileFilter(filter).call(widget.wiki, widget.wiki.makeTiddlerIterator(allVars));
-					$tw.utils.each(filteredVars, function(name) {
-						data[name] = allVars[name];
-					});
-				}
+                if (variable && variable.isFunctionDefinition) {
+                    if (widget.getVariable("tv-debug-functions") === "yes") {
+                        type = 'f';
+                        value = variable.value;
+                    }
+                } else if (variable && variable.isProcedureDefinition) {
+                    if (widget.getVariable("tv-debug-procedures") === "yes") {
+                        type = 'p';
+                        value = widget.getVariable(v, { defaultValue: "" });
+                    }
+                } else if (variable && variable.isMacroDefinition) {
+                    if (widget.getVariable("tv-debug-macros") === "yes") {
+                        type = 'm';
+                        value = widget.getVariable(v, { defaultValue: "" });
+                    }
+                } else if (variable && variable.isWidgetDefinition) {
+                    if (widget.getVariable("tv-debug-widgets") === "yes") {
+                        type = 'w';
+                        value = widget.getVariable(v, { defaultValue: "" });
+                    }
+                } else {
+                    value = widget.getVariable(v, { defaultValue: "" });
+                }
 
-				var finalData = Object.create(null);
-				finalData["transclusion"] = test || "";
+                if (value !== undefined) {
+                    allVars[v] = { value: value, type: type };
+                }
+            }
 
-				$tw.utils.each((filter) ? data : allVars, function(el, title) {
-					let str = "";
-					if (typeof el === "string" && el.includes("\n")) {
-						str = el.split("\n")[0] + " ...";
-					} else {
-						str = (el) ? String(el) : "";
-					}
-					if (str) finalData[title] = str;
-				});
+            filter = widget.getVariable("tv-debug-filter", { defaultValue: "[limit[100]]" });
+            if (filter) {
+                var filteredVars = widget.wiki.compileFilter(filter).call(widget.wiki, widget.wiki.makeTiddlerIterator(Object.keys(allVars)));
+                $tw.utils.each(filteredVars, function(name) {
+                    data[name] = allVars[name];
+                });
+            }
+
+            var finalData = Object.create(null);
+            finalData["transclusion"] = { value: test || "", type: "" };
+
+            $tw.utils.each((filter) ? data : allVars, function(el, title) {
+                let str = "";
+                if (typeof el.value === "string" && el.value.includes("\n")) {
+                    str = el.value.split("\n")[0] + " ...";
+                } else {
+                    str = (el.value) ? String(el.value) : "";
+                }
+                if (str) {
+                    finalData[title] = { value: str, type: el.type };
+                }
+            });
 
 				globalDebugPopup.setData(finalData);
 				globalDebugPopup.showPopup(domNode);
