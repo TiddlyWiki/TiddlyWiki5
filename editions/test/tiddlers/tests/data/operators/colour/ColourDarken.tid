@@ -1,0 +1,17 @@
+title: Operators/Colour/ColourDarken
+description: Darken colour function
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+<$text text={{{ [subfilter{Filter}] }}}/>
++
+title: Filter
+
+[[#5778d8]colour-darken[0.5]]
++
+title: ExpectedResult
+
+#0f1d77
