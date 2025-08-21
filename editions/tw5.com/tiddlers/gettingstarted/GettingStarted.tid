@@ -23,6 +23,7 @@ Language:
     <option value="pl-PL">Polski (Polska)</option>
     <option value="zh-Hans">简体中文</option>
     <option value="zh-Hant">繁體中文</option>
+    <option value="unsupported" disabled>Unsupported</option>
 </$select>
 
 <$transclude $tiddler=`Language ${ [{$:/temp/language}] }$` />
