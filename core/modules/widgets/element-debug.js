@@ -31,17 +31,28 @@ exports.startup = function() {
 
 				const style = document.createElement("style");
 				style.textContent = `
+					:host {
+						/* Default values for themeable properties */
+						--popup-bg-color: #fefefe;
+						--popup-border: 1px solid #ccc;
+						--popup-min-width: 350px;
+						--popup-max-width: 600px;
+						--popup-max-height: 500px;
+						--popup-header-bg-color: #4CAF50;
+						--popup-header-color: white;
+						--function-content-color: blue;
+					}
 					.debug-popup {
 						display: none; /* Hidden by default, shown with JS */
 						position: fixed; /* Use fixed position for viewport-relative placement */
 						z-index: 1000;
-						background-color: #fefefe;
-						border: 1px solid #ccc;
+						background-color: var(--popup-bg-color);
+						border: var(--popup-border);
 						border-radius: 5px;
 						padding: 10px;
-						min-width: 350px;
-						max-width: 600px;
-						max-height: 500px;
+						min-width: var(--popup-min-width);
+						max-width: var(--popup-max-width);
+						max-height: var(--popup-max-height);
 						overflow-y: auto;
 						box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
 						font-family: "Source Code Pro", monospace;
@@ -64,8 +75,8 @@ exports.startup = function() {
 						padding-top: 4px;
 						padding-bottom: 4px;
 						text-align: left;
-						background-color: #4CAF50;
-						color: white;
+						background-color: var(--popup-header-bg-color);
+						color: var(--popup-header-color);
 					}
 					.debug-search-input {
 						width: 98%;
@@ -75,7 +86,7 @@ exports.startup = function() {
 						border-radius: 3px;
 					}
 					.debug-function-content {
-						color: blue;
+						color: var(--function-content-color);
 						display: block;
 						margin-top: 3px;
 					}
@@ -87,6 +98,7 @@ exports.startup = function() {
 				searchInput.setAttribute("type", "text");
 				searchInput.setAttribute("placeholder", "Filter variables...");
 				searchInput.setAttribute("class", "debug-search-input");
+				searchInput.setAttribute("part", "search-input"); // Expose this element for styling
 				this._searchInput = searchInput;
 				popup.append(searchInput);
 
@@ -212,7 +224,17 @@ exports.startup = function() {
 				table.setAttribute("class", "debug-popup-table");
 
 				const thead = document.createElement("thead");
-				thead.innerHTML = "<tr><th></th><th>Variable</th><th>Value</th></tr>";
+				const headerRow = document.createElement("tr");
+				thead.append(headerRow);
+
+				// Create headers safely using textContent to prevent XSS
+				const th1 = document.createElement("th"); // Empty for type column
+				const th2 = document.createElement("th");
+				th2.textContent = "Variable";
+				const th3 = document.createElement("th");
+				th3.textContent = "Value";
+
+				headerRow.append(th1, th2, th3);
 				table.append(thead);
 
 				const tbody = document.createElement("tbody");
