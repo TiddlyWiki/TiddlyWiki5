@@ -1,26 +1,26 @@
 code-body: yes
 created: 20250804121707719
-modified: 20250821115840222
+modified: 20250821124959849
 tags: $:/tags/Global
 title: debug-mode
 type: text/vnd.tiddlywiki
 
 <!-- Globally enable or disable the debug option -->
-\define tv-debug() yes
+\define tv-debug() yesXXX
 
 <!-- Add function, macro, proc and widget definitions to the tooltip -->
-\define tv-debug-functions() yesXXX
+\define tv-debug-functions() yes
 \define tv-debug-macros() yesXXX
 \define tv-debug-procedures() yesXXX
 \define tv-debug-widgets() yesXXX
 
 <!-- Define a custom filter to reduce the number of variables shown. Defaults to: [limit[20]] -->
 \define tv-debug-filterXXX() [prefix[list-links]]
-\define tv-debug-filterXXX() [prefix[listItem]]
+\define tv-debug-filter() [prefix[listItem]]
 \define tv-debug-filterXXX() [limit[100]]  -[prefix[colour]] -[prefix[tv-]]  -[prefix[tf.change-input]]
 
 <!-- [limit[xx]] is needed otherwise the subfilter does not work -->
 \define tv-debug-filterXXX() [subfilter{test-dynamic-filter!!filter}]
 
-\define tv-debug-filter() [limit[40]]
+\define tv-debug-filter() [limit[2000]]
 
