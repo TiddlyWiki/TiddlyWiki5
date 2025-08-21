@@ -136,7 +136,7 @@ exports.startup = function() {
 				this._popup.append(table);
 			}
 
-			showPopup(triggerElement, mouseX) {
+			showPopup(triggerElement, mouseX, mouseY) {
 				if (triggerElement && typeof triggerElement.getBoundingClientRect === "function") {
 					this._triggerElement = triggerElement;
 				}
@@ -148,20 +148,19 @@ exports.startup = function() {
 				const popup = this._popup;
 				popup.style.display = "block";
 
-				const rect = this._triggerElement.getBoundingClientRect();
 				const popupRect = popup.getBoundingClientRect();
 				const viewportWidth = window.innerWidth;
 				const viewportHeight = window.innerHeight;
 
-				let top = rect.bottom + 5;
-				let left = mouseX; // Use mouseX for the initial left position
-
-				if (top + popupRect.height > viewportHeight) {
-					top = rect.top - popupRect.height - 5;
-				}
+				let top = mouseY;
+				let left = mouseX;
 
 				if (top < 0) {
 					top = 5;
+				}
+
+				if (top + popupRect.height > viewportHeight) {
+					top = viewportHeight - popupRect.height - 5;
 				}
 
 				if (left < 0) {
@@ -308,7 +307,7 @@ exports.startup = function() {
             });
 
 				globalDebugPopup.setData(finalData);
-				globalDebugPopup.showPopup(domNode, event.clientX);
+				globalDebugPopup.showPopup(domNode, event.clientX, event.clientY);
 				globalDebugPopup._popupTimeout = null; // Clear timeout ID after execution
 			}, 1000); // Delay to show popup
 		}, true);
