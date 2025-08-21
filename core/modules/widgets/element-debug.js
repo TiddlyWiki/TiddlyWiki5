@@ -326,84 +326,99 @@ exports.startup = function() {
 	}
 
 	$tw.hooks.addHook("th-rendering-debug", function(domNode, widget) {
+
+		/**
+		 * Gathers and formats all relevant variable data from the current widget context.
+		 * @param {object} widget - The widget instance to inspect.
+		 * @returns {object} A formatted object containing variable data for the popup.
+		 */
+		function _gatherVariableData(widget) {
+			var test = widget.getVariable("transclusion");
+			var data = Object.create(null);
+			var allVars = Object.create(null);
+			var filter;
+
+			for (var v in widget.variables) {
+				let variable = widget.parentWidget && widget.parentWidget.variables[v];
+				let type = '';
+				let value;
+
+				if (variable && variable.isFunctionDefinition) {
+					if (widget.getVariable("tv-debug-functions") === "yes") {
+						type = 'f';
+						value = variable.value;
+					}
+				} else if (variable && variable.isProcedureDefinition) {
+					if (widget.getVariable("tv-debug-procedures") === "yes") {
+						type = 'p';
+						value = widget.getVariable(v, { defaultValue: "" });
+					}
+				} else if (variable && variable.isMacroDefinition) {
+					if (widget.getVariable("tv-debug-macros") === "yes") {
+						type = 'm';
+						value = widget.getVariable(v, { defaultValue: "" });
+					}
+				} else if (variable && variable.isWidgetDefinition) {
+					if (widget.getVariable("tv-debug-widgets") === "yes") {
+						type = 'w';
+						value = widget.getVariable(v, { defaultValue: "" });
+					}
+				} else {
+					value = widget.getVariable(v, { defaultValue: "" });
+				}
+
+				if (value !== undefined) {
+					allVars[v] = { value: value, type: type };
+				}
+			}
+
+			filter = widget.getVariable("tv-debug-filter", { defaultValue: "[limit[100]]" });
+			if (filter) {
+				var filteredVars = widget.wiki.compileFilter(filter).call(widget.wiki, widget.wiki.makeTiddlerIterator(Object.keys(allVars)));
+				$tw.utils.each(filteredVars, function(name) {
+					data[name] = allVars[name];
+				});
+			}
+
+			var finalData = Object.create(null);
+			finalData["transclusion"] = { value: test || "", type: "" };
+
+			$tw.utils.each((filter) ? data : allVars, function(el, title) {
+				let str = "";
+				if (typeof el.value === "string" && el.value.includes("\n")) {
+					str = el.value.split("\n")[0] + " ...";
+				} else {
+					str = (el.value) ? String(el.value) : "";
+				}
+				if (str) {
+					finalData[title] = { value: str, type: el.type };
+				}
+			});
+			return finalData;
+		}
+
+		/**
+		 * The callback function to execute after a delay when the mouse enters the element.
+		 * It gathers data and shows the popup.
+		 * @param {MouseEvent} event - The mouse event.
+		 */
+		const showPopupCallback = (event) => {
+			if (globalDebugPopup._popup.style.display !== "none") {
+				return;
+			}
+			const finalData = _gatherVariableData(widget);
+			globalDebugPopup.setData(finalData);
+			globalDebugPopup.showPopup(domNode, event.clientX, event.clientY);
+			globalDebugPopup._popupTimeout = null; // Clear timeout ID after execution
+		};
+
 		domNode.addEventListener("mouseenter", function(event) {
 			// Clear any existing timeout to prevent multiple popups or flickering
 			if (globalDebugPopup._popupTimeout) {
 				clearTimeout(globalDebugPopup._popupTimeout);
 			}
 			// Set a timeout to show the popup
-			globalDebugPopup._popupTimeout = setTimeout(() => {
-				// If the popup is already visible, do nothing (no toggle behavior on hover)
-				if (globalDebugPopup._popup.style.display !== "none") {
-					return;
-				}
-
-				var test = widget.getVariable("transclusion");
-				var data = Object.create(null);
-            var allVars = Object.create(null);
-            var filter;
-
-            for (var v in widget.variables) {
-                let variable = widget.parentWidget && widget.parentWidget.variables[v];
-                let type = '';
-                let value;
-
-                if (variable && variable.isFunctionDefinition) {
-                    if (widget.getVariable("tv-debug-functions") === "yes") {
-                        type = 'f';
-                        value = variable.value;
-                    }
-                } else if (variable && variable.isProcedureDefinition) {
-                    if (widget.getVariable("tv-debug-procedures") === "yes") {
-                        type = 'p';
-                        value = widget.getVariable(v, { defaultValue: "" });
-                    }
-                } else if (variable && variable.isMacroDefinition) {
-                    if (widget.getVariable("tv-debug-macros") === "yes") {
-                        type = 'm';
-                        value = widget.getVariable(v, { defaultValue: "" });
-                    }
-                } else if (variable && variable.isWidgetDefinition) {
-                    if (widget.getVariable("tv-debug-widgets") === "yes") {
-                        type = 'w';
-                        value = widget.getVariable(v, { defaultValue: "" });
-                    }
-                } else {
-                    value = widget.getVariable(v, { defaultValue: "" });
-                }
-
-                if (value !== undefined) {
-                    allVars[v] = { value: value, type: type };
-                }
-            }
-
-            filter = widget.getVariable("tv-debug-filter", { defaultValue: "[limit[100]]" });
-            if (filter) {
-                var filteredVars = widget.wiki.compileFilter(filter).call(widget.wiki, widget.wiki.makeTiddlerIterator(Object.keys(allVars)));
-                $tw.utils.each(filteredVars, function(name) {
-                    data[name] = allVars[name];
-                });
-            }
-
-            var finalData = Object.create(null);
-            finalData["transclusion"] = { value: test || "", type: "" };
-
-            $tw.utils.each((filter) ? data : allVars, function(el, title) {
-                let str = "";
-                if (typeof el.value === "string" && el.value.includes("\n")) {
-                    str = el.value.split("\n")[0] + " ...";
-                } else {
-                    str = (el.value) ? String(el.value) : "";
-                }
-                if (str) {
-                    finalData[title] = { value: str, type: el.type };
-                }
-            });
-
-				globalDebugPopup.setData(finalData);
-				globalDebugPopup.showPopup(domNode, event.clientX, event.clientY);
-				globalDebugPopup._popupTimeout = null; // Clear timeout ID after execution
-			}, 1000); // Delay to show popup
+			globalDebugPopup._popupTimeout = setTimeout(() => showPopupCallback(event), 1000); // Delay to show popup
 		}, true);
 
 		domNode.addEventListener("mouseleave", function(event) {
