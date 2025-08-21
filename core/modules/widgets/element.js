@@ -77,9 +77,8 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	// Add debug info to DOM node
 	if(this.getVariable("tv-debug") === "yes") {
 		if(domNode) {
-			// domNode = $tw.hooks.invokeHook("th-rendering-debug", domNode, this);
 			$tw.hooks.invokeHook("th-rendering-debug", domNode, this);
-			// Browser F12 debug mode is more specific than a DOM tooltip
+			// We need this data-debug attribute for styling and it adds some basic info for F12 inspect
 			domNode.setAttribute("data-debug-xxxx", this.getVariable("transclusion"));
 		}
 	}
