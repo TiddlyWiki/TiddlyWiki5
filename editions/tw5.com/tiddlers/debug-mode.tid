@@ -1,6 +1,6 @@
 code-body: yes
 created: 20250804121707719
-modified: 20250820132129779
+modified: 20250821115840222
 tags: $:/tags/Global
 title: debug-mode
 type: text/vnd.tiddlywiki
@@ -22,5 +22,5 @@ type: text/vnd.tiddlywiki
 <!-- [limit[xx]] is needed otherwise the subfilter does not work -->
 \define tv-debug-filterXXX() [subfilter{test-dynamic-filter!!filter}]
 
-\define tv-debug-filterXXX() [limit[30]]
+\define tv-debug-filter() [limit[40]]
 

@@ -76,63 +76,17 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.assignAttributes(domNode,{excludeEventAttributes: true});
 	// Add debug info to DOM node
 	if(this.getVariable("tv-debug") === "yes") {
-		if (domNode) {
-			this.addNodeDebugInfo(domNode);
+		if(domNode) {
+			// domNode = $tw.hooks.invokeHook("th-rendering-debug", domNode, this);
+			$tw.hooks.invokeHook("th-rendering-debug", domNode, this);
+			// Browser F12 debug mode is more specific than a DOM tooltip
+			domNode.setAttribute("data-debug-xxxx", this.getVariable("transclusion"));
 		}
 	}
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
 };
-
-ElementWidget.prototype.addNodeDebugInfo = function(domNode) {
-	var test = this.getVariable("transclusion");
-	var data = Object.create(null);
-	var allVars = Object.create(null);
-	var output = [];
-	var filter;
-
-	// Browser F12 debug mode is more specific than a DOM tooltip
-	domNode.setAttribute("data-debug-xxxx", test);
-
-	// By default only show variables in the DOM tooltip
-	for(var v in this.variables) {
-		let variable = this.parentWidget && this.parentWidget.variables[v];
-		if(variable && variable.isFunctionDefinition) {
-			if (this.getVariable("tv-debug-functions") === "yes") allVars[v] = variable.value;
-		} else if (variable && variable.isProcedureDefinition)  {
-			if (this.getVariable("tv-debug-procedures") === "yes") allVars[v] = this.getVariable(v,{defaultValue:""});
-		} else if (variable && variable.isMacroDefinition)  {
-			if (this.getVariable("tv-debug-macros") === "yes") allVars[v] = this.getVariable(v,{defaultValue:""});
-		} else if (variable && variable.isWidgetDefinition)  {
-			if (this.getVariable("tv-debug-widgets") === "yes") allVars[v] = this.getVariable(v,{defaultValue:""});
-		} else {
-			allVars[v]  = this.getVariable(v,{defaultValue:""});
-		}
-	}
-
-	// By default show a limited ammount of elements. Is user configurable
-	filter = this.getVariable("tv-debug-filter",{defaultValue:"[limit[30]]"});
-	if(filter) {
-		var filteredVars = this.wiki.compileFilter(filter).call(this.wiki,this.wiki.makeTiddlerIterator(allVars));
-		$tw.utils.each(filteredVars,function(name) {
-			data[name] = allVars[name];
-		});
-	}
-
-	$tw.utils.each((filter) ? data : allVars, function(el, title) {
-		let str = "";
-		if (typeof el === "string" && el.includes("\n")) {
-			str = el.split("\n").slice(0,1).join("\n")
-		} else {
-			str = (el) ? el : "";
-		}
-		if (str) output.push(title + ":\t" + str);
-	});
-	output = output.join("\n");
-	domNode.setAttribute("title", "transclusion:\t" + test + "\n" + output);
-}
-
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
