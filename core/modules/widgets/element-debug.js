@@ -14,7 +14,7 @@ A startup module to replace the debug tooltip with a custom element.
 // Export name and synchronous status
 exports.name = "custom-debug-hook";
 exports.platforms = ["browser"];
-exports.after = ["startup"];
+exports.before = ["startup"];
 exports.synchronous = true;
 
 exports.startup = function() {
@@ -28,11 +28,6 @@ exports.startup = function() {
 				const popup = document.createElement("div");
 				popup.setAttribute("class", "debug-popup");
 				this._popup = popup;
-
-				const closeButton = document.createElement("button");
-				closeButton.setAttribute("class", "debug-close-button");
-				closeButton.textContent = "x";
-				closeButton.setAttribute("title", "Close");
 
 				const style = document.createElement("style");
 				style.textContent = `
@@ -75,9 +70,6 @@ exports.startup = function() {
 				`;
 
 				this.shadowRoot.append(style, popup);
-				popup.append(closeButton);
-
-				closeButton.addEventListener("click", () => this.hide());
 
 				// Prevent scroll events from bleeding out
 				popup.addEventListener("wheel", function(event) {
@@ -111,12 +103,10 @@ exports.startup = function() {
 			}
 
 			setData(data) {
-				this._popup.innerHTML = ""; // Clear previous content
-
-				// Re-append the close button after clearing content
-				const closeButton = this.shadowRoot.querySelector(".debug-close-button");
-				if (closeButton) {
-					this._popup.append(closeButton);
+				// Find and remove the old table if it exists
+				const oldTable = this._popup.querySelector(".debug-popup-table");
+				if (oldTable) {
+					oldTable.remove();
 				}
 
 				const table = document.createElement("table");
@@ -216,7 +206,7 @@ exports.startup = function() {
 					this._hideTimeout = setTimeout(() => {
 						this.hide();
 						this._hideTimeout = null;
-					}, 900); // 1000ms delay before hiding
+					}, 900); // 900ms delay before hiding
 				}
 			}
 		}
@@ -244,7 +234,7 @@ exports.startup = function() {
 			if (globalDebugPopup._popupTimeout) {
 				clearTimeout(globalDebugPopup._popupTimeout);
 			}
-			// Set a timeout to show the popup after 1000ms
+			// Set a timeout to show the popup
 			globalDebugPopup._popupTimeout = setTimeout(() => {
 				// If the popup is already visible, do nothing (no toggle behavior on hover)
 				if (globalDebugPopup._popup.style.display !== "none") {
@@ -295,7 +285,7 @@ exports.startup = function() {
 				globalDebugPopup.setData(finalData);
 				globalDebugPopup.showPopup(domNode);
 				globalDebugPopup._popupTimeout = null; // Clear timeout ID after execution
-			}, 1000);
+			}, 1000); // Delay to show popup
 		}, true);
 
 		domNode.addEventListener("mouseleave", function(event) {
@@ -312,7 +302,7 @@ exports.startup = function() {
 				globalDebugPopup._hideTimeout = setTimeout(() => {
 					globalDebugPopup.hide();
 					globalDebugPopup._hideTimeout = null;
-				}, 900); // 900ms delay before hiding
+				}, 900); // Delay before hiding
 			}
 		}, true);
 	});
