@@ -74,6 +74,11 @@ exports.startup = function() {
 						border: 1px solid #ccc;
 						border-radius: 3px;
 					}
+					.debug-function-content {
+						color: blue;
+						display: block;
+						margin-top: 3px;
+					}
 				`;
 
 				this.shadowRoot.append(style, popup);
@@ -220,7 +225,24 @@ exports.startup = function() {
 
 						typeCell.textContent = data[key].type || "";
 						keyCell.textContent = key;
-						valueCell.textContent = data[key].value;
+
+						// Special handling for functions to show definition and content
+						if (data[key].type === 'f' && data[key].content) {
+							const valueContainer = document.createElement("div");
+
+							const definitionSpan = document.createElement("span");
+							definitionSpan.textContent = data[key].value;
+							
+							const contentSpan = document.createElement("span");
+							contentSpan.textContent = data[key].content;
+							contentSpan.classList.add("debug-function-content");
+
+							valueContainer.append(definitionSpan, contentSpan);
+							valueCell.append(valueContainer);
+						} else {
+							// Default behavior for all other types
+							valueCell.textContent = data[key].value;
+						}
 
 						row.append(typeCell, keyCell, valueCell);
 						tbody.append(row);
@@ -340,35 +362,34 @@ exports.startup = function() {
 
 			for (var v in widget.variables) {
 				let variable = widget.parentWidget && widget.parentWidget.variables[v];
-				let type = '';
-				let value;
+				let entry = null;
 
 				if (variable && variable.isFunctionDefinition) {
 					if (widget.getVariable("tv-debug-functions") === "yes") {
-						type = 'f';
-						value = variable.value;
+						entry = {
+							value: variable.value,
+							type: 'f',
+							content: widget.getVariable(v, { defaultValue: "" })
+						};
 					}
 				} else if (variable && variable.isProcedureDefinition) {
 					if (widget.getVariable("tv-debug-procedures") === "yes") {
-						type = 'p';
-						value = widget.getVariable(v, { defaultValue: "" });
+						entry = { value: widget.getVariable(v, { defaultValue: "" }), type: 'p' };
 					}
 				} else if (variable && variable.isMacroDefinition) {
 					if (widget.getVariable("tv-debug-macros") === "yes") {
-						type = 'm';
-						value = widget.getVariable(v, { defaultValue: "" });
+						entry = { value: widget.getVariable(v, { defaultValue: "" }), type: 'm' };
 					}
 				} else if (variable && variable.isWidgetDefinition) {
 					if (widget.getVariable("tv-debug-widgets") === "yes") {
-						type = 'w';
-						value = widget.getVariable(v, { defaultValue: "" });
+						entry = { value: widget.getVariable(v, { defaultValue: "" }), type: 'w' };
 					}
 				} else {
-					value = widget.getVariable(v, { defaultValue: "" });
+					entry = { value: widget.getVariable(v, { defaultValue: "" }), type: '' };
 				}
 
-				if (value !== undefined) {
-					allVars[v] = { value: value, type: type };
+				if (entry && entry.value !== undefined) {
+					allVars[v] = entry;
 				}
 			}
 
@@ -391,7 +412,7 @@ exports.startup = function() {
 					str = (el.value) ? String(el.value) : "";
 				}
 				if (str) {
-					finalData[title] = { value: str, type: el.type };
+					finalData[title] = { value: str, type: el.type, content: el.content }; // Preserve content
 				}
 			});
 			return finalData;
