@@ -54,6 +54,13 @@ exports.parse = function() {
 	if(tokens.length > 0) {
 		this.parser.amendRules(tokens[0],tokens.slice(1));
 	}
-	// No parse tree nodes to return
-	return [];
+	// No widget to render, return void node.
+	return [{
+		type: "void",
+		attributes: {
+			action: {type: "string", value: tokens[0]},
+			rules: {type: "string", value: tokens.slice(1).join(" ")}
+		},
+		children: []
+	}];
 };
