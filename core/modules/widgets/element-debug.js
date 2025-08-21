@@ -120,23 +120,73 @@ exports.startup = function() {
 			}
 
 			_filterTable() {
-				const filterText = this._searchInput.value.toLowerCase();
+				let filterText = this._searchInput.value.toLowerCase();
 				const table = this._popup.querySelector(".debug-popup-table");
 				if (!table) return;
 
 				const rows = table.querySelectorAll("tbody tr");
+
+				let typeFilter = null;
+				let searchFilter = '';
+
+				// Check for special type-filtering commands
+				if (filterText.startsWith(':')) {
+					const parts = filterText.split(' ');
+					const command = parts[0];
+					
+					switch (command) {
+						case ':m':
+							typeFilter = 'm';
+							break;
+						case ':p':
+							typeFilter = 'p';
+							break;
+						case ':f':
+							typeFilter = 'f';
+							break;
+						case ':w':
+							typeFilter = 'w';
+							break;
+						case ':-':
+							typeFilter = ''; // Empty string for no type
+							break;
+					}
+
+					if (typeFilter !== null) {
+						searchFilter = parts.slice(1).join(' ').trim();
+					} else {
+						// Not a valid command, treat the whole thing as a normal search
+						searchFilter = filterText;
+					}
+				} else {
+					searchFilter = filterText;
+				}
+
 				rows.forEach(row => {
-					// The cells are: 0: type, 1: variable, 2: value
+					const typeCell = row.cells[0];
 					const variableCell = row.cells[1];
 					const valueCell = row.cells[2];
-					if (variableCell && valueCell) {
-						const variableText = variableCell.textContent.toLowerCase();
-						const valueText = valueCell.textContent.toLowerCase();
-						if (variableText.includes(filterText) || valueText.includes(filterText)) {
-							row.style.display = "";
-						} else {
-							row.style.display = "none";
-						}
+
+					if (!typeCell || !variableCell || !valueCell) return;
+
+					const typeText = typeCell.textContent.toLowerCase();
+					const variableText = variableCell.textContent.toLowerCase();
+					const valueText = valueCell.textContent.toLowerCase();
+
+					let typeMatch = true;
+					if (typeFilter !== null) {
+						typeMatch = (typeText === typeFilter);
+					}
+
+					let searchMatch = true;
+					if (searchFilter) {
+						searchMatch = variableText.includes(searchFilter) || valueText.includes(searchFilter);
+					}
+
+					if (typeMatch && searchMatch) {
+						row.style.display = "";
+					} else {
+						row.style.display = "none";
 					}
 				});
 			}
