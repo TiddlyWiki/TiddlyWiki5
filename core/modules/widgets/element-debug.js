@@ -67,9 +67,26 @@ exports.startup = function() {
 						background-color: #4CAF50;
 						color: white;
 					}
+					.debug-search-input {
+						width: 98%;
+						padding: 4px;
+						margin-bottom: 8px;
+						border: 1px solid #ccc;
+						border-radius: 3px;
+					}
 				`;
 
 				this.shadowRoot.append(style, popup);
+
+				const searchInput = document.createElement("input");
+				searchInput.setAttribute("type", "text");
+				searchInput.setAttribute("placeholder", "Filter variables...");
+				searchInput.setAttribute("class", "debug-search-input");
+				this._searchInput = searchInput;
+				popup.append(searchInput);
+
+				// Add event listener for the search input
+				searchInput.addEventListener("input", () => this._filterTable());
 
 				// Prevent scroll events from bleeding out
 				popup.addEventListener("wheel", function(event) {
@@ -102,7 +119,34 @@ exports.startup = function() {
 				}
 			}
 
+			_filterTable() {
+				const filterText = this._searchInput.value.toLowerCase();
+				const table = this._popup.querySelector(".debug-popup-table");
+				if (!table) return;
+
+				const rows = table.querySelectorAll("tbody tr");
+				rows.forEach(row => {
+					// The cells are: 0: type, 1: variable, 2: value
+					const variableCell = row.cells[1];
+					const valueCell = row.cells[2];
+					if (variableCell && valueCell) {
+						const variableText = variableCell.textContent.toLowerCase();
+						const valueText = valueCell.textContent.toLowerCase();
+						if (variableText.includes(filterText) || valueText.includes(filterText)) {
+							row.style.display = "";
+						} else {
+							row.style.display = "none";
+						}
+					}
+				});
+			}
+
 			setData(data) {
+				// Clear the search input
+				if (this._searchInput) {
+					this._searchInput.value = "";
+				}
+
 				// Find and remove the old table if it exists
 				const oldTable = this._popup.querySelector(".debug-popup-table");
 				if (oldTable) {
