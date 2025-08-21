@@ -1,5 +1,5 @@
 created: 20250820133555580
-modified: 20250821203632337
+modified: 20250821215331286
 tags: 
 title: debug-popup-info
 type: text/vnd.tiddlywiki
@@ -37,7 +37,7 @@ This tiddler contains:
 `tv-debug` variables need to be set to `yes` that they are active.
 
 |Variable |Description |h
-|tv-debug |If set to `yes` the debug mode is active. Usually this variable is set for ''debugging only''. It does add a lot of DOM elements, especially custom event handlers to every DOM element. So it can show a popup dialogue "at hover"  |
+|tv-debug |If set to `yes` the debug mode is active. Usually this variable is set for ''debugging only''. It does add event listeners to every visible DOM element, so it can show a popup dialogue "at hover"  |
 |tv-debug-functions |If set to `yes` function definitions ''and'' values are shown in the popup |
 |tv-debug-macros |If set to `yes` macro definitions are shown in the popup |
 |tv-debug-procedures |If set to `yes` procedure definitions are shown in the popup |
