@@ -11,7 +11,7 @@ Action widget to delete fields of a tiddler.
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-class DeleteFieldWidget {
+class DeleteFieldWidget extends Widget {
 	constructor(parseTreeNode, options) {
 		super();
 		this.initialise(parseTreeNode, options);

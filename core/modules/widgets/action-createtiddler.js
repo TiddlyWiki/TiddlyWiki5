@@ -11,7 +11,7 @@ Action widget to create a new tiddler with a unique name and specified fields.
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-class CreateTiddlerWidget {
+class CreateTiddlerWidget extends Widget {
 	constructor(parseTreeNode, options) {
 		super();
 		this.initialise(parseTreeNode, options);
