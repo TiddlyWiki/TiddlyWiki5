@@ -1047,9 +1047,9 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	.tc-sidebar-scrollable {
 		position: fixed;
 		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
-		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+		inset-inline-start: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
 		bottom: 0;
-		right: 0;
+		inset-inline-end: 0;
 		overflow-y: auto;
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
@@ -1057,9 +1057,16 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		padding: 71px 0 28px 42px;
 	}
 
-	html[dir="rtl"] .tc-sidebar-scrollable {
-		left: auto;
-		right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+	@supports not (inset-inline-start: 0) {
+		.tc-sidebar-scrollable {
+			left: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+			right: 0;
+		}
+
+		html[dir="rtl"] .tc-sidebar-scrollable {
+			left: auto;
+			right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+		}
 	}
 
 	.tc-story-river {
