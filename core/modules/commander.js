@@ -129,8 +129,7 @@ Commander.prototype.executeNextCommand = function() {
 /*
 Given an array of parameter strings `params` in name:value format, and an array of mandatory parameter names in `mandatoryParameters`, returns a hashmap of values or a string if error
 */
-Commander.prototype.extractNamedParameters = function(params,mandatoryParameters) {
-	mandatoryParameters = mandatoryParameters || [];
+Commander.prototype.extractNamedParameters = function(params, mandatoryParameters = []) {
 	var errors = [],
 		paramsByName = Object.create(null);
 	// Extract the parameters
@@ -155,8 +154,7 @@ Commander.prototype.extractNamedParameters = function(params,mandatoryParameters
 	}
 };
 
-Commander.initCommands = function(moduleType) {
-	moduleType = moduleType || "command";
+Commander.initCommands = function(moduleType = "command") {
 	$tw.commands = {};
 	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
 		var c = $tw.commands[module.info.name] = {};

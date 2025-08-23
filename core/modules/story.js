@@ -15,8 +15,7 @@ wiki: reference to wiki object to use to resolve tiddler titles
 storyTitle: title of story list tiddler
 historyTitle: title of history list tiddler
 */
-function Story(options) {
-	options = options || {};
+function Story(options = {}) {
 	this.wiki = options.wiki || $tw.wiki;
 	this.storyTitle = options.storyTitle || "$:/StoryList";
 	this.historyTitle = options.historyTitle || "$:/HistoryList";
@@ -31,8 +30,7 @@ Story.prototype.getStoryList = function() {
 	return this.wiki.getTiddlerList(this.storyTitle) || [];
 };
 
-Story.prototype.addToStory = function(navigateTo,navigateFromTitle,options) {
-	options = options || {};
+Story.prototype.addToStory = function(navigateTo, navigateFromTitle, options = {}) {
 	var storyList = this.getStoryList();
 	// See if the tiddler is already there
 	var slot = storyList.indexOf(navigateTo);

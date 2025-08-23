@@ -14,8 +14,7 @@ Manage tm-http-request events. Options include:
 wiki: Reference to the wiki to be used for state tiddler tracking
 stateTrackerTitle: Title of tiddler to be used for state tiddler tracking
 */
-function HttpClient(options) {
-	options = options || {};
+function HttpClient(options = {}) {
 	this.nextId = 1;
 	this.wiki = options.wiki || $tw.wiki;
 	this.stateTrackerTitle = options.stateTrackerTitle || "$:/state/http-requests";

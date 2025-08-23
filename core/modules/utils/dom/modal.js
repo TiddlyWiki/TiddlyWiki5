@@ -26,8 +26,7 @@ Options include:
 	event: widget event
 	variables: from event.paramObject
 */
-Modal.prototype.display = function(title,options) {
-	options = options || {};
+Modal.prototype.display = function(title, options = {}) {
 	this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
 				options.variables.rootwindow === "yes") ? document :
 				(options.event && options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);

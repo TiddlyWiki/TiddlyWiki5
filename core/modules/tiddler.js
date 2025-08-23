@@ -52,8 +52,7 @@ exports.getFieldList = function(field) {
 Get all the fields as a hashmap of strings. Options:
 	exclude: an array of field names to exclude
 */
-exports.getFieldStrings = function(options) {
-	options = options || {};
+exports.getFieldStrings = function(options = {}) {
 	var exclude = options.exclude || [];
 	var fields = {};
 	for(var field in this.fields) {
@@ -70,8 +69,7 @@ exports.getFieldStrings = function(options) {
 Get all the fields as a name:value block. Options:
 	exclude: an array of field names to exclude
 */
-exports.getFieldStringBlock = function(options) {
-	options = options || {};
+exports.getFieldStringBlock = function(options = {}) {
 	var exclude = options.exclude || [],
 		fields = Object.keys(this.fields).sort(),
 		result = [];

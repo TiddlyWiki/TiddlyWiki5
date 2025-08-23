@@ -15,8 +15,7 @@ function Animator() {
 	$tw.modules.applyMethods("animation",this.animations);
 }
 
-Animator.prototype.perform = function(type,domNode,options) {
-	options = options || {};
+Animator.prototype.perform = function(type, domNode, options = {}) {
 	// Find an animation that can handle this type
 	var chosenAnimation;
 	$tw.utils.each(this.animations,function(animation,name) {

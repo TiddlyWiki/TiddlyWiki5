@@ -11,9 +11,7 @@ Text editor engine based on a simple input or textarea tag
 
 var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
 
-function SimpleEngine(options) {
-	// Save our options
-	options = options || {};
+function SimpleEngine(options = {}) {
 	this.widget = options.widget;
 	this.value = options.value;
 	this.parentNode = options.parentNode;

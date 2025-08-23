@@ -13,8 +13,7 @@ Module that creates a $tw.utils.Popup object prototype that manages popups in th
 Creates a Popup object with these options:
 	rootElement: the DOM element to which the popup zapper should be attached
 */
-var Popup = function(options) {
-	options = options || {};
+var Popup = function(options = {}) {
 	this.rootElement = options.rootElement || document.documentElement;
 	this.popups = []; // Array of {title:,wiki:,domNode:} objects
 };
@@ -182,7 +181,7 @@ Popup.prototype.cancel = function(level) {
 				popup.wiki.deleteTiddler(popup.title);
 			} else {
 				popup.wiki.deleteTiddler($tw.utils.parseTextReference(popup.title).title);
-        		}
+	    		}
 		}
 	}
 	if(this.popups.length === 0) {

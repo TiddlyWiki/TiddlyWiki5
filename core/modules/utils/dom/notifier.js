@@ -21,8 +21,7 @@ Display a notification
 	options: see below
 Options include:
 */
-Notifier.prototype.display = function(title,options) {
-	options = options || {};
+Notifier.prototype.display = function(title, options = {}) {
 	// Create the wrapper divs
 	var self = this,
 		notification = document.createElement("div"),

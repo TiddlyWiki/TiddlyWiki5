@@ -119,8 +119,7 @@ SaverHandler.prototype.titleSavedNotification = "$:/language/Notifications/Save/
 /*
 Select the appropriate saver modules and set them up
 */
-SaverHandler.prototype.initSavers = function(moduleType) {
-	moduleType = moduleType || "saver";
+SaverHandler.prototype.initSavers = function(moduleType = "saver") {
 	// Instantiate the available savers
 	this.savers = [];
 	var self = this;
@@ -150,8 +149,7 @@ Save the wiki contents. Options are:
 	downloadType: the content type for the saved file
 	wiki: optional wiki, overriding the default wiki specified in the constructor
 */
-SaverHandler.prototype.saveWiki = function(options) {
-	options = options || {};
+SaverHandler.prototype.saveWiki = function(options = {}) {
 	var self = this,
 		wiki = options.wiki || this.wiki,
 		method = options.method || "save";

@@ -11,9 +11,7 @@ Text editor engine based on a simple input or textarea within an iframe. This is
 
 var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
 
-function FramedEngine(options) {
-	// Save our options
-	options = options || {};
+function FramedEngine(options = {}) {
 	this.widget = options.widget;
 	this.value = options.value;
 	this.parentNode = options.parentNode;

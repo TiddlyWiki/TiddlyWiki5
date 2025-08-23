@@ -325,8 +325,7 @@ event: the keyboard event object
 options:
 	onlyPriority: true if only priority global shortcuts should be invoked
 */
-KeyboardManager.prototype.handleKeydownEvent = function(event, options) {
-	options = options || {};
+KeyboardManager.prototype.handleKeydownEvent = function(event, options = {}) {
 	var key, action;
 	for(var i=0; i<this.shortcutTiddlers.length; i++) {
 		if(options.onlyPriority && this.shortcutPriorityList[i] !== true) {

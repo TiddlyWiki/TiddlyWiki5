@@ -135,8 +135,7 @@ function parseFilterOperation(operators,filterString,p) {
 /*
 Parse a filter string
 */
-exports.parseFilter = function(filterString) {
-	filterString = filterString || "";
+exports.parseFilter = function(filterString = "") {
 	var results = [], // Array of arrays of operator nodes {operator:,operand:}
 		p = 0, // Current position in the filter string
 		match;

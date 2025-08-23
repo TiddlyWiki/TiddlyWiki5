@@ -66,8 +66,7 @@ exports.setTextReference = function(textRef,value,currTiddlerTitle) {
 	this.setText(title,tr.field,tr.index,value);
 };
 
-exports.setText = function(title,field,index,value,options) {
-	options = options || {};
+exports.setText = function(title, field, index, value, options = {}) {
 	var creationFields = options.suppressTimestamp ? {} : this.getCreationFields(),
 		modificationFields = options.suppressTimestamp ? {} : this.getModificationFields();
 	// Check if it is a reference to a tiddler field
@@ -192,8 +191,7 @@ exports.getChangeCount = function(title) {
 Generate an unused title from the specified base
 options.prefix must be a string
 */
-exports.generateNewTitle = function(baseTitle,options) {
-	options = options || {};
+exports.generateNewTitle = function(baseTitle, options = {}) {
 	var title = baseTitle,
 		template = options.template || "",
 		// test if .startCount is a positive integer. If not set to 0
@@ -309,8 +307,7 @@ sortField: field to sort by
 excludeTag: tag to exclude
 includeSystem: whether to include system tiddlers (defaults to false)
 */
-exports.getTiddlers = function(options) {
-	options = options || Object.create(null);
+exports.getTiddlers = function(options = Object.create(null)) {
 	var self = this,
 		sortField = options.sortField || "title",
 		tiddlers = [], t, titles = [];
@@ -723,8 +720,7 @@ exports.getTagMap = function() {
 /*
 Lookup a given tiddler and return a list of all the tiddlers that include it in the specified list field
 */
-exports.findListingsOfTiddler = function(targetTitle,fieldName) {
-	fieldName = fieldName || "list";
+exports.findListingsOfTiddler = function(targetTitle, fieldName = "list") {
 	var wiki = this;
 	var listings = this.getGlobalCache("listings-" + fieldName,function() {
 		var listings = Object.create(null);
@@ -951,8 +947,7 @@ fields: optional hashmap of additional tiddler fields to be set
 options: optional hashmap of options including:
 	suppressTimestamp: if true, don't set the creation/modification timestamps
 */
-exports.setTiddlerData = function(title,data,fields,options) {
-	options = options || {};
+exports.setTiddlerData = function(title, data, fields, options = {}) {
 	var existingTiddler = this.getTiddler(title),
 		creationFields = options.suppressTimestamp ? {} : this.getCreationFields(),
 		modificationFields = options.suppressTimestamp ? {} : this.getModificationFields(),
@@ -1056,9 +1051,7 @@ Options include:
 	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
 	_canonical_uri: optional string of the canonical URI of this content
 */
-exports.parseText = function(type,text,options) {
-	text = text || "";
-	options = options || {};
+exports.parseText = function(type, text = "", options = {}) {
 	// Select a parser
 	var Parser = $tw.Wiki.parsers[type];
 	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
@@ -1158,9 +1151,7 @@ Parse a block of text of a specified MIME type
 Options include:
 	substitutions: an optional array of substitutions
 */
-exports.getSubstitutedText = function(text,widget,options) {
-	options = options || {};
-	text = text || "";
+exports.getSubstitutedText = function(text = "", widget, options = {}) {
 	var self = this,
 		substitutions = options.substitutions || [],
 		output;
@@ -1187,8 +1178,7 @@ document: optional document to use
 variables: hashmap of variables to set
 parentWidget: optional parent widget for the root node
 */
-exports.makeWidget = function(parser,options) {
-	options = options || {};
+exports.makeWidget = function(parser, options = {}) {
 	var widgetNode = {
 			type: "widget",
 			children: []
@@ -1229,8 +1219,7 @@ options.children: optional array of children for the transclude widget
 options.importVariables: optional importvariables filter string for macros to be included
 options.importPageMacros: optional boolean; if true, equivalent to passing "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]" to options.importVariables
 */
-exports.makeTranscludeWidget = function(title,options) {
-	options = options || {};
+exports.makeTranscludeWidget = function(title, options = {}) {
 	var parseTreeDiv = {tree: [{
 			type: "element",
 			tag: "div",
@@ -1293,8 +1282,7 @@ Options include:
 variables: hashmap of variables to set
 parentWidget: optional parent widget for the root node
 */
-exports.renderText = function(outputType,textType,text,options) {
-	options = options || {};
+exports.renderText = function(outputType, textType, text, options = {}) {
 	var parser = this.parseText(textType,text,options),
 		widgetNode = this.makeWidget(parser,options);
 	var container = $tw.fakeDocument.createElement("div");
@@ -1311,8 +1299,7 @@ Options include:
 variables: hashmap of variables to set
 parentWidget: optional parent widget for the root node
 */
-exports.renderTiddler = function(outputType,title,options) {
-	options = options || {};
+exports.renderTiddler = function(outputType, title, options = {}) {
 	var parser = this.parseTiddler(title,options),
 		widgetNode = this.makeWidget(parser,options);
 	var container = $tw.fakeDocument.createElement("div");
@@ -1342,8 +1329,7 @@ Options available:
 			regardless of adjacency or ordering
 		some: treats search string as a list of tokens, and matches if at least ONE token is found
 */
-exports.search = function(text,options) {
-	options = options || {};
+exports.search = function(text, options = {}) {
 	var self = this,
 		t,
 		regExpStr="",
@@ -1395,7 +1381,7 @@ exports.search = function(text,options) {
 			}
 		}
 	}
-// Accumulate the array of fields to be searched or excluded from the search
+	// Accumulate the array of fields to be searched or excluded from the search
 	var fields = [];
 	if(options.field) {
 		if($tw.utils.isArray(options.field)) {
@@ -1517,8 +1503,7 @@ exports.getTiddlerText = function(title,defaultText) {
 /*
 Check whether the text of a tiddler matches a given value. By default, the comparison is case insensitive, and any spaces at either end of the tiddler text is trimmed
 */
-exports.checkTiddlerText = function(title,targetText,options) {
-	options = options || {};
+exports.checkTiddlerText = function(title, targetText, options = {}) {
 	var text = this.getTiddlerText(title,"");
 	if(!options.noTrim) {
 		text = text.trim();
