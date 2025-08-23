@@ -326,8 +326,8 @@ options:
 	onlyPriority: true if only priority global shortcuts should be invoked
 */
 KeyboardManager.prototype.handleKeydownEvent = function(event, options = {}) {
-    var key, action;
-    for(var i=0; i<this.shortcutTiddlers.length; i++) {
+	var key, action;
+	for(var i=0; i<this.shortcutTiddlers.length; i++) {
 		if(options.onlyPriority && this.shortcutPriorityList[i] !== true) {
 			continue;
 		}
@@ -337,13 +337,13 @@ KeyboardManager.prototype.handleKeydownEvent = function(event, options = {}) {
 			action = this.shortcutActionList[i];
 		}
 	}
-    if(key !== undefined) {
+	if(key !== undefined) {
 		event.preventDefault();
 		event.stopPropagation();
 		$tw.rootWidget.invokeActionString(action,$tw.rootWidget,event);
 		return true;
 	}
-    return false;
+	return false;
 };
 
 KeyboardManager.prototype.detectNewShortcuts = function(changedTiddlers) {

@@ -14,7 +14,7 @@ Create an instance of the language manager. Options include:
 wiki: wiki from which to retrieve translation tiddlers
 */
 function Language(options = "") {
-    this.wiki = options.wiki || $tw.wiki;
+	this.wiki = options.wiki || $tw.wiki;
 }
 
 /*
@@ -23,8 +23,8 @@ Options include:
 variables: optional hashmap of variables to supply to the language wikification
 */
 Language.prototype.getString = function(title, options = {}) {
-    title = "$:/language/" + title;
-    return this.wiki.renderTiddler("text/plain",title,{variables: options.variables});
+	title = "$:/language/" + title;
+	return this.wiki.renderTiddler("text/plain",title,{variables: options.variables});
 };
 
 /*

@@ -120,16 +120,16 @@ SaverHandler.prototype.titleSavedNotification = "$:/language/Notifications/Save/
 Select the appropriate saver modules and set them up
 */
 SaverHandler.prototype.initSavers = function(moduleType = "saver") {
-    // Instantiate the available savers
-    this.savers = [];
-    var self = this;
-    $tw.modules.forEachModuleOfType(moduleType,function(title,module) {
+	// Instantiate the available savers
+	this.savers = [];
+	var self = this;
+	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
 		if(module.canSave(self)) {
 			self.savers.push(module.create(self.wiki));
 		}
 	});
-    // Sort the savers into priority order
-    this.savers.sort(function(a,b) {
+	// Sort the savers into priority order
+	this.savers.sort(function(a,b) {
 		if(a.info.priority < b.info.priority) {
 			return -1;
 		} else {
@@ -150,14 +150,14 @@ Save the wiki contents. Options are:
 	wiki: optional wiki, overriding the default wiki specified in the constructor
 */
 SaverHandler.prototype.saveWiki = function(options = {}) {
-    var self = this,
+	var self = this,
 		wiki = options.wiki || this.wiki,
 		method = options.method || "save";
-    // Ignore autosave if disabled
-    if(method === "autosave" && ($tw.config.disableAutoSave || wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes")) {
+	// Ignore autosave if disabled
+	if(method === "autosave" && ($tw.config.disableAutoSave || wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes")) {
 		return false;
 	}
-    var	variables = options.variables || {},
+	var	variables = options.variables || {},
 		template = (options.template || 
 		           wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain",
@@ -177,15 +177,15 @@ SaverHandler.prototype.saveWiki = function(options = {}) {
 				}
 			}
 		};
-    // Call the highest priority saver that supports this method
-    for(var t=this.savers.length-1; t>=0; t--) {
+	// Call the highest priority saver that supports this method
+	for(var t=this.savers.length-1; t>=0; t--) {
 		var saver = this.savers[t];
 		if(saver.info.capabilities.indexOf(method) !== -1 && saver.save(text,method,callback,{variables: {filename: variables.filename, type: variables.type}})) {
 			this.logger.log("Saving wiki with method",method,"through saver",saver.info.name);
 			return true;
 		}
 	}
-    return false;
+	return false;
 };
 
 /*

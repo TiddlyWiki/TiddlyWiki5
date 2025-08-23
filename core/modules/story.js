@@ -16,9 +16,9 @@ storyTitle: title of story list tiddler
 historyTitle: title of history list tiddler
 */
 function Story(options = {}) {
-    this.wiki = options.wiki || $tw.wiki;
-    this.storyTitle = options.storyTitle || "$:/StoryList";
-    this.historyTitle = options.historyTitle || "$:/HistoryList";
+	this.wiki = options.wiki || $tw.wiki;
+	this.storyTitle = options.storyTitle || "$:/StoryList";
+	this.historyTitle = options.historyTitle || "$:/HistoryList";
 };
 
 Story.prototype.navigateTiddler = function(navigateTo,navigateFromTitle,navigateFromClientRect) {
@@ -31,16 +31,16 @@ Story.prototype.getStoryList = function() {
 };
 
 Story.prototype.addToStory = function(navigateTo, navigateFromTitle, options = {}) {
-    var storyList = this.getStoryList();
-    // See if the tiddler is already there
-    var slot = storyList.indexOf(navigateTo);
-    // Quit if it already exists in the story river
-    if(slot >= 0) {
+	var storyList = this.getStoryList();
+	// See if the tiddler is already there
+	var slot = storyList.indexOf(navigateTo);
+	// Quit if it already exists in the story river
+	if(slot >= 0) {
 		return;
 	}
-    // First we try to find the position of the story element we navigated from
-    var fromIndex = storyList.indexOf(navigateFromTitle);
-    if(fromIndex >= 0) {
+	// First we try to find the position of the story element we navigated from
+	var fromIndex = storyList.indexOf(navigateFromTitle);
+	if(fromIndex >= 0) {
 		// The tiddler is added from inside the river
 		// Determine where to insert the tiddler; Fallback is "below"
 		switch(options.openLinkFromInsideRiver) {
@@ -68,10 +68,10 @@ Story.prototype.addToStory = function(navigateTo, navigateFromTitle, options = {
 			slot = 0;
 		}
 	}
-    // Add the tiddler
-    storyList.splice(slot,0,navigateTo);
-    // Save the story
-    this.saveStoryList(storyList);
+	// Add the tiddler
+	storyList.splice(slot,0,navigateTo);
+	// Save the story
+	this.saveStoryList(storyList);
 };
 
 Story.prototype.saveStoryList = function(storyList) {
