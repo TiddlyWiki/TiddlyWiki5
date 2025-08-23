@@ -49,35 +49,25 @@ exports.removeChildren = function(node) {
 	}
 };
 
-exports.hasClass = function(el,className) {
-	return el && el.hasAttribute && el.hasAttribute("class") && el.getAttribute("class").split(" ").indexOf(className) !== -1;
-};
+// Deprecated: Use element.classList.contains instead
+exports.hasClass = (el,className) => el.classList && el.classList.contains(className);
 
+// Deprecated: Use element.classList.add instead
 exports.addClass = function(el,className) {
-	var c = (el.getAttribute("class") || "").split(" ");
-	if(c.indexOf(className) === -1) {
-		c.push(className);
-		el.setAttribute("class",c.join(" "));
-	}
+	el.classList.add(className);
 };
 
+// Deprecated: Use element.classList.remove instead
 exports.removeClass = function(el,className) {
-	var c = (el.getAttribute("class") || "").split(" "),
-		p = c.indexOf(className);
-	if(p !== -1) {
-		c.splice(p,1);
-		el.setAttribute("class",c.join(" "));
-	}
+	el.classList.remove(className);
 };
 
+// Deprecated: Use element.classList.toggle instead
 exports.toggleClass = function(el,className,status) {
 	if(status === undefined) {
-		status = !exports.hasClass(el,className);
-	}
-	if(status) {
-		exports.addClass(el,className);
+		el.classList.toggle(className);
 	} else {
-		exports.removeClass(el,className);
+		el.classList.toggle(className, status);
 	}
 };
 
