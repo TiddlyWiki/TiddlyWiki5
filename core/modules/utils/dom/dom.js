@@ -119,7 +119,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 	// Get the scroll container and register the current scroll position
 	var container = $tw.utils.getScrollContainer(domNode),
 		scrollTop = container.scrollTop;
-    // Measure the specified minimum height
+	// Measure the specified minimum height
 	domNode.style.height = minHeight;
 	var measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
 	// Set its height to auto so that it snaps to the correct height
@@ -265,9 +265,7 @@ exports.copyStyles = function(srcDomNode,dstDomNode) {
 /*
 Copy plain text to the clipboard on browsers that support it
 */
-exports.copyToClipboard = function(text,options) {
-	options = options || {};
-	text = text || "";
+exports.copyToClipboard = function(text = "", options = {}) {
 	var textArea = document.createElement("textarea");
 	textArea.style.position = "fixed";
 	textArea.style.top = 0;
@@ -368,8 +366,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 /*
 Make sure the CSS selector is not invalid
 */
-exports.querySelectorSafe = function(selector,baseElement) {
-	baseElement = baseElement || document;
+exports.querySelectorSafe = function(selector, baseElement = document) {
 	try {
 		return baseElement.querySelector(selector);
 	} catch(e) {
@@ -377,8 +374,7 @@ exports.querySelectorSafe = function(selector,baseElement) {
 	}
 };
 
-exports.querySelectorAllSafe = function(selector,baseElement) {
-	baseElement = baseElement || document;
+exports.querySelectorAllSafe = function(selector, baseElement = document) {
 	try {
 		return baseElement.querySelectorAll(selector);
 	} catch(e) {

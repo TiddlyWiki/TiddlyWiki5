@@ -12,9 +12,7 @@ A quick and dirty way to pack up plugins within the browser.
 /*
 Repack a plugin, and then delete any non-shadow payload tiddlers
 */
-exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
-	additionalTiddlers = additionalTiddlers || [];
-	excludeTiddlers = excludeTiddlers || [];
+exports.repackPlugin = function(title, additionalTiddlers = [], excludeTiddlers = []) {
 	// Get the plugin tiddler
 	var pluginTiddler = $tw.wiki.getTiddler(title);
 	if(!pluginTiddler) {
