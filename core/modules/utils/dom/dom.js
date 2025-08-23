@@ -54,20 +54,20 @@ exports.hasClass = (el,className) => el.classList && el.classList.contains(class
 
 // Deprecated: Use element.classList.add instead
 exports.addClass = function(el,className) {
-	el.classList.add(className);
+	el.classList && el.classList.add(className);
 };
 
 // Deprecated: Use element.classList.remove instead
 exports.removeClass = function(el,className) {
-	el.classList.remove(className);
+	el.classList && el.classList.remove(className);
 };
 
 // Deprecated: Use element.classList.toggle instead
 exports.toggleClass = function(el,className,status) {
 	if(status === undefined) {
-		el.classList.toggle(className);
+		el.classList && el.classList.toggle(className);
 	} else {
-		el.classList.toggle(className, status);
+		el.classList && el.classList.toggle(className, status);
 	}
 };
 
