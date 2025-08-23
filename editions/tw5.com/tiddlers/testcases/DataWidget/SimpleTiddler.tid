@@ -14,7 +14,7 @@ title: Output
 +
 title: ExpectedResult
 
-<p>[
+<p dir="auto">[
     {
         "title": "Epsilon",
         "text": "Theta"

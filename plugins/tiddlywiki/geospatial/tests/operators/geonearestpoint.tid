@@ -25,4 +25,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>Oxford,Winchester,</p>
+<p dir="auto">Oxford,Winchester,</p>
