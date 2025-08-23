@@ -45,11 +45,9 @@ $tw.utils.hop = function(object,property) {
 };
 
 /*
-Determine if a value is an array
+Deprecated: Use Array.isArray instead
 */
-$tw.utils.isArray = function(value) {
-	return Object.prototype.toString.call(value) == "[object Array]";
-};
+$tw.utils.isArray = value => Array.isArray(value);
 
 /*
 Check if an array is equal by value and by reference.
@@ -332,31 +330,16 @@ $tw.utils.htmlDecode = function(s) {
 };
 
 /*
-Get the browser location.hash. We don't use location.hash because of the way that Firefox auto-urldecodes it (see http://stackoverflow.com/questions/1703552/encoding-of-window-location-hash)
+Deprecated. Use window.location.hash instead.
 */
-$tw.utils.getLocationHash = function() {
-	var href = window.location.href;
-	var idx = href.indexOf('#');
-	if(idx === -1) {
-		return "#";
-	} else if(href.substr(idx + 1,1) === "#" ||  href.substr(idx + 1,3) === "%23") {
-		// Special case: ignore location hash if it itself starts with a #
-		return "#";
-	} else {
-		return href.substring(idx);
-	}
-};
+$tw.utils.getLocationHash = () => window.location.hash;
 
 /*
-Pad a string to a given length with "0"s. Length defaults to 2
+Depercated: Pad a string to a given length with "0"s. Length defaults to 2
 */
-$tw.utils.pad = function(value,length) {
-	length = length || 2;
-	var s = value.toString();
-	if(s.length < length) {
-		s = "000000000000000000000000000".substr(0,length - s.length) + s;
-	}
-	return s;
+$tw.utils.pad = function(value,length = 2) {
+	const s = value.toString();
+	return s.padStart(length, "0");
 };
 
 // Convert a date into UTC YYYYMMDDHHMMSSmmm format
