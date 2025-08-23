@@ -129,36 +129,34 @@ Commander.prototype.executeNextCommand = function() {
 /*
 Given an array of parameter strings `params` in name:value format, and an array of mandatory parameter names in `mandatoryParameters`, returns a hashmap of values or a string if error
 */
-Commander.prototype.extractNamedParameters = function(params,mandatoryParameters) {
-	mandatoryParameters = mandatoryParameters || [];
-	var errors = [],
+Commander.prototype.extractNamedParameters = function(params, mandatoryParameters = []) {
+    var errors = [],
 		paramsByName = Object.create(null);
-	// Extract the parameters
-	$tw.utils.each(params,function(param) {
+    // Extract the parameters
+    $tw.utils.each(params,function(param) {
 		var index = param.indexOf("=");
 		if(index < 1) {
 			errors.push("malformed named parameter: '" + param + "'");
 		}
 		paramsByName[param.slice(0,index)] = $tw.utils.trim(param.slice(index+1));
 	});
-	// Check the mandatory parameters are present
-	$tw.utils.each(mandatoryParameters,function(mandatoryParameter) {
+    // Check the mandatory parameters are present
+    $tw.utils.each(mandatoryParameters,function(mandatoryParameter) {
 		if(!$tw.utils.hop(paramsByName,mandatoryParameter)) {
 			errors.push("missing mandatory parameter: '" + mandatoryParameter + "'");
 		}
 	});
-	// Return any errors
-	if(errors.length > 0) {
+    // Return any errors
+    if(errors.length > 0) {
 		return errors.join(" and\n");
 	} else {
 		return paramsByName;
 	}
 };
 
-Commander.initCommands = function(moduleType) {
-	moduleType = moduleType || "command";
-	$tw.commands = {};
-	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
+Commander.initCommands = function(moduleType = "command") {
+    $tw.commands = {};
+    $tw.modules.forEachModuleOfType(moduleType,function(title,module) {
 		var c = $tw.commands[module.info.name] = {};
 		// Add the methods defined by the module
 		for(var f in module) {

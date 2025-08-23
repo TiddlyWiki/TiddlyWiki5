@@ -13,9 +13,8 @@ The $tw.Language() manages translateable strings
 Create an instance of the language manager. Options include:
 wiki: wiki from which to retrieve translation tiddlers
 */
-function Language(options) {
-	options = options || "";
-	this.wiki = options.wiki || $tw.wiki;
+function Language(options = "") {
+    this.wiki = options.wiki || $tw.wiki;
 }
 
 /*
@@ -23,10 +22,9 @@ Return a wikified translateable string. The title is automatically prefixed with
 Options include:
 variables: optional hashmap of variables to supply to the language wikification
 */
-Language.prototype.getString = function(title,options) {
-	options = options || {};
-	title = "$:/language/" + title;
-	return this.wiki.renderTiddler("text/plain",title,{variables: options.variables});
+Language.prototype.getString = function(title, options = {}) {
+    title = "$:/language/" + title;
+    return this.wiki.renderTiddler("text/plain",title,{variables: options.variables});
 };
 
 /*

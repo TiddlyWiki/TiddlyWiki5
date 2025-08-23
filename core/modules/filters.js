@@ -135,14 +135,13 @@ function parseFilterOperation(operators,filterString,p) {
 /*
 Parse a filter string
 */
-exports.parseFilter = function(filterString) {
-	filterString = filterString || "";
-	var results = [], // Array of arrays of operator nodes {operator:,operand:}
+exports.parseFilter = function(filterString = "") {
+    var results = [], // Array of arrays of operator nodes {operator:,operand:}
 		p = 0, // Current position in the filter string
 		match;
-	var whitespaceRegExp = /(\s+)/mg,
+    var whitespaceRegExp = /(\s+)/mg,
 		operandRegExp = /((?:\+|\-|~|=|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
-	while(p < filterString.length) {
+    while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
 		match = whitespaceRegExp.exec(filterString);
@@ -192,7 +191,7 @@ exports.parseFilter = function(filterString) {
 			results.push(operation);
 		}
 	}
-	return results;
+    return results;
 };
 
 exports.getFilterOperators = function() {
