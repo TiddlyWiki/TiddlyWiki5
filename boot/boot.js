@@ -350,8 +350,7 @@ $tw.utils.getLocationHash = function() {
 /*
 Pad a string to a given length with "0"s. Length defaults to 2
 */
-$tw.utils.pad = function(value,length) {
-	length = length || 2;
+$tw.utils.pad = function(value, length = 2) {
 	var s = value.toString();
 	if(s.length < length) {
 		s = "000000000000000000000000000".substr(0,length - s.length) + s;
@@ -438,8 +437,7 @@ $tw.utils.parseStringArray = function(value, allowDuplicate) {
 };
 
 // Parse a block of name:value fields. The `fields` object is used as the basis for the return value
-$tw.utils.parseFields = function(text,fields) {
-	fields = fields || Object.create(null);
+$tw.utils.parseFields = function(text, fields = Object.create(null)) {
 	text.split(/\r?\n/mg).forEach(function(line) {
 		if(line.charAt(0) !== "#") {
 			var p = line.indexOf(":");
@@ -563,8 +561,7 @@ options: {flags: flags,deserializerType: deserializerType}
 	flags:"image" for image types
 	deserializerType: defaults to type if not specified
 */
-$tw.utils.registerFileType = function(type,encoding,extension,options) {
-	options = options || {};
+$tw.utils.registerFileType = function(type, encoding, extension, options = {}) {
 	if($tw.utils.isArray(extension)) {
 		$tw.utils.each(extension,function(extension) {
 			$tw.config.fileExtensionInfo[extension] = {type: type};
@@ -799,10 +796,9 @@ the password, and to encrypt/decrypt a block of text
 $tw.utils.Crypto = function() {
 	var sjcl = $tw.node ? (global.sjcl || require("./sjcl.js")) : window.sjcl,
 		currentPassword = null,
-		callSjcl = function(method,inputText,password) {
-			password = password || currentPassword;
-			var outputText;
-			try {
+		callSjcl = function(method, inputText, password = currentPassword) {
+	        var outputText;
+	        try {
 				if(password) {
 					outputText = sjcl[method](password,inputText);
 				}
@@ -810,8 +806,8 @@ $tw.utils.Crypto = function() {
 				console.log("Crypto error:" + ex);
 				outputText = null;
 			}
-			return outputText;
-		};
+	        return outputText;
+	    };
 	$tw.sjcl = sjcl;
 	this.setPassword = function(newPassword) {
 		currentPassword = newPassword;
@@ -975,8 +971,7 @@ $tw.modules.forEachModuleOfType = function(moduleType,callback) {
 /*
 Get all the modules of a particular type in a hashmap by their `name` field
 */
-$tw.modules.getModulesByTypeAsHashmap = function(moduleType,nameField) {
-	nameField = nameField || "name";
+$tw.modules.getModulesByTypeAsHashmap = function(moduleType, nameField = "name") {
 	var results = Object.create(null);
 	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
 		results[module[nameField]] = module;
@@ -1159,8 +1154,7 @@ Wiki constructor. State is stored in private members that only a small number of
 options include:
 enableIndexers - Array of indexer names to enable, or null to use all available indexers
 */
-$tw.Wiki = function(options) {
-	options = options || {};
+$tw.Wiki = function(options = {}) {
 	var self = this,
 		tiddlers = Object.create(null), // Hashmap of tiddlers
 		tiddlerTitles = null, // Array of tiddler titles
@@ -1597,9 +1591,7 @@ $tw.Wiki.prototype.processSafeMode = function() {
 /*
 Extracts tiddlers from a typed block of text, specifying default field values
 */
-$tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields,options) {
-	srcFields = srcFields || Object.create(null);
-	options = options || {};
+$tw.Wiki.prototype.deserializeTiddlers = function(type, text, srcFields = Object.create(null), options = {}) {
 	var deserializer = $tw.Wiki.tiddlerDeserializerModules[options.deserializer],
 		fields = Object.create(null);
 	if(!deserializer) {
@@ -2044,18 +2036,16 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 		}
 	};
 	// Helper to recursively search subdirectories
-	var getAllFiles = function(dirPath, recurse, arrayOfFiles) {
-		recurse = recurse || false;
-		arrayOfFiles = arrayOfFiles || [];
-		var files = fs.readdirSync(dirPath);
-		files.forEach(function(file) {
+	var getAllFiles = function(dirPath, recurse = false, arrayOfFiles = []) {
+	    var files = fs.readdirSync(dirPath);
+	    files.forEach(function(file) {
 			if(recurse && fs.statSync(dirPath + path.sep + file).isDirectory()) {
 				arrayOfFiles = getAllFiles(dirPath + path.sep + file, recurse, arrayOfFiles);
 			} else if(fs.statSync(dirPath + path.sep + file).isFile()){
 				arrayOfFiles.push(path.join(dirPath, path.sep, file));
 			}
 		});
-		return arrayOfFiles;
+	    return arrayOfFiles;
 	}
 	// Process the listed tiddlers
 	$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
@@ -2228,8 +2218,7 @@ options:
 	parentPaths: array of parent paths that we mustn't recurse into
 	readOnly: true if the tiddler file paths should not be retained
 */
-$tw.loadWikiTiddlers = function(wikiPath,options) {
-	options = options || {};
+$tw.loadWikiTiddlers = function(wikiPath, options = {}) {
 	var parentPaths = options.parentPaths || [],
 		wikiInfoPath = path.resolve(wikiPath,$tw.config.wikiInfo),
 		wikiInfo,
@@ -2510,17 +2499,16 @@ $tw.boot.initStartup = function(options) {
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	// Call unload handlers in the browser
 	if($tw.browser) {
-		window.onbeforeunload = function(event) {
-			event = event || {};
-			var result;
-			$tw.utils.each($tw.unloadTasks,function(task) {
+		window.onbeforeunload = function(event = {}) {
+	        var result;
+	        $tw.utils.each($tw.unloadTasks,function(task) {
 				var r = task(event);
 				if(r) {
 					result = r;
 				}
 			});
-			return result;
-		}
+	        return result;
+	    }
 	}
 };
 $tw.boot.loadStartup = function(options){
@@ -2571,8 +2559,7 @@ $tw.boot.execStartup = function(options){
 /*
 Startup TiddlyWiki
 */
-$tw.boot.startup = function(options) {
-	options = options || {};
+$tw.boot.startup = function(options = {}) {
 	// Get the URL hash and check for safe mode
 	$tw.boot.initStartup(options);
 	$tw.boot.loadStartup(options);
