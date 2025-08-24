@@ -24,7 +24,6 @@ exports.startup = function() {
 			constructor() {
 				super();
 				this.attachShadow({ mode: "open" });
-
 				const style = document.createElement("style");
 				style.textContent = `
 					:host {
@@ -50,38 +49,37 @@ exports.startup = function() {
 						padding-left: 1em;
 						margin-left: 1em;
 					}
-				summary {
-					cursor: pointer;
-					outline: none;
-				}
-				summary:hover {
-					color: blue;
-				}
-				.key {
-					color: #666;
-				}
-				.string {
-					color: #a31515;
-				}
-				.number {
-					color: #098658;
-				}
-				.boolean {
-					color: #0000ff;
-				}
-				.null {
-					color: #800080;
-				}
-				.value {
-					margin-left: 1em;
-				}
+					summary {
+						cursor: pointer;
+						outline: none;
+					}
+					summary:hover {
+						color: blue;
+					}
+					.key {
+						color: #666;
+					}
+					.string {
+						color: #a31515;
+					}
+					.number {
+						color: #098658;
+					}
+					.boolean {
+						color: #0000ff;
+					}
+					.null {
+						color: #800080;
+					}
+					.value {
+						margin-left: 1em;
+					}
 				`
-
-					this.shadowRoot.append(style);
-					this._container = document.createElement("div");
-					this._container.setAttribute("class", "tree");
-					this.shadowRoot.append(this._container);
-					this._boundUpdateMaxHeight = this._updateMaxHeight.bind(this);
+				this.shadowRoot.append(style);
+				this._container = document.createElement("div");
+				this._container.setAttribute("class", "tree");
+				this.shadowRoot.append(this._container);
+				this._boundUpdateMaxHeight = this._updateMaxHeight.bind(this);
 			}
 
 			connectedCallback() {
