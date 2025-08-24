@@ -41,6 +41,11 @@ exports.startup = function() {
 					.tree {
 						padding-left: 1em;
 					}
+					.tree > details:first-child {
+						border-left: none;
+						margin-left: 0;
+						padding-left: 0;
+					}
 					details {
 						border-left: 1px solid #ccc;
 						padding-left: 1em;
@@ -152,7 +157,7 @@ exports.startup = function() {
 
 			_createArrayElement(arr, key) {
 				const details = document.createElement("details");
-				details.open = true;
+				details.open = (key !== "orderedAttributes");
 				const summary = document.createElement("summary");
 
 				if (key !== null) {
