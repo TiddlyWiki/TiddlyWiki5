@@ -32,7 +32,6 @@ exports.startup = function() {
 						font-family: "Source Code Pro", monospace;
 						font-size: 12px;
 						line-height: 1.3;
-						height: 800px;
 						overflow-y: auto;
 						border: 1px solid #ddd;
 						padding: 10px;
@@ -82,10 +81,24 @@ exports.startup = function() {
 					this._container = document.createElement("div");
 					this._container.setAttribute("class", "tree");
 					this.shadowRoot.append(this._container);
+					this._boundUpdateMaxHeight = this._updateMaxHeight.bind(this);
 			}
 
 			connectedCallback() {
 				this.render();
+				this._updateMaxHeight();
+				window.addEventListener("resize", this._boundUpdateMaxHeight);
+			}
+
+			disconnectedCallback() {
+				window.removeEventListener("resize", this._boundUpdateMaxHeight);
+			}
+
+			_updateMaxHeight() {
+				const rect = this.getBoundingClientRect();
+				const availableHeight = window.innerHeight - rect.top;
+				const margin = 40; // A bit of space at the bottom
+				this.style.maxHeight = (availableHeight - margin) + "px";
 			}
 
 			render() {
