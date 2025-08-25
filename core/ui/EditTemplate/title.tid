@@ -34,7 +34,10 @@ tags: $:/tags/EditTemplate
 
 <$vars fromTitle={{!!draft.of}} toTitle={{!!draft.title}}>
 
-<$checkbox tiddler="$:/config/RelinkOnRename" field="text" checked="yes" unchecked="no" default="no">&#32;{{$:/language/EditTemplate/Title/Relink/Prompt}}</$checkbox>
+<$transclude $variable="control-panel-checkbox"
+	config="$:/config/RelinkOnRename"
+	label={{$:/language/EditTemplate/Title/Relink/Prompt}}
+/>
 
 <$list filter="[title<fromTitle>backlinks[]limit[1]]" variable="listItem">
 
