@@ -115,6 +115,9 @@ exports.startup = function() {
 					return;
 				}
 
+				const blockListAttr = this.getAttribute("block-list");
+				this._blockList = blockListAttr ? blockListAttr.split(" ") : [];
+
 				this._container.innerHTML = ""; // Clear previous content
 				const tree = this._createTreeElement(data, null);
 				this._container.append(tree);
@@ -157,6 +160,9 @@ exports.startup = function() {
 				list.className = "value";
 				for (const newKey in obj) {
 					if (Object.prototype.hasOwnProperty.call(obj, newKey)) {
+						if (this._blockList.includes(newKey)) {
+							continue;
+						}
 						const item = document.createElement("div");
 						item.append(this._createTreeElement(obj[newKey], newKey));
 						list.append(item);
