@@ -148,7 +148,7 @@ exports.startup = function() {
 				// const stateDataTiddlerTitle = "_"; // Now passed as parameter
 				const stateKey = currentPath; // The key within the data tiddler
 				const stateData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
-				details.open = (stateData[stateKey] !== "hide");
+				details.open = (stateData[stateKey] === undefined) ? true : (stateData[stateKey] !== "hide");
 				details.setAttribute("data-state-key", stateKey); // For event listener
 				details.addEventListener("toggle", (event) => {
 					const keyToUpdate = event.target.getAttribute("data-state-key");
@@ -201,7 +201,7 @@ exports.startup = function() {
 				// const stateDataTiddlerTitle = "_"; // Now passed as parameter
 				const stateKey = currentPath; // The key within the data tiddler
 				const stateData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
-				details.open = (stateData[stateKey] !== "hide");
+				details.open = (stateData[stateKey] === undefined) ? (key !== "orderedAttributes") : (stateData[stateKey] !== "hide");
 				details.setAttribute("data-state-key", stateKey); // For event listener
 				details.addEventListener("toggle", (event) => {
 					const keyToUpdate = event.target.getAttribute("data-state-key");
