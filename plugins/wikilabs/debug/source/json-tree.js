@@ -56,6 +56,12 @@ exports.startup = function() {
 					summary:hover {
 						color: blue;
 					}
+					summary::marker {
+						color: #666;
+					}
+					details:not([open]) > summary::marker {
+						color: red;
+					}
 					.key {
 						color: #666;
 					}
