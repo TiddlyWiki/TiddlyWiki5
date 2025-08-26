@@ -119,15 +119,17 @@ exports.startup = function() {
 				this._blockList = blockListAttr ? blockListAttr.split(" ") : [];
 
 				this._container.innerHTML = ""; // Clear previous content
-				const tree = this._createTreeElement(data, null);
+				const stateAttr = this.getAttribute("state");
+				const stateDataTiddlerTitle = stateAttr || "_"; // Default to "_" if not provided
+				const tree = this._createTreeElement(data, null, "", stateDataTiddlerTitle); // Initial empty path and state tiddler title
 				this._container.append(tree);
 			}
 
-			_createTreeElement(data, key) {
+			_createTreeElement(data, key, currentPath, stateDataTiddlerTitle) {
 				if (Array.isArray(data)) {
-					return this._createArrayElement(data, key);
+					return this._createArrayElement(data, key, currentPath, stateDataTiddlerTitle);
 				} else if (typeof data === "object" && data !== null) {
-					return this._createObjectElement(data, key);
+					return this._createObjectElement(data, key, currentPath, stateDataTiddlerTitle);
 				} else {
 					const fragment = document.createDocumentFragment();
 					if (key !== null) {
@@ -141,9 +143,30 @@ exports.startup = function() {
 				}
 			}
 
-			_createObjectElement(obj, key) {
+			_createObjectElement(obj, key, currentPath, stateDataTiddlerTitle) {
 				const details = document.createElement("details");
-				details.open = true;
+				// const stateDataTiddlerTitle = "_"; // Now passed as parameter
+				const stateKey = currentPath; // The key within the data tiddler
+				const stateData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
+				details.open = (stateData[stateKey] !== "hide");
+				details.setAttribute("data-state-key", stateKey); // For event listener
+				details.addEventListener("toggle", (event) => {
+					const keyToUpdate = event.target.getAttribute("data-state-key");
+					if (keyToUpdate) {
+						let currentData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
+						currentData = {...currentData}; // Create a mutable copy
+						if (event.target.open) {
+							delete currentData[keyToUpdate]; // Remove key if open (default)
+						} else {
+							currentData[keyToUpdate] = "hide"; // Set to hide if closed
+						}
+						$tw.wiki.addTiddler(new $tw.Tiddler({
+							title: stateDataTiddlerTitle,
+							type: "application/json", // Assuming data tiddlers are JSON
+							text: JSON.stringify(currentData, null, 2)
+						}));
+					}
+				});
 				const summary = document.createElement("summary");
 
 				if (key !== null) {
@@ -164,7 +187,8 @@ exports.startup = function() {
 							continue;
 						}
 						const item = document.createElement("div");
-						item.append(this._createTreeElement(obj[newKey], newKey));
+						const newPath = (currentPath ? `${currentPath}/${newKey}` : newKey);
+						item.append(this._createTreeElement(obj[newKey], newKey, newPath, stateDataTiddlerTitle));
 						list.append(item);
 					}
 				}
@@ -172,9 +196,30 @@ exports.startup = function() {
 				return details;
 			}
 
-			_createArrayElement(arr, key) {
+			_createArrayElement(arr, key, currentPath, stateDataTiddlerTitle) {
 				const details = document.createElement("details");
-				details.open = (key !== "orderedAttributes");
+				// const stateDataTiddlerTitle = "_"; // Now passed as parameter
+				const stateKey = currentPath; // The key within the data tiddler
+				const stateData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
+				details.open = (stateData[stateKey] !== "hide");
+				details.setAttribute("data-state-key", stateKey); // For event listener
+				details.addEventListener("toggle", (event) => {
+					const keyToUpdate = event.target.getAttribute("data-state-key");
+					if (keyToUpdate) {
+						let currentData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
+						currentData = {...currentData}; // Create a mutable copy
+						if (event.target.open) {
+							delete currentData[keyToUpdate]; // Remove key if open (default)
+						} else {
+							currentData[keyToUpdate] = "hide"; // Set to hide if closed
+						}
+						$tw.wiki.addTiddler(new $tw.Tiddler({
+							title: stateDataTiddlerTitle,
+							type: "application/json", // Assuming data tiddlers are JSON
+							text: JSON.stringify(currentData, null, 2)
+						}));
+					}
+				});
 				const summary = document.createElement("summary");
 
 				if (key !== null) {
@@ -192,7 +237,8 @@ exports.startup = function() {
 				list.className = "value";
 				arr.forEach((value, index) => {
 					const item = document.createElement("div");
-					item.append(this._createTreeElement(value, index));
+					const newPath = (currentPath ? `${currentPath}/${index}` : String(index));
+					item.append(this._createTreeElement(value, index, newPath, stateDataTiddlerTitle));
 					list.append(item);
 				});
 				details.append(list);
