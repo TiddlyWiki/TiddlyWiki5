@@ -127,11 +127,9 @@ $tw.utils.pushTop = function(array,value) {
 };
 
 /*
-Determine if a value is a date
+Deprecated: Use instanceof Date instead
 */
-$tw.utils.isDate = function(value) {
-	return Object.prototype.toString.call(value) === "[object Date]";
-};
+$tw.utils.isDate = (value) => value instanceof Date;
 
 /*
 Iterate through all the own properties of an object or array. Callback is invoked with (element,title,object)

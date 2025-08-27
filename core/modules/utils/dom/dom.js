@@ -287,9 +287,8 @@ exports.copyToClipboard = function(text,options) {
 	document.body.removeChild(textArea);
 };
 
-exports.getLocationPath = function() {
-	return window.location.toString().split("#")[0];
-};
+// Deprecated: use window.location.origin instead
+exports.getLocationPath = () => window.location.origin;
 
 /*
 Collect DOM variables
