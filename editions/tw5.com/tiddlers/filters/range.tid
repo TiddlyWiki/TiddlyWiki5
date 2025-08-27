@@ -1,6 +1,6 @@
 caption: range
 created: 20171221184734665
-modified: 20250827142853527
+modified: 20230321133838310
 op-input: ignored
 op-neg-output: a series of evenly spaced numbers ranging from `[begin]` to `[end]` in reverse order
 op-output: a series of evenly spaced numbers ranging from `[begin]` to `[end]`
