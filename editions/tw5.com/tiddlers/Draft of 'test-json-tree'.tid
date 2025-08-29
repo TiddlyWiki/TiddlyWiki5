@@ -1,0 +1,10 @@
+created: 20250824202200168
+draft.of: test-json-tree
+draft.title: test-json-tree
+modified: 20250826180506106
+tags: 
+title: Draft of 'test-json-tree'
+type: text/vnd.tiddlywiki
+
+<json-tree block-list="start end" state="asdf"/>
+

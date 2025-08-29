@@ -1,0 +1,78 @@
+title: $:/plugins/wikilabs/debug/test.json
+type: application/json
+
+[
+    {
+        "type": "list",
+        "start": 0,
+        "attributes": {
+            "filter": {
+                "start": 6,
+                "name": "filter",
+                "type": "string",
+                "value": "[range[2]]",
+                "end": 26
+            },
+            "variable": {
+                "start": 26,
+                "name": "variable",
+                "type": "string",
+                "value": "x",
+                "end": 39
+            }
+        },
+        "orderedAttributes": [
+            {
+                "start": 6,
+                "name": "filter",
+                "type": "string",
+                "value": "[range[2]]",
+                "end": 26
+            },
+            {
+                "start": 26,
+                "name": "variable",
+                "type": "string",
+                "value": "x",
+                "end": 39
+            }
+        ],
+        "tag": "$list",
+        "end": 70,
+        "openTagStart": 0,
+        "openTagEnd": 40,
+        "isBlock": true,
+        "children": [
+            {
+                "type": "text",
+                "start": 42,
+                "attributes": {
+                    "text": {
+                        "start": 48,
+                        "name": "text",
+                        "type": "substituted",
+                        "rawValue": "$(x)$ test",
+                        "end": 66
+                    }
+                },
+                "orderedAttributes": [
+                    {
+                        "start": 48,
+                        "name": "text",
+                        "type": "substituted",
+                        "rawValue": "$(x)$ test",
+                        "end": 66
+                    }
+                ],
+                "tag": "$text",
+                "isSelfClosing": true,
+                "end": 68,
+                "isBlock": true,
+                "rule": "html"
+            }
+        ],
+        "closeTagEnd": 70,
+        "closeTagStart": 70,
+        "rule": "html"
+    }
+]
