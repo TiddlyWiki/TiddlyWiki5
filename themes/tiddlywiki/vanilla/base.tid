@@ -1266,13 +1266,13 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-tiddler-frame .tc-tiddler-controls {
-	float: inline-end;
+	float: right;
 	padding: 3px; /* make space for outline */
 }
 
-@supports not (float: inline-end) {
+@supports (float: inline-end) {
 	.tc-tiddler-frame .tc-tiddler-controls {
-		float: right;
+		float: inline-end;
 	}
 }
 
@@ -3464,12 +3464,12 @@ span.tc-translink > a:first-child {
 }
 
 .tc-test-case-toolbar {
-	float: inline-end;
+	float: right;
 }
 
-@supports not (float: inline-end) {
+@supports (float: inline-end) {
 	.tc-test-case-toolbar {
-		float: right;
+		float: inline-end;
 	}
 }
 
