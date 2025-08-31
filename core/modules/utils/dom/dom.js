@@ -11,19 +11,11 @@ Various static DOM-related utility functions.
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
-/*
-Determines whether element 'a' contains element 'b'
-Code thanks to John Resig, http://ejohn.org/blog/comparing-document-position/
-*/
-exports.domContains = function(a,b) {
-	return a.contains ?
-		a !== b && a.contains(b) :
-		!!(a.compareDocumentPosition(b) & 16);
-};
+// Deprecated: Use compareDocumentPosition instead
+exports.domContains = (a,b) => a.compareDocumentPosition(b) & 16;
 
-exports.domMatchesSelector = function(node,selector) {
-	return node.matches ? node.matches(selector) : node.msMatchesSelector(selector);
-};
+// Deprecated: Use matches instead
+exports.domMatchesSelector = (node,selector) => node.matches(selector);
 
 /*
 Select text in a an input or textarea (setSelectionRange crashes on certain input types)

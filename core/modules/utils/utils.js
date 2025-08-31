@@ -936,9 +936,8 @@ exports.parseInt = function(str) {
 	return parseInt(str,10) || 0;
 };
 
-exports.stringifyNumber = function(num) {
-	return num + "";
-};
+// Use Number.toString instead
+exports.stringifyNumber = num => num.toString();
 
 exports.makeCompareFunction = function(type,options) {
 	options = options || {};
