@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 <$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
 \end
 
-.yellow-note, [data-tiddler-title="Hire the creator of TiddlyWiki"] {
+.yellow-note, [data-tiddler-title="Hire the founder of TiddlyWiki"] {
 	z-index: 800;
 	margin-top: 2em;
 	transform-origin: 50% 50%;
@@ -23,23 +23,23 @@ type: text/vnd.tiddlywiki
 	text-shadow: 0 1px 0 #ffffff;
 }
 
-.yellow-note:hover, [data-tiddler-title="Hire the creator of TiddlyWiki"]:hover {
+.yellow-note:hover, [data-tiddler-title="Hire the founder of TiddlyWiki"]:hover {
 	transform: rotate(-0deg) scale(1.03);
 }
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
-.yellow-note, [data-tiddler-title="Hire the creator of TiddlyWiki"] {
+.yellow-note, [data-tiddler-title="Hire the founder of TiddlyWiki"] {
 	transform: rotate(-0.6deg) scale(0.9);
 }
 
-.yellow-note:hover, [data-tiddler-title="Hire the creator of TiddlyWiki"]:hover {
+.yellow-note:hover, [data-tiddler-title="Hire the founder of TiddlyWiki"]:hover {
 	transform: rotate(-0deg) scale(1.03);
 }
 
 }
 
-.yellow-note h2.tc-title, [data-tiddler-title="Hire the creator of TiddlyWiki"] h2.tc-title {
+.yellow-note h2.tc-title, [data-tiddler-title="Hire the founder of TiddlyWiki"] h2.tc-title {
 	margin: 0.5em 0;
 	font-size: 1.5em;
 	line-height: 1.75;
@@ -47,24 +47,24 @@ type: text/vnd.tiddlywiki
 	color: #334;
 }
 
-[data-tiddler-title="Hire the creator of TiddlyWiki"] .tc-tags-wrapper {
+[data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-tags-wrapper {
 	display: none;
 }
 
-.yellow-note p, [data-tiddler-title="Hire the creator of TiddlyWiki"] p {
+.yellow-note p, [data-tiddler-title="Hire the founder of TiddlyWiki"] p {
 	margin: 0.5em 0;
 }
 
-.yellow-note .tc-tiddler-body h1, [data-tiddler-title="Hire the creator of TiddlyWiki"] .tc-tiddler-body h1 {
+.yellow-note .tc-tiddler-body h1, [data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-tiddler-body h1 {
 	margin: 0.25em 0;
 	font-weight: bold;
 }
 
-.yellow-note .tc-tiddler-body a, [data-tiddler-title="Hire the creator of TiddlyWiki"] .tc-tiddler-body a {
+.yellow-note .tc-tiddler-body a, [data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-tiddler-body a {
 	color: #5778d8;
 }
 
-[data-tiddler-title="Hire the creator of TiddlyWiki"] .tc-btn-big-green {
+[data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-btn-big-green {
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -76,19 +76,19 @@ type: text/vnd.tiddlywiki
 
 @media (min-width: <<sidebarbreakpoint>>) {
 
-[data-tiddler-title="Hire the creator of TiddlyWiki"] .tc-btn-big-green {
+[data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-btn-big-green {
 	margin-left: -1.35em;
 }
 
 }
 
-[data-tiddler-title="Hire the creator of TiddlyWiki"] .tc-btn-big-green svg {
+[data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-btn-big-green svg {
 	fill: #cece86;
 }
 
 .yellow-note-sidebar-wrapper {
 	overflow-y: hidden;
-	max-height: {{{ [[$:/StoryList]contains[Hire the creator of TiddlyWiki]then[0em]else[15em]] }}};
+	max-height: {{{ [[$:/StoryList]contains[Hire the founder of TiddlyWiki]then[0em]else[15em]] }}};
 	transition: max-height 600ms ease-in-out;
 }
 
