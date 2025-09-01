@@ -6,10 +6,7 @@ module-type: startup
 Favicon handling
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -39,5 +36,3 @@ function setFavicon() {
 		faviconLink.setAttribute("href",$tw.utils.makeDataUri(tiddler.fields.text,tiddler.fields.type,tiddler.fields._canonical_uri));
 	}
 }
-
-})();

@@ -6,10 +6,7 @@ module-type: widget
 Reveal widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -275,5 +272,3 @@ RevealWidget.prototype.updateState = function() {
 };
 
 exports.reveal = RevealWidget;
-
-})();

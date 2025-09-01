@@ -51,6 +51,7 @@ title: $:/core/ui/ImportListing
 \end
 
 \whitespace trim
+<div class="tc-table-wrapper">
 <table class="tc-import-table">
 <tbody>
 <tr>
@@ -129,3 +130,4 @@ title: $:/core/ui/ImportListing
 </$list>
 </tbody>
 </table>
+</div>

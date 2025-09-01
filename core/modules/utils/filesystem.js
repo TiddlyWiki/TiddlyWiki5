@@ -6,10 +6,7 @@ module-type: utils-node
 File system utilities
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var fs = require("fs"),
@@ -543,5 +540,3 @@ exports.cleanupTiddlerFiles = function(options,callback) {
 		return callback(null,bootInfo);
 	}
 };
-
-})();

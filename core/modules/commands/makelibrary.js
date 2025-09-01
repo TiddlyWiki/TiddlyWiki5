@@ -6,10 +6,7 @@ module-type: command
 Command to pack all of the plugins in the library into a plugin tiddler of type "library"
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -41,5 +38,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

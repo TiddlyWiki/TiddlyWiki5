@@ -6,10 +6,7 @@ module-type: widget
 Set variable widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -122,5 +119,3 @@ SetWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.setvariable = SetWidget;
 exports.set = SetWidget;
-
-})();

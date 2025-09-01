@@ -1,0 +1,28 @@
+created: 20130825162000000
+modified: 20241211112813514
+original-modified: 20170328160211362
+tags: Features
+title: Importing Tiddlers
+ja-title: Tiddlerのインポート
+type: text/vnd.tiddlywiki
+
+外部ファイルから、または別の~TiddlyWikiから直接、Tiddlerを~TiddlyWikiにインポートできます。
+
+!! 外部ファイルからのコンテンツのインポート
+
+外部ファイルからコンテンツ(テキスト、画像、PDFドキュメントなど)をインポートする方法はいくつかあります: 
+
+* <<.icon $:/core/images/import-button>> ''インポート''ボタン(サイドバーの''ツール''タブ配下)を使用してローカルファイルを選択します
+* WindowsエクスプローラーやOS X Finderなどからファイルを~TiddlyWikiブラウザウィンドウにドラッグアンドドロップします
+* メニューやキーボードショートカット(<kbd>ctrl-V</kbd>または<kbd>cmd-V</kbd>)を使用して、クリップボードから直接コンテンツを貼り付けます
+** 現在、Chrome、Firefox、Edgeでサポートされています(Internet Explorerはサポートされていません)
+
+ほとんどのファイルは個別のTiddlerとしてインポートされます。例外は次のとおりです: 
+
+* ~TiddlyWikiファイルとして認識された''.html''ファイルは解析され、その中のTiddlerが抽出されます。
+* ''.json''ファイルは解析され、その中にあるTiddlerが抽出されます。''.json''ファイルは、別の~TiddlyWikiから[[エクスポートする|How to export tiddlers]]ことで作成できます。~TiddlyWikiは、単一のTiddlerフィールドオブジェクトまたはTiddlerフィールドオブジェクトの配列を含むJSONファイルを受け入れます
+
+!! 他の~TiddlyWikiブラウザウィンドウからのコンテンツのインポート
+
+Tiddlerは、[[ドラッグアンドドロップ|Drag and Drop]]を使用して他の~TiddlyWikiブラウザーウィンドウからインポートできます。TiddlyWikiの内部リンクやタグを、ある~TiddlyWikiブラウザーウィンドウから別のウィンドウにドラッグします。内部リンクをドラッグすると1つのTiddlerがインポートされますが、タグピルをドラッグすると、そのタグを持つすべてのTiddlerがインポートされます。
+

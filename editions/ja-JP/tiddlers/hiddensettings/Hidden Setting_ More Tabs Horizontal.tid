@@ -1,0 +1,9 @@
+created: 20221128092648000
+modified: 20241124105614116
+original-modified: 20221128092903706
+tags: [[Hidden Settings]]
+title: Hidden Setting: More Tabs Horizontal
+ja-title: 隠し設定: 「詳しく」タブの水平化
+type: text/vnd.tiddlywiki
+
+詳しく -> タブ を水平方向に揃えるには、$:/config/ui/SideBar/More/horizontal Tiddlerをyesに設定します。

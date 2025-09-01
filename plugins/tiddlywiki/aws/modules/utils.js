@@ -6,8 +6,7 @@ module-type: library
 AWS utility functions
 
 \*/
-/*jslint node: true, browser: true */
-/*global $tw: false */
+
 "use strict";
 
 /*

@@ -6,7 +6,7 @@ list-after: $:/core/ui/SideBarSegments/site-subtitle
 	<p>
 		<div class="tc-scary-warning" style="display: flex;gap: 0.5em;padding: 1em;margin-right: 1em;align-items: center;">
 			<div style="">
-				<a href="https://www.netlify.com" rel="noopener noreferrer" target="_blank"><img src="https://www.netlify.com/v3/img/components/netlify-light.svg" alt="Deploys by Netlify" /></a>
+				<a href="https://www.netlify.com" rel="noopener noreferrer" target="_blank"><$image source="$:/_tw5.com/netlify-build-badge/netlify-light.svg" alt="Deploys by Netlify" /></a>
 			</div>
 			<div style="">
 				This is a preview build of the pull request <a href={{{ [{$:/build}split[|]nth[5]addprefix[https://github.com/TiddlyWiki/TiddlyWiki5/pull/]] }}} rel="noopener noreferrer" target="_blank">#<$text text={{{ [{$:/build}split[|]nth[5]] }}}/></a>
