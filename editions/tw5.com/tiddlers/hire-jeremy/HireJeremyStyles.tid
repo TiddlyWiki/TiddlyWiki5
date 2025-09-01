@@ -41,13 +41,11 @@ type: text/vnd.tiddlywiki
 
 .yellow-note h2.tc-title, [data-tiddler-title="Hire the founder of TiddlyWiki"] h2.tc-title {
 	margin: 0.5em 0;
-	font-size: 1.5em;
-	line-height: 1.75;
-	font-family: "Noteworthy", Georgia, serif;
 	color: #334;
+	font-weight: bold;
 }
 
-[data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-tags-wrapper {
+[data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-tags-wrapper, [data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-subtitle {
 	display: none;
 }
 
