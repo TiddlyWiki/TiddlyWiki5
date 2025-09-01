@@ -99,7 +99,7 @@ type: text/vnd.tiddlywiki
 
 .yellow-note-sidebar .yellow-note {
 	padding: 0.5em;
-	margin: 0.8em 0;
+	margin: 1em 0;
 	transform: rotate(-0.9deg) scale(0.95);
 }
 
