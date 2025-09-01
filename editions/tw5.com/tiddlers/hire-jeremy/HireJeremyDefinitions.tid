@@ -1,0 +1,24 @@
+title: $:/HireJeremy/definitions
+tags: $:/tags/Global
+
+\widget $expand.able(heading:'Click me',colour)
+<$let
+	stateBase=<<qualify "$:/temp/HireJeremy">>
+	state={{{ [<stateBase>addsuffix<heading>] }}}
+>
+	<$button class="tc-btn-big-green" style.background-color=<<colour>>>
+		<%if [<state>get[text]else[closed]match[closed]] %>
+			<$action-setfield $tiddler=<<state>> $value="open"/>
+			{{$:/core/images/right-arrow}}
+		<%else%>
+			<$action-setfield $tiddler=<<state>> $value="closed"/>
+			{{$:/core/images/down-arrow}}
+		<%endif%>
+		<$text text=<<heading>>/>
+	</$button>
+
+	<$reveal type="match" state=<<state>> text="open" default="closed" animate="yes" retain="yes" tag="div">
+		<$slot $name="ts-raw">
+	</$reveal>
+</$let>
+\end $expand.able
