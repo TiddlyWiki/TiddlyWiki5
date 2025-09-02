@@ -11,19 +11,11 @@ Various static DOM-related utility functions.
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
-/*
-Determines whether element 'a' contains element 'b'
-Code thanks to John Resig, http://ejohn.org/blog/comparing-document-position/
-*/
-exports.domContains = function(a,b) {
-	return a.contains ?
-		a !== b && a.contains(b) :
-		!!(a.compareDocumentPosition(b) & 16);
-};
+// Deprecated: Use compareDocumentPosition instead
+exports.domContains = (a,b) => a.compareDocumentPosition(b) & 16;
 
-exports.domMatchesSelector = function(node,selector) {
-	return node.matches ? node.matches(selector) : node.msMatchesSelector(selector);
-};
+// Deprecated: Use matches instead
+exports.domMatchesSelector = (node,selector) => node.matches(selector);
 
 /*
 Select text in a an input or textarea (setSelectionRange crashes on certain input types)
@@ -49,35 +41,25 @@ exports.removeChildren = function(node) {
 	}
 };
 
-exports.hasClass = function(el,className) {
-	return el && el.hasAttribute && el.hasAttribute("class") && el.getAttribute("class").split(" ").indexOf(className) !== -1;
-};
+// Deprecated: Use element.classList.contains instead
+exports.hasClass = (el,className) => el.classList && el.classList.contains(className);
 
+// Deprecated: Use element.classList.add instead
 exports.addClass = function(el,className) {
-	var c = (el.getAttribute("class") || "").split(" ");
-	if(c.indexOf(className) === -1) {
-		c.push(className);
-		el.setAttribute("class",c.join(" "));
-	}
+	el.classList && el.classList.add(className);
 };
 
+// Deprecated: Use element.classList.remove instead
 exports.removeClass = function(el,className) {
-	var c = (el.getAttribute("class") || "").split(" "),
-		p = c.indexOf(className);
-	if(p !== -1) {
-		c.splice(p,1);
-		el.setAttribute("class",c.join(" "));
-	}
+	el.classList && el.classList.remove(className);
 };
 
+// Deprecated: Use element.classList.toggle instead
 exports.toggleClass = function(el,className,status) {
 	if(status === undefined) {
-		status = !exports.hasClass(el,className);
-	}
-	if(status) {
-		exports.addClass(el,className);
+		el.classList && el.classList.toggle(className);
 	} else {
-		exports.removeClass(el,className);
+		el.classList && el.classList.toggle(className, status);
 	}
 };
 
