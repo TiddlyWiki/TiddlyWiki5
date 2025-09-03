@@ -915,6 +915,9 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = this.getTiddler(tiddler);
 	}
+	if(tiddler && tiddler.isPlugin()) {
+		return $tw.Wiki.pluginInfoModules[tiddler.fields.type].parse(tiddler);
+	}
 	if(tiddler && tiddler.fields.text) {
 		switch(tiddler.fields.type) {
 			case "application/json":
@@ -1740,7 +1743,7 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 // Determine whether a plugin by title is dynamically loadable
 exports.doesPluginRequireReload = function(title) {
 	var tiddler = this.getTiddler(title);
-	if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"]) {
+	if(tiddler && tiddler.isPlugin()) {
 		if(tiddler.fields["plugin-type"] === "import") {
 			// The import plugin never requires reloading
 			return false;

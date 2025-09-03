@@ -1068,6 +1068,13 @@ $tw.Tiddler.prototype.hasField = function(field) {
 	return $tw.utils.hop(this.fields,field);
 };
 
+$tw.Tiddler.prototype.isPlugin = function() {
+	if(!this.fields["plugin-type"]) return false;
+	if(!this.fields.text || !this.fields.type) return false;
+	if(!$tw.Wiki.pluginInfoModules[this.fields.type]) return false;
+	return true;
+};
+
 /*
 Compare two tiddlers for equality
 tiddler: the tiddler to compare
@@ -1407,10 +1414,9 @@ $tw.Wiki = function(options) {
 		$tw.utils.each(titles || getTiddlerTitles(),function(title) {
 			var tiddler = tiddlers[title];
 			if(tiddler) {
-				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
-					pluginInfo[tiddler.fields.title] = $tw.utils.parseJSONSafe(tiddler.fields.text);
-					results.modifiedPlugins.push(tiddler.fields.title);
-				}
+				if(!tiddler.isPlugin()) return;
+				pluginInfo[tiddler.fields.title] = $tw.Wiki.pluginInfoModules[tiddler.fields.type].parse(tiddler);
+				results.modifiedPlugins.push(tiddler.fields.title);
 			} else {
 				if(pluginInfo[title]) {
 					delete pluginInfo[title];
@@ -1431,13 +1437,13 @@ $tw.Wiki = function(options) {
 		var self = this,
 			registeredTitles = [],
 			checkTiddler = function(tiddler,title) {
-				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType)) {
-					var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
-					if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
-						self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
-						pluginTiddlers.push(tiddler);
-						registeredTitles.push(tiddler.fields.title);
-					}
+				if(!tiddler.isPlugin()) return;
+				if(pluginType && tiddler.fields["plugin-type"] !== pluginType) return;
+				var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
+				if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
+					self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
+					pluginTiddlers.push(tiddler);
+					registeredTitles.push(tiddler.fields.title);
 				}
 			};
 		if(titles) {
@@ -1740,6 +1746,13 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 			return [fields];
 		}
 	}
+});
+
+// the fields in stringify may be frozen, do not write to them
+$tw.modules.define("$:/boot/plugininfo/json","plugininfo",{
+	name: "application/json",
+	parse: function(tiddler){ return $tw.utils.parseJSONSafe(tiddler.fields.text, function(){}); },
+	stringify: function(fields, data){ return JSON.stringify(data); },
 });
 
 /////////////////////////// Browser definitions
@@ -2140,8 +2153,7 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		}
 		pluginInfo.dependents = pluginInfo.dependents || [];
 		pluginInfo.type = "application/json";
-		// Set plugin text
-		pluginInfo.text = JSON.stringify({tiddlers: pluginInfo.tiddlers});
+		pluginInfo.text = $tw.Wiki.pluginInfoModules[pluginInfo.type].stringify(pluginInfo, {tiddlers: pluginInfo.tiddlers});
 		delete pluginInfo.tiddlers;
 		// Deserialise array fields (currently required for the dependents field)
 		for(var field in pluginInfo) {
@@ -2151,7 +2163,7 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		}
 		return pluginInfo;
 	} else {
-			return null;
+		return null;
 	}
 };
 
@@ -2508,6 +2520,8 @@ $tw.boot.initStartup = function(options) {
 	// Install the tiddler deserializer modules
 	$tw.Wiki.tiddlerDeserializerModules = Object.create(null);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	// Install the plugin info modules
+	$tw.Wiki.pluginInfoModules = $tw.modules.getModulesByTypeAsHashmap("plugininfo");
 	// Call unload handlers in the browser
 	if($tw.browser) {
 		window.onbeforeunload = function(event) {
