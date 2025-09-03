@@ -13,7 +13,7 @@ The $tw.Commander class is a command interpreter
 Parse a sequence of commands
 	commandTokens: an array of command string tokens
 	wiki: reference to the wiki store object
-	streams: {output:, error:}, each of which has a write(string) method
+	streams: {output:, input:, error:}
 	callback: a callback invoked as callback(err) where err is null if there was no error
 */
 var Commander = function(commandTokens,callback,wiki,streams) {
@@ -62,68 +62,171 @@ Commander.prototype.execute = function() {
 };
 
 /*
+Returns the next string token without consuming it, or null if there are none left. Callback invoked(err,data)
+*/
+Commander.prototype.peekNextToken = function(callback) {
+	var self = this;
+	if(this.nextToken >= this.commandTokens.length) {
+		return callback(null,null);
+	} else {
+		return this.stringifyToken(this.nextToken,function(err,data) {
+			if(!err) {
+				// Save the stringified token for next time so that we don't run prompts twice
+				self.commandTokens[self.nextToken] = data;
+			}
+			callback(err,data);
+		});
+	}
+};
+
+/*
+Returns and consumes the next string token, or null if there are none left. Callback invoked(err,data)
+*/
+Commander.prototype.getNextToken = function(callback) {
+	if(this.nextToken >= this.commandTokens.length) {
+		return callback(null,null);
+	} else {
+		return this.stringifyToken(this.nextToken++,callback);
+	}
+};
+
+/*
+Returns and consumes the string tokens until the end of the token stream or the first token that starts with "--".
+Callback invoked(err,tokenArray)
+*/
+Commander.prototype.getTokensUntilCommand = function(callback) {
+	var self = this,
+		tokens = [];
+	function processNextToken() {
+		self.peekNextToken(function(err,data) {
+			if(err) {
+				return callback(err);
+			}
+			if(data === null || data.substr(0,2) === "--") {
+				return callback(null,tokens);
+			} else {
+				self.getNextToken(function(err,data) {
+					if(err) {
+						return callback(err);
+					}
+					tokens.push(data);
+					processNextToken();
+				});
+			}
+		});	
+	}
+	processNextToken();
+};
+
+/*
+Returns a specified stringified token, or null if the index does not exist. Callback invoked(err,data)
+*/
+Commander.prototype.stringifyToken = function(index,callback) {
+	var self = this;
+	if(index >= this.commandTokens.length) {
+		return callback(null,null);
+	} else {
+		var token = this.commandTokens[index];
+		if(typeof token === "string") {
+			return callback(null,token);
+		} else if(typeof token === "object") {
+			switch(token.type) {
+				case "filter":
+					return callback(null,this.wiki.filterTiddlers(token.text)[0] || "");
+				case "wikify":
+					return callback(null,this.wiki.renderText("text/plain","text/vnd.tiddlywiki",token.text,{
+						parseAsInline: false,
+						parentWidget: $tw.rootWidget
+					}));
+				case "prompt":
+					$tw.utils.terminalQuestion({
+						promptText: token.prompt || "Please enter a value",
+						defaultResult: token["default"] || "",
+						callback: function(err,userText) {
+							if(err) {
+								callback(err);
+							} else {
+								if(token.transformFilter) {
+									userText = self.wiki.filterTiddlers(token.transformFilter,null,self.wiki.makeTiddlerIterator([userText]))[0] || "";
+								}
+								callback(null,userText);
+							}
+						},
+						input: self.streams.input,
+						output: self.streams.output,
+					});
+					break;
+				default:
+					throw "Unknown dynamic command token type: " + token.type;
+			}
+		}
+	}
+};
+
+/*
 Execute the next command in the sequence
 */
 Commander.prototype.executeNextCommand = function() {
 	var self = this;
-	// Invoke the callback if there are no more commands
-	if(this.nextToken >= this.commandTokens.length) {
-		this.callback(null);
-	} else {
-		// Get and check the command token
-		var commandName = this.commandTokens[this.nextToken++];
+	// Get and check the command token
+	var commandName = this.getNextToken(function(err,commandName) {
+		if(err) {
+			return self.callback(err);
+		}
+		if(!commandName) {
+			return self.callback(null);
+		}
 		if(commandName.substr(0,2) !== "--") {
-			this.callback("Missing command: " + commandName);
+			return self.callback("Missing command: " + commandName);
 		} else {
 			commandName = commandName.substr(2); // Trim off the --
-			// Accumulate the parameters to the command
-			var params = [];
-			while(this.nextToken < this.commandTokens.length && 
-				this.commandTokens[this.nextToken].substr(0,2) !== "--") {
-				params.push(this.commandTokens[this.nextToken++]);
-			}
-			// Get the command info
-			var command = $tw.commands[commandName],
-				c,err;
-			if(!command) {
-				this.callback("Unknown command: " + commandName);
-			} else {
-				if(this.verbose) {
-					this.streams.output.write("Executing command: " + commandName + " " + params.join(" ") + "\n");
+			// Get the parameters to the command
+			self.getTokensUntilCommand(function(err,params) {
+				if(err) {
+					return self.callback(err);
 				}
-				// Parse named parameters if required
-				if(command.info.namedParameterMode) {
-					params = this.extractNamedParameters(params,command.info.mandatoryParameters);
-					if(typeof params === "string") {
-						return this.callback(params);
-					}
-				}
-				if(command.info.synchronous) {
-					// Synchronous command
-					c = new command.Command(params,this);
-					err = c.execute();
-					if(err) {
-						this.callback(err);
-					} else {
-						this.executeNextCommand();
-					}
+				var command = $tw.commands[commandName],
+					c,err;
+				if(!command) {
+					self.callback("Unknown command: " + commandName);
 				} else {
-					// Asynchronous command
-					c = new command.Command(params,this,function(err) {
+					if(self.verbose) {
+						self.streams.output.write("Executing command: " + commandName + " " + params.join(" ") + "\n");
+					}
+					// Parse named parameters if required
+					if(command.info.namedParameterMode) {
+						params = self.extractNamedParameters(params,command.info.mandatoryParameters);
+						if(typeof params === "string") {
+							return self.callback(params);
+						}
+					}
+					if(command.info.synchronous) {
+						// Synchronous command
+						c = new command.Command(params,self);
+						err = c.execute();
 						if(err) {
 							self.callback(err);
 						} else {
 							self.executeNextCommand();
 						}
-					});
-					err = c.execute();
-					if(err) {
-						this.callback(err);
+					} else {
+						// Asynchronous command
+						c = new command.Command(params,self,function(err) {
+							if(err) {
+								self.callback(err);
+							} else {
+								self.executeNextCommand();
+							}
+						});
+						err = c.execute();
+						if(err) {
+							self.callback(err);
+						}
 					}
 				}
-			}
+			});
 		}
-	}
+	});
 };
 
 /*

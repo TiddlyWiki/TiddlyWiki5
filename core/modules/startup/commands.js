@@ -26,7 +26,11 @@ exports.startup = function(callback) {
 			callback();
 		},
 		$tw.wiki,
-		{output: process.stdout, error: process.stderr}
+		{
+			output: process.stdout,
+			input: process.stdin,
+			error: process.stderr
+		}
 	);
 	commander.execute();
 };
