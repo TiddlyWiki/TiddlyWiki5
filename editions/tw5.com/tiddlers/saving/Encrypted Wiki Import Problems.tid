@@ -1,0 +1,22 @@
+created: 20250617180651017
+modified: 20250617183155928
+tags: Encryption
+title: Encrypted Wiki Import Problems
+type: text/vnd.tiddlywiki
+
+There have been some problems with ''importing encrypted'' TWs ''into'' version v5.2.0 and v5.2.1.
+
+While encrypting and decrypting single file wikis with v5.2.0 and v5.2.1 works as intended. There are some problems if encrypted wikis are ''imported'', if those wikis have been ''encrypted with any other version''.
+
+So if you import a wiki that was been encrypted with eg: TW v5.1.23 into v5.2.0 or v5.2.1 the v5.1.23 wiki could not be decrypted by v5.2.0 or v5.2.1.
+
+!! Upgrading
+
+* ''Importing'' encrypted wikis from any v5.1.x, v5.2.x and v5.3.x ''into the latest'' TW versions ''works as expected''
+* The ''only target'' TW versions that can cause ''importing problems'' are ''v5.2.0'' and ''v5.2.1''
+
+!! Downgrading
+
+* Importing an encrypted v5.''3''.x into v5.''2''.x and v5.''3''.x ''works'' as expected
+** ''Except'' v5.2.0 and v5.2.1
+* Importing an encrypted v5.''3''.x to v5.''1''.x ''does not work''
