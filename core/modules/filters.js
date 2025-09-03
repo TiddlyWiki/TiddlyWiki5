@@ -6,10 +6,7 @@ module-type: wikimethod
 Adds tiddler filtering methods to the $tw.Wiki object.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widgetClass = require("$:/core/modules/widgets/widget.js").widget;
@@ -251,8 +248,7 @@ exports.compileFilter = function(filterString) {
 		// Create a function for the chain of operators in the operation
 		var operationSubFunction = function(source,widget) {
 			var accumulator = source,
-				results = [],
-				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
+				results = [];
 			$tw.utils.each(operation.operators,function(operator) {
 				var operands = [],
 					operatorFunction;
@@ -268,6 +264,7 @@ exports.compileFilter = function(filterString) {
 				}
 				$tw.utils.each(operator.operands,function(operand) {
 					if(operand.indirect) {
+						var currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
 					} else if(operand.variable) {
 						var varTree = $tw.utils.parseFilterVariable(operand.text);
@@ -367,5 +364,3 @@ exports.compileFilter = function(filterString) {
 	this.filterCacheCount++;
 	return fnMeasured;
 };
-
-})();

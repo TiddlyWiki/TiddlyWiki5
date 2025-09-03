@@ -6,10 +6,7 @@ module-type: library
 Legacy version of the dyannotate background daemon to track the selection
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var TextMap = require("$:/plugins/tiddlywiki/dynannotate/textmap.js").TextMap;
@@ -100,5 +97,3 @@ LegacySelectionTracker.prototype.findSelectionContainer = function findSelection
 };
 
 exports.LegacySelectionTracker = LegacySelectionTracker;
-
-})();

@@ -6,10 +6,7 @@ module-type: startup
 Initialise $:/info tiddlers via $:/temp/info-plugin pseudo-plugin
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -54,5 +51,3 @@ exports.startup = function() {
 	$tw.wiki.registerPluginTiddlers("info",[TITLE_INFO_PLUGIN]);
 	$tw.wiki.unpackPluginTiddlers();
 };
-
-})();

@@ -6,10 +6,7 @@ module-type: startup
 Startup logic concerned with managing plugins
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -75,11 +72,10 @@ exports.startup = function() {
 				$tw.wiki.unpackPluginTiddlers();
 				// Queue change events for the changed shadow tiddlers
 				$tw.utils.each(Object.keys(changedShadowTiddlers),function(title) {
-					$tw.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title]);
+					$tw.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title], true);
 				});
 			}
 		}
 	});
 };
 
-})();

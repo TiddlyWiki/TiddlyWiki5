@@ -1,0 +1,77 @@
+created: 20211127084727217
+modified: 20241115113055145
+original-modified: 20211204120054422
+tags: [[Customise TiddlyWiki]]
+title: Customising TiddlyWiki's user interface
+ja-title: TiddlyWikiのユーザーインターフェイスのカスタマイズ
+type: text/vnd.tiddlywiki
+
+TiddlyWikiのユーザーインターフェイスは、高度に拡張できるように設計されています。すべての要素は、追加、削除、または再配置することができます
+
+これを実現するために、いくつかの異なるメカニズムが使用されます: 
+
+* 特殊フィールド
+* 特殊タイトル
+* 特殊タグ
+* カスケード
+
+これらのメカニズムの概要と、それらがどのように相互に関連しているかを説明します
+
+!! 特殊フィールド
+
+特殊フィールドは、個々のTiddlerに外観や動作を割り当てるために使用されます。これらは、適用されるTiddlerを直接制御するフラグや値と考えることができます
+
+例:
+
+* `icon`フィールドは、Tiddlerのアイコンとして使用する画像Tiddlerのタイトルを設定します
+* `color`フィールドは、Tiddlerに関連付けられたアイコンとタグマークのCSSカラーを設定します
+* `hide-body`フィールドは、`yes` にすると、Tiddlerのビューテンプレートのボディを非表示にします
+
+すべての特別フィールドの詳細については、[[Tiddlerフィールド|TiddlerFields]]を参照してください
+
+!! 特殊タイトル
+
+特定の特殊タイトルは、TiddlyWikiの外観や動作をカスタマイズする設定用のTiddlerです。これらは、Wiki全体に影響するグローバル設定と考えることができます
+
+例:
+
+* $:/DefaultTiddlersは、起動時に表示されるTiddlerのタイトルを生成するフィルターです
+* $:/SiteTitleは、Wikiタイトルのテキストを指定します
+* $:/config/Tags/MinLengthは、タグのオートコンプリートをトリガーする最小文字数を制御します
+
+TiddlyWikiの設定に関するTiddlerの多くは、[[$:/ControlPanel]]にオプションとして表示されます。あまり一般的には使用されない設定用のTiddlerにはユーザーインターフェイスがありませんが、[[隠し設定|Hidden Settings]]に文書化されています
+
+!! 特殊タグ
+
+特殊タグは、それらが適用されるすべてのTiddlerに特別な動作や外観を割り当てます。これらは、特定の方法で処理される、または、表示されるTiddlerの順序付きリストを確立すると考えることができます
+
+例:
+
+* $:/tags/Globalにより、Tiddler内の定義がグローバルに有効になります
+* $:/tags/Stylesheetにより、TiddlerがCSSスタイルシートとして解釈されます
+* $:/tags/SideBarにより、Tiddlerがサイドバーのタブとして表示されます
+
+すべての特殊タグの詳細については、[[システムタグ|SystemTags]]を参照してください
+
+TiddlyWikiのユーザーインターフェース全体は、特殊システムタグから形成されたリストから構築されています
+
+これらのリストの順序は、[[タグ付けされたTiddlerの順序|Order of Tagged Tiddlers]]ルールによって決まります。ユーザーは、タグドロップダウン内でドラッグアンドドロップを使用してタグを並べ替えることができます
+
+!! カスケード
+
+カスケードは、柔軟で拡張可能な基準に基づいて複数の値の1つを選択する手段を提供します。これらは、条件の1つが一致するまで順番に評価される条件のリストと考えることができます
+
+例えば、コアは表示モードではテンプレート$:/core/ui/ViewTemplateを使用してTiddlerを表示し、編集モードではテンプレート$:/core/ui/EditTemplateを使用して Tiddlerを表示します。カスケードは、特定のTiddlerに使用するテンプレートを選択するために使用されます
+
+# Tiddlerがドラフトの場合は、$:/core/ui/EditTemplateを使用します
+# それ以外の場合は、$:/core/ui/ViewTemplateを使用します
+
+条件のリストは特殊タグを介して定義されるため、リスト内の任意の場所に追加の条件を挿入できます
+
+例えば、プラグインは追加のルールを挿入することで、タグ[[$:/tags/Map]]を持つTiddler用の特別なテンプレート$:/plugins/example/map-templateを追加できます: 
+
+# Tiddlerがドラフトの場合は、$:/core/ui/EditTemplateを使用します
+# @@background: yellow; Tiddlerに$:/tags/Mapタグが付けられている場合は、$:/plugins/example/map-templateを使用します@@
+# それ以外の場合は、$:/core/ui/ViewTemplateを使用します
+
+詳細については、[[カスケード|Cascades]]を参照してください

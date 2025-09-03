@@ -6,10 +6,7 @@ module-type: filteroperator
 returns the value at a given index of datatiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -28,5 +25,3 @@ exports.getindex = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

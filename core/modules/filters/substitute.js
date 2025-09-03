@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for substituting variables and embedded filter expressions with their corresponding values
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -32,5 +29,3 @@ exports.substitute = function(source,operator,options) {
 	return results;
 };
 
-})();
- 

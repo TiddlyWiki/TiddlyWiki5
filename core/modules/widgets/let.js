@@ -14,10 +14,7 @@ the later variables to depend upon the earlier ones.
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -92,5 +89,3 @@ LetWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["let"] = LetWidget;
-
-})();

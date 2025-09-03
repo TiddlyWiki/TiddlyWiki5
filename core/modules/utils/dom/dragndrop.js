@@ -6,10 +6,7 @@ module-type: utils
 Browser data transfer utilities, used with the clipboard and drag and drop
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -275,5 +272,3 @@ exports.dragEventContainsFiles = function(event) {
 };
 
 exports.dragEventContainsType = dragEventContainsType;
-
-})();

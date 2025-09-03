@@ -6,10 +6,7 @@ module-type: utils
 A basic logging implementation
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var ALERT_TAG = "$:/tags/Alert";
@@ -199,5 +196,3 @@ Logger.prototype.clearAlerts = function() {
 };
 
 exports.Logger = Logger;
-
-})();

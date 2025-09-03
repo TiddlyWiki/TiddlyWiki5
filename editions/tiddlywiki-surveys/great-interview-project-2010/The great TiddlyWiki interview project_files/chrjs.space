@@ -1,0 +1,108 @@
+/***
+TiddlySpace extensions for [[chrjs]]
+***/
+//{{{
+(function($) {
+
+tiddlyweb.routes.spaces = "{host}/spaces";
+tiddlyweb.routes.space = "{host}/spaces/{name}";
+tiddlyweb.routes.members = "{host}/spaces/{name}/members";
+tiddlyweb.routes.member = "{host}/spaces/{name}/members/{username}";
+
+tiddlyweb.Space = function(name, host) {
+	tiddlyweb.Resource.apply(this, ["space", host]);
+	this.name = name;
+};
+tiddlyweb.Space.prototype = new tiddlyweb.Resource();
+$.extend(tiddlyweb.Space.prototype, {
+	create: function(callback, errback) { // API wrapper
+		this.put.apply(this, arguments);
+	},
+	members: function() {
+		return new MemberCollection(this);
+	},
+	includes: function() {
+		return new IncludesCollection(this);
+	}
+});
+
+var Member = function(username, space) {
+	tiddlyweb.Resource.apply(this, ["member", space.host]);
+	this.name = space.name;
+	this.username = username;
+};
+Member.prototype = new tiddlyweb.Resource();
+
+var MemberCollection = function(space) {
+	tiddlyweb.Collection.apply(this, ["members", space.host, {
+		name: space.name
+	}]);
+};
+MemberCollection.prototype = new tiddlyweb.Collection();
+$.extend(MemberCollection.prototype, {
+	add: function(username, callback, errback) {
+		var member = new Member(username, this);
+		member.put(callback, errback);
+	},
+	remove: function(username, callback, errback) {
+		var member = new Member(username, this);
+		member["delete"](callback, errback);
+	}
+});
+
+var IncludesCollection = function(space) {
+	tiddlyweb.Collection.apply(this, ["space", space.host, {
+		name: space.name
+	}]);
+};
+IncludesCollection.prototype = new tiddlyweb.Collection();
+$.extend(IncludesCollection.prototype, {
+	get: function(callback, errback) {
+		var self = this;
+		var recipe = new tiddlyweb.Recipe(this.name + "_public", this.host);
+		recipe.get(function(recipe, status, xhr) {
+			var inclusions = $.map(recipe.recipe, function(item, i) {
+				var arr = item[0].split("_public");
+				return (arr[0] != self.name && arr[1] === "") ? arr[0] : null;
+			});
+			callback(inclusions, status, xhr);
+		}, function(xhr, error, exc) {
+			errback(xhr, error, exc, self);
+		});
+	},
+	add: function(name, callback, errback) {
+		var self = this;
+		var names = typeof(name) === "string" ? [ name ] : name;
+		$.ajax({
+			type: "post",
+			url: this.route(),
+			contentType: "json",
+			data: JSON.stringify({ "subscriptions": names }),
+			success: function(response, status, xhr) {
+				callback(self, status, xhr);
+			},
+			error: function(xhr, error, exc) {
+				errback(xhr, error, exc, self);
+			}
+		});
+	},
+	remove: function(name, callback, errback) {
+		var self = this;
+		var names = typeof(name) === "string" ? [ name ] : name;
+		$.ajax({
+			type: "post",
+			contentType: "json",
+			url: this.route(),
+			data: JSON.stringify({ "unsubscriptions": names }),
+			success: function(response, status, xhr) {
+				callback(self, status, xhr);
+			},
+			error: function(xhr, error, exc) {
+				errback(xhr, error, exc, self);
+			}
+		});
+	}
+});
+
+})(jQuery);
+//}}}

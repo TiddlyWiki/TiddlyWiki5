@@ -2,11 +2,11 @@
 	"description": "Documentation from https://tiddlywiki.com",
 	"plugins": [
 		"tiddlywiki/browser-sniff",
-		"tiddlywiki/railroad",
-		"tiddlywiki/internals",
-		"tiddlywiki/menubar",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
+		"tiddlywiki/internals",
+		"tiddlywiki/menubar",
+		"tiddlywiki/railroad",
 		"tiddlywiki/tour"
 	],
 	"themes": [
