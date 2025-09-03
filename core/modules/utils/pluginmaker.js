@@ -12,7 +12,7 @@ A quick and dirty way to pack up plugins within the browser.
 /*
 Repack a plugin, and then delete any non-shadow payload tiddlers
 */
-exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
+exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers,saveAsType) {
 	additionalTiddlers = additionalTiddlers || [];
 	excludeTiddlers = excludeTiddlers || [];
 	// Get the plugin tiddler
@@ -21,7 +21,7 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 		throw "No such tiddler as " + title;
 	}
 	// Extract the JSON
-	var jsonPluginTiddler = $tw.utils.parseJSONSafe(pluginTiddler.fields.text,null);
+	var jsonPluginTiddler = $tw.Wiki.pluginInfoModules[pluginTiddler.fields.type].parse(pluginTiddler.fields.text);
 	if(!jsonPluginTiddler) {
 		throw "Cannot parse plugin tiddler " + title + "\n" + $tw.language.getString("Error/Caption") + ": " + e;
 	}
@@ -60,7 +60,8 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 		version += "+" + pluginVersion.build;
 	}
 	// Save the tiddler
-	$tw.wiki.addTiddler(new $tw.Tiddler(pluginTiddler,{text: JSON.stringify({tiddlers: plugins},null,4), version: version}));
+	var text = $tw.Wiki.pluginInfoModules[saveAsType||pluginTiddler.fields.type].stringify(pluginTiddler.fields, {tiddlers: plugins});
+	$tw.wiki.addTiddler(new $tw.Tiddler(pluginTiddler,{text: text, version: version}));
 	// Delete any non-shadow constituent tiddlers
 	$tw.utils.each(tiddlers,function(title) {
 		if($tw.wiki.tiddlerExists(title)) {
