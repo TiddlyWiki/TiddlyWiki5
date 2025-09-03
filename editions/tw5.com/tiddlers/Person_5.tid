@@ -1,0 +1,12 @@
+caption: Yogi Bear
+created: 20240204195458310
+first-name: Yogi
+last-name: Bear
+modified: 20240204201551863
+tags: Person
+title: Person/5
+type: text/vnd.tiddlywiki
+
+\import [[b b]]
+
+<<list-fields>>
