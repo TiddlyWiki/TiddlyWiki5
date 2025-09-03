@@ -17,10 +17,7 @@ Wiki text inline rule for embedding images. For example:
 Generates the `<$image>` widget.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "image";
@@ -122,12 +119,10 @@ exports.parseImage = function(source,pos) {
 	}
 	pos = token.end;
 	if(token.match[1]) {
-		node.attributes.tooltip = {type: "string", value: token.match[1].trim()};
+		node.attributes.tooltip = {type: "string", value: token.match[1].trim(),start: token.start,end:token.start + token.match[1].length - 1};
 	}
-	node.attributes.source = {type: "string", value: (token.match[2] || "").trim()};
+	node.attributes.source = {type: "string", value: (token.match[2] || "").trim(), start: token.start + (token.match[1] ? token.match[1].length : 0), end: token.end - 2};
 	// Update the end position
 	node.end = pos;
 	return node;
 };
-
-})();

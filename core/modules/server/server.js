@@ -6,10 +6,7 @@ module-type: library
 Serve tiddlers over http
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 if($tw.node) {
@@ -140,6 +137,11 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 				return;
 			}
 		}
+	} else {
+		// RFC 7231, 6.1. Overview of Status Codes:
+		// Browser clients may cache 200, 203, 204, 206, 300, 301, 
+		// 404, 405, 410, 414, and 501 unless given explicit cache controls
+		headers["Cache-Control"] = headers["Cache-Control"] || "no-store";
 	}
 	/*
 	If the gzip=yes is set, check if the user agent permits compression. If so,
@@ -369,5 +371,3 @@ Server.prototype.listen = function(port,host,prefix) {
 };
 
 exports.Server = Server;
-
-})();

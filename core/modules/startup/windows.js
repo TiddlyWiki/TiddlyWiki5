@@ -6,10 +6,7 @@ module-type: startup
 Setup root widget handlers for the messages concerned with opening external browser windows
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -56,7 +53,7 @@ exports.startup = function() {
 			return;
 		}
 		// Initialise the document
-		srcDocument.write("<html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
+		srcDocument.write("<!DOCTYPE html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
 		srcDocument.close();
 		srcDocument.title = windowTitle;
 		srcWindow.addEventListener("beforeunload",function(event) {
@@ -110,5 +107,3 @@ exports.startup = function() {
 	// Close open windows when unloading main window
 	$tw.addUnloadTask(closeAllWindows);
 };
-
-})();

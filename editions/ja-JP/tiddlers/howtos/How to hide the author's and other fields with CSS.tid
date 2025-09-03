@@ -1,0 +1,33 @@
+created: 20180309232911422
+modified: 20241020113622005
+original-modified: 20180310201216266
+tags: Learning
+title: How to hide the author's and other fields with CSS
+ja-title: CSSで作成者やその他フィールドを非表示にする方法
+type: text/vnd.tiddlywiki
+
+すべてのTiddlerで作成者の名前を非表示にして、画面スペースを節約したい場合があります。簡単な方法は次のとおりです: 
+
+* 任意のタイトルを付けて新しいTiddlerを作成します
+* Tiddlerにタグ`$:/tags/Stylesheet`を付けます
+* Tiddlerのテキストフィールドに次のように入力します: 
+
+```
+.tc-subtitle .tc-tiddlylink {display:none;}
+```
+
+* Tiddlerを保存します。作成者名フィールドは表示されなくなります
+
+同様に、作成者と日付を含むサブタイトルフィールド全体を削除するには: 
+
+```
+.tc-subtitle {display:none;}
+```
+
+残念ながら、CSSを使用して作成者を非表示にせずに日付だけを非表示にすることはできません
+
+最後に、本当に最小限の外観にするために、タイトルを削除するには: 
+
+```
+h2.tc-title {display:none;)
+```

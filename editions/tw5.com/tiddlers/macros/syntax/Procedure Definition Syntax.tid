@@ -1,0 +1,93 @@
+created: 20240310165023000
+modified: 20240310175033730
+tags: [[Procedure Syntax]]
+title: Procedure Definition Syntax
+type: text/vnd.tiddlywiki
+
+<<.preamble """What follows is a formal presentation of the syntax of the [[Pragma: \procedure]], using [[railroad diagrams|Railroad Diagrams]]. """>>
+
+! \procedure
+
+There are 2 types of procedure definitions
+
+* Single line definitions
+* Multi line definitions
+
+!! Single Line
+
+Single line definitions should only be used for very short bodies, where the procedure name, params and the body fit into 1 line terminated with a line-feed.
+
+<$railroad text="""
+"\procedure"
+[[<"space">|"Filter Whitespace"]]
+"procedure-name"
+<"(params)">
+[:[[<"space">|"Filter Whitespace"]]]
+"body"
+"lf"
+"""/>
+
+!! Multi Line
+
+The majority of procedure definitions will have a body, that spans over several lines of wikitext. Those procedure definitions are terminated using the "\end" pragma
+
+<$railroad text="""
+"\procedure"
+[[<"space">|"Filter Whitespace"]]
+"procedure-name"
+<"(params)">
+[:[[<"space">|"Filter Whitespace"]]]
+body
+"\end"
+"""/>
+
+The [[procedure-name|Procedures]] is a sequence of non-whitespace characters other than `(` or `>`.
+
+
+* <<.place procedure-name>> is a sequence of letters (`A`--`Z`, `a`--`z`), digits (`0`--`9`), hyphens (`-`) and underscores (`_`)
+* <<.place body>> is wikitext including [[nested procedures|Pragma: \procedure]]
+* <<.place space>> denotes a sequence of [[whitespace characters|Filter Whitespace]]
+
+!! params
+
+The parameter declaration list <<.place (params)>> has the following syntax:
+
+<$railroad text="""
+\start none
+\end none
+"(" [:"sep"] [:{ parameter "sep" }] ")"
+"""/>
+
+* <<.place sep>> is any sequence of characters that does not match a <<.place param-name>>. <br>Among other things, this includes commas, spaces and linefeeds.
+
+
+Each ''individual'' <<.place parameter>> has the following syntax:
+
+<$railroad text="""
+\start none
+\end none
+"param-name" [: [:[[<"space">|"Filter Whitespace"]]] ":" [:[[<"space">|"Filter Whitespace"]]] default ]
+"""/>
+
+* <<.place param-name>> is a sequence of letters (`A`--`Z`, `a`--`z`), digits (`0`--`9`), hyphens (`-`) and underscores (`_`).
+
+* <<.place default>> is an optional value of a parameter is specified as follows:
+
+<$railroad text={{$:/editions/tw5.com/railroad/macro-parameter-value}}/>
+
+!! body
+
+The <<.place body>> of the definition has the following syntax:
+
+<$railroad text="""
+\start none
+\end none
+{[[<"wikitext">|WikiText]] "lf"}  
+"""/>
+
+* <<.place wikitext>> is any sequence of characters that doesn't terminate the macro definition.
+** If [[nested procedures|Pragma: \procedure]] are used they need to be at the start of the wikitext. There are the same rules as if the wikitext would be in a tiddler. 
+** Pragmas need to be before standard wikitext.
+
+* <<.place lf>> denotes a linefeed.
+

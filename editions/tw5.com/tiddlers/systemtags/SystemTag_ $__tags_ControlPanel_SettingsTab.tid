@@ -1,0 +1,9 @@
+caption: $:/tags/ControlPanel/SettingsTab
+created: 20240813060717747
+description: marks elements to be placed under "Settings" tab in Control Panel
+modified: 20240813060843043
+tags: SystemTags
+title: SystemTag: $:/tags/ControlPanel/SettingsTab
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]] `$:/tags/ControlPanel/SettingsTab` marks elements to be placed under "Settings" tab in [[$:/ControlPanel]]

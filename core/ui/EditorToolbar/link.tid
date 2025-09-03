@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/link
 caption: {{$:/language/Buttons/Link/Caption}}
 description: {{$:/language/Buttons/Link/Hint}}
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 button-classes: tc-text-editor-toolbar-item-start-group
 shortcuts: ((link))
 dropdown: $:/core/ui/EditorToolbar/link-dropdown

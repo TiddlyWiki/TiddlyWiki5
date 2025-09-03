@@ -1,5 +1,3 @@
-const { ElementSpotlight } = require("./element-spotlight");
-
 /*\
 title: $:/plugins/tiddlywiki/dynannotate/startup.js
 type: application/javascript
@@ -8,10 +6,6 @@ module-type: startup
 Startup the dyannotate background daemon to track the selection
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -58,6 +52,3 @@ exports.startup = function() {
 		$tw.dynannotate.elementSpotlight.shineSpotlight(selectors);
 	});
 };
-
-})();
-	

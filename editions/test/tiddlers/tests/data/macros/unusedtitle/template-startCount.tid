@@ -1,0 +1,27 @@
+title: Macros/unusedtitle/template-startCount
+description: test <<unusedtitle>> with templates and startCount
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<!-- test template basics -->
+
+<<unusedtitle template:"$basename$$separator$$count$xx" >>
+
+<<unusedtitle template:"$basename$$separator$$count$xx" startCount:"4" >>
+
+<<unusedtitle template:"$basename$$separator$$count:1$xx" startCount:"11">>
+
+<!-- test parameter edgecases -->
+
+<<unusedtitle template:"$basename$$separator$$count:2$xx" startCount:"" baseName:"emptyCount">>
+
+<<unusedtitle template:"$basename$$separator$$count$xx" startCount:"-1" separator:"" baseName:"invalid start" >>
+
+<<unusedtitle template:"$basename$$separator$$count$xx" startCount:"bbb" separator:"" baseName:"invalid count" >>
+
++
+title: ExpectedResult
+
+<p>New Tiddler 0xx</p><p>New Tiddler 4xx</p><p>New Tiddler 11xx</p><p>emptyCount 00xx</p><p>invalid start 0xx</p><p>invalid count 0xx</p>

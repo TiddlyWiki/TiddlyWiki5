@@ -15,10 +15,7 @@ The following options are supported:
 Supports backward compatibility with --savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]*
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -176,7 +173,10 @@ WikiFolderMaker.prototype.saveCustomPlugin = function(pluginTiddler) {
 	this.saveJSONFile(directory + path.sep + "plugin.info",pluginInfo);
 	self.log("Writing " + directory + path.sep + "plugin.info: " + JSON.stringify(pluginInfo,null,$tw.config.preferences.jsonSpaces));
 	var pluginTiddlers = $tw.utils.parseJSONSafe(pluginTiddler.fields.text).tiddlers; // A hashmap of tiddlers in the plugin
-	$tw.utils.each(pluginTiddlers,function(tiddler) {
+	$tw.utils.each(pluginTiddlers,function(tiddler,title) {
+		if(!tiddler.title) {
+			tiddler.title = title;
+		 }
 		self.saveTiddler(directory,new $tw.Tiddler(tiddler));
 	});
 };
@@ -218,5 +218,3 @@ WikiFolderMaker.prototype.saveFile = function(filename,encoding,data) {
 };
 
 exports.Command = Command;
-
-})();

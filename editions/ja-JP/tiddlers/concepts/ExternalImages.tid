@@ -1,0 +1,72 @@
+created: 20140610213500000
+modified: 20241209112247651
+original-modified: 20241030132047048
+tags: Concepts Features
+title: ExternalImages
+ja-title: 外部画像
+type: text/vnd.tiddlywiki
+
+TiddlyWikiの外部画像は、画像データすべてを埋め込むのではなく、画像のURIを指定するTiddlerです。特に画像の数やサイズが大きい場合、埋め込み画像よりもパフォーマンスが向上します。ただし、外部画像を使用すると、TiddlyWikiの単一ファイルパターンが崩れます。
+
+外部画像はブラウザで使用されます。TiddlyWikiをビルドするときにNode.js構成によって作成されるか、ブラウザ内で手動で作成されます。
+
+! 外部画像とは
+
+外部画像は、画像のURIを含む''_canonical_uri''フィールドを持つ通常の画像Tiddlerです。URIは、HTMLドキュメントに対する絶対パスや相対パスで指定することができます。Canonical URIが指定されている場合は、Tiddlerの''text''フィールドは無視されるため、省略する必要があります。
+
+! 外部画像を手動で作成する
+
+外部画像を手動で作成するには、適切な画像コンテンツタイプでTiddlerを作成し、実際の画像の場所を指すURIを含む''_canonical_uri''フィールドを追加します。
+
+''重要:'' スペルを再度確認してください。``_canonical_uri``は、URLではなく[[URI|https://en.wikipedia.org/wiki/URI#The_relationship_between_URIs.2C_URLs.2C_and_URNs]]と綴られます。
+
+! Node.jsで外部画像を作成する
+
+参照される外部画像を含む''images''フォルダーを伴うWikiの静的HTMLファイルバージョンを作成するには、次の手順を使用します: 
+
+# 通常の方法でTiddlyWikiFoldersに画像Tiddlerを作成します
+# 画像を別ファイルとして保存します (慣例により、''images''という名前のサブフォルダに保存します)
+# ''_canonical_uri''フィールドを追加して画像Tiddlerを外部化します
+# メインのHTMLファイルを保存します
+
+画像ファイルは外部化する前に保存する必要があることに注意してください。外部化すると、Wikiストアのメモリ内コピーの''text''フィールドが破壊され、保存の試みが失敗します。
+
+たとえば、''tw5.com'' Wikiの''externalimages''ビルドターゲットを参照してください: 
+
+```
+--save [is[image]] images
+--setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri-external-image text/plain
+--setfield [is[image]] text "" text/plain
+--render $:/core/save/all externalimages.html text/plain
+```
+
+!! 個別の画像ファイルを保存する
+
+次の`--save`コマンド ([[Saveコマンド|SaveCommand]]を参照)を使用すると、Wikiの画像を''images''サブフォルダーに保存できます: 
+
+```
+--save [is[image]] images
+```
+
+!! 画像Tiddlerの外部化
+
+2つの`--setfield`コマンドが使用されています: 最初のコマンドは、''_canonical_uri''フィールドをTiddlerのタイトルから派生したURIに設定し、2番目のコマンドはtextフィールドをクリアします。
+
+```
+--setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri-external-image text/plain
+--setfield [is[image]] text "" text/plain
+```
+
+テンプレートTiddler  [[$:/core/templates/canonical-uri-external-image]]には以下が含まれます: 
+
+<pre>
+
+<$view tiddler="$:/core/templates/canonical-uri-external-image" field="text" format="text"/>
+
+</pre>
+
+これらの操作により、Wikiストア内のTiddlerが変更されるため、後続のコマンド操作に影響する可能性があることに注意してください。
+
+! 外部画像の使用について
+
+URIフィールドを別の画像を指すように変更しない限り、ブラウザで外部画像を直接編集することはできません。

@@ -6,10 +6,7 @@ module-type: isfilteroperator
 Filter function for [is[current]]
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -33,5 +30,3 @@ exports.current = function(source,prefix,options) {
 	}
 	return results;
 };
-
-})();

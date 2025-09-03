@@ -33,6 +33,7 @@ external-link-background: inherit
 external-link-foreground-hover: inherit
 external-link-foreground-visited: #0000aa
 external-link-foreground: #0000ee
+footnote-target-background: #ecf2ff
 foreground: #333333
 highlight-background: #ffff00
 highlight-foreground: #000000
@@ -84,6 +85,7 @@ table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
 tag-background: #d5ad34
 tag-foreground: #ffffff
+testcase-accent-level-1: #b1b3e3
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #888888
