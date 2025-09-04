@@ -6,8 +6,7 @@ module-type: utils
 Various static utility functions.
 
 \*/
-/*jslint node: true, browser: true */
-/*global $tw: false */
+
 "use strict";
 
 exports.formatVariableString = function(template,options) {

@@ -3,10 +3,7 @@ title: $:/core/modules/filters/format/variable.js
 type: application/javascript
 module-type: formatfilteroperator
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -29,5 +26,3 @@ exports.variable = function(source,operand,options) {
 	});
 	return results;
 };
-
-})();

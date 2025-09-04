@@ -6,10 +6,6 @@ module-type: filteroperator
 Filter operator for returning the names of the active variables
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -69,5 +65,3 @@ exports["variables-wl"] = function(source,operator,options) {
 		return names;
 	}
 };
-
-})();

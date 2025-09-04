@@ -7,10 +7,7 @@ Filter operator to get widget variable info and
 Display as JSON with basic formatting
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -29,5 +26,3 @@ exports.jsonvariable = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();
