@@ -76,6 +76,7 @@ WikiFolderMaker.prototype.tiddlersToIgnore = [
 	"$:/boot/boot.js",
 	"$:/boot/bootprefix.js",
 	"$:/core",
+	"$:/core-server",
 	"$:/library/sjcl.js",
 	"$:/temp/info-plugin"
 ];
