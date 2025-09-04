@@ -409,7 +409,7 @@ exports.startup = function() {
 	// Create a single observer to watch all relevant elements
 	const observer = new IntersectionObserver(handleIntersection);
 
-	$tw.hooks.addHook("th-rendering-debug", function(domNode, widget) {
+	$tw.hooks.addHook("th-dom-rendering-element", function(domNode, widget) {
 
 		/**
 		 * Gathers and formats all relevant variable data from the current widget context.
@@ -531,7 +531,10 @@ exports.startup = function() {
 
 		// Start observing the element, but only if it is a valid Element
 		if (domNode instanceof Element) {
-			observer.observe(domNode);
+			if(widget.getVariable("tv-debug") === "yes") {
+				domNode.setAttribute("data-debug-xxxx", widget.getVariable("transclusion"));
+				observer.observe(domNode);
+			}
 		}
 	});
 };
