@@ -1,0 +1,161 @@
+title: $:/HireJeremy/styles
+tags: [[$:/tags/Stylesheet]]
+type: text/vnd.tiddlywiki
+
+\define sidebarbreakpoint()
+<$text text={{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}/>
+\end
+
+\define sidebarbreakpoint-minus-one()
+<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
+\end
+
+.yellow-note, [data-tiddler-title="Hire the founder of TiddlyWiki"] {
+	z-index: 800;
+	margin-top: 2em;
+	transform-origin: 50% 50%;
+	transition: transform 200ms ease-in-out;
+	transform: rotate(-0.6deg) scale(1);
+	background-color: #ffff92;
+	color: black;
+	box-shadow: 6px 6px 14px 0px rgba(0, 0, 0, 0.3);
+	border: 1px solid #cccc40;
+	text-shadow: 0 1px 0 #ffffff;
+}
+
+.yellow-note:hover, [data-tiddler-title="Hire the founder of TiddlyWiki"]:hover {
+	transform: rotate(-0deg) scale(1.03);
+}
+
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+.yellow-note, [data-tiddler-title="Hire the founder of TiddlyWiki"] {
+	transform: rotate(-0.6deg) scale(0.9);
+}
+
+.yellow-note:hover, [data-tiddler-title="Hire the founder of TiddlyWiki"]:hover {
+	transform: rotate(-0deg) scale(1.03);
+}
+
+}
+
+.yellow-note h2.tc-title, [data-tiddler-title="Hire the founder of TiddlyWiki"] h2.tc-title {
+	margin: 0.5em 0;
+	color: #334;
+	font-weight: bold;
+}
+
+[data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-tags-wrapper, [data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-subtitle {
+	display: none;
+}
+
+.yellow-note p, [data-tiddler-title="Hire the founder of TiddlyWiki"] p {
+	margin: 0.5em 0;
+}
+
+.yellow-note .tc-tiddler-body h1, [data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-tiddler-body h1 {
+	margin: 0.25em 0;
+	font-weight: bold;
+}
+
+.yellow-note .tc-tiddler-body a, [data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-tiddler-body a {
+	color: #5778d8;
+}
+
+[data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-btn-big-green {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	width: 100%;
+	color: #334;
+	font-weight: bold;
+	background-color: inherit;
+}
+
+@media (min-width: <<sidebarbreakpoint>>) {
+
+[data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-btn-big-green {
+	margin-left: -1.35em;
+}
+
+}
+
+[data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-btn-big-green svg {
+	fill: #cece86;
+}
+
+.yellow-note-sidebar-wrapper {
+	overflow-y: hidden;
+	max-height: {{{ [[$:/StoryList]contains[Hire the founder of TiddlyWiki]then[0em]else[15em]] }}};
+	transition: max-height 600ms ease-in-out;
+}
+
+.yellow-note-sidebar {
+	font-size: 2em;
+	text-align: center;
+	line-height: 1.3;
+	max-width: 8.5em;
+}
+
+.yellow-note-sidebar .yellow-note {
+	padding: 0.5em;
+	margin: 1em 0;
+	transform: rotate(-0.9deg) scale(0.95);
+}
+
+.yellow-note-sidebar:hover .yellow-note {
+	transform: rotate(0deg) scale(1);
+}
+
+.yellow-note-sidebar:hover a {
+	text-decoration: none;
+}
+
+/* Thanks to https://codepen.io/dillonbrady/pen/EgRoZQ */
+
+.yellow-note-pin {
+	background-color: #aaa;
+	display: block;
+	height: 32px;
+	width: 2px;
+	position: absolute;
+	left: 50%;
+	top: -16px;
+	z-index: 1;
+}
+
+.yellow-note-pin:after {
+	background-color: #A31;
+	background-image: radial-gradient(25% 25%, circle, hsla(0,0%,100%,.3), hsla(0,0%,0%,.3));
+	border-radius: 50%;
+	box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.1), inset 3px 3px 3px hsla(0,0%,100%,.2), inset -3px -3px 3px hsla(0,0%,0%,.2), 23px 20px 3px hsla(0,0%,0%,.15);
+	content: "";
+	height: 12px;
+	left: -5px;
+	position: absolute;
+	top: -10px;
+	width: 12px;
+}
+
+.yellow-note-pin:before {
+	background-color: hsla(0,0%,0%,0.1);
+	box-shadow: 0 0 .25em hsla(0,0%,0%,.1);
+	content: "";
+	height: 24px;
+	width: 2px;
+	left: 0;
+	position: absolute;
+	top: 8px;
+
+	transform: rotate(57.5deg);
+	-moz-transform: rotate(57.5deg);
+	-webkit-transform: rotate(57.5deg);
+	-o-transform: rotate(57.5deg);
+	-ms-transform: rotate(57.5deg);
+
+	transform-origin: 50% 100%;
+	-moz-transform-origin: 50% 100%;
+	-webkit-transform-origin: 50% 100%;
+	-ms-transform-origin: 50% 100%;
+	-o-transform-origin: 50% 100%;
+}
