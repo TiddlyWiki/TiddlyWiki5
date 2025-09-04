@@ -74,14 +74,8 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	// Create the DOM node and render children
 	var domNode = this.document.createElementNS(this.namespace,this.tag);
 	this.assignAttributes(domNode,{excludeEventAttributes: true});
-	// Add debug info to DOM node
-	if(this.getVariable("tv-debug") === "yes") {
-		if(domNode) {
-			$tw.hooks.invokeHook("th-rendering-debug", domNode, this);
-			// We need this data-debug attribute for styling and it adds some basic info for F12 inspect
-			domNode.setAttribute("data-debug-xxxx", this.getVariable("transclusion"));
-		}
-	}
+	// Allow plugins to manipulate the DOM. Eg: Add debug info
+	$tw.hooks.invokeHook("th-dom-rendering-element", domNode, this);
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
