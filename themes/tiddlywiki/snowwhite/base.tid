@@ -97,13 +97,9 @@ canvas.tc-edit-bitmapeditor  {
 	<<background-linear-gradient "left, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 100%">>
 }
 
-/* HACK: [dir="rtl"] rules are used to support browsers released before 2023 */
+/* HACK: :dir should be used here. html[dir="rtl"] rules are used to support browsers released before 2023 */
 
-[dir="rtl"] .tc-sidebar-lists .tc-tab-set .tc-tab-divider {
-	background-image: linear-gradient(to left, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 100%);
-}
-
-.tc-sidebar-lists .tc-tab-set .tc-tab-divider:dir(rtl) {
+html[dir="rtl"] .tc-sidebar-lists .tc-tab-set .tc-tab-divider {
 	background-image: linear-gradient(to left, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 100%);
 }
 
@@ -115,19 +111,11 @@ canvas.tc-edit-bitmapeditor  {
 	<<background-linear-gradient "left, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%">>
 }
 
-[dir="rtl"] .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
+html[dir="rtl"] .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
     background-image: linear-gradient(to right, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.01) 100%);
 }
 
-.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button:dir(rtl) {
-    background-image: linear-gradient(to right, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.01) 100%);
-}
-
-[dir="rtl"] .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected {
-    background-image: linear-gradient(to right, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.05) 100%)
-}
-
-.tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected:dir(rtl) {
+html[dir="rtl"] .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected {
     background-image: linear-gradient(to right, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.05) 100%)
 }
 
