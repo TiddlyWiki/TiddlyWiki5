@@ -61,9 +61,9 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		{display: "block"},
 		{transformOrigin: "0 0"},
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
+		{transition: "none"},
 		{opacity: "0.0"}
 	]);
-	targetElement.style.removeProperty("transition");
 	// Get the position of the source node, or use the centre of the window as the source position
 	var sourceBounds = historyInfo.fromPageRect || {
 			left: window.innerWidth/2 - 2,
@@ -96,6 +96,9 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
 		{zIndex: "500"},
 	]);
+	setTimeout(function() {
+		$tw.utils.removeStyles(targetElement, ["transition", "opacity", "transform", "zIndex"]);
+	}, duration);
 	// Transform the previous tiddler out of the way and then hide it
 	if(prevCurrentTiddler && prevCurrentTiddler !== targetElement) {
 		scale = zoomBounds.width / sourceBounds.width;
@@ -169,10 +172,9 @@ ZoominListView.prototype.remove = function(widget) {
 		{display: "block"},
 		{transformOrigin: "50% 50%"},
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
+		{transition: "none"},
 		{zIndex: "0"}
 	]);
-	targetElement.style.removeProperty("transition");
-
 	// We'll move back to the previous or next element in the story
 	var toWidget = widget.previousSibling();
 	if(!toWidget) {
@@ -208,6 +210,9 @@ ZoominListView.prototype.remove = function(widget) {
 		{opacity: "0"},
 		{zIndex: "0"}
 	]);
+	setTimeout(function() {
+		$tw.utils.removeStyles(toWidgetDomNode, ["transformOrigin", "transform", "transition", "opacity", "zIndex"]);
+	}, duration);	
 	setTimeout(removeElement,duration);
 	// Now the tiddler we're going back to
 	if(toWidgetDomNode) {
