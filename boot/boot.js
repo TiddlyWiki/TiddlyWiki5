@@ -135,24 +135,13 @@ $tw.utils.isDate = (value) => value instanceof Date;
 Iterate through all the own properties of an object or array. Callback is invoked with (element,title,object)
 */
 $tw.utils.each = function(object,callback) {
-	var next,f,length;
 	if(object) {
-		if(Object.prototype.toString.call(object) == "[object Array]") {
-			for(f=0, length=object.length; f<length; f++) {
-				next = callback(object[f],f,object);
-				if(next === false) {
-					break;
-				}
-			}
+		if(Array.isArray(object)) {
+			object.forEach(callback);
 		} else {
-			var keys = Object.keys(object);
-			for(f=0, length=keys.length; f<length; f++) {
-				var key = keys[f];
-				next = callback(object[key],key,object);
-				if(next === false) {
-					break;
-				}
-			}
+			Object.entries(object).forEach((element) => {
+				callback(element[1], element[0], object);
+			});
 		}
 	}
 };
