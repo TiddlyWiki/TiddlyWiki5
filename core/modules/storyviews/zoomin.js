@@ -63,7 +63,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
 		{opacity: "0.0"}
 	]);
-	stargetElement.style.removeProperty("transition");
+	targetElement.style.removeProperty("transition");
 	// Get the position of the source node, or use the centre of the window as the source position
 	var sourceBounds = historyInfo.fromPageRect || {
 			left: window.innerWidth/2 - 2,
