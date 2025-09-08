@@ -47,16 +47,16 @@ ClassicStoryView.prototype.insert = function(widget) {
 		// Reset the margin once the transition is over
 		setTimeout(function() {
 			$tw.utils.setStyle(targetElement,[
-				{transition: "none"},
 				{marginBottom: ""}
 			]);
+  		targetElement.style.removeProperty('transition');
 		},duration);
 		// Set up the initial position of the element
 		$tw.utils.setStyle(targetElement,[
-			{transition: "none"},
 			{marginBottom: (-currHeight) + "px"},
 			{opacity: "0.0"}
 		]);
+		targetElement.style.removeProperty('transition');
 		$tw.utils.forceLayout(targetElement);
 		// Transition to the final position
 		$tw.utils.setStyle(targetElement,[
@@ -94,11 +94,11 @@ ClassicStoryView.prototype.remove = function(widget) {
 		setTimeout(removeElement,duration);
 		// Animate the closure
 		$tw.utils.setStyle(targetElement,[
-			{transition: "none"},
 			{transform: "translateX(0px)"},
 			{marginBottom:  currMarginBottom + "px"},
 			{opacity: "1.0"}
 		]);
+		targetElement.style.removeProperty('transition');
 		$tw.utils.forceLayout(targetElement);
 		$tw.utils.setStyle(targetElement,[
 			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", " +

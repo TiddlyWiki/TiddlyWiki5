@@ -63,9 +63,9 @@ CecilyStoryView.prototype.remove = function(widget) {
 	},duration);
 	// Animate the closure
 	$tw.utils.setStyle(targetElement,[
-		{transition: "none"},
 		{opacity: "1.0"}
 	]);
+	targetElement.style.removeProperty('transition');
 	$tw.utils.forceLayout(targetElement);
 	$tw.utils.setStyle(targetElement,[
 		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out, " +
