@@ -22,6 +22,7 @@ function slideOpen(domNode,options) {
 	// Reset the margin once the transition is over
 	setTimeout(function() {
 		$tw.utils.setStyle(domNode,[
+			{transition: "none"},
 			{marginBottom: ""},
 			{marginTop: ""},
 			{paddingBottom: ""},
@@ -32,10 +33,10 @@ function slideOpen(domNode,options) {
 		if(options.callback) {
 			options.callback();
 		}
-		domNode.style.removeProperty('transition');
 	},duration);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(domNode,[
+		{transition: "none"},
 		{marginTop: "0px"},
 		{marginBottom: "0px"},
 		{paddingTop: "0px"},
@@ -43,7 +44,6 @@ function slideOpen(domNode,options) {
 		{height: "0px"},
 		{opacity: "0"}
 	]);
-	domNode.style.removeProperty('transition');
 	$tw.utils.forceLayout(domNode);
 	// Transition to the final position
 	$tw.utils.setStyle(domNode,[
@@ -69,6 +69,7 @@ function slideClosed(domNode,options) {
 	// Clear the properties we've set when the animation is over
 	setTimeout(function() {
 		$tw.utils.setStyle(domNode,[
+			{transition: "none"},
 			{marginBottom: ""},
 			{marginTop: ""},
 			{paddingBottom: ""},
@@ -79,7 +80,6 @@ function slideClosed(domNode,options) {
 		if(options.callback) {
 			options.callback();
 		}
-		domNode.style.removeProperty('transition');
 	},duration);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(domNode,[
