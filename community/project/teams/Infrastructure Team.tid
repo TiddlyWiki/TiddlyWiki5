@@ -1,0 +1,14 @@
+title: Infrastructure Team
+tags: Community/Team
+modified: 20250909171928024
+created: 20250909171928024
+team: @MotovunJack
+
+The Infrastructure Team is responsible for maintaining and improving the infrastructure that supports the TiddlyWiki project. This includes the hosting, deployment, and management of the TiddlyWiki websites and services, as well as the tools and systems used by the TiddlyWiki community.
+
+The infrastructure includes:
+
+* talk.tiddlywiki.org
+* github.com/TiddlyWiki
+* tiddlywiki.com DNS
+* Netlify account for PR previews
