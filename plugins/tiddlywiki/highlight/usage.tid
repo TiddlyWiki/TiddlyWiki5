@@ -23,9 +23,9 @@ You can add themes from highlight.js by copying the CSS to a new tiddler and tag
 
 Then, check the new theme in the following list and uncheck others: 
 
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/Stylesheet/Highlight]]">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Stylesheet/Highlight]sort[title]!is[draft]]">
 
-<$checkbox tag="$:/tags/Stylesheet"> <<currentTiddler>></$checkbox>
+<$checkbox tag="$:/tags/Stylesheet"> <$link/></$checkbox>
 
 </$list>
 
