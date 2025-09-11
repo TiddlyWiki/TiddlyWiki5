@@ -1,7 +1,7 @@
 title: $:/tw5.com/releases/procedures
 tags: $:/tags/Global
 
-\procedure releasenotes(release)
+\procedure releasenote(release)
 <$let
 	releaseTiddler={{{ [all[tiddlers]tag[ReleaseNotes]] :filter[{!!caption}match<release>] }}}
 	releaseTiddlerCreated={{{ [<releaseTiddler>get[created]] }}}
@@ -63,4 +63,4 @@ for their winning design for the banner for this release (here is the
 
 <%endif%>
 
-\end releasenotes
+\end releasenote

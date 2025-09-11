@@ -17,4 +17,4 @@ Release v5.4.0 includes major improvements in a number of areas:
 \define release-contributors()
 \end release-contributors
 
-<<releasenotes 5.4.0>>
+<<releasenote 5.4.0>>

@@ -37,4 +37,4 @@ pmario
 \define banner-credit-discussion-link() https://talk.tiddlywiki.org/t/planning-a-v5-3-8-bug-fix-release/12963
 \define banner-credit-permalink() https://raw.githubusercontent.com/TiddlyWiki/TiddlyWiki5/e8a7bbf14e078d83ab6ba55a80cb8d9ba5290303/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png
 
-<<releasenotes 5.3.8>>
+<<releasenote 5.3.8>>
