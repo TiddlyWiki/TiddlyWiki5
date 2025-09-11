@@ -4,19 +4,7 @@ tags: Community Reference
 title: Developers
 type: text/vnd.tiddlywiki
 
-! [[GitHub Stats|https://github.com/TiddlyWiki/TiddlyWiki5/graphs/contributors]]
-
-There are several resources for developers to learn more about TiddlyWiki and to discuss and contribute to its development.
-
-> [img[https://repobeats.axiom.co/api/embed/b92b1b363e2b5f26837ae573a60d39b4248b50a0.svg]]
-
 * [[tiddlywiki.com/dev|https://tiddlywiki.com/dev]] is the official developer documentation
-
 * Get involved in the [[development on GitHub|https://github.com/TiddlyWiki/TiddlyWiki5]]
-
 * [[GitHub Discussions|https://github.com/TiddlyWiki/TiddlyWiki5/discussions]] are for Q&A and open-ended discussion
 * [[GitHub Issues|https://github.com/TiddlyWiki/TiddlyWiki5/issues]] are for raising bug reports and proposing specific, actionable new ideas
-
-* The older ~TiddlyWikiDev Google Group is now closed in favour of [[Talk TiddlyWiki|https://talk.tiddlywiki.org/]] and [[GitHub Discussions|https://github.com/TiddlyWiki/TiddlyWiki5/discussions]] 
-** It remains a useful archive: https://groups.google.com/group/TiddlyWikiDev
-*** An enhanced group search facility is available on [[mail-archive.com|https://www.mail-archive.com/tiddlywikidev@googlegroups.com/]]
