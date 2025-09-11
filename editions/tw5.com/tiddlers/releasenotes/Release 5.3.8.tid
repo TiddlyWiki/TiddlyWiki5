@@ -7,14 +7,7 @@ tags: ReleaseNotes
 title: Release 5.3.8
 type: text/vnd.tiddlywiki
 
-//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.7...master]]//
-
-<<.banner-credits
-	credit:"""Congratulations to [[Christian Byron|https://talk.tiddlywiki.org/u/Christian_Byron]] for their winning design for the banner for this release (here is the [[discussion|https://talk.tiddlywiki.org/t/planning-a-v5-3-8-bug-fix-release/12963]]).
-"""
-	url:"https://raw.githubusercontent.com/TiddlyWiki/TiddlyWiki5/e8a7bbf14e078d83ab6ba55a80cb8d9ba5290303/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
->>
-
+\define release-introduction()
 This is a bug fix release for TiddlyWiki [[Release 5.3.7]] that fixes problems introduced in that release.
 
 ! Translation improvements
@@ -30,14 +23,18 @@ This is a bug fix release for TiddlyWiki [[Release 5.3.7]] that fixes problems i
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9185">> [[Highlight Plugin]] theme listing
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9175">> Flexoki palette regressions
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/9166">> name field of fa-IR language plugin
+\end release-introduction
 
-! Acknowledgements
-
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
-
-<<.contributors """
+\define release-contributors()
 CeeBeeTree
 EvidentlyCube
 Leilei332
 pmario
-""">>
+\end release-contributors
+
+\define banner-credit-user-name() Christian Byron
+\define banner-credit-user-link() https://talk.tiddlywiki.org/u/Christian_Byron
+\define banner-credit-discussion-link() https://talk.tiddlywiki.org/t/planning-a-v5-3-8-bug-fix-release/12963
+\define banner-credit-permalink() https://raw.githubusercontent.com/TiddlyWiki/TiddlyWiki5/e8a7bbf14e078d83ab6ba55a80cb8d9ba5290303/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png
+
+<<releasenotes 5.3.8>>

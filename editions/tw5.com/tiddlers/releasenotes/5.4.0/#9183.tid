@@ -1,0 +1,6 @@
+title: $:/changenotes/5.4.0/#9183
+description: Offload server-only components to a plugin
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: pluginisation
+link: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9183

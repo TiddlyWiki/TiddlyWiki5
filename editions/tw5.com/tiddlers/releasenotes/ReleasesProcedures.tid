@@ -1,0 +1,66 @@
+title: $:/tw5.com/releases/procedures
+tags: $:/tags/Global
+
+\procedure releasenotes(release)
+<$let
+	releaseTiddler={{{ [all[tiddlers]tag[ReleaseNotes]] :filter[{!!caption}match<release>] }}}
+	releaseTiddlerCreated={{{ [<releaseTiddler>get[created]] }}}
+>
+	<a
+		class="tc-tiddlylink-external"
+		href=`https://github.com/TiddlyWiki/TiddlyWiki5/compare/v${ [all[tiddlers]tag[ReleaseNotes]has[released]!sort[released]] :filter[get[released]compare:number:lt<releaseTiddlerCreated>] +[get[caption]] }$...${ [<releaseTiddler>has[released]get[caption]addprefix[v]] :else[[master]] }$`
+		rel="noopener noreferrer"
+		target="_blank"
+	>
+		See ~GitHub for detailed change history of this release
+	</a>
+</$let>
+
+<%if [<banner-credit-user-name>!match[]] %>
+
+<img src=<<banner-credit-permalink>> width="140" style="float:left;margin-right:0.5em;"/>
+
+Congratulations to
+<a
+	class="tc-tiddlylink-external"
+	href=<<banner-credit-user-link>>
+	rel="noopener noreferrer"
+	target="_blank"
+><$text text=<<banner-credit-user-name>>/></a>
+for their winning design for the banner for this release (here is the
+<a
+	class="tc-tiddlylink-external"
+	href=<<banner-credit-discussion-link>>
+	rel="noopener noreferrer"
+	target="_blank"
+>discussion</a>).
+<div style="clear:both;"/>
+
+<%endif%>
+
+! Introduction
+
+<$transclude $variable="release-introduction" $mode="block"/>
+
+<%if [enlist<release-contributors>count[]!match[0]] %>
+
+! Acknowledgements
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+<ol class="doc-github-contributors">
+	<$list filter="[enlist<release-contributors>sort[]]" variable="username">
+		<li>
+			<a href={{{ [[https://github.com/]addsuffix<username>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">
+				<img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=64]] }}} width="64" height="64"/>
+				<span class="doc-github-contributor-username">
+					@<$text text=<<username>>/>
+				</span>
+			</a>
+		</li>
+	</$list>
+</ol>
+
+<%endif%>
+
+\end releasenotes
