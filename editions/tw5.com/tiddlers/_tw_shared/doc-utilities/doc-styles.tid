@@ -254,6 +254,12 @@ a.doc-deprecated-version.tc-tiddlylink {
     text-decoration: underline;
 }
 
+.doc-changenote-body {
+	margin-left: 2em;
+	font-style: italic;
+	font-size: 0.9em;
+}
+
 .doc-tiddler-fields {
 	background-color: <<colour code-background>>;
 	border: 1px solid <<colour tiddler-border>>;
@@ -283,6 +289,7 @@ a.doc-deprecated-version.tc-tiddlylink {
 	list-style: none;
 	display: flex;
 	flex-wrap: wrap;
+	padding: 0;
 }
 ol.doc-github-contributors li {
 	display: flex;
