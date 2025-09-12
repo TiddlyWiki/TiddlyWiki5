@@ -57,7 +57,7 @@ Improvements to the following translations:
 
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7217">> consistency of tiddler deletion by allowing missing tiddlers to be 'deleted', which just results in them being closed
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/commit/34643a42790777f1b235f57b5093bb29bd0b3a14">> layout switcher to include an optional icon for each layout
-* <<.link-badge-removed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/c0615e20ecf7d5d5e66d8a2acd28b80e8d59688d">> [[improvements to table layout|https://github.com/TiddlyWiki/TiddlyWiki5/pull/7010]] from v5.2.5 that have proved to not be backwards compatible
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/c0615e20ecf7d5d5e66d8a2acd28b80e8d59688d">> problems with [[improvements to table layout|https://github.com/TiddlyWiki/TiddlyWiki5/pull/7010]] from v5.2.5 by reverting them
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7323">> support for `&dollar;` HTML entity
 
 ! Widget Improvements

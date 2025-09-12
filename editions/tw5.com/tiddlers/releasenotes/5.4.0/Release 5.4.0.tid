@@ -1,0 +1,13 @@
+caption: 5.4.0
+created: 20250901000000000
+modified: 20250901000000000
+tags: ReleaseNotes
+title: Release 5.4.0
+type: text/vnd.tiddlywiki
+description: Under development
+
+\define release-introduction()
+Release v5.4.0 includes major improvements in a number of areas. See the [[project plan|https://github.com/orgs/TiddlyWiki/projects/4]] for more details.
+\end release-introduction
+
+<<releasenote 5.4.0>>

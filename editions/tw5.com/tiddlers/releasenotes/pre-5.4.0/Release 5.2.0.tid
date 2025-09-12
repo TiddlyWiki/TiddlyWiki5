@@ -123,7 +123,7 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 ! Widget Improvements
 
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/commit/9eda02868f21e9dd1733ffe26352bd7ac96285b4">> (and [[here|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f87b3bfcdba79b6ad198af286bd827c61044891f]]) new MessageCatcherWidget to catch arbitrary messages and execute action strings
-* <<.link-badge-modified "https://github.com/TiddlyWiki/TiddlyWiki5/commit/b9647b2c48152dac069a1099a0822b32375a66cf">> [[FieldManglerWidget]] to ensure it doesn't propogate events that it traps
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/commit/b9647b2c48152dac069a1099a0822b32375a66cf">> [[FieldManglerWidget]] to ensure it doesn't propogate events that it traps
 * <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/5597">> [[DropzoneWidget]] to optionally invoke actions after the `tm-import-tiddlers` message has been sent, and to specify an optional `contentTypesFilter` which determines which content types are accepted by the dropzone.
 * <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/commit/07caa16e8714afe9a64eb202375e4a2f95da1508">> [[DropzoneWidget]] to also use the specified deserializer for strings either dropped or pasted on to the dropzone
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/5635">> [[SelectWidget]] refreshing
@@ -206,7 +206,7 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 !! [[BibTeX Plugin]]
 
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/5581">> BibTeX Plugin to report errors more sensibly
-* <<.link-badge-modified "https://github.com/TiddlyWiki/TiddlyWiki5/commit/953fb9f237ad78e409c03d4b29b9854d8abf6cdf">> BibTex Plugin to force fieldnames to be lowercase
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/commit/953fb9f237ad78e409c03d4b29b9854d8abf6cdf">> BibTex Plugin to force fieldnames to be lowercase
 
 ! Developer Experience Improvements
 

@@ -1,0 +1,38 @@
+title: Release Notes and Changes
+
+! Release Notes
+
+! Change Notes
+
+* `title` by convention titles are formed `$:/changenotes/<version>/<unique identifier>`. The unique identifier is typically a GitHub PR or issue like `#1234` or a GitHub commit ID such as `98f850609d29bc36ded83f90c0d5be231649254b`
+* `tags` must include `$:/tags/ChangeNote`, see below for other valid tags
+* `change-type` the type of change as a single string; see below for values
+* `change-category` the category of the change; see below for vqalues
+
+Other valid tags for change notes:
+
+* `$:/tags/ChangeNote/Deprecation`
+* `$:/tags/ChangeNote/Breaking`
+
+Valid change note types are as follows:
+
+* ''bugfix''
+* ''feature''
+* ''enhancement''
+* ''deprecation''
+* ''security''
+* ''pluginisation''
+
+Valid change categories are as follows: 
+
+* ''internal''
+* ''translation''
+* ''plugin''
+* ''widget''
+* ''filters''
+* ''usability''
+* ''palette''
+* ''hackability''
+* ''nodejs''
+* ''performance''
+* ''developer''
