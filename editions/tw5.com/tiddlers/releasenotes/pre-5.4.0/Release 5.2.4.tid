@@ -61,7 +61,7 @@ Improvements to the translation features of TiddlyWiki itself:
 
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/127f660c91020dcbb43897d954066b31af729e74">> EditTextWidget to remove the default text "Type the text for the tiddler 'foo'"
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7081">> ''focus'' attribute to SelectWidget
-* <<.link-badge-removed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/1df4c29d73073788ba3859668112e8bb46171a6c">> restriction of the LetWidget being unable to create variables whose names begin with a dollar sign
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/commit/1df4c29d73073788ba3859668112e8bb46171a6c">> LetWidget to remove restriction of the widget being unable to create variables whose names begin with a dollar sign
 
 ! Filter improvements
 

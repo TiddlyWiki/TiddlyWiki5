@@ -24,13 +24,13 @@ description: Switchable page templates, EventCatcherWidget, Rename during import
 
 ! Usability Improvements
 
-* <<.link-badge-renamed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/5143">> "references" to "backlinks" in the tiddler info panel
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/5143">> tiddler info panel to change "references" to "backlinks"
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/commit/1546a4a1895b93a47b79c9d37b94be039604443a">> warning message about using the online plugin library with the client-server configuration
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/commit/9cd5415dfe54b47819920aa3cf6ac2d5e3a9188e">> favicon for the prerelease edition
-* <<.link-badge-removed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/22e25c05eb5e5cc5b670a362d1eead1d62dedbb9">> normalize.css's styling of search input fields and <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/commit/9003c810393d90ee20db083fda35b6469acc592a">> to a modern fork of normalize.css
-* <<.link-badge-removed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/bb6fee4e1c79a2b1cbf75cd0326ecb8fb1ccb86b">> unneeded editor toolbar buttons when editing SVG tiddlers
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/commit/22e25c05eb5e5cc5b670a362d1eead1d62dedbb9">> normalize.css's styling of search input fields and <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/commit/9003c810393d90ee20db083fda35b6469acc592a">> to a modern fork of normalize.css
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/commit/bb6fee4e1c79a2b1cbf75cd0326ecb8fb1ccb86b">> editor toolbar buttons editing SVG tiddlers by removing unneeded buttons
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/5089">> global keyboard shortcut for switching layouts
-* <<.link-badge-hide "https://github.com/TiddlyWiki/TiddlyWiki5/commit/1d7091e637462dcda8c28d660ca42c073f647043">> the `.tid` exporter when more than one tiddler to export
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/commit/1d7091e637462dcda8c28d660ca42c073f647043">> the export menu to hide the `.tid` exporter when there is more than one tiddler to export
 
 ! Import Mechanism Improvements
 
@@ -153,7 +153,7 @@ Other improvements:
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4908">> support for an override saver
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4923">> utility CSS classes to replace use of `&nbsp;` to introduce visual separation
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4983">> option to configure the tag used for TableOfContents in the menubar
-* <<.link-badge-modified "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4971">> the KeyboardWidget to not trap keys if there are no actions to be invoked
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4971">> the KeyboardWidget to not trap keys if there are no actions to be invoked
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4975">> buttons to the Edit Template toolbar for the editor-height and the stamp tool for tiddlers of type ''application/javascript'',''application/json'' and ''application/x-tiddler-dictionary''
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4985">> all instance of the [[tabs Macro]] in the core to use the explicitState attribute
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/5000">> support for the <kbd>meta</kbd> key as a modifier in actions
@@ -238,7 +238,7 @@ Please note that using this plugin does not guarantee compliance with any partic
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4674">> issue with adding tags in $:/Manager
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4686">> edit template "type" dropdown positioning
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4687">> edit template field dropdown positioning
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4704">> (with <<.link-badge-addendum "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4705">>) syntax error in ScrollableWidget
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4704">> (with additional updates <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4705">>) syntax error in ScrollableWidget
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4780">> problem with headers not being treated case insensitively
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/a2796d89ab3dbf4a15b63b0f4623387fdc6acd5b">> problem with `Content-Type` HTTP header sent as `Content-type`
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4776">> EntityWidget not refreshing correctly
