@@ -9,28 +9,7 @@ type: text/vnd.tiddlywiki
 
 \define release-introduction()
 This is a bug fix release for TiddlyWiki [[Release 5.3.7]] that fixes problems introduced in that release.
-
-! Translation improvements
-
-* Chinese
-* Polish
-* Greek
-
-! Bug Fixes
-
-* <<.link-badge-reverted "https://github.com/TiddlyWiki/TiddlyWiki5/commit/32caeb69c3e7b75a80a84a1e14363e87175b164e">> the [[change in v5.3.7|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8721]] that broke the [[list-tagged-draggable Macro]]. The change involved updating some core macros to use procedures
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/93d30f374da4a6b2037b335f7f7d4eddce8192db">> display of field names longer than the available width in the info panel
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9185">> [[Highlight Plugin]] theme listing
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/9175">> Flexoki palette regressions
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/9166">> name field of fa-IR language plugin
 \end release-introduction
-
-\define release-contributors()
-CeeBeeTree
-EvidentlyCube
-Leilei332
-pmario
-\end release-contributors
 
 \define banner-credit-user-name() Christian Byron
 \define banner-credit-user-link() https://talk.tiddlywiki.org/u/Christian_Byron

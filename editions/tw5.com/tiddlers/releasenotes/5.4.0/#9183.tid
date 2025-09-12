@@ -3,4 +3,8 @@ description: Offload server-only components to a plugin
 release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: pluginisation
+change-category: internal
 link: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9183
+github-contributors: Jermolene
+
+This change reduces the size of the core plugin by 114.5KB or about 4.5%.

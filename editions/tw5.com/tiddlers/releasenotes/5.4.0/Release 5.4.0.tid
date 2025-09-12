@@ -7,14 +7,7 @@ type: text/vnd.tiddlywiki
 description: Under development
 
 \define release-introduction()
-Release v5.4.0 includes major improvements in a number of areas:
-
-* One thing
-* Another thing
-* More things
+Release v5.4.0 includes major improvements in a number of areas. See the [[project plan|https://github.com/orgs/TiddlyWiki/projects/4]] for more details.
 \end release-introduction
-
-\define release-contributors()
-\end release-contributors
 
 <<releasenote 5.4.0>>
