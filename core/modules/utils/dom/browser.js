@@ -25,6 +25,26 @@ exports.setStyle = function(element,styles) {
 };
 
 /*
+Remove style properties of an element
+  element: dom node
+	styleProperties: ordered array of string property names
+*/
+exports.removeStyles = function(element, styleProperties) {
+	for (var i=0; i<styleProperties.length; i++) {
+		element.style.removeProperty($tw.utils.convertStyleNameToPropertyName(styleProperties[i]));
+	}
+}
+
+/*
+Remove single style property of an element
+  element: dom node
+	styleProperty: string property name
+*/
+exports.removeStyle = function(element, styleProperty) {
+	$tw.utils.removeStyles(element, [styleProperty])
+}
+
+/*
 Converts a standard CSS property name into the local browser-specific equivalent. For example:
 	"background-color" --> "backgroundColor"
 	"transition" --> "webkitTransition"
