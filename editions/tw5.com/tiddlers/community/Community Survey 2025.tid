@@ -1,28 +1,20 @@
 title: Community Survey 2025
 created: 20250708130030654
-modified: 20250708130030654
+modified: 20250826162904085
 
 <div style.float="right" style.padding-left="1em">
-<$image source="Community Survey 2025.png" alt="Shape the future by taking the TiddlyWiki Community Survey 2025" width="280"/>
+<$image source="Community Survey 2025.png" alt="Shaping the future of TiddlyWiki with the Community Survey 2025" width="280"/>
 </div>
 
 The core developers work hard year by year to continuously improve ~TiddlyWiki. Part of the satisfaction is that we are not just building software for ourselves, we’re serving the needs of a wider community of users.
 
-That begs the question of how we can understand the needs of these other users. We do it in an informal way through every interaction with users on the forum, or on GitHub, but once in a while it can be useful to do take a more formal approach, such as survey.
+That begs the question of how we can understand the needs of these other users. We do it in an informal way through every interaction with users on the forum, or on GitHub, but once in a while it can be useful to do take a more formal approach, and so we undertook the ~TiddlyWiki Community Survey 2025. This brief, anonymous survey was designed to give us insight into the needs of TiddlyWiki users, with a mix of structured and freeform questions.
 
-So, we would like to invite you to participate in the ~TiddlyWiki Community Survey 2025. This brief, anonymous survey is designed to give us insight into the needs of TiddlyWiki users, with a mix of structured and freeform questions.
+The [[raw results|https://ec.europa.eu/eusurvey/publication/tiddlywiki-users-2025]] of the survey are available in TiddlyWiki form on this new site:
 
-The results of this survey will help inform future developments, helping us focus on what would make TiddlyWiki better for you, both as software and as a community. Even longer-term, it will help us refine the future vision of the project, ensuring it is based on the needs of our community.
+https://tiddlywiki.com/surveys.html
 
-The survey will remain open until Monday 11th August 2025. Shortly afterwards, we will aggregate and share the findings.
-
-Take the survey here:
-
-https://ec.europa.eu/eusurvey/runner/tiddlywiki-users-2025
-
-You can explore the questions and responses on this new site:
-
-https://tiddlywiki.com/prerelease/surveys.html
+The results of this survey will help inform future developments, helping us focus on what would make TiddlyWiki better for you, both as software and as a community. Even longer-term, it will help us refine the future vision of the project, ensuring it is based on the needs of our community. We intend to publish further analysis of the survey results in the coming weeks.
 
 !! The Great Viral TiddlyWiki Interview Project (2010)
 

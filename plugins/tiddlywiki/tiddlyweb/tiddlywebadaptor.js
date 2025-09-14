@@ -175,7 +175,7 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
 		data: {
-			filter: "[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/library/sjcl.js]] -[[$:/core]]"
+			filter: "[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[has[plugin-type]field:platform[server]] -[[$:/library/sjcl.js]] -[[$:/core]]"
 		},
 		callback: function(err,data) {
 			// Check for errors

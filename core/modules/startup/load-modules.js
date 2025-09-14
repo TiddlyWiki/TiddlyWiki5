@@ -36,7 +36,6 @@ exports.startup = function() {
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
 	$tw.wiki.initParsers();
-	$tw.Commander.initCommands();
 	// --------------------------
 	// The rest of the startup process here is not strictly to do with loading modules, but are needed before other startup
 	// modules are executed. It is easier to put them here than to introduce a new startup module
@@ -58,4 +57,7 @@ exports.startup = function() {
 	});
 	// Kick off the background action dispatcher
 	$tw.backgroundActionDispatcher = new $tw.BackgroundActionDispatcher($tw.filterTracker,$tw.wiki);
+	if($tw.node) {
+		$tw.Commander.initCommands();
+	}
 };

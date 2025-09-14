@@ -1433,7 +1433,7 @@ $tw.Wiki = function(options) {
 			checkTiddler = function(tiddler,title) {
 				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType)) {
 					var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
-					if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
+					if(title === "$:/core" || title === "$:/core-server" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
 						self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
 						pluginTiddlers.push(tiddler);
 						registeredTitles.push(tiddler.fields.title);
@@ -2350,6 +2350,7 @@ $tw.loadTiddlersNode = function() {
 	});
 	// Load the core tiddlers
 	$tw.wiki.addTiddler($tw.loadPluginFolder($tw.boot.corePath));
+	$tw.wiki.addTiddler($tw.loadPluginFolder($tw.boot.coreServerPath));
 	// Load any extra plugins
 	$tw.utils.each($tw.boot.extraPlugins,function(name) {
 		if(name.charAt(0) === "+") { // Relative path to plugin
@@ -2423,6 +2424,7 @@ $tw.boot.initStartup = function(options) {
 		// System paths and filenames
 		$tw.boot.bootPath = options.bootPath || path.dirname(module.filename);
 		$tw.boot.corePath = path.resolve($tw.boot.bootPath,"../core");
+		$tw.boot.coreServerPath = path.resolve($tw.boot.bootPath,"../core-server");
 		// If there's no arguments then default to `--help`
 		if($tw.boot.argv.length === 0) {
 			$tw.boot.argv = ["--help"];

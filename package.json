@@ -1,7 +1,7 @@
 {
   "name": "tiddlywiki",
   "preferGlobal": true,
-  "version": "5.3.8-prerelease",
+  "version": "5.4.0-prerelease",
   "author": "Jeremy Ruston <jeremy@jermolene.com>",
   "description": "a non-linear personal web notebook",
   "contributors": [

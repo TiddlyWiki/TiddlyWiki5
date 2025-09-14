@@ -1,0 +1,8 @@
+title: $:/changenotes/5.3.8/75502266176de9d4a5e1f89cd7f2e455b7a2f6da
+description: Update Greek translation
+release: 5.3.8
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: translation
+links: https://github.com/TiddlyWiki/TiddlyWiki5/commit/75502266176de9d4a5e1f89cd7f2e455b7a2f6da
+github-contributors: superuser-does
