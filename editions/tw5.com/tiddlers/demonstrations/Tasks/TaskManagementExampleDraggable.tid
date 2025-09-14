@@ -5,6 +5,8 @@ title: TaskManagementExample (Draggable)
 type: text/vnd.tiddlywiki
 
 This is a version of the TaskManagementExample enhanced with the ability to drag and drop the task list to re-order them.
+To install export this tiddler and [[TaskManagementExampleDraggableTemplate]] then import both to your tiddlywiki.
+
 
 ! Outstanding tasks
 
