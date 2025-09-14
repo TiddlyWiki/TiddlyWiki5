@@ -4,3 +4,4 @@ This plugin contains TiddlyWiki's core components that are only needed on the se
 
 * Commands
 * HTTP server code
+* Utility functions for server
