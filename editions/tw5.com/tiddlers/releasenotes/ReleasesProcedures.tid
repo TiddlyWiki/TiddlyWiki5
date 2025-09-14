@@ -7,9 +7,7 @@ tags: $:/tags/Global
 	href=`https://github.com/TiddlyWiki/TiddlyWiki5/compare/v${ [all[tiddlers]tag[ReleaseNotes]has[released]!sort[released]] :filter[get[released]compare:number:lt<releaseTiddlerCreated>] +[get[caption]] }$...${ [<releaseTiddler>has[released]get[caption]addprefix[v]] :else[[master]] }$`
 	rel="noopener noreferrer"
 	target="_blank"
->
-	See ~GitHub for detailed change history of this release
-</a>
+>the detailed change history on ~GitHub</a>
 \end github-changes-link
 
 \procedure banner-credits()
@@ -46,16 +44,27 @@ for their winning design for the banner for this release (here is the
 		<ul>
 			<$list filter="[tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>]" variable="change">
 				<li>
-					<a
-						href={{{ [<change>get[link]] }}}
+					<$link
+						to="Release Notes and Changes"
 						class="doc-link-badge"
 						target="_blank"
 						rel="noopener noreferrer"
 						style.backgroundColor={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/colour]get[text]] }}}
 					>
 						<$text text={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/caption]get[text]] }}}/>
-					</a>
+					</$link>
 					<$text text=" "/>
+					<$list filter="[<change>get[links]enlist-input[]]" variable="link">
+						<a
+							href=<<link>>
+							class="doc-github-link"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{{$:/core/images/github}}
+						</a>
+						<$text text=" "/>
+					</$list>
 					<$transclude $tiddler=<<change>> $field="description" $mode="inline"/>
 					<div class="doc-changenote-body">
 						<$transclude $tiddler=<<change>> $mode="block"/>
@@ -89,7 +98,7 @@ for their winning design for the banner for this release (here is the
 	release-github-contributors={{{ [tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :map:flat[enlist{!!github-contributors}] +[sort[]format:titlelist[]join[ ]]}}}
 >
 
-<<github-changes-link>>
+See <<github-changes-link>> and [[other versions|TiddlyWiki Releases]].
 
 <<banner-credits>>
 
