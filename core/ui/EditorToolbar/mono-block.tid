@@ -7,9 +7,8 @@ condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.
 button-classes: tc-text-editor-toolbar-item-start-group
 shortcuts: ((mono-block))
 
-<$action-sendmessage
-	$message="tm-edit-text-operation"
-	$param="wrap-lines"
+<$transclude $variable="editor-text-operation"
+	operation="wrap-lines"
 	prefix="
 ```"
 	suffix="```"

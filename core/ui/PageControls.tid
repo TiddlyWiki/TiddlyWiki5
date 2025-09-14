@@ -6,7 +6,7 @@ title: $:/core/ui/PageTemplate/pagecontrols
 <div class="tc-page-controls">
 	<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
 		<$list filter="[<config-title>!text[hide]]" storyview="pop" variable="ignore">
-			<$let tv-config-toolbar-class={{{ [enlist<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] +[join[ ]] }}}>
+			<$let tv-config-toolbar-class={{{ [tf.toolbar-button-classes<tv-config-toolbar-class>,<listItem>] }}}>
 				<$transclude $tiddler=<<listItem>> $mode="inline"/>
 			</$let>
 		</$list>

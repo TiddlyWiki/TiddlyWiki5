@@ -9,13 +9,11 @@ tags: $:/tags/TiddlerInfo/Advanced
 
 <<lingo Hint>>
 <ul>
-<$list filter="[all[current]plugintiddlers[]sort[title]]" emptyMessage=<<lingo Empty/Hint>>>
-<li>
-<$link to={{!!title}}>
-<$view field="title"/>
-</$link>
-</li>
-</$list>
+<$transclude $variable="list-with-empty" 
+	filter="[all[current]plugintiddlers[]sort[title]]" 
+	emptyMessage=<<lingo Empty/Hint>>
+	template="<li><$link to={{!!title}}><$view field='title'/></$link></li>"
+/>
 </ul>
 
 </$list>

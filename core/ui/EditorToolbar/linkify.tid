@@ -7,10 +7,8 @@ shortcuts: ((linkify))
 title: $:/core/ui/EditorToolbar/linkify
 tags: $:/tags/EditorToolbar
 
-<$action-sendmessage
-	$message="tm-edit-text-operation"
-	$param="wrap-selection"
+<$transclude $variable="editor-text-operation"
+	operation="wrap-selection"
 	prefix="[["
 	suffix="]]"
-	trimSelection="yes"
 />

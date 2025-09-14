@@ -4,13 +4,9 @@ caption: {{$:/core/images/refresh-button}} {{$:/language/Buttons/Refresh/Caption
 description: {{$:/language/Buttons/Refresh/Hint}}
 
 \whitespace trim
-<$button message="tm-browser-refresh" tooltip={{$:/language/Buttons/Refresh/Hint}} aria-label={{$:/language/Buttons/Refresh/Caption}} class=<<tv-config-toolbar-class>>>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/refresh-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/Refresh/Caption}}/>
-</span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/Refresh/Hint}}
+	label={{$:/language/Buttons/Refresh/Caption}}
+	icon="$:/core/images/refresh-button"
+	actions="<$action-sendmessage $message='tm-browser-refresh'/>"
+/>

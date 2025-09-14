@@ -4,13 +4,9 @@ caption: {{$:/core/images/permaview-button}} {{$:/language/Buttons/Permaview/Cap
 description: {{$:/language/Buttons/Permaview/Hint}}
 
 \whitespace trim
-<$button message="tm-permaview" tooltip={{$:/language/Buttons/Permaview/Hint}} aria-label={{$:/language/Buttons/Permaview/Caption}} class=<<tv-config-toolbar-class>>>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/permaview-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/Permaview/Caption}}/>
-</span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/Permaview/Hint}}
+	label={{$:/language/Buttons/Permaview/Caption}}
+	icon="$:/core/images/permaview-button"
+	actions="<$action-sendmessage $message='tm-permaview'/>"
+/>
