@@ -7,6 +7,7 @@ const eslint = require("eslint");
 const {
     FlatCompat,
 } = require("@eslint/eslintrc");
+const { fixupConfigRules } = require("@eslint/compat");
 
 const compat = new FlatCompat({
     baseDirectory: __dirname,
@@ -28,7 +29,10 @@ module.exports = [{
         "playwright.config.js",
 
     ],
-}, ...compat.extends("eslint:recommended"), {
+},
+...compat.extends("eslint:recommended"),
+...fixupConfigRules(compat.extends("plugin:es/restrict-to-es2017")),
+{
     languageOptions: {
         globals: {
             ...globals.browser,
@@ -37,7 +41,7 @@ module.exports = [{
             $tw: "writable", // temporary
         },
 
-        ecmaVersion: 2017,
+        ecmaVersion: 2025,
         sourceType: "commonjs",
     },
 
