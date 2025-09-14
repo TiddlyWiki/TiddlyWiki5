@@ -16,8 +16,8 @@ function LinkedList() {
 
 LinkedList.prototype.clear = function() {
 	// LinkedList performs the duty of both the head and tail node
-	this.next = new Map();
-	this.prev = new Map();
+	this.next = new LLMap();
+	this.prev = new LLMap();
 	// Linked list head initially points to itself
 	this.next.set(null, null);
 	this.prev.set(null, null);
@@ -187,6 +187,20 @@ function _linkToEnd(list,value) {
 function _assertString(value) {
 	if(typeof value !== "string") {
 		throw "Linked List only accepts string values, not " + value;
+	}
+};
+
+var LLMap = function() {
+	this.map = Object.create(null);
+};
+
+// Just a wrapper so our object map can also accept null.
+LLMap.prototype = {
+	set: function(key,val) {
+		(key === null) ? (this.null = val) : (this.map[key] = val);
+	},
+	get: function(key) {
+		return (key === null) ? this.null : this.map[key];
 	}
 };
 
