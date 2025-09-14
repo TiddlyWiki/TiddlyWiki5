@@ -252,3 +252,6 @@ ViewTemplateSubtitle/Caption: View Template Subtitle
 ViewTemplateSubtitle/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the subtitle of a tiddler.
 ViewTemplateTags/Caption: View Template Tags
 ViewTemplateTags/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the tags area of a tiddler.
+WikiInformation/Caption: Wiki Information
+WikiInformation/Hint: This page summarises high level information about the configuration of this ~TiddlyWiki. It is designed to enable users to quickly share relevant aspects of the configuration of their ~TiddlyWiki with others, for example when seeking help in one of the forums. No private or personal information is included, and nothing is shared without being explicitly copied and pasted elsewhere
+WikiInformation/Drag/Caption: Drag this link to copy this tool to another wiki
