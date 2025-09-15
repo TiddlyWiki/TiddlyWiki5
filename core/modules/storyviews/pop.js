@@ -37,10 +37,7 @@ PopStoryView.prototype.insert = function(widget) {
 	}
 	// Reset once the transition is over
 	setTimeout(function() {
-		$tw.utils.setStyle(targetElement,[
-			{transition: "none"},
-			{transform: "none"}
-		]);
+		$tw.utils.removeStyles(targetElement, ["transition", "transform"]);		
 		$tw.utils.setStyle(widget.document.body,[
 			{"overflow-x": ""}
 		]);
@@ -51,10 +48,10 @@ PopStoryView.prototype.insert = function(widget) {
 	]);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(targetElement,[
-		{transition: "none"},
 		{transform: "scale(2)"},
 		{opacity: "0.0"}
 	]);
+	$tw.utils.removeStyle(targetElement, "transition");		
 	$tw.utils.forceLayout(targetElement);
 	// Transition to the final position
 	$tw.utils.setStyle(targetElement,[
@@ -63,6 +60,9 @@ PopStoryView.prototype.insert = function(widget) {
 		{transform: "scale(1)"},
 		{opacity: "1.0"}
 	]);
+	setTimeout(function() {
+		$tw.utils.removeStyles(targetElement, ["transition", "transform", "opactity"]);
+	}, duration)
 };
 
 PopStoryView.prototype.remove = function(widget) {
@@ -81,11 +81,7 @@ PopStoryView.prototype.remove = function(widget) {
 	// Remove the element at the end of the transition
 	setTimeout(removeElement,duration);
 	// Animate the closure
-	$tw.utils.setStyle(targetElement,[
-		{transition: "none"},
-		{transform: "scale(1)"},
-		{opacity: "1.0"}
-	]);
+	$tw.utils.removeStyles(targetElement, ["transition", "transform", "opacity"]);		
 	$tw.utils.forceLayout(targetElement);
 	$tw.utils.setStyle(targetElement,[
 		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out, " +
