@@ -216,8 +216,10 @@ function MarkdownParser(type,text,options) {
 	var mdTree = md.parse(text,env);
 	var textToParse = '<div class="markdown">\n' + md.renderer.render(mdTree,md.options,env) + '</div>';
 
-	//console.log(JSON.stringify(mdTree,null,2));
-	//console.log("\n----------------\n" + textToParse);
+	if($tw.log.MARKDOWN) {
+		console.log(JSON.stringify(mdTree,null,2));
+		console.log("\n----------------\n" + textToParse);
+	}
 
 	var wikiParser;
 
