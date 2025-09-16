@@ -1,0 +1,12 @@
+caption: Booboo Bear
+created: 20240204194659091
+first-name: Booboo
+last-name: Bear
+modified: 20240204201551863
+tags: Person
+title: Person/2
+type: text/vnd.tiddlywiki
+
+\import [[b b]]
+
+<<list-fields>>
