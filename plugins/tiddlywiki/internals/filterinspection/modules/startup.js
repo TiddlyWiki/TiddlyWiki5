@@ -20,8 +20,8 @@ exports.startup = function() {
 	$tw.plugins.internals = {
 		getWrappers: getWrappers
 	};
-	// We accumulate the output of the filter inspection into an array. We can't directly write to the wiki since we might be in the middle
-	// of the refresh cycle, when writes to the wiki are not allowed
+	// We accumulate the output of the filter inspection into an array. We can't directly write to the wiki since we might be in
+	// the middle of the refresh cycle, when writes to the wiki are not allowed
 	var accumulator = [];
 	// Add our hook for each filter evaluation
 	$tw.hooks.addHook("th-filter-evaluation",function(filterString,wrappers) {
