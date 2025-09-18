@@ -1071,7 +1071,7 @@ $tw.Tiddler.prototype.hasField = function(field) {
 $tw.Tiddler.prototype.isPlugin = function() {
 	if(!this.fields["plugin-type"]) return false;
 	if(!this.fields.text || !this.fields.type) return false;
-	if(!$tw.Wiki.pluginInfoModules[this.fields.type]) return false;
+	if(!$tw.Wiki.pluginSerializerModules[this.fields.type]) return false;
 	return true;
 };
 
@@ -1415,7 +1415,7 @@ $tw.Wiki = function(options) {
 			var tiddler = tiddlers[title];
 			if(tiddler) {
 				if(!tiddler.isPlugin()) return;
-				pluginInfo[tiddler.fields.title] = $tw.Wiki.pluginInfoModules[tiddler.fields.type].parse(tiddler);
+				pluginInfo[tiddler.fields.title] = $tw.Wiki.pluginSerializerModules[tiddler.fields.type].parse(tiddler);
 				results.modifiedPlugins.push(tiddler.fields.title);
 			} else {
 				if(pluginInfo[title]) {
@@ -1749,7 +1749,7 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 });
 
 // the fields in stringify may be frozen, do not write to them
-$tw.modules.define("$:/boot/plugininfo/json","plugininfo",{
+$tw.modules.define("$:/boot/plugininfo/json","pluginserializer",{
 	name: "application/json",
 	parse: function(tiddler){ return $tw.utils.parseJSONSafe(tiddler.fields.text, function(){}); },
 	stringify: function(fields, data){ return JSON.stringify(data); },
@@ -2153,7 +2153,7 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		}
 		pluginInfo.dependents = pluginInfo.dependents || [];
 		pluginInfo.type = "application/json";
-		pluginInfo.text = $tw.Wiki.pluginInfoModules[pluginInfo.type].stringify(pluginInfo, {tiddlers: pluginInfo.tiddlers});
+		pluginInfo.text = $tw.Wiki.pluginSerializerModules[pluginInfo.type].stringify(pluginInfo, {tiddlers: pluginInfo.tiddlers});
 		delete pluginInfo.tiddlers;
 		// Deserialise array fields (currently required for the dependents field)
 		for(var field in pluginInfo) {
@@ -2392,6 +2392,7 @@ $tw.loadTiddlersNode = function() {
 Startup TiddlyWiki
 */
 $tw.boot.initStartup = function(options) {
+	$tw.hooks.invokeHook("th-boot-start", options);
 	// Get the URL hash and check for safe mode
 	$tw.locationHash = "#";
 	if($tw.browser && !$tw.node) {
@@ -2521,7 +2522,8 @@ $tw.boot.initStartup = function(options) {
 	$tw.Wiki.tiddlerDeserializerModules = Object.create(null);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	// Install the plugin info modules
-	$tw.Wiki.pluginInfoModules = $tw.modules.getModulesByTypeAsHashmap("plugininfo");
+	$tw.Wiki.pluginSerializerModules = $tw.modules.getModulesByTypeAsHashmap("pluginserializer");
+
 	// Call unload handlers in the browser
 	if($tw.browser) {
 		window.onbeforeunload = function(event) {

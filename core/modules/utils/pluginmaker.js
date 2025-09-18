@@ -21,7 +21,7 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers,saveAsT
 		throw "No such tiddler as " + title;
 	}
 	// Extract the JSON
-	var jsonPluginTiddler = $tw.Wiki.pluginInfoModules[pluginTiddler.fields.type].parse(pluginTiddler.fields.text);
+	var jsonPluginTiddler = $tw.Wiki.pluginSerializerModules[pluginTiddler.fields.type].parse(pluginTiddler.fields.text);
 	if(!jsonPluginTiddler) {
 		throw "Cannot parse plugin tiddler " + title + "\n" + $tw.language.getString("Error/Caption") + ": " + e;
 	}
@@ -60,7 +60,7 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers,saveAsT
 		version += "+" + pluginVersion.build;
 	}
 	// Save the tiddler
-	var text = $tw.Wiki.pluginInfoModules[saveAsType||pluginTiddler.fields.type].stringify(pluginTiddler.fields, {tiddlers: plugins});
+	var text = $tw.Wiki.pluginSerializerModules[saveAsType||pluginTiddler.fields.type].stringify(pluginTiddler.fields, {tiddlers: plugins});
 	$tw.wiki.addTiddler(new $tw.Tiddler(pluginTiddler,{text: text, version: version}));
 	// Delete any non-shadow constituent tiddlers
 	$tw.utils.each(tiddlers,function(title) {

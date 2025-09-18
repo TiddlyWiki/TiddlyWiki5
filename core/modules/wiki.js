@@ -916,7 +916,7 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 		tiddler = this.getTiddler(tiddler);
 	}
 	if(tiddler && tiddler.isPlugin()) {
-		return $tw.Wiki.pluginInfoModules[tiddler.fields.type].parse(tiddler);
+		return $tw.Wiki.pluginSerializerModules[tiddler.fields.type].parse(tiddler);
 	}
 	if(tiddler && tiddler.fields.text) {
 		switch(tiddler.fields.type) {
