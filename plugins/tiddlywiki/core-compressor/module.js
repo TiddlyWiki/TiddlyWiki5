@@ -2,13 +2,7 @@
 (function (fflate) {
     "use strict";
     function registerBrowser($tw) {
-        // create the $tw.preloadHooks array if it doesn't exist
-        $tw = $tw || Object.create(null);
-        $tw.preloadHooks = $tw.preloadHooks || [];
-        // Add the hook with the vnd.json.gz plugin serializer
-        $tw.preloadHooks.push(["th-boot-start", (options) => {
-            $tw.modules.define("$:/boot/plugininfo/vnd.json.gz", "pluginserializer", pluginserializer)
-        }]);
+        $tw.modules.define("$:/boot/plugininfo/vnd.json.gz", "pluginserializer", pluginserializer)
     }
     function registerNode($tw) {
         $tw.Wiki.pluginSerializerModules[pluginserializer.name] = pluginserializer;

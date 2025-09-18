@@ -2392,7 +2392,6 @@ $tw.loadTiddlersNode = function() {
 Startup TiddlyWiki
 */
 $tw.boot.initStartup = function(options) {
-	$tw.hooks.invokeHook("th-boot-start", options);
 	// Get the URL hash and check for safe mode
 	$tw.locationHash = "#";
 	if($tw.browser && !$tw.node) {

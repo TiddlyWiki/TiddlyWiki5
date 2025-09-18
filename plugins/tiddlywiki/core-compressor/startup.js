@@ -12,6 +12,7 @@ Core compressor initialisation
 // Export name and synchronous status
 exports.name = "core-compressor";
 exports.before = ["startup"];
+exports.platforms = ["node"];
 exports.synchronous = true;
 
 exports.startup = function () {
