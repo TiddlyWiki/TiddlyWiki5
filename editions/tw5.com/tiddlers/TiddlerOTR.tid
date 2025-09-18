@@ -1,0 +1,10 @@
+created: 20240217005718290
+modified: 20240217010023625
+tags: 
+title: TiddlerOTR
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$parameters $parseMode="@parseMode">
+	<$text text=<<@parseMode>>/>
+</$parameters>

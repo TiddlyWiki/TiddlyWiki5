@@ -1,0 +1,7 @@
+created: 20240217012631558
+modified: 20240217030241005
+tags: 
+title: text-john-strange text macro call
+type: text/vnd.tiddlywiki
+
+text <<john one:val1 two: 'val "2"' three: "val '3'" four: """val 4"5'""" five: [[val 5]] >>

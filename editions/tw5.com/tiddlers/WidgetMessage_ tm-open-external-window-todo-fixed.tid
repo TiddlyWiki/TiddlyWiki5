@@ -1,0 +1,10 @@
+created: 20221123145406421
+modified: 20240901184846958
+tags: 
+title: WidgetMessage: tm-open-external-window-todo-fixed
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+Same problem as: [[WidgetMessage: tm-full-screen-todo]]
+with 3 buttons in a row now. 
