@@ -49,6 +49,8 @@ title: $:/core/templates/tiddlywiki5.html
 <div id="bootKernelPrefix" style="display:none;">
 `{{ $:/boot/bootprefix.js ||$:/core/templates/javascript-tiddler}}`
 </div>
+<!--~~ $:/tags/BootHook ~~-->
+`{{{ [enlist<saveTiddlerAndShadowsFilter>tag[$:/tags/BootHook]] ||$:/core/templates/javascript-tiddler}}}`
 <!--~~ Boot kernel ~~-->
 <div id="bootKernel" style="display:none;">
 `{{ $:/boot/boot.js ||$:/core/templates/javascript-tiddler}}`

@@ -2758,6 +2758,14 @@ $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 	return args[0];
 };
 
+$tw.preloadHooks.forEach(function(hook){
+	if(!Array.isArray(hook) || hook.length !== 2 || typeof hook[0] !== "string" || typeof hook[1] !== "function") {
+		console.warn("Invalid hook definition in $tw.preloadHooks", hook);
+	} else {
+		$tw.hooks.addHook(hook[0], hook[1]);
+	}
+});
+
 /////////////////////////// Main boot function to decrypt tiddlers and then startup
 
 $tw.boot.boot = function(callback) {
