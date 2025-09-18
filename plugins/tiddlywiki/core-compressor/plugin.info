@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/core-compressor",
+	"name": "Core Compressor",
+	"description": "A plugin to gzip plugins",
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
+}

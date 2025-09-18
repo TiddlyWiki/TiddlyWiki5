@@ -1,0 +1,36 @@
+{
+	"tiddlers": [
+		{
+			"file": "fflate.js",
+			"fields": {
+				"title": "$:/library/fflate.js",
+				"type": "application/javascript",
+				"tags": "$:/tags/BootHook",
+				"module-type": "library"
+			}
+		},
+		{
+			"file": "startup.js",
+			"isTiddlerFile": true
+		},
+		{
+			"file": "module.js",
+			"fields": {
+				"title": "$:/plugins/tiddlywiki/core-compressor/register-browser.js",
+				"tags": "$:/tags/BootHook",
+				"list-after": "$:/library/fflate.js"
+			},
+			"suffix": "(window.fflate).registerBrowser(window.$tw);"
+		},
+		{
+			"file": "module.js",
+			"fields": {
+				"title": "$:/plugins/tiddlywiki/core-compressor/register-node.js",
+				"type":"application/javascript",
+				"module-type": "library"
+			},
+			"prefix": "Object.assign(exports, ",
+			"suffix": "(require(\"$:/library/fflate.js\")));"
+		}
+	]
+}
