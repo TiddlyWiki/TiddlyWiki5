@@ -55,7 +55,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
 		}
 	}
-	if(isPoppedUp) {
+	if(this.popup || this.popupTitle) {
 		$tw.utils.pushTop(classes,"tc-popup-handle");
 	}
 	domNode.className = classes.join(" ");
