@@ -468,11 +468,11 @@ a.tc-tiddlylink-resolves {
 }
 
 a.tc-tiddlylink-shadow {
-	font-weight: bold;
+	border-left: 2px dotted;
 }
 
 a.tc-tiddlylink-shadow.tc-tiddlylink-resolves {
-	font-weight: normal;
+	border-left: 2px solid;
 }
 
 a.tc-tiddlylink-missing {
@@ -2852,6 +2852,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 }
 
 .tc-chooser-item .tc-tiddlylink {
+	border-left: none;
 	display: block;
 	text-decoration: none;
 	background-color: transparent;
