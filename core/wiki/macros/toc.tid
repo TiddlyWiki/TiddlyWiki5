@@ -78,9 +78,15 @@ If the macro parameter is empty - Use the toc-defaultFieldTemplate
 -->
 \function tf.toc-getItemTemplateTitle() [<currentTiddler>get[toc-itemTemplate]] :filter[has[text]] :else[<itemTemplate>has[text]then<itemTemplate>]
 
+\procedure _linkTemplate()
+<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+	<<toc-defaultFieldTemplate>>
+</$link>
+\end
+
 \procedure _itemTemplate()
 <$transclude $tiddler=<<tf.toc-getItemTemplateTitle>> >
-	<<toc-defaultFieldTemplate>>
+	<<_linkTemplate>>
 </$transclude>
 \end
 
@@ -158,9 +164,9 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 							<<_itemTemplate>>
 						<% else %>
 							<!-- Since v5.1.23 use target-field if present in tiddler -->
-							<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+							<!-- <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}> -->
 								<<_itemTemplate>>
-							</$link>
+							<!-- </$link> -->
 						<% endif %>
 						<!-- toc-body only calls itself, so only modified variables have to be passed on. -->
 						<!-- The rest can be reused from toc parameters -->
@@ -267,10 +273,10 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
 	<li class=<<tf.toc-itemClass>>>
 		<!-- v5.1.23 use target-field if present in tiddler -->
-		<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+		<!-- <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}> -->
 			<<toc-chevron>>
 			<<_itemTemplate>>
-		</$link>
+		<!-- </$link> -->
 		<!-- TODO auto expand -->
 		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall $name="toc-expandable"
@@ -341,7 +347,7 @@ Shows an expandable toc. Item always have an open/close chevron
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>>>
 	<li class=<<tf.toc-itemClass>>>
 		<!-- v5.1.23 use target-field if present in tiddler -->
-		<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+		<!-- <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}> -->
 			<!-- The subfilter<exclude> must be the last filter run -->
 			<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] +[limit[1]] %>
 				<<toc-chevron>>
@@ -351,7 +357,7 @@ Shows an expandable toc. Item always have an open/close chevron
 				</$button>
 			<% endif %>
 			<<_itemTemplate>>
-		</$link>
+		<!-- </$link> -->
 		<!-- TODO auto expand -->
 		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall $name="toc-selective-expandable"
