@@ -1,0 +1,45 @@
+created: 20250923084615978
+draft.of: toc-param-tagField 1
+draft.title: toc-param-itemTemplate
+import-compound: toc-simple $:/spec/toc-param-itemTemplate
+modified: 20250923101918740
+tags: $:/tags/wiki-test-spec param
+title: Draft of 'toc-param-tagField 1'
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents to show the use of different parameters
+
+* The "root" elements are ''tagged Contents''
+
+* The macro-call uses the ''itemTemplate'' to render the toc nodes
+
+{{example-overview}}
+
++
+title: Description
+
+TOC Macro Parameter "itemTemplate"
+
++
+title: my-item-template
+
+\procedure todo()
+<$checkbox tag="done"/>
+\end
+
+<!-- Automatic wiki-linking should be switched off, since it may create "links inside links" if CamelCase linking is active. -->
+<$let tv-wikilinks="no">
+<<todo>> - 
+<$link to={{{ [<tag>get[target]else<tag>] }}}>
+	<<toc-defaultItemTemplate>>
+</$link>
+</$let>
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"Contents" itemTemplate:"my-item-template">>
+</div>

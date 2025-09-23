@@ -1,0 +1,35 @@
+created: 20250922122215951
+modified: 20250923080837936
+tags: 
+title: toc-examples-overview
+type: text/vnd.tiddlywiki
+
+! Simple toc-rewritten Examples
+
+Test the parameters, that are part of the "old" toc macro.
+
+<ul>
+<$list filter="[tag[simple]]">
+<li><$link/></li>
+</$list>
+</ul>
+
+! TOC Node Fields Examples
+
+These tests show the functions, that are available with the node fields, including the "old" ones.
+
+<ul>
+<$list filter="[tag[field]]">
+<li><$link/></li>
+</$list>
+</ul>
+
+! TOC Macro Parameter Examples
+
+These tests show how the different macro parameters are used
+
+<ul>
+<$list filter="[tag[param]]">
+<li><$link/></li>
+</$list>
+</ul>

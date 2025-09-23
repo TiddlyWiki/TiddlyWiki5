@@ -1,0 +1,18 @@
+created: 20250923103532853
+modified: 20250923104132390
+tags: $:/tags/Stylesheet
+title: fix-toc-styles
+type: text/vnd.tiddlywiki
+
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a,
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a {
+	border: none;
+	display: inline-block;
+}
+
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected {
+	border-top: 1px solid <<colour tab-border>>;
+	border-left: 1px solid <<colour tab-border>>;
+	border-bottom: 1px solid <<colour tab-border>>;
+	background: <<colour background>>;
+}

@@ -1,0 +1,31 @@
+created: 20250922121402140
+import-compound: toc-simple $:/spec/toc-simple-tabbed-internal
+modified: 20250922125824680
+tags: $:/tags/wiki-test-spec simple
+title: toc-simple-tabbed-internal
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple tabbed expandable list
+
+* Links clicked in the tiddler body text, will open the next tiddler within the TOC
+
+* Every element which has at least 1 child shows a chevron
+
+{{ctrl-click-info}}
++
+title: Description
+
+Simple Tabbed TOC with Internal Navigation
++
+title: Output
+
+<$macrocall
+	$name="toc-tabbed-internal-nav"
+	tag="Contents"
+	selectedTiddler="$:/temp/toc/selectedTiddler"
+	unselectedText="<p>Select a topic in the table of contents. Click the arrow to expand a topic.</p>"
+	missingText="<p>Missing tiddler.</p>"
+/>
+

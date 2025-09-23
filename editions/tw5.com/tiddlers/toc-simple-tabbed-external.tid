@@ -1,0 +1,32 @@
+created: 20250922121618425
+import-compound: toc-simple $:/spec/toc-simple-tabbed-external
+modified: 20250922130232542
+tags: $:/tags/wiki-test-spec simple
+title: toc-simple-tabbed-external
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+
+* This example shows a simple tabbed expandable list
+
+* Links clicked in the tiddler body text, will open the next tiddler in the story river. In the example here the story river are the tabs in Output tab area
+
+* Every element which has at least 1 child shows a chevron
+
+{{ctrl-click-info}}
++
+title: Description
+
+Simple Tabbed TOC with External Navigation
++
+title: Output
+
+<$macrocall
+	$name="toc-tabbed-external-nav"
+	tag="Contents"
+	selectedTiddler="$:/temp/toc/selectedTiddler"
+	unselectedText="<p>Select a topic in the table of contents. Click the arrow to expand a topic.</p>"
+	missingText="<p>Missing tiddler.</p>"
+/>
+

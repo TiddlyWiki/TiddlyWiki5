@@ -1,14 +1,17 @@
 created: 20240730081443212
-description: Test New Tiddler Button
-modified: 20240731044815553
+modified: 20250922192427643
 tags: $:/tags/wiki-test-spec
-title: test-new-tiddler-button
+title: new-tiddler-button
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative
 
-This code tests action-sendmessage with tm-new-tiddler
+* This code tests ''action-sendmessage'' with `tm-new-tiddler`
 
++
+title: Description
+
+Test New Tiddler Button
 +
 title: Output
 

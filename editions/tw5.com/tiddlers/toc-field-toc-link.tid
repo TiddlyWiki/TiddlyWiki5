@@ -1,0 +1,32 @@
+created: 20250922185924219
+import-compound: toc-simple $:/spec/toc-field-toc-link
+modified: 20250923075321514
+tags: $:/tags/wiki-test-spec field
+title: toc-field-toc-link
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents with 3 levels
+* The "root" elements are ''tagged Contents''
+* The [[aa-aa]] tiddler contains a field: `toc-link: no` to it does not contain a link
+
+{{example-overview}}
+
++
+title: Description
+
+Simple TOC with a toc-link Field
++
+title: aa-aa
+tags: aa
+toc-link: no
+
+Link to [[bb]]
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>
