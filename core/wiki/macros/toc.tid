@@ -146,7 +146,9 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 	<!-- text substitution for $(sort)$ parameter backwards compatibility -->
 	<$list filter=` [subfilter<tf.toc-filter>]
 					:else[subfilter<tf.toc-filterString>$(sort)$]
-					[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
+					[subfilter<tf.toc-include>]
+					-[<tag>] -[subfilter<exclude>]`
+	>
 		<%if [<currentTiddler>] -[subfilter<tf.toc-hide>] %>
 			<$let _path=<<tf.toc-newPath>> _mode=<<tf.toc-mode>> >
 				<!-- adding tf.toc-hide, excludes blocked elements from all visible sub-nodes -->
@@ -238,12 +240,12 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 \end
 
 <!--
-	If a toc-item shows a link. Clicking the caption will open the tiddler
-	If toc-item is linked, the _itemTemplate is managed in the parent procedure
-	If a toc-item should not show a link, the _itemTemplate is part of the button. So it can be clicked to open or close one branch
+	If a toc-chevron shows a link. Clicking the caption will open the tiddler
+	If toc-chevron is linked, the _itemTemplate is managed in the parent procedure
+	If a toc-chevron should not show a link, the _itemTemplate is part of the button. So it can be clicked to open or close one branch
 	The buttons also call toc-stateOpen and toc-stateClose, which by default allow us to CTRL-click to expand or fold the whole branch
 -->
-\procedure toc-item(isUnlinked:"")
+\procedure toc-chevron(isUnlinked:"")
 <% if [<toc-state>get[text]else[close]match[close]] %>
 	<$button actions=<<toc-openBranch>> setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-tiny-gap-right">
 		<$transclude tiddler=<<toc-closed-icon>> />
@@ -266,7 +268,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 	<li class=<<tf.toc-itemClass>>>
 		<!-- v5.1.23 use target-field if present in tiddler -->
 		<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
-			<<toc-item>>
+			<<toc-chevron>>
 			<<_itemTemplate>>
 		</$link>
 		<!-- TODO auto expand -->
@@ -284,7 +286,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 \procedure toc-unlinked-expandable-body(tag,sort:"",itemClassFilter,exclude,path,captionField,tagField,parentField,itemTemplate)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>>>
 	<li class=<<tf.toc-itemClass>>>
-		<<toc-item isUnlinked:"yes">>
+		<<toc-chevron isUnlinked:"yes">>
 		<!-- TODO auto expand -->
 		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall $name="toc-expandable"
@@ -340,9 +342,9 @@ Shows an expandable toc. Item always have an open/close chevron
 	<li class=<<tf.toc-itemClass>>>
 		<!-- v5.1.23 use target-field if present in tiddler -->
 		<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
-			<!-- The subfilter<exclude> must to be the last filter run -->
+			<!-- The subfilter<exclude> must be the last filter run -->
 			<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] +[limit[1]] %>
-				<<toc-item>>
+				<<toc-chevron>>
 			<% else %>
 				<$button class='tc-btn-invisible tc-tiny-gap-right' tabindex="-1">
 					{{$:/core/images/blank}}
@@ -380,7 +382,7 @@ Shows an expandable toc. Item always have an open/close chevron
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
 	<li class=<<tf.toc-itemClass>>>
 		<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] +[limit[1]] %>
-			<<toc-item isUnlinked:"yes">>
+			<<toc-chevron isUnlinked:"yes">>
 		<% else %>
 			<$button class="tc-btn-invisible ">
 				{{$:/core/images/blank}}
@@ -438,10 +440,10 @@ If an item has no children, there is no open/close chevron
 </$let>
 \end
 
-<!-- ====================================================================
+<!-- =======================================================================
 Shows a tabbed toc.
-If a toc-item link is clicked it will open the tiddler in the story river
-========================================================================= -->
+If a toc-chevron link is clicked it will open the tiddler in the story river
+============================================================================ -->
 \procedure toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude,captionField,tagField,parentField,itemTemplate)
 <$let tag={{{ [<tag>is[blank]then<currentTiddler>else<tag>] }}} >
 	<$tiddler tiddler={{{ [<selectedTiddler>get[text]] }}}>
@@ -473,7 +475,7 @@ If a toc-item link is clicked it will open the tiddler in the story river
 \end
 
 <!-- ========================================================
-Shows a tabbed toc. If a toc-item link is clicked
+Shows a tabbed toc. If a toc-chevron link is clicked
 it will open the tiddler in the view area of the same tiddler
 ============================================================= -->
 \procedure toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude,captionField,tagField,parentField,itemTemplate)
