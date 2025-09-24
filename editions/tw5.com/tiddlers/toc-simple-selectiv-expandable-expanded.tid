@@ -1,8 +1,8 @@
 created: 20250924062955923
-import-compound: toc-simple $:/spec/toc-advanced-selective-expandable
-modified: 20250924100247879
+import-compound: toc-simple $:/spec/toc-simple-selective-expandable-expanded
+modified: 20250924105006349
 tags: $:/tags/wiki-test-spec simple
-title: toc-advanced-selectiv-expandable
+title: toc-simple-selectiv-expandable-expanded
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative
@@ -13,11 +13,12 @@ title: Narrative
 
 * All paths are expanded by default
 
-{{ctrl-click-info}}
+* All paths are expanded as long as `tv-toc-expanded() yes` is defined.
+
 +
 title: Description
 
-Advanced TOC Selective Expandable
+Simple TOC Selective Expandable Expanded
 +
 title: Output
 

@@ -1,6 +1,6 @@
 created: 20250922121811982
 import-compound: toc-simple $:/spec/toc-simple-selective-expandable-custom-icons
-modified: 20250922123531062
+modified: 20250924110134442
 tags: $:/tags/wiki-test-spec simple
 title: toc-simple-selectiv-expandable-custom-icons
 type: text/vnd.tiddlywiki-multiple
@@ -20,4 +20,3 @@ title: Output
 <<toc-selective-expandable tag:"Contents">>
 </div>
 </$let>
-
