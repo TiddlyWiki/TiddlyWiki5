@@ -82,9 +82,9 @@ If the macro parameter is empty - Use the toc-defaultFieldTemplate
 <% if [all[current]toc-link[no]] %>
 	<<toc-defaultFieldTemplate>>
 <% else %>
-<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
-	<<toc-defaultFieldTemplate>>
-</$link>
+	<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+		<<toc-defaultFieldTemplate>>
+	</$link>
 <% endif %>
 \end
 
@@ -249,6 +249,13 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 <% endif %>
 \end
 
+<!-- 
+	If tf.toc-stateIsOpen() is hardcoded to "open", the the toc will be loaded with all branches expanded.
+	That's especially important for testing "ExpectedResults" in testcase tiddlers
+-->
+\function tf.toc-stateIsClosed() [<toc-state>get[text]else[close]match[close]] 
+\function tf.toc-stateIsOpen() [<toc-state>get[text]match[open]]
+
 <!--
 	If a toc-chevron shows a link. Clicking the caption will open the tiddler
 	If toc-chevron is linked, the _itemTemplate is managed in the parent procedure
@@ -256,14 +263,16 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 	The buttons also call toc-stateOpen and toc-stateClose, which by default allow us to CTRL-click to expand or fold the whole branch
 -->
 \procedure toc-chevron(isUnlinked:"")
-<% if [<toc-state>get[text]else[close]match[close]] %>
+<!-- <% if [<toc-state>get[text]else[close]match[close]] %> -->
+
+<% if [<tf.toc-stateIsClosed>!is[blank]] %>
 	<$button actions=<<toc-openBranch>> setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-tiny-gap-right">
 		<$transclude tiddler=<<toc-closed-icon>> />
 		<% if [<isUnlinked>match[yes]] %>
 			<span class="tc-toc-unlinked tc-tiny-gap-left"><<_itemTemplate>></span>
 		<% endif %>
 	</$button>
-<% elseif [<toc-state>get[text]match[open]] %>
+<% elseif [<tf.toc-stateIsOpen>] %>
 	<$button actions=<<toc-closeBranch>> setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-tiny-gap-right">
 		<$transclude tiddler=<<toc-open-icon>> />
 		<% if [<isUnlinked>match[yes]] %>
@@ -282,7 +291,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 			<<_itemTemplate>>
 		<!-- </$link> -->
 		<!-- TODO auto expand -->
-		<% if [<toc-state>get[text]match[open]] %>
+		<% if [<tf.toc-stateIsOpen>!is[blank]] %>
 			<$macrocall $name="toc-expandable"
 				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>>
 				captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
@@ -298,7 +307,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 	<li class=<<tf.toc-itemClass>>>
 		<<toc-chevron isUnlinked:"yes">>
 		<!-- TODO auto expand -->
-		<% if [<toc-state>get[text]match[open]] %>
+		<% if [<tf.toc-stateIsOpen>!is[blank]] %>
 			<$macrocall $name="toc-expandable"
 				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>>
 				captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
@@ -363,7 +372,7 @@ Shows an expandable toc. Item always have an open/close chevron
 			<<_itemTemplate>>
 		<!-- </$link> -->
 		<!-- TODO auto expand -->
-		<% if [<toc-state>get[text]match[open]] %>
+		<% if [<tf.toc-stateIsOpen>!is[blank]] %>
 			<$macrocall $name="toc-selective-expandable"
 				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>>
 				captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
@@ -402,7 +411,7 @@ Shows an expandable toc. Item always have an open/close chevron
 			</span>
 		<% endif %>
 		<!-- TODO auto expand -->
-		<% if [<toc-state>get[text]match[open]] %>
+		<% if [<tf.toc-stateIsOpen>!is[blank]] %>
 			<$macrocall $name="toc-selective-expandable"
 				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>
 				captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
