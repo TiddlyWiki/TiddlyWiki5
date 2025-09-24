@@ -469,6 +469,7 @@ a.tc-tiddlylink-resolves {
 
 a.tc-tiddlylink-shadow {
 	border-left: 2px dotted;
+	padding-left: 4px;
 }
 
 a.tc-tiddlylink-shadow.tc-tiddlylink-resolves {
@@ -2853,6 +2854,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 
 .tc-chooser-item .tc-tiddlylink {
 	border-left: none;
+	padding-left: none;
 	display: block;
 	text-decoration: none;
 	background-color: transparent;
