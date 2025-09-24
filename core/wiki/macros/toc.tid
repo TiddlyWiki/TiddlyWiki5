@@ -18,7 +18,7 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 \whitespace trim
 
 <!-- The field to show depends on the following cascade - default: title -->
-\procedure _hasItemTemplate() [<itemTemplate>!is[blank]then[text]]
+\procedure _hasItemTemplate() [<itemTemplate>!is[blank]then[title]]
 \procedure _hasCaptionField() [get<captionField>!is[blank]then<captionField>]
 \procedure _hasCaption() [has[caption]then[caption]]
 
