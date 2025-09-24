@@ -79,9 +79,13 @@ If the macro parameter is empty - Use the toc-defaultFieldTemplate
 \function tf.toc-getItemTemplateTitle() [<currentTiddler>get[toc-itemTemplate]] :filter[has[text]] :else[<itemTemplate>has[text]then<itemTemplate>]
 
 \procedure _linkTemplate()
+<% if [all[current]toc-link[no]] %>
+	<<toc-defaultFieldTemplate>>
+<% else %>
 <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
 	<<toc-defaultFieldTemplate>>
 </$link>
+<% endif %>
 \end
 
 \procedure _itemTemplate()
