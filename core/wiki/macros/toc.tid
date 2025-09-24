@@ -164,14 +164,14 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 				<!-- adding tf.toc-hide, excludes blocked elements from all visible sub-nodes -->
 				<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-hide>]">
 					<li class=<<tf.toc-itemClass>>>
-						<% if [all[current]toc-link[no]] %>
+						<!-- <% if [all[current]toc-link[no]] %> -->
 							<<_itemTemplate>>
-						<% else %>
+						<!-- <% else %> -->
 							<!-- Since v5.1.23 use target-field if present in tiddler -->
 							<!-- <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}> -->
-								<<_itemTemplate>>
+								<!-- <<_itemTemplate>> -->
 							<!-- </$link> -->
-						<% endif %>
+						<!-- <% endif %> -->
 						<!-- toc-body only calls itself, so only modified variables have to be passed on. -->
 						<!-- The rest can be reused from toc parameters -->
 						<$macrocall $name="toc-body" tag=<<currentTiddler>> exclude=<<_excluded>> path=<<_path>>
