@@ -51,11 +51,6 @@ exports.warning = function(text) {
 };
 
 /*
-Deprecated: Use console.table instead
-*/
-exports.logTable = data => console.table(data);
-
-/*
 Return the integer represented by the str (string).
 Return the dflt (default) parameter if str is not a base-10 number.
 */
@@ -71,32 +66,6 @@ exports.replaceString = function(text,search,replace) {
 	return text.replace(search,function() {
 		return replace;
 	});
-};
-
-/*
-Deprecated: Use str.repeat instead
-*/
-exports.repeat = (str,count) => str.repeat(count);
-
-/*
-Deprecated: Use str.startsWith instead
-*/
-exports.startsWith = (str,search) => str.startsWith(search);
-
-/*
-Deprecated: Use str.endsWith instead
-*/
-exports.endsWith = (str,search) => str.endsWith(search);
-
-/*
-Deprecated: Use str.trim instead
-*/
-exports.trim = function(str) {
-	if(typeof str === "string") {
-		return str.trim();
-	} else {
-		return str;
-	}
 };
 
 exports.trimPrefix = function(str,unwanted) {
@@ -906,10 +875,6 @@ exports.tagToCssSelector = function(tagName) {
 	});
 };
 
-exports.sign = Math.sign;
-
-exports.strEndsWith = (str,ending,position) => str.endsWith(ending,position);
-
 /*
 Return system information useful for debugging
 */
@@ -935,9 +900,6 @@ exports.parseNumber = function(str) {
 exports.parseInt = function(str) {
 	return parseInt(str,10) || 0;
 };
-
-// Use Number.toString instead
-exports.stringifyNumber = num => num.toString();
 
 exports.makeCompareFunction = function(type,options) {
 	options = options || {};

@@ -11,11 +11,6 @@ Various static DOM-related utility functions.
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
-// Deprecated: Use compareDocumentPosition instead
-exports.domContains = (a,b) => a.compareDocumentPosition(b) & 16;
-
-// Deprecated: Use matches instead
-exports.domMatchesSelector = (node,selector) => node.matches(selector);
 
 /*
 Select text in a an input or textarea (setSelectionRange crashes on certain input types)
@@ -38,28 +33,6 @@ exports.setSelectionByPosition = function(node,selectFromStart,selectFromEnd) {
 exports.removeChildren = function(node) {
 	while(node.hasChildNodes()) {
 		node.removeChild(node.firstChild);
-	}
-};
-
-// Deprecated: Use element.classList.contains instead
-exports.hasClass = (el,className) => el.classList && el.classList.contains(className);
-
-// Deprecated: Use element.classList.add instead
-exports.addClass = function(el,className) {
-	el.classList && el.classList.add(className);
-};
-
-// Deprecated: Use element.classList.remove instead
-exports.removeClass = function(el,className) {
-	el.classList && el.classList.remove(className);
-};
-
-// Deprecated: Use element.classList.toggle instead
-exports.toggleClass = function(el,className,status) {
-	if(status === undefined) {
-		el.classList && el.classList.toggle(className);
-	} else {
-		el.classList && el.classList.toggle(className, status);
 	}
 };
 
