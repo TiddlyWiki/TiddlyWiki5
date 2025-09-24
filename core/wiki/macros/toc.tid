@@ -250,11 +250,11 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 \end
 
 <!-- 
-	If tf.toc-stateIsOpen() is hardcoded to "open", the the toc will be loaded with all branches expanded.
+	If tv-doc-expand() is set to yes, the toc will be loaded with all branches expanded.
 	That's especially important for testing "ExpectedResults" in testcase tiddlers
 -->
 \function tf.toc-stateIsClosed() [<toc-state>get[text]else[close]match[close]] 
-\function tf.toc-stateIsOpen() [<toc-state>get[text]match[open]]
+\function tf.toc-stateIsOpen() [<toc-state>get[text]match[open]] :else[<tv-toc-expand>match[yes]]
 
 <!--
 	If a toc-chevron shows a link. Clicking the caption will open the tiddler

@@ -1,6 +1,6 @@
 created: 20250924062955923
 import-compound: toc-simple $:/spec/toc-advanced-selective-expandable
-modified: 20250924093242093
+modified: 20250924100247879
 tags: $:/tags/wiki-test-spec simple
 title: toc-advanced-selectiv-expandable
 type: text/vnd.tiddlywiki-multiple
@@ -21,7 +21,7 @@ Advanced TOC Selective Expandable
 +
 title: Output
 
-\function tf.toc-stateIsOpen() open
+\define tv-toc-expand() yes
 
 <div class="tc-table-of-contents">
 <<toc-selective-expandable tag:"Contents">>
