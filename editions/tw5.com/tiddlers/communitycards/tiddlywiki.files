@@ -1,0 +1,10 @@
+{
+	"directories": [
+		{
+			"path": "../../../../community",
+			"isTiddlerFile": true,
+			"filesRegExp": "^(?!readme\\.md$)(?!\\.DS_Store$).+",
+			"searchSubdirectories": true
+		}
+	]
+}
