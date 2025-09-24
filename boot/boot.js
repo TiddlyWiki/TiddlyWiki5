@@ -965,11 +965,12 @@ Apply a callback to each module of a particular type
 	moduleType: type of modules to enumerate
 	callback: function called as callback(title,moduleExports) for each module
 */
-$tw.modules.forEachModuleOfType = function(moduleType,callback) {
-	var modules = $tw.modules.types[moduleType];
-	$tw.utils.each(modules,function(element,title) {
-		callback(title,$tw.modules.execute(title));
-	});
+$tw.modules.forEachModuleOfType = function(moduleType,callback) {  
+    $tw.utils.each($tw.modules.titles,function(moduleInfo,title) {  
+        if(moduleInfo.moduleType === moduleType) {  
+            callback(title,$tw.modules.execute(title));  
+        }  
+    });  
 };
 
 /*
