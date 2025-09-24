@@ -1,0 +1,29 @@
+created: 20250924062955923
+import-compound: toc-simple $:/spec/toc-advanced-selective-expandable
+modified: 20250924093242093
+tags: $:/tags/wiki-test-spec simple
+title: toc-advanced-selectiv-expandable
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple expandable list
+
+* Every element which has at least 1 child shows a chevron
+
+* All paths are expanded by default
+
+{{ctrl-click-info}}
++
+title: Description
+
+Advanced TOC Selective Expandable
++
+title: Output
+
+\function tf.toc-stateIsOpen() open
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"Contents">>
+</div>
+

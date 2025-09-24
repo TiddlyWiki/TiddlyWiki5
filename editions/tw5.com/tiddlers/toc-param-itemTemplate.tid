@@ -1,10 +1,8 @@
 created: 20250923084615978
-draft.of: toc-param-tagField 1
-draft.title: toc-param-itemTemplate
 import-compound: toc-simple $:/spec/toc-param-itemTemplate
-modified: 20250923101918740
+modified: 20250923114139597
 tags: $:/tags/wiki-test-spec param
-title: Draft of 'toc-param-tagField 1'
+title: toc-param-itemTemplate
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative
@@ -25,21 +23,11 @@ TOC Macro Parameter "itemTemplate"
 +
 title: my-item-template
 
-\procedure todo()
-<$checkbox tag="done"/>
-\end
-
-<!-- Automatic wiki-linking should be switched off, since it may create "links inside links" if CamelCase linking is active. -->
-<$let tv-wikilinks="no">
-<<todo>> - 
-<$link to={{{ [<tag>get[target]else<tag>] }}}>
-	<<toc-defaultItemTemplate>>
-</$link>
-</$let>
+<$checkbox tag="done"/> - <<_linkTemplate>>
 
 +
 title: Output
 
 <div class="tc-table-of-contents">
-<<toc-selective-expandable tag:"Contents" itemTemplate:"my-item-template">>
+<<toc tag:"Contents" itemTemplate:"my-item-template">>
 </div>

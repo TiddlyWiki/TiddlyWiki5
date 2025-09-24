@@ -1,5 +1,5 @@
 created: 20250923103532853
-modified: 20250923104132390
+modified: 20250923111451842
 tags: $:/tags/Stylesheet
 title: fix-toc-styles
 type: text/vnd.tiddlywiki
@@ -15,4 +15,5 @@ type: text/vnd.tiddlywiki
 	border-left: 1px solid <<colour tab-border>>;
 	border-bottom: 1px solid <<colour tab-border>>;
 	background: <<colour background>>;
+	margin-right: -1px;
 }
