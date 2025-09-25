@@ -1,0 +1,87 @@
+/*\
+title: $:/plugins/wikilabs/debug/styles.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+Stylesheet for the debug popup
+\*/
+
+:host {
+	/* Default values for themeable properties */
+	--popup-bg-color: #fefefe;
+	--popup-border: 1px solid #ccc;
+	--popup-min-width: 350px;
+	--popup-max-width: 600px;
+	--popup-max-height: 500px;
+	--popup-header-bg-color: #4CAF50;
+	--popup-header-color: white;
+	--function-content-color: blue;
+}
+.debug-popup {
+	display: none; /* Hidden by default, shown with JS */
+	position: fixed; /* Use fixed position for viewport-relative placement */
+	z-index: 1000;
+	background-color: var(--popup-bg-color);
+	border: var(--popup-border);
+	border-radius: 5px;
+	padding: 10px;
+	min-width: var(--popup-min-width);
+	max-width: var(--popup-max-width);
+	max-height: var(--popup-max-height);
+	overflow-y: auto;
+	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+	font-family: "Source Code Pro", monospace;
+	font-size: 12px;
+	line-height: 1.4;
+	white-space: pre-wrap;
+	text-align: left;
+}
+.debug-popup-table {
+	border-collapse: collapse;
+	width: 100%;
+}
+.debug-popup-table td, .debug-popup-table th {
+	border: 1px solid #ddd;
+	padding: 3px;
+	vertical-align: top;
+}
+.debug-popup-table tr:nth-child(even){background-color: #f9f9f9;}
+.debug-popup-table th {
+	padding-top: 4px;
+	padding-bottom: 4px;
+	text-align: left;
+	background-color: var(--popup-header-bg-color);
+	color: var(--popup-header-color);
+}
+.debug-search-input {
+	width: 98%;
+	padding: 4px;
+	margin-bottom: 8px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	font-size: 14px;
+}
+.debug-function-content {
+	color: var(--function-content-color);
+	display: block;
+	margin-top: 3px;
+}
+.search-suggestions {
+	display: none;
+	position: absolute;
+	border: 1px solid #999;
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+	background-color: var(--popup-bg-color);
+	width: calc(98% - 2px);
+	max-height: 150px;
+	overflow-y: auto;
+	z-index: 1001;
+	font-size: 14px;
+}
+.suggestion-item {
+	padding: 4px 8px;
+	cursor: pointer;
+}
+.suggestion-item:hover, .suggestion-item.suggestion-active {
+	background-color: #ddd;
+}
