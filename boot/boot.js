@@ -965,12 +965,11 @@ Apply a callback to each module of a particular type
 	moduleType: type of modules to enumerate
 	callback: function called as callback(title,moduleExports) for each module
 */
-$tw.modules.forEachModuleOfType = function(moduleType,callback) {  
-    $tw.utils.each($tw.modules.titles,function(moduleInfo,title) {  
-        if(moduleInfo.moduleType === moduleType) {  
-            callback(title,$tw.modules.execute(title));  
-        }  
-    });  
+$tw.modules.forEachModuleOfType = function(moduleType,callback) {
+	var modules = $tw.modules.types[moduleType];
+	$tw.utils.each(modules,function(element,title) {
+		callback(title,$tw.modules.execute(title));
+	});
 };
 
 /*
@@ -2550,10 +2549,10 @@ $tw.boot.execStartup = function(options){
 	if($tw.safeMode) {
 		$tw.wiki.processSafeMode();
 	}
-	// Register typed modules from the tiddlers we've just loaded
-	$tw.wiki.defineTiddlerModules();
-	// And any modules within plugins
+	// Register typed modules from the tiddlers we've just loaded and any modules within plugins
+	// Tiddlers should appear last so that they may overwrite shadows during module registration
 	$tw.wiki.defineShadowModules();
+	$tw.wiki.defineTiddlerModules();
 	// Make sure the crypto state tiddler is up to date
 	if($tw.crypto) {
 		$tw.crypto.updateCryptoStateTiddler();
