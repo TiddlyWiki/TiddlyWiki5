@@ -27,6 +27,7 @@ exports.startup = function() {
 
 				this._historyTiddler = "$:/config/wikilabs/debug/search-history";
 				this._lastSearchTiddler = "$:/temp/wikilabs/debug/last-search";
+				this._highlightedSuggestionIndex = -1;
 
 				const popup = document.createElement("div");
 				popup.setAttribute("class", "debug-popup");
@@ -94,6 +95,24 @@ exports.startup = function() {
 						display: block;
 						margin-top: 3px;
 					}
+					.search-suggestions {
+						display: none;
+						position: absolute;
+						border: 1px solid #ccc;
+						background-color: var(--popup-bg-color);
+						width: calc(98% - 2px); /* Match search input width */
+						max-height: 150px;
+						overflow-y: auto;
+						z-index: 1001; /* Above the table */
+						font-size: 14px;
+					}
+					.suggestion-item {
+						padding: 8px;
+						cursor: pointer;
+					}
+					.suggestion-item:hover, .suggestion-item.suggestion-active {
+						background-color: #ddd;
+					}
 				`;
 
 				this.shadowRoot.append(style, popup);
@@ -103,17 +122,29 @@ exports.startup = function() {
 				searchInput.setAttribute("placeholder", "Filter variables...");
 				searchInput.setAttribute("class", "debug-search-input");
 				searchInput.setAttribute("part", "search-input"); // Expose this element for styling
-				searchInput.setAttribute("list", "debug-search-history-list");
 				this._searchInput = searchInput;
 				popup.append(searchInput);
 
-				const datalist = document.createElement("datalist");
-				datalist.id = "debug-search-history-list";
-				popup.append(datalist);
+				const suggestions = document.createElement("div");
+				suggestions.setAttribute("class", "search-suggestions");
+				this._suggestions = suggestions;
+				popup.append(suggestions);
 
 				// Add event listener for the search input
-				searchInput.addEventListener("input", () => this._filterTable());
+				searchInput.addEventListener("input", () => {
+					this._filterTable();
+					this._loadSearchHistory();
+					this._showSuggestions();
+				});
 				searchInput.addEventListener("keydown", (e) => this._handleSearchInputKeydown(e));
+				searchInput.addEventListener("focus", () => {
+					this._loadSearchHistory();
+					this._showSuggestions();
+				});
+				searchInput.addEventListener("blur", () => {
+					// Delay hiding to allow click on suggestion
+					setTimeout(() => this._hideSuggestions(), 150);
+				});
 
 				// Prevent scroll events from bleeding out
 				popup.addEventListener("wheel", function(event) {
@@ -138,10 +169,71 @@ exports.startup = function() {
 				this._boundGlobalWheelListener = this._globalWheelListener.bind(this); // Bind global wheel listener
 			}
 
+			_showSuggestions() {
+				this._suggestions.style.display = "block";
+			}
+
+			_hideSuggestions() {
+				this._suggestions.style.display = "none";
+			}
+
+			_updateSuggestionHighlight() {
+				const items = this._suggestions.querySelectorAll(".suggestion-item");
+				items.forEach((item, index) => {
+					if (index === this._highlightedSuggestionIndex) {
+						item.classList.add("suggestion-active");
+						item.scrollIntoView({ block: "nearest" });
+					} else {
+						item.classList.remove("suggestion-active");
+					}
+				});
+			}
+
+			_handleSuggestionClick(term) {
+				this._searchInput.value = term;
+				this._hideSuggestions();
+				this._filterTable();
+			}
+
 			_handleSearchInputKeydown(event) {
-				if (event.key === "Enter") {
-					event.preventDefault();
-					this._saveSearchTerm(this._searchInput.value);
+				const items = this._suggestions.querySelectorAll(".suggestion-item");
+				if (this._suggestions.style.display === "none" || !items.length) {
+					if (event.key === "Enter") {
+						event.preventDefault();
+						this._saveSearchTerm(this._searchInput.value);
+						this._hideSuggestions();
+					}
+					return;
+				}
+
+				switch (event.key) {
+					case "ArrowDown":
+						event.preventDefault();
+						this._highlightedSuggestionIndex++;
+						if (this._highlightedSuggestionIndex >= items.length) {
+							this._highlightedSuggestionIndex = 0;
+						}
+						this._updateSuggestionHighlight();
+						break;
+					case "ArrowUp":
+						event.preventDefault();
+						this._highlightedSuggestionIndex--;
+						if (this._highlightedSuggestionIndex < 0) {
+							this._highlightedSuggestionIndex = items.length - 1;
+						}
+						this._updateSuggestionHighlight();
+						break;
+					case "Enter":
+						event.preventDefault();
+						if (this._highlightedSuggestionIndex >= 0) {
+							const selectedTerm = items[this._highlightedSuggestionIndex].textContent;
+							this._handleSuggestionClick(selectedTerm);
+							this._saveSearchTerm(selectedTerm);
+						} else {
+							this._saveSearchTerm(this._searchInput.value);
+						}
+						this._hideSuggestions();
+						break;
 				}
 			}
 
@@ -162,16 +254,31 @@ exports.startup = function() {
 
 			_loadSearchHistory() {
 				const history = $tw.wiki.getTiddlerData(this._historyTiddler, []);
-				const datalist = this.shadowRoot.querySelector("#debug-search-history-list");
-				if (!datalist) {
+				const suggestions = this._suggestions;
+				if (!suggestions) {
 					return;
 				}
-				// Clear old options
-				datalist.innerHTML = "";
-				history.forEach(term => {
-					const option = document.createElement("option");
-					option.value = term;
-					datalist.appendChild(option);
+				suggestions.innerHTML = "";
+				this._highlightedSuggestionIndex = -1;
+
+				history.forEach((term, index) => {
+					const item = document.createElement("div");
+					item.setAttribute("class", "suggestion-item");
+					item.textContent = term;
+					item.addEventListener("mousedown", (e) => {
+						e.preventDefault();
+						this._handleSuggestionClick(term);
+					});
+					item.addEventListener("mouseenter", () => {
+						this._highlightedSuggestionIndex = index;
+						this._updateSuggestionHighlight();
+					});
+					suggestions.appendChild(item);
+				});
+
+				suggestions.addEventListener("mouseleave", () => {
+					this._highlightedSuggestionIndex = -1;
+					this._updateSuggestionHighlight();
 				});
 			}
 
@@ -372,6 +479,7 @@ exports.startup = function() {
 			}
 
 			hide() {
+				this._hideSuggestions();
 				if (this._searchInput) {
 					$tw.wiki.setText(this._lastSearchTiddler, "text", undefined, this._searchInput.value);
 				}
@@ -384,7 +492,9 @@ exports.startup = function() {
 			_escapeKeyListener(event) {
 				if (event.key === "Escape") {
 					event.stopPropagation();
-					if (this._searchInput.value.length > 0) {
+					if (this._suggestions.style.display === "block") {
+						this._hideSuggestions();
+					} else if (this._searchInput.value.length > 0) {
 						this._searchInput.value = "";
 						this._filterTable();
 					} else {
