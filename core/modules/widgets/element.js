@@ -74,7 +74,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	// Create the DOM node and render children
 	var domNode = this.document.createElementNS(this.namespace,this.tag);
 	this.assignAttributes(domNode,{excludeEventAttributes: true});
-	// Allow plugins to manipulate the DOM. Eg: Add debug info
+	// Allow hooks to manipulate the DOM node. Eg: Add debug info
 	$tw.hooks.invokeHook("th-dom-rendering-element", domNode, this);
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
