@@ -86,6 +86,7 @@ exports.startup = function() {
 						margin-bottom: 8px;
 						border: 1px solid #ccc;
 						border-radius: 3px;
+						font-size: 14px;
 					}
 					.debug-function-content {
 						color: var(--function-content-color);
@@ -373,8 +374,13 @@ exports.startup = function() {
 
 			_escapeKeyListener(event) {
 				if (event.key === "Escape") {
-					this.hide();
 					event.stopPropagation();
+					if (this._searchInput.value.length > 0) {
+						this._searchInput.value = "";
+						this._filterTable();
+					} else {
+						this.hide();
+					}
 				}
 			}
 
