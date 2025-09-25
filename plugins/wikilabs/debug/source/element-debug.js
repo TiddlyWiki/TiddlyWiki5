@@ -25,6 +25,8 @@ exports.startup = function() {
 				super();
 				this.attachShadow({ mode: "open" });
 
+				this._historyTiddler = "$:/config/wikilabs/debug/search-history";
+
 				const popup = document.createElement("div");
 				popup.setAttribute("class", "debug-popup");
 				this._popup = popup;
@@ -99,11 +101,17 @@ exports.startup = function() {
 				searchInput.setAttribute("placeholder", "Filter variables...");
 				searchInput.setAttribute("class", "debug-search-input");
 				searchInput.setAttribute("part", "search-input"); // Expose this element for styling
+				searchInput.setAttribute("list", "debug-search-history-list");
 				this._searchInput = searchInput;
 				popup.append(searchInput);
 
+				const datalist = document.createElement("datalist");
+				datalist.id = "debug-search-history-list";
+				popup.append(datalist);
+
 				// Add event listener for the search input
 				searchInput.addEventListener("input", () => this._filterTable());
+				searchInput.addEventListener("keydown", (e) => this._handleSearchInputKeydown(e));
 
 				// Prevent scroll events from bleeding out
 				popup.addEventListener("wheel", function(event) {
@@ -126,6 +134,43 @@ exports.startup = function() {
 				this._popupTimeout = null; // Initialize timeout ID
 				this._hideTimeout = null; // Initialize hide timeout ID
 				this._boundGlobalWheelListener = this._globalWheelListener.bind(this); // Bind global wheel listener
+			}
+
+			_handleSearchInputKeydown(event) {
+				if (event.key === "Enter") {
+					event.preventDefault();
+					this._saveSearchTerm(this._searchInput.value);
+				}
+			}
+
+			_saveSearchTerm(term) {
+				term = term.trim();
+				if (!term) {
+					return;
+				}
+				let history = $tw.wiki.getTiddlerData(this._historyTiddler, []);
+				// Remove from history if it exists, to move it to the top
+				history = history.filter(item => item !== term);
+				// Add to the beginning
+				history.unshift(term);
+				// Keep only the last 20
+				history = history.slice(0, 20);
+				$tw.wiki.setTiddlerData(this._historyTiddler, history);
+			}
+
+			_loadSearchHistory() {
+				const history = $tw.wiki.getTiddlerData(this._historyTiddler, []);
+				const datalist = this.shadowRoot.querySelector("#debug-search-history-list");
+				if (!datalist) {
+					return;
+				}
+				// Clear old options
+				datalist.innerHTML = "";
+				history.forEach(term => {
+					const option = document.createElement("option");
+					option.value = term;
+					datalist.appendChild(option);
+				});
 			}
 
 			_globalWheelListener(event) {
@@ -275,6 +320,8 @@ exports.startup = function() {
 			}
 
 			showPopup(triggerElement, mouseX, mouseY) {
+				this._loadSearchHistory();
+
 				if (triggerElement && typeof triggerElement.getBoundingClientRect === "function") {
 					this._triggerElement = triggerElement;
 				}
