@@ -413,7 +413,11 @@ Widget.prototype.getAttribute = function(name,defaultText) {
 Assign the common attributes of the widget to a domNode
 options include:
 sourcePrefix: prefix of attributes that are to be directly assigned (defaults to the empty string meaning all attributes)
-destPrefix: prefix to be applied to attribute names that are to be directly assigned (defaults to the emtpy string which means no prefix is added)
+destPrefix: prefix to be applied to attribute names that are to be directly assigned (defaults to the empty string which means no prefix is added)
+additionalAttributesMap: hashmap of additional attributes to be assigned, where the key is the widget attribute name and the value is a hashmap with optional properties:
+	domAttribute: DOM attribute name to assign, defaults to the widget attribute name
+	mapAttributeFn: function that accepts the widget as argument and returns the DOM attribute value to assign
+	(If additionalAttributesMap is missing, only attributes allowed by sourcePrefix are assigned.)
 changedAttributes: hashmap by attribute name of attributes to process (if missing, process all attributes)
 excludeEventAttributes: ignores attributes whose name would begin with "on"
 */
@@ -423,6 +427,7 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 		changedAttributes = options.changedAttributes || this.attributes,
 		sourcePrefix = options.sourcePrefix || "",
 		destPrefix = options.destPrefix || "",
+		additionalAttributesMap = options.additionalAttributesMap || {},
 		EVENT_ATTRIBUTE_PREFIX = "on";
 	var assignAttribute = function(name,value) {
 		// Process any CSS custom properties
@@ -439,7 +444,19 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 		if(name.substr(0,sourcePrefix.length) === sourcePrefix) {
 			name = destPrefix + name.substr(sourcePrefix.length);
 		} else {
-			value = undefined;
+			var attrMap = additionalAttributesMap[name];
+			if(attrMap) {
+				// Use mapAttributeFn if specified
+				if(typeof attrMap.mapAttributeFn === "function") {
+					value = attrMap.mapAttributeFn(self, name);
+				}
+				// Use domAttribute if specified
+				if(attrMap.domAttribute) {
+					name = attrMap.domAttribute;
+				}
+			} else {
+				value = undefined;
+			}
 		}
 		// Check for excluded attribute names
 		if(options.excludeEventAttributes && name.substr(0,2).toLowerCase() === EVENT_ATTRIBUTE_PREFIX) {
@@ -686,8 +703,42 @@ Widget.prototype.dispatchEvent = function(event) {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 Widget.prototype.refresh = function(changedTiddlers) {
+	if(this.attributesInfo) {
+		const changedAttributes = this.computeAttributes(),
+			hasChangedAttributes = $tw.utils.count(changedAttributes) > 0,
+			attributesNeedRerender = this.attributesInfo.notUpdateable.some(function(key) {return changedAttributes[key]});
+
+		if(attributesNeedRerender) {
+			this.refreshSelf();
+			return true;
+		}
+		if(hasChangedAttributes) {
+			// Refresh any data-, stye. or other DOM attributes
+			if(this.domNodes.length) {
+				this.refreshDOMAttributes(changedAttributes);
+			}
+			// Handle custom-refreshable attributes
+			for (const attr in changedAttributes) {
+				const refreshHandler = this.attributesInfo.hasCustomRefresh[attr];
+				if (refreshHandler && typeof this[refreshHandler] === "function") {
+					this[refreshHandler](attr);
+				}
+			}
+		}
+	}
+
 	return this.refreshChildren(changedTiddlers);
 };
+
+Widget.prototype.refreshDOMAttributes = function(changedAttributes) {
+		const domNode = this.domNodes[0];
+		this.assignAttributes(domNode, {
+			changedAttributes: changedAttributes,
+			sourcePrefix: "data-",
+			destPrefix: "data-",
+			additionalAttributesMap: this.attributesInfo.dom || {}
+		});
+	}
 
 /*
 Rebuild a previously rendered widget
