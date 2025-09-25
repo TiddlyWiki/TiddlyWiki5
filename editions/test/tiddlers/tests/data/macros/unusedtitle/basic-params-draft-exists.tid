@@ -24,4 +24,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>test 1</p><p>asdf 1</p>
+<p dir="auto">test 1</p><p dir="auto">asdf 1</p>

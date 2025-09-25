@@ -16,7 +16,7 @@ title: Output
 +
 title: ExpectedResult
 
-<p>Some%2520text%2520%253E%2520%2522aaa%2522
+<p dir="auto">Some%2520text%2520%253E%2520%2522aaa%2522
 —
 Some text &gt; "aaa"
 </p>

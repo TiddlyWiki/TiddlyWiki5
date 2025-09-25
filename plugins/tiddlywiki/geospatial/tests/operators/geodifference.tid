@@ -51,4 +51,4 @@ type: application/json
 +
 title: ExpectedResult
 
-<p>{"type":"FeatureCollection","features":[]}</p>
+<p dir="auto">{"type":"FeatureCollection","features":[]}</p>
