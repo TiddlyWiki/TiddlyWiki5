@@ -1,5 +1,5 @@
 created: 20250820133555580
-modified: 20250821215331286
+modified: 20250925131401634
 tags: 
 title: debug-popup-info
 type: text/vnd.tiddlywiki
@@ -24,7 +24,9 @@ This tiddler contains:
 
 * If you hover a new element, that popup will disappear in 900ms. This makes it possible to copy / paste content from the popup <<.infoBox """''Inside the popup'' use ''double-click'' or ''tripple clicks'' to ''select'' words or the whole sentence """>>
 
-* The <kbd>ESC</kbd> key will hide the popup
+* The <kbd>ESC</kbd> key will hide the popup, if the search input is empty
+
+** If the search input contains some text the first <kbd>ESC</kbd> key will clear the text input
 
 * Moving the mouse outside of the tiddler boundaries will also hide the popup here in this tiddler
 
@@ -46,7 +48,8 @@ This tiddler contains:
 
 ! Configuration Examples
 
-More configuration options can be seen at: [[debug-popup-config]]
+* [[$:/config/wikilabs/debug/search-history]] contains the last 20 search terms that have been activated with the <kbd>Enter</kbd> key
+* More configuration options can be seen at: [[debug-popup-config]]
 
 ! Popup Search Filter Input
 
