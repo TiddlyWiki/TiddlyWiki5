@@ -1,7 +1,7 @@
 title: $:/core/templates/server/static.sidebar.wikitext
 
 \whitespace trim
-<div class="tc-sidebar-scrollable" style="overflow: auto;" role="region" aria-label={{$:/language/SideBar/Caption}}>
+<section class="tc-sidebar-scrollable" style="overflow: auto;" aria-label={{$:/language/SideBar/Caption}}>
 <div class="tc-sidebar-header">
 <h1 class="tc-site-title">
 <$transclude tiddler="$:/SiteTitle"/>
@@ -17,7 +17,7 @@ title: $:/core/templates/server/static.sidebar.wikitext
 <$link><$text text=<<currentTiddler>>/></$link>
 </div>
 </$list>
-</div>
+</section>
 <!-- Currently disabled the recent list as it is unweildy when the responsive narrow view kicks in
 <h2>
 {{$:/language/SideBar/Recent/Caption}}
