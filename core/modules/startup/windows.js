@@ -24,7 +24,8 @@ exports.startup = function() {
 	// Handle open window message
 	$tw.rootWidget.addEventListener("tm-open-window",function(event) {
 		// Get the parameters
-		var refreshHandler,
+		var mainRefreshHandler,
+			styleRefreshHandler,
 			title = event.param || event.tiddlerTitle,
 			paramObject = event.paramObject || {},
 			windowTitle = paramObject.windowTitle || title,
@@ -58,30 +59,54 @@ exports.startup = function() {
 		srcDocument.title = windowTitle;
 		srcWindow.addEventListener("beforeunload",function(event) {
 			delete $tw.windows[windowID];
-			$tw.wiki.removeEventListener("change",refreshHandler);
+			$tw.wiki.removeEventListener("change",styleRefreshHandler);
+			$tw.wiki.removeEventListener("change",mainRefreshHandler);
 		},false);
 		// Set up the styles
-		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
-				document: $tw.fakeDocument,
-				variables: variables,
-				importPageMacros: true}),
-			styleContainer = $tw.fakeDocument.createElement("style");
-		styleWidgetNode.render(styleContainer,null);
-		var styleElement = srcDocument.createElement("style");
-		styleElement.innerHTML = styleContainer.textContent;
+		var styleSetup = $tw.utils.setupStyleElements($tw.wiki, srcDocument, "$:/core/ui/PageStylesheet", variables, true);
+		var styleWidgetNode = styleSetup.styleWidgetNode,
+			styleContainer = styleSetup.styleContainer,
+			styleElement = styleSetup.styleElement;
 		srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
 			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: variables});
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
-		// Function to handle refreshes
-		refreshHandler = function(changes) {
-			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
-				styleElement.innerHTML = styleContainer.textContent;
-			}
-			widgetNode.refresh(changes);
+		// Prepare refresh mechanism
+		var mainDeferredChanges = Object.create(null),
+			styleDeferredChanges = Object.create(null),
+			mainTimerId = {id: null},
+			styleTimerId = {id: null},
+			throttledRefreshFn = $tw.utils.createThrottledRefreshManager($tw.wiki);
+		var styleRefresh = $tw.utils.createStyleRefreshHandler(styleWidgetNode, styleContainer, styleElement, styleDeferredChanges);
+		var mainRefresh = function() {
+			widgetNode.refresh(mainDeferredChanges);
+			mainDeferredChanges = Object.create(null);
 		};
-		$tw.wiki.addEventListener("change",refreshHandler);
+		var mainThrottledRefresh = $tw.perf.report("throttledMainRefresh",mainRefresh),
+			styleThrottledRefresh = $tw.perf.report("throttledStyleRefresh",styleRefresh);
+		styleRefreshHandler = function(changes) {
+			throttledRefreshFn(changes,{
+				throttledRefresh: styleThrottledRefresh,
+				callback: styleRefresh,
+				mainCondition: false,
+				styleCondition: true,
+				deferredChanges: styleDeferredChanges,
+				timerId: styleTimerId
+			});
+		};
+		mainRefreshHandler = function(changes) {
+			throttledRefreshFn(changes,{
+				throttledRefresh: mainThrottledRefresh,
+				callback: mainRefresh,
+				mainCondition: true,
+				styleCondition: false,
+				deferredChanges: mainDeferredChanges,
+				timerId: mainTimerId
+			});
+		};
+		$tw.wiki.addEventListener("change",styleRefreshHandler);
+		$tw.wiki.addEventListener("change",mainRefreshHandler);
 		// Listen for keyboard shortcuts
 		$tw.utils.addEventListeners(srcDocument,[{
 			name: "keydown",
