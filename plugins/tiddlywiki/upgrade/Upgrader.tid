@@ -1,0 +1,22 @@
+title: $:/Upgrader
+name: Upgrader
+description: Layout for upgrade edition
+code-body: yes
+tags: $:/tags/Layout
+
+\whitespace trim
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+
+<div class="tc-page-container">
+
+<$navigator story="$:/StoryList" history="$:/HistoryList">
+
+<$dropzone enable="yes" class="tc-dropzone tc-page-container-inner">
+
+<$transclude $tiddler="$:/UpgradeWizard"/>
+
+</$dropzone>
+
+</$navigator>
+
+</div>
