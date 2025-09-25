@@ -196,6 +196,11 @@ exports.startup = function() {
 			}
 
 			_handleSearchInputKeydown(event) {
+				if (event.key === "ArrowDown" && this._suggestions.style.display === "none") {
+					this._loadSearchHistory();
+					this._showSuggestions();
+				}
+
 				const items = this._suggestions.querySelectorAll(".suggestion-item");
 				if (this._suggestions.style.display === "none" || !items.length) {
 					if (event.key === "Enter") {
