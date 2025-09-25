@@ -26,6 +26,7 @@ exports.startup = function() {
 				this.attachShadow({ mode: "open" });
 
 				this._historyTiddler = "$:/config/wikilabs/debug/search-history";
+				this._lastSearchTiddler = "$:/temp/wikilabs/debug/last-search";
 
 				const popup = document.createElement("div");
 				popup.setAttribute("class", "debug-popup");
@@ -323,6 +324,11 @@ exports.startup = function() {
 			showPopup(triggerElement, mouseX, mouseY) {
 				this._loadSearchHistory();
 
+				if (this._searchInput) {
+					this._searchInput.value = $tw.wiki.getTiddlerText(this._lastSearchTiddler) || "";
+					this._filterTable();
+				}
+
 				if (triggerElement && typeof triggerElement.getBoundingClientRect === "function") {
 					this._triggerElement = triggerElement;
 				}
@@ -366,6 +372,9 @@ exports.startup = function() {
 			}
 
 			hide() {
+				if (this._searchInput) {
+					$tw.wiki.setText(this._lastSearchTiddler, "text", undefined, this._searchInput.value);
+				}
 				this._popup.style.display = "none";
 				document.removeEventListener("keydown", this._boundEscapeKeyListener, true);
 				// Remove global wheel listener when popup is hidden
