@@ -4,13 +4,9 @@ caption: {{$:/core/images/close-others-button}} {{$:/language/Buttons/CloseOther
 description: {{$:/language/Buttons/CloseOthers/Hint}}
 
 \whitespace trim
-<$button message="tm-close-other-tiddlers" param=<<currentTiddler>> tooltip={{$:/language/Buttons/CloseOthers/Hint}} aria-label={{$:/language/Buttons/CloseOthers/Caption}} class=<<tv-config-toolbar-class>>>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/close-others-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/CloseOthers/Caption}}/>
-</span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/CloseOthers/Hint}}
+	label={{$:/language/Buttons/CloseOthers/Caption}}
+	icon="$:/core/images/close-others-button"
+	actions="<$action-sendmessage $message='tm-close-other-tiddlers' $param=<<currentTiddler>>/>"
+/>

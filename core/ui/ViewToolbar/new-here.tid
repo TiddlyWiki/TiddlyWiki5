@@ -9,16 +9,9 @@ description: {{$:/language/Buttons/NewHere/Hint}}
 <$action-sendmessage $message="tm-new-tiddler" tags=<<tags>>/>
 </$set>
 \end
-\procedure newHereButton()
-<$button actions=<<newHereActions>> tooltip={{$:/language/Buttons/NewHere/Hint}} aria-label={{$:/language/Buttons/NewHere/Caption}} class=<<tv-config-toolbar-class>>>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/new-here-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/NewHere/Caption}}/>
-</span>
-<%endif%>
-</$button>
-\end
-<<newHereButton>>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/NewHere/Hint}}
+	label={{$:/language/Buttons/NewHere/Caption}}
+	icon="$:/core/images/new-here-button"
+	actions=<<newHereActions>>
+/>

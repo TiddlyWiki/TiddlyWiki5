@@ -6,9 +6,8 @@ description: {{$:/language/Buttons/ListNumber/Hint}}
 condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 shortcuts: ((list-number))
 
-<$action-sendmessage
-	$message="tm-edit-text-operation"
-	$param="prefix-lines"
+<$transclude $variable="editor-text-operation"
+	operation="prefix-lines"
 	character="#"
 	count="1"
 />

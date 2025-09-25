@@ -10,9 +10,7 @@ second-search-filter: [!is[system]search<userInput>sort[title]limit[250]]
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[first-search-filter]] }}} emptyMessage={{$:/language/Search/Matches/NoResult}}>
-<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
-<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
-</span>
+<$transclude $variable="search-results-item" selectionState=<<searchListState>> suffix="-primaryList"/>
 </$list>
 </$list>
 
@@ -20,9 +18,7 @@ second-search-filter: [!is[system]search<userInput>sort[title]limit[250]]
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">
 <$list filter={{{ [<configTiddler>get[second-search-filter]] }}} emptyMessage={{$:/language/Search/Matches/NoResult}}>
-<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
-<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
-</span>
+<$transclude $variable="search-results-item" selectionState=<<searchListState>> suffix="-secondaryList"/>
 </$list>
 </$list>
 

@@ -5,17 +5,17 @@ description: {{$:/language/Buttons/AdvancedSearch/Hint}}
 
 \whitespace trim
 \procedure advanced-search-button(class)
-\whitespace trim
-<$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class=`$(tv-config-toolbar-class)$ $(class)$`>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/advanced-search-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/AdvancedSearch/Caption}}/></span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	to="$:/AdvancedSearch"
+	tooltip={{$:/language/Buttons/AdvancedSearch/Hint}}
+	label={{$:/language/Buttons/AdvancedSearch/Caption}}
+	icon="$:/core/images/advanced-search-button"
+	class=<<class>>
+/>
 \end
 
-<$list filter="[list[$:/StoryList]] +[field:title[$:/AdvancedSearch]]" emptyMessage=<<advanced-search-button>>>
-<<advanced-search-button "tc-selected">>
-</$list>
+<$transclude $variable="list-with-empty" 
+	filter="[list[$:/StoryList]] +[field:title[$:/AdvancedSearch]]" 
+	emptyMessage=<<advanced-search-button>>
+	template="""<<advanced-search-button "tc-selected">>"""
+/>

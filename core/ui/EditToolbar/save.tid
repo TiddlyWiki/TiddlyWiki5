@@ -4,21 +4,11 @@ caption: {{$:/core/images/done-button}} {{$:/language/Buttons/Save/Caption}}
 description: {{$:/language/Buttons/Save/Hint}}
 
 \whitespace trim
-\procedure save-tiddler-button()
 <$fieldmangler>
-	<$button
+	<$transclude $variable="toolbar-button-conditional"
 		tooltip={{$:/language/Buttons/Save/Hint}}
-		aria-label={{$:/language/Buttons/Save/Hint}}
-		class=<<tv-config-toolbar-class>>
-	>
-		<<save-tiddler-actions>>
-		<%if [<tv-config-toolbar-icons>match[yes]] %>
-			{{$:/core/images/done-button}}
-		<%endif%>
-		<%if [<tv-config-toolbar-text>match[yes]] %>
-			<span class="tc-btn-text"><$text text={{$:/language/Buttons/Save/Caption}}/></span>
-		<%endif%>
-	</$button>
+		label={{$:/language/Buttons/Save/Caption}}
+		icon="$:/core/images/done-button"
+		actions=<<save-tiddler-actions>>
+	/>
 </$fieldmangler>
-\end
-<<save-tiddler-button>>

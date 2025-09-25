@@ -7,11 +7,10 @@ caption: {{$:/language/ControlPanel/Settings/CamelCase/Caption}}
 
 <<lingo Hint>>
 
-<$checkbox tiddler="$:/config/WikiParserRules/Inline/wikilink"
-	field="text" checked="enable" unchecked="disable" default="enable"
-	class="tc-control-panel-item"
->
-	<$link to="$:/config/WikiParserRules/Inline/wikilink" class="tc-tiny-gap-left">
-		<<lingo Description>>
-	</$link>
-</$checkbox>
+<$transclude $variable="control-panel-checkbox"
+	config="$:/config/WikiParserRules/Inline/wikilink"
+	label=<<lingo Description>>
+	default="enable"
+	checkedValue="enable"
+	uncheckedValue="disable"
+/>

@@ -3,4 +3,8 @@ tags: $:/tags/TiddlerInfo
 caption: {{$:/language/TiddlerInfo/List/Caption}}
 
 \define lingo-base() $:/language/TiddlerInfo/
-<$list filter="[list{!!title}]" emptyMessage=<<lingo List/Empty>> template="$:/core/ui/ListItemTemplate"/>
+<$transclude $variable="list-or-empty"
+	filter="[list{!!title}]"
+	emptyMessage=<<lingo List/Empty>>
+	template="$:/core/ui/ListItemTemplate"
+/>

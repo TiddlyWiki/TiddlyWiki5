@@ -1,0 +1,263 @@
+title: $:/core/macros/utilities
+tags: $:/tags/Global
+
+\procedure relative-date(date,field:"modified")
+\whitespace trim
+<$let dateValue={{{ [<now [UTC]YYYY0MM0DD0hh0mm0ss0XXX>format:date[TIMESTAMP]] }}} fieldValue={{{ [all[current]get<field>format:date[TIMESTAMP]] }}} days={{{ [<dateValue>subtract<fieldValue>divide[86400000]floor[]] }}}>
+	<$list filter="[<days>compare:number:lt[1]]" emptyMessage="""<$wikify name="lingoText" text=<<lingo DaysAgo>>><$text text=<<lingoText>>/></$wikify>""">
+		<<lingo Today>>
+	</$list>
+</$let>
+\end
+
+\procedure toggle-field(tiddler,field,value1:"yes",value2:"no")
+<$action-setfield $tiddler=<<tiddler>> $field=<<field>> $value={{{ [<tiddler>get<field>match<value1>then<value2>else<value1>] }}}/>
+\end
+
+\procedure toggle-state-button(state,openIcon,closeIcon,openTooltip,closeTooltip,openText:"",closeText:"",openValue:"open",closeValue:"close",default:"close",actions:"",openAriaLabel:"",closeAriaLabel:"")
+\whitespace trim
+<$reveal type="nomatch" stateTitle=<<state>> text=<<openValue>> default=<<default>>>
+	<$button setTitle=<<state>> setTo=<<openValue>> class="tc-btn-invisible" tooltip=<<openTooltip>> actions=<<actions>> aria-label=<<openAriaLabel>>>
+		<$transclude tiddler=<<openIcon>>/>
+		<%if [<openText>!is[blank]] %>
+			<$text text=<<openText>>/>
+		<% endif %>
+	</$button>
+</$reveal>
+<$reveal type="match" stateTitle=<<state>> text=<<openValue>> default=<<default>>>
+	<$button setTitle=<<state>> setTo=<<closeValue>> class="tc-btn-invisible" tooltip=<<closeTooltip>> actions=<<actions>> aria-label=<<closeAriaLabel>>>
+		<$transclude tiddler=<<closeIcon>>/>
+		<%if [<closeText>!is[blank]] %>
+			<$text text=<<closeText>>/>
+		<% endif %>
+	</$button>
+</$reveal>
+\end
+
+\procedure tm-message-button(message,param,tooltip,label,icon,class:"tc-btn-invisible",actions:"")
+\whitespace trim
+<$button tooltip=<<tooltip>> class=<<class>>>
+	<$action-sendmessage $message=<<message>> $param=<<param>>/>
+	<<actions>>
+	<$transclude tiddler=<<icon>>/>
+	<$text text=<<label>>/>
+</$button>
+\end
+
+\procedure list-or-empty(filter,emptyMessage,template:"")
+<$list filter=<<filter>> emptyMessage=<<emptyMessage>>>
+	<$transclude $tiddler=<<template>> $mode="block">
+		<<currentTiddler>>
+	</$transclude>
+</$list>
+\end
+
+\procedure toolbar-button(actions,tooltip,icon,caption)
+\whitespace trim
+<$button tooltip=<<tooltip>> class=<<tv-config-toolbar-class>> actions=<<actions>>>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		<$transclude tiddler=<<icon>>/>
+	<% endif %>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text"><$text text=<<caption>>/></span>
+	<% endif %>
+</$button>
+\end
+
+\procedure dropdown-wrapper(state,button,content,class:"tc-popup-keep")
+\whitespace trim
+<$button popup=<<state>> class=<<class>>>
+	<<button>>
+</$button>
+<$reveal state=<<state>> type="popup" position="below" animate="yes" retain="yes">
+	<div class="tc-drop-down">
+		<<content>>
+	</div>
+</$reveal>
+\end
+
+\procedure toolbar-button-conditional(tooltip,label,icon,actions:"",to:"",class:"",selectedClass:"",popup:"")
+\whitespace trim
+<$button to=<<to>> tooltip=<<tooltip>> aria-label=<<label>> class={{{ [<tv-config-toolbar-class>] [<class>] +[unique[ ]] +[join[ ]] }}} actions=<<actions>> popup=<<popup>> selectedClass=<<selectedClass>>>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		<$transclude tiddler=<<icon>>/>
+	<% endif %>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text"><$text text=<<label>>/></span>
+	<% endif %>
+</$button>
+\end
+
+\procedure editor-text-operation(operation,param,prefix:"",suffix:"",character:"",count:"")
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param=<<operation>>
+	prefix=<<prefix>>
+	suffix=<<suffix>>
+	character=<<character>>
+	count=<<count>>
+	trimSelection="yes"
+/>
+\end
+
+\procedure control-panel-checkbox(config,label,default:"no",checkedValue:"yes",uncheckedValue:"no")
+\whitespace trim
+<$checkbox tiddler=<<config>> field="text" checked=<<checkedValue>> unchecked=<<uncheckedValue>> default=<<default>>>
+	<$link to=<<config>> class="tc-tiny-gap-left"><<label>></$link>
+</$checkbox>
+\end
+
+\function tf.cascade-filter(tag)
+[<currentTiddler>] :cascade[all[shadows+tiddlers]tag<tag>!is[draft]get[text]]
+\end
+
+\function tf.tiddler-frame-classes(type:"view")
+[all[shadows+tiddlers]tag[$:/tags/ClassFilters/TiddlerTemplate]!is[draft]] :map:flat[subfilter{!!text}] 
+[[tc-tiddler-frame]] 
+[<type>match[view]then[tc-tiddler-view-frame]] 
+[<type>match[edit]then[tc-tiddler-edit-frame]] 
+[<currentTiddler>is[tiddler]then[tc-tiddler-exists]] 
+[<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] 
+[<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] 
+[<currentTiddler>is[shadow]is[tiddler]then[tc-tiddler-overridden-shadow]] 
+[<currentTiddler>is[system]then[tc-tiddler-system]] 
+[{!!class}] 
+[<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] 
++[join[ ]]
+\end
+
+\function tf.toolbar-button-classes(baseClass,item)
+[enlist<baseClass>] [<item>encodeuricomponent[]addprefix[tc-btn-]] +[join[ ]]
+\end
+
+\procedure reveal-animate-dropdown(state,content,position:"below",class:"tc-drop-down",style:"")
+\whitespace trim
+<$reveal state=<<state>> type="popup" position=<<position>> animate="yes" retain="yes">
+	<div class=<<class>> style=<<style>>>
+		<<content>>
+	</div>
+</$reveal>
+\end
+
+\procedure list-filter-empty(filter,emptyMessage:"",variable:"currentTiddler")
+\whitespace trim
+<$list filter=<<filter>> variable=<<variable>> emptyMessage=<<emptyMessage>>>
+	<<variable>>
+</$list>
+\end
+
+\procedure search-min-length-guard(searchTiddler,content,minLengthConfig:"$:/config/Search/MinLength")
+\whitespace trim
+<%if [<searchTiddler>get[text]minlength{$:/config/Search/MinLength}limit[1]] %>
+	<<content>>
+<%else%>
+	<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>
+<%endif%>
+\end
+
+\procedure search-cancel-actions(searchTiddler,inputTiddler,refreshTiddler,additionalActions:"")
+\whitespace trim
+<%if [<searchTiddler>get[text]!match<inputTiddler>get[text]] %>
+	<$action-setfield $tiddler=<<inputTiddler>> text={{{ [<searchTiddler>get[text]] }}}/>
+	<$action-setfield $tiddler=<<refreshTiddler>> text="yes"/>
+<%else%>
+	<$action-deletetiddler $filter="[<searchTiddler>] [<inputTiddler>] [<refreshTiddler>]"/>
+	<<additionalActions>>
+<%endif%>
+\end
+
+\procedure search-navigate-actions(targetTiddler)
+\whitespace trim
+<%if [{$:/config/Search/NavigateOnEnter/enable}match[yes]] %>
+	<$action-navigate $to={{{ [<targetTiddler>get[text]] }}}/>
+<%else%>
+	<%if [<targetTiddler>get[text]!is[missing]] :else[<targetTiddler>get[text]is[shadow]] %>
+		<$action-navigate $to={{{ [<targetTiddler>get[text]] }}}/>
+	<%endif%>
+<%endif%>
+\end
+
+\procedure search-navigate-variant-actions(targetTiddler)
+\whitespace trim
+<%if [{$:/config/Search/NavigateOnEnter/enable}match[yes]] %>
+	<%if [<targetTiddler>get[text]minlength[1]] %>
+		<$action-sendmessage $message="tm-edit-tiddler" $param={{{ [<targetTiddler>get[text]] }}}/>
+	<%endif%>
+<%else%>
+	<%if [<targetTiddler>get[text]!is[missing]] :else[<targetTiddler>get[text]is[shadow]] %>
+		<%if [<targetTiddler>get[text]minlength[1]] %>
+			<$action-sendmessage $message="tm-edit-tiddler" $param={{{ [<targetTiddler>get[text]] }}}/>
+		<%endif%>
+	<%endif%>
+<%endif%>
+\end
+
+\procedure search-results-item(selectionState,suffix:"-primaryList",itemTemplate:"$:/core/ui/ListItemTemplate")
+\whitespace trim
+<span class={{{ [<currentTiddler>addsuffix<suffix>] :except[<selectionState>get[text]] :and[then[]else[tc-list-item-selected]] }}}>
+	<$transclude tiddler=<<itemTemplate>>/>
+</span>
+\end
+
+\procedure list-with-empty(filter,emptyMessage:"",template:"",variable:"currentTiddler")
+\whitespace trim
+<$list filter=<<filter>> variable=<<variable>> emptyMessage=<<emptyMessage>>>
+	<%if [<template>!is[blank]] %>
+		<$transclude tiddler=<<template>>/>
+	<%else%>
+		<$transclude/>
+	<%endif%>
+</$list>
+\end
+
+\procedure conditional-action(condition,trueActions:"",falseActions:"")
+\whitespace trim
+<%if [subfilter<condition>] %>
+	<<trueActions>>
+<%else%>
+	<<falseActions>>
+<%endif%>
+\end
+
+\procedure draggable-item(tiddler,content,dragFilter:"",tag:"div",class:"",startActions:"",endActions:"")
+\whitespace trim
+<$draggable tiddler=<<tiddler>> filter=<<dragFilter>> tag=<<tag>> class=<<class>> startactions=<<startActions>> endactions=<<endActions>>>
+	<<content>>
+</$draggable>
+\end
+
+\procedure icon-text-button(actions:"",tooltip:"",ariaLabel:"",icon:"",text:"",class:"tc-btn-invisible",popup:"",to:"")
+\whitespace trim
+<$button actions=<<actions>> tooltip=<<tooltip>> aria-label=<<ariaLabel>> class=<<class>> popup=<<popup>> to=<<to>>>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		<%if [<icon>!is[blank]] %>
+			<$transclude tiddler=<<icon>>/>
+		<%endif%>
+	<%endif%>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<%if [<text>!is[blank]] %>
+			<span class="tc-btn-text"><$text text=<<text>>/></span>
+		<%endif%>
+	<%endif%>
+</$button>
+\end
+
+\procedure navigate-or-edit-button(tiddler,navigateText:"Open",editText:"Edit",class:"tc-btn-invisible")
+\whitespace trim
+<%if [<tiddler>is[missing]] %>
+	<$button to=<<tiddler>> class=<<class>>>
+		{{$:/core/images/new-button}} <$text text=<<editText>>/>
+	</$button>
+<%else%>
+	<$button to=<<tiddler>> class=<<class>>>
+		{{$:/core/images/open-window}} <$text text=<<navigateText>>/>
+	</$button>
+<%endif%>
+\end
+
+\procedure simple-icon-button(icon,tooltip:"",ariaLabel:"",class:"tc-btn-invisible",actions:"",message:"",param:"",set:"",setTo:"",popup:"",to:"")
+\whitespace trim
+<$button class=<<class>> tooltip=<<tooltip>> aria-label=<<ariaLabel>> actions=<<actions>> message=<<message>> param=<<param>> set=<<set>> setTo=<<setTo>> popup=<<popup>> to=<<to>>>
+	<$transclude tiddler=<<icon>>/>
+</$button>
+\end
