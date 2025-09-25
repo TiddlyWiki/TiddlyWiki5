@@ -36,87 +36,20 @@ Compute the internal state of the widget
 WikifyWidget.prototype.execute = function() {
 	// Get our parameters
 	this.wikifyName = this.getAttribute("name");
-	this.wikifyText = this.getAttribute("text");
-	this.wikifyType = this.getAttribute("type");
-	this.wikifyMode = this.getAttribute("mode","block");
-	this.wikifyOutput = this.getAttribute("output","text");
-	// Create the parse tree
-	this.wikifyParser = this.wiki.parseText(this.wikifyType,this.wikifyText,{
-			parseAsInline: this.wikifyMode === "inline"
-		});
-	// Create the widget tree 
-	this.wikifyWidgetNode = this.wiki.makeWidget(this.wikifyParser,{
-			document: $tw.fakeDocument,
-			parentWidget: this
-		});
-	// Render the widget tree to the container
-	this.wikifyContainer = $tw.fakeDocument.createElement("div");
-	this.wikifyWidgetNode.render(this.wikifyContainer,null);
-	this.wikifyResult = this.getResult();
+	// Create the wikifier
+	this.wikifier = new $tw.utils.Wikifier({
+		wiki: this.wiki,
+		widget: this,
+		text: this.getAttribute("text"),
+		type: this.getAttribute("type"),
+		mode: this.getAttribute("mode","block"),
+		output: this.getAttribute("output","text")
+	});
+	this.wikifyResult = this.wikifier.getResult();
 	// Set context variable
 	this.setVariable(this.wikifyName,this.wikifyResult);
 	// Construct the child widgets
 	this.makeChildWidgets();
-};
-
-/*
-Return the result string
-*/
-WikifyWidget.prototype.getResult = function() {
-	var result;
-	switch(this.wikifyOutput) {
-		case "text":
-			result = this.wikifyContainer.textContent;
-			break;
-		case "formattedtext":
-			result = this.wikifyContainer.formattedTextContent;
-			break;
-		case "html":
-			result = this.wikifyContainer.innerHTML;
-			break;
-		case "parsetree":
-			result = JSON.stringify(this.wikifyParser.tree,0,$tw.config.preferences.jsonSpaces);
-			break;
-		case "widgettree":
-			result = JSON.stringify(this.getWidgetTree(),0,$tw.config.preferences.jsonSpaces);
-			break;
-	}
-	return result;
-};
-
-/*
-Return a string of the widget tree
-*/
-WikifyWidget.prototype.getWidgetTree = function() {
-	var copyNode = function(widgetNode,resultNode) {
-			var type = widgetNode.parseTreeNode.type;
-			resultNode.type = type;
-			switch(type) {
-				case "element":
-					resultNode.tag = widgetNode.parseTreeNode.tag;
-					break;
-				case "text":
-					resultNode.text = widgetNode.parseTreeNode.text;
-					break;
-			}
-			if(Object.keys(widgetNode.attributes || {}).length > 0) {
-				resultNode.attributes = {};
-				$tw.utils.each(widgetNode.attributes,function(attr,attrName) {
-					resultNode.attributes[attrName] = widgetNode.getAttribute(attrName);
-				});
-			}
-			if(Object.keys(widgetNode.children || {}).length > 0) {
-				resultNode.children = [];
-				$tw.utils.each(widgetNode.children,function(widgetChildNode) {
-					var node = {};
-					resultNode.children.push(node);
-					copyNode(widgetChildNode,node);
-				});
-			}
-		},
-		results = {};
-	copyNode(this.wikifyWidgetNode,results);
-	return results;
 };
 
 /*
@@ -130,9 +63,9 @@ WikifyWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	} else {
 		// Refresh the widget tree
-		if(this.wikifyWidgetNode.refresh(changedTiddlers)) {
+		if(this.wikifier.refresh(changedTiddlers)) {
 			// Check if there was any change
-			var result = this.getResult();
+			var result = this.wikifier.getResult();
 			if(result !== this.wikifyResult) {
 				// If so, save the change
 				this.wikifyResult = result;
