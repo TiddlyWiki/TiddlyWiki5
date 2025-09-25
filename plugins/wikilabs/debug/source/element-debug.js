@@ -98,16 +98,17 @@ exports.startup = function() {
 					.search-suggestions {
 						display: none;
 						position: absolute;
-						border: 1px solid #ccc;
+						border: 1px solid #999;
+						box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
 						background-color: var(--popup-bg-color);
-						width: calc(98% - 2px); /* Match search input width */
+						width: calc(96%);
 						max-height: 150px;
 						overflow-y: auto;
-						z-index: 1001; /* Above the table */
-						font-size: 14px;
+						z-index: 1001;
+						font-size: 12px;
 					}
 					.suggestion-item {
-						padding: 8px;
+						padding: 4px 8px;
 						cursor: pointer;
 					}
 					.suggestion-item:hover, .suggestion-item.suggestion-active {
