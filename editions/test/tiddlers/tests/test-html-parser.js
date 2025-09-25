@@ -6,10 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests for the internal components of the HTML tag parser
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function FakeParser() {
@@ -161,6 +158,16 @@ describe("HTML tag new parser tests", function() {
 		expect($tw.utils.parseAttribute(" attrib1>",0)).toEqual(
 			{ type : 'string', value : 'true', start : 0, name : 'attrib1', end : 8 }
 		);
+		expect($tw.utils.parseAttribute("p=`blah` ",1)).toEqual(null);
+		expect($tw.utils.parseAttribute("p=`blah` ",0)).toEqual(
+			{ start: 0, name: 'p', type: 'substituted', rawValue: 'blah', end: 8 }
+		);
+		expect($tw.utils.parseAttribute("p=```blah``` ",0)).toEqual(
+			{ start: 0, name: 'p', type: 'substituted', rawValue: 'blah', end: 12 }
+		);
+		expect($tw.utils.parseAttribute("p=`Hello \"There\"`",0)).toEqual(
+			{ start: 0, name: 'p', type: 'substituted', rawValue: 'Hello "There"', end: 17 }
+		);
 	});
 
 	it("should parse HTML tags", function() {
@@ -221,5 +228,3 @@ describe("HTML tag new parser tests", function() {
 	});
 
 });
-
-})();

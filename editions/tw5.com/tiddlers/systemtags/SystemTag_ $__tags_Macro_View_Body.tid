@@ -6,4 +6,4 @@ tags: SystemTags
 title: SystemTag: $:/tags/Macro/View/Body
 type: text/vnd.tiddlywiki
 
-The [[system tag|SystemTags]] `$:/tags/Macro/View/Body` marks macros that are only made available within the main view template bodies and the preview panel.
+The [[system tag|SystemTags]] `$:/tags/Macro/View/Body` marks macros that are only made available within the main view template bodies and the preview panel. It is now deprecated in favour of [[SystemTag $:/tags/Global/View/Body]].

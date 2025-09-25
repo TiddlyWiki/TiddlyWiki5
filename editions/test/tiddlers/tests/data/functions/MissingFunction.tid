@@ -1,0 +1,15 @@
+title: Functions/MissingFunction
+description: Calling a missing function via the function operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+<$text text={{{ [[23]function[missing]] }}}/>
+
++
+title: ExpectedResult
+
+23

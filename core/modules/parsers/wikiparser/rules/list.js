@@ -40,10 +40,7 @@ A CSS class can be applied to a list item as follows:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "list";
@@ -74,6 +71,7 @@ exports.parse = function() {
 		// Match the list marker
 		var reMatch = /([\*#;:>]+)/mg;
 		reMatch.lastIndex = this.parser.pos;
+		var start = this.parser.pos;
 		var match = reMatch.exec(this.parser.source);
 		if(!match || match.index !== this.parser.pos) {
 			break;
@@ -94,9 +92,21 @@ exports.parse = function() {
 			}
 			// Construct the list element or reuse the previous one at this level
 			if(listStack.length <= t) {
-				var listElement = {type: "element", tag: listInfo.listTag, children: [
-					{type: "element", tag: listInfo.itemTag, children: []}
-				]};
+				var listElement = {
+					type: "element",
+					tag: listInfo.listTag,
+					children: [
+						{
+							type: "element",
+							tag: listInfo.itemTag,
+							children: [],
+							start: start,
+							end: this.parser.pos,
+						}
+					],
+					start: start,
+					end: this.parser.pos,
+				};
 				// Link this list element into the last child item of the parent list item
 				if(t) {
 					var prevListItem = listStack[t-1].children[listStack[t-1].children.length-1];
@@ -105,21 +115,33 @@ exports.parse = function() {
 				// Save this element in the stack
 				listStack[t] = listElement;
 			} else if(t === (match[0].length - 1)) {
-				listStack[t].children.push({type: "element", tag: listInfo.itemTag, children: []});
+				listStack[t].children.push({
+					type: "element",
+					tag: listInfo.itemTag,
+					children: [],
+					start: start,
+					end: this.parser.pos,
+				});
 			}
 		}
 		if(listStack.length > match[0].length) {
 			listStack.splice(match[0].length,listStack.length - match[0].length);
 		}
 		// Process the body of the list item into the last list item
+		var classStart = this.parser.pos;
 		var lastListChildren = listStack[listStack.length-1].children,
 			lastListItem = lastListChildren[lastListChildren.length-1],
 			classes = this.parser.parseClasses();
+		var classEnd = this.parser.pos;
 		this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 		var tree = this.parser.parseInlineRun(/(\r?\n)/mg);
 		lastListItem.children.push.apply(lastListItem.children,tree);
+		lastListItem.end = this.parser.pos;
+		listStack[listStack.length-1].end = this.parser.pos;
 		if(classes.length > 0) {
 			$tw.utils.addClassToParseTreeNode(lastListItem,classes.join(" "));
+			lastListItem.attributes.class.start = classStart;
+			lastListItem.attributes.class.end = classEnd;
 		}
 		// Consume any whitespace following the list item
 		this.parser.skipWhitespace();
@@ -127,5 +149,3 @@ exports.parse = function() {
 	// Return the root element of the list
 	return [listStack[0]];
 };
-
-})();

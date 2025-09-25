@@ -5,6 +5,7 @@ The ''Dynannotate'' plugin allows annotations on textual content to be created a
 * The dynannotate widget draws clickable textual annotations, search highlights and search snippets as overlays over the top of the content that it contains
 * The selection tracker keeps track of changes to the selected text in the main browser window. It triggers an action string when the selection changes, passing it the details of the selection. It can be used to display a popup menu
 ** The original legacy selection tracker is also provided for backwards compatibility. It is much more limited, and not recommended for new projects
+* The element spotlight highlights on screen elements using a spotlight animation
 
 !! Dynannotate Widget
 
@@ -23,9 +24,10 @@ The `<$dynannotate>` widget uses the selection tracker to support a popup that d
 |filter |Filter identifying the annotation tiddlers applying to this content (see below) |
 |actions |Action string to be executed when an annotation is clicked. The variable `annotationTiddler` contains the title of the tiddler corresponding to the annotation that was clicked, and the variable `modifierKey` contains "ctrl", "shift", "ctrl-shift", "normal" according to which modifier keys were pressed |
 |popup |Popup state tiddler to be used to trigger a popup when an annotation is clicked |
+|floating |Setting to `yes` makes the popup need to be closed explicitly. |
 |search |Search text to be highlighted within the widget |
 |searchDisplay |"overlay" or "snippet" (see below) |
-|searchMode |"normal" (default), "regexp" or "whitespace" (see below) |
+|searchMode |"literal" (default), "regexp", "whitespace", "words" or "some" (see below) |
 |searchMinLength |Optional minimum length of search string |
 |searchCaseSensitive |"yes" (the default) for a case sensitive search, or "no" for a case insensitive search|
 |searchClass |Optional CSS class to be added to search overlays |
@@ -46,9 +48,10 @@ The values supported by the `searchDisplay` attribute are:
 
 The search modes supported by the `searchMode` attribute are:
 
-* `normal` - a literal string of plain text to match
+* `literal` or `normal` - a literal string of plain text to match (default).
 * `regexp` - a JavaScript-style regular expression (without the quoting backslashes and flags)
-* `whitespace` - a literal string to match while normalising runs of whitespace. This allows `a. b` to match `a.  b`
+* `whitespace` - a literal string to match while normalising runs of whitespace. Thus `A B` matches `A   B`.
+* `words` or `some` - treats the search string as a list of tokens separated by whitespace, and matches all tokens (regardless of ordering and whether there is other text in between)
 
 When the selection popup is triggered, the currently selected text can be found in the tiddler named in the `selection` attribute, with the disambiguating prefix and suffix in the tiddlers named in the `selectionPrefix` and `selectionPopup` tiddlers. Note that the selection text will be an empty string if the selection popup was triggered in response to a click (ie zero width selection).
 
@@ -95,7 +98,7 @@ Note that using the `annotate-tiddler` field to associate an annotation with the
 
 !! Selection Trackers
 
-The following configuration tiddlers can be used to control whether the selection trackers are enabled when the following configuration tiddlers are set to ''yes'' (the default).
+The selection trackers are enabled when the following configuration tiddlers are set to ''yes''.
 
 * $:/config/Dynannotate/SelectionTracker/Enable for the main selection tracker
 * $:/config/Dynannotate/LegacySelectionTracker/Enable for the legacy selection tracker
@@ -170,3 +173,12 @@ Notes:
 
 * The selection popup will disappear if the selection is cancelled; this will happen if the user clicks on any other element apart than a button. Thus it is not possible to have any interactive controls within the popup apart from buttons
 
+!! Element Spotlight
+
+The `tm-spotlight-element` message causes a spotlight effect to briefly appear to highlight a specified element. The message accepts the following parameters:
+
+|!Parameter |!Description |
+|`selector` |CSS selector of the element to highlight |
+|{//Any parameter names starting with `selector-`}// |Fallback CSS selectors to be used if the primary selector does not resolve to an element |
+
+The fallback CSS selectors are case-insensitively sorted by title before use, with uppercase letters sorting before lower case letters. The usual convention is to use numeric suffixes: `selector-00`, `selector-01` etc.

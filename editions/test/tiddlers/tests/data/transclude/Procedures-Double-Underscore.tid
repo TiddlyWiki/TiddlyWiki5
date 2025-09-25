@@ -1,0 +1,26 @@
+title: Procedures/Double/Underscore
+description: Checking that procedures don't expose parameters as variables wrapped in double underscores
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\procedure mamacro(one:"red",two:"green")
+It is $one$ and $two$<<__one__>><<__two__>>.
+\end
+
+<$macrocall $name="mamacro"/>
+
+<$transclude $variable="mamacro"/>
+
+<$transclude $variable="mamacro" one="orange"/>
+
+<$transclude $variable="mamacro" 0="pink"/>
+
+<$transclude $variable="mamacro" one="purple" 1="pink"/>
+
++
+title: ExpectedResult
+
+<p>It is $one$ and $two$.</p><p>It is $one$ and $two$.</p><p>It is $one$ and $two$.</p><p>It is $one$ and $two$.</p><p>It is $one$ and $two$.</p>

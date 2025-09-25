@@ -6,10 +6,7 @@ module-type: parser
 The PDF parser embeds a PDF viewer
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var ImageParser = function(type,text,options) {
@@ -25,9 +22,8 @@ var ImageParser = function(type,text,options) {
 		element.attributes.src = {type: "string", value: "data:application/pdf;base64," + text};
 	}
 	this.tree = [element];
+	this.source = text;
+	this.type = type;
 };
 
 exports["application/pdf"] = ImageParser;
-
-})();
-

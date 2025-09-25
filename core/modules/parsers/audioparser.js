@@ -6,10 +6,7 @@ module-type: parser
 The audio parser parses an audio tiddler into an embeddable HTML element
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var AudioParser = function(type,text,options) {
@@ -28,12 +25,11 @@ var AudioParser = function(type,text,options) {
 		element.attributes.src = {type: "string", value: "data:" + type + ";base64," + text};
 	}
 	this.tree = [element];
+	this.source = text;
+	this.type = type;
 };
 
 exports["audio/ogg"] = AudioParser;
 exports["audio/mpeg"] = AudioParser;
 exports["audio/mp3"] = AudioParser;
 exports["audio/mp4"] = AudioParser;
-
-})();
-

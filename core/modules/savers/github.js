@@ -6,10 +6,7 @@ module-type: saver
 Saves wiki by pushing a commit to the GitHub v3 REST API
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -31,7 +28,7 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		headers = {
 			"Accept": "application/vnd.github.v3+json",
 			"Content-Type": "application/json;charset=UTF-8",
-			"Authorization": "Basic " + window.btoa(username + ":" + password),
+			"Authorization": "Basic " + $tw.utils.base64Encode(username + ":" + password),
 			"If-None-Match": ""
 		};
 	// Bail if we don't have everything we need
@@ -115,5 +112,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new GitHubSaver(wiki);
 };
-
-})();

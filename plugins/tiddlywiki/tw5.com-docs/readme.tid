@@ -1,0 +1,7 @@
+title $:/plugins/tiddlywiki/tw5.com-docs/readme
+
+This is an experimental packaging of the documentation from tiddlywiki.com into a plugin.
+
+It is currently not fully functional:
+
+* Listings of tiddlers don't always work because the docs tiddlers are now shadow tiddlers

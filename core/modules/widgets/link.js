@@ -6,10 +6,7 @@ module-type: widget
 Link widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -43,6 +40,11 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 	} else {
 		// Just insert the link text
 		var domNode = this.document.createElement("span");
+		// Assign data- attributes
+		this.assignAttributes(domNode,{
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
 		parent.insertBefore(domNode,nextSibling);
 		this.renderChildren(domNode,null);
 		this.domNodes.push(domNode);
@@ -138,6 +140,11 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			widget: this
 		});
 	}
+	// Assign data- attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Insert the link into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -207,8 +214,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 LinkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip ||
-		changedAttributes["class"] || changedAttributes.tabindex || changedAttributes.draggable || changedAttributes.tag) {
+	if($tw.utils.count(changedAttributes) > 0 || changedTiddlers[this.to]) {
 		this.refreshSelf();
 		return true;
 	}
@@ -216,5 +222,3 @@ LinkWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.link = LinkWidget;
-
-})();

@@ -1,0 +1,13 @@
+created: 20140206211715540
+modified: 20241206115421575
+original-modified: 20160610081543108
+tags: Features
+title: AutoSave
+ja-title: 自動保存
+type: text/vnd.tiddlywiki
+
+自動保存をサポートする利用可能なSavingMechanismがある場合、TiddlyWikiは、Tiddlerの編集時に<<.icon $:/core/images/done-button>>''ok''または<<.icon $:/core/images/delete-button>>''削除''をクリックすると、現在のドキュメントの保存を自動的にトリガーします
+
+自動保存が行われたことを確認するために、ウィンドウの右上に黄色の通知が表示されます
+
+自動保存は、[[コントロールパネル|$:/ControlPanel]]<<.icon $:/core/images/options-button>>の''設定''タブで有効または無効にできます。バックグラウンドでは、設定用Tiddler[[$:/config/AutoSave]]を通じて制御されます。自動保存を有効にするには、この構成の値が''yes''である必要があります

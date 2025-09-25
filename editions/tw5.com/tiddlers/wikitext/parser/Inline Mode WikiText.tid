@@ -1,6 +1,6 @@
 caption: inline parser mode
 created: 20220111000108618
-modified: 20220122182842036
+modified: 20220917074925230
 tags: [[WikiText Parser Modes]]
 title: Inline Mode WikiText
 type: text/vnd.tiddlywiki
@@ -14,13 +14,13 @@ These WikiText types can be expressed without an entire line of text. They aren'
 * [[HTML in WikiText]]
 * [[Images in WikiText]]
 * [[Linking in WikiText]]
-* [[Macro Calls in WikiText]]
+* [[Macro Calls]]
 * [[Styles and Classes in WikiText]] (single line version only)
 * [[Transclusion in WikiText]]
 * [[Variables in WikiText]]
 * [[Widgets in WikiText]]
 
-<<.tip """[[Macro Calls in WikiText]] and  [[Transclusion in WikiText]] will be recognised in block mode if the macro call or transclusion spans an entire line.""">>
+<<.tip """[[Macro Calls]] and  [[Transclusion in WikiText]] will be recognised in block mode if the macro call or transclusion spans an entire line.""">>
 <<.tip """The other ''inline mode'' WikiText types are technically <<.em only>> detected while the parser is in ''inline mode''. However, the opening punctuation will also trigger the start of [[Paragraphs in WikiText]] which will automatically cause the parser to go into ''inline mode''. Therefore, practically speaking, it is just as useful to consider these WikiText types as recognised while the parser is in either ''inline mode'' or ''block mode''""">>
 
 While processing the //enclosed// text of some of these WikiText types, the parser [[will not look for new WikiText|Places where the parser ignores WikiText]]. But for rest of these WikiText types, the parser will continue in ''inline mode'' for the //enclosed// text.  While parsing that text, it might encounter something which [[moves it to block mode|WikiText parser mode transitions]].

@@ -1,0 +1,61 @@
+created: 20210428083929749
+from-version: 5.2.0
+modified: 20250419111702297
+original-modified: 20240717120111427
+rp-input: 前回までのすべてのランのフィルタアウトプット
+rp-output: アウトプットタイトルは、以前のフィルタランのアウトプットを置き換え
+rp-purpose: 各項目に対して実行されたこのフィルタの評価結果によってインプットタイトルを並べ替え
+rp-suffix: :sortフィルタランプレフィックスはリッチサフィックスを使用します。詳細については以下を参照
+rp-suffix-name: S
+tags: [[Named Filter Run Prefix]]
+title: Sort Filter Run Prefix
+ja-title: sortフィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( ":sort" ) 
+( ":" ) 
+( : "string" | "alphanumeric" | "number" | "integer" | "version" | "date" )
+( ":" ) 
+{
+	(
+		(
+			( : "caseinsensitive" /"stringとalphanumericには必須"/ | "casesensitive" /"stringとalphanumericには必須"/)
+			| "reverse" /"オプション"/ 
+		)
+	)
+	+","
+}
+[["ラン"|"Filter Run"]]
+"""/>
+
+前回のランからインプットされた各タイトルは、今回のランに順番に渡されます。フィルタランは、インプットタイトルをソートに必要な形式に変換します。例えば、フィルタラン`[length[]]`は各インプットタイトルをその長さを表す数値に変換し、インプットタイトルを長さに基づいてソートします。
+
+フィルタラン内では、<<.var currentTiddler>>変数が処理中のTiddlerのタイトルに設定されていることに注意してください。これにより、`:sort:number[{!!value}divide{!!cost}]`のようなフィルタランを計算に使用できます。ラン外の<<.var currentTiddler>>の値は、<<.var "..currentTiddler">>変数で使用できます。
+
+`:sort` <<.place S>>フィルタランプレフィックスでは、複数のサフィックスを許可する拡張構文が使用されます。その一部は必須です: 
+
+```
+:sort:<type>:<flaglist>[...filter run...]
+
+```
+
+* ''type'': 必須。項目の比較方法を決定し、''string''、''alphanumeric''、''number''、''integer''、''version''、''date''のいずれかになります。
+
+* ''flaglist'': 次のフラグのコンマ区切りリスト:
+
+** ''casesensitive'' または ''caseinsensitive'' (typeが`string`や`alphanumeric`のとき必須)。
+*** フラグがない場合、デフォルトは: //caseinsensitive// です。
+*** 明確にするために、このパラメータは常に定義する必要があります。
+
+** フィルター実行の順序を反転するには、''reverse''を使用します(オプション)。
+
+<<.tip """`:sort`プレフィックス付きのフィルタランは、''渡された項目と同じ数の項目が返される''ことに注意してください。特に、[[getオペレータ|get Operator]]を使用してフィールドの値を取得する場合は、[[elseオペレータ|else Operator]]を使用してフィールド値が欠落するのを防ぐと便利です。例えば`...[get[myfield]else[default-value]]`。<br><br>
+
+''missing''エントリは''ゼロ''または''空文字列''として扱われます。
+
+参照: <<.olink sortsub>>オペレータ
+
+[[例|Sort Filter Run Prefix (Examples)]]

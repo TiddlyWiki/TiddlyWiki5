@@ -1,0 +1,9 @@
+caption: $:/tags/Global
+created: 20230419103154329
+description: marks global definitions
+modified: 20230419103154329
+tags: SystemTags
+title: SystemTag: $:/tags/Global
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]] `$:/tags/Global` marks global definitions that are made available everywhere.

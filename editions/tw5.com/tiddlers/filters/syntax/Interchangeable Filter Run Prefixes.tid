@@ -1,0 +1,44 @@
+created: 20230316151518640
+modified: 20230327130626715
+tags: [[Filter Run Prefix]]
+title: Interchangeable Filter Run Prefixes
+type: text/vnd.tiddlywiki
+
+!! Interchangeable Filter Run Prefixes
+
+In technical / logical terms:
+
+|!Run |!Equivalent named prefix |!Interpretation |!Output |
+|`[run]` |`:or[run]` |de-duplicated union of sets |... OR run |
+|`+[run]` |`:and[run]` |accumulation of filter steps |... AND run |
+|`-[run]` |`:except[run]` |difference of sets |... AND NOT run |
+|`~[run]` |`:else[run]` |else |... ELSE run |
+|`=[run]` |`:all[run]` |union of sets without de-duplication |... OR run |
+
+The input of a run is normally a list of all the non-[[shadow|ShadowTiddlers]] tiddler titles in the wiki (in no particular order).<br>But the `+` prefix can change this:
+
+|Prefix|Input|h
+|`-`, `~`, `=`, `:intersection` or none| <$link to="all Operator">`[all[]]`</$link> tiddler titles, unless otherwise determined by the first [[filter operator|Filter Operators]]|
+|`+`, `:filter`,  `:map`, `:reduce`,`:sort` |the filter output of all previous runs so far|
+
+Precisely because of varying inputs, be aware that both prefixes `-` and `+` do not behave inverse to one another!
+
+For example, in both of the following, `$:/baz` will only be removed if it actually exists:
+
+* <$link to="is Operator"> `foo bar $:/baz -[is[system]]`</$link>
+* <$link to="prefix Operator">`foo bar $:/baz -[prefix[$:/]]`</$link>
+
+To understand why, consider the input for both final runs with their `-` prefix.
+
+In order to remove `$:/baz` in any case, existing or not, simply use the `+` prefix with [[negated filter operators|Filter Operators]]:
+
+* <$link to="is Operator">`foo bar $:/baz +[!is[system]]`</$link>
+* <$link to="prefix Operator">`foo bar $:/baz +[!prefix[$:/]]`</$link>
+
+!! Difference between + and intersection
+
+For the difference between `+` and `:intersection`, see [[Intersection Filter Run Prefix (Examples)]].
+
+!! For Developers
+
+To create a new filter run prefix, create a [[Javascript module|Modules]] with a [[module-type|ModuleType]] of `filterrunprefix`.

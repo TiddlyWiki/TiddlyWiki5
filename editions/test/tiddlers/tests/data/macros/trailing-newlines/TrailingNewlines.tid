@@ -1,0 +1,22 @@
+title: Macros/TrailingNewlines
+description: Trailing newlines in macros must not be dropped
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define inner()
+Paragraph 1
+
+Paragraph 2
+\end
+\define outer()
+<$macrocall $name=inner />
+
+\end
+<<outer>>
+
++
+title: ExpectedResult
+
+<p>Paragraph 1</p><p>Paragraph 2</p>

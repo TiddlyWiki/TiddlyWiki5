@@ -6,10 +6,7 @@ module-type: widget
 Button widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -59,6 +56,11 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		$tw.utils.pushTop(classes,"tc-popup-handle");
 	}
 	domNode.className = classes.join(" ");
+	// Assign data- attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Assign other attributes
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
@@ -250,22 +252,27 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 	//Add new classes from updated class attribute.
 	$tw.utils.pushTop(domNodeClasses,newClasses);
 	this.domNode.className = domNodeClasses.join(" ");
-}
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
+	if(changedAttributes.tooltip || changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributes["class"]) {
-		this.updateDomNodeClasses();
+	} else {
+		if(changedAttributes["class"]) {
+			this.updateDomNodeClasses();
+		}
+		this.assignAttributes(this.domNodes[0],{
+			changedAttributes: changedAttributes,
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
 	}
 	return this.refreshChildren(changedTiddlers);
 };
 
 exports.button = ButtonWidget;
-
-})();

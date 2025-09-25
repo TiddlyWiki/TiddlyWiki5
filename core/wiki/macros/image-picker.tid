@@ -5,13 +5,13 @@ title: $:/core/macros/image-picker
 type: text/vnd.tiddlywiki
 
 \define image-picker-thumbnail(actions)
-<$button tag="a" tooltip="""$(imageTitle)$""">$actions$<$transclude tiddler=<<imageTitle>>/></$button>
+<$button tag="a" tooltip="""$(imageTitle)$"""><$transclude $variable="__actions__"/><$transclude tiddler=<<imageTitle>>/></$button>
 \end
 
 \define image-picker-list(filter,actions)
 \whitespace trim
 <$list filter="""$filter$""" variable="imageTitle">
-<$macrocall $name="image-picker-thumbnail" actions="""$actions$"""/>
+<$macrocall $name="image-picker-thumbnail" actions=<<__actions__>>/>
 &#32;
 </$list>
 \end
@@ -25,15 +25,15 @@ type: text/vnd.tiddlywiki
 {{$:/language/SystemTiddlers/Include/Prompt}}
 </$checkbox>
 <$reveal state=<<state-system>> type="match" text="hide" default="hide" tag="div">
-<$macrocall $name="image-picker-list" filter="""$filter$ +[!is[system]]""" actions="""$actions$"""/>
+<$macrocall $name="image-picker-list" filter="""$filter$ +[!is[system]]""" actions=<<__actions__>>/>
 </$reveal>
 <$reveal state=<<state-system>> type="nomatch" text="hide" default="hide" tag="div">
-<$macrocall $name="image-picker-list" filter="""$filter$""" actions="""$actions$"""/>
+<$macrocall $name="image-picker-list" filter="""$filter$""" actions=<<__actions__>>/>
 </$reveal>
 </$vars>
 </div>
 \end
 
 \define image-picker-include-tagged-images(actions)
-<$macrocall $name="image-picker" filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[!has[draft.of]sort[title]]" actions="""$actions$"""/>
+<$macrocall $name="image-picker" filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[!has[draft.of]sort[title]]" actions=<<__actions__>>/>
 \end

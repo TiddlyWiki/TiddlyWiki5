@@ -6,11 +6,10 @@ module-type: wikimethod
 Adds tiddler filtering methods to the $tw.Wiki object.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
+
+var widgetClass = require("$:/core/modules/widgets/widget.js").widget;
 
 /* Maximum permitted filter recursion depth */
 var MAX_FILTER_DEPTH = 300;
@@ -249,25 +248,27 @@ exports.compileFilter = function(filterString) {
 		// Create a function for the chain of operators in the operation
 		var operationSubFunction = function(source,widget) {
 			var accumulator = source,
-				results = [],
-				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
+				results = [];
 			$tw.utils.each(operation.operators,function(operator) {
 				var operands = [],
 					operatorFunction;
 				if(!operator.operator) {
+					// Use the "title" operator if no operator is specified
 					operatorFunction = filterOperators.title;
 				} else if(!filterOperators[operator.operator]) {
-					operatorFunction = filterOperators.field;
+					// Unknown operators treated as "[unknown]" - at run time we can distinguish between a custom operator and falling back to the default "field" operator
+					operatorFunction = filterOperators["[unknown]"];
 				} else {
+					// Use the operator function
 					operatorFunction = filterOperators[operator.operator];
 				}
-
 				$tw.utils.each(operator.operands,function(operand) {
 					if(operand.indirect) {
+						var currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
 					} else if(operand.variable) {
 						var varTree = $tw.utils.parseFilterVariable(operand.text);
-						operand.value = widget.getVariable(varTree.name,{params:varTree.params,defaultValue: ""});
+						operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source})[0] || "";
 					} else {
 						operand.value = operand.text;
 					}
@@ -363,5 +364,3 @@ exports.compileFilter = function(filterString) {
 	this.filterCacheCount++;
 	return fnMeasured;
 };
-
-})();

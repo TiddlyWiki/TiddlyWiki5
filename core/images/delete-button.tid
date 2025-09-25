@@ -1,4 +1,5 @@
 title: $:/core/images/delete-button
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-delete-button tc-image-button" viewBox="0 0 128 128"><g fill-rule="evenodd" transform="translate(12)"><rect width="105" height="16" y="11" rx="8"/><rect width="48" height="16" x="28" rx="8"/><rect width="16" height="112" x="8" y="16" rx="8"/><rect width="88" height="16" x="8" y="112" rx="8"/><rect width="16" height="112" x="80" y="16" rx="8"/><rect width="16" height="112" x="56" y="16" rx="8"/><rect width="16" height="112" x="32" y="16" rx="8"/></g></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-delete-button tc-image-button" viewBox="0 0 128 128"><g fill-rule="evenodd" transform="translate(12)"><rect width="105" height="16" y="11" rx="8"/><rect width="48" height="16" x="28" rx="8"/><rect width="16" height="112" x="8" y="16" rx="8"/><rect width="88" height="16" x="8" y="112" rx="8"/><rect width="16" height="112" x="80" y="16" rx="8"/><rect width="16" height="112" x="56" y="16" rx="8"/><rect width="16" height="112" x="32" y="16" rx="8"/></g></svg>

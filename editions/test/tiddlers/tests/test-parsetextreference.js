@@ -6,10 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests for source attribute in parser returned from wiki.parseTextReference
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Wiki.parseTextReference tests", function() {
@@ -124,9 +121,8 @@ describe("Wiki.parseTextReference tests", function() {
 		// Non-existent subtiddler of a plugin
 		expect(parseAndGetSource("$:/ShadowPlugin","text",null,"MyMissingTiddler")).toEqual(null);
 		// Plain text tiddler
-		expect(parseAndGetSource("TiddlerNine")).toEqual(undefined);
+		expect(parseAndGetSource("TiddlerNine")).toEqual("this is plain text");
 	});
 
 });
 
-})();

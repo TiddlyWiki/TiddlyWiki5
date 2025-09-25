@@ -1,0 +1,12 @@
+created: 20240313100515958
+modified: 20240313103959789
+tags: Editions
+title: TiddlyWiki Docs PR Maker
+
+''~TiddlyWiki Docs PR Maker'' is a special edition of tiddlywiki.com designed to help you contribute to and improve the documentation made by [[@saqimtiaz|https://github.com/saqimtiaz/]].
+
+https://saqimtiaz.github.io/tw5-docs-pr-maker/
+
+All changes made to the documentation can be very easily submitted to GitHub -- the pull request will be automatically made, hence the "PR Maker" name of the edition.
+
+You will need to create a free ~GitHub account and sign the [[Contributor License Agreement]] before using the Docs PR Maker. You can find more details about contributing to the documentation [[here|Improving TiddlyWiki Documentation]].

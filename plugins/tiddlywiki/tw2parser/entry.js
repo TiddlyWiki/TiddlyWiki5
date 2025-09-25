@@ -3,9 +3,6 @@ title: $:/macros/tiddlywiki/entry.js
 type: application/javascript
 module-type: macro
 \*/
-(function(){
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 /*
 Information about this macro
@@ -21,10 +18,9 @@ exports.params = [
 Run the macro
 */
 exports.run = function(key,map) {
-	try{
+	try {
 		return  JSON.parse(map)[key];
 	} catch(e) {
 		return "";
 	}
 }
-})();

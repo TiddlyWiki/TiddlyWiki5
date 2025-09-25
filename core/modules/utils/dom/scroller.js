@@ -6,10 +6,7 @@ module-type: utils
 Module that creates a $tw.utils.Scroller object prototype that manages scrolling in the browser
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -127,13 +124,11 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 };
 
 PageScroller.prototype.scrollSelectorIntoView = function(baseElement,selector,callback,options) {
-	baseElement = baseElement || document.body;
-	var element = baseElement.querySelector(selector);
+	baseElement = baseElement || document;
+	var element = $tw.utils.querySelectorSafe(selector,baseElement);
 	if(element) {
 		this.scrollIntoView(element,callback,options);
 	}
 };
 
 exports.PageScroller = PageScroller;
-
-})();

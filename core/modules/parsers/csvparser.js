@@ -6,10 +6,7 @@ module-type: parser
 The CSV text parser processes CSV files into a table wrapped in a scrollable widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var CsvParser = function(type,text,options) {
@@ -52,10 +49,9 @@ var CsvParser = function(type,text,options) {
 		tag = "td";
 		this.tree[0].children[0].children[0].children.push(row);
 	}
+	this.source = text;
+	this.type = type;
 };
 
 exports["text/csv"] = CsvParser;
 exports["text/tab-delimited-values"] = CsvParser;
-
-})();
-

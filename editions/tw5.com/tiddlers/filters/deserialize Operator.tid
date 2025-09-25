@@ -1,0 +1,17 @@
+caption: deserialize
+created: 20230601195749377
+from-version: 5.3.0
+modified: 20230627094109762
+op-input: a selection of strings
+op-output: JSON representations of tiddlers extracted from input titles.
+op-parameter: the deserializer module to be used to extract tiddlers from the input
+op-purpose: extract JSON representation of tiddlers from the input strings
+tags: [[Filter Operators]] [[Special Operators]]
+title: deserialize Operator
+type: text/vnd.tiddlywiki
+
+{{Deserializers}}
+
+
+
+<<.operator-examples "deserialize">>

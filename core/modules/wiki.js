@@ -16,10 +16,7 @@ Adds the following properties to the wiki object:
 * `globalCache` is a hashmap by cache name of cache objects that are cleared whenever any tiddler change occurs
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -141,12 +138,15 @@ This method should be called after the changes it describes have been made to th
 	title: Title of tiddler
 	isDeleted: defaults to false (meaning the tiddler has been created or modified),
 		true if the tiddler has been deleted
+	isShadow: defaults to false (meaning the change applies to the normal tiddler),
+		true if the tiddler being changed is a shadow tiddler
 */
-exports.enqueueTiddlerEvent = function(title,isDeleted) {
+exports.enqueueTiddlerEvent = function(title,isDeleted,isShadow) {
 	// Record the touch in the list of changed tiddlers
 	this.changedTiddlers = this.changedTiddlers || Object.create(null);
 	this.changedTiddlers[title] = this.changedTiddlers[title] || Object.create(null);
 	this.changedTiddlers[title][isDeleted ? "deleted" : "modified"] = true;
+	this.changedTiddlers[title][isShadow ? "shadow" : "normal"] = true;
 	// Increment the change count
 	this.changeCount = this.changeCount || Object.create(null);
 	if($tw.utils.hop(this.changeCount,title)) {
@@ -194,18 +194,24 @@ options.prefix must be a string
 */
 exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
-	var c = 0,
-		title = baseTitle,
-		template = options.template,
+	var title = baseTitle,
+		template = options.template || "",
+		// test if .startCount is a positive integer. If not set to 0
+		c = (parseInt(options.startCount,10) > 0) ? parseInt(options.startCount,10) : 0,
 		prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
+
 	if (template) {
 		// "count" is important to avoid an endless loop in while(...)!!
 		template = (/\$count:?(\d+)?\$/i.test(template)) ? template : template + "$count$";
-		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c});
+		// .formatTitleString() expects strings as input
+		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c+""});
 		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
-			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)});
+			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)+""});
 		}
 	} else {
+		if (c > 0) {
+			title = baseTitle + prefix + c;
+		}
 		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
 			title = baseTitle + prefix + (++c);
 		}
@@ -534,8 +540,8 @@ Return an array of tiddler titles that link to the specified tiddler
 */
 exports.getTiddlerBacklinks = function(targetTitle) {
 	var self = this,
-		backlinksIndexer = this.getIndexer("BacklinksIndexer"),
-		backlinks = backlinksIndexer && backlinksIndexer.lookup(targetTitle);
+		backIndexer = this.getIndexer("BackIndexer"),
+		backlinks = backIndexer && backIndexer.subIndexers.link.lookup(targetTitle);
 
 	if(!backlinks) {
 		backlinks = [];
@@ -547,6 +553,86 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 		});
 	}
 	return backlinks;
+};
+
+
+/*
+Return an array of tiddler titles that are directly transcluded within the given parse tree. `title` is the tiddler being parsed, we will ignore its self-referential transclusions, only return
+ */
+exports.extractTranscludes = function(parseTreeRoot, title) {
+	// Count up the transcludes
+	var transcludes = [],
+		checkParseTree = function(parseTree, parentNode) {
+			for(var t=0; t<parseTree.length; t++) {
+				var parseTreeNode = parseTree[t];
+				if(parseTreeNode.type === "transclude") {
+					if(parseTreeNode.attributes.$tiddler) {
+						if(parseTreeNode.attributes.$tiddler.type === "string") {
+							var value;
+							// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
+							if(parentNode && parentNode.type === "tiddler" && parentNode.attributes.tiddler && parentNode.attributes.tiddler.type === "string") {
+								// Empty value (like `{{!!field}}`) means self-referential transclusion.
+								value = parentNode.attributes.tiddler.value || title;
+							} else {
+								value = parseTreeNode.attributes.$tiddler.value;
+							}
+						}
+					} else if(parseTreeNode.attributes.tiddler) {
+						if (parseTreeNode.attributes.tiddler.type === "string") {
+							// Old transclude widget usage
+							value = parseTreeNode.attributes.tiddler.value;
+						}
+					} else if(parseTreeNode.attributes.$field && parseTreeNode.attributes.$field.type === "string") {
+						// Empty value (like `<$transclude $field='created'/>`) means self-referential transclusion. 
+						value = title;
+					} else if(parseTreeNode.attributes.field && parseTreeNode.attributes.field.type === "string") {
+						// Old usage with Empty value (like `<$transclude field='created'/>`)
+						value = title;
+					}
+					// Deduplicate the result.
+					if(value && transcludes.indexOf(value) === -1) {
+						$tw.utils.pushTop(transcludes,value);
+					}
+				}
+				if(parseTreeNode.children) {
+					checkParseTree(parseTreeNode.children,parseTreeNode);
+				}
+			}
+		};
+	checkParseTree(parseTreeRoot);
+	return transcludes;
+};
+
+
+/*
+Return an array of tiddler titles that are transcluded from the specified tiddler
+*/
+exports.getTiddlerTranscludes = function(title) {
+	var self = this;
+	// We'll cache the transcludes so they only get computed if the tiddler changes
+	return this.getCacheForTiddler(title,"transcludes",function() {
+		// Parse the tiddler
+		var parser = self.parseTiddler(title);
+		if(parser) {
+			// this will ignore self-referential transclusions from `title`
+			return self.extractTranscludes(parser.tree,title);
+		}
+		return [];
+	});
+};
+
+/*
+Return an array of tiddler titles that transclude to the specified tiddler
+*/
+exports.getTiddlerBacktranscludes = function(targetTitle) {
+	var self = this,
+		backIndexer = this.getIndexer("BackIndexer"),
+		backtranscludes = backIndexer && backIndexer.subIndexers.transclude.lookup(targetTitle);
+
+	if(!backtranscludes) {
+		backtranscludes = [];
+	}
+	return backtranscludes;
 };
 
 /*
@@ -988,7 +1074,8 @@ exports.parseText = function(type,text,options) {
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
 		wiki: this,
-		_canonical_uri: options._canonical_uri
+		_canonical_uri: options._canonical_uri,
+		configTrimWhiteSpace: options.configTrimWhiteSpace
 	});
 };
 
@@ -1028,10 +1115,11 @@ exports.parseTextReference = function(title,field,index,options) {
 };
 
 exports.getTextReferenceParserInfo = function(title,field,index,options) {
-	var tiddler,
+	var defaultType = options.defaultType || "text/vnd.tiddlywiki",
+		tiddler,
 		parserInfo = {
 			sourceText : null,
-			parserType : "text/vnd.tiddlywiki"
+			parserType : defaultType
 		};
 	if(options.subTiddler) {
 		tiddler = this.getSubTiddler(title,options.subTiddler);
@@ -1044,6 +1132,7 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 			if(tiddler.fields.type) {
 				parserInfo.parserType = tiddler.fields.type;
 			}
+			parserInfo._canonical_uri = tiddler.fields._canonical_uri;
 		}
 	} else if(field) {
 		if(field === "title") {
@@ -1062,6 +1151,34 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 }
 
 /*
+Parse a block of text of a specified MIME type
+	text: text on which to perform substitutions
+	widget
+	options: see below
+Options include:
+	substitutions: an optional array of substitutions
+*/
+exports.getSubstitutedText = function(text,widget,options) {
+	options = options || {};
+	text = text || "";
+	var self = this,
+		substitutions = options.substitutions || [],
+		output;
+	// Evaluate embedded filters and substitute with first result
+	output = text.replace(/\$\{([\S\s]+?)\}\$/g, function(match,filter) {
+		return self.filterTiddlers(filter,widget)[0] || "";
+	});
+	// Process any substitutions provided in options
+	$tw.utils.each(substitutions,function(substitute) {
+		output = $tw.utils.replaceString(output,new RegExp("\\$" + $tw.utils.escapeRegExp(substitute.name) + "\\$","mg"),substitute.value);
+	});
+	// Substitute any variable references with their values
+	return output.replace(/\$\((.+?)\)\$/g, function(match,varname) {
+		return widget.getVariable(varname,{defaultValue: ""})
+	});
+};
+
+/*
 Make a widget tree for a parse tree
 parser: parser object
 options: see below
@@ -1077,19 +1194,20 @@ exports.makeWidget = function(parser,options) {
 			children: []
 		},
 		currWidgetNode = widgetNode;
-	// Create set variable widgets for each variable
-	$tw.utils.each(options.variables,function(value,name) {
-		var setVariableWidget = {
-			type: "set",
+	// Create let variable widget for variables
+	if($tw.utils.count(options.variables) > 0) {
+		var letVariableWidget = {
+			type: "let",
 			attributes: {
-				name: {type: "string", value: name},
-				value: {type: "string", value: value}
 			},
 			children: []
 		};
-		currWidgetNode.children = [setVariableWidget];
-		currWidgetNode = setVariableWidget;
-	});
+		$tw.utils.each(options.variables,function(value,name) {
+			$tw.utils.addAttributeToParseTreeNode(letVariableWidget,name,"" + value);
+		});
+		currWidgetNode.children = [letVariableWidget];
+		currWidgetNode = letVariableWidget;
+	}
 	// Add in the supplied parse tree nodes
 	currWidgetNode.children = parser ? parser.tree : [];
 	// Create the widget
@@ -1146,7 +1264,7 @@ exports.makeTranscludeWidget = function(title,options) {
 		if(options.importVariables) {
 			parseTreeImportVariables.attributes.filter.value = options.importVariables;
 		} else if(options.importPageMacros) {
-			parseTreeImportVariables.attributes.filter.value = "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]";
+			parseTreeImportVariables.attributes.filter.value = this.getTiddlerText("$:/core/config/GlobalImportFilter");
 		}
 		parseTreeDiv.tree[0].children.push(parseTreeImportVariables);
 		parseTreeImportVariables.children.push(parseTreeTransclude);
@@ -1256,7 +1374,7 @@ exports.search = function(text,options) {
 			console.log("Regexp error parsing /(" + text + ")/" + flags + ": ",e);
 		}
 	} else if(options.some) {
-		terms = text.trim().split(/ +/);
+		terms = text.trim().split(/[^\S\xA0]+/);
 		if(terms.length === 1 && terms[0] === "") {
 			searchTermsRegExps = null;
 		} else {
@@ -1267,7 +1385,7 @@ exports.search = function(text,options) {
 			searchTermsRegExps.push(new RegExp("(" + regExpStr + ")",flags));
 		}
 	} else { // default: words
-		terms = text.split(/ +/);
+		terms = text.split(/[^\S\xA0]+/);
 		if(terms.length === 1 && terms[0] === "") {
 			searchTermsRegExps = null;
 		} else {
@@ -1411,6 +1529,14 @@ exports.checkTiddlerText = function(title,targetText,options) {
 	}
 	return text === targetText;
 }
+
+/*
+Execute an action string without an associated context widget
+*/
+exports.invokeActionString = function(actions,event,variables,options) {
+	var widget = this.makeWidget(null,{parentWidget: options.parentWidget});
+	widget.invokeActionString(actions,null,event,variables);
+};
 
 /*
 Read an array of browser File objects, invoking callback(tiddlerFieldsArray) once they're all read
@@ -1662,5 +1788,3 @@ exports.slugify = function(title,options) {
 	}
 	return slug;
 };
-
-})();

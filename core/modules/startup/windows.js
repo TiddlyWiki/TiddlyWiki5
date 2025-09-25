@@ -6,10 +6,7 @@ module-type: startup
 Setup root widget handlers for the messages concerned with opening external browser windows
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -40,7 +37,7 @@ exports.startup = function() {
 			variables = $tw.utils.extend({},paramObject,{currentTiddler: title, "tv-window-id": windowID});
 		// Open the window
 		var srcWindow,
-		    srcDocument;
+			srcDocument;
 		// In case that popup blockers deny opening a new window
 		try {
 			srcWindow = window.open("","external-" + windowID,"scrollbars,width=" + width + ",height=" + height + (top ? ",top=" + top : "" ) + (left ? ",left=" + left : "" )),
@@ -52,10 +49,11 @@ exports.startup = function() {
 		$tw.windows[windowID] = srcWindow;
 		// Check for reopening the same window
 		if(srcWindow.haveInitialisedWindow) {
+			srcWindow.focus();
 			return;
 		}
 		// Initialise the document
-		srcDocument.write("<html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
+		srcDocument.write("<!DOCTYPE html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
 		srcDocument.close();
 		srcDocument.title = windowTitle;
 		srcWindow.addEventListener("beforeunload",function(event) {
@@ -109,5 +107,3 @@ exports.startup = function() {
 	// Close open windows when unloading main window
 	$tw.addUnloadTask(closeAllWindows);
 };
-
-})();

@@ -1,5 +1,5 @@
 title: $:/language/Help/server
-description: 提供一个 HTTP 服务器界面到 TiddlyWiki (已弃用，支持新的 listen 命令)
+description: （已弃用：请参阅 'listen' 命令）提供一个 HTTP 服务器界面到 TiddlyWiki
 
 在服务器中内置 TiddlyWiki5 是非常简单。虽与 TiddlyWeb 兼容，但不支持许多健全互联网面向的使用方式所需的功能。
 

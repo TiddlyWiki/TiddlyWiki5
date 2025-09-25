@@ -1,0 +1,42 @@
+created: 20240309135835396
+modified: 20240309142156125
+tags: Concepts
+title: Bags and Recipes
+type: text/vnd.tiddlywiki
+
+The bags and recipes model is a reference architecture for how tiddlers can be shared between multiple wikis. It was first introduced by TiddlyWeb in 2008.
+
+The principles of bags and recipes can be simply stated:
+
+# Tiddlers are stored in named "bags"
+# Bags have access controls that determines which users can read or write to them
+# Recipes are named lists of bags, ordered from lowest priority to highest
+# The tiddlers within a recipe are accumulated in turn from each bag in the recipe in order of increasing priority. Thus, if there are multiple tiddlers with the same title in different bags then the one from the highest priority bag will be used as the recipe tiddler
+# Wikis are composed by splicing the tiddlers from the corresponding recipe into the standard TW5 HTML template
+
+A very simple example of the recipe/bag model might be for a single user who maintains the following bags:
+
+* ''recipes'' - tiddlers related to cooking recipes
+* ''work'' - tiddlers related to work
+* ''app'' - common tiddlers for customising TiddlyWiki
+
+Those bags would be used with the following recipes:
+
+* ''recipes'' --> recipes, app - wiki for working with recipes, with common custom components
+* ''work'' --> work, app - wiki for working with work, with common custom components
+* ''app'' --> app - wiki for maintaining custom components
+
+All of this will work dynamically, so changes to the app bag will instantly ripple into the affected hosted wikis.
+
+A more complex example might be for a teacher working with a group of students:
+
+* ''student-{name}'' bag for each students work
+* ''teacher-course'' bag for the coursework, editable by the teacher
+* ''teacher-tools'' bag for custom tools used by the teacher
+
+Those bags would be exposed through the following hosted wikis:
+
+* ''student-{name}'' hosted wiki for each students work, including the coursework material
+* ''teacher-course'' hosted wiki for the coursework, editable by the teacher
+* ''teacher'' hosted wiki for the teacher, bringing together all the bags, giving them an overview of all the students work
+

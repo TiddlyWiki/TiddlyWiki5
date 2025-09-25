@@ -1,0 +1,4 @@
+title: $:/language/Docs/Fields/
+
+class: The CSS class applied to a tiddler when rendering it—see [[Custom styles by user-class]].  Also used for [[Modals]]
+color: The CSS color value associated with a tiddler

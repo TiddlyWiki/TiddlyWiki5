@@ -6,10 +6,7 @@ module-type: widget
 Checkbox widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -47,12 +44,20 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	if(isChecked === undefined && this.checkboxIndeterminate === "yes") {
 		this.inputDomNode.indeterminate = true;
 	}
+	if(this.tabIndex) {
+		this.inputDomNode.setAttribute("tabindex", this.tabIndex);
+	}
 	if(this.isDisabled === "yes") {
 		this.inputDomNode.setAttribute("disabled",true);
 	}
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
 	this.labelDomNode.appendChild(this.spanDomNode);
+	// Assign data- attributes
+	this.assignAttributes(this.inputDomNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
 		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
@@ -112,11 +117,11 @@ CheckboxWidget.prototype.getValue = function() {
 			var list;
 			if(this.checkboxListField) {
 				if($tw.utils.hop(tiddler.fields,this.checkboxListField)) {
-					list = tiddler.getFieldList(this.checkboxListField);
+					list = tiddler.getFieldList(this.checkboxListField) || [];
 				} else {
 					list = $tw.utils.parseStringArray(this.checkboxDefault || "") || [];
 				}
-			} else if (this.checkboxListIndex) {
+			} else if(this.checkboxListIndex) {
 				list = $tw.utils.parseStringArray(this.wiki.extractTiddlerDataItem(tiddler,this.checkboxListIndex,this.checkboxDefault || "")) || [];
 			} else {
 				list = this.wiki.filterTiddlers(this.checkboxFilter,this) || [];
@@ -149,7 +154,7 @@ CheckboxWidget.prototype.getValue = function() {
 		if(this.checkboxTag) {
 			return false;
 		}
-		if(this.checkboxField) {
+		if(this.checkboxField || this.checkboxIndex) {
 			if(this.checkboxDefault === this.checkboxChecked) {
 				return true;
 			}
@@ -208,16 +213,22 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	if(this.checkboxListField || this.checkboxListIndex) {
 		var fieldContents, listContents, oldPos, newPos;
 		if(this.checkboxListField) {
-			fieldContents = tiddler ? tiddler.fields[this.checkboxListField] : undefined;
+			fieldContents = (tiddler ? tiddler.fields[this.checkboxListField] : undefined) || [];
 		} else {
 			fieldContents = this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex);
 		}
 		if($tw.utils.isArray(fieldContents)) {
 			// Make a copy so we can modify it without changing original that's refrenced elsewhere
 			listContents = fieldContents.slice(0);
-		} else {
-			listContents = $tw.utils.parseStringArray(fieldContents) || [];
+		} else if(fieldContents === undefined) {
+			listContents = [];
+		} else if(typeof fieldContents === "string") {
+			listContents = $tw.utils.parseStringArray(fieldContents);
 			// No need to copy since parseStringArray returns a fresh array, not refrenced elsewhere
+		} else {
+			// Field was neither an array nor a string; it's probably something that shouldn't become
+			// an array (such as a date field), so bail out *without* triggering actions
+			return;
 		}
 		oldPos = notValue ? listContents.indexOf(notValue) : -1;
 		newPos = value ? listContents.indexOf(value) : -1;
@@ -294,6 +305,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxClass = this.getAttribute("class","");
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	this.isDisabled = this.getAttribute("disabled","no");
+	this.tabIndex = this.getAttribute();
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -303,7 +315,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.index || changedAttributes.listField || changedAttributes.listIndex || changedAttributes.filter || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes.indeterminate || changedAttributes["class"] || changedAttributes.disabled) {
+	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.index || changedAttributes.listField || changedAttributes.listIndex || changedAttributes.filter || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes.indeterminate || changedAttributes["class"] || changedAttributes.disabled || changedAttributes.tabindex) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -319,10 +331,13 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 				$tw.utils.removeClass(this.labelDomNode,"tc-checkbox-checked");
 			}
 		}
+		this.assignAttributes(this.inputDomNode,{
+			changedAttributes: changedAttributes,
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
 		return this.refreshChildren(changedTiddlers) || refreshed;
 	}
 };
 
 exports.checkbox = CheckboxWidget;
-
-})();

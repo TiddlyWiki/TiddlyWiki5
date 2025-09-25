@@ -5,12 +5,12 @@ description: {{$:/language/Buttons/NewImage/Hint}}
 
 \whitespace trim
 <$button tooltip={{$:/language/Buttons/NewImage/Hint}} aria-label={{$:/language/Buttons/NewImage/Caption}} class=<<tv-config-toolbar-class>> actions={{$:/core/ui/Actions/new-image}}>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/new-image-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/NewImage/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>

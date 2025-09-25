@@ -1,0 +1,11 @@
+title: $:/language/Help/build
+description: Автоматски извршува команди
+
+Build the specified build targets for the current wiki. If no build targets are specified then all available targets will be built.
+
+```
+--build <target> [<target> ...]
+```
+
+Build targets are defined in the `tiddlywiki.info` file of a wiki folder.
+

@@ -1,0 +1,29 @@
+title: Transclude/Parameterised/Positional/Shortcut/Parameters
+description: Positional parameterised transclusion using shortcut syntax and parameters pragma
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+{{TiddlerOne}}
+{{TiddlerOne|Ferret}}
+{{TiddlerOne|Butterfly|Moth}}
+{{TiddlerOne|Beetle|Scorpion|Snake}}
+{{TiddlerOne||TiddlerTwo|Beetle|Scorpion|Snake}}
++
+title: TiddlerOne
+
+\whitespace trim
+\parameters(zero:Jaguar,one:'Lizard',two:'Mole')
+[{<$text text=<<zero>>/>}{<$text text=<<one>>/>}{<$text text=<<two>>/>}]
++
+title: TiddlerTwo
+
+\whitespace trim
+\parameters(zero:'Mouse',one:Horse,two:'Owl')
+(<$transclude $tiddler=<<currentTiddler>> zero=<<zero>> one=<<one>> two=<<two>>/>)
++
+title: ExpectedResult
+
+<p>[{Jaguar}{Lizard}{Mole}]</p><p>[{Ferret}{Lizard}{Mole}]</p><p>[{Butterfly}{Moth}{Mole}]</p><p>[{Beetle}{Scorpion}{Snake}]</p><p>([{Beetle}{Scorpion}{Snake}])</p>

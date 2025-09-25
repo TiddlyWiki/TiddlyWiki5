@@ -1,9 +1,9 @@
 caption: append
 created: 20151017145358368
-modified: 20151108051540981
+modified: 20230321131631510
 op-input: a list of items
-op-neg-output: a list with items appended from the tail of the operand array
-op-output: a list with items appended from the head of the operand array
+op-neg-output: a list with items appended from the tail of the parameter array
+op-output: a list with items appended from the head of the parameter array
 op-parameter: the array of items to be appended to the tail of the list
 op-parameter-name: list
 op-purpose: append a range of items from an array to the list

@@ -5,26 +5,9 @@ created: 20131221085742684
 delivery: Browser Extension
 description: Browser extension for older versions of Firefox
 method: save
-modified: 20200507105421421
+modified: 20230806001436106
 tags: Saving Firefox
 title: Saving with TiddlyFox
 type: text/vnd.tiddlywiki
 
-If you're using [[Firefox for Android]], see the instructions for [[Saving with TiddlyFox on Android]].
-
-# Ensure you have a version of Firefox before version 57. ~TiddlyFox will not work with Firefox 57 and on.  For Firefox 57 and on, consider using the following instead: <<list-links filter:"[tag[Firefox]delivery[Browser Extension]] -[[Saving with TiddlyFox]]">>
-# Install the latest release of the TiddlyFox extension from:
-#* https://addons.mozilla.org/en-GB/firefox/addon/tiddlyfox/
-# Restart [[Firefox]]
-# [[Download]] an empty TiddlyWiki by clicking this button:
-#> {{$:/editions/tw5.com/snippets/download-empty-button}}
-# Locate the file you just downloaded
-#* You may rename it, but be sure to keep the `.html` or `.htm` extension
-# Open the file in [[Firefox]]
-#* If you are using TiddlyFox v1.x.x, you will need to click ''OK'' in response to the prompt from TiddlyFox that asks whether to enable saving for this file
-#* If you are using TiddlyFox v2.x.x you will need to click on the icon of a kitten standing on a blue globe to activate saving. There is no prompt in v2.0.1.
-#** For TiddlyFox v2.0.1, you can not be using Private Browsing mode nor can you be using "Never Remember History".
-# Try creating a new tiddler using the ''new tiddler'' <<.icon $:/core/images/new-button>> button in the sidebar. Type some content for the tiddler, and click the <<.icon $:/core/images/done-button>> ''ok'' button
-# Save your changes by clicking the <<.icon $:/core/images/save-button-dynamic>> ''save changes'' button in the sidebar
-#* Look for the yellow notification ''Saved wiki'' at the top right of the window
-# Refresh the browser window to verify that your changes have been saved correctly
+<<.deprecated-since "FireFox 57" "Saving with FireFox">>

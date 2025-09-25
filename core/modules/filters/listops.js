@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operators for manipulating the current selection list
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -58,6 +55,7 @@ Last entry/entries in list
 exports.last = function(source,operator,options) {
 	var count = $tw.utils.getInt(operator.operand,1),
 		results = [];
+	if(count === 0) return results;
 	source(function(tiddler,title) {
 		results.push(title);
 	});
@@ -115,5 +113,3 @@ exports.zth = function(source,operator,options) {
 	});
 	return results.slice(count,count + 1);
 };
-
-})();

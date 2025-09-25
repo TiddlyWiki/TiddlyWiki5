@@ -6,10 +6,7 @@ module-type: library
 Wraps up the markdown-it parser for use as a Parser in TiddlyWiki
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var md;
@@ -200,7 +197,7 @@ function tw_filteredtranscludeinline(state,silent) {
 }
 
 // based on markdown-it html_block()
-var WidgetTagRegEx = [/^<\/?\$[a-zA-Z0-9\-\$]+(?=(\s|\/?>|$))/, /^$/];
+var WidgetTagRegEx = [/^<\/?\$[a-zA-Z0-9\-\$\.]+(?=(\s|\/?>|$))/, /^$/];
 function tw_block(state,startLine,endLine,silent) {
 	var i, nextLine, token, lineText,
 		pos = state.bMarks[startLine] + state.tShift[startLine],
@@ -364,7 +361,7 @@ function tw_prettyextlink(state,silent) {
 	return true;
 }
 
-var TWCloseTagRegEx = /<\/\$[A-Za-z0-9\-\$]+\s*>/gm;
+var TWCloseTagRegEx = /<\/\$[A-Za-z0-9\-\$\.]+\s*>/gm;
 function extendHtmlInline(origRule) {
 	return function(state,silent) {
 		if(origRule(state,silent)) {
@@ -535,5 +532,3 @@ module.exports = function tiddlyWikiPlugin(markdown,options) {
 	md.core.ruler.disable('text_join');
 	md.core.ruler.push('wikify',wikify);
 };
-
-})();

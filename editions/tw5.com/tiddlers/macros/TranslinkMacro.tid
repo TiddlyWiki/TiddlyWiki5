@@ -1,0 +1,21 @@
+created: 20230505090333510
+modified: 20230505090333510
+tags: Macros [[Core Macros]]
+title: translink Macro
+type: text/vnd.tiddlywiki
+caption: translink
+
+The <<.def translink>> [[macro|Macros]] returns a frame with the title and [[transcluded|Transclusion]] text of a chosen tiddler. The title links to the transcluded tiddler.
+
+If the chosen tiddler is missing, an appropriate message will be shown instead of the transcluded text.
+
+This is the default macro used when [[excising|Using Excise]] text and replacing it with a macro.
+
+!! Parameters
+
+; title
+: The title of the tiddler to be transcluded
+; mode
+: The mode of the [[transclude widget|TranscludeWidget]] used inside the macro, defaults to `block`
+
+<<.macro-examples "translink">>

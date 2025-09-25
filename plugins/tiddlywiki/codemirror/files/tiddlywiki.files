@@ -10,7 +10,7 @@
 		},{
 			"file": "codemirror.css",
 			"fields": {
-				"type": "text/vnd.tiddlywiki",
+				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/codemirror/lib/codemirror.css",
 				"tags": "[[$:/tags/Stylesheet]]"
 			}

@@ -2,5 +2,15 @@ created: 20150221194423000
 modified: 20211114013601189
 tags: SecondThree [[Table-of-Contents Demonstrations]]
 title: SecondThreeThree
+toc-link: no
+type: text/vnd.tiddlywiki
 
-<<.toc-lorem>>
+''Important''
+
+It's important that this tiddler has no "child" to be able to visually test every possible toc code-path.
+
+* This tiddler has a field ''toc-link: no''
+* Do not tag any other tiddler with the title of this one
+
+
+

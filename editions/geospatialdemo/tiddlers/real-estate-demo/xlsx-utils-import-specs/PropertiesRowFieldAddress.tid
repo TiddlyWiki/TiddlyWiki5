@@ -1,0 +1,7 @@
+import-field-column: Address
+import-field-name: address
+import-field-source: column
+import-spec-role: field
+title: $:/_importspec/RealEstate/PropertiesRow/Field/address
+type: text/vnd.tiddlywiki
+

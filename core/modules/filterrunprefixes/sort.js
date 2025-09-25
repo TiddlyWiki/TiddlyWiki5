@@ -4,10 +4,7 @@ type: application/javascript
 module-type: filterrunprefix
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -25,20 +22,10 @@ exports.sort = function(operationSubFunction,options) {
 				indexes = new Array(inputTitles.length),
 				compareFn;
 			results.each(function(title) {
-				var key = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
-					getVariable: function(name,opts) {
-						opts = opts || {};
-						opts.variables = {
-							"currentTiddler": "" + title,
-							"..currentTiddler": widget.getVariable("currentTiddler")
-						};
-						if(name in opts.variables) {
-							return opts.variables[name];
-						} else {
-							return widget.getVariable(name,opts);
-						}
-					}
-				});
+				var key = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
+					"currentTiddler": "" + title,
+					"..currentTiddler": widget.getVariable("currentTiddler")
+				}));
 				sortKeys.push(key[0] || "");
 			});
 			results.clear();
@@ -58,5 +45,3 @@ exports.sort = function(operationSubFunction,options) {
 		}
 	}
 };
-
-})();

@@ -3,10 +3,7 @@ title: $:/core/modules/filterrunprefixes/reduce.js
 type: application/javascript
 module-type: filterrunprefix
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -18,24 +15,14 @@ exports.reduce = function(operationSubFunction,options) {
 			var accumulator = "",
 				index = 0;
 			results.each(function(title) {
-				var list = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
-					getVariable: function(name,opts) {
-						opts = opts || {};
-						opts.variables = {
-							"currentTiddler": "" + title,
-							"..currentTiddler": widget.getVariable("currentTiddler"),
-							"index": "" + index,
-							"revIndex": "" +  (results.length - 1 - index),
-							"length": "" + results.length,
-							"accumulator": "" + accumulator
-						};
-						if(name in opts.variables) {
-							return opts.variables[name];
-						} else {
-							return widget.getVariable(name,opts);
-						}
-					}
-				});
+				var list = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
+					"currentTiddler": "" + title,
+					"..currentTiddler": widget.getVariable("currentTiddler"),
+					"index": "" + index,
+					"revIndex": "" +  (results.length - 1 - index),
+					"length": "" + results.length,
+					"accumulator": "" + accumulator
+				}));
 				if(list.length > 0) {
 					accumulator = "" + list[0];
 				}
@@ -46,5 +33,3 @@ exports.reduce = function(operationSubFunction,options) {
 		}
 	}
 };
-
-})();

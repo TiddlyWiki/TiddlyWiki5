@@ -1,0 +1,25 @@
+title: ListWidget/WithLimit
+description: List widget with limit
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
++
+title: Output
+
+Zero: <$list filter="1 2 3 4" limit="0" template="Template"/>
+
+One: <$list filter="1 2 3 4" limit="1" template="Template"/>
+
+Two: <$list filter="1 2 3 4" limit="2" template="Template"/>
+
+Minus Two: <$list filter="1 2 3 4" limit="-2" template="Template"/>
+
++
+title: Template
+
+<$text text=<<currentTiddler>>/>
++
+title: ExpectedResult
+
+<p>Zero: </p><p>One: 1</p><p>Two: 12</p><p>Minus Two: 34
+</p>

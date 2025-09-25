@@ -6,10 +6,7 @@ module-type: storyview
 Zooms between individual tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/#easeInOutCubic
@@ -129,7 +126,7 @@ function findTitleDomNode(widget,targetClass) {
 	targetClass = targetClass || "tc-title";
 	var domNode = widget.findFirstDomNode();
 	if(domNode && domNode.querySelector) {
-		return domNode.querySelector("." + targetClass);
+		return $tw.utils.querySelectorSafe("." + targetClass,domNode);
 	}
 	return null;
 }
@@ -226,5 +223,3 @@ ZoominListView.prototype.logTextNodeRoot = function(node) {
 };
 
 exports.zoomin = ZoominListView;
-
-})();

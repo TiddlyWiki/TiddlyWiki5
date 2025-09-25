@@ -10,5 +10,5 @@ This wiki gives examples for various [[filters|Filters]] and their use in the [[
 {{!!url}}
 
 <<<
-This wiki gives examples for various [[filters|Filters]] and their use in the [[list widget|ListWidget]]. A good starting point to understand what filters yield which results also is [[test-filters.js|https://github.com/Jermolene/TiddlyWiki5/blob/master/editions/test/tiddlers/tests/test-filters.js]].
+This wiki gives examples for various [[filters|Filters]] and their use in the [[list widget|ListWidget]]. A good starting point to understand what filters yield which results also is [[test-filters.js|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/editions/test/tiddlers/tests/test-filters.js]].
 <<<

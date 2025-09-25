@@ -3,10 +3,7 @@ title: $:/core/modules/filterrunprefixes/cascade.js
 type: application/javascript
 module-type: filterrunprefix
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -25,20 +22,10 @@ exports.cascade = function(operationSubFunction,options) {
 					if(!filterFnList[index]) {
 						filterFnList[index] = options.wiki.compileFilter(filter);
 					}
-					var output = filterFnList[index](options.wiki.makeTiddlerIterator([title]),{
-						getVariable: function(name,opts) {
-							opts = opts || {};
-							opts.variables = {
-								"currentTiddler": "" + title,
-								"..currentTiddler": widget.getVariable("currentTiddler")
-							};
-							if(name in opts.variables) {
-								return opts.variables[name];
-							} else {
-								return widget.getVariable(name,opts);
-							}
-						}
-					});
+					var output = filterFnList[index](options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
+						"currentTiddler": "" + title,
+						"..currentTiddler": widget.getVariable("currentTiddler","")
+					}));
 					if(output.length !== 0) {
 						result = output[0];
 						return false;
@@ -49,5 +36,3 @@ exports.cascade = function(operationSubFunction,options) {
 		}
 	}
 };
-
-})();
