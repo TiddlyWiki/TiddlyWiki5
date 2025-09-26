@@ -1,0 +1,17 @@
+title: $:/palettes/TwentyTwenties/Settings
+
+\procedure entry(name,description)
+<$text text=<<description>>/>: <$edit-text tiddler={{$:/palette}} index=<<name>> type="color" tag="input" default={{{ [function[colour],<name>] }}}/>
+\end entry
+
+<<entry name:"base-paper" description:"Paper">>
+
+<<entry name:"base-background" description:"Page background">>
+
+<<entry name:"base-ink" description:"Ink">>
+
+<<entry name:"base-primary" description:"Primary">>
+
+<<entry name:"base-secondary" description:"Secondary">>
+
+<<entry name:"base-tertiary" description:"Tertiary">>
