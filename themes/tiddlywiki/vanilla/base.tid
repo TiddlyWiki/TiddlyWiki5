@@ -63,6 +63,7 @@ $else$
 </$set>
 \end
 
+\import [[$:/core/macros/CSS/property]]
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
@@ -269,10 +270,7 @@ input[type="search"]::-webkit-search-results-decoration {
 svg.tc-image-button {
 	padding-top: 0px;
 	padding-bottom: 1px;
-	padding-inline-start: 0px;
-	padding-inline-end: 1px;
-	-webkit-padding-start: 0px;
-	-webkit-padding-end: 1px;
+	<<padding-inline 0px 1px>>
 }
 
 .tc-icon-wrapper > svg {
@@ -677,8 +675,7 @@ html body.tc-body .tc-btn-rounded:hover svg {
 
 
 .tc-btn-text {
-	-webkit-margin-start: 7px;
-	margin-inline-start: 7px;
+	<<margin-start 7px>>
 }
 
 /* used for documentation "fake" buttons */
@@ -1815,8 +1812,7 @@ html body.tc-body.tc-single-tiddler-window {
 */
 
 .tc-viewswitcher .tc-image-button {
-	-webkit-margin-end: .3em;
-	margin-inline-end: .3em;
+	<<margin-end ".3em">>
 }
 
 .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
@@ -2288,8 +2284,7 @@ html body.tc-body.tc-single-tiddler-window {
 	display: inline-block;
 	vertical-align: top;
 	padding-top: 0;
-	-webkit-padding-start: 14px;
-	padding-inline-start: 14px;
+	<<padding-start 14px>>
 	border-inline-start: 1px solid <<colour tab-border>>;
 	-webkit-flex: 1 0 70%;
 	flex: 1 0 70%;
@@ -2888,10 +2883,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	border-top: 1px solid <<colour table-header-background>>;
 	padding-top: 2px;
 	padding-bottom: 2px;
-	padding-inline-start: 14px;
-	padding-inline-end: 4px;
-	-webkit-padding-start: 14px;
-	-webkit-padding-end: 4px;
+	<<padding-inline 14px 4px>>
 }
 
 .tc-drop-down .tc-chooser-item {
@@ -2924,8 +2916,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 }
 
 .tc-chosen > .tc-tiddlylink:before {
-	-webkit-margin-start: -10px
-	margin-inline-start: -10px;
+	<<margin-start "-10px">>
 	position: relative;
 	content: "» ";
 }
@@ -2990,13 +2981,11 @@ input.tc-palette-manager-colour-input {
 
 .tc-table-of-contents ol {
 	list-style-type: none;
-	-webkit-padding-start: 0;
-	padding-inline-start: 0;
+	<<padding-start 0>>
 }
 
 .tc-table-of-contents ol ol {
-	-webkit-padding-start: 1em;
-	padding-inline-start: 1em;
+	<<padding-start 1em>>
 }
 
 .tc-table-of-contents li {
@@ -3037,8 +3026,7 @@ input.tc-palette-manager-colour-input {
 .tc-tabbed-table-of-contents .tc-table-of-contents {
 	z-index: 100;
 	display: inline-block;
-	-webkit-padding-start: 1em;
-	padding-inline-start: 1em;
+	<<padding-start 1em>>
 	max-width: 50%;
 	-webkit-flex: 0 0 auto;
 	flex: 0 0 auto;
@@ -3287,20 +3275,17 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 */
 
 .tc-tree div {
-	-webkit-padding-start: 14px;
-	padding-inline-start: 14px;
+	<<padding-start: "14px">>
 }
 
 .tc-tree ol {
 	list-style-type: none;
-	-webkit-padding-start: 0;
-	padding-inline-start: 0;
+	<<padding-start: 0>>
 	margin-top: 0;
 }
 
 .tc-tree ol ol {
-	-webkit-padding-start: 1em;
-	padding-inline-start: 1em;
+	<<padding-start: 1em>>
 }
 
 .tc-tree button {
@@ -3431,8 +3416,7 @@ span.tc-translink > a:first-child {
 	line-height: 0;
 	border-radius: 1em;
 	vertical-align: text-bottom;
-	-webkit-margin-end: 0.25em;
-	margin-inline-end: 0.25em;
+	<<margin-end "0.25em">>
 }
 
 .tc-test-case-result-icon-pass {
@@ -3604,13 +3588,11 @@ span.tc-translink > a:first-child {
 }
 
 .tc-tiny-gap-left {
-	-webkit-margin-start: .25em;
-	margin-inline-start: .25em;
+	<<margin-start ".25em">>
 }
 
 .tc-tiny-gap-right {
-	-webkit-margin-end: .25em;
-	margin-inline-end: .25em;
+	<<margin-end ".25em">>
 }
 
 .tc-small-gap {
@@ -3619,13 +3601,11 @@ span.tc-translink > a:first-child {
 }
 
 .tc-small-gap-left {
-	-webkit-margin-start: .5em;
-	margin-inline-start: .5em;
+	<<margin-start ".5em">>
 }
 
 .tc-small-gap-right {
-	-webkit-margin-end: .5em;
-	margin-inline-end: .5em;
+	<<margin-end ".5em">>
 }
 
 .tc-big-gap {
@@ -3634,13 +3614,11 @@ span.tc-translink > a:first-child {
 }
 
 .tc-big-gap-left {
-	-webkit-margin-start: 1em;
-	margin-inline-start: 1em;
+	<<margin-start 1em>>
 }
 
 .tc-big-gap-right {
-	-webkit-margin-end: 1em;
-	margin-inline-end: 1em;
+	<<margin-end 1em>>
 }
 
 .tc-word-break {
