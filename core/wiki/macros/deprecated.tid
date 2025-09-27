@@ -30,10 +30,8 @@ tags: $:/tags/Macro
 \define background-linear-gradient(gradient)
 ``
 background-image: linear-gradient($gradient$);
-background-image: -o-linear-gradient($gradient$);
 background-image: -moz-linear-gradient($gradient$);
 background-image: -webkit-linear-gradient($gradient$);
-background-image: -ms-linear-gradient($gradient$);
 ``
 \end
 
