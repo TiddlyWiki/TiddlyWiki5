@@ -1,6 +1,6 @@
 title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/Stylesheet]]
-list-before:
+list-after: $:/core/reset
 code-body: yes
 
 \define custom-background-datauri()
@@ -64,12 +64,6 @@ $else$
 \end
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
-
-/*
-** Start with the normalize CSS reset, and then belay some of its effects
-*/
-
-{{$:/themes/tiddlywiki/vanilla/reset}}
 
 input[type="search"] {
 	outline-offset: initial;
