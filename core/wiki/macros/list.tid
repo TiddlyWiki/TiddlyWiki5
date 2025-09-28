@@ -24,44 +24,49 @@ tags: $:/tags/Macro
 
 \define list-links-draggable(tiddler,field:"list",emptyMessage,type:"ul",subtype:"li",class:"",itemTemplate)
 \whitespace trim
-<span class="tc-links-draggable-list">
-	<$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
-		<$genesis $type=<<__type__>> class="$class$">
-			<$list filter="[list[$tiddler$!!$field$]]" emptyMessage=<<__emptyMessage__>>>
-				<$droppable
-					actions=<<list-links-draggable-drop-actions>>
-					tag="""$subtype$"""
-					enable=<<tv-enable-drag-and-drop>>
-				>
-					<div class="tc-droppable-placeholder"/>
-					<div>
-						<$transclude tiddler="""$itemTemplate$""">
-							<$link to={{!!title}}>
-								<$let tv-wikilinks="no">
-									<$transclude field="caption">
-										<$view field="title"/>
-									</$transclude>
-								</$let>
-							</$link>
-						</$transclude>
-					</div>
-				</$droppable>
-			</$list>
-			<$tiddler tiddler="">
-				<$droppable
-					actions=<<list-links-draggable-drop-actions>> 
-					tag="div"
-					enable=<<tv-enable-drag-and-drop>>
-				>
-					<div class="tc-droppable-placeholder">
-						{{$:/core/images/blank}}
-					</div>
-					<div style="height:0.5em;"/>
-				</$droppable>
-			</$tiddler>
-		</$genesis>
-	</$vars>
-</span>
+<$set name="_tiddler" value="""$tiddler$""" emptyValue=<<currentTiddler>> >
+	<$let field-reference={{{ [<_tiddler>] "!!" [[$field$]] +[join[]] }}}
+		targetTiddler=<<_tiddler>>
+		targetField="""$field$"""
+	>
+		<span class="tc-links-draggable-list">
+			<$genesis $type=<<__type__>> class="$class$">
+				<$list filter="[list<field-reference>]" emptyMessage=<<__emptyMessage__>>>
+					<$droppable
+						actions=<<list-links-draggable-drop-actions>>
+						tag="""$subtype$"""
+						enable=<<tv-enable-drag-and-drop>>
+					>
+						<div class="tc-droppable-placeholder"/>
+						<div>
+							<$transclude tiddler="""$itemTemplate$""">
+								<$link to={{!!title}}>
+									<$let tv-wikilinks="no">
+										<$transclude field="caption">
+											<$view field="title"/>
+										</$transclude>
+									</$let>
+								</$link>
+							</$transclude>
+						</div>
+					</$droppable>
+				</$list>
+				<$tiddler tiddler="">
+					<$droppable
+						actions=<<list-links-draggable-drop-actions>> 
+						tag="div"
+						enable=<<tv-enable-drag-and-drop>>
+					>
+						<div class="tc-droppable-placeholder">
+							{{$:/core/images/blank}}
+						</div>
+						<div style="height:0.5em;"/>
+					</$droppable>
+				</$tiddler>
+			</$genesis>
+		</span>
+	</$let>
+</$set>
 \end
 
 \define list-tagged-draggable-drop-actions(tag)
