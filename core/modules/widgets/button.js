@@ -22,6 +22,46 @@ Inherit from the base widget class
 */
 ButtonWidget.prototype = new Widget();
 
+ButtonWidget.prototype.attributesInfo = {
+	dom: {
+		style: {},
+		tooltip: {
+			domAttribute: "title"
+		},
+		"aria-label": {},
+		role: {},
+		tabindex: {},
+		disabled: {
+			mapAttributeFn: function(widget) {
+				return widget.getAttribute("disabled","no") === "yes" ? true : undefined;
+			}
+		}
+	},
+	notUpdateable: [
+			"actions",
+			"to",
+			"message",
+			"param",
+			"set",
+			"setTo",
+			"popup",
+			"hover",
+			"selectedClass",
+			"dragFilter",
+			"dragTiddler",
+			"popupAbsCoords",
+			"setTitle",
+			"setField",
+			"setIndex",
+			"popupTitle",
+			"default",
+			"disabled"
+		],
+	hasCustomRefresh: {
+		class: "updateDomNodeClasses"
+	}
+};
+
 /*
 Render this widget into the DOM
 */
@@ -56,33 +96,21 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		$tw.utils.pushTop(classes,"tc-popup-handle");
 	}
 	domNode.className = classes.join(" ");
-	// Assign data- attributes
+	// Assign data- and direct DOM attributes that are not falsy
+	var nonBlankAttributes = {};
+	$tw.utils.each(Object.keys(self.attributesInfo.dom),function(name) {
+		if(!!self.getAttribute(name)) {
+			nonBlankAttributes[name] = self.attributesInfo.dom[name];
+		}
+	});
 	this.assignAttributes(domNode,{
 		sourcePrefix: "data-",
-		destPrefix: "data-"
+		destPrefix: "data-",
+		additionalAttributesMap: nonBlankAttributes
 	});
 	// Assign other attributes
-	if(this.style) {
-		domNode.setAttribute("style",this.style);
-	}
-	if(this.tooltip) {
-		domNode.setAttribute("title",this.tooltip);
-	}
-	if(this["aria-label"]) {
-		domNode.setAttribute("aria-label",this["aria-label"]);
-	}
-	if (this.role) {
-		domNode.setAttribute("role", this.role);
-	}
 	if(this.popup || this.popupTitle) {
 		domNode.setAttribute("aria-expanded",isPoppedUp ? "true" : "false");
-	}
-	// Set the tabindex
-	if(this.tabIndex) {
-		domNode.setAttribute("tabindex",this.tabIndex);
-	}
-	if(this.isDisabled === "yes") {
-		domNode.setAttribute("disabled",true);
 	}
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
@@ -143,7 +171,7 @@ ButtonWidget.prototype.getBoundingClientRect = function() {
 };
 
 ButtonWidget.prototype.isSelected = function() {
-    return this.setTitle ? (this.setField ? this.wiki.getTiddler(this.setTitle).getFieldString(this.setField) === this.setTo :
+	return this.setTitle ? (this.setField ? this.wiki.getTiddler(this.setTitle).getFieldString(this.setField) === this.setTo :
 		(this.setIndex ? this.wiki.extractTiddlerDataItem(this.setTitle,this.setIndex) === this.setTo :
 			this.wiki.getTiddlerText(this.setTitle))) || this.defaultSetValue || this.getVariable("currentTiddler") :
 		this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler")) === this.setTo;
@@ -215,10 +243,6 @@ ButtonWidget.prototype.execute = function() {
 	this.setTo = this.getAttribute("setTo");
 	this.popup = this.getAttribute("popup");
 	this.hover = this.getAttribute("hover");
-	this["aria-label"] = this.getAttribute("aria-label");
-	this.role = this.getAttribute("role");
-	this.tooltip = this.getAttribute("tooltip");
-	this.style = this.getAttribute("style");
 	this["class"] = this.getAttribute("class","");
 	this.selectedClass = this.getAttribute("selectedClass");
 	this.defaultSetValue = this.getAttribute("default","");
@@ -230,49 +254,27 @@ ButtonWidget.prototype.execute = function() {
 	this.setIndex = this.getAttribute("setIndex");
 	this.popupTitle = this.getAttribute("popupTitle");
 	this.popupAbsCoords = this.getAttribute("popupAbsCoords", "no");
-	this.tabIndex = this.getAttribute("tabindex");
 	this.isDisabled = this.getAttribute("disabled","no");
 	// Make child widgets
 	this.makeChildWidgets();
 };
 
 ButtonWidget.prototype.updateDomNodeClasses = function() {
-	var domNodeClasses = this.domNode.className.split(" "),
-		oldClasses = this.class.split(" "),
-		newClasses;
-	this["class"] = this.getAttribute("class","");
-	newClasses = this.class.split(" ");
-	//Remove classes assigned from the old value of class attribute
-	$tw.utils.each(oldClasses,function(oldClass){
-		var i = domNodeClasses.indexOf(oldClass);
-		if(i !== -1) {
-			domNodeClasses.splice(i,1);
-		}
-	});
-	//Add new classes from updated class attribute.
-	$tw.utils.pushTop(domNodeClasses,newClasses);
-	this.domNode.className = domNodeClasses.join(" ");
+	let oldClasses = this.class.split(" ") || [];
+	this["class"] = this.getAttribute("class",[]);
+	$tw.utils.updateClasses(this.domNode,oldClasses,this["class"].split(" ")||[]);
 };
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tooltip || changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
+	if((this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle])) {
 		this.refreshSelf();
 		return true;
 	} else {
-		if(changedAttributes["class"]) {
-			this.updateDomNodeClasses();
-		}
-		this.assignAttributes(this.domNodes[0],{
-			changedAttributes: changedAttributes,
-			sourcePrefix: "data-",
-			destPrefix: "data-"
-		});
+		return Object.getPrototypeOf(Object.getPrototypeOf(this)).refresh.call(this,changedTiddlers);
 	}
-	return this.refreshChildren(changedTiddlers);
 };
 
 exports.button = ButtonWidget;
