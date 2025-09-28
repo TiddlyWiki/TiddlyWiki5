@@ -14,7 +14,11 @@ tags: $:/tags/PageTemplate
 
 </section>
 
+<$let tv-enable-storyview-scroll="yes">
+
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/StoryTiddlerTemplate" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}/>
+
+</$let>
 
 <section class="story-frontdrop">
 
