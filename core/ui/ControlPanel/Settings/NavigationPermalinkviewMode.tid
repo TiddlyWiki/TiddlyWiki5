@@ -6,20 +6,14 @@ caption: {{$:/language/ControlPanel/Settings/NavigationPermalinkviewMode/Caption
 \define lingo-base() $:/language/ControlPanel/Settings/NavigationPermalinkviewMode/
 <<lingo Hint>>
 
-<$checkbox tiddler="$:/config/Navigation/Permalinkview/CopyToClipboard"
-	field="text" checked="yes" unchecked="no" default="yes"
-	class="tc-control-panel-item"
->
-	<$link to="$:/config/Navigation/Permalinkview/CopyToClipboard" class="tc-tiny-gap-left">
-		<<lingo CopyToClipboard/Description>>
-	</$link>
-</$checkbox>
+<$transclude $variable="control-panel-checkbox"
+	config="$:/config/Navigation/Permalinkview/CopyToClipboard"
+	label=<<lingo CopyToClipboard/Description>>
+	default="yes"
+/>
 
-<$checkbox tiddler="$:/config/Navigation/Permalinkview/UpdateAddressBar"
-	field="text" checked="yes" unchecked="no" default="yes"
-	class="tc-control-panel-item"
->
-	<$link to="$:/config/Navigation/Permalinkview/UpdateAddressBar" class="tc-tiny-gap-left">
-		<<lingo UpdateAddressBar/Description>>
-	</$link>
-</$checkbox>
+<$transclude $variable="control-panel-checkbox"
+	config="$:/config/Navigation/Permalinkview/UpdateAddressBar"
+	label=<<lingo UpdateAddressBar/Description>>
+	default="yes"
+/>

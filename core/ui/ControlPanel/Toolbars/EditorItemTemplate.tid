@@ -6,11 +6,11 @@ $(config-base)$$(currentTiddler)$
 \whitespace trim
 
 <$draggable tiddler=<<currentTiddler>>>
-<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"/>
-&#32;
-<span class="tc-icon-wrapper"><$transclude tiddler={{!!icon}}/></span>
-&#32;
-<$transclude field="caption"/>
-&#32;--&#32;
-<i class="tc-muted"><$transclude field="description"/></i>
+<$transclude $variable="control-panel-checkbox"
+	config=<<config-title>>
+	label="""<span class="tc-icon-wrapper"><$transclude tiddler={{!!icon}}/></span>&#32;<$transclude field="caption"/>&#32;--&#32;<i class="tc-muted"><$transclude field="description"/></i>"""
+	checkedValue="show"
+	uncheckedValue="hide"
+	default="show"
+/>
 </$draggable>

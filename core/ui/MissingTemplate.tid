@@ -1,15 +1,18 @@
 title: $:/core/ui/MissingTemplate
 
 \whitespace trim
+\procedure missing-template-dropdown()
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<hr>
+<$list filter="[all[current]backlinks[]sort[title]]" template="$:/core/ui/ListItemTemplate"/>
+\end
+
 <div class="tc-tiddler-missing">
 <$button popup=<<qualify "$:/state/popup/missing">> class="tc-btn-invisible tc-missing-tiddler-label">
 <$view field="title" format="text" />
 </$button>
-<$reveal state=<<qualify "$:/state/popup/missing">> type="popup" position="below" animate="yes">
-<div class="tc-drop-down">
-<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
-<hr>
-<$list filter="[all[current]backlinks[]sort[title]]" template="$:/core/ui/ListItemTemplate"/>
-</div>
-</$reveal>
+<$transclude $variable="reveal-animate-dropdown"
+	state=<<qualify "$:/state/popup/missing">>
+	content=<<missing-template-dropdown>>
+/>
 </div>

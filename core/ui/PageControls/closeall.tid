@@ -4,13 +4,9 @@ caption: {{$:/core/images/close-all-button}} {{$:/language/Buttons/CloseAll/Capt
 description: {{$:/language/Buttons/CloseAll/Hint}}
 
 \whitespace trim
-<$button message="tm-close-all-tiddlers" tooltip={{$:/language/Buttons/CloseAll/Hint}} aria-label={{$:/language/Buttons/CloseAll/Caption}} class=<<tv-config-toolbar-class>>>
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/close-all-button}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/CloseAll/Caption}}/>
-</span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/CloseAll/Hint}}
+	label={{$:/language/Buttons/CloseAll/Caption}}
+	icon="$:/core/images/close-all-button"
+	actions="<$action-sendmessage $message='tm-close-all-tiddlers'/>"
+/>

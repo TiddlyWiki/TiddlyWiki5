@@ -5,17 +5,17 @@ description: {{$:/language/Buttons/Palette/Hint}}
 
 \whitespace trim
 <span class="tc-popup-keep">
-<$button popup=<<qualify "$:/state/popup/palette">> tooltip={{$:/language/Buttons/Palette/Hint}} aria-label={{$:/language/Buttons/Palette/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
-<%if [<tv-config-toolbar-icons>match[yes]] %>
-{{$:/core/images/palette}}
-<%endif%>
-<%if [<tv-config-toolbar-text>match[yes]] %>
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/Palette/Caption}}/></span>
-<%endif%>
-</$button>
+<$transclude $variable="toolbar-button-conditional"
+	tooltip={{$:/language/Buttons/Palette/Hint}}
+	label={{$:/language/Buttons/Palette/Caption}}
+	icon="$:/core/images/palette"
+	popup=<<qualify "$:/state/popup/palette">>
+	selectedClass="tc-selected"
+/>
 </span>
-<$reveal state=<<qualify "$:/state/popup/palette">> type="popup" position="below" animate="yes">
-<div class="tc-drop-down" style="font-size:0.7em;">
-{{$:/snippets/paletteswitcher}}
-</div>
-</$reveal>
+<$transclude $variable="reveal-animate-dropdown"
+	state=<<qualify "$:/state/popup/palette">>
+	position="below"
+	content={{$:/snippets/paletteswitcher}}
+	style="font-size:0.7em;"
+/>

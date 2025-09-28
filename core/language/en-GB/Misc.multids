@@ -13,6 +13,7 @@ ConfirmOverwriteTiddler: Do you wish to overwrite the tiddler "<$text text=<<tit
 ConfirmEditShadowTiddler: You are about to edit a ShadowTiddler. Any changes will override the default system making future upgrades non-trivial. Are you sure you want to edit "<$text text=<<title>>/>"?
 ConfirmAction: Do you wish to proceed?
 Count: count
+DaysAgo: <<days>> days ago
 DefaultNewTiddlerTitle: New Tiddler
 Diffs/CountMessage: <<diff-count>> differences
 DropMessage: Drop now (or use the 'Escape' key to cancel)
@@ -95,5 +96,6 @@ TagManager/Icons/None: None
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
 Tiddler/DateFormat: DDth MMM YYYY at hh12:0mmam
+Today: Today
 UnsavedChangesWarning: You have unsaved changes in TiddlyWiki
 Yes: Yes

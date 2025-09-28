@@ -4,9 +4,9 @@ title: $:/core/ui/PluginInfo/Default/contents
 \whitespace trim
 <<lingo Hint>>
 <ul>
-<$list filter="[all[current]plugintiddlers[]sort[title]]" emptyMessage=<<lingo Empty/Hint>>>
-<li>
-<$link />
-</li>
-</$list>
+<$transclude $variable="list-with-empty" 
+	filter="[all[current]plugintiddlers[]sort[title]]" 
+	emptyMessage=<<lingo Empty/Hint>>
+	template="<li><$link /></li>"
+/>
 </ul>
