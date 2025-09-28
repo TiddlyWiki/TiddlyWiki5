@@ -147,7 +147,7 @@ Settings/AutoSave/Disabled/Description: Do not save changes automatically
 Settings/AutoSave/Enabled/Description: Save changes automatically
 Settings/AutoSave/Hint: Attempt to automatically save changes during editing when using a supporting saver
 Settings/CamelCase/Caption: Camel Case Wiki Links
-Settings/CamelCase/Hint: You can globally disable automatic linking of ~CamelCase phrases. Requires reload to take effect
+Settings/CamelCase/Hint: Requires reload to take effect
 Settings/CamelCase/Description: Enable automatic ~CamelCase linking
 Settings/Caption: Settings
 Settings/EditorToolbar/Caption: Editor Toolbar
