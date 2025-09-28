@@ -1,0 +1,11 @@
+created: 20240826172211655
+modified: 20240826172607528
+tags: [[Macro Examples]] [[Table-of-Contents Macros]]
+title: Table-of-Contents Macros (Advanced Examples)
+type: text/vnd.tiddlywiki
+
+The following examples provide information about the "rewritten" toc macors. For the standard examples look at: [[Table-of-Contents Macros (Examples)]]
+
+<<list-links filter:"[prefix[Examples/TOC/]]">>
+
+<<tree prefix:"Examples/TOC/">>

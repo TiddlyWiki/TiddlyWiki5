@@ -1,0 +1,12 @@
+caption: Wilma Flintstone
+created: 20240204194617448
+first-name: Wilma
+last-name: Flintstone
+modified: 20240204201551863
+tags: Person
+title: Person/3
+type: text/vnd.tiddlywiki
+
+\import [[b b]]
+
+<<list-fields>>
