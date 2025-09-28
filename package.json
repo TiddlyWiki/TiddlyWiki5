@@ -30,12 +30,27 @@
   "bundleDependencies": [],
   "license": "BSD",
   "engines": {
-    "node": ">=0.8.2"
+    "node": ">=18.20.8"
   },
   "scripts": {
-    "dev": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
+    "start": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
     "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
+
+    "lazy": "node ./tiddlywiki.js ./editions/tw5.com-server --listen root-tiddler=$:/core/save/lazy-all",
+    "watch": "node --watch-path=./core --watch-preserve-output ./tiddlywiki.js ./editions/tw5.com-server --listen",
+
+    "dev": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/dev --listen",
+
+    "library:info": "echo The Warning: \"Plugin(s) required for client-server operation are missing\" is INTENTIONAL, so no files will be saved back.",
+    "library": "node ./tiddlywiki.js ./editions/pluginlibrary --build test-server",
+
+    "build": "node ./tiddlywiki.js ./editions/tw5.com --build",
+
+    "help": "node ./tiddlywiki.js --help",
+
+    "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lint": "eslint ."
+
+    "prelibrary": "npm run library:info -s"
   }
 }
