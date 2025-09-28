@@ -1,11 +1,13 @@
 title: $:/language/ThemeTweaks/
 
 ThemeTweaks: Theme Tweaks
-ThemeTweaks/Hint: You can tweak certain aspects of the ''Vanilla'' theme.
+ThemeTweaks/Hint: You can tweak certain aspects of the ''<$text text={{{ [<get.current.theme>get[name]] :else[[current]] }}}/>'' theme.
 Options: Options
 Options/SidebarLayout: Sidebar layout
 Options/SidebarLayout/Fixed-Fluid: Fixed story, fluid sidebar
 Options/SidebarLayout/Fluid-Fixed: Fluid story, fixed sidebar
+Options/SidebarPosition: Sidebar position
+Options/SidebarResizer: Sidebar resizer
 Options/StickyTitles: Sticky titles
 Options/StickyTitles/Hint: Causes tiddler titles to "stick" to the top of the browser window
 Options/CodeWrapping: Wrap long lines in code blocks
@@ -26,17 +28,34 @@ Metrics/FontSize: Font size
 Metrics/LineHeight: Line height
 Metrics/BodyFontSize: Font size for tiddler body
 Metrics/BodyLineHeight: Line height for tiddler body
+Metrics/PreviewSliderWidth: Preview slider width
+Metrics/PreviewSliderWidth/Hint: the width of the slider between editor and editor preview
+Metrics/SidebarPadding: Sidebar padding
+Metrics/SidebarPadding/Hint: the padding of the sidebar between sidebar and story river
+Metrics/SidebarResizer/Hint: the values for `storyleft`, `storyright`, `storywidth`, `storyminwidth`, `sidebarwidth` and `sidebarminwidth` need to be ''absolute'' CSS units, ''percentages'' or ''em'' units in order for the sidebar resizer to work
+Metrics/SliderOpacity: Slider opacity
+Metrics/SliderOpacity/Hint: the opacity of the sliders
+Metrics/SliderOpacityHover: Slider opacity hover
+Metrics/SliderOpacityHover/Hint: the opacity on hover of the sliders
 Metrics/StoryLeft: Story left position
 Metrics/StoryLeft/Hint: how far the left margin of the story river<br>(tiddler area) is from the left of the page
+Metrics/StoryMinWidth: Minimum Story width
+Metrics/StoryMinWidth/Hint: controls the minimum width of the tiddlers in the story river
+Metrics/StoryPaddingLeft: Story Padding Left
+Metrics/StoryPaddingLeft/Hint: the left padding of the story river
+Metrics/StoryPaddingRight: Story Padding Right
+Metrics/StoryPaddingRight/Hint: the right padding of the story river
 Metrics/StoryTop: Story top position
 Metrics/StoryTop/Hint: how far the top margin of the story river<br>is from the top of the page
 Metrics/StoryRight: Story right
 Metrics/StoryRight/Hint: how far the left margin of the sidebar <br>is from the left of the page
 Metrics/StoryWidth: Story width
 Metrics/StoryWidth/Hint: the overall width of the story river
-Metrics/TiddlerWidth: Tiddler width
-Metrics/TiddlerWidth/Hint: within the story river
 Metrics/SidebarBreakpoint: Sidebar breakpoint
 Metrics/SidebarBreakpoint/Hint: the minimum page width at which the story<br>river and sidebar will appear side by side
+Metrics/SidebarMinWidth: Minimum Sidebar width
+Metrics/SidebarMinWidth/Hint: the minimum width of the sidebar
 Metrics/SidebarWidth: Sidebar width
 Metrics/SidebarWidth/Hint: the width of the sidebar in fluid-fixed layout
+Metrics/TiddlerWidth: Tiddler width
+Metrics/TiddlerWidth/Hint: within the story river

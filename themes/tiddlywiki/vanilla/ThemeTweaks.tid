@@ -2,6 +2,12 @@ title: $:/themes/tiddlywiki/vanilla/themetweaks
 tags: $:/tags/ControlPanel/Appearance
 caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 
+\function get.theme-tweaks.metric() [get.theme<metric>]
+
+\procedure get-theme-tweaks-lingo() <$transclude $variable="lingo" title=`Metrics/$(metricName)$`/>
+
+\procedure get-theme-tweaks-lingo-hint() <$transclude $variable="lingo" title=`Metrics/$(metricName)$/Hint`/>
+
 \define lingo-base() $:/language/ThemeTweaks/
 
 \define replacement-text()
@@ -45,6 +51,8 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 </$select>
 \end
 
+\whitespace trim
+
 <<lingo ThemeTweaks/Hint>>
 
 ! <<lingo Options>>
@@ -52,6 +60,8 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 |<$link to="$:/themes/tiddlywiki/vanilla/options/sidebarlayout"><<lingo Options/SidebarLayout>></$link> |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/sidebarlayout"><option value="fixed-fluid"><<lingo Options/SidebarLayout/Fixed-Fluid>></option><option value="fluid-fixed"><<lingo Options/SidebarLayout/Fluid-Fixed>></option></$select> |
 |<$link to="$:/themes/tiddlywiki/vanilla/options/stickytitles"><<lingo Options/StickyTitles>></$link><br>//<<lingo Options/StickyTitles/Hint>>// |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/stickytitles"><option value="no">{{$:/language/No}}</option><option value="yes">{{$:/language/Yes}}</option></$select> |
 |<$link to="$:/themes/tiddlywiki/vanilla/options/codewrapping"><<lingo Options/CodeWrapping>></$link> |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/codewrapping"><option value="pre">{{$:/language/No}}</option><option value="pre-wrap">{{$:/language/Yes}}</option></$select> |
+|<$link to={{{ [function[get.base.theme.option],<get.current.theme>,[sidebarposition]first[]] }}}><<lingo Options/SidebarPosition>></$link> |<$select tiddler={{{ [function[get.base.theme.option],<get.current.theme>,[sidebarposition]first[]] }}}><option value="right">{{$:/language/Right}}</option><option value="left">{{$:/language/Left}}</option></$select> |
+|<$link to={{{ [function[get.base.theme.option],<get.current.theme>,[sidebarresizer]first[]] }}}><<lingo Options/SidebarResizer>></$link> |<$select tiddler={{{ [function[get.base.theme.option],<get.current.theme>,[sidebarresizer]first[]] }}}><option value="hide">{{$:/language/No}}</option><option value="show">{{$:/language/Yes}}</option></$select> |
 
 ! <<lingo Settings>>
 
@@ -64,14 +74,16 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 
 ! <<lingo Metrics>>
 
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/fontsize"><<lingo Metrics/FontSize>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/fontsize" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/lineheight"><<lingo Metrics/LineHeight>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/lineheight" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize"><<lingo Metrics/BodyFontSize>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight"><<lingo Metrics/BodyLineHeight>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storyleft"><<lingo Metrics/StoryLeft>></$link><br>//<<lingo Metrics/StoryLeft/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storytop"><<lingo Metrics/StoryTop>></$link><br>//<<lingo Metrics/StoryTop/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storytop" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storyright"><<lingo Metrics/StoryRight>></$link><br>//<<lingo Metrics/StoryRight/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storywidth"><<lingo Metrics/StoryWidth>></$link><br>//<<lingo Metrics/StoryWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth"><<lingo Metrics/TiddlerWidth>></$link><br>//<<lingo Metrics/TiddlerWidth/Hint>>//<br> |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint"><<lingo Metrics/SidebarBreakpoint>></$link><br>//<<lingo Metrics/SidebarBreakpoint/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth"><<lingo Metrics/SidebarWidth>></$link><br>//<<lingo Metrics/SidebarWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" default="" tag="input"/> |
+<<lingo Metrics/SidebarResizer/Hint>>
+
+<table>
+<tbody>
+<$list filter="FontSize LineHeight BodyFontSize BodyLineHeight StoryLeft StoryTop StoryRight StoryWidth StoryMinWidth StoryPaddingLeft StoryPaddingRight TiddlerWidth SidebarBreakpoint SidebarWidth SidebarPadding SliderOpacity SliderOpacityHover PreviewSliderWidth :except[<get.theme.option sidebarlayout>match[fluid-fixed]then[StoryRight StoryWidth TiddlerWidth]enlist-input[]] :except[<get.theme.option sidebarlayout>match[fixed-fluid]then[SidebarWidth]]" variable="metricName" counter="counter">
+<$set name="metric" value={{{ [<metricName>lowercase[]] }}}>
+<tr class={{{ [<counter>remainder[2]match[0]then[oddRow]] :else[[evenRow]] }}}>
+<td><$link to=<<get.theme-tweaks.metric>>><<get-theme-tweaks-lingo>></$link><br>//<<get-theme-tweaks-lingo-hint>>//  </td><td><$edit-text tiddler=<<get.theme-tweaks.metric>> default="" tag="input"/> </td>
+</tr>
+</$set>
+</$list>
+</tbody>
+</table>

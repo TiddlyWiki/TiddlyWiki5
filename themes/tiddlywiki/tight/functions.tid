@@ -1,0 +1,10 @@
+title: $:/themes/tiddlywiki/tight/functions
+
+\function set.centralised() no
+\function set.storywidth.storyright() [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]then[yes]] :else[[no]]
+\function set.sidebarwidth() [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]then[yes]] :else[[no]]
+
+\function get.story-sidebar.overlap() 0px
+
+\function sidebar.resizer.maxwidth() 12px
+\function sidebar.resizer.width() [<sidebar.resizer.maxwidth>]

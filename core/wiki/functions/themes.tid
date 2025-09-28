@@ -1,0 +1,115 @@
+title: $:/core/functions/themes
+tags: $:/tags/Global
+code-body: yes
+
+\function is.pixel.value(value) [<value>removesuffix[px]]
+\function is.percentage.value(value) [<value>removesuffix[%]]
+\function is.cm.value(value) [<value>removesuffix[cm]]
+\function is.mm.value(value) [<value>removesuffix[mm]]
+\function is.Q.value(value) [<value>removesuffix[Q]]
+\function is.in.value(value) [<value>removesuffix[in]]
+\function is.pc.value(value) [<value>removesuffix[pc]]
+\function is.pt.value(value) [<value>removesuffix[pt]]
+\function is.em.value(value) [<value>removesuffix[em]]
+
+\function convert.to.cm(value) [<value>divide[37.8]]
+\function convert.to.mm(value) [convert.to.cm<value>multiply[10]]
+\function convert.to.Q(value) [convert.to.cm<value>multiply[40]]
+\function convert.to.in(value) [<value>divide[96]]
+\function convert.to.pc(value) [convert.to.in<value>multiply[6]]
+\function convert.to.pt(value) [convert.to.in<value>multiply[72]]
+\function convert.to.em(value) [[storyTiddler]is[variable]then<value>divide{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}] [[storyTiddler]!is[variable]then<value>divide{$:/themes/tiddlywiki/vanilla/metrics/fontsize}]
+
+\function convert.to.pixels(value)
+[is.pixel.value<value>]
+:else[is.cm.value<value>multiply[37.8]]
+:else[is.mm.value<value>multiply[37.8]divide[10]]
+:else[is.Q.value<value>multiply[37.8]divide[40]]
+:else[is.in.value<value>multiply[96]]
+:else[is.pc.value<value>multiply[96]divide[6]]
+:else[is.pt.value<value>multiply[96]divide[72]]
+:else[is.em.value<value>then[storyTiddler]is[variable]then<value>multiply{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}]
+:else[is.em.value<value>then[storyTiddler]!is[variable]then<value>multiply{$:/themes/tiddlywiki/vanilla/metrics/fontsize}]
+\end
+
+\function convert.to.pixels.metric(value,metric) [<value>addsuffix<metric>] :map[convert.to.pixels<currentTiddler>]
+
+\function subtract.one.from.sidebarbreakpoint(value)
+[is.pixel.value<value>subtract[1]addsuffix[px]]
+:else[is.cm.value<value>convert.to.pixels.metric<value>,[cm]subtract[1]divide[37.8]addsuffix[cm]]
+:else[is.mm.value<value>convert.to.pixels.metric<value>,[mm]subtract[1]divide[37.8]multiply[10]addsuffix[mm]]
+:else[is.Q.value<value>convert.to.pixels.metric<value>,[Q]subtract[1]divide[37.8]multiply[40]addsuffix[Q]]
+:else[is.in.value<value>convert.to.pixels.metric<value>,[in]subtract[1]divide[96]addsuffix[in]]
+:else[is.pc.value<value>convert.to.pixels.metric<value>,[pc]subtract[1]divide[96]multiply[6]addsuffix[pc]]
+:else[is.pt.value<value>convert.to.pixels.metric<value>,[pt]subtract[1]divide[96]multiply[72]addsuffix[pt]]
+:else[is.em.value<value>convert.to.pixels.metric<value>,[em]subtract[1]divide{$:/themes/tiddlywiki/vanilla/metrics/fontsize}addsuffix[em]]
+\end
+
+\function sidebarbreakpoint() [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}]
+
+\function sidebarbreakpoint-minus-one() [subtract.one.from.sidebarbreakpoint<sidebarbreakpoint>] :else[<sidebarbreakpoint>]
+
+\function add.one.to.breakpoint(value)
+[is.pixel.value<value>add[1]addsuffix[px]]
+:else[is.cm.value<value>convert.to.pixels.metric<value>,[cm]add[1]divide[37.8]addsuffix[cm]]
+:else[is.mm.value<value>convert.to.pixels.metric<value>,[mm]add[1]divide[37.8]multiply[10]addsuffix[mm]]
+:else[is.Q.value<value>convert.to.pixels.metric<value>,[Q]add[1]divide[37.8]multiply[40]addsuffix[Q]]
+:else[is.in.value<value>convert.to.pixels.metric<value>,[in]add[1]divide[96]addsuffix[in]]
+:else[is.pc.value<value>convert.to.pixels.metric<value>,[pc]add[1]divide[96]multiply[6]addsuffix[pc]]
+:else[is.pt.value<value>convert.to.pixels.metric<value>,[pt]add[1]divide[96]multiply[72]addsuffix[pt]]
+:else[is.em.value<value>convert.to.pixels.metric<value>,[em]add[1]divide{$:/themes/tiddlywiki/vanilla/metrics/fontsize}addsuffix[em]]
+\end
+
+\function breakpoint-plus-one() [add.one.to.breakpoint{$:/config/plugins/menubar/breakpoint}] :else[{$:/config/plugins/menubar/breakpoint}]
+
+\function get.base.theme.metric.recursive(theme,metric) [<theme>get[dependents]enlist-input[]] :map[get.base.theme.metric<currentTiddler>,<metric>]
+
+\function get.base.theme.metric(theme,metric)
+[<theme>addsuffix[/metrics/]addsuffix<metric>is[tiddler]]
+:else[<theme>addsuffix[/metrics/]addsuffix<metric>is[shadow]]
+:else[get.base.theme.metric.recursive<theme>,<metric>]
+\end
+
+\function get.base.theme(theme,metric) [get.base.theme.metric<theme>,<metric>first[]removesuffix<metric>removesuffix[/metrics/]]
+
+\function get.theme.metric(metric) [get.base.theme.metric<get.current.theme>,<metric>first[]get[text]]
+
+\function get.base.theme.option.recursive(theme,option) [<theme>get[dependents]enlist-input[]] :map[get.base.theme.option<currentTiddler>,<option>]
+
+\function get.base.theme.option(theme,option)
+[<theme>addsuffix[/options/]addsuffix<option>is[tiddler]]
+:else[<theme>addsuffix[/options/]addsuffix<option>is[shadow]]
+:else[get.base.theme.option.recursive<theme>,<option>]
+\end
+
+\function get.theme.option(option) [get.base.theme.option<get.current.theme>,<option>first[]get[text]]
+
+\function get.theme.explicit.option(option) [<get.current.theme>addsuffix[/options/]addsuffix<option>get[text]]
+
+\function get.theme(metric)
+[get.base.theme<get.current.theme>,<metric>addsuffix[/metrics/]addsuffix<metric>is[tiddler]]
+:else[get.base.theme<get.current.theme>,<metric>addsuffix[/metrics/]addsuffix<metric>is[shadow]]
+:else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
+\end
+
+\function set.theme.metric(metric)
+[get.base.theme.metric<get.current.theme>,<metric>first[]is[shadow]]
+:else[get.base.theme.metric<get.current.theme>,<metric>first[]!is[shadow]is[tiddler]]
+:else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
+\end
+
+\function get.base.functions.theme.recursive(theme) [<theme>get[dependents]enlist-input[]] :map[get.base.functions.theme<currentTiddler>]
+
+\function get.base.functions.theme(theme)
+[<theme>addsufix[/functions]is[tiddler]]
+:else[<theme>addsuffix[/functions]is[shadow]]
+:else[get.base.functions.theme.recursive<theme>]
+\end
+
+\function get.current.theme() [{$:/theme}!is[blank]] :else[all[tiddlers+shadows]plugin-type[theme]plugin-priority[0]first[]]
+
+\function get.theme.storywidthoverlap() [[max((]addsuffix<get.theme.metric storyright>addsuffix[ - ]addsuffix<get.theme.metric storywidth>addsuffix[ - ]addsuffix<get.theme.metric storyleft>addsuffix[),(-1 * (]addsuffix<get.theme.metric storyright>addsuffix[ - ]addsuffix<get.theme.metric storywidth>addsuffix[ - ]addsuffix<get.theme.metric storyleft>addsuffix[)))]]
+
+\function get.theme.storyleftpadding.excess() [[calc(]addsuffix<get.theme.metric storypaddingleft>addsuffix[ - ]addsuffix<get.story-sidebar.overlap>addsuffix[)]]
+
+\function get.theme.storyrightpadding.excess() [[calc(]addsuffix<get.theme.metric storypaddingright>addsuffix[ - ]addsuffix<get.story-sidebar.overlap>addsuffix[)]]

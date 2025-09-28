@@ -1,0 +1,10 @@
+title: $:/themes/tiddlywiki/centralised/functions
+
+\function set.centralised() yes
+\function set.storywidth.storyright() no
+\function set.sidebarwidth() no
+
+\function get.story-sidebar.overlap() 42px
+
+\function sidebar.resizer.maxwidth() 21px
+\function sidebar.resizer.width() [<get.theme.option sidebarposition>!match[left]then[min(calc(]addsuffix<get.theme.metric storypaddingright>addsuffix[ / 2),]addsuffix<sidebar.resizer.maxwidth>addsuffix[)]] :else[[min(calc(]addsuffix<get.theme.metric storypaddingleft>addsuffix[ / 2),]addsuffix<sidebar.resizer.maxwidth>addsuffix[)]]

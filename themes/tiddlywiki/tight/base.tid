@@ -1,12 +1,12 @@
 title: $:/themes/tiddlywiki/tight/base
 tags: [[$:/tags/Stylesheet]]
 
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline conditional
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 }
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint>>) {
 
 	html body.tc-body {
 		font-size: 13px;
@@ -27,7 +27,7 @@ tags: [[$:/tags/Stylesheet]]
 	}
 
 	html body.tc-body section.tc-story-river {
-		padding: 0px;
+		padding: 0px <<get.theme.metric storypaddingright>> 0px <<get.theme.metric storypaddingleft>>;
 	}
 
 	html body.tc-body div.tc-tiddler-frame {
@@ -37,6 +37,27 @@ tags: [[$:/tags/Stylesheet]]
 	html body.tc-body div.tc-sidebar-scrollable {
 		padding: 12px 0 12px 12px;
 	}
+
+	html body.tc-body .tc-sidebar-left div.tc-sidebar-scrollable {
+		padding: 12px 12px 12px 12px;
+	}
+
+	html[dir="rtl"] body.tc-body .tc-sidebar-left div.tc-sidebar-scrollable {
+		padding: 12px 12px 12px 0;
+	}
+
+	<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
+
+		html body.tc-body div.tc-sidebar-scrollable {
+			left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + 42px),calc(<<get.theme.metric storyright>> + 42px),calc(100% - <<get.theme.metric sidebarminwidth>> + 42px));
+		}
+
+		html body.tc-body .tc-sidebar-left div.tc-sidebar-scrollable {
+			left: 0;
+			right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + 42px),calc(<<get.theme.metric storyright>> + 42px),calc(100% - <<get.theme.metric sidebarminwidth>> + 42px));
+		}
+
+	<% endif %>
 
 	html body.tc-body .tc-tiddler-frame .tc-subtitle {
 		font-size: 0.7em;

@@ -1,0 +1,10 @@
+title: $:/themes/tiddlywiki/vanilla/functions
+
+\function set.centralised() no
+\function set.storywidth.storyright() [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]then[yes]] :else[[no]]
+\function set.sidebarwidth() [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]then[yes]] :else[[no]]
+
+\function get.story-sidebar.overlap() 42px
+
+\function sidebar.resizer.maxwidth() 21px
+\function sidebar.resizer.width() [<get.theme.option sidebarposition>!match[left]then[min(calc(]addsuffix<get.theme.metric storypaddingright>addsuffix[ / 2),]addsuffix<sidebar.resizer.maxwidth>addsuffix[)]] :else[[min(calc(]addsuffix<get.theme.metric storypaddingleft>addsuffix[ / 2),]addsuffix<sidebar.resizer.maxwidth>addsuffix[)]]

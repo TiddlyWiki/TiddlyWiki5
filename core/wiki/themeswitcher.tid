@@ -4,7 +4,7 @@ title: $:/snippets/themeswitcher
 <$linkcatcher to="$:/theme">
 <div class="tc-chooser">
 <$list filter="[plugin-type[theme]sort[title]]">
-<$set name="cls" filter="[all[current]field:title{$:/theme}] [[$:/theme]!has[text]addsuffix[s/tiddlywiki/vanilla]field:title<currentTiddler>] +[limit[1]]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
+<$set name="cls" filter="[all[current]field:title{$:/theme}] [<get.current.theme>field:title<currentTiddler>] +[limit[1]]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
 <div class=<<cls>>><$link to={{!!title}}>
 ''<$view field="name" format="text"/>''
 &#32;

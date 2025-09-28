@@ -1,0 +1,257 @@
+title: $:/themes/tiddlywiki/vanilla/sidebar-resizer
+tags: [[$:/tags/Stylesheet]]
+code-body: yes
+
+\import [function[get.base.functions.theme],<get.current.theme>first[]is[tiddler]] :else[function[get.base.functions.theme],<get.current.theme>first[]is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/functions]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional html
+
+.tc-slider {
+	position: fixed;
+	top: 0;
+	height: 100%;
+	width: <<sidebar.resizer.width>>;
+	opacity: <<get.theme.metric slideropacity>>;
+	cursor: ew-resize;
+	background: linear-gradient(<<colour muted-foreground>>, <<colour muted-foreground>>) no-repeat center/2px 100%;
+}
+
+.tc-slider:hover {
+	opacity: <<get.theme.metric slideropacityhover>>;
+}
+
+.tc-slider-pointerdown-eventcatcher, .tc-slider-pointermove-eventcatcher-wrapper {
+	height: 100%;
+}
+
+.tc-edit-texteditor-slider > .tc-slider-pointerdown-eventcatcher.tc-editor-preview-eventcatcher {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+
+.tc-slider-pointermove-eventcatcher, .tc-slider-pointermove {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	z-index: -1;
+}
+
+.tc-slider-pointerdown-eventcatcher:not(.tc-main-slider), .tc-slider-pointermove-eventcatcher:not(.tc-main-slider), .tc-slider-pointermove-eventcatcher-wrapper:not(.tc-main-slider) {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	align-items: stretch;
+}
+
+.tc-slider-pointermove-eventcatcher-wrapper:not(.tc-main-slider) {
+	position: absolute;
+	width: 100%;
+	flex-direction: row;
+}
+
+.tc-slider-pointerdown-eventcatcher:not(.tc-main-slider) {
+	position: relative;
+}
+
+.tc-slider, .tc-slider-pointermove-eventcatcher, .tc-slider-pointermove {
+	touch-action: none;
+	user-select: none;
+}
+
+.tc-slider-pointermove-eventcatcher-wrapper.tc-main-slider.tc-resizer-active {
+	z-index: 801;
+}
+
+.tc-slider-pointermove-eventcatcher.tc-main-slider.tc-resizer-active {
+	z-index: 802;
+}
+
+.tc-slider-pointermove.tc-main-slider.tc-resizer-active {
+	z-index: 803;
+}
+
+.tc-slider-pointermove.tc-resizer-active {
+	cursor: ew-resize;
+}
+
+.tc-slider-pointermove-eventcatcher-wrapper.tc-resizer-active:not(.tc-main-slider) {
+	z-index: 2;
+}
+
+.tc-slider-pointermove-eventcatcher.tc-resizer-active:not(.tc-main-slider) {
+	z-index: 3;
+}
+
+.tc-slider-pointermove.tc-resizer-active:not(.tc-main-slider) {
+	z-index: 4;
+}
+
+.tc-slider.tc-resizer-active {
+	opacity: <<get.theme.metric slideropacityhover>>;
+}
+
+<%if [<get.theme.explicit.option sidebarresizer>match[show]] %>
+
+	@media (min-width: <<sidebarbreakpoint>>) {
+
+		@media (pointer: coarse) {
+
+			.tc-slider.tc-main-slider {
+				background: <<colour muted-foreground>>;
+			}
+
+			.tc-slider.tc-main-slider:hover {
+				opacity: <<get.theme.metric slideropacity>>;
+			}
+		}
+
+		<%if [[$:/state/sidebar/resizing]is[tiddler]] %>
+
+			@media (pointer: coarse) {
+
+				.tc-slider.tc-main-slider {
+					opacity: min(calc(3 * <<get.theme.metric slideropacity>>),1);
+				}
+			}
+
+		<% endif %>
+
+		<%if [<set.storywidth.storyright>match[yes]] %>
+
+			.tc-slider.tc-main-slider {
+				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>> + <<get.theme.storywidthoverlap>> - (2 * <<get.story-sidebar.overlap>> / 3)));
+			}
+
+			.tc-sidebar-left .tc-slider.tc-main-slider {
+				left: auto;
+				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.story-sidebar.overlap>> + <<get.theme.storywidthoverlap>> - (2 * <<get.story-sidebar.overlap>> / 3)));
+			}
+
+		<% endif %>
+
+		<%if [<set.sidebarwidth>match[yes]] %>
+
+			.tc-slider.tc-main-slider {
+				left: min(clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - <<get.story-sidebar.overlap>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3))),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3)));
+			}
+
+			.tc-sidebar-left .tc-slider.tc-main-slider {
+				left: auto;
+				right: min(clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + <<get.theme.storyleftpadding.excess>> + <<get.theme.storyrightpadding.excess>> - <<get.story-sidebar.overlap>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3))),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.story-sidebar.overlap>> / 3)));
+			}
+
+		<% endif %>
+
+		<%if [<set.centralised>match[yes]] %>
+
+			.tc-slider.tc-main-slider {
+				left: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.story-sidebar.overlap>> / 3)));
+			}
+
+			.tc-sidebar-left .tc-slider.tc-main-slider {
+				left: auto;
+				z-index: 1;
+				right: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.story-sidebar.overlap>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.story-sidebar.overlap>> / 3)));
+			}
+
+		<% endif %>
+
+		<%if [{$:/state/sidebar}match[no]] %>
+
+			.tc-slider-pointerdown-eventcatcher.tc-main-slider, .tc-slider-pointermove-eventcatcher-wrapper.tc-main-slider, .tc-slider-pointermove-eventcatcher.tc-main-slider, .tc-slider-pointermove.tc-main-slider, .tc-slider.tc-main-slider {
+				display: none;
+			}
+
+		<% endif %>
+
+	}
+
+	@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+		.tc-slider-pointerdown-eventcatcher.tc-main-slider, .tc-slider-pointermove-eventcatcher-wrapper.tc-main-slider, .tc-slider-pointermove-eventcatcher.tc-main-slider, .tc-slider-pointermove.tc-main-slider, .tc-slider.tc-main-slider {
+			display: none;
+		}
+	}
+
+<% endif %>
+
+.tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
+.tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
+.tc-tiddler-frame div[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
+.tc-tiddler-frame canvas[class*="tc-edit-bitmapeditor-identified-"].tc-edit-bitmapeditor {
+	width: calc(100% - <<get.theme.metric previewsliderwidth>>);
+	min-width: 0px;
+}
+
+.tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview,
+.tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview,
+.tc-tiddler-frame div[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview,
+.tc-tiddler-frame canvas[class*="tc-edit-bitmapeditor-identified-"].tc-edit-bitmapeditor + .tc-tiddler-preview-preview {
+	min-width: 0px;
+}
+
+div[class*="tc-editor-preview-slider-"] {
+	position: absolute;
+	left: calc(50% - <<get.theme.metric previewsliderwidth>>);
+	width: <<get.theme.metric previewsliderwidth>>;
+}
+
+@media (pointer: coarse) {
+
+	div[class*="tc-editor-preview-slider-"] {
+		background-color: <<colour muted-foreground>>;
+	}
+
+	div[class*="tc-editor-preview-slider-"]:hover {
+		opacity: <<get.theme.metric slideropacityhover>>;
+	}
+
+}
+
+<$list filter="[all[tiddlers]prefix[$:/state/resizer/previewwidth-]]" variable="previewWidthTiddler">
+
+	<$let
+		identifier={{{ [<previewWidthTiddler>removeprefix[$:/state/resizer/previewwidth-]] }}}
+		width={{{ [<previewWidthTiddler>get[text]] }}}>
+
+		.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview.tc-tiddler-preview-identified-<<identifier>> {
+			grid-template-columns: calc(100% - <<width>>) <<width>>;
+		}
+
+		div.tc-slider.tc-editor-preview-slider-<<identifier>> {
+			left: calc(100% - <<width>> - <<get.theme.metric previewsliderwidth>>);
+		}
+
+		<%if [[$:/state/resizing/editor-preview-]addsuffix<identifier>is[tiddler]] %>
+
+			div.tc-slider.tc-editor-preview-slider-<<identifier>> {
+				opacity: min(<<get.theme.metric slideropacityhover>>,1);
+			}
+
+		<% endif %>
+
+		<%if [<width>compare:number:lteq[1]] %>
+
+			.tc-tiddler-preview-preview-identified-<<identifier>> {
+				display: none;
+			}
+
+		<% endif %>
+
+		<%if [<width>compare:number:gteq[99]] %>
+
+			.tc-edit-texteditor-identified-<<identifier>> {
+				display: none;
+			}
+
+		<% endif %>
+
+	</$let>
+
+</$list>

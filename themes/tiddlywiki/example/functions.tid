@@ -1,0 +1,10 @@
+title: $:/themes/tiddlywiki/example/functions
+
+\function set.centralised() yes
+\function set.storywidth.storyright() no
+\function set.sidebarwidth() no
+
+\function get.story-sidebar.overlap() 0px
+
+\function sidebar.resizer.maxwidth() 12px
+\function sidebar.resizer.width() [<sidebar.resizer.maxwidth>]
