@@ -11,4 +11,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p><div>Mouse</div><div class="tc-thing" label="Squeak">Mouse</div></p>
+<div>Mouse</div><div class="tc-thing" label="Squeak">Mouse</div>

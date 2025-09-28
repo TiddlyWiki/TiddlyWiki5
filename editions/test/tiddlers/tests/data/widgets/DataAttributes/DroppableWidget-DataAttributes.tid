@@ -24,4 +24,4 @@ Title1
 +
 title: ExpectedResult
 
-<p><div class="myclass tc-droppable" data-title="mytiddler" style="color:red;">my tiddler</div><div class="myclass tc-droppable" data-title="Title2" style="color:red;">hello</div></p>
+<div class="myclass tc-droppable" data-title="mytiddler" style="color:red;">my tiddler</div><div class="myclass tc-droppable" data-title="Title2" style="color:red;">hello</div>

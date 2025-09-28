@@ -1,0 +1,13 @@
+created: 20240217002246152
+modified: 20240217002337316
+tags: 
+title: Conditionals/Else
+type: text/vnd.tiddlywiki
+
+<$let something="one">
+{{Textx}}
+</$let>
+
+<$let something="two">
+{{Textx}}
+</$let>

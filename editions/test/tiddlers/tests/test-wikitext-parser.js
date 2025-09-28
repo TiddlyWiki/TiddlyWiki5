@@ -28,7 +28,7 @@ describe("WikiText parser tests", function() {
 		);
 		expect(parse("</br>")).toEqual(
 
-			[ { type : 'element', tag : 'p', start : 0, end : 5, children : [ { type : 'text', text : '</br>', start : 0, end : 5 } ] } ]
+			[{"type": "element","tag": "p","children": [{"type": "text","text": "</br>","start": 0,	"end": 5}],	"start": 0,	"end": 5}]
 
 		);
 		expect(parse("<div>")).toEqual(
