@@ -37,7 +37,7 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 	var link = document.createElement("a");
 	// We prefer Blobs if they're available, unless we're dealing with a tiddler type declaring itself full of base64 encoded content.
 	// Then we use data urls, because browsers will know to decode the stream and download the actual binary file as intended.
-	if(Blob !== undefined && type.indexOf(";base64") < 0) {
+	if(Blob !== undefined && !type.includes(";base64")) {
 		var blob = new Blob([text], {type: type});
 		link.setAttribute("href", URL.createObjectURL(blob));
 	} else {
