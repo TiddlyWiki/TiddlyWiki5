@@ -55,3 +55,5 @@ exports.toggleClass = function(el,className,status) {
 		el.classList && el.classList.toggle(className, status);
 	}
 };
+
+exports.getLocationPath = () => window.location.origin + window.location.pathname;

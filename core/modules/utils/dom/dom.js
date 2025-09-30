@@ -252,10 +252,6 @@ exports.copyToClipboard = function(text,options) {
 	document.body.removeChild(textArea);
 };
 
-exports.getLocationPath = function() {
-	return window.location.toString().split("#")[0];
-};
-
 /*
 Collect DOM variables
 */
