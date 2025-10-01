@@ -369,14 +369,14 @@ Sort an array of tiddler titles by a specified field
 	isDescending: true if the sort should be descending
 	isCaseSensitive: true if the sort should consider upper and lower case letters to be different
 */
-exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric,isAlphaNumeric) {
+exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric,isAlphaNumeric,locale) {
 	var self = this;
 	if(sortField === "title") {
 		if(!isNumeric && !isAlphaNumeric) {
 			if(isCaseSensitive) {
 				if(isDescending) {
 					titles.sort(function(a,b) {
-						return b.localeCompare(a);
+						return b.localeCompare(a, locale);
 					});
 				} else {
 					titles.sort(function(a,b) {
@@ -386,11 +386,11 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			} else {
 				if(isDescending) {
 					titles.sort(function(a,b) {
-						return b.toLowerCase().localeCompare(a.toLowerCase());
+						return b.toLowerCase().localeCompare(a.toLowerCase(), locale);
 					});
 				} else {
 					titles.sort(function(a,b) {
-						return a.toLowerCase().localeCompare(b.toLowerCase());
+						return a.toLowerCase().localeCompare(b.toLowerCase(), locale);
 					});
 				}	
 			}
@@ -415,13 +415,13 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 					}
 				}
 				if(isAlphaNumeric) {
-					return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+					return isDescending ? b.localeCompare(a,locale,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,locale,{numeric: true,sensitivity: "base"});
 				}
 				if(!isCaseSensitive) {
 					a = a.toLowerCase();
 					b = b.toLowerCase();
 				}
-				return isDescending ? b.localeCompare(a) : a.localeCompare(b);
+				return isDescending ? b.localeCompare(a, locale) : a.localeCompare(b, locale);
 			});
 		}
 	} else {
@@ -464,13 +464,13 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			a = String(a);
 			b = String(b);
 			if(isAlphaNumeric) {
-				return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+				return isDescending ? b.localeCompare(a,locale,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,locale,{numeric: true,sensitivity: "base"});
 			}
 			if(!isCaseSensitive) {
 				a = a.toLowerCase();
 				b = b.toLowerCase();
 			}
-			return isDescending ? b.localeCompare(a) : a.localeCompare(b);
+			return isDescending ? b.localeCompare(a, locale) : a.localeCompare(b, locale);
 		});
 	}
 };
