@@ -1,9 +1,10 @@
 /*\
 title: $:/plugins/wikilabs/debug/styles.css
 type: text/css
-tags: $:/tags/Stylesheet
+tags: 
 
 Stylesheet for the debug popup
+This stylesheet is __not tagged__ because it will be injected into custom element
 \*/
 
 :host {
