@@ -100,11 +100,13 @@ type: text/vnd.tiddlywiki
 .yellow-note-sidebar .yellow-note {
 	padding: 0.5em;
 	margin: 1em 0;
-	transform: rotate(-0.9deg) scale(0.95);
+	transform: perspective(600px) rotateX(10deg) rotateY(5deg) scale(0.9);
+	transform-style: preserve-3d;
 }
 
 .yellow-note-sidebar:hover .yellow-note {
-	transform: rotate(0deg) scale(1);
+	transform: perspective(900px) rotateX(5deg) rotateY(10deg) scale(0.95);
+	transform-style: preserve-3d;
 }
 
 .yellow-note-sidebar:hover a {
