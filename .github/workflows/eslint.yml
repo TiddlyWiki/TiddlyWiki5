@@ -3,9 +3,6 @@ name: ESLint
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-  push:
-    branches:
-      - master
   workflow_dispatch:
 
 concurrency:
