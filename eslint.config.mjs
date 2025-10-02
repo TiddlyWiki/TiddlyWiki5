@@ -1,17 +1,39 @@
-const globals = require("globals");
-const js = require("@eslint/js");
+//@ts-check
+// const globals = require("globals");
+// /** @type {import("@eslint/js")} */
+// const js = require("@eslint/js");
+// /** @type {import("eslint")} */
+// const eslint = require("eslint");
+// const { FlatCompat, } = require("@eslint/eslintrc");
+// const { fixupConfigRules } = require("@eslint/compat");
+import { defineConfig } from "eslint/config";
+import globals from "globals";
+import js from "@eslint/js";
+import eslint from "eslint";
+import { FlatCompat } from "@eslint/eslintrc";
+import { fixupConfigRules } from "@eslint/compat";
+import esx from "eslint-plugin-es-x"
 
-const {
-    FlatCompat,
-} = require("@eslint/eslintrc");
+/** @type {import("eslint").Linter.Config} */
+const es2017rules = {
+    //@ts-ignore
+    plugins: esx.configs["flat/restrict-to-es2017"].plugins,
+    //@ts-ignore
+    rules: esx.configs["flat/restrict-to-es2017"].rules,
+    ignores: ["bin/**/*", "core-server/**/*"],
+};
+/** @type {import("eslint").Linter.Config} */
+const es2023rules = {
+    //@ts-ignore
+    plugins: esx.configs["flat/restrict-to-es2023"].plugins,
+    //@ts-ignore
+    rules: esx.configs["flat/restrict-to-es2023"].rules,
+    files: ["bin/**/*", "core-server/**/*"],
+};
 
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
-});
 
-module.exports = [{
+
+export default defineConfig([{
     ignores: [
         // Ignore "third party" code whose style we will not change.
         "boot/sjcl.js",
@@ -21,17 +43,15 @@ module.exports = [{
         "core/modules/utils/diff-match-patch/diff_match_patch_uncompressed.js",
         "core/modules/utils/dom/csscolorparser.js",
         "plugins/tiddlywiki/*/files/",
+        "eslint.config.mjs",
+        "playwright.config.js",
     ],
-}, ...compat.extends("eslint:recommended"), {
-    languageOptions: {
-        globals: {
-            ...globals.browser,
-            ...globals.commonjs,
-            ...globals.node,
-            $tw: "writable", // temporary
-        },
 
-        ecmaVersion: 5,
+},
+js.configs.recommended,
+{
+    languageOptions: {
+        ecmaVersion: "latest",
         sourceType: "commonjs",
     },
 
@@ -42,12 +62,10 @@ module.exports = [{
         "array-element-newline": "off",
         "arrow-body-style": "error",
         "arrow-parens": ["error", "as-needed"],
-
         "arrow-spacing": ["error", {
             after: true,
             before: true,
         }],
-
         "block-scoped-var": "off",
         "block-spacing": "off",
         "brace-style": "off",
@@ -91,38 +109,18 @@ module.exports = [{
         "init-declarations": "off",
         "jsx-quotes": "error",
         "key-spacing": "off",
-
         "keyword-spacing": ["error", {
             before: true,
             after: false,
-
             overrides: {
-                case: {
-                    after: true,
-                },
-
-                do: {
-                    after: true,
-                },
-
-                else: {
-                    after: true,
-                },
-
-                return: {
-                    after: true,
-                },
-
-                throw: {
-                    after: true,
-                },
-
-                try: {
-                    after: true,
-                },
+                case: { after: true },
+                do: { after: true },
+                else: { after: true },
+                return: { after: true },
+                throw: { after: true },
+                try: { after: true },
             },
         }],
-
         "line-comment-position": "off",
         "linebreak-style": "off",
         "lines-around-comment": "off",
@@ -152,11 +150,7 @@ module.exports = [{
         "no-catch-shadow": "off",
         "no-confusing-arrow": "error",
         "no-console": "off",
-
-        "no-constant-condition": ["error", {
-            checkLoops: false,
-        }],
-
+        "no-constant-condition": ["error", { checkLoops: false }],
         "no-constructor-return": "error",
         "no-continue": "off",
         "no-div-regex": "off",
@@ -170,13 +164,11 @@ module.exports = [{
         "no-extra-label": "off",
         "no-extra-parens": "off",
         "no-floating-decimal": "off",
-
         "no-implicit-coercion": ["error", {
             boolean: false,
             number: false,
             string: false,
         }],
-
         "no-implicit-globals": "off",
         "no-implied-eval": "error",
         "no-inline-comments": "off",
@@ -213,13 +205,13 @@ module.exports = [{
         "no-promise-executor-return": "error",
         "no-proto": "off",
         "no-restricted-exports": "error",
-        "no-restricted-globals": "error",
+        "no-restricted-globals": ["error", "self"],
         "no-restricted-imports": "error",
         "no-restricted-modules": "error",
         "no-restricted-properties": "error",
         "no-restricted-syntax": "error",
         "no-return-assign": "off",
-        "no-return-await": "error",
+        "no-return-await": "off",
         "no-script-url": "off",
         "no-self-compare": "off",
         "no-sequences": "off",
@@ -275,11 +267,7 @@ module.exports = [{
         "prefer-spread": "off",
         "prefer-template": "off",
         "quote-props": "off",
-
-        quotes: ["error", "double", {
-            avoidEscape: true,
-        }],
-
+        quotes: ["error", "double", { avoidEscape: true }],
         radix: "off",
         "require-atomic-updates": "error",
         "require-await": "error",
@@ -305,17 +293,12 @@ module.exports = [{
         "template-tag-spacing": "error",
         "unicode-bom": ["error", "never"],
         "valid-jsdoc": "off",
-
-        "valid-typeof": ["error", {
-            requireStringLiterals: false,
-        }],
-
+        "valid-typeof": ["error", { requireStringLiterals: false }],
         "vars-on-top": "off",
         "wrap-iife": "off",
         "wrap-regex": "off",
         "yield-star-spacing": "error",
         yoda: "off",
-
         // temporary rules
         "no-useless-escape": "off",
         "no-unused-vars": "off",
@@ -330,4 +313,8 @@ module.exports = [{
         "no-unreachable": "off",
         "no-self-assign": "off",
     },
-}];
+
+},
+    es2017rules,
+    es2023rules
+]);
