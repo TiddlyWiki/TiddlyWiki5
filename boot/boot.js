@@ -129,7 +129,7 @@ $tw.utils.pushTop = function(array,value) {
 /*
 Deprecated: Use instanceof Date instead
 */
-$tw.utils.isDate = (value) => value instanceof Date;
+$tw.utils.isDate = value => value instanceof Date;
 
 // Deprecated: Use Array.each & Object.entries instead
 $tw.utils.each = function(object,callback) {
