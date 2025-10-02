@@ -163,6 +163,18 @@ exports.toTitleCase = function(str) {
 }
 
 /*
+Check whether a language code is supported by Intl
+*/
+exports.checkLanguageCode = lang => {
+	try {
+		"a".localeCompare("a", lang);
+		return true;
+	} catch(e) {
+		return false;
+	}
+}
+
+/*
 Find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string
 */
