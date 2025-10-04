@@ -11,4 +11,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>(Shark|Donkey)(Shark|Donkey)</p>
+<p dir="auto">(Shark|Donkey)(Shark|Donkey)</p>
