@@ -2539,11 +2539,14 @@ html body.tc-body.tc-single-tiddler-window {
 	display: flex;
 	text-shadow: none;
 	border: 1px solid <<colour muted-foreground>>;
-	fill: <<colour muted-foreground>>;
 	background-color: <<colour background>>;
 	margin: 0.5em 0 0.5em 0;
 	padding: 4px;
 	align-items: center;
+}
+
+.tc-plugin-info svg {
+	color: <<colour muted-foreground>>;
 }
 
 .tc-sidebar-lists a.tc-tiddlylink.tc-plugin-info {
@@ -2587,7 +2590,10 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 	text-decoration: none;
 	background-color: <<colour primary>>;
 	color: <<colour background>>;
-	fill: <<colour foreground>>;
+}
+
+a.tc-tiddlylink.tc-plugin-info:hover svg {
+	color: <<colour foreground>>;
 }
 
 a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
@@ -3336,13 +3342,16 @@ span.tc-translink > a:first-child {
 }
 
 .tc-test-case-result-icon {
-	fill: #fff;
 	padding: 0.25em;
 	display: inline-block;
 	line-height: 0;
 	border-radius: 1em;
 	vertical-align: text-bottom;
 	margin-right: 0.25em;
+}
+
+.tc-test-case-result-icon svg {
+	color: #fff;
 }
 
 .tc-test-case-result-icon-pass {
