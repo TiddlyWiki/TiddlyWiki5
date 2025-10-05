@@ -570,7 +570,7 @@ a.tc-tiddlylink-external:hover {
 
 .tc-sidebar-tab-open .tc-btn-invisible.tc-btn-mini svg {
 	font-size: 0.7em;
-	fill: <<colour muted-foreground>>;
+	color: <<colour muted-foreground>>;
 }
 
 /*
@@ -641,7 +641,7 @@ html body.tc-body .tc-btn-boxed svg {
 
 html body.tc-body .tc-btn-rounded svg {
 	font-size: 1.6666em;
-	fill: <<colour background>>;
+	color: <<colour background>>;
 }
 
 .tc-btn-rounded:hover {
@@ -653,7 +653,7 @@ html body.tc-body .tc-btn-rounded svg {
 .tc-btn-icon svg {
 	height: 1em;
 	width: 1em;
-	fill: <<colour muted-foreground>>;
+	color: <<colour muted-foreground>>;
 }
 
 
@@ -741,11 +741,11 @@ button svg.tc-image-button, button .tc-image-button img {
 
 .tc-unfold-banner svg, .tc-fold-banner svg {
 	height: 0.75em;
-	fill: <<colour tiddler-controls-foreground>>;
+	color: <<colour tiddler-controls-foreground>>;
 }
 
 .tc-unfold-banner:hover svg, .tc-fold-banner:hover svg {
-	fill: <<colour tiddler-controls-foreground-hover>>;
+	color: <<colour tiddler-controls-foreground-hover>>;
 }
 
 .tc-fold-banner {
@@ -900,11 +900,11 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-topbar svg {
-	fill: <<colour muted-foreground>>;
+	color: <<colour muted-foreground>>;
 }
 
 .tc-topbar button:hover svg {
-	fill: <<colour foreground>>;
+	color: <<colour foreground>>;
 }
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
@@ -966,11 +966,11 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-page-controls svg {
-	fill: <<colour sidebar-controls-foreground>>;
+	color: <<colour sidebar-controls-foreground>>;
 }
 
 .tc-page-controls button:hover svg, .tc-page-controls a:hover svg {
-	fill: <<colour sidebar-controls-foreground-hover>>;
+	color: <<colour sidebar-controls-foreground-hover>>;
 }
 
 .tc-sidebar-lists .tc-menu-list-item {
@@ -1256,7 +1256,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img,
 .tc-search button svg, .tc-search a svg {
-	fill: <<colour tiddler-controls-foreground>>;
+	color: <<colour tiddler-controls-foreground>>;
 }
 
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img {
@@ -1271,12 +1271,12 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-controls button.tc-selected svg,
 .tc-page-controls button.tc-selected svg  {
-	fill: <<colour tiddler-controls-foreground-selected>>;
+	color: <<colour tiddler-controls-foreground-selected>>;
 }
 
 .tc-tiddler-controls button.tc-btn-invisible:hover svg,
 .tc-search button:hover svg, .tc-search a:hover svg {
-	fill: <<colour tiddler-controls-foreground-hover>>;
+	color: <<colour tiddler-controls-foreground-hover>>;
 }
 
 @media print {
@@ -1514,43 +1514,43 @@ html body.tc-body.tc-single-tiddler-window {
 */
 
 .tc-page-controls svg.tc-image-new-button {
-	fill: <<colour toolbar-new-button>>;
+	color: <<colour toolbar-new-button>>;
 }
 
 .tc-page-controls svg.tc-image-options-button {
-	fill: <<colour toolbar-options-button>>;
+	color: <<colour toolbar-options-button>>;
 }
 
 .tc-page-controls svg.tc-image-save-button {
-	fill: <<colour toolbar-save-button>>;
+	color: <<colour toolbar-save-button>>;
 }
 
 .tc-tiddler-controls button svg.tc-image-info-button {
-	fill: <<colour toolbar-info-button>>;
+	color: <<colour toolbar-info-button>>;
 }
 
 .tc-tiddler-controls button svg.tc-image-edit-button {
-	fill: <<colour toolbar-edit-button>>;
+	color: <<colour toolbar-edit-button>>;
 }
 
 .tc-tiddler-controls button svg.tc-image-close-button {
-	fill: <<colour toolbar-close-button>>;
+	color: <<colour toolbar-close-button>>;
 }
 
 .tc-tiddler-controls button svg.tc-image-delete-button {
-	fill: <<colour toolbar-delete-button>>;
+	color: <<colour toolbar-delete-button>>;
 }
 
 .tc-tiddler-controls button svg.tc-image-cancel-button {
-	fill: <<colour toolbar-cancel-button>>;
+	color: <<colour toolbar-cancel-button>>;
 }
 
 .tc-tiddler-controls button svg.tc-image-done-button {
-	fill: <<colour toolbar-done-button>>;
+	color: <<colour toolbar-done-button>>;
 }
 
 .tc-page-controls svg.tc-image-layout-button {
-	fill: <<colour toolbar-options-button>>;
+	color: <<colour toolbar-options-button>>;
 }
 
 /*
@@ -1690,7 +1690,7 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-edit-field-remove svg {
 	height: 1em;
 	width: 1em;
-	fill: <<colour muted-foreground>>;
+	color: <<colour muted-foreground>>;
 	vertical-align: middle;
 }
 
@@ -1804,7 +1804,7 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-btn-dropdown svg, .tc-btn-dropdown img {
 	height: 1em;
 	width: 1em;
-	fill: <<colour muted-foreground>>;
+	color: <<colour muted-foreground>>;
 }
 
 .tc-drop-down-wrapper {
@@ -1827,15 +1827,15 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-drop-down button svg, .tc-drop-down a svg  {
-	fill: <<colour foreground>>;
+	color: <<colour foreground>>;
 }
 
 .tc-drop-down button:disabled svg {
-	fill: <<colour muted-foreground>>;
+	color: <<colour muted-foreground>>;
 }
 
 .tc-drop-down button.tc-btn-invisible:hover svg {
-	fill: <<colour background>>;
+	color: <<colour background>>;
 }
 
 .tc-drop-down .tc-drop-down-info {
@@ -2448,7 +2448,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-alert-toolbar svg {
-	fill: <<colour alert-muted-foreground>>;
+	color: <<colour alert-muted-foreground>>;
 }
 
 .tc-alert-subtitle {
@@ -2591,7 +2591,7 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 }
 
 a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
-	fill: <<colour background>>;
+	color: <<colour background>>;
 }
 
 a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
@@ -3112,7 +3112,7 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 
 .tc-thumbnail-wrapper:hover .tc-thumbnail-icon svg,
 .tc-thumbnail-wrapper:hover .tc-thumbnail-icon img {
-	fill: #fff;
+	color: #fff;
 	<<filter "drop-shadow(3px 3px 4px rgba(0,0,0,0.6))">>
 }
 
