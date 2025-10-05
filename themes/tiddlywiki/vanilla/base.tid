@@ -93,7 +93,6 @@ button:-moz-focusring, input:-moz-focusring, textarea:-moz-focusring, select:-mo
 html button {
 	line-height: 1.2;
 	color: <<colour button-foreground>>;
-	fill: <<colour button-foreground>>;
 	background: <<colour button-background>>;
 	border-color: <<colour button-border>>;
 	cursor: pointer;
@@ -102,10 +101,6 @@ html button {
 button:disabled {
 	cursor: default;
 	color: <<colour muted-foreground>>;
-}
-
-button:disabled svg {
-	fill: <<colour muted-foreground>>;
 }
 
 /*
@@ -130,7 +125,7 @@ body.tc-body {
 	<<custom-background-datauri>>
 	color: <<colour foreground>>;
 	background-color: <<colour page-background>>;
-	fill: <<colour foreground>>;
+	fill: currentColor;
 }
 
 <<if-background-attachment """
@@ -608,7 +603,6 @@ button svg, button img, label svg, label img {
 	border: none;
 	cursor: pointer;
 	color: <<colour foreground>>;
-	fill: <<colour foreground>>;
 }
 
 button:disabled.tc-btn-invisible  {
@@ -634,10 +628,6 @@ html body.tc-body .tc-btn-boxed svg {
 	color: <<colour background>>;
 }
 
-html body.tc-body .tc-btn-boxed:hover svg {
-	fill: <<colour background>>;
-}
-
 .tc-btn-rounded {
 	font-size: 0.5em;
 	line-height: 2;
@@ -658,10 +648,6 @@ html body.tc-body .tc-btn-rounded svg {
 	border: 1px solid <<colour muted-foreground>>;
 	background: <<colour background>>;
 	color: <<colour muted-foreground>>;
-}
-
-html body.tc-body .tc-btn-rounded:hover svg {
-	fill: <<colour muted-foreground>>;
 }
 
 .tc-btn-icon svg {
@@ -691,7 +677,6 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	margin: 4px 8px 4px 8px;
 	background: <<colour download-background>>;
 	color: <<colour download-foreground>>;
-	fill: <<colour download-foreground>>;
 	border: none;
 	border-radius: 2px;
 	font-size: 1.2em;
@@ -704,7 +689,6 @@ html body.tc-body .tc-btn-rounded:hover svg {
 	height: 2em;
 	width: 2em;
 	vertical-align: middle;
-	fill: <<colour download-foreground>>;
 }
 
 .tc-primary-btn {
@@ -717,7 +701,6 @@ html body.tc-body .tc-btn-rounded:hover svg {
 
 .tc-sidebar-lists button {
 	color: <<colour sidebar-button-foreground>>;
-	fill: <<colour sidebar-button-foreground>>;
 }
 
 .tc-sidebar-lists button.tc-btn-mini {
@@ -934,7 +917,6 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-sidebar-header {
 	color: <<colour sidebar-foreground>>;
-	fill: <<colour sidebar-foreground>>;
 }
 
 .tc-sidebar-header .tc-title a.tc-tiddlylink-resolves {
@@ -1422,7 +1404,6 @@ html body.tc-body.tc-single-tiddler-window {
 	vertical-align: middle;
 	background-color: <<colour tiddler-controls-foreground>>;
 	color: <<colour tiddler-controls-foreground-selected>>;
-	fill: <<colour tiddler-controls-foreground-selected>>;
 	border-radius: 4px;
 	padding: 3px;
 	margin: 2px 0 2px 4px;
@@ -1453,7 +1434,6 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-editor-toolbar button:hover {
 	background-color: <<colour tiddler-controls-foreground-selected>>;
-	fill: <<colour background>>;
 	color: <<colour background>>;
 }
 
@@ -2342,7 +2322,6 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-manager-list-item-heading-selected {
 	font-weight: bold;
 	color: <<colour background>>;
-	fill: <<colour background>>;
 	background-color: <<colour foreground>>;
 }
 
@@ -2526,14 +2505,12 @@ html body.tc-body.tc-single-tiddler-window {
 	border-bottom: none;
 	background: <<colour dirty-indicator>>;
 	color: <<colour background>>;
-	fill: <<colour background>>;
 }
 
 .tc-drafts-list a:hover {
 	text-decoration: none;
 	background: <<colour foreground>>;
 	color: <<colour background>>;
-	fill: <<colour background>>;
 }
 
 .tc-drafts-list a svg {
@@ -2738,7 +2715,6 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	font-weight: bold;
 	background: green;
 	color: white;
-	fill: white;
 	border-radius: 4px;
 	padding: 3px;
 }
@@ -2927,7 +2903,7 @@ input.tc-palette-manager-colour-input {
 	width: 0.7em;
 	height: 0.7em;
 	vertical-align: middle;
-	fill: <<colour sidebar-foreground>>;
+	color: <<colour sidebar-foreground>>;
 }
 
 .tc-table-of-contents ol {
@@ -3050,7 +3026,6 @@ html body.tc-dirty svg.tc-image-save-button-dynamic .tc-image-save-button-dynami
 }
 
 html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-indicator svg {
-	fill: <<colour dirty-indicator>>;
 	color: <<colour dirty-indicator>>;
 }
 
@@ -3244,7 +3219,7 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 }
 
 .tc-tree svg {
-	fill: #acacac;
+	color: #acacac;
 }
 
 .tc-tree span svg {
@@ -3403,7 +3378,7 @@ span.tc-translink > a:first-child {
 }
 
 .tc-test-case-toolbar svg {
-	fill: <<colour tiddler-controls-foreground>>;
+	color: <<colour tiddler-controls-foreground>>;
 }
 
 .tc-test-case-toolbar .tc-drop-down {
