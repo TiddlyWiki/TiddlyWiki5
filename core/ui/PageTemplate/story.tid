@@ -2,7 +2,7 @@ title: $:/core/ui/PageTemplate/story
 tags: $:/tags/PageTemplate
 
 \whitespace trim
-<section class="tc-story-river" role="main">
+<main class="tc-story-river">
 
 <section class="story-backdrop">
 
@@ -26,4 +26,4 @@ tags: $:/tags/PageTemplate
 
 </section>
 
-</section>
+</main>
