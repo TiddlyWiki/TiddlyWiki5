@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/highlight/readme
 
-\define highlightVersion() 11.4.0
+\define highlightVersion() 11.11.1
 
 This plugin provides syntax highlighting of code blocks using version <<highlightVersion>> of [[highlight.js|https://github.com/isagalaev/highlight.js]] from Ivan Sagalaev. This plugin does not work on browsers that do not fully support ~JavaScript ES6 (2015). If you need highlight.js running on those legacy browsers, you would need to install the "Highlight (Legacy)" plugin instead. Here's a [[ES6 compatibility table|https://caniuse.com/?search=es6]].
 
