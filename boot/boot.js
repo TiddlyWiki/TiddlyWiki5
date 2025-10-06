@@ -1560,7 +1560,7 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 		if(!self.tiddlerExists(title) && tiddler.hasField("module-type")) {
 			if(tiddler.hasField("draft.of")) {
 				// Report a fundamental problem
-				console.log(`Plugins should not contain a DRAFT OF: ${tiddler.fields.title}`);
+				console.warn(`TiddlyWiki: Plugins should not contain tiddlers with a 'draft.of' field: ${tiddler.fields.title}`);
 				return;
 			}
 			// Define the module
