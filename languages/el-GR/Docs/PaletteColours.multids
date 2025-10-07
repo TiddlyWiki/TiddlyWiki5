@@ -1,8 +1,18 @@
 title: $:/language/Docs/PaletteColours/
 
+alert-background: Υπόβαθρο προειδοποίησης
+alert-border: Περίγραμμα προειδοποίησης
+alert-highlight: Επισήμανση προειδοποίησης
 alert-muted-foreground: Προσκήνιο προειδοποίησης, βουβού τύπου
+background: Γενικό υπόβαθρο
 blockquote-bar: Πλαίσιο παραθέσεων αποσπασμάτων
 button-background: Προκαθορισμένο υπόβαθρο κουμπιών
+button-border: Περίγραμμα προεπιλεγμένου κουμπιού
+button-foreground: Χρώμα προεπιλεγμένου κουμπιού
+code-background: Υπόβαθρο κώδικα
+code-border: Περίγραμμα κώδικα
+code-foreground: Προσκήνιο κώδικα
+dirty-indicator: Ένδειξη μη αποθηκευμένων αλλαγών
 download-background: Υπόβαθρο για το κουμπί λήψης
 download-foreground: Προσκήνιο για το κουμπί λήψης
 dragger-background: Υπόβαθρο συρσίματος
@@ -21,6 +31,9 @@ external-link-foreground-visited: Υπόβαθρο για εξωτερικούς
 foreground: Γενικό προσκήνιο
 menubar-background: Υπόβαθρο γραμμής μενού
 menubar-foreground: Προσκήνιο γραμμής μενού
+message-background: Υπόβαθρο πλαισίου μηνύματος
+message-border: Περίγραμμα πλαισίου μηνύματος
+message-foreground: Προσκήνιο πλαισίου μηνύματος
 modal-backdrop: Υπόβαθρο σκηνικό όταν εμφανίζεται ένα αποκλειστικό παράθυρο
 modal-background: Υπόβαθρο αποκλειστικού παραθύρου
 modal-border: Περίγραμμα αποκλειστικού παραθύρου
@@ -28,6 +41,8 @@ modal-footer-background: Υπόβαθρο υποσέλιδου σε αποκλε
 modal-footer-border: Περίγραμμα υποσέλιδου σε αποκλειστικά παράθυρα
 modal-header-border: Περίγραμμα κεφαλίδας σε αποκλειστικά παράθυρα
 muted-foreground: Γενικό προσκήνιο, βουβού τύπου
+notification-background: Υπόβαθρο ειδοποίησης
+notification-border: Περίγραμμα ειδοποίησης
 page-background: Υπόβαθρο σελίδας
 pre-background: Υπόβαθρο προδιαμορφωμένου κώδικα
 pre-border: Περίγραμμα προδιαμορφωμένου κώδικα 
@@ -55,9 +70,19 @@ stability-deprecated: Κονκάρδα για το «υπό απόσυρση» �
 stability-experimental: Κονκάρδα για το «πειραματικό» επίπεδο σταθερότητας
 stability-legacy: Κονκάρδα για το «παρωχημένο» επίπεδο σταθερότητας
 stability-stable: Κονκάρδα για το «σταθερό» επίπεδο σταθερότητας
+static-alert-foreground: Προσκήνιο στατικής προειδοποίησης
+tab-background: Υπόβαθρο καρτέλας
 tab-background-selected: Υπόβαθρο επιλεγμένων καρτελών
+tab-border: Περίγραμμα καρτέλας
 tab-border-selected: Περίγραμμα επιλεγμένων καρτελών
+tab-divider: Διαχωριστής καρτελών
+tab-foreground: Προσκήνιο καρτέλας
 tab-foreground-selected: Προσκήνιο επιλεγμένων καρτελών
+table-border: Περίγραμμα καρτέλας
+table-footer-background: Υπόβαθρο υπότιτλου σε πίνακα
+table-header-background: Υπόβαθρο επικεφαλίδας πίνακα
+tag-background: Υπόβαθρο ετικέτας
+tag-foreground: Προσκήνιο ετικέτας
 testcase-accent-level-1: Απόχρωση υπόθεσης δοκιμής χωρίς ένθεση
 testcase-accent-level-2: Απόχρωση υπόθεσης δοκιμής με ένθεση 3ου επιπέδου
 testcase-accent-level-3: Απόχρωση υπόθεσης δοκιμής με ένθεση 3ου ή παραπάνω επιπέδου
