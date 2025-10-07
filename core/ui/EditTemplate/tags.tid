@@ -21,7 +21,7 @@ tags: $:/tags/EditTemplate
 		>
 			<$transclude tiddler=<<icon>>/>
 			<$view field="title" format="text"/>
-			<$button class="tc-btn-invisible tc-remove-tag-button" >
+			<$button class="tc-btn-invisible tc-remove-tag-button">
 				<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="-[{!!title}]"/>
 				{{$:/core/images/close-button}}
 			</$button>
