@@ -1532,7 +1532,8 @@ Define all modules stored in ordinary tiddlers
 */
 $tw.Wiki.prototype.defineTiddlerModules = function() {
 	this.each(function(tiddler,title) {
-		if(tiddler.hasField("module-type")) {
+		// Modules in draft tiddlers are disabled
+		if(tiddler.hasField("module-type") && (!tiddler.hasField("draft.of"))) {
 			switch(tiddler.fields.type) {
 				case "application/javascript":
 					// We only define modules that haven't already been defined, because in the browser modules in system tiddlers are defined in inline script
@@ -1559,6 +1560,11 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 	this.eachShadow(function(tiddler,title) {
 		// Don't define the module if it is overidden by an ordinary tiddler
 		if(!self.tiddlerExists(title) && tiddler.hasField("module-type")) {
+			if(tiddler.hasField("draft.of")) {
+				// Report a fundamental problem
+				console.warn(`TiddlyWiki: Plugins should not contain tiddlers with a 'draft.of' field: ${tiddler.fields.title}`);
+				return;
+			}
 			// Define the module
 			$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
 		}
