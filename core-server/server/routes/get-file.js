@@ -38,8 +38,19 @@ exports.handler = function(request,response,state) {
 				// Handle range requests
 				var parts = rangeHeader.replace(/bytes=/, "").split("-"),
 					start = parseInt(parts[0], 10),
-					end = parts[1] ? parseInt(parts[1], 10) : stats.size - 1,
-					chunksize = (end - start) + 1;
+					end = parts[1] ? parseInt(parts[1], 10) : stats.size - 1;
+				// Validate start and end
+				if (
+					isNaN(start) ||
+					isNaN(end) ||
+					start < 0 ||
+					end < start ||
+					end >= stats.size
+				) {
+					responseHeaders["Content-Range"] = "bytes */" + stats.size;
+					return response.writeHead(416, responseHeaders).end();
+				}
+				var chunksize = (end - start) + 1;
 				responseHeaders["Content-Range"] = "bytes " + start + "-" + end + "/" + stats.size;
 				responseHeaders["Content-Length"] = chunksize;
 				response.writeHead(206, responseHeaders);
