@@ -58,11 +58,6 @@ exports.handler = function(request,response,state) {
 					response.destroy();
 				}
 			});
-			stream.on("end", function() {
-				if(!response.headersSent) {
-					response.end();
-				}
-			});
 			stream.pipe(response);
 		}
 	});
