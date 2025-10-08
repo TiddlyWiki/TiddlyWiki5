@@ -1,0 +1,57 @@
+created: 20240826160050805
+description: Simple TOC
+modified: 20240826162927425
+tags: $:/tags/wiki-test-spec
+title: Examples/TOC/param/itemTemplate
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* The following code defines a "Simple Table of Contents" using "root" as the base tag
+* Click through all the tabs to get additional info
+
+<$transclude $tiddler="Narrative-extended" $mode="block"/>
+
++
+title: root
+list: First Third Fourth
+
+The list-field in the "root" tag-tiddler can be used to define the "sort order" of the TOC
++
+title: First
+tags: root
+
+1st 1st 1st 1st 1st
++
+title: Second
+tags: First
+
+2nd 2nd 2nd 2nd 2nd
++
+title: Third
+tags: root
+
+3rd 3rd 3rd 3rd 3rd
++
+title: Fourth
+caption: fourth-caption
+tags: root
+
+4th 4th 4th 4th 4th 
+
+This tiddler contains a caption, which will be shown in the TOC instead of the tiddler title
++
+title: myTemplate
+
+<$let tv-wikilinks="no">
+<$transclude $field="caption">
+  <$transclude $field="title"/> - param itemTemplate
+</$transclude>
+</$let>
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"root" itemTemplate:"myTemplate">>
+</div>
+

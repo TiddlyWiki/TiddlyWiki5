@@ -1,0 +1,10 @@
+author: Mario Pietsch
+core-version: >=5.1.15
+dependents: 
+description: Adds some powerfull search tools
+list: readme license history
+name: Advance Search Plus
+plugin-type: plugin
+title: $:/plugins/wikilabs/advanced-search-plus
+type: application/json
+version: 0.6.0

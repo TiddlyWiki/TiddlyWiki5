@@ -1,0 +1,35 @@
+created: 20250923080256065
+import-compound: toc-simple $:/spec/toc-param-exclude
+modified: 20250923080726479
+tags: $:/tags/wiki-test-spec param
+title: toc-param-exclude
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents to show the use of different parameters
+
+* The "root" elements are ''tagged Contents''
+
+* Tiddler [[aa-aa]] is excluded when the macro is called. So it is a "global" exclusion
+
+{{example-overview}}
+
++
+title: Description
+
+TOC Macro Parameter "exclude"
++
+title: aa-aa
+tags: aa
+
+Link to [[bb]]
+
++
+title: Output
+
+The `exclude` parameter is part of the macro call.
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents" exclude:"aa-aa">>
+</div>

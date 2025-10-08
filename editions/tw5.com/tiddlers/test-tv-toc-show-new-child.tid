@@ -1,0 +1,12 @@
+created: 20240618145407617
+modified: 20240723095028937
+tags: 
+title: test-tv-toc-show-new-child
+type: text/vnd.tiddlywiki
+
+
+<<wikitext-example-without-html src:"""\define tv-toc-show-new-child() yes
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"root" parentField:"parent" exclude:"p1.1">>
+</div>""">>

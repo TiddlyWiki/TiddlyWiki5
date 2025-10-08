@@ -1,0 +1,36 @@
+created: 20250923080953644
+import-compound: toc-simple $:/spec/toc-param-captionField
+modified: 20250923081535018
+tags: $:/tags/wiki-test-spec param
+title: toc-param-captionField
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents to show the use of different parameters
+
+* The "root" elements are ''tagged Contents''
+
+* Tiddler `aa-aa` has a `description` field, which is referenced by the ''captionField'' macro parameter
+
+{{example-overview}}
+
++
+title: Description
+
+TOC Macro Parameter "captionField"
++
+title: aa-aa
+tags: aa
+description: Tiddler aa-aa has this text in the description field
+
+Link to [[bb]]
+
++
+title: Output
+
+The `captionField` parameter is part of the macro call.
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents" captionField:"description">>
+</div>
