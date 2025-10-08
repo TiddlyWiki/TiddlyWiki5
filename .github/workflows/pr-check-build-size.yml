@@ -5,8 +5,8 @@ on:
     paths:
       - 'boot/**'
       - 'core/**'
-      - 'themes/snowwhite/**'
-      - 'themes/vanilla/**'
+      - 'themes/tiddlywiki/snowwhite/**'
+      - 'themes/tiddlywiki/vanilla/**'
 
 jobs:
   calculate-build-size:
