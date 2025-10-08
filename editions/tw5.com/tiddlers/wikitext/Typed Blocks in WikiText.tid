@@ -1,78 +1,67 @@
+caption: Typed Blocks
 created: 20131205161051792
-modified: 20140120171407764
+modified: 20251006150732150
 tags: WikiText
 title: Typed Blocks in WikiText
 type: text/vnd.tiddlywiki
-caption: Typed Blocks
 
 WikiText can include blocks of text that are rendered with an explicit ContentType like this:
 
-```
-$$$image/svg+xml
+!! Image SVG
+
+<<wikitext-example-without-html 
+"""$$$image/svg+xml
 <svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
   <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="green" />
 </svg>
 $$$
-```
-
-This renders as:
-
-$$$image/svg+xml
-<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
-  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="green" />
-</svg>
-$$$
+""">>
 
 It is also possible to abbreviate the ContentType to a file extension. For example:
 
-```
-$$$.svg
+<<wikitext-example-without-html
+"""$$$.svg
 <svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
   <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
 </svg>
 $$$
-```
+"""
+>>
 
-This renders as:
+!! Unknown Type
 
-$$$.svg
-<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
-  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
-</svg>
-$$$
+Unknown types render as plain text
 
-Unknown types render as plain text:
-
-```
-$$$text/unknown
+<<wikitext-example-without-html 
+"""$$$text/unknown
 Some plain text, which will not be //formatted//.
 $$$
-```
+""">>
 
-Which renders as:
-
-$$$text/unknown
-Some plain text, which will not be //formatted//.
-$$$
+!! Specific Type WikiText
 
 A render type can also be specified, causing a particular text rendering to be displayed. For example:
 
-```
-$$$text/vnd.tiddlywiki>text/html
+<<wikitext-example-without-html 
+"""$$$text/vnd.tiddlywiki>text/html
 This is ''some'' wikitext
 $$$
+""">>
 
-$$$text/vnd.tiddlywiki>text/plain
+<<wikitext-example-without-html 
+"""$$$text/vnd.tiddlywiki>text/plain
 This is ''some'' wikitext
 $$$
-```
+""">>
 
-Renders as:
+!! CSV Table
 
-$$$text/vnd.tiddlywiki>text/html
-This is ''some'' wikitext
+<<wikitext-example-without-html 
+"""$$$text/csv
+a,b,c
+1,2,3
+4,5,6
+aye,bee,cee
+10,22,42
 $$$
-
-$$$text/vnd.tiddlywiki>text/plain
-This is ''some'' wikitext
-$$$
+""">>

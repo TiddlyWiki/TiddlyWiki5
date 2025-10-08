@@ -4,18 +4,37 @@ Body/External/Hint: Αυτό το tiddler εμφανίζει περιεχόμε�
 Body/Placeholder: Πληκτρολόγησε το κείμενο για αυτό το tiddler
 Body/Preview/Type/DiffCurrent: διαφορές από το παρόν
 Body/Preview/Type/DiffShadow: διαφορές από σκιώδες tiddler (εάν υπάρχουν)
+Body/Preview/Type/Output: αποτέλεσμα
 Caption: Επεξεργαστής
 Field/Dropdown/Caption: λίστα πεδίων
 Field/Dropdown/Hint: Πρόβαλλε κατάλογο με πεδία
+Field/Remove/Caption: αφαίρεσε το πεδίο
+Field/Remove/Hint: Αφαιρεί το πεδίο
+Fields/Add/Button: προσθήκη
 Fields/Add/Button/Hint: Πρόσθεσε το νέο πεδίο στο tiddler
+Fields/Add/Dropdown/System: Πεδία του συστήματος
+Fields/Add/Dropdown/User: Πεδία του χρήστη
+Fields/Add/Name/Placeholder: όνομα πεδίου
+Fields/Add/Prompt: Πρόσθεσε ένα νέο πεδίο:
+Fields/Add/Value/Placeholder: τιμή πεδίου
 Shadow/OverriddenWarning: Αυτό είναι ένα τροποποιημένο σκιώδες tiddler. Μπορείς να διαγράψεις αυτό το tiddler για να ανακαλέσεις στην προκαθορισμένη εκδοχή στο <<pluginLink>> 
+Shadow/Warning: Αυτό είναι ένα σκιώδες tiddler. Οποιεσδήποτε αλλαγές κάνετε θα παρακάμψουν την προκαθορισμένη εκδοχή του πρόσθετου <<pluginLink>>
+Tags/Add/Button: προσθήκη
 Tags/Add/Button/Hint: προσθήκη ετικέτας
+Tags/Add/Placeholder: όνομα ετικέτας
 Tags/ClearInput/Caption: καθαρισμός εισόδου
 Tags/ClearInput/Hint: Εκκαθάρισε το κείμενο ετικέτας
+Tags/Dropdown/Caption: λίστα ετικετών
+Tags/Dropdown/Hint: Εμφανίζει την λίστα ετικετών
 Tags/EmptyMessage: Δεν βρέθηκαν ετικέτες
 Tags/EmptyMessage/System: Δεν βρέθηκαν ετικέτες σηστήματος
+Title/BadCharacterWarning: Προειδοποίηση: αποφύγετε την χρήση των χαρακτήρων <<bad-chars>> στους τίτλους των tiddler
+Title/Exists/Prompt: Το tiddler προορισμού υπάρχει ήδη
 Title/References/Prompt: Οι ακόλουθες αναφορές σε αυτό το tiddler δεν θα ενημερωθούν αυτόματα:
 Title/Relink/Prompt: Ενημέρωσε το ''<$text text=<<fromTitle>>/>'' σε ''<$text text=<<toTitle>>/>'' στα πεδία //tags// και //list// των υπολοίπων tiddlers
 Type/Delete/Caption: διέγραψε τον τύπο περιεχομένου
 Type/Delete/Hint: Διέγραψε τον τύπο περιεχομένου
+Type/Dropdown/Caption: λίστα τύπων περιεχομένου
 Type/Dropdown/Hint: Εμφάνισε κατάλογο με τύπους περιεχομένου
+Type/Placeholder: τύπος περιεχομένου
+Type/Prompt: Τύπος:

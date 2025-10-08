@@ -41,7 +41,7 @@ Here are the questions we asked and the responses we received.
 							<h3>
 								//<$view tiddler=<<answer>> field="modified" format="date" template="DDth MMM YYYY" />//
 							</h3>
-							<$transclude $tiddler=<<answer>> mode="block" />
+							<$transclude $tiddler=<<answer>> $mode="block" />
 						</div>
 					</$list>
 				<%endif%>
