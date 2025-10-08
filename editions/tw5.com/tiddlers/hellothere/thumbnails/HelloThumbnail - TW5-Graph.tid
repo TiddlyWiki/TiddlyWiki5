@@ -6,4 +6,6 @@ tags: HelloThumbnail
 title: HelloThumbnail - TW5-Graph
 ribbon-text: NEW
 
+\rules except wikilink
+
 Use TiddlyWiki plugins to easily create visualizations of your tiddlers.
