@@ -1,6 +1,6 @@
 caption: range
 created: 20171221184734665
-modified: 20250910222830741
+modified: 20251008154315078
 op-input: ignored
 op-neg-output: a series of evenly spaced numbers ranging from `[BEGIN]` to `[END]` in reverse order
 op-output: a series of evenly spaced numbers ranging from `[BEGIN]` to `[END]`
@@ -39,8 +39,8 @@ The behaviour depends on the number of parameters:
 |`[BEGIN],[END],[STEP]` |Numbers from `[BEGIN]` to `[END]` spaced out by `[STEP]` eg: `[range[1],[7],[2]]` |
 
 |Parameter(s) Dynamic |Output |h
-|`<END>` |Whole numbers up to `<END>` eg: `[range<myRangeEnd>]`. The <<.var myRangeEnd>> variable has to be defined somewhere else with eg: <<.wid let>> widget |
-|`{BEGIN},<END>` |Numbers from `{BEGIN}` to `<END>` eg: `[range{myRangeStart},<myRangeEnd>]`. The <<.param myRangeStart>> will be transcluded from a tiddler "myRanageStart"  and <<.var myRangeEnd>> comes from a variable |
+|`<END>` |Whole numbers up to `<END>` eg: `[range<myRangeEnd>]`.<br>The <<.var myRangeEnd>> variable has to be defined somewhere else with eg: <<.wid let>> widget |
+|`{BEGIN},<END>` |Numbers from `{BEGIN}` to `<END>` eg: `[range{myRangeStart},<myRangeEnd>]`.<br>The <<.param myRangeStart>> will be transcluded from a tiddler "myRanageStart"  and <<.var myRangeEnd>> comes from a variable |
 
 Each parameter must be a number, and works as follows:
 
