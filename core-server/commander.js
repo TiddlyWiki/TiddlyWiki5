@@ -99,16 +99,18 @@ Commander.prototype.executeNextCommand = function() {
 					}
 				}
 				if(command.info.synchronous) {
-					// Synchronous command
+					// Synchronous command (await thenables)
 					c = new command.Command(params,this);
 					err = c.execute();
-					if(err) {
+					if(err && typeof err.then === "function") {
+						err.then(e => { e ? this.callback(e) : this.executeNextCommand(); });
+					} else if(err) {
 						this.callback(err);
 					} else {
 						this.executeNextCommand();
 					}
 				} else {
-					// Asynchronous command
+					// Asynchronous command (await thenables)
 					c = new command.Command(params,this,function(err) {
 						if(err) {
 							self.callback(err);
@@ -117,7 +119,9 @@ Commander.prototype.executeNextCommand = function() {
 						}
 					});
 					err = c.execute();
-					if(err) {
+					if(err && typeof err.then === "function") {
+						err.then(e => { if(e) this.callback(e); });
+					} else if(err) {
 						this.callback(err);
 					}
 				}

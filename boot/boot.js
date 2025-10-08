@@ -2629,11 +2629,13 @@ $tw.boot.executeNextStartupTask = function(callback) {
 			$tw.boot.log(s.join(" "));
 			// Execute task
 			if(!$tw.utils.hop(task,"synchronous") || task.synchronous) {
-				task.startup();
-				if(task.name) {
-					$tw.boot.executedStartupModules[task.name] = true;
+				const thenable = task.startup();
+				if(thenable && typeof thenable.then === "function"){
+					thenable.then(asyncTaskCallback);
+					return true;
+				} else {
+					return asyncTaskCallback();
 				}
-				return $tw.boot.executeNextStartupTask(callback);
 			} else {
 				task.startup(asyncTaskCallback);
 				return true;
