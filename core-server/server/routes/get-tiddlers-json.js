@@ -10,7 +10,7 @@ GET /recipes/default/tiddlers.json?filter=<filter>
 
 var DEFAULT_FILTER = "[all[tiddlers]!is[system]sort[title]]";
 
-exports.method = "GET";
+exports.methods = ["GET"];
 
 exports.path = /^\/recipes\/default\/tiddlers.json$/;
 
