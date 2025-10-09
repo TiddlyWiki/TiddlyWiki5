@@ -2,6 +2,11 @@ name: Calculate PR build size
 on:
   pull_request_target:
     types: [opened, reopened, synchronize]
+    paths:
+      - 'boot/**'
+      - 'core/**'
+      - 'themes/tiddlywiki/snowwhite/**'
+      - 'themes/tiddlywiki/vanilla/**'
 
 jobs:
   calculate-build-size:
@@ -19,7 +24,7 @@ jobs:
       with:
         pr_number: ${{ github.event.pull_request.number }}
         repo: ${{ github.repository }}
-        base_ref: ${{ github.base_ref }}
+        base_ref: ${{ github.event.pull_request.base.ref }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
         mode: size:calc
 
