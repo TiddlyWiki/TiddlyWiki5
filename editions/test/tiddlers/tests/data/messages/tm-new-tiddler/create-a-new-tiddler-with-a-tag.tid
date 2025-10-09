@@ -29,7 +29,7 @@ title: output-template
 +
 title: ExpectedResult
 
-<p><pre>draft.of: New Tiddler
+<p dir="auto"><pre>draft.of: New Tiddler
 draft.title: New Tiddler
 tags: test [[with spaces]]
 title: Draft of 'New Tiddler'
