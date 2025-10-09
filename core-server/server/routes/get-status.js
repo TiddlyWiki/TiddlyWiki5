@@ -12,6 +12,10 @@ exports.method = "GET";
 
 exports.path = /^\/status$/;
 
+exports.info = {
+	priority: 100
+};
+
 exports.handler = function(request,response,state) {
 	var text = JSON.stringify({
 		username: state.authenticatedUsername || state.server.get("anon-username") || "",

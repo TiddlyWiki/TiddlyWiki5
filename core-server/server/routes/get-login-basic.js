@@ -12,6 +12,10 @@ exports.method = "GET";
 
 exports.path = /^\/login-basic$/;
 
+exports.info = {
+	priority: 100
+};
+
 exports.handler = function(request,response,state) {
 	if(!state.authenticatedUsername) {
 		// Challenge if there's no username

@@ -12,6 +12,10 @@ exports.method = "GET";
 
 exports.path = /^\/files\/(.+)$/;
 
+exports.info = {
+	priority: 100
+};
+
 exports.handler = function(request,response,state) {
 	var path = require("path"),
 		fs = require("fs"),
