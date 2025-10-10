@@ -12,6 +12,10 @@ exports.method = "DELETE";
 
 exports.path = /^\/bags\/default\/tiddlers\/(.+)$/;
 
+exports.info = {
+	priority: 100
+};
+
 exports.handler = function(request,response,state) {
 	var title = $tw.utils.decodeURIComponentSafe(state.params[0]);
 	state.wiki.deleteTiddler(title);

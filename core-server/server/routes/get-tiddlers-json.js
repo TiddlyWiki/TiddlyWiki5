@@ -14,6 +14,10 @@ exports.method = "GET";
 
 exports.path = /^\/recipes\/default\/tiddlers.json$/;
 
+exports.info = {
+	priority: 100
+};
+
 exports.handler = function(request,response,state) {
 	var filter = state.queryParameters.filter || DEFAULT_FILTER;
 	if(state.wiki.getTiddlerText("$:/config/Server/AllowAllExternalFilters") !== "yes") {
