@@ -222,7 +222,7 @@ Server.prototype.findMatchingRoute = function(request,state) {
 		} else {
 			match = potentialRoute.path.exec(pathname);
 		}
-		if(match && request.method === potentialRoute.method) {
+		if(match && (potentialRoute.methods?.includes(request.method) || potentialRoute.method === request.method)) {
 			state.params = [];
 			for(var p=1; p<match.length; p++) {
 				state.params.push(match[p]);

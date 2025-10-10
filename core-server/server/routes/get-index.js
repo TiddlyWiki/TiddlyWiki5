@@ -8,7 +8,7 @@ GET /
 \*/
 "use strict";
 
-exports.method = "GET";
+exports.methods = ["GET"];
 
 exports.path = /^\/$/;
 
