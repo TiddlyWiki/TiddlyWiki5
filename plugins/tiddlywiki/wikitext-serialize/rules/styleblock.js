@@ -50,7 +50,7 @@ exports.serialize = function(tree,serialize) {
 	for(var i = 0; i < tree.children.length; i++) {
 		lines.push(serialize(tree.children[i]));
 	}
-	var result = lines.join("").trimEnd();
+	var result = lines.join("").replace(/\s+$/, "");
 	// Add the closing @@ for the style block
 	result += "\n@@\n\n"
 	return result;
