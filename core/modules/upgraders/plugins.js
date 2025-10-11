@@ -20,6 +20,13 @@ var BLOCKED_PLUGINS = {
 	}
 };
 
+/**
+ * Upgrade the specified tiddlers to their latest versions
+ * @param {import("tiddlywiki").Wiki} wiki The wiki to which the tiddler is being imported
+ * @param {string[]} titles The titles of the tiddlers to be imported
+ * @param {Record<string, Record<string, string>>} tiddlers The tiddlers to be imported
+ * @returns {Object} An object containing messages about the upgrade process
+ */
 exports.upgrade = function(wiki,titles,tiddlers) {
 	var self = this,
 		messages = {},

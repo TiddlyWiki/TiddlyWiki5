@@ -910,19 +910,12 @@ exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 Alternative, uncached version of getTiddlerDataCached(). The return value can be mutated freely and reused
 */
 exports.getTiddlerData = function(titleOrTiddler,defaultData) {
-	var tiddler = titleOrTiddler,
-		data;
+	var tiddler = titleOrTiddler;
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = this.getTiddler(tiddler);
 	}
-	if(tiddler && tiddler.fields.text) {
-		switch(tiddler.fields.type) {
-			case "application/json":
-				// JSON tiddler
-				return $tw.utils.parseJSONSafe(tiddler.fields.text,defaultData);
-			case "application/x-tiddler-dictionary":
-				return $tw.utils.parseFields(tiddler.fields.text);
-		}
+	if(tiddler && tiddler.fields.text && tiddler.fields.type && $tw.Wiki.dataTiddlerSerializerModules[tiddler.fields.type]) {
+		return $tw.Wiki.dataTiddlerSerializerModules[tiddler.fields.type].parse(tiddler);
 	}
 	return defaultData;
 };
@@ -959,12 +952,15 @@ exports.setTiddlerData = function(title,data,fields,options) {
 		newFields = {
 			title: title
 		};
-	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
-		newFields.text = $tw.utils.makeTiddlerDictionary(data);
+
+	if(existingTiddler && existingTiddler.fields.type && $tw.Wiki.dataTiddlerSerializerModules[existingTiddler.fields.type]){
+		newFields.type = existingTiddler.fields.type;
 	} else {
 		newFields.type = "application/json";
-		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
 	}
+
+	newFields.text = $tw.Wiki.dataTiddlerSerializerModules[newFields.type].stringify(newFields, data);
+
 	this.addTiddler(new $tw.Tiddler(creationFields,existingTiddler,fields,newFields,modificationFields));
 };
 
@@ -1740,7 +1736,7 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 // Determine whether a plugin by title is dynamically loadable
 exports.doesPluginRequireReload = function(title) {
 	var tiddler = this.getTiddler(title);
-	if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"]) {
+	if(tiddler && tiddler.isPlugin()) {
 		if(tiddler.fields["plugin-type"] === "import") {
 			// The import plugin never requires reloading
 			return false;

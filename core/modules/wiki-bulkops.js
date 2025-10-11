@@ -40,7 +40,7 @@ function relinkTiddler(fromTitle,toTitle,options) {
 		this.each(function(tiddler,title) {
 			var type = tiddler.fields.type || "";
 			// Don't touch plugins or JavaScript modules
-			if(!tiddler.fields["plugin-type"] && type !== "application/javascript") {
+			if(!tiddler.isPlugin() && type !== "application/javascript") {
 				var tags = tiddler.fields.tags ? tiddler.fields.tags.slice(0) : undefined,
 					list = tiddler.fields.list ? tiddler.fields.list.slice(0) : undefined,
 					isModified = false,
