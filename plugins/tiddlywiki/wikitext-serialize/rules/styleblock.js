@@ -52,6 +52,6 @@ exports.serialize = function(tree,serialize) {
 	}
 	var result = lines.join("").replace(/\s+$/, "");
 	// Add the closing @@ for the style block
-	result += "\n@@\n\n"
+	result += "\n@@\n\n";
 	return result;
 };
