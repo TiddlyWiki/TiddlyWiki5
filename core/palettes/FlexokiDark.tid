@@ -70,7 +70,7 @@ alert-border: <<colour flexoki-ye>>
 alert-highlight: <<colour flexoki-re>>
 alert-muted-foreground: <<colour flexoki-ye>>
 background: #100F0F
-blockquote-bar: <<colour flexoki-ma-2>>
+blockquote-bar: <<colour flexoki-ma>>
 button-background: <<colour flexoki-bg-2>>
 button-foreground: <<colour flexoki-paper>>
 button-border: <<colour flexoki-600>>
@@ -106,7 +106,7 @@ foreground: #CECDC3
 highlight-background: <<colour flexoki-yellow-900>>
 highlight-foreground: inherit
 menubar-background: <<colour primary>>
-menubar-foreground: <<colour flexoki-paper>>
+menubar-foreground: <<colour flexoki-999>>
 message-background: <<colour background>>
 message-border: <<colour foreground>>
 message-foreground: <<colour foreground>>

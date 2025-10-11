@@ -799,12 +799,13 @@ the password, and to encrypt/decrypt a block of text
 $tw.utils.Crypto = function() {
 	var sjcl = $tw.node ? (global.sjcl || require("./sjcl.js")) : window.sjcl,
 		currentPassword = null,
-		callSjcl = function(method,inputText,password) {
+		callSjcl = function(method,inputText,password,options) {
+			options = options || {};
 			password = password || currentPassword;
 			var outputText;
 			try {
 				if(password) {
-					outputText = sjcl[method](password,inputText);
+					outputText = sjcl[method](password,inputText,options);
 				}
 			} catch(ex) {
 				console.log("Crypto error:" + ex);
@@ -830,7 +831,8 @@ $tw.utils.Crypto = function() {
 		return !!currentPassword;
 	}
 	this.encrypt = function(text,password) {
-		return callSjcl("encrypt",text,password);
+		// set default ks:256 -- see: http://bitwiseshiftleft.github.io/sjcl/doc/convenience.js.html
+		return callSjcl("encrypt",text,password,{v:1,iter:10000,ks:256,ts:64,mode:"ccm",adata:"",cipher:"aes"});
 	};
 	this.decrypt = function(text,password) {
 		return callSjcl("decrypt",text,password);
@@ -1433,7 +1435,7 @@ $tw.Wiki = function(options) {
 			checkTiddler = function(tiddler,title) {
 				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType)) {
 					var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
-					if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
+					if(title === "$:/core" || title === "$:/core-server" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
 						self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
 						pluginTiddlers.push(tiddler);
 						registeredTitles.push(tiddler.fields.title);
@@ -1530,7 +1532,8 @@ Define all modules stored in ordinary tiddlers
 */
 $tw.Wiki.prototype.defineTiddlerModules = function() {
 	this.each(function(tiddler,title) {
-		if(tiddler.hasField("module-type")) {
+		// Modules in draft tiddlers are disabled
+		if(tiddler.hasField("module-type") && (!tiddler.hasField("draft.of"))) {
 			switch(tiddler.fields.type) {
 				case "application/javascript":
 					// We only define modules that haven't already been defined, because in the browser modules in system tiddlers are defined in inline script
@@ -1557,6 +1560,11 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 	this.eachShadow(function(tiddler,title) {
 		// Don't define the module if it is overidden by an ordinary tiddler
 		if(!self.tiddlerExists(title) && tiddler.hasField("module-type")) {
+			if(tiddler.hasField("draft.of")) {
+				// Report a fundamental problem
+				console.warn(`TiddlyWiki: Plugins should not contain tiddlers with a 'draft.of' field: ${tiddler.fields.title}`);
+				return;
+			}
 			// Define the module
 			$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
 		}
@@ -2350,6 +2358,7 @@ $tw.loadTiddlersNode = function() {
 	});
 	// Load the core tiddlers
 	$tw.wiki.addTiddler($tw.loadPluginFolder($tw.boot.corePath));
+	$tw.wiki.addTiddler($tw.loadPluginFolder($tw.boot.coreServerPath));
 	// Load any extra plugins
 	$tw.utils.each($tw.boot.extraPlugins,function(name) {
 		if(name.charAt(0) === "+") { // Relative path to plugin
@@ -2423,6 +2432,7 @@ $tw.boot.initStartup = function(options) {
 		// System paths and filenames
 		$tw.boot.bootPath = options.bootPath || path.dirname(module.filename);
 		$tw.boot.corePath = path.resolve($tw.boot.bootPath,"../core");
+		$tw.boot.coreServerPath = path.resolve($tw.boot.bootPath,"../core-server");
 		// If there's no arguments then default to `--help`
 		if($tw.boot.argv.length === 0) {
 			$tw.boot.argv = ["--help"];
@@ -2619,11 +2629,13 @@ $tw.boot.executeNextStartupTask = function(callback) {
 			$tw.boot.log(s.join(" "));
 			// Execute task
 			if(!$tw.utils.hop(task,"synchronous") || task.synchronous) {
-				task.startup();
-				if(task.name) {
-					$tw.boot.executedStartupModules[task.name] = true;
+				const thenable = task.startup();
+				if(thenable && typeof thenable.then === "function"){
+					thenable.then(asyncTaskCallback);
+					return true;
+				} else {
+					return asyncTaskCallback();
 				}
-				return $tw.boot.executeNextStartupTask(callback);
 			} else {
 				task.startup(asyncTaskCallback);
 				return true;

@@ -615,3 +615,17 @@ Galen Huntington, @galenhuntington, 2025/01/19
 @bob.jansen@cultconv.com, 2025/03/22
 
 Matthew Salmon, @matthewsalmon, 2025/04/24
+
+@jbaldus, 2025/05/28
+
+Wu Peiyuan, @s793016, 2025/06/10
+
+Markus Sauermann, @Sauermann, 2025/06/20
+
+@bobjoe12131, 2025/07/01
+
+Ioannis Anthymidis (Ιωάννης Ανθυμίδης), @superuser-does, 2025/07/06
+
+Christian Byron, @CeeBeeTree, 2025/08/05
+
+Frédéric Demers, @bepuzzled, 2025/08/17

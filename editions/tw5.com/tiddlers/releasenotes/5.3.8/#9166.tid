@@ -1,0 +1,8 @@
+title: $:/changenotes/5.3.8/#9166
+description: Fixed name field of fa-IR language plugin
+release: 5.3.8
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: translation
+links: https://github.com/TiddlyWiki/TiddlyWiki5/issue/9166
+github-contributors: Leilei332
