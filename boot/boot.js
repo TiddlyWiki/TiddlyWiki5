@@ -8,7 +8,7 @@ On the server this file is executed directly to boot TiddlyWiki. In the browser,
 
 \*/
 
-var _boot = (function($tw) {
+var _boot = (function(/** @type {import("tiddlywiki").TW} */ $tw) {
 
 /*jslint node: true, browser: true */
 /*global modules: false, $tw: false */
@@ -455,6 +455,17 @@ $tw.utils.parseFields = function(text,fields) {
 	return fields;
 };
 
+/*
+Convert a hashmap into a tiddler dictionary format sequence of name:value pairs
+*/
+$tw.utils.makeTiddlerDictionary = function(data) {
+	var output = [];
+	for(var name in data) {
+		output.push(name + ": " + data[name]);
+	}
+	return output.join("\n");
+};
+
 // Safely parse a string as JSON
 $tw.utils.parseJSONSafe = function(text,defaultJSON) {
 	try {
@@ -468,6 +479,22 @@ $tw.utils.parseJSONSafe = function(text,defaultJSON) {
 	}
 };
 
+$tw.utils.parseDataTiddler = function(type, text){
+	if(!type) throw new Error("Called parseDataTiddler with no type");
+	var parser = $tw.Wiki.dataTiddlerSerializerModules[type];
+	if(!parser) throw new Error("No data tiddler parser for type " + type);
+	return parser.parse(text);
+}
+
+$tw.utils.stringifyDataTiddler = function(type, data){
+	if(!type) throw new Error("Called stringifyDataTiddler with no type");
+	var parser = $tw.Wiki.dataTiddlerSerializerModules[type];
+	if(!parser) throw new Error("No data tiddler parser for type " + type);
+	return parser.stringify(data);
+}
+$tw.utils.isValidDataTiddlerType = function(type){
+	return !!type && $tw.Wiki.dataTiddlerSerializerModules[type] !== undefined;
+}
 /*
 Resolves a source filepath delimited with `/` relative to a specified absolute root filepath.
 In relative paths, the special folder name `..` refers to immediate parent directory, and the
@@ -605,7 +632,7 @@ var globalCheck =[
 	"    delete Object.prototype.__temp__;",
 	"  }",
 	"  delete Object.prototype.__temp__;",
-].join('\n');
+].join("\n");
 
 /*
 Run code globally with specified context variables in scope
@@ -1070,6 +1097,13 @@ $tw.Tiddler.prototype.hasField = function(field) {
 	return $tw.utils.hop(this.fields,field);
 };
 
+$tw.Tiddler.prototype.isPlugin = function() {
+	if(!this.fields["plugin-type"]) return false;
+	if(!this.fields.text || !this.fields.type) return false;
+	if(!$tw.utils.isValidDataTiddlerType(this.fields.type)) return false;
+	return true;
+};
+
 /*
 Compare two tiddlers for equality
 tiddler: the tiddler to compare
@@ -1409,10 +1443,9 @@ $tw.Wiki = function(options) {
 		$tw.utils.each(titles || getTiddlerTitles(),function(title) {
 			var tiddler = tiddlers[title];
 			if(tiddler) {
-				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
-					pluginInfo[tiddler.fields.title] = $tw.utils.parseJSONSafe(tiddler.fields.text);
-					results.modifiedPlugins.push(tiddler.fields.title);
-				}
+				if(!tiddler.isPlugin()) return;
+				pluginInfo[tiddler.fields.title] = $tw.utils.parseDataTiddler(tiddler.fields.type, tiddler.fields.text);
+				results.modifiedPlugins.push(tiddler.fields.title);
 			} else {
 				if(pluginInfo[title]) {
 					delete pluginInfo[title];
@@ -1433,13 +1466,14 @@ $tw.Wiki = function(options) {
 		var self = this,
 			registeredTitles = [],
 			checkTiddler = function(tiddler,title) {
-				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType)) {
-					var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
-					if(title === "$:/core" || title === "$:/core-server" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
-						self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
-						pluginTiddlers.push(tiddler);
-						registeredTitles.push(tiddler.fields.title);
-					}
+				if(!tiddler) return;
+				if(!tiddler.isPlugin()) return;
+				if(pluginType && tiddler.fields["plugin-type"] !== pluginType) return;
+				var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
+				if(title === "$:/core" || title === "$:/core-server" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
+					self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
+					pluginTiddlers.push(tiddler);
+					registeredTitles.push(tiddler.fields.title);
 				}
 			};
 		if(titles) {
@@ -1534,19 +1568,20 @@ $tw.Wiki.prototype.defineTiddlerModules = function() {
 	this.each(function(tiddler,title) {
 		// Modules in draft tiddlers are disabled
 		if(tiddler.hasField("module-type") && (!tiddler.hasField("draft.of"))) {
-			switch(tiddler.fields.type) {
-				case "application/javascript":
-					// We only define modules that haven't already been defined, because in the browser modules in system tiddlers are defined in inline script
-					if(!$tw.utils.hop($tw.modules.titles,tiddler.fields.title)) {
-						$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
-					}
-					break;
-				case "application/json":
-					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],$tw.utils.parseJSONSafe(tiddler.fields.text));
-					break;
-				case "application/x-tiddler-dictionary":
-					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],$tw.utils.parseFields(tiddler.fields.text));
-					break;
+			if($tw.utils.isValidDataTiddlerType(tiddler.fields.type)) {
+				$tw.modules.define(
+					tiddler.fields.title,
+					tiddler.fields["module-type"],
+					$tw.utils.parseDataTiddler(tiddler.fields.type, tiddler.fields.text)
+				);
+			} else if(tiddler.fields.type === "application/javascript"){
+				if(!$tw.utils.hop($tw.modules.titles,tiddler.fields.title)) {
+					$tw.modules.define(
+						tiddler.fields.title,
+						tiddler.fields["module-type"],
+						tiddler.fields.text
+					);
+				}
 			}
 		}
 	});
@@ -1748,6 +1783,20 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 			return [fields];
 		}
 	}
+});
+
+// the fields in stringify may be frozen, do not write to them
+$tw.modules.define("$:/boot/tiddlerdata/json", "datatiddlerserializer", {
+	name: "application/json",
+	parse: text => $tw.utils.parseJSONSafe(text, () => {}),
+	// $tw.config.preferences.jsonSpaces isn't defined yet
+	stringify: data => JSON.stringify(data, null, 4),
+});
+
+$tw.modules.define("$:/boot/tiddlerdata/tid", "datatiddlerserializer", {
+	name: "application/x-tiddler-dictionary",
+	parse: text => $tw.utils.parseFields(text),
+	stringify: data => $tw.utils.makeTiddlerDictionary(data),
 });
 
 /////////////////////////// Browser definitions
@@ -2149,7 +2198,7 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		pluginInfo.dependents = pluginInfo.dependents || [];
 		pluginInfo.type = "application/json";
 		// Set plugin text
-		pluginInfo.text = JSON.stringify({tiddlers: pluginInfo.tiddlers});
+		pluginInfo.text = $tw.utils.stringifyDataTiddler(pluginInfo.type, {tiddlers: pluginInfo.tiddlers});
 		delete pluginInfo.tiddlers;
 		// Deserialise array fields (currently required for the dependents field)
 		for(var field in pluginInfo) {
@@ -2518,6 +2567,9 @@ $tw.boot.initStartup = function(options) {
 	// Install the tiddler deserializer modules
 	$tw.Wiki.tiddlerDeserializerModules = Object.create(null);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	// Install the tiddler data serializer modules
+	$tw.Wiki.dataTiddlerSerializerModules = $tw.modules.getModulesByTypeAsHashmap("datatiddlerserializer");
+
 	// Call unload handlers in the browser
 	if($tw.browser) {
 		window.onbeforeunload = function(event) {
@@ -2583,9 +2635,11 @@ Startup TiddlyWiki
 */
 $tw.boot.startup = function(options) {
 	options = options || {};
-	// Get the URL hash and check for safe mode
+	$tw.hooks.invokeHook("th-boot-init", options);
 	$tw.boot.initStartup(options);
+	$tw.hooks.invokeHook("th-boot-load", options);
 	$tw.boot.loadStartup(options);
+	$tw.hooks.invokeHook("th-boot-exec", options);
 	$tw.boot.execStartup(options);
 };
 
@@ -2753,6 +2807,14 @@ $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 	}
 	return args[0];
 };
+
+$tw.preloadHooks.forEach(function(hook){
+	if(!Array.isArray(hook) || hook.length !== 2 || typeof hook[0] !== "string" || typeof hook[1] !== "function") {
+		console.warn("Invalid hook definition in $tw.preloadHooks", hook);
+	} else {
+		$tw.hooks.addHook(hook[0], hook[1]);
+	}
+});
 
 /////////////////////////// Main boot function to decrypt tiddlers and then startup
 
