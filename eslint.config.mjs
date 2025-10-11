@@ -4,7 +4,7 @@ import globals from "globals";
 import js from "@eslint/js";
 import eslint from "eslint";
 import stylistic from "@stylistic/eslint-plugin";
-import esx from "eslint-plugin-es-x"
+import esx from "eslint-plugin-es-x";
 
 /** @type {import("eslint").Linter.Config} */
 const es2017rules = {
