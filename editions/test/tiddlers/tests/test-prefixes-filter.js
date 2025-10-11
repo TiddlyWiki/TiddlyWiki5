@@ -372,13 +372,13 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 	it("should handle the variance operator", function() {
 		expect(parseFloat(wiki.filterTiddlers("[tag[shopping]get[price]variance[]]").join(","))).toBeCloseTo(2.92);
 		expect(parseFloat(wiki.filterTiddlers("[tag[food]get[price]variance[]]").join(","))).toBeCloseTo(3.367);
-		expect(wiki.filterTiddlers(" +[variance[]]").toString()).toBe("NaN");
+		expect(wiki.filterTiddlers(" +[variance[]]").toString()).toBe("");
 	});
 
 	it("should handle the standard-deviation operator", function() {
 		expect(parseFloat(wiki.filterTiddlers("[tag[shopping]get[price]standard-deviation[]]").join(","))).toBeCloseTo(1.71);
 		expect(parseFloat(wiki.filterTiddlers("[tag[food]get[price]standard-deviation[]]").join(","))).toBeCloseTo(1.835);
-		expect(wiki.filterTiddlers(" +[standard-deviation[]]").toString()).toBe("NaN");
+		expect(wiki.filterTiddlers(" +[standard-deviation[]]").toString()).toBe("");
 	});	
 
 	it("should handle the :intersection prefix", function() {
