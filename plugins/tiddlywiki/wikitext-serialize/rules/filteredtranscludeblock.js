@@ -17,7 +17,7 @@ exports.serialize = function(tree,serialize) {
 	serialized += "}}";
 	// Inline styles
 	if(tree.attributes.style) serialized += tree.attributes.style.value;
-	serialized += "}"
+	serialized += "}";
 	// CSS classes
 	if(tree.attributes.itemClass) serialized += "." + tree.attributes.itemClass.value.split(" ").join(".");
 	return serialized + "\n\n";
