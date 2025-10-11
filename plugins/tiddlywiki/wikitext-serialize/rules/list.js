@@ -52,7 +52,7 @@ exports.serialize = function (tree,serialize) {
 							// Recursive call for nested lists
 							if(content.length > 0) {
 								result.push(markerPrefix + currentMarker + classAttr + " " + content.join("").trim());
-								content = []
+								content = [];
 							}
 							result.push(serializeList(subNode, markerPrefix + currentMarker).trim())
 						} else {
