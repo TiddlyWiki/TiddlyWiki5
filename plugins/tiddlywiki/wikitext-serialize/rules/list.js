@@ -63,7 +63,7 @@ exports.serialize = function (tree,serialize) {
 					// prepend `#` mark to a new line, if it has content (and has or hasn't nested list), or if it has no content and also no nested list
 					if(content.length > 0 || child.children.length === 0) {
 						result.push(markerPrefix + currentMarker + classAttr + " " + content.join("").trim());
-						content = []
+						content = [];
 					}
 				}
 			});
