@@ -1,17 +1,8 @@
 //@ts-check
-// const globals = require("globals");
-// /** @type {import("@eslint/js")} */
-// const js = require("@eslint/js");
-// /** @type {import("eslint")} */
-// const eslint = require("eslint");
-// const { FlatCompat, } = require("@eslint/eslintrc");
-// const { fixupConfigRules } = require("@eslint/compat");
 import { defineConfig } from "eslint/config";
 import globals from "globals";
 import js from "@eslint/js";
 import eslint from "eslint";
-import { FlatCompat } from "@eslint/eslintrc";
-import { fixupConfigRules } from "@eslint/compat";
 import stylistic from "@stylistic/eslint-plugin";
 import esx from "eslint-plugin-es-x"
 
