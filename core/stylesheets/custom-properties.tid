@@ -2,7 +2,7 @@ title: $:/core/stylesheets/custom-properties
 tags: [[$:/tags/Stylesheet]]
 list-before: 
 
-\rules only macrocallinline macrocallblock
+\rules only transcludeinline macrocallinline macrocallblock
 
 /* Tiddlywiki's CSS properties */
 
@@ -18,4 +18,27 @@ list-before:
     --tc-button-foreground: <<colour button-foreground>>;
     --tc-code-background: <<colour code-background>>;
     --tc-code-border: <<colour code-border>>;
+    --tc-code-foreground: <<colour code-foreground>>;
+    --tc-diff-delete-background: <<colour diff-delete-background>>;
+    --tc-diff-delete-foreground: <<colour diff-delete-foreground>>;
+    --tc-diff-equal-background: <<colour diff-equal-background>>;
+    --tc-diff-equal-foreground: <<colour diff-equal-foreground>>;
+    --tc-diff-insert-background: <<colour diff-insert-background>>;
+    --tc-diff-insert-foreground: <<colour diff-insert-foreground>>;
+    --tc-diff-invisible-background: <<colour diff-invisible-background>>;
+    --tc-diff-invisible-foreground: <<colour diff-invisible-foreground>>;
+    --tc-dirty-indicator: <<colour dirty-indicator>>;
+    --tc-download-background: <<colour download-background>>;
+    --tc-download-foreground: <<colour download-foreground>>;
+
+    /* CSS settings */
+    --tp-codewrapping: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
+    --tp-fontfamily: {{$:/themes/tiddlywiki/vanilla/settings/fontfamily}};
+    --tp-codefontfamily: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+    --tp-editorfontfamily: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
+    --tp-fontsize: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
+    --tp-lineheight: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
+    --tp-bodyfontsize: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
+    --tp-tiddlerwidth: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}}
+
 }
