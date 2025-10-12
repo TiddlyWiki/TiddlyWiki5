@@ -32,13 +32,13 @@ list-before:
     --tc-download-foreground: <<colour download-foreground>>;
 
     /* CSS settings */
-    --tp-codewrapping: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
-    --tp-fontfamily: {{$:/themes/tiddlywiki/vanilla/settings/fontfamily}};
-    --tp-codefontfamily: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
-    --tp-editorfontfamily: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
-    --tp-fontsize: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
-    --tp-lineheight: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
-    --tp-bodyfontsize: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
-    --tp-tiddlerwidth: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}}
+    --tp-code-wrapping: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
+    --tp-font-family: {{$:/themes/tiddlywiki/vanilla/settings/fontfamily}};
+    --tp-code-font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+    --tp-editor-font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
+    --tp-font-size: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
+    --tp-line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
+    --tp-body-font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
+    --tp-tiddler-width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}}
 
 }
