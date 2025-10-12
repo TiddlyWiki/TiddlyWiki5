@@ -39,6 +39,12 @@ list-before:
     --tp-font-size: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
     --tp-line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
     --tp-body-font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
-    --tp-tiddler-width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}}
-
+    --tp-body-line-height: {{$:/themes/tiddlywiki/vanilla/metrics/bodylineheight}};
+    --tp-story-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+    --tp-story-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+    --tp-story-right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+    --tp-story-width: {{$:/themes/tiddlywiki/vanilla/metrics/storyrwidth}};
+    --tp-tiddler-width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
+    --tp-sidebar-breakpoint: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}};
+    --tp-sidebar-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
 }
