@@ -1,0 +1,21 @@
+title: $:/core/stylesheets/custom-properties
+tags: [[$:/tags/Stylesheet]]
+list-before: 
+
+\rules only macrocallinline macrocallblock
+
+/* Tiddlywiki's CSS properties */
+
+:root {
+    --tc-alert-background: <<colour alert-background>>;
+    --tc-alert-border: <<colour alert-border>>;
+    --tc-alert-highlight: <<colour alert-highlight>>;
+    --tc-alert-muted-foreground: <<colour alert-muted-foreground>>;
+    --tc-background: <<colour background>>;
+    --tc-blockquote-bar: <<colour blockquote-bar>>;
+    --tc-button-background: <<colour button-background>>;
+    --tc-button-border: <<colour button-border>>;
+    --tc-button-foreground: <<colour button-foreground>>;
+    --tc-code-background: <<colour code-background>>;
+    --tc-code-border: <<colour code-border>>;
+}
