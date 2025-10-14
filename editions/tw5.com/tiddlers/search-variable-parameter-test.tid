@@ -1,0 +1,13 @@
+created: 20240218173858951
+modified: 20240223200921450
+tags: 
+title: search-variable-parameter-test
+type: text/vnd.tiddlywiki
+
+\procedure asdf()
+<$let EXAMPLE="123" >
+<<search-variables type:"" sort:"" subfilter:"[search::some[]]"  format:"$type$ $name$($params$)"  >>
+</$let>
+\end
+
+<<asdf>>
