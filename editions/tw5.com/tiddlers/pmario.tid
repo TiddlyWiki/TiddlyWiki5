@@ -1,0 +1,14 @@
+created: 20240204014317494
+first-name: Mario
+last-name: Pietsch
+modified: 20240208142422817
+tags: person
+title: pmario
+type: text/vnd.tiddlywiki
+
+\import [[b b]]
+
+* part of [[test-contacts]]
+* has `first-name`, `last-name` fields
+
+<<list-fields>>
