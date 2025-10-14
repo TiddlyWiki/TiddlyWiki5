@@ -430,7 +430,7 @@ Tiddler frame in story river
 }
 
 :root {
-	color-scheme: {{{ [{$:/palette}get[color-scheme]] ~light }}};
+	color-scheme: {{{ [[$:/palette]mediaquery[(prefers-color-scheme: light)]get[text]get[color-scheme]] [[$:/palettedark]mediaquery[(prefers-color-scheme: dark)]get[text]get[color-scheme]] :else[[light]] }}};
 }
 
 /*
