@@ -1,0 +1,10 @@
+created: 20251015120940754
+modified: 20251015122119345
+tags: $:/deprecated
+title: Deprecated Core Classes
+type: text/vnd.tiddlywiki
+
+These [[Core Classes]] are considered deprecated. It is not recommend to use them for styling.
+
+* `tc-tagged-*` <<.deprecated-since 5.1.16>> Use [[Custom styles by data-tags]] instead.
+* `tc-reveal` <<.deprecated-since 5.3.8>> This class is used in TiddlyWiki so excessively that it has no value for styling.
