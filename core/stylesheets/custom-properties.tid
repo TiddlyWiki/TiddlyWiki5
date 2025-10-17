@@ -2,7 +2,7 @@ title: $:/core/stylesheets/custom-properties
 tags: [[$:/tags/Stylesheet]]
 list-before: 
 
-\rules only transcludeinline macrocallinline macrocallblock
+\rules only transcludeinline macrocallinline
 
 /* Tiddlywiki's CSS properties */
 
