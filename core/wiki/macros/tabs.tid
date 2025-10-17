@@ -4,13 +4,15 @@ code-body: yes
 
 \define tabs-button()
 \whitespace trim
+\procedure tabs-filter() []
 <$button
 	set=<<tabsState>>
 	setTo=<<currentTab>>
 	default=<<__default__>>
 	selectedClass="tc-tab-selected"
 	tooltip={{!!tooltip}}
-	role="switch"
+	role="tab"
+	aria-selected={{{ [<tabsState>is[missing]] :then[<__default__>match<currentTab>then[yes]] :else[<tabsState>get[text]match<currentTab>] :then[[true]] :else[[false]] }}}
 	data-tab-title=<<currentTab>>
 >
 	<$tiddler tiddler=<<save-currentTiddler>>>
@@ -57,12 +59,12 @@ code-body: yes
 \whitespace trim
 <$qualify title=<<__state__>> name="qualifiedState">
 	<$let tabsState={{{ [<__explicitState__>minlength[1]] ~[<qualifiedState>] }}}>
-		<div class={{{ [[tc-tab-set]addsuffix[ ]addsuffix<__class__>] }}}>
+		<div class={{{ [[tc-tab-set]addsuffix[ ]addsuffix<__class__>] }}} role="tablist">
 			<div class={{{ [[tc-tab-buttons]addsuffix[ ]addsuffix<__class__>] }}}>
 				<<tabs-tab-list>>
 			</div>
 			<div class={{{ [[tc-tab-divider]addsuffix[ ]addsuffix<__class__>] }}}/>
-			<div class={{{ [[tc-tab-content]addsuffix[ ]addsuffix<__class__>] }}}>
+			<div class={{{ [[tc-tab-content]addsuffix[ ]addsuffix<__class__>] }}} role="tabpanel">
 				<<tabs-tab-body>>
 			</div>
 		</div>
