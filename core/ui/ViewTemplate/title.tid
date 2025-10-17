@@ -5,7 +5,7 @@ tags: $:/tags/ViewTemplate
 \define title-styles() color:$(foregroundColor)$;
 
 <div class="tc-tiddler-title tc-clearfix">
-	<div class="tc-titlebar">
+	<div class="tc-titlebar" dir=<<tv-text-direction>>>
 		<span class="tc-tiddler-controls">
 			<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] :filter[lookup[$:/config/ViewToolbarButtons/Visibility/]!match[hide]]"
 				storyview="pop"

@@ -21,4 +21,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>New Tiddler</p><p>xxx</p><p>00-New Tiddler</p><p>0000 asdf</p>
+<p dir="auto">New Tiddler</p><p dir="auto">xxx</p><p dir="auto">00-New Tiddler</p><p dir="auto">0000 asdf</p>
