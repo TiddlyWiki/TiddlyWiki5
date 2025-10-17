@@ -12,7 +12,7 @@ code-body: yes
 	selectedClass="tc-tab-selected"
 	tooltip={{!!tooltip}}
 	role="tab"
-	aria-selected={{{ [<tabsState>is[missing]] :then[<__default__>match<currentTab>then[yes]] :else[<tabsState>get[text]match<currentTab>] :then[[true]] :else[[false]] }}}
+	aria-selected={{{ [<tabsState>!is[missing]] :then[<tabsState>get[text]match<currentTab>] :else[<currentTab>match<__default__>]  :then[[true]] :else[[false]] }}}
 	data-tab-title=<<currentTab>>
 >
 	<$tiddler tiddler=<<save-currentTiddler>>>
