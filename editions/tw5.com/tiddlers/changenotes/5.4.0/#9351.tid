@@ -1,0 +1,8 @@
+change-category: performance
+change-type: enhancement
+created: 20251019172022509
+modified: 20251019172500222
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9351
+
+Instead of checking the specified field of each input title for the parameter, a (cached) list of tiddlers that have the parameter in their respective field is retrieved and then intersected with the input list, resulting in better performance.
