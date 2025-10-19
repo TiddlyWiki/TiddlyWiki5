@@ -1,12 +1,13 @@
 title: $:/snippets/languageswitcher
 
 \whitespace trim
+\procedure languageFilter() [all[current]field:title{$:/language}]
+
 <$linkcatcher to="$:/language">
-<div class="tc-chooser tc-language-chooser">
+<div class="tc-chooser tc-language-chooser" role="listbox">
 <$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[description]]">
-<$set name="cls" filter="[all[current]field:title{$:/language}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
-<div class=<<cls>> lang={{!!name}}>
-<$link>
+<div class={{{ [subfilter<languageFilter>then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}} lang={{!!name}}>
+<$link role="option" aria-selected={{{ [subfilter<languageFilter>then[true]else[false]] }}}>
 <$view field="description">
 <$view field="name">
 <$view field="title"/>
@@ -14,7 +15,6 @@ title: $:/snippets/languageswitcher
 </$view>
 </$link>
 </div>
-</$set>
 </$list>
 </div>
 </$linkcatcher>
