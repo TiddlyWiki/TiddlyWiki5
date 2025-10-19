@@ -46,10 +46,14 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	var classes = this["class"].split(" ") || [],
 		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
 	if(this.selectedClass) {
-		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
+		if((this.set || this.setTitle) && this.setTo) {
 			const selectedAria = ALLOWED_SELECTED_ARIA_ATTR.includes(this.selectedAria) ? this.selectedAria : "aria-checked";
-			$tw.utils.pushTop(classes, this.selectedClass.split(" "));
-			domNode.setAttribute(selectedAria, "true");
+			if(this.isSelected()) {
+				$tw.utils.pushTop(classes, this.selectedClass.split(" "));
+				domNode.setAttribute(selectedAria, "true");
+			} else {
+				domNode.setAttribute(selectedAria, "false");
+			}
 		}
 		if(isPoppedUp) {
 			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
