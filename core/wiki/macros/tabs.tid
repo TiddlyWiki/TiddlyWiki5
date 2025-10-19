@@ -4,15 +4,14 @@ code-body: yes
 
 \define tabs-button()
 \whitespace trim
-\procedure tabs-filter() []
 <$button
 	set=<<tabsState>>
 	setTo=<<currentTab>>
 	default=<<__default__>>
 	selectedClass="tc-tab-selected"
+	selectedAria="aria-selected"
 	tooltip={{!!tooltip}}
 	role="tab"
-	aria-selected={{{ [<tabsState>!is[missing]] :then[<tabsState>get[text]match<currentTab>] :else[<currentTab>match<__default__>]  :then[[true]] :else[[false]] }}}
 	data-tab-title=<<currentTab>>
 >
 	<$tiddler tiddler=<<save-currentTiddler>>>

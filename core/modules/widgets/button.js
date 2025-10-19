@@ -9,6 +9,8 @@ Button widget
 
 "use strict";
 
+const ALLOWED_SELECTED_ARIA_ATTR = ["aria-checked", "aria-selected", "aria-pressed"];
+
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
@@ -45,8 +47,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
 	if(this.selectedClass) {
 		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
+			const selectedAria = ALLOWED_SELECTED_ARIA_ATTR.includes(this.selectedAria) ? this.selectedAria : "aria-checked";
 			$tw.utils.pushTop(classes, this.selectedClass.split(" "));
-			domNode.setAttribute("aria-checked", "true");
+			domNode.setAttribute(selectedAria, "true");
 		}
 		if(isPoppedUp) {
 			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
@@ -221,6 +224,7 @@ ButtonWidget.prototype.execute = function() {
 	this.style = this.getAttribute("style");
 	this["class"] = this.getAttribute("class","");
 	this.selectedClass = this.getAttribute("selectedClass");
+	this.selectedAria = this.getAttribute("selectedAria");
 	this.defaultSetValue = this.getAttribute("default","");
 	this.buttonTag = this.getAttribute("tag");
 	this.dragTiddler = this.getAttribute("dragTiddler");
