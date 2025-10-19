@@ -6,15 +6,15 @@ title: $:/snippets/languageswitcher
 <$linkcatcher to="$:/language">
 <div class="tc-chooser tc-language-chooser" role="listbox">
 <$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[description]]">
-<div class={{{ [subfilter<languageFilter>then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}} lang={{!!name}}>
-<$link role="option" aria-selected={{{ [subfilter<languageFilter>then[true]else[false]] }}}>
-<$view field="description">
-<$view field="name">
-<$view field="title"/>
-</$view>
-</$view>
-</$link>
-</div>
+	<div class={{{ [subfilter<languageFilter>then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}} lang={{!!name}}>
+		<$link role="option" aria-selected={{{ [subfilter<languageFilter>then[true]else[false]] }}}>
+			<$view field="description">
+				<$view field="name">
+				<$view field="title"/>
+				</$view>
+			</$view>
+		</$link>
+	</div>
 </$list>
 </div>
 </$linkcatcher>

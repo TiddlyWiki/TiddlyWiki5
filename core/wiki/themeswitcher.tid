@@ -6,13 +6,13 @@ title: $:/snippets/themeswitcher
 <$linkcatcher to="$:/theme">
 <div class="tc-chooser" role="listbox">
 <$list filter="[plugin-type[theme]sort[title]]">
-<div class={{{ [subfilter<themeFilter>then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}}>
-<$link to={{!!title}} role="option" aria-selected={{{ [subfilter<themeFilter>then[true]else[false]] }}}>
-''<$view field="name" format="text"/>''
-&#32;
-<$view field="description" format="text"/>
-</$link>
-</div>
+	<div class={{{ [subfilter<themeFilter>then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}}>
+		<$link to={{!!title}} role="option" aria-selected={{{ [subfilter<themeFilter>then[true]else[false]] }}}>
+			''<$view field="name" format="text"/>''
+			&#32;
+			<$view field="description" format="text"/>
+		</$link>
+	</div>
 </$list>
 </div>
 </$linkcatcher>

@@ -7,22 +7,22 @@ caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
 \procedure layoutEmptyFilter() [all[current]field:title{$:/layout}]
 
 <$linkcatcher to="$:/layout">
-<div class="tc-chooser" role>
+<div class="tc-chooser" role="listbox">
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/Layout]] [[$:/core/ui/PageTemplate]] +[!is[draft]sort[name]]">
-<$list filter="[{$:/layout}!has[text]]" variable="ignore">
-<$list-empty>
-<div class={{{ [subfilter<layoutEmptyFilter>then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}}>
-<$link to={{!!title}} role="option" aria-selected={{{ [subfilter<layoutEmptyFilter>then[true]else[false]] }}}>
-''<$transclude tiddler={{{ [<currentTiddler>get[icon]] }}}/><$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
-</$link>
-</div>
-</$list-empty>
-<div class={{{ [subfilter<layoutFilter>then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}}>
-<$link to={{!!title}} role="option" aria-selected={{{ [subfilter<layoutFilter>then[true]else[false]] }}}>
-''<$transclude tiddler={{{ [<currentTiddler>get[icon]] }}}/><$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
-</$link>
-</div>
-</$list>
+	<$list filter="[{$:/layout}!has[text]]" variable="ignore">
+		<$list-empty>
+			<div class={{{ [subfilter<layoutEmptyFilter>then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}}>
+				<$link to={{!!title}} role="option" aria-selected={{{ [subfilter<layoutEmptyFilter>then[true]else[false]] }}}>
+					''<$transclude tiddler={{{ [<currentTiddler>get[icon]] }}}/><$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
+				</$link>
+			</div>
+		</$list-empty>
+		<div class={{{ [subfilter<layoutFilter>then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}}>
+			<$link to={{!!title}} role="option" aria-selected={{{ [subfilter<layoutFilter>then[true]else[false]] }}}>
+				''<$transclude tiddler={{{ [<currentTiddler>get[icon]] }}}/><$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
+			</$link>
+		</div>
+	</$list>
 </$list>
 </div>
 </$linkcatcher>
