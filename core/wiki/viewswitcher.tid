@@ -9,13 +9,9 @@ $:/core/images/storyview-$(storyview)$
 <$linkcatcher to="$:/view">
 <div class="tc-chooser tc-viewswitcher" role="listbox">
 <$list filter="[storyviews[]]" variable="storyview">
-<$set name="cls" filter=<<viewFilter>> value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
-<$set name="selected" filter=<<viewFilter>> value="true" emptyValue="false">
-<div class=<<cls>>>
-<$button tag="a" class="tc-tiddlylink tc-btn-invisible" role="option" to=<<storyview>> aria-selected=<<selected>>><$transclude tiddler=<<icon>>/><$text text=<<storyview>>/></$button>
+<div class={{{ [subfilter<viewFilter>then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}}>
+<$button tag="a" class="tc-tiddlylink tc-btn-invisible" role="option" to=<<storyview>> aria-selected={{{ [subfilter<viewFilter>then[true]else[false]] }}}><$transclude tiddler=<<icon>>/><$text text=<<storyview>>/></$button>
 </div>
-</$set>
-</$set>
 </$list>
 </div>
 </$linkcatcher>
