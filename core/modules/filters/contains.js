@@ -21,9 +21,7 @@ exports.contains = function(source,operator,options) {
 	// we get the title or list of titles to check for from the first operand
 	const operandTitles = $tw.utils.parseStringArray(operands[0] || "");
 	if(flags.includes("listed")) { // we use findListingsOfTiddler lookup if requested
-		const intermediateSets = operandTitles.map(title => 
-			new Set(options.wiki.findListingsOfTiddler(title, fieldname))
-		);
+		const intermediateSets = operandTitles.map(title => new Set(options.wiki.findListingsOfTiddler(title, fieldname)));
 		source((tiddler,title) => {
 			let hasTitle;
 			if(flags.includes("some")) {
@@ -41,13 +39,9 @@ exports.contains = function(source,operator,options) {
 				const list = tiddler.getFieldList(fieldname);
 				let hasTitle;
 				if(flags.includes("some")) {
-					hasTitle = operandTitles.some(searchTitle => 
-						list.indexOf(searchTitle) !== -1
-					);
+					hasTitle = operandTitles.some(searchTitle => list.indexOf(searchTitle) !== -1);
 				} else {
-					hasTitle = operandTitles.every(searchTitle => 
-						list.indexOf(searchTitle) !== -1
-					);
+					hasTitle = operandTitles.every(searchTitle => list.indexOf(searchTitle) !== -1);
 				}
 				if(hasTitle !== invert) {
 					results.push(title);
