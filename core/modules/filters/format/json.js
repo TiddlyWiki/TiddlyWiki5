@@ -16,7 +16,7 @@ exports.json = function(source,operand,options) {
 		spaces = /^\d+$/.test(operand) ? parseInt(operand,10) : operand;
 	}
 	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title);
+		var data;
 		try {
 			data = JSON.parse(title);
 		} catch(e) {
