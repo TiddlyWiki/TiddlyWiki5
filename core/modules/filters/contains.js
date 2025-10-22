@@ -18,9 +18,19 @@ exports.contains = function(source,operator,options) {
 	const flagsString = operands[2] || "";
 	const flags = flagsString.split(",").map(f => f.trim().toLowerCase());
 	const invert = operator.prefix === "!";
-	// we get the title or list of titles to check for from the first operand
+
+	// We parse the first parameter value to get the title or list of titles to check for
 	const operandTitles = $tw.utils.parseStringArray(operands[0] || "");
-	if(flags.includes("listed")) { // we use findListingsOfTiddler lookup if requested
+
+	// We return the input list (or nothing if inverted) if no value is given
+	if(operandTitles.length === 0) {
+		if(!invert) {
+			source((tiddler,title) => results.push(title));
+		}
+		return results;
+	}
+
+	if(flags.includes("listed")) { // We use findListingsOfTiddler lookup if requested
 		const intermediateSets = operandTitles.map(title => new Set(options.wiki.findListingsOfTiddler(title, fieldname)));
 		source((tiddler,title) => {
 			let hasTitle;
@@ -33,7 +43,7 @@ exports.contains = function(source,operator,options) {
 				results.push(title);
 			}
 		});
-	} else { // original algorithm
+	} else { // We use the original algorithm
 		source((tiddler,title) => {
 			if(tiddler) {
 				const list = tiddler.getFieldList(fieldname);
