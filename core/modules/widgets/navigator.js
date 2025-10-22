@@ -588,7 +588,7 @@ NavigatorWidget.prototype.handlePerformImportEvent = function (event) {
 				else {
 					// Check for temporary rename field
 					var tempRenameTiddler = self.wiki.getTiddler("$:/temp/NewImportTitle-" + title);
-					if (tempRenameTiddler && tempRenameTiddler.fields.text && tempRenameTiddler.fields.text.trim() !== "") {
+					if(tempRenameTiddler && tempRenameTiddler.fields.text && tempRenameTiddler.fields.text.trim() !== "") {
 						newTitle = tempRenameTiddler.fields.text.trim();
 					}
 				}
