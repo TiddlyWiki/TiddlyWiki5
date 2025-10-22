@@ -581,9 +581,16 @@ NavigatorWidget.prototype.handlePerformImportEvent = function (event) {
 			if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
 				var newTitle = title; // Default to original title
 
-				// Check for confirmed rename field
+				// Check for confirmed rename field first
 				if($tw.utils.hop(importTiddler.fields, ["rename-" + title])) {
 					newTitle = importTiddler.fields["rename-" + title];
+				}
+				else {
+					// Check for temporary rename field (user input without clicking checkmark)
+					var tempRenameTiddler = self.wiki.getTiddler("$:/temp/NewImportTitle-" + title);
+					if (tempRenameTiddler && tempRenameTiddler.fields.text && tempRenameTiddler.fields.text.trim() !== "") {
+						newTitle = tempRenameTiddler.fields.text.trim();
+					}
 				}
 
 				var tiddler = new $tw.Tiddler(tiddlerFields, { title: newTitle });
