@@ -64,3 +64,4 @@ exports.contains = function(source,operator,options) {
 		});
 	}
 	return results;
+};
