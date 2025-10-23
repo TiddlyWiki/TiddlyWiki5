@@ -44,7 +44,7 @@ exports.serializeWikitextParseTree = function serializeWikitextParseTree(tree,op
 			} else if(tree.rule === "parseblock") {
 				output.push(serializeWikitextParseTree(tree.children,options),"\n\n");
 			} else {
-				// when no rule is found, just serialize the children
+				// when no rule is found, just serialize the children, for example the void nodes
 				output.push(serializeWikitextParseTree(tree.children,options));
 			}
 		}
