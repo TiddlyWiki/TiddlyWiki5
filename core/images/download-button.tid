@@ -2,4 +2,4 @@ title: $:/core/images/download-button
 tags: $:/tags/Image
 
 \parameters (size:"22pt")
-<svg xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>> viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tc-image-download-button tc-image-button lucide lucide-hard-drive-download-icon lucide-hard-drive-download"><path d="M12 2v8"/><path d="m16 6-4 4-4-4"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 18h.01"/><path d="M10 18h.01"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>> viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tc-image-download-button tc-image-button lucide lucide-circle-arrow-down-icon lucide-circle-arrow-down"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="m8 12 4 4 4-4"/></svg>
