@@ -9,8 +9,9 @@ code-body: yes
 	setTo=<<currentTab>>
 	default=<<__default__>>
 	selectedClass="tc-tab-selected"
+	selectedAria="aria-selected"
 	tooltip={{!!tooltip}}
-	role="switch"
+	role="tab"
 	data-tab-title=<<currentTab>>
 >
 	<$tiddler tiddler=<<save-currentTiddler>>>
@@ -57,12 +58,12 @@ code-body: yes
 \whitespace trim
 <$qualify title=<<__state__>> name="qualifiedState">
 	<$let tabsState={{{ [<__explicitState__>minlength[1]] ~[<qualifiedState>] }}}>
-		<div class={{{ [[tc-tab-set]addsuffix[ ]addsuffix<__class__>] }}}>
+		<div class={{{ [[tc-tab-set]addsuffix[ ]addsuffix<__class__>] }}} role="tablist">
 			<div class={{{ [[tc-tab-buttons]addsuffix[ ]addsuffix<__class__>] }}}>
 				<<tabs-tab-list>>
 			</div>
 			<div class={{{ [[tc-tab-divider]addsuffix[ ]addsuffix<__class__>] }}}/>
-			<div class={{{ [[tc-tab-content]addsuffix[ ]addsuffix<__class__>] }}}>
+			<div class={{{ [[tc-tab-content]addsuffix[ ]addsuffix<__class__>] }}} role="tabpanel">
 				<<tabs-tab-body>>
 			</div>
 		</div>
