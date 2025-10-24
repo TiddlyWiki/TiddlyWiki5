@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/icons-legacy",
+	"name": "Core Icons (legacy)",
+	"description": "Core icons used by Tiddlywiki before v5.4.0",
+	"stability": "STABILITY_0_DEPRECATED",
+	"version": "5.3.8"
+}
