@@ -2,4 +2,4 @@ title: $:/core/images/layout-button
 tags: $:/tags/Image
 
 \parameters (size:"22pt")
-<svg width=<<size>> height=<<size>> class="tc-image-layout-button tc-image-button" viewBox="0 0 24 24" stroke-width="1" stroke="none"><path d="M0 0h24v24H0z" fill="none"/><rect x="2" y="2" width="7" height="7" rx="2"/><rect x="2" y="13" width="7" height="9" rx="2"/><rect x="12" y="2" width="10" height="20" rx="2"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>> viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tc-image-layout-button tc-image-button lucide lucide-layout-dashboard-icon lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
