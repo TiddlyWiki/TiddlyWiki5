@@ -4,4 +4,4 @@ tags: $:/tags/Image
 title: $:/core/images/left-arrow
 
 \parameters (size:"22pt")
-<svg width=<<size>> height=<<size>> class="tc-image-left-arrow tc-image-button" viewBox="0 0 128 128"><path d="M0 64.177c0-2.026.771-4.054 2.317-5.6l55.98-55.98a7.92 7.92 0 0111.195.001c3.086 3.085 3.092 8.104.001 11.195L19.111 64.175l50.382 50.382a7.92 7.92 0 010 11.195c-3.086 3.086-8.105 3.092-11.196.001l-55.98-55.98A7.892 7.892 0 010 64.177z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>> viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tc-image-left-arrow tc-image-button lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
