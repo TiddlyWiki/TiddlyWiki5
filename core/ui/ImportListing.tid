@@ -37,8 +37,6 @@ title: $:/core/ui/ImportListing
 
 \define suppressedField() suppressed-$(payloadTiddler)$
 
-\define newImportTitleTiddler() $:/temp/NewImportTitle-$(payloadTiddler)$
-
 \define previewPopupState() $(currentTiddler)$!!popup-$(payloadTiddler)$
 
 \define renameFieldState() $(currentTiddler)$!!state-rename-$(payloadTiddler)$
