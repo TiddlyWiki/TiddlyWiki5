@@ -3315,6 +3315,10 @@ span.tc-translink > a:first-child {
 	fill: <<colour network-activity-foreground>>;
 }
 
+.tc-network-activity-outline {
+	stroke: <<colour network-activity-foreground>>;
+}
+
 /*
 ** Test Cases
 */
