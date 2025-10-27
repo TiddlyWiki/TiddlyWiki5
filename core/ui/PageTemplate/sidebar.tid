@@ -16,7 +16,9 @@ $:/config/SideBarSegments/Visibility/$(listItem)$
 
 <$reveal type="nomatch" state=<<config-title>> text="hide"  tag="div">
 
+<%if [<tv-config-static>!match[yes]] :else[<listItem>!has[hide-static]] %>
 <$transclude tiddler=<<listItem>> mode="block"/>
+<%endif%>
 
 </$reveal>
 

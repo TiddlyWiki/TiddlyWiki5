@@ -1,6 +1,6 @@
 title: $:/StaticBanner
 
-\function url() [[https://tiddlywiki.com/]] [<storyTiddler>encodeuri[]] +[join[#]]
-\define tv-wikilinks() no
+\function tf.url() [[https://tiddlywiki.com/]] [<storyTiddler>encodeuricomponent[]] +[join[#]]
+\function tf.urlPlain() [[https://tiddlywiki.com/]] [<storyTiddler>] +[join[#]]
 
-<div class="tc-static-alert"><div class="tc-static-alert-inner">This page is part of a static HTML representation of the ~TiddlyWiki note at: ~https://tiddlywiki.com/#<a class="tc-tiddlylink-external" href=<<url>> rel="noopener noreferrer" target="_blank"><<storyTiddler>></a></div></div>
+<div class="tc-static-alert"><div class="tc-static-alert-inner">This page is part of a static HTML representation of the ~TiddlyWiki at: <a class="tc-tiddlylink-external" href=<<tf.url>> rel="noopener noreferrer" target="_blank"><$text text=<<tf.urlPlain>>/></a></div></div>
