@@ -6,10 +6,7 @@ module-type: utils
 Various static utility functions.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
@@ -1038,5 +1035,3 @@ exports.makeCompareFunction = function(type,options) {
 		};
 	return (types[type] || types[options.defaultType] || types.number);
 };
-
-})();

@@ -3,10 +3,7 @@ title: $:/macros/classic/macroadapter.js
 type: application/javascript
 module-type: module
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 /*
 Information about this module:
@@ -94,4 +91,3 @@ var paramadapter = {
 exports.name = 'macroadapter';
 exports.namedapter = namedapter;
 exports.paramadapter = paramadapter;
-})();

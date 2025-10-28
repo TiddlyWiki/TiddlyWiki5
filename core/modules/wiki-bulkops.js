@@ -6,10 +6,7 @@ module-type: wikimethod
 Bulk tiddler operations such as rename.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -84,5 +81,3 @@ function relinkTiddler(fromTitle,toTitle,options) {
 
 exports.renameTiddler = renameTiddler;
 exports.relinkTiddler = relinkTiddler;
-
-})();

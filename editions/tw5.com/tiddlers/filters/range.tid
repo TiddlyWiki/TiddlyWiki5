@@ -1,9 +1,9 @@
 caption: range
 created: 20171221184734665
-modified: 20230321133838310
+modified: 20251008154315078
 op-input: ignored
-op-neg-output: a series of evenly spaced numbers ranging from `<begin>` to `<end>` in reverse order
-op-output: a series of evenly spaced numbers ranging from `<begin>` to `<end>`
+op-neg-output: a series of evenly spaced numbers ranging from `[BEGIN]` to `[END]` in reverse order
+op-output: a series of evenly spaced numbers ranging from `[BEGIN]` to `[END]`
 op-parameter: a range specification, like `[1],[5]`
 op-parameter-name: N
 op-purpose: generate a range of numbers
@@ -23,42 +23,56 @@ The `range` operator produces a list of numbers counting up or down.  It is usef
 
 <<.from-version "5.2.0">> The range operator has been updated to use multiple parameters. Prior to this version, the range operator only had one parameter, with the three parts delimited by `,`, `;` or `:`.
 
+In the descriptions below the words `BEGIN`, `END` and `STEP` are placeholders. 
+
 ```
-[range[<begin>]]
-[range[<begin>],[<end>]]
-[range[<begin>],[<end>],[<step>]]
+[range[END]]
+[range[BEGIN],[END]]
+[range[BEGIN],[END],[STEP]]
 ```
 
 The behaviour depends on the number of parameters:
 
-|Parameter |Output |h
-|`<end>` |Whole numbers up to `<end>` |
-|`<begin>,<end>` |Numbers from `<begin>` to `<end>`, spaced by whole numbers |
-|`<begin>,<end>,<step>` |Numbers from `<begin>` to `<end>` spaced out by `<step>` |
+|Parameter(s) Literal |Output |h
+|`[END]` |Whole numbers up to `[END]` eg: `[range[7]]`|
+|`[BEGIN],[END]` |Numbers from `[BEGIN]` to `[END]`, spaced by whole numbers eg: `[range[1],[10]]` |
+|`[BEGIN],[END],[STEP]` |Numbers from `[BEGIN]` to `[END]` spaced out by `[STEP]` eg: `[range[1],[7],[2]]` |
 
-Each part must be a number, and works as follows:
+|Parameter(s) Dynamic |Output |h
+|`<END>` |Whole numbers up to `<END>` eg: `[range<myRangeEnd>]`.<br>The <<.var myRangeEnd>> variable has to be defined somewhere else with eg: <<.wid let>> widget |
+|`{BEGIN},<END>` |Numbers from `{BEGIN}` to `<END>` eg: `[range{myRangeStart},<myRangeEnd>]`.<br>The <<.param myRangeStart>> will be transcluded from a tiddler "myRanageStart"  and <<.var myRangeEnd>> comes from a variable |
 
-* `<begin>`: start counting at this number.
-** Defaults to 1 if `<end>` is at least 1 (or -1 if `<end>` is at most -1).
-* `<end>`: stop counting at this number.
+Each parameter must be a number, and works as follows:
+
+* `[BEGIN]`: start counting at this number.
+** Defaults to 1 if `[END]` is at least 1 (or -1 if `[END]` is at most -1).
+
+* `[END]`: stop counting at this number.
 ** This number will appear in the list unless it falls between two steps.
-* `<step>`: count up (or down) by this amount.
+
+* `[STEP]`: count up (or down) by this amount.
 ** Defaults to 1.
 ** Cannot be zero.
-** We always count from `<begin>` toward `<end>`, whether `<step>` is positive or negative.
+** We always count from `[BEGIN]` toward `[END]`, whether `[STEP]` is positive or negative.
 
 The number of decimal points in the output is fixed, and based on the parameter with the //most// decimal points.
 
 To prevent the browser from freezing, `range` is currently limited to 10,000 values.
 
-!!Examples
+!! Examples
 
-<<range_example "7">>
+<<wikitext-example-without-html
+"""<$list variable=n filter="[range[7]]" join=", "><<n>></$list>""">>
 
-<<range_example "1],[10">>
+<<wikitext-example-without-html
+"""<$list variable=n filter="[range[3],[10]]" join=", "><<n>></$list>""">>
 
-<<range_example "17],[13">>
+<<wikitext-example-without-html
+"""<$list variable=n filter="[range[17],[13]]" join=", "><<n>></$list>""">>
 
-<<range_example "1.001],[5],[1">>
+<<wikitext-example-without-html
+"""<$list variable=n filter="[range[1.001],[8],[2]]" join=", "><<n>></$list>""">>
 
-<<range_example ".5],[1.4],[.004">>
+<<wikitext-example-without-html
+"""<$list variable=n filter="[range[.9],[1.1],[.004]]" join=", "><<n>></$list>""">>
+

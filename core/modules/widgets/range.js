@@ -6,10 +6,7 @@ module-type: widget
 Range widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -45,6 +42,9 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 	}
 	if(this.increment){
 		this.inputDomNode.setAttribute("step", this.increment);
+	}
+	if(this.tabIndex) {
+		this.inputDomNode.setAttribute("tabindex", this.tabIndex);
 	}
 	if(this.isDisabled === "yes") {
 		this.inputDomNode.setAttribute("disabled",true);
@@ -164,6 +164,7 @@ RangeWidget.prototype.execute = function() {
 	this.defaultValue = this.getAttribute("default","");
 	this.elementClass = this.getAttribute("class","");
 	this.isDisabled = this.getAttribute("disabled","no");
+	this.tabIndex = this.getAttribute("tabindex");
 	// Actions since 5.1.23
 	// Next 2 only fire once!
 	this.actionsMouseDown = this.getAttribute("actionsStart","");
@@ -196,5 +197,3 @@ RangeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.range = RangeWidget;
-
-})();

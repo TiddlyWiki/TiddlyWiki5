@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator evaluates a subfilter for each item, making the running total available in the variable `accumulator`, and the current index available in the variable `index`
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -44,5 +41,3 @@ exports.reduce = function(source,operator,options) {
 		return [];
 	}
 };
-
-})();

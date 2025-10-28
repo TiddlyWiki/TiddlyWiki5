@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for returning the names of the wiki parser rules in this wiki
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -27,5 +24,3 @@ exports.wikiparserrules = function(source,operator,options) {
 	results.sort();
 	return results;
 };
-
-})();

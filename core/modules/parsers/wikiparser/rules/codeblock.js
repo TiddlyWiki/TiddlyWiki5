@@ -12,10 +12,7 @@ Wiki text rule for code blocks. For example:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "codeblock";
@@ -56,5 +53,3 @@ exports.parse = function() {
 			}
 	}];
 };
-
-})();

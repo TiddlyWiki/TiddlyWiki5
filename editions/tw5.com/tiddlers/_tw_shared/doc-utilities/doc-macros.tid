@@ -207,6 +207,7 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 \procedure .link-badge-removed(link,colour:#a9aabc)  <$macrocall $name=".link-badge" text="removed"  link=<<link>> colour=<<colour>>/>
 \procedure .link-badge-renamed(link,colour:#b4b995)  <$macrocall $name=".link-badge" text="renamed"  link=<<link>> colour=<<colour>>/>
 \procedure .link-badge-updated(link,colour:#91ba66)  <$macrocall $name=".link-badge" text="updated"  link=<<link>> colour=<<colour>>/>
+\procedure .link-badge-reverted(link,colour:#ba8e66)  <$macrocall $name=".link-badge" text="reverted"  link=<<link>> colour=<<colour>>/>
 
 \procedure .banner-credits(credit,url)
 <img src=<<url>> width="140" style="float:left;margin-right:0.5em;"/>

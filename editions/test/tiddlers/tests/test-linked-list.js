@@ -21,10 +21,7 @@ NOTE TO FURTHER LINKED LIST DEVELOPERS:
 	the end. I think you'll probably be better off preventing 'prev' from ever
 	adding undefined.
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("LinkedList class tests", function() {
@@ -307,4 +304,3 @@ describe("LinkedList class tests", function() {
 	});
 });
 
-})();
