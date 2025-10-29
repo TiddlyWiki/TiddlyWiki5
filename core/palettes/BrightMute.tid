@@ -71,7 +71,7 @@ sidebar-tab-divider: #999
 sidebar-tab-foreground-selected: #bfbfbf
 sidebar-tab-foreground: #b0b0b0
 sidebar-tiddler-link-foreground-hover: #444444
-sidebar-tiddler-link-foreground: #d1d0d2
+sidebar-tiddler-link-foreground: #aaaaaa
 site-title-foreground: <<colour tiddler-title-foreground>>
 stability-deprecated: #bf616a
 stability-experimental: #d08770
