@@ -121,8 +121,8 @@ SelectWidget.prototype.setSelectValue = function() {
 	if (this.selectMultiple) {
 		value = value === undefined ? "" : value;
 		var select = this.getSelectDomNode();
-		var values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
-		var child;
+var child,
+		values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
 		for(var i=0; i < select.children.length; i++){
 			child=select.children[i];
 			if (child.children.length === 0){
