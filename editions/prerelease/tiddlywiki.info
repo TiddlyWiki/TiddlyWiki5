@@ -1,7 +1,6 @@
 {
 	"description": "Content for the current prerelease",
 	"plugins": [
-		"tiddlywiki/freelinks",
 		"tiddlywiki/help",
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",
