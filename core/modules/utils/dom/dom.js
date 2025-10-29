@@ -286,7 +286,7 @@ exports.copyToClipboard = function(text,options,type) {
 	textArea.setSelectionRange(0,text.length);
 	textArea.addEventListener("copy",function(event) {
 		event.preventDefault();
-		if (options.plainText) {
+		if(options.plainText) {
 			event.clipboardData.setData("text/plain",options.plainText);
 		}
 		event.clipboardData.setData(type,text);
@@ -319,7 +319,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
-		
+
 		if("offsetLeft" in selectedNode) {
 			// Add variables with a (relative and absolute) popup coordinate string for the selected node
 			var nodeRect = {
@@ -344,7 +344,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
 		}
 	}
-	
+
 	if(domNode && ("offsetWidth" in domNode)) {
 		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
 		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
@@ -395,30 +395,23 @@ exports.querySelectorAllSafe = function(selector,baseElement) {
 
 /*
 Sanitize HTML tag- and custom web component names
-	1. Check the string, if it is a valid html tag - using this spec: https://html.spec.whatwg.org/#syntax-tag-name
-		1.1 Tag names are "case insensitive"
-    2. Extend 1. and allow hyphens: "-"
-		2.1 Browsers allow "AA-AA", so do we. Be aware there may be styling problems
-
-	3. Sanitize input parameters - spec: https://html.spec.whatwg.org/#valid-custom-element-name
-    4. Implement a forbidden list: exports.htmlForbiddenTags - see: $:/core/modules/config.js
-    5. Check function parameters for invalid character ranges up to \uFFFF. This detects problems in a range JS RegExp can handle
-    6. We assume that everything out of js RegExp-range is valid, which is OK for \u10000-\uEFFFF according to the spec
-
+	Check function parameters for invalid character ranges up to \uFFFF. This detects problems in a range JS RegExp can handle
+	We assume that everything out of js RegExp-range is valid, which is OK for \u10000-\uEFFFF according to the spec
 	Unicode overview: https://symbl.cc/en/unicode-table/
 */
 exports.makeTagNameSafe = function(tag,defaultTag) {
-	// Custom web-components need to be "lowercase()"
+	// Custom web-components need to be "lowercase()" https://html.spec.whatwg.org/#valid-custom-element-name
 	var regxSanitizeChars = new RegExp($tw.config.htmlCustomPrimitives.sanitizePCENChar,"mg");
-	// Sanitize inputs to make the logic simple
+
+	// Sanitize inputs to make the logic simpler
 	defaultTag = (defaultTag) ? defaultTag.replace(regxSanitizeChars,"") : "SPAN";
 	tag = (tag) ? tag.replace(regxSanitizeChars,"") : defaultTag;
 
-	// RegExp for valid standard HTML element, extended including hyphen "-"
+	// RegExp for valid standard HTML element, extended including hyphen "-" because browsers allow it
 	var regexStandardChars = /(?:[a-z]|[A-Z]|[0-9]|-)+/g,
 		result = "";
 
-	// Check if tag matches standard HTML spec
+	// Check if tag matches standard HTML spec https://html.spec.whatwg.org/#syntax-tag-name
 	if(tag.match(regexStandardChars)[0] === tag) {
 		result = tag;
 	}
@@ -426,7 +419,7 @@ exports.makeTagNameSafe = function(tag,defaultTag) {
 	if($tw.config.htmlUnsafeElements.indexOf(result.toLowerCase()) !== -1) {
 		result = ($tw.config.htmlUnsafeElements.indexOf(defaultTag.toLowerCase()) !== -1) ? "safe-" + defaultTag : defaultTag;
 	}
-	// Check for forbidden tag names according to spec and log info to help users
+	// Check for forbidden tag names according to spec and log info to help users. See: $:/core/modules/config.js
 	if($tw.config.htmlForbiddenTags.indexOf(result.toLowerCase()) >= 0) {
 		console.log("Forbidden custom element:\"" + result.toLowerCase() + "\" See: https://html.spec.whatwg.org/#valid-custom-element-name")
 		result = "safe-" + result;
