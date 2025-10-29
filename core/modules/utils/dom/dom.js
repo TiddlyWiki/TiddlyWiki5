@@ -306,13 +306,13 @@ Collect DOM variables
 */
 exports.collectDOMVariables = function(selectedNode,domNode,event) {
 	var variables = {},
-		selectedNodeRect,
-		domNodeRect;
+	    selectedNodeRect,
+	    domNodeRect;
 	if(selectedNode) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
-
+		
 		if("offsetLeft" in selectedNode) {
 			// Add variables with a (relative and absolute) popup coordinate string for the selected node
 			var nodeRect = {
@@ -337,7 +337,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
 		}
 	}
-
+	
 	if(domNode && ("offsetWidth" in domNode)) {
 		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
 		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
@@ -366,7 +366,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 };
 
 /*
-Make sure the CSS selector is valid
+Make sure the CSS selector is not invalid
 */
 exports.querySelectorSafe = function(selector,baseElement) {
 	baseElement = baseElement || document;
@@ -384,38 +384,4 @@ exports.querySelectorAllSafe = function(selector,baseElement) {
 	} catch(e) {
 		console.log("Invalid selector: ",selector);
 	}
-};
-
-/*
-Sanitize HTML tag- and custom web component names
-	Check function parameters for invalid character ranges up to \uFFFF. This detects problems in a range JS RegExp can handle
-	We assume that everything out of js RegExp-range is valid, which is OK for \u10000-\uEFFFF according to the spec
-	Unicode overview: https://symbl.cc/en/unicode-table/
-*/
-exports.makeTagNameSafe = function(tag,defaultTag) {
-	// Custom web-components need to be "lowercase()" https://html.spec.whatwg.org/#valid-custom-element-name
-	var regxSanitizeChars = new RegExp($tw.config.htmlCustomPrimitives.sanitizePCENChar,"mg");
-
-	// Sanitize inputs to make the logic simpler
-	defaultTag = (defaultTag) ? defaultTag.replace(regxSanitizeChars,"") : "SPAN";
-	tag = (tag) ? tag.replace(regxSanitizeChars,"") : defaultTag;
-
-	// RegExp for valid standard HTML element, extended including hyphen "-" because browsers allow it
-	var regexStandardChars = /(?:[a-z]|[A-Z]|[0-9]|-)+/g,
-		result = "";
-
-	// Check if tag matches standard HTML spec https://html.spec.whatwg.org/#syntax-tag-name
-	if(tag.match(regexStandardChars)[0] === tag) {
-		result = tag;
-	}
-	// Check for unsafe tag and unsafe defaultTag
-	if($tw.config.htmlUnsafeElements.indexOf(result.toLowerCase()) !== -1) {
-		result = ($tw.config.htmlUnsafeElements.indexOf(defaultTag.toLowerCase()) !== -1) ? "safe-" + defaultTag : defaultTag;
-	}
-	// Check for forbidden tag names according to spec and log info to help users. See: $:/core/modules/config.js
-	if($tw.config.htmlForbiddenTags.indexOf(result.toLowerCase()) >= 0) {
-		console.log("Forbidden custom element:\"" + result.toLowerCase() + "\" See: https://html.spec.whatwg.org/#valid-custom-element-name")
-		result = "safe-" + result;
-	}
-	return result;
 };

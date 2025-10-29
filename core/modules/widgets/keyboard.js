@@ -31,7 +31,9 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	var tag = this.parseTreeNode.isBlock ? "div" : "span";
-	tag = $tw.utils.makeTagNameSafe(this.tag,tag);
+	if(this.tag && $tw.config.htmlUnsafeElements.indexOf(this.tag) === -1) {
+		tag = this.tag;
+	}
 	// Create element
 	var domNode = this.document.createElement(tag);
 	// Assign classes
@@ -48,7 +50,7 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 };
 
 KeyboardWidget.prototype.handleChangeEvent = function(event) {
-	if($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
 		return true;
 	}
 
