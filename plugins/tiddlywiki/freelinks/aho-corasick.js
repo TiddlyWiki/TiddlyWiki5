@@ -189,8 +189,8 @@ AhoCorasick.prototype.search = function(text, useWordBoundary) {
 };
 
 AhoCorasick.prototype.isWordBoundaryMatch = function(text, start, end) {
-	var beforeChar = start > 0 ? text[start - 1] : '';
-	var afterChar = end < text.length ? text[end] : '';
+	var beforeChar = start > 0 ? text[start - 1] : "";
+	var afterChar = end < text.length ? text[end] : "";
 	
 	var isWordChar = function(char) {
 		return /[a-zA-Z0-9_\u00C0-\u00FF]/.test(char);
