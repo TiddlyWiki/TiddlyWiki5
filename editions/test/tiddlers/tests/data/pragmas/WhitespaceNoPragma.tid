@@ -20,7 +20,7 @@ Now!
 +
 title: ExpectedResult
 
-<p>
+<p dir="auto">
 [
     {
         "type": "text",

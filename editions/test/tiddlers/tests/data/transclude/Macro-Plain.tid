@@ -14,4 +14,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>Jeremy|Jeremy</p>
+<p dir="auto">Jeremy|Jeremy</p>

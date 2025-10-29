@@ -19,8 +19,8 @@ title: Output
 +
 title: ExpectedResult
 
-<p>
+<p dir="auto">
 This is a Elephant
-</p><p>
+</p><p dir="auto">
 This is a 
 </p>

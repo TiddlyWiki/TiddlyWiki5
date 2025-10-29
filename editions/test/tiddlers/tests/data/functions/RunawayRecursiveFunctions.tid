@@ -7,7 +7,7 @@ title: Output
 
 \whitespace trim
 \function .buffalo(p)
-[.buffalo<p>]
+[.buffalo<p dir="auto">]
 \end
 
 <$text text=<<.buffalo 8>>/>

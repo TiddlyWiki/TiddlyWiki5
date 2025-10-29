@@ -14,5 +14,5 @@ Out: <<max>>
 +
 title: ExpectedResult
 
-<p>Nothing
-\end</p><p>Out: </p>
+<p dir="auto">Nothing
+\end</p><p dir="auto">Out: </p>

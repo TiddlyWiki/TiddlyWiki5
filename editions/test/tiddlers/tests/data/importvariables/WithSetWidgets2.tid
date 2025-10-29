@@ -20,4 +20,4 @@ title: Definitions
 +
 title: ExpectedResult
 
-<p>elephant,giraffe</p>
+<p dir="auto">elephant,giraffe</p>

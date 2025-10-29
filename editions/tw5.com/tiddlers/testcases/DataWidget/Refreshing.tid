@@ -22,7 +22,7 @@ title: Actions
 +
 title: ExpectedResult
 
-<p>[
+<p dir="auto">[
     {
         "title": "Epsilon",
         "text": "Theta"

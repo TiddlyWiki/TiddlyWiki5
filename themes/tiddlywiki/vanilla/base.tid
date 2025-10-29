@@ -1308,6 +1308,8 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	border: 1px solid <<colour tiddler-editor-border>>;
 	line-height: 1.3em;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
+	unicode-bidi: plaintext;
+	text-align: start; /* Align text automatically left/right*/
 }
 
 .tc-tiddler-frame input.tc-edit-texteditor,

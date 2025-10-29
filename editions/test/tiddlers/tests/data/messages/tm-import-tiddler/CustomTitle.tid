@@ -21,7 +21,7 @@ title: Actions
 +
 title: ExpectedResult
 
-<p>text: {
+<p dir="auto">text: {
     "tiddlers": {
         "Elephants": {
             "title": "Elephants"

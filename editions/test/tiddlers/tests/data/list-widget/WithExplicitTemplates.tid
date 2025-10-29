@@ -26,4 +26,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>123</p><p>None!</p>
+<p dir="auto">123</p><p dir="auto">None!</p>

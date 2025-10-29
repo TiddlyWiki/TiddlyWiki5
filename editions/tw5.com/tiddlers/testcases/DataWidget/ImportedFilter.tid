@@ -35,7 +35,7 @@ text: Today is Sunday
 +
 title: ExpectedResult
 
-<p>[
+<p dir="auto">[
     {
         "title": "Day: Thursday",
         "text": "Today is Thursday",

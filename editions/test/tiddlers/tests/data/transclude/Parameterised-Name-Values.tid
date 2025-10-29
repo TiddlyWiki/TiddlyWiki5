@@ -31,4 +31,4 @@ title: TiddlerTwo
 +
 title: ExpectedResult
 
-<p>{0:}{1:}{2:}</p><p></p><p>{0:Ferret}</p><p>{0:Butterfly}{1:Moth}</p><p>{0:Beetle}{1:Scorpion}{2:Snake}</p><p>({$one:Scorpion}{two:Snake}{zero:Beetle})</p>
+<p dir="auto">{0:}{1:}{2:}</p><p dir="auto"></p><p dir="auto">{0:Ferret}</p><p dir="auto">{0:Butterfly}{1:Moth}</p><p dir="auto">{0:Beetle}{1:Scorpion}{2:Snake}</p><p dir="auto">({$one:Scorpion}{two:Snake}{zero:Beetle})</p>
