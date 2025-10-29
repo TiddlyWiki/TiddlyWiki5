@@ -1443,7 +1443,7 @@ exports.search = function(text,options) {
 			// Don't search the text field if the content type is binary
 			var fieldName = searchFields[fieldIndex];
 			if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
-				break;
+				continue;
 			}
 			var str = tiddler.fields[fieldName],
 				t;
