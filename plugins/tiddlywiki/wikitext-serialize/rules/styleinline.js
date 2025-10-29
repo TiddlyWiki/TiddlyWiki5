@@ -18,7 +18,11 @@ exports.serialize = function(tree,serialize) {
 	if(tree.attributes && tree.attributes.class) {
 		result += "." + tree.attributes.class.value.trim().split(" ").join(".");
 	}
-	// Serialize children and append to result
-	result += " " + serialize(tree.children) + "@@";
+	var children = serialize(tree.children);
+	// Ensure at least one space after the style/class
+	if(children && children[0] !== " ") {
+		result += " ";
+	}
+	result += children + "@@";
 	return result;
 };

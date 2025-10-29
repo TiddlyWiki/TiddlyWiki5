@@ -22,7 +22,7 @@ exports.types = {inline: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match /@@(styles)?\s*(\.class\s+)?/
-	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?\s*(\.(?:[^\r\n\s]+)\s+)?/mg;
+	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?(\.(?:[^\r\n\s]+)\s+)?/mg;
 };
 
 exports.parse = function() {
