@@ -22,7 +22,7 @@ var ESCAPE_REGEX = /[\\^$*+?.()|[\]{}]/g;
 
 function escapeRegExp(str) {
 	try {
-		return str.replace(ESCAPE_REGEX, '\\$&');
+		return str.replace(ESCAPE_REGEX, "\\$&");
 	} catch(e) {
 		return null;
 	}
