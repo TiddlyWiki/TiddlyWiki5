@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/Void.js
+title: $:/core/modules/widgets/void.js
 type: application/javascript
 module-type: widget
 
