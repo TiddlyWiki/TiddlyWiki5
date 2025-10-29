@@ -1,0 +1,19 @@
+created: 20150417155912612
+modified: 20241117110849866
+original-modified: 20230803044412567
+tags: [[Customise TiddlyWiki]]
+title: Setting a page background image
+ja-title: ページの背景画像を設定する
+type: text/vnd.tiddlywiki
+
+# 画像をTiddlerとしてインポートします([[WikiTextでの画像|Images in WikiText]]を参照)
+#* [[外部の画像|ExternalImages]]も使用できます
+# [[コントロールパネル|$:/ControlPanel]]<<.icon $:/core/images/options-button>>を開き、''外観''/''Theme Tweaks''タブに切り替えます
+# "Page background image"というラベルのドロップダウンリストから画像を選択します
+# "Page background image attachment"を"Fixed to window"に設定すると、背景が固定され、コンテンツがその上でスクロールします。また、"Scroll with tiddlers"に設定すると背景も移動します(iPhone/iPadではパフォーマンス上の理由から[[Fixed設定はサポートされない|http://stackoverflow.com/a/20444219]]ことに注意してください)
+# "Page background image size"を以下のように設定します: 
+#* ''Auto''は、ページの背景に背景画像が並べて表示されます
+#* ''Cover''は、背景画像がページを完全に覆うようにサイズ調整されます。画像の端が切り取られる場合があります
+#* ''Contain''は、背景画像がページ内に収まるようにサイズ変更されます
+
+[[DarkPhotos|ColourPalettes]]パレットは、暗い背景画像でサイドバーを読みやすくするために提供されていることに注意してください。

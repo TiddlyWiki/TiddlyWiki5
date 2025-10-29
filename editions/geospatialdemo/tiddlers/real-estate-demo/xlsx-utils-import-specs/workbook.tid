@@ -1,0 +1,7 @@
+caption: Real Estate Listing Demo
+import-spec-role: workbook
+list: [[$:/_importspec/RealEstate/PropertiesSheet]]
+tags: 
+title: $:/_importspec/RealEstate/
+type: text/vnd.tiddlywiki
+

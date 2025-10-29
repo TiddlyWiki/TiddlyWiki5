@@ -4,7 +4,7 @@ tags: [[Filter Run Prefix]]
 title: Named Filter Run Prefix
 type: text/vnd.tiddlywiki
 
-In <<.from-version "5.1.23">> the named filter run prefixes where implemented. `:cascade`, `:map` and `:sort` have been added later as shown in the diagrams.
+In <<.from-version "5.1.23">> the named filter run prefixes were implemented. `:cascade`, `:map` and `:sort` have been added later as shown in the diagrams.
 
 A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expression|Filter Expression]] in place of a [[shortcut run prefix|Shortcut Filter Run Prefix]].
 

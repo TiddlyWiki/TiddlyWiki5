@@ -6,10 +6,7 @@ module-type: widget
 Action widget to log debug messages
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -66,7 +63,12 @@ LogWidget.prototype.log = function() {
 	});
 
 	for(var v in this.variables) {
-		allVars[v] = this.getVariable(v,{defaultValue:""});
+		var variable = this.parentWidget && this.parentWidget.variables[v];
+		if(variable && variable.isFunctionDefinition) {
+			allVars[v] = variable.value;
+		} else {
+			allVars[v]  = this.getVariable(v,{defaultValue:""});
+		}
 	}
 	if(this.filter) {
 		filteredVars = this.wiki.compileFilter(this.filter).call(this.wiki,this.wiki.makeTiddlerIterator(allVars));
@@ -89,5 +91,3 @@ LogWidget.prototype.log = function() {
 }
 
 exports["action-log"] = LogWidget;
-
-})();

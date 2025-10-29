@@ -7,25 +7,25 @@ title: Release 5.1.2
 fr-title: Version 5.1.2
 type: text/vnd.tiddlywiki
 
-//[[Voir GitHub pour un historique détaillé des modifications apportées par de cette version|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.1...v5.1.2]]//
+//[[Voir GitHub pour un historique détaillé des modifications apportées par de cette version|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.1...v5.1.2]]//
 
 Une nouvelle version mineure avec des mises à jour de la documentation, quelques corrections de bugs, et quelques améliorations.
 
 !! Améliorations d'usage
 
-* [[Amélioration|https://github.com/Jermolene/TiddlyWiki5/commit/b3df07ae3e190cfb6fc23dbe31c6229fe5e39087]] de la gestion des erreurs liées au [[plugin KaTeX|KaTeX Plugin]] pour les cas où le contenu <<latex>> est malformé ou non reconnu.
+* [[Amélioration|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b3df07ae3e190cfb6fc23dbe31c6229fe5e39087]] de la gestion des erreurs liées au [[plugin KaTeX|KaTeX Plugin]] pour les cas où le contenu <<latex>> est malformé ou non reconnu.
 
 !! Améliorations pour les bricoleurs
 
-* [[Amélioration|https://github.com/Jermolene/TiddlyWiki5/commit/42abef6fbf79342ccbd90b142d48f64ab5c1c38a]] du style du séparateur avant l'article //sans étiquette// dans la liste des tags de la barre latérale
-* [[Amélioration|https://github.com/Jermolene/TiddlyWiki5/commit/23c2d90ee8e28f8c68f9ba58fcbc13a56f838d61]] de la gestion d'erreur lors pour l'enregistreur de type //dépôt// (qui est utilisé pour enregistrer vers TiddlySpot)
-* [[Amélioration|https://github.com/Jermolene/TiddlyWiki5/commit/115245a632e80e9d033957327dfec909a3cd1fc8]] de la détection d'erreurs dans la vue sur le déroulé
+* [[Amélioration|https://github.com/TiddlyWiki/TiddlyWiki5/commit/42abef6fbf79342ccbd90b142d48f64ab5c1c38a]] du style du séparateur avant l'article //sans étiquette// dans la liste des tags de la barre latérale
+* [[Amélioration|https://github.com/TiddlyWiki/TiddlyWiki5/commit/23c2d90ee8e28f8c68f9ba58fcbc13a56f838d61]] de la gestion d'erreur lors pour l'enregistreur de type //dépôt// (qui est utilisé pour enregistrer vers TiddlySpot)
+* [[Amélioration|https://github.com/TiddlyWiki/TiddlyWiki5/commit/115245a632e80e9d033957327dfec909a3cd1fc8]] de la détection d'erreurs dans la vue sur le déroulé
 
 !! Correction d'erreurs
 
-* [[Correction|https://github.com/Jermolene/TiddlyWiki5/commit/b1fb0a2a070a6abc78564e56fdb4244076ac44ac]] des crashs causé par des plugins mal formatés
-* [[Correction|https://github.com/Jermolene/TiddlyWiki5/commit/eacb9e53ebf2a814d61bf005d68f449f7b9e63b5]] d'un problème faisant que les informations sur un tiddler n'étaient pas supprimées par le plugin de synchronisation après la suppression d'un tiddler
-* [[Correction|https://github.com/Jermolene/TiddlyWiki5/commit/e2046ce4ffb6b8232a4ad5e7f51c431798917787]] de la gestion HTTP pour considérer le code de réponse 201 comme un succès.
+* [[Correction|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b1fb0a2a070a6abc78564e56fdb4244076ac44ac]] des crashs causé par des plugins mal formatés
+* [[Correction|https://github.com/TiddlyWiki/TiddlyWiki5/commit/eacb9e53ebf2a814d61bf005d68f449f7b9e63b5]] d'un problème faisant que les informations sur un tiddler n'étaient pas supprimées par le plugin de synchronisation après la suppression d'un tiddler
+* [[Correction|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e2046ce4ffb6b8232a4ad5e7f51c431798917787]] de la gestion HTTP pour considérer le code de réponse 201 comme un succès.
 
 !! Contributeurs
 

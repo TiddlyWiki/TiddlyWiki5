@@ -1,0 +1,172 @@
+caption: 5.1.20
+created: 20190809141328809
+modified: 20190809141328809
+released: 20190809141328809
+tags: ReleaseNotes
+title: Release 5.1.20
+type: text/vnd.tiddlywiki
+description: New conditional, mathematics and string operators, GitHub Saver, save wiki folder command, [[Innerwiki Plugin]]
+
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.19...v5.1.20]]//
+
+!! New Conditional Operators
+
+[[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/17711657b6028a177c8aef97f7a0a1c084d65436]] new [[Conditional Operators]] [[then Operator]] and [[else Operator]]
+
+!! New Mathematics Operators
+
+Added several new [[Mathematics Operators]] for working with numbers: [[negate|negate Operator]], [[abs|abs Operator]], [[ceil|ceil Operator]], [[floor|floor Operator]], [[round|round Operator]], [[trunc|trunc Operator]], [[untrunc|untrunc Operator]], [[sign|sign Operator]], [[add|add Operator]], [[subtract|subtract Operator]], [[multiply|multiply Operator]], [[divide|divide Operator]], [[remainder|remainder Operator]], [[max|max Operator]], [[min|min Operator]], [[fixed|fixed Operator]], [[precision|precision Operator]], [[exponential|exponential Operator]], [[sum|sum Operator]], [[product|product Operator]], [[maxall|maxall Operator]] and [[minall|minall Operator]].
+
+!! New String Operators
+
+Added several new string operators: [[match|match Operator]], [[length|length Operator]], [[uppercase|uppercase Operator]], [[lowercase|lowercase Operator]], [[titlecase|titlecase Operator]], [[sentencecase|sentencecase Operator]], [[trim|trim Operator]], [[split|split Operator]], [[splitregexp|splitregexp Operator]] and [[join|join Operator]].
+
+!! Improved Handling of Duplicates in Filters 
+
+There is now finer control over TiddlyWiki's default behaviour of removing duplicates from filter results, making it much easier to work with the new mathematics and string operators:
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/37bb75f0cf446d62eb45d07b9f9b0aa14814a43f]] support for new `=` prefix for merging filter runs without removing duplicates
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/18fe112da7d3ac210a5a0b9cf73fe9050717d4e3]] option for the [[enlist Operator]] to not remove duplicates
+
+!! Improved Keyboard Shortcuts
+
+Keyboard shortcut handling has been significantly improved with the following new global shortcuts (configurable via $:/ControlPanel):
+
+* <kbd>ctrl-shift-F</kbd> - focus the sidebar search field 
+* <kbd>alt-shift-S</kbd> - toggle the visibility of the sidebar
+* <kbd>ctrl-shift-A</kbd> - open the advanced search tiddler
+
+!! Saving to ~GitHub and ~GitLab
+
+[[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/aa5eaa98fcb8658dbc2b93476c2e09c9207439d8]] a [[Git service saver|Saving to a Git service]] for saving directly to ~GitHub and ~GitLab
+
+!! Plugin Improvements
+
+New and improved plugins:
+
+* New [[BrowserStorage Plugin]] for saving tiddlers in browser local storage
+* New [[Innerwiki Plugin]] for rendering TiddlyWiki screenshots
+* [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/pull/4133]] [[KaTeX Plugin]] to ~KaTeX v0.10.2
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3131]] an editor toolbar button for the [[KaTeX Plugin]]
+* [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3635]] [[Highlight Plugin]] to use highlight.js v9.15.6
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3898]] support for language aliases with the [[Highlight Plugin]]
+* Updates to the [[CodeMirror Plugin]], including [[adding|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3810]] support for smart indent
+* Updates to the [[Dynaview Plugin]], including [[adding|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a9e595c3f633391003224e499440cdeb8560c055]] support for restoring the scroll position at startup from local storage
+* Updates to the [[Amazon Web Services Plugin]], including [[adding|https://github.com/TiddlyWiki/TiddlyWiki5/commit/fffd0ee9e17d6b6a561648a42f0f200d4bb04046]] support for specifying credentials
+
+!! Translation Improvements
+
+New and improved translations:
+
+* Catalan
+* Chinese Simplified and Chinese Traditional
+* French
+* German
+* US English
+
+!! Performance Improvements
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3951]] pluggable index modules to accelerate the [[field Operator]] and the [[tag Operator]] (in tests on a wiki with 60K tiddlers, startup time is reduced by 25% with these optimisations, and refresh time is reduced by a factor of three.)
+* [[Optimised|https://github.com/TiddlyWiki/TiddlyWiki5/commit/fddc5d4ee627232441278284ed6bee2f50fe8b26]] the "Classic" storyview to perform much faster when the animation duration is set to zero (approximtely 50% speed improvement was observed in tests opening a storyview with 8,000 entries)
+* [[Optimised|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7869546fef7b2ea5fd6fd72feacd565a7f177fb6]] the RevealWidget to avoid using the relatively slow `localeCompare()` method to compare strings
+* [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e8d1fbba6c109ccbeaedc1b34e47677c0ada7529]] [[Performance Instrumentation]] to show the timings for individual filters
+* [[Optimised|https://github.com/TiddlyWiki/TiddlyWiki5/pull/4102]] rendering and refreshing child widgets
+
+!! Usability Improvements
+
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3832]] the [[palette manager|$:/PaletteManager]] with the ability to delete entries, and directly edit indirect entries
+* Several new palettes: "Nord", "Solarized Light", "Spartan Day", "Spartan Night" and "Twilight"
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5a37a84a54f2dc9ccf106309b739cfa693bae3e3]] the plugin library to search all plugin fields
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e5f3301c1c36e8add4ed89ab1bd53a9b68411d3f]] a warning when core JavaScript modules are overwritten via import
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3654]] prompt for references when renaming a tiddler
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0e6855eba8945e023cc5ef19809cfb6d6025627b]] a new filter preset for advanced search for "tiddlers modified this session"
+* Added a number of animations (some of were already present but had been broken over the years) for changes in:
+** [[Tags in the view template|https://github.com/TiddlyWiki/TiddlyWiki5/pull/4142]]
+** [[Page controls|https://github.com/TiddlyWiki/TiddlyWiki5/pull/4145]]
+** [[Top left and top right bar|https://github.com/TiddlyWiki/TiddlyWiki5/pull/4146]]
+** [[Tabs|https://github.com/TiddlyWiki/TiddlyWiki5/pull/4149]]
+** [[Fields in the edit template|https://github.com/TiddlyWiki/TiddlyWiki5/pull/4148]]
+
+!! Hackability Improvements
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/4051]] support for [[configurable view and edit templates|Hidden Setting: ViewTemplate and EditTemplate]]
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/37ea659bf011b1d4a152f54171399d94f5bba3ef]] the [[dumpvariables Macro]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/754c1251a9bdf45e8f64079a4bbdaed2d05be2b7]] new [[variables Operator]] and [[getvariable Operator]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ed67f4a88b29c5c81d4de31203dbf23d66955fb7]] new [[WidgetMessage: tm-focus-selector]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3546]] new [[escapecss Operator]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3880]] new [[unusedtitle Macro]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/36e76429b1a1d4638374d513430393db5693b932]] new `[is[variable]]` option to the [[is Operator]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/90684f9f52809ff5df39629d3b161d7ff23002f4]] new `[is[blank]]` option to the [[is Operator]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/94f143bf643e36e817d1dd5b678515853eed6aca]] optional autofocus for the text inputs in $:/AdvancedSearch (controlled by the same [[Hidden Setting: Search AutoFocus]] as the sidebar search)
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3756]] optional ''tabindex'' attribute to simple, framed and CodeMirror text editor engines
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3758]] ''tabindex'' attributes to edit templates
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3822]] outline colour to button, textarea, input
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/477c41f84304ed83245c87068dba3695a5053d62]] ''tooltip'' attribute to SelectWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/348a0bc8bcbf5c42d9b93e5e208696d28fc95cb7]] an option for plugins to disable the initial navigation at startup
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c036c228269fc30d0df770a7c7713fd9af829df7]] $:/info/browser/language to the InfoMechanism
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f047e7cbf50edcf4775b50bdebc3f704970b8cde]] an example of using StartupActions to set the default language
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/edd3156430dd94b0ced630a1b70f2e2ef0ff6c36]] importing of JSON files to verify whether they are valid tiddler files, and import them as plain JSON if not
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/issues/3974]] the LinkWidget to use the title of the target tiddler as a default if it has no content
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/2a4c60b23dc1436af6206fad5a56742550eac1a3]] [[WidgetMessage: tm-open-window]] to allow a window title to be specified
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8e7c0907f8cce4708a02486fc93dcea1ab115196]] ''checkActions'' attribute to the CheckboxWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3afaa9de9aaae7654c1d03ddc22ee97724cbb159]] support for searches anchored to the start of a field
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8b04cfd4d5142a957f2e3da80c3f079e215b9e75]] a long standing problem with the main standalone HTML file template whereby raw markup tiddlers would be included even if not selected by the save filter
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3572]] overlapping dropdowns with sticky titles enabled
+* [[Removed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3749]] apparently obsolete limitation of selection wrapping in text editor
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3745]] bug in RevealWidget when stateTitle tiddler is missing
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/72f2a9425197b013ab3664e1679c6763d92d4382]] bug with animation duration being blank
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3806]] Firefox problem with drag and drop placeholders in the "open" tab of the sidebar
+* [[Ameliorated|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3809]] Firefox problem with sticky placeholder during drag and drop operations
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3819]] [[CodeMirror Plugin]] to use ''tiddler-editor-border'' colour
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8012a3508f209fbbe68484e30ed65832cf5146b9]] problem using the TiddlySpot saver with cookies disabled
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3611]] framed text editor to use correct background colour
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f5b25994322e58de84cae70ab67a68b1413db27f]] problem with the class `tc-sidebar-lists` being used on two different areas of the sidebar, making it impossible to distinguish them in CSS selectors
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7f78065992baf290ae221fb12c63e52e0f8da403]] problem with unnecessary "list" field created when renaming tiddlers
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/394725f00cd8f38089d2840aa026d72c88627bff]] crash with EditBitmapWidget and missing tiddlers
+
+!! Node.js Bug Fixes and Improvements
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/373afd72c804b0ffa2779849ba0d278d53e65df4]] new SaveWikiFolderCommand to save a wiki as a [[wiki folder|TiddlyWikiFolders]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5b09881679200dc78e5962a0588c8f214ddedbbb]] new DeleteTiddlersCommand
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8c72a28f0c70e6a62387ccdd1431f9225a5fd2de]] (and [[also here|https://github.com/TiddlyWiki/TiddlyWiki5/commit/feab75a6d1723cd6db5912b2902f0ec33c550fb6]]) ability to specify plugins on the command line (see [[Using TiddlyWiki on Node.js]])
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3677]] support for deflate and gzip compression to the WebServer ListenCommand
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/12630d4a91b4cc7b1eb846c3afbeda16858df05a]] an option to the LoadCommand to ignore loading errors
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7fcd2f132e91aa375a1fece501b14e991ba1bd4c]] handling of JSON files by the file system adaptor:
+** Use `.json` files (instead of `.tid`) for any tiddler whose fields contain values that can't be stored as a .tid file
+** Save `application/json` tiddlers as `.json` files
+
+!! Developer Bug Fixes and Improvements
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e52a616891977bde142334df2a72c7dd121efb82]] support for widget subclassing -- see https://tiddlywiki.com/prerelease/dev/#WidgetSubclassingMechanism
+
+! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@00SS|https://github.com/00SS]]
+* [[@admls|https://github.com/admls]]
+* [[@benwebber|https://github.com/benwebber]]
+* [[@bimlas|https://github.com/bimlas]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@BurningTreeC|https://github.com/BurningTreeC]]
+* [[@diego898|https://github.com/diego898]]
+* [[@dnebauer|https://github.com/dnebauer]]
+* [[@inmysocks|https://github.com/inmysocks]]
+* [[@flibbles|https://github.com/flibbles]]
+* [[@jdjdjdjdjdjd|https://github.com/jdjdjdjdjdjd]]
+* [[@JesseWeinstein|https://github.com/JesseWeinstein]]
+* [[@joshuafontany|https://github.com/joshuafontany]]
+* [[@Kartiku|https://github.com/Kartiku]]
+* [[@kyrias|https://github.com/kyrias]]
+* [[@MarxSal|https://github.com/MarxSal]]
+* [[@MidnightLightning|https://github.com/MidnightLightning]]
+* [[@pacoriviere|https://github.com/pacoriviere]]
+* [[@pmario|https://github.com/pmario]]
+* [[@rmunn|https://github.com/rmunn]]
+* [[@talha131|https://github.com/talha131]]
+* [[@telmiger|https://github.com/telmiger]]
+* [[@the-kenny|https://github.com/the-kenny]]
+* [[@xcazin|https://github.com/xcazin]]

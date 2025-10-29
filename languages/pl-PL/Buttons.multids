@@ -79,6 +79,7 @@ NewMarkdown/Caption: nowy Markdown tiddler
 NewMarkdown/Hint: Stwórz nowego tiddlera o typie Markdown
 NewTiddler/Caption: nowy tiddler
 NewTiddler/Hint: Stwórz nowego tiddlera
+OpenControlPanel/Hint: Otwórz panel kontrolny
 OpenWindow/Caption: otwórz w nowym oknie
 OpenWindow/Hint: Otwórz tego tiddlera w nowym oknie
 Palette/Caption: paleta
@@ -103,6 +104,8 @@ ShowSideBar/Caption: pokaż menu boczne
 ShowSideBar/Hint: Pokaż menu boczne
 TagManager/Caption: menedżer tagów
 TagManager/Hint: Otwórz menedżer tagów
+TestCaseImport/Caption: importuj tiddlery
+TestCaseImport/Hint: Importuj tiddlery
 Timestamp/Caption: aktualizacje czasu
 Timestamp/Hint: Wybierz czy zmiany mają aktualizować czas
 Timestamp/On/Caption: zmiany czasu są włączone
@@ -129,6 +132,7 @@ Excise/Caption/Replace/Link: link
 Excise/Caption/Replace/Transclusion: transkluzja
 Excise/Caption/Tag: Otaguj nowego tiddlera nazwą tego
 Excise/Caption/TiddlerExists: Uwaga: tiddler już istnieje
+Excise/DefaultTitle: Nowe Wycięcie
 Excise/Hint: Wytnij zaznaczony tekst i wstaw go do nowego tidlera
 Heading1/Caption: nagłówek 1
 Heading1/Hint: Zmień zaznaczony tekst na nagłówek 1. stopnia

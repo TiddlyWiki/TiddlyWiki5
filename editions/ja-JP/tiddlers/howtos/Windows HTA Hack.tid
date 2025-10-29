@@ -1,0 +1,18 @@
+caption: HTA Hack
+color: #F06292
+created: 20131212223146250
+delivery: DIY
+description: Internet Explorerで変更を手動で直接保存する方法
+method: save
+modified: 20241012122755089
+original-modified: 20200507110355115
+tags: Saving Windows
+title: Windows HTA Hack
+ja-title: Windows HTAのハック
+type: text/vnd.tiddlywiki
+
+Windowsでは、HTMLファイルの拡張子を`*.hta`に名前変更することで、TiddlyWikiを真のローカルアプリケーションに変換できます。その後、''fsosaver''モジュールは~ActiveX ~FileSystemObjectを使用して変更を保存できます。
+
+この方法の欠点の1つは、TiddlyWikiファイルがUTF-16フォーマットで保存されるため、通常のUTF-8エンコードの場合と比べて2倍の大きさになることです。ただし、別の保存方法でファイルを開いて保存すると、ファイルはUTF-8に再エンコードされます。
+
+詳細については、Wikipediaを参照してください: https://en.wikipedia.org/wiki/HTML_Application

@@ -5,7 +5,7 @@ tags: [[$:/tags/wiki-test-spec]]
 
 title: Text
 
-This is a <% if [<something>match[one]] %>Elephant<% elseif [<something>match[two]] %>Antelope<% else %>Crocodile<% endif %>, I think.
+This is a <%if [<something>match[one]] %>Elephant<%elseif [<something>match[two]] %>Antelope<%else%>Crocodile<%endif%>, I think.
 +
 title: Output
 

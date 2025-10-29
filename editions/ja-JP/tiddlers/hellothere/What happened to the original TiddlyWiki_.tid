@@ -1,0 +1,17 @@
+title: What happened to the original TiddlyWiki?
+ja-title: オリジナルのTiddlyWikiはどうなったか?
+tags: HelloThere
+created: 201409040851
+modified: 20241129112304613
+original-modified: 201409040851
+
+<a class="tc-float-right tc-bordered-image" href="https://classic.tiddlywiki.com/" target="_blank" rel="noopener noreferrer">[img width="200" [TiddlyWiki Classic.png]]</a>
+
+
+TiddlyWikiのオリジナルの[[クラシック|TiddlyWikiClassic]]バージョンは、現在も以下の場所から入手できます:
+
+https://classic.tiddlywiki.com.
+
+TiddlyWikiの[[現バージョン|TiddlyWiki5]]はTiddlyWikiClassicとの完全な下位互換性がないことに注意してください。コンテンツはインポートできますが、新しいWikiテキスト形式に適応させるためにマッサージが必要になります。TiddlyWikiClassic用に作成されたほとんどのコンテンツを忠実に表示できるようにする''tw2parser''プラグインが開発中です:
+
+https://tiddlywiki.com/plugins/tiddlywiki/tw2parser/

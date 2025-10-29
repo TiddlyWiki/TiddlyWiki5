@@ -1,0 +1,91 @@
+caption: ~WebDAV
+color: #f48fb1
+created: 20160216191710789
+delivery: Protocol
+description: SharePointなどの製品で利用できる標準Webプロトコル
+method: save
+modified: 20220615155048712
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
+title: Saving via WebDAV
+ja-title: WebDAV経由の保存
+type: text/vnd.tiddlywiki
+
+[[WebDAV|https://en.wikipedia.org/wiki/WebDAV]]が有効なサーバーでホストされている場合、TiddlyWikiは2016年以降に作成されたTiddlyWikiの変更を自動的にHTTP経由で保存します。2016年2月16日より前にwikiを作成した場合は、~WebDAVを有効にするために[[アップグレード|Upgrading]]する必要があります。
+
+
+
+!! クロスプラットフォームの軽量サーバー
+
+軽量で持ち運びでき、使いやすいソリューション
+
+*   [[rclone|https://rclone.org/commands/rclone_serve_webdav/]]
+**  実行方法は次のようにシンプルです: <br/>`rclone serve webdav some_directory_containing_tiddlywiki_files`
+*   [[micromata dave - シンプルなWebDAVサーバー|https://github.com/micromata/dave]]
+* [[dav-server|https://github.com/edrex/dav-server]]はHTML ~TiddlyWikiのフォルダーを素早く提供する方法です。
+*   [[hacdias webdav server|https://github.com/hacdias/webdav/]]
+    **   Mohammadによるこの~WebDAVサーバーの使用ガイド [[Tiddlywikiのスクリプト — TWのコード、マクロ、ソリューション|https://kookma.github.io/TW-Scripts/#Easy%20Local%20Saving%20with%20WebDav]]
+
+
+!! Windows
+
+*   IIS
+    **   [[pmario|https://talk.tiddlywiki.org/u/pmario]]による動画ガイド: [[01 はじめに - IISとWebDAVでTiddlyWikiを使用する方法 - YouTube|https://www.youtube.com/watch?v=tpkQhKyqPzc&list=PLuiC_HFhI4OwoVDb-B-VK0ydj-mBPNn-1]]
+    **  ~MagoArcadeによる、自己署名証明書を使用した“リアルな“IISサーバー + SSL + WindowsAuthの使用に関するステップバイステップの~HowTo動画: [[TiddlyWikiのインストール - Windows IIS WebDAVを使った方法 - YouTube|https://youtu.be/VMQ3Lfko8uQ]]
+
+*   Windows用~SharePoint / ~OneDrive
+** ~TiddlyWikiファイルを`.aspx`拡張子付きで保存する
+** ~SharePoint / ~OneDrive for Businessの同期ライブラリにコピーする
+**   ~WebDAVが無効になっていない限り、これらのフォルダのいずれかに保存されている単一ファイルのWikiを.htmlから.aspxに名前変更することは“問題なく機能“します。
+** これはMacでも機能する//可能性があり//ます。
+
+!! OSX
+*   ~WebDavNavサーバーはMac App Storeから入手できます。
+
+!! Android
+
+* RCXは、//rclone//をベースにしたAndroid用のオープンソースファイルマネージャーです。//F-Droid//と//Google Play//の両方で利用できます。統合されたWebDAVサーバーのおかげで、ポケットの中に保存しているwikiを編集できます。ローカルネットワーク上の他のデバイスと共有することもできます。
+
+!! サーバー
+
+多くの[[NAS|https://en.wikipedia.org/wiki/NAS]]や[[Subversion|https://en.wikipedia.org/wiki/Apache_Subversion]]サーバーは特に何もしなくても~WebDAVをサポートします。ただし、独自のサーバーをセットアップするには、多少の手間がかかる場合があります:
+
+
+
+!! 無料ホスティング
+
+テストしたいくつかの~WebDAVホスティングサービス(~~box.com~~、~~swissdisk.com~~)は、Webブラウザ経由でのHTMLファイルへのアクセスをサポートしていないため、~TiddlyWikiでは動作しません。ただし、GMXメディアセンター(www.gmx.net)は、無料アカウントでWebDAVが動作することが報告されています。
+
+!!! Koofr
+
+//''Koofr''//はプライバシーを重視したクラウドサービスです。WebDAVサービスを利用するには、`koofr.eu`でアカウントをサインアップします。次に、Web アプリの`preferences`に移動し、左側のメニューから`password`に移動します。`App Passwords`までスクロールします。'tiddlywiki'などの名前を使用して、パスワードを生成します。表示されている内容にかかわらず、パスワードをどこかに保存します。
+
+おそらく、ファイル拡張子を`.aspx`に変更する必要があります。次に、ファイルを、できればスペースを含まないパスでサイトにアップロードします。次に、ブラウザで次のようなアドレスのサイトにリンクします:
+
+```
+https://app.koofr.net/dav/Koofr/myfile.aspx
+
+```
+そうすると、認証ダイアログが表示されます。サインアップ時に使用したメールアドレスと、先ほど生成したパスワードを使用してログインします。
+
+ファイルをロードして、変更を元の場所に保存できるはずです。
+
+!! 有料ホスティング
+
+!!! pCloud
+
+//''pCloud''//はヨーロッパとアメリカにサーバーがあるクラウドサービスです。サインアップする際には、最適なサーバーの場所を選択する必要があります。次に、Webブラウザでサービスにサインインします。ブラウザインターフェースからアクセスしたいファイルをアップロードします。次に、別のタブで、次のどちらかを開きます
+
+サーバーがアメリカにある場合: 
+
+```
+https://webdav.pcloud.com
+```
+
+または、サーバーがヨーロッパにある場合: 
+
+```
+https://ewebdav.pcloud.com
+```
+
+
+ファイルナビゲーションページが表示されます。ファイルに移動して、ブラウザーで開きます。変更を作成して保存できるはずです。

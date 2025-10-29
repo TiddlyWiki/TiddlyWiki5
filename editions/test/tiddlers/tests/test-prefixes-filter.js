@@ -4,7 +4,7 @@ type: application/javascript
 tags: [[$:/tags/test-spec]]
 Tests the reduce prefix and filter.
 \*/
-(function(){
+
 
 /* jslint node: true, browser: true */
 /* eslint-env node, browser, jasmine */
@@ -420,6 +420,8 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string[{!!title}]").join(",")).toBe("cheesecake,Cheesecake,chocolate cake,Chocolate Cake,Persian love cake,Pound cake");
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string:casesensitive[{!!title}]").join(",")).toBe("Cheesecake,Chocolate Cake,Persian love cake,Pound cake,cheesecake,chocolate cake");
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string:casesensitive,reverse[{!!title}]").join(",")).toBe("chocolate cake,cheesecake,Pound cake,Persian love cake,Chocolate Cake,Cheesecake");
+		expect(wiki.filterTiddlers("1.2.0 1.0.0 1.0.5 :sort:version[{!!title}]").join(",")).toBe("1.0.0,1.0.5,1.2.0");
+		expect(wiki.filterTiddlers("1.2.0 1.0.0 1.0.5 :sort:version:reverse[{!!title}]").join(",")).toBe("1.2.0,1.0.5,1.0.0");
 	});
 
 	it("should handle the :map prefix", function() {
@@ -459,5 +461,3 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers('[tag[shopping]] :reduce[<echo "$(accumulator)$ $(index)$ $(currentTiddler)$,">]',anchorWidget).join(",")).toBe(" 0 Brownies, 1 Chick Peas, 2 Milk, 3 Rice Pudding,");
 	});
 });
-
-})();

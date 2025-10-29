@@ -6,10 +6,7 @@ module-type: widget
 Element widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -77,6 +74,8 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	// Create the DOM node and render children
 	var domNode = this.document.createElementNS(this.namespace,this.tag);
 	this.assignAttributes(domNode,{excludeEventAttributes: true});
+	// Allow hooks to manipulate the DOM node. Eg: Add debug info
+	$tw.hooks.invokeHook("th-dom-rendering-element", domNode, this);
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
@@ -101,5 +100,3 @@ ElementWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.element = ElementWidget;
-
-})();

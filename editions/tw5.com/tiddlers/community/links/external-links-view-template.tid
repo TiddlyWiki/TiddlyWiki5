@@ -1,0 +1,8 @@
+title: $:/_tw5.com/external-links-view-template
+tags: $:/tags/ViewTemplate
+
+<%if [<currentTiddler>tag[TiddlyWiki on the Web]] %>
+<div class="tc-cards tc-cards-vertical">
+<$macrocall $name="flex-card-external" backgroundcolor={{!!background-color}} textcolor={{!!text-color}} captionField="caption"/>
+</div>
+<%endif%>

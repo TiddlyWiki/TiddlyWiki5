@@ -6,12 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the filtering mechanism.
 
 \*/
-(function(){
 
-	/* jslint node: true, browser: true */
-	/* eslint-env node, browser, jasmine */
-	/* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"]*/
-	/* global $tw, require */
 	"use strict";
 	
 	describe("Filter tests", function() {
@@ -1134,9 +1129,26 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[[<>:\"/\\|?*]encodeuricomponent[]]").join(",")).toBe("%3C%3E%3A%22%2F%5C%7C%3F%2A");
 		});
 	
+		it("should handle the moduleproperty operator", function() {
+			// We don't need to confirm them all, only it it finds at least one module name that we're sure is there.
+			expect(wiki.filterTiddlers("[[macro]modules[]moduleproperty[name]]")).toContain("qualify");
+			// No such property. Nothing to return.
+			expect(wiki.filterTiddlers("[[macro]modules[]moduleproperty[nonexistent]]").length).toBe(0);
+			// No such tiddlers. Nothing to return.
+			expect(wiki.filterTiddlers("[[nonexistent]moduleproperty[name]]").length).toBe(0);
+			// Non string properties should get toStringed.
+			expect(wiki.filterTiddlers("[[$:/core/modules/startup.js]moduleproperty[synchronous]]").join(" ")).toBe('true');
+		});
+
+		it("should minimize unnecessary variable lookup", function() {
+			var widget = wiki.makeWidget();
+			var getVar = spyOn(widget, "getVariableInfo").and.callThrough();
+			expect(wiki.filterTiddlers("[all[]prefix[anything]]", widget).length).toBe(0);
+			// We didn't use any indirect operands or variables.
+			// No variable lookup should have occurred.
+			expect(getVar).not.toHaveBeenCalled();
+		});
 	}
 	
 	});
-	
-	})();
 	

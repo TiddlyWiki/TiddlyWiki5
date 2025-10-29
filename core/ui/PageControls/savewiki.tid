@@ -4,18 +4,25 @@ caption: {{$:/core/images/save-button-dynamic}} {{$:/language/Buttons/SaveWiki/C
 description: {{$:/language/Buttons/SaveWiki/Hint}}
 
 \whitespace trim
-<$button tooltip={{$:/language/Buttons/SaveWiki/Hint}} aria-label={{$:/language/Buttons/SaveWiki/Caption}} class=<<tv-config-toolbar-class>>>
+\procedure saveActions()
 <$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
-<$action-sendmessage $message="tm-save-wiki" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
+	<$action-sendmessage $message="tm-save-wiki" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
 </$wikify>
+\end
+
+<$button actions=<<saveActions>>
+	tooltip={{$:/language/Buttons/SaveWiki/Hint}}
+	aria-label={{$:/language/Buttons/SaveWiki/Caption}}
+	class=<<tv-config-toolbar-class>>
+>
 <span class="tc-dirty-indicator">
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/save-button-dynamic}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/SaveWiki/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </span>
 </$button>

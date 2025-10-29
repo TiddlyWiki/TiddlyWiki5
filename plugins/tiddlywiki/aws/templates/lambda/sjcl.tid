@@ -4,13 +4,13 @@ title: $:/plugins/tiddlywiki/aws/lambda/sjcl
 
 (function() {
 
-var module;
+var module, window = {};
 
 global.sjcl = (function() {
 
 {{ $:/library/sjcl.js ||$:/core/templates/plain-text-tiddler}}
 
-return sjcl;
+return window.sjcl;
 
 })();
 

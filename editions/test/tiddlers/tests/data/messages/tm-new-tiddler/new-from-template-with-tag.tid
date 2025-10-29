@@ -1,0 +1,44 @@
+title: Message/tm-new-tiddler/new-from-template-with-tag
+description: tm-new-tiddler create a draft from a template. Template has an empty tags field
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<pre>{{	Draft of 'new-tiddler-template 1'||output-template}}</pre>
++
+title: Actions
+
+<$navigator story="$:/StoryList">
+
+<$action-sendmessage $message="tm-new-tiddler"
+	$param="new-tiddler-template"
+	text="some text"
+	z-field="a"
+/>
+
+</$navigator>
+
++
+title: new-tiddler-template
+asdf: asdf
+tags:
+
++
+title: output-template
+
+<!-- This template is used for saving tiddlers in TiddlyWeb *.tid format -->
+<$fields exclude='text bag created modified' template='$name$: $value$
+'></$fields>
+<$view field="text" format="text" />
++
+title: ExpectedResult
+
+<p><pre>asdf: asdf
+draft.of: new-tiddler-template 1
+draft.title: new-tiddler-template 1
+tags: 
+title: Draft of 'new-tiddler-template 1'
+z-field: a
+
+some text</pre></p>

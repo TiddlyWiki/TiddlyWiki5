@@ -4,29 +4,21 @@ caption: {{$:/core/images/new-journal-button}} {{$:/language/Buttons/NewJournalH
 description: {{$:/language/Buttons/NewJournalHere/Hint}}
 
 \whitespace trim
-\define journalButtonTags()
-[[$(currentTiddlerTag)$]] $(journalTags)$
-\end
-\define journalButton()
-\whitespace trim
+\procedure journalButton()
 <$button tooltip={{$:/language/Buttons/NewJournalHere/Hint}} aria-label={{$:/language/Buttons/NewJournalHere/Caption}} class=<<tv-config-toolbar-class>>>
-<$wikify name="journalTitle" text="""<$macrocall $name="now" format=<<journalTitleTemplate>>/>""">
-<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<journalButtonTags>>/>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<$wikify name="journalTitle" text="""<$transclude $variable="now" format=<<journalTitleTemplate>>/>""">
+<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=`[[$(currentTiddlerTag)$]] $(journalTags)$`/>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/new-journal-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/NewJournalHere/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$wikify>
 </$button>
 \end
-<$set name="journalTitleTemplate" value={{$:/config/NewJournal/Title}}>
-<$set name="journalTags" value={{$:/config/NewJournal/Tags}}>
-<$set name="currentTiddlerTag" value=<<currentTiddler>>>
+<$let journalTitleTemplate={{$:/config/NewJournal/Title}} journalTags={{$:/config/NewJournal/Tags}} currentTiddlerTag=<<currentTiddler>>>
 <<journalButton>>
-</$set>
-</$set>
-</$set>
+</$let>

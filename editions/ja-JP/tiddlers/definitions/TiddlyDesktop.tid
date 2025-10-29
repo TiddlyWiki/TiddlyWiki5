@@ -1,0 +1,21 @@
+created: 20140126125259638
+modified: 20241227104451970
+original-modified: 20171118195316103
+tags: Definitions Platforms
+title: TiddlyDesktop
+ja-title: TiddlyDesktop
+type: text/vnd.tiddlywiki
+
+TiddlyDesktopは、TiddlyWikiファイル(TiddlyWikiClassicとTiddlyWikiバージョン5の両方)を操作するためのアプリです。Windowsや、Mac OS X、Linuxにインストールできます。TiddlyWikiバージョン5と古いTiddlyWikiClassicと互換性があります
+
+{{Saving on TiddlyDesktop}}
+
+{{Introducing TiddlyDesktop Video}}
+
+! ソース
+
+TiddlyDesktopは、[[オープンソース|OpenSource]]プロジェクト[[NW.js]]をベースにしています。ソースはGitHubにあります:
+
+https://github.com/TiddlyWiki/TiddlyDesktop/
+
+[[TiddlyDesktopのリリース|TiddlyDesktop Releases]]と[[TiddlyDesktopのカスタマイズ方法|How to Customize TiddlyDesktop]]を参照してください

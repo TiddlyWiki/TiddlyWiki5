@@ -1,0 +1,7 @@
+import-sheet-name: Final Day 1 and 2
+import-spec-role: sheet
+list: [[$:/_importspec/RealEstate/PropertiesRow]]
+tags: 
+title: $:/_importspec/RealEstate/PropertiesSheet
+type: text/vnd.tiddlywiki
+
