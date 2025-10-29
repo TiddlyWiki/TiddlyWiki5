@@ -3,7 +3,6 @@
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
-		"tiddlywiki/freelinks",
 		"tiddlywiki/highlight",
 		"tiddlywiki/internals"
 	],
