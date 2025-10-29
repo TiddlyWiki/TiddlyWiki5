@@ -240,7 +240,7 @@ a.doc-deprecated-version.tc-tiddlylink {
     vertical-align: text-bottom;
 }
 
-.doc-link-badge {
+html button.doc-link-badge, html a.doc-link-badge {
     text-decoration: none;
     background-color: #7eba4c;
     color: <<colour foreground>>;
@@ -250,8 +250,20 @@ a.doc-deprecated-version.tc-tiddlylink {
     font-size: 0.75em;
 }
 
-.doc-link-badge:hover {
+html button.doc-link-badge:hover, html a.doc-link-badge:hover {
     text-decoration: underline;
+}
+
+.doc-github-link svg {
+	width: 1.2em;
+	height: 1.2em;
+	vertical-align: middle;
+}
+
+.doc-changenote-body {
+	margin-left: 2em;
+	font-style: italic;
+	font-size: 0.9em;
 }
 
 .doc-tiddler-fields {
@@ -283,6 +295,7 @@ a.doc-deprecated-version.tc-tiddlylink {
 	list-style: none;
 	display: flex;
 	flex-wrap: wrap;
+	padding: 0;
 }
 ol.doc-github-contributors li {
 	display: flex;

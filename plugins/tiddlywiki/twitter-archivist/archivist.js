@@ -7,6 +7,8 @@ Utility class for manipulating Twitter archives
 
 \*/
 
+/* eslint-disable no-await-in-loop */
+/* eslint-disable require-await */
 "use strict";
 
 function TwitterArchivist(options) {
@@ -228,13 +230,22 @@ TwitterArchivistSourceBrowser.prototype.init = async function() {
 
 TwitterArchivistSourceBrowser.prototype.processFiles = async function(dirPath,encoding,callback) {
 	const dirHandle = await this.walkDirectory(dirPath.split("/"));
-	for await (const [filename, fileHandle] of dirHandle.entries()) {
+	const asyncIterator = dirHandle.entries();
+	await AsyncIteratorForEach(asyncIterator, async ([filename, fileHandle]) => {
 		const contents = await fileHandle.getFile();
 		callback({
 			filename: filename,
-			contents: arrayBufferToBase64(await contents.arrayBuffer())
+			contents: encoding === "base64" ? arrayBufferToBase64(await contents.arrayBuffer()) : await contents.text()
 		});
-	}
+	});
+	
+	// for await (const [filename, fileHandle] of dirHandle.entries()) {
+	// 	const contents = await fileHandle.getFile();
+	// 	callback({
+	// 		filename: filename,
+	// 		contents: arrayBufferToBase64(await contents.arrayBuffer())
+	// 	});
+	// }
 };
 
 TwitterArchivistSourceBrowser.prototype.loadTwitterJsData = async function(filePath) {
@@ -308,6 +319,26 @@ function arrayBufferToBase64(arrayBuffer) {
 	}
 	return base64;
 }
+
+
+async function AsyncIteratorForEach(iter, callback) {
+
+	// Start the iteration
+	try {
+		while(true) {
+			// Await the next result object
+			const { value, done } = await iter.next();
+			if(done) break;
+			await callback(value);
+		}
+	} finally {
+		// If the iterator supports cleanup, call it
+		if(typeof iter.return === "function") {
+			await iter.return();
+		}
+	}
+}
+
 
 exports.TwitterArchivist = TwitterArchivist;
 exports.TwitterArchivistSourceNodeJs = TwitterArchivistSourceNodeJs;

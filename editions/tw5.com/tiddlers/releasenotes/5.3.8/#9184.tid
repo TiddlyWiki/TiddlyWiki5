@@ -1,0 +1,8 @@
+title: $:/changenotes/5.3.8/#9184
+description: Update Polish translation
+release: 5.3.8
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: translation
+links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9184
+github-contributors: EvidentlyCube

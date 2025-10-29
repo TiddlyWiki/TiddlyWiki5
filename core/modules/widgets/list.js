@@ -519,36 +519,3 @@ ListJoinWidget.prototype.render = function() {}
 ListJoinWidget.prototype.refresh = function() { return false; }
 
 exports["list-join"] = ListJoinWidget;
-
-/*
-Make <$list-template> and <$list-empty> widgets that do nothing
-*/
-var ListTemplateWidget = function(parseTreeNode,options) {
-	// Main initialisation inherited from widget.js
-	this.initialise(parseTreeNode,options);
-};
-ListTemplateWidget.prototype = new Widget();
-ListTemplateWidget.prototype.render = function() {}
-ListTemplateWidget.prototype.refresh = function() { return false; }
-
-exports["list-template"] = ListTemplateWidget;
-
-var ListEmptyWidget = function(parseTreeNode,options) {
-	// Main initialisation inherited from widget.js
-	this.initialise(parseTreeNode,options);
-};
-ListEmptyWidget.prototype = new Widget();
-ListEmptyWidget.prototype.render = function() {}
-ListEmptyWidget.prototype.refresh = function() { return false; }
-
-exports["list-empty"] = ListEmptyWidget;
-
-var ListJoinWidget = function(parseTreeNode,options) {
-	// Main initialisation inherited from widget.js
-	this.initialise(parseTreeNode,options);
-};
-ListJoinWidget.prototype = new Widget();
-ListJoinWidget.prototype.render = function() {}
-ListJoinWidget.prototype.refresh = function() { return false; }
-
-exports["list-join"] = ListJoinWidget;

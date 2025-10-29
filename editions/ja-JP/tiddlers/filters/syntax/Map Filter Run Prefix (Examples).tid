@@ -1,0 +1,60 @@
+created: 20210618134753828
+modified: 20250416110748088
+original-modified: 20230305125405422
+tags: [[Map Filter Run Prefix]]
+title: Map Filter Run Prefix (Examples)
+ja-title: mapフィルタランプレフィックス(例)
+type: text/vnd.tiddlywiki
+
+インプットタイトルが存在する場合はキャプションフィールドで置き換え、存在しない場合はインプットタイトルを保持します: 
+
+<<.operator-example 1 "[tag[Widgets]] :map[get[caption]else{!!title}]">>
+
+<<.tip "上記の例は`[tag[Widgets]] :map[{!!caption}!is[blank]else{!!title}]`と同等です。フィールドを`{!!caption}`のようにテキスト参照として参照する場合、存在しない、または空のキャプションフィールドに対しては空文字列が返されることに注意してください。したがって、`else`オペレータの前に`is[blank]`のチェックが必要です。">>
+
+買い物リストの各タイトルについて、各アイテムの購入にかかる合計コストを計算します:
+
+<<.operator-example 2 "[tag[shopping]] :map[get[quantity]else[0]multiply{!!price}]">>
+
+`Widget:`でタグ付けされたすべてのTiddlerのタグを取得します:
+
+<<.operator-example 3 "[tag[Widgets]] :map:flat[tagging[]] :and[!is[blank]unique[]]">>
+<<.tip "`flat`サフィックスがない場合、`:map`フィルタランは各インプットタイトルの最初の結果のみを返します">>
+
+!! `:map`の`flat`サフィックスの有無の比較
+
+`:map`フィルタランは、少なくともインプットと同じ数のアウトプットを返します。デフォルトでは、1つのインプット項目に対して1つのアウトプット項目が生成されます。フィルタランによってインプット項目が空の結果に変換された場合、その項目のアウトプットは空の文字列になります。フィルタランによってインプット項目が複数の項目に変換された場合、アウトプットには最初の項目のみが表われます。この動作は、`flat`サフィックスを指定することで上書きできます。`flat`サフィックスを指定すると、すべての項目がアウトプットに表れます。
+
+| `:map` | `:map:flat` |
+|^<<.operator-example m0.1 "[range[4]] :map[match[this matches nothing]]">>|^<<.operator-example m0.2 "[range[4]] :map:flat[match[this matches nothing]]">>|
+|^<<.operator-example m1.1 "[range[4]] :map[range<currentTiddler>]">>|^<<.operator-example m1.2 "[range[4]] :map:flat[range<currentTiddler>]">>|
+|^<<.operator-example m2.1 "[range[4]] :map[range<currentTiddler>]">>|^<<.operator-example m2.2 "[range[4]] :map:flat[range<currentTiddler>first[]]">>|
+|^<<.operator-example m3.1 "[range[4]] :map[range<currentTiddler>sum[]]">>|^<<.operator-example m3.2 "[range[4]] :map:flat[range<currentTiddler>sum[]]">>|
+|^<<.operator-example m4.1 "[[1,2,3]] [[4,5]] :map[split[,]]">>|^<<.operator-example m4.2 "[[1,2,3]] [[4,5]] :map:flat[split[,]]">>|
+|^<<.operator-example m5.1 "[[1,2,3]] [[4,5]] :map[split[,]]">>|^<<.operator-example m5.2 "[[1,2,3]] [[4,5]] :map:flat[split[,]first[]]">>|
+
+
+!! `:map`と`:and`/`+`フィルタランプレフィックスの比較
+
+`:map`フィルタランプレフィックスの機能は、`:and` プレフィックス(別名`+`)と一部重複しています。これらは同じ結果を返す場合もありますが、少なくとも以下の場合には結果が異なります:
+
+# `:and`フィルタランによってアイテム数が変更される(増加や減少)場合があります。`:map`フィルタランによってアイテム数が変更されることはありません。
+# `:and`フィルタランのアイテム数は、[[重複排除|Dominant Append]]により減少します。`:map`ランは[[重複排除|Dominant Append]]は行われません。
+# "currentTiddler"変数への明示的な参照は異なる動作をします
+# TextReferenceを使用した"currentTiddler"への暗黙的な参照は異なる動作をします。
+
+| `:map` | `:and` |
+|!結果は同じ|<|
+|^<<.operator-example 1.1 "[range[5]] :map[add[1]]">>|^<<.operator-example 1.2 "[range[5]] :and[add[1]]">>|
+|^<<.operator-example 2.1 "[range[5]] :map[addsuffix[ hello]]">>|^<<.operator-example 2.2 "[range[5]] :and[addsuffix[ hello]]">>|
+|^<<.operator-example 3.1 "[tag[shopping]] :map[get[quantity]]">>|^<<.operator-example 3.2 "[tag[shopping]] :and[get[quantity]]">>|
+|!項目数が減少|<|
+|^<<.operator-example 4.1 "[range[5]] :map[sum[]]">>|^<<.operator-example 4.2 "[range[5]] :and[sum[]]">>|
+|^<<.operator-example 5.1 "[range[5]] :map[join[,]]">>|^<<.operator-example 5.2 "[range[5]] :and[join[,]]">>|
+|!項目数が増加|<|
+|^<<.operator-example 6.1 "[[1,2,3]] [[4,5]] :map[split[,]]">>|^<<.operator-example 6.2 "[[1,2,3]] [[4,5]] :and[split[,]]">>|
+|!重複排除|<|
+|^<<.operator-example 7.1 "[range[5]] :map[[hello]]">>|^<<.operator-example 7.2 "[range[5]] :and[[hello]]">>|
+|!currentTiddler|<|
+|^<<.operator-example 8.1 "[tag[shopping]] :map[<currentTiddler>]">>|^<<.operator-example 8.2 "[tag[shopping]] :and[<currentTiddler>]">>|
+|^<<.operator-example 9.1 "[tag[shopping]] :map[{!!quantity}]">>|^<<.operator-example 9.2 "[tag[shopping]] :and[{!!quantity}]">>|

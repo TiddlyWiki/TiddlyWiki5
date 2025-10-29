@@ -1173,7 +1173,7 @@ exports.getSubstitutedText = function(text,widget,options) {
 		output = $tw.utils.replaceString(output,new RegExp("\\$" + $tw.utils.escapeRegExp(substitute.name) + "\\$","mg"),substitute.value);
 	});
 	// Substitute any variable references with their values
-	return output.replace(/\$\(([^\)\$]+)\)\$/g, function(match,varname) {
+	return output.replace(/\$\((.+?)\)\$/g, function(match,varname) {
 		return widget.getVariable(varname,{defaultValue: ""})
 	});
 };
@@ -1443,7 +1443,7 @@ exports.search = function(text,options) {
 			// Don't search the text field if the content type is binary
 			var fieldName = searchFields[fieldIndex];
 			if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
-				break;
+				continue;
 			}
 			var str = tiddler.fields[fieldName],
 				t;
