@@ -181,7 +181,7 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 };
 
 ScrollableWidget.prototype.listenerFunction = function(event) {
-	self = this;
+	var self = this;
 	clearTimeout(this.timeout);
 	this.timeout = setTimeout(function() {
 		var existingTiddler = self.wiki.getTiddler(self.scrollableBind),

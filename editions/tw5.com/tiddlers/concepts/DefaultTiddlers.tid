@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 There are two ways default tiddlers can be defined:
 
 * A [[title-list|Title List]] eg: `TiddlerTitle` and `[[Title with spaces]]`
-* [[Filter expressions|Filter Expression], using filter operators eg: `[tag[HelloThere]]`
+* [[Filter expressions|Filter Expression]], using filter operators eg: `[tag[HelloThere]]`
 
 The resulting list of titles is then inserted into the [[story river|Story River]].
 
