@@ -26,4 +26,4 @@ title: TiddlerOne
 +
 title: ExpectedResult
 
-<p>[{"type":"element","tag":"p","children":[{"type":"text","text":"This is a block","start":68,"end":83}],"start":68,"end":83}]</p><p>[{"type":"text","text":"This is inline","start":136,"end":152}]</p>
+<p>[{"type":"element","tag":"p","children":[{"type":"text","text":"This is a block","start":68,"end":83}],"start":68,"end":83,"rule":"parseblock"}]</p><p>[{"type":"text","text":"This is inline","start":136,"end":152}]</p>
