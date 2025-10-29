@@ -1,0 +1,29 @@
+created: 20230305131705188
+modified: 20230710074438655
+tags: [[Filter Run Prefix]]
+title: Shortcut Filter Run Prefix
+type: text/vnd.tiddlywiki
+
+Shortcut prefixes are commonly used by advanced users because they are fast to type but they are harder to read by less experienced users. That's why [[named prefixes|Named Filter Run Prefix]] have been created, which are more verbose. Shortcut and named filter run prefixes are interchangeable as shown in the table below.
+
+<$railroad text="""
+\start none
+\end none
+(-|:"+"|"-"|"~"|"=")
+[[run|"Filter Run"]]
+"""/>
+
+If a run has:
+
+* no prefix, its output titles are [[dominantly appended|Dominant Append]] to the filter's output
+
+* the prefix `+`, it receives the filter output so far as its input; its output then <<.em "replaces">> all filter output so far and forms the input for the next run
+
+* the prefix `-`, output titles are <<.em removed>> from the filter's output (if such tiddlers exist)
+
+* the prefix `~`, if the filter output so far is an empty list then the output titles of the run are [[dominantly appended|Dominant Append]] to the filter's output. If the filter output so far is not an empty list then the run is ignored. <<.from-version "5.1.18">>
+
+* the prefix `=`, output titles are appended to the filter's output without de-duplication. <<.from-version "5.1.20">> 
+
+
+{{Interchangeable Filter Run Prefixes}}

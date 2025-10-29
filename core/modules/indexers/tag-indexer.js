@@ -6,10 +6,7 @@ module-type: indexer
 Indexes the tiddlers with each tag
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global modules: false */
 "use strict";
 
 function TagIndexer(wiki) {
@@ -65,7 +62,7 @@ TagSubIndexer.prototype.rebuild = function() {
 			} else {
 				self.index[tag].titles.push(title);
 			}
-		});		
+		});
 	});
 };
 
@@ -83,7 +80,7 @@ TagSubIndexer.prototype.lookup = function(tag) {
 		if(!indexRecord.isSorted) {
 			if(this.indexer.wiki.sortByList) {
 				indexRecord.titles = this.indexer.wiki.sortByList(indexRecord.titles,tag);
-			}			
+			}
 			indexRecord.isSorted = true;
 		}
 		return indexRecord.titles;
@@ -94,5 +91,3 @@ TagSubIndexer.prototype.lookup = function(tag) {
 
 
 exports.TagIndexer = TagIndexer;
-
-})();

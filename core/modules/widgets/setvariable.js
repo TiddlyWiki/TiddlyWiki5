@@ -6,10 +6,7 @@ module-type: widget
 Set variable widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -48,7 +45,17 @@ SetWidget.prototype.execute = function() {
 	this.setValue = this.getAttribute("value");
 	this.setEmptyValue = this.getAttribute("emptyValue");
 	// Set context variable
-	this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,!!this.parseTreeNode.isMacroDefinition);
+	if(this.parseTreeNode.isMacroDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,true);
+	} else if(this.parseTreeNode.isFunctionDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isFunctionDefinition: true});
+	} else if(this.parseTreeNode.isProcedureDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isProcedureDefinition: true, configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
+	} else if(this.parseTreeNode.isWidgetDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isWidgetDefinition: true, configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
+	} else {
+		this.setVariable(this.setName,this.getValue());
+	}
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -63,7 +70,7 @@ SetWidget.prototype.getValue = function() {
 		if(this.setSubTiddler) {
 			tiddler = this.wiki.getSubTiddler(this.setTiddler,this.setSubTiddler);
 		} else {
-			tiddler = this.wiki.getTiddler(this.setTiddler);			
+			tiddler = this.wiki.getTiddler(this.setTiddler);
 		}
 		if(!tiddler) {
 			value = this.setEmptyValue;
@@ -84,7 +91,7 @@ SetWidget.prototype.getValue = function() {
 			if(select !== undefined) {
 				value = results[select] || "";
 			} else {
-				value = $tw.utils.stringifyList(results);			
+				value = $tw.utils.stringifyList(results);
 			}
 		}
 		if(results.length === 0 && this.setEmptyValue !== undefined) {
@@ -112,5 +119,3 @@ SetWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.setvariable = SetWidget;
 exports.set = SetWidget;
-
-})();

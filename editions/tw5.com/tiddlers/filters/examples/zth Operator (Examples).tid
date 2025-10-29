@@ -1,0 +1,10 @@
+created: 20211029023246203
+modified: 20211029023559616
+tags: [[Operator Examples]] [[zth Operator]]
+title: zth Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]zth[]]">>
+<<.operator-example 2 "[list[Days of the Week]zth[5]]">>

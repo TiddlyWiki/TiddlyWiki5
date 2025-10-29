@@ -7,4 +7,4 @@ type: text/vnd.tiddlywiki
 
 En Google Chrome, TiddlyWiki sólo puede guardar cambios usando el módulo alternativo de guardado compatible con HTML5
 
-{{Saving with the HTML5 fallback saver}}
+{{Saving with the HTML5 saver}}

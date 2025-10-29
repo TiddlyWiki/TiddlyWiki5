@@ -9,7 +9,8 @@ Drafts: Les tiddlers en cours d'édition
 Orphans: Les tiddlers orphelins
 SystemTiddlers: Les tiddlers système
 ShadowTiddlers: Les tiddlers shadow
-StoryList: Les tiddlers du déroulé, hormis $:/AdvancedSearch
 OverriddenShadowTiddlers: Les tiddlers shadow modifiés
+SessionTiddlers: Les tiddlers modifiés depuis que le dernier chargement du wiki
 SystemTags: Les tags système
-TypedTiddlers: Tiddlers ayant un contenu non wiki-text
+StoryList: Les tiddlers du déroulé, hormis  <$text text="$:/AdvancedSearch"/>
+TypedTiddlers: Tiddlers dont le contenu n'est pas en wiki-text

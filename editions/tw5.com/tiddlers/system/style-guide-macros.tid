@@ -1,5 +1,7 @@
-title: $:/editions/tw5.com/style-guide-macros
+created: 20220227210120989
+modified: 20220227210123695
 tags: $:/tags/Macro
+title: $:/editions/tw5.com/style-guide-macros
 
 \define style-guide(good,bad)
 <table>
@@ -15,3 +17,5 @@ tags: $:/tags/Macro
 </tbody>
 </table>
 \end
+
+<pre><$view field="text"/></pre>

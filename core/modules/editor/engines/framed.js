@@ -6,10 +6,7 @@ module-type: library
 Text editor engine based on a simple input or textarea within an iframe. This is done so that the selection is preserved even when clicking away from the textarea
 
 \*/
-(function(){
 
-/*jslint node: true,browser: true */
-/*global $tw: false */
 "use strict";
 
 var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
@@ -34,8 +31,10 @@ function FramedEngine(options) {
 	this.parentNode.insertBefore(this.iframeNode,this.nextSibling);
 	this.iframeDoc = this.iframeNode.contentWindow.document;
 	// (Firefox requires us to put some empty content in the iframe)
+	var paletteTitle = this.widget.wiki.getTiddlerText("$:/palette");
+	var colorScheme = (this.widget.wiki.getTiddler(paletteTitle) || {fields: {}}).fields["color-scheme"] || "light";
 	this.iframeDoc.open();
-	this.iframeDoc.write("");
+	this.iframeDoc.write("<!DOCTYPE html><html><head><meta name='color-scheme' content='" + colorScheme + "'></head><body></body></html>");
 	this.iframeDoc.close();
 	// Style the iframe
 	this.iframeNode.className = this.dummyTextArea.className;
@@ -58,7 +57,7 @@ function FramedEngine(options) {
 		this.domNode.value = this.value;
 	}
 	// Set the attributes
-	if(this.widget.editType) {
+	if(this.widget.editType && this.widget.editTag !== "textarea") {
 		this.domNode.setAttribute("type",this.widget.editType);
 	}
 	if(this.widget.editPlaceholder) {
@@ -78,16 +77,28 @@ function FramedEngine(options) {
 	}
 	if(this.widget.isDisabled === "yes") {
 		this.domNode.setAttribute("disabled",true);
-	}	
+	}
 	// Copy the styles from the dummy textarea
 	this.copyStyles();
 	// Add event listeners
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
-		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
+		{name: "keydown",handlerObject: this,handlerMethod: "handleKeydownEvent"},
 		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
 	]);
+	// Add drag and drop event listeners if fileDrop is enabled
+	if(this.widget.isFileDropEnabled) {
+		$tw.utils.addEventListeners(this.domNode,[
+			{name: "dragenter",handlerObject: this.widget,handlerMethod: "handleDragEnterEvent"},
+			{name: "dragover",handlerObject: this.widget,handlerMethod: "handleDragOverEvent"},
+			{name: "dragleave",handlerObject: this.widget,handlerMethod: "handleDragLeaveEvent"},
+			{name: "dragend",handlerObject: this.widget,handlerMethod: "handleDragEndEvent"},
+			{name: "drop", handlerObject: this.widget,handlerMethod: "handleDropEvent"},
+			{name: "paste", handlerObject: this.widget,handlerMethod: "handlePasteEvent"},
+			{name: "click",handlerObject: this.widget,handlerMethod: "handleClickEvent"}
+		]);
+	}
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
 }
@@ -104,6 +115,8 @@ FramedEngine.prototype.copyStyles = function() {
 	this.domNode.style.margin = "0";
 	// In Chrome setting -webkit-text-fill-color overrides the placeholder text colour
 	this.domNode.style["-webkit-text-fill-color"] = "currentcolor";
+	// Ensure we don't force text direction to LTR
+	this.domNode.style.removeProperty("direction");
 };
 
 /*
@@ -123,7 +136,11 @@ FramedEngine.prototype.setText = function(text,type) {
 Update the DomNode with the new text
 */
 FramedEngine.prototype.updateDomNodeText = function(text) {
-	this.domNode.value = text;
+	try {
+		this.domNode.value = text;
+	} catch(e) {
+		// Ignore
+	}
 };
 
 /*
@@ -144,13 +161,13 @@ FramedEngine.prototype.fixHeight = function() {
 		if(this.widget.editAutoHeight) {
 			if(this.domNode && !this.domNode.isTiddlyWikiFakeDom) {
 				var newHeight = $tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);
-				this.iframeNode.style.height = (newHeight + 14) + "px"; // +14 for the border on the textarea
+				this.iframeNode.style.height = newHeight + "px";
 			}
 		} else {
 			var fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
 			fixedHeight = Math.max(fixedHeight,20);
 			this.domNode.style.height = fixedHeight + "px";
-			this.iframeNode.style.height = (fixedHeight + 14) + "px";
+			this.iframeNode.style.height = fixedHeight + "px";
 		}
 	}
 };
@@ -159,9 +176,11 @@ FramedEngine.prototype.fixHeight = function() {
 Focus the engine node
 */
 FramedEngine.prototype.focus  = function() {
-	if(this.domNode.focus && this.domNode.select) {
+	if(this.domNode.focus) {
 		this.domNode.focus();
-		this.domNode.select();
+	}
+	if(this.domNode.select) {
+		$tw.utils.setSelectionByPosition(this.domNode,this.widget.editFocusSelectFromStart,this.widget.editFocusSelectFromEnd);
 	}
 };
 
@@ -170,8 +189,19 @@ Handle a focus event
 */
 FramedEngine.prototype.handleFocusEvent = function(event) {
 	if(this.widget.editCancelPopups) {
-		$tw.popup.cancel(0);	
+		$tw.popup.cancel(0);
 	}
+};
+
+/*
+Handle a keydown event
+ */
+FramedEngine.prototype.handleKeydownEvent = function(event) {
+	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+		return true;
+	}
+
+	return this.widget.handleKeydownEvent(event);
 };
 
 /*
@@ -189,7 +219,7 @@ FramedEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	if(this.widget.editInputActions) {
-		this.widget.invokeActionString(this.widget.editInputActions);
+		this.widget.invokeActionString(this.widget.editInputActions,this,event,{actionValue: this.getText()});
 	}
 	return true;
 };
@@ -240,5 +270,3 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 };
 
 exports.FramedEngine = FramedEngine;
-
-})();

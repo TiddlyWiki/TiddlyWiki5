@@ -4,7 +4,7 @@ modified: 20201118192136472
 op-input: a list of items
 op-output: the input list with the titles specified in the parameter toggled in a cyclical manner
 op-parameter: the <<.op cycle>> operator accepts 1 or 2 parameters, see below for details
-op-purpose: toggle in the input, the titles specified in the first operand in a cyclical manner
+op-purpose: toggle the titles specified in the first parameter in a cyclical manner
 tags: [[Filter Operators]] [[Listops Operators]] [[Order Operators]]
 title: cycle Operator
 type: text/vnd.tiddlywiki

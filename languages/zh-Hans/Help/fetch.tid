@@ -1,7 +1,7 @@
 title: $:/language/Help/fetch
-description: 通过网址从维基撷取条目
+description: 通过网址从维基提取条目
 
-通过 HTTP/HTTPS 撷取一个或多个文件，并导入匹配筛选器的条目，可选的转换传入的名称。
+通过 HTTP/HTTPS 提取一个或多个文件，并导入匹配筛选器的条目，可选的转换传入的名称。
 
 ```
 --fetch file <url> <import-filter> <transform-filter>
@@ -10,11 +10,11 @@ description: 通过网址从维基撷取条目
 --fetch raw-files <url-filter> <transform-filter>
 ```
 
- "file" 和 "files" 选项撷取指定的文件，并尝试导入其中的条目（与将文件拖动到浏览器视窗中的处理相同）。 "raw-file" 和 "raw-files" 变选项撷取指定的文件，并将原始文件资料存储于条目，而不套用导入逻辑。
+ "file" 和 "files" 选项提取指定的文件，并尝试导入其中的条目（与将文件拖动到浏览器视窗中的处理相同）。 "raw-file" 和 "raw-files" 变选项提取指定的文件，并将原始文件资料存储于条目，而不套用导入逻辑。
 
-使用 "file" and "raw-file" 选项为仅撷取单个文件，且第一个参数为要读取文件的网址。
+使用 "file" and "raw-file" 选项为仅提取单个文件，且第一个参数为要读取文件的网址。
 
-使用 "files" 和 "raw-files" 选项为撷取多个文件，且第一个参数是一个产生要读取文件的网址清单的筛选器。例如，给定标签为 "remote-server" 的一组具有字段 "url" 的条目，筛选器 `[tag[remote-server]get[url]]` 将取回所有可用的网址。
+使用 "files" 和 "raw-files" 选项为提取多个文件，且第一个参数是一个产生要读取文件的网址清单的筛选器。例如，给定标签为 "remote-server" 的一组具有字段 "url" 的条目，筛选器 `[tag[remote-server]get[url]]` 将取回所有可用的网址。
 
 对于 "file" 和 "files" 选项，the `<import-filter>` 参数指定一个筛选器，用于确定要导入哪些条目。如果未提供，则默认为 `[all[tiddlers]]`。
 
@@ -22,7 +22,7 @@ description: 通过网址从维基撷取条目
 
 于 `--fetch` 之前使用 `--verbose` 命令，将在导入期间输出进度信息。
 
-请注意，TiddlyWiki 不会撷取一个已经加载插件的旧版本。
+请注意，TiddlyWiki 不会提取一个已经加载插件的旧版本。
 
 以下示例从 https://tiddlywiki.com 取回所有非系统条目，并将其保存到一个 JSON 文件：
 

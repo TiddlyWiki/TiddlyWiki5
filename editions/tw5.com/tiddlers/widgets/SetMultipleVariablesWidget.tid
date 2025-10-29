@@ -1,0 +1,33 @@
+caption: setmultiplevariables
+created: 20211023162409163
+modified: 20211023162409163
+tags: Widgets
+title: SetMultipleVariablesWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The setmultiplevariables widget assigns values to multiple [[variables|Variables]] where the names and values of the variables are specified as separate filter.
+
+! Content and Attributes
+
+The content of the `<$setmultiplevariables>` widget is the scope for the value assigned to the variable.
+
+|!Attribute |!Description |
+|$names |Filter evaluating to the names of a list of variables to assign |
+|$values |Filter evaluating to the values corresponding to the list of names specified in `$names` |
+
+! Examples
+
+Here is an example of a convoluted way to display the values of the fields of the tiddler "HelloThere":
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$setmultiplevariables $names="[[HelloThere]fields[]addprefix[demo-]]" $values="[[HelloThere]fields[]] :map[[HelloThere]get<currentTiddler>]">
+<ol>
+<$list filter="[variables[]prefix[demo-]sort[]]">
+<li>
+''<$text text={{{ [<currentTiddler>removeprefix[demo-]] }}}/>'': <$text text={{{ [<currentTiddler>getvariable[]] }}}/>
+</li>
+</$list>
+</ol>
+</$setmultiplevariables>"""/>

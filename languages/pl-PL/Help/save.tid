@@ -1,0 +1,25 @@
+title: $:/language/Help/save
+description: Zapisuje surowe tiddlery do plików
+
+Zapisuje indywidualne tiddlery bazująć na podanym filtrze w ich surowej lub binarnej formie do podanych plików.
+
+```
+--save <tiddler-filter> <filename-filter>
+```
+
+* ''tiddler-filter'': Filtr określający które tiddlery mają być zapisane
+* ''filename-filter'': Opcjonalny filtr konwertujący nazwy tiddlerów do ścieżek. Domyślnie jest to `[is[tiddler]]`, który używa niezmienionej nazwy tiddlera jako nazwy pliku.
+
+Domyślnie pliki są zapisywane w folderze `./output`, relatywnym do folderu z wiki. Komenda `--output` może być użyta by zmienić ścieżkę.
+
+Notatki:
+
+* Pliki NIE SĄ usuwane z folderu docelowego
+* Wszelkie brakujące foldery zostaną automatycznie utworzone.
+* Jeżeli chcesz użyć tiddlera, który w nazwie ma spacje pamiętaj, by otoczyć go nawiasami kwadratowymi i cudzysłowiem: `--save "[[Motovun Jack.jpg]]"`
+* Do ''filename-filter'' przekazywana jest nazwa obecnie renderowanego tiddlera, tak by można było jej użyć do określenia ścieżki. Na przykład `[encodeuricomponent[]addprefix[static/]]` koduje znaki URI w każdej nazwie, po czym dodaje przedrostek `static/`.
+* Komenda `--save` jest bardziej elastyczna niż `--savetiddler` i `--savetiddlers`, które są obecnie eliminowane
+
+Przykłady:
+
+* `--save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"` -- zapisuje wszystkie niesystemowe tiddlery obrazów jako pliki w podfolderze "tiddlers" z URI enkodowanymi nazwami.

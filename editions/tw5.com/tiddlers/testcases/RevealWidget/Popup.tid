@@ -1,0 +1,27 @@
+created: 20240721163229297
+description: Reveal widget for popup content
+modified: 20240721172211283
+tags: $:/tags/wiki-test-spec
+title: TestCases/RevealWidget/Popup
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+When the button is clicked, the tiddler specified by the popup attribute is filled with the click coordinates. The reveal widget uses these coordinates to position the popup content.
++
+title: Output
+
+<$button popup="$:/SamplePopupState">Pop me up!</$button>
+
+<$reveal type="popup" state="$:/SamplePopupState">
+<div class="tc-drop-down">
+
+! This is the popup
+And this is some text
+
+</div>
+</$reveal>
++
+title: ExpectedResult
+
+<p><button aria-expanded="false" class="">Pop me up!</button></p><p><span class=" tc-reveal" hidden="true"></span></p>

@@ -6,10 +6,7 @@ module-type: filteroperator
 Extended filter operators to manipulate the current list.
 
 \*/
-(function () {
 
-	/*jslint node: true, browser: true */
-	/*global $tw: false */
 	"use strict";
 
 	/*
@@ -193,7 +190,7 @@ Extended filter operators to manipulate the current list.
 			step = stepSize || 1,
 			i = 0,
 			opLength = operands.length,
-			nextOperandIndex;		
+			nextOperandIndex;
 		for(i; i < opLength; i++) {
 			resultsIndex = results.indexOf(operands[i]);
 			if(resultsIndex !== -1) {
@@ -202,7 +199,7 @@ Extended filter operators to manipulate the current list.
 		}
 		if(resultsIndex !== -1) {
 			i = i + step;
-			nextOperandIndex = (i < opLength ? i : i - opLength);
+			nextOperandIndex = (i < opLength ? i : i % opLength);
 			if(operands.length > 1) {
 				results.splice(resultsIndex,1,operands[nextOperandIndex]);
 			} else {
@@ -211,12 +208,12 @@ Extended filter operators to manipulate the current list.
 		} else {
 			results.push(operands[0]);
 		}
-		return results;		
+		return results;
 	}
 
 	/*
 	Toggles an item in the current list.
-	*/	
+	*/
 	exports.toggle = function(source,operator) {
 		return cycleValueInArray(prepare_results(source),operator.operands);
 	}
@@ -228,8 +225,6 @@ Extended filter operators to manipulate the current list.
 		if(step < 0) {
 			operands.reverse();
 			step = Math.abs(step);
-		}	
+		}
 		return cycleValueInArray(results,operands,step);
 	}
-	
-})();

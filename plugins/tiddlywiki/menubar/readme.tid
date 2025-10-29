@@ -19,6 +19,7 @@ Menu items are tagged <<tag $:/tags/MenuBar>>. The following fields are used by 
 |caption |The text that is displayed for the menu item. Avoid links, using `~` to suppress CamelCase links if required |
 |target |For simple link menu items specifies a tiddler title as the target of the link |
 |is-dropdown |Set to `yes` to indicate a dropdown menu item |
+|dropdown-position |Optional position for the dropdown (can be ''left'', ''above'', ''aboveleft'', ''aboveright'', ''right'', ''belowleft'', ''belowright'' or ''below'') |
 |text |For dropdown menu items, specifies the body of the dropdown |
 |custom-menu-content |Optional wikitext to be displayed in place of the caption |
 |custom-menu-styles-wide |Optional string of styles to be applied to menu item when the menubar is wide |

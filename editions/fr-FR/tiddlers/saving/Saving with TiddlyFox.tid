@@ -1,0 +1,31 @@
+caption: ~TiddlyFox
+color: #4db6ac
+community-author: Jeremy Ruston
+created: 20131221085742684
+delivery: Browser Extension
+description: Extension pour les anciennes versions de Firefox
+fr-title: Enregistrer avec TiddlyFox
+method: save
+modified: 20220417143943429
+tags: Saving Firefox
+title: Saving with TiddlyFox
+type: text/vnd.tiddlywiki
+
+Si vous utilisez [[Firefox pour Android|Firefox for Android]], reportez-vous aux instructions pour [[enregistrer avec TiddlyFox sur Android|Saving with TiddlyFox on Android]].
+
+# Assurez-vous d'avoir une version de [[Firefox]] antérieure à 57. ~TiddlyFox ne fonctionne plus sur les versions 57 et ultérieures. Pour Firefox 57 et au-delà, pensez plutôt à utiliser<<:>> <<list-links filter:"[tag[Firefox]delivery[Browser Extension]] -[[Saving with TiddlyFox]]">>
+# Installez la dernière version de l'extension TiddlyFox à partir de<<dp>>
+#* https://addons.mozilla.org/fr/firefox/addon/tiddlyfox/
+# Redémarrez [[Firefox]]
+# [[Téléchargez|Download]] un <<tw>> vide en cliquant sur ce bouton<<dp>>
+#> {{$:/editions/fr-FR/snippets/download-empty-button}}
+# Localisez le fichier que vous venez de télécharger
+#* Vous pouvez le renommer, mais assurez-vous de conserver l'extension `.html` ou `.htm`
+# Ouvrez le fichier dans [[Firefox]]
+#* Si vous utilisez TiddlyFox v1.x.x, cliquez ''OK'' en réponse à la demande de TiddlyFox d'activer l'enregistrement pour ce fichier
+#* Si vous utilisez TiddlyFox v2.x.x cliquez sur l’icône de chat sur un globe bleu pour activer l'enregistrement. Il n'y a pas de demande en v2.0.1.
+#** Pour TiddlyFox v2.0.1, vous ne  pouvez pas utiliser le mode Navigation Privée, ni activer l'option <<gf "Ne jamais conserver l'historique">>.
+# Essayez de créer un nouveau tiddler à l'aide du bouton <<.icon $:/core/images/new-button>> ''nouveau tiddler'' de la barre latérale. Ajouter du contenu dans le tiddler, et cliquez sur le bouton <<.icon $:/core/images/done-button>> ''terminé''
+# Enregistrez vos modifications en cliquant sur le bouton <<.icon $:/core/images/save-button>> ''enregistrer les modifications'' de la barre latérale
+#* Attendez l'indication jaune ''Wiki enregistré'' en haut à droite de la fenêtre
+# Rafraîchissez la fenêtre du navigateur pour vérifier que vos modifications ont été correctement enregistrées

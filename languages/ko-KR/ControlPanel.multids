@@ -6,7 +6,7 @@ Appearance/Caption: 외관
 Appearance/Hint: 티들리위키의 외관을 사용자 지정하는 방법입니다.
 Basics/AnimDuration/Prompt: 애니메이션 지속 시간:
 Basics/Caption: 기본
-Basics/DefaultTiddlers/BottomHint: 스페이스로 되어 있는 제목에는 &#91;&#91;이중 대괄호&#93;&#93;를 사용하세요. 또는 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">이야기 정렬 유지</$button>로 선택할 수 있습니다
+Basics/DefaultTiddlers/BottomHint: 스페이스로 되어 있는 제목에는 &#91;&#91;이중 대괄호&#93;&#93;를 사용하세요. 또는 {{이야기 정렬 유지||$:/snippets/retain-story-ordering-button}}로 선택할 수 있습니다
 Basics/DefaultTiddlers/Prompt: 기본 티들러:
 Basics/DefaultTiddlers/TopHint: 시작할 때 표시할 티들러를 선택합니다:
 Basics/Language/Prompt: 안녕! 현재 언어:

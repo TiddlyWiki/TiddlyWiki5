@@ -1,0 +1,16 @@
+caption: <<.attr field>>
+created: 20230314171223911
+description: tab
+modified: 20230317161110431
+tags: CheckboxWidget
+title: CheckboxWidget (field Mode)
+
+!!<<.link "<<.attr field>> Mode" "CheckboxWidget (field Mode)">>
+
+Using the checkbox widget in field mode requires the <<.attr field>> attribute to specify the name of the field. The <<.attr checked>> and <<.attr unchecked>> attributes specify the values to be assigned to the field to correspond to its checked and unchecked states respectively. The <<.attr default>> attribute is used as a fallback value if the field is missing or contains a value that does not correspond to the value of the <<.attr checked>> or <<.attr unchecked>> attributes.
+
+This example creates a checkbox that is checked if the field <<.field status>> is equal to <<.value open>> and unchecked if the field is equal to <<.value closed>>. If the field value is undefined then it defaults to <<.value closed>>.
+
+<<wikitext-example-without-html """<$checkbox field="status" checked="open" unchecked="closed" default="closed"> Is it open?</$checkbox>
+
+''status:'' {{!!status}}""">>

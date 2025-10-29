@@ -1,0 +1,24 @@
+created: 20140103091348509
+modified: 20241018104349502
+original-modified: 20140919161534259
+tags: Learning
+title: Adding a Twitter Follow button
+ja-title: Twitterのフォローボタンを追加する
+type: text/vnd.tiddlywiki
+
+
+以下は、特定のユーザー名のTwitterフォローボタンを提供するマクロです: 
+
+```
+\define twitterFollowButton(username)
+<iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?screen_name=$username$" style="width:300px; height:20px;"></iframe>
+\end
+```
+
+https://dev.twitter.com/docs/follow-button で公開されているバージョンからの唯一の変更点は、新しい行が削除されたことです
+
+src URLはプロトコル(つまり、"http"または"https")なしで指定されていることに注意してください。このようにして、サイトがHTTPドメインでホストされているかHTTPSドメインでホストされているかに関係なく機能するようにします。TiddlyWikiを"file://" URLでオフライン使用しているときにTwitterボタンを機能させたい場合は、プロトコルを手動で追加する必要があります。例えば: 
+
+```
+<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/follow_button.html?screen_name=jermolene" style="width:300px; height:20px;"></iframe>
+```

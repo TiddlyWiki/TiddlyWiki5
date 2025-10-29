@@ -1,0 +1,19 @@
+{
+	"tiddlers": [
+		{
+			"file": "addon/edit/trailingspace.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/trailingspace.css",
+				"tags": "[[$:/tags/Stylesheet]]"
+			}
+		},{
+			"file": "addon/edit/trailingspace.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/trailingspace.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

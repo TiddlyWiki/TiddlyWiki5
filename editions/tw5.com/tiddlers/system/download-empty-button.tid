@@ -5,5 +5,5 @@ type: text/vnd.tiddlywiki
 
 <$button class="tc-btn-download">
 <$action-sendmessage $message="tm-download-file" $param="$:/editions/tw5.com/download-empty" filename="empty.html"/>
-Download Empty {{$:/core/images/save-button}}
+Download {{$:/core/images/save-button}}
 </$button>

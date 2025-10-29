@@ -6,10 +6,7 @@ module-type: startup
 Title, stylesheet and page rendering
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -29,7 +26,11 @@ var THROTTLE_REFRESH_TIMEOUT = 400;
 
 exports.startup = function() {
 	// Set up the title
-	$tw.titleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TITLE_TITLE,{document: $tw.fakeDocument, parseAsInline: true});
+	$tw.titleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TITLE_TITLE, {
+		document: $tw.fakeDocument,
+		parseAsInline: true,
+		importPageMacros: true,
+	});
 	$tw.titleContainer = $tw.fakeDocument.createElement("div");
 	$tw.titleWidgetNode.render($tw.titleContainer,null);
 	var publishTitle = function() {
@@ -47,12 +48,17 @@ exports.startup = function() {
 	$tw.styleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_STYLESHEET_TITLE,{document: $tw.fakeDocument});
 	$tw.styleContainer = $tw.fakeDocument.createElement("style");
 	$tw.styleWidgetNode.render($tw.styleContainer,null);
+	$tw.styleWidgetNode.assignedStyles = $tw.styleContainer.textContent;
 	$tw.styleElement = document.createElement("style");
-	$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
+	$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
 	document.head.insertBefore($tw.styleElement,document.head.firstChild);
 	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
 		if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
-			$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
+			var newStyles = $tw.styleContainer.textContent;
+			if(newStyles !== $tw.styleWidgetNode.assignedStyles) {
+				$tw.styleWidgetNode.assignedStyles = newStyles;
+				$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
+			}
 		}
 	}));
 	// Display the $:/core/ui/PageTemplate tiddler to kick off the display
@@ -81,13 +87,15 @@ exports.startup = function() {
 		deferredChanges = Object.create(null);
 		$tw.hooks.invokeHook("th-page-refreshed");
 	}
+	var throttledRefresh = $tw.perf.report("throttledRefresh",refresh);
+
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
 		// Check if only tiddlers that are throttled have changed
 		var onlyThrottledTiddlersHaveChanged = true;
 		for(var title in changes) {
 			var tiddler = $tw.wiki.getTiddler(title);
-			if(!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh"))) {
+			if(!$tw.wiki.isVolatileTiddler(title) && (!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh")))) {
 				onlyThrottledTiddlersHaveChanged = false;
 			}
 		}
@@ -101,7 +109,7 @@ exports.startup = function() {
 			if(isNaN(timeout)) {
 				timeout = THROTTLE_REFRESH_TIMEOUT;
 			}
-			timerId = setTimeout(refresh,timeout);
+			timerId = setTimeout(throttledRefresh,timeout);
 			$tw.utils.extend(deferredChanges,changes);
 		} else {
 			$tw.utils.extend(deferredChanges,changes);
@@ -114,5 +122,3 @@ exports.startup = function() {
 	// Run any post-render startup actions
 	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/PostRender");
 };
-
-})();

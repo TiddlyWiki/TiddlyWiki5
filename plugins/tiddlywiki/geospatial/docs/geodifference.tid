@@ -1,0 +1,20 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/geodifference
+caption: geodifference operator
+tags: $:/tags/GeospatialDocs
+
+!! `geodifference` operator
+
+The `geodifference` operator calculates the difference between two or more [[GeoJSON Polygon Features|GeoJSON Polygon Feature]].
+
+Each input list item is interpreted as a [[GeoJSON Polygon Feature Collection]] containing polygons.
+
+```
+[geodifference[]]
+```
+
+!! Examples
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geodifference-interactive"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>

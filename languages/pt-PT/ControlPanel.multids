@@ -6,7 +6,7 @@ Appearance/Caption: Aparência
 Appearance/Hint: Formas de personalizar a aparência da sua TiddlyWiki.
 Basics/AnimDuration/Prompt: Duração da animação:
 Basics/Caption: Básicos
-Basics/DefaultTiddlers/BottomHint: Utilize &#91;&#91;parêntesis rectos duplos &#93;&#93; para títulos com espaços. Ou pode escolher <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">guardar a ordem da lista</$button>
+Basics/DefaultTiddlers/BottomHint: Utilize &#91;&#91;parêntesis rectos duplos &#93;&#93; para títulos com espaços. Ou pode escolher {{guardar a ordem da lista||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Tiddlers pré definidos:
 Basics/DefaultTiddlers/TopHint: Escolha que tiddlers são exibidos ao iniciar:
 Basics/Language/Prompt: Olá! Linguagem actual:
@@ -129,7 +129,7 @@ Settings/AutoSave/Enabled/Description: Fazer gravação automática
 Settings/AutoSave/Hint: Guardar alterações automaticamente durante a edição
 Settings/CamelCase/Caption: Ligações Wiki em Camel Case
 Settings/CamelCase/Description: Activar ligações em frases ~CamelCase automaticamente
-Settings/CamelCase/Hint: Pode desactivar a criação automática de ligações em frases em ~CamelCase. Requer recarregar o texto para que tome efeito
+Settings/CamelCase/Hint: Requer recarregar o texto para que tome efeito
 Settings/Caption: Definições
 Settings/DefaultMoreSidebarTab/Caption: Separador Mais da Barra Lateral pré Definido
 Settings/DefaultMoreSidebarTab/Hint: Especificar que separador Mais é exibido por defeito

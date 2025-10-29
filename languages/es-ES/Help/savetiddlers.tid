@@ -1,13 +1,16 @@
 title: $:/language/Help/savetiddlers
 description: Guarda un grupo de tiddlers de formato plano en un directorio
 
+(Nota: el comando `--savetiddlers` está obsoleto en favor del nuevo y más flexible comando `--save`)
+
 Guarda un grupo de tiddlers en formato binario o como texto plano en el directorio especificado.
 
 ```
---savetiddlers <filter> <pathname>
+--savetiddlers <filter> <pathname> ["noclean"]
 ```
 
-Por defecto, la ruta es relativa al subdirectorio `output` del directorio del wiki<br>
-Puede usarse con el comando `--output` para dirigir la salida a un directorio diferente
+Por defecto, la ruta es relativa al subdirectorio `output` del directorio del wiki. Puede usarse con el comando `--output` para dirigir la salida a un directorio diferente
+
+El directorio de salida se borra de los archivos existentes antes de guardar los archivos especificados. La eliminación se puede desactivar especificando el indicador "noclean".
 
 Los directorios no existentes en la ruta del nombre de archivo se crean automáticamente.

@@ -1,0 +1,7 @@
+created: 20211020142121129
+modified: 20211020142146276
+tags: [[Operator Examples]] [[sin Operator]]
+title: sin Operator (Examples)
+
+<<.operator-example 1 "[[2]sin[]]">>
+<<.operator-example 2 "=1 =2 =3 =4 +[sin[]]">>

@@ -6,10 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the tagging mechanism.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Tag tests", function() {
@@ -102,6 +99,25 @@ function runTests(wiki,wikiOptions) {
 		expect(wiki.filterTiddlers("[tag[TiddlerSeventh]]").join(",")).toBe("Tiddler10,TiddlerOne,Tiddler Three,Tiddler11,Tiddler9,a fourth tiddler");
 	});
 
+	it("should apply identical tag ordering irrespective of tag creation order", function () {
+		var wiki;
+		wiki = new $tw.Wiki(wikiOptions);
+		wiki.addTiddler({ title: "A", text: "", tags: "sortTag"});
+		wiki.addTiddler({ title: "B", text: "", tags: "sortTag"});
+		wiki.addTiddler({ title: "C", text: "", tags: "sortTag"});
+		expect(wiki.filterTiddlers("[tag[sortTag]]").join(',')).toBe("A,B,C");
+		wiki = new $tw.Wiki(wikiOptions);
+		wiki.addTiddler({ title: "A", text: "", tags: "sortTag"});
+		wiki.addTiddler({ title: "C", text: "", tags: "sortTag"});
+		wiki.addTiddler({ title: "B", text: "", tags: "sortTag"});
+		expect(wiki.filterTiddlers("[tag[sortTag]]").join(',')).toBe("A,B,C");
+		wiki = new $tw.Wiki(wikiOptions);
+		wiki.addTiddler({ title: "C", text: "", tags: "sortTag"});
+		wiki.addTiddler({ title: "B", text: "", tags: "sortTag"});
+		wiki.addTiddler({ title: "A", text: "", tags: "sortTag"});
+		expect(wiki.filterTiddlers("[tag[sortTag]]").join(',')).toBe("A,B,C");
+	});
+
 	// Tests for issue (#3296)
 	it("should apply tag ordering in order of dependency", function () {
 		var wiki = new $tw.Wiki(wikiOptions);
@@ -160,4 +176,3 @@ function runTests(wiki,wikiOptions) {
 
 });
 
-})();

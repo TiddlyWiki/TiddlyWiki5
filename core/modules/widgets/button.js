@@ -6,13 +6,12 @@ module-type: widget
 Button widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
+
+var Popup = require("$:/core/modules/utils/dom/popup.js");
 
 var ButtonWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -46,7 +45,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
 	if(this.selectedClass) {
 		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
-			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
+			$tw.utils.pushTop(classes, this.selectedClass.split(" "));
+			domNode.setAttribute("aria-checked", "true");
 		}
 		if(isPoppedUp) {
 			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
@@ -56,6 +56,15 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		$tw.utils.pushTop(classes,"tc-popup-handle");
 	}
 	domNode.className = classes.join(" ");
+	// Assign data- attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
+	this.assignAttributes(domNode,{
+		sourcePrefix: "aria-",
+		destPrefix: "aria-"
+	});
 	// Assign other attributes
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
@@ -63,8 +72,11 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this.tooltip) {
 		domNode.setAttribute("title",this.tooltip);
 	}
-	if(this["aria-label"]) {
-		domNode.setAttribute("aria-label",this["aria-label"]);
+	if (this.role) {
+		domNode.setAttribute("role", this.role);
+	}
+	if(this.popup || this.popupTitle) {
+		domNode.setAttribute("aria-expanded",isPoppedUp ? "true" : "false");
 	}
 	// Set the tabindex
 	if(this.tabIndex) {
@@ -140,7 +152,7 @@ ButtonWidget.prototype.isSelected = function() {
 
 ButtonWidget.prototype.isPoppedUp = function() {
 	var tiddler = this.popupTitle ? this.wiki.getTiddler(this.popupTitle) : this.wiki.getTiddler(this.popup);
-	var result = tiddler && tiddler.fields.text ? $tw.popup.readPopupState(tiddler.fields.text) : false;
+	var result = tiddler && tiddler.fields.text ? Popup.readPopupState(tiddler.fields.text) : false;
 	return result;
 };
 
@@ -166,6 +178,7 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 	if(this.popupTitle) {
 		$tw.popup.triggerPopup({
 			domNode: this.domNodes[0],
+			absolute: (this.popupAbsCoords === "yes"),
 			title: this.popupTitle,
 			wiki: this.wiki,
 			noStateReference: true
@@ -173,6 +186,7 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 	} else {
 		$tw.popup.triggerPopup({
 			domNode: this.domNodes[0],
+			absolute: (this.popupAbsCoords === "yes"),
 			title: this.popup,
 			wiki: this.wiki
 		});
@@ -202,7 +216,7 @@ ButtonWidget.prototype.execute = function() {
 	this.setTo = this.getAttribute("setTo");
 	this.popup = this.getAttribute("popup");
 	this.hover = this.getAttribute("hover");
-	this["aria-label"] = this.getAttribute("aria-label");
+	this.role = this.getAttribute("role");
 	this.tooltip = this.getAttribute("tooltip");
 	this.style = this.getAttribute("style");
 	this["class"] = this.getAttribute("class","");
@@ -215,6 +229,7 @@ ButtonWidget.prototype.execute = function() {
 	this.setField = this.getAttribute("setField");
 	this.setIndex = this.getAttribute("setIndex");
 	this.popupTitle = this.getAttribute("popupTitle");
+	this.popupAbsCoords = this.getAttribute("popupAbsCoords", "no");
 	this.tabIndex = this.getAttribute("tabindex");
 	this.isDisabled = this.getAttribute("disabled","no");
 	// Make child widgets
@@ -224,7 +239,7 @@ ButtonWidget.prototype.execute = function() {
 ButtonWidget.prototype.updateDomNodeClasses = function() {
 	var domNodeClasses = this.domNode.className.split(" "),
 		oldClasses = this.class.split(" "),
-		newClasses;	
+		newClasses;
 	this["class"] = this.getAttribute("class","");
 	newClasses = this.class.split(" ");
 	//Remove classes assigned from the old value of class attribute
@@ -237,22 +252,31 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 	//Add new classes from updated class attribute.
 	$tw.utils.pushTop(domNodeClasses,newClasses);
 	this.domNode.className = domNodeClasses.join(" ");
-}
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled) {
+	if(changedAttributes.tooltip || changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributes["class"]) {
-		this.updateDomNodeClasses();
+	} else {
+		if(changedAttributes["class"]) {
+			this.updateDomNodeClasses();
+		}
+		this.assignAttributes(this.domNodes[0],{
+			changedAttributes: changedAttributes,
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
+		this.assignAttributes(this.domNodes[0],{
+			sourcePrefix: "aria-",
+			destPrefix: "aria-"
+		});
 	}
 	return this.refreshChildren(changedTiddlers);
 };
 
 exports.button = ButtonWidget;
-
-})();

@@ -6,10 +6,7 @@ module-type: utils
 Modal message mechanism
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -26,6 +23,8 @@ Display a modal dialogue
 	options: see below
 Options include:
 	downloadLink: Text of a big download link to include
+	event: widget event
+	variables: from event.paramObject
 */
 Modal.prototype.display = function(title,options) {
 	options = options || {};
@@ -105,7 +104,7 @@ Modal.prototype.display = function(title,options) {
 		parentWidget: $tw.rootWidget
 	});
 	navigatorWidgetNode.render(modalBody,null);
-	
+
 	// Render the title of the message
 	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "subtitle",
@@ -144,6 +143,7 @@ Modal.prototype.display = function(title,options) {
 		link.setAttribute("href",tiddler.fields.help);
 		link.setAttribute("target","_blank");
 		link.setAttribute("rel","noopener noreferrer");
+		link.setAttribute("class","tc-tiddlylink-external");
 		link.appendChild(this.srcDocument.createTextNode("Help"));
 		modalFooterHelp.appendChild(link);
 		modalFooterHelp.style.float = "left";
@@ -209,6 +209,10 @@ Modal.prototype.display = function(title,options) {
 	headerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	bodyWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	footerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
+	// Whether to close the modal dialog when the mask (area outside the modal) is clicked
+	if(tiddler.fields && (tiddler.fields["mask-closable"] === "yes" || tiddler.fields["mask-closable"] === "true" || tiddler.fields["mask-closable"] === "" || "mask-closable" in tiddler.fields === false)) {
+		modalBackdrop.addEventListener("click",closeHandler,false);
+	}
 	// Set the initial styles for the message
 	$tw.utils.setStyle(modalBackdrop,[
 		{opacity: "0"}
@@ -243,8 +247,7 @@ Modal.prototype.adjustPageClass = function() {
 	if(windowContainer) {
 		$tw.utils.toggleClass(windowContainer,"tc-modal-displayed",this.modalCount > 0);
 	}
+	$tw.utils.toggleClass(this.srcDocument.body,"tc-modal-prevent-scroll",this.modalCount > 0);
 };
 
 exports.Modal = Modal;
-
-})();

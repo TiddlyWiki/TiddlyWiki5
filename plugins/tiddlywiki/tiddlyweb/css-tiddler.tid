@@ -4,4 +4,4 @@ title: $:/core/templates/css-tiddler
 
 This template is used for saving CSS tiddlers as a style tag with data attributes representing the tiddler fields. This version includes the tiddler changecount as the field `revision`.
 
--->`<style`<$fields template=' data-tiddler-$name$="$encoded_value$"'></$fields>` data-tiddler-revision="`<<changecount>>`" data-tiddler-bag="default" type="text/css">`<$view field="text" format="text" />`</style>`
+-->`<style`<$fields exclude='text revision bag' template=' data-tiddler-$name$="$encoded_value$"'></$fields>` data-tiddler-revision="`<<changecount>>`" data-tiddler-bag="default" type="text/css">`<$view field="text" format="text" />`</style>`

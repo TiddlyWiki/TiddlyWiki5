@@ -5,6 +5,8 @@ module-type: library
 
 Parser for the source of a railroad diagram.
 
+x y z			sequence
+<-x y z->		explicit sequence
 [:x]			optional, normally included
 [x]				optional, normally omitted
 {x}				one or more
@@ -13,8 +15,6 @@ Parser for the source of a railroad diagram.
 [{:x +","}]		zero or more, comma-separated, normally included
 [{x}]			zero or more, normally omitted
 [{x +","}]		zero or more, comma-separated, normally omitted
-x y z			sequence
-<-x y z->		explicit sequence
 (x|y|z)			alternatives
 (x|:y|z)		alternatives, normally y
 "x"				terminal
@@ -33,10 +33,7 @@ pragmas:
 	\end single|double|none
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var components = require("$:/plugins/tiddlywiki/railroad/components.js").components;
@@ -377,7 +374,7 @@ Parser.prototype.tokenise = function(source) {
 		// Skip whitespace
 		pos = $tw.utils.skipWhiteSpace(source,pos);
 		// Avoid falling off the end of the string
-		if (pos >= source.length) {
+		if(pos >= source.length) {
 			break;
 		}
 		// Examine the next character
@@ -448,5 +445,3 @@ Parser.prototype.readPragma = function(source,pos) {
 /////////////////////////// Exports
 
 exports.parser = Parser;
-
-})();

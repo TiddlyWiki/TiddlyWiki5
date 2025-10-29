@@ -5,4 +5,4 @@ title: match Operator (Examples)
 type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "a b c +[match[b]]">>
-<<.operator-example 1 "[match[HelloThere]]">>
+<<.operator-example 2 "[match[HelloThere]]">>

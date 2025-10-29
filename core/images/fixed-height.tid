@@ -1,4 +1,5 @@
 title: $:/core/images/fixed-height
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-fixed-height tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M60 35.657l-9.172 9.171a4 4 0 11-5.656-5.656l16-16a4 4 0 015.656 0l16 16a4 4 0 01-5.656 5.656L68 35.657v57.686l9.172-9.171a4 4 0 115.656 5.656l-16 16a4 4 0 01-5.656 0l-16-16a4 4 0 115.656-5.656L60 93.343V35.657zM16 116h96a4 4 0 100-8H16a4 4 0 100 8zm0-96h96a4 4 0 100-8H16a4 4 0 100 8z"/></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-fixed-height tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M60 35.657l-9.172 9.171a4 4 0 11-5.656-5.656l16-16a4 4 0 015.656 0l16 16a4 4 0 01-5.656 5.656L68 35.657v57.686l9.172-9.171a4 4 0 115.656 5.656l-16 16a4 4 0 01-5.656 0l-16-16a4 4 0 115.656-5.656L60 93.343V35.657zM16 116h96a4 4 0 100-8H16a4 4 0 100 8zm0-96h96a4 4 0 100-8H16a4 4 0 100 8z"/></svg>

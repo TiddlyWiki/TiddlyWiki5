@@ -1,22 +1,38 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: このtiddlerは外部のTiddlyWikiのファイルに保存されています。タグやフィールドの編集はできますが、実際の外部コンテンツを直接編集することはできません。
-Body/Placeholder: ここに tiddler の本文を入力してください。
-Field/Remove/Caption: fieldを削除
-Field/Remove/Hint: fieldを削除
+Body/External/Hint: この Tiddler は外部の TiddlyWiki のファイルに保存されています。タグやフィールドの編集はできますが、実際の外部コンテンツを直接編集することはできません
+Body/Placeholder: ここに Tiddler の本文を入力してください
+Body/Preview/Type/DiffCurrent: 現在との差異
+Body/Preview/Type/DiffShadow: shadow との相違点（あれば）
+Body/Preview/Type/Output: 出力
+Caption: エディタ
+Field/Dropdown/Caption: 項目一覧
+Field/Dropdown/Hint: 項目一覧を表示
+Field/Remove/Caption: 項目を削除
+Field/Remove/Hint: 項目を削除します
 Fields/Add/Button: 追加
+Fields/Add/Button/Hint: Tiddler に新しい項目を追加します
+Fields/Add/Dropdown/System: システム項目
+Fields/Add/Dropdown/User: ユーザー項目
 Fields/Add/Name/Placeholder: フィールド名
 Fields/Add/Prompt: 新しいフィールドを追加:
 Fields/Add/Value/Placeholder: フィールドの値
-Shadow/OverriddenWarning: このshadow tiddlerは編集されたものです。このtiddlerを削除すると、ものとshaddow tiddlerが有効になります。
-Shadow/Warning: これはshadow tiddlerです。変更すると上書きされます。
+Shadow/OverriddenWarning: この Shadow Tiddler は編集されたものです。この Tiddler を削除すると、ものと Shadow Tiddler が有効になります
+Shadow/Warning: これは Shadow Tiddler です。変更すると上書きされます
 Tags/Add/Button: 追加
+Tags/Add/Button/Hint: タグを追加
 Tags/Add/Placeholder: タグ名
+Tags/ClearInput/Caption: 入力をクリア
+Tags/ClearInput/Hint: タグ入力をクリア
 Tags/Dropdown/Caption: タグ一覧
 Tags/Dropdown/Hint: タグ一覧を表示
+Title/BadCharacterWarning: 警告: Tiddler のタイトルに <<bad-chars>> という文字の使用は避けてください
+Title/Exists/Prompt: 対象の Tiddler がすでに存在します
+Title/References/Prompt: この Tiddler の次のリファレンスは、自動的には更新されません:
+Title/Relink/Prompt: 他 Tiddler の //tags// と //list// 項目にある ''<$text text=<<fromTitle>>/>'' を ''<$text text=<<toTitle>>/>'' に更新します
 Type/Delete/Caption: コンテンツタイプを削除
 Type/Delete/Hint: コンテンツタイプを削除
 Type/Dropdown/Caption: コンテンツタイプ一覧
 Type/Dropdown/Hint: コンテンツタイプ一覧を表示
 Type/Placeholder: 種類
-Type/Prompt: Tiddlerの種類:
+Type/Prompt: Tiddler の種類:

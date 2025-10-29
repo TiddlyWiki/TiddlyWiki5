@@ -6,7 +6,7 @@ Appearance/Caption: ظاهر
 Appearance/Hint: روش‌های تغییر ظاهر TiddlyWiki
 Basics/AnimDuration/Prompt: طول زمان انیمیشن:
 Basics/Caption: اساسی‌ها
-Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
+Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to {{retain story ordering||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: تیدلرهای پیش‌فرض:
 Basics/DefaultTiddlers/TopHint: انتخاب کن که کدوم تیدلرها در هنگام شروع نمایش داده بشن:
 Basics/Language/Prompt: سلام! زبان حاضر:

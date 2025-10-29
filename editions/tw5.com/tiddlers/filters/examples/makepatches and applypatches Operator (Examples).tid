@@ -1,0 +1,43 @@
+created: 20230304160331362
+modified: 20230304160332927
+tags: [[makepatches Operator]] [[applypatches Operator]] [[Operator Examples]]
+title: makepatches and applypatches Operator (Examples)
+type: text/vnd.tiddlywiki
+
+These examples use the example texts in [[Hamlet]], taken from [[https://neil.fraser.name/software/diff_match_patch/demos/patch.html]]
+
+|^!Shakespeare's original |@@white-space: pre-wrap;{{Hamlet##Shakespeare-old}}@@ |
+|^!Modern English |@@white-space: pre-wrap;{{Hamlet##Shakespeare-new}}@@ |
+|^!Trekkie's Copy |@@white-space: pre-wrap;{{Hamlet##Trekkie-old}}@@ |
+
+<div class="doc-examples-hard-breaks">
+
+Use `makepatches` to generate the set of patches to transform Shakepeare's original into Modern English:
+
+<<.operator-example 1 "[{Hamlet##Shakespeare-old}makepatches{Hamlet##Shakespeare-new}]">>
+
+Use `applypatches` to apply the patches to Shakespeare's original text:
+
+<<.operator-example 2 "[{Hamlet##Shakespeare-old}makepatches{Hamlet##Shakespeare-new}] :map[{Hamlet##Shakespeare-old}applypatches<currentTiddler>]">>
+
+In the above example, the [[Map Filter Run Prefix]] is used to pass the patches information as a parameter to `applypatches`. Inside `:map`, <<.value currentTiddler>> is set to the input title (i.e. the previously generated patches).
+
+The patch information from the Shakepeare texts can also be used to transform the //Trekkie's Copy// to a Modern English version:
+
+<<.operator-example 3 "[{Hamlet##Shakespeare-old}makepatches{Hamlet##Shakespeare-new}] :map[{Hamlet##Trekkie-old}applypatches<currentTiddler>]">>
+
+The above examples used the character mode of `makepatches`. The `word` mode yields very similar results in this case, even when applied to the //Trekkie's Copy//.
+
+<<.operator-example 4 "[{Hamlet##Shakespeare-old}makepatches:words{Hamlet##Shakespeare-new}]">>
+
+<<.operator-example 5 "[{Hamlet##Shakespeare-old}makepatches:words{Hamlet##Shakespeare-new}] :map[{Hamlet##Trekkie-old}applypatches<currentTiddler>]">>
+
+The `lines` mode doesn't work as well in this application:
+
+<<.operator-example 6 "[{Hamlet##Shakespeare-old}makepatches:lines{Hamlet##Shakespeare-new}]">>
+
+<<.operator-example 7 "[{Hamlet##Shakespeare-old}makepatches:lines{Hamlet##Shakespeare-new}] :map[{Hamlet##Trekkie-old}applypatches<currentTiddler>]">>
+
+It is better suited as a very fast algorithm to detect line-wise incremental changes to texts and store only the changes instead of multiple versions of the whole texts.
+
+</div>

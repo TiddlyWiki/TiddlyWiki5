@@ -1,14 +1,14 @@
 created: 20140910102845245
-modified: 20210106151027576
+modified: 20220311184412211
 tags: [[Community Plugins]]
 title: TiddlyClip by buggyjay
 type: text/vnd.tiddlywiki
 url: http://tiddlyclip.tiddlyspot.com
 
-BuggyJay's TiddlyClip browser extension for [[Firefox]] permits clipping of text and graphics from web pages:
+~BuggyJay's ~TiddlyClip browser extension for Firefox permits clipping of text and graphics from web pages:
 
 {{!!url}}
 
 <<<
-TiddlyClip allows parts of webpages to be clipped into a TiddlyWiki, and consists of two parts, the browser addon and the TiddlyWiki plugin. The addon is completely memoryless, any configuration is determined by the current TiddlyWiki that the user has select to work with (we say that the addon is docked to the TiddlyWiki). TiddlyClip is designed to work (in a basic mode) without configuration. Once the addon and plugin are installed, all the user has to do is select which TW to dock to.
+~TiddlyClip allows parts of webpages to be clipped into a ~TiddlyWiki, and consists of two parts, the browser addon and the ~TiddlyWiki plugin. The addon is completely memoryless, any configuration is determined by the current ~TiddlyWiki that the user has select to work with (we say that the addon is docked to the ~TiddlyWiki). ~TiddlyClip is designed to work (in a basic mode) without configuration. Once the addon and plugin are installed, all the user has to do is select which TW to dock to.
 <<<

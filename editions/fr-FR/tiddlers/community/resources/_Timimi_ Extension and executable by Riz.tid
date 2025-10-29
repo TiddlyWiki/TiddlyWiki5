@@ -1,0 +1,33 @@
+caption: Timimi
+color: #4db6ac
+community-author: Riz
+created: 20180830194141190
+delivery: Browser Extension & Native host
+description: Extension de navigateur & hôte natif pour le bureau
+fr-title: Timimi : web-extension et hôte natif par Riz
+method: save
+modified: 20220402105820520
+tags: Windows Linux Chrome Firefox Saving [[Other Resources]] plugins Mac Opera Edge
+title: Timimi: WebExtension and Native Host by Riz
+type: text/vnd.tiddlywiki
+url: https://ibnishak.github.io/Timimi/
+
+Timimi est une web-extension accompagnée d'un hôte natif qui permet d'enregistrer et sauvegarder vos <<tw>> mono-fichier HTML ''n'importe-où sur votre disque''. Une fois installée, vous pouvez enregistrer les fichiers <<tw>> sans autre formalité, comme le plugin original Tiddlyfox.
+
+{{!!url}}
+
+Depuis la version 2.1, Timimi est compatible avec ces navigateurs<<:>>
+
+* Chrome/Chromium
+* Firefox
+* Opera
+* Microsoft Edge (Chromium)
+
+Il a été constaté que Timimi fonctionnait aussi sans encombre sur les navigateurs dérivés de Chrome comme //Brave// ou //Vivaldi//.
+
+Timimi fournit aussi aux utilisateurs 4 stratégies de sauvegarde, à savoir<<:>>
+
+* Créer une sauvegarde tous les n enregistrements
+* Créer une sauvegarde toutes les n minutes
+* Tours de Hanoï personnalisée
+* Premier entré, premier sorti

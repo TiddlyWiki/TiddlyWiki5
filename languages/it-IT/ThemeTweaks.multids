@@ -1,0 +1,42 @@
+title: $:/language/ThemeTweaks/
+
+Metrics: Dimensioni
+Metrics/BodyFontSize: Dimensione carattere per il corpo dei frammenti
+Metrics/BodyLineHeight: Altezza riga per il corpo dei frammenti
+Metrics/FontSize: Dimensione carattere
+Metrics/LineHeight: Altezza riga
+Metrics/SidebarBreakpoint: Punto di interruzione della barra laterale
+Metrics/SidebarBreakpoint/Hint: la larghezza minima della pagina alla quale la cronologia<br>e la barra laterale appariranno fianco a fianco
+Metrics/SidebarWidth: Larghezza barra laterale
+Metrics/SidebarWidth/Hint: larghezza della barra laterale in layout fluido-fisso
+Metrics/StoryLeft: Posizione cronologia a sinistra
+Metrics/StoryLeft/Hint: quanto dista il margine sinistro della cronologia<br>(area frammenti) dalla sinistra della pagina
+Metrics/StoryRight: Cronologia a destra
+Metrics/StoryRight/Hint: quanto dista il margine sinistro della barra <br>laterale dalla sinistra della pagina
+Metrics/StoryTop: Posizione superiore della cronologia
+Metrics/StoryTop/Hint: quanto dista il margine superiore della <br>cronologia dall'inizio della pagina
+Metrics/StoryWidth: Larghezza cronologia
+Metrics/StoryWidth/Hint: larghezza complessiva della cronologia
+Metrics/TiddlerWidth: Larghezza frammenti
+Metrics/TiddlerWidth/Hint: all'interno della cronologia
+Options: Opzioni
+Options/CodeWrapping: Racchiudi le righe lunghe in blocchi di codice
+Options/SidebarLayout: Layout barra laterale
+Options/SidebarLayout/Fixed-Fluid: Cronologia fissa, barra laterale fluida
+Options/SidebarLayout/Fluid-Fixed: Cronologia fluida, barra laterale fissa
+Options/StickyTitles: Titoli fissi
+Options/StickyTitles/Hint: Fa in modo che i titoli dei frammenti "si fissino" alla parte superiore della finestra del browser
+Settings: Impostazioni
+Settings/BackgroundImage: Immagine di sfondo della pagina
+Settings/BackgroundImageAttachment: Immagine di sfondo della pagina
+Settings/BackgroundImageAttachment/Fixed: Fissata alla finestra
+Settings/BackgroundImageAttachment/Scroll: Scorre con i frammenti
+Settings/BackgroundImageSize: Dimensione immagine di sfondo della pagina
+Settings/BackgroundImageSize/Auto: Auto
+Settings/BackgroundImageSize/Contain: Contiene
+Settings/BackgroundImageSize/Cover: Copre
+Settings/CodeFontFamily: Famiglia di caratteri del codice
+Settings/EditorFontFamily: Famiglia di caratteri dell'editor
+Settings/FontFamily: Famiglia di caratteri
+ThemeTweaks: Modifiche al tema
+ThemeTweaks/Hint: Puoi modificare alcuni aspetti del tema ''Vanilla''.

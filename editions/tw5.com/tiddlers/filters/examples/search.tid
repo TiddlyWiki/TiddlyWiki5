@@ -1,5 +1,5 @@
 created: 20150124104508000
-modified: 20181025082022690
+modified: 20211129122755444
 tags: [[search Operator]] [[Operator Examples]]
 title: search Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -13,3 +13,8 @@ type: text/vnd.tiddlywiki
 <$macrocall $name=".operator-example" n="7" eg="[!is[system]search::literal[the first]]" ie="non-system tiddlers containing a case-insensitive match for the literal phrase <<.word 'the first'>>"/>
 <$macrocall $name=".operator-example" n="8" eg="[!is[system]search::literal,casesensitive[The first]]" ie="non-system tiddlers containing a case-sensitive match for the literal phrase <<.word 'The first'>>"/>
 <$macrocall $name=".operator-example" n="9" eg="[search:caption,description:casesensitive,words[arch]]" ie="any tiddlers containing a case-sensitive match for the word `arch` in their <<.field caption>> or <<.field description>> fields"/>
+<$macrocall $name=".operator-example" n="10" eg="[search:tags:some[how test]]" ie="any tiddlers containing at least 1 of the search terms in the field: <<.field tags>>"/>
+<$macrocall $name=".operator-example" n="11" eg="[search:tags:some,casesensitive[how test]]" ie="any tiddlers containing at least 1 of the case-sensitive search terms in the field: <<.field tags>>"/>
+<$macrocall $name=".operator-example" n="12" eg="[search:tags,title:some,anchored[how test]]" ie="any tiddlers containing at least 1 of anchored search terms in the fields: <<.field tags>> and <<.field title>>"/>
+
+

@@ -6,10 +6,7 @@ module-type: widget
 Widget to display an editable keyboard shortcut
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -33,7 +30,7 @@ EditShortcutWidget.prototype.render = function(parent,nextSibling) {
 	this.inputNode = this.document.createElement("input");
 	// Assign classes
 	if(this.shortcutClass) {
-		this.inputNode.className = this.shortcutClass;		
+		this.inputNode.className = this.shortcutClass;
 	}
 	// Assign other attributes
 	if(this.shortcutStyle) {
@@ -47,6 +44,9 @@ EditShortcutWidget.prototype.render = function(parent,nextSibling) {
 	}
 	if(this.shortcutAriaLabel) {
 		this.inputNode.setAttribute("aria-label",this.shortcutAriaLabel);
+	}
+	if(this.isDisabled === "yes") {
+		this.inputNode.setAttribute("disabled", true);
 	}
 	// Assign the current shortcut
 	this.updateInputNode();
@@ -77,6 +77,7 @@ EditShortcutWidget.prototype.execute = function() {
 	this.shortcutTooltip = this.getAttribute("tooltip");
 	this.shortcutAriaLabel = this.getAttribute("aria-label");
 	this.shortcutFocus = this.getAttribute("focus");
+	this.isDisabled = this.getAttribute("disabled", "no");
 };
 
 /*
@@ -117,7 +118,7 @@ EditShortcutWidget.prototype.handleKeydownEvent = function(event) {
 		// Ignore the keydown if it was already handled
 		event.preventDefault();
 		event.stopPropagation();
-		return true;		
+		return true;
 	} else {
 		return false;
 	}
@@ -138,17 +139,15 @@ Selectively refreshes the widget if needed. Returns true if the widget needed re
 */
 EditShortcutWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.placeholder || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.style || changedAttributes.tooltip || changedAttributes["aria-label"] || changedAttributes.focus) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.placeholder || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.style || changedAttributes.tooltip || changedAttributes["aria-label"] || changedAttributes.focus || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
 	} else if(changedTiddlers[this.shortcutTiddler]) {
 		this.updateInputNode();
 		return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 
 exports["edit-shortcut"] = EditShortcutWidget;
-
-})();

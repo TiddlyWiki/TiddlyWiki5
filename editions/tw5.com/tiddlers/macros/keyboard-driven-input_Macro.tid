@@ -20,3 +20,6 @@ The additional parameters are:
 |secondSearchFilterField |the field of the configTiddler where the second search-filter is stored. Defaults to <<.field second-search-filter>> |
 |filterMinLength |the minimum length of the user input after which items are filtered |
 
+See [[Demonstration: keyboard-driven-input Macro]] for further guidance on using this macro.
+
+

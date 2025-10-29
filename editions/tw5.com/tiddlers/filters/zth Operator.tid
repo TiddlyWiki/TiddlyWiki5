@@ -1,0 +1,18 @@
+caption: zth
+created: 20211029023242012
+modified: 20211029023711450
+op-input: a [[selection of titles|Title Selection]]
+op-output: the <<.place Z>>th input title
+op-parameter: an integer, defaulting to 0
+op-parameter-name: Z
+op-purpose: select the <<.place Z>>th input title
+tags: [[Filter Operators]] [[Order Operators]]
+title: zth Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version 5.2.1>>
+<<.place Z>> is zero-based. In other words, `zth[0]` has the same effect as `nth[1]` and the <<.olink first>> operator.
+
+<<.tip "See <<.olink nth>> for an equivalent operator with a 1 based parameter">>
+
+<<.operator-examples "zth">>

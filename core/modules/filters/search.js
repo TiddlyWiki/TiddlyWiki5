@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for searching for the text in the operand tiddler
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -40,6 +37,7 @@ exports.search = function(source,operator,options) {
 			invert: invert,
 			field: fields,
 			excludeField: excludeFields,
+			some: hasFlag("some"),
 			caseSensitive: hasFlag("casesensitive"),
 			literal: hasFlag("literal"),
 			whitespace: hasFlag("whitespace"),
@@ -54,5 +52,3 @@ exports.search = function(source,operator,options) {
 		});
 	}
 };
-
-})();

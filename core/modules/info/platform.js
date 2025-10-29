@@ -6,10 +6,7 @@ module-type: info
 Initialise basic platform $:/info/ tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
@@ -22,7 +19,7 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 	if($tw.browser) {
 		// Document location
 		var setLocationProperty = function(name,value) {
-				infoTiddlerFields.push({title: "$:/info/url/" + name, text: value});			
+				infoTiddlerFields.push({title: "$:/info/url/" + name, text: value});
 			},
 			location = document.location;
 		setLocationProperty("full", (location.toString()).split("#")[0]);
@@ -48,5 +45,3 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 	}
 	return infoTiddlerFields;
 };
-
-})();

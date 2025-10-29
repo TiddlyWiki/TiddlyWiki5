@@ -6,10 +6,7 @@ module-type: widget
 Widget to wikify text into a variable
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -100,7 +97,7 @@ WikifyWidget.prototype.getWidgetTree = function() {
 					break;
 				case "text":
 					resultNode.text = widgetNode.parseTreeNode.text;
-					break;	
+					break;
 			}
 			if(Object.keys(widgetNode.attributes || {}).length > 0) {
 				resultNode.attributes = {};
@@ -153,5 +150,3 @@ WikifyWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.wikify = WikifyWidget;
-
-})();

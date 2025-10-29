@@ -8,6 +8,7 @@ The popup mechanism allows blocks of content to be selectively displayed and pos
 
 * [[StateTiddlers|StateMechanism]] to record whether a popup is currently displayed or not
 * The RevealWidget to selectively display the popup content
+** <<.from-version "5.2.4">> For positioning the popups relative or absolute coordinates can be used. See [[Coordinate Systems]] for more information about usage and format.
 ** For "sticky" popups — those that don't close when clicking inside one — set the ''class'' attribute to `tc-popup-keep`
 * The ButtonWidget to trigger the display of the popup by setting the state tiddler appropriately
 

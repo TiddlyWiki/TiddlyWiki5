@@ -1,0 +1,18 @@
+title: $:/plugins/tiddlywiki/tour/start-tour-button
+tags: $:/tags/PageControls
+caption: {{$:/plugins/tiddlywiki/tour/tour-button-icon}} Start Tour
+description: Start interactive training tour
+
+\whitespace trim
+\import [[$:/plugins/tiddlywiki/tour/variables]]
+<$button tooltip="Start interactive training tour" aria-label="Start Tour" class=<<tv-config-toolbar-class>>>
+<<tour-restart>>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="listItem">
+{{$:/plugins/tiddlywiki/tour/tour-button-icon}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text">
+<$text text="Start Tour"/>
+</span>
+</$list>
+</$button>

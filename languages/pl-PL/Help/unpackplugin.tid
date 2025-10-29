@@ -1,0 +1,8 @@
+title: $:/language/Help/unpackplugin
+description: Wypakuj tiddlery z wtyczki
+
+Wyciąga tiddlery z wtyczki, tworząc z nich zwykłe tiddlery:
+
+```
+--unpackplugin <title>
+```

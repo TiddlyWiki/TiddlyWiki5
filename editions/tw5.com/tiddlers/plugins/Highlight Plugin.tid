@@ -1,6 +1,6 @@
 created: 20160107223417655
 list: 
-modified: 20170228102525208
+modified: 20220222094354907
 tags: OfficialPlugins [[Plugin Editions]]
 title: Highlight Plugin
 type: text/vnd.tiddlywiki
@@ -8,3 +8,5 @@ type: text/vnd.tiddlywiki
 The Highlight plugin provides the ability to apply syntax colouring to text.
 
 See [ext[https://tiddlywiki.com/plugins/tiddlywiki/highlight|plugins/tiddlywiki/highlight]]
+
+<<.warning """The latest version of the [[Highlight Plugin]] requires a modern browser that fully supports JavaScript ES6 (released in 2015). The older version is still available as the ''highlight-legacy'' plugin for users who need to use an older browser.""">>

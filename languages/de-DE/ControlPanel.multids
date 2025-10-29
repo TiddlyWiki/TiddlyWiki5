@@ -7,7 +7,7 @@ Appearance/Hint: Möglichkeiten um das Aussehen Ihres ~TiddlyWikis anzupassen.
 Basics/AnimDuration/Prompt: Dauer der Animation
 Basics/AutoFocus/Prompt: Standard Fokus Feld für neue Tiddler
 Basics/Caption: Basis
-Basics/DefaultTiddlers/BottomHint: Verwenden Sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen Sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
+Basics/DefaultTiddlers/BottomHint: Verwenden Sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen Sie {{Offene Tiddler beim Laden wiederherstellen.||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Standard-Tiddler
 Basics/DefaultTiddlers/TopHint: Tiddler, die beim Start geladen werden
 Basics/Language/Prompt: Hallo! Aktuelle Sprache
@@ -17,6 +17,8 @@ Basics/NewJournal/Tags/Prompt: Tags des neuen Journal-Tiddlers
 Basics/NewTiddler/Title/Prompt: Titel des neuen Tiddlers
 Basics/NewTiddler/Tags/Prompt: Tags des neuen Tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener Schatten-Tiddler
+Basics/RemoveTags: Auf neues Format umstellen
+Basics/RemoveTags/Hint: Die "tags" Konfiguration wird auf das aktuelle Format umgestellt
 Basics/ShadowTiddlers/Prompt: Anzahl Schatten-Tiddler
 Basics/Subtitle/Prompt: Untertitel
 Basics/SystemTiddlers/Prompt: Anzahl System-Tiddler
@@ -25,10 +27,17 @@ Basics/Tiddlers/Prompt: Anzahl Tiddler
 Basics/Title/Prompt: Titel dieses ~TiddlyWikis
 Basics/Username/Prompt: Benutzersignatur zum Editieren
 Basics/Version/Prompt: ~TiddlyWiki Version
+Cascades/Caption: Kaskaden
+Cascades/Hint: Diese Regeln werden dynamisch auf verschiedene Templates angewendet. Das Ergebnis einer Filter-Kaskade wird von der Filter Sequenz bestimmt, die als Erste ein Resultat zurück gibt.
+Cascades/TagPrompt: Filter Tags: <$macrocall $name="tag" tag=<<currentTiddler>>/>
 EditorTypes/Caption: Editor Typen
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddler Typen (MIME-Type) verwendet werden soll.
 EditorTypes/Type/Caption: MIME-Type
+EditTemplateBody/Caption: Edit Template "Körper"
+EditTemplateBody/Hint: Diese Filter-Kaskade wird vom Standard "Edit Template" verwendet. Es wählt die Vorlage für den Textbereich aus.
+FieldEditor/Caption: Feld Editor
+FieldEditor/Hint: Diese Filter-Kaskade wird vom "Edit Template" zur Bestimmung der Vorlage für die "Feld Namen" verwendet.
 Info/Caption: Info
 Info/Hint: Informationen über dieses TiddlyWiki
 KeyboardShortcuts/Add/Prompt: Tastenkürzel hier eingeben
@@ -44,6 +53,7 @@ KeyboardShortcuts/Platform/Linux: Nur Linux
 KeyboardShortcuts/Platform/NonLinux: Alle Plattformen, außer Linux
 KeyboardShortcuts/Platform/Windows: Nur Windows
 KeyboardShortcuts/Platform/NonWindows: Alle Plattformen, außer Windows
+LayoutSwitcher/Caption: Layout
 LoadedModules/Caption: Geladene Module
 LoadedModules/Hint: Hier werden die geladenen Module und ihre Quelltext-Komponenten angezeigt. Kursiv hervorgehobene Tiddler haben keinen Quelltext. Sie werden während des Boot-Prozesses (Aufrufen des Tiddlywikis) erstellt.
 Palette/Caption: Palette
@@ -88,6 +98,10 @@ Plugins/Plugins/Hint: Erweiterungen
 Plugins/Reinstall/Caption: erneut installieren
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme Erweiterungen
+Plugins/Stability/Deprecated: ABGEKÜNDIGT
+Plugins/Stability/Experimental: EXPERIMENTELL
+Plugins/Stability/Legacy: VERALTET
+Plugins/Stability/Stable: STABIL
 Plugins/Update/Caption: aktualisieren
 Plugins/Updates/Caption: Aktualisieren
 Plugins/Updates/Hint: Verfügbare Erweiterungen zu bereits installierten "Plugins"
@@ -117,12 +131,12 @@ Saving/GitService/Gitea/Caption: Gitea Saver
 Saving/GitService/Gitea/Password: Persönlicher "Zugriffs-Token" (siehe: Gitea’s web Seite: `Settings | Applications | Generate New Token`)
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
 Saving/TiddlySpot/BackupDir: Verzeichnis für das "Backup"
-Saving/TiddlySpot/ControlPanel: ~TiddlySpot Control Panel
+Saving/TiddlySpot/ControlPanel: ~TiddlyHost Control Panel
 Saving/TiddlySpot/Backups: "Backups"
-Saving/TiddlySpot/Caption: Speichern auf ~TiddlySpot
-Saving/TiddlySpot/Description: Diese Einstellungen sind nur für http://tiddlyspot.com und kompatible Server aktiv!
+Saving/TiddlySpot/Caption: Speichern auf ~TiddlyHost
+Saving/TiddlySpot/Description: Diese Einstellungen sind nur für [[TiddlyHost|https://tiddlyhost.com]], und kompatible Server aktiv! [[Diese Beschreibung|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] enthält weitergehende Informationen.
 Saving/TiddlySpot/Filename: Dateiname für den "Upload"
-Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Heading: ~TiddlyHost
 Saving/TiddlySpot/Hint: //Die Standard-Server-URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server-URL' verändert werden. zB: http://example.com/store.php//
 Saving/TiddlySpot/Password: Passwort
 Saving/TiddlySpot/ServerURL: Server-URL
@@ -133,7 +147,7 @@ Settings/AutoSave/Disabled/Description: Änderungen NICHT automatisch speichern
 Settings/AutoSave/Enabled/Description: Änderungen automatisch speichern
 Settings/AutoSave/Hint: Änderungen des Wikis automatisch speichern
 Settings/CamelCase/Caption: Camel Case Wiki Links
-Settings/CamelCase/Hint: Hier können Sie die automatische Umwandlung von "~CamelCase Links" einstellen. ''Wichtig:'' Die Seite muss neu geladen werden, damit die Einstellungen wirksam werden.
+Settings/CamelCase/Hint: ''Wichtig:'' Die Seite muss neu geladen werden, damit die Einstellungen wirksam werden.
 Settings/CamelCase/Description: Automatische ~CamelCase Umwandlung aktivieren
 Settings/Caption: Einstellungen
 Settings/EditorToolbar/Caption: Editor Toolbar
@@ -160,6 +174,8 @@ Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Adressleiste 
 Settings/PerformanceInstrumentation/Caption: Performance Messung
 Settings/PerformanceInstrumentation/Hint: Anzeige der Performance Statistik in der Browser Entwickler Konsole. ''Wichtig:'' Seite neu laden um die Einstellung zu aktivieren!
 Settings/PerformanceInstrumentation/Description: Aktiviere Performance Messung
+Settings/RecentLimit/Caption: Zuletzt Limit
+Settings/RecentLimit/Hint: Maximale Anzahl von angezeigten "Tiddlern" im "Zuletzt" Reiter
 Settings/ToolbarButtonStyle/Caption: Toolbar Button Stil
 Settings/ToolbarButtonStyle/Hint: Wählen Sie einen Stil:
 Settings/ToolbarButtonStyle/Styles/Borderless: Ohne Rand
@@ -170,9 +186,11 @@ Settings/ToolbarButtons/Hint: Standard Toolbar Button Erscheinungsbild:
 Settings/ToolbarButtons/Icons/Description: Icon anzeigen
 Settings/ToolbarButtons/Text/Description: Text anzeigen
 Settings/DefaultSidebarTab/Caption: Standard Sidebar Tab
-Settings/DefaultSidebarTab/Hint: Definition, welcher "Sidebar Tab" standardmäßig aktiv ist.
+Settings/DefaultSidebarTab/Hint: Definition, welcher "Sidebar Tab" standardmäßig aktiv ist
 Settings/DefaultMoreSidebarTab/Caption: Standard "Mehr Sidebar Tab"
-Settings/DefaultMoreSidebarTab/Hint: Definition, welcher "Mehr Sidebar Tab" standardmäßig aktiv ist.
+Settings/DefaultMoreSidebarTab/Hint: Definition, welcher "Mehr Sidebar Tab" standardmäßig aktiv ist
+Settings/DefaultTiddlerInfoTab/Caption: Standard Tiddler Info Tab
+Settings/DefaultTiddlerInfoTab/Hint: Definition, welcher Tab in der Tiddler Info Section standardmäßig aktiv ist
 Settings/LinkToBehaviour/Caption: Tiddler Öffnen
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation bei Klicks //innerhalb// der Story
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation bei Klicks //außerhalb// der Story
@@ -187,16 +205,34 @@ Settings/TitleLinks/Yes/Description: Tiddler Titel als Link anzeigen.
 Settings/MissingLinks/Caption: Wiki-Links
 Settings/MissingLinks/Hint: Aktiviere Links zu fehlenden Tiddlern. zB: FehlenderTiddler [[Einführung]]
 Settings/MissingLinks/Description: Aktiviere Links zu fehlenden Tiddlern.
+SocialCard/Caption: Social Media Karte
+SocialCard/Domain/Prompt: Domain Name für Link Anzeige. Zb: ''tiddlywiki.com''
+SocialCard/Hint: Diese Information wird verwendet, wenn eine "Voransicht" eines Links angezeigt werden soll
+SocialCard/PreviewUrl/Prompt: Vollständige URL für die Media-Vorschau für dieses ~TiddlyWiki
+SocialCard/PreviewUrl/Preview: Vorschau Bild:
+SocialCard/Url/Prompt: Vollständige URL für dieses ~TiddlyWiki
+StoryTiddler/Caption: Story Tiddler
+StoryTiddler/Hint: Diese Filter-Kaskade wird verwendet, um die Vorlage für den Tiddler im "Story River" auszuwählen.
 StoryView/Caption: Anzeige
 StoryView/Prompt: Ausgewählte Anzeige:
 Stylesheets/Caption: Stylesheets
 Stylesheets/Expand/Caption: Alle erweitern
 Stylesheets/Hint: Hier wird der "erweiterte" CSS Code dargestellt. Die Reihenfolge, kann in der "Tag-Liste" <<tag "$:/tags/Stylesheet">> mit "Drag & Drop" angepasst werden!
 Stylesheets/Restore/Caption: Alle zurücksetzen
+TestCases/Caption: Test Beispiele
+TestCases/Hint: Test Beispiele sind eigenständige Beispiele zum testen und lernen einzelner Funktionen
+TestCases/All/Caption: Alle Beispiele
+TestCases/All/Hint: Alle Test Beispiele
+TestCases/Failed/Caption: Test Nicht Bestehenden
+TestCases/Failed/Hint: Nicht bestandene Tests - Übersicht
 Theme/Caption: Theme
 Theme/Prompt: Ausgewähltes Theme:
 TiddlerFields/Caption: Tiddler Felder
 TiddlerFields/Hint: Hier finden Sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exklusive Schatten-Tiddler.
+TiddlerColour/Caption: Tiddler Farbe
+TiddlerColour/Hint: Diese Filter-Kaskade wird verwendet, um die Farbe für das "Icon" und den "Tag" auszuwählen.
+TiddlerIcon/Caption: Tiddler Icon
+TiddlerIcon/Hint: Diese Filter-Kaskade wird verwendet, um die das Tiddler "Icon" auszuwählen.
 Toolbars/Caption: Toolbar
 Toolbars/EditToolbar/Caption: Edit Toolbar
 Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt werden. Verwenden Sie "Drag and Drop", um die Reihenfolge zu ändern
@@ -208,3 +244,11 @@ Toolbars/EditorToolbar/Hint: Auswählen, welche Editorbuttons angezeigt werden s
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden. Verwenden Sie "Drag and Drop", um die Reihenfolge zu ändern
 Tools/Download/Full/Caption: Herunterladen des ''gesamten Wikis''
+ViewTemplateBody/Caption: View Template Text
+ViewTemplateBody/Hint: Diese Filter-Kaskade wird vom "View Template" dazu verwendet, um die Vorlage für den Tiddler Textbereich auszuwählen.
+ViewTemplateTitle/Caption: View Template Titel
+ViewTemplateTitle/Hint: Diese Filter-Kaskade wird vom "View Template" dazu verwendet, um die Vorlage für den Tiddler Titel auszuwählen.
+ViewTemplateSubtitle/Caption: View Template Subtitle
+ViewTemplateSubtitle/Hint: Diese Filter-Kaskade wird vom "View Template" dazu verwendet, um den "Sub-Titel" für den Tidddler Kopf auszuwählen. 
+ViewTemplateTags/Caption: View Template Tags
+ViewTemplateTags/Hint: Diese Filter-Kaskade wird vom "View Template" dazu verwendet, um das Template für den Tag auszuwählen

@@ -1,5 +1,5 @@
 created: 20181002131341062
-modified: 20181002131556452
+modified: 20210418100750769
 tags: [[WebServer API]]
 title: WebServer API: Put Tiddler
 type: text/vnd.tiddlywiki
@@ -15,6 +15,10 @@ The body should be in [[TiddlyWeb JSON tiddler format]].
 Parameters:
 
 * ''title'' - URI encoded title of the tiddler to save
+
+Headers:
+
+* ''x-requested-with'' - must be set to `TiddlyWiki` in order for the request to succeed, unless [[WebServer Parameter: csrf-disable]] is set to `yes`
 
 Response:
 

@@ -6,10 +6,7 @@ module-type: startup
 Browser message handling
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -62,12 +59,14 @@ function loadIFrame(url,callback) {
 Unload library iframe for given url
 */
 function unloadIFrame(url){
-	$tw.utils.each(document.getElementsByTagName('iframe'), function(iframe) {
+	var iframes = document.getElementsByTagName('iframe');
+	for(var t=iframes.length-1; t--; t>=0) {
+		var iframe = iframes[t];
 		if(iframe.getAttribute("library") === "true" &&
 		  iframe.getAttribute("src") === url) {
 			iframe.parentNode.removeChild(iframe);
 		}
-	});
+	}
 }
 
 function saveIFrameInfoTiddler(iframeInfo) {
@@ -152,7 +151,7 @@ exports.startup = function() {
 				if(event.data.status.charAt(0) === "2") {
 					if(event.data.cookies) {
 						if(event.data.cookies.type === "save-info") {
-							var tiddlers = JSON.parse(event.data.body);
+							var tiddlers = $tw.utils.parseJSONSafe(event.data.body);
 							$tw.utils.each(tiddlers,function(tiddler) {
 								$tw.wiki.addTiddler(new $tw.Tiddler($tw.wiki.getCreationFields(),tiddler,{
 									title: event.data.cookies.infoTitlePrefix + event.data.cookies.url + "/" + tiddler.title,
@@ -170,7 +169,7 @@ exports.startup = function() {
 								},$tw.wiki.getModificationFields()));
 							});
 						} else if(event.data.cookies.type === "save-tiddler") {
-							var tiddler = JSON.parse(event.data.body);
+							var tiddler = $tw.utils.parseJSONSafe(event.data.body);
 							$tw.wiki.addTiddler(new $tw.Tiddler(tiddler));
 						}
 					}
@@ -179,5 +178,3 @@ exports.startup = function() {
 		}
 	},false);
 };
-
-})();

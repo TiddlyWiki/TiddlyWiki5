@@ -11,6 +11,6 @@ title: "savetiddlers" Extension for Chrome and Firefox by buggyj
 type: text/vnd.tiddlywiki
 url: https://github.com/buggyj/savetiddlers
 
-An extension for Google Chrome and Mozilla Firefox that smoothes out some of the friction from TiddlyWiki's built-in [[HTML5 fallback saver|Saving with the HTML5 fallback saver]], making it almost as easy to use as TiddlyFox once it is set up correctly.
+An extension for Google Chrome and Mozilla Firefox that smoothes out some of the friction from TiddlyWiki's built-in [[HTML5 saver|Saving with the HTML5 saver]], making it almost as easy to use as TiddlyFox once it is set up correctly.
 
 https://github.com/buggyj/savetiddlers

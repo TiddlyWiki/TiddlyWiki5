@@ -1,9 +1,9 @@
 title: $:/language/Help/server
-description: TiddlyWikiにHTTPサーバのインターフェースを提供
+description: TiddlyWiki に HTTP サーバのインターフェースを提供
 
 TiddlyWiki5 に組み込まれているサーバー機能は非常にシンプルなものです。TiddlyWeb との互換性はありますが、インターネット上で安定して公開するために必要となるいくつもの機能がサポートされていません。
 
-root 階層では指定された tiddler のレンダリングを行います。root 階層以外では JSON エンコードされた個々の tiddler や、一般的な HTTP 操作（`GET`, `PUT`, `DELETE`）をサポートします。
+root 階層では指定された Tiddler のレンダリングを行います。root 階層以外では JSON エンコードされた個々の Tiddler や、一般的な HTTP 操作（`GET`, `PUT`, `DELETE`）をサポートします。
 
 ```
 --server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host>
@@ -12,10 +12,10 @@ root 階層では指定された tiddler のレンダリングを行います。
 以下のパラメータがあります:
 
 * ''port'' - 待ち受けるポート番号（デフォルトは "8080"）
-* ''roottiddler'' - root階層になる tiddler（デフォルトは "$:/core/save/all"）
-* ''rendertype'' - root tiddler がレンダリングされるときの ContentType（デフォルトは "text/plain"）
-* ''servetype'' - root tiddler がリクエストされるときの ContentType（デフォルトは "text/html"）
-* ''username'' - 編集した tiddler を保存する際のデフォルトユーザ名
+* ''roottiddler'' - root 階層になる Tiddler（デフォルトは "$:/core/save/all"）
+* ''rendertype'' - root Tiddler がレンダリングされるときの ContentType（デフォルトは "text/plain"）
+* ''servetype'' - root Tiddler がリクエストされるときの ContentType（デフォルトは "text/html"）
+* ''username'' - 編集した Tiddler を保存する際のデフォルトユーザ名
 * ''password'' - ベーシック認証用のパスワード
 * ''host'' - サーバーとなるホスト名（デフォルトは "127.0.0.1" つまり "localhost"）
 

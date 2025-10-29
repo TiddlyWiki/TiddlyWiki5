@@ -1,0 +1,5 @@
+title: $:/config/TiddlerColourFilters/
+tags: $:/tags/TiddlerColourFilter
+
+color-field: [has[color]then{!!color}]
+default: [[$:/config/DefaultTiddlerColour]has[text]get[text]trim[]]

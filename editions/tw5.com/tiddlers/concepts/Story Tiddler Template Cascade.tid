@@ -1,0 +1,16 @@
+created: 20211206132047986
+modified: 20211206155818924
+tags: Cascades
+title: Story Tiddler Template Cascade
+type: text/vnd.tiddlywiki
+
+The story tiddler template cascade is a [[cascade|Cascades]] used to choose which [[Story Tiddler Template]] should be used for a particular tiddler.
+
+The default story tiddler template cascade consists of:
+
+# If the tiddler is a draft tiddler, use the template title given in the tiddler $:/config/ui/EditTemplate
+# Otherwise, use the template title given in the tiddler $:/config/ui/ViewTemplate
+
+You can see the current settings for the story tiddler template cascade in $:/ControlPanel under the ''Info'' -> ''Advanced'' -> ''Cascades''  -> ''Story Tiddler'' tab.
+
+<<list-links "[tag[Story Tiddler Template Cascade]]">>

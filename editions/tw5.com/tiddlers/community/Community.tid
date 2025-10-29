@@ -1,9 +1,9 @@
 created: 20130909151600000
-modified: 20210106151027426
-tags: TableOfContents
+modified: 20250909171928024
+tags: TableOfContents Welcome
 title: Community
 type: text/vnd.tiddlywiki
 
-Here we gather the latest and most useful material from the TiddlyWiki community.
+The TiddlyWiki community is an enthusiastic group of users and developers who work together to make TiddlyWiki better, and help each other get the best out of it.
 
-<<tabs "Forums Latest Tutorials [[Community Editions]] [[Community Plugins]] [[Community Themes]] [[Community Palettes]] [[Other Resources]] Examples Articles Meetups" "Latest">>
+<<tabs "[[TiddlyWiki Project]] [[TiddlyWiki People]] Forums" "TiddlyWiki Project">>

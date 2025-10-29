@@ -1,7 +1,8 @@
 created: 20140912145537860
 footer: <$button message="tm-close-tiddler">Close</$button>
-modified: 20140912145537861
+modified: 20211117224341543
 subtitle: This is a modal created especially for <<yourName>>
+tags: [[Message Examples]]
 title: SampleModal
 type: text/vnd.tiddlywiki
 

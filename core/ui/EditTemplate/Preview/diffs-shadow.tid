@@ -1,6 +1,6 @@
 title: $:/core/ui/EditTemplate/body/preview/diffs-shadow
 tags: $:/tags/EditPreview
-caption: differences from shadow (if any)
+caption: {{$:/language/EditTemplate/Body/Preview/Type/DiffShadow}}
 list-after: $:/core/ui/EditTemplate/body/preview/output
 
 <$list filter="[<currentTiddler>!is[image]]" emptyMessage={{$:/core/ui/EditTemplate/body/preview/output}}>

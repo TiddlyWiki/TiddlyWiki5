@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/katex/config
+caption: KaTeX
+tags: $:/tags/ControlPanel/SettingsTab
+
+<div class="tc-control-panel">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/KaTeX/Config]!has[draft.of]]">
+
+<div>
+
+!! <$link><$transclude field="caption"/></$link>
+
+<$transclude>
+
+</div>
+
+</$list>
+
+</div>

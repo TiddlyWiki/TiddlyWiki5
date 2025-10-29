@@ -1,0 +1,10 @@
+created: 20140708085814626
+modified: 20210525165526997
+tags: doc
+title: Data Storage
+
+~TiddlyWiki has two approaches to saving the user data (tiddlers) depending on whether you are using the single file version, or are using the node.js server.
+
+~TiddlyWiki on node.js saves each tiddler in a separate text file. For details on the file formats supported for tiddlers on node.js, see [[Tiddler Files|https://tiddlywiki.com/#TiddlerFiles]].
+
+The single file version of ~TiddlyWiki saves the tiddlers within the HTML file. See [[Data Storage in Single File TiddlyWiki]]

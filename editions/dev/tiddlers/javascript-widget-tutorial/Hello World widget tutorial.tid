@@ -1,0 +1,18 @@
+created: 20190201232200698
+modified: 20190216175629825
+tags: 
+title: Hello World widget tutorial
+type: text/vnd.tiddlywiki
+
+Now let's create a widget which actually has output.
+
+When tiddlywiki encounters a widget definition like `<$hello>` it will create an object which is an instance of the class which is exported by the widget code. 
+
+In addition to creating an instance of the class, tiddlywiki will call the render method of the resulting object. The render method is expected to create a dom node which will be display in place of the widget.
+
+In the `donothing` example the core widget was exported. The core widget class doesn't have a render method which creates a dom node and that's why there is no output. Getting output requires writing a widget class which inherits from the core `Widget` class. Code in the render method of this class will display the hello world message.
+
+The [[hello.js]] tiddler has code which accomplishes that:
+{{hello.js}}
+The code for importing the core widget class remains, but now we also have code to create our own class which inherits from it. In addition an implementation of the `render` method is included. Here is the result:
+{{Hello World demo}}

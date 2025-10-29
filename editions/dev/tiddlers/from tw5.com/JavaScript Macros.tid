@@ -22,11 +22,10 @@ Note that if the ''params'' array is missing or blank, then all the supplied par
 
 There are several JavaScript macros built into the core which can serve as a jumping off point for your own macros:
 
-https://github.com/Jermolene/TiddlyWiki5/tree/master/core/modules/macros
+https://github.com/TiddlyWiki/TiddlyWiki5/tree/master/core/modules/macros
 
 Note that JavaScript macros work on both the client and the server, and so do not have access to the browser DOM.
 
 !! Macro Behaviour
 
-Macros are just used to return a chunk of wikitext for further processing. They should not make modifications to tiddlers in the wiki store. The reason is that you cannott control when the macro is called; it may be called repeatedly as part of refresh processing. So it is important that macros do not have any other side effects beyond generating their text.
-
+Macros are just used to return a chunk of wikitext for further processing. They should not make modifications to tiddlers in the wiki store. The reason is that you cannot control when the macro is called; it may be called repeatedly as part of refresh processing. So it is important that macros do not have any other side effects beyond generating their text.

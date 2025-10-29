@@ -1,0 +1,26 @@
+title: ListWidget/WithMissingTemplate
+description: List widget with explicit templates
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
++
+title: Output
+
+\whitespace trim
+
+\procedure test(filter)
+<$list filter=<<filter>>>
+	<$list-empty>
+		None!
+	</$list-empty>
+</$list>
+\end
+
+<<test "1 2 3">>
+
+<<test "">>
+
++
+title: ExpectedResult
+
+<p><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#1">1</a></span><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#2">2</a></span><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#3">3</a></span></p><p>None!</p>

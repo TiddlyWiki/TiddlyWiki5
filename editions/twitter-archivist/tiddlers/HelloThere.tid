@@ -1,0 +1,9 @@
+title: HelloThere
+
+!!! Welcome to the Twitter Archivist for TiddlyWiki
+
+<$tiddler tiddler="$:/plugins/tiddlywiki/twitter-archivist">
+	<$set name="tabsList" filter="[list<currentTiddler>]">
+		<$macrocall $name="tabs" state=<<qualify "$:/state/tabs/twitter-archivist">> tabsList=<<tabsList>> default={{{ [enlist<tabsList>] }}} template="$:/core/ui/PluginInfo"/>
+	</$set>
+</$tiddler>

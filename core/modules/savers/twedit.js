@@ -6,10 +6,7 @@ module-type: saver
 Handles saving changes via the TWEdit iOS app
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false, netscape: false, Components: false */
 "use strict";
 
 var TWEditSaver = function(wiki) {
@@ -21,7 +18,7 @@ TWEditSaver.prototype.save = function(text,method,callback) {
 		return false;
 	}
 	// Get the pathname of this document
-	var pathname = decodeURIComponent(document.location.pathname);
+	var pathname = $tw.utils.decodeURIComponentSafe(document.location.pathname);
 	// Strip any query or location part
 	var p = pathname.indexOf("?");
 	if(p !== -1) {
@@ -87,5 +84,3 @@ exports.create = function(wiki) {
 if($tw.browser) {
 	window.version = {title: "TiddlyWiki"};
 }
-
-})();

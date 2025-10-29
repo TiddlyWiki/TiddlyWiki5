@@ -1,0 +1,15 @@
+title: Widgets/ElementWidgetEventAttributes
+description: Element widget should not support event attributes starting with "on"
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<div class="hello" onclick="clicked">
+TiddlyWiki
+</div>
++
+title: ExpectedResult
+
+<p><div class="hello">TiddlyWiki</div></p>

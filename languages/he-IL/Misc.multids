@@ -29,7 +29,6 @@ Error/SavingToTWEdit: שגיאה בשמירה TWEdit
 Error/WhileSaving: שגיאה בשמירה
 Error/XMLHttpRequest: XMLHttpRequest קוד שגיאה
 InternalJavaScriptError/Hint: מביך, אך מומלץ שתאתחל מחדש על ידי רפרוש הדפדפן
-InvalidFieldName: סימנים לא חוקיים בשם השדה "<$text text=<<fieldName>>/>". Fields can only contain lowercase letters, digits and the characters underscore (`_`), hyphen (`-`) and period (`.`)
 LoginToTiddlySpace: היכנס ל TiddlySpace
 MissingTiddler/Hint: טידלר חסר "<$text text=<<currentTiddler>>/>" -לחץ {{||$:/core/ui/Buttons/edit}} כדי ליצור
 No: לא

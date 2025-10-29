@@ -7,7 +7,7 @@ Appearance/Hint: Ways to customise the appearance of your TiddlyWiki.
 Basics/AnimDuration/Prompt: Animation duration
 Basics/AutoFocus/Prompt: Default focus field for new tiddlers
 Basics/Caption: Basics
-Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
+Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to {{retain story ordering||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Default tiddlers
 Basics/DefaultTiddlers/TopHint: Choose which tiddlers are displayed at startup
 Basics/Language/Prompt: Hello! Current language:
@@ -27,10 +27,17 @@ Basics/Tiddlers/Prompt: Number of tiddlers
 Basics/Title/Prompt: Title of this ~TiddlyWiki
 Basics/Username/Prompt: Username for signing edits
 Basics/Version/Prompt: ~TiddlyWiki version
+Cascades/Caption: Cascades
+Cascades/Hint: These global rules are used to dynamically choose certain templates. The result of the cascade is the result of the first filter in the sequence that returns a result
+Cascades/TagPrompt: Filters tagged <$macrocall $name="tag" tag=<<currentTiddler>>/>
 EditorTypes/Caption: Editor Types
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: These tiddlers determine which editor is used to edit specific tiddler types.
 EditorTypes/Type/Caption: Type
+EditTemplateBody/Caption: Edit Template Body
+EditTemplateBody/Hint: This rule cascade is used by the default edit template to dynamically choose the template for editing the body of a tiddler.
+FieldEditor/Caption: Field Editor
+FieldEditor/Hint: This rules cascade is used to dynamically choose the template for rendering a tiddler field based on its name. It is used within the Edit Template.
 Info/Caption: Info
 Info/Hint: Information about this TiddlyWiki
 KeyboardShortcuts/Add/Prompt: Type shortcut here
@@ -83,12 +90,16 @@ Plugins/Languages/Caption: Languages
 Plugins/Languages/Hint: Language pack plugins
 Plugins/NoInfoFound/Hint: No ''"<$text text=<<currentTab>>/>"'' found
 Plugins/NotInstalled/Hint: This plugin is not currently installed
-Plugins/OpenPluginLibrary: open plugin library
-Plugins/ClosePluginLibrary: close plugin library
+Plugins/OpenPluginLibrary: Open plugin library
+Plugins/ClosePluginLibrary: Close plugin library
 Plugins/PluginWillRequireReload: (requires reload)
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
 Plugins/Reinstall/Caption: reinstall
+Plugins/Stability/Deprecated: DEPRECATED
+Plugins/Stability/Experimental: EXPERIMENTAL
+Plugins/Stability/Legacy: LEGACY
+Plugins/Stability/Stable: STABLE
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme plugins
 Plugins/Update/Caption: update
@@ -120,15 +131,14 @@ Saving/GitService/Gitea/Caption: Gitea Saver
 Saving/GitService/Gitea/Password: Personal access token for API (via Gitea’s web interface: `Settings | Applications | Generate New Token`)
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
 Saving/TiddlySpot/BackupDir: Backup Directory
-Saving/TiddlySpot/ControlPanel: ~TiddlySpot Control Panel
+Saving/TiddlySpot/ControlPanel: ~TiddlyHost Control Panel
 Saving/TiddlySpot/Backups: Backups
-Saving/TiddlySpot/Caption: ~TiddlySpot Saver
-Saving/TiddlySpot/Description: These settings are only used when saving to http://tiddlyspot.com or a compatible remote server
+Saving/TiddlySpot/Caption: ~TiddlyHost Saver
+Saving/TiddlySpot/Description: These settings are only used when saving to [[TiddlyHost|https://tiddlyhost.com]] or a compatible remote server. See [[here|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] for information on ~TiddlyHost saving configuration
 Saving/TiddlySpot/Filename: Upload Filename
-Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address, e.g. `http://example.com/store.php`.//
+Saving/TiddlySpot/Heading: ~TiddlyHost
+Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/` and can be changed to use a custom server address, e.g. `http://example.com/store.php`.//
 Saving/TiddlySpot/Password: Password
-Saving/TiddlySpot/ReadOnly: The ~TiddlySpot service is currently only available in read-only form. Please see http://tiddlyspot.com/ for the latest details. The ~TiddlySpot saver can still be used to save to compatible servers.
 Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: Upload Directory
 Saving/TiddlySpot/UserName: Wiki Name
@@ -137,7 +147,7 @@ Settings/AutoSave/Disabled/Description: Do not save changes automatically
 Settings/AutoSave/Enabled/Description: Save changes automatically
 Settings/AutoSave/Hint: Attempt to automatically save changes during editing when using a supporting saver
 Settings/CamelCase/Caption: Camel Case Wiki Links
-Settings/CamelCase/Hint: You can globally disable automatic linking of ~CamelCase phrases. Requires reload to take effect
+Settings/CamelCase/Hint: Requires reload to take effect
 Settings/CamelCase/Description: Enable automatic ~CamelCase linking
 Settings/Caption: Settings
 Settings/EditorToolbar/Caption: Editor Toolbar
@@ -164,6 +174,8 @@ Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Update addres
 Settings/PerformanceInstrumentation/Caption: Performance Instrumentation
 Settings/PerformanceInstrumentation/Hint: Displays performance statistics in the browser developer console. Requires reload to take effect
 Settings/PerformanceInstrumentation/Description: Enable performance instrumentation
+Settings/RecentLimit/Caption: Recent Tab Limit 
+Settings/RecentLimit/Hint: Maximum number of tiddlers to be displayed under the sidebar "Recent" tab
 Settings/ToolbarButtonStyle/Caption: Toolbar Button Style
 Settings/ToolbarButtonStyle/Hint: Choose the style for toolbar buttons:
 Settings/ToolbarButtonStyle/Styles/Borderless: Borderless
@@ -177,6 +189,8 @@ Settings/DefaultSidebarTab/Caption: Default Sidebar Tab
 Settings/DefaultSidebarTab/Hint: Specify which sidebar tab is displayed by default
 Settings/DefaultMoreSidebarTab/Caption: Default More Sidebar Tab
 Settings/DefaultMoreSidebarTab/Hint: Specify which More sidebar tab is displayed by default
+Settings/DefaultTiddlerInfoTab/Caption: Default Tiddler Info Tab
+Settings/DefaultTiddlerInfoTab/Hint: Specify which tab is displayed by default when tiddler info panel is opened
 Settings/LinkToBehaviour/Caption: Tiddler Opening Behaviour
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation from //within// the story river
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation from //outside// the story river
@@ -191,16 +205,34 @@ Settings/TitleLinks/Yes/Description: Display tiddler titles as links
 Settings/MissingLinks/Caption: Wiki Links
 Settings/MissingLinks/Hint: Choose whether to link to tiddlers that do not exist yet
 Settings/MissingLinks/Description: Enable links to missing tiddlers
+SocialCard/Caption: Social Media Card
+SocialCard/Domain/Prompt: Domain name to display for the link (for example, ''tiddlywiki.com'')
+SocialCard/Hint: This information is used by social and messaging services to display a preview card for links to this ~TiddlyWiki when hosted online
+SocialCard/PreviewUrl/Prompt: Full URL to preview image for this ~TiddlyWiki
+SocialCard/PreviewUrl/Preview: Preview image:
+SocialCard/Url/Prompt: Full URL of this ~TiddlyWiki
+StoryTiddler/Caption: Story Tiddler
+StoryTiddler/Hint: This rule cascade is used to dynamically choose the template for displaying a tiddler in the story river.
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
 Stylesheets/Caption: Stylesheets
 Stylesheets/Expand/Caption: Expand All
 Stylesheets/Hint: This is the rendered CSS of the current stylesheet tiddlers tagged with <<tag "$:/tags/Stylesheet">>
 Stylesheets/Restore/Caption: Restore
+TestCases/Caption: Test Cases
+TestCases/Hint: Test cases are self contained examples for testing and learning
+TestCases/All/Caption: All Test Cases
+TestCases/All/Hint: All Test Cases
+TestCases/Failed/Caption: Failed Test Cases
+TestCases/Failed/Hint: Only Failed Test Cases
 Theme/Caption: Theme
 Theme/Prompt: Current theme:
 TiddlerFields/Caption: Tiddler Fields
 TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
+TiddlerColour/Caption: Tiddler Colour
+TiddlerColour/Hint: This rules cascade is used to dynamically choose the colour for a tiddler (used for the icon and the associated tag pill).
+TiddlerIcon/Caption: Tiddler Icon
+TiddlerIcon/Hint: This rules cascade is used to dynamically choose the icon for a tiddler.
 Toolbars/Caption: Toolbars
 Toolbars/EditToolbar/Caption: Edit Toolbar
 Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode. Drag and drop to change the ordering
@@ -212,3 +244,14 @@ Toolbars/EditorToolbar/Hint: Choose which buttons are displayed in the editor to
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode. Drag and drop to change the ordering
 Tools/Download/Full/Caption: Download full wiki
+ViewTemplateBody/Caption: View Template Body
+ViewTemplateBody/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the body of a tiddler.
+ViewTemplateTitle/Caption: View Template Title
+ViewTemplateTitle/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the title of a tiddler.
+ViewTemplateSubtitle/Caption: View Template Subtitle
+ViewTemplateSubtitle/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the subtitle of a tiddler.
+ViewTemplateTags/Caption: View Template Tags
+ViewTemplateTags/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the tags area of a tiddler.
+WikiInformation/Caption: Wiki Information
+WikiInformation/Hint: This page summarises high level information about the configuration of this ~TiddlyWiki. It is designed to enable users to quickly share relevant aspects of the configuration of their ~TiddlyWiki with others, for example when seeking help in one of the forums. No private or personal information is included, and nothing is shared without being explicitly copied and pasted elsewhere
+WikiInformation/Drag/Caption: Drag this link to copy this tool to another wiki

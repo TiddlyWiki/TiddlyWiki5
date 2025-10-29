@@ -1,6 +1,6 @@
 title: $:/language/Exporters/
 
-CsvFile: file CSV
-JsonFile: file JSON
+CsvFile: File CSV
+JsonFile: File JSON
 StaticRiver: HTML statico
-TidFile: ".tid" file
+TidFile: File ".tid"

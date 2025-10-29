@@ -6,4 +6,4 @@ tags: SystemTags
 title: SystemTag: $:/tags/Macro
 type: text/vnd.tiddlywiki
 
-The [[system tag|SystemTags]] `$:/tags/Macro` marks global macros
+The [[system tag|SystemTags]] `$:/tags/Macro` marks global macros. It is now deprecated in favour of [[SystemTag: $:/tags/Global]].

@@ -6,7 +6,7 @@ Appearance/Caption: Utseende
 Appearance/Hint: Möjlighet att ändra utseendet för din TiddlyWiki.
 Basics/AnimDuration/Prompt: Varaktighet på animationer:
 Basics/Caption: Grundläggande
-Basics/DefaultTiddlers/BottomHint: Använd &#91;&#91;dubbla hakparenteser&#93;&#93; för rubriker med mellanslag. Eller kan du välja att <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">spara de öppna tiddlers</$button>
+Basics/DefaultTiddlers/BottomHint: Använd &#91;&#91;dubbla hakparenteser&#93;&#93; för rubriker med mellanslag. Eller kan du välja att {{spara de öppna tiddlers||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Standard-tiddlers:
 Basics/DefaultTiddlers/TopHint: Välj vilka tiddlers som ska visas vid uppstart:
 Basics/Language/Prompt: Hej! Nuvarande språk:

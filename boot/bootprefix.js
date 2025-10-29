@@ -19,9 +19,13 @@ var _bootprefix = (function($tw) {
 $tw = $tw || Object.create(null);
 $tw.boot = $tw.boot || Object.create(null);
 
+// Config
+$tw.config = $tw.config || Object.create(null);
+$tw.config.maxEditFileSize = 100 * 1024 * 1024; // 100MB
+
 // Detect platforms
 if(!("browser" in $tw)) {
-	$tw.browser = typeof(window) !== "undefined" ? {} : null;
+	$tw.browser = typeof(window) !== "undefined" && typeof(document) !== "undefined" ? {} : null;
 }
 if(!("node" in $tw)) {
 	$tw.node = typeof(process) === "object" ? {} : null;
@@ -117,3 +121,4 @@ if(typeof(exports) === "undefined") {
 	// Export functionality as a module
 	exports.bootprefix = _bootprefix;
 }
+//# sourceURL=$:/boot/bootprefix.js

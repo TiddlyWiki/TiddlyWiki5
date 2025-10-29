@@ -1,0 +1,25 @@
+created: 20140103134551508
+fr-title: Enregistrer avec TiddlyFox sur Android
+modified: 20220417143919185
+tags: [[Saving with TiddlyFox]]
+title: Saving with TiddlyFox on Android
+type: text/vnd.tiddlywiki
+
+(Vous pouvez aussi regarder le [[tutoriel vidéo|TiddlyWiki on Firefox for Android Video]]).
+
+# Assurez-vous d'avoir installé la dernière version de [[Firefox pour Android|Firefox for Android]]
+#* http://getfirefox.com
+# Installez la dernière version de l'extension TiddlyFox depuis<<dp>>
+#* https://addons.mozilla.org/fr/firefox/addon/tiddlyfox/
+# Installez aussi cette extension qui vous permettra de sauvegarder le fichier <<tw>> localement<<dp>>
+#* https://addons.mozilla.org/fr/android/addon/save-link-menus/
+# [[Téléchargez|Download]] un fichier <<tw>> vide en enregistrant ce lien<<dp>>
+#* https://tiddlywiki.com/languages/fr-FR/empty.html
+#> (pour enregistrer le lien, assurez-vous d'avoir installé l'extension "save-link-menus", appuyez quelques secondes sur le lien, puis choisissez "Save link")
+# Une fois le fichier téléchargé, cliquez dessus depuis la zone de notification ou l'application de gestion des téléchargements
+# Choisissez d'ouvrir le fichier avec Firefox (et non l'application par défaut proposée par Android)
+# Cliquez ''OK'' en réponse à la demande de TiddlyFox qui vous demande s'il faut activer l'enregistrement pour ce fichier
+# Essayez de créer un nouveau tiddler à l'aide du bouton <<.icon $:/core/images/new-button>> ''nouveau tiddler'' de la barre latérale. Ajouter du contenu dans le tiddler, et cliquez sur le bouton <<.icon $:/core/images/done-button>> ''terminé''
+# Enregistrez vos modifications en cliquant sur le bouton <<.icon $:/core/images/save-button>> ''enregistrer les modifications'' de la barre latérale
+#* Attendez l'indication jaune ''Wiki enregistré'' en haut à droite de la fenêtre
+# Rafraîchissez la fenêtre du navigateur pour vérifier que vos modifications ont été correctement enregistrées

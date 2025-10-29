@@ -1,0 +1,55 @@
+title: $:/core/ui/EditorToolbar/file-import
+tags: $:/tags/EditorTools
+condition: [<targetTiddler>filter{$:/config/Editor/EnableImportFilter}]
+
+\procedure lingo-base() $:/language/Import/
+
+\procedure closePopupActions()
+<$action-deletetiddler $filter="[title<importState>] [title<importTitle>]"/>
+\end closePopupActions
+
+\procedure tw5-ImageTemplate() [img[$(currentTiddler)$]]
+\procedure tw5-FileTemplate() [[$(currentTiddler)$]]
+
+<!-- The following characters must be escaped in markdown: <>()\ -->
+\function escape.title() [search-replace:g:regexp[\(|\)|<|>|\\],[\$&]]
+\procedure markdown-ImageTemplate() ![](<#${ [<currentTiddler>escape.title[]] }$>)
+\procedure markdown-FileTemplate() [](<#${ [<currentTiddler>escape.title[]] }$>)
+
+\function is.markdown.tiddler() [all[]type[text/x-markdown]] [all[]type[text/markdown]]
+\function is.image() [get[type]prefix[image]]
+\function get.markdown.link() [is.image[]then<markdown-ImageTemplate>else<markdown-FileTemplate>]
+\function get.tw5.link() [is.image[]then<tw5-ImageTemplate>else<tw5-FileTemplate>] 
+\function get.link.template() [<storyTiddler>is.markdown.tiddler[]then<get.markdown.link>else<get.tw5.link>]
+
+\procedure postImportActions()
+\whitespace trim
+<$list filter="[<importTitle>links[]] :reduce[get.link.template[]substitute[]addprefix<accumulator>]" variable="imageTitle">
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="insert-text"
+	text=<<imageTitle>>
+/>
+</$list>
+<<closePopupActions>>
+\end postImportActions
+
+\procedure buttons()
+\whitespace trim
+<$button class="tc-btn-invisible" actions=<<closePopupActions>> ><<lingo Listing/Cancel/Caption>></$button>
+&#32;
+<$button class="tc-btn-invisible" message="tm-perform-import" param=<<importTitle>> actions=<<postImportActions>> ><<lingo Listing/Import/Caption>></$button>
+\end buttons
+
+\whitespace trim
+<$reveal type="popup" state=<<importState>> tag="div" class="tc-editor-importpopup">
+<div class="tc-editor-import">
+<$list filter="[<importTitle>field:plugin-type[import]]">
+<h2><<lingo Editor/Import/Heading>></h2>
+<$tiddler tiddler=<<importTitle>>>
+{{||$:/core/ui/ImportListing}}
+<<buttons>>
+</$tiddler>
+</$list>
+</div>
+</$reveal>

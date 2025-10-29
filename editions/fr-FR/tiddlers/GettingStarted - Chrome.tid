@@ -7,4 +7,4 @@ type: text/vnd.tiddlywiki
 
 Sous Google Chrome, <<tw>> ne parvient à sauvegarder les modifications qu'à l'aide de la solution de repli standard : le module de sauvegarde compatible HTML5.
 
-{{Saving with the HTML5 fallback saver}}
+{{Saving with the HTML5 saver}}

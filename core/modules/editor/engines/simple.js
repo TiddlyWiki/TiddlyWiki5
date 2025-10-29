@@ -6,10 +6,7 @@ module-type: library
 Text editor engine based on a simple input or textarea tag
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
@@ -34,7 +31,7 @@ function SimpleEngine(options) {
 		this.domNode.value = this.value;
 	}
 	// Set the attributes
-	if(this.widget.editType) {
+	if(this.widget.editType && this.widget.editTag !== "textarea") {
 		this.domNode.setAttribute("type",this.widget.editType);
 	}
 	if(this.widget.editPlaceholder) {
@@ -85,7 +82,11 @@ SimpleEngine.prototype.setText = function(text,type) {
 Update the DomNode with the new text
 */
 SimpleEngine.prototype.updateDomNodeText = function(text) {
-	this.domNode.value = text;
+	try {
+		this.domNode.value = text;
+	} catch(e) {
+		// Ignore
+	}
 };
 
 /*
@@ -115,10 +116,12 @@ SimpleEngine.prototype.fixHeight = function() {
 /*
 Focus the engine node
 */
-SimpleEngine.prototype.focus  = function() {
-	if(this.domNode.focus && this.domNode.select) {
+SimpleEngine.prototype.focus = function() {
+	if(this.domNode.focus) {
 		this.domNode.focus();
-		this.domNode.select();
+	}
+	if(this.domNode.select) {
+		$tw.utils.setSelectionByPosition(this.domNode,this.widget.editFocusSelectFromStart,this.widget.editFocusSelectFromEnd);
 	}
 };
 
@@ -129,7 +132,7 @@ SimpleEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	if(this.widget.editInputActions) {
-		this.widget.invokeActionString(this.widget.editInputActions);
+		this.widget.invokeActionString(this.widget.editInputActions,this,event,{actionValue: this.getText()});
 	}
 	return true;
 };
@@ -166,5 +169,3 @@ SimpleEngine.prototype.executeTextOperation = function(operation) {
 };
 
 exports.SimpleEngine = SimpleEngine;
-
-})();

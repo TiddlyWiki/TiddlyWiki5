@@ -1,0 +1,220 @@
+title: QuickDemo
+type: text/markdown
+
+<style>
+.tc-image-loaded {
+  width: 35%;
+}
+</style>
+# h1 Heading
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
+
+
+## Horizontal Rules
+
+____
+
+---
+
+****
+
+
+## Emphasis
+
+
+**This is bold text**
+
+__This is bold text__
+
+*This is italic text*
+
+_This is italic text_
+
+~~Strikethrough~~
+
+
+## Blockquotes
+
+
+> Blockquotes can also be nested...
+>> ...by using additional greater-than signs right next to each other...
+> > > ...or with spaces between arrows.
+
+
+## Unordered List
+
+
++ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+  - Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
+
+
+## Ordered List
+
+
+1. Lorem ipsum dolor sit amet
+2. Consectetur adipiscing elit
+3. Integer molestie lorem at massa
+
+
+1. You can use sequential numbers...
+1. ...or keep all the numbers as `1.`
+
+Start numbering with offset:
+
+57. foo
+1. bar
+
+
+## Code
+
+
+Inline `code`
+
+Indented code
+
+    // Some comments
+    line 1 of code
+    line 2 of code
+    line 3 of code
+
+Block code "fences"
+
+```
+Sample text here...
+```
+
+
+## Syntax highlighting
+
+``` js
+var foo = function (bar) {
+  return bar++;
+};
+
+console.log(foo(5));
+```
+
+
+## ~KaTeX
+
+
+Equation $c = \pm\sqrt{a^2 + b^2}$ is typeset in inline mode.
+
+Display style: $$c = \pm\sqrt{a^2 + b^2}$$
+
+
+## Tables
+
+
+| Attribute | Description |
+| --------- | ----------- |
+| multiple  | select multiple files to download |
+| param     | parameter to be passed with the message |
+| tooltip   | optional tooltip text |
+
+Aligning columns:
+
+| Column A | Column B | Column C |
+| :----    | :----:   | ----:    |
+| is   | is     | is    |
+| left | nicely | right |
+| aligned | centered | aligned |
+
+
+## Links
+
+
+[link text](http://google.com)
+
+[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+
+link to tiddler [QuickDemo Source](#QuickDemo%20Source)
+
+URL can contain spaces if enclosed in brackets `<>`: [QuickDemo Source](<#QuickDemo Source>)
+
+
+## Images
+
+
+![Minion](https://octodex.github.com/images/minion.png)
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+
+Like links, images also have a reference style syntax
+
+![Alt text][id]
+
+with a link reference defined later in the document.
+
+[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+
+
+## Subscript & Superscript
+
+
+- 19^th^
+- H~2~O
+
+
+## \<ins\>
+
+
+++Inserted text++
+
+
+## \<mark\>
+
+
+==Marked text==
+
+
+## Footnotes
+
+
+Footnote 1 link[^first].
+
+Footnote 2 link[^second].
+
+Inline footnote^[Text of inline footnote] definition.
+
+Duplicated footnote reference[^second].
+
+[^first]: Footnote **can have markup**
+
+    and multiple paragraphs.
+
+[^second]: Footnote text.
+
+
+## Definition Lists
+
+
+Term 1
+
+: Definition 1
+with lazy continuation.
+
+Term 2 with *inline markup*
+
+: Definition 2
+
+        { some code, part of Definition 2 }
+
+    Third paragraph of definition 2.
+
+_Compact style:_
+
+Term 1
+  ~ Definition 1
+
+Term 2
+  ~ Definition 2a
+  ~ Definition 2b

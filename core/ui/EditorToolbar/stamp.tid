@@ -6,4 +6,5 @@ description: {{$:/language/Buttons/Stamp/Hint}}
 condition: [<targetTiddler>type[]] [<targetTiddler>get[type]prefix[text/]] [<targetTiddler>get[type]match[application/javascript]] [<targetTiddler>get[type]match[application/json]] [<targetTiddler>get[type]match[application/x-tiddler-dictionary]] [<targetTiddler>get[type]match[image/svg+xml]] +[first[]]
 shortcuts: ((stamp))
 dropdown: $:/core/ui/EditorToolbar/stamp-dropdown
+button-classes: tc-editortoolbar-stamp-button
 text:

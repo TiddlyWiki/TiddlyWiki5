@@ -1,0 +1,30 @@
+caption: Twexe
+color: #ff8a65
+community-author: ihm4u
+created: 20200507214737998
+delivery: App
+description: Un Tiddlywiki5 mono-fichier exécutable
+fr-title: Twexe : un Tiddlywiki5 mono-fichier exécutable
+method: save
+modified: 20220402105820520
+tags: Firefox [[Internet Explorer]] Opera [[Other Resources]] Safari Saving Windows Edge Linux
+title: Twexe: Single File Tiddlywiki5 executable
+type: text/vnd.tiddlywiki
+url: https://ihm4u.github.io/twexe/
+
+{{!!description}}
+{{!!url}}
+
+!! Fonctionnalités
+
+* Sauvegardes automatiques
+* Enregistrement automatique
+* Aucune extension de navigateur requise<<!>>
+* Fonctionne sous Linux et Windows
+* Fichier exécutable autonome, peut être déplacé, copié, etc.
+* Le wiki est compressé, il occupe moins d'espace disque (parfois même seulement un tiers de l'espace<<!>>)
+* Convertit //n'importe quel// fichier Tiddlywiki5 en fichier exécutable //twexe//, pas besoin de plugin pour <<tw>>
+* Utilise automatiquement l'onglet ''Sauvegarde'' du panneau de contrôle, où vous pouvez préciser un dossier pour les sauvegardes si celui par défaut ne vous plaît pas.
+* Récupérez facilement le fichier HTML du wiki à partir du //twexe// exécutable si vous en avez besoin
+* Ouvre la possibilité de lancer des exécutables externes à partir de votre wiki (pour dessiner des graphiques, etc.) - restez à l'écoute<<!>>
+* Reconnaît les images externes (c-à-d avec un champ _canonical_uri)

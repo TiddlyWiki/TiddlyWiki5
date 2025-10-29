@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for finding values in array fields
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -17,7 +14,7 @@ Export our filter function
 */
 exports.contains = function(source,operator,options) {
 	var results = [],
-		fieldname = (operator.suffix || "list").toLowerCase();
+		fieldname = operator.suffix || "list";
 	if(operator.prefix === "!") {
 		source(function(tiddler,title) {
 			if(tiddler) {
@@ -41,5 +38,3 @@ exports.contains = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

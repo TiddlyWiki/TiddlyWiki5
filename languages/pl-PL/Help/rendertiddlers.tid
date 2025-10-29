@@ -1,0 +1,20 @@
+title: $:/language/Help/rendertiddlers
+description: Renderuje serię tiddlerów do wybranego typu
+
+(Uwaga: zalecamy użycie komendy `--render`, która jest dużo bardziej elastyczna i dalej wspierana)
+
+Renderuje serię tiddlerów do wybranego typu treści (domyślnie to `text/html`) i zapisuje je do pliku.
+
+```
+--rendertiddlers '<filter>' <template> <pathname> [<type>] [<extension>] ["noclean"]
+```
+
+Na przykład:
+
+```
+--rendertiddlers '[!is[system]]' $:/core/templates/static.tiddler.html ./static text/plain
+```
+
+Domyślnie pliki są zapisywane w folderze `./output`, relatywnym do folderu z wiki. Komenda `--output` może być użyta by zmienić ścieżkę.
+
+Wszystkie pliki w docelowym folderze zostaną usunięte, chyba że zostanie użyty argument ''noclean''. Wszelkie brakujące foldery zostaną automatycznie utworzone.

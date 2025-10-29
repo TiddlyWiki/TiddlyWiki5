@@ -7,7 +7,7 @@ If you don't already have an account:
 # Go to the Google Analytics website: http://www.google.com/analytics/
 # Click the ''Access Google Analytics'' button and follow instructions to set up your account
 # Enter the URL where the wiki is hosted
-# Note the Tracking ID for this domain of the form `UA-XXXXXX-XX`
+# Note the Tracking ID for this domain of the form `G-XXXXXXXXXX`
 
 !! Install the plugin on your local copy of the TiddlyWiki
 
@@ -20,5 +20,5 @@ If you don't already have an account:
 
 !! Upload the new version of your TiddlyWiki
 
-# Upload the saved TiddlyWiki to TiddlySpot, GitHub, GitLab or other web host
+# Upload the saved TiddlyWiki to Tiddlyhost, GitHub, GitLab or other web host
 # Return to your Google Analytics page to check that your site is being tracked

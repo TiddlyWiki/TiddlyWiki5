@@ -11,4 +11,4 @@ Logarithm of `100` with base `10`:
 <<.operator-example 2 "[[100]log[10]]">>
 
 Natural logarithm of 10 (base `e`), equivalent to `ln(10)` in mathematics:
-<<.operator-example 2 "[[10]log[]]">>
+<<.operator-example 3 "[[10]log[]]">>

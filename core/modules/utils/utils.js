@@ -6,13 +6,8 @@ module-type: utils
 Various static utility functions.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
-
-var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
 
 /*
 Display a message, in colour if we're on a terminal
@@ -96,6 +91,20 @@ exports.repeat = function(str,count) {
 };
 
 /*
+Check if a string starts with another string
+*/
+exports.startsWith = function(str,search) {
+	return str.substring(0, search.length) === search;
+};
+
+/*
+Check if a string ends with another string
+*/
+exports.endsWith = function(str,search) {
+	return str.substring(str.length - search.length) === search;
+};
+
+/*
 Trim whitespace from the start and end of a string
 Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-javascript
 */
@@ -150,7 +159,7 @@ Convert a string to title case (ie capitalise each initial letter)
 exports.toTitleCase = function(str) {
 	return (str || "").replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
 }
-	
+
 /*
 Find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string
@@ -223,6 +232,7 @@ exports.removeArrayEntries = function(array,value) {
 			array.splice(p,1);
 		}
 	}
+	return array;
 };
 
 /*
@@ -294,10 +304,56 @@ exports.slowInSlowOut = function(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 };
 
+exports.formatTitleString = function(template,options) {
+	var base = options.base || "",
+		separator = options.separator || "",
+		counter = options.counter || "";
+	var result = "",
+		t = template,
+		matches = [
+			[/^\$basename\$/i, function() {
+				return base;
+			}],
+			[/^\$count:(\d+)\$/i, function(match) {
+				return $tw.utils.pad(counter,match[1]);
+			}],
+			[/^\$separator\$/i, function() {
+				return separator;
+			}],
+			[/^\$count\$/i, function() {
+				return counter + "";
+			}]
+		];
+	while(t.length){
+		var matchString = "",
+			found = false;
+		$tw.utils.each(matches, function(m) {
+			var match = m[0].exec(t);
+			if(match) {
+				found = true;
+				matchString = m[1].call(null,match);
+				t = t.substr(match[0].length);
+				return false;
+			}
+		});
+		if(found) {
+			result += matchString;
+		} else {
+			result += t.charAt(0);
+			t = t.substr(1);
+		}
+	}
+	result = result.replace(/\\(.)/g,"$1");
+	return result;
+};
+
 exports.formatDateString = function(date,template) {
 	var result = "",
 		t = template,
 		matches = [
+			[/^TIMESTAMP/, function() {
+				return date.getTime();
+			}],
 			[/^0hh12/, function() {
 				return $tw.utils.pad($tw.utils.getHours12(date));
 			}],
@@ -340,6 +396,15 @@ exports.formatDateString = function(date,template) {
 			}],
 			[/^0WW/, function() {
 				return $tw.utils.pad($tw.utils.getWeek(date));
+			}],
+			[/^0ddddd/, function() {
+				return $tw.utils.pad(Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24),3);
+			}],
+			[/^ddddd/, function() {
+				return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+			}],
+			[/^dddd/, function() {
+				return [7,1,2,3,4,5,6][date.getDay()];
 			}],
 			[/^ddd/, function() {
 				return $tw.language.getString("Date/Short/Day/" + date.getDay());
@@ -397,7 +462,7 @@ exports.formatDateString = function(date,template) {
 	// 'return raw UTC (tiddlywiki style) date string.'
 	if(t.indexOf("[UTC]") == 0 ) {
 		if(t == "[UTC]YYYY0MM0DD0hh0mm0ssXXX")
-			return $tw.utils.stringifyDate(new Date());
+			return $tw.utils.stringifyDate(date || new Date());
 		var offset = date.getTimezoneOffset() ; // in minutes
 		date = new Date(date.getTime()+offset*60*1000) ;
 		t = t.substr(5) ;
@@ -515,6 +580,15 @@ exports.htmlEncode = function(s) {
 	}
 };
 
+// Converts like htmlEncode, but forgets the double quote for brevity
+exports.htmlTextEncode = function(s) {
+	if(s) {
+		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;");
+	} else {
+		return "";
+	}
+};
+
 // Converts all HTML entities to their character equivalents
 exports.entityDecode = function(s) {
 	var converter = String.fromCodePoint || String.fromCharCode,
@@ -608,9 +682,19 @@ exports.escapeRegExp = function(s) {
     return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, '\\$&');
 };
 
+/*
+Extended version of encodeURIComponent that encodes additional characters including
+those that are illegal within filepaths on various platforms including Windows
+*/
+exports.encodeURIComponentExtended = function(s) {
+	return encodeURIComponent(s).replace(/[!'()*]/g,function(c) {
+		return "%" + c.charCodeAt(0).toString(16).toUpperCase();
+	});
+};
+
 // Checks whether a link target is external, i.e. not a tiddler title
 exports.isLinkExternal = function(to) {
-	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
+	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|obsidian|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 
@@ -618,7 +702,7 @@ exports.nextTick = function(fn) {
 /*global window: false */
 	if(typeof process === "undefined") {
 		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
-		window.setTimeout(fn,4);
+		window.setTimeout(fn,0);
 	} else {
 		process.nextTick(fn);
 	}
@@ -690,9 +774,8 @@ exports.isValidFieldName = function(name) {
 	if(!name || typeof name !== "string") {
 		return false;
 	}
-	name = name.toLowerCase().trim();
-	var fieldValidatorRegEx = /^[a-z0-9\-\._]+$/mg;
-	return fieldValidatorRegEx.test(name);
+	// Since v5.2.x, there are no restrictions on characters in field names
+	return name;
 };
 
 /*
@@ -734,17 +817,77 @@ exports.hashString = function(str) {
 };
 
 /*
+Cryptographic hash function as used by sha256 filter operator
+options.length .. number of characters returned defaults to 64
+*/
+exports.sha256 = function(str, options) {
+	options = options || {}
+	return $tw.sjcl.codec.hex.fromBits($tw.sjcl.hash.sha256.hash(str)).substr(0,options.length || 64);
+}
+
+/*
+Base64 utility functions that work in either browser or Node.js
+*/
+if(typeof window !== 'undefined') {
+	exports.btoa = function(binstr) { return window.btoa(binstr); }
+	exports.atob = function(b64) { return window.atob(b64); }
+} else {
+	exports.btoa = function(binstr) {
+		return Buffer.from(binstr, 'binary').toString('base64');
+	}
+	exports.atob = function(b64) {
+		return Buffer.from(b64, 'base64').toString('binary');
+	}
+}
+
+exports.base64ToBytes = function(base64) {
+	const binString = exports.atob(base64);
+	return Uint8Array.from(binString, (m) => m.codePointAt(0));
+};
+
+exports.bytesToBase64 = function(bytes) {
+	const binString = Array.from(bytes, (byte) => String.fromCodePoint(byte)).join("");
+	return exports.btoa(binString);
+};
+
+exports.base64EncodeUtf8 = function(str) {
+	if ($tw.browser) {
+		return exports.bytesToBase64(new TextEncoder().encode(str));
+	} else {
+		const buff = Buffer.from(str, "utf-8");
+		return buff.toString("base64");
+	}
+};
+
+exports.base64DecodeUtf8 = function(str) {
+	if ($tw.browser) {
+		return new TextDecoder().decode(exports.base64ToBytes(str));
+	} else {
+		const buff = Buffer.from(str, "base64");
+		return buff.toString("utf-8");
+	}
+};
+
+/*
 Decode a base64 string
 */
-exports.base64Decode = function(string64) {
-	return base64utf8.base64.decode.call(base64utf8,string64);
+exports.base64Decode = function(string64,binary,urlsafe) {
+	const encoded = urlsafe ? string64.replace(/_/g,'/').replace(/-/g,'+') : string64;
+	if(binary) return exports.atob(encoded)
+	else return exports.base64DecodeUtf8(encoded);
 };
 
 /*
 Encode a string to base64
 */
-exports.base64Encode = function(string64) {
-	return base64utf8.base64.encode.call(base64utf8,string64);
+exports.base64Encode = function(string64,binary,urlsafe) {
+	let encoded;
+	if(binary) encoded = exports.btoa(string64);
+	else encoded = exports.base64EncodeUtf8(string64);
+	if(urlsafe) {
+		encoded = encoded.replace(/\+/g,'-').replace(/\//g,'_');
+	}
+	return encoded;
 };
 
 /*
@@ -792,7 +935,7 @@ exports.makeDataUri = function(text,type,_canonical_uri) {
 		parts.push(type);
 		parts.push(isBase64 ? ";base64" : "");
 		parts.push(",");
-		parts.push(isBase64 ? text : encodeURIComponent(text));		
+		parts.push(isBase64 ? text : encodeURIComponent(text));
 	}
 	return parts.join("");
 };
@@ -813,7 +956,7 @@ IE does not have sign function
 */
 exports.sign = Math.sign || function(x) {
 	x = +x; // convert to a number
-	if (x === 0 || isNaN(x)) {
+	if(x === 0 || isNaN(x)) {
 		return x;
 	}
 	return x > 0 ? 1 : -1;
@@ -826,7 +969,7 @@ exports.strEndsWith = function(str,ending,position) {
 	if(str.endsWith) {
 		return str.endsWith(ending,position);
 	} else {
-		if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
+		if(typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
 			position = str.length;
 		}
 		position -= ending.length;
@@ -867,7 +1010,9 @@ exports.stringifyNumber = function(num) {
 
 exports.makeCompareFunction = function(type,options) {
 	options = options || {};
-	var gt = options.invert ? -1 : +1,
+	// set isCaseSensitive to true if not defined in options
+	var isCaseSensitive = (options.isCaseSensitive === false) ? false : true,
+		gt = options.invert ? -1 : +1,
 		lt = options.invert ? +1 : -1,
 		compare = function(a,b) {
 			if(a > b) {
@@ -886,7 +1031,11 @@ exports.makeCompareFunction = function(type,options) {
 				return compare($tw.utils.parseInt(a),$tw.utils.parseInt(b));
 			},
 			"string": function(a,b) {
-				return compare("" + a,"" +b);
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return compare("" + a,"" + b);
 			},
 			"date": function(a,b) {
 				var dateA = $tw.utils.parseDate(a),
@@ -900,10 +1049,15 @@ exports.makeCompareFunction = function(type,options) {
 				return compare(dateA,dateB);
 			},
 			"version": function(a,b) {
-				return $tw.utils.compareVersions(a,b);
+				return compare($tw.utils.compareVersions(a,b),0);
+			},
+			"alphanumeric": function(a,b) {
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return options.invert ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 			}
 		};
 	return (types[type] || types[options.defaultType] || types.number);
 };
-
-})();

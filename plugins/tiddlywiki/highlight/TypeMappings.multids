@@ -6,3 +6,4 @@ text/css: css
 text/html: html
 image/svg+xml: xml
 text/x-markdown: markdown
+text/markdown: markdown

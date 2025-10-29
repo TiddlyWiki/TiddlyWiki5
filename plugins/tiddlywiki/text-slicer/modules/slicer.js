@@ -16,10 +16,7 @@ var slicer = new textSlicer.Slicer(doc,{
 	});
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function Slicer(options) {
@@ -365,7 +362,7 @@ Slicer.prototype.onCloseTag = function(name) {
 	// Render the tag
 	if(actions.isAnchor) {
 		this.onCloseAnchor(e);
-	} else if (!actions.dontRenderTag && !selfClosing) {
+	} else if(!actions.dontRenderTag && !selfClosing) {
 		var markupInfo = actions.markup && actions.markup[this.outputMode];
 		if(markupInfo) {
 			this.addTextToCurrentChunk(markupInfo.suffix);
@@ -474,5 +471,3 @@ Slicer.prototype.makeTitle = function(prefix) {
 };
 
 exports.Slicer = Slicer;
-
-})();

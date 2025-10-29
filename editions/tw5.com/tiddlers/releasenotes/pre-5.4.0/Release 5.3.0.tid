@@ -1,0 +1,165 @@
+caption: 5.3.0
+created: 20230701123439630
+modified: 20230701123439630
+released: 20230701123439630
+tags: ReleaseNotes
+title: Release 5.3.0
+type: text/vnd.tiddlywiki
+description: Parameterised transclusions, procedures, functions, custom widgets
+
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.2.7...v5.3.0]]//
+
+<<.banner-credits
+	credit:"""Congratulations to [[vilc|https://talk.tiddlywiki.org/u/vilc]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/banner-image-competition-for-v5-3-0/7406/10]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/04950452fab7d5cb86f893020355611c4711d361/editions/tw5.com/tiddlers/images/New%20Release%20Banner.jpg"
+>>
+
+! Overview of v5.3.0
+
+This release introduces a number of significant improvements and new features related to some of TiddlyWiki's most fundamental components: macros, widgets, operators and transclusion. v5.3.0 also contains several other bug fixes and improvements.
+
+! Introduction to Parameterised Transclusion, Procedures, Functions and Custom Widgets
+
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6666">> The motivation of these changes is to fix one of ~TiddlyWiki 5's early design flaws: the reliance on macros using textual substitution as the primary way to modularise and reuse wikitext and filters.
+
+Experience has shown that while macros are a good match for a small number of tasks, they are brittle and error prone for many common operations. See [[Macro Pitfalls]] for a discussion of the problems that accompany this approach. Over the years we have introduced mitigations for the worst problems but these have come at a cost of increased complexity.
+
+The changes in this release provide powerful new ways to achieve common tasks, and unlock completely new capabilities that were previously impossible in wikitext.
+
+* [[Procedures]], which are essentially what macros should have been; they work in exactly the same way except that parameters are exposed as simple variables (without the double underscores) and no textual substitution takes place
+* [[Custom Widgets]], allowing the creation of widgets in wikitext, and the redefinition of built-in widgets
+* [[Functions]], a new way to encapsulate filter expressions with named parameters, including the ability to make custom filter operators
+* Parameterised [[Transclusions|Transclusion]], allowing strings and wikitext trees to be passed to transclusions
+
+The approach taken by this release is to add new functionality by extending and augmenting the system without disturbing existing functionality. All of these changes are thus intended to be backwards compatible. While they represent a new field of opportunities for wikitext authors, it is possible for authors to ignore all these new features and continue to use ~TiddlyWiki 5 in the way that they have always done.
+
+These changes lay the groundwork for macros and related features to be deprecated (which is the point at which users are advised not to use old features, and instead given clear pointers to the equivalent modern functionality).
+
+! Text Substitution Improvements
+
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7526">> The new transclusion architecture is not by itself sufficient to enable us to fully deprecate macros yet. To handle most of the remaining use cases this release adds convenient new ways of using textual substitution without having to create a macro:
+
+Firstly, the new [[text substitution syntax for widget attributes|Substituted Attribute Values]] allows widget attributes to be assigned the value of a string with certain placeholders being replaced by their processed contents. For example:
+
+* Substitute variable names with the value: <$codeblock code="attr=`Current tiddler is $(currentTiddler)$`"/>
+* Substitute filter expressions with the first value they return: <$codeblock code="attr=```There are ${ [tag[Done]count[]] }$ completed tasks```"/>
+
+Secondly, the new [[substitute operator|substitute Operator]] allows the same textual substitutions to be performed via a filter operator with the addition of positional parameters that use placeholders of the form `$1$`, `$2$`, `$3$` etc.
+
+```
+[[https://$1$/$(currentTiddler)$]substitute<domain-name>]
+```
+
+! HTTP Requests in WikiText
+
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7422">> new [[WidgetMessage: tm-http-request]] for performing HTTP requests in WikiText. This opens up some exciting new opportunities:
+
+* Integration with Web-based APIs. The documentation includes an [[example of using the Zotero API|WidgetMessage: tm-http-request Example - Zotero]] to retrieve academic citation data
+* Dynamic content loading: additional tiddlers can be imported dynamically after the main wiki has loaded
+
+! Defaulting to Disabling CamelCase Links
+
+<<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7513">> CamelCase linking is now disabled by default for new wikis. (Note that this documentation wiki has CamelCase linking explicitly enabled because much of the old content was written relying on them).
+
+! Plugin Improvements
+
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7554">> Google Analytics plugin to use new GA4 code. Note that the update requires manual configuration to use the new "measurement ID" instead of the old "account ID"
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7260">> Dynannotate pugin to support three additional search modes
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7365">> problem with [[BrowserStorage Plugin]] unnecessarily saving shadow tiddlers
+
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7398">> [[BrowserStorage Plugin]] to request that browser storage be persisted without eviction
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7493">> [[CodeMirror Plugin]] to add an option to make trailing spaces visible
+
+! Translation improvement
+
+Improvements to the following translations:
+
+* French
+* German
+* Polish
+* Chinese
+
+! Usability Improvements
+
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7524">> consistency of layout of "Settings" tab in $:/ControlPanel
+
+<!--
+
+! Widget Improvements
+
+-->
+
+! Filter improvements
+
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7511"> new [[deserialize Operator]] for converting various textual representations of tiddlers into JSON data
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7292">> [[format Operator]] to support converting Unix timestamps to TiddlyWiki's native date format
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7392">> new [[':then' filter run prefix|Then Filter Run Prefix]]
+
+! Hackability Improvements
+
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7413">> [[Core Icons]] to allow the size to be controlled with a parameter
+** <<.warning """This change can cause problems with non-standard usage of the core icons where the text is directly rendered instead of being transcluded""">>
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7182">> new [[thisTiddler Variable]] that refers to the tiddler currently being rendered
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7530">> `data-tag-title` attribute to all tag pills, allowing easier [[Custom tag pill styles]]
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7332">> [[Story Tiddler Template Cascade]] handling to fall back to the default template if the output of the cascade is not valid
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7378">> missing file extensions for "audio/mpeg" files
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7417">> [[Table-of-Contents Macros]] to add consistent support for an ''exclude'' parameter
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/commit/190613ad2989f70526f86eef17f524087f60eb72">> [[tv-config-static Variable]] for indicating static rendering
+
+! Bug Fixes
+
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7215">> importing tiddlers by pasting tiddler data
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7400">> unneeded 14px bottom border for textareas with autoheight enabled
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7380">> crashes when using an invalid CSS selector for [[WidgetMessage: tm-focus-selector]] and [[WidgetMessage: tm-scroll]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7401">> bug whereby scrolling occurs if the linkcatcher widget triggers an action-navigate and the $scroll attribute is set to "no"
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7409">> problem switching between LTR and RTL text
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7448">> bug when the listField attribute of the CheckboxWidget was given the name of a date field (like <<.field created>> or <<.field modified>>)
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7529">> size of buttons in dropdown for editor "link" toolbar button
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/8e132948b6bec623d81d300fbe6dc3a0307bcc6d">> crash when transcluding a lazily loaded tiddler as an attribute value
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7462">> DiffTextWidget crash with missing or empty attributes
+
+! Node.js Improvements
+
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7471">> [[WebServer Parameter: authenticated-user-header]] to require URI encoding of authenticated username header, permitting non-ASCII characters in usernames
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7253">> support for `filepath` source attribute to [[tiddlywiki.files Files]]
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/commit/48b22abdaab62c281c207127c66883b50898f9dd">> a warning message for JSON errors in [[tiddlywiki.info Files]] or [[plugin.info Files|PluginFolders]]
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7490">> new "explodePlugins" option to SaveWikiFolderCommand
+
+! Performance Improvements
+
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/4624">> module execution to reuse the same sandbox, saving memory and improving performance
+
+! Acknowledgements
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+<<.contributors """
+AnthonyMuscio
+Arlen22
+BramChen
+btheado
+buggyj
+carlo-colombo
+cdruan
+donmor
+EvidentlyCube
+flibbles
+GameDungeon
+JoshuaFontany
+kookma
+linonetwo
+Marxsal
+mateuszwilczek
+michsa
+muzimuzhi
+oeyoews
+pmario
+rmunn
+saqimtiaz
+tavin
+twMat
+xcazin
+yaisog
+Zacharia2
+""">>

@@ -14,7 +14,7 @@ description: 将个别原始条目保存到文件
 
 * 输出文件夹不清除任何现有的文件
 * 文件名的路径中，任何不存在的文件夹，将自动创建。
-* 当正保存的条目的名称中带有空格，请注意同时使用命令行接口所要求的引号，与 TiddlyWiki 的双重方括号；`--save  "[[Motovun Jack.jpg]]"`
+* 当正保存的条目的名称中带有空格，请注意同时使用命令行接口所要求的引号，与 TiddlyWiki 的双重方括号：`--save "[[Motovun Jack.jpg]]"`
 * 所选的项目被设置为当前正在保存的条目名称，以此评估文件名筛选器，允条目名称用作基础计算的文件名。例如，`[encodeuricomponent[]addprefix[static/]]` 为每个条目名称套用 URI 编码，然后增加首码 `static/`
 * `--save` 命令是已被弃用的 `--savetiddler` 和 `--savetiddlers` 的一个更灵活的替代命令。
 

@@ -6,13 +6,12 @@ module-type: widget
 Action widget to trigger a popup.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
+
+var Popup = require("$:/core/modules/utils/dom/popup.js");
 
 var ActionPopupWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -37,6 +36,7 @@ Compute the internal state of the widget
 ActionPopupWidget.prototype.execute = function() {
 	this.actionState = this.getAttribute("$state");
 	this.actionCoords = this.getAttribute("$coords");
+	this.floating = this.getAttribute("$floating","no") === "yes";
 };
 
 /*
@@ -56,19 +56,20 @@ Invoke the action associated with this widget
 */
 ActionPopupWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	// Trigger the popup
-	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
-		match = popupLocationRegExp.exec(this.actionCoords || "");
-	if(match) {
+	var coordinates = Popup.parseCoordinates(this.actionCoords || "");
+	if(coordinates) {
 		$tw.popup.triggerPopup({
 			domNode: null,
 			domNodeRect: {
-				left: parseFloat(match[1]),
-				top: parseFloat(match[2]),
-				width: parseFloat(match[3]),
-				height: parseFloat(match[4])
+				left: coordinates.left,
+				top: coordinates.top,
+				width: coordinates.width,
+				height: coordinates.height
 			},
 			title: this.actionState,
-			wiki: this.wiki
+			wiki: this.wiki,
+			floating: this.floating,
+			absolute: coordinates.absolute
 		});
 	} else {
 		$tw.popup.cancel(0);
@@ -77,5 +78,3 @@ ActionPopupWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 exports["action-popup"] = ActionPopupWidget;
-
-})();

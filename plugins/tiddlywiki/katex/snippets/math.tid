@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/katex/snippets/math
+tags: $:/tags/KaTeX/Snippet
+caption: KaTeX mathematical formula
+description: create a math block
+preview: $$i = \sqrt{-1}$$
+icon: $:/plugins/tiddlywiki/katex/katex-logo
+
+$$\KaTeX$$

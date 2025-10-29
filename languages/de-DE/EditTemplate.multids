@@ -1,8 +1,11 @@
 title: $:/language/EditTemplate/
 
+Caption: Editor
 Body/External/Hint: Dieser Tiddler zeigt den Inhalt einer Datei, die nicht im TW file gespeichert ist. Sie können die "Tags" und "Feld" Texte ändern, jedoch nicht den Inhalt des Tiddlers!
 Body/Placeholder: Geben Sie den Text für diesen Tiddler ein.
 Body/Preview/Type/Output: Anzeige
+Body/Preview/Type/DiffShadow: Unterschiede zum Schatten-Tiddler (wenn vorhanden)
+Body/Preview/Type/DiffCurrent: Unterschiede zum aktuellen Tiddler
 Field/Remove/Caption: Lösche Feld
 Field/Remove/Hint: Lösche Feld
 Field/Dropdown/Caption: Feld Liste
@@ -23,6 +26,8 @@ Tags/ClearInput/Caption: lösche Eingabefeld
 Tags/ClearInput/Hint: Lösche Tag Eingabefeld
 Tags/Dropdown/Caption: Tag Liste
 Tags/Dropdown/Hint: Tag Liste anzeigen
+Tags/EmptyMessage: Kein Tag gefunden
+Tags/EmptyMessage/System: Kein System Tag gefunden
 Title/BadCharacterWarning: Warnung: Folgende Zeichen im Titel können zu Problemen führen: <<bad-chars>>
 Title/Exists/Prompt: Tiddler Name existiert bereits
 Title/Relink/Prompt: Ändere ''<$text text=<<fromTitle>>/>'' -> ''<$text text=<<toTitle>>/>'' in //tags// und //list// Feld aller anderen Tiddler

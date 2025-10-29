@@ -6,10 +6,7 @@ module-type: startup
 Favicon handling
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -17,7 +14,7 @@ exports.name = "favicon";
 exports.platforms = ["browser"];
 exports.after = ["startup"];
 exports.synchronous = true;
-		
+
 // Favicon tiddler
 var FAVICON_TITLE = "$:/favicon.ico";
 
@@ -41,5 +38,3 @@ exports.startup = function() {
 		}
 	});
 };
-
-})();

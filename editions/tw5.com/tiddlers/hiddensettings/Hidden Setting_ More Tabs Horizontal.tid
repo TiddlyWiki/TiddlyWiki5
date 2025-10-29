@@ -1,0 +1,7 @@
+created: 20221128092648000
+modified: 20221128092903706
+tags: [[Hidden Settings]]
+title: Hidden Setting: More Tabs Horizontal
+type: text/vnd.tiddlywiki
+
+Set the $:/config/ui/SideBar/More/horizontal tiddler to ''yes'', to align the ''More -> Tabs'' in horizontal orientation.

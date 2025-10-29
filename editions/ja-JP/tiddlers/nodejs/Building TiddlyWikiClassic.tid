@@ -1,0 +1,27 @@
+created: 20131129094452285
+modified: 20241227110457591
+original-modified: 20140912141658212
+tags: [[TiddlyWiki on Node.js]]
+title: Building TiddlyWikiClassic
+ja-title: TiddlyWikiClassicの構築
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5を使用すれば、TiddlyWikiClassicの古いバージョン2.xxをその構成コンポーネントから構築できます。これには次の機能が含まれます: 
+
+* `tiddlywiki/classictools`プラグインには、TiddlyWiki 2.xxの`.recipe`ファイルからTiddlerをロードできるようにするデシリアライザモジュールが含まれています
+* ViewWidgetのための`stripcomments`フォーマットは、`//#`で始まる1行のJavaScriptコメントを削除します
+* FieldsWidgetの`stripTitlePrefix='yes'`属性は、`title`属性から中括弧で囲まれたプレフィックスを削除します
+** 例えば、`{tiddler}HelloThere`は、`HelloThere`に変換されます
+
+! 使用法
+
+TiddlyWikiClassicは、[[Node.js上のTiddlyWiki|TiddlyWiki on Node.js]]を実行することによってコマンドラインから構築されます。一般的な使用法は次のようになります: 
+
+```
+node ../../tiddlywiki.js \
+	--verbose \
+	--load <path_to_recipe_file> \
+	--rendertiddler $:/core/templates/tiddlywiki2.template.html <path_to_write_index_file> text/plain \
+	|| exit 1
+```
+

@@ -1,0 +1,11 @@
+created: 20190201232001970
+modified: 20190202145655413
+tags: 
+title: Undefined widget tutorial
+type: text/vnd.tiddlywiki
+
+Let's start be defining a minimal widget which does nothing. It doesn't support any attributes, no child elements, and it doesn't output anything. The name of the widget will be `donothing`. If it does nothing, then how can we verify after writing the code that we accomplished anything? Well, let's see what happens when an undefined widget is referenced.
+
+{{Undefined widget demo}}
+
+Since we haven't written the code, the attempt to render the widget gives an undefined widget error. So we will know the donothing code accomplishes something if we don't get the undefined widget error when rendering.

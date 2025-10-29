@@ -1,0 +1,3 @@
+title: $:/core/templates/tiddlywiki.js/load-tiddler
+
+_load(window,<$macrocall $name="jsontiddler" $output="text/raw"/>);

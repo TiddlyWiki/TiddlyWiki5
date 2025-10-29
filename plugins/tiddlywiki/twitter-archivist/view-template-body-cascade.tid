@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/twitter-archivist/view-template-body-cascade
+tags: $:/tags/ViewTemplateBodyFilter
+list-before:
+
+[tag[$:/tags/Tweet]then[$:/plugins/tiddlywiki/twitter-archivist/template/tweet]]
+[tag[$:/tags/TwitterArchive]then[$:/plugins/tiddlywiki/twitter-archivist/template/archive]]
+[tag[$:/tags/Tweeter]then[$:/plugins/tiddlywiki/twitter-archivist/template/tweeter]]
+[tag[$:/tags/Hashtag]then[$:/plugins/tiddlywiki/twitter-archivist/template/hashtag]]

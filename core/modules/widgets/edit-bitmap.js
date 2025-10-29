@@ -6,10 +6,7 @@ module-type: widget
 Edit-bitmap widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Default image sizes
@@ -156,7 +153,7 @@ EditBitmapWidget.prototype.loadCanvas = function() {
 	};
 	// Get the current bitmap into an image object
 	if(tiddler && tiddler.fields.type && tiddler.fields.text) {
-		currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;		
+		currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;
 	} else {
 		currImage.width = DEFAULT_IMAGE_WIDTH;
 		currImage.height = DEFAULT_IMAGE_HEIGHT;
@@ -339,5 +336,3 @@ EditBitmapWidget.prototype.saveChanges = function() {
 };
 
 exports["edit-bitmap"] = EditBitmapWidget;
-
-})();

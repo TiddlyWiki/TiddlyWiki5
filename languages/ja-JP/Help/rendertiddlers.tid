@@ -1,7 +1,7 @@
 title: $:/language/Help/rendertiddlers
-description: フィルタパターンを指定してマッチする tiddler を指定した ContentTypeで出力
+description: フィルタパターンを指定してマッチする Tiddler を指定した ContentTypeで出力
 
-フィルタパターンを指定してマッチする tiddler を指定した ContentType（デフォルトは`text/html`）と拡張子（デフォルトは`.html`）で出力します。 
+フィルタパターンを指定してマッチする Tiddler を指定した ContentType（デフォルトは`text/html`）と拡張子（デフォルトは`.html`）で出力します。 
 
 ```
 --rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]

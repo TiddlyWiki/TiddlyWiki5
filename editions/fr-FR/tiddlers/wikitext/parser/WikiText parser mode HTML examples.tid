@@ -1,0 +1,73 @@
+created: 20220122153235162
+fr-title: Modes d'analyse du WikiTexte : exemples de HTML
+modified: 20220422205843467
+tags: [[WikiText parser mode transitions]]
+title: WikiText parser mode: HTML examples
+type: text/vnd.tiddlywiki
+
+<<wikitext-example-without-html "<div>
+
+* La ligne vide après la balise ouvrante permet
+* aux marqueurs de mode bloc (comme cette liste)
+* d'être reconnus
+</div>
+">>
+
+---
+
+L'astuce de la ligne vide fonctionne aussi au sein des syntaxes reconnues seulement en mode en ligne (comme <<fr "Formatting in WikiText">>)<<:>>
+
+<<wikitext-example-without-html "''<div>
+
+* premier élément de la liste
+* deuxième élément de la liste
+</div>''">>
+
+---
+
+<<wikitext-example-without-html "<div>
+* Une balise ouvrante non suivie d'une ligne vide
+* signifie que la syntaxe en mode bloc (cette liste)
+* ne sera PAS reconnue.
+
+Les paragraphes ne sont reconnus qu'en mode bloc. Même avec des lignes vides, aucun nouveau paragraphe n'est reconnu.
+
+Ceci n'est pas un nouveau paragraphe non plus.
+</div>">>
+
+---
+
+Les <<fr "Tables in WikiText">> sont des éléments pour lesquels l'astuce de la ligne vide ne fonctionne pas. Pour que l'interpréteur reconnaisse une ligne de tableau, elle doit remplir exactement une ligne de texte.
+
+Ajouter une ligne blanche après une balise ouvrante au sein d'une cellule de tableau répartit la ligne de tableau sur plusieurs lignes de texte, et l'interpréteur ne peut plus reconnaître ce texte en tant que ligne de tableau.
+
+<<wikitext-example-without-html "|la ligne de tableau|entièrement sur|une ligne de texte|est reconnue|">>
+
+<<wikitext-example-without-html "|Avec une ligne vide après une balise ouvrante|<div>
+
+* la liste est reconnue
+* mais pas le tableau autour
+</div>|">>
+
+---
+
+Le seul moyen de faire reconnaître la syntaxe de [[mode bloc|Block Mode WikiText]] dans des [[tableaux en WikiTexte|Tables in WikiText]] est d'utiliser un widget <<.wlink TranscludeWidget>> avec l'attribut <<.attr mode>>=<<.value block>>.
+
+<<wikitext-example-without-html '|Tableau imbriqué<<:>>|<$transclude tiddler="table-example" mode=block/>|'>>
+
+Notez que le widget <<.wlink MacroCallWidget>> ne dispose pas d'un attribut <<.attr mode>> similaire, et le contenu des définitions de macros ne peut être analysé qu'en [[mode en ligne|Inline Mode WikiText]].
+
+---
+
+Bien que moins pratiques, les balises html `<table>`, `<tr>`, `<td>` peuvent être utilisées comme un moyen sûr de faire reconnaître les syntaxes en [[mode bloc|Block Mode WikiText]] à l'intérieur d'un tableau.
+
+<<wikitext-example-without-html "<table>
+<tr><td>
+
+* premier élément de la liste
+* deuxième élément de la liste
+</td><td>
+
+|tableau|imbriqué|
+</td></tr>
+</table>">>

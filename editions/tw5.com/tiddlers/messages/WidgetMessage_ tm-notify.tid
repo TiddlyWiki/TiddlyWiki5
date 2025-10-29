@@ -1,14 +1,14 @@
+caption: tm-notify
 created: 20140811112304772
-modified: 20160701140248738
+modified: 20230723220728382
 tags: Messages
 title: WidgetMessage: tm-notify
 type: text/vnd.tiddlywiki
-caption: tm-notify
 
 The notify message briefly displays a specified tiddler as a small alert in the upper right corner of the page. It requires the following properties on the `event` object:
 
 |!Name |!Description |
 |param |Title of the tiddler to be displayed |
-|paramObject |Hashmap of variables to be provided to the notification |
+|//{any other params}// |Any other parameters are made available as variables to the notify message. |
 
 The notify message is handled by the TiddlyWiki core.

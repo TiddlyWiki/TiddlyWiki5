@@ -1,0 +1,18 @@
+created: 20240708171243370
+modified: 20240708201827711
+tags: 
+title: Operators without parameters
+
+Many [[Filter Operators]] have no [[parameter|Filter Parameter]] available. Still, each operator must be followed by a bracketed parameter expression — even if it is empty — as with the <<.olink backlinks>> operator below:
+
+`[<currentTiddler>backlinks[]]`
+
+(Even though an expression such as `[<currentTiddler>backlinks]` may at first <<.em seem>> well-formed — insofar as closing brackets seem to pair properly with opening brackets — each operator needs its own parameter brackets, even if empty. See [[Filter Syntax]].)
+
+The following [[Filter Operators]] accept no parameters:
+
+<div>
+
+<<list-links filter:"[op-parameter[none]] [tag[Filter Operators]!has[op-parameter]] -[search:op-purpose[same]]" class:"multi-columns">>
+
+</div>

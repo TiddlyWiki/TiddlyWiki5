@@ -1,0 +1,5 @@
+title: $:/language/Snippets/ListByTag
+tags: $:/tags/TextEditor/Snippet
+caption: Lista tiddlerów po tagu
+
+<<list-links "[tag[task]sort[title]]">>

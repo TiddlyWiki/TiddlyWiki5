@@ -7,9 +7,28 @@ title: $:/core/ui/ImportListing
 \define payloadTitleFilter() [<currentTiddler>get<renameField>minlength[1]else<payloadTiddler>]
 
 \define overWriteWarning()
+\whitespace trim
 <$list filter="[<currentTiddler>!has<suppressedField>]">
 <$text text={{{[subfilter<payloadTitleFilter>!is[tiddler]then[]] ~[<lingo-base>addsuffix[Listing/Rename/OverwriteWarning]get[text]]}}}/>
 </$list>
+\end
+
+\define selectionInfo()
+\whitespace trim
+<$set name="escUnselected" value={{{[{$:/language/Import/Upgrader/Tiddler/Unselected}escaperegexp[]addprefix[(?g)]]}}}>
+	<$list filter="[all[current]get<messageField>regexp<escUnselected>]" variable="ignore">
+		<$text text={{{[all[current]get<selectionField>match[checked]then{$:/language/Import/Upgrader/Tiddler/Selected}else[]]}}}/>
+	</$list>
+</$set>
+\end
+
+\define libraryInfo()
+\whitespace trim
+<$set name="escUnselected" value={{{[{$:/language/Import/Upgrader/Tiddler/Unselected}escaperegexp[]addprefix[(?g)]]}}}>
+	<$list filter="[all[current]get<messageField>!regexp<escUnselected>]" variable="ignore">
+		<$text text={{{[all[current]get<messageField>]}}}/>
+	</$list>
+</$set>
 \end
 
 \define selectionField() selection-$(payloadTiddler)$
@@ -18,23 +37,25 @@ title: $:/core/ui/ImportListing
 
 \define suppressedField() suppressed-$(payloadTiddler)$
 
-\define newImportTitleTiddler() $:/temp/NewImportTitle-$(payloadTiddler)$
-
 \define previewPopupState() $(currentTiddler)$!!popup-$(payloadTiddler)$
 
 \define renameFieldState() $(currentTiddler)$!!state-rename-$(payloadTiddler)$
 
 \define select-all-actions()
+\whitespace trim
 <$list filter="[all[current]plugintiddlers[]sort[title]]" variable="payloadTiddler">
 <$action-setfield $field={{{ [<payloadTiddler>addprefix[selection-]] }}} $value={{$:/state/import/select-all}}/>
 </$list>
 \end
 
+\whitespace trim
+<div class="tc-table-wrapper">
 <table class="tc-import-table">
 <tbody>
 <tr>
 <th align="left">
 <$checkbox tiddler="$:/state/import/select-all" field="text" checked="checked" unchecked="unchecked" default="checked" actions=<<select-all-actions>>>
+&#32;
 <<lingo Listing/Select/Caption>>
 </$checkbox>
 </th>
@@ -69,26 +90,30 @@ title: $:/core/ui/ImportListing
 </$reveal>
 </td>
 <td>
-<$view field=<<messageField>>/>
+<<selectionInfo>>
+&#32;
+<<libraryInfo>>
+&#32;
 <<overWriteWarning>>
 </td>
 </tr>
 <$reveal type="match" state=<<renameFieldState>> text="yes" tag="tr">
-<td colspan="3">
-<div class="tc-flex">
-<$edit-text tiddler=<<newImportTitleTiddler>>  default={{{[subfilter<payloadTitleFilter>]}}} tag="input" class="tc-import-rename tc-flex-grow-1"/><span class="tc-small-gap-left"><$button  class="tc-btn-invisible" set=<<renameFieldState>> setTo="no" tooltip={{{[<lingo-base>addsuffix[Listing/Rename/CancelRename]get[text]]}}}>{{$:/core/images/close-button}}<$action-deletetiddler $tiddler=<<newImportTitleTiddler>>/></$button><span class="tc-small-gap-right"/></span><$button  class="tc-btn-invisible" set=<<renameFieldState>> setTo="no" tooltip={{{[<lingo-base>addsuffix[Listing/Rename/ConfirmRename]get[text]]}}}>{{$:/core/images/done-button}}<$action-setfield $field=<<renameField>> $value={{{[<newImportTitleTiddler>get[text]minlength[1]else<payloadTiddler>]}}} /><$action-deletetiddler $tiddler=<<newImportTitleTiddler>>/></$button>
-</div>
-</td>
+	<td colspan="3">
+		<div class="tc-flex">
+			<$edit-text field=<<renameField>> default={{{[<payloadTiddler>]}}} tag="input" class="tc-import-rename tc-flex-grow-1"/>
+		</div>
+	</td>
 </$reveal>
-<tr>
+<$reveal type="match" text="yes" state=<<previewPopupState>> tag="tr">
 <td colspan="3">
-<$reveal type="match" text="yes" state=<<previewPopupState>> tag="div">
 <$list filter="[{$:/state/importpreviewtype}has[text]]" variable="listItem" emptyMessage={{$:/core/ui/ImportPreviews/Text}}>
-<$transclude tiddler={{$:/state/importpreviewtype}}/>
+	<div>
+		<$transclude tiddler={{$:/state/importpreviewtype}}/>
+	</div>
 </$list>
-</$reveal>
 </td>
-</tr>
+</$reveal>
 </$list>
 </tbody>
 </table>
+</div>

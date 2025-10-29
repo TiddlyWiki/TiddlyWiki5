@@ -1,0 +1,33 @@
+title: $:/plugins/tiddlywiki/twitter-archivist/readme
+
+! Introduction
+
+The Twitter Archivist imports the tweets and associated media from a [[Twitter Archive|https://help.twitter.com/en/managing-your-account/how-to-download-your-twitter-archive]] as individual tiddlers.
+
+The first step is to request your Tweet archive from Twitter. Once it is available, download file compressed file and unzip it.
+
+! Installation
+
+For browser-based wikis, drag and drop this link to install the Twitter Archivist plugin in your own wikis (note that a reload will be required after installing the plugin and saving the wiki):
+
+{{$:/plugins/tiddlywiki/twitter-archivist||$:/core/ui/Components/plugin-info}}
+
+For Node.js-based wikis, add `tiddlywiki/twitter-archivist` to the `plugin` section of `tiddlywiki.info`:
+
+```
+...
+	"plugins": [
+		"tiddlywiki/twitter-archivist"
+	],
+...
+```
+
+! Limitations of Twitter Archives
+
+The Twitter Archive format itself has many shortcomings which affect this tool:
+
+* Retweets come through as old-school RTs, which means that they are often truncated
+* Likes only have minimal information, lacking date, author and mentions
+* Twitter archives can be delivered in multiple parts, but this tool has only been tested with single archives. It is hoped that cumulatively importing each of the archives in turn should work
+
+A future version of this tool may use the Twitter API to get around these restrictions.

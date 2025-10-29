@@ -7,9 +7,12 @@ height: 1em;
 background-color: $(colour)$
 \end
 
+\whitespace trim
 <$vars colour={{!!color}}>
 <p style=<<swatch-styles>>/>
 </$vars>
 <p>
-<$edit-text field="color" tag="input" type="color"/> / <$edit-text field="color" tag="input" type="text" size="9"/>
+<$edit-text field="color" tag="input" type="color"/>
+&#32;/&#32;
+<$edit-text field="color" tag="input" type="text" size="9"/>
 </p>

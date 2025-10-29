@@ -10,6 +10,10 @@ tags: $:/tags/Macro
 <$list filter="""$(editFieldsFilter)$""" variable="editorField">
 <$edit-text tag="$(editorTagName)$" field=<<editorField>> type="text" class="tc-edit-texteditor" minHeight="10px"/>
 </$list>
+<$reveal state="$:/state/showEnglishText" type=match text="show" tag="p">
+Default text:
+<pre><code><$view tiddler="$:/core" subtiddler=<<currentTiddler>> field=<<editorField>>/></code></pre>
+</$reveal>
 </td>
 <td width="20px">
 <div class="tc-drop-down-wrapper">
@@ -59,6 +63,8 @@ Delete translation
 <div class="tc-translators-string-table">
 
 //<$count filter=<<translatableTiddlerTitles>>/> translatable tiddlers in this group//
+
+<$checkbox tiddler="$:/state/showEnglishText" field="text" checked="show" unchecked="hide" default="hide"> Show the default text below editor field</$checkbox>
 
 <$radio tiddler="$:/plugins/tiddlywiki/translators/editorTag" value="textarea"> Multi-line editors</$radio><br>
 <$radio tiddler="$:/plugins/tiddlywiki/translators/editorTag" value="input"> Single-line editors</$radio>

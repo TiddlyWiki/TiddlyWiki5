@@ -30,7 +30,6 @@ Error/SavingToTWEdit: Fejl ved gemning til TWEdit
 Error/WhileSaving: Fejl ved gemning
 InternalJavaScriptError/Hint: Oh, dette er pinligt. Det anbefales at du genstarter TiddlyWiki ved at opfriske din browser
 InternalJavaScriptError/Title: Intern JavaScript fejl
-InvalidFieldName: Illegale tegn i felt navn "<$text text=<<fieldName>>/>". Felter kan kun indeholde små bogstaver, tal og tegnene undersstreg (`_`), bindestreg (`-`) og punktum (`.`)
 LazyLoadingWarning: <p>indlæser ekstern tekst fra ''<$text text={{!!_canonical_uri}}/>''</p><p>Hvis denne besked ikke forsvinder, bruger du måske en browser, som ikke understøtter ekstern tekst i denne konfiguration. Se https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Login til TiddlySpace
 Manager/Controls/FilterByTag/Prompt: Filtrer efter tag:

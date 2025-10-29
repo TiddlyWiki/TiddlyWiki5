@@ -11,10 +11,7 @@ Wiki pragma rule for rules specifications
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "rules";
@@ -26,7 +23,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /^\\rules[^\S\n]/mg;
+	this.matchRegExp = /\\rules[^\S\n]/mg;
 };
 
 /*
@@ -60,5 +57,3 @@ exports.parse = function() {
 	// No parse tree nodes to return
 	return [];
 };
-
-})();

@@ -4,7 +4,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/list-number
 caption: {{$:/language/Buttons/ListNumber/Caption}} (Markdown)
 description: {{$:/language/Buttons/ListNumber/Hint}}
-condition: [<targetTiddler>type[text/x-markdown]]
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
 shortcuts: ((list-number))
 
 <$action-sendmessage

@@ -1,0 +1,36 @@
+created: 20220427174702859
+modified: 20241022103806366
+original-modified: 20220611104737314
+tags: [[JSON in TiddlyWiki]] Learning
+title: Reading data from JSON tiddlers
+ja-title: JSON Tiddlerからのデータの読み取り
+type: text/vnd.tiddlywiki
+
+TiddlyWikiでのJSONの扱い方の概要については、[[TiddlyWikiでのJSON|JSON in TiddlyWiki]]を参照してください
+
+!! JSONデータにアクセスするためのフィルター演算子
+
+次のフィルター演算子を使用すると、JSONデータから値を読み取ることができます: 
+
+* <<.olink jsonget>>は、JSONデータ内のプロパティの値を取得します
+* <<.olink jsontype>>は、JSONの値の型を取得します
+* <<.olink jsonindexes>>は、JSONオブジェクトのフィールドの名前やJSON配列のインデックスを取得します
+* <<.olink jsonextract>>は、JSONの値をJSONの文字列として取得します
+
+!! JSONデータにアクセスするためのテキスト参照
+
+[[テキスト参照|TextReference]]は、名前付きプロパティの値を検索するための単純なショートカット構文です。例えば、`MonthDays`という[[DictionaryTiddler|DictionaryTiddlers]]に次を含む場合: 
+
+```
+oct:31
+nov:30
+dec:31
+```
+
+... `{{MonthDays##nov}}`は、値`30`となります
+
+`MonthDays`が次の内容を含む[[JSONTiddler|JSONTiddlers]]の場合も同様です: 
+
+```
+{"oct":31,"nov":30,"dec":31}
+```

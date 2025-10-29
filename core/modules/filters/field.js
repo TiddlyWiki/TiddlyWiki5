@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for comparing fields for equality
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -17,7 +14,7 @@ Export our filter function
 */
 exports.field = function(source,operator,options) {
 	var results = [],indexedResults,
-		fieldname = (operator.suffix || operator.operator || "title").toLowerCase();
+		fieldname = operator.suffix || operator.operator || "title";
 	if(operator.prefix === "!") {
 		if(operator.regexp) {
 			source(function(tiddler,title) {
@@ -71,5 +68,3 @@ exports.field = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

@@ -1,0 +1,23 @@
+caption: Pragma
+created: 20150219175930000
+modified: 20220421233711464
+tags: Concepts [[WikiText Parser Modes]]
+title: Pragma
+type: text/vnd.tiddlywiki
+
+Un <<.def pragma>> est un composant spécial du <<fr WikiText>> qui permet de contrôler la façon dont la suite du texte est analysée.
+
+Les ''pragmas'' occupent des lignes débutant par un `\`. Ils ne peuvent être placés qu'au début d'un texte, mais des lignes vides sont autorisées entre eux. Si une ligne de pragma apparaît plus loin dans le corps du texte, il n'est pas pris en compte et apparaît comme du texte ordinaire.
+
+''NDT''<<:>> <<.from-version "5.2.0">> Les commentaires HTML `<!--  texte de commentaire -->` sont aussi autorisés avant et entre les ''pragmas'', ce qui facilite la documentation du code <<fr WikiText>>.
+
+Les ''pragmas'' suivants sont disponibles<<:>>
+
+;`\define`
+: introduit une définition de [[macro|Macros]]
+;`\rules`
+: permet d'ajuster l'ensemble des règles d'analyse du texte
+;`\whitespace trim` ou `\whitespace notrim`
+: <<.from-version "5.1.15">> contrôle si les caractères d'espacement sont retirés du début et de la fin de morceaux de texte (la valeur par défaut ''notrim'' n'entraîne aucun retrait). Ce paramètre est utile lorsque l'indentation ou les caractères d'espacement générés par les retours à la ligne perturbent la mise en forme du résultat.
+;`\import <expression-de-filtre>`
+: <<.from-version "5.1.18">> permet d'importer des définitions de macros à partir des tiddlers sélectionnés par une expression de filtre.

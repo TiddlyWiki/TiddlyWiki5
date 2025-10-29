@@ -1,0 +1,50 @@
+created: 20190202122928187
+modified: 20190216191939585
+tags: 
+title: Widget refresh demo III
+type: text/vnd.tiddlywiki
+
+<!-- The innerwiki doesn't refresh on its own when tiddlers on the outside change, so use the list widget to force a dependency -->
+<$list name=refresh filter=[[refreshcount.js]get[text]]>
+<$innerwiki width="600" height="400" style="width:100%;">
+	<$data title="$:/DefaultTiddlers" text="[[refresh count widget]]"/>
+	<$data title="test" text="Text field of tiddler='test'"/>
+	<$data $tiddler=refreshcount.js/>
+	<$data title="refresh count widget" text="""
+
+*<$button set="test!!test" setTo="hello">Modify a different tiddler</$button>
+*<$button set="!!test" setTo="hello">Modify this tiddler</$button>
+*<$edit-text focus=yes tiddler=test tag=input/>
+
+<div>
+<div style="display:inline-block;width: 49%;vertical-align: text-top;word-wrap: break-word;}">
+
+```
+<$refreshcount/>
+```
+
+Renders as:
+
+<$refreshcount/>
+</div>
+
+<div style="display:inline-block;width: 49%;vertical-align: text-top;word-wrap: break-word;}">
+
+```
+<$list filter="[[test]get[text]]">
+<<currentTiddler>><br>
+<$refreshcount/>
+</$list>
+```
+
+Renders as:
+
+<$list filter="[[test]get[text]]">
+<<currentTiddler>><br>
+<$refreshcount/>
+</$list>
+"""/>
+</div>
+</div>
+</$innerwiki>
+</$list>

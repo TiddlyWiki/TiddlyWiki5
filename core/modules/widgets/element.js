@@ -6,10 +6,7 @@ module-type: widget
 Element widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -34,6 +31,10 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	if($tw.config.htmlUnsafeElements.indexOf(this.tag) !== -1) {
 		this.tag = "safe-" + this.tag;
 	}
+	// Restrict tag name to digits, letts and dashes
+	this.tag = this.tag.replace(/[^0-9a-zA-Z\-]/mg,"");
+	// Default to a span
+	this.tag = this.tag || "span";
 	// Adjust headings by the current base level
 	var headingLevel = ["h1","h2","h3","h4","h5","h6"].indexOf(this.tag);
 	if(headingLevel !== -1) {
@@ -42,16 +43,22 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 		this.tag = "h" + headingLevel;
 	}
 	// Select the namespace for the tag
-	var tagNamespaces = {
+	var XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml",
+		tagNamespaces = {
 			svg: "http://www.w3.org/2000/svg",
 			math: "http://www.w3.org/1998/Math/MathML",
-			body: "http://www.w3.org/1999/xhtml"
+			body: XHTML_NAMESPACE
 		};
 	this.namespace = tagNamespaces[this.tag];
 	if(this.namespace) {
 		this.setVariable("namespace",this.namespace);
 	} else {
-		this.namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"});
+		if(this.hasAttribute("xmlns")) {
+			this.namespace = this.getAttribute("xmlns");
+			this.setVariable("namespace",this.namespace);
+		} else {
+			this.namespace = this.getVariable("namespace",{defaultValue: XHTML_NAMESPACE});
+		}
 	}
 	// Invoke the th-rendering-element hook
 	var parseTreeNodes = $tw.hooks.invokeHook("th-rendering-element",null,this);
@@ -67,6 +74,8 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	// Create the DOM node and render children
 	var domNode = this.document.createElementNS(this.namespace,this.tag);
 	this.assignAttributes(domNode,{excludeEventAttributes: true});
+	// Allow hooks to manipulate the DOM node. Eg: Add debug info
+	$tw.hooks.invokeHook("th-dom-rendering-element", domNode, this);
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
@@ -81,7 +90,7 @@ ElementWidget.prototype.refresh = function(changedTiddlers) {
 	if(hasChangedAttributes) {
 		if(!this.isReplaced) {
 			// Update our attributes
-			this.assignAttributes(this.domNodes[0],{excludeEventAttributes: true});			
+			this.assignAttributes(this.domNodes[0],{excludeEventAttributes: true});
 		} else {
 			// If we were replaced then completely refresh ourselves
 			return this.refreshSelf();
@@ -91,5 +100,3 @@ ElementWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.element = ElementWidget;
-
-})();

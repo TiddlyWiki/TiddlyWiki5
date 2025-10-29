@@ -1,0 +1,14 @@
+title: BrowserCompatibility
+ja-title: ブラウザの互換性
+tags: [[Working with TiddlyWiki]]
+
+TiddlyWikiは、HTML5互換ブラウザで動作するように設計されています
+
+次の表は、TiddlyWikiが動作することが知られているブラウザのバージョンをまとめたものです
+
+|!ブラウザ |!ステータス |
+|Internet Explorer |Version 10以降 |
+|Chrome |最近のすべてのバージョン |
+|Firefox |最近のすべてのバージョン |
+|Firefox for Android |最近のすべてのバージョン |
+|Safari |Version 6以降 |

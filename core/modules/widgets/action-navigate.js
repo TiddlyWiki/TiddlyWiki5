@@ -6,10 +6,7 @@ module-type: widget
 Action widget to navigate to a tiddler
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -70,11 +67,20 @@ NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		navigateFromNode: triggeringWidget,
 		navigateFromClientRect: bounds && { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
-		navigateSuppressNavigation: suppressNavigation
+		navigateFromClientTop: bounds && bounds.top,
+		navigateFromClientLeft: bounds && bounds.left,
+		navigateFromClientWidth: bounds && bounds.width,
+		navigateFromClientRight: bounds && bounds.right,
+		navigateFromClientBottom: bounds && bounds.bottom,
+		navigateFromClientHeight: bounds && bounds.height,
+		navigateSuppressNavigation: suppressNavigation,
+		metaKey: event.metaKey,
+		ctrlKey: event.ctrlKey,
+		altKey: event.altKey,
+		shiftKey: event.shiftKey,
+		event: event
 	});
 	return true; // Action was invoked
 };
 
 exports["action-navigate"] = NavigateWidget;
-
-})();

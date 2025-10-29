@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for checking if a tiddler has the specified field or index
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -61,10 +58,8 @@ exports.has = function(source,operator,options) {
 				if(tiddler && $tw.utils.hop(tiddler.fields,operator.operand) && (tiddler.fields[operator.operand].length !== 0)) {
 					results.push(title);
 				}
-			});				
+			});
 		}
 	}
 	return results;
 };
-
-})();

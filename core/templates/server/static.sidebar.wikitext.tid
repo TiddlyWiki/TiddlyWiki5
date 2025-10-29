@@ -1,7 +1,7 @@
 title: $:/core/templates/server/static.sidebar.wikitext
 
 \whitespace trim
-<div class="tc-sidebar-scrollable" style="overflow: auto;">
+<div class="tc-sidebar-scrollable" style="overflow: auto;" role="region" aria-label={{$:/language/SideBar/Caption}}>
 <div class="tc-sidebar-header">
 <h1 class="tc-site-title">
 <$transclude tiddler="$:/SiteTitle"/>

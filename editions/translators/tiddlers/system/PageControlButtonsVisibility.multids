@@ -13,4 +13,5 @@ core/ui/Buttons/more-page-actions: show
 core/ui/Buttons/new-journal: hide
 core/ui/Buttons/permaview: hide
 core/ui/Buttons/storyview: hide
+core/ui/Buttons/layout: hide
 core/ui/Buttons/theme: hide

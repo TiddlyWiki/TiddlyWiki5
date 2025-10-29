@@ -1,5 +1,6 @@
 title: $:/snippets/palettepreview
 
+\whitespace trim
 <$set name="currentTiddler" value={{$:/palette}}>
 {{||$:/snippets/currpalettepreview}}
 </$set>

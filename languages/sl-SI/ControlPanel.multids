@@ -6,7 +6,7 @@ Appearance/Caption: Videz
 Appearance/Hint: Načini prilagoditve videza vašega TiddlyWikija.
 Basics/AnimDuration/Prompt: Trajanje animacije:
 Basics/Caption: Osnove
-Basics/DefaultTiddlers/BottomHint: Za naslove s presledki uporabite &#91;&#91;double square brackets&#93;&#93;. Ali pa kliknite, <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">da bi ob nalaganju obnovili odprte tiddlerje.</$button>
+Basics/DefaultTiddlers/BottomHint: Za naslove s presledki uporabite &#91;&#91;double square brackets&#93;&#93;. Ali pa kliknite, {{da bi ob nalaganju obnovili odprte tiddlerje.||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Privzeti tiddlerji:
 Basics/DefaultTiddlers/TopHint: Izberite, kateri tiddlerji so prikazani ob zagonu:
 Basics/Language/Prompt: Zdravo! Trenutni jezik:
@@ -107,7 +107,7 @@ Settings/AutoSave/Enabled/Description: Samodejno shrani spremembe
 Settings/AutoSave/Hint: Samodejno shrani spremembe med urejanjem, če shranjevalni modul to podpira
 Settings/CamelCase/Caption: Camel Case wiki povezave
 Settings/CamelCase/Description: Omogoči samodejno povezovanje ~CamelCase
-Settings/CamelCase/Hint: Globalno onemogočite samodejno povezovanje stavkov ~CamelCase. Ponovno naložite stran, da aktivirate nastavitev!
+Settings/CamelCase/Hint: Ponovno naložite stran, da aktivirate nastavitev!
 Settings/Caption: Nastavitve
 Settings/DefaultSidebarTab/Caption: Privzeti zavihek v stranski vrstici
 Settings/DefaultSidebarTab/Hint: Določite, kateri zavihek stranske vrstice je privzeto prikazan

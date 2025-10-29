@@ -1,12 +1,14 @@
 created: 20180702160923664
-modified: 20180703100549667
+modified: 20211111023610539
 tags: [[WebServer Guides]]
 title: Using HTTPS
 type: text/vnd.tiddlywiki
 
 By default, TiddlyWiki's WebServer serves resources over the insecure HTTP protocol. The risk is minimal if it is only being used within a private, trusted network but in many situations it is desirable to use a secure HTTPS connection.
 
-HTTPS requires the server to be configured with a certificate via a "cert" file and a "key" file, configured via the [[tls-cert|WebServer Parameter: tls-cert]] and [[tls-key|WebServer Parameter: tls-key]] parameters
+HTTPS requires the server to be configured with a certificate via a "cert" file and a "key" file, configured via the [[tls-cert|WebServer Parameter: tls-cert]] and [[tls-key|WebServer Parameter: tls-key]] parameters.
+
+<<.from-version "5.2.2">> The optional [[tls-passphrase|WebServer Parameter: tls-passphrase]] parameter allows the server to use certificate files that have been generated with a passphrase/password.
 
 Certificates can be obtained from a certification authority such as https://letsencrypt.org/, or you can create a self-signed certificate for internal testing.
 
@@ -16,4 +18,17 @@ To create the required certificate files with the popular [[openssl|https://www.
 openssl req -newkey rsa:2048 -new -nodes -keyout mywikifolder/key.pem -out mywikifolder/csr.pem
 openssl x509 -req -days 365 -in mywikifolder/csr.pem -signkey mywikifolder/key.pem -out mywikifolder/server.crt
 tiddlywiki mywikifolder --listen username=joe password=bloggs tls-key=key.pem tls-cert=server.crt
+```
+
+If using a [[tls-passphrase|WebServer Parameter: tls-passphrase]] to generate the certificate files, the commands would change as below:
+
+* remove the `-nodes` flag, which specifies "no encryption"
+* replace `TLS_PASSPHRASE` in the `-passout` and `-passin` parameters in the below commands with your chosen string.
+
+This is the simplest, but __least secure method,__ of passing a passphrase to the certificate utility. See [[this Stack Exchange anwser on openssl certificates|https://security.stackexchange.com/questions/106525/generate-csr-and-private-key-with-password-with-openssl]] and the [[openssl|https://www.openssl.org/docs/man1.0.2/man1/openssl.html]] and [[openssl-passphrase-options|https://www.openssl.org/docs/manmaster/man1/openssl-passphrase-options.html]] page in the openssl utility documentation.
+
+```
+openssl req -newkey rsa:2048 -passout pass:TLS_PASSPHRASE -new -keyout mywikifolder/key.pem -out mywikifolder/csr.pem -passout pass:TLS_PASSPHRASE
+openssl x509 -req -days 365 -in mywikifolder/csr.pem -signkey mywikifolder/key.pem -out mywikifolder/server.crt -passin pass:TLS_PASSPHRASE
+tiddlywiki mywikifolder --listen username=joe password=bloggs tls-key=key.pem tls-cert=server.crt tls-passphrase=TLS_PASSPHRASE
 ```

@@ -2,71 +2,188 @@ title: $:/language/Buttons/
 
 AdvancedSearch/Caption: 詳細検索
 AdvancedSearch/Hint: 条件を付けて検索します
+Bold/Caption: 強調
+Bold/Hint: 選択範囲に太字の書式を適用します
 Cancel/Caption: キャンセル
-Cancel/Hint: 編集をキャンセルします
+Cancel/Hint: この Tiddler の変更を破棄します
+Clear/Caption: クリア
+Clear/Hint: 画像を無地にクリアします
 Clone/Caption: 複製
-Clone/Hint: tiddlerを複製します
+Clone/Hint: Tiddler を複製します
 Close/Caption: 閉じる
-Close/Hint: このtiddlerを閉じます
-CloseAll/Caption: 全て閉じる
-CloseAll/Hint: 全てのtiddlerを閉じます
-CloseOthers/Caption: 他のtidderを閉じる
-CloseOthers/Hint: 他のtidderを非表示にします
+Close/Hint: この Tiddler を閉じます
+CloseAll/Caption: すべて閉じる
+CloseAll/Hint: すべての Tiddler を閉じます
+CloseOthers/Caption: 他の Tiddler を閉じる
+CloseOthers/Hint: 他の Tiddler を非表示にします
 ControlPanel/Caption: コントロールパネル
-ControlPanel/Hint: このWikiの設定画面を開きます
+ControlPanel/Hint: この Wiki の設定画面を開きます
+CopyToClipboard/Caption: クリップボードへコピー
+CopyToClipboard/Hint: このテキストをクリップボードへコピーします
 Delete/Caption: 削除
-Delete/Hint: tiddlerを削除します
+Delete/Hint: Tiddler を削除します
 Edit/Caption: 編集
-Edit/Hint: このtiddlerを編集します
+Edit/Hint: この Tiddler を編集します
+EditorHeight/Caption: エディタの縦幅
+EditorHeight/Caption/Auto: コンテンツに合わせて自動的に高さを調整します
+EditorHeight/Caption/Fixed: 縦幅の固定:
+EditorHeight/Hint: テキストエディタの縦幅を選択します
 Encryption/Caption: 暗号化
 Encryption/ClearPassword/Caption: パスワードの解除
 Encryption/ClearPassword/Hint: パスワードと暗号化を解除します
-Encryption/Hint: Wikiを保存するときのパスワードの設定/解除をします
+Encryption/Hint: Wiki を保存するときのパスワードの設定/解除をします
 Encryption/SetPassword/Caption: パスワードの設定
 Encryption/SetPassword/Hint: パスワードを設定してwikiを暗号化します
+Excise/Caption: 切り取り
+Excise/Caption/Excise: 切り取りします
+Excise/Caption/MacroName: マクロ名:
+Excise/Caption/NewTitle: 新しい Tiddler のタイトル:
+Excise/Caption/Replace: 削除テキストを次に置き換える:
+Excise/Caption/Replace/Link: リンク
+Excise/Caption/Replace/Macro: マクロ
+Excise/Caption/Replace/Transclusion: 転出
+Excise/Caption/Tag: 新しい Tiddler にこの Tiddler のタイトルをタグ付けします
+Excise/Caption/TiddlerExists: Warning: Tiddler はすでに存在します
+Excise/Hint: 選択したテキストを新しいティドラーに切り出します
 ExportPage/Caption: すべてエクスポート
-ExportPage/Hint: すべてのtiddlerをエクスポートします。
-ExportTiddler/Caption: tiddlerをエクスポート
-ExportTiddler/Hint: tiddlerをエクスポート
-ExportTiddlers/Caption: tiddlerをエクスポート
-ExportTiddlers/Hint: tiddlerをエクスポート
+ExportPage/Hint: すべての Tiddler をエクスポートします
+ExportTiddler/Caption: Tiddler をエクスポート
+ExportTiddler/Hint: Tiddler をエクスポート
+ExportTiddlers/Caption: Tiddler をエクスポート
+ExportTiddlers/Hint: Tiddler をエクスポート
+Fold/Caption: Tiddler をしまう
+Fold/FoldBar/Caption: 棒状にしまう
+Fold/FoldBar/Hint: Tiddler を棒状にしまう・ひらきます
+Fold/Hint: この Tiddler をしまい、本文を非表示にします
+FoldAll/Caption: すべての Tiddler をしまう
+FoldAll/Hint: すべてのひらいている Tiddler を棒状にしまいます
+FoldOthers/Caption: 他の Tiddler をしまう
+FoldOthers/Hint: 他のひらいている Tiddler を棒状にしまいます
 FullScreen/Caption: フルスクリーン
 FullScreen/Hint: フルスクリーンで表示、またはフルスクリーン表示を解除します
+Heading1/Caption: 見出し 1
+Heading1/Hint: 選択範囲を含む行に見出しレベル 1 の書式を適用します
+Heading2/Caption: 見出し 2
+Heading2/Hint: 選択範囲を含む行に見出しレベル 2 の書式を適用します
+Heading3/Caption: 見出し 3
+Heading3/Hint: 選択範囲を含む行に見出しレベル 3 の書式を適用します
+Heading4/Caption: 見出し 4
+Heading4/Hint: 選択範囲を含む行に見出しレベル 4 の書式を適用します
+Heading5/Caption: 見出し 5
+Heading5/Hint: 選択範囲を含む行に見出しレベル 5 の書式を適用します
+Heading6/Caption: 見出し 6
+Heading6/Hint: 選択範囲を含む行に見出しレベル 6 の書式を適用します
+Help/Caption: ヘルプ
+Help/Hint: ヘルプパネルを表示します
 HideSideBar/Caption: サイドバーを消す
 HideSideBar/Hint: サイドバーを非表示にします
 Home/Caption: ホーム
-Home/Hint: デフォルトtiddlerを表示します
+Home/Hint: デフォルト Tiddler を表示します
 Import/Caption: インポート
 Import/Hint: ファイルをインポートします
 Info/Caption: 情報
-Info/Hint: このtiddlerの情報を表示します
-Language/Caption: 日本語
+Info/Hint: この Tiddler の情報を表示します
+Italic/Caption: 斜体
+Italic/Hint: 選択範囲に斜体書式を適用します
+Language/Caption: 言語
 Language/Hint: メニューの言語を選択します
+LineWidth/Caption: 線の長さ
+LineWidth/Hint: 線画する線の長さを設定します
+Link/Caption: リンク
+Link/Hint: Wiki テキストリンクを作成します
+Linkify/Caption: Wiki リンク
+Linkify/Hint: 選択部分を角括弧で囲みます
+ListBullet/Caption: 箇条書きリスト
+ListBullet/Hint: 選択範囲を含む行に箇条書きリストの書式を適用します
+ListNumber/Caption: 番号付きリスト
+ListNumber/Hint: 選択範囲を含む行に番号付きチストの書式を適用します
+Manager/Caption: Tiddler 管理
+Manager/Hint: Tiddler 管理を開きます
+MonoBlock/Caption: 等幅ブロック
+MonoBlock/Hint: 選択範囲を含む行に等幅ブロック書式を適用します
+MonoLine/Caption: 等幅
+MonoLine/Hint: 選択範囲に等幅の文字書式を適用します
 More/Caption: その他のコマンド
 More/Hint: その他のコマンドを表示します
-NewHere/Caption: タグ付きtiddlerの作成
-NewHere/Hint: このtiddlerのタイトルのタグを付けた、新しいtidderを作ります
+NewHere/Caption: タグ付き Tiddler の作成
+NewHere/Hint: この Tiddler のタイトルのタグを付けた、新しい Tidder を作成します
+NewImage/Caption: 新しい画像
+NewImage/Hint: 新しい画像 Tiddler を作成します
 NewJournal/Caption: 新しい日誌
-NewJournal/Hint: 新しい日誌（journal tiddler）を作ります
+NewJournal/Hint: 新しい日誌（Journal Tiddler）を作成します
 NewJournalHere/Caption: タグ付き日誌の作成
-NewJournalHere/Hint: このtiddlerのタイトルのタグを付けた、新しい日誌（journal tiddler）を作ります
-NewTiddler/Caption: 新しいtiddler
-NewTiddler/Hint: 新しいtiddlerを作ります
+NewJournalHere/Hint: この Tiddler のタイトルのタグを付けた、新しい日誌（Journal Tiddler）を作成します
+NewMarkdown/Caption: 新しい Markdown tiddler
+NewMarkdown/Hint: 新しい Markdown Tiddler を作成します
+NewTiddler/Caption: 新しい Tiddler
+NewTiddler/Hint: 新しい Tiddler を作成します
+Opacity/Caption: 透明度
+Opacity/Hint: ペイントの透明度を設定します
+OpenWindow/Caption: 新しいウインドウで開く
+OpenWindow/Hint: 新しいウインドウで Tiddler を開く
+Paint/Caption: ペイント色
+Paint/Hint: ペイントの色を設定します
+Palette/Caption: パレット
+Palette/Hint: 色パレットで選択します
 Permalink/Caption: パーマリンク
-Permalink/Hint: このtiddlerへ直接リンクするアドレスを、ブラウザのアドレスバーに表示します
+Permalink/Hint: この Tiddler へ直接リンクするアドレスを、ブラウザのアドレスバーに表示します
 Permaview/Caption: パーマビュー
-Permaview/Hint: 表示している全てのtiddlerへのリンクをブラウザのアドレスバーに表示視します
+Permaview/Hint: 表示している全ての Tiddler へのリンクをブラウザのアドレスバーに表示します
+Picture/Caption: 画像
+Picture/Hint: 画像を挿入します
+Preview/Caption: プレビュー
+Preview/Hint: プレビューパネルを表示します
+PreviewType/Caption: プレビューの種類
+PreviewType/Hint: プレビューの種類を選択します
+Print/Caption: ページを印刷
+Print/Hint: このページを印刷します
+Quote/Caption: 引用
+Quote/Hint: 選択範囲を含む行に引用符で囲まれたテキストフォーマットを適用します
 Refresh/Caption: 再読み込み
 Refresh/Hint: ファイルを再読み込みします
+RotateLeft/Caption: 反時計回転
+RotateLeft/Hint: 画像を反時計 90 度回転します
 Save/Caption: 確定
 Save/Hint: 編集内容を確定します
 SaveWiki/Caption: 保存
-SaveWiki/Hint: Wikiを保存します
+SaveWiki/Hint: Wiki を保存します
 ShowSideBar/Caption: サイドバーを表示する
 ShowSideBar/Hint: サイドバーを表示します
-StoryView/Caption: tidder表示切替
-StoryView/Hint: tiddlerの表示方法を切り替えます
+SidebarSearch/Hint: サイドバーの検索項目を選択します
+Size/Caption: 画像サイズ
+Size/Caption/Height: 縦幅:
+Size/Caption/Resize: 画像のサイズを変更
+Size/Caption/Width: 横幅:
+Size/Hint: 画像サイズの設定
+Stamp/Caption: 自己紹介
+Stamp/Caption/New: 自己紹介を追加します
+Stamp/Hint: あらかじめ設定されたスニペットを挿入します
+Stamp/New/Text: スニペットのテキスト (キャプションフィールドに説明的なタイトルを追加することを忘れないでください)
+Stamp/New/Title: メニューに表示する名前
+StoryView/Caption: Tidder 表示切替
+StoryView/Hint: Tiddler の表示方法を切り替えます
+Strikethrough/Caption: 取り消し線
+Strikethrough/Hint: 選択範囲に取り消し線書式を適用します
+Subscript/Caption: 下付き文字
+Subscript/Hint: 選択範囲に下付き文字の書式を適用します
+Superscript/Caption: 上付き文字
+Superscript/Hint: 選択範囲に上付き文字の書式を適用します
 TagManager/Caption: タグの管理
 TagManager/Hint: タグの管理画面を開きます
 Theme/Caption: テーマ
 Theme/Hint: 表示のテーマを選択します
+Timestamp/Caption: タイムスタンプ
+Timestamp/Hint: 修正によってタイムスタンプが更新されるかどうかを選択します
+Timestamp/Off/Caption: タイムスタンプを無効にする
+Timestamp/Off/Hint: Tiddler 変更時にタイムスタンプを更新しないようにします
+Timestamp/On/Caption: タイムスタンプを有効にする
+Timestamp/On/Hint: Tiddler 変更時にタイムスタンプを更新します
+ToggleSidebar/Hint: サイドバーの表示・非表示を切り替えます
+Transcludify/Caption: 参照
+Transcludify/Hint: 選択部分を中括弧で囲みます
+Underline/Caption: 下線
+Underline/Hint: 選択範囲に下線書式を適用します
+Unfold/Caption: Tiddler をひらく
+Unfold/Hint: この Tiddler の本文をひらきます
+UnfoldAll/Caption: すべての Tiddler をひらく
+UnfoldAll/Hint: しまっている Tiddler の本文をひらきます

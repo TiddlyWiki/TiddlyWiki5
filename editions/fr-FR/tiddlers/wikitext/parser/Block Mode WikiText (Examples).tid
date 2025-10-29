@@ -1,0 +1,52 @@
+created: 20220115152811251
+fr-title: WikiTexte en mode bloc (exemples)
+modified: 20220422215120630
+tags: [[Block Mode WikiText]]
+title: Block Mode WikiText (Examples)
+type: text/vnd.tiddlywiki
+
+Les [[paragraphes|Paragraphs in WikiText]] sont la forme la plus courante de <<fr WikiText>>. Il est important de comprendre qu'ils ne se terminent pas avant d'avoir rencontré une ligne vide. Dès qu'un paragraphe commence, l'interpréteur passe en ''mode en ligne''. Jusqu'à ce que cette ligne vide soit rencontrée, les syntaxes de <<fr WikiText>> en ''mode bloc'' sont ignorées<<:>>
+
+<<<
+<<wikitext-example-without-html src:'Voici un paragraphe.
+Seule la syntaxe du __//mode en ligne//__ est reconnue ici.
+La syntaxe du mode bloc est <b>ignorée</b> entre le début
+et la fin du paragraphe (c-à-d la prochaine ligne vide).
+Par exemple :
+* Les listes sont ignorées
+* Tout comme cette ligne horizontale<<:>>
+---
+|les tableaux|sont|ignorés|
+! les titres sont ignorés
+<<<
+les citations multi-lignes sont ignorées
+<<<
+'>>
+<<<
+
+Pour que le <<fr WikiText>> en mode bloc soit reconnu, il faut insérer une ligne vide après la ligne <<gf "Par exemple :">>. La ligne vide constituera une fin de paragraphe, et l'interpréteur commencera à reconnaître la syntaxe du mode bloc à nouveau. Comme ceci<<:>>
+
+<<<
+<<wikitext-example-without-html src:'Voici un paragraphe.
+Seule la syntaxe du __//mode en ligne//__ est reconnue ici.
+La syntaxe de mode bloc est <b>ignorée</b> entre le début
+et la fin du paragraphe (c-à-d la prochaine ligne vide).
+Par exemple, voici une ligne vide :
+
+* grâce à la ligne vide ci-dessus,
+* les listes fonctionnent
+* Tout comme cette ligne horizontale<<:>>
+---
+|!les tableaux|!fonctionnent|
+|cellule 1| cellule 2|
+! les titres fonctionnent
+<<<
+les citations multi-lignes fonctionnent
+<<<
+; Terme
+: Définition de ce terme
+Un autre paragraphe peut commencer ici, mais il ne finira pas avant une ligne vide.
+'>>
+<<<
+
+À part le paragraphe, tous les exemples de <<fr WikiText>> en mode bloc ci-dessus sont écrits une ligne après l'autre sans ligne vide intermédiaire. Ces types de <<fr WikiText>> n'ont pas besoin de ligne vide pour en marquer la fin.

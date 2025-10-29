@@ -11,10 +11,7 @@ Wiki pragma rule for whitespace specifications
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "whitespace";
@@ -26,7 +23,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /^\\whitespace[^\S\n]/mg;
+	this.matchRegExp = /\\whitespace[^\S\n]/mg;
 };
 
 /*
@@ -68,5 +65,3 @@ exports.parse = function() {
 	// No parse tree nodes to return
 	return [];
 };
-
-})();

@@ -1,0 +1,9 @@
+created: 20230505092952569
+modified: 20230505092952569
+tags: [[translink Macro]] [[Macro Examples]]
+title: translink Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg="""<<translink "Philosophy of Tiddlers">>"""/>
+<$macrocall $name=".example" n="2" eg="""<<translink "Philosophy of Tiddlers" inline>>"""/>
+<$macrocall $name=".example" n="3" eg="""<<translink Foo>>"""/>

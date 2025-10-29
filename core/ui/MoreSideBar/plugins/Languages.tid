@@ -2,4 +2,4 @@ title: $:/core/ui/MoreSideBar/Plugins/Languages
 tags: $:/tags/MoreSideBar/Plugins
 caption: {{$:/language/ControlPanel/Plugins/Languages/Caption}}
 
-<$list filter="[!has[draft.of]plugin-type[language]sort[description]]" template="$:/core/ui/PluginListItemTemplate" emptyMessage={{$:/language/ControlPanel/Plugins/Empty/Hint}}/>
+<$list filter="[!has[draft.of]plugin-type[language]sort[name]]" template="$:/core/ui/PluginListItemTemplate" emptyMessage={{$:/language/ControlPanel/Plugins/Empty/Hint}}/>

@@ -6,10 +6,7 @@ module-type: widget
 Link widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -43,6 +40,15 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 	} else {
 		// Just insert the link text
 		var domNode = this.document.createElement("span");
+		// Assign data- attributes
+		this.assignAttributes(domNode,{
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
+		this.assignAttributes(domNode,{
+			sourcePrefix: "aria-",
+			destPrefix: "aria-"
+		});
 		parent.insertBefore(domNode,nextSibling);
 		this.renderChildren(domNode,null);
 		this.domNodes.push(domNode);
@@ -77,7 +83,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			}
 		}
 		if(this.linkClasses) {
-			classes.push(this.linkClasses);			
+			classes.push(this.linkClasses);
 		}
 	} else if(this.overrideClasses !== "") {
 		classes.push(this.overrideClasses)
@@ -97,8 +103,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		// Expand the tv-wikilink-template variable to construct the href
 		var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
 			wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$";
-		wikiLinkText = $tw.utils.replaceString(wikiLinkTemplate,"$uri_encoded$",encodeURIComponent(this.to));
-		wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
+		wikiLinkText = $tw.utils.replaceString(wikiLinkTemplate,"$uri_encoded$",$tw.utils.encodeURIComponentExtended(this.to));
+		wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$uri_doubleencoded$",$tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(this.to)));
 	}
 	// Override with the value of tv-get-export-link if defined
 	wikiLinkText = this.getVariable("tv-get-export-link",{params: [{name: "to",value: this.to}],defaultValue: wikiLinkText});
@@ -123,9 +129,13 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			});
 		domNode.setAttribute("title",tooltipText);
 	}
-	if(this["aria-label"]) {
-		domNode.setAttribute("aria-label",this["aria-label"]);
+	if(this.role) {
+		domNode.setAttribute("role",this.role);
 	}
+	this.assignAttributes(domNode,{
+		sourcePrefix: "aria-",
+		destPrefix: "aria-"
+	})
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"},
@@ -137,7 +147,14 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			dragTiddlerFn: function() {return self.to;},
 			widget: this
 		});
+	} else if(this.draggable === "no") {
+		domNode.setAttribute("draggable","false");
 	}
+	// Assign data- attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Insert the link into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -154,6 +171,12 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
+		navigateFromClientTop: bounds.top,
+		navigateFromClientLeft: bounds.left,
+		navigateFromClientWidth: bounds.width,
+		navigateFromClientRight: bounds.right,
+		navigateFromClientBottom: bounds.bottom,
+		navigateFromClientHeight: bounds.height,
 		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1),
 		metaKey: event.metaKey,
 		ctrlKey: event.ctrlKey,
@@ -175,7 +198,7 @@ LinkWidget.prototype.execute = function() {
 	// Pick up our attributes
 	this.to = this.getAttribute("to",this.getVariable("currentTiddler"));
 	this.tooltip = this.getAttribute("tooltip");
-	this["aria-label"] = this.getAttribute("aria-label");
+	this.role = this.getAttribute("role");
 	this.linkClasses = this.getAttribute("class");
 	this.overrideClasses = this.getAttribute("overrideClass");
 	this.tabIndex = this.getAttribute("tabindex");
@@ -201,7 +224,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 LinkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip) {
+	if($tw.utils.count(changedAttributes) > 0 || changedTiddlers[this.to]) {
 		this.refreshSelf();
 		return true;
 	}
@@ -209,5 +232,3 @@ LinkWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.link = LinkWidget;
-
-})();

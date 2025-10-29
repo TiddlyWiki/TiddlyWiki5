@@ -6,10 +6,7 @@ module-type: info
 Initialise $:/info/browser tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.getInfoTiddlerFields = function() {
@@ -42,8 +39,12 @@ exports.getInfoTiddlerFields = function() {
 				["is/sailfish","sailfish"],
 				["is/android","android"],
 				["is/windowsphone","windowsphone"],
-				["is/firefoxos","firefoxos"]
+				["is/firefoxos","firefoxos"],
+				["is/mobile","mobile"]
 			];
+		$tw.browser = $tw.utils.extend($tw.browser, {
+			is: bowser.browser,
+		});
 		$tw.utils.each(mappings,function(mapping) {
 			var value = bowser.browser[mapping[1]];
 			if(value === undefined) {
@@ -74,5 +75,3 @@ exports.getInfoTiddlerFields = function() {
 	}
 	return infoTiddlerFields;
 };
-
-})();

@@ -6,10 +6,7 @@ module-type: global
 Performance measurement.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function Performance(enabled) {
@@ -21,7 +18,7 @@ function Performance(enabled) {
 
 Performance.prototype.showGreeting = function() {
 	if($tw.browser) {
-		this.logger.log("Execute $tw.perf.log(); to see filter execution timings");		
+		this.logger.log("Execute $tw.perf.log(); to see filter execution timings");
 	}
 };
 
@@ -87,5 +84,3 @@ Performance.prototype.measure = function(name,fn) {
 };
 
 exports.Performance = Performance;
-
-})();

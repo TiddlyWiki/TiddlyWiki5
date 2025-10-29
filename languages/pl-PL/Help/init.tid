@@ -1,0 +1,23 @@
+title: $:/language/Help/init
+description: Zainicjalizuj nowy WikiFolder
+
+Inicjalizuje nowy, pusty [[WikiFolder|WikiFolders]] z kopią wybranego wydania.
+
+```
+--init <edition> [<edition> ...]
+```
+
+Dla przykładu:
+
+```
+tiddlywiki ./MyWikiFolder --init empty
+```
+
+Uwagi:
+
+* Folder zostanie utworzony jeżeli jeszcze nie istnieje
+* "edition" ma domyślną wartość ''empty''
+* Komenda się nie powiedzie, jeżeli folder nie jest pusty
+* Komenda usuwa wszelkie definicje `includeWiki` z okujy `tiddlywiki.info`
+* Gdy podasz kilka edycji, edycje wpisane później nadpiszą pliku ze starszych edycji. Na przykład `tiddlywiki.info` zostanie wzięty z ostatniej wybranej edycji
+* `--editions` bez argumentów zwraca listę dostępnych edycji

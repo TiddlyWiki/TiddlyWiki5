@@ -1,0 +1,24 @@
+title: $:/language/Help/test
+description: Run the jasmine test suite
+
+This runs all of the tests in tiddlers tagged with `$:/tags/test-spec`.
+
+```
+--test [spec=<regExp>]
+```
+
+''spec'' - optional regular expression to run only specific suites or tests. It will be matched against the full name of every test to see whether to run it. The full name of a test is its assigned name prepended with the names of all containing suites. For instance, to run only the following test:
+
+```
+describe("Framework") { it("handles edgecases") { ... } }
+```
+
+You might use a specFilter like `"^Framework handles edgecases$"` to match the full name exactly, or more simply `"edgecases"`, though this might run other tests with "edgecases" in their name. You could also run all tests in that suite with `"^Framework"`.
+
+If any tests fail or are skipped, all following commands are ignored. If you have any commands which must be executed regardless of test results, execute them first.
+
+A common usage is to run the tests on the console after creating a Tiddlywiki file which will run the tests on the browser.
+
+```
+tiddlywiki --rendertiddler $:/core/save/all test.html text/plain --test
+```

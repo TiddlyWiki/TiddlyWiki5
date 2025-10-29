@@ -1,5 +1,5 @@
 created: 20150110183300000
-modified: 20150117152556000
+modified: 20210207124737959
 title: Tiddler Structure
 tags: [[Improving TiddlyWiki Documentation]]
 
@@ -12,5 +12,7 @@ Consistency of terminology is essential if the reader is not to become confused.
 Use numbered lists for step-by-step instructions, and bullet points for lists whose order is arbitrary. Use a definition list in preference to a bulleted list if each bulleted item would begin with a term and a colon. If at all possible, avoid burdening the reader with a nested list.
 
 Use a table when information naturally falls into three or more columns, and also for lists of parameters, attributes, etc in [[reference tiddlers|Reference Tiddlers]].
+
+Avoid periods at the end of list items, headings and table cell text.
 
 The documentation describes the current reality of ~TiddlyWiki. Avoid discussing future aspirations.

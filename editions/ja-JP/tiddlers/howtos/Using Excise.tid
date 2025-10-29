@@ -1,0 +1,20 @@
+created: 20160810122928198
+modified: 20241104112946776
+original-modified: 20230803044526608
+tags: [[Editor toolbar]]
+title: Using Excise
+ja-title: 切り出しの使用
+type: text/vnd.tiddlywiki
+
+! テキストの切り出し
+[[エディタツールバー|Editor toolbar]]から、選択したテキストを新しいTiddlerにエクスポートし、その場所に[[リンク|Linking in WikiText]]、[[トランスクルージョン|Transclusion]]、または[[マクロ|Macros]]を挿入できます。''選択したテキストを新しいティドラーに切り出します'' (<<.icon $:/core/images/excise>>)をクリックし、新しいTiddlerの名前を入力して、切り出し方法を選択します。
+
+!! テキストの切り取り方法
+# 関連するテキストをハイライトします 
+# ''選択したテキストを新しいティドラーに切り出します''(<<.icon $:/core/images/excise>>)をクリックします
+# 新しいTiddlerにタイトルを付けます。
+# 新しいTiddlerに現在のTiddlerのタイトルをタグ付けするかどうかを選択します(下記の注意を参照)。
+# 置き換え方法を選択します: [[リンク|Linking in WikiText]]、[[転出|Transclusion]]、または、[[マクロ|Macros]]。
+# ''{{$:/language/Buttons/Excise/Caption/Excise}}''ボタンをクリックします
+
+<<.strong 注意!>> `新しいTiddlerにこのTiddlerのタイトルをタグ付けします`オプションを選択した場合、新しいTiddlerは、編集される前の現在のTiddlerの名前でタグ付けされます。現在のTiddlerのタイトルを変更する場合は、最初に保存し、再度編集してから、このオプションで切り出しを実行します。

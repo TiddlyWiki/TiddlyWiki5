@@ -1,4 +1,8 @@
 title: $:/language/Help/verbose
-description: 詳細出力モード
+description: 詳細出力モードで動作
 
-詳細出力を有効にする。デバッグ時に有用。```--verbose```
+詳細出力モードで動作します。デバッグに便利です。
+
+```
+--verbose
+```

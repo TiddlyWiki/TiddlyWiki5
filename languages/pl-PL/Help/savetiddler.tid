@@ -1,0 +1,14 @@
+title: $:/language/Help/savetiddler
+description: Saves a raw tiddler to a file
+
+(Uwaga: zalecamy użycie komendy `--save`, która jest dużo bardziej elastyczna i dalej wspierana)
+
+Zapisuje pojedynczego tiddlera jako surowy tekst lub dane binarne w wybranej ścieżce.
+
+```
+--savetiddler <title> <filename>
+```
+
+Domyślnie ścieżka do zapisu jest relatywna do folderu `output` w folderze wiki. Komenda `--output` może być użyta by wybrać inny folder wyjściowy.
+
+Brakujące foldery w ścieżce zostają automatycznie utworzone.

@@ -1,10 +1,14 @@
 created: 20200507002727378
-modified: 20200515024640489
+modified: 20220719132112414
 tags: $:/tags/Stylesheet
 title: $:/_tw5.com-styles
 type: text/vnd.tiddlywiki
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-hero-heading a.tc-tiddlylink {
+	font-weight: bold;
+}
 
 .tc-double-spaced-list li {
 	padding-bottom: .5em;
@@ -78,123 +82,85 @@ type: text/vnd.tiddlywiki
 	height: 1em;
 }
 
-
-
 .tc-wrapper-flex {
 	display: flex;
 }
 
-.tc-saving-sidebar {
-	margin: 0;
-	padding: 0;
-	min-width: 200px;
-	overflow: auto;
-}
-
-.tc-saving-sidebar a {
-	display: block;
-}
-
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
-	.tc-wrapper-flex {
-		flex-direction: column;
-	}
-	.tc-saving-sidebar {
-		width: 100%;
-		height: auto;
-	}
-	.tc-saving-sidebar a {
-		float: left;
-	}
-}
-
-.tc-saving-sidebar-category {
-	margin-bottom: 10px;
-}
-
-.tc-saving-sidebar-category-title {
-	font-weight: bold;
-	margin-bottom: 5px;
-	font-size: 16px;
-}
-
-.tc-saving-sidebar-category-item {
-	margin-left: 10px;
-}
-
-.tc-card {
-	margin: 15px;
-	padding: 10px 20px;
-	border-radius: 10px;
-	border-top: 5px solid #45D3D3;
-	box-shadow: 0 8px 17px -8px #A3A5AE;
-	background-color: #FFF;
-	width: 200px;
-	transition: box-shadow 0.3s ease-in-out;
-	font-size: 13px;
-	line-height: 18px;
-}
-
-.tc-card:hover {
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-.tc-card:hover .tc-card-title {
-	color: #1462ff;
-}
-
-.tc-card-title {
-	text-align: center;
-	font-size: 1.2em;
-	font-weight: 600;
-	transition: color 0.2s ease-in-out;
-	padding: 10px 0;
-}
-
-.tc-card-author {
-	text-align: right;
-}
-
-.tc-card p {
-	height: 67px;
-	overflow: hidden;
-	margin: 0;
-	padding: 13px 0;
-}
-
-.tc-card a {
-	color: #222;
-}
-
-.tc-card a:hover {
-	text-decoration:none;
-}
-
-.tc-card a:active, .tc-card a:focus, .tc-btn-download:active, .tc-btn-download:focus{
-        outline: none; 
-}
-
-div.content {
-	padding: 1px 16px;
-	display: flex;
-	flex-wrap: wrap;
-}
-
 .tc-btn-download {
-	width: 250px;
-	padding: 10px;
+	padding: 10px 30px;
 	border-radius: 5px;
-	background: #1462ff;
-	border-radius: 5px;
-        border: none;
-	box-shadow: 0 2px 2px 0 #4a74c9;
+	background: <<colour "download-background">>;
+	border: none;
+	box-shadow: 1px 2px 2px 0 <<colour muted-foreground>>;
 	overflow: hidden;
 	cursor: pointer;
-        font-size: 1.2em;
-        line-height: 1.4em;
-        color: #fff;
-        fill: #fff;
+	font-size: 1.2em;
+	line-height: 1.4em;
+	color: #fff;
+	fill: #fff;
 }
 
 .tc-btn-download:active {
-	background: #1475ff;
+	box-shadow: none;
+}
+
+/* WikiText rules */
+
+.multi-columns,
+.fourcolumns {
+	display: block;
+	column-count: 4;
+	column-gap: 1em;
+	-moz-column-count: 4;
+	-moz-column-gap: 1em;
+	-webkit-column-count: 4;
+	-webkit-column-gap: 1em;
+}
+
+/* Switch to 2 columns for 780x1280 displays which is 780p */
+@media (max-width: 1279px) {
+	.multi-columns {
+		column-count: 2;
+	}
+}
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+	.multi-columns {
+		column-count: 1;
+	}
+}
+
+.tc-grid-columns {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(25em, 1fr));
+	gap: 1em;
+	width: 100%; /* Ensures container stretches fully */
+}
+
+.tc-grid-columns.tc-grid-columns-2 > div {
+	border-radius: 1em;
+	padding: 1em;
+	background-color: <<colour alert-background>>;
+}
+
+.tc-grid-columns.tc-grid-columns-2 > div:nth-child(odd) {
+	color: <<colour diff-delete-foreground>>;
+	background-color: <<colour diff-delete-background>>;
+}
+
+
+.tc-saving-sidebar-category { margin-bottom:10px; }
+.tc-saving-sidebar-category-title { margin-bottom:5px; font-weight:bold; }
+.tc-saving-sidebar-category-item { margin-left:10px; white-space:nowrap; }
+
+.tc-scary-warning {
+	font-weight: bold;
+	padding: 0 1em;
+	margin-left: -1em;
+	margin-right: -1em;
+	color: #f22;
+	border-radius: 4px;
+	border: 3px solid transparent;
+	background: #ffd;
+	background: linear-gradient(#ffd, #ffd) padding-box, repeating-linear-gradient(-45deg, red 0, red 25%, transparent 0, transparent 50%) 0 / .6em .6em;
 }

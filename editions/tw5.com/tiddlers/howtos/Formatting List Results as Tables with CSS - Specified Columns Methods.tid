@@ -33,29 +33,17 @@ Note the various places you need to indicate the number of columns
 
 ```
 @@.fourcolumns
-<$list filter="[tag[Filter Operators]]" variable="foo"><br>
-<<foo>>
+<$list filter="[tag[Filter Operators]]" variable="foo">
+<<foo>><br>
 </$list>
 @@
 ```
 
 !! Example showing partial list of filter operators
 
-<style>
-.fourcolumns {
-   display:block;
-   column-count:4;
-   column-gap:1em;
-   -moz-column-count:4;
-   -moz-column-gap:1em;
-   -webkit-column-count: 4;
-   -webkit-column-gap:1em;
-}
-</style>
-
-
 @@.fourcolumns
-<$list filter="[tag[Filter Operators]limit[24]]" variable="foo"><br>
-<<foo>>
+<$list filter="[tag[Filter Operators]limit[24]]" variable="foo">
+<<foo>><br>
 </$list>
 @@
+

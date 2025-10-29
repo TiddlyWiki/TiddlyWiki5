@@ -4,5 +4,5 @@ tags: [[WebServer Authentication]]
 title: WebServer Anonymous Access
 type: text/vnd.tiddlywiki
 
-Anonymous access is only permitted if the special ''(anon)'' token is present in the [[readers|WebServer Parameter: readers]] (for reading) and optionally [[writers|WebServer Parameter: writers]] (for writing) authorization parameters.
+Anonymous access is only permitted if the special ''(anon)'' token is present in the [[readers|WebServer Parameter: readers]] (for reading) and optionally [[writers|WebServer Parameter: writers]] (for writing) authorisation parameters.
 

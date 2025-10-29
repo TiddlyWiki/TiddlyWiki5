@@ -6,10 +6,7 @@ module-type: widget
 Raw widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -32,7 +29,7 @@ RawWidget.prototype.render = function(parent,nextSibling) {
 	var div = this.document.createElement("div");
 	div.innerHTML=this.parseTreeNode.html;
 	parent.insertBefore(div,nextSibling);
-	this.domNodes.push(div);	
+	this.domNodes.push(div);
 };
 
 /*
@@ -49,5 +46,3 @@ RawWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.raw = RawWidget;
-
-})();

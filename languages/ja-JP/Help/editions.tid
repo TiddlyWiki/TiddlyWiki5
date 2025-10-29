@@ -1,4 +1,8 @@
 title: $:/language/Help/editions
-description: 使用可能なTiddlyWikiのエディションの一覧を表示
+description: 使用可能な TiddlyWiki のエディションの一覧を表示
 
-使用可能なTiddlyWikiのエディションの名称と説明の一覧を表示する。`--init`コマンドで特定のエディションの新しいwikiを作成できる。```--editions```
+利用可能なエディションの名称と説明を一覧で表示します。 指定したエディションの新しい Wiki を作るには、 `--init` コマンドを使用します。
+
+```
+--editions
+```

@@ -6,11 +6,10 @@ module-type: widget
 Scrollable widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
+
+var DEBOUNCE_INTERVAL = 100; // Delay after last scroll event before updating the bound tiddler
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
@@ -38,10 +37,14 @@ ScrollableWidget.prototype.handleScrollEvent = function(event) {
 	if(this.outerDomNode.scrollWidth <= this.outerDomNode.offsetWidth && this.outerDomNode.scrollHeight <= this.outerDomNode.offsetHeight && this.fallthrough === "yes") {
 		return true;
 	}
+	var options = {};
+	if($tw.utils.hop(event.paramObject,"animationDuration")) {
+		options.animationDuration = event.paramObject.animationDuration;
+	}
 	if(event.paramObject && event.paramObject.selector) {
-		this.scrollSelectorIntoView(null,event.paramObject.selector);
+		this.scrollSelectorIntoView(null,event.paramObject.selector,null,options);
 	} else {
-		this.scrollIntoView(event.target);			
+		this.scrollIntoView(event.target,null,options);
 	}
 	return false; // Handled event
 };
@@ -49,9 +52,9 @@ ScrollableWidget.prototype.handleScrollEvent = function(event) {
 /*
 Scroll an element into view
 */
-ScrollableWidget.prototype.scrollIntoView = function(element) {
-	var duration = $tw.utils.getAnimationDuration(),
-	srcWindow = element ? element.ownerDocument.defaultView : window;
+ScrollableWidget.prototype.scrollIntoView = function(element,callback,options) {
+	var duration = $tw.utils.hop(options,"animationDuration") ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
+		srcWindow = element ? element.ownerDocument.defaultView : window;
 	this.cancelScroll();
 	this.startTime = Date.now();
 	var scrollPosition = {
@@ -97,7 +100,7 @@ ScrollableWidget.prototype.scrollIntoView = function(element) {
 			if(duration <= 0) {
 				t = 1;
 			} else {
-				t = ((Date.now()) - self.startTime) / duration;	
+				t = ((Date.now()) - self.startTime) / duration;
 			}
 			if(t >= 1) {
 				self.cancelScroll();
@@ -114,11 +117,11 @@ ScrollableWidget.prototype.scrollIntoView = function(element) {
 	}
 };
 
-ScrollableWidget.prototype.scrollSelectorIntoView = function(baseElement,selector,callback) {
-	baseElement = baseElement || document.body;
-	var element = baseElement.querySelector(selector);
+ScrollableWidget.prototype.scrollSelectorIntoView = function(baseElement,selector,callback,options) {
+	baseElement = baseElement || document;
+	var element = $tw.utils.querySelectorSafe(selector,baseElement);
 	if(element) {
-		this.scrollIntoView(element,callback);		
+		this.scrollIntoView(element,callback,options);
 	}
 };
 
@@ -167,6 +170,53 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 	parent.insertBefore(this.outerDomNode,nextSibling);
 	this.renderChildren(this.innerDomNode,null);
 	this.domNodes.push(this.outerDomNode);
+	// If the scroll position is bound to a tiddler
+	if(this.scrollableBind) {
+		// After a delay for rendering, scroll to the bound position
+		this.updateScrollPositionFromBoundTiddler();
+		// Set up event listener
+		this.currentListener = this.listenerFunction.bind(this);
+		this.outerDomNode.addEventListener("scroll", this.currentListener);
+	}
+};
+
+ScrollableWidget.prototype.listenerFunction = function(event) {
+	var self = this;
+	clearTimeout(this.timeout);
+	this.timeout = setTimeout(function() {
+		var existingTiddler = self.wiki.getTiddler(self.scrollableBind),
+			newTiddlerFields = {
+				title: self.scrollableBind,
+				"scroll-left": self.outerDomNode.scrollLeft.toString(),
+				"scroll-top": self.outerDomNode.scrollTop.toString()
+			};
+		if(!existingTiddler || (existingTiddler.fields["title"] !== newTiddlerFields["title"]) || (existingTiddler.fields["scroll-left"] !== newTiddlerFields["scroll-left"] || existingTiddler.fields["scroll-top"] !== newTiddlerFields["scroll-top"])) {
+			self.wiki.addTiddler(new $tw.Tiddler(existingTiddler,newTiddlerFields));
+		}
+	}, DEBOUNCE_INTERVAL);
+}
+
+ScrollableWidget.prototype.updateScrollPositionFromBoundTiddler = function() {
+	// Bail if we're running on the fakedom
+	if(!this.outerDomNode.scrollTo) {
+		return;
+	}
+	var tiddler = this.wiki.getTiddler(this.scrollableBind);
+	if(tiddler) {
+		var scrollLeftTo = this.outerDomNode.scrollLeft;
+		if(parseFloat(tiddler.fields["scroll-left"]).toString() === tiddler.fields["scroll-left"]) {
+			scrollLeftTo = parseFloat(tiddler.fields["scroll-left"]);
+		}
+		var scrollTopTo = this.outerDomNode.scrollTop;
+		if(parseFloat(tiddler.fields["scroll-top"]).toString() === tiddler.fields["scroll-top"]) {
+			scrollTopTo = parseFloat(tiddler.fields["scroll-top"]);
+		}
+		this.outerDomNode.scrollTo({
+			top: scrollTopTo,
+			left: scrollLeftTo,
+			behavior: "instant"
+		})
+	}
 };
 
 /*
@@ -174,6 +224,7 @@ Compute the internal state of the widget
 */
 ScrollableWidget.prototype.execute = function() {
 	// Get attributes
+	this.scrollableBind = this.getAttribute("bind");
 	this.fallthrough = this.getAttribute("fallthrough","yes");
 	this["class"] = this.getAttribute("class");
 	// Make child widgets
@@ -189,9 +240,22 @@ ScrollableWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	}
-	return this.refreshChildren(changedTiddlers);
+	// If the bound tiddler has changed, update the eventListener and update scroll position
+	if(changedAttributes["bind"]) {
+		if(this.currentListener) {
+			this.outerDomNode.removeEventListener("scroll", this.currentListener, false);
+		}
+		this.scrollableBind = this.getAttribute("bind");
+		this.currentListener = this.listenerFunction.bind(this);
+		this.outerDomNode.addEventListener("scroll", this.currentListener);
+	}
+	// Refresh children
+	var result = this.refreshChildren(changedTiddlers);
+	// If the bound tiddler has changed, update scroll position
+	if(changedAttributes["bind"] || changedTiddlers[this.getAttribute("bind")]) {
+		this.updateScrollPositionFromBoundTiddler();
+	}
+	return result;
 };
 
 exports.scrollable = ScrollableWidget;
-
-})();

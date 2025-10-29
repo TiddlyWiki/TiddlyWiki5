@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for checking for the presence of a tag
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -50,9 +47,7 @@ exports.tag = function(source,operator,options) {
 				});
 				results = options.wiki.sortByList(results,operator.operand);
 			}
-		}		
+		}
 	}
 	return results;
 };
-
-})();

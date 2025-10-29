@@ -1,0 +1,18 @@
+created: 20180328151124878
+fr-title: Exemple de tiddlywiki.info pour IIS
+modified: 20220402105820520
+tags: Saving
+title: Example tiddlywiki.info for IIS
+type: text/plain
+
+{
+	"description": "Mon wiki",
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	]
+}

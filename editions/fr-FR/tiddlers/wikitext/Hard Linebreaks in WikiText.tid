@@ -1,0 +1,39 @@
+caption: Fins de lignes forcées
+created: 20141017123553069
+fr-title: Fins de lignes forcées en WikiTexte
+modified: 20220422010528643
+tags: WikiText
+title: Hard Linebreaks in WikiText
+type: text/vnd.tiddlywiki
+
+Le traitement habituel des [[paragraphes en WikiTexte|Paragraphs in WikiText]] implique que les retours à la ligne simples sont ignorés, tandis que deux retours à la ligne sont interprétés comme la fin d'un paragraphe.
+
+Ce comportement n'est pas pratique pour du texte qui intègre des retours à la ligne -- par exemple, pour de la poésie.
+
+! Syntaxe en bloc
+
+Un bloc de contenu délimité par trois caractères "guillemets doubles" `"""` permet d'indiquer que les fins de ligne doivent y être forcées :
+
+<<wikitext-example-without-html '"""
+Ceci est une ligne
+et ceci est une nouvelle ligne
+tandis que cela est encore une autre ligne
+et ceci est la dernière
+
+excepté celle-ci
+"""'>>
+
+; Remarque
+* Contrairement à d'autres syntaxes en bloc, celle-ci ne requière pas que ses marqueurs soient seuls sur une ligne : ils pourraient être placés n'importe où, même au milieu du texte.
+
+! Syntaxe HTML
+
+Les fins de lignes ne devraient pas être forcées dans un texte courant, car cela peut déformer l'affichage sur des terminaux mobiles.
+
+Cependant, dans des cas exceptionnels, la balise [[HTML|HTML in WikiText]] `<br>` peut être utilisée pour revenir à la ligne sans créer de nouveau paragraphe :
+
+<<wikitext-example-without-html "Ceci est une première ligne.<br>
+Ceci est une deuxième ligne.<br>Et cela est une troisième ligne.">>
+
+; Remarque
+* Plusieurs `<br>` d'affilée permettent de créer artificiellement un espacement de plusieurs lignes.

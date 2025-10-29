@@ -1,0 +1,11 @@
+created: 20210919201407838
+modified: 20210919201738739
+tags: [[moduleproperty Operator]] [[Operator Examples]]
+title: moduleproperty Operator (Examples)
+type: text/vnd.tiddlywiki
+
+Get the name of the macro in the module `$:/core/modules/macros/qualify.js`:
+<<.operator-example 1 "[[$:/core/modules/macros/qualify.js]moduleproperty[name]]">>
+
+For all macro modules retrieve their name module properties:
+<<.operator-example 2 "[[macro]modules[]moduleproperty[name]]">>

@@ -16,7 +16,7 @@ This is a version of the TaskManagementExample enhanced with the ability to drag
 
 //(Listed in reverse order of completion)//
 
-<$list filter="[!has[draft.of]tag[task]tag[done]sort[created]]">
+<$list filter="[!has[draft.of]tag[task]tag[done]sort[modified]]">
 <div>
 <$checkbox tag="done"> ~~<$link/>~~</$checkbox>
 </div>

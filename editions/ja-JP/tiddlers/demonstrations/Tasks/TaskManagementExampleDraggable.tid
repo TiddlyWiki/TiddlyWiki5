@@ -1,0 +1,25 @@
+created: 20180307153530187
+modified: 20241022104926750
+original-modified: 20180307153530187
+tags: Learning
+title: TaskManagementExample (Draggable)
+ja-title: タスク管理の例(ドラッグ可能)
+type: text/vnd.tiddlywiki
+
+これは[[タスク管理の例|TaskManagementExample]]のタスクリストをドラッグアンドドロップして並べ替える機能を付与した強化バージョンです
+
+! 未完了のタスク
+
+//タスクをドラッグして順序を変更できます//
+
+<<list-tagged-draggable tag:"task" subFilter:"!has[draft.of]!tag[done]" itemTemplate:"TaskManagementExampleDraggableTemplate" emptyMessage:"アクティブなタスクはありません">>
+
+! 完了したタスク
+
+//(完了した逆順にリストされています)//
+
+<$list filter="[!has[draft.of]tag[task]tag[done]sort[modified]]">
+<div>
+<$checkbox tag="done"> ~~<$link/>~~</$checkbox>
+</div>
+</$list>

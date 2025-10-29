@@ -23,11 +23,11 @@ Encryption/RepeatPassword: Repetir palavra passe
 Encryption/SetPassword: Definir palavra passe
 Encryption/Username: Nome de utilizador
 Error/Caption: Erro
-Error/EditConflict: File changed on server
 Error/Filter: Erro de filtro
 Error/FilterSyntax: Erro de sintaxe na expressão do filtro
 Error/IsFilterOperator: Erro de Filtro: Operando desconhecido para o operador de filtro 'is'
 Error/LoadingPluginLibrary: Erro ao carregar a biblioteca de extensões
+Error/PutEditConflict: File changed on server
 Error/RecursiveTransclusion: Erro de transclusão recursiva na widget de transclusão
 Error/RetrievingSkinny: Erro ao obter a lista simples de tiddlers
 Error/SavingToTWEdit: Erro ao gravar em TWEdit
@@ -35,7 +35,6 @@ Error/WhileSaving: Erro ao gravar
 Error/XMLHttpRequest: Código de erro XMLHttpRequest
 InternalJavaScriptError/Hint: Bem, isto é embaraçoso. Recomenda-se que reinicie a sua TiddlyWiki recarregando o seu navegador
 InternalJavaScriptError/Title: Erro interno JavaScript
-InvalidFieldName: Caracteres ilegais no nome do ficheiro "<$text text=<<fieldName>>/>". Os campos apenas podem conter letras minúsculas, dígitos e os caracteres  subtraço (`_`), hífen (`-`) e ponto final (`.`)
 LazyLoadingWarning: <p>A carregar texto externo de ''<$text text={{!!_canonical_uri}}/>''</p><p>Se esta mensagem não desaparecer pode estar a utilizar um navegador que não suporta texto remoto nesta configuração. Veja https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Entrar em TiddlySpace
 Manager/Controls/FilterByTag/None: (none)

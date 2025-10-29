@@ -1,10 +1,10 @@
 color: #7bb95d
-created: 201308251451
-modified: 201308251451
-title: Definitions
+created: 20130825145100000
+modified: 20250104111522881
 tags: Reference
+title: Definitions
 type: text/vnd.tiddlywiki
 
 These are definitions of technical words and phrases used in this documentation. (As distinct from the [[Concepts]] that make up TiddlyWiki itself).
 
-<<list-links "[tag[Definitions]]">>
+<<list-links "[tag[Definitions]]" class:"multi-columns">>

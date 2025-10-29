@@ -1,7 +1,7 @@
 title: $:/language/Help/rendertiddler
-description: 個々の tiddler を指定した ContentType で出力
+description: 個々の Tiddler を指定した ContentType で出力
 
-個々の tiddler を指定した ContentType で出力します。デフォルトは `text/html` で、指定されたファイル名で内容を保存します。
+個々の Tiddler を指定した ContentType で出力します。デフォルトは `text/html` で、指定されたファイル名で内容を保存します。
 
 ```
 --rendertiddler <title> <filename> [<type>]

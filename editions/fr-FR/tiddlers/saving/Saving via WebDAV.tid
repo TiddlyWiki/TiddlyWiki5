@@ -1,0 +1,88 @@
+caption: ~WebDAV
+color: #f48fb1
+created: 20160216191710789
+delivery: Protocol
+description: Protocole web standard disponible sur les produits comme Sharepoint
+fr-title: Enregistrer avec WebDav
+method: save
+modified: 20220402105820520
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
+title: Saving via WebDAV
+type: text/vnd.tiddlywiki
+
+Lorsqu'il est hébergé sur un serveur [[WebDAV|https://fr.wikipedia.org/wiki/WebDAV]], un fichier <<tw>> créé après 2016 enregistre automatiquement ses modifications en HTTP. Si vous avez créé votre wiki avant le 16 février 2016 vous devez le [[mettre à jour|Upgrading]] pour activer ~WebDAV.
+
+
+!! Serveurs légers et multi-plateformes
+
+Solutions légères, portables et faciles d'emploi<<:>>
+
+* [[rclone|https://rclone.org/commands/rclone_serve_webdav/]]
+**  Démarrer rclone est aussi facile que<<:>> <br/>`rclone serve webdav un_dossier_contenant_des_fichiers_tiddlywiki`
+* [[micromata dave - le serveur webdav simple|https://github.com/micromata/dave]]
+* [[dav-server|https://github.com/edrex/dav-server]] est un moyen rapide de présenter un dossier de fichiers <<tw>> HTML.
+* [[serveur webdav hacdias|https://github.com/hacdias/webdav/]]
+    ** Guide d'utilisation de ce serveur ~WebDAV, rédigé par Mohammad [[Scripts pour Tiddlywiki — codes, macros, et solutions pour TW|https://kookma.github.io/TW-Scripts/#Easy%20Local%20Saving%20with%20WebDav]]
+
+
+!! Windows
+
+*   IIS
+    **   Guide vidéo par [[pmario|https://talk.tiddlywiki.org/u/pmario]]: [[01 Intro - Utiliser TiddlyWiki avec IIS et WebDAV - YouTube|https://www.youtube.com/watch?v=tpkQhKyqPzc&list=PLuiC_HFhI4OwoVDb-B-VK0ydj-mBPNn-1]]
+    **  Vidéo pas-à-pas par ~MagoArcade pour utiliser un <<gf vrai>> serveur IIS  + SSL + ~WindowsAuth avec certificat auto-signé<<:>> [[Installer TiddlyWiki - Méthode Windows IIS WebDAV - YouTube|https://youtu.be/VMQ3Lfko8uQ]]
+
+*   ~SharePoint / ~OneDrive pour Windows
+** Enregistrez votre fichier ~TiddlyWiki avec une extension `.aspx`
+** Copiez-le vers une bibliothèque synchronisée ~SharePoint/~OneDrive for Business
+** Tant que ~WebDAV est actif, renommer un wiki mono-fichier de `.html` à `.aspx` fonctionne lorsqu'il est stocké dans l'un de ces dossiers
+** Ça //pourrait// aussi fonctionner avec un Mac.
+
+!! OSX
+*   ~WebDavNav Server sur l'App store du Mac.
+
+!! Android
+
+* RCX est un gestionnaire de fichiers open source pour Android basé sur //rclone//. Il est disponible aussi bien sur //F-Droid// que //Google Play//. Grâce à son serveur ~WebDAV intégré, il permet d'éditer les wikis que vous gardez dans la poche, et de les partager sur le réseau local.
+
+!! Serveurs
+
+De nombreux serveurs [[NAS|https://fr.wikipedia.org/wiki/Serveur_de_stockage_en_r%C3%A9seau]] ou [[Subversion|https://fr.wikipedia.org/wiki/Apache_Subversion]] disposent de ~WebDAV nativement. Le paramétrage de votre propre serveur imposera toutefois quelques efforts<<:>>
+
+
+
+!! Hébergement gratuit
+
+Plusieurs hébergeurs ~WebDAV testés (~~box.com~~, ~~swissdisk.com~~) ne permettent pas l'accès aux fichiers HTML dans un navigateur, ils ne peuvent donc pas être utilisés pour <<tw>>. Néanmoins, le serveur multimédia GMX (www.gmx.net) a été déclaré compatible ~WebDav avec un compte gratuit.
+
+
+!!! Koofr
+
+//''Koofr''// est un service cloud qui met en avant le respect de la vie privée. Pour utiliser leur service ~WebDav, créez un compte sur `koofr.eu`, puis ouvrez les `preferences` sur leur appli web, puis `password` dans le menu à gauche. Descendez jusqu'à la rubrique `App Passwords`. Choisissez un nom comme `tiddlywiki` et générez un mot de passe. Contrairement à leurs recommandations, gardez en sécurité une copie du mot de passe. Téléversez votre fichier dans un dossier sur leur site, si possible sans espace dans le chemin d'accès. Ensuite, dans le navigateur saisissez l'adresse du fichier, qui ressemblera à<<:>>
+
+```
+https://app.koofr.net/dav/Koofr/monfichier.html
+
+```
+A ce moment-là, une demande d'authentification apparaîtra. Utilisez votre adresse mail de connexion et le mot de passe que vous venez de générer.
+
+Vous devriez être en mesure de charger le wiki et d'enregistrer les modifications dedans. 
+
+!! Hébergement payant
+
+!!! pCloud
+
+//''pCloud''// est un service cloud qui dispose de serveurs en Europe et aux États-Unis. Lors de l'inscription, vous devez choisir l'emplacement qui vous convient. Ensuite, avec votre navigateur, connectez-vous au service. Utilisez l'interface pour téléversez le fichier auquel vous voulez accéder. Il sera accessible soit sur<<:>>
+
+```
+https://webdav.pcloud.com
+```
+
+si vous avez choisi des serveurs aux États-Unis, ou sur<<:>>
+
+```
+https://ewebdav.pcloud.com
+```
+
+pour des serveurs en Europe.
+
+Un page de navigation dans les fichiers devrait s'afficher. Sélectionnez votre wiki et ouvrez-le dans le navigateur. Vous devriez pouvoir le modifier et enregistrer les modifications.

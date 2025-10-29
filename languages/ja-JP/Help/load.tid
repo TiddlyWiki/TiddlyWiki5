@@ -1,7 +1,7 @@
 title: $:/language/Help/load
-description: ファイルからtiddlerを読み込み
+description: ファイルから Tiddler を読み込み
 
-tiddler を TiddlyWiki Ver.2 のファイル (`.html`), `.tiddler`, `.tid`, `.json` などから読み込みます。
+Tiddler を TiddlyWiki Ver.2 のファイル (`.html`), `.tiddler`, `.tid`, `.json` などから読み込みます。
 
 ```
 --load <filepath>

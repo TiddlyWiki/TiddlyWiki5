@@ -1,4 +1,6 @@
 title: $:/plugins/tiddlywiki/external-attachments/settings
+caption: External Attachments
+tags: $:/tags/ControlPanel/SettingsTab
 
 When used on platforms that provide the necessary support (such as ~TiddlyDesktop), you can optionally import binary files as external tiddlers that reference the original file via the ''_canonical_uri'' field.
 

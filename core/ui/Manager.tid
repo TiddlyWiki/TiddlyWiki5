@@ -5,16 +5,17 @@ color: #bbb
 \define lingo-base() $:/language/Manager/
 
 \define list-item-content-item()
+\whitespace trim
 <div class="tc-manager-list-item-content-item">
 	<$vars state-title="""$:/state/popup/manager/item/$(listItem)$""">
 		<$reveal state=<<state-title>> type="match" text="show" default="show" tag="div">
 			<$button set=<<state-title>> setTo="hide" class="tc-btn-invisible tc-manager-list-item-content-item-heading">
-				{{$:/core/images/down-arrow}} <$transclude tiddler=<<listItem>> field="caption"/>
+				{{$:/core/images/down-arrow}}&#32;<$transclude tiddler=<<listItem>> field="caption"/>
 			</$button>
 		</$reveal>
 		<$reveal state=<<state-title>> type="nomatch" text="show" default="show" tag="div">
 			<$button set=<<state-title>> setTo="show" class="tc-btn-invisible tc-manager-list-item-content-item-heading">
-				{{$:/core/images/right-arrow}} <$transclude tiddler=<<listItem>> field="caption"/>
+				{{$:/core/images/right-arrow}}&#32;<$transclude tiddler=<<listItem>> field="caption"/>
 			</$button>
 		</$reveal>
 		<$reveal state=<<state-title>> type="match" text="show" default="show" tag="div" class="tc-manager-list-item-content-item-body">
@@ -24,19 +25,20 @@ color: #bbb
 </div>
 \end
 
+\whitespace trim
 <div class="tc-manager-wrapper">
 	<div class="tc-manager-controls">
 		<div class="tc-manager-control">
-			<<lingo Controls/Show/Prompt>> <$select tiddler="$:/config/Manager/Show" default="tiddlers">
+			<<lingo Controls/Show/Prompt>>&#32;<$select tiddler="$:/config/Manager/Show" default="tiddlers">
 				<option value="tiddlers"><<lingo Controls/Show/Option/Tiddlers>></option>
 				<option value="tags"><<lingo Controls/Show/Option/Tags>></option>
 			</$select>
 		</div>
 		<div class="tc-manager-control">
-			<<lingo Controls/Search/Prompt>> <$edit-text tiddler="$:/config/Manager/Filter" tag="input" default="" placeholder={{$:/language/Manager/Controls/Search/Placeholder}}/>
+			<<lingo Controls/Search/Prompt>>&#32;<$edit-text tiddler="$:/config/Manager/Filter" tag="input" default="" placeholder={{$:/language/Manager/Controls/Search/Placeholder}}/>
 		</div>
 		<div class="tc-manager-control">
-			<<lingo Controls/FilterByTag/Prompt>> <$select tiddler="$:/config/Manager/Tag" default="">
+			<<lingo Controls/FilterByTag/Prompt>>&#32;<$select tiddler="$:/config/Manager/Tag" default="">
 				<option value=""><<lingo Controls/FilterByTag/None>></option>
 				<$list filter="[!is{$:/config/Manager/System}tags[]!is[system]sort[title]]" variable="tag">
 					<option value=<<tag>>><$text text=<<tag>>/></option>
@@ -44,7 +46,7 @@ color: #bbb
 			</$select>
 		</div>
 		<div class="tc-manager-control">
-			<<lingo Controls/Sort/Prompt>> <$select tiddler="$:/config/Manager/Sort" default="title">
+			<<lingo Controls/Sort/Prompt>>&#32;<$select tiddler="$:/config/Manager/Sort" default="title">
 				<optgroup label="Common">
 					<$list filter="title modified modifier created creator created" variable="field">
 						<option value=<<field>>><$text text=<<field>>/></option>
@@ -56,12 +58,15 @@ color: #bbb
 					</$list>
 				</optgroup>
 			</$select>
+			&#32;
 			<$checkbox tiddler="$:/config/Manager/Order" field="text" checked="reverse" unchecked="forward" default="forward">
+				&#32;
 				<<lingo Controls/Order/Prompt>>
 			</$checkbox>
 		</div>
 		<div class="tc-manager-control">
 			<$checkbox tiddler="$:/config/Manager/System" field="text" checked="" unchecked="system" default="system">
+				&#32;
 				{{$:/language/SystemTiddlers/Include/Prompt}}
 			</$checkbox>
 		</div>

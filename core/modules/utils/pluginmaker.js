@@ -6,10 +6,7 @@ module-type: utils
 A quick and dirty way to pack up plugins within the browser.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -24,10 +21,8 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 		throw "No such tiddler as " + title;
 	}
 	// Extract the JSON
-	var jsonPluginTiddler;
-	try {
-		jsonPluginTiddler = JSON.parse(pluginTiddler.fields.text);
-	} catch(e) {
+	var jsonPluginTiddler = $tw.utils.parseJSONSafe(pluginTiddler.fields.text,null);
+	if(!jsonPluginTiddler) {
 		throw "Cannot parse plugin tiddler " + title + "\n" + $tw.language.getString("Error/Caption") + ": " + e;
 	}
 	// Get the list of tiddlers
@@ -77,5 +72,3 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 	// Return a heartwarming confirmation
 	return "Plugin " + title + " successfully saved";
 };
-
-})();

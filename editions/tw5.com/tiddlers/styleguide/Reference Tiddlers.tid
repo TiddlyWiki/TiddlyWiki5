@@ -1,7 +1,7 @@
 created: 20141226192500000
-modified: 20150117152552000
-title: Reference Tiddlers
+modified: 20230318160831470
 tags: [[Improving TiddlyWiki Documentation]]
+title: Reference Tiddlers
 
 <<.def "Reference tiddlers">> offer raw information in a comprehensive interlinked way. The reader is likely to be an intermediate or expert user.
 
@@ -13,6 +13,7 @@ There are several subcategories:
 ;User manual
 * Presenting technical details of ~WikiText features
 * Subcategorised: messages, operators, widgets, etc
+** Widget documentation should follow the [[Widget Documentation Style Guide]]
 
 ;Developer manual
 * Presenting technical details of ~TiddlyWiki's internal architecture

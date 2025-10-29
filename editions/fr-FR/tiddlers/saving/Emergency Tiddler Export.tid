@@ -1,0 +1,28 @@
+caption: Export d'urgence
+color: #7986CB
+created: 20180309211328412
+delivery: Saver
+description: Une technique embarassante mais utile d'enregistrement d'urgence des tiddlers
+fr-title: Export d'urgence des tiddlers
+method: save
+modified: 20220402105820520
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows Edge
+title: Emergency Tiddler Export
+type: text/vnd.tiddlywiki
+
+Cette méthode est utile si, pour une raison ou une autre, vous n'arrivez pas à enregistrer votre <<tw>> (si un plugin ou un serveur ne marchent plus). Elle devrait fonctionner sur n'importe quelle plateforme.
+
+* Ouvrez la Recherche avancée {{$:/core/ui/Buttons/advanced-search}}
+** Choisissez l'onglet <<gf Filtrer>>
+** Saisissez le code de filtre suivant<<:>>
+
+```
+[!is[system]!sort[modified]limit[25]]
+```
+* Vérifiez la liste des tiddlers
+* Ajustez le nombre <<gf 25>> dans le filtre pour que tous les tiddlers que vous avez modifiés depuis le dernier enregistrement soient visibles dans la liste
+* Cliquez sur le bouton [<button class="tc-btn-invisible" disabled><<.icon $:/core/images/export-button>></button>] qui s'affiche à droite de la zone de saisie, et choisissez le format de fichier JSON
+* Une fenêtre du navigateur va vous demander de choisir un emplacement pour enregistrer un fichier nommé `tiddler.json` ou, selon votre configuration, juste vous notifier que le fichier va être téléchargé. Cliquez sur //Enregistrer//.
+* Le fichier `tiddlers.json` peut être importé (onglet Outils de la barre latérale) ou glissé-déposé sur la ligne supérieure du déroulé des tiddlers ''d'un autre <<tw>>''.
+** Vous pouvez (dé)sélectionner des tiddlers particuliers.
+** Finalement, cliquez sur `Importer`.

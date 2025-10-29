@@ -1,0 +1,31 @@
+caption: action-setmultiplefields
+created: 20211023160110220
+modified: 20211023160110220
+tags: Widgets ActionWidgets
+title: ActionSetMultipleFieldsWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ''action-setmultiplefields'' widget is an [[action widget|ActionWidgets]] that assigns multiple fields to a tiddler where the names and values of the fields are specified as separate filters. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+! Content and Attributes
+
+The ''action-setmultiplefields'' widget is invisible. Any content within it is ignored.
+
+|!Attribute |!Description |
+|$tiddler |Optional title of the tiddler to modify (defaults to the current tiddler) |
+|$fields |Optional filter evaluating to the names of a list of fields to assign. Either `$fields` or `$indexes` must be specified  |
+|$indexes |Optional filter evaluating to the names of a list of indexes to assign. Either `$fields` or `$indexes` must be specified |
+|$values |Filter evaluating to the values to be assigned to the fields or indexes |
+|$timestamp |Specifies whether the timestamp(s) of the target tiddler will be updated (''modified'' and ''modifier'', plus ''created'' and ''creator'' for newly created tiddlers). Can be "yes" (the default) or "no" |
+
+! Examples
+
+Here is an example of button that uses the data in [[Days of the Week]] to assign fields `day-Monday`, `day-Tuesday` etc. to the tiddler "HelloThere":
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-setmultiplefields $tiddler="HelloThere" $fields="[list[Days of the Week]addprefix[day-]]" $values="[list[Days of the Week]]"/>
+Click me!
+</$button>'/>

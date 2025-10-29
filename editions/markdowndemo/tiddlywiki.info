@@ -1,7 +1,9 @@
 {
 	"description": "Demo of the Markdown plugin",
 	"plugins": [
-		"tiddlywiki/markdown"
+		"tiddlywiki/markdown",
+		"tiddlywiki/highlight",
+		"tiddlywiki/katex"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -11,6 +13,9 @@
 	],
 	"build": {
 		"index": [
-			"--rendertiddler","$:/core/save/all","markdowndemo.html","text/plain"]
+			"--rendertiddler","$:/core/save/all","markdowndemo.html","text/plain"],
+		"external": [
+			"--render","$:/core/save/all-external-js","markdowndemo.html","text/plain"
+		]
 	}
 }

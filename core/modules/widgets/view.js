@@ -6,10 +6,7 @@ module-type: widget
 View widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -65,6 +62,9 @@ ViewWidget.prototype.execute = function() {
 		case "htmlencoded":
 			this.text = this.getValueAsHtmlEncoded();
 			break;
+		case "htmltextencoded":
+			this.text = this.getValueAsHtmlTextEncoded();
+			break;
 		case "urlencoded":
 			this.text = this.getValueAsUrlEncoded();
 			break;
@@ -105,7 +105,7 @@ ViewWidget.prototype.getValue = function(options) {
 	} else {
 		var tiddler;
 		if(this.viewSubtiddler) {
-			tiddler = this.wiki.getSubTiddler(this.viewTitle,this.viewSubtiddler);	
+			tiddler = this.wiki.getSubTiddler(this.viewTitle,this.viewSubtiddler);
 		} else {
 			tiddler = this.wiki.getTiddler(this.viewTitle);
 		}
@@ -118,7 +118,7 @@ ViewWidget.prototype.getValue = function(options) {
 					if(options.asString) {
 						value = tiddler.getFieldString(this.viewField);
 					} else {
-						value = tiddler.fields[this.viewField];				
+						value = tiddler.fields[this.viewField];
 					}
 				}
 			}
@@ -160,12 +160,16 @@ ViewWidget.prototype.getValueAsHtmlEncoded = function() {
 	return $tw.utils.htmlEncode(this.getValueAsText());
 };
 
+ViewWidget.prototype.getValueAsHtmlTextEncoded = function() {
+	return $tw.utils.htmlTextEncode(this.getValueAsText());
+};
+
 ViewWidget.prototype.getValueAsUrlEncoded = function() {
-	return encodeURIComponent(this.getValueAsText());
+	return $tw.utils.encodeURIComponentExtended(this.getValueAsText());
 };
 
 ViewWidget.prototype.getValueAsDoubleUrlEncoded = function() {
-	return encodeURIComponent(encodeURIComponent(this.getValueAsText()));
+	return $tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(this.getValueAsText()));
 };
 
 ViewWidget.prototype.getValueAsDate = function(format) {
@@ -212,10 +216,8 @@ ViewWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 
 exports.view = ViewWidget;
-
-})();

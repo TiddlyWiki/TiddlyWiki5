@@ -6,10 +6,7 @@ module-type: saver
 Saves wiki by pushing a commit to the GitLab REST API
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: true */
 "use strict";
 
 /*
@@ -58,7 +55,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 			}
 			var requestType = "POST";
 			if(xhr.status !== 404) {
-				getResponseData = JSON.parse(getResponseDataJson);
+				getResponseData = $tw.utils.parseJSONSafe(getResponseDataJson);
 				$tw.utils.each(getResponseData,function(details) {
 					if(details.name === filename) {
 						requestType = "PUT";
@@ -67,7 +64,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 				});
 			}
 			var data = {
-				commit_message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
+				commit_message: $tw.language.getString("ControlPanel/Saving/GitService/CommitMessage"),
 				content: text,
 				branch: branch,
 				sha: sha
@@ -82,7 +79,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 					if(err) {
 						return callback(err);
 					}
-					var putResponseData = JSON.parse(putResponseDataJson);
+					var putResponseData = $tw.utils.parseJSONSafe(putResponseDataJson);
 					callback(null);
 				}
 			});
@@ -113,5 +110,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new GitLabSaver(wiki);
 };
-
-})();

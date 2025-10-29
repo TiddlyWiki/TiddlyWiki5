@@ -1,0 +1,39 @@
+created: 20220122153235162
+modified: 20240713165558596
+tags: [[WikiText parser mode transitions]]
+title: WikiText parser mode: HTML examples
+type: text/vnd.tiddlywiki
+
+<<testcase TestCases/HTML/OpenTagBlankLine>>
+
+---
+
+The open tag blank line "trick" also works inside of punctuation only recognised in inline mode (such as [[Formatting in WikiText]]):
+
+<<testcase TestCases/HTML/OpenTagBlankLineInBoldSyntax>>
+
+---
+
+<<testcase TestCases/HTML/OpenTagNoBlankLine>>
+
+---
+
+[[Tables in WikiText]] is one construct for which the open tag blank line "trick" cannot work. In order for the parser to recognise a table row, the entire row must be on a single line.
+
+Adding a blank link after an open tag within a table cell causes the row to span mulitple lines and the parser ceases to be able to recognise it as a table row.
+
+<<wikitext-example-without-html "|table row|all on|one line|is recognised|">>
+
+<<testcase TestCases/HTML/OpenTagBlankLineInTableSyntax>>
+
+---
+
+The only way to get [[block mode|Block Mode WikiText]] punctuation recognised in [[wikitext tables|Tables in WikiText]] is to use <<.wlink TranscludeWidget>> with <<.attr mode>> = <<.value block>>.
+
+<<wikitext-example-without-html '|Nested table:|<$transclude tiddler="table-example" mode=block/>|'>>
+
+Note that <<.wlink MacroCallWidget>> does not have a similar <<.attr mode>> attribute and the content of macro definitions can only be parsed in [[inline mode|Inline Mode WikiText]]
+
+---
+
+<<testcase TestCases/HTML/BlockModeInHTMLTable>>

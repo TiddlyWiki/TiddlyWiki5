@@ -2,13 +2,13 @@ title: $:/language/TiddlerInfo/
 
 Advanced/Caption: Avanzado
 Advanced/PluginInfo/Empty/Hint: No se han instalado
-Advanced/PluginInfo/Heading: Detalles del plugin
+Advanced/PluginInfo/Heading: Detalles del complemento
 Advanced/PluginInfo/Hint: Este plugin contiene los siguientes tiddlers ocultos
 Advanced/ShadowInfo/Heading: Oculto
 Advanced/ShadowInfo/NotShadow/Hint: El tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> no es de tipo oculto
-Advanced/ShadowInfo/OverriddenShadow/Hint: Anulado por un tiddler estándar
 Advanced/ShadowInfo/Shadow/Hint: El tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> es de tipo oculto
 Advanced/ShadowInfo/Shadow/Source: Definido en el plugin <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Advanced/ShadowInfo/OverriddenShadow/Hint: Anulado por un tiddler estándar
 Fields/Caption: Campos
 List/Caption: Lista
 List/Empty: Este tiddler no contiene listas

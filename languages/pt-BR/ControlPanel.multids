@@ -6,7 +6,7 @@ Appearance/Caption: Aparência
 Appearance/Hint: Formas de personalizar a aparência da sua TiddlyWiki.
 Basics/AnimDuration/Prompt: Duração da animação:
 Basics/Caption: Básicos
-Basics/DefaultTiddlers/BottomHint: Utilize &#91;&#91;colchetes &#93;&#93; para títulos com espaços. Ou então <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Clique aqui para inserir a ordem cronológica</$button>
+Basics/DefaultTiddlers/BottomHint: Utilize &#91;&#91;colchetes &#93;&#93; para títulos com espaços. Ou então {{Clique aqui para inserir a ordem cronológica||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Tiddlers Padrão:
 Basics/DefaultTiddlers/TopHint: Escolha quais tiddlers serão exibidos ao iniciar:
 Basics/Language/Prompt: Seleção do Idioma:
@@ -107,7 +107,7 @@ Settings/AutoSave/Enabled/Description: Fazer gravação automática
 Settings/AutoSave/Hint: Salvar alterações automaticamente durante a edição
 Settings/CamelCase/Caption: Link Wiki em Camel Case
 Settings/CamelCase/Description: Ativar link em frases ~CamelCase automaticamente
-Settings/CamelCase/Hint: Pode desativar a criação automática de link em frases em ~CamelCase. Requer reiniciar o texto para que tome efeito
+Settings/CamelCase/Hint: Requer reiniciar o texto para que tome efeito
 Settings/Caption: Definições
 Settings/DefaultSidebarTab/Caption: Separador da barra lateral pré-definido
 Settings/DefaultSidebarTab/Hint: Definir que separador da barra lateral é exibido por padrão

@@ -6,10 +6,7 @@ module-type: widget
 Action widget to create a new tiddler with a unique name and specified fields.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw:false, require:false, exports:false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -27,8 +24,11 @@ CreateTiddlerWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 CreateTiddlerWidget.prototype.render = function(parent,nextSibling) {
+	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
+	// Render children
+	this.renderChildren(parent,nextSibling);
 };
 
 /*
@@ -44,7 +44,8 @@ CreateTiddlerWidget.prototype.execute = function() {
 	this.actionTemplate = this.getAttribute("$template");
 	this.useTemplate = !!this.actionTemplate;
 	this.actionOverwrite = this.getAttribute("$overwrite","no");
-
+	// Construct the child widgets
+	this.makeChildWidgets();
 };
 
 /*
@@ -86,21 +87,22 @@ CreateTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	if (!this.hasBase && this.useTemplate) {
 		title = this.wiki.generateNewTitle(this.actionTemplate);
 	} else if (!this.hasBase && !this.useTemplate) {
-		// If NO $basetitle AND NO $template use initial title
-		// DON'T overwrite any stuff
+		// If no $basetitle and no $template then use initial title
 		title = this.wiki.generateNewTitle(title);
 	}
 	var templateTiddler = this.wiki.getTiddler(this.actionTemplate) || {};
-	var tiddler = this.wiki.addTiddler(new $tw.Tiddler(templateTiddler.fields,creationFields,fields,modificationFields,{title: title}));
+	this.wiki.addTiddler(new $tw.Tiddler(templateTiddler.fields,creationFields,fields,modificationFields,{title: title}));
+	var draftTitle = this.wiki.generateDraftTitle(title);
 	if(this.actionSaveTitle) {
 		this.wiki.setTextReference(this.actionSaveTitle,title,this.getVariable("currentTiddler"));
 	}
 	if(this.actionSaveDraftTitle) {
-		this.wiki.setTextReference(this.actionSaveDraftTitle,this.wiki.generateDraftTitle(title),this.getVariable("currentTiddler"));
+		this.wiki.setTextReference(this.actionSaveDraftTitle,draftTitle,this.getVariable("currentTiddler"));
 	}
+	this.setVariable("createTiddler-title",title);
+	this.setVariable("createTiddler-draftTitle",draftTitle);
+	this.refreshChildren();
 	return true; // Action was invoked
 };
 
 exports["action-createtiddler"] = CreateTiddlerWidget;
-
-})();

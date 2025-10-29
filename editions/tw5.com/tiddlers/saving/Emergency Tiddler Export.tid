@@ -2,7 +2,7 @@ caption: Emergency Export
 color: #7986CB
 created: 20180309211328412
 delivery: Saver
-description: Awkward but useful emergency technique for saving tiddlers
+description: Retrieve and save tiddlers when saving is broken
 method: save
 modified: 20200507202809334
 tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows Edge

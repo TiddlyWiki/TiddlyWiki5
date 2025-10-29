@@ -1,0 +1,19 @@
+created: 20140126125259638
+modified: 20220402105820520
+tags: Definitions Platforms
+title: TiddlyDesktop
+type: text/vnd.tiddlywiki
+
+TiddlyDesktop est une application pour travailler avec les fichiers <<tw>> (TiddlyWikiClassic et <<tw>> version 5). Il peut être installé sur Windows, Mac OS X or Linux. Il est compatible avec  TiddlyWiki version 5 ou l'ancien TiddlyWikiClassic.
+
+{{Saving on TiddlyDesktop}}
+
+{{Introducing TiddlyDesktop Video}}
+
+! Source
+
+TiddlyDesktop est basé sur le projet OpenSource [[NW.js]]. Les sources sont sur GitHub<<:>>
+
+https://github.com/TiddlyWiki/TiddlyDesktop/
+
+Voir les [[Versions de TiddlyDesktop|TiddlyDesktop Releases]] et <<fr "How to Customize TiddlyDesktop">>

@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for returning the names of the fields on the selected tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -20,7 +17,7 @@ exports.fields = function(source,operator,options) {
 		fieldName,
 		suffixes = (operator.suffixes || [])[0] || [],
 		operand = $tw.utils.parseStringArray(operator.operand);
-	
+
 	source(function(tiddler,title) {
 		if(tiddler) {
 			if(suffixes.indexOf("include") !== -1) {
@@ -41,5 +38,3 @@ exports.fields = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

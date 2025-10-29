@@ -1,0 +1,30 @@
+title: $:/plugins/tiddlywiki/katex/ImplementationNotes
+
+! CSS Handling
+
+The ''original CSS from KaTeX'' includes a number of font definitions in this format:
+
+```
+@font-face {
+    font-family: 'KaTeX_AMS';
+    src: url('fonts/KaTeX_AMS-Regular.eot');
+    src: url('fonts/KaTeX_AMS-Regular.eot?#iefix') format('embedded-opentype'),
+         url('fonts/KaTeX_AMS-Regular.woff') format('woff'),
+         url('fonts/KaTeX_AMS-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+```
+
+These definitions are currently ''removed manually'' from [[$:/plugins/tiddlywiki/katex/katex.min.css]] so that they can be redefined as data URIs using TiddlyWiki's macro notation in $:/plugins/tiddlywiki/katex/styles
+
+```
+@font-face {
+    font-family: 'KaTeX_AMS';
+    src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_AMS-Regular.woff'>>) format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+```
+
+Note that the plugin currently only embeds the WOFF format fonts, which seems to be sufficient for most browsers.

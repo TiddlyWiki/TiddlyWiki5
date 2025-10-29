@@ -1,0 +1,165 @@
+: Background Tones
+
+base03: #362b00
+base02: #423607
+
+: Content Tones
+
+base01: #756e58
+base00: #837b65
+base0: #969483
+base1: #a1a193
+
+: Background Tones
+
+base2: #d5e8ee
+base3: #e3f6fd
+
+: Accent Colors
+
+yellow: #b58900
+orange: #cb4b16
+red: #dc322f
+magenta: #d33682
+violet: #6c71c4
+blue: #268bd2
+cyan: #2aa198
+green: #859900
+
+: Additional Tones (RA)
+
+base10: #bbc0c4
+violet-muted: #7c81b0
+blue-muted: #4e7baa
+
+yellow-hot: #ffcc44
+orange-hot: #eb6d20
+red-hot: #ff2222
+blue-hot: #2298ee
+green-hot: #98ee22
+
+: Palette
+
+: Do not use colour macro for background and foreground
+background: #e3f6fd
+    download-foreground: <<colour background>>
+    dragger-foreground: <<colour background>>
+    dropdown-background: <<colour background>>
+    modal-background: <<colour background>>
+    sidebar-foreground-shadow: <<colour background>>
+    tiddler-background: <<colour background>>
+    tiddler-border: <<colour background>>
+    tiddler-link-background: <<colour background>>
+    tab-background-selected: <<colour background>>
+        dropdown-tab-background-selected: <<colour tab-background-selected>>
+foreground: #837b65
+    dragger-background: <<colour foreground>>
+    tab-foreground: <<colour foreground>>
+        tab-foreground-selected: <<colour tab-foreground>>
+            sidebar-tab-foreground-selected: <<colour tab-foreground-selected>>
+        sidebar-tab-foreground: <<colour tab-foreground>>
+    sidebar-button-foreground: <<colour foreground>>
+    sidebar-controls-foreground: <<colour foreground>>
+    sidebar-foreground: <<colour foreground>>
+: base03
+: base02
+: base01
+    alert-muted-foreground: <<colour base01>>
+: base00
+    code-foreground: <<colour base00>>
+    message-foreground: <<colour base00>>
+    tag-foreground: <<colour base00>>
+: base0
+    sidebar-tiddler-link-foreground: <<colour base0>>
+: base1
+    muted-foreground: <<colour base1>>
+        blockquote-bar: <<colour muted-foreground>>
+        dropdown-border: <<colour muted-foreground>>
+        sidebar-muted-foreground: <<colour muted-foreground>>
+        tiddler-title-foreground: <<colour muted-foreground>>
+            site-title-foreground: <<colour tiddler-title-foreground>>
+: base2
+    modal-footer-background: <<colour base2>>
+    page-background: <<colour base2>>
+        modal-backdrop: <<colour page-background>>
+        notification-background: <<colour page-background>>
+        code-background: <<colour page-background>>
+            code-border: <<colour code-background>>
+        pre-background: <<colour page-background>>
+            pre-border: <<colour pre-background>>
+        sidebar-tab-background-selected: <<colour page-background>>
+    table-header-background: <<colour base2>>
+    tag-background: <<colour base2>>
+    tiddler-editor-background: <<colour base2>>
+    tiddler-info-background: <<colour base2>>
+    tiddler-info-tab-background: <<colour base2>>
+    tab-background: <<colour base2>>
+        dropdown-tab-background: <<colour tab-background>>
+: base3
+    alert-background: <<colour base3>>
+    message-background: <<colour base3>>
+: yellow
+: orange
+: red
+: magenta
+    alert-highlight: <<colour magenta>>
+: violet
+    external-link-foreground: <<colour violet>>
+: blue
+: cyan
+: green
+: base10
+    tiddler-controls-foreground: <<colour base10>>
+: violet-muted
+    external-link-foreground-visited: <<colour violet-muted>>
+: blue-muted
+    primary: <<colour blue-muted>>
+        download-background: <<colour primary>>
+        tiddler-link-foreground: <<colour primary>>
+
+alert-border: #b99e2f
+dirty-indicator: #ff0000
+dropzone-background: rgba(0,200,0,0.7)
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+message-border: #cfd6e6
+modal-border: #999999
+select-tag-background:
+select-tag-foreground:
+sidebar-controls-foreground-hover:
+sidebar-muted-foreground-hover:
+sidebar-tab-background: #c5d8de
+sidebar-tiddler-link-foreground-hover:
+static-alert-foreground: #aaaaaa
+tab-border: #cccccc
+    modal-footer-border: <<colour tab-border>>
+    modal-header-border: <<colour tab-border>>
+    notification-border: <<colour tab-border>>
+    sidebar-tab-border: <<colour tab-border>>
+    tab-border-selected: <<colour tab-border>>
+        sidebar-tab-border-selected: <<colour tab-border-selected>>
+tab-divider: #d8d8d8
+    sidebar-tab-divider: <<colour tab-divider>>
+table-border: #dddddd
+table-footer-background: #a8a8a8
+tiddler-controls-foreground-hover: #888888
+tiddler-controls-foreground-selected: #444444
+tiddler-editor-border-image: #ffffff
+tiddler-editor-border: #cccccc
+tiddler-editor-fields-even: #e0e8e0
+tiddler-editor-fields-odd: #f0f4f0
+tiddler-info-border: #dddddd
+tiddler-subtitle-foreground: #c0c0c0
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
+untagged-background: #999999
+very-muted-foreground: #888888

@@ -1,0 +1,8 @@
+title: $:/core/ui/TiddlerIcon
+
+\whitespace trim
+<$let tiddlerIcon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}>
+<$list filter="[<tiddlerIcon>!is[blank]]" variable="ignore">
+<$transclude tiddler=<<tiddlerIcon>>/>
+</$list>
+</$let>

@@ -1,12 +1,12 @@
 caption: Macros
 created: 20131205160746466
-fr-title: Macros dans WikiText
-modified: 20150621152601026
+fr-title: Macros en WikiTexte
+modified: 20220219191257167
 tags: WikiText
 title: Macros in WikiText
 type: text/vnd.tiddlywiki
 
-L'utilisation des [[macros|Macros]] dans [[WikiTexte|WikiText]] a deux aspects distincts<<:>>
+L'utilisation des [[macros|Macros]] en [[WikiTexte|WikiText]] recouvre deux aspects distincts<<:>>
 
-* [[Définition des macros|Macro Definitions in WikiText]]
-* [[Appel des macros|Macro Calls in WikiText]]
+* [[La définition des macros|Macro Definitions in WikiText]]
+* [[L'appel des macros|Macro Calls in WikiText]]

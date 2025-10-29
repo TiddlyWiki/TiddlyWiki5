@@ -1,0 +1,34 @@
+title: Transclude/Parameterised/Name/Values
+description: Parameterised transclusion accessing parameters as name/value pairs
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler="TiddlerOne" 0="" 1="" 2=""/>
+
+{{TiddlerOne}}
+{{TiddlerOne|Ferret}}
+{{TiddlerOne|Butterfly|Moth}}
+{{TiddlerOne|Beetle|Scorpion|Snake}}
+{{TiddlerOne||TiddlerTwo|Beetle|Scorpion|Snake}}
++
+title: TiddlerOne
+
+\whitespace trim
+<$parameters zero='Jaguar' $$one='Lizard' two='Mole' $params="@params">
+<$list filter="[<@params>jsonindexes[]]">
+{<$text text=<<currentTiddler>>/>: <$text text={{{ [<@params>jsonget<currentTiddler>] }}}/>}
+</$list>
+</$parameters>
++
+title: TiddlerTwo
+
+\whitespace trim
+\parameters(zero:'Mouse',$one:'Horse',two:'Owl')
+(<$transclude $tiddler=<<currentTiddler>> zero=<<zero>> $$one=<<$one>> two=<<two>>/>)
++
+title: ExpectedResult
+
+<p>{0:}{1:}{2:}</p><p></p><p>{0:Ferret}</p><p>{0:Butterfly}{1:Moth}</p><p>{0:Beetle}{1:Scorpion}{2:Snake}</p><p>({$one:Scorpion}{two:Snake}{zero:Beetle})</p>

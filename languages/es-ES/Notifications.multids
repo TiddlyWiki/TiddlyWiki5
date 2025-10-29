@@ -1,4 +1,6 @@
 title: $:/language/Notifications/
 
 Save/Done: Guardado
-Save/Starting: Comenzando a guardar
+Save/Starting: Comenzando a guardar wiki
+CopiedToClipboard/Succeeded: ¡Copiado al portapapeles!
+CopiedToClipboard/Failed: ¡No se pudo copiar al portapapeles!

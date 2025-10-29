@@ -5,13 +5,23 @@ title: $:/plugins/tiddlywiki/katex/usage
 # Mathematical typesetting: [ext[https://katex.org/docs/supported.html]]
 # Chemical typesetting: [ext[https://mhchem.github.io/MathJax-mhchem/]]
 
-<hr>
+!! Syntax
 
-The usual way to include ~LaTeX is to use `$$`. For example:
+The usual way to include ~LaTeX is to use `$$` (when copying code examples from the references above, you will need to change from `$` to `$$`). For example:
 
 ```
 $$\displaystyle f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
 ```
+
+$$\displaystyle f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+
+chemical:
+
+```
+$$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
+```
+
+$$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
 
 Single line equations will render in inline mode. If there are newlines between the `$$` delimiters, the equations will be rendered in display mode.
 
@@ -21,4 +31,10 @@ The underlying widget can also be used directly, giving more flexibility:
 <$latex text="f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi" displayMode="true"></$latex>
 ```
 
+<$latex text="f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi" displayMode="true"></$latex>
+
 The KaTeX widget is provided under the name `<$latex>` and is also available under the alias `<$katex>`. It's better to use the generic `<$latex>` name unless you are running multiple ~LaTeX plugins and wish to specifically target KaTeX.
+
+!! Macro
+
+Tiddlers with tag `$:/tags/KaTeX/Macro` will be recognized as global KaTeX macros. You can create new macro using the form in the [[config|$:/plugins/tiddlywiki/katex/config]].

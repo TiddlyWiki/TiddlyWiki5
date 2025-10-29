@@ -1,0 +1,24 @@
+title: $:/language/Help/rendertiddler
+description: Renderuje pojedynczego tiddlera do wybranego typu
+
+(Uwaga: zalecamy użycie komendy `--render`, która jest dużo bardziej elastyczna i dalej wspierana)
+
+Renderuje pojedynczego tiddlera do wybranego typu treści (domyślnie to `text/html`) i zapisuje go do pliku.
+
+Opcjonalnie można też podać nazwę szablonowego tiddlera. W tym przypadku zamiast bezpośrednio renderować każdego tiddlera, nazwa każdego pliku zostanie po kolei przekazana do szablonu w zmiennej "currentTiddler" i wyrenderowana.
+
+Nazwy i wartości dodatkowych zmiennych mogą być też podane.
+
+```
+--rendertiddler <title> <filename> [<type>] [<template>] [<name>] [<value>]
+```
+
+Domyślnie pliki są zapisywane w folderze `./output`, relatywnym do folderu z wiki. Komenda `--output` może być użyta by zmienić ścieżkę.
+
+Wszelkie brakujące foldery zostaną automatycznie utworzone.
+
+Na przykład, poniższa komenda zapisze wszystkie tiddlery pasujące do filtra `[tag[done]]` do pliku JSON o nazwie `output.json`, używając templatki  `$:/core/templates/exporters/JsonFile`.
+
+```
+--rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[tag[done]]"
+```

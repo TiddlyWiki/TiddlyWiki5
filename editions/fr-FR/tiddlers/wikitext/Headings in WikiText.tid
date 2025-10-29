@@ -1,0 +1,22 @@
+caption: Titres de rubriques
+created: 20141017093039992
+fr-title: Titres de rubriques en WikiTexte
+modified: 20220422010744063
+tags: WikiText
+title: Headings in WikiText
+type: text/vnd.tiddlywiki
+
+Un titre de rubrique est codé par un à 6 caractères <<gf "point d'exclamation">> `!` au début d'une ligne<<:>>
+
+<<wikitext-example-without-html "! Titre de niveau 1
+!! Titre de niveau 2
+!!! Titre de niveau 3
+!!!! Titre de niveau 4
+!!!!! Titre de niveau 5
+!!!!!! Titre de niveau 6">>
+
+Des [[styles et des classes CSS|Styles and Classes in WikiText]] peuvent être assignés individuellement aux titres :
+
+<<wikitext-example-without-html "!! Titre
+!!@@background-color:#00ffff; Titre stylisé@@
+!!.monStyle Titre stylisé avec une classe">>
