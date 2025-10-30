@@ -1,5 +1,18 @@
 title: BlockMark/Marks
+tags: [[$:/tags/wiki-test-spec]]
 
 First normal paragraph.
 
 A block level mark in WikiText. ^BlockLevelLinksID1
+
+!! Title Level 2 ^🤗→AddingIDforTitle
+
+```css
+.main {
+  display: none;
+}
+```
+
+^IDAfterBlock
+
+A final paragraph without ID.
