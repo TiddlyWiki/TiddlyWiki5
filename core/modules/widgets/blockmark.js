@@ -57,7 +57,7 @@ Widget.prototype.findBlockMarkTargetDomNode = function() {
 		return null;
 	}
 	// the actual block is always at the parent level
-	targetElement = this.idNode.parentNode;
+	var targetElement = this.idNode.parentNode;
 	// need to check if the block is before this node
 	if(this.previousSibling) {
 		targetElement = targetElement.previousSibling;
