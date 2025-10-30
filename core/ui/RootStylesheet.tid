@@ -1,0 +1,15 @@
+title: $:/core/ui/RootStylesheet
+code-body: yes
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+\whitespace trim
+<$let currentTiddler={{$:/language}} languageTitle={{!!name}}>
+	<style type="text/css">
+		<$view tiddler="$:/themes/tiddlywiki/vanilla/reset" format="text" mode="block"/>
+	</style>
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!is[draft]] -[[$:/themes/tiddlywiki/vanilla/reset]]">
+		<style type="text/css">
+			<$view format={{{ [<currentTiddler>tag[$:/tags/Stylesheet/Static]then[text]else[plainwikified]] }}} mode="block"/>
+		</style>
+	</$list>
+</$let>
