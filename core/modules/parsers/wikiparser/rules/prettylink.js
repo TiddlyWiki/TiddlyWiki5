@@ -39,7 +39,7 @@ exports.parse = function() {
 	var linkStart = this.match[2] ? (start + this.match[1].length + 1) : start;
 	var linkEnd = linkStart + link.length;
 	if($tw.utils.isLinkExternal(link)) {
-		// add back the part after `^` to the ext link, if it happen to has one. Here is is not an block mark, but a part of the external URL.
+		// add back the part after `^` to the ext link, if it happens to have one. Here it is not a block mark, but a part of the external URL.
 		if(blockMark) {
 			link = link + "^" + blockMark;
 		}
