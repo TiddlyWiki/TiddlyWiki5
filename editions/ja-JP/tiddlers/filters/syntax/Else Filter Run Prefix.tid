@@ -1,0 +1,22 @@
+created: 20230318142408662
+from-version: 5.1.23
+modified: 20250312102737003
+original-modified: 20230322140756821
+rp-input: 前のフィルタランからのすべてのタイトル
+rp-output: これまでのフィルタアウトプットが空のリストの場合、ランのアウトプットタイトルがフィルタアウトプットに[[追加|Dominant Append]]されます<br>これまでのフィルタアウトプットが空のリストでない場合、ランは無視されます
+rp-purpose: フィルタランは、これまでのすべてのランのフィルタアウトプットが空のリストである場合にのみ評価されます
+tags: [[Named Filter Run Prefix]]
+title: Else Filter Run Prefix
+ja-title: elseフィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( ":else" | - )
+[[run|"Filter Run"]]
+"""/>
+
+このプレフィックスには[[ショートカットフィルタランプレフィックス|Shortcut Filter Run Prefix]] シンボル`~run`があります
+
+参照: [[thenフィルタランプレフィックス|Then Filter Run Prefix]] | [[thenオペレータ|then Operator]] と [[elseオペレータ|else Operator]]

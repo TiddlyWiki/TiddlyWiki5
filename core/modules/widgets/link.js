@@ -45,6 +45,10 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 			sourcePrefix: "data-",
 			destPrefix: "data-"
 		});
+		this.assignAttributes(domNode,{
+			sourcePrefix: "aria-",
+			destPrefix: "aria-"
+		});
 		parent.insertBefore(domNode,nextSibling);
 		this.renderChildren(domNode,null);
 		this.domNodes.push(domNode);
@@ -126,9 +130,13 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			});
 		domNode.setAttribute("title",tooltipText);
 	}
-	if(this["aria-label"]) {
-		domNode.setAttribute("aria-label",this["aria-label"]);
+	if(this.role) {
+		domNode.setAttribute("role",this.role);
 	}
+	this.assignAttributes(domNode,{
+		sourcePrefix: "aria-",
+		destPrefix: "aria-"
+	})
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"},
@@ -140,6 +148,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			dragTiddlerFn: function() {return self.to;},
 			widget: this
 		});
+	} else if(this.draggable === "no") {
+		domNode.setAttribute("draggable","false");
 	}
 	// Assign data- attributes
 	this.assignAttributes(domNode,{
@@ -191,7 +201,7 @@ LinkWidget.prototype.execute = function() {
 	this.to = this.getAttribute("to",this.getVariable("currentTiddler"));
 	this.toBlockMark = this.getAttribute("toBlockMark");
 	this.tooltip = this.getAttribute("tooltip");
-	this["aria-label"] = this.getAttribute("aria-label");
+	this.role = this.getAttribute("role");
 	this.linkClasses = this.getAttribute("class");
 	this.overrideClasses = this.getAttribute("overrideClass");
 	this.tabIndex = this.getAttribute("tabindex");

@@ -1,0 +1,125 @@
+title: $:/tw5.com/releases/procedures
+tags: $:/tags/Global
+
+\procedure github-changes-link()
+<a
+	class="tc-tiddlylink-external"
+	href=`https://github.com/TiddlyWiki/TiddlyWiki5/compare/v${ [all[tiddlers]tag[ReleaseNotes]has[released]!sort[released]] :filter[get[released]compare:number:lt<releaseTiddlerCreated>] +[get[caption]] }$...${ [<releaseTiddler>has[released]get[caption]addprefix[v]] :else[[master]] }$`
+	rel="noopener noreferrer"
+	target="_blank"
+>the detailed change history on ~GitHub</a>
+\end github-changes-link
+
+\procedure banner-credits()
+<%if [<banner-credit-user-name>!match[]] %>
+
+<img src=<<banner-credit-permalink>> width="140" style="float:left;margin-right:0.5em;"/>
+
+Congratulations to
+<a
+	class="tc-tiddlylink-external"
+	href=<<banner-credit-user-link>>
+	rel="noopener noreferrer"
+	target="_blank"
+><$text text=<<banner-credit-user-name>>/></a>
+for their winning design for the banner for this release (here is the
+<a
+	class="tc-tiddlylink-external"
+	href=<<banner-credit-discussion-link>>
+	rel="noopener noreferrer"
+	target="_blank"
+>discussion</a>).
+<%else%>
+<$image source="New Release Banner" width="140">
+<%endif%>
+<div style="clear:both;"/>
+\end banner-credits
+
+\procedure change-list()
+\whitespace trim
+<$list filter="[enlist{$:/tw5.com/releases/info/category-order}]" variable="category">
+	<%if [tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>] %>
+		<h2>
+			<$text text={{{ [[$:/tw5.com/releases/info/categories/]addsuffix<category>addsuffix[/caption]get[text]] }}} />
+		</h2>
+		<ul>
+			<$list filter="[tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>]" variable="change">
+				<li>
+					<$link
+						to="Release Notes and Changes"
+						class="doc-link-badge"
+						target="_blank"
+						rel="noopener noreferrer"
+						style.backgroundColor={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/colour]get[text]] }}}
+					>
+						<$text text={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/caption]get[text]] }}}/>
+					</$link>
+					<$text text=" "/>
+					<$list filter="[<change>get[links]enlist-input[]]" variable="link">
+						<a
+							href=<<link>>
+							class="doc-github-link"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{{$:/core/images/github}}
+						</a>
+						<$text text=" "/>
+					</$list>
+					<$transclude $tiddler=<<change>> $field="description" $mode="inline"/>
+					<div class="doc-changenote-body">
+						<$transclude $tiddler=<<change>> $mode="block"/>
+					</div>
+				</li>
+			</$list>
+		</ul>
+	<%endif%>
+</$list>
+\end change-list
+
+\procedure acknowledgements()
+<ol class="doc-github-contributors">
+	<$list filter="[enlist<release-github-contributors>sort[]]" variable="username">
+		<li>
+			<a href={{{ [[https://github.com/]addsuffix<username>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">
+				<img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=64]] }}} width="64" height="64"/>
+				<span class="doc-github-contributor-username">
+					@<$text text=<<username>>/>
+				</span>
+			</a>
+		</li>
+	</$list>
+</ol>
+\end acknowledgements
+
+\procedure releasenote(release)
+<$let
+	releaseTiddler={{{ [all[tiddlers]tag[ReleaseNotes]] :filter[{!!caption}match<release>] }}}
+	releaseTiddlerCreated={{{ [<releaseTiddler>get[created]] }}}
+	release-github-contributors={{{ [tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :map:flat[enlist{!!github-contributors}] +[sort[]format:titlelist[]join[ ]]}}}
+>
+
+See <<github-changes-link>> and [[other versions|TiddlyWiki Releases]].
+
+<<banner-credits>>
+
+! Introduction
+
+<$transclude $variable="release-introduction" $mode="block"/>
+
+! Changes
+
+This release includes the following changes.
+
+<<change-list>>
+
+<!-- Acknowledgement list -->
+
+! Acknowledgements
+
+A warm thank you to the developers who have contributed to this release:
+
+<<acknowledgements>>
+
+</$let>
+\end releasenote
