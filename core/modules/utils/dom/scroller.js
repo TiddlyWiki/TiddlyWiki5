@@ -128,7 +128,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 			if(t < 1) {
 				self.idRequestFrame = self.requestAnimationFrame.call(srcWindow,drawFrame);
 			} else {
-				// the animation is end.
+				// the animation has ended.
 				if(highlight) {
 					element.focus({ focusVisible: true });
 					$tw.utils.addClass(element,"tc-focus-highlight");
