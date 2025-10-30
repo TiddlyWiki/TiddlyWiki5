@@ -55,7 +55,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 			return widget.blockMarkId === historyInfo.blockMark;
 		});
 		if(blockMarkWidget) {
-			targetElement = blockMarkWidget.findBlockMarkTargetDomNode()
+			targetElement = blockMarkWidget.findBlockMarkTargetDomNode();
 			foundBlockMark = true;
 		}
 	}
