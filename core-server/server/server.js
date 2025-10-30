@@ -74,6 +74,11 @@ function Server(options) {
 		// console.log("Loading server route " + title);
 		self.addRoute(routeDefinition);
 	});
+	this.routes.sort((a, b) => {
+		const priorityA = a.info?.priority ?? 100,
+			priorityB = b.info?.priority ?? 100;
+		return priorityB - priorityA;
+	});
 	// Initialise the http vs https
 	this.listenOptions = null;
 	this.protocol = "http";
@@ -217,7 +222,7 @@ Server.prototype.findMatchingRoute = function(request,state) {
 		} else {
 			match = potentialRoute.path.exec(pathname);
 		}
-		if(match && request.method === potentialRoute.method) {
+		if(match && (potentialRoute.methods?.includes(request.method) || potentialRoute.method === request.method)) {
 			state.params = [];
 			for(var p=1; p<match.length; p++) {
 				state.params.push(match[p]);

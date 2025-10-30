@@ -1049,7 +1049,7 @@ exports.makeCompareFunction = function(type,options) {
 				return compare(dateA,dateB);
 			},
 			"version": function(a,b) {
-				return $tw.utils.compareVersions(a,b);
+				return compare($tw.utils.compareVersions(a,b),0);
 			},
 			"alphanumeric": function(a,b) {
 				if(!isCaseSensitive) {

@@ -641,7 +641,7 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	// Call the function and return the exports
 	return fn.apply(null,contextValues);
 };
-$tw.utils.sandbox = !$tw.browser ? vm.createContext({}) : undefined; 
+$tw.utils.sandbox = !$tw.browser ? vm.createContext({}) : undefined;
 /*
 Run code in a sandbox with only the specified context variables in scope
 */
@@ -1913,7 +1913,7 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 		fileSize = fs.statSync(filepath).size,
 		data;
 	if(fileSize > $tw.config.maxEditFileSize) {
-		data = "File " + filepath + "not loaded because it is too large";
+		data = "File " + filepath + " not loaded because it is too large";
 		console.log("Warning: " + data);
 		ext = ".txt";
 	} else {
@@ -1984,22 +1984,41 @@ filepath: pathname of the directory containing the specification file
 $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 	var tiddlers = [];
 	// Read the specification
-	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
+	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"), function(e) {
+		console.log("Warning: tiddlywiki.files in " + filepath + " invalid: " + e.message);
+		return {};
+	});
+
 	// Helper to process a file
 	var processFile = function(filename,isTiddlerFile,fields,isEditableFile,rootPath) {
 		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
 			type = (extInfo || {}).type || fields.type || "text/plain",
 			typeInfo = $tw.config.contentTypeInfo[type] || {},
 			pathname = path.resolve(filepath,filename),
-			text = fs.readFileSync(pathname,typeInfo.encoding || "utf8"),
 			metadata = $tw.loadMetadataForFile(pathname) || {},
-			fileTiddlers;
+			fileTooLarge = false,
+			text, fileTiddlers;
+
+		if("_canonical_uri" in fields) {
+			text = "";
+		} else if(fs.statSync(pathname).size > $tw.config.maxEditFileSize) {
+			var msg = "File " + pathname + " not loaded because it is too large";
+			console.log("Warning: " + msg);
+			fileTooLarge = true;
+			text = isTiddlerFile ? msg : "";
+		} else {
+			text = fs.readFileSync(pathname,typeInfo.encoding || "utf8");
+		}
+
 		if(isTiddlerFile) {
-			fileTiddlers = $tw.wiki.deserializeTiddlers(path.extname(pathname),text,metadata) || [];
+			fileTiddlers = $tw.wiki.deserializeTiddlers(fileTooLarge ? ".txt" : path.extname(pathname),text,metadata) || [];
 		} else {
 			fileTiddlers =  [$tw.utils.extend({text: text},metadata)];
 		}
 		var combinedFields = $tw.utils.extend({},fields,metadata);
+		if(fileTooLarge && isTiddlerFile) {
+			delete combinedFields.type;    // type altered
+		}
 		$tw.utils.each(fileTiddlers,function(tiddler) {
 			$tw.utils.each(combinedFields,function(fieldInfo,name) {
 				if(typeof fieldInfo === "string" || $tw.utils.isArray(fieldInfo)) {
@@ -2074,6 +2093,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 		} else if(tidInfo.suffix) {
 			tidInfo.fields.text = {suffix: tidInfo.suffix};
 		}
+		tidInfo.fields = tidInfo.fields || {};
 		processFile(tidInfo.file,tidInfo.isTiddlerFile,tidInfo.fields);
 	});
 	// Process any listed directories
@@ -2095,6 +2115,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 					var thisPath = path.relative(filepath, files[t]),
 					filename = path.basename(thisPath);
 					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
+						dirSpec.fields = dirSpec.fields || {};
 						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile,dirSpec.path);
 					}
 				}
@@ -2557,10 +2578,10 @@ $tw.boot.execStartup = function(options){
 	if($tw.safeMode) {
 		$tw.wiki.processSafeMode();
 	}
-	// Register typed modules from the tiddlers we've just loaded
-	$tw.wiki.defineTiddlerModules();
-	// And any modules within plugins
+	// Register typed modules from the tiddlers we've just loaded and any modules within plugins
+	// Tiddlers should appear last so that they may overwrite shadows during module registration
 	$tw.wiki.defineShadowModules();
+	$tw.wiki.defineTiddlerModules();
 	// Make sure the crypto state tiddler is up to date
 	if($tw.crypto) {
 		$tw.crypto.updateCryptoStateTiddler();
@@ -2629,11 +2650,13 @@ $tw.boot.executeNextStartupTask = function(callback) {
 			$tw.boot.log(s.join(" "));
 			// Execute task
 			if(!$tw.utils.hop(task,"synchronous") || task.synchronous) {
-				task.startup();
-				if(task.name) {
-					$tw.boot.executedStartupModules[task.name] = true;
+				const thenable = task.startup();
+				if(thenable && typeof thenable.then === "function"){
+					thenable.then(asyncTaskCallback);
+					return true;
+				} else {
+					return asyncTaskCallback();
 				}
-				return $tw.boot.executeNextStartupTask(callback);
 			} else {
 				task.startup(asyncTaskCallback);
 				return true;
