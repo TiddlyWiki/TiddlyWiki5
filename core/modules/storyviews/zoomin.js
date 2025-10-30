@@ -16,7 +16,7 @@ var ZoominListView = function(listWidget) {
 	this.listWidget = listWidget;
 	this.textNodeLogger = new $tw.utils.Logger("zoomin story river view", {
 		enable: true,
-		colour: 'red'
+		colour: "red"
 	});
 	// Get the index of the tiddler that is at the top of the history
 	var history = this.listWidget.wiki.getTiddlerDataCached(this.listWidget.historyTitle,[]),
@@ -60,7 +60,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement) {
 		return;
-	} else if (targetElement.nodeType === Node.TEXT_NODE) {
+	} else if(targetElement.nodeType === Node.TEXT_NODE) {
 		this.logTextNodeRoot(targetElement);
 		return;
 	}
@@ -148,7 +148,7 @@ ZoominListView.prototype.insert = function(widget) {
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement) {
 		return;
-	} else if (targetElement.nodeType === Node.TEXT_NODE) {
+	} else if(targetElement.nodeType === Node.TEXT_NODE) {
 		this.logTextNodeRoot(targetElement);
 		return;
 	}
@@ -192,7 +192,7 @@ ZoominListView.prototype.remove = function(widget) {
 	var toWidgetDomNode = toWidget && toWidget.findFirstDomNode();
 	// Set up the tiddler we're moving back in
 	if(toWidgetDomNode) {
-		if (toWidgetDomNode.nodeType === Node.TEXT_NODE) {
+		if(toWidgetDomNode.nodeType === Node.TEXT_NODE) {
 			this.logTextNodeRoot(toWidgetDomNode);
 			toWidgetDomNode = null;
 		} else {
