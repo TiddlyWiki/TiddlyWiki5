@@ -33,26 +33,62 @@ test("Search tiddler with link and navigate to block mark", async ({ page }) => 
     await page.fill('input[type="search"]', "BlockMark/Links");
     // click on link in search results inside the dropdown
     await page.click('div.tc-search-drop-down a:has-text("BlockMark/Links")');
-    // wait for link to appear and check its href
-    const searchResultLink = page.locator('a:has-text("Block Level Links in WikiText")');
-    await expect(searchResultLink, "Search result link presented").toBeVisible({timeout});
-    await expect(searchResultLink, "Search result link have correct href").toHaveAttribute("href", "#BlockMark%2FMarks-BlockLevelLinksID1");
-    // click on this link
-    await page.click('a:has-text("Block Level Links in WikiText")');
 
-    // The tiddler should be opened and operational, allow clicking link to navigate to block mark
-    // wait for tiddler to appear and the block focused, and check its properties
+    // Test 1: Link to paragraph with BlockLevelLinksID1
+    const firstLink = page.locator('a[href="#BlockMark%2FMarks-BlockLevelLinksID1"]');
+    await expect(firstLink, "First block mark link presented").toBeVisible({timeout});
+    await expect(firstLink, "First link have correct text").toHaveText("Block Level Links in WikiText");
+    await firstLink.click();
+
+    // Verify paragraph is highlighted
     const blockMarkedText = page.locator('p:has-text("A block level mark in WikiText.")');
     await expect(blockMarkedText, "Block marked text presented").toBeVisible({timeout});
-    await expect(blockMarkedText, "A highlight animation").toHaveClass("tc-focus-highlight");
+    await expect(blockMarkedText, "Paragraph has highlight animation").toHaveClass("tc-focus-highlight");
+
     // Check the mark span properties
-    const markSpan = page.locator('span[data-block-mark-id="BlockLevelLinksID1"]')
-    await expect(markSpan, "Mark span presented but not visible").not.toBeVisible({timeout}),
+    const markSpan1 = page.locator('span[data-block-mark-id="BlockLevelLinksID1"]');
+    await expect(markSpan1, "Mark span presented but not visible").not.toBeVisible({timeout});
     await Promise.all([
-        expect(markSpan).toHaveAttribute("data-block-mark-title", "BlockMark/Marks"),
-        expect(markSpan).toHaveClass("tc-block-mark"),
-        expect(markSpan).toHaveText(""),
-        expect(markSpan).toHaveClass("tc-block-mark"),
-        markSpan.evaluate(e => e.id).then(id => expect(id).toBe("BlockMark/Marks-BlockLevelLinksID1"))
-    ])
+        expect(markSpan1).toHaveAttribute("data-block-mark-title", "BlockMark/Marks"),
+        expect(markSpan1).toHaveClass("tc-block-mark"),
+        expect(markSpan1).toHaveText(""),
+        markSpan1.evaluate(e => e.id).then(id => expect(id).toBe("BlockMark/Marks-BlockLevelLinksID1"))
+    ]);
+
+    // Test 2: Navigate back and test link to title with emoji ID
+    await page.fill('input[type="search"]', "BlockMark/Links");
+    await page.click('div.tc-search-drop-down a:has-text("BlockMark/Links")');
+
+    const secondLink = page.locator('a[href="#BlockMark%2FMarks-%F0%9F%A4%97%E2%86%92AddingIDforTitle"]');
+    await expect(secondLink, "Second block mark link presented").toBeVisible({timeout});
+    await expect(secondLink, "Second link have correct text").toHaveText("Title Level 2");
+    await secondLink.click();
+
+    // Verify title is highlighted
+    const titleMarked = page.locator('h2:has-text("Title Level 2")');
+    await expect(titleMarked, "Title marked text presented").toBeVisible({timeout});
+    await expect(titleMarked, "Title has highlight animation").toHaveClass(/tc-focus-highlight/);
+
+    // Check the title mark span
+    const markSpan2 = page.locator('span[data-block-mark-id="🤗→AddingIDforTitle"]');
+    await expect(markSpan2, "Title mark span not visible").not.toBeVisible({timeout});
+    await expect(markSpan2).toHaveAttribute("data-block-mark-title", "BlockMark/Marks");
+
+    // Test 3: Navigate back and test link to code block mark
+    await page.fill('input[type="search"]', "BlockMark/Links");
+    await page.click('div.tc-search-drop-down a:has-text("BlockMark/Links")');
+
+    const thirdLink = page.locator('a[href="#BlockMark%2FMarks-IDAfterBlock"]');
+    await expect(thirdLink, "Third block mark link presented").toBeVisible({timeout});
+    await expect(thirdLink, "Third link have correct text").toHaveText("Code Block Mark");
+    await thirdLink.click();
+
+    // Verify the mark after code block is highlighted
+    const codeBlockMark = page.locator('span[data-block-mark-id="IDAfterBlock"]');
+    await expect(codeBlockMark, "Code block mark span presented").not.toBeVisible({timeout});
+    await expect(codeBlockMark).toHaveAttribute("data-block-mark-title", "BlockMark/Marks");
+
+    // The parent element should have the highlight
+    const highlightedElement = page.locator(".tc-focus-highlight").filter({ has: codeBlockMark });
+    await expect(highlightedElement, "Element with code block mark is highlighted").toBeVisible({timeout});
 });
