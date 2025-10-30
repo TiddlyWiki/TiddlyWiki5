@@ -5,7 +5,7 @@ module-type: wikirule
 
 Use hash as a tag for paragraph, we call it block mark.
 
-1. Hash won't change, it can be written by hand or be generated, and it is a ` \^\S+$` string after line: `text ^cb9d485` or `text ^1`, so it can be human readable (while without space), here are the parse rule for this.
+1. Hash won't change, it can be written by hand or be generated, and it is a ` \^\S+$` string after line: `text ^cb9d485` or `text ^1`, so it can be human readable (while without space), here is the parse rule for this.
 2. When creating widgets for rendering, omit this hash, so it's invisible in view mode. But this widget will create an mark to jump to.
 
 \*/
