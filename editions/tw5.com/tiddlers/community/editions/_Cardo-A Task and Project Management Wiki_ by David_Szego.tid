@@ -1,9 +1,10 @@
 created: 20141122093837330
+lost-url: http://cardo.wiki
 modified: 20210106151026996
 tags: [[Community Editions]]
 title: "Cardo - Task and Project Management Wiki" by David Szego
 type: text/vnd.tiddlywiki
-url: http://cardo.wiki
+url: https://web.archive.org/web/20181114094516/http://cardo.wiki/#Joe%20Cardo:%5B%5BJoe%20Cardo%5D%5D
 
 Task & Delegation Tracking, Meetings & Agenda Items, Project Roles, Progress & Status Updates, Reference Items, Tickler Calendar, Conversation Logging, Book Notes & Library, and More!
 
@@ -12,3 +13,9 @@ Task & Delegation Tracking, Meetings & Agenda Items, Project Roles, Progress & S
 <<<
 Cardo is a standalone, browser-based tool that can be used as a simple task manager, or as a complex Project Management system (and indeed, I do use it this way in my daily work) as well as a fully Wiki-ized personal knowledge store. It runs completely independently in the browser, even without an Internet connection, making it possible to carry around on a USB stick, or to use on the morning commute.
 <<<
+
+
+* https://cardo-revisited.tiddlyhost.com (re-activated TW v5.3.8)
+* https://cardo-dyumnin.tiddlyhost.com (TW v5.1.19)
+
+

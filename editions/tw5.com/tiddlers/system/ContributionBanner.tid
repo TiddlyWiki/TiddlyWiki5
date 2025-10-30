@@ -12,7 +12,7 @@ https://github.com/TiddlyWiki/TiddlyWiki5/edit/tiddlywiki-com/editions/tw5.com/t
 <$list filter="[[$:/config/OriginalTiddlerPaths]getindex<draft-of>]" variable="target" >
 <div class="tc-improvement-banner">
 {{$:/core/images/star-filled}} Can you help us improve this documentation? [[Find out how|Improving TiddlyWiki Documentation]] to
-<a href={{{ [<draft-of>encodeuricomponent[]addprefix[https://saqimtiaz.github.io/tw5-docs-pr-maker/#]] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">edit this tiddler in Docs PR Maker</a>
+<a href={{{ [<draft-of>encodeuricomponent[]addprefix[https://edit.tiddlywiki.com/#]] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">edit this tiddler in Docs PR Maker</a>
 or
 <a href={{{ [<target>addprefix<base-github>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">edit it directly on ~GitHub</a>
 </div>
