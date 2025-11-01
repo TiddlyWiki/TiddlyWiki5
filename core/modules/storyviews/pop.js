@@ -20,12 +20,23 @@ PopStoryView.prototype.navigateTo = function(historyInfo) {
 	}
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
+	// If block mark is provided, find the block element that this mark is pointing to
+	var foundBlockMark = false;
+	if(listItemWidget && historyInfo.blockMark) {
+		var blockMarkWidget = $tw.utils.findChildNodeInTree(listItemWidget, function(widget) {
+			return widget.blockMarkId === historyInfo.blockMark;
+		});
+		if(blockMarkWidget) {
+			targetElement = blockMarkWidget.findBlockMarkTargetDomNode();
+			foundBlockMark = true;
+		}
+	}
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	// Scroll the node into view
-	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
+	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement, highlight: foundBlockMark});
 };
 
 PopStoryView.prototype.insert = function(widget) {
