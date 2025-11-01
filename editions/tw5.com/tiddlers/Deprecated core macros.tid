@@ -1,0 +1,31 @@
+created: 20251101085817414
+modified: 20251101091035398
+tags: [[Core Macros]] Macros $:/deprecated
+title: Deprecated core macros
+type: text/vnd.tiddlywiki
+
+<<.warning "It is discouraged to use the following macros. Though tiddlywiki might still support them, they may be in the process of being dropped, or may only be kept for compatibility purposes. Avoid using it, and update existing code if possible. Be aware that these macros may cease to work at any time. ">>
+
+Most deprecated macros are defined in [[$:/core/macros/deprecated]]. It is discouraged to use them.
+
+! Stylesheet Macros
+
+<<.deprecated-since 5.4.0>> The following core [[macros|Macros]] used to made it easy to specify alternative browser-specific properties when constructing a [[stylesheet|Cascading Style Sheets]] tiddler. They are deprecated after 2017 baseline is supported in v5.4.0:
+
+; `<<box-shadow shadow>>`
+: for the `x-box-shadow` properties
+
+; `<<filter filter>>`
+: for the `x-filter` properties
+
+; `<<transition transition>>`
+: for the `x-transition` properties
+
+; `<<transform-origin origin>>`
+: for the `x-transition-origin` properties
+
+; `<<background-linear-gradient gradient>>`
+: for the `x-linear-gradient` values of the `background-image` property
+
+; `<<column-count columns>>`
+: for the `x-column-count` property
