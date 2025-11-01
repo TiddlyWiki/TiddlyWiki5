@@ -4,9 +4,7 @@ tags: Macros [[Core Macros]]
 title: Stylesheet Macros
 type: text/vnd.tiddlywiki
 
-The following core CSS property [[macros|Macros]] make it easy to specify alternative browser-specific properties when constructing a [[stylesheet|Cascading Style Sheets]] tiddler:
-
-<<.deprecated-since "5.4.0">> These CSS property macros are now deprecated, they were used to support browsers released before 2017:
+The following core [[macros|Macros]] make it easy to specify alternative browser-specific properties when constructing a [[stylesheet|Cascading Style Sheets]] tiddler:
 
 ;`<<box-shadow shadow>>`
 : for the `x-box-shadow` properties
@@ -20,8 +18,6 @@ The following core CSS property [[macros|Macros]] make it easy to specify altern
 : for the `x-linear-gradient` values of the `background-image` property
 ;`<<column-count columns>>`
 : for the `x-column-count` property
-
----
 
 The following macros are documented separately:
 
