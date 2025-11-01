@@ -4,7 +4,7 @@ tags: $:/deprecated [[Core Classes]]
 title: Deprecated Core Classes
 type: text/vnd.tiddlywiki
 
-<<.warning "It is not recommended to use these classes for styling. Though tiddlywiki might still support it, it may be in the process of being dropped, or may only be kept for compatibility purposes. Avoid using it, and update existing code if possible. Be aware that this feature may cease to work at any time.">>
+<<.warning "It is not recommended to use these classes for styling. Though tiddlywiki might still support them, they may be in the process of being dropped, or may only be kept for compatibility purposes. Avoid using them, and update existing code if possible. Be aware that this feature may cease to work at any time.">>
 
 These [[Core Classes]] are considered deprecated. It is not recommend to use them for styling.
 
