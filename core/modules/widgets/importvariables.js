@@ -108,7 +108,7 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
     // We store the list of processed tiddlers for refresh checking
     this.allProcessedTiddlers = Array.from(processedTiddlers);
 
-	if (widgetPointer != this) {
+	if(widgetPointer != this) {
 		widgetPointer.parseTreeNode.children = this.parseTreeNode.children;
 	} else {
 		widgetPointer.makeChildWidgets();
