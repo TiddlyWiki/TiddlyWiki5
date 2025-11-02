@@ -1,3 +1,20 @@
 title: $:/tw5.com/releases/styles
 tags: $:/tags/Stylesheet
 type: text/vnd.tiddlywiki
+
+.doc-release-note {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: fit-content(20ch) 1fr fit-content(40ch);
+	gap: 1.5rem;
+	margin: 2rem 0;
+}
+
+/* Headings span all three columns */
+.doc-release-note-heading {
+	grid-column: 1 / -1;
+}
+
+.doc-change-note-item {
+	display: contents;
+}

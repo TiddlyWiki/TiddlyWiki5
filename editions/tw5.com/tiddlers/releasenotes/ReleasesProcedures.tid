@@ -37,44 +37,67 @@ for their winning design for the banner for this release (here is the
 
 \procedure change-list()
 \whitespace trim
-<$list filter="[enlist{$:/tw5.com/releases/info/category-order}]" variable="category">
-	<%if [tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>] %>
-		<h2>
-			<$text text={{{ [[$:/tw5.com/releases/info/categories/]addsuffix<category>addsuffix[/caption]get[text]] }}} />
-		</h2>
-		<ul>
-			<$list filter="[tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>]" variable="change">
-				<li>
-					<$link
-						to="Release Notes and Changes"
-						class="doc-link-badge"
-						target="_blank"
-						rel="noopener noreferrer"
-						style.backgroundColor={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/colour]get[text]] }}}
-					>
-						<$text text={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/caption]get[text]] }}}/>
-					</$link>
-					<$text text=" "/>
-					<$list filter="[<change>get[links]enlist-input[]]" variable="link">
-						<a
-							href=<<link>>
-							class="doc-github-link"
-							target="_blank"
-							rel="noopener noreferrer"
+<div class="doc-release-note">
+	<$list filter="[enlist{$:/tw5.com/releases/info/category-order}]" variable="category">
+		<%if [tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>] %>
+			<div class="doc-release-note-heading">
+				<h2 class="doc-change-note-category">
+					<$text text={{{ [[$:/tw5.com/releases/info/categories/]addsuffix<category>addsuffix[/caption]get[text]] }}} />
+				</h2>
+			</div>
+			<$list filter="[tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>sort[description]]" variable="change">
+				<div class="doc-change-note-item">
+					<div class="doc-change-note-type">
+						<$link
+							to="Release Notes and Changes"
+							class="doc-link-badge"
+							style.backgroundColor={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/colour]get[text]] }}}
 						>
-							{{$:/core/images/github}}
-						</a>
-						<$text text=" "/>
-					</$list>
-					<$transclude $tiddler=<<change>> $field="description" $mode="inline"/>
-					<div class="doc-changenote-body">
-						<$transclude $tiddler=<<change>> $mode="block"/>
+							<$text text={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/caption]get[text]] }}}/>
+						</$link>
 					</div>
-				</li>
+					<div class="doc-change-note-body">
+						<$transclude $tiddler=<<change>> $field="description" $mode="inline"/>
+						<div class="">
+							<$list filter="[tag[$:/tags/ImpactNote]] :filter[{!!changenote}match<change>] +[sort[description]]" variable="impact">
+								<div class="doc-change-note-impactnote">
+									<$text text={{{ [<impact>get[impact-type]] }}}/>
+									<$text text=" - "/>
+									<$transclude $tiddler=<<impact>> $field="description" $mode="inline"/>
+								</div>
+							</$list>
+						</div>
+						<div class="doc-change-note-github-links">
+							<$list filter="[<change>get[links]enlist-input[]]" variable="link">
+								<a
+									href=<<link>>
+									class="doc-github-link"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{{$:/core/images/github}}
+								</a>
+							</$list>
+						</div>
+						<div class="doc-change-note-description">
+							<$transclude $tiddler=<<change>> $mode="block"/>
+						</div>
+					</div>
+					<div class="doc-change-note-impacts">
+						<div class="">
+							<$list filter="[tag[$:/tags/ImpactNote]] :filter[{!!changenote}match<change>] +[get[impact-type]unique[]sort[]]" variable="impact-type">
+								<span class="doc-change-note-impacts-summary-item" style.borderColor={{{ [<impact-type>addprefix[$:/tw5.com/releases/info/impact-types/]addsuffix[/colour]get[text]] }}}>
+									<$text text=<<impact-type>>/>
+								</span>
+								<$text text=" "/>
+							</$list>
+						</div>
+					</div>
+				</div>
 			</$list>
-		</ul>
-	<%endif%>
-</$list>
+		<%endif%>
+	</$list>
+</div>
 \end change-list
 
 \procedure acknowledgements()
@@ -82,10 +105,8 @@ for their winning design for the banner for this release (here is the
 	<$list filter="[enlist<release-github-contributors>sort[]]" variable="username">
 		<li>
 			<a href={{{ [[https://github.com/]addsuffix<username>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">
-				<img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=64]] }}} width="64" height="64"/>
-				<span class="doc-github-contributor-username">
-					@<$text text=<<username>>/>
-				</span>
+				<span class="doc-github-contributor-avatar"><img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=64]] }}} width="64" height="64"/></span>
+				<span class="doc-github-contributor-username">@<$text text=<<username>>/></span>
 			</a>
 		</li>
 	</$list>
