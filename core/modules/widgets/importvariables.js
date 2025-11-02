@@ -72,7 +72,7 @@ ImportVariablesWidget.prototype.processTiddlerList = function(tiddlerList, widge
 						} else {
 							// No more regenerating children for this widget. If it needs to refresh, it'll do so along with the the whole importvariable tree.
 							widgetPointer.children = [widgetPointer.makeChildWidget(node)];
-							if (widgetPointer != this) {
+							if(widgetPointer != this) {
 								widgetPointer.makeChildWidgets = function(){};
 							}
 							widgetPointer = widgetPointer.children[0];
