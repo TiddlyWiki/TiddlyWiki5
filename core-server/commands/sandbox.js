@@ -165,38 +165,9 @@ Command.prototype.execute = function() {
 		} catch (e) {
 			console.error("Error saving REPL history:", e);
 		}
-		// this.callback(null); // Call the original callback to exit the command
 	});
 
 	const { exec } = require("child_process");
-
-	this.runtime.defineCommand("openhistory", {
-		help: "Open the REPL history file in your system's default editor",
-		action() {
-			let command;
-
-			if (process.platform === "win32") {
-				// Windows: use 'start' with empty title
-				command = `start "" "${REPL_HISTORY_PATH}"`;
-			} else if (process.platform === "darwin") {
-				// macOS: use 'open'
-				command = `open "${REPL_HISTORY_PATH}"`;
-			} else {
-				// Linux and others: use 'xdg-open'
-				command = `xdg-open "${REPL_HISTORY_PATH}"`;
-			}
-
-			exec(command, err => {
-				if (err) {
-					this.outputStream.write("Failed to open history file: " + err.message + "\n");
-				} else {
-					this.outputStream.write("Opening history file...\n");
-				}
-				this.displayPrompt();
-			});
-		}
-	});
-
 
 	this.runtime.defineCommand("quit", {
 		help: "Exit the REPL",
@@ -205,32 +176,55 @@ Command.prototype.execute = function() {
 		}
 	});
 
-    this.runtime.defineCommand("history", {
-        help: "List all history commands",
-        action() {
-            const filteredHistory = [];
-            const seenCommands = new Set();
+	this.runtime.defineCommand("history", {
+		help: "List history or edit history file (.history or .history edit)",
+		action(input) {
+			const trimmed = input.trim().toLowerCase();
 
-            if (this.history) {
-                for (const cmd of this.history) {
-                    const trimmedCmd = cmd.trim();
-                    if (trimmedCmd.length >= 3 && !seenCommands.has(trimmedCmd)) {
-                        filteredHistory.push(trimmedCmd);
-                        seenCommands.add(trimmedCmd);
-                    }
-                }
-            }
+			if (trimmed === "edit") {
+				let command;
+				if (process.platform === "win32") {
+					command = `start "" "${REPL_HISTORY_PATH}"`;
+				} else if (process.platform === "darwin") {
+					command = `open "${REPL_HISTORY_PATH}"`;
+				} else {
+					command = `xdg-open "${REPL_HISTORY_PATH}"`;
+				}
 
-            if (filteredHistory.length > 0) {
-                filteredHistory.forEach((cmd, index) => {
-                    console.log(`[${index + 1}] - ${cmd}`);
-                });
-            } else {
-                console.log("No history available.");
-            }
-            this.displayPrompt(); // Show the prompt again after listing history
-        }
-    });
+				exec(command, err => {
+					if (err) {
+						this.outputStream.write("Failed to open history file: " + err.message + "\n");
+					} else {
+						this.outputStream.write("Opening history file...\n");
+					}
+					this.displayPrompt();
+				});
+			} else {
+				// Default behavior: list history
+				const filteredHistory = [];
+				const seenCommands = new Set();
+
+				if (this.history) {
+					for (const cmd of this.history) {
+						const trimmedCmd = cmd.trim();
+						if (trimmedCmd.length >= 3 && !seenCommands.has(trimmedCmd)) {
+							filteredHistory.push(trimmedCmd);
+							seenCommands.add(trimmedCmd);
+						}
+					}
+				}
+
+				if (filteredHistory.length > 0) {
+					filteredHistory.forEach((cmd, index) => {
+						console.log(`[${index + 1}] - ${cmd}`);
+					});
+				} else {
+					console.log("No history available.");
+				}
+				this.displayPrompt(); // Show the prompt again after listing history
+			}
+		}
+	});
 
 	this.runtime.on("reset", function() {
 		self.runtime.context.$tw = $tw;
