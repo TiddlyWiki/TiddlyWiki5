@@ -68,8 +68,8 @@ Command.prototype.execute = function() {
 				if (typeof target === "function") {
 					const funcString = target.toString();
 					const signatureMatch = funcString.match(/(?:async\s+)?function\s*\*?\s*[^(]*\(([^)]*)\)/) ||
-											funcString.match(/^\(([^)]*)\)\s*=>/) ||
-											funcString.match(/^([^=()]+)=>/);
+												funcString.match(/^\(([^)]*)\)\s*=>/) ||
+												funcString.match(/^([^=()]+)=>/);
 					if (signatureMatch) {
 						const params = signatureMatch[1] ? signatureMatch[1].trim() : "";
 						hits.push(`${line}(${params})`);
@@ -88,6 +88,13 @@ Command.prototype.execute = function() {
 		useColors: true,
 		ignoreUndefined: true,
 		completer: completer
+	});
+
+	this.runtime.defineCommand("quit", {
+		help: "Exit the REPL",
+		action() {
+			this.close();
+		}
 	});
 
 	this.runtime.on("reset", function() {
