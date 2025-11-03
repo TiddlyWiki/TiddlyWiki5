@@ -41,12 +41,6 @@ var Command = function(params,commander,callback) {
 	this.callback = callback;
 };
 
-// Threshold for showing function signatures in completions
-const SIGNATURE_THRESHOLD = 50;
-
-// Path to REPL history file
-const REPL_HISTORY_PATH = path.join(os.homedir(), ".tiddlywiki_repl_history");
-
 Command.prototype.execute = function() {
 	var self = this;
 
@@ -138,7 +132,7 @@ Command.prototype.execute = function() {
 
 	// Start the REPL
 	this.runtime = repl.start({
-		prompt: this.params.length ? this.params[0] : colour.txt("$command: > ",33,0,7,0),
+		prompt: this.params.length ? colour.txt(this.params[0],33,0,7,0) : colour.txt("$command: > ",33,0,7,0),
 		useColors: true,
 		ignoreUndefined: true,
 		completer: completer,
