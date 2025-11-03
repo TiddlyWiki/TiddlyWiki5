@@ -62,7 +62,10 @@ Command.prototype.execute = function() {
 			} while ((currentObj = Object.getPrototypeOf(currentObj)));
 			const properties = [...new Set(allProperties)]; // Remove duplicates
 
-			const matchingProperties = properties.filter(p => p.startsWith(partial));
+			// Filter out properties starting with '__'
+			const filteredProperties = properties.filter(p => !p.startsWith('__'));
+
+			const matchingProperties = filteredProperties.filter(p => p.startsWith(partial));
 			if (matchingProperties.length === 1 && matchingProperties[0] === partial) {
 				const fullProperty = matchingProperties[0];
 				const target = obj[fullProperty];
