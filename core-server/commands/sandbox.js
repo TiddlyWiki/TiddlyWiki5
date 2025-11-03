@@ -1,5 +1,5 @@
 /*\
-title: $:/poc2go/modules/commands/repl.js
+title: $:/core/modules/commands/sandbox.js
 type: application/javascript
 module-type: command
 
@@ -11,6 +11,10 @@ Optional params = REPL prompt
 
 "use strict";
 
+const fs = require("fs");
+const path = require("path");
+const os = require("os");
+
 // Terminal colours
 const colour = {
 	log: (txt="", fg=255, bg=0, efg=255, ebg=0) => process.stdout.write(
@@ -21,7 +25,7 @@ const colour = {
 }
 
 exports.info = {
-	name: "repl",
+	name: "sandbox",
 	synchronous: true
 };
 
@@ -31,6 +35,8 @@ var Command = function(params,commander,callback) {
 	this.commander = commander;
 	this.callback = callback;
 };
+
+const REPL_HISTORY_PATH = path.join(os.homedir(), ".tiddlywiki_repl_history");
 
 Command.prototype.execute = function() {
 	var self = this;
@@ -127,6 +133,26 @@ Command.prototype.execute = function() {
 		ignoreUndefined: true,
 		completer: completer,
 		writer: customWriter
+	});
+
+	// Load history from file
+	try {
+		if (fs.existsSync(REPL_HISTORY_PATH)) {
+			const history = fs.readFileSync(REPL_HISTORY_PATH, "utf8").split(os.EOL).filter(entry => entry.trim());
+			this.runtime.history = history;
+		}
+	} catch (e) {
+		console.error("Error loading REPL history:", e);
+	}
+
+	// Save history to file on exit
+	this.runtime.on("exit", () => {
+		try {
+			fs.writeFileSync(REPL_HISTORY_PATH, this.runtime.history.join(os.EOL));
+		} catch (e) {
+			console.error("Error saving REPL history:", e);
+		}
+		// this.callback(null); // Call the original callback to exit the command
 	});
 
 	this.runtime.defineCommand("quit", {
