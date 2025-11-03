@@ -54,14 +54,21 @@ Command.prototype.execute = function() {
 			if (obj === undefined || obj === null) {
 				return [[], line];
 			}
-			const properties = Object.getOwnPropertyNames(obj);
+			// Get all properties from the object and its prototype chain
+			let allProperties = [];
+			let currentObj = obj;
+			do {
+				allProperties = allProperties.concat(Object.getOwnPropertyNames(currentObj));
+			} while ((currentObj = Object.getPrototypeOf(currentObj)));
+			const properties = [...new Set(allProperties)]; // Remove duplicates
+
 			const matchingProperties = properties.filter(p => p.startsWith(partial));
 			if (matchingProperties.length === 1 && matchingProperties[0] === partial) {
 				const fullProperty = matchingProperties[0];
 				const target = obj[fullProperty];
 				if (typeof target === 'function') {
 					const funcString = target.toString();
-					const signatureMatch = funcString.match(/^(?:async\s+)?function\s*\*?\s*[^(]*\(([^)]*)\)/) || // function foo(a,b)
+					const signatureMatch = funcString.match(/(?:async\s+)?function\s*\*?\s*[^(]*\(([^)]*)\)/) || // function foo(a,b)
 										 funcString.match(/^\(([^)]*)\)\s*=>/) || // (a,b) =>
 										 funcString.match(/^([^=()]+)=>/); // a =>
 					if (signatureMatch) {
