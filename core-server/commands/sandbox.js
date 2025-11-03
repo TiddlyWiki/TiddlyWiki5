@@ -11,7 +11,6 @@ Optional params = REPL prompt
 
 "use strict";
 
-const fs = require("fs");
 const path = require("path");
 const os = require("os");
 
@@ -36,6 +35,10 @@ var Command = function(params,commander,callback) {
 	this.callback = callback;
 };
 
+// Threshold for showing function signatures in completions
+const SIGNATURE_THRESHOLD = 50;
+
+// Path to REPL history file
 const REPL_HISTORY_PATH = path.join(os.homedir(), ".tiddlywiki_repl_history");
 
 Command.prototype.execute = function() {
@@ -48,8 +51,8 @@ Command.prototype.execute = function() {
 	function getFunctionSignature(func) {
 		const funcString = func.toString();
 		const signatureMatch = funcString.match(/(?:async\s+)?function\s*\*?\s*[^(]*\(([^)]*)\)/) ||
-							 funcString.match(/^\(([^)]*)\)\s*=>/) ||
-							 funcString.match(/^([^=()]+)=>/);
+							funcString.match(/^\(([^)]*)\)\s*=>/) ||
+							funcString.match(/^([^=()]+)=>/);
 		if (signatureMatch) {
 			return signatureMatch[1] ? signatureMatch[1].trim() : "";
 		}
@@ -64,6 +67,7 @@ Command.prototype.execute = function() {
         });
     }
 
+	// Custom completer to provide property and method name completions
 	function completer(line) {
 		if (!self.runtime || !self.runtime.context) {
 			return [[], line];
@@ -103,7 +107,6 @@ Command.prototype.execute = function() {
 				}
 			}
 
-			const SIGNATURE_THRESHOLD = 50;
 			// If we have a small number of matches, show signatures for functions
 			if (matchingProperties.length > 0 && matchingProperties.length < SIGNATURE_THRESHOLD) {
 				hits = matchingProperties.map(propName => {
@@ -127,6 +130,7 @@ Command.prototype.execute = function() {
 		return [hits, line];
 	}
 
+	// Start the REPL
 	this.runtime = repl.start({
 		prompt: this.params.length ? this.params[0] : colour.txt("$command: > ",33,0,7,0),
 		useColors: true,
@@ -135,70 +139,26 @@ Command.prototype.execute = function() {
 		writer: customWriter
 	});
 
-	// Load history from file
-	try {
-		if (fs.existsSync(REPL_HISTORY_PATH)) {
-			const history = fs.readFileSync(REPL_HISTORY_PATH, "utf8").split(os.EOL).filter(entry => entry.trim());
-			this.runtime.history = history;
-		}
-	} catch (e) {
-		console.error("Error loading REPL history:", e);
-	}
-
-	// Save history to file on exit
-	this.runtime.on("exit", () => {
-		try {
-            // Filter history before saving
-            const filteredHistory = [];
-            const seenCommands = new Set(); // To track duplicates
-
-            for (const cmd of this.runtime.history) {
-                const trimmedCmd = cmd.trim();
-                // Apply minimum length and duplicate checks
-                if (trimmedCmd.length >= 3 && !seenCommands.has(trimmedCmd)) {
-                    filteredHistory.push(trimmedCmd);
-                    seenCommands.add(trimmedCmd);
-                }
-            }
-
-			fs.writeFileSync(REPL_HISTORY_PATH, filteredHistory.join(os.EOL));
-		} catch (e) {
-			console.error("Error saving REPL history:", e);
+	// Initialie History Setup
+	this.runtime.setupHistory({
+		filePath: REPL_HISTORY_PATH,
+		size: 200,
+		removeHistoryDuplicates: true
+	}, (err) => {
+		if (err) {
+			console.error("Error setting up REPL history:", err);
 		}
 	});
 
-	const { exec } = require("child_process");
-
-	this.runtime.defineCommand("quit", {
-		help: "Exit the REPL",
-		action() {
-			this.close();
-		}
-	});
-
+	// Define .history command
 	this.runtime.defineCommand("history", {
-		help: "List history or edit history file (.history or .history edit)",
+		help: "Use '.history' or '.history path'",
 		action(input) {
 			const trimmed = input.trim().toLowerCase();
 
-			if (trimmed === "edit") {
-				let command;
-				if (process.platform === "win32") {
-					command = `start "" "${REPL_HISTORY_PATH}"`;
-				} else if (process.platform === "darwin") {
-					command = `open "${REPL_HISTORY_PATH}"`;
-				} else {
-					command = `xdg-open "${REPL_HISTORY_PATH}"`;
-				}
-
-				exec(command, err => {
-					if (err) {
-						this.outputStream.write("Failed to open history file: " + err.message + "\n");
-					} else {
-						this.outputStream.write("Opening history file...\n");
-					}
-					this.displayPrompt();
-				});
+			if (trimmed === "info") {
+				this.outputStream.write(`History file can be found at: ${REPL_HISTORY_PATH}\n`);
+				this.displayPrompt();
 			} else {
 				// Default behavior: list history
 				const filteredHistory = [];
@@ -226,6 +186,7 @@ Command.prototype.execute = function() {
 		}
 	});
 
+	// On reset, restore $tw in the context
 	this.runtime.on("reset", function() {
 		self.runtime.context.$tw = $tw;
 	});
