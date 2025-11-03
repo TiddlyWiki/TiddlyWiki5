@@ -13,10 +13,10 @@ Optional params = REPL prompt
 
 // Terminal colours
 const colour = {
-	log: (txt='', fg=255, bg=0, efg=255, ebg=0) => process.stdout.write(
+	log: (txt="", fg=255, bg=0, efg=255, ebg=0) => process.stdout.write(
 		`\x1b[38;5;${fg};48;5;${bg}m${txt}\x1b[38;5;${efg};48;5;${ebg}m`),
 
-	txt: (txt='', fg=255, bg=0, efg=255, ebg=0) =>
+	txt: (txt="", fg=255, bg=0, efg=255, ebg=0) =>
 		`\x1b[38;5;${fg};48;5;${bg}m${txt}\x1b[38;5;${efg};48;5;${ebg}m`,
 }
 
@@ -35,7 +35,7 @@ var Command = function(params,commander,callback) {
 Command.prototype.execute = function() {
 	var self = this;
 
-	var repl = require('repl');
+	var repl = require("repl");
 
 	function completer(line) {
 		if (!self.runtime || !self.runtime.context) {
@@ -44,36 +44,32 @@ Command.prototype.execute = function() {
 		const context = self.runtime.context;
 		let hits = [];
 		try {
-			const parts = line.split('.');
-			const partial = parts.pop() || '';
-			const path = parts.join('.');
+			const parts = line.split(".");
+			const partial = parts.pop() || "";
+			const path = parts.join(".");
 			let obj = context;
 			if (path) {
-				obj = path.split('.').reduce((o, p) => o[p], context);
+				obj = path.split(".").reduce((o, p) => o && o[p], context);
 			}
 			if (obj === undefined || obj === null) {
 				return [[], line];
 			}
-			// Get all properties from the object and its prototype chain
 			let allProperties = [];
 			let currentObj = obj;
 			do {
 				allProperties = allProperties.concat(Object.getOwnPropertyNames(currentObj));
 			} while ((currentObj = Object.getPrototypeOf(currentObj)));
-			const properties = [...new Set(allProperties)]; // Remove duplicates
-
-			// Filter out properties starting with '__'
-			const filteredProperties = properties.filter(p => !p.startsWith('__'));
-
+			const properties = [...new Set(allProperties)];
+			const filteredProperties = properties.filter(p => !p.startsWith("__"));
 			const matchingProperties = filteredProperties.filter(p => p.startsWith(partial));
 			if (matchingProperties.length === 1 && matchingProperties[0] === partial) {
 				const fullProperty = matchingProperties[0];
 				const target = obj[fullProperty];
-				if (typeof target === 'function') {
+				if (typeof target === "function") {
 					const funcString = target.toString();
-					const signatureMatch = funcString.match(/(?:async\s+)?function\s*\*?\s*[^(]*\(([^)]*)\)/) || // function foo(a,b)
-										 funcString.match(/^\(([^)]*)\)\s*=>/) || // (a,b) =>
-										 funcString.match(/^([^=()]+)=>/); // a =>
+					const signatureMatch = funcString.match(/(?:async\s+)?function\s*\*?\s*[^(]*\(([^)]*)\)/) ||
+											funcString.match(/^\(([^)]*)\)\s*=>/) ||
+											funcString.match(/^([^=()]+)=>/);
 					if (signatureMatch) {
 						const params = signatureMatch[1] ? signatureMatch[1].trim() : "";
 						hits.push(`${line}(${params})`);
@@ -81,27 +77,23 @@ Command.prototype.execute = function() {
 					}
 				}
 			}
-			// Default completion
-			hits = matchingProperties.map(p => (path ? path + '.' : '') + p);
+			hits = matchingProperties.map(p => (path ? path + "." : "") + p);
 		} catch (e) {
-			// Suppress errors during completion
 		}
 		return [hits, line];
 	}
 
 	this.runtime = repl.start({
-		prompt: this.params.length ? this.params[0] : colour.txt('$command: > ',33,0,7,0),
+		prompt: this.params.length ? this.params[0] : colour.txt("$command: > ",33,0,7,0),
 		useColors: true,
 		ignoreUndefined: true,
 		completer: completer
 	});
 
-	// If REPL is reset (.clear) - context needs resetting
-	this.runtime.on('reset', function() {
+	this.runtime.on("reset", function() {
 		self.runtime.context.$tw = $tw;
 	});
 
-	// Initial context settings
 	this.runtime.context.$tw = $tw;
 
 	return null;
