@@ -31,24 +31,24 @@ ImportVariablesWidget.prototype.render = function(parent,nextSibling) {
 };
 
 ImportVariablesWidget.prototype.processTiddlerList = function(tiddlerList, widgetPointer, processedTiddlers) {
-    var self = this;
+	var self = this;
 	// We accumulate the relevant widgets from each tiddler
-    $tw.utils.each(tiddlerList, function(title) {
-        if(processedTiddlers.has(title)) {
-            return; // We skip already processed tiddlers
-        }
-        processedTiddlers.add(title);
+	$tw.utils.each(tiddlerList, function(title) {
+		if(processedTiddlers.has(title)) {
+			return; // We skip already processed tiddlers
+		}
+		processedTiddlers.add(title);
 
-        var parser = self.wiki.parseTiddler(title, {parseAsInline:true, configTrimWhiteSpace:false});
-        if(parser) {
-            var parseTreeNode = parser.tree[0];
-            while(parseTreeNode && ["setvariable","set","parameters","importvariables"].indexOf(parseTreeNode.type) !== -1) {
-                if(parseTreeNode.type === "importvariables") {
-                    // We extract the nested filter and recursively process these tiddlers
-                    var nestedFilter = parseTreeNode.attributes.filter.value;
-                    var nestedTiddlerList = self.wiki.filterTiddlers(nestedFilter, widgetPointer);
-                    widgetPointer = self.processTiddlerList(nestedTiddlerList, widgetPointer, processedTiddlers);
-                } else {
+		var parser = self.wiki.parseTiddler(title, {parseAsInline:true, configTrimWhiteSpace:false});
+		if(parser) {
+			var parseTreeNode = parser.tree[0];
+			while(parseTreeNode && ["setvariable","set","parameters","importvariables"].indexOf(parseTreeNode.type) !== -1) {
+				if(parseTreeNode.type === "importvariables") {
+					// We extract the nested filter and recursively process these tiddlers
+					var nestedFilter = parseTreeNode.attributes.filter.value;
+					var nestedTiddlerList = self.wiki.filterTiddlers(nestedFilter, widgetPointer);
+					widgetPointer = self.processTiddlerList(nestedTiddlerList, widgetPointer, processedTiddlers);
+				} else {
 					var node = {
 						type: "set",
 						attributes: parseTreeNode.attributes,
@@ -79,34 +79,34 @@ ImportVariablesWidget.prototype.processTiddlerList = function(tiddlerList, widge
 						}
 					}
 				}
-                parseTreeNode = parseTreeNode.children && parseTreeNode.children[0];
-            }
-        }
-    });
-    return widgetPointer;
+				parseTreeNode = parseTreeNode.children && parseTreeNode.children[0];
+			}
+		}
+	});
+	return widgetPointer;
 };
 
 /*
 Compute the internal state of the widget
 */
 ImportVariablesWidget.prototype.execute = function(tiddlerList) {
-    var widgetPointer = this;
+	var widgetPointer = this;
 	// We flush all the accumulated variables
-    this.variables = Object.create(null);
-    if(this.parentWidget) {
-        Object.setPrototypeOf(this.variables, this.parentWidget.variables);
-    }
+	this.variables = Object.create(null);
+	if(this.parentWidget) {
+		Object.setPrototypeOf(this.variables, this.parentWidget.variables);
+	}
 	// Get our parameters
-    this.filter = this.getAttribute("filter");
+	this.filter = this.getAttribute("filter");
 	// Compute the filter
-    this.tiddlerList = tiddlerList || this.wiki.filterTiddlers(this.filter, this);
+	this.tiddlerList = tiddlerList || this.wiki.filterTiddlers(this.filter, this);
 
-    // We call the recursive processing logic and track which tiddlers were processed
-    var processedTiddlers = new Set();
+	// We call the recursive processing logic and track which tiddlers were processed
+	var processedTiddlers = new Set();
 	widgetPointer = this.processTiddlerList(this.tiddlerList, widgetPointer, processedTiddlers);
 
-    // We store the list of processed tiddlers for refresh checking
-    this.allProcessedTiddlers = Array.from(processedTiddlers);
+	// We store the list of processed tiddlers for refresh checking
+	this.allProcessedTiddlers = Array.from(processedTiddlers);
 
 	if(widgetPointer != this) {
 		widgetPointer.parseTreeNode.children = this.parseTreeNode.children;
@@ -126,12 +126,12 @@ ImportVariablesWidget.prototype.refresh = function(changedTiddlers) {
 	// Refresh if the filter has changed, or the list of tiddlers has changed, or any of the tiddlers in the list has changed
 	function haveListedTiddlersChanged() {
 		var changed = false;
-        var allTiddlers = self.allProcessedTiddlers || tiddlerList;
-        allTiddlers.forEach(function(title) {
-            if(changedTiddlers[title]) {
-                changed = true;
-            }
-        });
+		var allTiddlers = self.allProcessedTiddlers || tiddlerList;
+		allTiddlers.forEach(function(title) {
+			if(changedTiddlers[title]) {
+				changed = true;
+			}
+		});
 		return changed;
 	}
 	if(changedAttributes.filter || !$tw.utils.isArrayEqual(this.tiddlerList,tiddlerList) || haveListedTiddlersChanged()) {
