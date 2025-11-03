@@ -162,6 +162,20 @@ Command.prototype.execute = function() {
 		}
 	});
 
+    this.runtime.defineCommand("history", {
+        help: "List all history commands",
+        action() {
+            if (this.history && this.history.length > 0) {
+                this.history.forEach((cmd, index) => {
+                    console.log(`[${index + 1}] - ${cmd}`);
+                });
+            } else {
+                console.log("No history available.");
+            }
+            this.displayPrompt(); // Show the prompt again after listing history
+        }
+    });
+
 	this.runtime.on("reset", function() {
 		self.runtime.context.$tw = $tw;
 	});
