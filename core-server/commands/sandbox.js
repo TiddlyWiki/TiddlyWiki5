@@ -168,6 +168,36 @@ Command.prototype.execute = function() {
 		// this.callback(null); // Call the original callback to exit the command
 	});
 
+	const { exec } = require("child_process");
+
+	this.runtime.defineCommand("openhistory", {
+		help: "Open the REPL history file in your system's default editor",
+		action() {
+			let command;
+
+			if (process.platform === "win32") {
+				// Windows: use 'start' with empty title
+				command = `start "" "${REPL_HISTORY_PATH}"`;
+			} else if (process.platform === "darwin") {
+				// macOS: use 'open'
+				command = `open "${REPL_HISTORY_PATH}"`;
+			} else {
+				// Linux and others: use 'xdg-open'
+				command = `xdg-open "${REPL_HISTORY_PATH}"`;
+			}
+
+			exec(command, err => {
+				if (err) {
+					this.outputStream.write("Failed to open history file: " + err.message + "\n");
+				} else {
+					this.outputStream.write("Opening history file...\n");
+				}
+				this.displayPrompt();
+			});
+		}
+	});
+
+
 	this.runtime.defineCommand("quit", {
 		help: "Exit the REPL",
 		action() {
