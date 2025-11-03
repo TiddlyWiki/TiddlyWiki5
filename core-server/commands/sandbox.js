@@ -148,7 +148,20 @@ Command.prototype.execute = function() {
 	// Save history to file on exit
 	this.runtime.on("exit", () => {
 		try {
-			fs.writeFileSync(REPL_HISTORY_PATH, this.runtime.history.join(os.EOL));
+            // Filter history before saving
+            const filteredHistory = [];
+            const seenCommands = new Set(); // To track duplicates
+
+            for (const cmd of this.runtime.history) {
+                const trimmedCmd = cmd.trim();
+                // Apply minimum length and duplicate checks
+                if (trimmedCmd.length >= 3 && !seenCommands.has(trimmedCmd)) {
+                    filteredHistory.push(trimmedCmd);
+                    seenCommands.add(trimmedCmd);
+                }
+            }
+
+			fs.writeFileSync(REPL_HISTORY_PATH, filteredHistory.join(os.EOL));
 		} catch (e) {
 			console.error("Error saving REPL history:", e);
 		}
