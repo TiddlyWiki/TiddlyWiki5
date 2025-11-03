@@ -37,6 +37,18 @@ Command.prototype.execute = function() {
 
 	var repl = require("repl");
 
+    // Helper to get a function's parameters as a string
+	function getFunctionSignature(func) {
+		const funcString = func.toString();
+		const signatureMatch = funcString.match(/(?:async\s+)?function\s*\*?\s*[^(]*\(([^)]*)\)/) ||
+							 funcString.match(/^\(([^)]*)\)\s*=>/) ||
+							 funcString.match(/^([^=()]+)=>/);
+		if (signatureMatch) {
+			return signatureMatch[1] ? signatureMatch[1].trim() : "";
+		}
+		return null;
+	}
+
 	function completer(line) {
 		if (!self.runtime || !self.runtime.context) {
 			return [[], line];
@@ -62,22 +74,37 @@ Command.prototype.execute = function() {
 			const properties = [...new Set(allProperties)];
 			const filteredProperties = properties.filter(p => !p.startsWith("__"));
 			const matchingProperties = filteredProperties.filter(p => p.startsWith(partial));
+
+            // Special case: if there's a single exact match for a function, complete its signature
 			if (matchingProperties.length === 1 && matchingProperties[0] === partial) {
-				const fullProperty = matchingProperties[0];
-				const target = obj[fullProperty];
+				const propName = matchingProperties[0];
+				const target = obj[propName];
 				if (typeof target === "function") {
-					const funcString = target.toString();
-					const signatureMatch = funcString.match(/(?:async\s+)?function\s*\*?\s*[^(]*\(([^)]*)\)/) ||
-												funcString.match(/^\(([^)]*)\)\s*=>/) ||
-												funcString.match(/^([^=()]+)=>/);
-					if (signatureMatch) {
-						const params = signatureMatch[1] ? signatureMatch[1].trim() : "";
-						hits.push(`${line}(${params})`);
+					const signature = getFunctionSignature(target);
+					if (signature !== null) {
+						hits.push(`${line}(${signature})`);
 						return [hits, line];
 					}
 				}
 			}
-			hits = matchingProperties.map(p => (path ? path + "." : "") + p);
+
+            const SIGNATURE_THRESHOLD = 50;
+            // If we have a small number of matches, show signatures for all functions
+			if (matchingProperties.length > 0 && matchingProperties.length < SIGNATURE_THRESHOLD) {
+				hits = matchingProperties.map(propName => {
+					const target = obj[propName];
+					if (typeof target === "function") {
+						const signature = getFunctionSignature(target);
+						if (signature !== null) {
+							return (path ? path + "." : "") + `${propName}(${signature})`;
+						}
+					}
+					return (path ? path + "." : "") + propName;
+				});
+			} else {
+                // Otherwise, just show the property names
+				hits = matchingProperties.map(p => (path ? path + "." : "") + p);
+			}
 		} catch (e) {
 		}
 		return [hits, line];
