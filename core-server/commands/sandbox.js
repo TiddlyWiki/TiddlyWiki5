@@ -178,8 +178,21 @@ Command.prototype.execute = function() {
     this.runtime.defineCommand("history", {
         help: "List all history commands",
         action() {
-            if (this.history && this.history.length > 0) {
-                this.history.forEach((cmd, index) => {
+            const filteredHistory = [];
+            const seenCommands = new Set();
+
+            if (this.history) {
+                for (const cmd of this.history) {
+                    const trimmedCmd = cmd.trim();
+                    if (trimmedCmd.length >= 3 && !seenCommands.has(trimmedCmd)) {
+                        filteredHistory.push(trimmedCmd);
+                        seenCommands.add(trimmedCmd);
+                    }
+                }
+            }
+
+            if (filteredHistory.length > 0) {
+                filteredHistory.forEach((cmd, index) => {
                     console.log(`[${index + 1}] - ${cmd}`);
                 });
             } else {
