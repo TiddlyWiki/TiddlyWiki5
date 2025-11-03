@@ -36,8 +36,9 @@ Command.prototype.execute = function() {
 	var self = this;
 
 	var repl = require("repl");
+	const util = require("util");
 
-    // Helper to get a function's parameters as a string
+	// Helper to get a function's parameters as a string
 	function getFunctionSignature(func) {
 		const funcString = func.toString();
 		const signatureMatch = funcString.match(/(?:async\s+)?function\s*\*?\s*[^(]*\(([^)]*)\)/) ||
@@ -48,6 +49,14 @@ Command.prototype.execute = function() {
 		}
 		return null;
 	}
+
+    // Custom writer to control output depth
+    function customWriter(output) {
+        return util.inspect(output, {
+            colors: true,
+            depth: 1 // Only one level deep
+        });
+    }
 
 	function completer(line) {
 		if (!self.runtime || !self.runtime.context) {
@@ -75,7 +84,7 @@ Command.prototype.execute = function() {
 			const filteredProperties = properties.filter(p => !p.startsWith("__"));
 			const matchingProperties = filteredProperties.filter(p => p.startsWith(partial));
 
-            // Special case: if there's a single exact match for a function, complete its signature
+			// Special case: if there's a single exact match for a function, complete its signature
 			if (matchingProperties.length === 1 && matchingProperties[0] === partial) {
 				const propName = matchingProperties[0];
 				const target = obj[propName];
@@ -88,21 +97,23 @@ Command.prototype.execute = function() {
 				}
 			}
 
-            const SIGNATURE_THRESHOLD = 50;
-            // If we have a small number of matches, show signatures for all functions
+			const SIGNATURE_THRESHOLD = 50;
+			// If we have a small number of matches, show signatures for functions
 			if (matchingProperties.length > 0 && matchingProperties.length < SIGNATURE_THRESHOLD) {
 				hits = matchingProperties.map(propName => {
 					const target = obj[propName];
+					const prefix = (path ? path + "." : "");
 					if (typeof target === "function") {
 						const signature = getFunctionSignature(target);
 						if (signature !== null) {
-							return (path ? path + "." : "") + `${propName}(${signature})`;
+							return prefix + `${propName}(${signature})`;
 						}
 					}
-					return (path ? path + "." : "") + propName;
+					// For non-functions, just return the name
+					return prefix + propName;
 				});
 			} else {
-                // Otherwise, just show the property names
+				// Otherwise, just show the property names
 				hits = matchingProperties.map(p => (path ? path + "." : "") + p);
 			}
 		} catch (e) {
@@ -114,7 +125,8 @@ Command.prototype.execute = function() {
 		prompt: this.params.length ? this.params[0] : colour.txt("$command: > ",33,0,7,0),
 		useColors: true,
 		ignoreUndefined: true,
-		completer: completer
+		completer: completer,
+		writer: customWriter
 	});
 
 	this.runtime.defineCommand("quit", {
