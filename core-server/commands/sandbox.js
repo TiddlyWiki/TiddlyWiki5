@@ -14,6 +14,12 @@ Optional params = REPL prompt
 const path = require("path");
 const os = require("os");
 
+// Threshold for showing function signatures in completions
+const SIGNATURE_THRESHOLD = 50;
+
+// Path to REPL history file
+const REPL_HISTORY_PATH = path.join(os.homedir(), ".tiddlywiki_repl_history");
+
 // Terminal colours
 const colour = {
 	log: (txt="", fg=255, bg=0, efg=255, ebg=0) => process.stdout.write(
