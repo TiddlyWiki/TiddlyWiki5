@@ -63,9 +63,10 @@ Command.prototype.execute = function() {
 	}
 
 	class CustomFunctionInspect {
-		constructor(val, depth) {
+		constructor(val, depth, colour_ref) {
 			this.val = val;
 			this.depth = depth;
+			this.colour = colour_ref;
 		}
 		[util.inspect.custom](depth, opts) {
 			const keys = Object.keys(this.val);
@@ -79,6 +80,9 @@ Command.prototype.execute = function() {
 			} else {
 				// Nested function, or function with properties, show short info
 				let s = `[Function: ${this.val.name || '(anonymous)'}]`;
+				// Apply light blue color
+				s = this.colour.txt(s, 117, 0, 255, 0); // light blue foreground, black background, reset to white foreground, black background
+
 				if (keys.length > 0) {
 					const props = {};
 					const newOpts = Object.assign({}, opts, { depth: opts.depth === null ? null : opts.depth - 1 });
@@ -118,7 +122,7 @@ Command.prototype.execute = function() {
 			}
 
 			if (typeof o === 'function') {
-				const wrapped = new CustomFunctionInspect(o, depth);
+				const wrapped = new CustomFunctionInspect(o, depth, colour); // Pass colour here
 				seen.set(o, wrapped);
 				return wrapped;
 			}
