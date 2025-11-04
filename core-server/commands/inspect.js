@@ -80,8 +80,8 @@ Command.prototype.execute = function() {
 			} else {
 				// Nested function, or function with properties, show short info
 				let s = `[Function: ${this.val.name || '(anonymous)'}]`;
-				// Apply light blue color
-				s = this.colour.txt(s, 117, 0, 255, 0); // light blue foreground, black background, reset to white foreground, black background
+				// Apply a lighter blue color
+				s = this.colour.txt(s, 69, 0, 255, 0); // xterm color 69
 
 				if (keys.length > 0) {
 					const props = {};
