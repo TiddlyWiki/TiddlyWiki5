@@ -78,10 +78,13 @@ Command.prototype.execute = function() {
 				}
 				return code;
 			} else {
-				// Nested function, or function with properties, show short info
-				let s = `[Function: ${this.val.name || '(anonymous)'}]`;
-				// Apply a lighter blue color
-				s = this.colour.txt(s, 69, 0, 255, 0); // xterm color 69
+				// Nested function, or function with properties, show signature
+				const signatureParams = getFunctionSignature(this.val);
+				let signature = `function ${this.val.name || ''}(${signatureParams || ''})`;
+				// Apply light gray color
+				signature = this.colour.txt(signature, 69, 0, 255, 0);
+
+				let s = signature;
 
 				if (keys.length > 0) {
 					const props = {};
