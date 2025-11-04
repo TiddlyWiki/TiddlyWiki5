@@ -113,6 +113,22 @@ exports["jsonset"] = function(source,operator,options) {
 	return results;
 };
 
+exports["jsondelete"] = function(source,operator,options) {
+	var indexes = operator.operands,
+		results = [];
+	source(function(tiddler,title) {
+		var data = $tw.utils.parseJSONSafe(title,title);
+		// If parsing failed (data equals original title and is a string), return unchanged
+		if(data === title && typeof data === "string") {
+			results.push(title);
+		} else if(data) {
+			data = deleteDataItem(data,indexes);
+			results.push(JSON.stringify(data));
+		}
+	});
+	return results;
+};
+
 /*
 Given a JSON data structure and an array of index strings, return an array of the string representation of the values at the end of the index chain, or "undefined" if any of the index strings are invalid
 */
@@ -273,6 +289,38 @@ function setDataItem(data,indexes,value) {
 	// Only set indexes on objects and arrays
 	if(typeof current === "object") {
 		current[lastIndex] = value;
+	}
+	return data;
+}
+
+/*
+Given a JSON data structure and an array of index strings, return the data structure with the item at the end of the index chain deleted. If any of the index strings are invalid then the JSON data structure is returned unmodified. If the root item is targetted then the JSON data structure is returned unmodified.
+*/
+function deleteDataItem(data,indexes) {
+	// Check for the root item - don't delete the root
+	if(indexes.length === 0 || (indexes.length === 1 && indexes[0] === "")) {
+		return data;
+	}
+	// Traverse the JSON data structure using the index chain
+	var current = data;
+	for(var i = 0; i < indexes.length - 1; i++) {
+		current = getItemAtIndex(current,indexes[i]);
+		if(current === undefined || current === null) {
+			// Return the original JSON data structure if any of the index strings are invalid
+			return data;
+		}
+	}
+	// Delete the item at the end of the index chain
+	var lastIndex = indexes[indexes.length - 1];
+	if($tw.utils.isArray(current) && current !== null) {
+		lastIndex = $tw.utils.parseInt(lastIndex);
+		if(lastIndex < 0) { lastIndex = lastIndex + current.length };
+		// Check if index is valid before splicing
+		if(lastIndex >= 0 && lastIndex < current.length) {
+			current.splice(lastIndex,1);
+		}
+	} else if(typeof current === "object" && current !== null) {
+		delete current[lastIndex];
 	}
 	return data;
 }
