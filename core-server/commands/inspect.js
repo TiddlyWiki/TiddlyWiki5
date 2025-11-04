@@ -62,29 +62,63 @@ Command.prototype.execute = function() {
 		return null;
 	}
 
-	function truncateLongText(obj, maxLines = MAX_SOURCE_LINES) {
+	class CustomFunctionInspect {
+		constructor(val) {
+			this.val = val;
+		}
+		[util.inspect.custom](depth, opts) {
+			let code = this.val.toString();
+			let truncatedCode = code;
+			if (code.split('\n').length > 10) {
+				truncatedCode = code.split('\n').slice(0,10).join('\n') + '\n...';
+			}
+
+			let s = `[Function: ${this.val.name || '(anonymous)'}]`;
+
+			const props = {};
+			const keys = Object.keys(this.val);
+			if(keys.length > 0) {
+				const newOpts = Object.assign({}, opts, { depth: opts.depth === null ? null : opts.depth - 1 });
+				if (opts.depth !== null && opts.depth <= 0) {
+					s += ' [Object]';
+				} else {
+					for(const key of keys) {
+						props[key] = this.val[key];
+					}
+					s += ' ' + util.inspect(props, newOpts);
+				}
+			}
+			return `${s}\n${truncatedCode}`;
+		}
+	}
+
+	function processOutput(obj, maxLines = MAX_SOURCE_LINES) {
 		if (maxLines === 0) {
 			return obj;
 		}
 		const seen = new WeakMap();
 
-		function truncate(value) {
-			if (typeof value === "string") {
-				const lines = value.split("\n");
-				if (lines.length > maxLines) {
-					return lines.slice(0, maxLines).join("\n") + `\n... (${lines.length - maxLines} more lines)`;
-				}
-			}
-			return value;
-		}
-
 		function walk(o) {
-			if (o === null || typeof o !== "object") {
-				return truncate(o);
+			if (o === null || (typeof o !== "object" && typeof o !== 'function')) {
+				if (typeof o === "string") {
+					const lines = o.split("\n");
+					if (lines.length > maxLines) {
+						return lines.slice(0, maxLines).join("\n") + `\n... (${lines.length - maxLines} more lines)`;
+					}
+				}
+				return o;
 			}
+
 			if (seen.has(o)) {
 				return seen.get(o);
 			}
+
+			if (typeof o === 'function') {
+				const wrapped = new CustomFunctionInspect(o);
+				seen.set(o, wrapped);
+				return wrapped;
+			}
+
 			if (Array.isArray(o)) {
 				const newArr = [];
 				seen.set(o, newArr);
@@ -93,6 +127,7 @@ Command.prototype.execute = function() {
 				}
 				return newArr;
 			}
+
 			const newObj = {};
 			seen.set(o, newObj);
 			for (const key in o) {
@@ -107,7 +142,7 @@ Command.prototype.execute = function() {
 
     // Custom writer to control output depth
     function customWriter(output) {
-        return util.inspect(truncateLongText(output), {
+        return util.inspect(processOutput(output), {
             colors: true,
             depth: 2 // Only one level deep
         });
