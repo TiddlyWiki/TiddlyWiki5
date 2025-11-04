@@ -161,11 +161,13 @@ Command.prototype.execute = function() {
 		return walk(obj, 0);
 	}
 
+	let inspectDepth = 2;
+
     // Custom writer to control output depth
     function customWriter(output) {
         return util.inspect(processOutput(output), {
             colors: true,
-            depth: 2 // Only one level deep
+            depth: inspectDepth
         });
     }
 
@@ -249,6 +251,21 @@ Command.prototype.execute = function() {
 	}, (err) => {
 		if (err) {
 			console.error("Error setting up REPL history:", err);
+		}
+	});
+
+	// Define .depth command
+	this.runtime.defineCommand("depth", {
+		help: "Set inspection depth. Usage: .depth <number>",
+		action(input) {
+			const newDepth = parseInt(input, 10);
+			if (isNaN(newDepth)) {
+				this.outputStream.write("Invalid depth. Please provide a number.\n");
+			} else {
+				inspectDepth = newDepth;
+				this.outputStream.write(`Inspection depth set to ${inspectDepth}.\n`);
+			}
+			this.displayPrompt();
 		}
 	});
 
