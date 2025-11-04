@@ -123,6 +123,13 @@ Command.prototype.execute = function() {
 				return o;
 			}
 
+			if (o instanceof Error) {
+				return {
+					message: o.message,
+					stack: o.stack
+				};
+			}
+
 			if (seen.has(o)) {
 				return seen.get(o);
 			}
@@ -211,7 +218,8 @@ Command.prototype.execute = function() {
 				if (typeof target === "function") {
 					const signature = getFunctionSignature(target);
 					if (signature !== null) {
-						hits.push(`${line}(${signature})`);
+						const coloredSignature = colour.txt(`(${signature})`, 248, 0, 255, 0);
+						hits.push(line + coloredSignature);
 						return [hits, line];
 					}
 				}
@@ -225,7 +233,8 @@ Command.prototype.execute = function() {
 					if (typeof target === "function") {
 						const signature = getFunctionSignature(target);
 						if (signature !== null) {
-							return prefix + `${propName}(${signature})`;
+							const coloredSignature = colour.txt(`(${signature})`, 248, 0, 255, 0);
+							return prefix + propName + coloredSignature;
 						}
 					}
 					// For non-functions, just return the name
