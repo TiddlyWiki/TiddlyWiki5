@@ -160,7 +160,7 @@ function convertDataItemValueToStrings(item) {
 		return ["null"]
 	} else if(typeof item === "object") {
 		var results = [],i,t;
-		if($tw.utils.isArray(item)) {
+		if(Array.isArray(item)) {
 			// Return all the items in arrays recursively
 			for(i=0; i<item.length; i++) {
 				t = convertDataItemValueToStrings(item[i])
@@ -194,7 +194,7 @@ function convertDataItemKeysToStrings(item) {
 			return [];
 		}
 		var results = [];
-		if($tw.utils.isArray(item)) {
+		if(Array.isArray(item)) {
 			for(var i=0; i<item.length; i++) {
 				results.push(i.toString());
 			}
@@ -217,7 +217,7 @@ function getDataItemType(data,indexes) {
 		return item;
 	} else if(item === null) {
 		return "null";
-	} else if($tw.utils.isArray(item)) {
+	} else if(Array.isArray(item)) {
 		return "array";
 	} else if(typeof item === "object") {
 		return "object";
@@ -229,7 +229,7 @@ function getDataItemType(data,indexes) {
 function getItemAtIndex(item,index) {
 	if($tw.utils.hop(item,index)) {
 		return item[index];
-	} else if($tw.utils.isArray(item)) {
+	} else if(Array.isArray(item)) {
 		index = $tw.utils.parseInt(index);
 		if(index < 0) { index = index + item.length };
 		return item[index]; // Will be undefined if index was out-of-bounds
@@ -239,15 +239,16 @@ function getItemAtIndex(item,index) {
 }
 
 /*
-Given a JSON data structure and an array of index strings, return the value at the end of the index chain, or "undefined" if any of the index strings are invalid
+Traverse the index chain and return the item at the specified depth.
+Returns the item at the end of the traversal, or undefined if traversal fails.
 */
-function getDataItem(data,indexes) {
+function traverseIndexChain(data,indexes,stopBeforeLast) {
 	if(indexes.length === 0 || (indexes.length === 1 && indexes[0] === "")) {
 		return data;
 	}
-	// Get the item
 	var item = data;
-	for(var i=0; i<indexes.length; i++) {
+	var stopIndex = stopBeforeLast ? indexes.length - 1 : indexes.length;
+	for(var i = 0; i < stopIndex; i++) {
 		if(item !== undefined) {
 			if(item !== null && ["number","string","boolean"].indexOf(typeof item) === -1) {
 				item = getItemAtIndex(item,indexes[i]);
@@ -257,6 +258,13 @@ function getDataItem(data,indexes) {
 		}
 	}
 	return item;
+}
+
+/*
+Given a JSON data structure and an array of index strings, return the value at the end of the index chain, or "undefined" if any of the index strings are invalid
+*/
+function getDataItem(data,indexes) {
+	return traverseIndexChain(data,indexes,false);
 }
 
 /*
@@ -271,18 +279,15 @@ function setDataItem(data,indexes,value) {
 	if(indexes.length === 0 || (indexes.length === 1 && indexes[0] === "")) {
 		return value;
 	}
-	// Traverse the JSON data structure using the index chain
-	var current = data;
-	for(var i = 0; i < indexes.length - 1; i++) {
-		current = getItemAtIndex(current,indexes[i]);
-		if(current === undefined) {
-			// Return the original JSON data structure if any of the index strings are invalid
-			return data;
-		}
+	// Traverse the JSON data structure using the index chain up to the parent
+	var current = traverseIndexChain(data,indexes,true);
+	if(current === undefined) {
+		// Return the original JSON data structure if any of the index strings are invalid
+		return data;
 	}
 	// Add the value to the end of the index chain
 	var lastIndex = indexes[indexes.length - 1];
-	if($tw.utils.isArray(current)) {
+	if(Array.isArray(current)) {
 		lastIndex = $tw.utils.parseInt(lastIndex);
 		if(lastIndex < 0) { lastIndex = lastIndex + current.length };
 	}
@@ -301,18 +306,15 @@ function deleteDataItem(data,indexes) {
 	if(indexes.length === 0 || (indexes.length === 1 && indexes[0] === "")) {
 		return data;
 	}
-	// Traverse the JSON data structure using the index chain
-	var current = data;
-	for(var i = 0; i < indexes.length - 1; i++) {
-		current = getItemAtIndex(current,indexes[i]);
-		if(current === undefined || current === null) {
-			// Return the original JSON data structure if any of the index strings are invalid
-			return data;
-		}
+	// Traverse the JSON data structure using the index chain up to the parent
+	var current = traverseIndexChain(data,indexes,true);
+	if(current === undefined || current === null) {
+		// Return the original JSON data structure if any of the index strings are invalid
+		return data;
 	}
 	// Delete the item at the end of the index chain
 	var lastIndex = indexes[indexes.length - 1];
-	if($tw.utils.isArray(current) && current !== null) {
+	if(Array.isArray(current) && current !== null) {
 		lastIndex = $tw.utils.parseInt(lastIndex);
 		if(lastIndex < 0) { lastIndex = lastIndex + current.length };
 		// Check if index is valid before splicing

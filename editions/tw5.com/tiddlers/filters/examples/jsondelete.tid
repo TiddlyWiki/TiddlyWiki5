@@ -56,3 +56,4 @@ The examples below assume the following JSON array is contained in the variable 
 <<.operator-example 13 "[<array-a>jsondelete[3],[0]]" "Delete an element from a nested array">>
 
 <<.operator-example 14 "[<object-a>] [<object-b>] :and[jsondelete[a]]" "If the input consists of multiple JSON objects with matching properties, the property is deleted from all of them">>
+
