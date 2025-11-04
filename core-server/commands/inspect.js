@@ -20,6 +20,9 @@ const SIGNATURE_THRESHOLD = 50;
 // Path to REPL history file
 const REPL_HISTORY_PATH = path.join(os.homedir(), ".tiddlywiki_repl_history");
 
+// Truncate long texts in object tree output
+const MAX_TEXT_LINES = 10;
+
 // Terminal colours
 const colour = {
 	log: (txt="", fg=255, bg=0, efg=255, ebg=0) => process.stdout.write(
@@ -44,7 +47,7 @@ var Command = function(params,commander,callback) {
 Command.prototype.execute = function() {
 	var self = this;
 
-	var repl = require("repl");
+	const repl = require("repl");
 	const util = require("util");
 
 	// Helper to get a function's parameters as a string
@@ -59,11 +62,54 @@ Command.prototype.execute = function() {
 		return null;
 	}
 
+	// deepclone an object
+	function mapTree(obj, fn, seen) {
+		seen = seen || new WeakMap();
+		if (obj === null || typeof obj !== "object") {
+			return fn(obj);
+		}
+		if (seen.has(obj)) {
+			return seen.get(obj);
+		}
+		if (Array.isArray(obj)) {
+			const newArr = [];
+			seen.set(obj, newArr);
+			for (let i = 0; i < obj.length; i++) {
+				newArr[i] = mapTree(obj[i], fn, seen);
+			}
+			return newArr;
+		}
+		const newObj = {};
+		seen.set(obj, newObj);
+		for (const key in obj) {
+			if (Object.prototype.hasOwnProperty.call(obj, key)) {
+				newObj[key] = mapTree(obj[key], fn, seen);
+			}
+		}
+		return newObj;
+	}
+
+	// truncate text
+	function truncateLongText(obj, maxLines = MAX_TEXT_LINES) {
+		if (maxLines=0) {
+			return obj;
+		}
+		return mapTree(obj, function(value) {
+			if (typeof value === "string") {
+				const lines = value.split("\n");
+				if (lines.length > maxLines) {
+					return lines.slice(0, maxLines).join("\n") + `\n... (${lines.length - maxLines} more lines)`;
+				}
+			}
+			return value;
+		});
+	}
+
     // Custom writer to control output depth
     function customWriter(output) {
-        return util.inspect(output, {
+        return util.inspect(truncateLongText(output), {
             colors: true,
-            depth: 1 // Only one level deep
+            depth: 2 // Only one level deep
         });
     }
 
