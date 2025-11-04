@@ -43,6 +43,40 @@ exports.makeDraggable = function(options) {
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
+			// Resolve plugin dependents recursively and add them to the drag bundle
+			var processedPlugins = {}; // Track processed plugins to avoid duplicates and cycles
+			var resolvePluginDependents = function(pluginTitle) {
+				if(processedPlugins[pluginTitle]) {
+					return; // Already processed this plugin
+				}
+				processedPlugins[pluginTitle] = true;
+				var tiddler = options.widget.wiki.getTiddler(pluginTitle);
+				// Check if this is a plugin
+				if(tiddler && tiddler.isPlugin()) {
+					// Get dependents from the plugin
+					var dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
+					$tw.utils.each(dependents,function(dependentTitle) {
+						// Check if the dependent exists in the wiki and isn't already in the bundle
+						var dependentTiddler = options.widget.wiki.getTiddler(dependentTitle);
+						if(dependentTiddler && dependentTiddler.isPlugin() && titles.indexOf(dependentTitle) === -1) {
+							// Add the dependent to the drag bundle
+							titles.push(dependentTitle);
+						}
+						// Recursively resolve dependents of dependents (if the dependent exists)
+						if(dependentTiddler && dependentTiddler.isPlugin()) {
+							resolvePluginDependents(dependentTitle);
+						}
+					});
+				}
+			};
+			// Process all plugins in the titles to resolve their dependents
+			var titlesCopy = titles.slice(0); // Copy to avoid modifying during iteration
+			$tw.utils.each(titlesCopy,function(title) {
+				var tiddler = options.widget.wiki.getTiddler(title);
+				if(tiddler && tiddler.isPlugin()) {
+					resolvePluginDependents(title);
+				}
+			});
 			var titleString = $tw.utils.stringifyList(titles);
 			// Check that we've something to drag
 			if(titles.length > 0 && (options.selector && $tw.utils.domMatchesSelector(event.target,options.selector) || event.target === domNode)) {

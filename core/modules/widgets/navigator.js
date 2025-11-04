@@ -516,50 +516,12 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 		incomingTiddlers = [];
 	// Process each tiddler
 	importData.tiddlers = importData.tiddlers || {};
-	// First, add all tiddlers to importData.tiddlers and create a map for quick lookup
-	var tiddlerMap = {};
 	$tw.utils.each(tiddlers,function(tiddlerFields) {
 		tiddlerFields.title = $tw.utils.trim(tiddlerFields.title);
 		var title = tiddlerFields.title;
 		if(title) {
 			incomingTiddlers.push(title);
 			importData.tiddlers[title] = tiddlerFields;
-			tiddlerMap[title] = tiddlerFields;
-		}
-	});
-	// Resolve plugin dependents recursively
-	// This function recursively accumulates all dependent plugins from the dragged data
-	var processedPlugins = {}; // Shared map to track processed plugins across all calls
-	var resolvePluginDependents = function(pluginTitle) {
-		if(processedPlugins[pluginTitle]) {
-			return; // Already processed this plugin
-		}
-		processedPlugins[pluginTitle] = true;
-		var pluginFields = tiddlerMap[pluginTitle];
-		// Check if this is a plugin
-		if(pluginFields && pluginFields.type === "application/json" && pluginFields["plugin-type"]) {
-			// Get dependents from the plugin
-			var dependents = $tw.utils.parseStringArray(pluginFields.dependents || "");
-			$tw.utils.each(dependents,function(dependentTitle) {
-				// Check if the dependent exists in the dragged data
-				var dependentFields = tiddlerMap[dependentTitle];
-				if(dependentFields && !importData.tiddlers[dependentTitle]) {
-					// Add the dependent to the import
-					importData.tiddlers[dependentTitle] = dependentFields;
-					incomingTiddlers.push(dependentTitle);
-				}
-				// Recursively resolve dependents of dependents
-				if(dependentFields) {
-					resolvePluginDependents(dependentTitle);
-				}
-			});
-		}
-	};
-	// Process all plugins in the incoming tiddlers to resolve their dependents
-	$tw.utils.each(tiddlers,function(tiddlerFields) {
-		var title = $tw.utils.trim(tiddlerFields.title);
-		if(title && tiddlerFields.type === "application/json" && tiddlerFields["plugin-type"]) {
-			resolvePluginDependents(title);
 		}
 	});
 	// Give the active upgrader modules a chance to process the incoming tiddlers
