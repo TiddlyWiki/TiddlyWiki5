@@ -63,32 +63,36 @@ Command.prototype.execute = function() {
 	}
 
 	class CustomFunctionInspect {
-		constructor(val) {
+		constructor(val, depth) {
 			this.val = val;
+			this.depth = depth;
 		}
 		[util.inspect.custom](depth, opts) {
-			let code = this.val.toString();
-			let truncatedCode = code;
-			if (code.split('\n').length > 10) {
-				truncatedCode = code.split('\n').slice(0,10).join('\n') + '\n...';
-			}
-
-			let s = `[Function: ${this.val.name || '(anonymous)'}]`;
-
-			const props = {};
 			const keys = Object.keys(this.val);
-			if(keys.length > 0) {
-				const newOpts = Object.assign({}, opts, { depth: opts.depth === null ? null : opts.depth - 1 });
-				if (opts.depth !== null && opts.depth <= 0) {
-					s += ' [Object]';
-				} else {
-					for(const key of keys) {
-						props[key] = this.val[key];
-					}
-					s += ' ' + util.inspect(props, newOpts);
+			if (this.depth === 0 && keys.length === 0) {
+				// Top-level function with no properties, show code
+				let code = this.val.toString();
+				if (code.split('\n').length > 10) {
+					code = code.split('\n').slice(0,10).join('\n') + '\n...';
 				}
+				return code;
+			} else {
+				// Nested function, or function with properties, show short info
+				let s = `[Function: ${this.val.name || '(anonymous)'}]`;
+				if (keys.length > 0) {
+					const props = {};
+					const newOpts = Object.assign({}, opts, { depth: opts.depth === null ? null : opts.depth - 1 });
+					if (opts.depth !== null && opts.depth <= 0) {
+						s += ' [Object]';
+					} else {
+						for(const key of keys) {
+							props[key] = this.val[key];
+						}
+						s += ' ' + util.inspect(props, newOpts);
+					}
+				}
+				return s;
 			}
-			return `${s}\n${truncatedCode}`;
 		}
 	}
 
@@ -98,7 +102,7 @@ Command.prototype.execute = function() {
 		}
 		const seen = new WeakMap();
 
-		function walk(o) {
+		function walk(o, depth) {
 			if (o === null || (typeof o !== "object" && typeof o !== 'function')) {
 				if (typeof o === "string") {
 					const lines = o.split("\n");
@@ -114,7 +118,7 @@ Command.prototype.execute = function() {
 			}
 
 			if (typeof o === 'function') {
-				const wrapped = new CustomFunctionInspect(o);
+				const wrapped = new CustomFunctionInspect(o, depth);
 				seen.set(o, wrapped);
 				return wrapped;
 			}
@@ -123,7 +127,7 @@ Command.prototype.execute = function() {
 				const newArr = [];
 				seen.set(o, newArr);
 				for (let i = 0; i < o.length; i++) {
-					newArr[i] = walk(o[i]);
+					newArr[i] = walk(o[i], depth + 1);
 				}
 				return newArr;
 			}
@@ -132,12 +136,12 @@ Command.prototype.execute = function() {
 			seen.set(o, newObj);
 			for (const key in o) {
 				if (Object.prototype.hasOwnProperty.call(o, key)) {
-					newObj[key] = walk(o[key]);
+					newObj[key] = walk(o[key], depth + 1);
 				}
 			}
 			return newObj;
 		}
-		return walk(obj);
+		return walk(obj, 0);
 	}
 
     // Custom writer to control output depth
