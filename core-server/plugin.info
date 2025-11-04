@@ -1,0 +1,11 @@
+{
+	"title": "$:/core-server",
+	"name": "Core Server Components",
+	"description": "TiddlyWiki5 core server components",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"platform": "server",
+	"plugin-priority": "0",
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
+}

@@ -1,56 +1,61 @@
 title: $:/core/macros/tree
 tags: $:/tags/Macro
 
-\procedure leaf-link(full-title,chunk,separator: "/")
-<$link to=<<full-title>>><$text text=<<chunk>>/></$link>
+\define leaf-link(full-title,chunk,separator: "/")
+<$link to=<<__full-title__>>><$text text=<<__chunk__>>/></$link>
 \end
 
+\define leaf-node(prefix,chunk)
 \whitespace trim
-\procedure leaf-node(prefix,chunk)
 <li>
-<$list filter="[<prefix>addsuffix<chunk>is[shadow]] [<prefix>addsuffix<chunk>is[tiddler]] ~[<chunk>is[shadow]] ~[<chunk>is[tiddler]]" variable="full-title">
-<span class="tc-tiny-gap-right">{{$:/core/images/file}}</span><$transclude $variable="leaf-link" full-title=<<full-title>> chunk=<<chunk>>/>
+<$list filter="[<__prefix__>addsuffix<__chunk__>is[shadow]] [<__prefix__>addsuffix<__chunk__>is[tiddler]]" variable="full-title">
+<$list filter="[<full-title>removeprefix<__prefix__>]" variable="chunk">
+<span>{{$:/core/images/file}}</span>&#32;<$macrocall $name="leaf-link" full-title=<<full-title>> chunk=<<chunk>>/>
 </$list>
 </li>
 \end
 
-\procedure branch-node(prefix,chunk,separator: "/", filter)
+\define branch-node(prefix,chunk,separator: "/")
+\whitespace trim
 <li>
-<$set name="reveal-state" value={{{ [[$:/state/tree/]addsuffix<prefix>addsuffix<chunk>] }}}>
+<$set name="reveal-state" value={{{ [[$:/state/tree/]addsuffix<__prefix__>addsuffix<__chunk__>] }}}>
 <$reveal type="nomatch" stateTitle=<<reveal-state>> text="show">
 <$button setTitle=<<reveal-state>> setTo="show" class="tc-btn-invisible">
-{{$:/core/images/folder}}&#32;<$text text=<<chunk>>/>
+{{$:/core/images/folder}}&#32;<$text text=<<__chunk__>>/>
 </$button>
 </$reveal>
 <$reveal type="match" stateTitle=<<reveal-state>> text="show">
 <$button setTitle=<<reveal-state>> setTo="hide" class="tc-btn-invisible">
-{{$:/core/images/folder}}&#32;<$text text=<<chunk>>/>
+{{$:/core/images/folder}}&#32;<$text text=<<__chunk__>>/>
 </$button>
 </$reveal>
-<span class="tc-tiny-gap-left">(<$count filter="[subfilter<filter>removeprefix<prefix>removeprefix<chunk>] -[<prefix>addsuffix<chunk>]"/>)</span>
+&#32;
+<span>(<$count filter="[all[shadows+tiddlers]removeprefix<__prefix__>removeprefix<__chunk__>] -[<__prefix__>addsuffix<__chunk__>]"/>)</span>
 <$reveal type="match" stateTitle=<<reveal-state>> text="show">
-<$transclude $variable="tree-node" prefix={{{ [<prefix>addsuffix<chunk>] }}} separator=<<separator>> filter=<<filter>>/>
+<$macrocall $name="tree-node" prefix={{{ [<__prefix__>addsuffix<__chunk__>] }}} separator=<<__separator__>>/>
 </$reveal>
 </$set>
 </li>
 \end
 
-\procedure tree-node(prefix,separator: "/", filter)
+\define tree-node(prefix,separator: "/")
+\whitespace trim
 <ol>
-<$list filter="[subfilter<filter>removeprefix<prefix>splitbefore<separator>sort[]!suffix<separator>]" variable="chunk">
-<$transclude $variable="leaf-node" prefix=<<prefix>> chunk=<<chunk>> separator=<<separator>> />
+<$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore<__separator__>sort[]!suffix<__separator__>]" variable="chunk">
+<$macrocall $name="leaf-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>>/>
 </$list>
-<$list filter="[subfilter<filter>removeprefix<prefix>splitbefore<separator>sort[]suffix<separator>]" variable="chunk">
-<$transclude $variable="branch-node" prefix=<<prefix>> chunk=<<chunk>> separator=<<separator>> filter=<<filter>>/>
+<$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore<__separator__>sort[]suffix<__separator__>]" variable="chunk">
+<$macrocall $name="branch-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>>/>
 </$list>
 </ol>
 \end
 
-\procedure tree(prefix: "$:/",separator: "/", filter: "[all[shadows+tiddlers]]")
+\define tree(prefix: "$:/",separator: "/")
+\whitespace trim
 <div class="tc-tree">
-<span><$text text=<<prefix>>/></span>
+<span><$text text=<<__prefix__>>/></span>
 <div>
-<$transclude $variable="tree-node" prefix=<<prefix>> separator=<<separator>> filter=<<filter>>/>
+<$macrocall $name="tree-node" prefix=<<__prefix__>> separator=<<__separator__>>/>
 </div>
 </div>
 \end

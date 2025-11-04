@@ -1,0 +1,10 @@
+title: $:/changenotes/5.3.8/32caeb69c3e7b75a80a84a1e14363e87175b164e
+description: Revert breakage of [[list-tagged-draggable Macro]]
+release: 5.3.8
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: hackability
+links: https://github.com/TiddlyWiki/TiddlyWiki5/commit/32caeb69c3e7b75a80a84a1e14363e87175b164e
+github-contributors: Jermolene
+
+Reverted the [[change in v5.3.7|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8721]] that broke the [[list-tagged-draggable Macro]]. The change involved updating some core macros to use procedures

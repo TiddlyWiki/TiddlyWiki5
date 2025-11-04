@@ -65,6 +65,10 @@ sidebar-tab-foreground-selected: Seitenleiste Reiter Vordergrund für selectiert
 sidebar-tab-foreground: Seitenleiste Reiter Vordergrund
 sidebar-tiddler-link-foreground-hover: Seitenleiste Tiddler Link Vordergrund (hover)
 sidebar-tiddler-link-foreground: Seitenleiste Tiddler Link Vordergrund
+stability-stable: Label für Stabilitäts-Level "stabil"
+stability-experimental: Label für Stabilitäts-Level "experimentell"
+stability-deprecated: Label für Stabilitäts-Level "abgekündigt"
+stability-legacy: Label für Stabilitäts-Level "veraltet"
 site-title-foreground: Wiki Titel Vordergrund
 static-alert-foreground: Statische Warnung Vordergrund
 testcase-accent-level-1: Test Beispiel Akzent Farbe nicht "verschachtelt" - Ebene 1
