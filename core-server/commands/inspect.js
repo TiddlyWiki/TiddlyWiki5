@@ -30,7 +30,7 @@ const colour = {
 }
 
 exports.info = {
-	name: "sandbox",
+	name: "inspect",
 	synchronous: true
 };
 
