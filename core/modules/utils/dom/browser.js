@@ -136,15 +136,19 @@ exports.getFullScreenApis = function() {
 		result = {
 		"_requestFullscreen": db.webkitRequestFullscreen !== undefined ? "webkitRequestFullscreen" :
 							db.mozRequestFullScreen !== undefined ? "mozRequestFullScreen" :
+							db.msRequestFullscreen !== undefined ? "msRequestFullscreen" :
 							db.requestFullscreen !== undefined ? "requestFullscreen" : "",
 		"_exitFullscreen": d.webkitExitFullscreen !== undefined ? "webkitExitFullscreen" :
 							d.mozCancelFullScreen !== undefined ? "mozCancelFullScreen" :
+							d.msExitFullscreen !== undefined ? "msExitFullscreen" :
 							d.exitFullscreen !== undefined ? "exitFullscreen" : "",
 		"_fullscreenElement": d.webkitFullscreenElement !== undefined ? "webkitFullscreenElement" :
 							d.mozFullScreenElement !== undefined ? "mozFullScreenElement" :
+							d.msFullscreenElement !== undefined ? "msFullscreenElement" :
 							d.fullscreenElement !== undefined ? "fullscreenElement" : "",
 		"_fullscreenChange": d.webkitFullscreenElement !== undefined ? "webkitfullscreenchange" :
 							d.mozFullScreenElement !== undefined ? "mozfullscreenchange" :
+							d.msFullscreenElement !== undefined ? "MSFullscreenChange" :
 							d.fullscreenElement !== undefined ? "fullscreenchange" : ""
 	};
 	if(!result._requestFullscreen || !result._exitFullscreen || !result._fullscreenElement || !result._fullscreenChange) {
