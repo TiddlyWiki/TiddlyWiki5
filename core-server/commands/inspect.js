@@ -20,6 +20,9 @@ const SIGNATURE_THRESHOLD = 50;
 // Path to REPL history file
 const REPL_HISTORY_PATH = path.join(os.homedir(), ".tiddlywiki_repl_history");
 
+// Max lines of source text in object output
+const MAX_SOURCE_LINES = 10; 
+
 // Terminal colours
 const colour = {
 	log: (txt="", fg=255, bg=0, efg=255, ebg=0) => process.stdout.write(
@@ -59,7 +62,10 @@ Command.prototype.execute = function() {
 		return null;
 	}
 
-	function truncateLongText(obj, maxLines = 10) {
+	function truncateLongText(obj, maxLines = MAX_SOURCE_LINES) {
+		if (maxLines === 0) {
+			return obj;
+		}
 		const seen = new WeakMap();
 
 		function truncate(value) {
