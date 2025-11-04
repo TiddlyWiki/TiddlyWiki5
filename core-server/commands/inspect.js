@@ -23,6 +23,9 @@ const REPL_HISTORY_PATH = path.join(os.homedir(), ".tiddlywiki_repl_history");
 // Max lines of source text in object output
 const MAX_SOURCE_LINES = 10; 
 
+// Initial inspection depth
+const INITIAL_INSPECT_DEPTH = 2;
+
 // Terminal colours
 const colour = {
 	log: (txt="", fg=255, bg=0, efg=255, ebg=0) => process.stdout.write(
@@ -164,7 +167,7 @@ Command.prototype.execute = function() {
 		return walk(obj, 0);
 	}
 
-	let inspectDepth = 2;
+	let inspectDepth = INITIAL_INSPECT_DEPTH;
 
     // Custom writer to control output depth
     function customWriter(output) {
