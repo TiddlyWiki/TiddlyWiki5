@@ -41,7 +41,7 @@ exports.convertStyleNameToPropertyName = function(styleName) {
 	var propertyName = $tw.utils.unHyphenateCss(styleName);
 	// Then check if it needs a prefix
 	if($tw.browser && document.body.style[propertyName] === undefined) {
-		var prefixes = ["Moz","webkit"];
+		var prefixes = ["O","MS","Moz","webkit"];
 		for(var t=0; t<prefixes.length; t++) {
 			var prefixedName = prefixes[t] + propertyName.substr(0,1).toUpperCase() + propertyName.substr(1);
 			if(document.body.style[prefixedName] !== undefined) {
@@ -66,6 +66,8 @@ exports.convertPropertyNameToStyleName = function(propertyName) {
 	// If there's a webkit prefix, add a dash (other browsers have uppercase prefixes, and so get the dash automatically)
 	if(styleName.indexOf("webkit") === 0) {
 		styleName = "-" + styleName;
+	} else if(styleName.indexOf("-m-s") === 0) {
+		styleName = "-ms" + styleName.substr(4);
 	}
 	return styleName;
 };
@@ -90,6 +92,8 @@ var eventNameMappings = {
 		correspondingCssProperty: "transition",
 		mappings: {
 			transition: "transitionend",
+			OTransition: "oTransitionEnd",
+			MSTransition: "msTransitionEnd",
 			MozTransition: "transitionend",
 			webkitTransition: "webkitTransitionEnd"
 		}
@@ -98,6 +102,8 @@ var eventNameMappings = {
 		correspondingCssProperty: "animation",
 		mappings: {
 			animation: "animationend",
+			OAnimation: "oAnimationEnd",
+			MSAnimation: "msAnimationEnd",
 			MozAnimation: "animationend",
 			webkitAnimation: "webkitAnimationEnd"
 		}
