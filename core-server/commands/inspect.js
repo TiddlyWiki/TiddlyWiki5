@@ -134,9 +134,22 @@ Command.prototype.execute = function() {
 
 			const newObj = {};
 			seen.set(o, newObj);
-			for (const key in o) {
-				if (Object.prototype.hasOwnProperty.call(o, key)) {
+
+			let allProperties = [];
+			let currentObj = o;
+			do {
+				allProperties = allProperties.concat(Object.getOwnPropertyNames(currentObj));
+			} while ((currentObj = Object.getPrototypeOf(currentObj)));
+			const properties = [...new Set(allProperties)]; // Remove duplicates
+
+			const filteredProperties = properties.filter(p => !p.startsWith("__")); // Filter out internal properties
+
+			for (const key of filteredProperties) {
+				try {
+					// Accessing properties can throw errors (e.g., getters)
 					newObj[key] = walk(o[key], depth + 1);
+				} catch (e) {
+					newObj[key] = `[Error: ${e.message}]`;
 				}
 			}
 			return newObj;
