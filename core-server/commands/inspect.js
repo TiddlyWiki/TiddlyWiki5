@@ -20,9 +20,6 @@ const SIGNATURE_THRESHOLD = 50;
 // Path to REPL history file
 const REPL_HISTORY_PATH = path.join(os.homedir(), ".tiddlywiki_repl_history");
 
-// Truncate long texts in object tree output
-const MAX_TEXT_LINES = 10;
-
 // Terminal colours
 const colour = {
 	log: (txt="", fg=255, bg=0, efg=255, ebg=0) => process.stdout.write(
@@ -62,39 +59,10 @@ Command.prototype.execute = function() {
 		return null;
 	}
 
-	// deepclone an object
-	function mapTree(obj, fn, seen) {
-		seen = seen || new WeakMap();
-		if (obj === null || typeof obj !== "object") {
-			return fn(obj);
-		}
-		if (seen.has(obj)) {
-			return seen.get(obj);
-		}
-		if (Array.isArray(obj)) {
-			const newArr = [];
-			seen.set(obj, newArr);
-			for (let i = 0; i < obj.length; i++) {
-				newArr[i] = mapTree(obj[i], fn, seen);
-			}
-			return newArr;
-		}
-		const newObj = {};
-		seen.set(obj, newObj);
-		for (const key in obj) {
-			if (Object.prototype.hasOwnProperty.call(obj, key)) {
-				newObj[key] = mapTree(obj[key], fn, seen);
-			}
-		}
-		return newObj;
-	}
+	function truncateLongText(obj, maxLines = 10) {
+		const seen = new WeakMap();
 
-	// truncate text
-	function truncateLongText(obj, maxLines = MAX_TEXT_LINES) {
-		if (maxLines=0) {
-			return obj;
-		}
-		return mapTree(obj, function(value) {
+		function truncate(value) {
 			if (typeof value === "string") {
 				const lines = value.split("\n");
 				if (lines.length > maxLines) {
@@ -102,7 +70,33 @@ Command.prototype.execute = function() {
 				}
 			}
 			return value;
-		});
+		}
+
+		function walk(o) {
+			if (o === null || typeof o !== "object") {
+				return truncate(o);
+			}
+			if (seen.has(o)) {
+				return seen.get(o);
+			}
+			if (Array.isArray(o)) {
+				const newArr = [];
+				seen.set(o, newArr);
+				for (let i = 0; i < o.length; i++) {
+					newArr[i] = walk(o[i]);
+				}
+				return newArr;
+			}
+			const newObj = {};
+			seen.set(o, newObj);
+			for (const key in o) {
+				if (Object.prototype.hasOwnProperty.call(o, key)) {
+					newObj[key] = walk(o[key]);
+				}
+			}
+			return newObj;
+		}
+		return walk(obj);
 	}
 
     // Custom writer to control output depth
