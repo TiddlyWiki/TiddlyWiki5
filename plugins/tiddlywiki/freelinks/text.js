@@ -112,7 +112,6 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 		return [{type: "plain-text", text: text}];
 	}
 	
-	// Sort: first by position, then by length descending (prioritize longer matches)
 	matches.sort(function(a, b) {
 		if(a.index !== b.index) {
 			return a.index - b.index;
@@ -123,21 +122,17 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 	var processedPositions = new FastPositionSet();
 	var validMatches = [];
 	
-	// Filter overlapping matches and current tiddler title
 	for(var i = 0; i < matches.length; i++) {
 		var match = matches[i];
 		var matchStart = match.index;
 		var matchEnd = matchStart + match.length;
 		
-		// Boundary check
 		if(matchStart < 0 || matchEnd > text.length) {
 			continue;
 		}
 		
-		// Get matched title
 		var matchedTitle = this.tiddlerTitleInfo.titles[match.titleIndex];
 		
-		// Critical fix: compare with case consideration
 		var titleToCompare = ignoreCase ? 
 			(currentTiddlerTitle ? currentTiddlerTitle.toLowerCase() : "") : 
 			currentTiddlerTitle;
@@ -145,12 +140,10 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 			(matchedTitle ? matchedTitle.toLowerCase() : "") : 
 			matchedTitle;
 		
-		// Skip if match is the current tiddler title
 		if(titleToCompare && matchedTitleToCompare === titleToCompare) {
 			continue;
 		}
 		
-		// Check if position already processed
 		var hasOverlap = false;
 		for(var pos = matchStart; pos < matchEnd && !hasOverlap; pos++) {
 			if(processedPositions.has(pos)) {
@@ -159,7 +152,6 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 		}
 		
 		if(!hasOverlap) {
-			//Mark these positions as processed
 			for(var pos = matchStart; pos < matchEnd; pos++) {
 				processedPositions.add(pos);
 			}
@@ -171,7 +163,6 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 		return [{type: "plain-text", text: text}];
 	}
 	
-	// Build new parse tree
 	var newParseTree = [];
 	var currentPos = 0;
 	
@@ -180,7 +171,6 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 		var matchStart = match.index;
 		var matchEnd = matchStart + match.length;
 		
-		// Add text before match
 		if(matchStart > currentPos) {
 			var beforeText = text.substring(currentPos, matchStart);
 			newParseTree.push({
@@ -189,7 +179,6 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 			});
 		}
 		
-		// Add matched text (as link)
 		var matchedTitle = this.tiddlerTitleInfo.titles[match.titleIndex];
 		var matchedText = text.substring(matchStart, matchEnd);
 		
@@ -208,7 +197,6 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 		currentPos = matchEnd;
 	}
 	
-	// Add remaining text
 	if(currentPos < text.length) {
 		var remainingText = text.substring(currentPos);
 		newParseTree.push({
@@ -236,7 +224,6 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 	var validTitles = [];
 	var ac = new AhoCorasick();
 	
-	// Process titles: filter system tiddlers and validate
 	for(var i = 0; i < titles.length; i++) {
 		var title = titles[i];
 		if(title && title.length > 0 && title.substring(0,3) !== "$:/") {
@@ -247,15 +234,12 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 		}
 	}
 	
-	// Sort: by length descending, then alphabetically
-	// Prioritizing longer titles avoids partial matches (e.g., "Java Script" vs "Java")
 	var sortedTitles = validTitles.sort(function(a,b) {
 		var lenDiff = b.length - a.length;
 		if(lenDiff !== 0) return lenDiff;
 		return a < b ? -1 : a > b ? 1 : 0;
 	});
 	
-	// Build Aho-Corasick automaton
 	for(var i = 0; i < sortedTitles.length; i++) {
 		var title = sortedTitles[i];
 		var pattern = ignoreCase ? title.toLowerCase() : title;
@@ -265,7 +249,6 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 	try {
 		ac.buildFailureLinks();
 	} catch(e) {
-		// If build fails, return empty result
 		return { 
 			titles: [], 
 			ac: new AhoCorasick()
