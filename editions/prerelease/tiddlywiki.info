@@ -10,7 +10,6 @@
 		"tiddlywiki/dynaview",
 		"tiddlywiki/dynannotate",
 		"tiddlywiki/codemirror",
-		"tiddlywiki/freelinks",
 		"tiddlywiki/menubar",
 		"tiddlywiki/jszip",
 		"tiddlywiki/confetti",
