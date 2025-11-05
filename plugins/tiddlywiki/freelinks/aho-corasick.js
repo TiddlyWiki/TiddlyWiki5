@@ -109,6 +109,11 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 				
 				var failureLink = (fail && fail[char]) ? fail[char] : root;
 				this.failure[child] = failureLink;
+				
+				// remove incorrect output merging
+				// Do not merge outputs from failure links during build
+				// Instead, collect matches dynamically by traversing failure links during search				
+
 				queue.push(child);
 			}
 		}
@@ -133,6 +138,7 @@ AhoCorasick.prototype.search = function(text, useWordBoundary) {
 		var char = text[i];
 		var transitionCount = 0;
 		
+		// Follow failure links to find a valid transition
 		while(node && !node[char] && node !== this.trie && transitionCount < this.maxFailureDepth) {
 			node = this.failure[node] || this.trie;
 			transitionCount++;
@@ -147,16 +153,20 @@ AhoCorasick.prototype.search = function(text, useWordBoundary) {
 			}
 		}
 		
+		// correctly collect all matches
+		// Traverse the current node and its failure link chain to gather all patterns
 		var currentNode = node;
 		var collectCount = 0;
 		var visitedNodes = new Set();
 		
 		while(currentNode && collectCount < 10) {
+			// Prevent infinite loops
 			if(visitedNodes.has(currentNode)) {
 				break;
 			}
 			visitedNodes.add(currentNode);
 			
+			// Only collect outputs from the current node (not merged ones)
 			if(currentNode.$) {
 				var outputs = currentNode.$;
 				for(var j = 0; j < outputs.length && matches.length < maxMatches; j++) {
