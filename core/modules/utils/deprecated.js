@@ -49,11 +49,7 @@ exports.removeClass = function(el,className) {
 
 // Use element.classList.toggle instead
 exports.toggleClass = function(el,className,status) {
-	if(status === undefined) {
-		el.classList && el.classList.toggle(className);
-	} else {
-		el.classList && el.classList.toggle(className, status);
-	}
+	el.classList && el.classList.toggle(className, status);
 };
 
 exports.getLocationPath = () => window.location.origin + window.location.pathname;
