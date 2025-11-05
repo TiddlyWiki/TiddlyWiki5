@@ -77,7 +77,7 @@ Command.prototype.execute = function() {
 			if (this.depth === 0 && keys.length === 0) {
 				// Top-level function with no properties, show code
 				let code = this.val.toString();
-				if (code.split('\n').length > 10) {
+				if (code.split('\n').length > 30) {
 					code = code.split('\n').slice(0,10).join('\n') + '\n...';
 				}
 				return code;
