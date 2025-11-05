@@ -221,7 +221,7 @@ Command.prototype.execute = function() {
 					const signature = getFunctionSignature(target);
 					if (signature !== null) {
 						const coloredSignature = colour.txt(`(${signature})`, 248, 0, 255, 0);
-						hits.push(line + coloredSignature);
+						hits.push(line + `(${signature})`);
 						return [hits, line];
 					}
 				}
@@ -236,7 +236,7 @@ Command.prototype.execute = function() {
 						const signature = getFunctionSignature(target);
 						if (signature !== null) {
 							const coloredSignature = colour.txt(`(${signature})`, 248, 0, 255, 0);
-							return prefix + propName + coloredSignature;
+							return prefix + propName + `(${signature})`;
 						}
 					}
 					// For non-functions, just return the name
