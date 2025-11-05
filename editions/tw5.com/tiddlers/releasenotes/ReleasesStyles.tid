@@ -3,18 +3,70 @@ tags: $:/tags/Stylesheet
 type: text/vnd.tiddlywiki
 
 .doc-release-note {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-columns: fit-content(20ch) 1fr fit-content(40ch);
-	gap: 1.5rem;
-	margin: 2rem 0;
 }
 
-/* Headings span all three columns */
 .doc-release-note-heading {
-	grid-column: 1 / -1;
+}
+
+.doc-change-note-category, .doc-change-note-heading {
+	font-weight: 600;
+	margin: 0;
+}
+
+.doc-release-note, .doc-release-note-heading, .doc-change-note-type, .doc-change-note-body, .doc-change-note-impacts {
 }
 
 .doc-change-note-item {
-	display: contents;
+	border: 2px solid #e8e8e8;
+	border-radius: 0.5em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	background: #f9f9f9;
+}
+
+.doc-change-note-item {
+}
+
+.doc-change-note-heading {
+	padding: 0.25em;
+	background: #e8e8e8;
+	color: <<colour foreground>>;
+}
+
+.doc-change-note-heading .doc-link-badge {
+	margin-right: 0.25em;
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+.doc-change-note-github-links {
+	border-top: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.doc-change-note-impact-note {
+	padding: 0.25em;
+	border-top: 1px solid #e8e8e8;
+}
+
+.doc-change-note-impact-pill {
+	padding: 0.2em 0.6em;
+	border: 1px solid;
+	border-radius: 1em;
+	font-size: 0.6em;
+	font-weight: 700;
+	background: #f0f0f0;
+	margin-right: 0.5em;
+	text-transform: uppercase;
+}
+
+.doc-change-note-impact-pill svg {
+	width: 1em;
+	height: 1em;
+	vertical-align: middle;
+	fill: currentColor;
+}
+
+.doc-change-note-description {
+	padding: 0.25em;
 }

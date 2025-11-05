@@ -35,6 +35,16 @@ for their winning design for the banner for this release (here is the
 <div style="clear:both;"/>
 \end banner-credits
 
+\procedure impact-pill(impact-type)
+<span
+	class={{{ doc-change-note-impact-pill [[doc-change-note-impact-pill-]addsuffix<impact-type>] +[join[ ]] }}}
+	style.borderColor={{{ [<impact-type>addprefix[$:/tw5.com/releases/info/impact-types/]addsuffix[/colour/foreground]get[text]] }}}
+	style.backgroundColor={{{ [<impact-type>addprefix[$:/tw5.com/releases/info/impact-types/]addsuffix[/colour/background]get[text]] }}}
+>
+	{{$:/core/images/star-filled}} <$text text=<<impact-type>>/>
+</span>
+\end impact-pill
+
 \procedure change-list()
 \whitespace trim
 <div class="doc-release-note">
@@ -47,51 +57,38 @@ for their winning design for the banner for this release (here is the
 			</div>
 			<$list filter="[tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>sort[description]]" variable="change">
 				<div class="doc-change-note-item">
-					<div class="doc-change-note-type">
+					<h3 class="doc-change-note-heading">
 						<$link
 							to="Release Notes and Changes"
 							class="doc-link-badge"
 							style.backgroundColor={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/colour]get[text]] }}}
 						>
 							<$text text={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/caption]get[text]] }}}/>
-						</$link>
+						</$link> <$transclude $tiddler=<<change>> $field="description" $mode="inline"/></h3>
+					<div class="doc-change-note-impact-notes">
+						<$list filter="[tag[$:/tags/ImpactNote]] :filter[{!!changenote}match<change>] +[sort[description]]" variable="impact">
+							<div class="doc-change-note-impact-note">
+								<$transclude $variable="impact-pill" $mode="inline" impact-type={{{ [<impact>get[impact-type]] }}}/>
+								<$text text=" - "/>
+								<$transclude $tiddler=<<impact>> $field="description" $mode="inline"/>
+							</div>
+						</$list>
 					</div>
-					<div class="doc-change-note-body">
-						<$transclude $tiddler=<<change>> $field="description" $mode="inline"/>
-						<div class="">
-							<$list filter="[tag[$:/tags/ImpactNote]] :filter[{!!changenote}match<change>] +[sort[description]]" variable="impact">
-								<div class="doc-change-note-impactnote">
-									<$text text={{{ [<impact>get[impact-type]] }}}/>
-									<$text text=" - "/>
-									<$transclude $tiddler=<<impact>> $field="description" $mode="inline"/>
-								</div>
-							</$list>
-						</div>
-						<div class="doc-change-note-github-links">
-							<$list filter="[<change>get[links]enlist-input[]]" variable="link">
-								<a
-									href=<<link>>
-									class="doc-github-link"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									{{$:/core/images/github}}
-								</a>
-							</$list>
-						</div>
-						<div class="doc-change-note-description">
-							<$transclude $tiddler=<<change>> $mode="block"/>
-						</div>
+					<div class="doc-change-note-github-links">
+					<$text text="GitHub links: "/>
+						<$list filter="[<change>get[github-links]enlist-input[]]" variable="link">
+							<a
+								href=<<link>>
+								class="doc-github-link"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								{{$:/core/images/github}}
+							</a>
+						</$list>
 					</div>
-					<div class="doc-change-note-impacts">
-						<div class="">
-							<$list filter="[tag[$:/tags/ImpactNote]] :filter[{!!changenote}match<change>] +[get[impact-type]unique[]sort[]]" variable="impact-type">
-								<span class="doc-change-note-impacts-summary-item" style.borderColor={{{ [<impact-type>addprefix[$:/tw5.com/releases/info/impact-types/]addsuffix[/colour]get[text]] }}}>
-									<$text text=<<impact-type>>/>
-								</span>
-								<$text text=" "/>
-							</$list>
-						</div>
+					<div class="doc-change-note-description">
+						<$transclude $tiddler=<<change>> $mode="block"/>
 					</div>
 				</div>
 			</$list>
@@ -114,6 +111,7 @@ for their winning design for the banner for this release (here is the
 \end acknowledgements
 
 \procedure releasenote(release)
+\whitespace trim
 <$let
 	releaseTiddler={{{ [all[tiddlers]tag[ReleaseNotes]] :filter[{!!caption}match<release>] }}}
 	releaseTiddlerCreated={{{ [<releaseTiddler>get[created]] }}}
@@ -130,9 +128,7 @@ See <<github-changes-link>> and [[other versions|TiddlyWiki Releases]].
 
 ! Changes
 
-This release includes the following changes.
-
-<<change-list>>
+<$transclude $variable="change-list" $mode="inline"/>
 
 <!-- Acknowledgement list -->
 
