@@ -110,7 +110,6 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 				var failureLink = (fail && fail[char]) ? fail[char] : root;
 				this.failure[child] = failureLink;
 				
-				// remove incorrect output merging
 				// Do not merge outputs from failure links during build
 				// Instead, collect matches dynamically by traversing failure links during search				
 
@@ -153,7 +152,6 @@ AhoCorasick.prototype.search = function(text, useWordBoundary) {
 			}
 		}
 		
-		// correctly collect all matches
 		// Traverse the current node and its failure link chain to gather all patterns
 		var currentNode = node;
 		var collectCount = 0;
