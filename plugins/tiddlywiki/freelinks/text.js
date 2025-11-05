@@ -3,8 +3,8 @@ title: $:/core/modules/widgets/text.js
 type: application/javascript
 module-type: widget
 
-An optimized override of the core text widget that automatically linkifies the text
-Fixed for TiddlyWiki 5.4 - resolves character disappearing issue
+An optimized override of the core text widget that automatically linkifies the text, with support for non-Latin languages like Chinese, prioritizing longer titles, skipping processed matches, excluding the current tiddler title from linking, and handling large title sets with enhanced Aho-Corasick algorithm.
+
 \*/
 
 "use strict";
