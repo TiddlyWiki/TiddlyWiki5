@@ -4,7 +4,7 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: hackability
-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8702
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8702
 github-contributors: Jermolene
 
 This PR brings several new features for end users:
