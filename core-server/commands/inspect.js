@@ -65,6 +65,7 @@ Command.prototype.execute = function() {
 		return null;
 	}
 
+	// utils.inspect: Custom inspect function
 	class CustomFunctionInspect {
 		constructor(val, depth, colour_ref) {
 			this.val = val;
@@ -106,6 +107,7 @@ Command.prototype.execute = function() {
 		}
 	}
 
+	// REPL: Custom output processing
 	function processOutput(obj, maxLines = MAX_SOURCE_LINES) {
 		if (maxLines === 0) {
 			return obj;
@@ -123,7 +125,8 @@ Command.prototype.execute = function() {
 				return o;
 			}
 
-			if (o instanceof Error) {
+			// likely an Error-like object / o instanceof Error was not detected
+			if (Object.prototype.toString.call(o) === '[object Error]') {
 				return {
 					message: o.message,
 					stack: o.stack
@@ -176,7 +179,7 @@ Command.prototype.execute = function() {
 
 	let inspectDepth = INITIAL_INSPECT_DEPTH;
 
-    // Custom writer to control output depth
+    // REPL: Custom writer to control output depth
     function customWriter(output) {
         return util.inspect(processOutput(output), {
             colors: true,
@@ -184,7 +187,7 @@ Command.prototype.execute = function() {
         });
     }
 
-	// Custom completer to provide property and method name completions
+	// REPL: Custom completer to provide property and method name completions
 	function completer(line) {
 		if (!self.runtime || !self.runtime.context) {
 			return [[], line];
@@ -249,7 +252,7 @@ Command.prototype.execute = function() {
 		return [hits, line];
 	}
 
-	// Start the REPL
+	// REPL: Start
 	this.runtime = repl.start({
 		prompt: this.params.length ? colour.txt(this.params[0],33,0,7,0) : colour.txt("$command: > ",33,0,7,0),
 		useColors: true,
@@ -258,7 +261,7 @@ Command.prototype.execute = function() {
 		writer: customWriter
 	});
 
-	// Initialie History Setup
+	// REPL: Initialie History Setup
 	this.runtime.setupHistory({
 		filePath: REPL_HISTORY_PATH,
 		size: 200,
@@ -269,7 +272,7 @@ Command.prototype.execute = function() {
 		}
 	});
 
-	// Define .depth command
+	// REPL: Define .depth command
 	this.runtime.defineCommand("depth", {
 		help: "Set inspection depth. Usage: .depth <number>",
 		action(input) {
@@ -284,7 +287,7 @@ Command.prototype.execute = function() {
 		}
 	});
 
-	// Define .history command
+	// REPL: Define .history command
 	this.runtime.defineCommand("history", {
 		help: "Use '.history' or '.history path'",
 		action(input) {
@@ -320,7 +323,7 @@ Command.prototype.execute = function() {
 		}
 	});
 
-	// On reset, restore $tw in the context
+	// REPL: On reset, restore $tw in the context
 	this.runtime.on("reset", function() {
 		self.runtime.context.$tw = $tw;
 	});
