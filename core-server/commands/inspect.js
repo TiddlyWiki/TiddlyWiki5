@@ -3,7 +3,7 @@ title: $:/core/modules/commands/sandbox.js
 type: application/javascript
 module-type: command
 
-node.js REPL with access to $tw
+node.js REPL with access to $tw variable space
 
 Optional params = REPL prompt
 
