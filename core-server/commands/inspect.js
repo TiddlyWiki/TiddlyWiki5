@@ -212,8 +212,7 @@ Command.prototype.execute = function() {
 			} while ((currentObj = Object.getPrototypeOf(currentObj)));
 			const properties = [...new Set(allProperties)];
 			const filteredProperties = properties.filter(p => !p.startsWith("__"));
-			const matchingProperties = filteredProperties.filter(p => p.startsWith(partial));
-
+			const matchingProperties = filteredProperties.filter(p => p.toLowerCase().startsWith(partial.toLowerCase()));
 			// Special case: if there's a single exact match for a function, complete its signature
 			if (matchingProperties.length === 1 && matchingProperties[0] === partial) {
 				const propName = matchingProperties[0];
