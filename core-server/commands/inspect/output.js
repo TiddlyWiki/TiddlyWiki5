@@ -107,7 +107,16 @@ exports.processOutput = function(obj, maxLines = MAX_SOURCE_LINES) {
 		} while ((currentObj = Object.getPrototypeOf(currentObj)));
 		const properties = [...new Set(allProperties)]; // Remove duplicates
 
-		const filteredProperties = properties.filter(p => !p.startsWith("__")); // Filter out internal properties
+		const propertiesToFilter = [
+			"constructor",
+			"hasOwnProperty",
+			"isPrototypeOf",
+			"propertyIsEnumerable",
+			"toString",
+			"valueOf",
+			"toLocaleString"
+		];
+		const filteredProperties = properties.filter(p => !p.startsWith("__") && propertiesToFilter.indexOf(p) === -1); // Filter out internal and Object.prototype properties
 
 		for (const key of filteredProperties) {
 			try {
