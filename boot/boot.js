@@ -140,7 +140,7 @@ $tw.utils.each = function(object,callback) {
 			});
 		} else {
 			Object.entries(object).every(entry => {
-				const next = callback(entry[1], entry[0], object)
+				const next = callback(entry[1], entry[0], object);
 				return next !== false;
 			});
 		}
