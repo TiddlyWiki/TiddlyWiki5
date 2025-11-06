@@ -1,7 +1,7 @@
 caption: $:/tags/ClassFilters/TiddlerTemplate
 created: 20221020035738692
-description: marks filters evaluated to dynamically add classes to the page template.
-modified: 20230326153057521
+description: marks filters evaluated to dynamically add classes to the tiddler template.
+modified: 20250608225016149
 tags: SystemTags
 title: SystemTag: $:/tags/ClassFilters/TiddlerTemplate
 type: text/vnd.tiddlywiki

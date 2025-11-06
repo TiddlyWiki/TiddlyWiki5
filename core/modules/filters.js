@@ -267,8 +267,7 @@ exports.compileFilter = function(filterString) {
 		// Create a function for the chain of operators in the operation
 		var operationSubFunction = function(source,widget) {
 			var accumulator = source,
-				results = [],
-				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
+				results = [];
 			$tw.utils.each(operation.operators,function(operator) {
 				var operands = [],
 					multiValueOperands = [],
@@ -286,6 +285,7 @@ exports.compileFilter = function(filterString) {
 				}
 				$tw.utils.each(operator.operands,function(operand) {
 					if(operand.indirect) {
+						var currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
 						operand.multiValue = [operand.value];
 					} else if(operand.variable) {

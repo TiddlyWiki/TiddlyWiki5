@@ -1,0 +1,7 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Dash
+type: text/vnd.tiddlywiki
+
+This is an en-dash: --
+
+This is an em-dash: ---

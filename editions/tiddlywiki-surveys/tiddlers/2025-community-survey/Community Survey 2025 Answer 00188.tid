@@ -1,0 +1,33 @@
+are-you-a-dev: No, I would not
+backup-method: Consumer online storage (e.g. Google Drive, Dropbox)
+diy-backup-info: 
+first-heard-survey: Talk TiddlyWiki
+first-used-tw: 2025
+joined-tw-community: No
+main-use-cases: Note-taking;Journalling;Task and project management (including CRMs);As a knowledge base (including technical, non-fiction and encyclopaedic content)
+ok-to-publish: Yes, I am happy for my responses to be published
+other-survey-source: 
+other-use-cases: 
+positive-about-future: Yes
+project-decision-trust: Yes
+project-strengths: The brief overview of the apps is nice.
+project-weaknesses: Documentation. Having most of the apps made by the community is fine but it would be great if the documentation was more centralized. Or maybe more examples posted on how to setup an app. I am pretty new to TiddlyWiki, but I find it hard to find information. Or at least to get help. Maybe the community isn't very involved?? An official Discord server might work better for people to discuss issues, projects, customizations.
+publish-to-intranet: 
+publish-to-web: 
+published-plugin: No
+save-method: Single-file wiki with TiddlyDesktop
+share-wikis: No, my TiddlyWiki is for personal use only
+started-tw-community: 
+tags: [[Community Survey 2025]]
+title: Community Survey 2025 Answer 00188
+tw-ability-level: My use is basic; I use TiddlyWiki in a configuration close to standard, without plugins
+tw-customisations: 
+tw-future-confidence: Yes
+use-discord: 
+use-for-work-or-study: No
+use-github-discuss: 
+use-mailing-list: 
+use-reddit: 
+use-ttw: 
+value-of-tw: I control the data. Makes me feel better. It is easy to search.
+wiki-setup-info: I have been using TiddlyDesktop until recently. I was storing the wiki in OneDrive but if I forgot to close it on one computer and opened it on another they would be out of sync. I have been trying to get TiddlyPWA up and running but it is having trouble creating the database in deno. So right now I have it in Tiddly Bob. It is working but I would rather have a separate app that I use instead of having it in the browser.

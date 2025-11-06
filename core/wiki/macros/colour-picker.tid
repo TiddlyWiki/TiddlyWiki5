@@ -1,55 +1,58 @@
 title: $:/core/macros/colour-picker
 tags: $:/tags/Macro
 
-\procedure colour-picker-update-recent()
+\define colour-picker-update-recent()
 <$action-listops
 	$tiddler="$:/config/ColourPicker/Recent"
-	$subfilter="[<colour-picker-value>] [list[$:/config/ColourPicker/Recent]remove<colour-picker-value>] +[limit[8]]"
+	$subfilter="$(colour-picker-value)$ [list[$:/config/ColourPicker/Recent]remove[$(colour-picker-value)$]] +[limit[8]]"
 />
 \end
 
-\procedure colour-picker-inner(actions)
-<$button tag="a" tooltip=<<colour-picker-value>>>
-<<colour-picker-update-recent>>
-<$transclude $variable="actions"/>
-<span style.display="inline-block" style.backgroundColor=<<colour-picker-value>> style.width="100%" style.height="100%" style.borderRadius="50%"/>
+\define colour-picker-inner(actions)
+<$button tag="a" tooltip="""$(colour-picker-value)$""">
+$(colour-picker-update-recent)$
+<$transclude $variable="__actions__"/>
+
+<span style="display:inline-block; background-color: $(colour-picker-value)$; width: 100%; height: 100%; border-radius: 50%;"/>
+
 </$button>
 \end
 
+\define colour-picker-recent-inner(actions)
 \whitespace trim
-\procedure colour-picker-recent-inner(actions)
-<$set name="colour-picker-value" value=<<recentColour>>>
-<$transclude $variable="colour-picker-inner" actions=<<actions>>/>
+<$set name="colour-picker-value" value="$(recentColour)$">
+<$macrocall $name="colour-picker-inner" actions=<<__actions__>>/>
 </$set>
 \end
 
-\procedure colour-picker-recent(actions)
+\define colour-picker-recent(actions)
+\whitespace trim
 {{$:/language/ColourPicker/Recent}}<$list filter="[list[$:/config/ColourPicker/Recent]]" variable="recentColour">
 &#32;
-<$transclude $variable="colour-picker-recent-inner" actions=<<actions>>/>
+<$macrocall $name="colour-picker-recent-inner" actions=<<__actions__>>/>
 </$list>
 \end
 
-\procedure colour-picker(actions)
+\define colour-picker(actions)
+\whitespace trim
 <div class="tc-colour-chooser">
 
-<$transclude $variable="colour-picker-recent" actions=<<actions>>/>
+<$macrocall $name="colour-picker-recent" actions=<<__actions__>>/>
 
 ---
 
 <$list filter="LightPink Pink Crimson LavenderBlush PaleVioletRed HotPink DeepPink MediumVioletRed Orchid Thistle Plum Violet Magenta Fuchsia DarkMagenta Purple MediumOrchid DarkViolet DarkOrchid Indigo BlueViolet MediumPurple MediumSlateBlue SlateBlue DarkSlateBlue Lavender GhostWhite Blue MediumBlue MidnightBlue DarkBlue Navy RoyalBlue CornflowerBlue LightSteelBlue LightSlateGrey SlateGrey DodgerBlue AliceBlue SteelBlue LightSkyBlue SkyBlue DeepSkyBlue LightBlue PowderBlue CadetBlue Azure LightCyan PaleTurquoise Cyan Aqua DarkTurquoise DarkSlateGrey DarkCyan Teal MediumTurquoise LightSeaGreen Turquoise Aquamarine MediumAquamarine MediumSpringGreen MintCream SpringGreen MediumSeaGreen SeaGreen Honeydew LightGreen PaleGreen DarkSeaGreen LimeGreen Lime ForestGreen Green DarkGreen Chartreuse LawnGreen GreenYellow DarkOliveGreen YellowGreen OliveDrab Beige LightGoldenrodYellow Ivory LightYellow Yellow Olive DarkKhaki LemonChiffon PaleGoldenrod Khaki Gold Cornsilk Goldenrod DarkGoldenrod FloralWhite OldLace Wheat Moccasin Orange PapayaWhip BlanchedAlmond NavajoWhite AntiqueWhite Tan BurlyWood Bisque DarkOrange Linen Peru PeachPuff SandyBrown Chocolate SaddleBrown Seashell Sienna LightSalmon Coral OrangeRed DarkSalmon Tomato MistyRose Salmon Snow LightCoral RosyBrown IndianRed Red Brown FireBrick DarkRed Maroon White WhiteSmoke Gainsboro LightGrey Silver DarkGrey Grey DimGrey Black" variable="colour-picker-value">
 &#32;
-<$transclude $variable="colour-picker-inner" actions=<<actions>>/>
+<$macrocall $name="colour-picker-inner" actions=<<__actions__>>/>
 </$list>
 
 ---
 
-<$edit-text tiddler="$:/config/ColourPicker/New" tag="input" default="" placeholder="" class="tc-tiny-gap-right"/>
+<$edit-text tiddler="$:/config/ColourPicker/New" tag="input" default="" placeholder=""/>
+&#32;
 <$edit-text tiddler="$:/config/ColourPicker/New" type="color" tag="input"/>
 <$set name="colour-picker-value" value={{$:/config/ColourPicker/New}}>
-<%if [{$:/config/ColourPicker/New}!is[blank]] %>
-<$transclude $variable="colour-picker-inner" actions=<<actions>>/>
-<%endif%>
+<$macrocall $name="colour-picker-inner" actions=<<__actions__>>/>
 </$set>
 
 </div>

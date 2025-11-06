@@ -1,0 +1,48 @@
+created: 20211130114857532
+filter1: [prefix[ca]then[ca]]
+filter2: [suffix[at]then[at]]
+filter3: other
+modified: 20250310110107153
+original-modified: 20230305125250563
+tags: [[Cascade Filter Run Prefix]]
+title: Cascade Filter Run Prefix (Examples)
+ja-title: cascadeフィルタランプレフィックス (例)
+type: text/vnd.tiddlywiki
+
+<<.op ":cascade">>フィルタランプレフィックスは、タグマクロによって生成されるタグピルで使用される各Tiddlerの配色を選択するために、~TiddlyWikiコアによって使用されます。
+
+`:cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]]`
+
+上記の<<.op :cascade>>フィルタラン内のフィルタ式は、<<tag $:/tags/TiddlerColourFilter>>でタグ付けされたTiddlerのテキストフィールドからフィルタのリストを返します。以下を参照: 
+
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]]">
+<li><pre><$text text=<<currentTiddler>>/></pre></li>
+</$list>
+</ul>
+
+インプットタイトルごとに、これらのフィルタが順番に適用され、空でないリストを返す最初のフィルタが見つかるまで続きます。この空でないリストの最初の結果がそのインプットタイトルに置き換えられ、そのTiddlerの色として使用されます。
+
+<<.operator-example 1 """[all[shadows+tiddlers]] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] +[!is[blank]limit[10]]""">>
+
+!! 拡張例
+
+この例では、<<.op :cascade>>フィルタランがどのように機能するかを段階的に説明します。
+
+アウトプットがフィルタのリストを返すフィルタ式が必要です。通常、このようなフィルタ式は、一連のTiddler内のいくつかのフィールドを照会して(おそらくタグ経由で)フィルタのリストを作成します。この例を自己完結型にするために、このTiddlerの//filter1//、//filter2//、//filter3//フィールドに、3つのフィルタが格納されます。[[テキスト参照|TextReference]]と[[appendオペレータ|append Operator]]のインスタンスを使用して、フィールドをフィルタのリストに結合します。
+
+フィルター`[{!!filter1}append{!!filter2}append{!!filter3}]`は、次のフィルタリストを生成します: 
+
+<ul>
+<$list filter="[{!!filter1}append{!!filter2}append{!!filter3}]">
+<li><pre><$text text=<<currentTiddler>>/></pre></li>
+</$list>
+</ul>
+
+この例では、`cat can bat bug`がインプットタイトルとして使用されます。各インプットタイトルは、上記の各フィルタに対して順番に<<.op :cascade>>で評価されます。<<.op :cascade>>の内部で何が起こっているかを理解しやすくするために、次の表では、[[mapフィルタランプレフィックス|Map Filter Run Prefix]]を使用して、各フィルタの結果を示しています。
+
+|^<<.operator-example c1.1 "cat can bat bug :map[prefix[ca]then[ca]]">>|^<<.operator-example c1.2 "cat can bat bug :map[suffix[at]then[at]]">>|^<<.operator-example c1.3 "cat can bat bug :map[[other]]">>|
+
+上記の3つの例で"Try it"をクリックします。<<.op :cascade>>を使用すると、各行の左から右に読み取られた最初の空白以外の値が返されます。最終結果を確認するには、下の"Try it"をクリックします。
+ 
+<<.operator-example c1.4 "cat can bat bug :cascade[{!!filter1}append{!!filter2}append{!!filter3}]">>
