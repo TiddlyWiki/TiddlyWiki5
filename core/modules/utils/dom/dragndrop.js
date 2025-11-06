@@ -58,7 +58,7 @@ exports.makeDraggable = function(options) {
 					$tw.utils.each(dependents,function(dependentTitle) {
 						// Check if the dependent exists in the wiki and isn't already in the bundle
 						var dependentTiddler = options.widget.wiki.getTiddler(dependentTitle);
-						if(dependentTiddler && dependentTiddler.isPlugin() && titles.indexOf(dependentTitle) === -1) {
+						if(dependentTiddler && dependentTiddler.isPlugin() && !titles.includes(dependentTitle)) {
 							// Add the dependent to the drag bundle
 							titles.push(dependentTitle);
 						}
@@ -71,7 +71,7 @@ exports.makeDraggable = function(options) {
 					var parentPlugin = tiddler.fields["parent-plugin"];
 					if(parentPlugin) {
 						var parentTiddler = options.widget.wiki.getTiddler(parentPlugin);
-						if(parentTiddler && parentTiddler.isPlugin() && titles.indexOf(parentPlugin) === -1) {
+						if(parentTiddler && parentTiddler.isPlugin() && !titles.includes(parentPlugin)) {
 							// Add the parent plugin to the drag bundle
 							titles.push(parentPlugin);
 						}
