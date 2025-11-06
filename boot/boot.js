@@ -878,7 +878,11 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 			$tw: $tw,
 			require: function(title) {
 				return $tw.modules.execute(title, name);
-			}
+			},
+			fetch: fetch,
+			Headers: Headers,
+			Request: Request,
+			Response: Response
 		};
 
 	Object.defineProperty(sandbox.module, "id", {

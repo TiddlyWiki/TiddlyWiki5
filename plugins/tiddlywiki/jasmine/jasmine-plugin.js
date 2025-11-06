@@ -36,7 +36,11 @@ exports.runTests = function(callback,specFilter) {
 		clearInterval: clearInterval,
 		setTimeout: setTimeout,
 		clearTimeout: clearTimeout,
-		$tw: $tw
+		$tw: $tw,
+		fetch: fetch,
+		Headers: Headers,
+		Request: Request,
+		Response: Response
 	};
 	// The `global` property is needed in two places:
 	// 1. jasmine-core/node_boot.js: extends the global object with jasmine interface.
