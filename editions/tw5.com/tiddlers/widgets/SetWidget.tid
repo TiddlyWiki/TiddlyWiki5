@@ -1,6 +1,6 @@
 caption: set
 created: 20131115182700000
-modified: 20230720174707977
+modified: 20251106163646008
 tags: Widgets
 title: SetWidget
 type: text/vnd.tiddlywiki
@@ -24,7 +24,7 @@ The content of the `<$set>` widget is the scope for the value assigned to the va
 |select |<<.from-version "5.1.14">> An optional zero-based index of the item to return from the filter output (see below) |
 |emptyValue |The value to assign to the variable if the specified value is missing or empty (see below) |
 
-<<.tip """If the value of your variable is enclosed in double square brackets this might indicate that you are returning a list of values from the filter. To use a single title from the filter output without the double square brackets see ''Filtered Item Variable Assignment'' below.""">>
+<<.tip """If the value of your variable is enclosed in double square brackets this might indicate that you are returning a list of values from the filter. To use a single title from the filter output without the double square brackets see ''Filtered Item Variable Assignment (Single Item)'' below.""">>
 
 ! Examples
 
@@ -82,9 +82,9 @@ src='<$set name="myVariable" filter="[tag[HelloThere]]">
 
 <<<
 
-!! Filtered Item Variable Assignment Single Element
+!! Filtered Item Variable Assignment (Single Item)
 
-<<.from-version "5.1.14">> This form of the set variable widget evaluates the filter and assigns the specified result to the variable as a single item (ie, not using double square brackets for titles containing spaces).
+<<.from-version "5.1.14">> This form of the set variable widget evaluates the filter and assigns the specified result to the variable as a single item (i.e. not using double square brackets for titles containing spaces).
 
 <<<
 
@@ -123,12 +123,13 @@ src='<$set name="myTiddler" value="HelloThere">
 
 !! Using the Set Widget to Create Global Variables
 
-There are times when it makes sense to use the features of the [[SetWidget]] rather than procedures or functions to create global variables.  This can be accomplished by placing the set variable widget in a tiddler that is tagged [[$:/tags/Global|SystemTag: $:/tags/Global]].  If multiple variables are required, the set variable widget can be nested as shown here:
+You can use the features of the SetWidget rather than procedures or functions to create global variables.  This can be accomplished by placing the SetWidget in a tiddler that is tagged [[$:/tags/Global|SystemTag: $:/tags/Global]].  If multiple variables are required, the widget can be nested:
 
 <<<
 <div class="doc-example">
 
 ```
+\whitespace trim
 <$set name="myGlobalVariable" value="I am global">
     <$set name="myOtherGlobalVariable" value="I am also a global variable.">
     </$set>
@@ -136,3 +137,5 @@ There are times when it makes sense to use the features of the [[SetWidget]] rat
 ```
 </div>
 <<<
+
+<<.note "You must insert the [[\whitespace Pragma|Pragma: \whitespace]] when using linebreaks and indents for nested widgets to be recognized by the global ImportVariablesWidget, as shown in the example." >>
