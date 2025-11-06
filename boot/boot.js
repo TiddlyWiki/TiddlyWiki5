@@ -131,20 +131,25 @@ Deprecated: Use instanceof Date instead
 */
 $tw.utils.isDate = value => value instanceof Date;
 
-// Deprecated: Use Array.each & Object.entries instead
 $tw.utils.each = function(object,callback) {
+	var next,f,length;
 	if(object) {
-		if(Array.isArray(object)) {
-			for(const f of object.keys()) {
-				const next = callback(object[f], f, object);
+		if(Object.prototype.toString.call(object) == "[object Array]") {
+			for(f=0, length=object.length; f<length; f++) {
+				next = callback(object[f],f,object);
 				if(next === false) {
 					break;
 				}
 			}
 		} else {
-			Object.entries(object).forEach(entry => {
-				callback(entry[1], entry[0], object)
-			});
+			var keys = Object.keys(object);
+			for(f=0, length=keys.length; f<length; f++) {
+				var key = keys[f];
+				next = callback(object[key],key,object);
+				if(next === false) {
+					break;
+				}
+			}
 		}
 	}
 };
