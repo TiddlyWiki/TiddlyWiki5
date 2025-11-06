@@ -30,7 +30,7 @@ for their winning design for the banner for this release (here is the
 	target="_blank"
 >discussion</a>).
 <%else%>
-<$image source="New Release Banner" width="140">
+<$image source="New Release Banner" width="140"/>
 <%endif%>
 <div style="clear:both;"/>
 \end banner-credits
