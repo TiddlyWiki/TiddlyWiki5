@@ -1,41 +1,56 @@
 caption: importvariables
 created: 20140612142500000
-modified: 20180928150043777
+modified: 20251106190900079
 tags: Widgets
 title: ImportVariablesWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The ImportVariablesWidget imports macro and variable definitions from a list of other tiddlers and makes them available to its children. For example:
+The <<.def $importvariables >> widget is used to import macro, procedure, function, widget and variable definitions from other tiddlers that are identified by a [[Filter Expression]].
 
-```
-<$importvariables filter="[tag[mySpecialMacros]]">
-All the macros defined in tiddlers with the tag "mySpecialMacros" are available here
-</$importvariables>
-```
+The content of the <<.wid importvariables>> widget is the scope within which the imported definitions are available.
 
-! Attributes and Content
-
-The content of the importvariables widget is the scope within which the imported variable definitions are available.
+! Attributes
 
 |!Attribute |!Description |
-|filter |[[Tiddler filter|Filters]] defining the tiddlers from which macro definitions will be imported |
+|filter |[[Filter Expression]] defining the tiddlers from which definitions will be imported |
 
-! Global Macros
+<<.note "Imports can be cascaded, i.e. the imported tiddlers can themselves contain an `\import` pragma or an <<.wid importvariables>> widget.">>
 
-So-called global macros are implemented within the main page template ([[$:/core/ui/PageTemplate]]) by wrapping the page content in the following importvariables widget:
+!Examples
+
+To import definitions from all tiddlers with the tag "myMacros":
 
 ```
-<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
-...
+<$importvariables filter="[tag[myMacros]]">
+    Definitions are available here
 </$importvariables>
 ```
 
-! `\import` Pragma
-
-<<.from-version "5.1.18">> The [[Pragma: \import]] is an alternative syntax for using the ImportVariablesWidget. For example, the previous example could be expressed as:
+!! Single Tiddler
+To import definitions from the tiddler "Macros and Procedures":
 
 ```
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+<$importvariables filter="[[Macros and Procedures]]">
+    Definitions are available here
+</$importvariables>
 ```
+
+<<.tip "Brackets `[[` and `]]` are only needed if the tiddler name contains spaces.">>
+
+! Pragma Shortcut Syntax
+<<.from-version "5.1.18">> The [[Pragma: \import]] is a shortcut syntax for the <<.wid importvariables>> widget. The examples above can also be written as
+
+```
+\import [tag[myMacros]]
+\import [[Macros and Procedures]]
+```
+or combined
+
+```
+\import [tag[myMacros]] [[Macros and Procedures]]
+```
+
+<<.note "Tiddlers are imported in the order of the <<.attr filter>> output, with subsequently imported definitions possibly overwriting preceding ones if they use the same name.
+">>
