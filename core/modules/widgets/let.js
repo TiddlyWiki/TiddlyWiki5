@@ -56,7 +56,7 @@ LetWidget.prototype.computeAttributes = function() {
 	});
 	// Run through again, setting variables and looking for differences
 	$tw.utils.each(this.currentValueFor,function(value,name) {
-		if (!$tw.utils.isArrayEqual(self.attributes[name],value)) {
+		if(!$tw.utils.isArrayEqual(self.attributes[name],value)) {
 			self.attributes[name] = value;
 			self.setVariable(name,value);
 			changedAttributes[name] = true;
