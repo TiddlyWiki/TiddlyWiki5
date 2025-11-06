@@ -1,0 +1,68 @@
+created: 20251107000000000
+modified: 20251107000000000
+tags: [[WebServer API]]
+title: WebServer API: Post Actions
+type: text/vnd.tiddlywiki
+
+Execute action tiddlers on the server side
+
+```
+POST /recipes/default/actions
+```
+
+The body should be a JSON object with the following properties:
+
+* ''tag'' - (optional) tag name to execute all action tiddlers with this tag
+* ''title'' - (optional) title of a specific action tiddler to execute
+* ''variables'' - (optional) object containing variable name-value pairs to set in the execution context
+
+At least one of ''tag'' or ''title'' must be provided. If both are provided, both will be executed.
+
+Headers:
+
+* ''Content-Type'' - must be set to `application/json`
+* ''x-requested-with'' - must be set to `TiddlyWiki` in order for the request to succeed, unless [[WebServer Parameter: csrf-disable]] is set to `yes`
+
+Example 1 - Execute by tag:
+
+```json
+{
+	"tag": "$:/tags/Actions",
+	"variables": {
+		"currentTiddler": "MyTiddler"
+	}
+}
+```
+
+Example 2 - Execute by title:
+
+```json
+{
+	"title": "$:/core/ui/Actions/new-tiddler",
+	"variables": {
+		"currentTiddler": "MyTiddler"
+	}
+}
+```
+
+Example 3 - Execute both:
+
+```json
+{
+	"tag": "$:/tags/Actions",
+	"title": "MyCustomAction",
+	"variables": {}
+}
+```
+
+Response:
+
+* 200 OK
+*> `Content-Type: application/json`
+*> `{"success": true}`
+* 400 Bad Request - Invalid JSON or missing required fields
+*> `Content-Type: application/json`
+*> `{"error": "error message"}`
+* 404 Not Found - Action tiddler not found (when using title)
+*> `Content-Type: application/json`
+*> `{"error": "Action tiddler not found: <title>"}`
