@@ -69,7 +69,7 @@ exports.runTests = function(callback,specFilter) {
 		context.require = function(moduleTitle) {
 			// mock out the 'glob' module required in
 			// "$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js"
-			if (moduleTitle === "glob") {
+			if(moduleTitle === "glob") {
 				return {};
 			}
 			return $tw.modules.execute(moduleTitle,title);
@@ -146,6 +146,15 @@ exports.runTests = function(callback,specFilter) {
 	context = $tw.utils.extend({},jasmineInterface,context);
 	// Iterate through all the test modules
 	var tests = $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
+	// If specFilter is provided, only load tests that match the filter
+	if(specFilter) {
+		tests = tests.filter(function(testTitle) {
+			// Get the test file content to check if it contains the spec name
+			var testText = $tw.wiki.getTiddlerText(testTitle, "");
+			// Check if the describe block contains the filter text
+			return testText.indexOf(specFilter) !== -1;
+		});
+	}
 	$tw.utils.each(tests,evalInContext);
 	// In a browser environment, we use jasmine-core/boot.js to call `execute()` for us.
 	// In Node.js, we call it manually.
