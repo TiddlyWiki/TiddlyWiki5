@@ -29,28 +29,25 @@ exports.info = {
 exports.handler = function(request,response,state) {
 	var data = $tw.utils.parseJSONSafe(state.data);
 	if(!data) {
-		response.writeHead(400, {"Content-Type": "application/json"});
-		response.end(JSON.stringify({
+		state.sendResponse(400,{"Content-Type": "application/json"},JSON.stringify({
 			error: "Invalid JSON in request body"
-		}));
+		}),"utf8");
 		return;
 	}
 	// Require filter field
 	if(!data.filter || typeof data.filter !== "string") {
-		response.writeHead(400, {"Content-Type": "application/json"});
-		response.end(JSON.stringify({
+		state.sendResponse(400,{"Content-Type": "application/json"},JSON.stringify({
 			error: "Missing or invalid 'filter' field"
-		}));
+		}),"utf8");
 		return;
 	}
 	// Check filter permissions (similar to get-tiddlers-json.js)
 	var filter = data.filter;
 	if(state.wiki.getTiddlerText("$:/config/Server/AllowAllExternalFilters") !== "yes") {
 		if(state.wiki.getTiddlerText("$:/config/Server/ExternalFilters/" + filter) !== "yes") {
-			response.writeHead(403, {"Content-Type": "application/json"});
-			response.end(JSON.stringify({
+			state.sendResponse(403,{"Content-Type": "application/json"},JSON.stringify({
 				error: "Forbidden: filter not allowed."
-			}));
+			}),"utf8");
 			return;
 		}
 	}
@@ -73,16 +70,14 @@ exports.handler = function(request,response,state) {
 		}
 
 		var results = state.wiki.filterTiddlers(data.filter, widgetNode, source);
-		response.writeHead(200, {"Content-Type": "application/json"});
-		response.end(JSON.stringify({
+		state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify({
 			results: results
-		}));
+		}),"utf8");
 	} catch(error) {
-		// Handle execution errors
-		response.writeHead(500, {"Content-Type": "application/json"});
-		response.end(JSON.stringify({
-			error: "Error executing filter: " + error.message,
-			stack: error.stack
-		}));
+		state.sendResponse(500,{"Content-Type": "application/json"},JSON.stringify({
+			error: "Error executing filter",
+		}),"utf8");
+		// Only log error on server console for security
+		console.error("Error executing filter:", error);
 	}
 };

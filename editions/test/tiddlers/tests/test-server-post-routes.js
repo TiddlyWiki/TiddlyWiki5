@@ -86,7 +86,7 @@ describe("Server API Routes", function() {
 		// Note: Tests use existing action tiddlers from $:/core/ui/Actions/*
 		// which are tagged with $:/tags/Actions
 		
-		xit("should execute existing action tiddlers by tag (new-tiddler)", async function() {
+		it("should execute existing action tiddlers by tag (new-tiddler)", async function() {
 			// Use the existing $:/core/ui/Actions/new-tiddler action
 			// Before: count tiddlers
 			var beforeCount = $tw.wiki.filterTiddlers("[!is[system]]").length;
@@ -171,42 +171,15 @@ describe("Server API Routes", function() {
 			expect(result.data.error).toContain("not found");
 		});
 		
-		it("should execute both tag and title when provided", async function() {
-			// Create a test action tiddler
-			$tw.wiki.addTiddler(new $tw.Tiddler({
-				title: "TestAction2",
-				text: '<$action-setfield $tiddler="TestActionResult2" text="from-title" />'
-			}));
-			
-			// Create a tagged action tiddler
-			$tw.wiki.addTiddler(new $tw.Tiddler({
-				title: "TestTaggedAction",
-				text: '<$action-setfield $tiddler="TestActionResult3" text="from-tag" />',
-				tags: ["TestActionTag"]
-			}));
-			
+		it("should return error when both tag and title are provided", async function() {
 			var result = await makeRequest({
-				title: "TestAction2",
-				tag: "TestActionTag"
+				title: "SomeAction",
+				tag: "SomeTag"
 			});
 			
-			expect(result.ok).toBe(true);
-			expect(result.data.success).toBe(true);
-			
-			// Verify both actions were executed
-			var resultTiddler2 = $tw.wiki.getTiddler("TestActionResult2");
-			expect(resultTiddler2).toBeDefined();
-			expect(resultTiddler2.fields.text).toBe("from-title");
-			
-			var resultTiddler3 = $tw.wiki.getTiddler("TestActionResult3");
-			expect(resultTiddler3).toBeDefined();
-			expect(resultTiddler3.fields.text).toBe("from-tag");
-			
-			// Cleanup
-			$tw.wiki.deleteTiddler("TestAction2");
-			$tw.wiki.deleteTiddler("TestTaggedAction");
-			$tw.wiki.deleteTiddler("TestActionResult2");
-			$tw.wiki.deleteTiddler("TestActionResult3");
+			expect(result.status).toBe(400);
+			expect(result.data.error).toContain("both");
+			expect(result.data.error).toContain("choose one");
 		});
 		
 		it("should succeed even with non-existent tag (no actions to execute)", async function() {

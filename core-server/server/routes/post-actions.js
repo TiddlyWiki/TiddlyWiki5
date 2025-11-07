@@ -12,7 +12,7 @@ Request body should be a JSON object with the following properties:
 - title: (optional) title of a specific action tiddler to execute
 - variables: (optional) object containing variable name-value pairs to set in the execution context
 
-At least one of 'tag' or 'title' must be provided. If both are provided, both will be executed.
+Either 'tag' or 'title' must be provided, but not both.
 
 Example 1 - Execute by tag:
 POST /recipes/default/actions
@@ -30,14 +30,6 @@ POST /recipes/default/actions
 	"variables": {
 		"currentTiddler": "MyTiddler"
 	}
-}
-
-Example 3 - Execute both:
-POST /recipes/default/actions
-{
-	"tag": "$:/tags/Actions",
-	"title": "MyCustomAction",
-	"variables": {}
 }
 
 \*/
@@ -63,10 +55,16 @@ exports.handler = function(request,response,state) {
 		}),"utf8");
 		return;
 	}
-	// Validate required fields - need at least one of tag or title
+	// Validate required fields - need exactly one of tag or title
 	if(!data.tag && !data.title) {
 		state.sendResponse(400,{"Content-Type": "application/json"},JSON.stringify({
-			error: "Missing required field: must provide either 'tag' or 'title'"
+			error: "Missing required field: must provide either 'tag' or 'title', and should not be empty string."
+		}),"utf8");
+		return;
+	}
+	if(data.tag && data.title) {
+		state.sendResponse(400,{"Content-Type": "application/json"},JSON.stringify({
+			error: "Cannot provide both 'tag' and 'title': choose one"
 		}),"utf8");
 		return;
 	}
@@ -77,14 +75,13 @@ exports.handler = function(request,response,state) {
 	// Execute action tiddler by title if provided
 	if(data.title) {
 		var tiddlerText = state.wiki.getTiddlerText(data.title);
-		if(tiddlerText) {
-			widgetNode.invokeActionString(tiddlerText, widgetNode, null, data.variables || {});
-		} else {
+		if(!tiddlerText) {
 			state.sendResponse(404,{"Content-Type": "application/json"},JSON.stringify({
 				error: "Action tiddler not found: " + data.title
 			}),"utf8");
 			return;
 		}
+		widgetNode.invokeActionString(tiddlerText, widgetNode, null, data.variables || {});
 	}
 	// Execute action tiddlers by tag if provided
 	if(data.tag) {

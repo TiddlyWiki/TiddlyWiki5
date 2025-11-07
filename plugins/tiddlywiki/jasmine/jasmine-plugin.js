@@ -150,14 +150,9 @@ exports.runTests = function(callback,specFilter) {
 	context = $tw.utils.extend({},jasmineInterface,context);
 	// Iterate through all the test modules
 	var tests = $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
-	// If specFilter is provided, only load tests that match the filter
+	// Filter the tests based on the spec tiddler title
 	if(specFilter) {
-		tests = tests.filter(function(testTitle) {
-			// Get the test file content to check if it contains the spec name
-			var testText = $tw.wiki.getTiddlerText(testTitle, "");
-			// Check if the describe block contains the filter text
-			return testText.indexOf(specFilter) !== -1;
-		});
+		tests = $tw.wiki.filterTiddlers("[search[" + specFilter + "]]", null, $tw.wiki.makeTiddlerIterator(tests));
 	}
 	$tw.utils.each(tests,evalInContext);
 	// In a browser environment, we use jasmine-core/boot.js to call `execute()` for us.
