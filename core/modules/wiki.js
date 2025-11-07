@@ -371,6 +371,7 @@ Sort an array of tiddler titles by a specified field
 */
 exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric,isAlphaNumeric,locale) {
 	var self = this;
+	locale = $tw.utils.checkLanguageCode(locale) ? locale : undefined;
 	if(sortField === "title") {
 		if(!isNumeric && !isAlphaNumeric) {
 			if(isCaseSensitive) {
@@ -380,7 +381,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 					});
 				} else {
 					titles.sort(function(a,b) {
-						return a.localeCompare(b);
+						return a.localeCompare(b, locale);
 					});
 				}	
 			} else {
