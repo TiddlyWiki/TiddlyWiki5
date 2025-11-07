@@ -34,7 +34,8 @@ if($tw.node) {
 					port: "8081",
 					host: "127.0.0.1",
 					"csrf-disable": "yes",
-					"writers": "(anon)"
+					"writers": "(anon)",
+					"suppress-server-logs": "yes"
 				}
 			});
 			nodeServer = serverInstance.listen();
