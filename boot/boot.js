@@ -44,9 +44,7 @@ $tw.utils.hop = function(object,property) {
 	return object ? Object.prototype.hasOwnProperty.call(object,property) : false;
 };
 
-/*
-Deprecated: Use Array.isArray instead
-*/
+/** @deprecated Use Array.isArray instead  */
 $tw.utils.isArray = value => Array.isArray(value);
 
 /*
@@ -126,11 +124,10 @@ $tw.utils.pushTop = function(array,value) {
 	return array;
 };
 
-/*
-Deprecated: Use instanceof Date instead
-*/
+/** @deprecated Use instanceof Date instead */
 $tw.utils.isDate = value => value instanceof Date;
 
+/** @deprecated Use array iterative methods instead */
 $tw.utils.each = function(object,callback) {
 	if(object) {
 		if(Array.isArray(object)) {
@@ -317,14 +314,10 @@ $tw.utils.htmlDecode = function(s) {
 	return s.toString().replace(/&lt;/mg,"<").replace(/&nbsp;/mg,"\xA0").replace(/&gt;/mg,">").replace(/&quot;/mg,"\"").replace(/&amp;/mg,"&");
 };
 
-/*
-Deprecated. Use window.location.hash instead.
-*/
+/** @deprecated Use window.location.hash instead.  */
 $tw.utils.getLocationHash = () => window.location.hash;
 
-/*
-Depercated: Pad a string to a given length with "0"s. Length defaults to 2
-*/
+/** @deprecated Pad a string to a given length with "0"s. Length defaults to 2 */
 $tw.utils.pad = function(value,length = 2) {
 	const s = value.toString();
 	return s.padStart(length, "0");
