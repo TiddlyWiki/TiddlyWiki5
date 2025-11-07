@@ -16,7 +16,7 @@ The body should be a JSON object with the following properties:
 * ''title'' - (optional) title of a specific action tiddler to execute
 * ''variables'' - (optional) object containing variable name-value pairs to set in the execution context
 
-Either ''tag'' or ''title'' must be provided, but not both.
+At least one of ''tag'' or ''title'' must be provided as a non-empty string. If both are provided, ''title'' takes precedence and ''tag'' is ignored.
 
 Headers:
 
@@ -45,14 +45,28 @@ Example 2 - Execute by title:
 }
 ```
 
+Example 3 - Title takes precedence when both provided:
+
+```json
+{
+	"tag": "$:/tags/Actions",
+	"title": "$:/my-specific-action",
+	"variables": {
+		"currentTiddler": "MyTiddler"
+	}
+}
+```
+
+''Note'': This is useful for testing individual actions from a tag group.
+
 Response:
 
 * 200 OK
 *> `Content-Type: application/json`
 *> `{"success": true}`
-* 400 Bad Request - Invalid JSON, missing required fields, or both tag and title provided
+* 400 Bad Request - Invalid JSON or missing required fields
 *> `Content-Type: application/json`
 *> `{"error": "error message"}`
 * 404 Not Found - Action tiddler not found (when using title)
 *> `Content-Type: application/json`
-*> `{"error": "Action tiddler not found: <title>"}`
+*> `{"error": "Tiddler not found: <title>"}`

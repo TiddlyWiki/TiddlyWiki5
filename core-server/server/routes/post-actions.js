@@ -12,7 +12,8 @@ Request body should be a JSON object with the following properties:
 - title: (optional) title of a specific action tiddler to execute
 - variables: (optional) object containing variable name-value pairs to set in the execution context
 
-Either 'tag' or 'title' must be provided, but not both.
+If both 'tag' and 'title' are provided, 'title' takes precedence.
+At least one of 'tag' or 'title' must be a non-empty string.
 
 Example 1 - Execute by tag:
 POST /recipes/default/actions
@@ -23,7 +24,7 @@ POST /recipes/default/actions
 	}
 }
 
-Example 2 - Execute by title:
+Example 2 - Execute by title (takes precedence if both provided):
 POST /recipes/default/actions
 {
 	"title": "$:/core/ui/Actions/new-tiddler",
@@ -55,38 +56,39 @@ exports.handler = function(request,response,state) {
 		}),"utf8");
 		return;
 	}
-	// Validate required fields - need exactly one of tag or title
-	if(!data.tag && !data.title) {
+	
+	// Validate required fields - at least one non-empty string
+	var hasTitle = data.title && typeof data.title === "string" && data.title.trim() !== "";
+	var hasTag = data.tag && typeof data.tag === "string" && data.tag.trim() !== "";
+	
+	if(!hasTitle && !hasTag) {
 		state.sendResponse(400,{"Content-Type": "application/json"},JSON.stringify({
-			error: "Missing required field: must provide either 'tag' or 'title', and should not be empty string."
+			error: "Missing required field: must provide either 'tag' or 'title' as a non-empty string"
 		}),"utf8");
 		return;
 	}
-	if(data.tag && data.title) {
-		state.sendResponse(400,{"Content-Type": "application/json"},JSON.stringify({
-			error: "Cannot provide both 'tag' and 'title': choose one"
-		}),"utf8");
-		return;
-	}
+	
 	// Create a root widget to execute actions
 	var widgetNode = state.wiki.makeWidget(null, {
 		document: $tw.fakeDocument
 	});
-	// Execute action tiddler by title if provided
-	if(data.title) {
+	
+	// Title takes precedence if provided
+	if(hasTitle) {
 		var tiddlerText = state.wiki.getTiddlerText(data.title);
 		if(!tiddlerText) {
 			state.sendResponse(404,{"Content-Type": "application/json"},JSON.stringify({
-				error: "Action tiddler not found: " + data.title
+				error: "Tiddler not found: " + data.title
 			}),"utf8");
 			return;
 		}
 		widgetNode.invokeActionString(tiddlerText, widgetNode, null, data.variables || {});
 	}
-	// Execute action tiddlers by tag if provided
-	if(data.tag) {
+	// Otherwise use tag
+	else if(hasTag) {
 		widgetNode.invokeActionsByTag(data.tag, null, data.variables || {});
 	}
+	
 	// Return success response
 	state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify({
 		success: true

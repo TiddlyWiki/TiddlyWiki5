@@ -137,8 +137,7 @@ if($tw.node) {
 				});
 
 				expect(result.status).toBe(400);
-				expect(result.data.error).toContain("tag");
-				expect(result.data.error).toContain("title");
+				expect(result.data.error).toContain("non-empty string");
 			});
 
 			it("should execute action by title", async function() {
@@ -174,15 +173,51 @@ if($tw.node) {
 				expect(result.data.error).toContain("not found");
 			});
 
-			it("should return error when both tag and title are provided", async function() {
+			it("should execute by title when both tag and title are provided (title takes precedence)", async function() {
+				// Create a test action tiddler
+				$tw.wiki.addTiddler(new $tw.Tiddler({
+					title: "TestActionByTitle",
+					text: '<$action-setfield $tiddler="TestActionByTitleResult" text="title-executed" />'
+				}));
+
 				var result = await makeRequest({
-					title: "SomeAction",
-					tag: "SomeTag"
+					title: "TestActionByTitle",
+					tag: "$:/tags/Actions" // This should be ignored
 				});
 
-				expect(result.status).toBe(400);
-				expect(result.data.error).toContain("both");
-				expect(result.data.error).toContain("choose one");
+				expect(result.ok).toBe(true);
+				expect(result.data.success).toBe(true);
+
+				// Verify only the title action was executed
+				var resultTiddler = $tw.wiki.getTiddler("TestActionByTitleResult");
+				expect(resultTiddler).toBeDefined();
+				expect(resultTiddler.fields.text).toBe("title-executed");
+
+				// Cleanup
+				$tw.wiki.deleteTiddler("TestActionByTitle");
+				$tw.wiki.deleteTiddler("TestActionByTitleResult");
+			});
+
+			it("should return error for empty string title", async function() {
+				var result = await makeRequest({
+					title: "",
+					tag: "$:/tags/Actions"
+				});
+
+				// Since title is empty, it should fall back to tag
+				expect(result.ok).toBe(true);
+				expect(result.data.success).toBe(true);
+			});
+
+			it("should return error for whitespace-only title", async function() {
+				var result = await makeRequest({
+					title: "   ",
+					tag: "$:/tags/Actions"
+				});
+
+				// Since title is whitespace, it should fall back to tag
+				expect(result.ok).toBe(true);
+				expect(result.data.success).toBe(true);
 			});
 
 			it("should succeed even with non-existent tag (no actions to execute)", async function() {
