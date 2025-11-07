@@ -24,13 +24,12 @@
     "wiki"
   ],
   "devDependencies": {
-    "@eslint/compat": "1.4.0",
     "@eslint/js": "9.36.0",
     "eslint": "9.36.0",
     "eslint-plugin-es-x": "9.1.0",
+    "@stylistic/eslint-plugin": "5.4.0",
     "globals": "16.4.0"
   },
-  "bundleDependencies": [],
   "license": "BSD",
   "engines": {
     "node": ">=0.8.2"
