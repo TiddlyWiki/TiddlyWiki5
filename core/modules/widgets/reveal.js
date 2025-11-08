@@ -105,29 +105,61 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 };
 
 /*
+Collect the attributes we need, in the process determining whether we're being used in legacy mode
+*/
+RevealWidget.prototype.collectAttributes = function() {
+	// Detect legacy mode: true if no attributes start with $
+	this.legacyMode = !this.hasDollarAttribute();
+	// Get the attributes for the appropriate mode
+	if(this.legacyMode) {
+		this.state = this.getAttribute("state");
+		this.revealTag = this.getAttribute("tag");
+		this.type = this.getAttribute("type");
+		this.text = this.getAttribute("text");
+		this.position = this.getAttribute("position");
+		this.positionAllowNegative = this.getAttribute("positionAllowNegative") === "yes";
+		// class attribute handled in assignDomNodeClasses()
+		this.style = this.getAttribute("style","");
+		this["default"] = this.getAttribute("default","");
+		this.animate = this.getAttribute("animate","no");
+		this.retain = this.getAttribute("retain","no");
+		this.openAnimation = this.animate === "no" ? undefined : "open";
+		this.closeAnimation = this.animate === "no" ? undefined : "close";
+		this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
+		// Compute the title of the state tiddler and read it
+		this.stateTiddlerTitle = this.state;
+		this.stateTitle = this.getAttribute("stateTitle");
+		this.stateField = this.getAttribute("stateField");
+		this.stateIndex = this.getAttribute("stateIndex");
+	} else {
+		this.state = this.getAttribute("$state");
+		this.revealTag = this.getAttribute("$tag");
+		this.type = this.getAttribute("$type");
+		this.text = this.getAttribute("$text");
+		this.position = this.getAttribute("$position");
+		this.positionAllowNegative = this.getAttribute("$positionAllowNegative") === "yes";
+		// class attribute handled in assignDomNodeClasses()
+		this.style = this.getAttribute("$style","");
+		this["default"] = this.getAttribute("$default","");
+		this.animate = this.getAttribute("$animate","no");
+		this.retain = this.getAttribute("$retain","no");
+		this.openAnimation = this.animate === "no" ? undefined : "open";
+		this.closeAnimation = this.animate === "no" ? undefined : "close";
+		this.updatePopupPosition = this.getAttribute("$updatePopupPosition","no") === "yes";
+		// Compute the title of the state tiddler and read it
+		this.stateTiddlerTitle = this.state;
+		this.stateTitle = this.getAttribute("$stateTitle");
+		this.stateField = this.getAttribute("$stateField");
+		this.stateIndex = this.getAttribute("$stateIndex");
+	}
+};
+
+/*
 Compute the internal state of the widget
 */
 RevealWidget.prototype.execute = function() {
 	// Get our parameters
-	this.state = this.getAttribute("state");
-	this.revealTag = this.getAttribute("tag");
-	this.type = this.getAttribute("type");
-	this.text = this.getAttribute("text");
-	this.position = this.getAttribute("position");
-	this.positionAllowNegative = this.getAttribute("positionAllowNegative") === "yes";
-	// class attribute handled in assignDomNodeClasses()
-	this.style = this.getAttribute("style","");
-	this["default"] = this.getAttribute("default","");
-	this.animate = this.getAttribute("animate","no");
-	this.retain = this.getAttribute("retain","no");
-	this.openAnimation = this.animate === "no" ? undefined : "open";
-	this.closeAnimation = this.animate === "no" ? undefined : "close";
-	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
-	// Compute the title of the state tiddler and read it
-	this.stateTiddlerTitle = this.state;
-	this.stateTitle = this.getAttribute("stateTitle");
-	this.stateField = this.getAttribute("stateField");
-	this.stateIndex = this.getAttribute("stateIndex");
+	this.collectAttributes();
 	this.readState();
 	// Construct the child widgets
 	var childNodes = this.isOpen ? this.parseTreeNode.children : [];
@@ -201,7 +233,8 @@ RevealWidget.prototype.readPopupState = function(state) {
 };
 
 RevealWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
+	var classAttr = this.legacyMode ? "class" : "$class";
+	var classes = this.getAttribute(classAttr,"").split(" ");
 	classes.push("tc-reveal");
 	this.domNode.className = classes.join(" ");
 };
@@ -211,7 +244,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
+	if(changedAttributes.state || changedAttributes.$state || changedAttributes.type || changedAttributes.$type || changedAttributes.text || changedAttributes.$text || changedAttributes.position || changedAttributes.$position || changedAttributes.positionAllowNegative || changedAttributes.$positionAllowNegative || changedAttributes["default"] || changedAttributes.$default || changedAttributes.animate || changedAttributes.$animate || changedAttributes.stateTitle || changedAttributes.$stateTitle || changedAttributes.stateField || changedAttributes.$stateField || changedAttributes.stateIndex || changedAttributes.$stateIndex) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -227,10 +260,10 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 		} else if(this.type === "popup" && this.isOpen && this.updatePopupPosition && (changedTiddlers[this.state] || changedTiddlers[this.stateTitle])) {
 			this.positionPopup(this.domNode);
 		}
-		if(changedAttributes.style) {
-			this.domNode.style = this.getAttribute("style","");
+		if(changedAttributes.style || changedAttributes.$style) {
+			this.domNode.style = this.legacyMode ? this.getAttribute("style","") : this.getAttribute("$style","");
 		}
-		if(changedAttributes["class"]) {
+		if(changedAttributes["class"] || changedAttributes.$class) {
 			this.assignDomNodeClasses();
 		}
 		return this.refreshChildren(changedTiddlers);
