@@ -16,7 +16,15 @@ if($tw.node) {
 		path = require("path"),
 		querystring = require("querystring"),
 		crypto = require("crypto"),
-		zlib = require("zlib");
+		zlib = require("zlib"),
+		http2;
+	// Try to load http2 module (available in Node.js 8.4+)
+	try {
+		http2 = require("http2");
+	} catch(e) {
+		// http2 module not available, will fall back to http/https
+		http2 = null;
+	}
 }
 
 /*
@@ -82,18 +90,44 @@ function Server(options) {
 	// Initialise the http vs https
 	this.listenOptions = null;
 	this.protocol = "http";
+	this.useHttp2 = false;
+	this.useH2c = false;
 	var tlsKeyFilepath = this.get("tls-key"),
 		tlsCertFilepath = this.get("tls-cert"),
-		tlsPassphrase = this.get("tls-passphrase");
+		tlsPassphrase = this.get("tls-passphrase"),
+		enableHttp2 = this.get("http2") === "yes",
+		enableH2c = this.get("h2c") === "yes";
 	if(tlsCertFilepath && tlsKeyFilepath) {
 		this.listenOptions = {
 			key: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsKeyFilepath),"utf8"),
 			cert: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsCertFilepath),"utf8"),
 			passphrase: tlsPassphrase || ''
 		};
-		this.protocol = "https";
+		// Enable HTTP/2 if requested and available
+		if(enableHttp2 && http2) {
+			this.protocol = "https";
+			this.useHttp2 = true;
+			this.listenOptions.allowHTTP1 = true; // Allow HTTP/1.1 fallback
+		} else {
+			this.protocol = "https";
+			if(enableHttp2 && !http2) {
+				$tw.utils.warning("Warning: HTTP/2 requested but not available. Falling back to HTTPS");
+			}
+		}
+	} else if(enableH2c && http2) {
+		// HTTP/2 Cleartext (h2c) - for internal networks or behind reverse proxy
+		this.protocol = "http";
+		this.useH2c = true;
+		$tw.utils.warning("Warning: Using HTTP/2 Cleartext (h2c). This should only be used in trusted networks or behind a reverse proxy.");
+	} else if(enableHttp2) {
+		$tw.utils.warning("Warning: HTTP/2 requires TLS certificates (tls-key and tls-cert). Use h2c=yes for unencrypted HTTP/2 in trusted networks.");
 	}
-	this.transport = require(this.protocol);
+	// Set the transport module
+	if(this.useHttp2 || this.useH2c) {
+		this.transport = http2;
+	} else {
+		this.transport = require(this.protocol);
+	}
 	// Name the server and init the boot state
 	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
@@ -183,7 +217,9 @@ Server.prototype.defaultVariables = {
 	"system-tiddler-render-template": "$:/core/templates/wikified-tiddler",
 	"debug-level": "none",
 	"gzip": "no",
-	"use-browser-cache": "no"
+	"use-browser-cache": "no",
+	"http2": "yes",
+	"h2c": "no"
 };
 
 Server.prototype.get = function(name) {
@@ -252,6 +288,17 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 
 Server.prototype.requestHandler = function(request,response,options) {
 	options = options || {};
+	// Handle HTTP/2 compatibility
+	// HTTP/2 uses pseudo-headers (:method, :path, etc.) but also provides them as regular properties
+	if(request.httpVersion === "2.0" || request.stream) {
+		// Ensure method and url are available (they should be in Node.js http2)
+		if(!request.method && request.headers[":method"]) {
+			request.method = request.headers[":method"];
+		}
+		if(!request.url && request.headers[":path"]) {
+			request.url = request.headers[":path"];
+		}
+	}
 	// Compose the state object
 	var self = this;
 	var state = {};
@@ -359,7 +406,15 @@ Server.prototype.listen = function(port,host,prefix) {
 	}
 	// Create the server
 	var server;
-	if(this.listenOptions) {
+	if(this.useHttp2) {
+		// Create HTTP/2 secure server
+		server = this.transport.createSecureServer(this.listenOptions,this.requestHandler.bind(this));
+		$tw.utils.log("HTTP/2 enabled with ALPN protocol negotiation","green");
+	} else if(this.useH2c) {
+		// Create HTTP/2 Cleartext server
+		server = this.transport.createServer(this.requestHandler.bind(this));
+		$tw.utils.log("HTTP/2 Cleartext (h2c) enabled - suitable for reverse proxy setups","yellow");
+	} else if(this.listenOptions) {
 		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
 	} else {
 		server = this.transport.createServer(this.requestHandler.bind(this));
@@ -367,8 +422,9 @@ Server.prototype.listen = function(port,host,prefix) {
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
 	server.on("listening",function() {
 		var address = server.address(),
-			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix;
-		$tw.utils.log("Serving on " + url,"brown/orange");
+			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix,
+			protocolInfo = self.useHttp2 ? " (HTTP/2)" : self.useH2c ? " (HTTP/2 Cleartext)" : "";
+		$tw.utils.log("Serving on " + url + protocolInfo,"brown/orange");
 		$tw.utils.log("(press ctrl-C to exit)","red");
 	});
 	// Listen

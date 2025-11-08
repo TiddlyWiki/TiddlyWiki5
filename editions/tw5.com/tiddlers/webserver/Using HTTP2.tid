@@ -1,0 +1,108 @@
+created: 20250109000000000
+modified: 20250109000000000
+tags: [[WebServer Guides]]
+title: Using HTTP/2
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.6">> TiddlyWiki's WebServer supports the HTTP/2 protocol, which provides significant performance improvements especially when lazy-loading many tiddlers.
+
+!! Benefits of HTTP/2
+
+HTTP/2 offers several advantages over HTTP/1.1:
+
+* ''Multiplexing'': Multiple requests can be sent simultaneously over a single connection, eliminating head-of-line blocking
+* ''Reduced Latency'': No need to establish multiple connections for parallel requests
+* ''Better Performance for Lazy Loading'': When loading many tiddlers, HTTP/2's multiplexing dramatically improves performance by allowing all requests to be processed in parallel over a single connection
+
+!! Requirements
+
+HTTP/2 requires:
+
+* TLS/SSL certificates (configured via [[tls-cert|WebServer Parameter: tls-cert]] and [[tls-key|WebServer Parameter: tls-key]])
+* Node.js 8.4.0 or later (the `http2` module is built-in)
+
+HTTP/2 cannot be used without TLS certificates. If you attempt to enable HTTP/2 without certificates, TiddlyWiki will fall back to HTTP/1.1 and display a warning.
+
+For scenarios where TLS termination happens at a reverse proxy, see [[h2c parameter|WebServer Parameter: h2c]] for HTTP/2 Cleartext support.
+
+!! Enabling HTTP/2
+
+HTTP/2 is enabled by default when TLS certificates are configured. To explicitly control HTTP/2:
+
+```
+tiddlywiki mywikifolder --listen tls-key=key.pem tls-cert=server.crt http2=yes
+```
+
+To disable HTTP/2 and use HTTPS with HTTP/1.1:
+
+```
+tiddlywiki mywikifolder --listen tls-key=key.pem tls-cert=server.crt http2=no
+```
+
+!! HTTP/1.1 Fallback
+
+The HTTP/2 implementation includes automatic HTTP/1.1 fallback support (via ALPN - Application-Layer Protocol Negotiation). This means:
+
+* Modern browsers that support HTTP/2 will automatically use it
+* Older browsers or clients that don't support HTTP/2 will automatically fall back to HTTP/1.1
+* No special client configuration is required
+
+!! Example Setup
+
+Here's a complete example for setting up TiddlyWiki with HTTP/2:
+
+```
+# Generate self-signed certificate (for testing)
+openssl req -newkey rsa:2048 -new -nodes -keyout mywikifolder/key.pem -out mywikifolder/csr.pem
+openssl x509 -req -days 365 -in mywikifolder/csr.pem -signkey mywikifolder/key.pem -out mywikifolder/server.crt
+
+# Start TiddlyWiki with HTTP/2 enabled (default)
+tiddlywiki mywikifolder --listen username=joe password=bloggs tls-key=key.pem tls-cert=server.crt
+```
+
+When the server starts, you'll see a message indicating HTTP/2 is enabled:
+
+```
+Serving on https://127.0.0.1:8080 (HTTP/2)
+```
+
+!! Performance Testing
+
+To verify HTTP/2 is working and measure performance improvements:
+
+# Open your browser's Developer Tools (F12)
+# Go to the Network tab
+# Check the "Protocol" column - it should show "h2" for HTTP/2 requests
+# Compare load times with and without HTTP/2, especially when loading many tiddlers
+
+For wikis with hundreds or thousands of tiddlers using lazy loading, HTTP/2 can reduce load times by 50% or more compared to HTTP/1.1.
+
+!! Troubleshooting
+
+;HTTP/2 not working
+:Ensure you have TLS certificates configured. HTTP/2 requires TLS/SSL. Alternatively, use [[h2c|WebServer Parameter: h2c]] for HTTP/2 behind a reverse proxy.
+
+;Warning about HTTP/2 not available
+:Your Node.js version may be too old. Upgrade to Node.js 8.4.0 or later.
+
+;Browser shows HTTP/1.1 instead of h2
+:Some proxies or load balancers may not support HTTP/2. Try connecting directly to the TiddlyWiki server.
+
+!! Using HTTP/2 Behind a Reverse Proxy
+
+If TiddlyWiki runs behind a reverse proxy (nginx, caddy, etc.) that handles HTTPS, you can use HTTP/2 Cleartext (h2c) for the backend connection:
+
+```
+tiddlywiki mywiki --listen h2c=yes
+```
+
+This allows HTTP/2 performance benefits between the proxy and TiddlyWiki without requiring certificates on TiddlyWiki itself. See [[h2c parameter|WebServer Parameter: h2c]] for details.
+
+!! Related
+
+* [[Using HTTPS]]
+* [[WebServer Parameter: tls-cert]]
+* [[WebServer Parameter: tls-key]]
+* [[WebServer Parameter: tls-passphrase]]
+* [[WebServer Parameter: http2]]
+* [[WebServer Parameter: h2c]]

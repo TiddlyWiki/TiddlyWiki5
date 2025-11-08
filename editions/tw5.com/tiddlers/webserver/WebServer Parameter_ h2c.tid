@@ -1,0 +1,143 @@
+caption: h2c
+created: 20250109000000000
+modified: 20250109000000000
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: h2c
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.6">> The [[web server configuration parameter|WebServer Parameters]] ''h2c'' enables HTTP/2 Cleartext mode, which allows using HTTP/2 without TLS encryption.
+
+!! Warning
+
+HTTP/2 Cleartext (h2c) should ''only'' be used in trusted environments:
+
+* Behind a reverse proxy (nginx, caddy, traefik, etc.)
+* In internal networks with tunneling services (frp, ngrok, etc.)
+* For local development
+
+''Never expose h2c directly to the internet'' as it transmits data unencrypted.
+
+!! Use Cases
+
+!!! Reverse Proxy Setup
+
+When TiddlyWiki runs behind a reverse proxy that handles HTTPS:
+
+```
+[Internet] --HTTPS/HTTP2--> [Reverse Proxy] --HTTP2/h2c--> [TiddlyWiki]
+```
+
+The reverse proxy terminates HTTPS and can communicate with TiddlyWiki using h2c, maintaining HTTP/2 performance benefits.
+
+!!! Internal Network Tunneling
+
+When using tunneling services (frp, ngrok, etc.):
+
+```
+[Internet] --HTTPS--> [Cloud Server] --Tunnel/h2c--> [Local TiddlyWiki]
+```
+
+The cloud server handles HTTPS, and the tunnel can use h2c for better performance.
+
+!! Configuration
+
+Enable h2c (HTTP/2 Cleartext):
+
+```
+tiddlywiki mywiki --listen h2c=yes
+```
+
+Disable h2c (default):
+
+```
+tiddlywiki mywiki --listen h2c=no
+```
+
+!! Default Value
+
+```
+no
+```
+
+!! Relationship with http2 Parameter
+
+* ''http2=yes'': HTTP/2 with TLS (requires certificates)
+* ''h2c=yes'': HTTP/2 without TLS (no certificates needed)
+* You should enable only one of these options
+
+!! Example: Behind Nginx
+
+'''Nginx configuration:'''
+
+```nginx
+upstream tiddlywiki {
+    server localhost:8080;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name wiki.example.com;
+    
+    ssl_certificate /path/to/cert.pem;
+    ssl_certificate_key /path/to/key.pem;
+    
+    location / {
+        # Enable HTTP/2 to backend
+        proxy_pass http://tiddlywiki;
+        proxy_http_version 2.0;
+        
+        # Required headers
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+'''TiddlyWiki command:'''
+
+```
+tiddlywiki mywiki --listen h2c=yes port=8080
+```
+
+!! Example: With frp Tunneling
+
+'''Local TiddlyWiki:'''
+
+```
+tiddlywiki mywiki --listen h2c=yes port=8080
+```
+
+'''frp client configuration (frpc.ini):'''
+
+```ini
+[common]
+server_addr = your.server.com
+server_port = 7000
+
+[tiddlywiki]
+type = http
+local_ip = 127.0.0.1
+local_port = 8080
+custom_domains = wiki.example.com
+```
+
+'''frp server with HTTPS:'''
+
+The frp server handles HTTPS and forwards to local TiddlyWiki via h2c tunnel.
+
+!! Performance Benefits
+
+Using h2c behind a reverse proxy provides:
+
+* Full HTTP/2 multiplexing between browser and proxy
+* HTTP/2 performance between proxy and TiddlyWiki
+* Faster lazy loading of tiddlers
+* Reduced latency compared to HTTP/1.1
+
+!! Related
+
+* [[Using HTTP/2]]
+* [[WebServer Parameter: http2]]
+* [[Using HTTPS]]

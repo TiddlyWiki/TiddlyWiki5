@@ -1,0 +1,45 @@
+caption: http2
+created: 20250109000000000
+modified: 20250109000000000
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: http2
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.6">> The [[web server configuration parameter|WebServer Parameters]] ''http2'' determines whether the server uses the HTTP/2 protocol when TLS certificates are available.
+
+When set to "yes" (the default), the server will use HTTP/2 with automatic HTTP/1.1 fallback support. When set to "no", the server will use HTTPS with HTTP/1.1 only.
+
+HTTP/2 provides significant performance improvements for lazy-loading scenarios where many tiddlers are loaded in parallel. The multiplexing feature of HTTP/2 allows all requests to be processed simultaneously over a single connection, eliminating the head-of-line blocking issues of HTTP/1.1.
+
+!! Requirements
+
+* HTTP/2 requires TLS certificates to be configured via [[tls-cert|WebServer Parameter: tls-cert]] and [[tls-key|WebServer Parameter: tls-key]]
+* Node.js 8.4.0 or later (the `http2` module is built-in)
+* If certificates are not configured, HTTP/2 will be disabled regardless of this setting
+
+!! Default Value
+
+```
+yes
+```
+
+!! Examples
+
+Enable HTTP/2 (default behavior when certificates are configured):
+
+```
+tiddlywiki mywiki --listen tls-key=key.pem tls-cert=server.crt http2=yes
+```
+
+Disable HTTP/2 and use HTTP/1.1 over TLS:
+
+```
+tiddlywiki mywiki --listen tls-key=key.pem tls-cert=server.crt http2=no
+```
+
+!! Related
+
+* [[Using HTTP/2]]
+* [[Using HTTPS]]
+* [[WebServer Parameter: tls-cert]]
+* [[WebServer Parameter: tls-key]]
