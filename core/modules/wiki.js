@@ -375,13 +375,25 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 	if(sortField === "title") {
 		if(!isNumeric && !isAlphaNumeric) {
 			if(isCaseSensitive) {
-				titles.sort(function(a,b) {
-					return a.localeCompare(b, locale);
-				});
+				if(isDescending) {
+					titles.sort(function(a,b) {
+						return b.localeCompare(a, locale);
+					});
+				} else {
+					titles.sort(function(a,b) {
+						return a.localeCompare(b, locale);
+					});
+				}	
 			} else {
-				titles.sort(function(a,b) {
-					return a.toLowerCase().localeCompare(b.toLowerCase(), locale);
-				});
+				if(isDescending) {
+					titles.sort(function(a,b) {
+						return b.toLowerCase().localeCompare(a.toLowerCase(), locale);
+					});
+				} else {
+					titles.sort(function(a,b) {
+						return a.toLowerCase().localeCompare(b.toLowerCase(), locale);
+					});
+				}	
 			}
 		} else {
 			titles.sort(function(a,b) {
@@ -393,24 +405,24 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 						if(isNaN(y)) {
 							// If neither value is a number then fall through to a textual comparison
 						} else {
-							return 1;
+							return isDescending ? -1 : 1;
 						}
 					} else {
 						if(isNaN(y)) {
-							return -1;
+							return isDescending ? 1 : -1;
 						} else {
-							return x - y;
+							return isDescending ? y - x :  x - y;
 						}
 					}
 				}
 				if(isAlphaNumeric) {
-					return a.localeCompare(b,locale,{numeric: true,sensitivity: "base"});
+					return isDescending ? b.localeCompare(a,locale,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,locale,{numeric: true,sensitivity: "base"});
 				}
 				if(!isCaseSensitive) {
 					a = a.toLowerCase();
 					b = b.toLowerCase();
 				}
-				return a.localeCompare(b, locale);
+				return isDescending ? b.localeCompare(a, locale) : a.localeCompare(b, locale);
 			});
 		}
 	} else {
@@ -437,33 +449,30 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 					if(isNaN(y)) {
 						// If neither value is a number then fall through to a textual comparison
 					} else {
-						return 1;
+						return isDescending ? -1 : 1;
 					}
 				} else {
 					if(isNaN(y)) {
-						return -1;
+						return isDescending ? 1 : -1;
 					} else {
-						return x - y;
+						return isDescending ? y - x :  x - y;
 					}
 				}
 			}
 			if(Object.prototype.toString.call(a) === "[object Date]" && Object.prototype.toString.call(b) === "[object Date]") {
-				return a - b;
+				return isDescending ? b - a : a - b;
 			}
 			a = String(a);
 			b = String(b);
 			if(isAlphaNumeric) {
-				return a.localeCompare(b,locale,{numeric: true,sensitivity: "base"});
+				return isDescending ? b.localeCompare(a,locale,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,locale,{numeric: true,sensitivity: "base"});
 			}
 			if(!isCaseSensitive) {
 				a = a.toLowerCase();
 				b = b.toLowerCase();
 			}
-			return a.localeCompare(b, locale);
+			return isDescending ? b.localeCompare(a, locale) : a.localeCompare(b, locale);
 		});
-	}
-	if(isDescending) {
-		titles.reverse();
 	}
 };
 
