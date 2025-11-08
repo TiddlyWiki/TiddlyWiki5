@@ -60,7 +60,11 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 		version += "+" + pluginVersion.build;
 	}
 	// Save the tiddler
-	$tw.wiki.addTiddler(new $tw.Tiddler(pluginTiddler,{text: JSON.stringify({tiddlers: plugins},null,4), version: version}));
+	var fields = {text: JSON.stringify({tiddlers: plugins},null,4), version: version};
+	if ($tw.wiki.getTiddlerText("$:/config/TimestampDisable") !== "yes") {
+		fields.modified = $tw.utils.stringifyDate(new Date());
+	}
+	$tw.wiki.addTiddler(new $tw.Tiddler(pluginTiddler,fields));
 	// Delete any non-shadow constituent tiddlers
 	$tw.utils.each(tiddlers,function(title) {
 		if($tw.wiki.tiddlerExists(title)) {
