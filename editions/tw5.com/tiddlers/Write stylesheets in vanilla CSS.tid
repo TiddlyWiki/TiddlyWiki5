@@ -1,0 +1,23 @@
+created: 20251108075645447
+modified: 20251108081036094
+title: Write stylesheets in vanilla CSS
+type: text/vnd.tiddlywiki
+
+<<.from-version 5.4.0>> Before v5.4.0, theme developers have to mix wikitext syntax with CSS syntax when writing stylesheets to intergrate Tiddlywiki color palettes and theme settings. With the introduction of [[Core CSS Variables]] in v5.4.0, theme developers can intergrate most Tiddlywiki palettes with vanilla CSS.
+
+! Using Tiddlywiki palette colors
+Tiddlywiki's custom properties for colors are prefixed `--tc-color-`. Before v5.4.0, theme developers have to use the following wikitext to get a color value of a palette:
+
+```
+.tag {
+	background: <<colour tag-background>>;
+}
+```
+
+Since v5.4.0, theme developers can use the following CSS to get the palette color:
+
+```css
+.tag {
+	background: var(--tp-color-tag-background);
+}
+```
