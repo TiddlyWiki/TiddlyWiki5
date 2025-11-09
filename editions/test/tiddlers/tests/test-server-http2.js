@@ -60,11 +60,48 @@ if($tw.node) {
 				var server = new Server({
 					wiki: $tw.wiki,
 					variables: {
-						port: testPort.toString()
+						port: testPort.toString(),
+						"suppress-server-logs": "yes"
 					}
 				});
 				expect(server.get("http2")).toBe("yes");
 				expect(server.get("h2c")).toBe("no");
+			});
+
+			it("should not enable connection tracking by default (production mode)", function() {
+				var server = new Server({
+					wiki: $tw.wiki,
+					variables: {
+						port: testPort.toString(),
+						"suppress-server-logs": "yes"
+					}
+				});
+				
+				// Connection tracking should be disabled by default
+				expect(server.enableConnectionTracking).toBe(false);
+				
+				// getConnectionStats should return null when tracking is disabled
+				expect(server.getConnectionStats()).toBe(null);
+			});
+
+			it("should enable connection tracking only when explicitly requested", function() {
+				var server = new Server({
+					wiki: $tw.wiki,
+					enableConnectionTracking: true,
+					variables: {
+						port: testPort.toString(),
+						"suppress-server-logs": "yes"
+					}
+				});
+				
+				// Connection tracking should be enabled
+				expect(server.enableConnectionTracking).toBe(true);
+				
+				// getConnectionStats should return stats object
+				var stats = server.getConnectionStats();
+				expect(stats).not.toBe(null);
+				expect(stats.http1Connections).toBe(0);
+				expect(stats.http2Sessions).toBe(0);
 			});
 
 			it("should fallback to HTTP/1.1 when no certificates and http2=yes", function() {
@@ -72,7 +109,8 @@ if($tw.node) {
 					wiki: $tw.wiki,
 					variables: {
 						port: testPort.toString(),
-						"http2": "yes"
+						"http2": "yes",
+						"suppress-server-logs": "yes"
 					}
 				});
 				
@@ -87,7 +125,8 @@ if($tw.node) {
 					wiki: $tw.wiki,
 					variables: {
 						port: testPort.toString(),
-						"h2c": "yes"
+						"h2c": "yes",
+						"suppress-server-logs": "yes"
 					}
 				});
 				
@@ -98,17 +137,13 @@ if($tw.node) {
 			});
 
 			it("should not enable both http2 and h2c simultaneously", function() {
-				if(!http2) {
-					pending("http2 module not available");
-					return;
-				}
-
 				var server = new Server({
 					wiki: $tw.wiki,
 					variables: {
 						port: testPort.toString(),
 						"http2": "yes",
-						"h2c": "yes"
+						"h2c": "yes",
+						"suppress-server-logs": "yes"
 					}
 				});
 				
@@ -124,11 +159,11 @@ if($tw.node) {
 			var nodeServer = null;
 
 			afterEach(function(done) {
-        nodeServer.close(function() {
-          serverInstance = null;
-          nodeServer = null;
-          done();
-        });
+				nodeServer.close(function() {
+					serverInstance = null;
+					nodeServer = null;
+					done();
+				});
 			});
 
 			it("should start h2c server successfully", function(done) {
@@ -171,8 +206,8 @@ if($tw.node) {
 				nodeServer = serverInstance.listen();
 				nodeServer.unref();
 
-				// Wait for server to start
-				setTimeout(function() {
+				// Wait for server listening event
+				nodeServer.on("listening", function() {
 					// Use HTTP/2 client to connect to h2c server
 					var client = http2.connect(h2cUrl);
 					
@@ -206,70 +241,212 @@ if($tw.node) {
 					});
 					
 					req.end();
-				}, 200);
+				});
 			});
 		});
 
-		describe("HTTP/2 Request Compatibility", function() {
+		describe("HTTP/2 Multiplexing Performance", function() {
 			var serverInstance = null;
 			var nodeServer = null;
+			var testTiddlerCount = 50;
 
-			afterEach(function(done) {
-				if(nodeServer) {
-					if(typeof nodeServer.closeAllConnections === "function") {
-						nodeServer.closeAllConnections();
-					}
-					nodeServer.close(function() {
-						serverInstance = null;
-						nodeServer = null;
-						done();
-					});
-				} else {
-					done();
-				}
-			});
-
-			it("should handle HTTP/2 pseudo-headers correctly", function() {
-				if(!http2) {
-					pending("http2 module not available");
-					return;
+			beforeAll(function(done) {
+				// Create test tiddlers
+				for(var i = 1; i <= testTiddlerCount; i++) {
+					$tw.wiki.addTiddler(new $tw.Tiddler({
+						title: "TestTiddler-HTTP2-" + i,
+						text: "Test content " + i,
+						tags: ["test-http2"]
+					}));
 				}
 
+				// Start server with connection tracking enabled (for testing)
 				serverInstance = new Server({
 					wiki: $tw.wiki,
+					enableConnectionTracking: true,  // Enable for testing only
 					variables: {
 						port: h2cPort.toString(),
-						"h2c": "yes"
+						host: "127.0.0.1",
+						"h2c": "yes",
+						"csrf-disable": "yes",
+						"suppress-server-logs": "yes"
 					}
 				});
 
-				// Create a mock HTTP/2 request object
-				var mockRequest = {
-					httpVersion: "2.0",
-					headers: {
-						":method": "GET",
-						":path": "/status",
-						":scheme": "http",
-						":authority": "localhost:" + h2cPort
-					},
-					// These should be populated by the compatibility layer
-					method: undefined,
-					url: undefined,
-					on: function() {},
-					setEncoding: function() {}
-				};
+				nodeServer = serverInstance.listen();
+				nodeServer.unref();
+				nodeServer.on("listening", done);
+			});
 
-				var mockResponse = {
-					writeHead: function() {},
-					end: function() {}
-				};
+			afterAll(function(done) {
+				for(var i = 1; i <= testTiddlerCount; i++) {
+					$tw.wiki.deleteTiddler("TestTiddler-HTTP2-" + i);
+				}
+				nodeServer.close(done);
+			});
 
-				// The requestHandler should normalize the request
-				// We can't fully test this without a real HTTP/2 connection,
-				// but we can verify the logic exists
-				expect(serverInstance.requestHandler).toBeDefined();
-				expect(typeof serverInstance.requestHandler).toBe("function");
+			it("should create only ONE HTTP/2 session for multiple concurrent requests", function(done) {
+				// Reset connection stats before test
+				serverInstance.resetConnectionStats();
+				
+				var client = http2.connect(h2cUrl);
+				var requestCount = 20;
+
+				var requestPromises = [];
+				for(var i = 1; i <= requestCount; i++) {
+					var index = i;
+					requestPromises.push(new Promise(function(resolve, reject) {
+						var req = client.request({
+							":method": "GET",
+							":path": "/recipes/default/tiddlers/TestTiddler-HTTP2-" + index
+						});
+
+						var data = "";
+						req.on("data", function(chunk) { data += chunk; });
+						req.on("end", function() {
+							try {
+								resolve(JSON.parse(data));
+							} catch(err) {
+								reject(err);
+							}
+						});
+						req.on("error", reject);
+						req.end();
+					}));
+				}
+
+				Promise.all(requestPromises).then(function(responses) {
+					// Verify all responses received correctly
+					expect(responses.length).toBe(requestCount);
+					responses.forEach(function(response, idx) {
+						expect(response.title).toBe("TestTiddler-HTTP2-" + (idx + 1));
+					});
+					
+					// KEY TEST: Verify server only created ONE HTTP/2 session
+					var stats = serverInstance.getConnectionStats();
+					expect(stats.http2Sessions).toBe(1);
+					expect(stats.http1Connections).toBe(0);
+					
+					console.log("HTTP/2 multiplexing verified: " + requestCount + " requests used " + 
+					            stats.http2Sessions + " HTTP/2 session (NOT " + requestCount + " connections)");
+					
+					client.close();
+					done();
+				}).catch(function(err) {
+					fail(err.message);
+					client.close();
+					done();
+				});
+			});
+
+			it("should reuse same socket for all requests on single connection", function(done) {
+				var client = http2.connect(h2cUrl);
+				var requestCount = 10;
+				
+				// Wait for connection to establish
+				client.on("connect", function() {
+					var socket = client.socket;
+					expect(socket).toBeDefined();
+					
+					// Socket properties might not be available immediately
+					// Just verify the socket object itself is reused
+					var requestPromises = [];
+					for(var i = 1; i <= requestCount; i++) {
+						requestPromises.push(new Promise(function(resolve, reject) {
+							var req = client.request({
+								":method": "GET",
+								":path": "/status"
+							});
+
+							req.on("data", function() {});
+							req.on("end", function() {
+								// Verify still using same socket object
+								expect(client.socket).toBe(socket);
+								resolve();
+							});
+							req.on("error", reject);
+							req.end();
+						}));
+					}
+
+					Promise.all(requestPromises).then(function() {
+						console.log("HTTP/2 socket reuse verified: " + requestCount + 
+						            " requests on same socket object");
+						
+						client.close();
+						done();
+					}).catch(function(err) {
+						fail("Request failed: " + err.message);
+						client.close();
+						done();
+					});
+				});
+			});
+
+			it("should demonstrate parallel execution with HTTP/2 multiplexing", function(done) {
+				// This test shows that HTTP/2 can send multiple requests in parallel
+				// On localhost, the speed difference is minimal, but we can verify
+				// that concurrent execution doesn't take 2x the time of a single request
+				var client = http2.connect(h2cUrl);
+				var requestCount = 10;
+				
+				// First: measure time for a single request (baseline)
+				var singleStart = Date.now();
+				var req1 = client.request({
+					":method": "GET",
+					":path": "/recipes/default/tiddlers/TestTiddler-HTTP2-1"
+				});
+				req1.on("data", function() {});
+				req1.on("end", function() {
+					var singleTime = Date.now() - singleStart;
+					
+					// Then: send multiple requests concurrently
+					var concurrentStart = Date.now();
+					var concurrentPromises = [];
+					
+					for(var i = 1; i <= requestCount; i++) {
+						var index = i;
+						concurrentPromises.push(new Promise(function(resolve, reject) {
+							var req = client.request({
+								":method": "GET",
+								":path": "/recipes/default/tiddlers/TestTiddler-HTTP2-" + index
+							});
+							var data = "";
+							req.on("data", function(chunk) { data += chunk; });
+							req.on("end", function() { resolve(data.length); });
+							req.on("error", reject);
+							req.end();
+						}));
+					}
+					
+					Promise.all(concurrentPromises).then(function() {
+						var concurrentTime = Date.now() - concurrentStart;
+						
+						// With HTTP/2 multiplexing, N concurrent requests should NOT take N times longer
+						// Due to localhost speed, we just verify it's reasonably fast
+						// In real world with network latency, the difference would be dramatic
+						var ratio = concurrentTime / singleTime;
+						
+						console.log("HTTP/2 multiplexing: 1 request=" + singleTime + "ms, " +
+						            requestCount + " concurrent=" + concurrentTime + "ms (ratio: " + 
+						            ratio.toFixed(1) + "x, not " + requestCount + "x)");
+						
+						// Concurrent should not be N times slower (that would indicate sequential execution)
+						// Allow some overhead, but it should be much less than N times
+						expect(ratio).toBeLessThan(requestCount * 0.5);
+						
+						client.close();
+						done();
+					});
+				});
+				req1.on("error", function(err) {
+					fail(err.message);
+					client.close();
+					done();
+				});
+				req1.end();
 			});
 		});
 	});
 }
+

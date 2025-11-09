@@ -39,6 +39,19 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
+	
+	// Connection tracking (only enabled when enableConnectionTracking option is true)
+	// This is primarily for testing purposes and should not be used in production
+	this.enableConnectionTracking = options.enableConnectionTracking || false;
+	if(this.enableConnectionTracking) {
+		this.connectionStats = {
+			http1Connections: 0,
+			http2Sessions: 0,
+			activeConnections: new Set(),
+			activeSessions: new Set()
+		};
+	}
+	
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -111,16 +124,22 @@ function Server(options) {
 		} else {
 			this.protocol = "https";
 			if(enableHttp2 && !http2) {
-				$tw.utils.warning("Warning: HTTP/2 requested but not available. Falling back to HTTPS");
+				if(this.get("suppress-server-logs") !== "yes") {
+					$tw.utils.warning("Warning: HTTP/2 requested but not available. Falling back to HTTPS");
+				}
 			}
 		}
 	} else if(enableH2c && http2) {
 		// HTTP/2 Cleartext (h2c) - for internal networks or behind reverse proxy
 		this.protocol = "http";
 		this.useH2c = true;
-		$tw.utils.warning("Warning: Using HTTP/2 Cleartext (h2c). This should only be used in trusted networks or behind a reverse proxy.");
+		if(this.get("suppress-server-logs") !== "yes") {
+			$tw.utils.warning("Warning: Using HTTP/2 Cleartext (h2c). This should only be used in trusted networks or behind a reverse proxy.");
+		}
 	} else if(enableHttp2) {
-		$tw.utils.warning("Warning: HTTP/2 requires TLS certificates (tls-key and tls-cert). Use h2c=yes for unencrypted HTTP/2 in trusted networks.");
+		if(this.get("suppress-server-logs") !== "yes") {
+			$tw.utils.warning("Warning: HTTP/2 requires TLS certificates (tls-key and tls-cert). Use h2c=yes for unencrypted HTTP/2 in trusted networks.");
+		}
 	}
 	// Set the transport module
 	if(this.useHttp2 || this.useH2c) {
@@ -400,35 +419,110 @@ Server.prototype.listen = function(port,host,prefix) {
 		}
 	}
 	if(missing.length > 0) {
-		var error = "Warning: Plugin(s) required for client-server operation are missing.\n"+
-			"\""+ missing.join("\", \"")+"\"";
-		$tw.utils.warning(error);
+		if(this.get("suppress-server-logs") !== "yes") {
+			var error = "Warning: Plugin(s) required for client-server operation are missing.\n"+
+				"\""+ missing.join("\", \"")+"\"";
+			$tw.utils.warning(error);
+		}
 	}
 	// Create the server
 	var server;
 	if(this.useHttp2) {
 		// Create HTTP/2 secure server
 		server = this.transport.createSecureServer(this.listenOptions,this.requestHandler.bind(this));
-		$tw.utils.log("HTTP/2 enabled with ALPN protocol negotiation","green");
+		// Track HTTP/2 sessions (only for testing)
+		if(this.enableConnectionTracking) {
+			server.on("session", function(session) {
+				self.connectionStats.http2Sessions++;
+				self.connectionStats.activeSessions.add(session);
+				session.on("close", function() {
+					self.connectionStats.activeSessions.delete(session);
+				});
+			});
+		}
+		if(this.get("suppress-server-logs") !== "yes") {
+			$tw.utils.log("HTTP/2 enabled with ALPN protocol negotiation","green");
+		}
 	} else if(this.useH2c) {
 		// Create HTTP/2 Cleartext server
 		server = this.transport.createServer(this.requestHandler.bind(this));
-		$tw.utils.log("HTTP/2 Cleartext (h2c) enabled - suitable for reverse proxy setups","yellow");
+		// Track HTTP/2 sessions (only for testing)
+		if(this.enableConnectionTracking) {
+			server.on("session", function(session) {
+				self.connectionStats.http2Sessions++;
+				self.connectionStats.activeSessions.add(session);
+				session.on("close", function() {
+					self.connectionStats.activeSessions.delete(session);
+				});
+			});
+		}
+		if(this.get("suppress-server-logs") !== "yes") {
+			$tw.utils.log("HTTP/2 Cleartext (h2c) enabled - suitable for reverse proxy setups","yellow");
+		}
 	} else if(this.listenOptions) {
 		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
+		// Track HTTP/1.1 connections (only for testing)
+		if(this.enableConnectionTracking) {
+			server.on("connection", function(socket) {
+				self.connectionStats.http1Connections++;
+				self.connectionStats.activeConnections.add(socket);
+				socket.on("close", function() {
+					self.connectionStats.activeConnections.delete(socket);
+				});
+			});
+		}
 	} else {
 		server = this.transport.createServer(this.requestHandler.bind(this));
+		// Track HTTP/1.1 connections (only for testing)
+		if(this.enableConnectionTracking) {
+			server.on("connection", function(socket) {
+				self.connectionStats.http1Connections++;
+				self.connectionStats.activeConnections.add(socket);
+				socket.on("close", function() {
+					self.connectionStats.activeConnections.delete(socket);
+				});
+			});
+		}
 	}
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
 	server.on("listening",function() {
 		var address = server.address(),
 			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix,
 			protocolInfo = self.useHttp2 ? " (HTTP/2)" : self.useH2c ? " (HTTP/2 Cleartext)" : "";
-		$tw.utils.log("Serving on " + url + protocolInfo,"brown/orange");
-		$tw.utils.log("(press ctrl-C to exit)","red");
+		if(self.get("suppress-server-logs") !== "yes") {
+			$tw.utils.log("Serving on " + url + protocolInfo,"brown/orange");
+			$tw.utils.log("(press ctrl-C to exit)","red");
+		}
 	});
 	// Listen
 	return server.listen(port,host);
+};
+
+// Get connection statistics (for testing only)
+// Returns null if connection tracking is not enabled
+Server.prototype.getConnectionStats = function() {
+	if(!this.enableConnectionTracking) {
+		return null;
+	}
+	return {
+		http1Connections: this.connectionStats.http1Connections,
+		http2Sessions: this.connectionStats.http2Sessions,
+		activeConnections: this.connectionStats.activeConnections.size,
+		activeSessions: this.connectionStats.activeSessions.size
+	};
+};
+
+// Reset connection statistics (for testing only)
+// Does nothing if connection tracking is not enabled
+Server.prototype.resetConnectionStats = function() {
+	if(!this.enableConnectionTracking) {
+		return;
+	}
+	this.connectionStats.http1Connections = 0;
+	this.connectionStats.http2Sessions = 0;
+	// Keep the Set objects but clear them
+	this.connectionStats.activeConnections.clear();
+	this.connectionStats.activeSessions.clear();
 };
 
 exports.Server = Server;
