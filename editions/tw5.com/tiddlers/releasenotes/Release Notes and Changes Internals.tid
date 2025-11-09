@@ -36,7 +36,7 @@ Change notes describe a discrete change within a release. Change note fields:
 * `text` - full description of the change
 * `description` - brief description of the change
 * `release` - the release with which this change note is associated (eg `5.4.0`)
-* `links` - a list of the ~GitHub links associated with this change
+* `github-links` - a list of the ~GitHub links associated with this change
 * `github-contributors` - a list of the ~GitHub handles of the developers responsible for the PR/commits
 
 ! Impact Notes
