@@ -136,9 +136,17 @@ function Server(options) {
 		if(this.get("suppress-server-logs") !== "yes") {
 			$tw.utils.warning("Warning: Using HTTP/2 Cleartext (h2c). This should only be used in trusted networks or behind a reverse proxy.");
 		}
-	} else if(enableHttp2) {
+	} else if(enableH2c && !http2) {
+		// h2c requested but http2 module not available - fall back to HTTP/1.1
+		this.protocol = "http";
 		if(this.get("suppress-server-logs") !== "yes") {
-			$tw.utils.warning("Warning: HTTP/2 requires TLS certificates (tls-key and tls-cert). Use h2c=yes for unencrypted HTTP/2 in trusted networks.");
+			$tw.utils.warning("Warning: HTTP/2 Cleartext (h2c) requested but not available. Falling back to HTTP/1.1");
+		}
+	} else if(enableHttp2) {
+		// http2=yes but no TLS certificates - fall back to HTTP/1.1
+		this.protocol = "http";
+		if(this.get("suppress-server-logs") !== "yes") {
+			$tw.utils.warning("Warning: HTTP/2 requires TLS certificates (tls-key and tls-cert). Use h2c=yes for unencrypted HTTP/2 in trusted networks. Falling back to HTTP/1.1");
 		}
 	}
 	// Set the transport module
@@ -307,17 +315,6 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 
 Server.prototype.requestHandler = function(request,response,options) {
 	options = options || {};
-	// Handle HTTP/2 compatibility
-	// HTTP/2 uses pseudo-headers (:method, :path, etc.) but also provides them as regular properties
-	if(request.httpVersion === "2.0" || request.stream) {
-		// Ensure method and url are available (they should be in Node.js http2)
-		if(!request.method && request.headers[":method"]) {
-			request.method = request.headers[":method"];
-		}
-		if(!request.url && request.headers[":path"]) {
-			request.url = request.headers[":path"];
-		}
-	}
 	// Compose the state object
 	var self = this;
 	var state = {};

@@ -19,7 +19,6 @@ if($tw.node) {
 	var Server = require("$:/core/modules/server/server.js").Server;
 	var fs = require("fs");
 	var path = require("path");
-	var http = require("http");
 	var https = require("https");
 	var http2;
 	
@@ -33,29 +32,12 @@ if($tw.node) {
 	describe("Server HTTP/2 Support", function() {
 		var testPort = 8091;
 		var h2cPort = 8092;
-		var baseUrl = "http://127.0.0.1:" + testPort;
 		var h2cUrl = "http://127.0.0.1:" + h2cPort;
-
-		// Helper function to create test certificates
-		function createTestCertificates(tempDir) {
-			// For testing, we'll use self-signed certificates
-			// In a real test environment, you would generate these with openssl
-			var keyPath = path.join(tempDir, "test-key.pem");
-			var certPath = path.join(tempDir, "test-cert.pem");
-			
-			// Note: These are dummy paths for testing the configuration logic
-			// Real certificate generation would require openssl
-			return {
-				keyPath: keyPath,
-				certPath: certPath,
-				exists: fs.existsSync(keyPath) && fs.existsSync(certPath)
-			};
-		}
 
 		describe("HTTP/2 Configuration", function() {
 			it("should have http2 default variable set to 'yes'", function() {
         // This test verifies the http2 module detection logic
-				expect(typeof http2).toBeDefined();
+				expect(http2).toBeDefined();
 				// http2 should be available in Node.js 8.4.0+
 				var server = new Server({
 					wiki: $tw.wiki,
@@ -118,9 +100,10 @@ if($tw.node) {
 				expect(server.protocol).toBe("http");
 				expect(server.useHttp2).toBe(false);
 				expect(server.useH2c).toBe(false);
+				expect(server.transport).toBe(require("http"));
 			});
 
-			it("should enable h2c when h2c=yes even without certificates", function() {
+			it("should enable h2c when h2c=yes and http2 module is available", function() {
 				var server = new Server({
 					wiki: $tw.wiki,
 					variables: {
@@ -130,10 +113,16 @@ if($tw.node) {
 					}
 				});
 				
-				// With h2c=yes, should enable HTTP/2 Cleartext
+				// With h2c=yes and http2 module available, should enable HTTP/2 Cleartext
 				expect(server.protocol).toBe("http");
-				expect(server.useH2c).toBe(true);
-				expect(server.transport).toBe(http2);
+				if(http2) {
+					expect(server.useH2c).toBe(true);
+					expect(server.transport).toBe(http2);
+				} else {
+					// If http2 module is not available, should fall back to HTTP/1.1
+					expect(server.useH2c).toBe(false);
+					expect(server.transport).toBe(require("http"));
+				}
 			});
 
 			it("should not enable both http2 and h2c simultaneously", function() {
@@ -159,11 +148,15 @@ if($tw.node) {
 			var nodeServer = null;
 
 			afterEach(function(done) {
-				nodeServer.close(function() {
-					serverInstance = null;
-					nodeServer = null;
+				if(nodeServer) {
+					nodeServer.close(function() {
+						serverInstance = null;
+						nodeServer = null;
+						done();
+					});
+				} else {
 					done();
-				});
+				}
 			});
 
 			it("should start h2c server successfully", function(done) {
@@ -243,6 +236,66 @@ if($tw.node) {
 					req.end();
 				});
 			});
+
+			it("should correctly handle HTTP/2 pseudo-headers", function(done) {
+				// This test verifies that Node.js HTTP/2 correctly maps pseudo-headers
+				// to request.method and request.url properties
+				var testServer = new Server({
+					wiki: $tw.wiki,
+					variables: {
+						port: (h2cPort + 1).toString(),
+						host: "127.0.0.1",
+						"h2c": "yes",
+						"csrf-disable": "yes",
+						"suppress-server-logs": "yes"
+					}
+				});
+
+				var testNodeServer = testServer.listen();
+				testNodeServer.unref();
+
+				testNodeServer.on("listening", function() {
+					// Intercept request to verify properties
+					var originalHandler = testServer.requestHandler.bind(testServer);
+					testServer.requestHandler = function(request, response, options) {
+						// Verify that Node.js http2 provides method and url directly
+						expect(request.method).toBeDefined();
+						expect(request.method).toBe("GET");
+						expect(request.url).toBeDefined();
+						expect(request.url).toContain("/status");
+						
+						// Verify that pseudo-headers are NOT in request.headers
+						// (they should be stripped by Node.js http2 implementation)
+						expect(request.headers[":method"]).toBeUndefined();
+						expect(request.headers[":path"]).toBeUndefined();
+						
+						// Call original handler
+						originalHandler(request, response, options);
+					};
+
+					var client = http2.connect("http://127.0.0.1:" + (h2cPort + 1));
+					var req = client.request({
+						":method": "GET",
+						":path": "/status"
+					});
+
+					req.on("data", function() {});
+					req.on("end", function() {
+						client.close();
+						testNodeServer.close(function() {
+							done();
+						});
+					});
+					req.on("error", function(err) {
+						fail("Request failed: " + err.message);
+						client.close();
+						testNodeServer.close(function() {
+							done();
+						});
+					});
+					req.end();
+				});
+			});
 		});
 
 		describe("HTTP/2 Multiplexing Performance", function() {
@@ -292,10 +345,10 @@ if($tw.node) {
 				var client = http2.connect(h2cUrl);
 				var requestCount = 20;
 
-				var requestPromises = [];
-				for(var i = 1; i <= requestCount; i++) {
-					var index = i;
-					requestPromises.push(new Promise(function(resolve, reject) {
+				// Create array of request promises using Array.from for cleaner code
+				var requestPromises = Array.from({length: requestCount}, function(_, i) {
+					var index = i + 1;  // 1-indexed
+					return new Promise(function(resolve, reject) {
 						var req = client.request({
 							":method": "GET",
 							":path": "/recipes/default/tiddlers/TestTiddler-HTTP2-" + index
@@ -312,12 +365,15 @@ if($tw.node) {
 						});
 						req.on("error", reject);
 						req.end();
-					}));
-				}
+					});
+				});
 
 				Promise.all(requestPromises).then(function(responses) {
 					// Verify all responses received correctly
 					expect(responses.length).toBe(requestCount);
+					
+					// Verify each response has the correct title
+					// Promise.all preserves order, so responses[0] is request 1, etc.
 					responses.forEach(function(response, idx) {
 						expect(response.title).toBe("TestTiddler-HTTP2-" + (idx + 1));
 					});
@@ -402,11 +458,9 @@ if($tw.node) {
 					
 					// Then: send multiple requests concurrently
 					var concurrentStart = Date.now();
-					var concurrentPromises = [];
-					
-					for(var i = 1; i <= requestCount; i++) {
-						var index = i;
-						concurrentPromises.push(new Promise(function(resolve, reject) {
+					var concurrentPromises = Array.from({length: requestCount}, function(_, i) {
+						var index = i + 1;  // 1-indexed
+						return new Promise(function(resolve, reject) {
 							var req = client.request({
 								":method": "GET",
 								":path": "/recipes/default/tiddlers/TestTiddler-HTTP2-" + index
@@ -416,8 +470,8 @@ if($tw.node) {
 							req.on("end", function() { resolve(data.length); });
 							req.on("error", reject);
 							req.end();
-						}));
-					}
+						});
+					});
 					
 					Promise.all(concurrentPromises).then(function() {
 						var concurrentTime = Date.now() - concurrentStart;
