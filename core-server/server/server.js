@@ -40,18 +40,6 @@ function Server(options) {
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
 	
-	// Connection tracking (only enabled when enableConnectionTracking option is true)
-	// This is primarily for testing purposes and should not be used in production
-	this.enableConnectionTracking = options.enableConnectionTracking || false;
-	if(this.enableConnectionTracking) {
-		this.connectionStats = {
-			http1Connections: 0,
-			http2Sessions: 0,
-			activeConnections: new Set(),
-			activeSessions: new Set()
-		};
-	}
-	
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -69,6 +57,16 @@ function Server(options) {
 	this.enableGzip = this.get("gzip") === "yes";
 	// Initialize browser-caching
 	this.enableBrowserCache = this.get("use-browser-cache") === "yes";
+	// Initialize connection tracking (for diagnostics and testing)
+	this.enableConnectionTracking = this.get("connection-tracking") === "yes";
+	if(this.enableConnectionTracking) {
+		this.connectionStats = {
+			http1Connections: 0,
+			http2Sessions: 0,
+			activeConnections: new Set(),
+			activeSessions: new Set()
+		};
+	}
 	// Initialise authorization
 	var authorizedUserName;
 	if(this.get("username") && this.get("password")) {
@@ -245,6 +243,10 @@ Server.prototype.defaultVariables = {
 	"debug-level": "none",
 	"gzip": "no",
 	"use-browser-cache": "no",
+	"connection-tracking": "no",
+	// HTTP/2 is enabled by default when TLS certificates are available
+	// Without TLS certificates, the server will fall back to HTTP/1.1 (with a warning)
+	// Use "h2c=yes" for HTTP/2 Cleartext (unencrypted) in trusted networks
 	"http2": "yes",
 	"h2c": "no"
 };
@@ -422,13 +424,17 @@ Server.prototype.listen = function(port,host,prefix) {
 			$tw.utils.warning(error);
 		}
 	}
-	// Create the server
-	var server;
-	if(this.useHttp2) {
-		// Create HTTP/2 secure server
-		server = this.transport.createSecureServer(this.listenOptions,this.requestHandler.bind(this));
-		// Track HTTP/2 sessions (only for testing)
-		if(this.enableConnectionTracking) {
+	
+	// Helper function to setup connection tracking
+	// When enableConnectionTracking is true, this attaches listeners to track:
+	// - HTTP/2: session events for multiplexing analysis
+	// - HTTP/1.1: connection events for connection pooling analysis
+	function setupConnectionTracking(server, isHttp2) {
+		if(!self.enableConnectionTracking) {
+			return;
+		}
+		if(isHttp2) {
+			// Track HTTP/2 sessions
 			server.on("session", function(session) {
 				self.connectionStats.http2Sessions++;
 				self.connectionStats.activeSessions.add(session);
@@ -436,50 +442,40 @@ Server.prototype.listen = function(port,host,prefix) {
 					self.connectionStats.activeSessions.delete(session);
 				});
 			});
+		} else {
+			// Track HTTP/1.1 connections
+			server.on("connection", function(socket) {
+				self.connectionStats.http1Connections++;
+				self.connectionStats.activeConnections.add(socket);
+				socket.on("close", function() {
+					self.connectionStats.activeConnections.delete(socket);
+				});
+			});
 		}
+	}
+	
+	// Create the server
+	var server;
+	if(this.useHttp2) {
+		// Create HTTP/2 secure server
+		server = this.transport.createSecureServer(this.listenOptions,this.requestHandler.bind(this));
+		setupConnectionTracking(server, true);
 		if(this.get("suppress-server-logs") !== "yes") {
 			$tw.utils.log("HTTP/2 enabled with ALPN protocol negotiation","green");
 		}
 	} else if(this.useH2c) {
 		// Create HTTP/2 Cleartext server
 		server = this.transport.createServer(this.requestHandler.bind(this));
-		// Track HTTP/2 sessions (only for testing)
-		if(this.enableConnectionTracking) {
-			server.on("session", function(session) {
-				self.connectionStats.http2Sessions++;
-				self.connectionStats.activeSessions.add(session);
-				session.on("close", function() {
-					self.connectionStats.activeSessions.delete(session);
-				});
-			});
-		}
+		setupConnectionTracking(server, true);
 		if(this.get("suppress-server-logs") !== "yes") {
 			$tw.utils.log("HTTP/2 Cleartext (h2c) enabled - suitable for reverse proxy setups","yellow");
 		}
 	} else if(this.listenOptions) {
 		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
-		// Track HTTP/1.1 connections (only for testing)
-		if(this.enableConnectionTracking) {
-			server.on("connection", function(socket) {
-				self.connectionStats.http1Connections++;
-				self.connectionStats.activeConnections.add(socket);
-				socket.on("close", function() {
-					self.connectionStats.activeConnections.delete(socket);
-				});
-			});
-		}
+		setupConnectionTracking(server, false);
 	} else {
 		server = this.transport.createServer(this.requestHandler.bind(this));
-		// Track HTTP/1.1 connections (only for testing)
-		if(this.enableConnectionTracking) {
-			server.on("connection", function(socket) {
-				self.connectionStats.http1Connections++;
-				self.connectionStats.activeConnections.add(socket);
-				socket.on("close", function() {
-					self.connectionStats.activeConnections.delete(socket);
-				});
-			});
-		}
+		setupConnectionTracking(server, false);
 	}
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
 	server.on("listening",function() {
@@ -495,22 +491,22 @@ Server.prototype.listen = function(port,host,prefix) {
 	return server.listen(port,host);
 };
 
-// Get connection statistics (for testing only)
-// Returns null if connection tracking is not enabled
 Server.prototype.getConnectionStats = function() {
 	if(!this.enableConnectionTracking) {
 		return null;
 	}
 	return {
+		// Total HTTP/1.1 connections created
 		http1Connections: this.connectionStats.http1Connections,
+		// Total HTTP/2 sessions created
 		http2Sessions: this.connectionStats.http2Sessions,
+		// Number of currently active HTTP/1.1 connections
 		activeConnections: this.connectionStats.activeConnections.size,
+		// Number of currently active HTTP/2 sessions
 		activeSessions: this.connectionStats.activeSessions.size
 	};
 };
 
-// Reset connection statistics (for testing only)
-// Does nothing if connection tracking is not enabled
 Server.prototype.resetConnectionStats = function() {
 	if(!this.enableConnectionTracking) {
 		return;

@@ -64,25 +64,23 @@ if($tw.node) {
 				expect(server.getConnectionStats()).toBe(null);
 			});
 
-			it("should enable connection tracking only when explicitly requested", function() {
-				var server = new Server({
-					wiki: $tw.wiki,
-					enableConnectionTracking: true,
-					variables: {
-						port: testPort.toString(),
-						"suppress-server-logs": "yes"
-					}
-				});
-				// Connection tracking should be enabled
-				expect(server.enableConnectionTracking).toBe(true);
-				// getConnectionStats should return stats object
-				var stats = server.getConnectionStats();
-				expect(stats).not.toBe(null);
-				expect(stats.http1Connections).toBe(0);
-				expect(stats.http2Sessions).toBe(0);
+		it("should enable connection tracking only when explicitly requested", function() {
+			var server = new Server({
+				wiki: $tw.wiki,
+				variables: {
+					port: testPort.toString(),
+					"connection-tracking": "yes",
+					"suppress-server-logs": "yes"
+				}
 			});
-
-			it("should fallback to HTTP/1.1 when no certificates and http2=yes", function() {
+			// Connection tracking should be enabled
+			expect(server.enableConnectionTracking).toBe(true);
+			// getConnectionStats should return stats object
+			var stats = server.getConnectionStats();
+			expect(stats).not.toBe(null);
+			expect(stats.http1Connections).toBe(0);
+			expect(stats.http2Sessions).toBe(0);
+		});			it("should fallback to HTTP/1.1 when no certificates and http2=yes", function() {
 				var server = new Server({
 					wiki: $tw.wiki,
 					variables: {
@@ -299,20 +297,18 @@ if($tw.node) {
 					}));
 				}
 
-				// Start server with connection tracking enabled (for testing)
-				serverInstance = new Server({
-					wiki: $tw.wiki,
-					enableConnectionTracking: true,  // Enable for testing only
-					variables: {
-						port: h2cPort.toString(),
-						host: "127.0.0.1",
-						"h2c": "yes",
-						"csrf-disable": "yes",
-						"suppress-server-logs": "yes"
-					}
-				});
-
-				nodeServer = serverInstance.listen();
+			// Start server with connection tracking enabled (for testing)
+			serverInstance = new Server({
+				wiki: $tw.wiki,
+				variables: {
+					port: h2cPort.toString(),
+					host: "127.0.0.1",
+					"h2c": "yes",
+					"csrf-disable": "yes",
+					"suppress-server-logs": "yes",
+					"connection-tracking": "yes"
+				}
+			});				nodeServer = serverInstance.listen();
 				nodeServer.unref();
 				nodeServer.on("listening", done);
 			});
