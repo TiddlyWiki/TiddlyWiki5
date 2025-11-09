@@ -62,7 +62,7 @@ function Server(options) {
 		}
 	}
 	// Setup the default required plugins
-	this.requiredPlugins = this.get("required-plugins").split(',');
+	this.requiredPlugins = this.get("required-plugins").split(",");
 	// Initialise CSRF
 	this.csrfDisable = this.get("csrf-disable") === "yes";
 	// Initialize Gzip compression
@@ -83,7 +83,7 @@ function Server(options) {
 		writers: (this.get("writers") || authorizedUserName).split(",").map($tw.utils.trim)
 	}
 	if(this.get("admin") || authorizedUserName !== "(anon)") {
-		this.authorizationPrincipals["admin"] = (this.get("admin") || authorizedUserName).split(',').map($tw.utils.trim)
+		this.authorizationPrincipals["admin"] = (this.get("admin") || authorizedUserName).split(",").map($tw.utils.trim)
 	}
 	// Load and initialise authenticators
 	$tw.modules.forEachModuleOfType("authenticator", function(title,authenticatorDefinition) {
@@ -114,7 +114,7 @@ function Server(options) {
 		this.listenOptions = {
 			key: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsKeyFilepath),"utf8"),
 			cert: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsCertFilepath),"utf8"),
-			passphrase: tlsPassphrase || ''
+			passphrase: tlsPassphrase || ""
 		};
 		// Enable HTTP/2 if requested and available
 		if(enableHttp2 && http2) {
@@ -175,7 +175,7 @@ encoding: the encoding of the data to send (passed to the end method of the resp
 */
 function sendResponse(request,response,statusCode,headers,data,encoding) {
 	if(this.enableBrowserCache && (statusCode == 200)) {
-		var hash = crypto.createHash('md5');
+		var hash = crypto.createHash("md5");
 		// Put everything into the hash that could change and invalidate the data that
 		// the browser already stored. The headers the data and the encoding.
 		hash.update(data);
@@ -410,8 +410,8 @@ Server.prototype.listen = function(port,host,prefix) {
 	}
 	// Warn if required plugins are missing
 	var missing = [];
-	for (var index=0; index<this.requiredPlugins.length; index++) {
-		if (!this.wiki.getTiddler(this.requiredPlugins[index])) {
+	for(var index=0; index<this.requiredPlugins.length; index++) {
+		if(!this.wiki.getTiddler(this.requiredPlugins[index])) {
 			missing.push(this.requiredPlugins[index]);
 		}
 	}

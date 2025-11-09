@@ -36,7 +36,7 @@ if($tw.node) {
 
 		describe("HTTP/2 Configuration", function() {
 			it("should have http2 default variable set to 'yes'", function() {
-        // This test verifies the http2 module detection logic
+				// This test verifies the http2 module detection logic
 				expect(http2).toBeDefined();
 				// http2 should be available in Node.js 8.4.0+
 				var server = new Server({
@@ -58,10 +58,8 @@ if($tw.node) {
 						"suppress-server-logs": "yes"
 					}
 				});
-				
 				// Connection tracking should be disabled by default
 				expect(server.enableConnectionTracking).toBe(false);
-				
 				// getConnectionStats should return null when tracking is disabled
 				expect(server.getConnectionStats()).toBe(null);
 			});
@@ -75,10 +73,8 @@ if($tw.node) {
 						"suppress-server-logs": "yes"
 					}
 				});
-				
 				// Connection tracking should be enabled
 				expect(server.enableConnectionTracking).toBe(true);
-				
 				// getConnectionStats should return stats object
 				var stats = server.getConnectionStats();
 				expect(stats).not.toBe(null);
@@ -95,7 +91,6 @@ if($tw.node) {
 						"suppress-server-logs": "yes"
 					}
 				});
-				
 				// Without certificates and h2c, should fall back to HTTP/1.1
 				expect(server.protocol).toBe("http");
 				expect(server.useHttp2).toBe(false);
@@ -112,7 +107,6 @@ if($tw.node) {
 						"suppress-server-logs": "yes"
 					}
 				});
-				
 				// With h2c=yes and http2 module available, should enable HTTP/2 Cleartext
 				expect(server.protocol).toBe("http");
 				if(http2) {
@@ -135,7 +129,6 @@ if($tw.node) {
 						"suppress-server-logs": "yes"
 					}
 				});
-				
 				// h2c takes precedence when both are enabled (no certificates case)
 				// or http2 takes precedence (with certificates case)
 				var http2Count = (server.useHttp2 ? 1 : 0) + (server.useH2c ? 1 : 0);
@@ -171,10 +164,8 @@ if($tw.node) {
 				});
 
 				expect(serverInstance.useH2c).toBe(true);
-				
 				nodeServer = serverInstance.listen();
 				expect(nodeServer).toBeDefined();
-				
 				if(nodeServer) {
 					nodeServer.unref();
 					// Give server time to start
@@ -203,17 +194,14 @@ if($tw.node) {
 				nodeServer.on("listening", function() {
 					// Use HTTP/2 client to connect to h2c server
 					var client = http2.connect(h2cUrl);
-					
 					var req = client.request({
 						":method": "GET",
 						":path": "/status"
 					});
-					
 					var data = "";
 					req.on("data", function(chunk) {
 						data += chunk;
 					});
-					
 					req.on("end", function() {
 						try {
 							var json = JSON.parse(data);
@@ -226,13 +214,11 @@ if($tw.node) {
 							done();
 						}
 					});
-					
 					req.on("error", function(err) {
 						fail("Request failed: " + err.message);
 						client.close();
 						done();
 					});
-					
 					req.end();
 				});
 			});
@@ -341,7 +327,6 @@ if($tw.node) {
 			it("should create only ONE HTTP/2 session for multiple concurrent requests", function(done) {
 				// Reset connection stats before test
 				serverInstance.resetConnectionStats();
-				
 				var client = http2.connect(h2cUrl);
 				var requestCount = 20;
 
@@ -371,21 +356,15 @@ if($tw.node) {
 				Promise.all(requestPromises).then(function(responses) {
 					// Verify all responses received correctly
 					expect(responses.length).toBe(requestCount);
-					
 					// Verify each response has the correct title
 					// Promise.all preserves order, so responses[0] is request 1, etc.
 					responses.forEach(function(response, idx) {
 						expect(response.title).toBe("TestTiddler-HTTP2-" + (idx + 1));
 					});
-					
 					// KEY TEST: Verify server only created ONE HTTP/2 session
 					var stats = serverInstance.getConnectionStats();
 					expect(stats.http2Sessions).toBe(1);
 					expect(stats.http1Connections).toBe(0);
-					
-					console.log("HTTP/2 multiplexing verified: " + requestCount + " requests used " + 
-					            stats.http2Sessions + " HTTP/2 session (NOT " + requestCount + " connections)");
-					
 					client.close();
 					done();
 				}).catch(function(err) {
@@ -398,12 +377,10 @@ if($tw.node) {
 			it("should reuse same socket for all requests on single connection", function(done) {
 				var client = http2.connect(h2cUrl);
 				var requestCount = 10;
-				
 				// Wait for connection to establish
 				client.on("connect", function() {
 					var socket = client.socket;
 					expect(socket).toBeDefined();
-					
 					// Socket properties might not be available immediately
 					// Just verify the socket object itself is reused
 					var requestPromises = [];
@@ -426,9 +403,6 @@ if($tw.node) {
 					}
 
 					Promise.all(requestPromises).then(function() {
-						console.log("HTTP/2 socket reuse verified: " + requestCount + 
-						            " requests on same socket object");
-						
 						client.close();
 						done();
 					}).catch(function(err) {
@@ -445,7 +419,6 @@ if($tw.node) {
 				// that concurrent execution doesn't take 2x the time of a single request
 				var client = http2.connect(h2cUrl);
 				var requestCount = 10;
-				
 				// First: measure time for a single request (baseline)
 				var singleStart = Date.now();
 				var req1 = client.request({
@@ -455,7 +428,6 @@ if($tw.node) {
 				req1.on("data", function() {});
 				req1.on("end", function() {
 					var singleTime = Date.now() - singleStart;
-					
 					// Then: send multiple requests concurrently
 					var concurrentStart = Date.now();
 					var concurrentPromises = Array.from({length: requestCount}, function(_, i) {
@@ -472,7 +444,6 @@ if($tw.node) {
 							req.end();
 						});
 					});
-					
 					Promise.all(concurrentPromises).then(function() {
 						var concurrentTime = Date.now() - concurrentStart;
 						
@@ -480,11 +451,6 @@ if($tw.node) {
 						// Due to localhost speed, we just verify it's reasonably fast
 						// In real world with network latency, the difference would be dramatic
 						var ratio = concurrentTime / singleTime;
-						
-						console.log("HTTP/2 multiplexing: 1 request=" + singleTime + "ms, " +
-						            requestCount + " concurrent=" + concurrentTime + "ms (ratio: " + 
-						            ratio.toFixed(1) + "x, not " + requestCount + "x)");
-						
 						// Concurrent should not be N times slower (that would indicate sequential execution)
 						// Allow some overhead, but it should be much less than N times
 						expect(ratio).toBeLessThan(requestCount * 0.5);
