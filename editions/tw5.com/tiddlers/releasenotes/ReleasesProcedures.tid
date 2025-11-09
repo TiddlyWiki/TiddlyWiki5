@@ -1,47 +1,50 @@
 title: $:/tw5.com/releases/procedures
 tags: $:/tags/Global
 
-\procedure github-changes-link()
+<!-- Generate a link to the changes since the previous release -->
+\procedure github-release-changes-link(release)
 <a
 	class="tc-tiddlylink-external"
 	href=`https://github.com/TiddlyWiki/TiddlyWiki5/compare/v${ [all[tiddlers]tag[ReleaseNotes]has[released]!sort[released]] :filter[get[released]compare:number:lt<releaseTiddlerCreated>] +[get[caption]] }$...${ [<releaseTiddler>has[released]get[caption]addprefix[v]] :else[[master]] }$`
 	rel="noopener noreferrer"
 	target="_blank"
 >the detailed change history on ~GitHub</a>
-\end github-changes-link
+\end github-release-changes-link
 
 \procedure banner-credits()
 <%if [<banner-credit-user-name>!match[]] %>
-
-<img src=<<banner-credit-permalink>> width="140" style="float:left;margin-right:0.5em;"/>
-
-Congratulations to
-<a
-	class="tc-tiddlylink-external"
-	href=<<banner-credit-user-link>>
-	rel="noopener noreferrer"
-	target="_blank"
-><$text text=<<banner-credit-user-name>>/></a>
-for their winning design for the banner for this release (here is the
-<a
-	class="tc-tiddlylink-external"
-	href=<<banner-credit-discussion-link>>
-	rel="noopener noreferrer"
-	target="_blank"
->discussion</a>).
+	<img src=<<banner-credit-permalink>> width="140" style="float:left;margin-right:0.5em;"/>
+	Congratulations to
+	<a
+		class="tc-tiddlylink-external"
+		href=<<banner-credit-user-link>>
+		rel="noopener noreferrer"
+		target="_blank"
+	><$text text=<<banner-credit-user-name>>/></a>
+	for their winning design for the banner for this release (here is the
+	<a
+		class="tc-tiddlylink-external"
+		href=<<banner-credit-discussion-link>>
+		rel="noopener noreferrer"
+		target="_blank"
+	>discussion</a>).
 <%else%>
-<$image source="New Release Banner" width="140"/>
+	<$image source="New Release Banner" width="140"/>
 <%endif%>
 <div style="clear:both;"/>
 \end banner-credits
 
 \procedure impact-pill(impact-type)
+\whitespace trim
 <span
-	class={{{ doc-change-note-impact-pill [[doc-change-note-impact-pill-]addsuffix<impact-type>] +[join[ ]] }}}
-	style.borderColor={{{ [<impact-type>addprefix[$:/tw5.com/releases/info/impact-types/]addsuffix[/colour/foreground]get[text]] }}}
-	style.backgroundColor={{{ [<impact-type>addprefix[$:/tw5.com/releases/info/impact-types/]addsuffix[/colour/background]get[text]] }}}
+	style.fill={{{ [<impact-type>addprefix[$:/tw5.com/releases/info/impact-types/]addsuffix[/colour/foreground]get[text]] }}}
+	style.color={{{ [<impact-type>addprefix[$:/tw5.com/releases/info/impact-types/]addsuffix[/colour/background]get[text]] }}}
+	class={{{ doc-change-note-impact-pill-icon [[doc-change-note-impact-pill-]addsuffix<impact-type>] +[join[ ]] }}}
+>{{$:/core/images/star-filled}}</span>
+<span
+	class="doc-change-note-impact-pill-text"
 >
-	{{$:/core/images/star-filled}} <$text text=<<impact-type>>/>
+	<$text text=<<impact-type>>/>
 </span>
 \end impact-pill
 
@@ -65,27 +68,39 @@ for their winning design for the banner for this release (here is the
 						>
 							<$text text={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/caption]get[text]] }}}/>
 						</$link> <$transclude $tiddler=<<change>> $field="description" $mode="inline"/></h3>
-					<div class="doc-change-note-impact-notes">
-						<$list filter="[tag[$:/tags/ImpactNote]] :filter[{!!changenote}match<change>] +[sort[description]]" variable="impact">
-							<div class="doc-change-note-impact-note">
-								<$transclude $variable="impact-pill" $mode="inline" impact-type={{{ [<impact>get[impact-type]] }}}/>
-								<$text text=" - "/>
-								<$transclude $tiddler=<<impact>> $field="description" $mode="inline"/>
+					<div class="doc-change-note-info-list">
+						<$list filter="[tag[$:/tags/ImpactNote]] :filter[{!!changenote}match<change>] +[sort[description]]" variable="impact" counter="impactCount">
+							<div class="doc-change-note-info-list-item-caption">
+								<%if [<impactCount>match[1]] %>
+									Impact:
+								<%endif%>
+							</div>
+							<div class="doc-change-note-info-list-item-description">
+								<div class="doc-change-note-info-list-item-description-summary">
+									<$transclude $variable="impact-pill" $mode="inline" impact-type={{{ [<impact>get[impact-type]] }}}/>
+									<$text text=": "/>
+									<$transclude $tiddler=<<impact>> $field="description" $mode="inline"/>
+								</div>
+								<div class="doc-change-note-info-list-item-description-details">
+									<$transclude $tiddler=<<impact>> $field="text" $mode="block"/>
+								</div>
 							</div>
 						</$list>
-					</div>
-					<div class="doc-change-note-github-links">
-					<$text text="GitHub links: "/>
-						<$list filter="[<change>get[github-links]enlist-input[]]" variable="link">
-							<a
-								href=<<link>>
-								class="doc-github-link"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								{{$:/core/images/github}}
-							</a>
-						</$list>
+						<div class="doc-change-note-info-list-item-caption">
+							<$text text="GitHub: "/>
+						</div>
+						<div class="doc-change-note-info-list-item-description">
+							<$list filter="[<change>get[github-links]enlist-input[]]" variable="link">
+								<a
+									href=<<link>>
+									class="doc-github-link"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{{$:/core/images/github}}
+								</a>
+							</$list>
+						</div>
 					</div>
 					<div class="doc-change-note-description">
 						<$transclude $tiddler=<<change>> $mode="block"/>
@@ -111,14 +126,13 @@ for their winning design for the banner for this release (here is the
 \end acknowledgements
 
 \procedure releasenote(release)
-\whitespace trim
 <$let
 	releaseTiddler={{{ [all[tiddlers]tag[ReleaseNotes]] :filter[{!!caption}match<release>] }}}
 	releaseTiddlerCreated={{{ [<releaseTiddler>get[created]] }}}
 	release-github-contributors={{{ [tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :map:flat[enlist{!!github-contributors}] +[sort[]format:titlelist[]join[ ]]}}}
 >
 
-See <<github-changes-link>> and [[other versions|TiddlyWiki Releases]].
+See <<github-release-changes-link>> and [[other releases|TiddlyWiki Releases]].
 
 <<banner-credits>>
 
