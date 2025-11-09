@@ -100,6 +100,7 @@ jobs:
     - name: Validate change note format
       if: steps.changed-files.outputs.any_changed == 'true'
       id: validate
+      continue-on-error: true
       run: |
         chmod +x bin/validate-changenotes.sh
         
@@ -188,3 +189,9 @@ jobs:
           ## ✅ Change Note Status
           
           This PR contains documentation or configuration changes that typically don't require a change note.
+    
+    - name: Fail workflow if validation failed
+      if: steps.validate.outcome == 'failure'
+      run: |
+        echo "::error::Change note validation failed. Please check the PR comment for details."
+        exit 1
