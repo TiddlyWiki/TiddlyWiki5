@@ -21,7 +21,7 @@ There is also a utility `serializeAttribute` for a single attribute node, like a
 * New core plugin `tiddlywiki/wikitext-serialize` containing most of the logic
 * Separate serialize handlers for each WikiText rule as `module-type: wikiruleserializer`
 * Test suite with tag `$:/tags/wikitext-serialize-test-spec`
-* It use each parser's name as rule (`nextMatch.rule.name`), each AST node that needs serialization has a `type` property matching the rule name
+* It uses each parser's name as rule (`nextMatch.rule.name`), each AST node that needs serialization has a `type` property matching the rule name
 
 !! Example Usage
 
