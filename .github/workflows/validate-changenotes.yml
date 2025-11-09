@@ -178,6 +178,18 @@ jobs:
           
           Note: If this is a documentation-only change or doesn't require a change note, you can ignore this message.
     
+    - name: Create or update comment (doc only - has no notes)
+      if: steps.check-needs-notes.outputs.needs_note == 'false' && steps.changed-files.outputs.any_changed != 'true'
+      uses: peter-evans/create-or-update-comment@v5
+      with:
+        comment-id: ${{ steps.find-comment.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
+        edit-mode: replace
+        body: |
+          ## ✅ Change Note Status
+          
+          This PR contains documentation or configuration changes that typically don't require a change note.
+    
     - name: Remove comment if not needed
       if: steps.check-needs-notes.outputs.needs_note == 'false' && steps.changed-files.outputs.any_changed == 'true'
       uses: peter-evans/create-or-update-comment@v5
