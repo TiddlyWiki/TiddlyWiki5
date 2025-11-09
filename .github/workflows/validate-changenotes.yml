@@ -1,0 +1,184 @@
+name: Validate Change Notes
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  validate-changenotes:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Checkout base branch
+      run: |
+        git fetch origin ${{ github.base_ref }}
+    
+    - name: Get all changed files in PR
+      id: all-files
+      uses: tj-actions/changed-files@v47
+      with:
+        base_sha: ${{ github.event.pull_request.base.sha }}
+    
+    - name: Get changed note files
+      id: changed-files
+      uses: tj-actions/changed-files@v47
+      with:
+        files: |
+          editions/*/tiddlers/releasenotes/**/*.tid
+        base_sha: ${{ github.event.pull_request.base.sha }}
+    
+    - name: Check if PR needs change notes
+      id: check-needs-notes
+      uses: actions/github-script@v8
+      with:
+        result-encoding: string
+        script: |
+          const allFiles = '${{ steps.all-files.outputs.all_changed_files }}'.split(' ').filter(Boolean);
+          const hasNotes = '${{ steps.changed-files.outputs.any_changed }}' === 'true';
+          
+          // Patterns for files that don't require change notes
+          const skipPatterns = [
+            /^\.github\//,
+            /^\.vscode\//,
+            /^\.editorconfig$/,
+            /^\.gitignore$/,
+            /^LICENSE$/,
+            /\.md$(?!.*\/readme\.md$)/i,  // .md files except readme.md
+            /^editions\/.*-docs?\//,
+            /^bin\/.*\.md$/,  // Documentation in bin folder
+            /^playwright-report\//,
+            /^test-results\//,
+          ];
+          
+          // Check if file is a documentation tiddler (not core code)
+          const isDocTiddler = (file) => {
+            if (!/^editions\/.*\/tiddlers\/.*\.tid$/.test(file)) return false;
+            // Core modules, plugins should require change notes
+            if (/\/(core|plugin\.info|modules)\//.test(file)) return false;
+            // Release notes themselves don't require additional notes
+            if (/\/releasenotes\//.test(file)) return false;
+            // Other tiddlers are documentation
+            return true;
+          };
+          
+          let needsNote = false;
+          for (const file of allFiles) {
+            // Skip documentation-only files
+            const isSkipped = skipPatterns.some(pattern => pattern.test(file)) || isDocTiddler(file);
+            
+            if (!isSkipped) {
+              needsNote = true;
+              core.info(`✓ File requires change note: ${file}`);
+              break;
+            }
+          }
+          
+          // Set outputs using environment file
+          const fs = require('fs');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `needs_note=${needsNote}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `has_notes=${hasNotes}\n`);
+          
+          if (needsNote) {
+            core.info('✓ PR contains code changes that may require a change note');
+          } else {
+            core.info('✓ PR only contains documentation/configuration changes');
+          }
+          
+          return needsNote ? 'needs-note' : 'doc-only';
+    
+    - name: Validate change note format
+      if: steps.changed-files.outputs.any_changed == 'true'
+      id: validate
+      run: |
+        chmod +x bin/validate-changenotes.sh
+        
+        # Run validation (will exit 1 on failure)
+        if bin/validate-changenotes.sh ${{ steps.changed-files.outputs.all_changed_files }}; then
+          echo "result=success" >> $GITHUB_OUTPUT
+        else
+          echo "result=failure" >> $GITHUB_OUTPUT
+          # Save error details if they exist
+          if [ -f /tmp/validation_errors.md ]; then
+            {
+              echo 'errors<<EOF'
+              cat /tmp/validation_errors.md
+              echo EOF
+            } >> $GITHUB_OUTPUT
+          fi
+          exit 1
+        fi
+      shell: bash
+    
+    - name: Find existing bot comment
+      if: always()
+      uses: peter-evans/find-comment@v3
+      id: find-comment
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        comment-author: 'github-actions[bot]'
+        body-includes: 'Change Note Status'
+    
+    - name: Create or update comment (validation passed)
+      if: steps.changed-files.outputs.any_changed == 'true' && steps.validate.outcome == 'success'
+      uses: peter-evans/create-or-update-comment@v5
+      with:
+        comment-id: ${{ steps.find-comment.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
+        edit-mode: replace
+        body: |
+          ## ✅ Change Note Status
+          
+          All change notes are properly formatted and validated.
+    
+    - name: Create or update comment (validation failed)
+      if: steps.changed-files.outputs.any_changed == 'true' && steps.validate.outcome == 'failure'
+      uses: peter-evans/create-or-update-comment@v5
+      with:
+        comment-id: ${{ steps.find-comment.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
+        edit-mode: replace
+        body: |
+          ## ❌ Change Note Status
+          
+          Change note validation failed. Please fix the following issues:
+          
+          ${{ steps.validate.outputs.errors }}
+          
+          ---
+          
+          [Release Notes and Changes](https://tiddlywiki.com/prerelease/#Release%20Notes%20and%20Changes)
+    
+    - name: Create or update comment (missing change note)
+      if: steps.check-needs-notes.outputs.needs_note == 'true' && steps.changed-files.outputs.any_changed != 'true'
+      uses: peter-evans/create-or-update-comment@v5
+      with:
+        comment-id: ${{ steps.find-comment.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
+        edit-mode: replace
+        body: |
+          ## ⚠️ Change Note Status
+          
+          This PR appears to contain code changes but doesn't include a change note.
+          
+          Please add a change note by creating a `.tid` file in `editions/tw5.com/tiddlers/releasenotes/<version>/` with the following format:
+          
+          [Release Notes and Changes](https://tiddlywiki.com/prerelease/#Release%20Notes%20and%20Changes)
+          
+          Note: If this is a documentation-only change or doesn't require a change note, you can ignore this message.
+    
+    - name: Remove comment if not needed
+      if: steps.check-needs-notes.outputs.needs_note == 'false' && steps.changed-files.outputs.any_changed == 'true'
+      uses: peter-evans/create-or-update-comment@v5
+      with:
+        comment-id: ${{ steps.find-comment.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
+        edit-mode: replace
+        body: |
+          ## ✅ Change Note Status
+          
+          This PR contains documentation or configuration changes that typically don't require a change note.
