@@ -513,7 +513,6 @@ Server.prototype.resetConnectionStats = function() {
 	}
 	this.connectionStats.http1Connections = 0;
 	this.connectionStats.http2Sessions = 0;
-	// Keep the Set objects but clear them
 	this.connectionStats.activeConnections.clear();
 	this.connectionStats.activeSessions.clear();
 };
