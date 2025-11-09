@@ -40,72 +40,26 @@ jobs:
     
     - name: Check if PR needs change notes
       id: check-needs-notes
-      uses: actions/github-script@v8
-      with:
-        result-encoding: string
-        script: |
-          const allFiles = '${{ steps.all-files.outputs.all_changed_files }}'.split(' ').filter(Boolean);
-          const hasNotes = '${{ steps.changed-files.outputs.any_changed }}' === 'true';
-          
-          // Patterns for files that don't require change notes
-          const skipPatterns = [
-            /^\.github\//,
-            /^\.vscode\//,
-            /^\.editorconfig$/,
-            /^\.gitignore$/,
-            /^LICENSE$/,
-            /\.md$(?!.*\/readme\.md$)/i,  // .md files except readme.md
-            /^editions\/.*-docs?\//,
-            /^bin\/.*\.md$/,  // Documentation in bin folder
-            /^playwright-report\//,
-            /^test-results\//,
-          ];
-          
-          // Check if file is a documentation tiddler (not core code)
-          const isDocTiddler = (file) => {
-            if (!/^editions\/.*\/tiddlers\/.*\.tid$/.test(file)) return false;
-            // Core modules, plugins should require change notes
-            if (/\/(core|plugin\.info|modules)\//.test(file)) return false;
-            // Release notes themselves don't require additional notes
-            if (/\/releasenotes\//.test(file)) return false;
-            // Other tiddlers are documentation
-            return true;
-          };
-          
-          let needsNote = false;
-          for (const file of allFiles) {
-            // Skip documentation-only files
-            const isSkipped = skipPatterns.some(pattern => pattern.test(file)) || isDocTiddler(file);
-            
-            if (!isSkipped) {
-              needsNote = true;
-              core.info(`✓ File requires change note: ${file}`);
-              break;
-            }
-          }
-          
-          // Set outputs using environment file
-          const fs = require('fs');
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, `needs_note=${needsNote}\n`);
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, `has_notes=${hasNotes}\n`);
-          
-          if (needsNote) {
-            core.info('✓ PR contains code changes that may require a change note');
-          } else {
-            core.info('✓ PR only contains documentation/configuration changes');
-          }
-          
-          return needsNote ? 'needs-note' : 'doc-only';
+      run: |
+        chmod +x bin/changenote.sh
+        
+        if bin/changenote.sh check-needs ${{ steps.all-files.outputs.all_changed_files }}; then
+          echo "needs_note=true" >> $GITHUB_OUTPUT
+        else
+          echo "needs_note=false" >> $GITHUB_OUTPUT
+        fi
+        
+        echo "has_notes=${{ steps.changed-files.outputs.any_changed }}" >> $GITHUB_OUTPUT
+      shell: bash
     
     - name: Validate change note format
       if: steps.changed-files.outputs.any_changed == 'true'
       id: validate
       continue-on-error: true
       run: |
-        chmod +x bin/validate-changenotes.sh
+        chmod +x bin/changenote.sh
         
-        # Run validation (will exit 1 on failure)
-        if bin/validate-changenotes.sh ${{ steps.changed-files.outputs.all_changed_files }}; then
+        if bin/changenote.sh validate ${{ steps.changed-files.outputs.all_changed_files }}; then
           echo "result=success" >> $GITHUB_OUTPUT
         else
           echo "result=failure" >> $GITHUB_OUTPUT
@@ -119,6 +73,21 @@ jobs:
           fi
           exit 1
         fi
+      shell: bash
+    
+    - name: Parse change note summaries
+      if: steps.changed-files.outputs.any_changed == 'true' && steps.validate.outcome == 'success'
+      id: parse-notes
+      run: |
+        chmod +x bin/changenote.sh
+        
+        summaries=$(bin/changenote.sh parse ${{ steps.changed-files.outputs.all_changed_files }})
+        
+        {
+          echo 'summaries<<EOF'
+          echo "$summaries"
+          echo EOF
+        } >> $GITHUB_OUTPUT
       shell: bash
     
     - name: Find existing bot comment
@@ -140,7 +109,16 @@ jobs:
         body: |
           ## ✅ Change Note Status
           
-          All change notes are properly formatted and validated.
+          All change notes are properly formatted and validated!
+          
+          ${{ steps.parse-notes.outputs.summaries }}
+          
+          <details>
+          <summary>📖 Change Note Guidelines</summary>
+          
+          Change notes help track and communicate changes effectively. See the [full documentation](https://tiddlywiki.com/prerelease/#Release%20Notes%20and%20Changes) for details.
+          
+          </details>
     
     - name: Create or update comment (validation failed)
       if: steps.changed-files.outputs.any_changed == 'true' && steps.validate.outcome == 'failure'
