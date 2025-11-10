@@ -3,7 +3,7 @@ description: Web server get-file route now supports HTTP Range headers and strea
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: nodejs
-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9078
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9078
 github-contributors: linonetwo
 
 The web server's `get-file` route now supports HTTP Range requests and file streaming, enabling better loading and playback of large media files.
