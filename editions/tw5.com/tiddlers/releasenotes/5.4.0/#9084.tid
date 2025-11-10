@@ -8,20 +8,12 @@ github-contributors: s793016
 
 This change introduces a fully optimized override of the core text widget, integrating an enhanced Aho-Corasick algorithm for automatic linkification of tiddler titles within text (freelinks). The new implementation prioritizes performance for large wikis and correct support for non-Latin scripts such as Chinese.
 
-**Highlights:**
+Highlights:
 - Full switch from regex-based matching to a custom, robust Aho-Corasick engine dedicated to rapid, multi-pattern title detection—drastically decreasing linkification time (tested: 1–5s reduced to 100–500ms on ~12,000 tiddlers).
 - Handles extremely large title sets gracefully, including a chunked insertion process and use of a persistent cache (`$:/config/Freelinks/PersistAhoCorasickCache`) to further accelerate subsequent linking operations in large/active wikis.
 - Improvements for CJK and non-Latin text: supports linking using long or full-width symbol titles such as  '：' (U+FF1A) with no split or mismatch.
 - Smart prioritization: longer titles are automatically matched before shorter, more ambiguous ones, preventing partial/incorrect linking.
 - Actively skips self-linking in the current tiddler and prevents overlapping matches for clean, deterministic linkification.
-- True developer extensibility: clear APIs for adding/linking titles, toggling boundaries/case, and seamless integration with core and wikilink.js CamelCase behavior.
-- Failsafe boundaries and error handling: safeguards against excessive memory or runaway trie growth; automatically disables if excessive patterns or errors are detected.
-
-**Impacts:**
 - End users with large or multilingual wikis see massive performance boost and 100% accurate linking for complex, full-width, or multi-language titles.
-- Developers benefit from a robust, configurable implementation that avoids the pitfalls of regex- or string-based freelinking.
-- There is no effect on existing content unless freelinks is enabled and configured; highly recommended for heavy or CJK wikis.
-
-**Migration and Usage:**
 - New options for persistent match cache and word boundary checking (`$:/config/Freelinks/WordBoundary`), both can be tuned based on wiki size and content language needs.
 - Safe for gradual rollout: legacy behavior is preserved if the new freelinks override is not enabled.
