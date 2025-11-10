@@ -6,42 +6,48 @@
 #   changenote.sh validate <files...>     - Validate change note format
 #   changenote.sh parse <files...>        - Parse and generate summary
 
-# Define valid values according to "Release Notes and Changes.tid" and "ReleasesInfo.multids"
-VALID_TYPES=("bugfix" "feature" "enhancement" "deprecation" "security" "performance")
-VALID_CATEGORIES=("internal" "translation" "plugin" "widget" "filters" "usability" "palette" "hackability" "nodejs" "performance" "developer")
-VALID_IMPACT_TYPES=("deprecation" "compatibility-break" "pluginisation")
+# Path to the ReleasesInfo.multids file
+RELEASES_INFO_FILE="editions/tw5.com/tiddlers/releasenotes/ReleasesInfo.multids"
 
-# Type emoji mapping
-declare -A TYPE_EMOJI=(
-    ["bugfix"]="🐛"
-    ["feature"]="✨"
-    ["enhancement"]="🧱"
-    ["deprecation"]="⚠️"
-    ["security"]="🔒"
-    ["performance"]="⚡"
-)
+# Function: Parse valid values and colors from ReleasesInfo.multids
+parse_releases_info() {
+    if [ ! -f "$RELEASES_INFO_FILE" ]; then
+        echo "Error: Cannot find $RELEASES_INFO_FILE"
+        exit 1
+    fi
+    
+    # Extract valid change types
+    VALID_TYPES=$(grep "^change-types/" "$RELEASES_INFO_FILE" | grep "/caption:" | sed 's|change-types/||' | sed 's|/caption:.*||' | tr '\n' ' ')
+    
+    # Extract valid categories
+    VALID_CATEGORIES=$(grep "^categories/" "$RELEASES_INFO_FILE" | grep "/caption:" | sed 's|categories/||' | sed 's|/caption:.*||' | tr '\n' ' ')
+    
+    # Extract valid impact types
+    VALID_IMPACT_TYPES=$(grep "^impact-types/" "$RELEASES_INFO_FILE" | grep "/caption:" | sed 's|impact-types/||' | sed 's|/caption:.*||' | tr '\n' ' ')
+}
 
-# Category emoji mapping
-declare -A CATEGORY_EMOJI=(
-    ["internal"]="🔧"
-    ["translation"]="🌐"
-    ["plugin"]="🔌"
-    ["widget"]="📦"
-    ["filters"]="🔍"
-    ["usability"]="👥"
-    ["palette"]="🎨"
-    ["hackability"]="🛠️"
-    ["nodejs"]="💻"
-    ["performance"]="⚡"
-    ["developer"]="👨‍💻"
-)
+# Function: Get color for a type
+get_type_color() {
+    local type="$1"
+    grep "^change-types/${type}/colour:" "$RELEASES_INFO_FILE" | sed 's|.*: ||' || echo "#cccccc"
+}
 
-# Impact type emoji mapping
-declare -A IMPACT_EMOJI=(
-    ["deprecation"]="⚠️"
-    ["compatibility-break"]="🔥"
-    ["pluginisation"]="🔌"
-)
+# Function: Get caption for a category
+get_category_caption() {
+    local category="$1"
+    grep "^categories/${category}/caption:" "$RELEASES_INFO_FILE" | sed 's|.*: ||' || echo "$category"
+}
+
+# Function: Get colors for an impact type
+get_impact_colors() {
+    local impact_type="$1"
+    local fg=$(grep "^impact-types/${impact_type}/colour/foreground:" "$RELEASES_INFO_FILE" | sed 's|.*: ||')
+    local bg=$(grep "^impact-types/${impact_type}/colour/background:" "$RELEASES_INFO_FILE" | sed 's|.*: ||')
+    echo "$fg $bg"
+}
+
+# Parse the releases info at startup
+parse_releases_info
 
 # Function: Check if files need change notes
 # Returns 0 if needs change note, 1 if not needed
@@ -132,66 +138,52 @@ validate_changenotes() {
         file_has_errors=false
         file_errors=""
         
-        # Determine if it's a change note or impact note
-        if [[ "$tags" =~ \$:/tags/ChangeNote ]]; then
-            # Validate as Change Note
-            change_type=$(grep -m 1 "^change-type: " "$file" | sed 's/^change-type: //')
-            change_category=$(grep -m 1 "^change-category: " "$file" | sed 's/^change-category: //')
-            description=$(grep -m 1 "^description: " "$file" | sed 's/^description: //')
-            release=$(grep -m 1 "^release: " "$file" | sed 's/^release: //')
-            github_links=$(grep -m 1 "^github-links: " "$file" | sed 's/^github-links: //')
-            github_contributors=$(grep -m 1 "^github-contributors: " "$file" | sed 's/^github-contributors: //')
-            
-            # Validate title format
-            if [[ ! "$title" =~ ^\$:/changenotes/[0-9]+\.[0-9]+\.[0-9]+/(#[0-9]+|[a-f0-9]{40})$ ]]; then
-                echo "::error file=$file::Invalid title format"
-                file_errors+="- Title format: Expected \`\$:/changenotes/<version>/<#issue or commit-hash>\`, found: \`$title\`\n"
+        # Validate title format
+        if [[ ! "$title" =~ ^\$:/changenotes/[0-9]+\.[0-9]+\.[0-9]+/(#[0-9]+|[a-f0-9]{40})$ ]]; then
+            echo "::error file=$file::Invalid title format"
+            file_errors+="- Title format: Expected \`\$:/changenotes/<version>/<#issue or commit-hash>\`, found: \`$title\`\n"
+            has_errors=true
+            file_has_errors=true
+        fi
+        
+        # Validate tags
+        if [[ -z "$tags" ]]; then
+            echo "::error file=$file::Missing 'tags' field"
+            file_errors+="- Missing field: \`tags\` field is required\n"
+            has_errors=true
+            file_has_errors=true
+        elif [[ ! "$tags" =~ \$:/tags/ChangeNote ]]; then
+            echo "::error file=$file::Tags must include '\$:/tags/ChangeNote'"
+            file_errors+="- Tags: Must include \`\$:/tags/ChangeNote\`, found: \`$tags\`\n"
+            has_errors=true
+            file_has_errors=true
+        fi
+        
+        # Validate change-type
+        if [[ -z "$change_type" ]]; then
+            echo "::error file=$file::Missing 'change-type' field"
+            file_errors+="- Missing field: \`change-type\` is required. Valid values: \`${VALID_TYPES}\`\n"
+            has_errors=true
+            file_has_errors=true
+        else
+            if [[ ! " $VALID_TYPES " =~ " $change_type " ]]; then
+                echo "::error file=$file::Invalid change-type '$change_type'"
+                file_errors+="- Invalid change-type: \`$change_type\` is not valid. Must be one of: \`${VALID_TYPES}\`\n"
                 has_errors=true
                 file_has_errors=true
             fi
-            
-            # Validate change-type
-            if [[ -z "$change_type" ]]; then
-                echo "::error file=$file::Missing 'change-type' field"
-                file_errors+="- Missing field: \`change-type\` is required. Valid values: \`${VALID_TYPES[*]}\`\n"
-                has_errors=true
-                file_has_errors=true
-            else
-                valid=false
-                for type in "${VALID_TYPES[@]}"; do
-                    [[ "$change_type" == "$type" ]] && valid=true && break
-                done
-                if [[ "$valid" == "false" ]]; then
-                    echo "::error file=$file::Invalid change-type '$change_type'"
-                    file_errors+="- Invalid change-type: \`$change_type\` is not valid. Must be one of: \`${VALID_TYPES[*]}\`\n"
-                    has_errors=true
-                    file_has_errors=true
-                fi
-            fi
-            
-            # Validate change-category
-            if [[ -z "$change_category" ]]; then
-                echo "::error file=$file::Missing 'change-category' field"
-                file_errors+="- Missing field: \`change-category\` is required. Valid values: \`${VALID_CATEGORIES[*]}\`\n"
-                has_errors=true
-                file_has_errors=true
-            else
-                valid=false
-                for category in "${VALID_CATEGORIES[@]}"; do
-                    [[ "$change_category" == "$category" ]] && valid=true && break
-                done
-                if [[ "$valid" == "false" ]]; then
-                    echo "::error file=$file::Invalid change-category '$change_category'"
-                    file_errors+="- Invalid change-category: \`$change_category\` is not valid. Must be one of: \`${VALID_CATEGORIES[*]}\`\n"
-                    has_errors=true
-                    file_has_errors=true
-                fi
-            fi
-            
-            # Validate description
-            if [[ -z "$description" ]]; then
-                echo "::error file=$file::Missing 'description' field"
-                file_errors+="- Missing field: \`description\` is required\n"
+        fi
+        
+        # Validate change-category
+        if [[ -z "$change_category" ]]; then
+            echo "::error file=$file::Missing 'change-category' field"
+            file_errors+="- Missing field: \`change-category\` is required. Valid values: \`${VALID_CATEGORIES}\`\n"
+            has_errors=true
+            file_has_errors=true
+        else
+            if [[ ! " $VALID_CATEGORIES " =~ " $change_category " ]]; then
+                echo "::error file=$file::Invalid change-category '$change_category'"
+                file_errors+="- Invalid change-category: \`$change_category\` is not valid. Must be one of: \`${VALID_CATEGORIES}\`\n"
                 has_errors=true
                 file_has_errors=true
             fi
@@ -242,17 +234,13 @@ validate_changenotes() {
             # Validate impact-type
             if [[ -z "$impact_type" ]]; then
                 echo "::error file=$file::Missing 'impact-type' field"
-                file_errors+="- Missing field: \`impact-type\` is required. Valid values: \`${VALID_IMPACT_TYPES[*]}\`\n"
+                file_errors+="- Missing field: \`impact-type\` is required. Valid values: \`${VALID_IMPACT_TYPES}\`\n"
                 has_errors=true
                 file_has_errors=true
             else
-                valid=false
-                for type in "${VALID_IMPACT_TYPES[@]}"; do
-                    [[ "$impact_type" == "$type" ]] && valid=true && break
-                done
-                if [[ "$valid" == "false" ]]; then
+                if [[ ! " $VALID_IMPACT_TYPES " =~ " $impact_type " ]]; then
                     echo "::error file=$file::Invalid impact-type '$impact_type'"
-                    file_errors+="- Invalid impact-type: \`$impact_type\` is not valid. Must be one of: \`${VALID_IMPACT_TYPES[*]}\`\n"
+                    file_errors+="- Invalid impact-type: \`$impact_type\` is not valid. Must be one of: \`${VALID_IMPACT_TYPES}\`\n"
                     has_errors=true
                     file_has_errors=true
                 fi
@@ -362,12 +350,12 @@ parse_changenotes() {
         # Determine if it's a change note or impact note
         if [[ "$tags" =~ \$:/tags/ChangeNote ]]; then
             # Output Change Note
-            type_icon="${TYPE_EMOJI[$change_type]:-📝}"
-            cat_icon="${CATEGORY_EMOJI[$change_category]:-📋}"
+            type_color=$(get_type_color "$change_type")
+            category_caption=$(get_category_caption "$change_category")
             
-            echo "### ${type_icon} ${title:-$file}"
+            echo "### ${title:-$file}"
             echo ""
-            echo "**Type:** ${change_type} | **Category:** ${change_category} ${cat_icon}"
+            echo "**Type:** <span style=\"color: $type_color\">${change_type}</span> | **Category:** ${category_caption}"
             [ -n "$release" ] && echo "**Release:** ${release}"
             echo ""
             
@@ -377,11 +365,11 @@ parse_changenotes() {
             
         elif [[ "$tags" =~ \$:/tags/ImpactNote ]]; then
             # Output Impact Note
-            impact_icon="${IMPACT_EMOJI[$impact_type]:-📋}"
+            read fg_color bg_color <<< $(get_impact_colors "$impact_type")
             
-            echo "### ${impact_icon} Impact: ${title:-$file}"
+            echo "### Impact: ${title:-$file}"
             echo ""
-            echo "**Impact Type:** ${impact_type}"
+            echo "**Impact Type:** <span style=\"color: $fg_color; background: $bg_color\">${impact_type}</span>"
             [ -n "$changenote" ] && echo "**Related Change:** ${changenote}"
             echo ""
             
@@ -389,7 +377,7 @@ parse_changenotes() {
             
         else
             # Unknown type, output basic info
-            echo "### 📝 ${title:-$file}"
+            echo "### ${title:-$file}"
             echo ""
             [ -n "$description" ] && echo "> ${description}" && echo ""
         fi
