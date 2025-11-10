@@ -45,7 +45,15 @@ jobs:
     - name: Check if PR needs change notes
       id: check-needs-notes
       run: |
-        if node bin/changenote.js check-needs ${{ steps.all-files.outputs.all_changed_files }}; then
+        # Store files in array to handle special characters
+        files=()
+        while IFS= read -r file; do
+          if [ -n "$file" ]; then
+            files+=("$file")
+          fi
+        done <<< "${{ steps.all-files.outputs.all_changed_files }}"
+        
+        if node bin/changenote.js check-needs "${files[@]}"; then
           echo "needs_note=true" >> $GITHUB_OUTPUT
         else
           echo "needs_note=false" >> $GITHUB_OUTPUT
@@ -59,10 +67,22 @@ jobs:
       id: validate
       continue-on-error: true
       run: |
-        # But validate files from PR branch
-        git checkout pr-branch -- ${{ steps.changed-files.outputs.all_changed_files }} 2>/dev/null || true
+        # Checkout files from PR branch, handling filenames with special characters
+        while IFS= read -r file; do
+          if [ -n "$file" ]; then
+            git checkout pr-branch -- "$file" 2>/dev/null || true
+          fi
+        done <<< "${{ steps.changed-files.outputs.all_changed_files }}"
         
-        if node bin/changenote.js validate ${{ steps.changed-files.outputs.all_changed_files }}; then
+        # Store files in array to handle special characters
+        files=()
+        while IFS= read -r file; do
+          if [ -n "$file" ]; then
+            files+=("$file")
+          fi
+        done <<< "${{ steps.changed-files.outputs.all_changed_files }}"
+        
+        if node bin/changenote.js validate "${files[@]}"; then
           echo "result=success" >> $GITHUB_OUTPUT
         else
           echo "result=failure" >> $GITHUB_OUTPUT
@@ -88,7 +108,15 @@ jobs:
       if: steps.changed-files.outputs.any_changed == 'true' && steps.validate.outcome == 'success'
       id: parse-notes
       run: |
-        summaries=$(node bin/changenote.js parse ${{ steps.changed-files.outputs.all_changed_files }})
+        # Store files in array to handle special characters
+        files=()
+        while IFS= read -r file; do
+          if [ -n "$file" ]; then
+            files+=("$file")
+          fi
+        done <<< "${{ steps.changed-files.outputs.all_changed_files }}"
+        
+        summaries=$(node bin/changenote.js parse "${files[@]}")
         
         {
           echo 'summaries<<EOF'
