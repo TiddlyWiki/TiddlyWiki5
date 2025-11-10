@@ -45,9 +45,7 @@ jobs:
     - name: Check if PR needs change notes
       id: check-needs-notes
       run: |
-        chmod +x bin/changenote.sh
-        
-        if bin/changenote.sh check-needs ${{ steps.all-files.outputs.all_changed_files }}; then
+        if node bin/changenote.js check-needs ${{ steps.all-files.outputs.all_changed_files }}; then
           echo "needs_note=true" >> $GITHUB_OUTPUT
         else
           echo "needs_note=false" >> $GITHUB_OUTPUT
@@ -61,13 +59,10 @@ jobs:
       id: validate
       continue-on-error: true
       run: |
-        # Use script from base branch (secure)
-        chmod +x bin/changenote.sh
-        
         # But validate files from PR branch
         git checkout pr-branch -- ${{ steps.changed-files.outputs.all_changed_files }} 2>/dev/null || true
         
-        if bin/changenote.sh validate ${{ steps.changed-files.outputs.all_changed_files }}; then
+        if node bin/changenote.js validate ${{ steps.changed-files.outputs.all_changed_files }}; then
           echo "result=success" >> $GITHUB_OUTPUT
         else
           echo "result=failure" >> $GITHUB_OUTPUT
@@ -76,6 +71,12 @@ jobs:
             {
               echo 'errors<<EOF'
               cat /tmp/validation_errors.md
+              echo EOF
+            } >> $GITHUB_OUTPUT
+          elif [ -f ./validation_errors.md ]; then
+            {
+              echo 'errors<<EOF'
+              cat ./validation_errors.md
               echo EOF
             } >> $GITHUB_OUTPUT
           fi
@@ -87,10 +88,7 @@ jobs:
       if: steps.changed-files.outputs.any_changed == 'true' && steps.validate.outcome == 'success'
       id: parse-notes
       run: |
-        # Use script from base branch (secure)
-        chmod +x bin/changenote.sh
-        
-        summaries=$(bin/changenote.sh parse ${{ steps.changed-files.outputs.all_changed_files }})
+        summaries=$(node bin/changenote.js parse ${{ steps.changed-files.outputs.all_changed_files }})
         
         {
           echo 'summaries<<EOF'
