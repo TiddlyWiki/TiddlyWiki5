@@ -47,6 +47,7 @@ modal-footer-background: #f5f5f5
 modal-footer-border: #dddddd
 modal-header-border: #eeeeee
 muted-foreground: #bbb
+network-activity-foreground: <<colour primary>>
 notification-background: #ffffdd
 notification-border: #999999
 page-background: #6f6f70
@@ -56,22 +57,26 @@ primary: #29a6ee
 select-tag-background:
 select-tag-foreground:
 sidebar-button-foreground: <<colour foreground>>
-sidebar-controls-foreground-hover: #000000
+sidebar-controls-foreground-hover: #222222
 sidebar-controls-foreground: #c2c1c2
-sidebar-foreground-shadow: rgba(255,255,255,0)
+sidebar-foreground-shadow: transparent
 sidebar-foreground: #d3d2d4
-sidebar-muted-foreground-hover: #444444
+sidebar-muted-foreground-hover: #333333
 sidebar-muted-foreground: #c0c0c0
 sidebar-tab-background-selected: #6f6f70
 sidebar-tab-background: #666667
 sidebar-tab-border-selected: #999
 sidebar-tab-border: #515151
 sidebar-tab-divider: #999
-sidebar-tab-foreground-selected: 
-sidebar-tab-foreground: #999
+sidebar-tab-foreground-selected: #bfbfbf
+sidebar-tab-foreground: #b0b0b0
 sidebar-tiddler-link-foreground-hover: #444444
-sidebar-tiddler-link-foreground: #d1d0d2
+sidebar-tiddler-link-foreground: #aaaaaa
 site-title-foreground: <<colour tiddler-title-foreground>>
+stability-deprecated: #bf616a
+stability-experimental: #d08770
+stability-legacy: #88c0d0
+stability-stable: #a3be8c
 static-alert-foreground: #aaaaaa
 tab-background-selected: #ffffff
 tab-background: #d8d8d8

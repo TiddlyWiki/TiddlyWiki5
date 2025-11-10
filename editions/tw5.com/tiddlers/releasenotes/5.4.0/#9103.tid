@@ -1,0 +1,8 @@
+title: $:/changenotes/5.4.0/#9103
+description: Add support for commands and startups which return promises
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9103
+github-contributors: Arlen22

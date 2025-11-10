@@ -73,10 +73,8 @@ rm $TW5_BUILD_OUTPUT/dev/static/*
 
 echo "<a href='./plugins/tiddlywiki/tw2parser/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/tw2parser/index.html</a>" > $TW5_BUILD_OUTPUT/classicparserdemo.html
 echo "<a href='./plugins/tiddlywiki/codemirror/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/codemirror/index.html</a>" > $TW5_BUILD_OUTPUT/codemirrordemo.html
-echo "<a href='./plugins/tiddlywiki/d3/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/d3/index.html</a>" > $TW5_BUILD_OUTPUT/d3demo.html
 echo "<a href='./plugins/tiddlywiki/highlight/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/highlight/index.html</a>" > $TW5_BUILD_OUTPUT/highlightdemo.html
 echo "<a href='./plugins/tiddlywiki/markdown/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/markdown/index.html</a>" > $TW5_BUILD_OUTPUT/markdowndemo.html
-echo "<a href='./plugins/tiddlywiki/tahoelafs/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/tahoelafs/index.html</a>" > $TW5_BUILD_OUTPUT/tahoelafs.html
 
 # Put the build details into a .tid file so that it can be included in each build (deleted at the end of this script)
 
@@ -299,26 +297,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all-external-js plugins/tiddlywiki/katex/index.html text/plain \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/katex/empty.html text/plain \
-	|| exit 1
-
-# /plugins/tiddlywiki/tahoelafs/index.html	Demo wiki with Tahoe-LAFS plugin
-# /plugins/tiddlywiki/tahoelafs/empty.html	Empty wiki with Tahoe-LAFS plugin
-node $TW5_BUILD_TIDDLYWIKI \
-	./editions/tahoelafs \
-	--load $TW5_BUILD_OUTPUT/build.tid \
-	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all plugins/tiddlywiki/tahoelafs/index.html text/plain \
-	--rendertiddler $:/core/save/empty plugins/tiddlywiki/tahoelafs/empty.html text/plain \
-	|| exit 1
-
-# /plugins/tiddlywiki/d3/index.html	Demo wiki with D3 plugin
-# /plugins/tiddlywiki/d3/empty.html	Empty wiki with D3 plugin
-node $TW5_BUILD_TIDDLYWIKI \
-	./editions/d3demo \
-	--load $TW5_BUILD_OUTPUT/build.tid \
-	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all plugins/tiddlywiki/d3/index.html text/plain \
-	--rendertiddler $:/core/save/empty plugins/tiddlywiki/d3/empty.html text/plain \
 	|| exit 1
 
 # /plugins/tiddlywiki/codemirror/index.html	Demo wiki with codemirror plugin
