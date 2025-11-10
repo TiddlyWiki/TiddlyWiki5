@@ -2,22 +2,15 @@ title: $:/changenotes/5.4.0/#9397
 description: Fix critical freelinks bugs: first character loss and false positive matches in v5.4.0
 tags: $:/tags/ChangeNote
 change-type: bugfix
-change-category: core
+change-category: plugin
 github-links: [https://github.com/TiddlyWiki/TiddlyWiki5/pull/9397](https://github.com/TiddlyWiki/TiddlyWiki5/pull/9397)
 github-contributors: s793016
 
-This note addresses two major bugs in the Freelinks plugin as released in v5.4.0:
+This note addresses two major bugs introduced in the Freelinks plugin with the v5.4.0 release:
 
-**Fixes:**
-- Bug 1: The first character of matched words would disappear when freelinks was enabled (e.g., "The" became "he").  
-  _Cause:_ Filtering out the current tiddler's title happened during parse tree construction instead of during match validation.  
-  _Fix:_ Filtering now occurs at match validation, and matching logic uses substring with proper case handling.
-- Bug 2: False positive matches, where unrelated words (like "it is" or "Choose") incorrectly link to a tiddler such as "FooBar" if one exists.  
-  _Cause:_ Wrong output merging in the Aho-Corasick failure-link handling caused extra, spurious matches from intermediate nodes.  
-  _Fix:_ Removed incorrect output merging, added correct result collection via the failure-link chain, exact pattern checking, and cycle detection to prevent endless loops.
+Fixes:
+- First Character Loss: The first character of a matched word would incorrectly disappear (e.g., "The" became "he"). This was fixed by correctly timing the filtering of the current tiddler's title during match validation, ensuring proper substring handling.
+- False Positive Matches: Unrelated words (like "it is" or "Choose") would incorrectly link to a tiddler title. This was resolved by fixing wrong output merging in the Aho-Corasick failure-link handling, eliminating spurious matches from intermediate nodes, and adding cycle detection.
 
-**Testing:**
-- Both issues can be verified with an attached test file (test by ai3.json). With "Word Boundary Check" enabled and "Ignore Case" disabled, the issues should be resolved.
-
-**Impact:**
+Impact:
 - Significantly improved correctness and reliability of automatic linking for all users, especially in multilingual and large wikis.
