@@ -197,17 +197,11 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 
 <!-- TODO use $:/palette colour settings -->
 \procedure .link-badge-added(link,colour:#ffe246)    <$macrocall $name=".link-badge" text="added"    link=<<link>> colour=<<colour>>/>
-\procedure .link-badge-addendum(link,colour:#fcc84a) <$macrocall $name=".link-badge" text="addendum" link=<<link>> colour=<<colour>>/>
 \procedure .link-badge-extended(link,colour:#f9a344) <$macrocall $name=".link-badge" text="extended" link=<<link>> colour=<<colour>>/>
 \procedure .link-badge-fixed(link,colour:#ffa86d)    <$macrocall $name=".link-badge" text="fixed"    link=<<link>> colour=<<colour>>/>
 \procedure .link-badge-here(link,colour:#d88e63)     <$macrocall $name=".link-badge" text="here"     link=<<link>> colour=<<colour>>/>
-\procedure .link-badge-hide(link,colour:#9d959f)     <$macrocall $name=".link-badge" text="hide"     link=<<link>> colour=<<colour>>/>
 \procedure .link-badge-improved(link,colour:#7593c7) <$macrocall $name=".link-badge" text="improved" link=<<link>> colour=<<colour>>/>
-\procedure .link-badge-modified(link,colour:#7f99c9) <$macrocall $name=".link-badge" text="modified" link=<<link>> colour=<<colour>>/>
-\procedure .link-badge-removed(link,colour:#a9aabc)  <$macrocall $name=".link-badge" text="removed"  link=<<link>> colour=<<colour>>/>
-\procedure .link-badge-renamed(link,colour:#b4b995)  <$macrocall $name=".link-badge" text="renamed"  link=<<link>> colour=<<colour>>/>
 \procedure .link-badge-updated(link,colour:#91ba66)  <$macrocall $name=".link-badge" text="updated"  link=<<link>> colour=<<colour>>/>
-\procedure .link-badge-reverted(link,colour:#ba8e66)  <$macrocall $name=".link-badge" text="reverted"  link=<<link>> colour=<<colour>>/>
 
 \procedure .banner-credits(credit,url)
 <img src=<<url>> width="140" style="float:left;margin-right:0.5em;"/>
