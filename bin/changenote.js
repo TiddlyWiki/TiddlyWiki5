@@ -95,7 +95,7 @@ const CONFIG = {
 		title: {
 			required: true,
 			pattern: "impactTitlePattern",
-			errorMessage: "Title format: Expected `$:/changenotes/<version>/<change-id>/<impact-type>/<identifier>`, found: `{value}`",
+			errorMessage: "Title format: Expected `$:/changenotes/<version>/<change-id>/impacts/<identifier>`, found: `{value}`",
 		},
 		tags: {
 			required: true,
@@ -115,6 +115,14 @@ const CONFIG = {
 		description: {
 			required: true,
 			errorMessage: "Missing field: `description` is required",
+		},
+		created: {
+			required: true,
+			errorMessage: "Missing field: `created` is required (in DateFormat, e.g., `20250901000000000`)",
+		},
+		modified: {
+			required: true,
+			errorMessage: "Missing field: `modified` is required (in DateFormat, e.g., `20250901000000000`)",
 		},
 	},
 	
@@ -169,17 +177,25 @@ function loadReleasesInfo() {
 	const changeTypes = new Set();
 	const changeCategories = new Set();
 	const impactTypes = new Set();
+	const typeCaptions = {};
 	const typeColors = {};
+	const categoryCaptions = {};
 	const categoryColors = {};
+	const impactCaptions = {};
 	const impactColors = {};
 	
 	const patterns = CONFIG.releasesInfoPatterns;
 	
 	for(const line of lines) {
+		let match;
+		
 		// Parse change-types
-		let match = line.match(patterns.changeType.caption);
+		match = line.match(patterns.changeType.caption);
 		if(match) {
-			changeTypes.add(match[1]);
+			const typeKey = match[1];
+			changeTypes.add(typeKey);
+			const caption = line.split(":")[1].trim();
+			typeCaptions[typeKey] = caption;
 		}
 		
 		match = line.match(patterns.changeType.colour);
@@ -190,7 +206,10 @@ function loadReleasesInfo() {
 		// Parse categories
 		match = line.match(patterns.category.caption);
 		if(match) {
-			changeCategories.add(match[1]);
+			const categoryKey = match[1];
+			changeCategories.add(categoryKey);
+			const caption = line.split(":")[1].trim();
+			categoryCaptions[categoryKey] = caption;
 		}
 		
 		match = line.match(patterns.category.colour);
@@ -201,7 +220,10 @@ function loadReleasesInfo() {
 		// Parse impact-types
 		match = line.match(patterns.impactType.caption);
 		if(match) {
-			impactTypes.add(match[1]);
+			const impactKey = match[1];
+			impactTypes.add(impactKey);
+			const caption = line.split(":")[1].trim();
+			impactCaptions[impactKey] = caption;
 		}
 		
 		match = line.match(patterns.impactType.colourBg);
@@ -221,8 +243,11 @@ function loadReleasesInfo() {
 		changeTypes: Array.from(changeTypes),
 		changeCategories: Array.from(changeCategories),
 		impactTypes: Array.from(impactTypes),
+		typeCaptions,
 		typeColors,
+		categoryCaptions,
 		categoryColors,
+		impactCaptions,
 		impactColors,
 	};
 }
@@ -285,7 +310,11 @@ function validateField(fieldName, fieldValue, fieldConfig, fileErrors) {
 	// Check if field is required
 	if(fieldConfig.required && !fieldValue) {
 		const message = fieldConfig.missingMessage || fieldConfig.errorMessage;
-		fileErrors.push(interpolateMessage(message, { value: fieldValue }));
+		const validValues = fieldConfig.validValues ? RELEASES_INFO[fieldConfig.validValues] : null;
+		fileErrors.push(interpolateMessage(message, { 
+			value: fieldValue,
+			validValues: validValues ? validValues.join(", ") : "",
+		}));
 		return;
 	}
 	
@@ -308,7 +337,7 @@ function validateField(fieldName, fieldValue, fieldConfig, fileErrors) {
 		return;
 	}
 	
-	// Check if field value is in valid values list
+	// Check if field value is in valid values list (from RELEASES_INFO)
 	if(fieldConfig.validValues) {
 		const validValues = RELEASES_INFO[fieldConfig.validValues];
 		if(validValues && !validValues.includes(fieldValue)) {
@@ -495,19 +524,21 @@ function formatChangeNote(fields) {
 	let output = `### 📝 ${title || "Untitled"}\n\n`;
 	
 	// Type with color if available
+	output += "Type: ";
 	if(typeColor) {
-		output += `<span style="background-color: ${typeColor}; padding: 2px 6px; border-radius: 3px;">**Type:** ${changeType}</span>`;
+		output += `<span style="background-color: ${typeColor}; padding: 2px 6px; border-radius: 3px;">${changeType}</span>`;
 	} else {
-		output += `**Type:** ${changeType}`;
+		output += changeType;
 	}
 	
 	output += " | ";
 	
 	// Category with color if available
+	output += "Category: ";
 	if(categoryColor) {
-		output += `<span style="background-color: ${categoryColor}; padding: 2px 6px; border-radius: 3px;">**Category:** ${changeCategory}</span>\n`;
+		output += `<span style="background-color: ${categoryColor}; padding: 2px 6px; border-radius: 3px;">${changeCategory}</span>\n`;
 	} else {
-		output += `**Category:** ${changeCategory}\n`;
+		output += `${changeCategory}\n`;
 	}
 	
 	if(release) {
@@ -540,10 +571,11 @@ function formatImpactNote(fields) {
 	let output = `### ⚠️ **Impact:** ${title || "Untitled"}\n\n`;
 	
 	// Only use color span if colors are defined
+	output += "Impact Type: ";
 	if(colors && colors.bg && colors.fg) {
-		output += `<span style="background-color: ${colors.bg}; color: ${colors.fg}; padding: 2px 6px; border-radius: 3px;">**Impact Type:** ${impactType}</span>\n`;
+		output += `<span style="background-color: ${colors.bg}; color: ${colors.fg}; padding: 2px 6px; border-radius: 3px;">${impactType}</span>\n`;
 	} else {
-		output += `**Impact Type:** ${impactType}\n`;
+		output += `${impactType}\n`;
 	}
 	
 	if(changenote) {
