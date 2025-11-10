@@ -145,7 +145,7 @@ jobs:
         body-includes: 'Change Note Status'
     
     - name: Create or update comment (validation passed)
-      if: steps.changed-files.outputs.any_changed == 'true' && steps.validate.outcome == 'success'
+      if: steps.changed-files.outputs.any_changed == 'true' && steps.validate.outcome == 'success' && steps.check-needs-notes.outputs.needs_note == 'true'
       uses: peter-evans/create-or-update-comment@v5
       with:
         comment-id: ${{ steps.find-comment.outputs.comment-id }}
@@ -228,6 +228,18 @@ jobs:
           ## ✅ Change Note Status
           
           This PR contains documentation or configuration changes that typically don't require a change note.
+    
+    - name: Create or update comment (doc only - has releasenotes files)
+      if: steps.check-needs-notes.outputs.needs_note == 'false' && steps.changed-files.outputs.any_changed == 'true'
+      uses: peter-evans/create-or-update-comment@v5
+      with:
+        comment-id: ${{ steps.find-comment.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
+        edit-mode: replace
+        body: |
+          ## ✅ Change Note Status
+          
+          This PR contains documentation or configuration changes (including changes to release notes documentation) that typically don't require a change note.
     
     - name: Fail workflow if validation failed
       if: steps.validate.outcome == 'failure'
