@@ -208,7 +208,7 @@ Collect the attributes we need, in the process determining whether we're being u
 */
 ButtonWidget.prototype.collectAttributes = function() {
 	// Detect legacy mode: true if no attributes start with $
-	this.legacyMode = !this.hasDollarAttribute();
+	this.legacyMode = this.isLegacyMode();
 	// Get attributes for the appropriate mode
 	if(this.legacyMode) {
 		this.actions = this.getAttribute("actions");
@@ -297,33 +297,18 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tooltip || changedAttributes.$tooltip || 
-	   changedAttributes.actions || changedAttributes.$actions || 
-	   changedAttributes.to || changedAttributes.$to || 
-	   changedAttributes.message || changedAttributes.$message || 
-	   changedAttributes.param || changedAttributes.$param || 
-	   changedAttributes.set || changedAttributes.$set || 
-	   changedAttributes.setTo || changedAttributes.$setTo || 
-	   changedAttributes.popup || changedAttributes.$popup || 
-	   changedAttributes.hover || changedAttributes.$hover || 
-	   changedAttributes.selectedClass || changedAttributes.$selectedClass || 
-	   changedAttributes.style || changedAttributes.$style || 
-	   changedAttributes.dragFilter || changedAttributes.$dragFilter || 
-	   changedAttributes.dragTiddler || changedAttributes.$dragTiddler || 
+	if(this.hasChangedAttributes([
+		"tooltip","actions","to","message","param","set","setTo","popup","hover",
+		"selectedClass","style","dragFilter","dragTiddler","popupAbsCoords",
+		"setTitle","setField","setIndex","popupTitle","disabled","default"
+	],changedAttributes) || 
 	   (this.set && changedTiddlers[this.set]) || 
 	   (this.popup && changedTiddlers[this.popup]) || 
-	   (this.popupTitle && changedTiddlers[this.popupTitle]) || 
-	   changedAttributes.popupAbsCoords || changedAttributes.$popupAbsCoords || 
-	   changedAttributes.setTitle || changedAttributes.$setTitle || 
-	   changedAttributes.setField || changedAttributes.$setField || 
-	   changedAttributes.setIndex || changedAttributes.$setIndex || 
-	   changedAttributes.popupTitle || changedAttributes.$popupTitle || 
-	   changedAttributes.disabled || changedAttributes.$disabled || 
-	   changedAttributes["default"] || changedAttributes.$default) {
+	   (this.popupTitle && changedTiddlers[this.popupTitle])) {
 		this.refreshSelf();
 		return true;
 	} else {
-		if(changedAttributes["class"] || changedAttributes.$class) {
+		if(this.hasChangedAttributes(["class"],changedAttributes)) {
 			this.updateDomNodeClasses();
 		}
 		this.assignAttributes(this.domNodes[0],{

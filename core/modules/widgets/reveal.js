@@ -109,7 +109,7 @@ Collect the attributes we need, in the process determining whether we're being u
 */
 RevealWidget.prototype.collectAttributes = function() {
 	// Detect legacy mode: true if no attributes start with $
-	this.legacyMode = !this.hasDollarAttribute();
+	this.legacyMode = this.isLegacyMode();
 	// Get the attributes for the appropriate mode
 	if(this.legacyMode) {
 		this.state = this.getAttribute("state");
@@ -244,7 +244,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.$state || changedAttributes.type || changedAttributes.$type || changedAttributes.text || changedAttributes.$text || changedAttributes.position || changedAttributes.$position || changedAttributes.positionAllowNegative || changedAttributes.$positionAllowNegative || changedAttributes["default"] || changedAttributes.$default || changedAttributes.animate || changedAttributes.$animate || changedAttributes.stateTitle || changedAttributes.$stateTitle || changedAttributes.stateField || changedAttributes.$stateField || changedAttributes.stateIndex || changedAttributes.$stateIndex) {
+	if(this.hasChangedAttributes(["state","type","text","position","positionAllowNegative","default","animate","stateTitle","stateField","stateIndex"],changedAttributes)) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -260,10 +260,10 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 		} else if(this.type === "popup" && this.isOpen && this.updatePopupPosition && (changedTiddlers[this.state] || changedTiddlers[this.stateTitle])) {
 			this.positionPopup(this.domNode);
 		}
-		if(changedAttributes.style || changedAttributes.$style) {
+		if(this.hasChangedAttributes(["style"],changedAttributes)) {
 			this.domNode.style = this.legacyMode ? this.getAttribute("style","") : this.getAttribute("$style","");
 		}
-		if(changedAttributes["class"] || changedAttributes.$class) {
+		if(this.hasChangedAttributes(["class"],changedAttributes)) {
 			this.assignDomNodeClasses();
 		}
 		return this.refreshChildren(changedTiddlers);

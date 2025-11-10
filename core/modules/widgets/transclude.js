@@ -113,7 +113,7 @@ Collect the attributes we need, in the process determining whether we're being u
 */
 TranscludeWidget.prototype.collectAttributes = function() {
 	// Detect legacy mode: true if no attributes start with $
-	this.legacyMode = !this.hasDollarAttribute();
+	this.legacyMode = this.isLegacyMode();
 	// Get the attributes for the appropriate mode
 	if(this.legacyMode) {
 		this.transcludeTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
