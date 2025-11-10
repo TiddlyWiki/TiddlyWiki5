@@ -2,6 +2,7 @@ title: $:/core/macros/deprecated
 tags: $:/tags/Macro
 
 <!-- Deprecated Macros -->
+<!-- DO NOT USE THESE MACROS. THEY MAY BE REMOVED AT ANY MOMENT -->
 
 \define box-shadow(shadow)
 ``
