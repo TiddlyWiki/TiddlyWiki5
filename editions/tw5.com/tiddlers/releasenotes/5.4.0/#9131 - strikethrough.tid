@@ -1,0 +1,7 @@
+title: $:/changenotes/5.4.0/#9131/impacts/strikethrough
+changenote: $:/changenotes/5.4.0/#9131
+tags: $:/tags/ImpactNote
+description: CSS rules using `strike` selector will broken
+impact-type: compatibility-break
+
+`strike` should be replaced by `s`.
