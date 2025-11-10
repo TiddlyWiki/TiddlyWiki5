@@ -82,7 +82,17 @@ jobs:
           fi
         done <<< "${{ steps.changed-files.outputs.all_changed_files }}"
         
-        if node bin/changenote.js validate "${files[@]}"; then
+        # Run validation and capture output
+        validation_output=$(node bin/changenote.js validate "${files[@]}" 2>&1)
+        exit_code=$?
+        
+        echo "$validation_output"
+        
+        # Check if "No Change Notes or Impact Notes found" appears in output
+        if echo "$validation_output" | grep -q "No Change Notes or Impact Notes found"; then
+          echo "result=no-notes" >> $GITHUB_OUTPUT
+          exit 0
+        elif [ $exit_code -eq 0 ]; then
           echo "result=success" >> $GITHUB_OUTPUT
         else
           echo "result=failure" >> $GITHUB_OUTPUT
@@ -172,6 +182,22 @@ jobs:
           ---
           
           [Release Notes and Changes](https://tiddlywiki.com/prerelease/#Release%20Notes%20and%20Changes)
+    
+    - name: Create or update comment (has releasenotes files but no actual notes)
+      if: steps.changed-files.outputs.any_changed == 'true' && steps.validate.outputs.result == 'no-notes' && steps.check-needs-notes.outputs.needs_note == 'true'
+      uses: peter-evans/create-or-update-comment@v5
+      with:
+        comment-id: ${{ steps.find-comment.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
+        edit-mode: replace
+        body: |
+          ## ⚠️ Change Note Status
+          
+          This PR contains code changes but no Change Notes were found.
+          
+          Files in `editions/*/tiddlers/releasenotes/` were modified, but none of them are tagged as Change Notes (`$:/tags/ChangeNote`) or Impact Notes (`$:/tags/ImpactNote`).
+          
+          Please add a properly formatted change note. See the [documentation](https://tiddlywiki.com/prerelease/#Release%20Notes%20and%20Changes) for details.
     
     - name: Create or update comment (missing change note)
       if: steps.check-needs-notes.outputs.needs_note == 'true' && steps.changed-files.outputs.any_changed != 'true'

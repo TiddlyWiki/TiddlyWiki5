@@ -413,6 +413,7 @@ function validateChangeNotes(files) {
 	}
 	
 	const errors = [];
+	let validatedCount = 0;
 	
 	for(const file of files) {
 		// Only validate files in releasenotes directory
@@ -439,9 +440,11 @@ function validateChangeNotes(files) {
 		if(tags.includes("$:/tags/ChangeNote")) {
 			// Validate Change Note
 			validateChangeNote(fields, file, fileErrors);
+			validatedCount++;
 		} else if(tags.includes("$:/tags/ImpactNote")) {
 			// Validate Impact Note
 			validateImpactNote(fields, file, fileErrors);
+			validatedCount++;
 		} else {
 			console.log(`Skipping non-note file: ${file}`);
 			continue;
@@ -454,15 +457,21 @@ function validateChangeNotes(files) {
 		}
 	}
 	
+	// If no actual notes were validated, treat as "no notes found"
+	if(validatedCount === 0) {
+		console.log("\nNo Change Notes or Impact Notes found in the provided files.");
+		return { success: true, errors: [], hasNotes: false };
+	}
+	
 	if(errors.length > 0) {
 		console.error("\n================================");
 		console.error("Validation failed!");
 		console.error("================================\n");
-		return { success: false, errors };
+		return { success: false, errors, hasNotes: true };
 	}
 	
 	console.log("\n✓ All notes are valid!");
-	return { success: true, errors: [] };
+	return { success: true, errors: [], hasNotes: true };
 }
 
 function validateChangeNote(fields, file, fileErrors) {
