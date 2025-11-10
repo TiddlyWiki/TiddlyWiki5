@@ -14,14 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout repository
+    - name: Checkout base repository (for scripts)
       uses: actions/checkout@v4
       with:
-        ref: ${{ github.event.pull_request.head.sha }}
+        # Always use the base branch scripts for security
+        ref: ${{ github.base_ref }}
         fetch-depth: 0
     
-    - name: Checkout base branch
+    - name: Fetch PR branch for file comparison
       run: |
+        git fetch origin pull/${{ github.event.pull_request.number }}/head:pr-branch
         git fetch origin ${{ github.base_ref }}
     
     - name: Get all changed files in PR
@@ -29,6 +31,7 @@ jobs:
       uses: tj-actions/changed-files@v47
       with:
         base_sha: ${{ github.event.pull_request.base.sha }}
+        sha: ${{ github.event.pull_request.head.sha }}
     
     - name: Get changed note files
       id: changed-files
@@ -37,6 +40,7 @@ jobs:
         files: |
           editions/*/tiddlers/releasenotes/**/*.tid
         base_sha: ${{ github.event.pull_request.base.sha }}
+        sha: ${{ github.event.pull_request.head.sha }}
     
     - name: Check if PR needs change notes
       id: check-needs-notes
@@ -57,7 +61,11 @@ jobs:
       id: validate
       continue-on-error: true
       run: |
+        # Use script from base branch (secure)
         chmod +x bin/changenote.sh
+        
+        # But validate files from PR branch
+        git checkout pr-branch -- ${{ steps.changed-files.outputs.all_changed_files }} 2>/dev/null || true
         
         if bin/changenote.sh validate ${{ steps.changed-files.outputs.all_changed_files }}; then
           echo "result=success" >> $GITHUB_OUTPUT
@@ -79,6 +87,7 @@ jobs:
       if: steps.changed-files.outputs.any_changed == 'true' && steps.validate.outcome == 'success'
       id: parse-notes
       run: |
+        # Use script from base branch (secure)
         chmod +x bin/changenote.sh
         
         summaries=$(bin/changenote.sh parse ${{ steps.changed-files.outputs.all_changed_files }})
@@ -158,18 +167,6 @@ jobs:
     
     - name: Create or update comment (doc only - has no notes)
       if: steps.check-needs-notes.outputs.needs_note == 'false' && steps.changed-files.outputs.any_changed != 'true'
-      uses: peter-evans/create-or-update-comment@v5
-      with:
-        comment-id: ${{ steps.find-comment.outputs.comment-id }}
-        issue-number: ${{ github.event.pull_request.number }}
-        edit-mode: replace
-        body: |
-          ## ✅ Change Note Status
-          
-          This PR contains documentation or configuration changes that typically don't require a change note.
-    
-    - name: Remove comment if not needed
-      if: steps.check-needs-notes.outputs.needs_note == 'false' && steps.changed-files.outputs.any_changed == 'true'
       uses: peter-evans/create-or-update-comment@v5
       with:
         comment-id: ${{ steps.find-comment.outputs.comment-id }}
