@@ -3,7 +3,7 @@ description: Fix critical freelinks bugs: first character loss and false positiv
 tags: $:/tags/ChangeNote
 change-type: bugfix
 change-category: plugin
-github-links: [https://github.com/TiddlyWiki/TiddlyWiki5/pull/9397](https://github.com/TiddlyWiki/TiddlyWiki5/pull/9397)
+github-links: [https://github.com/TiddlyWiki/TiddlyWiki5/pull/9084](https://github.com/TiddlyWiki/TiddlyWiki5/pull/9084), [https://github.com/TiddlyWiki/TiddlyWiki5/pull/9397](https://github.com/TiddlyWiki/TiddlyWiki5/pull/9397)
 github-contributors: s793016
 
 This note addresses two major bugs introduced in the Freelinks plugin with the v5.4.0 release:
