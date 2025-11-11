@@ -940,5 +940,157 @@ describe("Widget module", function() {
 		// the <<qualify>> widget to spit out something different.
 		expect(withA).toBe(withoutA);
 	});
-});
 
+	it("should handle nested importvariables", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "A", text: "\\define macroA() valueA"},
+			{title: "B", text: "\\import A\n\\define macroB() valueB"},
+			{title: "C", text: "\\import B\n\\define macroC() valueC"}
+		]);
+		var text = "\\import C\n<<macroA>> <<macroB>> <<macroC>>";
+		var widgetNode = createWidgetNode(parseText(text, wiki), wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p>valueA valueB valueC</p>");
+	});
+
+	it("should prevent circular imports", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "A", text: "\\import B\n\\define macroA() valueA"},
+			{title: "B", text: "\\import A\n\\define macroB() valueB"}
+		]);
+		var text = "\\import A\n<<macroA>> <<macroB>>";
+		var widgetNode = createWidgetNode(parseText(text, wiki), wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		// Should import both macros without infinite loop
+		expect(wrapper.innerHTML).toBe("<p>valueA valueB</p>");
+	});
+
+	it("should handle diamond-shaped import dependencies", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "Base", text: "\\define base() baseValue"},
+			{title: "Left", text: "\\import Base\n\\define left() leftValue"},
+			{title: "Right", text: "\\import Base\n\\define right() rightValue"},
+			{title: "Top", text: "\\import Left Right\n\\define top() topValue"}
+		]);
+		var text = "\\import Top\n<<base>> <<left>> <<right>> <<top>>";
+		var widgetNode = createWidgetNode(parseText(text, wiki), wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		// Base should only be processed once despite being imported by both Left and Right
+		expect(wrapper.innerHTML).toBe("<p>baseValue leftValue rightValue topValue</p>");
+	});
+
+	it("should refresh when nested imported tiddler changes", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "Base", text: "\\define base() original"},
+			{title: "Middle", text: "\\import Base"},
+			{title: "Top", text: "\\import Middle"}
+		]);
+		var text = "\\import Top\n<<base>>";
+		var widgetNode = createWidgetNode(parseText(text, wiki), wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p>original</p>");
+
+		// Change the base tiddler
+		wiki.addTiddler({title: "Base", text: "\\define base() modified"});
+		refreshWidgetNode(widgetNode, wrapper, ["Base"]);
+		expect(wrapper.innerHTML).toBe("<p>modified</p>");
+	});
+
+	it("should handle nested imports with filters", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "MacroA", text: "\\define macroA() valueA", tags: ["group1"]},
+			{title: "MacroB", text: "\\define macroB() valueB", tags: ["group1"]},
+			{title: "Importer", text: "\\import [tag[group1]]"},
+			{title: "MacroC", text: "\\define macroC() valueC", tags: ["group2"]},
+			{title: "TopImporter", text: "\\import Importer [tag[group2]]"}
+		]);
+		var text = "\\import TopImporter\n<<macroA>> <<macroB>> <<macroC>>";
+		var widgetNode = createWidgetNode(parseText(text, wiki), wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p>valueA valueB valueC</p>");
+	});
+
+	it("should not re-process tiddlers in complex import graphs", function() {
+		var wiki = new $tw.Wiki();
+		var processCount = 0;
+		var originalParseTiddler = wiki.parseTiddler;
+		wiki.parseTiddler = function(title, options) {
+			if(title === "Shared") {
+				processCount++;
+			}
+			return originalParseTiddler.call(this, title, options);
+		};
+
+		wiki.addTiddlers([
+			{title: "Shared", text: "\\define shared() sharedValue"},
+			{title: "PathA", text: "\\import Shared\n\\define pathA() valueA"},
+			{title: "PathB", text: "\\import Shared\n\\define pathB() valueB"},
+			{title: "PathC", text: "\\import Shared\n\\define pathC() valueC"},
+			{title: "Merger", text: "\\import PathA PathB PathC"}
+		]);
+
+		var text = "\\import Merger\n<<shared>> <<pathA>> <<pathB>> <<pathC>>";
+		var widgetNode = createWidgetNode(parseText(text, wiki), wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+
+		// Shared should only be parsed once despite being imported by PathA, PathB, and PathC
+		expect(processCount).toBe(1);
+		expect(wrapper.innerHTML).toBe("<p>sharedValue valueA valueB valueC</p>");
+	});
+
+	it("should handle tiddlers that start with HTML comments (void nodes)", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "WithComment", text: "<!-- This is a comment -->\n\\define macroA() valueA"},
+			{title: "WithoutComment", text: "\\define macroB() valueB"}
+		]);
+		var text = "\\import WithComment WithoutComment\n<<macroA>> <<macroB>>";
+		var widgetNode = createWidgetNode(parseText(text, wiki), wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+
+		// Navigate to the deepest child node
+		var childNode = widgetNode;
+		while(childNode.children.length > 0) {
+			childNode = childNode.children[0];
+		}
+
+		// Test that both macros are available despite the comment
+		expect(childNode.getVariable("macroA")).toBe("valueA");
+		expect(childNode.getVariable("macroB")).toBe("valueB");
+
+		// Also verify rendering works
+		expect(wrapper.innerHTML).toBe("<p>valueA valueB</p>");
+	});
+
+	it("should handle nested imports with comments", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "Base", text: "<!-- Comment in base -->\n\\define base() baseValue"},
+			{title: "Middle", text: "<!-- Comment in middle -->\n\\import Base\n\\define middle() middleValue"},
+			{title: "Top", text: "\\import Middle"}
+		]);
+		var text = "\\import Top\n<<base>> <<middle>>";
+		var widgetNode = createWidgetNode(parseText(text, wiki), wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+
+		expect(wrapper.innerHTML).toBe("<p>baseValue middleValue</p>");
+	});
+
+	it("should handle multiple comments before pragmas", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "MultiComment", text: "<!-- First comment -->\n<!-- Second comment -->\n\\define macro() value"}
+		]);
+		var text = "\\import MultiComment\n<<macro>>";
+		var widgetNode = createWidgetNode(parseText(text, wiki), wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+
+		expect(wrapper.innerHTML).toBe("<p>value</p>");
+	});
+
+});
