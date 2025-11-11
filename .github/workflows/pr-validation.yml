@@ -11,7 +11,7 @@ jobs:
     steps:
     # Step 1: Validate PR paths
     - name: Validate PR Paths
-      uses: TiddlyWiki/cerebrus@v5
+      uses: linonetwo/Cerebrus@feat/comment-order
       with:
         pr_number: ${{ github.event.pull_request.number }}
         repo: ${{ github.repository }}
@@ -22,7 +22,7 @@ jobs:
     
     # Step 2: Validate change notes
     - name: Validate Change Notes
-      uses: TiddlyWiki/cerebrus@v5
+      uses: linonetwo/Cerebrus@feat/comment-order
       with:
         pr_number: ${{ github.event.pull_request.number }}
         repo: ${{ github.repository }}
