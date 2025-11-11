@@ -4,7 +4,7 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: performance
 change-category: internal
-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9358
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9358
 github-contributors: cdruan
 
 Remove redundant code in `core/modules/filters/format/json.js`.

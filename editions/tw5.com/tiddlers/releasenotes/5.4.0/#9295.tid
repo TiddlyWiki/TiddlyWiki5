@@ -4,7 +4,7 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: bugfix
 change-category: plugin
-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9295
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9295
 github-contributors: cdruan
 
 * Fix markdown parser to respect ''parseAsInline'' option [[#8917|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8917]].

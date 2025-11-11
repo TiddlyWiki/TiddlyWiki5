@@ -4,7 +4,7 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: bugfix
 change-category: nodejs
-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9341
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9341
 github-contributors: cdruan
 
 * skip reading file content when `_canonical_uri` is present
