@@ -42,7 +42,8 @@ ImportVariablesWidget.prototype.processTiddlerList = function(tiddlerList, widge
 		var parser = self.wiki.parseTiddler(title, {parseAsInline:true, configTrimWhiteSpace:false});
 		if(parser) {
 			var parseTreeNode = parser.tree[0];
-			while(parseTreeNode && ["setvariable","set","parameters","importvariables"].indexOf(parseTreeNode.type) !== -1) {
+			// We added "void" in PR #8258 since which we parse commentblocks into nodes of type "void"
+			while(parseTreeNode && ["setvariable","set","parameters","importvariables","void"].indexOf(parseTreeNode.type) !== -1) {
 				if(parseTreeNode.type === "importvariables") {
 					// We extract the nested filter and recursively process these tiddlers
 					var nestedFilter = parseTreeNode.attributes.filter.value;
