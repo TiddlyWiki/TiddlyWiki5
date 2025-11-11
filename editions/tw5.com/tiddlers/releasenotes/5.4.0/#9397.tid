@@ -1,5 +1,6 @@
 title: $:/changenotes/5.4.0/#9397
 description: Fix critical freelinks bugs: first character loss and false positive matches in v5.4.0
+release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: bugfix
 change-category: plugin
