@@ -1,0 +1,8 @@
+title: $:/changenotes/5.4.0/#9422
+description: Remove Opera & Microsoft prefix in browser.js
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: deprecation
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9422
+github-contributors: Leilei332
