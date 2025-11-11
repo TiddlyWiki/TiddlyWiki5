@@ -29,5 +29,5 @@ jobs:
         base_ref: ${{ github.base_ref }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
         mode: changenotes
-      continue-on-error: true
+      continue-on-error: false
 
