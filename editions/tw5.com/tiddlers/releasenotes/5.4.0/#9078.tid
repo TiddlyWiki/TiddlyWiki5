@@ -11,6 +11,8 @@ The web server's `get-file` route now supports HTTP Range requests and file stre
 
 !! Features
 
+test test
+
 * HTTP Range header: Enables partial content delivery with `206 Partial Content` responses, which is used when the user drags the progress bar in video/audio playback
 * Streaming file delivery: Browsers can now properly seek and stream video files from the `/files/` directory. Files are read using Node.js streams for better performance and memory efficiency.
 * Resumable downloads: To save interrupted downloads
