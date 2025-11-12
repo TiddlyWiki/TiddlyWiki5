@@ -3,7 +3,7 @@ description: Added jsondelete operator for deleting properties from JSON objects
 release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: feature
-change-category: developer
+change-category: filters
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9390
 github-contributors: SmartDever02
 
