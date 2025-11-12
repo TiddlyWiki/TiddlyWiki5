@@ -1,0 +1,5 @@
+title: $:/changenotes/5.4.0/#9242/impacts/drpecate-css-macros
+changenote: $:/changenotes/5.4.0/#9242
+tags: $:/tags/ImpactNote
+description: Tiddlywiki's stylesheet may be broken on old browsers that don't support 2017 baseline
+impact-type: compatibility-break
