@@ -5,6 +5,6 @@ tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: developer
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9135
-github-contributors: arlen22
+github-contributors: Arlen22
 
 Updates the eslint config to check for syntax newer than ES2017. This uses a plugin to check for newer syntax, for better error messages, and may need to be updated regularly along with eslint to catch the latest features. 
