@@ -1,5 +1,5 @@
 title: $:/changenotes/5.4.0/#9405
-description: Add HTTP/2 and HTTP/2 Cleartext (h2c) support to TiddlyWiki server
+description: Add HTTP/2 and h2c support to TiddlyWiki server
 release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: feature
@@ -7,4 +7,4 @@ change-category: nodejs
 links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9405
 github-contributors: linonetwo
 
-Adds native HTTP/2 support to the TiddlyWiki server with protocol negotiation and multiplexing. HTTP/2 is enabled by default when TLS certificates are available, falling back to HTTP/1.1 when not configured. Also supports HTTP/2 Cleartext (h2c) for use in trusted networks / behind reverse proxies / NAT traversal.
+HTTP/2 support with TLS and HTTP/2 Cleartext (h2c) for trusted networks. Enables connection multiplexing for better performance. HTTP/2 is enabled by default when TLS certificates are available, with graceful fallback to HTTP/1.1.
