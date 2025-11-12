@@ -24,15 +24,15 @@ function buildHeading(context, node, level) {
 
 function buildUnorderedList(context, node) {
 	// Prosemirror requires split all lists into separate lists with single items
-	return node.children.map(function(item) {
-		var newContext = {};
-		for(var key in context) {
+	return node.children.map((item) => {
+		const newContext = {};
+		for(const key in context) {
 			if(context.hasOwnProperty(key)) {
 				newContext[key] = context[key];
 			}
 		}
 		newContext.level = context.level + 1;
-		var processedItem = convertANode(newContext, item);
+		const processedItem = convertANode(newContext, item);
 		return {
 			type: "list",
 			attrs: {
@@ -47,15 +47,15 @@ function buildUnorderedList(context, node) {
 }
 
 function buildOrderedList(context, node) {
-	return node.children.map(function(item) {
-		var newContext = {};
-		for(var key in context) {
+	return node.children.map((item) => {
+		const newContext = {};
+		for(const key in context) {
 			if(context.hasOwnProperty(key)) {
 				newContext[key] = context[key];
 			}
 		}
 		newContext.level = context.level + 1;
-		var processedItem = convertANode(newContext, item);
+		const processedItem = convertANode(newContext, item);
 		return {
 			type: "list",
 			attrs: {
@@ -79,10 +79,10 @@ function wrapTextNodesInParagraphs(context, nodes) {
 		return [];
 	}
 
-	var result = [];
-	var currentTextNodes = [];
+	let result = [];
+	let currentTextNodes = [];
 
-	function flushTextNodes() {
+	const flushTextNodes = () => {
 		if(currentTextNodes.length > 0) {
 			result.push({
 				type: "paragraph",
@@ -90,9 +90,9 @@ function wrapTextNodesInParagraphs(context, nodes) {
 			});
 			currentTextNodes = [];
 		}
-	}
+	};
 
-	nodes.forEach(function(node) {
+	nodes.forEach((node) => {
 		// If it's a text node, collect it
 		if(node.type === "text") {
 			currentTextNodes.push(node);
@@ -111,28 +111,28 @@ function wrapTextNodesInParagraphs(context, nodes) {
 }
 
 function buildListItem(context, node) {
-	var newContext = {};
-	for(var key in context) {
+	const newContext = {};
+	for(const key in context) {
 		if(context.hasOwnProperty(key)) {
 			newContext[key] = context[key];
 		}
 	}
 	newContext.level = context.level + 1;
-	var processedContent = convertNodes(newContext, node.children);
+	const processedContent = convertNodes(newContext, node.children);
 	// Ensure content starts with a block element (typically paragraph)
 	return wrapTextNodesInParagraphs(context, processedContent);
 }
 
 function buildTextWithMark(context, node, markType) {
-	var content = convertNodes(context, node.children);
-	return content.map(function(childNode) {
+	const content = convertNodes(context, node.children);
+	return content.map((childNode) => {
 		if(childNode.type === "text") {
 			// Add the mark to the text node
-			var marks = childNode.marks || [];
-			var newMarks = marks.slice();
+			const marks = childNode.marks || [];
+			const newMarks = marks.slice();
 			newMarks.push({ type: markType });
-			var result = {};
-			for(var key in childNode) {
+			const result = {};
+			for(const key in childNode) {
 				if(childNode.hasOwnProperty(key)) {
 					result[key] = childNode[key];
 				}
@@ -174,9 +174,9 @@ function buildSub(context, node) {
 
 function buildCodeBlock(context, node) {
 	// Extract text content from the code element inside pre
-	var codeElement = null;
+	let codeElement = null;
 	if(node.children && node.children.length > 0) {
-		for(var i = 0; i < node.children.length; i++) {
+		for(let i = 0; i < node.children.length; i++) {
 			if(node.children[i].tag === "code") {
 				codeElement = node.children[i];
 				break;
@@ -184,8 +184,8 @@ function buildCodeBlock(context, node) {
 		}
 	}
 	if(codeElement && codeElement.children) {
-		var textContent = "";
-		for(var j = 0; j < codeElement.children.length; j++) {
+		let textContent = "";
+		for(let j = 0; j < codeElement.children.length; j++) {
 			if(codeElement.children[j].type === "text") {
 				textContent += codeElement.children[j].text;
 			}
@@ -199,9 +199,9 @@ function buildCodeBlock(context, node) {
 		};
 	}
 	// Fallback: extract all text from children
-	var fallbackText = "";
+	let fallbackText = "";
 	if(node.children) {
-		for(var k = 0; k < node.children.length; k++) {
+		for(let k = 0; k < node.children.length; k++) {
 			if(node.children[k].type === "text") {
 				fallbackText += node.children[k].text;
 			}
@@ -219,14 +219,14 @@ function buildCodeBlock(context, node) {
 /**
  * Many node shares same type `element` in wikiAst, we need to distinguish them by tag.
  */
-var elementBuilders = {
+const elementBuilders = {
 	p: buildParagraph,
-	h1: function(context, node) { return buildHeading(context, node, 1); },
-	h2: function(context, node) { return buildHeading(context, node, 2); },
-	h3: function(context, node) { return buildHeading(context, node, 3); },
-	h4: function(context, node) { return buildHeading(context, node, 4); },
-	h5: function(context, node) { return buildHeading(context, node, 5); },
-	h6: function(context, node) { return buildHeading(context, node, 6); },
+	h1: (context, node) => buildHeading(context, node, 1),
+	h2: (context, node) => buildHeading(context, node, 2),
+	h3: (context, node) => buildHeading(context, node, 3),
+	h4: (context, node) => buildHeading(context, node, 4),
+	h5: (context, node) => buildHeading(context, node, 5),
+	h6: (context, node) => buildHeading(context, node, 6),
 	ul: buildUnorderedList,
 	ol: buildOrderedList,
 	li: buildListItem,
@@ -241,7 +241,7 @@ var elementBuilders = {
 };
 
 function element(context, node) {
-	var builder = elementBuilders[node.tag];
+	const builder = elementBuilders[node.tag];
 	if(builder) {
 		return builder(context, node);
 	} else {
@@ -259,8 +259,8 @@ function text(context, node) {
 
 function codeblock(context, node) {
 	// Extract code and language from attributes
-	var code = node.attributes && node.attributes.code ? node.attributes.code.value : "";
-	var language = node.attributes && node.attributes.language ? node.attributes.language.value : "";
+	const code = node.attributes && node.attributes.code ? node.attributes.code.value : "";
+	const language = node.attributes && node.attributes.language ? node.attributes.language.value : "";
 	
 	return {
 		type: "code_block",
@@ -275,7 +275,7 @@ function codeblock(context, node) {
 /**
  * Key is wikiAst node type, value is node converter function.
  */
-var builders = {
+const builders = {
 	element: element,
 	text: text,
 	codeblock: codeblock
@@ -283,21 +283,21 @@ var builders = {
 
 function wikiAstToProsemirrorAst(node, options) {
 	// Initialize context with level tracking
-	var context = {};
-	for(var key in builders) {
+	const context = {};
+	for(const key in builders) {
 		if(builders.hasOwnProperty(key)) {
 			context[key] = builders[key];
 		}
 	}
 	if(options) {
-		for(var key in options) {
+		for(const key in options) {
 			if(options.hasOwnProperty(key)) {
 				context[key] = options[key];
 			}
 		}
 	}
 	context.level = 0;
-	var result = convertNodes(context, Array.isArray(node) ? node : [node]);
+	const result = convertNodes(context, Array.isArray(node) ? node : [node]);
 	
 	// Wrap in a doc if needed
 	if(result.length > 0 && result[0].type !== "doc") {
@@ -317,17 +317,17 @@ function convertNodes(context, nodes) {
 		return [];
 	}
 
-	return nodes.reduce(function(accumulator, node) {
-		var convertedNodes = convertANode(context, node);
+	return nodes.reduce((accumulator, node) => {
+		const convertedNodes = convertANode(context, node);
 		return accumulator.concat(convertedNodes);
 	}, []);
 }
 
 function convertANode(context, node) {
-	var builder = context[node.type];
+	const builder = context[node.type];
 	if(typeof builder === "function") {
-		var convertedNode = builder(context, node);
-		var arrayOfNodes = (Array.isArray(convertedNode)
+		const convertedNode = builder(context, node);
+		const arrayOfNodes = (Array.isArray(convertedNode)
 		? convertedNode : [convertedNode]);
 		return arrayOfNodes;
 	}

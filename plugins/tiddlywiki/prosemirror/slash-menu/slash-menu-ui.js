@@ -8,7 +8,7 @@ Native JS SlashMenu UI implementation for TiddlyWiki
 
 "use strict";
 
-var slashMenu = require("$:/plugins/tiddlywiki/prosemirror/slash-menu.js");
+const slashMenu = require("$:/plugins/tiddlywiki/prosemirror/slash-menu.js");
 
 function SlashMenuUI(view, options) {
 	this.view = view;
@@ -25,8 +25,8 @@ function SlashMenuUI(view, options) {
 	this.setupStateListener();
 
 	// Listen for keydown events to track navigation method
-	var self = this;
-	document.addEventListener("keydown", function(e) {
+	const self = this;
+	document.addEventListener("keydown", (e) => {
 		if(self.isVisible && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
 			self.lastNavByKey = true;
 		} else if(self.isVisible) {
@@ -43,21 +43,23 @@ SlashMenuUI.prototype.createContainer = function() {
 };
 
 SlashMenuUI.prototype.setupStateListener = function() {
-	var self = this;
+	const self = this;
 	
-	function checkState() {
+	const checkState = () => {
 		self.updateMenu();
 		// Continue checking on next frame
 		requestAnimationFrame(checkState);
-	}
+	};
 	
 	// Start the animation frame loop
 	requestAnimationFrame(checkState);
 };
 
 SlashMenuUI.prototype.updateMenu = function() {
-	var state = slashMenu.SlashMenuKey.getState(this.view.state);
-	if(!state) return;
+	const state = slashMenu.SlashMenuKey.getState(this.view.state);
+	if(!state) {
+		return;
+	}
 	if(state.open && !this.isVisible) {
 		this.showMenu(state);
 	} else if(!state.open && this.isVisible) {
@@ -80,8 +82,8 @@ SlashMenuUI.prototype.hideMenu = function() {
 };
 
 SlashMenuUI.prototype.positionMenu = function() {
-	var selection = this.view.state.selection;
-	var coords = this.view.coordsAtPos(selection.to);
+	const selection = this.view.state.selection;
+	const coords = this.view.coordsAtPos(selection.to);
 	
 	this.container.style.position = "absolute";
 	this.container.style.left = coords.left + "px";
@@ -95,10 +97,10 @@ SlashMenuUI.prototype.renderMenu = function(state) {
 	
 	// Create filter display if there's a filter
 	if(state.filter) {
-		var filterWrapper = document.createElement("div");
+		const filterWrapper = document.createElement("div");
 		filterWrapper.className = "tw-slash-menu-filter-wrapper";
 		
-		var filterText = document.createElement("div");
+		const filterText = document.createElement("div");
 		filterText.className = "tw-slash-menu-filter";
 		filterText.textContent = state.filter;
 		
@@ -107,20 +109,20 @@ SlashMenuUI.prototype.renderMenu = function(state) {
 	}
 	
 	// Create menu content
-	var menuContent = document.createElement("div");
+	const menuContent = document.createElement("div");
 	menuContent.className = "tw-slash-menu-content";
 	
 	// Render menu elements
-	var elements = state.filteredElements;
+	const elements = state.filteredElements;
 	if(elements.length === 0) {
-		var placeholder = document.createElement("div");
+		const placeholder = document.createElement("div");
 		placeholder.className = "tw-slash-menu-placeholder";
 		placeholder.textContent = "No matching items";
 		menuContent.appendChild(placeholder);
 	} else {
-		for(var i = 0; i < elements.length; i++) {
-			var element = elements[i];
-			var menuItem = this.createMenuItem(element, state);
+		for(let i = 0; i < elements.length; i++) {
+			const element = elements[i];
+			const menuItem = this.createMenuItem(element, state);
 			menuContent.appendChild(menuItem);
 		}
 	}
@@ -129,14 +131,14 @@ SlashMenuUI.prototype.renderMenu = function(state) {
 };
 
 SlashMenuUI.prototype.createMenuItem = function(element, state) {
-	var self = this;
+	const self = this;
 	if(element.type === "group") {
-		var groupTitle = document.createElement("div");
+		const groupTitle = document.createElement("div");
 		groupTitle.className = "tw-slash-menu-group-title";
 		groupTitle.textContent = element.label;
 		return groupTitle;
 	}
-	var menuItem = document.createElement("div");
+	const menuItem = document.createElement("div");
 	menuItem.className = "tw-slash-menu-item";
 	menuItem.id = "menu-item-" + element.id;
 
@@ -145,7 +147,7 @@ SlashMenuUI.prototype.createMenuItem = function(element, state) {
 		menuItem.classList.add("tw-slash-menu-item-selected");
 		// Only auto scroll if last navigation was via keyboard
 		if(self.lastNavByKey) {
-			setTimeout(function() {
+			setTimeout(() => {
 				menuItem.scrollIntoView({ block: "nearest" });
 				self.lastNavByKey = false; // Reset after scroll
 			}, 0);
@@ -153,13 +155,13 @@ SlashMenuUI.prototype.createMenuItem = function(element, state) {
 	}
 
 	// Create icon placeholder
-	var icon = document.createElement("div");
+	const icon = document.createElement("div");
 	icon.className = "tw-slash-menu-item-icon";
 	icon.textContent = this.getIconForElement(element);
 	menuItem.appendChild(icon);
 
 	// Create label
-	var label = document.createElement("div");
+	const label = document.createElement("div");
 	label.className = "tw-slash-menu-item-label";
 	label.textContent = element.label;
 	menuItem.appendChild(label);
@@ -167,7 +169,7 @@ SlashMenuUI.prototype.createMenuItem = function(element, state) {
 	// Add click handler if clickable
 	if(this.options.clickable) {
 		menuItem.classList.add("tw-slash-menu-item-clickable");
-		menuItem.onclick = function() {
+		menuItem.onclick = () => {
 			self.executeCommand(element);
 		};
 	}
