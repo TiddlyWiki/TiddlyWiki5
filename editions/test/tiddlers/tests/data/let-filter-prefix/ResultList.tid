@@ -1,0 +1,12 @@
+title: LetFilterRunPrefix/ResultList
+description: Using the "let" filter run prefix to store result lists, not just single values
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$text text={{{ [all[tiddlers]] :let[[varname]] [(varname)sort[]join[,]] }}}/>
++
+title: ExpectedResult
+
+<p>$:/core,ExpectedResult,Output</p>
