@@ -61,7 +61,7 @@ exports.convertStyleNameToPropertyName = function(styleName) {
 	var propertyName = $tw.utils.unHyphenateCss(styleName);
 	// Then check if it needs a prefix
 	if($tw.browser && document.body.style[propertyName] === undefined) {
-		var prefixes = ["O","MS","Moz","webkit"];
+		var prefixes = ["Moz","webkit"];
 		for(var t=0; t<prefixes.length; t++) {
 			var prefixedName = prefixes[t] + propertyName.substr(0,1).toUpperCase() + propertyName.substr(1);
 			if(document.body.style[prefixedName] !== undefined) {
@@ -112,8 +112,6 @@ var eventNameMappings = {
 		correspondingCssProperty: "transition",
 		mappings: {
 			transition: "transitionend",
-			OTransition: "oTransitionEnd",
-			MSTransition: "msTransitionEnd",
 			MozTransition: "transitionend",
 			webkitTransition: "webkitTransitionEnd"
 		}
@@ -122,8 +120,6 @@ var eventNameMappings = {
 		correspondingCssProperty: "animation",
 		mappings: {
 			animation: "animationend",
-			OAnimation: "oAnimationEnd",
-			MSAnimation: "msAnimationEnd",
 			MozAnimation: "animationend",
 			webkitAnimation: "webkitAnimationEnd"
 		}
@@ -156,19 +152,15 @@ exports.getFullScreenApis = function() {
 		result = {
 		"_requestFullscreen": db.webkitRequestFullscreen !== undefined ? "webkitRequestFullscreen" :
 							db.mozRequestFullScreen !== undefined ? "mozRequestFullScreen" :
-							db.msRequestFullscreen !== undefined ? "msRequestFullscreen" :
 							db.requestFullscreen !== undefined ? "requestFullscreen" : "",
 		"_exitFullscreen": d.webkitExitFullscreen !== undefined ? "webkitExitFullscreen" :
 							d.mozCancelFullScreen !== undefined ? "mozCancelFullScreen" :
-							d.msExitFullscreen !== undefined ? "msExitFullscreen" :
 							d.exitFullscreen !== undefined ? "exitFullscreen" : "",
 		"_fullscreenElement": d.webkitFullscreenElement !== undefined ? "webkitFullscreenElement" :
 							d.mozFullScreenElement !== undefined ? "mozFullScreenElement" :
-							d.msFullscreenElement !== undefined ? "msFullscreenElement" :
 							d.fullscreenElement !== undefined ? "fullscreenElement" : "",
 		"_fullscreenChange": d.webkitFullscreenElement !== undefined ? "webkitfullscreenchange" :
 							d.mozFullScreenElement !== undefined ? "mozfullscreenchange" :
-							d.msFullscreenElement !== undefined ? "MSFullscreenChange" :
 							d.fullscreenElement !== undefined ? "fullscreenchange" : ""
 	};
 	if(!result._requestFullscreen || !result._exitFullscreen || !result._fullscreenElement || !result._fullscreenChange) {

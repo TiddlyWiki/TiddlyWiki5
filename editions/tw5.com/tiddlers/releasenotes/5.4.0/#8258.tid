@@ -1,9 +1,10 @@
 title: $:/changenotes/5.4.0/#8258
 description: Add ability to serialize WikiText AST nodes back to wikitext strings
 tags: $:/tags/ChangeNote
+release: 5.4.0
 change-type: feature
 change-category: developer
-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8258
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8258
 github-contributors: linonetwo
 
 This PR introduces a new utility `$tw.utils.serializeWikitextParseTree()` that can convert WikiText Abstract Syntax Tree (AST) nodes back into wikitext strings.
