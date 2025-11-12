@@ -91,7 +91,7 @@ function list(builder, node, context) {
 	
 	// Add content from current node to list items
 	if(node.content && node.content.forEach) {
-		node.content.forEach((item) => {
+		node.content.forEach(item => {
 			listItems.push({
 				type: "element",
 				tag: "li",
@@ -113,7 +113,7 @@ function list(builder, node, context) {
 			
 			// Merge its content into current list
 			if(consumedNode.content && consumedNode.content.forEach) {
-				consumedNode.content.forEach((item) => {
+				consumedNode.content.forEach(item => {
 					listItems.push({
 						type: "element",
 						tag: "li",
@@ -139,9 +139,7 @@ function code_block(builder, node) {
 	// Extract text content from the node
 	let textContent = "";
 	if(node.content && node.content.length > 0) {
-		textContent = node.content.map((child) => {
-			return child.text || "";
-		}).join("");
+		textContent = node.content.map(child => child.text || "").join("");
 	}
 	
 	// Get language from node attributes if available, default to empty string
@@ -208,7 +206,7 @@ function convertANode(builders, node, context) {
 		const convertedNode = builder(builders, node, context);
 		const arrayOfNodes = (Array.isArray(convertedNode)
 		? convertedNode : [convertedNode]);
-		return arrayOfNodes.map((child) => {
+		return arrayOfNodes.map(child => {
 			const metadata = restoreMetadata(node);
 			const result = {};
 			// Manual object merge instead of spread operator

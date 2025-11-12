@@ -14,7 +14,7 @@ function openPrompt(options) {
 	const wrapper = document.body.appendChild(document.createElement("div"));
 	wrapper.className = prefix;
 
-	const mouseOutside = (e) => {
+	const mouseOutside = e => {
 		if(!wrapper.contains(e.target)) {
 			close();
 		}
@@ -48,7 +48,7 @@ function openPrompt(options) {
 	if(options.title) {
 		form.appendChild(document.createElement("h5")).textContent = options.title;
 	}
-	domFields.forEach((field) => {
+	domFields.forEach(field => {
 		form.appendChild(document.createElement("div")).appendChild(field);
 	});
 	const buttons = form.appendChild(document.createElement("div"));
@@ -69,12 +69,12 @@ function openPrompt(options) {
 		}
 	};
 
-	form.addEventListener("submit", (e) => {
+	form.addEventListener("submit", e => {
 		e.preventDefault();
 		submit();
 	});
 
-	form.addEventListener("keydown", (e) => {
+	form.addEventListener("keydown", e => {
 		if(e.keyCode == 27) {
 			e.preventDefault();
 			close();

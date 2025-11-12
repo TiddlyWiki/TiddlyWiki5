@@ -79,7 +79,7 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 			.concat(listPlugins)
 			.concat(exampleSetup({ schema: schema })),
 		}),
-		dispatchTransaction: (transaction) => {
+		dispatchTransaction: transaction => {
 			const newState = self.view.state.apply(transaction);
 			self.view.updateState(newState);
 			self.debouncedSaveEditorContent();
