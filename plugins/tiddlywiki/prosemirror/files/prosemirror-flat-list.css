@@ -1,0 +1,87 @@
+/* src/style.css */
+.prosemirror-flat-list {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 32px;
+  margin-bottom: 0;
+  position: relative;
+  display: list-item;
+  list-style: none;
+}
+.prosemirror-flat-list.ProseMirror-selectednode {
+  outline: none;
+}
+.prosemirror-flat-list.ProseMirror-selectednode:after {
+  content: "";
+  position: absolute;
+  left: -32px;
+  right: -2px;
+  top: -2px;
+  bottom: -2px;
+  border: 2px solid #8cf;
+  pointer-events: none;
+}
+.prosemirror-flat-list[data-list-kind=bullet] {
+  list-style: disc;
+}
+.prosemirror-flat-list[data-list-kind=ordered] {
+  counter-increment: prosemirror-flat-list-counter;
+}
+.prosemirror-flat-list[data-list-kind=ordered] > * {
+  contain: style;
+}
+.prosemirror-flat-list[data-list-kind=ordered]::before {
+  position: absolute;
+  right: 100%;
+  font-variant-numeric: tabular-nums;
+  content: counter(prosemirror-flat-list-counter, decimal) ". ";
+}
+.prosemirror-flat-list[data-list-kind=ordered]:first-child,
+:not(.prosemirror-flat-list[data-list-kind=ordered]) + .prosemirror-flat-list[data-list-kind=ordered] {
+  counter-reset: prosemirror-flat-list-counter;
+}
+@supports (counter-set: prosemirror-flat-list-counter 1) {
+  [data-list-order]:is(.prosemirror-flat-list[data-list-kind=ordered]:first-child, :not(.prosemirror-flat-list[data-list-kind=ordered]) + .prosemirror-flat-list[data-list-kind=ordered]) {
+    counter-set: prosemirror-flat-list-counter var(--prosemirror-flat-list-order);
+  }
+}
+@supports not (counter-set: prosemirror-flat-list-counter 1) {
+  [data-list-order]:is(.prosemirror-flat-list[data-list-kind=ordered]:first-child, :not(.prosemirror-flat-list[data-list-kind=ordered]) + .prosemirror-flat-list[data-list-kind=ordered]) {
+    counter-increment: prosemirror-flat-list-counter var(--prosemirror-flat-list-order);
+  }
+}
+.prosemirror-flat-list[data-list-kind=task] > .list-marker {
+  position: absolute;
+  right: 100%;
+  text-align: center;
+  width: 1.5em;
+  width: 1lh;
+}
+.prosemirror-flat-list[data-list-kind=task] > .list-marker,
+.prosemirror-flat-list[data-list-kind=task] > .list-marker * {
+  cursor: pointer;
+}
+.prosemirror-flat-list[data-list-kind=toggle] > .list-marker {
+  position: absolute;
+  right: 100%;
+  text-align: center;
+  width: 1.5em;
+  width: 1lh;
+}
+.prosemirror-flat-list[data-list-kind=toggle] > .list-marker::before {
+  content: "\23f7";
+}
+.prosemirror-flat-list[data-list-kind=toggle][data-list-collapsable][data-list-collapsed] > .list-marker::before {
+  content: "\23f5";
+}
+.prosemirror-flat-list[data-list-kind=toggle][data-list-collapsable] > .list-marker {
+  cursor: pointer;
+}
+.prosemirror-flat-list[data-list-kind=toggle]:not([data-list-collapsable]) > .list-marker {
+  opacity: 40%;
+  pointer-events: none;
+}
+.prosemirror-flat-list[data-list-kind=toggle][data-list-collapsable][data-list-collapsed] > .list-content > *:nth-child(n+2) {
+  display: none;
+}
