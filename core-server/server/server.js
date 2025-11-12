@@ -17,14 +17,7 @@ if($tw.node) {
 		querystring = require("querystring"),
 		crypto = require("crypto"),
 		zlib = require("zlib"),
-		http2;
-	// Try to load http2 module (available in Node.js 8.4+)
-	try {
 		http2 = require("http2");
-	} catch(e) {
-		// http2 module not available, will fall back to http/https
-		http2 = null;
-	}
 }
 
 /*
@@ -107,45 +100,35 @@ function Server(options) {
 		tlsCertFilepath = this.get("tls-cert"),
 		tlsPassphrase = this.get("tls-passphrase"),
 		enableHttp2 = this.get("http2") === "yes",
-		enableH2c = this.get("h2c") === "yes";
+		enableH2c = this.get("h2c") === "yes",
+		warningText = null;
 	if(tlsCertFilepath && tlsKeyFilepath) {
 		this.listenOptions = {
 			key: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsKeyFilepath),"utf8"),
 			cert: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsCertFilepath),"utf8"),
 			passphrase: tlsPassphrase || ""
 		};
-		// Enable HTTP/2 if requested and available
-		if(enableHttp2 && http2) {
+		// Enable HTTP/2 if requested
+		if(enableHttp2) {
 			this.protocol = "https";
 			this.useHttp2 = true;
 			this.listenOptions.allowHTTP1 = true; // Allow HTTP/1.1 fallback
 		} else {
 			this.protocol = "https";
-			if(enableHttp2 && !http2) {
-				if(this.get("suppress-server-logs") !== "yes") {
-					$tw.utils.warning("Warning: HTTP/2 requested but not available. Falling back to HTTPS");
-				}
-			}
 		}
-	} else if(enableH2c && http2) {
+	} else if(enableH2c) {
 		// HTTP/2 Cleartext (h2c) - for internal networks or behind reverse proxy
 		this.protocol = "http";
 		this.useH2c = true;
-		if(this.get("suppress-server-logs") !== "yes") {
-			$tw.utils.warning("Warning: Using HTTP/2 Cleartext (h2c). This should only be used in trusted networks or behind a reverse proxy.");
-		}
-	} else if(enableH2c && !http2) {
-		// h2c requested but http2 module not available - fall back to HTTP/1.1
-		this.protocol = "http";
-		if(this.get("suppress-server-logs") !== "yes") {
-			$tw.utils.warning("Warning: HTTP/2 Cleartext (h2c) requested but not available. Falling back to HTTP/1.1");
-		}
+		warningText = "Warning: Using HTTP/2 Cleartext (h2c). This should only be used in trusted networks or behind a reverse proxy.";
 	} else if(enableHttp2) {
 		// http2=yes but no TLS certificates - fall back to HTTP/1.1
 		this.protocol = "http";
-		if(this.get("suppress-server-logs") !== "yes") {
-			$tw.utils.warning("Warning: HTTP/2 requires TLS certificates (tls-key and tls-cert). Use h2c=yes for unencrypted HTTP/2 in trusted networks. Falling back to HTTP/1.1");
-		}
+		warningText = "Warning: HTTP/2 requires TLS certificates (tls-key and tls-cert). Use h2c=yes for unencrypted HTTP/2 in trusted networks. Falling back to HTTP/1.1";
+	}
+	// Output warning if needed
+	if(warningText && this.get("debug-level") !== "none") {
+		$tw.utils.warning(warningText);
 	}
 	// Set the transport module
 	if(this.useHttp2 || this.useH2c) {
@@ -410,6 +393,16 @@ Server.prototype.listen = function(port,host,prefix) {
 	if(parseInt(port,10).toString() !== port) {
 		port = process.env[port] || 8080;
 	}
+	// Prevent warning on test
+	function logIfNotSuppressed(message, color) {
+		if(self.get("debug-level") !== "none") {
+			if(color) {
+				$tw.utils.log(message, color);
+			} else {
+				$tw.utils.warning(message);
+			}
+		}
+	}
 	// Warn if required plugins are missing
 	var missing = [];
 	for(var index=0; index<this.requiredPlugins.length; index++) {
@@ -418,11 +411,9 @@ Server.prototype.listen = function(port,host,prefix) {
 		}
 	}
 	if(missing.length > 0) {
-		if(this.get("suppress-server-logs") !== "yes") {
-			var error = "Warning: Plugin(s) required for client-server operation are missing.\n"+
-				"\""+ missing.join("\", \"")+"\"";
-			$tw.utils.warning(error);
-		}
+		var error = "Warning: Plugin(s) required for client-server operation are missing.\n"+
+			"\""+ missing.join("\", \"")+"\"";
+		logIfNotSuppressed(error);
 	}
 	
 	// Helper function to setup connection tracking
@@ -460,16 +451,12 @@ Server.prototype.listen = function(port,host,prefix) {
 		// Create HTTP/2 secure server
 		server = this.transport.createSecureServer(this.listenOptions,this.requestHandler.bind(this));
 		setupConnectionTracking(server, true);
-		if(this.get("suppress-server-logs") !== "yes") {
-			$tw.utils.log("HTTP/2 enabled with ALPN protocol negotiation","green");
-		}
+		logIfNotSuppressed("HTTP/2 enabled with ALPN protocol negotiation", "green");
 	} else if(this.useH2c) {
 		// Create HTTP/2 Cleartext server
 		server = this.transport.createServer(this.requestHandler.bind(this));
 		setupConnectionTracking(server, true);
-		if(this.get("suppress-server-logs") !== "yes") {
-			$tw.utils.log("HTTP/2 Cleartext (h2c) enabled - suitable for reverse proxy setups","yellow");
-		}
+		logIfNotSuppressed("HTTP/2 Cleartext (h2c) enabled - suitable for reverse proxy setups", "yellow");
 	} else if(this.listenOptions) {
 		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
 		setupConnectionTracking(server, false);
@@ -482,10 +469,8 @@ Server.prototype.listen = function(port,host,prefix) {
 		var address = server.address(),
 			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix,
 			protocolInfo = self.useHttp2 ? " (HTTP/2)" : self.useH2c ? " (HTTP/2 Cleartext)" : "";
-		if(self.get("suppress-server-logs") !== "yes") {
-			$tw.utils.log("Serving on " + url + protocolInfo,"brown/orange");
-			$tw.utils.log("(press ctrl-C to exit)","red");
-		}
+		logIfNotSuppressed("Serving on " + url + protocolInfo, "brown/orange");
+		logIfNotSuppressed("(press ctrl-C to exit)", "red");
 	});
 	// Listen
 	return server.listen(port,host);

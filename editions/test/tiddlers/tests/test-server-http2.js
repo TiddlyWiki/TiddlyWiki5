@@ -20,14 +20,7 @@ if($tw.node) {
 	var fs = require("fs");
 	var path = require("path");
 	var https = require("https");
-	var http2;
-	
-	// Try to load http2 module
-	try {
-		http2 = require("http2");
-	} catch(e) {
-		http2 = null;
-	}
+	var http2 = require("http2");
 
 	describe("Server HTTP/2 Support", function() {
 		var testPort = 8091;
@@ -36,9 +29,6 @@ if($tw.node) {
 
 		describe("HTTP/2 Configuration", function() {
 			it("should have http2 default variable set to 'yes'", function() {
-				// This test verifies the http2 module detection logic
-				expect(http2).toBeDefined();
-				// http2 should be available in Node.js 8.4.0+
 				var server = new Server({
 					wiki: $tw.wiki,
 					variables: {
@@ -102,23 +92,16 @@ if($tw.node) {
 				var server = new Server({
 					wiki: $tw.wiki,
 					variables: {
-						port: testPort.toString(),
-						"h2c": "yes",
-						"suppress-server-logs": "yes"
-					}
-				});
-				// With h2c=yes and http2 module available, should enable HTTP/2 Cleartext
-				expect(server.protocol).toBe("http");
-				if(http2) {
-					expect(server.useH2c).toBe(true);
-					expect(server.transport).toBe(http2);
-				} else {
-					// If http2 module is not available, should fall back to HTTP/1.1
-					expect(server.useH2c).toBe(false);
-					expect(server.transport).toBe(require("http"));
+					port: testPort.toString(),
+					"h2c": "yes",
+					"suppress-server-logs": "yes"
 				}
+				});
+				// With h2c=yes, should enable HTTP/2 Cleartext
+				expect(server.protocol).toBe("http");
+				expect(server.useH2c).toBe(true);
+				expect(server.transport).toBe(http2);
 			});
-
 			it("should not enable both http2 and h2c simultaneously", function() {
 				var server = new Server({
 					wiki: $tw.wiki,
