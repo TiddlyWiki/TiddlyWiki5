@@ -6,6 +6,16 @@ import eslint from "eslint";
 import stylistic from "@stylistic/eslint-plugin";
 import esx from "eslint-plugin-es-x";
 import format from "eslint-plugin-format";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Read dprint configuration
+const dprintConfigPath = path.join(__dirname, "dprint.json");
+const dprintConfig = JSON.parse(fs.readFileSync(dprintConfigPath, "utf-8"));
 
 /** @type {import("eslint").Linter.Config} */
 const es2017rules = {
@@ -320,20 +330,7 @@ js.configs.recommended,
         rules: {
             "format/dprint": ["warn", {
                 language: "typescript",
-                languageOptions: {
-                    lineWidth: 120,
-                    indentWidth: 1,
-                    useTabs: true,
-                    quoteProps: "asNeeded",
-                    quoteStyle: "preferDouble",
-                    "binaryExpression.operatorPosition": "sameLine",
-                    "parameters.spaceAround": false,
-                    "ifStatement.spaceAfterIfKeyword": false,
-                    "forStatement.spaceAfterForKeyword": false,
-                    "whileStatement.spaceAfterWhileKeyword": false,
-                    "switchStatement.spaceAfterSwitchKeyword": false,
-                    "spaceSurroundingProperties": false,
-                }
+                languageOptions: dprintConfig
             }],
             // Disable conflicting stylistic rules
             "@stylistic/keyword-spacing": "off",
