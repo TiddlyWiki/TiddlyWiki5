@@ -7,7 +7,7 @@ change-category: widget
 links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9403
 github-contributors: linonetwo
 
-The following widgets now support both legacy plain attributes and new preferred dollar-prefixed attributes，for consistency with the transclude widget:
+The following widgets now support both legacy plain attributes and new preferred dollar-prefixed attributes, for consistency with the transclude widget:
 
 * tiddler widget
 * reveal widget
