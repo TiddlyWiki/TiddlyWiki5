@@ -15,22 +15,22 @@ jobs:
     steps:
     # Step 1: Validate PR paths
     - name: Validate PR Paths
-      uses: TiddlyWiki/cerebrus@v5
+      uses: TiddlyWiki/cerebrus@v6
       with:
         pr_number: ${{ github.event.pull_request.number }}
         repo: ${{ github.repository }}
-        base_ref: ${{ github.base_ref }}
+        base_ref: ${{ github.event.pull_request.base.ref }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
         mode: rules
       continue-on-error: true
     
     # Step 2: Validate change notes
     - name: Validate Change Notes
-      uses: TiddlyWiki/cerebrus@v5
+      uses: TiddlyWiki/cerebrus@v6
       with:
         pr_number: ${{ github.event.pull_request.number }}
         repo: ${{ github.repository }}
-        base_ref: ${{ github.base_ref }}
+        base_ref: ${{ github.event.pull_request.base.ref }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
         mode: changenotes
       continue-on-error: false
