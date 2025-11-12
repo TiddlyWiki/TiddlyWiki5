@@ -39,7 +39,8 @@ export default defineConfig([{
         "plugins/tiddlywiki/*/files/",
         "eslint.config.mjs",
         "playwright.config.js",
-        "**/output/**"
+        "**/output/**",
+        "**/*.min.js"
     ],
 
 },
