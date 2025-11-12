@@ -199,14 +199,16 @@ function createSlashMenuPlugin(menuElements, options) {
 				if(!state) return false;
 				const slashCase = getCase(state, event, view);
 				switch(slashCase) {
-					case "OpenMenu":
+					case "OpenMenu": {
 						dispatchWithMeta(view, { type: SlashMetaTypes.open });
 						return true;
-					case "CloseMenu":
+					}
+					case "CloseMenu": {
 						if(!state.open) return false;
 						dispatchWithMeta(view, { type: SlashMetaTypes.close });
 						return true;
-					case "Execute":
+					}
+					case "Execute": {
 						const menuElement = getElementById(state.selected, state);
 						if(!menuElement) return false;
 						if(menuElement.type === "command") {
@@ -214,27 +216,33 @@ function createSlashMenuPlugin(menuElements, options) {
 							dispatchWithMeta(view, { type: SlashMetaTypes.execute });
 						}
 						return true;
-					case "NextItem":
+					}
+					case "NextItem": {
 						dispatchWithMeta(view, { type: SlashMetaTypes.nextItem });
 						return true;
-					case "PrevItem":
+					}
+					case "PrevItem": {
 						dispatchWithMeta(view, { type: SlashMetaTypes.prevItem });
 						return true;
-					case "addChar":
+					}
+					case "addChar": {
 						dispatchWithMeta(view, {
 							type: SlashMetaTypes.inputChange,
 							filter: state.filter + event.key
 						});
 						return true;
-					case "removeChar":
+					}
+					case "removeChar": {
 						const newFilter = state.filter.length === 1 ? "" : state.filter.slice(0, -1);
 						dispatchWithMeta(view, {
 							type: SlashMetaTypes.inputChange,
 							filter: newFilter
 						});
 						return true;
-					case "Catch":
+					}
+					case "Catch": {
 						return true;
+					}
 					case "Ignore":
 					default:
 						return false;
@@ -290,15 +298,13 @@ function createSlashMenuPlugin(menuElements, options) {
 			}
 		},
 		state: {
-			init: () => {
-				return initialState;
-			},
+			init: () => initialState,
 			apply: (tr, state) => {
 				const meta = tr.getMeta(SlashMenuKey);
 				if(!meta) return state;
 				let newState;
 				switch(meta.type) {
-					case SlashMetaTypes.open:
+					case SlashMetaTypes.open: {
 						newState = {};
 						for(const key in initialState) {
 							if(initialState.hasOwnProperty(key)) {
@@ -307,11 +313,14 @@ function createSlashMenuPlugin(menuElements, options) {
 						}
 						newState.open = true;
 						return newState;
-					case SlashMetaTypes.close:
+					}
+					case SlashMetaTypes.close: {
 						return initialState;
-					case SlashMetaTypes.execute:
+					}
+					case SlashMetaTypes.execute: {
 						return initialState;
-					case SlashMetaTypes.nextItem:
+					}
+					case SlashMetaTypes.nextItem: {
 						const nextId = getNextItemId(state);
 						if(!nextId) return state;
 						newState = {};
@@ -322,7 +331,8 @@ function createSlashMenuPlugin(menuElements, options) {
 						}
 						newState.selected = nextId;
 						return newState;
-					case SlashMetaTypes.prevItem:
+					}
+					case SlashMetaTypes.prevItem: {
 						const prevId = getPreviousItemId(state);
 						if(!prevId) return state;
 						newState = {};
@@ -333,7 +343,8 @@ function createSlashMenuPlugin(menuElements, options) {
 						}
 						newState.selected = prevId;
 						return newState;
-					case SlashMetaTypes.inputChange:
+					}
+					case SlashMetaTypes.inputChange: {
 						const newElements = meta.filter ? getFilteredItems(state, meta.filter) : flattenMenuElementsWithGroup(initialState.elements);
 						const selectedId = newElements[0] ? newElements[0].id : state.selected;
 						newState = {};
@@ -346,6 +357,7 @@ function createSlashMenuPlugin(menuElements, options) {
 						newState.filteredElements = newElements;
 						newState.filter = meta.filter || "";
 						return newState;
+					}
 					default:
 						return state;
 				}

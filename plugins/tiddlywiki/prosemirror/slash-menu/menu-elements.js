@@ -10,7 +10,7 @@ Exports functions to get all menu elements for SlashMenu (default + snippets)
 
 function getSnippetMenuElements(wiki) {
 	return wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]]")
-		.map((title) => {
+		.map(title => {
 			const tiddler = wiki.getTiddler(title);
 			if(!tiddler) {
 				return null;
@@ -25,7 +25,7 @@ function getSnippetMenuElements(wiki) {
 				label: label,
 				type: "command",
 				available: () => true,
-				command: (view) => {
+				command: view => {
 					const selection = view.state.selection;
 					const tr = view.state.tr.insertText(snippetText, selection.from, selection.to);
 					view.dispatch(tr);
@@ -41,19 +41,17 @@ function getBlockTypeMenuElements(schema) {
 		{ id: "blockquote", label: "Turn into quote", node: schema.nodes.blockquote },
 		{ id: "paragraph", label: "Turn into paragraph", node: schema.nodes.paragraph }
 	];
-	const blockTypeCommands = blockTypes.map((item) => {
-		return {
+	const blockTypeCommands = blockTypes.map(item => ({
 			id: item.id,
 			label: item.label,
 			type: "command",
 			available: () => true,
-			command: (view) => {
+			command: view => {
 				const tr = view.state.tr.setBlockType(view.state.selection.from, view.state.selection.to, item.node);
 				view.dispatch(tr);
 				return true;
 			}
-		};
-	});
+		}));
 	return [{
 		id: "blocktype-submenu",
 		label: "Block Type",
@@ -65,7 +63,7 @@ function getBlockTypeMenuElements(schema) {
 
 function flattenMenuElementsWithGroup(elements) {
 	let result = [];
-	elements.forEach((item) => {
+	elements.forEach(item => {
 		if(item.type === "submenu" && Array.isArray(item.elements)) {
 			// Insert group title before submenu items
 			result.push({
@@ -82,9 +80,7 @@ function flattenMenuElementsWithGroup(elements) {
 	return result;
 }
 
-exports.getAllMenuElements = (wiki, schema) => {
-	return getSnippetMenuElements(wiki)
+exports.getAllMenuElements = (wiki, schema) => getSnippetMenuElements(wiki)
 		.concat(getBlockTypeMenuElements(schema))
-		.filter((item) => !!item);
-};
+		.filter(item => !!item);
 exports.flattenMenuElementsWithGroup = flattenMenuElementsWithGroup;
