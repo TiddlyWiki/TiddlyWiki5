@@ -10,20 +10,24 @@ Exports functions to get all menu elements for SlashMenu (default + snippets)
 
 function getSnippetMenuElements(wiki) {
 	return wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]]")
-		.map(function(title) {
-			var tiddler = wiki.getTiddler(title);
-			if(!tiddler) return null;
-			var label = tiddler.fields.caption || title;
-			var snippetText = tiddler.fields.text;
-			if(!snippetText) return null;
+		.map((title) => {
+			const tiddler = wiki.getTiddler(title);
+			if(!tiddler) {
+				return null;
+			}
+			const label = tiddler.fields.caption || title;
+			const snippetText = tiddler.fields.text;
+			if(!snippetText) {
+				return null;
+			}
 			return {
 				id: "snippet-" + title,
 				label: label,
 				type: "command",
-				available: function() { return true; },
-				command: function(view) {
-					var selection = view.state.selection;
-					var tr = view.state.tr.insertText(snippetText, selection.from, selection.to);
+				available: () => true,
+				command: (view) => {
+					const selection = view.state.selection;
+					const tr = view.state.tr.insertText(snippetText, selection.from, selection.to);
 					view.dispatch(tr);
 					return true;
 				}
@@ -32,19 +36,19 @@ function getSnippetMenuElements(wiki) {
 }
 
 function getBlockTypeMenuElements(schema) {
-	var blockTypes = [
+	const blockTypes = [
 		{ id: "codeblock", label: "Turn into codeblock", node: schema.nodes.code_block },
 		{ id: "blockquote", label: "Turn into quote", node: schema.nodes.blockquote },
 		{ id: "paragraph", label: "Turn into paragraph", node: schema.nodes.paragraph }
 	];
-	var blockTypeCommands = blockTypes.map(function(item) {
+	const blockTypeCommands = blockTypes.map((item) => {
 		return {
 			id: item.id,
 			label: item.label,
 			type: "command",
-			available: function() { return true; },
-			command: function(view) {
-				var tr = view.state.tr.setBlockType(view.state.selection.from, view.state.selection.to, item.node);
+			available: () => true,
+			command: (view) => {
+				const tr = view.state.tr.setBlockType(view.state.selection.from, view.state.selection.to, item.node);
 				view.dispatch(tr);
 				return true;
 			}
@@ -54,21 +58,21 @@ function getBlockTypeMenuElements(schema) {
 		id: "blocktype-submenu",
 		label: "Block Type",
 		type: "submenu",
-		available: function() { return true; },
+		available: () => true,
 		elements: blockTypeCommands
 	}];
 }
 
 function flattenMenuElementsWithGroup(elements) {
-	var result = [];
-	elements.forEach(function(item) {
+	let result = [];
+	elements.forEach((item) => {
 		if(item.type === "submenu" && Array.isArray(item.elements)) {
 			// Insert group title before submenu items
 			result.push({
 				id: "group-" + item.id,
 				label: item.label,
 				type: "group",
-				available: function() { return true; }
+				available: () => true
 			});
 			result = result.concat(flattenMenuElementsWithGroup(item.elements));
 		} else {
@@ -78,9 +82,9 @@ function flattenMenuElementsWithGroup(elements) {
 	return result;
 }
 
-exports.getAllMenuElements = function(wiki, schema) {
+exports.getAllMenuElements = (wiki, schema) => {
 	return getSnippetMenuElements(wiki)
 		.concat(getBlockTypeMenuElements(schema))
-		.filter(function(item) { return !!item; });
+		.filter((item) => !!item);
 };
 exports.flattenMenuElementsWithGroup = flattenMenuElementsWithGroup;
