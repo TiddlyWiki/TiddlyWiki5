@@ -330,7 +330,10 @@ js.configs.recommended,
         rules: {
             "format/dprint": ["warn", {
                 language: "typescript",
-                languageOptions: dprintConfig
+                languageOptions: dprintConfig.typescript,
+                lineWidth: dprintConfig.lineWidth,
+                indentWidth: dprintConfig.indentWidth,
+                useTabs: dprintConfig.useTabs,
             }],
             // Disable conflicting stylistic rules
             "@stylistic/keyword-spacing": "off",

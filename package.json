@@ -24,12 +24,12 @@
     "wiki"
   ],
   "devDependencies": {
-    "@dprint/typescript": "0.91.6",
-    "@eslint/js": "9.36.0",
-    "@stylistic/eslint-plugin": "5.4.0",
-    "dprint": "^0.49.1",
-    "eslint": "9.36.0",
-    "eslint-plugin-es-x": "9.1.0",
+    "@dprint/typescript": "0.93.4",
+    "@eslint/js": "9.39.1",
+    "@stylistic/eslint-plugin": "5.5.0",
+    "dprint": "0.50.2",
+    "eslint": "9.39.1",
+    "eslint-plugin-es-x": "9.1.2",
     "eslint-plugin-format": "1.0.2",
     "globals": "16.4.0"
   },
