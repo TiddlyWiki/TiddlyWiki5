@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#7744
+description: Support block-level linking with block identifiers
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/7744
+github-contributors: linonetwo
+
+Add `^blockid` syntax for block-level identifiers. Apart from allowing user to link to a block mark `[[link text|tiddler title^blockid]]`. The syntax allowing plugin developers to create new deep reference features.
