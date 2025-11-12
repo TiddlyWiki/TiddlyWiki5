@@ -4,7 +4,7 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: widget
-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9403
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9403
 github-contributors: linonetwo
 
 The following widgets now support both legacy plain attributes and new preferred dollar-prefixed attributes, for consistency with the transclude widget:
