@@ -3,7 +3,7 @@ description: Add server-side POST API routes for filter and action execution
 release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
-change-category: server
+change-category: nodejs
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9398
 github-contributors: linonetwo
 
