@@ -26,7 +26,7 @@ function codeBlockRule(nodeType) {
 }
 
 function headingRule(nodeType, maxLevel) {
-	return textblockTypeInputRule(new RegExp("^(\\!{1," + maxLevel + "}|\！{1," + maxLevel + "})\\s$"), nodeType, (match) => ({ level: match[1].length }));
+	return textblockTypeInputRule(new RegExp("^(\\!{1," + maxLevel + "}|\！{1," + maxLevel + "})\\s$"), nodeType, match => ({ level: match[1].length }));
 }
 
 function buildInputRules(schema) {

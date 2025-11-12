@@ -24,7 +24,7 @@ function buildHeading(context, node, level) {
 
 function buildUnorderedList(context, node) {
 	// Prosemirror requires split all lists into separate lists with single items
-	return node.children.map((item) => {
+	return node.children.map(item => {
 		const newContext = {};
 		for(const key in context) {
 			if(context.hasOwnProperty(key)) {
@@ -47,7 +47,7 @@ function buildUnorderedList(context, node) {
 }
 
 function buildOrderedList(context, node) {
-	return node.children.map((item) => {
+	return node.children.map(item => {
 		const newContext = {};
 		for(const key in context) {
 			if(context.hasOwnProperty(key)) {
@@ -92,7 +92,7 @@ function wrapTextNodesInParagraphs(context, nodes) {
 		}
 	};
 
-	nodes.forEach((node) => {
+	nodes.forEach(node => {
 		// If it's a text node, collect it
 		if(node.type === "text") {
 			currentTextNodes.push(node);
@@ -125,7 +125,7 @@ function buildListItem(context, node) {
 
 function buildTextWithMark(context, node, markType) {
 	const content = convertNodes(context, node.children);
-	return content.map((childNode) => {
+	return content.map(childNode => {
 		if(childNode.type === "text") {
 			// Add the mark to the text node
 			const marks = childNode.marks || [];

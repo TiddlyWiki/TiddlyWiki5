@@ -26,7 +26,7 @@ function SlashMenuUI(view, options) {
 
 	// Listen for keydown events to track navigation method
 	const self = this;
-	document.addEventListener("keydown", (e) => {
+	document.addEventListener("keydown", e => {
 		if(self.isVisible && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
 			self.lastNavByKey = true;
 		} else if(self.isVisible) {

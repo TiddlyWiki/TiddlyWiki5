@@ -44,7 +44,7 @@ function insertImageItem(nodeType) {
 	return new MenuItem({
 		title: "Insert image",
 		label: "Image",
-		enable: (state) => canInsert(state, nodeType),
+		enable: state => canInsert(state, nodeType),
 		run: (state, _, view) => {
 			const from = state.selection.from, to = state.selection.to;
 			let attrs = null;
@@ -58,7 +58,7 @@ function insertImageItem(nodeType) {
 					title: new TextField({label: "Title", value: attrs && attrs.title}),
 					alt: new TextField({label: "Description", value: attrs ? attrs.alt : state.doc.textBetween(from, to, " ")})
 				},
-				callback: (attrs) => {
+				callback: attrs => {
 					view.dispatch(view.state.tr.replaceSelectionWith(nodeType.createAndFill(attrs)));
 					view.focus();
 				}
@@ -76,7 +76,7 @@ function cmdItem(cmd, options) {
 		passedOptions[prop] = options[prop];
 	}
 	if(!options.enable && !options.select) {
-		passedOptions[options.enable ? "enable" : "select"] = (state) => cmd(state);
+		passedOptions[options.enable ? "enable" : "select"] = state => cmd(state);
 	}
 
 	return new MenuItem(passedOptions);
@@ -93,7 +93,7 @@ function markActive(state, type) {
 
 function markItem(markType, options) {
 	const passedOptions = {
-		active: (state) => markActive(state, markType)
+		active: state => markActive(state, markType)
 	};
 	for(const prop in options) {
 		passedOptions[prop] = options[prop];
@@ -105,8 +105,8 @@ function linkItem(markType) {
 	return new MenuItem({
 		title: "Add or remove link",
 		icon: icons.link,
-		active: (state) => markActive(state, markType),
-		enable: (state) => !state.selection.empty,
+		active: state => markActive(state, markType),
+		enable: state => !state.selection.empty,
 		run: (state, dispatch, view) => {
 			if(markActive(state, markType)) {
 				toggleMark(markType)(state, dispatch);
@@ -118,7 +118,7 @@ function linkItem(markType) {
 					href: new TextField({label: "Link target", required: true}),
 					title: new TextField({label: "Title"})
 				},
-				callback: (attrs) => {
+				callback: attrs => {
 					toggleMark(markType, attrs)(view.state, view.dispatch);
 					view.focus();
 				}
@@ -188,14 +188,14 @@ function buildMenuItems(schema) {
 		r.insertHorizontalRule = new MenuItem({
 			title: "Insert horizontal rule",
 			label: "Horizontal rule",
-			enable: (state) => canInsert(state, hr),
+			enable: state => canInsert(state, hr),
 			run: (state, dispatch) => {
 				dispatch(state.tr.replaceSelectionWith(hr.create()));
 			}
 		});
 	}
 
-	const cut = (arr) => arr.filter((x) => x);
+	const cut = arr => arr.filter(x => x);
 	r.insertMenu = new Dropdown(cut([r.insertImage, r.insertHorizontalRule]), {label: "Insert"});
 	r.typeMenu = new Dropdown(cut([r.makeParagraph, r.makeCodeBlock, r.makeHead1 && new DropdownSubmenu(cut([
 		r.makeHead1, r.makeHead2, r.makeHead3, r.makeHead4, r.makeHead5, r.makeHead6
