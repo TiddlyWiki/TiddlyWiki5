@@ -5,6 +5,7 @@ import js from "@eslint/js";
 import eslint from "eslint";
 import stylistic from "@stylistic/eslint-plugin";
 import esx from "eslint-plugin-es-x";
+import format from "eslint-plugin-format";
 
 /** @type {import("eslint").Linter.Config} */
 const es2017rules = {
@@ -12,7 +13,8 @@ const es2017rules = {
     plugins: esx.configs["flat/restrict-to-es2017"].plugins,
     //@ts-ignore
     rules: esx.configs["flat/restrict-to-es2017"].rules,
-    ignores: ["bin/**/*", "core-server/**/*"],
+    files: ["**/*.js", "**/*.mjs"],
+    ignores: ["bin/**/*", "core-server/**/*", "tiddlywiki.js"],
 };
 /** @type {import("eslint").Linter.Config} */
 const es2023rules = {
@@ -20,7 +22,7 @@ const es2023rules = {
     plugins: esx.configs["flat/restrict-to-es2023"].plugins,
     //@ts-ignore
     rules: esx.configs["flat/restrict-to-es2023"].rules,
-    files: ["bin/**/*", "core-server/**/*"],
+    files: ["bin/**/*", "core-server/**/*", "tiddlywiki.js"],
 };
 
 
@@ -49,7 +51,8 @@ js.configs.recommended,
     },
 
     plugins: {
-        "@stylistic": stylistic
+        "@stylistic": stylistic,
+        "format": format
     },
 
     rules: {
@@ -308,5 +311,31 @@ js.configs.recommended,
 
 },
     es2017rules,
-    es2023rules
+    es2023rules,
+    // DPrint formatting for JavaScript files
+    {
+        files: ["**/*.js", "**/*.mjs"],
+        plugins: { format },
+        rules: {
+            "format/dprint": ["warn", {
+                language: "typescript",
+                languageOptions: {
+                    lineWidth: 120,
+                    indentWidth: 1,
+                    useTabs: true,
+                    quoteProps: "asNeeded",
+                    quoteStyle: "preferDouble",
+                    "binaryExpression.operatorPosition": "sameLine",
+                    "parameters.spaceAround": false,
+                    "ifStatement.spaceAfterIfKeyword": false,
+                    "forStatement.spaceAfterForKeyword": false,
+                    "whileStatement.spaceAfterWhileKeyword": false,
+                    "switchStatement.spaceAfterSwitchKeyword": false,
+                    "spaceSurroundingProperties": false,
+                }
+            }],
+            // Disable conflicting stylistic rules
+            "@stylistic/keyword-spacing": "off",
+        }
+    }
 ]);
