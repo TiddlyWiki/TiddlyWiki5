@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9075
+description: Add PUT endpoint for file uploads
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: nodejs
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9075
+github-contributors: linonetwo
+
+A new WebServer API endpoint PUT `/files/<pathname>` that supports streaming uploads for large files.
