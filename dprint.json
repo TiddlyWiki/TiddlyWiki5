@@ -30,29 +30,8 @@
 		"whileStatement.useBraces": "preferNone"
 	},
 	"json": {},
-	"markdown": {
-		"lineWidth": 120
-	},
-	"includes": [
-		"**/*.{js,mjs,cjs,ts,jsx,tsx,json,md}"
-	],
-	"excludes": [
-		"**/node_modules",
-		"**/*-lock.json",
-		"**/package-lock.json",
-		"**/pnpm-lock.yaml",
-		"**/output",
-		"boot/sjcl.js",
-		"core/modules/utils/base64-utf8/base64-utf8.module.js",
-		"core/modules/utils/base64-utf8/base64-utf8.module.min.js",
-		"core/modules/utils/diff-match-patch/diff_match_patch.js",
-		"core/modules/utils/diff-match-patch/diff_match_patch_uncompressed.js",
-		"core/modules/utils/dom/csscolorparser.js",
-		"plugins/tiddlywiki/*/files/"
-	],
 	"plugins": [
 		"https://plugins.dprint.dev/typescript-0.95.0.wasm",
-		"https://plugins.dprint.dev/json-0.19.4.wasm",
-		"https://plugins.dprint.dev/markdown-0.17.8.wasm"
+		"https://plugins.dprint.dev/json-0.19.4.wasm"
 	]
 }
