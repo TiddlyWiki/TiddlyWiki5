@@ -4,7 +4,7 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: feature
 change-category: nodejs
-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9405
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9405
 github-contributors: linonetwo
 
 HTTP/2 support with TLS and HTTP/2 Cleartext (h2c) for trusted networks. Enables connection multiplexing for better performance. HTTP/2 is enabled by default when TLS certificates are available, with graceful fallback to HTTP/1.1.
