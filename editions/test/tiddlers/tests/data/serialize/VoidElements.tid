@@ -1,0 +1,11 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/VoidElements
+type: text/vnd.tiddlywiki
+
+This tests void elements like <br/> and <hr/>.
+
+Line one<br/>Line two
+
+<hr/>
+
+Images are also void: <img src="test.png"/>
