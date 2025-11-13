@@ -16,9 +16,8 @@ exports.serialize = function(tree,serialize) {
 	// Children
 	var children = tree.children ? serialize(tree.children) : "";
 	var result = "";
-	// Check if it's a void element (elements that should not have closing tags)
 	var isVoidElement = $tw.config.htmlVoidElements.indexOf(tag) !== -1;
-	// Self-closing tag or void element
+	// Self-closing tag or void element (elements that should not have closing tags)
 	if(tree.isSelfClosing || isVoidElement) {
 			result += "<" + tag + (attributes ? " " + attributes : "") + "/>";
 	} else {
