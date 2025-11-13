@@ -11,6 +11,7 @@ categories/hackability/caption: Hackability
 categories/nodejs/caption: Node.js
 categories/performance/caption: Performance
 categories/developer/caption: Developer
+categories/filters/caption: Filters
 change-types/bugfix/caption: Bugfix
 change-types/bugfix/colour: #ffe246
 change-types/feature/caption: Feature

@@ -110,7 +110,7 @@ KeyboardWidget.prototype.execute = function() {
 KeyboardWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-keyboard");
-	this.domNode.className = classes.join(" ");
+	this.domNode.className = classes.join(" ").trim();
 };
 
 /*
