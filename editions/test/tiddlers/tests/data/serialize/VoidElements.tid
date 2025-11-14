@@ -5,6 +5,7 @@ type: text/vnd.tiddlywiki
 This tests void elements like <br/> and <br> (without `/`).
 
 Line one<br>Line two
+Line three<br/>Line four
 
 <hr>
 
