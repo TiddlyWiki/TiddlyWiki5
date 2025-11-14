@@ -17,9 +17,12 @@ exports.serialize = function(tree,serialize) {
 	var children = tree.children ? serialize(tree.children) : "";
 	var result = "";
 	var isVoidElement = $tw.config.htmlVoidElements.indexOf(tag) !== -1;
-	// Self-closing tag or void element (elements that should not have closing tags)
-	if(tree.isSelfClosing || isVoidElement) {
-			result += "<" + tag + (attributes ? " " + attributes : "") + "/>";
+	// Self-closing tag
+	if(tree.isSelfClosing) {
+		result += "<" + tag + (attributes ? " " + attributes : "") + "/>";
+	} else if(isVoidElement) {
+		// Void element without self-closing slash (e.g., <br> instead of <br/>)
+		result += "<" + tag + (attributes ? " " + attributes : "") + ">";
 	} else {
 		// Opening and closing tags
 		result += "<" + tag + (attributes ? " " + attributes : "") + ">" + children + "</" + tag + ">";
