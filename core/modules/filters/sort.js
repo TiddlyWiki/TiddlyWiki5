@@ -14,7 +14,6 @@ Export our filter function
 */
 exports.sort = function(source,operator,options) {
 	var results = prepare_results(source);
-	// TODO: Validate language code
 	options.wiki.sortTiddlers(results,operator.operands[0] || "title",operator.prefix === "!",false,false,undefined,operator.operands[1]);
 	return results;
 };
