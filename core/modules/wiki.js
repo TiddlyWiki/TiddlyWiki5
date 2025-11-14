@@ -374,27 +374,12 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 	locale = $tw.utils.checkLanguageCode(locale) ? locale : undefined;
 	if(sortField === "title") {
 		if(!isNumeric && !isAlphaNumeric) {
-			if(isCaseSensitive) {
-				if(isDescending) {
-					titles.sort(function(a,b) {
-						return b.localeCompare(a, locale);
-					});
-				} else {
-					titles.sort(function(a,b) {
-						return a.localeCompare(b, locale);
-					});
-				}	
+			const sorter = new Intl.Collator(locale, { sensitivity: isCaseSensitive ? "variant" : "accent" });
+			if(isDescending) {
+				titles.sort((a,b) => sorter.compare(b, a));
 			} else {
-				if(isDescending) {
-					titles.sort(function(a,b) {
-						return b.toLowerCase().localeCompare(a.toLowerCase(), locale);
-					});
-				} else {
-					titles.sort(function(a,b) {
-						return a.toLowerCase().localeCompare(b.toLowerCase(), locale);
-					});
-				}	
-			}
+				titles.sort((a,b) => sorter.compare(a, b));
+			}	
 		} else {
 			titles.sort(function(a,b) {
 				var x,y;
@@ -415,14 +400,8 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 						}
 					}
 				}
-				if(isAlphaNumeric) {
-					return isDescending ? b.localeCompare(a,locale,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,locale,{numeric: true,sensitivity: "base"});
-				}
-				if(!isCaseSensitive) {
-					a = a.toLowerCase();
-					b = b.toLowerCase();
-				}
-				return isDescending ? b.localeCompare(a, locale) : a.localeCompare(b, locale);
+				const sorter = new Intl.Collator(locale, { numeric: isAlphaNumeric, sensitivity: isAlphaNumeric ? "base" : isCaseSensitive ? "variant" :  "accent" });
+				return isDescending ? sorter.compare(b, a) : sorter.compare(a, b);
 			});
 		}
 	} else {
@@ -464,14 +443,8 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			}
 			a = String(a);
 			b = String(b);
-			if(isAlphaNumeric) {
-				return isDescending ? b.localeCompare(a,locale,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,locale,{numeric: true,sensitivity: "base"});
-			}
-			if(!isCaseSensitive) {
-				a = a.toLowerCase();
-				b = b.toLowerCase();
-			}
-			return isDescending ? b.localeCompare(a, locale) : a.localeCompare(b, locale);
+			const sorter = new Intl.Collator(locale, { numeric: isAlphaNumeric, sensitivity: isAlphaNumeric ? "base" : isCaseSensitive ? "variant" :  "accent" });
+			return isDescending ? sorter.compare(b, a) : sorter.compare(a, b);
 		});
 	}
 };
