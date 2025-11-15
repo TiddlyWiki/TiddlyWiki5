@@ -2,7 +2,7 @@ title: $:/changenotes/5.4.0/#9253
 description: Switch to native support for converting utf-8 between base64
 release: 5.4.0
 tags: $:/tags/ChangeNote
-change-type: deprecation
+change-type: performance
 change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9253
 github-contributors: Leilei332
