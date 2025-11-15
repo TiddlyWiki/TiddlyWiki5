@@ -18,6 +18,8 @@ The body should be a JSON object with the following properties:
 
 At least one of ''tag'' or ''title'' must be provided as a non-empty string. If both are provided, ''title'' takes precedence and ''tag'' is ignored.
 
+Variables can also be passed as URL query parameters. URL parameters take precedence over variables in the request body.
+
 Headers:
 
 * ''Content-Type'' - must be set to `application/json`
@@ -58,6 +60,23 @@ Example 3 - Title takes precedence when both provided:
 ```
 
 ''Note'': This is useful for testing individual actions from a tag group.
+
+Example 4 - Variables via URL parameters (take precedence):
+
+```
+POST /recipes/default/actions?currentTiddler=MyTiddler&status=done
+```
+
+```json
+{
+	"title": "$:/core/ui/Actions/new-tiddler",
+	"variables": {
+		"currentTiddler": "OtherTiddler"
+	}
+}
+```
+
+In this example, `currentTiddler` will be `"MyTiddler"` from the URL parameter, not `"OtherTiddler"` from the body.
 
 Response:
 

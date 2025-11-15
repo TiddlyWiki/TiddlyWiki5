@@ -16,6 +16,8 @@ The body should be a JSON object with the following properties:
 * ''variables'' - (optional) object containing variable name-value pairs to set in the execution context
 * ''source'' - (optional) array of tiddler titles to use as the source (if omitted, uses all tiddlers)
 
+Variables can also be passed as URL query parameters. URL parameters take precedence over variables in the request body.
+
 Headers:
 
 * ''Content-Type'' - must be set to `application/json`
@@ -53,6 +55,23 @@ Example 3 - Filter with custom source:
 	"source": ["Tiddler1", "Tiddler2", "Tiddler3"]
 }
 ```
+
+Example 4 - Variables via URL parameters (take precedence):
+
+```
+POST /recipes/default/filter?currentTiddler=MyTiddler&myTag=Journal
+```
+
+```json
+{
+	"filter": "[tag<myTag>sort[title]]",
+	"variables": {
+		"myTag": "OtherTag"
+	}
+}
+```
+
+In this example, `myTag` will be `"Journal"` from the URL parameter, not `"OtherTag"` from the body.
 
 Response:
 

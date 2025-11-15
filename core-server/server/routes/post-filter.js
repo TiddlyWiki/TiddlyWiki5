@@ -2,23 +2,9 @@
 title: $:/core/modules/server/routes/post-filter.js
 type: application/javascript
 module-type: route
+
 POST /recipes/default/filter
-Execute a filter expression with optional variable context
-Request body should be a JSON object with the following properties:
-- filter: string containing the filter expression to execute
-- variables: optional object containing variable name-value pairs to set in the execution context
-- source: optional array of tiddler titles to use as the source (if omitted, uses all tiddlers)
-Example:
-POST /recipes/default/filter
-{
-	"filter": "[tag<myTag>sort[title]]",
-	"variables": {
-		"currentTiddler": "MyTiddler",
-		"myTag": "Journal"
-	},
-	"source": ["Tiddler1", "Tiddler2"]
-}
-Response will be a JSON array of tiddler titles that match the filter.
+
 \*/
 "use strict";
 exports.methods = ["POST"];
@@ -52,16 +38,15 @@ exports.handler = function(request,response,state) {
 		}
 	}
 	try {
-		// Create a fake widget with the provided variables, then render the widget (required for proper initialization)
-		var parser = state.wiki.parseText("text/vnd.tiddlywiki", "", {
-			document: $tw.fakeDocument
-		});
-		var widgetNode = state.wiki.makeWidget(parser, {
-			document: $tw.fakeDocument,
-			variables: data.variables || {}
-		});
-		var container = $tw.fakeDocument.createElement("div");
-		widgetNode.render(container, null);
+		// Merge variables: URL parameters take precedence over request body
+		var variables = $tw.utils.extend({}, data.variables || {});
+		for(var key in state.queryParameters) {
+			variables[key] = state.queryParameters[key];
+		}
+		
+		// Create a fake widget with the provided variables
+		var fakeWidget = $tw.rootWidget.makeFakeWidgetWithVariables(variables);
+		
 		// Create source iterator if source titles are provided
 		var source = undefined;
 		var sourceTitles = data.source;
@@ -69,7 +54,7 @@ exports.handler = function(request,response,state) {
 			source = state.wiki.makeTiddlerIterator(sourceTitles);
 		}
 
-		var results = state.wiki.filterTiddlers(data.filter, widgetNode, source);
+		var results = state.wiki.filterTiddlers(data.filter, fakeWidget, source);
 		state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify({
 			results: results
 		}),"utf8");

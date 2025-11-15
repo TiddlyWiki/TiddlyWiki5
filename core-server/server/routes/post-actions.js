@@ -5,34 +5,6 @@ module-type: route
 
 POST /recipes/default/actions
 
-Execute action tiddlers on the server side
-
-Request body should be a JSON object with the following properties:
-- tag: (optional) tag name to execute all action tiddlers with this tag
-- title: (optional) title of a specific action tiddler to execute
-- variables: (optional) object containing variable name-value pairs to set in the execution context
-
-If both 'tag' and 'title' are provided, 'title' takes precedence.
-At least one of 'tag' or 'title' must be a non-empty string.
-
-Example 1 - Execute by tag:
-POST /recipes/default/actions
-{
-	"tag": "$:/tags/Actions",
-	"variables": {
-		"currentTiddler": "MyTiddler"
-	}
-}
-
-Example 2 - Execute by title (takes precedence if both provided):
-POST /recipes/default/actions
-{
-	"title": "$:/core/ui/Actions/new-tiddler",
-	"variables": {
-		"currentTiddler": "MyTiddler"
-	}
-}
-
 \*/
 "use strict";
 
@@ -68,9 +40,16 @@ exports.handler = function(request,response,state) {
 		return;
 	}
 	
+	// Merge variables: URL parameters take precedence over request body
+	var variables = $tw.utils.extend({}, data.variables || {});
+	for(var key in state.queryParameters) {
+		variables[key] = state.queryParameters[key];
+	}
+	
 	// Create a root widget to execute actions
 	var widgetNode = state.wiki.makeWidget(null, {
-		document: $tw.fakeDocument
+		document: $tw.fakeDocument,
+		variables: variables
 	});
 	
 	// Title takes precedence if provided
@@ -82,11 +61,11 @@ exports.handler = function(request,response,state) {
 			}),"utf8");
 			return;
 		}
-		widgetNode.invokeActionString(tiddlerText, widgetNode, null, data.variables || {});
+		widgetNode.invokeActionString(tiddlerText, widgetNode, null, variables);
 	}
 	// Otherwise use tag
 	else if(hasTag) {
-		widgetNode.invokeActionsByTag(data.tag, null, data.variables || {});
+		widgetNode.invokeActionsByTag(data.tag, null, variables);
 	}
 	
 	// Return success response
