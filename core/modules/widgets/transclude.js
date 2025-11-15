@@ -112,14 +112,8 @@ TranscludeWidget.prototype.execute = function() {
 Collect the attributes we need, in the process determining whether we're being used in legacy mode
 */
 TranscludeWidget.prototype.collectAttributes = function() {
-	var self = this;
-	// Detect legacy mode
-	this.legacyMode = true;
-	$tw.utils.each(this.attributes,function(value,name) {
-		if(name.charAt(0) === "$") {
-			self.legacyMode = false;
-		}
-	});
+	// Detect legacy mode: true if no attributes start with $
+	this.legacyMode = this.isLegacyMode();
 	// Get the attributes for the appropriate mode
 	if(this.legacyMode) {
 		this.transcludeTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
