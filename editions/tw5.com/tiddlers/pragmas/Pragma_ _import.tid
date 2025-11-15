@@ -1,17 +1,35 @@
 created: 20220917113054582
-modified: 20230419103154329
+modified: 20251106191143110
 tags: Pragmas
 title: Pragma: \import
 type: text/vnd.tiddlywiki
 
-The ''\import'' [[pragma|Pragmas]] is used to import definitions from other tiddlers that are identified with a filter. It is a shortcut syntax for the ImportVariablesWidget.
+<<.from-version "5.1.18">> The `\import` [[pragma|Pragmas]] is used to import macro, procedure, function, widget and variable definitions from other tiddlers that are identified by a [[Filter Expression]].
+
+It is a shortcut syntax for the ImportVariablesWidget.
 
 ```
 \import <filter>
 ```
 
-For example:
+<<.note "Imports can be cascaded, i.e. the imported tiddlers can themselves contain an `\import` pragma or an <<.wid importvariables>> widget.">>
+
+!! Redefining Imported Definitions
+
+You can use the `\define`, `\procedure`, `\function` or `\widget` pragmas, the SetWidget or the LetWidget to redefine any imported definitions after they have been imported.
+
+! Example
+
+!! Global Macro Definitions
+
+The main page template [[$:/core/ui/PageTemplate]] uses the `\import` pragma to import all definitions that should be available globally via a <<.olink subfilter>> operator and a configuration tiddler: 
 
 ```
-\import [all[shadows+tiddlers]tag[$:/tags/Global]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 ```
+The core config tiddler [[$:/core/config/GlobalImportFilter]] defines this filter:
+
+<$codeblock code={{$:/core/config/GlobalImportFilter}} />
+
+<<.note "Tiddlers are imported in the order of the <<.attr filter>> output, with subsequently imported definitions possibly overwriting preceding ones if they use the same name.
+">>

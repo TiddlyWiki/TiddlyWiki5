@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9389
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: widget
+description: Enable recursive \import
+release: 5.4.0
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9389
+github-contributors: yaisog
+
+This allows to import tiddlers that themselves import other tiddlers. Contains checks to avoid importing the same tiddler multiple times.
