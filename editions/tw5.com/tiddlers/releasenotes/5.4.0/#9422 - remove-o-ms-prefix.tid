@@ -1,0 +1,5 @@
+title: $:/changenotes/5.4.0/#9422/impacts/remove-o-ms-prefix
+changenote: $:/changenotes/5.4.0/#9422
+tags: $:/tags/ImpactNote
+description: Styles and fullscreen may be broken when Tiddlywiki is running on Internet Explorer, legacy Edge and old pre-Webkit versions of Opera
+impact-type: compatibility-break

@@ -24,7 +24,6 @@
     "wiki"
   ],
   "devDependencies": {
-    "@eslint/compat": "1.4.0",
     "@eslint/js": "9.36.0",
     "eslint": "9.36.0",
     "eslint-plugin-es-x": "9.1.0",

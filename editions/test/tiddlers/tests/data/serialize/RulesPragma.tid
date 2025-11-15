@@ -1,0 +1,6 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/RulesPragma
+type: text/vnd.tiddlywiki
+
+\rules except ruleone ruletwo rulethree
+\rules only ruleone ruletwo rulethree

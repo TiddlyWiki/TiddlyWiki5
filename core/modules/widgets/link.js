@@ -147,6 +147,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			dragTiddlerFn: function() {return self.to;},
 			widget: this
 		});
+	} else if(this.draggable === "no") {
+		domNode.setAttribute("draggable","false");
 	}
 	// Assign data- attributes
 	this.assignAttributes(domNode,{

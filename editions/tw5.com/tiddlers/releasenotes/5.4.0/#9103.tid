@@ -1,0 +1,18 @@
+title: $:/changenotes/5.4.0/#9103
+description: Add support for commands and startups which return promises
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9103
+github-contributors: Arlen22
+
+This adds support for async functions to commands and startups. 
+
+In both `synchronous: true` and `synchronous: false` mode, if you return a promise (manually or by using the async keyword), it will wait for the promise to resolve, and then proceed using the resolved value as the return value of the function. 
+
+Importantly, in `synchronous: false` mode, returning a promise will not change the callback behavior. So you can safely use an async function and still call the callback to continue execution. 
+
+Previously, in `synchronous: true` mode, returning a promise would have just logged the promise to console and halted execution. Now the promise will be awaited, and if the value is truthy, it will be logged to console and halt execution. If the promise resolves to a falsy value, execution will continue. This is the main breaking change, but since logging an opaque promise to console is the most useless of all error messages, this is unlikely to seriously break anything in practice. Throwing anything, truthy or not, will still stop execution (in `synchronous: true` mode). 
+
+This also does not add any error handling code. Rejected promises should still be logged to console as unhandled rejections just as uncaught exceptions are currently. 
