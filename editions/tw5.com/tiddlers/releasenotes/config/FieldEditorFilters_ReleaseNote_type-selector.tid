@@ -1,0 +1,5 @@
+title: $:/config/FieldEditorFilters/ReleaseNote/type-selector
+list-before: $:/config/FieldEditorFilters/default
+tags: $:/tags/FieldEditorFilter
+
+[suffix[change-type]then[$:/config/EditTemplateFields/ReleaseNote/change-type]]
