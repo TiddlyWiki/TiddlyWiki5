@@ -93,6 +93,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	}
 	// Set an href
 	var wikilinkTransformFilter = this.getVariable("tv-filter-export-link"),
+		to = this.toBlockMark ? this.to + "-" + this.toBlockMark : this.to,
 		wikiLinkText;
 	if(wikilinkTransformFilter) {
 		// Use the filter to construct the href
@@ -103,8 +104,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		// Expand the tv-wikilink-template variable to construct the href
 		var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
 			wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$";
-		wikiLinkText = $tw.utils.replaceString(wikiLinkTemplate,"$uri_encoded$",$tw.utils.encodeURIComponentExtended(this.to));
-		wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$uri_doubleencoded$",$tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(this.to)));
+		wikiLinkText = $tw.utils.replaceString(wikiLinkTemplate,"$uri_encoded$",$tw.utils.encodeURIComponentExtended(to));
+		wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$uri_doubleencoded$",$tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(to)));
 	}
 	// Override with the value of tv-get-export-link if defined
 	wikiLinkText = this.getVariable("tv-get-export-link",{params: [{name: "to",value: this.to}],defaultValue: wikiLinkText});
@@ -167,6 +168,7 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 	this.dispatchEvent({
 		type: "tm-navigate",
 		navigateTo: this.to,
+		toBlockMark: this.toBlockMark,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
@@ -197,6 +199,7 @@ Compute the internal state of the widget
 LinkWidget.prototype.execute = function() {
 	// Pick up our attributes
 	this.to = this.getAttribute("to",this.getVariable("currentTiddler"));
+	this.toBlockMark = this.getAttribute("toBlockMark");
 	this.tooltip = this.getAttribute("tooltip");
 	this.role = this.getAttribute("role");
 	this.linkClasses = this.getAttribute("class");

@@ -46,7 +46,9 @@ Handle an event
 */
 PageScroller.prototype.handleEvent = function(event) {
 	if(event.type === "tm-scroll") {
-		var options = {};
+		var options = {
+			highlight: event.highlight,
+		};
 		if($tw.utils.hop(event.paramObject,"animationDuration")) {
 			options.animationDuration = event.paramObject.animationDuration;
 		}
@@ -62,14 +64,21 @@ PageScroller.prototype.handleEvent = function(event) {
 
 /*
 Handle a scroll event hitting the page document
+
+options:
+- animationDuration: total time of scroll animation
+- highlight: highlight the element after scrolling, to make it evident. Usually to focus an anchor in the middle of the tiddler.
 */
 PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	var self = this,
 		duration = $tw.utils.hop(options,"animationDuration") ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
+		highlight = options.highlight || false,
 		srcWindow = element ? element.ownerDocument.defaultView : window;
 	// Now get ready to scroll the body
 	this.cancelScroll(srcWindow);
 	this.startTime = Date.now();
+	// toggle class to allow trigger the highlight animation
+	$tw.utils.removeClass(element,"tc-focus-highlight");
 	// Get the height of any position:fixed toolbars
 	var toolbar = srcWindow.document.querySelector(".tc-adjust-top-of-scroll"),
 		offset = 0;
@@ -78,7 +87,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	}
 	// Get the client bounds of the element and adjust by the scroll position
 	var getBounds = function() {
-			var clientBounds = typeof callback === 'function' ? callback() : element.getBoundingClientRect(),
+			var clientBounds = typeof callback === "function" ? callback() : element.getBoundingClientRect(),
 				scrollPosition = $tw.utils.getScrollPosition(srcWindow);
 			return {
 				left: clientBounds.left + scrollPosition.x,
@@ -118,6 +127,12 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 			srcWindow.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
 			if(t < 1) {
 				self.idRequestFrame = self.requestAnimationFrame.call(srcWindow,drawFrame);
+			} else {
+				// the animation has ended.
+				if(highlight) {
+					element.focus({ focusVisible: true });
+					$tw.utils.addClass(element,"tc-focus-highlight");
+				}
 			}
 		};
 	drawFrame();
