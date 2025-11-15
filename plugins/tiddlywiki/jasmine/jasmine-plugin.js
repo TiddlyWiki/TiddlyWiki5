@@ -5,6 +5,24 @@ module-type: library
 
 The main module of the Jasmine test plugin for TiddlyWiki5
 
+Usage: To run only specific tests, use the --test command with a spec filter pattern.
+The specFilter parameter uses [search[pattern]] for substring matching on test titles.
+
+Examples:
+  - Run all tests (default):
+    npm test
+
+  - Run only server POST API tests:
+    node ./tiddlywiki.js ./editions/test --test spec="Server API Routes POST"
+  
+  - Run only GET route tests:
+    node ./tiddlywiki.js ./editions/test --test spec="Server GET API"
+
+  - Run only one specific test by name:
+    node ./tiddlywiki.js ./editions/test --test spec="should support URL parameter"
+
+The spec filter value is passed to [search[...]] which does substring matching on test titles.
+
 \*/
 
 
