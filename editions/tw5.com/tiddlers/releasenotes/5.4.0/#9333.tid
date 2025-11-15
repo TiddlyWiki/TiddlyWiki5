@@ -1,0 +1,48 @@
+title: $:/changenotes/5.4.0/#9333
+description: Intergrate Tiddlywiki palette colors and settings to custom CSS properties
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9333
+github-contributors: Leilei332
+
+Adds `--tpc-*` (for palettes colors) and `--tp-*` (for CSS settings) [[custom CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/--*]] to allow writing stylesheets with vanilla CSS, for example:
+
+```
+/* Old way to get a palette color, which requires using wikitext */
+.tag {
+	background: <<colour tag-background>>;
+}
+```
+
+```css
+/* New way to get a palette color without wikitext */
+.tag {
+	background: var(--tp-color-tag-background);
+}
+```
+
+```
+/* Old way to get and process CSS settings with wikitext and filters */
+\define sidebarbreakpoint-minus-one()
+<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
+\end
+
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+	.tc-tiddler-frame {
+		box-shadow: none;
+	}
+}
+```
+
+```css
+/* New way to get and process CSS settings with CSS functions */
+@media (max-width: calc(var(--tp-sidebar-breakpoint) - 1px)) {
+	.tc-tiddler-frame {
+		box-shadow: none;
+	}
+}
+```
+
+See [[Writing stylesheets in vanilla CSS]] and [[Core CSS Variables]] for details.
