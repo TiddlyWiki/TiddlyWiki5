@@ -6,3 +6,5 @@ change-type: deprecation
 change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9422
 github-contributors: Leilei332
+
+Remove Opera & Microsoft prefix in `$:/core/modules/utils/dom/browser.js`.
