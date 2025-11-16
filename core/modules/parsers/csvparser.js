@@ -11,9 +11,9 @@ The CSV text parser processes CSV files into a table wrapped in a scrollable wid
 
 var CsvParser = function(type,text,options) {
 	// Special handler for tab-delimited files
-	if (
+	if(
 		!options.separator &&
-		(type === 'text/tab-delimited-values' || type === 'text/tab-separated-values')
+		(type === "text/tab-delimited-values" || type === "text/tab-separated-values")
 	) {
 		options.separator = "\t";
 	}
