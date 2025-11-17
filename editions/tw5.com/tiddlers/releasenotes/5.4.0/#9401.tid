@@ -7,4 +7,4 @@ change-category: developer
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9401
 github-contributors: andrewgoz
 
-This PR adds the standard tiddler modification fields to plugin tiddlers when they are repacked.
+This PR modifies `$tw.utils.repackPlugin()` so that it adds the standard tiddler modification fields to plugin tiddlers when they are repacked.
