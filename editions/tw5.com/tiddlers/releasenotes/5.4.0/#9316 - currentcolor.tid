@@ -1,0 +1,8 @@
+title: $:/changenotes/5.4.0/#9316/impacts/currentcolor
+changenote: $:/changenotes/5.4.0/#9316
+created: 20251115032340986
+modified: 20251115032340986
+tags: $:/tags/ImpactNote
+description: SVG icons will inherit colors instead of using `#333333` if its parent element has `color` property set
+impact-type: compatibility-break
+
