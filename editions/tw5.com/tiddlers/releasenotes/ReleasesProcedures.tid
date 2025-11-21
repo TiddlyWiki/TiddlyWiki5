@@ -1,0 +1,156 @@
+title: $:/tw5.com/releases/procedures
+tags: $:/tags/Global
+
+<!-- Generate a link to the changes since the previous release -->
+\procedure github-release-changes-link(release)
+<a
+	class="tc-tiddlylink-external"
+	href=`https://github.com/TiddlyWiki/TiddlyWiki5/compare/v${ [all[tiddlers]tag[ReleaseNotes]has[released]!sort[released]] :filter[get[released]compare:number:lt<releaseTiddlerCreated>] +[get[caption]] }$...${ [<releaseTiddler>has[released]get[caption]addprefix[v]] :else[[master]] }$`
+	rel="noopener noreferrer"
+	target="_blank"
+>the detailed change history on ~GitHub</a>
+\end github-release-changes-link
+
+\procedure banner-credits()
+<%if [<banner-credit-user-name>!match[]] %>
+	<img src=<<banner-credit-permalink>> width="140" style="float:left;margin-right:0.5em;"/>
+	Congratulations to
+	<a
+		class="tc-tiddlylink-external"
+		href=<<banner-credit-user-link>>
+		rel="noopener noreferrer"
+		target="_blank"
+	><$text text=<<banner-credit-user-name>>/></a>
+	for their winning design for the banner for this release (here is the
+	<a
+		class="tc-tiddlylink-external"
+		href=<<banner-credit-discussion-link>>
+		rel="noopener noreferrer"
+		target="_blank"
+	>discussion</a>).
+<%else%>
+	<$image source="New Release Banner" width="140"/>
+<%endif%>
+<div style="clear:both;"/>
+\end banner-credits
+
+\procedure impact-pill(impact-type)
+\whitespace trim
+<span
+	style.fill={{{ [<impact-type>addprefix[$:/tw5.com/releases/info/impact-types/]addsuffix[/colour/foreground]get[text]] }}}
+	style.color={{{ [<impact-type>addprefix[$:/tw5.com/releases/info/impact-types/]addsuffix[/colour/background]get[text]] }}}
+	class={{{ doc-change-note-impact-pill-icon [[doc-change-note-impact-pill-]addsuffix<impact-type>] +[join[ ]] }}}
+>{{$:/core/images/star-filled}}</span>
+<span
+	class="doc-change-note-impact-pill-text"
+>
+	<$text text=<<impact-type>>/>
+</span>
+\end impact-pill
+
+\procedure change-list()
+\whitespace trim
+<div class="doc-release-note">
+	<$list filter="[enlist{$:/tw5.com/releases/info/category-order}]" variable="category">
+		<%if [tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>] %>
+			<div class="doc-release-note-heading">
+				<h2 class="doc-change-note-category">
+					<$text text={{{ [[$:/tw5.com/releases/info/categories/]addsuffix<category>addsuffix[/caption]get[text]] }}} />
+				</h2>
+			</div>
+			<$list filter="[tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>sort[description]]" variable="change">
+				<div class="doc-change-note-item">
+					<h3 class="doc-change-note-heading">
+						<$link
+							to="Release Notes and Changes"
+							class="doc-link-badge"
+							style.backgroundColor={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/colour]get[text]] }}}
+						>
+							<$text text={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/caption]get[text]] }}}/>
+						</$link> <$transclude $tiddler=<<change>> $field="description" $mode="inline"/></h3>
+					<div class="doc-change-note-info-list">
+						<$list filter="[tag[$:/tags/ImpactNote]] :filter[{!!changenote}match<change>] +[sort[description]]" variable="impact" counter="impactCount">
+							<div class="doc-change-note-info-list-item-caption">
+								<%if [<impactCount>match[1]] %>
+									Impact:
+								<%endif%>
+							</div>
+							<div class="doc-change-note-info-list-item-description">
+								<div class="doc-change-note-info-list-item-description-summary">
+									<$transclude $variable="impact-pill" $mode="inline" impact-type={{{ [<impact>get[impact-type]] }}}/>
+									<$text text=": "/>
+									<$transclude $tiddler=<<impact>> $field="description" $mode="inline"/>
+								</div>
+								<div class="doc-change-note-info-list-item-description-details">
+									<$transclude $tiddler=<<impact>> $field="text" $mode="block"/>
+								</div>
+							</div>
+						</$list>
+						<div class="doc-change-note-info-list-item-caption">
+							<$text text="GitHub: "/>
+						</div>
+						<div class="doc-change-note-info-list-item-description">
+							<$list filter="[<change>get[github-links]enlist-input[]]" variable="link">
+								<a
+									href=<<link>>
+									class="doc-github-link"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{{$:/core/images/github}}
+								</a>
+							</$list>
+						</div>
+					</div>
+					<div class="doc-change-note-description">
+						<$transclude $tiddler=<<change>> $mode="block"/>
+					</div>
+				</div>
+			</$list>
+		<%endif%>
+	</$list>
+</div>
+\end change-list
+
+\procedure acknowledgements()
+<ol class="doc-github-contributors">
+	<$list filter="[enlist<release-github-contributors>sort[]]" variable="username">
+		<li>
+			<a href={{{ [[https://github.com/]addsuffix<username>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">
+				<span class="doc-github-contributor-avatar"><img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=64]] }}} width="64" height="64"/></span>
+				<span class="doc-github-contributor-username">@<$text text=<<username>>/></span>
+			</a>
+		</li>
+	</$list>
+</ol>
+\end acknowledgements
+
+\procedure releasenote(release)
+<$let
+	releaseTiddler={{{ [all[tiddlers]tag[ReleaseNotes]] :filter[{!!caption}match<release>] }}}
+	releaseTiddlerCreated={{{ [<releaseTiddler>get[created]] }}}
+	release-github-contributors={{{ [tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :map:flat[enlist{!!github-contributors}] +[sort[]format:titlelist[]join[ ]]}}}
+>
+
+See <<github-release-changes-link>> and [[other releases|TiddlyWiki Releases]].
+
+<<banner-credits>>
+
+! Introduction
+
+<$transclude $variable="release-introduction" $mode="block"/>
+
+! Changes
+
+<$transclude $variable="change-list" $mode="inline"/>
+
+<!-- Acknowledgement list -->
+
+! Acknowledgements
+
+A warm thank you to the developers who have contributed to this release:
+
+<<acknowledgements>>
+
+</$let>
+\end releasenote

@@ -6,15 +6,15 @@ module-type: wikirule
 Wiki pragma rule for function, procedure and widget definitions
 
 ```
-\function name(param:defaultvalue,param2:defaultvalue)
+\function name(param:"defaultvalue", param2:"defaultvalue")
 definition text
 \end
 
-\procedure name(param:defaultvalue,param2:defaultvalue)
+\procedure name(param:"defaultvalue", param2:"defaultvalue")
 definition text
 \end
 
-\widget $mywidget(param:defaultvalue,param2:defaultvalue)
+\widget $mywidget(param:"defaultvalue", param2:"defaultvalue")
 definition text
 \end
 ```

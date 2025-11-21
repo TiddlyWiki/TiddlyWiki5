@@ -1,6 +1,6 @@
 caption: link
 created: 20131024141900000
-modified: 20240730065043721
+modified: 20250720025154474
 tags: Widgets
 title: LinkWidget
 type: text/vnd.tiddlywiki
@@ -17,6 +17,7 @@ The content of the link widget is rendered within the `<a>` tag representing the
 |!Attribute |!Description |
 |to |The title of the target tiddler for the link (defaults to the [[current tiddler|Current Tiddler]]) |
 |aria-label |Optional accessibility label |
+|role |<<.from-version "5.4.0">> Optional [[ARIA role|https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles]] |
 |tooltip |Optional tooltip WikiText |
 |tabindex |Optional numeric [[tabindex|https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex]] |
 |draggable |"yes" to enable the link to be draggable (defaults to "yes") |
@@ -25,6 +26,7 @@ The content of the link widget is rendered within the `<a>` tag representing the
 |overrideClass|<<.from-version "5.1.16">> Optional CSS classes //instead of// the default classes |
 |data-* |<<.from-version "5.3.2">> Optional [[data attributes|https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes]] to be assigned to the HTML element |
 |style.* |<<.from-version "5.3.2">> Optional [[CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference]] to be assigned to the HTML element |
+|aria-* |<<.from-version "5.4.0">> Optional [[ARIA attributes|https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes]] to be assigned to the HTML element |
 
 The draggable functionality is equivalent to using the DraggableWidget with the ''tiddler'' attribute set to the link target.
 

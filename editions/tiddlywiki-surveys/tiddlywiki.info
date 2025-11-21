@@ -1,4 +1,9 @@
 {
+	"plugins": [
+		"tiddlywiki/jszip",
+		"tiddlywiki/xlsx-utils",
+		"tiddlywiki/filesystem"
+	],
 	"themes": [
 		"tiddlywiki/snowwhite",
 		"tiddlywiki/vanilla"

@@ -1,8 +1,11 @@
 title: $:/language/Import/
 
 Editor/Import/Heading: Κάνε εισαγωγή τις εικόνες και πρόσθεσέ τις στον επεξεργαστή.
+Imported/Hint: Τα ακόλουθα tiddler έχουν εισαχθεί:
+Listing/Cancel/Caption: Άκυρο
 Listing/Cancel/Warning: Θέλεις να ακυρώσεις την εισαγωγή;
 Listing/Hint: Αυτά τα tiddlers είναι έτοιμα για εισαγωγή:
+Listing/Import/Caption: Εισαγωγή
 Listing/Preview: Προεπισκόπιση:
 Listing/Preview/Diff: Διαφορά
 Listing/Preview/DiffFields: Διαφορά (Πεδία)
@@ -14,6 +17,9 @@ Listing/Rename/ConfirmRename: Μετονομασία tiddler
 Listing/Rename/OverwriteWarning: Υπάρχει ήδη ένα tiddler με αυτόν τον τίτλο.
 Listing/Rename/Prompt: Μετονομασία σε:
 Listing/Rename/Tooltip: Μετονομασία tiddler πριν την εισαγωγή
+Listing/Select/Caption: Επιλογή
+Listing/Status/Caption: Κατάσταση
+Listing/Title/Caption: Τίτλος
 Upgrader/Plugins/Suppressed/Incompatible: Μπλοκαρίστηκε ασύμβατο ή παρωχημένο πρόσθετο.
 Upgrader/Plugins/Suppressed/Version: Μπλοκαρίστηκε το πρόσθετο (επειδή το εισερχόμενο <<incoming>>  δεν είναι πιο καινούριο από το υπάρχον <<existing>>)
 Upgrader/Plugins/Upgraded: Αναβαθμίστηκε το πρόσθετο από <<incoming>> σε <<upgraded>>
