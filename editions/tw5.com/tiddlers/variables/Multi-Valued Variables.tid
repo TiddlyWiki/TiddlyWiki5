@@ -7,6 +7,8 @@ tags: Concepts Variables
 
 ! Setting Multi-Valued Variables
 
+Generally, all the methods for setting variables implicitly set multi-valued variables, with the exception of the [[Set Widget|Set Widget]].
+
 !! LetWidget
 
 The <<.wid let>> widget allows multi-valued variables to be set in one operation, each to the complete list of results obtained from evaluating an attribute that is defined via a filtered transclusion. For example:
@@ -33,9 +35,34 @@ The `:let` filter run prefix (or its shortcut syntax `=>`) assigns the complete 
 
 !! [[title Operator]]
 
+The simplest way to retrieve the complete list of values stored in a multi-valued variable is to use the [[title Operator]]. For example:
+
+```
+[title(varname)]
+```
+
+Because `title` is the default operator when the operator name is missing from a filter step, the following example is equivalent to the previous one:
+
+```
+[(varname)]
+```
+
 !! Multi-valued Parameters for Filter Operators
 
+Certain filter operators can accept multi-valued parameters:
 
+* [[function Operator]]
+* [[title Operator]]
+
+For example:
+
+```
+\function myfunc(tiddlers) [(tiddlers)sort[]]
+
+<$let varname={{{ [all[tiddlers]limit[50]] }}}> 
+<$text text={{{ [function[myfunc],(varname)] +[join[-]] }}}/>
+</$let>
+```
 
 ! Examples
 
