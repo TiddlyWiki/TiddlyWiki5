@@ -1,0 +1,19 @@
+change-category: developer
+change-type: bugfix
+created: 20251115011834670
+description: Modules in draft tidders should not be executed
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9293
+modified: 20251115012143765
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9293
+type: text/vnd.tiddlywiki
+
+Modules in draft tiddlers should not be executed.
+
+This PR:
+
+* Checks for drafts in `$tw.Wiki.prototype.defineTiddlerModules`
+* It also reports and blocks draft modules that come from plugins
+
