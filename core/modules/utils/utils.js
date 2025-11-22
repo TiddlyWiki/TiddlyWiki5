@@ -165,9 +165,10 @@ Check whether a language code is supported by Intl
 */
 exports.checkLanguageCode = lang => {
 	try {
-		"a".localeCompare("a", lang);
+		Intl.Collator(lang);
 		return true;
 	} catch(e) {
+		console.warn(`Warning: ${lang} is not a valid language code.`);
 		return false;
 	}
 }
