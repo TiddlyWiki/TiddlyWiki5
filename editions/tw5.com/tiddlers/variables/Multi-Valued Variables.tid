@@ -3,7 +3,7 @@ created: 20250307212252946
 modified: 20250307212252946
 tags: Concepts Variables
 
-<<.from-version "5.3.7">> In ordinary usage, [[variables|Variables]] contain a single snippet of text. With the introduction of multi-valued variables. it is now possible to store a list of multiple values in a single variable. When accessed in the usual way, only the first value is returned, but using round brackets instead of angle brackets around the variable name allows access to the complete list of the values. This makes multi-valued variables largely invisible unless you specifically need to use them.
+<<.from-version "5.4.0">> In ordinary usage, [[variables|Variables]] contain a single snippet of text. With the introduction of multi-valued variables. it is now possible to store a list of multiple values in a single variable. When accessed in the usual way, only the first value is returned, but using round brackets instead of angle brackets around the variable name allows access to the complete list of the values. This makes multi-valued variables largely invisible unless you specifically need to use them.
 
 ! Setting Multi-Valued Variables
 
