@@ -1,0 +1,48 @@
+title: Multi-Valued Variables
+created: 20250307212252946
+modified: 20250307212252946
+tags: Concepts Variables
+
+<<.from-version "5.4.0">> In ordinary usage, [[variables|Variables]] contain a single snippet of text. With the introduction of multi-valued variables. it is now possible to store a list of multiple values in a single variable. When accessed in the usual way, only the first value is returned, but using round brackets instead of angle brackets around the variable name allows access to the complete list of the values. This makes multi-valued variables largely invisible unless you specifically need to use them.
+
+! Setting Multi-Valued Variables
+
+!! LetWidget
+
+The <<.wid let>> widget allows multi-valued variables to be set in one operation, each to the complete list of results obtained from evaluating an attribute that is defined via a filtered transclusion. For example:
+
+```
+<$let
+	varname={{{ [all[tiddlers]sort[]] }}}
+>
+```
+
+The <<.wid let>> widget also allows the complete list of return values from a function to be assigned to a multi-valued variable. For example:
+
+```
+<$let
+	varname=<<my.func>>
+>
+```
+
+!! [[Let Filter Run Prefix]]
+
+The `:let` filter run prefix (or its shortcut syntax `=>`) assigns the complete list of results of a filter run to a multi-valued variable.
+
+! Retrieving Multi-Valued Variables
+
+!! [[title Operator]]
+
+!! Multi-valued Parameters for Filter Operators
+
+
+
+! Examples
+
+For example:
+
+```
+<$let varname={{{ [all[tiddlers]sort[]] }}}>
+<$text text={{{ [(varname)] +[join[-]] }}}/>
+</$let>
+```
