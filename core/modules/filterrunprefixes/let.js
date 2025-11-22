@@ -6,7 +6,6 @@ module-type: filterrunprefix
 Assign a value to a variable
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -40,5 +39,3 @@ exports.let = function(operationSubFunction,options) {
 		};
 	};
 };
-
-})();
