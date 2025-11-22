@@ -21,7 +21,7 @@ Attributes are evaluated in the order they are written. Attributes with the same
 
 ! Multi-Valued Variables
 
-<<.from-version "5.4.0">> The <<.wid let>> widget also allows [[multi-valued variables|Multi-Valued Variables]] to be set in one operation, each to the complete list of results obtained from evaluating an attribute.
+<<.from-version "5.4.0">> The <<.wid let>> widget also allows [[multi-valued variables|Multi-Valued Variables]] to be set in one operation to the complete list of results obtained from evaluating an attribute.
 
 Almost all operations that work with variables only consider the first item in the list. Using round brackets instead of angle brackets around the variable name gives access to the complete list of results. For example:
 
