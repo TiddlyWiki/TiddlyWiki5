@@ -1,0 +1,8 @@
+created: 20251102070723468
+modified: 20251103155127453
+tags: 
+title: One
+
+\define text() TextOne
+
+<$codeblock code={{!!text}} />

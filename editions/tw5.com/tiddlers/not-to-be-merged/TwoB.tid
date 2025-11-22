@@ -1,0 +1,17 @@
+created: 20251102071232059
+modified: 20251103155039655
+tags: 
+title: TwoB
+
+<$set name=more-text-before value="TwoBefore">
+
+<$importvariables filter="[[One]]" >
+
+<$set name="more-text" value="TextTwo">
+</$set>
+
+</$importvariables>
+
+</$set>
+
+<$codeblock code={{!!text}} />
