@@ -1,0 +1,18 @@
+title: $:/language/Help/commands
+description: Εκτέλεσε τις εντολές που επιστρέφονται από ένα φίλτρο
+
+Εκτέλεσε διαδοχικά τα διακριτικά εντολών που επιστρέφονται από ένα φίλτρο
+
+```
+--commands <filter>
+```
+
+Παραδείγματα
+
+```
+--commands "[enlist:raw{$:/build-commands-as-text}]"
+```
+
+```
+--commands "[{$:/build-commands-as-json}jsonindexes[]] :map[{$:/build-commands-as-json}jsonget<currentTiddler>]"
+```

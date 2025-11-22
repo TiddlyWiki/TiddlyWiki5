@@ -139,7 +139,7 @@ Settings/AutoSave/Enabled/Description: Sla veranderingen automatisch op
 Settings/AutoSave/Hint: Sla veranderingen tijdens wijzigen automatisch op
 Settings/CamelCase/Caption: 'Camel Case' wiki links
 Settings/CamelCase/Description: Zet automatisch 'Camel Case' linken aan
-Settings/CamelCase/Hint: Je kan globaal het automatisch linken van 'Camel Case' woorden uitzetten. Dit vereist herladen van de wiki om effect te hebben.
+Settings/CamelCase/Hint: Dit vereist herladen van de wiki om effect te hebben.
 Settings/Caption: Instellingen
 Settings/DefaultMoreSidebarTab/Caption: Standaard 'Meer' zijpaneel tab
 Settings/DefaultMoreSidebarTab/Hint: Geef aan welke 'Meer' tab in het zijpaneel standaard wordt getoond

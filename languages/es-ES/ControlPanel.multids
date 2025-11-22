@@ -148,7 +148,7 @@ Settings/AutoSave/Disabled/Description: No guardar cambios automáticamente
 Settings/AutoSave/Enabled/Description: Guardar cambios automáticamente
 Settings/AutoSave/Hint: Guarda automáticamente los cambios durante la edición
 Settings/CamelCase/Caption: Enlaces wiki mediante ~CamelCase
-Settings/CamelCase/Hint: Desactiva globalmente la opción de enlace automático mediante CamelCase <br> Requiere recargar la página para que surta efecto
+Settings/CamelCase/Hint: Requiere recargar la página para que surta efecto
 Settings/CamelCase/Description: Activar enlaces automáticos mediante ~CamelCase
 Settings/Caption: Configuración
 Settings/EditorToolbar/Caption: Barra de herramientas del editor

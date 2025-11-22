@@ -1,0 +1,19 @@
+title: Developer Experience Team
+tags: Community/Team
+modified: 20251109200632671
+created: 20251109200632671
+leader: @pmario
+team: @saqimtiaz
+
+The Developer Experience Team improves the experience of software contributors to the TiddlyWiki project. This includes enhancing documentation, streamlining contribution processes, and providing tools and resources to help developers effectively contribute to TiddlyWiki.
+
+Tools and resources managed by the Developer Experience Team include:
+
+* Advising and assisting contributors, particularly new developers
+* Maintenance of developer-focused documentation on the https://tiddlywiki.com/dev/ site, including:
+** Development environment setup guides
+** Code review processes and best practices
+** Contribution guidelines and documentation
+* Continuous integration and deployment scripts providing feedback on pull requests
+* Devising and implementing labelling systems for issues and pull requests
+* Automation scripts to simplify common development tasks

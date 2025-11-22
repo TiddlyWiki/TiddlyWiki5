@@ -107,7 +107,7 @@ Settings/AutoSave/Enabled/Description: Samodejno shrani spremembe
 Settings/AutoSave/Hint: Samodejno shrani spremembe med urejanjem, če shranjevalni modul to podpira
 Settings/CamelCase/Caption: Camel Case wiki povezave
 Settings/CamelCase/Description: Omogoči samodejno povezovanje ~CamelCase
-Settings/CamelCase/Hint: Globalno onemogočite samodejno povezovanje stavkov ~CamelCase. Ponovno naložite stran, da aktivirate nastavitev!
+Settings/CamelCase/Hint: Ponovno naložite stran, da aktivirate nastavitev!
 Settings/Caption: Nastavitve
 Settings/DefaultSidebarTab/Caption: Privzeti zavihek v stranski vrstici
 Settings/DefaultSidebarTab/Hint: Določite, kateri zavihek stranske vrstice je privzeto prikazan

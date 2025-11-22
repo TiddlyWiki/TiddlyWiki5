@@ -1,0 +1,13 @@
+title: $:/changenotes/5.4.0/#9305
+description: Let tiddler modules overwrite shadow modules with the same exports but different names
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9305
+github-contributors: yaisog
+
+Tiddlers were previously processed before shadows during module registration. The shadow modules registration algorithm only checked for a matching title to prevent overwriting, but a differently named tiddler with the same exports would be overwritten by a shadow. This change swaps the order of $tw.wiki.defineTiddlerModules() and $tw.wiki.defineShadowModules() in boot.js, so that tiddlers are processed after shadows and can therefore override them.
+
+Each group (tiddlers or shadows) is sorted alphabetically, so plugin shadows would previously correctly overwrite core shadows (assuming their name starts with $:/plugins/), which remains unchanged. This change only affects module tiddlers that have the same export as a shadow, but a different name.
+

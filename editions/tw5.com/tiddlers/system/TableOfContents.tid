@@ -1,6 +1,6 @@
 caption: {{$:/language/SideBar/Contents/Caption}}
 created: 20140809114010378
-list: HelloThere [[Quick Start]] Learning [[Working with TiddlyWiki]] [[Customise TiddlyWiki]] Features Filters Languages Editions Plugins Platforms Reference Community About
+list: Welcome HelloThere [[Quick Start]] Learning [[Working with TiddlyWiki]] [[Customise TiddlyWiki]] Features Filters Languages Editions Plugins Platforms Reference Community About
 list-before: 
 modified: 20230322150307580
 tags: $:/tags/SideBar

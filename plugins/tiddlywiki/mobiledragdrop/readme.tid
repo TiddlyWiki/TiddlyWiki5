@@ -1,5 +1,0 @@
-title: $:/plugins/tiddlywiki/mobiledragdrop/readme
-
-This plugin provides a "shim" that enables HTML 5 compatible drag and drop operations on mobile browsers, including iOS and Android. The shim was created by Tim Ruffles and is published at https://github.com/timruffles/ios-html5-drag-drop-shim.
-
-After installing the plugin it is necessary to save the HTML file a second time before it will be fully enabled.

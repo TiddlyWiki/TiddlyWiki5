@@ -1,0 +1,33 @@
+are-you-a-dev: Yes, I would
+backup-method: DIY (any other solution)
+diy-backup-info: Depends on the particular TW. There are many file sync options.
+first-heard-survey: tiddlywiki.com
+first-used-tw: 2012
+joined-tw-community: No
+main-use-cases: Note-taking;Journalling;Task and project management (including CRMs);As a knowledge base (including technical, non-fiction and encyclopaedic content)
+ok-to-publish: Yes, I am happy for my responses to be published
+other-survey-source: 
+other-use-cases: 
+positive-about-future: Yes
+project-decision-trust: Yes
+project-strengths: Open helpful community. I mostly just read relevant topics. JavaScript has many libraries, so standing on the shoulders of giants. Regular updates. Beautiful web site, also as a TW.
+project-weaknesses: Make JavaScript more accessible. Filter expressions etc. are good for simple use cases, but become very tough and hard to debug in more complex scenarios. Writing JS requires reloading etc., is cumbersome. Many TW plugins become outdated, e.g. single maintainer. Would be good to know on which ones, one can rely on. Maybe have some hierarchy, have multiple maintainers for heavily used PlugIns. Do not focus too much on NodeJS. I do not want a local Node JS installation. Have a way for online colab
+publish-to-intranet: Not publishing to this location
+publish-to-web: Not publishing to this location
+published-plugin: Yes
+save-method: Single-file wiki through web browser with Download Saver (default saving mechanism);Single-file wiki third-party mobile app (e.g. Tiddloid, Quine)
+share-wikis: Yes, with multiple editors/administrators
+started-tw-community: 
+tags: [[Community Survey 2025]]
+title: Community Survey 2025 Answer 00176
+tw-ability-level: I have customised TiddlyWiki through options and plugins;I am comfortable using WikiText widgets (e.g. <$transclude>, <$list>...);I am comfortable writing filter expressions;I have written custom HTML;I have written custom CSS styles;I have written custom JavaScript
+tw-customisations: Made a kind of versioning sync, so that you can drop one version of TW into another, will track changes and sync to the most current changes or show conflicts. Using NodeJS etc. would loose a big benefit: running purely in browser, important in restricted / company environments
+tw-future-confidence: Yes
+use-discord: 
+use-for-work-or-study: Yes
+use-github-discuss: 
+use-mailing-list: 
+use-reddit: 
+use-ttw: 
+value-of-tw: Single file is blessing: Reliable & beautiful place to put information; Spreading of information controllable, no install, browser sandbox; Nice for sharing projects / collections with others by secure channel. And curse: size limit, siloed, not interoperable with local fs tools.
+wiki-setup-info: 

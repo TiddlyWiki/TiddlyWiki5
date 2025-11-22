@@ -74,9 +74,8 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-copy-to-clipboard",function(event) {
 		$tw.utils.copyToClipboard(event.param,{
 			successNotification: event.paramObject && event.paramObject.successNotification,
-			failureNotification: event.paramObject && event.paramObject.failureNotification,
-			plainText: event.paramObject && event.paramObject.plainText
-		},event.paramObject && event.paramObject.type);
+			failureNotification: event.paramObject && event.paramObject.failureNotification
+		});
 	});
 	// Install the tm-focus-selector message
 	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {

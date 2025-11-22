@@ -1,5 +1,6 @@
 created: 20141115211411211
 title: ReleaseTemplate
+code-body: yes
 type: text/vnd.tiddlywiki
 
 <h2><$link to=<<currentTab>>><$view tiddler=<<currentTab>> field="title"/></$link></h2>

@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9401
+description: Repacking plugins should update modified timestamp
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: enhancement
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9401
+github-contributors: andrewgoz
+
+This PR modifies `$tw.utils.repackPlugin()` so that it adds the standard tiddler modification fields to plugin tiddlers when they are repacked.

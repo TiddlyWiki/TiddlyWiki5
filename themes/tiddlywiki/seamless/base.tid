@@ -94,7 +94,7 @@ html:-webkit-full-screen {
 
 /* Adjust the colour of the page controls */
 body.tc-body .tc-page-controls svg {
-	fill: <<colour muted-foreground>>;
+	color: <<colour muted-foreground>>;
 }
 
 /* Adjust the colour of the sidebar selected tabs */

@@ -1,5 +1,5 @@
 created: 20140720164948099
-modified: 20201124185829706
+modified: 20250819181815032
 tags: Mechanisms
 title: InfoMechanism
 type: text/vnd.tiddlywiki
@@ -19,6 +19,7 @@ System tiddlers in the namespace `$:/info/` are used to expose information about
 |[[$:/info/browser/language]] |<<.from-version "5.1.20">> Language as reported by browser (note that some browsers report two character codes such as `en` while others report full codes such as `en-GB`) |
 |[[$:/info/browser/screen/width]] |Screen width in pixels |
 |[[$:/info/browser/screen/height]] |Screen height in pixels |
+|`$:/info/browser/window/*` |<<.from-version "5.4.0">> Tiddlers reporting window dimensions, updated when the windows are resized |
 |[[$:/info/node]] |Running under [[Node.js]]? ("yes" or "no") |
 |[[$:/info/url/full]] |<<.from-version "5.1.14">> Full URL of wiki (eg, ''<<example full>>'') |
 |[[$:/info/url/host]] |<<.from-version "5.1.14">> Host portion of URL of wiki (eg, ''<<example host>>'') |
@@ -29,3 +30,27 @@ System tiddlers in the namespace `$:/info/` are used to expose information about
 |[[$:/info/url/protocol]] |<<.from-version "5.1.14">> Protocol portion of URL of wiki (eg, ''<<example protocol>>'') |
 |[[$:/info/url/search]] |<<.from-version "5.1.14">> Search portion of URL of wiki (eg, ''<<example search>>'') |
 |[[$:/info/darkmode]] |<<.from-version "5.1.23">> Is dark mode enabled? ("yes" or "no") |
+
+! Main Window Dimension Tiddlers
+
+<<.from-version "5.4.0">> These tiddlers reports the dimensions of the main ~TiddlyWiki window and are updated automatically whenever the main window is resized.
+
+|!Title |!Description |
+|[[$:/info/browser/window/system/main/outer/width]] |Full browser window including chrome, tabs, toolbars |
+|[[$:/info/browser/window/system/main/outer/height]] |Full browser window including chrome, tabs, toolbars |
+|[[$:/info/browser/window/system/main/inner/width]] |Viewport width including scrollbars |
+|[[$:/info/browser/window/system/main/inner/height]] |Viewport height including scrollbars |
+|[[$:/info/browser/window/system/main/client/width]] |Content width excluding scrollbars |
+|[[$:/info/browser/window/system/main/client/height]] |Content height excluding scrollbars |
+
+! User-Created Window Dimension Tiddlers
+
+<<.from-version "5.4.0">> These tiddler reports the dimensions of additional windows opened via [[tm-open-window|WidgetMessage: tm-open-window]]. The windowID used when opening the window is used to identify the corresponding info tiddlers. These tiddlers are updated automatically whenever the main window is resized.
+
+|!Title |!Description |
+|`$:/info/browser/window/user/<windowID>/outer/width` | Full browser window including chrome, tabs, toolbars |
+|`$:/info/browser/window/user/<windowID>/outer/height` | Full browser window including chrome, tabs, toolbars |
+|`$:/info/browser/window/user/<windowID>/inner/width` |Viewport width including scrollbars |
+|`$:/info/browser/window/user/<windowID>/inner/height` |Viewport height including scrollbars |
+|`$:/info/browser/window/user/<windowID>/client/width` |Content width excluding scrollbars |
+|`$:/info/browser/window/user/<windowID>/client/height` |Content height excluding scrollbars |

@@ -1,0 +1,11 @@
+title: $:/changenotes/5.4.0/#9371
+description: Added jsondelete operator for deleting properties from JSON objects
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: filters
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9390
+github-contributors: SmartDever02
+
+Added the <<.op jsondelete>> operator for deleting properties from JSON strings. The operator uses the same code path as <<.op jsonset>> to locate the correct part of the object, ensuring consistency between setting and deleting operations. It supports deleting both object properties and array elements, with support for negative array indexes counted from the end.
+

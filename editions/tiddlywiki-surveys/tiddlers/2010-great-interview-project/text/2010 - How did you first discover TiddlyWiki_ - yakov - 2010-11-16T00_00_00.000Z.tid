@@ -1,0 +1,7 @@
+icon: $:/avatars/yakov
+modified: 20101116000000000
+modifier: yakov
+tags: [[2010 - How did you first discover TiddlyWiki?]] [[2010 - Interview Answer]]
+title: 2010 - How did you first discover TiddlyWiki? - yakov - 2010-11-16T00:00:00.000Z
+
+I write loads of things and some time ago I realized that hypertext is the only form that would be flexible enough for me. Next I get the idea that since there are quite limited tools for creating hypertext on my handheld it would be good to create one based on web-technologies since they are totally cross-platform and imply hypertext. Then I realized that JavaScript has far too limited access to the file system (usually no access at all), so I asked about this thing in google.quesions. Few answers contained mentioning of Java and flash and also there was one with "see TiddlyWiki". And so, that was it.<br>

@@ -1,0 +1,15 @@
+title: Hire Jeremy Sidebar Segment
+created: 20250708130030654
+modified: 20250708130030654
+tags: $:/tags/SideBarSegment
+list-after: $:/core/ui/SideBarSegments/site-subtitle
+
+<div class="yellow-note-sidebar-wrapper">
+	<div class="yellow-note-sidebar">
+		<$link to="Hire the founder of TiddlyWiki">
+			<div class="yellow-note">
+				<i class="yellow-note-pin"></i>Hire the founder of ~TiddlyWiki
+			</div>
+		</$link>
+	</div>
+</div>

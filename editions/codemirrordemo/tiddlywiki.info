@@ -8,11 +8,16 @@
 		"tiddlywiki/codemirror-search-replace",
 		"tiddlywiki/codemirror-fullscreen-editing",
 		"tiddlywiki/codemirror-mode-xml",
+		"tiddlywiki/codemirror-mode-htmlembedded",
+		"tiddlywiki/codemirror-mode-htmlmixed",
 		"tiddlywiki/codemirror-mode-javascript",
 		"tiddlywiki/codemirror-mode-css",
 		"tiddlywiki/codemirror-mode-x-tiddlywiki",
 		"tiddlywiki/codemirror-mode-markdown",
-		"tiddlywiki/codemirror-keymap-sublime-text"
+		"tiddlywiki/codemirror-trailingspace",
+		"tiddlywiki/codemirror-keymap-emacs",
+		"tiddlywiki/codemirror-keymap-sublime-text",
+		"tiddlywiki/codemirror-keymap-vim"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

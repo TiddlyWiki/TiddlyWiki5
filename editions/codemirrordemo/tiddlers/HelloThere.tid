@@ -11,6 +11,7 @@ The ~CodeMirror plugin can be extended with ~AddOns for more functionality:
 * Keymaps in the style of Emacs, Sublime Text or Vim
 * Closing Brackets
 * Closing Tags
+* Display trailing whitespace
 
 NOTE: This demo has the ''Sublime Text'' keymap installed.
 

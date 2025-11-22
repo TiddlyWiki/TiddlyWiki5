@@ -1,0 +1,8 @@
+title: $:/changenotes/5.4.0/#8702/impacts/darkmode-info-tiddler
+changenote: $:/changenotes/5.4.0/#8702
+created: 20250901000000000
+modified: 20250901000000000
+tags: $:/tags/ImpactNote
+description: `$:/info/darkmode` has been superseded by `$:/info/browser/darkmode`
+impact-type: deprecation
+

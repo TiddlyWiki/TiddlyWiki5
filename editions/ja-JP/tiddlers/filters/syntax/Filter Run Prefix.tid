@@ -1,0 +1,21 @@
+created: 20230305130600148
+modified: 20250223105142349
+original-modified: 20230711090913687
+tags: [[Filter Expression]]
+title: Filter Run Prefix
+ja-title: フィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+There are 2 types of filter run prefixes that are interchangeable; [[named prefixes|Named Filter Run Prefix]] and [[shortcut prefixes|Shortcut Filter Run Prefix]]. 
+交換可能なフィルタランプレフィックスには、[[名前付きプレフィックス|Named Filter Run Prefix]]と[[ショートカットプレフィックス|Shortcut Filter Run Prefix]]の2種類があります。
+
+<$railroad text="""
+\start none
+\end none
+(
+   - |
+:  [[<":名前付きプレフィクス"> /"v5.1.23以降"/ |"Named Filter Run Prefix"]] | 
+   [[<"ショートカットプレフィックス"> /"v5.1.23以前"/ |"Shortcut Filter Run Prefix"]]
+)
+[[<"ラン">|"Filter Run"]]
+"""/>

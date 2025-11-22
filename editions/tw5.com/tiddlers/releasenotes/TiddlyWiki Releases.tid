@@ -5,13 +5,7 @@ tags: Releases
 title: TiddlyWiki Releases
 type: text/vnd.tiddlywiki
 
-Here are the details of recent releases of TiddlyWiki5. See [[TiddlyWiki5 Versioning]] for details of how releases are named.
-
-If you are using node.js, you can also install prior versions like this:
-
-> npm install -g tiddlywiki@5.1.13
-
-(BetaReleases and AlphaReleases are listed separately).
+Here are the details of recent releases of TiddlyWiki5. See [[TiddlyWiki5 Versioning]] for details of how releases are named, and [[Release Notes and Changes]] for details of how release notes are constructed.
 
 <$list filter="[tag[ReleaseNotes]!sort[created]limit[1]]">
   <$macrocall $name="tabs" tabsList="[tag[ReleaseNotes]!sort[created]]" default={{!!title}} class="tc-vertical" template="ReleaseTemplate" />

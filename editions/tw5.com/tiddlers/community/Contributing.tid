@@ -1,5 +1,5 @@
 created: 20131101111400000
-modified: 20220328105410721
+modified: 20250818012527342
 tags: Community
 title: Contributing
 type: text/vnd.tiddlywiki
@@ -16,7 +16,7 @@ PRs must meet these minimum requirements before they can be considered for mergi
 * The author must sign the Contributors License Agreement (see below)
 * Each PR should only make a single feature change
 * The title of the PR should be 50 characters or less
-* The title of the PR should be capitalised, and should not end with a period
+* The title of the PR should be capitalised (first letter of first word only, and proper nouns if any), and should not end with a period
 * The title of the PR should be written in the imperative mood. See below
 * Adequate explanation in the body of the PR for the motivation and implementation of the change. Focus on the //why// and //what//, rather than the //how//
 * PRs must be self-contained. Although they can link to material elsewhere, everything needed to understand the intention of the PR should be included

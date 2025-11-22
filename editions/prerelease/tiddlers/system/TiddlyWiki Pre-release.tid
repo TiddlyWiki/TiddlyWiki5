@@ -19,4 +19,5 @@ The pre-release is also available as an [[empty wiki|https://tiddlywiki.com/prer
 </div>
 <div class="tc-subtitle">Updated: <$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/></div>
 <$transclude mode="block"/>
+
 </$list>

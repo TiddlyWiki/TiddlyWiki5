@@ -17,15 +17,24 @@ caption: {{$:/language/Search/Standard/Caption}}
 
 \procedure input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="<$list filter='[<tiddler>get[text]!is[missing]] :else[<tiddler>get[text]is[shadow]]'><$list filter='[<tiddler>get[text]minlength[1]]'><$action-sendmessage $message='tm-edit-tiddler' $param={{{  [<tiddler>get[text]] }}}/></$list></$list>"><$list filter="[<tiddler>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<tiddler>get[text]] }}}/></$list></$list>
 
+\procedure input-actions()
+<%if [<event-code>match[ArrowRight]] :and[<modifier>match[alt-shift]] %>
+<<next-search-tab>>
+<%elseif [<event-code>match[ArrowLeft]] :and[<modifier>match[alt-shift]] %>
+<<previous-search-tab>>
+<%elseif [<event-key-descriptor>match[((input-tab-right))]] %>
+<<set-next-input-tab>>
+<%elseif [<event-key-descriptor>match[((input-tab-left))]] %>
+<<set-previous-input-tab>>
+<%endif%>
+\end
+
 \whitespace trim
 
 <<lingo Standard/Hint>>
 
 <div class="tc-search">
-<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
-<$keyboard key="((input-tab-left))" actions=<<set-previous-input-tab>>>
-<$keyboard key="shift-alt-Right" actions=<<next-search-tab>>>
-<$keyboard key="shift-alt-Left" actions=<<previous-search-tab>>>
+<$keyboard key="((input-tab-right)) ((input-tab-left)) shift-alt-Right shift-alt-Left" actions=<<input-actions>>>
 <$transclude $variable="keyboard-driven-input"
 	tiddler="$:/temp/advancedsearch/input"
 	storeTitle="$:/temp/advancedsearch"
@@ -39,9 +48,6 @@ caption: {{$:/language/Search/Standard/Caption}}
 	inputAcceptVariantActions=<<input-accept-variant-actions>>
 	configTiddlerFilter="[[$:/state/advancedsearch/standard/currentTab]!is[missing]get[text]] :else[{$:/config/SearchResults/Default}]"
 	filterMinLength={{$:/config/Search/MinLength}}/>
-</$keyboard>
-</$keyboard>
-</$keyboard>
 </$keyboard>
 &#32;
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">

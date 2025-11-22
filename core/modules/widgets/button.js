@@ -61,15 +61,16 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		sourcePrefix: "data-",
 		destPrefix: "data-"
 	});
+	this.assignAttributes(domNode,{
+		sourcePrefix: "aria-",
+		destPrefix: "aria-"
+	});
 	// Assign other attributes
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
 	}
 	if(this.tooltip) {
 		domNode.setAttribute("title",this.tooltip);
-	}
-	if(this["aria-label"]) {
-		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
 	if (this.role) {
 		domNode.setAttribute("role", this.role);
@@ -215,7 +216,6 @@ ButtonWidget.prototype.execute = function() {
 	this.setTo = this.getAttribute("setTo");
 	this.popup = this.getAttribute("popup");
 	this.hover = this.getAttribute("hover");
-	this["aria-label"] = this.getAttribute("aria-label");
 	this.role = this.getAttribute("role");
 	this.tooltip = this.getAttribute("tooltip");
 	this.style = this.getAttribute("style");
@@ -270,6 +270,10 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 			changedAttributes: changedAttributes,
 			sourcePrefix: "data-",
 			destPrefix: "data-"
+		});
+		this.assignAttributes(this.domNodes[0],{
+			sourcePrefix: "aria-",
+			destPrefix: "aria-"
 		});
 	}
 	return this.refreshChildren(changedTiddlers);

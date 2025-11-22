@@ -2,6 +2,6 @@ title: $:/language/Snippets/MacroDefinition
 tags: $:/tags/TextEditor/Snippet
 caption: Ορισμός μακροεντολής
 
-\define macroName(param1:"default value",param2)
-Κείμενο μακροεντολής
+\define όνομαΜακροεντολής(παράμετρος1:"προκαθορισμένη τιμή",παράμετρος2)
+Κείμενο της μακροεντολής
 \end

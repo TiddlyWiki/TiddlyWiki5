@@ -1,0 +1,9 @@
+title: $:/changenotes/5.4.0/#9183/impacts/core-server-pluginisation
+changenote: $:/changenotes/5.4.0/#9183
+created: 20250901000000000
+modified: 20250901000000000
+tags: $:/tags/ImpactNote
+description: Server components of the core have been moved into a new `$:/core-server` plugin
+impact-type: pluginisation
+
+It is not necessary for wikis to explicitly include the `$:/core-server` plugin.

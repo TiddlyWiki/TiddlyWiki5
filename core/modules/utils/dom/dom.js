@@ -265,10 +265,9 @@ exports.copyStyles = function(srcDomNode,dstDomNode) {
 /*
 Copy plain text to the clipboard on browsers that support it
 */
-exports.copyToClipboard = function(text,options,type) {
-	var text = text || "";
-	var options = options || {};
-	var type = type || "text/plain";
+exports.copyToClipboard = function(text,options) {
+	options = options || {};
+	text = text || "";
 	var textArea = document.createElement("textarea");
 	textArea.style.position = "fixed";
 	textArea.style.top = 0;
@@ -281,16 +280,10 @@ exports.copyToClipboard = function(text,options,type) {
 	textArea.style.outline = "none";
 	textArea.style.boxShadow = "none";
 	textArea.style.background = "transparent";
+	textArea.value = text;
 	document.body.appendChild(textArea);
 	textArea.select();
 	textArea.setSelectionRange(0,text.length);
-	textArea.addEventListener("copy",function(event) {
-		event.preventDefault();
-		if (options.plainText) {
-			event.clipboardData.setData("text/plain",options.plainText);
-		}
-		event.clipboardData.setData(type,text);
-	});
 	var succeeded = false;
 	try {
 		succeeded = document.execCommand("copy");

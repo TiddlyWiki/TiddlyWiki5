@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9167
+description: Allow link widget to use all aria attributes
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9167
+github-contributors: Leilei332
+
+Allow LinkWidget to use all aria attributes directly.

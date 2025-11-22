@@ -26,6 +26,8 @@ Tags/ClearInput/Caption: 清除輸入
 Tags/ClearInput/Hint: 清除標籤輸入
 Tags/Dropdown/Caption: 標籤清單
 Tags/Dropdown/Hint: 顯示標籤清單
+Tags/EmptyMessage: (找不到標籤)
+Tags/EmptyMessage/System: (找不到系統標籤)
 Title/BadCharacterWarning: 請注意，避免在條目名稱中使用這些字元：<<bad-chars>>
 Title/Exists/Prompt: 目標條目已經存在
 Title/Relink/Prompt: 將在其他條目的 //tags// 和 //list// 欄位中的 ''<$text text=<<fromTitle>>/>'' 改為 ''<$text text=<<toTitle>>/>''

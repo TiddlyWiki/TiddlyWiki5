@@ -4,13 +4,14 @@ title: $:/snippets/viewswitcher
 $:/core/images/storyview-$(storyview)$
 \end
 \whitespace trim
+\function view.filter() [<storyview>prefix{$:/view}]
+
 <$linkcatcher to="$:/view">
-<div class="tc-chooser tc-viewswitcher">
+<div class="tc-chooser tc-viewswitcher" role="listbox">
 <$list filter="[storyviews[]]" variable="storyview">
-<$set name="cls" filter="[<storyview>prefix{$:/view}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item"><div class=<<cls>>>
-<$button tag="a" class="tc-tiddlylink tc-btn-invisible" to=<<storyview>>><$transclude tiddler=<<icon>>/><$text text=<<storyview>>/></$button>
+<div class={{{ [view.filter[]then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}}>
+<$button tag="a" class="tc-tiddlylink tc-btn-invisible" role="option" to=<<storyview>> aria-selected={{{ [view.filter[]then[true]else[false]] }}}><$transclude tiddler=<<icon>>/><$text text=<<storyview>>/></$button>
 </div>
-</$set>
 </$list>
 </div>
 </$linkcatcher>

@@ -81,6 +81,7 @@ NewMarkdown/Hint: Erstelle einen neuen "Markdown" Tiddler
 NewTiddler/Caption: Neuer Tiddler
 NewTiddler/Hint: Erstelle einen neuen Tiddler
 OpenWindow/Caption: Öffne in neuem Fenster
+OpenControlPanel/Hint: Öffne das Control-Panel
 OpenWindow/Hint: Öffne diesen Tiddler in einem neuen Fenster
 Palette/Caption: Palette
 Palette/Hint: Wähle eine Farbpalette

@@ -1,5 +1,0 @@
-title: $:/plugins/tiddlywiki/nodewebkitsaver/readme
-
-This plugin provides a ''saver'' module for saving changes when using TiddlyWiki directly under NW.js (previously known as node-webkit).
-
-[[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/nodewebkitsaver]]

@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9235
+description: Fix nested `span.tc-keyboard` element in core
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9235 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9325
+github-contributors: Leilei332
+
+Removes nested `<span class="tc-keyboard">` element in core search field.

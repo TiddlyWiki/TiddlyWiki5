@@ -1,6 +1,6 @@
 caption: copy-to-clipboard
 created: 20171216104754967
-modified: 20250127133558352
+modified: 20171216104941967
 tags: Macros [[Core Macros]]
 title: copy-to-clipboard Macro
 type: text/vnd.tiddlywiki
@@ -15,9 +15,5 @@ The <<.def copy-to-clipboard>> [[macro|Macros]] displays a button that copies sp
 : Optional CSS classes to be assigned to the button (defaults to `tc-btn-invisible`)
 ;style
 : Optional CSS styles to be assigned to the button
-;type
-: <<.from-version "5.3.7">> MIME type of the text to be copied, defaults to `text/plain`
-;plain
-: <<.from-version "5.3.7">> Additional plain text to be copied when `type` attribute isn't `text/plain`
 
 <<.macro-examples "copy-to-clipboard">>

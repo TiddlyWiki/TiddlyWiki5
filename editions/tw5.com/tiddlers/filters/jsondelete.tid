@@ -1,0 +1,54 @@
+caption: jsondelete
+created: 20250115120000000
+modified: 20250115120000000
+op-input: a selection of JSON objects
+op-output: the JSON objects with the specified property deleted
+op-parameter: one or more indexes of the property to delete
+op-purpose: delete a property from JSON objects
+tags: [[Filter Operators]] [[JSON Operators]]
+title: jsondelete Operator
+
+<<.from-version "5.4.0">> The <<.op jsondelete>> operator is used to delete a property from JSON strings. See [[JSON in TiddlyWiki]] for background. See also the following related operators:
+
+* <<.olink jsonset>> to set values within JSON objects
+* <<.olink jsonget>> to retrieve the values of a property in JSON data
+* <<.olink jsontype>> to retrieve the type of a JSON value
+* <<.olink jsonindexes>> to retrieve the names of the fields of a JSON object, or the indexes of a JSON array
+* <<.olink jsonextract>> to retrieve a JSON value as a string of JSON
+
+Properties within a JSON object are identified by a sequence of indexes. In the following example, the value at `[a]` is `one`, and the value at `[d][f][0]` is `five`.
+
+```
+{
+    "a": "one",
+    "b": "",
+    "c": "three",
+    "d": {
+        "e": "four",
+        "f": [
+            "five",
+            "six",
+            true,
+            false,
+            null
+        ],
+        "g": {
+            "x": "max",
+            "y": "may",
+            "z": "maize"
+        }
+    }
+}
+```
+
+The <<.op jsondelete>> operator uses multiple parameters to specify the indexes of the property to delete. For object properties, the property is removed using JavaScript's `delete` operator. For array elements, the element is removed using `splice`, which shifts remaining elements.
+
+Negative indexes into an array are counted from the end, so -1 means the last item, -2 the next-to-last item, and so on.
+
+Indexes can be dynamically composed from variables and transclusions, e.g. `[<jsondata>jsondelete<variable>,{!!field},[0]]`.
+
+If the specified property does not exist, the JSON object is returned unchanged. If you attempt to delete the root object itself (by providing no indexes or a blank index), the JSON object is returned unchanged.
+
+If the input consists of multiple JSON objects, the property is deleted from all of them.
+
+<<.operator-examples "jsondelete">>

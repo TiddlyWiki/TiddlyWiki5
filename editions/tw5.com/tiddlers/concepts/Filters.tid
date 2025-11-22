@@ -24,5 +24,5 @@ A filter output can change as tiddlers are added and deleted in the wiki. ~Tiddl
 ''Find out more:''
 
 * <$linkcatcher message="tm-navigate" actions=<<openAdvancedSearch>> >[[Advanced Search|$:/AdvancedSearch]]</$linkcatcher> -- has a <<.advancedsearch-tab Filter>> tab that makes it easy to experiment with filters.
-
-* [[Filtered Transclusions|Transclusion in WikiText]] -- If you want to use filter results in your text
+* [[Filtered Transclusions|Transclusion in WikiText]] -- if you want to use filter results in your text
+* [[TiddlyWiki Syntax History]] -- if you are curious why the filter syntax is the way it is

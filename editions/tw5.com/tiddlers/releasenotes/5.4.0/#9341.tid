@@ -1,0 +1,12 @@
+title: $:/changenotes/5.4.0/#9341
+description: Fix crash when processing large files from tiddlywiki.files
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: nodejs
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9341
+github-contributors: cdruan
+
+* skip reading file content when `_canonical_uri` is present
+
+* skip loading file when file size is too large

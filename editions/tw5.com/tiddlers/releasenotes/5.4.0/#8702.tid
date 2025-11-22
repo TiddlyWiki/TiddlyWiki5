@@ -1,0 +1,27 @@
+title: $:/changenotes/5.4.0/#8702
+description: Colour handling improvements
+release: 5.4.0-disabled because this PR is not yet merged
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8702
+github-contributors: Jermolene
+
+This PR brings several new features for end users:
+
+* Automatically switching between a dark and light palette as the operating system setting changes (and to do so without making the wiki dirty)
+* Customisation options for palettes. For example, users might choose a base hue, with the colours of the palette automatically adapting to it
+* A generalisation of the dark vs. light mechanism to allow an arbitrary number of distinct schemes that are dynamically selected. For example, a palette that has a different scheme for night, morning, day and evening that automatically change with the time of day
+
+There are also new capabilities for palette authors:
+
+* Inheritance for palettes, making it easy to create chains of variants of a base palette
+* Self contained palettes that can contain both dark and light variants (or variants for any other custom scheme)
+
+To make all of these new features possible, this PR also includes some useful new general purpose mechanisms and features:
+
+* Background actions that are triggered whenever there is a change to the results of a specified filter
+* Several new filter operators for manipulating colour values. The underlying functionality comes from the [[color.js|https://colorjs.io/]] library
+* New media query tracking mechanism that can track the results of any CSS media query (not just dark mode), storing the results in a shadow `$:/info/...` tiddler
+* New `changecount` filter operator
+* New `:apply` filter run prefix (to be replaced by the `:let` filter run prefix in [[#8972|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8972]]))

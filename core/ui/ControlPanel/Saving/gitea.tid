@@ -3,7 +3,7 @@ tags: $:/tags/ControlPanel/Saving
 caption: {{$:/language/ControlPanel/Saving/GitService/Gitea/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Saving/GitService/
-\define service-name() ~Gitea
+\define service-name() Gitea
 
 <<lingo Description>>
 

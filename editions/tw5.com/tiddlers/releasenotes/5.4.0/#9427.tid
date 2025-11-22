@@ -1,0 +1,11 @@
+title: $:/changenotes/5.4.0/#9427
+description: Fix widgets generating leading space in class attribute when additional class is empty
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/9427
+github-contributors: linonetwo
+
+Fixed a bug in the RevealWidget, DroppableWidget, EventcatcherWidget, and KeyboardWidget where an empty class attribute would generate a leading space in the rendered HTML. By trimming the resulting class string, we shorten the HTML and avoid potential confusion.
+

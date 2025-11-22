@@ -1,0 +1,10 @@
+created: 20250711121107617
+import-sheet-name: Content
+import-spec-role: sheet
+import-tags: [[Community Survey 2025]]
+skip-rows-top: 3
+list: [[$:/_importspec/Community Survey 2025/Content/Row]]
+modified: 20250711121107617
+tags: 
+title: $:/_importspec/Community Survey 2025/Content
+type: text/vnd.tiddlywiki

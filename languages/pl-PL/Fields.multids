@@ -4,6 +4,7 @@ _canonical_uri: Pełny adres URL do zewnętrznego obrazu
 author: Imię autora wtyczki
 bag: Nazwa worka, z ktorego pochodzi tiddler
 caption: Tekst wyświetlany na zakładce lub przycisku
+class: Klasa CSSa dodana do tiddlera podczas wyświetlania. Używane również w oknach modalnych
 code-body: Ustawienie wartości na ''tak'' spowoduje wyświetlanie tiddlera jako kod
 color: Wartość koloru CSS powiążanego z tym tiddlerem
 component: Nazwa komponentu odpowiedzialnego za [[alert|AlertMechanism]]

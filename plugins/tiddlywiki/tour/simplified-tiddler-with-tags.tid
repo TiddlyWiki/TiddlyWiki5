@@ -3,7 +3,6 @@ title: $:/plugins/tiddlywiki/tour/simplified-tiddler-with-tags
 \whitespace trim
 \define tag-pill-styles()
 background-color:$(backgroundColor)$;
-fill:$(foregroundColor)$;
 color:$(foregroundColor)$;
 \end
 
