@@ -1,0 +1,16 @@
+title: $:/changenotes/5.4.0/#9078
+description: Web server get-file route now supports HTTP Range headers and streaming
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: enhancement
+change-category: nodejs
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9078
+github-contributors: linonetwo
+
+The web server's `get-file` route now supports HTTP Range requests and file streaming, enabling better loading and playback of large media files.
+
+!! Features
+
+* HTTP Range header: Enables partial content delivery with `206 Partial Content` responses, which is used when the user drags the progress bar in video/audio playback
+* Streaming file delivery: Browsers can now properly seek and stream video files from the `/files/` directory. Files are read using Node.js streams for better performance and memory efficiency.
+* Resumable downloads: To save interrupted downloads
