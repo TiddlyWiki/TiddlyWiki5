@@ -22,14 +22,14 @@ Tests various core deserializers
 			});
 		}
 	
-		executeTestCase("dezerializer test data case 1",[ { text: '<!doctype html>\n', type: 'text/html' } ]);
+		executeTestCase("dezerializer test data case 1",[ { text: "<!doctype html>\n", type: "text/html" } ]);
 
-		executeTestCase("dezerializer test data case 2",[ { text: '<!doctype html>\n<html lang="en">\n<head>\n\t<meta charset="utf-8">\n\t<title>Test Data</title>\n</head>\n<body>\n</body>\n</html>\n', type: 'text/html' } ]);
+		executeTestCase("dezerializer test data case 2",[ { text: '<!doctype html>\n<html lang="en">\n<head>\n\t<meta charset="utf-8">\n\t<title>Test Data</title>\n</head>\n<body>\n</body>\n</html>\n', type: "text/html" } ]);
 
-		executeTestCase("dezerializer test data case 3",[ { title: 'Hello "There"', text: 'Abacus', type: 'text/vnd.tiddlywiki' } ]);
+		executeTestCase("dezerializer test data case 3",[ { title: 'Hello "There"', text: "Abacus", type: "text/vnd.tiddlywiki" } ]);
 
-		executeTestCase("dezerializer test data case 4",[ { title: 'Hello "There"', text: 'Abacus', type: 'text/vnd.tiddlywiki' }, { title: 'Hello "There"', text: 'Calculator'}  ]);
+		executeTestCase("dezerializer test data case 4",[ { title: 'Hello "There"', text: "Abacus", type: "text/vnd.tiddlywiki" }, { title: 'Hello "There"', text: "Calculator"}  ]);
 
-		executeTestCase("dezerializer test data case 5",[ { title: 'Hello "There"', text: 'Abacus', type: 'text/vnd.tiddlywiki' }, { title: 'Hello "There"', text: 'Calculator'} , { title: 'Hello "There"', text: 'Protractor'}  ]);
+		executeTestCase("dezerializer test data case 5",[ { title: 'Hello "There"', text: "Abacus", type: "text/vnd.tiddlywiki" }, { title: 'Hello "There"', text: "Calculator"} , { title: 'Hello "There"', text: "Protractor"}  ]);
 		
 	});

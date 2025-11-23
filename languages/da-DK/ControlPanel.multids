@@ -98,7 +98,7 @@ Settings/AutoSave/Disabled/Description: Gem ikke ændringer automatisk
 Settings/AutoSave/Enabled/Description: Gem ændringer atomatisk
 Settings/AutoSave/Hint: Gem automatisk ændringer i løbet af redigeringen
 Settings/CamelCase/Description: Slå automatisk ~CamelCase linking til
-Settings/CamelCase/Hint: Du kan globalt slå automatisk linking af ~CamelCase fraser fra. Kræver genindlæsning for at tage effekt.
+Settings/CamelCase/Hint: Kræver genindlæsning for at tage effekt.
 Settings/Caption: Indstillinger
 Settings/DefaultSidebarTab/Caption: Standard Sidepanelsfane
 Settings/DefaultSidebarTab/Hint: Specificér hvilken sidepanelsfane der vises som standard

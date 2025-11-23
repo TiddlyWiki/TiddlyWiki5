@@ -2,7 +2,7 @@ title: $:/core/ui/ViewTemplate/title
 tags: $:/tags/ViewTemplate
 
 \whitespace trim
-\define title-styles() fill:$(foregroundColor)$;
+\define title-styles() color:$(foregroundColor)$;
 
 <div class="tc-tiddler-title tc-clearfix">
 	<div class="tc-titlebar">
