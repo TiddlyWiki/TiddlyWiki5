@@ -618,6 +618,8 @@ Matthew Salmon, @matthewsalmon, 2025/04/24
 
 @jbaldus, 2025/05/28
 
+@yogoshell, 2025/06/08
+
 Wu Peiyuan, @s793016, 2025/06/10
 
 Markus Sauermann, @Sauermann, 2025/06/20
@@ -631,3 +633,8 @@ Christian Byron, @CeeBeeTree, 2025/08/05
 Frédéric Demers, @bepuzzled, 2025/08/17
 
 @bombur51, 2025/09/28
+
+Joseph Yi, @josephyi, 2025/10/14
+
+Rishu kumar, @rishu-7549, 2025/10/25
+
