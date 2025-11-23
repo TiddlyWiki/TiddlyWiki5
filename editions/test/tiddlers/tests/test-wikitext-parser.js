@@ -344,7 +344,7 @@ describe("WikiText parser tests", function() {
 		);
 		expect(parse("<<john param>>>")).toEqual(
 
-			[{"type":"element","tag":"p","children":[{"type":"transclude","start":0,"end":14,"rule":"macrocallinline","attributes":{"0":{"name":"0","type":"string","value":"param","start":6,"end":12,"isPositional":true},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"param","start":6,"end":12,"isPositional":true}]},{"type":"text","text":">","start":14,"end":15}],"start":0,"end":15}]
+			[{"type":"element","rule":"parseblock","tag":"p","children":[{"type":"transclude","start":0,"end":14,"rule":"macrocallinline","attributes":{"0":{"name":"0","type":"string","value":"param","start":6,"end":12,"isPositional":true},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"param","start":6,"end":12,"isPositional":true}]},{"type":"text","text":">","start":14,"end":15}],"start":0,"end":15}]
 
 		);
 		// equals signs should be allowed
