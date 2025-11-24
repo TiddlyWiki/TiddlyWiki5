@@ -256,6 +256,7 @@ describe("HTML tag new parser tests", function() {
 								"one": {
 									"start": 25,
 									"name": "one",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "two",
 									"end": 33
@@ -263,8 +264,10 @@ describe("HTML tag new parser tests", function() {
 								"three": {
 									"start": 33,
 									"name": "three",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "four and five",
+									"quoted": true,
 									"end": 55
 								}
 							},
@@ -277,6 +280,7 @@ describe("HTML tag new parser tests", function() {
 								{
 									"start": 25,
 									"name": "one",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "two",
 									"end": 33
@@ -284,8 +288,10 @@ describe("HTML tag new parser tests", function() {
 								{
 									"start": 33,
 									"name": "three",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "four and five",
+									"quoted": true,
 									"end": 55
 								}
 							],
@@ -311,6 +317,7 @@ describe("HTML tag new parser tests", function() {
 								"one": {
 									"start": 25,
 									"name": "one",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "two",
 									"end": 33
@@ -318,8 +325,10 @@ describe("HTML tag new parser tests", function() {
 								"three": {
 									"start": 33,
 									"name": "three",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "four and five",
+									"quoted": true,
 									"end": 55
 								}
 							},
@@ -332,6 +341,7 @@ describe("HTML tag new parser tests", function() {
 								{
 									"start": 25,
 									"name": "one",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "two",
 									"end": 33
@@ -339,8 +349,10 @@ describe("HTML tag new parser tests", function() {
 								{
 									"start": 33,
 									"name": "three",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "four and five",
+									"quoted": true,
 									"end": 55
 								}
 							],
@@ -395,6 +407,7 @@ describe("HTML tag new parser tests", function() {
 								"one": {
 									"start": 64,
 									"name": "one",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "two",
 									"end": 72
@@ -402,8 +415,10 @@ describe("HTML tag new parser tests", function() {
 								"three": {
 									"start": 72,
 									"name": "three",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "four and five",
+									"quoted": true,
 									"end": 94
 								}
 							},
@@ -416,6 +431,7 @@ describe("HTML tag new parser tests", function() {
 								{
 									"start": 64,
 									"name": "one",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "two",
 									"end": 72
@@ -423,8 +439,10 @@ describe("HTML tag new parser tests", function() {
 								{
 									"start": 72,
 									"name": "three",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "four and five",
+									"quoted": true,
 									"end": 94
 								}
 							],
@@ -471,6 +489,7 @@ describe("HTML tag new parser tests", function() {
 								"one": {
 									"start": 64,
 									"name": "one",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "two",
 									"end": 72
@@ -478,8 +497,10 @@ describe("HTML tag new parser tests", function() {
 								"three": {
 									"start": 72,
 									"name": "three",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "four and five",
+									"quoted": true,
 									"end": 94
 								}
 							},
@@ -492,6 +513,7 @@ describe("HTML tag new parser tests", function() {
 								{
 									"start": 64,
 									"name": "one",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "two",
 									"end": 72
@@ -499,8 +521,10 @@ describe("HTML tag new parser tests", function() {
 								{
 									"start": 72,
 									"name": "three",
+									"assignmentOperator": ":",
 									"type": "string",
 									"value": "four and five",
+									"quoted": true,
 									"end": 94
 								}
 							],

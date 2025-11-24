@@ -296,6 +296,8 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 	// If we have a name and a separator then we have a named attribute
 	if(nameToken && separatorToken) {
 		node.name = nameToken.match[1];
+		// key value separator is `=` or `:`
+		node.assignmentOperator = separatorToken.match[0];
 		pos = separatorToken.end;
 	}
 	// Skip whitespace
@@ -306,6 +308,8 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 		pos = stringLiteral.end;
 		node.type = "string";
 		node.value = stringLiteral.value;
+		// Mark the value as having been quoted in the source
+		node.quoted = true;
 	} else {
 // console.log(`Failed to parse string literal ${source} at ${pos} with node as ${JSON.stringify(node)}`);
 		// Look for a filtered value
