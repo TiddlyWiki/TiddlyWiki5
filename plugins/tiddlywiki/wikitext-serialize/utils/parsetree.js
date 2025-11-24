@@ -69,11 +69,18 @@ exports.serializeAttribute = function(node,options) {
 		if(node.value === "true") {
 			return attributeString;
 		}
-		// For positional parameters without quotes in original text, preserve them unquoted
-		if(positional && assign === "" && !node.quoted) {
-			attributeString += node.value;
+		// For macro parameters (using ':' separator), preserve unquoted values
+		// For widget attributes (using '=' separator), always use quotes
+		if(assign === ":" && !node.quoted) {
+			attributeString += assign + node.value;
+		} else if(assign === "") {
+			// Positional parameter
+			if(!node.quoted) {
+				attributeString += node.value;
+			} else {
+				attributeString += '"' + node.value + '"';
+			}
 		} else {
-			// Otherwise, wrap string values in quotes
 			attributeString += assign + '"' + node.value + '"';
 		}
 	} else if(node.type === "filtered") {
