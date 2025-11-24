@@ -11,7 +11,7 @@ Optional params = REPL prompt
 
 "use strict";
 
-const { startRepl } = require("$:/core/modules/commands/inspect/repl.js");
+const{ startRepl } = require("$:/core/modules/commands/inspect/repl.js");
 
 exports.info = {
 	name: "inspect",
