@@ -316,17 +316,17 @@ describe("HTML tag new parser tests", function() {
 								},
 								"one": {
 									"start": 25,
-								"name": "one",
-								"assignmentOperator": ":",
-								"type": "string",
+									"name": "one",
+									"assignmentOperator": ":",
+									"type": "string",
 									"value": "two",
 									"end": 33
 								},
 								"three": {
 									"start": 33,
-								"name": "three",
-								"assignmentOperator": ":",
-								"type": "string",
+									"name": "three",
+									"assignmentOperator": ":",
+									"type": "string",
 									"value": "four and five",
 									"quoted": true,
 									"end": 55
@@ -340,17 +340,17 @@ describe("HTML tag new parser tests", function() {
 								},
 								{
 									"start": 25,
-								"name": "one",
-								"assignmentOperator": ":",
-								"type": "string",
+									"name": "one",
+									"assignmentOperator": ":",
+									"type": "string",
 									"value": "two",
 									"end": 33
 								},
 								{
 									"start": 33,
-								"name": "three",
-								"assignmentOperator": ":",
-								"type": "string",
+									"name": "three",
+									"assignmentOperator": ":",
+									"type": "string",
 									"value": "four and five",
 									"quoted": true,
 									"end": 55
