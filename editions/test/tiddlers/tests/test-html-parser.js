@@ -488,17 +488,17 @@ describe("HTML tag new parser tests", function() {
 								},
 								"one": {
 									"start": 64,
-								"name": "one",
-								"assignmentOperator": ":",
-								"type": "string",
+									"name": "one",
+									"assignmentOperator": ":",
+									"type": "string",
 									"value": "two",
 									"end": 72
 								},
 								"three": {
 									"start": 72,
-								"name": "three",
-								"assignmentOperator": ":",
-								"type": "string",
+									"name": "three",
+									"assignmentOperator": ":",
+									"type": "string",
 									"value": "four and five",
 									"quoted": true,
 									"end": 94
