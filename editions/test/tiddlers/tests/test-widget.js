@@ -964,16 +964,15 @@ describe("Widget module", function() {
 			{title: "$:/state/test", text: "show"}
 		]);
 		// Test plain mode - reveal widget creates span by default in inline mode
-		// Note: there's a leading space in class=" tc-reveal" due to existing behavior when class attribute is empty
 		var text = "<$reveal type='match' state='$:/state/test' text='show'>Revealed content</$reveal>";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		var wrapper = renderWidgetNode(widgetNode);
-		expect(wrapper.innerHTML).toBe("<p><span class=\" tc-reveal\">Revealed content</span></p>");
+		expect(wrapper.innerHTML).toBe("<p><span class=\"tc-reveal\">Revealed content</span></p>");
 		// Test dollar mode
 		text = "<$reveal $type='match' $state='$:/state/test' $text='show'>Revealed content</$reveal>";
 		widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		wrapper = renderWidgetNode(widgetNode);
-		expect(wrapper.innerHTML).toBe("<p><span class=\" tc-reveal\">Revealed content</span></p>");
+		expect(wrapper.innerHTML).toBe("<p><span class=\"tc-reveal\">Revealed content</span></p>");
 	});
 
 	it("should support dollar mode for button widget", function() {
