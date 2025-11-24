@@ -308,7 +308,7 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 		pos = stringLiteral.end;
 		node.type = "string";
 		node.value = stringLiteral.value;
-		// Do we have "" around the value
+		// Mark the value as having been quoted in the source
 		node.quoted = true;
 	} else {
 // console.log(`Failed to parse string literal ${source} at ${pos} with node as ${JSON.stringify(node)}`);
