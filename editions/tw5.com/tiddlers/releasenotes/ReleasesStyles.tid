@@ -1,3 +1,86 @@
 title: $:/tw5.com/releases/styles
 tags: $:/tags/Stylesheet
 type: text/vnd.tiddlywiki
+
+.doc-release-note {
+}
+
+.doc-release-note-heading {
+}
+
+.doc-change-note-category, .doc-change-note-heading {
+	font-weight: 600;
+	margin: 0;
+}
+
+.doc-release-note, .doc-release-note-heading, .doc-change-note-type, .doc-change-note-body, .doc-change-note-impacts {
+}
+
+.doc-change-note-item {
+	border: 2px solid #e8e8e8;
+	border-radius: 0.5em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	background: #f9f9f9;
+}
+
+.doc-change-note-item {
+}
+
+.doc-change-note-heading {
+	padding: 0.25em;
+	background: #e8e8e8;
+	color: <<colour foreground>>;
+}
+
+.doc-change-note-heading .doc-link-badge {
+	margin-right: 0.25em;
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+.doc-change-note-github-links {
+	border-top: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.doc-change-note-info-list {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 0.5rem;
+	padding: 0.5rem;
+}
+
+.doc-change-note-info-list-item-caption {
+	text-transform: uppercase;
+	font-size: 0.7em;
+	font-weight: bold;
+	white-space: nowrap;
+	text-align: right;
+}
+
+.doc-change-note-impact-pill-icon {
+}
+
+.doc-change-note-impact-pill-icon svg {
+	width: 1em;
+	height: 1em;
+	vertical-align: middle;
+}
+
+.doc-change-note-info-list-item-description-summary {
+	font-weight: bold;
+	font-size: 0.9em;
+}
+
+.doc-change-note-info-list-item-description-details {
+	font-size: 0.85em;
+	margin-top: 0.25em;
+	padding-left: 1.5em;
+	border-left: 2px solid #e8e8e8;
+}
+
+.doc-change-note-description {
+	padding: 0.25em;
+	background: #ffffff;
+}

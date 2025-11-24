@@ -236,7 +236,7 @@ RevealWidget.prototype.assignDomNodeClasses = function() {
 	var classAttr = this.legacyMode ? "class" : "$class";
 	var classes = this.getAttribute(classAttr,"").split(" ");
 	classes.push("tc-reveal");
-	this.domNode.className = classes.join(" ");
+	this.domNode.className = classes.join(" ").trim();
 };
 
 /*
