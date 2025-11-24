@@ -4,4 +4,4 @@ type: text/vnd.tiddlywiki
 
 <div class=<<mymacro param={{Something}}>>>content</div>
 
-<$button actions=<<myactions target={{!!title}}>>/> 
+<$button actions=<<myactions target={{!!title}}>>/>
