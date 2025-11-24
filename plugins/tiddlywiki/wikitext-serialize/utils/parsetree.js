@@ -62,19 +62,18 @@ exports.serializeAttribute = function(node,options) {
 	}
 	// If name is number, means it is a positional attribute and name is omitted
 	var positional = parseInt(node.name) >= 0,
-		// Use the original assignment operator if available, otherwise default based on context
-		// `=` in a widget and might be `:` in a macro
-		assign = positional ? "" : (node.assignmentOperator || options.assignmentSymbol || "="),
+		// Use the original assignment operator if available, otherwise default to '='
+		assign = positional ? "" : (node.assignmentOperator || "="),
 		attributeString = positional ? "" : node.name;
 	if(node.type === "string") {
 		if(node.value === "true") {
 			return attributeString;
 		}
-		// For positional parameters in macros using ':' separator (static parameters), use quotes only if the original value was quoted
-		if(positional && options.assignmentSymbol === ":" && !node.quoted) {
-			attributeString += assign + node.value;
+		// For positional parameters without quotes in original text, preserve them unquoted
+		if(positional && assign === "" && !node.quoted) {
+			attributeString += node.value;
 		} else {
-			// For named parameters or '=' separator (dynamic parameters), always use quotes
+			// Otherwise, wrap string values in quotes
 			attributeString += assign + '"' + node.value + '"';
 		}
 	} else if(node.type === "filtered") {
@@ -96,10 +95,7 @@ exports.serializeAttribute = function(node,options) {
 				if(node.value.orderedAttributes) {
 					node.value.orderedAttributes.forEach(function(attr) {
 						if(attr.name !== "$variable") {
-							// Use the original assignment operator if available. Otherwise, use '=' for dynamic parameters, ':' for static parameters
-							var nestedAssignmentSymbol = attr.assignmentOperator || 
-								((attr.type === "string" || !attr.type) ? ":" : "=");
-							var paramStr = exports.serializeAttribute(attr, {assignmentSymbol: nestedAssignmentSymbol});
+							var paramStr = exports.serializeAttribute(attr);
 							if(paramStr) {
 								params.push(paramStr);
 							}

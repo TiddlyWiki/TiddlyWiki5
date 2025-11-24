@@ -18,10 +18,7 @@ exports.serialize = function (node) {
 	if(node.orderedAttributes) {
 		node.orderedAttributes.forEach(function (attribute) {
 			if(attribute.name !== "$variable") {
-				// Use '=' for dynamic parameters (macro, indirect, filtered, substituted)
-				// Use ':' for static parameters (string)
-				var assignmentSymbol = (attribute.type === "string" || !attribute.type) ? ":" : "=";
-				result += " " + $tw.utils.serializeAttribute(attribute,{assignmentSymbol:assignmentSymbol});
+				result += " " + $tw.utils.serializeAttribute(attribute);
 			}
 		});
 	}
