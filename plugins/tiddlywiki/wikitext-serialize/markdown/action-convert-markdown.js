@@ -85,7 +85,7 @@ class ActionConvertMarkdownWidget extends Widget {
 			console.error("Error converting markdown:", e);
 			this.setVariable("success", "no");
 			this.setVariable("targetTiddler", this.tiddlerTitle);
-			this.setVariable("error-message", e.message || "Unknown error");
+			this.setVariable("errorMessage", e.message || "Unknown error");
 			// Refresh children to execute child action widgets
 			this.refreshChildren();
 			return false;
