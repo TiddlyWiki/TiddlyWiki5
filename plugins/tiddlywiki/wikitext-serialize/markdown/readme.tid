@@ -1,0 +1,56 @@
+title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/readme
+type: text/vnd.tiddlywiki
+
+! Markdown to Wikitext Conversion
+
+This module provides functionality to convert Markdown text to TiddlyWiki wikitext format.
+
+!! Usage
+
+The conversion is available through the `$tw.utils` API:
+
+```javascript
+var markdownText = "# Hello\n\nThis is **bold** text.";
+var wikiAST = $tw.utils.markdownTextToWikiAST(markdownText);
+var wikitext = $tw.utils.serializeWikitextParseTree(wikiAST);
+// Result: "! Hello\n\nThis is ''bold'' text."
+```
+
+!! Dependencies
+
+This module requires the `$:/plugins/tiddlywiki/markdown` plugin to be installed, as it uses the markdown-it library for parsing. Otherwise it will fail with a helpful error message.
+
+!! Supported Markdown Features
+
+* ''Headings'' - `# Heading` → `! Heading`
+* ''Bold'' - `**bold**` → `''bold''`
+* ''Italic'' - `*italic*` → `//italic//`
+* ''Inline code'' - ` `code` ` → ` `code` `
+* ''Code blocks'' - Fenced code blocks with language support
+* ''Links'' - `[text](url)` → `[[text|url]]`
+* ''Images'' - `![alt](src)` → `[img[alt|src]]`
+* ''Lists'' - Both unordered (`*`) and ordered (`1.`) lists, including nested lists
+* ''Blockquotes'' - `> quote` → `<<< quote >>>`
+* ''Horizontal rules'' - `---` → `---`
+* ''Paragraphs'' - Automatic paragraph handling
+* ''Line breaks'' - Hard breaks (two spaces + newline)
+* ''Strikethrough'' - `~~text~~` → `~~text~~`
+
+!! Architecture
+
+The conversion is implemented in a modular fashion:
+
+* `markdown-to-wikiast.js` - Main conversion engine with public API
+* `handlers/` - Individual handler modules for each markdown element type, for example:
+** `heading.js` - MD Headings AST node to WikiText AST node
+
+Each handler is a separate module with type `markdown-to-wikiast-handler`, making the system extensible.
+
+!! Testing
+
+Test cases are located in `editions/test/tiddlers/tests/data/markdown-to-wikitext/` and use the `text/vnd.tiddlywiki-multiple` format to specify:
+
+* Input markdown (in the `Markdown` sub-tiddler)
+* Expected wikitext output (in the `ExpectedWikitext` sub-tiddler)
+
+Tests are tagged with `$:/tags/markdown-to-wikitext-test-spec` and run automatically as part of the test suite using the JavaScript API directly (not through a filter operator).

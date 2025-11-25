@@ -1,0 +1,14 @@
+title: MarkdownToWikitext/Image
+description: Convert markdown images to wikitext
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/markdown-to-wikitext-test-spec]]
+
++
+title: Markdown
+
+![alt text](image.jpg)
+
++
+title: ExpectedWikitext
+
+[img[alt text|image.jpg]]

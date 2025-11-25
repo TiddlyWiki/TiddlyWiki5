@@ -1,0 +1,20 @@
+title: MarkdownToWikitext/Paragraph
+description: Convert markdown paragraphs to wikitext
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/markdown-to-wikitext-test-spec]]
+
++
+title: Markdown
+
+First paragraph.
+
+Second paragraph with multiple lines
+that continue here.
+
++
+title: ExpectedWikitext
+
+First paragraph.
+
+Second paragraph with multiple lines
+that continue here.

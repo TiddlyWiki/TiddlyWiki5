@@ -1,0 +1,18 @@
+title: MarkdownToWikitext/Blockquote
+description: Convert markdown blockquotes to wikitext
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/markdown-to-wikitext-test-spec]]
+
++
+title: Markdown
+
+> This is a quote
+> with multiple lines
+
++
+title: ExpectedWikitext
+
+<<< 
+This is a quote
+with multiple lines
+<<<

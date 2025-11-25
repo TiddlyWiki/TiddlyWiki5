@@ -1,0 +1,14 @@
+title: MarkdownToWikitext/Strikethrough
+description: Convert markdown strikethrough to wikitext
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/markdown-to-wikitext-test-spec]]
+
++
+title: Markdown
+
+This is ~~strikethrough~~ text.
+
++
+title: ExpectedWikitext
+
+This is ~~strikethrough~~ text.
