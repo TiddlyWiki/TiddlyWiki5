@@ -14,7 +14,7 @@ let handlers = {};
 function initHandlers() {
   // Only initialize once
 	if(Object.keys(handlers).length === 0) {
-		$tw.modules.forEachModuleOfType("markdown-to-wikiast-handler", (title, module) => {
+		$tw.modules.forEachModuleOfType("mdast-to-wikiast-rule", (title, module) => {
 			if(module.type) {
 				handlers[module.type] = module;
 			} else {

@@ -54,7 +54,7 @@ The conversion is implemented in a modular fashion:
 * `handlers/` - Individual handler modules for each markdown element type, for example:
 ** `heading.js` - MD Headings AST node to WikiText AST node
 
-Each handler is a separate module with type `markdown-to-wikiast-handler`, making the system extensible.
+Each handler is a separate module with type `mdast-to-wikiast-rule`, making the system extensible.
 
 !! Testing
 
