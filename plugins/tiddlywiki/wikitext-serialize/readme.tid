@@ -89,6 +89,15 @@ The plugin includes an optional markdown conversion module in the `markdown/` di
 
 See [[Markdown to WikiText Conversion|$:/plugins/tiddlywiki/wikitext-serialize/markdown/readme]] for details.
 
+!!! Editor Toolbar Buttons
+
+Two editor toolbar buttons are provided for WikiText editing:
+
+* ''Convert Markdown'' - Converts selected Markdown text (or the entire tiddler content if nothing is selected) to WikiText. Useful when pasting Markdown content into WikiText tiddlers.
+* ''Format WikiText'' - Reformats and normalizes WikiText by parsing and re-serializing it. This removes unnecessary whitespace and normalizes formatting.
+
+Both buttons appear in the editor toolbar when editing WikiText tiddlers (type `text/vnd.tiddlywiki` or no type specified).
+
 !! Testing
 
 The plugin includes a comprehensive test suite:
