@@ -111,47 +111,26 @@ RevealWidget.prototype.collectAttributes = function() {
 	// Detect legacy mode: true if no attributes start with $
 	this.legacyMode = this.isLegacyMode();
 	// Get the attributes for the appropriate mode
-	if(this.legacyMode) {
-		this.state = this.getAttribute("state");
-		this.revealTag = this.getAttribute("tag");
-		this.type = this.getAttribute("type");
-		this.text = this.getAttribute("text");
-		this.position = this.getAttribute("position");
-		this.positionAllowNegative = this.getAttribute("positionAllowNegative") === "yes";
-		// class attribute handled in assignDomNodeClasses()
-		this.style = this.getAttribute("style","");
-		this["default"] = this.getAttribute("default","");
-		this.animate = this.getAttribute("animate","no");
-		this.retain = this.getAttribute("retain","no");
-		this.openAnimation = this.animate === "no" ? undefined : "open";
-		this.closeAnimation = this.animate === "no" ? undefined : "close";
-		this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
-		// Compute the title of the state tiddler and read it
-		this.stateTiddlerTitle = this.state;
-		this.stateTitle = this.getAttribute("stateTitle");
-		this.stateField = this.getAttribute("stateField");
-		this.stateIndex = this.getAttribute("stateIndex");
-	} else {
-		this.state = this.getAttribute("$state");
-		this.revealTag = this.getAttribute("$tag");
-		this.type = this.getAttribute("$type");
-		this.text = this.getAttribute("$text");
-		this.position = this.getAttribute("$position");
-		this.positionAllowNegative = this.getAttribute("$positionAllowNegative") === "yes";
-		// class attribute handled in assignDomNodeClasses()
-		this.style = this.getAttribute("$style","");
-		this["default"] = this.getAttribute("$default","");
-		this.animate = this.getAttribute("$animate","no");
-		this.retain = this.getAttribute("$retain","no");
-		this.openAnimation = this.animate === "no" ? undefined : "open";
-		this.closeAnimation = this.animate === "no" ? undefined : "close";
-		this.updatePopupPosition = this.getAttribute("$updatePopupPosition","no") === "yes";
-		// Compute the title of the state tiddler and read it
-		this.stateTiddlerTitle = this.state;
-		this.stateTitle = this.getAttribute("$stateTitle");
-		this.stateField = this.getAttribute("$stateField");
-		this.stateIndex = this.getAttribute("$stateIndex");
-	}
+	var prefix = this.legacyMode ? "" : "$";
+	this.state = this.getAttribute(prefix + "state");
+	this.revealTag = this.getAttribute(prefix + "tag");
+	this.type = this.getAttribute(prefix + "type");
+	this.text = this.getAttribute(prefix + "text");
+	this.position = this.getAttribute(prefix + "position");
+	this.positionAllowNegative = this.getAttribute(prefix + "positionAllowNegative") === "yes";
+	// class attribute handled in assignDomNodeClasses()
+	this.style = this.getAttribute(prefix + "style","");
+	this["default"] = this.getAttribute(prefix + "default","");
+	this.animate = this.getAttribute(prefix + "animate","no");
+	this.retain = this.getAttribute(prefix + "retain","no");
+	this.openAnimation = this.animate === "no" ? undefined : "open";
+	this.closeAnimation = this.animate === "no" ? undefined : "close";
+	this.updatePopupPosition = this.getAttribute(prefix + "updatePopupPosition","no") === "yes";
+	// Compute the title of the state tiddler and read it
+	this.stateTiddlerTitle = this.state;
+	this.stateTitle = this.getAttribute(prefix + "stateTitle");
+	this.stateField = this.getAttribute(prefix + "stateField");
+	this.stateIndex = this.getAttribute(prefix + "stateIndex");
 };
 
 /*

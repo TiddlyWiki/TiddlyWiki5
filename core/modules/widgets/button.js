@@ -210,57 +210,31 @@ ButtonWidget.prototype.collectAttributes = function() {
 	// Detect legacy mode: true if no attributes start with $
 	this.legacyMode = this.isLegacyMode();
 	// Get attributes for the appropriate mode
-	if(this.legacyMode) {
-		this.actions = this.getAttribute("actions");
-		this.to = this.getAttribute("to");
-		this.message = this.getAttribute("message");
-		this.param = this.getAttribute("param");
-		this.set = this.getAttribute("set");
-		this.setTo = this.getAttribute("setTo");
-		this.popup = this.getAttribute("popup");
-		this.hover = this.getAttribute("hover");
-		this.role = this.getAttribute("role");
-		this.tooltip = this.getAttribute("tooltip");
-		this.style = this.getAttribute("style");
-		this["class"] = this.getAttribute("class","");
-		this.selectedClass = this.getAttribute("selectedClass");
-		this.defaultSetValue = this.getAttribute("default","");
-		this.buttonTag = this.getAttribute("tag");
-		this.dragTiddler = this.getAttribute("dragTiddler");
-		this.dragFilter = this.getAttribute("dragFilter");
-		this.setTitle = this.getAttribute("setTitle");
-		this.setField = this.getAttribute("setField");
-		this.setIndex = this.getAttribute("setIndex");
-		this.popupTitle = this.getAttribute("popupTitle");
-		this.popupAbsCoords = this.getAttribute("popupAbsCoords", "no");
-		this.tabIndex = this.getAttribute("tabindex");
-		this.isDisabled = this.getAttribute("disabled","no");
-	} else {
-		this.actions = this.getAttribute("$actions");
-		this.to = this.getAttribute("$to");
-		this.message = this.getAttribute("$message");
-		this.param = this.getAttribute("$param");
-		this.set = this.getAttribute("$set");
-		this.setTo = this.getAttribute("$setTo");
-		this.popup = this.getAttribute("$popup");
-		this.hover = this.getAttribute("$hover");
-		this.role = this.getAttribute("$role");
-		this.tooltip = this.getAttribute("$tooltip");
-		this.style = this.getAttribute("$style");
-		this["class"] = this.getAttribute("$class","");
-		this.selectedClass = this.getAttribute("$selectedClass");
-		this.defaultSetValue = this.getAttribute("$default","");
-		this.buttonTag = this.getAttribute("$tag");
-		this.dragTiddler = this.getAttribute("$dragTiddler");
-		this.dragFilter = this.getAttribute("$dragFilter");
-		this.setTitle = this.getAttribute("$setTitle");
-		this.setField = this.getAttribute("$setField");
-		this.setIndex = this.getAttribute("$setIndex");
-		this.popupTitle = this.getAttribute("$popupTitle");
-		this.popupAbsCoords = this.getAttribute("$popupAbsCoords", "no");
-		this.tabIndex = this.getAttribute("$tabindex");
-		this.isDisabled = this.getAttribute("$disabled","no");
-	}
+	var prefix = this.legacyMode ? "" : "$";
+	this.actions = this.getAttribute(prefix + "actions");
+	this.to = this.getAttribute(prefix + "to");
+	this.message = this.getAttribute(prefix + "message");
+	this.param = this.getAttribute(prefix + "param");
+	this.set = this.getAttribute(prefix + "set");
+	this.setTo = this.getAttribute(prefix + "setTo");
+	this.popup = this.getAttribute(prefix + "popup");
+	this.hover = this.getAttribute(prefix + "hover");
+	this.role = this.getAttribute(prefix + "role");
+	this.tooltip = this.getAttribute(prefix + "tooltip");
+	this.style = this.getAttribute(prefix + "style");
+	this["class"] = this.getAttribute(prefix + "class","");
+	this.selectedClass = this.getAttribute(prefix + "selectedClass");
+	this.defaultSetValue = this.getAttribute(prefix + "default","");
+	this.buttonTag = this.getAttribute(prefix + "tag");
+	this.dragTiddler = this.getAttribute(prefix + "dragTiddler");
+	this.dragFilter = this.getAttribute(prefix + "dragFilter");
+	this.setTitle = this.getAttribute(prefix + "setTitle");
+	this.setField = this.getAttribute(prefix + "setField");
+	this.setIndex = this.getAttribute(prefix + "setIndex");
+	this.popupTitle = this.getAttribute(prefix + "popupTitle");
+	this.popupAbsCoords = this.getAttribute(prefix + "popupAbsCoords", "no");
+	this.tabIndex = this.getAttribute(prefix + "tabindex");
+	this.isDisabled = this.getAttribute(prefix + "disabled","no");
 };
 
 /*
