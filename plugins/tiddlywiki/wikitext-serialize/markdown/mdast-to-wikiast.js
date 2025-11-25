@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/markdown-to-wikiast.js
+title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/mdast-to-wikiast.js
 type: application/javascript
 module-type: utils
 
