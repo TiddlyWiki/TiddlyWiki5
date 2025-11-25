@@ -1,0 +1,14 @@
+title: MarkdownToWikitext/MixedFormatting
+description: Convert markdown with mixed formatting to wikitext
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/markdown-to-wikitext-test-spec]]
+
++
+title: Markdown
+
+This text has **bold** and *italic* and `code` mixed together.
+
++
+title: ExpectedWikitext
+
+This text has ''bold'' and //italic// and `code` mixed together.

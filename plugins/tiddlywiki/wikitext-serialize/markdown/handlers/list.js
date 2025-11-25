@@ -1,0 +1,77 @@
+/*\
+title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/handlers/list.js
+type: application/javascript
+module-type: markdown-to-wikiast-handler
+
+Handler for markdown list tokens
+
+\*/
+
+"use strict";
+
+exports.bullet_list_open = {
+	type: "bullet_list_open",
+	isBlock: true,
+	isContainer: true,
+	handler: function(token, context) {
+		return {
+			type: "element",
+			tag: "ul",
+			children: [],
+			rule: "list"
+		};
+	}
+};
+
+exports.ordered_list_open = {
+	type: "ordered_list_open",
+	isBlock: true,
+	isContainer: true,
+	handler: function(token, context) {
+		return {
+			type: "element",
+			tag: "ol",
+			children: [],
+			rule: "list"
+		};
+	}
+};
+
+exports.list_item_open = {
+	type: "list_item_open",
+	isContainer: true,
+	handler: function(token, context) {
+		return {
+			type: "element",
+			tag: "li",
+			children: []
+		};
+	}
+};
+
+exports.list_item_close = {
+	type: "list_item_close",
+	isContainerClose: true,
+	handler: function(token, context) {
+		// Container close handler, actual pop happens in main loop
+		return null;
+	}
+};
+
+exports.bullet_list_close = {
+	type: "bullet_list_close",
+	isContainerClose: true,
+	handler: function(token, context) {
+		// Container close handler, actual pop happens in main loop
+		return null;
+	}
+};
+
+exports.ordered_list_close = {
+	type: "ordered_list_close",
+	isContainerClose: true,
+	handler: function(token, context) {
+		// Container close handler, actual pop happens in main loop
+		return null;
+	}
+};

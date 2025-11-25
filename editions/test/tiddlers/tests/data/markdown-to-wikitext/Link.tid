@@ -1,0 +1,15 @@
+title: MarkdownToWikitext/Link
+description: Convert markdown links to wikitext
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/markdown-to-wikitext-test-spec]]
+
++
+title: Markdown
+
+This is [a link](https://example.com) in text.
+
++
+title: ExpectedWikitext
+
+This is [[a link|https://example.com]] in text.
+
