@@ -50,7 +50,7 @@ This module requires the `$:/plugins/tiddlywiki/markdown` plugin to be installed
 
 The conversion is implemented in a modular fashion:
 
-* `markdown-to-wikiast.js` - Main conversion engine with public API
+* `mdast-to-wikiast.js` - Main conversion engine with public API
 * `handlers/` - Individual handler modules for each markdown element type, for example:
 ** `heading.js` - MD Headings AST node to WikiText AST node
 
