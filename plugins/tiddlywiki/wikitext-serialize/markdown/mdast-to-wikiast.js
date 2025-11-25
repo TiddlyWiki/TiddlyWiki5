@@ -9,7 +9,7 @@ Convert markdown-it tokens to TiddlyWiki parse tree (AST)
 
 "use strict";
 
-let handlers = {};
+const handlers = {};
 
 function initHandlers() {
   // Only initialize once
