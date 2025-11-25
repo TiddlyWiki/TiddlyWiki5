@@ -7,7 +7,9 @@ This module provides functionality to convert Markdown text to TiddlyWiki wikite
 
 !! Usage
 
-The conversion is available through the `$tw.utils` API:
+The conversion is available through multiple interfaces:
+
+!!! JavaScript API
 
 ```javascript
 var markdownText = "# Hello\n\nThis is **bold** text.";
@@ -15,6 +17,14 @@ var wikiAST = $tw.utils.markdownTextToWikiAST(markdownText);
 var wikitext = $tw.utils.serializeWikitextParseTree(wikiAST);
 // Result: "! Hello\n\nThis is ''bold'' text."
 ```
+
+!!! Tiddler Toolbar Button
+
+When viewing a markdown tiddler (type `text/x-markdown` or `text/markdown`), a convert button appears in the tiddler toolbar. Clicking it converts the markdown to wikitext.
+
+!!! Import Dialog
+
+When importing tiddlers, check the "Convert Markdown files to WikiText on import" option to automatically convert all markdown tiddlers during import.
 
 !! Dependencies
 
