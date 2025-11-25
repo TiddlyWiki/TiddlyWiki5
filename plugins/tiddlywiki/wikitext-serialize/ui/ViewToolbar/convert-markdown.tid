@@ -18,5 +18,10 @@ condition: [<currentTiddler>type[text/x-markdown]] [<currentTiddler>type[text/ma
 			<$text text={{$:/plugins/tiddlywiki/wikitext-serialize/language/Buttons/ConvertMarkdown/Caption}}/>
 		</span>
 	</$list>
-	<$action-convert-markdown $tiddler=<<currentTiddler>>/>
+	<$action-convert-markdown $tiddler=<<currentTiddler>>>
+		<$action-sendmessage 
+			$message="tm-notify" 
+			$param={{{ [<success>match[yes]then[$:/plugins/tiddlywiki/wikitext-serialize/language/Notifications/ConvertSuccess]else[$:/plugins/tiddlywiki/wikitext-serialize/language/Notifications/ConvertFailure]] }}}
+		/>
+	</$action-convert-markdown>
 </$button>

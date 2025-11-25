@@ -135,14 +135,7 @@ exports.markdownTextToWikiAST = function(markdownText) {
 		throw new Error("Markdown plugin is required for markdown-to-wikitext conversion. Please install the tiddlywiki/markdown plugin.");
 	}
 	
-	const md = new MarkdownIt({
-		html: true,
-		xhtmlOut: true,
-		breaks: false,
-		typographer: false,
-		linkify: false
-	});
-	
+	const md = new MarkdownIt();
 	const tokens = md.parse(markdownText, {});
 	return $tw.utils.mdASTToWikiAST(tokens);
 };
