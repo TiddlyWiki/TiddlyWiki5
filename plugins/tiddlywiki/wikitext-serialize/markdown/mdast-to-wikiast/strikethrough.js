@@ -9,9 +9,9 @@ Handler for markdown strikethrough tokens
 
 "use strict";
 
-exports.type = "s_open";
-
-exports.handler = function(token, context) {
+exports.s_open = {
+	type: "s_open",
+	handler: function(token, context) {
 	// Find the matching close tag
 	var closeIdx = context.index + 1;
 	var depth = 1;
@@ -31,11 +31,17 @@ exports.handler = function(token, context) {
 	// Update context index to skip processed tokens
 	context.skipTo = closeIdx - 1;
 	
-	return {
-		type: "element",
-		tag: "strike",
-		orderedAttributes: [],
-		children: sChildren,
-		rule: "strikethrough"
-	};
+		return {
+			type: "element",
+			tag: "strike",
+			orderedAttributes: [],
+			children: sChildren,
+			rule: "strikethrough"
+		};
+	}
+};
+
+exports.s_close = {
+	type: "s_close",
+	isCloseToken: true
 };

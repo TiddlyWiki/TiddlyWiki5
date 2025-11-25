@@ -9,9 +9,9 @@ Handler for markdown strong/bold tokens
 
 "use strict";
 
-exports.type = "strong_open";
-
-exports.handler = function(token, context) {
+exports.strong_open = {
+	type: "strong_open",
+	handler: function(token, context) {
 	// Find the matching close tag
 	var closeIdx = context.index + 1;
 	var depth = 1;
@@ -31,11 +31,17 @@ exports.handler = function(token, context) {
 	// Update context index to skip processed tokens
 	context.skipTo = closeIdx - 1;
 	
-	return {
-		type: "element",
-		tag: "strong",
-		orderedAttributes: [],
-		children: strongChildren,
-		rule: "bold"
-	};
+		return {
+			type: "element",
+			tag: "strong",
+			orderedAttributes: [],
+			children: strongChildren,
+			rule: "bold"
+		};
+	}
+};
+
+exports.strong_close = {
+	type: "strong_close",
+	isCloseToken: true
 };

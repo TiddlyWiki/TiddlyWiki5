@@ -9,9 +9,9 @@ Handler for markdown link tokens
 
 "use strict";
 
-exports.type = "link_open";
-
-exports.handler = function(token, context) {
+exports.link_open = {
+	type: "link_open",
+	handler: function(token, context) {
 	// Find the matching close tag
 	var closeIdx = context.index + 1;
 	var depth = 1;
@@ -55,15 +55,21 @@ exports.handler = function(token, context) {
 		};
 	}
 	
-	return {
-		type: "link",
-		attributes: {
-			to: {
-				type: "string",
-				value: href
-			}
-		},
-		children: linkChildren,
-		rule: "prettylink"
-	};
+		return {
+			type: "link",
+			attributes: {
+				to: {
+					type: "string",
+					value: href
+				}
+			},
+			children: linkChildren,
+			rule: "prettylink"
+		};
+	}
+};
+
+exports.link_close = {
+	type: "link_close",
+	isCloseToken: true
 };
