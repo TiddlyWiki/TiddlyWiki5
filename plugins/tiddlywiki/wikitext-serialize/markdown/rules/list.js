@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/handlers/list.js
+title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/rules/list.js
 type: application/javascript
 module-type: markdown-to-wikiast-handler
 
