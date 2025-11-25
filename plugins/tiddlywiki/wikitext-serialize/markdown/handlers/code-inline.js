@@ -15,6 +15,7 @@ exports.handler = function(token, context) {
 	return {
 		type: "element",
 		tag: "code",
+		orderedAttributes: [],
 		children: [{
 			type: "text",
 			text: token.content

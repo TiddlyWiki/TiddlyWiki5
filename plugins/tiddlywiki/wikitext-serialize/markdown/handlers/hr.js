@@ -16,6 +16,7 @@ exports.handler = function(token, context) {
 	return {
 		type: "element",
 		tag: "hr",
+		orderedAttributes: [],
 		rule: "horizrule"
 	};
 };

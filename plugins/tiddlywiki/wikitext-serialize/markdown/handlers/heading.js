@@ -27,6 +27,7 @@ exports.handler = function(token, context) {
 		type: "element",
 		tag: token.tag,
 		attributes: {},
+		orderedAttributes: [],
 		children: children,
 		rule: "heading"
 	};

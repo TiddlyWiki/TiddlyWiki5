@@ -17,6 +17,7 @@ exports.blockquote_open = {
 		return {
 			type: "element",
 			tag: "blockquote",
+			orderedAttributes: [],
 			children: [],
 			attributes: {
 				class: {

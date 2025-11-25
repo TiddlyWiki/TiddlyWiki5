@@ -34,6 +34,7 @@ exports.handler = function(token, context) {
 	return {
 		type: "element",
 		tag: "em",
+		orderedAttributes: [],
 		children: emChildren,
 		rule: "italic"
 	};
