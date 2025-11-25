@@ -19,12 +19,6 @@ exports.blockquote_open = {
 			tag: "blockquote",
 			orderedAttributes: [],
 			children: [],
-			attributes: {
-				class: {
-					type: "string",
-					value: " "  // Single space for basic blockquote (matches WikiText <<< syntax)
-				}
-			},
 			rule: "quoteblock"
 		};
 	}
