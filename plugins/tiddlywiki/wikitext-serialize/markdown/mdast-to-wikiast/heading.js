@@ -13,7 +13,6 @@ exports.type = "heading_open";
 exports.isBlock = true;
 
 exports.handler = function(token, context) {
-	var level = parseInt(token.tag.substr(1), 10);
 	var nextToken = context.tokens[context.index + 1];
 	var children = [];
 	if(nextToken && nextToken.type === "inline") {

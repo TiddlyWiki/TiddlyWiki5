@@ -39,27 +39,23 @@ class ActionConvertMarkdownWidget extends Widget {
 		const tiddlerTitle = this.tiddlerTitle;
 		if(!tiddlerTitle) {
 			this.setVariable("success", "no");
-			this.refreshChildren();
 			return false;
 		}
 
 		const tiddler = this.wiki.getTiddler(tiddlerTitle);
 		if(!tiddler) {
 			this.setVariable("success", "no");
-			this.refreshChildren();
 			return false;
 		}
 
 		const type = tiddler.fields.type || "text/vnd.tiddlywiki";
 		if(type !== "text/x-markdown" && type !== "text/markdown") {
 			this.setVariable("success", "no");
-			this.refreshChildren();
 			return false;
 		}
 
 		if(!$tw.utils.markdownTextToWikiAST) {
 			this.setVariable("success", "no");
-			this.refreshChildren();
 			return false;
 		}
 
@@ -78,16 +74,12 @@ class ActionConvertMarkdownWidget extends Widget {
 
 			this.setVariable("success", "yes");
 			this.setVariable("targetTiddler", this.tiddlerTitle);
-			// Refresh children to execute child action widgets
-			this.refreshChildren();
 			return true;
 		} catch(e) {
 			console.error("Error converting markdown:", e);
 			this.setVariable("success", "no");
 			this.setVariable("targetTiddler", this.tiddlerTitle);
 			this.setVariable("errorMessage", e.message || "Unknown error");
-			// Refresh children to execute child action widgets
-			this.refreshChildren();
 			return false;
 		}
 	}
