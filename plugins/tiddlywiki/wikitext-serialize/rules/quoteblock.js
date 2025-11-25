@@ -16,8 +16,6 @@ exports.serialize = function (tree,serialize) {
 		
 		result.push(quotePrefix);
 		
-		// Process children
-		var hasNestedQuote = false;
 		tree.children.forEach(function (child, index) {
 			if(child.type === "element" && child.tag === "p") {
 				var content = serialize(child.children).trim();
@@ -30,7 +28,6 @@ exports.serialize = function (tree,serialize) {
 					result.push(content);
 				}
 			} else if(child.type === "element" && child.tag === "blockquote") {
-				hasNestedQuote = true;
 				// Nested blockquote - add extra < for each level
 				var nestedQuote = exports.serialize(child, serialize).trim();
 				// Replace all <<< with <<<< to indicate one more level of nesting
