@@ -1,5 +1,4 @@
 title: MarkdownToWikitext/HardBreak
-description: Convert markdown hard breaks to wikitext
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/markdown-to-wikitext-test-spec]]
 

@@ -1,5 +1,4 @@
 title: MarkdownToWikitext/Heading
-description: Convert markdown headings to wikitext
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/markdown-to-wikitext-test-spec]]
 
