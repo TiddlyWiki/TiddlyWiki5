@@ -1,15 +1,22 @@
 title: MarkdownToWikitext/Link
 description: Convert markdown links to wikitext
+tags: $:/tags/markdown-to-wikitext-test-spec
 type: text/vnd.tiddlywiki-multiple
-tags: [[$:/tags/markdown-to-wikitext-test-spec]]
 
-+
 title: Markdown
 
-This is [a link](https://example.com) in text.
+[Normal link](http://example.com)
+[Link with title](http://example.com 'Link title')
+
+<http://example.com>
+<mailto:example@example.com>
 
 +
 title: ExpectedWikitext
 
-This is [[a link|https://example.com]] in text.
+[[Normal link|http://example.com]]
+[[Link with title|http://example.com]]
+
+http://example.com
+mailto:example@example.com
 

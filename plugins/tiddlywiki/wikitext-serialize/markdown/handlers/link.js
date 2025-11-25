@@ -39,8 +39,21 @@ exports.handler = function(token, context) {
 	// Process the content between open and close
 	var linkChildren = context.processInlineTokens(context.tokens.slice(context.index + 1, closeIdx - 1));
 	
+	// Check if this is an autolink (text content matches href)
+	var isAutolink = linkChildren.length === 1 && 
+	                 linkChildren[0].type === "text" && 
+	                 (linkChildren[0].text === href || linkChildren[0].text === href.replace(/^mailto:/, ""));
+	
 	// Update context index to skip processed tokens
 	context.skipTo = closeIdx - 1;
+	
+	if(isAutolink) {
+		// For autolinks, just return the URL as plain text
+		return {
+			type: "text",
+			text: href
+		};
+	}
 	
 	return {
 		type: "link",

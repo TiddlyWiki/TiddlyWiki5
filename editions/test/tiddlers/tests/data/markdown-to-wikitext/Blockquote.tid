@@ -12,7 +12,7 @@ title: Markdown
 +
 title: ExpectedWikitext
 
-<<< 
+<<<
 This is a quote
 with multiple lines
 <<<
