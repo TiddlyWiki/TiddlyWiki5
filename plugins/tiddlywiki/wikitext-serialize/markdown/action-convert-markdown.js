@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/wikitext-serialize/modules/widgets/convert-markdown.js
+title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/action-convert-markdown.js
 type: application/javascript
 module-type: widget
 

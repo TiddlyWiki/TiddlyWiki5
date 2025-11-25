@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/handlers/blockquote.js
+title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/rules/blockquote.js
 type: application/javascript
 module-type: markdown-to-wikiast-handler
 

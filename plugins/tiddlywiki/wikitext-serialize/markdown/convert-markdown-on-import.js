@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/wikitext-serialize/modules/startup/convert-markdown-on-import.js
+title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/convert-markdown-on-import.js
 type: application/javascript
 module-type: startup
 

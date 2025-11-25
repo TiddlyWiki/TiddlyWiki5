@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/handlers/emphasis.js
+title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/rules/emphasis.js
 type: application/javascript
 module-type: markdown-to-wikiast-handler
 

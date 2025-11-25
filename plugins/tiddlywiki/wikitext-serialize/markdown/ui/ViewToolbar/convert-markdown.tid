@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/wikitext-serialize/ui/ViewToolbar/convert-markdown
+title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/ui/ViewToolbar/convert-markdown
 tags: $:/tags/ViewToolbar
 caption: {{$:/plugins/tiddlywiki/wikitext-serialize/images/convert-markdown}} {{$:/plugins/tiddlywiki/wikitext-serialize/language/Buttons/ConvertMarkdown/Caption}}
 description: {{$:/plugins/tiddlywiki/wikitext-serialize/language/Buttons/ConvertMarkdown/Hint}}

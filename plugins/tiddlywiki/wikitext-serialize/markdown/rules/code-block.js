@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/handlers/code-block.js
+title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/rules/code-block.js
 type: application/javascript
 module-type: markdown-to-wikiast-handler
 
