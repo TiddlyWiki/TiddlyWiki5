@@ -9,5 +9,6 @@ tags: $:/tags/ImportOptions
 	unchecked="no"
 	default="no"
 >
-	{{$:/plugins/tiddlywiki/wikitext-serialize/language/Import/ConvertMarkdown}}
+	&#32;
+	{{$:/plugins/tiddlywiki/wikitext-serialize/language/en-GB/Import/ConvertMarkdown}}
 </$checkbox>

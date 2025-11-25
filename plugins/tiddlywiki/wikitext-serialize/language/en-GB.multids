@@ -3,5 +3,5 @@ title: $:/plugins/tiddlywiki/wikitext-serialize/language/en-GB/
 Buttons/ConvertMarkdown/Caption: convert to wikitext
 Buttons/ConvertMarkdown/Hint: Convert this markdown tiddler to wikitext
 Import/ConvertMarkdown: Convert Markdown files to WikiText on import
-Notifications/ConvertSuccess: Markdown successfully converted to WikiText
-Notifications/ConvertFailure: Failed to convert Markdown to WikiText
+Notifications/ConvertSuccess: <<targetTiddler>> Markdown successfully converted to WikiText
+Notifications/ConvertFailure: <<targetTiddler>> Failed to convert Markdown to WikiText

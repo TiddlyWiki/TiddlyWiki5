@@ -13,12 +13,17 @@ const Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 class ActionConvertMarkdownWidget extends Widget {
 	render(parent, nextSibling) {
+		this.parentDomNode = parent;
 		this.computeAttributes();
 		this.execute();
+		// Render children
+		this.renderChildren(parent, nextSibling);
 	}
 
 	execute() {
 		this.tiddlerTitle = this.getAttribute("$tiddler", this.getVariable("currentTiddler"));
+		// Construct the child widgets
+		this.makeChildWidgets();
 	}
 
 	refresh(changedTiddlers) {
@@ -27,30 +32,34 @@ class ActionConvertMarkdownWidget extends Widget {
 			this.refreshSelf();
 			return true;
 		}
-		return false;
+		return this.refreshChildren(changedTiddlers);
 	}
 
 	invokeAction(triggeringWidget, event) {
 		const tiddlerTitle = this.tiddlerTitle;
 		if(!tiddlerTitle) {
 			this.setVariable("success", "no");
+			this.refreshChildren();
 			return false;
 		}
 
 		const tiddler = this.wiki.getTiddler(tiddlerTitle);
 		if(!tiddler) {
 			this.setVariable("success", "no");
+			this.refreshChildren();
 			return false;
 		}
 
 		const type = tiddler.fields.type || "text/vnd.tiddlywiki";
 		if(type !== "text/x-markdown" && type !== "text/markdown") {
 			this.setVariable("success", "no");
+			this.refreshChildren();
 			return false;
 		}
 
 		if(!$tw.utils.markdownTextToWikiAST) {
 			this.setVariable("success", "no");
+			this.refreshChildren();
 			return false;
 		}
 
@@ -68,15 +77,17 @@ class ActionConvertMarkdownWidget extends Widget {
 			));
 
 			this.setVariable("success", "yes");
-			// Invoke child action widgets
-			this.invokeActions(triggeringWidget, event);
+			this.setVariable("targetTiddler", this.tiddlerTitle);
+			// Refresh children to execute child action widgets
+			this.refreshChildren();
 			return true;
 		} catch(e) {
 			console.error("Error converting markdown:", e);
 			this.setVariable("success", "no");
+			this.setVariable("targetTiddler", this.tiddlerTitle);
 			this.setVariable("error-message", e.message || "Unknown error");
-			// Invoke child action widgets with success=no variable
-			this.invokeActions(triggeringWidget, event);
+			// Refresh children to execute child action widgets
+			this.refreshChildren();
 			return false;
 		}
 	}
