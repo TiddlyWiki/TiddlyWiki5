@@ -22,6 +22,31 @@ var wikitext = $tw.utils.serializeWikitextParseTree(wikiAST);
 
 When viewing a markdown tiddler (type `text/x-markdown` or `text/markdown`), a convert button appears in the tiddler toolbar. Clicking it converts the markdown to wikitext.
 
+!!! Action Widget
+
+The `<$action-convert-markdown>` widget converts a markdown tiddler to wikitext format.
+
+''Attributes:''
+
+* `$tiddler` - Title of the tiddler to convert (defaults to current tiddler)
+
+''Variables set for child widgets:''
+
+* `success` - Set to `"yes"` if conversion succeeded, `"no"` if it failed
+* `targetTiddler` - Title of the tiddler that was converted
+* `errorMessage` - Error message if conversion failed (only set when `success="no"`)
+
+''Example:''
+
+```html
+<$action-convert-markdown $tiddler="MyMarkdownTiddler">
+  <$action-sendmessage 
+    $message="tm-notify" 
+    $param={{{ [<success>match[yes]then[ConvertSuccess]else[ConvertFailure]] }}}
+  />
+</$action-convert-markdown>
+```
+
 !!! Import Dialog
 
 When importing tiddlers, check the "Convert Markdown files to WikiText on import" option to automatically convert all markdown tiddlers during import.
