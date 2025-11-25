@@ -49,6 +49,11 @@ title: $:/core/ui/ImportListing
 \end
 
 \whitespace trim
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportOptions]]" variable="importOption">
+<div class="tc-import-option">
+<$transclude tiddler=<<importOption>>/>
+</div>
+</$list>
 <div class="tc-table-wrapper">
 <table class="tc-import-table">
 <tbody>
