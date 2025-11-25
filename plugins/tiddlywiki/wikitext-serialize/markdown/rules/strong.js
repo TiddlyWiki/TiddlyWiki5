@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/rules/strong.js
 type: application/javascript
-module-type: markdown-to-wikiast-handler
+module-type: mdast-to-wikiast-rule
 
 Handler for markdown strong/bold tokens
 

@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/rules/table.js
 type: application/javascript
-module-type: markdown-to-wikiast-handler
+module-type: mdast-to-wikiast-rule
 
 Markdown table handlers
 
