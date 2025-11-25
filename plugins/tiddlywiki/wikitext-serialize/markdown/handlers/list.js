@@ -17,6 +17,7 @@ exports.bullet_list_open = {
 		return {
 			type: "element",
 			tag: "ul",
+			orderedAttributes: [],
 			children: [],
 			rule: "list"
 		};
@@ -31,6 +32,7 @@ exports.ordered_list_open = {
 		return {
 			type: "element",
 			tag: "ol",
+			orderedAttributes: [],
 			children: [],
 			rule: "list"
 		};
@@ -44,6 +46,7 @@ exports.list_item_open = {
 		return {
 			type: "element",
 			tag: "li",
+			orderedAttributes: [],
 			children: []
 		};
 	}

@@ -27,6 +27,7 @@ exports.handler = function(token, context) {
 	return {
 		type: "element",
 		tag: "p",
+		orderedAttributes: [],
 		children: children,
 		isBlock: true,
 		rule: "parseblock"  // Use parseblock rule which just serializes children + blank line

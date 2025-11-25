@@ -34,6 +34,7 @@ exports.handler = function(token, context) {
 	return {
 		type: "element",
 		tag: "strike",
+		orderedAttributes: [],
 		children: sChildren,
 		rule: "strikethrough"
 	};
