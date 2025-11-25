@@ -9,7 +9,7 @@ module-type: wikiruleserializer
 exports.name = "parameters";
 
 exports.serialize = function(tree,serialize) {
-	var params = tree.orderedAttributes.map(function(param) {
+	var params = (tree.orderedAttributes || []).map(function(param) {
 			return param.name + (param.value ? ":" + param.value : "");
 	}).join(",");
 	return "\\parameters(" + params + ")\n\n" + serialize(tree.children);
