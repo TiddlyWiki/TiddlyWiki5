@@ -464,6 +464,38 @@ Widget.prototype.getAttribute = function(name,defaultText) {
 };
 
 /*
+Check if any attribute name starts with "$" to detect dollar mode vs legacy mode.
+Returns true if in legacy mode (no dollar-prefixed attributes found).
+*/
+Widget.prototype.isLegacyMode = function() {
+	var hasDollar = false;
+	$tw.utils.each(this.attributes,function(value,name) {
+		if(name.charAt(0) === "$") {
+			hasDollar = true;
+			return false; // Exit early
+		}
+	});
+	return !hasDollar;
+};
+
+/*
+Helper method to check if any attribute from a list has changed in either legacy or dollar mode.
+attributeNames: array of attribute names (without $ prefix)
+changedAttributes: the result from computeAttributes()
+Returns true if any of the attributes changed in either mode
+*/
+Widget.prototype.hasChangedAttributes = function(attributeNames,changedAttributes) {
+	var changed = false;
+	$tw.utils.each(attributeNames,function(name) {
+		if(changedAttributes[name] || changedAttributes["$" + name]) {
+			changed = true;
+			return false;
+		}
+	});
+	return changed;
+};
+
+/*
 Assign the common attributes of the widget to a domNode
 options include:
 sourcePrefix: prefix of attributes that are to be directly assigned (defaults to the empty string meaning all attributes)
