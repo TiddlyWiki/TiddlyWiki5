@@ -1,4 +1,4 @@
-title: $:/changenotes/5.4.0/#8258 - serialize-wikitext
+title: $:/changenotes/5.4.0/#8258
 description: Add ability to serialize WikiText AST nodes back to wikitext strings
 tags: $:/tags/ChangeNote
 release: 5.4.0
