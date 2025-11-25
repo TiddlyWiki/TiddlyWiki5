@@ -1,4 +1,4 @@
-title: $:/changenotes/5.4.0/#9462 - md-to-tid
+title: $:/changenotes/5.4.0/#9462
 description: Add button and import option to convert Markdown tiddlers to WikiText
 tags: $:/tags/ChangeNote
 release: 5.4.0
@@ -6,8 +6,6 @@ change-type: feature
 change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9462
 github-contributors: linonetwo
-
-This PR is based on [[#8258|$:/changenotes/5.4.0/#8258 - serialize-wikitext]]
 
 * new `action-convert-markdown` widget that converts a Markdown tiddler to WikiText
 ** A view toolbar button that uses this widget
