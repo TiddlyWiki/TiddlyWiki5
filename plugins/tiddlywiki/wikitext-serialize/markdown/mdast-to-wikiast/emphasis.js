@@ -9,9 +9,9 @@ Handler for markdown emphasis/italic tokens
 
 "use strict";
 
-exports.type = "em_open";
-
-exports.handler = function(token, context) {
+exports.em_open = {
+	type: "em_open",
+	handler: function(token, context) {
 	// Find the matching close tag
 	var closeIdx = context.index + 1;
 	var depth = 1;
@@ -31,11 +31,17 @@ exports.handler = function(token, context) {
 	// Update context index to skip processed tokens
 	context.skipTo = closeIdx - 1;
 	
-	return {
-		type: "element",
-		tag: "em",
-		orderedAttributes: [],
-		children: emChildren,
-		rule: "italic"
-	};
+		return {
+			type: "element",
+			tag: "em",
+			orderedAttributes: [],
+			children: emChildren,
+			rule: "italic"
+		};
+	}
+};
+
+exports.em_close = {
+	type: "em_close",
+	isCloseToken: true
 };

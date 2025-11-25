@@ -70,8 +70,11 @@ function processInlineTokens(inlineTokens) {
 			if(context.skipTo > i) {
 				i = context.skipTo - 1;
 			}
+		} else if(handler && handler.isCloseToken) {
+			// Skip close tokens - they're handled by their corresponding open token
 		} else {
-			if(!["strong_close", "em_close", "s_close", "link_close"].includes(token.type) && token.content) {
+			// Only add text content for tokens without handlers
+			if(token.content) {
 				result.push({
 					type: "text",
 					text: token.content
