@@ -1,5 +1,4 @@
 title: MarkdownToWikitext/HorizontalRule
-description: Convert markdown horizontal rule to wikitext
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/markdown-to-wikitext-test-spec]]
 
