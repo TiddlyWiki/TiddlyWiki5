@@ -35,7 +35,7 @@ exports.serialize = function (tree,serialize) {
 				var nestedQuote = exports.serialize(child, serialize).trim();
 				// Replace all <<< with <<<< to indicate one more level of nesting
 				nestedQuote = nestedQuote.replace(/^(<<<+)/gm, function(match) {
-					return match + '<';
+					return match + "<";
 				});
 				result.push(nestedQuote);
 				result.push(""); // Always add blank line after nested quote
