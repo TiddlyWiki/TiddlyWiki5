@@ -2,13 +2,21 @@ title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/ui/ImportOptions
 tags: $:/tags/ImportOptions
 
 \whitespace trim
-<$checkbox
-	tiddler="$:/config/wikitext-serialize/convert-markdown-on-import"
-	field="text"
-	checked="yes"
-	unchecked="no"
-	default="no"
->
-	&#32;
-	{{$:/plugins/tiddlywiki/wikitext-serialize/language/en-GB/Import/ConvertMarkdown}}
-</$checkbox>
+<$list filter="[all[current]plugintiddlers[]]" variable="payloadTiddler">
+	<$wikify name="payloadJson" text={{{ [<currentTiddler>get[text]] }}}>
+		<$let payloadType={{{ [<payloadJson>jsonget[tiddlers],<payloadTiddler>,[type]] }}}>
+			<$list filter="[<payloadType>match[text/x-markdown]] [<payloadType>match[text/markdown]]" variable="ignore">
+				<$checkbox
+					tiddler="$:/config/wikitext-serialize/convert-markdown-on-import"
+					field="text"
+					checked="yes"
+					unchecked="no"
+					default="no"
+				>
+					&#32;
+					{{$:/plugins/tiddlywiki/wikitext-serialize/language/en-GB/Import/ConvertMarkdown}}
+				</$checkbox>
+			</$list>
+		</$let>
+	</$wikify>
+</$list>
