@@ -4,9 +4,7 @@
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
 		"tiddlywiki/highlight",
-		"tiddlywiki/internals",
-		"tiddlywiki/wikitext-serialize",
-		"tiddlywiki/markdown"
+		"tiddlywiki/internals"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
