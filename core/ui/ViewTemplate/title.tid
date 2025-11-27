@@ -12,11 +12,11 @@ tags: $:/tags/ViewTemplate
 				variable="listItem"
 			>
 				<$let condition={{{ [<listItem>get[condition]] }}}>
-					<$list filter="[<condition>!is[blank]] :and[subfilter<condition>limit[1]] :else[<condition>is[blank]then[true]]" variable="ignore">
+					<%if [<condition>!is[blank]] :and[<currentTiddler>subfilter<condition>limit[1]] :else[<condition>is[blank]then[true]] %>
 						<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
 							<$transclude tiddler=<<listItem>>/>
 						</$set>
-					</$list>
+					<%endif%>
 				</$let>
 			</$list>
 		</span>
