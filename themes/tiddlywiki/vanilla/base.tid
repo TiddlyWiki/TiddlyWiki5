@@ -2396,6 +2396,9 @@ html body.tc-body.tc-single-tiddler-window {
 */
 
 .tc-import-option {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
 	margin: 0.5em 0;
 	padding: 0.5em;
 	background: <<colour tiddler-editor-background>>;

@@ -49,22 +49,26 @@ title: $:/core/ui/ImportListing
 \end
 
 \whitespace trim
-<$let importJson={{{ [{$:/Import}debug-log[imp-json]] }}}>
-	JSON 预览(截断): {{{ [<importJson>length[]] }}} bytes<br/>
-	导入标题列表: {{{ [<importJson>jsonindexes[tiddlers]debug-log[imp-titles]] }}}<br/>
-	导入类型列表: {{{ [<importJson>jsonindexes[tiddlers]] :map[<importJson>jsonget[tiddlers],<currentTiddler>,[type]debug-log[imp-type]] }}}<br/>
-	<$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportOptions]]" variable="importOption">
-		importOption: <<importOption>><br/>
-		<$let condition={{{ [<importOption>get[condition]debug-log[imp-cond]] }}}>
-			condition(raw): <<condition>><br/>
-			<$list filter="[<importJson>jsonindexes[tiddlers]] :map[<importJson>jsonget[tiddlers],<currentTiddler>,[type]] debug-log[imp-src] subfilter<condition>limit[1]]" variable="matchedType">
-				<div class="tc-import-option">
-					命中类型: <<matchedType>><br/>
-					<$transclude tiddler=<<importOption>>/>
-				</div>
-			</$list>
+<$let importJson={{{ [{$:/Import}] +[debug-log:imp-json[]] }}}>
+	<$let importTitles={{{ [<importJson>jsonindexes[tiddlers]] }}}>
+		<$let importTypes={{{ [(importTitles)] :map[<importJson>jsonget[tiddlers],<currentTiddler>,[type]] +[debug-log:imp-type[]] }}}>
+			<$let anyMatch={{{ [all[shadows+tiddlers]tag[$:/tags/ImportOptions]get[condition]] +[debug-log:conditions[]] :map[(importTypes)subfilter<currentTiddler>] +[!is[blank]limit[1]] +[debug-log:imp-any[]] }}}>
+				<%if [<anyMatch>!is[blank]] %>
+					<div class="tc-import-option">
+						<$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportOptions]]" variable="importOption">
+							<$let condition={{{ [<importOption>get[condition]] +[debug-log:imp-cond[]] }}}>
+								<$let hasMatch={{{ [(importTypes)subfilter<condition>limit[1]] +[debug-log:imp-match[]] }}}>
+									<%if [<hasMatch>!is[blank]] %>
+										<$transclude tiddler=<<importOption>>/>
+									<%endif%>
+								</$let>
+							</$let>
+						</$list>
+					</div>
+				<%endif%>
+			</$let>
 		</$let>
-	</$list>
+	</$let>
 </$let>
 <div class="tc-table-wrapper">
 <table class="tc-import-table">
