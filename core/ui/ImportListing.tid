@@ -49,11 +49,23 @@ title: $:/core/ui/ImportListing
 \end
 
 \whitespace trim
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportOptions]]" variable="importOption">
-<div class="tc-import-option">
-<$transclude tiddler=<<importOption>>/>
-</div>
-</$list>
+<$let importJson={{{ [{$:/Import}debug-log[imp-json]] }}}>
+	JSON 预览(截断): {{{ [<importJson>length[]] }}} bytes<br/>
+	导入标题列表: {{{ [<importJson>jsonindexes[tiddlers]debug-log[imp-titles]] }}}<br/>
+	导入类型列表: {{{ [<importJson>jsonindexes[tiddlers]] :map[<importJson>jsonget[tiddlers],<currentTiddler>,[type]debug-log[imp-type]] }}}<br/>
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportOptions]]" variable="importOption">
+		importOption: <<importOption>><br/>
+		<$let condition={{{ [<importOption>get[condition]debug-log[imp-cond]] }}}>
+			condition(raw): <<condition>><br/>
+			<$list filter="[<importJson>jsonindexes[tiddlers]] :map[<importJson>jsonget[tiddlers],<currentTiddler>,[type]] debug-log[imp-src] subfilter<condition>limit[1]]" variable="matchedType">
+				<div class="tc-import-option">
+					命中类型: <<matchedType>><br/>
+					<$transclude tiddler=<<importOption>>/>
+				</div>
+			</$list>
+		</$let>
+	</$list>
+</$let>
 <div class="tc-table-wrapper">
 <table class="tc-import-table">
 <tbody>
