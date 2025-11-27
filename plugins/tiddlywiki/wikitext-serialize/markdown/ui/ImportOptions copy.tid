@@ -1,5 +1,6 @@
-title: $:/plugins/tiddlywiki/wikitext-serialize/ui/ImportOptions
+title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/ui/ImportOptions copy
 tags: $:/tags/ImportOptions
+condition: [match[text/plain]]
 
 \whitespace trim
 <$checkbox
@@ -9,5 +10,6 @@ tags: $:/tags/ImportOptions
 	unchecked="no"
 	default="no"
 >
-	{{$:/plugins/tiddlywiki/wikitext-serialize/language/Import/ConvertMarkdown}}
+	&#32;
+	test text
 </$checkbox>
