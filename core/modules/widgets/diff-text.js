@@ -34,9 +34,10 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	// Create the diff
-	var dmpObject = new dmp.diff_match_patch(),
-		diffs = dmpObject.diff_main(this.getAttribute("source",""),this.getAttribute("dest",""));
+	// Create the diff object
+	var dmpObject = new dmp.diff_match_patch();
+		dmpObject.Diff_EditCost = $tw.utils.parseNumber(this.getAttribute("editcost","4"));
+	var	diffs = dmpObject.diff_main(this.getAttribute("source",""),this.getAttribute("dest",""));
 	// Apply required cleanup
 	switch(this.getAttribute("cleanup","semantic")) {
 		case "none":
@@ -132,7 +133,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DiffTextWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup) {
+	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup || changedAttributes.editcost) {
 		this.refreshSelf();
 		return true;
 	} else {

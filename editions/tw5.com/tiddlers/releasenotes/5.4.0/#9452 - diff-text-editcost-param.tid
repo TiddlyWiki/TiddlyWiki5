@@ -1,0 +1,9 @@
+title: $:/changenotes/5.4.0/#9452
+description: Add new editcost parameter to diff-text widget
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: feature
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9452
+github-contributors: pmario
+
