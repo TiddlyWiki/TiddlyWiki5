@@ -4,11 +4,9 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: developer
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9328 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9457
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9457
 github-contributors: Leilei332
 
-* Remove & migrate deprecated rules
-* Replace deprecated formatting and linting rules with `@stylistic/eslint-plugin`
 * Enforce tab indentation, semicolon
 * Switch off `max-classes-per-file`
 * Show warning for unused variables
