@@ -273,12 +273,57 @@ function codeblock(context, node) {
 }
 
 /**
+ * Handle transclude nodes (widgets, macros, procedures)
+ * Convert them to paragraphs with the original widget syntax
+ */
+function transclude(context, node) {
+	// Reconstruct the widget call syntax from the transclude node
+	let widgetText = "<<";
+	
+	// Get the widget/macro/procedure name
+	const widgetName = node.attributes && node.attributes.$variable 
+		? node.attributes.$variable.value 
+		: "unknown";
+	
+	widgetText += widgetName;
+	
+	// Add ordered attributes (excluding $variable)
+	if(node.orderedAttributes) {
+		for(let i = 0; i < node.orderedAttributes.length; i++) {
+			const attr = node.orderedAttributes[i];
+			if(attr.name !== "$variable") {
+				widgetText += " ";
+				// For positional parameters, just add the value
+				if(attr.name.match(/^\d+$/)) {
+					widgetText += '"' + attr.value + '"';
+				} else {
+					// For named parameters, add name=value
+					widgetText += attr.name + '="' + attr.value + '"';
+				}
+			}
+		}
+	}
+	
+	widgetText += ">>";
+	
+	// Return as a paragraph with the widget text
+	return {
+		type: "paragraph",
+		content: [{
+			type: "text",
+			text: widgetText
+		}]
+	};
+}
+
+/**
  * Key is wikiAst node type, value is node converter function.
  */
 const builders = {
 	element: element,
 	text: text,
-	codeblock: codeblock
+	codeblock: codeblock,
+	transclude: transclude
 };
 
 function wikiAstToProsemirrorAst(node, options) {
