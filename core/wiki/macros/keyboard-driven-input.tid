@@ -145,3 +145,32 @@ tags: $:/tags/Macro
 	/>
 </$keyboard>
 \end keyboard-driven-input
+
+\procedure keyboard-driven-input-aria(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle,cancelPopups:"",configTiddlerFilter,firstSearchFilterField:"first-search-filter",secondSearchFilterField:"second-search-filter",role,ariaAutocomplete,ariaControls)
+\whitespace trim
+\procedure keyboard-driven-input-actions()
+<%if [<event-key-descriptor>match[((input-accept))]] %>
+<<inputAcceptActions>>
+<%elseif [<event-key-descriptor>match[((input-accept-variant))]] %>
+<<inputAcceptVariantActions>>
+<%elseif [<event-key-descriptor>match[((input-up))]] %>
+<<input-next-actions-before>>
+<%elseif [<event-key-descriptor>match[((input-down))]] %>
+<<input-next-actions-after>>
+<%elseif [<event-key-descriptor>match[((input-cancel))]] %>
+<<inputCancelActions>>
+<%endif%>
+\end keyboard-driven-input-actions
+
+<$keyboard key="((input-accept)) ((input-accept-variant)) ((input-up)) ((input-down)) ((input-cancel))" actions=<<keyboard-driven-input-actions>>>
+	<$edit-text
+		tiddler=<<tiddler>> field=<<field>> index=<<index>>
+		inputActions=<<keyboard-input-actions>> tag=<<tag>> class=<<class>>
+		placeholder=<<placeholder>> default=<<default>> focusPopup=<<focusPopup>>
+		focus=<<focus>> type=<<type>> rows=<<rows>> minHeight=<<minHeight>>
+		tabindex=<<tabindex>> size=<<size>> autoHeight=<<autoHeight>>
+		refreshTitle=<<refreshTitle>> cancelPopups=<<cancelPopups>>
+		role=<<role>> aria-autocomplete=<<ariaAutocomplete>> aria-controls=<<ariaControls>>
+	/>
+</$keyboard>
+\end keyboard-driven-input-aria
