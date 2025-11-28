@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/wikitext-serialize/ui/EditorToolbar/format-wikitext
+tags: $:/tags/EditorToolbar
+icon: $:/plugins/tiddlywiki/wikitext-serialize/images/lint-wikitext
+caption: {{$:/plugins/tiddlywiki/wikitext-serialize/language/en-GB/Buttons/FormatWikitext/Caption}}
+description: {{$:/plugins/tiddlywiki/wikitext-serialize/language/en-GB/Buttons/FormatWikitext/Hint}}
+condition: [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>!has[type]]
+shortcuts: ((format-wikitext))
+list-after: $:/plugins/tiddlywiki/wikitext-serialize/markdown/ui/EditorToolbar/convert-markdown
+shortcuts: ((format-wikitext))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="format-wikitext"
+/>

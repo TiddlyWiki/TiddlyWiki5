@@ -1,0 +1,4 @@
+title: $:/config/wikitext-serialize/
+type: text/vnd.tiddlywiki
+
+convert-markdown-on-import: no

@@ -10,7 +10,7 @@ exports.name = "html";
 
 exports.serialize = function(tree,serialize) {
 	var tag = tree.tag;
-	var attributes = tree.orderedAttributes.map(function(attribute) {
+	var attributes = (tree.orderedAttributes || []).map(function(attribute) {
 			return $tw.utils.serializeAttribute(attribute);
 	}).join(" ");
 	// Children
