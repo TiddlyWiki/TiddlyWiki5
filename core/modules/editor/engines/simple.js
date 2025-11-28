@@ -55,6 +55,15 @@ function SimpleEngine(options) {
 	if(this.widget.isDisabled === "yes") {
 		this.domNode.setAttribute("disabled",true);
 	}
+	if(this.widget.role) {
+		this.domNode.setAttribute("role",this.widget.role);
+	}
+	if(this.widget["aria-autocomplete"]) {
+		this.domNode.setAttribute("aria-autocomplete",this.widget["aria-autocomplete"]);
+	}
+	if(this.widget["aria-controls"]) {
+		this.domNode.setAttribute("aria-autocomplete",this.widget["aria-controls"]);
+	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
