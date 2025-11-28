@@ -12,6 +12,54 @@ function doc(builder, node) {
 }
 
 function paragraph(builder, node) {
+	// Check if this paragraph contains a widget call
+	// If it's a single text node that looks like <<widgetName ...>>
+	if(node.content && node.content.length === 1 && node.content[0].type === "text") {
+		const text = node.content[0].text.trim();
+		const widgetPattern = /^<<\s*([a-zA-Z_][a-zA-Z0-9_-]*)\s*(.*)>>$/;
+		const match = text.match(widgetPattern);
+		
+		if(match) {
+			const widgetName = match[1];
+			const attributesStr = match[2].trim();
+			
+			// Parse attributes
+			const attributes = { $variable: { name: "$variable", type: "string", value: widgetName } };
+			const orderedAttributes = [{ name: "$variable", type: "string", value: widgetName }];
+			
+			// Simple attribute parsing - handle quoted strings
+			const attrPattern = /(?:([a-zA-Z_][a-zA-Z0-9_-]*)=)?(?:"([^"]*)"|'([^']*)'|([^\s]+))/g;
+			let attrMatch;
+			let paramIndex = 0;
+			
+			while((attrMatch = attrPattern.exec(attributesStr)) !== null) {
+				const key = attrMatch[1];
+				const value = attrMatch[2] || attrMatch[3] || attrMatch[4];
+				
+				if(key) {
+					attributes[key] = { name: key, type: "string", value: value };
+					orderedAttributes.push({ name: key, type: "string", value: value });
+				} else {
+					// Positional argument
+					const paramName = String(paramIndex);
+					attributes[paramName] = { name: paramName, type: "string", value: value };
+					orderedAttributes.push({ name: paramName, type: "string", value: value });
+					paramIndex++;
+				}
+			}
+			
+			// Return a transclude node
+			return {
+				type: "transclude",
+				attributes: attributes,
+				orderedAttributes: orderedAttributes,
+				isBlock: true,
+				rule: "macrocallblock"
+			};
+		}
+	}
+	
+	// Normal paragraph
 	return {
 		type: "element",
 		tag: "p",

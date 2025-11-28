@@ -26,6 +26,8 @@ const inputRules = require("prosemirror-inputrules").inputRules;
 const SlashMenuPlugin = require("$:/plugins/tiddlywiki/prosemirror/slash-menu.js").SlashMenuPlugin;
 const SlashMenuUI = require("$:/plugins/tiddlywiki/prosemirror/slash-menu-ui.js").SlashMenuUI;
 const getAllMenuElements = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js").getAllMenuElements;
+const createWidgetBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/widget-block/plugin.js").createWidgetBlockPlugin;
+const createWidgetBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/widget-block/plugin.js").createWidgetBlockNodeViewPlugin;
 
 const ProsemirrorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -65,7 +67,6 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 
 	const allMenuElements = getAllMenuElements(this.wiki, schema);
 
-	const self = this;
 	this.view = new EditorView(container, {
 		state: EditorState.create({
 			// doc: schema.node("doc", null, [schema.node("paragraph")]),
@@ -74,17 +75,25 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 				SlashMenuPlugin(allMenuElements, {
 					triggerCodes: ["Slash", "Backslash"] // Support both / (、) and \ keys
 				}),
-				listKeymapPlugin
+				listKeymapPlugin,
+				createWidgetBlockPlugin(),
+				createWidgetBlockNodeViewPlugin(this)
 			]
 			.concat(listPlugins)
 			.concat(exampleSetup({ schema: schema })),
 		}),
 		dispatchTransaction: transaction => {
-			const newState = self.view.state.apply(transaction);
-			self.view.updateState(newState);
-			self.debouncedSaveEditorContent();
+			const newState = this.view.state.apply(transaction);
+			this.view.updateState(newState);
+			this.debouncedSaveEditorContent();
 		}
 	});
+	
+	// Mark paste events with twEditor flag to prevent TiddlyWiki import dialog
+	container.addEventListener("paste", function(event) {
+		event.twEditor = true;
+		// Use capture phase to ensure it runs before other handlers
+	}, true);
 	
 	// Initialize SlashMenu UI
 	this.slashMenuUI = new SlashMenuUI(this.view, {
