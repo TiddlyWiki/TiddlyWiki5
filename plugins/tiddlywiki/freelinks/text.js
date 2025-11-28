@@ -84,7 +84,8 @@ TextNodeWidget.prototype.execute = function() {
 		
 		if(this.tiddlerTitleInfo.titles.length > 0) {
 			var newParseTree = this.processTextWithMatches(text, currentTiddlerTitle, ignoreCase, useWordBoundary);
-			if(newParseTree.length > 1 || newParseTree[0].type !== "plain-text") {
+			if(newParseTree && newParseTree.length > 0 && 
+			   (newParseTree.length > 1 || newParseTree[0].type !== "plain-text")) {
 				childParseTree = newParseTree;
 			}
 		}
@@ -94,6 +95,10 @@ TextNodeWidget.prototype.execute = function() {
 };
 
 TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerTitle, ignoreCase, useWordBoundary) {
+	if(!text || text.length === 0) {
+		return [{type: "plain-text", text: text}];
+	}
+	
 	var searchText = ignoreCase ? text.toLowerCase() : text;
 	var matches;
 	
@@ -108,8 +113,10 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 	}
 	
 	matches.sort(function(a, b) {
-		var posDiff = a.index - b.index;
-		return posDiff !== 0 ? posDiff : b.length - a.length;
+		if(a.index !== b.index) {
+			return a.index - b.index;
+		}
+		return b.length - a.length;
 	});
 	
 	var processedPositions = new FastPositionSet();
@@ -119,6 +126,23 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 		var match = matches[i];
 		var matchStart = match.index;
 		var matchEnd = matchStart + match.length;
+		
+		if(matchStart < 0 || matchEnd > text.length) {
+			continue;
+		}
+		
+		var matchedTitle = this.tiddlerTitleInfo.titles[match.titleIndex];
+		
+		var titleToCompare = ignoreCase ? 
+			(currentTiddlerTitle ? currentTiddlerTitle.toLowerCase() : "") : 
+			currentTiddlerTitle;
+		var matchedTitleToCompare = ignoreCase ? 
+			(matchedTitle ? matchedTitle.toLowerCase() : "") : 
+			matchedTitle;
+		
+		if(titleToCompare && matchedTitleToCompare === titleToCompare) {
+			continue;
+		}
 		
 		var hasOverlap = false;
 		for(var pos = matchStart; pos < matchEnd && !hasOverlap; pos++) {
@@ -148,39 +172,36 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 		var matchEnd = matchStart + match.length;
 		
 		if(matchStart > currentPos) {
+			var beforeText = text.substring(currentPos, matchStart);
 			newParseTree.push({
 				type: "plain-text",
-				text: text.slice(currentPos, matchStart)
+				text: beforeText
 			});
 		}
 		
 		var matchedTitle = this.tiddlerTitleInfo.titles[match.titleIndex];
+		var matchedText = text.substring(matchStart, matchEnd);
 		
-		if(matchedTitle === currentTiddlerTitle) {
-			newParseTree.push({
+		newParseTree.push({
+			type: "link",
+			attributes: {
+				to: {type: "string", value: matchedTitle},
+				"class": {type: "string", value: "tc-freelink"}
+			},
+			children: [{
 				type: "plain-text",
-				text: text.slice(matchStart, matchEnd)
-			});
-		} else {
-			newParseTree.push({
-				type: "link",
-				attributes: {
-					to: {type: "string", value: matchedTitle},
-					"class": {type: "string", value: "tc-freelink"}
-				},
-				children: [{
-					type: "plain-text",
-					text: text.slice(matchStart, matchEnd)
-				}]
-			});
-		}
+				text: matchedText
+			}]
+		});
+		
 		currentPos = matchEnd;
 	}
 	
 	if(currentPos < text.length) {
+		var remainingText = text.substring(currentPos);
 		newParseTree.push({
 			type: "plain-text",
-			text: text.slice(currentPos)
+			text: remainingText
 		});
 	}
 	
@@ -203,7 +224,6 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 	var validTitles = [];
 	var ac = new AhoCorasick();
 	
-	// Process titles in a single pass to avoid duplication
 	for(var i = 0; i < titles.length; i++) {
 		var title = titles[i];
 		if(title && title.length > 0 && title.substring(0,3) !== "$:/") {
@@ -214,17 +234,16 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 		}
 	}
 	
-	// Sort by length (descending) then alphabetically
-	// Longer titles are prioritized to avoid partial matches (e.g., "JavaScript" before "Java")
 	var sortedTitles = validTitles.sort(function(a,b) {
 		var lenDiff = b.length - a.length;
-		return lenDiff !== 0 ? lenDiff : (a < b ? -1 : a > b ? 1 : 0);
+		if(lenDiff !== 0) return lenDiff;
+		return a < b ? -1 : a > b ? 1 : 0;
 	});
 	
-	// Build Aho-Corasick automaton
 	for(var i = 0; i < sortedTitles.length; i++) {
 		var title = sortedTitles[i];
-		ac.addPattern(ignoreCase ? title.toLowerCase() : title, i);
+		var pattern = ignoreCase ? title.toLowerCase() : title;
+		ac.addPattern(pattern, i);
 	}
 	
 	try {
