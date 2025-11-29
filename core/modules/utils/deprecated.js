@@ -23,6 +23,8 @@ exports.trim = function(str) {
 	}
 };
 
+exports.hopArray = (object,array) => array.some(element => $tw.utils.hop(object,element));
+
 exports.sign = Math.sign;
 
 exports.strEndsWith = (str,ending,position) => str.endsWith(ending,position);

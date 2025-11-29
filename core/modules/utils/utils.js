@@ -151,18 +151,6 @@ exports.count = function(object) {
 };
 
 /*
-Determine whether an array-item is an object-property
-*/
-exports.hopArray = function(object,array) {
-	for(var i=0; i<array.length; i++) {
-		if($tw.utils.hop(object,array[i])) {
-			return true;
-		}
-	}
-	return false;
-};
-
-/*
 Remove entries from an array
 	array: array to modify
 	value: a single value to remove, or an array of values to remove
