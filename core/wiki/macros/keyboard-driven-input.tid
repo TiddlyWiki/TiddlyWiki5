@@ -146,7 +146,7 @@ tags: $:/tags/Macro
 </$keyboard>
 \end keyboard-driven-input
 
-\procedure keyboard-driven-input-aria(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle,cancelPopups:"",configTiddlerFilter,firstSearchFilterField:"first-search-filter",secondSearchFilterField:"second-search-filter",role,ariaAutocomplete,ariaControls)
+\procedure keyboard-driven-input-aria(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle,cancelPopups:"",configTiddlerFilter,firstSearchFilterField:"first-search-filter",secondSearchFilterField:"second-search-filter",role:"combobox",ariaAutocomplete,ariaControls)
 \whitespace trim
 \procedure keyboard-driven-input-actions()
 <%if [<event-key-descriptor>match[((input-accept))]] %>
