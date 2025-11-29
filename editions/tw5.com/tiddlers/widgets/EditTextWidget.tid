@@ -1,7 +1,7 @@
 caption: edit-text
 created: 20131024141900000
 heading: 
-modified: 20240627184331133
+modified: 20251118230450156
 tags: Widgets
 temp: 
 title: EditTextWidget
@@ -11,40 +11,40 @@ type: text/vnd.tiddlywiki
 
 The edit text widget provides a user interface in the browser for editing text tiddler fields. The editing element is dynamically bound to the underlying tiddler value: changes to the tiddler are instantly reflected, and any edits are instantly propagated.
 
-By default, applying the EditTextWidget to the `text` field of a tiddler will generates an HTML `<textarea>` element, i.e. a multi-line editor. Applying the EditTextWidget to any other field generates an HTML `<input type="text">` element, a single-line editor. This behaviour can be overridden with the `tag` and `type` attributes.
+By default, applying the ~EditTextWidget to the `text` field of a tiddler will generates an HTML `<textarea>` element, i.e. a multi-line editor. Applying the ~EditTextWidget to any other field generates an HTML `<input type="text">` element, a single-line editor. This behaviour can be overridden with the `tag` and `type` attributes.
 
 ! Content and Attributes
 
 The content of the `<$edit-text>` widget is ignored.
 
 |!Attribute |!Description |
-|tiddler |The tiddler to edit (defaults to the [[current tiddler|Current Tiddler]]) |
-|field |The field to edit (defaults to `text`). Takes precedence over the `index` attribute |
+|tiddler |The tiddler to edit (''defaults'' to the [[current tiddler|Current Tiddler]]) |
+|field |The field to edit (''defaults'' to `text`). Takes precedence over the `index` attribute |
 |index |The index to edit |
 |default |The default text to be provided when the target tiddler doesn't exist |
 |class |A CSS class to be assigned to the generated HTML editing element |
 |placeholder |Placeholder text to be displayed when the edit field is empty |
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
 |focus |Set to "yes" or "true" to automatically focus the editor after creation |
-|focusSelectFromStart |<<.from-version 5.2.6>> If the `focus` attribute is enabled, determines the position of the start of the selection: `0` (default) places the start of the selection at the beginning of the text, `1` places the start of the selection after the first character, etc.  |
-|focusSelectFromEnd |<<.from-version 5.2.6>> If the `focus` attribute is enabled, determines the position of the end of the selection: `0` (default) places the end of the selection at the end of the text, `1` places the start of the selection before the final character, etc.  |
+|focusSelectFromStart |<<.from-version 5.2.6>> If the `focus` attribute is enabled, determines the position of the start of the selection: `0` (''default'') places the start of the selection at the beginning of the text, `1` places the start of the selection after the first character, etc.  |
+|focusSelectFromEnd |<<.from-version 5.2.6>> If the `focus` attribute is enabled, determines the position of the end of the selection: `0` (''default'') places the end of the selection at the end of the text, `1` places the start of the selection before the final character, etc.  |
 |tabindex |Sets the `tabindex` attribute of the input or textarea to the given value |
 |autocomplete |<<.from-version 5.1.23>> An optional string to provide a hint to the browser how to handle autocomplete for this input |
 |tag |Overrides the generated HTML editing element tag. For a multi-line editor use `tag=textarea`. For a single-line editor use `tag=input` |
 |type |Overrides the generated HTML editing element `type` attribute |
 |size |The size of the input field (in characters). This exact result depends on browser and font. Use the `class` attribute to style width for precise control |
-|autoHeight |Either "yes" or "no" to specify whether to automatically resize `textarea` editors to fit their content (defaults to "yes") |
-|minHeight |Minimum height for automatically resized `textarea` editors, specified in CSS length units such as "px", "em" or "%" |
-|rows|Sets the rows attribute of a generated textarea |
+|autoHeight |Either "yes" or "no" to specify whether to automatically resize `textarea` editors to fit their content (''defaults'' to "yes"). This setting can be changed globally with an editor toolbar button|
+|minHeight |Minimum height for automatically resized `textarea` editors, specified in CSS length units such as "px", "em" or "%". Has no effect if the [[CodeMirror Plugin]] is active |
+|rows|Sets the rows attribute of a generated textarea. `rows` ''takes precedence'' over `autoHeight`, so text areas can be defined individually |
 |cancelPopups |<<.from-version "5.1.23">> if set to "yes", cancels all popups when the input gets focus |
 |inputActions |<<.from-version 5.1.23>> Optional actions that are triggered every time an input event occurs within the input field or textarea.<br><<.from-version "5.2.1">> The variable `actionValue` is available to the `inputActions` and contains the value of the input field. |
 |refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
-|disabled|<<.from-version "5.1.23">> Optional, disables the text input if set to "yes". Defaults to "no"|
-|fileDrop|<<.from-version "5.2.0">> Optional. When set to "yes" allows dropping or pasting images into the editor to import them. Defaults to "no"|
+|disabled|<<.from-version "5.1.23">> Optional, disables the text input if set to "yes". ''Defaults'' to "no"|
+|fileDrop|<<.from-version "5.2.0">> Optional. When set to "yes" allows dropping or pasting images into the editor to import them. ''Defaults'' to "no"|
 
 ! Examples
 
-If you wanted to change the field //myconfig// of the tiddler //AppSettings//, you could use an EditTextWidget to edit the field, and then show the result anywhere else by using `{{AppSettings!!myconfig}}`. Note that this will create tiddler AppSettings if it doesn't already exist.
+If you wanted to change the field `myconfig` of the tiddler `AppSettings`, you could use an ~EditTextWidget to edit the field, and then show the result anywhere else by using `{{AppSettings!!myconfig}}`. Note that this will create tiddler AppSettings if it doesn't already exist.
 
 <$macrocall $name=".example" n="1"
 eg="""<$edit-text tiddler="AppSettings" field="myconfig"/><p/>
@@ -79,7 +79,6 @@ eg="""\procedure onInput()
 \end
 
 Type a new tiddler name, starting with the system prefix `$:/`: <$edit-text inputActions=<<onInput>> field="temp" class="tc-edit-texteditor"/>
-
 """/>
 
 
