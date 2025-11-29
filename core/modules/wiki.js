@@ -1059,17 +1059,7 @@ Options include:
 exports.parseText = function(type,text,options) {
 	text = text || "";
 	options = options || {};
-	// Select a parser
-	var Parser = $tw.Wiki.parsers[type];
-	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
-		Parser = $tw.Wiki.parsers[$tw.utils.getFileExtensionInfo(type).type];
-	}
-	if(!Parser) {
-		Parser = $tw.Wiki.parsers[options.defaultType || "text/vnd.tiddlywiki"];
-	}
-	if(!Parser) {
-		return null;
-	}
+	var Parser = $tw.utils.getParser(type,options)
 	// Return the parser instance
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
@@ -1083,7 +1073,7 @@ exports.parseText = function(type,text,options) {
 Parse a tiddler according to its MIME type
 */
 exports.parseTiddler = function(title,options) {
-	options = $tw.utils.extend({},options);
+	options = options || {};
 	var cacheType = options.parseAsInline ? "inlineParseTree" : "blockParseTree",
 		tiddler = this.getTiddler(title),
 		self = this;
@@ -1443,7 +1433,7 @@ exports.search = function(text,options) {
 			// Don't search the text field if the content type is binary
 			var fieldName = searchFields[fieldIndex];
 			if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
-				break;
+				continue;
 			}
 			var str = tiddler.fields[fieldName],
 				t;

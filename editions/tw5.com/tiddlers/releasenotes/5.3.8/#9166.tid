@@ -4,5 +4,5 @@ release: 5.3.8
 tags: $:/tags/ChangeNote
 change-type: bugfix
 change-category: translation
-links: https://github.com/TiddlyWiki/TiddlyWiki5/issue/9166
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issue/9166
 github-contributors: Leilei332

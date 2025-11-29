@@ -1,0 +1,12 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/HardLineBreaks
+type: text/vnd.tiddlywiki
+
+"""
+This is some text
+That is set like
+It is a Poem
+When it is
+Clearly
+Not
+"""

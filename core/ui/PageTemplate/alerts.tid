@@ -1,8 +1,8 @@
 title: $:/core/ui/PageTemplate/alerts
 tags: $:/tags/PageTemplate
 
-<div class="tc-alerts">
+<div class="tc-alerts" role="region" aria-label="Alerts">
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Alert]!has[draft.of]]" template="$:/core/ui/AlertTemplate" storyview="pop"/>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Alert]!is[draft]]" template="$:/core/ui/AlertTemplate" storyview="pop"/>
 
 </div>

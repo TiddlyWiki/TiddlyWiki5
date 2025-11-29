@@ -2,7 +2,8 @@ title: HelloThumbnail - Newsletter
 tags: HelloThumbnail
 caption: ~TiddlyWiki Newsletter
 link: TiddlyWiki Newsletter
-image: TiddlyWiki Newsletter Badge.png
+image: TiddlyWiki Newsletter Badge
 color: #fff
+type: text/vnd.tiddlywiki
 
 Subscribe to the ~TiddlyWiki Newsletter, a fortnightly summary of the most interesting and relevant news from the ~TiddlyWiki community

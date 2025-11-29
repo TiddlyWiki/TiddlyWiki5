@@ -1,0 +1,18 @@
+title: $:/changenotes/5.4.0/#9337
+description: Modify output of some math operators for empty inputs
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: filters
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9337
+github-contributors: yaisog
+
+The following math operators are changed to output an empty list when the input list is empty:
+
+* sum[]
+* product[]
+* maxall[]
+* minall[]
+* average[]
+* variance[]
+* standard-deviation[]
