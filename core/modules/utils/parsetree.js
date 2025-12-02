@@ -101,6 +101,24 @@ exports.findParseTreeNode = function(nodeArray,search) {
 };
 
 /*
+Recursively search for a node in the parse tree that matches the search function
+*/
+exports.findChildNodeInTree = function(root,searchFn) {
+	if(searchFn(root)) {
+		return root;
+	}
+	if(root.children && root.children.length > 0) {
+		for(var i=0; i<root.children.length; i++) {
+			var result = exports.findChildNodeInTree(root.children[i], searchFn);
+			if(result) {
+				return result;
+			}
+		}
+	}
+	return undefined;
+};
+
+/*
 Helper to get the text of a parse tree node or array of nodes
 */
 exports.getParseTreeText = function getParseTreeText(tree) {
