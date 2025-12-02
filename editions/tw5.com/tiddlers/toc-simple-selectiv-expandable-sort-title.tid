@@ -1,0 +1,24 @@
+created: 20250922121940524
+import-compound: toc-simple $:/spec/toc-simple-selective-expandable-sort-title
+modified: 20250923081648168
+tags: $:/tags/wiki-test-spec simple param
+title: toc-simple-selectiv-expandable-sort-title
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows an expandable TOC where the ''titles'' are ''sorted in reverse''.
+
+{{ctrl-click-info}}
++
+title: Description
+
+Simple TOC Selective Expandable Sort Title
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"Contents" sort:"!sort[title]">>
+</div>
+

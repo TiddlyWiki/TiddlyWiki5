@@ -1,0 +1,25 @@
+created: 20250922121150885
+import-compound: toc-simple $:/spec/toc-simple-selective-expandable
+modified: 20250924110455556
+tags: $:/tags/wiki-test-spec simple
+title: toc-simple-selectiv-expandable
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple expandable list
+
+* Every element which has at least 1 child shows a chevron
+
+{{ctrl-click-info}}
++
+title: Description
+
+Simple TOC Selective Expandable
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"Contents">>
+</div>
+

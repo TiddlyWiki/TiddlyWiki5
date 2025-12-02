@@ -1,0 +1,12 @@
+code-body: yes
+created: 20250922115302679
+modified: 20250922115707173
+tags: 
+title: $:/spec/toc-simple
+type: text/vnd.tiddlywiki-multiple
+
+title: ExpectedResult
+
+<p><div class="tc-table-of-contents">
+<ol class="tc-toc"><li class="toc-item "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#aa"><span class="" data-fieldClass="field-title" title="aa">aa</span></a><ol class="tc-toc"><li class="toc-item "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#aa-aa"><span class="" data-fieldClass="field-title" title="aa-aa">aa-aa</span></a><ol class="tc-toc"></ol></li></ol></li><li class="toc-item "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#bb"><span class="" data-fieldClass="field-title" title="bb">bb</span></a><ol class="tc-toc"><li class="toc-item "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#bb-bb"><span class="" data-fieldClass="field-title" title="bb-bb">bb-bb</span></a><ol class="tc-toc"><li class="toc-item "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#bb-bb-bb"><span class="" data-fieldClass="field-title" title="bb-bb-bb">bb-bb-bb</span></a><ol class="tc-toc"></ol></li></ol></li></ol></li><li class="toc-item "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#cc"><span class="" data-fieldClass="field-title" title="cc">cc</span></a><ol class="tc-toc"></ol></li></ol>
+</div></p>

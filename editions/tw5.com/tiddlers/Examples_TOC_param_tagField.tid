@@ -1,0 +1,67 @@
+created: 20240729105221520
+description: Simple TOC - tagField = tagLike
+modified: 20240826163000897
+tags: $:/tags/wiki-test-spec
+title: Examples/TOC/param/tagField
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This test-case creates a "Simple Table of Contents" using "root" as the base tag
+* It uses a field named: ''tagLike'' which defines the TOC structure
+* The parameter is: `tagField:"tagLike"`
+* Click through all the tabs to get additional info
+
+<$transclude $tiddler="Narrative-extended" $mode="block"/>
+
++
+title: root
+
+This is the base tag for a ''tagLike'' TOC
+
++
+title: First
+tagLike: root
+
+1st 1st 1st 1st 1st
++
+title: Second
+tagLike: First
+
+2nd 2nd 2nd 2nd 2nd
++
+title: Third
+tagLike: root
+
+3rd 3rd 3rd 3rd 3rd
++
+title: Fourth
+tagLike: root
+
+4th 4th 4th 4th 4th 
+
++
+title: Fifth
+tagLike: Second
+
+5th 5th 5th 5th 5th 
+
++
+title: Sixth
+tagLike: Second
+
+6th 6th 6th 6th 6th 
+
++
+title: Output
+
+<!-- 
+This variable set to yes allows you to show a New-Child button.
+This button will create a "real" tiddler, which will _not_ be listed here
+-->
+\define tv-toc-show-new-child() yes
+
+<div class="tc-table-of-contents">
+<<toc tag:"root" tagField:"tagLike">>
+</div>
+

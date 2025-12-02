@@ -1,0 +1,30 @@
+created: 20250924062955923
+import-compound: toc-simple $:/spec/toc-simple-selective-expandable-expanded
+modified: 20250924105006349
+tags: $:/tags/wiki-test-spec simple
+title: toc-simple-selectiv-expandable-expanded
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple expandable list
+
+* Every element which has at least 1 child shows a chevron
+
+* All paths are expanded by default
+
+* All paths are expanded as long as `tv-toc-expanded() yes` is defined.
+
++
+title: Description
+
+Simple TOC Selective Expandable Expanded
++
+title: Output
+
+\define tv-toc-expand() yes
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"Contents">>
+</div>
+
