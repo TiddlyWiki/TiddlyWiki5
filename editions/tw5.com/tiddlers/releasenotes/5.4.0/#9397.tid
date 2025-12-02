@@ -1,0 +1,17 @@
+title: $:/changenotes/5.4.0/#9397
+description: Fix critical freelinks bugs: first character loss and false positive matches in v5.4.0
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9084 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9397
+github-contributors: s793016
+
+This note addresses two major bugs introduced in the Freelinks plugin with the v5.4.0 release:
+
+Fixes:
+* First Character Loss: The first character of a matched word would incorrectly disappear (e.g., "The" became "he"). This was fixed by correctly timing the filtering of the current tiddler's title during match validation, ensuring proper substring handling.
+* False Positive Matches: Unrelated words (like "it is" or "Choose") would incorrectly link to a tiddler title. This was resolved by fixing wrong output merging in the Aho-Corasick failure-link handling, eliminating spurious matches from intermediate nodes, and adding cycle detection.
+
+Impact:
+* Significantly improved correctness and reliability of automatic linking for all users, especially in multilingual and large wikis.
