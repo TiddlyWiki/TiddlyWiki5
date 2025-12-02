@@ -940,5 +940,72 @@ describe("Widget module", function() {
 		// the <<qualify>> widget to spit out something different.
 		expect(withA).toBe(withoutA);
 	});
-});
 
+	it("should support dollar mode for tiddler widget", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "Content of TiddlerOne"}
+		]);
+		// Test plain mode
+		var text = "<$tiddler tiddler='TiddlerOne'><<currentTiddler>></$tiddler>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p>TiddlerOne</p>");
+		// Test dollar mode
+		text = "<$tiddler $tiddler='TiddlerOne'><<currentTiddler>></$tiddler>";
+		widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p>TiddlerOne</p>");
+	});
+
+	it("should support dollar mode for reveal widget", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "$:/state/test", text: "show"}
+		]);
+		// Test plain mode - reveal widget creates span by default in inline mode
+		var text = "<$reveal type='match' state='$:/state/test' text='show'>Revealed content</$reveal>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p><span class=\"tc-reveal\">Revealed content</span></p>");
+		// Test dollar mode
+		text = "<$reveal $type='match' $state='$:/state/test' $text='show'>Revealed content</$reveal>";
+		widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p><span class=\"tc-reveal\">Revealed content</span></p>");
+	});
+
+	it("should support dollar mode for button widget", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "TargetTiddler", text: "Target content"}
+		]);
+		// Test plain mode
+		var text = "<$button to='TargetTiddler'>Click me</$button>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p><button class=\"\">Click me</button></p>");
+		// Test dollar mode
+		text = "<$button $to='TargetTiddler'>Click me</$button>";
+		widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p><button class=\"\">Click me</button></p>");
+	});
+
+	it("should support dollar mode for fieldmangler widget", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "TestTiddler", text: "Test content", myfield: "myvalue"}
+		]);
+		// Test plain mode
+		var text = "<$fieldmangler tiddler='TestTiddler'><div>Content</div></$fieldmangler>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p><div>Content</div></p>");
+		// Test dollar mode
+		text = "<$fieldmangler $tiddler='TestTiddler'><div>Content</div></$fieldmangler>";
+		widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p><div>Content</div></p>");
+	});
+});
