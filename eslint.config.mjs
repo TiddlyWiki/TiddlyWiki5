@@ -5,6 +5,17 @@ import js from "@eslint/js";
 import eslint from "eslint";
 import stylistic from "@stylistic/eslint-plugin";
 import esx from "eslint-plugin-es-x";
+import format from "eslint-plugin-format";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Read dprint configuration
+const dprintConfigPath = path.join(__dirname, "dprint.json");
+const dprintConfig = JSON.parse(fs.readFileSync(dprintConfigPath, "utf-8"));
 
 /** @type {import("eslint").Linter.Config} */
 const es2017rules = {
@@ -12,7 +23,8 @@ const es2017rules = {
     plugins: esx.configs["flat/restrict-to-es2017"].plugins,
     //@ts-ignore
     rules: esx.configs["flat/restrict-to-es2017"].rules,
-    ignores: ["bin/**/*", "core-server/**/*"],
+    files: ["**/*.js", "**/*.mjs"],
+    ignores: ["bin/**/*", "core-server/**/*", "tiddlywiki.js"],
 };
 /** @type {import("eslint").Linter.Config} */
 const es2023rules = {
@@ -20,7 +32,7 @@ const es2023rules = {
     plugins: esx.configs["flat/restrict-to-es2023"].plugins,
     //@ts-ignore
     rules: esx.configs["flat/restrict-to-es2023"].rules,
-    files: ["bin/**/*", "core-server/**/*"],
+    files: ["bin/**/*", "core-server/**/*", "tiddlywiki.js"],
 };
 
 
@@ -37,7 +49,8 @@ export default defineConfig([{
         "plugins/tiddlywiki/*/files/",
         "eslint.config.mjs",
         "playwright.config.js",
-        "**/output/**"
+        "**/output/**",
+        "**/*.min.js"
     ],
 
 },
@@ -49,7 +62,8 @@ js.configs.recommended,
     },
 
     plugins: {
-        "@stylistic": stylistic
+        "@stylistic": stylistic,
+        "format": format
     },
 
     rules: {
@@ -308,5 +322,21 @@ js.configs.recommended,
 
 },
     es2017rules,
-    es2023rules
+    es2023rules,
+    // DPrint formatting for JavaScript files
+    {
+        files: ["**/*.js", "**/*.mjs"],
+        plugins: { format },
+        rules: {
+            "format/dprint": ["warn", {
+                language: "typescript",
+                languageOptions: dprintConfig.typescript,
+                lineWidth: dprintConfig.lineWidth,
+                indentWidth: dprintConfig.indentWidth,
+                useTabs: dprintConfig.useTabs,
+            }],
+            // Disable conflicting stylistic rules
+            "@stylistic/keyword-spacing": "off",
+        }
+    }
 ]);

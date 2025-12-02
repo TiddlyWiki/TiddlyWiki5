@@ -1,0 +1,8 @@
+title: $:/changenotes/5.4.0/#9431
+description: Add dprint formatter configuration via eslint-plugin-format
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9431
+github-contributors: linonetwo
