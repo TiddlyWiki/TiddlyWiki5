@@ -184,6 +184,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editInputActions = this.getAttribute("inputActions");
 		this.editRefreshTitle = this.getAttribute("refreshTitle");
 		this.editAutoComplete = this.getAttribute("autocomplete");
+		this.role = this.getAttribute("role");
 		this.isDisabled = this.getAttribute("disabled","no");
 		this.isFileDropEnabled = this.getAttribute("fileDrop","no") === "yes";
 		// Get the default editor element tag and type
