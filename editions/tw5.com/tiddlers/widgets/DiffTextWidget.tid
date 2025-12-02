@@ -1,6 +1,6 @@
 caption: diff-text
 created: 20180316162725329
-modified: 20180316162725329
+modified: 20251117054552220
 tags: Widgets
 title: DiffTextWidget
 type: text/vnd.tiddlywiki
@@ -39,23 +39,31 @@ In other words, these three invocations are all equivalent:
 |!Attribute |!Description |
 |source |The source text |
 |dest |The destination text |
-|cleanup |See below |
+|cleanup |Defines a way to allow diffs to be human readable |
+|editcost |<<.from-version "5.4.0">> Only active if the cleanup flag is set to "efficient" |
+
+
+!!! Cleanup Flags
 
 The ''cleanup'' attribute determines which optional post-processing should be applied to the diffs:
 
 * ''none'': no cleanup is performed
 * ''semantic'' (default): rewrites the diffs for human readability
-* ''efficient'': rewrites the diffs to minimise the number of operations for subsequent processing 
+* ''efficient'': rewrites the diffs to minimise the number of operations for subsequent processing
+** If efficient is defined, ''editcost'' defines how the cleanup algorithm for human readability works. See example slider
 
-(Note that in many cases the results will be the same regardless of the cleanup option. See the [[docs|https://github.com/google/diff-match-patch/wiki/API]] of the underlying library for more details).
+<<.note """Note that in many cases the results will be the same regardless of the cleanup option. See the [[docs|https://github.com/google/diff-match-patch/wiki/API]] of the underlying library for more details""">>
 
 ! Examples
 
 In this example we compare two texts:
 
 <$macrocall $name='wikitext-example-without-html'
-src="""<$edit-text tiddler="SampleTiddlerFirst"/>
+src="""|tc-max-width tc-edit-max-width|k
+|<$edit-text tiddler="SampleTiddlerFirst" rows="5"/>|<$edit-text tiddler="SampleTiddlerSecond" rows="5"/>|
 
-<$edit-text tiddler="SampleTiddlerSecond"/>
+Edit cost:  {{$:/temp/SampleTiddlerEditCost}} -- Drag to 7 and then to 33
+<$range tiddler="$:/temp/SampleTiddlerEditCost" min="1" max="200" default="4" class="tc-max-width"/>
 
-<$diff-text source={{SampleTiddlerFirst}} dest={{SampleTiddlerSecond}}/>"""/>
+<$diff-text source={{SampleTiddlerFirst}} dest={{SampleTiddlerSecond}} cleanup=efficiency editcost={{$:/temp/SampleTiddlerEditCost}}/>
+"""/>  
