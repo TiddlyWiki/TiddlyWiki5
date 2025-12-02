@@ -47,6 +47,9 @@
 			"--render","$:/core/copyright.txt","license","text/plain"],
 		"tw2": [
 			"--render","TiddlyWiki2ReadMe","tw2/readme.md","text/html"],
+		"staticX": [
+			"--render","$:/core/templates/static.template.html","static.html","text/plain"
+		],
 		"static": [
 			"--render","$:/core/templates/static.template.html","static.html","text/plain",
 			"--render","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
