@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/tour/tour-button-icon
+tags: $:/tags/Image
+
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-tour-button tc-image-button" viewBox="0 0 24 24">
+<path d="M0 0h24v24H0z" style="fill:none"/>
+<path d="M1.832 10.356a1.024 1.024 0 0 1 0-1.832l9.71-4.856c.288-.144.628-.144.916 0l9.71 4.856a1.024 1.024 0 0 1 0 1.832l-9.71 4.855a1.025 1.025 0 0 1-.916 0l-9.71-4.855Z"/>
+<path d="M18.5 13.19v3.25h-.066c.044.163.066.33.066.5 0 1.932-2.913 3.5-6.5 3.5s-6.5-1.568-6.5-3.5c0-.17.022-.337.066-.5H5.5v-3.25l6.042 3.02c.288.145.628.145.916 0l6.042-3.02ZM2.73 8.44l.208 5-.681 3s-.002.709.974.717c.92.007 1-.717 1-.717l-.793-3 .293-5h-1Z"/>
+</svg>
