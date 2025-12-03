@@ -1,0 +1,26 @@
+title: MarkdownToWikitext/List
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/markdown-to-wikitext-test-spec]]
+
++
+title: Markdown
+
+* Item 1
+* Item 2
+* Item 3
+
+1. First
+2. Second
+3. Third
+
++
+title: ExpectedWikitext
+
+* Item 1
+* Item 2
+* Item 3
+
+# First
+# Second
+# Third
+

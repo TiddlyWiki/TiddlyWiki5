@@ -1,0 +1,27 @@
+title: Markdown to Wikitext/table-test
+tags: $:/tags/markdown-to-wikitext-test-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: Markdown
+
+# This is a table
+
+This is a `firefox`
+
+| ab | b | c | d |
+| --- | :--- | ---: | :---: |
+| e | f |
+| g | h | i | j | k |
+| L | L | R | C |
+
++
+title: ExpectedWikitext
+
+! This is a table
+
+This is a `firefox`
+
+|!ab|!b|!c|!d|
+|e|f|||
+|g|h|i|j|
+|L|L|R|C|

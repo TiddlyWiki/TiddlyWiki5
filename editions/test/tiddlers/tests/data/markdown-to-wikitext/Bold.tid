@@ -1,0 +1,14 @@
+title: MarkdownToWikitext/Bold
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/markdown-to-wikitext-test-spec]]
+
++
+title: Markdown
+
+This is **bold** text
+
++
+title: ExpectedWikitext
+
+This is ''bold'' text
+
