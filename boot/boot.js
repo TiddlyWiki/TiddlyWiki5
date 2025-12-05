@@ -8,6 +8,8 @@ On the server this file is executed directly to boot TiddlyWiki. In the browser,
 
 \*/
 
+/* eslint-disable @stylistic/indent */
+
 var _boot = (function($tw) {
 
 /*jslint node: true, browser: true */
@@ -630,7 +632,7 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
-		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
+		fn = window["eval"](code + "\n\n//# sourceURL=" + filename); // eslint-disable-line no-eval -- See https://github.com/TiddlyWiki/TiddlyWiki5/issues/6839
 	} else {
 		if(sandbox){
 			fn = vm.runInContext(code,sandbox,filename)
@@ -2800,6 +2802,8 @@ if($tw.browser && !$tw.boot.suppressBoot) {
 return $tw;
 
 });
+
+/* eslint-enable @stylistic/indent */
 
 if(typeof(exports) !== "undefined") {
 	exports.TiddlyWiki = _boot;
