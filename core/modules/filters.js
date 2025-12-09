@@ -286,7 +286,8 @@ exports.compileFilter = function(filterString) {
 					} else if(operand.variable) {
 						var varTree = $tw.utils.parseFilterVariable(operand.text);
 						operand.valueList = widgetClass.evaluateVariable(widget, varTree.name, {params: varTree.params, source: source});
-						operand.value = operand.valueList[0] || "";
+						operand.value = operand.valueList[0] !== undefined ? operand.valueList[0] : "";
+						operand.valueList = [operand.value];
 					} else {
 						operand.value = operand.text;
 						operand.valueList = [operand.value];
