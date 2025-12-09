@@ -103,7 +103,7 @@ Tests the checkbox widget thoroughly.
         ];
 
         var indexModeTests = fieldModeTests.map(data => {
-            var newData = {...data};
+            var newData = Object.assign({}, data);
             var newName = data.testName.replace('field mode', 'index mode');
             var tiddlerOneAlreadyExists = false;
             var newTiddlers = data.tiddlers.map(tiddler => {
@@ -274,14 +274,13 @@ Tests the checkbox widget thoroughly.
             listModeTests
             .filter(data => data.widgetText.includes("listField='colors'"))
             .map(data => {
-                var newData = {
-                    ...data,
-                    tiddlers: data.tiddlers.map(tiddler => ({...tiddler, list: tiddler.colors, colors: undefined})),
+                var newData = Object.assign({}, data, {
+                    tiddlers: data.tiddlers.map(tiddler => Object.assign({}, tiddler, {list: tiddler.colors, colors: undefined})),
                     widgetText: data.widgetText.replace("listField='colors'", "listField='list'"),
                     expectedChange: {
                         "Colors": { list: data.expectedChange.Colors.colors.split(' ') }
                     },
-                }
+                })
                 return newData;
             })
         );
@@ -289,20 +288,19 @@ Tests the checkbox widget thoroughly.
             listModeTests
             .filter(data => data.widgetText.includes("listField='colors'"))
             .map(data => {
-                var newData = {
-                    ...data,
-                    tiddlers: data.tiddlers.map(tiddler => ({...tiddler, tags: tiddler.colors, colors: undefined})),
+                var newData = Object.assign({}, data, {
+                    tiddlers: data.tiddlers.map(tiddler => Object.assign({}, tiddler, {tags: tiddler.colors, colors: undefined})),
                     widgetText: data.widgetText.replace("listField='colors'", "listField='tags'"),
                     expectedChange: {
                         "Colors": { tags: data.expectedChange.Colors.colors.split(' ') }
                     },
-                }
+                })
                 return newData;
             })
         );
 
         var indexListModeTests = listModeTests.map(data => {
-            var newData = {...data};
+            var newData = Object.assign({}, data);
             var newName = data.testName.replace('list mode', 'index list mode');
             var newTiddlers = data.tiddlers.map(tiddler => {
                 if (tiddler.hasOwnProperty('colors')) {

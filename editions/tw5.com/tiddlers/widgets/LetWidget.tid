@@ -1,12 +1,12 @@
 title: LetWidget
 created: 20211028115900000
-modified: 20221001094658854
+modified: 20250307212252946
 tags: Widgets
 caption: let
 
 ! Introduction
 
-<<.from-version "5.2.1">> The <<.wid let>> widget allows multiple variables to be set in one operation. In some situations it can result in simpler code than using the more flexible <<.wlink SetWidget>> widget. It differs from the <<.wlink VarsWidget>> widget in that variables you're defining may depend on earlier variables defined within the same <<.wid let>>.
+<<.from-version "5.2.1">> The <<.wid let>> widget allows more than one variable to be set in one operation. In some situations it can result in simpler code than using the more flexible <<.wlink SetWidget>> widget. It differs from the <<.wlink VarsWidget>> widget in that variables you're defining may depend on earlier variables defined within the same <<.wid let>>.
 
 ! Content and Attributes
 
@@ -18,6 +18,18 @@ The content of the <<.wid let>> widget is the scope for the value assigned to th
 Attributes are evaluated in the order they are written. Attributes with the same name are allowed. Each time a duplicate attribute is encountered, it will replace the existing value set by the earlier duplicate.
 
 <<.note """<<.from-version "5.2.4">> There is no longer any restriction on using variable names that start with the $ character.""">>
+
+! Multi-Valued Variables
+
+<<.from-version "5.4.0">> The <<.wid let>> widget also allows [[multi-valued variables|Multi-Valued Variables]] to be set in one operation to the complete list of results obtained from evaluating an attribute.
+
+Almost all operations that work with variables only consider the first item in the list. Using round brackets instead of angle brackets around the variable name gives access to the complete list of results. For example:
+
+```
+<$let varname={{{ [all[tiddlers]sort[]] }}}>
+<$text text={{{ [(varname)] +[join[-]] }}}/>
+</$let>
+```
 
 ! Examples
 
