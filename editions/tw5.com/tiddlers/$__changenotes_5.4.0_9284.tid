@@ -1,0 +1,15 @@
+change-category: widget
+change-type: bugfix
+created: 20251208165730566
+creator: CrossEye
+description: Remove hard-coded CSS style properties when animation completes
+github-contributors: CrossEye
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9284
+modified: 20251209030932559
+modifier: CrossEye
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/9284
+type: text/vnd.tiddlywiki
+
+This removes certain hard-coded CSS style properties that were set when an animation completes, trying to restore the defaults; instead we remove the properties from the element.  That fixes a class of small bugs in the storyviews: those properties were no longer available for animation through CSS transitions, and so certain animations were failing.
