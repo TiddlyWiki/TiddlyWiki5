@@ -35,7 +35,7 @@ function parseFilterOperation(operators,filterString,p) {
 			operator.prefix = filterString.charAt(p++);
 		}
 		// Get the operator name
-		nextBracketPos = filterString.substring(p).search(/[\[\{<\/\(]/);
+		nextBracketPos = filterString.substring(p).search(/[\[\{<\/]/);
 		if(nextBracketPos === -1) {
 			throw "Missing [ in filter expression";
 		}
@@ -55,7 +55,7 @@ function parseFilterOperation(operators,filterString,p) {
 				$tw.utils.each(subsuffix.split(","),function(entry) {
 					entry = $tw.utils.trim(entry);
 					if(entry) {
-						operator.suffixes[operator.suffixes.length - 1].push(entry); 
+						operator.suffixes[operator.suffixes.length - 1].push(entry);
 					}
 				});
 			});
@@ -78,10 +78,6 @@ function parseFilterOperation(operators,filterString,p) {
 				case "<": // Angle brackets
 					operand.variable = true;
 					nextBracketPos = filterString.indexOf(">",p);
-					break;
-				case "(": // Round brackets
-					operand.multiValuedVariable = true;
-					nextBracketPos = filterString.indexOf(")",p);
 					break;
 				case "/": // regexp brackets
 					var rex = /^((?:[^\\\/]|\\.)*)\/(?:\(([mygi]+)\))?/g,
@@ -116,7 +112,7 @@ function parseFilterOperation(operators,filterString,p) {
 		// Check for multiple operands
 		while(filterString.charAt(p) === ",") {
 			p++;
-			if(/^[\[\{<\/\(]/.test(filterString.substring(p))) {
+			if(/^[\[\{<\/]/.test(filterString.substring(p))) {
 				nextBracketPos = p;
 				p++;
 				parseOperand(filterString.charAt(nextBracketPos));
@@ -228,7 +224,7 @@ exports.getFilterRunPrefixes = function() {
 		$tw.modules.applyMethods("filterrunprefix",this.filterRunPrefixes);
 	}
 	return this.filterRunPrefixes;
-}
+};
 
 exports.filterTiddlers = function(filterString,widget,source) {
 	var fn = this.compileFilter(filterString);
@@ -270,14 +266,13 @@ exports.compileFilter = function(filterString) {
 				results = [];
 			$tw.utils.each(operation.operators,function(operator) {
 				var operands = [],
-					multiValueOperands = [],
-					isMultiValueOperand = [],
+					operandLists = [],
 					operatorFunction;
 				if(!operator.operator) {
 					// Use the "title" operator if no operator is specified
 					operatorFunction = filterOperators.title;
 				} else if(!filterOperators[operator.operator]) {
-					// Unknown operators treated as "[unknown]" - at run time we can distinguish between a custom operator and falling back to the default "field" operator
+					// Unknown operators treated as "[unknown]"
 					operatorFunction = filterOperators["[unknown]"];
 				} else {
 					// Use the operator function
@@ -287,29 +282,17 @@ exports.compileFilter = function(filterString) {
 					if(operand.indirect) {
 						var currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
-						operand.multiValue = [operand.value];
+						operand.valueList = [operand.value];
 					} else if(operand.variable) {
 						var varTree = $tw.utils.parseFilterVariable(operand.text);
-						operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source})[0] || "";
-						operand.multiValue = [operand.value];
-					} else if(operand.multiValuedVariable) {
-						var varTree = $tw.utils.parseFilterVariable(operand.text);
-						var resultList = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source});
-						if((resultList.length > 0 && resultList[0] !== undefined) || resultList.length === 0) {
-							operand.multiValue = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source}) || [];
-							operand.value = operand.multiValue[0] || "";
-						} else {
-							operand.value = "";
-							operand.multiValue = [];
-						}
-						operand.isMultiValueOperand = true;	
+						operand.valueList = widgetClass.evaluateVariable(widget, varTree.name, {params: varTree.params, source: source});
+						operand.value = operand.valueList[0] || "";
 					} else {
 						operand.value = operand.text;
-						operand.multiValue = [operand.value];
+						operand.valueList = [operand.value];
 					}
 					operands.push(operand.value);
-					multiValueOperands.push(operand.multiValue);
-					isMultiValueOperand.push(!!operand.isMultiValueOperand);
+					operandLists.push(operand.valueList);
 				});
 
 				// Invoke the appropriate filteroperator module
@@ -317,8 +300,7 @@ exports.compileFilter = function(filterString) {
 							operator: operator.operator,
 							operand: operands.length > 0 ? operands[0] : undefined,
 							operands: operands,
-							multiValueOperands: multiValueOperands,
-							isMultiValueOperand: isMultiValueOperand,
+							multiValueOperands: operandLists,
 							prefix: operator.prefix,
 							suffix: operator.suffix,
 							suffixes: operator.suffixes,

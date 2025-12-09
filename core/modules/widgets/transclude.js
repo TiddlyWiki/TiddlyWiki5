@@ -148,6 +148,7 @@ Collect string parameters
 TranscludeWidget.prototype.collectStringParameters = function() {
 	var self = this;
 	this.stringParametersByName = Object.create(null);
+	this.listParametersByName = Object.create(null);
 	if(!this.legacyMode) {
 		$tw.utils.each(this.attributes,function(value,name) {
 			if(name.charAt(0) === "$") {
@@ -160,6 +161,13 @@ TranscludeWidget.prototype.collectStringParameters = function() {
 				}
 			}
 			self.stringParametersByName[name] = value;
+			// Store list version if available
+			if(self.attributeLists && self.attributeLists[name]) {
+				self.listParametersByName[name] = self.attributeLists[name];
+			} else {
+				// Fallback: wrap single value in array
+				self.listParametersByName[name] = [value];
+			}
 		});
 	}
 };
@@ -354,7 +362,12 @@ TranscludeWidget.prototype.getOrderedTransclusionParameters = function() {
 	// Collect the parameters
 	for(var name in this.stringParametersByName) {
 		var value = this.stringParametersByName[name];
-		result.push({name: name, value: value});
+		var param = {name: name, value: value};
+		// Add multiValue field when available
+		if(this.listParametersByName && this.listParametersByName[name]) {
+			param.multiValue = this.listParametersByName[name];
+		}
+		result.push(param);
 	}
 	// Sort numerical parameter names first
 	result.sort(function(a,b) {
@@ -380,17 +393,31 @@ TranscludeWidget.prototype.getOrderedTransclusionParameters = function() {
 };
 
 /*
-Fetch the value of a parameter
+Fetch the value of a parameter (returns list array if available, single value otherwise)
 */
 TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaultValue) {
+	// First check if list exists
+	if(this.listParametersByName) {
+		if(name in this.listParametersByName) {
+			return this.listParametersByName[name];
+		} else {
+			var indexName = "" + index;
+			if(indexName in this.listParametersByName) {
+				return this.listParametersByName[indexName];
+			}
+		}
+	}
+
+	// Fall back to single-value lookup
 	if(name in this.stringParametersByName) {
 		return this.stringParametersByName[name];
 	} else {
-		var name = "" + index;
-		if(name in this.stringParametersByName) {
-			return this.stringParametersByName[name];
+		var indexName = "" + index;
+		if(indexName in this.stringParametersByName) {
+			return this.stringParametersByName[indexName];
 		}
 	}
+
 	return defaultValue;
 };
 

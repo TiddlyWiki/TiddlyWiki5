@@ -305,6 +305,7 @@ exports.parseAttribute = function(source,pos) {
 	// Define our regexps
 	const reAttributeName = /([^\/\s>"'`=]+)/y,
 		reUnquotedAttribute = /([^\/\s<>"'`=]+)/y,
+		reFilteredList = /\(\(\(([\S\s]+?)\)\)\)/y,
 		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/y,
 		reIndirectValue = /\{\{([^\}]+)\}\}/y,
 		reSubstitutedValue = /(?:```([\s\S]*?)```|`([^`]|[\S\s]*?)`)/y;
@@ -332,42 +333,50 @@ exports.parseAttribute = function(source,pos) {
 			node.type = "string";
 			node.value = stringLiteral.value;
 		} else {
-			// Look for a filtered value
-			var filteredValue = $tw.utils.parseTokenRegExp(source,pos,reFilteredValue);
-			if(filteredValue) {
-				pos = filteredValue.end;
-				node.type = "filtered";
-				node.filter = filteredValue.match[1];
+			// Look for a filtered list
+			var filteredList = $tw.utils.parseTokenRegExp(source,pos,reFilteredList);
+			if(filteredList) {
+				pos = filteredList.end;
+				node.type = "filteredlist";
+				node.filter = filteredList.match[1];
 			} else {
-				// Look for an indirect value
-				var indirectValue = $tw.utils.parseTokenRegExp(source,pos,reIndirectValue);
-				if(indirectValue) {
-					pos = indirectValue.end;
-					node.type = "indirect";
-					node.textReference = indirectValue.match[1];
+				// Look for a filtered value
+				var filteredValue = $tw.utils.parseTokenRegExp(source,pos,reFilteredValue);
+				if(filteredValue) {
+					pos = filteredValue.end;
+					node.type = "filtered";
+					node.filter = filteredValue.match[1];
 				} else {
-					// Look for a unquoted value
-					var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
-					if(unquotedValue) {
-						pos = unquotedValue.end;
-						node.type = "string";
-						node.value = unquotedValue.match[1];
+					// Look for an indirect value
+					var indirectValue = $tw.utils.parseTokenRegExp(source,pos,reIndirectValue);
+					if(indirectValue) {
+						pos = indirectValue.end;
+						node.type = "indirect";
+						node.textReference = indirectValue.match[1];
 					} else {
-						// Look for a macro invocation value
-						var macroInvocation = $tw.utils.parseMacroInvocation(source,pos);
-						if(macroInvocation) {
-							pos = macroInvocation.end;
-							node.type = "macro";
-							node.value = macroInvocation;
+						// Look for a unquoted value
+						var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
+						if(unquotedValue) {
+							pos = unquotedValue.end;
+							node.type = "string";
+							node.value = unquotedValue.match[1];
 						} else {
-							var substitutedValue = $tw.utils.parseTokenRegExp(source,pos,reSubstitutedValue);
-							if(substitutedValue) {
-								pos = substitutedValue.end;
-								node.type = "substituted";
-								node.rawValue = substitutedValue.match[1] || substitutedValue.match[2];
+							// Look for a macro invocation value
+							var macroInvocation = $tw.utils.parseMacroInvocation(source,pos);
+							if(macroInvocation) {
+								pos = macroInvocation.end;
+								node.type = "macro";
+								node.value = macroInvocation;
 							} else {
-								node.type = "string";
-								node.value = "true";
+								var substitutedValue = $tw.utils.parseTokenRegExp(source,pos,reSubstitutedValue);
+								if(substitutedValue) {
+									pos = substitutedValue.end;
+									node.type = "substituted";
+									node.rawValue = substitutedValue.match[1] || substitutedValue.match[2];
+								} else {
+									node.type = "string";
+									node.value = "true";
+								}
 							}
 						}
 					}

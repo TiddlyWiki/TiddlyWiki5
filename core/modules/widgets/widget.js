@@ -37,7 +37,8 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	this.parentWidget = options.parentWidget;
 	this.variables = Object.create(this.parentWidget ? this.parentWidget.variables : null);
 	this.document = options.document;
-	this.attributes = {};
+	this.attributes = Object.create(null);
+	this.attributeLists = Object.create(null);
 	this.children = [];
 	this.domNodes = [];
 	this.eventListeners = {};
@@ -391,6 +392,11 @@ Widget.prototype.computeAttributes = function(options) {
 			self.attributes[name] = value;
 			changedAttributes[name] = true;
 		}
+		var valueList = self.computeAttribute(attribute,{asList: true});
+		if(!$tw.utils.isArrayEqual(self.attributeLists[name], valueList)) {
+			self.attributeLists[name] = valueList;
+			//changedAttributes[name] = true;
+		}
 	});
 	return changedAttributes;
 };
@@ -403,14 +409,21 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 	options = options || {};
 	var self = this,
 		value;
+	/// We only return a single value from {{{ filter }}}
 	if(attribute.type === "filtered") {
+		value = this.wiki.filterTiddlers(attribute.filter,this)[0] || "";
+		if(options.asList) {
+			value = [value];
+		}
+	// We may return the full list from ((( filter )))
+	} else if(attribute.type === "filteredlist") {
 		value = this.wiki.filterTiddlers(attribute.filter,this);
 		if(!options.asList) {
 			value = value[0] || "";
 		}
 	} else if(attribute.type === "indirect") {
 		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler"));
-		if(value && options.asList) {
+		if(options.asList) {
 			value = [value];
 		}
 	} else if(attribute.type === "macro") {
