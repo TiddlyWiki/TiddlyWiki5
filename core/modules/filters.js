@@ -285,9 +285,9 @@ exports.compileFilter = function(filterString) {
 						operand.valueList = [operand.value];
 					} else if(operand.variable) {
 						var varTree = $tw.utils.parseFilterVariable(operand.text);
-						operand.valueList = widgetClass.evaluateVariable(widget, varTree.name, {params: varTree.params, source: source});
-						operand.value = operand.valueList[0] !== undefined ? operand.valueList[0] : "";
-						operand.valueList = [operand.value];
+						var valueList = widgetClass.evaluateVariable(widget, varTree.name, {params: varTree.params, source: source});
+						operand.valueList = valueList.map(function(value) { return value !== undefined ? value : ""; });
+						operand.value = operand.valueList[0];
 					} else {
 						operand.value = operand.text;
 						operand.valueList = [operand.value];
