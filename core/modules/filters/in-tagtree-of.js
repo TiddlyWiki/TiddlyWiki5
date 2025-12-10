@@ -5,6 +5,12 @@ module-type: filteroperator
 
 Filter operator for checking if tiddlers are in a tag tree with a specified root
 
+Finds out where a tiddler originates from, is it in a tag tree with xxx as root?
+
+Based on:
+- https://github.com/bimlas/tw5-kin-filter/blob/master/plugins/kin-filter/kin.js
+- https://talk.tiddlywiki.org/t/recursive-filter-operators-to-show-all-tiddlers-beneath-a-tag-and-all-tags-above-a-tiddler/3814
+
 \*/
 
 "use strict";
@@ -45,9 +51,7 @@ exports["in-tagtree-of"] = function(source,operator,options) {
 	}
 	
 	const rootTiddlerChildren = options.wiki.getGlobalCache("in-tagtree-of-" + rootTiddler,function() {
-		const results = new Set();
-		getTiddlersRecursively(rootTiddler,results,options.wiki);
-		return results;
+		return $tw.utils.getTagDescendants(options.wiki,rootTiddler);
 	});
 	
 	if(isNotInTagTreeOf) {
@@ -65,35 +69,3 @@ exports["in-tagtree-of"] = function(source,operator,options) {
 	});
 	return sourceTiddlerCheckedToBeChildrenOfRootTiddler;
 };
-
-function getTiddlersRecursively(title,results,wiki) {
-	// Get tagging[] list at this level
-	const intermediate = new Set(wiki.getTiddlersWithTag(title));
-	
-	// Remove any TiddlersWithTag in intermediate that are already in the results set to avoid loops
-	// Code adapted from $tw.utils.pushTop
-	if(intermediate.size > 0) {
-		if(results.size > 0) {
-			if(results.size < intermediate.size) {
-				results.forEach(function(alreadyExisted) {
-					if(intermediate.has(alreadyExisted)) {
-						intermediate.delete(alreadyExisted);
-					}
-				});
-			} else {
-				intermediate.forEach(function(alreadyExisted) {
-					if(results.has(alreadyExisted)) {
-						intermediate.delete(alreadyExisted);
-					}
-				});
-			}
-		}
-		// Add the remaining intermediate results and traverse the hierarchy further
-		intermediate.forEach(function(title) {
-			results.add(title);
-		});
-		intermediate.forEach(function(title) {
-			getTiddlersRecursively(title,results,wiki);
-		});
-	}
-}

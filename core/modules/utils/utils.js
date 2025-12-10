@@ -964,6 +964,30 @@ exports.tagToCssSelector = function(tagName) {
 };
 
 /*
+Return a Set of all tiddler titles that are descendants in the tag tree rooted at the given tag.
+The input tag itself is not included in the returned Set.
+*/
+exports.getTagDescendants = function(wiki,rootTag) {
+	wiki = wiki || $tw.wiki;
+	var results = new Set();
+	if(!rootTag) {
+		return results;
+	}
+	function collect(title) {
+		var tagged = wiki.getTiddlersWithTag(title) || [];
+		for(var index = 0; index < tagged.length; index++) {
+			var childTitle = tagged[index];
+			if(!results.has(childTitle)) {
+				results.add(childTitle);
+				collect(childTitle);
+			}
+		}
+	}
+	collect(rootTag);
+	return results;
+};
+
+/*
 IE does not have sign function
 */
 exports.sign = Math.sign || function(x) {
