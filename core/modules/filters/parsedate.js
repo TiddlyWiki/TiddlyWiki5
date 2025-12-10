@@ -11,11 +11,11 @@ Filter operator converting different date formats into TiddlyWiki's date format
 /*
 Export our filter function
 */
-exports.parsedate = function(source,operator,options) {
+exports.parsedate = function(source,operator) {
 	var parser = null;
-	switch (operator.operand) {
+	switch(operator.operand) {
 		case "JS":
-        default:
+		default:
 			parser = $tw.utils.parseECMAScriptDate;
 			break;
 	}
