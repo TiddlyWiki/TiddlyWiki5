@@ -13,15 +13,13 @@ Export our filter function
 */
 exports.parsedate = function(source,operator) {
 	var parser = null;
-	switch(operator.operand) {
-		case "JS":
-		default:
-			parser = $tw.utils.parseECMAScriptDate;
-			break;
+	var format = operator.operand || "JS";
+	if(format === "JS") {
+		parser = $tw.utils.parseECMAScriptDate;
 	}
-	if(!(parser instanceof Function)) {
+    if(!(parser instanceof Function)) {
 		return [$tw.language.getString("Error/ParseDateFilterOperator")];
-	}
+    }
 
 	var results = [];
 	source(function(tiddler,title) {

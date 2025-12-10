@@ -1074,15 +1074,8 @@ exports.makeCompareFunction = function(type,options) {
 	return (types[type] || types[options.defaultType] || types.number);
 };
 
-/*
-Parse a string in ECMAScript date format as specified in
-[ECMA262 Chapter 21.4.1.15](https://tc39.es/ecma262/#sec-date-time-string-format)
-
-Returns a Date object or false if the input does not match the format
-*/
-// Module-level RegExp for ECMAScript date validation
+// Parse https://tc39.es/ecma262/#sec-date-time-string-format
 const dateValidator = new RegExp("^(\\d{4}(-\\d{2}){0,2})?((^|T)\\d{2}:\\d{2}(:\\d{2}(\\.\\d{3})?)?(Z|([+-]\\d{2}:\\d{2}))?)?$");
-
 exports.parseECMAScriptDate = function(input) {
 	if(dateValidator.test(input)) {
 		// This code makes ECMAScript 2015 (ES6) behave like ES7 when parsing
