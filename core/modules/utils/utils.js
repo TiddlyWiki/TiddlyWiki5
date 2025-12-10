@@ -1062,14 +1062,35 @@ exports.makeCompareFunction = function(type,options) {
 			},
 			"version": function(a,b) {
 				return compare($tw.utils.compareVersions(a,b),0);
-			},
-			"alphanumeric": function(a,b) {
-				if(!isCaseSensitive) {
-					a = a.toLowerCase();
-					b = b.toLowerCase();
-				}
-				return options.invert ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+		},
+		"alphanumeric": function(a,b) {
+			if(!isCaseSensitive) {
+				a = a.toLowerCase();
+				b = b.toLowerCase();
 			}
-		};
+			return options.invert ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+		}
+	};
 	return (types[type] || types[options.defaultType] || types.number);
+};
+
+/*
+Parse a string in ECMAScript date format as specified in
+[ECMA262 Chapter 21.4.1.15](https://tc39.es/ecma262/#sec-date-time-string-format)
+
+Returns a Date object or false if the input does not match the format
+*/
+exports.parseECMAScriptDate = function(input) {
+	const dateValidator = new RegExp("^(\\d{4}(-\\d{2}){0,2})?((^|T)\\d{2}:\\d{2}(:\\d{2}(\\.\\d{3})?)?(Z|([+-]\\d{2}:\\d{2}))?)?$");
+
+	if(dateValidator.test(input)) {
+		// This code makes ECMAScript 2015 (ES6) behave like ES7 when parsing
+		// a date.
+		if((input.length < 11) && (input.indexOf("T") === -1)) {
+			input += "T00:00:00Z";
+		}
+		return new Date(input);
+	} else {
+		return false;
+	}
 };
