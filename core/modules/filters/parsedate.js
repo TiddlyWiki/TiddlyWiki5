@@ -6,10 +6,6 @@ module-type: filteroperator
 Filter operator converting different date formats into TiddlyWiki's date format
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -17,9 +13,9 @@ Export our filter function
 */
 exports.parsedate = function(source,operator,options) {
 	var parser = null;
-	var format = operator.operand || "JS";
-	switch (format) {
+	switch (operator.operand) {
 		case "JS":
+        default:
 			parser = $tw.utils.parseECMAScriptDate;
 			break;
 	}
@@ -37,5 +33,3 @@ exports.parsedate = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();
