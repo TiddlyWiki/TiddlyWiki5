@@ -1,0 +1,11 @@
+created: 20251210000000000
+modified: 20251210135243254
+tags: [[in-tagtree-of Operator]] [[Operator Examples]]
+title: in-tagtree-of Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[HelloThere]in-tagtree-of[TableOfContents]]" "check if ''HelloThere'' is in the tag tree rooted at ''TableOfContents''">>
+<<.operator-example 2 "[all[tiddlers]in-tagtree-of[Concepts]sort[title]]" "all tiddlers in the tag tree rooted at ''Concepts'', sorted by title">>
+<<.operator-example 3 "[all[tiddlers]!in-tagtree-of[Concepts]sort[title]]" "all tiddlers NOT in the tag tree rooted at ''Concepts''">>
+<<.operator-example 4 "[all[tiddlers]in-tagtree-of:inclusive[Concepts]]" "all tiddlers in the tag tree, including ''Concepts'' itself">>
+<<.operator-example 5 "[[ActionConfirmWidget]in-tagtree-of[Concepts]] [[ActionConfirmWidget]in-tagtree-of[Features]] +[unique[]]" "check if ''ActionConfirmWidget'' is in multiple tag trees">>
