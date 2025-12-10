@@ -1,10 +1,10 @@
-title: $:/changenotes/5.4.0/in-tagtree-of
+title: $:/changenotes/5.4.0/#9485
 description: Add new in-tagtree-of filter operator
 release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: feature
 change-category: filters
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/[PR-NUMBER]
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9485
 github-contributors: linonetwo
 
 Added a new filter operator `in-tagtree-of` that checks if tiddlers are in a tag tree with a specified root. This is a fast alternative to community `kin::to[xxx]`.
