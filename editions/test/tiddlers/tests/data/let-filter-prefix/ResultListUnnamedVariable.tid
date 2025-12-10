@@ -1,7 +1,7 @@
 title: LetFilterRunPrefix/ResultListUnnamedVariable
 description: Using the "let" filter run prefix to store result lists, not just single values
 type: text/vnd.tiddlywiki-multiple
-tags: [[$:/tags/wiki-test-spec]]
+tags:
 
 title: Output
 
