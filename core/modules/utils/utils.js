@@ -1080,9 +1080,10 @@ Parse a string in ECMAScript date format as specified in
 
 Returns a Date object or false if the input does not match the format
 */
-exports.parseECMAScriptDate = function(input) {
-	const dateValidator = new RegExp("^(\\d{4}(-\\d{2}){0,2})?((^|T)\\d{2}:\\d{2}(:\\d{2}(\\.\\d{3})?)?(Z|([+-]\\d{2}:\\d{2}))?)?$");
+// Module-level RegExp for ECMAScript date validation
+const dateValidator = new RegExp("^(\\d{4}(-\\d{2}){0,2})?((^|T)\\d{2}:\\d{2}(:\\d{2}(\\.\\d{3})?)?(Z|([+-]\\d{2}:\\d{2}))?)?$");
 
+exports.parseECMAScriptDate = function(input) {
 	if(dateValidator.test(input)) {
 		// This code makes ECMAScript 2015 (ES6) behave like ES7 when parsing
 		// a date.

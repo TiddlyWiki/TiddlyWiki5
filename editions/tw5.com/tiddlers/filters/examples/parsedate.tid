@@ -13,7 +13,7 @@ This example uses the `isodate` field of this tiddler containing "<$view field="
 
 <<.operator-example 2 "[get[isodate]parsedate[]]">>
 
-The following example uses a HTML5 date and time picker in combination with the `parsedate` operator to convert the output of the HTML5 input element into TiddlyWiki's [[DateFormat|date format]]. It uses the [[format Operator]] to output the date in human-readable form.
+The following example uses a HTML5 date and time picker in combination with the `parsedate` operator to convert the output of the HTML5 input element into TiddlyWiki's [[DateFormat]]. It uses the [[format Operator]] to output the date in human-readable form.
 
 <$macrocall $name=".example" n="3"
 eg="""<$edit-text field="isodate" type="datetime-local"/><br/><$text text={{{[get[isodate]parsedate[]format:date[MMM the DDth YYYY at 0hh:0mm]]}}}/>"""/>
@@ -34,6 +34,6 @@ Appending a `Z` to the Date and Time information makes sure it is always interpr
 
 <<.operator-example 6 "[[2011-01-01T00:00:00Z]parsedate[JS]format:date<utc-datetime>]">>
 
-Instead of `Z` a time zone offset can be specified. This offset will be used to interprete the date and time information. The local time zone is ignored.
+Instead of `Z` a time zone offset can be specified. This offset will be used to interpret the date and time information. The local time zone is ignored.
 
 <<.operator-example 7 "[[2011-01-01T00:00:00+05:00]parsedate[JS]format:date<utc-datetime>]">>
