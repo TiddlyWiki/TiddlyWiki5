@@ -1,0 +1,28 @@
+title: Filters/images
+description: Test images operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Tiddler1
+
+TiddlyWiki <$image source="https://tiddlywiki.com/images/tiddlywiki-logo.png" alt="TiddlyWiki logo" width="100px" height="100px"/><$image source="Image4" alt="Image4" width="100px" height="100px"/>.
++
+title: Tiddler2
+
+This is an image <$image source="Image1"/> and this is another image [img[Image2]] but this image won't be picked up <img src="Image3" alt="Image3" width="100px" height="100px"/> nor will this one {{Image4}}
++
+title: Image4
+type: image/png
+
+iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=
++
+title: Output
+
+\whitespace trim
+(<$text text={{{ [[Tiddler1]images[]join[,]] }}}/>)
+(<$text text={{{ [[Tiddler2]images[]join[,]] }}}/>)
++
+title: ExpectedResult
+
+<p>(https://tiddlywiki.com/images/tiddlywiki-logo.png,Image4)
+(Image1,Image2)</p>
