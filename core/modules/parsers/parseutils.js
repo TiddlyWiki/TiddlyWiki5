@@ -45,7 +45,7 @@ exports.parseWhiteSpace = function(source,pos) {
 			type: "whitespace",
 			start: pos,
 			end: p
-		}
+		};
 	}
 };
 
@@ -113,7 +113,7 @@ exports.parseStringLiteral = function(source,pos) {
 	if(match && match.index === pos) {
 		node.value = match[1] !== undefined ? match[1] :(
 			match[2] !== undefined ? match[2] : match[3]
-					);
+		);
 		node.end = pos + match[0].length;
 		return node;
 	} else {
@@ -162,7 +162,7 @@ exports.parseMacroParameters = function(node,source,pos) {
 	}
 	node.end = pos;
 	return node;
-}
+};
 
 /*
 Look for a macro invocation parameter. Returns null if not found, or {type: "macro-parameter", name:, value:, start:, end:}
@@ -184,16 +184,16 @@ exports.parseMacroParameter = function(source,pos) {
 	pos = token.end;
 	// Get the parameter details
 	node.value = token.match[2] !== undefined ? token.match[2] : (
-					token.match[3] !== undefined ? token.match[3] : (
-						token.match[4] !== undefined ? token.match[4] : (
-							token.match[5] !== undefined ? token.match[5] : (
-								token.match[6] !== undefined ? token.match[6] : (
-									""
-								)
-							)
-						)
+		token.match[3] !== undefined ? token.match[3] : (
+			token.match[4] !== undefined ? token.match[4] : (
+				token.match[5] !== undefined ? token.match[5] : (
+					token.match[6] !== undefined ? token.match[6] : (
+						""
 					)
-				);
+				)
+			)
+		)
+	);
 	if(token.match[1]) {
 		node.name = token.match[1];
 	}

@@ -12,15 +12,15 @@ Negated operator outputs those input tiddlers that are not in the operand list
 "use strict";
 
 exports.intersection = (source, operator, options) => {
-    const list = operator.multiValueOperands[0];
-    const isNegated = operator.prefix === "!";
-    const results = [];
+	const list = operator.multiValueOperands[0];
+	const isNegated = operator.prefix === "!";
+	const results = [];
 
-    source((tiddler, title) => {
-        if (isNegated !== list.includes(title)) {
-            results.push(title);
-        }
-    });
+	source((tiddler, title) => {
+		if(isNegated !== list.includes(title)) {
+			results.push(title);
+		}
+	});
 
-    return results;
+	return results;
 };

@@ -43,7 +43,7 @@ function parseFilterOperation(operators,filterString,p) {
 		var bracket = filterString.charAt(nextBracketPos);
 		operator.operator = filterString.substring(p,nextBracketPos);
 		// Any suffix?
-		var colon = operator.operator.indexOf(':');
+		var colon = operator.operator.indexOf(":");
 		if(colon > -1) {
 			// The raw suffix for older filters
 			operator.suffix = operator.operator.substring(colon + 1);
@@ -67,7 +67,7 @@ function parseFilterOperation(operators,filterString,p) {
 		operator.operands = [];
 		var parseOperand = function(bracketType) {
 			var operand = {};
-			switch (bracketType) {
+			switch(bracketType) {
 				case "{": // Curly brackets
 					operand.indirect = true;
 					nextBracketPos = filterString.indexOf("}",p);
@@ -84,8 +84,8 @@ function parseFilterOperation(operators,filterString,p) {
 						rexMatch = rex.exec(filterString.substring(p));
 					if(rexMatch) {
 						operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
-	// DEPRECATION WARNING
-	console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
+						// DEPRECATION WARNING
+						console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
 						nextBracketPos = p + rex.lastIndex - 1;
 					}
 					else {
@@ -104,7 +104,7 @@ function parseFilterOperation(operators,filterString,p) {
 			}
 			operator.operands.push(operand);
 			p = nextBracketPos + 1;
-		}
+		};
 
 		p = nextBracketPos + 1;
 		parseOperand(bracket);
@@ -298,18 +298,18 @@ exports.compileFilter = function(filterString) {
 
 				// Invoke the appropriate filteroperator module
 				results = operatorFunction(accumulator,{
-							operator: operator.operator,
-							operand: operands.length > 0 ? operands[0] : undefined,
-							operands: operands,
-							multiValueOperands: operandLists,
-							prefix: operator.prefix,
-							suffix: operator.suffix,
-							suffixes: operator.suffixes,
-							regexp: operator.regexp
-						},{
-							wiki: self,
-							widget: widget
-						});
+					operator: operator.operator,
+					operand: operands.length > 0 ? operands[0] : undefined,
+					operands: operands,
+					multiValueOperands: operandLists,
+					prefix: operator.prefix,
+					suffix: operator.suffix,
+					suffixes: operator.suffixes,
+					regexp: operator.regexp
+				},{
+					wiki: self,
+					widget: widget
+				});
 				if($tw.utils.isArray(results)) {
 					accumulator = self.makeTiddlerIterator(results);
 				} else {

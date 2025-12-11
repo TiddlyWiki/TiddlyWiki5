@@ -74,7 +74,7 @@ LetWidget.prototype.computeAttributes = function() {
 LetWidget.prototype.getVariableInfo = function(name,options) {
 	// Special handling: If this variable exists in this very $let, we can
 	// use it, but only if it's been staged.
-	if ($tw.utils.hop(this.currentValueFor,name)) {
+	if($tw.utils.hop(this.currentValueFor,name)) {
 		var value = this.currentValueFor[name];
 		return {
 			text: value[0] || "",
