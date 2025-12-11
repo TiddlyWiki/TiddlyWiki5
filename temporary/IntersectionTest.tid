@@ -1,0 +1,6 @@
+created: 20251208161828009
+modified: 20251211134842372
+tags: 
+title: IntersectionTest
+
+((( [all[shadows]prefix[$:/core/modules/widgets]] =>[[titleList]] [all[shadows]search:title[field]intersection<titleList>] )))
