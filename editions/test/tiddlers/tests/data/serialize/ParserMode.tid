@@ -1,0 +1,9 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/ParserMode
+type: text/vnd.tiddlywiki
+
+\parsermode block
+
+\parsermode inline
+
+Test.
