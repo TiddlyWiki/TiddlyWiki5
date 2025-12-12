@@ -51,7 +51,7 @@ class ViewHandler {
 		}
 	}
 
-	refresh() {
+	static refresh() {
 		return false;
 	}
 }
