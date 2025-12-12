@@ -51,7 +51,7 @@ class ViewHandler {
 		}
 	}
 
-	refresh(changedTiddlers) {
+	refresh() {
 		return false;
 	}
 }
