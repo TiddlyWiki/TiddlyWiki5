@@ -1,0 +1,141 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/flickr-helpers
+caption: Flickr helpers
+tags: $:/tags/GeospatialDocs
+
+!! Flickr Helpers
+
+!!! Photo Tiddlers
+
+The procedures that retrieve photos from Flickr create a separate tiddler for each retrieved photo. The field values of these photo tiddlers are specified through a photo tiddler template that specifies a filter expression for each field that is to be included.
+
+A [[default photo tiddler template|$:/plugins/tiddlywiki/geospatial/procedures/Flickr/DefaultPhotoTemplate]] is used if one is not specified. The default template makes the following assignments:
+
+|!Field |!Description |
+|title |Set to "Flickr Photo " appended with Flickr's ID for the photograph |
+|tags |`$:/tags/GeoMarker` and `$:/tags/FlickrPhoto` |
+|caption |The title of the photograph |
+|lat |The latitude of the image (blank for non-geocoded photographs) |
+|long |The longitude of the image (blank for non-geocoded photographs) |
+|alt |0 |
+|photo-url |The URL of the "large" image size of the photograph (longest side will be a maximum of 1024px) |
+|icon-url |The URL of the "small thumbnail" image size of the photograph (cropped to a square of maximum size 75px)  |
+
+The photo tiddler template can reference the following variables. See [[Flickr's documentation|https://www.flickr.com/services/api/misc.urls.html]] to learn how these values can be combined to construct URLs to access photographs.
+
+|!Variable |!Description |
+|photoData |Raw JSON data returned from Flickr API |
+|photoFarm |Flickr photo farm associated with the photograph |
+|photoServer | Flickr server associated with the photograph |
+|photoID |Flickr photo ID for the photograph |
+|photoSecret |The URL secret associated with the photograph |
+
+!!! `flickr-get-photos-of-user-items` procedure
+
+Retrieves photographs of a particular user, identified by their user ID.
+
+|!Parameter |!Description |
+|userID |ID of the user of whom to retrieve photos (eg 35468148136@N01) |
+|photoTiddlerTemplate |Optional title of tiddler specifying field values for the created photo tiddlers |
+
+For example:
+
+<$testcase>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+<$data title="Description" text="Get photographs of user"/>
+<$data title="Output" text="""<$button>
+<$transclude $variable="flickr-get-photos-of-user-items" userID="35468148136@N01"/>
+Click to get photos of user
+</$button>
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	</$list>
+</$geomap>
+"""/>
+</$testcase>
+
+!!! `flickr-get-group-items` procedure
+
+Retrieves photographs from a group, identified by the group ID.
+
+|!Parameter |!Description |
+|groupID |ID of the group from which to retrieve photos (eg 22075379@N00) |
+|photoTiddlerTemplate |Optional title of tiddler specifying field values for the created photo tiddlers |
+
+For example:
+
+<$testcase>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+<$data title="Description" text="Get photographs from group"/>
+<$data title="Output" text="""<$button>
+<$transclude $variable="flickr-get-group-items" groupID="22075379@N00"/>
+Click to get photos from group
+</$button>
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	</$list>
+</$geomap>
+"""/>
+</$testcase>
+
+!!! `flickr-get-album-items` procedure
+
+Retrieves photographs from an album, identified by the album ID.
+
+|!Parameter |!Description |
+|albumID |ID of the album from which to retrieve photos (eg 72157630297432522) |
+|photoTiddlerTemplate |Optional title of tiddler specifying field values for the created photo tiddlers |
+
+For example:
+
+<$testcase>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+<$data title="Description" text="Get photographs from album"/>
+<$data title="Output" text="""<$button>
+<$transclude $variable="flickr-get-album-items" albumID="72157630297432522"/>
+Click to get photos from album
+</$button>
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	</$list>
+</$geomap>
+"""/>
+</$testcase>
+
+!!! `flickr-get-interesting-items` procedure
+
+Retrieves Flickr's current list of the 500 most "interesting" photographs. 
+
+|!Parameter |!Description |
+|photoTiddlerTemplate |Optional title of tiddler specifying field values for the created photo tiddlers |
+
+For example:
+
+<$testcase>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+<$data title="Description" text="Get interesting photographs"/>
+<$data title="Output" text="""<$button>
+<$transclude $variable="flickr-get-interesting-items"/>
+Click to get interesting photos
+</$button>
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	</$list>
+</$geomap>
+"""/>
+</$testcase>

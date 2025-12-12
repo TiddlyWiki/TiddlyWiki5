@@ -6,10 +6,7 @@ module-type: animation
 A simple slide animation that varies the height of the element
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function slideOpen(domNode,options) {
@@ -111,5 +108,3 @@ exports.slide = {
 	open: slideOpen,
 	close: slideClosed
 };
-
-})();

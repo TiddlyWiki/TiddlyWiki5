@@ -1,0 +1,66 @@
+title: $:/Community Survey 2025/Definitions
+tags: $:/tags/Global
+
+\procedure survey-2025-list-answers(answerTitle)
+	<div class="interview-answers">
+		<table class="tc-view-field-table">
+			<tbody>
+				<tr>
+					<th style="width:50%;">Question</th>
+					<th style="width:50%;">Answer</th>
+				</tr>
+				<$list filter="[all[current]fields[]sort[title]] -text -title -tags" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+			</tbody>
+		</table>
+	</div>
+\end survey-2025-list-answers
+
+\procedure survey-2025-list-questions()
+	<$let stateBase=<<qualify "$:/state/survey-2025/">>>
+		<div class="interview">
+			<$list filter="[list[$:/_importspec/Community Survey 2025/Content/Row]]">
+				<$let
+					state={{{ [<stateBase>addsuffix<currentTiddler>] }}}
+					answerField={{{ [<currentTiddler>get[import-field-name]] }}}
+				>
+					<h1>
+						<$button class="tc-btn-invisible" style="text-align:left;">
+							<$action-setfield $tiddler=<<state>> $field="text" $value={{{ [<state>get[text]match[yes]then[no]else[yes]] }}}/>
+							<%if [<state>get[text]else[yes]match[yes]] %>
+								{{$:/core/images/chevron-down}}
+							<%else%>
+								{{$:/core/images/chevron-right}}
+							<%endif%>
+							<$text text={{!!import-field-column}}/>
+							(<$text text={{{ [tag[Community Survey 2025]get<answerField>else[]!match[]] +[count[]] }}}/>)
+						</$button>
+					</h1>
+					<%if [<state>get[text]else[yes]match[yes]] %>
+						<ol>
+							<%if [<currentTiddler>get[question-type]else[]match[multiple-choice] %>
+								<$list filter="[tag[Community Survey 2025]get<answerField>else[]!match[]split[;]unique[]sort[]]" variable="answerText">
+										<li class="interview-answer">
+											<$text text=<<answerText>>/>
+											(<$text text={{{ [tag[Community Survey 2025]] :filter[get<answerField>else[]split[;]match<answerText>] +[count[]] }}}/>)
+										</li>
+								</$list>
+							<%else%>
+								<$list filter="[tag[Community Survey 2025]] :filter[get<answerField>else[]!match[]] +[each<answerField>sort<answerField>]" variable="answerTitle">
+									<$let answerText={{{ [<answerTitle>get<answerField>] }}}>
+										<li class="interview-answer">
+											<$link to=<<answerTitle>>>
+												<$text text={{{ [<answerTitle>get<answerField>] }}}/>
+												(<$text text={{{ [tag[Community Survey 2025]get<answerField>match<answerText>count[]] }}}/>)
+											</$link>
+										</li>
+									</$let>
+								</$list>
+							<%endif%>
+						</ol>
+					<%endif%>
+				</$let>
+			</$list>
+		</div>
+	</$let>
+\end survey-2025-list-questions
+

@@ -1,0 +1,40 @@
+title: $:/plugins/tiddlywiki/geospatial/tests/widgets/geomap-draggable-marker
+description: geomap widget with draggable marker
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec-XXXXX]]
+NOTE: THIS TEST IS DISABLED BECAUSE IT CURRENTLY DOES NOT WORK IN CI WITH PLAYWRIGHT
+
+title: Description
+text: Map with draggable marker
++
+title: Oxford
+lat: 51.751944
+long: -1.257778
+alt: 0
++
+title: Output
+
+\procedure update-actions()
+<$action-setfield $tiddler="Oxford" $field="lat" $value=<<lat>>/>
+<$action-setfield $tiddler="Oxford" $field="long" $value=<<long>>/>
+\end
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+>
+	<$tiddler tiddler="Oxford">
+		<$geolayer
+			lat={{!!lat}}
+			long={{!!long}}
+			alt={{!!alt}}
+			color={{!!color}}
+			name={{!!title}}
+			draggable="yes"
+			updateActions=<<update-actions>>
+		/>
+	</$tiddler>
+</$geomap>
++
+title: ExpectedResult
+
+<p><div style="width:100%;height:600px;"></div></p>

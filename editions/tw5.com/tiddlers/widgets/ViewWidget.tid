@@ -55,6 +55,15 @@ The following example will view the core version of the tiddler [[$:/DefaultTidd
 
 '>>
 
+To transclude a subtiddler with codeblock visual style, wrap it with pre, and set the mode and format attributes:
+
+<<wikitext-example-without-html '
+<pre>
+<$view tiddler="$:/core" subtiddler="$:/core/ui/ControlPanel/ViewTemplateTags" mode=block format=text/>
+</pre>
+
+'>>
+
 ! Examples
 
 Given this [[Saturday]] example tiddler:

@@ -6,10 +6,7 @@ module-type: startup
 Title, stylesheet and page rendering
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -29,13 +26,22 @@ var THROTTLE_REFRESH_TIMEOUT = 400;
 
 exports.startup = function() {
 	// Set up the title
-	$tw.titleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TITLE_TITLE,{document: $tw.fakeDocument, parseAsInline: true});
+	$tw.titleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TITLE_TITLE, {
+		document: $tw.fakeDocument,
+		parseAsInline: true,
+		importPageMacros: true,
+	});
 	$tw.titleContainer = $tw.fakeDocument.createElement("div");
 	$tw.titleWidgetNode.render($tw.titleContainer,null);
-	document.title = $tw.titleContainer.textContent;
+	var publishTitle = function() {
+		$tw.titlePublisher.send({verb: "PAGETITLE",body: document.title});
+		document.title = $tw.titleContainer.textContent;
+	};
+	$tw.titlePublisher = new $tw.utils.BrowserMessagingPublisher({type: "PAGETITLE", onsubscribe: publishTitle});
+	publishTitle();
 	$tw.wiki.addEventListener("change",function(changes) {
 		if($tw.titleWidgetNode.refresh(changes,$tw.titleContainer,null)) {
-			document.title = $tw.titleContainer.textContent;
+			publishTitle();
 		}
 	});
 	// Set up the styles
@@ -81,6 +87,8 @@ exports.startup = function() {
 		deferredChanges = Object.create(null);
 		$tw.hooks.invokeHook("th-page-refreshed");
 	}
+	var throttledRefresh = $tw.perf.report("throttledRefresh",refresh);
+
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
 		// Check if only tiddlers that are throttled have changed
@@ -101,7 +109,7 @@ exports.startup = function() {
 			if(isNaN(timeout)) {
 				timeout = THROTTLE_REFRESH_TIMEOUT;
 			}
-			timerId = setTimeout(refresh,timeout);
+			timerId = setTimeout(throttledRefresh,timeout);
 			$tw.utils.extend(deferredChanges,changes);
 		} else {
 			$tw.utils.extend(deferredChanges,changes);
@@ -114,5 +122,3 @@ exports.startup = function() {
 	// Run any post-render startup actions
 	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/PostRender");
 };
-
-})();

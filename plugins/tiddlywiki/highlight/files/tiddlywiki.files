@@ -7,7 +7,6 @@
 				"title": "$:/plugins/tiddlywiki/highlight/highlight.js",
 				"module-type": "library"
 			},
-			"prefix": "var hljs = require(\"$:/plugins/tiddlywiki/highlight/highlight.js\");\n",
 			"suffix": "\nexports.hljs = hljs;\n"
 		},
 		{
@@ -15,7 +14,7 @@
 			"fields": {
 				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/highlight/highlight.css",
-				"tags": "[[$:/tags/Stylesheet]]"
+				"tags": "[[$:/tags/Stylesheet]] [[$:/tags/Stylesheet/Highlight]]"
 			}
 		}
 	]

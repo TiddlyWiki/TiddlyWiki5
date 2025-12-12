@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/savetrail/settings
-
+caption: Save Trail
+tags: $:/tags/ControlPanel/SettingsTab
 
 <$checkbox tiddler="$:/config/SaveTrailPlugin/enable" field="text" checked="yes" unchecked="no"> Enable automatic saving of modified tiddlers</$checkbox>
 

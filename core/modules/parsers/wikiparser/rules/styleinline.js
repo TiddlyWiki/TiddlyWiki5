@@ -13,10 +13,7 @@ Wiki text inline rule for assigning styles and classes to inline runs. For examp
 
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "styleinline";
@@ -24,7 +21,7 @@ exports.types = {inline: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
-	// Regexp to match
+	// Regexp to match /@@(styles)?\s*(\.class\s+)?/
 	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?(\.(?:[^\r\n\s]+)\s+)?/mg;
 };
 
@@ -54,5 +51,3 @@ exports.parse = function() {
 	}
 	return [node];
 };
-
-})();

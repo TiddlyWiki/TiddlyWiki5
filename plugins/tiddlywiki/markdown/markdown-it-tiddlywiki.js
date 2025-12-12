@@ -6,10 +6,7 @@ module-type: library
 Wraps up the markdown-it parser for use as a Parser in TiddlyWiki
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var md;
@@ -136,25 +133,20 @@ function findNextMatch(ruleinfo,pos) {
 }
 
 // Add inline rule "macrocall" to parse <<macroname ...>>
-var MacroCallRegEx = /<<([^\s>"'=]+)[^>]*>>/g;
 function tw_macrocallinline(state,silent) {
-	var match, max, pos = state.pos;
+	var ruleinfo = pluginOpts.inlineRules.macrocallinline;
 
-	// Check start
-	max = state.posMax;
-	if(state.src.charCodeAt(pos) !== 0x3C || state.src.charCodeAt(pos+1) !== 0x3C /* << */|| pos + 3 >= max) {
+	var pos = state.pos;
+	var matchIndex = findNextMatch(ruleinfo,pos);
+	if(matchIndex === undefined || matchIndex !== pos) {
 		return false;
 	}
 
-	MacroCallRegEx.lastIndex = pos;
-	match = MacroCallRegEx.exec(state.src);
-	if(!match || match.index !== pos) { return false; }
-
 	if(!silent) {
 		var token = state.push('tw_expr','',0);
-		token.content = state.src.slice(pos,pos+match[0].length);
+		token.content = state.src.slice(pos,ruleinfo.rule.nextCall.end);
 	}
-	state.pos = MacroCallRegEx.lastIndex;
+	state.pos = ruleinfo.rule.nextCall.end;
 	return true;
 }
 
@@ -523,8 +515,10 @@ module.exports = function tiddlyWikiPlugin(markdown,options) {
 		if(pluginOpts.inlineRules.transcludeinline) {
 			md.inline.ruler.before('html_inline','tw_transcludeinline',tw_transcludeinline);
 		}
+		if(pluginOpts.inlineRules.macrocallinline) {
+			md.inline.ruler.before('html_inline','tw_macrocallinline',tw_macrocallinline);
+		}
 
-		md.inline.ruler.before('html_inline','tw_macrocallinline',tw_macrocallinline);
 		md.inline.ruler.at('html_inline',extendHtmlInline(md.inline.ruler.__rules__[md.inline.ruler.__find__('html_inline')].fn));
 		md.block.ruler.after('html_block','tw_block',tw_block,{
 			alt: [ 'paragraph', 'reference', 'blockquote' ]
@@ -535,5 +529,3 @@ module.exports = function tiddlyWikiPlugin(markdown,options) {
 	md.core.ruler.disable('text_join');
 	md.core.ruler.push('wikify',wikify);
 };
-
-})();

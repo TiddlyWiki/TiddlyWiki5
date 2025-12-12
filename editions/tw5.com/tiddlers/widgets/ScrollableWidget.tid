@@ -60,6 +60,16 @@ This wiki text shows how to display a list within the scrollable widget:
 Set current scroll position to 100,100
 </$button>
 
+<$button>
+<$action-setfield $tiddler="$:/my-scroll-position" scroll-top={{{ [{$:/my-scroll-position!!scroll-top}subtract[10]] }}}/>
+Scroll up by 10 pixels
+</$button>
+
+<$button>
+<$action-setfield $tiddler="$:/my-scroll-position" scroll-top={{{ [{$:/my-scroll-position!!scroll-top}add[10]] }}}/>
+Scroll down by 10 pixels
+</$button>
+
 <<wikitext-example-without-html "<$scrollable class='tc-scrollable-demo' bind='$:/my-scroll-position'>
 <$list filter='[tag[Reference]]'>
 

@@ -1,15 +1,15 @@
+caption: each
 created: 20140410103123179
-modified: 20191209085901849
+modified: 20241204090042816
+op-input: a [[selection of titles|Title Selection]]
+op-output: a selection containing the first input title encountered for each distinct value of field <<.place F>>
+op-parameter: the name of a [[field|TiddlerFields]], defaulting to <<.field title>>
+op-parameter-name: F
+op-purpose: select one of each group of input titles by field
+op-suffix: optionally, `list-item` or `value`
 tags: [[Filter Operators]] [[Group Operators]]
 title: each Operator
 type: text/vnd.tiddlywiki
-caption: each
-op-purpose: select one of each group of input titles by field
-op-input: a [[selection of titles|Title Selection]]
-op-suffix: optionally, `list-item` or `value`
-op-parameter: the name of a [[field|TiddlerFields]], defaulting to <<.field title>>
-op-parameter-name: F
-op-output: a selection containing the first input title encountered for each distinct value of field <<.place F>>
 
 Each input title is processed in turn. The value of field <<.place F>> in the corresponding tiddler is examined.
 
@@ -21,5 +21,7 @@ Each input title is processed in turn. The value of field <<.place F>> in the co
 :As long as the title is unique it is appended to the output whether or not the corresponding tiddler exists.
 
 Note that if a tiddler does not contain field <<.place F>>, it is treated as if the value of the field were empty. Thus, a filter expression such as `[each[motovun]]` will return one tiddler that doesn't have a `motovun` field, as well as one tiddler with each distinct value of that field, if any. To obtain just the tiddlers that have a non-blank value for the `motovun` field one can use `[each[motovun]has[motovun]]`.
+
+<<.note"""For an example of using the <<.op each>> operator to generate a two-tier list of groups and members, see [[GroupedLists]].""">>
 
 <<.operator-examples "each">>

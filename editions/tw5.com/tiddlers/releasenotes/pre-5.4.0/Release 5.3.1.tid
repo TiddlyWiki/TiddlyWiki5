@@ -1,0 +1,87 @@
+caption: 5.3.1
+created: 20230820112855583
+modified: 20230820112855583
+released: 20230820112855583
+tags: ReleaseNotes
+title: Release 5.3.1
+type: text/vnd.tiddlywiki
+description: Bug fix release for v5.3.0
+
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.0...v5.3.1]]//
+
+<<.banner-credits
+	credit:"""Congratulations to [[vilc|https://talk.tiddlywiki.org/u/vilc]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/banner-image-competition-for-v5-3-0/7406/10]]).
+"""
+	url:"https://github.com/TiddlyWiki/TiddlyWiki5/blob/4124bbdfb3e2445d45488006dfff1925d067ab0f/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png?raw=true"
+>>
+
+! Overview of v5.3.1
+
+This release comes only a few weeks after [[v5.3.0|Release 5.3.0]]. The motivation for the release is to swiftly fix some issues that have emerged with v5.3.0. There are also some other improvements included in this release, notably the ability to access binary resources over HTTP -- the [[demo|WidgetMessage: tm-http-request Example - Random Dog]] downloads a random image or video of a dog.
+
+! Bug Fixes and Reversions of v5.3.0 Changes
+
+* Reverted adding the `widget.destroy()` method because of performance concerns (see https://github.com/TiddlyWiki/TiddlyWiki5/pull/7468)
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7647">> inefficiency when transcluding with the ''$output'' attribute set to `text/plain` that manifested itself as extremely slow export times
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7648">> unwanted error message "Global assignment is not allowed within modules on node"
+
+! Translation improvement
+
+Improvements to the following translations:
+
+* Chinese
+* Polish
+
+! Widget Improvements
+
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7594">> ''tabindex'' attribute to SelectWidget
+
+! Hackability Improvements
+
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7611">> ImportVariablesWidget and [[Pragma: \import]] to trim whitespace when parsing tiddlers
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/commit/9b2af1359614f4ad5afd05be7cf9853909334592">> [[WidgetMessage: tm-http-request]] to handle binary responses ([[demo|WidgetMessage: tm-http-request Example - Random Dog]])
+
+! Bug Fixes
+
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7627">> table of contents indentation
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7595">> bindStatus and bindProgress parameters of [[WidgetMessage: tm-http-request]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7606">> attribute substitution to handle variables containing non-word characters
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7624">> the pragmas introduced in v5.3.0 so that they can be indented with whitespace
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7619">> size of tiddler icons
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7622">> drag and drop from Chrome-like browsers to Firefox
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7679">> listIndex mode of checkbox widgets
+
+! Node.js Improvements
+
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7645">> console reporting of ~JavaScript errors
+
+! Developer Improvements
+
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/6c7c21a87bdb0d8a00df1c14eea18912164e0b57">> overeager onload handler in Jasmine plugin
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/08bad90e51c45233a196333e101bbbf6ecf702ce">> ordering of shadow tiddler listings to not reflect order of insertion
+
+! Acknowledgements
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+<<.contributors """
+AnthonyMuscio
+btheado
+catter-fly
+cmo-pomerium
+CrossEye
+flibbles
+hffqyd
+lilscribby
+linonetwo
+Marxsal
+mateuszwilczek
+pille1842
+pmario
+rmunn
+saqimtiaz
+stevesunypoly
+TiddlyTweeter
+twMat
+yaisog
+""">>

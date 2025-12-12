@@ -10,7 +10,7 @@ Lance la séquence des commandes retournées par un filtre
 Exemples
 
 ```
---commands "[enlist{$:/commandes-build-sous-forme-de-texte}]"
+--commands "[enlist:raw{$:/commandes-build-sous-forme-de-texte}]"
 ```
 
 ```

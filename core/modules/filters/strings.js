@@ -8,10 +8,7 @@ Filter operators for strings. Unary/binary operators work on each item in turn, 
 Sum/product/maxall/minall operate on the entire list, returning a single item.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.length = makeStringBinaryOperator(
@@ -127,7 +124,7 @@ function diffPartsToChars(text1,text2,mode) {
             if(lineHash.hasOwnProperty ? lineHash.hasOwnProperty(line) : (lineHash[line] !== undefined)) {
 				chars += String.fromCharCode(lineHash[line]);
             } else {
-                if (lineArrayLength == maxLines) {
+                if(lineArrayLength == maxLines) {
                   line = text.substring(lineStart);
                   lineEnd = text.length;
                 }
@@ -217,7 +214,10 @@ exports.splitregexp = function(source,operator,options) {
 		return ["RegExp error: " + ex];
 	}
 	source(function(tiddler,title) {
-		Array.prototype.push.apply(result,title.split(regExp));
+		var parts = title.split(regExp).map(function(part){
+			return part || "";	// make sure it's a string
+		});
+		Array.prototype.push.apply(result,parts);
 	});
 	return result;
 };
@@ -264,7 +264,7 @@ exports.pad = function(source,operator,options) {
 			} else {
 				var padString = "",
 					padStringLength = targetLength - title.length;
-				while (padStringLength > padString.length) {
+				while(padStringLength > padString.length) {
 					padString += fill;
 				}
 				//make sure we do not exceed the specified length
@@ -290,5 +290,3 @@ exports.charcode = function(source,operator,options) {
 	});
 	return [chars.join("")];
 };
-
-})();

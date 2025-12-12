@@ -1,0 +1,31 @@
+created: 20160107222504269
+modified: 20241221111742412
+original-modified: 20220617132957241
+tags: Plugins
+title: Uninstalling a plugin
+ja-title: プラグインをアンインストールする
+type: text/vnd.tiddlywiki
+
+\rules except wikilink
+
+手順を//隣に並べて//実行したい場合は、<<open-tiddler-in-window>>でできます。
+
+TiddlyWikiをスタンドアロンの単一ファイルWikiとして使用する場合は、次の手順に従ってください。
+
+# 現在のWikiファイルのバックアップを作成します([[念のため|The First Rule of Using TiddlyWiki]])
+
+# <<controlPanel-plugin-link>>を開き、''プラグイン''タブに移動します
+
+# 削除したいプラグインをクリックして、スタンドアロンTiddlerとして開きます。
+
+# <<.icon $:/core/images/down-arrow>> ''その他の操作''ボタン、そして<<.icon $:/core/images/delete-button>> ''削除''をクリックします
+
+# <<.icon $:/core/images/save-button-dynamic>>をクリックしてTiddlyWikiを保存します
+
+# ウィンドウの上部に黄色い警告バーが表示された場合は、TiddlyWikiがプラグイン<<.icon $:/core/images/refresh-button>>の削除を完了するためにウィンドウを更新します。
+
+#* <<.from-version "5.1.22">> 動的読み込みをサポートするプラグインを削除するときにTiddlyWikiを更新する必要がなくなりました。詳細については、[[プラグインのメカニズム|PluginMechanism]]を参照してください。
+
+# これでプラグインがアクティブではなくなるか、使用できるようになりました
+
+<$macrocall $name=".note" _="""Node.jsでTiddlyWikiを使用する場合の詳細は、[[Node.jsでプラグインをアンインストールする|Uninstalling a plugin with Node.js]]を確認してください。<br>概要は[[プラグイン|Plugins]]でご覧いただけます。"""/> 

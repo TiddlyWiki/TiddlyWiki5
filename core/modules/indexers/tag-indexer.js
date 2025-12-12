@@ -6,10 +6,7 @@ module-type: indexer
 Indexes the tiddlers with each tag
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global modules: false */
 "use strict";
 
 function TagIndexer(wiki) {
@@ -94,5 +91,3 @@ TagSubIndexer.prototype.lookup = function(tag) {
 
 
 exports.TagIndexer = TagIndexer;
-
-})();

@@ -27,7 +27,7 @@ As described in [[HTML in WikiText]], you can also transclude tiddler field valu
 <$text text={{MyTiddler}}/>
 ```
 
-As described in [[Introduction to filter notation]], you can also transclude tiddler field values as filter operands. For example:
+As described in [[Introduction to filter notation]], you can also transclude tiddler field values using the [[filter syntax|Filter Syntax]]. For example:
 
 ```
 {{{ [tag{TiddlerContainingMyTag}] }}}
@@ -47,7 +47,7 @@ As described in [[HTML in WikiText]], you can also transclude a variable as the 
 <$text text=<<myMacro>>/>
 ```
 
-As described in [[Introduction to filter notation]], you can also transclude a variable as the value of a filter operand. For example:
+As described in [[Introduction to filter notation]], you can also transclude a variable as the value of a filter parameter using the [[filter syntax|Filter Syntax]]. For example:
 
 ```
 {{{ [tag<myMacro>] }}}

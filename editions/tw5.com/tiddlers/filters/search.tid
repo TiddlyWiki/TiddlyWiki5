@@ -1,6 +1,6 @@
 caption: search
 created: 20140410103123179
-modified: 20211129120739275
+modified: 20230711084359603
 op-input: a [[selection of titles|Title Selection]]
 op-neg-output: those input tiddlers in which <<.em not>> all of the search terms can be found
 op-output: those input tiddlers in which <<.em all>> of the search terms can be found in the value of field <<.place F>>
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 The <<.op search>> operator uses an extended syntax that permits multiple fields and flags to be passed:
 
 ```
-[search:<field list>:<flag list>[<operand>]]
+[search:<field list>:<flag list>[<parameter>]]
 ```
 
 * ''field list'': a comma delimited list of field names to restrict the search
@@ -24,7 +24,7 @@ The <<.op search>> operator uses an extended syntax that permits multiple fields
 ** an asterisk `*` instead of the field list causes the search to be performed across all fields available on each tiddler
 ** preceding the list with a minus sign `-` reverses the order so that the search is performed on all fields except the listed fields
 * ''flag list'': a comma delimited list of flags (defaults to `words` if blank)
-* ''operand'': filter operand
+* ''parameter'': filter parameter
 
 This example searches the fields <<.field title>> and <<.field caption>> for a case-sensitive match for the literal string <<.op-word "The first">>:
 

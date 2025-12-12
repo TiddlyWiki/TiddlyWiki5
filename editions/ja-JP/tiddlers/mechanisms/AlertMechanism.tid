@@ -1,0 +1,22 @@
+created: 20140213224306412
+modified: 20241206114008718
+original-modified: 20160606125956564
+tags: Mechanisms Features
+title: AlertMechanism
+ja-title: アラートメカニズム
+type: text/vnd.tiddlywiki
+
+アラートは、TiddlyWikiのメインウィンドウに重なる黄色のボックスとして表示されます
+それぞれのアラートは、$:/tags/Alertタグを持つTiddlerに対応します。アラートの削除アイコン<<.icon $:/core/images/delete-button>> をクリックすると、対応するTiddlerが削除されます
+
+こちらがデモです
+<$fieldmangler tiddler="アラートのサンプル"><$set name="currentTiddler" value="アラートのサンプル"><$button message="tm-add-tag" param="$:/tags/Alert">アラート</$button></$set></$fieldmangler>。
+
+アラートTiddlerには次のフィールドが必要です:
+
+|!フィールド |!説明 |
+|title |デフォルトでは、アラートのタイトルには接頭辞`$:/temp/alerts/`が付きます |
+|text |アラートメッセージのテキスト |
+|modified |アラートの日付(画面上でアラートを並べ替えるのに使用されます) |
+|component |アラートに関連付けられたコンポーネント |
+|tags |[[$:/tags/Alert]] を含める必要があります |

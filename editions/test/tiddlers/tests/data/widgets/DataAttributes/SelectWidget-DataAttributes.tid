@@ -6,7 +6,7 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-<$select tiddler='New Tiddler' field='text' default='Choose a new text' data-title={{Temp}} style.color={{{ [[Temp]get[color]] }}} onclick="clicked">
+<$select tiddler='New Tiddler' class="myclass" field='text' default='Choose a new text' data-title={{Temp}} style.color={{{ [[Temp]get[color]] }}} onclick="clicked">
 <option disabled>Choose a new text</option>
 <option>A Tale of Two Cities</option>
 <option>A New Kind of Science</option>
@@ -24,4 +24,4 @@ Title1
 +
 title: ExpectedResult
 
-<p><select data-title="Title2" value="Choose a new text" style="color:red;"><option disabled="true">Choose a new text</option><option>A Tale of Two Cities</option><option>A New Kind of Science</option><option>The Dice Man</option></select></p>
+<p><select class="myclass" data-title="Title2" value="Choose a new text" style="color:red;"><option disabled="true">Choose a new text</option><option>A Tale of Two Cities</option><option>A New Kind of Science</option><option>The Dice Man</option></select></p>

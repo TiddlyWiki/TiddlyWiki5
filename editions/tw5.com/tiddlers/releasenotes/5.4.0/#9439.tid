@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9439
+description: Fix markup not included in external core edition
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9218 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9439
+github-contributors: Leilei332
+
+Fix the problem that tiddlywiki's raw markup shadow tiddlers in `$:/core` is not included in HTML.

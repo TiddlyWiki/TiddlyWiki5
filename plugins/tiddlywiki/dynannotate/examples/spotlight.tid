@@ -1,0 +1,71 @@
+title: $:/plugins/tiddlywiki/dynannotate/examples/spotlight
+tags: $:/tags/dynannotateExamples
+caption: Spotlight
+
+\define show-example(example)
+<$codeblock code=<<__example__>>/>
+
+//''Displays as:''//
+
+$example$
+\end
+
+<div class="tc-dynannotation-example-info">
+
+!! Spotlighting an Image
+
+</div>
+
+<<show-example """
+<$button>
+<$action-sendmessage $message="tm-spotlight-element" selector=".tc-dynannotate-spotlight-image-example"/>
+Spotlight this image
+</$button>
+<div class="tc-dynannotate-spotlight-image-example" style="display:inline-block;">
+{{$:/core/images/globe}}
+</div>
+""">>
+
+<div class="tc-dynannotation-example-info">
+
+!! Spotlighting a Button
+
+</div>
+
+<<show-example """
+<$button class="tc-dynannotate-spotlight-button-example">
+<$action-sendmessage $message="tm-spotlight-element" selector=".tc-dynannotate-spotlight-button-example"/>
+Spotlight this button
+</$button>
+""">>
+
+<div class="tc-dynannotation-example-info">
+
+!! Spotlighting a Text Area
+
+</div>
+
+<<show-example """
+<$button>
+<$action-sendmessage $message="tm-spotlight-element" selector=".tc-dynannotate-spotlight-textarea-example"/>
+Spotlight this text area
+</$button>
+
+<$edit-text class="tc-dynannotate-spotlight-textarea-example" tag="textarea" tiddler="$:/temp/dynannotate/spotlight/demo/text"/>
+
+""">>
+
+<div class="tc-dynannotation-example-info">
+
+!! Spotlighting the Sidebar Search Input
+
+This button will spotlight the sidebar search, but if the sidebar is hidden then it will spotlight the button for showing the sidebar.
+
+</div>
+
+<<show-example """
+<$button>
+<$action-sendmessage $message="tm-spotlight-element" selector=".tc-sidebar-search .tc-popup-handle" selector-fallback=".tc-menubar .tc-show-sidebar-btn"/>
+Spotlight the sidebar search input
+</$button>
+""">>

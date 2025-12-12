@@ -43,7 +43,7 @@ Properties within a JSON object are identified by a sequence of indexes. In the 
 
 The following examples assume that this JSON data is contained in a variable called `jsondata`.
 
-The <<.op jsonget>> operator uses multiple operands to specify the indexes of the property to retrieve:
+The <<.op jsonget>> operator uses multiple parameters to specify the indexes of the property to retrieve:
 
 ```
 [<jsondata>jsonget[a]] --> "one"
@@ -94,7 +94,7 @@ If the object or array contains nested child objects or arrays then the values a
 [<jsondata>jsonget[d]] --> "four","five","six","true","false","null","max","may","maize"
 ```
 
-A subtlety is that the special case of a single blank operand is used to identify the root object. Thus:
+A subtlety is that the special case of a single blank parameter is used to identify the root object. Thus:
 
 ```
 [<jsondata>jsonindexes[]] --> "a", "b", "c", "d"

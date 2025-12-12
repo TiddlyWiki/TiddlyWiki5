@@ -1,0 +1,69 @@
+caption: 画像
+created: 20131205160221762
+modified: 20241110103117361
+original-modified: 20220129152627668
+tags: WikiText [[Working with TiddlyWiki]]
+title: Images in WikiText
+ja-title: WikiTextでの画像
+type: text/vnd.tiddlywiki
+
+! 画像のフォーマット
+
+次の構文を使用して、WikiTextに画像を含めることができます:
+
+```
+[img[Motovun Jack.jpg]]
+[img[https://tiddlywiki.com/favicon.ico]]
+```
+
+エディターのツールバーから画像Tiddlerを挿入することもできます。''画像''(<<.icon $:/core/images/picture>>)をクリックし、画像ファイルを選択します。
+
+画像のソースが画像Tiddlerのタイトルである場合、そのTiddlerが直接表示されます。それ以外の場合はURLとして解釈され、URLを含む`src`属性を持つHTMLの`<img>`タグが生成されます。
+
+ツールチップも指定できます:
+
+```
+[img[説明ツールチップ|Motovun Jack.jpg]]
+```
+
+CSSクラスと画像の幅と高さを指定するための属性を指定できます: 
+
+```
+[img width=32 [Motovun Jack.jpg]]
+[img width=32 class="tc-image" [Motovun Jack.jpg]]
+```
+
+属性は、トランスクルージョンや変数参照として指定できることに注意してください: 
+
+```
+[img width={{!!mywidth}} class=<<image-classes>> [Motovun Jack.jpg]]
+```
+
+画像の構文は、ImageWidgetを呼び出すための省略形です。
+
+! トランスクルージョンによる画像の表示
+
+Tiddlerをトランスクルードすることで、Tiddlerに保存されている画像を表示することもできます。この方法の欠点は、画像のサイズを直接制御する方法がないことです。
+
+```
+{{Motovun Jack.jpg}}
+```
+
+次のようにレンダリングされます:
+
+{{Motovun Jack.jpg}}
+
+! リンクとしての画像
+```
+<$link to="HelloThere" tooltip="Custom tooltip">{{$:/core/icon}}</$link>
+```
+
+次のようにレンダリングされます:
+
+<$link to="HelloThere" tooltip="Custom tooltip">{{$:/core/icon}}</$link>
+
+! 画像のインポート
+
+<<.button import>>ボタン(サイドバーの<<.sidebar-tab Tools>>タブにある)を使用するか、ドラッグアンドドロップします。詳細については、[[Tiddlerのインポート|Importing Tiddlers]]を参照してください。
+
+<<.from-version "5.2.0">> Tiddlerエディタに画像をドロップするかペーストすることでも、画像をインポートできます。

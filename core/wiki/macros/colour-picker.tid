@@ -10,9 +10,7 @@ tags: $:/tags/Macro
 
 \define colour-picker-inner(actions)
 <$button tag="a" tooltip="""$(colour-picker-value)$""">
-
 $(colour-picker-update-recent)$
-
 <$transclude $variable="__actions__"/>
 
 <span style="display:inline-block; background-color: $(colour-picker-value)$; width: 100%; height: 100%; border-radius: 50%;"/>

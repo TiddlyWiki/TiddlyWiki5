@@ -1,0 +1,7 @@
+tags: [[backtranscludes Operator]] [[Operator Examples]]
+title: backtranscludes Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[Motovun Jack.jpg]backtranscludes[]]">>
+
+<<.operator-example 2 "[[Transclusion]backtranscludes[]]">>

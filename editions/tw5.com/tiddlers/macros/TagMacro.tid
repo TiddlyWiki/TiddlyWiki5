@@ -1,6 +1,6 @@
 caption: tag
 created: 20141206130540337
-modified: 20230725201240201
+modified: 20240228131301798
 tags: Macros [[Core Macros]]
 title: tag Macro
 type: text/vnd.tiddlywiki
@@ -11,7 +11,35 @@ The <<.def tag>> [[macro|Macros]] generates a tag pill for a specified tag. Clic
 
 !! Parameters
 
-;tag
+; tag
 : The title of the tag, defaulting to the [[current tiddler|Current Tiddler]]
+
+!! CSS classes
+
+<<.from-version "v5.3.4">>
+
+; `tc-tag-missing`
+: This class is defined if a tag does ''not exist'' as a tiddler.
+
+; `tc-tag-exists`
+: This class is defined if a tag does exist as a tiddler
+
+!!! Defining the class
+
+To define the `tc-tag-missing` class a stylesheet tiddler needs to be created. The default font-style for missing tiddler links is //italic//, so it's used for the example code below. Eg:
+
+''title:'' `myTagsStylesheet`<br>
+''tag:'' `$:/tags/Stylesheet`
+
+<<copy-to-clipboard-above-right src:"""
+.tc-tag-missing {
+	font-style: italic;
+}
+""">>
+```
+.tc-tag-missing {
+	font-style: italic;
+}
+```
 
 <<.macro-examples "tag">>

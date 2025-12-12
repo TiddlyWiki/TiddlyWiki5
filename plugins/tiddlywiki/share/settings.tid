@@ -1,4 +1,6 @@
 title: $:/plugins/tiddlywiki/share/settings
+caption: Share
+tags: $:/tags/ControlPanel/SettingsTab
 
 !! Base sharing URL
 

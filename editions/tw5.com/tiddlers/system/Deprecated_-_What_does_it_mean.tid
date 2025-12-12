@@ -7,6 +7,3 @@ type: text/vnd.tiddlywiki
 
 Deprecated features are marked with a special warning button. See: [[How to apply custom styles by tag]] for an example.
 
-''Tiddlers tagged `$:/deprecated`''
-
-><<list-links "[tag[$:/deprecated]]">>

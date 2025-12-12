@@ -2,7 +2,16 @@ title: $:/core/ui/ControlPanel/Settings/CamelCase
 tags: $:/tags/ControlPanel/Settings
 caption: {{$:/language/ControlPanel/Settings/CamelCase/Caption}}
 
+\whitespace trim
 \define lingo-base() $:/language/ControlPanel/Settings/CamelCase/
+
 <<lingo Hint>>
 
-<$checkbox tiddler="$:/config/WikiParserRules/Inline/wikilink" field="text" checked="enable" unchecked="disable" default="enable"> <$link to="$:/config/WikiParserRules/Inline/wikilink"><<lingo Description>></$link> </$checkbox>
+<$checkbox tiddler="$:/config/WikiParserRules/Inline/wikilink"
+	field="text" checked="enable" unchecked="disable" default="enable"
+	class="tc-control-panel-item"
+>
+	<$link to="$:/config/WikiParserRules/Inline/wikilink" class="tc-tiny-gap-left">
+		<<lingo Description>>
+	</$link>
+</$checkbox>

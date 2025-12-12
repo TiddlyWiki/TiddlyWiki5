@@ -1,10 +1,10 @@
 created: 20190802113703788
-modified: 20230501175143648
+modified: 20230711082337975
 tags: Filters
 title: Conditional Operators
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.1.20">>The conditional filter operators allow for ''if-then-else'' logic to be expressed within filters.
+<<.from-version "5.1.20">> The conditional filter operators allow ''if-then-else'' logic to be expressed within filters.
 
 The foundation is the convention that an empty list can be used to represent the Boolean value <<.value false>> and a list with at one (or more) entries to represent <<.value true>>.
 
@@ -25,6 +25,8 @@ The <<.olink else>> operator can be used to apply a defaults for missing values.
 
 <<.operator-example 2 "[[HelloThere]get[custom-field]else[default-value]]">>
 
-! Filter Run Prefixes
+''Filter Run Prefixes''
 
-The [[:then|:then Filter Run Prefix]] and [[:else|:else Filter Run Prefix]] filter run prefixes serve a similar purpose as the conditional operators.  Refer to their documentation for more information.
+The [[:then|Then Filter Run Prefix]] and [[:else|Else Filter Run Prefix]] named filter run prefixes serve a similar purpose as the conditional operators. 
+
+Also see: [[Named Filter Run Prefix]]

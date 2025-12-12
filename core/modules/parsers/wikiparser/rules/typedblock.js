@@ -22,10 +22,7 @@ $$$
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -46,6 +43,7 @@ exports.parse = function() {
 		renderType = this.match[2];
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
+	var start = this.parser.pos;
 	// Look for the end of the block
 	reEnd.lastIndex = this.parser.pos;
 	var match = reEnd.exec(this.parser.source),
@@ -62,22 +60,37 @@ exports.parse = function() {
 	var parser = this.parser.wiki.parseText(parseType,text,{defaultType: "text/plain"});
 	// If there's no render type, just return the parse tree
 	if(!renderType) {
-		return parser.tree;
+		return  [{
+			type: "void",
+			children: $tw.utils.isArray(parser.tree) ? parser.tree : [parser.tree],
+			parseType: parseType,
+			renderType: renderType,
+			text: text,
+			start: start,
+			end: this.parser.pos
+		}];
 	} else {
 		// Otherwise, render to the rendertype and return in a <PRE> tag
 		var widgetNode = this.parser.wiki.makeWidget(parser),
 			container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
-		text = renderType === "text/html" ? container.innerHTML : container.textContent;
+		var renderResult = renderType === "text/html" ? container.innerHTML : container.textContent;
+		// Use void node to carry important info for typedblock
 		return [{
-			type: "element",
-			tag: "pre",
+			type: "void",
 			children: [{
-				type: "text",
-				text: text
-			}]
+				type: "element",
+				tag: "pre",
+				children: [{
+					type: "text",
+					text: renderResult,
+				}]
+			}],
+			parseType: parseType,
+			renderType: renderType,
+			text: text,
+			start: start,
+			end: this.parser.pos
 		}];
 	}
 };
-
-})();
