@@ -97,7 +97,7 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 				parentHeight = window.innerHeight;
 		} else {
 			var parentWidth = domNode.offsetParent.offsetWidth,
-				parentHeight = domNode.offsetParent.offsetHeight
+				parentHeight = domNode.offsetParent.offsetHeight;
 		}
 		var right = left + domNode.offsetWidth,
 			bottom = top + domNode.offsetHeight;
@@ -113,9 +113,9 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 		left = Math.max(0,left);
 		top = Math.max(0,top);
 	}
-	if (this.popup.absolute) {
+	if(this.popup.absolute) {
 		// Traverse the offsetParent chain and correct the offset to make it relative to the parent node.
-		for (var offsetParentDomNode = domNode.offsetParent; offsetParentDomNode; offsetParentDomNode = offsetParentDomNode.offsetParent) {
+		for(var offsetParentDomNode = domNode.offsetParent; offsetParentDomNode; offsetParentDomNode = offsetParentDomNode.offsetParent) {
 			left -= offsetParentDomNode.offsetLeft;
 			top -= offsetParentDomNode.offsetTop;
 		}
@@ -162,7 +162,7 @@ Read the state tiddler
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
 	var state,
-	    defaultState = this["default"];
+		defaultState = this["default"];
 	if(this.stateTitle) {
 		var stateTitleTiddler = this.wiki.getTiddler(this.stateTitle);
 		if(this.stateField) {
@@ -280,11 +280,11 @@ RevealWidget.prototype.updateState = function() {
 	}
 	if(this.isOpen) {
 		domNode.removeAttribute("hidden");
-        $tw.anim.perform(this.openAnimation,domNode);
+		$tw.anim.perform(this.openAnimation,domNode);
 	} else {
 		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
 			//make sure that the state hasn't changed during the close animation
-			self.readState()
+			self.readState();
 			if(!self.isOpen) {
 				domNode.setAttribute("hidden","true");
 			}
