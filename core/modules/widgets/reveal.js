@@ -97,7 +97,7 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 	if(this.clampToParent !== "none") {
 		if(this.popup.absolute) {
 			var parentWidth = window.innerWidth,
-				parentheight = window.innerHeight;
+				parentHeight = window.innerHeight;
 		} else {
 			var parentWidth = domNode.offsetParent.offsetWidth,
 				parentHeight = domNode.offsetParent.offsetHeight
