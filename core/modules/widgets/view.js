@@ -115,11 +115,7 @@ Text View Handler
 ==========================================
 Default handler for plain text display
 */
-class TextViewHandler extends ViewHandler {
-	constructor(widget) {
-		super(widget);
-	}
-}
+class TextViewHandler extends ViewHandler {}
 
 /*
 ==========================================
@@ -128,10 +124,6 @@ HTML Wikified View Handler
 Handler for wikified HTML content
 */
 class HTMLWikifiedViewHandler extends WikifiedViewHandler {
-	constructor(widget) {
-		super(widget);
-	}
-
 	getValue() {
 		return this.fakeNode.innerHTML;
 	}
@@ -144,10 +136,6 @@ Plain Wikified View Handler
 Handler for wikified plain text content
 */
 class PlainWikifiedViewHandler extends WikifiedViewHandler {
-	constructor(widget) {
-		super(widget);
-	}
-
 	getValue() {
 		return this.fakeNode.textContent;
 	}
@@ -160,10 +148,6 @@ HTML Encoded Plain Wikified View Handler
 Handler for HTML-encoded wikified plain text
 */
 class HTMLEncodedPlainWikifiedViewHandler extends WikifiedViewHandler {
-	constructor(widget) {
-		super(widget);
-	}
-
 	getValue() {
 		return $tw.utils.htmlEncode(this.fakeNode.textContent);
 	}
@@ -176,10 +160,6 @@ HTML Encoded View Handler
 Handler for HTML-encoded text
 */
 class HTMLEncodedViewHandler extends ViewHandler {
-	constructor(widget) {
-		super(widget);
-	}
-
 	getValue() {
 		return $tw.utils.htmlEncode(this.widget.getValueAsText());
 	}
@@ -192,10 +172,6 @@ HTML Text Encoded View Handler
 Handler for HTML text-encoded content
 */
 class HTMLTextEncodedViewHandler extends ViewHandler {
-	constructor(widget) {
-		super(widget);
-	}
-
 	getValue() {
 		return $tw.utils.htmlTextEncode(this.widget.getValueAsText());
 	}
@@ -208,10 +184,6 @@ URL Encoded View Handler
 Handler for URL-encoded text
 */
 class URLEncodedViewHandler extends ViewHandler {
-	constructor(widget) {
-		super(widget);
-	}
-
 	getValue() {
 		return $tw.utils.encodeURIComponentExtended(this.widget.getValueAsText());
 	}
@@ -224,10 +196,6 @@ Double URL Encoded View Handler
 Handler for double URL-encoded text
 */
 class DoubleURLEncodedViewHandler extends ViewHandler {
-	constructor(widget) {
-		super(widget);
-	}
-
 	getValue() {
 		const text = this.widget.getValueAsText();
 		return $tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(text));
@@ -241,10 +209,6 @@ Date View Handler
 Handler for date formatting
 */
 class DateViewHandler extends ViewHandler {
-	constructor(widget) {
-		super(widget);
-	}
-
 	getValue() {
 		const format = this.viewTemplate || "YYYY MM DD 0hh:0mm";
 		const rawValue = this.widget.getValueAsText();
@@ -264,10 +228,6 @@ Relative Date View Handler
 Handler for relative date display
 */
 class RelativeDateViewHandler extends ViewHandler {
-	constructor(widget) {
-		super(widget);
-	}
-
 	getValue() {
 		const rawValue = this.widget.getValueAsText();
 		const value = $tw.utils.parseDate(rawValue);
@@ -286,10 +246,6 @@ Strip Comments View Handler
 Handler for stripping comments from text
 */
 class StripCommentsViewHandler extends ViewHandler {
-	constructor(widget) {
-		super(widget);
-	}
-
 	getValue() {
 		const lines = this.widget.getValueAsText().split("\n");
 		const out = [];
@@ -309,10 +265,6 @@ JS Encoded View Handler
 Handler for JavaScript string encoding
 */
 class JSEncodedViewHandler extends ViewHandler {
-	constructor(widget) {
-		super(widget);
-	}
-
 	getValue() {
 		return $tw.utils.stringify(this.widget.getValueAsText());
 	}
