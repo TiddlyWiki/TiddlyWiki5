@@ -6,10 +6,7 @@ module-type: utils
 A barebones CSV parser
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var QUOTE = '"';
@@ -120,5 +117,3 @@ exports.parseCsvStringWithHeader = function(text,options) {
 	}
 	return csv;
 }
-
-})();

@@ -6,10 +6,7 @@ module-type: widget
 Keyboard shortcut widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -113,7 +110,7 @@ KeyboardWidget.prototype.execute = function() {
 KeyboardWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-keyboard");
-	this.domNode.className = classes.join(" ");
+	this.domNode.className = classes.join(" ").trim();
 };
 
 /*
@@ -135,5 +132,3 @@ KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.keyboard = KeyboardWidget;
-
-})();

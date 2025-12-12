@@ -6,10 +6,7 @@ module-type: utils
 Modal message mechanism
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -146,6 +143,7 @@ Modal.prototype.display = function(title,options) {
 		link.setAttribute("href",tiddler.fields.help);
 		link.setAttribute("target","_blank");
 		link.setAttribute("rel","noopener noreferrer");
+		link.setAttribute("class","tc-tiddlylink-external");
 		link.appendChild(this.srcDocument.createTextNode("Help"));
 		modalFooterHelp.appendChild(link);
 		modalFooterHelp.style.float = "left";
@@ -212,7 +210,7 @@ Modal.prototype.display = function(title,options) {
 	bodyWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	footerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	// Whether to close the modal dialog when the mask (area outside the modal) is clicked
-	if(tiddler.fields && (tiddler.fields["mask-closable"] === "yes" || tiddler.fields["mask-closable"] === "true")) {
+	if(tiddler.fields && (tiddler.fields["mask-closable"] === "yes" || tiddler.fields["mask-closable"] === "true" || tiddler.fields["mask-closable"] === "" || "mask-closable" in tiddler.fields === false)) {
 		modalBackdrop.addEventListener("click",closeHandler,false);
 	}
 	// Set the initial styles for the message
@@ -253,5 +251,3 @@ Modal.prototype.adjustPageClass = function() {
 };
 
 exports.Modal = Modal;
-
-})();

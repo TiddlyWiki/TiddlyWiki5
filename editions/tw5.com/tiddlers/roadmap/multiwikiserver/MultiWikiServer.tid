@@ -14,13 +14,8 @@ Planned features include:
 * Instantaneous synchronisation of changes between the server and all connected clients
 * Workflow processing on the server, for example to automatically compress images, or to archive webpages
 
-MWS does require basic knowledge of the command line and Node.js but is designed to be as simple as possible to setup and use. Once downloaded, just two commands are needed to complete the installation and start the server:
+MWS does require basic knowledge of the command line and Node.js but is designed to be as simple as possible to setup and use. A few simple commands are all that is needed to complete the installation and start the server.
 
-```
-npm install
-npm start
-```
+MWS is currently under development at ~GitHub but it is already functional and usable:
 
-MWS is currently [[under development at GitHub|https://github.com/TiddlyWiki/TiddlyWiki5/pull/7915]] but it is already functional and usable. Visit the MWS website for more information:
-
-! https://mws.tiddlywiki.com/
+https://github.com/TiddlyWiki/MultiWikiServer/

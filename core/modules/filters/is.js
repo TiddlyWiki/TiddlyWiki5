@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for checking tiddler properties
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var isFilterOperators;
@@ -44,5 +41,3 @@ exports.is = function(source,operator,options) {
 		return results;
 	}
 };
-
-})();

@@ -16,10 +16,7 @@ Adds the following properties to the wiki object:
 * `globalCache` is a hashmap by cache name of cache objects that are cleared whenever any tiddler change occurs
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -141,12 +138,15 @@ This method should be called after the changes it describes have been made to th
 	title: Title of tiddler
 	isDeleted: defaults to false (meaning the tiddler has been created or modified),
 		true if the tiddler has been deleted
+	isShadow: defaults to false (meaning the change applies to the normal tiddler),
+		true if the tiddler being changed is a shadow tiddler
 */
-exports.enqueueTiddlerEvent = function(title,isDeleted) {
+exports.enqueueTiddlerEvent = function(title,isDeleted,isShadow) {
 	// Record the touch in the list of changed tiddlers
 	this.changedTiddlers = this.changedTiddlers || Object.create(null);
 	this.changedTiddlers[title] = this.changedTiddlers[title] || Object.create(null);
 	this.changedTiddlers[title][isDeleted ? "deleted" : "modified"] = true;
+	this.changedTiddlers[title][isShadow ? "shadow" : "normal"] = true;
 	// Increment the change count
 	this.changeCount = this.changeCount || Object.create(null);
 	if($tw.utils.hop(this.changeCount,title)) {
@@ -1059,17 +1059,7 @@ Options include:
 exports.parseText = function(type,text,options) {
 	text = text || "";
 	options = options || {};
-	// Select a parser
-	var Parser = $tw.Wiki.parsers[type];
-	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
-		Parser = $tw.Wiki.parsers[$tw.utils.getFileExtensionInfo(type).type];
-	}
-	if(!Parser) {
-		Parser = $tw.Wiki.parsers[options.defaultType || "text/vnd.tiddlywiki"];
-	}
-	if(!Parser) {
-		return null;
-	}
+	var Parser = $tw.utils.getParser(type,options)
 	// Return the parser instance
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
@@ -1083,7 +1073,7 @@ exports.parseText = function(type,text,options) {
 Parse a tiddler according to its MIME type
 */
 exports.parseTiddler = function(title,options) {
-	options = $tw.utils.extend({},options);
+	options = options || {};
 	var cacheType = options.parseAsInline ? "inlineParseTree" : "blockParseTree",
 		tiddler = this.getTiddler(title),
 		self = this;
@@ -1132,6 +1122,7 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 			if(tiddler.fields.type) {
 				parserInfo.parserType = tiddler.fields.type;
 			}
+			parserInfo._canonical_uri = tiddler.fields._canonical_uri;
 		}
 	} else if(field) {
 		if(field === "title") {
@@ -1172,7 +1163,7 @@ exports.getSubstitutedText = function(text,widget,options) {
 		output = $tw.utils.replaceString(output,new RegExp("\\$" + $tw.utils.escapeRegExp(substitute.name) + "\\$","mg"),substitute.value);
 	});
 	// Substitute any variable references with their values
-	return output.replace(/\$\(([^\)\$]+)\)\$/g, function(match,varname) {
+	return output.replace(/\$\((.+?)\)\$/g, function(match,varname) {
 		return widget.getVariable(varname,{defaultValue: ""})
 	});
 };
@@ -1442,7 +1433,7 @@ exports.search = function(text,options) {
 			// Don't search the text field if the content type is binary
 			var fieldName = searchFields[fieldIndex];
 			if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
-				break;
+				continue;
 			}
 			var str = tiddler.fields[fieldName],
 				t;
@@ -1790,5 +1781,3 @@ exports.slugify = function(title,options) {
 	}
 	return slug;
 };
-
-})();

@@ -1,0 +1,12 @@
+title: $:/changenotes/5.4.0/#9457
+description: Update eslint configuration
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9457
+github-contributors: Leilei332
+
+* Enforce tab indentation, semicolon
+* Switch off `max-classes-per-file`
+* Show warning for unused variables

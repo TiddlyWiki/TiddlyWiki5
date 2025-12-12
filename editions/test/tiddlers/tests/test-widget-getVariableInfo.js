@@ -6,10 +6,6 @@ tags: [[$:/tags/test-spec]]
 Tests the wikitext rendering pipeline end-to-end. We also need tests that individually test parsers, rendertreenodes etc., but this gets us started.
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Widget module", function() {
@@ -64,10 +60,10 @@ describe("Widget module", function() {
 			childNode = childNode.children[0];
 		}
 
-		expect(childNode.getVariableInfo("macro",{allowSelfAssigned:true}).params).toEqual([{name:"a",value:"aa"}]);
+		expect(childNode.getVariableInfo("macro",{allowSelfAssigned:true}).params).toEqual([{name:"a",value:"aa",multiValue:["aa"]}]);
 
 		// function params
-		expect(childNode.getVariableInfo("fn",   {allowSelfAssigned:true}).params).toEqual([{name:"f",value:"ff"}]);
+		expect(childNode.getVariableInfo("fn",   {allowSelfAssigned:true}).params).toEqual([{name:"f",value:"ff",multiValue:["ff"]}]);
 		// functions have a text and a value
 		expect(childNode.getVariableInfo("x",   {allowSelfAssigned:true}).text).toBe("fff");
 		expect(childNode.getVariableInfo("x",   {allowSelfAssigned:true}).srcVariable.value).toBe("[<fn>]");
@@ -77,7 +73,7 @@ describe("Widget module", function() {
 		expect(childNode.getVariableInfo("$my.widget", {allowSelfAssigned:true}).params).toEqual([{name:"w",default:"ww"}]);
 
 		// no params expected
-		expect(childNode.getVariableInfo("abc", {allowSelfAssigned:true})).toEqual({text:"def"});
+		expect(childNode.getVariableInfo("abc", {allowSelfAssigned:true})).toEqual({text:"def", resultList: [ "def" ]});
 
 		// debugger; Find code in browser
 
@@ -92,4 +88,3 @@ describe("Widget module", function() {
 
 });
 
-})();

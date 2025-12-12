@@ -6,10 +6,7 @@ module-type: library
 Text editor engine based on a simple input or textarea within an iframe. This is done so that the selection is preserved even when clicking away from the textarea
 
 \*/
-(function(){
 
-/*jslint node: true,browser: true */
-/*global $tw: false */
 "use strict";
 
 var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
@@ -37,7 +34,7 @@ function FramedEngine(options) {
 	var paletteTitle = this.widget.wiki.getTiddlerText("$:/palette");
 	var colorScheme = (this.widget.wiki.getTiddler(paletteTitle) || {fields: {}}).fields["color-scheme"] || "light";
 	this.iframeDoc.open();
-	this.iframeDoc.write("<meta name='color-scheme' content='" + colorScheme + "'>");
+	this.iframeDoc.write("<!DOCTYPE html><html><head><meta name='color-scheme' content='" + colorScheme + "'></head><body></body></html>");
 	this.iframeDoc.close();
 	// Style the iframe
 	this.iframeNode.className = this.dummyTextArea.className;
@@ -273,5 +270,3 @@ FramedEngine.prototype.executeTextOperation = function(operation) {
 };
 
 exports.FramedEngine = FramedEngine;
-
-})();

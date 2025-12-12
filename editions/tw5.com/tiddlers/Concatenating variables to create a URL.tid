@@ -1,0 +1,13 @@
+created: 20251021142733998
+modified: 20251021142733998
+tags: 
+title: Concatenating variables to create a URL
+type: text/vnd.tiddlywiki
+
+!! Concatenating strings and variables to create a URL
+
+<$macrocall $name=wikitext-example src="""<$let hash={{{ [<currentTiddler>encodeuricomponent[]] }}}>
+<a href=`http://tiddlywiki.com/#$(hash)$`>this tiddler on tiddlywiki.com</a>
+</$let>"""/>
+
+See: [[Substituted Attribute Values]]

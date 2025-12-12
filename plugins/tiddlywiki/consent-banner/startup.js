@@ -6,10 +6,7 @@ module-type: startup
 Startup initialisation
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -103,5 +100,3 @@ exports.startup = function() {
 		});
 	}
 };
-
-})();
