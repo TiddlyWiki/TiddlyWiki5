@@ -11,9 +11,7 @@ const{ TextEncoder, TextDecoder } = require("node:util");
 
 exports.btoa = binstr => Buffer.from(binstr, "binary").toString("base64");
 
-exports.atob = function(b64) {
-	return Buffer.from(b64, "base64").toString("binary");
-};
+exports.atob = b64 => Buffer.from(b64, "base64").toString("binary");
 
 function base64ToBytes(base64) {
 	const binString = exports.atob(base64);
