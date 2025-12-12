@@ -51,7 +51,8 @@ class ViewHandler {
 		}
 	}
 
-	static refresh() {
+	refresh() {
+		var self = this;
 		return false;
 	}
 }
