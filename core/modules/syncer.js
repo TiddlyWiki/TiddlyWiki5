@@ -255,6 +255,18 @@ Syncer.prototype.storeTiddler = function(tiddlerFields) {
 	// Save the tiddler
 	var tiddler = new $tw.Tiddler(tiddlerFields);
 	this.wiki.addTiddler(tiddler);
+	// If we've just loaded a full (fat) tiddler, hydrate any draft that was created from a skinny version
+	if(tiddlerFields && tiddlerFields.title && tiddlerFields.text !== undefined) {
+		var draftTitle = this.wiki.findDraft(tiddlerFields.title);
+		if(draftTitle) {
+			var draftTiddler = this.wiki.getTiddler(draftTitle);
+			if(draftTiddler && draftTiddler.hasField("_is_skinny")) {
+				// Copy the loaded text into the draft and remove the skinny marker so the editor can be shown
+				this.wiki.setText(draftTitle,"text",undefined,tiddlerFields.text);
+				this.wiki.setText(draftTitle,"_is_skinny",undefined,undefined);
+			}
+		}
+	}
 	// Save the tiddler revision and changeCount details
 	this.tiddlerInfo[tiddlerFields.title] = {
 		revision: this.getTiddlerRevision(tiddlerFields.title),
