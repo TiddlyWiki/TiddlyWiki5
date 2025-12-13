@@ -1,0 +1,28 @@
+caption: in-tagtree-of
+created: 20251210000000000
+modified: 20251210135101730
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: those input titles that are <<.em not>> in the tag tree rooted at <<.place T>>
+op-output: those input titles that are in the tag tree rooted at <<.place T>>
+op-parameter: the title of a tag that serves as the root of the tag tree
+op-parameter-name: T
+op-purpose: test whether tiddlers are in a tag tree with a specified root
+op-suffix: <<.from-version "5.4.0">> optional: `inclusive` to include the root tiddler itself in the results
+op-suffix-name: S
+tags: [[Filter Operators]] [[Tag Operators]] [[Negatable Operators]]
+title: in-tagtree-of Operator
+type: text/vnd.tiddlywiki
+
+The <<.olink in-tagtree-of>> operator tests whether tiddlers are in a tag tree (hierarchy) with a specified root tag. It recursively finds all tiddlers that are tagged with the root tag, and all tiddlers tagged with those tiddlers, and so on.
+
+Each input title is processed in turn. The operator checks if the tiddler is within the tag hierarchy rooted at <<.place T>>. The results are cached globally for performance.
+
+The <<.place S>> suffix controls whether the root tiddler itself is included:
+
+* Without the suffix (or with any value other than `inclusive`), only descendants in the tag tree are returned
+* With `:inclusive`, the root tiddler <<.place T>> is also included if it appears in the input
+
+The <<.olink in-tagtree-of>> operator is optimized for use in [[cascades|Cascades]] and [[FileSystemPaths|Customising Tiddler File Naming]], with special handling for single-tiddler inputs. In these cases you don't need
+a [[Selection Constructors]], instead you only want to test the provided input.
+
+<<.operator-examples "in-tagtree-of">>
