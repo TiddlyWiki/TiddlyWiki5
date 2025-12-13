@@ -4,6 +4,7 @@ about: Suggest an idea for TiddlyWiki 5
 title: "[IDEA]"
 labels: ''
 assignees: ''
+type: feature
 
 ---
 
