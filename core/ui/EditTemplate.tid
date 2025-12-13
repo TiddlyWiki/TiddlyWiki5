@@ -46,25 +46,19 @@ title: $:/core/ui/EditTemplate
 	typeSelectionTiddler=<<qualify "$:/temp/Type/selected-item">>>
 <$keyboard key="((cancel-edit-tiddler))" actions=<<cancel-delete-tiddler-actions "cancel">> tag="div">
 <$keyboard key="((save-tiddler))" actions=<<save-tiddler-actions>> tag="div">
-<$let
-	originalTiddler={{{ [<currentTiddler>get[draft.of]] }}}>
-	draftIsSkinny={{{ [<currentTiddler>has:field[_is_skinny]then[yes]else[no]] }}}>
-	originalExists={{{ [<originalTiddler>is[tiddler]then[yes]else[no]] }}}>
->
-	<%if [<draftIsSkinny>match[yes]] :and[<originalExists>match[yes]] %>
-		<!-- Trigger lazy-loading of the underlying tiddler text (hidden) -->
-		<div hidden>
-			<$tiddler tiddler=<<originalTiddler>>>
-				{{||$:/core/ui/ViewTemplate/body/default}}
-			</$tiddler>
-		</div>
-		<div class="tc-tiddler-lazy-loading" />
-	<%else%>
-		<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
-			<$transclude tiddler=<<listItem>>/>
-		</$list>
-	<%endif%>
-</$let>
+<%if [<currentTiddler>has:field[_is_skinny]] %>
+	<!-- Trigger lazy-loading of the underlying tiddler text (hidden) -->
+	<div hidden>
+		<$tiddler tiddler=<<originalTiddler>>>
+			{{||$:/core/ui/ViewTemplate/body/default}}
+		</$tiddler>
+	</div>
+	<div class="tc-tiddler-lazy-loading" />
+<%else%>
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
+		<$transclude tiddler=<<listItem>>/>
+	</$list>
+<%endif%>
 </$keyboard>
 </$keyboard>
 </$vars>
