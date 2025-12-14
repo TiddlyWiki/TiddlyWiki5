@@ -18,7 +18,12 @@ exports.decodebase64 = function(source,operator,options) {
 	var binary = operator.suffixes && operator.suffixes[0].indexOf("binary") !== -1;
 	var urlsafe = operator.suffixes && operator.suffixes[0].indexOf("urlsafe") !== -1;
 	source(function(tiddler,title) {
-		results.push($tw.utils.base64Decode(title,binary,urlsafe));
+		try {
+			const decoded = $tw.utils.base64Decode(title,binary,urlsafe);
+			results.push(decoded);
+		} catch(e) {
+			results.push(`${$tw.language.getString("Error/Filter")}: ${e}`);
+		}
 	});
 	return results;
 };
