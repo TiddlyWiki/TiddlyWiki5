@@ -31,6 +31,12 @@ exports.strEndsWith = (str,ending,position) => str.endsWith(ending,position);
 
 exports.stringifyNumber = num => num.toString();
 
+exports.tagToCssSelector = function(tagName) {
+	return "tc-tagged-" + encodeURIComponent(tagName).replace(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^`{\|}~,]/mg,function(c) {
+		return "\\" + c;
+	});
+};
+
 exports.domContains = (a,b) => a.compareDocumentPosition(b) & 16;
 
 exports.domMatchesSelector = (node,selector) => node.matches(selector);
