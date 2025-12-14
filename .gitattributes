@@ -1,4 +1,4 @@
-boot/ -linguist-generated
+boot/** -linguist-generated
 **/tiddlywiki.files linguist-language=JSON
 **/tiddlywiki.info linguist-language=JSON
 **/plugin.info linguist-language=JSON
