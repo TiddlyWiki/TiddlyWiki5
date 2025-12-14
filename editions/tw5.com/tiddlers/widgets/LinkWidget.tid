@@ -16,6 +16,7 @@ The content of the link widget is rendered within the `<a>` tag representing the
 
 |!Attribute |!Description |
 |to |The title of the target tiddler for the link (defaults to the [[current tiddler|Current Tiddler]]) |
+|toBlockMark |<<.from-version "5.3.6">> Optional id of the anchor for [[Block Level Links in WikiText]] |
 |aria-label |Optional accessibility label |
 |role |<<.from-version "5.4.0">> Optional [[ARIA role|https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles]] |
 |tooltip |Optional tooltip WikiText |

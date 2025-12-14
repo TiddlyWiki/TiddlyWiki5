@@ -54,7 +54,8 @@ exports.hasClass = function(el,className) {
 };
 
 exports.addClass = function(el,className) {
-	var c = (el.getAttribute("class") || "").split(" ");
+	var classAttr = el.getAttribute("class") || "";
+	var c = classAttr.trim() ? classAttr.split(" ") : [];
 	if(c.indexOf(className) === -1) {
 		c.push(className);
 		el.setAttribute("class",c.join(" "));

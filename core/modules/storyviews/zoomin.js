@@ -16,7 +16,7 @@ var ZoominListView = function(listWidget) {
 	this.listWidget = listWidget;
 	this.textNodeLogger = new $tw.utils.Logger("zoomin story river view", {
 		enable: true,
-		colour: 'red'
+		colour: "red"
 	});
 	// Get the index of the tiddler that is at the top of the history
 	var history = this.listWidget.wiki.getTiddlerDataCached(this.listWidget.historyTitle,[]),
@@ -48,10 +48,19 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	}
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
+	// If block mark is provided, find the block element that this mark is pointing to
+	if(listItemWidget && historyInfo.blockMark) {
+		var blockMarkWidget = $tw.utils.findChildNodeInTree(listItemWidget, function(widget) {
+			return widget.blockMarkId === historyInfo.blockMark;
+		});
+		if(blockMarkWidget) {
+			targetElement = blockMarkWidget.findBlockMarkTargetDomNode()
+		}
+	}
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement) {
 		return;
-	} else if (targetElement.nodeType === Node.TEXT_NODE) {
+	} else if(targetElement.nodeType === Node.TEXT_NODE) {
 		this.logTextNodeRoot(targetElement);
 		return;
 	}
@@ -119,7 +128,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		},duration);
 	}
 	// Scroll the target into view
-//	$tw.pageScroller.scrollIntoView(targetElement);
+	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement, highlight: true});
 };
 
 /*
@@ -139,7 +148,7 @@ ZoominListView.prototype.insert = function(widget) {
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement) {
 		return;
-	} else if (targetElement.nodeType === Node.TEXT_NODE) {
+	} else if(targetElement.nodeType === Node.TEXT_NODE) {
 		this.logTextNodeRoot(targetElement);
 		return;
 	}
@@ -183,7 +192,7 @@ ZoominListView.prototype.remove = function(widget) {
 	var toWidgetDomNode = toWidget && toWidget.findFirstDomNode();
 	// Set up the tiddler we're moving back in
 	if(toWidgetDomNode) {
-		if (toWidgetDomNode.nodeType === Node.TEXT_NODE) {
+		if(toWidgetDomNode.nodeType === Node.TEXT_NODE) {
 			this.logTextNodeRoot(toWidgetDomNode);
 			toWidgetDomNode = null;
 		} else {

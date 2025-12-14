@@ -1,0 +1,34 @@
+caption: block id
+created: 20230916061829840
+modified: 20230922150245402
+tags: Widgets
+title: BlockMarkWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The block id widget makes a block mark that can be focused and jumped to.
+
+! Content and Attributes
+
+The content of the `<$blockmark>` widget is ignored.
+
+|!Attribute |!Description |
+|id |The unique id for the block |
+|previousSibling |`yes` means the block is before this node, in parent node's children list, else it means the block is this node's direct parent node. |
+
+See [[Block Level Links in WikiText^🤗→AddingIDforblock]] for WikiText syntax of block ID.
+
+! Example
+
+<<wikitext-example-without-html """The block id widget is invisible, and is usually located at the end of the line. ID is here:<$blockmark id="BlockLevelLinksID1"/>
+
+[[Link to BlockLevelLinksID1|BlockMarkWidget^BlockLevelLinksID1]]
+""">>
+
+<<wikitext-example """You can refer to the block that is a line before the block id widget. Make sure block id widget itself is in a block (paragraph).
+
+ID is here:<$blockmark id="BlockLevelLinksID2" previousSibling="yes"/>
+
+[[Link to BlockLevelLinksID2|BlockMarkWidget^BlockLevelLinksID2]]
+""">>

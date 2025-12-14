@@ -1,0 +1,8 @@
+title: BlockMark/Links
+tags: $:/tags/wikitext-serialize-test-spec
+
+Link to paragraph: [[Block Level Links in WikiText|BlockMark/Marks^BlockLevelLinksID1]].
+
+Link to title: [[Title Level 2|BlockMark/Marks^🤗→AddingIDforTitle]].
+
+Link to code block: [[Code Block Mark|BlockMark/Marks^IDAfterBlock]].

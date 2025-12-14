@@ -467,6 +467,51 @@ describe("WikiText parser tests", function() {
 		}];
 
 		expect(parse(wikitext)).toEqual(expectedParseTree);
-        });
-});
+	});
 
+
+	it("should parse section marks", function () {
+		expect(parse("There is a block id that is invisible, but you can find it using developer tool's inspect element feature. ^BlockLevelLinksID1")).toEqual(
+
+			[{"type":"element","tag":"p","rule":"parseblock","children":[{"type":"text","text":"There is a block id that is invisible, but you can find it using developer tool's inspect element feature.","start":0,"end":106},{"type":"blockmark","attributes":{"id":{"type":"string","value":"BlockLevelLinksID1","start":126,"end":144},"previousSibling":{"type":"string","value":""}},"children":[],"start":106,"end":126,"rule":"blockmark"}],"start":0,"end":126}]
+
+		);
+	});
+
+
+	it("should parse link to section marks", function () {
+		expect(parse("[[Link to BlockLevelLinksID1|Block Level Links in WikiText^BlockLevelLinksID1]]")).toEqual(
+
+			[{"type":"element","tag":"p","rule":"parseblock","children":[{"type":"link","attributes":{"to":{"type":"string","value":"Block Level Links in WikiText","start":29,"end":58},"toBlockMark":{"type":"string","value":"BlockLevelLinksID1","start":59,"end":77}},"children":[{"type":"text","text":"Link to BlockLevelLinksID1","start":2,"end":28}],"start":0,"end":79,"rule":"prettylink"}],"start":0,"end":79}]
+
+		);
+	});
+
+	it("should parse block marks at start of line (previousSibling mode)", function () {
+		var result = parse("```\ncode block\n```\n^codeBlockId");
+		expect(result.length).toBe(2);
+		expect(result[0].type).toBe("codeblock");
+		expect(result[0].attributes.code.value).toBe("code block");
+		expect(result[1].type).toBe("element");
+		expect(result[1].tag).toBe("p");
+		expect(result[1].children[0].type).toBe("blockmark");
+		expect(result[1].children[0].attributes.id.value).toBe("codeBlockId");
+		expect(result[1].children[0].attributes.previousSibling.value).toBe("yes");
+	});
+
+	it("should parse link without block mark", function () {
+		expect(parse("[[Simple Link]]")).toEqual(
+
+			[{"type":"element","tag":"p","rule":"parseblock","children":[{"type":"link","attributes":{"to":{"type":"string","value":"Simple Link","start":2,"end":13},"toBlockMark":{"type":"string","value":"","start":13,"end":13}},"children":[{"type":"text","text":"Simple Link","start":2,"end":13}],"start":0,"end":15,"rule":"prettylink"}],"start":0,"end":15}]
+
+		);
+	});
+
+	it("should parse link with alias and block mark", function () {
+		expect(parse("[[Click here|TiddlerTitle^mark123]]")).toEqual(
+
+			[{"type":"element","tag":"p","rule":"parseblock","children":[{"type":"link","attributes":{"to":{"type":"string","value":"TiddlerTitle","start":13,"end":25},"toBlockMark":{"type":"string","value":"mark123","start":26,"end":33}},"children":[{"type":"text","text":"Click here","start":2,"end":12}],"start":0,"end":35,"rule":"prettylink"}],"start":0,"end":35}]
+
+		);
+	});
+});
