@@ -1,0 +1,89 @@
+created: 20251107000000000
+modified: 20251107000000000
+tags: [[WebServer API]]
+title: WebServer API: Post Filter
+type: text/vnd.tiddlywiki
+
+Execute a filter expression with optional variable context
+
+```
+POST /recipes/default/filter
+```
+
+The body should be a JSON object with the following properties:
+
+* ''filter'' - (required) string containing the filter expression to execute
+* ''variables'' - (optional) object containing variable name-value pairs to set in the execution context
+* ''source'' - (optional) array of tiddler titles to use as the source (if omitted, uses all tiddlers)
+
+Variables can also be passed as URL query parameters. URL parameters take precedence over variables in the request body.
+
+Headers:
+
+* ''Content-Type'' - must be set to `application/json`
+* ''x-requested-with'' - must be set to `TiddlyWiki` in order for the request to succeed, unless [[WebServer Parameter: csrf-disable]] is set to `yes`
+
+Filter Permission:
+
+By default, external filters must be explicitly allowed. Set `$:/config/Server/AllowAllExternalFilters` to `yes` to allow all filters, or create a tiddler titled `$:/config/Server/ExternalFilters/<filter>` with text `yes` to allow a specific filter.
+
+Example 1 - Simple filter:
+
+```json
+{
+	"filter": "[tag[Journal]sort[created]]"
+}
+```
+
+Example 2 - Filter with variables:
+
+```json
+{
+	"filter": "[tag<myTag>sort[title]]",
+	"variables": {
+		"currentTiddler": "MyTiddler",
+		"myTag": "Journal"
+	}
+}
+```
+
+Example 3 - Filter with custom source:
+
+```json
+{
+	"filter": "[tag[Important]]",
+	"source": ["Tiddler1", "Tiddler2", "Tiddler3"]
+}
+```
+
+Example 4 - Variables via URL parameters (take precedence):
+
+```
+POST /recipes/default/filter?currentTiddler=MyTiddler&myTag=Journal
+```
+
+```json
+{
+	"filter": "[tag<myTag>sort[title]]",
+	"variables": {
+		"myTag": "OtherTag"
+	}
+}
+```
+
+In this example, `myTag` will be `"Journal"` from the URL parameter, not `"OtherTag"` from the body.
+
+Response:
+
+* 200 OK
+*> `Content-Type: application/json`
+*> `{"results": ["Title1", "Title2", ...]}`
+* 400 Bad Request - Invalid JSON or missing filter field
+*> `Content-Type: application/json`
+*> `{"error": "error message"}`
+* 403 Forbidden - Filter not authorized
+*> `Content-Type: application/json`
+*> `{"error": "Forbidden: filter not allowed."}`
+* 500 Internal Server Error - Error executing filter
+*> `Content-Type: application/json`
+*> `{"error": "Error executing filter: <message>", "stack": "..."}`

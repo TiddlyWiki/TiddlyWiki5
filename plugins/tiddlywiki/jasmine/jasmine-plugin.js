@@ -5,6 +5,28 @@ module-type: library
 
 The main module of the Jasmine test plugin for TiddlyWiki5
 
+Usage: To run only specific tests, use the --test command with a spec filter pattern.
+The specFilter parameter uses [search[pattern]] for substring matching on test titles (describe blocks).
+
+Examples:
+  - Run all tests (default):
+    npm test
+
+  - Run only server API tests:
+    node ./tiddlywiki.js ./editions/test --test spec="Server API Routes"
+  
+  - Run only utility tests:
+    node ./tiddlywiki.js ./editions/test --test spec="Utility tests"
+
+  - Run only filter tests:
+    node ./tiddlywiki.js ./editions/test --test spec="Filter tests"
+
+  - Run only one specific test by name:
+    node ./tiddlywiki.js ./editions/test --test spec="should support URL parameter"
+
+NOTE: The spec filter value matches against describe() block titles as well as individual test names.
+      Use partial matches for flexible filtering.
+
 \*/
 
 
@@ -36,7 +58,8 @@ exports.runTests = function(callback,specFilter) {
 		clearInterval: clearInterval,
 		setTimeout: setTimeout,
 		clearTimeout: clearTimeout,
-		$tw: $tw
+		$tw: $tw,
+		fetch: fetch,
 	};
 	// The `global` property is needed in two places:
 	// 1. jasmine-core/node_boot.js: extends the global object with jasmine interface.
@@ -69,7 +92,7 @@ exports.runTests = function(callback,specFilter) {
 		context.require = function(moduleTitle) {
 			// mock out the 'glob' module required in
 			// "$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js"
-			if (moduleTitle === "glob") {
+			if(moduleTitle === "glob") {
 				return {};
 			}
 			return $tw.modules.execute(moduleTitle,title);
@@ -146,6 +169,10 @@ exports.runTests = function(callback,specFilter) {
 	context = $tw.utils.extend({},jasmineInterface,context);
 	// Iterate through all the test modules
 	var tests = $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
+	// Filter the tests based on the spec tiddler title
+	if(specFilter) {
+		tests = $tw.wiki.filterTiddlers("[search[" + specFilter + "]]", null, $tw.wiki.makeTiddlerIterator(tests));
+	}
 	$tw.utils.each(tests,evalInContext);
 	// In a browser environment, we use jasmine-core/boot.js to call `execute()` for us.
 	// In Node.js, we call it manually.
