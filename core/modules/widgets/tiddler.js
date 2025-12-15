@@ -31,9 +31,24 @@ TiddlerWidget.prototype.render = function(parent,nextSibling) {
 };
 
 /*
+Collect the attributes we need, in the process determining whether we're being used in legacy mode
+*/
+TiddlerWidget.prototype.collectAttributes = function() {
+	// Detect legacy mode: true if no attributes start with $
+	this.legacyMode = this.isLegacyMode();
+	// Get the attributes for the appropriate mode
+	if(this.legacyMode) {
+		this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	} else {
+		this.tiddlerTitle = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
+	}
+};
+
+/*
 Compute the internal state of the widget
 */
 TiddlerWidget.prototype.execute = function() {
+	this.collectAttributes();
 	this.tiddlerState = this.computeTiddlerState();
 	this.setVariable("currentTiddler",this.tiddlerState.currentTiddler);
 	this.setVariable("missingTiddlerClass",this.tiddlerState.missingTiddlerClass);
@@ -48,8 +63,7 @@ TiddlerWidget.prototype.execute = function() {
 Compute the tiddler state flags
 */
 TiddlerWidget.prototype.computeTiddlerState = function() {
-	// Get our parameters
-	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	// tiddlerTitle is set by collectAttributes()
 	// Compute the state
 	var state = {
 		currentTiddler: this.tiddlerTitle || "",
@@ -83,13 +97,18 @@ TiddlerWidget.prototype.getTagClasses = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 TiddlerWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		newTiddlerState = this.computeTiddlerState();
-	if(changedAttributes.tiddler || newTiddlerState.hash !== this.tiddlerState.hash) {
+	var changedAttributes = this.computeAttributes();
+	if(this.hasChangedAttributes(["tiddler"],changedAttributes)) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);
+		var newTiddlerState = this.computeTiddlerState();
+		if(newTiddlerState.hash !== this.tiddlerState.hash) {
+			this.refreshSelf();
+			return true;
+		} else {
+			return this.refreshChildren(changedTiddlers);
+		}
 	}
 };
 

@@ -37,11 +37,25 @@ FieldManglerWidget.prototype.render = function(parent,nextSibling) {
 };
 
 /*
+Collect the attributes we need, in the process determining whether we're being used in legacy mode
+*/
+FieldManglerWidget.prototype.collectAttributes = function() {
+	// Detect legacy mode: true if no attributes start with $
+	this.legacyMode = this.isLegacyMode();
+	// Get the attributes for the appropriate mode
+	if(this.legacyMode) {
+		this.mangleTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	} else {
+		this.mangleTitle = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
+	}
+};
+
+/*
 Compute the internal state of the widget
 */
 FieldManglerWidget.prototype.execute = function() {
 	// Get our parameters
-	this.mangleTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	this.collectAttributes();
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -51,7 +65,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 FieldManglerWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler) {
+	if(this.hasChangedAttributes(["tiddler"],changedAttributes)) {
 		this.refreshSelf();
 		return true;
 	} else {

@@ -204,34 +204,45 @@ ButtonWidget.prototype.setTiddler = function() {
 };
 
 /*
+Collect the attributes we need, in the process determining whether we're being used in legacy mode
+*/
+ButtonWidget.prototype.collectAttributes = function() {
+	// Detect legacy mode: true if no attributes start with $
+	this.legacyMode = this.isLegacyMode();
+	// Get attributes for the appropriate mode
+	var prefix = this.legacyMode ? "" : "$";
+	this.actions = this.getAttribute(prefix + "actions");
+	this.to = this.getAttribute(prefix + "to");
+	this.message = this.getAttribute(prefix + "message");
+	this.param = this.getAttribute(prefix + "param");
+	this.set = this.getAttribute(prefix + "set");
+	this.setTo = this.getAttribute(prefix + "setTo");
+	this.popup = this.getAttribute(prefix + "popup");
+	this.hover = this.getAttribute(prefix + "hover");
+	this.role = this.getAttribute(prefix + "role");
+	this.tooltip = this.getAttribute(prefix + "tooltip");
+	this.style = this.getAttribute(prefix + "style");
+	this["class"] = this.getAttribute(prefix + "class","");
+	this.selectedClass = this.getAttribute(prefix + "selectedClass");
+	this.defaultSetValue = this.getAttribute(prefix + "default","");
+	this.buttonTag = this.getAttribute(prefix + "tag");
+	this.dragTiddler = this.getAttribute(prefix + "dragTiddler");
+	this.dragFilter = this.getAttribute(prefix + "dragFilter");
+	this.setTitle = this.getAttribute(prefix + "setTitle");
+	this.setField = this.getAttribute(prefix + "setField");
+	this.setIndex = this.getAttribute(prefix + "setIndex");
+	this.popupTitle = this.getAttribute(prefix + "popupTitle");
+	this.popupAbsCoords = this.getAttribute(prefix + "popupAbsCoords", "no");
+	this.tabIndex = this.getAttribute(prefix + "tabindex");
+	this.isDisabled = this.getAttribute(prefix + "disabled","no");
+};
+
+/*
 Compute the internal state of the widget
 */
 ButtonWidget.prototype.execute = function() {
 	// Get attributes
-	this.actions = this.getAttribute("actions");
-	this.to = this.getAttribute("to");
-	this.message = this.getAttribute("message");
-	this.param = this.getAttribute("param");
-	this.set = this.getAttribute("set");
-	this.setTo = this.getAttribute("setTo");
-	this.popup = this.getAttribute("popup");
-	this.hover = this.getAttribute("hover");
-	this.role = this.getAttribute("role");
-	this.tooltip = this.getAttribute("tooltip");
-	this.style = this.getAttribute("style");
-	this["class"] = this.getAttribute("class","");
-	this.selectedClass = this.getAttribute("selectedClass");
-	this.defaultSetValue = this.getAttribute("default","");
-	this.buttonTag = this.getAttribute("tag");
-	this.dragTiddler = this.getAttribute("dragTiddler");
-	this.dragFilter = this.getAttribute("dragFilter");
-	this.setTitle = this.getAttribute("setTitle");
-	this.setField = this.getAttribute("setField");
-	this.setIndex = this.getAttribute("setIndex");
-	this.popupTitle = this.getAttribute("popupTitle");
-	this.popupAbsCoords = this.getAttribute("popupAbsCoords", "no");
-	this.tabIndex = this.getAttribute("tabindex");
-	this.isDisabled = this.getAttribute("disabled","no");
+	this.collectAttributes();
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -240,7 +251,8 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 	var domNodeClasses = this.domNode.className.split(" "),
 		oldClasses = this.class.split(" "),
 		newClasses;
-	this["class"] = this.getAttribute("class","");
+	var classAttr = this.legacyMode ? "class" : "$class";
+	this["class"] = this.getAttribute(classAttr,"");
 	newClasses = this.class.split(" ");
 	//Remove classes assigned from the old value of class attribute
 	$tw.utils.each(oldClasses,function(oldClass){
@@ -259,11 +271,18 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tooltip || changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
+	if(this.hasChangedAttributes([
+		"tooltip","actions","to","message","param","set","setTo","popup","hover",
+		"selectedClass","style","dragFilter","dragTiddler","popupAbsCoords",
+		"setTitle","setField","setIndex","popupTitle","disabled","default"
+	],changedAttributes) || 
+	   (this.set && changedTiddlers[this.set]) || 
+	   (this.popup && changedTiddlers[this.popup]) || 
+	   (this.popupTitle && changedTiddlers[this.popupTitle])) {
 		this.refreshSelf();
 		return true;
 	} else {
-		if(changedAttributes["class"]) {
+		if(this.hasChangedAttributes(["class"],changedAttributes)) {
 			this.updateDomNodeClasses();
 		}
 		this.assignAttributes(this.domNodes[0],{
