@@ -88,7 +88,8 @@
     "import-field-column": "How would you describe your main use cases for TiddlyWiki?",
     "title": "$:/2025 Community Survey/Questions/main-use-cases",
     "import-field-source": "column",
-    "import-spec-role": "field"
+    "import-spec-role": "field",
+    "question-type": "multiple-choice"
   },
   {
     "import-field-name": "other-use-cases",
@@ -116,14 +117,16 @@
     "import-field-column": "Do you publish your wiki(s) online?: To the World Wide Web",
     "title": "$:/2025 Community Survey/Questions/publish-to-web",
     "import-field-source": "column",
-    "import-spec-role": "field"
+    "import-spec-role": "field",
+    "question-type": "multiple-choice"
   },
   {
     "import-field-name": "publish-to-intranet",
     "import-field-column": "Do you publish your wiki(s) online?: To an intranet",
     "title": "$:/2025 Community Survey/Questions/publish-to-intranet",
     "import-field-source": "column",
-    "import-spec-role": "field"
+    "import-spec-role": "field",
+    "question-type": "multiple-choice"
   },
   {
     "import-field-name": "value-of-tw",
@@ -137,21 +140,24 @@
     "import-field-column": "What is your level of ability with TiddlyWiki? This question assumes you can navigate TiddlyWiki, use basic WikiText and save changes.",
     "title": "$:/2025 Community Survey/Questions/tw-ability-level",
     "import-field-source": "column",
-    "import-spec-role": "field"
+    "import-spec-role": "field",
+    "question-type": "multiple-choice"
   },
   {
     "import-field-name": "save-method",
     "import-field-column": "How do you save changes in TiddlyWiki?",
     "title": "$:/2025 Community Survey/Questions/save-method",
     "import-field-source": "column",
-    "import-spec-role": "field"
+    "import-spec-role": "field",
+    "question-type": "multiple-choice"
   },
   {
     "import-field-name": "backup-method",
     "import-field-column": "How do you back up/sync changes between systems?",
     "title": "$:/2025 Community Survey/Questions/backup-method",
     "import-field-source": "column",
-    "import-spec-role": "field"
+    "import-spec-role": "field",
+    "question-type": "multiple-choice"
   },
   {
     "import-field-name": "diy-backup-info",

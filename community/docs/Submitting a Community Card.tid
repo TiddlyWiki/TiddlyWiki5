@@ -1,0 +1,36 @@
+title: Submitting a Community Card
+tags: [[Community Cards]]
+modified: 20250909171928024
+created: 20250909171928024
+
+Anyone associated with the TiddlyWiki community can submit a Community Card. The submission process currently involves making a GitHub pull request but we intend to provide a more user-friendly submission process in the future.
+
+Pull requests to add or update a community card should be made against the `tiddlywiki-com` branch of the [[TiddlyWiki repository|https://github.com/TiddlyWiki/TiddlyWiki5]] in the directory `community/people`.
+
+The card should be a TiddlyWiki tiddler with the following fields:
+
+|!Field |!Required|!Description |
+|`title`|Yes |The username of the person represented by the card, starting with `@` (e.g. `@Jermolene`). This is the title of the card and should be unique |
+|`tags`|Yes |The tags for the card, including `Community/Person` |
+|`fullname`|Yes |The full name of the person or group represented by the card |
+|`avatar`|Yes |The base64 representation of the 32x32 avatar image for the person represented by the card |
+|`first-sighting`|No |The date of the first sighting in the community of the person represented by the card. This should be in ISO 8601 format (YYYY-MM-DD) |
+|`talk.tiddlywiki.org`|Yes |The username of the person or group on the TiddlyWiki Talk forum |
+|`github`|No |The username of the person or group on GitHub |
+|`linkedin`|No |The URL of the LinkedIn profile for the person or group represented by the card |
+|`flickr`|No |The URL of the Flickr profile for the person or group represented by the card |
+|`homepage`|No |The URL of the homepage for the person or group represented by the card |
+|`email`|No |The email address of the person or group represented by the card |
+|`text`|Yes |The text of the card. This should include a brief description of the person or group represented by the card, and any other relevant information |
+
+! Rules for Community Cards
+
+Community cards must observe the following rules. It is intended to enforce them with an automated script, but for the moment they will be manually checked.
+
+* `title` must be unique and start with `@`
+* `tags` must include `Community/Person`
+* `fullname` must be provided
+* `avatar` must be a base64 representation of a 32x32 image, with a limit of 1KB.  [[Squoosh|https://squoosh.app/]] is recommended for resizing and compressing images
+* `first-sighting` should be in ISO 8601 format (YYYY-MM-DD)
+* `talk.tiddlywiki.org` must be provided
+* `text` total size must not exceed 2KB

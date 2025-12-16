@@ -1,0 +1,56 @@
+title: Hire the founder of TiddlyWiki
+modified: 20250901094938063
+created: 20250901094938063
+
+<i class="yellow-note-pin"></i>//A note from [[JeremyRuston]]//
+
+I am currently taking on new commercial clients through my company [[Intertwingled Innovations]].
+
+<$expand.able heading="Why choose me?">
+
+Some of the ways I can help your organisation get the best from ~TiddlyWiki:
+
+* ''Custom applications'' -- Bespoke ~TiddlyWiki solutions to speed up your workflows
+* ''Core sponsorship'' -- Fund new features or official plugins for your organisation while strengthening the wider ~TiddlyWiki ecosystem
+* ''Seamless integration'' -- Connect ~TiddlyWiki with your existing tools and infrastructure so everything works smoothly together
+* ''Sustaining ~TiddlyWiki'' -- Commercial projects are what enable me to keep maintaining and innovating ~TiddlyWiki. By working with me, you directly support its future
+
+</$expand.able>
+
+<$expand.able heading="Ways to collaborate">
+
+Projects begin as a conversation to understand your vision, goals and operating context. One or more proof-of-concept prototypes are followed by iterative, timeboxed development cycles with regular meetings to review progress and agree on the next steps.
+
+Most of my projects have grown into long-term collaborations, but I also take on smaller, focused engagements. I work across several projects at once, identifying common needs and building components that benefit multiple clients, and often become enhancements for the whole ~TiddlyWiki community.
+
+</$expand.able>
+
+<$expand.able heading="Client success stories">
+
+I've been lucky enough to work on some meaningful and interesting projects with a wide range of organisations from across the globe. Notably:
+
+* For a charity -- [[Xememex]], a multi-user ~TiddlyWiki server with thousands of users
+* For a philanthropic investment firm -- an extranet to share their pipeline with external partners
+* For a law firm -- a hypertext knowledge system with hundreds of thousands of densely linked tiddlers
+* For a publisher -- an experimental hypertext book publishing platform
+* For a real estate firm -- a new geospatial plugin
+
+</$expand.able>
+
+<$expand.able heading="Impact on TiddlyWiki">
+
+Many core features and official plugins originated in client projects:
+
+* Testcase Widget
+* Consent Banner Plugin
+* Dynannotate and Dynaview Plugins
+* Excel Importer Plugin
+* Geospatial Plugin
+* ~InnerWiki Plugin
+* Text Slicer Plugin
+* Tour and Confetti Plugins
+* XLSX Importer Plugin
+
+</$expand.able>
+
+If you'd like to explore how ~TiddlyWiki could help your organisation, please contact me at <a href="mailto:jeremy@jermolene.com" target="_blank">jeremy@jermolene.com</a>.

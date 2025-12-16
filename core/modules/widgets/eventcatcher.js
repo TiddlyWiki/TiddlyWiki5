@@ -44,7 +44,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 		domNode.addEventListener(type,function(event) {
 			var selector = self.getAttribute("selector"),
 				matchSelector = self.getAttribute("matchSelector"),
-				actions = self.getAttribute("$"+type) || self.getAttribute("actions-"+type),
+				actions = self.getAttribute("$"+type),
 				stopPropagation = self.getAttribute("stopPropagation","onaction"),
 				selectedNode = event.target,
 				selectedNodeRect,
@@ -122,9 +122,6 @@ EventWidget.prototype.execute = function() {
 			self.types.push(key.slice(1));
 		}
 	});
-	if(!this.types.length) {
-		this.types = this.getAttribute("events","").split(" ");
-	}
 	this.elementTag = this.getAttribute("tag");
 	// Make child widgets
 	this.makeChildWidgets();
@@ -133,7 +130,7 @@ EventWidget.prototype.execute = function() {
 EventWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-eventcatcher");
-	this.domNode.className = classes.join(" ");
+	this.domNode.className = classes.join(" ").trim();
 };
 
 /*
