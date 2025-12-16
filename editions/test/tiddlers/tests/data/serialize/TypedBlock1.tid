@@ -1,0 +1,15 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/TypedBlock1
+type: text/vnd.tiddlywiki
+
+$$$text/vnd.tiddlywiki > text/plain
+This is ''some'' wikitext
+$$$
+
+$$$text/unknown
+Some plain text, which will not be //formatted//.
+
+$$$text/vnd.tiddlywiki > text/html
+This is ''some'' wikitext
+$$$
+

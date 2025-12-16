@@ -203,7 +203,7 @@ RevealWidget.prototype.readPopupState = function(state) {
 RevealWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-reveal");
-	this.domNode.className = classes.join(" ");
+	this.domNode.className = classes.join(" ").trim();
 };
 
 /*

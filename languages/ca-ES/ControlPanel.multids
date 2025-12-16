@@ -144,7 +144,7 @@ Settings/AutoSave/Enabled/Description: Desa els canvis de forma automàtica
 Settings/AutoSave/Hint: Desa els canvis de forma automàtica mentre s'està editant
 Settings/CamelCase/Caption: Enllaços wiki tipus CamelCase
 Settings/CamelCase/Description: Activa l'enllaç automàtic tipus ~CamelCase
-Settings/CamelCase/Hint: Podeu desactivar globalment l’enllaç automàtic de les frases ~CamelCase. Cal que es torni a carregar per tenir efecte
+Settings/CamelCase/Hint: Cal que es torni a carregar per tenir efecte
 Settings/Caption: Paràmetres
 Settings/DefaultMoreSidebarTab/Caption: Pestanya Més de la barra lateral per omissió
 Settings/DefaultMoreSidebarTab/Hint: Indiqueu la pestanya Més de la barra lateral que es mostra per omissió

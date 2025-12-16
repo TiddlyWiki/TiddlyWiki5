@@ -9,8 +9,6 @@ Various static utility functions.
 
 "use strict";
 
-var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
-
 /*
 Display a message, in colour if we're on a terminal
 */
@@ -51,14 +49,26 @@ exports.warning = function(text) {
 };
 
 /*
-Log a table of name: value pairs
+Log a table of name: value or name: [values...] pairs
 */
 exports.logTable = function(data) {
-	if(console.table) {
+	var hasArrays = false;
+	$tw.utils.each(data,function(value,name) {
+		if($tw.utils.isArray(value)) {
+			hasArrays = true;
+		}
+	});
+	if(console.table && !hasArrays) {
 		console.table(data);
 	} else {
 		$tw.utils.each(data,function(value,name) {
-			console.log(name + ": " + value);
+			if($tw.utils.isArray(value)) {
+				for(var t=0; t<value.length; t++) {
+					console.log(`${name}[${t}]: ${value[t]}`);
+				}
+			} else {
+				console.log(`${name}: ${value}`);
+			}
 		});
 	}
 }
@@ -842,22 +852,50 @@ if(typeof window !== 'undefined') {
 	}
 }
 
+exports.base64ToBytes = function(base64) {
+	const binString = exports.atob(base64);
+	return Uint8Array.from(binString, (m) => m.codePointAt(0));
+};
+
+exports.bytesToBase64 = function(bytes) {
+	const binString = Array.from(bytes, (byte) => String.fromCodePoint(byte)).join("");
+	return exports.btoa(binString);
+};
+
+exports.base64EncodeUtf8 = function(str) {
+	if ($tw.browser) {
+		return exports.bytesToBase64(new TextEncoder().encode(str));
+	} else {
+		const buff = Buffer.from(str, "utf-8");
+		return buff.toString("base64");
+	}
+};
+
+exports.base64DecodeUtf8 = function(str) {
+	if ($tw.browser) {
+		return new TextDecoder().decode(exports.base64ToBytes(str));
+	} else {
+		const buff = Buffer.from(str, "base64");
+		return buff.toString("utf-8");
+	}
+};
+
 /*
 Decode a base64 string
 */
 exports.base64Decode = function(string64,binary,urlsafe) {
-	var encoded = urlsafe ? string64.replace(/_/g,'/').replace(/-/g,'+') : string64;
+	const encoded = urlsafe ? string64.replace(/_/g,'/').replace(/-/g,'+') : string64;
 	if(binary) return exports.atob(encoded)
-	else return base64utf8.base64.decode.call(base64utf8,encoded);
+	else return exports.base64DecodeUtf8(encoded);
 };
 
 /*
 Encode a string to base64
 */
 exports.base64Encode = function(string64,binary,urlsafe) {
-	var encoded;
+	let encoded;
 	if(binary) encoded = exports.btoa(string64);
-	else encoded = base64utf8.base64.encode.call(base64utf8,string64);
+	else encoded = exports.base64EncodeUtf8(string64);
 	if(urlsafe) {
 		encoded = encoded.replace(/\+/g,'-').replace(/\//g,'_');
 	}
@@ -1023,7 +1061,7 @@ exports.makeCompareFunction = function(type,options) {
 				return compare(dateA,dateB);
 			},
 			"version": function(a,b) {
-				return $tw.utils.compareVersions(a,b);
+				return compare($tw.utils.compareVersions(a,b),0);
 			},
 			"alphanumeric": function(a,b) {
 				if(!isCaseSensitive) {
