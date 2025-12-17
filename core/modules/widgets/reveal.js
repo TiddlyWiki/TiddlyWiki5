@@ -120,8 +120,33 @@ RevealWidget.prototype.execute = function() {
 	this["default"] = this.getAttribute("default","");
 	this.animate = this.getAttribute("animate","no");
 	this.retain = this.getAttribute("retain","no");
-	this.openAnimation = this.animate === "no" ? undefined : "open";
-	this.closeAnimation = this.animate === "no" ? undefined : "close";
+	// Animation type configuration
+	this.animationType = this.getAttribute("animationType","default"); // default, transform, gpu
+	// Set animation function names based on type
+	if(this.animate === "no") {
+		this.openAnimation = undefined;
+		this.closeAnimation = undefined;
+	} else {
+		// Use animation type to determine implementation
+		switch(this.animationType) {
+			case "transform":
+				this.openAnimation = "openTransform";
+				this.closeAnimation = "closeTransform";
+				break;
+			case "gpu":
+				this.openAnimation = "openGPU";
+				this.closeAnimation = "closeGPU";
+				break;
+			default:
+				this.openAnimation = "open";
+				this.closeAnimation = "close";
+				break;
+		}
+	}
+	this.animationDuration = parseInt(this.getAttribute("animationDuration") || $tw.utils.getAnimationDuration());
+	this.animationDirection = this.getAttribute("animationDirection");
+	this.animationOrigin = this.getAttribute("animationOrigin");
+	this.animationEasing = this.getAttribute("animationEasing");
 	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
 	// Compute the title of the state tiddler and read it
 	this.stateTiddlerTitle = this.state;
@@ -211,7 +236,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex || changedAttributes.animationOrigin || changedAttributes.animationType || changedAttributes.animationEasing) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -232,6 +257,9 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 		}
 		if(changedAttributes["class"]) {
 			this.assignDomNodeClasses();
+		}
+		if(changedAttributes.animationDuration || changedTiddlers["$:/config/AnimationDuration"]) {
+			this.animationDuration = parseInt(this.getAttribute("animationDuration") || $tw.utils.getAnimationDuration());
 		}
 		return this.refreshChildren(changedTiddlers);
 	}
@@ -259,15 +287,42 @@ RevealWidget.prototype.updateState = function() {
 	}
 	if(this.isOpen) {
 		domNode.removeAttribute("hidden");
-        $tw.anim.perform(this.openAnimation,domNode);
+		var animOptions = {};
+		if(this.animationDuration) {
+			animOptions.duration = this.animationDuration;
+		}
+		if(this.animationDirection) {
+			animOptions.direction = this.animationDirection;
+		}
+		if(this.animationOrigin) {
+			animOptions.origin = this.animationOrigin;
+		}
+		if(this.animationEasing) {
+			animOptions.easing = this.animationEasing;
+		}
+        $tw.anim.perform(this.openAnimation,domNode,animOptions);
 	} else {
-		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
+		var animOptions = {};
+		if(this.animationDuration) {
+			animOptions.duration = this.animationDuration;
+		}
+		if(this.animationDirection) {
+			animOptions.direction = this.animationDirection;
+		}
+		if(this.animationOrigin) {
+			animOptions.origin = this.animationOrigin;
+		}
+		if(this.animationEasing) {
+			animOptions.easing = this.animationEasing;
+		}
+		animOptions.callback = function() {
 			//make sure that the state hasn't changed during the close animation
 			self.readState()
 			if(!self.isOpen) {
 				domNode.setAttribute("hidden","true");
 			}
-		}});
+		};
+		$tw.anim.perform(self.closeAnimation,domNode,animOptions);
 	}
 };
 
