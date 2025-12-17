@@ -519,7 +519,6 @@ Syncer.prototype.getPendingTitles = function() {
 				isReadyToSave = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
 			if(hasChanged) {
 				if(isReadyToSave) {
-					// return new SaveTiddlerTask(this,title);
 					savePending.push(title);
 				} else {
 					havePending = true;
@@ -529,7 +528,6 @@ Syncer.prototype.getPendingTitles = function() {
 	}
 	// Second we check for an outstanding sync from server
 	if(this.forceSyncFromServer || (this.timestampLastSyncFromServer && (now.valueOf() >= (this.timestampLastSyncFromServer.valueOf() + this.pollTimerInterval)))) {
-		// return new SyncFromServerTask(this);
 		syncServer = true;
 	}
 	// Third, we check tiddlers that are known from the server but not currently in the store, and so need deleting on the server
@@ -539,16 +537,10 @@ Syncer.prototype.getPendingTitles = function() {
 		tiddlerInfo = this.tiddlerInfo[title];
 		tiddler = this.wiki.tiddlerExists(title) && this.wiki.getTiddler(title);
 		if(!tiddler) {
-			// return new DeleteTiddlerTask(this,title);
 			deletePending.push(title);
 		}
 	}
 	// Finally, check for tiddlers that need loading
-	// title = Object.keys(this.titlesToBeLoaded)[0];
-	// if(title) {
-	// 	delete this.titlesToBeLoaded[title];
-	// 	return new LoadTiddlerTask(this,title);
-	// }
 	loadPending.push(...Object.keys(this.titlesToBeLoaded));
 	// No tasks are ready now, but might be in the future
 	return {havePending: havePending, loadPending: loadPending, savePending: savePending, deletePending: deletePending, syncServer: syncServer};
