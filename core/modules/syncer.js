@@ -89,7 +89,7 @@ function Syncer(options) {
 			self.processTaskQueue();
 		} else {
 			// Look for deletions of tiddlers we're already syncing	
-			var outstandingDeletion = false
+			var outstandingDeletion = false;
 			$tw.utils.each(changes,function(change,title,object) {
 				if(change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) {
 					outstandingDeletion = true;
@@ -309,7 +309,7 @@ Syncer.prototype.syncFromServer = function() {
 
 Syncer.prototype.canSyncFromServer = function() {
 	return !!this.syncadaptor.getUpdatedTiddlers || !!this.syncadaptor.getSkinnyTiddlers;
-}
+};
 
 /*
 Force load a tiddler from the server
@@ -562,13 +562,13 @@ function SaveAllTiddlersTask(syncer,titles) {
 
 SaveAllTiddlersTask.prototype.toString = function() {
 	return "SAVE ALL " + this.titles;
-}
+};
 
 SaveAllTiddlersTask.prototype.run = function(callback) {
 	this.syncer.logger.log("Dispatching 'save all' task:",this.titles);
 	var changeCounts = this.titles.reduce((r,title) => { r[title] = this.syncer.wiki.getChangeCount(title); return r; }, {});
 	var tiddlers = this.titles
-		.map((title) => this.syncer.wiki.tiddlerExists(title) && this.syncer.wiki.getTiddler(title))
+		.map(title => this.syncer.wiki.tiddlerExists(title) && this.syncer.wiki.getTiddler(title))
 		.filter(e => e);
 	if(!tiddlers.length) return $tw.utils.nextTick(() => { callback(null); });
 	this.do({
@@ -583,7 +583,7 @@ SaveAllTiddlersTask.prototype.run = function(callback) {
 			};
 		},
 		onDone: () => { callback(null); },
-		onError: (err) => { callback(err); },
+		onError: err => { callback(err); },
 	});
 };
 
@@ -602,7 +602,7 @@ SaveAllTiddlersTask.prototype.do = function (options){
 			}
 		},{tiddlerInfo: this.syncer.tiddlerInfo[title]});
 	}
-}
+};
 
 function DeleteAllTiddlersTask(syncer,titles) {
 	this.syncer = syncer;
@@ -612,18 +612,18 @@ function DeleteAllTiddlersTask(syncer,titles) {
 
 DeleteAllTiddlersTask.prototype.toString = function() {
 	return "DELETE ALL " + this.titles;
-}
+};
 
 DeleteAllTiddlersTask.prototype.run = function(callback) {
 	this.syncer.logger.log("Dispatching 'delete all' task:",this.titles);
 	this.do({
 		syncer: this.syncer,
 		titles: this.titles,
-		onNext: (title) => {
+		onNext: title => {
 			delete this.syncer.tiddlerInfo[title];
 		},
 		onDone: () => { callback(null); },
-		onError: (err) => { callback(err); },
+		onError: err => { callback(err); },
 	});
 };
 
@@ -641,7 +641,7 @@ DeleteAllTiddlersTask.prototype.do = function(options){
 			}
 		},{tiddlerInfo: this.syncer.tiddlerInfo[title]});
 	}
-}
+};
 
 function LoadAllTiddlersTask(syncer,titles) {
 	this.syncer = syncer;
@@ -651,16 +651,16 @@ function LoadAllTiddlersTask(syncer,titles) {
 
 LoadAllTiddlersTask.prototype.toString = function() {
 	return "LOAD ALL" + this.titles;
-}
+};
 
 LoadAllTiddlersTask.prototype.run = function(callback) {
 	this.syncer.logger.log("Dispatching 'load all' task:",this.titles);
 	this.syncer.syncadaptor.loadTiddlers({
 		syncer: this.syncer,
 		titles: this.titles,
-		onNext: (tiddlerFields) => {this.syncer.storeTiddler(tiddlerFields);},
+		onNext: tiddlerFields => {this.syncer.storeTiddler(tiddlerFields);},
 		onDone: () => {callback(null);},
-		onError: (err) => {callback(err);},
+		onError: err => {callback(err);},
 	});
 };
 
@@ -679,7 +679,7 @@ LoadAllTiddlersTask.prototype.do = function(options){
 			}
 		});
 	}
-}
+};
 
 function SyncFromServerTask(syncer) {
 	this.syncer = syncer;
@@ -688,7 +688,7 @@ function SyncFromServerTask(syncer) {
 
 SyncFromServerTask.prototype.toString = function() {
 	return "SYNCFROMSERVER";
-}
+};
 
 SyncFromServerTask.prototype.run = function(callback) {
 	var self = this;
