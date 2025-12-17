@@ -1,5 +1,5 @@
 title: $:/changenotes/5.4.0/#9454
-description: Edit-text widget rows parameter takes precedence
+description: Ensure rows parameter of edit-text widget takes precedence
 tags: $:/tags/ChangeNote
 release: 5.4.0
 change-type: feature
