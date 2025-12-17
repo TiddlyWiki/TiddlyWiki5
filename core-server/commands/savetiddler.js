@@ -24,7 +24,7 @@ Command.prototype.execute = async function() {
 	if(this.params.length < 2) {
 		return "Missing filename";
 	}
-	var self = this,
+	const self = this,
 		path = require("path"),
 		title = this.params[0],
 		filepath = path.resolve(this.commander.outputPath,this.params[1]);
@@ -39,10 +39,12 @@ Command.prototype.savetiddler = async function(title, filepath) {
 	const tiddler = this.commander.wiki.getTiddler(title);
 
 	if(!tiddler) return "Missing tiddler: " + title;
-	
-	var type = tiddler.fields.type || "text/vnd.tiddlywiki",
+
+	const type = tiddler.fields.type || "text/vnd.tiddlywiki",
 		contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"};
+
 	$tw.utils.createFileDirectories(filepath);
+
 	return await fs.writeFile(filepath,tiddler.fields.text,contentTypeInfo.encoding)
 		.then(() => null, e => e);
 }
