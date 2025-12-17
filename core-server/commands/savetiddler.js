@@ -11,7 +11,7 @@ Command to save the content of a tiddler to a file
 
 exports.info = {
 	name: "savetiddler",
-	synchronous: false
+	synchronous: true
 };
 
 var Command = function(params,commander,callback) {
@@ -20,27 +20,25 @@ var Command = function(params,commander,callback) {
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = async function() {
 	if(this.params.length < 2) {
 		return "Missing filename";
 	}
 	var self = this,
-		fs = require("fs"),
+		fs = require("fs/promises"),
 		path = require("path"),
 		title = this.params[0],
 		filename = path.resolve(this.commander.outputPath,this.params[1]),
 		tiddler = this.commander.wiki.getTiddler(title);
-	if(tiddler) {
-		var type = tiddler.fields.type || "text/vnd.tiddlywiki",
-			contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"};
-		$tw.utils.createFileDirectories(filename);
-		fs.writeFile(filename,tiddler.fields.text,contentTypeInfo.encoding,function(err) {
-			self.callback(err);
-		});
-	} else {
-		return "Missing tiddler: " + title;
-	}
-	return null;
+
+	if(!tiddler) return "Missing tiddler: " + title;
+	
+	var type = tiddler.fields.type || "text/vnd.tiddlywiki",
+		contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"};
+	$tw.utils.createFileDirectories(filename);
+	return await fs.writeFile(filename,tiddler.fields.text,contentTypeInfo.encoding)
+		.then(() => null, e => e);
+
 };
 
 exports.Command = Command;
