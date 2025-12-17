@@ -20,9 +20,9 @@ var Command = function(params,commander,callback) {
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = async function() {
 	var self = this,
-		fs = require("fs"),
+		fs = require("fs/promises"),
 		path = require("path");
 	if(this.params.length < 2) {
 		return "Missing parameters";
@@ -31,11 +31,11 @@ Command.prototype.execute = function() {
 		deserializer = self.params[1],
 		title = self.params[2] || filename,
 		encoding = self.params[3] || "utf8",
-		text = fs.readFileSync(filename,encoding),
+		text = await fs.readFile(filename,encoding),
 		tiddlers = this.commander.wiki.deserializeTiddlers(null,text,{title: title},{deserializer: deserializer});
-	$tw.utils.each(tiddlers,function(tiddler) {
+	for(const tiddler of tiddlers) {
 		self.commander.wiki.importTiddler(new $tw.Tiddler(tiddler));
-	});
+	}
 	this.commander.log(tiddlers.length + " tiddler(s) imported");
 	return null;
 };

@@ -32,11 +32,11 @@ Command.prototype.execute = async function() {
 		title = this.params[0],
 		filepath = path.resolve(this.commander.outputPath,this.params[1]);
 
-	return await this.savetiddler(title, filepath);
+	return await Command.savetiddler(title, filepath);
 
 };
 
-Command.prototype.savetiddler = async function(title, filepath) {
+Command.savetiddler = async function(title, filepath) {
 	const fs = require("fs/promises");
 
 	const tiddler = this.commander.wiki.getTiddler(title);
