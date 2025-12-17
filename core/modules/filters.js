@@ -232,7 +232,12 @@ exports.getFilterRunPrefixes = function() {
 
 exports.filterTiddlers = function(filterString,widget,source) {
 	var fn = this.compileFilter(filterString);
-	return fn.call(this,source,widget);
+	try {
+		const fnResult = fn.call(this,source,widget);
+		return fnResult;
+	} catch(e) {
+		return [`${$tw.language.getString("Error/Filter")}: ${e}`];
+	}
 };
 
 /*
@@ -313,24 +318,20 @@ exports.compileFilter = function(filterString) {
 				});
 
 				// Invoke the appropriate filteroperator module
-				try {
-					results = operatorFunction(accumulator,{
-						operator: operator.operator,
-						operand: operands.length > 0 ? operands[0] : undefined,
-						operands: operands,
-						multiValueOperands: multiValueOperands,
-						isMultiValueOperand: isMultiValueOperand,
-						prefix: operator.prefix,
-						suffix: operator.suffix,
-						suffixes: operator.suffixes,
-						regexp: operator.regexp
-					},{
-						wiki: self,
-						widget: widget
-					});
-				} catch(e) {
-					results = [`${$tw.language.getString("Error/Filter")}: ${e}`];
-				}
+				results = operatorFunction(accumulator,{
+					operator: operator.operator,
+					operand: operands.length > 0 ? operands[0] : undefined,
+					operands: operands,
+					multiValueOperands: multiValueOperands,
+					isMultiValueOperand: isMultiValueOperand,
+					prefix: operator.prefix,
+					suffix: operator.suffix,
+					suffixes: operator.suffixes,
+					regexp: operator.regexp
+				},{
+					wiki: self,
+					widget: widget
+				});
 				if($tw.utils.isArray(results)) {
 					accumulator = self.makeTiddlerIterator(results);
 				} else {
