@@ -11,10 +11,12 @@ Command to save the content of a tiddler to a file
 
 exports.info = {
 	name: "savetiddler",
+	// tells commander that we're done once the execute function returns/resolves
+	// otherwise the third constructor parameter is a callback
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
+var Command = function(params,commander) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
@@ -24,11 +26,12 @@ Command.prototype.execute = async function() {
 	if(this.params.length < 2) {
 		return "Missing filename";
 	}
-	const self = this,
+
+	const 
 		path = require("path"),
 		title = this.params[0],
 		filepath = path.resolve(this.commander.outputPath,this.params[1]);
-		
+
 	return await this.savetiddler(title, filepath);
 
 };
