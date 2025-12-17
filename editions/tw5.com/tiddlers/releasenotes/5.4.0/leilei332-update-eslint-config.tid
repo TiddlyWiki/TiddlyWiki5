@@ -4,9 +4,11 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: developer
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9457
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9457 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9474
 github-contributors: Leilei332
 
 * Enforce tab indentation, semicolon
 * Switch off `max-classes-per-file`
+* Switch on `no-eval` rule and disable it in [[$:/boot/boot.js]] with one comment
 * Show warning for unused variables
+* Disable `@stylistic/indent` rule in [[$:/boot/boot.js]] and [[$:/boot/bootprefix.js]]
