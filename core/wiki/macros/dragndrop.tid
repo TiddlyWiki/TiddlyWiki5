@@ -351,3 +351,26 @@ tags: $:/tags/Global
 </$let>
 </$tiddler>
 \end
+
+\procedure draggable-droppable-list(content:"",list:"",dropActions:"",class:"",dragStateTiddler:"$:/state/tiddlywiki/dragging",direction:"vertical",history:"",styleMarginTop:"0px",styleMarginBottom:"0px",stylePaddingLeft:"0px",stylePaddingRight:"0px",styleZIndex:"501",animationDuration:"175",animationCurve:"linear")
+<$list filter="[list<list>]" variable="tid">
+	<$transclude
+		$variable="make-draggable-droppable"
+		tiddler=<<tid>>
+		content=<<content>>
+		list=<<list>>
+		dropActions=<<dropActions>>
+		class=<<class>>
+		dragStateTiddler=<<dragStateTiddler>>
+		direction=<<direction>>
+		history=<<history>>
+		styleMarginTop=<<styleMarginTop>>
+		styleMarginBottom=<<styleMarginBottom>>
+		stylePaddingLeft=<<stylePaddingLeft>>
+		stylePaddingRight=<<stylePaddingRight>>
+		styleZIndex=<<styleZIndex>>
+		animationDuration=<<animationDuration>>
+		animationCurve=<<animationCurve>>
+	/>
+</$list>
+\end
