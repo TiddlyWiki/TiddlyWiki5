@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/parse-tree
+tags: $:/tags/EditPreview
+list-after: $:/core/ui/EditTemplate/body/preview/output
+caption: parse tree
+
+\define preview(mode)
+<$wikify name="preview-text" text={{!!text}} type={{!!type}} mode="$mode$" output="parsetree">
+<pre>
+<code>
+<$text text=<<preview-text>>/>
+</code>
+</pre>
+</$wikify>
+\end
+
+{{||$:/plugins/tiddlywiki/internals/EditTemplate/body/preview/shared}}

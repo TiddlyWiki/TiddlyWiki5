@@ -1,0 +1,44 @@
+created: 20131202081424080
+fr-title: La gestion des versions de TiddlyWiki
+modified: 20150603130355371
+tags: Releases
+title: TiddlyWiki5 Versioning
+type: text/vnd.tiddlywiki
+
+Chaque évolution publiée de TiddlyWiki5 est identifiée par un numéro conforme au standard décrit par la [[Gestion sémantique de Version 2.0.0|http://semver.org/lang/fr/]]
+
+! TiddlyWiki Version du noyau
+
+Conformément au standard<<:>>
+
+```
+Étant donné un numéro de version MAJOR.MINOR.PATCH. Incrémenter le :
+
+MAJOR, quand vos modifications rendent l'API incompatible,
+MINOR,  quand l'ajout des fonctionnalités respecte la compatibilité,
+PATCH, lorsque vos modifications compatibles corrigent des bogues.
+Pour les pré-versions et l'ajout de métadonnées, des extensions disponibles peuvent s'ajouter au numéro de version MAJOR.MINOR.PATCH.
+```
+
+!! Versions Alpha et Beta
+
+Quand TiddlyWiki5 était en version alpha, il utilisait l'extension de pre-version "alpha", par exemple<<:>>
+
+```
+5.0.1-alpha
+```
+
+Chaque nouvelle version alpha ou bêta impactera le `numéro de version PATCH`. 
+C'est une rupture par rapport au strict respect du standard car l'incrément des `PATCH` est supposé réservé aux modifications compatibles.
+
+//Noter que lors des versions précédant la ''5.0.1-alpha'', TiddlyWiki5 utilisait des n° de version formulés ainsi ''5.0.0-alpha.19''. Le changement fut effectué pour permettre au processus de mise à jour d'identifier l'évolution des plugins à partir de l'information donnée par le n° de version.//
+
+!! Versions intermédiaires
+
+En phase de développement, quand une nouvelle version est proposée, l'extension de `préversion` lui est ajoutée.
+
+! Version des Plugin
+
+Numéro de Version
+
+TiddlyWiki5 utilise le n° de version lié aux plugins pour déterminer quel est le plus récent au moment de la phase de mise à jour ou d'import. L'extension pre-release est ignoré quand les comparaisons sont effectuées.

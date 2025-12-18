@@ -1,0 +1,53 @@
+created: 20140403223413403
+modified: 20141008171634188
+tags: [[Release 5.0.9-beta]]
+title: Changes to filters in 5.0.9-beta
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+Cette version résoud un certain nombre d'incohérences dans la manière dont les filtres sont gérés. Ces changements impliquent que les filtres préexistants peuvent nécessiter des mises à jour — en particulier ceux qui s'exercent potentiellement sur des tiddlers manquants ou //shadow//.
+
+! Changements à ''is'' et ajout de ''all''
+
+La plupart des opérateurs de filtres agissent en réagençant tout ou partie des titres source. Ceux qui ajoutent de nouvelles entrées qui ne faisaient pas partie de la liste sur laquelle ils agissent sont nommés sélecteurs. Avant la version 5.0.9-beta, quelques nouveaux opérateurs de filtres étaient incohérents dans leur manière de filtrer la liste source ou d'y ajouter de nouvelles entrées. 
+
+Les changements spécifiques sont les suivants<<dp>>
+
+* L'opérateur [[is|FilterOperator: is]] se contente à présent de filtrer à partir de la liste de tiddlers déjà sélectionnée
+* Le nouvel opérateur [[all|FilterOperator: all]] agit comme //sélecteur// en remplaçant la liste en cours avec une combinaison de tidddlers issus des sources spécifiques suivantes<<dp>>
+
+** ''current'' pour le tiddler courant
+** ''missing'' pour tous les tiddlers manquants
+** ''orphans'' pour tous les tiddlers orphelins
+** ''shadows'' pour tous les tiddlers shadow
+** ''tiddlers'' pour tous les tidders non-//shadow// (comprenant à la fois les tiddlers système et non système)
+
+Les sources de l'opérateur ''all'' peuvent être combinées à l'aide du caractère `+`. Par exemple, `[all[shadows+tiddlers]]` renvoie tous les tidders //shadow// ainsi que tous les tiddlers ordinaires.
+
+Précédemment, il n'était pas rare d'avoir `[is[shadow]]` au début d'une chaîne de filtre pour sélectionner tous les tidders //shadow//. À partir de 5.0.9, au lieu de renvoyer tous les tiddlers //shadow//, cela renverra seulement les tiddlers ordinaires qui s'avèrent être ''aussi'' un tiddler //shadow// (par la grâce d'en avoir écrasé un). La solution consiste à utiliser le nouvel opérateur ''all''. Par exemple, si l'on considère ce filtre tiré de 5.0.8<<dp>>
+
+```
+[is[shadow]!has[draft.of]tag[$:/tags/AdvancedSearch]] [!is[shadow]!has[draft.of]tag[$:/tags/AdvancedSearch]] +[tag[$:/tags/AdvancedSearch]]
+```
+
+Avec 5.0.9, ce filtre a été changé en<<dp>>
+
+```
+[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch]!has[draft.of]]
+```
+On remarque comment l'opérateur ''all'' permet d'effectuer des opérations sur des tiddlers à partir de combinaisons de sources.
+
+!! Changements pour `[is[current]]`
+
+Une conséquence de ces changements est que `[is[current]]` est à présent un pur filtre sur les tiddlers source<<pv>> du coup, si le tiddler courant est un tiddler manquant qui ne se trouve pas dans la liste source, `[is[current]]` renverra une liste vide.
+
+Généralement, la solution consiste plutôt à utiliser `[all[current]]`. Ce n'est pas aussi naturel à lire, mais ça a le comportement attendu de retourner systématiquement le tiddler courant, qu'il se trouve ou non parmi les tiddlers sources.
+
+! Changements concernant ''title'' et ''field''
+
+Il y a des changements mineurs sur la façon dont fonctionnent les opérateurs [[title|FilterOperator: title]] et [[field|FilterOperator: field]].
+
+L'opérateur ''title'' est un //sélecteur//<<dp>> il renvoie le titre spécifié, qu'il se trouve ou non dans la source courante. ''title'' est utilisé comme opérateur par défaut si aucun opérateur n'est spécifié.
+
+L'opérateur ''field'' est un filtre<<dp>> il se contente de retourner un sous-ensemble des tiddlers source. ''field'' est utilisé comme opérateur par défaut si l'opérateur fourni n'est pas défini (l'opérateur fourni est alors passé comme suffixe de l'opérateur ''field'', de sorte que `[description[Missing]]` est équivalent à `[field:description[Missing]]`).

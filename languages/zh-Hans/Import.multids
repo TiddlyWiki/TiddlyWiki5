@@ -1,0 +1,34 @@
+title: $:/language/Import/
+
+Editor/Import/Heading: 导入图像并将其插入至编辑器。
+Imported/Hint:  下列条目已被导入：
+Listing/Cancel/Caption: 取消
+Listing/Cancel/Warning: 您要取消导入吗？
+Listing/Hint: 这些条目已备妥导入：
+Listing/Import/Caption: 导入
+Listing/Select/Caption: 选择
+Listing/Status/Caption: 状态
+Listing/Title/Caption: 条目
+Listing/Preview: 预览：
+Listing/Preview/Text: 文本
+Listing/Preview/TextRaw: 文本 (原始)
+Listing/Preview/Fields: 字段
+Listing/Preview/Diff: 差异
+Listing/Preview/DiffFields: 差异 (字段)
+Listing/Rename/Prompt: 重新命名为：
+Listing/Rename/Tooltip: 导入前重新命名条目
+Listing/Rename/ConfirmRename: 重新命名条目
+Listing/Rename/CancelRename: 取消
+Listing/Rename/OverwriteWarning: 具有此标题的条目已存在。
+Upgrader/Plugins/Suppressed/Incompatible: 封锁的不兼容或过时插件。
+Upgrader/Plugins/Suppressed/Version: 封锁的插件 (由于传入的 <<incoming>> 不比现有版本 <<existing>> 新)。
+Upgrader/Plugins/Upgraded: 升级插件，从 <<incoming>> 到 <<upgraded>>。
+Upgrader/State/Suppressed: 封锁的暂存状态条目。
+Upgrader/System/Disabled: 已禁用系統条目。
+Upgrader/System/Suppressed: 封锁的系统条目。
+Upgrader/System/Warning: 核心模块条目。
+Upgrader/System/Alert: 您即将导入一个条目会覆盖一个核心模块条目。不建议这样做，因为可能会使系统不稳定。
+Upgrader/ThemeTweaks/Created: 从 <$text text=<<from>>/> 迁移布局主题。
+Upgrader/Tiddler/Disabled: 已禁用系統条目。
+Upgrader/Tiddler/Selected: 选定的条目。
+Upgrader/Tiddler/Unselected: 未选定的条目。

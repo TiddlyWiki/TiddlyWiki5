@@ -1,0 +1,11 @@
+caption: Notificación 
+component: Demo alerta
+created: 20160428150254657
+es-title: Alerta de ejemplo
+modified: 20160429054033333
+title: SampleAlert
+type: text/vnd.tiddlywiki
+
+Esta es una alerta de demostración. 
+
+Pinchando en el icono del cubo de basura se borra el tiddler que la contiene. Otra forma de librarse de ella es editar el tiddler [[Alerta de demostración|SampleAlert]] y quitarle la etiqueta.

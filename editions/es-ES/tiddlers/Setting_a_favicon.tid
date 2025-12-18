@@ -1,0 +1,19 @@
+caption: Favicons en ~TiddlyWiki
+created: 20131224074240979
+es-title: Definir un favicon
+modified: 20160427054526689
+tags: [[Customise TiddlyWiki]]
+title: Setting a favicon
+type: text/vnd.tiddlywiki
+
+El <<.word favicon>> es un pequeño icono que la mayoría de navegadores incorporan a la ventana para ayudar al usuario a identificar páginas. 
+
+! favicons en el navegador
+
+Cuando ~TiddlyWiki arranca en el navegador, busca un tiddler llamado <<.tid $:/favicon.ico>> y lo usa dinámicamente como favicon de la página. Si modificas la imagen, el favicon cambiará al instante.
+
+! favicons en el servidor
+
+Trabajando en la versión servidor de ~TiddlyWiki, es el comando ServerCommand quien facilita el contenido del tiddler [[$:/favicon.ico]] a la ruta `/favicon.ico`.
+
+

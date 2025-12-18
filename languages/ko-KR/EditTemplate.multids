@@ -1,0 +1,26 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: 주요 티들리위키 파일의 바깥에 저장된 바깥 티들러입니다. 태그와 필드를 편집할 수는 있지만 직접 내용 자체를 편집할 수는 없습니다
+Body/Placeholder: 이 티들러에 대한 텍스트를 입력하세요
+Body/Preview/Type/Output: 출력
+Field/Remove/Caption: 필드 제거
+Field/Remove/Hint: 필드를 제거합니다
+Fields/Add/Button: 추가
+Fields/Add/Dropdown/System: 시스템 필드
+Fields/Add/Dropdown/User: 사용자 필드
+Fields/Add/Name/Placeholder: 필드 이름
+Fields/Add/Prompt: 새 필드 추가:
+Fields/Add/Value/Placeholder: 필드 값
+Shadow/OverriddenWarning: 이것은 수정된 섀도우 티들러입니다. 이 티들러를 삭제하여 <<pluginLink>> 플러그인의 기본 판으로 되돌릴 수 있습니다
+Shadow/Warning: 이것은 섀도우 티들러입니다. 어떠한 바뀜도 <<pluginLink>> 플러그인에서의 기본 판을 덮어쓰게 됩니다
+Tags/Add/Button: 추가
+Tags/Add/Placeholder: 태그 이름
+Tags/Dropdown/Caption: 태그 목록
+Tags/Dropdown/Hint: 태그 목록을 보여줍니다
+Title/BadCharacterWarning: 경고: 티들러 제목에 문자 <<bad-chars>> 의 사용은 피하십시오
+Type/Delete/Caption: 내용 형식 삭제
+Type/Delete/Hint: 내용 형식을 삭제합니다
+Type/Dropdown/Caption: 내용 형식 목록
+Type/Dropdown/Hint: 내용 형식 목록을 보여줍니다
+Type/Placeholder: 내용 형식
+Type/Prompt: 형식:

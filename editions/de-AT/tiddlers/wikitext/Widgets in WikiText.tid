@@ -1,0 +1,32 @@
+caption: Widgets
+created: 20131205160840915
+creator: pmario
+modified: 20140921170719673
+modifier: pmario
+tags: WikiText
+title: Widgets in WikiText
+type: text/vnd.tiddlywiki
+
+Widgets sind die Grundbausteine von ~TiddlyWiki. Sie haben ein sehr ähnliche Syntax wie [[HTML Elemente|HTML in WikiText]] aber ihre "Tag Namen" beginnen immer mit einem `$`. zB:
+
+```
+<$button message="tm-close-tiddler">Schließe mich!</$button>
+```
+
+<$button message="tm-close-tiddler">Schließe mich!</$button> .. Wird diesen Tiddler schließen :)
+
+Widgets erben alle Funktionalitäten von [[HTML in WikiText]]:
+
+* Widget Attribute können spezifiziert werden als:
+** Zeichenkette ohne Anführungszeichen. Attribute können dann keine Leerzeichen enthalten. 
+** Zeichenkette mit einfachen oder doppelten Anführungszeichen. Leerzeichen sind möglich.
+** Zeichenkette mit 3 x doppelten Anführungszeichen. Leerzeichen und 1 doppeltes Anführungszeichen sind möglich.
+** Makro Aufruf zB: `attr=<<meinMakro>>`
+** Transklusionen zB: `attr={{MeinTiddler!!feld}}` 
+* Der Inhalt eines Widgets wird im "Inline Modus" verarbeitet, außer dem EröffnungsTag folgen 2 Zeilenumbrüche, welches den "Block Modus" erzwingt.
+** "Inline Modus" .. ist für Zeichen Formatierungen wie `''fett''` und `//kursiv//` zuständig.
+** "Block Modus" .. ist für Block Elemente wie: `! Überschriften` und `* Listen` zuständig.
+
+Siehe auch: [[HTML in WikiText]] für mehr Informationen.
+
+Alle möglichen Widgets werden auf der TiddlyWiki Seite aufgelistet: [ext[https://tiddlywiki.com/#Widgets in WikiText]]

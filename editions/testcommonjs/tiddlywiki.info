@@ -1,0 +1,9 @@
+{
+	"description": "TiddlyWiki Common-JS tests",
+	"plugins": [
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	]
+}

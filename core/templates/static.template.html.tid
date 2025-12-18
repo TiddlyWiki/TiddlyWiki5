@@ -1,0 +1,34 @@
+title: $:/core/templates/static.template.html
+type: text/vnd.tiddlywiki-html
+
+\define tv-config-static() yes
+\define tv-wikilink-template() static/$uri_doubleencoded$.html
+\define tv-config-toolbar-icons() no
+\define tv-config-toolbar-text() no
+\define tv-config-toolbar-class() tc-btn-invisible
+\rules only filteredtranscludeinline transcludeinline
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="generator" content="TiddlyWiki" />
+<meta name="tiddlywiki-version" content="{{$:/core/templates/version}}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="format-detection" content="telephone=no">
+<link id="faviconLink" rel="shortcut icon" href="favicon.ico">
+<title>{{$:/core/wiki/title}}</title>
+<div id="styleArea">
+{{$:/boot/boot.css||$:/core/templates/css-tiddler}}
+</div>
+<style type="text/css">
+{{$:/core/ui/PageStylesheet||$:/core/templates/wikified-tiddler}}
+</style>
+</head>
+<body class="tc-body">
+{{$:/StaticBanner||$:/core/templates/html-tiddler}}
+{{$:/core/ui/PageTemplate||$:/core/templates/html-tiddler}}
+</body>
+</html>

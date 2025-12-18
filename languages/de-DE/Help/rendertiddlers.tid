@@ -1,0 +1,23 @@
+title: $:/language/Help/rendertiddlers
+description: Gefilterte Ausgabe von Tiddlern, in einem spezifizierten Format.
+
+''WICHTIG:''
+
+* Der `--rendertiddlers` Befehl wird ab V5.1.15 durch `--render` ersetzt.
+* `--rendertiddlers` wird auslaufen und sollte daher nicht mehr verwendet werden!
+
+Gefilterte Ausgabe mehrerer Tiddler, in ein angegebenes Dateiformat (standard: `text/html`) mit spezifischer Erweiterung (Standard: `.html`).
+
+```
+--rendertiddlers '<filter>' <template> <pathname> [<type>] [<extension>] ["noclean"]
+```
+
+Beispiel:
+
+```
+--rendertiddlers '[!is[system]]' $:/core/templates/static.tiddler.html ./static text/plain
+```
+
+Standardmäßig ist das `output` Verzeichnis ein Unterverzeichnis im `edition` Verzeichnis. Der `--output` Befehl kann verwendet werden, um ein anderes Verzeichnis auszuwählen.
+
+Nicht vorhandene Verzeichnisse werden automatisch erstellt und enthaltene Dateien werden gelöscht. Mit dem "noclean" Parameter, kann das löschen vorhandener Dateien unterdrückt werden.

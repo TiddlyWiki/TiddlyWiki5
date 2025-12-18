@@ -1,0 +1,26 @@
+created: 20140324223413403
+modified: 20150505063713581
+tags: Learning
+title: Making curved text with SVG
+type: text/vnd.tiddlywiki
+
+\define textOnPath(text)
+$$$.svg
+<svg width="100%" height="100%" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background:white;">
+<defs>
+<path id="MyPath" d="M 100 200 C 200 100 300   0 400 100 C 500 200 600 300 700 200 C 800 100 900 100 900 100"/>
+</defs>
+<use xlink:href="#MyPath" fill="none" stroke="#ddd"/>
+<text font-family="'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif" font-size="42.5">
+<textPath xlink:href="#MyPath">
+$text$
+</textPath>
+</text>
+</svg>
+$$$
+\end
+This demo shows how to use SVG to render transcluded text along a path. Enter some text in the textbox below to try it out; [[view the source|Making curved text with SVG]] to see how it is done.
+
+<$edit-text tiddler="$:/CurvedText" tag="input" placeholder="Type text here" default=""/>
+
+<$macrocall $name="textOnPath" text={{$:/CurvedText}}/>

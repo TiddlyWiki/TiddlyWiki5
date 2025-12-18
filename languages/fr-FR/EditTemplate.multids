@@ -1,0 +1,38 @@
+title: $:/language/EditTemplate/
+
+Caption: Éditeur
+Body/External/Hint: Ce tiddler affiche du contenu situé en dehors du fichier TiddlyWiki principal. Vous pouvez éditer les tags et les champs mais pas directement le contenu lui-même
+Body/Placeholder: Entrez le texte ici
+Body/Preview/Type/Output: sortie
+Body/Preview/Type/DiffShadow: différences avec le tiddler shadow (s'il existe)
+Body/Preview/Type/DiffCurrent: différences avec le tiddler courant
+Field/Remove/Caption: supprimer le champ
+Field/Remove/Hint: Supprime le champ
+Field/Dropdown/Caption: liste des champs
+Field/Dropdown/Hint: Montre la liste des champs
+Fields/Add/Button: ajouter
+Fields/Add/Button/Hint: Ajoute le nouveau champ au tiddler
+Fields/Add/Name/Placeholder: nom du champ
+Fields/Add/Prompt: Ajouter un nouveau champ :
+Fields/Add/Value/Placeholder: valeur du champ
+Fields/Add/Dropdown/System: Champs système
+Fields/Add/Dropdown/User: Champs utilisateur
+Shadow/OverriddenWarning: Ce tiddler est une version modifiée d'un tiddler « shadow ». Pour revenir à la version par défaut du plugin <<pluginLink>>, il vous suffit de supprimer ce tiddler.
+Shadow/Warning: Ceci est un tiddler « shadow ». Toute modification supplantera la version issue du plugin <<pluginLink>>
+Tags/Add/Button: ajouter
+Tags/Add/Button/Hint: ajoute un tag
+Tags/Add/Placeholder: nom du tag
+Tags/ClearInput/Caption: supprime l'entrée
+Tags/ClearInput/Hint: Supprime le tag entré
+Tags/Dropdown/Caption: liste des tags
+Tags/Dropdown/Hint: Montre la liste des tags
+Title/BadCharacterWarning: Attention : il est préférable d'éviter l'usage des caractères <<bad-chars>> dans les titres des tiddlers
+Title/Exists/Prompt: Le tiddler cible existe déjà
+Title/Relink/Prompt: Changer ''<$text text=<<fromTitle>>/>'' en ''<$text text=<<toTitle>>/>'' dans les //tags// et les champs //list// des autres tiddlers
+Title/References/Prompt: Les références suivantes à ce tiddler ne seront pas mises à jour automatiquement :
+Type/Dropdown/Caption: liste des types de contenu
+Type/Dropdown/Hint: Montre la liste des types de contenu
+Type/Delete/Caption: supprimer le type de contenu
+Type/Delete/Hint: Supprime le type de contenu
+Type/Placeholder: type du contenu
+Type/Prompt: Type :

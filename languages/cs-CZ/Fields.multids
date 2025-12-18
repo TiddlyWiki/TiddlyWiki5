@@ -1,0 +1,34 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: Kompletní URI exerního obrázkového tiddleru
+bag: The name of the bag from which a tiddler came
+caption: Text zobrazený záložce nebo tlačítku
+color: CSS barva tiddleru
+component: Název komponenty zodpovědné za [[alert tiddler|AlertMechanism]]
+created: Datum vytvoření tiddleru
+creator: Jméno tvůrce riddleru
+current-tiddler: Použito pro uložení tiddleru do cache v [[history list|HistoryMechanism]]
+dependents: Pro plugin, seznam závislých pluginů
+description: Popis pluginu nebo dialogu
+draft.of: Pro rozepsané tiddlery, obsahuje titulek s popisem, že se jedná o rozepsané tiddlery
+draft.title: Pro rozepsané tiddlery, obsahuje návrhy názvů pro nový tiddler
+footer: Patička
+icon: Název tiddleru obsahujícím ikonu
+library: Je-li nastaveno na "ano", pak se tiddler bude ukládán jako JavaScriptový soubor
+list: Seřazený seznam názvu tiddleru
+list-after: If set, the title of the tiddler after which this tiddler should be added to the ordered list of tiddler titles
+list-before: If set, the title of a tiddler before which this tiddler should be added to the ordered list of tiddler titles, or at the start of the list if this field is present but empty
+modified: Datum a čas poslední úpravy tiddleru
+modifier: Jméno člověka, který naposledy upravoval tiddler
+name: Název pluginu
+plugin-priority: Priorita pluginu
+plugin-type: Druh pluginu
+released: Datum vydání TiddlyWiki
+revision: Verze tiddleru
+source: Zdrojová URL tiddleru
+subtitle: Podtitulek
+tags: Seznam štítků tiddleru
+text: Text tiddleru
+title: Unikátní název tiddleru
+type: Typ obsahu tiddleru
+version: Verze pluginu

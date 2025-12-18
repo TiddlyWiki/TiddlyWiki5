@@ -1,0 +1,14 @@
+created: 20180113144350185
+modified: 20180113153832195
+tags: Concepts
+title: SystemTiddlers
+type: text/vnd.tiddlywiki
+
+Tiddlers are classified as system tiddlers if their title starts with the special string `$:/`. The only difference from ordinary tiddlers is that they are hidden from most searches and lists in the sidebar. (In particular, system tiddlers are shown in the "More/System" list).
+
+System tiddlers provide a simple way to hide the internal components of TiddlyWiki so that they don't clutter things up, getting in the way of the users content.
+
+Many of the system tiddlers follow the convention of using further slashes to delineate the components of the title. For example: `$:/config/BitmapEditor/LineWidth`.
+
+You don't need to create your own system tiddlers, but it can be useful when customising TiddlyWiki. For example, if you create a custom palette you might call it `$:/_MyPalette` so that (a) it is hidden from searches/lists and (b) it will appear at the top of the system tiddler list for easy reference.
+

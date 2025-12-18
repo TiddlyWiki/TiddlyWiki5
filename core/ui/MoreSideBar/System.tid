@@ -1,0 +1,5 @@
+title: $:/core/ui/MoreSideBar/System
+tags: $:/tags/MoreSideBar
+caption: {{$:/language/SideBar/System/Caption}}
+
+<$list filter={{$:/core/Filters/SystemTiddlers!!filter}} template="$:/core/ui/ListItemTemplate"/>

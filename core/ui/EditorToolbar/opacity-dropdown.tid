@@ -1,0 +1,54 @@
+title: $:/core/ui/EditorToolbar/opacity-dropdown
+
+\define lingo-base() $:/language/Buttons/Opacity/
+
+\define toolbar-opacity-inner()
+<$button tag="a" tooltip="""$(opacity)$""">
+
+<$action-setfield
+	$tiddler="$:/config/BitmapEditor/Opacity"
+	$value="$(opacity)$"
+/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+<div style="display: inline-block; vertical-align: middle; background-color: $(current-paint-colour)$; opacity: $(opacity)$; width: 1em; height: 1em; border-radius: 50%;"/>
+
+<span style="margin-left: 8px;">
+
+<$text text="""$(opacity)$"""/>
+
+<$reveal state="$:/config/BitmapEditor/Opacity" type="match" text="""$(opacity)$""" tag="span">
+
+<$entity entity="&nbsp;"/>
+
+<$entity entity="&#x2713;"/>
+
+</$reveal>
+
+</span>
+
+</$button>
+\end
+
+\define toolbar-opacity()
+''<<lingo Hint>>''
+
+<$list filter={{$:/config/BitmapEditor/Opacities}} variable="opacity">
+
+<<toolbar-opacity-inner>>
+
+</$list>
+\end
+
+<$set name="current-paint-colour" value={{$:/config/BitmapEditor/Colour}}>
+
+<$set name="current-opacity" value={{$:/config/BitmapEditor/Opacity}}>
+
+<<toolbar-opacity>>
+
+</$set>
+
+</$set>

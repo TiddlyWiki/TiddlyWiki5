@@ -1,0 +1,37 @@
+caption: insertbefore
+created: 20170406090122441
+modified: 20220223004441865
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input tiddler list with the new entry inserted
+op-parameter: <<.from-version "5.2.2">> the <<.op insertbefore>> operator accepts 1 or 2 parameters, see below for details
+op-purpose: insert an item <<.place T>> into a list immediately before an item <<.place B>>
+op-suffix: <<.from-version "5.2.3">> (optional) the name of a variable containing the title of the tiddler before which this one should be inserted
+tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
+title: insertbefore Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.2">>
+
+The <<.op insertbefore>> operator requires at least one parameter which specifies the title to insert into the input list. A second parameter can be used to specify the title before which the new title should be inserted.
+
+<<.from-version "5.2.3">>
+
+Using the suffix to specify <<.place B>>, the title before which the new title should be inserted, is deprecated. Instead, the two-parameter form is recommended. If the two-parameter form is used, the suffixes ''start'' and ''end'' can be used to specify where the item should be inserted if <<.place B>> is not found.
+
+```
+insertbefore:<before-title-variable>[<title>]
+insertbefore:<missing-location>[<title>],[<before-title>]
+```
+
+* ''title'' : a title <<.place T>> to insert in the input list.
+* ''before-title'' : (optional). Insert <<.place T>> before this title <<.place B>> in the input list.
+* ''before-title-variable'' : (optional). The name of a variable specifying <<.place B>> instead of the `before-title` parameter.
+* ''missing-location'' : (optional). Either `start` or `end`: where to insert <<.place T>> if <<.place B>> is not found in the list.
+
+If the item <<.place B>> isn't present in the input list then the new item is inserted at the end of the list. <<.from-version "5.2.3">> The suffixes ''start'' and ''end'' can be spedified to control where the new item is inserted when <<.place B>> is not found. The suffix ''end'' is the default, inserting the new item at the end of the list. The suffix ''start'' will cause the new item to be inserted at the start of the list when <<.place B>> is not found.
+
+<<.tip "Either [[parameter|Filter Parameter]] can be a string, a text reference or a variable">>
+
+<<.tip "If <<.place B>> is specified as both a suffix and a parameter, the parameter takes precedence">>
+
+<<.operator-examples "insertbefore">>

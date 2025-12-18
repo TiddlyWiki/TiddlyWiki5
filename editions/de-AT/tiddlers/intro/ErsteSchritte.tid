@@ -1,0 +1,22 @@
+created: 20140908135232028
+creator: pmario
+modified: 20150513161730602
+modifier: pmario
+tags: Intro Einführung
+title: ErsteSchritte
+type: text/vnd.tiddlywiki
+
+\define default-platform()
+ErsteSchritte - $(browser-name)$
+\end
+<$set name="browser-name" value={{$:/info/browser/name}}>
+<$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[ErsteSchritte - ]]" default=<<default-platform>> class="tc-vertical"/>
+</$set>
+
+!!! Weitere Links:
+
+* [[Liste aller HowTo's]]: Diese Liste ist vor allem dann wichtig, wenn Sie über "statische" Seiten hier her kommen. 
+* [[Speichern mit Verschlüsselung]]: ~TiddlyWiki kann verschlüsselt gespeichert werden. Wichtig: Vergessen Sie das Passwort nicht!
+* [[Speichern auf TiddlySpot]]: TiddlySpot ist ein freier Service, mit dem Sie Ihr Wiki online stellen können.
+* [[TiddlyWiki und TiddlyDesktop]]: TiddlyDesktop ist eine "echte" Applikation mit der Sie mehrere Wikis verwalten und speichern können. 
+* Running [[TiddlyWiki on NW.js]], turning a single TiddlyWiki into a native application on your desktop

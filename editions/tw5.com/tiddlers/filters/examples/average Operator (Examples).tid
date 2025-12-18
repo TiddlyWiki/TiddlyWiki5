@@ -1,0 +1,10 @@
+created: 20210426130837644
+modified: 20210426131553546
+tags: [[Operator Examples]] [[average Operator]]
+title: average Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "=1 =3 =4 =5 +[average[]]">>
+
+Note that if there is no input the operator returns `NaN`
+<<.operator-example 2 "[tag[NotATiddler]get[price]] +[average[]]">>

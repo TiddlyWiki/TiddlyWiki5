@@ -1,0 +1,11 @@
+created: 201712032331
+modified: 201712032331
+tags: [[Hidden Settings]]
+title: Hidden Setting: Tags Minimum Length
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.16">> Tag Dropdown: Controls the minimum length of an input string before results are displayed.
+
+Defaults to "0".
+
+$:/config/Tags/MinLength

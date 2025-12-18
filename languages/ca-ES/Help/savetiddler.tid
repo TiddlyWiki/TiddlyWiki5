@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddler
+description: Desa un tiddler com a text cru a un fitxer
+
+Desa un tiddler individual com a text cru o en format binari al fitxer indicat.
+
+```
+--savetiddler <títol> <fitxer>
+```
+
+Per omisió, el nom del fitxer es resoldrà de forma relativa a la carpeta `output` de la carpeta d'edició. L'ordre `--output` es pot fer servir per dirigir la sortida a una altre carpeta.
+
+Les carpetes de la ruta del fitxer que no es trobin es crearan de forma automàtica.

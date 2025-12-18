@@ -1,0 +1,26 @@
+created: 20190202034841184
+modified: 20221029201023638
+tags: 
+title: Widget refresh tutorial part III
+type: text/vnd.tiddlywiki
+
+This tutorial is intended to demonstrate a few examples of when calls to the `refresh` method happen vs. when a widget is recreated from scratch.
+
+This is accomplished with a [[refreshcount.js]] widget which sets a counter to zero when the widget is created and increments the counter every time the `refresh` method is called. Here is the full code:
+
+{{refreshcount.js}}
+
+These are the key parts of the code from above:
+
+```javascript
+this.refreshCount = 0;
+this.document.createTextNode(this.refreshCount + " refreshes");
+this.refreshCount++;
+```
+
+In the following example (see [[Widget refresh demo III]] for the code), two instances of the `refreshcount` widget are created. One at the top level and the other inside a list widget whose filter results depend on the value in the `text` field of the `test` widget. The tiddler store can be modified in a few ways via two buttons and an input box:
+{{Widget refresh demo III}}
+
+* ''Modify a different tiddler'' - every time this button is clicked, both counters increment, indicating the `refresh` method is being called
+* ''Modify this tiddler'' - clicking this button modifies the tiddler itself. In earlier ~TiddlyWiki versions that caused both widgets to be recreated from scratch and the counters are thereby reset to zero. Since [[version 5.2.0|https://tiddlywiki.com/#Release%205.2.0]] modifying another field in this tiddler does not cause the widgets to be recreated and the counters are not reset.
+*  ''Text field of tiddler='test''' - typing text into the input box causes the counter in the standalone `refreshcount` widget to be incremented. But the other instance of the widget is embedded inside a list widget whose filter output depends on the value of the tiddler field which is being modified. This causes it to recreate its children from scratch and the counter is reset every time. So with every keystroke, the counter on the left is incremented, but the counter on the right goes to/stays at zero.

@@ -1,0 +1,29 @@
+caption: TiddlyDesktop
+created: 20140126125259638
+es-title: TiddlyDesktop
+modified: 20160422202937418
+tags: Definitions Saving Platforms
+title: TiddlyDesktop
+type: text/vnd.tiddlywiki
+
+~TiddlyDesktop es una aplicación de escritorio para trabajar con archivos de ~TiddlyWikii, tanto del veterano [[TiddlyWiki Classic|TiddlyWikiClassic]], como del nuevo TiddlyWiki5. Se puede instalar en ,Windows, Mac OS X o Linux. 
+
+Aquí hay un video de [[introducción a TiddlyDesktop|Introducing TiddlyDesktop Video]]
+
+! Instrucciones
+
+# Descarga la última versión de TiddlyDesktop de https://github.com/TiddlyWiki/TiddlyDesktop/releases
+
+# Ejecuta TiddlyDesktop
+
+# Usa el botón <<.def browse>> para abrir archivos de TiddlyWiki 
+
+# Guarda los cambios como habitualmente
+
+! Fuente
+
+~TiddlyDesktop se basa en [[NW.js]], proyecto [[de código abierto|OpenSource]] y la fuente se encuentra en GitHub:
+
+https://github.com/TiddlyWiki/TiddlyDesktop/
+
+Consulta las [[versiones de TiddlyDesktop|TiddlyDesktop Releases]]

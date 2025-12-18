@@ -1,0 +1,12 @@
+title: Customisation
+
+TiddlyWiki supports deep customisation to fit your particular needs. For example, you can choose which tiddler toolbar buttons you need:
+
+<div class="tc-view-toolbar-tools">
+
+{{$:/core/ui/TiddlerInfo/Tools}}
+
+</div>
+
+
+You can make TiddlyWiki your own through [[Customisation]].

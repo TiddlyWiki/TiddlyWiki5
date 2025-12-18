@@ -1,0 +1,19 @@
+created: 20150709150749755
+modified: 20160709112741259
+tags: Mechanisms
+title: SavingMechanism
+type: text/vnd.tiddlywiki
+
+The SavingMechanism is the mechanism by which TiddlyWiki generates a new HTML file and stores it. It is different from the sync mechanism, which is concerned with synchronising changes to individual tiddlers back to a server (see https://tiddlywiki.com/dev/#SyncAdaptorModules for more details).
+
+The following steps are involved:
+
+# The saver mechanism uses the filter defined in $:/config/SaverFilter to specify which modified tiddlers trigger the dirty state for the wiki. (The dirty state is reflected in the red colouring of the "save changes" button in the sidebar).
+# The ButtonWidget is used to generate a [[tm-save-wiki|WidgetMessage: tm-save-wiki]] message to trigger the save operation
+# The optional parameter for the message specifies the template that will be used for generating the HTML file, defaulting to $:/core/save/all
+#* The plugin $:/plugins/tiddlywiki/tiddlyweb in the client-server configuration replaces the default template with $:/plugins/tiddlywiki/tiddlyweb/save/offline
+# The template includes a variable assignment that specifies a filter to select the tiddlers that should be included in the saved file. It then transcludes the main page template `$:/core/templates/tiddlywiki5.html`
+#* The template includes a reference to `$(publishFilter)$` that allows the filter to be customised via a global variable
+# The [[tm-save-wiki|WidgetMessage: tm-save-wiki]] handler renders the template to generate the HTML file
+# The message handler chooses the highest priority "saver" module that can handle saving the file
+#* See https://tiddlywiki.com/dev/#Saver for more details

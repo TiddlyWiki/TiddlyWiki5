@@ -1,0 +1,21 @@
+title: $:/language/Help/slice
+description: Slice a hierarchical document into individual tiddlers
+
+Slices the specified tiddler
+
+```
+--slice <source-title> [<dest-title>] [<slicer-rules>] [<output-mode>]
+```
+
+* ''source-title'': Title of the tiddler to be sliced
+* ''dest-title'': Base title for the generated output tiddlers
+* ''slicer-rules'': Name of the slicer rules to use for the operation (see below)
+* ''output-mode'': "html" vs "wiki"
+
+The plugin comes with several built-in sets of slicer rules:
+
+* //html-by-paragraph//: Slice every paragraph into a separate tiddler, threaded by heading
+* //html-by-heading//: Slice every heading into separate threaded tiddlers
+* //html-plain-paragraphs//: Slice every paragraph into a separate tiddler, without formatting or headings
+
+Advanced users can create or edit their own slicer rules for precise control over the conversion process

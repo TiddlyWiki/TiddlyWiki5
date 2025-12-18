@@ -1,0 +1,35 @@
+caption: ~TiddlyServer
+color: #f06292
+community-author: Arlen Beiler
+created: 20171109171415540
+delivery: DIY
+description: Une extension du serveur Node.js de TiddlyWiki
+fr-title: TiddlyServer par Arlen Beiler
+method: sync
+modified: 20220402105820520
+tags: Linux Mac Windows Saving [[Other Resources]]
+title: TiddlyServer by Arlen Beiler
+type: text/vnd.tiddlywiki
+url: https://github.com/Arlen22/TiddlyServer
+
+Une extension à la configuration du serveur Node.js de <<tw>> qui ajoute la prise en charge des contenus statiques et permet de travailler avec de multiples wikis simultanément.
+
+{{!!url}}
+
+<<<
+TiddlyServer prend la commande `server` de <<tw>> sur Node.js, et l'ajoute à un serveur de fichiers statiques. Ça signifie que vous pouvez charger et héberger n'importe quel //dossier de données// <<tw>> de la même façon qu'un <<tw>> mono-fichier.
+
+Mais vous n'êtes pas limité à un seul emplacement pour vos fichiers et dossiers partagés, vous pouvez les partager depuis n'importe où sur votre disque (littéralement n'importe quel chemin sur lequel NodeJS peut lancer un //stat//, un //readdir// et un //readFile//). Vous pouvez même les organiser en dossiers virtuels (comme les //alias// d'Apache et les //mounts// d'Express).
+
+Évidemment, vous pouvez modifier vos fichiers, pas seulement les consulter<<!>> Les <<tw>> mono-fichier utilisent l'enregistreur PUT, qui a besoin d'être patché en utilisant un //bookmarlet// disponible sur la page d'accueil. Les instructions correspondantes sont disponibles juste sous le titre "One thing that needs to be noted".
+
+Et vous pouvez évidemment modifier vos <<tw>> multi-fichiers comme si vous exécutiez `node tiddlywiki.js data --server`, sauf que vous l'exécutez depuis le chemin où vous l'avez ouvert (p.ex. http://localhost/personal/notes/). Vous pouvez avoir autant de dossier de données ouverts que vous voulez, ils n'entrent pas en conflit entre eux (même si chacun consomme de la mémoire).
+
+Les dossiers de données stockent des tiddlers individuels, pas des wikis entiers. Ils occupent moins de place car ils ne contiennent ni le noyau ni les plugins. La conséquence est qu'ils s'enregistrent beaucoup plus rapidement, surtout à travers internet. Ils s'enregistrent aussi immédiatement (en 10s environ) et enregistrent aussi les brouillons.
+<<<
+
+!!! NDT
+; <<tw>> mono-fichier
+:Il s'agit d'un wiki contenu dans un seul fichier HTML, comme le fichier //empty.html// que vous pouvez télécharger [[ici|https://tiddlywiki.com/languages/fr-FR/empty.html]]. Vous utilisez le wiki en ouvrant le fichier avec un navigateur.
+; <<tw>> multi-fichiers
+:Lorsqu'un wiki est hébergé sur Node.js, chaque tiddler est stocké dans son propre fichier `.tid` et ces fichiers sont organisés dans un //dossier de données//. Pour utiliser le wiki il faut saisir l'URL correspondante dans le navigateur. Plus d'informations [[ici|TiddlyWiki on Node.js]].

@@ -1,0 +1,149 @@
+caption: select
+created: 20131024141900000
+modified: 20231113093304323
+tags: TriggeringWidgets Widgets
+title: SelectWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The select widget displays a popup menu based on a [[HTML select element|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select]]. The popup (or dropdown) contains a list of items defined by `<option>` and `<optgroup>` elements. 
+Every time the user selects a new value in the menu, the selected value is written to the text of a specified tiddler field or index and any ActionWidgets within the `actions` attribute are triggered. Conversely, if the tiddler value is changed independently the select widget is automatically updated to reflect the new value.
+
+In multiple selection mode, the list of selected values is bound to the specified tiddler field or index. Browsers generally use the <kbd>ctrl</kbd> or <kbd>cmd</kbd> keys for multiple selection.
+
+For example, this select widget displays a list of the tags in this wiki:
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler=<<qualify 'select-demo'>> default='HelloThere'>
+<$list filter='[all[shadows+tiddlers]tags[]sort[title]]'>
+<option value=<<currentTiddler>>><$view field='title'/></option>
+</$list>
+</$select>"/>
+
+The <$link to=<<qualify "select-demo">>>state tiddler</$link> currently contains:
+
+<$edit-text tiddler=<<qualify "select-demo">> tag="input" default=""/>
+
+See the text change as you switch entries in the select widget. Try changing the value of the state tiddler and see the select widget change. Notice how the select widget only displays an entry if there is a precise match with the tiddler text.
+
+! Content and Attributes
+
+The content of the `<$select>` widget should be one or more HTML `<option>` or `<optiongroup>` elements that provide the available values.
+
+|!Attribute |!Description |
+|tiddler |The title of the tiddler containing the value to be displayed/modified by the select widget (defaults to the current tiddler) |
+|field |The field name for the value in the current tiddler (defaults to "text") |
+|index |The index of a property in a [[DataTiddler|DataTiddlers]] (takes precedence over the field attribute) |
+|class |CSS classes to be assigned to the HTML select element |
+|tooltip |Optional tooltip |
+|default |Default value to be used if the tiddler, field or index specifies a missing value |
+|multiple |If present, switches to multiple selection mode |
+|size |The number of rows to display in multiple selection mode |
+|actions |A string containing ActionWidgets to be triggered when the key combination is detected |
+|focus |<<.from-version "5.2.4">> Optional. Set to "yes" to automatically focus the HTML select element after creation |
+|tabindex |<<.from-version "5.3.1">> Optional. Sets the `tabindex` attribute of the HTML select element to the given value |
+|disabled |<<.from-version "5.3.7">> Optional. Set to "yes" to disable select input. Defaults to "no". |
+|data-* |<<.from-version "5.3.2">> Optional [[data attributes|https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes]] to be assigned to the HTML element |
+|style.* |<<.from-version "5.3.2">> Optional [[CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference]] to be assigned to the HTML element |
+
+! Examples
+
+!! Simple Lists
+
+This example sets the title of the current wiki [[$:/SiteTitle]] to one of a list of book titles:
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle' tooltip='Choose a new site title'>
+<option>A Tale of Two Cities</option>
+<option>A New Kind of Science</option>
+<option>The Dice Man</option>
+</$select>"/>
+
+!!! Simple List with Placeholder Value
+
+To display a default value that is also disabled, effectively functioning as a placeholder, the following form can be used. Note that the targeted field must be empty, or not exist, for the placeholder to show in the widget:
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='New Tiddler' field='text' default='Choose a new text'>
+<option disabled>Choose a new text</option>
+<option>A Tale of Two Cities</option>
+<option>A New Kind of Science</option>
+<option>The Dice Man</option>
+</$select>"/>
+
+!! Value lists
+
+In this example the `value` attribute has been used to specify the text that should be used as the value of the entry instead of the display text.
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle'>
+<option value='cities'>A Tale of Two Cities</option>
+<option value='science'>A New Kind of Science</option>
+<option value='dice'>The Dice Man</option>
+</$select>"/>
+
+!! Option Groups
+
+Entries in the list can be grouped together with the `<optgroup>` element
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle'>
+<optgroup label='Fiction'>
+<option value='cities'>A Tale of Two Cities</option>
+<option value='dice'>The Dice Man</option>
+</optgroup>
+<optgroup label='Non-fiction'>
+<option value='science'>A New Kind of Science</option>
+<option value='recursive'>The Recursive Universe</option>
+</optgroup>
+</$select>"/>
+
+!! Generated Lists
+
+The ListWidget can be used to generate the options for a select widget. For example, here we combine a select widget listing all the tiddlers tagged ''TableOfContents'' with a transclusion to display the text of the selected one.
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-state'>
+<$list filter='[tag[TableOfContents]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select>
+<$tiddler tiddler={{$:/generated-list-demo-state}}>
+<$transclude mode='block'/>
+</$tiddler>"/>
+
+!! Nested Lists
+
+This example uses a nested pair of list widgets. The outer one generates the `<optgroup>` elements, and the inner one generates `<option>` elements:
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-nestedstate' field='type' default='text/vnd.tiddlywiki'>
+<$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]each[group]sort[group]]'>
+<optgroup label={{!!group}}>
+<$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]]'>
+<option value={{!!name}}><$view field='description'><$view field='title'/></$view> (<$view field='name'/>)</option>
+</$list>
+</optgroup>
+</$list>
+</$select>"/>
+
+!! Multiple Selections
+
+This example uses the `multiple` keyword to specify that we should be able to select multiple items.
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-state' field='testing' multiple size='8'>
+<$list filter='[tag[TableOfContents]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select><br />
+<$list filter='[list[$:/generated-list-demo-state!!testing]]'>
+<$view field='title' /><br />
+</$list>
+"/>
+
+!! Actions 
+
+This example uses the actions attribute to apply days of the week as tags to the current tiddler.
+
+<$macrocall $name="wikitext-example-without-html" src="""<$select tiddler='$:/generated-list-demo-state' field='actions-test' 
+actions='<$action-listops $field="myfield" $tags={{$:/generated-list-demo-state!!actions-test}}/>'
+>
+<$list filter='[list[Days of the Week]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select>
+"""/>

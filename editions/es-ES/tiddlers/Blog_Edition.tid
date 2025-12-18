@@ -1,0 +1,11 @@
+caption: Edición Blog
+created: 20150902123139133
+es-title: Edición Blog
+modified: 20160504051105282
+tags: Editions
+title: Blog Edition
+type: text/vnd.tiddlywiki
+
+Desarrollada para su uso en Node.js, la edición <<.word blog>> de ~TiddlyWiki contiene herramientas para la publicación de blogs estáticos en HTML.
+
+Mientras se prepara la documentación, puedes ver un ejemplo de su uso en http://jermolene.com/

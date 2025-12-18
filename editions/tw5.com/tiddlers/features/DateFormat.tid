@@ -1,0 +1,86 @@
+created: 20140418142957325
+modified: 20230226144359284
+tags: Features
+title: DateFormat
+type: text/vnd.tiddlywiki
+
+The default representation of dates is a compact string such as <<.value 20211002153802059>>. The associated template is `[UTC]YYYY0MM0DD0hh0mm0ss0XXX`. For example, the <<.field created>> and <<.field modified>> fields are stored like this.
+
+The display format for this string can be controlled with a template. For example, transcluding the <<.field modified>> field automatically applies a template to display the date as <<.value "Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)">>. A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
+
+`<$view field=modified format=date template="DDth mmm YYYY 0hh:0mm:0ss" />`
+
+The date string is processed with the following substitutions:
+
+|!Token |!Substituted Value |
+|`ddddd` |<<.from-version "5.2.0">> Day of year (1 to 365, or 366 for leap years) |
+|`0ddddd` |<<.from-version "5.2.0">> Zero padded day of year (001 to 365, or 366 for leap years) |
+|`DDD` |Day of week in full (eg, "Monday") |
+|`ddd` |Short day of week (eg, "Mon") |
+|`dddd` |<<.from-version "5.2.0">> Weekday number from 1 through 7, beginning with Monday and ending with Sunday |
+|`DD` |Day of month |
+|`0DD` |Adds a leading zero |
+|`DDth` |Adds a suffix |
+|`WW` |ISO-8601 week number of year |
+|`0WW` |Adds a leading zero |
+|`MMM` |Month in full (eg, "July") |
+|`mmm` |Short month (eg, "Jul") |
+|`MM` |Month number |
+|`0MM` |Adds leading zero |
+|`YYYY` |Full year |
+|`YY` |Two digit year |
+|`wYYYY` |Full year with respect to week number |
+|`aYYYY` |<<.from-version "5.1.23">> Full year but negative dates are displayed as positive |
+|`wYY` |Two digit year with respect to week number |
+|`{era:BCE||CE}` |<<.from-version "5.1.23">> Displays a different string for years that are negative, zero or positive (see below) |
+|`hh` |Hours |
+|`0hh` |Adds a leading zero |
+|`hh12` |Hours in 12 hour clock |
+|`0hh12` |Hours in 12 hour clock with leading zero |
+|`mm` |Minutes |
+|`0mm` |Minutes with leading zero |
+|`ss` |Seconds |
+|`0ss` |Seconds with leading zero |
+|`XXX` |Milliseconds |
+|`0XXX` |Milliseconds with leading zero |
+|`am` or `pm` |Lower case AM/PM indicator |
+|`AM` or `PM` |Upper case AM/PM indicator |
+|`TZD` |Timezone offset |
+|`TIMESTAMP` |<<.from-version "5.2.4">> Number of milliseconds since the [[ECMAScript epoch|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_ecmascript_epoch_and_timestamps]], 1 January 1970. |
+|`\x` |Used to escape a character that would otherwise have special meaning |
+|`[UTC]`|Time-shift the represented date to UTC. Must be at very start of format string|
+
+Note that other text is passed through unchanged, allowing commas, colons or other separators to be used.
+
+The `{era:BCE||CE}` notation can specify different strings for years that are negative, zero or positive. For example `{era:BC|Z|AD}` would display <<.value BC>> for negative years, <<.value AD>> for positive years, and <<.value Z>> for year zero.
+
+! Examples
+
+|!Template |!Output |
+|`DDth MMM YYYY` |16th February 2011 |
+|`DDth MMM \M\M\M YYYY` |16th February MMM 2011 |
+|`DDth mmm YYYY 0hh:0mm:0ss` |16th Feb 2011 11:38:42 |
+
+!! Using <<.value TIMESTAMP>> to calculate time difference
+
+You can calculate the difference between two dates by doing the following:
+
+# Convert both dates to timestamps
+# Subtract the later date from the earlier one -- if you don't know which one is earlier use the <<.olink "abs">> operator to get an absolute value after subtraction
+# Divide the resulting number by the number of milliseconds in your chosen interval
+
+Here is an example of calculating the number of days that passed between creation and last modification of current tiddler:
+
+* Convert the <<.field created>> and <<.field modified>> fields to timestamps
+* Divide their difference by <<.value 86400000>> which is the number of milliseconds in a day
+** 1000 milliseconds per second × 60 seconds per minute × 60 minutes per hour × 24 hours per day = 86,400,000 milliseconds per day
+
+<$macrocall $name=".example" n="0" eg="""<$let
+	timestamp-modified={{{ [{!!modified}format:date[TIMESTAMP]] }}}
+	timestamp-created={{{ [{!!created}format:date[TIMESTAMP]] }}}
+	difference-days={{{ [<timestamp-modified>subtract<timestamp-created>divide[86400000]floor[]] }}}>
+
+* ''Modified date:'' <$text text={{{ [{!!modified}format:date[YYYY-0MM-0DD]] }}}/>
+* ''Created date:'' <$text text={{{ [{!!created}format:date[YYYY-0MM-0DD]] }}}/>
+* ''Difference in days:'' <<difference-days>> days
+</$let>"""/>

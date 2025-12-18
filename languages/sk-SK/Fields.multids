@@ -1,0 +1,34 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: Plná URI adresa pre externý tiddler s obrázkom
+bag: Názov vrecka, z ktorého tiddler pochádza
+caption: Text, ktorý sa má zobraziť na záložke alebo tlačítku
+color: CSS hodnota farby spojená so tiddlerom
+component: Názov komponentu, zodpovedného za [[alert tiddler|AlertMechanism]]
+created: Dátum vzniku tiddlera
+creator: Meno autora tiddlera
+current-tiddler: Použitý na cache-ovanie vrchného tiddlera v [[history list|HistoryMechanism]]
+dependents: Pre plugin, zoznamy závisiacich názvov pluginov
+description: Popisný text pre plugin, alebo modálny dialóg
+draft.of: Pre pracovné tiddlery, obsahuje názov tiddlera, pre ktorý je to pracovný tiddler
+draft.title: Pre pracovné tiddlery, obsahuje navrhovaný nový názov pre tiddler
+footer: Text pre pätu stránky do wizardu
+icon: Názov tiddlera obsahujúceho icomu priradenú tiddlera
+library: Ak nastavené ako "yes" signalizuje, že tiddler by sa mal uložiť ako JavaScript knižnica
+list: Zotriedený zoznam názvov tiddlerov priradených tiddlera
+list-after: Ak nastavené, názov tiddlera, za ktorým treba tento tiddler pridať do zotriedeného zoznamu názvov tiddlerov
+list-before: Ak nastavené,  názov tiddlera, pred ktorým treba tento tiddler pridať do zotriedeného zoznamu názvov tiddlerov, alebo na začiatok zoznamu, ak toto pole existuje ale je prázdne
+modified: Dátum a čas poslednej zmeny v tiddlere
+modifier: Názov tiddlera spojený s autorom, ktorý ako posledný zmenil tiddler
+name: Zrozumiteľný názov priradený plugin tiddlera
+plugin-priority: Číselná hodnota označujúca prioritu pre plugin tiddler
+plugin-type: Typ plugin v plugin tiddlere
+released: Dátum verzie TiddlyWiki
+revision: Revízia tiddlera uloženého na serveri
+source: Zdrojová URL priradená tiddlera
+subtitle: Text pre pomocný názov wizarda
+tags: Zoznam štítkov priradených tiddlera
+text: Text pre obsah tiddlera
+title: Unikátny názov tiddlera
+type: Typ obsahu tiddlera
+version: Informácia o verzii pluginu

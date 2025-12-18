@@ -1,0 +1,11 @@
+created: 20151018123433917
+modified: 20151108052158811
+tags: [[Operator Examples]] [[sortby Operator]]
+title: sortby Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "10 6 4 9 3 2 8 +[sortby[1 2 3 4 5 6 7 8 9 10]]">>
+<<.operator-example 2 "Friday Tuesday Monday Thursday Sunday +[sortby{Days of the Week!!list}]">>
+<<.operator-example 3 "1 Mon 5 Fri 4 Tue Sun 2  +[sortby{Days of the Week!!short}]">>

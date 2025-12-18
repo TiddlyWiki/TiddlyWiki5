@@ -1,0 +1,14 @@
+title: What happened to the original TiddlyWiki?
+tags: HelloThere
+created: 201409040851
+modified: 201409040851
+
+<a class="tc-float-right tc-bordered-image" href="https://classic.tiddlywiki.com/" target="_blank" rel="noopener noreferrer">[img width="200" [TiddlyWiki Classic.png]]</a>
+
+The original [[Classic|TiddlyWikiClassic]] version of TiddlyWiki is still available at:
+
+https://classic.tiddlywiki.com.
+
+Note that the [[current version|TiddlyWiki5]] of TiddlyWiki is not fully backwards compatible with TiddlyWikiClassic. Content can be imported but will need massaging to adapt to the new WikiText format. A ''tw2parser'' plugin is under development that will allow faithful display of most content created for TiddlyWikiClassic:
+
+https://tiddlywiki.com/plugins/tiddlywiki/tw2parser/

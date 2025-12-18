@@ -1,0 +1,8 @@
+created: 20150118134611000
+modified: 20150123214616000
+tags: [[listed Operator]] [[Operator Examples]]
+title: listed Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[HelloThere]listed[]]">>
+<<.operator-example 2 "[all[current]listed[my-special-list]]">>

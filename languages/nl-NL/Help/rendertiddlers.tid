@@ -1,0 +1,18 @@
+title: $:/language/Help/rendertiddlers
+description: Render (toon) een reeks tiddlers die aan een filter voldoen tot separate tiddlers van een gegeven inhoudstype
+
+Render (toon) een reeks tiddlers die aan een filter voldoen tot separate tiddlers van een gegeven inhoudstype (standaard `text/html`) en extensie (standaard `.html`).
+
+```
+--rendertiddlers <filter> <template> <bestandspad> [<type>] [<extensie>]
+```
+
+B.v.:
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```
+
+Standaard is de padnaam relatief t.o.v. de `output` subfolder van de editiefolder. Het `--output` commando kan worden gebruikt om de output naar een andere folder te sturen.
+
+Alle bestanden in de doelfolder worden verwijderd. De doelfolder wordt recursief aangemaakt als hij ontbreekt.

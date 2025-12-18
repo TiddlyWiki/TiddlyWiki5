@@ -1,0 +1,9 @@
+created: 20190617162921280
+modified: 20190617162921280
+tags: [[untrunc Operator]] [[Operator Examples]]
+title: untrunc Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[1.6]untrunc[]]">>
+<<.operator-example 2 "[[-1.6]untrunc[]]">>
+<<.operator-example 3 "=-1.2 =-2.4 =3.6 =4.8 =5.1 +[untrunc[]]">>

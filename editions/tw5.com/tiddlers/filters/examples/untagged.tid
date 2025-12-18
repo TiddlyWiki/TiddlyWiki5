@@ -1,0 +1,9 @@
+created: 20150124142346000
+modified: 20150124142713000
+tags: [[untagged Operator]] [[Operator Examples]]
+title: untagged Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[untagged[]]">>
+<<.operator-example 2 "[all[shadows]untagged[]]">>
+<<.operator-example 3 "[list[HelloThere]!untagged[]]">>

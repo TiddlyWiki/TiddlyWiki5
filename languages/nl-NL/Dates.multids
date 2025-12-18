@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: 
+Date/DaySuffix/10: 
+Date/DaySuffix/11: 
+Date/DaySuffix/12: 
+Date/DaySuffix/13: 
+Date/DaySuffix/14: 
+Date/DaySuffix/15: 
+Date/DaySuffix/16: 
+Date/DaySuffix/17: 
+Date/DaySuffix/18: 
+Date/DaySuffix/19: 
+Date/DaySuffix/2: 
+Date/DaySuffix/20: 
+Date/DaySuffix/21: 
+Date/DaySuffix/22: 
+Date/DaySuffix/23: 
+Date/DaySuffix/24: 
+Date/DaySuffix/25: 
+Date/DaySuffix/26: 
+Date/DaySuffix/27: 
+Date/DaySuffix/28: 
+Date/DaySuffix/29: 
+Date/DaySuffix/3: 
+Date/DaySuffix/30: 
+Date/DaySuffix/31: 
+Date/DaySuffix/4: 
+Date/DaySuffix/5: 
+Date/DaySuffix/6: 
+Date/DaySuffix/7: 
+Date/DaySuffix/8: 
+Date/DaySuffix/9: 
+Date/Long/Day/0: zondag
+Date/Long/Day/1: maandag
+Date/Long/Day/2: dinsdag
+Date/Long/Day/3: woensdag
+Date/Long/Day/4: donderdag
+Date/Long/Day/5: vrijdag
+Date/Long/Day/6: zaterdag
+Date/Long/Month/1: januari
+Date/Long/Month/10: oktober
+Date/Long/Month/11: november
+Date/Long/Month/12: december
+Date/Long/Month/2: februari
+Date/Long/Month/3: maart
+Date/Long/Month/4: april
+Date/Long/Month/5: mei
+Date/Long/Month/6: juni
+Date/Long/Month/7: juli
+Date/Long/Month/8: augustus
+Date/Long/Month/9: september
+Date/Period/am: am
+Date/Period/pm: pm
+Date/Short/Day/0: zo
+Date/Short/Day/1: ma
+Date/Short/Day/2: di
+Date/Short/Day/3: wo
+Date/Short/Day/4: do
+Date/Short/Day/5: vr
+Date/Short/Day/6: za
+Date/Short/Month/1: jan
+Date/Short/Month/10: okt
+Date/Short/Month/11: nov
+Date/Short/Month/12: dec
+Date/Short/Month/2: feb
+Date/Short/Month/3: mrt
+Date/Short/Month/4: apr
+Date/Short/Month/5: mei
+Date/Short/Month/6: jun
+Date/Short/Month/7: jul
+Date/Short/Month/8: aug
+Date/Short/Month/9: sep
+RelativeDate/Future/Days: <<period>> dagen vanaf nu
+RelativeDate/Future/Hours: <<period>> uren vanaf nu
+RelativeDate/Future/Minutes: <<period>> minuten vanaf nu
+RelativeDate/Future/Months: <<period>> maanden vanaf nu
+RelativeDate/Future/Second: 1 seconde vanaf nu
+RelativeDate/Future/Seconds: <<period>> seconden vanaf nu
+RelativeDate/Future/Years: <<period>> jaren vanaf nu
+RelativeDate/Past/Days: <<period>> dagen geleden
+RelativeDate/Past/Hours: <<period>> uren geleden
+RelativeDate/Past/Minutes: <<period>> minuten geleden
+RelativeDate/Past/Months: <<period>> maanden geleden
+RelativeDate/Past/Second: 1 seconde geleden
+RelativeDate/Past/Seconds: <<period>> seconden geleden
+RelativeDate/Past/Years: <<period>> jaren geleden

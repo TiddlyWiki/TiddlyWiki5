@@ -1,0 +1,30 @@
+created: 20140206214608586
+modified: 20211009145417525
+tags: Features
+title: LazyLoading
+type: text/vnd.tiddlywiki
+
+Ordinarily with TiddlyWiki, the full content of all tiddlers is embedded into the main HTML file. Lazy loading refers to the technique of only embedding metadata about the tiddler (in other words all fields except the ''text'' field), and requesting the body from the server when required.
+
+Lazy loading can be used in two configurations:
+
+* When running [[TiddlyWiki on Node.js]], just image tiddlers or all non-system tiddlers can be subject to lazy loading
+* When running [[TiddlyWiki in the Sky for TiddlyWeb]], all tiddlers are subject to lazy loading
+
+See the [[Lazy Loading Mechanism|https://tiddlywiki.com/dev/#LazyLoadingMechanism]] for details of how lazy loading is implemented.
+
+! Lazy loading under Node.js
+
+To start TiddlyWiki with lazy loading for image tiddlers use this command:
+
+
+```
+tiddlywiki --listen root-tiddler=$:/core/save/lazy-images
+```
+
+To apply lazy loading to all non-system tiddlers use this command:
+
+
+```
+tiddlywiki --listen root-tiddler=$:/core/save/lazy-all
+```

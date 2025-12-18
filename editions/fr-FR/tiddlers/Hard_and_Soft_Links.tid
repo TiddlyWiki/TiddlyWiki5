@@ -1,0 +1,17 @@
+caption: Liens durs et souples
+created: 20150123220237000
+fr-title: Liens durs et souples
+modified: 20150622105726090
+tags: Concepts
+title: Hard and Soft Links
+type: text/vnd.tiddlywiki
+
+Un <<.def "lien dur">> peut être détecté par un examen superficiel du WikiText.
+
+Un lien est <<.def "souple">> s'il est<<:>>
+
+* contenu dans un texte [[tranclus|Transclusion]] de quelque part
+* fourni par une [[macro|Macros]] ou une [[variable|Variables]]
+* généré par le lien d'un widget dont l'attribut <<.attr to>> est une transclusion, est une macro ou une variable
+
+<$macrocall $name=".warning" _="""les liens souples ne sont pas détectés par les opérateurs de filtre link-related tels que <<.olink backlinks>>, <<.olink links>>, <<.olink all>> and <<.olink is>>."""/>

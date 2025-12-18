@@ -1,0 +1,5 @@
+title: $:/core/Filters/RecentTiddlers
+tags: $:/tags/Filter
+filter: [!is[system]has[modified]!sort[modified]limit[50]]
+description: {{$:/language/Filters/RecentTiddlers}}
+

@@ -1,0 +1,44 @@
+title: $:/language/
+
+BinaryWarning/Prompt: הטידלר הזה כולל נתונים בינאריים
+ClassicWarning/Upgrade/Caption: שדרג
+CloseAll/Button: סגור הכל
+ColourPicker/Recent: אחרונים:
+ConfirmCancelTiddler: האם אתה רוצה לוותר על השינויים בטידלר "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: האם אתה רוצה למחוק את הטידלר "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: האם אתה רוצה להחליף את הטידלר "<$text text=<<title>>/>"?
+Count: מספר
+DefaultNewTiddlerTitle: טידלר חדש:
+DropMessage: שמוט כאן (או השתמש ב ESCAPE לבטל)
+Encryption/Cancel: בטל
+Encryption/ConfirmClearPassword: האם אתה רוצה לנקות את הסיסמה? זה יבטל את ההצפנה של הטידלי-ויקי הזה
+Encryption/Password: סיסמה
+Encryption/PasswordNoMatch: סיסמאות לא מתאימות
+Encryption/PromptSetPassword: קבע סיסמה חדשה לטידליויקי זה
+Encryption/RepeatPassword: סיסמה שוב
+Encryption/SetPassword: קבע סיסמה
+Encryption/Username: שם משתמש
+Error/Caption: שגיאה
+Error/Filter: שגיאת פילטר
+Error/FilterSyntax: שגיאת תחביר בביטוי פילטר
+Error/IsFilterOperator: שגיאת פילטר: אופרנד לא ידוע לאופרטור 'is' 
+Error/LoadingPluginLibrary: שגיאה בטעינת ספריית פלאגין
+Error/RecursiveTransclusion: שגיאת טרנסקלוזיה רקורסיבית בוידג'ט הטרנסקלוזיה
+Error/RetrievingSkinny: שגיאה באחזור רשימת טידלרים סקיניים
+Error/SavingToTWEdit: שגיאה בשמירה TWEdit
+Error/WhileSaving: שגיאה בשמירה
+Error/XMLHttpRequest: XMLHttpRequest קוד שגיאה
+InternalJavaScriptError/Hint: מביך, אך מומלץ שתאתחל מחדש על ידי רפרוש הדפדפן
+LoginToTiddlySpace: היכנס ל TiddlySpace
+MissingTiddler/Hint: טידלר חסר "<$text text=<<currentTiddler>>/>" -לחץ {{||$:/core/ui/Buttons/edit}} כדי ליצור
+No: לא
+OfficialPluginLibrary: רשמית~TiddlyWiki ספריית פלאגינים
+PluginReloadWarning: נא שמור {{$:/core/ui/Buttons/save-wiki}} וטען מחדש {{$:/core/ui/Buttons/refresh}} כדי לאפשר לשינויי הפלאגינים להיכנס לתוקף
+SystemTiddler/Tooltip: זהו טידלר מערכת
+TagManager/Colour/Heading: צבע
+TagManager/Count/Heading: מספר
+TagManager/Icon/Heading: צלמית
+TagManager/Info/Heading: מידע
+TagManager/Tag/Heading: תג
+UnsavedChangesWarning: יש לך שינויים לא שמורים בטידלי-ויקי
+Yes: כן

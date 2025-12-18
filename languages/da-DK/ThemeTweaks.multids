@@ -1,0 +1,35 @@
+title: $:/language/ThemeTweaks/
+
+Metrics: Størrelser
+Metrics/BodyFontSize: Font størrelse for tiddler body
+Metrics/BodyLineHeight: Linie højde for tiddler body
+Metrics/FontSize: Font størrelse
+Metrics/LineHeight: Linie højde
+Metrics/SidebarBreakpoint/Hint: minimum side bredde ved hvilken story<br>river og sidebar vises side om side
+Metrics/SidebarWidth: Sidebar bredde
+Metrics/SidebarWidth/Hint: bredden af sidebar i flydende-fikseret layout
+Metrics/StoryLeft: Story venstre position
+Metrics/StoryLeft/Hint: hvor langt venstre kant af story river<br>(tiddler area) er fra vestre side af siden.
+Metrics/StoryRight: Story højre
+Metrics/StoryRight/Hint: hvor langt venstre margen af sidebar <br>er fra vesntre side af siden
+Metrics/StoryTop/Hint: hvor langt top margen af the story river<br>er fra troppen af siden
+Metrics/StoryWidth: Story bredde
+Metrics/StoryWidth/Hint: Hele bredden af story river
+Metrics/TiddlerWidth: Tiddler bredde
+Metrics/TiddlerWidth/Hint: i story river
+Options: Valgmuligheder
+Options/CodeWrapping: Omgiv lange linier  i code blokke
+Options/SidebarLayout/Fixed-Fluid: Fikseretstory, flydende sidebar
+Options/SidebarLayout/Fluid-Fixed: Flydende story, fikseret sidebar
+Settings: Indstillinger
+Settings/BackgroundImage: Side baggrunds billede
+Settings/BackgroundImageAttachment: Side baggrunds billede tilknyttet
+Settings/BackgroundImageAttachment/Fixed: Fikseret til vindoe
+Settings/BackgroundImageAttachment/Scroll: Ruller med tiddlere
+Settings/BackgroundImageSize: Side baggrunds billede størrelse
+Settings/BackgroundImageSize/Contain: Indeholder
+Settings/BackgroundImageSize/Cover: Dækker
+Settings/CodeFontFamily: Code font familie
+Settings/FontFamily: Font familie
+ThemeTweaks: Tema justering
+ThemeTweaks/Hint: Du kan justere visse aspekter af ''Vanilla'' temaet.

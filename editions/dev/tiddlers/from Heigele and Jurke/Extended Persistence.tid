@@ -1,0 +1,30 @@
+chapter.of: TiddlyWiki Core Application
+created: 20140715184132652
+modified: 20140717181151719
+sub.num: 3
+tags: doc
+title: Extended Persistence
+
+The microkernel only contains a bare store and some deserializers to load tiddlers from JSON files or from the DOM of the current HTML file.
+The core plug-in adds some more deserializers and a new mechanism for persisting and synchronising tiddlers.
+
+This mechanism is provided as a global module in [[$:/core/modules/syncer.js]].
+The saver module has three responsibilities:
+
+# Save the whole wiki.
+# Provide the ability to download single tiddlers as files.
+# Synchronise the local wiki store with a remote wiki store, i.e. running in Node.js
+
+The syncer module is connected mainly to two other modules.
+For one it registers to changes at the wiki store ([[Event Mechanism]]) and if any changes occur they are synced to the remote store.
+Then it provides a function ``saveWiki(options)``. This function can be used by other modules. For example the [[RootWidget|RootWidget and Rendering Startup]] uses this function to save the whole wiki or start downloading single tiddlers.
+
+The syncer itself does not provide a concrete implementation of saving, downloading or syncing the tiddlers.
+Instead it loads modules of type ``saver`` and ``syncadaptor`` and manages the saving/syncing process.
+
+<$list filter="[!has[draft.of]has[chapter.of]chapter.of[Extended Persistence]tag[doc]sort[sub.num]]">
+
+
+!! <$view field="title"/>
+{{!!text}}
+</$list>

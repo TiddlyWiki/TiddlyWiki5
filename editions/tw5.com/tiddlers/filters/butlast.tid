@@ -1,0 +1,15 @@
+created: 20140410103123179
+modified: 20220226043344258
+tags: [[Filter Operators]] [[Order Operators]]
+title: butlast Operator
+type: text/vnd.tiddlywiki
+caption: butlast
+op-purpose: discard the last <<.place N>> input titles
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: an integer, defaulting to 1
+op-parameter-name: N
+op-output: all but the last <<.place N>> input titles
+
+<<.from-version "5.2.2">> The <<.op butlast>> operator returns the input list unchanged if <<.place N>> is 0. This is consistent with the behaviour of the [[rest Operator]].
+
+<<.operator-examples "butlast">>

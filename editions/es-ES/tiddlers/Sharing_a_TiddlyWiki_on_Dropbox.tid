@@ -1,0 +1,35 @@
+caption: TiddlyWiki en Dropbox
+created: 20140122085818089
+es-title: Compartir un TiddlyWiki en Dropbox
+modified: 20160417162424439
+tags: Learning
+title: Sharing a TiddlyWiki on Dropbox
+type: text/vnd.tiddlywiki
+
+Puedes trabajar en un TiddlyWiki en Dropbox y publicar una URL que cualquiera puede ver en vista de sólo lectura.
+
+#Guarda el TiddlyWiki en tu carpeta de Dropbox
+
+# Selecciona la opción de Dropbox ''Copiar enlace de Dropbox'' para tener una URL pública del archivo
+
+#* En el sitio web de Dropbox se hace haciendo clic sobre el botón ''Compartir'' que aparece al pasar el ratón por encima del archivo. Además de obtener el enlace público al documento (cualquiera que tenga el enlace podrá verlo), puedes decidir limitar qué usuarios tienen acceso al documento, o ponerle caducidad al enlace. Dropbox también añade la opción de copiar el enlace público al menú contextual (clic con el botón derecho sobre el archivo) en sus ediciones de escritorio para OS X, Windows y Linux. 
+
+#> La URL generada por Dropbox tiene este formato:
+
+#> `https://www.dropbox.com/s/<blablablaincomprensible>/mi_archivo.html`
+
+# Cuidadosamente modifica la URL, conservando el blablablaincomprensible, así:
+
+#> `https://dl.dropboxusercontent.com/s/<blablablaincomprensible>/mi_archivo.html`
+
+El resultado es una URL "secreta" que puedes enviar a otros para que vean el documento.
+
+''Nota'': Si compartes la URL sin modificar, aquel que la reciba verá el archivo en la interfaz online de Dropbox, no verá el archivo abierto. 
+
+----
+
+Para ayudarte a modificar la URL pública de dropbox, cópiala aquí y así obtendrás la nueva URL secreta:
+
+<$edit-text tiddler="$:/temp/dropboxurl" default="https://www.dropbox.com/s/<blablabla>/mi_archivo.html" tag="input" type="text" size="60"/>
+
+<$macrocall $name="dropbox-url" url={{$:/temp/dropboxurl}}/>

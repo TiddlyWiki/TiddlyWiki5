@@ -1,0 +1,23 @@
+title: $:/language/Help/default
+description: 
+
+\define commandTitle()
+$:/language/Help/$(command)$
+\end
+```
+uporaba: tiddlywiki [<wikifolder>] [--<command> [<args>...]...]
+```
+
+ukazi, ki so na voljo:
+
+<ul>
+<$list filter="[commands[]sort[title]]" variable="command">
+<li><$link to=<<commandTitle>>><$macrocall $name="command" $type="text/plain" $output="text/plain"/></$link>: <$transclude tiddler=<<commandTitle>> field="description"/></li>
+</$list>
+</ul>
+
+Podrobne informacije o ukazih:
+
+```
+tiddlywiki --help <command>
+```

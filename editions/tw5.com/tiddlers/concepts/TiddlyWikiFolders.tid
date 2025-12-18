@@ -1,0 +1,40 @@
+created: 20130825214200000
+modified: 20161015134454785
+tags: [[TiddlyWiki on Node.js]]
+title: TiddlyWikiFolders
+type: text/vnd.tiddlywiki
+
+As well as traditional single file wikis, [[TiddlyWiki on Node.js]] supports wikis that are stored as a folder of individual tiddler files.
+
+! Wiki Folder Structure
+
+Wiki folders can contain the following files and folders:
+
+* ''tiddlywiki.info'' - JSON file containing metadata for the wiki -- see [[tiddlywiki.info Files]]
+* ''\tiddlers'' - folder containing tiddler files comprising the wiki
+* ''\plugins'' - folder containing [[plugin folders|PluginFolders]] to be included in the wiki
+* ''\languages'' - folder containing [[plugin folders|PluginFolders]] for language plugins to be included in the wiki
+* ''\themes'' - folder containing [[plugin folders|PluginFolders]] for theme plugins to be included in the wiki
+
+Only the ''tiddlywiki.info'' file is required; everything else is optional. Any files and folders not listed above are ignored.
+
+!! Plugin processing
+
+To be usable in the browser, plugins just need to be included in the wiki. For wikis that are generated on the server, TiddlyWikiFolders can contain a [[tiddlywiki.info file|tiddlywiki.info Files]] that identifies the plugins to be included in this wiki:
+
+```
+{
+	"plugins": [
+		"tiddlywiki/slider",
+		"tiddlytools/chooser"
+	]
+}
+```
+
+Plugins names refer to plugin folders listed in TiddlyWiki5's root `plugins` folder. Plugins can also be included manually by copying them into the `plugins` subfolder of the wiki.
+
+!! Processing of `tiddlers` folder
+
+All the TiddlerFiles in the `tiddlers` folder are read into the wiki at startup. Sub-folders are scanned recursively for TiddlerFiles. Newly created tiddlers are stored in TiddlerFiles directly beneath the `tiddlers` folder, unless [[configured otherwise|Customising Tiddler File Naming]].
+
+The default processing for sub-folders within the `tiddlers` folder can  be overridden by providing a JSON file called `tiddlywiki.files` -- see [[tiddlywiki.files Files]].

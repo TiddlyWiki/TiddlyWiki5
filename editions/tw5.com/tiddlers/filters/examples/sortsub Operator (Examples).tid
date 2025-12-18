@@ -1,0 +1,34 @@
+created: 20200425110427700
+modified: 20201118103327392
+tags: [[sortsub Operator]] [[Operator Examples]]
+title: sortsub Operator (Examples)
+type: text/vnd.tiddlywiki
+
+\define show-variable(name)
+<li>''$name$'': <code><$text text=<<$name$>>/></code></li>
+\end
+
+
+<$vars
+	compare-by-title-length="[length[]]"
+	compare-by-text-length="[get[text]else[]length[]]"
+	compare-by-newest-of-modified-and-created-dates="[get[modified]else[19700101]]"
+>
+
+These examples make use of the following variables:
+
+<ul>
+<<show-variable compare-by-title-length>>
+<<show-variable compare-by-text-length>>
+<<show-variable compare-by-newest-of-modified-and-created-dates>>
+</ul>
+
+<<.operator-example 1 "[sortsub:number<compare-by-title-length>limit[10]]">>
+<<.operator-example 2 "[!sortsub:number<compare-by-title-length>limit[10]]">>
+<<.operator-example 3 "[sortsub:number<compare-by-text-length>limit[10]]">>
+<<.operator-example 4 "[!sortsub:number<compare-by-text-length>limit[10]]">>
+<<.operator-example 5 "[tag[Field Operators]sortsub:date<compare-by-newest-of-modified-and-created-dates>]">>
+
+{{How to remove stop words}}
+
+</$vars>

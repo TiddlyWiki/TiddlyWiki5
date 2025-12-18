@@ -1,0 +1,13 @@
+created: 20150325171700344
+modified: 20150325172147259
+tags: [[thumbnail Macro]] [[Macro Examples]]
+title: thumbnail Macro (Examples)
+type: text/vnd.tiddlywiki
+
+
+! Examples
+
+Here is an example of the `thumbnail-right` macro used to create a video thumbnail that floats to the right of the text
+
+<$macrocall $name=".example" n="1" eg="""<<thumbnail-right link:"Introduction Video" image:"Introduction Video Thumbnail.jpg" caption:"Introduction to ~TiddlyWiki" icon:"{{$:/core/images/video}}" color:"red">>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."""/>

@@ -1,0 +1,8 @@
+created: 20150119125815000
+modified: 20150119191028000
+tags: [[indexes Operator]] [[Operator Examples]]
+title: indexes Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[{$:/palette}indexes[]sort[title]]" "all the colours defined in the current [[colour palette|ColourPalettes]]">>
+<<.operator-example 2 "[[$:/HistoryList]indexes[]]" "integer output because the [[history list|$:/HistoryList]] is an array">>

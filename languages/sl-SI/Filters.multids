@@ -1,0 +1,15 @@
+title: $:/language/Filters/
+
+AllTags: Vse oznake razen sistemskih oznak
+AllTiddlers: Vsi tiddlerji razen sistemskih tiddlerjev
+Drafts: Osnutki tiddlerjev
+Missing: Manjkajoči tiddlerji
+Orphans: Tiddlerji sirote
+OverriddenShadowTiddlers: Prepisani senčni tiddlerji
+RecentSystemTiddlers: Nedavno spremenjeni tiddlerji, vključno s sistemskimi tiddlerji
+RecentTiddlers: Nedavno spremenjeni tiddlerji
+ShadowTiddlers: Senčni tiddlerji
+StoryList: Tiddlerji v zgodbi (reka tiddlerjev), brez <$text text="$:/AdvancedSearch"/>
+SystemTags: Sistemske oznake
+SystemTiddlers: Sistemski tiddlerji
+TypedTiddlers: Tiddlerji, ki ne vsebujejo "wiki-text"

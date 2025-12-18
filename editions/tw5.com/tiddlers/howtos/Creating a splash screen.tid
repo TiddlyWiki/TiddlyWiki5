@@ -1,0 +1,34 @@
+created: 20180927081216605
+modified: 20180927084436111
+tags: [[Customise TiddlyWiki]]
+title: Creating a splash screen
+type: text/vnd.tiddlywiki
+
+By default, TiddlyWiki displays a blank screen while it is loading. You can add a special "splash screen" that is displayed while the wiki loads.
+
+Larger TiddlyWiki files and those loaded over a slow network connection may take a little time to load. Once fully loaded, performance improves, because everything is now running entirely within the browser. Using a splash screen ensures people know the loading process is taking place, reducing the chance they will leave the page.
+
+In order for the splash screen to be displayed before TiddlyWiki is initialised or [[decrypted|Encryption]], it is embedded as static HTML/CSS within the TiddlyWiki HTML file. This is done with the [[SystemTag: $:/tags/RawMarkupWikified/TopBody]], or any of the other system tags beginning with $:/tags/RawMarkup. 
+
+In order to remove the splash screen when the wiki has finished loading, the HTML should be wrapped in a container with the special class `tc-remove-when-wiki-loaded`. Any DOM elements with this class are automatically deleted by the core once the wiki has loaded.
+
+Here's an example of a simple splash screen that just displays the text //Loading//. To use it, copy the text into a new tiddler, give it the type "text/plain" and the tag "$:/tags/RawMarkupWikified/TopBody":
+
+```
+<div class="tc-remove-when-wiki-loaded">
+Loading...
+</div>
+```
+
+If the tiddler is given the WikiText type `text/vnd.tiddlywiki` then the contents are wikified as the file is saved, allowing transclusion etc. For example, here's an example that quotes the site title in the loading message. To use it, copy the text into a new tiddler, give it the type "text/vnd.tiddlywiki" and the tag "$:/tags/RawMarkupWikified/TopBody":
+
+```
+\rules only filteredtranscludeinline transcludeinline
+<div class="tc-remove-when-wiki-loaded">
+Please wait while {{$:/SiteTitle}} is loading
+</div>
+```
+
+The `\rules` directive is used to limit the wikitext syntax that is recognised to the two forms of inline transclusion. This avoids accidental wikification of tiddler content.
+
+There is a more complex example splash screen using CSS animations and images configured in this wiki: see $:/SplashScreen

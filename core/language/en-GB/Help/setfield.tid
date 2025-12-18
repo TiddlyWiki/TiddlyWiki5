@@ -1,0 +1,17 @@
+title: $:/language/Help/setfield
+description: Prepares external tiddlers for use
+
+//Note that this command is experimental and may change or be replaced before being finalised//
+
+Sets the specified field of a group of tiddlers to the result of wikifying a template tiddler with the `currentTiddler` variable set to the tiddler.
+
+```
+--setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+The parameters are:
+
+* ''filter'' - filter identifying the tiddlers to be affected
+* ''fieldname'' - the field to modify (defaults to "text")
+* ''templatetitle'' - the tiddler to wikify into the specified field. If blank or missing then the specified field is deleted
+* ''rendertype'' - the text type to render (defaults to "text/plain"; "text/html" can be used to include HTML tags)

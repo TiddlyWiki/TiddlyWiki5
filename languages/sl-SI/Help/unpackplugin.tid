@@ -1,0 +1,8 @@
+title: $:/language/Help/unpackplugin
+description: Ekstrahira tiddlerje iz vtičnika
+
+Ekstrahira vse tiddlerje iz vtičnika in jih zapiše kot posamezne datoteke:
+
+```
+--unpackplugin <title>
+```

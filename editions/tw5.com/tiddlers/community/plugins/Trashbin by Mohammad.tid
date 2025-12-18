@@ -1,0 +1,14 @@
+created: 20201117155328920
+modified: 20201117155604253
+tags: [[Community Plugins]]
+title: Trashbin by Mohammad
+type: text/vnd.tiddlywiki
+url: https://kookma.github.io/TW-Trashbin/
+
+The concept behind Trashbin plugin is to have a simple mechanism to move deleted tiddlers to Trashbin and be able to restore them later if required.
+
+{{!!url}}
+
+The trash (also known as the Recycle Bin in Microsoft Windows) is a temporary storage for tiddlers that have been deleted in a Tiddlywiki by the user, but not yet permanently erased.
+
+Typically, a trash bin is presented as a special storage, allowing the user to browse deleted (removed) tiddlers, undelete those that were deleted by mistake, or delete them permanently (either one by one, or by the "Empty Trash" function).

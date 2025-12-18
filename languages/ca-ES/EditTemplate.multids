@@ -1,0 +1,37 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: Aquest és un tiddler extern desat fora del fitxer del TiddlyWiki principal. Podeu editar les etiquetes i camps però no podeu editar directament el seu contingut
+Body/Placeholder: Escriviu el text per aquest tiddler
+Body/Preview/Type/DiffCurrent: diferències respecte l'actual
+Body/Preview/Type/DiffShadow: diferències respecte de l'ombre (si hi ha)
+Body/Preview/Type/Output: resultat
+Field/Dropdown/Caption: llista de camps
+Field/Dropdown/Hint: Mostra la llista de camps
+Field/Remove/Caption: suprimeix el camp
+Field/Remove/Hint: Suprimeix el camp
+Fields/Add/Button: afegeix
+Fields/Add/Button/Hint: Afegeix un camp nou al tiddler
+Fields/Add/Dropdown/System: Camps del sistema
+Fields/Add/Dropdown/User: Camps de l'usuari
+Fields/Add/Name/Placeholder: nom del camp
+Fields/Add/Prompt: Afegeix un nou camp
+Fields/Add/Value/Placeholder: valors del camp
+Shadow/OverriddenWarning: Aquest és un tiddler ombra modificat. Podeu restablir la versió per omisió suprimint aquest tiddler
+Shadow/Warning: Aquest és un tiddler ombra. Qualsevol canvi sobreescriurà la versió per omisió
+Tags/Add/Button: afegeix
+Tags/Add/Button/Hint: afegeix una etiqueta
+Tags/Add/Placeholder: nom de l'etiqueta
+Tags/ClearInput/Caption: neteja
+Tags/ClearInput/Hint: Neteja l'etiqueta
+Tags/Dropdown/Caption: llista d'etiquetes
+Tags/Dropdown/Hint: Mostra la llista d'etiquetes
+Title/BadCharacterWarning: Avís: eviteu qualsevol dels caràcters <<bad-chars>> al títol d'un tiddler
+Title/Exists/Prompt: El tiddler destinació ja existeix
+Title/References/Prompt: Les referències següents cap aquest tiddler no s'actualitzaran automàticament:
+Title/Relink/Prompt: Actualitza ''<$text text=<<fromTitle>>/>'' cap a ''<$text text=<<toTitle>>/>'' a les //etiquetes// i a la //lista// de camps d'altres tiddlers
+Type/Delete/Caption: suprimeix el tipus de contingut
+Type/Delete/Hint: Suprimeix el tipus de contingut
+Type/Dropdown/Caption: llista del tipus de contingut
+Type/Dropdown/Hint: Mostra la llista dels tipus de contingut
+Type/Placeholder: tipus de contingut
+Type/Prompt: Tipus:

@@ -1,0 +1,12 @@
+caption: Intérprete TW2
+created: 20160107223340750
+es-title: Intérprete TW2
+list: 
+modified: 20160504142710275
+tags: [[Plugin Editions]]
+title: TW2Parser Plugin
+type: text/vnd.tiddlywiki
+
+Este es un plugin experimental que añade la funcionalidad de mostrar WikiText escrito para la primera versión <<.word Classic>> de ~TiddlyWiki.
+
+Está disponible en: https://tiddlywiki.com/plugins/tiddlywiki/tw2parser/

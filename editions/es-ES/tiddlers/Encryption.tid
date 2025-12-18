@@ -1,0 +1,23 @@
+caption: Cifrado
+created: 20130825160900000
+es-title: Cifrado
+modified: 20160426063330696
+tags: Features [[Working with TiddlyWiki]]
+title: Encryption
+type: text/vnd.tiddlywiki
+
+Usado como archivo único de HTML, TiddlyWiki5 permite encriptar el contenido mediante la [[Stanford JavaScript Crypto Library]].
+
+#En la pestaña <<.sidebar-tab Tools>> de la barra lateral, localiza el botón <<.button encryption>>.
+
+# Si el botón muestra la leyenda <<.word "Asignar contraseña">>, significa que el wiki no está encriptado. Pinchando el botón se abrirá el cuadro de diálogo que permite asignar la contraseña de cifrado
+
+# Abre el archivo en un editor de texto para verificar que los datos están encriptados
+
+# Al abrir el archivo en el navegador, se te pedirá la contraseña antes de mostrarte su contenido.
+
+TiddlyWIki ofrece otras dos funciones de encriptación, sin relación con esta:
+
+* La de asignar una contraseña para guardar en TiddlySpot, en la pestaña <<.controlpanel-tab Saving>> del panel de control
+
+* La de utilizar autenticación básica estándar HTTP en [[Node.js|TiddlyWiki on Node.js]] mediante el comando [[server|ServerCommand]]. Combinada con SSL, esta función ofrece el mismo nivel de cifrado de tráfico que tienes en servicios del tipo de Google o Dropbox, aunque no cifra los datos guardados en el disco. 

@@ -1,0 +1,23 @@
+created: 20150518130702749
+modified: 20150518133512830
+tags: Konzept
+title: TiddlyWiki mit Dropbox teilen
+type: text/vnd.tiddlywiki
+
+
+Sie können eine TiddlyWiki Datei auf Dropbox veröffentlichen, so dass jedermann Zugriff auf eine "read-only" Version der Datei hat. 
+
+# Speichern Sie die TW Datei in einem öffentlichen Dropbox Verzeichnis.
+
+# Wählen Sie "Öffentlichen Link Kopieren"
+#* In der Dropbox Web-Oberfläche bekommen Sie diese Möglichkeit mit einem Rechtsklick auf die Datei. 
+
+# Die URL, die von Droopbox erzeugt wird hat die folgende From:
+#> `https://dl.dropboxusercontent.com/u/xxxxxx/mywiki.html`
+
+Das Ergebnis ist eine öffentliche URL, die aufgerufen werden kann, wenn man sie kennt. Das Wiki wird direkt angezeigt und funktioniert ähnlich wie tiddlywiki.com
+
+Beispiele
+
+* Anzeigen: https://dl.dropboxusercontent.com/u/28489257/de-DE/de-DE-dropbox-link.html
+* Direkt speichern: https://dl.dropboxusercontent.com/u/28489257/de-DE/de-DE-dropbox-link.html?dl=1

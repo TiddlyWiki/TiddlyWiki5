@@ -1,0 +1,96 @@
+title: $:/language/
+
+AboveStory/ClassicPlugin/Warning: Sembra che tu stia tentando di caricare un plugin progettato per ~TiddlyWiki Classic. Considera che [[questi plugin non funzionano con TiddlyWiki versione 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]. Rilevati plug-in di ~TiddlyWiki Classic:
+BinaryWarning/Prompt: Questo frammento contiene dati binari
+ClassicWarning/Hint: Questo frammento &egrave; scritto nel formato testo wiki di TiddlyWiki Classic e non &egrave; pienamente compatibile con TiddlyWiki versione 5. Vedi https://tiddlywiki.com/static/Upgrading.html per maggiori dettagli.
+ClassicWarning/Upgrade/Caption: Aggiorna
+CloseAll/Button: Chiudi tutto
+ColourPicker/Recent: Recenti:
+ConfirmAction: Vuoi procedere?
+ConfirmCancelTiddler: Vuoi annullare le modifiche al frammento "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Vuoi eliminare il frammento "<$text text=<<title>>/>"?
+ConfirmDeleteTiddlers: Sei sicuro di voler eliminare <<resultCount>> frammento/i?
+ConfirmEditShadowTiddler: Stai per editare un frammento nascosto. Ogni modifica dei default di sistema render&agrave; i futuri aggiornamenti non semplici. Sei sicuro di voler editare "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Vuoi sovrascrivere il frammento "<$text text=<<title>>/>"?
+Count: Conteggio
+DefaultNewTiddlerTitle: Nuovo frammento
+Diffs/CountMessage: <<diff-count>> differenze
+DropMessage: Rilascia ora (o usa il tasto 'Escape' per annullare)
+Encryption/Cancel: Annulla
+Encryption/ConfirmClearPassword: Vuoi cancellare la password? Questa operazione rimuover&agrave; la crittografia applicata quando salverai questo wiki
+Encryption/Password: Password
+Encryption/PasswordNoMatch: Le password non corrispondono
+Encryption/PromptSetPassword: Imposta una nuova password per questo TiddlyWiki
+Encryption/RepeatPassword: Ripeti password
+Encryption/SetPassword: Imposta password
+Encryption/Username: Nome utente
+Error/Caption: Errore
+Error/Filter: Errore filtro
+Error/FilterRunPrefix: Errore filtro: prefisso sconosciuto per l'esecuzione del filtro
+Error/FilterSyntax: Errore di sintassi nell'espressione del filtro
+Error/FormatFilterOperator: Errore filtro: suffisso sconosciuto per l'operatore di filtro 'format'.
+Error/IsFilterOperator: Errore filtro: operando sconosciuto per l'operatore di filtro 'is'.
+Error/LoadingPluginLibrary: Errore durante il caricamento della libreria dei plug-in
+Error/NetworkErrorAlert: `<h2>''Errore di rete''</h2>Sembra che la connessione al server sia stata persa. Ciò potrebbe indicare un problema con la connessione di rete. Prova a ripristinare la connettività di rete prima di continuare.<br><br>''Tutte le modifiche non salvate verranno sincronizzate automaticamente al ripristino della connettività''.`
+Error/PutEditConflict: File modificato sul server
+Error/PutForbidden: Permesso negato
+Error/PutUnauthorized: Autenticazione richiesta
+Error/RecursiveTransclusion: Errore di transclusione ricorsivo nel widget di transclusione
+Error/RetrievingSkinny: Errore durante il recupero dell'elenco dei frammenti
+Error/SavingToTWEdit: Errore di salvataggio su TWEdit
+Error/WhileSaving: Errore di salvataggio
+Error/XMLHttpRequest: Codice di errore XMLHttpRequest
+InternalJavaScriptError/Hint: Beh, questo è imbarazzante. Si consiglia di riavviare TiddlyWiki aggiornando il browser
+InternalJavaScriptError/Title: Errore JavaScript interno
+LayoutSwitcher/Description: Apri il pannello di selezione del layout
+LazyLoadingWarning: <p>Tentativo di caricare contenuto esterno da ''<$text text={{!!_canonical_uri}}/>''</p><p>Se questo messaggio non scompare, il tipo di contenuto del frammento non corrisponde al tipo di contenuto esterno oppure potresti utilizzare un browser che non supporta il contenuto esterno per i wiki caricati come file autonomi. Vedi https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Login su TiddlySpace
+Manager/Controls/FilterByTag/None: (nessuna)
+Manager/Controls/FilterByTag/Prompt: Filtra per etichetta:
+Manager/Controls/Order/Prompt: Ordine inverso
+Manager/Controls/Search/Placeholder: Cerca
+Manager/Controls/Search/Prompt: Cerca:
+Manager/Controls/Show/Option/Tags: Etichette
+Manager/Controls/Show/Option/Tiddlers: Frammenti
+Manager/Controls/Show/Prompt: Mostra:
+Manager/Controls/Sort/Prompt: Ordina per:
+Manager/Item/Colour: Colore
+Manager/Item/Fields: Campi
+Manager/Item/Icon: Icone
+Manager/Item/Icon/None: (nessuno)
+Manager/Item/RawText: Testo non formattato
+Manager/Item/Tags: Etichette
+Manager/Item/Tools: Strumenti
+Manager/Item/WikifiedText: Testo wikificato
+MissingTiddler/Hint: Frammento mancante "<$text text=<<currentTiddler>>/>" -- clicca {{||$:/core/ui/Buttons/edit}} per crearlo
+No: No
+OfficialPluginLibrary: Libreria ufficiale plugin ~TiddlyWiki
+OfficialPluginLibrary/Hint: La libreria ufficiale di plugin ~TiddlyWiki su tiddlywiki.com. Plugin, temi e language pack sono mantenuti dal core team.
+PageTemplate/Description: il layout predefinito di ~TiddlyWiki
+PageTemplate/Name: ~PageTemplate predefinito
+PluginReloadWarning: Salva {{$:/core/ui/Buttons/save-wiki}} e ricarica {{$:/core/ui/Buttons/refresh}} per consentire alle modifiche ai plugin ~JavaScript di avere effetto
+RecentChanges/DateFormat: DD MMM YYYY
+Shortcuts/Input/Accept/Hint: Accetta l'elemento selezionato
+Shortcuts/Input/AcceptVariant/Hint: Accetta l'elemento selezionato (variante)
+Shortcuts/Input/AdvancedSearch/Hint: Apri il pannello ~RicercaAvanzata dal campo di ricerca della barra laterale
+Shortcuts/Input/Cancel/Hint: Cancella il campo di immissione
+Shortcuts/Input/Down/Hint: Seleziona il prossimo elemento
+Shortcuts/Input/Tab-Left/Hint: Seleziona il tab precedente
+Shortcuts/Input/Tab-Right/Hint: Seleziona il prossimo tab
+Shortcuts/Input/Up/Hint: Seleziona l'elemento precedente
+Shortcuts/SidebarLayout/Hint: Modifica il layout della barra laterale
+Switcher/Subtitle/language: Cambia lingua
+Switcher/Subtitle/layout: Cambia layout
+Switcher/Subtitle/palette: Cambia paletta
+Switcher/Subtitle/theme: Cambia tema
+SystemTiddler/Tooltip: Questo &egrave; un frammento di sistema
+SystemTiddlers/Include/Prompt: Includi i frammenti di sistema
+TagManager/Colour/Heading: Colore
+TagManager/Count/Heading: Conteggio
+TagManager/Icon/Heading: Icona
+TagManager/Icons/None: Nessuna
+TagManager/Info/Heading: Info
+TagManager/Tag/Heading: Etichetta
+Tiddler/DateFormat: DD MMM YYYY alle hh12:0mmam
+UnsavedChangesWarning: Ci sono modifiche non salvate in TiddlyWiki
+Yes: Sì

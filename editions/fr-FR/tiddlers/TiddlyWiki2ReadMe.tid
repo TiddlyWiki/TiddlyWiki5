@@ -1,0 +1,7 @@
+created: 20141115211411530
+title: TiddlyWiki2ReadMe
+type: text/vnd.tiddlywiki
+
+\define tv-wikilinks() no
+! Building TiddlyWikiClassic
+{{Building TiddlyWikiClassic}}

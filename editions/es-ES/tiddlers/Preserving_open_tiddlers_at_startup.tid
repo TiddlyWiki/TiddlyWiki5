@@ -1,0 +1,16 @@
+caption: Tiddlers abiertos al inicio
+created: 20140101192052333
+es-title: Cargar los últimos tiddlers abiertos al inicio
+modified: 20160427053631307
+tags: [[Customise TiddlyWiki]]
+title: Preserving open tiddlers at startup
+type: text/vnd.tiddlywiki
+
+Generalmente, ~TiddlyWiki muestra al inicio los tiddlers especificados en <<.tid ~$:/DefautTiddlers>>
+
+A veces, sin embargo, es útil mostrar los mismos tiddlers que estaban abiertos cuando se guardó el archivo. Para hacerlo, en <<.tid ~$:/DefautTiddlers>> en lugar una lista de tiddlers, debe especificarse el siguiente filtro:
+
+```
+[list[$:/StoryList]]
+```
+Este filtro devuelve la lista de tiddlers que figuran en <<.tid ~$:/StoryList>>, que es donde el sistema almacena el histórico de tiddlers.

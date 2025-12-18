@@ -1,0 +1,17 @@
+created: 20190330100101453
+modified: 20190330100101453
+tags: [[Filter Operators]] [[Special Operators]]
+title: getvariable Operator
+caption: getvariable
+op-purpose: select all values of variables named in the input titles
+op-input: a selection of variable names
+op-parameter: ignored
+op-output: the values of each of the variables named in the input titles (or blank if the variable is not defined)
+
+<<.from-version "5.1.20">> The usual way to retrieve a variable value within a filter is with the angle brackets notation. For example, `[<currentTiddler>]` will retrieve the value of the variable called `currentTiddler`. 
+
+The `getvariable` filter operator provides an alternative way to retrieve a variable. For example, `[[currentTiddler]getvariable[]]` is another way to retrieve the value of the variable `currentTiddler`.
+
+The advantage of `getvariable` is that it makes it possible to work with variables whose name is computed, and not known in advance. For example, `[<myvariable>getvariable[]]` gets the value of the variable whose name is given in the variable `myvariable`.
+
+<<.operator-examples "getvariable">>

@@ -1,0 +1,18 @@
+title: $:/language/Help/rendertiddlers
+description: Renderar tiddlers där ett filter matchar en specifik innehållstyp
+
+Renderar en grupp av tiddlers där ett filter matchar till separata filer av en specifik innehållstyp (stanard till `text/html`) och filändelse (standard till `.html`).
+
+```
+--rendertiddlers <filter> <template> <pathname> [<type>] [<extension>] ["noclean"]
+```
+
+Till exempel:
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```
+
+Som standard, sätts sökvägen relativt till `output` undermappen i utgåvans mapp. `--output` kommandot kan användas för att ställa in output till en annan mapp.
+
+Alla filer i målmappen kommer tas bort om inte "noclean" parametern är angiven. Målmappen skapas rekursivt om den saknas.

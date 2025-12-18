@@ -1,0 +1,23 @@
+title: $:/language/Help/init
+description: Inicializira novo mapo wiki
+
+Inicializira prazen  [[WikiFolder|WikiFolders]] s kopijo navedene izdaje.
+
+```
+--init <edition> [<edition> ...]
+```
+
+Na primer:
+
+```
+tiddlywiki ./MyWikiFolder --init empty
+```
+
+Opomba:
+
+* Po potrebi bo ustvarjen imenik mape wiki
+* Parameter "izdaja" je privzeto "empty"
+* Ukaz za init ne bo uspešen, če mapa wiki ni prazna
+* Ukaz init odstrani vse definicije `includeWikis` v datoteki `tiddlywiki.info` izdaje
+* Če je določenih več izdaj, bodo inicializirane izdaje kasneje prepisale vse datoteke, ki so deljene s prejšnjimi izdajami (tako bo končna datoteka `tiddlywiki.info` kopirana iz zadnje izdaje)
+* `--editions` vrne seznam razpoložljivih izdaj

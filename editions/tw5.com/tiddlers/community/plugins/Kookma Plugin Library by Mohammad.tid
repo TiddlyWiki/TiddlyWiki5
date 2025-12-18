@@ -1,0 +1,15 @@
+created: 20201117160603290
+modified: 20201117160819308
+tags: [[Community Plugins]]
+title: Kookma Plugin Library by Mohammad
+type: text/vnd.tiddlywiki
+url: https://kookma.github.io/TW-PluginLibrary/
+
+This library contains most useful plugins developed under the name [[Kookma|https://github.com/kookma]] for Tiddlywiki 5.
+
+{{!!url}}
+
+
+It has two parts
+
+The plugin library introduces a very simple mechanism like Tiddlywiki Official Plugin Library to let select among the published plugins and install any number of them you like.

@@ -1,0 +1,22 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: Isto es un nota externe salvate extra le file principal del TiddlyWiki. Tu pote rediger le etiquettas e quadros ma non directemente rediger le contento mesme
+Body/Placeholder: Scribe le texto pro iste nota
+Field/Remove/Caption: remove quadro
+Field/Remove/Hint: Remove quadro
+Fields/Add/Button: adde
+Fields/Add/Name/Placeholder: nomine de quadro
+Fields/Add/Prompt: Adde un nove quadro:
+Fields/Add/Value/Placeholder: valor del quadro
+Shadow/OverriddenWarning: Isto es un modificate nota umbral. Tu pote reverter al version standard per deler iste nota
+Shadow/Warning: Isto es un nota umbral. Ulle cambios va superscriber le version standard
+Tags/Add/Button: adde
+Tags/Add/Placeholder: nomine de etiquetta
+Tags/Dropdown/Caption: lista de etiquettas
+Tags/Dropdown/Hint: Monstra lista de etiquettas
+Type/Delete/Caption: dele typo de contento
+Type/Delete/Hint: Dele typo de contento
+Type/Dropdown/Caption: lista del typos de contento
+Type/Dropdown/Hint: Monstra lista del typos de contento
+Type/Placeholder: typos de contento
+Type/Prompt: Typo:

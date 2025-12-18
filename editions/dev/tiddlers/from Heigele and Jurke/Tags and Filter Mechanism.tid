@@ -1,0 +1,47 @@
+chapter.of: Extending the Store
+created: 20140715084630840
+modified: 20140717182135876
+sub.num: 4
+tags: doc
+title: Tags and Filter Mechanism
+
+!!! Tags
+The core plug-in extends the store by a simple mechanism to tag a tiddler.
+This provides the functionality to
+
+* retrieve tiddlers with a specific tag
+* retreive a hashmap of ``{ tag: [tiddler1, tiddler3, tiddler3] }``
+* list or iterate tiddlers not tagged with a specific tag
+
+The tags are stored directly in the tiddler. Each tiddler can have a field named "tag", which contains an array of its tags.
+The above functions use this field to calculate their results and cache them in a global cache.
+
+Organising information with tags is easy, intuitive and is common throughout the web.
+In most cases the functions mentioned above are not enough and a more sophisticated way of querying is needed.
+But instead of focusing only on tags TiddlyWiki introduces a querying system that isn't bound to tags or single tiddlers.
+
+!!! Filter mechanism
+This filter mechanism is build on the idea of a pipeline of single filter operators.
+Filters are noted as strings and can look like
+
+```
+[tag[task]!tag[done]interesting[very]]
+```
+
+This example would (implicitly) put all available tiddlers into the pipe.
+The first operator ``tag[task]`` would only pass tiddlers which are tagged with "task".
+The ``!tag[done]`` operator is negated and only passes tiddlers which are not tagged with "done".
+The last filter operator passes only tiddlers with a field "interesting" set to "very".
+So as a result this filter would be used to obtain all tiddlers which are marked as task, aren't already done and are very interesting.
+
+There are many filter operators already build into the core plug-in including the mentioned tag- and field operators, filter operators to sort the tiddlerlist by a specified field, etc.
+But more sophisticated operators are possible, too.
+An example would be the search-operator. This filter operator looks for the searched string in the text and in the tags of the tiddlers.
+If the provided filter operators are not enough, a developer can add new filters by adding a module with the ``filteroperator`` type.
+
+!!! System Tags
+
+Tags and the filter mechanism are used throughout the core plug-in for internal puproses.
+Tags which start with ``$:/`` are normally hidden from the casual user, similar to [[System Tiddlers]]
+
+The filter mechanism is added to the wiki store with the [[wikimethod module type]].

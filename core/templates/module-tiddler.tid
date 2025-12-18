@@ -1,0 +1,8 @@
+title: $:/core/templates/module-tiddler
+
+<!--
+
+This template is used for saving JavaScript tiddlers as a script tag with data attributes representing the tiddler fields. The body of the tiddler is wrapped in a call to the `$tw.modules.define` function in order to define the body of the tiddler as a module
+
+-->`<script`<$fields template=' data-tiddler-$name$="$encoded_value$"'></$fields>` type="text/javascript" data-module="yes">$tw.modules.define("`<$view field="title" format="jsencoded" />`","`<$view field="module-type" format="jsencoded" />`",function(module,exports,require) {`<$view field="text" format="text" />`});
+</script>`

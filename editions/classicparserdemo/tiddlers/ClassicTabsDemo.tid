@@ -1,0 +1,39 @@
+created: 20140603181004793
+modified: 20140901071957024
+title: ClassicTabsDemo
+type: text/x-tiddlywiki
+
+!!Demo text:
+{{{
+<<tabs  $:/state/tabtxtdemo
+"show a section" "sec 1" ClassicTabsDemo##Do1
+"section 2" "Priority 2" ClassicTabsDemo##Do2
+"and a slice" "a slice" [[ClassicTabsDemo::slice]]
+>>
+
+/% 
+!Do1
+first section: this is a hidden section below
+!Do2
+another hidden section of this tiddler
+!end
+|~slice| a hidden slice of this tiddler|
+!end
+%/
+}}}
+!!Demo results:
+<<tabs  $:/state/tabtxtdemo
+"show a section" "sec 1" ClassicTabsDemo##Do1
+"section 2" "Priority 2" ClassicTabsDemo##Do2
+"and a slice" "a slice" [[ClassicTabsDemo::slice]]
+>>
+
+/% 
+!Do1
+first section: this is a hidden section below
+!Do2
+another hidden section of this tiddler
+!end
+|~slice| a hidden slice of this tiddler|
+!end
+%/

@@ -1,0 +1,18 @@
+created: 20140716085406905
+fr-title: "PETTIL - Forth pour Commodore PET" par Charlie Hitselberger
+modified: 20150620161608242
+tags: Examples
+title: "PETTIL - Forth for the Commodore PET" by Charlie Hitselberger
+type: text/vnd.tiddlywiki
+url: http://chitselb.com/files/tiddlypettil.html
+
+Un interprète Forth véloce pour le [[Commodore PET|http://en.wikipedia.org/wiki/Commodore_PET]], écrit en langage assembleur 6502. Le TiddlyWiki contenant la documentation du programme est automatiquement engendré à partir du code source<<dp>> voir https://github.com/chitselb/pettil.
+
+<<<
+Les objectifs du projet étaient, sans ordre particulier<<:>>
+
+* faire un interpréteur Forth exécutable sur mon Commodore PET 2001
+* prendre du plaisir
+* développer mes compétences en "assembleur 6502"
+* trouver d'autres personnes intéressées par le projet
+<<<

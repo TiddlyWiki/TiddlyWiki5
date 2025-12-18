@@ -1,0 +1,13 @@
+created: 20140831105412236
+modified: 20140901072049425
+title: Classic Slider Demo
+type: text/x-tiddlywiki
+
+!!Demo text:
+{{{
+<<slider $:/temp/xxx slidertest "click me»" "more" >>
+}}}
+!!Demo results:
+
+<<slider $:/temp/xxx slidertest "click me»" "more" >>
+ 

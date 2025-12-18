@@ -1,0 +1,13 @@
+chapter.of: TiddlyWiki Core Application
+created: 20140710185629984
+modified: 20140717175642155
+sub.num: 2
+tags: doc
+title: Extending the Store
+
+<$list filter="[!has[draft.of]has[chapter.of]chapter.of[Extending the Store]tag[doc]sort[sub.num]]">
+
+
+!! <$view field="title"/>
+{{!!text}}
+</$list>

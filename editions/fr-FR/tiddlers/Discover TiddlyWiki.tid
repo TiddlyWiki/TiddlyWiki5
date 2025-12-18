@@ -1,0 +1,37 @@
+created: 20140904121000000
+fr-title: Découvrez TiddlyWiki
+modified: 20150620082733997
+tags: HelloThere
+title: Discover TiddlyWiki
+type: text/vnd.tiddlywiki
+
+À moins que vous n'ayez déjà observé <<tw>> en action, nous pouvons vous garantir que vous n'avez jamais //rien// vu de semblable.  <<tw>> est :
+
+:: un outil, 
+:: une boîte à outils, 
+:: une communauté, 
+:: et une philosophie. 
+
+! <<tw>> est un outil
+
+''<<tw>> est d'abord et avant tout un outil'' : un outil libre et gratuitement téléchargeable, qui sert à conserver et organiser du contenu, qu'il provienne du Web, de vos documents, ou de votre cerveau. Il s'agit d'un outil de prise de notes, d'annotation, de gestion de signets et de mémos, d'écriture, de gestion de projets et de listes de choses à faire, de collaboration, de blog, et d'édition.
+
+Avec <<tw>>, vous créez ou collez du contenu dans des notes appelées //tiddlers//, puis vous connectez vos tiddlers avec des hyperliens et des tags. Vous pouvez ensuite retrouver vos notes facilement grâce à des fonctions comme des nuages de tags, des onglets latéraux, ou la fenêtre de recherche ultra rapide de <<tw>>. Vous pouvez même inclure dynamiquement le contenu d'un tiddler dans un autre — comme on assemble un jeu de construction — pour créer des articles, des listes, des présentations, etc.
+
+! <<tw>> est une boîte à outils
+
+En plus d'être un outil multi-fonctions, ''<<tw>> est aussi une boîte à outils''.
+
+Là où d'autres produits de prises de notes commencent par vous attirer avec l'application de base, pour vous faire ensuite payer les fonctions réellement utiles, <<tw>> contient une collection de thèmes, palettes, plugins, widgets et macros, entièrement gratuits et en constante augmentation. Vous pouvez les combiner dans tous les sens pour corriger et remodeler votre <<tw>> à votre guise. 
+
+! <<tw>> est aussi une communauté
+
+Nous sommes une [[communauté|Community]] d'utilisateurs et de développeurs qui s'aident mutuellement, imaginent de nouvelles façons de penser et d'organiser les connaissances, et créent de nouvelles solutions, afin d'adapter constamment <<tw>> aux besoins des utilisateurs. Les utilisateurs et les développeurs de <<tw>> partagent questions et conseils sur un forum Google dédié. Ils créent également des tutoriels, des adaptations et des plugins qui amélioreront votre expérience de <<tw>>. Rendez-vous à la section ''Communité'' de la [[table des matières|TableOfContents]] pour plus de détails.
+
+! Enfin, <<tw>> est une philosophie
+
+Prendre des notes et les organiser (et conserver toutes sortes de contenu) n'a d'intérêt que si vous êtes en mesure de les retrouver plus tard. Sinon, l'acte de prendre des notes n'est qu'une colossale perte de temps.
+
+La [[philosophie de TiddlyWiki|Philosophy of Tiddlers]] soutient que le meilleur moyen de prendre des notes consiste à les séparer en //tiddlers//, les plus petites unités sémantiques possibles. Un tiddler peut être une image, un lien sur une page web, la définition d'un terme, ou du code de personnalisation, comme une macro.
+
+Ces //tiddlers// peuvent être ensuite combinés pour créer des unités plus longues : déroulés, articles, listes, galeries d'images, etc. Les fonctions de <<tw>> comme l'étiquetage, les références croisées et les filtres, sont conçues spécifiquement pour vous aider à associer et connecter les tiddlers de plusieurs manières, afin de faciliter la récupération de vos notes, voire vous aider à découvrir des relations inattendues entre vos tiddlers et l'information qu'ils contiennent.

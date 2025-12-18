@@ -1,0 +1,215 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Geavanceerd
+Advanced/Hint: Interne informatie over deze TiddlyWiki
+Appearance/Caption: Uiterlijk
+Appearance/Hint: Manieren om het uiterlijk van je TiddlyWiki aan te passen
+Basics/AnimDuration/Prompt: Duur van de animatie:
+Basics/AutoFocus/Prompt: Standaard 'focus' veld van een nieuwe tiddler
+Basics/Caption: Standaard
+Basics/DefaultTiddlers/BottomHint: Gebruik &#91;&#91;dubbele rechte haken&#93;&#93; voor titels met spaties. Of je kan {{kiezen voor behoud van open tiddlers||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/Prompt: Standaard tiddlers:
+Basics/DefaultTiddlers/TopHint: Kies welke tiddlers bij opstarten getoond worden:
+Basics/Language/Prompt: Hallo! Huidige taal:
+Basics/NewJournal/Tags/Prompt: Labels voor nieuwe journaaltiddlers
+Basics/NewJournal/Text/Prompt: Tekst voor nieuwe journaaltiddlers
+Basics/NewJournal/Title/Prompt: Titel voor nieuwe journaaltiddlers
+Basics/NewTiddler/Tags/Prompt: Labels voor nieuwe tiddlers
+Basics/NewTiddler/Title/Prompt: Titel voor nieuwe tiddlers
+Basics/OverriddenShadowTiddlers/Prompt: Aantal overschreven schaduwtiddlers:
+Basics/ShadowTiddlers/Prompt: Aantal schaduwtiddlers:
+Basics/Subtitle/Prompt: Ondertitel:
+Basics/SystemTiddlers/Prompt: Aantal systeem tiddlers:
+Basics/Tags/Prompt: Aantal labels:
+Basics/Tiddlers/Prompt: Aantal tiddlers:
+Basics/Title/Prompt: Titel van deze ~TiddlyWiki:
+Basics/Username/Prompt: Gebruikersnaam voor wijzigingen:
+Basics/Version/Prompt: ~TiddlyWiki versie:
+EditorTypes/Caption: Editor types
+EditorTypes/Editor/Caption: Editor
+EditorTypes/Hint: Deze tiddlers bepalen welke editor wordt gebruikt voor specifieke tiddler types
+EditorTypes/Type/Caption: Type
+Info/Caption: Info
+Info/Hint: Informatie over deze TiddlyWiki
+KeyboardShortcuts/Add/Caption: voeg sneltoets toe
+KeyboardShortcuts/Add/Prompt: Type hier de sneltoets
+KeyboardShortcuts/Caption: Sneltoetsen
+KeyboardShortcuts/Hint: Beheer sneltoetstoewijzing
+KeyboardShortcuts/NoShortcuts/Caption: Geen sneltoetsen toegekend
+KeyboardShortcuts/Platform/All: Alle platformen
+KeyboardShortcuts/Platform/Linux: Alleen voor Linux
+KeyboardShortcuts/Platform/Mac: Alleen voor Macintosh
+KeyboardShortcuts/Platform/NonLinux: Alleen voor niet-Linux
+KeyboardShortcuts/Platform/NonMac: Alleen voor niet-Macintosh
+KeyboardShortcuts/Platform/NonWindows: Alleen voor niet-Windows
+KeyboardShortcuts/Platform/Windows: Alleen voor Windows
+KeyboardShortcuts/Remove/Hint: verwijder sneltoets
+LoadedModules/Caption: Geladen modules
+LoadedModules/Hint: Dit zijn de nu geladen tiddler modules gekoppeld aan hun brontiddlers. Alle cursieve modules hebben geen brontiddler, gewoonlijk omdat ze tijdens het bootproces gemaakt werden.
+Palette/Caption: Palet
+Palette/Editor/Clone/Caption: kloon
+Palette/Editor/Clone/Prompt: Het wordt aanbevolen dit schaduwpalet te klonen alvorens het te wijzigen.
+Palette/Editor/Delete/Hint: verwijder deze invoer van het huidige palet
+Palette/Editor/Names/External/Show: Toon namen van kleuren die niet tot het huiddige palet behoren
+Palette/Editor/Prompt: Wijzigen
+Palette/Editor/Prompt/Modified: Dit schaduwpalet is gewijzigd
+Palette/Editor/Reset/Caption: reset
+Palette/HideEditor/Caption: verberg editor
+Palette/Prompt: Huidig palet:
+Palette/ShowEditor/Caption: toon editor
+Parsing/Block/Caption: 'Block parse' regels
+Parsing/Caption: 'Parsing' (ontleding)
+Parsing/Hint: Hier kan je globaal individuele wiki 'parser' regels uitzetten. Wees voorzichtig daar het uitzetten van sommige 'parser' regels het juist functioneren van ~Tiddlywiki kan beletten (je kan het normale gedrag herstellen met [['safe mode'|https://tiddlywiki.com/#SafeMode]])
+Parsing/Inline/Caption: 'Inline parse' regels
+Parsing/Pragma/Caption: 'Pragma parse' regels
+Plugins/Add/Caption: Verkrijg meer plugins
+Plugins/Add/Hint: Installeer plugins van de officiële bibliotheek
+Plugins/AlreadyInstalled/Hint: Deze plugin is al geïnstalleerd met versie <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: Vereist ook:
+Plugins/Caption: Plugins
+Plugins/ClosePluginLibrary: schakel pluginbibliotheek uit
+Plugins/Disable/Caption: schakel uit
+Plugins/Disable/Hint: Schakel deze plugin uit na verversen van deze pagina
+Plugins/Disabled/Status: (uitgeschakeld)
+Plugins/Empty/Hint: Niets
+Plugins/Enable/Caption: activeer
+Plugins/Enable/Hint: Activeer deze plugin bij verversen van deze pagina
+Plugins/Install/Caption: installeer
+Plugins/Installed/Hint: Geïnstalleerde plugins:
+Plugins/Language/Prompt: Talen
+Plugins/Languages/Caption: Talen
+Plugins/Languages/Hint: Taal plugins
+Plugins/NoInfoFound/Hint: ''"<$text text=<<currentTab>>/>"'' niet gevonden
+Plugins/NotInstalled/Hint: Deze plugin is nu niet geïnstalleerd
+Plugins/OpenPluginLibrary: open pluginbibliotheek
+Plugins/Plugin/Prompt: Plugins
+Plugins/PluginWillRequireReload: (vereist een 'reload')
+Plugins/Reinstall/Caption: herinstalleer
+Plugins/Theme/Prompt: Thema's
+Plugins/Themes/Caption: Thema's
+Plugins/Themes/Hint: Thema plugins
+Plugins/Updates/Hint: Beschikbare updates voor geïnstalleerde plugins
+Saving/Caption: Opslaan
+Saving/DownloadSaver/AutoSave/Description: Sta automatisch opslaan toe voor de opslagmodule
+Saving/DownloadSaver/AutoSave/Hint: Sla automatisch op voor de opslagmodule
+Saving/DownloadSaver/Caption: Opslagmodule
+Saving/DownloadSaver/Hint: Deze instellingen gelden voor de HTML5 compatibele opslagmodule
+Saving/General/Caption: Algemeen
+Saving/General/Hint: Deze instellingen gelden voor alle geladen opslagmodules
+Saving/GitHub/Branch: 'Tak' (branch) voor opslaan (standaard `master`)
+Saving/GitHub/Caption: ~GitHub opslagmodule
+Saving/GitHub/Description: Deze instellingen worden alleen gebruikt voor opslaan bij ~GitHub
+Saving/GitHub/Filename: Bestandsnaam van doelbestand (b.v. `index.html`)
+Saving/GitHub/Password: Wachtwoord, OAUTH token of persoonlijk toegangstoken
+Saving/GitHub/Path: Pad naar doelbestand (b.v. `/wiki/`)
+Saving/GitHub/Repo: Opslagplaats (b.v. `Jermolene/TiddlyWiki5`)
+Saving/GitHub/ServerURL: Server URL (standaard `https://api.github.com`)
+Saving/GitHub/UserName: Gebruikersnaam
+Saving/GitService/Branch: Doeltak (branch) voor opslaan
+Saving/GitService/CommitMessage: Opgeslagen door TiddlyWiki
+Saving/GitService/Description: Deze instellingen worden alleen gebruikt bij opslaan naar <<service-name>>
+Saving/GitService/Filename: Bestandsnaam van doelbestand (b.v. `index.html`)
+Saving/GitService/Gitea/Caption: Gitea opslagmodule
+Saving/GitService/Gitea/Password: Persoonlijk toegangs-token voor API (via Gitea’s web interface: `Settings | Applications | Generate New Token`)
+Saving/GitService/GitHub/Caption: ~GitHub opslagmodule
+Saving/GitService/GitHub/Password: Wachtwoord, OAUTH token, of persoonlijk toegangs-token (zie [[GitHub help-pagina|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] voor details)
+Saving/GitService/GitLab/Caption: ~GitLab opslagmodule
+Saving/GitService/GitLab/Password: Persoonlijk toegangs-token voor API (zie [[GitLab help-pagina|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] voor details)
+Saving/GitService/Path: Pad naar doelbestand (b.v. `/wiki/`)
+Saving/GitService/Repo: Opslagdoel (b.v. `Jermolene/TiddlyWiki5`)
+Saving/GitService/UserName: Gebruikersnaam
+Saving/Heading: Opslaan
+Saving/Hint: Instellingen voor opslaan van de gehele TiddlyWiki als één bestand via een opslagmodule
+Saving/TiddlySpot/Advanced/Heading: Geavanceerde instellingen
+Saving/TiddlySpot/BackupDir: Backup folder
+Saving/TiddlySpot/Backups: Backups
+Saving/TiddlySpot/Caption: ~TiddlySpot opslagmodule
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot bedieningspaneel
+Saving/TiddlySpot/Description: Deze instellingen worden alleen gebruikt bij http://tiddlyspot.com of een vergelijkbare server
+Saving/TiddlySpot/Filename: Upload bestandsnaam
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //De standaard server URL is `http://<wikiname>.tiddlyspot.com/store.cgi` en kan gewijzigd worden in een speciaal serveradres//
+Saving/TiddlySpot/Password: Wachtwoord
+Saving/TiddlySpot/ServerURL: Server URL
+Saving/TiddlySpot/UploadDir: Upload folder
+Saving/TiddlySpot/UserName: Wiki naam
+Settings/AutoSave/Caption: Automatisch opslaan
+Settings/AutoSave/Disabled/Description: Sla veranderingen niet automatisch op
+Settings/AutoSave/Enabled/Description: Sla veranderingen automatisch op
+Settings/AutoSave/Hint: Sla veranderingen tijdens wijzigen automatisch op
+Settings/CamelCase/Caption: 'Camel Case' wiki links
+Settings/CamelCase/Description: Zet automatisch 'Camel Case' linken aan
+Settings/CamelCase/Hint: Dit vereist herladen van de wiki om effect te hebben.
+Settings/Caption: Instellingen
+Settings/DefaultMoreSidebarTab/Caption: Standaard 'Meer' zijpaneel tab
+Settings/DefaultMoreSidebarTab/Hint: Geef aan welke 'Meer' tab in het zijpaneel standaard wordt getoond
+Settings/DefaultSidebarTab/Caption: Standaard tab in zijpaneel
+Settings/DefaultSidebarTab/Hint: Geef aan welke tab in het zijpaneel standaard wordt getoond
+Settings/EditorToolbar/Caption: Editor knoppenbalk
+Settings/EditorToolbar/Description: Toon editor knoppenbalk
+Settings/EditorToolbar/Hint: Zet editor knoppenbalk aan of uit:
+Settings/Hint: Met deze instellingen kun je het gedrag van TiddlyWiki veranderen.
+Settings/InfoPanelMode/Caption: Tiddler infopaneel modus
+Settings/InfoPanelMode/Hint: Controleer wanneer het tiddler infopaneel sluit:
+Settings/InfoPanelMode/Popup/Description: Tiddler informatiepaneel sluit automatisch
+Settings/InfoPanelMode/Sticky/Description: Tiddler informatiepaneel blijft open staan tot expliciet sluiten
+Settings/LinkToBehaviour/Caption: Waar een tiddler opent
+Settings/LinkToBehaviour/InsideRiver/Hint: Navigatie //vanuit// de 'story river'
+Settings/LinkToBehaviour/OpenAbove: Open boven de huidige tiddler
+Settings/LinkToBehaviour/OpenAtBottom: Open onderaan de 'story river'
+Settings/LinkToBehaviour/OpenAtTop: Open bovenaan de 'story river'
+Settings/LinkToBehaviour/OpenBelow: Open beneden de huidige tiddler
+Settings/LinkToBehaviour/OutsideRiver/Hint: Navigatie //van buiten// de 'story river'
+Settings/MissingLinks/Caption: Wiki links
+Settings/MissingLinks/Description: Sta links naar ontbrekende tiddlers toe
+Settings/MissingLinks/Hint: Kies om te linken naar nog niet bestaande tiddlers
+Settings/NavigationAddressBar/Caption: Navigatie adresbalk
+Settings/NavigationAddressBar/Hint: Gedrag van het browseradres bij navigeren naar een tiddler:
+Settings/NavigationAddressBar/No/Description: Verander het browseradres niet
+Settings/NavigationAddressBar/Permalink/Description: Voeg de doeltiddler toe
+Settings/NavigationAddressBar/Permaview/Description: Voeg alle open tiddlers toe
+Settings/NavigationHistory/Caption: Navigeer-geschiedenis
+Settings/NavigationHistory/Hint: Werk de browsergeschiedenis bij als er naar een tiddler genavigeerd wordt:
+Settings/NavigationHistory/No/Description: Werk de browsergeschiedenis niet bij
+Settings/NavigationHistory/Yes/Description: Werk de browsergeschiedenis bij
+Settings/NavigationPermalinkviewMode/Caption: Permalink/permaview modus
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Kopieer permalink/permaview URL naar klembord
+Settings/NavigationPermalinkviewMode/Hint: Kies hoe permalink/permaview wordt behandeld:
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Werk de adresbalk bij met permalink/permaview URL
+Settings/PerformanceInstrumentation/Caption: Prestatiemeting
+Settings/PerformanceInstrumentation/Description: Zet prestatiemeting aan
+Settings/PerformanceInstrumentation/Hint: Toont prestatiestatistieken in de 'browser console'. Dit vereist herladen van de wiki om effect te hebben
+Settings/TitleLinks/Caption: Titels van tiddlers
+Settings/TitleLinks/Hint: Toon (optioneel) tiddler titels als links
+Settings/TitleLinks/No/Description: Toon tiddler titels niet als links
+Settings/TitleLinks/Yes/Description: Toon tiddler titels als links
+Settings/ToolbarButtons/Caption: Knoppen van knoppenbalk
+Settings/ToolbarButtons/Hint: Uiterlijk van standaard knop in knoppenbalk:
+Settings/ToolbarButtons/Icons/Description: Met pictogram (icon)
+Settings/ToolbarButtons/Text/Description: Met tekst
+Settings/ToolbarButtonStyle/Caption: Stijl van knoppen in knoppenbalk
+Settings/ToolbarButtonStyle/Hint: Kies de stijl voor knoppen in knoppenbalk:
+Settings/ToolbarButtonStyle/Styles/Borderless: Zonder rand
+Settings/ToolbarButtonStyle/Styles/Boxed: Vierkante rand
+Settings/ToolbarButtonStyle/Styles/Rounded: Ronde rand
+StoryView/Caption: 'Story' view
+StoryView/Prompt: Huidige view:
+Stylesheets/Caption: Stijlbladen
+Stylesheets/Expand/Caption: Klap alles uit
+Stylesheets/Hint: Dit is de getoonde CSS van de huidige stijlblad-tiddlers gelabeld met <<tag "$:/tags/Stylesheet">>
+Stylesheets/Restore/Caption: Herstel
+Theme/Caption: Thema
+Theme/Prompt: Huidig thema:
+TiddlerFields/Caption: Tiddler velden
+TiddlerFields/Hint: Dit is de complete reeks tiddlervelden in gebruik bij deze wiki (inclusief systeemtiddlers maar exclusief schaduwtiddlers).
+Toolbars/Caption: Knoppenbalken
+Toolbars/EditorToolbar/Caption: Editor knoppenbalk
+Toolbars/EditorToolbar/Hint: Kies welke knoppen in de editor knoppenbalk getoond worden. Sommige knoppen worden alleen getoond bij een bepaald type tiddler
+Toolbars/EditToolbar/Caption: Knoppenbalk bij wijzigen
+Toolbars/EditToolbar/Hint: Kies welke knoppen getoond worden voor tiddlers in wijzigmode
+Toolbars/Hint: Kies welke knoppen getoond worden
+Toolbars/PageControls/Caption: Pagina-knoppenbalk
+Toolbars/PageControls/Hint: Kies welke knoppen getoond worden op de pagina-knoppenbalk
+Toolbars/ViewToolbar/Caption: Knoppenbalk bij weergave
+Toolbars/ViewToolbar/Hint: Kies welke knoppen zichtbaar zijn bij weergave
+Tools/Download/Full/Caption: Download complete wiki (inclusief documentatie)

@@ -1,0 +1,42 @@
+title: $:/language/ThemeTweaks/
+
+Metrics: Tamanhos
+Metrics/BodyFontSize: Tamanho da fonte para o corpo do tiddler
+Metrics/BodyLineHeight: Altura da linha para o corpo do tiddler
+Metrics/FontSize: Tamanho de fonte
+Metrics/LineHeight: Altura de linha
+Metrics/SidebarBreakpoint: Ponto de quebra da barra lateral
+Metrics/SidebarBreakpoint/Hint: a largura mínima da página para qual o rol de<br>tiddlers e a barra lateral aparecem lado-a-lado
+Metrics/SidebarWidth: Largura da barra lateral
+Metrics/SidebarWidth/Hint: a largura da barra lateral no esquema fluido-fixo
+Metrics/StoryLeft: Posição à esquerda do rol
+Metrics/StoryLeft/Hint: Distancia a que a margem esquerda do rol de tiddlers<br>(área dos tiddlers) está da esquerda da página
+Metrics/StoryRight: Rol à direita
+Metrics/StoryRight/Hint: distancia da margem esquerda da barra<br>lateral à da esquerda da página
+Metrics/StoryTop: Posição vertical do rol
+Metrics/StoryTop/Hint: distancia da margem superior do<br>rol ao topo da página
+Metrics/StoryWidth: Largura do rol
+Metrics/StoryWidth/Hint: largura total do rol de tiddlers
+Metrics/TiddlerWidth: Largura dos tiddlers
+Metrics/TiddlerWidth/Hint: largura do rol de tiddlers
+Options: Opções
+Options/CodeWrapping: Dividir linhas longas em blocos de código
+Options/SidebarLayout: Esquema da barra lateral
+Options/SidebarLayout/Fixed-Fluid: Rol fixo, barra fluida
+Options/SidebarLayout/Fluid-Fixed: Rol fluido, barra lateral fixa
+Options/StickyTitles: Títulos persistentes
+Options/StickyTitles/Hint: Torna as barras de título dos tiddlers sempre visíveis como se ficassem coladas no topo da janela do navegador.
+Settings: Definições
+Settings/BackgroundImage: Imagem de fundo da página
+Settings/BackgroundImageAttachment: Anexo de imagem de fundo da página
+Settings/BackgroundImageAttachment/Fixed: Fixa em relação à janela
+Settings/BackgroundImageAttachment/Scroll: Rolar com tiddlers
+Settings/BackgroundImageSize: Tamanho da imagem de fundo
+Settings/BackgroundImageSize/Auto: Automática
+Settings/BackgroundImageSize/Contain: Conter
+Settings/BackgroundImageSize/Cover: Cobrir
+Settings/CodeFontFamily: Família da fonte de código
+Settings/EditorFontFamily: Família da fonte do editor
+Settings/FontFamily: Família da fonte
+ThemeTweaks: Afinações dos Temas
+ThemeTweaks/Hint: Pode ajustar alguns parâmetros do tema ''Vanilla''.

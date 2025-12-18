@@ -1,0 +1,8 @@
+created: 20190611125619962
+modified: 20190611125638512
+tags: [[subtract Operator]] [[Operator Examples]]
+title: subtract Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[23]subtract[19]]">>
+<<.operator-example 2 "=1 =2 =3 =4 +[subtract[4]]">>

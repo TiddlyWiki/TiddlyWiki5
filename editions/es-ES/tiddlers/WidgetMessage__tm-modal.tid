@@ -1,0 +1,34 @@
+caption: tm-modal
+created: 20140811112133701
+es-title: Mensaje: tm-modal
+modified: 20160415153537297
+tags: Messages
+title: WidgetMessage: tm-modal
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-modal` muestra determinado tiddler sobre una ventana modal que atenúa la página principal. Requiere de las siguientes propiedades en el objeto `event`:
+
+|!Nombre |!Descripción |
+|param |Título del tiddler que se quiere mostrar |
+|paramObject |HashMap de variables que se le suministra al modal |
+
+La variable <<.def "current tiddler">> se asigna al tiddler modal, pero puede anularse especificando un valor diferente en `paramObject`.
+
+Este mensaje se genera normalmente con ButtonWidget y lo procesa el núcleo de ~TiddlyWiki.
+
+!! Ejemplo
+
+Este es un ejemplo de modal y de cómo se le pasan parámetros:
+
+
+<$macrocall $name='wikitext-example-without-html' 
+
+src='Escribe tu nombre: <$edit-text tiddler="$:/temp/yourName" tag="input" default="Nombre"/>
+
+Escribe tu mensaje:
+<$edit-text tiddler="$:/temp/yourMessage" default="Mensaje"/>
+
+<$button>
+<$action-sendmessage $message="tm-modal" $param="SampleModal" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}}/>
+¡Haz clic!
+</$button>'/>

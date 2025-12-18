@@ -1,0 +1,176 @@
+title: $:/plugins/tiddlywiki/xlsx-utils/styles
+tags: [[$:/tags/Stylesheet]]
+
+\define quick-colour-selector-background() #bac0f1
+\define quick-colour-selector-border() #9196c1
+
+\define quick-colour-editor-background() #bae3f1
+\define quick-colour-editor-controls() #d2ffff
+\define quick-colour-editor-border() #97b8c3
+
+\define quick-colour-workbook-background() #baf1db
+\define quick-colour-workbook-controls() #d3fff6
+\define quick-colour-workbook-border() #98c3b2
+
+\define quick-colour-sheet-background() #f1ebba
+\define quick-colour-sheet-controls() #fffed3
+\define quick-colour-sheet-border() #c4be98
+
+\define quick-colour-row-background() #f1baba
+\define quick-colour-row-controls() #fed1d2
+\define quick-colour-row-border() #c39697
+
+\define quick-colour-field-background() #e0d4fb
+\define quick-colour-field-controls() #fcefff
+\define quick-colour-field-border() #b6adcb
+
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.tc-import-spec-selector {
+	border: 1px solid <<quick-colour-selector-border>>;
+	background-color: <<quick-colour-selector-background>>;
+	padding: 0.25em;
+}
+
+.tc-import-spec-editor-wrapper {
+	border: 1px solid <<quick-colour-editor-border>>;
+	background-color: <<quick-colour-editor-background>>;
+	padding: 0.25em;
+}
+
+.tc-import-spec-editor {
+	border: 1px solid <<quick-colour-editor-border>>;
+	background-color: <<colour background>>;
+	margin: 0.25em;
+}
+
+.tc-import-spec-editor-controls {
+	display: block;
+	background-color: <<quick-colour-editor-controls>>;
+	border-bottom: 1px solid <<quick-colour-editor-background>>;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.tc-import-spec-editor-controls li {
+	padding: 0.25em 0.5em;
+}
+
+.tc-import-spec-editor-controls li:not(:last-child) {
+	border-bottom: 1px solid <<quick-colour-editor-background>>;
+}
+
+.tc-import-spec-editor-list {
+}
+
+.tc-import-spec-workbook-wrapper {
+	border: 1px solid <<quick-colour-workbook-border>>;
+	background-color: <<quick-colour-workbook-background>>;
+	padding: 0.25em;
+	margin: 0.5em;
+}
+
+.tc-import-spec-workbook {
+	border: 1px solid <<quick-colour-workbook-border>>;
+	background-color: <<colour background>>;
+	margin: 0.25em;
+}
+
+.tc-import-spec-workbook-controls {
+	display: block;
+	background-color: <<quick-colour-workbook-controls>>;
+	border-bottom: 1px solid <<quick-colour-workbook-background>>;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.tc-import-spec-workbook-controls li {
+	padding: 0.25em 0.5em;
+}
+
+.tc-import-spec-workbook-controls li:not(:last-child) {
+	border-bottom: 1px solid <<quick-colour-workbook-background>>;
+}
+
+.tc-import-spec-workbook-list {
+}
+
+.tc-import-spec-sheet-wrapper {
+	border: 1px solid <<quick-colour-sheet-border>>;
+	background-color: <<quick-colour-sheet-background>>;
+	padding: 0.25em;
+	margin: 0.5em;
+}
+
+.tc-import-spec-sheet {
+	border: 1px solid <<quick-colour-sheet-border>>;
+	background-color: <<colour background>>;
+	margin: 0.25em;
+}
+
+.tc-import-spec-sheet-controls {
+	display: block;
+	background-color: <<quick-colour-sheet-controls>>;
+	border-bottom: 1px solid <<quick-colour-sheet-background>>;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.tc-import-spec-sheet-controls li {
+	padding: 0.25em 0.5em;
+}
+
+.tc-import-spec-sheet-controls li:not(:last-child) {
+	border-bottom: 1px solid <<quick-colour-sheet-background>>;
+}
+
+.tc-import-spec-sheet-list {
+}
+
+.tc-import-spec-row-wrapper {
+	border: 1px solid <<quick-colour-row-border>>;
+	background-color: <<quick-colour-row-background>>;
+	padding: 0.25em;
+	margin: 0.5em;
+}
+
+.tc-import-spec-row {
+	border: 1px solid <<quick-colour-row-border>>;
+	background-color: <<colour background>>;
+	margin: 0.25em;
+}
+
+.tc-import-spec-row-controls {
+	display: block;
+	background-color: <<quick-colour-row-controls>>;
+	border-bottom: 1px solid <<quick-colour-row-background>>;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.tc-import-spec-row-controls li {
+	padding: 0.25em 0.5em;
+}
+
+.tc-import-spec-row-controls li:not(:last-child) {
+	border-bottom: 1px solid <<quick-colour-row-background>>;
+}
+
+.tc-import-spec-row-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.tc-import-spec-field-wrapper {
+	font-size: 0.9em;
+	border: 1px solid <<quick-colour-field-border>>;
+	background-color: <<quick-colour-field-background>>;
+	padding: 0.25em;
+	margin: 0.5em;
+}

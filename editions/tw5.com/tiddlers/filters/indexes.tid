@@ -1,0 +1,18 @@
+created: 20140410103123179
+modified: 20221229094244039
+tags: [[Filter Operators]]
+title: indexes Operator
+type: text/vnd.tiddlywiki
+caption: indexes
+op-purpose: select all data properties of the input titles
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: none
+op-output: all the property names or indices contained in the input data tiddlers
+
+Each input title is processed in turn, and is ignored if it does not denote a [[data tiddler|DataTiddlers]]. The sorted list of property names is retrieved from the data tiddler and then [[dominantly appended|Dominant Append]] to the operator's output.
+
+Note that behind the scenes, the name/value pairs in a dictionary tiddler are represented as a [[JSON object|JSONTiddlers]]. JSON objects do not maintain a guaranteed ordering and so we cannot reliably retain the ordering of the data in the file.
+
+Where the content of a tiddler is in JSON format with an array as its root, the <<.op indexes>> operator retrieves a selection of integer indices instead.
+
+<<.operator-examples "indexes">>

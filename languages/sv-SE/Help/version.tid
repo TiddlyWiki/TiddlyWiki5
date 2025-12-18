@@ -1,0 +1,8 @@
+title: $:/language/Help/version
+description: Visar versionsnumret för en TiddlyWiki
+
+Visar versionsnumret för en TiddlyWiki.
+
+```
+--version
+```

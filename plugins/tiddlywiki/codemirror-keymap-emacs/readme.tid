@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/codemirror-keymap-emacs/readme
+
+This plugin adds a ''Keymap'' with some of the most important ''Emacs'' keyboard shortcuts
+
+For more information about available ''keyboard shortcuts'' see the [ext[CodeMirror emacs demo|https://codemirror.net/demo/emacs.html]]

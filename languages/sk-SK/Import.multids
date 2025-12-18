@@ -1,0 +1,14 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: Zrušiť
+Listing/Hint: Tieto tiddlery sú pripravené na import:
+Listing/Import/Caption: Import
+Listing/Select/Caption: Vyber
+Listing/Status/Caption: Stav
+Listing/Title/Caption: Názov
+Upgrader/Plugins/Suppressed/Incompatible: Blokovaný alebo zastaralý plugin 
+Upgrader/Plugins/Suppressed/Version: Blokovaný plugin (pretože novo inštalovaný <<incoming>>  je starší ako existujúci <<existing>>)
+Upgrader/Plugins/Upgraded: Plugin upgradovaný z <<incoming>> na <<upgraded>>
+Upgrader/State/Suppressed: Tiddler v stave dočasného blokovania
+Upgrader/System/Suppressed: Blokovaný systémový tiddler
+Upgrader/ThemeTweaks/Created: Zmigrovaná úprava témy z <$text text=<<from>>/>

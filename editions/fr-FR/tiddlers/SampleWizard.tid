@@ -1,0 +1,13 @@
+created: 20140912145537860
+footer: <$button message="tm-close-tiddler">Fermer</$button>
+fr-title: Exemple d'assistant 
+modified: 20150620085917613
+subtitle: Je suis un assistant modale
+title: SampleWizard
+type: text/vnd.tiddlywiki
+
+Voici un dialogue d'assistant modale, mémorisé dans le tiddler [[Exemple d'assistant|SampleWizard]].
+
+{{Motovun Jack.jpg}}
+
+Vous pouvez <$button message="tm-modal" param="SampleWizard2">dénicher les assistants</$button>.

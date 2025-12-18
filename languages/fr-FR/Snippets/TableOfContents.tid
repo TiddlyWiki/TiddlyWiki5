@@ -1,0 +1,9 @@
+title: $:/language/Snippets/TableOfContents
+tags: $:/tags/TextEditor/Snippet
+caption: Table des matières
+
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'TableOfContents'>>
+
+</div>

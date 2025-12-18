@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: 
+Date/DaySuffix/10: 
+Date/DaySuffix/11: 
+Date/DaySuffix/12: 
+Date/DaySuffix/13: 
+Date/DaySuffix/14: 
+Date/DaySuffix/15: 
+Date/DaySuffix/16: 
+Date/DaySuffix/17: 
+Date/DaySuffix/18: 
+Date/DaySuffix/19: 
+Date/DaySuffix/2: 
+Date/DaySuffix/20: 
+Date/DaySuffix/21: 
+Date/DaySuffix/22: 
+Date/DaySuffix/23: 
+Date/DaySuffix/24: 
+Date/DaySuffix/25: 
+Date/DaySuffix/26: 
+Date/DaySuffix/27: 
+Date/DaySuffix/28: 
+Date/DaySuffix/29: 
+Date/DaySuffix/3: 
+Date/DaySuffix/30: 
+Date/DaySuffix/31: 
+Date/DaySuffix/4: 
+Date/DaySuffix/5: 
+Date/DaySuffix/6: 
+Date/DaySuffix/7: 
+Date/DaySuffix/8: 
+Date/DaySuffix/9: 
+Date/Long/Day/0: dominica
+Date/Long/Day/1: lunedi
+Date/Long/Day/2: martedi
+Date/Long/Day/3: mercuridi
+Date/Long/Day/4: jovedi
+Date/Long/Day/5: venerdi
+Date/Long/Day/6: sabbato
+Date/Long/Month/1: januario
+Date/Long/Month/10: octobre
+Date/Long/Month/11: novembre
+Date/Long/Month/12: decembre
+Date/Long/Month/2: februario
+Date/Long/Month/3: martio
+Date/Long/Month/4: april
+Date/Long/Month/5: maio
+Date/Long/Month/6: junio
+Date/Long/Month/7: julio
+Date/Long/Month/8: augusto
+Date/Long/Month/9: septembre
+Date/Period/am: a.m.
+Date/Period/pm: p.m.
+Date/Short/Day/0: dom.
+Date/Short/Day/1: lun.
+Date/Short/Day/2: mar.
+Date/Short/Day/3: mer.
+Date/Short/Day/4: jov.
+Date/Short/Day/5: ven.
+Date/Short/Day/6: sab.
+Date/Short/Month/1: jan.
+Date/Short/Month/10: oct.
+Date/Short/Month/11: nov.
+Date/Short/Month/12: dec.
+Date/Short/Month/2: feb.
+Date/Short/Month/3: mar.
+Date/Short/Month/4: apr.
+Date/Short/Month/5: maio
+Date/Short/Month/6: jun.
+Date/Short/Month/7: jul.
+Date/Short/Month/8: aug.
+Date/Short/Month/9: sep.
+RelativeDate/Future/Days: <<period>> dies ab ora
+RelativeDate/Future/Hours: <<period>> horas ab ora
+RelativeDate/Future/Minutes: <<period>> minutas ab ora
+RelativeDate/Future/Months: <<period>> menses ab ora
+RelativeDate/Future/Second: 1 secunda ab ora
+RelativeDate/Future/Seconds: <<period>> secundas ab ora
+RelativeDate/Future/Years: <<period>> annos ab ora
+RelativeDate/Past/Days: <<period>> dies retro
+RelativeDate/Past/Hours: <<period>> horas retro
+RelativeDate/Past/Minutes: <<period>> minutas retro
+RelativeDate/Past/Months: <<period>> menses retro
+RelativeDate/Past/Second: 1 secunda retro
+RelativeDate/Past/Seconds: <<period>> secundas retro
+RelativeDate/Past/Years: <<period>> annos retro

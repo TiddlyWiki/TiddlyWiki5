@@ -1,0 +1,9 @@
+created: 20140908131700000
+modified: 20140919161524603
+tags: Learning
+title: Copying tiddlers between TiddlyWiki files
+type: text/vnd.tiddlywiki
+
+You can copy an individual tiddler from one TiddlyWiki file to another by dragging a link to the tiddler from one browser window to another.
+
+If you want to drag a link, first move it vertically, because horizontal movement is recognized by the browser as text selection.

@@ -1,0 +1,10 @@
+created: 20150615065648378
+fr-title: Plugin TW2Parser
+modified: 20150615065907518
+tags: Plugins
+title: TW2Parser Plugin
+type: text/vnd.tiddlywiki
+
+Ce plugin, pour l'instant expérimental, permet d'afficher le WIkiText écrit pour la version classique originelle de TiddlyWiki.
+
+Voir https://tiddlywiki.com/plugins/tiddlywiki/tw2parser/

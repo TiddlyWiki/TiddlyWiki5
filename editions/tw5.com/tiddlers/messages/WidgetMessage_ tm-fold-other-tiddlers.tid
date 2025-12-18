@@ -1,0 +1,18 @@
+caption: tm-fold-other-tiddlers
+created: 20160424232355215
+modified: 20191028113932268
+tags: Messages
+title: WidgetMessage: tm-fold-other-tiddlers
+type: text/vnd.tiddlywiki
+
+The `tm-fold-other-tiddlers` message folds all tiddlers in the current story list, except the one specified in the `param` parameter. It does so by setting the text of a state tiddler to either "<<.value "show">>" or "<<.value "hide">>", according to the fold state.
+
+|!Name |!Description |
+|param|Title of the tiddler that should be ignored by the fold operation. |
+|foldedStatePrefix |Prefix for the state tiddler in which the fold state is stored. |
+
+<<.tip "The core uses a foldStatePrefix of `$:/state/folded/` to store the fold states for the default story view.">>
+<<.warning "The state tiddlers title is computed as `foldStatePrefix + TiddlerTitle`. If the foldStatePrefix is not set, it will overwrite the text of the tiddler(s) itself, resulting in data loss. ">>
+
+
+The `tm-fold-other-tiddlers` message is usually generated with the ButtonWidget and is handled by the surrounding NavigatorWidget.

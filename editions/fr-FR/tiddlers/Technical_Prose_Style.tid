@@ -1,0 +1,18 @@
+created: 20150110182900000
+fr-title: Style technique rédactionnel
+modified: 20150621210510651
+tags: [[Improving TiddlyWiki Documentation]]
+title: Technical Prose Style
+type: text/vnd.tiddlywiki
+
+Lors de la rédaction d'un [[tiddler d'apprentissage|Instruction Tiddlers]], commencez par planifier la route des informations que vous souhaitez présenter. Ce doit être un cheminement simple, logique, progressif, sans retour en arrière ou référence à suivre.
+
+Employez cette méthode, même lors d'expressions indépendantes<<:>> toujours aller de la cause à l'effet, de l'ancien ou connu vers le nouveau ou l'inconnu. Une phrase technique claire contient rarement plus d'une idée. Elle évite donc les informations entre parenthèses. De même, garder une structure de paragraphe simple. Une présentation linéaire est souvent plus facile à comprendre que si elle est hiérarchisée.
+
+Il est souvent possible de simplifier une phrase sans changer sa signification, simplement en ajustant son vocabulaire ou sa structure grammaticale. <<.word "le processus de la macro est exécutée">> signifie simplement <<.word "La macro s'exécute">>. <<.word "Votre attente pourrait être ...">> signifie simplement <<.word "Vous pourriez attendre ...">>.
+
+Préférez la voix active par défaut<<:>> <<.word "Jane créé un tiddler">> plutôt que <<.word "un tiddler est créé par Jane">>. La voix passive  peut être utile si vous voulez focaliser l'attention du lecteur sur l'action elle-même ou sur son résultat<<:>> <<.word "un tiddler est créé">>. Mais il est souvent plus clair d'aller de la cause à l'effet et dire en voix active, <<.word "Cela créé un tiddler">>.
+
+La documentation présente souvent deux éléments en parallèle par similarité ou par différence. Le lecteur pourra plus facilement appréhender des concepts si vous employez la même structure de phrase pour chacun. Mais c'est contrebalancé par la nécessité de rompre la monotonie.
+
+Préférez les instructions précises aux discours verbeux. Si quelque chose a un nom, l'utiliser. Si quelque chose n'a pas de nom, lui attribuer un tiddler.

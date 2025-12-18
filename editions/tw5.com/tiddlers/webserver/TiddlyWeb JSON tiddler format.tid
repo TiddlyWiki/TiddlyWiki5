@@ -1,0 +1,33 @@
+created: 20181002130513206
+modified: 20181002131123893
+tags: [[WebServer Guides]]
+title: TiddlyWeb JSON tiddler format
+type: text/vnd.tiddlywiki
+
+The web server API uses tiddlers in a special format originally designed for TiddlyWeb:
+
+* Field values are represented as strings. Lists (like the ''tags'' and ''list'' fields) use double square brackets to quote values that contain spaces
+* Tiddlers are represented as an object containing any of a fixed set of standard fields, with custom fields being relegated to a special property called ''fields''
+* The standard fields are: ''bag'', ''created'', ''creator'', ''modified'', ''modifier'', ''permissions'', ''recipe'', ''revision'', ''tags'', ''text'', ''title'', ''type'', ''uri''
+
+For example, consider the following tiddler:
+
+```
+{
+	"title": "HelloThere",
+	"tags": "FirstTag [[Second Tag]]",
+	"my-custom-field": "Field value"
+}
+```
+
+In transit over the API, the tiddler would be converted to the following format:
+
+```
+{
+	"title": "HelloThere",
+	"tags": "FirstTag [[Second Tag]]",
+	"fields": {
+		"my-custom-field": "Field value"		
+	}
+}
+```

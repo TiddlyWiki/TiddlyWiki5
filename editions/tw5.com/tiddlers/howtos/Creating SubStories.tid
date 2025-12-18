@@ -1,0 +1,32 @@
+created: 20140214215718317
+modified: 20211127032217828
+tags: Learning
+title: Creating SubStories
+type: text/vnd.tiddlywiki
+
+This example shows how to create a sub-story within a tiddler that is independent of the main [[story|Story River]].  The NavigatorWidget and ListWidget work together to:
+
+# Add tiddlers to the [[story|Story River]] when links are clicked. Navigate to the tiddler corresponding to the link click. (''story'' attribute of the NavigatorWidget)
+# Remove tiddlers from the [[story|Story River]] when tiddler close buttons are clicked. (''story'' attribute of NavigatorWidget)
+# Animate the opening and closing of tiddlers. (''storyview'' attribute of the ListWidget)
+# Display the list of open tiddlers. (''filter'' and ''template'' attributes of the ListWidget)
+# Display tiddlers in [[draft mode|DraftMechanism]]. (''editTemplate'' attribute of the ListWidget)
+# Track [[navigation history|HistoryMechanism]]. (''history'' attribute of both NavigatorWidget and ListWidget)
+# And more!
+
+Here is the example code (see also StateMechanism for related discussion):
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$navigator story="$:/temp/DemoStoryList" history="$:/temp/DemoHistoryList">
+
+{{$:/core/ui/SideBarSegments/search}}
+
+<$list
+  filter="[list[$:/temp/DemoStoryList]]"
+  history="$:/temp/DemoHistoryList"
+  template={{$:/config/ui/ViewTemplate}}
+  editTemplate={{$:/config/ui/EditTemplate}}
+  storyview="classic"
+  emptyMessage="Use search box above. Clicked search links will open here instead of in the main story.<p>No search ideas? Click this link to get started: HelloThere</p>"/>
+
+</$navigator>'>

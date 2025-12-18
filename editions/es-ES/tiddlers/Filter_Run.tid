@@ -1,0 +1,30 @@
+caption: Instrucciones
+created: 20150124182117000
+es-title: Instrucciones de filtro
+modified: 20160421054304561
+tags: [[Filter Syntax]]
+title: Filter Run
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+( "[" { [[paso|"Filter Step"]] } "]"
+  |
+  [:{/"nada excepto [ ] o espacio"/}]
+  |
+  '"' [:{/'nada excepto "'/}] '"'
+  |
+  "'" [:{/"nada excepto '"/}] "'"
+)
+"""/>
+
+Una <<.def instrucción>> se compone de [[pasos|Filter Step]] y devuelve como output una [[selección|Title Selection]] que contribuye a una [[expresión|Filter Expression]] mayor.
+
+Los pasos se procesan de izquierda a derecha y el input del primer paso es el mismo que el de la instrucción de la que forma parte. En todos los demás pasos, el input corresponde al output del paso anterior.
+
+{{Selection Constructors}}
+
+Las tres últimas opciones del diagrama que se muestra más arriba coinciden con sintaxis del tipo `HelloThere`, `"HelloThere"`, `'HelloThere'` y `"Filter Operators"`y son abreviaturas de `[title[...]]`.
+
+Las opciones entrecomilladas existen como soporte para títulos que contengan corchetes, como `"un tiddler [[[[inusual]]]]"`.
+
+The quoted options exist to support titles that contain square brackets, as in `"An [[[[Unusual]]]] Tiddler"`.

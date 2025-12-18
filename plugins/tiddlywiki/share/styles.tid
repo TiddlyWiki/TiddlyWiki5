@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/share/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.tc-sharing-wizard-wrapper {
+	width: 100%;
+	padding: 1em 1em;
+	margin-bottom: 1em;
+    border-radius: 4px;
+    background: <<colour background>>;
+	<<box-shadow "inset 0px 2px 3px 2px rgba(0,0,0,0.4)">>
+}
+
+input.tc-sharing-wizard-editor {
+	width: 100%;
+}

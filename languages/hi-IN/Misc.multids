@@ -1,0 +1,22 @@
+title: $:/language/
+
+BinaryWarning/Prompt: इस tiddler बाइनरी डेटा शामिल
+ClassicWarning/Hint: इस tiddler टिड्लीविकि संस्करण 5. देखने के साथ पूरी तरह से संगत नहीं है जो टिड्लीविकि क्लासिक विकी टेक्स्ट प्रारूप में लिखा है,https://tiddlywiki.com/static/Upgrading.html for more details. 
+ClassicWarning/Upgrade/Caption: उन्नत करना
+CloseAll/Button: करीब सभी
+ConfirmCancelTiddler: क्या आप tiddler के लिए परिवर्तनों को छोड़ना चाहते हैं "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: आप "<$ पाठ पाठ = << शीर्षक >> />" tiddler को नष्ट करना चाहते हैं?
+ConfirmEditShadowTiddler: आप एक Shadow Tiddler संपादित करने के बारे में हैं। कोई भी परिवर्तन भविष्य में नवीनीकरण गैर तुच्छ बना रही डिफ़ॉल्ट सिस्टम पार कर जाएगी। क्या आप "</ $ पाठ पाठ = << शीर्षक >>>" संपादित करने के लिए चाहते हैं?
+ConfirmOverwriteTiddler: आप "<$ पाठ पाठ = << शीर्षक >> />" tiddler को अधिलेखित करना चाहते हैं?
+DefaultNewTiddlerTitle: नया Tiddler
+DropMessage: यहाँ ड्रॉप (या रद्द करने से बचने के लिए क्लिक करें)
+Encryption/ConfirmClearPassword: आप पासवर्ड को स्पष्ट करना चाहते हैं?  यह एन्क्रिप्शन को हटा देगा जब इस विकि बचत लागू किया
+Encryption/PromptSetPassword: इस टिड्लीविकि के लिए एक नया पासवर्ड सेट करें
+MissingTiddler/Hint:  लापता Tiddler बनाने के लिए "<$ पाठ पाठ = << currentTiddler >> />" - क्लिक करें {{$: / कोर / छवियों / संपादित करें बटन}} बनाने के लिए
+RecentChanges/DateFormat: दिनांक / माह / वर्ष
+SystemTiddler/Tooltip: यह एक ऐसी प्रणाली tiddler है
+TagManager/Colour/Heading: रंग
+TagManager/Icon/Heading: चिह्न
+TagManager/Info/Heading: जानकारी
+TagManager/Tag/Heading: टैग
+UnsavedChangesWarning: आप टिड्लीविकि में परिवर्तन सहेजे नहीं गए

@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: Tworzy wtyczkę podtrzebną do aktualizacji
+
+Tworzy tiddler `$:/UpgradeLibrary` do aktualizacji.
+
+Wtyczka aktualizacji ma identyczny format jak wtyczka tiddlera o typie `library`. Zawiera kopię każdej wtyczki, motywi i paczki jezykowej dostępnej wewnątrz repozytorium TiddlyWiki5.
+
+Ta komenda jest na użytek wewnętrzny; może też być przydatna dla osób robiących własne paczki aktualizacyjne.
+
+```
+--makelibrary <title>
+```
+
+Domyślna wartość "title" to `$:/UpgradeLibrary`.

@@ -1,0 +1,15 @@
+caption: Importación
+created: 20130825162000000
+es-title: Importar tiddlers
+modified: 20160429043819830
+tags: Features
+title: ImportTiddlers
+type: text/vnd.tiddlywiki
+
+En ~TiddlyWiki puedes importar contenido de varias maneras:
+
+* Usa el botón <<.button import>>, en la pestaña <<.sidebar-tab Tools>> de la barra lateral para seleccionar un archivo local
+
+* Arrastra archivos desde cualquier ventana de tu escritorio a la del navegador
+* Copia contenido directamente del portapapeles mediante la opción del menú, o pulsando <<.keycombo Ctrl V>>/<<.keycombo Cmmd V>>
+** Por el momento, únicamente Chrome/Chromium permite esta acción

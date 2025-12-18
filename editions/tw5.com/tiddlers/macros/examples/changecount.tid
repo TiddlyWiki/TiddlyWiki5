@@ -1,0 +1,18 @@
+created: 20150221151206000
+modified: 20150221151227000
+tags: [[changecount Macro]] [[Macro Examples]]
+title: changecount Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg="""<<changecount>>"""/>
+
+The value will increase if you edit this tiddler and store it again, even without making any changes to its content.
+
+To access the <<.var changecount>> of a different tiddler, use a <<.wlink TiddlerWidget>> widget:
+
+<$macrocall $name=".example" n="2"
+eg="""<$tiddler tiddler="Draft of 'New Tiddler'">
+<<changecount>>
+</$tiddler>"""/>
+
+The value shown will increase whenever you create, store or delete [[New Tiddler]].

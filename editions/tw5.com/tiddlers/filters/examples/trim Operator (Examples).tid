@@ -1,0 +1,15 @@
+created: 20190613153847475
+modified: 20190613153924808
+tags: [[trim Operator]] [[Operator Examples]]
+title: trim Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[ a b ]trim[]addprefix[-]addsuffix[-]]">>
+
+<<.operator-example 2 "[[ abc ]] [[def ]] [[ ghi]] +[trim[]addprefix[-]addsuffix[-]]">>
+<<.operator-example 3 "[[ abc ]] [[def ]] [[ ghi]] +[trim:prefix[]addprefix[-]addsuffix[-]]">>
+<<.operator-example 4 "[[ abc ]] [[def ]] [[ ghi]] +[trim:suffix[]addprefix[-]addsuffix[-]]">>
+
+<<.operator-example 5 "abacus baobab +[trim[ab]]">>
+<<.operator-example 6 "abacus baobab +[trim:prefix[ab]]">>
+<<.operator-example 7 "abacus baobab +[trim:suffix[ab]]">>

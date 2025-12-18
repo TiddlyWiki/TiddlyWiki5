@@ -1,0 +1,17 @@
+created: 20150518134126669
+modified: 20150518141051354
+tags: Konzept
+title: Permalink
+type: text/vnd.tiddlywiki
+
+Die einfachste Form eines Permalinks ist ein Link auf einen einzelnen Tiddler. Dazu wird die URL mit `#` erweitert.
+
+* https://tiddlywiki.com/languages/de-DE/#Willkommen!
+
+Der Titel kann Leerzeichen enthalten:
+
+* [[https://tiddlywiki.com/languages/de-DE/#Was kann TiddlyWiki]]
+
+Hinweis: Doppelte eckige Klammern sind hier nicht erforderlich. Wenn vorhanden, werden sie entfernt.
+
+Siehe auch: [[Permaview]]

@@ -1,0 +1,15 @@
+caption: {{$:/language/Buttons/Linkify/Caption}} (Markdown)
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
+description: {{$:/language/Buttons/Linkify/Hint}}
+icon: $:/plugins/tiddlywiki/markdown/images/markdown-linkify
+list-after: $:/core/ui/EditorToolbar/linkify
+shortcuts: ((linkify))
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/linkify
+tags: $:/tags/EditorToolbar
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="["
+	suffix="]()"
+/>

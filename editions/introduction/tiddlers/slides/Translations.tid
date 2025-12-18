@@ -1,0 +1,9 @@
+title: Translations
+
+TiddlyWiki is currently available in <$count filter="[[$:/languages/en-GB]] [plugin-type[language]sort[title]] -[[$:/languages/de-AT]]"/> languages:
+
+<div style.height="400px" style.overflowY="auto">
+{{$:/snippets/languageswitcher}}
+</div>
+
+Find out how to [[Get Started]].

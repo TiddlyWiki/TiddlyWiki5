@@ -1,0 +1,21 @@
+created: 20140908131438258
+creator: pmario
+modified: 20140913185153858
+modifier: pmario
+tags: Lexikon
+title: Tiddler
+type: text/vnd.tiddlywiki
+
+''Für Benutzer:''
+
+In ~TiddlyWiki ist ein Tiddler die ''kleinste Informations Einheit''.
+
+Andere Systeme verwenden dafür mehr prosaische Namen, wie: Element, Eintrag, Item oder auch Record.
+
+Die Bezeichnung Tiddler mag etwas verwirrend sein, ist aber verwirrend ''unverkennbar'' :)
+
+''Für Entwickler:''
+
+Intern ist ein tiddler ein Verzeichnis von unveränderbaren "name:value" Paaren, die als "fields" (Felder) bezeichnet werden. Das einzige Feld, das vorhanden sein ''muss'' ist das "text" Feld. 
+
+Weitere Informationen finden Sie unter: https://tiddlywiki.com/#TiddlerFields 

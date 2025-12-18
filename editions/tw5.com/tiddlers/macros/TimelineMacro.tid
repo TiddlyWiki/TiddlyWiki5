@@ -1,0 +1,25 @@
+caption: timeline
+created: 20150220180357000
+modified: 20170223033633361
+tags: Macros [[Core Macros]]
+title: timeline Macro
+type: text/vnd.tiddlywiki
+
+The <<.def timeline>> [[macro|Macros]] returns a list of tiddlers in reverse chronological order of modification (or some other [[date field|Date Fields]]), grouped by day.
+
+!! Parameters
+
+;limit
+: The maximum number of tiddlers to include, defaulting to 100. But if <<.em any>> tiddlers are included for a particular day, <<.em all>> of the other tiddlers for that day will also be included -- even if this exceeds the limit
+;format
+: A string specifying the desired [[format|DateFormat]], defaulting to `DDth MMM YYYY`
+;subfilter
+: An optional extra [[filter step|Filter Step]], e.g. `tag[MyTag]`
+;dateField
+: The name of the date field to use, defaulting to `modified`
+
+The tiddlers are selected by means of a [[filter expression|Filter Expression]], into which the <<.param subfilter>> and <<.param limit>> parameters are spliced as follows:
+
+> `[!is[system]$subfilter$has[$dateField$]!sort[$dateField$]limit[$limit$]eachday[$dateField$]]`
+
+<<.macro-examples "timeline">>

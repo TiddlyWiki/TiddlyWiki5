@@ -1,0 +1,15 @@
+title: $:/language/Import/
+
+Imported/Hint: Følgende tiddlere blev importeret:
+Listing/Cancel/Caption: Fortryd
+Listing/Hint: Disse tiddlere er klar til import:
+Listing/Import/Caption: Importér
+Listing/Select/Caption: Vælg
+Listing/Status/Caption: Status
+Listing/Title/Caption: Titel
+Upgrader/Plugins/Suppressed/Incompatible: Blokeret inkompatibelt eller forældet udvidelse
+Upgrader/Plugins/Suppressed/Version: Blokeret udvidelse (pga. at indkommende <<incoming>>  er ældre end den eksisterende <<existing>>)
+Upgrader/Plugins/Upgraded: Upgraderet udvidelse fra <<incoming>> til <<upgraded>>
+Upgrader/State/Suppressed: Blokeret foreløbig statustiddler
+Upgrader/System/Suppressed: Blokeret systemtiddler
+Upgrader/ThemeTweaks/Created: Migreret tema tweak fra <$text text=<<from>>/>

@@ -1,0 +1,8 @@
+caption: Notificación de ejemplo
+created: 20140912145543340
+es-title: Notificación de ejemplo
+modified: 20160429054048686
+title: SampleNotification
+type: text/vnd.tiddlywiki
+
+{{$:/core/images/info-button}} ¡Esto es una notificación!

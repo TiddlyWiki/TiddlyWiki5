@@ -1,0 +1,16 @@
+title: $:/language/Help/load
+description: 파일에서 티들러를 불러옵니다
+
+2.x.x 티들리위키 파일 (`.html`), `.tiddler`, `.tid`, `.json` 또는 다른 파일에서 티들러를 불러옵니다
+
+```
+--load <파일경로>
+```
+
+암호화된 티들리위키 파일에서 티들러를 불러오려면 먼저 비밀번호명령으로 비밀번호를 지정해야 합니다. 예를 들어:
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
+```
+
+티들리위키는 이미 불러온 플러그인의 오래된 버전을 불러오지 않음을 참고하세요.

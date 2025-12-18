@@ -1,0 +1,68 @@
+created: 20130825162100000
+modified: 20140614120823657
+tags: dev
+title: TiddlyWiki Architecture
+type: text/vnd.tiddlywiki
+
+The heart of TiddlyWiki is an extensible representation transformation engine for text and images. Given the text of a tiddler and its associated [[ContentType|https://tiddlywiki.com/#ContentType]], the engine can produce a rendering of the tiddler in a new [[ContentType|https://tiddlywiki.com/#ContentType]]. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
+
+! Overview
+
+{{TiddlyWiki Architecture.svg}}
+
+The processing pipeline shows how WikiText is parsed by a stack of parse rules into a parse tree. The parse tree is rendered as a tree of widgets, which is synchronised into the DOM via the RefreshMechanism.
+
+DOM events trigger actions on widgets which update the tiddler store. The updates trigger a change event which in turn triggers the refresh mechanism to update the DOM.
+
+! Client/Server Architecture
+
+{{Server Architecture.svg}}
+
+When programming TiddlyWiki 5 plugins which make changes outside the scope of the included examples, you will need a more in-depth understanding of TiddlyWiki's internal architecture.
+
+! Model
+
+TiddlyWiki's data model is a fairly simple key-value store.
+
+* Each tiddler is simply an object with a `fields` member containing members such as `title`, `text`, `tags` and so on.
+* The core `Wiki` class defined in `boot/boot.js` implements simple associative array behaviours like insertion, deletion, iteration, listing keys, and get-by-key.
+* The code in `core/modules/wiki.js` then extends the `Wiki` class with functionality such as event dispatch and various cache-backed methods such as `getTiddlersWithTag`.
+
+The active tiddler store can be accessed via `$tw.wiki` as in this example:
+
+```js
+$tw.wiki.makeTiddlerIterator($tw.wiki.getTiddlersWithTag('timeline')
+    )(function(tiddler, title) {
+        // Skip templates
+        if (tiddler.fields.tags.indexOf('templates') >= 0) { return; }
+
+        do_something(tiddler);
+});
+```
+
+Data which should not be visible to end users under normal operation (eg. internal components, plugins, persisted state for GUI widgets) is stored in [[system tiddlers|https://tiddlywiki.com/#SystemTiddlers]] organised via a set of [[namespaces|https://tiddlywiki.com/#Naming%20of%20System%20Tiddlers]].
+
+The similarity between filesystem paths and system tiddler names is intentional and will be used to provide a hierarchical browsing interface in a future TiddlyWiki release.
+
+! View
+
+TiddlyWiki's view layer has a //lot// in common with desktop widget toolkits and this is the part which is most likely to trip up newcomers. There are two facets to it:
+
+!! Role of the DOM
+Because TiddlyWiki may re-render content, plugins should treat the DOM as write-only.
+
+In other words, any state you store in the DOM could vanish at any instant and you need to use TiddlyWiki's internal [[StateMechanism|https://tiddlywiki.com/#StateMechanism]] instead.
+
+In a desktop application, the base widget class defines a method such as `paint(canvas)` which is called in response to `expose` events or "data has changed" messages.
+
+In TiddlyWiki, the `Widget` class in `core/modules/widgets/widgets.js` defines a `render(parent, nextSibling)` method which TiddlyWiki calls in response to various events such as changes in the model.
+
+(The potential inefficiency of this approach is mitigated via a `refresh(changedTiddlers)` method which TiddlyWiki calls to ask your widget whether its current rendering is stale.)
+
+!! Locus of Control
+
+While TiddlyWiki's extended [[WikiText]] is similar in design to HTML templating languages with logic constructs, you can't just ignore it and assemble all of your content in raw Javascript because it is used to define most of TiddlyWiki's UI.
+
+In this respect, it's closer to a glue language like Qt Quick or Python with Javascript filling the "create new components" role of C/C++ in widget toolkits like Qt and GTK+.
+
+To familiarise yourself with this, read [[Widgets in WikiText|https://tiddlywiki.com/#Widgets%20in%20WikiText]] and [[Introduction to Filters|https://tiddlywiki.com/#Introduction%20to%20Filters]]. then examine the internals for a tiddler like [[TaskManagementExample|https://tiddlywiki.com/#TaskManagementExample]].

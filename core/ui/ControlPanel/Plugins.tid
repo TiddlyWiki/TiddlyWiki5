@@ -1,0 +1,20 @@
+title: $:/core/ui/ControlPanel/Plugins
+tags: $:/tags/ControlPanel
+caption: {{$:/language/ControlPanel/Plugins/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Plugins/
+
+\define plugin-table(type)
+\whitespace trim
+<$set name="plugin-type" value="""$type$""">
+<$set name="qualified-state" value=<<qualify "$:/state/plugin-info">>>
+<$list filter="[!has[draft.of]plugin-type[$type$]sort[name]]" emptyMessage=<<lingo "Empty/Hint">> template="$:/core/ui/Components/plugin-info"/>
+</$set>
+</$set>
+\end
+
+{{$:/core/ui/ControlPanel/Plugins/AddPlugins}}
+
+<<lingo Installed/Hint>>
+
+<$macrocall $name="tabs" tabsList="[all[tiddlers+shadows]tag[$:/tags/ControlPanel/Plugins]!has[draft.of]]" default="$:/core/ui/ControlPanel/Plugins/Installed/Plugins" explicitState="$:/state/tab--86143343"/>

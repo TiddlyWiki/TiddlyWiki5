@@ -1,0 +1,67 @@
+created: 20140912140651119
+fr-title: Enregistrer les modifications
+modified: 20220402105820520
+saving-browser: Firefox Chrome Edge [[Internet Explorer]] Safari Opera
+saving-os: Windows Mac Linux Android iOS
+tags: [[Working with TiddlyWiki]]
+title: Saving
+type: text/vnd.tiddlywiki
+
+
+\define alltagsfilter()  
+<$vars tag1="tag[" tag2="]" lb="[" rb="tag[Saving]sort[delivery]]">
+<$set filter="[list<stateTiddler>addprefix<tag1>addsuffix<tag2>]+[join[]addprefix<lb>addsuffix<rb>]" name="alltags" select=0>
+<$text text=<<alltags>>/>
+</$set>
+</$vars>
+\end
+
+\define saverssidebaritem(item:"Linux")
+<$checkbox tiddler=<<qualify $:/temp/$item$>> field="status" checked="selected" checkactions=<<checkactions "$item$">> uncheckactions=<<uncheckactions "$item$">> default="closed"> $item$</$checkbox><br/>
+\end
+
+\define saverssidebaritemlist(fieldname:"os")
+<$list filter="[enlist{!!$fieldname$}]" variable="currentItem">
+<$macrocall $name="saverssidebaritem" item=<<currentItem>>/>
+</$list>
+\end
+
+\define uncheckactions(item:"Linux")
+<$action-listops  $tiddler=<<stateTiddler>> $subfilter="-[[$item$]]"/>
+\end
+
+\define checkactions(item:"Linux")
+<$action-listops $tiddler=<<stateTiddler>>  $subfilter="[[$item$]]"/>
+\end
+<$vars stateTiddler=<<qualify "$:/state/gettingstarted">> >
+
+Méthodes disponibles pour enregistrer les modifications avec <<tw>><<:>>
+
+<div class="tc-wrapper-flex">
+<div class="tc-saving-sidebar">
+  <div class="tc-saving-sidebar-category">
+      <div class="tc-saving-sidebar-category-title">Plateforme</div>
+     <div class="tc-saving-sidebar-category-item">
+                <<saverssidebaritemlist "saving-os">>
+      </div>
+   </div>
+   <div class="tc-saving-sidebar-category">
+       <div class="tc-saving-sidebar-category-title">Navigateur internet</div>
+        <div class="tc-saving-sidebar-category-item">
+               <<saverssidebaritemlist "saving-browser">>
+        </div>
+  </div>
+  
+</div>
+
+<!-- Page content -->
+<div class="content">
+<$wikify text=<<alltagsfilter>> name="alltagsfilterwikified">
+<$list filter=<<alltagsfilterwikified>>>
+{{||$:/_tw5.com-card-template}}
+</$list>
+</$wikify>
+
+</div>
+</div>
+</$vars>

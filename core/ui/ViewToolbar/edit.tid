@@ -1,0 +1,20 @@
+title: $:/core/ui/Buttons/edit
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/edit-button}} {{$:/language/Buttons/Edit/Caption}}
+description: {{$:/language/Buttons/Edit/Hint}}
+
+\whitespace trim
+<$button message="tm-edit-tiddler"
+	tooltip={{$:/language/Buttons/Edit/Hint}}
+	aria-label={{$:/language/Buttons/Edit/Hint}}
+	class=<<tv-config-toolbar-class>>
+>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		{{$:/core/images/edit-button}}
+	<%endif%>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text">
+		<$text text={{$:/language/Buttons/Edit/Caption}}/>
+	</span>
+	<%endif%>
+</$button>

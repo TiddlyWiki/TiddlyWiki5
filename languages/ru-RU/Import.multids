@@ -1,0 +1,14 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: Отмена
+Listing/Hint: Импортируемые заметки:
+Listing/Import/Caption: Импортировать
+Listing/Select/Caption: Выбор
+Listing/Status/Caption: Примечание
+Listing/Title/Caption: Название
+Upgrader/Plugins/Suppressed/Incompatible: Заблокированный несовместимый или устаревший плагин
+Upgrader/Plugins/Suppressed/Version: Заблокированный плагин (импотируемый <<incoming>> старее существующего <<existing>>)
+Upgrader/Plugins/Upgraded: Обновляемый плагин с версии <<incoming>> до <<upgraded>>
+Upgrader/State/Suppressed: Заблокированная временная внутренняя заметка
+Upgrader/System/Suppressed: Заблокированная системная заметка
+Upgrader/ThemeTweaks/Created: Импортированная настройка темы из <$text text=<<from>>/>

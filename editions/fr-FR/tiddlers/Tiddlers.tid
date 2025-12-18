@@ -1,0 +1,12 @@
+caption: Tiddlers
+created: 20130825213500000
+modified: 20150622110941886
+tags: Concepts
+title: Tiddlers
+type: text/vnd.tiddlywiki
+
+Les tiddlers représentent l'unité d'information fondamentale dans <<tw>>. Plus les tiddlers sont petits mieux ils fonctionnent, car il est alors plus facile de les réutiliser en les assemblant de différentes manières.
+
+D'autres systèmes disposent de concepts analogues nommés de façon confusément générique, du style <<gf items>>, <<gf entrées>>, <<gf entités>> ou <<gf enregistrements>>. <<tw>> considère qu'il est préférable d'être confusément distinct.
+
+Les tiddlers sont représentés en interne par des listes de valeurs nommées appelées <<gf champs>>. Le seul champ obligatoire est le champ `title`, mais pour être utiles, les tiddlers comportent aussi un champ `text`, et tout ou partie des champs standard énumérés dans TiddlerFields.

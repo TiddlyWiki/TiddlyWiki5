@@ -1,0 +1,167 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: avanceret søgning
+AdvancedSearch/Hint: Avanceret søgning
+Bold/Caption: fed
+Bold/Hint: Føj fed formatering til udvalgte
+Cancel/Caption: fortryd
+Cancel/Hint: Fortryd redigering af denne tiddler
+Clear/Caption: tøm
+Clear/Hint: Erstat billede med solid farve
+Clone/Caption: klon
+Clone/Hint: Klon denne tiddler
+Close/Caption: luk
+Close/Hint: Luk denne tiddler
+CloseAll/Caption: Luk alle
+CloseAll/Hint: Luk alle tiddlere
+CloseOthers/Caption: luk andre
+CloseOthers/Hint: Luk andre tiddlere
+ControlPanel/Caption: Kontrolpanel
+ControlPanel/Hint: Åbn kontrolpanel
+Delete/Caption: slet
+Delete/Hint: Slet denne tiddler
+Edit/Caption: redigér
+Edit/Hint: Redigér denne tiddler
+EditorHeight/Caption: editor højde
+EditorHeight/Caption/Auto: Automatisk tilpasning af højde til indhold
+EditorHeight/Caption/Fixed: Fixeret højde
+EditorHeight/Hint: Vælg højde på tekst editor
+Encryption/Caption: kryptering
+Encryption/ClearPassword/Caption: slet kodeord
+Encryption/ClearPassword/Hint: Slet kodeord og gem denne wiki uden kryptering
+Encryption/Hint: Angiv eller slet et kodeord for at gemme denne wiki
+Encryption/SetPassword/Caption: Angiv kodeord
+Encryption/SetPassword/Hint: Angiv et kodeord for gemme denne wiki i krypteret tilstand
+Excise/Caption: klip
+Excise/Caption/Excise: Udfør klip
+Excise/Caption/MacroName: Makro navn:
+Excise/Caption/NewTitle: Titel på ny tiddler:
+Excise/Caption/Replace: Erstat udklippet tekst med:
+Excise/Caption/Replace/Macro: makro
+Excise/Caption/Replace/Transclusion: transklusion
+Excise/Caption/Tag: Tag ny tiddler med titlen på denne tiddler
+Excise/Caption/TiddlerExists: Advarsel: tiddler eksister allerede
+Excise/Hint: Klip udvalgt tekst til en ny tiddler
+ExportPage/Caption: eksportér alle
+ExportPage/Hint: Eksportér alle tiddlere
+ExportTiddler/Caption: eksportér tiddler
+ExportTiddler/Hint: Eksportér tiddler
+ExportTiddlers/Caption: eksportér tiddlere
+ExportTiddlers/Hint: Eksportér tiddlere
+Fold/FoldBar/Hint: Valgfri bars til fold og udfold af tiddlere
+Fold/Hint: Fold denne tiddlers krop
+FoldAll/Caption: fold alle tiddlere
+FoldAll/Hint: Fold kroppen i alle åbne tiddlere
+FoldOthers/Caption: fold andre tiddlere
+FoldOthers/Hint: Fold kroppen i andre åbne tiddlere
+FullScreen/Caption: fuldskærm
+FullScreen/Hint: Gå til eller forlad fuldskærmstilstand
+Heading1/Caption: overskrift 1
+Heading1/Hint: Føj overskrift niveau 1 formatering til linier indeholdende udvalgte
+Heading2/Caption: overskrift 2
+Heading2/Hint: Føj overskrift niveau 2 formatering til linier indeholdende udvalgte
+Heading3/Caption: overskrift 3
+Heading3/Hint: Føj overskrift niveau 3 formatering til linier indeholdende udvalgte
+Heading4/Caption: overskrift 4
+Heading4/Hint: Føj overskrift niveau 4 formatering til linier indeholdende udvalgte
+Heading5/Caption: overskrift 5
+Heading5/Hint: Føj overskrift niveau 5 formatering til linier indeholdende udvalgte
+Heading6/Caption: overskrift 6
+Heading6/Hint: Føj overskrift niveau 6 formatering til linier indeholdende udvalgte
+Help/Caption: hjælp
+Help/Hint: Vis hjælpepanel
+HideSideBar/Caption: skjul sidebar
+HideSideBar/Hint: Skjul sidepanel
+Home/Caption: hjem
+Home/Hint: Åbn standardtiddlerne
+Import/Caption: importér
+Import/Hint: Importér filer
+Info/Caption: info
+Info/Hint: Vis information om denne tiddler
+Italic/Caption: kursiv
+Italic/Hint: Føj kursiv formatering til udvalgte
+Language/Caption: sprog
+Language/Hint: Vælg brugerfladesprog
+LineWidth/Caption: linie tykkelse
+LineWidth/Hint: Sæt linie tykkelse til maling
+ListBullet/Caption: punkt liste
+ListBullet/Hint: Føj punkt liste formatering til linier indeholdende udvalgte
+ListNumber/Caption: nummereret liste
+ListNumber/Hint: Føj nummereret liste formatering til linier indeholdende udvalgte
+MonoBlock/Caption: monospaced blok
+MonoBlock/Hint: Føj monospaced blok formatering til linier indeholdende udvalgte
+MonoLine/Hint: Føj monospaced bogstav formatering til udvalgte
+More/Caption: mere
+More/Hint: Flere muligheder
+NewHere/Caption: ny her
+NewHere/Hint: Opret en ny tiddler tagget med denne tiddlers titel
+NewImage/Caption: nyt billede
+NewImage/Hint: Opret en ny billed tiddler
+NewJournal/Caption: ny journal
+NewJournal/Hint: Opret en ny journaltiddler
+NewJournalHere/Caption: ny journal her
+NewJournalHere/Hint: Opret en ny journaltiddler tagget med denne tiddlers titel
+NewMarkdown/Caption: ny Markdown tiddler
+NewMarkdown/Hint: Opret en ny Markdown tiddler
+NewTiddler/Caption: ny tiddler
+NewTiddler/Hint: Opret en ny tiddler
+Opacity/Caption: gennemsigtighed
+Opacity/Hint: Sæt gennemsigtighed af maling
+OpenWindow/Caption: Åben i nyt vindue
+OpenWindow/Hint: Åbn tiddler i nyt vindue
+Paint/Caption: male farve
+Paint/Hint: Sæt male farve
+Palette/Hint: Vælg farve palette
+Permalink/Caption: permalink
+Permalink/Hint: Sæt browserens adresselinie til et direkte link til denne tiddler
+Permaview/Caption: permaview
+Permaview/Hint: Sæt browserens adresselinie til et direkte link til alle tiddlere i denne historie
+Picture/Caption: billede
+Picture/Hint: Indsæt billede
+Preview/Caption: forhåndsvisning
+Preview/Hint: Vis forhåndsvisnings panel
+PreviewType/Caption: forhåndsvisnings type
+PreviewType/Hint: Vælg forhåndsvisnings type
+Print/Caption: print side
+Print/Hint: Print den aktuelle side
+Quote/Caption: Citat
+Quote/Hint: Føj citat tekst formatering til linier indeholdende udvalgte
+Refresh/Caption: genopfrisk
+Refresh/Hint: Udfør en fuld genopfriskning af wiki'en
+Save/Caption: gem
+Save/Hint: Gem denne tiddler
+SaveWiki/Caption: gem ændringer
+SaveWiki/Hint: Gem ændringer
+ShowSideBar/Caption: vis sidepanel
+ShowSideBar/Hint: Vis sidepanel
+Size/Caption: billed størrelse
+Size/Caption/Height: Højde:
+Size/Caption/Resize: Ændre billed størrelse
+Size/Caption/Width: Bredde:
+Size/Hint: Sæt billed størrelse
+Stamp/Caption: stempel
+Stamp/Caption/New: Tilføj dit eget
+Stamp/Hint: Indsæt et prækonfiguret klip med tekst
+Stamp/New/Text: Tekst i klippet. (Husk at skrive en beskrivende titel i caption feltet).
+Stamp/New/Title: Navn som vist i menu
+StoryView/Caption: historieVisning
+StoryView/Hint: Vælg historievisning
+Strikethrough/Caption: gennemstregning
+Strikethrough/Hint: Føj gennemstregnings formatering til udvalgte
+Subscript/Hint: Føj subscript formatering til udvalgte
+Superscript/Hint: Føj superscript formatering til udvalgte
+TagManager/Caption: tagadministrator
+TagManager/Hint: Åbn tagadministrator
+Theme/Caption: tema
+Theme/Hint: Vælg visningstema
+Timestamp/Hint: Vælg om modifikationer opdaterer tidsstempler
+Timestamp/Off/Caption: tidsstempler er slået fra
+Timestamp/Off/Hint: Opdaterer ikke tiddstempler når tiddlere modificeres
+Timestamp/On/Caption: tidsstempker er slået til
+Timestamp/On/Hint: Opdater tidsstempler når tiddlere modificeres
+Underline/Caption: understregning
+Underline/Hint: Føj understregnings formatering til udvalgte
+Unfold/Caption: udfold tiddler
+Unfold/Hint: Udfold denne tiddlers krop
+UnfoldAll/Caption: udfold alle tiddlere
+UnfoldAll/Hint: Udfold kroppen i alle åbne tiddlere

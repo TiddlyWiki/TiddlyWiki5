@@ -1,0 +1,66 @@
+title: $:/plugins/tiddlywiki/help/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.tc-help-panel {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 310px;
+	height: 400px;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	<<box-shadow "0px 0px 5px rgba(0, 0, 0, 0.3)">>
+	border: 1px solid <<colour tiddler-border>>;
+	background: <<colour tiddler-background>>;
+	padding: 1em;
+	margin: 0.5em;
+	z-index: 1000;
+}
+
+dl.tc-help-cheatsheet {
+	overflow: hidden;
+}
+
+dl.tc-help-cheatsheet .red {
+	color: red;
+}
+
+.tc-help-cheatsheet > dt {
+	display: block;
+	float: left;
+	clear: left;
+	margin: 2% 1em 0 0;
+	padding;
+	font-weight: normal;
+	width: 45%;
+}
+
+.tc-help-cheatsheet > dt > pre {
+	margin: 0;
+}
+
+.tc-help-cheatsheet > dd {
+	display: block;
+	float: left;
+	width: 45%;
+	margin: 1em 0 0 0;
+	padding: 0;
+}
+
+.tc-help-cheatsheet > dd > p,
+.tc-help-cheatsheet > dd > h1,
+.tc-help-cheatsheet > dd > pre,
+.tc-help-cheatsheet > dd > ul,
+.tc-help-cheatsheet > dd > ol,
+.tc-help-cheatsheet > dd > dl,
+.tc-help-cheatsheet > dd > table,
+.tc-help-cheatsheet > dd > blockquote,
+.tc-help-cheatsheet > dd > blockquote >p {
+	margin: 0;
+}
+
+.tc-help-cheatsheet .tc-image {
+	width: 16px;
+}

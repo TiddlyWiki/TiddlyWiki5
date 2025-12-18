@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/external-attachments",
+	"name": "External Attachments",
+	"description": "External attachments for TiddlyDesktop",
+	"list": "readme settings",
+	"stability": "STABILITY_2_STABLE"
+}

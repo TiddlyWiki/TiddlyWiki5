@@ -1,0 +1,12 @@
+created: 20150221141258000
+modified: 20150221141431000
+tags: [[storyTiddler Variable]] [[Variable Examples]]
+title: storyTiddler Variable (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1"
+eg="""<ol>
+<$list filter="[prefix[J]]">
+<li><<currentTiddler>>, <<storyTiddler>></li>
+</$list>
+</ol>"""/>

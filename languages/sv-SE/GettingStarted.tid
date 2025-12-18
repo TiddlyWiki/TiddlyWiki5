@@ -1,0 +1,17 @@
+title: GettingStarted
+
+\define lingo-base() $:/language/ControlPanel/Basics/
+Välkommen till ~TiddlyWiki och ~TiddlyWiki-community
+
+För att komma igång med denna tomma ~TiddlyWiki, måste du ändra följande. Kolla på https://tiddlywiki.com/#GettingStarted för detaljer
+
+!! Ställ in denna ~TiddlyWiki
+
+<div class="tc-control-panel">
+
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
+
+Kolla [[control panel|$:/ControlPanel]] för mer inställningar.

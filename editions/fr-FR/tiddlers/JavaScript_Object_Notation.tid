@@ -1,0 +1,13 @@
+caption: JSON
+created: 20150221152904000
+fr-title: JSON, Notation Objet JavaScript
+modified: 20150623074108882
+tags: Definitions
+title: JavaScript Object Notation
+type: text/vnd.tiddlywiki
+
+<<.dlink-ex JSON "http://en.wikipedia.org/wiki/JSON">> est un format de texte brut employé pour modéliser objets de structures hiérarchique contenant des champs nommés (fields).
+
+Les [[Tiddlers Data|DataTiddlers]] peuvent avoir un contenu JSON.
+
+La macro <<.mlink jsontiddlers>> renvoie le contenu d'un tiddler au format JSON.

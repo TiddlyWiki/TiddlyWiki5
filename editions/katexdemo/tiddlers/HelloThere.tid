@@ -1,0 +1,166 @@
+created: 20220504124110967
+modified: 20220504124250020
+title: HelloThere
+type: text/vnd.tiddlywiki
+
+This is a TiddlyWiki plugin for mathematical and chemical typesetting based on KaTeX from Khan Academy.
+
+It is completely self-contained, and doesn't need an Internet connection in order to work. It works both in the browser and under Node.js.
+
+! Installation
+
+To add the plugin to your own wiki, just //drag the following link to your ~TiddlyWiki browser window//.
+
+[[$:/plugins/tiddlywiki/katex]]
+
+! Using KaTeX
+
+The usual way to include ~LaTeX is to use `$$`, as shown in the examples below.
+
+The underlying KaTeX widget is provided under the name `<$latex>` and is also available under the alias `<$katex>`. It's better to use the generic `<$latex>` name unless you are running multiple ~LaTeX plugins and wish to specifically target KaTeX.
+
+! Examples - mathematical typesetting
+
+These examples are taken from [ext[http://khan.github.io/KaTeX/]]
+
+!! Example 1
+
+If the text between `$$` contains newlines it will rendered in display mode:
+
+```
+$$
+f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
+$$
+```
+
+$$
+f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
+$$
+
+!! Example 2
+
+```
+$$
+\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }
+$$
+```
+
+$$
+\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }
+$$
+
+
+!! Example 3
+
+```
+$$
+1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \quad\quad \text{for }\lvert q\rvert<1.
+$$
+```
+
+$$
+1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \quad\quad \text{for }\lvert q\rvert<1.
+$$
+
+!! Widget Example
+
+For more flexibility the KaTeX widget can also be used via the full widget syntax:
+
+```
+<$latex text="f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi" displayMode="true"></$latex>
+```
+
+<$latex text="f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi" displayMode="true"></$latex>
+
+! ''Error Handling''
+
+Any LaTeX syntax errors are flagged with the problematic syntax highlighted. For example:
+
+```
+$$ f(x) = \int_{-\infty}^\infinity\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi $$
+```
+
+$$ f(x) = \int_{-\infty}^\infinity\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi $$
+
+<hr>
+
+! Examples - chemical typesetting
+
+These examples are taken from [ext[https://mhchem.github.io/MathJax-mhchem/]]
+
+!! Example 1
+
+```
+$$
+\ce{CO2 + C -> 2 CO}
+$$
+```
+
+$$
+\ce{CO2 + C -> 2 CO}
+$$
+
+
+!! Example 2
+
+```
+$$
+\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}
+$$
+```
+
+$$
+\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}
+$$
+
+
+!! Example 3
+
+```
+$$
+\ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O}
+$$
+```
+
+$$
+\ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O}
+$$
+
+
+!! Example 4
+
+```
+$$
+\ce{A\bond{~--}B\bond{~=}C\bond{-~-}D}
+$$
+```
+
+$$
+\ce{A\bond{~--}B\bond{~=}C\bond{-~-}D}
+$$
+
+
+!! Example 5
+
+```
+$$
+\ce{Li^x_{Li,1-2x}Mg^._{Li,x}$V$'_{Li,x}Cl^x_{Cl}}
+$$
+```
+
+$$
+\ce{Li^x_{Li,1-2x}Mg^._{Li,x}$V$'_{Li,x}Cl^x_{Cl}}
+$$
+
+
+!! Example 6
+
+```
+$$
+\ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$}
+$$
+```
+
+$$
+\ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$}
+$$

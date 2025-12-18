@@ -1,0 +1,45 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/plain/tiddler
+
+<$vars toc-type={{!!toc-type}}>
+
+<$list filter="[<toc-type>match[document]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/document" mode="block"/>
+</$list>
+
+<$list filter="[<toc-type>match[heading]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/heading" mode="block"/>
+</$list>
+
+<$list filter="[<toc-type>match[paragraph]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/paragraph" mode="block"/>
+</$list>
+
+<$list filter="[<toc-type>match[note]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/note" mode="block"/>
+</$list>
+
+<$list filter="[<toc-type>match[list]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/list" mode="block"/>
+</$list>
+
+<$list filter="[<toc-type>match[item]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/item" mode="block"/>
+</$list>
+
+<$list filter="[<toc-type>match[image]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/image" mode="block"/>
+</$list>
+
+<$list filter="[<toc-type>match[def-list]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/def-list" mode="block"/>
+</$list>
+
+<$list filter="[<toc-type>match[term]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/term" mode="block"/>
+</$list>
+
+<$list filter="[<toc-type>match[definition]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/definition" mode="block"/>
+</$list>
+
+</$vars>

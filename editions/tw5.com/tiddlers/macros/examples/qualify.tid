@@ -1,0 +1,18 @@
+created: 20150221172527000
+tags: [[qualify Macro]] [[Macro Examples]]
+title: qualify Macro (Examples)
+type: text/vnd.tiddlywiki
+
+The results returned by the <<.mlink qualify>> macro depend on its location in the transclusion stack.
+
+The two examples below are identical, but produce different results because the second one has been transcluded from [[another tiddler|$:/editions/tw5.com/macro-examples/qualify-transcluded]].
+
+Each example shows the result of calling <<.var qualify>> and then the value of the <<.vlink transclusion>> variable.
+
+<$macrocall $name=".example" n="1"
+eg="""<ul>
+<li><code><<qualify "BaseTiddler">></code></li>
+<li><code><<transclusion>></code></li>
+</ul>"""/>
+
+{{$:/editions/tw5.com/macro-examples/qualify-transcluded}}

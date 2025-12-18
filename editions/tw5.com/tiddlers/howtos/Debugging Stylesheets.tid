@@ -1,0 +1,11 @@
+created: 20211125175712017
+modified: 20211125175906085
+tags: [[Using Stylesheets]]
+title: Debugging Stylesheets
+type: text/vnd.tiddlywiki
+
+The core shadow tiddler $:/snippets/DebugStylesheets contains a simple tool for tracking down certain problems with mismatched brackets and other nested structures.
+
+In the list below, any stylesheets containing an error will be marked with a red cross:
+
+{{$:/snippets/DebugStylesheets}}

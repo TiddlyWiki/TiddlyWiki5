@@ -1,0 +1,22 @@
+created: 20140103091348509
+fr-title: Ajouter un bouton suivre sur twitter
+modified: 20150614104441104
+tags: Learning
+title: Adding a Twitter Follow button
+type: text/vnd.tiddlywiki
+
+Voici une macro qui propose un Bouton suivre sur twitter pour un utilisateur particulier<<:>>
+
+```
+\define twitterFollowButton(username)
+<iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?screen_name=$username$"  style="width:300px; height:20px;"></iframe>
+\end
+```
+
+La seule modification à la version publiée sur https://dev.twitter.com/docs/follow-button est la suppression des nouvelles lignes.
+
+Notez que l'URL src est passée sans protocole (ie "http" or "https"). De cette façon, cela fonctionne que les sites soient sur un domaine en HTTP ou en HTTPS. Si vous voulez aussi que le bouton Twitter fonctionne en utilisant TiddlyWiki horsligne par une URL "file://", vous devrez ajouter manuellement le protocole. Par exemple:
+
+```
+<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/follow_button.html?screen_name=jermolene"  style="width:300px; height:20px;"></iframe>
+```

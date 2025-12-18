@@ -1,0 +1,14 @@
+created: 20150622122359427
+fr-title: Tiddlers système
+modified: 20150624092833623
+tags: Concepts
+title: SystemTiddlers
+type: text/vnd.tiddlywiki
+
+Un tiddler système correspond à tout tiddler dont le titre commence par `$:/`<<;>> de tels tiddlers sont automatiquement ignorés de plusieurs opérations. Ils n'apparaissent pas dans les listes des résultats de recherche, mais une liaison directe vers l'un d'eux fonctionne de façon classique.
+
+TiddlyWiki considère tout comme un [[tiddler | Tiddlers]], y compris ses composants internes et sa configuration. Ainsi, même un TiddlyWiki, apparemment vide, contient, en fait, des dizaines de tiddlers nécessaires à son bon fonctionnement. L'emploie de tiddlers système évite les méprises des utilisateurs occasionnels.
+
+Les tiddlers système actuels sont<<:>>
+
+<$list filter="[is[system]sort[title]]"/>

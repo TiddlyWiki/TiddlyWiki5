@@ -1,0 +1,33 @@
+created: 201401191419
+modified: 201901150000
+tags: Widgets
+title: TextWidget
+caption: text
+text-test: e=mc^^2^^
+
+! Introduction
+
+The text widget displays plain text without parsing it as [[WikiText]], opposite of [[WikifyWidget]].
+
+! Content and Attributes
+
+The content of the `<$text>` widget is not used.
+
+|!Attribute |!Description |
+|text |The text to display |
+
+! Example
+
+<$macrocall $name='wikitext-example-without-html' src='<$vars string="//italic//">
+
+* <<string>>
+* <$text text=<<string>>/>
+
+</$vars>
+' />
+
+<$macrocall $name='wikitext-example-without-html' src='
+The text-test field of this tiddler has a field value: <$text text={{!!text-test}}/>
+
+It displays in its normal WikiText format as: {{!!text-test}}
+' />

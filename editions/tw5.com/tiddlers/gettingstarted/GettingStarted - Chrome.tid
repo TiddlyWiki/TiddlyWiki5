@@ -1,0 +1,10 @@
+caption: Chrome
+created: 20140811165935523
+modified: 20211114031651878
+tags: GettingStarted
+title: GettingStarted - Chrome
+type: text/vnd.tiddlywiki
+
+TiddlyWiki on Google Chrome can only save changes using the HTML5-compatible saver module.
+
+{{Saving with the HTML5 saver}}

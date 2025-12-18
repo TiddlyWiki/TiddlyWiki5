@@ -1,0 +1,10 @@
+created: 20140912145532856
+footer: <$button message="tm-close-tiddler">Cerrar</$button>
+modified: 20160416120503104
+subtitle: Soy otro asistente modal
+title: SampleWizard2
+type: text/vnd.tiddlywiki
+
+Este es otro diálogo de asistente modal, guardado en el tiddler SampleWizard2.
+
+Puedes <$button message="tm-modal" param="SampleWizard">anidar asistentes</$button>

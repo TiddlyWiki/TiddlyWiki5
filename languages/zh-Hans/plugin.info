@@ -1,0 +1,9 @@
+{
+	"title": "$:/languages/zh-Hans",
+	"name": "zh-Hans",
+	"plugin-type": "language",
+	"description": "简体中文",
+	"author": "BramChen",
+	"core-version": ">=5.0.8",
+	"plugin-priority": 100
+}

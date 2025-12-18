@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/comments/above-story
+tags: $:/tags/AboveStory
+
+<$reveal state="$:/config/Comments/EnableWikiComments" type="match" text="yes" default="no">
+
+<$tiddler tiddler="$:/SiteTitle">
+
+<$transclude tiddler="$:/plugins/tiddlywiki/comments/comments-template" mode="inline"/>
+
+</$tiddler>
+
+</$reveal>

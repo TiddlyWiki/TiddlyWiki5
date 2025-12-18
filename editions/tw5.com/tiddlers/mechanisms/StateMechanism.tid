@@ -1,0 +1,41 @@
+created: 20131228164411884
+modified: 20211127033939415
+tags: Mechanisms
+title: StateMechanism
+type: text/vnd.tiddlywiki
+
+The StateMechanism in TiddlyWiki is at the heart of how complex user interfaces can be built from WikiText.
+
+In the browser, the TiddlyWiki display is produced by dynamically rendering the tiddler [[$:/core/ui/PageTemplate]]. Through various transclusions and other widgets it renders the entire user interface. The dynamic rendering is accomplished by a mechanism called "binding": any changes to the tiddlers in the store are dynamically reflected in the browser display.
+
+The stack of templates that make up the TiddlyWiki display are complex but we'll focus on the line that displays the main story column:
+
+```
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate" storyview={{$:/view}} />
+```
+
+Breaking down the attributes applied to the list widget:
+
+* ''filter'': selects the list of tiddlers in the `list` field of the tiddler [[$:/StoryList]]. If a tiddler is added or removed from that list then it is automatically reflected in the displayed list
+* ''history'': references the tiddler to be used to store the history stack (see the HistoryMechanism)
+* ''template'': identifies a template tiddler to be used for rendering each tiddler in the list
+* ''editTemplate'': identifies a different template tiddler to be used for rendering tiddlers that are in [[draft mode|DraftMechanism]]
+* ''storyview'': specifies the story view to be used (eg classic, or zoomin)
+
+The [[$:/StoryList]] tiddler is an example of a StateTiddler: a tiddler that is used to hold the state of the user interface. Changes to the user interface are made indirectly, by changing the underlying state tiddlers, and letting TiddlyWiki ripple the changes through the user interface.
+
+Note how this approach makes the ''open'' tab in the sidebar very easy to implement: it is just another list widget referencing the same state tiddler, but with a different template:
+
+```
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+<$button message="tm-close-tiddler" class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link/>
+</$list>
+```
+
+Now consider the implementation of the info panel within the tiddler template. We want to be able to toggle the info panel open and closed, which means that we must track its current state in a tiddler.
+
+However, we can't track the state in a tiddler called, say, [[$:/InfoPanelState]] because every tiddler would share the same state; changing the value of the tiddler would affect all tiddlers displayed in the story.
+
+The solution is to dynamically generate a unique title for each state tiddler that we need. We need to ensure that the same state tiddler title is generated each time a user interface element is rendered. To do that, we append together tokens representing each of the stack of transclusions that led to the current rendering location. Then that string of symbols is hashed to a simple numeric value.
+
+The process of generating a state tiddler title is encapsulated in the <<.mlink qualify>> macro.

@@ -1,0 +1,27 @@
+created: 20130825213300000
+modified: 20241017114309207
+original-modified: 20180307153530187
+tags: Learning
+title: TaskManagementExample
+ja-title: タスク管理の例
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5は、カスタマイズすることなく、シンプルなタスク管理システムとして使用できます。タスクに`task`タグを付け、完了したタスクに`done`タグも付けるというアイデアです。このようにして、タスクリストを簡単に作成できます。
+
+<<.tip """タスクをドラッグアンドドロップして並べ替える機能が追加された[[このデモの拡張版|TaskManagementExample (Draggable)]]があります""">>
+
+! 未完了のタスク
+
+<$list filter="[!has[draft.of]tag[task]!tag[done]sort[created]]">
+
+<$checkbox tag="done"> <$link/></$checkbox>
+
+</$list>
+
+! 完了したタスク
+
+<$list filter="[!has[draft.of]tag[task]tag[done]sort[created]]">
+
+<$checkbox tag="done"> ~~<$link/>~~</$checkbox>
+
+</$list>

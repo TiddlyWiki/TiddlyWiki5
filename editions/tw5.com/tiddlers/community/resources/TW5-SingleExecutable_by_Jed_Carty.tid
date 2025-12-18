@@ -1,0 +1,14 @@
+created: 20180320020552940
+modified: 20210106151027657
+tags: [[Other Resources]]
+title: TW5-SingleExecutable by Jed Carty
+type: text/vnd.tiddlywiki
+url: https://github.com/OokTech/TW5-SingleExecutable
+
+TiddlyWiki5 Packaged with the multi-user plugin in a single executable file. 
+
+{{!!url}}
+
+<<<
+Tiddlywiki, node js, multiuser plugin - all packaged into a single file so user can just download the file and run it and not have to install anything else. Versions available for windows, osx, and linux. 
+<<<

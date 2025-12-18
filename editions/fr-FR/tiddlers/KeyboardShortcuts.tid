@@ -1,0 +1,14 @@
+created: 20140526204527418
+fr-title: Raccourcis clavier
+modified: 20150601094524295
+tags: Features [[Working with TiddlyWiki]]
+title: KeyboardShortcuts
+type: text/vnd.tiddlywiki
+
+La prise en compte des raccourcis clavier est actuellement très limitée mais s'accroîtra dans les versions futures.
+
+! Raccourcis de saisie
+
+|Touches |Description du raccourci|
+|<kbd>ctrl-enter</kbd> |Valide les modifications effectuées dans le tiddler en cours de saisie |
+|<kbd>escape</kbd> |Annule les modification effectuées dans le tiddler en cours de saisie |

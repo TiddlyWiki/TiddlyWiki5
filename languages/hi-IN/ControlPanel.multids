@@ -1,0 +1,102 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: आगे बढ़ा हुआ
+Advanced/Hint: इस tiddler wiki के बारे में आंतरिक जानकारी
+Appearance/Caption: दिखावट
+	
+
+Appearance/Hint:  आपके टिड्लीविकि को अनुकूलित रूप से दिखने के तरीके
+Basics/AnimDuration/Prompt: एनीमेशन अवधि:
+Basics/Caption: पहला
+Basics/DefaultTiddlers/BottomHint:  प्रयोग करें&#91;&#91;डबल वर्ग ब्रैकेट्स&#93;&#93;रिक्त स्थान के साथ शीर्षक के लिए। या फिर आप चुन सकते हैं{{retain story ordering||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/Prompt: डिफ़ॉल्ट tiddlers:
+Basics/DefaultTiddlers/TopHint: कौन सा tiddler शुरुआत मे दिखाना है 
+Basics/Language/Prompt: हैलो! वर्तमान भाषा:
+Basics/NewJournal/Tags/Prompt: नये जर्नल tiddlers के लिए टैग
+Basics/NewJournal/Title/Prompt: नये जर्नल tiddlers का शीर्षक
+Basics/OverriddenShadowTiddlers/Prompt: रद्द की गयी tiddlers की संख्या:
+Basics/ShadowTiddlers/Prompt: छाया tiddlers की संख्या:
+Basics/Subtitle/Prompt: उपशीर्षक:
+Basics/SystemTiddlers/Prompt: सिस्टम tiddlers की संख्या:
+Basics/Tags/Prompt: टैग की संख्या:
+Basics/Tiddlers/Prompt: Tiddlers की संख्या:
+Basics/Title/Prompt: इस ~ टिड्लीविकि का शीर्षक:
+Basics/Username/Prompt: साइग्निंग एडिट्स करने के लिए उपयोगकर्ता नाम
+Basics/Version/Prompt:  tiddler wiki का अनुवादित रूप
+EditorTypes/Caption: संपादक प्रकार
+EditorTypes/Editor/Caption: संपादक
+EditorTypes/Hint: ये tiddlers विशिष्ट tiddler प्रकार संपादित करने के लिए प्रयोग किया जाता है, जो संपादक निर्धारित करते हैं।
+EditorTypes/Type/Caption: प्रकार
+Info/Caption: जानकारी
+Info/Hint: इस टिड्लीविकि के बारे में जानकारी
+LoadedModules/Caption: भरे हुये Modules
+LoadedModules/Hint: ये उनके स्रोत tiddlers से जुड़ा हुआ वर्तमान में लोड tiddler मॉड्यूल हैं। किसी भी italicised मॉड्यूल वे बूट प्रक्रिया के दौरान सेटअप किया गया आम तौर पर है, क्योंकि एक स्रोत tiddler की कमी है।
+Palette/Caption: पैलेट
+Palette/Editor/Clone/Caption: क्लोन
+Palette/Editor/Clone/Prompt: आपको यह सिफारिश की जाती है के शॅडो पॅलेट को एडिट करने से पहले कॉपी कर लें
+Palette/Editor/Prompt: एडिटिंग
+Palette/Editor/Prompt/Modified: यह शेडो पॅलेट परिवर्तित किया गया है 
+Palette/Editor/Reset/Caption: रीसेट करें
+Palette/HideEditor/Caption: एडिटर को छिपायें 
+Palette/Prompt: वर्तमान पैलेट
+Palette/ShowEditor/Caption: एडिटर दिखाना
+Plugins/Caption: प्लगइन्स
+Plugins/Disable/Caption: निष्क्रिय करना 
+Plugins/Disable/Hint: पृष्ठ पुनः लोड पर
+प्लगइन निष्क्रिय करें
+Plugins/Disabled/Status: (अक्षम)
+Plugins/Empty/Hint: कुछ नहीं
+Plugins/Enable/Caption: सक्षम
+Plugins/Enable/Hint: पृष्ठ पुनः लोड पर
+प्लगइन सक्षम करें
+Plugins/Language/Prompt: भाषाएँ
+Plugins/Plugin/Prompt: प्लगइन्स
+Plugins/Theme/Prompt: विषय
+Saving/Caption: सेविंग
+Saving/Heading: सेविंग
+Saving/TiddlySpot/Advanced/Heading: विकसित सेटिंग्स
+Saving/TiddlySpot/BackupDir: बैकअप निर्देशिका
+Saving/TiddlySpot/Backups: बैकअप
+Saving/TiddlySpot/Description: इस सेटिंग का उपयोग केवल इसको सेव करने के लिये http://tiddlyspot.comया एक compatible रिमोट सर्वर
+Saving/TiddlySpot/Filename: अपलोड फाईल का नाम
+Saving/TiddlySpot/Heading: ~Tiddlyस्थान
+Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi`और इसे कस्टम सर्वर address बदलने के लिये उपयोग किया जा सकता है 
+Saving/TiddlySpot/Password: पासवर्ड
+Saving/TiddlySpot/ServerURL: सर्वर URL
+Saving/TiddlySpot/UploadDir: अपलोड निर्देशिका
+Saving/TiddlySpot/UserName: विकी नाम
+Settings/AutoSave/Caption: औटोसेव
+Settings/AutoSave/Disabled/Description: स्वचालित रूप से परिवर्तन सावे ना करें 
+Settings/AutoSave/Enabled/Description: स्वचालित रूप से परिवर्तन करें  
+Settings/AutoSave/Hint: स्वचालित रूप से एडिटिंग के दौरान परिवर्तनों को सेव करें  
+Settings/Caption: सेटिंग्स
+Settings/Hint: ये सेटिंग्स से TiddlyWiki
+के व्यवहार को कस्टमाइस् कर सकते हैं i.
+Settings/NavigationAddressBar/Caption: नॅविगेशन अड्रेस बार
+Settings/NavigationAddressBar/Hint: बराउज़र address bar का व्यवहार एक tiddler को नेविगेट करता है
+Settings/NavigationAddressBar/No/Description: address bar अपडेट न करें
+Settings/NavigationAddressBar/Permalink/Description: लक्ष्य tiddler शामिल करें
+Settings/NavigationAddressBar/Permaview/Description: लक्ष्य tiddler और वर्तमान कहानी को अनुक्रम मे शामिल करें
+Settings/NavigationHistory/Caption: नेविगेशन इतिहास
+Settings/NavigationHistory/Hint: tiddler को नेविगेट करते हुये ब्राउज़र इतिहास को अपडेट करें
+Settings/NavigationHistory/No/Description: इतिहास को अपडेट न करें
+Settings/NavigationHistory/Yes/Description: अपडेट इतिहास
+Settings/ToolbarButtons/Caption: टूलबार बटन
+Settings/ToolbarButtons/Hint: डिफ़ॉल्ट टूलबार बटन उपस्थिति:
+Settings/ToolbarButtons/Icons/Description: आइकन शामिल करें
+Settings/ToolbarButtons/Text/Description: टेक्स्ट शामिल करें
+StoryView/Caption: स्टोरी देखें
+StoryView/Prompt: वर्तमान देखें:
+Theme/Caption: विषय
+Theme/Prompt: वर्तमान विषय:
+TiddlerFields/Caption: Tiddler फील्ड्स
+TiddlerFields/Hint: इस विकि में उपयोग में Tiddler फील्ड्स का पूरा सेट है।(सिस्टम tiddlers सहित, लेकिन शॅडो tiddlers को छोड़कर)
+Toolbars/Caption: टूलबार
+Toolbars/EditToolbar/Caption: edit टूलबार
+Toolbars/EditToolbar/Hint: बटन चुनें जो ,एडिट मोड में tiddlers के लिए प्रदर्शित कर रहे हैं
+Toolbars/Hint: चयन करें जो, टूलबार बटन प्रदर्शित कर रहे हैं
+Toolbars/PageControls/Caption: पृष्ठ टूलबार
+Toolbars/PageControls/Hint: बटन चुनें जो,मुख्य पृष्ठ टूलबार पर प्रदर्शित कर रहे हैं
+Toolbars/ViewToolbar/Caption: टूलबार देखें
+Toolbars/ViewToolbar/Hint: बटन चुनें जो,देखने के मोड में tiddlers के लिए प्रदर्शित कर रहे हैं
+Tools/Download/Full/Caption: पूर्ण विकी डाउनलोड करें 

@@ -1,0 +1,77 @@
+title: $:/plugins/tiddlywiki/innerwiki/docs
+
+! `<$innerwiki>` widget
+
+The `<$innerwiki>` widget encapsulates an embedded wiki. It starts as a blank copy of the current wiki and can have additional payload tiddlers added via embedded `<$data>` widgets (see below).
+
+It supports the following attributes:
+
+|!Attribute |!Description |
+|template |Specifies the template to be used to generate the base wiki (defaults to $:/plugins/tiddlywiki/innerwiki/template) |
+|width |Width in pixels of the virtual screen for rendering the embedded wiki |
+|height |Height in pixels of the virtual screen for rendering the embedded wiki |
+|style |CSS style definitions to be added to the DIV wrapper around the IFRAME containing the embedded wiki |
+|class |CSS classes to be added to the DIV wrapper around the IFRAME containing the embedded wiki |
+|filename |Base filename for saving a screenshot of the embedded wiki under Node.js (excludes file extension) |
+|clipLeft |Position in pixels of the left edge of the clip rectangle (optional) |
+|clipTop |Position in pixels of the top edge of the clip rectangle (optional) |
+|clipWidth |Width in pixels of the clip rectangle (optional) |
+|clipHeight |Height in pixels of the clip rectangle (optional) |
+
+! `<$data>` widget
+
+The `<$data>` widget is used within the `<$innerwiki>` widget to specify payload tiddlers to be added to the innerwiki.
+
+It supports the following attributes:
+
+|!Attribute |!Description |
+|$tiddler |The title of a tiddler to be used as a payload tiddler (optional) |
+|$filter |A filter string identifying tiddlers to be used as payload tiddlers (optional) |
+|//any attribute<br>not starting<br>with $// |Field values to be assigned to the payload tiddler(s) |
+
+It can be used in three different ways:
+
+* Without the `$tiddler` or `$filter` attributes, the remaining attributes provide the fields for a single payload tiddler
+* With the `$tiddler` attribute present, the payload tiddler takes its fields from that tiddler with the remaining attributes overriding those fields
+* With the `$filter` attribute present, the payload is a copy of all of the tiddlers identified by the filter, with the remaining attributes overriding those fields of each one
+
+This example injects a copy of the "HelloThere" tiddler with the addition of the field "custom" set to "Alpha":
+
+```
+<$data $tiddler="HelloThere" custom="Alpha"/>
+```
+
+This example injects all image tiddlers with the addition of the field "custom" set to "Beta":
+
+```
+<$data $filter="[is[image]]" custom="Beta"/>
+```
+
+! `<$anchor>` widget
+
+The `<$anchor>` widget is used within the `<$innerwiki>` widget to specify draggable anchors to be overlaid on the innerwiki.
+
+It supports the following attributes:
+
+|!Attribute |!Description |
+|x |The title of the tiddler containing the X coordinate of the anchor |
+|y |The title of the tiddler containing the Y coordinate of the anchor |
+
+This example declares an anchor whose coordinates are contained in the tiddlers [[my-anchor-x]] and [[my-anchor-y]]:
+
+```
+<$anchor x="my-anchor-x" y="my-anchor-y"/>
+```
+
+! `screenshot` command
+
+Saves PNG screenshots of the `<$innerwiki>` widgets rendered by a set of tiddlers identified by a filter.
+
+```
+--screenshot <filter> <deviceScaleFactor>
+```
+
+* ''filter'': a filter identifying the tiddlers to be rendered, from which the individual `<$innerwiki>` widgets are screenshotted
+* ''deviceScaleFactor'': a scale factor for the screenshot (optional; defaults to 1)
+
+A deviceScaleFactor of 4 or 5 gives high quality screenshots suitable for print use.

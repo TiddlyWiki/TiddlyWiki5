@@ -1,0 +1,24 @@
+title: $:/language/Help/load
+description: Lade Tiddler von einer Datei.
+
+Lade Tiddler aus einer TiddlyWiki `.html`, `.tiddler`, `.tid`, `.json` oder anderen lokalen Datei.
+
+Die Verarbeitung der geladenen Datei wird anhand der Datei-Erweiterung bestimmt. Verwenden sie den alternativen `import` Befehl, wenn sie die verarbeitungsweise ändern möchten.
+
+
+```
+--load <filepath> [noerror]
+--load <dirpath> [noerror]
+```
+
+Der "load" Befehl erzeugt eine Fehlermeldung, wenn keine Tiddler gefunden werden. Dieses Verhalten kann mit dem Parameter "noerror" unterdrückt werden.
+
+Um Daten aus einer verschlüsselten TiddlyWiki Datei zu laden, muss zuerst mit dem "password" Parameter ein Passwort definiert werden. 
+
+Beispiel:
+
+```
+tiddlywiki ./MyWiki --password hier-sicheres-passwort-verwenden --load my_encrypted_wiki.html
+```
+
+Hinweis: TiddlyWiki wird nur neuere Versionen eines bestehenden Plugins laden!

@@ -1,0 +1,170 @@
+caption: Macros para documentación
+created: 20150110182600000
+es-title: Macros para documentación
+modified: 20160511154246355
+tags: [[Improving TiddlyWiki Documentation]]
+title: Documentation Macros
+type: text/vnd.tiddlywiki
+
+Las siguientes son macros utilizadas en la documentación de ~TiddlyWiki. Sus nombres comienzan con un punto para mantenerlas fuera del alcance accidental de nombres con los que el usuario pueda intentar experimentar.
+
+
+!!Generales
+
+|!Macro |!Se usa para |!Ejemplo |
+|.def |definición de un término |<<.def widget>> |
+|.em |énfasis menor en una frase |<<.em cualquiera>> |
+|.strong |énfasis mayor en un tiddler |<<.strong ¡Importante!>> |
+|.place |texto comodín |<<.place tagname>> |
+|.word |mencionar una palabra o frase |<<.word "hello world">> |
+
+!!Advertencias
+
+|!Macro |!Se usa para |!Ejemplo |
+|.tip |señalar consejos y recomendaciones |<<.tip "Enciende la pantalla o no verás nada">> |
+|.warning |señalar advertencias |<<.warning "Haz copia de seguridad antes de actualizar">> |
+
+!!Bloques
+|!Macro |!Se usa para |
+|.preamble |enfatizar un preámbulo o un párrafo que sobresale del resto del texto |
+
+!!!Ejemplo: 
+
+<<.preamble "Esto es un ejemplo de bloque de preámbulo. Para que su visualización sea la correcta, debe constar de un único párrafo, separado del resto del texto por //enters//. No admite su inclusión en tablas ni la inclusión de macros, pero sí [[enlaces|TiddlerLinks]] y formato en ''~WikiText'' ">>
+
+!!Tiddlers y campos
+
+|!Macro |!Se usa para |!Ejemplo |
+|.tid |referirse al título de un tiddler |<<.tid "Título de ejemplo">> |
+|.tag |referirse a una etiqueta  |<<.tag "Etiqueta de ejemplo">> |
+|.field |referirse al campo de un tiddler |<<.field "campo de ejemplo">> |
+|.value |referirse al valor de un campo |<<.value "valor de ejemplo">> |
+|.op |referirse a un operador de filtro |<<.op backlinks>> |
+|.var |referirse a una variable o nombre de macro |<<.var currentTiddler>> |
+|.wid |referirse al nombre de un widget |<<.wid list>> |
+|.attr |referirse al nombre de un atributo |<<.attr filter>> |
+|.param |referirse al nombre de un parámetro de macro |<<.param text>> |
+
+!!Enlaces
+
+|!Macro |!Se usa para |!Ejemplo |
+|.link |señalar enlaces con ~WikiText |<<.link "^^esto es^^ ~~wikitext~~" WikiText>> |
+|.clink |señalar links con formato de código |<<.clink `<$list>` ListWidget>> |
+|.dlink |señalar links internos con formato de definición |<<.dlink widget Widgets>> |
+|.dlink-ex |señalar links externos con formato de definición |<<.dlink-ex Ejemplo "http://ejemplo.com/">> |
+|.flink |señalar enlaces a campos |<<.flink ListField>> |
+|.mlink |señalar enlaces a macros |<<.mlink qualify>> |
+|.mlink2 |señalar enlaces a macros, con //targets// específicos |<<.mlink2 foo "Macro de ejemplo">> |
+|.olink |señalar enlaces a operadores de filtro |<<.olink prefix>> |
+|.olink2 |señalar enlaces a operadores de filtro con //targets// específicos |<<.olink2 foo prefix>> |
+|.vlink |señalar enlaces a variables |<<.vlink currentTiddler>> |
+|.vlink2 |señalar enlaces a variables, con //targets// específicos |<<.vlink2 foo "Examples of Variables">> |
+|.wlink |señalar enlaces a widgets |<<.wlink ButtonWidget>> |
+|.wlink2 |señalar enlaces a widgets con texto específico |<<.wlink2 foo ButtonWidget>> |
+
+!!Interfaz de usuario
+
+|!Macro |!Se usa para |!Ejemplo |
+|.key |indicar una tecla del teclado |<<.key Escape>> |
+|.keycombo |indicar combinaciones de teclas |<<.keycombo Ctrl Enter>> |
+
+!!Pestañas
+
+|!Macro |!Se usa para |!Ejemplo |
+|.sidebar-tab |invocar el nombre de una pestaña de la barra lateral |<<.sidebar-tab More>> |
+|.more-tab |invocar el nombre de una subpestaña de la pestaña Más |<<.more-tab Shadows>> |
+|.info-tab |invocar el nombre de una pestaña del InfoPanel |<<.info-tab Fields>> |
+|.controlpanel-tab |invocar el nombre de una pestaña del [[Panel de Control|$:/ControlPanel]] |<<.controlpanel-tab Settings>> |
+|.advancedsearch-tab |invocar el nombre de una pestaña del cuadro de búsqueda avanzada |<<.advancedsearch-tab Filter>> |
+|.toc-tab |invocar el nombre del índice de tw5.com |<<.toc-tab>> |
+|.example-tab |indicar un ejemplo de nombre de pestaña |<<.example-tab "Ejemplo">> |
+
+!!!Parámetros de .sidebar-tab
+
+|Open |<<.sidebar-tab Open>> |
+|Recent |<<.sidebar-tab Recent>> |
+|Tools |<<.sidebar-tab Tools>> |
+|More |<<.sidebar-tab More>> |
+
+!!!Parámetros de .more-tab
+
+|All |<<.more-tab All>> |
+|Recent |<<.more-tab Recent>> |
+|Tags |<<.more-tab Tags>> |
+|Missing |<<.more-tab Missing>> |
+|Drafts |<<.more-tab Drafts>> |
+|Orphans |<<.more-tab Orphans>> |
+|Types |<<.more-tab Types>> |
+|System |<<.more-tab System>> |
+|Shadows |<<.more-tab Shadows>> |
+
+!!!Parámetros de .info-tab
+
+|Tools |<<.info-tab Tools>> |
+|References |<<.info-tab References>> |
+|Tagging |<<.info-tab Tagging>> |
+|List |<<.info-tab List>> |
+|Listed |<<.info-tab Listed>> |
+|Fields |<<.info-tab Fields>> |
+|Advanced |<<.info-tab Advanced>> |
+
+!!!Parámetros de .controlpanel-tab
+
+|Info |<<.controlpanel-tab Info>> |
+|Appearance |<<.controlpanel-tab Appearance>> |
+|Settings |<<.controlpanel-tab Settings>> |
+|Saving |<<.controlpanel-tab Saving>> |
+|Plugins |<<.controlpanel-tab Plugins>> |
+
+!!!Parámetros de .advancedsearch-tab
+
+|Standard |<<.advancedsearch-tab Standard>> |
+|System |<<.advancedsearch-tab System>> |
+|Shadows |<<.advancedsearch-tab Shadows>> |
+|Filter |<<.advancedsearch-tab Filter>> |
+
+!!Botones
+
+|!Macro |!Se usa para |!Ejemplo |
+|.button |insertar el nombre y el icono de un botón estándar |<<.button "new-tiddler">> |
+
+!!!Parámetros de .button
+
+!!!!Barra de tiddler
+
+|clone |<<.button "clone">> |
+|close |<<.button "close">> |
+|close-others |<<.button "close-others">> |
+|edit |<<.button "edit">> |
+|export-tiddler |<<.button "export-tiddler">> |
+|info |<<.button "info">> |
+|more-tiddler-actions |<<.button "more-tiddler-actions">> |
+|new-here |<<.button "new-here">> |
+|new-journal-here |<<.button "new-journal-here">> |
+|permalink |<<.button "permalink">> |
+
+!!!!Barra de edición
+
+|cancel |<<.button "cancel">> |
+|delete |<<.button "delete">> |
+|save |<<.button "save">> |
+
+!!!!Barra de página
+|advanced-search |<<.button "advanced-search">> |
+|close-all |<<.button "close-all">> |
+|control-panel |<<.button "control-panel">> |
+|encryption |<<.button "encryption">> |
+|export-page |<<.button "export-page">> |
+|full-screen |<<.button "full-screen">> |
+|home |<<.button "home">> |
+|import |<<.button "import">> |
+|language |<<.button "language">> |
+|more-page-actions |<<.button "more-page-actions">> |
+|new-journal |<<.button "new-journal">> |
+|new-tiddler |<<.button "new-tiddler">> |
+|permaview |<<.button "permaview">> |
+|refresh |<<.button "refresh">> |
+|save-wiki |<<.button "save-wiki">> |
+|storyview |<<.button "storyview">> |
+|tag-manager |<<.button "tag-manager">> |
+|theme |<<.button "theme">> |

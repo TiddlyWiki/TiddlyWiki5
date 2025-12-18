@@ -1,0 +1,14 @@
+created: 20141126153016142
+fr-title: Introduction Vidéo
+modified: 20141203144531777
+tags: Videos [[Working with TiddlyWiki]]
+title: Introduction Video
+type: text/vnd.tiddlywiki
+
+Cette rapide présentation explique les principes de base de TiddlyWiki.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KtCUr83XgyE" frameborder="0" allowfullscreen></iframe>
+
+On peut trouver le ~TiddlyWiki utilisé pour produire cette vidéo ici<<dp>>
+
+https://tiddlywiki.com/editions/introduction/

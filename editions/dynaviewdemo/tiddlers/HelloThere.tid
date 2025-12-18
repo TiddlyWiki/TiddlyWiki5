@@ -1,0 +1,11 @@
+title: HelloThere
+
+This edition demonstrates some of the capabilities of the ~DynaView plugin. See the [[plugin tiddler|$:/plugins/tiddlywiki/dynaview]] below for the plugin documentation and some simple examples.
+
+This wiki demonstrates how to use DynaView's dynamic rendering features to customise the story river such that tiddlers are only rendered when they are scrolled into view.
+
+The following customisations are made:
+
+! $:/core/ui/ViewTemplate
+
+<<compareTiddlerText sourceTiddlerTitle:"$:/core" sourceSubTiddlerTitle:"$:/core/ui/ViewTemplate" destTiddlerTitle:"$:/core/ui/ViewTemplate">>

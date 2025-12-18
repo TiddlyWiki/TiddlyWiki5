@@ -1,0 +1,16 @@
+title: $:/language/Filters/
+
+AllTiddlers: Todos los tiddlers, excepto los de sistema
+RecentSystemTiddlers: Tiddlers recientemente modificados, incluidos los de sistema
+RecentTiddlers: Tiddlers recientemente modificados
+AllTags: Todas las etiquetas, excepto las de sistema
+Missing: Tiddlers inexistentes
+Drafts: Borradores
+Orphans: Tiddlers huérfanos
+SystemTiddlers: Tiddlers de sistema
+ShadowTiddlers: Tiddlers ocultos
+OverriddenShadowTiddlers: Tiddlers ocultos anulados
+SessionTiddlers: Tiddlers modificados desde que se cargó el wiki
+SystemTags: Etiquetas de sistema
+StoryList: Tiddlers en la vista, excluyendo <$text text="$:/AdvancedSearch"/>
+TypedTiddlers: Tiddlers que no son WikiText

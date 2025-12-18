@@ -1,0 +1,16 @@
+created: 20150221154907000
+modified: 20150221155706000
+title: lingo Macro
+tags: Macros [[Core Macros]]
+caption: lingo
+
+The <<.def lingo>> [[macro|Macros]] relates to the translation of ~TiddlyWiki's user interface into other languages. It returns a piece of text in the user's currently selected language.
+
+Translatable text is supplied by language plugins containing tiddlers with specific titles that start with `$:/language/`.
+
+!! Parameters
+
+;title
+: The title of the shadow tiddler that contains the text. The prefix `$:/language/` is added automatically
+
+<<.macro-examples "lingo">>

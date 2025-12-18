@@ -1,0 +1,39 @@
+chapter.of: TiddlyWiki - A quick Overview
+created: 20140708082703387
+modified: 20140715094732261
+sub.num: 6
+tags: doc
+title: Tiddler as Basic Element
+
+By managing nearly every part of the application as tiddlers, the application is only needed to provide some basic functionality to manage the individual tiddlers, load and persist them, render them to HTML output and provide a way to register for the changes made to tiddlers.
+This way the whole wiki application can be build from these simple concepts.
+Plug-ins can be used to add new functionality to the existing modules or even to replace individual tiddlers/modules,
+enabling developers to build whole new applications on the TiddlyWiki base system.
+
+A tiddler is the smallest unit of the TiddlyWiki system. It can contain any data like plain text, WikiText markup, JavaScript code (module tiddler), JSON structures (JSON structures might even contain additional tiddlers. Plug-ins are implemented this way to pack multiple tiddlers in a single plug-in tiddler), images in SVG format or even binary images encoded with base64.
+Internally Tiddlers are immutable objects containing a bunch of key:value pairs called fields. The only required field of a tiddler is the title field. The Standard fields of a tiddler are listed below. Nearly everything in TiddlyWiki is loaded as tiddlers. Plug-ins for example are a bunch of tiddlers that are distributed as a single JSON tiddler. The only exception is the microkernel which isn't a tiddler.
+
+<dl>
+<dt>created</dt> <dd>Timestamp number of milliseconds since 01.01.1970.</dd>
+<dt>modified</dt> <dd>Timestamp number of milliseconds since 01.01.1970.</dd>
+<dt>tags</dt> <dd>list of tags seperated by whitespace. Tags which contain whitespaces are wrapped by [[ ]], e.g. [[example Tag]].</dd>
+<dt>type</dt> <dd>Type of the Tiddler, e.g. text/plain or text/vnd.tiddlywiki .</dd>
+<dt>title</dt> <dd>Title of the Tiddler</dd>
+<dt>list</dt> <dd>An ordered list of tiddler titles associated with a tiddler</dd>
+</dl>
+
+Tiddlers are used in multiple roles and on different levels. A developer uses tiddlers as the basic element containing application code, configuration values and even as a form of variable to save the current UI state.
+On a different level, a tiddler is also the basic unit of work for the wiki user, e.g. the individual wiki pages are implemented as tiddlers.
+This makes sense for multiple reasons:
+Because the UI of TiddlyWiki is build from tiddlers, the wiki user is able to edit the interface of his own TiddlyWiki just by editing a wiki page.
+For example to add a list of tiddler links to the sidebar, the user just needs to create a new tiddler, put the links into this tiddler and tag this tiddler with ``$:/tags/SideBar``.
+This way the user can customise his work environment just by using mechanisms he already uses to manage his wiki pages.
+Tiddlers consist of fields. When using a tiddler as wiki page, the user can use these fields to store meta information, like tags.
+
+Because fields for metadata and especially tags are an easy way for the user to organise his wiki pages, TiddlyWiki provides a special filter mechanism to choose tiddlers using their metadata.
+A filter string like ``[tag[learncard]topic[math]!tag[successful]]`` would filter all tiddlers tagged with "learncard", with the value "math" in the topic-field and are not tagged with "successful".
+A user could use this filter together with the ``<$list>`` widget to display a list of all math learncards which are not yet answered successfully in a wiki page.
+
+Another example which shows how the "anything is a tiddler" concept leads to an environment where a single feature brings great benefit is the drag and drop feature.
+HTML5 standard comes with a native drag and drop feature. TiddlyWiki uses this feature and makes it possible to drag and drop a tiddler from one instance to another.
+And because anything is a tiddler, this brings the ability to drag and drop individual wiki pages, JavaScript modules, UI components and whole plug-ins between TiddlyWiki instances.

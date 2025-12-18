@@ -1,0 +1,9 @@
+caption: $:/tags/Layout
+created: 20201123191935978
+description: marks alternative page layouts
+modified: 20201123192158739
+tags: SystemTags
+title: SystemTag: $:/tags/Layout
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]] `$:/tags/Layout` marks [[alternative page layouts|Alternative page layouts]] that can be switched to.

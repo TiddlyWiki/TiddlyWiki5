@@ -1,0 +1,23 @@
+title: $:/language/Help/init
+description: Inicia una nova carpeta wiki
+
+Inicialitza una [[CarpetaWiki|WikiFolders]] buida amb una còpia de l'edició indicada.
+
+```
+--init <edició> [<edició> ...]
+```
+
+Per exemple:
+
+```
+tiddlywiki ./LaMevaCarpetaWiki --init empty
+```
+
+Notes:
+
+* Si cal es generarà la carpeta wiki
+* El valor per omisió de "edició" és ''empty''
+* L'ordre init fracassarà si la carpeta wiki no està buida
+* L'ordre init suprimeix qualsevol definició `includeWikis` de l'edició del fitxer `tiddlywiki.info`
+* Quan s'indiqui múltiples edicions, les edicions que s'iniciïn més tard sobreescriuran qualsevol fitxer compartit amb edicions anteriors (així que el fitxer final `tiddlywiki.info` es copiarà de la darrera edció)
+* `--editions` retorna la llista d'edicions disponibles

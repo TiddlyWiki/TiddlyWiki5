@@ -1,0 +1,21 @@
+created: 20131228163141555
+modified: 20200330105334133
+tags: Macros [[Core Macros]]
+title: makedatauri Macro
+type: text/vnd.tiddlywiki
+caption: makedatauri
+
+The <<.def makedatauri>> [[macro|Macros]] takes a piece of text and an associated ContentType, and returns a corresponding [[data URI|Data URI]].
+
+<<.var makedatauri>> is used to implement the <<.mlink datauri>> macro.
+
+!! Parameters
+
+;text
+: The text to be converted to a data URI
+;type
+: The ContentType of the text
+;_canonical_uri
+: The optional ''_canonical_uri'' address of the content
+
+<<.macro-examples "makedatauri">>

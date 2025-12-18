@@ -1,0 +1,7 @@
+created: 20150221160534000
+modified: 20150221223613000
+tags: [[makedatauri Macro]] [[Macro Examples]]
+title: makedatauri Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg="""<<makedatauri "some example text" "text/plain">>"""/>

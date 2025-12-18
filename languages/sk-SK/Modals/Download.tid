@@ -1,0 +1,13 @@
+title: $:/language/Modals/Download
+type: text/vnd.tiddlywiki
+subtitle: Download changes
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/DownloadingChanges.html
+
+Bohužiuľ, Váš browser podporuje len manuálne uloženie wiki.
+
+Ak chcete uložiť zmeny, nastavte sa na linku nižšie, stlačte pravé tlačítko na myši a vyberte "Stiahnúť súbor" alebo "Uložiť súbor", a potom zvoľte adresár a názov súboru.
+
+//Proces môžete trochu urýchliť tým, že kliknete na linku súčasne so stlačením klávesy control (Windows) alebo options/alt (Mac OS X). Vtedy vás systém už nevyzve na zadanie názvu adresára a súboru, ale je možné, že váš browser dá súboru náhodný a nezrozumiteľný názov -- a skôr ako budete so súborom môcť niečo robiť, musíte ho premenovať a dať mu príponu `.html`.//
+
+Na mobilných telefónoch, ktoré nedovolia sťahovať súbory, môžete namiesto toho vyrobiť pre súbor záložku a potom záložku zosynchronizovať s počítačom, na ktorom už wiki viete uložiť bežným spôsobom.

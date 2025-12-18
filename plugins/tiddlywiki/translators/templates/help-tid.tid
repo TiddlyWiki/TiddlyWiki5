@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/translators/templates/help-tid
+
+\procedure generateTid(title)
+title: <<title>>
+description: <$text text={{!!description}}/>
+
+<$text text={{!!text}}/>
+\end
+<$transclude $variable="generateTid" title=<<currentTiddler>>/>

@@ -1,0 +1,11 @@
+caption: Ediciones de plugins
+created: 20160107223443647
+es-title: Ediciones de plugins
+modified: 20160605040445323
+tags: Editions
+title: Plugin Editions
+type: text/vnd.tiddlywiki
+
+Estas ediciones contienen demos de los plugins originales de ~TiddlyWiki y se prepararon para ediciones anteriores, que carecían de la librería de plugins.
+
+<<list-links "[tag[Plugin Editions]]">>

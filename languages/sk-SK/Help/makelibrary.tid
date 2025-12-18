@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: Plugin zostrojenia knižnice potrebný pre proces upgradu
+
+Vytvor `$:/UpgradeLibrary` tiddler pre proces upgradu.
+
+Upgrade knižnica má formát bežného pluginu s plugin typom `library`. Obsahuje kópiu každého pluginu, tém a jazykových balíkov dostupných v rámci  TiddlyWiki5 repozitára.
+
+Tento príkaz je určený pre interné použitie; je relevantný len pre tých, čo vyrábajú vlastný, customizovaný postup pre upgrade.
+
+```
+--makelibrary <title>
+```
+
+Argument pre názov je pred-definovaný ako `$:/UpgradeLibrary`.

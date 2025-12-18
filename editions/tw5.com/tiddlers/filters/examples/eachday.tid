@@ -1,0 +1,9 @@
+created: 20150118134611000
+modified: 20150118183156000
+tags: [[eachday Operator]] [[Operator Examples]]
+title: eachday Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[eachday[created]]" "the first tiddler created on each day">>
+
+For an example of using the <<.op eachday>> operator to generate a two-tier list of groups and members, see [[GroupedLists]].

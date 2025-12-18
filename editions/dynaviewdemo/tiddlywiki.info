@@ -1,0 +1,17 @@
+{
+	"description": "Demo of the DynaView plugin",
+	"plugins": [
+		"tiddlywiki/dynaview"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"external": [
+			"--render","$:/core/save/all-external-js","index.html","text/plain"
+		]
+	}
+}

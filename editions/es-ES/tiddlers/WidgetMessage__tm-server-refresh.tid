@@ -1,0 +1,12 @@
+caption: tm-server-refresh
+created: 20160415093830059
+es-title: Mensaje: tm-server-refresh
+modified: 20160415093852680
+tags: Messages
+title: WidgetMessage: tm-server-refresh
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-server-refresh` intenta sincronizar con el servidor los últimos cambios del cliente. 
+
+El SyncMechanism del núcleo es quien procesa este mensaje invocando el  [[Módulo de sincronización|SyncAdaptorModules]] actual, (normalmente, el plugin ''tiddlywiki/tiddlywebadaptor'').
+

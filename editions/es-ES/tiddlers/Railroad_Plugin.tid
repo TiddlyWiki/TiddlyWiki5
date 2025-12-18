@@ -1,0 +1,12 @@
+caption: Diagramas sintácticos
+created: 20160107223348621
+es-title: Diagramas sintácticos
+list: 
+modified: 20160504143404183
+tags: [[Plugin Editions]]
+title: Railroad Plugin
+type: text/vnd.tiddlywiki
+
+{{$:/plugins/tiddlywiki/railroad/readme}}
+
+Para más información sobre el uso de este plugin, [[pincha aquí|$:/plugins/tiddlywiki/railroad/syntax]]

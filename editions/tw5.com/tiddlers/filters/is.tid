@@ -1,0 +1,40 @@
+caption: is
+created: 20140410103123179
+modified: 20201107110947882
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: those input tiddlers that do <<.em not>> belong to category <<.place C>>
+op-output: those input tiddlers that belong to category <<.place C>>
+op-parameter: a category
+op-parameter-name: C
+op-purpose: filter the input by fundamental category
+tags: [[Filter Operators]] [[Common Operators]] [[Negatable Operators]]
+title: is Operator
+type: text/vnd.tiddlywiki
+
+The parameter <<.place C>> is one of the following fundamental categories:
+
+|!Category |!Matches any tiddler title that... |
+|^`current` |is the [[current tiddler|Current Tiddler]] |
+|^`image` |has an image ContentType |
+|^`binary` |has a binary ContentType |
+|^`missing` |does not exist (other than possibly as a shadow tiddler), regardless of whether there are any links to it |
+|^`orphan` |has no [[hard links|Hard and Soft Links]] to it |
+|^`shadow` |is a [[shadow tiddler|ShadowTiddlers]], regardless of whether it has been overridden with a non-shadow tiddler |
+|^`system` |is a [[system tiddler|SystemTiddlers]], i.e. its title starts with `$:/` |
+|^`tag` |is in use as a tag |
+|^`tiddler` |exists as a non-shadow tiddler |
+|^`variable` |<<.from-version "5.1.20">> exists as a variable (whether or not that variable has a non-blank value) |
+|^`blank` |<<.from-version "5.1.20">> is blank (i.e. is a zero length string) |
+|^`draft` |<<.from-version "5.1.23">> is a draft of another tiddler. Synonym for `[has[draft.of]]` |
+
+If <<.place C>> is anything else an error message is returned. <<.from-version "5.1.14">> if <<.place C>> is blank, the output is passed through unchanged (in earlier versions an error message was returned).
+
+`!is[tiddler]` is a synonym for `is[missing]`, and vice versa.
+
+When <<.op is[missing]>> is the first operator in a [[run|Filter Run]], its output is always empty. And when <<.op is[shadow]>> comes first, it outputs only those shadow tiddlers that have been overridden. This is because the [[initial input to a run|Filter Expression]] contains only <<.em non>>-shadow tiddlers.
+
+<<.tip "Use `has[title]` to match any tiddler title that is either a tiddler //or// a shadow tiddler.">>
+
+The <<.olink all>> operator is similar to <<.olink is>>, but its scope is the whole wiki.
+
+<<.operator-examples "is">>

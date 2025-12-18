@@ -1,0 +1,21 @@
+title: Keyboard Shortcut Tiddler
+tags: Concepts
+
+A ''Keyboard Shortcut Tiddler'' is made of three parts:
+
+* The ''Tag'' <<tag-pill $:/tags/KeyboardShortcut>>
+* The ''field'' `key` with a [[Keyboard Shortcut Descriptor]] as its ''value''
+* Actions in its ''text'' field
+
+<<.tip """<<.from-version "5.2.4">> By default <<.wlink KeyboardWidget>> and text editor shortcuts take priority, which can be circumvented by setting the ''field'' `priority` to `yes`.""">>
+
+If the [[Keyboard Shortcut Descriptor]] has the form `((my-shortcut))` it's a ''reference'' to a ''configuration Tiddler'' that stores the corresponding [[Keyboard Shortcut|KeyboardShortcuts]]
+
+In order to make a ''shortcut'' editable through the <<.controlpanel-tab KeyboardShortcuts>> Tab in the $:/ControlPanel it's sufficient to create a tiddler `$:/config/ShortcutInfo/my-shortcut`, where the ''suffix'' is the ''reference'' used for the [[Keyboard Shortcut|KeyboardShortcuts]]
+
+!! Notes on wiki navigation
+
+If you want to create keyboard shortcuts for navigation, there are two things to keep in mind:
+
+ * If your shortcut uses ''Ctrl'', you need to include `$scroll="yes"` in the [[ActionNavigateWidget's|ActionNavigateWidget]] attributes otherwise the action will be ignored.
+ * The actions need to be wrapped in [[NavigatorWidget]] like in this [[New Tiddler keyboard shortcut|$:/core/ui/KeyboardShortcuts/new-tiddler]].

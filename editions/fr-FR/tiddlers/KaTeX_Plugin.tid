@@ -1,0 +1,10 @@
+created: 20150615065148276
+fr-title: Plugin KaTeX
+modified: 20150615065256393
+tags: Plugins
+title: KaTeX Plugin
+type: text/vnd.tiddlywiki
+
+Ce plugin ajoute la possibilité d'afficher les notations mathématiques écrites en in ~LaTeX.
+
+Voir https://tiddlywiki.com/plugins/tiddlywiki/katex/

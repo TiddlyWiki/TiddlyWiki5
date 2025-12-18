@@ -1,0 +1,9 @@
+created: 20190611154509136
+modified: 20190611154545304
+tags: [[exponential Operator]] [[Operator Examples]]
+title: exponential Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "123456789 +[exponential[4]]">>
+<<.operator-example 2 "123456789 +[exponential[13]]">>
+<<.operator-example 3 "1.23E23 +[exponential[90]]">>

@@ -1,0 +1,10 @@
+{
+	"title": "$:/languages/en-US",
+	"name": "en-US",
+	"plugin-type": "language",
+	"description": "English (US)",
+	"author": "Ben Webber",
+	"core-version": ">=5.0.0",
+	"dependents": ["$:/languages/en-GB"],
+	"plugin-priority": 110
+}

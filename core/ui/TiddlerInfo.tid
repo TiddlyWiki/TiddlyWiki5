@@ -1,0 +1,14 @@
+title: $:/core/ui/TiddlerInfo
+
+\whitespace trim
+<div style="position:relative;">
+<div class="tc-tiddler-controls" style="position:absolute;right:0;">
+<$reveal state="$:/config/TiddlerInfo/Mode" type="match" text="sticky">
+<$button set=<<tiddlerInfoState>> setTo="" tooltip={{$:/language/Buttons/Info/Hint}} aria-label={{$:/language/Buttons/Info/Caption}} class="tc-btn-invisible">
+{{$:/core/images/close-button}}
+</$button>
+</$reveal>
+</div>
+</div>
+
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo]!has[draft.of]]" default={{$:/config/TiddlerInfo/Default}}/>

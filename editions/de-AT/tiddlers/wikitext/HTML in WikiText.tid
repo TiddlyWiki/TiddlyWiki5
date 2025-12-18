@@ -1,0 +1,65 @@
+caption: HTML
+created: 20131205160816081
+creator: pmario
+modified: 20140913190036237
+modifier: pmario
+tags: WikiText
+title: HTML in WikiText
+type: text/vnd.tiddlywiki
+
+''Für geübte Anwender!'' Neue Besucher bitte [[Transclusion in WikiText]] und [[Makros in WikiText]] zuerst lesen!
+
+HTML Elemente und Kommentare können direkt in ~WikiText verwendet werden. Beispiel:
+
+```
+<article class="hello">
+Dies ist ein einfacher Block Text: Hallo! 
+<!-- Dieser Kommentar wird in der Ausgabe nicht enthalten sein! -->
+</article>
+```
+Dargestellt als: 
+
+<article class="hello">
+Dies ist ein einfacher Block Text: Hallo! 
+<!-- Dieser Kommentar wird in der Ausgabe nicht enthalten sein! -->
+</article>
+
+!! Attribute
+
+Attribute in HTML können als [[Transklusion]] oder als [[Makro]] eingebunden werden. Zum Beispiel, wird hier das `href` Attribut als Wert des Tiddlers "MeinLinkZiel" verwendet: 
+
+```
+<a href={{MeinLinkZiel}}>link</a>
+```
+
+Hier wird das Attribut über einen Makro Aufruf definiert:
+
+```
+<a href=<<MeinMakro "Brian">>>link</a>
+```
+
+Text Attribute können Zeilenumbrüche enthalten. In der Ausgabe werden diese jedoch wie in HTML üblich ignoriert! Folgendes Beispiel erzeugt ein unsichtbares `html div element` das nur mit Entwickler Werkzeugen sichtbar ist. 
+
+```
+<div data-address="Mouse House,
+Mouse Lane,
+Rodentville,
+Ratland."/>
+```
+
+Wenn Sie 3 doppelte Anführungszeichen am Beginn verwenden, dann kann der Text einfache Anführungszeichen enthalten.
+
+```
+<div data-address="""Mouse House,
+"Mouse" Lane,
+Rodentville,
+Ratland."""/>
+```
+
+!! HTML Code Verarbeitung
+
+Der Inhalt von HTML Elementen wird im "Inline" Modus verarbeitet. <br/>
+Außer, wenn auf das Eröffnungselement 2 Zeilenumbrüche folgen, dann ist der Block Modus aktiv.
+
+; Inline Modus 
+: Es weden nur Zeichen Formatierungen wie: fett, hochgestellt usw. erkannt. Der Inhalt von Block Elementen, wie zB: Tabellen, Listen und Überschriften wird nicht korrekt übersetzt.

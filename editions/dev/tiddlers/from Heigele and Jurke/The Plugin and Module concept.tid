@@ -1,0 +1,10 @@
+created: 20140708084027985
+modified: 20140717203453471
+tags: doc unused
+title: The Plugin and Module concept
+
+Beside the boot kernel, TW is completely build from modules.
+After a short introduction on modules and plug-ins in the context of TW and explaining how they are organized and managed,
+the following sections will show what type of modules a developer can build and how they hook into the TW architecture.
+The last section shows the procedure of building an plug-in.
+This can be used as a tutorial for building your own plug-ins and will show how an advanced user can create solutions for his own use cases only by using the tiddler model and the WikiText markup language.

@@ -1,0 +1,32 @@
+title: $:/language/
+
+BinaryWarning/Prompt: Denna tiddler innehåller binär data
+ClassicWarning/Hint: Denna tiddler är skriven i TiddlyWiki klassisk wiki-textformat, vilket inte är fullständigt kompatibelt med TiddlyWiki version 5. Läs https://tiddlywiki.com/static/Upgrading.html för mer info. 
+ClassicWarning/Upgrade/Caption: uppgradera
+CloseAll/Button: stäng alla
+ConfirmCancelTiddler: Vill du ångra ändringar för denna tiddler "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Vill du ta bort denna tiddler "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Vill du skriva över denna tiddler "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: You are about to edit a ShadowTiddler. Any changes will override the default system making future upgrades non-trivial. Are you sure you want to edit "<$text text=<<title>>/>"?
+Count: antal
+DefaultNewTiddlerTitle: Ny Tiddler
+DropMessage: Drop here (or use the 'Escape' key to cancel)
+Encryption/Cancel: Avbryt
+Encryption/ConfirmClearPassword: Vill du rensa lösenordet? Detta kommer ta bort krypteringen när du sparar denna wiki
+Encryption/PromptSetPassword: Ställ in nytt lösenord för denna TiddlyWiki
+Encryption/Username: Användarnamn
+Encryption/Password: Lösenord
+Encryption/RepeatPassword: Upprepa lösenordet
+Encryption/PasswordNoMatch: Lösenorden matchar inte
+Encryption/SetPassword: Ställ in lösenord
+MissingTiddler/Hint: Saknar tiddler "<$text text=<<currentTiddler>>/>" - klicka {{||$:/core/ui/Buttons/edit}} för att skapa
+OfficialPluginLibrary: Officiella ~TiddlyWiki Insticksprogramsbibliotek
+PluginReloadWarning: Spara {{$:/core/ui/Buttons/save-wiki}} och ladda om {{$:/core/ui/Buttons/refresh}} för att ändringarna för insticksprogrammen ska slå igenom
+RecentChanges/DateFormat: DD MMM YYYY
+SystemTiddler/Tooltip: Detta är en system-tiddler
+TagManager/Colour/Heading: Färg
+TagManager/Count/Heading: Antal
+TagManager/Icon/Heading: Ikon
+TagManager/Info/Heading: Info
+TagManager/Tag/Heading: Tagg
+UnsavedChangesWarning: Du har osparade ändringar i TiddlyWiki

@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: Construit le plugin bibliothèque requis par la procédure de mise à jour
+
+Construit le tiddler `$:/UpgradeLibrary` pour la procédure de mise à jour.
+
+La bibliothèque de mise à jour est formatée comme un tiddler de plugin ordinaire avec le type `library`. Elle contient un exemplaire de chacun des packs de plugins, thèmes et languages disponibles dans le répertoire de TiddlyWiki5.
+
+Cette commande est prévue pour un usage interne ; elle n'a d'intérêt que pour les utilisateurs qui construisent une variante de la procédure de mise à jour.
+
+```
+--makelibrary <titre>
+```
+
+L'argument //titre// a pour valeur par défaut `$:/UpgradeLibrary`.

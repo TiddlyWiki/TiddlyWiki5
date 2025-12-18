@@ -1,0 +1,25 @@
+created: 20220830194301860
+modified: 20220830194658750
+title: $:/core/ui/TagPickerTagTemplate
+
+\whitespace trim
+<$button class=<<button-classes>> tag="a" tooltip={{$:/language/EditTemplate/Tags/Add/Button/Hint}}>
+<$list filter="[<saveTiddler>minlength[1]]">
+<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="[<tag>]"/>
+</$list>
+<$set name="currentTiddlerCSSEscaped" value={{{ [<saveTiddler>escapecss[]] }}}>
+<$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>> preventScroll="true"/>
+</$set>
+<<delete-tag-state-tiddlers>>
+<$list filter="[<refreshTitle>minlength[1]]">
+<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
+</$list>
+<<actions>>
+<$set name="backgroundColor" value={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}>
+<$wikify name="foregroundColor" text="""<$macrocall $name="contrastcolour" target=<<backgroundColor>> fallbackTarget=<<fallbackTarget>> colourA=<<colourA>> colourB=<<colourB>>/>""">
+<span class="tc-tag-label tc-btn-invisible" style=<<tag-pill-styles>>>
+{{||$:/core/ui/TiddlerIcon}}<$view field="fr-title" format="text"><$view field="title" format="text"/></$view>
+</span>
+</$wikify>
+</$set>
+</$button>

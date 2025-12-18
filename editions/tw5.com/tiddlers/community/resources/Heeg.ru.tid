@@ -1,0 +1,10 @@
+created: 20141215174011558
+modified: 20210106151027109
+tags: Tutorials
+title: "Heeg.ru" by sini-Kit
+type: text/vnd.tiddlywiki
+url: http://heeg.ru/
+
+A guide in Russian to creating an online shop with TiddlyWiki. No serverside code is needed, instead orders are handled by Disqus.
+
+{{!!url}}

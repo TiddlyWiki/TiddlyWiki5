@@ -1,0 +1,15 @@
+created: 20140714195430737
+description: The heart of TiddlyWiki is it's microkernel. This section will describe what bare mechanisms are included in the microkernel and how additional modules are loaded.
+modified: 20140717211633467
+sectionnumber: 2
+tags: section doc
+title: Microkernel Architecture
+
+This section describes the architecture of the ~TiddlyWiki-kernel. ~TiddlyWiki is based on a micro-kernel which provides only a small stack of functions. This design decision was made to introduce a cleaner mechanism for customisation of ~TiddlyWiki. This section also describes the data-model of ~TiddlyWiki called tiddler. And it gives a overview to the module system which developers can use to extend the functionality of the ~TiddlyWiki application.
+
+<$list filter="[!has[draft.of]has[chapter.of]chapter.of[Microkernel Architecture]tag[doc]sort[sub.num]]">
+
+
+! <$view field="title"/>
+{{!!text}}
+</$list>

@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddler
+description: Slaat een ruwe tiddler op in een bestand
+
+Slaat een individuele tiddler op in ruwe tekst of binair formaat met de gegeven bestandsnaam.
+
+```
+--savetiddler <titel> <bestandsnaam>
+```
+
+Standaard is de bestandsnaam relatief t.o.v. de `output` subfolder van de editiefolder. Het `--output` commando kan worden gebruikt om de output naar een andere folder te sturen.
+
+Ontbrekende folders in het pad worden automatisch aangemaakt.

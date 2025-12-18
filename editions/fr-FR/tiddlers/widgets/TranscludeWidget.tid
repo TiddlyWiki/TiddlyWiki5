@@ -1,0 +1,72 @@
+caption: transclude
+created: 20130824142500000
+fr-title: Widget Transclude
+modified: 20220418115006451
+tags: Widgets
+title: TranscludeWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+Le Widget Transclude importe dynamiquement le contenu d'un autre tiddler.
+
+! Attributs
+
+|!Attribut |!Description |
+|tiddler |Le titre du tiddler à transclure (par défaut le tiddler courant) |
+|field |Le nom du champ du tiddler (par défaut "text"<<;>> si présent, a priorité sur l'attribut index) |
+|index |L'index d'une propriété d'un [[Tiddler Data|DataTiddlers]] |
+|subtiddler |Titre optionnel d'un sous-tiddler quand le tiddler cible est un [[plugin|Plugins]] (voir infra) |
+|mode |Force le mode d'analyse du texte transclus à "block" ou à "inline" (voir infra) |
+
+Le Widget Transclude traite son propre contenu comme cible par défaut si la cible de transclusion n'est pas complètement définie (ex<<:>> un tiddler ou un champ manquant)
+
+! Modes d'analyse
+
+<<tw>> analyse le <<fr WikiText>> dans [[deux modes|WikiText Parser Modes]]<<:>>
+
+* le [[mode « en ligne »|Inline Mode WikiText]] (//inline//) reconnaît les formats de ''caractères'', tels que l'emphase, les liens
+* le [[mode « bloc »|Block Mode WikiText]] (//block//) reconnaît tous les formats ''en ligne'', et ajoute les formats de ''blocs'' comme les tableaux, les listes et les titres
+
+Habituellement, le mode bloc ou en ligne est déduit automatiquement du mode dans lequel le Widget Transclude lui-même a été analysé. Il peut toutefois être ajusté avec l'attribut `mode`.
+
+Par exemple, considérons un tiddler <<gf "A">> avec ce contenu<<:>>
+
+```
+# Article un
+#<$transclude tiddler="B"/>
+# Article deux
+```
+
+Et un tiddler <<gf "B">> avec ce contenu<<:>>
+
+```
+# Article un - a
+# Article un - b
+```
+
+Le résultat donnera quelque chose comme<<:>>
+
+# Article un
+# # Article un - a # Article un - b
+# Article deux
+
+Cela peut être corrigé en modifiant le tiddler <<gf "A">><<:>>
+
+```
+# Article un
+#<$transclude tiddler="B" mode="block"/>
+# Article deux
+```
+Voir aussi ces [[autres exemples|WikiText parser mode: transclusion examples]].
+
+! Accès aux sous-tiddlers
+
+Le Widget Transclude permet l'accès aux tiddlers individuels inclus dans un [[plugin|Plugins]].
+
+L'exemple suivant transclura la version initiale du tiddler noyau [[$:/DefaultTiddlers]] même s'il a été modifié<<:>>
+
+<<wikitext-example-without-html '
+<$transclude tiddler="$:/core" subtiddler="$:/DefaultTiddlers"/>
+
+'>>

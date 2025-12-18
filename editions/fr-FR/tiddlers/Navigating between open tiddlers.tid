@@ -1,0 +1,22 @@
+fr-title: Navigation parmi les tiddlers ouverts
+created: 20140908092600000
+modified: 20141022201649218
+tags: [[Working with TiddlyWiki]]
+title: Navigating between open tiddlers
+type: text/vnd.tiddlywiki
+
+Dans le mode de déroulé par défaut <<gf "classic">>, les tiddlers ouverts sont affichés verticalement dans une colonne appelée <<gf "cours du déroulé">>. Il existe plusieurs façons de parcourir le déroulé — autrement dit, de rebondir d'un tiddler ouvert à l'autre.
+
+* Une façon évidente consiste à ''faire défiler la page de bas en haut'' à l'aide de la barre de défilement du déroulé sur la droite.
+
+** On notera que lorsque le cours du déroulé et la barre latérale s'étendent l'un et l'autre sous l'écran visible, //deux// barre de défilement apparaissent. La barre de défilement extérieure, soit la plus à droite, contrôle le cours du déroulé. La barre de déroulement intérieure contrôle la barre latérale.
+
+* Une manière de procéder un peu maladroite mais souvent tentée par les nouveaux utilisateurs consiste à ''fermer les tiddlers un par un'' jusqu'à retrouver le tiddler qu'ils cherchent. 
+
+** Fermer un tiddler quelconque en haut ou au milieu du déroulé fera que tous les tiddlers situés en dessous remonteront le cours du déroulé. Le tiddler situé juste en dessous de celui que vous venez de fermer remontera d'un cran pour prendre sa place.
+
+** Fermer le tiddler tout en bas du déroulé amènera le bas du tiddler situé juste au-dessus de lui dans le champ de vision.
+
+* La meilleure approche consiste à ''utiliser l'onglet Ouverts'' dans la barre latérale pour cliquer directement sur le tiddler ouvert vers lequel vous souhaitez vous déplacer.
+
+** L'onglet 'Ouverts' contient la liste de tous les tiddlers ouverts. Vous pouvez cliquer sur n'importe quel tiddler de la liste pour rebondir vers lui, ou cliquer sur le 'x' situé à côté pour le fermer. Il existe également un bouton 'Tout fermer' au bas de la liste des tiddlers ouverts.

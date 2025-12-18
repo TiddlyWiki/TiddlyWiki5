@@ -1,0 +1,14 @@
+created: 20131128075743966
+modified: 20150518115747032
+origin: https://tiddlywiki.com/#Philosophy%20of%20Tiddlers
+tags: Konzept
+title: Philosophy von Tiddlern
+type: text/vnd.tiddlywiki
+
+Der Zweck Informationen aufzuzeichnen liegt darin, dass sie später wieder verwendet wird. Der Wert dieser Information steigt proportional, mit der Einfachheit, wie diese wieder verwendet werden kann. 
+
+Die Philosophie eines [[Tiddlers|Tiddler]] ist es, die Möglichkeit der Wiederverwendbarkeit zu maximieren. Dies wird dadurch erreicht, dass Informationen in gerade so kleine Einheiten "zerlegt" werden, das sie für sich genommen, noch Sinn machen. 
+
+~TiddlyWiki verfügt über mehrere Möglichkeiten, Tiddler durch unterschiedliche [[Zusammenfassungen|Transklusion in WikiText]] und [[Anordnungen|ListMacro]] in neue [[Beziehungen zu setzen|TiddlyWiki Strukturieren]]. 
+
+TiddlyWiki strebt danach eine Algebra für Tiddler bereit zu stellen. Einen präzisen Weg, um die Beziehungen zwischen kleinen Informationseinheiten zu erforschen und darzustellen. 

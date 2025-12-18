@@ -1,0 +1,105 @@
+title: $:/plugins/tiddlywiki/dynaview/docs
+
+! Documentation
+
+The components of this plugin include:
+
+* A background task that:
+** performs specified actions when elements are scrolled into view
+** updates certain base classes on the `document.body` according to the current zoom level
+** if enabled in the DynaView config panel - dynamically stores the viewport dimensions in $:/state/viewport/width and $:/state/viewport/height
+* Pre-configured CSS classes to simplify using those base classes
+* Usage examples
+
+! Scroll Features
+
+!! Scroll position preservation during refresh
+
+Some recent browsers have a feature called "scroll anchoring" whereby they suppress the apparent scrolling that occurs when elements are inserted or removed above the current viewport. (See https://github.com/WICG/ScrollAnchoring for more details).
+
+~DynaView can optionally polyfill this behaviour for older browsers by setting the configuration tiddler $:/config/DynaView/PreserveScrollPosition to `yes`.
+
+!! Startup scroll position restoration
+
+Optionally, ~DynaView can store the current scroll position in local storage and restore it upon startup. Set the configuration tiddler $:/config/DynaView/RestoreScrollPositionAtStartup to `yes`.
+
+Note that it is not recommended to use this setting at the same time as the "UpdateAddressBar" option.
+
+!! Visibility tracking
+
+The background task detects when elements with the class `tc-dynaview-track-tiddler-when-visible` scroll in and out of view. It tracks four different states:
+
+* ''Blank/missing'' -- The element has not yet been scrolled into view
+* ''0'' -- The element has been scrolled into view, but subsequently scrolled out of view
+* ''1'' -- The element is near the viewport
+* ''2'' -- The element is partially or wholly within the viewport
+
+The processing applied to each element is as follows:
+
+* If the element is partially or wholly within the viewport then set the state to "2"
+* If the element is near the viewport then set the state to "1"
+* If the element is fully outside the viewport then only set the state to "0" if it is currently unset (ie blank/missing)
+
+Attributes on the tracked element specify the following parameters:
+
+* ''data-dynaview-track-tiddler'' -- specifies the tiddler in which the element tracking state will be stored
+
+!! Update address bar when scrolling
+
+If the configuration tiddler $:/config/DynaView/UpdateAddressBar is set to `yes` the background task detects the tiddler at the top of the viewport and sets the address bar location hash to the title of that tiddler.
+
+Note that it is not recommended to use this setting at the same time as the "RestoreScrollPositionAtStartup" option.
+
+! Viewport Size Features
+
+!! Resize Tracking
+
+Some widgets require re-rendering or refreshing if the size of the viewport changes. This can be accomplished using "resize counting" in two steps:
+
+* Ensure that a DOM element with the class `tc-dynaview-request-refresh-on-resize` is present in the DOM to enable resize counting
+* Have the widget check for changes to the tiddler $:/state/DynaView/ViewportDimensions/ResizeCount to detect viewport resizes
+
+!! Viewport Size Tracking
+
+The background task can optionally dynamically update a pair of state tiddlers with the dimensions of the browser viewport.
+
+* Set the configuration tiddler $:/config/DynaView/ViewportDimensions to the text "yes" to enable this feature
+* The viewport dimensions can be found in $:/state/DynaView/ViewportDimensions/Width and $:/state/DynaView/ViewportDimensions/Height
+
+! Zoom Features
+
+!! Document Body Zoom Classes
+
+The background task sets the following classes on `document.body` according to the current zoom level.
+
+|!Class |!Description |
+|`tc-dynaview-zoom-factor-1` |Set when the zoom level is less than 2.00 |
+|`tc-dynaview-zoom-factor-2` |Set when the zoom level is greater than 2.00 and less than 3.00 |
+|`tc-dynaview-zoom-factor-3` |Set when the zoom level is greater than 3.00 and less than 4.00 |
+|`tc-dynaview-zoom-factor-4` |Set when the zoom level is greater than 4.00 |
+|`tc-dynaview-zoom-factor-1-and-above` |Set when the zoom level is greater than or equal to 1.00 |
+|`tc-dynaview-zoom-factor-1a-and-above` |Set when the zoom level is greater than or equal to 1.14 |
+|`tc-dynaview-zoom-factor-1b-and-above` |Set when the zoom level is greater than or equal to 1.33 |
+|`tc-dynaview-zoom-factor-1c-and-above` |Set when the zoom level is greater than or equal to 1.60 |
+|`tc-dynaview-zoom-factor-2-and-above` |Set when the zoom level is greater than or equal to 2.00 |
+|`tc-dynaview-zoom-factor-2a-and-above` |Set when the zoom level is greater than or equal to 2.66 |
+|`tc-dynaview-zoom-factor-3-and-above` |Set when the zoom level is greater than or equal to 3.00 |
+|`tc-dynaview-zoom-factor-4-and-above` |Set when the zoom level is greater than or equal to 4.00 |
+
+!! Pre-configured Classes
+
+These classes can be used on any element to control its visibility at different zoom levels.
+
+|!Class |!Description |
+|`tc-dynaview-zoom-visible-1-and-above` |Visible when the zoom level is 1.00 or more |
+|`tc-dynaview-zoom-visible-1a-and-above` |Visible when the zoom level is 1.14 or more |
+|`tc-dynaview-zoom-visible-1b-and-above` |Visible when the zoom level is 1.33 or more |
+|`tc-dynaview-zoom-visible-1c-and-above` |Visible when the zoom level is 1.60 or more |
+|`tc-dynaview-zoom-visible-2-and-above` |Visible when the zoom level is 2.00 or more |
+|`tc-dynaview-zoom-visible-2a-and-above` |Visible when the zoom level is 2.66 or more |
+|`tc-dynaview-zoom-visible-3-and-above` |Visible when the zoom level is 3.00 or more |
+|`tc-dynaview-zoom-visible-4-and-above` |Visible when the zoom level is 4.00 or more |
+|`tc-dynaview-zoom-visible-1` |Visible when the zoom level is less than 2.00 |
+|`tc-dynaview-zoom-visible-2` |Visible when the zoom level is greater than or equal to 2.00 and less than 3.00 |
+|`tc-dynaview-zoom-visible-3` |Visible when the zoom level is greater than or equal to 3.00 and less than 4.00 |
+|`tc-dynaview-zoom-visible-4` |Visible when the zoom level is greater than or equal to 4.00 |

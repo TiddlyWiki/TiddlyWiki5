@@ -1,0 +1,23 @@
+caption: Variables
+created: 20141002133113496
+modified: 20150622112706947
+tags: Concepts Reference
+title: Variables
+type: text/vnd.tiddlywiki
+
+Une <<.def variable>> est une portion de texte accessible par son nom via une branche particulière de l'[[arbre widget|Widgets]]. La portion reconnue est la <<.def valeur>> de la
+variable.
+
+Une nouvelle variable est définie par le widget <<.wlink SetWidget>>, et ainsi accessible à tous les descendants du widget, incluant les contenus tranclus. Un widget <<.wid set>> peut utiliser un nom existant et relier ainsi, une portion différente à ce nom pour cette génération de descendants du widget.
+
+Le widget <<.wlink ListWidget>> affecte aussi une variable particulière (par défaut <<.var currentTiddler>>), tour à tour, à chaque titre listé.
+
+Pour une vue d'ensemble quand à l'utilisation des variables, se reporter à  [[variables dans Wikitexte |Variables in WikiText]].
+
+Malgré le mot <<.word variable>>, chaque portion contient une chaine constante. L'apparente variabilité est actuellement reflétée par la présence de plusieurs variables portant le même nom en différents endroits de l'arbre widget.
+
+[[WikiTexte|WikiText]] n'analyse pas les portions en elles-mêmes. Cependant la référence à une variable peut être transcluse dans un contexte où une analyse ~WikiText parsing <<.em may>> pourrait s'effectuer. Dans une portion de code, le seul marquage détecté est `$name$` pour le paramètre de transclusion d'une macro  et `$(name)$` pour une variable à transclure.
+
+La macro <<.mlink dumpvariables>> liste toutes les variables (y  compris les macros) disponibles à une position donnée de l'[[arbre widget|Widgets]].
+
+Le noyau de ~TiddlyWiki intègre [[plusieurs variables|Core Variables]].

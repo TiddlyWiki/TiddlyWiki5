@@ -1,0 +1,7 @@
+created: 20150221152904000
+modified: 20220427170920772
+tags: Definitions
+title: JavaScript Object Notation
+type: text/vnd.tiddlywiki
+
+<<.dlink-ex JSON "https://en.wikipedia.org/wiki/JSON">> is a standard plain-text format used for modelling hierarchical structures of objects that contain named fields. See [[JSON in TiddlyWiki]] for an overview.

@@ -1,0 +1,13 @@
+created: 20141128135102023
+modified: 20141128135233410
+tags: $:/tags/Stylesheet
+title: $:/editions/fr-FR/CSS Stylesheets/utils
+type: text/css
+
+.inline-button {
+  height: 13px; 
+  width: 13px; 
+  vertical-align:-1ex; 
+  display:inline-block; 
+  fill:grey;
+}

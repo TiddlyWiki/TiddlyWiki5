@@ -1,0 +1,10 @@
+created: 20160107223435497
+list: 
+modified: 20170228102537972
+tags: OfficialPlugins [[Plugin Editions]]
+title: CodeMirror Plugin
+type: text/vnd.tiddlywiki
+
+The CodeMirror plugin adds a sophisticated web-based editor to TiddlyWiki.
+
+See [ext[https://tiddlywiki.com/plugins/tiddlywiki/codemirror|plugins/tiddlywiki/codemirror]] for a demo.

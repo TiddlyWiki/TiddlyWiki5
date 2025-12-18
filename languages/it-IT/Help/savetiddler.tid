@@ -1,0 +1,8 @@
+title: $:/language/Help/savetiddler
+description: Salva un frammento nel formato puro testo o binario in un file
+
+Salva un singolo frammento nel formato puro testo o binario con il nome file specificato. 
+
+```
+--savetiddler <title> <filename>
+```

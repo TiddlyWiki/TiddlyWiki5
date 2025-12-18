@@ -1,0 +1,8 @@
+title: $:/language/Help/unpackplugin
+description: Packar upp payload-tiddlers från ett insticksprogram
+
+Packar upp payload-tiddlers från ett insticksprogram, skapar dem som vanliga tiddlers:
+
+```
+--unpackplugin <title>
+```

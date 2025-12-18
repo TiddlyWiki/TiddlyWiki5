@@ -1,0 +1,27 @@
+caption: Novedades
+created: 20140321090511826
+es-title: Novedades
+modified: 20160413160205281
+tags: Community
+title: Latest
+type: text/vnd.tiddlywiki
+
+Las últimas noticias, artículos, recursos y ejemplos.
+
+<div class="tc-link-info">
+
+<$list filter="[tag[Articles]] [tag[Examples]] [tag[Resources]] [tag[Tutorials]] +[!sort[modified]limit[8]]">
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>

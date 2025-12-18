@@ -1,0 +1,17 @@
+title: $:/core/ui/Buttons/fold-all
+tags: $:/tags/PageControls
+caption: {{$:/core/images/fold-all-button}} {{$:/language/Buttons/FoldAll/Caption}}
+description: {{$:/language/Buttons/FoldAll/Hint}}
+
+\whitespace trim
+<$button tooltip={{$:/language/Buttons/FoldAll/Hint}} aria-label={{$:/language/Buttons/FoldAll/Caption}} class=<<tv-config-toolbar-class>>>
+<$action-sendmessage $message="tm-fold-all-tiddlers" $param=<<currentTiddler>> foldedStatePrefix="$:/state/folded/"/>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+{{$:/core/images/fold-all-button}}
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/FoldAll/Caption}}/>
+</span>
+<%endif%>
+</$button>

@@ -1,0 +1,5 @@
+title: $:/config/EditTemplateBodyFilters/
+tags: $:/tags/EditTemplateBodyFilter
+
+canonical-uri: [has[_canonical_uri]then[$:/core/ui/EditTemplate/body/canonical-uri]]
+default: [[$:/core/ui/EditTemplate/body/default]]

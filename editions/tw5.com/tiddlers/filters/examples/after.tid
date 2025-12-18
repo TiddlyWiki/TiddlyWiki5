@@ -1,0 +1,10 @@
+created: 20150118134611000
+modified: 20150118183126000
+tags: [[after Operator]] [[Operator Examples]]
+title: after Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>> The [[Thursday]] tiddler shows a further example.
+
+<<.operator-example 1 "[list[Days of the Week]after[Monday]]">>
+<<.operator-example 2 "[list[Days of the Week]after[Sunday]]">>

@@ -1,0 +1,5 @@
+title: $:/core/ui/MoreSideBar/Orphans
+tags: $:/tags/MoreSideBar
+caption: {{$:/language/SideBar/Orphans/Caption}}
+
+<$list filter={{$:/core/Filters/Orphans!!filter}} template="$:/core/ui/ListItemTemplate"/>

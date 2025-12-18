@@ -1,0 +1,25 @@
+created: 20190201232102417
+modified: 20190202145547621
+tags: 
+title: Do nothing widget tutorial
+type: text/vnd.tiddlywiki
+
+In order to define a widget in a tiddler, the tiddler must satisfy these requirements:
+
+* type field is application/javascript
+* module-type field is widget
+* the text field contains the javascript code
+
+The [[donothing.js]] tiddler fulfills the requirements and its code looks like this:
+{{donothing.js}}
+That code does 2 key things:
+
+* Imports the core Widget class ([[$:/core/modules/widgets/widget.js]])
+* exports the class in an attribute with the name we want our widget to have (`donothing`)
+
+Here's what it looks like:
+{{Do nothing widget demo}}
+And it worked. No error message this time.
+
+''Exercise'': Modify [[donothing.js]] and [[Do nothing widget demo]] so the widget is named `noop` instead of `donothing`
+

@@ -1,0 +1,193 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: Ricerca avanzata
+AdvancedSearch/Hint: Ricerca avanzata
+Bold/Caption: Grassetto
+Bold/Hint: Formatta in grassetto la selezione
+Cancel/Caption: Annulla
+Cancel/Hint: Annulla le modifiche di questo frammento
+Clear/Caption: Cancella
+Clear/Hint: Sostituisci l'immagine con una tinta unita
+Clone/Caption: Clona
+Clone/Hint: Clona questo frammento
+Close/Caption: Chiudi
+Close/Hint: Chiudi questo frammento
+CloseAll/Caption: Chiudi tutti
+CloseAll/Hint: Chiudi tutti i frammenti
+CloseOthers/Caption: Chiudi altri
+CloseOthers/Hint: Chiudi gli altri frammenti
+ControlPanel/Caption: Pannello di controllo
+ControlPanel/Hint: Apri il pannello di controllo
+CopyToClipboard/Caption: Copia negli appunti
+CopyToClipboard/Hint: Copia questo testo negli appunti
+Delete/Caption: Elimina
+Delete/Hint: Elimina questo frammento
+DeleteTiddlers/Caption: Elimina frammenti
+DeleteTiddlers/Hint: Elimina frammenti
+Edit/Caption: Modifica
+Edit/Hint: Modifica questo frammento
+EditorHeight/Caption: Altezza editor
+EditorHeight/Caption/Auto: Adatta automaticamente l'altezza al contenuto
+EditorHeight/Caption/Fixed: Altezza fissa:
+EditorHeight/Hint: Scegli l'altezza dell'editor del testo
+Encryption/Caption: Cifratura
+Encryption/ClearPassword/Caption: Rimuovi password
+Encryption/ClearPassword/Hint: Rimuovi la password e salva questo wiki senza cifrarlo
+Encryption/Hint: Imposta o rimuovi la password per salvare questo wiki
+Encryption/SetPassword/Caption: Imposta password
+Encryption/SetPassword/Hint: Imposta una password per salvare questo wiki con cifratura
+Excise/Caption: Ritaglia
+Excise/Caption/Excise: Ritaglia
+Excise/Caption/MacroName: Nome macro:
+Excise/Caption/NewTitle: Titolo del nuovo frammento:
+Excise/Caption/Replace: Sostituisci il testo ritagliato con:
+Excise/Caption/Replace/Link: Link
+Excise/Caption/Replace/Macro: Macro
+Excise/Caption/Replace/Transclusion: Trasclusione
+Excise/Caption/Tag: Etichetta il nuovo frammento con il titolo di questo frammento
+Excise/Caption/TiddlerExists: Attenzione: il frammento esiste già
+Excise/Hint: Ritaglia il testo selezionato in un nuovo frammento
+ExportPage/Caption: Esporta tutti
+ExportPage/Hint: Esporta tutti i frammenti
+ExportTiddler/Caption: Esporta frammento
+ExportTiddler/Hint: Esporta questo frammento
+ExportTiddlers/Caption: Esporta i frammenti
+ExportTiddlers/Hint: Esporta i frammenti
+Fold/Caption: Ripiega il frammento
+Fold/FoldBar/Caption: Ripiegabile
+Fold/FoldBar/Hint: Barre opzionali per ripiegare e dispiegare i frammenti
+Fold/Hint: Ripiega il corpo di questo frammento
+FoldAll/Caption: Ripiega tutti i frammenti
+FoldAll/Hint: Ripiega il corpo di tutti i frammenti aperti
+FoldOthers/Caption: Ripiega altri frammenti
+FoldOthers/Hint: Ripiega il corpo di altri frammenti aperti
+FullScreen/Caption: Schermo intero
+FullScreen/Hint: Entra o esci dalla modalit&agrave; a schermo intero
+Heading1/Caption: Titolo 1
+Heading1/Hint: Formatta come titolo 1 le linee che contengono la selezione
+Heading2/Caption: Titolo 2
+Heading2/Hint: Formatta come titolo 2 le linee che contengono la selezione
+Heading3/Caption: Titolo 3
+Heading3/Hint: Formatta come titolo 3 le linee che contengono la selezione
+Heading4/Caption: Titolo 4
+Heading4/Hint: Formatta come titolo 4 le linee che contengono la selezione
+Heading5/Caption: Titolo 5
+Heading5/Hint: Formatta come titolo 5 le linee che contengono la selezione
+Heading6/Caption: Titolo 6
+Heading6/Hint: Formatta come titolo 6 le linee che contengono la selezione
+Help/Caption: Aiuto
+Help/Hint: Mostra il pannello di aiuto
+HideSideBar/Caption: Nascondi la barra laterale
+HideSideBar/Hint: Nascondi la barra laterale
+Home/Caption: Home
+Home/Hint: Apri i frammenti predefiniti
+Import/Caption: Importa
+Import/Hint: Importa diversi tipi di file, come testo, immagine, TiddlyWiki o JSON
+Info/Caption: Info
+Info/Hint: Mostra informazioni su questo frammento
+Italic/Caption: Corsivo
+Italic/Hint: Formatta in corsivo la selezione
+Language/Caption: Lingua
+Language/Hint: Scegli la lingua dell'interfaccia
+LayoutSwitcher/Caption: Layout
+LayoutSwitcher/Hint: Apri il pannello di selezione layout
+LineWidth/Caption: Spessore linea
+LineWidth/Hint: Imposta lo spessore linea di disegno
+Link/Caption: Link
+Link/Hint: Crea link wikitext
+Linkify/Caption: Wikilink
+Linkify/Hint: Racchiudi la selezione tra parentesi quadre
+ListBullet/Caption: Elenco puntato
+ListBullet/Hint: Formatta come elenco puntato le linee che contengono la selezione
+ListNumber/Caption: Elenco numerato
+ListNumber/Hint: Formatta come elenco numerato le linee che contengono la selezione
+Manager/Caption: Gestore dei frammenti
+Manager/Hint: Apri il gestore dei frammenti
+MonoBlock/Caption: Blocco monospazio
+MonoBlock/Hint: Formatta come blocco monospazio le linee che contengono la selezione
+MonoLine/Caption: monospazio
+MonoLine/Hint: Formatta come carattere monospazio la selezione
+More/Caption: Altro
+More/Hint: Altre azioni
+NewHere/Caption: Nuovo qui
+NewHere/Hint: Crea un nuovo frammento etichettato con questo
+NewImage/Caption: Nuova immagine
+NewImage/Hint: Crea un nuovo frammento immagine
+NewJournal/Caption: Diario
+NewJournal/Hint: Crea un nuovo frammento diario
+NewJournalHere/Caption: Nuovo diario qui
+NewJournalHere/Hint: Crea un nuovo frammento diario etichettato con questo
+NewMarkdown/Caption: Nuovo frammento markdown
+NewMarkdown/Hint: Crea un nuovo frammento markdown
+NewTiddler/Caption: Nuovo frammento
+NewTiddler/Hint: Crea un nuovo frammento
+Opacity/Caption: Trasparenza
+Opacity/Hint: Imposta la trasparenza di disegno
+OpenWindow/Caption: Apri in una nuova finestra
+OpenWindow/Hint: Apri il frammento in una nuova finestra
+Paint/Caption: Colore di disegno
+Paint/Hint: Imposta il colore di disegno
+Palette/Caption: Tavolozza
+Palette/Hint: Scegli la tavolozza dei colori
+Permalink/Caption: Permalink
+Permalink/Hint: Imposta la barra degli indirizzi del browser a un link diretto a questo frammento
+Permaview/Caption: Permaview
+Permaview/Hint: Imposta la barra degli indirizzi del browser a un link diretto a tutti i frammenti in questa storia
+Picture/Caption: Immagine
+Picture/Hint: Inserisci un'immagine
+Preview/Caption: Anteprima
+Preview/Hint: Mostra il pannello di anteprima
+PreviewType/Caption: Tipo di anteprima
+PreviewType/Hint: Scegli il tipo di anteprima
+Print/Caption: Stampa pagina
+Print/Hint: Stampa la pagina corrente
+Quote/Caption: Citazione
+Quote/Hint: Formatta come citazione le linee che contengono la selezione
+Refresh/Caption: Ricarica
+Refresh/Hint: Ricarica completamente il wiki
+RotateLeft/Caption: Ruota a sinistra
+RotateLeft/Hint: Ruota l'immagine di 90 gradi a sinistra
+Save/Caption: Ok
+Save/Hint: Conferma le modifiche di questo frammento
+SaveWiki/Caption: Salva le modifiche
+SaveWiki/Hint: Salva le modifiche
+ShowSideBar/Caption: Mostra la barra laterale
+ShowSideBar/Hint: Mostra la barra laterale
+SidebarSearch/Hint: Seleziona il campo di ricerca della barra laterale
+Size/Caption: Dimensione immagine
+Size/Caption/Height: Altezza:
+Size/Caption/Resize: Ridimensiona l'immagine
+Size/Caption/Width: Larghezza
+Size/Hint: Imposta la dimensione dell'immagine
+Stamp/Caption: Timbro
+Stamp/Caption/New: Aggiungi il tuo
+Stamp/Hint: Inserisci un ritaglio di testo preconfigurato
+Stamp/New/Text: Testo del ritaglio. (Ricordati di aggiungere un titolo descrittivo nel campo della didascalia).
+Stamp/New/Title: Nome come mostrato nel menu
+StoryView/Caption: Visualizzazione "storia"
+StoryView/Hint: Scegli la visualizzazione "storia"
+Strikethrough/Caption: barrato
+Strikethrough/Hint: Barra la selezione
+Subscript/Caption: pedice
+Subscript/Hint: Formatta come pedice la selezione
+Superscript/Caption: apice
+Superscript/Hint: Formatta come apice la selezione
+TagManager/Caption: Gestore delle etichette
+TagManager/Hint: Apri il gestore delle etichette
+Theme/Caption: Tema
+Theme/Hint: Scegli il tema grafico
+Timestamp/Caption: Timestamp
+Timestamp/Hint: Scegli se le modifiche aggiornano i  timestamp
+Timestamp/Off/Caption: I timestamp sono disattivati
+Timestamp/Off/Hint: Non aggiornare i timestamp alla modifica dei frammenti
+Timestamp/On/Caption: I timestamp sono attivati
+Timestamp/On/Hint: Aggiornare i timestamp alla modifica dei frammenti
+ToggleSidebar/Hint: Attiva o disattiva la visibilità della barra laterale
+Transcludify/Caption: Trasclusione
+Transcludify/Hint: Racchiudi la selezione tra parentesi graffe
+Underline/Caption: Sottolinea
+Underline/Hint: Sottolinea la selezione
+Unfold/Caption: Dispiega il frammento
+Unfold/Hint: Dispiega il corpo di questo frammento
+UnfoldAll/Caption: Dispiega tutti i frammenti
+UnfoldAll/Hint: Dispiega il corpo di tutti i frammenti aperti

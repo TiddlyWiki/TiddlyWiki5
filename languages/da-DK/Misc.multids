@@ -1,0 +1,57 @@
+title: $:/language/
+
+AboveStory/ClassicPlugin/Warning: Det ser ud til, at du prøver at indlæse et plugin beregnet for ~TiddlyWiki Classic. Bemærk venligst, at [[disse plugins ikke virker med TiddlyWiki version 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]. ~TiddlyWiki Classic plugins opdaget:
+BinaryWarning/Prompt: Denne tiddler indeholder binære data
+ClassicWarning/Hint: Denne tiddler er skrevet i ~TiddlyWiki Classic wikitekstformat, som ikke er fuldt kompatibel med ~TiddlyWiki version 5. Se https://tiddlywiki.com/static/Upgrading.html for flere detaljer..
+ClassicWarning/Upgrade/Caption: Opgradér
+CloseAll/Button: luk alle
+ConfirmCancelTiddler: Ønsker du at fortryde ændringer til denne tiddler "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Ønsker du at slette denne tiddler "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Du skal til at redigere en skyggetiddler. Enhver ændring vil overskrive standardsystemet og gøre fremtidige opgraderinger mere besværlige. Er du sikker på, du ønsker at redigere "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Ønsker du at overskrive tiddleren "<$text text=<<title>>/>"?
+Count: tæl
+DefaultNewTiddlerTitle: Ny tiddler
+DropMessage: Slip her (eller klik escape for at fortryde)
+Encryption/Cancel: Fortryd
+Encryption/ConfirmClearPassword: Ønsker du at slette kodeordet? Dette vil fjerne den indsatte  kryptering, når wikien gemmes
+Encryption/Password: Kodeord
+Encryption/PasswordNoMatch: Kodeordet er ikke korrekt
+Encryption/PromptSetPassword: Angiv et nyt kodeord for denne ~TiddlyWiki
+Encryption/RepeatPassword: Gentag kodeord
+Encryption/SetPassword: Angiv kodeord
+Encryption/Username: Brugernavn
+Error/Caption: Fejl
+Error/Filter: Filter fejl
+Error/FilterSyntax: Syntaks fejl i filter udtryk
+Error/IsFilterOperator: Filter fejl: ukendt operand for  'is' filter operator
+Error/LoadingPluginLibrary: Fejl ved indlæsning af plugin library
+Error/RecursiveTransclusion: Recursive transclusion fejl i transclude widget
+Error/SavingToTWEdit: Fejl ved gemning til TWEdit
+Error/WhileSaving: Fejl ved gemning
+InternalJavaScriptError/Hint: Oh, dette er pinligt. Det anbefales at du genstarter TiddlyWiki ved at opfriske din browser
+InternalJavaScriptError/Title: Intern JavaScript fejl
+LazyLoadingWarning: <p>indlæser ekstern tekst fra ''<$text text={{!!_canonical_uri}}/>''</p><p>Hvis denne besked ikke forsvinder, bruger du måske en browser, som ikke understøtter ekstern tekst i denne konfiguration. Se https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Login til TiddlySpace
+Manager/Controls/FilterByTag/Prompt: Filtrer efter tag:
+Manager/Controls/Order/Prompt: Omvendt rækkefølge
+Manager/Controls/Search/Placeholder: Søg
+Manager/Controls/Search/Prompt: Søg:
+Manager/Controls/Show/Option/Tiddlers: tiddlere
+Manager/Controls/Show/Prompt: Vis:
+Manager/Controls/Sort/Prompt: Sortér efter:
+Manager/Item/Colour: Farve
+Manager/Item/Fields: Felter
+MissingTiddler/Hint: Manglende tiddler "<$text text=<<currentTiddler>>/>" - klik {{||$:/core/ui/Buttons/edit}} for at oprette den.
+No: Nej
+OfficialPluginLibrary: Officielt ~TiddlyWiki udvidelsesbibliotek
+OfficialPluginLibrary/Hint: Det officielle ~TiddlyWiki plugin library på tiddlywiki.com. Plugins, temaer og sprog pakker vedligeholdes af core team.
+PluginReloadWarning: Venligst gem {{$:/core/ui/Buttons/save-wiki}} og genindlæs {{$:/core/ui/Buttons/refresh}} for at tillade udvidelser at træde i kraft
+RecentChanges/DateFormat: DD. MMM YYYY
+SystemTiddler/Tooltip: Dette er en systemtiddler
+TagManager/Colour/Heading: Farve
+TagManager/Count/Heading: Tæl
+TagManager/Icon/Heading: Ikon
+TagManager/Tag/Heading: Tag
+Tiddler/DateFormat: DD. MMM YYYY kl. hh12:0mmam
+UnsavedChangesWarning: Du har ændringer som ikke er gemt i ~TiddlyWiki
+Yes: Ja

@@ -1,0 +1,20 @@
+{
+	"tiddlers": [
+		{
+			"file": "jszip.min.v2.6.1.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/jszip/jszip.js",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},{
+			"file": "LICENSE.markdown",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/jszip/license"
+			}
+		}
+	]
+}

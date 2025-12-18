@@ -1,0 +1,28 @@
+created: 20140419082845576
+modified: 20190912093109517
+tags: Features
+title: SafeMode
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+Safe mode provides a way to disabling most customisations in TiddlyWiki. This is useful because if TiddlyWiki is customised incorrectly it can be rendered inoperable. A particular issue is that some customisations break when upgrading to a newer core version of TiddlyWiki (especially during the beta).
+
+<<.warning "Safe mode should only be used with the single file configuration of TiddlyWiki, and then only with savers that do not autosave. Using safe mode in the client server configuration can lead to data loss.">>
+
+! Enabling Safe Mode
+
+Safe mode is enabled in the browser by starting TiddlyWiki with the URL hash set to the string `#:safe`. For example:
+
+https://tiddlywiki.com/#:safe
+
+! How Safe Mode Works
+
+Safe mode triggers two changes:
+
+* All plugins are temporarily disabled. You can use the [[control panel|$:/ControlPanel]] <<.icon $:/core/images/options-button>> to disable individual plugins
+* Any tiddlers that override shadow tiddlers are renamed to give them the prefix `SAFE: `, thus restoring the underlying shadow tiddler
+* Certain configuration options are ignored, and the default settings used instead:
+** WikiParserRuleConfiguration
+
+A report tiddler is displayed that allows you to inspect the tiddlers that were renamed.

@@ -1,0 +1,11 @@
+created: 20150221201816000
+modified: 20150221203715000
+title: Example Table of Contents: Expandable
+caption: Expandable
+tags: table-of-contents-example
+order: 2
+
+<$macrocall $name=".example" n="1"
+eg="""<div class="tc-table-of-contents">
+<<toc-expandable "Contents">>
+</div>"""/>

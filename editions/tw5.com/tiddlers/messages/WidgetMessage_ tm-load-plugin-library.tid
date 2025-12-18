@@ -1,0 +1,25 @@
+caption: tm-load-plugin-library
+created: 20160424235548387
+modified: 20160425000427238
+tags: Messages
+title: WidgetMessage: tm-load-plugin-library
+type: text/vnd.tiddlywiki
+
+The `tm-load-plugin-library` message loads the specified plugin library and imports information about the contained plugins in temporary tiddlers.
+
+|!Name |!Description |
+|url |Url specifying the plugin library to be loaded. |
+|infoTitlePrefix|Prefix to the temporary tiddlers being created, containing information about the plugins the plugin library offers. Defaults to <<.value "$:/temp/RemoteAssetInfo/">> |
+
+!Example
+
+The following snippet will load the official plugin library:
+
+```
+<$button>
+<$action-sendmessage $message="tm-load-plugin-library" infoTitlePrefix="$:/temp/RemoteAssetInfo/" url="https://tiddlywiki.com/library/v5.1.11/index.html"/>
+Load official plugin library
+</$button>
+```
+
+The `tm-load-plugin-library` message is usually generated with the ButtonWidget and is handled by the core itself.

@@ -1,0 +1,22 @@
+created: 20150126142522000
+modified: 20150221193759000
+tags: [[Filter Operators]] [[String Operators]]
+title: splitbefore Operator
+type: text/vnd.tiddlywiki
+caption: splitbefore
+op-purpose: select a delimited prefix from each input title
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: a string of characters marking the end of the prefix
+op-parameter-name: S
+op-output: the prefix, up to and including <<.place S>>, of each input title
+
+Each input title is processed in turn.
+
+* A title that contains <<.place S>> contributes everything up to and including <<.place S>>.
+* A title that doesn't contain <<.place S>> simply contributes itself to the output.
+
+Contributions are [[dominantly appended|Dominant Append]] to the output.
+
+The [[table-of-contents macros|Table-of-Contents Macros]] use this operator with `/` as the parameter.
+
+<<.operator-examples "splitbefore">>

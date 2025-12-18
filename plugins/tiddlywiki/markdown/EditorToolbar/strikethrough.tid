@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/strikethrough
+list-after: $:/core/ui/EditorToolbar/strikethrough
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/strikethrough
+caption: {{$:/language/Buttons/Strikethrough/Caption}} (Markdown)
+description: {{$:/language/Buttons/Strikethrough/Hint}}
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
+shortcuts: ((strikethrough))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="~~"
+	suffix="~~"
+/>

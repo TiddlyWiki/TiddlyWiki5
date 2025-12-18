@@ -1,0 +1,14 @@
+created: 20140904164608166
+fr-title: Manuel de style pour la documentation TiddlyWiki
+modified: 20141128170624843
+tags: Improving TiddlyWiki Documentation
+title: Documentation Style Guide
+type: text/vnd.tiddlywiki
+
+La documentation de ~TiddlyWiki tente de suivre les règles suivantes. L'objectif est de s'assurer que la documentation issue d'auteurs différents se lira de façon aussi homogène que possible.
+
+# Adressez-vous au lecteur directement en disant "vous"
+# Évitez la [[voix passive|http://bdl.oqlf.gouv.qc.ca/bdl/gabarit_bdl.asp?id=2950]] dans vos tutoriels et vos présentations
+# Lorsque vous écrivez en Anglais, utilisez [[l'Anglais britannique de préférence à l'Anglais des États-Unis|http://en.wikipedia.org/wiki/American_and_British_English_spelling_differences]]. En Français, si vous utilisez des expressions qui ne sont pas employées en France, reliez-les à un tiddler qui les replace dans leur contexte.
+
+Voir aussi les règles pour [[les titres des tiddlers|Adopt a Titles Policy]].

@@ -1,0 +1,17 @@
+created: 201804111739
+modified: 201804111739
+title: Q: How can I style a tiddler if it has "this" OR "that" tag?
+tags: [[Custom Styles FAQ]]
+
+''Answer:'' <<.from-version "5.1.16">>
+
+Either tag `this` or tag `that` create a red border.
+
+```
+[data-tags~="this"],
+[data-tags~="that"] {
+  border: 2px solid red;
+}
+```
+
+[[Learn more about possible attributes!|Attribute Selectors]]

@@ -1,0 +1,12 @@
+created: 20150117152418000
+fr-title: Sélection de titre
+modified: 20150624093025320
+tags: Concepts
+title: Title Selection
+type: text/vnd.tiddlywiki
+
+Une <<.def "sélection de titre">> est une suite ordonnée de titres de tiddlers (ou chaines similaires), dans laquelle aucun titre n'apparait plus d'une fois.
+
+Les sélections de titres sont importantes dans les processus de [[filtre|Filters]].
+
+La façon la plus simple d'en écrire une est une [[liste de titres|Title List]].

@@ -1,0 +1,14 @@
+title: $:/language/Help/savetiddler
+description: Guarda un tiddler en un archivo
+
+(Nota: el comando `--savetiddler` está obsoleto en favor del nuevo y más flexible comando `--save`)
+
+Guarda un tiddler individual en formato binario o como texto plano con el nombre de archivo especificado.
+
+```
+--savetiddler <title> <filename>
+```
+
+Por defecto, la ruta es relativa al subdirectorio `output` del directorio del wiki. Puede usarse con el comando `--output` para dirigir la salida a un directorio diferente
+
+Los directorios no existentes en la ruta del nombre de archivo se crean automáticamente.

@@ -1,0 +1,24 @@
+created: 20150706160301163
+modified: 20150706172915783
+tags: [[Widget Examples]] FieldManglerWidget
+title: FieldMangler Widget (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1"
+eg="""
+<$fieldmangler>
+Add tag ''example'' to this tiddler (current)<$button message="tm-add-tag" param="example">{{$:/core/images/new-button}}</$button>
+<br>
+Remove tag ''example'' to this tiddler (current)<$button message="tm-remove-tag" param="example">{{$:/core/images/delete-button}}</$button>
+</$fieldmangler>
+"""/>
+
+
+<$macrocall $name=".example" n="2"
+eg="""
+<$fieldmangler tiddler="Hello World">
+Add tag ''example'' to the Hello World tiddler<$button message="tm-add-tag" param="example">{{$:/core/images/new-button}}</$button>
+<br>
+Remove tag ''example'' to the Hello World tiddler<$button message="tm-remove-tag" param="example">{{$:/core/images/delete-button}}</$button>
+</$fieldmangler>
+"""/>

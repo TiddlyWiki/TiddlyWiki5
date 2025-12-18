@@ -1,0 +1,22 @@
+caption: Ortografía
+created: 20150110182900000
+es-title: Ortografía
+modified: 20160418162314298
+tags: [[Improving TiddlyWiki Documentation]]
+title: Spelling
+type: text/vnd.tiddlywiki
+
+Al ser de origen británico, ~TiddlyWiki prefiere, para su documentación en inglés, el [[uso ortográfico británico frente al americano |http://en.wikipedia.org/wiki/American_and_British_English_spelling_differences]].
+
+Por ese motivo, palabras como <<.word colour>> siguen la norma británica, salvo en aquellos casos en que por motivos técnicos es obligado el uso de la norma americana (p.ej., código en CSS o JavaScript).
+
+En esta edición en castellano, nos remitimos al [[uso ortográfico y estilístico peninsular|http://www.wikilengua.org/index.php/Portada]], a la vez que invitamos a los usuarios hispanohablantes del resto de países a contribuir con este proyecto aportando el material que consideren necesario para que ~TiddlyWiki y su documentación se adapte a la rica variedad de dialectos de nuestra lengua.
+
+Fuera de eso, los acrónimos técnicos estándar se escriben en mayúscula y sin puntos: <<.word HTML>>
+
+Conviene evitar abreviar arbitrariamente palabras y frases, aunque las siguientes son aceptables:
+
+|!Abreviatura |!Significado |!Observaciones |
+|p.ej. |por ejemplo |punto detrás de cada letra, aunque le sigan coma o dos puntos |
+|i.e. |esto es, es decir, |punto detrás de cada letra |
+|...etc |etcétera |puntos suspensivos delante y sin punto detrás |

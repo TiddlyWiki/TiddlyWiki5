@@ -1,0 +1,30 @@
+title: $:/language/Docs/ModuleTypes/
+
+allfilteroperator: Un sottooperatore per l'operatore di filtro ''all''.
+animation: Animazioni che possono essere utilizzate con RevealWidget.
+authenticator: Definisce il modo in cui le richieste vengono autenticate dal server HTTP integrato.
+bitmapeditoroperation: Un'operazione della barra degli strumenti dell'editor bitmap.
+command: Comandi che possono essere eseguiti sotto Node.js.
+config: Dati da inserire in `$tw.config`.
+filteroperator: I singoli metodi degli operatori di filtro.
+global: Dati globali da inserire in `$tw`.
+info: Pubblica informazioni di sistema tramite lo pseudo-plugin [[$:/temp/info-plugin]].
+isfilteroperator: Operandi per l'operatore di filtro ''is''.
+library: Tipo di modulo generico per moduli JavaScript generici.
+macro: Definizioni macro JavaScript.
+parser: Parser per differenti tipi di contenuto.
+route: Definisce il modo in cui i singoli pattern URL vengono gestiti dal server HTTP integrato.
+saver: I saver gestiscono diversi metodi per salvare i file dal browser.
+startup: Funzioni di avvio.
+storyview: Vista cronologia personalizza l'animazione ed il comportamento del widget liste.
+texteditoroperation: Un'operazione della barra degli strumenti dell'editor di testo.
+tiddlerdeserializer: Converte i diversi tipi di contenuto in frammenti.
+tiddlerfield: Definisce il comportamento di un singolo campo di un frammento.
+tiddlermethod: Aggiunge metodi al prototipo `$tw.Tiddler`.
+upgrader: Applica il processo di aggiornamento ai frammenti durante un aggiornamento/importazione.
+utils: Aggiunge metodi a `$tw.utils`.
+utils-browser: Aggiunge metodi specifici del browser a `$tw.utils`.
+utils-node: Aggiunge metodi specifici Node.js a `$tw.utils`.
+widget: I widget incapsulano il rendering e l'aggiornamento del DOM.
+wikimethod: Aggiunge metodi a `$tw.Wiki`.
+wikirule: Regole parser individuali del parser principale WikiText.

@@ -1,0 +1,10 @@
+title: $:/language/Help/help
+description: 顯示 TiddlyWiki 命令的説明
+
+顯示命令的説明文字:
+
+```
+--help [<command>]
+```
+
+若省略命令名稱，則顯示可用命令的清單。

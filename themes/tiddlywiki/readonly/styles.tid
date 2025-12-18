@@ -1,0 +1,21 @@
+title: $:/themes/tiddlywiki/readonly/styles.tid
+tags: [[$:/tags/Stylesheet]]
+
+\define button-selector(title)
+button.$title$, .tc-drop-down button.$title$, div.$title$
+\end
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fclone>>,
+<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fdelete>>,
+<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fedit>>,
+<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-here>>,
+<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-journal-here>>,
+<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fimport>>,
+<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fmanager>>,
+<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-image>>,
+<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-journal>>,
+<<button-selector tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-tiddler>> {
+	display: none;
+}

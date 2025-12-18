@@ -1,0 +1,42 @@
+title: $:/language/ThemeTweaks/
+
+ThemeTweaks: Theme Tweaks
+ThemeTweaks/Hint: Hier können sie verschiedene Elemente des ''Vanilla'' (Standard) Themas einstellen.
+Options: Optionen
+Options/SidebarLayout: Seitenleiste Darstellung
+Options/SidebarLayout/Fixed-Fluid: Fixe "Story", variable Seitenleiste
+Options/SidebarLayout/Fluid-Fixed: Variable "Story", fixe Seitenleiste
+Options/StickyTitles: "Klebender Titel"
+Options/StickyTitles/Hint: Tiddler-Titel bleiben beim "Scrollen" am oberen Bildschirmrand "kleben". Funktioniert möglicherweise nicht mit jedem Browser.
+Options/CodeWrapping: Lange Zeilen in "Code-Blöcken" umbrechen
+Settings: Einstellungen
+Settings/FontFamily: Schriftfamilie
+Settings/CodeFontFamily: "Code" Schriftfamilie
+Settings/EditorFontFamily: Editor Schriftfamilie
+Settings/BackgroundImage: Hintergrundbild für die Seite
+Settings/BackgroundImageAttachment: Hintergrundbild Anhang
+Settings/BackgroundImageAttachment/Scroll: Mit Inhalt "scrollen"
+Settings/BackgroundImageAttachment/Fixed: Fixe position im Fenster
+Settings/BackgroundImageSize: Hintergrundbild Größe
+Settings/BackgroundImageSize/Auto: Auto
+Settings/BackgroundImageSize/Cover: Abdecken
+Settings/BackgroundImageSize/Contain: Anpassen
+Metrics: Größen
+Metrics/FontSize: Schriftgröße
+Metrics/LineHeight: Zeilenhöhe
+Metrics/BodyFontSize: Schriftgröße für Tiddler Inhalt
+Metrics/BodyLineHeight: Zeilenhöhe für Tiddler Inhalt
+Metrics/StoryLeft: "Story" - linke Position
+Metrics/StoryLeft/Hint: Abstand des "story rivers" vom linken Fensterrand
+Metrics/StoryTop: "Story" - obere Position
+Metrics/StoryTop/Hint: Abstand des "story rivers" vom oberen Fensterrand
+Metrics/StoryRight: "Story" - rechte Position
+Metrics/StoryRight/Hint: Abstand der Seitenleiste from linken Fensterrand
+Metrics/StoryWidth: "Story" - Breite
+Metrics/StoryWidth/Hint: Breite des "story rivers" 
+Metrics/TiddlerWidth: Tiddlerbreite
+Metrics/TiddlerWidth/Hint: im "story river"
+Metrics/SidebarBreakpoint: Seitenleiste "breakpoint"
+Metrics/SidebarBreakpoint/Hint: Minimum Fensterbreite, bei der die Seitenleiste an den Anfang der Seite verschoben wird.
+Metrics/SidebarWidth: Seitenleiste Breite
+Metrics/SidebarWidth/Hint: Die Breite der Leiste bei variabler/fixer Darstellung

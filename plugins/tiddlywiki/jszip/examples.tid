@@ -1,0 +1,36 @@
+title: $:/plugins/tiddlywiki/jszip/examples
+
+\define actions-render-static-site()
+<$action-sendmessage $message="tm-zip-create" $param="$:/temp/_ZipTiddler"/>
+<$set name="tv-filter-export-link" value="[slugify[]addsuffix[.html]]">
+<$list filter="[all[tiddlers]!is[system]limit[25]]">
+<$action-sendmessage $message="tm-zip-render-file" $param="$:/temp/_ZipTiddler" filename={{{ [<currentTiddler>slugify[]addsuffix[.html]] }}} tiddler=<<currentTiddler>> template="$:/core/templates/static.tiddler.html"/>
+</$list>
+</$set>
+<$action-sendmessage $message="tm-zip-render-file" $param="$:/temp/_ZipTiddler" filename="static.css" template="$:/core/templates/static.template.css"/>
+<$action-sendmessage $message="tm-zip-download" $param="$:/temp/_ZipTiddler" filename="myzip.zip"/>
+\end
+
+! Rendering a Static Site to a Zip File
+
+The actions below create a ZIP file containing a static HTML rendering of the first 100 non-system tiddlers:
+
+<pre>
+<$text text=<<actions-render-static-site>>/>
+</pre>
+
+<$button actions=<<actions-render-static-site>>>
+Render site
+</$button>
+
+<$list filter="[!is[system]duplicateslugs[]limit[1]]" emptyMessage="''(There are no duplicate slugs)''">
+''The following tiddlers have duplicate slugs:''
+
+<ul>
+<$list filter="[all[tiddlers]!is[system]limit[25]duplicateslugs[]]">
+<li><$link><$text text=<<currentTiddler>>/></$link></li>
+</$list>
+</ul>
+</$list>
+
+Temporary zip file: $:/temp/_ZipTiddler

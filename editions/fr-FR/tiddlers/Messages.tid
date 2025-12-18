@@ -1,0 +1,12 @@
+caption: Messages
+created: 20140226083311937
+modified: 20150622112612112
+tags: Concepts Reference
+title: Messages
+type: text/vnd.tiddlywiki
+
+Les messages Widget sont générés par les widgets en réponse aux actions utilisateur. Ils parcourent l'arbre widget jusqu'à ce qu'ils soient traités par un ascendant widget.
+
+Les messages suivants sont implémentés dans le noyau<<:>>
+
+<<list-links "[tag[Messages]]">>

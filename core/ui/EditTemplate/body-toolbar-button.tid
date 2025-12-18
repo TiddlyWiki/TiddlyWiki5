@@ -1,0 +1,111 @@
+title: $:/core/ui/EditTemplate/body/toolbar/button
+
+\define toolbar-button-icon()
+<$list
+
+  filter="[all[current]!has[custom-icon]]"
+  variable="no-custom-icon"
+
+><$transclude
+
+  tiddler={{!!icon}}
+
+/></$list>
+\end
+
+\define toolbar-button-tooltip()
+{{!!description}}<$macrocall $name="displayshortcuts" $output="text/plain" shortcuts={{!!shortcuts}} prefix="` - [" separator="] [" suffix="]`"/>
+\end
+
+\define toolbar-button()
+<$list
+
+  filter={{!!condition}}
+  variable="list-condition"
+
+><$wikify
+
+  name="tooltip-text"
+  text=<<toolbar-button-tooltip>>
+  mode="inline"
+  output="text"
+
+><$list
+
+  filter="[all[current]!has[dropdown]]"
+  variable="no-dropdown"
+
+><$set name=disabled filter={{!!condition-disabled}}><$button
+
+  class="tc-btn-invisible $(buttonClasses)$"
+  tooltip=<<tooltip-text>>
+  actions={{!!actions}}
+  disabled=<<disabled>>
+
+><span
+
+  data-tw-keyboard-shortcut={{{ [<disabled>match[yes]then[]else{!!shortcuts}] }}}
+
+/><<toolbar-button-icon>><$transclude
+
+  tiddler=<<currentTiddler>>
+  field="text"
+
+/></$button></$set></$list><$list
+
+  filter="[all[current]has[dropdown]]"
+  variable="dropdown"
+
+><$set
+
+  name="dropdown-state"
+  value=<<qualify "$:/state/EditorToolbarDropdown">>
+
+><$set name=disabled filter={{!!condition-disabled}}><$button
+
+  popup=<<dropdown-state>>
+  class="tc-popup-keep tc-btn-invisible $(buttonClasses)$"
+  selectedClass="tc-selected"
+  tooltip=<<tooltip-text>>
+  actions={{!!actions}}
+  disabled=<<disabled>>
+
+><span
+
+  data-tw-keyboard-shortcut={{{ [<disabled>match[yes]then[]else{!!shortcuts}] }}}
+
+/><<toolbar-button-icon>><$transclude
+
+  tiddler=<<currentTiddler>>
+  field="text"
+
+/></$button></$set><$reveal
+
+  state=<<dropdown-state>>
+  type="popup"
+  position="below"
+  animate="yes"
+  tag="span"
+
+><div
+
+  class="tc-drop-down tc-popup-keep"
+
+><$transclude
+
+  tiddler={{!!dropdown}}
+  mode="block"
+
+/></div></$reveal></$set></$list></$wikify></$list>
+\end
+
+\define toolbar-button-outer()
+<$set
+
+  name="buttonClasses"
+  value={{!!button-classes}}
+
+><<toolbar-button>></$set>
+\end
+
+<<toolbar-button-outer>>

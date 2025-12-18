@@ -1,0 +1,17 @@
+title: $:/snippets/viewswitcher
+
+\define icon()
+$:/core/images/storyview-$(storyview)$
+\end
+\whitespace trim
+\function view.filter() [<storyview>prefix{$:/view}]
+
+<$linkcatcher to="$:/view">
+<div class="tc-chooser tc-viewswitcher" role="listbox">
+<$list filter="[storyviews[]]" variable="storyview">
+<div class={{{ [view.filter[]then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}}>
+<$button tag="a" class="tc-tiddlylink tc-btn-invisible" role="option" to=<<storyview>> aria-selected={{{ [view.filter[]then[true]else[false]] }}}><$transclude tiddler=<<icon>>/><$text text=<<storyview>>/></$button>
+</div>
+</$list>
+</div>
+</$linkcatcher>

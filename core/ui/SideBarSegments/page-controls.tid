@@ -1,0 +1,4 @@
+title: $:/core/ui/SideBarSegments/page-controls
+tags: $:/tags/SideBarSegment
+
+{{||$:/core/ui/PageTemplate/pagecontrols}}

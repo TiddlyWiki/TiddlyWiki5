@@ -1,0 +1,17 @@
+title: $:/language/Help/setfield
+description: Förbereder externa tiddlers för användning
+
+//Notera att detta kommando är experimentiellt och kan ändras eller ersättas innan det är färdigställt//
+
+Sätter det speficficerade fältet för en grupp av tiddlers med resultatet att wikifiera en mall-tiddler med `currentTiddler` variabeln satt till den tiddlern.
+
+```
+--setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+Parametrarna är:
+
+* ''filter'' - filtrera de identifierade tiddlers som kommer påverkas
+* ''fieldname'' - fältet som ska ändras (standard satt till "text")
+* ''templatetitle'' - tiddlern som ska wikifieras till ett specifikt fält. Om det är blankt eller saknas så kommer det specificerade fältet tas bort
+* ''rendertype'' - texttypen att rendera (standard satt till "text/plain"; "text/html" kan användas för att få med HTML-taggar)

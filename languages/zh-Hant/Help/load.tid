@@ -1,0 +1,19 @@
+title: $:/language/Help/load
+description: 從檔案中載入條目
+
+從 TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` 或其他本機檔案載入條目。應用的處理程序取決於導入檔案的副檔名。如果您需要明確指定解串器和編碼，請改用 `import` 命令。
+
+```
+--load <filepath> [noerror]
+--load <dirpath> [noerror]
+```
+
+預設情況下, 如果未找到條目，load 命令會引發錯誤。通過提供可選的 "noerror" 參數可以抑制該錯誤。
+
+從已加密的 TiddlyWiki 檔案中載入條目，須使用 PasswordCommand 指定密碼，例如：
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
+```
+
+請注意 TiddlyWiki 將不載入舊版本的已掛載的插件。

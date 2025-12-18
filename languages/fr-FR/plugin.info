@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/fr-FR",
+	"name": "fr-FR",
+	"plugin-type": "language",
+	"description": "Français (France)",
+	"author": "xcazin",
+	"core-version": ">=5.0.0"
+}

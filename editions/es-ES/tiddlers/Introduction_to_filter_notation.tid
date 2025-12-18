@@ -1,0 +1,97 @@
+caption: FIltros: Introducción
+created: 20140410101941871
+es-title: Introducción a la notación de filtros
+modified: 20160420173056133
+tags: Learning Filters
+title: Introduction to filter notation
+type: text/vnd.tiddlywiki
+
+<<.preamble """Aquí se tratan los fundamentos de la creación de [[filtros|Filters]] para obtener una selección de tiddlers. Para una exposición más técnica del tema, véase [[Sintaxis de filtros|Filter Syntax]].""">>
+
+<$macrocall $name=".tip" _="""Los filtros no hacen nada por sí mismos. Necesitan siempre un contexto. La manera más sencilla de experimentar con expresiones de filtro es escribirlos en el campo de búsqueda de la pestaña <<.advancedsearch-tab Filter>>, en la [[Búsqueda avanzada|$:/AdvancedSearch]]."""/>
+
+El caso más simple es aquel en que ya conoces exactamente qué tiddlers quieres seleccionar. Escribe cada título en corchetes dobles, separados por por un espacio:
+
+> `[[Libro de recetas]] [[HuevosRevueltos]] [[Tarta de manzana de mamá]]`
+
+Se pueden opitir los corchetes si el título no contiene espacios:
+
+> `[[Libro de recetas]] HuevosRevueltos [[Tarta de manzana de mamá]]`
+
+Los corchetes dobles son, de hecho, la abreviatura de un filtro:
+
+> `[title[HuevosRevueltos]]`
+
+... que nos sirve de <<.def "modelo genera">> para cualquier filtro:
+
+> `[operador[parámetro]]`
+
+Por ejemplo: Para seleccionar todos los tiddlers etiquetados como <<.tag Receta>>:
+operador
+> `[tag[Recetas]]`
+
+Podemos invertir el significado añadiendo un signo de exclamación `!` al operador. Así, por ejemplo, para seleccionar aquellos tiddlers que <<.em no>> contengan la etiqueta <<.tag Recetas>>, escribiremos:
+
+> `[!tag[Recipe]]`
+
+Se pueden filtrar tiddlers por otros campos, no sólo por título y etiqueta: 
+
+> `[field:raciones[4]]`
+
+Con este ejemplo se seleccionarán todos aquellos tiddlers que tengan <<.value 4>> como valor del campo <<.field raciones>>.
+
+Como la palabra "raciones" no es operador estándar de filtro y es improbable que alguna vez lo sea, se puede omitir sin peligro alguno el prefijo `field:`
+
+> `[raciones[4]]` 
+
+!!Combinaciones
+
+Los filtros vistos hasta ahora constan de un único paso, pero se se puede ejecutar una <<.def instrucción>> que consta de varios varios <<.def pasos>>, del modo siguiente:
+
+> `[tag[Vegetariano]!tag[sopas]raciones[4]]`
+
+>(Nótese cómo la instrucción entera queda encerrada por corchetes.
+
+Un tiddler debe coincidir con <<.em todos>> los pasos de la instrucción. Así, el ejemplo anterior nos devolverá una lista de recetas vegetarianas --excepto sopas--, para 4 personas.
+
+Una secuencia de instrucciones separadas seleccionará los tiddlers que coincidan con <<.em cualquiera>> de ellas. Puede servirnos para, por ejemplo, encontrar recetas para 3, 4 ó 5 personas, es decir, que cumplan <<.em cualquiera>> de las condiciones impuestas por estas: la primera, la segunda <<.def O>> la tercera.
+
+> `[raciones[3]] [raciones[4]] [raciones[5]]`
+
+Y, si quisiéramos ignorar las recetas vegetarianas para 4 personas, podríamos decir:
+
+> `[raciones[3]] [raciones[4]!tag[Vegetariano]] [serving[5]]`
+
+Por defecto, cada instrucción toma en consideración todos los tiddlers del wiki, pero podemos usar el signo `+` para restringir la acción de una instrucción a los tiddlers seleccionados por las precedentes, del modo que el resultado cumpla <<.em todas>> las condiciones: la anterior <<.def Y>> esta.
+
+> `[raciones[3]] [raciones[4]] [raciones[5]] + [tag[Vegetariano]] +[sort[title]]`
+
+Asi seleccionaremos recetas para 3, 4 ó 5 personas y <<.em "de entre estas, únicamente">> las vegetarianas, para, finalmente, ordenarlas por orden alfabético de sus títulos.
+
+De forma análoga podemos usar el signo `-` para <<.em eliminar>> los tiddlers que cumplen determinada condición de los resultados obtenidos hasta el momento, de modo que se cumplan unas condiciones <<.def "Y NO">> las otras. 
+
+Así podemos, por ejemplo, seleccionar todas las recetas vegetarianas salvo dos de ellas en particular:
+
+> `[tag[Vegetariano]] -[title[HuevosRevueltos]] -RopaVieja`
+
+...o todas las recetas sin gluten, menos las vegetarianas:
+
+> `[raciones[3]] [raciones[4]] [raciones[5]] + [tag[Sin gluten]] -[tag[Vegetariano]] +[sort[title]]`
+
+!!Parámetros especiales
+
+Los parámetros de cada instrucción de filtrado vista hasta el momento se indica entre corchetes, significando con ello que ~TiddlyWiki debe interpretarlos literalmente, pero tenemos otras formas de indicar parámetros:
+
+<<.def "Entre llaves">> `{}`, para indicar que el parámetro es una [[referencia de texto|TextReference]] y que debe buscar su valor en el <<.field texto>> de un tiddler en particular. 
+
+Por ejemplo: si tenemos un tiddler llamado <<.tid Preferencias>>, cuyo texto es la palabra <<.value Vegetariano>>, podemos decir
+
+> `[tag{Preferencias}]`
+
+como alternativa a `[tag[Vegetariano]]`. Esto permite que las preferencias cambien, sin necesidad de modificar el criterio de búsqueda.
+
+<<.def "Entre comillas angulares simples">> `<>`, para indicar que el parámetro es el nombre de una [[variable|Variables]] cuyo valor debe usar. 
+
+Aquí usaremos la variable incorporada <<.vlink currentTiddler>> en un filtro que selecciona todos los tiddlers cuyo texto contiene el título del actual:
+
+> `[search<currentTiddler>]`

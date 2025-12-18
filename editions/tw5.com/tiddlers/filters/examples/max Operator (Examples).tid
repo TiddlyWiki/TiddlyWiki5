@@ -1,0 +1,8 @@
+created: 20190611130905752
+modified: 20190611130938471
+tags: [[max Operator]] [[Operator Examples]]
+title: max Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[23]max[32]]">>
+<<.operator-example 2 "=1 =2 =3 =4 +[max[3]]">>

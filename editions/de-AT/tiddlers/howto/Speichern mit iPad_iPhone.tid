@@ -1,0 +1,25 @@
+created: 20131129101027725
+creator: pmario
+modified: 20140922125314742
+modifier: ChrisK
+tags: howto
+title: Speichern mit iPad/iPhone
+type: text/vnd.tiddlywiki
+
+Für das iPad/iPhone gibt es eine kostengünstige Applikation: ''TWEdit'', die es ermöglicht, mit ~TiddlyWiki "online" und "offline" zu arbeiten.
+
+Verwendung von TWEdit:
+
+# [[Holen Sie sich TWEdit im Apple Store|https://itunes.apple.com/gb/app/twedit/id409607956?mt=8]].
+# Öffnen Sie TWEdit.
+# Tippen Sie den Titel in der Mitte des "Toolbars".
+#* Eine Text Box sollte sich öffnen, in der Sie die URL eingeben können.
+# Verwenden Sie die URL `https://tiddlywiki.com/languages/de-AT/empty.html` oder `https://tiddlywiki.com/languages/de-DE/empty.html`
+# Wenn die leere Version geladen wurde, dann tippen Sie "save" (Das zweite "icon" oben rechts)
+#* Ein Hinweis Dialog sollte erscheinen, wo Sie den lokalen Namen eingeben können.
+# Geben Sie den neuen Dateinamen ein. Die Endung `.html` nicht vergessen!
+# Bearbeiten Sie Ihr ~TiddlyWiki wie gewohnt.
+# Um Änderungen zu speichern, tippen Sie wieder den ''save'' Button.
+#* Eine Bestätigungs Information sollte oben rechts auftauchen. 
+
+//HINWEIS: TWEdit steht in keiner Beziehung zu TiddlyWiki//

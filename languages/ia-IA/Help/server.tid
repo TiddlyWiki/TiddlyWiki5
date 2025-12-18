@@ -1,0 +1,37 @@
+title: $:/language/Help/server
+description: Provide un interfacite de servitor HTTP a TiddlyWiki
+
+Le servitor includite in TiddlyWiki5 es multo simple. Mesmo si illo es compatibile con TiddlyWeb, illo non supporta multe del functiones besoniate pro uso robuste de Internet.
+
+Como radice, illo servi pro render un nota specific. Excepte le radice, illo servi notas individual scribite in JSON, e supporta le operationes basic de HTTP pro `GET`, `PUT` e `DELETE`.
+
+```
+--server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host> <pathprefix>
+```
+
+Le parametros es:
+
+* ''port'' - numero del porta del qual servir (le standard es "8080")
+* ''roottiddler'' - le nota que functiona como le radice (le standard es "$:/core/save/all") 
+* ''rendertype'' - le typo de contento al qual le nota radice debe esser rendite (le standard es "text/plain")
+* ''servetype'' - le typo de contento per le qual le nota radice debe esser tractate (le standard es "text/html")
+* ''username'' - le nomine standard de usator pro cambios redactional
+* ''password'' - contrasigno optional pro authentication basic
+* ''host'' - nomine optional de hospite del qual servir (le standard es "127.0.0.1" anque appellate "localhost")
+* ''pathprefix'' - prefixo optional pro sentieros
+
+Si le parametro con le conrasigno es specificate, le navigator va demandar le usator a inserer le nomine de usator e contrasigno. Nota que le contrasigno es transmittite como texto pur, dunque le implementation non es apte pro uso general.
+
+Pro exemplo:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MiNomine c0ntrasigno
+```
+
+Le nomine de usator e contrasigno pote esser specificate como vacue, si on besonia fixar le nomine de hospite e le prefico del sentiero e non desira demandar un contrasigno:
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+Pro currer multiple servitores TiddlyWiki al mesme tempore, cata uno debe haber un porta differente.

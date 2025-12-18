@@ -1,0 +1,58 @@
+caption: Sources
+code-body: yes
+created: 20240313090915565
+modified: 20240313115026563
+tags: $:/tags/TiddlerInfo
+title: $:/editions/tw5.com/TiddlerInfo/Sources
+
+\function static-link-base() [[https://tiddlywiki.com/static/$(title)$.html]substitute[]]
+
+\function github-link-base()
+[[https://github.com/TiddlyWiki/TiddlyWiki5/blob/tiddlywiki-com/editions/tw5.com/tiddlers/$(title)$]substitute[]]
+\end
+
+\procedure make-static-link()
+\whitespace trim
+<$set name="title" filter="[<currentTiddler>encodeuricomponent[]encodeuricomponent[]]" select="0">
+	<a href=<<static-link-base>>
+		class="tc-tiddlylink-external"
+		target="_blank"
+		rel="noopener noreferrer"
+	>
+		<$text text=<<static-link-base>>/>
+	</a>
+</$set>
+\end
+
+\procedure make-github-link()
+<$set name="title" value={{{ [[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>] }}}>
+	<$set name="title" filter="[<title>encodeuricomponent[]]" select="0">
+		<a href=<<github-link-base>>
+			class="tc-tiddlylink-external"
+			target="_blank"
+			rel="noopener noreferrer"
+		>Link to "<$text text=<<currentTiddler>>/>" on github.com</a>
+	</$set>
+</$set>
+\end
+
+\procedure make-pr-maker-link()
+<a href={{{ [<currentTiddler>encodeuricomponent[]addprefix[https://edit.tiddlywiki.com/#]] }}}
+	class="tc-tiddlylink-external"
+	target="_blank"
+	rel="noopener noreferrer"
+>Link to "<$text text=<<currentTiddler>>/>" in Docs PR Maker edition</a>
+\end
+
+<$list filter="[all[current]!is[system]!is[shadow]]">
+
+A static HTML representation of this tiddler is available at the URL:
+
+* <<make-static-link>>
+
+Help us to [[improve the documentation|Improving TiddlyWiki Documentation]] by suggesting changes to this tiddler using the [[TiddlyWiki Docs PR Maker]] or directly on ~GitHub.
+
+* <<make-pr-maker-link>>
+* <<make-github-link>>
+
+</$list>

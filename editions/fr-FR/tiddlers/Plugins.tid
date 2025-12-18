@@ -1,0 +1,56 @@
+caption: Plugins
+created: 20140910215514237
+modified: 20150623055132307
+tags: Concepts TableOfContents
+title: Plugins
+type: text/vnd.tiddlywiki
+
+! Plugins Disponibles
+
+Ces plugins sont distribués sur tiddlywiki.com comme des éléments de la distribution principale à part entière.
+
+<<list-links "[tag[Plugins]]">>
+
+! Qu'est-ce qu'un plugin?
+
+Un plugin, dans TiddlyWiki5, est un ensemble de tiddlers empaquetés dans un seul tiddler. Les Plugins sont utilisés pour distribuer des composants optionnels et personnalisés de TiddlyWiki.
+
+Les tiddlers d'un plugin deviennent des [[tiddlers shadow|ShadowTiddlers]].
+
+Les Plugins peuvent contenir des modules JavaScript, des feuilles de styles, et des gabarits pour étendre les fonctionnalités de TiddlyWiki lui-même. Les plugins peuvent aussi être employés pour diffuser du texte oridinaire, des images ou tout autre contenu. 
+Leurs mise à jour depuis leur source les traite comme une simple unité.
+
+Se reporter au [[Mécanisme du Plugin|PluginMechanism]] pour plus de détail sur la façon dont les plugins sont implémentés en interne.
+
+! Installation d'un plugin à partir d'une bibliothèque de plugins
+
+# Faites une sauvegarde du fichier HTML TiddlyWiki ([[voir à ce propos|The First Rule of Using TiddlyWiki]])
+# Ouvrez votre TiddlyWiki dans un navigateur
+# Ouvrez le [[Panneau de contrôle|$:/ControlPanel]], cliquez sur l'onglet ''Plugins'', et à nouveau sur un nouvel onglet ''Plugins''
+# Cliquez sur le bouton ''Installez un plugin''
+# À l'affichage de la bibliothèque officielle<<:>>
+## Choisir entre ''plugins'', ''thèmes'' et ''langages''
+## Utilisez la ''recherche'' et cliquez sur le ''chevron'' d'un plugin pour obtenir des détails
+# Cliquez sur le bouton ''installez''
+# Une barre d'alerte vous propose de cliquer sur ''Sauvegarder'' puis de ''Rafraichir'' la page afin que les modifications soient prises en compte par TiddlyWiki
+# Le plugin est maintenant prêt à être utilisé
+
+! Installation manuelle d'un plugin
+
+# Faites une sauvegarde du fichier HTML TiddlyWiki ([[voir à ce propos|The First Rule of Using TiddlyWiki]])
+# Ouvrez votre TiddlyWiki dans un navigateur
+# Cherchez le lien vers le plugin, de type [[$:/plugins/tiddlywiki/exemple]]. Vous trouverez habituellement ce lien sur la page d'accueil du plugin (voir par exemple, https://tiddlywiki.com/plugins/tiddlywiki/katex/)
+# Glissez le lien de type [[$:/plugins/tiddlywiki/exemple]] vers la fenêtre du navigateur affichant votre TiddlyWiki
+# Sauvegardez votre TiddlyWiki
+# ''Rafraichir'' la page afin que les modifications soient prises en compte
+# Le plugin est maintenant prêt à être utilisé
+
+! Comment désinstaller/ supprimer un plugin
+
+# Faites une sauvegarde du fichier HTML TiddlyWiki ([[voir à ce propos|The First Rule of Using TiddlyWiki]])
+# # Ouvrez le [[Panneau de contrôle|$:/ControlPanel]], cliquez sur l'onglet ''Plugins'', et à nouveau sur un nouvel onglet ''Plugins''
+# Cliquez sur le plugin que vous voule supprimer pour ouvrir son tiddler
+# Cliquez sur l'icone d'édition, puis sur l'icone de suppression du tiddler
+# Sauvegardez votre TiddlyWiki
+# ''Rafraichir'' la page afin que les modifications soient prises en compte
+# Le plugin est maintenant désinstallé

@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/aws/lambdas/main
+
+\rules only filteredtranscludeinline transcludeinline
+
+/*
+{{ $:/core/copyright.txt }}
+*/
+
+{{$:/plugins/tiddlywiki/aws/lambda/tiddlers}}
+
+{{$:/plugins/tiddlywiki/aws/lambda/sjcl}}
+
+{{ $:/boot/bootprefix.js ||$:/core/templates/plain-text-tiddler}}
+
+{{ $:/boot/boot.js ||$:/core/templates/plain-text-tiddler}}
+
+{{$:/plugins/tiddlywiki/aws/lambda/package-info}}
+
+{{ $:/plugins/tiddlywiki/aws/lambda/handler ||$:/core/templates/plain-text-tiddler}}

@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/innerwiki/inner-example
+
+<$innerwiki width="1200" height="400" style="width:100%;">
+	<$anchor x="screenshot-inner-anchor-1-x" y="screenshot-inner-anchor-1-y"/>
+	<circle cx={{screenshot-inner-anchor-1-x}} cy={{screenshot-inner-anchor-1-y}} r="50" stroke="blue" stroke-width="2" fill="green" />
+	<$data title="HelloThere" text="! This tiddler is inside a wiki that is inside a wiki that is inside a wiki"/>
+	<$data title="$:/DefaultTiddlers" text="HelloThere"/>
+	<$data title="$:/palette" text="$:/palettes/SolarFlare"/>
+</$innerwiki>

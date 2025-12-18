@@ -1,0 +1,12 @@
+created: 20150118134611000
+modified: 20200129165627964
+tags: [[fields Operator]] [[Operator Examples]]
+title: fields Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[HelloThere]fields[]]" "fields of HelloThere">>
+<<.operator-example 2 "[[HelloThere]fields:include[list title text non-existing]]" """fields of HelloThere using a "short list" of fields. Fields are only shown, if they exist""">>
+<<.operator-example 3 "[[HelloThere]fields:include[list title text]sortby[title list text]]" "fields of HelloThere special sorting">>
+<<.operator-example 4 "[[HelloThere]fields:exclude[list title text]]" "fields of HelloThere using the exclude suffix">>
+<<.operator-example 5 "[[HelloThere]fields[]] -list -title -text" "fields of HelloThere, using several filter runs instead of exclude suffix">>
+<<.operator-example 6 "[tag[Common Operators]fields[]]" "fields of all tiddlers tagged as [[Common Operators]]">>

@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/text-slicer/ui/preview-column/empty
+
+<div class="tc-sliced-document-header">
+
+Create a document by slicing an existing tiddler
+
+---
+
+[[Help|$:/plugins/tiddlywiki/text-slicer/docs]]
+
+</div>

@@ -1,0 +1,16 @@
+created: 20150917193630604
+modified: 20201129183045031
+tags: Features
+title: InfoPanel
+type: text/vnd.tiddlywiki
+
+Each tiddler has a panel of additional information. To reveal it, click the <<.icon $:/core/images/down-arrow>> button in the tiddler's toolbar and then choose <<.icon $:/core/images/info-button>> ''info'' from the dropdown list.
+
+The info panel has the following tabs:
+
+* ''Tools'' - This offers buttons for various actions you can perform on the tiddler. The checkbox next to each button lets you promote an action to the tiddler's toolbar - this will affect all of the tiddlers in your wiki
+* ''Backlinks'', ''Tagging'', ''List'' and ''Listed'' - These list various kinds of related tiddlers. See [[Using links to navigate between tiddlers]]
+* ''Fields'' - This summarises all of the tiddler's [[fields|TiddlerFields]], except for ''text''
+* ''Advanced'' - This indicates whether the tiddler is a [[shadow|ShadowTiddlers]]. If it is, this also reveals which plugin it comes from and whether it has been overridden by an ordinary tiddler
+
+To close the info panel, click anywhere outside it.

@@ -1,0 +1,16 @@
+created: 20150719182943383
+modified: 20150719182947178
+tags: 
+title: Edit Existing Items
+
+\define thisMakeTabs()
+<<tabs '[prefix[$:/settings/$(ThisResume)$/]show[true]get[template]get[input_tiddler]]' default:[[Contact Information]]>>
+\end
+
+Each tab lets you edit the contents of that section. Click on the `Preview and Set Options` button to see a preview of the finished resume and for layout options.
+
+<$vars ThisResume={{$:/settings/Global!!selected_resume}}>
+<<thisMakeTabs>>
+</$vars>
+
+<!--<$button to="Preview and Set Options">Open Preview and Options</$button>-->

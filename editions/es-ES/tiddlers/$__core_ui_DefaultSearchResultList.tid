@@ -1,0 +1,18 @@
+caption: {{$:/language/Search/DefaultResults/Caption}}
+created: 20141117081621387
+modified: 20160515100401168
+tags: $:/tags/SearchResults
+title: $:/core/ui/DefaultSearchResultList
+type: text/vnd.tiddlywiki
+
+\define searchResultList()
+//<small>{{$:/language/Search/Matches/Title}}</small>//
+
+<$list filter="[!is[system]search:title{$(searchTiddler)$}sort[caption]limit[250]] [!is[system]search:es-title{$(searchTiddler)$}sort[title]limit[250]][!is[system]search:en-title{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+
+//<small>{{$:/language/Search/Matches/All}}</small>//
+
+<$list filter="[!is[system]search{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+
+\end
+<<searchResultList>>

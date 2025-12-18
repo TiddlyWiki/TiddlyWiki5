@@ -1,0 +1,14 @@
+created: 20141016083308219
+modified: 20141016083333808
+title: Contributing to the TiddlyWiki Plugin Library
+type: text/vnd.tiddlywiki
+
+The TiddlyWiki Plugin library is the set of plugins, themes and languages that are distributed via https://tiddlywiki.com.
+
+The plugin library is intended to help end users of TiddlyWiki in the following ways:
+
+* By being a reliable, official source of community assets
+* Permitting automatic upgrading of plugins during the upgrade process
+* Providing a guarantee of backwards compatibility
+
+Plugins in the library need a maintainer who is prepared to make a commitment to keep them tested and fully operational with successive releases of the core code. Many plugins are maintained by the core team.

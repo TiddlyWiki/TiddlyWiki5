@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Avancé
+Advanced/PluginInfo/Empty/Hint: aucune information
+Advanced/PluginInfo/Heading: Détails sur le plugin
+Advanced/PluginInfo/Hint: Ce plugin contient les tiddlers <q>shadow</q> suivants :
+Advanced/ShadowInfo/Heading: Statut <q>shadow</q>
+Advanced/ShadowInfo/NotShadow/Hint: Le tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> n'est pas un tiddler <q>shadow</q>
+Advanced/ShadowInfo/Shadow/Hint: Le tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> est un tiddler <q>shadow</q>
+Advanced/ShadowInfo/Shadow/Source: Il est défini dans le plugin <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Advanced/ShadowInfo/OverriddenShadow/Hint: Il est modifié par un tiddler normal
+Fields/Caption: Champs
+List/Caption: Liste
+List/Empty: Ce tiddler ne contient pas de champ //list//
+Listed/Caption: Listé
+Listed/Empty: Ce tiddler ne figure dans le champ //list// d'aucun autre tiddler
+References/Caption: Pointeurs
+References/Empty: Aucun tiddler ne pointe vers celui-ci
+Tagging/Caption: Étiquetage
+Tagging/Empty: Le titre de ce tiddler ne sert de tag à aucun tiddler
+Tools/Caption: Outils

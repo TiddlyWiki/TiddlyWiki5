@@ -1,0 +1,68 @@
+created: 20150531155638729
+modified: 20220417224935943
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/wikitext-macros
+type: text/vnd.tiddlywiki
+
+\define wikitext-example(src)
+<div class="doc-example">
+
+<$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/>
+
+```
+$src$
+```
+
+Affichera ceci&nbsp;:
+
+$$$text/vnd.tiddlywiki
+$src$
+$$$
+
+Code HTML correspondant&nbsp;:
+
+$$$text/vnd.tiddlywiki>text/html
+$src$
+$$$
+</div>
+\end
+
+\define wikitext-example-without-html(src)
+<div class="doc-example">
+
+<$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/>
+
+```
+$src$
+```
+
+Affichera ceci&nbsp;:
+
+$$$text/vnd.tiddlywiki
+$src$
+$$$
+</div>
+\end
+
+\define wikitext-example-table-header() <thead><tr><th/><th>ce [[WikiTexte|WikiText]]</th><th>affichera ceci</th></tr></thead>
+
+\define wikitext-example-table-row(id, code)
+ <tr>
+<th><<__id__>></th><td><$codeblock code=<<__code__>>/></td><td>
+
+<<__code__>>
+</td>
+</tr>
+\end
+
+\define tw-code(tiddler)
+<$codeblock language={{$tiddler$!!type}} code={{$tiddler$}}/>
+\end
+
+\define tw-code-link(tiddler)
+[[$tiddler$]]&nbsp;:
+
+<<tw-code $tiddler$>>
+\end
+
+<pre><$view field="text"/></pre>

@@ -1,0 +1,6 @@
+title: $:/editions/zh-Hans/snippets/download-empty-button
+
+<$button class="tc-btn-big-green">
+<$action-sendmessage $message="tm-download-file" $param="$:/editions/zh-Hant/download-empty" filename="empty.zh-Hans.html"/>
+简体中文版 {{$:/core/images/save-button}}
+</$button>

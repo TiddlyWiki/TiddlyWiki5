@@ -1,0 +1,34 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: ਬਾਹਰੀ ਚਿੱਤਰ ਨੂੰ tiddler ਦਾ ਪੂਰਾ URI
+bag:  ਬੈਗ ਦਾ ਨਾਮ ਜਿਸ ਤੱਕ ਇੱਕ tiddler ਆਇਆ ਸੀ 
+caption: ਟੈਕਸਟ ਨੂੰ ਇੱਕ ਟੈਬ ਜ ਬਟਨ 'ਤੇ ਵੇਖਾਉਣ ਲਈ
+color: CSS ਰੰਗ ਮੁੱਲ ਨੂੰ ਇੱਕ tiddler ਨਾਲ ਸੰਬੰਧਿਤ 
+component:  ਨਾਮ ਦੀ ਭਾਗ ਨੂੰ ਇੱਕ ਜ਼ਿੰਮੇਵਾਰ  ਲਈ   [[ਚੇਤਾਵਨੀ tiddler | AlertMechanism]]
+created: ਤਾਰੀਖ ਨੂੰ ਇੱਕ   tiddler ਬਣਾਇਆ ਗਿਆ ਸੀ 
+creator:  ਵਿਅਕਤੀ ਦਾ ਨਾਮ , ਜੋ ਇੱਕ  tiddler ਨੂੰ ਬਣਾਇਆ
+current-tiddler:  ਸਿਖਰ ਦੇ tiddler ਕੈਚੇ ਕਰਨ ਵਿਚ  ਵਰਤਿਆ ਗਿਆ  [[ਇਤਿਹਾਸ ਨੂੰ ਸੂਚੀ ਵਿੱਚ | ਇਤਿਹਾਸ ਕਾਰਜਵਿਧੀ]]
+dependents:  ਇੱਕ ਪਲੱਗਇਨ ਲਈ, ਨਿਰਭਰ ਪਲੱਗਇਨ ਖ਼ਿਤਾਬ ਦੀ ਸੂਚੀ ਹੈ
+description:  ਇੱਕ ਪਲੱਗਇਨ ਲਈ  ਟੈਕਸਟ ਜਾਣਕਾਰੀ  ਨੂੰ, ਯਾ ਮਾਡਲ ਸੰਵਾਦ
+draft.of: ਡਰਾਫਟ tiddlers ਲਈ, tiddler ਦਾ ਸਿਰਲੇਖ ਸ਼ਾਮਿਲ ਹੈ  ਜੋ ਕਿ ਇੱਕ ਡਰਾਫਟ ਹੈ
+draft.title:  ਡਰਾਫਟ tiddlers ਲਈ, tiddler ਦੇ ਪ੍ਰਸਤਾਵਿਤ ਸਿਰਲੇਖ ਸ਼ਾਮਿਲ ਹੈ
+footer:  ਪਦਲੇਖ ਪਾਠ  ਲਈ ਇੱਕ ਸਹਾਇਕ
+icon: ਨੂੰ ਇੱਕ tiddler ਨਾਲ ਸਬੰਧਤ ਆਈਕਾਨ ਰੱਖਣ ਵਾਲੀ tiddler ਦਾ ਸਿਰਲੇਖ
+library: ਜੇਕਰ "yes" ਇੱਕ tiddler ਨੂੰ ਇੱਕ ਜਾਵਾਸਕ੍ਰਿਪਟ ਲਾਇਬ੍ਰੇਰੀ ਦੇ ਤੌਰ ਤੇ ਸੰਭਾਲਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ, ਜੋ ਕਿ ਦਰਸਾਉਦਾ ਹੈ
+list:  ਇੱਕ tiddler ਨਾਲ ਸਬੰਧਤ tiddler ਦੇ ਟਾਇਟਲ ਦੀ ਇੱਕ ਸੂਚੀ, ਦਾ ਹੁਕਮ
+list-after: tiddler ਦੇ ਸਿਰਲੇਖ, ਜਿਸ ਦੇ ਬਾਅਦ ਇਸ ਨੂੰ tiddler  ਦੇ ਟਾਇਟਲ ਦੀ ਕ੍ਰਮਬੱਧ ਸੂਚੀ ਵਿੱਚ ਸ਼ਾਮਿਲ ਕੀਤਾ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ
+list-before: Iਸੈੱਟ ਕੀਤਾ ਹੈ, ਇੱਕ tiddler ਦੇ ਸਿਰਲੇਖ ਹੈ, ਜੋ ਕਿ ਇਸ ਨੂੰ tiddlerਦੇ ਅੱਗੇ  tiddler ਖ਼ਿਤਾਬ ਦੀ ਕ੍ਰਮਬੱਧ ਸੂਚੀ ਵਿੱਚ ਸ਼ਾਮਿਲ ਕੀਤਾ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ, ਜ ਸੂਚੀ ਦੇ ਸ਼ੁਰੂ 'ਤੇ ਇਹ ਖੇਤਰ ਮੌਜੂਦ ਹੈ, ਪਰ ਖਾਲੀ ਹੈ, 
+modified:  ਪਿਛਲੇ ਤਾਰੀਖ਼ ਅਤੇ ਟਾਈਮ ਜਿਸ 'ਤੇ  tiddler ਨੂੰ ਸੋਧਿਆ ਸੀ, 
+modifier:   ਉਹ ਵਿਅਕਤੀ  ਨਾਲ ਸੰਬੰਧਿਤ tiddler ਦਾ ਸਿਰਲੇਖ ਜਿਸ ਪਿਛਲੇ  tiddler  ਨੂੰ ਸੋਧਿਆ
+name: ਮਨੁੱਖ ਦੇ  ਨਾਮ ਦਾ ਪੜ੍ਹਨਯੋਗ  ਪਲੱਗਇਨ ਨਾਲ ਸਬੰਧਿਤ  tiddler 
+plugin-priority: ਇੱਕ ਪਲੱਗਇਨ tiddler ਦੀ ਪ੍ਰਮੁੱਖਤਾ ਦਾ ਸੰਕੇਤ ਕਰਦੀ  ਮੁੱਲ਼ ਅੰਕ
+plugin-type: ਇੱਕ ਪਲੱਗਇਨ tiddler ਵਿੱਚ ਪਲੱਗਇਨ ਦੀ ਕਿਸਮ
+released:  TiddlyWiki ਰੀਲਿਜ਼ ਦੀ ਤਾਰੀਖ
+revision: tiddler ਦੀ ਦੁਹਰਾਈ ਵਿਖੇ ਸਰਵਰ ਨੂੰ  ਆਯੋਜਿਤ 
+source:  tiddler ਨਾਲ ਸੰਬੰਧਿਤ  URL ਸਰੋਤ
+subtitle:  ਸਬ ਟਾਇਟਲ ਪਾਠ ਦੇ ਲਈ ਸਹਾਇਕ 
+tags:  tiddler ਨਾਲ ਸਬੰਧਤ ਟੈਗ ਦੀ ਇੱਕ ਸੂਚੀ
+text: ਨੂੰ ਇੱਕ tiddler ਦੀ ਬਣਾਵਟ ਨੂੰ ਪਾਠ
+title:  tiddler ਦਾ ਵਿਲੱਖਣ ਨਾਮ 
+type:  tiddler ਦੇ ਸੰਖੇਪ ਦੀ ਕਿਸਮ
+version: ਪਲੱਗਇਨ ਲਈ ਵਰਜਨ ਜਾਣਕਾਰੀ

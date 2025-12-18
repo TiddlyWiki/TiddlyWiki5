@@ -1,0 +1,21 @@
+created: 20140904164608166
+modified: 20150117152546000
+title: Documentation Style Guide
+tags: [[Improving TiddlyWiki Documentation]]
+type: text/vnd.tiddlywiki
+
+The documentation for ~TiddlyWiki tries to follow a consistent editorial style. It has two main areas, each with its own tone and audience:
+
+* [[Instruction Tiddlers]]
+* [[Reference Tiddlers]]
+
+We keep the two areas distinct. This avoids overwhelming relative newcomers, while still providing quick access to the information that expert users need.
+
+Additional topics:
+
+* [[Tiddler Title Policy]]
+* [[Tiddler Structure]]
+* [[Spelling]]
+* [[Typography]]
+* [[Documentation Macros]]
+* [[Technical Prose Style]]

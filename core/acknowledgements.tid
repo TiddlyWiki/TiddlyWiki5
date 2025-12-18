@@ -1,0 +1,7 @@
+title: $:/Acknowledgements
+
+TiddlyWiki incorporates code from these fine OpenSource projects:
+
+* [[The Stanford Javascript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]]
+* [[The Jasmine JavaScript Test Framework|https://jasmine.github.io/]]
+* [[modern-normalize by Sindre Sorhus|https://github.com/sindresorhus/modern-normalize]]

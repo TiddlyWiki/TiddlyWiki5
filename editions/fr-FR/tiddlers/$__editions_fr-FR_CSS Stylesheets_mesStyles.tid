@@ -1,0 +1,10 @@
+created: 20141017093648366
+modified: 20141116084637091
+tags: $:/tags/Stylesheet
+title: $:/editions/fr-FR/CSS Stylesheets/mesStyles
+type: text/css
+
+.monStyle {
+  color:#ff0000;
+  background-color:#ffff00;
+}

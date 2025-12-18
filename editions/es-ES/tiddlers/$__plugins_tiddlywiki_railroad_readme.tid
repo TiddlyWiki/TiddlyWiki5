@@ -1,0 +1,10 @@
+created: 20150102163222184
+modified: 20160504142457039
+title: $:/plugins/tiddlywiki/railroad/readme
+type: text/vnd.tiddlywiki
+
+Este plugin proporciona un widget para la elaboración de diagramas sintácticos en forma de imágenes SVG.
+
+La [[notación|$:/plugins/tiddlywiki/railroad/syntax]] del diagrama puede guardarse en un tiddler exclusivo con el campo <<.field type>> definido como `text/vnd.tiddlywiki.railroad`, de forma que esté disponible para transclusión allí donde se necesite. 
+
+El plugin se basa en una [[librería de Tab Atkins|https://github.com/tabatkins/railroad-diagrams]], y se ha trabajado en ella para hacerla más flexible, lo que incluye que los componentes del diagrama actúen como enlaces o admitan transclusión de otros tiddlers. 

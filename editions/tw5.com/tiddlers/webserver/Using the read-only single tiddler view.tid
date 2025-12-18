@@ -1,0 +1,22 @@
+created: 20180703095435813
+modified: 20180824073211367
+tags: [[WebServer Guides]]
+title: Using the read-only single tiddler view
+type: text/vnd.tiddlywiki
+
+TiddlyWiki's experimental single tiddler per page, read-only view uses a simplified page layout, and implements links between tiddlers, but there are no other interactive features. Compared to a full TiddlyWiki user interface, it is very lightweight and usable even over very slow connections.
+
+Alongside serving the full interactive wiki at the path `/` (e.g. http://127.0.0.1:8080/), TiddlyWiki serves each tiddler at the path `/<url-encoded-tiddler-title>`. For example:
+
+* http://127.0.0.1:8080/HelloThere
+* http://127.0.0.1:8080/Philosophy%20of%20Tiddlers
+
+Ordinary, non-system tiddlers are rendered through a special view template while system tiddlers are rendered through a template that returns the raw text of the rendered output. In this way ordinary tiddlers can be browsed by end users while system tiddlers can be included in their raw form to use them as JS, HTML or CSS templates. Additionally these defaults can be overwritten on a per tiddler basis by specifying the `_render_type` and `_render_template` fields accordingly.
+
+The templates are controlled by these parameters:
+
+* [[system-tiddler-render-type|WebServer Parameter: system-tiddler-render-type]]
+* [[system-tiddler-template|WebServer Parameter: system-tiddler-render-template]]
+* [[tiddler-render-type|WebServer Parameter: tiddler-render-type]]
+* [[tiddler-template|WebServer Parameter: tiddler-render-template]]
+

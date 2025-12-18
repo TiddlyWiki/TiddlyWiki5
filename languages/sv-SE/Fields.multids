@@ -1,0 +1,34 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: Den fullständiga URI till en extern bild-tiddler
+bag: Namnet på den mapp som tiddlern kom från
+caption: Texten som visas på fliken eller knappen
+color: Det CSS-färgsvärdet kopplat till en tiddler
+component: Namnet på en komponent som är ansvarig för en [[alert tiddler|AlertMechanism]]
+current-tiddler: Används för mellanlagring av den översta tiddlern i en [[history list|HistoryMechanism]]
+created: Datumet denna tiddler skapades
+creator: Namnet på personen som skapade en tiddler
+dependents: För insticksprogram, lista beroende insticksprogram
+description: Den beskrivande texten för ett insticksprogram, eller en modal-dialog
+draft.of: För utkast-tiddlers, innehåller rubriken av tiddlern som det är ett utkast för
+draft.title: For draft tiddlers, contains the proposed new title of the tiddler
+footer: Sidfotens text för en guide
+icon: Tiddlerns rubrik innehållande ikonen som är associerad med en tiddler
+library: Om satt till "Ja" innebär att tiddlern ska sparas som ett Javaskriptbibliotek
+list: En ordnad lista över tiddler-rubriker som är associerade med en tiddler
+list-before: Om satt, rubriken på en tiddler, vid vilken denna tiddler förs in i den ordnade listan över tiddler-rubriker, eller i början av listan, om detta fält är närvarande men tom.
+list-after: Om satt, rubriken på en tiddler varefter detta tiddler förs in i den ordnade listan över tiddler-rubriker.
+modified: Datumet och klockslaget när en tiddler var senast ändrad
+modifier: Den tiddlerrubrik som har samma namn som författare som senast ändrade tiddler
+name: Det läsbara namnet som skall kopplas till med en insticksprograms-tiddler
+plugin-priority: Ett numeriskt väde som indikerar prioriteringen av en insticksprograms-tiddler
+plugin-type: Typen av insticksprogram för en insticksprograms-tiddler
+revision: Revisionen av tiddlern som finns på servern
+released: Datum för en TiddlyWiki-version
+source: Käll-URL kopplat till en tiddler
+subtitle: Underrubrik för en guide
+tags: En lista över taggar kopplade till en tiddler
+text: Brödtexten i en tiddler
+title: Unika namnet för en tiddler
+type: En tiddlers innehållstyp
+version: Ett insticksprograms version

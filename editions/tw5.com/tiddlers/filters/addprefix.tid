@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20150203181822000
+tags: [[Filter Operators]] [[String Operators]]
+title: addprefix Operator
+type: text/vnd.tiddlywiki
+caption: addprefix
+op-purpose: extend each input title with a prefix
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: a string of characters
+op-parameter-name: S
+op-output: the input, but with <<.place S>> added to the start of each title
+
+<<.operator-examples "addprefix">>

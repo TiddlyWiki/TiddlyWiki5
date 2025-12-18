@@ -1,0 +1,34 @@
+caption: Tiddloid and Tiddloid Lite
+color: #FF8A65
+community-author: donmor
+created: 20130825161400000
+delivery: App
+description: Android app for saving changes locally to device storage
+method: save
+modified: 20200507103926292
+tags: Saving Android [[Standalone App]]
+title: Saving on Android
+type: text/vnd.tiddlywiki
+url: https://github.com/donmor/Tiddloid
+
+The Tiddloid and Tiddloid Lite app are Android apps that makes it possible to edit and save changes to TiddlyWiki HTML files. 
+
+* For more information: [[Tiddloid|https://github.com/donmor/Tiddloid]] [[Tiddloid Lite|https://github.com/donmor/TiddloidLite]].
+* Download apks: [[Tiddloid|https://github.com/donmor/Tiddloid/releases]], [[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]]
+
+
+!!! Features
+
+* Create new ~TiddlyWiki importing latest edition from internet
+* Import existing ~TiddlyWikis stored on device/internal storage. ([[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]] supports external SD card too)
+* Fork interesting ~Tiddlywikis from internet  (Supports TW5 only)
+* TiddlyWiki detection
+* Locally stored ~Tiddlywikis are updated simultaneously on saving changes to ~TiddlyWikis imported to the app
+* Backup system that is compatible with TiddlyDesktop, the desktop TiddlyWiki saver
+* Creating shortcuts to existing ~TiddlyWiki  on Android Homepage
+* [[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]] supports cloud storages like GDrive and ~OneDrive
+
+!!! Please note
+
+* Tiddloid Lite feature better support for devices running Android Q or later. It also supports cloud storages like GDrive and ~OneDrive, while Tiddloid keeps the compatibility to TiddlyWikiClassic. To know more about differences between Tiddloid and  Tiddloid Lite, please visit [[Tiddloid's homepage|https://github.com/donmor/Tiddloid]].
+* You should keep the `.html` or `.htm` extension of the files to be imported.

@@ -1,0 +1,8 @@
+created: 20210216203925301
+modified: 20210217003209935
+tags: [[unique Operator]] [[Operator Examples]]
+title: unique Operator (Examples)
+
+To remove duplicate entries from a list where deduplication has been prevented using the [[filter run prefix|Filter Expression]] `=`:
+
+<<.operator-example 1 """=[[E]] =[[A]] =[[B]] =[[C]] =[[C]] =[[D]] =[[C]] +[unique[]]""">>

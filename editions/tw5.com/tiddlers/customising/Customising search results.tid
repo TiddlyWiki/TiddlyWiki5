@@ -1,0 +1,49 @@
+created: 20141027151552783
+modified: 20201207181116804
+tags: [[Customise TiddlyWiki]]
+title: Customising search results
+type: text/vnd.tiddlywiki
+
+By default, the results for the sidebar search box are displayed as a simple list of tiddler titles. The search results can be customised by adding plugin visualisations that show the search results in different ways. (Tabs are shown automatically if an additional search result visualisation is detected).
+
+Search result visualisations are stored in tiddlers tagged [[$:/tags/SearchResults]]. The default search result listing is implemented in the system tiddler [[$:/core/ui/DefaultSearchResultList]].
+
+To create a new search result visualisation:
+
+# Create a new tiddler tagged [[$:/tags/SearchResults]]
+# Use the widget variable ''searchTiddler'' to access the title of the tiddler containing the current search term
+
+If you'd like the new visualisation to be the default, create a tiddler called [[$:/config/SearchResults/Default]] containing the title of the tiddler containing the search visualisation that you want to display by default.
+
+Here is an example of an alternative visualisation that displays results in reverse chronological order:
+
+```
+\define searchResults()
+<$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
+
+{{$:/language/Search/Matches}}
+
+</$set>
+<<timeline subfilter:"!is[system]search{$(searchTiddler)$}">>
+\end
+<<searchResults>>
+```
+
+<<.from-version 5.1.23>> The sidebar search introduces a more sophisticated search-mechanism which makes it possible to navigate the search results using the keyboard shortcuts <kbd><<displayshortcuts ((input-down))>></kbd> and <kbd><<displayshortcuts ((input-up))>></kbd>. To add that mechanism to your own custom search results follow these simple steps:
+
+# Your tiddler tagged <<tag-pill "$:/tags/SearchResults">>is accessible through the <<.var configTiddler>> variable
+# The user-input in the search field is accessible through the <<.var userInput>> variable
+# Use the fields <<.field first-search-filter>> and <<.field second-search-filter>> to store the filters used for your search results. See the tiddler $:/core/ui/DefaultSearchResultList for details
+# Use the following form so that navigated search-results are highlighted, modify it to match your needs:
+
+```
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+```
+
+<$macrocall $name=".tip" _="Note that the <<.var searchTiddler>> variable still contains the name of the tiddler that is used for sorting the search results. The <<.var editTiddler>> variable contains the name of the tiddler that is being edited."/>

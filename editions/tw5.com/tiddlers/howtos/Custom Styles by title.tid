@@ -1,0 +1,39 @@
+created: 201804111739
+modified: 201804111739
+tags: [[How to apply custom styles]]
+title: Custom styles by data-tiddler-title
+type: text/vnd.tiddlywiki
+
+! Attribute: data-tiddler-title
+
+<<.from-version "5.1.16">>
+
+The ~TiddlyWiki core adds several `attributes` to the rendered content. With those attributes it's possible to apply custom styles to the tiddler content. 
+
+For example this tiddler is named: "{{!!title}}" so the attribute looks like this: 
+
+```
+data-tiddler-title="Custom styles by data-tiddler-title"
+```
+
+!! Examples
+
+The following CSS is defined in [[Custom data-styles]] and creates a blue border for exactly this tiddler.
+
+```
+[data-tiddler-title="Custom styles by data-tiddler-title"] {
+  border: 1px solid blue;
+}
+```
+
+To create a green border for every tiddler that starts with `$:/` aka system tiddlers, you'd need to use CSS like so: (not applied here but you can experiment with it! )
+
+```
+[data-tiddler-title^="$:/"] {
+  border: 1px solid green;
+}
+```
+
+!! More Possibilities
+
+{{Attribute Selectors}}

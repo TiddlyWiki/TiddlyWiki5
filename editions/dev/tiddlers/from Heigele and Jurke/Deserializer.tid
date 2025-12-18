@@ -1,0 +1,16 @@
+chapter.of: Extended Persistence
+created: 20140708084404389
+modified: 20140715184857524
+sub.num: 1
+tags: doc
+title: Deserializer
+
+Modules with ``module-type: tiddlerdeserializer`` can provide functions to create tiddlers out of any textual representation. Each function must be associated with a type like ``application/json`` or ``text/html``.
+They get the textual representation of the tiddlers, some default field values and the type of the text block as arguments. They return an array of JavaScript objects representing the resulting tiddlers.
+
+Deserializers are not managed by the syncer module. Instead the concept of deserializers is in fact part of the microkernel.
+This is necessary because the microkernel needs a way of loading tiddlers before it can load the core plug-in and execute it's startup modules.
+(Due to the fact that the core plug-in and it's modules are represented as tiddlers.)
+
+The ``load-modules`` startup module loads additional deserializers and pushes them into the store.
+The core plug-in for example contains a few deserializers which can read a whole TiddlyWiki 5 or classic HTML file and load the individual tiddlers into the store.

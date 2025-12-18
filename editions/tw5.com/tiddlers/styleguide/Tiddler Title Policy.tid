@@ -1,0 +1,24 @@
+created: 20150110183300000
+modified: 20150118183633000
+title: Tiddler Title Policy
+tags: [[Improving TiddlyWiki Documentation]]
+
+Many documentation tiddlers, especially the [[reference ones|Reference Tiddlers]], are concerned with a single concept. Their titles should be succinct noun phrases like <<.tid "List Widget">> or <<.tid "Tiddler Fields">>.
+
+Each of the main words of such a title begins with a capital letter. Minor words such as <<.word and>>, <<.word or>>, <<.word the>>, <<.word to>> and <<.word with>> do not.
+
+Tags also follow this pattern.
+
+Titles of this kind are plural if they denote a category of items, e.g. <<.tid "Keyboard Shortcuts">> or <<.tid "Tiddler Fields">>. Such titles are used to tag more specific tiddlers within the category.
+
+Where a concept is an item rather than a category, its tiddler has a singular title, e.g. <<.tid "List Widget">>, <<.tid "tag Operator">>.
+
+Start a title with its most distinctive part. For instance, the tiddlers documenting the filter operators have titles like <<.tid "addprefix Operator">>. This helps the reader scan a list of links to find a particular tiddler.
+
+Avoid starting a title with the word <<.word the>>.
+
+In the past, many tiddlers had CamelCase titles. This is gradually being phased out of the documentation to improve readability. ~CamelCase titles should no longer be used, even for tags, except in cases like <<.tid ~JavaScript>> where that is the standard spelling.
+
+[[Instruction tiddlers|Instruction Tiddlers]] often have longer titles that can be more complicated than just a noun phrase, e.g. <<.tid "Ten reasons to switch to ~TiddlyWiki">>. These titles use sentence case, i.e. only the first word (and any proper names) starts with a capital letter.
+
+How-to tiddlers have titles that begin with <<.word "How to">>, e.g. <<.tid "How to edit a tiddler">>. Avoid titles like <<.tid "Editing tiddlers">>, because a less fluent English speaker could misunderstand that as the name of a category of tiddlers.

@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-fullscreen/readme
+
+This plugin adds a ''Fullscreen editing Mode'' to the [[CodeMirror|http://codemirror.net]] text editor. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
+
+Pressing ''F11'' with the focus within the editor-textarea will make the editor go fullscreen, pressing ''F11'' again leaves fullscreen-mode
+

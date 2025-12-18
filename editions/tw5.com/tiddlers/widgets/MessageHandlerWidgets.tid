@@ -1,0 +1,13 @@
+created: 20211031174746965
+modified: 20211113163856255
+tags: Widgets
+title: MessageHandlerWidgets
+type: text/vnd.tiddlywiki
+
+Message handler widgets are those widgets which can react to one or more [[widget messages|Messages]].
+
+<<.tip "Widget messages are similar to low-level DOM events, except they are higher-level and specific to TiddlyWiki. To handle DOM events see the EventCatcherWidget">>
+
+The following message handler widgets are provided:
+
+<<list-links "[tag[MessageHandlerWidgets]]">>

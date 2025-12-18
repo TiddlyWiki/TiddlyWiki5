@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/codemirror-autocomplete/readme
+
+This plugin enhances the [[CodeMirror|http://codemirror.net]] text editor with Autocompletion functionality. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
+
+It adds Autocompletion for ''html'', ''javascript'' and ''xml'' and also for ''already present words'' within a text-editor instance
+
+The ''Keyboard Shortcut'' for autocompletion is `Ctrl+Space`
+

@@ -1,0 +1,28 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler
+
+\define if(condition,then,else)
+<$list filter="""$condition$ +[limit[1]]""" emptyMessage="""$else$""" variable="ignore">
+$then$
+</$list>
+\end
+
+\define include-component(type)
+<<if "[{!!toc-type}match[$type$]]" """
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/$type$" mode="block"/>
+""">>
+\end
+
+<$list filter="[<tv-show-toolbar>match[yes]]" variable="hasToolbar">
+{{||$:/plugins/tiddlywiki/text-slicer/ui/tiddler/toolbar}}
+</$list>
+
+<<include-component "document">>
+<<include-component "heading">>
+<<include-component "paragraph">>
+<<include-component "note">>
+<<include-component "list">>
+<<include-component "item">>
+<<include-component "image">>
+<<include-component "def-list">>
+<<include-component "term">>
+<<include-component "definition">>

@@ -1,0 +1,22 @@
+title: $:/language/
+
+BinaryWarning/Prompt: Iste nota contine datos binari
+ClassicWarning/Hint: Iste nota es scribite in le formato textual wiki TiddlyWiki Classic, que non es plenmente compatibile con TiddlyWiki version 5. Vide https://tiddlywiki.com/static/Upgrading.html pro plus de detalios. 
+ClassicWarning/Upgrade/Caption: modernisa
+CloseAll/Button: claude omnes
+ConfirmCancelTiddler: Desira tu annullar cambios al nota "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Desira tu deler le nota "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Tu es al puncto de rediger un nota umbral. Ulle cambios superscribera le systema standard, lo que facera modernisationes futur non-trivial. Es tu secur que tu desira rediger "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Desira tu superscriber le nota "<$text text=<<title>>/>"?
+DefaultNewTiddlerTitle: Nove nota
+DropMessage: Lassa cader ci (o clicca Esc pro cancellar)
+Encryption/ConfirmClearPassword: Desira tu remover le contrasigno? Isto va remover le usate codification quando iste wiki es conservate
+Encryption/PromptSetPassword: Fixa un nove contrasigno pro iste TiddlyWiki
+MissingTiddler/Hint: Notas mancante "<$text text=<<currentTiddler>>/>" - clicca {{||$:/core/ui/Buttons/edit}} pro crear
+RecentChanges/DateFormat: le DD de MMM YYYY
+SystemTiddler/Tooltip: Isto es un notitia de systema
+TagManager/Colour/Heading: Color
+TagManager/Icon/Heading: Icone
+TagManager/Info/Heading: Information
+TagManager/Tag/Heading: Etiquetta
+UnsavedChangesWarning: Tu ha cambios non conservate in TiddlyWiki

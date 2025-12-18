@@ -1,0 +1,51 @@
+title: HighlightExample
+
+''Javascript'' code:
+
+```javascript
+(function(a,b){
+    var result = a+b;
+    return result;
+})(10,20)
+```
+
+''CSS'' code:
+
+```css
+ * { margin: 0; padding: 0; } /* micro reset */
+
+html { font-size: 62.5%; }
+body { font-size: 14px; font-size: 1.4rem; } /* =14px */
+h1   { font-size: 24px; font-size: 2.4rem; } /* =24px */
+```
+
+''Perl'' code:
+
+```perl
+package Name;
+my $singleton;
+
+BEGIN {
+    $singleton = {
+        attribute => 'value',
+        another   => 'something',
+    };
+    bless $singleton, "Name";
+}
+
+sub new {
+    my $class = shift;
+    return $singleton;
+}
+```
+
+''Python'' code:
+
+```python
+class Singleton:
+    __single = None
+    def __init__( self ):
+        if Singleton.__single:
+            raise Singleton.__single
+        Singleton.__single = self
+```

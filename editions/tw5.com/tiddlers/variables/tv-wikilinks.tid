@@ -1,0 +1,18 @@
+created: 20150228102737000
+modified: 20150228130415000
+title: tv-wikilinks Variable
+tags: Variables [[Core Variables]] [[Configuration Variables]]
+type: text/vnd.tiddlywiki
+caption: tv-wikilinks
+
+The <<.def tv-wikilinks>> [[variable|Variables]] controls the behaviour of the <<.wlink LinkWidget>> widget.
+
+The widget normally produces a link to a tiddler. But if this variable has the value <<.value no>>, the widget suppresses the link and simply displays the text that would otherwise have served as the link.
+
+You can suppress links for a whole tiddler by placing the following line at the start of the tiddler's text:
+
+> `\define tv-wikilinks() no`
+
+This variable has no effect on external links, as those do not involve the <<.wid link>> widget.
+
+<<.variable-examples "tv-wikilinks">>

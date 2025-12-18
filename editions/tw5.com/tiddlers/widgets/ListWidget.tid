@@ -1,0 +1,169 @@
+caption: list
+created: 20131024141900000
+modified: 20230831182949930
+tags: Widgets Lists
+title: ListWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The list widget displays a sequence of tiddlers that match a [[tiddler filter|Filters]]. It can be used for many purposes:
+
+* Displaying custom lists of links, like in TiddlyWiki5's sidebar
+* Custom lists, such as "all tiddlers tagged 'task' that are not tagged 'done'"
+* Listing each of the tags applied to a tiddler
+* Handling the main story river
+
+The tiddlers are displayed by transcluding each in turn through a template. There are several ways to specify the template and for controlling the behaviour of the list.
+
+! Examples
+
+''plain list''
+
+```
+<$list filter="[tag[ListWidget]sort[title]]"/>
+```
+
+Displays as:
+
+<<<
+<$list filter="[tag[ListWidget]sort[title]]"/>
+
+<<<
+
+''custom item output''
+
+```
+<$list filter="[tag[ListWidget]sort[title]]">
+<<currentTiddler>>
+{{||$:/core/ui/ViewTemplate/tags}}
+</$list>
+```
+
+Displays as:
+
+<<<
+<$list filter="[tag[ListWidget]sort[title]]">
+<<currentTiddler>>
+{{||$:/core/ui/ViewTemplate/tags}}
+</$list>
+<<<
+
+''custom item template''
+
+```
+<$list filter="[tag[ListWidget]sort[title]]" template="$:/core/ui/ViewTemplate/subtitle"/>
+```
+
+Displays as:
+
+<<<
+<$list filter="[tag[ListWidget]sort[title]]" template="$:/core/ui/ViewTemplate/subtitle"/>
+
+<<<
+
+!! Grouped Lists
+
+See GroupedLists for how to generate nested and grouped lists using the ListWidget.
+
+! Content and Attributes
+
+The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list.
+
+<<.from-version "5.3.2">> If the widgets `<$list-template>` or `<$list-empty>` are found as immediate children of the <<.wid "ListWidget">> widget then the content of those widgets are used as the list item template and/or the empty template. Note that the <<.attr "emptyMessage">> and <<.attr "template">> attributes take precedence if they are present.
+
+The action of the list widget depends on the results of the filter combined with several options for specifying the template:
+
+* If the filter evaluates to an empty list, the text of the ''emptyMessage'' attribute is rendered, and all other templates are ignored
+* Otherwise, if the ''template'' attribute is specified then it is taken as the title of a tiddler to use as a template for rendering each item of the list
+* Otherwise, if the list widget content is not blank, it is used as a template for rendering each item of the list
+* Otherwise, a default template is used consisting of a `<span>` or `<div>` element wrapped around a link to the item
+
+|!Attribute |!Description |
+|filter |The [[tiddler filter|Filters]] to display |
+|limit |<<.from-version "5.3.2">> Optional numeric limit for the number of results that are returned. Negative values will return the results from the end of the list |
+|template |The title of a template tiddler for transcluding each tiddler in the list. When no template is specified, the body of the ListWidget serves as the item template. With no body, a simple link to the tiddler is returned. |
+|editTemplate |An alternative template to use for [[DraftTiddlers|DraftMechanism]] in edit mode |
+|join |<<.from-version "5.3.2">> Text to include between each list item |
+|variable |The name for a [[variable|Variables]] in which the title of each listed tiddler is stored. Defaults to ''currentTiddler'' |
+|counter |<<.from-version "5.2.0">> Optional name for a [[variable|Variables]] in which the 1-based numeric index of each listed tiddler is stored (see below) |
+|emptyMessage |Message to be displayed when the list is empty |
+|storyview |Optional name of module responsible for animating/processing the list |
+|history |The title of the tiddler containing the navigation history |
+
+!! `counter` attribute
+
+The optional `counter` attribute specifies the name of a variable to hold the 1-based numeric index of the current item in the list.
+
+Two additional variables are also set to indicate the first and last items in the list:
+
+* `<counter-variable-name>-first` is set to `yes` for the first entry in the list, `no` for the others
+* `<counter-variable-name>-last` is set to `yes` for the last entry in the list, `no` for the others
+
+For example:
+
+
+```
+<$list filter="[tag[About]sort[title]]" counter="counter">
+<div>
+<<counter>>: ''<$text text=<<currentTiddler>>/>'' (is first: <<counter-first>>, is last: <<counter-last>>)
+</div>
+</$list>
+```
+
+Displays as:
+
+<<<
+<$list filter="[tag[About]sort[title]]" counter="counter">
+<div>
+<<counter>>: ''<$text text=<<currentTiddler>>/>'' (is first: <<counter-first>>, is last: <<counter-last>>)
+</div>
+</$list>
+<<<
+
+Note that using the `counter` attribute can reduce performance when working with list items that dynamically reorder or update themselves. The best advice is only to use it when it is really necessary: to obtain a numeric index, or to detect the first or last entries in the list. Note that if you are only using it to insert something (like a comma) between list items, the `join` attribute performs much better and you should use it instead of `counter`.
+
+Setting `counter="transclusion"` is a handy way to make child elements for each list element be identified as unique. A common use case are multiple [[tag macros|tag Macro]] for the same tag generated by a list widget. Refer to [[tag macro examples|tag Macro (Examples)]] for more details.
+
+!! `join` attribute
+
+<<.from-version "5.3.2">> The optional `join` attribute allow you to insert some [[WikiText]] between each list item without needing to use the `counter` attribute, which can become quite slow if the list is updated frequently.
+
+<<.from-version "5.3.2">> If the widget `<$list-join>` is found as an immediate child of the <<.wid "ListWidget">> widget then the content of that widget is used as the "join" template, included between two list items. Note that the <<.attr "join">> attribute takes precedence if it is present.
+
+For example:
+
+
+```
+<$list filter="[tag[About]sort[title]]" join=", " variable="item"><<item>></$list>
+```
+
+Displays as:
+
+<<<
+<$list filter="[tag[About]sort[title]]" join=", " variable="item"><<item>></$list>
+<<<
+
+!! Edit mode
+
+The `<$list>` widget can optionally render draft tiddlers through a different template to handle editing, see DraftMechanism.
+
+!! `storyview` attribute
+
+The `storyview` attribute specifies the name of an optional module that can animate changes to the list (including navigation). The core ships with the following storyview modules:
+
+* `classic`: renders the list as an ordered sequence of tiddlers
+* `zoomin`: just renders the current tiddler from the list, with a zoom animation for navigating between tiddlers
+* `pop`: shrinks items in and out of place
+
+In order for the storyviews to animate correctly each entry in the list should be a single block mode DOM element.
+
+!! History and navigation
+
+The optional `history` attribute specifies the name of a tiddler that is used to track the current tiddler for navigation purposes. When the history tiddler changes the list view responds by telling the listview to handle navigating to the new tiddler. See HistoryMechanism for details.
+
+!! Additional Notes and Edge Cases
+
+* If the `filter` attribute is not present then a default of `[!is[system]sort[title]]` is used
+* If the list widget is completely empty (ie only whitespace between the opening and closing tags), then it behaves as if the content were a `DIV` or a `SPAN` containing a link to the current tiddler (it’s a `DIV` if the list widget is in block mode, or a SPAN if it is in inline mode)
+* If the `template` attribute is not present then the content of the list widget will be used as the template, unless the widget is completely empty in which case a default template is used

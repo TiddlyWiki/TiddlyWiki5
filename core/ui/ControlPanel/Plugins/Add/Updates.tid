@@ -1,0 +1,40 @@
+title: $:/core/ui/ControlPanel/Plugins/Add/Updates
+caption: <$importvariables filter="$:/core/ui/ControlPanel/Plugins/Add/Updates">{{$:/language/ControlPanel/Plugins/Updates/Caption}} (<<update-count>>)</$importvariables>
+
+\define each-updateable-plugin(body)
+\whitespace trim
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}sort[title]]" variable="assetInfo">
+<$set name="libraryVersion" value={{{ [<assetInfo>get[version]] }}}>
+<$list filter="[<assetInfo>get[original-title]has[version]!version<libraryVersion>]" variable="ignore">
+<$set name="installedVersion" value={{{ [<assetInfo>get[original-title]get[version]] }}}>
+<$list filter="[<installedversion>!match<libraryVersion>]" variable="ignore">
+$body$
+</$list>
+</$set>
+</$list>
+</$set>
+</$list>
+\end
+
+\define update-all-actions()
+<$macrocall $name="each-updateable-plugin" body="""
+<<install-plugin-actions>>
+"""/>
+\end
+
+\define update-count()
+<$wikify name="count-filter" text=<<each-updateable-plugin "&#91;&#91;<$text text=<<assetInfo>>/>]]">>><$count filter=<<count-filter>>/></$wikify>
+\end
+
+\whitespace trim
+<$button actions=<<update-all-actions>> class="tc-btn-invisible tc-install-plugin tc-reinstall-upgrade">
+{{$:/core/images/download-button}}
+&#32;
+{{||$:/language/ControlPanel/Plugins/Updates/UpdateAll/Caption}}
+</$button>
+
+<div class="tc-plugin-library-listing">
+<$macrocall $name="each-updateable-plugin" body="""
+<$macrocall $name="display-plugin-info" type={{{ [<assetInfo>get[original-plugin-type]] }}}/>
+"""/>
+</div>

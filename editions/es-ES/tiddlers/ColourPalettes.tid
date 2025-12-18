@@ -1,0 +1,35 @@
+caption: Paletas cromáticas
+created: 20140216102454178
+es-title: Paletas cromáticas en TiddlyWiki
+modified: 20160507042920576
+tags: Concepts
+title: ColourPalettes
+type: text/vnd.tiddlywiki
+
+Una paleta de colores es un [[tiddler de datos|DataTiddlers]] que proporciona valores [[CSS]] a una serie de parámetros de color de diferentes componentes, definidos de esta manera:
+
+```
+page-background: #fe0
+table-border: #ccc
+...
+```
+
+Hay varias paletas definidas en el núcleo de ~TiddlyWiki. El tiddler <<.tid ~$:/palette>> contiene el título de la paleta actualmente seleccionada. 
+
+Para saber el color de algún elemento definido en la paleta actual, por ejemplo para su uso en una hoja de estilos, se puede usar la macro <<.mlink color>>:
+
+```
+<<colour page-background>>
+```
+Devuelve el siguiente valor, correspondiente al color aplicado al componente <<.word page-background>>: <<colour page-background>>. 
+
+Los tiddlers que definen una paleta de color tienen que tener los siguientes campos: 
+
+|!Nombre |!Valor |
+|title |Lleva el prefijo `$:/` |
+|type |`application/x-tiddler-dictionary` |
+|tags |`$:/tags/Palette` |
+|description |Descripción para mostrar en el selector de paletas |
+|text |`nombre: valor` |
+
+El valor CSS puede definirse bien usando un nombre predefinido (p.ej: ~BlanchedAlmond), su valor hexadecimal (p.ej, para el anterior: #FFEBCD), o rgba (el anterior: 255, 235, 205,1)

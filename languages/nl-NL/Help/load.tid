@@ -1,0 +1,16 @@
+title: $:/language/Help/load
+description: Laadt tiddlers van bestand
+
+Laadt tiddlers van 2.x.x TiddlyWiki bestanden (`.html`), `.tiddler`, `.tid`, `.json` of andere bestanden
+
+```
+--load <bestandspad>
+```
+
+Om tiddlers van een versleuteld TiddlyWiki bestand te laden dien je eerst het wachtwoord met het wachtwoordcommando te geven, b.v.:
+
+```
+tiddlywiki ./MijnWiki --password pa55w0rd --load mijn_versleutelde_wiki.html
+```
+
+N.B.: TiddlyWiki laadt geen plugin die ouder is dan de al aanwezige plugin.

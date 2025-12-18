@@ -1,0 +1,13 @@
+created: 20141228094500000
+modified: 20220427171020974
+tags: Concepts
+title: DictionaryTiddlers
+type: text/vnd.tiddlywiki
+
+A dictionary tiddler is a kind of [[data tiddler|DataTiddlers]] that contains a simple list of `name: value` pairs.
+
+Its [[ContentType]] is `application/x-tiddler-dictionary`.
+
+The `text` field consists of one or more lines of the form <code>//name//: //value//</code>.
+
+[[ColourPalettes]], such as the [[default Vanilla palette|$:/palettes/Vanilla]], are dictionary tiddlers.

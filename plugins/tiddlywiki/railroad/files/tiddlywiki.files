@@ -1,0 +1,21 @@
+{
+	"tiddlers": [
+		{
+			"file": "railroad-diagrams.css",
+			"fields": {
+				"type": "text/vnd.tiddlywiki",
+				"title": "$:/plugins/tiddlywiki/railroad/railroad-diagrams.css",
+                                "tags": "$:/tags/Stylesheet"
+			}
+		},{
+			"file": "railroad-diagrams.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/railroad/railroad-diagrams.js",
+				"module-type": "library"
+			},
+			"prefix": "(function(document) {\n",
+			"suffix": "\n})($tw.node ? $tw.fakeDocument : window.document)\n"
+		}
+	]
+}

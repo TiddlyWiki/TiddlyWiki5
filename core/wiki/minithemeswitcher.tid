@@ -1,0 +1,9 @@
+title: $:/snippets/minithemeswitcher
+
+\define lingo-base() $:/language/ControlPanel/Theme/
+\whitespace trim
+<<lingo Prompt>>&#32;<$select tiddler="$:/theme">
+<$list filter="[plugin-type[theme]sort[title]]">
+<option value=<<currentTiddler>>><$view field="name"><$view field="title"/></$view></option>
+</$list>
+</$select>

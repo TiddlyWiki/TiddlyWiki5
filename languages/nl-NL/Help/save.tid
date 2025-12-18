@@ -1,0 +1,24 @@
+title: $:/language/Help/save
+description: Slaat individuele ruwe tiddlers in bestanden op
+
+Slaat gefilterde individuele tiddlers op in gespecificeerde bestanden als ruwe tekst of in binair formaat.
+
+```
+--save <tiddler-filter> <bestandsnaam-filter>
+```
+
+* ''tiddler-filter'': Een filter dat bepaalt welke tiddler(s) opgeslagen moeten worden
+* ''bestandsnaam-filter'': Optioneel filter dat tiddler titels omzet in padnamen. Standaard (geen optioneel filter) `[is[tiddler]]`, hetgeen de onveranderde tiddler titel als bestandsnaam gebruikt
+
+Standaard is de bestandsnaam relatief t.o.v. de `output` subfolder van de editiefolder. Het `--output` commando kan gebruikt worden om output naar een andere folder te leiden.
+
+N.B.:
+* De output folder wordt niet leeg gemaakt
+* Elke ontbrekende folder in het pad naar de bestandsnaam wordt automatisch aangemaakt
+* In het geval van een tiddler met spaties in de titel, gebruik zowel de aanhalingstekens die vereist zijn voor de commando shell en ook TiddlyWiki's dubbele vierkante haken : `--render "[[Motovun Jack.jpg]]"`
+* Het bestandsnaam filter wordt geëvalueerd met de gekozen onderdelen, gezet voor de titel van de te tiddler die opgeslagen wordt, waarbij de titel als basis dient om de bestandsnaam te bepalen. B.v. `[encodeuricomponent[]addprefix[static/]]` past URI encoding toe op elke titel, en voegt dan de prefix `static/` toe
+* Het `--save` commando is een uitgebreidere vervanging voor de verouderde `--savetiddler` en `--savetiddlers` commando's
+
+Voorbeelden:
+
+ * `--save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"` -- slaat alle non-system afbeeldingstiddlers als bestanden op in the subfolder "tiddlers" met URL-encoded titels

@@ -1,0 +1,37 @@
+title: $:/language/Help/fetch
+description: 通過網址從維基擷取條目
+
+通過 HTTP/HTTPS 擷取一個或多個檔案，並導入符合篩選器的條目，可選的轉換傳入的名稱。
+
+```
+--fetch file <url> <import-filter> <transform-filter>
+--fetch files <url-filter> <import-filter> <transform-filter>
+--fetch raw-file <url> <transform-filter>
+--fetch raw-files <url-filter> <transform-filter>
+```
+
+ "file" 和 "files" 選項擷取指定的檔案，並嘗試導入其中的條目（與將檔案拖動到瀏覽器視窗中的處理相同）。 "raw-file" 和 "raw-files" 變選項擷取指定的檔案，並將原始檔案資料存儲於條目，而不套用導入邏輯。
+
+使用 "file" and "raw-file" 選項為僅擷取單個檔案，且第一個參數為要讀取檔案的網址。
+
+使用 "files" 和 "raw-files" 選項為擷取多個檔案，且第一個參數是一個產生要讀取檔案的網址清單的篩選器。例如，給定標籤為 "remote-server" 的一組具有欄位 "url" 的條目，篩選器 `[tag[remote-server]get[url]]` 將取回所有可用的網址。
+
+對於 "file" 和 "files" 選項，the `<import-filter>` 參數指定一個篩選器，用於確定要導入哪些條目。如果未提供，則預設為 `[all[tiddlers]]`。
+
+對於所有選項，`<transform-filter>` 參數指定一個可選的篩選器，用於轉換導入條目的名稱。例如，`[addprefix[$:/myimports/]]` 會將前綴  `$:/myimports/` 加至每個名稱。
+
+於 `--fetch` 之前使用 `--verbose` 命令，將在導入期間輸出進度資訊。
+
+請注意，TiddlyWiki 不會擷取一個已經載入插件的舊版本。
+
+以下範例從 https://tiddlywiki.com 取回所有非系統條目，並將其儲存到一個 JSON 檔案：
+
+```
+tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+```
+
+以下範例從 https://tiddlywiki.com 取回 "favicon" 檔案，並將其儲存在名為 "output.ico" 的檔案中。請注意，在 "--fetch" 命令中引用的中間條目 "Icon Tiddler"，因為它被用作轉換篩選器來替換預設的名稱，而 "--savetiddler" 命令沒有引號，因為它是直接用作標題。
+
+```
+tiddlywiki --verbose --fetch raw-file "https://tiddlywiki.com/favicon.ico" "[[Icon Tiddler]]" --savetiddler "Icon Tiddler" output.ico
+```

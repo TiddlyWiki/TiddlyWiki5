@@ -1,0 +1,14 @@
+title: Genesis/EmptyType
+description: Using an empty type attribute with the genesis widget
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$genesis>Mouse</$genesis>
+
+<$genesis $type="">Mouse</$genesis>
++
+title: ExpectedResult
+
+<p>Mouse</p><p>Mouse</p>

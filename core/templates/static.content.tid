@@ -1,0 +1,10 @@
+title: $:/core/templates/static.content
+
+<!-- For Google, and people without JavaScript-->
+This [[TiddlyWiki|https://tiddlywiki.com]] contains the following tiddlers:
+
+<ul>
+<$list filter=<<saveTiddlerFilter>>>
+<li><$view field="title" format="text"></$view></li>
+</$list>
+</ul>

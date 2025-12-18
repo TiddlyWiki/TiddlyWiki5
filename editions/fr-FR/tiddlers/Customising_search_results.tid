@@ -1,0 +1,32 @@
+created: 20141027151552783
+fr-title: Une recherche aux résultats personnalisés
+modified: 20150616103121307
+tags: [[Customise TiddlyWiki]]
+title: Customising search results
+type: text/vnd.tiddlywiki
+
+Par défaut les résultats de la recherche du menu latéral sont affichés comme une simple liste de titres de tiddler. Ce résultat de recherche peut être personnalisé en ajoutant des plugins de visualisation qui les montreront de différentes façons. (les onglets sont affichés automatiquement si un résultat de recherche additionnel est détecté).
+
+Les visualisations des résultats de recherche sont mémorisés dans les tiddlers étiquetés [[$:/tags/SearchResults]]. La liste de résultats de recherche par défaut est implémentée dans le tiddler système [[$:/core/ui/DefaultSearchResultList]].
+
+Pour créer un nouvel affichage de liste de recherche<<:>>
+
+# Créez un nouveau tiddler étiqueté [[$:/tags/SearchResults]]
+# Utilise la variable widget ''searchTiddler'' pour accéder au titre de chaque tiddler contenant les termes de la recherche en cours
+
+Si vous voulez faire du nouvel affichage celui du résultat de recherche par défaut, créez un tiddler appelé [[$:/config/SearchResults/Default]] contenant le titre de cet affichage.
+
+Voici un exemple d'affichage montrant les résultats dans l'ordre chronologique inverse<<:>>
+
+```
+\define searchResults()
+<$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
+
+{{$:/language/Search/Matches}}
+
+</$set>
+<<timeline subfilter:"!is[system]search{$(searchTiddler)$}">>
+\end
+<<searchResults>>
+```
+

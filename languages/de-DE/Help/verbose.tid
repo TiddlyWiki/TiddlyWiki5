@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: Aktiviert die erweiterte Fehlerausgabe.
+
+Aktiviert die erweiterte Fehlerausgabe. Nützlich um Fehler zu finden.
+
+```
+--verbose
+```

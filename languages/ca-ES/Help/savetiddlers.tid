@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddlers
+description: Desa un grup de tiddlers com a text cru a una carpeta
+
+Desa un grup de tiddlers com a text com a text cru o en format binari a la carpeta indicada.
+
+```
+--savetiddlers <filtre> <ruta>
+```  Tingueu en compte que la contrasenya es transmet tal qual així que no és una bona solució d'ús general.
+
+Per omissió, la ruta es resoldrà de forma relativa a la carpeta `output` de la carpeta d'edició. L'ordre `--output` es pot fer servir per dirigir la sortida a una altre carpeta.
+
+Les carpetes de la ruta que no es trobin es crearan de forma automàtica.

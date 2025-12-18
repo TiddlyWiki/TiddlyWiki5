@@ -1,0 +1,15 @@
+title: $:/language/Import/
+
+Imported/Hint: Uvoženi so bili naslednji tiddlerji:
+Listing/Cancel/Caption: Prekliči
+Listing/Hint: Ti tiddlerji so pripravljeni za uvoz:
+Listing/Import/Caption: Uvoz
+Listing/Select/Caption: Izbor
+Listing/Status/Caption: Status
+Listing/Title/Caption: Naslov
+Upgrader/Plugins/Suppressed/Incompatible: Blokiran nezdružljiv ali zastarel vtičnik
+Upgrader/Plugins/Suppressed/Version: Blokiran vtičnik (uvoženi vtičnik <<incoming>> je starejši od obstoječega <<existing>>)
+Upgrader/Plugins/Upgraded: Nadgrajen vtičnik iz <<incoming>> na <<upgraded>>
+Upgrader/State/Suppressed: Blokiran tiddler začasnega stanja
+Upgrader/System/Suppressed: Blokiran sistemski tiddler
+Upgrader/ThemeTweaks/Created: Prenesena prilagoditev teme iz <$text text=<<from>>/>

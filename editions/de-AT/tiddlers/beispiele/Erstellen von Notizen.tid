@@ -1,0 +1,38 @@
+created: 20140923182806946
+creator: pmario
+modified: 20140923190400774
+modifier: pmario
+tags: [[Was kann TiddlyWiki]]
+title: Erstellen von Notizen
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki macht es dem Anwender einfach, Gedanken schnell nieder zu schreiben, um sie später wieder aufzugreifen, neu zu strukturieren und zu erweitern.
+
+!! Listen
+
+Listen sind ein einfaches Element um "Brainstorming" zu machen. zB:
+
+* Was soll alles in dieses Wiki
+** Beispiele
+** InhaltsVerzeichnis
+** WikiText
+* Wie können die Möglichkeiten einfach dargestellt werden
+* Welche Macros sollen vorgestellt werden
+** Wie erstellt man Macros
+* Wie schnell sind dem Benutzer Widgets zuzumuten
+
+!! Zitate
+
+<<<
+Auch aus Steinen, die einem in den Weg gelegt werden, kann man was Schönes bauen. 
+<<<Johann Wolfgang von Goethe, deutscher Dichter, 1749-1832
+
+!! Tags und Inhaltsverzeichnis
+
+Dieser Tiddler ist mit [[Was kann TiddlyWiki]] getaggt. Dadurch wird er automatisch ins InhaltsVerzeichnis aufgenommen.
+
+!! ~WikiLinks
+
+Wie Sie oben in der "Brainstorming" Liste sehen können, verwende ich dort WikiLinks. Auf diese Weise werden aus den Wörtern automatisch Links erstellt. Der Vorteil hier ist, das der Schreibfluss nicht durch das tippen von `[[]]` unterbrochen wird. 
+
+

@@ -1,0 +1,8 @@
+title: $:/language/Help/unpackplugin
+description: Extreu els tiddlers carregats d'un connector
+
+Extreu els tiddlers carregats d'un connector, generant-los com a tiddlers corrents:
+
+```
+--unpackplugin <títol>
+```

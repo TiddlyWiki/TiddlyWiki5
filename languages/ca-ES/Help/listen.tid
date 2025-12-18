@@ -1,0 +1,33 @@
+title: $:/language/Help/listen
+description: Proporciona una interfície del servidor HTTP a TiddlyWiki
+
+Serveix una wiki via HTTP.
+
+L'ordre listen utilitza Paràmetres d'Ordre amb Nom:
+
+```
+--listen [<nom>=<valor>]...
+```
+
+Tots els paràmetres són opcionals amb valors predeterminats segurs i es poden especificar en qualsevol ordre. Els paràmetres reconeguts són:
+
+* ''host'': nom d'amfitrió opcional per servir (per omissió, "127.0.0.1" o "localhost")
+* ''path-prefix'' - prefix opcional per a les rutes
+* ''port'' - número de port on escoltar; Els valors no numèrics s’interpreten com a variable d’entorn del sistema des de la qual s’extreu el número de port (per omissió, "8080")
+* ''credentials'': ruta del fitxer CSV de les credencials (relatiu a la carpeta wiki)
+* ''anon-username'': el nom d’usuari per signar edicions per a usuaris anònims
+* ''username'' - nom d’usuari opcional per a l’autenticació bàsica
+* ''password'': contrasenya opcional per a l'autenticació bàsica
+* ''authenticated-user-header'' - nom opcional de la capçalera que s’utilitzarà per a l’autenticació de confiança
+* ''readers'' - llista separada per comes, dels usuaris que poden llegir aquesta wiki
+* ''writers': llista separada per comes, dels usuaris que poden escriure en aquesta wiki
+* ''csrf-disable'': es defineix com a "sí" per desactivar les comprovacions de CSRF (per omissió, "no")
+* ''root-tiddler'': el tiddler que servirà a l’arrel (per omissió és "$:/core/save/all")
+* ''root-render-type '' - el tipus de contingut amb el qual s'ha de generar el tiddler arrel (per omissió, "text/plain")
+* ''root-serve-type'' - el tipus de contingut amb el qual s'ha de servir el tiddler root (per omissió, "text/html")
+* ''tls-cert'': ruta del fitxer del certificat TLS (relatiu a la carpeta wiki)
+* ''tls-key'': ruta d'accés al fitxer de la clau TLS (relatiu a la carpeta wiki)
+* ''debug-level'' - nivell de depuració opcional; s'estableix a "debug" per veure els detalls de la sol·licitud (per omissió, "cap")
+* ''gzip'': establiu-ho a "sí" per habilitar la compressió gzip per a alguns extrems http (per omissió "no")
+
+Per obtenir informació sobre com obrir la vostra instància a tota la xarxa local i possibles problemes de seguretat, consulteu el tiddler WebServer de TiddlyWiki.com.

@@ -1,0 +1,37 @@
+caption: La macro tabs
+created: 20131228162203521
+fr-title: La macro tabs
+modified: 20150624091834029
+tags: Macros
+title: TabsMacro
+type: text/vnd.tiddlywiki
+
+La macro tabs affiche une liste de tiddlers sous forme d'onglets. L'utilisateur peut passer d'un onglet à l'autre en cliquant. Les onglets sont étiquetés avec le titre du tiddler correspondant, sauf si un champ `caption` est présent, auquel cas c'est celui-ci qui est utilisé.
+
+Par défaut, les onglets sont disposés horizontalement, le contenu étant affiché en-dessous. Vous pouvez aussi disposer les onglets verticalement en passant en paramètre la classe `tc-vertical`.
+
+! Paramètres
+
+|!Position |!Nom |!Description |!Défaut |
+|1re |tabsList |Filtre indiquant les tiddlers à afficher | |
+|2e |default |Nom du tiddler contenant l'onglet qui s'affichera par défaut | |
+|3e |state |Chaîne de caractères permettant de distinguer plusieurs ensembles d'onglets présents dans le même tiddler (l'utilisation du préfixe des tiddlers système est recommandée) |$:/state/tab |
+|4e |class |Classes CSS supplémentaires pour les trois DIVs imbriquées qui construisent les onglets (vous pouvez indiquer plusieurs classes en les séparant avec des espaces) | |
+|5e |template |Un tiddler template optionnel via lequel le contenu de l'onglet doit être rendu | |
+
+À l'intérieur du template, le titre de l'onglet courant est accessible via la variable ''currentTab''. La variable ''currentTiddler'' n'est pas modifiée par la macros tabs.
+
+! Exemples
+
+Voici quelques exemples d'utilisation de la macro tabs. Notez que l'édition française de la documentation utilise le champ `caption` pour faire apparaître le titre de l'onget en Français<<dp>>
+
+```
+<<tabs "SampleTabOne SampleTabTwo SampleTabThree SampleTabFour" "SampleTabThree" "$:/state/tab1">>
+
+<<tabs "[tag[sampletab]]" "SampleTabTwo" "$:/state/tab2" "tc-vertical">>
+```
+
+<<tabs "SampleTabOne SampleTabTwo SampleTabThree SampleTabFour" "SampleTabThree" "$:/state/tab1">>
+
+<<tabs "[tag[sampletab]]" "SampleTabTwo" "$:/state/tab2" "tc-vertical">>
+Exercice : comment faire en sorte que cette deuxième liste soit triée<<pi>> Indice<<dp>> lisez le tiddler [[Tagging]] jusqu'au bout.

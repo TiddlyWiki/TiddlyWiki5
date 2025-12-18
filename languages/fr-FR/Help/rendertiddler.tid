@@ -1,0 +1,24 @@
+title: $:/language/Help/rendertiddler
+description: Exécute le contenu d'un tiddler pour le type spécifié
+
+(À noter : la commande `--rendertiddler` est dépréciée. Il est préférable d'utiliser la nouvelle commande `--render`, plus souple)
+
+Enregistre vers le chemin indiqué le résultat de l'exécution d'un tiddler pour le type de contenu (ContentType) spécifié — par défaut `text/html`.
+
+Un tiddler modèle (template) peut être indiqué optionnellement. Dans ce cas, le tiddler modèle est exécuté après initialisation de la variable "currentTiddler" avec le tiddler dont le titre est donné en premier paramètre de la commande.
+
+Le nom et la valeur d'une variable supplémentaire peuvent être spécifiés optionnellement.
+
+```
+--rendertiddler <titre> <chemindufichier> [<type>] [<modèle>] [<nom>] [<valeur>]
+```
+
+Par défaut, le nom de fichier est résolu relativement au sous-répertoire `output` du répertoire de l'édition. La commande `--output` peut servir à rediriger la sortie vers un répertoire différent.
+
+Les répertoires présents dans le chemin du fichier et qui n'existent pas encore sont créés automatiquement.
+
+Par exemple, la commande ci-dessous enregistre tous les tiddlers correspondant au filtre `[tag[done]]` vers un fichier JSON de nom `output.json`, en faisant appel au template prédéfini `$:/core/templates/exporters/JsonFile`.
+
+```
+--rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[tag[done]]"
+```

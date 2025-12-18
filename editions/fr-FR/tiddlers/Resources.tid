@@ -1,0 +1,28 @@
+caption: Ressources
+created: 20140320230543190
+modified: 20160603043905955
+tags: Community
+title: Resources
+type: text/vnd.tiddlywiki
+
+Voici quelques sites contenant des ressources créées par la [[communauté|Community]] ~TiddlyWiki, pour vous aider à tirer le meilleur de ~TiddlyWiki : plugins, macros etc. N'hésitez pas à proposer de nouvelles ressources via GitHub, Twitter ou en postant sur les [[groupes de discussion TiddlyWiki|Forums]].
+
+<div class="tc-link-info">
+
+<$list filter='[tag[Resources]!sort[modified]]'>
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="caption"><$view field="title"/></$view></$link>
+
+!!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
+
+<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>

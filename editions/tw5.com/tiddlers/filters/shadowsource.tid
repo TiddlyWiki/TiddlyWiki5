@@ -1,0 +1,14 @@
+created: 20140410103123179
+modified: 20150203191120000
+tags: [[Filter Operators]] [[Special Operators]]
+title: shadowsource Operator
+type: text/vnd.tiddlywiki
+caption: shadowsource
+op-purpose: select the plugin titles that contain the input shadows
+op-input: a [[selection|Title Selection]] of [[shadow titles|ShadowTiddlers]]
+op-parameter: none
+op-output: the [[plugins|Plugins]] that contain the input tiddlers
+
+Each input title is processed in turn. If it denotes a shadow tiddler, the title of its plugin tiddler is [[dominantly appended|Dominant Append]] to the output. Non-shadow tiddlers contribute nothing to the output.
+
+<<.operator-examples "shadowsource">>

@@ -1,0 +1,10 @@
+created: 20140425085548209
+modified: 20140427210435569
+tags: Commands
+title: BuildCommand
+type: text/vnd.tiddlywiki
+caption: build
+
+{{$:/language/Help/build}}
+
+See [[tiddlywiki.info Files]] for details of defining build targets.

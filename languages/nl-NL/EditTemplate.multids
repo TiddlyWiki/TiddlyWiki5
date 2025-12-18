@@ -1,0 +1,34 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: Dit is een externe tiddler die niet in de TiddlyWiki opgeslagen is. Je kan labels en velden wijzigen maar de tekst zelf niet.
+Body/Placeholder: Typ de tekst voor deze tiddler
+Field/Dropdown/Caption: veldenlijst
+Field/Dropdown/Hint: Toon veldenlijst
+Field/Remove/Caption: verwijder veld
+Field/Remove/Hint: Verwijder veld
+Fields/Add/Button: +
+Fields/Add/Button/Hint: Voeg het nieuwe veld aan de tiddler toe
+Fields/Add/Dropdown/System: Systeemvelden
+Fields/Add/Dropdown/User: Gebruikersvelden
+Fields/Add/Name/Placeholder: veldnaam
+Fields/Add/Prompt: Voeg nieuw veld toe:
+Fields/Add/Value/Placeholder: veldwaarde
+Shadow/OverriddenWarning: Dit is een aangepaste schaduwtiddler. Door deze tiddler te verwijderen wordt de standaard schaduwtiddler weer actief
+Shadow/Warning: Dit is een schaduwtiddler. Elke verandering overschrijft de standaardversie
+Tags/Add/Button: +
+Tags/Add/Button/Hint: voeg label toe
+Tags/Add/Placeholder: labelnaam
+Tags/ClearInput/Caption: verwijde ingave
+Tags/ClearInput/Hint: Verwijder labelingave
+Tags/Dropdown/Caption: labellijst
+Tags/Dropdown/Hint: Toon labellijst
+Title/BadCharacterWarning: Waarschuwing: vermijd elk karakter van <<bad-chars>> in tiddler titels
+Title/Exists/Prompt: Doeltiddler bestaat al
+Title/References/Prompt: De volgende referenties naar deze tiddler worden niet automatisch bijgewerkt:
+Title/Relink/Prompt: Werk ''<$text text=<<fromTitle>>/>'' naar ''<$text text=<<toTitle>>/>'' bij in de //label// en //lijst// velden van andere tiddlers
+Type/Delete/Caption: verwijder inhoudstype
+Type/Delete/Hint: Verwijder inhoudstype
+Type/Dropdown/Caption: lijst van inhoudstypes
+Type/Dropdown/Hint: Toon lijst van inhoudstypes
+Type/Placeholder: inhoudstype
+Type/Prompt: Type:

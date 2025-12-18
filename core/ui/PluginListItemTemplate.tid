@@ -1,0 +1,15 @@
+title: $:/core/ui/PluginListItemTemplate
+
+\whitespace trim
+<$link to={{!!title}} class="tc-plugin-info">
+	<div class="tc-plugin-info-chunk tc-plugin-info-icon">
+		<$transclude tiddler=<<currentTiddler>> subtiddler={{{ [<currentTiddler>addsuffix[/icon]] }}}>
+			<$transclude tiddler={{{ [<currentTiddler>get[plugin-type]addprefix[$:/core/images/plugin-generic-]] }}}/>
+		</$transclude>
+	</div>
+	<div class="tc-plugin-info-chunk tc-plugin-info-description">
+		<h1>
+			''<$text text={{{ [<currentTiddler>get[name]] ~[<currentTiddler>split[/]last[1]] }}}/>'':&nbsp;<$view field="description"><$view field="title"/></$view>
+		</h1>
+	</div>
+</$link>

@@ -1,0 +1,8 @@
+created: 20190611130110805
+modified: 20190611130121033
+tags: [[remainder Operator]] [[Operator Examples]]
+title: remainder Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[23]remainder[3]]">>
+<<.operator-example 2 "=1 =2 =3 =4 +[remainder[2]]">>

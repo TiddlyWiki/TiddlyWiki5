@@ -1,0 +1,55 @@
+created: 20130822080600000
+fr-title: Tags système
+modified: 20150624091907085
+tags: Concepts
+title: SystemTags
+type: text/vnd.tiddlywiki
+
+<style>.symb svg {width: 1em; height: 1em; margin: 0em;}</style>
+Les tags système sont employés pour donner un comportement particulier aux tiddlers.
+
+! Tags système disponibles
+
+Liste des tags système disponibles
+
+* {{$:/tags/AboveStory||$:/core/ui/TagTemplate}} Éléments à placer au sommet du déroulé
+* {{$:/tags/AdvancedSearch||$:/core/ui/TagTemplate}}Recherche Avancée +/- d'Onglets
+* {{$:/tags/Alert||$:/core/ui/TagTemplate}} Créer un Gabarit d'Alerte
+* {{$:/tags/BelowStory||$:/core/ui/TagTemplate}} Éléments à placer en queue de déroulé
+* {{$:/tags/ControlPanel||$:/core/ui/TagTemplate}}<<.button "control-panel">> +/- Onglets
+* <div class="symb">{{$:/tags/ControlPanel/Advanced||$:/core/ui/TagTemplate}}<$transclude tiddler="$:/core/images/options-button" /> /<<.controlpanel-tab Advanced>> +/- Options</div>
+* <div class="symb">{{$:/tags/ControlPanel/Appearance||$:/core/ui/TagTemplate}}<$transclude tiddler="$:/core/images/options-button" /> /<<.controlpanel-tab Appearance>> +/- Options</div>
+* <div class="symb">{{$:/tags/ControlPanel/Info||$:/core/ui/TagTemplate}}<$transclude tiddler="$:/core/images/options-button" /> /<<.controlpanel-tab Info>> +/- Options</div>
+* <div class="symb">{{$:/tags/ControlPanel/Settings||$:/core/ui/TagTemplate}}<$transclude tiddler="$:/core/images/options-button" /> /<<.controlpanel-tab Settings>> +/- Options</div>
+* <div class="symb">{{$:/tags/ControlPanel/Toolbars||$:/core/ui/TagTemplate}}<$transclude tiddler="$:/core/images/options-button" /> /<<.controlpanel-tab Toolbars>> +/- Options</div>
+* {{$:/tags/EditTemplate||$:/core/ui/TagTemplate}}Tiddlers, Édition Gabarit +/- zones
+* {{$:/tags/EditToolbar||$:/core/ui/TagTemplate}} Tiddlers, Édition +/- de boutons accessibles
+* {{$:/tags/Exporter||$:/core/ui/TagTemplate}} Créer un Gabarit d'[[Export|Creating a custom export format]]
+* {{$:/tags/Filter||$:/core/ui/TagTemplate}} Ajout au choix déroulant des ex. de filtres en recherche avancée
+* {{$:/tags/Image||$:/core/ui/TagTemplate}} Ajouter des images (noyau)
+* {{$:/tags/Macro||$:/core/ui/TagTemplate}} Ajouter des macros globales
+* {{$:/tags/MoreSideBar||$:/core/ui/TagTemplate}}Menu latéral/<<.sidebar-tab More>> +/- Options
+* {{$:/tags/PageControls||$:/core/ui/TagTemplate}}Menu latéral/<<.sidebar-tab Tools>> +/- Options
+* {{$:/tags/PageTemplate||$:/core/ui/TagTemplate}}Page, Gabarit +/- de zones
+* {{$:/tags/Palette||$:/core/ui/TagTemplate}} Couleur +/- de palettes 
+* {{$:/tags/PluginLibrary||$:/core/ui/TagTemplate}} Plugin +/- de bibliothèques 
+* {{$:/tags/RawMarkup||$:/core/ui/TagTemplate}} Intégrer les balises brutes à la génération du fichier HTML
+* {{$:/tags/SearchResults||$:/core/ui/TagTemplate}} Créer un Gabarit pour les résultats de recherche
+* {{$:/tags/SideBar||$:/core/ui/TagTemplate}}Menu latéral +/- d'Onglets
+* {{$:/tags/Stylesheet||$:/core/ui/TagTemplate}} Ajout d'un tiddler [[feuille de style CSS|Using Stylesheets]]
+* {{$:/tags/TiddlerInfo||$:/core/ui/TagTemplate}}Tiddler <<.button "info">> +/-  Onglets
+* {{$:/tags/TiddlerInfo/Advanced||$:/core/ui/TagTemplate}}Tiddler <<.button "info">>/<<.info-tab Tools>> +/- Options 
+* {{$:/tags/TopLeftBar||$:/core/ui/TagTemplate}} +/- Menu Haut-Gauche
+* {{$:/tags/TopRightBar||$:/core/ui/TagTemplate}} +/- Menu Haut-Droit
+* {{$:/tags/ViewTemplate||$:/core/ui/TagTemplate}} Tiddlers, Affichage Gabarit +/- zones
+* {{$:/tags/ViewToolbar||$:/core/ui/TagTemplate}} Tiddlers, Affichage +/- de boutons accessibles
+
+! Tags système utilisés
+
+Listes des tags système en cours d'utilisation dans ce wiki<<:>>
+
+<ul>
+<$list filter="[all[shadows+tiddlers]tags[]prefix[$:/]sort[title]]">
+<li>{{||$:/core/ui/TagTemplate}}</li>
+</$list>
+</ul>

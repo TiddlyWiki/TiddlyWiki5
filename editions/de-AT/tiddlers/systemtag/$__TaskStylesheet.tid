@@ -1,0 +1,26 @@
+created: 20140923174845752
+creator: pmario
+modified: 20140923175216429
+modifier: pmario
+tags: $:/tags/Stylesheet
+title: $:_TaskStylesheet
+type: text/vnd.tiddlywiki
+
+\define datauri(title)
+<$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}}/>
+\end
+
+li.Done {
+list-style-image:url(<<datauri "list-done.svg" >>);
+font-weight:normal;
+}
+
+li.Check {
+list-style-image:url(<<datauri "list-check.svg">>);
+font-weight:normal;
+}
+
+li.ToDo {
+list-style-image:url(<<datauri "list-task.svg" >>);
+font-weight:bold;
+}

@@ -1,0 +1,40 @@
+title: $:/core/ui/EditTemplate/shadow
+tags: $:/tags/EditTemplate
+
+\define lingo-base() $:/language/EditTemplate/Shadow/
+\define pluginLinkBody()
+\whitespace trim
+<$link to="""$(pluginTitle)$""">
+<$text text="""$(pluginTitle)$"""/>
+</$link>
+\end
+\whitespace trim
+<$list filter="[all[current]get[draft.of]is[shadow]!is[tiddler]]">
+
+<$list filter="[all[current]shadowsource[]]" variable="pluginTitle">
+
+<$set name="pluginLink" value=<<pluginLinkBody>>>
+<div class="tc-message-box">
+
+<<lingo Warning>>
+
+</div>
+</$set>
+</$list>
+
+</$list>
+
+<$list filter="[all[current]get[draft.of]is[shadow]is[tiddler]]">
+
+<$list filter="[all[current]shadowsource[]]" variable="pluginTitle">
+
+<$set name="pluginLink" value=<<pluginLinkBody>>>
+<div class="tc-message-box">
+
+<<lingo OverriddenWarning>>
+
+</div>
+</$set>
+</$list>
+
+</$list>

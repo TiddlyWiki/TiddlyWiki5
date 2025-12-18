@@ -1,0 +1,72 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: vyhľadávanie
+AdvancedSearch/Hint: Pokročilé vyhľadávanie
+Cancel/Caption: zrušiť
+Cancel/Hint: Zruš editovanie tohto tiddlera
+Clone/Caption: klonovať
+Clone/Hint: Naklonuj tento tiddler
+Close/Caption: zatvoriť
+Close/Hint: Zatvor tento tiddler
+CloseAll/Caption: zatvoriť všetky
+CloseAll/Hint: Zatvor všetky tiddlery
+CloseOthers/Caption: zatvoriť ostatné
+CloseOthers/Hint: Zatvor ostatné tiddlery
+ControlPanel/Caption: ovládanie
+ControlPanel/Hint: Ovládací panel
+Delete/Caption: vymazať
+Delete/Hint: Vymaž tento tiddler
+Edit/Caption: editovať
+Edit/Hint: Edituj tento tiddler
+Encryption/Caption: šifrovať
+Encryption/ClearPassword/Caption: vynulovať heslo
+Encryption/ClearPassword/Hint: Vynuluj heslo a ulož wiki bez šifrovania
+Encryption/Hint: Nastav alebo vynuluj heslo pre uloženie tohto wiki
+Encryption/SetPassword/Caption: nastaviť heslo
+Encryption/SetPassword/Hint: Nastav heslo pre šifrované uloženie tohto wiki
+ExportPage/Caption: export
+ExportPage/Hint: Exportuj všetky tiddlery
+ExportTiddler/Caption: exportuj tiddler
+ExportTiddler/Hint: Exportuj tiddler
+ExportTiddlers/Caption: exportovať tiddlery
+ExportTiddlers/Hint: Exportuj tiddlery
+FullScreen/Caption: celá obrazovka
+FullScreen/Hint: Vstúp do alebo vystúp z režimu celej obrazovky
+HideSideBar/Caption: zatvoriť bočné menu
+HideSideBar/Hint: Zatvor bočné menu
+Home/Caption: domov
+Home/Hint: Otvor defaultné tiddlery
+Import/Caption: import
+Import/Hint: Importuj súbory
+Info/Caption: info
+Info/Hint: Ukáž info pre tento tiddler
+Language/Caption: jazyk
+Language/Hint: Jazyk užívateľského prostredia
+More/Caption: viac
+More/Hint: Ďalšie možnosti
+NewHere/Caption: tu vytvoriť nový
+NewHere/Hint: Vytvor nový tiddler s rovnakým štítkom ako má tento
+NewJournal/Caption: nový denník
+NewJournal/Hint: Vytvor nový tiddler typu denník
+NewJournalHere/Caption: tu vytvoriť nový denník
+NewJournalHere/Hint: Vytvor nový tiddler typu denník s rovnakým štítkom ako má tento
+NewTiddler/Caption: nový tiddler
+NewTiddler/Hint: Nový tiddler
+Permalink/Caption: trvalá linka
+Permalink/Hint: Nastav adresu v browseri ako priamu linku na tento tiddler
+Permaview/Caption: trvalý pohľad
+Permaview/Hint: Nastav adresu v browseri ako priamu linku na všetky tiddlery v tejto story
+Refresh/Caption: obnoviť
+Refresh/Hint: Obnov celý obsah wiki
+Save/Caption: uložiť
+Save/Hint: Ulož tento tiddler
+SaveWiki/Caption: uložiť zmeny
+SaveWiki/Hint: Uložiť zmeny
+ShowSideBar/Caption: ukázať bočné menu
+ShowSideBar/Hint: Ukáž bočné menu
+StoryView/Caption: pohľad
+StoryView/Hint: Zvoľ si vizualizáciu pre story
+TagManager/Caption: manažér štítkov
+TagManager/Hint: Otvor manažér štítkov
+Theme/Caption: téma
+Theme/Hint: Zvoľ si tému vzhľadu

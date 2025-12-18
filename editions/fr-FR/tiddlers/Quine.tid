@@ -1,0 +1,10 @@
+caption: Quine
+created: 20150623080048791
+modified: 20150623080948454
+tags: Definitions
+title: Quine
+type: text/vnd.tiddlywiki
+
+Une [[Quine|http://fr.wikipedia.org/wiki/Quine_(computing)]] est un programme d'ordinateur qui se programme lui-même.
+
+TiddlyWiki est un exemple inhabituel de quine<<:>> c'est lié à la capacité de son noyau à produire une copie de son propre code source pour sauver indépendamment ses propres modifications.

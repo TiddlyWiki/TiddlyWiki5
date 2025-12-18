@@ -1,0 +1,15 @@
+caption: tm-fold-all-tiddlers
+created: 20160424230908388
+modified: 20191028113838596
+tags: Messages
+title: WidgetMessage: tm-fold-all-tiddlers
+type: text/vnd.tiddlywiki
+
+The `tm-fold-all-tiddlers` message folds all tiddlers in the current story list.
+
+Internally, it sets the text of all of the state tiddlers corresponding to tiddlers in the story river to "<<.value "hide">>". The state tiddler titles are formed by prefixing the tiddler title with a prefix that defaults to `$:/state/folded/`.
+
+|!Name |!Description |
+|foldedStatePrefix |Prefix for the state tiddler in which the fold state is stored. Defaults to `$:/state/folded` |
+
+The `tm-fold-all-tiddlers` message is usually generated with the ButtonWidget and is handled by the surrounding NavigatorWidget.

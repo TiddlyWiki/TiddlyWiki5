@@ -1,0 +1,24 @@
+created: 20130822172800000
+fr-title: Fonctionnalités
+modified: 20150531185159561
+tags: TableOfContents
+title: Features
+type: text/vnd.tiddlywiki
+
+\define alert-demo()
+<$fieldmangler tiddler="SampleAlert"><$set name="currentTiddler" value="SampleAlert"><$button message="tm-add-tag" param="$:/tags/Alert">alerts</$button></$set></$fieldmangler>
+\end
+
+Plus d'informations sur les fonctionnalités spécifiques de <<tw>><<dp>>
+
+<<list-links "[tag[Features]]">>
+
+----
+
+* Des outils d'interface utilisateur conviviaux comme <<alert-demo>>, <$button message="tm-modal" param="SampleWizard">wizards</$button> et <$button message="tm-notify" param="SampleNotification">notifications</$button>
+* Essayez le <$button message="tm-full-screen">mode plein-écran</$button>
+* Explorez le [[plugin de visualisation D3.js|https://tiddlywiki.com/plugins/tiddlywiki/d3/index.html]]
+* Accédez à [[CodeMirror par plugin|https://tiddlywiki.com/plugins/tiddlywiki/codemirror/index.html]]
+* Notez avec [[Markdown par  plugin|https://tiddlywiki.com/plugins/tiddlywiki/markdown/index.html]]
+* Conservez le marquage [[TiddlyWiki Classic par plugin|https://tiddlywiki.com/plugins/tiddlywiki/tw2parser/index.html]]
+* Enfin, mais non des moindres, TiddlyWiki est un des rares exemples d'utilisation d'une [[quine|Quine]] au quotidien.

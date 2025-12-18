@@ -1,0 +1,28 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: Este é um tiddler armazenado fora do arquivo principal da Tiddlywiki. Pode mudar os assuntos mas não pode editar o seu conteúdo
+Body/Placeholder: Escreva o texto para este tiddler
+Body/Preview/Type/Output: resultado
+Field/Remove/Caption: remover campo
+Field/Remove/Hint: Remover campo
+Fields/Add/Button: adicionar
+Fields/Add/Dropdown/System: Campos de Sistema
+Fields/Add/Dropdown/User: Campos do usuário
+Fields/Add/Name/Placeholder: nome do campo
+Fields/Add/Prompt: Adicionar novo campo
+Fields/Add/Value/Placeholder: valor do campo
+Shadow/OverriddenWarning: Isto é um tiddler-sombra modificado. Pode voltar à configuração pré-definida apagando este tiddler
+Shadow/Warning: Isto é um tiddler-sombra. Quaisquer alterações irão sobrepor-se à versão pré-definida
+Tags/Add/Button: adicionar
+Tags/Add/Placeholder: nome do assunto
+Tags/Dropdown/Caption: lista de assuntos
+Tags/Dropdown/Hint: Mostrar a lista de assuntos
+Title/BadCharacterWarning: Atenção: Evite utilizar os caracteres <<bad-chars>> no título de tiddlers
+Title/Exists/Prompt: O Tiddler especificado já existe 
+Title/Relink/Prompt: Substituindo ''<$text text=<<fromTitle>>/>'' por ''<$text text=<<toTitle>>/>'' nas //lista//, //tags// e campos de outros tiddlers
+Type/Delete/Caption: apagar formato de arquivo
+Type/Delete/Hint: Apagar formato de arquivo
+Type/Dropdown/Caption: Lista de formato de arquivo
+Type/Dropdown/Hint: Mostrar a lista de formato de arquivo
+Type/Placeholder: formato de arquivo
+Type/Prompt: Tipo:

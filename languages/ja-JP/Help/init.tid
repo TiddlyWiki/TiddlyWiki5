@@ -1,0 +1,23 @@
+title: $:/language/Help/init
+description: 空の [[Wiki フォルダ|WikiFolders]] を初期化
+
+空の [[Wiki フォルダ|WikiFolders]] を初期化し、その中に指定したエディションの内容をコピーします。
+
+```
+--init <edition> [<edition> ...]
+```
+
+使用例:
+
+```
+tiddlywiki ./MyWikiFolder --init empty
+```
+
+備考:
+
+* 必要ならば Wiki フォルダが新たに作成されます。
+* デフォルトのエディションは ''empty'' です。
+* wiki フォルダが空ではない場合、init コマンドは失敗します。
+* init コマンドは指定エディションの `tiddlywiki.info` ファイルに指定されている `includeWikis` は除外します。
+* 複数のエディションを指定した場合、先に指定したエディションに含まれているファイルは、後に指定したエディションに同名のファイルが含まれていると上書きされます。つまり最終的な `tiddlywiki.info` は最後に指定したエディションのものが使用されます。
+* `--editions` で使用できるエディションの一覧を表示します。

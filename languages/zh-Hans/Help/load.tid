@@ -1,0 +1,19 @@
+title: $:/language/Help/load
+description: 从文件中加载条目
+
+从 TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` 或其他本机文件加载条目。应用的处理程序取决于导入文件的扩展名。如果您需要明确指定解串器和编码，请改用 `import` 命令。
+
+```
+--load <filepath> [noerror]
+--load <dirpath> [noerror]
+```
+
+默认情况下, 如果未找到条目，load 命令会引发错误。通过提供可选的 "noerror" 参数可以抑制该错误。
+
+从已加密的 TiddlyWiki 文件中加载条目，须使用 PasswordCommand 指定密码，例如：
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
+```
+
+请注意 TiddlyWiki 将不加载旧版本的已挂载的插件。

@@ -1,0 +1,25 @@
+title: GettingStarted
+
+\define lingo-base() $:/language/ControlPanel/Basics/
+Добро пожаловать в ~TiddlyWiki, нелинейную личную сетевую записную книжку.
+
+Для начала убедитесь, что у вас работает сохранение - подробные инструкции на https://tiddlywiki.com/.
+
+Затем вы можете:
+
+* Создать новые заметки, используя кнопку 'плюс' на боковой панели
+* Зайти в панель управления, используя кнопку с изображением 'шестерёнки' на боковой панели и настроить TiddlyWiki на свой вкус
+** Убрать это сообщение, изменив настройку 'заметки по умолчанию' на вкладке Основные
+* Сохранить изменения при помощи кнопки 'скачать' на боковой панели
+* Изучить подробнее WikiText
+
+!! Set up this ~TiddlyWiki
+
+<div class="tc-control-panel">
+
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
+
+See the [[control panel|$:/ControlPanel]] for more options.

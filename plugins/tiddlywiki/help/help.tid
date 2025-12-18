@@ -1,0 +1,30 @@
+title: $:/plugins/help/Buttons/help
+tags: $:/tags/PageControls
+caption: {{$:/core/images/help}} {{$:/language/Buttons/Help/Caption}}
+description: {{$:/language/Buttons/Help/Hint}}
+
+\whitespace trim
+\define help-inner()
+\whitespace trim
+<$list filter="[[$:/config/ShowHelp]get[text]] +[else[no]match[yes]]" variable="ignore">
+<$button set="$:/config/ShowHelp" setTo="no" tooltip={{$:/language/Buttons/Help/Hint}} aria-label={{$:/language/Buttons/Help/Caption}} class="""$(tv-config-toolbar-class)$ tc-selected""">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+{{$:/core/images/help}}
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/Help/Caption}}/></span>
+<%endif%>
+</$button>
+</$list>
+<$list filter="[[$:/config/ShowHelp]get[text]] +[else[no]!match[yes]]" variable="ignore">
+<$button set="$:/config/ShowHelp" setTo="yes" tooltip={{$:/language/Buttons/Help/Hint}} aria-label={{$:/language/Buttons/Help/Caption}} class=<<tv-config-toolbar-class>>>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+{{$:/core/images/help}}
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/Help/Caption}}/></span>
+<%endif%>
+</$button>
+</$list>
+\end
+<<help-inner>>

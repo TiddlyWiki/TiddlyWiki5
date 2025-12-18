@@ -1,0 +1,94 @@
+created: 20140410101941871
+modified: 20201103111438568
+tags: Learning Filters
+title: Introduction to filter notation
+type: text/vnd.tiddlywiki
+
+<<.preamble """This explains the basics of writing a [[filter|Filters]] to select a set of tiddlers. For a more technical presentation, see [[Filter Syntax]].""">>
+
+<$macrocall $name=".tip" _="""Filters do nothing if you just type them into a tiddler on their own. They need a context. An easy way to experiment with filters is to type them into the <<.advancedsearch-tab Filter>> tab of [[Advanced Search|$:/AdvancedSearch]]."""/>
+
+The simplest case is where you already know exactly which tiddlers you want. Type each title in double square brackets, with a space between each one and the next:
+
+> `[[Recipe book]] [[ScrambledEggs]] [[Mom's apple pie]]`
+
+You can omit the square brackets when a title doesn't contain any spaces:
+
+> `[[Recipe book]] ScrambledEggs [[Mom's apple pie]]`
+
+The double square brackets are actually a shorthand for this:
+
+> `[title[ScrambledEggs]]`
+
+... which gives us the <<.def "general model">> for any filter:
+
+> `[operator[parameter]]`
+
+For instance, here's how to select all the tiddlers that have been tagged <<.tag Recipe>>:
+
+> `[tag[Recipe]]`
+
+We can reverse the meaning by adding an exclamation mark `!` just before the operator. For example, we can select any tiddlers that do <<.em not>> have the <<.tag Recipe>> tag:
+
+> `[!tag[Recipe]]`
+
+Tiddlers can be filtered by other fields than just title and tags:
+
+> `[field:serving[4]]`
+
+That example will select any tiddlers that have <<.value 4>> in their <<.field serving>> field.
+
+As the word "serving" isn't a standard filter operator (and isn't likely to become one), you can safely omit the `field:` prefix:
+
+> `[serving[4]]`
+
+!Combinations
+
+The filters we've looked at so far have involved just one step each. But you can <<.def run>> several steps together like this:
+
+> `[tag[Vegetarian]!tag[soup]serving[4]]`
+
+Notice how the entire run is contained in a single pair of square brackets.
+
+A tiddler has to match <<.em all>> of the steps in a run. So the example above retrieves vegetarian recipes (other than soups) for 4 people.
+
+A sequence of separate runs will select the tiddlers that match <<.em any>> of the runs. We can use this to find recipes that serve either 3, 4 or 5 people:
+
+> `[serving[3]] [serving[4]] [serving[5]]`
+
+If we want to ignore vegetarian recipes that serve 4, we can say this:
+
+> `[serving[3]] [serving[4]!tag[Vegetarian]] [serving[5]]`
+
+By default, each run considers every tiddler in the wiki. But we can use a `+` sign to force a run to consider only the tiddlers that were selected by the preceding runs:
+
+> `[serving[3]] [serving[4]] [serving[5]] +[tag[Vegetarian]] +[sort[title]]`
+
+This selects recipes for 3, 4 or 5 people, then filters <<.em those>> to keep only the vegetarian ones, and finally sorts any that are left into alphabetical order of title.
+
+In a similar way, we can use a `-` sign to <<.em remove>> a run's tiddlers from the result so far. Here we select all vegetarian recipes apart from two:
+
+> `[tag[Vegetarian]] -[title[ScrambledEggs]] -BeansOnToast`
+
+!Special parameters
+
+The parameter of each step we've seen so far has been in square brackets. It means that ~TiddlyWiki will filter for the exact string found between the brackets. But two other kinds of bracket are possible:
+
+<<.def "Curly brackets">> `{}` mean that the parameter is a TextReference, and it will be replaced with content from another tiddler. For example, if we have a tiddler with the title <<.tid Preference>> whose content is the single word <<.value Vegetarian>>, we can say
+
+> `[tag{Preference}]`
+
+In this simplest form the TextReference will take the full content of the tiddler (in technical terms, the text field of the tiddler) and substitute it in place of the TextReference. This way the tiddler's content will become the filter parameter, just like if you have written `[tag[Vegetarian]]`. But it gives you the added flexibility to change the parameter by changing the content of the Preference tiddler.
+
+<<.def "Angle brackets">> `<>` mean that the parameter is the name of a [[variable|Variables]] whose value is to be used instead. Here we use the built-in <<.vlink currentTiddler>> variable in a filter that selects any tiddlers whose text contains the title of the current one:
+
+> `[search<currentTiddler>]`
+
+Note that these special brackets cannot be nested. It is not possible for example to write `[search{<currentTiddler>}]`.
+
+!Multiple parameters
+
+<<.from-version "5.1.23">> Some steps accept multiple parameters which are separated by a ` , ` character.
+
+> Example: `[param1],[param2]` or `<param1>,{param2}`
+

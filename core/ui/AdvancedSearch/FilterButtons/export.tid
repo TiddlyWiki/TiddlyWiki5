@@ -1,0 +1,7 @@
+title: $:/core/ui/AdvancedSearch/Filter/FilterButtons/export
+tags: $:/tags/AdvancedSearch/FilterButton
+
+\whitespace trim
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+<$macrocall $name="exportButton" exportFilter={{$:/temp/advancedsearch}} lingoBase="$:/language/Buttons/ExportTiddlers/"/>
+</$reveal>

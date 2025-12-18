@@ -1,0 +1,23 @@
+created: 20161015122718559
+modified: 20190928083018378
+tags: PluginMechanism
+title: Plugin Fields
+type: text/vnd.tiddlywiki
+
+Plugins are stored as tiddlers with the following fields:
+
+|!Field |!Description |
+|author |//(optional)// Author of plugin |
+|dependents |List of dependencies: plugins that should be installed in order for this one to work |
+|description |Description of plugin |
+|list |Names of exposed plugin information tiddlers (see below) |
+|name |Brief name of the plugin |
+|plugin-priority |//(optional)// Numerical priority (higher numbers install later, the core plugin has a priority of zero |
+|plugin-type |Generally ''plugin'', ''language'' or ''theme''; see PluginMechanism for details |
+|parent-plugin |//(optional)// <<.from-version "5.1.22">> Title of the plugin under which this plugin should be displayed as a sub-plugin in the control panel plugin chooser |
+|source |//(optional)// Source URL of plugin |
+|text |JSON encoding of the list of tiddlers comprising the plugin |
+|title |Title of plugin |
+|type |Must be ''application/json'' |
+|version |//(optional)// Version string (should conform to [ext[SemanticVersioning|http://semver.org/]] convention) |
+|platform |<<.from-version 5.4.0>> //(optional)// Set this field to ''node'' to restrict the plugin to only be loaded on the server (this is accomplished by suppressing such plugins from the various save templates) |

@@ -1,0 +1,11 @@
+color: #7bb95d
+created: 20130825145100000
+fr-title: Définitions
+modified: 20150623062320889
+tags: Reference
+title: Definitions
+type: text/vnd.tiddlywiki
+
+Voici les définitions des mots et phrases techniques employés dans cette  documentation. (elles se distinguent des [[Concepts]] propres à TiddlyWiki).
+
+<<list-links "[tag[Definitions]sort[caption]]">>

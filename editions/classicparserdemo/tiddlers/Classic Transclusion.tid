@@ -1,0 +1,12 @@
+created: 20140831105630157
+modified: 20140901082725277
+title: Classic Transclusion
+type: text/x-tiddlywiki
+
+!!Demo text:
+{{{
+<<tiddler [[Classic Parser Plugin Demo##Support for Classic macros]]>>
+}}}
+!!Demo results:
+
+<<tiddler [[Classic Parser Plugin Demo##Support for Classic macros]]>>

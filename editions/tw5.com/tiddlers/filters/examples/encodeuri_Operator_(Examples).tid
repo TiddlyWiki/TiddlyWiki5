@@ -1,0 +1,8 @@
+created: 20161017154702282
+modified: 20161017155350397
+tags: [[Operator Examples]] [[encodeuri Operator]]
+title: encodeuri Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[Title with Space]] +[encodeuri[]]">>
+<<.operator-example 2 "[[Title with Space]] [[Another title with Space]] +[encodeuri[]]">>

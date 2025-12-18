@@ -1,0 +1,8 @@
+created: 20190731080350471
+modified: 20190731080435966
+tags: [[match Operator]] [[Operator Examples]]
+title: match Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "a b c +[match[b]]">>
+<<.operator-example 2 "[match[HelloThere]]">>

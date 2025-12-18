@@ -1,0 +1,8 @@
+title: $:/core/sk-SK/readme
+
+Tento plugin obsahuje componenty jadra TiddlyWiki, vrátane:
+
+* JavaScript programových modulov
+* Ikony
+* Vzory potrebné na vytvorenie užívateľského rozhrania
+* Preložiteľné texty používané jadrom v britskej angličtine (en-GB)

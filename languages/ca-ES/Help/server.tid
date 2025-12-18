@@ -1,0 +1,37 @@
+title: $:/language/Help/server
+description: Proporciona una interfície de servidor HTTP a TiddlyWiki
+
+El servidor que inclou el TiddlyWiki5 és molt simple. Encara que és compatible amb TiddlyWeb no permet moltes de les característiques necessàries que calen per a l'ús robust de l'Internet.
+
+A l'arrel, serveix per a generar un tiddler concret. Fora de l'arrel, serveis els tiddlers individuals codificats en JSON, i permet l'ús de les operacions bàsiques HTTP per `GET`, `PUT` i `DELETE`.
+
+```
+--server <port> <tiddler-arrel> <tipus-de-contingut> <tipus-de-servidor> <usuari> <contrasenya> <host> <prefix-de-la-ruta>
+```
+
+Els paràmetres són:
+
+* ''port'' - número del port que donarà el servei (per omissió "8080")
+* ''tiddler-arrel'' - el tiddler que donarà el servei arrel (per omissió "$:/core/save/all") 
+* ''tipus-de-contingut'' - el tipus de contingut al qual s'haurà de generar el tiddler arrel (per omissió "text/plain")
+* ''tipus-de-servidor'' - el tipus de contingut amb el qual s'haurà de servir el tiddler arrel (per omissió "text/html")
+* ''usuari'' - nom de l'usuari per omissió per signar les edicions
+* ''contrasenya'' - contrasenya opcional per l'autenticació bàsica
+* ''host'' - nom de host opcional que donarà el servei (per omissió "127.0.0.1" és a dir "localhost")
+* ''prefix-de-la-ruta'' - prefix opcional de les rutes
+
+Si s'indica el paràmetre de la contrasenya el navegador demanarà un usuari i una contrasenya. La contrasenya es transmet tal qual així que no és una bona solució d'ús general.
+
+Per exemple:
+
+```
+--server 8080 $:/core/save/all text/plain text/html ElMeuUsuari c0ntran3nya
+```
+
+El nom d'usuari i la contrasenya es pot indicar com a cadenes buides si voleu indicar un host o un prefix-de-la-ruta i no us cal una contrasenya:
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+Per tal d'executar diversos servidors TiddlyWiki al mateix temps, heu d'indicar un port diferent per a cada un.

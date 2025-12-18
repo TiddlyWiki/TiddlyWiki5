@@ -1,0 +1,17 @@
+caption: Ligne horizontale
+created: 20141017091105859
+fr-title: Lignes horizontales en WikiTexte
+modified: 20220421000313978
+tags: WikiText
+title: Horizontal Rules in WikiText
+type: text/vnd.tiddlywiki
+
+Vous pouvez insérer une ligne horizontale à l'aide d'une série d'au moins trois tirets tout seuls sur une ligne<<:>>
+
+<<wikitext-example-without-html "Paragraphe précédent.
+
+---
+Paragraphe suivant.">>
+
+; Remarque
+* La ligne vide avant les `---` est nécessaire pour que la ligne horizontale soit interprétée correctement, et pas comme un [[tiret|Dashes in WikiText]].

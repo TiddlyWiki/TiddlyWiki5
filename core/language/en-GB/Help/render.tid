@@ -1,0 +1,35 @@
+title: $:/language/Help/render
+description: Renders individual tiddlers to files
+
+Render individual tiddlers identified by a filter and save the results to the specified files.
+
+Optionally, the title of a template tiddler can be specified. In this case, instead of directly rendering each tiddler, the template tiddler is rendered with the "currentTiddler" variable set to the title of the tiddler that is being rendered.
+
+A name and value for an additional variable may optionally also be specified.
+
+```
+--render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
+```
+
+* ''tiddler-filter'': A filter identifying the tiddler(s) to be rendered
+* ''filename-filter'': Optional filter transforming tiddler titles into pathnames. If omitted, defaults to `[is[tiddler]addsuffix[.html]]`, which uses the unchanged tiddler title as the filename
+* ''render-type'': Optional render type: `text/html` (the default) returns the full HTML text and `text/plain` just returns the text content (ie it ignores HTML tags and other unprintable material)
+* ''template'': Optional template through which each tiddler is rendered
+* ''name'': Name of optional variables
+* ''value'': Value of optional variables
+
+By default, the filename is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
+
+Notes:
+
+* The output directory is not cleared of any existing files
+* Any missing directories in the path to the filename are automatically created.
+* When referring to a tiddler with spaces in its title, take care to use both the quotes required by your shell and also TiddlyWiki's double square brackets: `--render "[[Motovun Jack.jpg]]"`
+* The filename filter is evaluated with the selected items being set to the title of the tiddler currently being rendered, allowing the title to be used as the basis for computing the filename. For example `[encodeuricomponent[]addprefix[static/]]` applies URI encoding to each title, and then adds the prefix `static/`
+* Multiple ''name''/''value'' pairs can be used to pass more than one variable
+* The `--render` command is a more flexible replacement for both the `--rendertiddler` and `--rendertiddlers` commands, which are deprecated
+
+Examples:
+
+* `--render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'` -- renders all non-system tiddlers as files in the subdirectory "tiddlers" with URL-encoded titles and the extension HTML
+* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- renders the tiddlers tagged "HelloThere" to a JSON file named "tiddlers.json"

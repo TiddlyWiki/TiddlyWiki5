@@ -1,0 +1,13 @@
+caption: jsontiddler
+created: 20170317140130417
+modified: 20220427171228844
+tags: Macros [[Core Macros]]
+title: jsontiddler Macro
+type: text/vnd.tiddlywiki
+
+The <<.def jsontiddler>> [[macro|Macros]] returns the fields of a single tiddler in [[JSON|JavaScript Object Notation]] form. See [[JSON in TiddlyWiki]] for an overview.
+
+!! Parameters
+
+;title
+: The title of a tiddler

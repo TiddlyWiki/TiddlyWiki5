@@ -1,0 +1,17 @@
+caption: levenshtein
+created: 20230304181639768
+modified: 20230304181642365
+op-purpose: determine the Levenshtein distance of the input title(s) and a given string
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: a string
+op-parameter-name: S
+op-output: the Levenshtein distance between the input title(s) and <<.place S>>
+tags: [[Filter Operators]] [[String Operators]]
+title: levenshtein Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.6">>
+
+The Levenshtein distance is a metric for measuring the difference between two strings. Informally, the Levenshtein distance between two strings is the //minimum// number of single-character edits required to change one string into the other.
+
+<<.operator-examples "levenshtein">>

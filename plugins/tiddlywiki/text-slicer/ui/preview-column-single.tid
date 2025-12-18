@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/text-slicer/ui/preview-column/single
+
+<$list filter="[toc-type[document]!has[draft.of]sort[title]limit[1]]" template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/document"/>

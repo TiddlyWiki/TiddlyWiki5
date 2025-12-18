@@ -1,0 +1,6 @@
+created: 20140912145543340
+modified: 20140912145610020
+title: SampleNotification
+type: text/vnd.tiddlywiki
+
+{{$:/core/images/done-button}} This is a notification!

@@ -1,0 +1,16 @@
+title: $:/language/Filters/
+
+AllTiddlers: 所有条目，不含系统条目
+RecentSystemTiddlers: 最近修改的条目，包含系统条目
+RecentTiddlers: 最近修改的条目
+AllTags: 所有标签，不含系统标签
+Missing: 缺失条目
+Drafts: 草稿条目
+Orphans: 孤立条目
+SystemTiddlers: 系统条目
+ShadowTiddlers: 默认条目
+OverriddenShadowTiddlers: 被覆盖的默认条目
+SessionTiddlers: 自维基加载后修改的条目
+SystemTags: 系统标签
+StoryList: 故事河中的条目，不含 ~$:/AdvancedSearch
+TypedTiddlers: 非维基文字条目

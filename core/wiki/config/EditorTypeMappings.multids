@@ -1,0 +1,11 @@
+title: $:/config/EditorTypeMappings/
+
+image/gif: bitmap
+image/webp: bitmap
+image/heic: bitmap
+image/heif: bitmap
+image/jpeg: bitmap
+image/jpg: bitmap
+image/png: bitmap
+image/x-icon: bitmap
+text/vnd.tiddlywiki: text

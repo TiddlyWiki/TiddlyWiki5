@@ -1,0 +1,26 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: متقدم
+Advanced/PluginInfo/Empty/Hint: لا شيء
+Advanced/PluginInfo/Heading: تفاصيل البرنامج المساعد
+Advanced/PluginInfo/Hint: يحتوي هذا البرنامج المساعد على التدلرز الخفية التالية:
+
+Advanced/ShadowInfo/Heading: حالة الظل
+Advanced/ShadowInfo/NotShadow/Hint: التدلر <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> ليس تدلر خفي
+Advanced/ShadowInfo/OverriddenShadow/Hint: يتم تجاوزه من قبل تدلر عادي
+
+Advanced/ShadowInfo/Shadow/Hint: التدلر  <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> هو تدلر خفي
+Advanced/ShadowInfo/Shadow/Source: يتم تعريفه في البرنامج المساعد
+ <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Fields/Caption: حقول
+List/Caption: قائمة
+List/Empty: هذا التدلر ليس لديه قائمة
+
+Listed/Caption: مدرج في قائمة
+Listed/Empty: لم يتم سرد هذا التدلر في قائمة من قبل أي تدلر اخر
+
+References/Caption: مراجع
+References/Empty: لا يوجد تدلرز مرتبطة بهذا
+Tagging/Caption: توسيم
+Tagging/Empty: لا يوجد تدلر موسوم بهذا التدلر
+Tools/Caption: أدوات

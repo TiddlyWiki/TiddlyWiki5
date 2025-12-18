@@ -1,0 +1,9 @@
+created: 20170629074200301
+modified: 20170629074520393
+tags: Variables [[Core Variables]]
+title: tv-story-list Variable
+type: text/vnd.tiddlywiki
+
+The <<.def tv-story-list>> [[variable|Variables]] is assigned by the [[NavigatorWidget]] to contain the title of the tiddler containing the current story list.
+
+Compare <<.vlink tv-history-list>>.

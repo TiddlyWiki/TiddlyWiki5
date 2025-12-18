@@ -1,0 +1,34 @@
+title: $:/language/Import/
+
+Editor/Import/Heading: 画像を取り込み、エディターに挿入します。
+Imported/Hint: 次の Tiddler をインポートしました:
+Listing/Cancel/Caption: キャンセル
+Listing/Cancel/Warning: インポートをキャンセルしてよろしいですか？
+Listing/Hint: これらの Tiddler はすぐにインポートできます:
+Listing/Import/Caption: インポート
+Listing/Preview: プレビュー:
+Listing/Preview/Diff: 差分
+Listing/Preview/DiffFields: 差分 (項目)
+Listing/Preview/Fields: 項目
+Listing/Preview/Text: テキスト
+Listing/Preview/TextRaw: テキスト (Raw)
+Listing/Rename/CancelRename: キャンセル
+Listing/Rename/ConfirmRename] Tiddler の名前を変更
+Listing/Rename/OverwriteWarning: このタイトルの Tiddler はすでに存在しています。
+Listing/Rename/Prompt: 変更名:
+Listing/Rename/Tooltip: インポート前に Tiddler の名前を変更する
+Listing/Select/Caption: 選択
+Listing/Status/Caption: ステータス
+Listing/Title/Caption: タイトル
+Upgrader/Plugins/Suppressed/Incompatible: 互換性のないまたは廃止によりブロックされたプラグイン
+Upgrader/Plugins/Suppressed/Version: ブロックされたプラグイン（インポートされる <<incoming>> プラグインが存在している <<existing>> プラグインより古いため）
+Upgrader/Plugins/Upgraded: プラグインは <<incoming>> から <<upgraded>> にアップグレードされました
+Upgrader/State/Suppressed: ブロックされた一時 Tiddler
+Upgrader/System/Alert: コアモジュールの Tiddler を上書きするTiddlerをインポートしようとしています。システムが不安定になる可能性があるため、推奨しません。
+Upgrader/System/Disabled: システム Tiddler の無効化
+Upgrader/System/Suppressed: システム Tiddler のブロック
+Upgrader/System/Warning: コアモジュール Tiddler
+Upgrader/ThemeTweaks/Created: <$text text=<<from>>/> から移動した Theme Tweak
+Upgrader/Tiddler/Disabled: 無効化した Tiddler
+Upgrader/Tiddler/Selected: 選択した Tiddler
+Upgrader/Tiddler/Unselected: 選択していない Tiddler

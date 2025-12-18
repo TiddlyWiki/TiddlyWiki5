@@ -1,0 +1,10 @@
+created: 20150117152418000
+modified: 20150124202920000
+tags: Concepts
+title: Title Selection
+
+A <<.def "title selection">> is an ordered set of tiddler titles (or similar strings), in which no title appears more than once.
+
+Title selections are important in [[filter|Filters]] processing.
+
+The simplest way to write one down is as a [[title list|Title List]].

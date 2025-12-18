@@ -1,0 +1,8 @@
+title: $:/core/ui/EditorToolbar/size
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/size
+caption: {{$:/language/Buttons/Size/Caption}}
+description: {{$:/language/Buttons/Size/Hint}}
+condition: [<targetTiddler>is[image]] -[<targetTiddler>type[image/svg+xml]]
+dropdown: $:/core/ui/EditorToolbar/size-dropdown
+

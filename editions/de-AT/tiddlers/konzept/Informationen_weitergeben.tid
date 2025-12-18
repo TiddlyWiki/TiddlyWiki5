@@ -1,0 +1,20 @@
+created: 20140908163900000
+modified: 20150518141847244
+origin: https://tiddlywiki.com/#Sharing%20your%20tiddlers%20with%20others
+tags: Konzept
+title: Informationen weitergeben
+type: text/vnd.tiddlywiki
+
+Es gibt viele Möglichkeiten Wikis mit Anderen zu teilen:
+
+* ~TiddlyWiki kann sehr leicht als Anhang in einem e-mail verschickt werden.
+
+* Sie können ein ~TiddlyWiki online verlinken: 
+** Als "URL Link" direkt auf die Datei
+** Als [[Permalink]], das direkt einen Tiddler in einem TW aktiviert.
+** Als [[Permaview]], der mehrere Tiddler aus einem TW öffnet.
+
+* "Drag and Drop" [[importieren von Tiddlern|Importieren von Tiddlern]] aus anderen ~TiddlyWiki Dateien.
+
+* ~TiddlyWiki kann sehr einfach [[über Filesharing-Dienste|TiddlyWiki mit Dropbox teilen]] verbreitet werden. zB: Dropbox
+

@@ -1,0 +1,28 @@
+caption: ~TiddlyServer
+color: #f06292
+community-author: Arlen Beiler
+created: 20171109171415540
+delivery: DIY
+description: An extension to TiddlyWiki's Node.js server
+method: sync
+modified: 20210106151027596
+tags: Linux Mac Windows Saving [[Other Resources]]
+title: TiddlyServer by Arlen Beiler
+type: text/vnd.tiddlywiki
+url: https://github.com/Arlen22/TiddlyServer
+
+An extension to the Node.js configuration of TiddlyWiki that adds support for static attachments and for working with multiple wikis at the same time.
+
+{{!!url}}
+
+<<<
+TiddlyServer 2.0 takes the server command of TiddlyWiki on NodeJS and adds it to a static file server. This means you can load and serve any TiddlyWiki data folder in the same way you can serve a single file TiddlyWiki.
+
+But you don't need to serve files and folders from just one place, you can serve them from multiple places anywhere on your harddrive (literally anywhere NodeJS can stat, readdir, and readFile). You can even organise them into virtual folders (aka aliases in Apache and mounts in Express).
+
+The main point, of course, is that you can actually edit your files, not just look at them. Single file TiddlyWikis use the put saver, which needs to be patched using a bookmarklet included on the index page. The instructions for this are below under the heading "One thing that needs to be noted".
+
+And, of course, you can edit data folder tiddlywikis just like you were running node tiddlywiki.js data --server, except that you run it on the path that you found it at (e.g. http://localhost/personal/notes/). You can have as many data folders open as you want, they don't conflict (though they will each take memory).
+
+Data folders store individual tiddlers instead of entire wikis. They take less disk space as they also do not store the core and plugins. This means they also save much quicker, especially over the internet. They also save immediately (within 10 seconds or so) and they save drafts.
+<<<

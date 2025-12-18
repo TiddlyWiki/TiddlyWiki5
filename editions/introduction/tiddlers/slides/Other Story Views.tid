@@ -1,0 +1,12 @@
+title: Other Story Views
+
+Here's an experimental view that displays tiddlers sideways:
+
+<$scrollable class="tc-scrollable-storyview">
+<div class="tc-scrollable-storyview-inner">
+<$list filter="[list[$:/StoryList]] -[[Other Story Views]]" template="$:/core/ui/ViewTemplate" storyview="cecily"/>
+</div>
+</$scrollable>
+
+Next, tiddlers can be controlled with [[Toolbars]].
+

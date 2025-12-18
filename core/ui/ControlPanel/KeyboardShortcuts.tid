@@ -1,0 +1,151 @@
+title: $:/core/ui/ControlPanel/KeyboardShortcuts
+tags: $:/tags/ControlPanel
+caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/KeyboardShortcuts/
+
+\define new-shortcut(title)
+\whitespace trim
+<div class="tc-dropdown-item-plain">
+<$edit-shortcut tiddler="$title$" placeholder={{$:/language/ControlPanel/KeyboardShortcuts/Add/Prompt}} focus="true" style="width:auto;"/>
+&#32;
+<$button>
+<<lingo Add/Caption>>
+<$action-listops
+	$tiddler="$(shortcutTitle)$"
+	$field="text"
+	$subfilter="[{$title$}]"
+/>
+<$action-deletetiddler
+	$tiddler="$title$"
+/>
+</$button>
+</div>
+\end
+
+\define shortcut-list-item(caption)
+\whitespace trim
+<td>
+</td>
+<td style="text-align:right;font-size:0.7em;">
+<<lingo Platform/$caption$>>
+</td>
+<td>
+<div style="position:relative;">
+<$button popup=<<qualify "$:/state/dropdown/$(shortcutTitle)$">> class="tc-btn-invisible">
+{{$:/core/images/edit-button}}
+</$button>
+&#32;
+<$macrocall $name="displayshortcuts" $output="text/html" shortcuts={{$(shortcutTitle)$}} prefix="<kbd>" separator="</kbd> <kbd>" suffix="</kbd>"/>
+
+<$reveal state=<<qualify "$:/state/dropdown/$(shortcutTitle)$">> type="popup" position="below" animate="yes">
+<div class="tc-block-dropdown-wrapper">
+<div class="tc-block-dropdown tc-edit-type-dropdown tc-popup-keep">
+<$list
+	filter="[list[$(shortcutTitle)$!!text]sort[title]]"
+	variable="shortcut"
+	emptyMessage="<div class='tc-dropdown-item-plain'>//<<lingo NoShortcuts/Caption>>//</div>">
+<div class="tc-dropdown-item-plain">
+<$button class="tc-btn-invisible" tooltip={{$:/language/ControlPanel/KeyboardShortcuts/Remove/Hint}}>
+<$action-listops
+	$tiddler="$(shortcutTitle)$"
+	$field="text"
+	$subfilter="+[remove<shortcut>]"
+/>
+<small>{{$:/core/images/close-button}}</small>
+</$button>
+&#32;
+<kbd>
+<$macrocall $name="displayshortcuts" $output="text/html" shortcuts=<<shortcut>>/>
+</kbd>
+</div>
+</$list>
+<hr/>
+<$macrocall $name="new-shortcut" title=<<qualify "$:/state/new-shortcut/$(shortcutTitle)$">>/>
+</div>
+</div>
+</$reveal>
+</div>
+</td>
+\end
+
+\define shortcut-list(caption,prefix)
+\whitespace trim
+<tr>
+<$list filter="[[$prefix$$(shortcutName)$]]" variable="shortcutTitle">
+<<shortcut-list-item "$caption$">>
+</$list>
+</tr>
+\end
+
+\define shortcut-editor()
+\whitespace trim
+<<shortcut-list "All" "$:/config/shortcuts/">> 
+<<shortcut-list "Mac" "$:/config/shortcuts-mac/">>
+<<shortcut-list "NonMac" "$:/config/shortcuts-not-mac/">>
+<<shortcut-list "Linux" "$:/config/shortcuts-linux/">>
+<<shortcut-list "NonLinux" "$:/config/shortcuts-not-linux/">>
+<<shortcut-list "Windows" "$:/config/shortcuts-windows/">>
+<<shortcut-list "NonWindows" "$:/config/shortcuts-not-windows/">>
+\end
+
+\define shortcut-preview()
+<$macrocall $name="displayshortcuts" $output="text/html" shortcuts={{$(shortcutPrefix)$$(shortcutName)$}} prefix="<kbd>" separator="</kbd> <kbd>" suffix="</kbd>"/>
+\end
+
+\define shortcut-item-inner()
+\whitespace trim
+<tr>
+<td>
+<$reveal type="nomatch" state=<<dropdownStateTitle>> text="open">
+<$button class="tc-btn-invisible">
+<$action-setfield
+	$tiddler=<<dropdownStateTitle>>
+	$value="open"
+/>
+{{$:/core/images/right-arrow}}
+</$button>
+</$reveal>
+<$reveal type="match" state=<<dropdownStateTitle>> text="open">
+<$button class="tc-btn-invisible">
+<$action-setfield
+	$tiddler=<<dropdownStateTitle>>
+	$value="close"
+/>
+{{$:/core/images/down-arrow}}
+</$button>
+</$reveal>
+&#32;
+''<$text text=<<shortcutName>>/>''
+</td>
+<td>
+<$transclude tiddler="$:/config/ShortcutInfo/$(shortcutName)$"/>
+</td>
+<td>
+<$list filter="$:/config/shortcuts/ $:/config/shortcuts-mac/ $:/config/shortcuts-not-mac/ $:/config/shortcuts-linux/ $:/config/shortcuts-not-linux/ $:/config/shortcuts-windows/ $:/config/shortcuts-not-windows/" variable="shortcutPrefix">
+<<shortcut-preview>>
+</$list>
+</td>
+</tr>
+<$set name="dropdownState" value={{$(dropdownStateTitle)$}}>
+<$list filter="[<dropdownState>match[open]]" variable="listItem">
+<<shortcut-editor>>
+</$list>
+</$set>
+\end
+
+\define shortcut-item()
+\whitespace trim
+<$set name="dropdownStateTitle" value=<<qualify "$:/state/dropdown/keyboardshortcut/$(shortcutName)$">>>
+<<shortcut-item-inner>>
+</$set>
+\end
+\whitespace trim
+
+<table>
+<tbody>
+<$list filter="[all[shadows+tiddlers]removeprefix[$:/config/ShortcutInfo/]]" variable="shortcutName">
+<<shortcut-item>>
+</$list>
+</tbody>
+</table>

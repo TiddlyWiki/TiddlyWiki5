@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/upgrade/set-auto-open-on-import
+tags: $:/tags/Macro
+
+\define tv-auto-open-on-import()
+no
+\end

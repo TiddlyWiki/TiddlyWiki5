@@ -1,0 +1,20 @@
+created: 20180409142128584
+modified: 20180409142128584
+tags: HookMechanism
+title: Hook: th-server-command-post-start
+type: text/vnd.tiddlywiki
+
+This hook allows plugins to extend the TiddlyWiki server command after it initializes. The two 
+most obvious use cases are adding routes (such as an attachments folder for external files) 
+to the SimpleServer instance and adding a websockets handler to the HTTP server. 
+
+Hook function parameters: 
+
+* SimpleServer instance
+** Defined in core/modules/commands/server.js
+* NodeJS HTTP Server instance
+** See the NodeJS docs at [ext[https://nodejs.org/docs/latest-v8.x/api/http.html#http_class_http_server]]
+* Name of server invoking this hook (for special handling of the NodeJS HTTP server instance argument). 
+** Current known values: `tiddlywiki`, `tiddlyserver`. 
+
+Return value is ignored.

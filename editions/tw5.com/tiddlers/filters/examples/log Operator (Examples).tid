@@ -1,0 +1,14 @@
+created: 20201120041503515
+modified: 20201120042024813
+tags: [[Operator Examples]] [[log Operator]]
+title: log Operator (Examples)
+type: text/vnd.tiddlywiki
+
+Logarithm of `8` with base `2`:
+<<.operator-example 1 "[[8]log[2]]">>
+
+Logarithm of `100` with base `10`:
+<<.operator-example 2 "[[100]log[10]]">>
+
+Natural logarithm of 10 (base `e`), equivalent to `ln(10)` in mathematics:
+<<.operator-example 3 "[[10]log[]]">>

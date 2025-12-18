@@ -1,0 +1,26 @@
+title: $:/core/ui/EditorToolbar/stamp-dropdown
+
+<$macrocall $name="list-tagged-draggable" tag="$:/tags/TextEditor/Snippet" subFilter="!is[draft]" itemTemplate="$:/core/ui/EditorToolbar/StampDropdown/ItemTemplate"/>
+
+----
+
+<$button tag="a">
+
+<$action-sendmessage
+	$message="tm-new-tiddler"
+	tags="$:/tags/TextEditor/Snippet"
+	caption={{$:/language/Buttons/Stamp/New/Title}}
+	text={{$:/language/Buttons/Stamp/New/Text}}
+/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+<em>
+
+<$text text={{$:/language/Buttons/Stamp/Caption/New}}/>
+
+</em>
+
+</$button>

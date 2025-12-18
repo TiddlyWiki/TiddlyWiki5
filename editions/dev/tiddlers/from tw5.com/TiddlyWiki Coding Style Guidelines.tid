@@ -1,0 +1,43 @@
+modified: 20150430153333808
+title: TiddlyWiki Coding Style Guidelines
+tags: dev
+
+! Motivation
+
+TiddlyWiki is a large project with many interested parties. It benefits everyone if the code is as easy to read as possible. A key part of that it must be written and laid out consistently -- the code should read as though it were written by a single author.
+
+! Guidelines
+
+This list of guidelines isn't exhaustive but captures some of the common problems. The ultimate guide is the existing TiddlyWiki code-base. There are still some places where the coding guidelines aren't used consistently within the core; pull requests are welcome to help resolve those issues.
+
+!! Tabs and whitespace
+
+TiddlyWiki uses 4-character tabs for indenting.
+
+One blank line is used to separate blocks of code. Occasional blank lines are permitted within blocks for clarity, but should be avoided unless they solve a specific readability problem.
+
+!! Layout of basic constructs
+
+See the following example for layout of basic JavaScript constructs:
+
+```js
+/*
+Multiline comments are used to introduce a block of code such as a function definition
+*/
+function demoFunction(param,more) {
+	// Proper sentence capitalisation for comments; prefer strict equality checks
+	if(condition === "something") {
+		// Always use braces, even when optional; no space between "if" and the brackets; always spaces around binary operators
+		something = somethingElse;
+		myOtherFunction(one,two); // No whitespace within function parameters
+		do {
+			myCondition.explore(); // Always use semicolons
+		} while(myCondition < worsens);
+	}	
+}
+
+```
+
+!! Strings
+
+Double quotes are preferred over single quotes for string literals.

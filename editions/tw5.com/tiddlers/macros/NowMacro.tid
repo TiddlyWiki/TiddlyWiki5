@@ -1,0 +1,22 @@
+caption: now
+created: 20141008141616791
+modified: 20210629215024061
+tags: Macros [[Core Macros]]
+title: now Macro
+type: text/vnd.tiddlywiki
+
+The <<.def now>> [[macro|Macros]] returns the current date and time in a specified [[format|DateFormat]].
+
+The value doesn't update automatically, like a ticking clock. It updates whenever the macro call is rendered, such as when the containing tiddler's display needs to be refreshed for some other reason.
+
+!! Parameters
+
+;format
+: A string specifying the desired [[format|DateFormat]], defaulting to `0hh:0mm, DDth MMM YYYY`
+
+''Note'': The format string `[UTC]YYYY0MM0DD0hh0mm0ssXXX` will return a date string representing the UTC time-stamp as it is used in the ~TiddlyWiki `created` and `modified` time-stamp fields.
+
+<<.from-version 5.2.0>><<.tip "You can now pass literal parameters to the `now` macro in filters. For example, this filter will return all tiddlers created today: `[all[tiddlers]] :filter[get[created]format:date[YYYY0MM0DD]match<now YYYY0MM0DD>]`">>
+
+
+<<.macro-examples "now">>

@@ -1,0 +1,15 @@
+created: 20150221151358000
+fr-title: Macro dumpvariables (Exemples)
+modified: 20150619161448208
+tags: [[dumpvariables Macro]] [[Macro Examples]]
+title: dumpvariables Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1"
+eg="""<$set name="EXEMPLE" value="123.$(EXAMPLE2)$.789">
+<$set name="EXEMPLE2" value="456">
+
+<<dumpvariables>>
+
+</$set>
+</$set>"""/>

@@ -1,0 +1,43 @@
+caption: Contact Information Options
+tags: Options
+title: $:/options/Contact Information Options
+
+<table>
+<tr>
+	<td>
+		<$checkbox tiddler='$:/settings/Resume Configuration' field='show_name' checked=true unchecked=false>Show Name</$checkbox>
+	</td>
+	<td>
+	</td>
+</tr>
+<tr>
+	<td>
+		<$checkbox tiddler='$:/settings/Resume Configuration' field='show_address' checked=true unchecked=false>Show Address</$checkbox>
+	</td>
+	<td>
+	</td>
+</tr>
+<tr>
+	<td>
+		<$checkbox tiddler='$:/settings/Resume Configuration' field='show_phone_number' checked=true unchecked=false>Show Phone Number</$checkbox>
+	</td>
+	<td>
+	</td>
+</tr>
+<tr>
+	<td>
+		<$checkbox tiddler='$:/settings/Resume Configuration' field='show_email_address' checked=true unchecked=false>Show Email Address</$checkbox>
+	</td>
+	<td>
+	</td>
+</tr>
+<tr>
+	<td>
+		<$checkbox tiddler='$:/settings/Resume Configuration' field='show_date' checked=true unchecked=false>Show Date</$checkbox>
+	</td>
+		<tr><td><$radio tiddler='$:/settings/Resume Configuration' field='show_current_date' value=true>Use Current Date</$radio>: <<now "DDD DDth MMM YYYY">></td></tr>
+		<tr><td><$radio tiddler='$:/settings/Resume Configuration' field='show_current_date' value=false>Enter Date</$radio>: <$edit-text tiddler='$:/data/Personal Information' field='entered_date'/></td></tr>
+</tr>
+</table>
+
+<$transclude tiddler=ResumeHeaderTemplate mode=block/>

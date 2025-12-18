@@ -1,0 +1,10 @@
+created: 20140819110529062
+modified: 20140826110529062
+tags: Messages
+title: WidgetMessage: tm-browser-refresh
+type: text/vnd.tiddlywiki
+caption: tm-browser-refresh
+
+The `tm-browser-refresh` message refreshes the page, causing the re-initialisation of any plugin tiddlers. It does not require any properties on the `event` object.
+
+The refresh message is usually generated with the ButtonWidget and is handled by the core.

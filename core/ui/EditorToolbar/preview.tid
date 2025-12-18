@@ -1,0 +1,16 @@
+title: $:/core/ui/EditorToolbar/preview
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/preview-open
+custom-icon: yes
+caption: {{$:/language/Buttons/Preview/Caption}}
+description: {{$:/language/Buttons/Preview/Hint}}
+condition: [<targetTiddler>]
+button-classes: tc-text-editor-toolbar-item-start-group
+shortcuts: ((preview))
+
+\whitespace trim
+<span>
+	<$transclude $tiddler={{{ [<edit-preview-state>match[yes]then[$:/core/images/preview-open]else[$:/core/images/preview-closed]] }}} />
+</span>
+<$action-setfield $tiddler=<<editPreviewStateTiddler>> $value={{{ [<editPreviewStateTiddler>get[text]toggle[yes],[no]] }}} />
+<$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/>

@@ -1,0 +1,11 @@
+created: 20140923201646576
+fr-title: Osmosoft et TiddlySpace
+modified: 20150624092502365
+title: Osmosoft and TiddlySpace
+type: text/vnd.tiddlywiki
+
+Je constituais une équipe chez [[BT]] sous le nom [[Osmosoft]]. Nous avions comme objectif d'évangéliser les bénéfices de l'//open source// et d'aider d'autres équipes à réaliser ces bénéfices en pratique. Nous nous sommes aussi rendu compte qu'il était nécessaire d'évangéliser l'usage du Web en général, et les standards web en particullier.
+
+Notre approche était de privilégier la démonstration sur le discours. Nous avons travaillé avec la communauté <<tw>> pour étendre l'écosystème, et nous avons construit de nombreux systèmes internes pour BT (certains basés sur <<tw>>, d'autres non).
+
+La principale contribution d'[[Osmosoft]] à la communauté <<tw>> fut la création de TiddlyWeb et TiddlySpace. TiddlyWeb était un serveur robuste, capable de servir des tiddlers sur l'Internet, mais aussi de composer des vues <<tw>> à partir de ces tiddlers. Quant à TiddlySpace, il s'agissait d'une tentative pour packager TiddlyWeb de façon plus directement utilisable.

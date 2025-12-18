@@ -1,0 +1,15 @@
+caption: Constructores de selección
+created: 20150117204109000
+es-title: Constructores de selección
+modified: 20160420183010734
+tags: Filters
+title: Selection Constructors
+type: text/vnd.tiddlywiki
+
+El output de un [[paso|Filter Step]] depende de su [[operador|Filter Operators]]:
+
+* La mayoría de operadores obtienen su output a partir del input. Por ejemplo, muchos devuelven un subconjunto del input, cumpliendo así realmente con la función de <<.word filtros>>, al reducir el output de la instrucción que los contiene. Estos operadores se llaman <<.def "modificadores de selección">>.
+
+* Unos pocos operadores, sin embargo, ignoran el input y generan un output independiente. A estos se les llama <<.def "constructores de selección">>, porque construyen una [[selección|Title Selection]] totalmente nueva.
+
+Un buen ejemplo de constructor es <<.olink title>>. El output de `[title[A]title[B]]` es <<.tid B>>, mientras que <<.olink field>> es un modificador, por lo que `[title[A]field:title[B]` no genera output alguno.

@@ -1,0 +1,9 @@
+created: 20130822173400000
+modified: 20211124215615812
+tags: Features
+title: Scalability
+type: text/vnd.tiddlywiki
+
+You might expect that TiddlyWiki's architecture as a SinglePageApplication would make it unsuitable for large amounts of data. In fact, TiddlyWiki users regularly work with files that are tens or even over a hundred megabytes without problems - and successful experiments have been done up into the gigabytes.
+
+See [[performance tips|Performance]] for large wikis.

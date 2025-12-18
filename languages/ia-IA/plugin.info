@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/ia-IA",
+	"name": "ia-IA",
+	"plugin-type": "language",
+	"description": "Interlingua (Interlingua)",
+	"author": "Thomas Breinstrup",
+	"core-version": ">=5.0.8"
+}

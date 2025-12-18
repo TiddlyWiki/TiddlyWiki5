@@ -1,0 +1,78 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: avancerad sök
+AdvancedSearch/Hint: Avancerad sök
+Cancel/Caption: avbryt
+Cancel/Hint: Ångra ändringarna för denna tiddler
+Clone/Caption: Kopiera
+Clone/Hint: Kopiera denna tiddler
+Close/Caption: stäng
+Close/Hint: Stäng denna tiddler
+CloseAll/Caption: stäng alla
+CloseAll/Hint: Stäng alla tiddlers
+CloseOthers/Caption: stäng andra
+CloseOthers/Hint: Stäng alla andra tiddler
+ControlPanel/Caption: kontrollpanel
+ControlPanel/Hint: Öppna kontrollpanelen
+Delete/Caption: ta bort
+Delete/Hint: ta bort denna tiddler
+Edit/Caption: redigera
+Edit/Hint: Redigera denna tiddler
+Encryption/Caption: kryptering
+Encryption/Hint: Ställ in eller rensa lösenordet för att kunna spara denna wiki
+Encryption/ClearPassword/Caption: rensa lösenord
+Encryption/ClearPassword/Hint: Rensa lösenordet för att kunna spara denna wikin utan kryptering
+Encryption/SetPassword/Caption: ställ in lösenord
+Encryption/SetPassword/Hint: Ställ in ett lösenord fö ratt spara denna wikin med kryptering
+ExportPage/Caption: exportera alla
+ExportPage/Hint: Export all tiddlers
+ExportTiddler/Caption: exportera tiddler
+ExportTiddler/Hint: Exportera tiddler
+ExportTiddlers/Caption: exportera tiddlers
+ExportTiddlers/Hint: Exportera tiddlers
+FullScreen/Caption: fullskärm
+FullScreen/Hint: Slå på/av fullskärmsläge
+Help/Caption: hjälp
+Help/Hint: Show help panel
+Import/Caption: importera
+Import/Hint: Importera filer
+Info/Caption: info
+Info/Hint: Visa information för denna tiddler
+Home/Caption: hem
+Home/Hint: Öppna standard-tiddlers
+Language/Caption: språk
+Language/Hint: Välj visningsspråk
+More/Caption: mer
+More/Hint: Mer val
+NewHere/Caption: ny här
+NewHere/Hint: Skapa en ny tiddler taggad med denna tiddlers rubrik
+NewJournal/Caption: ny journal
+NewJournal/Hint: Skapa en ny journal-tiddler
+NewJournalHere/Caption: ny journal här
+NewJournalHere/Hint: Skapa en ny journal-tiddler taggad med denna tiddlers rubrik
+NewTiddler/Caption: ny tiddler
+NewTiddler/Hint: Skapa en ny tiddler
+OpenWindow/Caption: öppna i nytt fönster
+OpenWindow/Hint: Öppna tiddler i ett nytt fönster
+Palette/Caption: palett
+Palette/Hint: Välj färgpalett
+Permalink/Caption: permalänk
+Permalink/Hint: Ställ in webbläsarens adressfält för en direktlänk till denna tiddler
+Permaview/Caption: permavy
+Permaview/Hint: Ställ in webbläsarens adressfält för en direktlänk till alla tiddlers för denna artikeln
+Refresh/Caption: uppdatera
+Refresh/Hint: Utför en fullständig uppdatering av wikin
+Save/Caption: ok
+Save/Hint: Godkänn ändringar för denna tiddler
+SaveWiki/Caption: spara ändringar
+SaveWiki/Hint: Spara ändringar
+StoryView/Caption: artikelvy
+StoryView/Hint: Välj visualisering för artikelvyn
+HideSideBar/Caption: göm sidofält
+HideSideBar/Hint: Göm sidofält
+ShowSideBar/Caption: visa sidofält
+ShowSideBar/Hint: Visa sidofält
+TagManager/Caption: tagghanteraren
+TagManager/Hint: Öppna tagghanteraren
+Theme/Caption: tema
+Theme/Hint: Välj visningstema

@@ -1,0 +1,12 @@
+created: 20131128075743966
+fr-title: Philosophie des tiddlers
+modified: 20220220004339779
+tags: Learning
+title: Philosophy of Tiddlers
+type: text/vnd.tiddlywiki
+
+Lorsqu'on enregistre et organise des informations, on se donne pour objectif de pouvoir les réutiliser plus tard. La valeur d'une information conservée est directement proportionnelle à la facilité avec laquelle on peut la réutiliser.
+
+La philosophie des [[tiddlers|Tiddlers]] consiste à maximiser les possibilités de réutilisation en découpant l'information en unités sémantiques aussi petites que possible, grâce à une [[modélisation riche des relations entre elles|Structuring TiddlyWiki]]. On utilise ensuite l'agrégation et la composition pour tisser les fragments entre eux afin de construire des déroulés cohérents.
+
+<<tw>> a pour ambition de proposer une algèbre pour les tiddlers<<dp>> une manière concise d'exprimer et d'explorer les relations entre les diverses bribes d'information.

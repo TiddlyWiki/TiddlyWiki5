@@ -1,0 +1,20 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: Liste
+Filter/Caption: Filter
+Filter/Hint: Søg med et [[filterudtryk|https://tiddlywiki.com/static/Filters.html]]
+Filter/Matches: //<small><<resultCount>> træffere</small>//
+Matches: //<small><<resultCount>> træffere</small>//
+Matches/All: Alle træffere:
+Matches/Title: Titel træffere:
+Search: Søg
+Search/TooShort: Søge tekst for kort
+Shadows/Caption: Skygger
+Shadows/Hint: Søg i skyggetiddlere
+Shadows/Matches: //<small><<resultCount>> træffere</small>//
+Standard/Caption: Standard
+Standard/Hint: Søg i standardtiddlere
+Standard/Matches: //<small><<resultCount>>træffere</small>//
+System/Caption: System
+System/Hint: Søg i systemtiddlere
+System/Matches: //<small><<resultCount>>træffere</small>//

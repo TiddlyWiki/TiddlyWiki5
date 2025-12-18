@@ -1,0 +1,22 @@
+chapter.of: Microkernel Architecture
+created: 20140708084103508
+modified: 20140715094857594
+sub.num: 3
+tags: doc [[Microkernel Architecture]]
+title: Module System
+
+After the boot kernel provides the functions used to load tiddlers, the rest of the TiddlyWiki application is loaded as modules.
+A module is a tiddler which has the type ``application/javascript`` and contains CommonJS compatible JavaScript code. This means a single module provides its public structures and functions in a variable called ``export``. Other modules can obtain these structures and functions by using a global ``require`` function.
+
+```js
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
+// ...
+ButtonWidget.prototype = new Widget();
+```
+
+In most cases these module tiddlers are packed into a plug-in.
+Following the "everything is a tiddler" concept, a plug-in is a tiddler, which contains a bunch of other tiddlers. These tiddlers are first converted into a JSON structure which then becomes the body of the plug-in tiddler.
+This is not restricted to module tiddlers. A plug-in can contain any tiddlers. This way a developer can put for example simple modules, widgets, UI parts written with WikiText, even new filter operators or extensions to the WikiText parser into a plug-in tiddler. In fact the whole TW core is provided as a single plug-in. Tiddlers provided in a plug-in are called shadow tiddlers and can not be edited. Instead, when trying to edit a shadow tiddler, a new tiddler with the same name is created which then "overrides" the shadow tiddler.
+
+Instead of requiring a specific module directly, a module developer can specify the type of the module he is developing by setting the field "module-type" of the containing tiddler.
+For example, by providing a module-type of "saver", TiddlyWiki knows that this module implements a way of saving the whole wiki and when the user clicks on the save button, TiddlyWiki automaticly considers the provided module to save the current state.

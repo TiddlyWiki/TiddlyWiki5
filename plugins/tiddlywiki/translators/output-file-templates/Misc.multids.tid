@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/translators/templates/Misc.multids
+
+{{[all[tiddlers]prefix[$:/language/]]
+-[all[tiddlers]prefix[$:/language/Buttons/]]
+-[all[tiddlers]prefix[$:/language/ControlPanel/]]
+-[all[tiddlers]prefix[$:/language/Date/]]
+-[all[tiddlers]prefix[$:/language/Docs/]]
+-[all[tiddlers]prefix[$:/language/EditTemplate/]]
+-[all[tiddlers]prefix[$:/language/Exporters/]]
+-[all[tiddlers]prefix[$:/language/Filters/]]
+-[all[tiddlers]prefix[$:/language/Help/]]
+-[all[tiddlers]prefix[$:/language/Import/]]
+-[all[tiddlers]prefix[$:/language/Modals/]]
+-[all[tiddlers]prefix[$:/language/Notifications/]]
+-[all[tiddlers]prefix[$:/language/RelativeDate/]]
+-[all[tiddlers]prefix[$:/language/Search/]]
+-[all[tiddlers]prefix[$:/language/SideBar/]]
+-[all[tiddlers]prefix[$:/language/Snippets/]]
+-[all[tiddlers]prefix[$:/language/ThemeTweaks/]]
+-[all[tiddlers]prefix[$:/language/TiddlerInfo/]]
++[sort[title]]||$:/plugins/tiddlywiki/translators/templates/filtered-multids}}

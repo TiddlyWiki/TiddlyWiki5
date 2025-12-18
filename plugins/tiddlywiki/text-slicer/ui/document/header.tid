@@ -1,0 +1,39 @@
+title: $:/plugins/tiddlywiki/text-slicer/ui/document/header
+
+\define metadatafield()
+<tr>
+<td>
+''<$transclude tiddler=<<listItem>> field="caption"/>''
+</td>
+<td>
+<$reveal type="match" state="""$(listItem)$!!field-type""" text="string">
+<$edit-text field={{$(listItem)$!!field}}/>
+</$reveal>
+<$reveal type="match" state="""$(listItem)$!!field-type""" text="list">
+<$edit-text tag="textarea" field={{$(listItem)$!!field}}/>
+</$reveal>
+</td>
+</tr>
+\end
+
+<div class="tc-sliced-document-header">
+
+''Exclude filter'': <$edit-text field="toc-exclude-filter"/>
+
+<$checkbox tiddler=<<config-show-toolbar>> field="text" checked="yes" unchecked="no" default="no"> Show toolbar </$checkbox> <$checkbox tiddler=<<config-show-metadata>> field="text" checked="yes" unchecked="no" default="no"> Show metadata</$checkbox> <$button>
+<$action-sendmessage $message="tm-open-window" $param=<<currentTiddler>> template="$:/plugins/tiddlywiki/text-slicer/templates/plain/document"/>
+View document
+</$button>
+
+<$reveal state=<<config-show-metadata>> default="no" type="match" text="yes">
+<table>
+<tbody>
+<$list filter="[all[system+tiddlers]tag[$:/tags/DocumentMetaData]]" variable="listItem">
+<<metadatafield>>
+</$list>
+</tbody>
+</table>
+</$reveal>
+
+
+</div>

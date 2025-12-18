@@ -1,0 +1,22 @@
+title: $:/language/Docs/ModuleTypes/
+
+animation: ਐਨੀਮੇਸ਼ਨ ਜੋ ਕਿ RevealWidget ਨਾਲ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ 
+command: Commands ਜੋ ਕਿ Node.js. ਤਹਿਤ ਚਲਾਉਣ ਲਈ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ
+config: ਡਾਟਾ `$ tw.config` ਵਿੱਚ ਸ਼ਾਮਲ ਕਰਨ ਲਈ.
+filteroperator: ਵਿਅਕਤੀਗਤ ਫਿਲਟਰ ਆਪਰੇਟਰ ਦਾ ਢੰਗ.
+global: ਗਲੋਬਲ ਡਾਟਾ `$ tw` ਵਿੱਚ ਸ਼ਾਮਲ ਕਰਨ ਲਈ.
+isfilteroperator: ਅੰਕ ਲਈ.'' '' ਹੈ '' ਫਿਲਟਰ ਆਪਰੇਟਰ 
+macro: ਜਾਵਾਸਕ੍ਰਿਪਟ ਮੈਕਰੋ ਪਰਿਭਾਸ਼ਾ.
+parser: ਵੱਖ-ਵੱਖ ਸਮੱਗਰੀ ਦੇ ਕਿਸਮ ਲਈ ਪਾਰਸਰ.
+saver: ਸੇਵਰ ਬਰਾਊਜ਼ਰ ਤੱਕ ਫਾਇਲ ਨੂੰ ਬਚਾਉਣ ਲਈ ਵੱਖ ਵੱਖ ਢੰਗ ਨੂੰ ਵਰਤ.
+startup: ਸ਼ੁਰੂਆਤੀ ਫੰਕਸ਼ਨ
+storyview: ਕਹਾਣੀ ਵਿਚਾਰ ਐਨੀਮੇਸ਼ਨ ਅਤੇ ਸੂਚੀ ਵਿਡਜ਼ਿਟ ਦੇ ਰਵੱਈਆ ਨੂੰ ਸੋਧ.
+tiddlerdeserializer: Tiddlers ਵਿੱਚ ਵੱਖ-ਵੱਖ ਸਮੱਗਰੀ ਦੇ ਕਿਸਮ ਬਦਲਦਾ ਹੈ.
+tiddlerfield: ਇੱਕ ਵਿਅਕਤੀ ਨੂੰ tiddler ਖੇਤਰ ਦਾ ਵਰਤਾਓ ਪਰਿਭਾਸ਼ਿਤ.
+tiddlermethod: `$ Tw.Tiddler` ਪ੍ਰੋਟੋਟਾਈਪ ਕਰਨ ਲਈ ਢੰਗ ਸ਼ਾਮਲ ਕਰੋ.
+upgrader: ਅੱਪਗਰੇਡ / import ਦੌਰਾਨ tiddlers ਅੱਪਗਰੇਡ ਨੂੰ ਕਾਰਵਾਈ ਕਰਨ ਤੇ ਲਾਗੂ ਹੁੰਦਾ ਹੈ.
+utils: $ Tw.utils` ਕਰਨ ਲਈ ਢੰਗ ਸ਼ਾਮਲ ਕਰੋ.
+utils-node: `$ Tw.utils` ਕਰਨ ਲਈ node.js-ਖਾਸ ਢੰਗ ਸ਼ਾਮਲ ਕਰੋ.
+widget: Widgets encapsulate DOM  ਪੇਸ਼ਕਾਰੀ ਅਤੇ ਤਾਜ਼ਗੀ ਰੱਖਦਾ.
+wikimethod: $ Tw.Wiki` `ਕਰਨ ਲਈ ਢੰਗ ਸ਼ਾਮਲ ਕਰੋ.
+wikirule: ਮੁੱਖ WikiText ਪਾਰਸਰ ਲਈ ਵਿਅਕਤੀਗਤ ਪਾਰਸਰ ਨਿਯਮ.

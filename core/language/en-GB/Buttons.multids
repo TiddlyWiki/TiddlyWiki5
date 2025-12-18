@@ -1,0 +1,200 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: advanced search
+AdvancedSearch/Hint: Advanced search
+Cancel/Caption: cancel
+Cancel/Hint: Discard changes to this tiddler
+Clone/Caption: clone
+Clone/Hint: Clone this tiddler
+Close/Caption: close
+Close/Hint: Close this tiddler
+CloseAll/Caption: close all
+CloseAll/Hint: Close all tiddlers
+CloseOthers/Caption: close others
+CloseOthers/Hint: Close other tiddlers
+ControlPanel/Caption: control panel
+ControlPanel/Hint: Open control panel
+CopyToClipboard/Caption: copy to clipboard
+CopyToClipboard/Hint: Copy this text to the clipboard
+Delete/Caption: delete
+Delete/Hint: Delete this tiddler
+DeleteTiddlers/Caption: delete tiddlers
+DeleteTiddlers/Hint: Delete tiddlers
+Edit/Caption: edit
+Edit/Hint: Edit this tiddler
+Encryption/Caption: encryption
+Encryption/Hint: Set or clear a password for saving this wiki
+Encryption/ClearPassword/Caption: clear password
+Encryption/ClearPassword/Hint: Clear the password and save this wiki without encryption
+Encryption/SetPassword/Caption: set password
+Encryption/SetPassword/Hint: Set a password for saving this wiki with encryption
+EmergencyDownload/Caption: download tiddlers as json
+ExportPage/Caption: export all
+ExportPage/Hint: Export all tiddlers
+ExportTiddler/Caption: export tiddler
+ExportTiddler/Hint: Export tiddler
+ExportTiddlers/Caption: export tiddlers
+ExportTiddlers/Hint: Export tiddlers
+SidebarSearch/Hint: Select the sidebar search field
+Fold/Caption: fold tiddler
+Fold/Hint: Fold the body of this tiddler
+Fold/FoldBar/Caption: fold-bar
+Fold/FoldBar/Hint: Optional bars to fold and unfold tiddlers
+Unfold/Caption: unfold tiddler
+Unfold/Hint: Unfold the body of this tiddler
+FoldOthers/Caption: fold other tiddlers
+FoldOthers/Hint: Fold the bodies of other opened tiddlers
+FoldAll/Caption: fold all tiddlers
+FoldAll/Hint: Fold the bodies of all opened tiddlers
+UnfoldAll/Caption: unfold all tiddlers
+UnfoldAll/Hint: Unfold the bodies of all opened tiddlers
+FullScreen/Caption: full-screen
+FullScreen/Hint: Enter or leave full-screen mode
+Help/Caption: help
+Help/Hint: Show help panel
+Import/Caption: import
+Import/Hint: Import many types of file including text, image, TiddlyWiki or JSON
+Info/Caption: info
+Info/Hint: Show information for this tiddler
+Home/Caption: home
+Home/Hint: Open the default tiddlers
+Language/Caption: language
+Language/Hint: Choose the user interface language
+LayoutSwitcher/Hint: Open layout switcher
+LayoutSwitcher/Caption: layout
+Manager/Caption: tiddler manager
+Manager/Hint: Open tiddler manager
+More/Caption: more
+More/Hint: More actions
+NewHere/Caption: new here
+NewHere/Hint: Create a new tiddler tagged with this one
+NetworkActivity/Caption: network activity
+NetworkActivity/Hint: Cancel all network activity
+NewJournal/Caption: new journal
+NewJournal/Hint: Create a new journal tiddler
+NewJournalHere/Caption: new journal here
+NewJournalHere/Hint: Create a new journal tiddler tagged with this one
+NewImage/Caption: new image
+NewImage/Hint: Create a new image tiddler
+NewMarkdown/Caption: new Markdown tiddler
+NewMarkdown/Hint: Create a new Markdown tiddler
+NewTiddler/Caption: new tiddler
+NewTiddler/Hint: Create a new tiddler
+OpenControlPanel/Hint: Open control panel
+OpenWindow/Caption: open in new window
+OpenWindow/Hint: Open tiddler in new window
+Palette/Caption: palette
+Palette/Hint: Choose the colour palette
+Permalink/Caption: permalink
+Permalink/Hint: Set browser address bar to a direct link to this tiddler
+Permaview/Caption: permaview
+Permaview/Hint: Set browser address bar to a direct link to all the tiddlers in this story
+Print/Caption: print page
+Print/Hint: Print the current page
+Refresh/Caption: refresh
+Refresh/Hint: Perform a full refresh of the wiki
+Save/Caption: ok
+Save/Hint: Confirm changes to this tiddler
+SaveWiki/Caption: save changes
+SaveWiki/Hint: Save changes
+StoryView/Caption: storyview
+StoryView/Hint: Choose the story visualisation
+HideSideBar/Caption: hide sidebar
+HideSideBar/Hint: Hide sidebar
+ShowSideBar/Caption: show sidebar
+ShowSideBar/Hint: Show sidebar
+TagManager/Caption: tag manager
+TagManager/Hint: Open tag manager
+TestCaseImport/Caption: import tiddlers
+TestCaseImport/Hint: Import tiddlers
+Timestamp/Caption: timestamps
+Timestamp/Hint: Choose whether modifications update timestamps
+Timestamp/On/Caption: timestamps are on
+Timestamp/On/Hint: Update timestamps when tiddlers are modified
+Timestamp/Off/Caption: timestamps are off
+Timestamp/Off/Hint: Don't update timestamps when tiddlers are modified
+Theme/Caption: theme
+Theme/Hint: Choose the display theme
+Bold/Caption: bold
+Bold/Hint: Apply bold formatting to selection
+Clear/Caption: clear
+Clear/Hint: Clear image to solid colour
+EditorHeight/Caption: editor height
+EditorHeight/Caption/Auto: Automatically adjust height to fit content
+EditorHeight/Caption/Fixed: Fixed height:
+EditorHeight/Hint: Choose the height of the text editor
+Excise/Caption: excise
+Excise/Caption/Excise: Perform excision
+Excise/Caption/MacroName: Macro name:
+Excise/Caption/NewTitle: Title of new tiddler:
+Excise/Caption/Replace: Replace excised text with:
+Excise/Caption/Replace/Macro: macro
+Excise/Caption/Replace/Link: link
+Excise/Caption/Replace/Transclusion: transclusion
+Excise/Caption/Tag: Tag new tiddler with the title of this tiddler
+Excise/Caption/TiddlerExists: Warning: tiddler already exists
+Excise/DefaultTitle: New Excision
+Excise/Hint: Excise the selected text into a new tiddler
+Heading1/Caption: heading 1
+Heading1/Hint: Apply heading level 1 formatting to lines containing selection
+Heading2/Caption: heading 2
+Heading2/Hint: Apply heading level 2 formatting to lines containing selection
+Heading3/Caption: heading 3
+Heading3/Hint: Apply heading level 3 formatting to lines containing selection
+Heading4/Caption: heading 4
+Heading4/Hint: Apply heading level 4 formatting to lines containing selection
+Heading5/Caption: heading 5
+Heading5/Hint: Apply heading level 5 formatting to lines containing selection
+Heading6/Caption: heading 6
+Heading6/Hint: Apply heading level 6 formatting to lines containing selection
+Italic/Caption: italic
+Italic/Hint: Apply italic formatting to selection
+LineWidth/Caption: line width
+LineWidth/Hint: Set line width for painting
+Link/Caption: link
+Link/Hint: Create wikitext link
+Linkify/Caption: wikilink
+Linkify/Hint: Wrap selection in square brackets
+ListBullet/Caption: bulleted list
+ListBullet/Hint: Apply bulleted list formatting to lines containing selection
+ListNumber/Caption: numbered list
+ListNumber/Hint: Apply numbered list formatting to lines containing selection
+MonoBlock/Caption: monospaced block
+MonoBlock/Hint: Apply monospaced block formatting to lines containing selection
+MonoLine/Caption: monospaced
+MonoLine/Hint: Apply monospaced character formatting to selection
+Opacity/Caption: opacity
+Opacity/Hint: Set painting opacity
+Paint/Caption: paint colour
+Paint/Hint: Set painting colour
+Picture/Caption: picture
+Picture/Hint: Insert picture
+Preview/Caption: preview
+Preview/Hint: Show preview pane
+PreviewType/Caption: preview type
+PreviewType/Hint: Choose preview type
+Quote/Caption: quote
+Quote/Hint: Apply quoted text formatting to lines containing selection
+RotateLeft/Caption: rotate left
+RotateLeft/Hint: Rotate image left by 90 degrees
+Size/Caption: image size
+Size/Caption/Height: Height:
+Size/Caption/Resize: Resize image
+Size/Caption/Width: Width:
+Size/Hint: Set image size
+Stamp/Caption: stamp
+Stamp/Caption/New: Add your own
+Stamp/Hint: Insert a preconfigured snippet of text
+Stamp/New/Title: Name as shown in menu
+Stamp/New/Text: Text of snippet. (Remember to add a descriptive title in the caption field).
+Strikethrough/Caption: strikethrough
+Strikethrough/Hint: Apply strikethrough formatting to selection
+Subscript/Caption: subscript
+Subscript/Hint: Apply subscript formatting to selection
+Superscript/Caption: superscript
+Superscript/Hint: Apply superscript formatting to selection
+ToggleSidebar/Hint: Toggle the sidebar visibility
+Transcludify/Caption: transclusion
+Transcludify/Hint: Wrap selection in curly brackets
+Underline/Caption: underline
+Underline/Hint: Apply underline formatting to selection

@@ -1,0 +1,16 @@
+created: 20171109171703588
+modified: 20210106151027452
+tags: [[Community Plugins]] plugins
+title: Full Text Search Plugin by Rob Hoelz
+type: text/vnd.tiddlywiki
+url: https://hoelz.ro/files/fts.html
+
+A plugin to integrate the popular [[lunr.js|https://lunrjs.com/]] search engine, giving TiddlyWiki much more sophisticated search capabilities:
+
+{{!!url}}
+
+<<<
+Provides an alternative search result list that orders results by search relevance and ignores differences in word forms (ex. //tag// vs //tags//).
+
+On my personal wiki, I have the problem that there are terms I use across a lot of tiddlers, and sometimes I'll use different forms (such as the aforementioned //tag// vs //tags//).  I wanted a plugin to allow me to find the tiddler I'm looking for quickly and didn't require me to worry about how I declined a noun or inflected a verb - so I wrote this plugin, which provides an alternative search list powered by [[lunr.js|https://lunrjs.com/]].
+<<<

@@ -1,0 +1,25 @@
+created: 20160424150551727
+modified: 20181106224128548
+tags: [[Customise TiddlyWiki]]
+title: Adding a table of contents to the sidebar
+type: text/vnd.tiddlywiki
+
+The standard mechanisms in ~TiddlyWiki for creating Table-of-Contents are macros known collectively as "toc" [[macros|Macros]] (click on link to learn more about macros). They use `Tagging` as their means of creating relationships, so be sure to review the [[Tagging]] topic tiddler if tagging is a new concept for you.
+
+A customisable [[table of contents|Table-of-Contents Macros]] can be added to the sidebar with the following steps:
+
+# Create a tiddler called [[TableOfContents]]
+# Give it the tag ''~$:/tags/SideBar''
+# Set the text to <div><pre><code><$text text="""
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'TableOfContents'>>
+
+</div>"""/></code></pre></div>
+# Add a ''caption'' field with the text ''Contents''
+# Add a ''list-after'' field with the text ''~$:/core/ui/SideBar/Open''
+
+Add entries to the table of contents by creating tiddlers tagged ''~TableOfContents''. An easy way is to choose <<.icon $:/core/images/new-here-button>> ''new here'' from the tiddler toolbar of the ''~TableOfContents'' tiddler. 
+(if you don't see the "new here" button, click on the down arrow <<.icon $:/core/images/down-arrow>> to see more menu options.)
+
+To create child tiddlers (tiddlers that come below other tiddlers), tag them with the name of the parent tiddler.

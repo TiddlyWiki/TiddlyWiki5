@@ -1,0 +1,19 @@
+caption: dumpvariables
+created: 20140908104107181
+fr-title: Macro dumpvariables
+modified: 20150619161005590
+tags: Macros [[Core Macros]]
+title: dumpvariables Macro
+type: text/vnd.tiddlywiki
+
+La [[macro|Macros]] <<.def dumpvariables>> renvoie un tableau affichant les valeurs de toutes les [[variables|Variables]] et [[macros|Macros]] présentes à une position donnée de l'[[arbre widget|Widgets]].
+
+Utile pour déboguer et explorer le fonctionnement interne de ~TiddlyWiki.
+
+Les zones réservées sont remplacées par des valeurs de façon normale, mais en utilisant les valeurs par défaut pour tous les paramètres de macro.
+
+!! Paramètres
+
+(aucun)
+
+<<.macro-examples "dumpvariables">>

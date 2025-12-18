@@ -1,0 +1,8 @@
+title: $:/AdvancedSearch
+icon: $:/core/images/advanced-search-button
+color: #bbb
+
+\whitespace trim
+<div class="tc-advanced-search">
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch]!has[draft.of]]" default="$:/core/ui/AdvancedSearch/System" actions="""<$action-setfield $tiddler="$:/state/advancedsearch/currentTab" text=<<currentTab>>/>""" explicitState="$:/state/tab--1498284803"/>
+</div>

@@ -1,0 +1,5 @@
+title: $:/core/ui/SideBar/Recent
+tags: $:/tags/SideBar
+caption: {{$:/language/SideBar/Recent/Caption}}
+
+<$transclude $variable="timeline" format={{$:/language/RecentChanges/DateFormat}} limit={{$:/config/RecentLimit}}/>

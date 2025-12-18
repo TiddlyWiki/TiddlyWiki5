@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: Construe extension de bibliotheca besoniate pro le processo de actualisation
+
+Construe le nota `$:/UpgradeLibrary` pro le processo de actualisation.
+
+Le bibliotheca pro actualisation es formatate como un ordinari nota de extension con le typo `library`. Illo contine un copia de cata del extensiones, themas e paccos lingual disponibile in le deposito TiddlyWiki5.
+
+Iste commando es intendite pro uso interne; illo es solmente relevante pro usatores qui construe un procedura individual de actualisation.
+
+```
+--makelibrary <title>
+```
+
+Le argumento del titulo es como standard `$:/UpgradeLibrary`.

@@ -1,0 +1,73 @@
+title: $:/SavingThumbnailsStyles
+tags: $:/tags/Stylesheet
+
+.tc-thumbnail-tabs .tc-tab-buttons {
+	background: <<color message-background>>;
+    text-align: center;
+}
+
+.tc-thumbnail-tabs .tc-tab-buttons button {
+    display: table-cell;
+	width: 140px;
+	height: 80px;
+	vertical-align: top;
+	margin: 0.3em;
+	border: 2px solid <<color message-background>>;
+	background: <<color message-background>>;
+	color: <<colour message-foreground>>;
+	padding: 0;
+	font-weight: normal;
+}
+
+.tc-thumbnail-tabs .tc-tab-buttons button.tc-tab-selected {
+	border: 2px solid <<colour foreground>>;
+	background: <<color background>>;
+}
+
+.tc-thumbnail-tabs .tc-tab-buttons button:hover {
+	background: <<colour message-foreground>>;
+	color: <<colour message-background>>;
+}
+
+.tc-thumbnail-tabs .tc-tab-divider {
+	border: none;
+}
+
+.tc-thumbnail-tabs .tc-saving-thumbnail-wrapper {
+	vertical-align: top;
+    height: inherit;
+}
+
+.tc-thumbnail-tabs .tc-saving-thumbnail-caption {
+	font-weight: bold;
+	background: <<color foreground>>;
+	color: <<color background>>;
+	padding: 2px 8px;
+}
+
+.tc-thumbnail-tabs .tc-saving-thumbnail-description {
+	padding: 2px 8px;
+	font-style: italic;
+    font-size: 0.85em;
+}
+
+.tc-thumbnail-tabs .tc-saving-details-platform,
+.tc-thumbnail-tabs .tc-btn-unpushed,
+.tc-thumbnail-tabs .tc-btn-pushed  {
+	display: inline-block;
+	padding: 0.16em 0.7em;
+	font-size: 0.9em;
+	font-weight: 400;
+	line-height: 1.2em;
+	color: <<colour message-background>>;
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: <<colour message-foreground>>;
+	border-radius: 1em;
+}
+
+.tc-thumbnail-tabs .tc-btn-pushed {
+	background-color: <<colour foreground>>;
+	fill: <<color background>>;
+}
+

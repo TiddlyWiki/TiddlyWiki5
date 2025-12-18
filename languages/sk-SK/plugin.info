@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/sk-SK",
+	"name": "sk-SK",
+	"plugin-type": "language",
+	"description": "Slovenčina (Slovensko)",
+	"author": "Vlado Luknar",
+	"core-version": ">=5.0.0"
+}

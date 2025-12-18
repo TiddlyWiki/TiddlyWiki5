@@ -1,0 +1,11 @@
+created: 20140912145532856
+footer: <$button message="tm-close-tiddler">Fermer</$button>
+fr-title: Exemple d'assistant 2
+modified: 20150620090110881
+subtitle: Je suis un autre assistant modale
+title: SampleWizard2
+type: text/vnd.tiddlywiki
+
+Voici un autre dialogue d'assistant modale, mémorisé dans le tiddler [[Exemple d'assistant 2|SampleWizard2]].
+
+Vous pouvez <$button message="tm-modal" param="SampleWizard">dénicher les assistants</$button>.

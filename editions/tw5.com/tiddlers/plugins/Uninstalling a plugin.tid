@@ -1,0 +1,30 @@
+created: 20160107222504269
+modified: 20220617132957241
+tags: Plugins
+title: Uninstalling a plugin
+type: text/vnd.tiddlywiki
+
+\rules except wikilink
+
+If you want to follow the steps //side by side// you can <<open-tiddler-in-window>>.
+
+
+Follow these instructions when using TiddlyWiki as a standalone, single file wiki.
+
+# Create a backup of your current TiddlyWiki HTML file ([[just in case|The First Rule of Using TiddlyWiki]])
+
+# Open the <<controlPanel-plugin-link>> and go to the ''Plugins'' tab
+
+# Click on the plugin you want to delete to open it as a standalone tiddler
+
+# Click the <<.icon $:/core/images/down-arrow>> ''more'' button and <<.icon $:/core/images/delete-button>> ''delete'' the tiddler
+
+# Save your TiddlyWiki <<.icon $:/core/images/save-button-dynamic>>
+
+# If a yellow warning bar appears at the top of the window,  refresh the window so that TiddlyWiki completely removes the plugin <<.icon $:/core/images/refresh-button>>
+
+#* <<.from-version "5.1.22">> It is no longer necessary to refresh TiddlyWiki when deleting plugins that support dynamic loading. See [[PluginMechanism]] for more details
+
+# The plugin should no longer be active or available
+
+<$macrocall $name=".note" _="""If you use TiddlyWiki with node.js have a closer look at [[Uninstalling a plugin with Node.js]]<br>An overview of working with plugins can be found at [[Plugins]]"""/> 

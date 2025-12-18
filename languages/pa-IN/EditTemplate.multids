@@ -1,0 +1,22 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: ਇਹ ਮੁੱਖ TiddlyWiki ਫਾਇਲ ਦੇ ਬਾਹਰ ਹੀ ਸੰਭਾਲਿਆ ਇੱਕ ਬਾਹਰੀ tiddler ਹੈ. ਤੁਸ ਟੈਗ ਅਤੇ ਖੇਤਰ ਨੂੰ ਸੋਧ ਸਕਦੇ ਹੋ, ਪਰ ਆਪਣੇ ਆਪ ਸਿੱਧੇ ਤੌਰ 'ਤੇ ਸਮੱਗਰੀ ਨੂੰ ਸੋਧ ਨਹੀ ਕਰ ਸਕਦੇ
+Body/Placeholder:  ਪਾਠ ਟਾਈਪ ਲਈ ਇਸ tiddler ਨੂੰ  ਵਰਤੋ
+Field/Remove/Caption: ਖੇਤਰ ਨੂੰ ਹਟਾਉਣ
+Field/Remove/Hint: ਖੇਤਰ ਨੂੰ ਹਟਾਉਣ
+Fields/Add/Button: ਸ਼ਾਮਿਲ ਕਰੋ
+Fields/Add/Name/Placeholder: ਫਿਲਡ ਨਾਮ
+Fields/Add/Prompt: ਇੱਕ ਨਿਊ ਖੇਤਰ ਸ਼ਾਮਿਲ ਕਰੋ:
+Fields/Add/Value/Placeholder: ਖੇਤਰ ਦਾ ਮੁੱਲ
+Shadow/OverriddenWarning: ਇਹ ਇੱਕ ਸੋਧਿਆ ਸ਼ੈਡੋ tiddler ਹੈ. ਤੁਸੀ ਇਸ  ਮੂਲ ਵਰਜਨ ਨੂੰ  ਖੋਲਣ ਲਈ tiddler ਨੂੰ ਹਟਾ ਸਕਦੇ ਹੋ
+Shadow/Warning:  ਇਹ ਇੱਕ ਸ਼ੈਡੋ tiddler ਹੈ. ਕੋਈ ਵੀ ਬਦਲਾਅ  ਵਰਜਨ ਨੂੰ  ਮੂਲ ਰੂਪ ਵਿੱਚ ਅਣਡਿੱਠਾ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ
+Tags/Add/Button: ਸ਼ਾਮਿਲ ਕਰੋ
+Tags/Add/Placeholder: ਟੈਗ  ਨਾਮ
+Tags/Dropdown/Caption: ਟੈਗ ਸੂਚੀ
+Tags/Dropdown/Hint:  ਟੈਗ ਸੂਚੀ ਵੇਖਾਓ
+Type/Delete/Caption: ਸਮੱਗਰੀ ਦੀ ਕਿਸਮ ਹਟਾਓ
+Type/Delete/Hint: ਸਮੱਗਰੀ ਦੀ ਕਿਸਮ ਹਟਾਓ
+Type/Dropdown/Caption: ਕਿਸਮ ਸੂਚੀ  ਦੀ ਸਮੱਗਰੀ 
+Type/Dropdown/Hint: ਸਮੱਗਰੀ ਦੇ ਕਿਸਮ ਸੂਚੀ ਵੇਖਾਓ
+Type/Placeholder:  ਕਿਸਮ ਦੀ ਸੰਖੇਪ
+Type/Prompt:   ਕਿਸਮ:

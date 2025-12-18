@@ -1,0 +1,34 @@
+created: 20131129094758194
+modified: 20141012191051894
+title: ReadMe
+type: text/vnd.tiddlywiki
+
+\define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
+
+<$importvariables filter={{$:/core/config/GlobalImportFilter}}>
+
+Bienvenue sur <<tw>>, un carnet de notes personnel web et non-linéaire que tout le monde peut utiliser et conserver, sans dépendre d'une quelconque entreprise.
+
+<<tw>> est un wiki interactif en JavaScript. Il peut être utilisé dans le navigateur sous forme de fichier HTML autonome ou comme une puissante application Node.js. Il est extrêmement personnalisable : l'interface utilisateur dans son intégralité est elle-même implémentée en WikiText recomposable à volonté.
+
+Plus d'informations et démonstrations sur https://tiddlywiki.com
+
+! Installation de <<tw>> sur Node.js
+
+{{Installing TiddlyWiki on Node.js}}
+
+! Utilisation de <<tw>> sur Node.js
+
+{{Using TiddlyWiki on Node.js}}
+
+! Mise à niveau de <<tw>> sur Node.js
+
+{{Upgrading TiddlyWiki on Node.js}}
+
+! Voir aussi
+
+<<list-links "[tag[TiddlyWiki on Node.js]] -[[Installing TiddlyWiki on Node.js]] -[[Using TiddlyWiki on Node.js]] -[[Upgrading TiddlyWiki on Node.js]]">>
+
+//Ce fichier readme a été généré automatiquement par <<tw>>//
+
+</$importvariables>

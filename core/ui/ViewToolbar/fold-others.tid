@@ -1,0 +1,17 @@
+title: $:/core/ui/Buttons/fold-others
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/fold-others-button}} {{$:/language/Buttons/FoldOthers/Caption}}
+description: {{$:/language/Buttons/FoldOthers/Hint}}
+
+\whitespace trim
+<$button tooltip={{$:/language/Buttons/FoldOthers/Hint}} aria-label={{$:/language/Buttons/FoldOthers/Caption}} class=<<tv-config-toolbar-class>>>
+<$action-sendmessage $message="tm-fold-other-tiddlers" $param=<<currentTiddler>> foldedStatePrefix="$:/state/folded/"/>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+{{$:/core/images/fold-others-button}}
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/FoldOthers/Caption}}/>
+</span>
+<%endif%>
+</$button>

@@ -1,0 +1,6 @@
+title: $:/language/Exporters/
+
+CsvFile: Arquivos CSV dos tiddlers
+JsonFile: Arquivos JSON dos tiddlers
+StaticRiver: Sequência de tiddlers como arquivo estático HTML
+TidFile: Tiddler individual em arquivo ".tid"

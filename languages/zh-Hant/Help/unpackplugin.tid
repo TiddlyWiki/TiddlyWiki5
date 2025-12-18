@@ -1,0 +1,8 @@
+title: $:/language/Help/unpackplugin
+description: 從插件解開附屬的條目
+
+提取插件的附屬條目，將其建立為一般條目：
+
+```
+--unpackplugin <title>
+```

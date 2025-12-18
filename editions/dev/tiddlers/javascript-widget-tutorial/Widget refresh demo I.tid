@@ -1,0 +1,44 @@
+created: 20190201233806976
+modified: 20221029194854112
+tags: 
+title: Widget refresh demo I
+type: text/vnd.tiddlywiki
+
+<!-- The innerwiki doesn't refresh on its own when tiddlers on the outside change, so use the list widget to force a dependency -->
+<$list name=refresh filter=[[tiddlerfield-norefresh.js]get[text]]>
+<$innerwiki width="600" height="400" style="width:100%;">
+	<$data title="$:/DefaultTiddlers" text="[[tiddler field widget]]"/>
+	<$data title="test" text="type new text here"/>
+	<$data $tiddler=tiddlerfield-norefresh.js/>
+	<$data title="tiddler field widget" text="""
+<$edit-text focus=yes tiddler=test tag=input/>
+<$button set="!!refresh" setTo={{test}}>Force refresh</$button>
+<$list filter="[{!!refresh}]">
+
+<div>
+<div style="display:inline-block;width: 49%;vertical-align: text-top;word-wrap: break-word;}">
+
+```
+<$tiddlerfield/>
+```
+
+Renders as:
+
+<$tiddlerfield/>
+</div>
+<div style="display:inline-block;width: 49%;vertical-align: text-top;word-wrap: break-word;}">
+
+```
+<$view tiddler="test"/>
+```
+
+Renders as:
+
+<$view tiddler="test"/>
+</div>
+</div>
+</$list>
+"""/>
+
+</$innerwiki>
+</$list>

@@ -1,0 +1,14 @@
+created: 20140410103123179
+modified: 20150203185545000
+tags: [[Filter Operators]] [[Common Operators]]
+title: links Operator
+type: text/vnd.tiddlywiki
+caption: links
+op-purpose: find the titles linked to by each input title
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: none
+op-output: the titles to which the input tiddlers contain [[hard links|Hard and Soft Links]]
+
+Each input title is processed in turn. The corresponding tiddler's list of links is generated, in the order in which they appear in the tiddler's text, and [[dominantly appended|Dominant Append]] to the operator's overall output.
+
+<<.operator-examples "links">>

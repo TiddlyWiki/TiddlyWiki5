@@ -1,0 +1,16 @@
+title: $:/language/Help/load
+description: Ladda tiddlers från en fil
+
+Ladda tiddlers från 2.x.x TiddlyWiki filer (`.html`), `.tiddler`, `.tid`, `.json` eller andra filer
+
+```
+--load <filepath>
+```
+
+För att ladda tiddlers från en krypterad TiddlyWiki-fil så måste du först ange lösenordet med PasswordCommand. Till exempel:
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
+```
+
+Notera att TiddlyWiki inte kommer ladda änldre version av ett redan laddat insticksprogram.

@@ -1,0 +1,20 @@
+created: 20150117152418000
+modified: 20150518121901359
+origin: https://tiddlywiki.com/#Title%20List
+tags: Konzept
+title: Titel Listen
+type: text/vnd.tiddlywiki
+
+Titel Listen, ist eine durch Leerzeichen getrennte Auflistung von Tiddler Titeln. 
+
+Wenn ein Tiddler Titel selbst Leerzeichen enthält, dann wird diese durch eine doppelte eckige Klammer begrenzt. zB: `[[Titel Listen]]`. Dadurch wird der Titel als [[WikiLink|WikiLinks]] dargestellt. 
+
+Beispiel für eine Titel Liste:
+
+```
+Willkommen! [[Erstellen von Notizen]] Einführung
+```
+
+Solche Listen werden verwendet, um zB: das Inhaltsverzeichnis manuell zu sortieren. Wenn Sie das InhaltsVerzeichnis im Editiermodus öffen, dann sehen sie das `list` Feld. 
+
+Titel Listen können auch als Filter Parameter für das ListMacro verwendet werden. 

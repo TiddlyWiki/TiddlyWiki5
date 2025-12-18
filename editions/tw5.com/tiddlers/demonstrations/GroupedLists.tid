@@ -1,0 +1,18 @@
+created: 20150106180000000
+modified: 20241204085601176
+tags: ListWidget Lists
+title: GroupedLists
+
+The following sidebar tabs give examples of grouped lists created by nesting.
+
+!! [[Types Tab|$:/core/ui/MoreSideBar/Types]]
+
+For the "Types Tab", the outer list filter as shown below selects each discrete value found in the `type` field. The inner list filter selects all the (non-system) tiddlers with that type.
+
+<<tw-code "$:/core/ui/MoreSideBar/Types">>
+
+!! [[Recent Tab|$:/core/ui/SideBar/Recent]]
+
+The list in the "Recent Tab" is generated using the <<.mlink timeline>> macro. Here, the outer list filter selects each discrete day found in the `modified` field, while the inner list filter selects all the tiddlers dated the same day in the `modified` field.
+
+<<tw-code "$:/core/macros/timeline">>

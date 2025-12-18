@@ -1,0 +1,69 @@
+caption: Modificación del diseño de tiddlers y página
+created: 20141120125300000
+es-title: Modificación del diseño de tiddlers y de la página
+modified: 20160428062508818
+tags: [[Customise TiddlyWiki]]
+title: Page and tiddler layout customisation
+type: text/vnd.tiddlywiki
+
+Algo que muchos usuarios desconocen es hasta qué punto pueden customizar ~TIddlyWiki simplemente añadiendo o quitando etiquetas de sistema de tiddlers ocultos clave o de sus propios tiddlers.
+
+* Puedes añadir o quitar funciones por defecto en tiddlers, tanto en modo de visionado como en modo de edición (digamos que encuentras que el subtítulo de tiddler distrae o que quieres añadir un recordatorio para cuando se editen tiddlers)
+
+* También puedes añadir o quitar funciones por defecto en el diseño general de la página (quizá necesites un reloj en la barra lateral, o sustituir uno de los botones de control por otro que hayas hecho tú)
+
+* O puedes reorganizar el orden en que se muestran (quizá prefieres mostrar las etiquetas por encima del título, o que el subtítulo de la página aparezca por debajo de los botones)
+
+Una vez sepas qué es lo que quieres hacer, te parecerá que todas estas cosas son bastante fáciles.
+
+! Añadir tiddlers a medida a la interfaz de usuario
+
+Puedes crear el tiddler que quieras y asignarle la etiqueta de sistema apropiada para que aparezca en tal o cual sitio. Por ejemplo, si creas un tiddler llamado <<.word Recordatorio>> con el texto <<.word "Esto es un recordatorio">> y la etiqueta <<.em ~$:/tags/EditTemplate>>, las palabras <<.word "Esto es un recordatorio">> aparecerán en todos los tiddlers que abras para edición.
+
+Al crear tiddlers para que se muestren dentro de otros tiddlers o para que formen parte del diseño de página, necesitarás con toda probabilidad reorganizar el diseño para que tus tiddlers se muestren exactamente donde quieres que aparezcan. Para hacerlo, edita el tiddler oculto apropiado con el prefijo <<.em ~$:/tags>> e incluye el título de tu tiddler en el lugar adecuado del campo <<.field list>>. Por ejemplo, si quieres que la frase <<.word "Esto es un recordatorio">> del ejemplo anterior aparezca por encima del editor de etiquetas en modo de edición, edita el tiddler <<.tid "~$:/tags/EditTemplate">> e inserta `[[Recordatorio]]` en el campo <<.field list>>, justo antes de <<.tid "~$:/core/ui/EditTemplate/tags">>
+
+! Crear nuevos botones en la barra de tiddler y los controles de página
+
+Digamos que tienes un tiddler llamado <<.tid "Plantilla Recetas">> y quieres un botón que cree nuevas recetas a partir de él. Para hacerlo tendrás que hacer lo siguiente:
+
+# Primero, necesitarás una imagen para el botón. Si ninguna de las imágenes del sistema (tiddlers ocultos con el prefijo y la etiqueta <<.tag ~$:/core/images>>), necesitarás crear o buscar una imagen SVG para ello (por ejemplo una de http://flaticon.com).
+#*En cualquier caso, arrástrala a tu página para [[importarla|ImportTiddlers]], edita convenientemente el tiddler y ajusta sus dimensiones a 22px x 22px
+
+# Necesitarás crear un tiddler que contenga el botón.  Créalo, dale título y añade el código para habilitar el botón:
+#* ``\define newHereButtonTags()
+[[$(currentTiddler)$]]
+\end
+\define newHereButton()
+<$button class=<<tv-config-toolbar-class>>>
+<$action-sendmessage
+  $message="tm-new-tiddler"
+$param="TÍTULO DE LA PLANTILLA QUE QUIERES QUE ABRA"
+title="New tiddler"
+  tags=<<newHereButtonTags>> />
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{NOMBRE DE LA IMAGEN DEL BOTÓN}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text="NOMBRE DEL BOTÓN PARA MOSTRAR EN PANTALLA"/></span>
+</$list>
+</$button>
+\end
+
+<<newHereButton>>
+``
+
+#* Asígnale la etiqueta <<.tag ~$:/tags/ViewToolbar]]>>
+
+# Hay que crear un tiddler que le diga a ~TiddlyWIki si el botón será o no visible en la barra. Llamémosle por ejemplo <<.tid "~$:/config/ViewToolbarButtons/Visibility/Receta"">>. Escribe `show` en el cuerpo y guárdalo.
+
+# Habrá que posicionar el botón adecuadamente. Abre el tiddler <<.tid ~$:/tags/ViewToolbar>> e inserta el nombre de tu botón en el lugar adecuado del campo <<.field list>>.
+
+! Eliminar tiddlers ocultos de la interfaz de usuario
+
+En la subpestaña <<.more-tab Shadows>> de la pestaña <<.sidebar-tab More>> en la barra lateral, verás la lista de todos los tiddlers ocultos. En ella verás algunos con el prefijo <<.place ~$:/core/ui/>>. Estos son los que definen la interfaz de usuario y llevan [[etiquetas de sistema|SystemTags]]. Añadir o eliminar estas etiquetas modifica el diseño, tanto de los tiddlers, como de la página entera.
+
+Por ejemplo: <<.tid ~$:/core/ui/SideBar/More>> es el tiddler que define la pestaña <<.sidebar-tab More>>. Si le quitas la etiqueta, quitarás dicha pestaña de la barra lateral y si se la vuelves a asignar, volverás a mostrarla.
+
+Puedes aplicar el mismo procedimiento para cualquier tiddler de la interfaz que lleve el prefijo <<.tid ~$:/core/ui/>>. Por ejemplo, quitar la etiqueta de sistema al tiddler <<.tid ~$:/core/ui/ViewTemplate/subtitle>> eliminará el subtítulo de todos los tiddlers.
+
+Si modificas un tiddler oculto de esta manera, sobreescribirás el valor predefinido. Para revertirlo a su origen, simplemente borra el tiddler modificado para restaurar el tiddler oculto.

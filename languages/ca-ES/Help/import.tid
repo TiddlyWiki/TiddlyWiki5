@@ -1,0 +1,24 @@
+title: $:/language/Help/import
+description: Importa els tiddlers d’un fitxer
+
+Importa tiddlers de TiddlyWiki (`.html`),` .tiddler`, `.tid`,` .json` o altres fitxers locals. Cal indicar explícitament el deserialitzador, a diferència de l’ordre `load` que infereix al deserialitzador de l’extensió del fitxer.
+
+```
+--import <ruta> <deserialitzador> [<títol>] [<codificació>]
+```
+
+Els deserialitzadors inclosos són:
+
+* application/javascript
+* application/json
+* application/x-tiddler
+* application/x-tiddler-html-div
+* application/x-tiddlers
+* text/html
+* text/plain
+
+El títol del tiddler importat és per omissió el nom del fitxer.
+
+La codificació predeterminada és "utf8", però pot ser "base64" per importar fitxers binaris.
+
+Tingueu en compte que TiddlyWiki no importarà una versió anterior d’un connector ja carregat.

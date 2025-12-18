@@ -1,0 +1,30 @@
+created: 20150220182252000
+modified: 20150221221723000
+tags: [[WikiText Examples]]
+title: Macro Calls in WikiText (Examples)
+type: text/vnd.tiddlywiki
+
+\define sayhi-example-1() <<sayhi>>
+\define sayhi-example-2() <<sayhi Bugs>>
+\define sayhi-example-3() <<sayhi "Donald Duck" Disneyland>>
+\define sayhi-example-4() <<sayhi "Mickey Mouse" "Mouse House">>
+\define sayhi-example-5() <<sayhi name:'Minnie Mouse' address:[[Mouse House]]>>
+\define sayhi-example-6() <<sayhi address:"Quacky Towers" name:"Donald Duck">>
+
+\define sayhi-example-7()
+<<sayhi "Mickey Mouse" """"Mouse House",
+Rodent's Lane,
+Squeaksville,
+Ratland""">>
+\end
+
+<$importvariables filter="$:/editions/tw5.com/macro-examples/say-hi">
+<$codeblock code={{$:/editions/tw5.com/macro-examples/say-hi}}/>
+<$macrocall $name=".example" n="1" eg=<<sayhi-example-1>>/>
+<$macrocall $name=".example" n="2" eg=<<sayhi-example-2>>/>
+<$macrocall $name=".example" n="3" eg=<<sayhi-example-3>>/>
+<$macrocall $name=".example" n="4" eg=<<sayhi-example-4>>/>
+<$macrocall $name=".example" n="5" eg=<<sayhi-example-5>>/>
+<$macrocall $name=".example" n="6" eg=<<sayhi-example-6>>/>
+<$macrocall $name=".example" n="7" egvar="sayhi-example-7"/>
+</$importvariables>

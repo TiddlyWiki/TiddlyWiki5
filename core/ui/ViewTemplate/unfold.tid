@@ -1,0 +1,22 @@
+title: $:/core/ui/ViewTemplate/unfold
+tags: $:/tags/ViewTemplate
+
+\whitespace trim
+<div class="tc-reveal">
+<$list filter="[{$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/fold-bar}match[show]]" variable="ignore">
+<$reveal tag="div" type="nomatch" stateTitle=<<folded-state>> text="hide" default="show" retain="yes" animate="yes">
+<$button tooltip={{$:/language/Buttons/Fold/Hint}} aria-label={{$:/language/Buttons/Fold/Caption}} class="tc-fold-banner">
+<$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
+{{$:/core/images/chevron-up}}
+</$button>
+</$reveal>
+</$list>
+<$list filter="[{$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/fold-bar}match[show]] :else[<folded-state>get[text]match[hide]]" variable="ignore">
+<$reveal tag="div" type="nomatch" stateTitle=<<folded-state>> text="show" default="show" retain="yes" animate="yes">
+<$button tooltip={{$:/language/Buttons/Unfold/Hint}} aria-label={{$:/language/Buttons/Unfold/Caption}} class="tc-unfold-banner">
+<$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
+{{$:/core/images/chevron-down}}
+</$button>
+</$reveal>
+</$list>
+</div>

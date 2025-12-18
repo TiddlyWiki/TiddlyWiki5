@@ -1,0 +1,34 @@
+caption: Compartir Tiddlers
+created: 20140908163900000
+es-title: Compartir Tiddlers con los demás
+modified: 20160412163859576
+tags: Learning
+title: Sharing your tiddlers with others
+type: text/vnd.tiddlywiki
+
+Hay muchas formas de compartir tiddlers:
+
+*Puedes enviar un ~Tiddlywiki por mail.
+
+*Puedes publicarlo online y enviar un enlace... 
+
+**a todo el archivo (URL del archivo),
+
+**a un tiddler específico (enlace que llamamos [[PermaLink|PermaLinks]]),
+
+**a una serie concreta de tiddlers (que llamamos PermaView)
+
+*Puedes //robar// tiddlers de un ~TiddlyWiki que alguien haya publicado por ahí y, simplemente, importarlos al tuyo, arrastrándolos con el ratón:
+
+**Abre tu ~TiddlyWiki en el navegador, en otra pestaña o en una nueva ventana.
+
+**Busca un enlace al tiddler que te interesa
+
+**Haz clic con el botón izquierdo del ratón y mantenlo presionado
+
+**Arrastra el enlace a la ventana o pestaña en la que tienes tu ~TiddlyWIki hasta que aparezca una barra en la parte superior de la pantalla que indica que tu ~TiddlyWiki está listo para recibirlo.
+
+**Al soltar el botón, aparecerá un tiddler pidiéndote que confirmes la importación.*
+
+*Puedes [[compartirlo en Dropbox|Sharing a TiddlyWiki on Dropbox]]
+* Puedes [[exportar tiddlers|How to export tiddlers]] a una gran variedad de formatos: HTML estático, CSV...

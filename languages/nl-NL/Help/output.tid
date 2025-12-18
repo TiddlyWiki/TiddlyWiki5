@@ -1,0 +1,11 @@
+title: $:/language/Help/output
+description: Stelt de basis output folder voor volgende commando's in
+
+Stelt de basis output folder voor volgende commando's in. De standaard outputfolder is de `output` subfolder van de editiefolder.
+
+```
+--output <bestandspad>
+```
+
+Als het gespecificeerde bestandspad relatief is zal dit relatief zijn t.o.v. de werkfolder. B.v. `--output .` stelt de outputfolder in als huidige werkfolder.
+

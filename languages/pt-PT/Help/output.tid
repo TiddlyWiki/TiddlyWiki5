@@ -1,0 +1,10 @@
+title: $:/language/Help/output
+description: Define a pasta de destino para os comandos subsequentes
+
+Define a directoria base de destino para os comandos subsequentes. A pasta de destino pré definida é a sub-pasta `output` dentro da pasta da edição.
+
+```
+--output <caminho>
+```
+
+Se o caminho especificado é relativo este será resolvido em relação à actual pasta de trabalho. Por exemplo `--output .` define a directoria de destino para a actual pasta de trabalho.

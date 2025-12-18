@@ -1,0 +1,30 @@
+created: 20151006145934884
+modified: 20160610084018658
+tags: Learning
+title: How to export tiddlers
+type: text/vnd.tiddlywiki
+
+! Selecting All tiddlers for export
+
+To export ''all'' tiddlers click on the "Tools" tab of the Sidebar. Find and click the <<.icon $:/core/images/export-button>> ''export all'' button. A pop-up menu will offer you the chance to export tiddlers in multiple formats.
+
+! Exporting a tiddler
+
+If you want to export a particular tiddler, first navigate to that tiddler. Then click on the <<.icon $:/core/images/down-arrow>> ''more'' button that appears above the tiddler. From the list that appears select <<.icon $:/core/images/export-button>> ''export tiddler''. A pop-up menu will offer you the chance to export the tiddler in multiple formats.
+
+! Exporting tiddlers matching a criteria (filter)
+
+To export a selection of tiddlers, click the little magnifying glass <<.icon $:/core/images/advanced-search-button>> next to the search area on the sidebar. This will open the [[Advanced Search|$:/AdvancedSearch]] tiddler. Click on the "Filter" tab of the Advanced Search tiddler. Only the [[Filter|Filters]] tab will allow you to export a selection of tiddlers. [[Filters]] follow a particular syntax. Click on this [[Filters|Filters]] link to learn about how to make filters.
+
+Once you have written a filter, a list of tiddlers matching the filter will appear. Now you can click on the <<.icon $:/core/images/export-button>> ''export tiddler'' button to the right of the filter input field. A pop-up menu will offer you the chance to export tiddlers in multiple formats.
+
+! Export formats
+
+Currently, the export formats available are:
+
+* CSV file format
+* JSON file format
+* Static HTML file
+* ".tid" file format
+
+The ``".tid"`` format is unique from the other formats in that only one tiddler will be exported, even if you are attempting to export all tiddlers or a selection of tiddlers.

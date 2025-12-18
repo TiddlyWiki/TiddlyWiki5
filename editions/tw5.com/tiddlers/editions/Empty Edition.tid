@@ -1,0 +1,13 @@
+created: 20140916213421041
+modified: 20160702084215576
+tags: Editions
+title: Empty Edition
+type: text/vnd.tiddlywiki
+
+The "empty" edition of TiddlyWiki is a vanilla distribution, with no additional plugins or configuration beyond the core code.
+
+The empty edition can be downloaded from:
+
+* Link: [ext[empty.html]]
+* Built-in: {{$:/editions/tw5.com/snippets/download-empty-button}}
+Your browser may ask you to accept the download before it begins

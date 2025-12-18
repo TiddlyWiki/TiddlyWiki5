@@ -1,0 +1,27 @@
+title: $:/core/templates/static.content
+type: text/vnd.tiddlywiki
+
+\define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
+
+<!-- For Google, and people without JavaScript-->
+
+<$reveal default="yes" text=<<savingEmpty>> type="nomatch">
+
+Es scheint, dass bei diesem Browser JavaScript deaktiviert wurde. Sie können die statische HTML Version verwenden:
+
+!! Deutsch - Deutschland
+
+* https://tiddlywiki.com/languages/de-DE/static.html - Einzelne Tiddler als individuelle Seiten.
+* [ext[https://tiddlywiki.com/languages/de-DE/alltiddlers.html#Willkommen!]] - Eine Datei mit allen Tiddlern.
+
+!! Deutsch - Österreich
+
+* https://tiddlywiki.com/languages/de-AT/static.html - Einzelne Tiddler als individuelle Seiten.
+* [ext[https://tiddlywiki.com/languages/de-AT/alltiddlers.html#Willkommen!]] - Eine Datei mit allen Tiddlern.
+
+!! Englische Version
+
+* https://tiddlywiki.com/static.html - Einzelne Tiddler als individuelle Seiten.
+* https://tiddlywiki.com/alltiddlers.html#HelloThere - single file containing all tiddlers
+
+</$reveal>

@@ -1,0 +1,8 @@
+created: 20220219134855444
+modified: 20220220192530872
+title: $:/core/ui/ViewTemplate/title/fr-default
+
+\whitespace trim
+<h2 class="tc-title">
+<$view field="fr-title"/>
+</h2>

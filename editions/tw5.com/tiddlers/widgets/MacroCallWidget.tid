@@ -1,0 +1,34 @@
+caption: macrocall
+created: 20131024141900000
+modified: 20230419103154328
+tags: Widgets $:/deprecated
+title: MacroCallWidget
+type: text/vnd.tiddlywiki
+
+<<.deprecated-since "5.3.0" "TranscludeWidget">>
+
+The <<.wlink MacroCallWidget>> widget is deprecated. While it will continue to work, users are now advised to use the <<.wlink TranscludeWidget>> widget, converting the `$name` attribute to `$variable`.
+
+For example,
+
+```
+<$macrocall $name="my-macro" my-parameter="Elephant"/>
+```
+
+should be changed to:
+
+```
+<$transclude $variable="my-macro" my-parameter="Elephant"/>
+```
+
+Internally, the <<.wlink MacroCallWidget>> widget is implemented via the <<.wlink TranscludeWidget>> widget.
+
+! Content and Attributes
+
+The content of the <<.wlink MacroCallWidget>> widget is ignored.
+
+|!Attribute |!Description |
+|$name |Name of the macro to invoke |
+|$type |ContentType with which the macro text should be parsed (defaults to `text/vnd.tiddlywiki`) |
+|$output |ContentType for the output rendering (defaults to `text/html`, can also be `text/plain` or `text/raw`) |
+|//parameters// |Macro parameters specified as attributes |

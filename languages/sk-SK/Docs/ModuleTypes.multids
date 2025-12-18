@@ -1,0 +1,22 @@
+title: $:/language/Docs/ModuleTypes/
+
+animation: Animácie, ktoré môžu byť použité s RevealWidget.
+command: Príkazy, ktoré môžu byť spustené pod Node.js.
+config: Údaje, ktoré treba vložiť do `$tw.config`.
+filteroperator: Metódy pre individuálne operácie filtrovania.
+global: Globálne údaje, ktoré treba vložiť do `$tw`.
+isfilteroperator: Parametre pre ''is'' operátor filtrovania.
+macro: JavaScript makro definície.
+parser: Parsery pre rôzne typy obsahu.
+saver: Rôzne metódy na ukladanie obsahu v browseri.
+startup: Štartovacie funkcie.
+storyview: Pohľady na celý obsah wiki (story) s úpravami animácií a správania sa widgetov.
+tiddlerdeserializer: Konvertuje rôzne typy obsahu pre tiddler.
+tiddlerfield: Definuje správanie sa jednotlivého poľa v tiddlere.
+tiddlermethod: Pridáva metódy k `$tw.Tiddler` prototypu.
+upgrader: Realizuje spracovanie tiddlerov pri upgrade alebo importe.
+utils: Pridáva metódy k `$tw.utils` prototypu.
+utils-node: Pridáva k `$tw.utils` metódy špecifické pre  Node.js.
+widget: Widgety enkapsulujú renderovanie a prekleslovanie DOM.
+wikimethod: Pridáva metódy k `$tw.Wiki`.
+wikirule: Individuálne parsovacie pravidlá pre hlavný WikiText parser.

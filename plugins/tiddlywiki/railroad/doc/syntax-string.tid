@@ -1,0 +1,5 @@
+created: 20150103184022184
+modified: 20150103184022184
+title: $:/plugins/tiddlywiki/railroad/syntax-string
+
+('"' text '"' | "'" text "'" | '"""' text '"""')

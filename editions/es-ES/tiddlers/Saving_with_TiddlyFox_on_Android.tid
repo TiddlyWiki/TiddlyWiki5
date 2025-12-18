@@ -1,0 +1,42 @@
+caption: TiddlyFox en Android
+created: 20140103134551508
+es-title: Guardar con TiddlyFox en Android
+modified: 20160603145948981
+tags: Saving
+title: Saving with TiddlyFox on Android
+type: text/vnd.tiddlywiki
+
+También puedes consultar el [[video tutorial|TiddlyWiki on Firefox for Android Video]]
+
+
+# Asegúrate de que tienes la última versión de [[Firefox para Android|Firefox for Android]]
+
+#* http://getfirefox.com
+
+#Descarga e instala la última versión de la extensión TiddlyFox de:
+
+#* https://addons.mozilla.org/es/firefox/addon/tiddlyfox/
+
+#Instala esta extensión para poder guardar localmente el archivo TiddlyWiki:
+
+#* https://addons.mozilla.org/es/android/addon/save-link-menus/
+
+#Descarga un TiddlyWiki en blanco guardando el enlace:
+
+#* https://tiddlywiki.com/languages/es-ES/empty.html
+
+#>Para guardar el enlace, mantenlo presionado y selecciona "Save link" (asegúrate de tener instalada la extensión "save-link-menus")
+
+#Cuando se haya descargado el archivo, haz click en él, bien en la barra de notificaciones, bien en el administrador de descargas.
+
+# Para abrirlo, selecciona Firefox en vez del navegador por defecto de Android.
+
+# Haz clic en ''OK'' cuando TiddlyFox te pregunte si quieres activar la función de guardado para el archivo.
+
+# Comprueba que funciona con el botón ''Nuevo tiddler'' {{$:/core/images/new-button}} de la barra lateral. Escribe algo en el tiddler y haz click en el botón ''OK'' {{$:/core/images/done-button}}
+
+# Guarda ahora los cambios haciendo click en el botón ''Guardar cambios'' {{$:/core/images/save-button}} de la barra lateral.
+
+#* Arriba a la derecha aparecerá una notificación en amarillo que dice ''Guardado''
+
+# Actualiza la ventana del navegador para comprobar que los cambios se han guardado correctamente.

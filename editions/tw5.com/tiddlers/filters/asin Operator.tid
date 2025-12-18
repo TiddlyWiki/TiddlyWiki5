@@ -1,0 +1,15 @@
+caption: asin
+created: 20211019212120548
+modified: 20211021222841479
+op-input: a [[selection of titles|Title Selection]]
+op-output: the arcsine (in radians) of the input numbers
+op-purpose: calculate the arcsine value (in radians) of a list of numbers
+tags: [[Filter Operators]] [[Mathematics Operators]] [[Trigonometric Operators]] [[Unary Mathematics Operators]]
+title: asin Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.21">> See [[Mathematics Operators]] for an overview.
+
+<<.tip " This is the inverse operation of [[sin|sin Operator]]: sin calculate the sine of an angle (in radian), but asin calculate the angle (in radian) of a sine.">>
+
+<<.operator-examples "asin">>

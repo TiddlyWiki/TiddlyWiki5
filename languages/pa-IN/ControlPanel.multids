@@ -1,0 +1,97 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: ਤਕਨੀਕੀ / ਸੁਰਖੀ
+Advanced/Hint:  Tiddly Wiki ਬਾਰੇ ਅੰਦਰੂਨੀ ਜਾਣਕਾਰੀ ਨੂੰ 
+Appearance/Caption:  ਦਿਖਾਵਟ
+Appearance/Hint: TiddlyWiki ਦੀ ਦਿਖਾਵਟ ਨੂੰ ਤਬਦੀਲ ਕਰਨ ਲਈ ਤਰੀਕੇ ਤੁਹਾਡੇ 
+Basics/AnimDuration/Prompt: ਐਨੀਮੇਸ਼ਨ ਅੰਤਰਾਲ
+Basics/Caption: ਮੁੱਢਲੀ /ਸੁਰਖੀ
+Basics/DefaultTiddlers/BottomHint: ਮੁੱਢਲੀ ਜਾਣਕਾਰੀ / ਮੂਲ Tiddlers / ਥੱਲਿਉ ਸੰਕੇਤ
+Basics/DefaultTiddlers/Prompt: ਮੁੱਢਲੀ ਜਾਣਕਾਰੀ / ਮੂਲ Tiddlers / Prompt
+Basics/DefaultTiddlers/TopHint:  tiddlers ਚੁਣੋ:, ਜੋ ਸ਼ੁਰੂ ਹੋਣ ਵਿਖੇ ਵੇਖਾਏ ਗਏ ਹਨ
+Basics/Language/Prompt:  ਸਤ ਸ੍ਰੀ ਅਕਾਲ! ਮੌਜੂਦਾ ਭਾਸ਼ਾ:
+Basics/NewJournal/Tags/Prompt: ਨਿਊ ਪੱਤ੍ਰਿਕਾ tiddlers ਵਾਸਤੇ ਟੈਗਸ
+Basics/NewJournal/Title/Prompt: ਨਵ ਪੱਤ੍ਰਿਕਾ tiddlers ਦੇ  ਸਿਰਲੇਖ
+Basics/OverriddenShadowTiddlers/Prompt:  overridden ਸ਼ੈਡੋ tiddlers ਦੀ ਸੰਖਿਆ
+Basics/ShadowTiddlers/Prompt: ਸ਼ੈਡੋ tiddlers ਦੀ ਸੰਖਿਆ
+Basics/Subtitle/Prompt:  ਉਪ ਸਿਰਲੇਖ
+Basics/SystemTiddlers/Prompt: ਸਿਸਟਮ tiddlers ਦੀ ਸੰਖਿਆ
+Basics/Tags/Prompt: ਟੈਗ ਦੀ ਸੰਖਿਆ
+Basics/Tiddlers/Prompt: tiddlers ਦੀ ਸੰਖਿਆ 
+Basics/Title/Prompt: ਇਸ ਦੇ  ~ TiddlyWiki ਦੇ ਟਾਈਟਲ
+Basics/Username/Prompt:  ਸੰਪਾਦਨ ਦੇ ਦਾਖਲੇ ਲਈ ਯੂਜ਼ਰ ਦਾ ਨਾਮ
+Basics/Version/Prompt: ~ TiddlyWiki ਦਾ ਵਰਜਨ
+EditorTypes/Caption: ਸੰਪਾਦਕ ਕਿਸਮ
+EditorTypes/Editor/Caption:  ਸੰਪਾਦਕ
+EditorTypes/Hint: ਇਹ tiddlers ਖਾਸ tiddler ਕਿਸਮ ਨੂੰ ਸੋਧਣ ਲਈ ਵਰਤਿਆ ਗਿਆ ਹੈ, ਜੋ ਕਿ ਸੰਪਾਦਕ ਨੂੰ ਪਤਾ.
+EditorTypes/Type/Caption:  ਕਿਸਮ
+Info/Caption: ਜਾਣਕਾਰੀ
+Info/Hint: ਇਸ TiddlyWiki ਬਾਰੇ ਜਾਣਕਾਰੀ
+LoadedModules/Caption: ਲੋਡ ਕੀਤੇ ਮੋਡੀਊਲ
+LoadedModules/Hint: ਲੋਡ ਕੀਤੇ ਮੋਡੀਊਲ / ਸੰਕੇਤ,
+Palette/Caption: ਪੈਲਅਟ
+Palette/Editor/Clone/Caption: ਨਕਲ ਬਣਾਉਣ
+Palette/Editor/Clone/Prompt: ਪੈਲਅਟ / ਸੰਪਾਦਕ / ਕਲੋਨ / ਪੁਸ਼ਟੀ ਕਰਨਾ
+Palette/Editor/Prompt: ਸੰਪਾਦਨ
+Palette/Editor/Prompt/Modified: ਇਸ ਪੈਲਅਟ  ਦੇ ਪਰਛਾਵੇ ਨਾਲ  ਸੋਧ ਕੀਤੀ ਕੀਤਾ ਗਿਆ ਹੈ
+Palette/Editor/Reset/Caption: ਮੁੜ-ਵਸਾਉਣਾ
+Palette/HideEditor/Caption: ਪੈਲਅਟ /ਛੁਪਾਉਣਾ ਸੰਪਾਦਕ /ਸੁਰਖੀ
+Palette/Prompt: ਮੌਜੂਦਾ ਪੈਲਅਟ:
+Palette/ShowEditor/Caption: ਪ੍ਰਦਰਸ਼ਨ ਸੰਪਾਦਕ
+Plugins/Caption:  ਪਲੱਗਇਨ
+Plugins/Disable/Caption: ਨਿਰਯੋਗ ਠਹਿਰਾਉਣਾ
+Plugins/Disable/Hint: ਪਲੱਗਇਨ / ਅਯੋਗ ਕਰੋ / ਸੰਕੇਤ ਵਿਕਲਪ
+Plugins/Disabled/Status:  ਅਯੋਗ ਹੈ
+Plugins/Empty/Hint: None
+Plugins/Enable/Caption: ਨੂੰ ਯੋਗ ਕਰੋ
+Plugins/Enable/Hint:  ਇਸ ਸਫੇ ਨੂੰ ਜਦ ਇਹ ਪਲੱਗਇਨ ਯੋਗ ਕਰੋ
+Plugins/Language/Prompt:  ਭਾਸ਼ਾ
+Plugins/Plugin/Prompt: ਪਲੱਗਇਨ
+Plugins/Theme/Prompt: ਥੀਮ
+Saving/Caption: ਸੇਵਿੰਗ / ਸੁਰਖੀ 
+Saving/Heading:  ਸੇਵਿੰਗ / ਹੈਡਿੰਗ
+Saving/TiddlySpot/Advanced/Heading: ਵਿਕਸਿਤ ਸੈਟਿੰਗ
+Saving/TiddlySpot/BackupDir: ਬੈਕਅੱਪ ਡਾਇਰੈਕਟਰੀ
+Saving/TiddlySpot/Backups: ਬੈਕਅੱਪ
+Saving/TiddlySpot/Description: Http://tiddlyspot.com ਜ ਇੱਕ ਅਨੁਕੂਲ ਰਿਮੋਟ ਸਰਵਰ ਨੂੰ ਸੰਭਾਲਣ ਦੀ ਹੈ ਜਦ ਇਹ ਸੈਟਿੰਗ ਸਿਰਫ ਇਸਤੇਮਾਲ ਕੀਤਾ ਜਾਦਾ ਹੈ
+Saving/TiddlySpot/Filename: ਫਾਇਲ ਦਾ ਨਾਮ  ਅੱਪਲੋਡ
+Saving/TiddlySpot/Heading: ~ Tiddly Spot
+Saving/TiddlySpot/Hint: // HTTP `ਕਰਨ ਲਈ ਸਰਵਰ ਦੀ URL ਮੂਲ: // <wikiname> .tiddlyspot.com / store.cgi` ਅਤੇ ਇੱਕ ਕਸਟਮ ਸਰਵਰ ਐਡਰੈੱਸ ਵਰਤਣ ਲਈ ਤਬਦੀਲ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ //
+Saving/TiddlySpot/Password: ਪਾਸਵਰਡ
+Saving/TiddlySpot/ServerURL:  URL ਸਰਵਰ
+Saving/TiddlySpot/UploadDir:  ਅੱਪਲੋਡ ਡਾਇਰੈਕਟਰੀ
+Saving/TiddlySpot/UserName: ਵਿਕਿ ਨਾਮ
+Settings/AutoSave/Caption:  ਆਪਣੇ ਆਪ ਹੀ  ਬਚਾਨਾ
+Settings/AutoSave/Disabled/Description:  ਆਪਣੇ ਆਪ ਹੀ ਤਬਦੀਲੀ ਨੂੰ ਬਚਾ ਨਾ ਕਰੋ
+Settings/AutoSave/Enabled/Description:  ਆਪਣੇ ਆਪ ਹੀ ਬਦਲਾਅ ਸੰਭਾਲੋ
+Settings/AutoSave/Hint: ਆਟੋਮੈਟਿਕ ਸੰਪਾਦਨ ਦੌਰਾਨ ਤਬਦੀਲੀ ਨੂੰ ਸੰਭਾਲਣ
+Settings/Caption: ਸੈਟਿੰਗ
+Settings/Hint:  ਇਹ ਸੈਟਿੰਗ ਤੁਹਾਡੇ TiddlyWiki ਦੇ ਰਵੱਈਆ ਨੂੰ ਸੋਧ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ.
+Settings/NavigationAddressBar/Caption: ਨੇਵੀਗੇਸ਼ਨ ਐਡਰੈੱਸ ਬਾਰ
+Settings/NavigationAddressBar/Hint:  ਸੈਟਿੰਗ / ਨੇਵੀਗੇਸ਼ਨ ਐਡਰੈੱਸ ਬਾਰ / ਸੰਕੇਤ,
+Settings/NavigationAddressBar/No/Description: ਐਡਰੈੱਸ ਬਾਰ ਨੂੰ ਅੱਪਡੇਟ ਨਾ ਕਰੋ
+Settings/NavigationAddressBar/Permalink/Description:   ਟਾਰਗਿਟ  tiddler ਨੂੰ  ਸ਼ਾਮਲ ਕਰੋ
+Settings/NavigationAddressBar/Permaview/Description: ਟਾਰਗਿਟ  tiddler ਨੂੰ  ਸ਼ਾਮਲ ਕਰੋ ਅਤੇ ਮੌਜੂਦਾ ਕਹਾਣੀ ਤਰਤੀਬ
+Settings/NavigationHistory/Caption: ਨੇਵੀਗੇਸ਼ਨ ਅਤੀਤ
+Settings/NavigationHistory/Hint:   tiddler  ਨੇਵੀਗੇਟਿੰਗ ਤੱਕ ਬਰਾਊਜ਼ਰ  ਦੇ ਇਤਿਹਾਸ ਨੂੰ ਅੱਪਡੇਟ ਕਰੋ 
+Settings/NavigationHistory/No/Description: ਇਤਿਹਾਸ ਨੂੰ ਅੱਪਡੇਟ ਨਾ ਕਰੋ
+Settings/NavigationHistory/Yes/Description: ਇਤਿਹਾਸ ਨੂੰ ਅੱਪਡੇਟ  ਕਰੋ
+Settings/ToolbarButtons/Caption: ਟੂਲਬਾਰ ਵਾਲੇ ਬਟਨ
+Settings/ToolbarButtons/Hint: ਡਿਫਾਲਟ ਟੂਲਬਾਰ ਦੇ ਬਟਨ ਦੀ ਦਿਖਾਵਟ
+Settings/ToolbarButtons/Icons/Description: ਆਈਕਾਨ ਨੂੰ ਸ਼ਾਮਲ ਕਰੋ
+Settings/ToolbarButtons/Text/Description: Iਟੈਕਸਟ ਨੂੰ ਸ਼ਾਮਲ ਕਰੋ
+StoryView/Caption: ਸਟੋਰੀ ਦੀ ਝਲਕ ਵੇਖੋ
+StoryView/Prompt: ਮੌਜੂਦਾ ਝਲਕ ਵੇਖੋ
+Theme/Caption:  ਥੀਮ
+Theme/Prompt: ਮੌਜੂਦਾ  ਥੀਮ
+TiddlerFields/Caption: Tiddler ਖੇਤਰ
+TiddlerFields/Hint: ਇਹ ਵਿਕੀ  ਵਰਤਣ ਵਿੱਚ ਇਸ TiddlerFields ਦਾ ਪੂਰਾ ਸਮੂਹ ਹੈ. ( ਪਰ ਸਾਯੇ tiddlers  ਛੱਡ ਕੇ ਹੈ)
+Toolbars/Caption: ਟੂਲਬਾਰ
+Toolbars/EditToolbar/Caption:  ਟੂਲਬਾਰ ਸੰਪਾਦਿਤ ਕਰੋ 
+Toolbars/EditToolbar/Hint:   ਬਟਨ ਚੁਣੋ ਜੋ  ਸੰਪਾਦਨ  ਵਿੱਚ tiddlers ਲਈ ਵੇਖਾਏ ਗਏ ਹਨ
+Toolbars/Hint: ਟੂਲਬਾਰ ਬਟਨ , ਜੋ ਕਿ ਵੇਖਾਇਆ ਗਿਆ ਹੈ,  ਚੋਣ ਕਰੋ
+Toolbars/PageControls/Caption: ਸਫ਼ਾ ਟੂਲਬਾਰ
+Toolbars/PageControls/Hint:  ਬਟਨ ਚੁਣੋ , ਜੋ  ਟੂਲਬਾਰ ਦੇ ਮੁੱਖ ਸਫ਼ੇ 'ਤੇ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਦੇ ਹਨ
+Toolbars/ViewToolbar/Caption: ਟੂਲਬਾਰ ਵੇਖੋ
+Toolbars/ViewToolbar/Hint:  ਬਟਨ ਚੁਣੋ, ਜੋ  tiddlers ਲਈ View ਮੋਡ ਵਿੱਚ ਵੇਖਾਏ ਗਏ ਹਨ
+Tools/Download/Full/Caption: ਪੂਰੀ wiki ਡਾਊਨਲੋਡ ਕਰੋ

@@ -1,0 +1,41 @@
+title: Core Icons
+tags: Features
+modified: 20230423103154329
+created: 20230423103154329
+
+
+!! Introduction
+
+TiddlyWiki includes over 100 custom vector icons. They feature in the user interface and are also available for authors to use in their own applications. See [[Icon Gallery]] for a complete listing.
+
+!! Usage
+
+The core icons are used by transcluding them. For example:
+
+<<wikitext-example-without-html """{{$:/core/images/new-image-button}}
+""">>
+
+The core icons are parameterised. The first parameter `size` specified the size at which the icon should be rendered:
+
+<<wikitext-example-without-html """{{$:/core/images/picture|64px}}
+<$transclude $tiddler="$:/core/images/picture" size="32px"/>
+""">>
+
+Here is an example of dynamically resizing icons:
+
+<<wikitext-example-without-html """<$list filter="[range[24,56,8]]" variable=iconSize>
+<$text text={{{ [<iconSize>addsuffix[px]] }}} />
+<$transclude $tiddler="$:/core/icon" size=<<iconSize>>/>
+</$list>
+""">>
+
+Some icons take further parameters to customise how they are rendered. For example, the $:/core/images/new-journal-button icon takes an additional parameter `day` that specifies the day of the month that should be shown on the calendar. It defaults to the current date if not specified
+
+<<wikitext-example-without-html """{{$:/core/images/new-journal-button|48px|17}}
+<$transclude $tiddler="$:/core/images/new-journal-button" day="17"/>
+""">>
+
+The core icons are implemented as embedded [[SVG elements|Using SVG]], and not as full-blown SVG images. This means that they can be styled using CSS. For example, the CSS property `fill` can be used to change the colour of the icons. For example:
+
+<<wikitext-example-without-html """<span style="fill: red;">{{$:/core/images/opacity}}</span>
+""">>

@@ -1,0 +1,17 @@
+title: $:/language/Help/setfield
+description: Prepares external tiddlers for use
+
+//Nota que iste commando es experimental e pote cambiar o esser replaciate ante esser finalisate//
+
+Fixa le quadro specificate de un gruppo de notas al resultato de wikificar un nota modello con le variabile `currentTiddler` create pro le nota.
+
+```
+--setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+Le parametros es:
+
+* ''filter'' - filtro que identifica le notas a esser toccate
+* ''fieldname'' - le quadro a modificar (le standard es "text")
+* ''templatetitle'' - le nota a wikificar a in le quadro specificate. Si vacue o mancante, alora le quadro specificate es delite
+* ''rendertype'' - le typo de texto a tractar (le standard es "text/plain"; "text/html" pote esser usate pro includer etiquettas HTML)

@@ -1,0 +1,6 @@
+title: $:/core/ui/Buttons/fold-bar
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/chevron-up}} {{$:/language/Buttons/Fold/FoldBar/Caption}}
+description: {{$:/language/Buttons/Fold/FoldBar/Hint}}
+
+<!-- This dummy toolbar button is here to allow visibility of the fold-bar to be controlled as if it were a toolbar button -->

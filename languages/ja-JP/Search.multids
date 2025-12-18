@@ -1,0 +1,21 @@
+title: $:/language/Search/
+
+Advanced/Matches: //<small><<resultCount>> 件一致</small>//
+DefaultResults/Caption: リスト
+Filter/Caption: フィルタ
+Filter/Hint: [[フィルタ|https://tiddlywiki.com/static/Filters.html]]で検索します。 
+Filter/Matches: //<small><<resultCount>> 件一致</small>//
+Matches: //<small><<resultCount>> 件一致</small>//
+Matches/All: すべて一致:
+Matches/Title: タイトル一致:
+Search: 検索
+Search/TooShort: 検索文が短すぎます
+Shadows/Caption: 隠し
+Shadows/Hint: 隠し Tiddler を検索します
+Shadows/Matches: //<small><<resultCount>> 件一致</small>//
+Standard/Caption: 一般
+Standard/Hint: 一般の Tiddler を検索します
+Standard/Matches: //<small><<resultCount>> 件一致</small>//
+System/Caption: システム
+System/Hint: システム Tiddler を検索します
+System/Matches: //<small><<resultCount>> 件一致</small>//

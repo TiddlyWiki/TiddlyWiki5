@@ -1,0 +1,25 @@
+created: 20141018131647392
+modified: 20141019200654436
+tags: [[Working with TiddlyWiki]] Features
+title: Audio
+type: text/vnd.tiddlywiki
+
+Audio files can be incorporated into TiddlyWiki in a very similar way to [[images|Images in WikiText]].
+
+! Embedded Audio
+
+Small audio files can be embedded directly within TiddlyWiki. Embedding isn't suitable for large files (over a few hundred kilobytes) because it increases the size of the TiddlyWiki file.
+
+For example, the tiddler [[TiddlyWiki.mp3]] contains an MP3 recording of the word "TiddlyWiki". If you visit that tiddler, you should see an audio player that will play back the recording.
+
+You can also transclude audio files. For example:
+
+<<wikitext-example-without-html '{{TiddlyWiki.mp3}}'>>
+
+! External Audio
+
+External audio tiddlers use the ''_canonical_uri'' field to point to an external audio file/stream, and have their ''text'' field blocked. This reduces their size considerably, but still allows for playback.
+
+For example, the tiddler [[Caruso - Ave Maria]] points to an online audio recording hosted on http://archive.org:
+
+<<wikitext-example-without-html '{{Caruso - Ave Maria}}'>>

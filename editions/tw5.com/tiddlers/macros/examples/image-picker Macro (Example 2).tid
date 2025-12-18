@@ -1,0 +1,17 @@
+created: 20160418155523369
+modified: 20211116035110986
+tags: [[Macro Examples]]
+title: image-picker Macro (Example 2)
+type: text/vnd.tiddlywiki
+
+Image: <$edit-text tiddler='$:/_MyImage' tag='input' placeholder='(unset)' default=''/>
+
+<$transclude tiddler={{$:/_MyImage}}/>
+
+---
+
+<$macrocall $name='image-picker' actions="
+
+<$action-setfield $tiddler='$:/_MyImage' $value=<<imageTitle>>/>
+
+" subfilter="prefix[Language]"/>

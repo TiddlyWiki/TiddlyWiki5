@@ -1,0 +1,21 @@
+created: 20140103091348509
+modified: 20140919161534259
+tags: Learning
+title: Adding a Twitter Follow button
+type: text/vnd.tiddlywiki
+
+Here's a macro that provides a Twitter Follow button for a particular username:
+
+```
+\define twitterFollowButton(username)
+<iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?screen_name=$username$" style="width:300px; height:20px;"></iframe>
+\end
+```
+
+The only change from the version published at https://dev.twitter.com/docs/follow-button is that new lines have been removed.
+
+Note that the src URL is given without a protocol (ie "http" or "https"). It's done this way so that it works on sites whether they are hosted on a HTTP or HTTPS domain. If you want the Twitter button to work while using a TiddlyWiki offline on a "file://" URL, then you'll need to manually add the protocol. For example:
+
+```
+<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/follow_button.html?screen_name=jermolene" style="width:300px; height:20px;"></iframe>
+```

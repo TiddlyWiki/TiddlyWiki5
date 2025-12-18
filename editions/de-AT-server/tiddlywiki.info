@@ -1,0 +1,23 @@
+{
+	"description": "Server configuration of the German (Österreich) edition",
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem",
+		"tiddlywiki/highlight",
+		"tiddlywiki/internals"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"languages": [
+		"de-AT",
+		"de-DE"
+	],
+	"includeWikis": [
+		"../de-AT"
+	],
+	"config": {
+		"default-tiddler-location": "../de-AT/tiddlers"
+	}
+}

@@ -1,0 +1,9 @@
+caption: $:/tags/TextEditor/Snippet
+created: 20180926170345251
+description: marks text snippets
+modified: 20200828154100425
+tags: SystemTags
+title: SystemTag: $:/tags/TextEditor/Snippet
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]] `$:/tags/TextEditor/Snippet` marks text snippets

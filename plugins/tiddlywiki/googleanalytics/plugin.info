@@ -1,0 +1,8 @@
+{
+	"title": "$:/plugins/tiddlywiki/googleanalytics",
+	"name": "Google Analytics",
+	"description": "Website visitor statistics from Google",
+	"contributor": "Sylvain Comte",
+	"list": "readme settings usage",
+	"stability": "STABILITY_2_STABLE"
+}

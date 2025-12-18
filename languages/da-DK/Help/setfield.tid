@@ -1,0 +1,17 @@
+title: $:/language/Help/setfield
+description: Forbereder eksterne tiddlere til brug
+
+//Bemærk at denne kommando er eksperimentel og kan ændres eller erstattes før den bliver endelig//
+
+Sætter det angivne felt i en gruppe af tiddlere med resulterende wikificering af en skabelontiddler med den `currentTiddler` variable sat til den  tiddler.
+
+```
+--setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+Parametrene er:
+
+* ''filter'' - filter der identificerer de tiddlere der påvirkes
+* ''fieldname'' - feltet der ændres (standard til "text")
+* ''templatetitle'' - tiddleren der wikificeres til det angivne felt. Hvis tom eller manglende slettes det specificerede felt
+* ''rendertype'' - text type til renderingr (standard til "text/plain"; "text/html" kan bruges for at inkludere HTML tags)

@@ -1,0 +1,20 @@
+title: $:/language/Help/rendertiddlers
+description: 呈現符合篩選條件的條目為指定的內容類型
+
+(請注意：`--rendertiddlers` 命令已被棄用，而支援新的、更靈活得 `--render` 命令)
+
+呈現符合篩選條的條目為指定的[[內容類型|ContentType]] (預設為 `text/html`) 與副檔名 (預設為 `.html`).
+
+```
+--rendertiddlers '<filter>' <template> <pathname> [<type>] [<extension>] ["noclean"]
+```
+
+例如：
+
+```
+--rendertiddlers '[!is[system]]' $:/core/templates/static.tiddler.html ./static text/plain
+```
+
+預設情況下，路徑名被解析為相對於發行版資料夾的 `output` 子資料夾。 `--output` 命令可以用於將輸出指定到一個不同的資料夾。
+
+在目標資料夾中的任何檔案都會被刪除，除非指定 ''noclean'' 旗標。若缺少目標資料夾，則以遞迴方式建立。

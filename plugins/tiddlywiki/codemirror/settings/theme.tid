@@ -1,0 +1,16 @@
+title: $:/core/ui/ControlPanel/Settings/codemirror/theme
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: {{$:/language/codemirror/theme/hint}}
+
+\define lingo-base() $:/language/codemirror/
+
+<$link to="$:/config/codemirror/theme"><<lingo hint>></$link>
+
+<$select tiddler="$:/config/codemirror/theme" default="default">
+<option value="default">default</option>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]module-type[codemirror-theme]!has[draft.of]get[name]]">
+<option value=<<currentTiddler>>><$transclude field="name"><$text text=<<currentTiddler>>/></$transclude></option>
+</$list>
+</$select>
+
+//see the [[CodeMirror Usage|$:/plugins/tiddlywiki/codemirror/usage]] how to add themes//

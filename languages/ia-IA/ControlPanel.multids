@@ -1,0 +1,95 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Avantiate
+Advanced/Hint: Information interne super iste TiddlyWiki
+Appearance/Caption: Apparentia
+Appearance/Hint: Manieras de cambiar le apparentia de tu TiddlyWiki.
+Basics/AnimDuration/Prompt: Animation - duration:
+Basics/Caption: Basic
+Basics/DefaultTiddlers/BottomHint: Usa &#91;&#91;parentheses quadrate duple&#93;&#93; pro titulos con spatios. O selige {{mantener le ordine de historia||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/Prompt: Notas standard:
+Basics/DefaultTiddlers/TopHint: Selige qual notas es monstrate in le initio:
+Basics/Language/Prompt: Hallo! Lingua actual:
+Basics/NewJournal/Tags/Prompt: Etiquettas pro nove jornales
+Basics/NewJournal/Title/Prompt: Titulo de nove jornales
+Basics/OverriddenShadowTiddlers/Prompt: Numero de superscribite notas umbral:
+Basics/ShadowTiddlers/Prompt: Numero de notas umbral:
+Basics/Subtitle/Prompt: Subtitulo:
+Basics/SystemTiddlers/Prompt: Numero de notas de systema:
+Basics/Tags/Prompt: Numero de etiquettas:
+Basics/Tiddlers/Prompt: Numero de notas:
+Basics/Title/Prompt: Titulo de iste ~TiddlyWiki:
+Basics/Username/Prompt: Nomine de usator pro signar redactiones:
+Basics/Version/Prompt: Version de ~TiddlyWiki:
+EditorTypes/Caption: Typos de editor
+EditorTypes/Editor/Caption: Editor
+EditorTypes/Hint: Iste notas determina qual editor es usate pro rediger specific typos de notas.
+EditorTypes/Type/Caption: Typo
+Info/Hint: Information super iste TiddlyWiki
+LoadedModules/Caption: Modulos in function
+LoadedModules/Hint: Actualmente, modulos de notas in function es ligate a lor notas de fonte. A ulle modulos in italico manca un nota de fonte, typicamente proque illos esseva definite durante le processo de lanceamento initial.
+Palette/Caption: Paletta
+Palette/Editor/Clone/Caption: clona
+Palette/Editor/Clone/Prompt: Il es recommendate que tu clona iste paletta umbral ante rediger lo
+Palette/Editor/Prompt: Redige
+Palette/Editor/Prompt/Modified: Iste paletta umbral ha essite modificate
+Palette/Editor/Reset/Caption: reinitialisa
+Palette/HideEditor/Caption: cela editor
+Palette/Prompt: Paletta actual:
+Palette/ShowEditor/Caption: monstra editor
+Plugins/Caption: Extensiones
+Plugins/Disable/Caption: disactiva
+Plugins/Disable/Hint: Disactiva iste extension, quando le pagina es refrescate
+Plugins/Disabled/Status: (disactivate)
+Plugins/Empty/Hint: Nulle
+Plugins/Enable/Caption: activa
+Plugins/Enable/Hint: Activa iste extension, quando le pagina es refrescate
+Plugins/Language/Prompt: Linguas
+Plugins/Plugin/Prompt: Extensiones
+Plugins/Theme/Prompt: Themas
+Saving/Caption: Salva
+Saving/Heading: Salva
+Saving/TiddlySpot/Advanced/Heading: Preferentias avantiate
+Saving/TiddlySpot/BackupDir: Directorio pro copia de securitate
+Saving/TiddlySpot/Backups: Copias de securitate
+Saving/TiddlySpot/Description: Iste preferentias es solmente usate, quando on salva a http://tiddlyspot.com o a un servitor remote compatibile
+Saving/TiddlySpot/Filename: Nomine de file a cargar
+Saving/TiddlySpot/Hint: //Le adresse del servitor es como standard `http://<wikiname>.tiddlyspot.com/store.cgi` e pote esser cambiate a usar un proprie adresse de servitor//
+Saving/TiddlySpot/Password: Contrasigno
+Saving/TiddlySpot/ServerURL: Adresse de servitor
+Saving/TiddlySpot/UploadDir: Directorio de cargar
+Saving/TiddlySpot/UserName: Nomine de wiki
+Settings/AutoSave/Caption: Salva automaticamente
+Settings/AutoSave/Disabled/Description: Non salva automaticamente le cambios
+Settings/AutoSave/Enabled/Description: Salva automaticamente le cambios
+Settings/AutoSave/Hint: Salva automaticamente cambios durante le redaction
+Settings/Caption: Preferentias
+Settings/Hint: Iste preferentias permitte personalisar le maniera de ager del TiddlyWiki.
+Settings/NavigationAddressBar/Caption: Barra de navigation de adresses
+Settings/NavigationAddressBar/Hint: Maniera que le barra de adresses del navigator age quando navigante a un nota:
+Settings/NavigationAddressBar/No/Description: Non actualisa le barra de adresses
+Settings/NavigationAddressBar/Permalink/Description: Include le nota in question
+Settings/NavigationAddressBar/Permaview/Description: Include le nota in question e le sequentia del historia actual
+Settings/NavigationHistory/Caption: Historia de navigation
+Settings/NavigationHistory/Hint: Actualisa le historia del navigator, quando on naviga a un nota:
+Settings/NavigationHistory/No/Description: Non actualisa le historia
+Settings/NavigationHistory/Yes/Description: Actualisa le historia
+Settings/ToolbarButtons/Caption: Buttones del barra de utensiles
+Settings/ToolbarButtons/Hint: Apparentia standard del buttones del barra de utensiles:
+Settings/ToolbarButtons/Icons/Description: Include icone
+Settings/ToolbarButtons/Text/Description: Include texto
+StoryView/Caption: Presentation de historia
+StoryView/Prompt: Presentation actual:
+Theme/Caption: Thema
+Theme/Prompt: Thema actual:
+TiddlerFields/Caption: Quadros de un nota
+TiddlerFields/Hint: Isto es le plen collection de quadros de un nota in uso in iste wiki (inclusive notas de systema ma exclusive notas umbral).
+Toolbars/Caption: Barras de utensiles
+Toolbars/EditToolbar/Caption: Redige Barra de utensiles
+Toolbars/EditToolbar/Hint: Selige qual buttones es monstrate pro notas sub redaction
+Toolbars/Hint: Selige qual buttones del barra de utensiles es monstrate
+Toolbars/PageControls/Caption: Barra de utensile pro paginas
+Toolbars/PageControls/Hint: Selige qual buttones es monstrate in le barra de utensiles pro le pagina principal
+Toolbars/ViewToolbar/Caption: Monstra Barra de utensiles
+Toolbars/ViewToolbar/Hint: Selige qual buttones es monstrate pro notas in modo de presentation
+Tools/Download/Full/Caption: Discarga le plen wiki

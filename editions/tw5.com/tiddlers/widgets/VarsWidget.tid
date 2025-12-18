@@ -1,0 +1,52 @@
+title: VarsWidget
+created: 20150426115958020
+modified: 20150426115958020
+tags: Widgets
+caption: vars
+
+! Introduction
+
+The <<.wid vars>> widget allows multiple variables to be set in one operation. In some situations it can result in simpler code than using the more flexible <<.wlink SetWidget>> widget. It differs from the <<.wlink LetWidget>> in that variables cannot interfere with the evaluation of other variables within the same <<.wid vars>>.
+
+! Content and Attributes
+
+The content of the <<.wid vars>> widget is the scope for the value assigned to the variable.
+
+|!Attribute |!Description |
+|//{attributes not starting with $}// |Each attribute name specifies a variable name. The attribute value is assigned to the variable |
+
+Attributes will not interfere with the evaluation of other attributes. So if one attribute sets <<.attr currentTiddler>>, and another attribute uses <<.attr currentTiddler>> in its evaluation, it will use the value of <<.attr currentTiddler>> that exists outside the widget's scope.
+
+! Examples
+
+Consider a case where you need to set multiple variables.
+
+Using the <<.wid vars>> widget, this situation may be handled in the following way:
+
+```
+\define helloworld() Hello world!
+
+<$vars greeting="Hi" me={{!!title}} sentence=<<helloworld>>>
+  <<greeting>>! I am <<me>> and I say: <<sentence>>
+</$vars>
+```
+
+In contrast, here is the same example using the <<.wid set>> widget:
+
+```
+<$set name="greeting" value="Hi" >
+<$set name="me" value={{!!title}} >
+<$set name="sentence" value=<<helloworld>> >
+  <<greeting>>! I am <<me>> and I say: <<sentence>>
+</$set>
+</$set>
+</$set>
+```
+
+! Remarks
+
+It should be noted that this widget differs from the <<.wid set>> widget in the following ways:
+
+* A fallback (also known as "emptyValue") cannot be specified
+* Filters cannot be used to produce a conditional variable assignment
+* Variable names must be literal strings

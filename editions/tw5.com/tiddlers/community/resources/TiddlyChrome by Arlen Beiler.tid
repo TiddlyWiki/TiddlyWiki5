@@ -1,0 +1,10 @@
+created: 20160422143238688
+modified: 20210106151027566
+tags: [[Other Resources]]
+title: TiddlyChrome by Arlen Beiler
+type: text/vnd.tiddlywiki
+url: https://github.com/Arlen22/tiddly-chrome-app/
+
+An extension application for Google Chrome that enables TiddlyWiki to save changes directly to the file system.
+
+{{!!url}}

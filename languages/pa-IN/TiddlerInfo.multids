@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: ਵਿਕਸਿਤ
+Advanced/PluginInfo/Empty/Hint: ਕਿਸੇ ਨੂੰ ਨਾ ਚੁਣੋ
+Advanced/PluginInfo/Heading: ਪਲੱਗਇਨ ਦਾ ਵੇਰਵਾ
+Advanced/PluginInfo/Hint: ਇਹ ਪਲੱਗਇਨ ਹੇਠ ਸ਼ੈਡੋ tiddlers ਸ਼ਾਮਿਲ ਹਨ
+Advanced/ShadowInfo/Heading:  ਸ਼ੈਡੋ ਸਥਿਤੀ
+Advanced/ShadowInfo/NotShadow/Hint: Tiddler <= << infoTiddler >>> <$ ਪਾਠ = << >> infoTiddler /> </ $ ਲਿੰਕ ਨੂੰ ਕਰਨ ਲਈ ਲਿੰਕ ਨੂੰ $> ਇੱਕ ਸ਼ੈਡੋ tiddler ਨਹੀ ਹੈ
+Advanced/ShadowInfo/OverriddenShadow/Hint: ਇਹ ਇੱਕ ਆਮ tiddler ਦੁਆਰਾ ਰੱਦ ਕੀਤਾ ਗਿਆ ਹੈ
+Advanced/ShadowInfo/Shadow/Hint: Tiddler <= << infoTiddler >>> <$ ਪਾਠ = << >> infoTiddler /> </ $ ਲਿੰਕ ਨੂੰ ਕਰਨ ਲਈ ਲਿੰਕ ਨੂੰ $> ਇੱਕ ਸ਼ੈਡੋ tiddler ਹੈ
+Advanced/ShadowInfo/Shadow/Source: ਇਹ ਪਲੱਗਇਨ <= ਡਾਲਰ link ਵਿੱਚ ਪਰਿਭਾਸ਼ਤ ਕੀਤਾ ਗਿਆ ਹੈ << pluginTiddler >>> <$ ਪਾਠ = << >> pluginTiddler /> </ $ link>
+Fields/Caption: ਖੇਤਰ
+List/Caption: ਸੂਚੀ 
+List/Empty: ਸੂਚੀ / ਖਾਲੀ
+Listed/Caption: ਸੂਚੀਬੱਧ
+Listed/Empty: ਇਹ ਕਿਸੇ ਵੀ ਹੋਰ tiddler ਦੁਆਰਾ ਸੂਚੀਬੱਧ ਨਹ ਹੈ
+References/Caption: ਹਵਾਲੇ
+References/Empty: ਕੋਈ tiddlers ਇਸ ਨੂੰ ਲਿੰਕਕਰਨ ਲਈ  ਨਹ ਹੈ
+Tagging/Caption: ਟੈਗ ਲਗਾਉਣੇ
+Tagging/Empty: No tiddlers ਇਸ ਇੱਕ ਨਾਲ ਹੀ ਟੈਗ ਹਨ,
+Tools/Caption: ਟੂਲ 

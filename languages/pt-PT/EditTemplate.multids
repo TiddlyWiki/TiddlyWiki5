@@ -1,0 +1,31 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: Este é um tiddler armazenado fora do ficheiro principal da TiddlyWiki. Pode mudar as etiquetas mas não pode editar o seu conteúdo
+Body/Placeholder: Escreva o texto para este tiddler
+Body/Preview/Type/Output: resultado
+Field/Dropdown/Caption: lista de campos
+Field/Dropdown/Hint: Mostrar lista de campos
+Field/Remove/Caption: remover campo
+Field/Remove/Hint: Remover campo
+Fields/Add/Button: adicionar
+Fields/Add/Dropdown/System: Campos de Sistema
+Fields/Add/Dropdown/User: Campos do utilizador
+Fields/Add/Name/Placeholder: nome do campo
+Fields/Add/Prompt: Adicionar novo campo
+Fields/Add/Value/Placeholder: valor do campo
+Shadow/OverriddenWarning: Isto é um tiddler-sombra modificado. Pode voltar à configuração pré-definida apagando este tiddler
+Shadow/Warning: Isto é um tiddler-sombra. Quaisquer alterações irão sobrepor-se à versão pré-definida
+Tags/Add/Button: adicionar
+Tags/Add/Placeholder: nome da etiqueta
+Tags/Dropdown/Caption: lista de etiquetas
+Tags/Dropdown/Hint: Mostrar a lista de etiquetas
+Title/BadCharacterWarning: Atenção: Evite utilizar os caracteres <<bad-chars>> no título de tiddlers
+Title/Exists/Prompt: Tiddler alvo já existente
+Title/References/Prompt: As seguintes referências a este tiddler não serão automaticamente actualizadas:
+Title/Relink/Prompt: Actualizar ''<$text text=<<fromTitle>>/>'' para ''<$text text=<<toTitle>>/>'' nas //etiquetas// e nos campos //list// de outros tiddlers
+Type/Delete/Caption: apagar tipo de conteúdo
+Type/Delete/Hint: Apagar tipo de conteúdo
+Type/Dropdown/Caption: Lista de tipo de conteúdo
+Type/Dropdown/Hint: Mostrar a lista de tipo de conteúdo
+Type/Placeholder: tipo de conteúdo
+Type/Prompt: Tipo:

@@ -1,0 +1,22 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: List
+Filter/Caption: Filter
+Filter/Hint: Search via a [[filter expression|https://tiddlywiki.com/static/Filters.html]]
+Filter/Matches: //<small><<resultCount>> matches</small>//
+Matches: //<small><<resultCount>> matches</small>//
+Matches/All: All matches:
+Matches/NoMatch: //No match//
+Matches/NoResult: //No search result//
+Matches/Title: Title matches:
+Search: Search
+Search/TooShort: Search text too short
+Shadows/Caption: Shadows
+Shadows/Hint: Search for shadow tiddlers
+Shadows/Matches: //<small><<resultCount>> matches</small>//
+Standard/Caption: Standard
+Standard/Hint: Search for standard tiddlers
+Standard/Matches: //<small><<resultCount>> matches</small>//
+System/Caption: System
+System/Hint: Search for system tiddlers
+System/Matches: //<small><<resultCount>> matches</small>//

@@ -1,0 +1,15 @@
+caption: order
+created: 20161128185907280
+modified: 20161128191251557
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input, with the order reversed if <<.field F>> is the special value `reverse`
+op-parameter: Either the string `reverse` or another value
+op-parameter-name: F
+op-purpose: selectively reverse the input list
+tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Order Operators]]
+title: order Operator
+type: text/vnd.tiddlywiki
+
+Either reverses or preserves the order of the input list according to whether the parameter is the special value `reverse`.
+
+<<.operator-examples "order">>

@@ -1,0 +1,29 @@
+caption: Emergency Export
+color: #7986CB
+created: 20180309211328412
+delivery: Saver
+description: Retrieve and save tiddlers when saving is broken
+method: save
+modified: 20200507202809334
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows Edge
+title: Emergency Tiddler Export
+type: text/vnd.tiddlywiki
+
+This method is useful if, for any reason, you should find your current TiddlyWiki instance is not saving (e.g. a plugin or a server has stopped working). It should work on just about any platform.
+
+* Go to advanced search {{$:/core/ui/Buttons/advanced-search}}
+** Goto the filter tab
+** Enter the following filter text: 
+
+
+```
+[!is[system]!sort[modified]limit[25]]
+```
+* Check the list of tiddlers.
+* Adjust the number "25" in the filter to make sure you found  all your recently modified tiddlers
+* Press the bucket with the up arrow [<button class="tc-btn-invisible" disabled><<.icon $:/core/images/export-button>></button>] which appears on the right
+* A dialogue window will ask for a location to download a file called tiddler.json on your local drive, or depending on browser configuration, just alert you that such a file will be downloaded. Press save.
+* The `tiddlers.json` file can be imported (tools in sidebar) or drag and drop the file on the top line of the story river of another TW . 
+** You can (de)select specific tiddlers. 
+** Finally, press `import`.
+

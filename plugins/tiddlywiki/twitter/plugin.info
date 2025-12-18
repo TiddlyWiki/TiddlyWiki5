@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/twitter",
+	"name": "Twitter",
+	"description": "Twitter embedding tools",
+	"list": "readme usage",
+	"stability": "STABILITY_3_LEGACY"
+}

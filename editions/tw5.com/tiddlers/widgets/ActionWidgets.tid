@@ -1,0 +1,47 @@
+created: 20141008134425548
+modified: 20211031172913375
+tags: Widgets
+title: ActionWidgets
+type: text/vnd.tiddlywiki
+
+Action widgets are a special type of widget that have no visual appearance but perform an action when triggered (such as sending a message, navigating to a tiddler, or changing the value of a tiddler). Action widgets are used in association with other widgets that [[trigger those actions|TriggeringWidgets]] (for example, the ButtonWidget).
+
+The following action widgets are provided:
+
+<<list-links "[tag[ActionWidgets]]">>
+
+There are two ways to use action widgets:
+
+* Placing them within an action string attribute (typically called `actions`) on the triggering widget (this is the preferred way)
+* Embedding the actions within the triggering widget (an older technique that is now deprecated)
+
+!! Using action string attributes
+
+The action widgets are passed as a string to the `actions` attribute of the [[triggering widget|TriggeringWidgets]]. Usually, it is more convenient to use a macro to assign the action widgets to a variable. For example, here is a button that triggers two actions of sending different messages:
+
+```
+\define my-actions()
+<$action-sendmessage $message="tm-home"/>
+<$action-sendmessage $message="tm-full-screen"/>
+\end
+
+<$button actions=<<my-actions>>>
+Click me!
+</$button>
+```
+
+!! Directly embedding action widgets
+
+The action widgets need not be immediate children of their [[triggering widget|TriggeringWidgets]], but they must be descendents of it. The actions are performed in sequence. Here is the above example rewritten to use embedding:
+
+```
+<$button>
+<$action-sendmessage $message="tm-home"/>
+<$action-sendmessage $message="tm-full-screen"/>
+Click me!
+</$button>
+```
+
+! Action Execution Modes
+
+{{ActionWidget Execution Modes}}

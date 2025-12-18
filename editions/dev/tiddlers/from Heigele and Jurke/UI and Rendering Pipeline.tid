@@ -1,0 +1,25 @@
+chapter.of: TiddlyWiki Core Application
+created: 20140708085306641
+modified: 20140717195230942
+sub.num: 4
+tags: doc
+title: UI and Rendering Pipeline
+
+The microkernel provides basic functionality to store tiddlers and manage modules and plugins.
+The [[Startup Process]] then loads the core plug-in including extensions to the store providing
+a [[Event Mechanism]], [[Caching]], [[Tags|Tags and Filter Mechanism]] and a [[Filter Mechanism|Tags and Filter Mechanism]] giving the ability to query for specific tiddlers.
+
+Using some of this techniques the core plug-in also adds some functionalities to load and save single tiddlers or the whole wiki, described in [[Extended Persistence]].
+
+This next chapter will focus on the parts of the core plug-in that provide the UI of TiddlyWiki.
+
+<<<
+{{rendering.svg}}
+<<< The rendering pipeline [https://tiddlywiki.com/talkytalky, 17.07.2014]
+
+<$list filter="[!has[draft.of]has[chapter.of]chapter.of[UI and Rendering Pipeline]tag[doc]sort[sub.num]]">
+
+
+!! <$view field="title"/>
+{{!!text}}
+</$list>

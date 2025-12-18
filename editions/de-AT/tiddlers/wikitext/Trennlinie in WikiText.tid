@@ -1,0 +1,14 @@
+caption: Trennlinie
+created: 20131205160706975
+creator: pmario
+modified: 20140913121200274
+modifier: pmario
+tags: WikiText
+title: Trennlinie in WikiText
+type: text/vnd.tiddlywiki
+
+Eine horizontale Trennlinie kann mit 3 minus Zeichen erstellt werden und sollte sparsam eingesetzt werden:
+
+<<wikitext-example src:"
+---
+">>

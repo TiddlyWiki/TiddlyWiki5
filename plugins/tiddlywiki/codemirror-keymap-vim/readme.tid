@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/codemirror-keymap-vim/readme
+
+This plugin adds a ''Keymap'' with some of the most important ''Vim'' keyboard shortcuts
+
+For information about available ''keyboard shortcuts'' see the [ext[CodeMirror vim demo|https://codemirror.net/demo/vim.html]]

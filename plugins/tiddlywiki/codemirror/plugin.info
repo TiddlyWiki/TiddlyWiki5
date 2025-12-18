@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/codemirror",
+	"name": "CodeMirror",
+	"description": "CodeMirror editor",
+	"list": "readme usage keyboard license",
+	"stability": "STABILITY_2_STABLE"
+}

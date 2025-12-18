@@ -1,0 +1,19 @@
+{
+	"description": "Server configuration of the tw5.com edition",
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem",
+		"tiddlywiki/highlight",
+		"tiddlywiki/internals"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"includeWikis": [
+		"../tw5.com"
+	],
+	"config": {
+		"default-tiddler-location": "../tw5.com/tiddlers"
+	}
+}

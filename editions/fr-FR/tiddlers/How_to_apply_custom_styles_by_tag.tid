@@ -1,0 +1,31 @@
+created: 20141001132300000
+fr-title: Des styles personnalisés selon les tags
+modified: 20150620100032895
+tags: Learning
+title: How to apply custom styles by tag
+type: text/vnd.tiddlywiki
+
+Vous pouvez appliquer des styles personnalisés aux tiddlers ayant un tag particulier en définissant une classe CSS nommée `tc-tagged-<Nom du tag>`.
+
+Par exemple, pour coloriser les tiddlers étiquetés "NightReader" d'une façon spéciale, [[Créer une feuille de style |Using Stylesheets]] définissant la classe `tc-tagged-NightReader` comme suit<<:>>
+
+```
+.tc-tagged-NightReader {
+	background-color:black;
+	color: orange;
+	padding: 35px 35px;
+}
+
+.tc-tagged-NightReader .tc-tiddler-body {
+	font-size: 1.5em;
+}
+```
+
+La classe `tc-tagged-NightReader` s'applique au tiddler tou entier et pas seulement au texte du tiddler. Si vous désirez l'appliquer à une portion plus réduite du tiddler vous pouvez ajuster le sélecteur CSS, comme ici avec `.tc-tagged-NightReader .tc-tiddler-body`.
+
+Notez que les tags contenant des espaces et des caractères non-alphanumériques seront convertis en utilisant le codage URI, rendant le nom de classe CSS généré difficile à prévoir. Par exemple<<:>>
+
+|!Tag |!Nom généré pour la classe |
+|`$:/mytag` |`tc-tagged-%24%3A%2Fmytag` |
+|`one two` |`tc-tagged-one%20two` |
+|`£35.23` |`tc-tagged-%C2%A335.23` |

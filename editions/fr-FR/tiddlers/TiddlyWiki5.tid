@@ -1,0 +1,8 @@
+caption: TiddlyWiki5
+created: 20130825213600000
+modified: 20150622113254756
+tags: Concepts
+title: TiddlyWiki5
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5 est une réincarnation de TiddlyWiki armée pour les 25 prochaines années. Il s'agit d'une wiki interactif complet, écrit en JavaScript et qui peut s'exécuter soit dans un navigateur web, soit en mode serveur sous [[Node.js]].

@@ -1,0 +1,11 @@
+created: 20150228131248000
+modified: 20150228131522000
+tags: Definitions
+title: Percent Encoding
+type: text/vnd.tiddlywiki
+
+<<.dlink-ex "Percent encoding" "https://en.wikipedia.org/wiki/Percent-encoding">> is a notation that allows otherwise invalid characters to be included in a [[URI]].
+
+Such characters are represented as a percent sign `%` followed by two additional characters.
+
+For example, a space is represented as `%20` and an actual percent sign is represented as `%25`.

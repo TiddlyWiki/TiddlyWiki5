@@ -1,0 +1,26 @@
+created: 201804111739
+modified: 201804111739
+title: Custom styles by user-class
+tags: [[How to apply custom styles]]
+type: text/vnd.tiddlywiki
+
+''Tiddler Field: `class`'' <<.from-version "5.1.16">>
+
+The [[tag manager|$:/TagManager]] allows us to set a tiddler `color` field, that is used to define the "tag-pill" colour. Since: <<.from-version "5.1.16">> we can define a `class` field, that is directly inserted into the [[ViewTemplate|$:/core/ui/ViewTemplate]] and it can be used for styling: 
+
+"""
+title: `anyName`
+tags: `$:/tags/Stylesheet`
+class: `myClass`
+"""
+
+Every tiddler, that has a `class` field can be styled that way!
+
+```
+.myClass {
+  border: 2px solid blue;
+}
+
+```
+
+Learn more at: [[How to apply custom styles]]

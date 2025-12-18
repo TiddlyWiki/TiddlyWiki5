@@ -1,0 +1,20 @@
+created: 20150124125646000
+modified: 20220729141540007
+tags: Tagging
+title: Order of Tagged Tiddlers
+type: text/vnd.tiddlywiki
+
+When ~TiddlyWiki generates a list of the tiddlers that have a particular tag (e.g. the dropdown list of a tag pill), it orders the tiddlers using the following rules:
+
+# Start with any that are [[declared|Title List]] in the <<.field list>> field of the tag tiddler, in the order given there.
+
+# In each remaining tiddler <<.place T>>, look for a <<.field list-before>> field. If this has a tiddler title as its value, place <<.place T>> just <<.em before>> that one.
+#* As a special case, if the field exists but its value is empty, place <<.place T>> at the very start of the list.
+
+# In each remaining tiddler <<.place T>>, look for a <<.field list-after>> field. If this has a tiddler title as its value, place tiddler <<.place T>> just <<.em after>> that one.
+
+#* As a special case, if the field exists but its value is empty, place <<.place T>> at the very end of the list.
+
+# If any tiddlers still remain, place them at the end of the list in ascending alphabetical order of title. The difference between capital and lowercase letters is ignored.
+
+The ordering of tiddlers with a particular tag can be directly modified using drag and drop within a tag pill dropdown. The underlying [[list-tagged-draggable Macro]] can also be used elsewhere.

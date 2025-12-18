@@ -1,0 +1,101 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: चेतावनी पृष्ठभूमि
+alert-border: चेतावनी सीमा
+alert-highlight: चेतावनी को उजागर
+alert-muted-foreground:  अग्रभूमि को  म्यूट किया गया सचेतक
+background: सामान्य पृष्ठभूमि
+blockquote-bar: ब्लॉक उद्धरण बार
+code-background: कोड पृष्ठभूमि
+code-border: कोड सीमा
+code-foreground: कोड  अग्रभूमि 
+dirty-indicator: बिना सहेजे गए परिवर्तन सूचक
+download-background: डाउनलोड बटन पृष्ठभूमि
+download-foreground: डाउनलोड बटन अग्रभूमि
+dragger-background:  पृष्ठभूमि घसीटनेवाला
+dragger-foreground: अग्रभूमि घसीटनेवाला
+dropdown-background: लटकती पृष्ठभूमि
+dropdown-border: लटकती  सीमा
+dropdown-tab-background: लटकती टैब पृष्ठभूमि
+dropdown-tab-background-selected: चयनित टैब के लिए लटकती टैब पृष्ठभूमि
+dropzone-background: ड्रॉप जोन पृष्ठभूमि
+external-link-background: बाहरी लिंक पृष्ठभूमि
+external-link-background-hover: बाहरी लिंक पृष्ठभूमि हॉवर
+external-link-background-visited: बाहरी लिंक पृष्ठभूमि का दौरा किया
+external-link-foreground: बाहरी लिंक अग्रभूमि
+external-link-foreground-hover: बाहरी लिंक अग्रभूमि हॉवर
+external-link-foreground-visited: बाहरी लिंक अग्रभूमि   का दौरा किया
+foreground:  सामान्य अग्रभूमि  
+message-background: संदेश बॉक्स पृष्ठभूमि
+message-border: संदेश बॉक्स सीमा
+message-foreground: संदेश बॉक्स अग्रभूमि  
+modal-backdrop: मॉडल वापस ड्रॉप
+modal-background: मॉडल पृष्ठभूमि
+modal-border: मॉडल सीमा
+modal-footer-background: मॉडल पदलेख की पृष्ठभूमि
+modal-footer-border: मॉडल पदलेख की सीमा
+modal-header-border: मॉडल शीर्षलेख सीमा
+muted-foreground: जनरल मौन अग्रभूमि
+notification-background: अधिसूचना पृष्ठभूमि
+notification-border: अधिसूचना  सीमा
+page-background: पृष्ठ की पृष्ठभूमि
+pre-background: Preformatted कोड पृष्ठभूमि
+pre-border: Preformatted कोड सीमा
+primary: सामान्य प्राथमिक
+sidebar-button-foreground: साइडबार बटन अग्रभूमि
+sidebar-controls-foreground: साइडबार नियंत्रण अग्रभूमि
+sidebar-controls-foreground-hover: साइडबार अग्रभूमि हॉवर को नियंत्रित करता है
+sidebar-foreground: साइडबार अग्रभूमि
+sidebar-foreground-shadow: साइडबार अग्रभूमि छाया
+sidebar-muted-foreground: साइडबार मौन अग्रभूमि
+sidebar-muted-foreground-hover: साइडबार  मौन अग्रभूमि हॉवर
+sidebar-tab-background: साइडबार टैब पृष्ठभूमि
+sidebar-tab-background-selected: चयनित टैब के लिए साइडबार टैब पृष्ठभूमि
+sidebar-tab-border:  साइडबार टैब सीमा
+sidebar-tab-border-selected: चयनित टैब के लिए साइडबार टैब सीमा
+sidebar-tab-divider: साइडबार टैब विभक्त
+sidebar-tab-foreground: साइडबार टैब अग्रभूमि
+sidebar-tab-foreground-selected: चयनित टैब के लिए साइडबार टैब अग्रभूमि
+sidebar-tiddler-link-foreground: साइडबार tiddler लिंक अग्रभूमि 
+sidebar-tiddler-link-foreground-hover: साइडबार tiddler लिंक अग्रभूमि हॉवर
+static-alert-foreground: स्टेटिक चेतावनी अग्रभूमि
+tab-background: टैब पृष्ठभूमि
+tab-background-selected: चयनित टैब के लिए टैब पृष्ठभूमि
+tab-border:  टैब सीमा
+tab-border-selected: चयनित टैब के लिए टैब सीमा
+tab-divider: टैब विभक्त
+tab-foreground: टैब अग्रभूमि
+tab-foreground-selected: चयनित टैब के लिए टैब अग्रभूमि
+table-border: टेबल सीमा
+table-footer-background: टेबल पदलेख की पृष्ठभूमि
+table-header-background: तालिका शीर्षलेख पृष्ठभूमि
+tag-background: टैग पृष्ठभूमि
+tag-foreground: टैग अग्रभूमि
+tiddler-background: Tiddler पृष्ठभूमि
+tiddler-border: Tiddler सीमा
+tiddler-controls-foreground: Tiddler अग्रभूमि को नियंत्रित करता है
+tiddler-controls-foreground-hover: Tiddler अग्रभूमि हॉवर को नियंत्रित करता है 
+tiddler-controls-foreground-selected: Tiddler चयनित नियंत्रण के लिए अग्रभूमि को नियंत्रित करता है
+tiddler-editor-background: Tiddler संपादक पृष्ठभूमि
+tiddler-editor-border: Tiddler संपादक सीमा
+tiddler-editor-border-image: Tiddler संपादक सीमा की छवि
+tiddler-editor-fields-even: यहां तक कि खेतों के लिए Tiddler संपादक पृष्ठभूमि
+tiddler-editor-fields-odd: विषम क्षेत्रों के लिए Tiddler संपादक पृष्ठभूमि
+tiddler-info-background: Tiddler जानकारी पैनल पृष्ठभूमि
+tiddler-info-border: Tiddler जानकारी पैनल सीमा
+tiddler-info-tab-background: Tiddler जानकारी पैनल टैब पृष्ठभूमि
+tiddler-link-background: Tiddler लिंक पृष्ठभूमि
+tiddler-link-foreground: Tiddler लिंक अग्रभूमि
+tiddler-subtitle-foreground: Tiddler उपशीर्षक अग्रभूमि
+tiddler-title-foreground: Tiddler शीर्षक अग्रभूमि
+toolbar-cancel-button: टूलबार 'रद्द करें'  अग्रभूमि बटन
+toolbar-close-button: टूलबार 'बंद'  अग्रभूमि बटन 
+toolbar-delete-button: टूलबार 'नष्ट'  अग्रभूमि बटन 
+toolbar-done-button: टूलबार 'किया' अग्रभूमि  बटन 
+toolbar-edit-button: टूलबार 'संपादन' अग्रभूमि बटन 
+toolbar-info-button: टूलबार 'जानकारी' अग्रभूमि बटन 
+toolbar-new-button: टूलबार 'नए tiddler' अग्रभूमि बटन 
+toolbar-options-button:   अग्रभूमि टूलबार 'विकल्प' बटन
+toolbar-save-button: बटन अग्रभूमि 'सहेजें' टूलबार
+untagged-background: अनटैग पिल पृष्ठभूमि
+very-muted-foreground: बहुत मौन अग्रभूमि

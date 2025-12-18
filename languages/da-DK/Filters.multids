@@ -1,0 +1,14 @@
+title: $:/language/Filters/
+
+AllTags: Alle tags undtaget systemtags
+AllTiddlers: Alle tiddlere undtaget systemtiddlere
+Drafts: Kladdetiddlere
+Missing: Manglende tiddlere
+Orphans: Løse tiddlere
+OverriddenShadowTiddlers: Overskrevne skyggetiddlere
+RecentSystemTiddlers: Nyligt ændrede tiddlere, inklusive systemtiddlere
+RecentTiddlers: Nyligt ændrede tiddlere
+ShadowTiddlers: Skyggetiddlere
+SystemTags: Systemtags
+SystemTiddlers: Systemtiddlere
+TypedTiddlers: Ikke wiki-tekst tiddlere

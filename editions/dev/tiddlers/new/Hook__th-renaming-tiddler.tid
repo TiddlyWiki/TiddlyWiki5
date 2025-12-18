@@ -1,0 +1,24 @@
+created: 20170209145207186
+modified: 20170209145633522
+tags: HookMechanism
+title: Hook: th-renaming-tiddler
+type: text/vnd.tiddlywiki
+
+This hook allows plugins to inspect tiddlers before they are modified by the `tm-rename-tiddler` message.
+
+Hook function parameters:
+
+* ''newTiddler'': tiddler object incorporating the rename
+* ''oldTiddler'': optional existing tiddler object that will be overwritten
+
+Return value:
+
+* newTiddler: tiddler object to be used for the renaming operation.
+
+The original tiddler object can be returned unmodified by the hook. If the hook needs to modify the tiddler then it should return a new tiddler object, for example:
+
+```
+	return new $tw.Tiddler(tiddler,{"my-field": value});
+```
+
+Hooks must not change the ''title'' field but can freely modify any other field of the tiddler.

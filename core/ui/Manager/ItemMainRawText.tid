@@ -1,0 +1,5 @@
+title: $:/Manager/ItemMain/RawText
+tags: $:/tags/Manager/ItemMain
+caption: {{$:/language/Manager/Item/RawText}}
+
+<pre><code><$view/></code></pre>

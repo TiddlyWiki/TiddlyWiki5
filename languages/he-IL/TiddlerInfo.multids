@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: מתקדם
+Advanced/PluginInfo/Empty/Hint: ללא
+Advanced/PluginInfo/Heading: פרטי פלאגין
+Advanced/PluginInfo/Hint: פלאגין זה כולל את טידלרי הצל הבאים:
+Advanced/ShadowInfo/Heading: מצב צל
+Advanced/ShadowInfo/NotShadow/Hint: הטידלר <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> אינו טידלר צל
+Advanced/ShadowInfo/OverriddenShadow/Hint: הוא ממוסך על ידי טידלר אחר
+Advanced/ShadowInfo/Shadow/Hint: הטידלר <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> הוא טילדר צל
+Advanced/ShadowInfo/Shadow/Source: הוא מוגדר בפלאגין <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Fields/Caption: שדות
+List/Caption: רשימה
+List/Empty: לטידלר זה אין רשימה
+Listed/Caption: רשום
+Listed/Empty: הטידלר אינו רשום על ידי אחרים
+References/Caption: התייחסויות
+References/Empty: אין טידלרים המקושרים לזה
+Tagging/Caption: תיוג
+Tagging/Empty: אין טידלרים המתויגים על ידי זה
+Tools/Caption: כלים

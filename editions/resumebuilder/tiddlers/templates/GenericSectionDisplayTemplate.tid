@@ -1,0 +1,20 @@
+tags: 
+title: GenericSectionDisplayTemplate
+
+\define thisDisplayThing()
+<$list filter='[is[current]removeprefix[$:/display/]addprefix[$:/settings/$(ThisResumeName)$/]!show[false]get[template]]'>
+<$transclude mode=block/>
+</$list>
+\end
+
+<!--
+\define thisDisplayThing()
+<$list filter='[[$:/settings/$(ThisResumeName)$/$(currentTiddler)$]!show[false]get[template]]'>
+<$transclude mode=block/>
+</$list>
+\end
+-->
+
+<$set name=ThisResumeName value={{$:/settings/Global!!selected_resume}}>
+<<thisDisplayThing>>
+</$set>

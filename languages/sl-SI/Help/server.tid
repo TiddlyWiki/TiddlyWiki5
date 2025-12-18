@@ -1,0 +1,38 @@
+title: $:/language/Help/server
+description: Zagotavlja HTTP strežnik za TiddlyWiki.
+
+Strežnik, vgrajen v TiddlyWiki5, je zelo preprost. Čeprav je združljiv s TiddlyWeb, ne podpira številnih funkcij, potrebnih za robustno uporabo v internetu.
+
+V osnovi omogoča streže prikaz določenega tiddlerja. Poleg tega pa omogoča še strežbo posameznih tiddlerjev kodiranih v JSON formatu ter podpira osnovne operacije HTTP za `GET`,` PUT` in `DELETE`.
+
+
+```
+--server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host> <pathprefix>
+```
+
+Parametri so:
+
+* ''port'' - številka vrat, s katerih naj se streže (privzeto je "8080")
+* ''roottiddler'' - tiddler, ki bo osnovni tiddler (privzeto "$:/core/save/all")
+* ''rendertype'' - vrsto vsebine, v kateri na bo naj bo prikazan osnovni tiddler (privzeto je "text / plain")
+* ''servetype'' - vrsto vsebine, v kateri naj bo strežen osnovni tiddler (privzeto je "text / html")
+* ''username''- privzeto uporabniško ime za podpisovanje sprememb
+* ''password'' - izbirno geslo za osnovno overjanje
+* ''gostitelj'' - neobvezno ime gostitelja, s katerega se streže (privzeto je "127.0.0.1" ali "localhost")
+* ''pathprefix'' - neobvezna predpona za poti
+
+Če je parameter gesla določen, bo brskalnik uporabnika pozval za uporabniško ime in geslo. Geslo se pošilja v nešifriranem besedilu, zato ta implementacija ni primerna za splošno uporabo.
+
+Na primer:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+Če morate nastaviti ime gostitelja ali pathprefix in ne želite zahtevati gesla je mogoče za uporabniško ime in geslo uporabiti prazen niz:
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+Če želite zagnati več TiddlyWiki strežnikov hkrati, morate vsakemu nastaviti svoja vrata (port).

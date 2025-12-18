@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/text-slicer/icon
+tags: $:/tags/Image
+
+<svg class="tc-image-text-slicer tc-image-button" width="22pt" height="22pt" viewBox="0 0 128 128">
+    <g fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M64,0 L118.5596,32 L118.5596,96 L64,128 L9.44039956,96 L9.44039956,32 L64,0 Z" ></path>
+        <g transform="translate(32.000000, 32.000000) scale(2.19)" fill="#ffffff">
+            {{$:/plugins/tiddlywiki/text-slicer/images/text-slicer-icon}}
+        </g>
+    </g>
+</svg>

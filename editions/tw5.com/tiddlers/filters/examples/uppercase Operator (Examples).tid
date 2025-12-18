@@ -1,0 +1,8 @@
+created: 20190613153541799
+modified: 20190613153642345
+tags: [[uppercase Operator]] [[Operator Examples]]
+title: uppercase Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[Abc]uppercase[]]">>
+<<.operator-example 2 "[tag[HelloThere]uppercase[]]">>

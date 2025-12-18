@@ -1,0 +1,13 @@
+title: $:/core/templates/static.area
+
+<$reveal type="nomatch" state="$:/isEncrypted" text="yes">
+{{{ [all[shadows+tiddlers]tag[$:/tags/RawStaticContent]!has[draft.of]] ||$:/core/templates/raw-static-tiddler}}}
+{{$:/core/templates/static.content||$:/core/templates/html-tiddler}}
+</$reveal>
+<$reveal type="match" state="$:/isEncrypted" text="yes">
+This file contains an encrypted ~TiddlyWiki. Enable ~JavaScript and enter the decryption password when prompted.
+</$reveal>
+<!-- ensure splash screen isn't shown when JS is disabled -->
+`<style>
+.tc-remove-when-wiki-loaded {display: none;}
+</style>`

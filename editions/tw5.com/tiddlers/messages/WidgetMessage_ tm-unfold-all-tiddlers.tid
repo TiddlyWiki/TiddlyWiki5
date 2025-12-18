@@ -1,0 +1,16 @@
+caption: tm-unfold-all-tiddlers
+created: 20160424233133261
+modified: 20191028113810219
+tags: Messages
+title: WidgetMessage: tm-unfold-all-tiddlers
+type: text/vnd.tiddlywiki
+
+The `tm-unfold-all-tiddlers` message unfolds all tiddlers in the current story list. It does so by setting the text of all state tiddlers to: "<<.value "show">>".
+
+|!Name |!Description |
+|foldedStatePrefix |Prefix for the state tiddler in which the fold state is stored. |
+
+<<.tip "The core uses a foldStatePrefix of `$:/state/folded/` to store the fold states for the default story view.">>
+<<.warning "The state tiddlers title is computed as `foldStatePrefix + TiddlerTitle`. If the foldStatePrefix is not set, it will overwrite the text of the tiddler(s) itself, resulting in data loss. ">>
+
+The `tm-unfold-all-tiddlers` message is usually generated with the ButtonWidget and is handled by the surrounding NavigatorWidget.

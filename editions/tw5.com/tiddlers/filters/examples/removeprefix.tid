@@ -1,0 +1,8 @@
+created: 20150118132851000
+modified: 20220218023400000
+tags: [[removeprefix Operator]] [[Operator Examples]]
+title: removeprefix Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[My Cat]] [[Your Garden]] [[My Favourite Armchair]] +[removeprefix[My ]]">>
+<<.operator-example 2 "[[My Cat]] [[Your Garden]] [[My Favourite Armchair]] +[removeprefix:caseinsensitive[my ]]">>

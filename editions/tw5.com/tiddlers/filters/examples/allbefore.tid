@@ -1,0 +1,11 @@
+created: 20151017150902487
+modified: 20151108051438263
+tags: [[Operator Examples]] [[allbefore Operator]]
+title: allbefore Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]allbefore[Wednesday]]">>
+<<.operator-example 2 "[list[Days of the Week]allbefore:include[Wednesday]]">>
+<<.operator-example 3 "A B C D E +[allbefore:include[C]count[]]">>

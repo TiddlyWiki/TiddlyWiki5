@@ -1,0 +1,77 @@
+title: $:/themes/tiddlywiki/vanilla/themetweaks
+tags: $:/tags/ControlPanel/Appearance
+caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
+
+\define lingo-base() $:/language/ThemeTweaks/
+
+\define replacement-text()
+[img[$(imageTitle)$]]
+\end
+
+\define backgroundimage-dropdown()
+<div class="tc-drop-down-wrapper">
+<$set name="state" value=<<qualify "$:/state/popup/themetweaks/backgroundimage">>>
+<$button popup=<<state>> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
+<$reveal state=<<state>> type="popup" position="belowleft" text="" default="" class="tc-popup-keep">
+<div class="tc-drop-down" style="text-align:center;">
+<$macrocall $name="image-picker" actions="""
+
+<$action-setfield
+	$tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimage"
+	$value=<<imageTitle>>
+/>
+
+<$action-deletetiddler $tiddler=<<state>>/>
+
+"""/>
+</div>
+</$reveal>
+</$set>
+</div>
+\end
+
+\define backgroundimageattachment-dropdown()
+<$select tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment" default="scroll">
+<option value="scroll"><<lingo Settings/BackgroundImageAttachment/Scroll>></option>
+<option value="fixed"><<lingo Settings/BackgroundImageAttachment/Fixed>></option>
+</$select>
+\end
+
+\define backgroundimagesize-dropdown()
+<$select tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize" default="scroll">
+<option value="auto"><<lingo Settings/BackgroundImageSize/Auto>></option>
+<option value="cover"><<lingo Settings/BackgroundImageSize/Cover>></option>
+<option value="contain"><<lingo Settings/BackgroundImageSize/Contain>></option>
+</$select>
+\end
+
+<<lingo ThemeTweaks/Hint>>
+
+! <<lingo Options>>
+
+|<$link to="$:/themes/tiddlywiki/vanilla/options/sidebarlayout"><<lingo Options/SidebarLayout>></$link> |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/sidebarlayout"><option value="fixed-fluid"><<lingo Options/SidebarLayout/Fixed-Fluid>></option><option value="fluid-fixed"><<lingo Options/SidebarLayout/Fluid-Fixed>></option></$select> |
+|<$link to="$:/themes/tiddlywiki/vanilla/options/stickytitles"><<lingo Options/StickyTitles>></$link><br>//<<lingo Options/StickyTitles/Hint>>// |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/stickytitles"><option value="no">{{$:/language/No}}</option><option value="yes">{{$:/language/Yes}}</option></$select> |
+|<$link to="$:/themes/tiddlywiki/vanilla/options/codewrapping"><<lingo Options/CodeWrapping>></$link> |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/codewrapping"><option value="pre">{{$:/language/No}}</option><option value="pre-wrap">{{$:/language/Yes}}</option></$select> |
+
+! <<lingo Settings>>
+
+|<$link to="$:/themes/tiddlywiki/vanilla/settings/fontfamily"><<lingo Settings/FontFamily>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/fontfamily" default="" tag="input"/> | |
+|<$link to="$:/themes/tiddlywiki/vanilla/settings/codefontfamily"><<lingo Settings/CodeFontFamily>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/codefontfamily" default="" tag="input"/> | |
+|<$link to="$:/themes/tiddlywiki/vanilla/settings/editorfontfamily"><<lingo Settings/EditorFontFamily>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/editorfontfamily" default="" tag="input"/> | |
+|<$link to="$:/themes/tiddlywiki/vanilla/settings/backgroundimage"><<lingo Settings/BackgroundImage>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" default="" tag="input"/> |<<backgroundimage-dropdown>> |
+|<$link to="$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment"><<lingo Settings/BackgroundImageAttachment>></$link> |<<backgroundimageattachment-dropdown>> | |
+|<$link to="$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize"><<lingo Settings/BackgroundImageSize>></$link> |<<backgroundimagesize-dropdown>> | |
+
+! <<lingo Metrics>>
+
+|<$link to="$:/themes/tiddlywiki/vanilla/metrics/fontsize"><<lingo Metrics/FontSize>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/fontsize" default="" tag="input"/> |
+|<$link to="$:/themes/tiddlywiki/vanilla/metrics/lineheight"><<lingo Metrics/LineHeight>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/lineheight" default="" tag="input"/> |
+|<$link to="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize"><<lingo Metrics/BodyFontSize>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize" default="" tag="input"/> |
+|<$link to="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight"><<lingo Metrics/BodyLineHeight>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight" default="" tag="input"/> |
+|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storyleft"><<lingo Metrics/StoryLeft>></$link><br>//<<lingo Metrics/StoryLeft/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" default="" tag="input"/> |
+|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storytop"><<lingo Metrics/StoryTop>></$link><br>//<<lingo Metrics/StoryTop/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storytop" default="" tag="input"/> |
+|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storyright"><<lingo Metrics/StoryRight>></$link><br>//<<lingo Metrics/StoryRight/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" default="" tag="input"/> |
+|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storywidth"><<lingo Metrics/StoryWidth>></$link><br>//<<lingo Metrics/StoryWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" default="" tag="input"/> |
+|<$link to="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth"><<lingo Metrics/TiddlerWidth>></$link><br>//<<lingo Metrics/TiddlerWidth/Hint>>//<br> |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth" default="" tag="input"/> |
+|<$link to="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint"><<lingo Metrics/SidebarBreakpoint>></$link><br>//<<lingo Metrics/SidebarBreakpoint/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint" default="" tag="input"/> |
+|<$link to="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth"><<lingo Metrics/SidebarWidth>></$link><br>//<<lingo Metrics/SidebarWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" default="" tag="input"/> |

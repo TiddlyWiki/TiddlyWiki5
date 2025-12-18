@@ -1,0 +1,8 @@
+created: 20150118134611000
+modified: 20150118183202000
+tags: [[field Operator]] [[Operator Examples]]
+title: field Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[field:author[JeremyRuston]]" "plugins authored by JeremyRuston">>
+<<.operator-example 2 "[plugin-type[theme]author[JeremyRuston]]" "themes authored by JeremyRuston">>

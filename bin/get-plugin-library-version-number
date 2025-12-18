@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+// Extract raw version number from package.json (without the optional "-prerelease" suffix)
+
+if(!process.env["TW5_BUILD_TIDDLYWIKI"]) {
+	throw "TW5_BUILD_TIDDLYWIKI environment variable not set";
+}
+
+var fs = require("fs"),
+	path = require("path");
+
+var filename = path.resolve(path.dirname(process.env["TW5_BUILD_TIDDLYWIKI"]),"./package.json"),
+	json = JSON.parse(fs.readFileSync(filename,"utf8"));
+
+if(!json.version) {
+	throw "Missing version number in package.json";
+}
+
+process.stdout.write("v" + json.version.split("-")[0]);

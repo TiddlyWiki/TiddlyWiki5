@@ -1,0 +1,10 @@
+title: $:/Manager/ItemMain/Fields
+tags: $:/tags/Manager/ItemMain
+caption: {{$:/language/Manager/Item/Fields}}
+
+\whitespace trim
+<table>
+<tbody>
+<$list filter="[all[current]fields[]sort[title]] -text" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+</tbody>
+</table>

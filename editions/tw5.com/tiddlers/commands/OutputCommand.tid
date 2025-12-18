@@ -1,0 +1,8 @@
+created: 20140425085548209
+modified: 20140425085738745
+tags: Commands
+title: OutputCommand
+type: text/vnd.tiddlywiki
+caption: output
+
+{{$:/language/Help/output}}

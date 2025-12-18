@@ -1,0 +1,18 @@
+fr-title: Choisir un « favicon »
+created: 20131224074240979
+modified: 20141115212933955
+tags: [[Customise TiddlyWiki]]
+title: Setting a favicon
+type: text/vnd.tiddlywiki
+
+Les <<gf "favicons">> sont de petites icones que la plupart des navigateurs web affichent pour aider les utilisateurs à identifier les sites web.
+
+! favicons dans le Navigateur
+
+Lorsque TiddlyWiki démarre dans le navigateur, il cherche un tiddler nommé [[$:/favicon.ico]] et l'utilise dynamiquement comme //favicon// de la page. Si vous modifiez l'image, le //favicon// change instantanément pour en tenir compte.
+
+! favicons sur le Serveur
+
+Sur le serveur, la commande [[server|ServerCommand]] servira le tiddler [[$:/favicon.ico]] sur le chemin `/favicon.ico`.
+
+

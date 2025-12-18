@@ -1,0 +1,17 @@
+title: GettingStarted
+
+\define lingo-base() $:/language/ControlPanel/Basics/
+티들리위키와 티들리위키 공동체에 오신 것을 환영합니다
+
+티들리위키에 중요한 정보를 저장하는 것을 시작하기 전에 확실히 바뀜을 저장할 수 있는지 확인하는 것이 중요합니다. 자세한 사항은 [[https://tiddlywiki.com/#GettingStarted]]를 보세요
+
+!! 이 티들리위키 설정하기
+
+<div class="tc-control-panel">
+
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
+
+더 많은 옵션에 대해서는 [[제어판|$:/ControlPanel]]을 보세요.

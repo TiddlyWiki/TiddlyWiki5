@@ -1,0 +1,9 @@
+created: 20140923200935097
+creator: pmario
+modified: 20140923203505353
+modifier: pmario
+tags: TabsMakro
+title: ReiterEins
+type: text/vnd.tiddlywiki
+
+ReiterEins: Wenn Sie im rechten Menü den Reiter "Mehr: System" auswählen, dann können Sie die [[Status Tiddler]]: `$:state/tab1-########` sehen. Wenn Sie diese öffnen, dann sehen Sie, welcher Reiter gerade aktiv ist. 

@@ -1,0 +1,5 @@
+title: $:/core/ui/MoreSideBar/Plugins/Plugins
+tags: $:/tags/MoreSideBar/Plugins
+caption: {{$:/language/ControlPanel/Plugins/Plugins/Caption}}
+
+<$list filter="[!has[draft.of]plugin-type[plugin]sort[name]]" template="$:/core/ui/PluginListItemTemplate" emptyMessage={{$:/language/ControlPanel/Plugins/Empty/Hint}}>>/>

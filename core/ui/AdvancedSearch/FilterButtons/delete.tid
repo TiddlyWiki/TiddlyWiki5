@@ -1,0 +1,27 @@
+title: $:/core/ui/AdvancedSearch/Filter/FilterButtons/delete
+tags: $:/tags/AdvancedSearch/FilterButton
+
+\whitespace trim
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+<$button tooltip={{$:/language/Buttons/DeleteTiddlers/Hint}} popup=<<qualify "$:/state/filterDeleteDropdown">> class="tc-btn-invisible">
+{{$:/core/images/delete-button}}
+</$button>
+</$reveal>
+
+<$reveal state=<<qualify "$:/state/filterDeleteDropdown">> type="popup" position="belowleft" animate="yes">
+<div class="tc-block-dropdown-wrapper">
+<div class="tc-block-dropdown tc-edit-type-dropdown">
+<div class="tc-dropdown-item-plain">
+<$set name="resultCount" value="""<$count filter={{$:/temp/advancedsearch}}/>""">
+{{$:/language/ConfirmDeleteTiddlers}}
+</$set>
+</div>
+<div class="tc-dropdown-item-plain">
+<$button class="tc-btn">
+<$action-deletetiddler $filter={{$:/temp/advancedsearch}}/>
+{{$:/language/Buttons/DeleteTiddlers/Hint}}
+</$button>
+</div>
+</div>
+</div>
+</$reveal>

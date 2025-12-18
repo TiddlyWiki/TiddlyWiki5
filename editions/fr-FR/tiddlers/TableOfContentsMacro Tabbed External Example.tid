@@ -1,0 +1,26 @@
+caption: Onglets Externes
+created: 20150221205834000
+fr-title: Exemple Table des matères: Onglets externes
+modified: 20150621091831154
+order: 6
+tags: table-of-contents-example
+title: Example Table of Contents: Tabbed External
+type: text/vnd.tiddlywiki
+
+<$macrocall
+	$name="toc-tabbed-external-nav"
+	tag="TableOfContents"
+	selectedTiddler="$:/temp/toc/selectedTiddler"
+	unselectedText="<p>Select a topic in the table of contents. Click the arrow to expand a topic.</p>"
+	missingText="<p>Missing tiddler.</p>"
+/>
+
+```
+<$macrocall
+	$name="toc-tabbed-external-nav"
+	tag="TableOfContents"
+	selectedTiddler="$:/temp/toc/selectedTiddler"
+	unselectedText="<p>Select a topic in the table of contents. Click the arrow to expand a topic.</p>"
+	missingText="<p>Missing tiddler.</p>"
+/>
+```

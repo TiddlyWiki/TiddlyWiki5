@@ -1,0 +1,21 @@
+created: 20200131150229551
+modified: 20240602154933113
+tags: ActionCreateTiddlerWidget
+title: ActionCreateTiddlerWidget Example 4
+type: text/vnd.tiddlywiki
+
+<$testcase>
+<$data title=Description text="Template with override fields and custom base title"/>
+<$data title=Narrative text="""The $action-createtiddler widget in this example uses the basetitle attribute and template: [[ActionCreateTiddlerWidget Template]].
+
+There will be new fields "aa" and "bb" which are added to the new tiddlers.
+"""/>
+<$data $tiddler="ActionCreateTiddlerWidget Template"/>
+<$data title=Output text="""\procedure testCreate()
+<$action-createtiddler $basetitle="base" $template="ActionCreateTiddlerWidget Template" aa="new field aa" bb="new field bb" />
+\end
+
+<$button actions=<<testCreate>> >
+Create Tiddler
+</$button>"""/>
+</$testcase>

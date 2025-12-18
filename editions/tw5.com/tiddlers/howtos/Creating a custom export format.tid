@@ -1,0 +1,21 @@
+title: Creating a custom export format
+modified: 20141124173526227
+created: 20141124173526227
+tags: [[Customise TiddlyWiki]]
+
+To create a custom export format that exports tiddlers as their raw body text:
+
+# Create a tiddler with the following fields:
+#* ''tags'': [[$:/tags/Exporter]]
+#* ''description'': Description of this exporter
+#* ''extension'': Default file extension for this export format (including the dot; for example `.tid`)
+# Set the following content:
+
+```
+\define renderContent()
+{{{ $(exportFilter)$ ||$:/core/templates/plain-text-tiddler}}}
+\end
+<<renderContent>>
+```
+
+The variable `exportFilter` contains a filter defining which tiddlers should be exported.

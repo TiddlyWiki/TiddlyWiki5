@@ -1,0 +1,22 @@
+caption: Previous Employment Options
+tags: Options
+title: $:/options/Previous Employment Options
+
+\define thisListPreviousEmployment()
+<$list filter='[is[current]removeprefix[$:/data/Previous Employment/]addprefix[$:/settings/$(ThisResumeName)$/Previous Employment/]]'>
+<$edit-text field=order size=2/>
+</$list>
+\end
+
+<$vars ThisResumeName={{$:/settings/Global!!selected_resume}}>
+<table style='width:100%'>
+<tr><th>Visible</th><th>Entry</th><th>Order</th></tr>
+<$list filter='[prefix[$:/data/Previous Employment/]sort[order]]'>
+<tr><td><$checkbox tiddler=<<currentTiddler>> field=show checked='true' unchecked=false default=true/></td><td><$view field='job_title'/>, <$view field='employer'/>, <$view field='dates'/></td>
+<td>
+<<thisListPreviousEmployment>>
+</td>
+</tr>
+</$list>
+</table>
+</$vars>

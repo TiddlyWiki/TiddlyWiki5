@@ -1,0 +1,31 @@
+caption: Widgets
+created: 20131205160840915
+modified: 20220513113347606
+tags: WikiText
+title: Widgets in WikiText
+type: text/vnd.tiddlywiki
+
+Widgets provide rich functionality within WikiText. They have the same syntax as [[HTML elements|HTML in WikiText]], but the tag name always starts with `$`. For example:
+
+<$macrocall $name=".example" n="1"
+eg="""<$button message="tm-navigate" to="HelloThere">Open ~HelloThere</$button>
+"""/>
+
+Note that widgets inherit all the features of [[HTML in WikiText]]:
+
+* Widget attributes can be specified as:
+** Unquoted strings (that cannot contain spaces)
+** Strings quoted with single or double quotes
+** Strings quoted with triple-double quotes
+** Macro invocations (eg `attr=<<myMacro>>`)
+** Transclusions (eg, `attr={{MyTiddler!!field}}`)
+** Filtered transclusions (eg, `attr={{{ [filter[op]] }}}`)
+** <<.from-version "5.3.0">> [[Substituted Attribute Values]]
+* The content of a widget is [[parsed|WikiText Parser Modes]] in [[inline mode|Inline Mode WikiText]] unless the opening tag is followed by two linebreaks, which forces [[block mode|Block Mode WikiText]]
+** [[inline mode|Inline Mode WikiText]] means that [[block mode|Block Mode WikiText]] parse rules like headings, tables and lists are not recognised
+
+See [[HTML in WikiText]] for more details.
+
+The available widgets include:
+
+<<list-links "[tag[Widgets]]">>

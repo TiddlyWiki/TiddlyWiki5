@@ -1,0 +1,14 @@
+caption: Node.js
+created: 20131129094739786
+modified: 20150623063324750
+tags: Definitions
+title: Node.js
+type: text/vnd.tiddlywiki
+
+''Node.js'' est une application téléchargeable sur votre ordinateur PC, Mac ou Linux, qui vous permet d'exécuter des programmes JavaScript. Contrairement aux programmes ~JavaScript s'exécutant dans un navigateur, le code tournant sur Node.js dispose d'un accès complet au système de fichiers et aux autres ressources de l'ordinateur, ce qui lui permet mener à bien des tâches traditionnellement dévolues à des langages comme Java, PHP et Python. Voir http://nodejs.org pour plus de détails.
+
+Dans le cas de ~TiddlyWiki, Node.js permet de profiter d'un même code principal capable de tourner aussi bien dans le navigateur que sur le serveur, ce qui accroît encore sa souplesse d'utilisation.
+
+Pour les utilisateurs finaux, le mode Node.js n'est pas plus compliqué à utiliser que le mode intégré au navigateur web, mais il donne accès à des fonctions puissantes, notamment la possibilité d'exécuter  ~TiddlyWiki en tant que serveur web auquel vous pouvez vous connecter depuis d'autres appareils.
+
+Voir [[TiddlyWiki sur Node.js|TiddlyWiki on Node.js]] pour plus de détails.

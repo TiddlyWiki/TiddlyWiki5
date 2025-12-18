@@ -1,0 +1,56 @@
+title: $:/language/
+
+Date/Long/Day/0: 周日
+Date/Long/Day/1: 周一
+Date/Long/Day/2: 周二
+Date/Long/Day/3: 周三
+Date/Long/Day/4: 周四
+Date/Long/Day/5: 周五
+Date/Long/Day/6: 周六
+Date/Long/Month/1: 一月
+Date/Long/Month/2: 二月
+Date/Long/Month/3: 三月
+Date/Long/Month/4: 四月
+Date/Long/Month/5: 五月
+Date/Long/Month/6: 六月
+Date/Long/Month/7: 七月
+Date/Long/Month/8: 八月
+Date/Long/Month/9: 九月
+Date/Long/Month/10: 十月
+Date/Long/Month/11: 十一月
+Date/Long/Month/12: 十二月
+Date/Period/am: 上午
+Date/Period/pm: 下午
+Date/Short/Day/0: 日
+Date/Short/Day/1: 一
+Date/Short/Day/2: 二
+Date/Short/Day/3: 三
+Date/Short/Day/4: 四
+Date/Short/Day/5: 五
+Date/Short/Day/6: 六
+Date/Short/Month/1: 01月
+Date/Short/Month/2: 02月
+Date/Short/Month/3: 03月
+Date/Short/Month/4: 04月
+Date/Short/Month/5: 05月
+Date/Short/Month/6: 06月
+Date/Short/Month/7: 07月
+Date/Short/Month/8: 08月
+Date/Short/Month/9: 09月
+Date/Short/Month/10: 10月
+Date/Short/Month/11: 11月
+Date/Short/Month/12: 12月
+RelativeDate/Future/Days: <<period>> 天后
+RelativeDate/Future/Hours: <<period>> 小时后
+RelativeDate/Future/Minutes: <<period>> 分钟后
+RelativeDate/Future/Months: <<period>> 个月后
+RelativeDate/Future/Second: 1 秒后
+RelativeDate/Future/Seconds: <<period>> 秒后
+RelativeDate/Future/Years: <<period>> 年后
+RelativeDate/Past/Days: <<period>> 天前
+RelativeDate/Past/Hours: <<period>> 小时前
+RelativeDate/Past/Minutes: <<period>> 分钟前
+RelativeDate/Past/Months: <<period>> 个月前
+RelativeDate/Past/Second: 1 秒前
+RelativeDate/Past/Seconds: <<period>> 秒前
+RelativeDate/Past/Years: <<period>> 年前

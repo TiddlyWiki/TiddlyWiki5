@@ -1,0 +1,122 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Avancerat
+Advanced/Hint: Intern information om denna TiddlyWiki
+Appearance/Caption: Utseende
+Appearance/Hint: Möjlighet att ändra utseendet för din TiddlyWiki.
+Basics/AnimDuration/Prompt: Varaktighet på animationer:
+Basics/Caption: Grundläggande
+Basics/DefaultTiddlers/BottomHint: Använd &#91;&#91;dubbla hakparenteser&#93;&#93; för rubriker med mellanslag. Eller kan du välja att {{spara de öppna tiddlers||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/Prompt: Standard-tiddlers:
+Basics/DefaultTiddlers/TopHint: Välj vilka tiddlers som ska visas vid uppstart:
+Basics/Language/Prompt: Hej! Nuvarande språk:
+Basics/NewJournal/Title/Prompt: Rubriken för nya journal-tiddlers
+Basics/NewJournal/Tags/Prompt: Taggar för nya journal-tiddlers
+Basics/OverriddenShadowTiddlers/Prompt: Antal överskridna skugg-tiddlers:
+Basics/ShadowTiddlers/Prompt: Antar skugg-tiddlers:
+Basics/Subtitle/Prompt: Underrubrik:
+Basics/SystemTiddlers/Prompt: Antal system-tiddlers:
+Basics/Tags/Prompt: Antal taggar:
+Basics/Tiddlers/Prompt: Antal tiddlers:
+Basics/Title/Prompt: Rubrik för denna ~TiddlyWiki:
+Basics/Username/Prompt: Användarnamn att signera redigeringar:
+Basics/Version/Prompt: ~TiddlyWiki version:
+EditorTypes/Caption: Redigeringstyper
+EditorTypes/Editor/Caption: Redigerare
+EditorTypes/Hint: Dessa tiddlers bestämmer vilken redigerare som används att redigera specifika tiddler-typer.
+EditorTypes/Type/Caption: Typ
+Info/Caption: Info
+Info/Hint: Information om denna TiddlyWiki
+LoadedModules/Caption: Inlästa moduler
+LoadedModules/Hint: Detta är de nuvarande inlästa tiddlermoduler som är länkade till sin källtiddler. Alla moduler i kursivt Alle moduler i kursiv stil saknar källtiddler, vanligtvis eftersom de sattes upp under uppstartsprocessen.
+Palette/Caption: Palett
+Palette/Editor/Clone/Caption: klona
+Palette/Editor/Clone/Prompt: Det är rekommenderat att du klona denna skugg-palett innan du redigerar den
+Palette/Editor/Prompt/Modified: Denna skugg-palett har blivit ändrad
+Palette/Editor/Prompt: Redigerar
+Palette/Editor/Reset/Caption: återställ
+Palette/HideEditor/Caption: göm redigerare
+Palette/Prompt: Current palett:
+Palette/ShowEditor/Caption: visa redigerare
+Plugins/Add/Hint: Installera insticksprogram från officiella biblioteket
+Plugins/Add/Caption: Hämta fler insticksprogram
+Plugins/Caption: Insticksprogram
+Plugins/Disable/Caption: inaktivera
+Plugins/Disable/Hint: Inaktivera detta insticksprogram efter laddat om sidan
+Plugins/Disabled/Status: (inaktiverad)
+Plugins/Empty/Hint: Inga
+Plugins/Enable/Caption: aktivera
+Plugins/Enable/Hint: Aktivera detta insticksprogram efter laddat om sidan
+Plugins/Installed/Hint: Nuvarande installerade insticksprogram:
+Plugins/Languages/Caption: Språk
+Plugins/Languages/Hint: Språkpakets-insticksprogram
+Plugins/Plugins/Caption: Insticksprogram
+Plugins/Plugins/Hint: Insticksprogram
+Plugins/Themes/Caption: Teman
+Plugins/Themes/Hint: Teman-Insticksprogram
+Saving/Caption: Sparar
+Saving/Heading: Sparar
+Saving/TiddlySpot/Advanced/Heading: Avancerade Inställningar
+Saving/TiddlySpot/BackupDir: Backupmapp
+Saving/TiddlySpot/Backups: Backuper
+Saving/TiddlySpot/Description: Dessa inställningar används bara när du sparar till http://tiddlyspot.com eller en kompatibel server
+Saving/TiddlySpot/Filename: Uppladdningsfilnamn
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //Serverns URL är som standard `http://<wikiname>.tiddlyspot.com/store.cgi` och kan ändras till en anpassad serveradress, t.ex. `http://example.com/store.php`.//
+Saving/TiddlySpot/Password: Lösenord
+Saving/TiddlySpot/ServerURL: Server URL
+Saving/TiddlySpot/UploadDir: Uppladdninsmapp
+Saving/TiddlySpot/UserName: Wikinamn
+Settings/AutoSave/Caption: Autospara
+Settings/AutoSave/Disabled/Description: Sparar inte ändringar automatiskt
+Settings/AutoSave/Enabled/Description: Spara ändringar automatiskt
+Settings/AutoSave/Hint: Sparar automatiskt ändringar under redigering
+Settings/Caption: Inställningar
+Settings/Hint: Dessa inställningar låter dig anpassa din TiddlyWikis beteende.
+Settings/NavigationAddressBar/Caption: Navigerings-adressfält
+Settings/NavigationAddressBar/Hint: Beteende för webbläsarens adressfält när du går till en tiddler:
+Settings/NavigationAddressBar/No/Description: Uppdatera inte adressfältet
+Settings/NavigationAddressBar/Permalink/Description: Inkludera måltiddler
+Settings/NavigationAddressBar/Permaview/Description: Inkludera måltiddler och nuvarande artikelsekvens
+Settings/NavigationHistory/Caption: Navigationshistorik
+Settings/NavigationHistory/Hint: Uppdatera webbläsarhistoriken när du går till en tiddler:
+Settings/NavigationHistory/No/Description: Uppdatera inte historiken
+Settings/NavigationHistory/Yes/Description: Uppdatera historiken
+Settings/ToolbarButtonStyle/Caption: Verktygsfältsknappars stil
+Settings/ToolbarButtonStyle/Hint: Välj stil för verktygsfältsknapparna
+Settings/ToolbarButtonStyle/Styles/Borderless: Utan ram
+Settings/ToolbarButtonStyle/Styles/Boxed: Fyrkantig
+Settings/ToolbarButtonStyle/Styles/Rounded: Runda
+Settings/ToolbarButtons/Caption: Verktygsfältsknappar
+Settings/ToolbarButtons/Hint: Standardutseende för verktygsfältsknapparna:
+Settings/ToolbarButtons/Icons/Description: Inkludera ikon
+Settings/ToolbarButtons/Text/Description: Inkludera text
+Settings/DefaultSidebarTab/Caption: Standard-sidofältsflik
+Settings/DefaultSidebarTab/Hint: Ange vilken sidofältsflik som visas som standard
+Settings/LinkToBehaviour/Caption: Tiddlers öppningsbeteende
+Settings/LinkToBehaviour/InsideRiver/Hint: Navigera //innefrån// artikelflödet
+Settings/LinkToBehaviour/OutsideRiver/Hint: Navigera //utanför// artikelflödet
+Settings/LinkToBehaviour/OpenAbove: Öppna ovanför aktuell tiddler
+Settings/LinkToBehaviour/OpenBelow: Öppna nedanför aktuell tiddler
+Settings/LinkToBehaviour/OpenAtTop: Öppna högst upp för artikelflödet
+Settings/LinkToBehaviour/OpenAtBottom: Öppna längst ner för artikelflödet
+Settings/TitleLinks/Caption: Tiddlerrubriker
+Settings/TitleLinks/Hint: Ställ in att visa tiddlerrubriker som länkar
+Settings/TitleLinks/No/Description: Visa inte tiddlerrubriker som  länkar
+Settings/TitleLinks/Yes/Description: Visa tiddlerrubriker som länkar
+StoryView/Caption: Artikelvy
+StoryView/Prompt: Nuvarande vy:
+Theme/Caption: Tema
+Theme/Prompt: Nuvarande tema:
+TiddlerFields/Caption: Tiddlerfält
+TiddlerFields/Hint: Detta är all Tiddlerfält som används i denna wiki (inklusive system-tiddlers med undantag för skugg-tiddlers).
+Toolbars/Caption: Verktygsfält
+Toolbars/EditToolbar/Caption: Redigera verktygsfält
+Toolbars/EditToolbar/Hint: Välj vilja knappar som ska visas när man redigerar en tiddler
+Toolbars/Hint: Välj vilka verktygsfältsknapper som ska visas
+Toolbars/PageControls/Caption: Sidverktygsfält
+Toolbars/PageControls/Hint: Välj vilka knappar som visas på standardverktygsfältet  
+Toolbars/ViewToolbar/Caption: Visa verktygsfält
+Toolbars/ViewToolbar/Hint: Välj vilka knappar som visas för tiddlers i visningsläge
+Tools/Download/Full/Caption: Ladda ner fullständig wiki
+

@@ -1,0 +1,11 @@
+created: 20140913122214453
+creator: pmario
+modified: 20140913122324232
+modifier: pmario
+tags: Lexikon
+title: Transklusion
+type: text/vnd.tiddlywiki
+
+<<<
+Eine Transklusion (engl. transclusion) ist die Fähigkeit in meist Hypertext-Systemen, andere Dokumente oder Abschnitte daraus in sich einzuschließen (auch „einzubinden“). So können Textbausteine an unterschiedlichen Stellen mehrfach genutzt werden. Wird der transkludierte Text aktualisiert, aktualisiert sich automatisch auch die Transklusion in allen Seiten, in die diese eingebunden ist.
+<<< Wikipedia: http://de.wikipedia.org/wiki/Transklusion

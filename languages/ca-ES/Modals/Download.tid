@@ -1,0 +1,7 @@
+title: $:/language/Modals/Download
+type: text/vnd.tiddlywiki
+subtitle: Download changes
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/DownloadingChanges.html
+
+El vostre navegador només permet desar de forma manual. Per desar les modificacions del vostre wiki, cliqueu amb el botó dret l'enllaç per baixar de sota i trieu "Baixa el fitxer" o "Desa el fitxer", i llavors trieu la carpeta i el nom del fitxer.//Podeu accelerar-ho clicant l'enllaç amb la tecla control (Windows) o la tecla opcions/alt (Mac OS X). Es demanarà la carpeta o el nom del fitxer, però probablement el vostre navegador hi assignarà un nom irreconeixible -- haureu de reanomenar el fitxer per incloure l'extensió `.html` abans no pogueu fer res útil amb ell.//Als mòbils que no permeten baixar fitxers podeu desar l'enllaç als preferits, i llavors sincronitzar els vostres preferits a un ordinador des del que podeu desar el wiki normalment.

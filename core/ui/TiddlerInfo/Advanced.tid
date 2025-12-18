@@ -1,0 +1,9 @@
+title: $:/core/ui/TiddlerInfo/Advanced
+tags: $:/tags/TiddlerInfo
+caption: {{$:/language/TiddlerInfo/Advanced/Caption}}
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo/Advanced]!has[draft.of]]" variable="listItem">
+
+<$transclude tiddler=<<listItem>> mode="block"/>
+
+</$list>

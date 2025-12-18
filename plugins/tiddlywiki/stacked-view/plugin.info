@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/stacked-view",
+	"name": "Stacked View",
+	"description": "Stacked card storyview",
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
+}

@@ -1,0 +1,38 @@
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/* CSS modified for TiddlyWiki */
+
+svg.railroad-diagram {
+	background-color: <<colour background>>;
+	border-radius: 5px;
+}
+/*
+svg.railroad-diagram:hover {
+	background-color: hsl(30,20%,96%);
+}
+*/
+svg.railroad-diagram path,
+svg.railroad-diagram rect {
+	stroke-width: 2;
+	stroke: <<colour message-border>>;
+}
+svg.railroad-diagram path {
+	fill: <<colour background>>;
+}
+svg.railroad-diagram rect {
+	fill: <<colour message-background>>;
+}
+svg.railroad-diagram text {
+	font: 14px monospace;
+	text-anchor: middle;
+	fill: <<colour message-foreground>>;
+}
+svg.railroad-diagram text.label {
+	text-anchor: start;
+}
+svg.railroad-diagram text.comment {
+	font: italic 12px monospace;
+}
+svg.railroad-diagram path.arrow {
+    stroke-width: 2;
+}

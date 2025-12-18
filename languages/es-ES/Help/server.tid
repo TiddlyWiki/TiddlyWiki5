@@ -1,0 +1,42 @@
+title: $:/language/Help/server
+description: (en desuso: utiliza el comando 'listen') Proporciona interfaz de servidor HTTP a TiddlyWiki
+
+Comando obsoleto para servir una wiki a través de HTTP.
+
+```
+--server <port> <root-tiddler> <root-render-type> <root-serve-type> <username> <password> <host> <path-prefix> <debug-level>
+```
+
+Los parámetros son
+
+* ''port'' - número de puerto desde el que sirve; valores no numéricos se interpretan como una variable de entorno del sistema de la que se extrae el número de puerto (por defecto, "8080")
+* ''roottiddler'' - tiddler que se sirve desde la raíz (por defecto, "$:/core/save/all")
+* ''rendertype'' - tipo de contenido con el que se genera el tiddler raíz (por defecto "text/plain")
+* ''servetype'' - tipo de contenido con el que se sirve el tiddler raíz (por defecto "text/html")
+* ''username'' - nombre de usuario por defecto que firma la edición
+* ''password'' - contraseña opcional para autenticación básica
+* ''host'' - nombre opcional del servidor desde el que se sirve (por defecto, "127.0.0.1" o "localhost")
+* ''pathprefix'' - prefijo opcional para rutas
+* ''debug-level'' - nivel de depuración opcional; establecer en "debug" para ver los detalles de la solicitud (el valor predeterminado es "none")
+
+Si se ha definido contraseña, el navegador pedirá que se introduzca nombre y contraseña. <br>Nótese que la contraseña se transmite en modo texto por lo que esta implementación solo debe usarse en redes seguras or utilizando HTTPS.
+
+Por ejemplo:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+El nombre de usuario y la contraseña pueden ser especificados como cadenas de símbolos vacías si se necesita configurar el nombre del servidor o prefijo de ruta y no se requiere contraseña:
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+El uso de una dirección como esta expone tu sistema a la red local. Para obtener información sobre cómo abrir tu instancia a toda la red local y posibles problemas de seguridad, consulta el tiddler de WebServer en TiddlyWiki.com.
+
+Para ejecutar simultáneamente múltiples servidores TiddlyWiki, deberán configurarse cada uno en un puerto diferente
+
+```
+--server MY_PORT_NUMBER $:/core/save/all text/plain text/html MyUserName passw0rd
+```

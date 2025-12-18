@@ -1,0 +1,17 @@
+caption: tm-download-file
+created: 20140811112201235
+es-title: Mensaje: tm-download-file
+modified: 20160416044054991
+tags: Messages
+title: WidgetMessage: tm-download-file
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-download-file` hace que el [[SaverModule|SaverModules]] actual indique al usuario que descargue como archivo el resultado de la interpretación de un determinado tiddler.
+
+Requiere las siguientes propiedades del objeto `event`:
+
+|!Nombre |!Descripción |
+|param |Título del tiddler usado como plantilla del nuevo tiddler |
+|paramObject |HashMap opcional de valores de variable que se usará para la conversión |
+
+Este mensaje lo genera normalmente ButtonWidget y lo procesa SyncMechanism en el núcleo de TiddlyWiki, que invoca el [[SaverModule|SaverModules]] actual.

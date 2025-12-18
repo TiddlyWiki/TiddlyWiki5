@@ -1,0 +1,10 @@
+created: 20180309160958926
+modified: 20211113010607278
+tags: [[Other Resources]]
+title: "Dynamic Tables" by Jed Carty
+type: text/vnd.tiddlywiki
+url: http://ooktech.com/jed/ExampleWikis/DynamicTables/
+
+//''Dynamic Tables''// is a set of  macros that allow you to create tables where the rows are created from tiddlers and the columns from the tiddler fields, or where the columns are created from tiddlers and the rows from their fields. Individual cells can be edited on the fly. Row tables can be sorted by columns and column tables can be sorted by rows.
+
+{{!!url}}

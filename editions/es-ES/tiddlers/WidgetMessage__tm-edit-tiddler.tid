@@ -1,0 +1,17 @@
+caption: tm-edit-tiddler
+created: 20140226085529797
+es-title: Mensaje: tm-edit-tiddler
+modified: 20160416043352274
+tags: Messages navigator-message
+title: WidgetMessage: tm-edit-tiddler
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-edit-tiddler` sustituye en la StoryList el tiddler especificado por un borrador de sí mismo. 
+
+Requiere las siguientes propiedades del objeto `event`:
+
+|!Nombre |!Descripción |
+|param |Título del tiddler que pasa a modo edición |
+|tiddlerTitle |Título alternativo usado si no se especifica ''param'' (asignado automáticamente por ButtonWidget)  |
+
+Este mensaje normalmente lo generan ButtonWidget o ActionSendMessageWidget y loprocesa NavigatorWidget.

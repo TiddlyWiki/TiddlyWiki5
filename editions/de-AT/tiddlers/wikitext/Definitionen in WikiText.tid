@@ -1,0 +1,16 @@
+caption: Definitionen
+created: 20131205160424246
+creator: pmario
+modified: 20140921170646774
+modifier: pmario
+tags: WikiText
+title: Definitionen in WikiText
+type: text/vnd.tiddlywiki
+
+HTML Definitionslisten werden wie folgt erstellt:
+
+<<wikitext-example src:"; Term der zu definieren ist
+: Definition dieses Terms
+; Neuer Term
+: Neue Definition
+">>

@@ -1,0 +1,11 @@
+title: $:/language/Help/build
+description: Doorloop automatisch de geconfigureerde commando's
+
+Compileert de gespecificeerde 'build targets' voor de actuele wiki. Worden geen 'build targets' gespecificeerd dan worden alle beschikbare 'targets' gecompileerd.
+
+```
+--build <target> [<target> ...]
+```
+
+'Build targets' worden gedefinieerd in het `tiddlywiki.info` bestand van een wiki folder.
+

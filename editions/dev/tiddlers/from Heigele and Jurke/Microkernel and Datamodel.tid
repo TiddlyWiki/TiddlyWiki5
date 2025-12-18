@@ -1,0 +1,9 @@
+created: 20140708173111709
+modified: 20140709093651688
+tags: redo
+title: Microkernel and Datamodel
+
+The microkernel is responsible for creating a bare-bones TW environment.
+It is running under Node.js or in a HTML5 Browser. The Bootkernel just loads enough functionality to load the modules containing the main logic of the application. This boot-kernel contains a few helper methods, the module mechanism as well as the function to create a tiddler and manage them. The boot-kernel also creates the bare-bones wiki store, which holds all the information of the wiki during the runtime. After creating the store, the boot-kernel is in charge of decrypting the encrypted tiddlers and extracting all the tiddlers e.g. the core module tiddlers embedded in the DOM structure of the HTML file. Furthermore the boot kernel offers the functionality to load tiddlers from a file, when you run TW with Node.js.
+
+{{StartupTimeline.png}}

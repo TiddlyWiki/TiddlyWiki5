@@ -1,0 +1,31 @@
+created: 20180309232911422
+modified: 20180310201216266
+tags: Learning
+title: How to hide the author's and other fields with CSS
+type: text/vnd.tiddlywiki
+
+Sometimes you might want to save some screen space by hiding away the author's name in all tiddlers. Here's a quick way to do it:
+
+* Create a new tiddler with any title you want.
+* Give the tiddler the tag `$:/tags/Stylesheet`
+* In the text field of the tiddler put:
+
+```
+.tc-subtitle .tc-tiddlylink {display:none;}
+```
+
+* Save the tiddler. The author's name field should no longer appear.
+
+Similarly, the entire subtitle field including author and date can be removed with:
+
+```
+.tc-subtitle {display:none;}
+```
+
+Unfortunately, you can't hide just the date without also hiding the author using CSS.
+
+And finally, for a truly minimalist look, you can remove the title with:
+
+```
+h2.tc-title {display:none;)
+```

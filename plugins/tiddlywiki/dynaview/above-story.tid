@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/dynaview/above-story
+tags: $:/tags/AboveStory-disabled
+
+<!-- Remove the "-disabled" part of the tag to cause the currently selected example to appear at the top of the story river. Intended to make it easier to make clean screencaps -->
+<div style="height:100em;">
+<$transclude tiddler={{$:/state/tab--1915807570}} mode="block"/>
+</div>

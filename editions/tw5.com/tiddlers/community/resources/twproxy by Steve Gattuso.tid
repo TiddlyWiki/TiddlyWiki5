@@ -1,0 +1,16 @@
+created: 20160424150055313
+modified: 20210106151027692
+tags: [[Other Resources]]
+title: twproxy by Steve Gattuso
+type: text/vnd.tiddlywiki
+url: https://github.com/stevenleeg/twproxy
+
+An authentication proxy for your TiddlyWiki.
+
+{{!!url}}
+
+<<<
+One of my favorite aspects of TiddlyWiki has been that it's web-based, making it possible for me to access my wiki from everywhere (especially my phone). That being said, I'm a bit paranoid, so I was left a bit unsatisfied with the tiddlywiki server's HTTP basic auth for protecting my wiki. ~23 commits later, I've created something called twproxy that I'd like to share with you all today, as I'm hoping somebody other than myself will find it useful.
+
+Essentially it is a simple proxy that puts your wiki behind a username, password, and optional 2-factor auth prompt. This gives you added security in addition to the ability to remember your credentials past one browsing session (I was getting sick and tired of typing my username/password in over and over using basic auth).
+<<<

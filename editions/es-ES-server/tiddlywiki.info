@@ -1,0 +1,20 @@
+{
+	"description": "Configuración en modo servidor de la edición es-ES",
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem",
+		"tiddlywiki/highlight",
+		"tiddlywiki/internals"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"includeWikis": [
+		"../es-ES"
+	],
+	"config": {
+		"retain-original-tiddler-path": true,
+		"default-tiddler-location": "../es-ES/tiddlers"
+	}
+}

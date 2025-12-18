@@ -1,0 +1,13 @@
+created: 20150221120117000
+modified: 20150221181310000
+tags: Definitions
+title: Comma-Separated Values
+type: text/vnd.tiddlywiki
+
+<<.dlink-ex CSV "https://en.wikipedia.org/wiki/Comma-separated_values">> is a standard plain-text format for storing a table of data.
+
+Each row of the table is called a <<.def record>> and occupies one line.
+
+The columns are called <<.def fields>>. Each field of a row is separated from the next by a comma, and is often delimited by quotation marks.
+
+The <<.mlink csvtiddlers>> macro returns tiddler content in this format.

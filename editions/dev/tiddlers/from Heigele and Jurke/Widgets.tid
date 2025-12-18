@@ -1,0 +1,34 @@
+chapter.of: UI and Rendering Pipeline
+created: 20140717174307709
+modified: 20140717181543163
+sub.num: 3
+tags: doc
+title: Widgets
+
+When the WikiText has been transformed into a parse-tree the next step is to transform this parse-tree into a widget-tree.
+We talked about widgets as parts of the WikiText markup but in fact each node of the parse-tree is transformed to a widget object.
+The core plug-in provides a basic widget object which gets the parse node it should represent and a DOM node. The widget then must create the DOM structure which represents the parse node and add it to the provided DOM node.
+A ~LinkWidget for example would create the DOM node for a ``<a>...</a>`` tag and put it in the provided DOM node.
+When a widget gets a parse node with child nodes it must create the corresponding child widgets.
+
+All this functionality is basically provided with the base widget. But when creating the widget for a parse node it loads additional modules with ``module-type: widget``. These modules can export multiple widgets which extend the base widget and can override it's methods like the rendering and refresh functions.
+As described in [[Parser]] each parse node contains a "type" property. This type directly determines which widget module is used.
+
+```js
+{type: "text", text: <string>} - a text node
+```
+
+Would be transformed to a [[TextWidget|$:/core/modules/widgets/text.js]].
+(Note that the ~TextWidget module exports a property "text".)
+
+So in fact when talking about widgets in WikiText, they are not a feature added to WikiText but the ability to directly use a specific widget instead of the parser choosing a widget type.
+
+In the beginning we talked about widgets and how they enable dynamic behaviour. But up until now we only described how widgets create DOM nodes from parse nodes.
+Widgets add dynamic behaviour in two ways.
+
+<$list filter="[!has[draft.of]has[chapter.of]chapter.of[Widgets]tag[doc]sort[sub.num]]">
+
+
+!!! <$view field="title"/>
+{{!!text}}
+</$list>

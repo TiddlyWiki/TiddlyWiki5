@@ -1,0 +1,13 @@
+caption: Video: Inicio
+created: 20140104134911101
+es-title: Videotutorial de inicio
+modified: 20160421134904459
+tags: Videos [[Working with TiddlyWiki]]
+title: Getting Started Video
+type: text/vnd.tiddlywiki
+
+Este breve tutorial te enseña cómo guardar cambios en TiddlyWIki.
+
+//El video está un poco anticuado, pero esperamos poder ponerlo pronto al día.//
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1g66s7UbyuU" frameborder="0" allowfullscreen></iframe>

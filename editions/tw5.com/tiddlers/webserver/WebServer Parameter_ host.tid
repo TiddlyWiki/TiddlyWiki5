@@ -1,0 +1,14 @@
+caption: host
+created: 20180630180123321
+modified: 20181107183151913
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: host
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''host'' is the IP address on which the server listens. The most common settings are:
+
+* ''127.0.0.1'' (default) - only listens for connections from browsers on the same computer 
+* ''0.0.0.0'' - listens for connections on all network interfaces, and thus from any browser on a reachable network
+* ''n.n.n.n'' - listens for connections on the network interface with the specified IP address
+
+''Note:'' Using ''0.0.0.0'' or ''n.n.n.n'' in a public environment (e.g. coffee shop, library, airport) is inadvisable as it ''will'' expose your system to possible intrusion.

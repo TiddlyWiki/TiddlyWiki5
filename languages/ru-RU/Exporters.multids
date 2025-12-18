@@ -1,0 +1,6 @@
+title: $:/language/Exporters/
+
+StaticRiver: Показываемые заметки в виде статического HTML файла
+JsonFile: Заметки в формате JSON
+CsvFile: Заметки в формате CSV
+TidFile: Одна заметка в формате ".tid"

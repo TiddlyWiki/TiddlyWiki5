@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/twitter/usage/hashtagbutton
+tags: $:/tags/TwitterUsage
+caption: Hashtag Button
+
+!! Embedding Hashtag Buttons
+
+|!Attribute |!Values |!Default |!Notes |
+|''type'' |"hashtagButton" |none |"hashtagButton" |
+|''hashtag'' |Hashtag to be tweeted and displayed on the button |none | |
+|''text'' |Any string |none |The default, highlighted text a user sees in the Tweet web intent |
+|''align'' |"left", "right" |locale dependent (left or right, depending on the text direction of the language) |The alignment of the button within an iframe; use this to ensure flush layout when aligning buttons |
+|''size'' |"medium", "large" |medium |Size of button |
+|''lang'' |An ISO 639-1 language code |en |The language in which to render a widget, if supported |
+|''dnt'' |"true", "false" |false |Enable Do Not Track for this widget |
+|''related'' |Any comma-separated list of valid Twitter screen names |none |A list of Twitter screen names to be suggested for following after a Tweet or Tweet action is posted |
+|''via'' |Any valid Twitter screen name |none |A Twitter user mentioned in the default Tweet text as via @user where appropriate |
+
+<<twitter-usage """<$twitter type="hashtagButton" hashtag="TiddlyWiki"/>
+""">>

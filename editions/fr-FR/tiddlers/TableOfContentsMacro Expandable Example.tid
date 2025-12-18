@@ -1,0 +1,13 @@
+caption: Développable
+created: 20150221201816000
+modified: 20150621082656629
+tags: table-of-contents-example
+title: TableOfContentsMacro Expandable Example
+type: text/vnd.tiddlywiki
+order: 2
+fr-title: Exemple Table des matières: Développable
+
+<$macrocall $name=".example" n="1"
+eg="""<div class="tc-table-of-contents">
+<<toc-expandable "Contents">>
+</div>"""/>

@@ -1,0 +1,10 @@
+title: TiddlyWiki Single File Privacy and Security
+tags: [[TiddlyWiki Privacy and Security]]
+
+!!! Single File Configuration
+
+As a practical matter, using ~TiddlyWiki in the single file configuration depends upon keeping that file secure and private.  You can employ the same tools that you use to keep your other documents and images secure. In most cases, the simplest solution will be to use an existing file storage service such as [[Google Drive|https://drive.google.com]], [[Apple's iCloud|https://www.icloud.com]], or [[Dropbox|https://www.dropbox.com]]. Many people already rely on the privacy and security of these services.  There are also open source alternatives such as [[Syncthing|https://syncthing.net/]] that can allow you to synchronise files between your devices without using a third party service.
+
+You may also wish to use additional layers of security. ~TiddlyWiki in the single file configuration offers built-in encryption using an industry standard encryption library to provide AES 128-bit encryption in CCM mode. All the data within the file is encrypted and cannot be accessed without entering the correct password. Your password is never stored in the file: if it is lost or forgotten, your data cannot be decrypted. Instructions can be found in [[Encryption]].
+
+It is important to understand that ~TiddlyWiki's built in encryption is our best endeavour to offer privacy and usability. However, the encryption feature has not been subject to the kind of rigorous third party testing that characterises secure services like Signal or Syncthing.  Cautious users may wish to use ~TiddlyWiki's built in encryption as an extra layer of security, but should take care not to rely on it as one would rely on industry standard encryption solutions that have been rigorously tested in a variety of situations.

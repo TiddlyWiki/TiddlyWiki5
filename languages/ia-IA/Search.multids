@@ -1,0 +1,15 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: Lista
+Filter/Caption: Filtro
+Filter/Hint: Cerca via un [[filter expression|https://tiddlywiki.com/static/Filters.html]]
+Filter/Matches: //<small><<resultCount>> resultatos</small>//
+Matches: //<small><<resultCount>> resultatos</small>//
+Shadows/Caption: Umbras
+Shadows/Hint: Cerca pro notas umbral
+Shadows/Matches: //<small><<resultCount>> resultatos</small>//
+Standard/Hint: Cerca pro notas standard
+Standard/Matches: //<small><<resultCount>> resultatos</small>//
+System/Caption: Systema
+System/Hint: Cerca pro notas de systema
+System/Matches: //<small><<resultCount>> resultatos</small>//

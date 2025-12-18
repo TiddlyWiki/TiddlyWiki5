@@ -1,0 +1,9 @@
+created: 20150615125628093
+modified: 20150615131411878
+tags: $:/tags/Macro
+title: $:/editions/de-AT-DE/iframe-responsive
+type: text/vnd.tiddlywiki
+
+\define iframe-responsive(src; ratio:"56.25%"; allowfullscreen:"allowfullscreen"; frameborder:"0")
+<div style="width: 100%; padding-bottom: $ratio$; height: 0px; position: relative;"><iframe style="width: 100%; height: 100%; position: absolute; left: 0px; top: 0px;" src="$src$" frameborder="$frameborder$" $allowfullscreen$></iframe></div>
+\end

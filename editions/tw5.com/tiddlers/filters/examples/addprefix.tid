@@ -1,0 +1,7 @@
+created: 20150118132851000
+modified: 20150118183116000
+tags: [[addprefix Operator]] [[Operator Examples]]
+title: addprefix Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "Cat Garden [[Favourite Armchair]] +[addprefix[My ]]">>

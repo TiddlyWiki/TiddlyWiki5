@@ -1,0 +1,10 @@
+caption: Chrome
+created: 20140811165935523
+modified: 20140928170054684
+title: GettingStarted - Chrome
+fr-title: Bien démarrer — Chrome
+type: text/vnd.tiddlywiki
+
+Sous Google Chrome, <<tw>> ne parvient à sauvegarder les modifications qu'à l'aide de la solution de repli standard : le module de sauvegarde compatible HTML5.
+
+{{Saving with the HTML5 saver}}

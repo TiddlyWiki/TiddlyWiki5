@@ -1,0 +1,42 @@
+title: $:/language/ThemeTweaks/
+
+ThemeTweaks: 主题调整
+ThemeTweaks/Hint: 您可以调整 ''Vanilla'' 布局主题的某些样貌。
+Options: 选项
+Options/SidebarLayout: 侧边栏布局
+Options/SidebarLayout/Fixed-Fluid: 固定故事，浮动侧边栏
+Options/SidebarLayout/Fluid-Fixed: 浮动故事，固定侧边栏
+Options/StickyTitles: 置顶标题
+Options/StickyTitles/Hint: 使条目名称吸顶
+Options/CodeWrapping: 在代码区块中换行
+Settings: 设置
+Settings/FontFamily: 字型
+Settings/CodeFontFamily: 代码字型
+Settings/EditorFontFamily: 编辑器字型
+Settings/BackgroundImage: 页面背景图像
+Settings/BackgroundImageAttachment: 页面背景图像附属
+Settings/BackgroundImageAttachment/Scroll: 随条目滚动
+Settings/BackgroundImageAttachment/Fixed: 固定于窗口
+Settings/BackgroundImageSize: 页面背景图像大小
+Settings/BackgroundImageSize/Auto: 自动
+Settings/BackgroundImageSize/Cover: 覆盖
+Settings/BackgroundImageSize/Contain: 包含
+Metrics: 大小
+Metrics/FontSize: 字体大小
+Metrics/LineHeight: 行高
+Metrics/BodyFontSize: 条目本文的字体大小
+Metrics/BodyLineHeight: 条目本文的行高
+Metrics/StoryLeft: 故事左侧位置
+Metrics/StoryLeft/Hint: 故事河（条目区）的左边缘与页面左端的间距
+Metrics/StoryTop: 故事顶部位置
+Metrics/StoryTop/Hint: 故事河（条目区）的上边缘与页面顶部的间距
+Metrics/StoryRight: 故事右侧位置
+Metrics/StoryRight/Hint: 侧边栏的左边缘与页面左端的间距
+Metrics/StoryWidth: 故事的宽度
+Metrics/StoryWidth/Hint: 故事河的整体宽度
+Metrics/TiddlerWidth: 条目宽度
+Metrics/TiddlerWidth/Hint: 在故事河内
+Metrics/SidebarBreakpoint: 侧边栏中断点
+Metrics/SidebarBreakpoint/Hint: 故事河和侧边栏会并排显示的最小页面宽度
+Metrics/SidebarWidth: 侧边栏宽度
+Metrics/SidebarWidth/Hint: 在 浮动故事，固定侧边栏 布局中，侧边栏的宽度

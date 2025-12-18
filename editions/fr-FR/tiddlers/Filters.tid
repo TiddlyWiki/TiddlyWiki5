@@ -1,0 +1,24 @@
+caption: Filtres
+created: 20130827080000000
+fr-title: Filtres
+modified: 20150622110050866
+tags: Reference Concepts
+title: Filters
+type: text/vnd.tiddlywiki
+
+Vous pouvez vous représenter TiddlyWiki comme une base de données où tous les enregistrements sont des tiddlers. Une base de données propose typiquement un moyen de découvrir quels enregistrements satisfont à des critères donnés, avec ~TiddlyWiki c'est effectué par les filtres.
+
+Un <<.def filtre>> est une notation notation concise pour sélectionner un [[ensemble de tiddlers|Title Selection]] particuliers, envoyé dans une <<.def "output">>. Quand ~TiddlyWiki rencontre un filtre, il calcule l'output (la sortie). D'autres tâches peuvent être réalisées avec ces tiddlers, comme le [[dénombrement|CountWidget]] ou leur [[listage|ListWidget]].
+
+L'exemple qui suit envoie la sortie d'un filtre à la macro <<.mlink list-links>> pour afficher la liste des tiddlers qui commencent par la lettre H<<:>>
+
+> `<<list-links "[prefix[H]]">>`
+
+La sortie d'un filtre peut changer selon que des tiddlers sont ajoutés ou supprimés du wiki. ~TiddlyWiki recalcule à la volée, actualisant automatiquement aussi bien les dénombrements basés sur des filtres que les listages.
+
+La [[Recherche Avancée|$:/AdvancedSearch]] a un onglet <<.advancedsearch-tab Filter>> qui facilite l'expérimentation et l'apprentissage des filtres.
+
+;En savoir plus<<:>>
+* [[Introduction à la rédaction d'un filtre|Introduction to filter notation]] -- un didacticiel pas à pas
+* [[Syntaxe des Filtres|Filter Syntax]] -- les règles techniques détaillées
+* [[Opérateurs des Filtres|Filter Operators]] -- les méthodes de filtrages disponibles

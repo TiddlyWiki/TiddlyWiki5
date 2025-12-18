@@ -1,0 +1,26 @@
+created: 20150228135051000
+modified: 20150228135737000
+tags: [[tv-config-toolbar-class Variable]] [[Variable Examples]]
+title: tv-config-toolbar-class Variable (Examples)
+type: text/vnd.tiddlywiki
+
+<style>
+.green-background {
+	background-color: green;
+	fill: white;
+}
+</style>
+
+<$macrocall $name=".example" n="1"
+eg="""<$set name="tv-config-toolbar-class" value="tc-btn-invisible">
+{{$:/core/ui/Buttons/new-tiddler}}
+</$set>
+"""/>
+
+<$macrocall $name=".example" n="2"
+eg="""<$set name="tv-config-toolbar-class" value="green-background">
+{{$:/core/ui/Buttons/new-tiddler}}
+</$set>
+"""/>
+
+The `green-background` [[CSS|Cascading Style Sheets]] class is declared in a stylesheet within this tiddler.

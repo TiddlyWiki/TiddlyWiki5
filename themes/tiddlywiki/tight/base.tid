@@ -1,0 +1,98 @@
+title: $:/themes/tiddlywiki/tight/base
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+}
+
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+
+	html body.tc-body {
+		font-size: 13px;
+		line-height: 16px;
+	}
+
+	html body.tc-body h1,
+	html body.tc-body h2,
+	html body.tc-body h3,
+	html body.tc-body h4,
+	html body.tc-body p {
+		margin-top: 0.3em;
+		margin-bottom: 0.3em;
+	}
+
+	html body.tc-body code {
+		font-size: 0.8em;
+	}
+
+	html body.tc-body section.tc-story-river {
+		padding: 0px;
+	}
+
+	html body.tc-body div.tc-tiddler-frame {
+		padding: 12px;
+	}
+
+	html body.tc-body div.tc-sidebar-scrollable {
+		padding: 12px 0 12px 12px;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-subtitle {
+		font-size: 0.7em;
+		font-weight: 700;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-subtitle .tc-tiddlylink {
+		margin-right: .3em;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-tags-wrapper {
+		margin: 0;
+	}
+
+	html body.tc-body .tc-tiddler-frame button.tc-tag-label,
+	html body.tc-body .tc-tiddler-frame span.tc-tag-label {
+		font-size: 0.8em;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-tiddler-body h1 {
+		font-size: 1.5em;
+		font-weight: 500;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-tiddler-body h2 {
+		font-size: 1.3em;
+		font-weight: 500;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-tiddler-body h3 {
+		font-size: 1.2em;
+		font-weight: 500;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-tiddler-body h4 {
+		font-size: 1.1em;
+		font-weight: 500;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-improvement-banner {
+		margin-right: -15px;
+		margin-left: -10px;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-tiddler-info {
+		margin: 0 -13px 0 -13px;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-fold-banner {
+		width: 13px;
+		margin-left: -15px;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-unfold-banner {
+		margin-left: -13px;
+		margin-top: -4px;
+	}
+
+}

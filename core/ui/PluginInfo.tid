@@ -1,0 +1,21 @@
+title: $:/core/ui/PluginInfo
+
+\define localised-info-tiddler-title()
+$(currentTiddler)$/$(languageTitle)$/$(currentTab)$
+\end
+\define info-tiddler-title()
+$(currentTiddler)$/$(currentTab)$
+\end
+\define default-tiddler-title()
+$:/core/ui/PluginInfo/Default/$(currentTab)$
+\end
+\whitespace trim
+<$transclude tiddler=<<localised-info-tiddler-title>> mode="block">
+<$transclude tiddler=<<currentTiddler>> subtiddler=<<localised-info-tiddler-title>> mode="block">
+<$transclude tiddler=<<currentTiddler>> subtiddler=<<info-tiddler-title>> mode="block">
+<$transclude tiddler=<<default-tiddler-title>> mode="block">
+{{$:/language/ControlPanel/Plugin/NoInfoFound/Hint}}
+</$transclude>
+</$transclude>
+</$transclude>
+</$transclude>

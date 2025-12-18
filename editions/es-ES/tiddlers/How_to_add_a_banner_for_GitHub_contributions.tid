@@ -1,0 +1,26 @@
+caption: Banner para contribuciones en GitHub
+created: 20141123094403948
+es-title: Cómo añadir un banner para pedir contribuciones en GitHub
+modified: 20160419135034099
+tags: Learning
+title: How to add a banner for GitHub contributions
+type: text/vnd.tiddlywiki
+
+Cuando editas un tiddler en https://tiddlywiki.com, aparece una pequeña banda de color rosa que te invita a editar la fuente del tiddler en GitHub. 
+
+Si usas Node.js, puedes reproducir este mismo efecto para tu propio ~TiddlyWiki, de la siguiente manera:
+
+# Asegúrate de incluir el siguiente ajuste en el archivo `tiddlywiki.info` de tu directorio:
+
+#> <pre><code>	"config": {
+		"retain-original-tiddler-path": true
+	}</code></pre>
+
+# Copia el tiddler [[$:/ContributionBanner]] a tu wiki 
+
+# Haz los siguientes cambios:
+
+## Modifica la URL del enlace en GitHub para que apunte a tu propio directorio 
+
+## Modifica la frase <<.word "¿Puedes ayudarnos a mejorar la documentación?">> del modo que mejor convenza a los lectores para que contribuyan contigo.
+## Ajusta convenientemente el enlace [[Mejorar la documentación de TiddlyWiki|Improving TiddlyWiki Documentation]] para que apunte en la dirección del tiddler que contiene las instrucciones.

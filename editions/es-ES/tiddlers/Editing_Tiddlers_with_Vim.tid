@@ -1,0 +1,11 @@
+caption: Edición con Vim
+created: 20140406210404245
+es-title: Editar tiddlers con Vim
+modified: 20160419091110916
+tags: Learning
+title: Editing Tiddlers with Vim
+type: text/vnd.tiddlywiki
+
+Devin Weaver ha escrito un  plugin para [[Vim|http://www.vim.org/]], publicado en https://github.com/sukima/vim-tiddlywiki
+
+Soporta la mayor parte de la sintaxis de TiddlyWiki e incluye un plugin que actualiza automáticamente el campo `modified`.

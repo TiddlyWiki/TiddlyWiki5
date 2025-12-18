@@ -1,0 +1,20 @@
+chapter.of: Extended Persistence
+created: 20140708084614887
+modified: 20140715184930403
+sub.num: 2
+tags: doc
+title: Saver
+
+Modules with ``module-type: saver`` provide functionality to save the whole wiki. There are three methods a saver can support:
+
+<dl>
+<dt>save</dt> <dd>This method is used, when the user requests a save, for example by clicking the save button in the sidebar.</dd>
+<dt>autosave</dt> <dd>This method is used automatically by TW when tiddlers are changed, created or deleted by the user.</dd>
+<dt>download</dt> <dd>This message is used when the wiki or a single tiddler should explicitly be downloaded. The control panel for example uses this method to provide a button which saves the wiki as a static HTML file.</dd>
+</dl>
+
+A saver module has to export two functions. ``canSave(wiki)`` returning true if this module is capable of working and ``create(wiki)`` returning an instance of a saver object.
+This saver object has to provide an ``info`` property containing a name, a priority, an array of methods it supports and a method ``save(text,method,callback)``. This method is called from TW with the actual text which should be saved, the method which is used and a callback function to report errors: ``callback("Error while saving")`` or to notify that saving went well: ``callback(null, "Saving went well :)")``. If the saver method successfully saved the file it has to return true, or false otherwise.
+Saves are triggered by messages from the UI. The syncer module uses the saver with the highest priority capable of the requested method to save the file.
+
+The core plug-in contains a saver capable of saving the current state of the wiki to the local hard drive by using a special Firefox extension called Tiddlyfox. If this extension is not available, the savers ``canSave`` method would return false. A saver with a lower priority would then ask the user to save the current state as a new HTML file.

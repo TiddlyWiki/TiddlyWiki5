@@ -1,0 +1,44 @@
+{
+	"description": "Chinese (Traditional) edition",
+	"plugins": [
+		"tiddlywiki/internals"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/starlight",
+		"tiddlywiki/seamless",
+		"tiddlywiki/centralised",
+		"tiddlywiki/tight",
+		"tiddlywiki/readonly"
+	],
+	"languages": [
+		"zh-Hant"
+	],
+	"includeWikis": [
+		{"path": "../tw5.com", "read-only": true}
+	],
+	"build": {
+		"index": [
+			"--savetiddlers","[tag[external-image]]","images",
+			"--rendertiddlers","[tag[external-text]]","$:/core/templates/tid-tiddler","text","text/plain",".tid",
+			"--setfield","[tag[external-image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",
+			"--setfield","[tag[external-text]]","_canonical_uri","$:/core/templates/canonical-uri-external-text","text/plain",
+			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"empty": [
+			"--rendertiddler","$:/editions/zh-Hant/download-empty","empty.html","text/plain",
+			"--rendertiddler","$:/editions/zh-Hant/download-empty","empty.hta","text/plain"],
+		"favicon": [
+			"--savetiddler","$:/favicon.ico","favicon.ico",
+			"--savetiddler","$:/green_favicon.ico","static/favicon.ico"],
+		"static": [
+			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
+			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
+			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain",
+			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain"]
+	},
+	"config": {
+		"retain-original-tiddler-path": true
+	}
+}

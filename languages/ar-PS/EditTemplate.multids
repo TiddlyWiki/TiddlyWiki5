@@ -1,0 +1,27 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: يعرض هذا التدلر محتوى مخزن خارج ملف تدلي ويكي الرئيسي. يمكنك تحرير الوسوم والحقول ولكن لا يمكنك تحرير المحتوى نفسه مباشرة
+
+Body/Placeholder: اكتب النص لهذا التدلر
+
+Body/Preview/Type/Output: output
+Field/Dropdown/Caption: قائمة الحقول
+Fields/Add/Button: أضف
+Fields/Add/Button/Hint: أضف الحقل الجديد إلى التدلر
+Fields/Add/Dropdown/System: حقول النظام
+Fields/Add/Dropdown/User: حقول المستخدم
+Fields/Add/Name/Placeholder: اسم الحقل
+Fields/Add/Prompt: أضف حقل جديد:
+Fields/Add/Value/Placeholder: قيمة الحقل
+Tags/Add/Button: أضف
+Tags/Add/Button/Hint: أضف وسما
+Tags/Add/Placeholder: إسم الوسم
+Tags/Dropdown/Caption: قائمة وسوم
+Tags/Dropdown/Hint: إظهار قائمة الوسوم
+Title/Exists/Prompt: التدلر المستهدف موجود بالفعل
+Type/Delete/Caption: حذف نوع المحتوى
+Type/Delete/Hint: حذف نوع المحتوى
+Type/Dropdown/Caption: قائمة أنواع المحتوى
+Type/Dropdown/Hint: إظهار قائمة أنواع المحتوى
+Type/Placeholder: نوع المحتوى
+Type/Prompt: نوع:

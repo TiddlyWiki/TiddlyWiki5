@@ -1,0 +1,32 @@
+caption: Überschriften
+created: 20131205161234909
+creator: pmario
+modified: 20140913121017112
+modifier: pmario
+tags: WikiText
+title: Überschriften in WikiText
+type: text/vnd.tiddlywiki
+
+Überschriften werden mit Ausrufezeichen `!` spezifiziert. Es sind bis zu 6 Ebenen möglich:
+
+```
+! Überschrift Ebene 1
+
+!! Überschrift Ebene 2
+
+!!! Überschrift Ebene 3
+```
+
+! Überschrift Ebene 1
+
+!! Überschrift Ebene 2
+
+!!! Überschrift Ebene 3
+
+---
+
+CSS Klassen können in Ausnahmefällen von geübten Benutzern direkt angegeben werden:
+
+```
+!.myStyle Diese Überschrift wird die HTML Klasse class="myStyle" bekommen.
+```

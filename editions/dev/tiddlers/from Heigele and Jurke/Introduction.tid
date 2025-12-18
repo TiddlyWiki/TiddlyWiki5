@@ -1,0 +1,13 @@
+created: 20140708090028950
+modified: 20140717212619797
+tags: doc
+title: Introduction
+
+TiddlyWiki is a personal notebook application based on a wiki application. In addition to a static Web-Site, TiddlyWiki is implemented as a single page application. This is a approach to build rich internet applications, it includes the possibility to put application logic into web-pages to make them dynamically. Furthermore this means the whole application is delivered in one HTML file, consisting of source code to dynamically change the view and behaviour of the application as well as the data of the application. During the runtime nothing must be loaded from a server to the TiddlyWiki application. The HTML file contains everything needed to start the application. TiddlyWiki is highly customisable because of a very sophisticated module concept. Except of a micro-kernel written in JavaScript the whole application consist of a own data-structure called tiddlers and a own markup language called wikiText. Even the modules are realised as tiddlers.
+
+The aim of this documentation is to overview the idea behind the TiddlyWiki application as well as give a overview of the architecture to the reader. This means after reading the documentation the reader is has the knowledge how the overall application works and where the points are where the reader can extend the functionality of the application.
+
+
+''__Section Overview:__''
+
+{{Section Overview}}

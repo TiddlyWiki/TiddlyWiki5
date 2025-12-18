@@ -1,0 +1,16 @@
+caption: Referencia
+created: 20140910212931897
+es-title: Material de referencia
+list: Concepts Definitions WikiText Macros Widgets Filters Messages Commands Mechanisms
+modified: 20160511152812725
+tags: TableOfContents
+title: Reference
+type: text/vnd.tiddlywiki
+
+Los siguientes temas constituyen la documentación de referencia de ~TiddlyWiki: 
+
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'Reference'>>
+
+</div>

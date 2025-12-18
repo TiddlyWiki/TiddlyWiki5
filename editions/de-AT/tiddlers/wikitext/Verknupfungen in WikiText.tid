@@ -1,0 +1,82 @@
+caption: Verknüpfungen
+created: 20131205155230596
+creator: pmario
+modified: 20140922132221424
+modifier: ChrisK
+tags: WikiText Hyperlinks
+title: Verknüpfungen in WikiText
+type: text/vnd.tiddlywiki
+
+Eine Schlüssel Fähigkeit von WikiText ist die einfache Möglichkeit, Verknüpfungen zu anderen Tiddlern oder externen Seiten herzustellen. 
+
+!! Manuelle Verknüpfungen
+
+<table><tbody>
+<tr class="evenRow">
+  <td>`[[Tiddler Titel]]`</td>
+  <td>[[Tiddler Titel]]</td>
+  <td>Verknüpfung zu einem Tiddler mit dem Titel</td>
+</tr>
+<tr class="oddRow">
+  <td>`[[Angezeigter Link Text|Tiddler Titel]]`</td>
+  <td>[[Angezeigter Link Text|Tiddler Titel]]</td>
+  <td>Verknüpfung zu einem Tiddler und Festlegen des angezeigten Textes.</td>
+</tr>
+</tbody></table>
+
+!! ~CamelCase Verknüpfungen
+
+Für Tiddler, für die die "Camel Case" Richtlinien gelten, ist es nicht nötig, die "doppelten eckigen Klammen" zu verwenden. "Camel Case" Verknüpfungen werden automatisch erstellt. 
+
+```
+* HelloThere ist eine Verknüpfung
+* http://google.com/ ist eine Verknüpfung"
+```
+Dargestellt als: 
+
+* HelloThere ist eine Verknüpfung
+* http://google.com/ ist eine Verknüpfung"
+
+---
+
+Diese Regel kann mit einem Tilde `~` Zeichen unterdrückt werden. (Bei manchen Tastatur Einstellungen muss die Taste 2 mal gedrückt werden) Beispiele:
+
+```
+* ~HelloThere ist keine Verknüpfung
+* ~http://google.com/ ist keine Verknüpfung"
+```
+
+Dargestellt als: 
+
+* ~HelloThere ist keine Verknüpfung
+* ~http://google.com/ ist keine Verknüpfung"
+
+!! Externe Verknüpfungen
+
+Um zu externen Seiten zu verknüpfen muss die volle URL verwendet werden:
+
+```
+* https://tiddlywiki.com/
+* [[TW5|https://tiddlywiki.com/]]
+```
+
+Dargestellt als: 
+
+* https://tiddlywiki.com/
+* [[TW5|https://tiddlywiki.com/]]
+
+Die automatische Erkennung von externen Verknüpfungen hat einige Schwächen. Deshalb ist es möglich eine externe Verknüpfung zu definieren: 
+
+```
+[ext[tiddlywiki.com]]
+[ext[caption for link|tiddlywiki.com]]
+[ext[Donate|bitcoin:1aabbdd....?amount=0.001]]
+```
+* [ext[tiddlywiki.com]]
+* [ext[caption for link|tiddlywiki.com]]
+* [ext[Donate|bitcoin:1aabbdd....?amount=0.001]]
+
+!! Anpassen von "Tiddler Links"
+
+Siehe LinkWidget für eine genauere Beschreibung. Dieser Link zeigt auf die englische Dokumentation!
+

@@ -1,0 +1,69 @@
+title: JSON in TiddlyWiki
+tags: Features
+type: text/vnd.tiddlywiki
+created: 20220427174702859
+modified: 20220611104737314
+
+!! Introduction
+
+JSON (~JavaScript Object Notation) is a standardised text representation for data structures that is widely used for the storage and transfer of data.
+
+JSON is used in several different contexts in TiddlyWiki. For example:
+
+* Tiddlers are represented as JSON data within TiddlyWiki HTML files
+* Groups of tiddlers can be [[exported|How to export tiddlers]] and [[imported|Importing Tiddlers]] as JSON files
+* Plugin tiddlers store their constituent shadow tiddlers as JSON data
+* The client-server configuration uses [[JSON messages|TiddlyWeb JSON tiddler format]] to communicate between the client and the server
+* Arbitrary JSON data within DataTiddlers can be processed and manipulated using a set of filter operators and action widgets
+
+!! About JSON
+
+The technical description of JSON at the official website https://json.org/ is terse. Here we summarise the main features.
+
+JSON supports two basic data structures:
+
+''Arrays'' are lists of items. The items are identified by their numeric index (starting at zero)
+
+An example of an array is:
+
+```json
+["one","two","three\"four"]
+```
+
+Note the following features of arrays:
+
+* The array is signified by square brackets surrounding the list of items
+* Each item is a string in double quotes. Double quotes can be included within the strings by preceding them with a backslash (`\`)
+* The items are separated by commas
+
+''Objects'' are collections of name/value pairs. Each item is a value that is identified by a unique name
+
+An example of an object is:
+
+```json
+{
+  "first": "This is the first value",
+  "second": "This is the second value",
+  "third": "This is the third value"
+}
+```
+
+Note the following features of objects:
+
+* The object is signified by curly braces surrounding the list of name/value pairs
+* Each name/value pair consists of the name in double quotes, a colon, and then the value
+* The name/value pairs are separated by commas
+
+The examples above all show string values. JSON actually supports several different types of value. Any of these types can be used as a value:
+
+* String values, as shown above
+* Numeric values, represented as signed decimals such as `1`, `3.14`. Exponential notation can also be used e.g. `-1E10`
+* Boolean values, represented by the keywords `true` and `false`
+* The special value `null`, which is often used to represent data that is missing or incomplete
+* Objects and arrays are also values, allowing complex nested structures to be represented
+
+!! Working with Data Tiddlers
+
+* [[Reading data from JSON tiddlers]]
+* [[Constructing JSON tiddlers]]
+* [[Modifying JSON tiddlers]]

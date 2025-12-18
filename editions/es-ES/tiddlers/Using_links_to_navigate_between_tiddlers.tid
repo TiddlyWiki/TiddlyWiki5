@@ -1,0 +1,53 @@
+caption: Desplazarse con enlaces
+created: 20140908093600000
+es-title: Usar enlaces para desplazarse entre tiddlers
+modified: 20160422093819943
+tags: [[Working with TiddlyWiki]]
+title: Using links to navigate between tiddlers
+type: text/vnd.tiddlywiki
+
+Para moverte de un tiddler a otro puedes usar enlaces (generalmente de color azul). Pinchar cualquier enlace te llevará automáticamente al tiddler en cuestión. Si está cerrado, lo abrirá. Lo fabuloso de ~TiddlyWiki es que hace los enlaces a tiddlers tan accesibles como sea posible. ¡Hay enlaces por todos lados! Estos son los lugares clave donde puedes encontrar enlaces a otros tiddlers en ~TiddlyWiki:
+
+* En el cuerpo de cualquier tiddler puedes <<.def "crear un link">> a otro tiddler, tanto si ya existe como si no. [[Enlaces en WikiText|Linking in WikiText]] te muestra varias formas sencillas de crear enlaces entre tiddlers.
+
+* Cada <<.def pastilla>> que veas en un tiddler (como la que hay bajo el título de este tiddler, que dice <<.def "Working with ~TiddlyWiki">>, contiene un enlace al tiddler de su correspondiente etiqueta. 
+
+* El <<.def InfoPanel>> de un tiddler te muestra cuatro pestañas que contienen listas adicionales de enlaces relacionados con este. 
+
+** La pestaña <<.info-tab References>> te da una lista de los enlaces que apuntan al tiddler actual
+
+** <<.info-tab Tagging>> muestra una lista de enlaces de tiddlers etiquetados con el título del actual. 
+
+** <<.info-tab List>> muestra una lista de enlaces de tiddlers mencionados en el campo <<.flink ListField>> del tiddler actual. 
+
+** <<.info-tab Listed>> muestra una lista de enlaces de tiddlers que incluyen el actual en sus respectivos <<.flink ListField>> 
+
+* Las <<.def "pestañas">> de la barra lateral también contienen innumerables enlaces a tiddlers:
+
+** <<.sidebar-tab Open>> muestra una lista de tiddlers actualmente abiertos. Es decir, a la vista. 
+
+** <<.sidebar-tab Recent>> enumera los últimos 100 tiddlers modificados, por orden ascendente de antigüedad.
+
+** <<.sidebar-tab More>> ofrece ocho listas adicionales de enlaces:
+
+*** <<.more-tab All>> contiene la lista alfabética de todos los tiddlers del wiki.
+
+*** <<.more-tab Tags>> contiene la lista alfabética de todas las etiquetas del wiki. Pinchando en cualquiera de ellas, además, obtienes una lista alfabética de todos los tiddlers etiquetados con ella
+
+*** <<.more-tab Missing>> contiene la lista de enlaces vacíos, es decir, que enlazan con tiddlers que aún no existen. Función muy útil para encontrar aquellos tiddlers que uno planeó escribir cuando redacta
+
+*** <<.more-tab Drafts>> contiene la lista de tiddlers que actualmente están en borrador. ~TiddlyWiki considera que, mientras esté en edición, un borrador es un tiddler aparte del original, de modo que mientras se edita, existen dos tiddlers iguales e independientes, lo que por un lado conserva intacto el contenido original hasta que se pulse el botón <<.button save>> y, por otro, nos permite trabajar tranquilamente en un borrador sin mostrar tiddlers inacabados ni perder cambios
+
+*** <<.more-tab Orphans>> contiene la lista de aquellos tiddlers que no enlazan a ningún otro ni mediante links, ni etiquetas ni listas. Muestra qué tiddlers necesitan integrarse con el resto, algo muy útil a la hora de editar un wiki
+
+*** <<.more-tab Types>> contiene una lista por tipo de contenido de tiddlers con contenido especial, como imágenes, audio, código, archivo PDF ...etc
+
+*** <<.more-tab System>> contiene la lista de todos los [[tiddlers de sistema|SystemTiddlers]]
+
+*** <<.more-tab Shadows>> contiene la lista de todos los [[tiddlers ocultos|ShadowTiddlers]].
+
+* FInalmente, también puedes crear tus propias listas de enlaces, usando varios métodos:
+
+** Por [[transclusión|Transclusion in WikiText]] de [[filtros|Filters]]: si escribimos `{{{[tag[Contents]]}}}` en un tiddler, nos mostrará la lista de tiddlers que llevan la etiqueta <<.em Contents>>. 
+
+** Puedes usar ListWidget. Es algo más complejo que la transclusión de filtros, pero a cambio te da más flexibilidad a la hora de diseñar la lista para que se muestre tal y como quieres.

@@ -1,0 +1,33 @@
+created: 20171118194518819
+fr-title: Personnaliser TiddlyDesktop
+modified: 20220402105820520
+tags: Learning
+title: How to Customize TiddlyDesktop
+type: text/vnd.tiddlywiki
+
+!! Avertissement<<:>>
+
+Avant d'expérimenter avec les entrailles de TiddlyDesktop, vous devriez noter l'emplacement du <<gf "dossier de configuration utilisateur">><<:>> cliquez sur le bouton <<gf Settings>> de la fenêtre principale de TiddlyDesktop, puis cliquez sur le bouton <<gf "Open user config folder">>. Ensuite, remontez d'un niveau pour localiser le dossier parent, qui devrait s'appeler <<gf TiddlyDesktop>>. Si quelque chose se passe mal, vous pouvez restaurer l'état d'origine de TiddlyDesktop en supprimant ce dossier et son contenu.
+
+Cliquez sur le bouton <<gf Backstage>> de la fenêtre principale de TiddlyDesktop pour ouvrir le //wiki d'infrastructure// qui tourne en coulisses. C'est une pseudo-instance de <<tw>> sous Node.js qui fournit l'interface utilisateur et la mécanique de TiddlyDesktop.
+
+!! Comment me débarrasser du bouton <<gf "Add a ~TiddlyWiki Folder">><<?>>
+
+Dans le //wiki d'infrastructure//, localisez le tiddler `WikiListToolbar` (il y a un lien dans HelloThere). Passez en mode d'édition, et vous verrez le WikiTexte des boutons de barre d'outils. Si vous faites des modifications et les enregistrez, elles seront immédiatement prises en compte dans la fenêtre principale de TiddlyDesktop.
+
+!! Comment changer le bouton <<gf advanced>> en bouton <<gf "reveal backups">><<?>>
+
+Vous pouvez copier le code du bouton <<gf "reveal backups">> disponible dans le tiddler `$:/TiddlyDesktop/Settings`, et le coller dans `WikiListToolbar`.
+
+!! Comment modifier les couleurs<<?>>
+
+Comme d'habitude dans <<tw>><<:>> vous pouvez utiliser la palette, ou définir vos propres CSS.
+
+!! Comment changer l'ordre d'apparition des tiddlers (qui semble alphabétique)<<?>>
+
+Ouvrez le tiddler `WikiList` en mode édition, naviguez jusqu'en bas du code, et modifiez le widget `<$list>` à l'intérieur de la macro <<gf wikilist>><<:>>
+
+```
+<$list filter="[tag[wikilist]sort[title]!has[draft.of]]" emptyMessage="Add a ~TiddlyWiki file or folder to get started. Click the buttons above to browse, or drag and drop from your file Explorer/Finder" storyview="pop">
+```
+

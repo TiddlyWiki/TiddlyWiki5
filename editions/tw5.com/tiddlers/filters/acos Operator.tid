@@ -1,0 +1,15 @@
+caption: acos
+created: 20211019211936842
+modified: 20211021222835888
+op-input: a [[selection of titles|Title Selection]]
+op-output: the arccosine (in radians) of the input numbers
+op-purpose: calculate the arccosine value (in radians) of a list of numbers
+tags: [[Filter Operators]] [[Mathematics Operators]] [[Trigonometric Operators]] [[Unary Mathematics Operators]]
+title: acos Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.21">> See [[Mathematics Operators]] for an overview.
+
+<<.tip " This is the inverse operation of [[cos|cos Operator]]: cos calculate the cosine of an angle (in radian), but acos calculate the angle (in radian) of a cosine.">>
+
+<<.operator-examples "acos">>

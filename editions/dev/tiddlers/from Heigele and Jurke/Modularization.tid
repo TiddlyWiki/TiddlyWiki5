@@ -1,0 +1,11 @@
+chapter.of: TiddlyWiki - A quick Overview
+created: 20140708082305109
+modified: 20140715083449669
+sub.num: 5
+tags: doc
+title: Modularization
+type: 
+
+The whole application is basically built from three parts. At first, the microkernel provides the basic functionality to handle tiddlers. The second part are tiddlers representing core functionality. These are for example modules which extend the store by more sophisticated functions, UI tiddlers and widget modules, a WikiText parser, sophisticated deserializers, savers, syncadapters, etc.
+These core modules are provided as plug-in to the microkernel. Consequently, a plug-in is a single tiddler which itself contains multiple tiddlers, forming the plug-in. Each of this tiddler might be a module providing new functionality (i.e. a module tiddler marked with "module-type: saver" can extend the application with new methods of saving the current wiki state.).
+Tiddlers provided in plug-ins are called shadow tiddlers. They are immutable and can not be edited or deleted  but we can create a new tiddler with the same name to override a shadow tiddler.

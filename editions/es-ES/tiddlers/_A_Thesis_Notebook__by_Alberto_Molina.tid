@@ -1,0 +1,20 @@
+caption: "A Thesis Notebook", de Alberto Molina
+created: 20130302085406905
+es-title: "A Thesis Notebook", de Alberto Molina
+modified: 20160417093653037
+tags: Examples
+title: "A Thesis Notebook" by Alberto Molina
+type: text/vnd.tiddlywiki
+url: http://tesis.tiddlyspot.com/
+
+Cuaderno de tesis basado en TiddlyWiki
+
+{{!!url}}
+
+<<<
+Este es un ejemplo de cuaderno de tesis, construido sobre TiddlyWiki 5.0.8-beta.
+
+TiddlyWiki es un gran programa creado por Jeremy Ruston. Te permite, entre otras cosas, tomar notas, organizar ideaas, guardar información y ver todas tus cosas de la forma que queres. Es una herramiente increíblemente flexible que puedes adaptar para que satisfaga casi todas tus necesidades. 
+
+Este TiddlyWiki ha sido adaptado para servir de cuaderno de notas de filosofía, centrado en autores, libros y artículos, conceptos y teorías, además de notas personales. Lo uso junto con Zotero, que es un programa de bibliografía. Ambos son proyectos gratuitos de código abierto. TiddlyWiki se puede descargar de https://tiddlywiki.com
+<<<

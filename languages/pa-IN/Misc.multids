@@ -1,0 +1,22 @@
+title: $:/language/
+
+BinaryWarning/Prompt: ਇਹ tiddler ਬਾਇਨਰੀ ਦਾ ਡਾਟਾ ਰੱਖਦਾ ਹੈ
+ClassicWarning/Hint: ਇਹ tiddler 5. ਹੋਰ ਜਾਣਕਾਰੀ ਲਈ https://tiddlywiki.com/static/Upgrading.html ਵੇਖੋ TiddlyWiki ਵਰਜਨ ਨਾਲ ਅਨੁਕੂਲ ਪੂਰੀ ਨਹੀ ਹੈ, ਜੋ ਕਿ TiddlyWiki ਕਲਾਸਿਕ ਵਿਕਿ ਟੈਕਸਟ ਫਾਰਮੈਟ ਹੈ, ਵਿੱਚ ਲਿਖਿਆ ਗਿਆ ਹੈ.
+ClassicWarning/Upgrade/Caption:  ਅੱਪਗਰੇਡ
+CloseAll/Button: ਸਭ ਨੂੰ  ਬੰਦ ਕਰੋ 
+ConfirmCancelTiddler: ਤੁਸੀ "<$ ਪਾਠ = << >> ਦੇ ਸਿਰਲੇਖ />" tiddler ਲਈ ਤਬਦੀਲੀ ਰੱਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?
+ConfirmDeleteTiddler: ਤੁਸੀ "<$ ਪਾਠ = << >> ਦੇ ਸਿਰਲੇਖ />" tiddler ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
+ConfirmEditShadowTiddler: ਤੁਹਾਨੂੰ ਇੱਕ ShadowTiddler ਸੋਧ ਕਰਨ ਲਈ ਜਾ ਰਹੇ ਹੋ. ਕੋਈ ਵੀ ਤਬਦੀਲੀ ਨੂੰ ਭਵਿੱਖ ਅੱਪਗਰੇਡ ਗੈਰ-ਮਾਮੂਲੀ ਬਣਾਉਣ ਮੂਲ ਸਿਸਟਮ ਅਣਡਿੱਠਾ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ. ਤੁਹਾਨੂੰ "</ $ ਪਾਠ = << ਦਾ ਸਿਰਲੇਖ >>>" ਵਿੱਚ ਸੋਧ ਕਰਨ ਲਈ ਚਾਹੁੰਦੇ ਹੋ?
+ConfirmOverwriteTiddler: ਤੁਸੀ "<$ ਪਾਠ = << >> ਦੇ ਸਿਰਲੇਖ />" tiddler ਹੀ ਲਿਖਣਾ ਚਾਹੁੰਦੇ ਹੋ?
+DefaultNewTiddlerTitle: ਨਿਊ Tiddler
+DropMessage:  ਇੱਥੇ ਛੱਡੋ (ਜ ਰੱਦ ਕਰਨ ਲਈ ਬਚ ਕਲਿੱਕ ਕਰੋ)
+Encryption/ConfirmClearPassword: ਤੁਸੀ ਪਾਸਵਰਡ ਨੂੰ ਸਾਫ਼ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ? ਇਹ ਇੰਕ੍ਰਿਪਸ਼ਨ ਹਟਾਉਣ  ਤੇ ਇਸ ਵਿਕੀ 'ਨੂੰ ਬਚਾਉਣ ਲਈ   ਲਾਗੂ ਕੀਤਾ ਜਾਵੇਗਾ
+Encryption/PromptSetPassword: TiddlyWiki ਲਈ ਇੱਕ ਪਾਸਵਰਡ ਸੈੱਟ ਕਰੋ
+MissingTiddler/Hint: Tiddler ਗੁੰਮ ਹੈ "<$ ਪਾਠ = << >> currentTiddler />" - ਕਲਿੱਕ ਕਰੋ {{$ / core / images / ਸੋਧ-ਬਟਨ}} ਨੂੰ ਬਣਾਉਣ ਲਈ
+RecentChanges/DateFormat: ਮਿਤੀ /ਮਹੀਨੇ /ਸਾਲ
+SystemTiddler/Tooltip: ਇਹ ਇੱਕ ਸਿਸਟਮ tiddler ਹੈ
+TagManager/Colour/Heading:  ਰੰਗ
+TagManager/Icon/Heading:  ਆਈਕਾਨ 
+TagManager/Info/Heading:  ਜਾਣਕਾਰੀ
+TagManager/Tag/Heading:  ਟੈਗ
+UnsavedChangesWarning: ਤੁਹਾਡੇ ਕੋਲ TiddlyWiki ਵਿੱਚ ਬਿਨਾਂ ਸੰਭਾਲੇ ਬਦਲਾਅ 

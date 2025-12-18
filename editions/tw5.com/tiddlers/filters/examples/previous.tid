@@ -1,0 +1,11 @@
+created: 20150123221711000
+modified: 20150123223422000
+tags: [[previous Operator]] [[Operator Examples]]
+title: previous Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[[Wednesday]previous[Days of the Week]]">>
+<<.operator-example 2 "[[Monday]previous[Days of the Week]]">>
+<<.operator-example 3 "Tuesday Wednesday Thursday +[previous[Days of the Week]]">>

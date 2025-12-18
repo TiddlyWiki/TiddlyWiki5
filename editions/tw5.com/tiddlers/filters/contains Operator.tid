@@ -1,0 +1,16 @@
+caption: contains
+created: 20180815124349784
+modified: 20180815124607101
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: those input tiddlers in which the list field <<.place F>> does <<.em not>> contain the value <<.place S>>
+op-output: those input tiddlers in which the list field <<.place F>> contains the value <<.place S>>
+op-parameter: a possible value to be found in list field <<.place F>>
+op-parameter-name: S
+op-purpose: filter the input by searching list fields for a value
+op-suffix: the name of a [[field|TiddlerFields]] (defaults to `list`)
+op-suffix-name: F
+tags: [[Filter Operators]] [[Field Operators]] [[Negatable Operators]]
+title: contains Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "contains">>

@@ -1,0 +1,21 @@
+created: 20150102163222184
+modified: 20150119231005000
+title: $:/plugins/tiddlywiki/railroad/usage
+
+The content of the `<$railroad>` widget is ignored.
+
+|!Attribute |!Description |!Default |
+|text |Text in a special notation that defines the diagram's layout |-- |
+|arrow |If set to `no`, repeat paths do not have an arrow on them |`yes` |
+|start |Style of the startpoint: `single`, `double`, `none` |`single` |
+|end |Style of the endpoint: `single`, `double`, `none` |`single` |
+|debug |If set to `yes`, the diagram displays its parse tree |`no` |
+
+These options can also be specified via pragmas in the diagram notation, or globally via a dictionary tiddler called `$:/config/railroad`:
+
+```
+arrow: yes
+start: single
+end: single
+debug: no
+```

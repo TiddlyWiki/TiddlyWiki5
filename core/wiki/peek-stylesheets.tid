@@ -1,0 +1,76 @@
+title: $:/snippets/peek-stylesheets
+
+\define expandable-stylesheets-list()
+\whitespace trim
+<ol>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
+<$vars state=<<qualify "$:/state/peek-stylesheets/open/">>>
+<$set name="state" value={{{ [<state>addsuffix<currentTiddler>] }}}>
+<li>
+<$reveal type="match" state=<<state>> text="yes" tag="span">
+<$button set=<<state>> setTo="no" class="tc-btn-invisible">
+{{$:/core/images/down-arrow}}
+</$button>
+</$reveal>
+<$reveal type="nomatch" state=<<state>> text="yes" tag="span">
+<$button set=<<state>> setTo="yes" class="tc-btn-invisible">
+{{$:/core/images/right-arrow}}
+</$button>
+</$reveal>
+<$link>
+<$view field="title"/>
+</$link>
+<$reveal type="match" state=<<state>> text="yes" tag="div">
+<$set name="source" tiddler=<<currentTiddler>>>
+<$wikify name="styles" text=<<source>>>
+<$codeblock code=<<styles>> language="css"/>
+</$wikify>
+</$set>
+</$reveal>
+</li>
+</$set>
+</$vars>
+</$list>
+</ol>
+\end
+
+\define stylesheets-list()
+\whitespace trim
+<ol>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
+<li>
+<$link>
+<$view field="title"/>
+</$link>
+<$set name="source" tiddler=<<currentTiddler>>>
+<$wikify name="styles" text=<<source>>>
+<pre>
+<code>
+<$text text=<<styles>>/>
+</code>
+</pre>
+</$wikify>
+</$set>
+</li>
+</$list>
+</ol>
+\end
+\whitespace trim
+
+<$vars modeState=<<qualify "$:/state/peek-stylesheets/mode/">>>
+
+<$reveal type="nomatch" state=<<modeState>> text="expanded" tag="div">
+<$button set=<<modeState>> setTo="expanded" class="tc-btn-invisible">{{$:/core/images/chevron-right}} {{$:/language/ControlPanel/Stylesheets/Expand/Caption}}</$button>
+</$reveal>
+<$reveal type="match" state=<<modeState>> text="expanded" tag="div">
+<$button set=<<modeState>> setTo="restored" class="tc-btn-invisible">{{$:/core/images/chevron-down}} {{$:/language/ControlPanel/Stylesheets/Restore/Caption}}</$button>
+</$reveal>
+
+<$reveal type="nomatch" state=<<modeState>> text="expanded" tag="div">
+<<expandable-stylesheets-list>>
+</$reveal>
+<$reveal type="match" state=<<modeState>> text="expanded" tag="div">
+<<stylesheets-list>>
+</$reveal>
+
+</$vars>

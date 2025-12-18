@@ -1,0 +1,12 @@
+caption: Guardar en Internet Explorer
+created: 20131212182652334
+es-title: Guardar en Internet Explorer
+modified: 20160422201134073
+tags: Saving
+title: Saving on InternetExplorer
+type: text/vnd.tiddlywiki
+
+Por defecto, ~TiddlyWiki guarda los cambios en InternetExplorer 10 y superiores usando un módulo de guardado que descarga el archivo modificado en vez de guardarlo directamente. Hay dos alternativas para guardar los cambios directamente en el archivo:
+
+* [[Usando la extensión TiddlyIE |Saving with TiddlyIE]]
+* Ejecutándolo como [[aplicación HTA|Windows HTA Hack]] cambiando la extensión `*.html` por `*.hta`

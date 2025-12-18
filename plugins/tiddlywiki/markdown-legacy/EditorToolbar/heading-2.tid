@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/markdown-legacy/EditorToolbar/heading-2
+list-after: $:/core/ui/EditorToolbar/heading-2
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/heading-2
+caption: {{$:/language/Buttons/Heading2/Caption}} (Markdown)
+description: {{$:/language/Buttons/Heading2/Hint}}
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
+shortcuts: ((heading-2))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="prefix-lines"
+	character="#"
+	count="2"
+/>

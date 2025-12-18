@@ -1,0 +1,19 @@
+fr-title: Dix raisons de passer à TiddlyWiki
+created: 20140904085700000
+modified: 20141115223448436
+tags: HelloThere
+title: Ten reasons to switch to TiddlyWiki
+type: text/vnd.tiddlywiki
+
+@@.doublespacedlist
+# Avec <<tw>>, vous pouvez organiser vos notes selon vos préférences, pas selon celle des autres. Vos notes se conforment à votre façon de penser et personne ne vous impose une hiérarchie prédéfinie de carnets de notes ou d'onglets. 
+# L'approche non-linéaire de <<tw>> vous donnera l'occasion de penser à vos informations d'une façon effectivement nouvelle et utile.
+# Retrouver ses notes dans <<tw>> est ultra-rapide.
+# Il existe de nombreux moyens de personnaliser et d'adapter tous les aspects de <<tw>>.
+# <<tw>> est libre et gratuit, et compatible avec toutes les plates-formes. N'importe quel navigateur web pourra l'ouvrir. Pour l'utiliser, il n'est pas nécessaire d'acquérir une application coûteuse, ni de payer un abonnement.
+# Les fichiers <<tw>> facilitent le partage d'informations. Il existe une multitude de manières de partager vos informations depuis <<tw>>.
+# Avec <<tw>>, vos informations vous appartiennent, et vous les stockez où vous voulez — sur notre appareil, sur une clé USB, dans Dropbox, sur votre serveur.
+# <<tw>> propose un nombre toujours croissant de plugins, thèmes, widgets, et langages.
+# La communauté en ligne de <<tw>> est bienveillante, et fera de son mieux pour vous apporter l'aide dont vous avez besoin.
+# Si vous êtes programmeur, vous trouverez encore plus de façons de faire joujou avec <<tw>>. Avec <<tw>>, plus on en sait, plus on s'amuse.
+@@

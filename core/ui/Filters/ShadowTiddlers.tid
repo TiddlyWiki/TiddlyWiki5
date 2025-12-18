@@ -1,0 +1,5 @@
+title: $:/core/Filters/ShadowTiddlers
+tags: $:/tags/Filter
+filter: [all[shadows]sort[title]]
+description: {{$:/language/Filters/ShadowTiddlers}}
+

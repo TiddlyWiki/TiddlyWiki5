@@ -1,0 +1,57 @@
+created: 20131028132700000
+modified: 20241219105600277
+original-modified: 20160618085859219
+tags: Features
+title: Using SVG
+ja-title: SVGの使用
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5では、SVGを使用して2つの方法でベクターグラフィックスを表示できます: 
+
+* `image/svg+xml`タイプのTiddlerはSVG画像として解釈され、`src`属性にデータURIとして埋め込まれたSVGを持つ自己包含型の`<img>`要素として表示、トランスクルードされます。
+** SVG画像の例としては、[[Motovun Jack.svg]]や[[Tiddler Fishes.svg]]を参照してください
+* WikiTextには、インラインSVG要素を直接含めることもできます。例については以下を参照してください。
+
+! SVG Tiddlerの埋め込み
+
+通常のトランスクルージョン構文を使用してSVG画像Tiddlerを埋め込むことができます:
+
+```
+{{Motovun Jack.jpg}}
+```
+
+[[WikiText の型付きブロック|Typed Blocks in WikiText]]を使用して、インラインでSVG Tiddlerを埋め込むこともできます。
+
+`<img>`要素内でレンダリングされる画像の意味は、画像がサンドボックス化されることです。たとえば、親ドキュメントのCSSスタイルは使用されません。また、画像はトランスクルージョンなどのWikiText機能も使用できません。
+
+! SVG要素の埋め込み
+
+SVGを使用するもう1つの方法は、`<svg>`要素を直接埋め込むことです。例:
+
+<svg width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg>
+
+インラインSVG要素には`<?xml version="1.0"?>`宣言は必要ないことに留意してください。
+
+! SVG画像にHTMLまたはWikiTextコンテンツを含める
+
+`<text>`要素を使用して、SVG画像に単純なテキスト文字列を含めることができます: 
+
+<svg width="100px" height="30px" viewBox="0 0 1000 300"><text x="250" y="150" font-family="Verdana" font-size="55">みなさん、こんにちは</text><rect x="1" y="1" width="998" height="298" fill="none" stroke-width="2" /></svg>
+
+`<foreignObject>`要素を使用して、HTMLやWikiTextコンテンツをインラインSVG画像内に含めることができます。例:
+
+<svg width="260px" height="260px"><circle cx="150" cy="150" r="100" fill="blue" stoke="red"/><foreignObject x="70" y="110" width="150" height="180"><body>これはワードラップが必要なテキストで、[[Tiddlerへのリンク|HelloThere]]が含まれています。</body></foreignObject></svg>
+
+! SVG要素のトランスクルード
+
+SVG要素を埋め込むときは、トランスクルージョンなどのWikiText機能も使用できます。たとえば、半径がTiddler[[$:/SVGExampleRadius]]の値に設定されたSVG円を示します: 
+
+<svg width="150" height="150"><circle cx="75" cy="75" r={{$:/SVGExampleRadius}} stroke="black" stroke-width="2" fill="green"/></svg>
+
+半径の値を編集できます: <$edit-text tiddler="$:/SVGExampleRadius" tag="input"/>
+
+! SVGでカーブしたテキストを作成する
+
+{{Making curved text with SVG}}

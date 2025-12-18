@@ -1,0 +1,14 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: रद्द करना
+Listing/Hint: ये tiddlers आयात करने के लिए तैयार हैं:
+Listing/Import/Caption: इम्पोर्ट
+Listing/Select/Caption: चुनना
+Listing/Status/Caption: स्थिति
+Listing/Title/Caption: शीर्षक
+Upgrader/Plugins/Suppressed/Incompatible: ब्लॉक्ड असंगत या अप्रचलित प्लगइन
+Upgrader/Plugins/Suppressed/Version: प्लगइन ब्लॉक्ड (कारण के लिए आने वाली << आवक >> मौजूदा पुराने की तुलना में किया जा रहा है << मौजूदा >>)
+Upgrader/Plugins/Upgraded: प्लगइन से उन्नत बनाया  << लिए आने वाली >> के लिए << उन्नत किया >>
+Upgrader/State/Suppressed: ब्लॉक्ड अस्थायी state tiddler
+Upgrader/System/Suppressed: ब्लॉक्ड प्रणाली tiddler
+Upgrader/ThemeTweaks/Created: <$ टेक्स्ट टेक्स्ट = << से >> /> से माइग्रेट थीम ट्वीक

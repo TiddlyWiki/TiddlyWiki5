@@ -1,0 +1,29 @@
+{
+	"tiddlers": [
+		{
+			"file": "xlsx.full.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/xlsx-utils/xlsx.js",
+				"module-type": "library"
+			},
+			"prefix": "var old_exports = exports,JSZip = require(\"$:/plugins/tiddlywiki/jszip/jszip.js\");exports = {};if($tw.browser){module.exports=undefined;};",
+			"suffix": "$tw.utils.extend(old_exports,exports);exports = old_exports;module.exports=exports;"
+		},{
+			"file": "cpexcel.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/xlsx-utils/dist/cpexcel.js",
+				"module-type": "library"
+			},
+			"prefix": "if($tw.browser){Buffer = undefined;};",
+			"suffix": ""
+		},{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/xlsx-utils/license"
+			}
+		}
+	]
+}

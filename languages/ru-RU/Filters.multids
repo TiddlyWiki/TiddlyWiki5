@@ -1,0 +1,14 @@
+title: $:/language/Filters/
+
+AllTags: Все метки, кроме системных
+AllTiddlers: Все заметки, кроме системных
+Drafts: Черновики
+Missing: Отсутствующие заметки
+Orphans: Потерянные заметки
+OverriddenShadowTiddlers: Переопределённые встроенные заметки
+RecentSystemTiddlers: Недавно измененные заметки, включая системные
+RecentTiddlers: Недавно измененные заметки
+ShadowTiddlers: Встроенные заметки
+SystemTags: Системные метки
+SystemTiddlers: Системные заметки
+TypedTiddlers: Не вики-текстовые тиддлеры

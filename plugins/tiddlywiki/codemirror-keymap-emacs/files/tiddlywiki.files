@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+		{
+			"file": "keymap/emacs.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/keymap/emacs.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

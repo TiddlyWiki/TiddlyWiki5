@@ -1,0 +1,14 @@
+created: 20151017150942725
+modified: 20151108051557748
+tags: [[Operator Examples]] [[append Operator]]
+title: append Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]append[Tomorrow]]">>
+<<.operator-example 2 "[list[Days of the Week]append[Yesterday Today Tomorrow]]">>
+
+;Append the first 4 short days of the week to our list
+
+<<.operator-example 3 "[list[Days of the Week]append:4{Days of the Week!!short}]">>

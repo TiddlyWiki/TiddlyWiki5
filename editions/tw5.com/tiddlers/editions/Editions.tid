@@ -1,0 +1,16 @@
+created: 20140908125500000
+list: [[Empty Edition]]
+modified: 20160107222125923
+tags: TableOfContents
+title: Editions
+type: text/vnd.tiddlywiki
+
+TiddlyWiki is distributed in several distinct editions that are tuned for specific purposes.
+
+An edition consists of the TiddlyWiki core components along with plugins, documentation and sample content to get you up and running as quickly as possible.
+
+You can mix and match the components of these editions, to make a unique solution for your particular application.
+
+<<list-links "[tag[Editions]]">>
+
+<$macrocall $name=".tip" _="""Note that editions should not be confused with the [[platforms|Platforms]] on which TiddlyWiki runs (eg as a [[single HTML file|Saving]] vs. [[under Node.js|TiddlyWiki on Node.js]])"""/>

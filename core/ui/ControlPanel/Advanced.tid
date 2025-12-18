@@ -1,0 +1,10 @@
+title: $:/core/ui/ControlPanel/Advanced
+tags: $:/tags/ControlPanel/Info
+caption: {{$:/language/ControlPanel/Advanced/Caption}}
+
+\whitespace trim
+{{$:/language/ControlPanel/Advanced/Hint}}
+
+<div class="tc-control-panel">
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Advanced]!has[draft.of]]" default="$:/core/ui/ControlPanel/TiddlerFields" explicitState="$:/state/tab--959111941"/>
+</div>

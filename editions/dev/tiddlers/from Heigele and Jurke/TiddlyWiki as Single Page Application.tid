@@ -1,0 +1,20 @@
+chapter.of: TiddlyWiki - A quick Overview
+created: 20140708081759619
+modified: 20140715094527946
+sub.num: 1
+tags: doc
+title: TiddlyWiki as Single Page Application
+
+TiddlyWiki builds on some basic concepts. First, TiddlyWiki should not be perceived as a dynamic web page like traditional server-side generated web pages. Instead TiddlyWiki can be perceived as an application which is written entirely in ~JavaScript and uses HTML5 and CSS3 to render a GUI. This way TiddlyWiki can be executed in any ~JavaScript environment like a browser or a node.js instance, while keeping the advantages of a simple application.
+One of these advantages is, that TiddlyWiki has no need to emulate an application state, as a traditional web application would need to do.
+
+A second idea concerns the storage of the application data. In contrast to a traditional web application, TiddlyWiki doesn't store the data in an external database but simply uses native data structures already existing in ~JavaScript to store tiddlers, the basic (atomic) element of the TiddlyWiki application, in the memory. Additional core modules provide a way to persist this storage in simple HTML div elements.
+
+Just by building on these simple and basic concepts,
+
+* TiddlyWiki is able to store application data in a single HTML page by using div elements as data container.
+*TW is able to store application code (~JavaScript) in the same single HTML page.
+*TiddlyWiki can be executed in any ~JavaScript environment like a browser.
+
+These points already enable TW to be used as an offline-enabled single file web application.
+Also, by using a server side node.js environment running the same TiddlyWiki application, TiddlyWiki can be used as an online web application. This is realized on server-side by providing an additional module to persist tiddlers into plain text files and on client-side by a module syncing the local data store with the node.js server.

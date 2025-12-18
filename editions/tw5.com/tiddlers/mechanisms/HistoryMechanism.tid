@@ -1,0 +1,35 @@
+created: 20140213171818824
+modified: 20150207131000000
+tags: Mechanisms
+title: HistoryMechanism
+type: text/vnd.tiddlywiki
+
+The system tiddler [[$:/HistoryList]] keeps track of a list of tiddlers comprising the navigation history. Each time you click on a link to a tiddler, the title of the target tiddler is added to the top of the stack.
+
+The history list is stored in JSON to allow additional details about the coordinates of the DOM node that initiated the navigation.
+
+The history list also maintains the field ''current-tiddler'' that contains the name of the tiddler at the top of the stack. This field can be used like so:
+
+```
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+
+<$button message="tm-close-tiddler" class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link><$view field="title"/> <$reveal type="match" state="$:/HistoryList!!current-tiddler" text=<<currentTiddler>>>&#x2713;</$reveal></$link>
+
+</$list>
+```
+
+Which renders the same as the "Open" sidebar tab, with the addition of a tick against the tiddler that was last navigated to.
+
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+
+<$button message="tm-close-tiddler" class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link><$view field="title"/> <$reveal type="match" state="$:/HistoryList!!current-tiddler" text=<<currentTiddler>>>&#x2713;</$reveal></$link>
+
+</$list>
+
+!! Empty Story
+
+To display content when the story is empty, create $:/config/EmptyStoryMessage and enter the desired contents. The following would show the GettingStarted tiddler when all others are closed.
+
+```
+{{GettingStarted||$:/core/ui/ViewTemplate}}
+```

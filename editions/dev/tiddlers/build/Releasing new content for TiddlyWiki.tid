@@ -1,0 +1,8 @@
+created: 20190809094421578
+modified: 20190809104210288
+title: Releasing new content for TiddlyWiki
+type: text/vnd.tiddlywiki
+
+To update https://tiddlywiki.com with new content, make a Pull Request with the updated tiddlers to the `tiddlywiki-com` branch. As soon as the PR is merged, the [[Continuous Deployment]] system will automatically rebuild the site.
+
+Note that the PR should only include updates within the `editions` folder of the repo.

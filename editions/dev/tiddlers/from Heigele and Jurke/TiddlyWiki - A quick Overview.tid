@@ -1,0 +1,17 @@
+created: 20140708082524269
+description: This section describes the idea of the TiddlyWiki application. This should give the reader a overview over what TiddlyWiki consists of give a brief introduction to the topics of the main documentation.
+modified: 20140717211405842
+sectionnumber: 1
+tags: doc section
+title: TiddlyWiki - A quick Overview
+
+Traditional web applications are bound to ~HTTP-Concepts, including stateless requests to transfer data. In these applications a state is often emulated by the use of sessions, which need to be handled on the client and especially on the server side.
+These restrictions often lead to a fragmented user experience because the user interface is rebuilt on every data transfer.
+TiddlyWiki tries to overcome these restrictions and the resulting disadvantages by building on few but basic concepts which loosen the coupling of HTTP and the actual application, eliminating the need of state emulation and resulting in a wiki style single page application with the ability to run in an offline environment.
+
+<$list filter="[!has[draft.of]has[chapter.of]chapter.of[TiddlyWiki - A quick Overview]tag[doc]sort[sub.num]]">
+
+
+! <$view field="title"/>
+{{!!text}}
+</$list>

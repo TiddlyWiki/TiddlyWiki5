@@ -1,0 +1,27 @@
+created: 20140206214608586
+fr-title: Chargement différé (Lazy Loading)
+modified: 20150624094207694
+tags: Features
+title: LazyLoading
+type: text/vnd.tiddlywiki
+
+Habituellement, avec <<tw>>, le contenu complet de tous les tiddlers est intégré dans le fichier HTML principal. Le <<.def LazyLoading>> (chargement différé) fait référence à une  technique qui intègre seulement les métadonnées dans le tiddler (en d'autres termes, tous les champs hormis le champ ''text''), et demande le contenu au serveur quand il est requis.
+
+Le //Lazy Loading// peut être utilisée dans deux configurations:
+
+* À l'exécution de [[TiddlyWiki sous Node.js|TiddlyWiki on Node.js]], les tiddlers images peuvent être soumis au Chargement Allégé
+* À l'exécution de [[TiddlyWiki au Ciel pour TiddlyWeb|TiddlyWiki in the Sky for TiddlyWeb]], tous les tiddlers sont soumis au Chargement Allégé
+
+Voir le LazyLoadingMechanism pour plus de détails sur la façon dont le <<.def LazyLoading>> est implémentée.
+
+! Le <<.def LazyLoading>> sous Node.js
+
+Pour exécuter le chargement différé des images par TiddlyWiki, lancer le serveur par cette [[ServerCommand|commande serveur]]&nbsp;:
+
+```
+tiddlywiki --server 8080 $:/core/save/lazy-images
+```
+
+! Le <<.def LazyLoading>> sous TiddlyWeb
+
+Dans la configuration actuelle, le <<.def LazyLoading>> est activée par défaut.

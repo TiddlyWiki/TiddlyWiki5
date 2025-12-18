@@ -1,0 +1,72 @@
+title: $:/demoshow/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+html body .tc-subtitle {
+	display: none;
+}
+
+.tc-btn-big-blue {
+	padding: 6px;
+	margin: 4px 6px;
+	background: #44f;
+	color: #fff;
+	fill: #fff;
+	border: none;
+	font-size: 16px;
+	line-height: 18px;
+}
+
+.tc-view-toolbar-tools {
+	font-size: 0.5em;
+	line-height: 1.1;
+}
+
+.tc-view-toolbar-tools p {
+	margin: 0;
+}
+
+.tc-edit-bitmapeditor-width,
+.tc-edit-bitmapeditor-height {
+	display: none;
+}
+
+.tc-language-list {
+	color: #777;
+}
+
+.tc-language-list-greeting {
+	display: inline-block;
+	width: 40%;
+}
+
+.tc-language-list-name {
+	display: inline-block;
+	width: 55%;
+}
+.tc-language-list-name img {
+	margin: 0.1em 0.5em;
+}
+
+.tc-example-box {
+	border: 3px dashed #ddd;
+	background: #fff;
+	padding: 1em;	
+}
+
+.tc-example-box img {
+	width: 2em;
+}
+
+.tc-cecily-demo {
+	height: 7em;
+}
+
+.tc-cecily-demo-inner {
+}
+
+.tc-cecily-demo .tc-tiddler-frame {
+	background-color: white;
+	<<box-shadow "0px 0px 15px rgba(0, 0, 0, 0.3)">>
+}

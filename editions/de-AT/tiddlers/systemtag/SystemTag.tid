@@ -1,0 +1,12 @@
+created: 20140923180759976
+creator: pmario
+modified: 20140923181606152
+modifier: pmario
+tags: Lexikon
+title: SystemTag
+type: text/vnd.tiddlywiki
+
+Dieser Tag ist ein System Tag. System Tags sind in normalen Tag Listen nicht sichtbar. System Tags werden intern von ~TiddlyWiki verwendet.
+
+Geübte Anwender können ebenfalls System Tags verwenden, um sie vor Endanwendern zu verstecken. Dies ist manchmal nötig, um den Anwender nicht zu verwirren. 
+

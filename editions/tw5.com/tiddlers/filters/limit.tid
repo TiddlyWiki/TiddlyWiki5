@@ -1,0 +1,16 @@
+created: 20140410103123179
+modified: 20150203185456000
+tags: [[Filter Operators]] [[Common Operators]] [[Order Operators]] [[Negatable Operators]]
+title: limit Operator
+type: text/vnd.tiddlywiki
+caption: limit
+op-purpose: select the first or last <<.place N>> input titles
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: an integer, defaulting to 0
+op-parameter-name: N
+op-output: the first <<.place N>> input titles
+op-neg-output: the last <<.place N>> input titles
+
+`limit[N]` and `!limit[N]` are synonyms for `first[N]` and `last[N]` respectively.
+
+<<.operator-examples "limit">>

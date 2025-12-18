@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/TiddlerFields
+tags: $:/tags/ControlPanel/Advanced
+caption: {{$:/language/ControlPanel/TiddlerFields/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/
+
+<<lingo TiddlerFields/Hint>>
+
+{{$:/snippets/allfields}}

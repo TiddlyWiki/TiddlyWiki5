@@ -1,0 +1,8 @@
+title: $:/core/fr-FR/readme
+
+Ce plugin contient les principaux composants de TiddlyWiki, notamment :
+
+* Les modules du code JavaScript ;
+* Les icônes ;
+* Les //templates// nécessaires à l'élaboration de l'interface utilisateur de TiddlyWiki ;
+* Les traductions en anglais britannique (''en-GB'') des chaînes de caractères utilisées par le cœur de l'application et susceptibles d'être traduites dans d'autres langues.

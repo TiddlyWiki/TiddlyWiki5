@@ -1,0 +1,8 @@
+title: $:/language/Help/editions
+description: 列出可用的 TiddlyWiki 版本
+
+列出可用版本的名稱和描述。您可以用 `--init` 命令建立一個指定版本的新維基。
+
+```
+--editions
+```

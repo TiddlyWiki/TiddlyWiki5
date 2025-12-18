@@ -1,0 +1,60 @@
+created: 20141129210304238
+modified: 20150220161405000
+tags: [[Transclusion in WikiText]]
+title: Transclusion with Templates
+caption: With Templates
+
+! Introduction
+
+In [[Transclusion Basic Usage]] we have seen how to include the content of a tiddler A into a tiddler B. Now suppose that tiddler A contains:
+
+```
+@@background-color:yellow;
+Hello, my title is {{!!title}}
+@@
+```
+
+This makes tiddler A display its title with a yellow background (see [[Styles and Classes in WikiText]] to learn about CSS style). Imagine that you want to display the title in the same way in tiddler B. But you don't want to copy/paste the style instructions, because you might want to change the background colour later and you want to keep it consistent among tiddlers. This looks like a typical case of transclusion, so let's try to transclude tiddler A in tiddler B the usual way with ``{{A}}``. You should see the following content in tiddler B:
+
+<<<
+@@background-color:yellow;
+Hello, my title is A
+@@
+<<<
+
+The style is applied as expected, but the title is wrong: we want ``{{!!title}}`` to refer to the target tiddler B, and not the source tiddler A.
+
+The solution is to use a //template//. In this case, the source tiddler A is called the [[TemplateTiddler|TemplateTiddlers]], and it is //applied// to tiddler B using the notation ``{{||A}}``. The difference is that any TextReference which does not refer explicitly to a specific tiddler is applied to the [[current tiddler|Current Tiddler]], that is, the target tiddler. As a result, tiddler B now looks as expected:
+
+<<<
+@@background-color:yellow;
+Hello, my title is B
+@@
+<<<
+
+! Usage
+
+Transcluding via a template is like applying a mask: assuming that the source tiddler contains generic references (like eye holes in a mask), these will be replaced with the target tiddlers values (like the eyes of the person who wears the mask).
+
+A template can be applied to any tiddler, not necessarily the current one. This is achieved using the full notation ``{{<target>||<template>}}``. The default ``<target>`` is the [[current tiddler|Current Tiddler]] (this is what we used in the above example).
+
+! Examples
+
+!! A predefined template to render tags nicely
+
+You can apply the system template ``$:/core/ui/TagTemplate`` to a tag in order to see it as a tag pill with a drop-down menu:
+
+```
+{{Transclusion||$:/core/ui/TagTemplate}}
+```
+
+is rendered as {{Transclusion||$:/core/ui/TagTemplate}}
+
+See also:
+
+* [[Transclusion in WikiText]]
+* [[Transclusion Basic Usage]]
+* TextReference
+* TemplateTiddlers
+* TranscludeWidget
+* [[Current Tiddler]]

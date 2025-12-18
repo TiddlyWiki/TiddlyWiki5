@@ -1,0 +1,115 @@
+caption: Tabellen
+created: 20130914132100000
+creator: pmario
+modified: 20140922130746459
+modifier: ChrisK
+tags: WikiText
+title: Tabellen in WikiText
+type: text/vnd.tiddlywiki
+
+!! Basis Info
+
+TiddlyWiki formatiert Tabellen mit dem "Pipe" `|` Zeichen:
+
+```
+|Zelle 1 |Zelle 2|h
+|Zelle 2 |Zelle 4|
+
+|Zelle 1 |!Zelle 2|
+|Zelle 2 |Zelle 4|
+```
+
+Der `h` Parameter nach der ersten Zeile definiert die Reihe als Kopfzeile.
+Alternativ können einzelne Zellen mit einem Rufzeichen `!` hervorgehoben werden.
+
+|Zelle 1 |Zelle 2|h
+|Zelle 2 |Zelle 4|
+
+|Zelle 1 |!Zelle 2|
+|Zelle 2 |Zelle 4|
+
+!! Horizontale Ausrichtung der Zellen
+
+Die Zellausrichtung kann mit Leerzeichen vor oder nach dem "Pipe" Zeichen definiert werden: 
+
+```
+|Text ist links ausgerichtet |
+| Text wird rechts ausgerichtet|
+| Text ist zentriert |
+|+++ Ein etwas längerer Text, damit die Ausrichtung besser sichtbar wird.+++|
+```
+
+Dargestellt als:
+
+|Text ist links ausgerichtet |
+| Text wird rechts ausgerichtet|
+| Text ist zentriert |
+|+++ Ein etwas längerer Text, damit die Ausrichtung sichtbar wird.+++|
+
+!! Vertikale Ausrichtung
+
+Die vertikale Ausrichtung kann mit `^` für oben und `,` für unten als erstes Zeichen in der Zelle festgelegt werden:
+Eine horizontale Ausrichtung ist zusätzlich möglich.
+
+```
+|^oben links |^ oben mitte |^ oben rechts|
+|mitte links | mittig | mitte rechts|
+|,unten links |, unten mitte |, unten rechts|
+```
+
+Dargestellt als (der "Rahmen" ist nötig, um die Ausrichtung mit wenig Text sichtbar zu machen):
+
+| :: | ::::::::::::::::::::::::::: | ::::::::::::::::::::::::::: | ::::::::::::::::::::::::::: | :: |
+| ::<br>:: |^oben links |^ oben mitte |^ oben rechts| ::<br>:: |
+| ::<br>:: |mitte links | mittig | mitte rechts| ::<br>:: |
+| ::<br>:: |,unten links |, unten mitte |, unten rechts| ::<br>:: |
+| :: | ::::::::::::::::::::::::::: | ::::::::::::::::::::::::::: | ::::::::::::::::::::::::::: | :: |
+
+Wenn Sie die Zeichen `^` und `,` als erste Zeichen benötigen, dann können Sie "HTML escaping" verwenden.
+
+| `^` | &amp;#94; |
+| `,` | &amp;#44; |
+
+!! Zellen zusammenfügen
+
+Mit `~`, `<` und `>` können Zellen zusammengefügt werden.
+
+* Um eine Zelle mit der darüber liegenden zu vereinen verwenden sie: `~` 
+* Um eine Zelle mit der links liegenden zu vereinen verwenden sie: `<`
+* Um eine Zelle mit der rechts liegenden zu vereinen verwenden sie: `>`
+
+```
+|Zelle 1 |Zelle 2 |Zelle  3|Zelle  4|
+|Zelle 5|Zelle 6| Zelle 7 |<|
+|Zelle 8|~|Zelle  9|Zelle 10|
+|>| Zelle 11 |Zelle 12|Zelle 13|
+```
+
+Dargestellt als:
+
+|Zelle 1 |Zelle 2 |Zelle  3|Zelle  4|
+|Zelle 5|Zelle 6| Zelle 7 |<|
+|Zelle 8|~|Zelle  9|Zelle 10|
+|>| Zelle 11 |Zelle 12|Zelle 13|
+
+!! Tabellen Klassen, Beschriftung, Kopfzeile und Fußzeile
+
+Tabellen CSS Klassen, Beschriftung, Kopfzeile und Fußzeile können als "Pseudo Zeilen" dargestellt werden. Die Position der Zeilen ist dabei nicht wichtig:
+
+```
+|meineKlasse anderKlasse|k
+| Das die Tabellen Beschriftung |c
+|--- Kopfzeile ---|--- Kopfzeile ---|h
+|Zelle 1|Zelle 2|
+| Zelle 3 | Zelle 4|
+|Fußzeile|Fußzeile|f
+```
+
+Dargestellt als:
+
+|meineKlasse anderKlasse|k
+| Das die Tabellen Beschriftung |c
+|--- Kopfzeile ---|--- Kopfzeile ---|h
+|Zelle 1|Zelle 2|
+| Zelle 3 | Zelle 4|
+|Fußzeile|Fußzeile|f

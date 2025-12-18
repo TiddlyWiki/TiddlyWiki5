@@ -1,0 +1,42 @@
+title: $:/core/ui/SideBar/Open
+tags: $:/tags/SideBar
+caption: {{$:/language/SideBar/Open/Caption}}
+
+\define lingo-base() $:/language/CloseAll/
+
+\define drop-actions()
+<$action-listops $tiddler="$:/StoryList" $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
+\end
+
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+<div style="position: relative;">
+<$droppable actions=<<drop-actions>>>
+<div class="tc-droppable-placeholder">
+&nbsp;
+</div>
+<div>
+<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
+
+<$set name="state" value={{{ [[$:/state/viewtemplate/visibility/]addsuffix<currentTiddler>] }}}>
+<$reveal type="match" stateTitle=<<state>> text="0">
+<span style="display: inline-block; background: red; color: white; padding: 2px; border-radius: 2px;font-size: 0.5em;line-height: 1;text-shadow: none;font-weight: bold;vertical-align: middle;">OUT OF VIEW</span>
+</$reveal>
+<$reveal type="match" stateTitle=<<state>> text="1">
+<span style="display: inline-block; background: green; color: white; padding: 2px; border-radius: 2px;font-size: 0.5em;line-height: 1;text-shadow: none;font-weight: bold;vertical-align: middle;">NEAR</span>
+</$reveal>
+<$reveal type="match" stateTitle=<<state>> text="2">
+<span style="display: inline-block; background: purple; color: white; padding: 2px; border-radius: 2px;font-size: 0.5em;line-height: 1;text-shadow: none;font-weight: bold;vertical-align: middle;">VISIBLE</span>
+</$reveal>
+</$set>
+</div>
+</$droppable>
+</div>
+</$list>
+<$tiddler tiddler="">
+<$droppable actions=<<drop-actions>>>
+<div class="tc-droppable-placeholder">
+&nbsp;
+</div>
+<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>
+</$droppable>
+</$tiddler>

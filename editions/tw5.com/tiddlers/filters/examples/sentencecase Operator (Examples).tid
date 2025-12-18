@@ -1,0 +1,10 @@
+created: 20190619110741485
+modified: 20190620140353983
+tags: [[sentencecase Operator]] [[Operator Examples]]
+title: sentencecase Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[abc def ghi jkl]sentencecase[]]">>
+<<.operator-example 2 "[[abc deF gHi jKL]sentencecase[]]">>
+<<.operator-example 3 "[[abc deF gHi jKL]lowercase[]sentencecase[]]">>
+<<.operator-example 4 "[tag[HelloThere]sentencecase[]]">>

@@ -1,0 +1,16 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: सूची 
+Filter/Caption: फिल्टर 
+Filter/Hint: एक के माध्यम से खोज [[फिल्टर अभिव्यक्ति | नि: //tiddlywiki.com/static/Filters.html]]
+Filter/Matches: // <छोटे> << resultCount >> से मेल खाता </ छोटे> //
+Matches: // <छोटे> << resultCount >> से मेल खाता </ छोटे> //
+Shadows/Caption:  छाया
+Shadows/Hint:     छाया Tiddler के लिए खोज
+Shadows/Matches: // <छोटे> << resultCount >> से मेल खाता </ छोटे> //
+Standard/Caption: स्तर 
+Standard/Hint:  tiddlers स्तर के लिए खोज 
+Standard/Matches: // <छोटे> << resultCount >> से मेल खाता </ छोटे> //
+System/Caption: प्रणाली
+System/Hint: tiddlers प्रणाली के लिए खोज 
+System/Matches: // <छोटे> << resultCount >> से मेल खाता </ छोटे> //

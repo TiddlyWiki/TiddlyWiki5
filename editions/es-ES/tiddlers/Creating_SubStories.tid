@@ -1,0 +1,46 @@
+caption: Subhistorias
+created: 20140214215718317
+es-title: Crear subhistorias en TiddlyWiki
+modified: 20160418043031981
+tags: Learning
+title: Creating SubStories
+type: text/vnd.tiddlywiki
+
+Este ejemplo muestra cómo, dentro de un un tiddler, se pueden mostrar subhistorias independientes de la historia principal.
+
+Este es el código:
+
+```
+<$navigator story="MiSubHistoria" history="MiSubHistoria">
+
+Haz clic en este enlace para empezar:[[¡Hola! ¿Qué tal?|HelloThere]]
+
+<$list filter="[list[MiSubHistoria]]" history="MiSubHistoria">
+<div>
+
+! <$button message="tm-close-tiddler" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="es-title"/>
+
+<$transclude/>
+</div>
+</$list>
+
+</$navigator>
+```
+
+Ahora puedes abrir el tiddler [[¡Hola! ¿Qué tal?|HelloThere]] como subhistoria haciendo clic en el siguiente enlace. Los enlaces de la subhistoria se abren en la subhistoria y no en la principal.
+
+<$navigator story="MiSubHistoria" history="MiSubHistoria">
+
+Haz clic en este enlace para empezar:[[¡Hola! ¿Qué tal?|HelloThere]]
+
+<$list filter="[list[MiSubHistoria]]" history="MiSubHistoria">
+<div>
+
+! <$button message="tm-close-tiddler" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="es-title"/>
+
+<$transclude/>
+
+</div>
+</$list>
+
+</$navigator>

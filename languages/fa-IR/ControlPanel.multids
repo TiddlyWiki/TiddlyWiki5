@@ -1,0 +1,177 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: پیشرفته
+Advanced/Hint: اطلاعات داخلی در مورد TiddlyWiki
+Appearance/Caption: ظاهر
+Appearance/Hint: روش‌های تغییر ظاهر TiddlyWiki
+Basics/AnimDuration/Prompt: طول زمان انیمیشن:
+Basics/Caption: اساسی‌ها
+Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to {{retain story ordering||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/Prompt: تیدلرهای پیش‌فرض:
+Basics/DefaultTiddlers/TopHint: انتخاب کن که کدوم تیدلرها در هنگام شروع نمایش داده بشن:
+Basics/Language/Prompt: سلام! زبان حاضر:
+Basics/NewJournal/Tags/Prompt: برچسب‌ها برای تیدلرهای ژورنالی جدید
+Basics/NewJournal/Text/Prompt: متن برای تیدلرهای ژورنالی جدید
+Basics/NewJournal/Title/Prompt: عنوان برای تیدلرهای ژورنالی جدید
+Basics/OverriddenShadowTiddlers/Prompt: تعداد تیدلرهای سایه‌ای باز‌نویسی شد:
+Basics/ShadowTiddlers/Prompt: تعداد تیدلرهای سایه‌ای:
+Basics/Subtitle/Prompt: زیرنویس:
+Basics/SystemTiddlers/Prompt: تعداد تیدلرهای سیستمی:
+Basics/Tags/Prompt: تعداد برچسب‌ها:
+Basics/Tiddlers/Prompt: تعداد تیدلر‌ها:
+Basics/Title/Prompt: عنوان این ~TiddlyWiki:
+Basics/Username/Prompt: نام کاربری برای امضای ویرایش‌ها:
+Basics/Version/Prompt: ~TiddlyWiki ورژن:
+EditorTypes/Caption: انواع ویرایشگرها
+EditorTypes/Editor/Caption: ویرایشگر
+EditorTypes/Hint: این تیدلرها مشخص می‌کنند که کدوم ویرایشگر برای کدوم نوع تیدلر استفاده بشه.
+EditorTypes/Type/Caption: نوع
+Info/Caption: اطلاعات
+Info/Hint: اطلاعات درباره‌ی این TiddlyWiki
+KeyboardShortcuts/Add/Caption: اضافه کردن میانبر
+KeyboardShortcuts/Add/Prompt: میانبر را در اینجا بنویسید
+KeyboardShortcuts/Caption: میانبر‌های صفحه کلید
+KeyboardShortcuts/Hint: مدیریت میانبر‌های صفحه کلید ساخته شده
+KeyboardShortcuts/NoShortcuts/Caption: هیچ میانبر‌های صفحه کلیدی ساخته نشده است.
+KeyboardShortcuts/Platform/All: همه‌ی پلتفورم‌ها
+KeyboardShortcuts/Platform/Linux: فقط برای لینوکس
+KeyboardShortcuts/Platform/Mac: فقط برای مکینتاش
+KeyboardShortcuts/Platform/NonLinux: فقط برای غیر لینوکس‌ها
+KeyboardShortcuts/Platform/NonMac: فقط برای غیر مکینتاش‌ها
+KeyboardShortcuts/Platform/NonWindows: فقط برای غیر ویندوزها
+KeyboardShortcuts/Platform/Windows: ففقط برای ویندوز
+KeyboardShortcuts/Remove/Hint: حذف میانبر‌ صفحه کلید
+LoadedModules/Caption: مدول‌های بارگزاری شده
+LoadedModules/Hint: این‌ها مدول‌های تیدلر بارگزاری شده هستند که به تیدلرهای منبعشون پیوند داده شدن. هر مدولی که مایل‌نویس شده، بدون تیدلر منبع هست که معمولن بخاطر این هست که در هنگام بارگزاری ساخته شدند.
+Palette/Caption: پالت
+Palette/Editor/Clone/Caption: کلون
+Palette/Editor/Clone/Prompt: پیشنهاد می شه که قبل ازاستفاده از این پالت سایه‌ای، کلونش کنین.
+Palette/Editor/Prompt: ویرایش‌کردن
+Palette/Editor/Prompt/Modified: این پالت سایه‌ای تغییر کرده است.
+Palette/Editor/Reset/Caption: بازسازی
+Palette/HideEditor/Caption: مخفی‌کردن ویرایش‌گر
+Palette/Prompt: پالت حال حاضر:
+Palette/ShowEditor/Caption: نمایش ویرایش‌گر
+Parsing/Block/Caption: قواعد تجزیه‌ی بلوک‌ها
+Parsing/Caption: تجزیه کردن
+Parsing/Hint: Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|https://tiddlywiki.com/#SafeMode]] to restore normal operation.
+اینجا می‌تونی قواعد تجزیه‌ی ویکی رو به صورت کلی عوض کنی. برای این که تغییرات تاثیرگذار باشن، ذخیره کن و ویکیت رو دوباره بارگذاری کن. غیر فعال کردن بعضی قواعد تجزیه می‌تونه مانع عملکرد درست <$text text="TiddlyWiki"/> بشه.  
+از [[safe mode|https://tiddlywiki.com/#SafeMode]] استفاده کن تا عملکرد‌ها عادی بشه.
+Parsing/Inline/Caption: قواعد تجزیه‌ی درون‌خطی
+Parsing/Pragma/Caption: قواعد تجزیه پراگما
+Plugins/Add/Caption: دریافت افزونه‌های بیشتر
+Plugins/Add/Hint: نصب افزونه از کتاب‌خانه‌ی رسمی
+Plugins/AlreadyInstalled/Hint: این افزونه از ورژن  <$text text=<<installedVersion>>/> از قبل نصب شده‌است
+Plugins/Caption: افزونه‌ها
+Plugins/ClosePluginLibrary: بستن کتاب‌خانه‌ی افزونه‌ها
+Plugins/Disable/Caption: غیرفعال
+Plugins/Disable/Hint: این افزونه را هنگام بارگذاری دوباره‌ی صفحه غیرفعال کن
+Plugins/Disabled/Status: (غیرفعال)
+Plugins/Empty/Hint: هیچ
+Plugins/Enable/Caption: فعال
+Plugins/Enable/Hint: این افزونه را هنگام بارگذاری دوباره‌ی صفحه فعال کن
+Plugins/Install/Caption: نصب
+Plugins/Installed/Hint: افزونه‌ی نصب شده:
+Plugins/Languages/Caption: زبان‌ها
+Plugins/Languages/Hint: افزونه‌های بسته‌های زبانی 
+Plugins/NoInfoFound/Hint: هیچ ''"<$text text=<<currentTab>>/>"'' پیدا نشد
+Plugins/NoInformation/Hint: هیچ اطلاعاتی داده نشد
+Plugins/NotInstalled/Hint: این افزونه در حال حاضر نصب نشده‌است
+Plugins/OpenPluginLibrary: بازکردن کتاب‌خانه‌ی افزونه
+Plugins/Plugins/Caption: افزونه‌ها
+Plugins/Plugins/Hint: افزونه‌ها
+Plugins/Reinstall/Caption: بازنصب
+Plugins/Themes/Caption: قالب‌ها
+Plugins/Themes/Hint: افزونه قالب‌ها
+Saving/Caption: در حال ذخیره
+Saving/DownloadSaver/AutoSave/Description: اجازه‌ی ذخیره‌ی خودکار به ذخیره کننده‌ی بارگذار
+Saving/DownloadSaver/AutoSave/Hint: فعال‌سازی ذخیره‌ی خودکار به ذخیره کننده‌ی بارگذار
+Saving/DownloadSaver/Caption: ذخیره کننده‌ی بارگذار
+Saving/DownloadSaver/Hint: 
+این تنظیمات بر روی ذخیره کننده‌ی بارگذار مطابق با HTML5 اجرا می‌شه
+Saving/General/Caption: عمومی
+Saving/General/Hint: این تنظیمات بر روی تمام ذخیره‌کننده‌های فعال اجرا می‌شود
+Saving/Hint: Settings used for saving the entire TiddlyWiki as a single file via a saver module
+تنظیماتی برای ذخیره‌ی کل TiddlyWiki بر روی یک فایل از طریق مدولی برای ذخیره 
+Saving/TiddlySpot/Advanced/Heading: تنظیمات پیشرفته
+Saving/TiddlySpot/BackupDir: محل پشتیبانی‌گیری
+Saving/TiddlySpot/Backups: محل پشتیبانی‌گیری
+Saving/TiddlySpot/Caption: ذخیره کننده‌ی  ~TiddlySpot 
+Saving/TiddlySpot/Description: این تنظیمات فقط زمانی استفاده می‌شوند که از  http://tiddlyspot.com یا یک سرور دوردست دارای مطابقت استفاده می‌شود.
+Saving/TiddlySpot/Filename: اسم فایل آپلود شده
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address, e.g. `http://example.com/store.php`.//
+Saving/TiddlySpot/Password: رمز
+Saving/TiddlySpot/ServerURL: آدرس سرور
+Saving/TiddlySpot/UploadDir: محل آپلود
+Saving/TiddlySpot/UserName: اسم ویکی
+Settings/AutoSave/Caption: ذخیره خودکار
+Settings/AutoSave/Disabled/Description: تغییرات رو خودکار ذخیره نکن
+Settings/AutoSave/Enabled/Description: تغییرات رو خودکار ذخیره کن.
+Settings/AutoSave/Hint: سعی کن تغییرات رو به صورت خودکار ذخیره کنی در حینی که ویرایش انجام می‌شه توسط یک ذخیره کننده‌ی پشتیبان.
+Settings/CamelCase/Caption: CamelCase Wiki Links
+Settings/CamelCase/Description:  فعال سازی  پیوند‌های ~CamelCase خودکار
+Settings/CamelCase/Hint: شما پیوندسازی خودکار عبارات ~CamelCase را غیر فعال ساختید. این تغییر نیازمند بارگزاری دوباره است تا عمل کند.
+Settings/Caption: تنظیمات
+Settings/DefaultSidebarTab/Caption: برگه‌ی پیشفرض نوار کناری
+Settings/DefaultSidebarTab/Hint: مشخص کنید که کدام برگه‌ی نوارکناری به صورت پیشفرض نمایش داده شود
+Settings/EditorToolbar/Caption: نوار ابزار ویرایشگر
+Settings/EditorToolbar/Description: نوار ابزار ویرایشگر رو نمایش بده
+Settings/EditorToolbar/Hint: نوار ابزار ویرایشگر رو فعال یا غیرفعال کن:
+Settings/Hint: این تنظیمات به شما امکان تغییر رفتار TiddlyWiki را می‌دهند.
+Settings/InfoPanelMode/Caption: حالت صفحه‌ی اطلاعات تیدلر
+Settings/InfoPanelMode/Hint: زمانی که حالت صفحه‌ی اطلاعات تیدلر بسته می‌شه رو کنترل کن:
+Settings/InfoPanelMode/Popup/Description: حالت صفحه‌ی اطلاعات تیدلر به صورت خودکار بسته می‌شه
+Settings/InfoPanelMode/Sticky/Description: حالت صفحه‌ی اطلاعات تیدلر باز می‌مونه مگر این که عمدن بسته بشه
+Settings/LinkToBehaviour/Caption: رفتار باز شدن تیدلر
+Settings/LinkToBehaviour/InsideRiver/Hint: هدایت از //درون// رود داستان
+Settings/LinkToBehaviour/OpenAbove: بالای تیدلر کنونی باز کن
+Settings/LinkToBehaviour/OpenAtBottom: پایین رود داستان باز کن
+Settings/LinkToBehaviour/OpenAtTop: بالای رود داستان باز کن
+Settings/LinkToBehaviour/OpenBelow: پایین تیدلر کنونی باز کن
+Settings/LinkToBehaviour/OutsideRiver/Hint: هدایت از //بیرون// رود داستان
+Settings/MissingLinks/Caption: پیوند‌های ویکی
+Settings/MissingLinks/Description: فعا‌ل‌سازی پیوند به تیدلرهای ناموجود
+Settings/MissingLinks/Hint: انتخاب کنید که آیا پیوند به تیدلرهایی که هنوز وجود ندارد زده شود یا نه
+Settings/NavigationAddressBar/Caption: نوار آدرس هدایت‌گر
+Settings/NavigationAddressBar/Hint: عملکرد نوار آدرس هنگامی که به داخل تیدلر می‌رود:
+Settings/NavigationAddressBar/No/Description: نوار آدرس را بروز نکن
+Settings/NavigationAddressBar/Permalink/Description: تیدلر مورد نظر را شامل شود
+Settings/NavigationAddressBar/Permaview/Description: تیدلر مورد نظر و توالی داستان کنونی را شامل شود
+Settings/NavigationHistory/Caption: تاریخچه‌ی حرکت
+Settings/NavigationHistory/Hint: زمانی که به یک تیدلر می‌روی تاریخچه مرورگر بروزرسانی شود:
+Settings/NavigationHistory/No/Description: تاریخچه بروز نشود
+Settings/NavigationHistory/Yes/Description: بروزرسانی تاریخ‌چه
+Settings/PerformanceInstrumentation/Caption: استعمال آلات کارایی
+Settings/PerformanceInstrumentation/Description: فعال‌سازی استعمال آلات کارایی
+Settings/PerformanceInstrumentation/Hint: نمایش آمار کارایی در کنسول توسعه‌گر مرورگر. نیازمند بارگزاری مجدد.
+Settings/TitleLinks/Caption: عنوان‌های تیدلر
+Settings/TitleLinks/Hint: به صورت اختیاری عنوان‌ها رو به صورت پیوند نمایش بده
+Settings/TitleLinks/No/Description:  عنوان تیدلرها رو به صورت پیوند نمایش نده
+Settings/TitleLinks/Yes/Description:  عنوان تیدلرها رو به صورت پیوند نمایش بده
+Settings/ToolbarButtons/Caption: دکمه‌های نوار ابزار
+Settings/ToolbarButtons/Hint: ظاهر پیشفرض دکمه‌های نوار ابزار:
+Settings/ToolbarButtons/Icons/Description: شامل آیکون
+Settings/ToolbarButtons/Text/Description: شامل متن
+Settings/ToolbarButtonStyle/Caption: استایل دکمه‌های نوار ابزار
+Settings/ToolbarButtonStyle/Hint: انتخاب استایل دکمه‌های نوار ابزار:
+Settings/ToolbarButtonStyle/Styles/Borderless: بدون مرز
+Settings/ToolbarButtonStyle/Styles/Boxed: مربع شده
+Settings/ToolbarButtonStyle/Styles/Rounded: گرد شده
+StoryView/Caption: نمای داستانی
+StoryView/Prompt: نمای حال حاضر:
+Theme/Caption: قالب
+Theme/Prompt: قالب کنونی:
+TiddlerFields/Caption: فضای تیدلر
+TiddlerFields/Hint: این مجموعه‌ای کامل از فضاهای تیدلرهای استفاده شده در این ویکی است (شامل تیدلرهای سیستم اما بدون تیدلرهای سایه‌ای).
+Toolbars/Caption: نوارابزارها
+Toolbars/EditorToolbar/Caption: نوارابزار ویرایشگر
+Toolbars/EditorToolbar/Hint: انتخاب کن کدام دکمه‌های در نوارابزار ویرایشگر نمایش داده شود. توجه کن که بعضی دکمه‌ها فقط در ویرایشگرهای تیدلرهای بخصوصی نمایش داده می‌شوند. برای تغییر ترتیب بکش و بندازشان
+Toolbars/EditToolbar/Caption: ویرایش نوار ابزار
+Toolbars/EditToolbar/Hint: انتخاب کن کدام دکمه‌ها برای تیدلرها در حالت ویرایش نمایش داده شود. برای تغییر ترتیب بکش و بندازشان
+Toolbars/Hint: انتخاب نمایش دکمه‌های نوارابزار
+Toolbars/PageControls/Caption: نوارابزار صفحه
+Toolbars/PageControls/Hint: انتخاب کن کدام دکمه‌ها در نوار ابزار صفحه اصلی نمایش داده شود. برای تغییر ترتیب بکش و بندازشان
+Toolbars/ViewToolbar/Caption: نوارابزار رو نمایش بده
+Toolbars/ViewToolbar/Hint: انتخاب کن کدام دکمه‌ها برای تیدلرها در حالت نمایش، نمایش داده شود. برای تغییر ترتیب بکش و بندازشان
+Tools/Download/Full/Caption: ویکی کامل رو دانلود کن

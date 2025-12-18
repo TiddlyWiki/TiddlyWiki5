@@ -1,0 +1,10 @@
+title: $:/language/Snippets/Table4x3
+tags: $:/tags/TextEditor/Snippet
+caption: Tabelle -- 5 Spalten, 3 Zeilen, Kopf-, Fußzeile und Beschriftung
+
+| |Alpha |Beta |Gamma |Delta |h
+|!Beta | | | | |
+|!Gamma | | | | |
+|!Delta | | | | |
+| |a|b|c|d|f
+| Beschriftung |c

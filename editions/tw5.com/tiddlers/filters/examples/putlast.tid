@@ -1,0 +1,11 @@
+created: 20151017153037776
+modified: 20151108052020761
+tags: [[Operator Examples]] [[putlast Operator]]
+title: putlast Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]] +[putlast[]]">>
+<<.operator-example 2 "[list[Days of the Week]] +[putlast:2[]]">>
+<<.operator-example 3 "one two three [list[Days of the Week]] +[putlast:-3[]]">>

@@ -1,0 +1,222 @@
+title: $:/plugins/tiddlywiki/twitter-archivist/macros
+tags: $:/tags/Macro
+
+\define skinny-tabs(tabNames,tabCaptions,defaultTab,state)
+<$let
+	currTab={{{ [<__state__>get[text]else<__defaultTab__>] }}}
+>
+	<div class="tc-tab-set">
+		<div class="tc-tab-buttons">
+			<$list filter="[enlist<__tabNames__>]" variable="tab" counter="tabCounter">
+				<$let
+					caption={{{ [enlist<__tabCaptions__>nth<tabCounter>] }}}
+				>
+					<$list filter="[<tab>match<currTab>]" variable="ignore">
+						<$button aria-checked="true" class="tc-tab-selected" role="switch">
+							<$action-setfield $tiddler=<<__state__>> $value=<<tab>>/>
+							<$text text=<<caption>>/>
+						</$button>
+					</$list>
+					<$list filter="[<tab>!match<currTab>]" variable="ignore">
+						<$button role="switch">
+							<$action-setfield $tiddler=<<__state__>> $value=<<tab>>/>
+							<$text text=<<caption>>/>
+						</$button>
+					</$list>
+				</$let>
+			</$list>
+		</div>
+		<div class="tc-tab-divider"></div>
+		<div class="tc-tab-content">
+			<$list filter="[enlist<__tabNames__>]" variable="tab" counter="tabCounter">
+				<$list filter="[<tab>match<currTab>]" variable="ignore">
+					<div class="tc-reveal">
+						<$macrocall $name=<<currTab>>/>
+					</div>
+				</$list>
+				<$list filter="[<tab>!match<currTab>]" variable="ignore">
+					<div class="tc-reveal" hidden="true"></div>
+				</$list>
+			</$list>
+		</div>
+	</div>
+</$let>
+\end
+
+\define list-archives()
+\whitespace trim
+<$list filter="[tag[$:/tags/TwitterArchive]limit[1]]" emptyMessage=<<list-archives-empty>> variable="ignore">
+	<ul>
+		<$list filter="[tag[$:/tags/TwitterArchive]sort[displayname]]">
+			<li>
+				<$link><$text text=<<currentTiddler>>/></$link>
+			</li>
+		</$list>
+	</ul>
+</$list>
+\end
+
+\define list-archives-empty()
+<p style="background:#ff3;color:#333;padding:8px;font-weight:bold;">
+No Twitter Archives are currently loaded
+</p>
+<$transclude tiddler="$:/plugins/tiddlywiki/twitter-archivist/usage" mode="block"/>
+\end
+
+\define show-archive()
+<$let
+	user_id={{!!user_id}}
+>
+	<div class="tc-twitter-archive">
+		<table>
+			<tbody>
+				<<show-archive-attribute "Username" "username" prefix:"@">>
+				<<show-archive-attribute "Display Name" "displayname">>
+				<<show-archive-attribute "Bio" "bio">>
+				<<show-archive-attribute "Location" "location">>
+				<<show-archive-attribute "Website" "website">>
+				<<show-archive-calculated-attribute "Number of Tweets" "[tag[$:/tags/Tweet]field:user_id<user_id>count[]]">>
+				<<show-archive-calculated-attribute "Number of Favorites Received" "[tag[$:/tags/Tweet]field:user_id<user_id>] :reduce[<currentTiddler>get[favorite_count]else[0]add<accumulator>]">>
+				<<show-archive-calculated-attribute "Number of Retweets Received" "[tag[$:/tags/Tweet]field:user_id<user_id>] :reduce[<currentTiddler>get[retweet_count]else[0]add<accumulator>]">>
+				<<show-archive-calculated-attribute "Number of Tweeters Mentioned" "[tag[$:/tags/Tweeter]count[]]">>
+				<<show-archive-attribute "User ID" "user_id">>
+				<<show-archive-attribute "Account Creation Date" "account_created_date" format:"date" template:"DDth mmm YYYY 0hh:0mm:0ss">>
+				<<show-archive-attribute "Archive Generation Date" "generation_date" format:"date" template:"DDth mmm YYYY 0hh:0mm:0ss">>
+			</tbody>
+		</table>
+		<$macrocall $name="skinny-tabs" tabNames="show-archive-tweets show-favorited-tweets" tabCaptions="Tweets Favourites" defaultTab="show-archive-tweets" state=<<qualify "$:/state/skinny-tabs/archive">>/>
+	</div>
+</$let>
+\end
+
+\define show-archive-tweets()
+<$let user_id={{!!user_id}}>
+	<$list filter="[tag[$:/tags/Tweet]field:user_id<user_id>!sort[created]limit[50]]">
+		<<show-tweet>>
+	</$list>
+</$let>
+\end
+
+\define show-favorited-tweets()
+<$let user_id={{!!user_id}}>
+	<$list filter="[tag[$:/tags/Tweet]field:liked_by<user_id>limit[50]]">
+		<<show-tweet>>
+	</$list>
+</$let>
+\end
+
+\define show-archive-attribute(caption,field,prefix,format:"text",template)
+<tr>
+	<th>
+		<$text text=<<__caption__>>/>
+	</th>
+	<td>
+		<$text text={{{ [<__prefix__>] }}}/>
+		<$view field=<<__field__>> format=<<__format__>> template=<<__template__>>/>
+	</td>
+</tr>
+\end
+
+\define show-archive-calculated-attribute(caption,filter)
+<tr>
+	<th>
+		<$text text=<<__caption__>>/>
+	</th>
+	<td>
+		<$text text={{{ [subfilter<__filter__>] }}}/>
+	</td>
+</tr>
+\end
+
+\define show-tweet()
+<div class="tc-twitter-tweet">
+	<div class="tc-twitter-tweet-header">
+		<$list filter="[<currentTiddler>has[user_id]]" variable="ignore">
+			<$let archive={{{ [tag[$:/tags/TwitterArchive]field:user_id{!!user_id}] }}}>
+				<span class="tc-twitter-tweet-header-displayname">
+					<$text text={{{ [<archive>get[displayname]] }}}/>
+				</span>
+				<span class="tc-twitter-tweet-header-username">
+					@<$text text={{{ [<archive>get[username]] }}}/>
+				</span>
+				•
+			</$let>
+		</$list>
+		<$link to=<<currentTiddler>>>
+			<span class="tc-twitter-tweet-header-date">
+				<$view field="created" format="date" template="DDth mmm YYYY 0hh:0mm:0ss"/>
+			</span>
+		</$link>
+	</div>
+	<$list filter="[<currentTiddler>get[in_reply_to_status_id]addprefix[Tweet - ]is[tiddler]]" variable="replyTo">
+		<div class="tc-twitter-tweet-reply-to">
+			Reply to <$link to=<<replyTo>>><$text text=<<replyTo>>/></$link>
+		</div>
+	</$list>
+	<div class="tc-twitter-tweet-body">
+		<$transclude field="text"/>
+	</div>
+	<div class="tc-twitter-tweet-media">
+		<$list filter="[tag[$:/tags/TweetMedia]field:status_id{!!status_id}]" variable="mediaItem">
+			<$transclude tiddler=<<mediaItem>>/>
+		</$list>
+	</div>
+	<div class="tc-twitter-tweet-footer">
+		<$list filter="[<currentTiddler>has[retweet_count]]" variable="ignore">
+			<span class="tc-twitter-tweet-footer-retweets">
+				Retweets: <$view field="retweet_count" format="text"/>
+			</span>
+		</$list>
+		<$list filter="[<currentTiddler>has[favorite_count]]" variable="ignore">
+			<span class="tc-twitter-tweet-footer-likes">
+				Likes: <$view field="favorite_count" format="text"/>
+			</span>
+		</$list>
+		<span class="tc-twitter-tweet-footer-twitter-link">
+			<a href={{{ [{!!status_id}addprefix[https://twitter.com/i/web/status/]] }}} rel="noopener noreferrer" target="_blank">View on Twitter</a>
+		</span>
+	</div>
+</div>
+\end
+
+\define show-tweet-thread(archive)
+<div class="tc-twitter-tweet-thread">
+	<$list filter="[<currentTiddler>has[in_reply_to_status_id]]" variable="ignore">
+		<div class="tc-twitter-tweet-reply">
+			<$tiddler tiddler={{{ [<currentTiddler>get[in_reply_to_status_id]addprefix[Tweet - ]] }}}>
+				<$macrocall $name="show-tweet"/>
+			</$tiddler>
+		</div>
+	</$list>
+	<$macrocall $name="show-tweet"/>
+</div>
+\end
+
+\define show-tweeter()
+<table>
+	<tbody>
+		<tr><th>Username</th><td><$text text={{!!screenname}}/></td></tr>
+		<tr><th>Display Name</th><td><$text text={{!!name}}/></td></tr>
+		<tr><th>User ID</th><td><$text text={{!!user_id}}/></td></tr>
+	</tbody>
+</table>
+<a href={{{ [{!!user_id}addprefix[https://twitter.com/intent/user?user_id=]] }}} rel="noopener noreferrer" target="_blank">View on Twitter</a>
+<$macrocall $name="skinny-tabs" tabNames="show-tweeter-mentions" tabCaptions="Mentions" defaultTab="show-tweeter-mentions" state=<<qualify "$:/state/skinny-tabs/tweeter-mentions">>/>
+\end
+
+\define show-tweeter-mentions()
+<$list filter="[tag[$:/tags/Tweet]tag<currentTiddler>]">
+	<$macrocall $name="show-tweet" title=<<currentTiddler>>/>
+</$list>
+\end
+
+\define show-hashtag()
+<a href={{{ [{!!user_id}addprefix[https://twitter.com/intent/user?user_id=]] }}} rel="noopener noreferrer" target="_blank">View on Twitter</a>
+<$macrocall $name="skinny-tabs" tabNames="show-hashtag-tweets" tabCaptions="Tweets" defaultTab="show-hashtag-tweets" state=<<qualify "$:/state/skinny-tabs/hashtag-tweets">>/>
+\end
+
+\define show-hashtag-tweets()
+<$list filter="[tag[$:/tags/Tweet]tag<currentTiddler>]">
+	<$macrocall $name="show-tweet" title=<<currentTiddler>>/>
+</$list>
+\end

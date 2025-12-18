@@ -1,0 +1,105 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: רקע התראה
+alert-border: גבול התראה
+alert-highlight: הדגשת התראה
+alert-muted-foreground: קדומני התראה מושתקת
+background: רקע כללי
+blockquote-bar: סרגל ציטוט
+button-background: רקע כפתור ברירת מחדל
+button-border: גבול כפתור ברירת מחדל
+button-foreground: קדומני כפתור ברירת מחדל
+code-background: רקע קוד
+code-border: גבול קוד
+code-foreground: קדומני קוד
+dirty-indicator: מסמן שינויים לא שמורים
+download-background: רקע כפתור הורדה
+download-foreground: קדומני כפתור הורדה
+dragger-background: רקע גורר
+dragger-foreground: קדומני גורר
+dropdown-background: רקע גלילה למטה
+dropdown-border: גבול גלילה למטה
+dropdown-tab-background: רקע לשונית גלילה למטה
+dropdown-tab-background-selected: רקע לשונית גלילה למטה ללשוניות בחורות
+dropzone-background: רקע אזור עזיבה
+external-link-background: רקע קישור חיצוני
+external-link-background-hover: רקע בריחוף מעל קישור חיצוני
+external-link-background-visited:  רקע קישור חיצוני שבוקר
+external-link-foreground: קדומני קישור חיצוני
+external-link-foreground-hover: קדומני בריחוף מעל קישור חיצוני
+external-link-foreground-visited: קדומני בקישור חיצוני שבוקר
+foreground: קדומני כללי
+message-background: רקע תיבת הודעה
+message-border: גבול תיבת הודעה
+message-foreground: קדומני תיבת הודעה
+modal-backdrop: "ווילוון" מודאלי
+modal-background: רקע מודאלי
+modal-border: גבול מודאלי
+modal-footer-background: רקע לכותרת תחתית מודאלית
+modal-footer-border: גבול כותרת תחתית מודאלית
+modal-header-border: גבול כותרת עילית מודאלית
+muted-foreground: קדומני מושתק כללי
+notification-background: רקע הודעות
+notification-border: גובל הודעות
+page-background: רקע עמוד
+pre-background: רקע קוד מעוצב מראש
+pre-border: גבול קוד מעוצב מראש
+primary: ראשוני כללי 
+sidebar-button-foreground: קדומני כפתור סרגל צד
+sidebar-controls-foreground: קדומני לבקרות סרגל צד
+sidebar-controls-foreground-hover:  ריחוף מעל קדומני לבקרות סרגל צד  
+sidebar-foreground: קדומני סרגל צד
+sidebar-foreground-shadow:  צל קדומני סרגל צד
+sidebar-muted-foreground: קדומני מושתק סרגל צד
+sidebar-muted-foreground-hover:  ריחוף מעל קדומני מושתק סרגל צד
+sidebar-tab-background: רקע לשונית סרגל צד
+sidebar-tab-background-selected: רקע לשונית סרגל צד ללשוניות בחורות
+sidebar-tab-border: גבול לשונית סרגל צד
+sidebar-tab-border-selected: גבול לשונית סרגל צד ללשוניות בחורות
+sidebar-tab-divider: מפריד לשונית סרגל צד
+sidebar-tab-foreground: קדומני לשונית סרגל צד
+sidebar-tab-foreground-selected: קדומני לשונית סרגל צד ללשוניות בחורות  
+sidebar-tiddler-link-foreground: קדומני לקישור טידלרים בסרגל צד
+sidebar-tiddler-link-foreground-hover:  קדומני לריחוף מעל לקישור טידלרים בסרגל צד
+site-title-foreground: קדומני לכותרת האתר
+static-alert-foreground: קדומני לאתראה סטטית 
+tab-background: רקע ללשונית
+tab-background-selected: רקע ללשונית ללשוניות בחורות 
+tab-border: גבול לשונית
+tab-border-selected: גבול לשונית ללשוניות בחורות
+tab-divider: מפריד לשוניות 
+tab-foreground: קדומני ללשונית
+tab-foreground-selected: קדומני ללשונית ללשוניות בחורות 
+table-border: גבול טבלה
+table-footer-background: רקע לכותרת תחתית לטבלה
+table-header-background: רקע לכותרת עילית לטבלה
+tag-background: רקע לתגית 
+tag-foreground: קדומני לתגית
+tiddler-background: רקע לטידלר
+tiddler-border: גבול לטידלר
+tiddler-controls-foreground: קדומני לבקרות טידלר
+tiddler-controls-foreground-hover: קדומני ךריחוף מעל לבקרות טידלר
+tiddler-controls-foreground-selected: קדומני לבקרות טידלר לטידלרים נבחרים
+tiddler-editor-background: רקע לעורך טידלרים
+tiddler-editor-border: גבול לעורך טידלרים
+tiddler-editor-border-image: תמונת גבול עורך טידלרים
+tiddler-editor-fields-even: רקע עורך טידלרים שדות זוגיים
+tiddler-editor-fields-odd: רקע עורך טידלרים שדות אי זוגיים
+tiddler-info-background: רקע ללוח מידע טידלר
+tiddler-info-border: גבול ללוח מידע טידלר
+tiddler-info-tab-background: גבול ללשונית לוח מידע טידלר
+tiddler-link-background: רקע קישור טידלר
+tiddler-link-foreground: קדומני קישור טידלר
+tiddler-subtitle-foreground: רקע לתת-כותרת טידלר
+tiddler-title-foreground: קודמני לכותרת טידלר
+toolbar-cancel-button: קדומני לכפתור בטל בסרגל
+toolbar-close-button: קדומני לכפתור סגורבסרגל
+toolbar-delete-button: קדומני לכפתור מחקבסרגל
+toolbar-done-button: קדומני לכפתור עשוי בסרגל
+toolbar-edit-button: קדומני לכפתור ערוך בסרגל
+toolbar-info-button: קדומני לכפתור מידע בסרגל
+toolbar-new-button: קדומני לכפתור טידלר חדש בסרגל
+toolbar-options-button: קדומני לכפתור אפשרויות בסרגל
+toolbar-save-button: קדומני לכפתור שמור בסרגל
+untagged-background: רקע לגלולה לא מסומנת
+very-muted-foreground: קדומני מאוד מושתק

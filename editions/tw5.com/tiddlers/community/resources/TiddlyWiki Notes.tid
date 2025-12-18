@@ -1,0 +1,10 @@
+created: 20140327085406905
+modified: 20210106151027260
+tags: [[Other Resources]]
+title: "TiddlyWiki Notes" by James Anderson
+type: text/vnd.tiddlywiki
+url: http://welford.github.io
+
+Notes and tips by a developer working on writing TiddlyWiki plugins -- including [[TWExe|https://github.com/welford/twexe]], a widget for running Windows scripts and executables. 
+
+{{!!url}}

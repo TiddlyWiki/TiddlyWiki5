@@ -1,0 +1,24 @@
+created: 20150221205834000
+modified: 20150221210006000
+title: Example Table of Contents: Tabbed External
+caption: Tabbed External
+tags: table-of-contents-example
+order: 6
+
+<$macrocall
+	$name="toc-tabbed-external-nav"
+	tag="TableOfContents"
+	selectedTiddler="$:/temp/toc/selectedTiddler"
+	unselectedText="<p>Select a topic in the table of contents. Click the arrow to expand a topic.</p>"
+	missingText="<p>Missing tiddler.</p>"
+/>
+
+```
+<$macrocall
+	$name="toc-tabbed-external-nav"
+	tag="TableOfContents"
+	selectedTiddler="$:/temp/toc/selectedTiddler"
+	unselectedText="<p>Select a topic in the table of contents. Click the arrow to expand a topic.</p>"
+	missingText="<p>Missing tiddler.</p>"
+/>
+```

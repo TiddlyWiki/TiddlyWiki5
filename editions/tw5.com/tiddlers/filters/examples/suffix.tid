@@ -1,0 +1,9 @@
+created: 20150124113652000
+modified: 20220218023400000
+tags: [[suffix Operator]] [[Operator Examples]]
+title: suffix Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[suffix[.jpg]]">>
+<<.operator-example 2 "[suffix:caseinsensitive[.JPG]]">>
+<<.operator-example 3 "[tag[task]!suffix[ing]]">>

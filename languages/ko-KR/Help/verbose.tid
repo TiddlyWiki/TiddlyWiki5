@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: 트리거의 상세한 출력 모드
+
+디버깅에 유용한, 트리거의 상세한 출력
+
+```
+--verbose
+```

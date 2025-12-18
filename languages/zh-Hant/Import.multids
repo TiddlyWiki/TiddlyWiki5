@@ -1,0 +1,34 @@
+title: $:/language/Import/
+
+Editor/Import/Heading: 導入圖像並將其插入至編輯器。
+Imported/Hint:  下列條目已被導入：
+Listing/Cancel/Caption: 取消
+Listing/Cancel/Warning: 您要取消導入嗎？
+Listing/Hint: 這些條目已備妥導入：
+Listing/Import/Caption: 導入
+Listing/Select/Caption: 選擇
+Listing/Status/Caption: 狀態
+Listing/Title/Caption: 條目
+Listing/Preview: 預覽：
+Listing/Preview/Text: 文字
+Listing/Preview/TextRaw: 文字 (原始)
+Listing/Preview/Fields: 欄位
+Listing/Preview/Diff: 差異
+Listing/Preview/DiffFields: 差異 (欄位)
+Listing/Rename/Prompt: 重新命名為：
+Listing/Rename/Tooltip: 導入前重新命名條目
+Listing/Rename/ConfirmRename: 重新命名條目
+Listing/Rename/CancelRename: 取消
+Listing/Rename/OverwriteWarning: 具有此標題的條目已存在。
+Upgrader/Plugins/Suppressed/Incompatible: 封鎖的不相容或過時插件。
+Upgrader/Plugins/Suppressed/Version: 封鎖的插件 (由於傳入的 <<incoming>> 不比現有版本 <<existing>> 新)。
+Upgrader/Plugins/Upgraded: 升級插件，從 <<incoming>> 到 <<upgraded>>。
+Upgrader/State/Suppressed: 封鎖的暫存狀態條目。
+Upgrader/System/Disabled: 停用系統條目。
+Upgrader/System/Suppressed: 封鎖的系統條目。
+Upgrader/System/Warning: 核心模組條目。
+Upgrader/System/Alert: 您即將導入一個條目會覆蓋一個核心模組條目。不建議這樣做，因為可能會使系統不穩定。
+Upgrader/ThemeTweaks/Created: 從 <$text text=<<from>>/> 遷移佈景主題。
+Upgrader/Tiddler/Disabled: 停用條目。
+Upgrader/Tiddler/Selected: 選定的條目。
+Upgrader/Tiddler/Unselected: 未選定的條目。

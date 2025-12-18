@@ -1,0 +1,12 @@
+title: $:/language/Help/rendertiddler
+description: Render (toon) een individuele tiddler als een gegeven inhoudstype
+
+Render (toon) een individuele tiddler als een gegeven inhoudstype (standaard `text/html`) en sla deze op met de gegeven bestandsnaam:
+
+```
+--rendertiddler <titel> <bestandsnaam> [<type>]
+```
+
+Standaard is de bestandsnaam relatief t.o.v. de `output` subfolder van de editiefolder.
+
+Ontbrekende folders in het pad worden automatisch aangemaakt.

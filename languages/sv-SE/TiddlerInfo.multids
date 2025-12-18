@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Avancerat
+Advanced/PluginInfo/Empty/Hint: none
+Advanced/PluginInfo/Heading: Detaljer för insticksprogram
+Advanced/PluginInfo/Hint: Detta insticksprogram innehåller följande skugg-tiddler:
+Advanced/ShadowInfo/Heading: Skugg-status
+Advanced/ShadowInfo/NotShadow/Hint: Tiddlern <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> är inte en skugg-tiddler
+Advanced/ShadowInfo/Shadow/Hint: Tiddlern <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> är en skugg-tiddler
+Advanced/ShadowInfo/Shadow/Source: Det är definerat i insticksprogrammet <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Advanced/ShadowInfo/OverriddenShadow/Hint: Det är överskridet av en allmän tiddler
+Fields/Caption: Fält
+List/Caption: Lista
+List/Empty: Denna tiddler har ingen lista
+Listed/Caption: Listade
+Listed/Empty: Denna tiddler är inte listad av någon annan tiddler
+References/Caption: Referenser
+References/Empty: Inga tiddlers länkar till denna
+Tagging/Caption: Taggning
+Tagging/Empty: Inga tiddlers är taggade med denna
+Tools/Caption: Verktyg

@@ -1,0 +1,16 @@
+title: $:/language/Filters/
+
+AllTags: Totes les etiquetes excepte les etiquetes del sistema
+AllTiddlers: Totes els tiddlers excepte els tiddlers del sistema
+Drafts: Tiddlers esborranys
+Missing: Tiddlers que no existeixen
+Orphans: Tiddlers orfes
+OverriddenShadowTiddlers: Tiddlers amb ombra sobreescrits
+RecentSystemTiddlers: Tiddlers que s'han modificat recentment, inclós els tiddlers del sistema
+RecentTiddlers: Tiddlers que s'han modificat recentment
+SessionTiddlers: Tiddlers modificats des que es va carregar el wiki
+ShadowTiddlers: Tiddlers amb ombra predefinits
+StoryList: Els tiddlers de la cronologia, a excepció de <$text text="$:/AdvancedSearch"/>
+SystemTags: Etiquetes del sistema
+SystemTiddlers: Tiddlers del sistema
+TypedTiddlers: Tiddlers amb text que no és wiki

@@ -1,0 +1,13 @@
+title: $:/language/Modals/Download
+type: text/vnd.tiddlywiki
+subtitle: Download changes
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/DownloadingChanges.html
+
+O seu navegador apenas suporta gravação manual.
+
+Para guardar a sua wiki modificada clique no botão de transferência abaixo e seleccione "Descarregar ficheiro" ou "Guardar Ficheiro", e de seguida escolha uma pasta e um nome para o ficheiro.
+
+//Pode acelerar marginalmente o processo clicando no link enquanto pressiona a tecla Control (Windows) ou a tecla Options/Alt (Mac OS X). Não lhe será pedida uma pasta ou um nome para o ficheiro, mas o seu navegador provavelmente irá atribuir-lhe um nome irreconhecível -- poderá ter de alterar o nome de modo a incluir a extensão '.html' antes de conseguir fazer algo com ele.//
+
+Em dispositivos móveis que não permitem a transferência de ficheiros pode alternativamente guardar a ligação nos seus favoritos ou marcadores, e posteriormente sincroniza-los com o seu computador onde será então possível gravar normalmente.

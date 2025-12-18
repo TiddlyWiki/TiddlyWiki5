@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Filters
+caption: Filters
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/Filters/]sort[title]]
+\end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/Filters/]]
+\end
+
+! Filters
+
+Translatable titles of the preconfigured filters available in [[advanced search|$:/AdvancedSearch]].
+
+<<translatableStringEditor>>

@@ -1,0 +1,30 @@
+created: 20130828185900000
+fr-title: Type de contenu
+modified: 20150624091440971
+tags: Definitions
+title: ContentType
+type: text/vnd.tiddlywiki
+
+Utilisé dans les protocoles Internet pour spécifier le type d'interprétation à appliquer au contenu d'une ressource web.
+
+Dans TiddlyWiki, le champ `type` contient le type d'interprétation à appliquer au contenu du champ principal `text`.
+
+!! Liste des Types de contenu (ContentType) courants
+
+|!Groupe |!Type |!Contenu des champs `type` |
+|^''Développeur'' |Éléments d'un Dictionnaire |application/x-tiddler-dictionary|
+|~|code ~JavaScript |application/javascript|
+|~|Éléments JSON |application/json|
+|~|Feuille de style Statique |text/css|
+|^''Image''|image GIF |image/gif|
+|~|fichier au format icone ICO |image/x-icon|
+|~|image JPEG |image/jpeg|
+|~|image PDF |application/pdf|
+|~|image PNG |image/png|
+|~|image Structured Vector Graphics |image/svg+xml|
+|^''Texte''|balisage HTML |text/html|
+|~|Feuille de style Cascade |text/css|
+|~|Valeurs séparées par des virgules |text/csv|
+|~|Texte brut |text/plain|
+|~|~TiddlyWiki 5 |text/vnd.tiddlywiki|
+|~|~TiddlyWiki Classic |text/x-tiddlywiki|

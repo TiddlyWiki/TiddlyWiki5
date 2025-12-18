@@ -1,0 +1,56 @@
+created: 20140908131500000
+fr-title: Formater du texte dans TiddlyWiki
+modified: 20141203151407522
+tags: [[Working with TiddlyWiki]]
+title: Formatting text in TiddlyWiki
+type: text/vnd.tiddlywiki
+
+Au sein d'un tiddler, vous pouvez utiliser un formatage spécifique appelé WikiText, afin de contrôler la manière dont le texte sera affiché.
+
+! Formatage simple
+
+Dans sa plus simple expression, WikiText vous permet d'appliquer des fonctions de traitement de texte familières comme le gras, l'italique, les listes et les tableaux. Par exemple<<dp>>
+
+```
+Portez ce //vieux// whisky au ''juge'' ~~brun~~ blond qui `fume`
+```
+
+S'affiche ainsi<<dp>>
+
+Portez ce //vieux// whisky au ''juge'' ~~brun~~ blond qui `fume`
+
+! Travailler avec les tiddlers
+
+WikiText vous permet de [[pointer vers d'autres tiddlers|Linking in WikiText]] à l'aide des doubles crochets droits, ou grâce aux liens automatiques engendrés par les mots en CamelCase<<dp>>
+
+```
+Voici un lien vers HelloThere, et un autre vers l'[[histoire de TiddlyWiki|History of TiddlyWiki]]
+```
+
+S'affiche comme<<dp>>
+
+Voici un lien vers HelloThere, et un autre vers l'[[histoire de TiddlyWiki|History of TiddlyWiki]]
+
+! Macros
+
+Les macros vous permettent d'assembler des bouts de WikiText répétitifs, afin de les réutiliser facilement.
+
+Par exemple, voici la définition d'une macro qui génère une URL vidéo ~YouTube à partir de son identifiant unique<<dp>>
+
+```
+\define youtube(video)
+https://www.youtube.com/watch?v=$video$
+\end
+```
+
+Une fois cette définition mise en place, `<<youtube 1g66s7UbyuU>>` génèrera l'URL https://www.youtube.com/watch?v=1g66s7UbyuU
+
+! ~WikiText avancé
+
+Les fonctionnalités avancées de WikiText permettent de produire des listes automatisées et des fonctions interactives comme des menus déroulants. En fait, toute l'interface de TiddlyWiki est elle-même écrite en WikiText<<pv>> autrement dit, toutes les fonctionnalités que vous voyez dans TiddlyWiki peuvent être adaptées pour être utilisées dans vos propres wikis.
+
+Certaines fonctionnalités avancées nécessitent un codage complexe. <<tw>> inclut plusieurs macros prédéfinies, qui simplifient les fonctions usuelles d'interface utilisateur, comme les onglets, les tables des matières, et les listes de tiddlers.
+
+! En savoir plus
+
+Voir [[WikiText]] pour une introduction détaillée à l'écriture de ~WikiText.

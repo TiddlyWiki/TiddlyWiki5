@@ -1,0 +1,96 @@
+created: 20150719191225198
+modified: 20150720163929573
+title: Making a new section
+
+There is a [[New Section Creation Tool]] to help with creating new résumé sections.
+
+Each section needs the following tiddlers:
+
+#A display tiddler
+#A template tiddler (possibly more than one)
+#An input tiddler (at least one, up to one per template tiddler)
+#An options tiddler (optional and recommended, up to one per template tiddler)
+
+You can have multiple template tiddlers that use the same input and options tiddlers.
+
+!!Display tiddler
+
+This is the container used to display the section in the résumé itself, there isn't any customisation here.
+
+''Required tags'': `Section Display`<br>
+''Required name format'': `$:/display/(section name) Display`<br>
+''Additional fields'':
+
+*'section' - the section name, something like 'Résumé Title' or 'Objective'.
+''Examples'': [[$:/display/Resume Title Display]] and [[$:/display/Objective Display]].<br>
+
+''Other things'':
+
+In the text field put 
+
+```
+<$transclude tiddler=GenericSectionDisplayTemplate mode=block/>
+```
+
+and nothing else.
+
+This tiddler should have only what is listed above.
+
+!!Template tiddler(s)
+
+These tiddlers determine how the section is displayed on the résumé. This sets the look of the final result.
+
+''Required tags'': `DisplayTemplate`<br>
+''Required name format'': `$:/template/(template name)`<br>
+''Additional fields'':
+
+*`section_name` - the name of the section that the template is for, this must be the same as the value in the `section` field of the section display template you made.
+*`input_tiddler` - the name of the tiddler that has the form to take input for this section.
+*`template_name` - an optional field containing a more convenient name for the template than the tiddler title. If it exists this will be displayed for the template selection.
+*`options_tiddler` - The name of the options tiddler for this template, if any.
+
+''Examples'': [[$:/template/ResumeTitleTemplate]] or [[$:/template/EducationTemplate]], or any of the other tiddlers that start with `$:/template/` for examples.
+
+The data displayed by the templates will be from tiddlers named in the form `$:/data/(section name)/(section item)`.
+
+!!Input Tiddler
+
+A tiddler that contains the input from for adding entries to the section, and if desired options for the section. 
+
+''Required tags'': none<br>
+''Required name format'': `$:/input/(template name)`<br>
+''Additional fields'': 
+
+*`caption` - The contents of this field will be displayed as the section name in the [[Résumé Wizard]].
+''Examples'': [[$:/input/Resume Title]], [[$:/input/Education]]
+
+The data taken from the input tiddler should be stored in the fields of a tiddler named in the form `$:/data/(SectionName)/(ItemName)`.
+
+I don't have any real help for this one, what you do will be dependent on what you want in the section. Look at the examples. If you have any questions please feel free to ask on the group (https://groups.google.com/forum/#!forum/tiddlywiki).
+
+!!Options tiddler
+
+A tiddler used to set options for a section.
+
+''Required tags'': `Options`<br>
+''Required name format'': `$:/options/(template name)`<br>
+''Additional fields'':
+
+*`caption` - a caption field, it should have something like `(section name) Options`. This is what appears on the tabs in the [[Résumé Options]] tiddler.
+''Examples'': [[$:/options/Education Options]], [[$:/options/Previous Employment Options]].
+
+You would use this tiddler to change the fonts used and list types and similar things here.
+All settings and state information about each section should be stored in a tiddler named in the form `$:/settings/(ResumeName)/(SectionName)`.
+For each item within a section all state and configuration information should be kept in a tiddler with a name in the form `$:/settings/(ResumeName)/(SectionName)/(ItemName)`.
+The options tiddler must only change fields in these tiddlers.
+
+These tiddlers hold the information about which items/sections are visible in each résumé. See the list of system tiddlers for many examples. You don't need to make those tiddlers, you just need to make your input and settings tiddlers create or modify the correct tiddler name and they will be created. See the examples.
+
+''Important note:''
+
+If you are going to make your own section, in order to allow the items to be in different orders in different résumés you will need to use this wonderful filter
+(Thanks to Eric for pointing out that my original version could be shortened):
+
+`[prefix[$:/data/(SectionName)/]removeprefix[$:/data/]addprefix[$:/settings/$(ThisResumeName)$/]!show[false]sort[order]removeprefix[$:/settings/$(ThisResumeName)$/]addprefix[$:/data/]]`
+
+you need to manually replace `(SectionName)` with the name of the section you are adding, and you need to put `<$vars ThisResumeName={{$:/settings/Global!!selected_resume}}>` and `</$vars>` around the macro that contains the list widget with the above filter. Look at the examples and it will hopefully make more sense.

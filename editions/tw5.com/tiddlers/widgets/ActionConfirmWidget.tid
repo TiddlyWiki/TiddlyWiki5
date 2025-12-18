@@ -1,0 +1,40 @@
+caption: action-confirm
+created: 20201115150255011
+modified: 20201115160335288
+tags: Widgets ActionWidgets
+title: ActionConfirmWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+<<.from-version "5.1.23">>The ''action-confirm'' widget is an [[action widget|ActionWidgets]] that prompts the user for confirmation and invokes other action widgets contained within it only if the user confirms. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+! Content and Attributes
+
+The ''action-confirm'' widget is invisible. Any content within it is only processed if the user confirms the action, or the confirmation has been disabled by the `$prompt` attribute.
+
+|!Attribute |!Description |
+|$message |Optional message displayed to the user when asking for confirmation.|
+|$prompt |Optional flag, set to "no" to disable the prompt for confirmation. Defaults to "yes" |
+
+! Examples
+
+Here is an example of a button that asks the user for confirmation, before deleting the caption and tags fields of the current tiddler:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-confirm $message="Do you wish to delete the caption and tags?">
+<$action-deletefield caption tags/>
+Delete "caption" and "tags"
+</$action-confirm>
+</$button>'/>
+
+Here is an example of a button that uses the optional `$prompt` attribute to control whether to prompt the user before deleting the text field of the tiddler HelloThere:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-confirm $message="Do you wish to delete the text field?" $prompt={{$:/state/promptUser}}>
+<$action-deletefield $tiddler="HelloThere" $field="text"/>
+</$action-confirm>
+Delete text from ~HelloThere
+</$button>'/>

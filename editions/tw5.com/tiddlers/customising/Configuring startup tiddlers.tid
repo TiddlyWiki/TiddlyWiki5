@@ -1,0 +1,27 @@
+created: 20180305174809089
+modified: 20180306161405033
+tags: [[Customise TiddlyWiki]]
+title: Configuring startup tiddlers
+type: text/vnd.tiddlywiki
+
+You can configure ~TiddlyWiki to start up using whatever individual or group of tiddlers you want using the [[default tiddlers|DefaultTiddlers]] mechanism.
+
+In the control panel under the info tab is an input field labeled "Choose which tiddlers are displayed at startup". You can list whatever tiddlers you want to open at startup. Use double square brackets for titles containing spaces. For example:
+
+```
+FirstTiddler
+SecondTiddler
+[[Third Tiddler]]
+```
+
+You can also use [[filter expressions|Filter Expression]] to open more than one tiddler. For example:
+
+```
+[tag[HelloThere]]
+```
+
+will open all tiddlers tagged as <<tag HelloThere>>. 
+
+You can also use this technique to [[preserve open tiddlers at startup|Preserving open tiddlers at startup]]
+
+See also [[StartupActions]] for controlling more advanced startup behaviours.

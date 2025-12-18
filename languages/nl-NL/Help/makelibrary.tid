@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: Het maken van de bibliotheekplugin is vereist voor het upgradeproces
+
+Maak de `$:/UpgradeLibrary` tiddler voor het upgradeproces.
+
+De upgradebibliotheek is opgemaakt als een normale plugin tiddler van het plugintype `library`. Het bevat een kopie van iedere plugin, thema of taalpakket dat in de TiddlyWiki5 opslagruimte beschikbaar is.
+
+Dit commando is bedoeld voor intern gebruik; het is alleen relevant voor gebruikers die een eigen upgradeprocedure maken.
+
+```
+--makelibrary <titel>
+```
+
+Het titelargument is standaard `$:/UpgradeLibrary`.

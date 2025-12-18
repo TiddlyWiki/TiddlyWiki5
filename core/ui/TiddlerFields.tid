@@ -1,0 +1,8 @@
+title: $:/core/ui/TiddlerFields
+
+\whitespace trim
+<table class="tc-view-field-table">
+<tbody>
+<$list filter="[all[current]fields[]sort[title]] -text" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+</tbody>
+</table>

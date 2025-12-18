@@ -1,0 +1,53 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/document
+
+\define config-document-status()
+$:/state/plugins/tiddlywiki/text-slicer/show-preview-document/$(tv-heading-status-config-prefix)$/$(currentTiddler)$
+\end
+
+\define config-show-toolbar()
+$:/state/plugins/tiddlywiki/text-slicer/show-toolbar/$(currentTiddler)$
+\end
+
+\define config-show-metadata()
+$:/state/plugins/tiddlywiki/text-slicer/show-metadata/$(currentTiddler)$
+\end
+
+\define config-heading-status()
+$:/state/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
+\end
+
+\define body()
+<$set name="tv-heading-status-config-title" value=<<config-heading-status>>>
+<$set name="tv-show-toolbar" value={{$(config-show-toolbar)$}}>
+<div class="tc-sliced-document">
+<div class="tc-sliced-document-header">
+<div class="tc-document-tiddler-toolbar">
+<$reveal type="nomatch" state=<<config-document-status>> text="close" default="open" tag="div">
+<$button set=<<config-document-status>> setTo="close" class="tc-btn-invisible">
+{{$:/core/images/down-arrow}}
+</$button>
+</$reveal>
+<$reveal type="match" state=<<config-document-status>> text="close" default="open" tag="div">
+<$button set=<<config-document-status>> setTo="open" class="tc-btn-invisible">
+{{$:/core/images/right-arrow}}
+</$button>
+</$reveal>
+</div>
+<h1 class="tc-sliced-document-title">''Document'': <$link><$view field="title"/></$link></h1>
+</div>
+<$reveal type="nomatch" state=<<config-document-status>> text="close" default="open" tag="div">
+{{||$:/plugins/tiddlywiki/text-slicer/ui/document/header}}
+<div class='tc-sliced-document-body'>
+<$set name="tv-show-toolbar" value={{$(config-show-toolbar)$}}>
+<$set name="tv-exclude-filter" value={{!!toc-exclude-filter}}>
+<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler"/>
+</$set>
+</$set>
+</div>
+</$reveal>
+</div>
+</$set>
+</$set>
+\end
+
+<<body>>

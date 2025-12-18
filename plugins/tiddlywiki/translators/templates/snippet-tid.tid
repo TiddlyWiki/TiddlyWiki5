@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/translators/templates/snippet-tid
+
+\procedure generateTid(title)
+title: <<title>>
+tags: $:/tags/TextEditor/Snippet
+caption: <$text text={{!!caption}}/>
+
+<$text text={{!!text}}/>
+\end
+<$transclude $variable="generateTid" title=<<currentTiddler>>/>

@@ -1,0 +1,10 @@
+title: $:/language/Help/build
+description: 設定されたコマンドを自動実行
+
+現在の Wiki の指定したターゲット（target）をビルドします。もしターゲットを指定しない場合は、ビルド可能な全てのターゲットをビルドします。
+
+```
+--build <target> [<target> ...]
+```
+
+ビルドターゲットは、wiki フォルダの tiddlywiki.info に定義されます。

@@ -1,0 +1,17 @@
+created: 20150221141507000
+modified: 20150228103440000
+tags: [[transclusion Variable]] [[Variable Examples]]
+title: transclusion Variable (Examples)
+type: text/vnd.tiddlywiki
+
+This example shows how to distinguish between the sidebar and other environments:
+
+<$macrocall $name=".example" n="1"
+eg="""We are
+<$list
+filter="[<transclusion>prefix[{|$:/core/ui/PageTemplate/sidebar|||}]]"
+emptyMessage="in the story river.">
+in the sidebar.
+</$list>"""/>
+
+In the sidebar, this would show `We are in the sidebar` instead.

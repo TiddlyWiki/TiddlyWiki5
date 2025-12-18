@@ -1,0 +1,90 @@
+title: $:/language/
+
+AboveStory/ClassicPlugin/Warning: Sembla que intenteu carregar un connector dissenyat per a ~TiddlyWiki Classic. Tingueu en compte que [[aquests connectors no funcionen amb la versió 5.x.x de TiddlyWiki |https://tiddlywiki.com/#TiddlyWikiClassic]]. S'han detectat connectors de ~TiddlyWiki Classic:
+BinaryWarning/Prompt: Aquest tiddler conté dades binàries
+ClassicWarning/Hint: Aquest tiddler està escrit en format de text de TiddlyWiki, que no es totalment compatible amb la versió 5 de TiddlyWiki. Veieu els detalls a https://tiddlywiki.com/static/Upgrading.html .
+ClassicWarning/Upgrade/Caption: actualitza
+CloseAll/Button: tanca-ho tot
+ConfirmAction: Voleu continuar?
+ConfirmCancelTiddler: Voleu descartar els canvis del tiddler "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Voleu suprimir el tiddler "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Aneu a editar un TiddlerOmbra. Qualsevol canvi sobreescriurà les opcions per omisió del sistema i complicarà les actualitzacions. Segur que voleu editar "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Segur que voleu sobreescriure el tiddler "<$text text=<<title>>/>"?
+Count: compte
+DefaultNewTiddlerTitle: Nou Tiddler
+Diffs/CountMessage: <<diff-count>> diferències
+DropMessage: Dexeu-ho anar aquí (o anul·leu-ho amb la tecla 'Escape')
+Encryption/Cancel: Anul·la
+Encryption/ConfirmClearPassword: Voleu suprimir la contrasenya? Això eliminarà l'encriptació utilitzada quan es desa aquest wiki
+Encryption/Password: Contrasenya
+Encryption/PasswordNoMatch: Les contrasenyes no coincideixen
+Encryption/PromptSetPassword: Indiqueu una nova contrasenya per aquest TiddlyWiki
+Encryption/RepeatPassword: Repetiu la contrasenya
+Encryption/SetPassword: Indiqueu la contrasenya
+Encryption/Username: Usuari
+Error/Caption: S'ha produït un error
+Error/Filter: S'ha produït un error del filtre
+Error/FilterRunPrefix: S'ha produït un error del filtre: El prefix és desconegut
+Error/FilterSyntax: S'ha produït un error de sintaxi en l'expressió del filtre
+Error/FormatFilterOperator: S'ha produït un error del filtre: El sufix del operador del filtre de 'format' és desconegut
+Error/IsFilterOperator: S'ha produït un error del filtre: operant desconegut per a l’operador de filtre "is"
+Error/LoadingPluginLibrary: S'ha produït un error en carregar la biblioteca del connector
+Error/NetworkErrorAlert: `<h2>''Error de la xarxa''</h2>Sembla que s'ha perdut la connexió amb el servidor. Això pot indicar un problema amb la vostra connexió de la xarxa. Intenteu restaurar la connectivitat de xarxa abans de continuar.<br><br>' Qualsevol canvi no guardat es sincronitzarà automàticament quan es restableixi la connectivitat''.'
+Error/PutEditConflict: El fitxer ha canviat al servidor
+Error/RecursiveTransclusion: S'ha produït un error de transclusió recursiva en el widget de transclusió
+Error/RetrievingSkinny: S'ha produït un error en recuperar la llista de tiddler parcials
+Error/SavingToTWEdit: S'ha produït un error en desar a TWEdit
+Error/WhileSaving: S'ha produït un error en desar
+Error/XMLHttpRequest: Codi d'error XMLHttpRequest
+InternalJavaScriptError/Hint: Bé, això és compromès. Es recomana que reinicieu TiddlyWiki actualitzant el navegador
+InternalJavaScriptError/Title: S'ha produït un error intern de JavaScript
+LayoutSwitcher/Description: Obre el canviador de disposició
+LazyLoadingWarning: <p>S'està tractant de carregar contingut extern de ''<$text text={{!!_canonical_uri}}/>''</p><p>Si aquest missatge no desapareix, o bé el tipus de contingut del tiddler no coincideix amb el tipus de contingut extern o bé esteu utilitzant un navegador que no admet contingut extern per als wikis carregats com a fitxers independents. Mireu https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Inicieu la sessió a TiddlySpace
+Manager/Controls/FilterByTag/None: (cap)
+Manager/Controls/FilterByTag/Prompt: Filtra per etiqueta:
+Manager/Controls/Order/Prompt: Ordre invers
+Manager/Controls/Search/Placeholder: Cerca
+Manager/Controls/Search/Prompt: Cerca:
+Manager/Controls/Show/Option/Tags: etiquetes
+Manager/Controls/Show/Prompt: Mostra:
+Manager/Controls/Sort/Prompt: Ordena per:
+Manager/Item/Colour: Color
+Manager/Item/Fields: Camps
+Manager/Item/Icon: Icona
+Manager/Item/Icon/None: (cap)
+Manager/Item/RawText: Text cru
+Manager/Item/Tags: Etiquetes
+Manager/Item/Tools: Eines
+Manager/Item/WikifiedText: Text en format Wiki
+MissingTiddler/Hint: Falta el tiddler "<$text text=<<currentTiddler>>/>" - cliqueu {{||$:/core/ui/Buttons/edit}} per generar-ho
+OfficialPluginLibrary: Biblioteca Oficial de connectors de ~TiddlyWiki
+OfficialPluginLibrary/Hint: La biblioteca de complements oficials de ~TiddlyWiki a tiddlywiki.com. L'equip principal gestiona els connectors, els temes i els paquets d'idioma.
+PageTemplate/Description: disposició de ~TiddlyWiki per omissió
+PageTemplate/Name: ~PageTemplate per omissió
+PluginReloadWarning: Deseu si us plau {{$:/core/ui/Buttons/save-wiki}} i torneu a carregar {{$:/core/ui/Buttons/refresh}} per tal que els canvis als connectors es puguin activar
+RecentChanges/DateFormat: DD MMM YYYY
+Shortcuts/Input/Accept/Hint: Accepta l'element triat
+Shortcuts/Input/AcceptVariant/Hint: Accepta l'element triat (variant)
+Shortcuts/Input/AdvancedSearch/Hint: Obre el tauler de ~AdvancedSearch des del camp de cerca de la barra lateral
+Shortcuts/Input/Cancel/Hint: Neteja el camp d'entrada
+Shortcuts/Input/Down/Hint: Tria l'element següent
+Shortcuts/Input/Tab-Left/Hint: Tria la pestanya anterior
+Shortcuts/Input/Tab-Right/Hint: Tria la pestanya següent
+Shortcuts/Input/Up/Hint: Tria l'element anterior
+Shortcuts/SidebarLayout/Hint: Canvia la disposició de la barra lateral
+Switcher/Subtitle/language: Canvia l'idioma
+Switcher/Subtitle/layout: Canvia la disposició
+Switcher/Subtitle/palette: Canvia la paleta
+Switcher/Subtitle/theme: Canvia el tema
+SystemTiddler/Tooltip: Aquest és un tiddler del sistema
+SystemTiddlers/Include/Prompt: Inclou els tiddlers del sistema
+TagManager/Colour/Heading: Color
+TagManager/Count/Heading: Compte
+TagManager/Icon/Heading: Icona
+TagManager/Icons/None: Cap
+TagManager/Info/Heading: Informació
+TagManager/Tag/Heading: Etiqueta
+Tiddler/DateFormat: DD MMM de YYYY a les hh12:0mm am
+UnsavedChangesWarning: Teniu canvis sense desar al TiddlyWiki
+Yes: Sí

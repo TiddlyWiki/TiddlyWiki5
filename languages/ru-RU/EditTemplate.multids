@@ -1,0 +1,24 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: Содержимое этой заметки находится вне TiddlyWiki. Но вы можете редактировать метки и поля
+Body/Placeholder: Введите текст заметки
+Field/Remove/Caption: удалить поле
+Field/Remove/Hint: Удалить поле
+Fields/Add/Button: добавить
+Fields/Add/Dropdown/System: Системные поля
+Fields/Add/Dropdown/User: Пользовательские поля
+Fields/Add/Name/Placeholder: название поля
+Fields/Add/Prompt: Добавить новое поле:
+Fields/Add/Value/Placeholder: значение
+Shadow/OverriddenWarning: Это переопределённая встроенная заметка. Для восстановления стандартного значения просто удалите её
+Shadow/Warning: Это встроенная заметка. Любое изменение переопределит стандартное значение
+Tags/Add/Button: добавить
+Tags/Add/Placeholder: название метки
+Tags/Dropdown/Caption: список меток
+Tags/Dropdown/Hint: Показать список меток
+Type/Delete/Caption: удалить тип содержимого
+Type/Delete/Hint: Удалить тип содержимого
+Type/Dropdown/Caption: список типов содержимого
+Type/Dropdown/Hint: Показать список типов содержимого
+Type/Placeholder: тип содержимого
+Type/Prompt: Тип:

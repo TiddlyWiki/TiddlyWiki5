@@ -1,0 +1,29 @@
+title: $:/language/Docs/ModuleTypes/
+
+allfilteroperator: Un suboperador per a l’operador de filtre '' all ''.
+animation: Animacions que es poden utilitzar amb el RevealWidget.
+authenticator: Defineix com el servidor HTTP integrat autentica les sol·licituds.
+bitmapeditoroperation: Una operació de la barra d'eines de l'editor de mapes de bits.
+command: Ordres que es poden executar a Node.js.
+config: Dades per a insertar a `$tw.config`.
+filteroperator: Mètodes individuals de l'operador filtre.
+global: Dades globals per a insertar a `$tw`.
+info: Publica la informació del sistema mitjançant el pseudo-connector [[$:/temp/info-plugin]].
+isfilteroperator: Operands pel operador filtre ''is''.
+library: Tipus de mòdul genèric per a mòduls JavaScript de propòsit general.
+macro: Definicions de macros JavaScript.
+parser: Analitzadors sintàctics per a diferents tipus de continguts.
+route: Defineix com el servidor HTTP integrat gestiona els patrons d’URL individuals.
+saver: Els gestors de baixades (saver) ofereixen diferents mètodes per a desar fitxers des del navegador.
+startup: Funcions de l'inici
+storyview: El mode de visualització permet personalizar l'animació i el comportament de les llistes
+texteditoroperation: Una operació de la barra d'eines de l'editor de text.
+tiddlerdeserializer: Converteix diferents tipus de contingut a tiddlers.
+tiddlerfield: Defineix el comportament d'un camp individual d'un tiddler.
+tiddlermethod: Afegeix mètodes al prototip `$tw.Tiddler`.
+upgrader: Aplica processament d'actualització als tiddlers durant una actualització o importació.
+utils: Afegeix mètodes a `$tw.utils`.
+utils-node: Afegeix mètodes específics de Node.js a `$tw.utils`.
+widget: Els widgets encapsulen el renderitzat i l'actualització del DOM.
+wikimethod: Afegeix mètodes a `$tw.Wiki`.
+wikirule: Regles d'anàlisi sintàctic individuals per a l'analitzador sintàctic principal del WikiText.

@@ -1,0 +1,29 @@
+title: $:/language/Docs/ModuleTypes/
+
+allfilteroperator: Um sub-operador para o operador de filtro "All".
+animation: Animações que podem ser utilizadas com a RevealWidget.
+authenticator: Define como os pedidos são autenticados pelo servidor HTTP integrado.
+bitmapeditoroperation: A bitmap editor toolbar operation.
+command: Comandos que podem ser executados no Node.js.
+config: Informação a ser inserida em `$tw.config`.
+filteroperator: Métodos de filtragem individuais.
+global: Informação global a ser inserida em `$tw`.
+info: Publica a informação do sistema através da [[$:/temp/info-plugin]] pseudo-extensão.
+isfilteroperator: Operandos para o operador de filtragem ''is''.
+library: Tipo de módulo genérico para módulos de JavaScript de usos gerais.
+macro: Definições de macros JavaScript.
+parser: Interpretadores para diferentes tipos de conteúdo.«
+route: Define como são processados padrões individuais de URL pelo servidor integrado.
+saver: Os savers controlam diferentes métodos para guardar ficheiros a partir do navegador.
+startup: Funções de arranque.
+storyview: As story views personalizam as animações e comportamento das ferramentas de listagem.
+texteditoroperation: Uma operação da barra de edição de texto.
+tiddlerdeserializer: Converte diferentes tipos de conteúdo em tiddlers.
+tiddlerfield: Define o comportamento individual de um campo de tiddler.
+tiddlermethod: Adiciona um método ao protótipo `$tw.Tiddler`.
+upgrader: Aplica processamento de actualização durante o processo de importação/actualização de versão.
+utils: Adiciona métodos a `$tw.utils`.
+utils-node: Adiciona métodos específicos para o Node.js a `$tw.utils`.
+widget: As ferramentas widgets contém representação e actualização de DOM.
+wikimethod: Adiciona métodos a `$tw.Wiki`.
+wikirule: Regras individuais de interpretação para o interpretador principal de WikiText.

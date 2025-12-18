@@ -1,0 +1,8 @@
+caption: writers
+created: 20180630180359439
+modified: 20180702155133411
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: writers
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''writers'' is used to specify the security principals with write access to the wiki. See [[WebServer Authorization]] for more details.

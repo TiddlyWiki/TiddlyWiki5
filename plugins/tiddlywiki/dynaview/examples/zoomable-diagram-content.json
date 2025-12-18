@@ -1,0 +1,134 @@
+[
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/TiddlyWiki Architecture",
+		"caption": "TiddlyWiki Architecture",
+		"tags": "[[$:/tags:/ZoomableDiagram]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Browser Architecture",
+		"caption": "Browser Architecture",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/TiddlyWiki Architecture]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Service Workers",
+		"caption": "Service Workers",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Browser Architecture]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Service Bosses",
+		"caption": "Service Bosses",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Service Workers]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Out of Service Workers",
+		"caption": "Out of Service Workers",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Service Workers]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Events",
+		"caption": "Events",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Browser Architecture]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Non Events",
+		"caption": "Non Events",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Events]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Past Events",
+		"caption": "Past Events",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Events]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/DOM",
+		"caption": "DOM",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Browser Architecture]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Nodes",
+		"caption": "Nodes",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/DOM]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Attributes",
+		"caption": "Attributes",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/DOM]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Pathogens",
+		"caption": "Pathogens",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/DOM]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Connection",
+		"caption": "Connection",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/TiddlyWiki Architecture]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/HTTP",
+		"caption": "HTTP",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Connection]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Server Architecture",
+		"caption": "Server Architecture",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/TiddlyWiki Architecture]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Node.js",
+		"caption": "Node.js",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Server Architecture]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/C/C++",
+		"caption": "C/C++",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Node.js]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Quotation Marks",
+		"caption": "Quotation Marks",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Node.js]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Asterisks",
+		"caption": "Asterisks",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Node.js]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Potatoes",
+		"caption": "Potatoes",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Server Architecture]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Carrots",
+		"caption": "Carrots",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Potatoes]]",
+		"text": "<<lorem-ipsum>>"
+	},
+	{
+		"title": "$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Apricots",
+		"caption": "Apricots",
+		"tags": "[[$:/plugins/tiddlywiki/dynaview/zoomable-diagram/Potatoes]]",
+		"text": "<<lorem-ipsum>>"
+	}
+]

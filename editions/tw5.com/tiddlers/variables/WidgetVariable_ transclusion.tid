@@ -1,0 +1,36 @@
+caption: transclusion
+created: 20141002004621385
+modified: 20150221225622000
+tags: Variables [[Core Variables]]
+title: transclusion Variable
+type: text/vnd.tiddlywiki
+
+The <<.def transclusion>> [[variable|Variables]] is set by the <<.wlink TranscludeWidget>> widget to a string that identifies the position of that widget within the [[widget tree|Widgets]].
+
+~TiddlyWiki's core uses it to detect recursive [[transclusion|Transclusion]]. It is also used to implement the <<.mlink qualify>> macro.
+
+The string has the following syntax:
+
+<$railroad text="""
+"{" a "|" b "|" c "|" d "|" e "|" "}"
+"""/>
+
+<ol style="list-style-type: lower-alpha;">
+<li>the title of the [[current tiddler|Current Tiddler]]</li>
+<li>the title of the tiddler being transcluded</li>
+<li>the name of the field being transcluded</li>
+<li>the name of the property name or index being transcluded</li>
+<li>the name of the subtiddler being transcluded from a plugin</li>
+</ol>
+
+Many of the five items are often blank.
+
+In the sidebar, the value of <<.var transclusion>> is:
+
+> `{|$:/core/ui/PageTemplate/sidebar|||}`
+
+When the tiddler <<.tid HelloThere>> is displayed in the story river, <<.var transclusion>> is set to:
+
+> `{HelloThere|HelloThere|||}`
+
+<<.variable-examples "transclusion">>

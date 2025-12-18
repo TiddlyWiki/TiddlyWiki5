@@ -1,0 +1,13 @@
+title: Story Views
+
+A story is a sequence of tiddlers. The current story view shows a single tiddler at a time.
+
+<$button class="tc-btn-big-blue">
+<$action-setfield $tiddler="$:/view" text="classic"/>
+{{$:/core/images/storyview-classic}} Switch to the default story view</$button>
+
+<$button class="tc-btn-big-blue">
+<$action-setfield $tiddler="$:/view" text="zoomin"/>
+{{$:/core/images/storyview-zoomin}} Revert to the presentation story view</$button>
+
+Next, [[Themes]] change the appearance of TiddlyWiki.

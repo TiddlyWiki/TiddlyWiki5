@@ -1,0 +1,83 @@
+caption: scrollable
+created: 20140324223413403
+modified: 20230731100903977
+tags: Widgets
+title: ScrollableWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The scrollable widget wraps its content in a scrollable frame. The user can scroll the contents with the mouse or with touch gestures. Code can use the [[WidgetMessage: tm-scroll]] to programmatically scroll specific DOM nodes into view.
+
+! Content and Attributes
+
+The content of the `<$scrollable>` widget is displayed within a pair of wrapper DIVs. If the inner DIV is larger then it scrolls within the outer one. CSS is used to specify the size of the outer wrapper.
+
+|!Attribute |!Description |
+|class |The CSS class(es) to be applied to the outer DIV |
+|fallthrough |See below |
+|bind |<<.from-version "5.3.2">> Optional title of tiddler to which the scroll position should be bound |
+
+Binding the scroll position to a tiddler automatically copies the scroll coordinates into the `scroll-left` and `scroll-top` fields after scrolling occurs. Conversely, setting those field values will automatically cause the scrollable to scroll if it can.
+
+<$macrocall $name=".note" _="""If a scrollable widget can't handle the `tm-scroll` message because the inner DIV fits within the outer DIV, then by default the message falls through to the parent widget. Setting the ''fallthrough'' attribute to `no` prevents this behaviour."""/> 
+
+! Examples
+
+These examples require the following CSS definitions from [[$:/_tw5.com-styles]]:
+
+```
+.tc-scrollable-demo {
+	border: 1px solid <<colour message-border>>;
+	background-color: <<colour message-background>>;
+	padding: 1em;
+	height: 400px;
+	position: relative;
+}
+```
+
+!! Simple Usage
+
+This wiki text shows how to display a list within the scrollable widget:
+
+<<wikitext-example-without-html "<$scrollable class='tc-scrollable-demo'>
+<$list filter='[tag[Reference]]'>
+
+<$view field='title'/>: <$list filter='[all[current]links[]sort[title]]' storyview='pop'>
+<$link><$view field='title'/></$link>
+</$list>
+
+</$list>
+</$scrollable>
+">>
+
+!! Binding scroll position to a tiddler
+
+[[Current scroll position|$:/my-scroll-position]]: {{$:/my-scroll-position!!scroll-left}}, {{$:/my-scroll-position!!scroll-top}}
+
+<$button>
+<$action-setfield $tiddler="$:/my-scroll-position" scroll-left="100" scroll-top="100"/>
+Set current scroll position to 100,100
+</$button>
+
+<$button>
+<$action-setfield $tiddler="$:/my-scroll-position" scroll-top={{{ [{$:/my-scroll-position!!scroll-top}subtract[10]] }}}/>
+Scroll up by 10 pixels
+</$button>
+
+<$button>
+<$action-setfield $tiddler="$:/my-scroll-position" scroll-top={{{ [{$:/my-scroll-position!!scroll-top}add[10]] }}}/>
+Scroll down by 10 pixels
+</$button>
+
+<<wikitext-example-without-html "<$scrollable class='tc-scrollable-demo' bind='$:/my-scroll-position'>
+<$list filter='[tag[Reference]]'>
+
+<$view field='title'/>: <$list filter='[all[current]links[]sort[title]]' storyview='pop'>
+<$link><$view field='title'/></$link>
+</$list>
+
+</$list>
+</$scrollable>
+">>
+

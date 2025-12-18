@@ -1,0 +1,8 @@
+title: $:/language/Snippets/Table4x3
+tags: $:/tags/TextEditor/Snippet
+caption: טבלה בת 4 עמודות ו 3 שורות
+
+|! |!Alpha |!Beta |!Gamma |!Delta |
+|!One | | | | |
+|!Two | | | | |
+|!Three | | | | |

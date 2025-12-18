@@ -1,0 +1,68 @@
+caption: Images
+created: 20131205160221762
+modified: 20220129152627668
+tags: WikiText [[Working with TiddlyWiki]]
+title: Images in WikiText
+type: text/vnd.tiddlywiki
+
+! Image Formatting
+
+Images can be included in WikiText with the following syntax:
+
+```
+[img[Motovun Jack.jpg]]
+[img[https://tiddlywiki.com/favicon.ico]]
+```
+
+You can also insert image tiddlers from the editor toolbar. Click ''picture'' (<<.icon $:/core/images/picture>>) and select a picture file.
+
+If the image source is the title of an image tiddler then that tiddler is directly displayed. Otherwise it is interpreted as a URL and an HTML `<img>` tag is generated with the `src` attribute containing the URL.
+
+A tooltip can also be specified:
+
+```
+[img[An explanatory tooltip|Motovun Jack.jpg]]
+```
+
+Attributes can be provided to specify CSS classes and the image width and height:
+
+```
+[img width=32 [Motovun Jack.jpg]]
+[img width=32 class="tc-image" [Motovun Jack.jpg]]
+```
+
+Note that attributes can be specified as transclusions or variable references:
+
+```
+[img width={{!!mywidth}} class=<<image-classes>> [Motovun Jack.jpg]]
+```
+
+The image syntax is a shorthand for invoking the ImageWidget.
+
+! Displaying Images via Transclusion
+
+You can also display an image stored in a tiddler by transcluding that tiddler. The disadvantage of this approach is that there is no direct way to control the size of the image.
+
+```
+{{Motovun Jack.jpg}}
+```
+
+Renders as:
+
+{{Motovun Jack.jpg}}
+
+! Images as Links
+```
+<$link to="HelloThere" tooltip="Custom tooltip">{{$:/core/icon}}</$link>
+```
+
+Renders as:
+
+<$link to="HelloThere" tooltip="Custom tooltip">{{$:/core/icon}}</$link>
+
+! Importing Images
+
+Use the <<.button import>> button (under the <<.sidebar-tab Tools>> tab in the sidebar), or drag and drop.
+See [[Importing Tiddlers]] for details.
+
+<<.from-version "5.2.0">> You can also import images by dropping or pasting images into the tiddler editor.

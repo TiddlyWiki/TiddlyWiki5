@@ -1,0 +1,69 @@
+caption: Internet Information Services
+color: #F06292
+created: 20180328120356008
+delivery: DIY
+description: Windows' built-in web server
+method: sync
+modified: 20200507105855400
+tags: Saving [[TiddlyWiki on Node.js]] Windows
+title: Installing TiddlyWiki on Microsoft Internet Information Server
+type: text/vnd.tiddlywiki
+
+\define example-file(title)
+<$transclude tiddler="$title$" mode="block"/> <$macrocall $name="copy-to-clipboard" src={{$title$}}/>
+\end
+
+Microsoft's [[Internet Information Server|https://en.wikipedia.org/wiki/Internet_Information_Services]] (IIS) is the built-in web server for Windows. It can be useful to host TiddlyWiki within IIS in order to take advantage of IIS features like URL rewriting, static file hosting and automatic restarts after a crash.
+
+! 1. Enable IIS
+
+# In Windows, access the Control Panel and click ''Add or Remove Programs''
+# In the Add or Remove Programs window, click ''Add/Remove Windows Components''.
+# Select the ''Internet Information Services (IIS)'' check box
+# Click ''Next'', then click ''Finish''
+
+! 2. Install the required tools
+
+# Install the IIS module ~HttpPlatformHandler from https://www.iis.net/downloads/microsoft/httpplatformhandler
+# Install [[Node.js]] from https://nodejs.org/
+# Install Git from https://git-scm.com/
+#* //optional; only required when using the latest TiddlyWiki release pulled directly from ~GitHub -- see below//
+
+! 3. Install TiddlyWiki and setup a new wiki
+
+# Create a convenient directory for the wiki (e.g. `C:\MyStuff`)
+# Within it, create a file called `C:\MyStuff\package.json` with the content:
+#> <<example-file "Example package.json for IIS">>
+# Also create a file called `C:\MyStuff\web.config` with the content:
+#> <<example-file "Example web.config for IIS">>
+# Create a subdirectory called "wiki" (i.e. `C:\MyStuff\wiki`)
+# Create a file called `C:\MyStuff\wiki\tiddlywiki.info` with the content:
+#> <<example-file "Example tiddlywiki.info for IIS">>
+# Create a subdirectory called "tiddlers" (i.e. `C:\MyStuff\wiki\tiddlers`)
+# Within it, create a file called `C:\MyStuff\wiki\tiddlers\config-tiddlyweb-host.tid` with the content:
+#> <<example-file "Example config-tiddlyweb-host for IIS">>
+#* (See [[the documentation|https://docs.microsoft.com/en-us/iis/extensions/httpplatformhandler/httpplatformhandler-configuration-reference]] for details of the configuration fields for ~HttpPlatformHandler
+# Execute the command `npm install` within the `C:/MyStuff` directory
+
+! 4. Setup the application in IIS
+
+* In Windows, run the IIS Manager application (use the start menu to run `inetmgr.exe`)
+* Locate the server in the ''Connections'' column on the left, and click the disclosure triangle to show its content
+* Open the ''Sites'' folder
+* Right click on the ''Default Web Site'' entry, and select ''Add application..'' from the menu
+* Enter the following information in the dialogue box:
+*# ''Alias'': `MyApp`
+*# ''Physical path'': `C:\MyStuff`
+* Click ''OK''
+
+! 5. Test the application
+
+Test the app by visiting http://localhost/MyApp/ in a browser.
+
+! Notes
+
+* If you require authentication, specify a username and password in the `--listen` command in `web.config`. For example:
+** `arguments=".\node_modules\tiddlywiki\tiddlywiki.js ./wiki-server --listen username=joe &quot;password=bloggs&quot; port=PORT path-prefix=/MyApp">`
+** Take note of the need to use double quotes around non-alphanumeric passwords, and to HTML encode them into `&quot;`
+* If you change the settings in the `web.config` file, or modify the app code, then you'll need to restart the server using the IIS manager application
+

@@ -1,0 +1,42 @@
+title: $:/language/ThemeTweaks/
+
+ThemeTweaks: Réglages du thème
+ThemeTweaks/Hint: Vous pouvez ajuster certains aspects du thème ''Vanilla''.
+Options: Options
+Options/SidebarLayout: Agencement de la barre latérale
+Options/SidebarLayout/Fixed-Fluid: Déroulé fixe, barre latérale extensible
+Options/SidebarLayout/Fluid-Fixed: Déroulé extensible, barre latérale fixe
+Options/StickyTitles: Titres accrochés
+Options/StickyTitles/Hint: Lorsqu'on fait défiler le déroulé, les titres des tiddlers s'accrochent en haut de la fenêtre du navigateur tant que le contenu de leur tiddler est visible. Attention : ne fonctionne pas du tout avec Chrome, et peut causer quelques problèmes de mise en page dans Firefox
+Options/CodeWrapping: Enroule les lignes trop longues à l'intérieur des blocs de code
+Settings: Réglages
+Settings/FontFamily: Famille de polices
+Settings/CodeFontFamily: Famille de polices pour le code
+Settings/EditorFontFamily: Famille de polices pour l'éditeur
+Settings/BackgroundImage: Image de fond de page
+Settings/BackgroundImageAttachment: Arrimage de l'image de fond de page
+Settings/BackgroundImageAttachment/Scroll: Défile avec les tiddlers
+Settings/BackgroundImageAttachment/Fixed: Arrimée à la fenêtre
+Settings/BackgroundImageSize: Taille de l'image de fond de page
+Settings/BackgroundImageSize/Auto: Auto
+Settings/BackgroundImageSize/Cover: Élargie
+Settings/BackgroundImageSize/Contain: Contenue
+Metrics: Tailles
+Metrics/FontSize: Taille police
+Metrics/LineHeight: Hauteur ligne
+Metrics/BodyFontSize: Taille de la police dans le corps des tiddlers
+Metrics/BodyLineHeight: Hauteur de ligne dans le corps des tiddlers
+Metrics/StoryLeft: Gauche du déroulé
+Metrics/StoryLeft/Hint: marge gauche entre le déroulé principal<br>(zone des tiddlers) et le bord gauche de la page
+Metrics/StoryTop: Haut du déroulé
+Metrics/StoryTop/Hint: marge supérieure entre le déroulé pincipal<br>et le bord supérieur de la page
+Metrics/StoryRight: Droite du déroulé
+Metrics/StoryRight/Hint: marge de gauche entre la barre latérale<br>et le bord gauche de la page
+Metrics/StoryWidth: Largeur du déroulé
+Metrics/StoryWidth/Hint: largeur hors tout du déroulé
+Metrics/TiddlerWidth: Largeur des tiddlers
+Metrics/TiddlerWidth/Hint: largeur des tiddlers dans le déroulé
+Metrics/SidebarBreakpoint: Décroché de la barre latérale
+Metrics/SidebarBreakpoint/Hint: largeur minimum de la page à partir de laquelle déroulé principal et barre latérale apparaissent côte à côte
+Metrics/SidebarWidth: Largeur de la barre latérale
+Metrics/SidebarWidth/Hint: largeur de la barre latérale dans l'agencement //déroulé extensible—barre latérale fixe//

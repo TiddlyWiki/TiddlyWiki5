@@ -1,0 +1,8 @@
+title: $:/core/pt-BR/readme
+
+Esta extensão contém os componentes principais da TiddlyWiki compostos por:
+
+* Módulos de código JavaScript
+* Ícones
+* Modelos necessários para criar o interface do usuário da TiddlyWiki
+* Traduções em Inglês Britânico (en-GB) dos textos traduzíveis utilizados pelo núcleo

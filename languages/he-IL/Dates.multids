@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: 
+Date/DaySuffix/10: 
+Date/DaySuffix/11: 
+Date/DaySuffix/12: 
+Date/DaySuffix/13: 
+Date/DaySuffix/14: 
+Date/DaySuffix/15: 
+Date/DaySuffix/16: 
+Date/DaySuffix/17: 
+Date/DaySuffix/18: 
+Date/DaySuffix/19: 
+Date/DaySuffix/2: 
+Date/DaySuffix/20: 
+Date/DaySuffix/21: 
+Date/DaySuffix/22: 
+Date/DaySuffix/23: 
+Date/DaySuffix/24: 
+Date/DaySuffix/25: 
+Date/DaySuffix/26: 
+Date/DaySuffix/27: 
+Date/DaySuffix/28: 
+Date/DaySuffix/29: 
+Date/DaySuffix/3: 
+Date/DaySuffix/30: 
+Date/DaySuffix/31: 
+Date/DaySuffix/4: 
+Date/DaySuffix/5: 
+Date/DaySuffix/6: 
+Date/DaySuffix/7: 
+Date/DaySuffix/8: 
+Date/DaySuffix/9: 
+Date/Long/Day/0: ראשון
+Date/Long/Day/1: שני
+Date/Long/Day/2: שלישי
+Date/Long/Day/3: רביעי
+Date/Long/Day/4: חמישי
+Date/Long/Day/5: שישי
+Date/Long/Day/6: שבת
+Date/Long/Month/1: ינואר
+Date/Long/Month/10: אוקטובר
+Date/Long/Month/11: נובמבר
+Date/Long/Month/12: דצמבר
+Date/Long/Month/2: פברואר
+Date/Long/Month/3: מרץ
+Date/Long/Month/4: אפריל
+Date/Long/Month/5: מאי
+Date/Long/Month/6: יוני
+Date/Long/Month/7: יולי
+Date/Long/Month/8: אוגוסט
+Date/Long/Month/9: ספטמבר
+Date/Period/am: לפנה"צ
+Date/Period/pm: אחה"צ
+Date/Short/Day/0: ראש
+Date/Short/Day/1: שני
+Date/Short/Day/2: שלי
+Date/Short/Day/3: רבי
+Date/Short/Day/4: חמי
+Date/Short/Day/5: שיש
+Date/Short/Day/6: שבת
+Date/Short/Month/1: ינו
+Date/Short/Month/10: אוק
+Date/Short/Month/11: נוב
+Date/Short/Month/12: דצמ
+Date/Short/Month/2: פבר
+Date/Short/Month/3: מרץ
+Date/Short/Month/4: אפר
+Date/Short/Month/5: מאי
+Date/Short/Month/6: יון
+Date/Short/Month/7: יול
+Date/Short/Month/8: אוג
+Date/Short/Month/9: ספט
+RelativeDate/Future/Days: <<period>> ימים מעכשיו
+RelativeDate/Future/Hours: <<period>> שעות מעכשיו
+RelativeDate/Future/Minutes: <<period>> דקות מעכשיו
+RelativeDate/Future/Months: <<period>> חודשים מעכשיו
+RelativeDate/Future/Second: 1 שנייה מעכשיו
+RelativeDate/Future/Seconds: <<period>> שניות מעכשיו
+RelativeDate/Future/Years: <<period>> שנים מעכשיו
+RelativeDate/Past/Days: <<period>> ימים קודם
+RelativeDate/Past/Hours: <<period>> שעות קודם
+RelativeDate/Past/Minutes: <<period>> דקות קודם
+RelativeDate/Past/Months: <<period>> חודשים קודם
+RelativeDate/Past/Second: 1 שנייה קודם
+RelativeDate/Past/Seconds: <<period>> שניות קודם
+RelativeDate/Past/Years: <<period>> שנים קודם

@@ -1,0 +1,36 @@
+created: 20190316163428191
+modified: 20190510133455372
+tags: Features
+title: Performance Instrumentation
+type: text/vnd.tiddlywiki
+
+The core has built-in performance instrumentation for the refresh cycle. See “Performance Instrumentation” on the “Settings” tab of control panel. The wiki will need to be reloaded before it takes effect.
+
+With performance instrumentation switched on, there is additional timing information displayed the browser developer console each time a refresh cycle is triggered. For example:
+
+```
+performance: mainRender: 327.83ms 
+performance: styleRefresh: 9.14ms 
+performance: mainRefresh: 68.10ms 
+```
+
+The information above should be interpreted as follows:
+
+* mainRender is the time taken for the initial display of the page template
+* styleRefresh is the time taken to refresh the page stylesheet
+* mainRefresh is the time taken to refresh the main page template
+
+As an example, try switching between the sidebar tabs to compare how long they take to render.
+
+More detailed information on filter execution timings is also available. With performance instrumentation enabled, type the following JavaScript command in the browser developer console:
+
+```
+$tw.perf.log()
+```
+
+A table is displayed with the following information:
+
+* ''name'' - the string "Filter: " plus the text of the filter
+* ''invocations'' - the number of invocations of the filter since startup
+* ''totalTime'' - the total time in milliseconds spent evaluating this filter since startup
+* ''percentTime'' - the percentage of the execution time of this filter against the total execution time of all filters

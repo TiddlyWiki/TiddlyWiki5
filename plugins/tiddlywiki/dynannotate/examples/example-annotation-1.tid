@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/dynannotate/example-annotation-1
+annotate-tiddler: $:/plugins/tiddlywiki/dynannotate/example-text-1
+annotate-text: memory is transitory.  Yet the speed of action
+annotate-colour: SkyBlue
+annotate-blend-mode: multiply

@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/translators/templates/PaletteColours.multids
+
+{{$:/language/Docs/PaletteColours/||$:/plugins/tiddlywiki/translators/templates/multids}}

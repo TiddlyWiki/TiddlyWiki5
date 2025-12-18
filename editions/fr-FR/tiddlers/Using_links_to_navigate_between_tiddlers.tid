@@ -1,0 +1,52 @@
+created: 20140908093600000
+fr-title: Utiliser des liens pour naviguer entre les tiddlers
+modified: 20150620091824246
+tags: [[Working with TiddlyWiki]]
+title: Using links to navigate between tiddlers
+type: text/vnd.tiddlywiki
+
+Vous pouvez utiliser des liens (habituellement affichés en bleu)pour naviguer d'un tiddler à l'autre. Cliquer sur le lien vers un tiddler vous amène à ce tiddler. Si le tiddler est fermé, il sera ouvert. La particularité de TiddlyWiki est de rendre les liens vers tiddlers aussi accessible que possible. Il y a des liens partout&nbsp;! Voici les principaux endroits où vous pourrez trouver des liens vers d'autres tiddlers dans TiddlyWiki&nbsp;:
+
+* Vous pouvez ''créer un lien'' vers un tiddler, qu'il existe déjà ou pas, dans le contenu de tout tiddler. Voir [[ Liens avec WikiTexte|Linking in WikiText]] pour consulter les différentes façons de créer simplement des liens entre tiddlers.
+
+* Chaque ''tag'' de votre tiddler (comme par exemple le tag ''Working with ~TiddlyWiki'' sous le titre de ce tiddler) contient un lien vers ce tiddler tag,  ainsi que la liste de tous les tiddlers avec ce tag. Ce qui vous permet d'ouvrir un de ces tiddlers.
+
+* Le ''Panneau d'information'' de chaque tiddler vous donne l'accès à 4 onglets contenant un liste additionnelle de tiddlers connexes&nbsp;:
+
+** L'onglet ''Références'' liste tous les tiddlers avec un lien //vers// le tiddler en cours.
+
+** L'onglet ''Étiqueté'' liste tous les tiddlers tagués avec le titre du tiddler en cours.
+
+** L'onglet ''Liste'' liste tous les tiddlers (ou les tiddlers potentiels) mentionnés dans le [[champ liste|ListField]] du tiddler en cours.
+
+** L'onglet ''Listé'' liste tous les tiddlers qui mentionnent le tiddler en cours dans //leurs// champs liste.
+
+* Les ''onglets de la barre de menu'' contiennent plusieurs listes de liens vers des tiddlers&nbsp;:
+
+** L'onglet ''Récents'' liste les 100 tiddlers récemment modifiés, en commençant pas la modification la plus récente.
+
+** L'onglet ''Plus'' propose 8 listes supplémentaires de tiddlers<<:>>
+
+*** ''Tout'' liste tous les tiddlers dans l'ordre alphabétique.
+
+*** ''Tags'' liste tous les tags. Vous pouvez cliquer sur la pilule de tout tag pour accéder à la liste des tiddlers étiquetés par ce tag.
+
+*** ''Manquants'' liste tous les tiddlers qui n'existent pas encore, mais auquels sont liés à d'autres tiddlers. Utile pour trouver les tiddlers que vous aviez prévu de créer, sans en avoir jamais eu le temps.
+
+*** ''Ébauches'' liste tous les tiddlers actuellement en mode ébauche. ~TiddlyWiki considère l'ébauche d'un tiddler comme un tiddler séparé de l'original aussi longtemps que vous le modifiez, aussi, tant que vous modifierez le tiddler titré ''Australie'', il y aura deux tiddlers, ''Australie'' et ''Draft of 'Australie'''. Quand vous clôturerez l'ébauche en confirmant les modifications, ces modifications seront apportées au tiddler original ''Australie''. Aussi, traitez l'onglet ''Ébauches'' comme un moyen de retrouver toutes les ébauches que vous avez commencé.
+
+*** ''Orphelins'' liste tous les tiddlers non connectés à un autre tiddler par des lien, tag ou liste. C'est une assistance utile à l'organisation de vos fichiers - qui montre quels tiddlers doivent y faire l'objet d'une intégration plus soigneuse.
+
+*** ''Types'' liste tous les tiddlers à contenu spécial, comme les images ou l'audio.
+
+*** ''Système'' liste tous les SystemTiddlers.
+
+*** ''Shadows'' liste tous les ShadowTiddlers.
+
+* ''Résultats de la recherche'' est une liste des tiddlers contenant le texte que vous avez saisi dans la zone de recherche.
+
+* Enfin, vous pouvez créer vos propres tiddlers de listes personnalisées par différents moyens<<:>>
+
+** Vous pouvez transclure un [[filtre|Filters]] (voir [[Transclusion grâce à WikiText|Transclusion in WikiText]]). Par exemple, l'ajout de `{{{ [tag[montagne]] }}}` à un tiddler insèrera une liste de tiddlers avec le tag ''montagne''.
+
+** Vous pouvez utiliser le ListWidget. C'est plus compliqué que transclure un [[filtre|Filters]], mais offre plus de souplesse dans l'affichage et la mise en forme d'une liste exactement de la façon dans laquelle vous désirez qu'elle s'affiche.

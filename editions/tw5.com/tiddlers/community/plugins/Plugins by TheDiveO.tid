@@ -1,0 +1,22 @@
+created: 20140910102845245
+modified: 20210106151027524
+tags: [[Community Plugins]]
+title: Plugins by TheDiveO
+type: text/vnd.tiddlywiki
+url: http://thediveo.github.io
+
+A collection of plugins from TheDiveO.
+
+{{!!url}}
+
+[[TheDiveO's Third Flow|http://thediveo.github.io/ThirdFlow/]] plugin construction system:
+
+<<<
+The ~ThirdFlow plugin brings to you another way to develop customisation plugins for TiddlyWiki 5. It is not enforcing a specific development flow, it simply tries to help you. Otherwise, it tries to stay out of your way.
+<<<
+
+[[TheDiveO's FontAwesome|http://thediveo.github.io/TW5FontAwesome/]] plugin:
+
+<<<
+The FontAwesome plugin supports embedding Font Awesome in TiddlyWiki 5. There is no need to install this font into your operating system in order to use it with TiddlyWiki 5. The font is already embedded in this TiddlyWiki 5 customisation plugin instead, so nothing else to install.
+<<<

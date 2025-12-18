@@ -1,0 +1,17 @@
+created: 20140910102845245
+modified: 20140910102845245
+tags: Articles
+title: "Notizen mit TiddlyWiki systemübergreifend nutzen" by Michael Sonntag
+url: http://michaelsonntag.net/notizen-mit-tiddlywiki-systemuebergreifend-nutzen
+
+A quick guide to using TiddlyWiki (written in German)
+
+{{!!url}}
+
+<<<
+Those using multiple different computer platforms (if only PC and Android) knows for certain: You would like to sync notes across computers and thereby be independent of any apps or services. I am concerned at any rate so and so I am constantly looking for the perfect solution.
+
+With TiddlyWiki I found it mostly. As the name suggests, it TiddlyWiki is a Wikisystem. In contrast to all other wikis, TiddlyWiki is a single HTML file that runs in the browser and thus can be used on all modern operating systems. And because there is only one file, it can be very easily via the well-known cloud services (Dropbox, Google Drive, ownCloud) or synchronized with FTP or used on a USB stick.
+<<<
+
+(Translation from German by Google Translate)

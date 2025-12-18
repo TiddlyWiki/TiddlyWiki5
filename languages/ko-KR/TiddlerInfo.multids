@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: 고급
+Advanced/PluginInfo/Empty/Hint: 없음
+Advanced/PluginInfo/Heading: 플러그인 자세한 사항
+Advanced/PluginInfo/Hint: 이 플러그인은 다음 섀도우 티들러를 포함합니다:
+Advanced/ShadowInfo/Heading: 섀도우 상태
+Advanced/ShadowInfo/NotShadow/Hint: <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> 티들러는 섀도우 티들러가 아닙니다
+Advanced/ShadowInfo/OverriddenShadow/Hint: 일반 티들러를 덮어쓰고 있습니다
+Advanced/ShadowInfo/Shadow/Hint: <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> 티들러는 섀도우 티들러입니다
+Advanced/ShadowInfo/Shadow/Source: <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link> 플러그인에 정의되어 있습니다
+Fields/Caption: 필드
+List/Caption: 목록
+List/Empty: 이 티들러는 목록에 없습니다
+Listed/Caption: 나열됨
+Listed/Empty: 이 티들러는 어떠한 것에도 나열되어 있지 않습니다
+References/Caption: 참조
+References/Empty: 이 티들러를 가리키는 것이 없습니다
+Tagging/Caption: 태그함
+Tagging/Empty: 이 티들러로 태그된 것이 없습니다
+Tools/Caption: 도구

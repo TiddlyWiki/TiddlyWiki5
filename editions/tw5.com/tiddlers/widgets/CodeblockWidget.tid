@@ -1,0 +1,39 @@
+caption: codeblock
+created: 20151103160200000
+modified: 20240809074611002
+tags: Widgets
+title: CodeBlockWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ''codeblock'' widget renders text in `<pre>` and `<code>` blocks, causing it to be
+displayed monospace. A language may optionally be specified using the
+''language'' attribute, however syntax highlighting will only be used if the
+[[Highlight Plugin]] is installed.
+
+! Content and Attributes
+
+The content of the `<$codeblock>` widget is ignored.
+
+|!Attribute |!Description |
+|code |Contents of the block to render as code |
+|language |Programming language for syntax highlighting |
+
+The `language` attribute accepts either:
+
+* a Highlight.js language code (see https://highlightjs.org/demo for a list)
+* a MIME type (eg, `text/html` or `image/svg+xml`)
+
+! Examples
+
+Here is an example embedding the contents of a tiddler as a code block.
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$codeblock code={{$:/editions/tw5.com/macro-examples/say-hi}} />' />
+
+A codeblock may also specify a language.
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$codeblock code="SELECT * FROM users WHERE deleted = false" language="sql" />' />
+

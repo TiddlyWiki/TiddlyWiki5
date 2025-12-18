@@ -1,0 +1,12 @@
+title: $:/language/Help/rendertiddler
+description: Rende un nota individual como un specificate ContentType
+
+Rende un nota individual como un specificate ContentType, le standard es `text/html` e salva lo al nomine specificate de file:
+
+```
+--rendertiddler <title> <filename> [<type>]
+```
+
+Como standard, le nomine de file es resolvite relative al subbibliotheca `output` del biblioteca de redactiones. Le commando `--output` pote esser usate pro diriger le resultatos a un altere bibliotheca.
+
+Ulle bibliothecas mancante in le sentiero del nomine de file es create automaticamente.

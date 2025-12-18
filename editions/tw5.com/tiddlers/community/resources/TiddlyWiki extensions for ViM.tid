@@ -1,0 +1,10 @@
+created: 20160820000000000
+modified: 20210106151027617
+tags: [[Other Resources]]
+title: TiddlyWiki extensions for ViM
+type: text/vnd.tiddlywiki
+url: https://github.com/roma0104/vim-tid
+
+[[Vi iMproved|http://www.vim.org/]] syntax file for TiddlyWiki5 `*.tid` files.
+
+{{!!url}}

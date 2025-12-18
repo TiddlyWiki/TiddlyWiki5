@@ -1,0 +1,20 @@
+created: 20140908092600000
+modified: 20160607145200048
+tags: [[Working with TiddlyWiki]]
+title: Navigating between open tiddlers
+type: text/vnd.tiddlywiki
+
+In the default "classic" storyview mode, open tiddlers are displayed in a vertical column called the "story river". There are a number of ways you can navigate the story river - that is, how you can jump back and forth between the open tiddlers.
+
+* The best approach is to ''use the Open tab'' in the sidebar to click on the open tiddler to which you wish to navigate.
+
+** The ''Open'' tab contains a list of all the open tiddlers. You can click on any tiddler in the list to jump to it, or click the "×" next to a tiddler link to close it. There is also a handy <<.icon $:/core/images/close-all-button>> ''close all'' button at the bottom of the list of open tiddlers.
+
+* Another way is to simply ''scroll the page up and down'' using the story river scrollbar to the right.
+
+** Note that when both the story river and the sidebar extend below the visible screen, there will be //two// scrollbars. The outer or far-right scrollbar controls the story river. The inner scrollbar controls the sidebar.
+
+* A clunky approach that many new users try is to ''close tiddlers one by one'' until they get to the tiddler they are looking for. 
+** Closing any tiddler at the top or in the middle of the story river will cause all the tiddlers below it to slide up the river. The tiddler immediately below the tiddler you closed will slide up to take its place.
+
+** Closing the bottom tiddler will close it and the bottom of the tiddler above it will come into view.

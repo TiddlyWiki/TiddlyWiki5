@@ -1,0 +1,8 @@
+title: $:/language/Snippets/Table4x3
+tags: $:/tags/TextEditor/Snippet
+caption: Tableau avec 4 colonnes par trois lignes
+
+|! |!Alpha |!Beta |!Gamma |!Delta |
+|!Un | | | | |
+|!Deux | | | | |
+|!Trois | | | | |

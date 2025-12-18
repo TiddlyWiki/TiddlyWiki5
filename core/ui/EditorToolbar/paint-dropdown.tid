@@ -1,0 +1,16 @@
+title: $:/core/ui/EditorToolbar/paint-dropdown
+
+''{{$:/language/Buttons/Paint/Hint}}''
+
+<$macrocall $name="colour-picker" actions="""
+
+<$action-setfield
+	$tiddler="$:/config/BitmapEditor/Colour"
+	$value=<<colour-picker-value>>
+/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+"""/>

@@ -1,0 +1,29 @@
+title: $:/language/Import/
+
+Imported/Hint: De volgende tiddlers werden geïmporteerd:
+Listing/Cancel/Caption: Annuleer
+Listing/Hint: Deze tiddlers staan klaar voor import:
+Listing/Import/Caption: Importeer
+Listing/Preview: Voorvertoning:
+Listing/Preview/Diff: Verschil
+Listing/Preview/DiffFields: Verschil (Velden)
+Listing/Preview/Fields: Velden
+Listing/Preview/Text: Tekst
+Listing/Preview/TextRaw: Tekst (Ruw)
+Listing/Rename/CancelRename: Annuleer
+Listing/Rename/ConfirmRename: Hernoem tiddler
+Listing/Rename/OverwriteWarning: Een tiddler met deze naam bestaat al
+
+Listing/Rename/Prompt: Hernoem tot:
+Listing/Rename/Tooltip: Hernoem tiddler voor import
+Listing/Select/Caption: Selecteer
+Listing/Status/Caption: Status
+Listing/Title/Caption: Titel
+Upgrader/Plugins/Suppressed/Incompatible: Geblokkeerde plugin (incompatibel of verouderd)
+Upgrader/Plugins/Suppressed/Version: Geblokkeerde plugin (te importeren <<incoming>>  ouder dan bestaande <<existing>>)
+Upgrader/Plugins/Upgraded: Plugin opgewaardeerd van <<incoming>> naar <<upgraded>>
+Upgrader/State/Suppressed: Geblokkeerde tijdelijke statustiddler
+Upgrader/System/Alert: Je staat op het punt om om een tiddler te importeren die een 'core module' tiddler zal overschrijven. Dit wordt niet aanbevolen daar het systeem instabiel kan worden
+Upgrader/System/Suppressed: Geblokkeerde systeemtiddler
+Upgrader/System/Warning: 'Core module' tiddler
+Upgrader/ThemeTweaks/Created: Gemigreerde thema-aanpassing van <$text text=<<from>>/>

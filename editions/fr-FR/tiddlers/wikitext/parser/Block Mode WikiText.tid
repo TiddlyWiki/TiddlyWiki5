@@ -1,0 +1,37 @@
+caption: analyse en mode bloc
+created: 20220110234234616
+fr-title: WikiTexte en mode bloc
+modified: 20220422210106782
+tags: [[WikiText Parser Modes]]
+title: Block Mode WikiText
+type: text/vnd.tiddlywiki
+
+Une partie du <<fr WikiText>> n'est reconnue que quand l'interpréteur est en mode <<gf "bloc">>.
+
+Caractéristiques communes de ce <<fr WikiText>> en mode bloc<<:>>
+
+* Il occupe au moins une ligne entière.
+* Le marqueur de fermeture doit être situé en fin de ligne (dans certains cas la fin de ligne <<.em est>> le marqueur de fermeture)
+
+|!~WikiTexte|!Marqueurs|
+|<<fr "Block Quotes in WikiText">> |Les citations multi-lignes sont encadrées par le texte `<<<` tout seul sur sa ligne<<;>> les citations mono-ligne sont aussi possibles.|
+|<<fr "Code Blocks in WikiText">>|Les blocs de code sont encadrés par le texte <code>&#96;&#96;&#96;</code> tout seul sur sa ligne.|
+|<<fr "Definitions in WikiText">>|Chaque terme est sur sa propre ligne, et chaque définition est sur sa propre ligne.|
+|<<fr "Hard Linebreaks in WikiText">>|Encadrées par le texte `"""` tout seul sur sa ligne.|
+|<<fr "Headings in WikiText">>|Lignes complètes commençant par `!`.|
+|<<fr "Horizontal Rules in WikiText">>|Une ligne ne contenant que le texte `---`.|
+|<<fr "Lists in WikiText">>|Chaque élément de liste est sur sa propre ligne.|
+|<<fr "Paragraphs in WikiText">>|Tout autre texte que le marqueur de début d'une des autres expressions <<fr WikiText>> en mode bloc constitue le début d'un paragraphe. Même un marqueur de début d'expression <<fr WikiText>> en mode en ligne constitue le début d'un paragraphe. L’interpréteur inclut toutes les lignes suivantes dans le paragraphe jusqu'à rencontrer une ligne vide.|
+|<<fr "Styles and Classes in WikiText">>|Encadrés par des lignes commençant par `@@`.|
+|<<fr "Tables in WikiText">>|Chaque ligne du tableau est une ligne de texte qui commence et se termine par `|`.|
+|<<fr "Typed Blocks in WikiText">>|Encadrés par des lignes commençant par `$$`.|
+
+Les expressions <<fr WikiText>> ci-dessus ne sont reconnues qu'en ''mode bloc''. Par contre, le texte <<.em contenu>> à l'intérieur sera interprété en ''mode en ligne'' (les <<fr "Block Quotes in WikiText">> et les <<fr "Styles and Classes in WikiText">> sont les deux expressions pour lesquelles l'interpréteur poursuit l'analyse en ''mode bloc''). L'analyse en ''mode en ligne'' peut amener l'interpréteur à rencontrer un contenu qui le fait [[basculer en mode bloc|WikiText parser mode transitions]].
+
+À la fin de la dernière ligne du bloc, l'interpréteur retourne en ''mode bloc''.
+
+<<.tip 'Note: Les [[fins de ligne forcées|Hard Linebreaks in WikiText]] nécessitent une ligne vide supplémentaire après le `"""` final pour que l&apos;interpréteur retourne en <b>mode bloc</b>.'>>
+
+Si le marqueur de début d'une des expressions de bloc ci-dessus est rencontré alors que l'interpréteur est en ''mode en ligne'', il sera //ignoré// et apparaîtra tel quel dans le résultat.
+
+[[Exemples|Block Mode WikiText (Examples)]]

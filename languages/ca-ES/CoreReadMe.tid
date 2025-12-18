@@ -1,0 +1,8 @@
+title: $:/core/readme
+
+Aquest connector conté  components del nucli de TiddlyWiki, com ara:
+
+* Els mòduls de codi JavaScript,
+* Icones
+* Plantilles necessàries per crear la interfície d'usuari de TiddlyWiki
+* Traduccions en Català ('ca-ES' ') de les cadenes localitzables utilitzades pel nucli

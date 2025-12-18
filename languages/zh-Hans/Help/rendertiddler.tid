@@ -1,0 +1,24 @@
+title: $:/language/Help/rendertiddler
+description: 呈现个别条目为指定的内容类型
+
+(请注意：`--rendertiddler` 命令已被弃用，而支持新的、更灵活的 `--render` 命令)
+
+呈现个别条目为指定的[[内容类型|ContentType]]，默认为 `text/html` 且保存为指定的文件名。
+
+还可以指定一个模板，在这种情况下，"currentTiddler" 变量设为正在呈现的条目 (第一个参数值) 与模板条目合并呈现。
+
+也能可选地指定附加变量的名称与其值。
+
+```
+--rendertiddler <title> <filename> [<type>] [<template>]
+```
+
+默认情况下，文件名被解析为相对于版本文件夹的 `output` 子文件夹。 `--output` 命令可以用于将输出指定到一个不同的文件夹。
+
+自动创建在文件名称的路径中任何缺少的文件夹。
+
+例如，以下命令通过使用核心模板 `$:/core/templates/exporters/JsonFile`，将所有匹配筛选器 `[tag[done]]` 的条目保存到名为 `output.json` 的 JSON 文件。
+
+```
+--rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[tag[done]]"
+```

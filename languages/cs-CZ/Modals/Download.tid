@@ -1,0 +1,11 @@
+title: $:/language/Modals/Download
+type: text/vnd.tiddlywiki
+subtitle: Download changes
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/DownloadingChanges.html
+
+Váš prohlížeč umožnuje pouze ruční ukládání.
+
+Abyste uložili vaši upravenou wiki, klikněte pravým tlačítkem myši na odkaz ke stažení níže a zvolte "Stáhnout soubor" nebo "Uložit soubor" a potom vyberte složku a jméno souboru pro uložení.
+
+Na smartphonech, které neumožnují soubory stahovat, můžete odkaz vložit do záložek a záložky synchronizovat s běžným PC. Odtud pak wiki uložíte normálně.

@@ -1,0 +1,17 @@
+{
+	"description": "TiddlyWiki core tests",
+	"plugins": [
+		"tiddlywiki/jasmine",
+		"tiddlywiki/wikitext-serialize",
+		"tiddlywiki/geospatial"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","test.html","text/plain",
+			"--test"]
+	}
+}

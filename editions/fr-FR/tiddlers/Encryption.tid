@@ -1,0 +1,19 @@
+caption: Cryptage
+created: 20130825160900000
+fr-title: Cryptage
+modified: 20150603142918663
+tags: Features [[Working with TiddlyWiki]]
+title: Encryption
+type: text/vnd.tiddlywiki
+
+Lorsqu'il est utilisé comme un fichier HTML unique, TiddlyWiki5 permet de crypter le contenu à l'aide de la [[Stanford JavaScript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]].
+
+# Allez à l'onglet ''Outils'' sur la barre latérale, et cherchez le bouton avec une icône de cadenas
+
+# Si le bouton a pour intitulé <<gf "//affecter un mot de passe//">>, c'est que le wiki en cours n'est pas crypté. Cliquer sur le bouton vous demandera un mot de passe qui sera utilisé pour les prochains enregistrements
+
+# Si le bouton est intitulé <<gf "//résilier le mot de passe//">>, cela signifie que le wiki en cours est déjà crypté. Cliquer sur le bouton supprimera le mot de passe de sorte que les enregistrements suivants ne seront pas cryptés
+
+# Si vous voulez vérifier que vos données sont bien cryptées, vous pouvez ouvrir le fichier enregistré dans un éditeur de texte (faites attention de ne pas le modifier !)
+
+# Ouvrez le fichier dans votre navigateur. Avant d'afficher le contenu, un mot de passe vous sera demandé.

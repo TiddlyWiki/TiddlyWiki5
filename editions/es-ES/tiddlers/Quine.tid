@@ -1,0 +1,11 @@
+caption: Quine
+created: 20160428142759864
+es-title: Quine
+modified: 20160428143539736
+tags: Definitions
+title: Quine
+type: text/vnd.tiddlywiki
+
+Wikipedia [[define un Quine|https://es.wikipedia.org/wiki/Quine_%28programa%29]] como //un programaque produce su código fuente como única salida//.
+
+~TiddlyWiki es un raro ejemplo de <<.em Quine>> con utilidad práctica: es esa capacidad para producir una copia de su propio código fuente lo que constituye el secreto de su capacidad para almacenar independientemente cambios en sí mismo.

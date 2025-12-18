@@ -1,0 +1,5 @@
+title: TiddlyWiki2ReadMe
+
+\define tv-wikilinks() no
+! Building TiddlyWikiClassic
+{{Building TiddlyWikiClassic}}

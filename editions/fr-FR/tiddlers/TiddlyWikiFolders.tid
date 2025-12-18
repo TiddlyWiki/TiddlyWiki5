@@ -1,0 +1,108 @@
+created: 20130825214200000
+modified: 20141115212205884
+tags: [[TiddlyWiki on Node.js]]
+title: TiddlyWikiFolders
+type: text/vnd.tiddlywiki
+
+En plus des wikis contenus dans un seul fichier, [[TiddlyWiki on Node.js]] reconnaît les wikis conservés dans un dossier contenant un fichier pour chaque tiddler.
+
+! Fichiers et répertoires dans les dossiers ~TiddlyWiki
+
+Les dossiers ~TiddlyWiki peuvent contenir les fichiers et répertoires ci-dessous<<dp>>
+
+* ''tiddlywiki.info'' — fichier JSON contenant les métadonnées du wiki
+* ''\tiddlers'' — répertoire contenant les fichiers de tiddlers constituant le wiki
+* ''\plugins'' — répertoire contenant les [[dossiers de plugins|PluginMechanism]] à inclure dans le wiki.
+
+Seul le fichier ''tiddlywiki.info'' est obligatoire, les dossiers ''tiddlers'' et ''plugins'' étant optionnels. Les autres fichiers et dossiers éventuellement présents à la racine d'un dossier ~TiddlyWiki sont ignorés.
+
+!! Contenu du fichier `tiddlywiki.info`
+
+Le fichier `tiddlywiki.info` présent dans un dossier wiki contient un objet JSON contenant les champs suivants<<dp>>
+
+* ''plugins'' - un tableau de noms de plugins à inclure dans le wiki
+* ''themes'' - un tableau de noms de thèmes à inclure dans le wiki
+* ''languages'' - un tableau de noms de langues à inclure dans le wiki
+* ''includeWikis'' - un tableau de chemins relatifs vers des dossiers wikis externes à inclure dans le wiki
+* ''build'' - une table de hachage de noms de cibles de compilation, chacune étant définie par un tableau de jetons de commande (voir BuildCommand)
+* ''config'' - une table de hachage optionnelle d'options de configuration (voir ci-dessous)
+
+!!! ''includeWikis''
+
+Les entrées du tableau ''includeWikis'' peuvent être soit une chaîne indiquant le chemin relatif vers le wiki à inclure, soit un object contenant les champs suivants<<dp>>
+
+* ''path'' - chemin relatif vers le répertoire du wiki
+* ''read-only'' - donner une valeur //true// pour éviter que les tiddlers du wiki inclus soient modifiés. Les modifications seront écrites dans le répertoire spécifié dans l'option de configuration ''default-tiddler-location'', décrite ci-dessous.
+
+!!! ''build''
+
+Notez que les cibles de compilation des wikis à inclure sont fusionnées si aucune cible du même nom n'est définie dans le fichier `tiddlywiki.info` courant.
+
+!!! ''config''
+
+Les options de configuration comprennent<<dp>>
+
+* ''default-tiddler-location'' — une chaîne de caractères indiquant le chemin vers la localisation par défaut de l'adaptateur //système de fichiers// utilisé pour enregistrer de nouveaux tiddlers (le chemin est résolu relativement au dossier wiki)
+
+* ''retain-original-tiddler-path'' — si la valeur est à `true`, le serveur génèrera un tiddler [[$:/config/OriginalTiddlerPaths]] contenant les chemins de fichiers d'origine de chaque tiddler dans le wiki.
+
+Par exemple<<dp>>
+
+```
+{
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem"
+	],
+	"includeWikis": [
+		"../tw5.com"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"favicon": [
+			"--savetiddler","$:/favicon.ico","favicon.ico",
+			"--savetiddler","$:/green_favicon.ico","static/favicon.ico"]
+	},
+	"config": {
+		"retain-original-tiddler-path": true	
+	}
+}
+```
+
+!! Contenu du dossier `tiddlers`
+
+Tous les [[fichiers de tiddler|TiddlerFiles]] présents dans le dossier `tiddlers` et ses sous-dossiers sont interprétés dans le wiki au démarrage. Les éventuels sous-dossiers sont explorés récursivement.
+
+Les sous-dossiers contenus dans le dossier `tiddlers` peuvent également contenir un fichier JSON nommé `tiddlywiki.files` qui modifiera le traitement par défaut de ce dossier. Le format de ce fichier est illustré par cet exemple tiré du plugin D3<<dp>>
+
+```
+{
+	"tiddlers": [
+		{
+			"file": "d3.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/d3/d3.js",
+				"module-type": "library"
+			},
+			"prefix": "var d3;if($tw.browser){\n",
+			"suffix": "}\nexports.d3 = d3;\n"
+		},
+		{
+			"file": "cloud/d3.layout.cloud.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/d3/d3.layout.cloud.js",
+				"module-type": "library"
+			}
+		}
+	]
+}
+```
+
+Les données JSON consistent en un objet ayant une propriété `tiddlers` qui contient un tableau d'informations sur chaque tiddler à charger dans le wiki. Cette information est constituée de<<dp>>
+
+* `file`: le chemin de fichier relatif ou absolu du fichier de tiddler à inclure
+* `fields`: un objet contenant des champs qui surchargent ceux éventuellement fournis dans le fichier de tiddler
+* `prefix` & `suffix` (optionnels)<<dp>> chaînes de caractères à utiliser pour préfixer et suffixer le contenu texte du fichier de tiddler.

@@ -1,0 +1,44 @@
+created: 20140410103123179
+fr-title: Opérateurs de filtre
+modified: 20150619185306096
+tags: Concepts Filters
+title: FilterOperators
+type: text/vnd.tiddlywiki
+
+\define .operator-rows(filter)
+<$list filter="$filter$"><tr>
+<td><$link to={{!!title}}>{{!!caption}}</$link></td>
+<td>{{!!op-purpose}} <$list filter="[all[current]tag[Common Operators]]">{{$:/core/images/done-button}}</$list></td>
+<td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>
+</tr></$list>
+\end
+
+\define .group-heading(_)
+<tr class="doc-table-subheading"><th colspan="3" align="center">$_$</th></tr>
+\end
+
+Un <<.def "opérateur de filtre">> est un motclé prédéfini attaché à une [[étape|Filter Step]] individuelle d'un [[filtre|Filters]]. Il définit une action particulière de cette étape.
+
+Le tableau suivant liste tous les opérateurs du noyau. Les plus communs sont côchés. La troisième colonne indique quels opérateurs acceptent <$link to="Filter Step">le <code>!</code> préfixe</$link> pour inverser leur expression.
+
+<table>
+<tr>
+<th align="left">Opérateur</th>
+<th align="left">Propose</th>
+<th align="left">Neg</th>
+</tr>
+<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.group-heading "Opérateurs de classement">>
+<<.operator-rows "[tag[Filter Operators]tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.group-heading "Opérateurs de chaine">>
+<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.group-heading "Opérateurs de tag">>
+<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[String Operators]tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.group-heading "Opérateurs Spéciaux">>
+<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[String Operators]!tag[Tag Operators]tag[Special Operators]sort[]]">>
+</table>
+
+La rédaction d'une étape typique s'écrit `[opérateur[paramètre]]`, même si tous les opérateurs ne nécessitent pas de [[paramètre|Filter Parameter]].
+
+La plupart des étapes agissent sur les [[titres d'une sélection|Title Selection]] qu'ils ont en entrée, mais quelques uns [[construisent une sélection entièrement neuve|Selection Constructors]] à la place. Pour des règles précises, voir [[Syntaxe des filtres|Filter Syntax]].
+

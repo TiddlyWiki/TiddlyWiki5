@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Avançado
+Advanced/PluginInfo/Empty/Hint: nenhum
+Advanced/PluginInfo/Heading: Detalhes da extensão
+Advanced/PluginInfo/Hint: Esta extensão contém os seguintes tiddlers-sombra:
+Advanced/ShadowInfo/Heading: Estado da Sombra
+Advanced/ShadowInfo/NotShadow/Hint: O tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> não é um tiddler-sombra
+Advanced/ShadowInfo/OverriddenShadow/Hint: Sobrescrito por um tiddler normal
+Advanced/ShadowInfo/Shadow/Hint: O tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> é um tiddler sombra
+Advanced/ShadowInfo/Shadow/Source: Está definido na extensão <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Fields/Caption: Campos
+List/Caption: Lista
+List/Empty: Este tiddler não tem uma lista
+Listed/Caption: Listado
+Listed/Empty: Este tiddler não é listado por nenhum outro
+References/Caption: Referências
+References/Empty: Nenhum tiddler tem ligações para este
+Tagging/Caption: Etiquetas
+Tagging/Empty: Nenhum tiddler está etiquetado com este
+Tools/Caption: Ferramentas

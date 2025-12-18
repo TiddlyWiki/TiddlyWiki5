@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/static/paragraph
+
+<$list filter="""[all[current]] $(tv-exclude-filter)$ +[limit[1]]""" variable="item">
+
+`<p class="`{{||$:/plugins/tiddlywiki/text-slicer/templates/static/helpers/classes}}`">`
+
+<$view field="text" format="htmlencodedplainwikified"/>
+
+`</p>`
+
+</$list>

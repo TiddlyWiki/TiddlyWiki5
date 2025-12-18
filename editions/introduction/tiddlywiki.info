@@ -1,0 +1,58 @@
+{
+	"description": "A step by step introduction to TiddlyWiki",
+	"plugins": [
+		"tiddlywiki/cecily",
+		"tiddlywiki/codemirror",
+		"tiddlywiki/highlight",
+		"tiddlywiki/katex"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/starlight",
+		"tiddlywiki/seamless",
+		"tiddlywiki/centralised",
+		"tiddlywiki/tight",
+		"tiddlywiki/readonly"
+	],
+	"languages": [
+		"ar-PS",
+		"ca-ES",
+		"cs-CZ",
+		"da-DK",
+		"de-AT",
+		"de-CH",
+		"de-DE",
+		"el-GR",
+		"en-US",
+		"en-PH",
+		"es-ES",
+		"fa-IR",
+		"fr-FR",
+		"he-IL",
+		"hi-IN",
+		"ia-IA",
+		"it-IT",
+		"ja-JP",
+		"ko-KR",
+		"mk-MK",
+		"nl-NL",
+		"pa-IN",
+		"pl-PL",
+		"pt-BR",
+		"pt-PT",
+		"ru-RU",
+		"sk-SK",
+		"sl-SI",
+		"sv-SE",
+		"zh-CN",
+		"zh-Hans",
+		"zh-Hant",
+		"zh-HK",
+		"zh-TW"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"]
+	}
+}

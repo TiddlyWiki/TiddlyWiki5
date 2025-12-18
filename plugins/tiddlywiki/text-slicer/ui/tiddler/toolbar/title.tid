@@ -1,0 +1,30 @@
+title: $:/plugins/tiddlywiki/text-slicer/ui/tiddler/toolbar/title
+tags: $:/tags/TextSlicerToolbar
+
+\define renameProxyTitle()
+$:/state/plugins/tiddlywiki/text-slicer/rename-$(currentTiddler)$
+\end
+
+\define body()
+<div class="tc-text-slicer-rename">
+<$edit-text tag="input" tiddler=<<renameProxyTitle>> placeholder="Rename" default=<<currentTiddler>>/>
+<$reveal type="nomatch" state="""$(renameProxyTitle)$""" text=<<currentTiddler>> default=<<currentTiddler>>>
+<$button>
+<$action-deletetiddler $tiddler=<<renameProxyTitle>>/>
+cancel
+</$button>
+<$button>
+<$action-sendmessage $message="tm-rename-tiddler" from=<<currentTiddler>> to={{$(renameProxyTitle)$}}/>
+<$action-deletetiddler $tiddler=<<renameProxyTitle>>/>
+rename
+</$button>
+<$set name="proxy-title" value={{$(renameProxyTitle)$}}>
+<$list filter="""[<proxy-title>is[tiddler]]""">
+Warning: tiddler already exists
+</$list>
+</$set>
+</$reveal>
+</div>
+\end
+
+<<body>>

@@ -1,0 +1,97 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Pokročilé
+Advanced/Hint: Podrobnější informace o této TiddlyWiki
+Appearance/Caption: Vzhled
+Appearance/Hint: Možnosti přizpůsobení vzhledu vaší TiddlyWiki.
+Basics/AnimDuration/Prompt: Délka animace:
+Basics/Caption: Základní
+Basics/DefaultTiddlers/BottomHint: Použijte &#91;&#91;dvojité hranaté závorky&#93;&#93; pro názvy s mezerami. Nebo můžete zvolit {{zachování toku||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/Prompt: Výchozí tiddlery:
+Basics/DefaultTiddlers/TopHint: Vyberte které tiddlery budou zobrazeny po spuštění:
+Basics/Language/Prompt: Ahoj! Aktuální jazyk:
+Basics/NewJournal/Tags/Prompt: Štítky pro nové deníkové tiddlery
+Basics/NewJournal/Title/Prompt: Název nových deníkových tiddlerů
+Basics/OverriddenShadowTiddlers/Prompt: Počet přepsaných stínových tiddlerů:
+Basics/ShadowTiddlers/Prompt: Počet stínových tiddlerů:
+Basics/Subtitle/Prompt: Podtitul:
+Basics/SystemTiddlers/Prompt: Počet systémových tiddlerů:
+Basics/Tags/Prompt: Počet štítků:
+Basics/Tiddlers/Prompt: Počet tiddlerů:
+Basics/Title/Prompt: Název této ~TiddlyWiki:
+Basics/Username/Prompt: Jméno do podpisu:
+Basics/Version/Prompt: Verze ~TiddlyWiki:
+EditorTypes/Caption: Typy editorů
+EditorTypes/Editor/Caption: Editor
+EditorTypes/Hint: Tyto tiddlery určují, který editor bude použit pro úpravu daného typu tiddleru.
+EditorTypes/Type/Caption: Typ
+Info/Caption: Info
+Info/Hint: Informace o této TiddlyWiki
+LoadedModules/Caption: Nahrané moduly
+LoadedModules/Hint: Toto jsou aktálně nahrané moduly spojené s jejich zdrojovými tiddlery. Kurzívou psaným modulům chybí zdrojový tiddler, obvykle proto, že byli nastaveny během startu.
+Palette/Caption: Paleta barev
+Palette/Editor/Clone/Caption: zkopírovat
+Palette/Editor/Clone/Prompt: Doporučujeme si tuto paletu před úpravami zkopírovat
+Palette/Editor/Prompt: Editace
+Palette/Editor/Prompt/Modified: Tato paleta byla upravena
+Palette/Editor/Reset/Caption: reset
+Palette/HideEditor/Caption: skrýt editor
+Palette/Prompt: Aktivní paleta:
+Palette/ShowEditor/Caption: zobrazit editor
+Plugins/Caption: Pluginy
+Plugins/Disable/Caption: vypnout
+Plugins/Disable/Hint: Vypne tento plugin po obnovení stránky
+Plugins/Disabled/Status: (vypnuto)
+Plugins/Empty/Hint: Žadný
+Plugins/Enable/Caption: zapnout
+Plugins/Enable/Hint: Zapne tento plugin po obnovení stránky
+Plugins/Language/Prompt: Jazyky
+Plugins/Plugin/Prompt: Pluginy
+Plugins/Theme/Prompt: Témata
+Saving/Caption: Ukládání
+Saving/Heading: Ukládání
+Saving/TiddlySpot/Advanced/Heading: Pokročilé nastavení
+Saving/TiddlySpot/BackupDir: Složka záloh
+Saving/TiddlySpot/Backups: Zálohy
+Saving/TiddlySpot/Description: Toto nastavení je použito pouze pro ukládání na http://tiddlyspot.com nebo kompatibilní server
+Saving/TiddlySpot/Filename: Jméno souboru pro upload
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //Výchozí URL serveru je `http://<wikiname>.tiddlyspot.com/store.cgi` a může být změněno na adresu vlastního serveru//
+Saving/TiddlySpot/Password: Heslo
+Saving/TiddlySpot/ServerURL: URL serveru
+Saving/TiddlySpot/UploadDir: Složka pro upload
+Saving/TiddlySpot/UserName: Wiki Jméno
+Settings/AutoSave/Caption: Autosave
+Settings/AutoSave/Disabled/Description: Neukládat změny automaticky
+Settings/AutoSave/Enabled/Description: Ukládat změny automaticky
+Settings/AutoSave/Hint: Automatické ukládání změn během editace
+Settings/Caption: Nastavení
+Settings/Hint: Tato nastavení ovlivňují chování TiddlyWiki.
+Settings/NavigationAddressBar/Caption: Adresní řádek prohlížeče
+Settings/NavigationAddressBar/Hint: Chování adresního řádku během pohybu mezi tiddlery:
+Settings/NavigationAddressBar/No/Description: Neměnit adresní řádek
+Settings/NavigationAddressBar/Permalink/Description: Vložit cílový tiddler
+Settings/NavigationAddressBar/Permaview/Description: Vložit cílový tiddler a tok tiddlerů
+Settings/NavigationHistory/Caption: Historie navigace
+Settings/NavigationHistory/Hint: Chování historie prohížeče během pohybu mezi tiddlery:
+Settings/NavigationHistory/No/Description: Neukládat historii
+Settings/NavigationHistory/Yes/Description: Ukládat historii
+Settings/ToolbarButtons/Caption: Lišta tlačítek
+Settings/ToolbarButtons/Hint: Výchozí zobrazení lišty tlačítek:
+Settings/ToolbarButtons/Icons/Description: Včetně ikon
+Settings/ToolbarButtons/Text/Description: Včetně textu
+StoryView/Caption: Zobrazení toku tiddlerů
+StoryView/Prompt: Aktivní zobrazení:
+Theme/Caption: Téma
+Theme/Prompt: Aktivní téma:
+TiddlerFields/Caption: Pole tiddleru
+TiddlerFields/Hint: Toto je kompletí set polí tiddleru použitých v tété wiki (včetně systémových ale bez stínových)
+Toolbars/Caption: Lišty tlačítek
+Toolbars/EditToolbar/Caption: Editační lištu
+Toolbars/EditToolbar/Hint: Vyberte, které tlačítka budou zobrazena při editaci tiddleru
+Toolbars/Hint: Vyberte, které tlačítka budou zobrazena
+Toolbars/PageControls/Caption: Hlavní lišta
+Toolbars/PageControls/Hint: Vyberte, které tlačítka budou zobrazena na hlavní liště
+Toolbars/ViewToolbar/Caption: Lišta tiddleru
+Toolbars/ViewToolbar/Hint: Vyberte, které tlačítka budou zobrazena při prohlížení tiddleru
+Tools/Download/Full/Caption: Stáhnout kompletní wiki

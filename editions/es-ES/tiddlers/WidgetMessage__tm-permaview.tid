@@ -1,0 +1,17 @@
+caption: tm-permaview
+created: 20140723103751357
+es-title: Mensaje: tm-permaview
+modified: 20160415110056356
+tags: Messages
+title: WidgetMessage: tm-permaview
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-permaview` cambia la dirección del navegador para formar una [[permaview|PermaLinks]]: dirección web que especifica qué tiddlers aparecerán abiertos en el StoryRiver y entre estos, cuál se muestra primero en pantalla (por defecto, el tiddler actual).
+
+Este mensaje permite las siguientes propiedades del objeto `event`:
+
+|!Nombre |!Descripción |
+|param |Título del tiddler de la permaview que primero se mostrará en pantalla |
+|tiddlerTitle |Tiddler actual (usado por defecto si no se especifica otro en el `param`) |
+
+Este mensaje puede generarse con el ButtonWidget y lo procesa el mecanismo StoryMechanism

@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/italic
+list-after: $:/core/ui/EditorToolbar/italic
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/italic
+caption: {{$:/language/Buttons/Italic/Caption}} (Markdown)
+description: {{$:/language/Buttons/Italic/Hint}}
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
+shortcuts: ((italic))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="*"
+	suffix="*"
+/>

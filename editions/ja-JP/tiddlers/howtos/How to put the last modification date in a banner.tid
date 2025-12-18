@@ -1,0 +1,29 @@
+created: 20141020111002211
+modified: 20241021111644842
+original-modified: 20160617125921235
+tags: Learning
+title: How to put the last modification date in a banner
+ja-title: バナーに最終更新日を記載する方法
+type: text/vnd.tiddlywiki
+
+ウィンドウの角のバナーにWikiの最終更新日を表示する方法は次のとおりです
+
+# ~TiddlyWikiに<<.def "Corner ribbon">>[[プラグインをインストールする|Installing a plugin from the plugin library]] 
+# Wikiを保存(<<.icon $:/core/images/save-button-dynamic>>)し、再読み込み(<<.icon $:/core/images/refresh-button>>)します
+# [[$:/_MyRibbon]]という名の新しいTiddlerを作成し、[[$:/tags/PageControls]]のタグを付け、次の内容を含めます:<div>
+
+```
+<div class="github-fork-ribbon-wrapper right">
+<div class="github-fork-ribbon" style="background-color:#DF4848;">
+<$list filter="[!is[system]!has[draft.of]!sort[modified]limit[1]]">
+<$link>
+<$view field="modified" format="date" template="DD mmm YYYY at 0hh:0mm"/>
+</$link>
+</$list>
+</div>
+</div>
+```
+</div>
+# 必要に応じて、背景色の値を好みに合わせて変更します
+# 位置決めクラスを`right`から`right-bottom`に変更することもできます
+## バナーを左上に表示するには、[[$:/tags/PageControls]]の代わりに、[[$:/tags/PageTemplate]]のタグを付け、位置決めクラスを`left`に変更します

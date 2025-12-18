@@ -1,0 +1,38 @@
+title: $:/language/Help/server
+description: Geeft een HTTP serverinterface aan TiddlyWiki
+
+TiddlyWiki5 bevat een simpele server. Hoewel deze server compatibel is met TiddlyWeb, ontbreken zaken voor robuust internetgebruik.
+
+De server kan specifieke tiddlers in het gegeven formaat tonen. Daarnaast kunnen tiddlers in JSON-formaat uitgeleverd worden.
+De ondersteunde HTTP-functies zijn: `GET`, `PUT` en `DELETE`.
+
+```
+--server <poort> <roottiddler> <rendertype> <servetype> <gebruikersnaam> <wachtwoord> <host> <padprefix>
+```
+
+De parameters zijn:
+
+* ''poort'' - poortnummer voor communicatie (standaard "8080")
+* ''roottiddler'' - de tiddler die als basistiddler gebruikt wordt (standaard "$:/core/save/all") 
+* ''rendertype'' - het inhoudstype waarmee de basistiddler getoond wordt (standaard "text/plain")
+* ''servetype'' - het inhoudstype waarmee de basistiddler uitgeleverd wordt (standaard "text/html")
+* ''gebruikersnaam'' - de standaard gebruikersnaam waarmee wijzigingen gesigneerd worden
+* ''wachtwoord'' - optioneel wachtwoord voor simpele verificatie
+* ''host'' - optionele hostnaam waarmee uitgeleverd wordt (standaard "127.0.0.1" oftewel "localhost")
+* ''padprefix'' - optioneel voorvoegsel voor paden
+
+Als een wachtwoord gegeven wordt zal de browser om gebruikersnaam en wachtwoord vragen. N.B. het wachtwoord wordt als platte tekst verzonden en dit is dus niet geschikt voor algemeen internetgebruik.
+
+B.v.:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+De gebruikersnaam en het wachtwoord kunnen als lege "strings" ("") gespecificeerd worden als je "hostnaam" of "padprefix" wil geven zonder wachtwoord:
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+Om meerdere TiddlyWiki servers tegelijkertijd te gebruiken dien je elke server op een aparte poort te zetten.

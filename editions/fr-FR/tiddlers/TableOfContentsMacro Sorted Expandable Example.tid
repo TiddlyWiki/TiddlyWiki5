@@ -1,0 +1,13 @@
+caption: Triée
+created: 20150221201942000
+fr-title: Exemple Table des matières: Triée étendue
+modified: 20150621084211641
+order: 3
+tags: table-of-contents-example
+title: Example Table of Contents: Sorted Expandable
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1"
+eg="""<div class="tc-table-of-contents">
+<<toc-expandable "Contents" "sort[title]">>
+</div>"""/>

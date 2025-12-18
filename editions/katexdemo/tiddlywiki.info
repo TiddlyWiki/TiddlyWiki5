@@ -1,0 +1,24 @@
+{
+	"description": "Demo of the KaTeX plugin",
+	"plugins": [
+		"tiddlywiki/katex"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"includeWikis": [
+	],
+	"build": {
+		"index": [
+			"--render","$:/core/save/all","katexdemo.html","text/plain"],
+		"static": [
+			"--render","$:/core/templates/static.template.html","static.html","text/plain",
+			"--render","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
+			"--render","[!is[system]]","[encodeuricomponent[]addprefix[static/]addsuffix[.html]]","text/plain","$:/core/templates/static.tiddler.html",
+			"--render","$:/core/templates/static.template.css","static/static.css","text/plain"],
+		"external": [
+			"--render","$:/core/save/all-external-js","katexdemo.html","text/plain"
+		]
+	}
+}

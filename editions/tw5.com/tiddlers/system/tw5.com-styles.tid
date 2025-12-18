@@ -1,0 +1,166 @@
+created: 20200507002727378
+modified: 20220719132112414
+tags: $:/tags/Stylesheet
+title: $:/_tw5.com-styles
+type: text/vnd.tiddlywiki
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-hero-heading a.tc-tiddlylink {
+	font-weight: bold;
+}
+
+.tc-double-spaced-list li {
+	padding-bottom: .5em;
+	padding-top: .5em;
+}
+
+.tc-link-info-item {
+    border: 1px solid #ebefcd;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    background: <<colour code-background>>;
+    font-size: 0.8em;
+    line-height: 1.2;
+}
+
+.tc-link-info-item h1 {
+	font-weight: 500;
+	font-size: 16px;	
+}
+
+.tc-scrollable-demo {
+	border: 1px solid <<colour message-border>>;
+	background-color: <<colour message-background>>;
+	padding: 1em;
+	height: 400px;
+	position: relative;
+	overflow: auto;
+}
+
+.tc-improvement-banner {
+	font-size: 0.7em;
+	background: #fcc;
+	padding-left: 5px;
+	margin-top: 6px;
+	margin-bottom: 12px;
+	<<box-shadow "2px 2px 2px rgba(0,0,0,0.4)">>
+}
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+	
+	.tc-improvement-banner {
+	}
+
+}
+
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+
+	.tc-improvement-banner {
+		margin-right: -53px;
+		margin-left: -53px;
+	}
+
+	.tc-improvement-banner:before {
+		display: block;
+		position: absolute;
+		width: 0;
+		height: 0;
+		content: " ";
+		margin-left: -5px;
+		margin-top: -10px;
+		border-top: 5px solid transparent;
+		border-left: 5px solid transparent;
+		border-right: 5px solid #C07E7E;
+		border-bottom: 5px solid #C07E7E;
+	}
+
+}
+
+.tc-improvement-banner svg {
+	width: 1em;
+	height: 1em;
+}
+
+.tc-wrapper-flex {
+	display: flex;
+}
+
+.tc-btn-download {
+	padding: 10px 30px;
+	border-radius: 5px;
+	background: <<colour "download-background">>;
+	border: none;
+	box-shadow: 1px 2px 2px 0 <<colour muted-foreground>>;
+	overflow: hidden;
+	cursor: pointer;
+	font-size: 1.2em;
+	line-height: 1.4em;
+	color: #fff;
+	fill: #fff;
+}
+
+.tc-btn-download:active {
+	box-shadow: none;
+}
+
+/* WikiText rules */
+
+.multi-columns,
+.fourcolumns {
+	display: block;
+	column-count: 4;
+	column-gap: 1em;
+	-moz-column-count: 4;
+	-moz-column-gap: 1em;
+	-webkit-column-count: 4;
+	-webkit-column-gap: 1em;
+}
+
+/* Switch to 2 columns for 780x1280 displays which is 780p */
+@media (max-width: 1279px) {
+	.multi-columns {
+		column-count: 2;
+	}
+}
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+	.multi-columns {
+		column-count: 1;
+	}
+}
+
+.tc-grid-columns {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(25em, 1fr));
+	gap: 1em;
+	width: 100%; /* Ensures container stretches fully */
+}
+
+.tc-grid-columns.tc-grid-columns-2 > div {
+	border-radius: 1em;
+	padding: 1em;
+	background-color: <<colour alert-background>>;
+}
+
+.tc-grid-columns.tc-grid-columns-2 > div:nth-child(odd) {
+	color: <<colour diff-delete-foreground>>;
+	background-color: <<colour diff-delete-background>>;
+}
+
+
+.tc-saving-sidebar-category { margin-bottom:10px; }
+.tc-saving-sidebar-category-title { margin-bottom:5px; font-weight:bold; }
+.tc-saving-sidebar-category-item { margin-left:10px; white-space:nowrap; }
+
+.tc-scary-warning {
+	font-weight: bold;
+	padding: 0 1em;
+	margin-left: -1em;
+	margin-right: -1em;
+	color: #f22;
+	border-radius: 4px;
+	border: 3px solid transparent;
+	background: #ffd;
+	background: linear-gradient(#ffd, #ffd) padding-box, repeating-linear-gradient(-45deg, red 0, red 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+}

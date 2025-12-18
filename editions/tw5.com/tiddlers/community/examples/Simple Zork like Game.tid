@@ -1,0 +1,15 @@
+created: 20141118143636664
+modified: 20141118143636664
+tags: Examples
+title: Simple Zork-like Game by Jed Carty
+url: http://zorklike.tiddlyspot.com
+
+A simple game built with TiddlyWiki, introduced in [[this post|https://groups.google.com/d/topic/tiddlywiki/4aRpZht1vOs/discussion]].
+
+{{!!url}}
+
+<<<
+I decided to see if it was possible to make some sort of game using only the core tiddlywiki with no plugins or javascript. I made a very bare bones zork/interactive fiction type game. It is currently the simplest thing I could make and claim it was a game, but I may add on to it in the future. It uses the 5.1.5 prerelease because the action-setfield widget saved lots of work making macros.
+
+One goal of this is to use nothing besides what is contained in the core tiddlywiki, so there is no javascript and no plugins.
+<<<

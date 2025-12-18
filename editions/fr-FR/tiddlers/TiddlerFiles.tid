@@ -1,0 +1,60 @@
+created: 20130825150000000
+modified: 20141019101433897
+tags: [[TiddlyWiki on Node.js]]
+title: TiddlerFiles
+type: text/vnd.tiddlywiki
+
+Les tiddlers peuvent être conservés dans des fichiers texte dans plusieurs formats différents. Les fichiers contenant un seul tiddler peuvent aussi avoir un fichier .meta auxiliaire formaté comme une suite de paires //nom:valeur//<<dp>>
+
+```
+title: LeTitre
+```
+
+!! Fichiers `.tid` à la ~TiddlyWeb
+
+Ces fichiers consistent en une séquence de paires //nom:valeur//, suivie d'une ligne blanche, puis du texte du tiddler. Par exemple<<dp>>
+
+```
+title: MonTiddler
+
+Voici le texte de mon tiddler.
+```
+
+Notez que de nombreux éditeurs de texte imposent que les fichiers se terminent par un caractère de <<gf "nouvelle ligne">>. Si vous voulez éviter qu'une ligne soit ajoutée à la fin de votre texte, vous pouvez utiliser cette autre syntaxe<<dp>>
+
+```
+title: MonTiddler
+text: Voici le texte de mon tiddler.
+```
+
+//Le ContentType `application/x-tiddler` est utilisé en interne pour ces fichiers//
+
+!! Fichiers `<DIV>` avec l'extension //.tiddler//
+
+Les fichiers `*.tiddler` modernes ressemblent à ça<<dp>>
+
+```
+<div title="AnotherExampleStyleSheet" modifier="blaine" created="201102111106" modified="201102111310" tags="examples" creator="psd">
+<pre>Notez qu'il y a une balise <pre> embarquée, et que les retours à la ligne ne sont pas échappés.
+
+Et bizarrement, aucun codage HTML dans le corps du tiddler.</pre>
+</div>
+```
+
+Ces fichiers `*.tiddler` ne sont donc pas vraiment similaires aux tiddlers trouvés à l'intérieur d'un fichier HTML <<tw>>, dans lequel le corps du texte est encodé en HTML comme attendu.
+
+Les anciens fichiers `*.tiddler` étaient plus proches du format de stockage utilisé par <<tw>> à l'époque<<dp>>
+
+```
+<div tiddler="AnotherExampleStyleSheet" modifier="JeremyRuston" modified="200508181432" created="200508181432" tags="examples">Voici un fichier tiddler à l'ancienne, sans balise &lt;pre&gt; embarquée. \nVoyez comme le corps du tiddler est &quot;codé en HTML&quot; et les sauts de ligne échappés par \\n</div>
+```
+
+//Le ContentType `application/x-tiddler-html-div` est utilisé en interne pour ces fichiers//
+
+!! Fichiers JSON de type ~TiddlyWeb
+
+Ces fichiers sont des tableaux de hachages sans fioritures contenant des champs sous la forme name:value. À présent seuls ces champs standards sont traités<<dp>> `title`, `text`, `created`, `creator`, `modified`, `modifier`, `type` et `tags`.
+
+//Le ContentType `application/json` est utilisé en interne pour ces fichiers//
+
+{{TiddlyWikiFiles}}

@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/innerwiki/template
+
+\define saveTiddlerFilter()
+$:/core
+$:/plugins/tiddlywiki/innerwiki
+$:/plugins/tiddlywiki/railroad
+$:/themes/tiddlywiki/snowwhite
+$:/themes/tiddlywiki/vanilla
+\end
+{{$:/core/templates/tiddlywiki5.html}}

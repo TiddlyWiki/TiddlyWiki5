@@ -1,0 +1,25 @@
+created: 20140416193948971
+modified: 20140901082129041
+title: text/x-tiddlywiki typeblock
+type: text/vnd.tiddlywiki
+
+This is a tiddlywiki5 tiddler containing a Classic type-block.
+
+!!Demo text:
+
+```
+!!Tw5 Here
+
+$$$text/x-tiddlywiki
+!Classic Here
+<<slider $:/temp/xxx slidertest "click me»" "more" >>
+$$$
+```
+!!Demo results:
+
+!!Tw5 Here
+
+$$$text/x-tiddlywiki
+!Classic Here
+<<slider $:/temp/xxx slidertest "click me»" "more" >>
+$$$

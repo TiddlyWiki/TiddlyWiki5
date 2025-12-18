@@ -1,0 +1,46 @@
+created: 20140418142957325
+fr-title: Format des dates
+modified: 20150620074639900
+tags: Features
+title: DateFormat
+type: text/vnd.tiddlywiki
+
+Le [[WidgetView|ViewWidget]] accepte un attribut `template` qui permet de spécifier le format d'affichage des dates. A la chaine formatée se substituent les valeurs suivantes&nbsp;:
+
+|!Format |!Valeur de Substitution |
+|`DDD` |Jour de la semaine en entier (ex, "Monday") |
+|`ddd` |Jour de la semaine abrégé (ex, "Mon") |
+|`DD` |N° du jour dans le mois |
+|`0DD` |Éventuel préfixe d'un zéro |
+|`DDth` |Ajout d'un suffixe |
+|`WW` |ISO-8601 n° de la semaine |
+|`0WW` |Éventuel préfixe d'un zéro |
+|`MMM` |Mois en entier (ex, "July") |
+|`mmm` |Mois abrégé (ex, "Jul") |
+|`MM` |N° du mois |
+|`0MM` |Éventuel préfixe d'un zéro |
+|`YYYY` |Année en entier |
+|`YY` |Année sur 2 chiffres |
+|`wYYYY` |Année complète avec numéro de la semaine |
+|`wYY` |Année abrégée avec numéro de la semaine |
+|`hh` |Heures |
+|`0hh` |Éventuel préfixe d'un zéro |
+|`hh12` |Heures au format 12 heures |
+|`0hh12` |Éventuel préfixe d'un zéro |
+|`mm` |Minutes |
+|`0mm` |Éventuel préfixe d'un zéro |
+|`ss` |Secondes |
+|`0ss` |Éventuel préfixe d'un zéro |
+|`am`/`pm` |Indicateur AM/PM en minuscule |
+|`AM`/`PM` |Indicateur AM/PM en majuscule |
+|`TZD` |Zone horaire |
+|`\x` |Utilisation du caractère d'échappement pour insérer des caractères sans interpréter le formatage |
+
+Notez que tout autre texte sera affiché sans générer de modification, ce qui permet d'utiliser des virgules, les deux points ou tout séparateur utile.
+
+! Exemples
+
+|!Modèles |!Résultats formatés |
+|`DDth MMM wYYYY` |16 Février 2011 |
+|`DDth MMM \M\M\M YYYY` |16 Février MMM 2011 |
+|`DDth mmm hh:mm:ss` |16 Fév 2011 11:38:42 |

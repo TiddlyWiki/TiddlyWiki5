@@ -1,0 +1,38 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: Questo &egrave; un frammento esterno memorizzato al di fuori del file principale TiddlyWiki. Puoi editare le etichette ed i campi ma non puoi editare il contenuto
+Body/Placeholder: Digita il testo di questo frammento
+Body/Preview/Type/DiffCurrent: Differenze rispetto all'attuale
+Body/Preview/Type/DiffShadow: Differenze rispetto al nascosto (se presenti)
+Body/Preview/Type/Output: Output
+Caption: Editor
+Field/Dropdown/Caption: Lista di campi
+Field/Dropdown/Hint: Mostra la lista di campi
+Field/Remove/Caption: Rimuovi campo
+Field/Remove/Hint: Rimuovi il campo
+Fields/Add/Button: Aggiungi
+Fields/Add/Button/Hint: Aggiungi il nuovo campo al frammento
+Fields/Add/Dropdown/System: Campi di sistema
+Fields/Add/Dropdown/User: Campi utente
+Fields/Add/Name/Placeholder: Nome campo
+Fields/Add/Prompt: Aggiungi un nuovo campo:
+Fields/Add/Value/Placeholder: Valore campo
+Shadow/OverriddenWarning: Questo &egrave; un frammento nascosto modificato. Puoi ritornare alla versione di default eliminando questo frammento
+Shadow/Warning: Questo &egrave; un frammento nascosto. Qualsiasi modifica sovrascriverà la versione di default del plugin <<pluginLink>>
+Tags/Add/Button: Aggiungi
+Tags/Add/Button/Hint: Aggiungi etichetta
+Tags/Add/Placeholder: Nome etichetta
+Tags/ClearInput/Caption: Cancella input
+Tags/ClearInput/Hint: Cancella input etichetta
+Tags/Dropdown/Caption: Lista delle etichette
+Tags/Dropdown/Hint: Mostra la lista delle etichette
+Title/BadCharacterWarning: Attenzione: evita di usare uno qualsiasi dei caratteri <<bad-chars>> nei titoli dei frammenti
+Title/Exists/Prompt: Il frammento di destinazione esiste già
+Title/References/Prompt: I seguenti riferimenti a questo frammento non verranno aggiornati automaticamente:
+Title/Relink/Prompt: Aggiorna ''<$text text=<<fromTitle>>/>'' a ''<$text text=<<toTitle>>/>'' nei campi //etichetta// e //lista// degli altri frammenti
+Type/Delete/Caption: Cancella il tipo di contenuto
+Type/Delete/Hint: Cancella il tipo di contenuto
+Type/Dropdown/Caption: Elenca il tipo di contenuto
+Type/Dropdown/Hint: Mostra la lista del tipo di contenuto
+Type/Placeholder: Tipo di contenuto
+Type/Prompt: Tipo:

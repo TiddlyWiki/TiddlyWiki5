@@ -1,0 +1,9 @@
+created: 20150624235333601
+modified: 20150624235400799
+tags: Definitions
+title: Stanford JavaScript Crypto Library
+url: http://bitwiseshiftleft.github.io/sjcl/
+
+The Stanford Javascript Crypto Library is a project by the Stanford Computer Security Lab to build a secure, powerful, fast, small, easy-to-use, cross-browser library for cryptography in Javascript.
+
+{{!!url}}

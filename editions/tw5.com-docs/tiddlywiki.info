@@ -1,0 +1,18 @@
+{
+	"description": "Documentation from tw5.com edition",
+	"plugins": [
+		"tiddlywiki/tw5.com-docs",
+		"tiddlywiki/internals"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--render","$:/core/save/all","index.html","text/plain"],
+		"external": [
+			"--render","$:/core/save/all-external-js","index.html","text/plain"
+		]
+	}
+}

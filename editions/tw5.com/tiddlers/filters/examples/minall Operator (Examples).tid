@@ -1,0 +1,8 @@
+created: 20190611161051108
+modified: 20190611161107239
+tags: [[minall Operator]] [[Operator Examples]]
+title: minall Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "=1 =2 =3 =4 =5 +[minall[]]">>
+<<.operator-example 2 "[tag[HelloThere]get[text]length[]minall[]]">>

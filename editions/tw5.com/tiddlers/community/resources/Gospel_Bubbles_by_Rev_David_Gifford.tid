@@ -1,0 +1,25 @@
+created: 20141122093837330
+modified: 20210106151027081
+tags: Examples
+title: "Gospel Bubbles" by Rev. David Gifford
+type: text/vnd.tiddlywiki
+url: http://giffmex.org/gospels.bubbles.html#Gospels%20Bubbles
+
+Creates bubble maps of Biblical texts.
+
+{{!!url}}
+
+<<<
+This ~TiddlyWiki, which is still under construction, has several features that together make it lightning fast to find passages, types of passages, themes, people, places and images in the New Testament Gospels.  The bubblemaps are color-coded overviews of each Gospel. Each type of passage (miracle story, parable, etc) was assigned a color. Bubblemaps allow you to do three things:
+
+#The ''bubblemaps'' are color-coded overviews of each Gospel. Each type of passage (miracle story, parable, etc) was assigned a color. Bubblemaps allow you to do three things:
+##See how the different types of passages are distributed throughout each Gospel.
+##Hover over passages to see the verses and titles.
+##Click on a passage to open it and see the themes and other data it mentions.
+
+#The ''themes by passage'' indexes are lists of the passages in each Gospel, followed by the themes and other data found in the passage. Clicking on a theme calls up a list of all the passages that mention that theme.
+
+#The ''indexes of themes'' contain lists of links to each theme, person, group, place and image.  Clicking on a theme calls up a list of all the passages that mention that theme.
+
+#There is a ''search window'' hidden in the right hand menu. Use the search window to find passages quickly, by typing things like sower or paralytic. Click the arrows in the upper right of the screen to open the menu and search.
+<<<

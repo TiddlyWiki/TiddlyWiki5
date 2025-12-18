@@ -1,0 +1,11 @@
+title: $:/language/Help/build
+description: Executa automaticamente commandos configurate
+
+Construe le specificate objectivos de construction pro le wiki actual. Si nulle objectivos de construction es specificate, omne objectivos disponibile essera create.
+
+```
+--build <target> [<target> ...]
+```
+
+Objectivos de construction es definite in le file `tiddlywiki.info` de un dossier wiki.
+

@@ -1,0 +1,15 @@
+fr-title: "CouchDB Adaptor", par William Shallum
+created: 20140927155929149
+modified: 20141118215458410
+tags: Resources
+title: "CouchDB Adaptor" by William Shallum
+type: text/vnd.tiddlywiki
+url: https://github.com/wshallum/couchadaptor
+
+Un adaptateur qui permet à <<tw>> de synchroniser les modifications avec une base de données [[CouchDB|http://couchdb.apache.org]].
+
+<<<
+L'adaptateur CouchDB pour TiddlyWiki 5. Nécessite une version de <<tw>> >= 5.1.2.
+
+Fonctionne après des tests limités. Difficile de garantir qu'il gère les conflits correctement.
+<<<

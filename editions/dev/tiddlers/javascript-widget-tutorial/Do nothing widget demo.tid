@@ -1,0 +1,22 @@
+created: 20190201120100249
+modified: 20190201222600576
+tags: 
+title: Do nothing widget demo
+type: text/vnd.tiddlywiki
+
+<!-- The innerwiki doesn't refresh on its own when tiddlers on the outside change, so use the list widget to force a dependency -->
+<$list name=refresh filter=[[donothing.js]get[text]]>
+<$innerwiki width="600" height="400" style="width:100%;">
+	<$data title="$:/DefaultTiddlers" text="[[do nothing widget]]"/>
+	<$data $tiddler=donothing.js/>
+	<$data title="do nothing widget" text="""
+```
+<$donothing/>
+```
+
+Renders as:
+
+<$donothing/>
+"""/>
+</$innerwiki>
+</$list>

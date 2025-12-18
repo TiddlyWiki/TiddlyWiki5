@@ -1,0 +1,7 @@
+created: 20170328211011767
+modified: 20170328211211799
+tags: [[list-links-draggable Macro]] [[Macro Examples]]
+title: list-links-draggable Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg="""<<list-links-draggable tiddler:"Days of the Week">>"""/>

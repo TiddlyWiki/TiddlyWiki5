@@ -1,0 +1,28 @@
+created: 20140909134102102
+modified: 20150203190626000
+tags: [[Filter Operators]] [[Field Operators]] [[Negatable Operators]]
+title: regexp Operator
+type: text/vnd.tiddlywiki
+caption: regexp
+op-purpose: filter the input by pattern-matched field
+op-input: a [[selection of titles|Title Selection]]
+op-suffix: the name of a [[field|TiddlerFields]], defaulting to <<.field title>>
+op-suffix-name: F
+op-parameter: a regular expression
+op-parameter-name: X
+op-output: those input tiddlers in which field <<.place F>> matches <<.place X>>
+op-neg-output: those input tiddlers in which field <<.place F>> does <<.em not>> match <<.place X>>
+
+<<.def "Regular expressions">> are concise strings of characters that denote patterns of text to search for. The format used in ~TiddlyWiki is fully defined in [[this Mozilla reference|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions]].
+
+The [[filter syntax|Filter Run]] makes it impossible to directly specify a regular expression that contains square brackets. The solution is to store the expression in a [[variable|Variables]]. See the <<.operator-examples "regexp" "examples">>.
+
+The parameter <<.place X>> can optionally start or end with a string of flags:
+
+<$railroad text=""" "(?" { ("i"|"m"|:"g") } ")" """/>
+
+Only the `i` flag is generally useful: it forces the different between capital and lowercase letters to be ignored.
+
+If <<.place X>> is empty, <<.op regexp>> will match all of the input tiddlers.
+
+<<.operator-examples "regexp">>

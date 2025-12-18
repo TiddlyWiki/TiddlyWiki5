@@ -1,0 +1,10 @@
+caption: Wiki
+created: 20150622124426731
+modified: 20150622203849923
+tags: Concepts
+title: Wiki
+type: text/vnd.tiddlywiki
+
+Les groupes de tiddlers à intitulé unique sont contenus dans des objets WikiStore.
+
+Le WikiStore gère également les modules de plugin utilisés pour les widgets, les opérations comme la sérialisation, la désérialisation, l'analyse et le rendu tiddlers.

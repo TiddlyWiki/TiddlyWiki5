@@ -1,0 +1,62 @@
+created: 20141120125300000
+fr-title: Personnalisation poussée de la page et des tiddlers
+modified: 20150620081142936
+tags: [[Customise TiddlyWiki]]
+title: Page and tiddler layout customisation
+type: text/vnd.tiddlywiki
+
+Une caractéristique majeure dont plusieurs nouveaux utilisateurs ignorent le degré, est le point jusqu'auquel TiddlyWiki peut être personnalisé, juste par l'ajout, la suppression de [[tags système|SystemTags]] au sein de tiddlers shadow bien choisis ou dans vos propres tiddlers personnalisés. 
+
+* Vous pouvez ajouter et retrancher les fonctionnalités par défaut des tiddlers aussi bien en mode édition que visualisation (au cas où vous trouveriez un sous titre de tiddler distrayant ou que vous souhaitiez avoir un aide-mémoire à visualiser lors de l'édition de tiddler)
+* Vous pouvez ajouter et retrancher les fonctionnalités par défaut de la mise en page globale (peut-être souhaitez-vous ajouter une horloge au menu latéral, ou remplacer les boutons de contrôle de la page par les vôtres
+* Vous pouvez aussi revoir l'ordre dans lequel les fonctionnalités sont affichées (comme mettre les tags au dessus des titres des tiddlers, ou le sous-titre de votre TiddlyWiki sous les boutons de contrôles de la page)
+
+Une fois que vous saurez ce que vous faites, tout cela sera vraiment plutôt facile à réaliser.
+
+! Ajout de tiddlers sur-mesure dans l'interface utilisateur
+
+Vous pouvez aussi créer tout tiddler de votre choix avec le [[TagSystème|SystemTag]] approprié, il apparaitra en son lieu et place. Par exemple, si vous créez un tiddler 'Rappel automatique', ajouter le texte 'C'est un aide-mémoire' et étiquetez le `$:/tags/EditTemplate`, la phrase 'C'est un aide-mémoire' apparaitra dans chaque tiddler lors de son édition.
+
+Quand vous afficherez de nouveaux tiddlers dans des tiddlers ou dans la mise en page générale, vous aurez probablement à les repositionner de sorte qu'ils apparaissent exactement où vous le souhaitez. Pour ce faire, modifiez le bon tiddler shadow muni du préfixe `$:/tags/`, et insérez-y le titre de votre tiddler dans le champ list, au bon endroit. Par exemple, si la phrase 'C'est un aide-mémoire', de l'exemple au-dessus, doit s'afficher au-dessus de l'éditeur de tags dans le mode édition, modifiez le tiddler $:/tags/EditTemplate, sélectionnez le champ 'list' field, et insérez `[[Rappel automatique]]` juste avant `$:/core/ui/EditTemplate/tags`. 
+
+! Création de nouveaux boutons pour le [[MenuOutilVisu|ViewToolbar]] et les contrôles de page
+
+Imaginons que vous ayez un tiddler squelette appelé 'Modèle Recette', et que vous souhaitiez un bouton dans le tiddler [[MenuOutilVisu|ViewToolbar]] pour créer des tiddlers 'nouvelle recette' à la demande. Cela nécessite les étapes suivantes<<:>>
+
+# Pour illustrer votre bouton, si aucune des images du noyau (tiddlers shadow préfixés par $:/core/images/ ) n'est à votre convenance, vous devrez la créer ou en obtenir une au format SVG (par exemple, une de celles de http://flaticon.com), glissez-la dans votre fichier pour la transformer en tiddler, modifiez le tiddler et ajustez sa hauteur et sa largeur à 22px
+#Passons au tiddler contenant votre tiddler. Créez-le, titrez-le et ajoutez le code du bouton (voir le code ci-dessous par exemple, en l'adaptant à vos besoins si nécessaire) Étiquetez-le par [[$:/tags/ViewToolbar]]
+#Contrôlons la visibilité de votre tiddler dans la barre d'outil par la création d'un tiddler à titrer [[$:/config/ViewToolbarButtons/Visibility/Recette]]. Saisissez `show`dans la zone texte et sauvegardez.
+#Enfin, positionnons le bouton proprement. Ouvrez le tiddler $:/tags/ViewToolbar et insérez le titre de votre tiddler bouton (cf. titre étape précédente) dans le champ field au bon endroit.
+
+```
+\define newHereButtonTags()
+[[$(currentTiddler)$]]
+\end
+\define newHereButton()
+<$button class=<<tv-config-toolbar-class>>>
+<$action-sendmessage
+  $message="tm-new-tiddler"
+$param="TITLE DE VOTRE BOUTON SQUELETTE"
+title="New tiddler"
+  tags=<<newHereButtonTags>> />
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{TITRE DE VOTRE TIDDLER IMAGE SVG}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text="CAPTION DE VOTRE BOUTON"/></span>
+</$list>
+</$button>
+\end
+
+<<newHereButton>>
+```
+
+! Supprimer les tiddlers shadows de l'interface utilisateur
+
+Dans l'onglet 'Plus' > option 'Shadows' sont listés tous les tiddlers shadows. Dans cette liste se trouvent plusieurs tiddlers préfixés `$:/core/ui/`. Ce sont les tiddlers du noyau définissant l'interface utilisateur. Ces tiddlers sont étiquetés par des [[Tags système|SystemTags]], supprimer ou ajouter ces tags modifie la présentation de la page et des tiddlers.
+
+Par exemple, $:/core/ui/SideBar/More est le tiddler correspondant à l'onglet 'plus' du menu latéral, étiqueté par le [[Tag système|SystemTags]] `$:/tags/SideBar` de façon à apparaître dans le menu latéral. Supprimer ce tag de ce tiddler supprime le tag du menu, et lui réajouter ce tag le fera y réapparaître. 
+
+Vous pouvez suivre le même procédé pour tout tiddler du noyau définissant l'interface utilisateur et donc préfixé par $:/core/ui/. Ainsi encore, supprimer le [[Tag Système|SystemTags]] `$:/tags/ViewTemplate` du tiddler `$:/core/ui/ViewTemplate/subtitle` fera disparaître les sous-titres  de tous les tiddlers.
+
+Modifier un tiddler shadow de cette façon remplacera la valeur par défaut. Pour réinitialiser, il suffit de supprimer le tiddler modifié pour restaurer le tiddler shadow sous-jacent.

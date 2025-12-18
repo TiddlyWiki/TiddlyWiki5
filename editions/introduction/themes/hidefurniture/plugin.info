@@ -1,0 +1,9 @@
+{
+	"title": "$:/themes/tiddlywiki/hidefurniture",
+	"name": "Hide Furniture",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "Hides the normal user interface, presentational",
+	"dependents": ["$:/themes/tiddlywiki/centralised"]
+}

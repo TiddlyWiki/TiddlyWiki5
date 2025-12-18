@@ -1,0 +1,6 @@
+title: Hidden Setting: ViewTemplate and EditTemplate
+tags: [[Hidden Settings]]
+created: 20190704053532718
+modified: 20190704053532718
+
+The configuration Tiddlers $:/config/ui/ViewTemplate and $:/config/ui/EditTemplate can be used to change the ''~ViewTemplate'' respectively the ''~EditTemplate'' used in the [[Story PageTemplate|$:/core/ui/PageTemplate/story]]

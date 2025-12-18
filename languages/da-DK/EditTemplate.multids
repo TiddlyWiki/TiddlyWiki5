@@ -1,0 +1,25 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: Dette er en indlejret tiddler hentet fra et eksternt tiddlywikidokument. Du kan redigere tags og felter men kan ikke direkte redigere selve  indholdet
+Body/Placeholder: Skriv denne tiddlers tekst
+Field/Remove/Caption: fjern felt
+Field/Remove/Hint: Fjern felt
+Fields/Add/Button: tilføj
+Fields/Add/Dropdown/System: System felter
+Fields/Add/Dropdown/User: Bruger felter
+Fields/Add/Name/Placeholder: felt navn
+Fields/Add/Prompt: Tilføj et nyt felt:
+Fields/Add/Value/Placeholder: feltværdi
+Shadow/OverriddenWarning: Dette er en ændret skyggetiddler. Du kan vende tilbage til standardversionen ved at slette denne tiddler
+Shadow/Warning: Dette er en skyggetiddler. Enhver ændring vil overskrive standardversionen
+Tags/Add/Button: tilføj
+Tags/Add/Placeholder: tagnavn
+Tags/Dropdown/Caption: tagliste
+Tags/Dropdown/Hint: Vis tagliste
+Title/BadCharacterWarning: Advarsel: undgå alle at bruge nogen af disse bogstaver <<bad-chars>> i tiddler titler
+Type/Delete/Caption: slet indholdstype
+Type/Delete/Hint: Slet indholdstype
+Type/Dropdown/Caption: indholdstypeliste
+Type/Dropdown/Hint: Vis indholdstypeliste
+Type/Placeholder: indholdstype
+Type/Prompt: Type:

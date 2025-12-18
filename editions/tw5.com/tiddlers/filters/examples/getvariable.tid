@@ -1,0 +1,7 @@
+created: 20190330100101453
+modified: 20190330100101453
+tags: [[getvariable Operator]] [[Operator Examples]]
+title: getvariable Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[currentTiddler]getvariable[]]" "returns the value of the variable ''currentTiddler''">>

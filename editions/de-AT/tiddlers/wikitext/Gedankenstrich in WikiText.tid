@@ -1,0 +1,12 @@
+caption: Gevier
+created: 20131205160641986
+creator: pmario
+modified: 20140922122858062
+modifier: ChrisK
+tags: WikiText
+title: Gedankenstrich in WikiText
+type: text/vnd.tiddlywiki
+
+Der [[Halbgeviertstrich]], englisch "n-dash", kann mit 2 "minus" Zeichen erzeugt werden. `--` ergibt: --
+
+Der [[Geviertstrich]], englisch "m-dash", wird mit 3 "minus" Zeichen erzeugt: `---` ergibt: ---

@@ -1,0 +1,9 @@
+title: HelloThere
+
+This is a demo of the ''xlsx-utils'' plugin for TiddlyWiki.
+
+{{$:/plugins/tiddlywiki/xlsx-utils/readme}}
+
+!! Demos
+
+* [[Presidents Demo]]

@@ -1,0 +1,54 @@
+caption: Estilos CSS con etiquetas
+created: 20141001132300000
+es-title: Cómo aplicar estilos CSS mediante etiquetas
+modified: 20160419152957461
+tags: Learning
+title: How to apply custom styles by tag
+type: text/vnd.tiddlywiki
+
+Se pueden aplicar estilos personalizados a tiddlers con una pestaña particular definiendo una clase CSS con el nombre `tc-tagged-<etiqueta>`.
+
+Por ejemplo: Para que una serie de tiddlers con la etiqueta <<.tag ~VistaNocturna>> se muestren con un esquema de colores apropiado para leer con poca luz, tendremos que [[crear una hoja de estilos|Using Stylesheets]] que defina la clase `tc-tagged-VistaNocturna`, del modo siguiente: 
+
+```
+.tc-tagged-VistaNocturna {
+	background-color:black;
+	color: orange;
+	padding: 35px 35px;
+}
+
+.tc-tagged-VistaNocturna .tc-tiddler-body {
+	font-size: 1.5em;
+}
+```
+La clase `tc-tagged-VistaNocturna` se aplica a todo el tiddler y no sólo al texto. Si queremos referirnos sólo a una parte del tiddler, se puede habilitar el selector CSS, como hemos hecho aquí con `.tc-tagged-NightReader .tc-tiddler-body`.
+
+Nótese que las etiquetas que contengan espacios o caracterres no alfanuméricos, para que CSS los interprete, tendrán que convertirse según la codificación URI, lo que hace que la clase CSS resultante sea difícil de predecir y más proclive a errores.
+
+Por ejemplo:
+
+|!Etiqueta |!Nombre de clase generado |
+|`$:/mytag` |`tc-tagged-%24%3A%2Fmytag` |
+|`Doctor Who` |`tc-tagged-Doctor%20Who` |
+|`£35.23` |`tc-tagged-%C2%A335.23` |
+
+Aunque ~TiddlyWiki generará las etiquetas, para usarlas en la hoja de estilos se tendrá que usar la correspondiente equivalencia en [[código porciento|https://es.wikipedia.org/wiki/C%C3%B3digo_porciento]]:
+
+```
+.tc-tagged-Doctor\%20Who {
+    background-image: url(./tardis_back.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    color:#FBFBFB;
+}
+```
+Hay disponible una función en ~JavaScript para realizar la conversión:
+
+```
+$tw.utils.tagToCssSelector("$:/tags/Stylesheet")
+```
+...que genera la siguiente respuesta:
+
+```
+tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet
+```

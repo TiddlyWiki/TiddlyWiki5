@@ -1,0 +1,15 @@
+{
+	"description": "TiddlyWiki upgrader edition",
+	"plugins": [
+		"tiddlywiki/upgrade"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"upgrade": [
+			"--makelibrary",
+			"--rendertiddler","$:/core/save/all","upgrade.html","text/plain"]
+	}
+}

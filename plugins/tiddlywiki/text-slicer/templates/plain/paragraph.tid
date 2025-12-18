@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/plain/paragraph
+
+\define body()
+<div>
+
+<$list filter="""[all[current]] $(tv-exclude-filter)$ +[limit[1]]""" variable="item">
+
+<$transclude/>
+
+</$list>
+
+</div>
+\end
+
+<<body>>

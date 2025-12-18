@@ -1,0 +1,27 @@
+created: 20150124182117000
+fr-title: Séquence d'un filtre
+modified: 20150621104254554
+tags: [[Filter Syntax]]
+title: Filter Run
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+( "[" { [[etape|"Filter Step"]] } "]"
+  |
+  [:{/"tout sauf [ ] ou Espacevierge"/}]
+  |
+  '"' [:{/'tout sauf "'/}] '"'
+  |
+  "'" [:{/"tout sauf '"/}] '"'
+)
+"""/>
+
+Une <<.def séquence>> se compose d'[[étapes|Filter Step]]. Elle génère une [[sélection|Title Selection]]. Un ensemble de séquences forme une vaste [[expression filtre|Filter Expression]].
+
+Les étapes sont traitées de gauche à droite. Ce qui entre dans la première étape correspond à ce qui entre dans la séquence. Pour chaque étape suivante, l'entrée provient de la sortie de l'étape précédente.
+
+{{Selection Constructors}}
+
+Les trois options basses du diagramme correspondent aux syntaxes `SalutàTous`, `"SalutàTous"`, `'SalutàTous'` et `"Opérateurs de Filtre"`. Ce sont des abrégés de `[title[...]]`.
+
+Les options cotées existent pour tenir compte des titres contenant des crochets, comme, `"Un Tiddler [[[[Peucourant]]]]"`.

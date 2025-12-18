@@ -1,0 +1,8 @@
+title: $:/language/Help/editions
+description: Listar möjliga utgåvor av TiddlyWiki
+
+Listar namnen och beskrivningen över de möjliga utgåvorna. Du kan skapa en ny wiki av en speficik utgåva med `--init` kommandot.
+
+```
+--editions
+```

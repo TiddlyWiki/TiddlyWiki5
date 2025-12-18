@@ -1,0 +1,17 @@
+title: $:/language/Help/setfield
+description: Prepara els tiddlers externs per que puguin ser utilitzats
+
+//Tingueu en compte que aquesta ordre és experimental i podria canviar abans d'estar acabada//
+
+Estableix el camp d'un grup de tiddlers al resultat de wikificar un tiddler plantilla indicat per la variable `currentTiddler`.
+
+```
+--setfield <filtre> <nom-del-camp> <plantilla-del-títol> <tipus>
+```
+
+Els paràmetres són:
+
+* ''filtre'' - filtre que identifica els tiddlers afectats
+* ''nom-del-camp'' - el camp a modificar (per omissió "text")
+* ''plantilla-del-títol'' - el tiddler a wikificar del camp indicat. Si està en blanc o no hi és llavors el camp indicat es suprimirà
+* ''tipus-de-text'' - el tipus de text que cal generar (per omissió "text/plain"; es possible utilitzar "text/html" per incloure etiquetes HTML)

@@ -1,0 +1,32 @@
+created: 20171118194518819
+modified: 20171118194518819
+tags: Learning
+title: How to Customize TiddlyDesktop
+type: text/vnd.tiddlywiki
+
+!! Prelude/caution:
+
+Before experimenting with TiddlyDesktop internals you should find the location of the “user configuration folder” - click the “Settings” button on the main TiddlyDesktop window, and then click the button “Open user config folder”. Then move up to locate the parent folder, which should be called “TiddlyDesktop”. If things go wrong, you can reset TiddlyDesktop to its factory state by deleting this entire folder.
+
+Click the `Backstage` button on the main TiddlyDesktop window to open the backstage wiki. This is a Node.js-like instance of TiddlyWiki that runs the UI and logic of TiddlyDesktop.
+
+!! How do I get rid of the "Add a ~TiddlyWiki Folder" button.
+
+Within the backstage wiki, locate the tiddler `WikiListToolbar` (there’s a link in HelloThere). Click it into edit mode and you’ll see the wikitext for all the toolbar buttons. If you make modifications and click “done” then the changes will immediately be reflected in the main TiddlyDesktop window.
+
+!! How would I change the "advanced" button to the "reveal backups" button.
+
+You can copy the code for the “reveal backups” button from the tiddler `$:/TiddlyDesktop/Settings` and paste it into `WikiListToolbar`.
+
+!! How do I change the colors?
+
+Just as usual in TiddlyWiki: you can use the palette, or define your own custom CSS.
+
+!! How do I change the order in which the tiddlers are listed (which appears to be alphabetical)?
+
+Open the `WikiList` tiddler, edit it, and scroll to the end. Then change the `<$list>` widget inside the ''wikilist'' macro:
+
+```
+<$list filter="[tag[wikilist]sort[title]!has[draft.of]]" emptyMessage="Add a ~TiddlyWiki file or folder to get started. Click the buttons above to browse, or drag and drop from your file Explorer/Finder" storyview="pop">
+```
+

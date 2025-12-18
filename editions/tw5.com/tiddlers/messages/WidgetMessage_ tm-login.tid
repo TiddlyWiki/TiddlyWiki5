@@ -1,0 +1,12 @@
+created: 20140811112445887
+modified: 20201025163134940
+tags: Messages
+title: WidgetMessage: tm-login
+type: text/vnd.tiddlywiki
+caption: tm-login
+
+The login message prompts the user for a username and password and attempts to login to the current serverside host. The tiddler [[$:/status/IsLoggedIn]] reflects the current login status with the values "yes" or "no", and [[$:/status/UserName]] reflects the current username.
+
+The login message is handled by the TiddlyWiki core SyncMechanism which invokes the current [[SyncAdaptorModule|SyncAdaptorModules]] (typically the ''tiddlywiki/tiddlywebadaptor'' plugin).
+
+<<.from-version "5.1.23">> The login message can optionally accept parameters called ''username'' and ''password'' that immediately attempts to login with the specified credentials without displaying the prompt

@@ -1,0 +1,11 @@
+created: 20150619162223882
+modified: 20150619162405141
+tags: [[Customise TiddlyWiki]]
+title: Hidden Settings
+type: text/vnd.tiddlywiki
+
+The most useful configuration settings for TiddlyWiki are exposed in the [[control panel|$:/ControlPanel]] but some more advanced settings do not have a full user interface. Instead, the underlying configuration tiddlers are edited directly.
+
+To change these settings on an empty TiddlyWiki, you can drag the links to the individual configuration tiddlers directly from this wiki into yours.
+
+<<list-links "[tag[Hidden Settings]]">>

@@ -1,0 +1,45 @@
+caption: tabs
+created: 20131228162203521
+modified: 20240627201724476
+tags: Macros [[Core Macros]]
+title: tabs Macro
+type: text/vnd.tiddlywiki
+
+The <<.def tabs>> [[macro|Macros]] presents a [[selection of tiddlers|Title Selection]] as a set of tabs that the user can switch between.
+
+The tabs display the <<.field caption>> field of a tiddler if it has one, or the tiddler's title otherwise. If specified, the tabs display the <<.field tooltip>> field of a tiddler as the respective button tooltip.
+
+By default the tabs are arranged horizontally above the content. To get vertical tabs, set the <<.param class>> parameter to <<.value tc-vertical>>.
+
+!! Parameters
+
+;tabsList
+: A [[filter|Filters]] selecting which tiddlers to include
+;default
+: The title of the tiddler whose tab is to be selected by default, if the [[state tiddler|StateMechanism]] doesn't exist. The state tiddler takes precedence over this setting
+;state
+: The prefix for the title of a [[state tiddler|StateMechanism]] for noting the currently selected tab, defaulting to `$:/state/tab`. It is recommended that this be a [[system tiddler|SystemTiddlers]]
+;class
+: Additional [[CSS|Cascading Style Sheets]] classes for the generated `div` elements. Multiple classes can be separated with spaces
+;template
+: Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the content of the selected tab
+;buttonTemplate
+: Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the content of the button for the selected tab
+;retain
+: Optionally, "yes" specifies that the content of the tabs should be retained when switching to another tab, avoiding re-rendering it (this can be useful to avoid video or audio sources unexpectedly resetting)
+;actions
+: Optionally, actions can be specified that are triggered when changing a tab. Within the actions, the title of the selected tab is available in the <<.var currentTab>> variable and the `currentTiddler` variable from outside the tabs macro is available in the <<.var save-currentTiddler>>
+;explicitState
+: Optionally, an explicit state title can be specified. It will be preferred over the internally computed (qualified) state title
+
+Within the template, the title of the selected tab is available in the <<.var currentTab>> variable.
+
+The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macro. This can put you in trouble if the list of tabs includes tiddlers that depend on the value of the <<.vlink currentTiddler>>, for example tiddlers listing children based on its own name. To overcome this problem you can make use of the <<.vlink currentTab>> variable, which can be used in a [[TemplateTiddler|TemplateTiddlers]] such as the following:
+
+```
+<$tiddler tiddler=<<currentTab>>>
+<$transclude mode="block" />
+</$tiddler>
+```
+
+<<.macro-examples "tabs">>

@@ -1,0 +1,20 @@
+chapter.of: Microkernel Architecture
+created: 20140709111543896
+modified: 20140715083802104
+sub.num: 2
+tags: doc new [[Microkernel Architecture]]
+title: Datamodel
+
+The micro-kernel creates a TiddlyWiki specific data-structure called tiddler. Here you have to separate the different definition of tiddlers. In the architectural view a tiddler is a JavaScript object holding some data. In the overall concept a tiddler is similar to a wiki page in a normal wiki application like wikipedia. In this section we describe the architectural view of a tiddler. The listing below shows the JSON representation of a tiddler object. During the runtime of the TiddlyWiki everything is saved an object like this. Without any plug-in the architecture is not able to persist any kind of data. All the data is stored in a store. This store is a JavaScript object. This store is constructed like a Map with a bunch of key value pairs. Every tiddler has its name as the key in the map and the JavaScript-Object as the value. The tiddler concept is the main data-model within TiddlyWiki, everything from data up to plug-ins is stored as a tiddler.
+
+```javascript
+{"fields":{
+   "text":"example Text",
+   "title":"Infrastruktur",
+   "tags":["vs"],
+   "modified":"2014-07-01T16:25:01.230Z",
+   "myField":"myFieldValue",
+   "created":"2014-07-01T16:22:10.673Z"
+   }
+}
+```

@@ -1,0 +1,4 @@
+title: $:/_Startup/SetLanguage
+tags: $:/tags/StartupAction
+
+<$action-setfield $tiddler="$:/language" text={{{ [[$:/languages/en-GB]] [plugin-type[language]sort[description]removeprefix[$:/languages/]] +[prefix{$:/info/browser/language}] ~[[en-GB]] +[addprefix[$:/languages/]] }}}/>

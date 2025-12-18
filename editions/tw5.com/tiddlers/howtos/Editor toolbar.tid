@@ -1,0 +1,20 @@
+created: 20160817093933820
+modified: 20190118161349442
+tags: Features [[Formatting text in TiddlyWiki]]
+title: Editor toolbar
+type: text/vnd.tiddlywiki
+
+!! How it Works
+
+The editor toolbar is a toolbar that helps you format text easily. It appears above the text input field in a tiddler when in edit mode. It has a similar appearance to desktop text editors like Microsoft Word or Libre Office Write. 
+
+!! What the Editor toolbar does
+When you press the button for a function, it will insert the WikiText in the text field. As an example, if you press the bold button it will insert `'' ''`. 
+
+If you ''highlight'' a piece of text the markup code will automatically go around the highlighted text.
+
+If you are in another mode, like [[MarkDown|Markdown Plugin]], the toolbar will change to that syntax and insert appropriate code. However It will not change previously typed text or markup.
+
+Besides the standard WikiText formatting, the Editor toolbar has the following buttons:
+
+<<list-links "[tag[Editor toolbar]sort[title]]">>

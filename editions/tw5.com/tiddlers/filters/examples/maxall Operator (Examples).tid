@@ -1,0 +1,8 @@
+created: 20190611160949615
+modified: 20190611161010568
+tags: [[maxall Operator]] [[Operator Examples]]
+title: maxall Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "=1 =2 =3 =4 =5 +[maxall[]]">>
+<<.operator-example 2 "[tag[HelloThere]get[text]length[]maxall[]]">>

@@ -1,0 +1,10 @@
+{
+	"title": "$:/languages/zh-TW",
+	"name": "zh-TW",
+	"plugin-type": "language",
+	"description": "繁體中文 (台灣)",
+	"author": "BramChen",
+	"core-version": ">=5.0.8",
+	"dependents": ["$:/languages/zh-Hant"],
+	"plugin-priority": 110
+}

@@ -1,0 +1,12 @@
+caption: tv-adjust-heading-level
+created: 20180609112450207
+modified: 20180609112450207
+tags: Variables [[Core Variables]] [[Configuration Variables]]
+title: tv-adjust-heading-level Variable
+type: text/vnd.tiddlywiki
+
+The <<.def tv-adjust-heading-level>> [[variable|Variables]] allows the level of [[headings|Headings in WikiText]] to be adjusted. It is interpreted as a positive or negative number (e.g. "2" or "-3") that is added to the heading level for display.
+
+Note that if the resulting heading level is less than 1 then level 1 is used instead. This means that specfiying a large negative adjustment factor will reset all headings to display as level 1. Similarly, heading levels larger than 6 are clamped to the maximum HTML heading level of 6.
+
+<<.variable-examples "tv-adjust-heading-level">>

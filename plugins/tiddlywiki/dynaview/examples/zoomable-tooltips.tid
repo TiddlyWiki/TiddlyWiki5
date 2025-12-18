@@ -1,0 +1,56 @@
+title: $:/plugins/tiddlywiki/dynaview/examples/zoomable-tooltips
+tags: $:/tags/dynaviewExamples
+caption: Zoomable Tooltips
+
+//Zoom into the images below to see their titles//
+
+''N.B. This example only works in Safari at the moment''
+
+<style>
+.zoomable-tooltip-demo-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.zoomable-tooltip-demo-item {
+	display: flex;
+	flex-direction: column;
+	flex: 0 0 auto;
+	padding: 4px;
+	width: 5em;
+	height: 7em;
+}
+
+.zoomable-tooltip-demo-item-image {
+	flex: 0 0 auto;
+}
+
+.zoomable-tooltip-demo-item-image svg {
+	width: 4em;
+	height: 4em;
+}
+
+.zoomable-tooltip-demo-item-text {
+	font-size:0.3em;
+	flex: 0 0 auto;
+	line-height: 1.1;
+	text-align: center;
+    text-align: center;
+    background: #f7f747;
+    border: 1px solid #c2c235;
+    padding: 2px;
+    border-radius: 2px;
+}
+</style>
+<div class="zoomable-tooltip-demo-container">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Image]]">
+<div class="zoomable-tooltip-demo-item">
+<span class="zoomable-tooltip-demo-item-image">
+<$transclude/>
+</span>
+<span class="zoomable-tooltip-demo-item-text tc-dynaview-zoom-visible-2-and-above">
+<$text text=<<currentTiddler>>/>
+</span>
+</div>
+</$list>
+</div>

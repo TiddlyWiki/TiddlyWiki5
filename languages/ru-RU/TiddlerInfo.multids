@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Расширенные
+Advanced/PluginInfo/Empty/Hint: нет
+Advanced/PluginInfo/Heading: Сведения о плагине
+Advanced/PluginInfo/Hint: Плагин содержит следующие встроенные заметки:
+Advanced/ShadowInfo/Heading: Встроенность
+Advanced/ShadowInfo/NotShadow/Hint: Заметка <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> не является встроенной
+Advanced/ShadowInfo/OverriddenShadow/Hint: Она переопределена обычной заметкой
+Advanced/ShadowInfo/Shadow/Hint: Заметка <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> является встроенной
+Advanced/ShadowInfo/Shadow/Source: Она принадлежит плагину <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Fields/Caption: Поля
+List/Caption: Список
+List/Empty: У этой заметки нет списка
+Listed/Caption: В списках
+Listed/Empty: Этой заметки нет в списках
+References/Caption: Ссылки
+References/Empty: Другие заметки не ссылаются на эту
+Tagging/Caption: Отмеченные
+Tagging/Empty: Нет заметок, отмеченных этой
+Tools/Caption: Инструменты

@@ -1,0 +1,26 @@
+created: 20140710183759647
+description: After the microkernel has been explained this section focuses on the core plug-in. It describes the central modules of the core and explains how they work together to build a single file application.
+modified: 20140717203802364
+sectionnumber: 3
+tags: doc new section
+title: TiddlyWiki Core Application
+
+The microkernel builds up the base functionality to manage tiddlers by providing a basic wiki store and a barebone tiddler model.
+The microkernel can also load a set of (decrypted) tiddlers and provides a module system, enabling a developer to extend the kernel and add functionality with module tiddlers and plug-ins.
+
+For instance, the TiddlyWiki Core Application is provided as a single plug-in.
+In this part we want to focus on the TiddlyWiki core plug-in.
+After describing how new functionality is added directly to the wiki store,
+we show how the core plug-in realises persistence of tiddlers.
+The last part describes how TiddlyWiki builds an UI out of tiddlers and WikiText.
+
+<<<
+{{arch.svg}}
+<<< The TiddlyWiki Application consists of a microkernel and several modules building up the full application.
+
+<$list filter="[!has[draft.of]has[chapter.of]chapter.of[TiddlyWiki Core Application]tag[doc]sort[sub.num]]">
+
+
+! <$view field="title"/>
+{{!!text}}
+</$list>

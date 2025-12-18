@@ -1,0 +1,8 @@
+title: HelloThere
+
+This edition of ~TiddlyWiki is for people who would like to create or update a translation for ~TiddlyWiki. It makes it possible for translators to work interactively, avoiding using Node.js and ~GitHub.
+
+* [[Instructions for Translators]]
+* [[Extracting Translations]]
+
+See https://tiddlywiki.com for more details about ~TiddlyWiki.

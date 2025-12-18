@@ -1,0 +1,5 @@
+title: $:/core/ui/ViewTemplate/subtitle
+tags: $:/tags/ViewTemplate
+
+\whitespace trim
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateSubtitleFilter]!is[draft]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/subtitle/default]] }}} />

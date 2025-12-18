@@ -1,0 +1,44 @@
+caption: Blocs de code
+created: 20141016143834720
+fr-title: Blocs de code en WikiTexte
+modified: 20220420233001221
+tags: WikiText
+title: Code Blocks in WikiText
+type: text/vnd.tiddlywiki
+
+Un bloc de code (<<.icon $:/core/images/mono-block>>) est délimité par trois caractères <<gf "accent grave">> <code>&#96;&#96;&#96;</code> (connus en anglais sous le nom de <<gf "backticks">>)<<:>>
+
+<pre>
+&#96;&#96;&#96;
+Ce texte aura une chasse fixe et ne sera pas &#96;formaté&#96;.
+&#96;&#96;&#96;
+</pre>
+
+Donnera le résultat suivant<<:>>
+
+```
+Ce texte aura une chasse fixe et ne sera pas `formaté`.
+```
+
+Pour être interprétés correctement, les trois accents graves doivent être placés au début d'une ligne et immédiatement suivis d'un retour à la ligne.
+
+Souvenez-vous que le paragraphe précédent doit s'être terminé correctement, à l'aide de deux retours à la ligne. L'exemple suivant est donc ''faux''<<:>>
+
+<pre>
+Ceci est un paragraphe ordinaire.
+&#96;&#96;&#96;
+Ce texte aura une chasse fixe et ne sera pas &#96;formaté&#96;.
+&#96;&#96;&#96;
+</pre>
+
+La version correcte est<<:>>
+
+<pre>
+Ceci est un paragraphe ordinaire.
+
+&#96;&#96;&#96;
+Ce texte aura une chasse fixe et ne sera pas &#96;formaté&#96;.
+&#96;&#96;&#96;
+</pre>
+
+Certains claviers traitent l'accent grave comme une [[touche morte|http://fr.wikipedia.org/wiki/Touche_morte]], le rendant difficile à saisir tout seul. L'astuce consiste à saisir 3 <code>&#96;</code> suivis d'un espace. Une autre méthode consiste à saisir 6 <code>&#96;</code> d'affilée, puis de bouger le curseur en arrière trois fois pour saisir ou coller le contenu du bloc.

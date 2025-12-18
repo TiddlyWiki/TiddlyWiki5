@@ -1,0 +1,28 @@
+title: $:/core/macros/translink
+tags: $:/tags/Macro
+
+\define translink(title,mode:"block")
+\whitespace trim
+<$list filter="[<__mode__>match[block]]">
+<div class="tc-translink">
+<div>
+<$link to="""$title$""">
+<h1><$text text="""$title$"""/></h1>
+</$link>
+<$transclude tiddler="""$title$""" mode="block">
+<$set name="currentTiddler" value="""$title$"""><$transclude tiddler="$:/language/MissingTiddler/Hint"/></$set>
+</$transclude>
+</div>
+</div>
+</$list>
+<$list filter="[<__mode__>match[inline]]">
+<span class="tc-translink">
+<$link to="""$title$""">
+<$text text="""$title$"""/>
+</$link>
+&#32;(<$transclude tiddler="""$title$""" mode="inline">
+<$set name="currentTiddler" value="""$title$"""><$transclude tiddler="$:/language/MissingTiddler/Hint"/></$set>
+</$transclude>)
+</span>
+</$list>
+\end

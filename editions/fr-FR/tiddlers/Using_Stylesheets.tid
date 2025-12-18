@@ -1,0 +1,51 @@
+created: 20140305091244145
+fr-title: Utilisation des feuilles de style
+modified: 20150622183256721
+tags: [[Customise TiddlyWiki]]
+title: Using Stylesheets
+type: text/vnd.tiddlywiki
+
+Les premières étapes pour changer l'apparence de TiddlyWiki sont de choisir et d'appliquer un des thèmes disponibles, ou de modifier la [[palette de couleurs|ColourPalettes]].
+
+De plus, les [[feuilles de style CSS|http://www.w3schools.com/css]] personnalisées peuvent être définies en taguant un tiddler par `$:/tags/Stylesheet`. Essayez de créer  une feuille de style maintenant avec le contenu suivant pour modifier la couleur de fond de la page à rouge<<:>>
+
+```
+html body.tc-body {
+	background: red;
+}
+```
+
+! Outrepasser les réglages du thème
+
+Les feuilles de style personnalisées sont appliquées indépendamment de celles du thème. Toutefois, il est souvent nécessaire aux règles css de votre feuille de style d'être plus spécifiques que celles du thème auquel vous désirez vous substituer. Ainsi, `html body.tc-body` sera plus pointu que `body.tc-body`.
+
+! Les types de feuille de style
+
+Il est en général bien mieux de faire appel au `text/css` pour les feuilles de styles. Cela les interprète comme des feuilles de style à part entière, et assure que TiddlyWiki ne leur applique aucun processus wiki.
+
+Si vous souhaitez utiliser macros et transclusions au sein de vos feuilles de style vous devrez y substituer le type WikiTexte par défaut `text/vnd.tiddlywiki`. Ce qui permettra a une interprétation WikiTexte d'être complètement appliquée. Voilà un exemple<<:>>
+
+```
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+body.tc-body pre {
+	<<box-shadow "inset 0 1px 0 #fff">>
+}
+```
+
+Le pragma `\rules` au début du tiddler restreint l'application WikiTexte aux seules macros et transclusions. Sont ainsi évités les déclenchements de processus WikiTexte erronés indésirables.
+
+Un tiddler feuille de style est interprété de façon telle qu'il est, dans un premier temps wikifié et la portion de texte en résultant est extraite pour être considéré comme du CSS. Toute balise HTML que vous utiliseriez dans votre feuille de style est ainsi ignorée. Par exemple, les éléments HTML générés par le RevealWidget n'affecteront pas le résultat en sortie. Comme dans l'exemple suivant, vous pouvez entourer les règles de balises `<pre>` pour les afficher comme des blocs de code sans affecter leur interprétation, incluant la prise en compte de la macro entourée.
+
+```
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+<pre>body.tc-body pre {
+	<<box-shadow "inset 0 1px 0 #fff">>
+}
+</pre>
+```
+
+!! Macros feuille de style
+
+Le noyau de ~TiddlyWiki offre plusieurs [[macros globales that are helpful dans l'élaboration des feuilles de style |Stylesheet Macros]].

@@ -1,0 +1,43 @@
+title: $:/plugins/tiddlywiki/jszip/docs
+
+The following messages are provided to allow programmatic manipulation of ZIP files stored within tiddlers:
+
+!! Create ZIP file
+
+```
+<$action-sendmessage $message="tm-zip-create" $param="MyZipTiddler"/>
+```
+
+* ''$param'': title of tiddler to contain ZIP file
+
+!! Add/replace text file within ZIP file
+
+```
+<$action-sendmessage $message="tm-zip-add-text-file" $param="MyZipTiddler" filename="my/newfilename.txt" text="The content"/>
+```
+
+* ''$param'': title of tiddler containing ZIP file
+* ''filename'': filename of file to be added
+* ''text'': text content of file to be added
+
+!! Render tiddler to ZIP file
+
+```
+<$action-sendmessage $message="tm-zip-render-file" $param="MyZipTiddler" filename="my/newfilename.txt" tiddler="HelloThere" template="The content" mode="block" output="text/plain"/>
+```
+
+* ''$param'': title of tiddler containing ZIP file
+* ''filename'': filename of output file
+* ''tiddler'': optional title of currentTiddler for rendering template
+* ''template'': title of template tiddler to be rendered
+* ''mode'': optional parsing mode "block" (default) or "inline"
+* ''output'': output format: "text/plain" (default) for the text content or "text/html" for the full HTML content, including tags
+
+!! Download a ZIP file
+
+```
+<$action-sendmessage $message="tm-zip-download" $param="MyZipTiddler" filename="myzipfile.zip"/>
+```
+
+* ''$param'': title of tiddler containing ZIP file
+* ''filename'': filename to be suggested to browser for downloaded file

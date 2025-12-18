@@ -1,0 +1,75 @@
+caption: action-setfield
+created: 20141025120850184
+modified: 20250322010115457
+tags: Widgets ActionWidgets
+title: ActionSetFieldWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ''action-setfield'' widget is an [[action widget|ActionWidgets]] that assigns values to the fields of a tiddler. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+! Content and Attributes
+
+The ''action-setfield'' widget is invisible. Any content within it is ignored.
+
+|!Attribute |!Description |
+|$tiddler |The title of the tiddler whose fields are to be modified (if not provided defaults to the [[current tiddler|Current Tiddler]]) |
+|$field |Optional name of a field to be assigned the $value attribute |
+|$index |Optional index of a property in a [[data tiddler|DataTiddlers]] to be assigned the $value attribute|
+|$value |The value to be assigned to the field or index identified by the $field or $index attribute. If neither is specified then the value is assigned to the text field. If no value is specified, $field or $index will be deleted.|
+|$timestamp |Specifies whether the timestamp(s) of the target tiddler will be updated (''modified'' and ''modifier'', plus ''created'' and ''creator'' for newly created tiddlers). Can be "yes" (the default) or "no" |
+|//{any attributes not starting with $}// |Each attribute name specifies a field to be modified with the attribute value providing the value to assign to the field  |
+
+! Examples
+
+Here is an example of a pair of buttons that open the control panel directly to specified tabs. They work by using ''action-setfield'' to set the state tiddler for the control panel tabs.
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Appearance"/>
+<$action-navigate $to="$:/ControlPanel"/>
+Go to Control Panel "Appearance" tab
+</$button>
+
+<$button>
+<$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Settings"/>
+<$action-navigate $to="$:/ControlPanel"/>
+Go to Control Panel "Settings" tab
+</$button>'/>
+
+Here is an example of a button that assigns tags and fields to the tiddler HelloThere, and then navigates to it and opens the tiddler info panel on the "Fields" tab:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-setfield $tiddler="HelloThere" tags="NewTag [[Another New Tag]]" color="red"/>
+<$action-setfield $tiddler="$:/state/popup/tiddler-info--1779055697" text="(568,1443,33,39)"/>
+<$action-setfield $tiddler="$:/state/tab--1890574033" text="$:/core/ui/TiddlerInfo/Fields"/>
+<$action-navigate $to="HelloThere"/>
+Modify ~HelloThere
+</$button>'/>
+
+Here is an example of a button that assigns tags and fields to the tiddler HelloThere, and then initiates editing it:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-setfield $tiddler="HelloThere" tags="MoreTag [[Further More Tags]]" color="green"/>
+<$action-sendmessage $message="tm-edit-tiddler" $param="HelloThere"/>
+Edit ~HelloThere
+</$button>'/>
+
+Here is an example of a button that opens the control panel directly to the "Appearance" tabs:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-setfield $tiddler="$:/state/tab-1749438307" $field="text" $value="$:/core/ui/ControlPanel/Appearance"/>
+<$action-navigate $to="$:/ControlPanel"/>
+Go to Control Panel "Appearance" tab
+</$button>'/>
+
+Here is an example of a button that will update the value of an existing field in a tiddler
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-setfield $tiddler="Test" existing_field_name="new field value"/>
+Update Field existing_field_name in tiddler Test
+</$button>'/>

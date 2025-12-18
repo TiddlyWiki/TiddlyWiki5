@@ -1,0 +1,8 @@
+title: FakeDomMechanism
+modified: 20141019122342995
+
+The "fake DOM" is a simplified JavaScript implementation of the DOM that can be run on the server. Its use allows modules that need to run under Node.js to generate and manipulate HTML through the DOM API, rather than having to stitch HTML strings together.
+
+The fake DOM only implements a small subset of the full DOM APIs but it is sufficient for the core widgets to be able to be run under Node.js.
+
+Because the fake DOM is faster than the real DOM, it is also used in the browser when interactive rendering to the DOM isn't needed. The best example is stylesheet processing, where WikiText stylesheet content is parsed and rendered, and the plain text extracted from the fake DOM for use as the stylesheet content.

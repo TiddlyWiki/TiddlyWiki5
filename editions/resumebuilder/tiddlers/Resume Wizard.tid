@@ -1,0 +1,150 @@
+created: 20150719173441992
+modified: 20150720171426440
+tags: 
+title: Résumé Wizard
+
+\define CurrentResume() {{$:/settings/Global!!selected_resume}}
+
+\define thisDisplayInputTiddler()
+<$list filter='[[$:/settings/$(ThisResume)$/$(CurrentSection)$]get[template]]'>
+<$transclude tiddler={{!!input_tiddler}}/>
+</$list>
+\end
+
+\define thisResumeWizardTiddlerEmptyMessage()
+<$list filter='[tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]sort[order]removeprefix[$:/settings/]removeprefix{$:/settings/Global!!selected_resume}addprefix[$:/display]last[]]'>
+	<$reveal type='match' state='$:/state/ResumeWizardState' text=<<currentTiddler>>>
+		<$button>
+			Continue to Options
+			<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value="Resume Options"/>
+		</$button>
+	</$reveal>
+
+	<$reveal type='match' state='$:/state/ResumeWizardState' text="Resume Options">
+		<$button>
+			Go to Preview
+			<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value="Preview"/>
+		</$button>
+	</$reveal>
+	<$reveal type='match' state='$:/state/ResumeWizardState' text="Preview">
+		<$tiddler tiddler='Preview'>
+			<$button message="tm-open-window">
+				Print
+			</$button>
+		</$tiddler>
+	</$reveal>
+</$list>
+\end
+
+\define thisAddResumeButton()
+<$button>
+	Add Résumé
+	<$action-setfield $tiddler='$:/data/ResumeList' $index={{$:/temp/NewResumeName!!resume_name}} $value=true/>
+	<$action-setfield $tiddler='$:/temp/NewResumeName' resume_name=''/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/Resume Title Display' order=1 show=true template='$:/template/ResumeTitleTemplate'/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/Contact Information Display' order=2 show=true template='$:/template/ContactInformationTemplate'/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/Objective Display' order=3 show=true template='$:/template/ObjectiveTemplate'/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/Skills and Expertise Display' order=4 show=true template='$:/template/SkillsAndExpertiseTemplate'/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/Previous Employment Display' order=5 show=true template='$:/template/PreviousEmploymentTemplate'/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/Education Display' order=6 show=true template='$:/template/EducationTemplate'/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/ResumeTitle' text=Resume/>
+</$button>
+\end
+
+<!-- If the user hasn't started the wizard yet display the interface to add or select a résumé and the button to start the wizard -->
+<$reveal type='match' state='$:/state/ResumeWizardState' text=''>
+	<!-- User can select an existing résumé -->
+	Select résumé to work on:
+	<$select tiddler='$:/settings/Global' field='selected_resume'>
+		<$list filter='[[$:/data/ResumeList]indexes[]]'>
+			<option><$view field='title'/></option>
+		</$list>
+	</$select>
+	<br>
+	<!-- User can add a new résumé. Creating a new résumé automatically populates some of the settings, namely setting all default résumé sections to visible using the first template and in the default order. -->
+	You can add a résumé to the list:
+	<$edit-text tiddler='$:/temp/NewResumeName' field='resume_name' class='tc-edit-texteditor' placeholder='Name of new résumé'/>
+	<$vars ResumeName={{$:/temp/NewResumeName!!resume_name}}>
+		<<thisAddResumeButton>>
+	</$vars>
+	<br>
+	<br>
+
+	<!-- The layout options. This is so that the user can set up which sections they want to see before starting the résumé wizard. -->
+	The preview is displayed to the right. The options below let you set which sections are visible and the section order. Only sections that are visible will be included in the wizard. You will be able to change these options later also.
+
+	<$transclude tiddler='Layout Options' mode=block/>
+
+	<!-- The button that starts the wizard -->
+	<$button>
+		Click here to get started
+		<$list filter='[tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]sort[order]removeprefix[$:/settings/]removeprefix{$:/settings/Global!!selected_resume}addprefix[$:/display]first[]]'>
+			<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=<<currentTiddler>>/>
+		</$list>
+	</$button>
+</$reveal>
+
+<!-- Once the wizard is started display the current input tiddler with forward and back buttons. There is also a 'back to start' button. -->
+<$reveal type='nomatch' state='$:/state/ResumeWizardState' text=''>
+	<!-- Display the current section title. -->
+	<h1>
+		<$transclude tiddler={{$:/state/ResumeWizardState}} field='section' mode=block/>
+	</h1>
+
+	<!-- Display the correct input tiddler. -->
+	<$list filter='[{$:/state/ResumeWizardState}removeprefix[$:/display/]]' variable=CurrentSection>
+		<$vars ThisResume={{$:/settings/Global!!selected_resume}}>
+			<<thisDisplayInputTiddler>>
+		</$vars>
+	</$list>
+	<!-- Display the résumé options if that is the current section. -->
+	<$reveal type='match' state='$:/state/ResumeWizardState' text='Resume Options'>
+		Here you can change the order of sections (or of items in each section) on your résumé as well as set other options. Click on 'Print' to open the résumé in a new window to save or print it.<br>
+
+		<$transclude tiddler='Résumé Options' mode=block/><br>
+	</$reveal>
+
+	<!-- If the user hasn't reached options section yet, make and display the back and next buttons. -->
+	<$reveal type='nomatch' state='$:/state/ResumeWizardState' text='Resume Options'>
+		<!-- This makes the back button. If the user is on the first section this doesn't display anything. -->
+		<$list filter='[tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]sort[order]removeprefix[$:/settings/]removeprefix{$:/settings/Global!!selected_resume}addprefix[$:/display]before{$:/state/ResumeWizardState}]' emptyMessage="" variable=PreviousTiddler>
+			<$button>
+				Back (<$view tiddler=<<PreviousTiddler>> field='section'/>)
+				<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=<<PreviousTiddler>>/>
+			</$button>
+		</$list>
+		<!-- This Makes the next button. If the user is on the last section this is a button that opens the options section. -->
+		<$list filter='[tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]sort[order]removeprefix[$:/settings/]removeprefix{$:/settings/Global!!selected_resume}addprefix[$:/display]after{$:/state/ResumeWizardState}]' emptyMessage=<<thisResumeWizardTiddlerEmptyMessage>> variable=NextTiddler>
+			<$button>
+				Next Section (<$view tiddler=<<NextTiddler>> field='section'/>)
+				<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=<<NextTiddler>>/>
+			</$button>
+		</$list>
+	</$reveal>
+
+	<!-- If the user has reached the options section display the print button (and the back button, this is a special case). -->
+	<$reveal type='match' state='$:/state/ResumeWizardState' text='Resume Options'>
+		<!-- Magic to make the back button. -->
+		<$list filter='[tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]sort[order]removeprefix[$:/settings/]removeprefix{$:/settings/Global!!selected_resume}addprefix[$:/display]last[]]' emptyMessage="" variable=PreviousTiddler>
+			<$button>
+				Back (<$view tiddler=<<PreviousTiddler>> field='section'/>)
+				<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=<<PreviousTiddler>>/>
+			</$button>
+		</$list>
+		<!-- Open résumé in new window for saving/printing. -->
+		<$tiddler tiddler='Print Version'>
+			<$button message="tm-open-window">
+				Print
+			</$button>
+		</$tiddler>
+		<br>
+	</$reveal>
+
+	<hr>
+	<hr>
+
+	<$button>
+		Back to start
+		<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=''/>
+	</$button>
+</$reveal>

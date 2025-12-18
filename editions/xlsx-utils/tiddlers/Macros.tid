@@ -1,0 +1,6 @@
+title: $:/_Macros
+tags: $:/tags/Macro
+
+\define download-xlsx-tiddler(title,caption)
+<a href={{{ [[data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,]addsuffix{$title$}] }}} download="$title$">$caption$</a>
+\end

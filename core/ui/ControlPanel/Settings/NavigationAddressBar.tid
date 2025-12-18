@@ -1,0 +1,22 @@
+title: $:/core/ui/ControlPanel/Settings/NavigationAddressBar
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/NavigationAddressBar/Caption}}
+
+\whitespace trim
+\define lingo-base() $:/language/ControlPanel/Settings/NavigationAddressBar/
+
+<$link to="$:/config/Navigation/UpdateAddressBar" class="tc-control-panel-item">
+	<<lingo Hint>>
+</$link>
+
+<$radio tiddler="$:/config/Navigation/UpdateAddressBar" value="permaview">
+	<span class="tc-tiny-gap-left"><<lingo Permaview/Description>></span>
+</$radio>
+
+<$radio tiddler="$:/config/Navigation/UpdateAddressBar" value="permalink">
+	<span class="tc-tiny-gap-left"><<lingo Permalink/Description>></span>
+</$radio>
+
+<$radio tiddler="$:/config/Navigation/UpdateAddressBar" value="no">
+	<span class="tc-tiny-gap-left"><<lingo No/Description>></span>
+</$radio>

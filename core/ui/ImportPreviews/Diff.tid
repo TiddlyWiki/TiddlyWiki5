@@ -1,0 +1,5 @@
+title: $:/core/ui/ImportPreviews/Diff
+tags: $:/tags/ImportPreview
+caption: {{$:/language/Import/Listing/Preview/Diff}}
+
+<$macrocall $name="compareTiddlerText" sourceTiddlerTitle=<<payloadTiddler>> destTiddlerTitle=<<currentTiddler>> destSubTiddlerTitle=<<payloadTiddler>>/>

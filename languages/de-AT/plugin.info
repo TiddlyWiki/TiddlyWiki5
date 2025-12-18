@@ -1,0 +1,10 @@
+{
+	"title": "$:/languages/de-AT",
+	"name": "de-AT",
+	"plugin-type": "language",
+	"description": "Deutsch (Österreich)",
+	"author": "MarioPietsch aka pmario",
+	"core-version": ">=5.0.0",
+	"dependents": ["$:/languages/de-DE"],
+	"plugin-priority": 110
+}

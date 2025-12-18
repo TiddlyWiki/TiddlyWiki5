@@ -1,0 +1,22 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: यह मुख्य टिड्लीविकि फ़ाइल के बाहर संग्रहीत एक बाहरी tiddler है। आप टैग और क्षेत्रों को संपादित कर सकते हैं लेकिन सीधे ही सामग्री edit नहीं कर सकते
+Body/Placeholder: इस tiddler के लिए text टाइप करें
+Field/Remove/Caption: क्षेत्र को हटाने
+Field/Remove/Hint: क्षेत्र निकालें
+Fields/Add/Button: जोड़ना
+Fields/Add/Name/Placeholder: क्षेत्र का नाम
+Fields/Add/Prompt: एक नए क्षेत्र में जोड़ें:
+Fields/Add/Value/Placeholder: क्षेत्र मूल्य
+Shadow/OverriddenWarning: यह एक संशोधित shadow tiddler है। आप इस tiddler को हटाकर डिफ़ॉल्ट version में लौट सकते हैं
+Shadow/Warning: यह एक shadow tiddler है। कोई भी परिवर्तन डिफ़ॉल्ट संस्करण के स्थान पर आ जाएगी
+Tags/Add/Button: जोड़ना
+Tags/Add/Placeholder: टैग नाम
+Tags/Dropdown/Caption: टैग सूची
+Tags/Dropdown/Hint:  टैग सूची दिखाएँ 
+Type/Delete/Caption: सामग्री प्रकार को हटाना
+Type/Delete/Hint: सामग्री प्रकार को हटाएँ
+Type/Dropdown/Caption: सामग्री प्रकार को सूची
+Type/Dropdown/Hint: सामग्री प्रकार की सूची दिखाएँ
+Type/Placeholder: सामग्री प्रकार
+Type/Prompt: प्रकार:

@@ -1,0 +1,14 @@
+input_tiddler: $:/input/ObjectiveInput1
+options_tiddler: $:/options/Objective Options
+section_name: Objective
+tags: DisplayTemplate
+template_name: Objective Template 1
+title: $:/template/ObjectiveTemplate
+
+\define thisShowObjective()
+<$list filter='[[$:/settings/$(ThisResume)$/Objective]get[text]addprefix[$:/data/Objective/]]'>
+<$view field='text'/>
+</$list>
+\end
+
+''Objective:'' <$vars ThisResume={{$:/settings/Global!!selected_resume}}><<thisShowObjective>></$vars>

@@ -1,0 +1,15 @@
+created: 20170629080243049
+modified: 20170629080243049
+tags: HookMechanism
+title: Hook: th-editing-tiddler
+type: text/vnd.tiddlywiki
+
+This hook allows plugins to inspect tiddlers before they are edited via the ''edit'' toolbar button.
+
+Hook function parameters:
+
+* ''event'': DOM event object that triggered the edit
+
+Return value:
+
+* ''editTiddler'': ''true'' to continue with editing the tiddler as usual, ''false'' to silently suppress editing

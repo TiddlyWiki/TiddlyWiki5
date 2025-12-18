@@ -1,0 +1,5 @@
+title: $:/core/buttonstyles/Borderless
+tags: $:/tags/ToolbarButtonStyle
+caption: {{$:/language/ControlPanel/Settings/ToolbarButtonStyle/Styles/Borderless}}
+
+tc-btn-invisible

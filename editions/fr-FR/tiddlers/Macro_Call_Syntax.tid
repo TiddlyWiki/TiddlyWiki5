@@ -1,0 +1,28 @@
+created: 20150221105732000
+fr-title: Syntaxe de l'appel de Macro
+modified: 20150602121747838
+tags: [[Macro Syntax]]
+title: Macro Call Syntax
+type: text/vnd.tiddlywiki
+
+<<.preamble """What follows is a formal presentation of the syntax of the WikiText syntax for macro calls, using [[railroad diagrams|Railroad Diagrams]]. A [[simpler overview|Macro Calls in WikiText]] is also available.""">>
+
+<$railroad text="""
+"<<" nom [: espace [:{param-valeur}] ]">>"
+"""/>
+
+<<.place espace>> denotes a sequence of [[whitespace characters|Filter Whitespace]].
+
+The [[macro|Macros]]'s <<.place name>> is a sequence of non-whitespace characters autre que `(` or `>`.
+
+Each individual <<.place param-value>> has the following syntax:
+
+<$railroad text="""
+[: param-nom [:espace] ":" [:espace] ] valeur [: espace]
+"""/>
+
+The <<.place param-nom>> is a sequence of letters (`A`--`Z`, `a`--`z`), digits (`0`--`9`), hyphens (`-`) and underscores (`_`).
+
+The <<.place valeur>> is specified as follows<<dp>>
+
+<$railroad text={{$:/editions/tw5.com/railroad/macro-parameter-value}}/>

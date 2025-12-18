@@ -1,0 +1,13 @@
+caption: Anexión dominante
+created: 20150123220223000
+es-title: Anexión dominante
+modified: 20160421062101543
+tags: Filters
+title: Dominant Append
+type: text/vnd.tiddlywiki
+
+Los [[filtros|Filters]] manipulan [[conjuntos de títulos|Title Selection]] en los que ningún título puede aparecer más de una vez. Muchas veces necesitan anexar unos conjuntos a otros. 
+
+En estos casos, la anexión se realiza de modo que si hubiera un título duplicado, se descarta el más antiguo y decimos que los títulos así anexados son dominantes.
+
+Por ejemplo: si una selección contiene los títulos `A, B, C, D` y se anexa la selección compuesta por `A, BB, C, DD`, el resultado es `B, D, A, C, BB, DD` (En primer lugar, los títulos no duplicados de la primera selección, en segundo, la versión más nueva de los duplicados y en último, los no duplicados de la segunda selección).

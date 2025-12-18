@@ -1,0 +1,23 @@
+created: 20130825103300000
+fr-title: Adoptez une politique pour vos titres
+modified: 20150620095126583
+tags: Learning
+title: Adopt a Titles Policy
+type: text/vnd.tiddlywiki
+
+À mesure que les structures à l'intérieur de vos documents <<tw>> se complexifient, il peut être difficile de conserver la cohérence des titres des tiddlers. Par exemple, faut-il définir les termes au pluriel ou au singulier ? Avec la convention <<gf "//Camel case//">> ou en séparant les mots<<pi>>
+
+Fixer une politique formelle concernant les titres peuvent aider à réduire les risques de confusion. Par exemple, la politique de titres de ce wiki sont<<dp>>
+
+* Utilisation de mots simples en minuscules pour les tags
+** exemples : [[tâche|task]], [[demo]]
+* Utilisation de la convention CamelCase pour les définitions et les concepts
+** exemples : TiddlerFields, DeveloperDocs
+* Utilisation de mots séparés pour les titres qui sont des expressions ou des phrases complètes, comme des FAQ, des howtos ou des tâches
+** exemple : [[Comment construire un TiddlyWiki5 à partir de tiddlers isolés|How to build a TiddlyWiki5 from individual tiddlers]]
+* Là où TiddlyWiki or TiddlyWiki5 est utilisé comme qualifieur au début du titre, toujours utiliser des mots séparés
+** exemple : [[TiddlyWiki sur Node.js|TiddlyWiki on Node.js]]
+
+Une politique qui inclurait la règle ci-dessous pourrait s'appliquer à vos propres wikis<<dp>>
+
+* Utliisation du préfixe `$:/_` pour tous les tiddlers système que vous créez pour être sûr de les retrouver en haut de la liste des tiddlers système de la barre latérale.

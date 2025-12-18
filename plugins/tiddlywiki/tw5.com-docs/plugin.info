@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/tw5.com-docs",
+	"name": "TW5.com Docs",
+	"description": "Documentation from tiddlywiki.com",
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
+}

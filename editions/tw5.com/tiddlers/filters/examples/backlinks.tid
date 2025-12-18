@@ -1,0 +1,9 @@
+created: 20150118134611000
+modified: 20150118183135000
+tags: [[backlinks Operator]] [[Operator Examples]]
+title: backlinks Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[HelloThere]backlinks[]]">>
+<<.operator-example 2 "[tag[TableOfContents]backlinks[]]" "tiddlers that link to tiddlers tagged [[TableOfContents]]">>
+<<.operator-example 3 "[all[current]backlinks[]]" "tiddlers that link to this one">>

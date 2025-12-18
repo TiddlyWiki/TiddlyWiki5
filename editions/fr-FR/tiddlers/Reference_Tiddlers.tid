@@ -1,0 +1,28 @@
+created: 20141226192500000
+fr-title: Tiddlers de référence
+modified: 20150624094247677
+tags: [[Improving TiddlyWiki Documentation]]
+title: Reference Tiddlers
+type: text/vnd.tiddlywiki
+
+Les <<.def "Tiddlers référents">> proposent une information sobre d'une façon compréhensible et interconnectée. Le lecteur peut être, aussi bien, un utilisateur moyen ou un expert.
+
+Il existe plusieurs subdivisions<<:>>
+
+;Concepts
+* Définitions, dont l'ensemble forme un glossaire
+
+;Manuel utilisateur
+* Présente les détails techniques des fonctionnalités ~WikiTexte
+* Subdivisions<<:>> messages, opérateurs, widgets, etc
+
+;Manuel dévelopeur
+* Présente les détails techniques de l'architecture interne de ~TiddlyWiki
+
+Le matériel de référence est rédigé à la troisième personne, un style formel qui évite de s'adresser au lecteur, pour se focaliser sur la façon dont se comporte ~TiddlyWiki lui-même. La voix passive est souvent appropriée<<:>>
+
+* <<.word "Le gabarit spécifié via un tiddler">> plutôt que <<.word "spécifiez le gabarit via un tiddler">>
+* <<.word "Le widget peut être employé à divers usages">> plutôt que <<.word "vous pouvez employer le the widget à divers usages">>
+* Mais <<.word "Ce widget offre plusieurs utilisation possibles">> est meilleur, car moins alambiqué et plus succinct
+
+Les double négations, les négations contractées et les expressions pouvant conduire à ignorer une négation ou à faire un contresens accidentel par omission doivent être évitées dans les tiddlers référents.

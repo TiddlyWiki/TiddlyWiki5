@@ -1,0 +1,18 @@
+created: 20151110060519720
+modified: 20210106151027499
+tags: [[Community Plugins]]
+title: Leaflet maps plugin by Sylvain Comte
+type: text/vnd.tiddlywiki
+url: http://sycom.github.io/TiddlyWiki-Plugins/#Leaflet%20plugin
+
+A mapping plugin based on [[Leaflet|http://leafletjs.com/]] library. Allows you to create maps based upon geographical data contained in tiddlers.
+
+{{!!url}}
+
+<<<
+The [[leaflet plugin|http://sycom.github.io/TiddlyWiki-Plugins/#Leaflet%20plugin]] is a (working) attempt to integrate the [[leaflet|http://leafletjs.com/]] library in TiddlyWiki in order to display geographical purpose tiddlers.
+
+For now `<$leafmap>` widget displays an interactive map. Select size, location and zoom, clustering distance, and background. You can display data  : geojson, point(s), polygon(s) and/or polyline(s) directly or calling //GeoTiddler//(s). Tiddler can be called individually, by list or with a [[filter|Filters]].
+
+Have a look at [[demo page on the web|http://sycom.github.io/TiddlyWiki-Plugins/#A%20plugin%20collection:%5B%5BA%20plugin%20collection%5D%5D%20%5B%5BLeaflet%20plugin%5D%5D]].
+<<<

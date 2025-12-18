@@ -1,0 +1,8 @@
+{
+	"title": "$:/plugins/tiddlywiki/highlight",
+	"name": "Highlight",
+	"description": "Highlight.js syntax highlighting",
+	"author": "Joao Bolila",
+	"list": "readme usage license",
+	"stability": "STABILITY_2_STABLE"
+}

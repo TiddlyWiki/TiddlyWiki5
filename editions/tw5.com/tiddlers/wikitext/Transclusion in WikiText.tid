@@ -1,0 +1,74 @@
+caption: Transclusion
+created: 20131205160146648
+modified: 20240102070417483
+tags: WikiText
+title: Transclusion in WikiText
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+You can incorporate the content of one tiddler within another using the [[Transclusion]] notation:
+
+* `{{MyTiddler}}` transcludes a single tiddler
+* `{{MyTiddler||TemplateTitle}}` displays the tiddler through a specified [[TemplateTiddler|TemplateTiddlers]]
+* `{{||TemplateTitle}}` displays the specified template tiddler without altering the [[current tiddler|Current Tiddler]]
+* `{{MyTiddler|Parameter}}` transcludes a single tiddler with a single parameter
+* `{{MyTiddler||TemplateTitle|Parameter|SecondParameter}}` transcludes a single tiddler through a specified [[TemplateTiddler|TemplateTiddlers]] with two parameters
+
+!! Transcluding Text References
+
+You can also use a TextReference instead of a tiddler title:
+
+* `{{MyTiddler!!field}}` transcludes a specified field of a tiddler
+* `{{!!field}}` transcludes a specified field of the current tiddler
+* `{{MyTiddler##index}}` transcludes a specified indexed property of a [[DataTiddler|DataTiddlers]]
+* `{{##index}}` transcludes a specified indexed property of the current [[DataTiddler|DataTiddlers]]
+
+!! Filtered Transclusion
+
+A similar syntax can be used to generate or transclude a list of tiddlers matching a specified [[filter|Filters]]:
+
+```
+{{{ [tag[mechanism]] }}}
+{{{ [tag[mechanism]]||TemplateTitle }}}
+```
+
+In contrast to [[Filtered Attribute Values]], all items matching the filter are transcluded and not only the first.
+
+!! Generated Widgets
+
+The WikiText transclusion syntax generates a TiddlerWidget wrapped around a TranscludeWidget. For example, `{{MyTiddler||TemplateTitle}}` generates the following pair of widgets:
+
+```
+<$tiddler tiddler="MyTiddler">
+	<$transclude $tiddler="TemplateTitle"/>
+</$tiddler>
+```
+
+The filtered transclusion syntax `{{{ [tag[mechanism]] }}}` generates the following widgets
+
+```
+<$list filter="[tag[mechanism]]">
+	<$link />
+</$list>
+```
+or, when used with a template, `{{{ [tag[mechanism]]||TemplateTitle }}}` expands to
+
+```
+<$list filter="[tag[mechanism]]">
+	<$transclude tiddler="TemplateTitle" />
+</$list>
+```
+
+<<.tip "Install the //Internals// plugin to enable the display of the generated widget tree in the preview pane of the editor">>
+
+---
+
+See also:
+
+* [[Transclusion Basic Usage]]
+* [[Transclusion with Templates]]
+* TemplateTiddlers
+* TranscludeWidget
+* [[Transclusion and Substitution]]
+* [[WikiText parser mode: transclusion examples]]

@@ -1,0 +1,88 @@
+caption: Uso de SVG's
+created: 20131028132700000
+es-title: Uso de imágenes SVG
+modified: 20160503054238164
+tags: Features
+title: UsingSVG
+type: text/vnd.tiddlywiki
+
+~Tiddlywiki permite el uso de imágenes SVG de dos maneras:
+
+* Los tiddlers de tipo `image/svg+xml` se interpretan como imágenes SVG, es decir que se muestran como elementos `<img>` con el SVG incrustado en el atributo `src`.
+
+** Como ejemplos de imagen SVG, véanse [[Motovun Jack.svg]] y [[Tiddler Fishes.svg]]
+
+* También pueden incluirse elementos SVG directamente con WikiText. 
+
+! Transclusión de tiddlers SVG
+
+Se pueden incrustar SVG's mediante transclusión
+
+```
+{{Motovun Jack.jpg}}
+```
+
+! Incrustación de elementos SVG
+
+La otra forma de usar un SVG es incrustándolo directamente.
+
+Al incrustar un SVG en el texto como elemento `<img>`, este permanece en un entorno restringido y contenido. No puede, por ejemplo, usar los estilos CSS del documento padre, por ejemplo, ni se puede hacer una transclusión aislada del SVG.
+
+También puede incluirse el `<svg>` directamente.
+
+Este es el código...
+
+```
+<svg width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg>
+```
+...y este el resultado:
+
+<svg width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg>
+
+Para hacerlo, no necesitamos la directiva `<?xml version="1.0"?>`.
+
+! Inclusión de contenido HTML o ~WikiText en imágenes SVG
+
+Se pueden incluir sencillas cadenas de texto en un SVG mediante el elemento `<text>`
+
+Este es el código...
+
+```
+<svg width="300px" height="30px" viewBox="0 0 1000 300"><text x="250" y="150" font-family="Verdana" font-size="200">Hello, out there</text><rect x="1" y="1" width="998" height="298" fill="none" stroke-width="2" /></svg>
+```
+
+...y este el resultado
+
+<svg width="300px" height="30px" viewBox="0 0 1000 300"><text x="250" y="150" font-family="Verdana" font-size="200">Hello, out there</text><rect x="1" y="1" width="998" height="298" fill="none" stroke-width="2" /></svg>
+
+Se puede incluir HTML o ~WikiText <<.def dentro>> de imágenes SVG incrustadas en el texto mediante el elemento `<foreignObject>`. Por ejemplo:
+
+```
+<svg width="260px" height="260px"><circle cx="150" cy="150" r="100" fill="blue" stoke="red"/><foreignObject x="70" y="110" width="150" height="180"><body>Esto es un poco de texto que incluye un [[enlace a otro tiddler|HelloThere]].</body></foreignObject></svg>
+```
+<svg width="260px" height="260px"><circle cx="150" cy="150" r="100" fill="blue" stoke="red"/><foreignObject x="70" y="110" width="150" height="180"><body>Esto es un poco de texto que incluye un [[enlace a otro tiddler|HelloThere]].</body></foreignObject></svg>
+
+!! Incrustación y transclusión combinadas
+
+Al definiri elementos SVG podemos jugar con algunos de sus parámetros mediante transclusión. Como ejemplo, veamos el caso de este círculo SVG que podemos modificar mediante transclusión del valor de su radio desde el tiddler [[$:/SVGExampleRadius]]:
+
+Este es el código...
+
+```
+<svg width="150" height="150"><circle cx="75" cy="75" r={{$:/SVGExampleRadius}} stroke="black" stroke-width="2" fill="green"/></svg>
+```
+...y este el resultado:
+
+<svg width="150" height="150"><circle cx="75" cy="75" r={{$:/SVGExampleRadius}} stroke="black" stroke-width="2" fill="green"/></svg>
+
+Podemos variar el radio del círculo (como podríamos variar cualquier otro parámetro con la misma técnica) editando el siguiente valor, alojado en otro tiddler:
+
+ <$edit-text tiddler="$:/SVGExampleRadius" tag="input"/>
+
+! Texto curvo en SVG's
+
+{{Making curved text with SVG}}

@@ -1,0 +1,21 @@
+caption: image-picker
+created: 20160418155531395
+modified: 20160418155805435
+tags: Macros [[Core Macros]]
+title: image-picker Macro
+type: text/vnd.tiddlywiki
+
+The <<.def image-picker>> [[macro|Macros]] displays an interactive image picker, as can be seen in the core text editor.
+
+!! Parameters
+
+;actions
+: Wikitext for the action widgets that should be executed when the user selects an image. Within the text, the variable `imageTitle` contains the title of the tiddler containing the selected image.
+;subfilter
+: An optional extra [[filter step|Filter Step]], e.g. `tag[MyTag]`
+
+The images are selected by means of a [[filter expression|Filter Expression]], into which the <<.param subfilter>> parameter is spliced as follows:
+
+> `[all[shadows+tiddlers]is[image]$subfilter$!has[draft.of]] -[type[application/pdf]] +[sort[title]]`
+
+<<.macro-examples "image-picker">>

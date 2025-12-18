@@ -1,0 +1,19 @@
+created: 20141226192500000
+modified: 20150117152559000
+title: Typography
+
+Use the [[documentation macros|Documentation Macros]] to keep the text maintainable in the face of change.
+
+Be wary of arbitrarily applying raw bold or italic markup in a sentence. If there's a suitable macro, use that instead. If there isn't a suitable macro, write one or request one.
+
+Use simple backticks (<code>&#96;...&#96;</code>) for fragments of WikiText, but not for the names of things like fields and widgets. These have their own macros.
+
+To keep things clean and simple, quotation marks and apostrophes should be straight `'`, not curly `’`, and the ellipsis should be three separate dots `...` rather than `…`.
+
+Use `"` as the primary quotation mark, reserving `'` for the rare case of a nested quotation.
+
+Avoid using a single hyphen `-` as sentence punctuation. Instead, use a double hyphen -- which ~TiddlyWiki renders as an en-dash -- with a space on either side.
+
+Items in lists and tables should only end with a full stop (period in US English) if they are complete sentences. They should have no trailing punctuation otherwise.
+
+It is very rarely necessary to use an exclamation mark in professional documentation.

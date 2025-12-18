@@ -1,0 +1,258 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: متقدم
+Advanced/Hint: معلومات داخلية عن هذا الوكي
+Appearance/Caption: مظهر خارجي
+Appearance/Hint: طرق لتخصيص مظهر وكي خاص بك.
+
+Basics/AnimDuration/Prompt: مدة الرسوم المتحركة
+Basics/AutoFocus/Prompt: موقع مؤشر الماوس الإفتراضي للتدلرز الجددة
+Basics/Caption: أساسيات
+Basics/DefaultTiddlers/BottomHint: إستخدم &#91;&#91;أقواس مربعة مزدوجة&#93;&#93; للعناوين مع مسافات. أو بإمكانك إختيار{{الإحتفاظ بترتيب القصة||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/Prompt: تدلرز مفترضة
+Basics/DefaultTiddlers/TopHint: أي تدلرز ستظهر عند التشغيل 
+Basics/Language/Prompt: مرحبا! اللغة الحالية:
+Basics/NewJournal/Tags/Prompt: وسوم لتدلر اليوميات الجديدة
+
+Basics/NewJournal/Text/Prompt: نص لتدلر اليوميات الجديدة
+Basics/NewJournal/Title/Prompt: عنوان لتدلر اليوميات الجديدة
+Basics/NewTiddler/Tags/Prompt: وسوم للتدلرز الجديدة
+Basics/NewTiddler/Title/Prompt: عنوان للتدلرز الجديدة
+Basics/OverriddenShadowTiddlers/Prompt: عدد تدلرز الظل التي تم تجاوزها
+Basics/ShadowTiddlers/Prompt: عدد تدلرز الظل
+Basics/Subtitle/Prompt: العنوان الفرعي
+
+Basics/SystemTiddlers/Prompt: عدد تدلرز النظام
+Basics/Tags/Prompt: عدد الوسوم
+Basics/Tiddlers/Prompt: عدد التدلرز
+Basics/Title/Prompt: عنوان هذا الويكي
+Basics/Username/Prompt: اسم المستخدم لتوقيع التعديلات
+Basics/Version/Prompt: نسخة تدلي ويكي
+EditorTypes/Caption: أنواع المحرر
+EditorTypes/Editor/Caption: المحرر
+EditorTypes/Hint:  تحدد هذه التدلرز أي محرر مستخدم لتحرير أنواع معينة من التدلرز
+EditorTypes/Type/Caption: نوع
+Info/Caption: معلومات
+Info/Hint: معلومات عن هذا التدلي ويكي
+KeyboardShortcuts/Add/Caption: إضافة اختصار
+KeyboardShortcuts/Add/Prompt: اكتب اختصار هنا
+KeyboardShortcuts/Caption: اختصارات لوحة المفاتيح
+KeyboardShortcuts/Hint: إدارة تعيينات اختصارات لوحة المفاتيح
+KeyboardShortcuts/NoShortcuts/Caption: لم يتم تعيين اختصارات لوحة المفاتيح
+KeyboardShortcuts/Platform/All: جميع المنصات
+KeyboardShortcuts/Platform/Linux: نظام لينكس فقط
+KeyboardShortcuts/Platform/Mac: نظام ماكنتوش فقط
+KeyboardShortcuts/Platform/NonLinux: انظمة غير نظام لينكس فقط
+KeyboardShortcuts/Platform/NonMac: انظمة غير نظام ماكنتوش فقط
+KeyboardShortcuts/Platform/NonWindows: انظمة غير نظام ويندوز فقط
+KeyboardShortcuts/Platform/Windows: نظام ويندوز فقط
+KeyboardShortcuts/Remove/Hint: إزالة اختصار لوحة المفاتيح
+LoadedModules/Caption: الوحدات المحملة
+LoadedModules/Hint: هذ هي وحدات التدلرز المحملة حاليا والمرتبطة بتدلرز مصدرية. تفتقر أي وحدات بتنسيق مائل إلى تدلر مصدري ، عادة لأن إعدادها تم أثناء عملية التمهيد.
+
+Palette/Caption: نظام الألوان
+Palette/Editor/Clone/Caption: استنساخ
+
+Palette/Editor/Clone/Prompt: من المستحسن أن تنسخ نظام ألوان الظل هذه قبل تحريره
+
+Palette/Editor/Delete/Hint: حذف هذا الإدخال من نظام الألوان
+
+Palette/Editor/Names/External/Show: إظهار أسماء الألوان التي ليست جزءًا من نظام الألوان الحالي
+
+Palette/Editor/Prompt: التحرير
+Palette/Editor/Prompt/Modified: تم تعديل نظام ألوان الظل هذه
+
+Palette/Editor/Reset/Caption: إعادة تعيين
+Palette/HideEditor/Caption: إخفاء محرر 
+
+Palette/Prompt: نظام الألوان الحالي:
+Palette/ShowEditor/Caption: إظهار محرر
+Parsing/Caption: التحليل النحوي
+Parsing/Hint: هنا يمكنك تعطيل / تمكين قواعد محلل ويكي النحوي. لكي تدخل التغييرات حيز التنفيذ ، احفظ موقع الويكي وأعد تحميله. يمكن أن يمنع تعطيل بعض قواعد المحلل النحوي <$text text="تدلي ويكي"/> من العمل بشكل صحيح. استخدم [[الوضع الآمن | https: //tiddlywiki.com/#SafeMode]] لاستعادة التشغيل العادي.
+Plugins/Add/Caption: احصل على المزيد من البرامج المساعدة
+Plugins/Add/Hint: تثبيت البرامج المساعدة من المكتبة الرسمية
+Plugins/AlreadyInstalled/Hint: هذا البرنامج المساعد مثبت بالفعل في الإصدار
+ <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: يتطلب أيضًا:
+Plugins/Caption: البرامج المساعدة
+Plugins/ClosePluginLibrary: إغلاق مكتبة البرنامج المساعد
+Plugins/Disable/Caption: تعطيل
+Plugins/Disable/Hint: قم بتعطيل هذا البرنامج المساعد عند إعادة تحميل الصفحة
+Plugins/Disabled/Status: (معطل)
+Plugins/Downgrade/Caption: تخفيض
+Plugins/Empty/Hint: لا يوجد
+
+Plugins/Enable/Caption: مَكن
+Plugins/Enable/Hint: تمكين هذا البرنامج المساعد عند إعادة تحميل الصفحة
+Plugins/Install/Caption: تثبيت
+Plugins/Installed/Hint: البرنامج المساعد المثبتة حاليًا:
+Plugins/Languages/Caption: اللغات
+Plugins/Languages/Hint: برامج مساعدة (حزم لغوية)
+Plugins/NotInstalled/Hint: هذا البرنامج المساعد غير مثبت حاليا
+Plugins/OpenPluginLibrary: فتح مكتبة البرنامج المساعد
+Plugins/Plugins/Caption: البرامج المساعدة
+Plugins/Plugins/Hint: البرامج المساعدة
+Plugins/PluginWillRequireReload: (يتطلب إعادة التحميل)
+Plugins/Reinstall/Caption: إعادة تثبيت
+Plugins/Themes/Caption: ثيمات
+Plugins/Themes/Hint: برامج مساعدة (ثيمات)
+Plugins/Update/Caption: تحديث
+Plugins/Updates/Caption: التحديثات
+Plugins/Updates/Hint: التحديثات المتاحة للمكونات الإضافية المثبتة
+Plugins/Updates/UpdateAll/Caption: تحديث <<update-count>> برامج المساعدة
+Saving/Caption: حفظ
+Saving/DownloadSaver/AutoSave/Description: السماح بالحفظ التلقائي لحافظ التنزيل
+Saving/DownloadSaver/AutoSave/Hint: تمكين الحفظ التلقائي لحافظ التنزيل
+Saving/DownloadSaver/Caption: حافظ التنزيل
+Saving/DownloadSaver/Hint: تنطبق هذه الإعدادات على خادم التنزيل المتوافق مع HTML5
+Saving/General/Caption: عام
+Saving/General/Hint: تنطبق هذه الإعدادات على جميع الخوادم المحملة
+Saving/GitService/Branch: الفرع المستهدف للحفظ
+Saving/GitService/CommitMessage: حفظ بواسطة تدلي ويكي
+Saving/GitService/Description: تُستخدم هذه الإعدادات فقط عند الحفظ في <<service-name>>
+Saving/GitService/Filename: اسم الملف الهدف (مثال `index.html`)
+
+Saving/GitService/Gitea/Caption: حافظ جت تي
+Saving/GitService/Gitea/Password: رمز الوصول الشخصي لواجهة برمجة التطبيقات (عبر واجهة الويب لـ Gitea: `الإعدادات | التطبيقات | إنشاء رمز جديد`)
+Saving/GitService/GitHub/Caption: حافظ جت هب
+Saving/GitService/GitHub/Password: كلمة المرور أو رمز OAUTH أو رمز الوصول الشخصي (انظر [[صفحة مساعدة GitHub | https: //help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] للتفاصيل)
+Saving/GitService/GitLab/Caption: حافظ جت لاب
+Saving/GitService/GitLab/Password: رمز الدخول الشخصي لواجهة برمجة التطبيقات (انظر [[صفحة مساعدة GitLab | https: //docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] للحصول على التفاصيل)
+Saving/GitService/Path: مسار الملف المستهدف (مثال `/wiki/`)
+Saving/GitService/Repo: المستودع الهدف (مثال `Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: عنوان URL لواجهة برمجة تطبيقات الخادم
+
+Saving/GitService/UserName: إسم المستخدم
+Saving/Hint: الإعدادات المستخدمة لحفظ تدلي ويكي بالكامل كملف واحد عبر وحدة خادم
+
+Saving/TiddlySpot/Advanced/Heading: إعدادات متقدمة
+Saving/TiddlySpot/BackupDir: مجلد النسخة الاحتياطية
+Saving/TiddlySpot/Backups: النسخ الاحتياطية
+Saving/TiddlySpot/Caption: حافظ تدلي سبوت
+Saving/TiddlySpot/Description: تُستخدم هذه الإعدادات فقط عند الحفظ في http://tiddlyspot.com أو خادم آخر مناسب
+
+Saving/TiddlySpot/Filename: إسم ملف التحميل
+Saving/TiddlySpot/Password: كلمة المرور
+Saving/TiddlySpot/UploadDir: مجلد التحميل
+Saving/TiddlySpot/UserName: إسم الويكي
+Settings/AutoSave/Caption: حفظ تلقائي
+Settings/AutoSave/Disabled/Description: لا تقم بحفظ التغييرات تلقائيًا
+Settings/AutoSave/Enabled/Description: إحفظ التغييرات تلقائيًا
+Settings/CamelCase/Caption: روابط ويكي بنمط كاميلكيس
+Settings/CamelCase/Description: تفعيل الربط التلقائي لعبارات كاميلكيس
+Settings/CamelCase/Hint: يمكنك تعطيل الربط التلقائي لعبارات كاميلكيس بشكل عام. يتطلب إعادة التحميل لتصبح نافذة المفعول
+Settings/Caption: الإعدادات
+Settings/DefaultMoreSidebarTab/Caption: القيمة الافتراضية للتبويب "مزيد" في الشريط الجانبي
+
+Settings/DefaultMoreSidebarTab/Hint: حدد أي قيمة في التبويب "مزيد" سيتم عرضها بشكل افتراضي من الشريط الجانبي
+Settings/DefaultSidebarTab/Caption: التبويب الافتراضي في الشريط الجانبي
+
+Settings/DefaultSidebarTab/Hint: حدد أي تبويب سيتم عرضه بشكل افتراضي في الشريط الجانبي
+
+Settings/EditorToolbar/Caption: شريط أدوات المحرر
+
+Settings/EditorToolbar/Description: أظهر شريط أدوات المحرر
+
+Settings/EditorToolbar/Hint: تمكين أو تعطيل شريط أدوات المحرر:
+
+Settings/Hint: تتيح لك هذه الإعدادات تخصيص سلوك تدلي ويكي.
+
+Settings/InfoPanelMode/Caption: وضع لوحة معلومات تدلر
+Settings/InfoPanelMode/Hint: تحديد أي ظرف يتم فيه إغلاق لوحة معلومات
+Settings/InfoPanelMode/Popup/Description: يتم إغلاق لوحة معلومات تدلر تلقائيًا
+
+Settings/InfoPanelMode/Sticky/Description: تظل لوحة معلومات تدلر مفتوحة حتى يتم إغلاقها
+
+Settings/LinkToBehaviour/Caption: سلوك عملية فتح تدلر
+Settings/LinkToBehaviour/InsideRiver/Hint: التقل من // داخل // مسار القصة
+
+Settings/LinkToBehaviour/OpenAbove: فتح فوق التدلر الحالي
+
+Settings/LinkToBehaviour/OpenAtBottom: فتح في الجزء السفلي من مسار القصة
+
+Settings/LinkToBehaviour/OpenAtTop: فتح في الجزء العلوي من مسار القصة
+
+Settings/LinkToBehaviour/OpenBelow: فتح أسفل التدلر الحالي
+
+Settings/LinkToBehaviour/OutsideRiver/Hint: التقل من // خارج // مسار القصة
+
+Settings/MissingLinks/Caption: روابط ويكي
+Settings/MissingLinks/Description: تمكين الارتباط بتلرز مفقودة
+
+Settings/MissingLinks/Hint: اختيار إمكانية الارتباط بتدلرز غير موجودين بعد
+
+Settings/NavigationAddressBar/Caption: شريط عنوان التنقل
+Settings/NavigationAddressBar/Hint: سلوك شريط عنوان المتصفح عند الانتقال إلى تدلر
+
+Settings/NavigationAddressBar/No/Description: لا تقم بتحديث شريط العنوان
+
+Settings/NavigationAddressBar/Permalink/Description: قم بتضمين التدلر المستهدف
+
+Settings/NavigationAddressBar/Permaview/Description: قم بتضمين التدلر المستهدف وتسلسل القصة الحالي
+
+Settings/NavigationHistory/Caption: محفوظات التنقل
+
+Settings/NavigationHistory/Hint: تحديث محفوظات المتصفح عند الانتقال إلى تدلر:
+
+Settings/NavigationHistory/No/Description: لا تقم بتحديث محفوظات المتصفح
+
+Settings/NavigationHistory/Yes/Description: حدث محفوظات المتصفح
+Settings/NavigationPermalinkviewMode/Caption: رابط مباشر/ وضع العرض المباشر
+
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: انسخ الرابط المباشر/ رابط العرض المباشر إلى الكليب-بورد
+
+Settings/NavigationPermalinkviewMode/Hint: اختر كيفية معالجة الرابط المباشر/ العرض المباشر:
+
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: تحديث شريط العنوان باستخدام الرابط المباشر/ رابط العرض المباشر
+
+Settings/PerformanceInstrumentation/Caption: قياس الأداء
+Settings/PerformanceInstrumentation/Description: تمكين قياس الأداء
+
+Settings/PerformanceInstrumentation/Hint: يعرض إحصائيات الأداء في وحدة تحكم مطور المتصفح. يتطلب إعادة التحميل لتصبح نافذة المفعول
+Settings/TitleLinks/Caption: عناوين التدلرز
+Settings/TitleLinks/Hint: عرض عناوين التدلرز بشكل اختياري كروابط
+
+Settings/TitleLinks/No/Description: لا تعرض عناوين التدلرز كروابط
+
+Settings/TitleLinks/Yes/Description: عرض عناوين التدلرز كروابط
+
+Settings/ToolbarButtons/Caption: أزرار شريط الأدوات
+
+Settings/ToolbarButtons/Hint: مظهر زر شريط الأدوات الافتراضي:
+Settings/ToolbarButtons/Icons/Description: إدراج أيقونة
+Settings/ToolbarButtons/Text/Description: إدراج نص
+Settings/ToolbarButtonStyle/Caption: نمط زر شريط الأدوات
+Settings/ToolbarButtonStyle/Hint: اختر نمط أزرار شريط الأدوات:
+
+Settings/ToolbarButtonStyle/Styles/Borderless: بلا حدود
+
+Settings/ToolbarButtonStyle/Styles/Boxed: وضع في صندوق
+Settings/ToolbarButtonStyle/Styles/Rounded: وضع في دائرة
+StoryView/Caption: عرض القصة
+StoryView/Prompt: العرض الحالي:
+Stylesheets/Caption: ستايل شيتس
+Stylesheets/Expand/Caption: توسيع الكل
+Stylesheets/Hint:  هـذه قائمة من ستايل  شيت تدلرز فعالة وموسومة بـ   <<tag "$:/tags/Stylesheet">>
+Stylesheets/Restore/Caption: استعادة
+Theme/Caption: ثيم
+Theme/Prompt: الثيم الحالي:
+
+TiddlerFields/Caption: حقول التدلر
+TiddlerFields/Hint: هذه هي المجموعة الكاملة من حقول التدلرز المستخدمة في هذا الويكي (بما في ذلك تدلرز النظام ولكن باستثناء تدلرز الظل).
+Toolbars/Caption: أشرطة الأدوات
+Toolbars/EditorToolbar/Caption: شريط أدوات المحرر
+
+Toolbars/EditorToolbar/Hint: اختر الأزرار التي يتم عرضها في شريط أدوات المحرر. لاحظ أن بعض الأزرار ستظهر فقط عند تحرير التدلرز من نوع معين. اسحب وأفلت لتغيير الترتيب
+Toolbars/EditToolbar/Caption:  شريط الأدوات التحرير
+Toolbars/EditToolbar/Hint: اختر الأزرار التي يتم عرضها للتدلرز في وضع التحرير. اسحب وأفلت لتغيير الترتيب.
+
+Toolbars/Hint: حدد أزرار شريط الأدوات التي يتم عرضها
+
+Toolbars/PageControls/Caption: شريط أدوات الصفحة
+Toolbars/PageControls/Hint: اختر الأزرار التي يتم عرضها على شريط أدوات الصفحة الرئيسية. اسحب وأفلت لتغيير الترتيب
+
+Toolbars/ViewToolbar/Caption: شريط أدوات العرض
+Toolbars/ViewToolbar/Hint: اختر الأزرار التي يتم عرضها للتدلرز في وضع العرض. اسحب وأفلت لتغيير الترتيب
+
+Tools/Download/Full/Caption: تنزيل الويكي بشكل كامل
+

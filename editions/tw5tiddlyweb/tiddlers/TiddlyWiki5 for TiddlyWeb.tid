@@ -1,0 +1,25 @@
+title: TiddlyWiki5 for TiddlyWeb
+created: 201311152153
+modified: 201311152153
+
+! Features
+
+* Loads skinny tiddlers from entire recipe at startup/login
+* Subsequently syncs changes back to the server
+* Polls for changes from the server
+
+! Getting Started
+
+To try it out, create a new space, include the space ''tw5tiddlyweb'', and then visit ''{myspace}.tiddlyspace.com/tw5''.
+
+If you want to make TiddlyWiki5 the default view for your space, then create a tiddler called ''ServerSettings'' and give it the text:
+
+```
+index: tw5
+```
+
+! Issues
+
+* ''[[$:/DefaultTiddlers]]'' doesn't work because thanks to lazy loading it is only loaded after it is needed
+* Ignores ''if-match'' header, so doesn't detect clashes on save
+* UI state (eg current tab status) is shared between all users of the wiki, meaning that the UI can spontaneously change in response to a server sync

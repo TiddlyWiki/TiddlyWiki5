@@ -1,0 +1,19 @@
+title: $:/language/Help/load
+description: Carga tiddlers desde un archivo
+
+Carga tiddlers de archivos de tipo TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` u otros archivos locales. El procesamiento aplicado a los archivos entrantes será determinado por la extensión del archivo. Utiliza el comando `import` si necesita especificar el deserializador y la codificación explícitamente.
+
+```
+--load <filepath> [noerror]
+--load <dirpath> [noerror]
+```
+
+De forma predeterminada, el comando `load` genera un error si no se encuentran tiddlers. El error se puede suprimir proporcionando el parámetro opcional "noerror".
+
+Para cargar tiddlers de un TiddlyWiki encriptado, primero debes especificar la contraseña con el comando PasswordCommand. Por ejemplo:
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
+```
+
+Ten en cuenta que TiddlyWiki no carga complementos o extensiones anteriores a los ya cargados. 

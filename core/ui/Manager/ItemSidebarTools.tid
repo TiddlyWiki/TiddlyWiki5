@@ -1,0 +1,15 @@
+title: $:/Manager/ItemSidebar/Tools
+tags: $:/tags/Manager/ItemSidebar
+caption: {{$:/language/Manager/Item/Tools}}
+
+\whitespace trim
+<p>
+<$button to=<<currentTiddler>>>
+{{$:/core/images/link}}&#32;open
+</$button>
+</p>
+<p>
+<$button message="tm-edit-tiddler" param=<<currentTiddler>>>
+{{$:/core/images/edit-button}}&#32;edit
+</$button>
+</p>

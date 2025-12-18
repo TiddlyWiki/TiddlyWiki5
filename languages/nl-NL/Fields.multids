@@ -1,0 +1,38 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: De volledige URI van een externe afbeeldingstiddler
+_is_skinny: Indien aanwezig, geeft aan dat het tekstveld van de server geladen moet worden
+bag: De naam van de 'bag' waaruit de tiddler kwam
+caption: Tekst die op een tab of een knop getoond wordt
+color: De CSS-waarde van een kleur gekoppeld aan een tiddler
+component: De naam van de component die een [[alarmtiddler|AlertMechanism]] veroorzaakt
+created: De aanmaakdatum van een tiddler
+creator: De naam van de maker van de tiddler
+current-tiddler: Gebruikt om de tiddler bovenaan bij te houden in een [[geschiedenislijst|HistoryMechanism]]
+dependents: De lijst van plugintitels waarvan een plugin afhankelijk is
+description: De beschrijvende tekst voor een plugin of een modale dialoog
+draft.of: Voor concepttiddlers; bevat de titel van de te maken tiddler
+draft.title: Voor concepttiddlers; bevat de voorgestelde titel van de tiddler
+footer: De voettekst van een 'wizard'
+hide-body: Als 'yes' ingevuld is, wordt de tekst van de tiddler niet weergegeven
+icon: De titel van de pictogramtiddler die met deze tiddler gekoppeld is
+library: Als 'yes' ingevuld is, dient de tiddler als JavaScript-bibliotheek opgeslagen te worden
+list: Een geordende lijst van tiddlertitels gekoppeld met een tiddler
+list-after: Indien ingevuld, de titel van de tiddler waarna deze tiddler toegevoegd moet worden in de reeks tiddlertitels
+list-before: Indien ingevuld, de titel van de tiddler waarvoor deze tiddler toegevoegd moet worden in de reeks tiddlertitels, of aan het begin van de reeks als dit veld wel aanwezig maar leeg is
+modified: De datum en tijd waarop de tiddler voor het laatst werd gewijzigd
+modifier: De persoon die voor het laatst de tiddler gewijzigd heeft
+name: De leesbare naam gekoppeld aan een plugin tiddler
+plugin-priority: Een numerieke waarde die de prioriteit van een plugintiddler aangeeft
+plugin-type: Het type van een plugin in een plugin tiddler
+released: Datum van een TiddlyWiki versie
+revision: De versie van de tiddler op de server
+source: De URL gekoppeld aan de tiddler
+subtitle: De tekst van de ondertitel van een wizard
+tags: Een lijst van labels gekoppeld met een tiddler
+text: De tekst van een tiddler
+throttle.refresh: Indien aanwezig wordt verversen van deze tiddler verminderd
+title: De unieke naam van een tiddler
+toc-link: Als 'no' ingevuld is, is de tiddler geen link meer in de Inhoudsopgave
+type: Inhoudstype van een tiddler
+version: Versieinformatie van een plugin

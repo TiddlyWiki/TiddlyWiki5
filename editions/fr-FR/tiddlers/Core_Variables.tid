@@ -1,0 +1,13 @@
+created: 20150220161908000
+fr-title: Variables du noyau
+modified: 20150619163609033
+title: Core Variables
+type: text/vnd.tiddlywiki
+
+Les [[variables|Variables]] suivantes sont intégrées dans le noyau de ~TiddlyWiki<<:>>
+
+<<list-links "[tag[Core Variables]] -[tag[Configuration Variables]]">>
+
+Le noyau utilise aussi diverses configurations de variables et macros si vous les définissez<<:>>
+
+<<list-links "[tag[Configuration Variables]]">>

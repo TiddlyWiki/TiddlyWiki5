@@ -1,0 +1,3 @@
+title: $:/core/templates/plain-text-tiddler-strip-comments
+
+<$view field="text" format="stripcomments" />

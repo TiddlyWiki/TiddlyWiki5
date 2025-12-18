@@ -1,0 +1,21 @@
+caption: encodehtml
+created: 20161017152953211
+modified: 20161017153015687
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input with HTML encoding applied
+op-parameter: 
+op-parameter-name: 
+op-purpose: apply HTML encoding to a string
+tags: [[Filter Operators]] [[String Operators]]
+title: encodehtml Operator
+type: text/vnd.tiddlywiki
+from-version: 5.1.14
+
+"HTML encoding" means replacing special HTML characters with the corresponding HTML entity:
+
+* `&` replaced with `&amp;`
+* `<` replaced with `&lt;`
+* `>` replaced with `&gt;`
+* `"` replaced with `&quot;`
+
+<<.operator-examples "encodehtml">>

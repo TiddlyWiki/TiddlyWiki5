@@ -1,0 +1,59 @@
+created: 20160618090057124
+modified: 20230101114932775
+tags: [[Editor toolbar]]
+title: Using Stamp
+type: text/vnd.tiddlywiki
+
+Snippets are pre-configured snippets of text which can be inserted into the editor by clicking the ''stamp'' (<<.icon $:/core/images/stamp>>) button on the [[toolbar|Editor toolbar]] and then on the required item.
+
+Snippets can either ''replace'', or be ''added before and/or after'', the selected text in the editor.
+
+! Create a snippet
+!! Whilst editing a tiddler
+
+# Click ''stamp'' (<<.icon $:/core/images/stamp>>) on the toolbar
+# Click "//Add your own//" at the bottom of the menu
+# Type the text for the snippet in the editor
+# Enter the caption for the snippet menu item in the `caption` field
+# Click the <<.icon $:/core/images/done-button>> //Confirm changes to this tiddler// button
+
+!! Manually
+
+# Create a new tiddler by clicking the //Create a new tiddler// <<.icon $:/core/images/new-button>> button in the sidebar
+
+# Change the title for the tiddler (from e.g. `New Tiddler 1`). The tiddler title determines the menu item for the stamp if you do not set a `caption` field (see below).<div><$macrocall $name=".tip" _="""''Pro tip'' Set a title like `$:/yourusername/snippets/My new stamp` to 'file' your new tiddler away as a [[system tiddler|SystemTiddlers]] which doesn't appear in the normal search results """ /></div>
+
+# Add the tag <<tag-pill $:/tags/TextEditor/Snippet>> by entering `$:/tags/TextEditor/Snippet` in the `tag name` tag box and clicking //Add// (or pressing the //Enter// key)
+
+# Enter the snippet content (which you wish to appear in the editor when you click the stamp menu <<.icon $:/core/images/stamp>>) in the editor 
+
+# Create a field with the name `caption` and value set to the text for the snippet's stamp menu item:
+## Enter `caption` in the //Add new field// `field name` box
+## Enter the stamp menu item caption in the `field value` box
+
+
+
+! Re-ordering snippets
+Your new snippet will appear at the bottom of the stamp menu by default. To adjust the order of snippets:
+
+# Navigate to a snippet tiddler
+# Click the <<tag $:/tags/TextEditor/Snippet>> tag pill
+# Drag items up and down the menu of snippets
+
+
+! Adding a prefix and/or suffix to a selection <span style="font-size:1rem;"><<.from-version "5.1.20">></span>
+
+By default, the stamp button ''replaces ''text you have selected in the editor (let's say `selectedText`)with your snippet (let's say `$:/my/snippet`).
+
+If instead of //replacing// selected text, you wish the stamp button to //add// [[wikitext  |WikiText]] before and/or after the selection:
+
+# Create a snippet tiddler (tagged <<tag-pill $:/tags/TextEditor/Snippet>>, with `caption` field set to desired stamp menu item text) using either of the two methods above
+# Create a new tiddler with either `/prefix` or `/suffix` appended to the end of the snippet tiddler's title, according to whether you wish the stamp to insert the snippet content //before //(`/prefix`) or //after //(`/suffix`) the text selected in the editor. 
+#* Do not tag the tiddler <<tag-pill $:/tags/TextEditor/Snippet>>; the caption field is ignored
+#* Set the tiddler text to the text you wish to be inserted before or after your selection
+
+|Example configuration for `snippet2` with prefix+suffix|c
+|!Tiddler|!Tiddler content|!Tag|!`caption` field|
+|`$:/snip/snippet2`||<<tag-pill $:/tags/TextEditor/Snippet>>|`My second stamp menu item`|
+|`$:/snip/snippet2/prefix`|`TextIWantPrependedToSelection`|||
+|`$:/snip/snippet2/suffix`|`TextIWantAppendedToSelection`|||

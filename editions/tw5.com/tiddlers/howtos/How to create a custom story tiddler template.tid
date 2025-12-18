@@ -1,0 +1,40 @@
+created: 20211204120244761
+modified: 20211206165108185
+tags: Learning Cascades [[Story Tiddler Template]] [[Story Tiddler Template Cascade]] [[Customise TiddlyWiki]]
+title: How to create a custom story tiddler template
+type: text/vnd.tiddlywiki
+
+Here we show how to add a rule to the [[Story Tiddler Template Cascade]] that causes tiddlers tagged <<tag "$:/tags/TiddlerList">> to be displayed with a custom appearance incorporating thumbnails of the tiddlers named in the list field.
+
+Open [[Demo Tiddler List with Custom Story Tiddler Template]] to see the demo.
+
+First, we add a new step to the story tiddler template cascade. The new filter step is:
+
+```
+[tag[$:/tags/TiddlerList]then[$:/_tw5.com/CustomStoryTiddlerTemplateDemo/Template]]
+```
+
+It can be read as:
+
+```
+If the tiddler has the tag $:/tags/TiddlerList then return $:/_tw5.com/CustomStoryTiddlerTemplateDemo/Template
+```
+
+> The template $:/_tw5.com/CustomStoryTiddlerTemplateDemo/Template also depends on styles defined in [[$:/_tw5.com/CustomStoryTiddlerTemplateDemo/Styles]].
+
+The story tiddler template cascade is defined by the tag <<tag "$:/tags/StoryTiddlerTemplateFilter">>, so we need to create a configuration tiddler with that tag.
+
+We also need to make sure that it is inserted at the correct point in the cascade:
+
+* The new rule must be after the "draft" rule to ensure that draft tiddlers with the tag $:/tags/TiddlerList can be edited
+* The new rule must be before the "default" rule otherwise it will never be executed
+
+The control panel "Cascades" tab shows that this can be achieved by inserting the new step immediately before the default step using the `list-before` field.
+
+The full list of fields in the configuration tiddler is:
+
+<<.tiddler-fields "$:/_tw5.com/CustomStoryTiddlerTemplateDemo/Filter">>
+
+Finally, we need to create the demo tiddler itself:
+
+<<.tiddler-fields "Demo Tiddler List with Custom Story Tiddler Template">>

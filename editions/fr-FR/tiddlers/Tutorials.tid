@@ -1,0 +1,29 @@
+caption: Tutoriels
+created: 20140908125300000
+fr-title: Tutoriels
+modified: 20150614160111460
+tags: Community
+title: Tutorials
+type: text/vnd.tiddlywiki
+
+Voici quelques pages web contenant des astuces et des tutoriels liés à ~TiddlyWiki :
+
+<div class="tc-link-info">
+
+<$list filter="[tag[Tutorials]!sort[modified]]">
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+!!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
+
+<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>

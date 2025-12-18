@@ -1,0 +1,13 @@
+caption: sum
+created: 20190611155400623
+modified: 20190611155953322
+op-input: a [[selection of titles|Title Selection]]
+op-output: the result of adding together the input as numbers
+op-purpose: produce the sum of the input numbers
+tags: [[Reducing Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: sum Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+<<.operator-examples "sum">>

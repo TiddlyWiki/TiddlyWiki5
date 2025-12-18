@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: Konstruerar biblioteks-insticksprogram som är nödvändigt för uppgraderingsprocessen
+
+Konstruerar `$:/UpgradeLibrary` tiddlern för uppgraderingsprocessen.
+
+Uppgraderingsbiblioteket är formaterat som en vanligt inststicksprogram-tiddler med insticksprogramtypen `library`. Den innehåller en kopia av varje insticksprogram, teman och språkpaket som är tillgängliga via TiddlyWiki5 repository.
+
+Detta kommando är tänk att användas för internt bruk; det är enbart relevant för användare som skapar anpassade uppgraderingsprocedurer.
+
+```
+--makelibrary <title>
+```
+
+Titel argumentet som standard till `$:/UpgradeLibrary`.

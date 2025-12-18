@@ -1,0 +1,14 @@
+created: 20150403110817298
+modified: 20210106151027409
+tags: [[Community Plugins]]
+title: Ace Editor Plugin by Joerg Plewe
+type: text/vnd.tiddlywiki
+url: http://innoq.tiddlyspot.com
+
+A plugin to integrate the [[Ace editor|https://github.com/ajaxorg/ace]] into TiddlyWiki.
+
+{{!!url}}
+
+<<<
+Being quite new to TW5 development I tried my best to draft a SyncAdaptor to store tiddlers in IndexedDb. This is quite useful if an application / plugin installation is not possible (we have quite some restrictions at work...).
+<<<

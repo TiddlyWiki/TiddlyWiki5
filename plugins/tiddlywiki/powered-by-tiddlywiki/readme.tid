@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/powered-by-tiddlywiki/readme
+
+This plugin adds a "Powered by ~TiddlyWiki" banner that links back to https://tiddlywiki.com
+
+It's very basic at the moment, but the plan is to improve it by making it more customisable.

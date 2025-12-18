@@ -1,0 +1,5 @@
+title: $:/language/
+
+# The rest of the elements is part of languages/de-DE/Dates.multids
+Date/Long/Month/1: Jänner
+Date/Short/Month/1: Jän

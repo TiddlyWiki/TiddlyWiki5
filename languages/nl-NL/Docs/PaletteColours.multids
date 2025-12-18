@@ -1,0 +1,109 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Achtergrond alarm
+alert-border: Rand alarm
+alert-highlight: Geaccentueerd alarm
+alert-muted-foreground: Gedimde voorgrond alarm
+background: Algemene achtergrond
+blockquote-bar: Citaatbalk
+button-background: Standaard knopachtergrond
+button-border: Standaard knoprand
+button-foreground: Standaard knop voorgrond
+code-background: Achtergrond code
+code-border: Rand code
+code-foreground: Voorgrond code
+dirty-indicator: Indicator voor niet-opgeslagen wijzigingen
+download-background: Achtergrond downloadknop
+download-foreground: Voorgrond downloadknop
+dragger-background: Achtergrond 'dragger'
+dragger-foreground: Voorgrond 'dragger'
+dropdown-background: Achtergrond dropdown
+dropdown-border: Rand dropdown
+dropdown-tab-background: Achtergrond dropdown tab
+dropdown-tab-background-selected: Achtergrond dropdown tab voor geselecteerde tabs
+dropzone-background: Achtergrond 'dropzone'
+external-link-background: Achtergrond externe link
+external-link-background-hover: Achtergrond 'mouseover' externe link
+external-link-background-visited: Achtergrond bezochte externe link
+external-link-foreground: Voorgrond externe link
+external-link-foreground-hover: Voorgrond mouseover externe link
+external-link-foreground-visited: Voorgrond bezochte externe link
+foreground: Voorgrond algemeen
+menubar-background: Menu bar achtergrond
+menubar-foreground: Menu bar voorgrond
+message-background: Achtergrond berichtenpaneel
+message-border: Rand berichtenpaneel
+message-foreground: Voorgrond berichtenpaneel
+modal-backdrop: Gedimde achtergrond bij modale dialoog
+modal-background: Achtergrond modale dialoog
+modal-border: Rand van modale dialoog
+modal-footer-background: Achtergrond van modale voettekst
+modal-footer-border: Rand van modale voettekst
+modal-header-border: Rand van modale koptekst
+muted-foreground: Voorgrond algemeen gedimd
+notification-background: Achtergrond melding
+notification-border: Rand melding
+page-background: Achtergrond pagina
+pre-background: Achtergrond gepreformatteerde code
+pre-border: Rand gepreformatteerde code
+primary: Primaire kleur
+select-tag-background: `<select>` element achtergrond
+select-tag-foreground: `<select>` element tekst
+sidebar-button-foreground: Voorgrond zijpaneelknop
+sidebar-controls-foreground: Voorgrond knoppen zijpaneel
+sidebar-controls-foreground-hover: Voorgrond mouseover knoppen zijpaneel
+sidebar-foreground: Voorgrond zijpaneel
+sidebar-foreground-shadow: Voorgrond schaduw zijpaneel
+sidebar-muted-foreground: Voorgrond gedimd zijpaneel
+sidebar-muted-foreground-hover: Voorgrond gedimd 'mouseover' zijpaneel
+sidebar-tab-background: Achtergrond tab zijpaneel
+sidebar-tab-background-selected: Achtergrond tab zijpaneel voor geselecteerde tabs
+sidebar-tab-border: Rand tab zijpaneel
+sidebar-tab-border-selected: Rand tab zijpaneel voor geselecteerde tabs
+sidebar-tab-divider: Zijpaneel tabscheider
+sidebar-tab-foreground: Voorgrond tab zijpaneel
+sidebar-tab-foreground-selected: Voorgrond tab zijpaneel voor geselecteerde tabs
+sidebar-tiddler-link-foreground: Voorgrond tiddler link zijpaneel
+sidebar-tiddler-link-foreground-hover: Voorgrond 'mouseover' tiddler link zijpaneel
+site-title-foreground: Voorgrond van de wikititel
+static-alert-foreground: Voorgrond statische alarmmelding
+tab-background: Achtergrond tab
+tab-background-selected: Achtergrond tab voor geselecteerde tabs
+tab-border: Rand tab
+tab-border-selected: Rand tab voor geselecteerde tabs
+tab-divider: Tabscheider
+tab-foreground: Voorgrond tab
+tab-foreground-selected: Voorgrond tab voor geselecteerde tabs
+table-border: Rand tabel
+table-footer-background: Achtergrond tabel voettekst
+table-header-background: Achtergrond tabelkop
+tag-background: Achtergrond label
+tag-foreground: Voorgrond label
+tiddler-background: Achtergrond tiddler
+tiddler-border: Rand tiddler
+tiddler-controls-foreground: Voorgrond knoppen tiddler
+tiddler-controls-foreground-hover: Voorgrond mouseover knoppen tiddler
+tiddler-controls-foreground-selected: Voorgrond geselecteerde knoppen tiddler
+tiddler-editor-background: Achtergrond tiddlereditor
+tiddler-editor-border: Rand tiddlereditor
+tiddler-editor-border-image: Rand tiddler editor afbeelding
+tiddler-editor-fields-even: Achtergrond tiddler editor voor even velden
+tiddler-editor-fields-odd: Achtergrond tiddler editor voor oneven velden
+tiddler-info-background: Achtergrond tiddler infopaneel
+tiddler-info-border: Rand tiddler infopaneel
+tiddler-info-tab-background: Achtergrond tab tiddler-infopaneel
+tiddler-link-background: Achtergrond tiddlerlink
+tiddler-link-foreground: Voorgrond tiddlerlink
+tiddler-subtitle-foreground: Voorgrond tiddlerondertitel
+tiddler-title-foreground: Voorgrond tiddlertitel
+toolbar-cancel-button: Voorgrond 'annuleer' knop (knoppenbalk)
+toolbar-close-button: Voorgrond 'sluit' knop (knoppenbalk)
+toolbar-delete-button: Voorgrond 'verwijder' knop (knoppenbalk)
+toolbar-done-button: Voorgrond 'opslaan' knop (knoppenbalk)
+toolbar-edit-button: Voorgrond 'wijzig' knop (knoppenbalk)
+toolbar-info-button: Voorgrond 'info' knop (knoppenbalk)
+toolbar-new-button: Voorgrond 'nieuwe tiddler' knop (knoppenbalk)
+toolbar-options-button: Voorgrond 'opties' knop (knoppenbalk)
+toolbar-save-button: Voorgrond 'opslaan wiki' knop (knoppenbalk)
+untagged-background: Achtergrond label "niet gelabeld"
+very-muted-foreground: Voorgrond zeer gedimd

@@ -1,0 +1,33 @@
+caption: Personalizar resultados de búsqueda
+created: 20141027151552783
+es-title: Visualización personalizada de resultados de búsqueda
+modified: 20160426145023142
+tags: [[Customise TiddlyWiki]]
+title: Customising search results
+type: text/vnd.tiddlywiki
+
+Por defecto, los resultados de búsquedas en la barra lateral se muestran como una simple lista de títulos de tiddler. La forma de mostrar los resultados puede modificarse a gusto mediante plugins de visualización. Si el sistema detecta visualizaciones adicionales, las mostrará en pestañas. 
+
+Las distintas visualizaciones de resultados se guardan en tiddlers con la etiqueta <<.tag ~$:/tags/SearchResults>>. La lista por defecto de resultados de búsqueda está implementada en el sistema y reside en el tiddler <<.tid ~$:/core/ui/DefaultSearchResultList>>.
+
+Para crear una nueva visualización de resultados:
+
+# Crea un nuevo tiddler con la etiqueta <<.tag ~$:/tags/SearchResults>>
+# Usa la variable <<.var searchTiddler>> para acceder al título del tiddler que contiene el término de búsqueda actual
+
+Si quieres que sea la nueva visualización la que se muestre por defecto, crea un tiddler llamado <<.tid ~$:/config/SearchResults/Default>> que contenga en el texto el título de la nueva visualización. 
+
+Este es un ejemplo de visualización alternativa que muestra los resultados en orden cronológicamente inverso:
+
+```
+\define searchResults()
+<$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
+
+{{$:/language/Search/Matches}}
+
+</$set>
+<<timeline subfilter:"!is[system]search{$(searchTiddler)$}">>
+\end
+<<searchResults>>
+```
+

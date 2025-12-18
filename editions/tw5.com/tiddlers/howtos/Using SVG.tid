@@ -1,0 +1,55 @@
+created: 20131028132700000
+modified: 20160618085859219
+tags: Features
+title: Using SVG
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5 allows you to use SVG to display vector graphics in two ways:
+
+* Tiddlers with the type `image/svg+xml` are interpreted as SVG images, and displayed and transcluded as self-contained `<img>` elements with the SVG embedded as a data URI in the `src` attribute.
+** For examples of SVG images see [[Motovun Jack.svg]] and [[Tiddler Fishes.svg]]
+* WikiText can also include inline SVG elements directly. See below for an example.
+
+! Embedding SVG tiddlers
+
+You can embed an SVG image tiddler using the ordinary transclusion syntax:
+
+```
+{{Motovun Jack.jpg}}
+```
+
+You can also use [[Typed Blocks in WikiText]] to embed an inline SVG tiddler.
+
+The implications of the image being rendered within an `<img>` element are that it is sandboxed; it can't use CSS styles from the parent document, for example. Neither can the image use WikiText features like transclusion.
+
+! Embedding SVG elements
+
+The other way to use SVG is to embed the `<svg>` element directly. For example:
+
+<svg width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg>
+
+Note that inline SVG elements don't need an `<?xml version="1.0"?>` directive.
+
+! Including HTML or WikiText content in SVG images
+
+You can include simple text strings in SVG images using the `<text>` element:
+
+<svg width="100px" height="30px" viewBox="0 0 1000 300"><text x="250" y="150" font-family="Verdana" font-size="55">Hello, out there</text><rect x="1" y="1" width="998" height="298" fill="none" stroke-width="2" /></svg>
+
+HTML or WikiText content can be included within inline SVG images using the `<foreignObject>` element. For example:
+
+<svg width="260px" height="260px"><circle cx="150" cy="150" r="100" fill="blue" stoke="red"/><foreignObject x="70" y="110" width="150" height="180"><body>Here is some text that requires a word wrap, and includes a [[link to a tiddler|HelloThere]].</body></foreignObject></svg>
+
+! Transcluding SVG elements
+
+When embedding SVG elements you can also use WikiText features like transclusion. For example, here is an SVG circle with the radius set to the value in the tiddler [[$:/SVGExampleRadius]]:
+
+<svg width="150" height="150"><circle cx="75" cy="75" r={{$:/SVGExampleRadius}} stroke="black" stroke-width="2" fill="green"/></svg>
+
+You can edit the value of the radius here: <$edit-text tiddler="$:/SVGExampleRadius" tag="input"/>
+
+! Making curved text with SVG
+
+{{Making curved text with SVG}}

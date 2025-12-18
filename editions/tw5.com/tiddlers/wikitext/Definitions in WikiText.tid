@@ -1,0 +1,14 @@
+created: 20131205160424246
+modified: 20131205160450910
+tags: WikiText
+title: Definitions in WikiText
+type: text/vnd.tiddlywiki
+caption: Definitions
+
+HTML definition lists are created with this syntax:
+
+<<wikitext-example src:"; Term being defined
+: Definition of that term
+; Another term
+: Another definition
+">>

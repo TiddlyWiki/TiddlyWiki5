@@ -1,0 +1,138 @@
+created: 20151014170727812
+days: Fri Wed Mon Tue
+dofwks: Mon Tue Wed Thu Fri Sat Sun
+item1: six
+item2: seven
+item3: eight
+list: Yesterday Today Tomorrow
+marker: Thursday
+modified: 20230227175501965
+myfield: Monday Tuesday [[Middle of the Week]] Thursday Friday Saturday Sunday
+numbers: 1 2 3 4 five 6 7 8 9
+tags: Filters
+title: Extended Listops Filters
+
+\define .operator-rows(filter)
+<$list filter="$filter$"><tr>
+<td><$link>{{!!caption}}</$link></td>
+<td>{{!!op-purpose}}</td>
+<td align="center"><$list filter="[all[current]tag[Common Operators]]">✓</$list></td>
+<td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>
+</tr></$list>
+\end
+
+\define .group-heading(_)
+<tr class="doc-table-subheading"><th colspan="4" align="center">$_$</th></tr>
+\end
+
+! Introduction
+
+A number of filters are used to manipulate lists. 
+
+Some filters are designed to move items from the tail of the list and insert them at specified locations in the list, e.g. [[putafter|putafter Operator]] or [[putbefore|putbefore Operator]]. Items are often appended to the list before using these filters. In general, these filters accept a suffix specifying the number of items to move (default to 1.) 
+
+Some filters are designed to either add or remove from the list, a selected range of items from an array, e.g. [[append|append Operator]] or [[remove|remove Operator]]. These filters are best used with a reference to an array, stored in a field or data index elsewhere in the wiki (they may be used with a simple list of items, provided the items do not include white space.) In general, these filters accept a suffix specifying the number of items to move (default to All.)
+
+<table>
+<<.group-heading "Listops Operators">>
+<tr>
+<th align="left">Operator</th>
+<th align="left">Purpose</th>
+<th>✓</th>
+<th>`!`</th>
+</tr>
+<<.operator-rows "[tag[Filter Operators]tag[Listops Operators]tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+</table>
+
+! Examples
+
+In this example we shall populate the '~DataIndex' index of the tiddler '~MyData' with the names of the days of the week, then clear this list. 
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $filter="[list[Days of the Week]]"/>
+Get days-of-the-week
+</$button> 
+<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $filter="[[]]"/>
+Clear
+</$button>
+
+{{ListopsData}}"""/>
+
+---
+In this example we shall slice the populated list from the 'DaysOfTheWeek' index of the tiddler '~MyData' in order to insert items before and after a marker item (Wednesday) that are first appended to the list.
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="one two +[putbefore:2[Wednesday]]"/>
+Put 2 Items Before Wednesday
+</$button> 
+<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="four five +[putafter:2[Wednesday]] three +[putbefore[Wednesday]]"/>
+Put One Item Before & Two Items After Wednesday
+</$button>
+
+{{ListopsData}}"""/>
+
+---
+In this example we shall slice the populated list from the 'DaysOfTheWeek' index of the tiddler '~MyData' in order to replace the marker item (Wednesday) with items which are first appended to the list. We shall then move 3 items to the head of the list which have first been appended to the list from referenced fields.
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="[[---o]] [[o---]] +[replace:2{!!marker}]"/>
+Replace '!!marker' with 2 Items
+</$button>
+<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="[{!!item1}] [{!!item2}] [{!!item3}] +[putfirst:3[]]"/>
+Put 3 Items First
+</$button>
+
+{{ListopsData}}"""/>
+
+---
+In this example we shall slice the populated list from the 'DaysOfTheWeek' index of the tiddler '~MyData' in order to append to the truncated list, items from a referenced field. We shall then remove the first two of the items added.
+
+<$macrocall $name='wikitext-example-without-html'
+src="""|list: |<$view field="list"/> |
+
+<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="+[allbefore:include[Wednesday]] +[prepend{!!list}]"/>
+Prepend '!!list' to items before 'Wednesday'
+</$button> 
+<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="+[remove:2{!!list}]"/>
+Remove first two items in '!!list' from current list
+</$button>
+<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="+[!remove:1{!!list}]"/>
+Remove last item in '!!list' from current list
+</$button>
+
+{{ListopsData}}"""/>
+
+---
+In this example we shall populate the list with numbers, then move items one by one from the head to the tail and from the tail to the head (best seen by clicking the lower buttons several times.) 
+
+This example illustrates that the append[] and prepend[] operators do not enforce unique instances of an item and that, with the next run, any duplicates are removed.
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $filter="[[]]" $subfilter="+[append:3{!!numbers}]"/>
+Setup some numbers
+</$button>
+<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="+[!append:6{!!numbers}]"/>
+Append more numbers
+</$button>
+
+<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="+[putfirst:2[]]"/>
+Move last 2 items to the head
+</$button>
+<$button>
+<$action-listops $tiddler="ListopsData" $index="DataIndex" $subfilter="+[putlast[]]"/>
+Move the head to the last item
+</$button>
+
+{{ListopsData}}"""/>

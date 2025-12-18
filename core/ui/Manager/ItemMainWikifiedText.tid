@@ -1,0 +1,5 @@
+title: $:/Manager/ItemMain/WikifiedText
+tags: $:/tags/Manager/ItemMain
+caption: {{$:/language/Manager/Item/WikifiedText}}
+
+<$transclude mode="block"/>

@@ -1,0 +1,7 @@
+title: Audio
+
+TiddlyWiki supports audio as a first class citizen alongside images and text.
+
+{{TiddlyWiki.mp3}}
+
+Next, create structure with [[Tags]].

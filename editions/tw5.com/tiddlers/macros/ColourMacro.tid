@@ -1,0 +1,17 @@
+created: 20150221154058000
+modified: 20200228142855357
+tags: Macros [[Core Macros]]
+title: colour Macro
+type: text/vnd.tiddlywiki
+caption: colour
+
+The <<.def colour>> (or <<.def color>>) [[macro|Macros]] returns the [[CSS|Cascading Style Sheets]] value of one the colours in the current [[palette|ColourPalettes]].
+
+If no such entry exists in the current palette, the [[vanilla palette|$:/palettes/Vanilla]] is used instead. If no such entry exists in the vanilla palette, the system looks for a configuration tiddler with the title `$:/config/DefaultColourMappings/<colour-name>` and transcludes the colour from the text field. This enables to plugins to ship defaults for colours that are not present in the core palettes.
+
+!! Parameters
+
+;name
+: The name of the palette entry, e.g. `page-background`
+
+<<.macro-examples "colour">>

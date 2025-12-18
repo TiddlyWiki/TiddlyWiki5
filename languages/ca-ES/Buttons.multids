@@ -1,0 +1,188 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: cerca avançada
+AdvancedSearch/Hint: Cerca avançada
+Bold/Caption: negreta
+Bold/Hint: Poseu en negreta la selecció
+Cancel/Caption: anul·la
+Cancel/Hint: Descarta els canvis d'aquest tiddler
+Clear/Caption: esborra
+Clear/Hint: Esborra la imatge
+Clone/Caption: clona
+Clone/Hint: Clona aquest tiddler
+Close/Caption: tanca
+Close/Hint: Tanca aquest tiddler
+CloseAll/Caption: tanca-ho tot
+CloseAll/Hint: Tanca tots els tiddlers
+CloseOthers/Caption: tanca els altres
+CloseOthers/Hint: Tanca els altres tiddlers
+ControlPanel/Caption: tauler de control
+ControlPanel/Hint: Obre el tauler de control
+CopyToClipboard/Caption: copia al portapapers
+CopyToClipboard/Hint: Copia el text al portapapers
+Delete/Caption: suprimeix
+Delete/Hint: Suprimeix aquest tiddler
+Edit/Caption: edita
+Edit/Hint: Edita aquest tiddler
+EditorHeight/Caption: alçada de l'editor
+EditorHeight/Caption/Auto: Ajusta l'alçada al contingut
+EditorHeight/Caption/Fixed: Alçada fixe:
+EditorHeight/Hint: Trieu l'alçada de l'editor de text
+Encryption/Caption: encriptació
+Encryption/ClearPassword/Caption: neteja la contrasenya
+Encryption/ClearPassword/Hint: Suprimeix la contrasenya per desar aquest wiki sense encriptació
+Encryption/Hint: Establiu o suprimiu la contrasenya per desar aquest wiki
+Encryption/SetPassword/Caption: trieu la contrasenya
+Encryption/SetPassword/Hint: Estableix una contrasenya per desar aquest wiki amb encriptació
+Excise/Caption: extirpa
+Excise/Caption/Excise: Executa l'extirpació
+Excise/Caption/MacroName: Nom de la macro:
+Excise/Caption/NewTitle: Títol del nou tiddler:
+Excise/Caption/Replace: Reemplaça el text extirpat amb:
+Excise/Caption/Replace/Link: enllaç
+Excise/Caption/Replace/Transclusion: transclusió
+Excise/Caption/Tag: Etiqueta el nou tiddler amb el títol d'aquest tiddler
+Excise/Caption/TiddlerExists: Atenció: aquest tiddler ja existeix
+Excise/Hint: Extirpa el text seleccionat en un nou tiddler
+ExportPage/Caption: exporta-ho tot
+ExportPage/Hint: Exporta tots els tiddlers
+ExportTiddler/Caption: exporta el tiddler
+ExportTiddler/Hint: Exporta aquest tiddler
+ExportTiddlers/Caption: exporta tiddlers
+ExportTiddlers/Hint: Exporta els tiddlers
+Fold/Caption: expandeix el tiddler
+Fold/FoldBar/Caption: barra d'expansió
+Fold/FoldBar/Hint: Barres opcionals per a contraure i expandir els tiddlers
+Fold/Hint: Contrau el cos d'aquest tiddler
+FoldAll/Caption: contrau tots els tiddlers
+FoldAll/Hint: Contrau el cos de tots els tiddlers oberts
+FoldOthers/Caption: contrau els altres tiddlers
+FoldOthers/Hint: Contrau el cos d'altres tiddlers oberts
+FullScreen/Caption: pantalla sencera
+FullScreen/Hint: Mostra o deixa de mostrar la finestra en pantalla sencera
+Heading1/Caption: capçalera 1
+Heading1/Hint: Aplica el format de capçalera de nivell 1 a les línies que contenen la selecció
+Heading2/Caption: capçalera 2
+Heading2/Hint: Aplica el format de capçalera de nivell 2 a les línies que contenen la selecció
+Heading3/Caption: capçalera 3
+Heading3/Hint: Aplica el format de capçalera de nivell 3 a les línies que contenen la selecció
+Heading4/Caption: capçalera 4
+Heading4/Hint: Aplica el format de capçalera de nivell 4 a les línies que contenen la selecció
+Heading5/Caption: capçalera 5
+Heading5/Hint: Aplica el format de capçalera de nivell 5 a les línies que contenen la selecció
+Heading6/Caption: capçalera 6
+Heading6/Hint: Aplica el format de capçalera de nivell 6 a les línies que contenen la selecció
+Help/Caption: ajuda
+Help/Hint: Mostra el tauler d'ajuda
+HideSideBar/Caption: amaga la barra lateral
+HideSideBar/Hint: Amaga la barra lateral
+Home/Caption: Inici
+Home/Hint: Obre els tiddlers per omissió
+Import/Caption: importa
+Import/Hint: Importa fitxers
+Info/Caption: informació
+Info/Hint: Mostra la informació d'aquest tiddler
+Italic/Caption: cursiva
+Italic/Hint: Aplica el format de cursiva a la selecció
+Language/Caption: idioma
+Language/Hint: Trieu l'idioma
+LineWidth/Caption: amplada de la línia
+LineWidth/Hint: Trieu l'amplada de la línia
+Link/Caption: enllaç
+Link/Hint: Genera un enllaç de tipus wikitext
+Linkify/Caption: wikienllaç
+Linkify/Hint: Posa la selecció dins de claudàtors
+ListBullet/Caption: llista de pics
+ListBullet/Hint: Aplica el format de llista de pics a la selecció
+ListNumber/Caption: llista numerada
+ListNumber/Hint: Aplica el format de llista numerada a la selecció
+Manager/Caption: gestor de tiddlers
+Manager/Hint: Obre el gestor de tiddlers
+MonoBlock/Caption: bloc monoespaiat
+MonoBlock/Hint: Aplica el format de bloc monoespaiat a la selecció
+MonoLine/Caption: monoespaiat
+MonoLine/Hint: Aplica el format monoespaiat a la selecció
+More/Caption: més
+More/Hint: Més accions
+NewHere/Caption: nou aquí
+NewHere/Hint: Obre un nou tiddler etiquetat amb aquest
+NewImage/Caption: nova imatge
+NewImage/Hint: Nova imatge
+NewJournal/Caption: nou diari
+NewJournal/Hint: Nou tiddler diari
+NewJournalHere/Caption: nou diari aquí
+NewJournalHere/Hint: Obre un nou tiddler de tipus diari etiquetat amb el títol d'aquest tiddler
+NewMarkdown/Caption: nou tiddler de Markdown
+NewMarkdown/Hint: Genera un nou tiddler de Markdown
+NewTiddler/Caption: nou tiddler
+NewTiddler/Hint: Obre un nou tiddler
+Opacity/Caption: opacitat
+Opacity/Hint: Trieu l'opacitat de la tinta
+OpenWindow/Caption: obre en una nova finestra
+OpenWindow/Hint: Obre el tiddler en una nova finestra
+Paint/Caption: color de la tinta
+Paint/Hint: Trieu el color de la tinta
+Palette/Caption: paleta de colors
+Palette/Hint: Trieu el color de la paleta
+Permalink/Caption: enllaç permanent
+Permalink/Hint: Mostra a la barra d'adreces, l'enllaç directe cap aquest tiddler
+Permaview/Caption: vista permanent
+Permaview/Hint: Mostra a la barra d'adreces, l'enllaç directe cap als tiddlers que ara es veuen
+Picture/Caption: imatge
+Picture/Hint: Inserta una imatge
+Preview/Caption: previsualització
+Preview/Hint: Mostra el quadre de previsualització
+PreviewType/Caption: tipus de previsualització
+PreviewType/Hint: Trieu el tipus de previsualització
+Print/Caption: imprimeix la pàgina
+Print/Hint: Imprimeix la pàgina actual
+Quote/Caption: cita
+Quote/Hint: Aplica el format de cita a la selecció
+Refresh/Caption: actualitza
+Refresh/Hint: Actualitza tot el wiki
+RotateLeft/Caption: gira a l'esquerra
+RotateLeft/Hint: Gira la imatge 90 graus a l'esquerra
+Save/Caption: d'acord
+Save/Hint: Confirma els canvis d'aquest tiddler
+SaveWiki/Caption: desa els canvis
+SaveWiki/Hint: Desa els canvis
+ShowSideBar/Caption: mostra la barra lateral
+ShowSideBar/Hint: Mostra la barra lateral
+SidebarSearch/Hint: Trieu el camp de cerca de la barra lateral
+Size/Caption: mida de la imatge
+Size/Caption/Height: Alçada:
+Size/Caption/Resize: Mida de la  imatge
+Size/Caption/Width: Amplada:
+Size/Hint: Trieu la mida de la imatge
+Stamp/Caption: Plantilla
+Stamp/Caption/New: Afegeix una nova plantilla
+Stamp/Hint: Inserta una plantilla de text
+Stamp/New/Text: Plantilla de text. (Recordeu afegir un text descriptiu al camp //caption//).
+Stamp/New/Title: Nom que es mostrarà al menú d'afegir una plantilla
+StoryView/Caption: mode de visualització
+StoryView/Hint: mode de visualització
+Strikethrough/Caption: ratllat
+Strikethrough/Hint: Aplica el format de ratllat a la selecció
+Subscript/Caption: subíndex
+Subscript/Hint: Aplica el format de subíndex a la selecció
+Superscript/Caption: superíndex
+Superscript/Hint: Aplica el format de superíndex a la selecció
+TagManager/Caption: gestor d'etiquetes
+TagManager/Hint: Obre el gestor d'etiquetes
+Theme/Caption: tema
+Theme/Hint: Trieu el tema
+Timestamp/Caption: marques del temps
+Timestamp/Hint: Indiqueu si voleu que s'anoti l'hora de modificació dels tiddlers
+Timestamp/Off/Caption: no anotis l'hora de modificació
+Timestamp/Off/Hint: No s'anota l'hora de modificació dels tiddlers
+Timestamp/On/Caption: anota l'hora de modificació
+Timestamp/On/Hint: S'anota l'hora de modificació dels tiddlers
+ToggleSidebar/Hint: Commuta la visibilitat de la barra lateral
+Transcludify/Caption: transclusió
+Transcludify/Hint: Posa la selecció entre claus
+Underline/Caption: subratllat
+Underline/Hint: Aplica el format de subratllat a la selecció
+Unfold/Caption: expandeix el tiddler
+Unfold/Hint: Expandeix el cos d'aquest tiddler
+UnfoldAll/Caption: expandeix tots els tiddlers
+UnfoldAll/Hint: Expandeix el cos de tots els tiddlers oberts

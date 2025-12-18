@@ -1,0 +1,14 @@
+title: Genesis/DollarSigns
+description: Usage of genesis widget with attributes starting with dollar signs
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$genesis $type="$let" myvar="Kitten">(<$text text=<<myvar>>/>)</$genesis>
+<$genesis $type="$let" $$myvar="Kitten">(<$text text=<<$myvar>>/>)</$genesis>
++
+title: ExpectedResult
+
+<p>(Kitten)(Kitten)</p>

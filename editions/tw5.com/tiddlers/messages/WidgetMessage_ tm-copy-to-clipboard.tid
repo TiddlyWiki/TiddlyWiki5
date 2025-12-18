@@ -1,0 +1,27 @@
+caption: tm-copy-to-clipboard
+created: 20171215150056004
+modified: 20240523174013095
+tags: Messages
+title: WidgetMessage: tm-copy-to-clipboard
+type: text/vnd.tiddlywiki
+
+The "copy to clipboard" message attempts to copy the specified text to the clipboard. If it succeeds, the tiddler [[$:/language/Notifications/CopiedToClipboard/Succeeded]] is displayed as a notification. If the browser doesn't permit the operation, the tiddler [[$:/language/Notifications/CopiedToClipboard/Failed]] is displayed instead.
+
+It requires the following properties on the `event` object:
+
+|!Name |!Description |
+|param |Text to be copied to the clipboard |
+|successNotification |<<.from-version "5.3.4">> Optional title of tiddler containing notification to be used if the operation succeeds |
+|failureNotification |<<.from-version "5.3.4">> Optional title of tiddler containing notification to be used if the operation fails |
+
+This message is usually generated with the ButtonWidget. It is handled by the TiddlyWiki core.
+
+! Example
+
+This example copies the current time to the clipboard:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button message="tm-copy-to-clipboard" param=<<now>>>
+Copy date to clipboard
+</$button>'/>
+

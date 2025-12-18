@@ -1,0 +1,105 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Фон сообщения об ошибке
+alert-border: Граница сообщения об ошибке
+alert-highlight: Подсветка сообщения об ошибке
+alert-muted-foreground: Приглушенный цвет текста сообщения об ошибке
+background: Общий фон
+blockquote-bar: Оформление цитаты
+button-background: Фон кнопки по умолчанию
+button-border: Граница кнопки по умолчанию
+button-foreground: Цвет кнопки по умолчанию
+code-background: Фон блоков кода
+code-border: Граница блоков кода
+code-foreground: Цвет текста блоков кода
+dirty-indicator: Индикатор несохранённых изменений
+download-background: Фон кнопки Скачать
+download-foreground: Цвет текста кнопки Скачать
+dragger-background: Фон перетаскиваемой ссылки
+dragger-foreground: Цвет текста перетаскиваемой ссылки
+dropdown-background: Фон выпадающего меню
+dropdown-border: Граница выпадающего меню
+dropdown-tab-background: Фон вкладок выпадающего меню
+dropdown-tab-background-selected: Фон выбранных вкладок выпадающего меню
+dropzone-background: Фон области перетаскивания
+external-link-background: фон внешней ссылки
+external-link-background-hover: Фон внешней ссылки при наведении
+external-link-background-visited: Фон посещённой внешней ссылки
+external-link-foreground: Цвет текста внешней ссылки
+external-link-foreground-hover: Цвет текста внешней ссылки при наведении
+external-link-foreground-visited: Цвет текста посещённой внешней ссылки
+foreground: Общий цвет текста
+message-background: Фон сообщений
+message-border: Граница сообщений
+message-foreground: Цвет текста сообщений
+modal-backdrop: Цвет фона за модальным окном
+modal-background: Фон модального окна
+modal-border: Граница модального окна
+modal-footer-background: Фон подвала модального окна
+modal-footer-border: Граница подвала модального окна
+modal-header-border: Граница шапки модального окна
+muted-foreground: Приглушенный цвет текста
+notification-background: Фон уведомлений
+notification-border: Граница уведомлений
+page-background: Фон страницы
+pre-background: Фон неформатированного текста
+pre-border: Граница неформатированного текста
+primary: Первичный цвет
+sidebar-button-foreground: Цвет текста кнопок боковой панели
+sidebar-controls-foreground: Цвет элементов управления боковой панели
+sidebar-controls-foreground-hover: Цвет элементов управления боковой панели при наведении
+sidebar-foreground: Цвет текста на боковой панели
+sidebar-foreground-shadow: Цвет тени текста на боковой панели
+sidebar-muted-foreground: Приглушенный цвет текста на боковой панели
+sidebar-muted-foreground-hover: Приглушенный цвет текста на боковой панели при наведении
+sidebar-tab-background: Фон вкладок на боковой панели
+sidebar-tab-background-selected: Фон выбранных вкладок на боковой панели
+sidebar-tab-border: Граница вкладок на боковой панели
+sidebar-tab-border-selected: Граница выбранных вкладок на боковой панели
+sidebar-tab-divider: Разделитель вкладок на боковой панели
+sidebar-tab-foreground: Цвет текста вкладок на боковой панели
+sidebar-tab-foreground-selected: Цвет текста выбранных вкладок на боковой панели
+sidebar-tiddler-link-foreground: Цвет ссылок на заметки на боковой панели
+sidebar-tiddler-link-foreground-hover: Цвет ссылок на заметки на боковой панели при наведении
+site-title-foreground: Цвет заголовка сайта
+static-alert-foreground: Цвет текста статической версии сообщения об ошибке
+tab-background: Фон вкладок
+tab-background-selected: Фон выбранных вкладок
+tab-border: Граница вкладок
+tab-border-selected: Граница выбранных вкладок
+tab-divider: Разделитель вкладок
+tab-foreground: Цвет текста вкладок
+tab-foreground-selected: Цвет текста выбранных вкладок
+table-border: Граница таблиц
+table-footer-background: Фон подвала таблиц
+table-header-background: Фон шапки таблиц
+tag-background: Фон меток
+tag-foreground: Цвет текста меток
+tiddler-background: Фон заметок
+tiddler-border: Граница заметок
+tiddler-controls-foreground: Цвет элементов управления заметки
+tiddler-controls-foreground-hover: Цвет элементов управления заметки при наведении
+tiddler-controls-foreground-selected: Цвет выбранных элементов управления заметки
+tiddler-editor-background: Фон редактора заметок
+tiddler-editor-border: Граница редактора заметок
+tiddler-editor-border-image: Граница редактора изображений
+tiddler-editor-fields-even: Фон четных полей
+tiddler-editor-fields-odd: Фон нечётных полей
+tiddler-info-background: Фон информационной панели заметки
+tiddler-info-border: Граница информационной панели заметки
+tiddler-info-tab-background: Фон вкладок информационной панели заметки
+tiddler-link-background: Фон ссылок на заметку
+tiddler-link-foreground: Цвет текста ссылок на заметку
+tiddler-subtitle-foreground: Цвет текста подзаголовка заметки
+tiddler-title-foreground: Цвет текста заголовка заметки
+toolbar-cancel-button: Цвет кнопки 'отменить'
+toolbar-close-button: Цвет кнопки 'закрыть'
+toolbar-delete-button: Цвет кнопки 'удалить'
+toolbar-done-button: Цвет кнопки 'готово'
+toolbar-edit-button: Цвет кнопки 'редактировать'
+toolbar-info-button: Цвет кнопки 'информация'
+toolbar-new-button: Цвет кнопки 'создать'
+toolbar-options-button: Цвет кнопки 'настройки'
+toolbar-save-button: Цвет кнопки 'сохранить'
+untagged-background: Фон метки 'без метки'
+very-muted-foreground: Очень приглушенный цвет текста

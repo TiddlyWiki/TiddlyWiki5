@@ -1,0 +1,10 @@
+title: $:/language/Help/build
+description: 自动执行已配置的命令
+
+生成指定的生成目标为当前 wiki。若未指定任何生成目标，则生成所有可用的目标。
+
+```
+--build <target> [<target> ...]
+```
+
+生成目标在 wiki 文件夹的 `tiddlywiki.info` 文件中定义。

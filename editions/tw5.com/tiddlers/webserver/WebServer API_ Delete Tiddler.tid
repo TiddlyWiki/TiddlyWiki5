@@ -1,0 +1,23 @@
+created: 20181002112106875
+modified: 20210418100750769
+tags: [[WebServer API]]
+title: WebServer API: Delete Tiddler
+type: text/vnd.tiddlywiki
+
+Delete a tiddler
+
+```
+DELETE /bags/default/tiddlers/{title}
+```
+
+Parameters:
+
+* ''title'' - URI encoded title of the tiddler to delete
+
+Headers:
+
+* ''x-requested-with'' - must be set to `TiddlyWiki` in order for the request to succeed, unless [[WebServer Parameter: csrf-disable]] is set to `yes`
+
+Response:
+
+* 204 No Content

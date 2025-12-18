@@ -1,0 +1,15 @@
+title: Filters/Recursion
+description: Filter recursion detection
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\define myfilter() [subfilter<myfilter>]
+
+<$text text={{{ [subfilter<myfilter>] }}}/>
++
+title: ExpectedResult
+
+<p>/**-- Excessive filter recursion --**/</p>

@@ -1,0 +1,16 @@
+title: $:/core/ui/Buttons/permaview
+tags: $:/tags/ViewToolbar $:/tags/PageControls
+caption: {{$:/core/images/permaview-button}} {{$:/language/Buttons/Permaview/Caption}}
+description: {{$:/language/Buttons/Permaview/Hint}}
+
+\whitespace trim
+<$button message="tm-permaview" tooltip={{$:/language/Buttons/Permaview/Hint}} aria-label={{$:/language/Buttons/Permaview/Caption}} class=<<tv-config-toolbar-class>>>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+{{$:/core/images/permaview-button}}
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/Permaview/Caption}}/>
+</span>
+<%endif%>
+</$button>

@@ -1,0 +1,19 @@
+caption: copy-to-clipboard
+created: 20171216104754967
+modified: 20171216104941967
+tags: Macros [[Core Macros]]
+title: copy-to-clipboard Macro
+type: text/vnd.tiddlywiki
+
+The <<.def copy-to-clipboard>> [[macro|Macros]] displays a button that copies specified text to the clipboard. A notification is displayed if the operation is successful; some browsers do not permit the operation.
+
+!! Parameters
+
+;src
+: The text to be copied to the clipboard
+;class
+: Optional CSS classes to be assigned to the button (defaults to `tc-btn-invisible`)
+;style
+: Optional CSS styles to be assigned to the button
+
+<<.macro-examples "copy-to-clipboard">>

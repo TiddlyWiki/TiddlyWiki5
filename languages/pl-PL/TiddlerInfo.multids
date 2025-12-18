@@ -1,0 +1,22 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Zaawansowane
+Advanced/PluginInfo/Empty/Hint: pusto
+Advanced/PluginInfo/Heading: Szczegóły Wtyczki
+Advanced/PluginInfo/Hint: Ta wtyczka zawiera takie tiddlery-cienie:
+Advanced/ShadowInfo/Heading: Status ukrycia
+Advanced/ShadowInfo/NotShadow/Hint: Tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> nie jest tiddlerem-cieniem
+Advanced/ShadowInfo/Shadow/Hint: Tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> jest tiddlerem-cieniem
+Advanced/ShadowInfo/Shadow/Source: Zdefiniiowany we wtyczce <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Advanced/ShadowInfo/OverriddenShadow/Hint: Nadpisany przez zwykłego tiddlera
+Fields/Caption: Pola
+List/Caption: Lista
+List/Empty: Ten tiddler nie posiada żadnych list
+Listed/Caption: W Listach
+Listed/Empty: Ten tiddler nie jest wylistowany w żadnym innym tiddlerze
+References/Caption: Link Zwrotne
+References/Empty: Żaden inny tiddler nie linkuje do tego
+Tagging/Caption: Tagi
+Tagging/Empty: Żaden inny tiddler nie ma w swoich tagach tego
+Tools/Caption: Narzędzia
+

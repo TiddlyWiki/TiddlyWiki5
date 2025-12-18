@@ -1,0 +1,26 @@
+caption: Onglets internes
+created: 20150221203607000
+fr-title: Exemple Table des matières: Onglets internes
+modified: 20150621091852105
+order: 5
+tags: table-of-contents-example
+title: Example Table of Contents: Tabbed Internal
+type: text/vnd.tiddlywiki
+
+<$macrocall
+	$name="toc-tabbed-internal-nav"
+	tag="TableOfContents"
+	selectedTiddler="$:/temp/toc/selectedTiddler"
+	unselectedText="<p>Choisir un article dans la table des matières. Cliquer sur la flêche pour le développer.</p>"
+	missingText="<p>Tiddler manquant.</p>"
+/>
+
+```
+<$macrocall
+	$name="toc-tabbed-internal-nav"
+	tag="TableOfContents"
+	selectedTiddler="$:/temp/toc/selectedTiddler"
+	unselectedText="<p>Choisir un article dans la table des matières. Click the arrow to expand a topic.</p>"
+	missingText="<p>Tiddler manquant.</p>"
+/>
+```

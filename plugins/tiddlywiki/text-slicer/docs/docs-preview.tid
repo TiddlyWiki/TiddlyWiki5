@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/text-slicer/docs/preview
+tags: $:/plugins/tiddlywiki/text-slicer/docs
+caption: Preview
+
+The document preview column appears at the left side of the screen. The content of headings can be collapsed and expanded to help navigation. Clicking on a tiddler opens the corresponding tiddler in the main story river.
+
+Clicking ''Show toolbar'' causes each tiddler to be preceded by a toolbar showing the underlying title. It can be edited directly to rename the tiddler. References to the tiddler in the ''tags'' and ''list'' are automatically updated to reflect the change, but note that links to the tiddler will not be automatically changed.
+
+The following theme tweaks should be applied to enable the preview column:
+
+* Set [[story left position|$:/themes/tiddlywiki/vanilla/metrics/storyleft]] to ''400px'' (or more)
+* It is recommended to also set the [[sidebar layout|$:/themes/tiddlywiki/vanilla/options/sidebarlayout]] to ''fluid-fixed''.
+
+To preview the entire document in a separate window, locate it in the preview column and click the button labelled "View document". The document will open in plain text in a new window. The window will be automatically updated as you work on the document.

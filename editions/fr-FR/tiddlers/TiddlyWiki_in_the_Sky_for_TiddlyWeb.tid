@@ -1,0 +1,22 @@
+created: 20131129100250644
+fr-title: TiddlyWiki in the Sky pour TiddlyWeb
+modified: 20150624094721882
+tags: [[Hosting your TiddlyWiki on the web]] Configurations
+title: TiddlyWiki in the Sky for TiddlyWeb
+type: text/vnd.tiddlywiki
+
+//~TiddlyWiki in the Sky pour ~TiddlyWeb// permet la synchronisation du contenu entre le TiddlyWiki s'exécutant dans un navigateur et un serveur TiddlyWeb (ou TiddlySpace). 
+
+Les fonctionnalités incluent<<:>>
+
+* Le [[chargement différé|LazyLoading]]
+* Deux modes de synchronisation entre le navigateur et le serveur
+** Une synchronisation du serveur par polling (actuellement toutes les 60 secondes)
+* Des goulots d'étranglement qui évitent de submerger le serveur avec l'évolution rapide des tiddlers
+
+Pour expérimenter //~TiddlyWiki in the Sky pour ~TiddlyWeb//<<:>>
+
+# Si besoin, créer un compte sur http://tiddlyspace.com/
+# Créez un nouvel espace, ex<<:>> `<myspace>`
+# Inclure un espace `tw5tiddlyweb`
+# Rendez-vous à `http://<myspace>.tiddlyspace.com/tw5`

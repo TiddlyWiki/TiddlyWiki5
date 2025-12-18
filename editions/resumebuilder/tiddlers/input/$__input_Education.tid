@@ -1,0 +1,72 @@
+caption: Education
+tags: Section
+title: $:/input/Education
+
+\define thisAddEducation()
+<$action-setfield $tiddler='$:/temp/Education' $field='title' $value="""$:/data/Education/$(AwardingInstitution)$ - $(Degree)$"""/>
+\end
+
+\define thisMakeCheckbox()
+<$list filter='[is[current]removeprefix[$:/data/Education/]addprefix[$:/settings/$(ThisResume)$/Education/]]'>
+<$checkbox tiddler=<<currentTiddler>> field=show checked='true' unchecked=false default=true/>
+</$list>
+\end
+
+\define thisSetOrder()
+<$list filter='[is[current]removeprefix[$:/data/Education/]addprefix[$:/settings/$(ThisResume)$/Education/]]'>
+<$edit-text field=order size=2/>
+</$list>
+\end
+
+Here you list any relevant education. If you haven't finished but want to list something anyway you can put 'Unfinished' or 'Expected Graduation Date 5/5/5' in the `Graduation Date` field (replace 5/5/5 with the appropriate date). After you add an entry it is listed at the bottom, to delete an existing entry click on the <$button class='tc-btn-invisible'>{{$:/core/images/delete-button}}</$button> icon next to the entry on the list.
+
+Degree/Certificate/Level:
+<$edit-text tiddler='$:/temp/Education' field='degree_level' placeholder='BS, BA, MS, PhD, Highschool, etc.' class='tc-edit-texteditor'/>
+
+Major or Concentration (if any):
+<$edit-text tiddler='$:/temp/Education' field='major' placeholder='Major or Concentration' class='tc-edit-texteditor'/>
+
+Awarding Institution:
+<$edit-text tiddler='$:/temp/Education' field='institution' placeholder='Institution' class='tc-edit-texteditor'/>
+
+Institution Address:
+<$edit-text tiddler='$:/temp/Education' field='address' placeholder='Institution Address' class='tc-edit-texteditor'/>
+
+<$checkbox tiddler='$:/temp/Education' field='ongoing' checked='true' unchecked='false'>Check this if you are currently working on this degree/whatever</$checkbox>
+
+<$reveal type='match' state='$:/temp/Education!!ongoing' text='true'>Expected</$reveal> Graduation Date (this doesn't need to be exact, it could just be something like 'Spring 1910', or even just '1910'):
+<$edit-text tiddler='$:/temp/Education' field='graduation_date' placeholder='Graduation Date' class='tc-edit-texteditor'/>
+
+<$checkbox tiddler='$:/temp/Education' field='show_gpa' checked='true' unchecked='false'>Show GPA</$checkbox>
+
+GPA (if desired):
+<$edit-text tiddler='$:/temp/Education' field='gpa' placeholder='gpa' class='tc-edit-texteditor'/>
+
+<$set name=AwardingInstitution value={{$:/temp/Education!!institution}}>
+<$set name=Degree value={{$:/temp/Education!!degree_level}}>
+<$button>
+Add Education
+<<thisAddEducation>>
+<$action-setfield $tiddler='$:/temp/Education' degree_level='' major='' institution='' address='' graduation_date='' gpa=''/>
+</$button>
+</$set>
+</$set>
+
+<h2>Current list:</h2>
+
+<$vars ThisResume={{$:/settings/Global!!selected_resume}}>
+<table style='width:100%'>
+<tr><th></th><th>Visible</th><th>Entry</th><th>Order</th></tr>
+<$list filter='[prefix[$:/data/Education/]sort[order]]'>
+<tr><td><$button class='tc-btn-invisible' message='tm-delete-tiddler' param=<<currentTiddler>>>{{$:/core/images/delete-button}}</$button></td>
+<td>
+<<thisMakeCheckbox>>
+</td>
+<td><$view field='degree_level'/><$reveal type='nomatch' state='!!ongoing' text='true'>, </$reveal><$reveal type='match' state='!!ongoing' text='true'> (Ongoing), </$reveal><$view field='major'/>, <$view field='institution'/>, <$view field='address'/>, <$reveal type='match' state='!!ongoing' text='true'>Expected Graduation Date: </$reveal> <$view field='graduation_date'/><$reveal type='match' state='!!show_gpa' text='true'>, GPA: <$view field='gpa'/></$reveal></td>
+<td>
+<<thisSetOrder>>
+</td>
+</tr>
+</$list>
+</table>
+</$vars>

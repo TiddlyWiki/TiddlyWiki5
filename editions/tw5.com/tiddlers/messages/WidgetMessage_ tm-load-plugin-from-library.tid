@@ -1,0 +1,28 @@
+caption: tm-load-plugin-from-library
+created: 20160424233627001
+modified: 20160424235543975
+tags: Messages
+title: WidgetMessage: tm-load-plugin-from-library
+type: text/vnd.tiddlywiki
+
+The `tm-load-plugin-from-library` message load the specified tiddler or plugin from the specified plugin library.
+
+|!Name |!Description |
+|title |Title of the tiddler or plugin to be loaded into the current wiki |
+|url |Url specifying the plugin library from which the tiddler or plugin is to be loaded. |
+
+!Example
+
+The following snippet will install the CodeMirror plugin from the official plugin library:
+
+```
+<$button>
+<$action-sendmessage $message="tm-load-plugin-from-library" title="$:/plugins/tiddlywiki/codemirror" url="https://tiddlywiki.com/library/v5.1.11/index.html"/>
+Install CodeMirror
+</$button>
+```
+
+<<.tip "Usually a plugin library has to be loaded (initialized) first before it can be used. If the plugin library specified by 'url' has not been initialized yet, it will be loaded and initialized.">>
+
+
+The `tm-load-plugin-from-library` message is usually generated with the ButtonWidget and is handled by the core itself.

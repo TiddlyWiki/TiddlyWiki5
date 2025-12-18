@@ -1,0 +1,8 @@
+created: 20190611125929173
+modified: 20190611130146154
+tags: [[divide Operator]] [[Operator Examples]]
+title: divide Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[355]divide[113]]">>
+<<.operator-example 2 "=1 =2 =3 =4 +[divide[2]]">>

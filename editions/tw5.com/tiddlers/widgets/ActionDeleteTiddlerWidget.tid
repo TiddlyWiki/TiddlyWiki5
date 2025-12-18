@@ -1,0 +1,44 @@
+caption: action-deletetiddler
+created: 20141025120850184
+modified: 20240608152211834
+tags: Widgets ActionWidgets
+title: ActionDeleteTiddlerWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ''action-deletetiddler'' widget is an [[action widget|ActionWidgets]] that deletes tiddlers. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+There are several differences compared to the [[WidgetMessage: tm-delete-tiddler]]:
+
+* The user is not prompted to confirm the deletion
+* No automatic updating of the story list
+* No special handling of draft tiddlers
+
+! Content and Attributes
+
+The ''action-deletetiddler'' widget is invisible. Any content within it is ignored.
+
+|!Attribute |!Description |
+|$tiddler |Optional title of the tiddler to be deleted |
+|$filter |Optional filter identifying tiddlers to be deleted |
+
+! Examples
+
+<$testcase>
+<$data title=Description text="Delete a specific tiddler"/>
+<$data title=Narrative text="""Use the $tiddler attribute of the $action-deletefield widget to delete the "~HelloThere" tiddler"""/>
+<$data $tiddler="HelloThere"/>
+<$data title=Output text="""<$button actions="<$action-deletetiddler $tiddler=HelloThere/>">
+Delete "~HelloThere"
+</$button>"""/>
+</$testcase>
+
+<$testcase>
+<$data title=Description text="Delete tiddlers matching a filter"/>
+<$data title=Narrative text="""Use the $filter attribute of the $action-deletefield widget to delete all tiddlers tagged "~TableOfContents" """/>
+<$data $filter="[tag[TableOfContents]]"/>
+<$data title=Output text="""<$button actions='<$action-deletetiddler $filter="[tag[TableOfContents]]"/>'>
+Delete tiddlers tagged "~TableOfContents"
+</$button>"""/>
+</$testcase>

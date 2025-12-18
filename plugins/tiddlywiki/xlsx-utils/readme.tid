@@ -1,0 +1,24 @@
+title: $:/plugins/tiddlywiki/xlsx-utils/readme
+
+This plugin provides a flexible way to import tiddlers from Excel files. It is based on the library [[js-xlsx|https://github.com/SheetJS/js-xlsx]].
+
+The plugin uses //import specifications// to determine how incoming spreadsheets are processed. You can view, create and edit import specifications in the control panel "XLSX Utilities" tab, or directly in the [[plugin controls|$:/plugins/tiddlywiki/xlsx-utils]]. This is also where you select which import specification is selected for use during the next import operation.
+
+Each sheet is expected to consist of a single header row followed by multiple content rows, each consisting of an independent record. The plugin automatically detects the extent of each sheet by looking for the bottom right cell that contains a value. This can lead to unexpected results if a cell is accidentally created with an invisible, blank value.
+
+Import specifications describe how tiddlers are created from a particular row of a sheet; multiple tiddlers can be generated from a single row. (Conversely, if different rows yield tiddlers with the same title then they will overwrite one another).
+
+Each field of each tiddler can be assigned a constant value, or a value taken from a named column of the sheet, optionally with a prefix and/or suffix added. There is special support for handling list fields (like the tags field), with the ability to append new items to the list.
+
+Internally, each import specifier is actually modelled as a hierarchy of connected tiddlers with the field ''import-spec-role'' indicating the following roles:
+
+* ''workbook'': describes the sheets to be imported from the workbook
+* ''sheet'': describes each sheet to be processed
+* ''row'': describes the tiddlers to be imported from each row of each sheet
+* ''field'': describes the fields to be assigned to each tiddler from each row of each sheet
+
+The easiest way to understand the structure is to explore the example import specifications, and the corresponding spreadsheets they are designed to handle.
+
+Note that there are many possible different ways of importing a particular spreadsheet, depending on whether the structures are modelled with fields, tags, prefixes or other mechanisms. The plugin is designed to support a wide range of applications.
+
+This plugin also requires the JSZip plugin ([[$:/plugins/tiddlywiki/jszip]]) to be installed.

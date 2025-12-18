@@ -1,0 +1,19 @@
+caption: ¿Y el original?
+created: 20140904085100000
+es-title: ¿Qué pasó con el TiddlyWiki original?
+modified: 20160605052442495
+tags: HelloThere
+title: What happened to the original TiddlyWiki?
+type: text/vnd.tiddlywiki
+
+<a class="tc-float-right tc-bordered-image" href="https://classic.tiddlywiki.com/" target="_blank" rel="noopener noreferrer">[img width="200" [TiddlyWiki Classic.png]]</a>
+
+La versión original de TiddlyWiki, que llamamos [[Classic|TiddlyWikiClassic]], sigue disponible en:
+
+https://classic.tiddlywiki.com.
+
+Ten en cuenta que la [[versión actual|TiddlyWiki5]] de ~TiddlyWiki no es totalmente compatible con la versión [[Classic|TiddlyWikiClassic]]. Se pueden importar contenidos, pero necesitan algo de //masaje// para adaptarse al nuevo formato de escritura, WikiText.
+
+Actualmente está en desarrollo un plugin: ''tw2parser'', intérprete que permita reproducir fielmente y sin mayor complicación los contenidos creados por TiddlyWikiClassic.
+
+https://tiddlywiki.com/plugins/tiddlywiki/tw2parser/

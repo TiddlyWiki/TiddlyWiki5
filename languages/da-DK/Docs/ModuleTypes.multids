@@ -1,0 +1,27 @@
+title: $:/language/Docs/ModuleTypes/
+
+allfilteroperator: En sub-operator for ''all'' filter operator.
+animation: Animationer kan bruges med RevealWidget.
+bitmapeditoroperation: En bitmap editor toolbar operation.
+command: Kommandoer som kan køres under Node.js.
+config: Data som indsættes i `$tw.config`.
+filteroperator: Individuelle filter operator metoder.
+global: Globale data som indsættes i `$tw`.
+info: Publiserer system information via [[$:/temp/info-plugin]] pseudo-plugin.
+isfilteroperator: Operander for  ''is'' filter operatoren.
+library: Generisk modul type for general purpose JavaScript moduler.
+macro: JavaScript makro definitioner.
+parser: Parsere for forskellige indholdstyper..
+saver: Gemmere håndterer forskellige metoder til at gemme filer fra browseren.
+startup: Opstartsfunktioner.
+storyview: Historievisninger tilpasser animation og adfærd for liste widgets.
+texteditoroperation: En text editor toolbar operation.
+tiddlerdeserializer: konverterer forskellige indholdstyper til tiddlere.
+tiddlerfield: Definerer adfærden for et individuelt tiddler felt.
+tiddlermethod: Føjer metoder til `$tw.Tiddler` prototypen.
+upgrader: Anvender opgraderingsforarbejdning af tiddlere under en opgradering / import.
+utils: Føjer metoder til `$tw.utils`.
+utils-node: Føjer Node.js-specifikke metoder til `$tw.utils`.
+widget: Widgets indkapsler DOM rendering og genopfriskning.
+wikimethod: Føjer metoder til `$tw.Wiki`.
+wikirule: Individuelle parserregler for hoved WikiText parseren.

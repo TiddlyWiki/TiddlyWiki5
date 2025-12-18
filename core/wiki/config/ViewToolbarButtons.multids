@@ -1,0 +1,16 @@
+title: $:/config/ViewToolbarButtons/Visibility/$:/
+
+core/ui/Buttons/clone: hide
+core/ui/Buttons/close-others: hide
+core/ui/Buttons/export-tiddler: hide
+core/ui/Buttons/info: hide
+core/ui/Buttons/more-tiddler-actions: show
+core/ui/Buttons/new-here: hide
+core/ui/Buttons/new-journal-here: hide
+core/ui/Buttons/open-window: hide
+core/ui/Buttons/permalink: hide
+core/ui/Buttons/permaview: hide
+core/ui/Buttons/delete: hide
+core/ui/Buttons/fold: hide
+core/ui/Buttons/fold-bar: hide
+core/ui/Buttons/fold-others: hide

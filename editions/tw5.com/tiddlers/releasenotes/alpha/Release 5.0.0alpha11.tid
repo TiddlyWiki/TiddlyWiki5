@@ -1,0 +1,32 @@
+created: 201311081754007
+modified: 201311081754007
+title: Release 5.0.0-alpha.11
+tags: AlphaReleaseNotes
+released: 201311081806
+caption: 5.0.0-alpha.11
+
+This release is the culmination of a large scale refactoring of the widget mechanism of TiddlyWiki5. There are several changes to be aware of if upgrading from earlier versions:
+
+* The following widgets have been removed:
+** `<$setstyle>` - use `<div style=<<macroName Param>>>` instead
+** `<$video>` - will return in a later release
+** `<$datauri>` - use the `<<makedatauri>>` built-in macro instead
+** `<$error>` - may return in a later release
+** `<$import>` - use the BrowseWidget, DropzoneWidget and NavigatorWidget instead
+** `<$info>` - use the `<<changecount>>` built-in macro instead
+** `<$version>` - use the `<<version>>` built-in macro instead
+* The following widgets have had significant changes:
+** EditWidget
+** ListWidget - the list widget itself no longer generates HTML nodes, so you'll often need to wrap the template in a `<div>` or a `<span>` to be able to style the content
+** ViewWidget - has several changes:
+*** `<$view format="link"/>` is no longer available; use an explicit `<$link>` widget instead
+*** `<$view format="link"/>` is no longer available; use the TranscludeWidget instead
+* The following new widgets have been added:
+** BrowseWidget
+** DropzoneWidget
+** EditTextWidget and EditBitmapWidget
+** SetVariableWidget
+* Widget attribute names have been made more consistent. In particular, `tiddler` is used to reference a tiddler by title, not `title`
+* It is no longer possible to import the macro definitions within another tiddler by transcluding that tiddler
+* The `body` element now has the class `tw-body`, which will need to be specified in any overrides
+** This was done due to the new support for HTML foreign objects, which makes it possible to have multiple `<body>` elements in a document

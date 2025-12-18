@@ -1,0 +1,12 @@
+title: $:/language/Help/rendertiddler
+description: Renderar en enstaka tiddler som en specifik innehållstyp
+
+Renderar en enstaka tiddler som en specifik innehållstyp, standard till `text/html` och sparar den till det angivna filnamnet:
+
+```
+--rendertiddler <title> <filename> [<type>]
+```
+
+Som standard, sätts filnamnets sökväg relativt till `output` undermappen i utgåvans mapp. `--output` kommandot kan användas för att ställa in output till en annan mapp..
+
+Alla saknade mappar i sökvägen kommer automatiskt skapas.

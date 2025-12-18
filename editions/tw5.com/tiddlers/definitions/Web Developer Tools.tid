@@ -1,0 +1,7 @@
+created: 20201120153119665
+modified: 20201120154646100
+tags: Definitions
+title: Web Developer Tools
+type: text/vnd.tiddlywiki
+
+Most browsers provide ''Web Developer Tools'' that include a JavaScript console. In Chrome and Firefox it can be opened via the ''Tools'' menu, or by pressing <kbd>Ctrl + Shift + J</kbd> (<kbd>Cmd + Shift + J</kbd> on a Mac).

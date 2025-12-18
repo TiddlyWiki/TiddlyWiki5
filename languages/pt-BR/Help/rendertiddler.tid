@@ -1,0 +1,12 @@
+title: $:/language/Help/rendertiddler
+description: Interpretar tiddler individual conforme tipo ContentType especificado
+
+Interpreta um tiddler individual conforme o ContentType especificado, pré definição é `text/html`, e guarda-o para o arquivo especificado:
+
+```
+--rendertiddler <título> <caminho> [<tipo>]
+```
+
+Por padrão, o caminho é resolvido relativamente à sub-pasta `output` do diretório de edição. O comando `--output` pode ser utilizado para redireccionar para umo diretório de destino diferente.
+
+Quaisquer pastas em falta no caminho de destino serão automaticamente criadas.

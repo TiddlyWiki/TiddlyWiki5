@@ -1,0 +1,26 @@
+title: $:/core/macros/copy-to-clipboard
+tags: $:/tags/Macro
+
+\whitespace trim
+
+\procedure copy-to-clipboard(src,class:"tc-btn-invisible",style)
+<$button message="tm-copy-to-clipboard"
+	param=<<src>>
+	class=<<class>>
+	style=<<style>>
+	tooltip={{$:/language/Buttons/CopyToClipboard/Hint}}
+>
+	{{$:/core/images/copy-clipboard}}
+	<span class="tc-tiny-gap-left">
+		<$text text={{$:/language/Buttons/CopyToClipboard/Caption}}/>
+	</span>
+</$button>
+\end
+
+\procedure copy-to-clipboard-above-right(src,class:"tc-btn-invisible",style)
+<div style="position: relative;">
+	<div style="position: absolute; bottom: 0; right: 0;">
+		<$macrocall $name="copy-to-clipboard" src=<<src>> class=<<class>> style=<<style>>/>
+	</div>
+</div>
+\end

@@ -1,0 +1,31 @@
+created: 20170328143119836
+modified: 20170328173846754
+tags: Features
+title: Drag and Drop
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki uses drag and drop to power two separate features:
+
+* [[Importing Tiddlers]] into ~TiddlyWiki 
+* Manipulating tiddlers within a ~TiddlyWiki 
+
+Tiddler manipulation via drag and drop is supported by the core user interface in the following contexts:
+
+* Entries in the "Open" tab of the sidebar can be reordered by drag and drop; new tiddlers can be opened by dragging their titles into the list
+* Entries within a tag pill dropdown can be reordered by drag and drop; new tiddlers can be assigned the tag by dragging their titles into the list
+* Entries in the [[control panel|$:/ControlPanel]] "Appearance"/"Toolbars" tab can be reordered by drag and drop. (Less usefully, new entries can be added to the toolbars by dragging their titles into the list)
+
+All tiddler links are draggable by default. They can be dragged within a browser window for manipulating tiddlers, or dragged to a different browser window to initiate an [[import operation|Importing Tiddlers]]
+
+If you want to drag a link, first move it vertically, because horizontal movement is recognized by the browser as text selection.
+
+Tag pills are also draggable, and are equivalent to simultaneously dragging all of the individual tiddlers carrying the tag.
+
+Some common scenarios for drag and drop tiddler manipulation are available as reusable macros:
+
+* [[list-links-draggable Macro]] for reordering the entries in a tiddler ListField
+* [[list-tagged-draggable Macro]] for reordering the tiddlers that carry a specified tag
+
+See DragAndDropMechanism for details of how to use the low level drag and drop primitives to build more complex interactions.
+
+The standard HTML 5 drag and drop APIs used by ~TiddlyWiki are not generally available on mobile browsers on smartphones or tablets. The [[Mobile Drag And Drop Shim Plugin]] adds an open source library that implements partial support on many mobile browsers, including iOS and Android.

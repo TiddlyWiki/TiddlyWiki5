@@ -1,0 +1,8 @@
+created: 20150126143216000
+modified: 20150126143901000
+tags: [[splitbefore Operator]] [[Operator Examples]]
+title: splitbefore Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".operator-example" n="1" eg="2015-01-26 2014-07-19 2013 +[splitbefore[-]]"/>
+<$macrocall $name=".operator-example" n="2" eg="[[green trees]splitbefore[ee]]"/>

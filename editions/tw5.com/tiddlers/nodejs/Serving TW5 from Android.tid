@@ -1,0 +1,47 @@
+caption: Node.js on Termux
+color: #F06292
+created: 20200501120322327
+delivery: App with DIY steps
+description: Using Node.js to serve/create flatfile wikis
+method: sync
+modified: 20200507112915801
+tags: Saving [[TiddlyWiki on Node.js]] Android
+title: Serving TW5 from Android
+type: text/vnd.tiddlywiki
+
+[[Termux|https://termux.com/]] is and open source android application providing limited Unix environment enabling users to install [[Node.js]] and npm modules in android. Users can install and run [[TiddlyWiki on Node.js]] using [[Termux|https://termux.com/]].
+
+!! Instructions 
+
+* Download and install Termux from [[Google Play Store|https://play.google.com/store/apps/details?id=com.termux]] or [[Fdroid|https://f-droid.org/en/packages/com.termux/]]
+* Open termux and run the following commands one by one
+
+  ```bash
+apt update
+apt upgrade
+apt install nodejs
+npm install -g tiddlywiki
+```
+
+* If you need to create/serve ''~TiddlyWiki on Node.js'' from the internal storage, you need to give termux storage permission by running the following command in termux
+
+```
+termux-setup-storage
+```
+
+* Now you can create and serve ''~TiddlyWiki on Node.js'' from internal storage. In the example given below, user is creating a new wiki called "mynewwiki" in his internal folder.
+
+```
+cd storage/shared
+tiddlywiki mynewwiki --init server
+tiddlywiki mynewwiki --listen
+```
+* Visit http://127.0.0.1:8080/ in your browser
+* From then on, as long as //Termux// is not closed, you may access your wiki anytime from your favourite Web browser pointing on the expected address and port.
+
+---
+
+* For more information regarding ~TiddlyWiki on Node.js, please see [[Installing TiddlyWiki on Node.js]]
+* For more information and tips regarding termux, please refer to [[Termux wiki|https://wiki.termux.com/wiki/Main_Page]]
+
+<<.tip "In //Termux//, you may as well install //git//, //emacs// or //vi//, in order to edit and maintain individual tiddler files. This would probably require that you also attach a more powerful keyboard to your Android, like the [[Hacker's Keyboard|https://github.com/klausw/hackerskeyboard/]] application or a Bluetooth external device.">>

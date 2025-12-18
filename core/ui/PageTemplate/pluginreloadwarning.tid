@@ -1,0 +1,22 @@
+title: $:/core/ui/PageTemplate/pluginreloadwarning
+tags: $:/tags/PageTemplate
+
+\define lingo-base() $:/language/
+
+<$list filter="[{$:/status/RequireReloadDueToPluginChange}match[yes]]">
+
+<$reveal type="nomatch" state="$:/temp/HidePluginWarning" text="yes">
+
+<div class="tc-plugin-reload-warning">
+
+<$set name="tv-config-toolbar-class" value="">
+
+<<lingo PluginReloadWarning>> <$button set="$:/temp/HidePluginWarning" setTo="yes" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button>
+
+</$set>
+
+</div>
+
+</$reveal>
+
+</$list>

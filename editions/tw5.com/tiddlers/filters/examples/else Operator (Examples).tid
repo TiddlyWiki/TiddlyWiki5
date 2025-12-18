@@ -1,0 +1,9 @@
+created: 20190802113334259
+modified: 20190802113551566
+tags: [[else Operator]] [[Operator Examples]]
+title: else Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[HelloThereMissing]is[missing]else[yes]]">>
+<<.operator-example 2 "[[HelloThere]is[missing]else[yes]]">>
+

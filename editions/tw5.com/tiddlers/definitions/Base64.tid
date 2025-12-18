@@ -1,0 +1,7 @@
+created: 20150221180826000
+modified: 20150221181700000
+tags: Definitions
+title: Base64
+type: text/vnd.tiddlywiki
+
+<<.dlink-ex Base64 "https://en.wikipedia.org/wiki/Base64">> is a way of representing binary data, such an image, as a string of text.

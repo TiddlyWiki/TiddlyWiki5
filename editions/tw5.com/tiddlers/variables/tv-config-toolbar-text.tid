@@ -1,0 +1,14 @@
+created: 20150228135910000
+modified: 20150228141403000
+title: tv-config-toolbar-text Variable
+tags: Variables [[Core Variables]] [[Configuration Variables]]
+type: text/vnd.tiddlywiki
+caption: tv-config-toolbar-text
+
+The <<.def tv-config-toolbar-text>> [[variable|Variables]] controls whether toolbar buttons display text.
+
+<<.this-is-toolbar-config-variable $:/config/Toolbar/Text>>
+
+<<.variable-examples "tv-config-toolbar-text">>
+
+See also <<.vlink tv-config-toolbar-icons>>.

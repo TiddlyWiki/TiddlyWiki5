@@ -1,0 +1,16 @@
+tags: [[Filter Operators]] [[Date Operators]] [[Negatable Operators]]
+title: days Operator
+type: text/vnd.tiddlywiki
+caption: days
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: those input tiddlers in which field <<.place F>> is at least <<.place D>> days in the { future | past }
+op-output: those input tiddlers in which field <<.place F>> is <<.place D>> days in the { future | past } or any time { before | after } that, including { past | future }
+op-parameter: a { positive | negative } number of days, defaulting to 0
+op-parameter-name: D
+op-purpose: filter the input by date
+op-suffix: the name of a [[date field|Date Fields]], defaulting to <<.field modified>>
+op-suffix-name: F
+
+Select tiddlers where a specified date field (default "modified") is within a specified date range. Time portion is ignored.
+
+<<.operator-examples "days">>

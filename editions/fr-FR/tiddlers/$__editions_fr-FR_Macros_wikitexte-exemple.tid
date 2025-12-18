@@ -1,0 +1,15 @@
+created: 20141017091409980
+modified: 20141116084827059
+tags: $:/tags/Macro
+title: $:/editions/fr-FR/Macros/wikitexte-exemple
+type: text/vnd.tiddlywiki
+
+\define wikitexte-exemple(src)
+```
+$src$
+```
+<div class="tc-message-box">
+
+$src$
+</div>
+\end

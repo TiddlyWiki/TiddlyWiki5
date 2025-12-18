@@ -1,0 +1,13 @@
+caption: count
+created: 20170208200553517
+modified: 20170208200900081
+op-input: a [[selection of titles|Title Selection]]
+op-output: a new list containing the number of items in the input list as a decimal string
+op-purpose: count the number of entries in a list
+tags: [[Filter Operators]] [[Group Operators]]
+title: count Operator
+type: text/vnd.tiddlywiki
+
+The number of the entries in the input list is counted and a decimal representation returned as a single string.
+
+<<.operator-examples "count">>

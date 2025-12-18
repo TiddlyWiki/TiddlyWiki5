@@ -1,0 +1,34 @@
+title: Transclude/Parameterised/Depth
+description: Parameterised transclusion using the $depth attribute
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler='TiddlerOne' one='Ferret'/>
+|
+<$transclude $tiddler='TiddlerOne'/>
+|
+<$transclude $tiddler='TiddlerOne' one='Ferret' $$two="Osprey"/>
+|
+<$transclude $tiddler='TiddlerOne' $$two="Falcon"/>
++
+title: TiddlerOne
+
+\whitespace trim
+{{TiddlerTwo}}
++
+title: TiddlerTwo
+
+\whitespace trim
+<$parameters one='Jaguar' $$two='Piranha' $depth="2">
+	<$text text=<<one>>/>:<$text text=<<$two>>/>
+</$parameters>
+<$parameters one='Leopard' $$two='Coelacanth'>
+	(<$text text=<<one>>/>|<$text text=<<$two>>/>)
+</$parameters>
++
+title: ExpectedResult
+
+<p>Ferret:Piranha(Leopard|Coelacanth)|Jaguar:Piranha(Leopard|Coelacanth)|Ferret:Osprey(Leopard|Coelacanth)|Jaguar:Falcon(Leopard|Coelacanth)</p>

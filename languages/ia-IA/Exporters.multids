@@ -1,0 +1,6 @@
+title: $:/language/Exporters/
+
+CsvFile: File CSV de notas
+JsonFile: File JSON de notas
+StaticRiver: Fluvio de notas como static file HTML
+TidFile: Singule notitia como file ".tid"

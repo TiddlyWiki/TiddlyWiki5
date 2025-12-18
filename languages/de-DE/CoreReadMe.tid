@@ -1,0 +1,8 @@
+title: $:/core/de-DE/readme
+
+Dieses Plugin enthält die TiddlyWiki Basis Komponenten, bestehend aus:
+
+* JavaScript Code Module.
+* Piktogramme (icons).
+* Vorlagen, die benötigt werden um die ~TiddlyWiki Oberfläche zu erstellen.
+* British English (''en-GB'') übersetzbare Texte, die von der TW Basis Software verwendet werden.

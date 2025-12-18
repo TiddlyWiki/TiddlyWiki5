@@ -1,0 +1,23 @@
+created: 20201004141030951
+modified: 20201004143326056
+tags: [[Operator Examples]] [[filter Operator]]
+title: filter Operator (Examples)
+type: text/vnd.tiddlywiki
+
+\define larger-than-1k() [get[text]length[]compare:integer:gteq[1000]]
+\define smaller-than-2k() [get[text]length[]compare:integer:lteq[2000]]
+\define contains-missing-links() [links[]!is[shadow]is[missing]]
+\define display-variable(name)
+''<$text text=<<__name__>>/>'': <code><$text text={{{ [<__name__>getvariable[]] }}}/></code>
+\end
+
+These examples use the following predefined variables:
+
+* <<display-variable larger-than-1k>>
+* <<display-variable smaller-than-2k>>
+* <<display-variable contains-missing-links>>
+
+<<.operator-example 1 "[tag[HelloThere]filter<larger-than-1k>]">>
+<<.operator-example 2 "[tag[HelloThere]filter<smaller-than-2k>]">>
+<<.operator-example 3 "[tag[HelloThere]filter<larger-than-1k>filter<smaller-than-2k>]">>
+<<.operator-example 4 "[tag[Features]filter<contains-missing-links>]">>

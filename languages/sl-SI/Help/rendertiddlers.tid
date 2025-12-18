@@ -1,0 +1,18 @@
+title: $:/language/Help/rendertiddlers
+description: Tiddlerje, ki se ujemajo s filtrom, izpiše v določeni obliki
+
+Tiddlerje, ki se ujemajo s filtrom, izpiše v posamezne datoteke v določeni obliki, (privzeto `text/html`) in končnico (privzeto `.html`).
+
+```
+--rendertiddlers <filter> <template> <pathname> [<type>] [<extension>] ["noclean"]
+```
+
+Na primer:
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```
+
+Privzeto je pot do izhodne datoteke relativna glede na podimenik `output` v imeniku izdaje. Ukaz `--output` lahko uporabite za usmerjanje izhoda v drug imenik.
+
+Vse datoteke v ciljnem imeniku se izbrišejo, razen če je podan parameter ''noclean''. Ciljni imenik je rekurzivno ustvarjen, če manjka.

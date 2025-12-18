@@ -1,0 +1,73 @@
+caption: Imágenes externas
+created: 20140610213500000
+es-title: Imágenes externas
+modified: 20160426055543779
+tags: Concepts Features
+title: ExternalImages
+type: text/vnd.tiddlywiki
+
+Por imágenes externas nos referimos en tiddlywiki a tiddlers que, en lugar de incrustarla, apuntan a la URI de una imagen. Se trabaja más rápido que con imágenes incrustadas, especialmente si el wiki contiene gran número de imágenes o imágenes muy grandes. Sin embargo, supone abandonar la política inicial de <<.word "único archivo">> de ~TiddlyWiki.
+
+Las imágenes esternas se usan en el navegador. Puede crearlas la configuración de Node.js al construir ~TiddlyWiki o pueden crearse manualmente en el navegador.
+
+!! En qué consisten
+
+Una imagen externa es un tiddler de imagen que contiene el campo <<.em "_canonical_uri">> cuyo valor es la URI de la imagen en cuestión. La URI puede ser absoluta o relativa al documento HTML. El campo <<.em text>> de un tiddler se ignora o se omite cuando se proporciona URI canónica de una imagen externa. 
+
+!! Creación manual de imágenes externas
+
+Para crear manualmente una imagen externa, simplemente crea un tiddler con el tipo apropiado de contenido y añade el campo <<.em "_canonical_uri">> indicando la ruta actual a la imagen.
+
+<<.warning "Comprueba bien que escribes correctamente la ruta y que escribes  [[URI|https://es.wikipedia.org/wiki/Identificador_de_recursos_uniforme]], no URL">>
+
+!! Creación de imágenes externas en Node.js
+
+Para crear un archivo HTML estático de ~TiddlyWiki acompañado por una carpeta de imágenes externas referenciadas en el HTML
+
+# Crea tiddlers de imagen en los WikiFolders, de la manera habitual
+# Guarda las imágenes como archivos separados (por convención, en una subcarpeta llamada <<.em images>>)
+# Externaliza los tiddlers correspondientes a cada imagen habilitando el campo <<.em "_canonical_uri">>
+# Guarda el archivo HTML principal
+
+
+>Las imágenes deben añadirse a la subcarpeta <<.def antes>> de externalizar los tiddlers. El campo <<.em "_canonical_uri">> invalida el campo <<.em text>> del tiddler, lo que lleva consigo que cualquier ulterior intento de guardado fallará.
+
+>Como ejemplo, véase el target <<.def externalimages>> de la demo <<.word tw5.com>>:
+
+```
+--savetiddlers [is[image]] images
+--setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri-external-image text/plain
+--setfield [is[image]] text "" text/plain
+--rendertiddler $:/core/save/all externalimages.html text/plain
+```
+
+!!! Guardar archivos separados de imagen
+
+Para guardar las imágenes de un wiki en una subcarpeta <<.em images>> puede usarse el comando `--savetiddlers` de la siguiente manera:
+
+```
+--savetiddlers [is[image]] images
+```
+
+!!! Externalizar tiddlers de imagen
+
+Se usan dos comandos `--setfield`: el primero establece el campo <<.em ''_canonical_uri''>> con valor derivado del título del tiddler. El segundo limpia el campo <<.em text>>.
+
+```
+--setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri-external-image text/plain
+--setfield [is[image]] text "" text/plain
+```
+
+La plantilla [[$:/core/templates/canonical-uri-external-image]] contiene:
+
+<pre>
+
+<$view tiddler="$:/core/templates/canonical-uri-external-image" field="text" format="text"/>
+
+</pre>
+
+<<.warning "Estas operaciones modifican los tiddlers en el WikiStore y pueden afectar al funcionamiento de posteriores comandos.">>
+
+!! Uso de imágenes externas
+
+No es posible editar una imagen externa directamente en el navegador, salvo para editar la URI  de forma que apunte a otra imagen.

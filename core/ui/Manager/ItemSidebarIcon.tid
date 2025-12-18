@@ -1,0 +1,23 @@
+title: $:/Manager/ItemSidebar/Icon
+tags: $:/tags/Manager/ItemSidebar
+caption: {{$:/language/Manager/Item/Icon}}
+
+\whitespace trim
+<p>
+<div class="tc-manager-icon-editor">
+<$button popup=<<qualify "$:/state/popup/image-picker">> class="tc-btn-invisible">
+<$transclude tiddler={{!!icon}}>
+{{$:/language/Manager/Item/Icon/None}}
+</$transclude>
+</$button>
+<div class="tc-block-dropdown-wrapper" style="position: static;">
+<$reveal state=<<qualify "$:/state/popup/image-picker">> type="nomatch" text="" default="" tag="div" class="tc-popup">
+<div class="tc-block-dropdown tc-popup-keep" style="width: 80%; left: 10%; right: 10%; padding: 0.5em;">
+<$macrocall
+	$name="image-picker-include-tagged-images"
+	actions="<$action-setfield $field='icon' $value=<<imageTitle>>/><$action-deletetiddler $tiddler=<<qualify '$:/state/popup/image-picker'>>/>"/>
+</div>
+</$reveal>
+</div>
+</div>
+</p>

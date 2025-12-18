@@ -1,0 +1,8 @@
+title: $:/language/Help/unpackplugin
+description: एक प्लगइन से पेलोड tiddlers अनपैक
+
+एक प्लगइन से पेलोड tiddlers निकालें:उन्हें साधारण रूप में tiddlers बनाये
+
+```
+--unpackplugin <title>
+```

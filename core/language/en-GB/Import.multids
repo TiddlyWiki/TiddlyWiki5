@@ -1,0 +1,34 @@
+title: $:/language/Import/
+
+Editor/Import/Heading: Import images and insert them into the editor.
+Imported/Hint: The following tiddlers were imported:
+Listing/Cancel/Caption: Cancel
+Listing/Cancel/Warning: Do you wish to cancel the import?
+Listing/Hint: These tiddlers are ready to import:
+Listing/Import/Caption: Import
+Listing/Select/Caption: Select
+Listing/Status/Caption: Status
+Listing/Title/Caption: Title
+Listing/Preview: Preview:
+Listing/Preview/Text: Text
+Listing/Preview/TextRaw: Text (Raw)
+Listing/Preview/Fields: Fields
+Listing/Preview/Diff: Diff
+Listing/Preview/DiffFields: Diff (Fields)
+Listing/Rename/Tooltip: Rename tiddler before importing
+Listing/Rename/Prompt: Rename to:
+Listing/Rename/ConfirmRename: Rename tiddler
+Listing/Rename/CancelRename: Cancel
+Listing/Rename/OverwriteWarning: A tiddler with this title already exists.
+Upgrader/Plugins/Suppressed/Incompatible: Blocked incompatible or obsolete plugin.
+Upgrader/Plugins/Suppressed/Version: Blocked plugin (due to incoming <<incoming>> not being newer than existing <<existing>>).
+Upgrader/Plugins/Upgraded: Upgraded plugin from <<incoming>> to <<upgraded>>.
+Upgrader/State/Suppressed: Blocked temporary state tiddler.
+Upgrader/System/Disabled: Disabled system tiddler.
+Upgrader/System/Suppressed: Blocked system tiddler.
+Upgrader/System/Warning: Core module tiddler.
+Upgrader/System/Alert: You are about to import a tiddler that will overwrite a core module tiddler. This is not recommended as it may make the system unstable.
+Upgrader/ThemeTweaks/Created: Migrated theme tweak from <$text text=<<from>>/>.
+Upgrader/Tiddler/Disabled: Disabled tiddler.
+Upgrader/Tiddler/Selected: Selected tiddler.
+Upgrader/Tiddler/Unselected: Unselected tiddler.

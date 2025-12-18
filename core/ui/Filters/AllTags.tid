@@ -1,0 +1,5 @@
+title: $:/core/Filters/AllTags
+tags: $:/tags/Filter
+filter: [tags[]!is[system]sort[title]]
+description: {{$:/language/Filters/AllTags}}
+

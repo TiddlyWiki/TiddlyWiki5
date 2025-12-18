@@ -1,0 +1,9 @@
+created: 20150221161803000
+modified: 20150221181711000
+tags: Definitions
+title: Data URI
+type: text/vnd.tiddlywiki
+
+A <<.dlink-ex "data URI" "https://en.wikipedia.org/wiki/Data_URI_scheme">> is a way of storing data (such as an image) in a way that is compatible with the addresses used by web pages and [[stylesheets|Cascading Style Sheets]] to access external resources.
+
+The <<.mlink datauri>> macro can be used to generate data URIs within ~TiddlyWiki.

@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/Long/Day/0: Воскресенье
+Date/Long/Day/1: Понедельник
+Date/Long/Day/2: Вторник
+Date/Long/Day/3: Среда
+Date/Long/Day/4: Четверг
+Date/Long/Day/5: Пятница
+Date/Long/Day/6: Суббота
+Date/Long/Month/1: января
+Date/Long/Month/2: февраля
+Date/Long/Month/3: марта
+Date/Long/Month/4: апреля
+Date/Long/Month/5: мая
+Date/Long/Month/6: июня
+Date/Long/Month/7: июля
+Date/Long/Month/8: августа
+Date/Long/Month/9: сентября
+Date/Long/Month/10: октября
+Date/Long/Month/11: ноября
+Date/Long/Month/12: декабря
+Date/Period/am: до полудня
+Date/Period/pm: после полудня
+Date/Short/Day/0: Вс
+Date/Short/Day/1: Пн
+Date/Short/Day/2: Вт
+Date/Short/Day/3: Ср
+Date/Short/Day/4: Чт
+Date/Short/Day/5: Пт
+Date/Short/Day/6: Сб
+Date/Short/Month/1: янв
+Date/Short/Month/2: фев
+Date/Short/Month/3: мрт
+Date/Short/Month/4: апр
+Date/Short/Month/5: май
+Date/Short/Month/6: июн
+Date/Short/Month/7: июл
+Date/Short/Month/8: авг
+Date/Short/Month/9: сен
+Date/Short/Month/10: окт
+Date/Short/Month/11: нбр
+Date/Short/Month/12: дек
+Date/DaySuffix/1: -й
+Date/DaySuffix/10: -й
+Date/DaySuffix/11: -й
+Date/DaySuffix/12: -й
+Date/DaySuffix/13: -й
+Date/DaySuffix/14: -й
+Date/DaySuffix/15: -й
+Date/DaySuffix/16: -й
+Date/DaySuffix/17: -й
+Date/DaySuffix/18: -й
+Date/DaySuffix/19: -й
+Date/DaySuffix/2: -й
+Date/DaySuffix/20: -й
+Date/DaySuffix/21: -й
+Date/DaySuffix/22: -й
+Date/DaySuffix/23: -й
+Date/DaySuffix/24: -й
+Date/DaySuffix/25: -й
+Date/DaySuffix/26: -й
+Date/DaySuffix/27: -й
+Date/DaySuffix/28: -й
+Date/DaySuffix/29: -й
+Date/DaySuffix/3: -й
+Date/DaySuffix/30: -й
+Date/DaySuffix/31: -й
+Date/DaySuffix/4: -й
+Date/DaySuffix/5: -й
+Date/DaySuffix/6: -й
+Date/DaySuffix/7: -й
+Date/DaySuffix/8: -й
+Date/DaySuffix/9: -й
+RelativeDate/Future/Days: через <<period>> дней
+RelativeDate/Future/Hours: через <<period>> часов
+RelativeDate/Future/Minutes: через <<period>> минут
+RelativeDate/Future/Months: через <<period>> месяцев
+RelativeDate/Future/Second: через 1 секунду
+RelativeDate/Future/Seconds: через <<period>> секунд
+RelativeDate/Future/Years: через <<period>> лет
+RelativeDate/Past/Days: <<period>> дней назад
+RelativeDate/Past/Hours: <<period>> часов назад
+RelativeDate/Past/Minutes: <<period>> минут назад
+RelativeDate/Past/Months: <<period>> месяцев назад
+RelativeDate/Past/Second: 1 секунду назад
+RelativeDate/Past/Seconds: <<period>> секунд назад
+RelativeDate/Past/Years: <<period>> лет назад

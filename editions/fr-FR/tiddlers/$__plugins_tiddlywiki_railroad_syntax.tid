@@ -1,0 +1,97 @@
+created: 20150103184022184
+modified: 20150621143842068
+title: $:/plugins/tiddlywiki/railroad/syntax
+type: text/vnd.tiddlywiki
+
+Le widget railroad utilise une notation spéciale pour construire les composants définis çi-après.
+
+Ici, `x` et `y` remplacent tout composant.
+
+Les noms (contrairement aux chaines cotées) ne sont composés que de valeurs débutant par une lettre et contenant seulement lettres, chiffres, soulignements, points et traits d'union.
+
+---
+
+; série
+: <$railroad text=""" ["<-"] {x} ["->"] """/>
+* Une série de composants
+* Les délimiteurs `<-` et `->` permettent d'obliger un composant unique à être traité comme une série. C'est parfois utile pour mettre en valeur un diagramme
+---
+
+; optionnel
+: <$railroad text=""" "[" [":"] x "]" """/>
+* Un composant qui peut être omis
+* Les deux points font qu'`x` soit en tout premier
+
+---
+
+; répété
+: <$railroad text=""" "{" x [:"+" y] "}" """/>
+* Une liste d'un ou plusieurs `x`
+* Le suffixe `+` ajoute `y` comme séparateur entre tout `x` et le suivant
+
+---
+
+; répétition optionnelle
+: <$railroad text=""" "[{" [":"] x [:"+" y] "}]" """/>
+* Une liste optionnelle de `x`, i.e. une liste de zéro ou plusieurs `x`
+
+---
+
+; choix
+: <$railroad text=""" "(" {[:":"] x +"|"} ")" """/>
+* Un ensemble d'alternatives
+* Les deux points indiquent quelle branche arrive en tout premier. Par défaut, c'est la première branche
+
+---
+
+; chaine / terminal
+: <$railroad text={{$:/plugins/tiddlywiki/railroad/syntax-string}}/>
+* Un composant littéral ou terminal
+* Ci-après les règles ~TiddlyWiki normales pour les chaines cotées
+---
+
+; nonterminal
+: <$railroad text=""" (nom | "<" chaine ">") """/>
+* Un composant nonterminal, i.e. le nom d'un autre diagramme
+
+---
+
+; commentaire
+: <$railroad text=""" "/" chaine "/" """/>
+* Un commentaire
+
+---
+
+; dummy
+: <$railroad text=""" "-" """/>
+* L'absence de composant
+
+---
+
+; lien
+: <$railroad text=""" "[[" x "|" (nom|chaine) "]]" """/>
+* Un lien vers le titre d'un tiddler ou l'URI donné par la chaine ou le nom
+
+---
+
+; transclusion
+: <$railroad text=""" "{{" (nom|chaine) "}}" """/>
+* Interprète le contenu d'un autre tiddler comme un diagramme syntaxique et le transclut dans le diagramme courant
+
+---
+
+; pragma arrow
+: <$railroad text=""" "\flêche" ("oui" | "non") """/>
+* Contrôle si les chemins répétés ont une flêche ou pas
+* Peut être réglé sur oui ou non dans un diagramme intermédiaire, si désiré
+---
+
+; pragma debug
+: <$railroad text=""" "\debug" """/>
+* Provoque l'affichage du diagramme syntaxique d'un diagramme
+
+---
+
+; pragma start/end
+: <$railroad text=""" ("\start" |: "\end") ("aucun" |: "simple" | "double") """/>
+* Règle le style des diagrammes startpoint ou endpoint

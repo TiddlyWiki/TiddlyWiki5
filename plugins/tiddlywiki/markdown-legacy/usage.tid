@@ -1,0 +1,36 @@
+title: $:/plugins/tiddlywiki/markdown-legacy/usage
+
+! Plugin Configuration
+
+|!Config |!Default |!Description |
+| <code>[[breaks|$:/config/markdown/breaks]]</code>| ``false``|Remarkable library config: Convert '\n' in paragraphs into ``<br>`` |
+| <code>[[linkify|$:/config/markdown/linkify]]</code>| ``false``|Remarkable library config: Autoconvert URL-like text to links |
+| <code>[[linkNewWindow|$:/config/markdown/linkNewWindow]]</code>| ``true``|For external links, should clicking on them open a new window/tab automatically? |
+| <code>[[quotes|$:/config/markdown/quotes]]</code>| ``“”‘’``|Remarkable library config: Double + single quotes replacement pairs, when ``typographer`` enabled |
+| <code>[[renderWikiText|$:/config/markdown/renderWikiText]]</code>| ``true``|After Markdown is parsed, should any text elements be handed off to the ~WikiText parser for further processing? |
+| <code>[[renderWikiTextPragma|$:/config/markdown/renderWikiTextPragma]]</code>|<code><$view tiddler="$:/plugins/tiddlywiki/markdown-legacy" subtiddler="$:/config/markdown/renderWikiTextPragma" mode="inline"/></code>|When handing off to the ~WikiText parser, what pragma rules should it follow? |
+| <code>[[typographer|$:/config/markdown/typographer]]</code>| ``false``|Remarkable library config: Enable some language-neutral replacement + quotes beautification |
+
+! Creating ~WikiLinks
+
+Create wiki links with the usual Markdown link syntax targeting `#` and the target tiddler title:
+
+```
+[link text](#TiddlerTitle)
+```
+
+If the target tiddler has a space in its name, that name must be URL-escaped to be detected as a URL:
+
+```
+[link text](#Test%20Tiddler)
+```
+
+! Images
+
+Markdown image syntax can be used to reference images by tiddler title or an external URI. For example:
+
+```
+![alt text](/path/to/img.jpg "Title")
+
+![alt text](Motovun Jack.jpg "Title")
+```

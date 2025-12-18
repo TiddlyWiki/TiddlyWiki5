@@ -1,0 +1,62 @@
+created: 20131202102427114
+modified: 20160617105124677
+tags: Features [[Working with TiddlyWiki]]
+title: Upgrading
+type: text/vnd.tiddlywiki
+
+There are regular releases of TiddlyWiki with bug fixes and improvements. It's a good idea to keep up to date by regularly upgrading to the latest version.
+
+! Introduction
+
+The process described here is for upgrading standalone TiddlyWiki files. There is a [[different procedure|Upgrading TiddlyWiki on Node.js]] for upgrading [[TiddlyWiki on Node.js]].
+
+<<<
+When upgrading, please remember the [[The First Rule of Using TiddlyWiki]]:
+
+//You are responsible for looking after your own data; take care to make backups, especially when upgrading the ~TiddlyWiki core//
+<<<
+
+! Online upgrading
+
+This process will work on most desktop browsers. Note that none of your personal data leaves your browser with this process.
+
+# Locate your TiddlyWiki file in the file system (i.e. using Windows Explorer, the Finder on Mac OS X, or your file manager on Linux)
+# Visit https://tiddlywiki.com/upgrade.html in your browser
+
+# Drag your old TiddlyWiki HTML file into the browser window
+#* If the file is encrypted you will be prompted for the password
+# Review the list of tiddlers that will be upgraded
+# Click ''Upgrade''
+# Save changes to save the new version (<<.icon $:/core/images/save-button-dynamic>>)
+
+This will download a file called ''upgrade.html'' to your computer. This file is the upgrade of your old file. You may need to open the location where ''upgrade.html'' was downloaded, rename ''upgrade.html'' with the name of the old file you are upgrading, and replace the old file by moving the new file in its place.
+
+! Offline upgrading
+
+You can also download https://tiddlywiki.com/upgrade.html locally and perform the same drag-and-drop procedure to upgrade your files.
+
+! Problems with Upgrades
+
+!! Firefox Security Restrictions
+
+The following error occurs when trying to perform the online upgrade procedure using Firefox:
+
+<<<
+Error while saving:
+
+Error:NS_ERROR_DOM_BAD_URI: Access to restricted URI denied
+<<<
+
+The upgrade operation falls foul of a security restriction in Firefox. Until this can be resolved, we suggest either using the offline upgrader, or using Chrome to perform the upgrade:
+
+# Use Chrome to open https://tiddlywiki.com/upgrade.html, then drag the TiddlyWiki HTML file to be upgraded into the upgrader window, as described above in ''Online upgrading''
+# After you've saved your upgraded file, you should be able to open it in Firefox and [[save using TiddlyFox|Saving with TiddlyFox]] again
+
+!! Incompatible Customisations
+
+It is possible for a customisation applied in a previous version to break when upgraded to the latest version. There are two techniques you can use to help track down issues:
+
+* Try repeating the upgrade having selectively unchecked any tiddlers that may be applying customisations to TiddlyWiki
+* Use SafeMode to disable all customisations of shadow tiddlers
+
+You can see which shadow tiddlers have been overridden in the ''Filter'' tab of [[advanced search|$:/AdvancedSearch]]. Select "Overridden shadow tiddlers" from the dropdown.

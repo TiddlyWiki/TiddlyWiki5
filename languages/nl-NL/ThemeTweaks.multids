@@ -1,0 +1,41 @@
+title: $:/language/ThemeTweaks/
+
+Metrics: Afmetingen
+Metrics/BodyFontSize: Lettergrootte voor tiddlertekst
+Metrics/BodyLineHeight: Regelhoogte voor tiddlertekst
+Metrics/FontSize: Lettergrootte
+Metrics/LineHeight: Regelhoogte
+Metrics/SidebarBreakpoint: Breekpunt voor zijpaneel
+Metrics/SidebarBreakpoint/Hint: de minimale paginabreedte waarbij de 'story river'<br>en het zijpaneel naast elkaar getoond worden
+Metrics/SidebarWidth: Breedte zijpaneel
+Metrics/SidebarWidth/Hint: de breedte van het zijpaneel in 'fluid-fixed' layout
+Metrics/StoryLeft: Linker story-positie
+Metrics/StoryLeft/Hint: hoe ver de linkermarge van de 'story river'<br>(tiddler oppervlak) is van de linkerzijde van de pagina
+Metrics/StoryRight: Rechter story-positie
+Metrics/StoryRight/Hint: hoe ver de linkermarge van het zijpaneel<br>is van de linkerkant van de pagina
+Metrics/StoryTop: Bovenkant story
+Metrics/StoryTop/Hint: hoe ver de bovenmarge van de 'story river'<br>is van de bovenkant van de pagina
+Metrics/StoryWidth: Story-breedte
+Metrics/StoryWidth/Hint: de totale breedte van de 'story river'
+Metrics/TiddlerWidth: Tiddler-breedte
+Metrics/TiddlerWidth/Hint: binnen de 'story river'
+Options: Opties
+Options/CodeWrapping: Breek lange regels in code-blokken af ('word wrap')
+Options/SidebarLayout: Zijpaneel layout
+Options/SidebarLayout/Fixed-Fluid: 'Fixed story', 'fluid' zijpaneel
+Options/SidebarLayout/Fluid-Fixed: 'Fluid' story, 'fixed' zijpaneel
+Options/StickyTitles: Vaststaande ('sticky') titels
+Options/StickyTitles/Hint: Doet tiddler-titels vaststaan ('stick') aan de bovenkant van het browserscherm. Waarschuwing: Werkt niet bij alle browsers
+Settings: Instellingen
+Settings/BackgroundImage: Pagina achtergrond afbeelding
+Settings/BackgroundImageAttachment: Binding van pagina achtergrond afbeelding
+Settings/BackgroundImageAttachment/Fixed: Vast aan het scherm
+Settings/BackgroundImageAttachment/Scroll: 'Scroll' met tiddlers
+Settings/BackgroundImageSize: Pagina achtergrond afbeeldingsmaat
+Settings/BackgroundImageSize/Contain: 'Contain'
+Settings/BackgroundImageSize/Cover: 'Cover'
+Settings/CodeFontFamily: Lettertype voor code
+Settings/EditorFontFamily: Lettertype voor editor
+Settings/FontFamily: Lettertype
+ThemeTweaks: Thema 'tweaks'
+ThemeTweaks/Hint: Je kan bepaalde aspecten van het ''Vanilla'' thema 'tweaken'

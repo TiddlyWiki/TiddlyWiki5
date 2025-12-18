@@ -1,0 +1,3 @@
+title: $:/config/SaverFilter
+
+[all[]] -[prefix[$:/HistoryList]] -[prefix[$:/StoryList]] -[status[pending]plugin-type[import]] -[[$:/isEncrypted]] -[[$:/UploadName]] -[prefix[$:/state/]] -[prefix[$:/temp/]]

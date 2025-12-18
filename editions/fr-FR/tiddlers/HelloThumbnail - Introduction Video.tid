@@ -1,0 +1,12 @@
+background-color: #fff
+caption: Introduction à ~TiddlyWiki
+color: red
+created: 20160603123154767
+fr-title: BonjourLaVignette - Introduction Vidéo
+icon: {{$:/core/images/video}}
+image: Introduction Video Thumbnail.jpg
+link: Introduction Video
+modified: 20160603123557963
+tags: HelloThumbnail
+title: HelloThumbnail - Introduction Video
+

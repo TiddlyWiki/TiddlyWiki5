@@ -1,0 +1,18 @@
+caption: trim
+created: 20190613153740241
+modified: 20201130141111438
+op-purpose: returns each item in the list with whitespace, or a given character string, trimmed from the start and/or end
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: <<.from-version "5.1.23">> a string of characters
+op-parameter-name: S
+op-output: the input titles with <<.place S>>, or whitespace if <<.place S>> is not specified, trimmed from the start and/or end
+op-suffix: <<.from-version "5.1.23">> `prefix` to trim from the start only, `suffix` to trim from the end only. If omitted (default), trim from both start and end
+op-suffix-name: T
+tags: [[Filter Operators]] [[String Operators]]
+title: trim Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>
+<<.from-version "5.1.23">>The <<.op trim>> filter allows a parameter specifying a string to trim.
+
+<<.operator-examples "trim">>

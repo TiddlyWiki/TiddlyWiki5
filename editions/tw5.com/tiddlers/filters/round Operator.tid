@@ -1,0 +1,13 @@
+caption: round
+created: 20190613084541416
+modified: 20190613084623913
+op-input: a [[selection of titles|Title Selection]]
+op-output: rounds each of the input numbers to the nearest integer
+op-purpose: rounds a list of numbers to the nearest integer
+tags: [[Unary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: round Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+<<.operator-examples "round">>

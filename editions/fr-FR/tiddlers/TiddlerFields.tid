@@ -1,0 +1,45 @@
+created: 20130825213300000
+fr-title: Champs de tiddler
+modified: 20150624092901510
+tags: Concepts
+title: TiddlerFields
+type: text/vnd.tiddlywiki
+
+\define lingo-base() $:/language/Docs/Fields/
+Les champs de tiddlers sont les couples ''nom:valeur'' qui constituent un [[tiddler|Tiddlers]]. Les noms de champ peuvent être composés de lettres minuscules non accentuées, chiffres, ou caractères `-` (tiret), `_` (souligné) et `.` (point).
+
+Les champs standard sont<<dp>>
+
+|!Nom du champ |!Référence |!Description |
+|`title` |TitleField |<<lingo title>> |
+|`text` |TextField |<<lingo text>> |
+|`modified` |ModifiedField |<<lingo modified>> |
+|`modifier` |ModifierField |<<lingo modifier>> |
+|`created` |CreatedField |<<lingo created>> |
+|`creator` |CreatorField |<<lingo creator>> |
+|`tags` |TagsField |<<lingo tags>> |
+|`type` |TypeField |<<lingo type>> |
+|`list` |ListField |<<lingo list>> |
+
+Les autres champs utilisés par le noyau sont<<dp>>
+
+|!Nom du champ |!Référence |!Description |
+|`color` |ColorField |<<lingo color>> |
+|`description` |DescriptionField |<<lingo description>> |
+|`draft.of` |DraftOfField |<<lingo draft.of>> |
+|`draft.title` |DraftTitleField |<<lingo draft.title>> |
+|`footer` |FooterField |<<lingo footer>> |
+|`library` |LibraryField |<<lingo library>> |
+|`name` |NameField |<<lingo name>> |
+|`plugin-priority` |PluginPriorityField |<<lingo plugin-priority>> |
+|`plugin-type` |PluginTypeField |<<lingo plugin-type>> |
+|`source` |SourceField |<<lingo source>> |
+|`subtitle` |SubtitleField |<<lingo subtitle>> |
+
+Le TiddlyWebAdaptor utilise quelques champs supplémentaires<<dp>>
+
+|!Nom du champ |!Référence |!Description |
+|`bag` |BagField |<<lingo bag>> |
+|`revision` |RevisionField |<<lingo revision>> |
+
+Voir l'onglet ''Avancé > Champs'' du [[panneau de contrôle|$:/ControlPanel]] pour des détails sur les champs utilisés dans ce wiki.

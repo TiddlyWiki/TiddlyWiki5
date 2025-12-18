@@ -1,0 +1,7 @@
+title: $:/languages/en-GB
+name: en-GB
+description: English (British)
+author: JeremyRuston
+core-version: >=5.0.0"
+
+Stub pseudo-plugin for the default language

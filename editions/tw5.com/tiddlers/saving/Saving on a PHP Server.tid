@@ -1,0 +1,49 @@
+caption: PHP
+color: #F06292
+created: 20140111091844267
+delivery: DIY
+description: DIY script you can install on your own server
+method: save
+modified: 20200507110314202
+tags: Saving PHP
+title: Saving on a PHP Server
+type: text/vnd.tiddlywiki
+
+The built-in `TiddlySpot `saver can also be used to save changes to a simple PHP script that you can run on most hosting providers.
+
+//This code hasn't been updated in several years. If you have difficulty with it, consider using [[TW Receiver|Saving with TW Receiver]] instead//
+
+# Download a copy of `TiddlyHome_0.1.2.zip` from https://code.google.com/archive/p/bidix/downloads
+# Unzip. 
+# Extract a copy of `store.php` from under the unzipped subdirectory `_th\lib`
+# Edit your copy of ''store.php'' to add your username(s) and password(s). Find the line `$USERS = array( 'UserName1'=>'Password1', etc)` and replace Username1 and Password1 with your desired username and password
+#* Make sure you leave all the punctuation and code, such as the single quotes, intact
+# Save the file
+# Using FTP or your web interface, upload ''store.php'' to your server. Make sure that the filename is correct
+#* If you've uploaded the file correctly you should be able to view it in your browser (eg, http://example.com/store.php)
+# In TiddlyWiki, go to the ''Saving'' tab of the ''control panel'' <<.icon $:/core/images/options-button>> and enter the following information:
+#* Your username as the wiki name
+#* Your password
+#* The URL of the ''store.php'' file (//''not'' the URL of the wiki, this must the full URL to the ''store.php'' file//)
+
+The control panel ''Saving'' tab includes the following configuration options:
+
+|!Name |!Description |
+|Server URL |The full URL to the ''store.php'' file on your server |
+|Upload filename |The filename used to save the TiddlyWiki (defaults to ''index.html'') |
+|Upload directory |The relative path from ''store.php'' to the directory used for saving the file |
+|Backup directory |The relative path from ''store.php'' to the directory used for backups |
+
+!!! Note about maximum size
+
+As your TW file increases in size, you may need to modify  your `.htaccess` or `htaccess` file (depending on system)  to increase the value of the maximum upload and/or post size. Check with your Web Host Provider for your particular settings. Be sure also to make backups before experiementing. On some systems, the settings might look like:
+
+```
+php_value upload_max_filesize 4M
+php_value post_max_size 6M
+```
+
+!!! Note about possible error message
+
+If you get an error message regarding `split()`, you may need to change references  to `split` in ''store.php'' to function `explode` .
+

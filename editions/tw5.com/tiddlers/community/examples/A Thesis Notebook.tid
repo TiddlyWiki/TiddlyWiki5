@@ -1,0 +1,17 @@
+created: 20130302085406905
+modified: 20130302084548184
+tags: Examples
+title: "A Thesis Notebook" by Alberto Molina
+url: http://tesis.tiddlyspot.com/
+
+A thesis notebook based on TiddlyWiki.
+
+{{!!url}}
+
+<<<
+This is an example of a thesis notebook powered by TiddlyWiki 5.0.8-beta.
+
+TiddlyWiki is a great piece of software created by Jeremy Ruston. It allows you, among other things, to take notes, organise ideas, store information, and display all your stuff the way you want. It is an incredibly flexible tool you can adapt to fit almost all your needs.
+
+This TiddlyWiki has been customized to serve as a philosophy notebook centered around authors, books and papers, concepts and theories, and personal notes. I use it along with Zotero, which is a dedicated bibliography software. Both are free, open source projects. TiddlyWiki can be downloaded at https://tiddlywiki.com.
+<<<

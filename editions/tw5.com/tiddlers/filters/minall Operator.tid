@@ -1,0 +1,15 @@
+caption: minall
+created: 20190611161015153
+modified: 20190611161043817
+op-input: a [[selection of titles|Title Selection]]
+op-output: the smallest of the input numbers
+op-purpose: find the smallest of a list of numbers
+tags: [[Reducing Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: minall Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+See also the [[maxall Operator]], and compare with the [[max Operator]] and the [[min Operator]].
+
+<<.operator-examples "minall">>

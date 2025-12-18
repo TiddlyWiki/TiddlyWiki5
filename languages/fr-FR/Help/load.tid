@@ -1,0 +1,22 @@
+title: $:/language/Help/load
+description: Charge des tiddlers à partir d'un fichier
+
+Charge des tiddlers à partir de fichiers ~TiddlyWikiClassic 2.x.x
+(`.html`), `.tiddler`, `.tid`, `.json` ou d'autres types de
+fichiers. Le traitement appliqué aux fichiers entrants est déterminé par l'extension du fichier. Utilisez plutôt la commande `import` si vous devez spécifier explicitement le désérialiseur et l'encodage.
+
+
+```
+--load <chemindufichier> [noerror]
+--load <chemindurépertoire> [noerror]
+```
+
+Par défaut, la commande //load// provoque une erreur si aucun tiddler n'est trouvé. L'erreur peut être supprimée en spécifiant le paramètre optionnel "noerror".
+
+Pour charger des tiddlers à partir d'un fichier ~TiddlyWiki chiffré, vous devrez d'abord spécifier le mot de passe à l'aide de la [[commande password|PasswordCommand]]. Par exemple :
+
+```
+tiddlywiki ./MonWiki --password pa55w0rd --load mon_wiki_secret.html
+```
+
+À noter : TiddlyWiki refusera de charger une version plus ancienne d'un plugin déjà chargé.

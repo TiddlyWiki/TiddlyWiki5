@@ -1,0 +1,35 @@
+created: 20131129090249275
+fr-title: La mise en route
+modified: 20220217175123712
+tags: [[Working with TiddlyWiki]]
+title: GettingStarted
+type: text/vnd.tiddlywiki
+
+
+Téléchargez un <<tw>> vide en cliquant sur ce bouton<<:>> {{$:/editions/fr-FR/snippets/download-empty-button}}
+
+L'étape suivante consiste à choisir une solution d'enregistrement des modifications. De nombreuses méthodes sont disponibles, chacune avec ses atouts et ses limites. Cliquez sur la fiche d'une méthode pour voir plus d'informations la concernant. Vous pouvez aussi cocher une case de plateformes et de navigateur pour afficher les solutions qui fonctionnent pour cette combinaison.
+
+<<.warning "N'utilisez pas le menu ''Fichier''/''Enregistrer'' du navigateur internet pour enregistrer vos modifications (ça ne marche pas)<<!>>">><br/><br/>
+
+{{Saving}}
+
+
+
+Autres informations<<:>>
+
+* [[Protéger le contenu avec un mot de passe|Encryption]] grâce au système de chiffrement intégré à <<tw>><<;>>
+* [[Enregistrer avec Tiddlyspot|Saving on TiddlySpot]], un service gratuit qui vous permet d'utiliser <<tw>> en ligne<<;>>
+* Sauvegarde avec TiddlyDesktop, une application de bureautique dédiée au travail avec <<tw>><<;>>
+* Vous pouvez aussi télécharger ce <<tw>> complet, avec toute sa documentation<<:>><div>
+
+<<<
+{{$:/snippets/download-wiki-button}}
+
+Si le bouton ne fonctionne pas, sauvegardez ce lien<<:>>
+
+<a href="https://tiddlywiki.com/languages/fr-FR/index.html" download="index.html">~https://tiddlywiki.com/languages/fr-FR/index.html</a>
+
+Votre navigateur vous demandera sans doute confirmation avant de démarrer le téléchargement.
+<<<
+</div>

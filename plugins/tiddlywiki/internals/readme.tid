@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/internals/readme
+
+This plugin adds features to help explore the internals of TiddlyWiki:
+
+* New preview panes showing:
+** the parse tree
+** the widget tree
+** the raw HTML output
+
+The first two include a dropdown for choosing block vs. inline parsing mode.

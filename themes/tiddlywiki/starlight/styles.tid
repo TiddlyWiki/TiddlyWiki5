@@ -1,0 +1,24 @@
+title: $:/themes/tiddlywiki/starlight/styles.tid
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+Placeholder for a more thorough refinement of Snow White
+*/
+
+@font-face {
+	font-family: "Arvo";
+	font-style: normal;
+	font-weight: 400;
+	src: local("Arvo"), url(<<datauri "$:/themes/tiddlywiki/starlight/arvo.woff">>) format("woff");
+}
+
+html body, .tc-sidebar-scrollable-backdrop {
+	font-family: "Arvo", "Times";
+	background: url(<<datauri "$:/themes/tiddlywiki/starlight/ltbg.jpg">>);
+}
+
+.tc-page-controls svg {
+	<<filter "drop-shadow(1px 1px 2px rgba(255,255,255,0.9))">>
+}

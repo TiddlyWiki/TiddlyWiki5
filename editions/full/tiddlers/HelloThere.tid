@@ -1,0 +1,12 @@
+title: HelloThere
+
+The "full" edition of TiddlyWiki consists of all the available languages, themes and plugins for TiddlyWiki.
+
+It is intended for use in testing TiddlyWiki - in particular, for switching between all the available language plugins.
+
+{{$:/language/ControlPanel/Basics/Language/Prompt}} {{$:/snippets/minilanguageswitcher}}
+
+---
+
+{{$:/core/ui/ControlPanel/Plugins}}
+

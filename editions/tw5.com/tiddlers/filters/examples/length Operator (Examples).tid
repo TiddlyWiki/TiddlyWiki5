@@ -1,0 +1,8 @@
+created: 20190613153325774
+modified: 20190613153409962
+tags: [[length Operator]] [[Operator Examples]]
+title: length Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[abc]length[]]">>
+<<.operator-example 2 "[tag[HelloThere]length[]]">>

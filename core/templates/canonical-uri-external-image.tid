@@ -1,0 +1,10 @@
+title: $:/core/templates/canonical-uri-external-image
+
+<!--
+
+This template is used to assign the ''_canonical_uri'' field to external images.
+
+Change the `./images/` part to a different base URI. The URI can be relative or absolute.
+
+-->
+./images/<$view field="title" format="doubleurlencoded"/>

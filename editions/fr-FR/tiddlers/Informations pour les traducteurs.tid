@@ -1,0 +1,22 @@
+created: 20141115212945847
+list-after: RoadMap
+modified: 20141218212448109
+tags: $:/tags/SideBar About
+title: Informations pour les traducteurs
+type: text/vnd.tiddlywiki
+
+Pour contribuer à cette traduction de la documentation //tiddlywiki.com//, commencez par repérer sur [[fr-edition.tiddlyspot.com|http://fr-edition.tiddlyspot.com]] quelques tiddlers non traduits, pas mis à jour, voire mal traduits. Évitez seulement ceux qui sont <a href="http://fr-edition.tiddlyspot.com#:[tag[en cours]]" target="_blank">tagués  en cours</a> car comme leur tag l'indique, ils ont été réservés. Ensuite<<:>>
+
+* si vous travaillez en mode Node.js sur un //clone git// de l'édition `fr-FR`, vous pouvez traduire à partir de votre clone en respectant les quelques indications ci-dessous, puis proposer un pull request sur ~GitHub en vous aidant si besoin de la [[documentation|Improving TiddlyWiki Documentation]]
+* sinon, traduisez directement, soit en ligne, soit sur une [[sauvegarde du site|https://tiddlywiki.com/prerelease/languages/fr-FR/#%24%3A%2Fcore%2Fui%2FButtons%2Fsave-wiki]] (c'est plus prudent). Puis<<:>>
+** exportez votre travail [[dans un fichier JSON|Exporter un sous-ensemble de tiddlers]]
+** envoyez ce fichier à une personne susceptible d'effectuer un //pull request// sur ~GitHub, ou directement sur la liste de diffusion.
+Nous ne disposons pas encore de mécanismes très évolués pour gérer le travail de traduction en parallèle, donc ne gardez pas vos traductions sous le coude trop longtemps<<:>> il vaut mieux envoyer un tiddler à la fois que s'apercevoir trop tard que quelqu'un d'autre l'a traduit en parallèle. 
+
+; Les titres des tiddlers sont conservés en anglais 
+: de sorte que les tiddlers traduits soient écrasent la version d'origine au moment d'être servis, et que les références croisées soient maintenues. Pour faire apparaître les titres traduits, utilisez le champ `fr-title`, ainsi que le paramètre de libellé dans les [[liens wikitext|Linking in WikiText]].
+: Pour disposer d'un libellé réduit, utile pour les onglets notamment, vous pouvez aussi traduire le champ `caption`.
+; Un glossaire est en cours de constitution
+: Si vous suivez [[ses propositions|Glossaire en-GB -> fr-FR]], cela augmentera la cohérence de notre traduction. N'hésitez pas à le compléter ou à le critiquer publiquement !
+; Quelques raccourcis sont à votre disposition 
+: sous forme de macros dans le tiddler [[$:/editions/fr-FR/util-macros]]. Ils facilitent la saisie des chaînes de caractères typiquement françaises (comme les <<gf guillemets>>, mais aussi de mots fréquents (comme <<tw>>) ou compliqués comme <<latex>> (qui a sa propre [[feuille de style|$:/editions/fr-FR/CSS stylesheets/latex]]). N'hésitez pas à en ajouter<<pe>>

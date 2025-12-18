@@ -1,0 +1,21 @@
+caption: Skills Options
+tags: Options
+title: $:/options/Skills Options
+
+\define thisListSkills()
+<$list filter='[is[current]removeprefix[$:/data/Skills and Expertise/]addprefix[$:/settings/$(ThisResumeName)$/Skills and Expertise/]]'>
+<$edit-text field=order size=2/>
+</$list>
+\end
+
+<$vars ThisResumeName={{$:/settings/Global!!selected_resume}}>
+<table style='width:100%'>
+<tr><th>Visible</th><th>Entry</th><th>Order</th></tr>
+<$list filter='[prefix[$:/data/Skills and Expertise/]sort[order]]'>
+<tr><td><$checkbox tiddler=<<currentTiddler>> field=show checked='true' unchecked=false default=true/></td><td><$view field='skill'/></td>
+<td>
+<<thisListSkills>>
+</td></tr>
+</$list>
+</table>
+</$vars>

@@ -1,0 +1,3 @@
+title: $:/core/templates/wikified-tiddler
+
+<$transclude />

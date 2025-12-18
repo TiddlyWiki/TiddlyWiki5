@@ -1,0 +1,14 @@
+caption: tm-add-field
+created: 20140908185153663
+es-title: Mensaje: tm-add-field
+modified: 20160416051117201
+tags: Messages
+title: WidgetMessage: tm-add-field
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-add-field` define un determinado campo y lo añade con valor en blanco, si dicho campo no existe. 
+
+|!Nombre |!Descripción |
+|param |Nombre del campo |
+
+Este mensaje lo genera normalmente ButtonWidget y lo procesa FieldManglerWidget.

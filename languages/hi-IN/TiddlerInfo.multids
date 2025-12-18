@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: उन्नत 
+Advanced/PluginInfo/Empty/Hint: कोई भी 
+Advanced/PluginInfo/Heading:  प्लगइन विवरण
+Advanced/PluginInfo/Hint: इस प्लगइन में निम्नलिखित छाया tiddlers शामिल हैं:
+Advanced/ShadowInfo/Heading: छाया की स्थिति
+Advanced/ShadowInfo/NotShadow/Hint: Tiddler <= << infoTiddler >>> <$ पाठ पाठ = << infoTiddler >> /> </ $ लिंक करने के लिए $ लिंक> एक छाया tiddler नहीं है
+Advanced/ShadowInfo/OverriddenShadow/Hint: यह एक साधारण tiddler के द्वारा अध्यारोहित है
+Advanced/ShadowInfo/Shadow/Hint: Tiddler <= << infoTiddler >>> <$ पाठ पाठ = << infoTiddler >> /> </ $ लिंक करने के लिए $ लिंक> एक छाया tiddler है
+Advanced/ShadowInfo/Shadow/Source: यह प्लगइन <= के लिए $ कड़ी में परिभाषित किया गया है << pluginTiddler >>> <$ पाठ पाठ = << pluginTiddler >> /> </ $ लिंक>
+Fields/Caption: क्षेत्र
+List/Caption: सूची
+List/Empty: यह tiddler  सूची नहीं करता
+Listed/Caption:  सूचीबद्ध 
+Listed/Empty: यह tiddler किसी भी अन्य लोगों द्वारा सूचीबद्ध नहीं है
+References/Caption: सन्दर्भ 
+References/Empty:  इस एक से tiddlers लिंक नहीं 
+Tagging/Caption:  टैगिंग 
+Tagging/Empty: कोई tiddlers इस एक के साथ टैग किया गया है
+Tools/Caption: उपकरण 

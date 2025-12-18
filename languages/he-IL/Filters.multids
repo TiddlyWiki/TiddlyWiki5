@@ -1,0 +1,14 @@
+title: $:/language/Filters/
+
+AllTags: כל התגים חוץ מתגי מערכת
+AllTiddlers: כל הטידלרים חוץ מטידלרי מערכת
+Drafts: טידלרי טיוטה
+Missing: טידלרים חסרים
+Orphans: טידלרים יתומים
+OverriddenShadowTiddlers: טידלרי צל שכוסו
+RecentSystemTiddlers: טידלרים ששונו לארונה, כולל מערכת
+RecentTiddlers: טידלרים ששונו לאחרונה
+ShadowTiddlers: טידלרי צל
+SystemTags: תגיות מערכת
+SystemTiddlers: טידלרי מערכת
+TypedTiddlers: טידלרים שאינם בויקי-טקסט

@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddler
+description: Salva un nota pur a un file
+
+Salva un nota individual in su texto pur o formato binari al nomine specificate de file.
+
+```
+--savetiddler <title> <filename>
+```
+
+Como standard, le nomine de file es resolvite relative al subbibliotheca `output` del bibliotheca de redactiones. Le commando `--output` pote esser usate pro diriger resultatos a un bibliotheca differente.
+
+Ulle bibliothecas mancante in le sentiero pro le nomine de file es create automaticamente.

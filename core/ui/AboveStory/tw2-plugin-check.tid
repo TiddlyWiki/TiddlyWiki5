@@ -1,0 +1,27 @@
+title: $:/core/ui/AboveStory/tw2-plugin-check
+tags: $:/tags/AboveStory
+
+\define lingo-base() $:/language/AboveStory/ClassicPlugin/
+<$list filter="[all[system+tiddlers]tag[systemConfig]limit[1]]">
+
+<div class="tc-message-box">
+
+<<lingo Warning>>
+
+<ul>
+
+<$list filter="[all[system+tiddlers]tag[systemConfig]]">
+
+<li>
+
+<$link><$view field="title"/></$link>
+
+</li>
+
+</$list>
+
+</ul>
+
+</div>
+
+</$list>

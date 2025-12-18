@@ -1,0 +1,35 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Miscellaneous
+caption: Miscellaneous
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/]]
+-[all[tiddlers+shadows]prefix[$:/language/Buttons/]]
+-[all[tiddlers+shadows]prefix[$:/language/ControlPanel/]]
+-[all[tiddlers+shadows]prefix[$:/language/Date/]]
+-[all[tiddlers+shadows]prefix[$:/language/Docs/]]
+-[all[tiddlers+shadows]prefix[$:/language/EditTemplate/]]
+-[all[tiddlers+shadows]prefix[$:/language/Filters/]]
+-[all[tiddlers+shadows]prefix[$:/language/Help/]]
+-[all[tiddlers+shadows]prefix[$:/language/Import/]]
+-[all[tiddlers+shadows]prefix[$:/language/RelativeDate/]]
+-[all[tiddlers+shadows]prefix[$:/language/Search/]]
+-[all[tiddlers+shadows]prefix[$:/language/SideBar/]]
+-[all[tiddlers+shadows]prefix[$:/language/Snippets/]]
+-[all[tiddlers+shadows]prefix[$:/language/ThemeTweaks/]]
+-[all[tiddlers+shadows]prefix[$:/language/TiddlerInfo/]]
+[all[tiddlers+shadows]prefix[$:/config/NewJournal/]]
+[[$:/SiteTitle]]
+[[$:/SiteSubtitle]]
+[[$:/core/readme]]
++[sort[title]]
+\end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/]] [all[current]removeprefix[$:/config/]] [all[current]!prefix[$:/language/]!prefix[$:/config/]]
+\end
+
+! Miscellaneous
+
+Miscellaneous translatable strings.
+
+<<translatableStringEditor>>

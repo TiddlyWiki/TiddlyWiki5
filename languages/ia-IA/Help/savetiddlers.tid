@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddlers
+description: Salva un gruppo de notas pur a un bibliotheca
+
+Salva un gruppo de notas in lor texto pur o formato binari a un bibliotheca specificate.
+
+```
+--savetiddlers <filter> <pathname>
+```
+
+Como standard, le nomine de sentiero es resolvite relative al subbibliotheca `output` del bibliotheca de redactiones. Le commando `--output` pote esser usate pro diriger resultatos a un bibliotheca differente.
+
+Ulle bibliothecas mancante in le nomine de sentiero es create automaticamente.

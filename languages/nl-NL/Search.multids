@@ -1,0 +1,20 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: Lijst
+Filter/Caption: Filter
+Filter/Hint: Zoek via een [[filter expressie|https://tiddlywiki.com/static/Filters.html]]
+Filter/Matches: //<small><<resultCount>> resultaten</small>//
+Matches: //<small><<resultCount>> resultaten</small>//
+Matches/All: Alle resultaten:
+Matches/Title: Titel resultaten:
+Search: Zoek
+Search/TooShort: Zoektekst te kort
+Shadows/Caption: Schaduwen
+Shadows/Hint: Zoek schaduwtiddlers
+Shadows/Matches: //<small><<resultCount>> resultaten</small>//
+Standard/Caption: Standaard
+Standard/Hint: Zoek (in) standaard tiddlers
+Standard/Matches: //<small><<resultCount>> resultaten</small>//
+System/Caption: Systeem
+System/Hint: Zoek systeemtiddlers
+System/Matches: //<small><<resultCount>> resultaten</small>//

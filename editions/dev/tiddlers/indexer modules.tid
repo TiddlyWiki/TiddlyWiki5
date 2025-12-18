@@ -1,0 +1,55 @@
+created: 20201002010134640
+modified: 20201002012758239
+tags: moduletypes dev
+title: indexer modules
+
+Indexer modules maintain indexes of tiddlers organized in a manner that's more efficient for different types of access, typically to speed up things like certain filter operators.  An example of this would be the tag indexer - it's much faster to maintain a lookup table listing which tiddlers have a given tag than to iterate over //all// of the tiddlers in a wiki and ask each of them if they have the tag you're interested in!
+
+Indexer modules have a `module-type` of `indexer`, and the indexers that are included with TiddlyWiki can be found under `core/modules/indexers`.
+
+! Methods
+
+Indexer modules must export a constructor function, which takes the current wiki object as its only argument.  The object built by the construction function must implement the following methods:
+
+!! `init()`
+
+This performs any initial setup required by an indexer.
+
+!! `rebuild()`
+
+This rebuilds an index from scratch, usually after a large number of changes have happened to a wiki.
+
+!! `update(updateDescriptor)`
+
+This is called every time a tiddler is added, changed, or deleted.  The `updateDescriptor` value is an object with two fields - `old` and `new` - which represent the pre-update and post-update state of the tiddler, respectively.  Each of these has three fields of their own:
+
+  * `tiddler` - the state of the tiddler (may be `null`)
+  * `shadow` - a boolean indicating whether or not the tiddler is a shadow
+  * `exists` - a boolean indicating whether or not the tiddler exists
+
+For example, let's say you have an indexer `idx` and you create a tiddler T with the text "test" - that would result in your indexer's `update` method being called like this:
+
+```javascript
+idx.update({
+  old: { tiddler: null, shadow: false, exists: false },
+  new: { tiddler: new $tw.Tiddler({title: 'T', text: 'test'}), shadow: false, exists: true }
+});
+```
+
+If you then change the text from "test" to "testing", `update` would be called like this:
+
+```javascript
+idx.update({
+  old: { tiddler: new $tw.Tiddler({title: 'T', text: 'test'}), shadow: false, exists: true },
+  new: { tiddler: new $tw.Tiddler({title: 'T', text: 'testing'}), shadow: false, exists: true }
+});
+```
+
+And finally, if you delete T, `update` will be called like this:
+
+```javascript
+idx.update({
+  old: { tiddler: new $tw.Tiddler({title: 'T', text: 'testing'}), shadow: false, exists: true },
+  new: { tiddler: null, shadow: false, exists: false }
+});
+```

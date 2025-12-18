@@ -1,0 +1,27 @@
+caption: Appel de Macro
+created: 20150220182252000
+fr-title: Appel de macro en WikiTexte
+modified: 20220422225844802
+tags: WikiText
+title: Macro Calls in WikiText
+type: text/vnd.tiddlywiki
+
+Pour appeler une [[macro|Macros]], placez des `<<`doubles parenthèses en équerre`>>` autour de son nom et des valeurs de ses paramètres. ex<<:>> `<<maMacro val1 val2 ... valn>>`
+
+Par défaut, les paramètres sont passés dans l'ordre fixé lors de la définition de la macro. Un paramètre peut être identifié par son nom, pour plus de clarté ou pour pouvoir les utiliser dans le désordre.
+
+Si aucune valeur n'est fournie pour un paramètre, la valeur par défaut fixée lors de la définition de la macro est utilisée (si aucune valeur par défaut n'est définie, le paramètre est tout simplement vide).
+
+Chaque valeur de paramètre peut être délimitée par des `'`simples cotes`'`, des `"`doubles cotes`"`,  des `"""`doubles cotes triplées`"""` ou des  `[[`doubles crochets`]]`. Les doubles cotes triplées permettent de passer à peu près toutes les valeurs. Si une valeur ne contient ni espace, ni simple ou double cotes, les délimiteurs sont inutiles.
+
+Une [[description|Macro Call Syntax]] plus formelle de cette syntaxe est aussi disponible.
+
+Cette syntaxe est une forme abrégée du widget <<.wlink MacroCallWidget>>. Le widget en lui-même permet une plus grande flexibilité, incluant la capacité de [[transclure|Transclusion]] des valeurs de paramètres ou de les générer via des macros additionnelles.
+
+Comme les macros sont de simples [[variables|Variables]] paramétrées, des valeurs de variables peuvent être insérées en faisant appel aux mêmes techniques.
+
+[[Des exemples|Macro Calls in WikiText (Examples)]] et [[d'autres exemples|WikiText parser mode: macro examples]] sont à votre disposition.
+
+!! Paramètres nommés ou anonymes
+
+En <<fr WikiText>>, nommer les paramètres lors de l'appel aux macros est toujours le choix le plus sûr par rapport à l'utilisation de valeurs anonymes. Ne pas utiliser le nom des paramètres peut avoir des effets indésirables perturbants. Imaginez par exemple que le premier paramètre d'une macro serve à spécifier le nom d'un [[tiddler d'état|StateMechanism]], et que le second soit destiné à préciser un [[tiddler gabarit|Transclusion with Templates]]. Si vous deviez par mégarde oublier de définir la valeur du premier paramètre ou vous tromper dans l'ordre des paramètres, au prochain appel de la macro (qui pourrait même avoir lieu en prévisualisant votre tiddler) votre gabarit pourrait être malencontreusement écrasé avec le contenu destiné au tiddler d'état.

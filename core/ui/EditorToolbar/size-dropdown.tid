@@ -1,0 +1,81 @@
+title: $:/core/ui/EditorToolbar/size-dropdown
+
+\define lingo-base() $:/language/Buttons/Size/
+
+\define toolbar-button-size-preset(config-title)
+<$set name="width" filter="$(sizePair)$ +[first[]]">
+
+<$set name="height" filter="$(sizePair)$ +[last[]]">
+
+<$button tag="a">
+
+<$action-setfield
+	$tiddler="""$config-title$/new-width"""
+	$value=<<width>>
+/>
+
+<$action-setfield
+	$tiddler="""$config-title$/new-height"""
+	$value=<<height>>
+/>
+
+<$action-deletetiddler
+	$tiddler="""$config-title$/presets-popup"""
+/>
+
+<$text text=<<width>>/> &times; <$text text=<<height>>/>
+
+</$button>
+
+</$set>
+
+</$set>
+\end
+
+\define toolbar-button-size(config-title)
+\whitespace trim
+''{{$:/language/Buttons/Size/Hint}}''
+
+<<lingo Caption/Width>>&#32;<$edit-text tag="input" tiddler="""$config-title$/new-width""" default=<<tv-bitmap-editor-width>> focus="true" size="8"/>
+&#32;
+<<lingo Caption/Height>>&#32;<$edit-text tag="input" tiddler="""$config-title$/new-height""" default=<<tv-bitmap-editor-height>> size="8"/>
+&#32;
+<$button popup="""$config-title$/presets-popup""" class="tc-btn-invisible tc-popup-keep" style="width: auto; display: inline-block; background-colour: inherit;" selectedClass="tc-selected">
+{{$:/core/images/down-arrow}}
+</$button>
+
+<$reveal tag="span" state="""$config-title$/presets-popup""" type="popup" position="belowleft" animate="yes">
+
+<div class="tc-drop-down tc-popup-keep">
+
+<$list filter={{$:/config/BitmapEditor/ImageSizes}} variable="sizePair">
+
+<$macrocall $name="toolbar-button-size-preset" config-title="$config-title$"/>
+
+</$list>
+
+</div>
+
+</$reveal>
+
+<$button>
+<$action-sendmessage
+	$message="tm-edit-bitmap-operation"
+	$param="resize"
+	width={{$config-title$/new-width}}
+	height={{$config-title$/new-height}}
+/>
+<$action-deletetiddler
+	$tiddler="""$config-title$/new-width"""
+/>
+<$action-deletetiddler
+	$tiddler="""$config-title$/new-height"""
+/>
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+<<lingo Caption/Resize>>
+</$button>
+\end
+
+<$macrocall $name="toolbar-button-size" config-title=<<qualify "$:/state/Size/">>/>

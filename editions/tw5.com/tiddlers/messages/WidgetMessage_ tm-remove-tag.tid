@@ -1,0 +1,13 @@
+created: 20140908185153663
+modified: 20140908185153663
+tags: Messages
+title: WidgetMessage: tm-remove-tag
+type: text/vnd.tiddlywiki
+caption: tm-remove-tag
+
+The `tm-remove-tag` message is handled by the FieldManglerWidget. It removes the specified tag.
+
+|!Name |!Description |
+|param |Name of tag to remove |
+
+The remove tag message is usually generated with the ButtonWidget, and is handled by the FieldManglerWidget.

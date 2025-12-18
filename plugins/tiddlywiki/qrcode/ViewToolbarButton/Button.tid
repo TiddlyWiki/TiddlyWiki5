@@ -1,0 +1,35 @@
+title: $:/plugins/tiddlywiki/qrcode/ViewToolbarButton
+tags: $:/tags/ViewToolbar
+list-before: $:/core/ui/Buttons/close
+caption: {{$:/plugins/tiddlywiki/qrcode/icon}} QR code
+short-caption: QR code
+description: Generate QR code for this tiddler
+
+\whitespace trim
+<span class="tc-popup-keep">
+<$button popup=<<qualify "$:/state/popup/qrcode">> tooltip={{$:/plugins/tiddlywiki/qrcode/ViewToolbarButton!!description}} aria-label={{$:/plugins/tiddlywiki/qrcode/ViewToolbarButton!!short-caption}} class=<<tv-config-toolbar-class>> class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+{{$:/plugins/tiddlywiki/qrcode/icon}}
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
+<span class="tc-btn-text">
+<$text text={{$:/plugins/tiddlywiki/qrcode/ViewToolbarButton!!short-caption}}/>
+</span>
+<%endif%>
+</$button>
+</span>
+<$reveal state=<<qualify "$:/state/popup/qrcode">> type="popup" position="below" animate="yes">
+    <div class="tc-drop-down">
+
+    {{$:/plugins/tiddlywiki/qrcode/ViewToolbarButton||description}}
+
+        <$let tv-config-toolbar-icons="yes" tv-config-toolbar-text="yes" tv-config-toolbar-class="tc-btn-invisible" targetTiddler=<<currentTiddler>>>
+            <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbarButton/QRcode]!has[draft.of]]">
+                <$button popup=<<qualify "$:/state/popup/qrcode/type">> class="tc-btn-invisible" selectedClass="tc-selected">
+                    <$action-sendmessage $message="tm-modal" $param=<<currentTiddler>> currentTiddler=<<targetTiddler>>/>
+                    <$transclude field="caption" mode="inline"/>
+                </$button>
+            </$list>
+        </$let>
+    </div>
+</$reveal>

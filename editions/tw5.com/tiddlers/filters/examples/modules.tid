@@ -1,0 +1,10 @@
+created: 20150123221510000
+modified: 20210919201037087
+tags: [[modules Operator]] [[Operator Examples]]
+title: modules Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[filteroperator]modules[]]">>
+
+Get the title of the macro module which a `property` name with value `version`:
+<<.operator-example 2 "[[macro]modules[name],[version]]">>

@@ -1,0 +1,23 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: قائمة
+Filter/Caption: فلتر
+Filter/Hint: البحث عن طريق [[عبارة فلتر |https://tiddlywiki.com/static/Filters.html]]
+Matches: //<small><<resultCount>> تطابقات</small>//
+Matches/All: جميع التدلرز المتطابقة:
+Matches/Title: العناوين المتطابقة:
+Search: بحث
+Search/TooShort: نص البحث قصير جدًا
+
+Shadows/Caption: تدلرز خفية
+Shadows/Hint: ابحث عن تدلرز الظل
+
+Shadows/Matches: //<small><<resultCount>> تطابقات</small>//
+Standard/Caption: معيار
+Standard/Hint: ابحث عن التدلرز المعيارية
+
+Standard/Matches: //<small><<resultCount>> تطابقات</small>//
+System/Caption: نظام
+System/Hint: ابحث عن تدلرز النظام
+
+System/Matches: //<small><<resultCount>> تطابقات</small>//

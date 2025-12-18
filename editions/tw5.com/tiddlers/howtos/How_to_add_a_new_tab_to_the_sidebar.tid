@@ -1,0 +1,15 @@
+created: 20141117000000000
+modified: 20170204191253218
+tags: Learning [[Customise TiddlyWiki]]
+title: How to add a new tab to the sidebar
+type: text/vnd.tiddlywiki
+
+To create a new tab in the sidebar menu:
+
+# Create a tiddler and tag it with the [[SystemTag|SystemTags]] tag [[$:/tags/SideBar]]
+#* To create a table of contents you can populate the new tab tiddler using the [[table-of-contents macros|Table-of-Contents Macros]]. For example, see the [[TableOfContents]] used here
+# By default, the tiddler title is used as the tab title but you can override it using the `caption` field
+# To define the tab ordering, use the `list-after` or `list-before` fields as discussed in [[Tagging]]
+#* For example: set `list-after` to [[$:/core/ui/SideBar/Open]] to place a sidebar tab immediately after the "Open" tab
+
+Note that you can create new tabs under the "More" tab in the same way by using the tag `$:/tags/MoreSideBar`.

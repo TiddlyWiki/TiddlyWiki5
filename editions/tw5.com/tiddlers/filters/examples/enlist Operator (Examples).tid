@@ -1,0 +1,10 @@
+created: 20170221144328467
+modified: 20190610165309565
+tags: [[enlist Operator]] [[Operator Examples]]
+title: enlist Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[enlist[one two three]addsuffix[!]]">>
+<<.operator-example 2 "[enlist[one one one]]">>
+<<.operator-example 3 "[enlist:raw[one one one]]">>
+<<.operator-example 4 "[enlist{$:/StoryList!!list}]">>

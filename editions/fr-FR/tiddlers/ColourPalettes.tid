@@ -1,0 +1,31 @@
+created: 20140216102454178
+fr-title: Palettes de couleurs
+modified: 20150624092544660
+tags: Concepts
+title: ColourPalettes
+type: text/vnd.tiddlywiki
+
+Une palette de couleur est un [[tiddler data|DataTiddlers]] qui affecte une valeur de couleur [[CSS]], comme ''yellow'' ou ''#fe0'', à chacun des multiples noms de couleur, de cette façon<<:>>
+
+```
+page-background: #fe0
+table-border: #ccc
+...
+```
+
+Plusieurs palettes font partie du noyau. le tiddler système [[$:/palette]] contient toujours le titre du tiddler en cours de la palette sélectionnée.
+
+Pour récupérer la valeur du nom d'une couleur dans la palette courante, ex<<:>> à employer dans un tiddler stylesheet, faites appel à la macro <<.mlink colour>><<:>>
+
+```
+<<colour page-background>>
+```
+
+Les tiddlers palette tiddlers contiennent les champs suivants<<:>>
+
+|!Nom |!Valeur |
+|title |Débute typiquement  par `$:/` |
+|type |`application/x-tiddler-dictionary` |
+|tags |`$:/tags/Palette` |
+|description |Affichée à l'exploration de la palette |
+|text |`name: value` définition des couleurs |

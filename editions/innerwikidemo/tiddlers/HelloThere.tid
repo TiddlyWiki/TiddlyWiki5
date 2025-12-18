@@ -1,0 +1,14 @@
+title: HelloThere
+
+This is a demo of TiddlyWiki 5's ''innerwiki'' plugin.
+
+To try these examples under Node.js:
+
+# Install Puppeteer, as described in the [[readme|$:/plugins/tiddlywiki/innerwiki/readme]]
+# Execute the following command in the root of the TiddlyWiki 5 repo:
+
+```
+./tiddlywiki.js editions/innerwikidemo --screenshot '[[$:/plugins/tiddlywiki/innerwiki/examples]]' 4 --render '[[$:/plugins/tiddlywiki/innerwiki/examples]]' "examples.html"
+```
+
+Open `examples.html` to see the generated static HTML rendering.

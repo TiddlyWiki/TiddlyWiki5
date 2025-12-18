@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: .
+Date/DaySuffix/10: .
+Date/DaySuffix/11: .
+Date/DaySuffix/12: .
+Date/DaySuffix/13: .
+Date/DaySuffix/14: .
+Date/DaySuffix/15: .
+Date/DaySuffix/16: .
+Date/DaySuffix/17: .
+Date/DaySuffix/18: .
+Date/DaySuffix/19: .
+Date/DaySuffix/2: .
+Date/DaySuffix/20: .
+Date/DaySuffix/21: .
+Date/DaySuffix/22: .
+Date/DaySuffix/23: .
+Date/DaySuffix/24: .
+Date/DaySuffix/25: .
+Date/DaySuffix/26: .
+Date/DaySuffix/27: .
+Date/DaySuffix/28: .
+Date/DaySuffix/29: .
+Date/DaySuffix/3: .
+Date/DaySuffix/30: .
+Date/DaySuffix/31: .
+Date/DaySuffix/4: .
+Date/DaySuffix/5: .
+Date/DaySuffix/6: .
+Date/DaySuffix/7: .
+Date/DaySuffix/8: .
+Date/DaySuffix/9: .
+Date/Long/Day/0: søndag
+Date/Long/Day/1: mandag
+Date/Long/Day/2: tirsdag
+Date/Long/Day/3: onsdag
+Date/Long/Day/4: torsdag
+Date/Long/Day/5: fredag
+Date/Long/Day/6: lørdag
+Date/Long/Month/1: januar
+Date/Long/Month/10: oktober
+Date/Long/Month/11: november
+Date/Long/Month/12: december
+Date/Long/Month/2: februar
+Date/Long/Month/3: marts
+Date/Long/Month/4: april
+Date/Long/Month/5: maj
+Date/Long/Month/6: juni
+Date/Long/Month/7: juli
+Date/Long/Month/8: august
+Date/Long/Month/9: september
+Date/Period/am: am
+Date/Period/pm: pm
+Date/Short/Day/0: søn
+Date/Short/Day/1: man
+Date/Short/Day/2: tir
+Date/Short/Day/3: ons
+Date/Short/Day/4: tor
+Date/Short/Day/5: fre
+Date/Short/Day/6: lør
+Date/Short/Month/1: jan
+Date/Short/Month/10: okt
+Date/Short/Month/11: nov
+Date/Short/Month/12: dec
+Date/Short/Month/2: feb
+Date/Short/Month/3: mar
+Date/Short/Month/4: apr
+Date/Short/Month/5: maj
+Date/Short/Month/6: jun
+Date/Short/Month/7: jul
+Date/Short/Month/8: aug
+Date/Short/Month/9: sep
+RelativeDate/Future/Days: om <<period>> dage
+RelativeDate/Future/Hours: om <<period>> timer
+RelativeDate/Future/Minutes: om <<period>> minuter
+RelativeDate/Future/Months: om <<period>> måneder
+RelativeDate/Future/Second: om 1 sekund
+RelativeDate/Future/Seconds: om <<period>> sekunder
+RelativeDate/Future/Years: om <<period>> år
+RelativeDate/Past/Days: for <<period>> dage siden
+RelativeDate/Past/Hours: for <<period>> timer siden
+RelativeDate/Past/Minutes: for <<period>> minutter siden
+RelativeDate/Past/Months: for <<period>> måneder siden
+RelativeDate/Past/Second: for 1 sekund siden
+RelativeDate/Past/Seconds: for <<period>> sekunder siden
+RelativeDate/Past/Years: for <<period>> år siden

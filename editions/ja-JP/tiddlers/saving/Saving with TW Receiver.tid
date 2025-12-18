@@ -1,0 +1,17 @@
+caption: TW Receiver
+created: 20200612233356021
+delivery: DIY
+description: DIY script you can install on your own server
+method: save
+modified: 20241103115046217
+original-modified: 20200612234312631
+tags: Saving PHP
+title: Saving with TW Receiver
+ja-title: TWレシーバーでの保存
+type: text/vnd.tiddlywiki
+
+TWレシーバーは、PHPベースのサーバーに保存するために使用される~TiddlyWikiプラグインであり、PHPスクリプトです。
+
+その機能には、シンプルな自動バックアップ、古いインスタンスの上書き保護、チャレンジダイジェスト認証(強化されたセキュリティ)、データ整合性署名(強化されたセキュリティ)などがあります。
+
+* 詳細情報、プラグイン、コードについては、[[TWレシーバー|https://github.com/sendwheel/tw-receiver]]をご覧ください。

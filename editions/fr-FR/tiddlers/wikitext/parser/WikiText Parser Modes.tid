@@ -1,0 +1,17 @@
+created: 20220110233944530
+fr-title: Modes d'analyse du WikiTexte
+modified: 20220419233657896
+tags: WikiText
+title: WikiText Parser Modes
+type: text/vnd.tiddlywiki
+
+Pour afficher les tiddlers (généralement le champ <<.field text>>), l'interpréteur de <<fr WikiText>> lit et analyse le contenu, et applique les règles de conversion du <<fr WikiText>>. L'interpréteur a trois modes d'analyse<<:>>
+
+* Le ''mode pragma'' - l'analyseur ne reconnaît que la syntaxe [[WikiTexte du mode pragma|Pragma]]
+* Le ''mode bloc'' - l'analyseur ne reconnaît que la syntaxe [[WikiTexte du mode bloc|Block Mode WikiText]]
+* Le ''mode en ligne'' - l'analyseur ne reconnaît que la syntaxe [[WikiTexte du mode en ligne|Inline Mode WikiText]]
+
+L'interpréteur [[bascule entre ces modes d'analyse|WikiText parser mode transitions]] selon le texte qu'il rencontre. De plus, il existe des [[emplacements où le WikiTexte est ignoré|Places where the parser ignores WikiText]].
+
+<<.tip """Le concept de modes <<gf bloc>> et <<gf "en ligne">> existe aussi pour les éléments HTML standards. En HTML, ces [[deux modes de mise en page|https://www.w3schools.com/html/html_blocks.asp]] ,,(en anglais),, déterminent si le résultat est disposé sur une même ligne ou pas.
+<p>La majorité du <<fr "Block Mode WikiText">> correspond aux [[éléments de bloc HTML|https://developer.mozilla.org/fr-FR/docs/Web/HTML/Block-level_elements]], et la majorité du <<fr "Inline Mode WikiText">> correspond aux [[éléments en ligne HTML|https://developer.mozilla.org/fr-FR/docs/Web/HTML/Inline_elements]]. Néanmoins, en ~WikiTexte les deux modes sont aussi importants pour déterminer la syntaxe utilisable que pour déterminer la présentation du résultat.</p>""">>

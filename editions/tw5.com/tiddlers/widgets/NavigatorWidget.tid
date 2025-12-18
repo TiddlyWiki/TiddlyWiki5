@@ -1,0 +1,44 @@
+caption: navigator
+created: 20131024141900000
+modified: 20211127023932158
+tags: Widgets MessageHandlerWidgets
+title: NavigatorWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The navigator widget manipulates the current store, the story list and history lists in response to various [[Messages]].
+
+! Content and Attributes
+
+The navigator widget displays any contained content, and responds to Messages dispatched within it.
+
+|!Attribute |!Description |
+|story |Name of the tiddler containing the story list to be manipulated |
+|history |Name of the tiddler containing the history list to be manipulated |
+|openLinkFromInsideRiver |Determines the location for opening new tiddlers from links within the story river: at the ''top'' or ''bottom'' of the story river, or ''above'' or ''below'' the current tiddler |
+|openLinkFromOutsideRiver|Determines the location for opening new tiddlers from links outside the story river: at the ''top'' or ''bottom'' of the story river|
+|relinkOnRename|<<.from-version "5.1.14">> Determines if tags in other tiddlers are renamed if the tiddler title changes. ''yes'' or ''no''. default: ''no''|
+
+! Widget Messages
+
+The following [[Messages]] are handled by the navigator widget:
+
+<ul>
+<$list filter="[tag[navigator-message]]">
+<li>
+<$link/>
+</li>
+</$list>
+</ul>
+
+! Variables
+
+The following [[Variables]] are assigned by the navigator widget:
+
+* <<.vlink tv-story-list>>, giving the name of the tiddler containing the story list
+* <<.vlink tv-history-list>>, giving the name of the tiddler containing the history list
+
+! Examples
+
+See [[Creating SubStories]].

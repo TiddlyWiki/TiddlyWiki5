@@ -1,0 +1,5 @@
+title: $:/config/EditorToolbarButtons/Visibility/$:/
+
+core/ui/EditorToolbar/heading-4: hide
+core/ui/EditorToolbar/heading-5: hide
+core/ui/EditorToolbar/heading-6: hide

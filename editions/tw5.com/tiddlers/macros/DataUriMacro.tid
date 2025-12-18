@@ -1,0 +1,21 @@
+created: 20150221162212000
+modified: 20150221222838000
+tags: Macros [[Core Macros]]
+title: datauri Macro
+type: text/vnd.tiddlywiki
+caption: datauri
+
+The <<.def datauri>> [[macro|Macros]] returns a [[data URI|Data URI]] for the content of a tiddler.
+
+It is often used in [[stylesheet|Cascading Style Sheets]] tiddlers to reference things like inline images and fonts:
+
+> `background: url(<<datauri "Motovun Jack.jpg">>);`
+
+The data URI is automatically [[base64|Base64]]-encoded in the case of a non-text tiddler.
+
+!! Parameters
+
+;title
+: The title of a tiddler, such as an image
+
+<<.macro-examples "datauri">>

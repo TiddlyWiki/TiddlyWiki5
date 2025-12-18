@@ -1,0 +1,13 @@
+title: $:/language/Modals/Download
+type: text/vnd.tiddlywiki
+subtitle: Download changes
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/DownloadingChanges.html
+
+Din webbläsare stödjer bara manuell sparning.
+
+För att spara din ändrade wiki, högerklicka på nedladdninslänken nedan och välj "Spara länk som...", och sen välj mapp och filnamn.
+
+//Du kan snabba upp lite genom att klicka på länken med alt-knappen nedtryckt. Du får då inte fråga om var du ska spara eller vad filen ska heta, troligvis så kommer din webbläsare ge filen ett oigenkänligt namn-- du kan behöva döpa om filen och se till att den har en filändelsen `.html` innan du kan använda den.//
+
+På smartphone som inte tillåter att du sparar ner filer så kan du istället bokmärka länken, och sen synka dina bokmärken till din dator som du därifrån kan spara ner normalt.

@@ -1,0 +1,27 @@
+title: Presidents Demo
+
+\define tv-config-toolbar-icons() yes
+\define tv-config-toolbar-text() yes
+
+# Visit the ''XLSX Utilities'' tab of control panel and ensure the current import specification is set to ''Presidents and Justices demo''
+# Download the demo spreadsheet: <<download-xlsx-tiddler "Presidents and Justices.xlsx" "Presidents and Justices.xlsx">>
+# Explore the contents of the file to understand the data and how it is structured
+# Import the spreadsheet back into TiddlyWiki
+#* Use the {{$:/core/ui/Buttons/import}} button here or in the ''Tools'' sidebar tab --or--
+#* Drag and drop the file into the browser
+# Click the ''import'' button on the $:/Import tiddler
+# Explore the imported data using the table of contents below 
+# Explore the ''Presidents and Justices demo'' import specification to see how the spreadsheet data was converted into tiddlers
+
+! Output
+
+<$list filter="[role[president]limit[1]]" emptyMessage="""
+//Follow the instructions above and the results will appear here//
+""">
+</$list>
+
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'States'>>
+
+</div>

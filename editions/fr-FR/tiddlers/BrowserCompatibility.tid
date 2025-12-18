@@ -1,0 +1,17 @@
+created: 20150530180205275
+fr-title: Navigateurs compatibles
+modified: 20150531184355238
+tags: [[Working with TiddlyWiki]]
+title: BrowserCompatibility
+type: text/vnd.tiddlywiki
+
+<<tw>> est conçu pour fonctionner avec des navigateurs HTML5-compatibles.
+
+Le tableau suivant récapitule les versions de navigateur qui sont connues pour fonctionner avec TiddlyWiki
+
+|!Navigateurs |!Status |
+|Internet Explorer |Version 10 et suivantes |
+|Chrome |Toutes les récentes versions |
+|Firefox |Toutes les récentes versions |
+|Firefox for Android |Toutes les récentes versions |
+|Safari |Version 6 et suivantes |

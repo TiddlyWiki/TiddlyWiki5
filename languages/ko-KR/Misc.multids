@@ -1,0 +1,52 @@
+title: $:/language/
+
+AboveStory/ClassicPlugin/Warning: 티들리위키 클래식용으로 설계된 플러그인을 불러오려고 하는 것 같아 보입니다. [[이러한 플러그인은 티들리위키 버전 5.x.x에 동작하지 않음|https://tiddlywiki.com/#TiddlyWikiClassic]]을 참고하세요. 티들리위키 클래식 플러그인이 감지되었습니다:
+BinaryWarning/Prompt: 이 티들러는 바이너리 데이터를 포함합니다
+ClassicWarning/Hint: 이 티들러는 티들리위키 클래식 위키 텍스트 형식으로 쓰여져 있으며, 티들리위키 버전 5와 완전히 호환되지 않습니다. 자세한 사항은 [[https://tiddlywiki.com/static/Upgrading.html]]을 보세요.
+ClassicWarning/Upgrade/Caption: 업그레이드
+CloseAll/Button: 모두 닫기
+ColourPicker/Recent: 최근:
+ConfirmCancelTiddler: "<$text text=<<title>>/>" 티들러의 바뀜을 버리겠습니까?
+ConfirmDeleteTiddler: "<$text text=<<title>>/>" 티들러를 삭제하겠습니까?
+ConfirmEditShadowTiddler: 섀도우티들러를 편집하려고 합니다. 어떠한 바뀜도 향후 업그레이드가 하찮지 않게 하는 기본 시스템을 덮어씁니다. "<$text text=<<title>>/>" 티들러를 편집하겠습니까?
+ConfirmOverwriteTiddler: "<$text text=<<title>>/>" 티들러를 덮어쓰겠습니까?
+Count: 횟수
+DefaultNewTiddlerTitle: 새 티들러
+DropMessage: 여기에 놓기 (또는 취소하려면 'Escape' 키 사용)
+Encryption/Cancel: 취소
+Encryption/ConfirmClearPassword: 비밀번호를 지우겠습니까? 이 위키를 저장할 때 적용된 암호화를 제거합니다
+Encryption/Password: 비밀번호
+Encryption/PasswordNoMatch: 비밀번호가 일치하지 않습니다
+Encryption/PromptSetPassword: 이 티들리위키에 대한 새 비밀번호를 설정합니다
+Encryption/RepeatPassword: 비밀번호 다시 입력
+Encryption/SetPassword: 비밀번호 설정
+Encryption/Username: 사용자 이름
+Error/Caption: 오류
+Error/Filter: 필터 오류
+Error/FilterSyntax: 필터 표현식에서 구문 오류
+Error/IsFilterOperator: 필터 오류: 'is' 필터 연산자에 대한 알 수 없는 피연산자
+Error/LoadingPluginLibrary: 플러그인 라이브러리를 불러오는 중 오류
+Error/RecursiveTransclusion: 끼워넣기 위젯에서 재귀 끼워넣기 오류
+Error/RetrievingSkinny: 날씬한 티들러 목록을 얻는 중 오류
+Error/SavingToTWEdit: TW편집으로 저장하는 데 오류
+Error/WhileSaving: 저장하는 동안 오류
+Error/XMLHttpRequest: XMLHttpRequest 오류 코드
+InternalJavaScriptError/Hint: 아이 창피해. 브라우저를 새로 고쳐 티들리위키를 다시 시작할 것을 권장합니다
+InternalJavaScriptError/Title: 내부 자바스크립트 오류
+LazyLoadingWarning: <p>''<$text text={{!!_canonical_uri}}/>''에서 바깥 텍스트를 불러오는 중입니다</p><p>이 메시지가 사라지지 않으면 이 구성에서 바깥 텍스트를 지원하지 않는 브라우저를 사용하고 있을 수 있습니다. [[https://tiddlywiki.com/#ExternalText]]를 보세요</p>
+LoginToTiddlySpace: TiddlySpace에 로그인
+MissingTiddler/Hint: "<$text text=<<currentTiddler>>/>" 티들러가 없습니다 - 만드려면 {{||$:/core/ui/Buttons/edit}}을 클릭하세요
+No: 아니오
+OfficialPluginLibrary: 공식 티들리위키 플러그인 라이브러리
+OfficialPluginLibrary/Hint: tiddlywiki.com에서의 공식 티들리위키 플러그인 라이브러리입니다. 플러그인, 테마 및 언어 팩은 코어 팀이 유지 관리하고 있습니다.
+PluginReloadWarning: 플러그인의 바뀜을 적용할 수 있도록 하려면 저장 {{$:/core/ui/Buttons/save-wiki}}하고 나서 다시 불러오세요 {{$:/core/ui/Buttons/refresh}}
+RecentChanges/DateFormat: YYYY년 MMM DD일
+SystemTiddler/Tooltip: 이것은 시스템 티들러입니다
+TagManager/Colour/Heading: 색
+TagManager/Count/Heading: 횟수
+TagManager/Icon/Heading: 아이콘
+TagManager/Info/Heading: 정보
+TagManager/Tag/Heading: 태그
+Tiddler/DateFormat: YYYY년 MMM DD일 am hh12:0mm
+UnsavedChangesWarning: 티들리위키에 저장하지 않은 바뀜이 있습니다
+Yes: 예

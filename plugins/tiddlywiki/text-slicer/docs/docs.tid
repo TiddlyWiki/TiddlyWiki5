@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/text-slicer/docs
+list: $:/plugins/tiddlywiki/text-slicer/docs/usage $:/plugins/tiddlywiki/text-slicer/docs/preview $:/plugins/tiddlywiki/text-slicer/docs/model $:/plugins/tiddlywiki/text-slicer/docs/exporters $:/plugins/tiddlywiki/text-slicer/docs/internals
+
+! Introduction
+
+This plugin contains tools to help work with documents that are structured as a hierarchical outline of tiddlers.  The structural relationships within the document are expressed through the `list` and `tags` fields: for example, headings have a list specifying the chunks of content to be shown under the heading.
+
+The major components within the text slicer plugin include:
+
+* ''the slicer'', a tool that slices up an existing monolithic document according to the headings, lists and paragraphs. It is available as a toolbar button for the browser, or as a command for use under Node.js
+* ''document preview column'', a new sidebar on the left that shows the full text of any documents in the wiki and allows individual tiddlers to be opened with a click
+* ''templates'' for previewing and exporting the individual documents as HTML files
+
+Minor components include:
+
+* a new `list-children` filter that returns all the descendents listed in the `list` field of the selected tiddlers
+* a new canned filter for [[advanced search|$:/AdvancedSearch]] that lists orphans tiddlers that are not part of any document
+
+<<tabs "[all[tiddlers+shadows]tag[$:/plugins/tiddlywiki/text-slicer/docs]!has[draft.of]]" "$:/plugins/tiddlywiki/text-slicer/docs/usage">>

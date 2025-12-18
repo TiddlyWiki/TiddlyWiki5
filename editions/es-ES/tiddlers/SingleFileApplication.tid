@@ -1,0 +1,14 @@
+caption: Archivo único
+created: 20130822174000000
+es-title: Aplicación de archivo único
+modified: 20160429055855664
+tags: Definitions
+title: SingleFileApplication
+type: text/vnd.tiddlywiki
+
+Una <<.def "aplicación de archivo único">> es una en la que todos sus recursos se presentan en un único archivo estático. Esto significa que puede descargarse y usarse offline sin perder funcionalidad. Del mismo modo puede alojarse en casi cualquier tipo de servidor web.
+
+~TiddlyWiki es un caso particular de aplicación de archivo único porque guarda sus datos en sí mismo y es capaz, además, de guardar cambios en sí mismo, lo que también lo convierte en un curioso caso de [[quine|Quine]] con aplicaciones prácticas.
+
+Por definición, una aplicación de archivo único lo es también de [[página única|SinglePageApplication]], pero lo contrario no siempre es del todo cierto.
+

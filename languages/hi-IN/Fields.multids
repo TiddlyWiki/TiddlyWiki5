@@ -1,0 +1,36 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: एक बाहरी छवि tiddler से भरा यूआरआई
+bag: बैग का नाम
+जिसमें एक tiddler आया था
+caption:  टैब या बटन पर प्रदर्शित करने के लिए 
+टेक्स्ट
+color: एक tiddler के साथ जुड़े CSS रंग value
+component: एक tiddler के साथ जुड़े CSS रंग value [[alert tiddler|AlertMechanism]]
+created: तारीख,एक tiddler बनाया गया था
+creator: tiddler बनाए गए व्यक्ति का नाम
+current-tiddler: एक में सबसे ऊपर tiddler cache करने के लिए प्रयोग किया जाता [[इतिहास की सूची | HistoryMechanism]]
+dependents: एक प्लगइन के लिए, निर्भर प्लगइन शीर्षकों की सूची
+description: एक प्लगइन के लिए वर्णनात्मक पाठ,or एक modal dialogue
+draft.of: tiddler के शीर्षक में शामिल,जिसमें से यह एक ड्राफ्ट है,ड्राफ्ट tiddlers के लिए
+draft.title: ड्राफ्ट tiddlers के लिए, tiddler के प्रस्तावित नए शीर्षक में शामिल
+footer: एक विज़ार्ड के के लिए footer टेक्स्ट
+icon: एक tiddler के साथ जुड़े चिह्न युक्त tiddler का खिताब
+library: अगर"हाँ" सेट किया है, तो यह संकेत करता है की एक tiddler किसी JavaScript लाइब्रेरी के रूप सेव की जानी चाहिए
+list: एक tiddler के साथ जुड़े tiddler खिताब के एक आदेश सूची
+list-after: अगर सेट करते हैं, tiddler का शीर्षक है, जिसके बाद इस tiddler में tiddler शीर्षकों की आदेश सूची को जोड़ा जाना चाहिए
+list-before: सेट करते हैं, एक tiddler का शीर्षक है, जो पहले इस tiddler tiddler शीर्षकों की आदेश सूची में जोड़ा जाना चाहिए, या सूची के शुरू में इस क्षेत्र मौजूद है, लेकिन खाली है
+modified: तारीख और समय जिस पर , एक tiddler अंतिम बार संशोधित किया गया था
+modifier: यह tiddler उस व्यक्ति के साथ जुड़े हुए हैं जिसने पिछले एक tiddler को  modified किया  
+name: एक प्लगइन tiddler के साथ जुड़े human पढ़ने योग्य नाम
+plugin-priority: एक संख्यात्मक मूल्य,एक प्लगइन tiddler की प्राथमिकता का संकेत है
+plugin-type: एक प्लगइन tiddler में प्लगइन के प्रकार
+released: एक टिड्लीविकि जारी होने की तारीख
+revision: सर्वर में आयोजित tiddler में संशोधन
+source: एक tiddler के साथ जुड़े  URL स्रोत 
+subtitle: एक विज़ार्ड के के लिए उपशीर्षक टेक्स्ट
+tags: एक tiddler के साथ जुड़े टैग की सूची
+text: एक tiddler के मुख्य भाग टेक्स्ट
+title: एक tiddler का अनूठा नाम
+type: एक tiddler की सामग्री के प्रकार
+version: एक प्लगइन के लिए संस्करण जानकारी

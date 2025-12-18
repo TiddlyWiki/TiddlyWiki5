@@ -1,0 +1,16 @@
+title: $:/language/Filters/
+
+AllTags: Tutte le etichette eccetto quelle di sistema
+AllTiddlers: Tutti i frammenti eccetto quelli di sistema
+Drafts: Frammenti bozza
+Missing: Frammenti mancanti
+Orphans: Frammenti orfani
+OverriddenShadowTiddlers: Frammenti nascosti sovrascritti
+RecentSystemTiddlers: Frammenti modificati di recente, inclusi frammenti di sistema
+RecentTiddlers: Frammenti modificati di recente
+SessionTiddlers: Frammenti modificati da quando è stato caricato il wiki
+ShadowTiddlers: Frammenti nascosti
+StoryList: Frammenti nella cronologia, escluso <$text text="$:/AdvancedSearch"/>
+SystemTags: Etichette di sistema
+SystemTiddlers: Frammenti di sistema
+TypedTiddlers: Frammenti di tipo non wiki-text

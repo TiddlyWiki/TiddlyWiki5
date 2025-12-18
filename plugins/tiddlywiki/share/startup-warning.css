@@ -1,0 +1,87 @@
+
+.startup-warning-wrapper {
+	font-family: sans-serif;
+	line-height: 1.4;
+	width: 50%;
+	margin: 1em auto 0 auto;
+	padding: 0 1em;
+	border: 6px solid transparent;
+	border-radius: 8px;
+	background: linear-gradient(white, white) padding-box, repeating-linear-gradient(-45deg, red 0, red 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+	animation: marching-ants 20s linear infinite;
+}
+
+@media (max-width: 600px) {
+	.startup-warning-wrapper {
+		width: 85%;
+	}
+}
+
+#startup-warning-preview {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#startup-warning-preview .tiddler-title {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#startup-warning-preview table {
+	margin-left: 1em;
+}
+
+#startup-warning-preview th {
+	vertical-align: top;
+	font-weight: normal;
+}
+
+#startup-warning-preview td {
+	font-family: monospace;
+    white-space: pre-wrap;
+    background: #f8f8f8;
+}
+
+.startup-warning-wrapper button {
+    padding: 0.3em;
+    border-radius: 4px;
+    font-size: 1.5em;
+}
+
+#startup-warning-cancel {
+	background: #DB2828;
+	color: #fff;
+}
+
+#startup-warning-cancel:hover {
+	background: #E75C60;
+	color: #fff;
+}
+
+#startup-warning-cancel:active {
+	background: #ec8d8d;
+	color: #fff;
+}
+
+#startup-warning-proceed {
+	background: #24BA4C;
+	color: #fff;
+}
+
+#startup-warning-proceed:hover {
+	background: #59e27e;
+	color: #fff;
+}
+
+#startup-warning-proceed:active {
+	background: #ABF5BD;
+	color: #fff;
+}
+
+.startup-warning-wrapper h1,
+.startup-warning-wrapper h2 {
+	font-weight: bold;
+}
+ 
+@keyframes marching-ants { to { background-position: 100% 100% } }
+

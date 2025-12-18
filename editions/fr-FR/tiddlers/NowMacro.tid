@@ -1,0 +1,28 @@
+caption: now
+created: 20141008141616791
+modified: 20141018163834163
+tags: Macros
+title: NowMacro
+type: text/vnd.tiddlywiki
+
+La macro ''now'' renvoie la date et l'heure courantes, formatées d'après chaîne de caractères optionnelle.
+
+! Paramètres
+
+|!Position |!Nom |!Description |!Défaut |
+| 1 |format |Chaîne de type DateFormat spécifiant le format pour la date et l'heure |`0hh:0mm, DDth MMM YYYY` |
+
+! Exemples
+
+Par exemple<<dp>>
+
+```
+* <<now>>
+* <<now "DDth MMM YYYY">>
+```
+
+Renvoie<<dp>>
+
+* <<now>>
+* <<now "DDth MMM YYYY">>
+

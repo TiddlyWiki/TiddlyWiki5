@@ -1,0 +1,13 @@
+created: 20201129174833980
+modified: 20201129180011580
+tags: [[Operator Examples]] [[pad Operator]]
+title: pad Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 """[[2]pad[3]]""">>
+
+<<.operator-example 2 """[[2]pad[3],[a]]""">>
+
+<<.operator-example 3 """[[12]pad[9],[abc]]""">>
+
+<<.operator-example 4 """[[12]pad:suffix[9],[abc]]""">>

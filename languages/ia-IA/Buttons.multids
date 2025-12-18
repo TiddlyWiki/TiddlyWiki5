@@ -1,0 +1,71 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: cerca avantiate
+AdvancedSearch/Hint: Cerca avantiate
+Cancel/Caption: cancella
+Cancel/Hint: Cancella redaction de iste nota
+Clone/Caption: clona
+Clone/Hint: Clona iste nota
+Close/Caption: claude
+Close/Hint: Claude iste nota
+CloseAll/Caption: claude omnes
+CloseAll/Hint: Claude omne notas
+CloseOthers/Caption: claude alteres
+CloseOthers/Hint: Claude altere notas
+ControlPanel/Caption: pannello de controlo
+ControlPanel/Hint: Aperi pannello de controlo
+Delete/Caption: dele
+Delete/Hint: Dele iste nota
+Edit/Caption: redige
+Edit/Hint: Redige iste nota
+Encryption/Caption: codification
+Encryption/ClearPassword/Caption: remove contrasigno
+Encryption/ClearPassword/Hint: Remove le contrasigno, e salva iste wiki sin codification
+Encryption/Hint: Fixa o remove un contrasigno pro salvar iste wiki
+Encryption/SetPassword/Caption: fixa contrasigno
+Encryption/SetPassword/Hint: Fixa un contrasigno pro salvar iste wiki con codification
+ExportPage/Caption: exporta omnes
+ExportPage/Hint: Exporta omne notas
+ExportTiddler/Caption: exporta nota
+ExportTiddler/Hint: Exporta nota
+ExportTiddlers/Caption: exporta notas
+ExportTiddlers/Hint: Exporta notas
+FullScreen/Caption: plen schermo
+FullScreen/Hint: Entra o exi plen schermo
+HideSideBar/Caption: cela barra lateral
+HideSideBar/Hint: Cela barra lateral
+Home/Caption: initio
+Home/Hint: Aperi le notas standard
+Import/Caption: importa
+Import/Hint: Importa files
+Info/Hint: Monstra information pro iste nota
+Language/Caption: lingua
+Language/Hint: Selige le lingua del interfacie
+More/Caption: plus
+More/Hint: Plus de actiones
+NewHere/Caption: nove ci
+NewHere/Hint: Crea un nove nota con iste etiquetta
+NewJournal/Caption: nove jornal
+NewJournal/Hint: Crea un nove jornal
+NewJournalHere/Caption: nove jornal ci
+NewJournalHere/Hint: Crea un nove jornal con iste etiquetta
+NewTiddler/Caption: nove notitia
+NewTiddler/Hint: Crea un nove notitia
+Permalink/Caption: permaligamine
+Permalink/Hint: Fixa in le barra de adresses del navigator un ligamine directe a iste nota
+Permaview/Caption: permavista
+Permaview/Hint: Fixa in le barra de adresses del navigator un ligamine directe a omne le notas in iste historia
+Refresh/Caption: refresca
+Refresh/Hint: Executa un plen refrescamento de iste wiki
+Save/Caption: salva
+Save/Hint: Salva iste nota
+SaveWiki/Caption: salva cambios
+SaveWiki/Hint: Salva cambios
+ShowSideBar/Caption: monstra barra lateral
+ShowSideBar/Hint: Monstra barra lateral
+StoryView/Caption: presentation de historia
+StoryView/Hint: Selige le visualisation del historia
+TagManager/Caption: administrator de etiquettas
+TagManager/Hint: Aperi administrator de etiquettas
+Theme/Caption: thema
+Theme/Hint: Selige le thema a monstrar

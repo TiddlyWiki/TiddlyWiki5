@@ -1,0 +1,10 @@
+title: $:/language/Help/help
+description: Mostra l'ajuda de les ordres TiddlyWiki
+
+Mostra el text d'ajuda d'una ordre:
+
+```
+--help [<ordre>]
+```Per exemple:
+
+Si no s'indica el nom de l'ordre llavors es mostra una llista de les ordres disponibles.

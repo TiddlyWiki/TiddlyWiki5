@@ -1,0 +1,110 @@
+created: 20230421020225031
+modified: 20230726145912019
+tags: 
+title: Variable Usage
+type: text/vnd.tiddlywiki
+
+!Ways to define variables and parameters
+|! how declared|! how parameters are defined|! accessing parameter values in the body|
+|\define|`()`|`$param$, <<__param__>>`|
+|~|<<.wlink ParametersWidget>> or `\parameters`|`<<param>>`|
+|<<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>|<<.wlink ParametersWidget>> or `\parameters`|`<<param>>`|
+|\procedure, \widget|`()`, <<.wlink ParametersWidget>> or `\parameters`|`<<param>>`|
+|\function|`()`|`<param>`|
+|javascript macros|`exports.params` javascript property array|passed as normal javascript function parameter and so accessed as a normal javascript variable|
+
+!!Examples
+These examples are meant to provide insight into the various ways of defining and using parameters. In many cases they do not illustrate best practices.
+
+!!! \define
+
+<$let eg='\define mp1(a1)  $a1$ - <<__a1__>>
+
+\define mp2() <$parameters a1><<a1>></$parameters>
+
+\define mp3()
+\parameters(a1)
+<<a1>>
+\end
+
+|<<mp1 foo>>|<<mp2 foo>>|<<mp3 foo>>|
+'>
+<$macrocall $name="copy-to-clipboard-above-right" src=<<eg>>/>
+<$codeblock code=<<eg>>/>
+</$let>
+
+!!! $set, $let, $vars
+
+<$let eg='<$set name="sp1" value="<$parameters a1><<a1>></$parameters>">
+<$set name="sp2" value="""
+\parameters(a1)
+<$parameters a1><<a1>></$parameters>
+""">
+<$vars vp1="<$parameters a1><<a1>></$parameters>" vp2="""
+\parameters(a1)
+<$parameters a1><<a1>></$parameters>
+""">
+<$let lp1="<$parameters a1><<a1>></$parameters>" lp2="""
+\parameters(a1)
+<$parameters a1><<a1>></$parameters>
+""">
+
+|<<sp1 foo>>|<<sp2 foo>>|
+|<<vp1 foo>>|<<vp2 foo>>|
+|<<lp1 foo>>|<<lp2 foo>>|
+</$let>
+</$vars>
+</$set>
+</$set>
+'>
+<$macrocall $name="copy-to-clipboard-above-right" src=<<eg>>/>
+<$codeblock code=<<eg>>/>
+</$let>
+
+!!! \procedure, \widget
+
+<$let eg='\procedure pp1(a1)  <<a1>>
+
+\procedure pp2() <$parameters a1><<a1>></$parameters>
+
+\procedure pp3()
+\parameters(a1)
+<<a1>>
+\end
+
+\procedure wp1(a1)  <<a1>>
+
+\widget wp2() <$parameters a1><<a1>></$parameters>
+
+\widget wp3()
+\parameters(a1)
+<<a1>>
+\end
+
+|<<pp1 foo>>|<<pp2 foo>>|<<pp3 foo>>|
+|<<wp1 foo>>|<<wp2 foo>>|<<wp3 foo>>|
+'>
+<$macrocall $name="copy-to-clipboard-above-right" src=<<eg>>/>
+<$codeblock code=<<eg>>/>
+</$let>
+
+!!! \function
+<$let eg='\function fp1(a1)  [<a1>]
+|<<fp1 foo>>|'>
+<$macrocall $name="copy-to-clipboard-above-right" src=<<eg>>/>
+<$codeblock code=<<eg>>/>
+</$let>
+
+
+!Behaviour of invoked variables depends on how the variable was declared
+
+{{Behaviour of invoked variables depends on how the variable was declared}}
+
+
+!Namespaces
+
+*''tiddler titles'' - tiddlers are uniquely identified by their title. The namespace for tiddler titles and variable names are completely separate.
+*''variables'' - \define, <<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>, \procedure, \widget, \function all create variables. If the same name is used, then later define will overwrite earlier defined
+ *''<<.op function>> filter operator parameter'' - only variables defined using \function can be called using the <<.olink function>> operator
+ *''filter operators'' - only the [[javascript defined filter operators|Filter Operators]] and variables defined using \function with name containing a dot can be called
+ *''widgets'' - variables defined using \widget can be invoked using `<$widget/>` syntax ONLY if the name starts a dollar sign. Without the dollar sign prefix, defining variables using \widget is no different than using \procedure.

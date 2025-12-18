@@ -1,0 +1,64 @@
+modified: 20160112175006000
+created: 20160112025328000
+title: Adding Babel Polyfill to TiddlyWiki
+type: text/vnd.tiddlywiki
+
+Not all browsers support the latest features of ES2015. The Babel project offers a polyfill that can be included into your TiddlyWiki so those features can be available to your plugins. To do this you will need a copy of the polyfill source.
+
+You can obtain the source either through <<.def "npm">> or downloaded/saved. See the [[Babel Polyfill documentation|https://babeljs.io/docs/usage/polyfill/]] for specific information on installing it.
+
+In your TiddlyWiki editions folder make sure you have a `plugins/babel-polyfill` folder. Then create the `plugins/babel-polyfill/plugin.info` file with the following in it:
+
+```json
+{
+  "title": "$:/plugins/babel/babel-polyfill",
+  "description": "Babel Polyfills for ES2015 support",
+  "author": "Your Name Here",
+  "core-version": ">=5.0.0"
+}
+```
+
+Create the folder `plugins/babel-polyfill/files` folder. Then create the `plugins/babel-polyfill/files/tiddlywiki.files` file with the following in it:
+
+```json
+{
+  "tiddlers": [
+    {
+      "file": "polyfill.min.js",
+      "fields": {
+        "title": "$:/plugins/babel/babel-polyfill/polyfill.min.js",
+        "type": "application/javascript",
+        "module-type": "library",
+        "global-module": "true"
+      }
+    }
+  ]
+}
+```
+
+Now copy the `polyfill.min.js` you downloaded/saved.
+
+<<.tip "If you downloaded this via ''npm'' then it would be available in `./node_modules/babel-polyfill/dist/polyfill.min.js`.">>
+
+Lastly you need a initializer so create the `plugins/babel-polyfill/plugin.js` file with the following in it:
+
+```javascript
+/*\
+title: $:/plugins/babel/babel-polyfill/plugin.js
+type: application/javascript
+module-type: startup
+
+Load the babel-polyfill library on startup
+
+\*/
+
+exports.startup = function() {
+  $tw.modules.execute('$:/plugins/babel/babel-polyfill/polyfill.min.js');
+}
+```
+
+<<.warning "Because the polyfill is meant to be used in the browser we need to conditionally load the library which ES2016 doesn't allow. This is why it is written using TiddlyWiki's dependency resolver instead of using ES2015 `import` statements.">>
+
+Now all the //runtime// ES2015 features are available like using `Promise` in your plugin code.
+
+See [[Using ES2016 for Writing Plugins]] on how to use the ES2015 //syntax// for your plugin code.

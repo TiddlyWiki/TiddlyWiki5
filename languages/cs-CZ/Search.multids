@@ -1,0 +1,16 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: Seznam
+Filter/Caption: Filtr
+Filter/Hint: Hledat pomocí [[filter expression|https://tiddlywiki.com/static/Filters.html]]
+Filter/Matches: //<small>nalezeno <<resultCount>></small>//
+Matches: //<small>nalezeno <<resultCount>></small>//
+Shadows/Caption: Stínové
+Shadows/Hint: Hledat stínové tiddlery
+Shadows/Matches: //<small>nalezeno <<resultCount>></small>//
+Standard/Caption: Standardní
+Standard/Hint: Hledat standardní tiddlery
+Standard/Matches: //<small>nalezeno <<resultCount>></small>//
+System/Caption: Systémové
+System/Hint: Hledat systémové tiddlery
+System/Matches: //<small>nalezeno <<resultCount>></small>//

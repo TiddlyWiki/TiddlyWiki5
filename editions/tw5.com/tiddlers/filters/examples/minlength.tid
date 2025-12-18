@@ -1,0 +1,11 @@
+created: 20161011074235805
+modified: 20161011074235805
+tags: [[Operator Examples]] [[minlength Operator]]
+title: minlength Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]minlength[7]]">>
+<<.operator-example 2 "[list[Days of the Week]minlength[1]]">>
+

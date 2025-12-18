@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddler
+description: Sparar en rå tiddler till en fil
+
+Sparar en enskild tiddler i dess råtext- eller binärformat till det specificerade filnamnet. 
+
+```
+--savetiddler <title> <filename>
+```
+
+Som standard, filnamnens sökvägen är satt realtivt till `output` undermappen av utgåvans mapp. `--output` kommandot kan användas för att ställa in output till en annan mapp.
+
+Alla saknade mappar i sökvägen kommer automatiskt skapas.

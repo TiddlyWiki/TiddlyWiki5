@@ -1,0 +1,8 @@
+title: $:/language/Help/version
+description: Monstra le numero de version de TiddlyWiki
+
+Monstra le numero de version de TiddlyWiki.
+
+```
+--version
+```

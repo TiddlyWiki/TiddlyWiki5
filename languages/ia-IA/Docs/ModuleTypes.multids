@@ -1,0 +1,22 @@
+title: $:/language/Docs/ModuleTypes/
+
+animation: Animationes que pote esser usate in combination con RevealWidget.
+command: Commandos que pote esser executate per Node.js.
+config: Datos a esser inserite in `$tw.config`.
+filteroperator: Methodos de operatores de filtros individual.
+global: Datos global a esser inserite in `$tw`.
+isfilteroperator: Operatores pro le operator de filtro ''is''.
+macro: Definitiones de macros JavaScript.
+parser: Divisores pro differente typos de contento.
+saver: Salvatores tracta methodos differente de salvar files ab le navigator.
+startup: Functiones initial.
+storyview: Presentationes de historia adjuta le animation e conducto del widgets de listas.
+tiddlerdeserializer: Converte differente typos de contento a in notas.
+tiddlerfield: Defini le conducto de un quadro individual de un nota.
+tiddlermethod: Adde methodos al prototypo `$tw.Tiddler`.
+upgrader: Executa le tractamento de modernisation a notas durante un modernisation/importation.
+utils: Adde methodos a `$tw.utils`.
+utils-node: Adde methodos specific pro Node.js a `$tw.utils`.
+widget: Widgets incapsula interpretation e refrescamento de DOM.
+wikimethod: Adde methodos a `$tw.Wiki`.
+wikirule: Regulas individual de divison pro le divisor principal de WikiText.

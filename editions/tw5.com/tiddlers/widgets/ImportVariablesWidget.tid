@@ -1,0 +1,41 @@
+caption: importvariables
+created: 20140612142500000
+modified: 20180928150043777
+tags: Widgets
+title: ImportVariablesWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ImportVariablesWidget imports macro and variable definitions from a list of other tiddlers and makes them available to its children. For example:
+
+```
+<$importvariables filter="[tag[mySpecialMacros]]">
+All the macros defined in tiddlers with the tag "mySpecialMacros" are available here
+</$importvariables>
+```
+
+! Attributes and Content
+
+The content of the importvariables widget is the scope within which the imported variable definitions are available.
+
+|!Attribute |!Description |
+|filter |[[Tiddler filter|Filters]] defining the tiddlers from which macro definitions will be imported |
+
+! Global Macros
+
+So-called global macros are implemented within the main page template ([[$:/core/ui/PageTemplate]]) by wrapping the page content in the following importvariables widget:
+
+```
+<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
+...
+</$importvariables>
+```
+
+! `\import` Pragma
+
+<<.from-version "5.1.18">> The [[Pragma: \import]] is an alternative syntax for using the ImportVariablesWidget. For example, the previous example could be expressed as:
+
+```
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+```

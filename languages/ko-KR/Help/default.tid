@@ -1,0 +1,23 @@
+title: $:/language/Help/default
+description: 
+
+\define commandTitle()
+$:/language/Help/$(command)$
+\end
+```
+사용법: tiddlywiki [<위키폴더>] [--<명령> [<인수>...]...]
+```
+
+사용할 수 있는 명령:
+
+<ul>
+<$list filter="[commands[]sort[title]]" variable="command">
+<li><$link to=<<commandTitle>>><$macrocall $name="command" $type="text/plain" $output="text/plain"/></$link>: <$transclude tiddler=<<commandTitle>> field="description"/></li>
+</$list>
+</ul>
+
+명령에 대한 자세한 도움말을 얻으려면:
+
+```
+tiddlywiki --help <명령>
+```

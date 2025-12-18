@@ -1,0 +1,18 @@
+created: 20210101161104883
+modified: 20210101201435693 
+tags: [[Community Editions]]
+title: "Stroll - a Roam-like experience" by David Gifford
+url: https://giffmex.org/stroll/stroll.html
+
+A adaptation of TiddlyWiki perfect for using as a Notebook sysetem.
+
+{{!!url}}
+
+<<<
+Stroll is a TiddlyWiki adaptation imitating certain features of Roam to help users easily see connections between their notes and navigate between them. Features include:
+
+* bi-directional links,
+* autocompletion when linking,
+* renaming of links upon changing tiddler titles,
+* side-by-side editing of multiple notes. 
+<<<

@@ -1,0 +1,34 @@
+title: $:/language/Import/
+
+Editor/Import/Heading: Importa immagini e inseriscile nell'editor.
+Imported/Hint: I frammenti seguenti sono stati importati:
+Listing/Cancel/Caption: Annulla
+Listing/Cancel/Warning: Vuoi annullare l'importazione?
+Listing/Hint: Questi frammenti sono pronti per essere importati:
+Listing/Import/Caption: Importa
+Listing/Preview: Anteprima:
+Listing/Preview/Diff: Diff
+Listing/Preview/DiffFields: Diff (Campi)
+Listing/Preview/Fields: Campi
+Listing/Preview/Text: Testo
+Listing/Preview/TextRaw: Testo (non formattato)
+Listing/Rename/CancelRename: Annulla
+Listing/Rename/ConfirmRename: Rinomina frammento
+Listing/Rename/OverwriteWarning: Un frammento con questo nome esiste già.
+Listing/Rename/Prompt: Rinomina in:
+Listing/Rename/Tooltip: Rinomina frammento prima dell'importazione
+Listing/Select/Caption: Seleziona
+Listing/Status/Caption: Stato
+Listing/Title/Caption: Titolo
+Upgrader/Plugins/Suppressed/Incompatible: Plugin bloccato incompatibile o obsoleto
+Upgrader/Plugins/Suppressed/Version: Plugin bloccato (a causa di <<incoming>> in arrivo pi&ugrave; vecchio di <<existing>> esistente)
+Upgrader/Plugins/Upgraded: Plugin aggiornato da <<incoming>> a <<upgraded>>
+Upgrader/State/Suppressed: Frammento in stato temporaneo bloccato
+Upgrader/System/Alert: Stai per importare un frammento che sovrascriverà un frammento del modulo principale. Questo non è raccomandato in quanto potrebbe rendere instabile il sistema.
+Upgrader/System/Disabled: Frammento di sistema disabilitato.
+Upgrader/System/Suppressed: Frammento di sistema bloccato.
+Upgrader/System/Warning: Frammento del modulo principale.
+Upgrader/ThemeTweaks/Created: Tweak del tema migrato da <$text text=<<from>>/>
+Upgrader/Tiddler/Disabled: Frammento disabilitato.
+Upgrader/Tiddler/Selected: Frammento selezionato.
+Upgrader/Tiddler/Unselected: Frammento deselezionato.

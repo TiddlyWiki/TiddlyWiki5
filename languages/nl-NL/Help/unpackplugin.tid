@@ -1,0 +1,4 @@
+title: $:/language/Help/unpackplugin
+description: Extraheer de 'payload' tiddlers van een plugin
+
+Extraheer de 'payload' tiddlers van een plugin en maak er gewone tiddlers van:```--unpackplugin <titel>```

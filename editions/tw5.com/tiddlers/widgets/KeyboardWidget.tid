@@ -1,0 +1,59 @@
+caption: keyboard
+created: 20140302192136805
+modified: 20211009121239821
+tags: Widgets TriggeringWidgets
+title: KeyboardWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The keyboard widget allows ActionWidgets to be triggered by specific key combinations. There is also a shorthand for generating [[Messages]] via the `message` and `param` attributes.
+
+! Content and Attributes
+
+The content of the `<$keyboard>` widget is rendered normally. The keyboard shortcuts only take effect when the focus is within the contained content.
+
+|!Attribute |!Description |
+|actions |A string containing ActionWidgets to be triggered when the key combination is detected<br><<.from-version "5.2.0">> The variables: ''event-key'', ''event-code'' and ''modifier'' are available for the actions |
+|message |The title of the [[WidgetMessage|Messages]] to generate |
+|param |The parameter to be passed with the [[WidgetMessage|Messages]] |
+|key |Key string identifying the key(s) to be trapped (see below) |
+|class |A CSS class to be assigned to the generated HTML DIV element |
+|tag|<<.from-version "5.1.14">> The html element the widget creates to capture the keyboard event, defaults to:<br>» `span` when parsed in inline-mode<br>» `div` when parsed in block-mode|
+
+! Variables
+
+<<.from-version "5.2.0">> The following variables are made available to the actions:
+
+|!Variables |!Description |
+|`event-key` |The <<.var event-key>> variable contains the character, if possible. eg: `1`. You can experiment with some settings at: [[Key Codes (Example)]] |
+|`event-code` |The <<.var event-code>> variable contains a character description. eg:  `Digit1` instead of `1`. Or `Space` instead of an empty string ` `, which is hard to see|
+|`event-key-descriptor` |The <<.var event-key-descriptor>> variable is available if the keyboard event captured was configured using a [[keyboard shortcut descriptor|Keyboard Shortcut Descriptor]] of the form `((my-shortcut))` which references a configuration tiddler. |
+|`modifier` |The [[modifier Variable]] contains the Modifier Key held during the event (can be <kbd>normal</kbd>, <kbd>ctrl</kbd>, <kbd>shift</kbd>, <kbd>alt</kbd> or combinations thereof) |
+
+! Key Strings
+
+Key strings are made up of one or more key specifiers separated by spaces. Each key specifier is zero or more of the modifiers <kbd>alt</kbd>, <kbd>shift</kbd>, <kbd>ctrl</kbd> or <kbd>meta</kbd> followed by the name of a key, all joined with "+" plus or "-" minus symbols. Key names are either the letter or digit printed on the key (eg "a" or "1"), or one of the special keys <kbd>backspace</kbd>, <kbd>tab</kbd>, <kbd>enter</kbd> or <kbd>escape</kbd>.
+
+<$railroad text="""
+[: {
+   ("alt" | "shift" | "ctrl" |: "meta" ) +("+" | "-") 
+	 }
+	 "+" 
+]
+( "<a-z,0-9>" | "backspace" |: "tab" | "enter" | "escape" )
+"""/>
+
+For example:
+
+```
+A
+shift+A
+shift+escape
+ctrl+enter
+ctrl+shift+alt+A
+```
+
+! More Info
+
+<<list-links "[tag[KeyboardWidget]]">>

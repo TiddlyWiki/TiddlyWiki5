@@ -1,0 +1,32 @@
+caption: Filtros
+created: 20130827080000000
+es-title: FIltros y expresiones de búsqueda
+list: [[Introduction to filter notation]] [[Filter Syntax]]
+modified: 20160419165818368
+tags: Reference Concepts
+title: Filters
+type: text/vnd.tiddlywiki
+
+Piensa en ~TiddlyWiki como en una base de datos cuyos registros son tiddlers. Una base de datos proporciona los medios para encontrar entre sus registros aquellos que coinciden con un determinado patrón de búsqueda. La forma de hacerlo en ~TiddlyWiki es mediante <<.em filtros>>.
+
+Un <<.def filtro>> es una expresión breve y concisa que describe a un [[conjunto de tiddlers|Title Selection]] llamado <<.def "output">> o <<.def salida>>. Siempre que ~TiddlyWiki encuentra un filtro, calcula su output. De este modo, puede realizar determinadas tareas con esa selección de tiddlers en particular, como [[contarlos|CountWidget]] o [[hacer una lista|ListWidget]] con ellos.
+
+El siguiente ejemplo especifica un filtro de búsqueda a la macro <<.mlink list-links>> para que muestre un listado de tiddlers cuyos títulos comienzan con la letra hache:
+
+> `<<list-links "[prefix[H]]">>`
+
+Y este es su output:
+
+<<list-links "[prefix[H]]">>
+
+El output cambiará en la medida en que cambie el wiki según se añadan y se eliminen tiddlers. En cualquier caso, ~TiddlyWIki lo volverá a calcular al vuelo, manteniendo así al día cualquier cuenta o lista basada en dicho filtro.
+
+[[Búsqueda avanzada|$:/AdvancedSearch]] tiene una pestaña llamada <<.advancedsearch-tab Filter>>, que facilita experimentar con filtros. 
+
+;Para saber más:
+
+*> [[Introducción a la notación de filtros|Introduction to filter notation]] -- Guía paso a paso
+
+*> [[Sintaxis de filtros|Filter Syntax]] -- Reglas detalladas para uso técnico
+
+*> [[Operadores de filtro|Filter Operators]] -- métodos disponibles de búsqueda 

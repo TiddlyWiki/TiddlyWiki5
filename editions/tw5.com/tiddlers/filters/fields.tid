@@ -1,0 +1,17 @@
+caption: fields
+created: 20140924115616653
+modified: 20200129165038748
+op-input: a [[selection of titles|Title Selection]]
+op-output: all the field names contained in the input tiddlers
+op-parameter: <<.from-version "5.1.22">> optional: a [[list of field names|TiddlerFields]]
+op-purpose: select all field names of the input titles
+op-suffix: <<.from-version "5.1.22">> optional: `include`, `exclude` parameter list
+tags: [[Filter Operators]] [[Field Operators]]
+title: fields Operator
+type: text/vnd.tiddlywiki
+
+Each input title is processed in turn. Its list of field names is retrieved (in no particular order) and then [[dominantly appended|Dominant Append]] to the operator's output. 
+
+<<.from-version "5.1.22">> If the `include` suffix is used, fields are only included, if they exist. It doesn't matter, if fields have a value. The `exclude` suffix is there for convenience, since it would be possible to use a second filter run. For more info see the examples.
+
+<<.operator-examples "fields">>

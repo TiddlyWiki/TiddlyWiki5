@@ -1,0 +1,23 @@
+caption: tag
+created: 20140410103123179
+modified: 20161126122900712
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: those input tiddlers that do <<.em not>> have tag <<.place T>>
+op-output: those input tiddlers that have tag <<.place T>>
+op-parameter: the title of a [[tag|Tagging]]
+op-parameter-name: T
+op-purpose: filter the input by tag
+op-suffix: <<.from-version "5.1.14">> optional `strict` flag
+op-suffix-name: S
+tags: [[Filter Operators]] [[Common Operators]] [[Tag Operators]] [[Negatable Operators]]
+title: tag Operator
+type: text/vnd.tiddlywiki
+
+The output is [[sorted|Order of Tagged Tiddlers]] using the tag's <<.field list>> field and the tiddlers' <<.field list-before>> and <<.field list-after>> fields.
+
+The behaviour when <<.place T>> is empty depends on the settings of the <<.place S>> optional suffix:
+
+* if <<.place T>> is missing and  <<.place S>> is either missing or set to "loose", then the output of `tag` is empty, and the output of `!tag` is a copy of the input.
+* <<.from-version "5.1.14">> if <<.place T>> is missing and <<.place S>> is set to "strict", then the output of both `tag` and `!tag` is a copy of the input
+
+<<.operator-examples "tag">>

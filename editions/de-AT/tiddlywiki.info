@@ -1,0 +1,33 @@
+{
+	"description": "Deutsch (Österreich) Edition",
+	"plugins": [
+		"tiddlywiki/browser-sniff"],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/starlight",
+		"tiddlywiki/seamless",
+		"tiddlywiki/centralised",
+		"tiddlywiki/tight",
+		"tiddlywiki/readonly",
+		"tiddlywiki/internals"
+	],
+	"languages": [
+		"de-AT",
+		"de-DE"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"empty": [
+			"--rendertiddler","$:/editions/de-AT-DE/download-empty","empty.html","text/plain",
+			"--rendertiddler","$:/editions/de-AT-DE/download-empty","empty.hta","text/plain"],
+		"favicon": [
+			"--savetiddler","$:/favicon.ico","favicon.ico"],
+		"static": [
+			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
+			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
+			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain",
+			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain"]
+	}
+}

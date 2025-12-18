@@ -1,0 +1,22 @@
+created: 20150325170720682
+modified: 20210519110623819
+tags: HelloThere
+title: A Gentle Guide to TiddlyWiki
+type: text/vnd.tiddlywiki
+
+TiddlyWiki is an incredibly flexible and versatile tool that is conceived and constructed differently than most software. This can make it hard to understand until the moment when it clicks, and becomes a seamless extension of your brain.
+
+Starting with the basics, TiddlyWiki is a note-taking web application you can download for free, store wherever you like and customise however you wish. Use it to capture, organise and share your notes in ways that word processors and other note-taking tools cannot.
+
+~TiddlyWiki is designed to be non-linear, structuring content with stories, tags, hyperlinks, and other features. You can organise and retrieve your notes in ways that conform to your personal thought patterns, rather than feel chained to one preset organisational structure.
+
+You can use ~TiddlyWiki as a single file that you view and edit through any web browser, whether you are online or offline. Or you can use it as a powerful [[Node.js application|TiddlyWiki on Node.js]] that stores each of your notes as a separate file.
+
+How can you make ~TiddlyWiki work for you? We recommend you start with our introductory documentation listed below, and then browse the TableOfContents, available in the Contents tab in the sidebar. Or just [[follow our simple instructions|GettingStarted]] and try it out for yourself!
+
+<<list-links "[tag[HelloThere]]">>
+
+Also see:
+
+* [["Grok TiddlyWiki" by Soren Bjornstad]]
+* [[TiddlyWiki Video Tutorials by Francis Meetze]]

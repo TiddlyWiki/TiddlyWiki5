@@ -1,0 +1,14 @@
+caption: Estructurar ~TiddlyWiki
+created: 20131128090536894
+es-title: Estructurar TiddlyWiki
+modified: 20160422205446418
+tags: [[Working with TiddlyWiki]]
+title: Structuring TiddlyWiki
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5 proporciona varias herramientas útiles para estructurar información en forma de  [[tiddlers|Tiddlers]] y estructurar las diferentes relaciones que se establecen entre ellos:
+
+* [[Enlaces|TiddlerLinks]]
+* [[Etiquetas|Tagging]]
+* [[Listas|Title List]]
+* [[Tiddlers de datos|DataTiddlers]]

@@ -1,0 +1,11 @@
+title: $:/language/Help/output
+description: Ställer in output-mappen för efterföljande kommandon
+
+Ställer in output-mappen för efterföljande kommandon. Standard output-mappen är `output` undermappen av utgåvans mapp
+
+```
+--output <pathname>
+```
+
+Om den specificerade sökvägen är relativ, så sätt den relativt till aktuell mapp. Till exempel `--output .` sätter output-mappen till aktuell mapp.
+

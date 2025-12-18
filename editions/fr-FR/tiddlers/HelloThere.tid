@@ -1,0 +1,38 @@
+caption: Bienvenue !
+created: 20130822170200000
+fr-title: Bienvenue !
+list: [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[History of TiddlyWiki]] [[What happened to the original TiddlyWiki?]]
+modified: 20220217174842374
+tags: TableOfContents
+title: HelloThere
+type: text/vnd.tiddlywiki
+
+''N'avez-vous jamais eu la sensation que votre tête était trop petite pour contenir tout ce que vous avez besoin de mémoriser<<?>>''
+
+Bienvenue sur TiddlyWiki, un carnet de notes web [[non-linéaire|Philosophy of Tiddlers]] pour [[saisir|Creating and editing tiddlers]], [[organiser|Structuring TiddlyWiki]] et [[partager|Sharing your tiddlers with others]] des informations simples ou complexes.
+
+Utilisez-le pour gérer votre [[liste de tâches|TaskManagementExample]], faire le plan d'un [[essai ou d'une nouvelle|"TiddlyWiki for Scholars" by Alberto Molina]], ou pour organiser votre mariage. Enregistrez tout ce qui vous traverse l'esprit, ou construisez un site web flexible et réactif.
+
+<div style="font-size:0.7em;text-align:center;margin-top:2em;margin-bottom:2em;">
+<<list-thumbnails filter:"[tag[HelloThumbnail]]" width:"168" height:"95">>
+</div>
+
+Contrairement aux services en ligne classiques, TiddlyWiki vous permet de choisir où conserver vos informations, et garantit que, dans les décennies à venir, vous pourrez toujours utiliser les notes que vous prenez aujourd'hui.
+
+<div style="font-size:0.7em;text-align:center;margin:3em auto;">
+<a href="https://talk.tiddlywiki.org/" class="tc-btn-big-green" style="border-radius:4px;background-color:#FF8C19;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/help}} ~TalkTW
+</a>
+<a href="https://www.youtube.com/c/JeremyRuston" class="tc-btn-big-green" style="border-radius:4px;background-color:#e52d27;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/video}} ~YouTube
+</a>
+<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#5E9FCA;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/twitter}} Twitter
+</a>
+<a href="https://github.com/TiddlyWiki/TiddlyWiki5" class="tc-btn-big-green" style="border-radius:4px;background-color:#444;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/github}} ~GitHub
+</a>
+<a href="https://gitter.im/TiddlyWiki/public" class="tc-btn-big-green" style="border-radius:4px;background-color:#753a88;background-image:linear-gradient(to left,#cc2b5e,#753a88);" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/gitter}} Gitter
+</a>
+</div>

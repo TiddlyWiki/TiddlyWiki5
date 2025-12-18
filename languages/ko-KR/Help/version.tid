@@ -1,0 +1,8 @@
+title: $:/language/Help/version
+description: 티들리위키의 버전 번호를 표시합니다
+
+티들리위키의 버전 번호를 표시합니다.
+
+```
+--version
+```

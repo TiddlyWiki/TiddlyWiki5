@@ -1,0 +1,18 @@
+title: $:/language/Help/rendertiddlers
+description: Renderer tiddlere der matcher et filter til  specifik indholdstype
+
+Renderer et sæt af tiddlere, der matcher et filter til forskellige filer af en specifik indholdstype (standard til `text/html`) og udvidelse (standard til `.html`).
+
+```
+--rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
+```
+
+For eksempel:
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```
+
+Pr. standard, sættes stinavnet til `output` undermappen i udgavens mappe. `--output` kommandoen kan bruges til at dirigere output til en anden mappe.
+
+Enhver fil i målmappen bliver slettet. Målmappen bliver rekursivt oprettet, hvis den mangler.

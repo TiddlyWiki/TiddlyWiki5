@@ -1,0 +1,20 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: Lista
+Filter/Caption: Filtro
+Filter/Hint: Cerca attraverso un [[filtro|https://tiddlywiki.com/static/Filters.html]]
+Filter/Matches: //<small><<resultCount>> corrispondenze</small>//
+Matches: //<small><<resultCount>> corrispondenze</small>//
+Matches/All: Tutte le corrispondenze:
+Matches/Title: Corrispondenze titolo:
+Search: Ricerca
+Search/TooShort: Testo di ricerca troppo corto
+Shadows/Caption: Nascosti
+Shadows/Hint: Cerca frammenti nascosti
+Shadows/Matches: //<small><<resultCount>> corrispondenze</small>//
+Standard/Caption: Standard
+Standard/Hint: Cerca frammenti standard
+Standard/Matches: //<small><<resultCount>> corrispondenze</small>//
+System/Caption: Sistema
+System/Hint: Cerca frammenti di sistema
+System/Matches: //<small><<resultCount>> corrispondenze</small>//

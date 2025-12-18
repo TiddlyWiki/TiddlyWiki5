@@ -1,0 +1,29 @@
+created: 20141115212945847
+list-after: RoadMap
+modified: 20160511152131764
+tags: $:/tags/SideBar About
+title: Información para traductores
+type: text/vnd.tiddlywiki
+
+Para contribuir con esta traducción de la documentación de //tiddlywiki.com//, lo suyo, cuando esté lista, es ver en la página del proyecto, qué tiddlers necesitan traducción, actualización o corrección.
+Evite los tiddlers etiquetados como "en proceso", porque como la etiqueta indica, ya hay gente trabajando en ellos. A continuación:
+
+*Si trabaja en Node.js con un //clon de Git// de la edición `es_ES`, puede traducir a partir de su clon, respetando únicamente el par de indicaciones que se dan más abajo y proponer un //pull request// en ~GitHub, ayudándose, si hiciera falta, de la [[documentación|Improving TiddlyWiki Documentation]].
+*Si no, traduzca directamente, bien en línea, bien en una copia de la página http://tw5es-es.tiddlyspot.com. 
+*Cuando termine:
+**exporte su trabajo a [[un fichero JSON|Exporter un sous-ensemble de tiddlers]]
+**envíe el archivo a paulus-arroba-alamier-punto-com para que pueda efectuar el correspondiente //pull request// en ~GitHub, o bien
+**cuelgue el archivo en algún lugar accesible (en Dropbox, por ejemplo) y publique el enlace en el [[grupo de TiddlyWiki|https://groups.google.com/forum/#!forum/tiddlywiki]]
+
+No tenemos aún mecanismos demasiados sofisticados para gestionar el trabajo de traducción en paralelo (las plataformas que lo permiten cuestan un dineral), por lo que se ruega que actualice y comparta su trabajo con frecuencia. Es preferible enviar un tiddler por vez --que no es molestia alguna, en serio-- que darse cuenta demasiado tarde de que se está trabajando en paralelo --lo que sí puede ser un lío a veces--.
+
+Al trabajar en la traducción, tenga en cuenta lo siguiente:
+
+*''Los títulos de los tiddlers no se traducen'': Para que el sistema funcione correctamente, no deben modificarse los títulos en inglés de los tiddlers. 
+**La traducción del título se hace en el campo `es-title`, usando, cuando sea necesario, el formato ~WikiText para los [[enlaces|Linking in WikiText]].
+**Traduzca también el campo `caption`, tanto para tener una versión reducida del título (ej: Enlaces en Wikitext => Enlaces) para incluirla en enlaces, como para su visualización en pestañas.
+
+*''Sírvase del glosario'': con la intención de disponer de una base terminológica común que dé coherencia a la traducción y que sirva para posteriores trabajos, estamos trabajando en un [[glosario|Glosario en-GB->es-ES]], para el que se ruega colaboración, comentario y crítica.
+
+*''Tiene a su disposición algunas abreviaturas'' que facilitan la escritura de algunos caracteres, como las comillas tipográficas (<<gf>>), o palabras que se repiten con frecuencia como <<tw>> o que son complicadas de componer, como <<latex>>.
+**Estas abreviaturas están definidas como macros en el tiddler [[$:/editions/es-ES/util-macros]]. No dude en añadir las que considere necesarias.

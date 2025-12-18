@@ -1,0 +1,21 @@
+{
+	"description": "Tools for slicing up long texts into individual tiddlers",
+	"plugins": [
+		"tiddlywiki/text-slicer",
+		"tiddlywiki/sax"
+	],
+	"languages": [
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"
+		],
+		"external": [
+			"--render","$:/core/save/all-external-js","index.html","text/plain"
+		]
+	}
+}

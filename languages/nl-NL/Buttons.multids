@@ -1,0 +1,183 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: geavanceerd zoeken
+AdvancedSearch/Hint: Geavanceerd zoeken
+Bold/Caption: vet
+Bold/Hint: Maak selectie vet
+Cancel/Caption: annuleer
+Cancel/Hint: Annuleer wijzigingen
+Clear/Caption: maak schoon
+Clear/Hint: Maak schoon en kleur
+Clone/Caption: kloon
+Clone/Hint: Kloon deze tiddler
+Close/Caption: sluit
+Close/Hint: Sluit deze tiddler
+CloseAll/Caption: sluit alle
+CloseAll/Hint: Sluit alle tiddlers
+CloseOthers/Caption: sluit andere
+CloseOthers/Hint: Sluit alle andere tiddlers
+ControlPanel/Caption: bedieningspaneel
+ControlPanel/Hint: Open bedieningspaneel
+CopyToClipboard/Caption: kopieer naar klembord
+CopyToClipboard/Hint: Kopieer deze tekst naar het klembord
+Delete/Caption: verwijder
+Delete/Hint: Verwijder deze tiddler
+Edit/Caption: wijzig
+Edit/Hint: Wijzig deze tiddler
+EditorHeight/Caption: hoogte van de editor
+EditorHeight/Caption/Auto: Pas automatisch hoogte aan zodat inhoud past
+EditorHeight/Caption/Fixed: Vaste hoogte:
+EditorHeight/Hint: Kies de hoogte van de teksteditor
+Encryption/Caption: versleuteling
+Encryption/ClearPassword/Caption: verwijder wachtwoord
+Encryption/ClearPassword/Hint: Verwijder het wachtwoord en sla de wiki onversleuteld op
+Encryption/Hint: Vul in / verwijder wachtwoord om deze wiki op te slaan
+Encryption/SetPassword/Caption: vul wachtwoord in
+Encryption/SetPassword/Hint: Vul een wachtwoord in om deze wiki versleuteld op te slaan
+Excise/Caption: snij uit
+Excise/Caption/Excise: Snij uit
+Excise/Caption/MacroName: Macro naam:
+Excise/Caption/NewTitle: Titel van de nieuwe tiddler
+Excise/Caption/Replace: Vervang uitgesneden tekst door:
+Excise/Caption/Replace/Transclusion: transclusie
+Excise/Caption/Tag: Label de nieuwe tiddler met de titel van deze tiddler
+Excise/Caption/TiddlerExists: Waarschuwing: deze tiddler bestaat al
+Excise/Hint: Knip en plak de geselecteerde tekst in een nieuwe tiddler
+ExportPage/Caption: exporteer alle
+ExportPage/Hint: Exporteer alle tiddlers
+ExportTiddler/Caption: exporteer tiddler
+ExportTiddler/Hint: Exporteer tiddler
+ExportTiddlers/Caption: exporteer tiddlers
+ExportTiddlers/Hint: Exporteer tiddlers
+Fold/Caption: klap tiddler in
+Fold/FoldBar/Caption: in- / uitklap balk
+Fold/FoldBar/Hint: Optionele in- / uitklapbalken
+Fold/Hint: Klap de tekst van deze tiddler in
+FoldAll/Caption: klap alle tiddlers in
+FoldAll/Hint: Klap de tekst van alle open tiddlers in
+FoldOthers/Caption: klap andere tiddlers in
+FoldOthers/Hint: Klap de tekst van alle andere open tiddlers in
+FullScreen/Caption: volledig scherm
+FullScreen/Hint: Start of verlaat 'volledig scherm'
+Heading1/Caption: kop 1
+Heading1/Hint: Formatteer gekozen regel als kop 1
+Heading2/Caption: kop 2
+Heading2/Hint: Formatteer gekozen regel als kop 2
+Heading3/Caption: kop 3
+Heading3/Hint: Formatteer gekozen regel als kop 3
+Heading4/Caption: kop 4
+Heading4/Hint: Formatteer gekozen regel als kop 4
+Heading5/Caption: kop 5
+Heading5/Hint: Formatteer gekozen regel als kop 5
+Heading6/Caption: kop 6
+Heading6/Hint: Formatteer gekozen regel als kop 6
+Help/Caption: hulp
+Help/Hint: Toon hulppaneel
+HideSideBar/Caption: verberg zijpaneel
+HideSideBar/Hint: Verberg zijpaneel
+Home/Caption: home
+Home/Hint: Open de standaard tiddlers
+Import/Caption: importeer
+Import/Hint: Importeer bestanden
+Info/Caption: info
+Info/Hint: Toon informatie over deze tiddler
+Italic/Caption: cursief
+Italic/Hint: Maak selectie cursief
+Language/Caption: taal
+Language/Hint: Kies de taal voor de gebruikersomgeving
+LineWidth/Caption: lijnbreedte
+LineWidth/Hint: Stel lijnbreedte in
+Link/Hint: Maak een wikitext link
+Linkify/Hint: Zet selectie tussen vierkante haakjes
+ListBullet/Caption: lijst met opsommingstekens
+ListBullet/Hint: Maak van selectie een lijst met opsommingstekens
+ListNumber/Caption: genummerde lijst
+ListNumber/Hint: Maak van selectie een genummerde lijst
+MonoBlock/Caption: blok in 'monospace'
+MonoBlock/Hint: Maak van selectie een 'monospace' blokformattering
+MonoLine/Caption: in 'monospace'
+MonoLine/Hint: Maak van selectie een 'monospace' karakterformattering
+More/Caption: meer
+More/Hint: Meer mogelijkheden
+NewHere/Caption: nieuw hier
+NewHere/Hint: Maak een nieuwe tiddler gelabeld met deze tiddler
+NewImage/Caption: nieuwe afbeelding
+NewImage/Hint: Maak een nieuwe afbeelding
+NewJournal/Caption: nieuw journaal
+NewJournal/Hint: Maak een nieuwe journaaltiddler
+NewJournalHere/Caption: nieuw journaal hier
+NewJournalHere/Hint: Maak een nieuwe journaaltiddler gelabeld met deze tiddler
+NewMarkdown/Caption: nieuwe 'Markdown' tiddler
+NewMarkdown/Hint: Maak een nieuwe 'Markdown' tiddler
+NewTiddler/Caption: nieuwe tiddler
+NewTiddler/Hint: Maak een nieuwe tiddler
+Opacity/Caption: ondoorzichtigheid
+Opacity/Hint: Stel de ondoorzichtigheid in
+OpenWindow/Caption: open in een nieuw venster
+OpenWindow/Hint: Open tiddler in nieuw venster
+Paint/Caption: kleur om te tekenen
+Paint/Hint: Kies kleur om te tekenen
+Palette/Caption: palet
+Palette/Hint: Kies het kleurpalet
+Permalink/Caption: permalink
+Permalink/Hint: Zet browseradres als directe link naar deze tiddler
+Permaview/Caption: permaview
+Permaview/Hint: Zet browseradres als directe link naar alle open tiddlers
+Picture/Caption: afbeelding
+Picture/Hint: Voeg afbeelding in
+Preview/Caption: voorbeeldweergave
+Preview/Hint: Toon voorbeeldweergavepaneel
+PreviewType/Caption: type voorbeeldweergave
+PreviewType/Hint: Kies type voorbeeldweergave
+Print/Caption: druk pagina af
+Print/Hint: Druk the actuele pagina af
+Quote/Caption: 'blockquote'
+Quote/Hint: Maak van selectie een 'blockqoute'
+Refresh/Caption: ververs
+Refresh/Hint: Ververs deze wiki
+RotateLeft/Caption: Roteer linksom
+RotateLeft/Hint: Roteer 90 graden linksom
+Save/Caption: opslaan
+Save/Hint: Sla deze tiddler op
+SaveWiki/Caption: opslaan
+SaveWiki/Hint: Sla wijzigingen op
+ShowSideBar/Caption: toon zijpaneel
+ShowSideBar/Hint: Toon zijpaneel
+SidebarSearch/Hint: Kies het zoekvak in het zijpaneel
+Size/Caption: formaat van de afbeelding
+Size/Caption/Height: Hoogte:
+Size/Caption/Resize: Wijzig het formaat van de afbeelding
+Size/Caption/Width: Breedte:
+Size/Hint: Stel grootte van afbeelding in
+Stamp/Caption: stempel
+Stamp/Caption/New: Voeg je eigen ... toe
+Stamp/Hint: Voeg een bestaand tekstfragment in
+Stamp/New/Text: Tekstfragment (Denk eraan om een beschrijvende titel aan het 'caption' veld toe te voegen).
+Stamp/New/Title: Naam getoond in het menu
+StoryView/Caption: 'story' weergave
+StoryView/Hint: Kies de 'story' weergave
+Strikethrough/Caption: doorstrepen
+Strikethrough/Hint: Streep de selectie door
+Subscript/Caption: 'subscript'
+Subscript/Hint: Maak selectie 'subscript'
+Superscript/Caption: 'superscript'
+Superscript/Hint: Maak selectie 'superscript'
+TagManager/Caption: labelmanager
+TagManager/Hint: Open labelmanager
+Theme/Caption: thema
+Theme/Hint: Kies het thema
+Timestamp/Caption: tijdstempels
+Timestamp/Hint: Kies of veranderingen de tijdstempels bijwerken
+Timestamp/Off/Caption: tijdstempels zijn uit
+Timestamp/Off/Hint: Werk tijdstempels niet bij als tiddlers veranderd zijn
+Timestamp/On/Caption: tijdstempels zijn aan
+Timestamp/On/Hint: Werk tijdstempels bij als tiddlers veranderd zijn
+ToggleSidebar/Hint: 'Toggle' het zijpaneel
+Transcludify/Caption: transclusie
+Transcludify/Hint: Zet selectie tussen accolades
+Underline/Caption: onderstreept
+Underline/Hint: Onderstreep het geselecteerde
+Unfold/Caption: klap tiddler uit
+Unfold/Hint: Klap de tekst van deze tiddler uit
+UnfoldAll/Caption: klap alle tiddlers uit
+UnfoldAll/Hint: Klap de tekst van alle open tiddlers uit

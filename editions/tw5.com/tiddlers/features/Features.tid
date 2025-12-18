@@ -1,0 +1,11 @@
+created: 20130822172800000
+modified: 20160107225826644
+tags: TableOfContents
+title: Features
+type: text/vnd.tiddlywiki
+
+Further information about specific TiddlyWiki features:
+
+<<list-links "[tag[Features]]">>
+
+Last but not least, TiddlyWiki is a rare example of a practical [[quine|Quine]]

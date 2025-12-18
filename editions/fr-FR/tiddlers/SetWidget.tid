@@ -1,0 +1,60 @@
+caption: set
+created: 20131115182700000
+fr-title: Widget set
+modified: 20150620061155802
+tags: Widgets
+title: SetWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+Le widget set variable affecte une valeur à une [[variable|Variables]] spécifiée. La nouvelle valeur est alors disponible par le contenu dans le cadre défini du widget.
+
+! Contenu et Attributs
+
+Le contenu du widget `<$set>` forme le cadre de la valeur affectée à la variable.
+
+|!Attribut |!Description |
+|name |Le nom de la variable à affecter (par défaut du "Tiddlercourant") |
+|value |La valeur à affecter à la variable si le filtre est manquant ou non vide |
+|filter |Un filtre optionnel à évaluer et à affecter à la variable (voir ci-dessous) |
+|emptyValue |La valeur à affecter à la variable si le filtre évalue une liste vide (voir ci-dessous) |
+
+!! Affectation simple d'une variable
+
+L'utilisation la plus simple du widget set variable affecte une chaine à une variable. L'exemple suivant affecte une chaine littérale
+
+```
+<$set name="maVariable" value="du texte">
+<$text text=<<maVariable>>/>
+</$set>
+```
+
+Les attributs nom et valeur peuvent tous deux être transclus. Par exemple<<:>>
+
+```
+<$set name=<<autreVariable>> value={{gabarit!!texte}}>
+<$text text=<<maVariable>>/>
+</$set>
+```
+
+!! Affectation conditionnel d'une variable
+
+Cette forme du widget set variable choisit une des deux valeurs spécifiées selon que le résultat du filtre soit une liste vide ou pas. Voici un exemple affectant une variable selon que le tiddler courant se nomme "monTitreMagique" ou pas<<:>>
+
+```
+<$set name="maVariable" filter="[all[current]field:title[monTitreMagique]]" value="C'est magique" emptyValue="Ce n'est pas magique">
+<$text text=<<maVariable>>/>
+</$set>
+```
+
+!! Affectation d'une liste filtrée de variable
+
+
+Cette forme du widget set variable évalue le filtre et affecte le résultat à la variable sous forme de liste séparée par des espaces (utilisation des double crochets pour les titres contenant des espaces).
+
+```
+<$set name="maVariable" filter="[tag[Introduction]]">
+<$text text=<<maVariable>>/>
+</$set>
+```

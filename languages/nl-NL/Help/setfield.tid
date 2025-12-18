@@ -1,0 +1,17 @@
+title: $:/language/Help/setfield
+description: Maakt externe tiddlers voor gebruik gereed
+
+//N.B. Dit commando is experimenteel en kan veranderen of vervangen worden//
+
+Zet het gespecificeerde veld van een groep tiddlers via een filter. Een sjabloon wordt "gewikificeerd" (wikified) en het resultaat aan het veld toegekend. De `currentTiddler` variabele wordt aan de respectievelijke tiddler toegekend.
+
+```
+--setfield <filter> <veldnaam> <templatetitel> <rendertype>
+```
+
+De parameters zijn:
+
+* ''filter'' - filter dat de tiddlers selecteert
+* ''veldnaam'' - het betreffende veld (standaard "text")
+* ''templatetitel'' - de tiddler die in het betreffende veld gewikificeerd moet worden. In geval van een leeg of ontbrekend veld wordt het veld verwijderd
+* ''rendertype'' - het teksttype om te renderen (tonen) - standaard "text/plain"; "text/html" kan worden gebruikt om HTML-elementen te kunnen gebruiken

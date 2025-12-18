@@ -1,0 +1,25 @@
+chapter.of: TiddlyWiki - A quick Overview
+created: 20140708083145150
+modified: 20140717212656341
+sub.num: 7
+tags: doc
+title: WikiText Markup
+
+The WikiText is a markup language, created especially for the requirements of the TiddlyWiki application. It is based on [[Markdown|http://daringfireball.net/projects/markdown]], but extended with some TiddlyWiki specific features.  On one hand its a text-to-HTML conversion language and on the other hand its used to provide the interactive features of TiddlyWiki. The aim of this language is to allow the user of the software to focus on the writing. The WikiText is used to format Tiddlers within the TiddlyWiki application. The tags of the WikiText syntax can be used within the standard text input field. 
+During the saving process these tags renders to HTML elements for example:
+
+```
+WikiText:--- 
+Renders as:
+HTML:<hr>
+WikiText:[img[https://tiddlywiki.com/favicon.ico]]
+Renders as: TW
+HTML:<img src="https://tiddlywiki.com/favicon.ico">
+```
+
+Furthermore the WikiText is used to access the widgets which are integrated in the application.These widgets are used to enhance the the WikiText with a rich functionality. Widgets are based on the ~HTML-Syntax but always starts with a $.
+
+```
+WikiText:
+<$button message="tm-close-tiddler">Close Me!</$button> 
+```

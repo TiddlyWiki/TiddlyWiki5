@@ -1,0 +1,23 @@
+title: $:/language/Help/init
+description: Initialise a new wiki folder
+
+Initialise an empty [[WikiFolder|WikiFolders]] with a copy of the specified edition.
+
+```
+--init <edition> [<edition> ...]
+```
+
+For example:
+
+```
+tiddlywiki ./MyWikiFolder --init empty
+```
+
+Note:
+
+* The wiki folder directory will be created if necessary
+* The "edition" defaults to ''empty''
+* The init command will fail if the wiki folder is not empty
+* The init command removes any `includeWikis` definitions in the edition's `tiddlywiki.info` file
+* When multiple editions are specified, editions initialised later will overwrite any files shared with earlier editions (so, the final `tiddlywiki.info` file will be copied from the last edition)
+* `--editions` returns a list of available editions

@@ -1,0 +1,35 @@
+caption: action-sendmessage
+created: 20141008134309742
+modified: 20211023160110220
+tags: Widgets ActionWidgets
+title: ActionSendMessageWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ''action-sendmessage'' widget is an [[action widget|ActionWidgets]] that sends a [[message|Messages]] back up the widget tree. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+! Content and Attributes
+
+The ''action-sendmessage'' widget is invisible. Any content within it is ignored.
+
+|!Attribute |!Description |
+|$message |The message to send (eg, [[WidgetMessage: tm-new-tiddler]]) |
+|$param |Optional parameter string whose meaning is dependent on the message being sent |
+|$name |Optional name of additional parameter |
+|$value |Value for optional parameter whose name is specified in `$name` |
+|$names |<<.from-version "5.2.1">> Optional filter evaluating to a list of additional parameter names |
+|$values |<<.from-version "5.2.1">> Optional filter evaluating to a list of parameter values corresponding to the parameters names specified in `$names` |
+|//{any attributes not starting with $}// |Multiple additional, optional named parameters that are attached to the message |
+
+! Examples
+
+Here is an example of button that displays both a notification and a wizard, and creates a new tiddler with tags and text:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-sendmessage $message="tm-modal" $param="SampleWizard"/>
+<$action-sendmessage $message="tm-notify" $param="SampleNotification"/>
+<$action-sendmessage $message="tm-new-tiddler" title="This is newly created tiddler" tags="OneTag [[Another Tag]]" text=<<now "Today is DDth, MMM YYYY">>/>
+Click me!
+</$button>'/>

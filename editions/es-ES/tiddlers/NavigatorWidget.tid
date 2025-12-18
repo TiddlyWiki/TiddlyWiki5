@@ -1,0 +1,37 @@
+caption: navigator
+created: 20131024141900000
+es-title: Widget Navegador
+modified: 20160415051406374
+tags: Widgets
+title: NavigatorWidget
+type: text/vnd.tiddlywiki
+
+! Introducción
+
+El widget ''Navegador'' manipula el TiddlerStore, StoryList y HistoryList en respuesta a una serie de [[mensajes|Messages]].
+
+!Contenido y atributos
+
+El widget muestra en pantalla su contenido y responde a los mensajes que se le envían
+
+The navigator widget displays any contained content, and responds to Messages dispatched within it.
+
+|!Atributo |!Descripción |
+|story |Nombre del tiddler que contiene el `StoryList` que se va a manipular |
+|history |Nombre del tiddler que contiene el `HistoryList` que se va a manipular |
+|openLinkFromInsideRiver |Determina dónde se van a abrir los tiddlers nuevos que se invoquen desde dentro del `StoryRiver`:  ''al principio'' o ''al final'' del StoryRiver o ''encima'' o ''debajo'' del tiddler actual  |
+|openLinkFromOutsideRiver|Determina dónde se van a abrir los tiddlers nuevos que se llamen desde fuera del `StoryRiver`:  ''al principio'' o ''al final'' del StoryRiver |
+
+! Mensajes del widget
+
+El navegador maneja los siguientes [[mensajes|Messages]]:
+
+<ul>
+<$list filter="[tag[navigator-message]]">
+<li>
+<$link to={{!!title}}>
+<$view field="title"/>
+</$link>
+</li>
+</$list>
+</ul>

@@ -1,0 +1,34 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: Den fulde URI til en ekstern billedtiddler
+bag: Navnet på den mappe en tiddler kom fra
+caption: Teksten der bliver vist på en fane eller knap
+color: Den CSS farveværdi som er knyttet til en tiddler
+component: Navnet på den komponent som er ansvarlig for en [[advarselstiddler|AlertMechanism]]
+created: Den dato en tiddler blev oprettet
+creator: Navnet på den person som oprettede en tiddler
+current-tiddler: Bruges til mellemlagring af den øverste tiddler i en [[historieliste|HistoryMechanism]]
+dependents: Lister afhængighederne for en udvidelse
+description: Den beskrivende tekst for en udvidelse, eller en modal dialog
+draft.of: For kladdetiddlere, indeholder  titlen på den tiddler som denne er en kladde til
+draft.title: For kladdetiddlere, indeholder forslag til ny titel på tiddleren
+footer: fodnotetekst i en guide
+icon: Titlen på den tiddler som indeholder et ikon, der er knyttet til en tiddler
+library: Hvis sat til  "ja" indikeres at en tiddler bør gemmes som et  JavaScript library
+list: En ordnet liste af tiddlertitler som er knyttet til en tiddler
+list-after: Hvis sat, titlen på den tiddler efter hvilken denne tiddler skal indsættes i den ordnede liste over tiddler titler.
+list-before: Hvis sat, titlen på en tiddler, før hvilken denne tiddler skal indsættes i  den ordnede liste over tiddler titler, eller i starten af listen, hvis dette felt er tilstede men tomt.
+modified: Dato og klokkeslæt, hvor en tiddler sidst blev ændret
+modifier: Den tiddlertitel som har samme navn som den forfatter der sidst ændrede tiddleren
+name: Det menneskeligt læsbare navn, som knyttes til en udvidelsestiddler
+plugin-priority: En numerisk værdi som indikerer prioriteringen af en udvidelsestiddler
+plugin-type: Typen af plugin i en udvidelsestiddler
+released: Dato for en tiddlywikiudgivelse
+revision: Revision af tiddleren holdt på serveren
+source: Kilde-URL knyttet til en  tiddler
+subtitle: Undertiteltekst for en guide
+tags: En liste over tags som er knyttet til en tiddler
+text: tekstområdet i en tiddler
+title: Det unikke navn på en tiddler
+type: En tiddlers indholdstype
+version: En udvidelses versionsnummer

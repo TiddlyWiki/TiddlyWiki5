@@ -1,0 +1,14 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: רשימה
+Filter/Caption: פילטר
+Filter/Hint: חפש דרך [[filter expression|https://tiddlywiki.com/static/Filters.html]]
+Matches/All: כל ההתאמות:
+Matches/Title: התאמות שם:
+Search: חפש
+Shadows/Caption: צללים
+Shadows/Hint: חפש טידלרי צללים
+Standard/Caption: רגיל
+Standard/Hint: חפש טידלרים רגילים
+System/Caption: מערכת
+System/Hint: חפש טידלרי מערכת

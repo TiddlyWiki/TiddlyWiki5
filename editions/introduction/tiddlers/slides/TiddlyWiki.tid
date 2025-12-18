@@ -1,0 +1,17 @@
+created: 20141029161248510
+modified: 20141029161417820
+title: TiddlyWiki
+
+~TiddlyWiki is a powerful notetaking tool that helps you collect and structure any kind of information and work with it to get stuff done.
+
+<$scrollable class="tc-cecily-demo">
+<div class="tc-cecily-demo-inner">
+<$linkcatcher>
+<$list filter="[{$:/DefaultTiddlers}enlist-input[]] -[[ ]] -[[TiddlyWiki]]" template="$:/core/ui/ViewTemplate" storyview="cecily" cecily-width="550px" cecily-map="CecilyMap"/>
+</$linkcatcher>
+</div>
+</$scrollable>
+
+It's like a hypertext card index system from the future.
+
+~TiddlyWiki deals with information in bite-sized, linked chunks called [[Tiddlers]].

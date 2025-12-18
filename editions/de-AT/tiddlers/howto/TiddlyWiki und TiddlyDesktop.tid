@@ -1,0 +1,20 @@
+created: 20140126125532723
+creator: pmario
+modified: 20150513162432240
+modifier: pmario
+tags: howto
+title: TiddlyWiki und TiddlyDesktop
+type: text/vnd.tiddlywiki
+
+TiddlyDesktop ist ein Programm für Windows, Mac OS X und Linux, mit dem Sie TiddlyWiki Dateien bearbeiten können.
+
+# Installieren Sie die aktuelle ~TiddlyDesktop Version von: https://github.com/TiddlyWiki/TiddlyDesktop/releases
+# Starten Sie TiddlyDesktop
+# Verwenden Sie den "browse button" um TiddlyWiki Dateien zu öffnen.
+# Speichern der Änderungen funktioniert wie gewohnt. 
+
+-----
+
+Ein kurzes, englisches Einführungs-Video zu TiddlyDesktop:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/i3Bggkm7paA" frameborder="0" allowfullscreen></iframe>

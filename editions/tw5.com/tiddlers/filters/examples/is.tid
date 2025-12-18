@@ -1,0 +1,13 @@
+created: 20150119133413000
+modified: 20150119134652000
+tags: [[is Operator]] [[Operator Examples]]
+title: is Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[is[tag]]">>
+<<.operator-example 2 "[!is[tag]]">>
+<<.operator-example 3 "[all[shadows]!is[system]]" "shadow tiddlers that don't start with `$:/`">>
+<<.operator-example 4 "[is[system]tag[$:/tags/Stylesheet]]" "system stylesheets">>
+<<.operator-example 5 "[all[shadows]is[system]tag[$:/tags/Stylesheet]]" "shadow system stylesheets">>
+<<.operator-example 6 "[is[shadow]]" "overridden shadow tiddlers">>
+<<.operator-example 7 "[is[missing]]" "empty because its input contains only tiddlers that exist">>

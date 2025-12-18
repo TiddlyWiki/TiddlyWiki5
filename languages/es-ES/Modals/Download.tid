@@ -1,0 +1,14 @@
+title: $:/language/Modals/Download
+type: text/vnd.tiddlywiki
+subtitle: Download changes
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/DownloadingChanges.html
+
+Tu navegador sólo permite guardar manualmente
+
+Para guardar el wiki, haz clic con el botón derecho en el enlace de más abajo y selecciona "Descargar archivo" o "Guardar enlace como..." y selecciona a continuación la carpeta y el nombre que quieres darle
+
+//Puedes acelerar ligeramente estas acciones haciendo clic en el enlace conjuntamente con la tecla "Control" (Windows) o con la tecla "Option" (Mac OS X)<br>
+No se te pedirán carpeta ni nombre, sino que se asignará automáticamente un nombre probablemente irreconocible -- necesitarás cambiar el nombre y darle extensión `.html` para usarlo//
+
+En el caso de teléfonos móviles que no permiten la descarga de archivos, puedes marcar el enlace como favorito y luego sincronizar favoritos con tu ordenador y descargarlo normalmente desde ahí

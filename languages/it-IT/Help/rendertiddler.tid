@@ -1,0 +1,8 @@
+title: $:/language/Help/rendertiddler
+description: Presenta un frammento singolo secondo uno specifico ContentType
+
+Presenta un frammento singolo secondo uno specifico ContentType, il default &egrave; `text/html` e lo salva con il nome file specificato:
+
+```
+--rendertiddler <title> <filename> [<type>]
+```

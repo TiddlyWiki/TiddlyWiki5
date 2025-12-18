@@ -1,0 +1,62 @@
+title: $:/plugins/tiddlywiki/twitter-archivist/spec
+
+! Twitter Archivist Data Model
+
+The Twitter Archivist imports the following tiddlers:
+
+* A single tiddler tagged <<tag "$:/tags/TwitterArchive">> containing details about the archive
+* Tweets/favourites represented by tiddlers tagged <<tag "$:/tags/Tweet">>
+* Twitter users represented by tiddlers tagged <<tag "$:/tags/Tweeter">>
+* Tweet images/videos represented by tiddlers tagged <<tag "$:/tags/TweetMedia">>
+
+!! Twitter Archive Tiddler Fields
+
+|!Field |!Description |
+|''account_created_date'' |Date of account creation (in TiddlyWiki format) |
+|''bio'' |Account biography |
+|''displayname'' |Account displayname |
+|''generation_date'' |Date of archive generation (in TiddlyWiki format) |
+|''location'' |Account location |
+|''tags'' |`$:/tags/TwitterArchive` |
+|''title'' |Formed from `Twitter Archive for @` concatenated with the account username |
+|''user_id'' |Unique numeric identifier for account |
+|''username'' |Account username |
+|''website'' |Account website |
+
+!! Tweet Tiddler Fields
+
+|!Field |!Description |
+|''created'' |Tweet creation date (in TiddlyWiki format) |
+|''favorite_count'' |Number of favourites received by this tweet |
+|''mention_user_ids'' |Optional list of user IDs mentioned in the tweet |
+|''modified'' |Tweet creation date (in TiddlyWiki format) |
+|''retweet_count'' |Number of retweets received by this tweet |
+|''status_id'' |Unique numeric identifier for tweet |
+|''tags'' |`$:/tags/Tweet` along with the titles of any tweeters mentioned in the tweet |
+|''text'' |The text of the tweet (see below) |
+|''title'' |Formed from `Tweet - ` concatenated with the tweet ID |
+|''user_id'' |Unique numeric identifier for tweeter of this tweet |
+
+The text of the tweet includes the following changes:
+
+* The pragma `\rules only html entity extlink` is prepended to restrict the parse rules recognised within the text
+* Mentions are linked to the associated tweeter tiddler
+* Line breaks are replaced by `<br/>`
+
+!! Tweeter Tiddler Fields
+
+|!Field |!Description |
+|''name'' |Account displayname |
+|''screenname'' |Account screenname (including the @) |
+|''tags'' |`$:/tags/Tweeter` |
+|''title'' |Formed from `Tweeter - ` concatenated with the account ID |
+|''user_id'' |Unique numeric identifier for account |
+
+!! Tweet Media Fields
+
+|!Field |!Description |
+|''status_id'' |Identifier of tweet associated with this media item |
+|''tags'' |`$:/tags/TweetMedia` |
+|''text'' |The body of the media item |
+|''title'' |Formed from `Tweet Media - ` concatenated with the ID of the associated tweet and a further unique identifier |
+|''type'' |`image/jpg`, `image/png` or `video/mp4` |

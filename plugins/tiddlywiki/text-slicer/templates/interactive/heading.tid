@@ -1,0 +1,32 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/heading
+
+\define config-heading-status()
+$(tv-heading-status-config-title)$/$(tv-heading-status-config-prefix)$/$(currentTiddler)$
+\end
+
+\define body(level:"h1")
+<$set name="tv-heading-status-config-title" value=<<config-heading-status>>>
+<div class="tc-document-tiddler">
+<div class="tc-document-tiddler-toolbar">
+<$reveal type="nomatch" state=<<tv-heading-status-config-title>> text="close" default=<<tv-default-heading-state>> tag="div">
+<$button set=<<tv-heading-status-config-title>> setTo="close" class="tc-btn-invisible">
+{{$:/core/images/down-arrow}}
+</$button>
+</$reveal>
+<$reveal type="match" state=<<tv-heading-status-config-title>> text="close" default=<<tv-default-heading-state>> tag="div">
+<$button set=<<tv-heading-status-config-title>> setTo="open" class="tc-btn-invisible">
+{{$:/core/images/right-arrow}}
+</$button>
+</$reveal>
+</div>
+<$link tag="$level$" class="tc-document-tiddler-link">
+<$transclude/>
+</$link>
+<$reveal type="nomatch" state=<<tv-heading-status-config-title>> text="close" default=<<tv-default-heading-state>> tag="div">
+<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler"/>
+</$reveal>
+</div>
+</$set>
+\end
+
+<$macrocall $name="body" level={{!!toc-heading-level}}/>

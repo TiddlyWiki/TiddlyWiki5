@@ -1,0 +1,20 @@
+title: $:/language/Help/setfield
+description: उपयोग के लिए बाहरी tiddlers को तैयार
+
+//नोट इस आदेश को प्रयोगात्मक और बदल सकते है  या
+प्रतिस्थापित किया जा रहा है
+अंतिम रूप दिये जाने से  पहले.//
+
+Tiddler सेट करने के लिए `currentTiddler` चर के साथ एक टेम्पलेट tiddler wikifying के परिणाम को tiddlers के एक समूह की निर्दिष्ट क्षेत्र सेट करता है।
+
+```
+--setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+The parameters are:
+
+* ''फिल्टर '' - फिल्टर tiddlers की पहचान के प्रभावित होने की
+* 'FIELDNAME' '- क्षेत्र को संशोधित करने के लिए (defaults "पाठ" करने के लिए)
+* ''templatetitle' '- निर्दिष्ट क्षेत्र में wikify को tiddler।रिक्त या फिर लापता तब  क्षेत्र हटाया जाता है
+* ''
+प्रकार '' - टेक्स्ट प्रकार रेंडर करने के लिए ("टेक्स्ट / plain" करने के लिए defaults, "defaults to "text/html") html" एचटीएमएल टैग शामिल करने के लिए इस्तेमाल किया जा सकता है)

@@ -1,0 +1,8 @@
+caption: {{$:/language/SideBar/More/Caption}}
+created: 20150719185507821
+modified: 20150719185507821
+title: $:/core/ui/SideBar/More
+
+<div class="tc-more-sidebar">
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/MoreSideBar]!has[draft.of]]" "$:/core/ui/MoreSideBar/Tags" "$:/state/tab/moresidebar" "tc-vertical">>
+</div>

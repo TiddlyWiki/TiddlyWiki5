@@ -1,0 +1,32 @@
+created: 20131221085742684
+creator: pmario
+modified: 20150615130547291
+modifier: pmario
+tags: howto TiddlyFox
+title: Speichern mit TiddlyFox
+type: text/vnd.tiddlywiki
+
+!! Android
+
+Wenn Sie "Firefox for Android" verwenden, dann beachten sie: [[Speichern mit TiddlyFox - Android]].
+
+!! Speichern mit TiddlyFox
+
+<<iframe-responsive src:"https://www.youtube.com/embed/bsWE7jXPbb0">>
+
+# Stellen Sie sicher, dass Sie die [[aktuelle Version von Firefox|http://getfirefox.com]] verwenden.
+# Installieren Sie die aktuelle TiddlyFox Erweiterung von: https://addons.mozilla.org/en-US/firefox/addon/tiddlyfox/
+# Firefox neu starten!
+# Speichern Sie eine leere Datei der deutschen Version.
+#> {{$:/editions/de-AT-DE/snippets/download-empty-button}}
+# Suchen Sie die eben geladene Datei im Datei Manager.
+#* Geben Sie der Datei einen vernünftigen Namen aber stellen Sie sicher, dass die Endung `.html` oder `.htm` ist.
+# Öffnen Sie die Datei mit Firefox.
+# Beim Öffnen der Datei erscheint ein Dialog, mit der Frage, ob der direkte Dateizugriff für TiddlyFox erlaubt werden soll.
+#* ''Klicken Sie hier unbedingt "OK" '':
+# Erstellen Sie einen neuen Tiddler mit dem {{$:/core/images/new-button}} ''plus'' im rechten Menü. 
+# Geben Sie den Text ein und bestätigen die Eingabe mit dem {{$:/core/images/done-button}} ''OK''.
+# Speichern Sie die Änderungen mit: {{$:/core/images/save-button}} ''speichern'' im rechten Menü
+# Rechts oben sollte ein gelber Nachrichten-Dialog mit "Wiki gespeichert!" auftauchen.
+#* Ist dies nicht der Fall, dann überprüfen sie, ob TiddlyFox im Firefox: ~AddOn Menü richtig geladen wurde.
+# Laden Sie die Seite neu, um zu überprüfen, ob die Datei korrekt gespeichert wurde. 

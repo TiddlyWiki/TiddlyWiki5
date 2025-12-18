@@ -1,0 +1,17 @@
+created: 20150110182900000
+modified: 20150117152553000
+title: Spelling
+tags: [[Improving TiddlyWiki Documentation]]
+
+Because ~TiddlyWiki is of British origin, its English documentation uses [[British spelling in preference to US spelling|https://en.wikipedia.org/wiki/American_and_British_English_spelling_differences]].
+
+Words like <<.word customise>> are spelled <<.word -ise>>, not <<.word -ize>>. Words like <<.word colour>> will also be spelled using UK English unless they are being used for reserved words in code, such as in CSS or JavaScript.
+
+Standard technical acronyms are written in upper case, without dots: <<.word HTML>>, not <<.word html>> or <<.word H.T.M.L.>>
+
+Avoid arbitrarily abbreviating words and sentences. But the following abbreviations are acceptable:
+
+|!Abbreviation |!Meaning |!Notes |
+|e.g. |for example |with a dot after each letter |
+|i.e. |that is to say |with a dot after each letter |
+|etc |and so on |without a dot |

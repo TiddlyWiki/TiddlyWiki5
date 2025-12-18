@@ -1,0 +1,10 @@
+title: $:/language/Help/help
+description: Viser hjælpetekst for TiddlyWiki kommandoer
+
+Viser hjælpetekst for en kommando:
+
+```
+--help [<command>]
+```
+
+Hvis kommandoens navn udelades, vil en liste over mulige kommandoer vises.

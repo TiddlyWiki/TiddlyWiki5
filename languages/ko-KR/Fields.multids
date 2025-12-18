@@ -1,0 +1,34 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: 바깥 그림 티들러의 전체 URI
+bag: 티들러의 유래가 된 가방 이름
+caption: 탭이나 버튼에 표시할 텍스트
+color: 티들러와 연관된 CSS 색 값
+component: [[경보 티들러|AlertMechanism]]에 대해 담당하는 구성 요소의 이름
+created: 티들러가 만들어진 날짜
+creator: 티들러를 만든 사람의 이름
+current-tiddler: [[역사 목록|HistoryMechanism]]에서 최상위 티들러를 캐시하는 데 사용
+dependents: 플러그인에 대해, 종속된 플러그인 제목을 나열
+description: 플러그인에 대한 설명문, 또는 모달 대화 상자
+draft.of: 초안 티들러에 대해, 초안인 티들러의 제목을 포함
+draft.title: 초안 티들러에 대해, 티들러의 제안된 새 제목을 포함
+footer: 마법사를 위한 바닥글 텍스트
+icon: 티들러와 연관된 아이콘을 포함하는 티들러의 제목
+library: "yes"로 설정하면 티들러가 자바스크립트 라이브러리로 저장해야하는지 나타냄
+list: 티들러와 연관된 티들러 제목의 정렬된 목록
+list-after: 설정하면, 티들러가 정렬된 목록 뒤에 추가해야 하는 티들러 제목
+list-before: 설정하면, 티들러의 정렬된 목록 앞에, 또는 이 필드에 빈 문자열이 들어 있지 않으면 목록의 시작에서 추가해야 하는 티들러 제목
+modified: 티들러가 마지막으로 수정된 날짜 및 시간
+modifier: 티들러를 마지막으로 수정한 사람과 관련된 티들러 제목
+name: 플러그인 티들러와 연관된 사람이 읽을 수 있는 이름
+plugin-priority: 플러그인 티들러의 우선 순위를 나타내는 숫자 값
+plugin-type: 플러그인 티들러에서 플러그인의 형식
+released: 티들리위키 배포 날짜
+revision: 서버에 열린 티들러의 판
+source: 티들러와 연관된 원본 URL
+subtitle: 마법사를 위한 부제목 텍스트
+tags: 티들러와 연관된 태그의 목록
+text: 티들러의 본문
+title: 티들러의 고유 이름
+type: 티들러의 내용 형식
+version: 플러그인에 대한 버전 정보

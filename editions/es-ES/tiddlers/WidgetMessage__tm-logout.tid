@@ -1,0 +1,12 @@
+caption: tm-logout
+created: 20140811112457311
+es-title: Mensaje: tm-logout
+modified: 20160415160213368
+tags: Messages
+title: WidgetMessage: tm-logout
+type: text/vnd.tiddlywiki
+
+El mensaje `tm-logout` desconecta al usuario de su sesión actual en el servidor. 
+El tiddler [[$:/status/IsLoggedIn]] indica el estado actual de inicio de sesión con los valores "yes" o "no" y [[$:/status/UserName]] indica el nombre de usuario actual
+
+Este mensaje lo procesa SyncMechanism en el núcleo de ~TiddlyWiki invocando el [[SyncAdaptorModule|SyncAdaptorModules]] actual, (generalmente, el plugin  ''tiddlywiki/tiddlywebadaptor'').

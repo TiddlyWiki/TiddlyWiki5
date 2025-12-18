@@ -1,0 +1,23 @@
+created: 20140101174035140
+modified: 20140101175304016
+title: TiddlyWiki on NW.js
+type: text/vnd.tiddlywiki
+
+[[NW.js|https://tiddlywiki.com/#NW.js]] (previously known as "node-webkit") allows TiddlyWiki to be set up as a native application for Windows, Mac OS X or Linux.
+
+! Setting up
+
+# Create a folder with the following contents:
+## The appropriate copy of [[NW.js]] for your platform, downloaded from https://github.com/nwjs/nw.js
+## Your TiddlyWiki HTML file as `index.html`
+## A file called `package.json` with the following content:
+##> {{package.json for NW.js}}
+# Run the [[NW.js]] application
+#* If it doesn't work, you may need to unblock the application before your operating system will run it
+#** OS X: see http://support.apple.com/kb/PH14369
+# Try saving changes in the usual way
+
+! Limitations
+
+MP3 audio and H264 video are not supported without special steps [[described on the NW.js wiki|https://github.com/nwjs/nw.js/wiki/Using-MP3-%26-MP4-%28H.264%29-using-the--video--%26--audio--tags.]].
+

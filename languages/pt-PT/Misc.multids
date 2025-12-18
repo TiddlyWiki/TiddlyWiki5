@@ -1,0 +1,72 @@
+title: $:/language/
+
+AboveStory/ClassicPlugin/Warning: Parece que você está a tentar instalar uma extensão desenvolvida para a ~TiddlyWiki Classic. Por favor repare que [[estas extensões não funcionam com a TiddlyWiki versão 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]. Extensões ~TiddlyWiki Classic detectadas:
+BinaryWarning/Prompt: Este tiddler contém informação binária
+ClassicWarning/Hint: Este tiddler está escrito no formato de texto wiki da TiddlyWiki Clássica, que não é totalmente compatível com a TiddlyWiki versão 5. Veja https://tiddlywiki.com/static/Upgrading.html para mais detalhes.
+ClassicWarning/Upgrade/Caption: actualizar
+CloseAll/Button: fechar todos
+ColourPicker/Recent: Recente:
+ConfirmCancelTiddler: Pretende descartar as alterações feitas no tiddler "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Pretende apagar o tiddler "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Está prestes a editar um Tiddler-Sombra. Quaisquer alterações sobrepor-se-ão aos valores pré definidos de sistema, tornando futuras actualizações mais complexas. Tem a certeza que pretende editar "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Pretende substituir o tiddler "<$text text=<<title>>/>"?
+Count: contagem
+DefaultNewTiddlerTitle: Novo Tiddler
+Diffs/CountMessage: <<diff-count>> diferenças
+DropMessage: Largue aqui (ou carregue no Escape para cancelar)
+Encryption/Cancel: Cancelar
+Encryption/ConfirmClearPassword: Pretende remover a palavra-passe? Esta acção removerá a encriptação aplicada quando guardar esta wiki
+Encryption/Password: Palavra Passe
+Encryption/PasswordNoMatch: Palavras Passe não são iguais
+Encryption/PromptSetPassword: Definir nova palavra passe para esta TiddlyWiki
+Encryption/RepeatPassword: Repetir palavra passe
+Encryption/SetPassword: Definir palavra passe
+Encryption/Username: Nome de utilizador
+Error/Caption: Erro
+Error/Filter: Erro de filtro
+Error/FilterSyntax: Erro de sintaxe na expressão do filtro
+Error/IsFilterOperator: Erro de Filtro: Operando desconhecido para o operador de filtro 'is'
+Error/LoadingPluginLibrary: Erro ao carregar a biblioteca de extensões
+Error/PutEditConflict: File changed on server
+Error/RecursiveTransclusion: Erro de transclusão recursiva na widget de transclusão
+Error/RetrievingSkinny: Erro ao obter a lista simples de tiddlers
+Error/SavingToTWEdit: Erro ao gravar em TWEdit
+Error/WhileSaving: Erro ao gravar
+Error/XMLHttpRequest: Código de erro XMLHttpRequest
+InternalJavaScriptError/Hint: Bem, isto é embaraçoso. Recomenda-se que reinicie a sua TiddlyWiki recarregando o seu navegador
+InternalJavaScriptError/Title: Erro interno JavaScript
+LazyLoadingWarning: <p>A carregar texto externo de ''<$text text={{!!_canonical_uri}}/>''</p><p>Se esta mensagem não desaparecer pode estar a utilizar um navegador que não suporta texto remoto nesta configuração. Veja https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Entrar em TiddlySpace
+Manager/Controls/FilterByTag/None: (none)
+Manager/Controls/FilterByTag/Prompt: Filtrar por etiqueta:
+Manager/Controls/Order/Prompt: Ordem inversa
+Manager/Controls/Search/Placeholder: Procurar 
+Manager/Controls/Search/Prompt: Procurar:
+Manager/Controls/Show/Option/Tags: etiquetas
+Manager/Controls/Show/Option/Tiddlers: tiddlers
+Manager/Controls/Show/Prompt: Mostrar:
+Manager/Controls/Sort/Prompt: Ordenar por:
+Manager/Item/Colour: Cor
+Manager/Item/Fields: Campos
+Manager/Item/Icon: Ícone
+Manager/Item/Icon/None: (none)
+Manager/Item/RawText: Texto simples
+Manager/Item/Tags: Etiquetas
+Manager/Item/Tools: Ferramentas
+Manager/Item/WikifiedText: Texto formatado
+MissingTiddler/Hint: Tiddler "<$text text=<<currentTiddler>>/>" em falta - clique {{||$:/core/ui/Buttons/edit}} para criar
+No: Não
+OfficialPluginLibrary: Biblioteca de Extensões Official ~TiddlyWiki
+OfficialPluginLibrary/Hint: A Biblioteca de Extensões Official ~TiddlyWiki em tiddlywiki.com. Extensões temas e pacotes de idiomas são mantidos pela equipa principal.
+PluginReloadWarning: Por favor grave  {{$:/core/ui/Buttons/save-wiki}} e recarregue {{$:/core/ui/Buttons/refresh}} para que as alterações às extensões tomem efeito
+RecentChanges/DateFormat: DD de MMM de YYYY
+SystemTiddler/Tooltip: Este é um tiddler de sistema
+SystemTiddlers/Include/Prompt: Incluir tiddlers de sistema
+TagManager/Colour/Heading: Cor
+TagManager/Count/Heading: Contagem
+TagManager/Icon/Heading: Ícone
+TagManager/Info/Heading: Informação
+TagManager/Tag/Heading: Etiqueta
+Tiddler/DateFormat: DD de MMM de YYYY às hh12:0mmam
+UnsavedChangesWarning: Têm alterações não guardadas na TiddlyWiki
+Yes: Sim«

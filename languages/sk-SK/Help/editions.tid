@@ -1,0 +1,8 @@
+title: $:/language/Help/editions
+description: Vylistovať názvy dostupných vydaní TiddlyWiki
+
+Vylistovať názvy a popisy dostupných vydaní.  Môžete vytvoriť nový wiki zo špecifikovaného vydania pomocou príkazu `--init`.
+
+```
+--editions
+```

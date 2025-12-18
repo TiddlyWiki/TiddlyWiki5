@@ -1,0 +1,11 @@
+created: 20150123221711000
+modified: 20150123221834000
+tags: [[next Operator]] [[Operator Examples]]
+title: next Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[[Monday]next[Days of the Week]]">>
+<<.operator-example 2 "[[Sunday]next[Days of the Week]]">>
+<<.operator-example 3 "Tuesday Wednesday Thursday +[next[Days of the Week]]">>

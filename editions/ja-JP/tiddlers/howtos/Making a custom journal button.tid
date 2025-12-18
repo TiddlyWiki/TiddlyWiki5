@@ -1,0 +1,43 @@
+created: 20160424150551727
+modified: 20241117105431939
+original-modified: 20171114215846324
+tags: [[Customise TiddlyWiki]]
+title: Making a custom journal button
+ja-title: カスタムジャーナルボタンの作成
+type: text/vnd.tiddlywiki
+
+独自の''//カスタム//''ジャーナルボタンを取得するには、まず[[新しいジャーナル|$:/core/ui/Buttons/new-journal]]ボタンを複製します
+
+次に、独自の設定用Tiddlerを作成します。例: 
+
+* ``$:/config/myNewTiddler/Tags``と... 
+* ``$:/config/myNewTiddler/Title``と... 
+* ``$:/config/myNewTiddler/Text``
+
+カスタムボタンを編集し、設定用Tiddler名を"検索して置換"します
+
+Tiddlerの終わり近くにある次の行を修正します
+
+修正前
+
+```
+<$set name="journalTitleTemplate" value={{$:/config/NewJournal/Title}}>
+<$set name="journalTags" value={{$:/config/NewJournal/Tags}}>
+<$set name="journalText" value={{$:/config/NewJournal/Text}}>
+```
+
+修正後
+
+```
+<$set name="journalTitleTemplate" value={{$:/config/myNewTiddler/Title}}>
+<$set name="journalTags" value={{$:/config/myNewTiddler/Tags}}>
+<$set name="journalText" value={{$:/config/myNewTiddler/Text}}>
+```
+
+サイドバーで使用したい場合は、設定用Tiddlerを次のようにします: 
+
+```
+<$set name="journalTitleTemplate" value={{config/myNewTiddler/Title}}>
+<$set name="journalTags" value={{config/myNewTiddler/Tags}}>
+<$set name="journalText" value={{config/myNewTiddler/Text}}>
+```

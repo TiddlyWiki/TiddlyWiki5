@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/share/settings
+caption: Share
+tags: $:/tags/ControlPanel/SettingsTab
+
+!! Base sharing URL
+
+//Defaults to the current location//
+
+<$edit-text tiddler="$:/config/plugins/share/base-url" tag="input" class="tc-sharing-wizard-editor"/>

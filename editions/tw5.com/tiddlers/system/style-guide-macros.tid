@@ -1,0 +1,21 @@
+created: 20220227210120989
+modified: 20220227210123695
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/style-guide-macros
+
+\define style-guide(good,bad)
+<table>
+<tbody>
+<tr>
+<th>Good</th>
+<td>``$good$``</td>
+</tr>
+<tr>
+<th>Bad</th>
+<td>``$bad$``</td>
+</tr>
+</tbody>
+</table>
+\end
+
+<pre><$view field="text"/></pre>

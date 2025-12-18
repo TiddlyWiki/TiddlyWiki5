@@ -1,0 +1,13 @@
+created: 20150124112340000
+modified: 20150124113250000
+tags: [[sort Operator]] [[Operator Examples]]
+title: sort Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]sort[]]">>
+<<.operator-example 2 "[list[Days of the Week]!sort[]]">>
+<<.operator-example 3 "one two Three four +[sort[]]">>
+<<.operator-example 4 "[prefix[Tiddl]sort[text]]">>
+<<.operator-example 5 "[has[created]sort[created]limit[10]]" "the oldest 10 tiddlers in the wiki">>

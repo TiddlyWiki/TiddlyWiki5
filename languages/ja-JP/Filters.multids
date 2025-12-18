@@ -1,0 +1,16 @@
+title: $:/language/Filters/
+
+AllTags: システムタグを除くすべてのタグ
+AllTiddlers: システム Tiddler を除くすべての Tiddler
+Drafts: ドラフト状態の Tiddler
+Missing: 未作成の Tiddler
+Orphans: 孤立状態の Tiddler
+OverriddenShadowTiddlers: 上書きされている隠し Tiddler
+RecentSystemTiddlers: 最近更新された Tiddler（システム Tiddler を含む）
+RecentTiddlers: 最近更新された Tiddler
+SessionTiddlers: Wiki 読み込み後に変更された Tiddler
+ShadowTiddlers: 隠し Tiddler
+StoryList: Tiddly 表示部内の Tiddler。 <$text text="$:/AdvancedSearch"/> は除く
+SystemTags: システムタグ
+SystemTiddlers: システム Tiddler
+TypedTiddlers: Wiki テキストではない Tiddler

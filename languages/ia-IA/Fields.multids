@@ -1,0 +1,34 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: Le plen adresse de un externe nota imagine
+bag: Le nomine del sacco del qual veniva un nota
+caption: Le texto a monstrar sur un scheda o button
+color: Le valor del color CSS associate con un nota
+component: Le nomine del componente responsabile pro un [[alert tiddler|AlertMechanism]]
+created: Le data al qual le nota esseva create
+creator: Le nomine del persona qui creava le nota
+current-tiddler: Usate pro salvar temporarimente le nota principal in un [[history list|HistoryMechanism]]
+dependents: Pro un extension, listas del titulos de extensiones dependente
+description: Le texto descriptive de un extension o un dialogo modal
+draft.of: Pro notas de schizzo, contine le titulo del nota del qual isto es un schizzo
+draft.title: Pro notas de schizzo, contine le proponite nove titulo del nota
+footer: Le texto de pede de un guida
+icon: Le titulo del nota con le icone associate con un nota
+library: Quando fixate a "si" illo indica que un nota debe esser salvate como un bibliotheca de JavaScript
+list: Un lista arrangiate de titulos de notas associate con un nota
+list-after: Si activate, le titulo del nota post le qual iste nota debe esser addite al lista arrangiate de titulos de notas
+list-before: Si activate, le titulo de un nota ante que iste nota debe esser addite al lista arrangiate de titulos de notas, o al initio del lista si iste quadro es presente ma vacue
+modified: Le data e hora al qual un nota esseva modificate le plus recentemente
+modifier: Le titulo de nota associate con le persona qui le plus recentemente modificava un nota
+name: Le nomine human legibile associate con un nota de extension
+plugin-priority: Un valor numeric que indica le prioritate de un nota de extension
+plugin-type: Le typo de extension de un extension de nota
+released: Data de un version de TiddlyWiki
+revision: Le revision del nota como salvate al servitor
+source: Le adresse fonte associate con un nota
+subtitle: Le texto de subtitulo de un guida
+tags: Un lista de etiquettas associate con un nota
+text: Le texto de un nota
+title: Le nomine unic de un nota
+type: Le typo de contento de un nota
+version: Information super le version de un extension

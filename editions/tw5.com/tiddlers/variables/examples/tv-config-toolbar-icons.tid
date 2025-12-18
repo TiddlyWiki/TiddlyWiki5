@@ -1,0 +1,19 @@
+created: 20150228140420000
+modified: 20150228141418000
+tags: [[tv-config-toolbar-icons Variable]] [[Variable Examples]]
+title: tv-config-toolbar-icons Variable (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1"
+eg="""<$set name="tv-config-toolbar-icons" value="no">
+<$set name="tv-config-toolbar-text" value="yes">
+{{$:/core/ui/Buttons/new-tiddler}}
+</$set>
+</$set>
+"""/>
+
+<$macrocall $name=".example" n="2"
+eg="""<$set name="tv-config-toolbar-icons" value="yes">
+{{$:/core/ui/Buttons/new-tiddler}}
+</$set>
+"""/>

@@ -1,0 +1,53 @@
+created: 20201130191618831
+modified: 20210307102027763
+tags: RangeWidget
+title: RangeWidget Example
+type: text/vnd.tiddlywiki
+
+\define getText() $(text)$ - value: $(value)$ - changed: $(actionValueHasChanged)$
+
+\define range-log(text:"", value:"", tiddler:"$:/temp/range/log")
+<$vars text="""$text$""" value="""$value$""" >
+<$action-setfield $tiddler="""$tiddler$""" $index=<<now "0hh-0mm-0ss:0XXX">> $value=<<getText>>/>
+</$vars>
+\end
+
+\define clear-range-log(tiddler:"$:/temp/range/log")
+<$action-setfield $tiddler="""$tiddler$""" text="{}" show=show/>
+\end
+
+\define logTiddler()$:/temp/range/log
+
+\define clearLogButton()<$button actions=<<clear-range-log>>>Clear Log</$button>
+
+\define actionsStop()
+<$macrocall $name="range-log" text="                    actionsStop" value=<<actionValue>> />
+\end
+
+\define actionsStart()
+<$macrocall $name="range-log" text="                    actionsStart" value=<<actionValue>> />
+\end
+
+\define actions()
+<$macrocall $name="range-log" text="actions" value=<<actionValue>> />
+\end
+
+!! Using Actions
+
+<$range tiddler="$:/temp/range/1__" min="-1" max="10" default="1" increment="1"
+  actionsStart=<<actionsStart>> actionsStop=<<actionsStop>> actions=<<actions>>/> {{$:/temp/range/1__}}
+
+<$range tiddler="$:/temp/range/__2" min="0" max="1" default=".01" increment=".01"
+  actionsStart=<<actionsStart>> actionsStop=<<actionsStop>> actions=<<actions>> /> {{$:/temp/range/__2}} 
+
+<$checkbox tiddler=<<logTiddler>> field="show" checked="show" unchecked="hide"> Show log</$checkbox> <<clearLogButton>>
+
+<$reveal stateTitle=<<logTiddler>> stateField="show" type="match" text="show">
+<$transclude tiddler=<<logTiddler>> />
+</$reveal>
+
+---
+
+The wikitext of this example is shown below:
+
+<$codeblock code={{RangeWidget Example!!text}}/>

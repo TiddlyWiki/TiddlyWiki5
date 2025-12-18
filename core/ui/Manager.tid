@@ -1,0 +1,97 @@
+title: $:/Manager
+icon: $:/core/images/list
+color: #bbb
+
+\define lingo-base() $:/language/Manager/
+
+\define list-item-content-item()
+\whitespace trim
+<div class="tc-manager-list-item-content-item">
+	<$vars state-title="""$:/state/popup/manager/item/$(listItem)$""">
+		<$reveal state=<<state-title>> type="match" text="show" default="show" tag="div">
+			<$button set=<<state-title>> setTo="hide" class="tc-btn-invisible tc-manager-list-item-content-item-heading">
+				{{$:/core/images/down-arrow}}&#32;<$transclude tiddler=<<listItem>> field="caption"/>
+			</$button>
+		</$reveal>
+		<$reveal state=<<state-title>> type="nomatch" text="show" default="show" tag="div">
+			<$button set=<<state-title>> setTo="show" class="tc-btn-invisible tc-manager-list-item-content-item-heading">
+				{{$:/core/images/right-arrow}}&#32;<$transclude tiddler=<<listItem>> field="caption"/>
+			</$button>
+		</$reveal>
+		<$reveal state=<<state-title>> type="match" text="show" default="show" tag="div" class="tc-manager-list-item-content-item-body">
+			<$transclude tiddler=<<listItem>>/>
+		</$reveal>
+	</$vars>
+</div>
+\end
+
+\whitespace trim
+<div class="tc-manager-wrapper">
+	<div class="tc-manager-controls">
+		<div class="tc-manager-control">
+			<<lingo Controls/Show/Prompt>>&#32;<$select tiddler="$:/config/Manager/Show" default="tiddlers">
+				<option value="tiddlers"><<lingo Controls/Show/Option/Tiddlers>></option>
+				<option value="tags"><<lingo Controls/Show/Option/Tags>></option>
+			</$select>
+		</div>
+		<div class="tc-manager-control">
+			<<lingo Controls/Search/Prompt>>&#32;<$edit-text tiddler="$:/config/Manager/Filter" tag="input" default="" placeholder={{$:/language/Manager/Controls/Search/Placeholder}}/>
+		</div>
+		<div class="tc-manager-control">
+			<<lingo Controls/FilterByTag/Prompt>>&#32;<$select tiddler="$:/config/Manager/Tag" default="">
+				<option value=""><<lingo Controls/FilterByTag/None>></option>
+				<$list filter="[!is{$:/config/Manager/System}tags[]!is[system]sort[title]]" variable="tag">
+					<option value=<<tag>>><$text text=<<tag>>/></option>
+				</$list>
+			</$select>
+		</div>
+		<div class="tc-manager-control">
+			<<lingo Controls/Sort/Prompt>>&#32;<$select tiddler="$:/config/Manager/Sort" default="title">
+				<optgroup label="Common">
+					<$list filter="title modified modifier created creator created" variable="field">
+						<option value=<<field>>><$text text=<<field>>/></option>
+					</$list>
+				</optgroup>
+				<optgroup label="All">
+					<$list filter="[all{$:/config/Manager/Show}!is{$:/config/Manager/System}fields[]sort[title]] -title -modified -modifier -created -creator -created" variable="field">
+						<option value=<<field>>><$text text=<<field>>/></option>
+					</$list>
+				</optgroup>
+			</$select>
+			&#32;
+			<$checkbox tiddler="$:/config/Manager/Order" field="text" checked="reverse" unchecked="forward" default="forward">
+				&#32;
+				<<lingo Controls/Order/Prompt>>
+			</$checkbox>
+		</div>
+		<div class="tc-manager-control">
+			<$checkbox tiddler="$:/config/Manager/System" field="text" checked="" unchecked="system" default="system">
+				&#32;
+				{{$:/language/SystemTiddlers/Include/Prompt}}
+			</$checkbox>
+		</div>
+	</div>
+	<div class="tc-manager-list">
+		<$list filter="[all{$:/config/Manager/Show}!is{$:/config/Manager/System}search{$:/config/Manager/Filter}tag:strict{$:/config/Manager/Tag}sort{$:/config/Manager/Sort}order{$:/config/Manager/Order}]">
+			<$vars transclusion=<<currentTiddler>>>
+				<div style="tc-manager-list-item">
+					<$button popup=<<qualify "$:/state/manager/popup">> class="tc-btn-invisible tc-manager-list-item-heading" selectedClass="tc-manager-list-item-heading-selected">
+						<$text text=<<currentTiddler>>/>
+					</$button>
+					<$reveal state=<<qualify "$:/state/manager/popup">> type="nomatch" text="" default="" tag="div" class="tc-manager-list-item-content tc-popup-handle">
+						<div class="tc-manager-list-item-content-tiddler">
+							<$list filter="[all[shadows+tiddlers]tag[$:/tags/Manager/ItemMain]!has[draft.of]]" variable="listItem">
+								<<list-item-content-item>>
+							</$list>
+						</div>
+						<div class="tc-manager-list-item-content-sidebar">
+							<$list filter="[all[shadows+tiddlers]tag[$:/tags/Manager/ItemSidebar]!has[draft.of]]" variable="listItem">
+								<<list-item-content-item>>
+							</$list>
+						</div>
+					</$reveal>
+				</div>
+			</$vars>
+		</$list>
+	</div>
+</div>

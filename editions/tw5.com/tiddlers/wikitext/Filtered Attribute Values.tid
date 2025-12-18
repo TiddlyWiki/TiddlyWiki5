@@ -1,0 +1,16 @@
+created: 20230615045132842
+modified: 20230615045231048
+tags: WikiText [[Widget Attributes]]
+title: Filtered Attribute Values
+type: text/vnd.tiddlywiki
+
+Filtered attribute values are indicated with triple curly braces around a [[Filter Expression]]. The value will be the first item in the resulting list, or the empty string if the list is empty.
+
+<<.from-version "5.2.2">> To improve readability, newlines can be included anywhere that whitespace is allowed within filtered attributes.
+
+This example shows how to add a prefix to a value:
+
+```
+<$text text={{{ [<currentTiddler>addprefix[$:/myprefix/]] }}} />
+```
+<<.warning "The value of the attribute will be the exact text from the first item in the resulting list. Any wiki syntax in that text will be left as-is.">>

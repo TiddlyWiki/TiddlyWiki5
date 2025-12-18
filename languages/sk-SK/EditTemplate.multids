@@ -1,0 +1,22 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: Toto je externý tiddler uložený mimo hlavného TiddlyWiki súboru. Môžete editovať štítky a polia, ale nemôžete priamo editovať samotný obsah
+Body/Placeholder: Napíšte text pre tento tiddler
+Field/Remove/Caption: odstrániť pole
+Field/Remove/Hint: Odstráň pole
+Fields/Add/Button: pridaj
+Fields/Add/Name/Placeholder: názov poľa
+Fields/Add/Prompt: Pridaj nové pole:
+Fields/Add/Value/Placeholder: hodnota pre pole
+Shadow/OverriddenWarning: Toto je modifikovaný tieňový tiddler. Môžete sa vrátiť k pôvodnej verzii tým, že ho vymažete
+Shadow/Warning: Toto je tieňový tiddler. Akékoľvek zmeny prepíšu pred-definovanú verziu
+Tags/Add/Button: pridaj
+Tags/Add/Placeholder: meno štítku
+Tags/Dropdown/Caption: zoznam štítkov
+Tags/Dropdown/Hint: Ukáž zoznam štítkov
+Type/Delete/Caption: vymazať typ obsahu
+Type/Delete/Hint: Vymaž typ obsahu
+Type/Dropdown/Caption: zoznam typov obsahu
+Type/Dropdown/Hint: Ukáž zoznam typov obsahu
+Type/Placeholder: Typ obsahu
+Type/Prompt: Typ:

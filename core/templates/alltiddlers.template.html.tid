@@ -1,0 +1,10 @@
+title: $:/core/templates/alltiddlers.template.html
+type: text/vnd.tiddlywiki-html
+
+<!-- This template is provided for backwards compatibility with older versions of TiddlyWiki -->
+
+<$set name="exportFilter" value="[!is[system]sort[title]]">
+
+{{$:/core/templates/exporters/StaticRiver}}
+
+</$set>

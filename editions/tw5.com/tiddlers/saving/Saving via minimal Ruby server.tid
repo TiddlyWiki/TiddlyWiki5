@@ -1,0 +1,19 @@
+caption: Ruby Server
+color: #78909C
+community-author: Jim Foltz
+created: 20180514011710789
+delivery: Server-side Script
+description: DIY script you can run as a server
+method: save
+modified: 20200507203129704
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows iOS Edge
+title: Saving via a Minimal Ruby Server
+type: text/vnd.tiddlywiki
+
+This is a minimal server using Ruby Webrick. It just serves up files from the same folder and handles saving.
+
+Once running, just point your web browser at http://localhost:8000 to view the folder listing, and click on your wiki html file.
+
+See the script at:
+
+https://gist.github.com/jimfoltz/ee791c1bdd30ce137bc23cce826096da

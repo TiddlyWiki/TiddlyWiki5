@@ -1,0 +1,4 @@
+title: $:/language/Help/load
+description: ਇੱਕ tiddlers ਫਾਇਲ ਲੋਡ ਕਰਨ
+
+2.xx TiddlyWiki ਫਾਇਲ ਲੋਡ tiddlers (`.html`),` .tiddler`, `.tid`,` .json` ਜ ਹੋਰ ਫਾਇਲ `` `--load <ਮਾਰਗ>` `` ਇੱਕ ਇੰਕ੍ਰਿਪਟਡ ਤੱਕ tiddlers ਲੋਡ ਕਰਨ ਲਈ, TiddlyWiki ਤੁਹਾਨੂੰ ਪਹਿਲੀ PasswordCommand ਨਾਲ ਗੁਪਤ-ਕੋਡ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ ਦਾਇਰ. ਉਦਾਹਰਨ ਲਈ: `` `tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html```Note TiddlyWiki ਇੱਕ ਹੀ ਲੋਡ ਕੀਤਾ ਪਲੱਗਇਨ ਦਾ ਇੱਕ ਪੁਰਾਣਾ ਵਰਜਨ ਨੂੰ ਲੋਡ ਨਹੀ ਕਰੇਗਾ, ਜੋ ਕਿ.

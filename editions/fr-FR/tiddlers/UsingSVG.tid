@@ -1,0 +1,56 @@
+created: 20131028132700000
+fr-title: SVG, son Utilisation
+modified: 20150622062645411
+tags: Features
+title: UsingSVG
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5 propose d'afficher les illustrations vectorielles SVG de deux façons<<:>>
+
+* Les Tiddlers avec le type `image/svg+xml` sont interprétés comme des images SVG, et affichés et transclus des éléments `<img>` autonomes avec du code SVG intégré (le lien URI vers les données source est dans l'attribut `src`)
+** Exemples d'images SVG, voir [[Motovun Jack.svg]] et [[Tiddler Fishes.svg]]
+* WikiText peut aussi inclure directement des éléments SVG en ligne. Voir ci-dessous pour un exemple.
+
+! Intégration de tiddlers SVG
+
+Vous pouvez intégrer un tiddler image SVG en utilisant la syntaxe ordinaire de transclusion<<:>>
+
+```
+{{Motovun Jack.jpg}}
+```
+
+De même, vous pouvez faire appel aux [[blocs typés|Typed Blocks in WikiText]] pour intégrer un tiddler SVG en mode ligne.
+
+Toutefois, le rendu de l'image par l'élément `<img>` fait qu'elle passe par un <<.def "bac à sable">>, et ne peut pas récupérer les styles CSS du document parent, par exemple. L'image, en elle-même, ne peut pas utiliser de fonctionnalités WikiText comme la transclusion.
+
+! Intégration d'éléments SVG
+
+L'autre façon d'utiliser SVG est d'intégrer des éléments `<svg>` directement. Par exemple<<:>>
+
+<svg width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg>
+
+Notez que les éléments SVG en mode ligne ne nécessitent pas de directive `<?xml version="1.0"?>`.
+
+! Inclure du contenu HTML ou WikiText dans des images SVG
+
+Vous pouvez inclure de simples chaine de texte dans des images SVG par l'emploie de l'élément `<text>` <<:>>
+
+<svg width="100px" height="30px" viewBox="0 0 200 400"><text x="250" y="150" font-family="Verdana" font-size="100">Salut d'ici</text><rect x="1" y="1" width="998" height="298" fill="none" stroke-width="2" /></svg>
+
+Le contenu HTML or WikiText peut être inclu dans des images en mode ligne via l'élément `<foreignObject>`. Par exemple<<:>>
+
+<svg width="260px" height="260px"><circle cx="150" cy="150" r="100" fill="blue" stoke="red"/><foreignObject x="70" y="110" width="150" height="180"><body>Voici du texte qui réclame un retour à la ligne, et intègre un [[lien vers un tiddler|HelloThere]].</body></foreignObject></svg>
+
+! Transclusion d'éléments SVG
+
+Lors de l'intégration d'éléments SVG vous pouvez faire appel à des fonctionnalités WikiText comme la transclusion. Par exemple, voici un cercle SVG dont la valeur du rayon est réglée dans le tiddler [[$:/SVGExampleRadius]]<<:>>
+
+<svg width="150" height="150"><circle cx="75" cy="75" r={{$:/SVGExampleRadius}} stroke="black" stroke-width="2" fill="green"/></svg>
+
+Vous pouvez modifier la valeur du rayon<<:>> <$edit-text tiddler="$:/SVGExampleRadius" tag="input"/>
+
+! Tracer un texte incurvé avec SVG
+
+{{Making curved text with SVG}}

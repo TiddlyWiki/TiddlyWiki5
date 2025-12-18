@@ -1,0 +1,17 @@
+caption: nth
+created: 20150122204111000
+modified: 20211029023739450
+op-input: a [[selection of titles|Title Selection]]
+op-output: the <<.place N>>th input title
+op-parameter: an integer, defaulting to 1
+op-parameter-name: N
+op-purpose: select the <<.place N>>th input title
+tags: [[Filter Operators]] [[Order Operators]]
+title: nth Operator
+type: text/vnd.tiddlywiki
+
+<<.place N>> is one-based. In other words, `nth[1]` has the same effect as the <<.olink first>> operator.
+
+<<.tip "See <<.olink zth>> for an equivalent operator with a 0 based parameter">>
+
+<<.operator-examples "nth">>

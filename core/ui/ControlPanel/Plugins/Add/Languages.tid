@@ -1,0 +1,4 @@
+title: $:/core/ui/ControlPanel/Plugins/Add/Languages
+caption: {{$:/language/ControlPanel/Plugins/Languages/Caption}} (<$count filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[language]]"/>)
+
+<<display-server-assets language>>

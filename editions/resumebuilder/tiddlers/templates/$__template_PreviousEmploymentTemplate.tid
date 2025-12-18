@@ -1,0 +1,18 @@
+input_tiddler: $:/input/Previous Employment
+options_tiddler: $:/options/Previous Employment Options
+section_name: Previous Employment
+tags: DisplayTemplate
+template_name: Previous Employment Template 1
+title: $:/template/PreviousEmploymentTemplate
+
+\define thisPreviousEmploymentList()
+<$list filter='[prefix[$:/data/Previous Employment/]removeprefix[$:/data/]addprefix[$:/settings/$(ThisResumeName)$/]!show[false]sort[order]removeprefix[$:/settings/$(ThisResumeName)$/]addprefix[$:/data/]]'>
+<li><$view field='job_title'/>, <$view field='employer'/>, <$view field='dates'/></li>
+</$list>
+\end
+
+!!''Previous Employment''
+
+<ul>
+<<thisPreviousEmploymentList>>
+</ul>

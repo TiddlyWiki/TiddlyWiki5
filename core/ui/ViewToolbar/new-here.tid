@@ -1,0 +1,24 @@
+title: $:/core/ui/Buttons/new-here
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/new-here-button}} {{$:/language/Buttons/NewHere/Caption}}
+description: {{$:/language/Buttons/NewHere/Hint}}
+
+\whitespace trim
+\procedure newHereActions()
+<$set name="tags" filter="[<currentTiddler>] [enlist{$:/config/NewTiddler/Tags}]">
+<$action-sendmessage $message="tm-new-tiddler" tags=<<tags>>/>
+</$set>
+\end
+\procedure newHereButton()
+<$button actions=<<newHereActions>> tooltip={{$:/language/Buttons/NewHere/Hint}} aria-label={{$:/language/Buttons/NewHere/Caption}} class=<<tv-config-toolbar-class>>>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+{{$:/core/images/new-here-button}}
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/NewHere/Caption}}/>
+</span>
+<%endif%>
+</$button>
+\end
+<<newHereButton>>

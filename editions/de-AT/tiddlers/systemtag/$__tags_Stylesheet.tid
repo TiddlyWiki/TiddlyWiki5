@@ -1,0 +1,13 @@
+created: 20140923180325727
+creator: pmario
+modified: 20140923182406110
+modifier: pmario
+tags: SystemTag
+title: $:/tags/Stylesheet
+type: text/vnd.tiddlywiki
+
+Dieser Tag: ''{{!!title}}'' ist ein SystemTag. Er wird verwendet um Benutzer definierte [[Stylesheets|Stylesheet]] zu aktivieren. 
+
+Benutzer Stylesheets in diesem Wiki: 
+
+<<list-links "[tag[$:/tags/Stylesheet]]">>

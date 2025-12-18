@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/GettingStarted
+caption: Getting Started
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+GettingStarted
+\end
+\define shortenTitle()
+[all[current]]
+\end
+
+! Getting Started
+
+The GettingStarted tiddler that is displayed when an empty ~TiddlyWiki starts.
+
+<<translatableStringEditor>>

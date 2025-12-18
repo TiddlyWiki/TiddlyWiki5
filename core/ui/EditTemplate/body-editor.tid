@@ -1,0 +1,44 @@
+title: $:/core/ui/EditTemplate/body/editor
+
+\whitespace trim
+
+<$edit
+
+  field="text"
+  class="tc-edit-texteditor tc-edit-texteditor-body"
+  placeholder={{$:/language/EditTemplate/Body/Placeholder}}
+  tabindex={{$:/config/EditTabIndex}}
+  focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}
+  cancelPopups="yes"
+  fileDrop={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}}
+
+><$set
+
+  name="targetTiddler"
+  value=<<currentTiddler>>
+
+><$list
+
+  filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]"
+
+><$reveal
+
+  type="nomatch"
+  state=<<config-visibility-title>>
+  text="hide"
+  class="tc-text-editor-toolbar-item-wrapper"
+
+><$transclude
+
+  tiddler="$:/core/ui/EditTemplate/body/toolbar/button"
+  mode="inline"
+
+/></$reveal></$list><$list
+
+  filter="[all[shadows+tiddlers]tag[$:/tags/EditorTools]!has[draft.of]]"
+
+><$list
+	filter={{!!condition}}
+	variable="list-condition"
+><$transclude/>
+</$list></$list></$set></$edit>

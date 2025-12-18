@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/comments/toolbar-button-delete
+tags: $:/tags/CommentToolbarButton
+
+<$reveal state="$:/status/IsReadOnly" type="match" text="no" default="no" tag="span">
+<$reveal type="match" state="!!edit-mode" text="yes">
+<$button>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/>
+delete
+</$button>
+</$reveal>
+</$reveal>

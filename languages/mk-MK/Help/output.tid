@@ -1,0 +1,11 @@
+title: $:/language/Help/output
+description: Поставува општа излезна датотека (насока) за команди
+
+Sets the base output directory for subsequent commands. The default output directory is the `output` subdirectory of the edition directory.
+
+```
+--output <pathname>
+```
+
+If the specified pathname is relative then it is resolved relative to the current working directory. For example `--output .` sets the output directory to the current working directory.
+

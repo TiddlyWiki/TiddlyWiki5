@@ -1,0 +1,14 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: Cancella
+Listing/Hint: Iste notas es preste a importar
+Listing/Import/Caption: Importa
+Listing/Select/Caption: Selige
+Listing/Status/Caption: Stato
+Listing/Title/Caption: Titulo
+Upgrader/Plugins/Suppressed/Incompatible: Extension bloccate incompatibile o obsolete
+Upgrader/Plugins/Suppressed/Version: Extension bloccate (proque entrante <<incoming>>  es plus vetere que existente <<existing>>)
+Upgrader/Plugins/Upgraded: Extension actualisate de <<incoming>> a <<upgraded>>
+Upgrader/State/Suppressed: Bloccate nota temporari de stato
+Upgrader/System/Suppressed: Bloccate nota de systema
+Upgrader/ThemeTweaks/Created: Migrate thema adjustate de <$text text=<<from>>/>

@@ -1,0 +1,22 @@
+title: $:/language/Help/rendertiddler
+description: Izpiše posamezen tiddler v določeni obliki
+
+Izpiše posamezni tiddler v določeni obliki, privzeto "text/html" in ga shrani v podano ime datoteke.
+
+Izbirno je mogoče podati naslov tiddler predloge. Spremenljivka "currentTiddler", je pri tem nastavljena na tiddler, ki ga želimo izpisati (prva vrednost parametra).
+
+Opcijsko je mogoče tudi določiti ime in vrednost za dodatno spremenljivko.
+
+```
+--rendertiddler <title> <filename> [<type>] [<template>] [<name>] [<value>]
+```
+
+Privzeto je pot do izhodne datoteke relativna glede na podimenik `output` v imeniku izdaje. Ukaz `--output` lahko uporabite za usmerjanje izhoda v drug imenik.
+
+Vsi manjkajoči imeniki na poti do imena datoteke se samodejno ustvarijo.
+
+Naslednji ukaz na primer shrani vse tiddlerje, ki se ujemajo s filtrom `[tag[done]]` `v datoteko JSON z naslovom `output.json`, tako da uporabijo osnovno predlogo `$:/core/templates/exporters/JsonFile`.
+
+```
+--rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[tag[done]]"
+```

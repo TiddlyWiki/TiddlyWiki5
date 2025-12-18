@@ -1,0 +1,15 @@
+created: 20140923175452015
+creator: pmario
+modified: 20140923180722213
+modifier: pmario
+tags: SystemTag
+title: $:/_tags/ListIcon
+type: text/vnd.tiddlywiki
+
+Dieser Tag wird als SystemTag bezeichnet. Er dient dazu Tag basierte Listen erstellen zu können. Der Tag selbst soll aber für den Endanwender unsichtbar bleiben.
+
+Die Kennung für einen System-Tag ist `$:/`. Der Rest des Tags ist nur eine Namenskonvention, die je nach Anwendungsfall unterschiedlich sein kann. 
+
+Der Unterstrich `_` hier, hat den Vorteil, dass der Tag in Listen ganz oben angezeigt wird. In der Community wird sich diese Konvention wahrscheinlich für "Benutzerdefinierte ~SystemTags" durchsetzen.
+
+<<list-links filter:"[tag{!!title}]">>

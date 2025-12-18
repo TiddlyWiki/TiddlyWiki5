@@ -1,0 +1,10 @@
+created: 20150118134611000
+modified: 20150123222912000
+tags: [[nth Operator]] [[Operator Examples]]
+title: nth Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]nth[]]">>
+<<.operator-example 2 "[list[Days of the Week]nth[5]]">>

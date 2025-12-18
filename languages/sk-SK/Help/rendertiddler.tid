@@ -1,0 +1,12 @@
+title: $:/language/Help/rendertiddler
+description: Zobraz jednotlivý tiddler podľa špecifikovaného ContentType
+
+Zobraz jednotlivý tiddler podľa špecifikovaného ContentType, štandardne zobrazujúc ako `text/html`, a ulož do určeného súboru:
+
+```
+--rendertiddler <title> <filename> [<type>]
+```
+
+Štandardne sa názov súboru resolvuje voči `output` podadresáru v adresári vydania. Príkaz `--output` je možné použiť na presmerovanie výstupu do iného adresára.
+
+Chýbajúce adresáre v ceste vytváraného súboru sa vytvoria automaticky.

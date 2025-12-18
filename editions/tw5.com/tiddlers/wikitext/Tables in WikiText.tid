@@ -1,0 +1,72 @@
+caption: Tables
+created: 20130914132100000
+modified: 20220819103416274
+tags: WikiText
+title: Tables in WikiText
+type: text/vnd.tiddlywiki
+
+! Basics
+
+TiddlyWiki5 formats tables using vertical bar `|` characters. Exclamation marks `!` are used to indicate header cells.
+
+<<wikitext-example-without-html src:"""|!Cell1 |!Cell2 |
+|Cell3 |Cell3 |
+""">>
+
+
+
+! Cell Alignment
+
+Table cell alignment is controlled by inserting space characters before and/or after the cell content. For example:
+
+<<wikitext-example-without-html src:"""|Left aligned content |
+| Right aligned content|
+| Centred content |
+|+++ a very wide column so we can see the alignment +++|
+""">>
+
+
+
+! Cell vertical Alignment
+
+Vertical alignment of cells is done by inserting either a `^` for top alignment or a `,` for bottom alignment as the first character of a cell. The normal horizontal alignment is still possible. For example:
+
+```
+|^top left |^ top center |^ top right|
+|middle left | middle center | middle right|
+|,bottom left |, bottom center |, bottom right|
+```
+
+The example renders as:
+
+| :: | ::::::::::::::::::::::::::: | ::::::::::::::::::::::::::: | ::::::::::::::::::::::::::: | :: |
+| ::<br>:: |^top left |^ top center |^ top right| ::<br>:: |
+| ::<br>:: |middle left | middle center | middle right| ::<br>:: |
+| ::<br>:: |,bottom left |, bottom center |, bottom right| ::<br>:: |
+| :: | ::::::::::::::::::::::::::: | ::::::::::::::::::::::::::: | ::::::::::::::::::::::::::: | :: |
+
+If you need to have a `^`or a `,` as the first character of a left aligned cell, you can use HTML escaping:
+
+| `^` | &amp;#94; |
+| `,` | &amp;#44; |
+
+
+
+! Cell Merging
+
+To merge a table cell with the one above, use the special cell text `~`. To merge a cell with the one to its left use the text `<`. To merge one to its right use `>`. For example:
+
+<<wikitext-example-without-html src:"""|Cell1 |Cell2 |Cell3 |Cell4 |
+|Cell5 |Cell6 |Cell7 |<|
+|Cell5 |~|Cell7 |Cell8 |
+|>|Cell9 |Cell10 |Cell11 |
+""">>
+
+
+
+! Table Classes, Captions, Headers and Footers
+
+{{Table Classes, Captions, Headers and Footers}}
+
+
+More examples can be found at: [[Tables in WikiText CSS Utility Classes]]

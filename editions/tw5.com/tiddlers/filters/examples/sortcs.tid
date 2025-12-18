@@ -1,0 +1,10 @@
+created: 20150124113044000
+modified: 20150124113344000
+tags: [[sortcs Operator]] [[Operator Examples]]
+title: sortcs Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "one two Three four +[sortcs[]]">>
+<<.operator-example 2 "one two Three four +[!sortcs[]]">>

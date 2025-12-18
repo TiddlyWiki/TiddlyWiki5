@@ -1,0 +1,22 @@
+created: 20130827075900000
+fr-title: Référence texte
+modified: 20150624093008844
+tags: Concepts
+title: TextReference
+type: text/vnd.tiddlywiki
+
+Une [[RéférenceTexte|TextReference]] identifie le bloc de texte d'un tiddler qui peut être récupéré ou modifié selon le contexte.
+
+Les références texte sont composées de multiple parties, dont plusieurs peuvent être optionnelles<<:>>
+
+* `tiddlerTitle` - Le [[champ|TiddlerFields]] texte d'un tiddler spécifié
+* `tiddlerTitle!!field` - un [[champ de tiddler|TiddlerFields]] (eg, `modified`, `modifier`, `type` etc)
+* `!!field` - un [[champ|TiddlerFields]] du tiddler en cours
+* `tiddlerTitle##propertyIndex` - extrait la propriété nommée d'un [[Tiddler Data|DataTiddlers]]
+
+Les références texte peuvent être utilisées à plusieurs endroits<<:>>
+
+* Comme [[paramètres indirectes|Filter Parameter]] dans les [[Filtres]] (eg, `<$list filter="[tag{MonTag!!nom}]"/>`)
+* Comme [[attributs indirects|IndirectAttributes]] d'un élément ou d'un widget (eg, `<$widget attrib={{Title!!description}}/>`)
+* comme l'opérateur d'une transclusion (eg, `{{MyTiddler!!title}}`)
+* Comme attribut `state` du RevealWidget et du LinkCatcherWidget

@@ -1,0 +1,20 @@
+caption: Añadir pestañas a la barra lateral
+created: 20141117000000000
+es-title: Cómo añadir pestañas a la barra lateral
+modified: 20160419144422300
+tags: Learning [[Customise TiddlyWiki]]
+title: How to add a new tab to the sidebar
+type: text/vnd.tiddlywiki
+
+Para crear una nueva pestaña en la barra lateral:
+
+# Crea un tiddler nuevo y ponle la [[etiqueta de sistema|SystemTags]] [[$:/tags/SideBar]]
+
+#* Si vas a crear un sumario o tabla de contenidos, puedes usar la [[macro de sumario |Table-of-Contents Macros]]. Tienes un ejemplo en el [[propio índice|TableOfContents]] de este sitio
+
+# Por defecto se usa el título del tiddler como título de la pestaña, pero puedes puentearlo con el campo `caption`
+
+#Para definir en qué orden tiene que aparecer la pestaña, puedes usar los campos `list-before` y `list-after`, tal como se indica en [[Etiquetas|Tagging]]
+#* P. ej.: establece el valor de `list-after` como [[$:/core/ui/SideBar/Open]] para colocar tu pestaña inmediatamente después de la solapa <<.sidebar-tab Open>>
+
+<<.tip "Nota: de igual manera, puedes crear nuevas pestañas dentro de la pestaña ''Más'', con la etiqueta `$:/tags/MoreSideBar`." >>

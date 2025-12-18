@@ -1,0 +1,50 @@
+created: 20190202035425715
+modified: 20190205023518575
+tags: 
+title: Widget attributes tutorial part I
+type: text/vnd.tiddlywiki
+
+So far none of the widgets we've implemented have had any code for handling widget attributes A vast majority of useful widgets will need to support attributes in order to make them useful.
+
+As an example, let's change the Hello World widget so it can greet not just the world, but whoever/whatever the user wants. To do that we can add support for an attribute named `what` and call it like `<$hello what="pale blue dot"/>`.
+
+The tiddlywiki widget class provides methods `computeAttributes` and `getAttribute` which can together be used by the widget code to discover what values are passed into the widget.
+
+The `computeAttributes` and `getAttribute` methods can be called like this (the second parameter to `getAttribute` will be used as the default value if the user doesn't provide that attribute in the widget call):
+
+```javascript
+this.computeAttributes();
+var message = this.getAttribute("message", "World");
+```
+
+Then the `message` variable can be used to construct the Hello XXX string:
+
+```javascript
+var textNode = this.document.createTextNode("Hello, " + message + "!");
+```
+
+The original [[hello.js]] code only implements a `render` method. The `refresh` method is not needed because the output from the widget can never be different...it will always be "Hello, World!".
+
+Even with a `message` attribute, you might think the `render` by itself is enough. After all, the value of the input parameter `message` can only be changed by modifying the wiki text which means the tiddler will be redisplayed from scratch.
+
+However, tiddlywiki has a syntax which allows parameter values to vary without modifying the wiki text. See https://tiddlywiki.com/#Widgets%20in%20WikiText for details. As one example, if the widget were called like `<$hello message={{MyTiddler!!field}}/>`, then every time the `field` field of `MyTiddler` were modified, only the `refresh` method would be called. Therefore, in order to get the widget display to update, the refresh method needs to be implemented.
+
+If the `computeAttributes` and `getAttribute` calls are placed in the `render` method then we can implement a performance unoptimized version of refresh as was done in [[Widget refresh tutorial part II]]:
+
+```javascript
+/*
+A widget with optimized performance will selectively refresh, but here we refresh always
+*/
+MyWidget.prototype.refresh = function(changedTiddlers) {
+	// Regenerate and rerender the widget and
+	// replace the existing DOM node
+	this.refreshSelf();
+	return true;
+};
+```
+
+The full code can be seen at [[hello-attribute.js]] and here is the result ([[Widget attributes demo I]]):
+
+{{Widget attributes demo I}}
+
+The third example above is the only one which requires the refresh method in order to behave properly.

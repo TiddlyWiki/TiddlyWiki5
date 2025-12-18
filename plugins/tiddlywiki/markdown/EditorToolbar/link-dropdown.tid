@@ -1,0 +1,73 @@
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/link-dropdown
+
+\define lingo-base() $:/language/Buttons/Link/
+
+\define add-link-actions()
+\whitespace trim
+<$action-sendmessage $message="tm-edit-text-operation" $param="make-markdown-link" text={{$(linkTiddler)$}} />
+<$action-deletetiddler $filter="[<dropdown-state>] [<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]"/>
+\end
+
+\define get-focus-selector() [data-tiddler-title="$(cssEscapedTitle)$"] .tc-create-wikitext-link input
+
+\define cancel-search-actions-inner()
+<$set name="userInput" value={{{ [<storeTitle>get[text]] }}}><$list filter="[<searchTiddler>get[text]!match<userInput>]" emptyMessage="<$action-deletetiddler $filter='[<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]'/>"><$action-setfield $tiddler=<<searchTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/></$list></$set>
+\end
+
+\define cancel-search-actions() <$list filter="[<storeTitle>!has[text]] +[<searchTiddler>!has[text]]" emptyMessage="<<cancel-search-actions-inner>>"><$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/></$list>
+
+\define external-link()
+\whitespace trim
+<$button class="tc-btn-invisible" style="width: auto; display: inline-block; background-colour: inherit;" actions=<<add-link-actions>>>
+{{$:/core/images/chevron-right}}
+</$button>
+\end
+
+\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="<$action-setfield $tiddler='$:/state/search/currentTab' text=<<nextTab>>/>"/>
+
+\define body(config-title)
+\whitespace trim
+''<<lingo Hint>>''
+
+<$vars searchTiddler="""$config-title$/search""" linkTiddler="""$config-title$/link""" linktext="" searchListState=<<qualify "$:/temp/link-search/selected-item">> refreshTitle=<<qualify "$:/temp/link-search/refresh">> storeTitle=<<qualify "$:/temp/link-search/input">>>
+
+<$vars linkTiddler=<<searchTiddler>>>
+<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
+<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">> class="tc-create-wikitext-link">
+<$macrocall $name="keyboard-driven-input" tiddler=<<searchTiddler>> storeTitle=<<storeTitle>>
+		selectionStateTitle=<<searchListState>> refreshTitle=<<refreshTitle>> type="search" filterMinLength="1"
+		tag="input" focus="true" class="tc-popup-handle" inputCancelActions=<<cancel-search-actions>>
+		inputAcceptActions=<<add-link-actions>> placeholder={{$:/language/Search/Search}} default=""
+		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]" />
+</$keyboard>
+</$keyboard>
+&#32;
+<$reveal tag="span" state=<<storeTitle>> type="nomatch" text="">
+<<external-link>>
+&#32;
+<$button class="tc-btn-invisible" style="width: auto; display: inline-block; background-colour: inherit;">
+<<cancel-search-actions>><$set name="cssEscapedTitle" value={{{ [<storyTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>>/></$set>
+{{$:/core/images/close-button}}
+</$button>
+</$reveal>
+</$vars>
+
+<$reveal tag="div" state=<<storeTitle>> type="nomatch" text="">
+
+<$linkcatcher actions=<<add-link-actions>> to=<<linkTiddler>>>
+
+<$vars userInput={{{ [<storeTitle>get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}>
+
+{{$:/core/ui/SearchResults}}
+
+</$vars>
+
+</$linkcatcher>
+
+</$reveal>
+
+</$vars>
+
+\end
+
+<$macrocall $name="body" config-title=<<qualify "$:/state/Link/">>/>

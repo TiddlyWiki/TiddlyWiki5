@@ -1,0 +1,15 @@
+created: 20130825142100000
+modified: 20140211195324716
+tags: Definitions
+title: JavaScript
+type: text/vnd.tiddlywiki
+
+~JavaScript is a computer language that was originally introduced by browsers as a way of scripting web pages. At first it was considered a poorly designed toy, but over the years has become recognised as a powerful language in its own right, and has been adopted widely beyond the browser.
+
+~JavaScript looks like this:
+
+```
+function circleArea(radius) {
+	return radius * 2 * 3.141592653;
+}
+```

@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Avanceret
+Advanced/PluginInfo/Empty/Hint: ingen
+Advanced/PluginInfo/Heading: Udvidelsesdetaljer
+Advanced/PluginInfo/Hint: Denne udvidelse indeholder følgende skyggetiddlere:
+Advanced/ShadowInfo/Heading: Skyggestatus
+Advanced/ShadowInfo/NotShadow/Hint: Tiddleren <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> er ikke en skyggetiddler
+Advanced/ShadowInfo/OverriddenShadow/Hint: Den er oveskrevet af en almindelig tiddler
+Advanced/ShadowInfo/Shadow/Hint: Tiddleren <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link>er en skyggetiddler
+Advanced/ShadowInfo/Shadow/Source: Det er defineret i udvidelsen <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Fields/Caption: Felter
+List/Caption: Liste
+List/Empty: Denne tiddler har ikke en liste
+Listed/Caption: Listet
+Listed/Empty: Denne tiddler er ikke listet af andre
+References/Caption: Referencer
+References/Empty: Ingen tiddlere linker til denne
+Tagging/Caption: Tagging
+Tagging/Empty: Ingen tiddlere er tagget med denne
+Tools/Caption: Værktøj

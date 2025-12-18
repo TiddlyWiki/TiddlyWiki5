@@ -1,0 +1,16 @@
+title: $:/language/Help/load
+description: Carregar tiddlers de um ficheiro
+
+Carregar tiddlers de ficheiros da TiddlyWiki 2.x.x (`.html`), `.tiddler`, `.tid`, `.json` ou outros ficheiros
+
+```
+--load <filepath>
+```
+
+Para carregar tiddlers de um ficheiro TiddlyWiki encriptado deve primeiro especificar uma palavra passe com o comando Password. Por exemplo:
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
+```
+
+A TiddlyWiki não carregará uma versão anterior de uma extensão já carregada.

@@ -1,0 +1,20 @@
+created: 20130825161100000
+modified: 20220217174534558
+tags: Definitions
+title: TiddlyFox
+type: text/vnd.tiddlywiki
+
+//~TiddlyFox// est une extension pour Firefox qui permet aux fichiers <<tw>> autonomes d'enregistrer leurs modifications directement sur le système de fichiers. //~TiddlyFox// fonctionne aussi bien sur les versions station de travail que mobile de [[Firefox]]. Voir [[Enregistrer avec TiddlyFox|Saving with TiddlyFox]] ou [[Enregistrer avec TiddlyFox pour Android|Saving with TiddlyFox on Android]] pour des instructions détaillées.
+
+~TiddlyFox est maintenant obsolète car il n'est plus compatible avec les dernières versions de Firefox (voir <<fr "TiddlyFox Apocalypse">>). Il existe de nombreuses alternatives à ~TiddlyFox, mais aucune ne fonctionne exactement de la même façon. Voir <<fr GettingStarted>> pour plus d'informations.
+
+
+//~TiddlyFox// peut être téléchargé depuis le site //Mozilla Addons//<<:>>
+
+https://addons.mozilla.org/fr/firefox/addon/tiddlyfox/
+
+<<<
+Vous pouvez également installer la dernière version de développement de ~TiddlyFox directement depuis GitHub<<:>>
+
+https://github.com/TiddlyWiki/TiddlyFox/raw/master/tiddlyfox.xpi
+<<<

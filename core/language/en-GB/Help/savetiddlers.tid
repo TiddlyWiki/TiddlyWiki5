@@ -1,0 +1,16 @@
+title: $:/language/Help/savetiddlers
+description: Saves a group of raw tiddlers to a directory
+
+(Note: The `--savetiddlers` command is deprecated in favour of the new, more flexible `--save` command)
+
+Saves a group of tiddlers in their raw text or binary format to the specified directory.
+
+```
+--savetiddlers <filter> <pathname> ["noclean"]
+```
+
+By default, the pathname is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
+
+The output directory is cleared of existing files before saving the specified files. The deletion can be disabled by specifying the ''noclean'' flag.
+
+Any missing directories in the pathname are automatically created.

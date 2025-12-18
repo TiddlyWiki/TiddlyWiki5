@@ -1,0 +1,17 @@
+created: 20140410103123179
+modified: 20150210161620000
+tags: [[Filter Operators]] [[Group Operators]] [[Date Operators]]
+title: eachday Operator
+type: text/vnd.tiddlywiki
+caption: eachday
+op-purpose: select one of each group of input titles by date
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: the name of a [[date field|Date Fields]], defaulting to <<.field modified>>
+op-parameter-name: F
+op-output: a selection containing the first input title encountered for each distinct value (ignoring times of day) of field <<.place F>>
+
+Each input title is processed in turn. The value of field <<.place F>> in the corresponding tiddler is examined, and as long as this indicates a date that has not been encountered before, the title is appended to the output.
+
+If a tiddler doesn't contain field <<.place F>>, it contributes nothing to the output.
+
+<<.operator-examples "eachday">>

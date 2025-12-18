@@ -1,0 +1,8 @@
+created: 20140708083929806
+modified: 20140708090225382
+tags: doc
+title: Timeline of the startup Process
+
+This section shows a quick and short overview over the startup process of TW, from the first step of the boot mechanism until the loading of the different startup modules. The image shown below  shall point out the main parts of this startup-process.
+
+{{StartupTimeline.png}}

@@ -1,0 +1,102 @@
+caption: list
+created: 20131024141900000
+es-title: ListWidget
+modified: 20160507044251692
+tags: Widgets
+title: ListWidget
+type: text/vnd.tiddlywiki
+
+!! Introducción
+
+El ListWidget muestra una secuencia de tiddlers que coinciden con una [[expresión de filtro|Filters]]. Sirve para:
+
+* Mostrar listas particulares de enlaces, como en la barra lateral de ~TiddlyWiki5
+
+* Confeccionar listas a medida, como <<.word "todos aquellos tiddlers con etiqueta `tarea`, no etiquetados como `hecha`">>
+
+* Hacer una lista de las etiquetas aplicadas a un tiddler
+
+* Manejar el ~StoryRIver principal
+
+Los tiddlers se muestran por transclusión, uno a uno, en una plantilla. Hay diversas maneras de especificar la plantilla, así como de controlar el comportamiento de la lista.
+
+!! Ejemplos
+
+<<.def "lista plana">>: lista sin formato
+
+```
+<$list filter="[tag[Contents]sort[title]]"/>
+```
+
+Se muestra como:
+
+<<<
+<$list filter="[tag[Contents]sort[title]]"/>
+<<<
+
+<<.def "custom item output">>
+
+```
+<$list filter="[tag[Contents]sort[title]]">
+<<currentTiddler>>
+{{||$:/core/ui/ViewTemplate/subtitle}}
+
+</$list>
+```
+
+Se muestra como
+
+<<<
+<$list filter="[tag[Contents]sort[title]]">
+<<currentTiddler>>
+{{||$:/core/ui/ViewTemplate/subtitle}}
+
+</$list>
+<<<
+
+<<.def "custom template output">>
+
+```
+<$list filter="[tag[Contents]sort[title]]" template="$:/core/ui/ViewTemplate/subtitle"/>
+```
+
+Se muestra como:
+
+<<<
+<$list filter="[tag[Contents]sort[title]]" template="$:/core/ui/ViewTemplate/subtitle"/>
+<<<
+
+!!! Listas anidadas
+
+En [[listas anidadas|NestedLists]] se explica cómo generar listas anidadas con ListWidget.
+
+!! Contenido y atributos
+
+El contenido del widget `<$list>` es una plantilla opcional usada para representar cada tiddler de la lista. Alternativamente, puede especificarse la plantilla como título de un tiddler en el atributo `template`. Como alternativa, la plantilla por defecto sólo muestra el título del tiddler.
+
+|!Atributo |!Descripción |
+|filter |Tiddler de [[filtro|Filters]] para mostrar |
+|template |Título de la plantilla de transclusión para cada tiddler de la lista. Si no es especifica ninguna, es el propio cuerpo de ListWidget el que sirve como plantilla. The title of a template tiddler for transcluding each tiddler in the list. Sin cuerpo, sólo se muestra un enlace al tiddler. |
+|editTemplate |Plantilla alternativa para el uso de [[borradores|DraftMechanism]] en modo edición |
+|variable |Nombre de la [[variable|Variables]] que guarda el título de cada tiddler. Por defecto, ''currentTiddler'' |
+|emptyMessage |Mensaje que se muestra si la lista está vacía |
+|storyview |nombre optativo del módulo responsable de animar/procesar la lista |
+|history |Título del tiddler que contiene el historial de navegación |
+
+!!! Modo edición
+
+El widget `<$list>`puede procesar tiddlers en borrador con una plantilla diferente. Consultar [[borradores|DraftMechanism]]
+
+!!! Atributo `storyview`
+
+El atributo `storyview` especifica el nombre de de un módulo optativo que puede animar los cambios realizados en la lista (incluso la navegación). El núcleo incluye por defecto los siguientes módulos:
+
+* <<.def classic>>: muestra la lista como una secuencia ordenada de tiddlers
+* <<.def zooming>>: muestra sólo el tiddler actual con una animación de zoom al navegar entre tiddlers
+* <<.def pop>>: muestra los tiddlers de uno en uno, con efecto de tiddler emergente.
+
+Para que la animación de `storyview` sea correcta, cada entrada de la lista debe ser un único bloque DOM.
+
+!!! Histórico y navegación
+
+El atributo opcional `history` especifica el nombre del tiddler usado para rastrear el actual, con el fin de presentar el histórico de navegación. Cuando el histórico cambia, le pide a la ListView que procese la navegación al siguiente tiddler. Véase [[Histórico|HistoryMechanism]] para mayor información.

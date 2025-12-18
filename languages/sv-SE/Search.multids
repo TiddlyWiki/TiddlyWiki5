@@ -1,0 +1,16 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: Lista
+Filter/Caption: Filter
+Filter/Hint: Sök via [[filter expression|https://tiddlywiki.com/static/Filters.html]]
+Filter/Matches: //<small><<resultCount>> träffar</small>//
+Matches: //<small><<resultCount>> träffar</small>//
+Shadows/Caption: Skuggor
+Shadows/Hint: Sök efter skugg-tiddlers
+Shadows/Matches: //<small><<resultCount>> träffar</small>//
+Standard/Caption: Standard
+Standard/Hint: Sök efter standard-tiddlers
+Standard/Matches: //<small><<resultCount>> träffar</small>//
+System/Caption: System
+System/Hint: Sök efter system-tiddlers
+System/Matches: //<small><<resultCount>> träffar</small>//

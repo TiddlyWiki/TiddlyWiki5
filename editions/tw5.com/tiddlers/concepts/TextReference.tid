@@ -1,0 +1,34 @@
+created: 20130827075900000
+modified: 20230321130421587
+tags: Concepts
+title: TextReference
+type: text/vnd.tiddlywiki
+
+A TextReference is a general purpose way to describe a fragment of text as either a field of a tiddler, or an index within a [[data tiddler|DataTiddlers]].
+
+In different situations, text references can be used to retrieve values, or to specify a value that should be modified.
+
+A TextReference consists of several parts:
+
+* The title of the target tiddler. If omitted, it defaults to the [[Current Tiddler]]
+* Either one of:
+** The name of a field (marked with `!!`)
+** The name of an index within a [[data tiddler|DataTiddlers]] (marked with `##`)
+* If both the field and index are omitted, the text field is used as the default
+
+Most of the parts of a text reference can be optional:
+
+* `tiddlerTitle` - the title [[field|TiddlerFields]] of the specified tiddler
+* `tiddlerTitle!!field` - a [[tiddler field|TiddlerFields]] (eg, `modified`, `modifier`, `type` etc)
+* `!!field` - a [[field|TiddlerFields]] of the current tiddler
+* `tiddlerTitle##propertyIndex` - extracts a named property from DataTiddlers
+
+Text references can be used in several places:
+
+* As [[indirect parameters|Filter Parameter]] within [[Filters]] (eg, `<$list filter="[tag{MyTag!!name}]"/>`)
+* As [[indirect attributes|HTML in WikiText]] of an element or widget (eg, `<$widget attrib={{Title!!description}}/>`)
+* As the parameter of a shortcut transclusion (eg, `{{MyTiddler!!title}}`)
+* As the `state` attribute of the RevealWidget and the LinkCatcherWidget
+
+<$macrocall $name=".tip" _="""Note the distinction between a text reference such as `foo!!bar` and a transclusion of a text reference such as `{{foo!!bar}}`"""/>
+

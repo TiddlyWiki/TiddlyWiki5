@@ -1,0 +1,11 @@
+created: 20141228094500000
+modified: 20220427171219408
+tags: Concepts
+title: JSONTiddlers
+type: text/vnd.tiddlywiki
+
+A JSON tiddler is a [[data tiddler|DataTiddlers]] containing a [[JSON|JavaScript Object Notation]] structure in its `text` field. See [[JSON in TiddlyWiki]] for an overview.
+
+Its [[ContentType]] is `application/json`.
+
+The [[history list|$:/HistoryList]] is an example of a JSON tiddler.

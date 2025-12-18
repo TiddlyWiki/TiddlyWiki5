@@ -1,0 +1,34 @@
+created: 20140213171818824
+fr-title: Mécanisme d'historique
+modified: 20150624090945769
+tags: Mechanisms
+title: HistoryMechanism
+type: text/vnd.tiddlywiki
+
+Le tiddler système [[$:/HistoryList]] garde la trace d'une liste de tiddlers composé de l'historique de navigation. Chaque fois que vous cliquez sur un lien vers un tiddler, le titre du tiddler cible est ajouté au sommet de la pile.
+
+La liste historique est mémorisée en JSON qui permettent des détails additionnels au sujet des coordonnées du nœud DOM initialisant la navigation. Ce champ peut être utilisé comme suit<<:>>
+
+```
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+
+<$button message="tm-close-tiddler" class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/> <$reveal type="match" state="$:/HistoryList!!current-tiddler" text=<<currentTiddler>>>&#x2713;</$reveal></$link>
+
+</$list>
+```
+
+ce qui affichera de façon semblable à l'onglet "Ouvert" du menu latéral, avec en sus, une coche contre le tiddler objet de la dernière navigation.
+
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+
+<$button message="tm-close-tiddler" class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/> <$reveal type="match" state="$:/HistoryList!!current-tiddler" text=<<currentTiddler>>>&#x2713;</$reveal></$link>
+
+</$list>
+
+!! Déroulé vide
+
+Pour afficher un contenu lorsque le déroulé est vide, créez un $:/config/EmptyStoryMessage et entrez le contenu souhaité. Le cas suivant montrerait le tiddler GettingStarted quand tous les autres sont fermés.
+
+```
+{{GettingStarted||$:/core/ui/ViewTemplate}}
+```

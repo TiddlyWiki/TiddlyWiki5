@@ -1,0 +1,124 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Расширенные
+Advanced/Hint: Системные сведения об этой TiddlyWiki
+Appearance/Caption: Внешний вид
+Appearance/Hint: Способы настройки внешнего вида TiddlyWiki.
+Basics/AnimDuration/Prompt: Продолжительность анимации:
+Basics/Caption: Основные
+Basics/DefaultTiddlers/BottomHint: Заметки, содержащие пробелы нужно взять в &#91;&#91;двойные квадратные скобки&#93;&#93;. А также можно возвращать {{открытые ранее заметки||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/Prompt: Открывать при старте:
+Basics/DefaultTiddlers/TopHint: Выберите заметки открытые при запуске:
+Basics/Language/Prompt: Привет! Текущий язык:
+Basics/NewJournal/Tags/Prompt: Метки новых заметок дневника
+Basics/NewJournal/Title/Prompt: Заголовок новых заметок дневника
+Basics/OverriddenShadowTiddlers/Prompt: Количество переопределённых встроенных заметок:
+Basics/ShadowTiddlers/Prompt: Количество встроенных заметок:
+Basics/Subtitle/Prompt: Подзаголовок:
+Basics/SystemTiddlers/Prompt: Количество системных заметок:
+Basics/Tags/Prompt: Количество меток:
+Basics/Tiddlers/Prompt: Количество заметок:
+Basics/Title/Prompt: Заголовок этой ~TiddlyWiki:
+Basics/Username/Prompt: Имя пользователя для подписи под изменениями:
+Basics/Version/Prompt: Версия ~TiddlyWiki:
+EditorTypes/Caption: Редакторы
+EditorTypes/Editor/Caption: Редактор
+EditorTypes/Hint: Эти заметки определяют, какой редактор используется для конкретного типа заметки.
+EditorTypes/Type/Caption: Тип содержимого
+Info/Caption: Сведения
+Info/Hint: Сведения об этой TiddlyWiki
+LoadedModules/Caption: Загруженные модули
+LoadedModules/Hint: Это загруженные в настоящий момент модули, ссылающиеся на их исходные заметки. Модули, обозначенные курсивом, не имеют исходных заметок (обычно, потому что они были установлены во время процесса загрузки).
+Palette/Caption: Цветовая схема
+Palette/Editor/Clone/Caption: скопировать
+Palette/Editor/Clone/Prompt: Перед редактированием рекомендуется скопировать встроенную цветовую схему
+Palette/Editor/Prompt: Редактирование
+Palette/Editor/Prompt/Modified: Эта встроенная цветовая схема изменена
+Palette/Editor/Reset/Caption: сброс
+Palette/HideEditor/Caption: скрыть редактор
+Palette/Prompt: Текущая цветовая схема:
+Palette/ShowEditor/Caption: показать редактор
+Plugins/Add/Caption: Другие плагины
+Plugins/Add/Hint: Установить официальные плагины
+Plugins/Caption: Плагины
+Plugins/Disable/Caption: выключить
+Plugins/Disable/Hint: Выключить этот плагин
+Plugins/Disabled/Status: (выключен)
+Plugins/Empty/Hint: Нет
+Plugins/Enable/Caption: включить
+Plugins/Enable/Hint: Выключить этот плагин
+Plugins/Installed/Hint: Список установленных плагинов:
+Plugins/Language/Prompt: Языки
+Plugins/Languages/Caption: Языки
+Plugins/Languages/Hint: Плагины языковых пакетов
+Plugins/Plugin/Prompt: Плагины
+Plugins/Plugins/Caption: Плагины
+Plugins/Plugins/Hint: Плагины
+Plugins/Theme/Prompt: Темы
+Plugins/Themes/Caption: Темы
+Plugins/Themes/Hint: Плагины тем
+Saving/Caption: Сохранение
+Saving/Heading: Сохранение
+Saving/TiddlySpot/Advanced/Heading: Расширенные настройки
+Saving/TiddlySpot/BackupDir: Каталог для резервной копии
+Saving/TiddlySpot/Backups: Резервная копия
+Saving/TiddlySpot/Description: Эти настройки нужны для сохранения на http://tiddlyspot.com или совместимый с ним удаленный сервер
+Saving/TiddlySpot/Filename: Имя файла для загрузки
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //URL сервера по умолчанию - `http://<wikiname>.tiddlyspot.com/store.cgi`. Его можно указать если используется другой сервер//
+Saving/TiddlySpot/Password: Пароль
+Saving/TiddlySpot/ServerURL: URL сервера
+Saving/TiddlySpot/UploadDir: Каталог загрузки
+Saving/TiddlySpot/UserName: Название Wiki
+Settings/AutoSave/Caption: Автосохранение
+Settings/AutoSave/Disabled/Description: Не сохранять изменения автоматически
+Settings/AutoSave/Enabled/Description: Сохранять изменения автоматически
+Settings/AutoSave/Hint: Сохранять изменения автоматически в процессе редактирования
+Settings/Caption: Настройки
+Settings/DefaultSidebarTab/Caption: Стандартная боковая панель
+Settings/DefaultSidebarTab/Hint: Определяет какую боковую панель показывать по умолчанию
+Settings/Hint: Эти настройки позволяют изменить поведение TiddlyWiki.
+Settings/LinkToBehaviour/Caption: Открытие Тиддлера
+Settings/LinkToBehaviour/InsideRiver/Hint: По ссылке //из// открытых тиддлеров
+Settings/LinkToBehaviour/OpenAbove: Открывать выше открытого тиддлера
+Settings/LinkToBehaviour/OpenAtBottom: Открывать ниже всех открытых тиддлеров
+Settings/LinkToBehaviour/OpenAtTop: Открывать выше всех открытых тиддлеров
+Settings/LinkToBehaviour/OpenBelow: Открывать ниже открытого тиддлера
+Settings/LinkToBehaviour/OutsideRiver/Hint: По ссылке //вне// открытых тиддлеров
+Settings/NavigationAddressBar/Caption: Адресная строка браузера
+Settings/NavigationAddressBar/Hint: Поведение адресной строки браузера при открытии заметки:
+Settings/NavigationAddressBar/No/Description: Не изменять адресную строку
+Settings/NavigationAddressBar/Permalink/Description: Включить целевую заметку
+Settings/NavigationAddressBar/Permaview/Description: Включить целевую заметку и все открытые заметки
+Settings/NavigationHistory/Caption: История браузера
+Settings/NavigationHistory/Hint: Обновлять историю браузера при открытии заметки:
+Settings/NavigationHistory/No/Description: Не обновлять историю
+Settings/NavigationHistory/Yes/Description: Обновлять историю
+Settings/TitleLinks/Caption: Заголовки Тиддлеров
+Settings/TitleLinks/Hint: Выборочно показывает заголовки тиддеров как ссылки
+Settings/TitleLinks/No/Description: Не показывать заголовки тиддлеров как ссылки
+Settings/TitleLinks/Yes/Description: Показывать заголовки тиддлеров как ссылки
+Settings/ToolbarButtons/Caption: Кнопки
+Settings/ToolbarButtons/Hint: Внешний вид кнопок:
+Settings/ToolbarButtons/Icons/Description: Показывать значок
+Settings/ToolbarButtons/Text/Description: Показывать текст
+Settings/ToolbarButtonStyle/Caption: Стиль кнопок панелей
+Settings/ToolbarButtonStyle/Hint: Выберите стиль кнопок панелей:
+Settings/ToolbarButtonStyle/Styles/Borderless: Без границ
+Settings/ToolbarButtonStyle/Styles/Boxed: Внутри квадрата
+Settings/ToolbarButtonStyle/Styles/Rounded: Внутри круга
+StoryView/Caption: Поведение открытых заметок
+StoryView/Prompt: Текущий вид:
+Theme/Caption: Тема
+Theme/Prompt: Текущая тема:
+TiddlerFields/Caption: Поля заметок
+TiddlerFields/Hint: Это полный набор полей заметок (включая системные заметки, но без встроенных).
+Toolbars/Caption: Панели инструментов
+Toolbars/EditToolbar/Caption: При редактировании
+Toolbars/EditToolbar/Hint: Выберите кнопки, отображаемые во время редактирования заметок
+Toolbars/Hint: Выберите отображаемые кнопки
+Toolbars/PageControls/Caption: Боковой панели
+Toolbars/PageControls/Hint: Выберите кнопки, отображаемые на боковой панели
+Toolbars/ViewToolbar/Caption: При просмотре
+Toolbars/ViewToolbar/Hint: Выберите кнопки, отображаемые во время просмотра заметок
+Tools/Download/Full/Caption: Скачать wiki целиком

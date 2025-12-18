@@ -1,0 +1,13 @@
+caption: Página única
+created: 20130822173900000
+es-title: Aplicación de página única
+modified: 20160429055921886
+tags: Definitions
+title: SinglePageApplication
+type: text/vnd.tiddlywiki
+
+Tal como lo define [[WIkipedia|https://es.wikipedia.org/wiki/Single-page_application]], una <<.def "aplicación de página única">> es una que cabe en una sola página con el propósito de dar una experiencia más fluida a los usuarios, que carga dinámicamente contenido adicional a medida que el usuario navega por el sitio.
+
+Es frecuente que las aplicaciones de página única se diseñen cuidadosamente para ocultar su naturaleza, de modo que su apariencia y funcionamiento sea la de una página estática común, respetando la barra de dirección y los controles de navegación adelante y atrás. 
+
+De manera inusual, TiddlyWiki es también una aplicación de [[archivo único|SingleFileApplication]].

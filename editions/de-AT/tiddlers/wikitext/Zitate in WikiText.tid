@@ -1,0 +1,71 @@
+caption: Zitate
+created: 20131206154636572
+creator: pmario
+modified: 20140921170704585
+modifier: pmario
+tags: WikiText
+title: Zitate in WikiText
+type: text/vnd.tiddlywiki
+
+Es gibt zwei Möglichkeiten um Zitate zu erstellen. Eine, die mehrere Zeilen Text einfasst und eine, für einzelne Zeilen.
+
+! Mehrzeilige Zitate
+
+!! Einfaches Zitat
+
+Die Syntax für Zitate, die mehrere Zeilen einfasst ist wie folgt:
+
+<<wikitext-example src:"<<<
+Das ist ein Absatz mit mehreren Zeilen im Quelltext.
+Das Ergebnis wird zusammenhängend dargestellt.
+<<<
+">>
+
+!! Zitat mit Autor
+
+Wenn Sie den Autor anführen möchten, dann schreiben Sie wie folgt:
+
+<<wikitext-example src:"<<<
+Computers are like a bicycle for our minds
+<<< Steve Jobs
+">>
+
+! Einzeilige Zitate
+
+Ein einzeiliger Zitat Block ist eine Erweiterung der Syntax für [[Listen in WikiText]]. Zum Beispiel:
+
+<<wikitext-example src:"> Einzeiliges Zitat 1
+> Einzeiliges Zitat 2
+">>
+
+Zitate können "verschachtelt" werden:
+
+```
+> Zitat 1
+>> Zitat 1.1
+> Zitat 2
+```
+
+Dargestellt als: 
+
+> Zitat 1
+>> Zitat 1.1
+> Zitat 2
+
+Sie können Zitate mit Listenelementen mischen. zB:
+
+<<wikitext-example src:"* Liste Eins
+** Liste Zwei
+**> Ein Zitat
+**> Ein weiteres Zitat
+* Liste Drei
+">>
+
+!! CSS Klassen
+
+[[CSS Klassen]], um eine Formatierung direkt zu ändern, können in ''Ausnahmefällen'' direkt angegeben werden. Diese Option ist nur für geübte Benutzer gedacht. 
+
+<<wikitext-example src:"<<<.myClass.another-class
+Operating systems are like a brick wall for our minds
+<<< Nobody
+">>

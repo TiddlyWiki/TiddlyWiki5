@@ -1,0 +1,5 @@
+title: $:/core/Filters/SystemTags
+tags: $:/tags/Filter
+filter: [all[shadows+tiddlers]tags[]is[system]sort[title]]
+description: {{$:/language/Filters/SystemTags}}
+

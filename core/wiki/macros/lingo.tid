@@ -1,0 +1,10 @@
+title: $:/core/macros/lingo
+tags: $:/tags/Macro
+
+\define lingo-base()
+$:/language/
+\end
+
+\define lingo(title)
+{{$(lingo-base)$$title$}}
+\end

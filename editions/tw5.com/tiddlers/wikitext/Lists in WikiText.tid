@@ -1,0 +1,92 @@
+caption: Lists
+created: 20131205160257619
+modified: 20160607093103220
+tags: WikiText Lists
+title: Lists in WikiText
+type: text/vnd.tiddlywiki
+
+! Bulleted Lists
+
+You can create bulleted (unordered) lists with `*` characters (<<.icon $:/core/images/list-bullet>>):
+
+<<wikitext-example src:"* First list item
+* Second list item
+** A subitem
+* Third list item
+">>
+
+! Numbered Lists
+
+Numbered (ordered) lists use `#` instead of `*` (<<.icon $:/core/images/list-number>>):
+
+# First item
+# Second item
+# Third item
+
+You can also mix ordered and unordered list items:
+
+<<wikitext-example src:"* To do today
+*# Eat
+* To get someone else to do
+*# This
+*# That
+*## And the other
+">>
+
+Here's an example the other way around, with numbers as the first level:
+
+<<wikitext-example src:"# To do today
+#* Eat
+# To get someone else to do
+#* This
+#* That
+#** And the other
+">>
+
+! CSS Classes
+
+You can also assign a CSS class to an individual member of a list with this notation:
+
+<<wikitext-example src:"* List One
+*.tc-muted List Two
+* List Three
+">>
+
+! Mixing Lists and Block Quotes
+
+Note that [[Block Quotes in WikiText]] can be mixed with lists. For example:
+
+<<wikitext-example src:"* List One
+** List Two
+**> A quote
+**> Another quote
+* List Three
+">>
+
+! Paragraphs in Lists
+
+Entries in the list are delimited with a linebreak, making it impossible to include linebreaks within a list entry. There are a couple of workarounds.
+
+First, you can transclude paragraph content from another tiddler. For example:
+
+```
+* First entry
+* <$transclude tiddler="MyTiddler" mode="block"/>
+* Third entry
+```
+
+Secondly, you can use an HTML "div" element to contain the multiline content. For example:
+
+```
+# Step 1
+# Step 2
+# Step 3<div>
+
+Here is the first of several paragraphs. Note that the double linebreak preceding this paragraph is significant.
+
+And here is the second of several paragraphs.
+</div>
+# Step 4
+# Step 5
+# Step 6
+```

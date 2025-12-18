@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Geavanceerd
+Advanced/PluginInfo/Empty/Hint: niets
+Advanced/PluginInfo/Heading: Plugin details
+Advanced/PluginInfo/Hint: Deze plugin bevat de volgende schaduwtiddlers:
+Advanced/ShadowInfo/Heading: Schaduwstatus
+Advanced/ShadowInfo/NotShadow/Hint: De tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> is geen schaduwtiddler
+Advanced/ShadowInfo/OverriddenShadow/Hint: Overschreven door een gewone tiddler
+Advanced/ShadowInfo/Shadow/Hint: De tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> is een schaduwtiddler
+Advanced/ShadowInfo/Shadow/Source: Gedefinieerd in de plugin <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Fields/Caption: Velden
+List/Caption: Lijst
+List/Empty: Deze tiddler heeft geen lijst
+Listed/Caption: Genoemd
+Listed/Empty: Deze tiddler wordt niet door andere tiddlers genoemd
+References/Caption: Referenties
+References/Empty: Er zijn geen tiddlers aan deze tiddler gelinkt
+Tagging/Caption: Gelabeld
+Tagging/Empty: Er zijn geen tiddlers gelabeld met deze tiddler
+Tools/Caption: Gereedschap

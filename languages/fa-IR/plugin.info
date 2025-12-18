@@ -1,0 +1,9 @@
+{
+	"title": "$:/languages/fa-IR",
+	"name": "fa-IR",
+	"plugin-type": "language",
+	"description": "فارسی (ایران)",
+	"author": "amirography",
+	"core-version": ">=5.0.0",
+	"text-direction": "rtl"
+}

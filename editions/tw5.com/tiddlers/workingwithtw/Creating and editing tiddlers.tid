@@ -1,0 +1,35 @@
+created: 20140904140300000
+modified: 20160607153747195
+tags: [[Working with TiddlyWiki]]
+title: Creating and editing tiddlers
+type: text/vnd.tiddlywiki
+
+! Creating tiddlers
+
+You create a tiddler either by clicking the <<.icon $:/core/images/new-button>> button in the sidebar, or by clicking on a link to a missing tiddler. Links to missing tiddlers are shown in [[blue italics]].
+
+See also:
+
+* [[Creating journal tiddlers]]
+
+! Editing tiddlers
+
+To edit an existing tiddler, click the <<.icon $:/core/images/edit-button>> button at the top right of the tiddler.
+
+!! Draft mode
+
+When you create a new tiddler or edit an existing one, the tiddler will go into draft mode. This presents a control panel for modifying the tiddler in various ways. It has several parts, from top to bottom:
+
+*''The title field'' - Use this to change the title of the tiddler
+*''The tag selector'' - Use this to add or remove tags. As you type a tag name in the box, a dropdown list will show you any existing tags that match. You can pick from this list or create a completely new tag. Then click the ''add'' button or hit the <kbd>Enter</kbd> key to add the tag to the tiddler. Each tag is shown as a coloured pill. Click the "×" on a pill to remove that tag
+*''The text area'' - Use this to edit the main content of the tiddler. Click the ''preview'' button (<<.icon $:/core/images/preview-closed>> / <<.icon $:/core/images/preview-open>>) to see what your changes will look like
+*''The type selector'' - Use this when a tiddler needs to be displayed in a special way, such as an image. See ContentType for a list of the options. The default is `text/vnd.tiddlywiki`, which means the tiddler contains WikiText
+*''The field selector'' - Use this to add or remove fields on the tiddler. For example, if you are editing a tiddler that's being used to tag other tiddlers, you can add a [[''list'' field|ListField]] to change the order in which those tiddlers will be listed
+
+! Save, cancel or delete
+
+When you have finished editing, click a button at the top right of the tiddler:
+
+*The ''ok'' button (<<.icon $:/core/images/done-button>>) stores your changes to this one tiddler and leaves draft mode. If your wiki is configured to [[AutoSave]], your changes will be permanently saved. Otherwise they will only be stored temporarily in your web browser, and you will lose them if you close your ~TiddlyWiki page without first clicking the master ''save changes'' button (<<.icon $:/core/images/save-button-dynamic>>) in the sidebar.
+*The ''cancel'' button (<<.icon $:/core/images/cancel-button>>) discards your changes (after asking you to confirm) and leaves draft mode.
+*The ''delete'' button (<<.icon $:/core/images/delete-button>>) deletes the entire tiddler (after asking you to confirm).

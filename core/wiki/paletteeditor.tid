@@ -1,0 +1,3 @@
+title: $:/snippets/paletteeditor
+
+<$transclude tiddler="$:/PaletteManager"/>

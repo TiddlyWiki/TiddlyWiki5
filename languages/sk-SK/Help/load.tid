@@ -1,0 +1,16 @@
+title: $:/language/Help/load
+description: Natiahni tiddlery zo súboru
+
+Natiahni tiddlery z TiddlyWiki súborov vo verzii 2.x.x (`.html`), `.tiddler`, `.tid`, `.json` alebo iných súborov 
+
+```
+--load <filepath>
+```
+
+Ak chcete natiahnuť tiddlery zo zašifrovaného TiddlyWiki súboru, musíte najskôr zadať heslo cez PasswordCommand. Napríklad:
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load moj_sifrovany_wiki.html
+```
+
+Všimnite si, že TiddlyWiki nenatiahne staršiu verziu už prítomného pluginu.

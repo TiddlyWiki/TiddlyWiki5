@@ -1,0 +1,27 @@
+title: $:/core/templates/static.content
+type: text/vnd.tiddlywiki
+
+\define tv-wikilink-template() https://tiddlywiki.com/languages/ko-KR/static/$uri_doubleencoded$.html
+
+<!-- For Google, and people without JavaScript-->
+
+<$reveal default="yes" text=<<savingEmpty>> type="nomatch">
+
+이 브라우저는 자바스크립트를 실행하지 않은 것으로 보입니다. 같은 내용을 찾아보려면 정적 HTML 버전 중 하나를 사용할 수 있습니다:
+
+* https://tiddlywiki.com/languages/ko-KR/static.html - 구분된 문서의 개별 티들러 찾아보기
+* https://tiddlywiki.com/languages/ko-KR/alltiddlers.html#HelloThere - 모든 티들러를 포함하는 하나의 파일
+
+---
+
+{{HelloThere}}
+
+{{TiddlyWiki}}
+
+{{Features}}
+
+{{Community}}
+
+{{HelpingTiddlyWiki}}
+
+</$reveal>

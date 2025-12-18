@@ -1,0 +1,109 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Fons de l'avís
+alert-border: Vora de l'avís
+alert-highlight: Destacat de l'avís
+alert-muted-foreground: Primer plà de l'avís silenciat
+background: Fons general
+blockquote-bar: Barra de bloc de cita
+button-background: Fons del botó predeterminat
+button-border: Vora del botó predeterminat
+button-foreground: Primer pla del botó predeterminat
+code-background: Fons del codi
+code-border: Vora del codi
+code-foreground: Primer plà del codi
+dirty-indicator: Indicador dels canvis sense desar
+download-background: Fons del botó de baixada
+download-foreground: Primer plà del botó de baixada
+dragger-background: Fons de l'arrossegador
+dragger-foreground: Primer plà de l'arrossegador
+dropdown-background: Fons de la llista desplegable
+dropdown-border: Vora de la llista desplegable
+dropdown-tab-background: Fons de la pestanya de la llista desplegable
+dropdown-tab-background-selected: Fons de la pestanya de la llista desplegable per les pestanyes seleccionades
+dropzone-background: Fons de la zona d'aterratge
+external-link-background: Fons de l'enllaç extern
+external-link-background-hover: Fons de la bafarada de l'enllaç extern
+external-link-background-visited: Fons de l'enllaç extern visitat
+external-link-foreground: Primer plà de l'enllaç extern
+external-link-foreground-hover: Primer plà de la bafarada de l'enllaç extern
+external-link-foreground-visited: Primer plà de l'enllaç extern visitat
+foreground: Primer plà general
+menubar-background: Fons de la barra de menús
+menubar-foreground: Primer plà de la barra de menús
+message-background: Fons de la capsa de text
+message-border: Vora de la capsa de text
+message-foreground: Primer plà de la capsa de text
+modal-backdrop: Zona d'aterratge dels diàlegs modals
+modal-background: Fons dels diàlegs modals
+modal-border: Vora dels diàlegs modals
+modal-footer-background: Fons del peu dels diàlegs modals
+modal-footer-border: Vora del peu dels diàlegs modals
+modal-header-border: Vora de la capçalera dels diàlegs modals
+muted-foreground: Primer plà silenciat general
+notification-background: Fons de la notificació
+notification-border: Vora de la notificació
+page-background: Fons de la pàgina
+pre-background: Fons del codi preformatat
+pre-border: Vora del codi preformatat
+primary: General primari
+select-tag-background: `<select>` el fons de l’element
+select-tag-foreground: `<select>`el  text de l'element
+sidebar-button-foreground: Primer plà del botó de la barra lateral
+sidebar-controls-foreground: Primer plà dels controls de la barra lateral
+sidebar-controls-foreground-hover: Primer plà de la bafarada dels controls de la barra lateral
+sidebar-foreground: Primer plà de la barra lateral
+sidebar-foreground-shadow: Ombra del primer plà de la barra lateral
+sidebar-muted-foreground: Primer plà de la barra lateral silenciada
+sidebar-muted-foreground-hover: Primer plà de la bafarada de la barra lateral silenciada
+sidebar-tab-background: Fons de la pestanya de la barra lateral
+sidebar-tab-background-selected: Fons de la pestanya de la barra lateral per les pestanyes seleccionades
+sidebar-tab-border: Vora de la pestanya de la barra lateral
+sidebar-tab-border-selected: Vora de la pestanya de la barra lateral per les pestanyes seleccionades
+sidebar-tab-divider: Divisor de la pestanya de la barra lateral
+sidebar-tab-foreground: Primer plà de la pestanya de la barra lateral
+sidebar-tab-foreground-selected: Primer plà de la pestanya de la barra lateral per les pestanyes seleccionades
+sidebar-tiddler-link-foreground: Primer plà de l'enllaç del tiddler de la barra lateral
+sidebar-tiddler-link-foreground-hover: Primer plà de la bafarada de l'enllaç del tiddler de la barra lateral
+site-title-foreground: Primer pla del títol del lloc
+static-alert-foreground: Primer plà de l'avís estàtic
+tab-background: Fons de la pestanya
+tab-background-selected: Fons de la pestanya per les pestanyes seleccionades
+tab-border: Vora de la pestanya
+tab-border-selected: Vora de la pestanya per les pestanyes seleccionades
+tab-divider: Divisor de la pestanya
+tab-foreground: Primer plà de la pestanya
+tab-foreground-selected: Primer plà de la pestanya per les pestanyes seleccionades
+table-border: Vora de la taula
+table-footer-background: Fons del peu de la taula
+table-header-background: Fons de la capçalera de la taula
+tag-background: Fons de l'etiqueta
+tag-foreground: Primer plà de l'etiqueta
+tiddler-background: Fons del tiddler
+tiddler-border: Vora del tiddler
+tiddler-controls-foreground: Primer plà dels controls del tiddler
+tiddler-controls-foreground-hover: Primer plà de la bafarada dels controls del tiddler
+tiddler-controls-foreground-selected: Primer plà dels controls del tiddler per als controls seleccionats
+tiddler-editor-background: Fons de l'editor de tiddlers
+tiddler-editor-border: Vora de l'editor de tiddlers
+tiddler-editor-border-image: Imatge de la vora de l'editor de tiddlers
+tiddler-editor-fields-even: Fons de l'editor de tiddlers per als camps parells
+tiddler-editor-fields-odd: Fons de l'editor de tiddlers per als camps senars
+tiddler-info-background: Fons del tiddler del tauler d'informació
+tiddler-info-border: Vora del tiddler del tauler d'informació
+tiddler-info-tab-background: Fons de la pestanya del tiddler del tauler d'informació
+tiddler-link-background: Fons de l'enllaç del tiddler
+tiddler-link-foreground: Primer plà de l'enllaç del tiddler
+tiddler-subtitle-foreground: Primer plà del subtitol del tiddler
+tiddler-title-foreground: Primer plà del titol del tiddler
+toolbar-cancel-button: Primer plà del botó 'anul·la' de la caixa d'eines
+toolbar-close-button: Primer plà del botó 'tanca' de la caixa d'eines
+toolbar-delete-button: Primer plà del botó 'suprimeix' de la caixa d'eines
+toolbar-done-button: Primer plà del botó 'fet' de la caixa d'eines
+toolbar-edit-button: Primer plà del botó 'edita' de la caixa d'eines
+toolbar-info-button: Primer plà del botó 'informació' de la caixa d'eines
+toolbar-new-button: Primer plà del botó 'nou tiddler' de la caixa d'eines
+toolbar-options-button: Primer plà del botó 'opcions' de la caixa d'eines
+toolbar-save-button: Primer plà del botó 'desa' de la caixa d'eines
+untagged-background: Fons de la píndola sense etiqueta
+very-muted-foreground: Primer plà de l'avís molt silenciat

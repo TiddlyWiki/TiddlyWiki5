@@ -1,0 +1,16 @@
+caption: Title Options
+tags: Options
+title: $:/options/Title Options
+
+\define thisResumeTitleInput()
+Select title to use:<br>
+<$radio tiddler='$:/settings/$(ThisResume)$/ResumeTitle' value='use name'>Use your name</$radio><br>
+<$list filter='[prefix[$:/data/ResumeTitle/]get[resume_title]]'>
+<$radio tiddler='$:/settings/$(ThisResume)$/ResumeTitle' value=<<currentTiddler>>><$view field='title'/></$radio><br>
+</$list>
+\end
+
+
+<$vars ThisResume={{$:/settings/Global!!selected_resume}} ThisTitle={{$:/temp/ResumeTitle!!resume_title}}>
+<<thisResumeTitleInput>>
+</$vars>

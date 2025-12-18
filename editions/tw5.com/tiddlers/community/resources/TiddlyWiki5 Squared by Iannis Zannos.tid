@@ -1,0 +1,20 @@
+created: 20141009170239174
+modified: 20210106151027345
+tags: [[Other Resources]]
+title: "TiddlyWiki5^2 documenting while learning TiddlyWiki5" by Iannis Zannos
+type: text/vnd.tiddlywiki
+url: https://web.archive.org/web/20170728212414/http://larigot.avarts.ionio.gr/users/iani/wikis/tw5square.html
+
+A wealth of hints, tips and notes about using [[TiddlyWiki on Node.js]]:
+
+<<<
+TiddlyWiki is different from other wikis because of its principle of dynamically customizeable "storyline" based on tiddlers as basic units of information. That is, the user "composes" their own version of the webpage by clicking on tiddler links, which add tiddlers to the page in order to compose a storyline.
+
+The Node.js implementation in TiddlyWiki5 adds all the advantages of flat-file markup language based type of site. This makes TiddlyWiki an excellent alternative to flat-file based CMS/webpage/blog authoring systems for the web.
+
+Also very cool is the treatment of tags as menus everywhere.
+<<<
+
+<a href={{!!url}}><$text text="http://larigot.avarts.ionio.gr/users/iani/wikis/tw5square.html"/></a>
+
+Also available on [[GitHub|https://github.com/iani/tw5square]] (download and save index.html and open it in your browser).

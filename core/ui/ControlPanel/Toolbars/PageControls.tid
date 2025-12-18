@@ -1,0 +1,19 @@
+title: $:/core/ui/ControlPanel/Toolbars/PageControls
+tags: $:/tags/ControlPanel/Toolbars
+caption: {{$:/language/ControlPanel/Toolbars/PageControls/Caption}}
+
+\define lingo-base() $:/language/TiddlerInfo/
+
+\define config-base() $:/config/PageControlButtons/Visibility/
+
+{{$:/language/ControlPanel/Toolbars/PageControls/Hint}}
+
+<$set name="tv-config-toolbar-icons" value="yes">
+
+<$set name="tv-config-toolbar-text" value="yes">
+
+<$macrocall $name="list-tagged-draggable" tag="$:/tags/PageControls" itemTemplate="$:/core/ui/ControlPanel/Toolbars/ItemTemplate"/>
+
+</$set>
+
+</$set>

@@ -1,0 +1,27 @@
+created: 20170209130829546
+modified: 20210203190724491
+tags: HookMechanism
+title: Hook: th-importing-tiddler
+type: text/vnd.tiddlywiki
+
+This hook allows plugins to inspect or modify tiddlers as they are imported via the import mechanism. It is invoked when the final "Import" button is clicked, and the selected tiddlers are being imported into the store.
+
+The hook is part of the `NavigatorWidget.prototype.handlePerformImportEvent` function.
+
+Use this hook if you want to process each imported tiddler after they have been extracted from the files.  See [[Hook: th-importing-file]] if you want to control how tiddlers are extracted from files during an import.
+
+Hook function parameters:
+
+* ''tiddler'': tiddler object about to be imported
+
+Return value:
+
+* tiddler object to be imported
+
+The original tiddler object can be returned unmodified by the hook. If the hook needs to modify the tiddler then it should return a new tiddler object, for example:
+
+```
+	return new $tw.Tiddler(tiddler,{"my-field": value});
+```
+
+Hooks must not change the ''title'' field but can freely modify any other field of the tiddler.

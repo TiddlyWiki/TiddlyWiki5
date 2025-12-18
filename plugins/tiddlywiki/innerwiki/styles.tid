@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/innerwiki/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.tc-innerwiki-wrapper {
+	border: 1px solid #666;
+	<<box-shadow "2px 2px 5px rgba(0, 0, 0, 0.5)">>
+}

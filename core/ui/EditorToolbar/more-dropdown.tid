@@ -1,0 +1,23 @@
+title: $:/core/ui/EditorToolbar/more-dropdown
+
+\define config-title()
+$:/config/EditorToolbarButtons/Visibility/$(toolbarItem)$
+\end
+
+\define conditional-button()
+\whitespace trim
+<$list filter={{$(toolbarItem)$!!condition}} variable="condition">
+<$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/>
+&#32;
+<$transclude tiddler=<<toolbarItem>> field="description"/>
+</$list>
+\end
+\whitespace trim
+
+<div class="tc-text-editor-toolbar-more">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]] -[[$:/core/ui/EditorToolbar/more]]">
+<$reveal type="match" state=<<config-visibility-title>> text="hide" tag="div">
+<<conditional-button>>
+</$reveal>
+</$list>
+</div>

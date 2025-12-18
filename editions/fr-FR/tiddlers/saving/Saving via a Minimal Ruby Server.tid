@@ -1,0 +1,20 @@
+caption: Serveur Ruby
+color: #78909C
+community-author: Jim Foltz
+created: 20180514011710789
+delivery: Server-side Script
+description: Un script maison utilisable comme serveur
+fr-title: Enregistrer avec un serveur Ruby minimal
+method: save
+modified: 20220402105820520
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows iOS Edge
+title: Saving via a Minimal Ruby Server
+type: text/vnd.tiddlywiki
+
+Un serveur Ruby minimal qui utilise Webrick. Il présente les fichiers du dossier courant et permet l'enregistrement.
+
+Lancez le script, puis naviguez vers l'adresse http://localhost:8000 pour voir le contenu du dossier choisi, et cliquez sur le fichier HTML de votre wiki.
+
+Le script est disponible ici<<:>>
+
+https://gist.github.com/jimfoltz/ee791c1bdd30ce137bc23cce826096da

@@ -1,0 +1,24 @@
+title: $:/core/ui/Buttons/new-journal-here
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/new-journal-button}} {{$:/language/Buttons/NewJournalHere/Caption}}
+description: {{$:/language/Buttons/NewJournalHere/Hint}}
+
+\whitespace trim
+\procedure journalButton()
+<$button tooltip={{$:/language/Buttons/NewJournalHere/Hint}} aria-label={{$:/language/Buttons/NewJournalHere/Caption}} class=<<tv-config-toolbar-class>>>
+<$wikify name="journalTitle" text="""<$transclude $variable="now" format=<<journalTitleTemplate>>/>""">
+<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=`[[$(currentTiddlerTag)$]] $(journalTags)$`/>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+{{$:/core/images/new-journal-button}}
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/NewJournalHere/Caption}}/>
+</span>
+<%endif%>
+</$wikify>
+</$button>
+\end
+<$let journalTitleTemplate={{$:/config/NewJournal/Title}} journalTags={{$:/config/NewJournal/Tags}} currentTiddlerTag=<<currentTiddler>>>
+<<journalButton>>
+</$let>

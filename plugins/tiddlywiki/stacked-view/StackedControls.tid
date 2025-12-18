@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/stacked-view/StackedControls
+caption: Stacked View
+tags: $:/tags/SideBar
+
+Set the [[fan separation|$:/config/StackedStoryViewFanHeight]]:
+
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="-10">-10</$button>
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="0">0</$button>
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="10">10</$button>
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="30">30</$button>
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="50">50</$button>
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="100">100</$button>
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="150">150</$button>
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="200">200</$button>
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="250">250</$button>
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="300">300</$button>
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="500">500</$button>
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="700">700</$button>
+* <$button set="$:/config/StackedStoryViewFanHeight" setTo="1500">1500</$button>

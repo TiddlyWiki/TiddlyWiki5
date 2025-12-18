@@ -1,0 +1,10 @@
+title: $:/core/ui/ControlPanel/Toolbars
+tags: $:/tags/ControlPanel/Appearance
+caption: {{$:/language/ControlPanel/Toolbars/Caption}}
+
+\whitespace trim
+{{$:/language/ControlPanel/Toolbars/Hint}}
+
+<div class="tc-control-panel">
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Toolbars]!has[draft.of]]" default="$:/core/ui/ControlPanel/Toolbars/ViewToolbar" class="tc-vertical" explicitState="$:/state/tabs/controlpanel/toolbars-1345989671"/>
+</div>

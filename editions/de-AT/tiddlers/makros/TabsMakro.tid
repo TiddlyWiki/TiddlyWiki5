@@ -1,0 +1,40 @@
+caption: tabs-Reiter
+created: 20131228162203521
+creator: ChrisK
+list: ReiterEins ReiterZwei ReiterDrei
+modified: 20140923234958679
+modifier: pmario
+tags: Makros
+title: TabsMakro
+type: text/vnd.tiddlywiki
+
+Das `<<tabs>>` Makro stellt eine Liste von Tiddlern als "Reiter" dar. Der Anwender kann zwischen den Reitern wechseln, indem er sie anklickt. 
+
+Als Reiter Text wird der Tiddler Titel verwendet. Außer es ist ein Feld mit dem Namen: `caption` im Tiddler enthalten, dann wird der `caption` Text angezeigt.
+
+Standardmäßig werden die Reiter horizontal angeordnet. Sie können diese Ausrichtung jedoch mit einem Parameter `tc-vertical` ändern.
+
+!! Parameter
+
+|Position |Name |Beschreibung |Standard |h
+|1 |tabsList |Filter mit der die Liste der Tiddler erstellt wird | |
+|2 |default |Name des Tiddlers, der den "Standard Reiter" festlegt | |
+|3 |state |Status Variable, um mehreren Reiter im selben Tiddler unterscheiden zu können. Es wird empfohlen, das System-TIddler prefix zu verwenden. |''$:/state/tab'' |
+|4 |class |Optionale [[CSS-Klasse|CSS Klassen]], die dem einhüllenden DIV zugewiesen wird. | |
+|5 |template |Optionale Vorlage, mit der der Reiter dargestellt werden soll. | |
+
+In der Vorlage ist der Titel des aktuellen Reiters in der Widget Variable `currentTab` enthalten.
+
+! Beispiele
+
+Hier sind einige Beispiele für das `<<tabs>>` Makro
+
+```
+<<tabs "ReiterEins ReiterZwei ReiterDrei" "ReiterZwei" "$:/state/tab1">>
+
+<<tabs "[tag[TabsMakro]]" "ReiterDrei" "$:/state/tab2" "tc-vertical">>
+```
+
+<<tabs "ReiterEins ReiterZwei ReiterDrei" "ReiterZwei" "$:/state/tab1">>
+
+<<tabs "[tag[TabsMakro]]" "ReiterDrei" "$:/state/tab2" "tc-vertical">>

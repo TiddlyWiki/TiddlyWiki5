@@ -1,0 +1,41 @@
+title: $:/themes/tiddlywiki/hidefurniture/base
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+html body .tc-tiddler-frame {
+	background-color: inherit;
+	border: none;
+	<<box-shadow "none">>
+}
+
+html body .tc-tiddler-title {
+	background-color: inherit;
+}
+
+html body .tc-story-river {
+	margin-top: 70px;
+}
+
+html body .tc-tiddler-frame .tc-tiddler-title {
+	font-size: 24px;
+	line-height: 28px;
+}
+
+html body .tc-tiddler-frame .tc-tags-wrapper { 
+	font-size: 18px;
+	line-height: 22px;
+}
+
+html body .tc-tiddler-frame .tc-tiddler-body {
+	font-size: 20px;
+	line-height: 32px;
+}
+
+html body .tc-titlebar {
+	position: relative;
+}
+
+html body .tc-edit-texteditor {
+	font-family: monospace;
+}

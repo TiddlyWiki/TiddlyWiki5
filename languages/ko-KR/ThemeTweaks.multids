@@ -1,0 +1,41 @@
+title: $:/language/ThemeTweaks/
+
+ThemeTweaks: 테마 개조
+ThemeTweaks/Hint: ''Vanilla'' 테마의 특정한 면들을 개조할 수 있습니다.
+Options: 옵션
+Options/SidebarLayout: 사이드바 레이아웃
+Options/SidebarLayout/Fixed-Fluid: 고정된 이야기, 흐르는 사이드바
+Options/SidebarLayout/Fluid-Fixed: 흐르는 이야기, 고정된 사이드바
+Options/StickyTitles: 제목 고정
+Options/StickyTitles/Hint: 티들러 제목을 브라우저 창의 위에 "고정"합니다. 주의: Chrome으로는 전혀 작동되지 않으며, Firefox에서 일부 레이아웃 문제를 일으킵니다
+Options/CodeWrapping: 코드 블럭에서 긴 줄을 줄바꿈
+Settings: 설정
+Settings/FontFamily: 글꼴 집합
+Settings/CodeFontFamily: 코드 글꼴 집합
+Settings/BackgroundImage: 페이지 배경 그림
+Settings/BackgroundImageAttachment: 페이지 배경 그림 첨부
+Settings/BackgroundImageAttachment/Scroll: 티들러로 스크롤
+Settings/BackgroundImageAttachment/Fixed: 창에 고정
+Settings/BackgroundImageSize: 페이지 배경 그림 크기
+Settings/BackgroundImageSize/Auto: 자동
+Settings/BackgroundImageSize/Cover: 덮개
+Settings/BackgroundImageSize/Contain: 포함
+Metrics: 크기
+Metrics/FontSize: 글자 크기
+Metrics/LineHeight: 줄 높이
+Metrics/BodyFontSize: 티들러 본문의 글자 크기
+Metrics/BodyLineHeight: 티들러 본문의 줄 높이
+Metrics/StoryLeft: 이야기 왼쪽 위치
+Metrics/StoryLeft/Hint: 이야기 강(티들러 영역)의 왼쪽 여백은<br>페이지의 왼쪽에서 얼마나 멉니까
+Metrics/StoryTop: 이야기 위 위치
+Metrics/StoryTop/Hint: 이야기 강의 위 여백은 페이지의 위에서<br>얼마나 멉니까
+Metrics/StoryRight: 이야기 오른쪽
+Metrics/StoryRight/Hint: 사이드바의 인쪽 여백은 페이지의<br>왼쪽에서 얼마나 멉니까
+Metrics/StoryWidth: 이야기 너비
+Metrics/StoryWidth/Hint: 이야기 강의 전반적인 너비
+Metrics/TiddlerWidth: 티들러 너비
+Metrics/TiddlerWidth/Hint: 이야기 강에서
+Metrics/SidebarBreakpoint: 사이드바 중단점
+Metrics/SidebarBreakpoint/Hint: 이야기 강과 사이드바가 나란이 나타나는<br>최소 페이지 너비
+Metrics/SidebarWidth: 사이드바 너비
+Metrics/SidebarWidth/Hint: 흐르는-고정된 레이아웃에서 사이드바의 너비

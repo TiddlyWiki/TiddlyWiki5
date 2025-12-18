@@ -1,0 +1,11 @@
+caption: NW.js
+created: 20150310165059118
+modified: 20150623074910223
+tags: Definitions
+title: NW.js
+type: text/vnd.tiddlywiki
+
+NW.js est une application OpenSource qui étend les fonctionnalités d'un navigateur web avec celles de [[Node.js]]. Il permet l'utilisation d'application web d'une façon similaire aux applications natives, avec tous les accès au système de fichier et autres commodités natives. Allez plus loin sur le [[site officiel|https://github.com/nwjs/nw.js]] ou avec [[ce blog d'introduction (eng)|this introductory blog post|http://net.tutsplus.com/tutorials/javascript-ajax/introduction-to-html5-desktop-apps-with-node-webkit/]].
+
+Voir [[TiddlyWiki sur NW.js|TiddlyWiki on NW.js]] pour plus de détails à ce sujet.
+

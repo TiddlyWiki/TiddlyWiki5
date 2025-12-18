@@ -1,0 +1,16 @@
+created: 20130829164700000
+modified: 20220427171321793
+tags: Concepts
+title: DataTiddlers
+type: text/vnd.tiddlywiki
+
+A data tiddler is a miniature database contained within a tiddler.
+
+There are two standard formats:
+
+* DictionaryTiddlers
+* [[JSONTiddlers]]
+
+Other formats of tiddler can also be parsed to yield blocks of data that behave like data tiddlers.
+
+See [[JSON in TiddlyWiki]] for an overview.

@@ -1,0 +1,12 @@
+title: $:/config/EditorTypeMappings/
+
+application/javascript: codemirror
+application/json: codemirror
+application/x-tiddler-dictionary: codemirror
+text/css: codemirror
+text/html: codemirror
+text/plain: codemirror
+text/vnd.tiddlywiki: codemirror
+text/x-markdown: codemirror
+text/markdown: codemirror
+text/x-tiddlywiki: codemirror

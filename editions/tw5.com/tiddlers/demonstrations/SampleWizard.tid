@@ -1,0 +1,13 @@
+created: 20140912145537860
+footer: <$button message="tm-close-tiddler">Close</$button>
+modified: 20211119205125230
+subtitle: I'm a modal wizard
+tags: Demonstrations
+title: SampleWizard
+type: text/vnd.tiddlywiki
+
+This is a modal wizard dialogue, stored in the tiddler SampleWizard.
+
+{{Motovun Jack.jpg}}
+
+You can <$button message="tm-modal" param="SampleWizard2">nest wizards</$button>.

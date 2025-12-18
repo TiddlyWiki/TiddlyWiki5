@@ -1,0 +1,15 @@
+title: Widgets/LetWidgetSelfReferences
+description: Test let widget self references
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$let default={{{ [[default]is[variable]then[aa]else[bb]] }}} >
+<<default>>
+</$let>
++
+title: ExpectedResult
+
+<p>bb</p>

@@ -1,0 +1,59 @@
+caption: {{!!title}} - ^^deprecated^^
+created: 20141001132300000
+modified: 20220704174221300
+tags: [[How to apply custom styles]] $:/deprecated
+title: How to apply custom styles by tag
+type: text/vnd.tiddlywiki
+
+<<.deprecated-since "5.1.16" "Custom styles by data-tags">>. Also see: [[How to apply custom styles]]
+
+----
+
+You can apply custom styles to tiddlers that have a particular tag by defining a CSS class with the name `tc-tagged-<Tag Name>`.
+
+For example, to make tiddlers tagged "NightReader" appear in a special colour scheme suitable for night-time reading, [[create a stylesheet|Using Stylesheets]] defining the class `tc-tagged-NightReader` like this:
+
+```
+.tc-tagged-NightReader {
+	background-color:black;
+	color: orange;
+	padding: 35px 35px;
+}
+
+.tc-tagged-NightReader .tc-tiddler-body {
+	font-size: 1.5em;
+}
+```
+
+The `tc-tagged-NightReader` class is applied to the entire tiddler and not just the tiddler text. If you want to target a smaller portion of the tiddler you can qualify the CSS selector, as is done here with `.tc-tagged-NightReader .tc-tiddler-body`.
+
+Note that tags containing spaces or non-alphanumeric characters will be converted using URI encoding, making the generated CSS classname hard to predict. For example:
+
+|!Tag |!Generated Class Name |
+|`$:/mytag` |`tc-tagged-%24%3A%2Fmytag` |
+|`Doctor Who` |`tc-tagged-Doctor%20Who` |
+|`£35.23` |`tc-tagged-%C2%A335.23` |
+
+Although ~TiddlyWiki will generate these tags, to actually use them in your css, you will need to escape the percent character in your stylesheet, like:
+
+```
+.tc-tagged-Doctor\%20Who {
+    background-image: url(./tardis_back.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    color:#FBFBFB;
+}
+```
+
+A utility function is available in JavaScript to perform the conversion:
+
+```
+$tw.utils.tagToCssSelector("$:/tags/Stylesheet")
+```
+
+Generates the following output:
+
+```
+tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet
+```
+

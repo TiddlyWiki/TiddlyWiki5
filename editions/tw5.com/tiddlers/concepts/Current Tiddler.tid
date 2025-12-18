@@ -1,0 +1,18 @@
+created: 20130825144900000
+modified: 20150221215022000
+tags: Concepts
+title: Current Tiddler
+type: text/vnd.tiddlywiki
+
+The <<.def "current tiddler">> provides the context in which several aspects of WikiText are interpreted.
+
+For example, `{{!!title}}` denotes the value of the <<.field title>> field of whatever the current tiddler happens to be. This technique can be used to create general-purpose [[template tiddlers|TemplateTiddlers]].
+
+The title of the current tiddler can always be found in the <<.vlink currentTiddler>> variable.
+
+The two most common ways in which the current tiddler is changed are:
+
+* the <<.wlink TiddlerWidget>> widget
+* the <<.wlink ListWidget>> widget (when its <<.attr variable>> attribute is not overridden)
+
+The current tiddler is therefore often <<.em not>> the same as the [[tiddler that is being viewed or edited|storyTiddler Variable]].

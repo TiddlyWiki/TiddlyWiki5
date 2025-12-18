@@ -1,0 +1,13 @@
+created: 20130825103300000
+modified: 20140912150136251
+tags: Learning
+title: Adopt a Titles Policy
+type: text/vnd.tiddlywiki
+
+As the structures within your TiddlyWiki documents get more complex it can be hard to keep the titles of tiddlers consistent. For example, should terms be defined in the plural or the singular? Camel case or separate words?
+
+Recording a formal titling policy can help to reduce confusion. For example, the titling policies for this wiki are recorded in the [[Documentation Style Guide]].
+
+! SystemTiddler Titles
+
+A useful convention is to use the prefix `$:/_` for any system tiddlers that you create to ensure that they are near the top of the system tiddler listing in the sidebar

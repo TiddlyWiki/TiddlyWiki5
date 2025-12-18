@@ -1,0 +1,24 @@
+title: $:/language/Help/import
+description: 從檔案導入條目
+
+從 TiddlyWiki 檔案 (`.html`)、`.tiddler`、`.tid`、`.json` 或其他本機檔案導入條目。必須明確指定解串器，而不像 `load` 命令，從檔案的副檔名推斷解串器。
+
+```
+--import <filepath> <deserializer> [<title>] [<encoding>]
+```
+
+核心的解串器包括：
+
+* application/javascript
+* application/json
+* application/x-tiddler
+* application/x-tiddler-html-div
+* application/x-tiddlers
+* text/html
+* text/plain
+
+導入的條目名稱，預設為檔名。
+
+編碼預設為 "utf8"，但用於導入二進位檔案可以是 "base64"。
+
+請注意，TiddlyWiki 不會導入舊版本的已載入插件。

@@ -1,0 +1,34 @@
+caption: Expresiones
+created: 20150124182421000
+es-title: Expresión de filtros
+modified: 20160420174819458
+tags: [[Filter Syntax]]
+title: Filter Expression
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+[{:
+  [:[[espacio|"Filter Whitespace"]] ]
+  ("+"|:-|"-")
+  [[instruccion|"Filter Run"]]
+}]
+"""/>
+
+Una <<.def "expresión de filtro">> corresponde al nivel más externo de la [[sintaxis de filtros|Filter Syntax]]. Consta de una o más [[instrucciones|Filter Run]].
+
+El input de una instrucción es, generalmente, la lista de todos los títulos de tiddlers no-[[ocultos|ShadowTiddlers]] del wiki, sin ningún orden en particular. 
+
+Un prefijo, sin embargo, puede cambiar las cosas:
+
+* Si una instrucción no lleva los prefijos `+` o `-`, su output [[se añade dominantemente|Dominant Append]] al output del filtro.
+
+*Si una instrucción lleva el prefijo `-`, su output <<.em "se elimina">> del output del filtro, si estuviera presente.
+
+* Si una instrucción lleva el prefijo `+`, recibe como input el output del filtro y lo <<.em "lo reemplaza">> por el output de dicha instrucción. Toda instrucción posterior vuelve a recibir como input todos los títulos del wiki, salvo que también lleve el prefijo `+`.
+
+Dicho en lenguaje técnico, claros y conciso:
+
+|!Instrucción |!Interpretación |!Output |
+|`runA runB` |suma de conjuntos |cumple A <<.def O>> B|
+|`runA +runB` |intersección de conjuntos |cumple A <<.def Y>> B|
+|`runA -runB` |diferencia de conjuntos |cumple A <<.def "Y NO">> B|

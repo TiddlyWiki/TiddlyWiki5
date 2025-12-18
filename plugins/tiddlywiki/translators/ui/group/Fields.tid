@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Docs/Fields
+caption: Fields
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[shadows+tiddlers]prefix[$:/language/Docs/Fields/]sort[title]]
+\end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/Docs/Fields/]]
+\end
+
+! Fields
+
+Descriptions of commonly used fields.
+
+<<translatableStringEditor>>

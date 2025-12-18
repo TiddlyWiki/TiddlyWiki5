@@ -1,0 +1,27 @@
+created: 20140103134551508
+creator: pmario
+modified: 20140922125926756
+modifier: ChrisK
+tags: howto
+title: Speichern mit TiddlyFox - Android
+type: text/vnd.tiddlywiki
+
+Alternativ zu dieser Beschreibung gibt es ein kurzes [[englisches Video |TiddlyWiki mit Firefox für Android Video]])
+
+# Stellen Sie sicher, dass Sie eine aktuelle Version von [[Firefox für Android|http://getfirefox.com]] haben.
+# Installieren Sie die aktuelle Version der TiddlyFox Erweiterung von:
+#* https://addons.mozilla.org/en-US/firefox/addon/tiddlyfox/
+# Installieren Sie eine zweite Erweiterung, die es erlaubt, Links lokal zu speichern:
+#* https://addons.mozilla.org/en-US/android/addon/save-link-menus/
+# Laden Sie eine leere TiddlyWiki Datei, indem Sie den folgenden Link "tippen und halten" bis ein Dialog erscheint
+#* Tippen sie: "Link Speichern.."
+#* https://tiddlywiki.com/empty.html
+#> Um den Link zu speichern, benötigen Sie obige "save-link-menus" Erweiterung!
+# Wenn die Datei gespeichert wurde, dann klicken Sie sie in der Meldungsübersicht oder mit dem "Download Manager"
+# Wählen Sie öffnen mit FireFox anstatt mit dem Standard Android Programm.
+# Clicken Sie "OK", wenn Sie gefragt werden, ob TiddlyFox das Speichern erlaubt werden soll.
+# Erstellen Sie einen neuen Tiddler mit dem {{$:/core/images/new-button}} ''plus'' im rechten Menü. 
+# Geben Sie den Text ein und bestätigen die Eingabe mit dem {{$:/core/images/done-button}} ''OK''.
+# Speichern Sie die Änderungen mit: {{$:/core/images/save-button}} ''speichern'' im rechten Menü
+#* Rechts oben sollte eine gelbe Meldung: "Wiki gespeichert!" angezeigt werden.
+# Laden Sie die Seite neu und überprüfen sie, ob die Daten richtig gespeichert wurden.

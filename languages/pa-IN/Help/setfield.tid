@@ -1,0 +1,4 @@
+title: $:/language/Help/setfield
+description: ਵਰਤਣ ਲਈ ਬਾਹਰੀ tiddlers ਨੂੰ ਤਿਆਰ
+
+// ਇਸ ਹੁਕਮ ਨੂੰ ਤਜਰਬੇ ਹੈ ਅਤੇ ਬਦਲ ਸਕਦੀ ਹੈ ਜ ਫਾਈਨਲ ਹੋਣ ਦੇ ਅੱਗੇ ਤਬਦੀਲ ਕੀਤਾ ਜਾ // tiddler.``` ਕਰਨ `currentTiddler` ਵੇਰੀਏਬਲ ਸੈੱਟ ਨਾਲ ਟੈਪਲੇਟ tiddler wikifying ਦੇ ਨਤੀਜੇ ਨੂੰ tiddlers ਦੇ ਇਕ ਗਰੁੱਪ ਦੀ ਨਿਰਧਾਰਿਤ ਹੈ, ਖੇਤਰ ਸੈੱਟ ਕਰਦਾ ਹੈ, ਜੋ ਕਿ ਯਾਦ ਰੱਖੋ --setfield <ਫਿਲਟਰ> <fieldname> <templatetitle> <rendertype> `` `ਪੈਰਾਮੀਟਰ ਹਨ: * '' ਫਿਲਟਰ '' - tiddlers ਪ੍ਰਭਾਵਿਤ ਕਰਨ ਦੀ ਪਛਾਣ ਫਿਲਟਰ * '' fieldname '' - ਤੱਕ (ਮੂਲ ਦੇ, ਸੋਧਣ ਦਾ ਖੇਤਰ "ਪਾਠ") * '' templatetitle '' - ਖਾਸ ਖੇਤਰ ਵਿੱਚ wikify ਨੂੰ tiddler. ਖਾਲੀ ਜ ਲਾਪਤਾ, ਜੇ ਫਿਰ ਨਿਰਧਾਰਿਤ ਹੈ, ਖੇਤਰ ਨੂੰ ਹਟਾਇਆ ਗਿਆ ਹੈ, * '' ਦੀ ਕਿਸਮ '' - ਪਾਠ ਟਾਈਪ ਪੇਸ਼ ਕਰਨ ਲਈ (ਮੂਲ ਕਰਨ ਲਈ "text / plain ';" ਪਾਠ / html' HTML ਟੈਗ ਨੂੰ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ)

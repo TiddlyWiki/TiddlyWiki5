@@ -1,0 +1,24 @@
+created: 201308251618
+modified: 201308262048
+tags: dev
+title: TiddlyWiki5 Development Environment
+
+//This information is for people who are working on the development of TiddlyWiki5 itself, and isn't relevant for end users//
+
+! Setting up npm
+
+[[Installing TiddlyWiki5|https://tiddlywiki.com/#Installing%20TiddlyWiki%20on%20Node.js]] with NPM downloads a snapshot release of TiddlyWiki5. To use a development copy of the TiddlyWiki5 repository instead of the copy installed by [[NPM]], use this command within the root of the TiddlyWiki5 repo:
+
+```bash
+npm link
+```
+
+! Bumping version numbers
+
+As releases are made during development it is necessary to adjust the version number of the TiddlyWiki5 core. This is done with the [[npm version|https://npmjs.org/doc/version.html]] command. For example:
+
+```bash
+npm version 5.0.0-alpha.10
+```
+
+As described in #10 in [[this article by npm's author|http://blog.izs.me/post/1675072029/10-cool-things-you-probably-didnt-realize-npm-could-do]], when run from within a git repo this command will also commit the change and tag it

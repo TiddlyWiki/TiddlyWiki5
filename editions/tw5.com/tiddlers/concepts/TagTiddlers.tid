@@ -1,0 +1,11 @@
+created: 20141228094500000
+modified: 20211127135914596
+tags: Tagging
+title: TagTiddlers
+type: text/vnd.tiddlywiki
+
+A tag tiddler is any tiddler that is in use as a tag.
+
+The ''Tagging'' tab on the InfoPanel of a tag tiddler shows which tiddlers are tagged with the tag tiddler.
+
+A tag can be used without a corresponding tag tiddler.

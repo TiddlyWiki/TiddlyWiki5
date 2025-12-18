@@ -1,0 +1,14 @@
+caption: Modal
+created: 20140912145537860
+es-title: MuestraModal
+footer: <$button message="tm-close-tiddler">Close</$button>
+modified: 20160415151609720
+subtitle: Este es un tiddler modal creado especialmente para <<yourName>>
+title: SampleModal
+type: text/vnd.tiddlywiki
+
+! ¡Hola, <<yourName>>!
+
+Este es un ejemplo de modal que contiene el siguiente mensaje:
+
+<<yourMessage>>

@@ -1,0 +1,19 @@
+{
+	"description": "Demo of the experimental TiddlyWiki Classic parser plugin",
+	"plugins": [
+		"tiddlywiki/tw2parser"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"includeWikis": [
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","classicparserdemo.html","text/plain"],
+		"external": [
+			"--render","$:/core/save/all-external-js","classicparserdemo.html","text/plain"
+		]
+	}
+}

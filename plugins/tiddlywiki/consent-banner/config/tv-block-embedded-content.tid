@@ -1,0 +1,4 @@
+title: $:/plugins/tiddlywiki/consent-banner/tv-block-embedded-content
+tags: $:/tags/Macro
+
+<$set name="tv-block-embedded-content" value={{{ [{$:/config/cookie-consent-required}else[no]match[yes]then{$:/state/consent-banner/accepted}!match[yes]then[yes]] }}}/>

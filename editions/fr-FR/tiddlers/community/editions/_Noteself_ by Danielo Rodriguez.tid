@@ -1,0 +1,34 @@
+caption: Noteself
+color: #29B6F6
+community-author: Danielo Rodríguez
+created: 20141122093837330
+delivery: Web Service
+description: Service en ligne gratuit que vous pouvez aussi héberger vous-même
+fr-title: "Noteself" par Danielo Rodríguez
+method: sync
+modified: 20220402105820520
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge [[Community Editions]] [[Other Resources]]
+title: "Noteself" by Danielo Rodríguez
+type: text/vnd.tiddlywiki
+url: https://noteself.github.io/
+
+~NoteSelf est votre version personnelle, privée, et personnalisable de l'expérience utilisateur d'Evernote. 
+Vous voulez du cloud<<?>> Bien<<!>> Vous n'en voulez pas<<?>> C'est bien aussi<<!>> C'est à vous, c'est votre choix<<!>>
+Pourquoi ne seriez-vous pas un peu égoïste<<?>>
+
+https://noteself.github.io/
+
+<<<
+~NoteSelf est le support parfait pour vos idées, vos notes, vos pensées, vos astuces, vos recettes... tout ce que vous voulez<<!>> 
+~NoteSelf les stockera, les indexera et les rendra faciles à rechercher, pour que vous les trouviez instantanément quand vous en avez besoin<<!>>
+
+Vous connaissez déjà Evernote et vous l'adorez, nous le savons bien. Il est confortable, il se synchronise, il permet la recherche...
+Ouah<<!>> Il est presque parfait, mais que pensez-vous de<<:>>
+
+* La vie privée<<:>> tout est stocké sur les serveurs d'Evernote<<!>>
+* La personnalisation<<:>> si vous n'aimez pas l'interface d'Evernote, il n'y a rien à faire.
+
+~NoteSelf est construit sur la base de <<tw>>, un logiciel libre de wiki personnel puissant, gratuit et hautement personnalisable.
+Nous en avons tiré le meilleur, son système puissant de personnalisation, et l'avons combiné avec une des meilleures
+bases de données embarquées disponibles, [[PouchDb|http://www.pouchdb.com]], pour y apporter les capacités de synchronisation dont vous avez besoin.
+<<<

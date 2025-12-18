@@ -1,0 +1,8 @@
+title: $:/core/ja-JP/readme
+
+このプラグインには、下記の TiddlyWiki のコアコンポーネントが含まれています:
+
+* JavaScript モジュール
+* アイコン
+* TiddlyWiki の表示に必要なテンプレート
+* コアに使用される各言語の文字列の英語（"en-GB"）表現

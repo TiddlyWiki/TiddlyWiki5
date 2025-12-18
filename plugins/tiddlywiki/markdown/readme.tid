@@ -1,0 +1,119 @@
+title: $:/plugins/tiddlywiki/markdown/readme
+
+This plugin provides Markdown support via the [[markdown-it|https://github.com/markdown-it/markdown-it]] parser and its associated plugins:
+
+* markdown-it-deflist
+* markdown-it-footnote
+* markdown-it-ins
+* markdown-it-mark
+* markdown-it-sub
+* markdown-it-sup
+
+!! Compatibility Notes
+
+* <p>A tab character in Markdown has a size of four spaces. Configure the tab size of your code editor accordingly. For example, if you use <$text text="CodeMirror"/>, it is recommended that you set $:/config/codemirror/indentUnit and $:/config/codemirror/tabSize to `4` to avoid inconsistent indentations.</p>
+* <p>HTML blocks are ultimately parsed by the <$text text=WikiText/> parser: //an opening tag followed by a blank line will activate block-level parsing for its content//. When working with tags designed to contain literal content, such as `<pre>` and `<style>` tags, refrain from adding blank lines after the opening tags.</p>
+* <p>You must terminate a table with either a blank line or another block-level structure.</p>
+* <p>`latex-parser` in $:/config/markdown/renderWikiTextPragma is no longer required and will be ignored.</p>
+* <p>Config option `linkNewWindow` is removed.</p>
+
+!! Extending the Parser
+
+You can extend the parser by loading additional markdown-it plugins this way:
+
+```js
+var plugin1 = require(...);
+var plugin2 = require(...);
+
+var md = $tw.Wiki.parsers["text/markdown"].prototype.md;
+
+md.use(plugin1)
+  .use(plugin2, opts, ...);
+```
+
+! Plugin Configuration
+
+<h2 style="margin-top:1.5em">~WikiText Pragma</h2>
+
+The value of [[renderWikiTextPragma|$:/config/markdown/renderWikiTextPragma]] has been carefully tuned to properly integrate markdown with ~TiddlyWiki. Changing this setting may produce unexpected results, but the inclusion of the following parser rules should be fine:
+
+; image
+: embed images using ~TiddlyWiki's image syntax:
+
+<p style="margin-left:1em">
+
+```
+[img[An explanatory tooltip|TiddlerTitle]]
+
+[img width=23 class="tc-image" [https://tiddlywiki.com/fractalveg.jpg]]
+```
+</p>
+
+; prettylink
+: create links the ~TiddlyWiki way:
+
+<p style="margin-left:1em">
+
+```
+[[TiddlerTitle]]
+
+[[Displayed Link Title|Tiddler Title]]
+
+[[TW5|https://tiddlywiki.com/]]
+```
+</p>
+
+; prettyextlink
+: create external links using the following syntax:
+
+<p style="margin-left:1em">
+
+```
+[ext[Open file|index.html]]
+
+[ext[Open file|../README.md]]
+```
+</p>
+
+; wikilink
+: auto-link ~CamelCase titles
+
+; syslink
+: auto-link system tiddlers
+
+<h2 style="margin-top:1.5em">Typographical Replacements</h2>
+
+When [[typographer|$:/config/markdown/typographer]] is enabled, markdown-it will provide these typographical replacements:
+
+```
+(c) (C)   → ©
+(tm) (TM) → ™
+(r) (R)   → ®
++-        → ±
+...       → …
+?....     → ?..
+!....     → !..
+?????     → ???
+!!!!!     → !!!
+,,        → ,
+--        → &ndash;
+---       → &mdash;
+```
+
+! Making Markdown the Default in TiddlyWiki
+
+!! Modifying Existing Actions
+
+Adding `type="text/markdown"` to the actions of the following buttons will
+override the default behavior.
+
+* New Journal - $:/core/ui/Actions/new-journal
+* New Tiddler Here - $:/core/ui/Buttons/new-here
+* New Tiddler - $:/core/ui/Actions/new-tiddler
+
+!! Using Markdown for Missing Links
+
+By default, missing tiddlers are created with a blank content type, which
+implies WikiText. Setting [[$:/config/DefaultMissingType]] to `text/markdown`
+will make it so that tiddlers created from a missing tiddler link will be in
+Markdown rather than in WikiText.

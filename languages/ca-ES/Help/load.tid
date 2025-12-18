@@ -1,0 +1,16 @@
+title: $:/language/Help/load
+description: Carrega tiddlers des d'un fitxer
+
+Carrega els fitxers dels tiddlers de la versió 2.x.x del TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` o altres fitxers 
+
+```
+--load <ruta>
+```
+
+Per carregar els tiddlers d'un fitxer TiddlyWiki encriptat cal indicar la contrasenya, amb l'ordre PasswordCommand. Per exemple:
+
+```
+tiddlywiki ./ElMeuWiki --password c0ntras3nya --load la_meva_wiki.html
+```
+
+Tingueu en compte que TiddlyWiki no carregarà una versió anterior d'un connector ja carregat.

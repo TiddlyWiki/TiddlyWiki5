@@ -1,0 +1,14 @@
+created: 20150126141718000
+modified: 20150203191420000
+tags: [[Filter Operators]] [[Special Operators]] [[Selection Constructors]]
+title: storyviews Operator
+type: text/vnd.tiddlywiki
+caption: storyviews
+op-purpose: select the names of all the story views
+op-input: ignored
+op-parameter: none
+op-output: the name of each story view
+
+The names are those exported by [[modules|Modules]] whose <<.field module-type>> is <<.value storyview>>.
+
+<<.operator-examples "storyviews">>

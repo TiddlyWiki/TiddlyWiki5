@@ -1,0 +1,11 @@
+created: 20150118134611000
+modified: 20150119182151000
+tags: [[last Operator]] [[Operator Examples]]
+title: last Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]last[]]">>
+<<.operator-example 2 "[list[Days of the Week]last[5]]">>
+<<.operator-example 3 "[tag[Concepts]!sort[title]last[3]]">>

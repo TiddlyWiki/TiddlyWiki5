@@ -1,0 +1,18 @@
+title: GettingStarted
+
+\define lingo-base() $:/language/ControlPanel/Basics/
+Vítejte v ~TiddlyWiki a v ~TiddlyWiki komunitě
+
+Než začnete používat ~TiddlyWiki pro záznam důležitých informací, je potřeba se přesvědčit, zda lze informace v pořádku uložit na disk
+Zjistěte více na https://tiddlywiki.com/#GettingStarted
+
+!! Nastavte si tutos ~TiddlyWiki
+
+<div class="tc-control-panel">
+
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
+
+V sekci [[control panel|$:/ControlPanel]] najdete další nastavení

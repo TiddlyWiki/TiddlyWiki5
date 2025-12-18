@@ -1,0 +1,15 @@
+created: 20140512103123179
+modified: 20150203191918000
+tags: [[Filter Operators]] [[Order Operators]]
+caption: before
+title: before Operator
+type: text/vnd.tiddlywiki
+op-purpose: find which input title precedes a specified one
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: one of those titles
+op-parameter-name: T
+op-output: the title that immediately precedes <<.place T>> in the input
+
+If <<.place T>> is not present in the input, or is the first title there, then the output is empty.
+
+<<.operator-examples "before">>

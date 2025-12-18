@@ -1,0 +1,40 @@
+chapter.of: UI and Rendering Pipeline
+created: 20140717174120958
+modified: 20140717202324456
+sub.num: 2
+tags: doc
+title: Parser
+
+The first stage of WikiText processing is the parser.
+A Parser is provided by a module with ``module-type: parser`` and is responsible to transform block of text to a parse-tree.
+The parse-tree consists of nested nodes like
+
+```js
+{type: "element", tag: <string>, attributes: {}, children: []} - an HTML element
+{type: "text", text: <string>} - a text node
+{type: "entity", entity: <string>} - an HTML entity like &copy; for a copyright symbol
+{type: "raw", html: <string>} - raw HTML
+```
+
+The core plug-in provides a recursive descent WikiText parser which loads it's individual rules from individual modules.
+Thus a developer can provide additional rules by using ``module-type: wikirule``. Each rule can produce a list of parse-tree nodes.
+A simple example for a wikirule producing a ``<hr>`` from ``---`` can be found in [[horizrule.js|$:/core/modules/parsers/wikiparser/rules/horizrule.js]]
+
+HTML tags can be embedded into WikiText because of the [[html rule|$:/core/modules/parsers/wikiparser/rules/html.js]].
+This rule matches HTML tag syntax and creates ``type: "element"`` nodes.
+But the html-rule has another special purpose. By parsing the HTML tag syntax it implicitly parses WikiText widgets.
+It the recognises them by the $ character at the beginning of the tag name and instead of producing "element" nodes 
+it uses the tag name for the type:
+
+```js
+{type: "list", tag: "$list", attributes: {}, children: []} - a list element
+```
+
+The [[Widgets]] part will reveal why this makes sense and how each node is transformed into a widget.
+Another special characteristic of the html-rule or the parse nodes in general is the attributes property.
+Attributes in the parse-tree are not stored as simple strings but they are nodes of its own to make indirect text references available as attributes as described in [[Widgets]]:
+
+```js
+{type: "string", value: <string>} - literal string
+{type: "indirect", textReference: <textReference>} - indirect through a text reference
+```

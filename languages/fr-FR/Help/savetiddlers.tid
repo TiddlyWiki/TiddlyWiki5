@@ -1,0 +1,16 @@
+title: $:/language/Help/savetiddlers
+description: Enregistre un groupe de tiddlers vers un répertoire
+
+(À noter : la commande `--savetiddlers` est dépréciée. Il est préférable d'utiliser la nouvelle commande `--save`, plus souple)
+
+Enregistre un groupe de tiddlers vers le chemin spécifié, sous leur forme brute, texte ou binaire. 
+
+```
+--savetiddlers <filtre> <chemin-de-répertoire> ["noclean"]
+```
+
+Par défaut, le répertoire de sortie est calculé relativement au sous-répertoire `output` du répertoire de l'édition. La commande `--output` peut servir à diriger la sortie vers un répertoire différent.
+
+Les fichiers présents dans le répertoire de sortie sont supprimés avant que soient enregistrés les fichiers des tiddlers spécifiés par le filtre. Pour empêcher cette suppression, ajouter le drapeau ''noclean''.
+
+Les éventuels répertoires manquants dans le chemin spécifié sont créés automatiquement.

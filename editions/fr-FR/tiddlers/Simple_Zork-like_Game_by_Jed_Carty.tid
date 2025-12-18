@@ -1,0 +1,17 @@
+created: 20141118143636664
+fr-title: Une "histoire dont vous êtes le héros" par Jed Carty
+modified: 20150614041634588
+tags: Examples
+title: Simple Zork-like Game by Jed Carty
+type: text/vnd.tiddlywiki
+url: http://zorklike.tiddlyspot.com
+
+Un jeu simple développé avec TiddlyWiki et présenté dans [[cet article (eng)|https://groups.google.com/d/topic/tiddlywiki/4aRpZht1vOs/discussion]].
+
+{{!!url}}
+
+<<<
+J'ai voulu évaluer la possibilité de créer un certain type de jeu en utilisant seulement le noyau de tiddlywiki sans plugins ou code javascript. J'ai réalisé un jeu de fiction interactif de type zork réduit à l'essentiel. C'est le jeu le plus simple que je puisse faire à ce jour, mais je pourrai faire quelques ajouts à l'avenir. il utiliser la préversion 5.1.5 car le widget action-setfield  épargne un gros travail d'élaboration de macros.
+
+Le but était de n'utiliser que les fonctions du noyau de tiddlywiki, aussi il n'y a ni plugins, ni javascript.
+<<<

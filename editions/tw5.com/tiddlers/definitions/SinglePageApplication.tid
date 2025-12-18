@@ -1,0 +1,8 @@
+created: 201308221739
+modified: 201308231751
+tags: Definitions
+title: SinglePageApplication
+
+As defined by Wikipedia, a SinglePageApplication is a web application that presents itself as a single HTML document that dynamically loads additional content as the user browses the site. Frequently, single page applications are carefully designed to hide their nature, appearing and functioning as an ordinary static website by respecting the address bar and the back/forward navigation controls.
+
+Unusually, TiddlyWiki is also a SingleFileApplication.

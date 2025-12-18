@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/upgrade/readme
+
+This plugin contains the user interface components used to build the special [[upgrade edition|https://tiddlywiki.com/upgrade.html]].
+
+[[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/upgrade]]

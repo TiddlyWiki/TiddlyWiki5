@@ -1,0 +1,8 @@
+title: $:/language/Help/version
+description: 显示 TiddlyWiki 的版本编号
+
+显示 TiddlyWiki 的版本编号。
+
+```
+--version
+```

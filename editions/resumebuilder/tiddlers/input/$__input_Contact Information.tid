@@ -1,0 +1,18 @@
+caption: Contact Information
+created: 20150720164912365
+modified: 20150720164948543
+tags: Section
+title: $:/input/Contact Information
+
+This is contact information to be included in your résumé.<br><br>
+
+Name: <$edit-text tiddler='$:/data/Personal Information' field='name' placeholder='Your Name' class='tc-edit-texteditor'/>
+
+Street Address: <$edit-text tiddler='$:/data/Personal Information' field='street_address' placeholder='Street Address' class='tc-edit-texteditor'/>
+City: <$edit-text tiddler='$:/data/Personal Information' field='city' placeholder='City' class='tc-edit-texteditor'/>
+State/Provence: <$edit-text tiddler='$:/data/Personal Information' field='state' placeholder='State/Provence' class='tc-edit-texteditor'/>
+Zip Code: <$edit-text tiddler='$:/data/Personal Information' field='zip_code' placeholder='Zip Code' class='tc-edit-texteditor'/>
+Country: <$edit-text tiddler='$:/data/Personal Information' field='country' placeholder='Country' class='tc-edit-texteditor'/>
+
+Phone Number: <$edit-text tiddler='$:/data/Personal Information' field='phone_number' placeholder='Phone Number' class='tc-edit-texteditor'/>
+Email Address: <$edit-text tiddler='$:/data/Personal Information' field='email_address' placeholder='Email Address' class='tc-edit-texteditor'/>

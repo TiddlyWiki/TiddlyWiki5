@@ -1,0 +1,18 @@
+title: $:/language/Help/rendertiddlers
+description: Interpretar tiddlers respeitantes de um filtro para o ContentType especificado
+
+Interpreta um conjunto de tiddlers respeitante de um determinado filtro para ficheiros separados de um determinado ContentType (por defeito `text/html`) e extensão (por defeito `.html`).
+
+```
+--rendertiddlers <filtro> <modelo> <caminho> [<tipo>] [<extensão>]
+```
+
+Por exemplo:
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```
+
+Por defeito, o caminho é resolvido relativamente à sub-pasta `output` da directoria de edição. O comando `--output` pode ser utilizado para redireccionar para uma directoria de destino diferente.
+
+Quaisquer ficheiros na directoria de destino serão apagados. Quaisquer pastas em falta nos caminhos de destino serão automaticamente criadas se em falta.

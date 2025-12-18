@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: アップグレード処理に必要なライブラリプラグインを生成
+
+アップグレードに使用する`$:/UpgradeLibrary` Tiddler を作成します。
+
+アップグレード用のライブラリの書式は、library というタイプの一般的なプラグインTiddler です。ライブラリには、TiddlyWiki5 リポジトリに含まれている各プラグイン、テーマ、および言語パックが含まれています。
+
+このコマンドは、内部的に使用することを想定したものです。アップグレードをカスタムの方法で実行するユーザーだけに関連するものです。
+
+```
+--makelibrary <title>
+```
+
+引数titleの規定値は、 `$:/UpgradeLibrary` です。

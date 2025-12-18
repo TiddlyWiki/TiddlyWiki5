@@ -1,0 +1,19 @@
+title: $:/core/ui/ControlPanel/Toolbars/EditToolbar
+tags: $:/tags/ControlPanel/Toolbars
+caption: {{$:/language/ControlPanel/Toolbars/EditToolbar/Caption}}
+
+\define lingo-base() $:/language/TiddlerInfo/
+
+\define config-base() $:/config/EditToolbarButtons/Visibility/
+
+{{$:/language/ControlPanel/Toolbars/EditToolbar/Hint}}
+
+<$set name="tv-config-toolbar-icons" value="yes">
+
+<$set name="tv-config-toolbar-text" value="yes">
+
+<$macrocall $name="list-tagged-draggable" tag="$:/tags/EditToolbar" itemTemplate="$:/core/ui/ControlPanel/Toolbars/ItemTemplate"/>
+
+</$set>
+
+</$set>

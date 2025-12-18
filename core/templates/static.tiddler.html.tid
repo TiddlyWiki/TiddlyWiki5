@@ -1,0 +1,31 @@
+title: $:/core/templates/static.tiddler.html
+
+\define tv-wikilink-template() $uri_doubleencoded$.html
+\define tv-config-static() yes
+\define tv-config-toolbar-icons() no
+\define tv-config-toolbar-text() no
+\define tv-config-toolbar-class() tc-btn-invisible
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+`<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="generator" content="TiddlyWiki" />
+<meta name="tiddlywiki-version" content="`{{$:/core/templates/version}}`" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="format-detection" content="telephone=no">
+<link id="faviconLink" rel="shortcut icon" href="favicon.ico">
+<link rel="stylesheet" href="static.css">
+<title>`<$view field="caption"><$view field="title"/></$view>: {{$:/core/wiki/title}}`</title>
+</head>
+<body class="tc-body">
+`{{$:/StaticBanner||$:/core/templates/html-tiddler}}`
+<section class="tc-story-river tc-static-story-river">
+`<$view tiddler="$:/core/ui/ViewTemplate" format="htmlwikified"/>`
+</section>
+</body>
+</html>
+`

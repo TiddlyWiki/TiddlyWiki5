@@ -1,0 +1,8 @@
+created: 20171216104946277
+modified: 20171216105109641
+tags: [[copy-to-clipboard Macro]] [[Macro Examples]]
+title: copy-to-clipboard Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg="""<<copy-to-clipboard "Mary had a little lamb">>"""/>
+<$macrocall $name=".example" n="2" eg="""<$macrocall $name="copy-to-clipboard" src={{$:/SiteTitle}}/>"""/>

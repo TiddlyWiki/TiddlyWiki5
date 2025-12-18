@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/translators/templates/modal-tid
+
+\procedure generateTid(title)
+title: <<title>>
+type: <$text text={{!!type}}/>
+subtitle: <$text text={{!!subtitle}}/>
+footer: <$text text={{!!footer}}/>
+help: <$text text={{!!help}}/>
+
+<$text text={{!!text}}/>
+\end
+<$transclude $variable="generateTid" title=<<currentTiddler>>/>

@@ -1,0 +1,2 @@
+title: $:/tags/SideBarSegment
+list: [[$:/core/ui/SideBarSegments/site-title]] [[$:/core/ui/SideBarSegments/site-subtitle]] [[$:/core/ui/SideBarSegments/page-controls]] [[$:/core/ui/SideBarSegments/search]] [[$:/core/ui/SideBarSegments/tabs]]

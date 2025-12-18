@@ -1,0 +1,83 @@
+title: $:/language/Buttons/
+
++ExportPage/Hint: Экспортировать все заметки
++ExportTiddler/Caption: экспортировать заметку
++ExportTiddler/Hint: Экспортировать заметку
++ExportTiddlers/Caption: экспортировать заметки
++ExportTiddlers/Hint: Экспортировать заметки
+AdvancedSearch/Caption: расширенный поиск
+AdvancedSearch/Hint: Расширенный поиск
+Cancel/Caption: отмена
+Cancel/Hint: Отменить редактирование заметки
+Clone/Caption: клонировать
+Clone/Hint: Создать копию заметки
+Close/Caption: закрыть
+Close/Hint: Закрыть заметку
+CloseAll/Caption: закрыть все
+CloseAll/Hint: Закрыть все заметки
+CloseOthers/Caption: закрыть остальные
+CloseOthers/Hint: Закрыть остальные заметки
+ControlPanel/Caption: панель управления
+ControlPanel/Hint: Открыть панель управления
+Delete/Caption: удалить
+Delete/Hint: Удалить заметку
+Edit/Caption: редактировать
+Edit/Hint: Редактировать заметку
+Encryption/Caption: шифрование
+Encryption/ClearPassword/Caption: сбросить пароль
+Encryption/ClearPassword/Hint: Сбросить пароль и сохранить без использования шифрования
+Encryption/Hint: Установить или сбросить пароль
+Encryption/SetPassword/Caption: установить пароль
+Encryption/SetPassword/Hint: Установить пароль и включить шифрование
+ExportPage/Caption: экспортировать всё
+ExportPage/Hint: Экспортировать все тиддлеры
+ExportTiddler/Caption: экспорт тиддлера
+ExportTiddler/Hint: Экспорт тиддлера
+ExportTiddlers/Caption: экспорт тиддлеров
+ExportTiddlers/Hint: Экспорт тиддлеров
+FullScreen/Caption: полный экран
+FullScreen/Hint: Включить или выключить полноэкранный режим
+Help/Caption: помощь
+Help/Hint: Показать панель помощи
+HideSideBar/Caption: скрыть боковую панель
+HideSideBar/Hint: Скрыть боковую панель
+Home/Caption: главная
+Home/Hint: Открыть заметки по умолчанию
+Import/Caption: импортировать
+Import/Hint: Импорт файлов
+Info/Caption: информация
+Info/Hint: Показать информацию об этой заметке
+Language/Caption: язык
+Language/Hint: Выбрать язык пользовательского интерфейса
+More/Caption: ещё
+More/Hint: Другие действия
+NewHere/Caption: новая заметка здесь
+NewHere/Hint: Создать новую заметку, помеченную этой заметкой
+NewJournal/Caption: дневник
+NewJournal/Hint: Создать новую заметку в дневник
+NewJournalHere/Caption: дневник здесь
+NewJournalHere/Hint: Создать новую заметку в дневник, помеченную этой заметкой
+NewTiddler/Caption: новая заметка
+NewTiddler/Hint: Создать новую заметку
+OpenWindow/Caption: открыть в новом окне
+OpenWindow/Hint: Открыть тиддлер в новом окне
+Palette/Caption: цветовая схема
+Palette/Hint: Выбрать цветовую схему
+Permalink/Caption: прямая ссылка
+Permalink/Hint: Показать прямую ссылку на заметку в адресной строке браузера
+Permaview/Caption: прямая ссылка
+Permaview/Hint: Показать прямую ссылку на открытые заметки в адресной строке браузера
+Refresh/Caption: oбновить
+Refresh/Hint: Выполнить обновление страницы
+Save/Caption: сохранить
+Save/Hint: Сохранить заметку
+SaveWiki/Caption: сохранить изменения
+SaveWiki/Hint: Сохранить изменения
+ShowSideBar/Caption: показать боковую панель
+ShowSideBar/Hint: Показать боковую панель
+StoryView/Caption: отображение заметок
+StoryView/Hint: Выбрать способ отображения заметок
+TagManager/Caption: управление метками
+TagManager/Hint: Открыть панель управления метками
+Theme/Caption: тема
+Theme/Hint: Выбрать тему

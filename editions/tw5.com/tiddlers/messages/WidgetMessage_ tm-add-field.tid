@@ -1,0 +1,13 @@
+created: 20140908185153663
+modified: 20140908185153663
+tags: Messages
+title: WidgetMessage: tm-add-field
+type: text/vnd.tiddlywiki
+caption: tm-add-field
+
+The `tm-add-field` message is handled by the FieldManglerWidget. It adds the specified field with a blank value if the field doesn't already exist.
+
+|!Name |!Description |
+|param |Name of field to add |
+
+The add field message is usually generated with the ButtonWidget, and is handled by the FieldManglerWidget.

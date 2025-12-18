@@ -1,0 +1,14 @@
+title: $:/core/macros/dumpvariables
+tags: $:/tags/Macro
+
+\define dumpvariables()
+\whitespace trim
+<ul>
+<$list filter="[variables[]]" variable="varname">
+<li>
+<strong><code><$text text=<<varname>>/></code></strong>:<br/>
+<$codeblock code={{{ [<varname>getvariable[]] }}}/>
+</li>
+</$list>
+</ul>
+\end

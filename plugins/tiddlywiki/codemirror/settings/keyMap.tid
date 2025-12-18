@@ -1,0 +1,15 @@
+title: $:/core/ui/ControlPanel/Settings/codemirror/keyMap
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: {{$:/language/codemirror/keyMap/hint}}
+
+\define lingo-base() $:/language/codemirror/keyMap
+
+<$link to="$:/config/codemirror/keyMap"><<lingo hint>></$link>
+
+<$select tiddler="$:/config/codemirror/keyMap" default="default">
+<option value="default">default</option>
+<$list filter="[all[shadows+tiddlers]module-type[codemirror-keymap]!has[draft.of]get[text]]">
+<option value=<<currentTiddler>>><$transclude><$text text=<<currentTiddler>>/></$transclude></option>
+</$list>
+</$select>
+

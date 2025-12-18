@@ -1,0 +1,9 @@
+created: 20150124134009000
+modified: 20150124134203000
+tags: [[tags Operator]] [[Operator Examples]]
+title: tags Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[Filter Operators]tags[]]">>
+<<.operator-example 2 "[all[shadows]tags[]]">>
+<<.operator-example 3 "[all[shadows+tiddlers]tags[]sort[]]">>

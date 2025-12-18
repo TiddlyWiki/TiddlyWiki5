@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/translators/templates/GettingStarted.tid
+
+{{GettingStarted||$:/plugins/tiddlywiki/translators/templates/tid}}

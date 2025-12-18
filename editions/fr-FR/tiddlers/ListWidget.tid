@@ -1,0 +1,97 @@
+caption: list
+created: 20131024141900000
+fr-title: Widget list
+modified: 20150620080305968
+tags: Widgets
+title: ListWidget
+type: b
+
+Le widget ~ListWidget affiche la suite de tiddlers qui correspondent au [[tiddler filtre|Filters]]. Il répond à de nombreux cas d'utilisation<<:>>
+
+* Affichage de listes personnalisées de liens, comme le menu latéral de TiddlyWiki5
+* Listes personnalisées, comme "tous les tiddlers étiquetés 'task' et non-étiquetés 'fait'"
+* Lister chacun des tags appliqués au tiddler
+* Manipuler le déroulé principal
+
+Les tiddlers sont affichés en transcluant chacun tour à tour via un gabarit. Il existe plusieurs façons de spécifier le gabarit et de contrôler le comportement de la liste.
+
+! Exemples
+
+''Liste brute''
+
+```
+<$list filter="[tag[ListWidget]sort[title]]"/>
+```
+
+Affichera <<:>>
+
+<<<
+<$list filter="[tag[ListWidget]sort[title]]"/>
+
+<<<
+
+''Sorties personnalisées''
+
+```
+<$list filter="[tag[ListWidget]sort[title]]">
+<<currentTiddler>>
+{{||$:/core/ui/ViewTemplate/tags}}
+</$list>
+```
+
+Affichera <<:>>
+
+<<<
+<$list filter="[tag[ListWidget]sort[title]]">
+<<currentTiddler>>
+{{||$:/core/ui/ViewTemplate/tags}}
+</$list>
+<<<
+
+''Gabarit personnalisé''
+
+```
+<$list filter="[tag[ListWidget]sort[title]]" template="$:/core/ui/ViewTemplate/subtitle"/>
+```
+
+Affichera <<:>>
+
+<<<
+<$list filter="[tag[ListWidget]sort[title]]" template="$:/core/ui/ViewTemplate/subtitle"/>
+
+<<<
+
+!! Listes Groupées
+
+Se reporter à [[Listes imbriquées|GroupedLists]] pour voir comment générer des listes groupées et imbriquées en utilisant le [[widget list|ListWidget]].
+
+! Contenu et Attributs
+
+Le contenu du widget `<$list>` est un gabarit optionnel à utiliser pour l'affichage de chaque tiddler de la liste. Autrement, le gabarit peut être spécifié comme titre du tiddler dans le ``gabarit`` attribut. En l'absence de directive, le gabarit par défaut affiche juste le titre du tiddler.
+
+|!Attribut |!Description |
+|filter |Le [[filtre du tiddler|Filters]] à afficher |
+|template |Le titre du tiddler gabarit pour transclure chaque tiddler de la liste. Si aucun gabarit n'est spécifié, Le corps du widget list sert de gabarit. En l'absence de corps, un simple lien vers le tiddler est renvoyé. |
+|editTemplate |Un gabarit différent pour la modification des [[Ébauches de Tiddlers|DraftMechanism]] en mode édition |
+|variable |Le nom d'une [[variable|Variables]] dans laquelle le titre de chaque tiddler listé est mémorisé. Par défaut ''currentTiddler'' |
+|emptyMessage |Message à afficher quand la liste est vide |
+|storyview |Nom optionnel du module responsable de l'animation/traitement de la liste |
+|history |Le titre du tiddler contenant l'historique de navigation |
+
+!! Mode édition
+
+Le widget `<$list>` peut afficher de façon optionnelle les tiddlers ébauche via un gabarit différent lors de l'édition, voir [[Mécanisme d'Ébauche|DraftMechanism]].
+
+!! attribut `storyview`
+
+L'attribut optionnel `storyview` indique le nom du module qui anime les changements dans la liste (incluant la navigation). Le noyau intègre les animations (storyview) suivantes<<:>>
+
+* `classic`<<:>> affiche la liste comme une séquence ordonnée de tiddlers
+* `zoomin`<<:>> affiche juste le tiddler courant dans la liste, avec une animation zoom à la navigation entre les tiddlers
+* `pop`<<:>> rétrécit les éléments sur place
+
+Afin que les storyviews s'animent correctement, chaque entrée de la liste doit être un élément du DOM en mode bloc unique.
+
+!! Historique et navigation
+
+L'attribut optionnel `history` indique le nom du tiddler utilisé pour tracer le tiddler en cours pour les besoins de la navigation. Quand le tiddler history change, l'affichage de la liste répond en demandant à listview de diriger la navigation jusqu'au nouveau tiddler. Voir [[Mécanisme Historique|HistoryMechanism]] pour les détails.

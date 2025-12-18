@@ -1,0 +1,28 @@
+caption: tm-full-screen
+created: 20140811112400855
+modified: 20180814215126941
+tags: Messages
+title: WidgetMessage: tm-full-screen
+type: text/vnd.tiddlywiki
+
+The fullscreen message is used to enter, exit or toggle the "fullscreen" mode of the browser, if it supports it. It uses the following properties on the `event` object:
+
+|!Name |!Description |
+|param |`enter` to enter full screen mode, `exit` to exit it, otherwise toggle the full screen status |
+
+The fullscreen message is handled by the TiddlyWiki core.
+
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button message="tm-full-screen">
+Full screen toggle
+</$button>
+
+<$button message="tm-full-screen" param="enter">
+Full screen enter
+</$button>
+
+<$button message="tm-full-screen" param="exit">
+Full screen exit
+</$button>'/>
+

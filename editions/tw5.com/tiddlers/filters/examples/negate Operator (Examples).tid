@@ -1,0 +1,8 @@
+created: 20190611174040931
+modified: 20190611174121059
+tags: [[negate Operator]] [[Operator Examples]]
+title: negate Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[-2000]negate[]]">>
+<<.operator-example 2 "=1 =2 =3 =4 =5 +[negate[]]">>

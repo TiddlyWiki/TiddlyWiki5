@@ -1,0 +1,80 @@
+title: $:/language/
+
+Date/DaySuffix/1: r
+Date/DaySuffix/10: 
+Date/DaySuffix/11: 
+Date/DaySuffix/12: 
+Date/DaySuffix/13: 
+Date/DaySuffix/14: 
+Date/DaySuffix/15: 
+Date/DaySuffix/16: 
+Date/DaySuffix/17: 
+Date/DaySuffix/18: 
+Date/DaySuffix/19: 
+Date/DaySuffix/2: 
+Date/DaySuffix/20: 
+Date/DaySuffix/21: 
+Date/DaySuffix/22: 
+Date/DaySuffix/23: 
+Date/DaySuffix/24: 
+Date/DaySuffix/25: 
+Date/DaySuffix/26: 
+Date/DaySuffix/27: 
+Date/DaySuffix/28: 
+Date/DaySuffix/29: 
+Date/DaySuffix/3: 
+Date/DaySuffix/30: 
+Date/DaySuffix/31: 
+Date/DaySuffix/4: 
+Date/DaySuffix/5: 
+Date/DaySuffix/6: 
+Date/DaySuffix/7: 
+Date/DaySuffix/8: 
+Date/DaySuffix/9: 
+Date/Long/Day/0: Diumenge
+Date/Long/Day/1: Dilluns
+Date/Long/Day/2: Dimarts
+Date/Long/Day/3: Dimarts
+Date/Long/Day/4: Dijous
+Date/Long/Day/5: Divendres
+Date/Long/Day/6: Dissabte
+Date/Long/Month/1: de gener
+Date/Long/Month/10: d'octubre
+Date/Long/Month/11: de novembre
+Date/Long/Month/12: de desembre
+Date/Long/Month/2: de febrer
+Date/Long/Month/3: de març
+Date/Long/Month/4: d'abril de
+Date/Long/Month/5: de maig
+Date/Long/Month/6: de juny
+Date/Long/Month/7: de juliol
+Date/Long/Month/8: d'agost
+Date/Long/Month/9: de septembre
+Date/Short/Day/0: Diu
+Date/Short/Day/1: Dil
+Date/Short/Day/2: Dim
+Date/Short/Day/3: Dic
+Date/Short/Day/4: Dij
+Date/Short/Day/5: Div
+Date/Short/Day/6: Dis
+Date/Short/Month/1: Gen
+Date/Short/Month/12: Des
+Date/Short/Month/4: Abr
+Date/Short/Month/5: Mai
+Date/Short/Month/8: Ago
+Date/Period/am: del matí
+Date/Period/pm: de la tarda
+RelativeDate/Future/Days: <<period>> dies des d'ara
+RelativeDate/Future/Hours: <<period>> hores des d'ara
+RelativeDate/Future/Minutes: <<period>> minuts des d'ara
+RelativeDate/Future/Months: <<period>> mesos des d'ara
+RelativeDate/Future/Second: 1 segon des d'ara
+RelativeDate/Future/Seconds: <<period>> segons des d'ara
+RelativeDate/Future/Years: <<period>> anys des d'ara
+RelativeDate/Past/Days: fa <<period>> dies
+RelativeDate/Past/Hours: fa <<period>> hores
+RelativeDate/Past/Minutes: fa <<period>> minuts
+RelativeDate/Past/Months: fa <<period>> mesos
+RelativeDate/Past/Second: fa 1 segon
+RelativeDate/Past/Seconds: fa <<period>> segons
+RelativeDate/Past/Years: fa <<period>> anys

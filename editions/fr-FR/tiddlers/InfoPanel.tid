@@ -1,0 +1,18 @@
+caption: Panneau d'information
+created: 20150530180848897
+fr-title: Panneau d'information
+modified: 20150622110305004
+tags: Concepts Features
+title: InfoPanel
+type: text/vnd.tiddlywiki
+
+Chaque tiddler a un panneau d'informations additionnelles. Pour l'afficher, cliquez dans la barre d'outils du tiddler, sur l'icone{{$:/core/images/down-arrow}}, puis sur {{$:/core/images/info-button}} ''info'' dans la liste déroulante.
+
+Le panneau d'information comporte les onglets suivants&nbsp;:
+
+* ''Outils'' - propose des boutons pour diverses actions à effectuer sur un tiddler. Cocher la case en regard de chaque bouton l'ajoutera dans la barre d'outils du tiddler - Ceci affectera tous les tiddlers de votre wiki.
+* ''Références'', ''Étiqueté'', ''Liste'' et ''Listé'' - Listent différents types de tiddlers connexes. Voir [[Utiliser des liens pour naviguer entre les tiddlers|Using links to navigate between tiddlers]]
+* ''Champs'' - récapitule tous les [[champs|TiddlerFields]] du tiddler, hormis le champ ''text''
+* ''Avancé'' - indique si le tiddler est [[shadow|ShadowTiddlers]]. S'il l'est, mentionne aussi quel plugin le génère et s'il a été remplacé par un tiddler ordinaire.
+
+Pour fermer le panneau d'information, cliquez n'importe où ailleurs.

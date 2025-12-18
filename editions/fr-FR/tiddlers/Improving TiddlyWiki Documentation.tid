@@ -1,0 +1,33 @@
+created: 20140820151051019
+fr-title: Améliorer la documentation de TiddlyWiki
+modified: 20150623063157355
+tags: Community
+title: Improving TiddlyWiki Documentation
+type: text/vnd.tiddlywiki
+
+(''NB''<<dp>> si vous souhaitez travailler sur la traduction française, reportez-vous plutôt aux [[infos traducteurs|Informations pour les traducteurs]].)
+
+N'importe qui peut proposer des améliorations à la documentation ~TiddlyWiki présente sur https://tiddlywiki.com<<dp>>
+
+# Lisez et suivez le [[Manuel de style pour la documentation TiddlyWiki|Documentation Style Guide]]
+# Si vous n'en n'avez pas déjà un, créez un compte sur https://github.com
+# Sur https://tiddlywiki.com, cliquez sur le bouton "edit" du tiddler que vous souhaitez améliorer
+# Vous devriez voir un bandeau rose avec le texte suivant<<dp>>  //Pouvez-vous nous aider à améliorer cette documentation ? Voyez comment éditer ce tiddler sur ~GitHub//.
+# Cliquez sur le lien externe ...''ce tiddler sur ~GitHub''
+## Une alerte va s'afficher comme quoi <<gf "you need to fork this repository to propose changes">> (<<gf "vous devez cloner ce répertoire avant de pouvoir proposer des modifications">>). Un //fork// est votre propre exemplaire du répertoire, qui intègrera les modifications que vous proposez
+# Un nouvel onglet devrait s'ouvrir sur votre navigateur, pour permettre d'éditer le tiddler sur github.com. La dernière vidéo montre le contenu attendu dans cette zone.
+# Sous la boîte d'édition du texte du tiddler, vous devriez voir une boîte indiquant ''Propose file change''
+# Entrez un titre bref expliquant la modification (par ex., "Clarifier l'instabilité de la syntaxe des attributs")
+# Si nécessaire, entrez également une description plus détaillée
+# Cliquez sur le bouton vert intitulé ''Propose file change''
+# Sur l'écran suivant, cliquez sur le bouton vert intitulé ''Create pull request''
+
+[[Jermolene|https://github.com/Jermolene]] ou l'un des autres développeurs principaux sera alors en mesure de fusionner votre //pull request// de façon à l'intégrer à la prochaine version de https://tiddlywiki.com.
+
+Mario Pietsch a créé pour vous ces tutoriels vidéos<<dp>>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/L4zTkMYcri8" frameborder="0" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6ElUruH92tc" frameborder="0" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/axFCk9KsMFc" frameborder="0" allowfullscreen></iframe>

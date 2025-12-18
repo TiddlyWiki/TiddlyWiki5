@@ -1,0 +1,58 @@
+title: Instructions for Translators
+
+! Overview
+
+The tiddler [[$:/Translators]] provides a dashboard for creating, editing and reviewing translatable strings. It has the following parts:
+
+* A summary of progress
+* A copy of the page controls to make it easier to work with the sidebar hidden
+* Editor tabs, splitting the translatable strings into groups. Within each tab:
+** A title, description and tiddler count for the group
+** Radio buttons to select between showing single line and multi-line editors. Some longer strings are easier to edit with the multi-line editors
+** A table of each translatable tiddler in the group, each showing:
+*** The link and title of the translatable tiddler. In most cases the title is abbreviated; click the link to open the tiddler directly to see the full title
+*** An editor for the translatable text
+*** A dropdown with:
+**** The original en-GB text
+**** A button to revert by deleting the translatable tiddler
+
+Most translatable tiddlers consist of a single field. The "Types" and "Help" groups have multiple fields that must be translated. The heading of the editor table gives the names of the fields.
+
+! Step by Step
+
+# Make sure you know how to save changes with ~TiddlyWiki, as described on https://tiddlywiki.com/
+# Visit https://tiddlywiki.com/editions/translators/index.html
+# Click the ''Save changes'' button below to save a copy of the translators edition to your local hard drive. Name the copy `MyTranslation.html`
+#* You may want to save the file into your Dropbox folder (or equivalent) to benefit from automatic backups
+# Open the `MyTranslation.html` in your browser
+# Translate a single string to make sure things are working:
+## Select the ''Sidebar'' tab in [[$:/Translators]]
+## Type new text for the item ''Open/Caption'' (the text shown as the caption of the "Open" tab in the sidebar)
+## Open the sidebar to check that the translation appears correctly
+## Save changes
+# Repeat for the other translatable strings
+# While working on your translation, remember to save changes and take backups regularly
+
+! Submitting your Translation
+
+When your translation reaches the point that it's useful to be shared with others you can submit it for inclusion in the TiddlyWiki core.
+
+The easiest way to submit your translation is to publish the HTML file on Dropbox (as described on https://tiddlywiki.com/) and then post a link to the TiddlyWiki discussion group.
+
+Alternatively, you can email the translation directly to Jeremy Ruston or Mario Pietsch.
+
+! Translation Advice
+
+Prioritise the groups to translate first. A translation can be useful without being 100% complete; just covering the main groups will cover most of the text seen by ordinary users:
+
+* Buttons
+* Control Panel
+* Date
+* Edit Template
+* Getting Started
+* Import
+* Miscellaneous
+* Search
+* Sidebar
+* Tiddler Info
+

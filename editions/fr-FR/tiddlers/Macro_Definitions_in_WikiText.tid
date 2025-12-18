@@ -1,0 +1,46 @@
+caption: Définitions de macros
+created: 20150220181617000
+fr-title: Définitions de macros en WikiText
+modified: 20150624094918963
+title: Macro Definitions in WikiText
+type: text/vnd.tiddlywiki
+
+Une [[macro|Macros]] est définie par l'utilisation du [[pragma|Pragma]] `\define`. Comme tout pragma, il peut seulement prendre place au début d'un tiddler.
+
+La première ligne de la définition indique le nom de la macro suivi de ses paramètres. Chaque paramètre a un nom, et de façon optionnelle une valeur par défaut utilisée si aucune valeur n'est passée lors de l'appel de la macro. Les lignes qui suivent contiennent le texte de la macro (càd l'extrait de code représenté par le nom de la macro), jusqu'à l'apparition du `\end`<<:>>
+
+<$codeblock code={{$:/editions/tw5.com/macro-examples/say-hi}}/>
+
+Vous pouvez éviter l'utilisation du marqueur final `\end`, en rédigeant toute la définition sur une seule ligne<<:>>
+
+```
+\define sayhi(name:"Bugs Bunny") Salut, Je suis $name$.
+```
+
+Une [[présentation|Macro Definition Syntax]] plus formelle de cette syntaxe est aussi disponible.
+
+!! [[ZoneRéservée|PlaceHolder]]
+
+Les extraits de code peuvent utiliser des [[Zones Réservées|PlaceHolder]] en paramètres. Il suffira de placer le nom du paramètre entre les signes dollar, comme `$ceci$`.
+
+Il est aussi possible d'utiliser des [[Zones Réservées|PlaceHolder]] comme [[variables|Variables]]. Il suffira de placer le nom de la variable (ou du nom de la macro)  entre les signes dollar entourés de parenthèses, comme `$(ceci)$`.
+
+À la valeur actuelle du paramètre ou de la variable se substituera celle portée par le [[ZoneRéservée|PlaceHolder]] lors de l'appel de la macro<<dp>>
+
+<$importvariables filter="$:/editions/tw5.com/macro-examples/say-hi-using-variables">
+<$codeblock code={{$:/editions/tw5.com/macro-examples/say-hi-using-variables}}/>
+<$macrocall $name=".example" n="1"
+eg="""<$set name="address" value="Rabbit Hole Hill">
+<<say-hi-using-variables>>
+</$set>"""/>
+</$importvariables>
+
+!! Étendue
+
+Les macros peuvent être utilisées dans le tiddler où elles sont définies, ainsi que tous les tiddlers qui le transclus.
+
+Pour étendre l'utilisation d'une macro à tous les tiddlers, définissez-la dans un tiddler étiqueté <<.tag $:/tags/Macro>>.
+
+Il est aussi possible de développer une macro dans un [[module JavaScript|https://tiddlywiki.com/dev/index.html#JavaScript%20Macros]]. Les macros ~JavaScript sont disponibles dans tous les tiddlers, et offrent un maximum de flexibilité.
+
+On peut importer dans un tiddler les définitions de macros d'une [[sélection|Title Selection]] d'autres tiddlers en utilisant le widget <<.wlink ImportVariablesWidget>>.

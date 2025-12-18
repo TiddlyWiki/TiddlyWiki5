@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: Ustvari knjižnico, ki je potrebna za postopek nadgradnje.
+
+Ustvari tiddler `$:/UpgradeLibrary`, ki je potreben za postopek nadgradnje.
+
+Knjižnica za nadgradnjo je oblikovana kot navaden vtičnik tiddler z tipom vtičnika `library`. Vsebuje kopijo vsakega vtičnika, tem in jezikovnih paketov, ki so na voljo v skladišču TiddlyWiki5.
+
+Ta ukaz je namenjen za interno uporabo; velja samo za uporabnike, ki si želijo izdelati postopek nadgradnje po meri.
+
+```
+--makelibrary <title>
+```
+
+Argument "title" je privzeto `$:/UpgradeLibrary`.

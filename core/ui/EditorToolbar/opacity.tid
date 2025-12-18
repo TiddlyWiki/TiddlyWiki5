@@ -1,0 +1,9 @@
+title: $:/core/ui/EditorToolbar/opacity
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/opacity
+caption: {{$:/language/Buttons/Opacity/Caption}}
+description: {{$:/language/Buttons/Opacity/Hint}}
+condition: [<targetTiddler>is[image]] -[<targetTiddler>type[image/svg+xml]]
+dropdown: $:/core/ui/EditorToolbar/opacity-dropdown
+
+<$text text={{$:/config/BitmapEditor/Opacity}}/>

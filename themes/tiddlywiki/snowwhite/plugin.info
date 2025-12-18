@@ -1,0 +1,10 @@
+{
+	"title": "$:/themes/tiddlywiki/snowwhite",
+	"name": "Snow White",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "Emphasises individual tiddlers",
+	"dependents": ["$:/themes/tiddlywiki/vanilla"],
+	"plugin-priority": "0"
+}

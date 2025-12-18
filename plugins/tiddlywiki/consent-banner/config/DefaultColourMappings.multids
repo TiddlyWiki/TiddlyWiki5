@@ -1,0 +1,15 @@
+title: $:/config/DefaultColourMappings/
+
+consent-banner-backdrop-background: rgba(0,0,0,0.2)
+consent-banner-background: #009677
+consent-banner-button-background: transparent
+consent-banner-button-border: #fff
+consent-banner-button-default-background: #fff
+consent-banner-button-default-foreground: #009677
+consent-banner-button-foreground: #fff
+consent-banner-button-hover-background: #fff
+consent-banner-button-hover-border: #fff
+consent-banner-button-hover-foreground: #009577
+consent-banner-foreground: #fff
+consent-banner-hr-background: rgba(255,255,255,.25)
+consent-banner-link-foreground: #fff

@@ -1,0 +1,14 @@
+title: $:/language/Help/savetiddler
+description: Enregistre un tiddler dans un fichier sous sa forme brute
+
+(À noter : la commande `--savetiddler` est dépréciée. Il est préférable d'utiliser la nouvelle commande `--save`, plus souple)
+
+Enregistre un tiddler texte ou binaire dans le fichier spécifié, sous sa forme brute. 
+
+```
+--savetiddler <titre> <chemindufichier>
+```
+
+Par défaut, le nom de fichier est résolu relativement au sous-répertoire `output` du répertoire de l'édition. La commande `--output` peut servir à rediriger la sortie vers un répertoire différent.
+
+Les répertoires présents dans le chemin du fichier et qui n'existent pas encore sont créés automatiquement. 

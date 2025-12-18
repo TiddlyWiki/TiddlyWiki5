@@ -1,0 +1,19 @@
+created: 20140923203534404
+creator: pmario
+modified: 20140923204241082
+modifier: pmario
+tags: Lexikon
+title: Status Tiddler
+type: text/vnd.tiddlywiki
+
+Status Tiddler werden meist von Makros oder Widgets verwendet, um Status Informationen zwischen zu speichern. Zum Beispiel: Welcher Reiter beim `<<tabs>>` Makro gerade aktiv ist. 
+
+Diese Status Tiddler werden meist mit einem System Prefix versehen, damit sie in normalen Listen nicht auftauchen.
+
+Wenn Sie im rechten Menü den Reiter: "Mehr: System" wählen, dann können Sie Status Tiddler mit den Namen: `$:/state/xxxxxx` sehen. 
+
+''Wichtig'': `$:/state/*` Tiddler werden nicht gespeichert. Wenn Sie also den Status Ihres `<<tabs>>` Makros speichern wollen, dann verwenden Sie einen anderen Namen. zB: `$:/_state/tabx`
+
+Siehe auch:
+
+<<list-links [tag[Makros]]>>

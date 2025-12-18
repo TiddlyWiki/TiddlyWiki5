@@ -1,0 +1,23 @@
+title: $:/language/Help/init
+description: 새 위키 폴더를 초기화합니다
+
+빈 [[위키폴더|WikiFolders]]를 초기화하고 지정한 에디션을 복사합니다.
+
+```
+--init <에디션> [<에디션> ...]
+```
+
+예를 들어:
+
+```
+tiddlywiki ./MyWikiFolder --init empty
+```
+
+참고:
+
+* 필요하다면 위키 폴더 디렉터리가 만들어집니다
+* "에디션" 기본값은 ''empty''입니다
+* init 명령은 위키 폴더가 비어 있지 않으면 실패합니다
+* init 명령은 에디션의 `tiddlywiki.info` 파일에 정의된 모든 `includeWikis`를 제거합니다
+* 여러 에디션이 지정되어 있을 때, 이른 에디션의 공유된 파일을 마지막 초기화 에디션으로 덮어쓰게 됩니다 (그래서, 마지막 `tiddlywiki.info` 파일은 마지막 에디션에서 복사됩니다)
+* `--editions`는 사용할 수 있는 에디션의 목록을 반환합니다

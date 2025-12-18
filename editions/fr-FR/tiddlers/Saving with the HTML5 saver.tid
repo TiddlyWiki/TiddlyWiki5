@@ -1,0 +1,23 @@
+created: 20131129092604900
+fr-title: Sauvegarder avec l'enregistreur HTML 5 par défaut
+modified: 20160526130128327
+tags: Saving
+title: Saving with the HTML5 saver
+type: text/vnd.tiddlywiki
+
+Cette manière d'enregistrer les modifications est assez pénible, car elle requiert une intervention manuelle à chaque enregistrement. Elle a l'avantage de fonctionner avec pratiquement tous les navigateurs tournant sur les ordinateurs de bureaux, et de nombreux navigateurs tournant sur appareils mobiles.
+
+# [[Téléchargez|Download]] un TiddlyWiki en cliquant sur ce bouton<<dp>>
+#> {{$:/editions/fr-FR/snippets/download-empty-button}}
+#> Si le bouton ne fonctionne pas, enregistrez ce lien<<dp>> https://tiddlywiki.com/languages/fr-FR/empty.html
+#> Votre navigateur vous demandera peut-être d'accepter explicitement l'enregistrement avant qu'il démarre
+# Localisez le fichier que vous venez de télécharger
+#* Vous pouvez le renommer, mais assurez-vous de conserver l'extension `.html` ou `.htm`
+# Ouvrez le fichier dans votre navigateur
+# Essayez de créer un nouveau tiddler à l'aide du bouton ''nouveau tiddler'' {{$:/core/images/new-button}} de la barre latérale. Ajouter du contenu dans le tiddler, et cliquez sur le bouton ''terminé'' {{$:/core/images/done-button}}
+# Enregistrez vos modifications en cliquant sur le bouton ''enregistrer les modifications'' {{$:/core/images/save-button}} de la barre latérale
+# Votre navigateur téléchargera alors un nouvel exemplaire du wiki, avec vos modifications à l'intérieur
+# Localisez ce nouveau fichier et ouvrez-le dans votre navigateur
+# Vérifiez que vos modifications ont correctement été enregistrées
+
+''Truc'': la plupart des navigateurs peuvent être configurés pour proposer un chemin d'enregistrement à chaque téléchargement. Cela vous permet de sélectionner la version précédente du fichier et ainsi de la remplacer.

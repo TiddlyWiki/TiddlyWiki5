@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/heading-3
+list-after: $:/core/ui/EditorToolbar/heading-3
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/heading-3
+caption: {{$:/language/Buttons/Heading3/Caption}} (Markdown)
+description: {{$:/language/Buttons/Heading3/Hint}}
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
+shortcuts: ((heading-3))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="prefix-lines"
+	character="#"
+	count="3"
+/>

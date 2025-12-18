@@ -1,0 +1,42 @@
+title: $:/core/ui/EditorToolbar/line-width-dropdown
+
+\define lingo-base() $:/language/Buttons/LineWidth/
+
+\define toolbar-line-width-inner()
+<$button tag="a" tooltip="""$(line-width)$""">
+
+<$action-setfield
+	$tiddler="$:/config/BitmapEditor/LineWidth"
+	$value="$(line-width)$"
+/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+<div style="display: inline-block; margin: 4px calc(80px - $(line-width)$); background-color: #000; width: calc(100px + $(line-width)$ * 2); height: $(line-width)$; border-radius: 120px; vertical-align: middle;"/>
+
+<span style="margin-left: 8px;">
+
+<$text text="""$(line-width)$"""/>
+
+<$reveal state="$:/config/BitmapEditor/LineWidth" type="match" text="""$(line-width)$""" tag="span">
+
+<$entity entity="&nbsp;"/>
+
+<$entity entity="&#x2713;"/>
+
+</$reveal>
+
+</span>
+
+</$button>
+\end
+
+''<<lingo Hint>>''
+
+<$list filter={{$:/config/BitmapEditor/LineWidths}} variable="line-width">
+
+<<toolbar-line-width-inner>>
+
+</$list>

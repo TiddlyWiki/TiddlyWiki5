@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: º
+Date/DaySuffix/10: º
+Date/DaySuffix/11: º
+Date/DaySuffix/12: º
+Date/DaySuffix/13: º
+Date/DaySuffix/14: º
+Date/DaySuffix/15: º
+Date/DaySuffix/16: º
+Date/DaySuffix/17: º
+Date/DaySuffix/18: º
+Date/DaySuffix/19: º
+Date/DaySuffix/2: º
+Date/DaySuffix/20: º
+Date/DaySuffix/21: º
+Date/DaySuffix/22: º
+Date/DaySuffix/23: º
+Date/DaySuffix/24: º
+Date/DaySuffix/25: º
+Date/DaySuffix/26: º
+Date/DaySuffix/27: º
+Date/DaySuffix/28: º
+Date/DaySuffix/29: º
+Date/DaySuffix/3: º
+Date/DaySuffix/30: º
+Date/DaySuffix/31: º
+Date/DaySuffix/4: º
+Date/DaySuffix/5: º
+Date/DaySuffix/6: º
+Date/DaySuffix/7: º
+Date/DaySuffix/8: º
+Date/DaySuffix/9: º
+Date/Long/Day/0: Domingo
+Date/Long/Day/1: Segunda
+Date/Long/Day/2: Terça
+Date/Long/Day/3: Quarta
+Date/Long/Day/4: Quinta
+Date/Long/Day/5: Sexta
+Date/Long/Day/6: Sábado
+Date/Long/Month/1: Janeiro
+Date/Long/Month/10: Outubro
+Date/Long/Month/11: Novembro
+Date/Long/Month/12: Dezembro
+Date/Long/Month/2: Fevereiro
+Date/Long/Month/3: Março
+Date/Long/Month/4: Abril
+Date/Long/Month/5: Maio
+Date/Long/Month/6: Junho
+Date/Long/Month/7: Julho
+Date/Long/Month/8: Agosto
+Date/Long/Month/9: Setembro
+Date/Short/Day/0: Dom
+Date/Short/Day/1: Seg
+Date/Short/Day/2: Ter
+Date/Short/Day/3: Qua
+Date/Short/Day/4: Qui
+Date/Short/Day/5: Sex
+Date/Short/Day/6: Sab
+Date/Short/Month/1: Jan
+Date/Short/Month/10: Out
+Date/Short/Month/11: Nov
+Date/Short/Month/12: Dez
+Date/Short/Month/2: Fev
+Date/Short/Month/3: Mar
+Date/Short/Month/4: Abr
+Date/Short/Month/5: Mai
+Date/Short/Month/6: Jun
+Date/Short/Month/7: Jul
+Date/Short/Month/8: Ago
+Date/Short/Month/9: Set
+Date/Period/am: am
+Date/Period/pm: pm
+RelativeDate/Future/Days: Dentro de <<period>> dias
+RelativeDate/Future/Hours: Dentro de <<period>> horas
+RelativeDate/Future/Minutes: Dentro de <<period>> minutos
+RelativeDate/Future/Months: Dentro de <<period>> meses
+RelativeDate/Future/Second: Daqui a 1 segundo
+RelativeDate/Future/Seconds: Dentro de <<period>> segundos
+RelativeDate/Future/Years: Dentro de <<period>> anos
+RelativeDate/Past/Days: Há <<period>> dias
+RelativeDate/Past/Hours: Há <<period>> horas
+RelativeDate/Past/Minutes: Há <<period>> minutos
+RelativeDate/Past/Months: Há <<period>> meses
+RelativeDate/Past/Second: Há 1 segundo
+RelativeDate/Past/Seconds: Há <<period>> segundos
+RelativeDate/Past/Years: Há <<period>> anos

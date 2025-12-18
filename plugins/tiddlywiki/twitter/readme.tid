@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/twitter/readme
+
+This plugin provides a `<$twitter>` widget that can embed various entities from Twitter's service:
+
+* Individual tweets and conversations
+* Buttons for tweeting/mentioning, sharing, following
+* Various types of timeline: profile, likes, list, collection, url and widget
+
+The widget only works in the browser, and not in generated static HTML pages.

@@ -1,0 +1,21 @@
+created: 20140904090300000
+fr-title: Certaines choses que vous pouvez faire avec TiddlyWiki
+modified: 20160602061707749
+tags: HelloThere
+title: Some of the things you can do with TiddlyWiki
+type: text/vnd.tiddlywiki
+
+* Prendre des notes, et servez-vous des tags et des références croisées pour les lier entre elles ;
+* Utiliser les onglets, les tableaux, les listes de tiddlers partageant les mêmes tags, et les tables des matières, pour organiser vos notes ;
+* Sauvegarder des signets pour vos sites web préférés (un exemple sur http://giffmex.org/experiments/tidmarks.html)<<;>>
+* Garder trace de vos tâches et rendez-vous, et organisez-les à l'aide de tags multiples (voir notre [[exemple de gestion de tâches|TaskManagementExample]])<<;>>
+* Inventorier tout ce qui vous passe par la tête : vos recettes, votre bibliothèque personnelle, vos contacts, votre collection de morceaux de musique, etc.<<;>>
+* Créer un blog ou un site web<<;>>
+* Écrire un livre<<;>>
+* Organiser vos images en galeries (voir notre [[exemple de galerie d'images|ImageGallery Example]])<<;>>
+* Partager les informations contenues dans votre <<tw>> avec d'autres, sous forme de fichier en ligne, de pièce jointe dans un email, d'un fichier tiddler, ou d'un lien vers un tiddler en ligne précis (essayez de cliquer sur un lien de tiddler et de le transporter depuis un <<tw>> vers un autre, pour voir)<<;>>
+* Faire une esquisse de dessin (éditez [[Motovun Jack.jpg]] et commencez à dessiner sur l'image, pour visualiser)<<;>>
+* Créer un assistant modal (on parle aussi de //lightbox//) — voir [[Exemple d'assistant|SampleWizard]]<<;>>
+* Créer une présentation de type « transparents »<<;>>
+* Créer une base de connaissance complète en local ou en ligne, à partir d'un fichier <<tw>> central pointant vers d'autres fichiers <<tw>> (un exemple est visible à l'adresse http://recursos.giffmex.org)<<;>>
+* Créer une infographie en utilisant des tiddlers comme données (voir les infographies à l'adresse https://tiddlywiki.com/plugins/tiddlywiki/d3/).

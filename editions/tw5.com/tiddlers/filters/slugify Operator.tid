@@ -1,0 +1,24 @@
+caption: slugify
+created: 20200509141702846
+modified: 20200509141702846
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input titles transformed so that they only contain lower case letters, numbers, periods, dashes and underscores
+op-purpose: returns each item in the list in a human-readable form for use in URLs or filenames
+tags: [[Filter Operators]]
+title: slugify Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.23">> The transformation applied by the slugify operator follows these steps:
+
+* If there is a tiddler with the same title that has a ''slug'' field, then return that field instead of running the following steps
+* Replace uppercase letters with lowercase equivalents
+* Transliterate diacritics to their basic lowercase ASCII equivalents (for example, "Æ" is transliterated to "AE")
+* Replace spaces with dashes
+* Remove all non-word characters except dashes and periods
+* Replace multiple sequential dashes with a single dash
+* Trim dashes from start and end
+* If the result is the empty string then character codes are used instead (eg. "&£@" transforms to "38-163-64")
+
+Note that it is possible for more than one title to slugify to the same string. The <<.olink duplicateslugs>> can be used to alert authors to any clashes.
+
+<<.operator-examples "slugify">>

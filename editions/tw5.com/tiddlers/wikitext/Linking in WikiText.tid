@@ -1,0 +1,125 @@
+caption: Linking
+created: 20131205155230596
+modified: 20211230145939554
+tags: WikiText
+title: Linking in WikiText
+type: text/vnd.tiddlywiki
+
+A key capability of WikiText is the ability to make links to other tiddlers or to external websites.
+
+! Manual Links
+
+Link to a tiddler by title:
+
+```
+[[Tiddler Title]]
+```
+
+To link to a tiddler and specify the text of the link:
+
+```
+[[Displayed Link Title|Tiddler Title]]
+```
+
+You can also create a link from the editor toolbar. Click ''link'' (<<.icon $:/core/images/link>>), and search and select a tiddler.
+
+! ~CamelCase Links
+
+For tiddler titles that match the CamelCase rules, just typing the title without double square brackets will automatically create a link.
+
+You can suppress a link from being recognised by preceding it with `~`. For example:
+
+<<wikitext-example src:"* ~HelloThere is not a link
+* ~http://google.com/ is not a link">>
+
+! External Links
+
+To link to an external [[resource|https://en.wikipedia.org/wiki/Web_resource]] such as a website or a file, type its //full// [[URL|https://en.wikipedia.org/wiki/URL]], including the [[URI scheme|https://en.wikipedia.org/wiki/URI_scheme]] such as a protocol (e.g. `http://`, `file://`) or `mailto`:
+
+```
+https://tiddlywiki.com/
+
+[[TW5|https://tiddlywiki.com/]]
+
+[[Mail me|mailto:me@where.net]]
+
+[[Open file|file:///c:/users/me/index.html]]
+```
+
+For this syntax to work, the URL has to be recognisable as a URL. Otherwise, it is treated as a tiddler title. As a result, in case you want to link to a resource locatable using a relative path, use the extended syntax:
+
+```
+[ext[Open file|index.html]]
+
+[ext[Open file|./index.html]]
+
+[ext[Open file|../README.md]]
+
+[ext[Open file|c:\users\me\index.html]]
+```
+
+The extended syntax still works with full URLs, although in that case it is not necessary:
+
+```
+[ext[https://tiddlywiki.com]]
+
+[ext[TW5|https://tiddlywiki.com]]
+
+[ext[Mail me|mailto:me@where.net]]
+
+[ext[Open file|file:///c:/users/me/index.html]]
+```
+
+You can also use the extended syntax to force an external link:
+
+```
+[ext[Donate|bitcoin:1aabbdd....?amount=0.001]]
+```
+
+! Customising Tiddler Links
+
+See the LinkWidget for details of the underlying widget used to implement tiddler links, including macros that can be used to customise its behaviour.
+
+! Generating dynamic links
+
+[[Linking in WikiText]] does not lend itself well to creating dynamic links. The reason is because this WikiText link:
+
+```
+[[link to myself|Linking in WikiText]]
+```
+is shorthand for using the LinkWidget and TextWidget like this:
+
+```
+<$link to="Linking in WikiText">
+  <$text text="link to myself"/>
+</$link>
+```
+Since both the link title ("link to myself") and the link target ("Linking in ~WikiText") are used as widget attributes, no WikiText expansion takes place.
+
+For example, an attempt to use a [[reference|TextReference]] and a [[variable|Variables]] to dynamically generate a link like this:
+
+<<.bad-example "`[[{{!!caption}}|<<currentTiddler>>]]`">>
+
+is the same as trying to use the LinkWidget and TextWidget like this:
+
+<<.bad-example """```
+<$link to="<<currentTiddler>>">
+  <$text text="{{!!caption}}"/>
+</$link>
+```""">>
+
+This will not work as desired. Content inside of quoted widget attributes is [[treated as a literal value|HTML in WikiText]] and protected from WikiText expansion, so it will render like this:
+
+<<.bad-example "[[{{!!caption}}|<<currentTiddler>>]]">>
+
+In order to get the desired result, the LinkWidget can be used directly like this:
+
+<<wikitext-example-without-html src:"<$link to=<<currentTiddler>>>{{!!caption}}</$link>">>
+
+See also another example of [[constructing dynamic links|Concatenating text and variables using macro substitution]].
+
+! Linking within tiddlers - "anchor links"
+
+In TiddlyWiki anchor links can help us link to target points and distinct sections within rendered tiddlers. They can help the reader navigate longer tiddler content.
+
+See [[Anchor Links using HTML]] for more information.

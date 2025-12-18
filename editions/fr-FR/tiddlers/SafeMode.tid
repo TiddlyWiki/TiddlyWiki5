@@ -1,0 +1,25 @@
+created: 20140419082845576
+fr-title: Mode Sans Échec
+modified: 20150617072959172
+tags: Features
+title: SafeMode
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+Le Mode Sans Échec permet de désactiver la plupart des personnalisations de <<tw>>. Il est nécessaire car certaines personnalisations incorrectes de  <<tw>> peuvent le rendre inutilisable. Dans un cas particulier, certaines personnalisations  échouaient lors du passage à une nouvelle version du noyau de <<tw>> (notamment lors de la version beta).
+
+! Activer le Mode Sans Échec
+
+Le Mode Sans Échec est activé en faisant précéder le lien URL de <<tw>> dans le navigateur par la chaine `#:safe`. Par exemple&nbsp;:
+
+https://tiddlywiki.com/#:safe
+
+! Comment fonctionne le Mode Sans Échec
+
+Le Mode Sans Échec déclenche 2 modifications&nbsp;:
+
+* Tous les plugins sont momentanément désactivés. Vous pouvez alors utiliser le control panel pour désactiver des plugins.
+* Les tiddlers qui modifient les tiddlers shadows sont renommés avec le préfixe `SAFE: `, ce qui a pour effet de restaurer les tiddlers shadows sous-jacents.
+
+Un tiddler rapport est affiché pour vous permettre d'examiner les tiddlers renommés.

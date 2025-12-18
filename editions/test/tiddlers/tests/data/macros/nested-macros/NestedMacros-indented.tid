@@ -1,0 +1,36 @@
+title: Macros/NestedMacros-indented
+description: Nested Macros-indented
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+\define outer()
+	\whitespace trim
+
+	\define middle()
+		\whitespace trim
+
+		\define inner()
+			\whitespace trim
+
+			Jaguar
+
+		\end inner
+
+		<<inner>>
+
+	\end middle
+
+	<<middle>>
+
+\end outer
+
+<<outer>>
+
++
+title: ExpectedResult
+
+<p>Jaguar</p>

@@ -1,0 +1,12 @@
+created: 20150221181835000
+modified: 20251101090648379
+tags: Macros [[Core Macros]]
+title: Stylesheet Macros
+type: text/vnd.tiddlywiki
+
+The following stylesheet macros are documented separately:
+
+* <<.mlink colour>>
+* <<.mlink datauri>>
+
+All these macros are defined in the [[$:/core/macros/CSS]] tiddler.

@@ -1,0 +1,11 @@
+title: $:/language/Help/build
+description: Executa automàticament ordres configurades
+
+Construeix els destins indicats al wiki actual. Si no s'indica cap destí, llavors es construiran tots els destins.
+
+```
+--build <desti> [<desti> ...]
+```
+
+Construeix els destins indicats al fitxer `tiddlywiki.info` de la carpeta wiki.
+

@@ -1,0 +1,375 @@
+title: $:/plugins/tiddlywiki/xlsx-utils/controls
+caption: XLSX Utilities
+tags: $:/tags/ControlPanel
+
+\define help-button(state)
+<$button popup="""$:/state/expand-help/$state$""" class="tc-btn-invisible tc-popup-keep">
+{{$:/core/images/help}}
+</$button>
+\end
+
+\define help-content(type,state)
+<$reveal tag="span" state="""$:/state/expand-help/$state$""" type="popup" position="below">
+<div class="tc-drop-down tc-popup-keep" style="padding: 0.5em; max-width: 30em; white-space: normal;">
+<$transclude tiddler="""$:/plugins/tiddlywiki/xlsx-utils/docs/$type$""" mode="block"/>
+</div>
+</$reveal>
+\end
+
+\define renameProxyTitle()
+$:/state/plugins/tiddlywiki/xlsx-utils/rename-$(currentTiddler)$
+\end
+
+\define rename-current-tiddler()
+<$edit-text tag="input" tiddler=<<renameProxyTitle>> placeholder="Rename" default=<<currentTiddler>> size="50"/>
+<$reveal type="nomatch" state="""$(renameProxyTitle)$""" text=<<currentTiddler>> default=<<currentTiddler>> tag="span">
+<$button>
+<$action-deletetiddler $tiddler=<<renameProxyTitle>>/>
+cancel
+</$button>
+<$button>
+<$action-sendmessage $message="tm-rename-tiddler" from=<<currentTiddler>> to={{$(renameProxyTitle)$}}/>
+<$action-deletetiddler $tiddler=<<renameProxyTitle>>/>
+rename
+</$button>
+<$set name="proxy-title" value={{$(renameProxyTitle)$}}>
+<$list filter="""[<proxy-title>is[tiddler]]""">
+Warning: tiddler already exists
+</$list>
+</$set>
+</$reveal>
+\end
+
+\define expand-collapse-button(state)
+<$reveal state="""$:/state/expand/$state$""" type="match" text="yes" default="no" tag="span">
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler="""$:/state/expand/$state$""" $value="no"/>
+{{$:/core/images/down-arrow}}
+</$button>
+</$reveal>
+<$reveal state="""$:/state/expand/$state$""" type="nomatch" text="yes" default="no" tag="span">
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler="""$:/state/expand/$state$""" $value="yes"/>
+{{$:/core/images/right-arrow}}
+</$button>
+</$reveal>
+\end
+
+\define expand-collapse-content(state,content,class)
+<$reveal state="""$:/state/expand/$state$""" type="match" text="yes" default="no" tag="div" class="""$class$""" animate="yes" retain="yes">
+$content$
+</$reveal>
+\end
+
+\define up-down-buttons(parent,child)
+<$list filter="[list<$parent$>butfirst[]field:title<$child$>limit[1]]" variable="listItem">
+<$button class="tc-btn-invisible">
+<$action-listops $tiddler=<<$parent$>> $subfilter="+[move:-1<$child$>]"/>
+{{$:/core/images/chevron-up}}
+</$button>
+</$list>
+<$list filter="[list<$parent$>butlast[]field:title<$child$>limit[1]]" variable="listItem">
+<$button class="tc-btn-invisible">
+<$action-listops $tiddler=<<$parent$>> $subfilter="+[move:1<$child$>]"/>
+{{$:/core/images/chevron-down}}
+</$button>
+</$list>
+\end
+
+\define edit-button(state)
+<$reveal state="""$:/state/edit/$state$""" type="nomatch" text="yes" default="no" tag="span">
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler="""$:/state/edit/$state$""" $value="yes"/>
+<$action-setfield $tiddler="""$:/state/expand/$state$""" $value="yes"/>
+{{$:/core/images/edit-button}}
+</$button>
+</$reveal>
+<$reveal state="""$:/state/edit/$state$""" type="match" text="yes" default="no" tag="span">
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler="""$:/state/edit/$state$""" $value="no"/>
+{{$:/core/images/done-button}} Finish editing
+</$button>
+</$reveal>
+\end
+
+\define delete-item-button(filter,parent,title,prompt)
+<$button class="tc-btn-invisible">
+<$action-deletetiddler $filter="""$filter$"""/>
+<$action-listops $tiddler="""$parent$""" $subfilter="-[[$title$]]"/>
+{{$:/core/images/delete-button}}$prompt$
+</$button>
+\end
+
+\define edit-field()
+<$select tiddler=<<field>> field="import-field-list-op" default="none">
+<option value="none">Set field</option>
+<option value="append">Append to list field</option>
+</$select>
+<$edit-text tiddler=<<field>> field="import-field-name" size="10" tag="input" placeholder="field name"default=""/>
+<$reveal state="""$(field)$!!import-field-list-op""" type="match" text="none" default="none" tag="span">
+to
+</$reveal>
+<$reveal state="""$(field)$!!import-field-list-op""" type="match" text="append" default="none" tag="span">
+the
+</$reveal>
+<$select tiddler=<<field>> field="import-field-type" default="string">
+<option value="date">date</option>
+<option value="string">string</option>
+<option value="number">number</option>
+</$select>
+<$select tiddler=<<field>> field="import-field-source" default="column">
+<option value="column">from column</option>
+<option value="constant">constant</option>
+</$select>
+<$reveal state="""$(field)$!!import-field-source""" type="match" text="column" default="column" tag="span">
+<$edit-text tiddler=<<field>> field="import-field-column" tag="input" placeholder="column" default=""/>
+prefixed
+<$edit-text tiddler=<<field>> field="import-field-prefix" tag="input" placeholder="prefix" default=""/>,
+suffixed
+<$edit-text tiddler=<<field>> field="import-field-suffix" tag="input" placeholder="suffix" default=""/>
+</$reveal>
+<$reveal state="""$(field)$!!import-field-source""" type="match" text="constant" default="column" tag="span">
+<$edit-text tiddler=<<field>> field="import-field-value" tag="input" placeholder="constant" default=""/>
+</$reveal>
+<$checkbox tiddler=<<field>> field="import-field-skip-tiddler-if-blank" checked="yes" unchecked="no" default="no">
+Skip this tiddler when field blank
+<br/>
+Title:
+<$tiddler tiddler=<<field>>>
+<<rename-current-tiddler>>
+</$tiddler>
+\end
+
+\define view-field()
+<$link to=<<field>>>
+<$list filter="[<field>!has[import-field-list-op]]" variable="listItem">
+Set field ''<$view tiddler=<<field>> field="import-field-name"/>'' to
+</$list>
+<$list filter="[<field>get[import-field-list-op]prefix[append]]" variable="listItem">
+Append to list field ''<$view tiddler=<<field>> field="import-field-name"/>''
+</$list>
+<$list filter="[<field>has[import-field-prefix]]" variable="listItem">
+''<code><$view tiddler=<<field>> field="import-field-prefix"/></code>'' +
+</$list>
+<$list filter="[<field>get[import-field-type]prefix[date]]" variable="listItem">
+date
+</$list>
+<$list filter="[<field>get[import-field-source]prefix[column]]" variable="listItem">
+value from column ''<$view tiddler=<<field>> field="import-field-column"/>''
+</$list>
+<$list filter="[<field>get[import-field-source]prefix[constant]]" variable="listItem">
+constant ''<code><$view tiddler=<<field>> field="import-field-value"/></code>''
+</$list>
+<$list filter="[<field>has[import-field-suffix]]" variable="listItem">
++ ''<code><$view tiddler=<<field>> field="import-field-suffix"/></code>''
+</$list>
+</$link>
+\end
+
+\define list-fields()
+<ul class="tc-import-spec-row-list">
+<$list filter="[list<row>]" variable="field" emptyMessage="<div>(No field import specifiers)</div>">
+<li class="tc-import-spec-field-wrapper">
+<$reveal state="""$:/state/edit/$(row)$""" type="match" text="yes" default="no" tag="span">
+<<edit-field>>
+<<up-down-buttons parent:"row" child:"field">>
+<$macrocall $name="delete-item-button" filter="[<field>]" parent=<<row>> title=<<field>>/>
+</$reveal>
+<$reveal state="""$:/state/edit/$(row)$""" type="nomatch" text="yes" default="no" tag="span">
+<<view-field>>
+</$reveal>
+</li>
+</$list>
+</ul>
+\end
+
+\define view-row-content()
+<$reveal state="""$:/state/edit/$(row)$""" type="match" text="yes" default="no" tag="ul" class="tc-import-spec-row-controls" animate="yes" retain="yes">
+<li>
+<$macrocall $name="delete-item-button" filter="[<row>] [<row>getlist[]]" parent=<<sheet>> title=<<row>> prompt=" Delete this row"/>
+</li>
+<li>
+Title:
+<$tiddler tiddler=<<row>>>
+<<rename-current-tiddler>>
+</$tiddler>
+</li>
+<li>
+Row type:
+<$select tiddler=<<row>> field="import-row-type" default="by-field">
+<option value="by-field">By field</option>
+<option value="by-column">By column</option>
+</$select>
+</li>
+<li>
+<$button class="tc-btn-invisible">
+<$action-createtiddler $basetitle="$:/_ExcelImporter/ImportSpecifiers/Field" $savetitle="$:/temp/newtiddler" import-spec-role="field" import-field-name="fieldname" import-field-type="string" import-field-source="column" import-field-column="Column Name" />
+<$action-listops $tiddler=<<row>> $subfilter="[{$:/temp/newtiddler}] +[putfirst[]]"/>
+{{$:/core/images/new-button}} Add new field
+</$button>
+</li>
+</$reveal>
+<<list-fields>>
+\end
+
+\define view-row()
+<div class="tc-import-spec-row-wrapper">
+<h5>
+<$macrocall $name="expand-collapse-button" state=<<row>>/>
+Each row: <$list filter="[list<row>import-field-name[title]]" variable="field" emptyMessage="
+<$link to=<<field>>>(title field not set)</$link>"><<view-field>></$list>
+<$macrocall $name="edit-button" state=<<row>>/>
+<<up-down-buttons parent:"sheet" child:"row">>
+<$macrocall $name="help-button" state=<<row>>/>
+</h5>
+<$macrocall $name="help-content" type="row" state=<<row>>/>
+<$macrocall $name="expand-collapse-content" state=<<row>> content=<<view-row-content>> class="tc-import-spec-row"/>
+</div>
+\end
+
+\define list-rows()
+<div class="tc-import-spec-sheet-list">
+<$list filter="[list<sheet>]" variable="row" emptyMessage="<div>(No row import specifiers)</div>">
+<<view-row>>
+</$list>
+\end
+
+\define view-sheet-content()
+<$reveal state="""$:/state/edit/$(sheet)$""" type="match" text="yes" default="no" tag="ul" class="tc-import-spec-sheet-controls" animate="yes" retain="yes">
+<li>
+<$macrocall $name="delete-item-button" filter="[<sheet>] [<sheet>getlist[]] [<sheet>getlist[]getlist[]]" parent=<<workbook>> title=<<sheet>> prompt=" Delete this sheet"/>
+</li>
+<li>
+Title:
+<$tiddler tiddler=<<sheet>>>
+<<rename-current-tiddler>>
+</$tiddler>
+</li>
+<li>
+Import sheet name:
+<$edit-text tiddler=<<sheet>> field="import-sheet-name" size="50"/>
+</li>
+<li>
+<$button class="tc-btn-invisible">
+<$action-createtiddler $basetitle="$:/_ExcelImporter/ImportSpecifiers/Row" $savetitle="$:/temp/newtiddler" import-spec-role="row"/>
+<$action-listops $tiddler=<<sheet>> $subfilter="[{$:/temp/newtiddler}] +[putfirst[]]"/>
+<$action-setfield $tiddler={{{ [{$:/temp/newtiddler}addprefix[$:/state/edit/]] }}} $value="yes"/>
+<$action-setfield $tiddler={{{ [{$:/temp/newtiddler}addprefix[$:/state/expand/]] }}} $value="yes"/>
+{{$:/core/images/new-button}} Add new row
+</$button>
+</li>
+</$reveal>
+<<list-rows>>
+\end
+
+\define view-sheet()
+<div class="tc-import-spec-sheet-wrapper">
+<h4>
+<$macrocall $name="expand-collapse-button" state=<<sheet>>/>
+Sheet: <$link to=<<sheet>>><$view tiddler=<<sheet>> field="import-sheet-name"/></$link>
+<$macrocall $name="edit-button" state=<<sheet>>/>
+<<up-down-buttons parent:"workbook" child:"sheet">>
+<$macrocall $name="help-button" state=<<sheet>>/>
+</h4>
+<$macrocall $name="help-content" type="sheet" state=<<sheet>>/>
+<$macrocall $name="expand-collapse-content" state=<<sheet>> content=<<view-sheet-content>> class="tc-import-spec-sheet"/>
+</div>
+\end
+
+\define list-sheets()
+<div class="tc-import-spec-workbook-list">
+<$list filter="[list<workbook>]" variable="sheet" emptyMessage="<div>(No sheet import specifiers)</div>">
+<<view-sheet>>
+</$list>
+</div>
+\end
+
+\define view-workbook-content()
+<$reveal state="""$:/state/edit/$(workbook)$""" type="match" text="yes" default="no" tag="ul" class="tc-import-spec-workbook-controls" animate="yes" retain="yes">
+<li>
+<$macrocall $name="delete-item-button" filter="[<workbook>] [<workbook>getlist[]] [<workbook>getlist[]getlist[]] [<workbook>getlist[]getlist[]getlist[]]" prompt=" Delete this workbook"/>
+</li>
+<li>
+Title:
+<$tiddler tiddler=<<workbook>>>
+<<rename-current-tiddler>>
+</$tiddler>
+</li>
+<li>
+Caption:
+<$edit-text tiddler=<<workbook>> field="caption" size="50"/>
+</li>
+<li>
+<$button class="tc-btn-invisible">
+<$action-createtiddler $basetitle="$:/_ExcelImporter/ImportSpecifiers/Sheet" $savetitle="$:/temp/newtiddler" import-spec-role="sheet" import-sheet-name="Sheet name"/>
+<$action-listops $tiddler=<<workbook>> $subfilter="[{$:/temp/newtiddler}] +[putfirst[]]"/>
+<$action-setfield $tiddler={{{ [{$:/temp/newtiddler}addprefix[$:/state/edit/]] }}} $value="yes"/>
+<$action-setfield $tiddler={{{ [{$:/temp/newtiddler}addprefix[$:/state/expand/]] }}} $value="yes"/>
+{{$:/core/images/new-button}} Add new sheet
+</$button>
+</li>
+</$reveal>
+<<list-sheets>>
+\end
+
+\define view-workbook()
+<div class="tc-import-spec-workbook-wrapper">
+<h3>
+<$macrocall $name="expand-collapse-button" state=<<workbook>>/>
+Workbook: <$link to=<<workbook>>><$view tiddler=<<workbook>> field="caption"/></$link>
+<$macrocall $name="edit-button" state=<<workbook>>/>
+<$macrocall $name="help-button" state=<<workbook>>/>
+</h3>
+<$macrocall $name="help-content" type="workbook" state=<<workbook>>/>
+<$macrocall $name="expand-collapse-content" state=<<workbook>> content=<<view-workbook-content>> class="tc-import-spec-workbook"/>
+</div>
+\end
+
+\define list-workbooks()
+<ul class="tc-import-spec-editor-controls">
+<li>
+<$button class="tc-btn-invisible">
+<$action-createtiddler $basetitle="$:/_ExcelImporter/ImportSpecifiers/Workbook" $savetitle="$:/temp/newtiddler" import-spec-role="workbook" caption="New workbook"/>
+<$action-setfield $tiddler={{{ [{$:/temp/newtiddler}addprefix[$:/state/edit/]] }}} $value="yes"/>
+<$action-setfield $tiddler={{{ [{$:/temp/newtiddler}addprefix[$:/state/expand/]] }}} $value="yes"/>
+{{$:/core/images/new-button}} Add new workbook
+</$button>
+</li>
+</ul>
+<div class="tc-import-spec-editor-list">
+<$list filter="[all[shadows+tiddlers]import-spec-role[workbook]sort[caption]]" variable="workbook">
+<<view-workbook>>
+</$list>
+</div>
+\end
+
+<h1>
+Controls for XLSX Spreadsheet Utilities
+</h1>
+
+<div class="tc-import-spec-selector">
+<h2>
+Current Import Specification
+</h2>
+<$list filter="[all[shadows+tiddlers]import-spec-role[workbook]limit[1]]" emptyMessage="""
+There are no import specifications available. Use the controls below to create one
+""">
+This is the import specification that will be used for the next import of an `.XLSX` file
+<$select tiddler="$:/config/plugins/tiddlywiki/xlsx-utils/default-import-spec">
+<$list filter="[all[shadows+tiddlers]import-spec-role[workbook]sort[caption]]">
+<option value=<<currentTiddler>>><$text text={{!!caption}}/></option>
+</$list>
+</$select>
+</$list>
+</div>
+
+<div class="tc-import-spec-editor-wrapper">
+<h2>
+ Import Specifications
+<$macrocall $name="help-button" state=""/>
+</h2>
+<$macrocall $name="help-content" type="editor" state=""/>
+<div class="tc-import-spec-editor">
+<<list-workbooks>>
+</div>
+</div>

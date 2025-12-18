@@ -1,0 +1,23 @@
+title: $:/plugins/tiddlywiki/text-slicer/ui/slice-toolbar-button
+tags: $:/tags/ViewToolbar
+list-before: $:/core/ui/Buttons/edit
+caption: {{$:/plugins/tiddlywiki/text-slicer/images/text-slicer-icon}} Slice text tiddler
+description: Slice this text tiddler by headings and lists
+
+\whitespace trim
+
+\procedure hint()
+Slice this text tiddler into chunks
+\end
+
+<$list filter="[<currentTiddler>!is[image]!is[binary]]" variable="ignore">
+<$button tooltip=<<hint>> aria-label=<<hint>> class=<<tv-config-toolbar-class>>>
+<$action-sendmessage $message="tm-modal" $param="$:/plugins/tiddlywiki/text-slicer/ui/slice-modal" currentTiddler=<<currentTiddler>>/>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+{{$:/plugins/tiddlywiki/text-slicer/images/text-slicer-icon}}
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
+<span class="tc-btn-text">Slice tiddler</span>
+<%endif%>
+</$button>
+</$list>

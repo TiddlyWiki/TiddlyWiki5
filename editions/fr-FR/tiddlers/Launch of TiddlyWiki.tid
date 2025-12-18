@@ -1,0 +1,15 @@
+created: 20140923200804020
+fr-title: Lancement de TiddlyWiki
+modified: 20141217193442167
+title: Launch of TiddlyWiki
+type: text/vnd.tiddlywiki
+
+En septembre 2004, j'ai donc publié une [[version préliminaire de TiddlyWiki|https://classic.tiddlywiki.com/firstversion.html]]. Il s'agissait de la plus petite  application possible démontrant le concept : un simple fichier HTML de 48KB qui s'auto-engendrait.
+
+L'inconvénient d'avoir écrit de cette manière la première version de <<tw>>, c'est que ça la rendait complètement impraticable pour l'édition — quand vous cliquiez sur <<gf "enregistrer les modifications">>, elle faisait apparaître une fenêtre montrant les données qui auraient été enregistrées s'il avait été possible d'écrire sur le système de fichiers depuis une page HTML.
+
+Un grande partie des premiers commentaires sur <<tw>> étaient que c'était un outil sympathique, mais qu'il aurait été plus utile si on avait pu enregistrer correctement les modifications. J'étais plutôt frustré, car je tenais pour certaine l'impossibilité pour un fichier HTML tournant dans un navigateur d'enregistrer des modifications sur le système de fichiers local.
+
+Quelques mois plus tard, j'ai repéré une extension Firefox expérimentale qui permettait à <<tw>> de sauvegarder les modifications depuis le navigateur. En examinant le code, je réalisai que l'API utilisée pour écrire sur le système de fichiers était en fait disponible pour les fichiers HTML ordinaires — pourvu qu'ils soient chargés depuis une URI de type `file://`.
+
+J'adaptai le code Firefox dans le noyau de <<tw>> et j'ajoutai bientôt une fonctionnalité similaire pour Internet Explorer (en utilisant un ancien contrôle ~ActiveX que Microsoft distribuait avec Internet Explorer).

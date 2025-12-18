@@ -1,0 +1,7 @@
+created: 20150118134542000
+modified: 20150118183121000
+tags: [[addsuffix Operator]] [[Operator Examples]]
+title: addsuffix Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[London]addsuffix[ Underground]]">>

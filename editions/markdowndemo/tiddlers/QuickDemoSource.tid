@@ -1,0 +1,5 @@
+title: QuickDemo Source
+
+<$let tiddler="QuickDemo">
+<$codeblock code={{{ [<tiddler>get[text]] }}} language={{{ [<tiddler>get[type]else[text/vnd.tiddlywiki]] }}}/>
+</$let>

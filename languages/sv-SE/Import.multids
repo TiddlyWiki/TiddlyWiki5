@@ -1,0 +1,14 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: Avbryt
+Listing/Hint: Dessa tiddlers är redo att importeras:
+Listing/Import/Caption: Importera
+Listing/Select/Caption: Välj
+Listing/Status/Caption: Status
+Listing/Title/Caption: Rubrik
+Upgrader/Plugins/Suppressed/Incompatible: Blockerat, inkompatibelt eller föråldrat insticksprogram 
+Upgrader/Plugins/Suppressed/Version: Blockerat insticksprogram (pga <<incoming>>  är äldre änd nuvarande <<existing>>)
+Upgrader/Plugins/Upgraded: Uppgraderat insticksprogram från <<incoming>> till <<upgraded>>
+Upgrader/State/Suppressed: Blockerad temporär state-tiddler
+Upgrader/System/Suppressed: Blockerad system-tiddler
+Upgrader/ThemeTweaks/Created: Migrera justeringar för temat från <$text text=<<from>>/>

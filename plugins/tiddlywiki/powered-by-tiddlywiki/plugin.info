@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/powered-by-tiddlywiki",
+	"name": "Powered By TiddlyWiki",
+	"description": "Powered by TiddlyWiki banner",
+	"list": "readme",
+	"stability": "STABILITY_3_LEGACY"
+}

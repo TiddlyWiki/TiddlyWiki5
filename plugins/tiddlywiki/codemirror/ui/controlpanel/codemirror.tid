@@ -1,0 +1,24 @@
+title: $:/core/ui/ControlPanel/Settings/CodeMirror
+tags: $:/tags/ControlPanel/SettingsTab
+caption: CodeMirror
+list-after: $:/core/ui/ControlPanel/Settings/TiddlyWiki
+
+\define lingo-base() $:/language/codemirror/controlPanel/
+
+<<lingo hint>>
+
+<$link to="$:/plugins/tiddlywiki/codemirror/usage"><<lingo usage>></$link>
+
+<$link to="$:/plugins/tiddlywiki/codemirror/keyboard"><<lingo keyboard>></$link>
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Settings/CodeMirror]]">
+
+<div class="tc-control-panel-setting" data-setting-title=<<currentTiddler>> >
+
+!!.tc-control-panel-accent <$link><$transclude field="caption"/></$link>
+
+<$transclude/>
+
+</div>
+
+</$list>

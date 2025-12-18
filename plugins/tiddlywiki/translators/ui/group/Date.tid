@@ -1,0 +1,18 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Date
+caption: Date
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/Date/]]
+[all[tiddlers+shadows]prefix[$:/language/RelativeDate/]]
++[sort[title]]
+\end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/Date/]] [all[current]removeprefix[$:/language/RelativeDate/]]
+\end
+
+! Date
+
+Absolute and relative dates.
+
+<<translatableStringEditor>>

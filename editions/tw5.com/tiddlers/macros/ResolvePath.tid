@@ -1,0 +1,27 @@
+created: 20150203152000000
+modified: 20150221223858000
+tags: Macros [[Core Macros]]
+title: resolvepath Macro
+type: text/vnd.tiddlywiki
+caption: resolvepath
+
+The <<.def resolvepath>> [[macro|Macros]] takes a relative path and an absolute path. It interprets the former relative to the latter, and returns the absolute equivalent of the former.
+
+Folders in the paths are delimited by `/`.
+
+The special folder name `.` denotes the current folder, and `..` denotes the parent folder.
+
+If the absolute path indicates a folder, it needs to end with `/`. Anything after the final `/` is treated as an arbitrary filename within the intended path, and is discarded.
+
+If no absolute path is supplied, the relative path is returned unchanged, except that anything after the final `/` is discarded.
+
+The return value is a path, but does <<.em not>> end with `/`.
+
+!! Parameters
+
+;source
+: the relative path
+;root
+: the absolute path
+
+<<.macro-examples "resolvepath">>

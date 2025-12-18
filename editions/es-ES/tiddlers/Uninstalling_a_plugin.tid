@@ -1,0 +1,23 @@
+caption: Desinstalar plugins
+created: 20160107222504269
+es-title: Cómo desinstalar un plugin
+modified: 20160504154335550
+tags: Plugins
+title: Uninstalling a plugin
+type: text/vnd.tiddlywiki
+
+# Sólo [[por si acaso|The First Rule of Using TiddlyWiki]], haz copia de seguridad de tu archivo HTML de ~TiddlyWiki
+
+# Abre la pestaña <<.controlpanel-tab Plugins>> del [[Panel de control|$:/ControlPanel]]
+
+# Pincha el nombre del plugin que quieres desinstalar para abrir el tiddler que lo contiene. 
+
+# Pincha el botón <<.button edit>>
+
+# Pincha el botón <<.button delete>>
+
+# Guarda los cambios con el botón <<.button save-wiki>>
+
+# Recarga la página
+
+# El plugin se ha desinstalado por completo

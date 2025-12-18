@@ -1,0 +1,10 @@
+title: $:/core/ui/Components/tag-link
+
+\whitespace trim
+<$link>
+<$set name="backgroundColor" value={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}>
+<span style=<<tag-styles>> class="tc-tag-label">
+<$view field="title" format="text"/>
+</span>
+</$set>
+</$link>

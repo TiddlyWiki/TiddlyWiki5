@@ -1,0 +1,45 @@
+created: 20131202102427114
+fr-title: Obtenir la dernière version
+modified: 20150620090746011
+tags: Features [[Working with TiddlyWiki]]
+title: Upgrading
+type: text/vnd.tiddlywiki
+
+De nouvelles versions de <<tw>> sont publiées régulièrement, avec des améliorations et des corrections de bogues. Il est recommandé de rester à jour en hissant votre wiki au niveau de la dernière version.
+
+! Introduction
+
+La procédure décrite ici est réservée à la mise à niveau de fichiers <<tw>> autonomes. Pour mettre à niveau [[TiddlyWiki sur Node.js|TiddlyWiki on Node.js]], il existe une [[méthode différente|Upgrading TiddlyWiki on Node.js]].
+
+<<<
+Quand vous mettez à niveau, n'oubliez pas [[la première règle d'utilisation de Tiddlywiki|The First Rule of Using TiddlyWiki]] :
+
+//Il est de votre responsabilité de vous occuper de vos données ; prenez soin d'effectuer des sauvegardes, surtout quand vous mettez à niveau le noyau de <<tw>>.//
+<<<
+
+! Mise à niveau en ligne
+
+Cette procédure fonctionnera sur la plupart des navigateurs de bureau. Notez que vos données personnelles ne quittent pas votre navigateur pendant la procédure.
+
+# Localisez votre fichier <<tw>> sur le système de fichiers (à l'aide de Windows Explorer, du Finder sur Mac OS X, ou de votre gestionnaire de fichiers sur Linux)
+# Visitez la page https://tiddlywiki.com/upgrade.html dans votre navigateur
+# Faites glisser votre ancien fichier <<tw>> HTML sur la fenêtre du navigateur
+#* Si le fichier est crypté, un mot de passe vous sera demandé
+# Passez en revue la liste des tiddlers qui seront mis à niveau
+# Cliquez sur ''Upgrade''
+# Enregistrer les changements pour sauvegarder la nouvelle version
+
+Cela aura pour résultat de télécharger sur votre ordinateur un fichier nommé ''upgrade.html''. Ce fichier constitue la version à niveau de votre ancien fichier. Il se peut que vous deviez vous rendre là où ''upgrade.html'' a été téléchargé, renommer ''upgrade.html'' avec le nom de l'ancien fichier que vous mettez à niveau, et remplacer l'ancien fichier en déplaçant le nouveau à sa place.
+
+! Mise à niveau hors ligne
+
+Vous pouvez également télécharger le fichier https://tiddlywiki.com/upgrade.html localement et effectuer la même procédure de glisser-déposer pour mettre vos fichiers à niveau.
+
+! Problèmes avec les mises à niveau
+
+Il est possible qu'une personnalisation appliquée dans une version précédente devienne inopérante une fois la mise à niveau effectuée. Deux techniques peuvent être employées pour vous aider à retrouver l'origine du problème :
+
+* Essayez de répéter la mise à niveau en décochant tous les tiddlers qui pourraient contenir des personnalisations de <<tw>>
+* Utilisez le [[ModeSansÉchec|SafeMode]] pour désactiver toutes les adaptations personnalisées des tiddlers //shadow//
+
+Vous pouvez voir quels tiddlers //shadow// ont été modifiés dans l'onglet ''Filtres'' de la [[recherche avancée|$:/AdvancedSearch]]. Choisir "Les tidders shadow modifiés" depuis le menu déroulant.

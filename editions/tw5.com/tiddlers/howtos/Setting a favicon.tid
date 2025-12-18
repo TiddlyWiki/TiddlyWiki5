@@ -1,0 +1,19 @@
+created: 20131224074240979
+modified: 20200510115704738
+tags: [[Customise TiddlyWiki]]
+title: Setting a favicon
+type: text/vnd.tiddlywiki
+
+"favicons" are small icons that most browsers display to help users identify websites. Note that all browsers support bitmap images, but only certain modern browsers support SVG format icons.
+
+! favicons in the Browser
+
+When TiddlyWiki starts up in the browser it looks for a tiddler called [[$:/favicon.ico]] and dynamically uses it as the favicon for the page. If you modify the image then the favicon changes instantly to reflect it.
+
+<<.from-version "5.1.23">> To set an external image as the favicon, assign the URL to the ''_canonical_uri'' field of the [[$:/favicon.ico]] tiddler.
+
+! favicons on the Server
+
+On the server, the ServerCommand will serve the tiddler [[$:/favicon.ico]] at the path `/favicon.ico`.
+
+

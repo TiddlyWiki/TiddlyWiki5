@@ -1,0 +1,11 @@
+created: 20170628164706364
+modified: 20170628164823552
+tags: [[tree Macro]] [[Macro Examples]]
+title: tree Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1"
+eg="""<<tree prefix:"$:/">>"""/>
+
+<$macrocall $name=".example" n="2"
+eg="""<<tree prefix:"tree-macro-example-" separator:"-">>"""/>

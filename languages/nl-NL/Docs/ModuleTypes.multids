@@ -1,0 +1,29 @@
+title: $:/language/Docs/ModuleTypes/
+
+allfilteroperator: Een sub-operator voor de ''all'' filter operator.
+animation: Animaties die door de RevealWidget gebruikt kunnen worden.
+authenticator: Definieert hoe aanvragen worden gewaarmerkt door de ingebouwde HTTP-server.
+bitmapeditoroperation: Een 'bitmap'-editor knoppenbalkbewerking.
+command: Commando's die onder Node.js gebruikt kunnen worden.
+config: Data die aan `$tw.config` moet worden toegevoegd.
+filteroperator: Individuele methodes voor een filter operator.
+global: Globale data die aan `$tw.config` moet worden toegevoegd.
+info: Publiceert systeeminformatie via de [[$:/temp/info-plugin]] pseudo-plugin.
+isfilteroperator: Operands voor de ''is'' filter operator.
+library: Algemeen module type voor algemene JavaScript modules.
+macro: JavaScript macro definities.
+parser: 'Parsers' voor verschillende inhoudstypes.
+route: Definieert hoe individuele URL-patronen door de ingebouwde HTTP-server worden behandeld.
+saver: 'Savers' (opslagmodules) gebruiken verschillende methodes voor het opslaan van bestanden vanuit de browser.
+startup: Startup functies.
+storyview: 'Story views' passen de animatie en het gedrag van 'list' widgets aan.
+texteditoroperation: Een teksteditor knoppenbalkbewerking.
+tiddlerdeserializer: Zet verschillende inhoudstypes in tiddlers om.
+tiddlerfield: Bepaalt het gedrag van een individueel tiddlerveld.
+tiddlermethod: Voegt methodes aan het `$tw.Tiddler` prototype toe.
+upgrader: Past upgradeverwerking toe op tiddlers gedurende een upgrade / import.
+utils: Voegt methodes aan `$tw.utils` toe.
+utils-node: Voegt Node.js-specifieke methodes aan `$tw.utils` toe.
+widget: 'Widgets' omvatten DOM 'rendering' en verversing.
+wikimethod: Voegt methodes aan `$tw.Wiki` toe.
+wikirule: Individuele 'parser' regels voor de hoofd-WikiText-parser.

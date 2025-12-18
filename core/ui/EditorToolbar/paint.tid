@@ -1,0 +1,15 @@
+title: $:/core/ui/EditorToolbar/paint
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/paint
+caption: {{$:/language/Buttons/Paint/Caption}}
+description: {{$:/language/Buttons/Paint/Hint}}
+condition: [<targetTiddler>is[image]] -[<targetTiddler>type[image/svg+xml]]
+dropdown: $:/core/ui/EditorToolbar/paint-dropdown
+
+\define toolbar-paint()
+<div style="display: inline-block; vertical-align: middle; background-color: $(colour-picker-value)$; width: 1em; height: 1em; border-radius: 50%;"/>
+\end
+\whitespace trim
+<$set name="colour-picker-value" value={{$:/config/BitmapEditor/Colour}}>
+<<toolbar-paint>>
+</$set>

@@ -1,0 +1,26 @@
+created: 20131211220000000
+creator: pmario
+modified: 20150615132910045
+modifier: pmario
+tags: howto
+title: Speichern mit TiddlyIE
+type: text/vnd.tiddlywiki
+
+!! Speichern mit TiddlyIE
+
+<<iframe-responsive src:"https://www.youtube.com/embed/OrWuvjs3Ly0">>
+
+# Installieren Sie TiddlyIE AddOn von:
+#* https://github.com/davidjade/TiddlyIE/releases
+# Starten Sie Internet Explorer neu. IE wird beim Start einen Dialog anzeigen, mit dem Sie das AddOn freischalten können.
+#> Es ist möglich, dass Sie aufgefordert werden das //Microsoft Script Runtime// zu erlauben. Tun Sie das!
+#  Klicken Sie den folgenden Link mit der rechten Maustaste und wählen: "Ziel Speichern unter ..."
+#> https://tiddlywiki.com/languages/de-AT/empty.html oder
+#> https://tiddlywiki.com/languages/de-DE/empty.html
+# Suchen Sie die eben geladene Datei im Datei Manager.
+#* Geben Sie der Datei einen vernünftigen Namen und stellen Sie sicher, dass die Endung `.html` ist.
+# Öffnen Sie die Datei mit dem Internet Explorer
+# Erstellen Sie einen neuen Tiddler mit dem {{$:/core/images/new-button}} ''plus'' im rechten Menü. 
+# Geben Sie den Text ein und bestätigen die Eingabe mit dem {{$:/core/images/done-button}} ''OK''.
+# Speichern Sie die Änderungen mit: {{$:/core/images/save-button}} ''speichern'' im rechten Menü. IE wird einen "Speichern Unter.." Dialog öffnen. Folgen Sie den Dialogen!
+# Laden Sie die Seite neu, um sicher zu stellen, dass die Daten richtig gespeichert wurden.

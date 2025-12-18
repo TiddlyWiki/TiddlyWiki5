@@ -1,0 +1,20 @@
+created: 20150602084548184
+modified: 20211113010652022
+tags: [[Community Plugins]]
+title: "Encrypt single tiddler plugin" by Danielo Rodriguez
+type: text/vnd.tiddlywiki
+url: http://danielorodriguez.com/TW5-EncryptTiddlerPlugin/
+
+A plugin that allows to encrypt your tiddlers individually Danielo Rodriguez.
+
+{{!!url}}
+
+<<<
+Advantages:
+
+* You can specify a different password for each tiddler if you want.
+* You don't have to encrypt your whole wiky.
+* If you forget your password, you only lose a tiddler.
+* It's possible to edit the tiddler content , tags and fields except the encrypt field after encryption.
+* [...]
+<<<

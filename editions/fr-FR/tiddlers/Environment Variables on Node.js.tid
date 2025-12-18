@@ -1,0 +1,23 @@
+created: 20140617211749290
+fr-title: Variables d'environment sur Node.js
+modified: 20150624094749654
+tags: [[TiddlyWiki on Node.js]]
+title: Environment Variables on Node.js
+type: text/vnd.tiddlywiki
+
+[[TiddlyWiki pour Node.js|TiddlyWiki on Node.js]] reconnaît les variables d'environnement système ci-dessous pour spécifier une liste de chemins (séparés par des deux-points), où chercher les différents plugins et <<gf éditions>><<dp>>
+
+* `TIDDLYWIKI_PLUGIN_PATH` — Chemin de recherche pour les plugins ordinaires
+* `TIDDLYWIKI_THEME_PATH` — Chemin de recherche pour les thèmes
+* `TIDDLYWIKI_LANGUAGE_PATH` — Chemin de recherche pour les langues
+* `TIDDLYWIKI_EDITION_PATH` — Chemin de recherche pour les éditions (utilisé par la [[commande Init|InitCommand]]).
+
+Ces chemins supplémentaires doivent tous pointer vers des dossiers structurés comme leurs répertoires équivalents de l'arborescence TiddlyWiki5 sous GitHub<<dp>> les répertoires de plugins, thèmes et langues contiennent `publisher/nomduplugin/<fichiers>` tandis que les répertoires des <<gf éditions>> contiennent `nomedition/<fichiers>`
+
+Exemple<<dp>>
+
+```
+TIDDLYWIKI_PLUGIN_PATH=~/MonMagasinDePlugins
+tiddlywiki monwiki --build index
+```
+

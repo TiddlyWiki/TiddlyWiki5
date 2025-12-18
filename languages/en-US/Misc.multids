@@ -1,0 +1,6 @@
+title: $:/language/
+
+Manager/Item/Colour: Color
+TagManager/Colour/Heading: Color
+RecentChanges/DateFormat: MMM DD, YYYY
+Tiddler/DateFormat: MMM DD, YYYY at hh12:0mm am

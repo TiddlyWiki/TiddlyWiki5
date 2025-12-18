@@ -1,0 +1,11 @@
+created: 20161011074235805
+modified: 20161011074235805
+tags: [[Hidden Settings]]
+title: Hidden Setting: Search Minimum Length
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.14">> Controls the minimum length of a search string before results are displayed.
+
+Defaults to "3".
+
+$:/config/Search/MinLength

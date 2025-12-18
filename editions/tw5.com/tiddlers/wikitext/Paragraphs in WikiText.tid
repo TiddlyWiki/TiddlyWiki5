@@ -1,0 +1,23 @@
+created: 20131205155836435
+modified: 20131214170445345
+tags: WikiText
+title: Paragraphs in WikiText
+type: text/vnd.tiddlywiki
+caption: Paragraphs
+
+To mark the end of a paragraph in TiddlyWiki you need to type `enter` twice to create a double line break:
+
+```
+This is the first paragraph.
+
+And this is the second paragraph.
+```
+
+Single line breaks are ignored within paragraphs. For example:
+
+<<wikitext-example src:"This is a
+paragraph made
+up of
+short lines">>
+
+For situations where this behaviour isn't convenient, you can also use [[Hard Linebreaks in WikiText]].

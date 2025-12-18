@@ -1,0 +1,84 @@
+title: $:/language/
+
+AboveStory/ClassicPlugin/Warning: Het lijkt erop dat je probeert een ~TiddlyWiki Classic plugin te laden. [[Deze plugins werken niet met ~TiddlyWiki version 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]. Gedetecteerde ~TiddlyWiki Classic plugins:
+BinaryWarning/Prompt: Deze tiddler bevat binaire data
+ClassicWarning/Hint: Deze tiddler is in TiddlyWiki Classic wiki tekstformaat geschreven dat niet geheel compatibel is met TiddlyWiki versie 5. Zie https://tiddlywiki.com/static/Upgrading.html voor meer details.
+ClassicWarning/Upgrade/Caption: upgrade
+CloseAll/Button: sluit alle
+ConfirmAction: Wil je doorgaan?
+ConfirmCancelTiddler: Wil je gemaakte wijzigingen aan de tiddler "<$text text=<<title>>/>" annuleren?
+ConfirmDeleteTiddler: Wil je de tiddler "<$text text=<<title>>/>" verwijderen?
+ConfirmEditShadowTiddler: Je staat op het punt een schaduwtiddler te wijzigen. Toekomstige automatische veranderingen (upgrades) zijn dan niet mogelijk. Wil je "<$text text=<<title>>/>" wijzigen?
+ConfirmOverwriteTiddler: Wil je de tiddler "<$text text=<<title>>/>" overschrijven?
+Count: aantal
+DefaultNewTiddlerTitle: Nieuwe tiddler
+Diffs/CountMessage: <<diff-count>> verschillen
+DropMessage: 'Drop' hier (of klik escape om te annuleren)
+Encryption/Cancel: Annuleer
+Encryption/ConfirmClearPassword: Wil je het wachtwoord verwijderen? Dan wordt de wiki onversleuteld opgeslagen.
+Encryption/Password: Wachtwoord
+Encryption/PasswordNoMatch: Wachtwoorden komen niet overeen
+Encryption/PromptSetPassword: Vul een nieuw wachtwoord in voor deze TiddlyWiki
+Encryption/RepeatPassword: Herhaal wachtwoord
+Encryption/SetPassword: Vul wachtwoord in
+Encryption/Username: Gebruikersnaam
+Error/Caption: Fout
+Error/Filter: Filterfout
+Error/FilterRunPrefix: Filterfout: Onbekend voorvoegsel voor filter 'run'
+Error/FilterSyntax: Syntaxfout in filter expressie
+Error/FormatFilterOperator: Filterfout: Onbekend achtervoegsel voor de 'format' filter operator
+Error/IsFilterOperator: Filterfout: Onbekende operand voor het 'is' filter
+Error/LoadingPluginLibrary: Fout bij laden van de pluginbibliotheek
+Error/NetworkErrorAlert: `<h2>''Network fout''</h2>De verbinding met de server lijkt verbroken. Mogelijk een probleem met de netwerkverbinding. Herstel de netwerkverbinding voordat verder wordt gegaan.<br><br>''Niet opgeslagen veranderingen worden gesynchroniseerd als de verbinding hersteld is''.`
+Error/PutEditConflict: Bestand gewijzigd op server
+Error/RecursiveTransclusion: Recursieve transclusiefout in 'transclude' widget
+Error/RetrievingSkinny: Fout bij ophalen van de 'skinny' tiddlerlijst
+Error/SavingToTWEdit: Fout bij opslaan naar TWEdit
+Error/WhileSaving: Fout bij opslaan
+Error/XMLHttpRequest: XMLHttpRequest foutcode
+InternalJavaScriptError/Hint: Er is een probleem. Herstart TiddlyWiki door je browser te verversen
+InternalJavaScriptError/Title: Interne JavaScript fout
+LazyLoadingWarning: <p>Er wordt externe tekst geladen van ''<$text text={{!!_canonical_uri}}/>''</p><p>Als deze mededeling niet verdwijnt ondersteunt de gebruikte browser in deze configuratie mogelijk geen externe tekst. Zie https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Login bij TiddlySpace
+Manager/Controls/FilterByTag/None: (geen)
+Manager/Controls/FilterByTag/Prompt: Filter d.m.v. label:
+Manager/Controls/Order/Prompt: Omgekeerde volgorde
+Manager/Controls/Search/Placeholder: Zoek
+Manager/Controls/Search/Prompt: Zoek:
+Manager/Controls/Show/Option/Tags: labels
+Manager/Controls/Show/Prompt: Toon:
+Manager/Controls/Sort/Prompt: Sorteer op:
+Manager/Item/Colour: Kleur
+Manager/Item/Fields: Velden
+Manager/Item/Icon: Pictogram (icon)
+Manager/Item/Icon/None: (geen)
+Manager/Item/RawText: Ruwe tekst
+Manager/Item/Tags: Labels
+Manager/Item/Tools: Gereedschappen
+Manager/Item/WikifiedText: 'Wikified' tekst
+MissingTiddler/Hint: Ontbrekende tiddler "<$text text=<<currentTiddler>>/>" - klik {{||$:/core/ui/Buttons/edit}} om hem aan te maken
+No: Nee
+OfficialPluginLibrary: Officiële ~TiddlyWiki pluginbibliotheek
+OfficialPluginLibrary/Hint: De officiële ~TiddlyWiki pluginbibliotheek op tiddlywiki.com. Plugins, thema's en taalpaketten worden door het core team onderhouden.
+PluginReloadWarning: Sla op {{$:/core/ui/Buttons/save-wiki}} en ververs {{$:/core/ui/Buttons/refresh}} om wijzigingen aan plugins door te voeren
+RecentChanges/DateFormat: DD MMM YYYY
+Shortcuts/Input/Accept/Hint: Accepteer het geselecteerde item
+Shortcuts/Input/AcceptVariant/Hint: Accepteer het geselecteerde item (variant)
+Shortcuts/Input/AdvancedSearch/Hint: Open geavanceerd zoeken vanuit het zoekveld in het zijpaneel
+Shortcuts/Input/Cancel/Hint: Wis het input veld
+Shortcuts/Input/Down/Hint: Selecteer het volgende item
+Shortcuts/Input/Tab-Left/Hint: Selecteer de voorgaande tab
+Shortcuts/Input/Tab-Right/Hint: Selecteer de volgende tab
+Shortcuts/Input/Up/Hint: Selecteer het voorgaande item
+Shortcuts/SidebarLayout/Hint: Verander de layout van het zijpaneel
+SystemTiddler/Tooltip: Dit is een systeem tiddler
+SystemTiddlers/Include/Prompt: Inclusief systeem tiddlers
+TagManager/Colour/Heading: Kleur
+TagManager/Count/Heading: Aantal
+TagManager/Icon/Heading: Pictogram (icon)
+TagManager/Icons/None: Geen
+TagManager/Info/Heading: Info
+TagManager/Tag/Heading: Label
+Tiddler/DateFormat: DD MMM YYYY om hh12:0mmam
+UnsavedChangesWarning: Er zijn niet-opgeslagen veranderingen in TiddlyWiki
+Yes: Ja

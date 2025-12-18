@@ -1,0 +1,25 @@
+caption: Amable introducción
+created: 20150325170720682
+es-title: Amable introducción a TiddlyWiki
+modified: 20160416054440172
+tags: HelloThere
+title: A Gentle Guide to TiddlyWiki
+type: text/vnd.tiddlywiki
+
+TiddlyWiki es una herramienta increíblemente flexible y versátil, concebida y construida de forma muy distinta a la mayoría de software. Esto puede hacerla difícil de comprender hasta ese momento en que algo hace //clic// y se convierte en una extensión natural de tu cerebro.
+
+Para empezar por lo básico, TiddlyWiki es una aplicación web para la toma de notas que puedes descargar libre y gratuitamente, que puedes guardar donde quieras y adaptar del modo que desees. Úsala para [[escribir|Creating and editing tiddlers]], [[organizar|Structuring TiddlyWiki]] y [[compartir|Sharing your tiddlers with others]] notas de un modo que los procesadores de texto y otras herramientas para tomar notas no pueden. 
+
+~TiddlyWiki está diseñada para estructurar contenidos de modo [[no lineal|Philosophy of Tiddlers]] valiéndose de StoryLists, etiquetas, enlaces y otras características. Puedes organizar y recuperar tus notas de la manera que mejor se adapte a tu forma de pensar, en lugar de sentirte encadenado a una estructura predeterminada de organización.
+
+~TiddlyWiki is designed to be non-linear, structuring content with stories, tags, hyperlinks, and other features. You can organise and retrieve your notes in ways that conform to your personal thought patterns, rather than feel chained to one preset organisational structure.
+
+Puedes usar ~TiddlyWiki tanto online como sin conexión de red. Como archivo único que consultas y editas con cualquier navegador web, o puedes utilizarlo como una poderosa [[aplicación de Node.js|TiddlyWiki on Node.js]], que guarda por separado cada una de tus notas.
+
+¿Cómo hacer que ~TiddlyWiki trabaje para ti? Te recomendamos empezar consultando la documentación introductoria que se muestra más abajo y echar un vistazo al [[índice|TableOfContents]] que tienes a tu disposición en la barra lateral.
+
+También puedes seguir estas  [[sencillas instrucciones|GettingStarted]] e ir descubriendo por ti mismo a partir de ahí. 
+
+<<list-links "[tag[HelloThere]]">>
+
+También hay [[tutoriales en video|TiddlyWiki Video Tutorials by Francis Meetze]] (en inglés)

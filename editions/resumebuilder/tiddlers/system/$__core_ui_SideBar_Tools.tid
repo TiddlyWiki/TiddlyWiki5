@@ -1,0 +1,33 @@
+caption: {{$:/language/SideBar/Tools/Caption}}
+created: 20150719185611214
+modified: 20150719185622149
+title: $:/core/ui/SideBar/Tools
+
+\define lingo-base() $:/language/ControlPanel/
+\define config-title()
+$:/config/PageControlButtons/Visibility/$(listItem)$
+\end
+
+<<lingo Basics/Version/Prompt>> <<version>>
+
+<$set name="tv-config-toolbar-icons" value="yes">
+
+<$set name="tv-config-toolbar-text" value="yes">
+
+<$set name="tv-config-toolbar-class" value="">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
+
+<div style="position:relative;">
+
+<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"/> <$transclude tiddler=<<listItem>>/> <i class="tc-muted"><$transclude tiddler=<<listItem>> field="description"/></i>
+
+</div>
+
+</$list>
+
+</$set>
+
+</$set>
+
+</$set>

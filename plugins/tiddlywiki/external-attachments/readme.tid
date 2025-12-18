@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/external-attachments/readme
+
+! Introduction
+
+This plugin provides support for importing tiddlers as external attachments. That means that instead of importing binary files as self-contained tiddlers, they are imported as "skinny" tiddlers that reference the original file via the ''_canonical_uri'' field. This reduces the size of the wiki and thus improves performance. However, it does mean that the wiki is no longer fully self-contained.
+
+! Compatibility
+
+This plugin only works when using TiddlyWiki with platforms such as TiddlyDesktop that support the ''path'' attribute for imported/dragged files.
+

@@ -1,0 +1,22 @@
+created: 20130825160900000
+creator: pmario
+modified: 20140922130327196
+modifier: ChrisK
+tags: howto
+title: Speichern mit Verschlüsselung
+type: text/vnd.tiddlywiki
+
+Wenn ~TiddlyWiki als einzelne HTML Datei verwendet wird, dann kann der Inhalt mit der [[Stanford JavaScript Crypto Library]] 
+verschlüsselt werden. 
+
+''Vorgehensweise''
+
+# Im rechten Menü wählen Sie den "Tools" Reiter. Dort sehen Sie einen Button "verschlüsseln"
+# Wenn Sie den Button klicken, dann erscheint ein Passwort Dialog.
+# Geben Sie ein Passwort ein und klicken Sie den Button "Set Password"
+# Der Button wechselt nun den Text auf: "Password löschen".
+#* Wichtig: Die Verschlüsselung wird erst beim Speichern des Wikis aktiv. 
+#* ''ACHTUNG'': Wenn Sie das Passwort vergessen, dann sind die Daten weg. Es gibt keine Hintertüre.
+# Speichern Sie das Wiki.
+# Sie können zur Kontrolle die gespeicherte Datei mit einem Text Editor öffnen.
+# Wenn Sie ein verschlüsseltes Wiki öffnen, dann wird der Passwort Dialog angezeigt. 

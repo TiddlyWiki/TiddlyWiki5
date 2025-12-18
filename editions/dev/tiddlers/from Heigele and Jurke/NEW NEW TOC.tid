@@ -1,0 +1,65 @@
+caption: Table of Contents
+created: 20140715074724076
+list-before: 
+modified: 20140717182928525
+tags: $:/tags/SideBar
+title: NEW NEW TOC
+
+\define toc-heading(caption,body)
+<$reveal type="nomatch" state=<<qualify "$:/state/toc/$caption$">> text="show">
+<$button set=<<qualify "$:/state/toc/$caption$">> setTo="show" class="tc-btn-invisible">{{$:/core/images/right-arrow}} $caption$
+</$button>
+</$reveal>
+<$reveal type="match" state=<<qualify "$:/state/toc/$caption$">> text="show">
+<$button set=<<qualify "$:/state/toc/$caption$">> setTo="hide" class="tc-btn-invisible">{{$:/core/images/down-arrow}} $caption$
+</$button>
+</$reveal>
+<$reveal type="match" state=<<qualify "$:/state/toc/$caption$">> text="show" retain="yes" animate="yes">
+
+$body$
+
+</$reveal>
+\end
+<div class="tc-table-of-contents">
+
+# [[Introduction]]
+
+# [[TiddlyWiki - A quick Overview]]
+## <<toc-heading "~TiddlyWiki - A quick Overview ~TiddlyWiki" "
+##[[TiddlyWiki as Single Page Application]]
+## [[Microkernel]]
+##[[Data Persistence]]
+##[[The User Interface]]
+##[[Modularization]]
+##[[Tiddler as Basic Element]]
+##[[WikiText Markup]]
+">>
+# [[Microkernel Architecture]]
+## <<toc-heading "Microkernel Architecture" "
+##[[Microkernel|Microkernel Description]]
+##[[Datamodel]]
+##[[Module System]]
+">>
+# [[TiddlyWiki Core Application]]
+## <<toc-heading "~TiddlyWiki Core Application" "
+##[[Startup Process]]
+##[[Extending the Store]]
+###[[Event Mechanism]]
+###[[Caching]]
+###[[System Tiddlers]]
+###[[Tags and Filter Mechanism]]
+##[[Extended Persistence]]
+###[[Deserializer]]
+###[[Saver]]
+###[[Syncadaptor]]
+##[[UI and Rendering Pipeline]]
+###[[Wikitext]]
+###[[Parser]]
+###[[Widgets]]
+####[[Messages]]
+####[[Selective Update]]
+###[[Transclusion and TextReference]]
+###[[RootWidget and Rendering Startup]]
+">>
+#[[Conclusion]]
+</div>

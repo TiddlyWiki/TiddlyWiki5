@@ -1,0 +1,19 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: 목록
+Filter/Caption: 필터
+Filter/Hint: [[필터 표현식|https://tiddlywiki.com/static/Filters.html]]을 통해 검색합니다
+Filter/Matches: //<small><<resultCount>>개 일치</small>//
+Matches: //<small><<resultCount>>개 일치</small>//
+Matches/All: 모든 일치:
+Matches/Title: 제목 일치:
+Search: 검색
+Shadows/Caption: 섀도우
+Shadows/Hint: 섀도우 티들러에 대해 검색합니다
+Shadows/Matches: //<small><<resultCount>>개 일치</small>//
+Standard/Caption: 표준
+Standard/Hint: 표준 티들러에 대해 검색합니다
+Standard/Matches: //<small><<resultCount>>개 일치</small>//
+System/Caption: 시스템
+System/Hint: 시스템 티들러에 대해 검색합니다
+System/Matches: //<small><<resultCount>>개 일치</small>//

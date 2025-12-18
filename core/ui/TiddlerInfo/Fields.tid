@@ -1,0 +1,5 @@
+title: $:/core/ui/TiddlerInfo/Fields
+tags: $:/tags/TiddlerInfo
+caption: {{$:/language/TiddlerInfo/Fields/Caption}}
+
+<$transclude tiddler="$:/core/ui/TiddlerFields"/>

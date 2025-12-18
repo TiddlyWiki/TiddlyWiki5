@@ -1,0 +1,28 @@
+chapter.of: Widgets
+created: 20140717174605570
+modified: 20140717181806148
+sub.num: 2
+tags: doc
+title: Selective Update
+
+With [[Messages]] a widget is able to put some kind of events into the TiddlyWiki application which is one part of the dynamic behaviour of widgets.
+The other part is selective updating.
+Widgets are often dependant on tiddler states.
+The [[ListWidget|https://tiddlywiki.com/#ListWidget]] for example can be configured to list all tiddlers which are tagged with "important".
+Now, when such a tiddler is changed and it's "important" tag is removed, this change should reflect in the ~ListWidget.
+To allow widgets to react on such changes, each widget can provide a function ``refresh(changedTiddlers)``.
+The [[RootWidget|RootWidget and Rendering Startup]] is registered to the wiki store, using the [[Event Mechanism]]. When an change event occurs it starts to call the refresh function of its children with a list of the changed tiddlers.
+Each widget can then decide if it has to change or re-render its DOM representation and call the refresh function of its own children.
+This way every time a tiddler or the wiki store itself changes, each widget can instantly react on these changes or ignore them.
+
+Another way of updating are text reference attributes (text references explained in [[Transclusion and TextReference]]):
+
+```js
+{type: "indirect", textReference: <textReference>}
+```
+
+When a widget got a attribute which is a text reference and the refresh function is called, it can check if the text reference references a changed tiddler and update accordingly.
+
+Nearly every state of the UI is stored in tiddlers. A search mechanism for example would use a ~EditTextWidget which shows an text input field for the search string and a ListWidget to show the results.
+The ~EditTextWidget is bound to a tiddler [[$:/temp/search]]. Meaning when editing the text in the input field the tiddlers content is changed to this text. On the other hand when the tiddler changes the [[RootWidget|RootWidget and Rendering Startup]] is notified. It then starts calling its childrens refresh methods. Eventually the refresh method of the ~EditTextWidget is called and it can re-render itself if necessary.
+This way TiddlyWiki can re-use an already existing data structure which is not only convenient because we don't need to introduce an additional structure but tiddlers managed in the wiki store are already a pretty powerful data structure, supporting an [[Event Mechanism]] (so we don't need an additional observer pattern), [[Caching]], Metadata by additional tiddler fields and a [[way to obtain specific tiddlers|Tags and Filter Mechanism]].

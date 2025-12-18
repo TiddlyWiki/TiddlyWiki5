@@ -1,0 +1,20 @@
+title: $:/plugins/tiddlywiki/twitter/usage/sharebutton
+tags: $:/tags/TwitterUsage
+caption: Share Button
+
+!! Embedding Share Buttons
+
+|!Attribute |!Values |!Default |!Notes |
+|''type'' |"shareButton" |none |"shareButton" |
+|''url'' |The URL to be shared |none | |
+|''text'' |Any string |none |The default, highlighted text a user sees in the Tweet web intent |
+|''hashtags'' |A comma-separated list of hashtags |none |A list of hashtags to be appended to default Tweet text where appropriate |
+|''align'' |"left", "right" |locale dependent (left or right, depending on the text direction of the language) |The alignment of the button within an iframe; use this to ensure flush layout when aligning buttons |
+|''size'' |"medium", "large" |medium |Size of button |
+|''lang'' |An ISO 639-1 language code |en |The language in which to render a widget, if supported |
+|''dnt'' |"true", "false" |false |Enable Do Not Track for this widget |
+|''related'' |Any comma-separated list of valid Twitter screen names |none |A list of Twitter screen names to be suggested for following after a Tweet or Tweet action is posted |
+|''via'' |Any valid Twitter screen name |none |A Twitter user mentioned in the default Tweet text as via @user where appropriate |
+
+<<twitter-usage """<$twitter type="shareButton" url="https://tiddlywiki.com/" text="Mind blown!"/>
+""">>

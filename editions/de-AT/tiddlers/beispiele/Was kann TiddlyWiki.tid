@@ -1,0 +1,21 @@
+created: 20140923101722330
+creator: pmario
+list: [[Erstellen von Notizen]] [[Task Management mit Tags]] [[Task Management mit Listen]]
+modified: 20140924155042877
+modifier: pmario
+tags: InhaltsVerzeichnis
+title: Was kann TiddlyWiki
+type: text/vnd.tiddlywiki
+
+* [[Notizen sammeln|Erstellen von Notizen]], taggen und verlinken, um Beziehungen zwischen den Notizen fest zu legen.
+* Einfaches Erstellen, von [[Tag basierenden Listen|TaskManagement]] und [[Inhaltsverzeichnissen|InhaltsVerzeichnis]].
+** ~TiddlyWiki ist zwar ein "nicht lineares Notizbuch" aber etwas Struktur schadet nie :)
+* Verwalten von einfachen ~ToDo Listen. siehe: TaskManagement
+* Inhaltsverzeichnis für "fast alles": Rezepte, Bücher, Kontakte, Musik Kollektionen und vieles mehr.
+* Erstellen eines "Blogs" oder einer Webseite.
+* [[Ideensammlung]] zum nächsten Buch.
+* Erstellen einfacher [[Bildergalerien|Bilder Gallerie Beispiel]]. 
+* Da ~TiddlyWiki eine einzelne Datei ist, ist es sehr einfach sie mit anderen zu teilen. zB: Per mail verschicken --- fertig.
+* Erstellen einer lokalen Wissensdatenbank mit mehreren vernetzten ~TiddlyWiki Dateien. 
+
+Weitere interessante Anwendungsmöglichkeiten finden Sie unter [[Community]] und auf https://tiddlywiki.com

@@ -1,0 +1,12 @@
+created: 20150228120919000
+modified: 20150228130407000
+title: tv-auto-open-on-import Variable
+tags: Variables [[Core Variables]] [[Configuration Variables]]
+type: text/vnd.tiddlywiki
+caption: tv-auto-open-on-import
+
+The <<.def tv-auto-open-on-import>> [[variable|Variables]] controls whether the `tm-import-tiddlers` message causes the tiddler [[$:/Import]] (which lists the pending imports) to open in the story river.
+
+By default, the tiddler is opened. But if this variable has the value <<.value no>>, it isn't.
+
+An example of setting this variable to <<.value no>> can be found in the upgrade plugin within the [[TiddlyWiki Upgrade Wizard|https://www.tiddlywiki.com/upgrade.html]]. People can drag their wiki files onto the wizard without triggering the normal import display.

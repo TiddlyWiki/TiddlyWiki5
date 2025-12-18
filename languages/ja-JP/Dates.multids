@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: 日
+Date/DaySuffix/10: 日
+Date/DaySuffix/11: 日
+Date/DaySuffix/12: 日
+Date/DaySuffix/13: 日
+Date/DaySuffix/14: 日
+Date/DaySuffix/15: 日
+Date/DaySuffix/16: 日
+Date/DaySuffix/17: 日
+Date/DaySuffix/18: 日
+Date/DaySuffix/19: 日
+Date/DaySuffix/2: 日
+Date/DaySuffix/20: 日
+Date/DaySuffix/21: 日
+Date/DaySuffix/22: 日
+Date/DaySuffix/23: 日
+Date/DaySuffix/24: 日
+Date/DaySuffix/25: 日
+Date/DaySuffix/26: 日
+Date/DaySuffix/27: 日
+Date/DaySuffix/28: 日
+Date/DaySuffix/29: 日
+Date/DaySuffix/3: 日
+Date/DaySuffix/30: 日
+Date/DaySuffix/31: 日
+Date/DaySuffix/4: 日
+Date/DaySuffix/5: 日
+Date/DaySuffix/6: 日
+Date/DaySuffix/7: 日
+Date/DaySuffix/8: 日
+Date/DaySuffix/9: 日
+Date/Long/Day/0: 日曜
+Date/Long/Day/1: 月曜
+Date/Long/Day/2: 火曜
+Date/Long/Day/3: 水曜
+Date/Long/Day/4: 木曜
+Date/Long/Day/5: 金曜
+Date/Long/Day/6: 土曜
+Date/Long/Month/1: 1 月
+Date/Long/Month/10: 10 月
+Date/Long/Month/11: 11 月
+Date/Long/Month/12: 12 月
+Date/Long/Month/2: 2 月
+Date/Long/Month/3: 3 月
+Date/Long/Month/4: 4 月
+Date/Long/Month/5: 5 月
+Date/Long/Month/6: 6 月
+Date/Long/Month/7: 7 月
+Date/Long/Month/8: 8 月
+Date/Long/Month/9: 9 月
+Date/Period/am: 午前
+Date/Period/pm: 午後
+Date/Short/Day/0: 日
+Date/Short/Day/1: 月
+Date/Short/Day/2: 火
+Date/Short/Day/3: 水
+Date/Short/Day/4: 木
+Date/Short/Day/5: 金
+Date/Short/Day/6: 土
+Date/Short/Month/1: 1 月
+Date/Short/Month/10: 10 月
+Date/Short/Month/11: 11 月
+Date/Short/Month/12: 12 月
+Date/Short/Month/2: 2 月
+Date/Short/Month/3: 3 月
+Date/Short/Month/4: 4 月
+Date/Short/Month/5: 5 月
+Date/Short/Month/6: 6 月
+Date/Short/Month/7: 7 月
+Date/Short/Month/8: 8 月
+Date/Short/Month/9: 9 月
+RelativeDate/Future/Days: <<period>> 日後
+RelativeDate/Future/Hours: <<period>> 時間後
+RelativeDate/Future/Minutes: <<period>> 分後
+RelativeDate/Future/Months: <<period>> か月後
+RelativeDate/Future/Second: 1 秒後
+RelativeDate/Future/Seconds: <<period>> 秒後
+RelativeDate/Future/Years: <<period>> 年後
+RelativeDate/Past/Days: <<period>> 日前
+RelativeDate/Past/Hours: <<period>> 時間前
+RelativeDate/Past/Minutes: <<period>> 分前
+RelativeDate/Past/Months: <<period>> か月前
+RelativeDate/Past/Second: 1 秒前
+RelativeDate/Past/Seconds: <<period>> 秒前
+RelativeDate/Past/Years: <<period>> 年前

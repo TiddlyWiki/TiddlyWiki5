@@ -1,0 +1,8 @@
+section: Previous Employment
+tags: [[Section Display]]
+template: $:/template/PreviousEmploymentTemplate
+title: $:/display/Previous Employment Display
+
+\define ThisTiddler() $:/display/Previous Employment Display
+
+<$transclude tiddler=GenericSectionDisplayTemplate mode=block/>

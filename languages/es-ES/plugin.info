@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/es-ES",
+	"name": "es-ES",
+	"plugin-type": "language",
+	"description": "Castellano. (España)",
+	"author": "Pau DeLuca,Joe Bordes",
+	"core-version": ">=5.3"
+}

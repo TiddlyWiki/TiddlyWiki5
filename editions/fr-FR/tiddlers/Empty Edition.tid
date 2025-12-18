@@ -1,0 +1,14 @@
+created: 20140916213421041
+fr-title: Édition « basique »
+modified: 20160526132027359
+tags: Editions
+title: Empty Edition
+type: text/vnd.tiddlywiki
+
+L'édition <<gf "basique">> de ~TiddlyWiki est une distribution minimale, sans plugin additionnel ni configuration au-delà du code principal.
+
+L'édition //basique// peut être récupérée à l'adresse<<dp>>
+
+> {{$:/editions/fr-FR/snippets/download-empty-button}}
+> Si le bouton ne fonctionne pas, enregistrez ce lien<<dp>> https://tiddlywiki.com/languages/fr-FR/empty.html
+> Votre navigateur vous demandera peut-être d'accepter explicitement l'enregistrement avant qu'il démarre

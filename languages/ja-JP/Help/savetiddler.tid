@@ -1,0 +1,8 @@
+title: $:/language/Help/savetiddler
+description: raw テキストの Tiddler をファイルに保存
+
+個別の Tiddler を raw テキストあるいはバイナリフォーマットにて、指定したファイル名に保存します。
+
+```
+--savetiddler <title> <filename>
+```

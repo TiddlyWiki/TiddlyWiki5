@@ -1,0 +1,50 @@
+caption: Librería oficial de plugins
+created: 20160107222352710
+es-title: Cómo instalar plugins desde la librería oficial
+modified: 20181123220449416
+tags: Plugins
+title: Installing a plugin from the plugin library
+type: text/vnd.tiddlywiki
+
+! Configuración de escritorio
+
+Seguir instrucciones cuando se utiliza TiddlyWiki en versión archivo HTML:
+
+# Sólo [[por si acaso|The First Rule of Using TiddlyWiki]], haz copia de seguridad de tu archivo HTML de ~TiddlyWiki
+# Abre ~TiddlyWiki en el navegador
+# Abre el [[panel de control|$:/ControlPanel]] {{$:/core/images/options-button}}, clic en la pestaña ''Plugins'' y luego en botón {{$:/core/images/download-button}} ''Obten complementos y extensiones''
+# Pincha en el botón {{$:/core/images/chevron-right}} ''Abrir biblioteca de complementos y extensiones'' para abrir la librería oficial
+# Cuando se haya cargado la librería:
+## Selecciona la pestaña adecuada al tipo complemento que buscas ''Plugins'', ''Temas'' o ''Idiomas''
+## Desplázate o usa el cuadro para encontrar lo que buscas
+# Pincha el botón ''instalar''
+# Guarda los cambios con el botón  {{$:/core/images/save-button}}
+# Recarga la página {{$:/core/images/refresh-button}}
+# El plugin está instalado y listo para su uso
+
+! Configuración cliente-servidor
+
+Seguir instrucciones cuando se utiliza TiddlyWiki en versión servidor Node.js:
+
+# Identificar el plugin que desea instalar usando la pestaña ''Plugins'' en el [[panel de control|$:/ControlPanel]] ('sin embargo no instalar el plugin desde aquí). Los plugins se identifican por su tipo  (''Plugins'', ''Temas'' o ''Idiomas''), editor y título. Por ejemplo, el  plugin `$:/plugins/tiddlywiki/internals` es identificado como ''tiddlywiki/internals''
+# Detener el servidor si está en ejecución.
+# Editar el archivo `tiddlywiki.info` (está en formato JSON) y ubicar la sección `plugins`, `themes` or `languages` (ver abajo)
+# Agreagar las entradas correspondientes a los plugins que desea instalar. (Tener cuidado de separar los ítems con coma, pero al último ítem no colocarle)
+# Reiniciar el servidor
+
+```
+{
+	"plugins": [
+		"tiddlywiki/codemirror"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"languages": [
+		"es-ES",
+		"fr-FR",
+		"en-EN"
+	]
+}
+```

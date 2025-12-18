@@ -1,0 +1,21 @@
+created: 20150221113728000
+modified: 20150221151338000
+tags: Macros [[Core Macros]]
+title: contrastcolour Macro
+type: text/vnd.tiddlywiki
+caption: contrastcolour
+
+The <<.def contrastcolour>> [[macro|Macros]] returns whichever of two given [[CSS|Cascading Style Sheets]] colours is deemed to contrast best with another.
+
+An example can be seen in the [[template tiddler for tag pills|$:/core/ui/TagTemplate]].
+
+!! Parameters
+
+;target
+: The colour to contrast against (typically a background colour)
+;fallbackTarget
+: An alternative colour to contrast against. This is used when <<.param target>> is undefined or not a valid colour
+;colourA
+: The first of the two colours to choose between
+;colourB
+: The second of the two colours to choose between

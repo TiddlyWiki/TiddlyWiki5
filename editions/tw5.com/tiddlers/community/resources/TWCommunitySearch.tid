@@ -1,0 +1,22 @@
+created: 20150913184230499
+modified: 20210106151027664
+tags: [[Other Resources]]
+title: TWCommunitySearch
+type: text/vnd.tiddlywiki
+url: http://erwanm.github.io/tw-community-search
+
+The [[CommunitySearch wiki|http://erwanm.github.io/tw-community-search]] aggregates many public wikis from the community. It is updated automatically every day. At the time of writing, more than 5000 tiddlers are indexed, thus giving access to the largest known collection of TW content.
+
+It lets you search for some specific content among a preselected list of wikis. The indexed content is mostly focused on TW usage, so you would typically use this search system to find information about a particular aspect of TiddlyWiki. Say for example that you want to learn how to make a table of content, type "table of content" in the [[CommunitySearch box|http://erwanm.github.io/tw-community-search/#CommunitySearch]] (also accessible in the default tiddler [[GettingStarted|http://erwanm.github.io/tw-community-search/#GettingStarted]]). The search results are links to various wikis, and point directly to the specific tiddlers containing your request.
+
+
+The ~CommunitySearch wiki also lets you:
+
+* Browse the [[list of wikis|http://erwanm.github.io/tw-community-search/#CommunityWikis]]
+* Browse the [[list of author|http://erwanm.github.io/tw-community-search/#CommunityAuthors]]
+* Browse the [[list of plugins|http://erwanm.github.io/tw-community-search/#CommunityPlugins]]
+* Access content by [[tag|http://erwanm.github.io/tw-community-search/#CommunityTags]] (see also [[BookmarkingTags|http://erwanm.github.io/tw-community-search/#BookmarkingTags]])
+* Follow the [[latest news|http://erwanm.github.io/tw-community-search/#CommunityNews]] from the community (and [[publish your own news|http://erwanm.github.io/tw-community-search/#PublishingInCommunityNews]] if you are a wiki author)
+
+
+

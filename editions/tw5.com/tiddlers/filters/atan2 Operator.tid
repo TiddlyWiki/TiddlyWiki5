@@ -1,0 +1,15 @@
+caption: atan2
+created: 20211019222810994
+modified: 20211021222853123
+op-input: a [[selection of titles|Title Selection]] = coordinate Y (<<.place Y>>)
+op-output: the angle in radians (in [ - π , π ] ) between the positive x-axis and the ray from (0,0) to the point (x,y)
+op-parameter: coordinate X
+op-parameter-name: X
+op-purpose: returns the angle in the plane (in radians) between the positive x-axis and the ray from (0,0) to the point (x,y), for [<<.place Y>>]atan2[<<.place X>>]
+tags: [[Filter Operators]] [[Mathematics Operators]] [[Binary Mathematics Operators]] [[Trigonometric Operators]]
+title: atan2 Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.21">> See [[Mathematics Operators]] for an overview.
+
+<<.operator-examples "atan2">>

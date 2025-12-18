@@ -1,0 +1,3 @@
+title: $:/tags/SideBar
+list: [[$:/core/ui/SideBar/Open]] [[$:/core/ui/SideBar/Recent]] [[$:/core/ui/SideBar/Tools]] [[$:/core/ui/SideBar/More]]
+

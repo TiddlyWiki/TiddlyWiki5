@@ -1,0 +1,15 @@
+created: 20201228143125000
+fr-title: Plugin de partage
+modified: 20220221010033461
+tags: OfficialPlugins
+title: Share Plugin
+type: text/vnd.tiddlywiki
+
+<div class="tc-message-box">N'installez ce plugin que si vous comprenez ce qu'il fait !</div>
+
+Ce plugin expérimental fournit des outils pour partager des tiddlers via des URLs, comme<<:>>
+
+* La possibilité de charger un groupe de tiddlers grâce à une //adresse hachée// au démarrage
+* Un assistant et des modèles pour créer des URLs à partir d'un groupe de tiddlers
+
+Dans la [[bibliothèque des plugins|Installing a plugin from the plugin library]], vous trouverez le plugin de partage sous le nom <<gf "Share Plugin">>.

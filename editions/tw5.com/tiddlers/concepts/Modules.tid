@@ -1,0 +1,9 @@
+created: 20131129162919588
+modified: 20160610082237902
+tags: Concepts
+title: Modules
+type: text/vnd.tiddlywiki
+
+A //module// in TiddlyWiki5 is a tiddler containing executable JavaScript, of the type `application/javascript` and with the field `module-type` set to the ModuleType of the module.
+
+See [[control panel|$:/ControlPanel]] <<.icon $:/core/images/options-button>> > ''Info'' > ''Advanced'' > ''Loaded Modules'' for a list of currently loaded modules.

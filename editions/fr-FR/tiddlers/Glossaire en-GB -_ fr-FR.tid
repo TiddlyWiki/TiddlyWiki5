@@ -1,0 +1,50 @@
+created: 20141217193625476
+modified: 20220402105820520
+title: Glossaire en-GB -> fr-FR
+type: text/vnd.tiddlywiki
+
+|en-GB |fr-FR |Commentaire |h
+|added|ajouté||
+|background|arrière plan||
+|bug|bogue||
+|core |noyau ||
+|dominant append|ajout prépondérant|//ajouté par prépondérance//|
+|draft|ébauche||
+|empty édition |édition basique ||
+|encryption|cryptage||
+|filter run|séquence de filtre||
+|fixed|corrigé||
+|flexible|souple|maléable |
+|improved|amélioré||
+|introduce|intègrer|ex (eng)<<:>> Introduce plugin|
+|keyword|motclé||
+|layout|mise en page||
+|lazy loading|téléconsigne ||
+|no *|sauf * |hormis * |
+|non-linear|3D ? ||
+|placeholder|zoneréservée||
+|pull request|proposer une contribution||
+|run|séquence||
+|~SafeMode|~ModeSansÉchec |~ModeSecours ?|
+|~SandBox|~BacàSable|=> ~ZoneBrouillon/Protégée ?|
+|sequence|suite /série||
+|a set|un ensemble||
+|shadow|shadow|(ombre, *latent*, fantôme ?)|
+|single file wiki|wiki mono-fichier||
+|snippet|portion||
+|step|étape||
+|story river|déroulé||
+|tagging |étiquet(er/age) |tag=> tag/étiquette|
+|template|gabarit||
+|tweak|régl(er/age)||
+|upgrade |mettre à niveau |actualiser/Obtenir la dernière version |
+|view|visualisation |abr.<<:>> 'Visu'|
+|Whitespace|Espacevierge||
+|widget |widget ||
+
+---
+
+!!AVERTISSEMENT - Mots et références réservés pour le système<<:>>
+
+* Les noms de `champ` et leurs références (nom du champ sans séparateur suivi de Field, ex<<:>> ListField)
+* Les noms des widgets, ex<<dp>> NavigatorWidget

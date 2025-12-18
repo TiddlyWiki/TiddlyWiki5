@@ -1,0 +1,6 @@
+title: $:/core/ui/Buttons/export-tiddler
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/export-button}} {{$:/language/Buttons/ExportTiddler/Caption}}
+description: {{$:/language/Buttons/ExportTiddler/Hint}}
+
+<$transclude $variable="exportButton" exportFilter=`[[$(currentTiddler)$]]` lingoBase="$:/language/Buttons/ExportTiddler/" baseFilename=<<currentTiddler>>/>

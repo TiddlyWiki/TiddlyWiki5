@@ -1,0 +1,23 @@
+title: $:/language/Help/init
+description: Inicializar uma nova pasta wiki
+
+Inicializa uma [[PastaWiki|WikiFolders]] vazia com uma cópia da edição especificada.
+
+```
+--init <edition> [<edition> ...]
+```
+
+Por exemplo:
+
+```
+tiddlywiki ./MyWikiFolder --init empty
+```
+
+Nota:
+
+* A pasta para a wiki será criada se não existir
+* Por omissão a "edition" será ''empty''
+* O comando init irá falhar se a pasta especificada não estiver vazia
+* O comando init remove quaisquer definições de `includeWikis` no arquivo `tiddlywiki.info` da edição
+* Quando múltiplas edições são especificadas, as edições inicializadas posteriormente substituem quaisquer arquivos partilhados com edições anteriores (de modo que o arquivo `tiddlywiki.info` final será copiado da última edição)
+* `--editions` mostra uma lista de edições disponíveis

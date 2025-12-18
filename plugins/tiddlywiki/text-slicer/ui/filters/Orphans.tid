@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/text-slicer/filters/Orphans
+tags: $:/tags/Filter
+filter: [has[toc-type]] -[toc-type[document]list-children[]]
+description: [Text-slicer] Tiddlers that are not part of any document
+

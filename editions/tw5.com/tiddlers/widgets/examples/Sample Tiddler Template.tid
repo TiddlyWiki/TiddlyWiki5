@@ -1,0 +1,9 @@
+created: 20230518124140604
+description: This example tiddler is used to illustrate some of the new features in Parameterized Transclusions
+modified: 20230518125337219
+tags: [[ParametersWidget Examples]] Demonstrations
+title: Sample Tiddler Template
+
+<$parameters name=Jeremy age="21">
+My name is <<name>> and my age is <<age>>.
+</$parameters>

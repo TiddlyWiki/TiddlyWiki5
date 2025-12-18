@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/raw
+tags: $:/tags/EditPreview
+caption: raw HTML
+list-after: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/widget-tree
+code-body: yes
+
+<pre><code><$view field="text" format="htmlwikified" /></code></pre>

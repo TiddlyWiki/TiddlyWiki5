@@ -1,0 +1,22 @@
+created: 20140210160125905
+modified: 20160607163012344
+tags: Features [[Working with TiddlyWiki]]
+title: Searching in TiddlyWiki
+type: text/vnd.tiddlywiki
+
+Searching is fast and flexible in ~TiddlyWiki.
+
+! Standard search
+
+Typing text into the search box in the sidebar will turn up a list of all the tiddlers that contain that text.
+
+://(Note that the sidebar tabs will be hidden by the search results until you click the 'x' to the right of the search box to remove the search results)//
+
+! Advanced searching
+
+Clicking on the magnifying glass icon <<.icon $:/core/images/advanced-search-button>> to the right of the search box will open [[$:/AdvancedSearch]]. This tiddler contains four tabs:
+
+* The ''standard'' tab contains another instance of the search box found in the sidebar
+* The ''system'' tab allows you to limit your search to system tiddlers
+* The ''shadows'' tab allows you to limit your search to shadow tiddlers
+* The ''filter'' tab is not a search box, per se, but a way to obtain a list of all tiddlers that meet the specific criteria described by that [[filter|Filters]], for example, "All tags except system tags"

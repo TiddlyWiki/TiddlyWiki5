@@ -1,0 +1,25 @@
+created: 20140321090511826
+modified: 20140919170549958
+tags: Resources
+title: Latest
+type: text/vnd.tiddlywiki
+
+The latest news, articles, resources and examples.
+
+<div class="tc-link-info">
+
+<$list filter="[tag[Articles]] [tag[Examples]] [tag[Resources]] [tag[Tutorials]] +[!sort[modified]limit[8]]">
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>

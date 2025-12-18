@@ -1,0 +1,16 @@
+title: $:/language/Filters/
+
+AllTags: Alle labels behalve systeemlabels
+AllTiddlers: Alle tiddlers behalve systeemtiddlers
+Drafts: Concepttiddlers
+Missing: Ontbrekende tiddlers
+Orphans: Weestiddlers
+OverriddenShadowTiddlers: Overschreven schaduwtiddlers
+RecentSystemTiddlers: Onlangs gewijzigde tiddlers inclusief systeemtiddlers
+RecentTiddlers: Onlangs gewijzigde tiddlers
+SessionTiddlers: Tiddlers gewijzigf nadat de wiki geleaden werd
+ShadowTiddlers: Schaduwtiddlers
+StoryList: Tiddlers in de 'story river' behalve <$text text="$:/AdvancedSearch"/>
+SystemTags: Systeemlabels
+SystemTiddlers: Systeemtiddlers
+TypedTiddlers: Niet-wikitekst tiddlers

@@ -1,0 +1,12 @@
+created: 20140924115616653
+modified: 20141006103216206
+tags: Filters
+title: FilterOperator: fields
+type: text/vnd.tiddlywiki
+
+L'opérateur de filtre ''fields'' est un sélecteur qui renvoie les noms de tous les champs utilisés dans les tiddlers sélectionnés.
+
+|!Chaîne de filtre |!Description |
+|`[[HelloThere]fields[]]` |Renvoie les champs présents dans le tiddler `HelloThere` |
+|`[tag[monTag]fields[]]` |Renvoie l'ensemble de tous les champs présents dans les tiddlers ayant pour tag `monTag` |
+

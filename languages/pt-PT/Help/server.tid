@@ -1,0 +1,37 @@
+title: $:/language/Help/server
+description: Atribui um interface de servidor HTTP à TiddlyWiki
+
+O servidor incluído na TiddlyWiki 5 é muito elementar. Apesar de compatível com a TiddlyWeb não suporta muitas das funcionalidades necessárias para utilização robusta com interface pela Internet.
+
+Na sua forma mais elementar serve a representação de um tiddler específico. Com parâmetros adicionais serve tiddlers codificados em JSON, e suporta operações HTTP básicas para `GET`, `PUT` e `DELETE`.
+
+```
+--server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host> <pathprefix>
+```
+
+Os parâmetros são:
+
+* ''port'' - número da porta pela qual servir (por defeito "8080")
+* ''roottiddler'' - o tiddler a ser servido na raiz (por defeito "$:/core/save/all") 
+* ''rendertype'' - o tipo de conteúdo para o qual o tiddler deve ser representado (por defeito "text/plain")
+* ''servetype'' - o tipo de conteúdo para o qual o tiddler deve ser servido (por defeito "text/html")
+* ''username'' - o nome de utilizador pré definido com o qual se assinam as edições
+* ''password'' - palavra passe opcional para autenticação básica
+* ''host'' - endereço opcional do servidor de onde servir (por defeito  "127.0.0.1" conhecido como "localhost")
+* ''pathprefix'' - prefixo opcional para caminhos
+
+Se o parâmetro palavra passe for especificado o navegador irá pedir ao utilizador um nome e palavra passe. Tenha em atenção que a palavra passe é transmitida em texto simples tornando esta implementação imprópria para utilização geral
+
+Por exemplo:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+O nome de utilizador e a palavra passe podem ser vazios se necessitar de definir o nome do servidor ou prefixo para caminhos e não pretender que a palavra passe seja requerida:
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+Para correr servidores TiddlyWiki múltiplos ao mesmo tempo é necessário colocar cada um numa porta diferente.

@@ -1,0 +1,20 @@
+caption: Filtros: Sintaxis
+created: 20140210141217955
+es-title: Sintaxis de expresiones de búsqueda
+list: [[Filter Expression]] [[Filter Run]] [[Filter Step]] [[Filter Parameter]] [[Filter Whitespace]]
+modified: 20160420173154550
+tags: Filters
+title: Filter Syntax
+type: text/vnd.tiddlywiki
+
+<<.preamble """Los [[filtros|Filters]] siguen una gramática especial que aquí presentamos mediante [[diagramas sintácticos|Railroad Diagrams]], para uso de quienes encuentran útil la descripción sintáctica formal. Puedes, sin embargo, [[aprender a escribir filtros|Introduction to filter notation]] sin necesidad de comprender esta sección.""">>
+
+Un <<.def filtro>> es una una secuencia de instrucciones que transforma un <<.def input>> o <<.word entrada>> en un <<.def output>> o <<.word salida>>. Tanto el input como el output son [[conjuntos ordenados de títulos|Title Selection]] de cosas tales como tiddlers y campos. 
+
+Un filtro es una [[expresión|Filter Expression]] construida con piezas más pequeñas --que llamamos [[instrucciones|Filter Run]] y [[pasos|Filter Step]]--, cada uno de los cuales transforma a su vez un input en un output.
+
+Un filtro comienza con un output vacío y sus ejecuciones se procesan de izquierda a derecha, modificando progresivamente dicho output. 
+
+Estas son las diferentes piezas que componen un filtro:
+
+<<list-links "[tag[Filter Syntax]]">>

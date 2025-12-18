@@ -1,0 +1,10 @@
+title: $:/language/Help/output
+description: Change le répertoire de départ pour la sortie des prochaines commandes
+
+Change le répertoire de départ pour la sortie des prochaines commandes. Par défaut, le répertoire de sortie est le sous-répertoire `output` du répertoire de l'édition courante.
+
+```
+--output <nom de chemin>
+```
+
+Si le chemin spécifié est relatif, il est calculé relativement au répertoire de sortie courant. Par exemple, `--output .` indique le répertoire courant comme répertoire de sortie.

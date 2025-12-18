@@ -1,0 +1,158 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: 고급
+Advanced/Hint: 이 티들리위키에 대한 내부 정보
+Appearance/Caption: 외관
+Appearance/Hint: 티들리위키의 외관을 사용자 지정하는 방법입니다.
+Basics/AnimDuration/Prompt: 애니메이션 지속 시간:
+Basics/Caption: 기본
+Basics/DefaultTiddlers/BottomHint: 스페이스로 되어 있는 제목에는 &#91;&#91;이중 대괄호&#93;&#93;를 사용하세요. 또는 {{이야기 정렬 유지||$:/snippets/retain-story-ordering-button}}로 선택할 수 있습니다
+Basics/DefaultTiddlers/Prompt: 기본 티들러:
+Basics/DefaultTiddlers/TopHint: 시작할 때 표시할 티들러를 선택합니다:
+Basics/Language/Prompt: 안녕! 현재 언어:
+Basics/NewJournal/Tags/Prompt: 새 일지 티들러에 대한 태그
+Basics/NewJournal/Title/Prompt: 새 일지 티들러의 제목
+Basics/OverriddenShadowTiddlers/Prompt: 덮어쓴 섀도우 티들러 수:
+Basics/ShadowTiddlers/Prompt: 섀도우 티들러 수:
+Basics/Subtitle/Prompt: 부제목:
+Basics/SystemTiddlers/Prompt: 시스템 티들러 수:
+Basics/Tags/Prompt: 태그 수:
+Basics/Tiddlers/Prompt: 티들러 수:
+Basics/Title/Prompt: 이 티들리위키의 제목:
+Basics/Username/Prompt: 편집에 서명하기 위한 사용자 이름:
+Basics/Version/Prompt: 티들리위키 버전:
+EditorTypes/Caption: 편집기 형식
+EditorTypes/Editor/Caption: 편집기
+EditorTypes/Hint: 이 티들러는 특정 티들러 형식을 편집하는 데 사용하는 편집기를 결정합니다.
+EditorTypes/Type/Caption: 형식
+Info/Caption: 정보
+Info/Hint: 이 티들리위키에 대한 정보
+KeyboardShortcuts/Add/Caption: 단축키 추가
+KeyboardShortcuts/Add/Prompt: 여기에 단축키를 입력하세요
+KeyboardShortcuts/Caption: 키보드 단축키
+KeyboardShortcuts/Hint: 키보드 단축키 할당 관리
+KeyboardShortcuts/NoShortcuts/Caption: 할당된 키보드 단축키가 없음
+KeyboardShortcuts/Platform/All: 모든 플랫폼
+KeyboardShortcuts/Platform/Linux: Linux 플랫폼 전용
+KeyboardShortcuts/Platform/Mac: 매킨토시 플랫폼 전용
+KeyboardShortcuts/Platform/NonLinux: Linux가 아닌 플랫폼 전용
+KeyboardShortcuts/Platform/NonMac: 매킨토시가 아닌 플랫폼 전용
+KeyboardShortcuts/Platform/NonWindows: Windows가 아닌 플랫폼 전용
+KeyboardShortcuts/Platform/Windows: Windows 플랫폼 전용
+KeyboardShortcuts/Remove/Hint: 키보드 단축키 제거
+LoadedModules/Caption: 불러온 모듈
+LoadedModules/Hint: 현재 불러온 티들러 모듈의 원본 티들러로 연결된 현재 불러온 티들러 모듈입니다. 어떠한 기울린 모듈은 통상적으로 부팅 과정 중에 설치되었기 때문에 원본 티들러가 부족합니다.
+Palette/Caption: 팔레트
+Palette/Editor/Clone/Caption: 복제
+Palette/Editor/Clone/Prompt: 이 섀도우 팔레트를 편집하기 전에 그것을 복제하는 것을 권장합니다
+Palette/Editor/Prompt: 편집 중:
+Palette/Editor/Prompt/Modified: 이 섀도우 팔레트는 수정되어 있습니다
+Palette/Editor/Reset/Caption: 재설정
+Palette/HideEditor/Caption: 편집기 숨기기
+Palette/Prompt: 현재 팔레트:
+Palette/ShowEditor/Caption: 편집기 보이기
+Parsing/Block/Caption: 블록 파서 규칙
+Parsing/Caption: 구문 분석
+Parsing/Hint: 여기서 개별 위키 파서 규칙을 전역으로 비활성화할 수 있습니다. 어떤 파서 규칙을 비활성화하면 티들리위키가 제대로 작동하는 것을 막을 수 있으므로 주의하십시오 ([[안전 모드|https://tiddlywiki.com/#SafeMode]]로 정상 작동하도록 복구할 수 있습니다)
+Parsing/Inline/Caption: 인라인 파서 규칙
+Parsing/Pragma/Caption: 플라그마 파서 규칙
+Plugins/Add/Caption: 더 많은 플러그인 얻기
+Plugins/Add/Hint: 공식 라이브러리에서 플러그인을 설치합니다
+Plugins/AlreadyInstalled/Hint: 이 플러그인은 이미 <$text text=<<installedVersion>>/> 버전으로 설치되어 있습니다
+Plugins/Caption: 플러그인
+Plugins/Disable/Caption: 비활성화
+Plugins/Disable/Hint: 페이지를 다시 불러올 때 이 플러그인을 비활성화합니다
+Plugins/Disabled/Status: (비활성화됨)
+Plugins/Empty/Hint: 없음
+Plugins/Enable/Caption: 활성화
+Plugins/Enable/Hint: 페이지를 다시 불러올 때 이 플러그인을 활성화합니다
+Plugins/Install/Caption: 설치
+Plugins/Installed/Hint: 현재 설치된 플러그인:
+Plugins/Languages/Caption: 언어
+Plugins/Languages/Hint: 언어 팩 플러그인
+Plugins/NoInfoFound/Hint: ''"<$text text=<<currentTab>>/>"'' 찾을 수 없음
+Plugins/NotInstalled/Hint: 이 플러그인은 현재 설치되어 있지 않습니다
+Plugins/OpenPluginLibrary: 플러그인 라이브러리 열기
+Plugins/Plugins/Caption: 플러그인
+Plugins/Plugins/Hint: 플러그인
+Plugins/Reinstall/Caption: 재설치
+Plugins/Themes/Caption: 테마
+Plugins/Themes/Hint: 테마 플러그인
+Saving/Caption: 저장
+Saving/Heading: 저장
+Saving/TiddlySpot/Advanced/Heading: 고급 설정
+Saving/TiddlySpot/BackupDir: 백업 디렉터리
+Saving/TiddlySpot/Backups: 백업
+Saving/TiddlySpot/Description: 이 설정은 http://tiddlyspot.com 또는 호환되는 원격 서버에 저장할 때에만 사용됩니다
+Saving/TiddlySpot/Filename: 업로드 파일 이름
+Saving/TiddlySpot/Hint: //서버 URL 기본값은 `http://<wikiname>.tiddlyspot.com/store.cgi`이며 사용자 지정 서버 주소를 사용하도록 바꿀 수 있습니다, 예를 들어 `http://example.com/store.php`.//
+Saving/TiddlySpot/Password: 비밀번호
+Saving/TiddlySpot/ServerURL: 서버 URL
+Saving/TiddlySpot/UploadDir: 업로드 디렉터리
+Saving/TiddlySpot/UserName: 위키 이름
+Settings/AutoSave/Caption: 자동 저장
+Settings/AutoSave/Disabled/Description: 바뀜을 자동으로 저장하지 않습니다
+Settings/AutoSave/Enabled/Description: 바뀜을 자동으로 저장합니다
+Settings/AutoSave/Hint: 편집하는 동안 자동으로 바뀜을 저장합니다
+Settings/CamelCase/Caption: Camel Case 위키 링크
+Settings/CamelCase/Description: 자동으로 ~CamelCase 링크를 활성화
+Settings/CamelCase/Hint: ~CamelCase 어구를 자동으로 링크하는 것을 전역으로 비활성화할 수 있습니다. 적용하려면 다시 불러와야 합니다
+Settings/Caption: 설정
+Settings/DefaultSidebarTab/Caption: 기본 사이드바 탭
+Settings/DefaultSidebarTab/Hint: 기본적으로 표시하는 사이드바 탭을 지정합니다
+Settings/EditorToolbar/Caption: 편집기 도구 모음
+Settings/EditorToolbar/Description: 편집기 도구 모음 보이기
+Settings/EditorToolbar/Hint: 편집기 도구 모음을 활성화하거나 비활성화합니다:
+Settings/Hint: 이 설정은 티들리위키의 동작을 사용자 지정할 수 있습니다.
+Settings/LinkToBehaviour/Caption: 티들러 열기 동작
+Settings/LinkToBehaviour/InsideRiver/Hint: 이야기 강 //안//에서 둘러보기
+Settings/LinkToBehaviour/OpenAbove: 현재 티들러 위에 열기
+Settings/LinkToBehaviour/OpenAtBottom: 이야기 강의 아래에 열기
+Settings/LinkToBehaviour/OpenAtTop: 이야기 강의 위에 열기
+Settings/LinkToBehaviour/OpenBelow: 현재 티들러 아래에 열기
+Settings/LinkToBehaviour/OutsideRiver/Hint: 이야기 강 //바깥//에서 둘러보기
+Settings/MissingLinks/Caption: 위키 링크
+Settings/MissingLinks/Description: 없는 티들러로의 링크 활성화
+Settings/MissingLinks/Hint: 아직 존재하지 않는 티들러로 링크할지 선택
+Settings/NavigationAddressBar/Caption: 둘러보기 주소 창
+Settings/NavigationAddressBar/Hint: 티들러를 둘러볼 때 브라우저 주소 창의 동작:
+Settings/NavigationAddressBar/No/Description: 주소 창을 업데이트하지 않음
+Settings/NavigationAddressBar/Permalink/Description: 대상 티들러를 포함
+Settings/NavigationAddressBar/Permaview/Description: 대상 티들러와 현재 이야기 서열을 포함
+Settings/NavigationHistory/Caption: 둘러보기 역사
+Settings/NavigationHistory/Hint: 티들러로 둘러보기할 때 둘러보기 역사를 업데이트합니다:
+Settings/NavigationHistory/No/Description: 역사를 업데이트하지 않음
+Settings/NavigationHistory/Yes/Description: 역사를 업데이트
+Settings/PerformanceInstrumentation/Caption: 성능 계측
+Settings/PerformanceInstrumentation/Description: 성능 계측 활성화
+Settings/PerformanceInstrumentation/Hint: 브라우저 개발자 콘솔에서 성능 통계를 표시합니다. 적용하려면 다시 불러와야 합니다
+Settings/TitleLinks/Caption: 티들러 제목
+Settings/TitleLinks/Hint: 티들러 제목을 링크로 선택적으로 표시합니다
+Settings/TitleLinks/No/Description: 티들러 제목을 링크로 표시하지 않음
+Settings/TitleLinks/Yes/Description: 티들러 제목을 링크로 표시
+Settings/ToolbarButtons/Caption: 도구 모음 버튼
+Settings/ToolbarButtons/Hint: 기본 도구 모음 버튼 외관:
+Settings/ToolbarButtons/Icons/Description: 아이콘을 포함
+Settings/ToolbarButtons/Text/Description: 텍스트를 포함
+Settings/ToolbarButtonStyle/Caption: 도구 모음 버튼 스타일
+Settings/ToolbarButtonStyle/Hint: 도구 모음 버튼에 대한 스타일을 선택합니다:
+Settings/ToolbarButtonStyle/Styles/Borderless: 테두리 없음
+Settings/ToolbarButtonStyle/Styles/Boxed: 상자형
+Settings/ToolbarButtonStyle/Styles/Rounded: 둥근형
+StoryView/Caption: 이야기 보기
+StoryView/Prompt: 현재 보기:
+Theme/Caption: 테마
+Theme/Prompt: 현재 테마:
+TiddlerFields/Caption: 티들러 필드
+TiddlerFields/Hint: 이 위키에 사용하고 있는 티들러필드의 전체 집합입니다. (시스템 티들러는 포함하지만 섀도우 티들러는 제외)
+Toolbars/Caption: 도구 모음
+Toolbars/EditorToolbar/Caption: 편집기 도구 모음
+Toolbars/EditorToolbar/Hint: 편집기 도구 모음에 표시할 버튼을 선택하세요. 어떤 버튼은 특정 형식의 티들러를 편집할 때에만 나타남을 참고하세요
+Toolbars/EditToolbar/Caption: 편집 도구 모음
+Toolbars/EditToolbar/Hint: 편집 모드에서 티들러에 표시할 버튼을 선택하세요
+Toolbars/Hint: 표시할 도구 모음 버튼을 선택합니다
+Toolbars/PageControls/Caption: 페이지 도구 모음
+Toolbars/PageControls/Hint: 주요 페이지 도구 모음에 표시할 버튼을 선택하세요
+Toolbars/ViewToolbar/Caption: 보기 도구 모음
+Toolbars/ViewToolbar/Hint: 보기 모드에서 티들러에 표시할 버튼을 선택하세요
+Tools/Download/Full/Caption: 전체 위키 다운로드

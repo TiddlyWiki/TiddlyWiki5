@@ -1,0 +1,25 @@
+created: 20130825213300000
+modified: 20180307153530187
+tags: Learning
+title: TaskManagementExample
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5 can be used as a simple task management system without further customisation. The idea is that tasks be tagged `task`, with those that are completed also tagged `done`. In this way it is straightforward to generate task lists.
+
+<<.tip """There is [[an enhanced version of this demo|TaskManagementExample (Draggable)]] that adds the ability to drag and drop the tasks to re-order them.""">>
+
+! Outstanding tasks
+
+<$list filter="[!has[draft.of]tag[task]!tag[done]sort[created]]">
+
+<$checkbox tag="done"> <$link/></$checkbox>
+
+</$list>
+
+! Completed tasks
+
+<$list filter="[!has[draft.of]tag[task]tag[done]sort[created]]">
+
+<$checkbox tag="done"> ~~<$link/>~~</$checkbox>
+
+</$list>

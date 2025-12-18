@@ -1,0 +1,5 @@
+title: $:/core/Filters/TypedTiddlers
+tags: $:/tags/Filter
+filter: [!is[system]has[type]each[type]sort[type]] -[type[text/vnd.tiddlywiki]]
+description: {{$:/language/Filters/TypedTiddlers}}
+

@@ -1,0 +1,105 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Advarselsbaggrund
+alert-border: Advarselsramme
+alert-highlight: Advarselsopmærkning
+alert-muted-foreground: Dæmpet advarselsforgrund
+background: Generel baggrund
+blockquote-bar: Blokcitatslinie
+button-background: Standard knap baggrund
+button-border: Standard knap ramme
+button-foreground: Standard knap forgrund
+code-background: Kodebaggrund
+code-border: Koderamme
+code-foreground: Kodeforgrund
+dirty-indicator: Indikator af ugemte ændringer
+download-background: Downloadknap baggrund
+download-foreground: Downloadknap forgrund
+dragger-background: Trækkerbaggrund
+dragger-foreground: Trækkerforgrund
+dropdown-background: Rullemenubaggrund
+dropdown-border: Rullemenuramme
+dropdown-tab-background: Fanebaggrund for rullemenu
+dropdown-tab-background-selected: Rullemenuers fanebaggrund for valgte faner
+dropzone-background: Dropzone baggrund
+external-link-background: Eksternt link baggrund
+external-link-background-hover: Eksternt link baggrund når der peges
+external-link-background-visited: Eksternt link baggrund besøgt
+external-link-foreground: Eksternt link forgrund
+external-link-foreground-hover: Eksternt link forgrund når der peges
+external-link-foreground-visited: Eksternt link forgrund besøgt
+foreground: Generel forgrund
+message-background: Beskedboks baggrund
+message-border: Beskedboks ramme
+message-foreground: Beskedboks forgrund
+modal-backdrop: Modal bagtæppe
+modal-background: Modal baggrund
+modal-border: Modal ramme
+modal-footer-background: Modal footer baggrund
+modal-footer-border: Modal footer ramme
+modal-header-border: Modal header ramme
+muted-foreground: Generel dæmpet forgrund
+notification-background: Notifikationsbaggrund
+notification-border: Notifikationsramme
+page-background: Side baggrund
+pre-background: Præformateret kode baggrund
+pre-border: Præformatteret kode ramme
+primary: Generel primær
+sidebar-button-foreground: Sidepanelets knap forgrund
+sidebar-controls-foreground: Sidepanelets kontroller forgrund
+sidebar-controls-foreground-hover: Sidepanelets kontroller forgrund hover
+sidebar-foreground: Sidepanelets forgrund
+sidebar-foreground-shadow: Sidepanelets forgrund skygge
+sidebar-muted-foreground: Sidepanelets dæmpet forgrund
+sidebar-muted-foreground-hover: Sidepanelets dæmpet forgrund når der peges
+sidebar-tab-background: Sidepanelets fane baggrund
+sidebar-tab-background-selected: Sidepanelets fane baggrund for valgte faner
+sidebar-tab-border: Sidepanelets faneramme
+sidebar-tab-border-selected: Sidepanelets fane ramme for valgte faner
+sidebar-tab-divider: Sidepanelets fane deler
+sidebar-tab-foreground: Sidepanelets fane forgrund
+sidebar-tab-foreground-selected: Sidepanelets fane forgrund for valgte faner
+sidebar-tiddler-link-foreground: Sidepanelets tiddler link forgrund
+sidebar-tiddler-link-foreground-hover: Sidepanelets tiddler link forgrund når der peges
+site-title-foreground: Side titel forgrund
+static-alert-foreground: Statisk advarsel forgrund
+tab-background: Fanebaggrund
+tab-background-selected: Fanebaggrund for valgte faner
+tab-border: Faneramme
+tab-border-selected: Faneramme for valgte faner
+tab-divider: Faneadskiller
+tab-foreground: Faneforgrund
+tab-foreground-selected: Faneforgrund for valgte faner
+table-border: Tabelramme
+table-footer-background: Tabelfod baggrund
+table-header-background: Tabelheader baggrund
+tag-background: Tagbaggrund
+tag-foreground: Tagforgrund
+tiddler-background: Tiddlerbaggrund
+tiddler-border: Tiddlerramme
+tiddler-controls-foreground: Tiddlerkontroller forgrund
+tiddler-controls-foreground-hover: Tiddlerkontroller forgrund hover
+tiddler-controls-foreground-selected: Tiddlerkontroller forgrund for valgte kontroller
+tiddler-editor-background: Tiddlereditor baggrund
+tiddler-editor-border: Tiddlereditor ramme
+tiddler-editor-border-image: Tiddlereditor ramme billede
+tiddler-editor-fields-even: Tiddlereditor baggrund for lige felter
+tiddler-editor-fields-odd: Tiddlereditor baggrund for ulige felter
+tiddler-info-background: Tiddler infopanel baggrund
+tiddler-info-border: Tiddler infopanel ramme
+tiddler-info-tab-background: Tiddler infopanel fane baggrund
+tiddler-link-background: Tiddler linkbaggrund
+tiddler-link-foreground: Tiddler linkforgrund
+tiddler-subtitle-foreground: Tiddler undertitel forgrund
+tiddler-title-foreground: Tiddler titel forgrund
+toolbar-cancel-button: Værktøjslinie 'fortryd' knap forgrund
+toolbar-close-button: Værktøjslinie 'luk' knap forgrund
+toolbar-delete-button: Værktøjslinie 'slet' knap forgrund
+toolbar-done-button: Værktøjslinie 'gem' knap forgrund
+toolbar-edit-button: Værktøjslinie 'redigér' knap forgrund
+toolbar-info-button: Værktøjslinie 'info' knap forgrund
+toolbar-new-button: Værktøjslinie 'ny tiddler' knap forgrund
+toolbar-options-button: Værktøjslinie 'valg' knap forgrund
+toolbar-save-button: Værktøjslinie 'gem' knap forgrund
+untagged-background: Ukategoriseret pille baggrund
+very-muted-foreground: Meget dæmpet forgrund

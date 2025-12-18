@@ -1,0 +1,17 @@
+title: GettingStarted
+
+\define lingo-base() $:/language/ControlPanel/Basics/
+به ~TiddlyWiki و جامعه‌ی  ~TiddlyWiki خوش آمدید.
+
+قبل از این که هر گونه اطلاعات مهمی رو در ~TiddlyWiki وارد کنی، مهمه که اطمینان کسب کنیم که می‌تونی اطلاعات رو به شکل قابل اعتمادی ذخیره کنی. برای اطلاعات بیشتر ببین: https://tiddlywiki.com/#GettingStarted
+
+!! این رو تنظیم کن ~TiddlyWiki
+
+<div class="tc-control-panel">
+
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
+
+برای انتخاب‌های بیشتر این رو ببین: [[control panel|$:/ControlPanel]]

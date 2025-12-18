@@ -1,0 +1,31 @@
+created: 20140216102454178
+modified: 20230803045407958
+tags: Concepts
+title: ColourPalettes
+type: text/vnd.tiddlywiki
+
+A colour palette is a [[data tiddler|DataTiddlers]] that supplies a [[CSS|Cascading Style Sheets]] colour value, such as ''yellow'' or ''#fe0'', for each of several colour names, like this:
+
+```
+page-background: #fe0
+table-border: #ccc
+...
+```
+
+Several palettes form part of the core. The system tiddler [[$:/palette]] always contains the title of the currently selected palette tiddler. You can change a palette using the <<.icon $:/core/images/palette>> ''palette'' button, found on the "Tools" tab in the sidebar.
+
+To retrieve the value of a named colour from the current palette, e.g. for use in a stylesheet tiddler, use the <<.mlink colour>> macro:
+
+```
+<<colour page-background>>
+```
+
+Palette tiddlers should have the following fields:
+
+|!Name |!Value |
+|title |Typically starting with `$:/` |
+|type |`application/x-tiddler-dictionary` |
+|tags |`$:/tags/Palette` |
+|name |Displayed in the palette browser |
+|description |Displayed in the palette browser |
+|text |`name: value` colour definitions |

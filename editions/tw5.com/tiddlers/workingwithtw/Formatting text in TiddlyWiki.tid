@@ -1,0 +1,57 @@
+created: 20140908131500000
+modified: 20140919214820549
+tags: [[Working with TiddlyWiki]]
+title: Formatting text in TiddlyWiki
+type: text/vnd.tiddlywiki
+
+Within the text of a tiddler you can use special formatting called WikiText to control how the text is displayed.
+
+WikiText can be typed by using the [[Editor toolbar]] or by typing by hand. While the first is convenient the later can be faster when you know the WikiText markup code.
+
+! Simple Formatting
+
+At its simplest, WikiText lets you use familiar word-processing features like bold, italic, lists and tables. For example:
+
+```
+The ''quick'' brown ~~flea~~ fox //jumps// over the `lazy` dog
+```
+
+… displays as:
+
+The ''quick'' brown ~~flea~~ fox //jumps// over the `lazy` dog
+
+! Working with Tiddlers
+
+In WikiText, you can link to tiddlers using double square brackets, or by taking advantage of the automatic linking of CamelCase words:
+
+```
+This is a link to HelloThere, and one to [[History of TiddlyWiki]]
+```
+
+… displays as:
+
+This is a link to HelloThere, and one to [[History of TiddlyWiki]]
+
+! Macros
+
+Macros let you package repetitive fragments of WikiText so that you can easily reuse them.
+
+For example, here is the definition of a macro that generates a ~YouTube video URL from its unique identifier:
+
+```
+\define youtube(video)
+https://www.youtube.com/watch?v=$video$
+\end
+```
+
+With that definition in place, `<<youtube 1g66s7UbyuU>>` generates the URL https://www.youtube.com/watch?v=1g66s7UbyuU
+
+! Advanced WikiText
+
+Advanced WikiText features allow you to produce automated lists and interactive features like dropdown menus. In fact, the entire user interface of TiddlyWiki itself is written in WikiText, so any feature that you see in TiddlyWiki can be adapted for use in your own wikis.
+
+Some of the advanced features require complex coding. TiddlyWiki includes several built-in macros that simplify common user interface tasks, like tabs, tables of content, and lists of tiddlers.
+
+! Find out more
+
+See [[WikiText]] for a detailed introduction to writing WikiText.
