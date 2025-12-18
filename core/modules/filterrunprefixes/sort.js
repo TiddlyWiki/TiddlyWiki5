@@ -21,7 +21,6 @@ exports.sort = function(operationSubFunction,options) {
 				sortKeys = [],
 				indexes = new Array(inputTitles.length),
 				compareFn;
-			const locale = $tw.utils.checkLanguageCode(suffixes[2] && suffixes[2][0] ? suffixes[2][0] : "") ? suffixes[2][0] : undefined;
 			results.each(function(title) {
 				var key = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
 					"currentTiddler": "" + title,
@@ -35,7 +34,7 @@ exports.sort = function(operationSubFunction,options) {
 				indexes[t] = t;
 			}
 			// Sort the indexes
-			compareFn = $tw.utils.makeCompareFunction(sortType,{defaultType: "string", invert:invert, isCaseSensitive:isCaseSensitive,locale:locale});
+			compareFn = $tw.utils.makeCompareFunction(sortType,{defaultType: "string", invert:invert, isCaseSensitive:isCaseSensitive});
 			indexes = indexes.sort(function(a,b) {
 					return compareFn(sortKeys[a],sortKeys[b]);
 			});
