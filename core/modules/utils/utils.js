@@ -904,12 +904,12 @@ exports.parseInt = function(str) {
 	return parseInt(str,10) || 0;
 };
 
-exports.makeCompareFunction = function(type,options = {}) {
+exports.makeCompareFunction = function(type,options) {
+	options = options || {};
 	// set isCaseSensitive to true if not defined in options
 	var isCaseSensitive = (options.isCaseSensitive === false) ? false : true,
 		gt = options.invert ? -1 : +1,
 		lt = options.invert ? +1 : -1,
-		locale = options.locale,
 		compare = function(a,b) {
 			if(a > b) {
 				return gt ;
@@ -927,8 +927,11 @@ exports.makeCompareFunction = function(type,options = {}) {
 				return compare($tw.utils.parseInt(a),$tw.utils.parseInt(b));
 			},
 			"string": function(a,b) {
-				const sorter = Intl.Collator(locale, { sensitivity: isCaseSensitive ? "variant" : "accent" });
-				return options.invert ? sorter.compare(b.toString(), a.toString()) : sorter.compare(a.toString(), b.toString());
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return compare("" + a,"" + b);
 			},
 			"date": function(a,b) {
 				var dateA = $tw.utils.parseDate(a),
@@ -945,8 +948,11 @@ exports.makeCompareFunction = function(type,options = {}) {
 				return compare($tw.utils.compareVersions(a,b),0);
 			},
 			"alphanumeric": function(a,b) {
-				const sorter = Intl.Collator(locale, {numeric: true, sensitivity: isCaseSensitive ? "case" : "base"});
-				return options.invert ? sorter.compare(b, a) : sorter.compare(a, b);
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return options.invert ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 			}
 		};
 	return (types[type] || types[options.defaultType] || types.number);
