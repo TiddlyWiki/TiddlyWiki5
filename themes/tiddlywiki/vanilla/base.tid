@@ -2395,6 +2395,17 @@ html body.tc-body.tc-single-tiddler-window {
 ** Import table
 */
 
+.tc-import-option {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+	margin: 0.5em 0;
+	padding: 0.5em;
+	background: <<colour tiddler-editor-background>>;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: 4px;
+}
+
 .tc-import-table {
 	width: 100%;
 }

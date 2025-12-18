@@ -1,12 +1,12 @@
 title: $:/tw5.com/releases/info/
 
-category-order: translation  plugin usability palette hackability widget filters performance nodejs internal developer 
+category-order: translation  plugin usability theme hackability widget filters performance nodejs internal developer 
 categories/internal/caption: Internal
 categories/translation/caption: Translation
 categories/plugin/caption: Plugin
 categories/widget/caption: Widget
 categories/usability/caption: Usability
-categories/palette/caption: Palette
+categories/theme/caption: Theme
 categories/hackability/caption: Hackability
 categories/nodejs/caption: Node.js
 categories/performance/caption: Performance
