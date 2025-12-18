@@ -88,8 +88,8 @@ function parseFilterOperation(operators,filterString,p) {
 						rexMatch = rex.exec(filterString.substring(p));
 					if(rexMatch) {
 						operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
-	// DEPRECATION WARNING
-	console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
+						// DEPRECATION WARNING
+						console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
 						nextBracketPos = p + rex.lastIndex - 1;
 					}
 					else {
@@ -232,7 +232,12 @@ exports.getFilterRunPrefixes = function() {
 
 exports.filterTiddlers = function(filterString,widget,source) {
 	var fn = this.compileFilter(filterString);
-	return fn.call(this,source,widget);
+	try {
+		const fnResult = fn.call(this,source,widget);
+		return fnResult;
+	} catch(e) {
+		return [`${$tw.language.getString("Error/Filter")}: ${e}`];
+	}
 };
 
 /*
@@ -314,19 +319,19 @@ exports.compileFilter = function(filterString) {
 
 				// Invoke the appropriate filteroperator module
 				results = operatorFunction(accumulator,{
-							operator: operator.operator,
-							operand: operands.length > 0 ? operands[0] : undefined,
-							operands: operands,
-							multiValueOperands: multiValueOperands,
-							isMultiValueOperand: isMultiValueOperand,
-							prefix: operator.prefix,
-							suffix: operator.suffix,
-							suffixes: operator.suffixes,
-							regexp: operator.regexp
-						},{
-							wiki: self,
-							widget: widget
-						});
+					operator: operator.operator,
+					operand: operands.length > 0 ? operands[0] : undefined,
+					operands: operands,
+					multiValueOperands: multiValueOperands,
+					isMultiValueOperand: isMultiValueOperand,
+					prefix: operator.prefix,
+					suffix: operator.suffix,
+					suffixes: operator.suffixes,
+					regexp: operator.regexp
+				},{
+					wiki: self,
+					widget: widget
+				});
 				if($tw.utils.isArray(results)) {
 					accumulator = self.makeTiddlerIterator(results);
 				} else {

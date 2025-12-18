@@ -131,15 +131,14 @@ Saving/GitService/Gitea/Caption: Gitea Saver
 Saving/GitService/Gitea/Password: Token de acceso personal para API (a través de la interfaz web de Gitea: `Configuración | Aplicaciones | Generar token nuevo`)
 Saving/TiddlySpot/Advanced/Heading: Configuración Avanzada
 Saving/TiddlySpot/BackupDir: Directorio de copias de seguridad
-Saving/TiddlySpot/ControlPanel: ~TiddlySpot Control Panel
+Saving/TiddlySpot/ControlPanel: ~TiddlyHost Control Panel
 Saving/TiddlySpot/Backups: Copias de seguridad
-Saving/TiddlySpot/Caption: ~TiddlySpot Saver
-Saving/TiddlySpot/Description: Esta configuración sólo se usa para guardar el wiki en http://tiddlyspot.com o en otro servidor compatible
+Saving/TiddlySpot/Caption: ~TiddlyHost Saver
+Saving/TiddlySpot/Description: Esta configuración sólo se usa al guardar el wiki en [[TiddlyHost|https://tiddlyhost.com]] o en otro servidor compatible. [[Ver aquí|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] para obtener información sobre cómo guardar en ~TiddlyHost
 Saving/TiddlySpot/Filename: Nombre del archivo
-Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //La dirección (URL) por defecto de// TiddlySpot //es `http://<wikiname>.tiddlyspot.com/store.cgi` aunque puede cambiarse a voluntad para usar otro servidor//
+Saving/TiddlySpot/Heading: ~TiddlyHost
+Saving/TiddlySpot/Hint: //La dirección (URL) por defecto de// TiddlyHost //es `http://<wikiname>.tiddlyspot.com/` aunque puede cambiarse a voluntad para usar otro servidor//
 Saving/TiddlySpot/Password: Contraseña
-Saving/TiddlySpot/ReadOnly: Ten en cuenta que [[TiddlySpot|http://tiddlyspot.com]] ya no permite la creación de nuevos sitios. Para sitios nuevos, puede usa [[TiddlyHost|https://tiddlyhost.com]], un nuevo servicio de alojamiento que reemplaza a ~TiddlySpot.
 Saving/TiddlySpot/ServerURL: Dirección (URL) del servidor
 Saving/TiddlySpot/UploadDir: Directorio de almacenamiento
 Saving/TiddlySpot/UserName: Nombre del Wiki
@@ -175,6 +174,8 @@ Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Actualizar la
 Settings/PerformanceInstrumentation/Caption: //Estadísticas de rendimiento//
 Settings/PerformanceInstrumentation/Hint: Muestra estadísticas de las prestaciones de la página en la consola de desarrollo <br>Requiere recargar la página para que surta efecto
 Settings/PerformanceInstrumentation/Description: Activar //estadísticas de rendimiento//
+Settings/RecentLimit/Caption: Límite de Recientes 
+Settings/RecentLimit/Hint: Número máximo de tiddlers que se mostrarán en la pestaña "Recientes" de la barra lateral
 Settings/ToolbarButtonStyle/Caption: Estilo de botón
 Settings/ToolbarButtonStyle/Hint: Selecciona el estilo de los botones de la barra de herramientas
 Settings/ToolbarButtonStyle/Styles/Borderless: Sin borde
@@ -188,6 +189,8 @@ Settings/DefaultSidebarTab/Caption: Pestaña por defecto de la barra lateral
 Settings/DefaultSidebarTab/Hint: Indica qué pestaña de la barra lateral se muestra por defecto al inicio
 Settings/DefaultMoreSidebarTab/Caption: Pestaña predeterminada Más de la barra lateral
 Settings/DefaultMoreSidebarTab/Hint: Especifica qué pestaña de la barra lateral Más se muestra de forma predeterminada
+Settings/DefaultTiddlerInfoTab/Caption: Información de tiddler predeterminada
+Settings/DefaultTiddlerInfoTab/Hint: Especifica qué pestaña se muestra por defecto cuando se abre el panel de información de tiddler
 Settings/LinkToBehaviour/Caption: Comportamiento al abrir tiddlers...
 Settings/LinkToBehaviour/InsideRiver/Hint: ...dentro del Visor
 Settings/LinkToBehaviour/OutsideRiver/Hint: ...desde fuera del Visor
@@ -204,10 +207,10 @@ Settings/MissingLinks/Hint: Elige si quieres vincular a tiddlers que aún no exi
 Settings/MissingLinks/Description: Habilitar enlaces a tiddlers inexistentes
 SocialCard/Caption: Tarjeta Red Social
 SocialCard/Domain/Prompt: Nombre de dominio que se mostrará para el enlace (por ejemplo, ''tiddlywiki.com'')
-SocialCard/Hint: Esta información es utilizada por los servicios de redes sociales y mensajería para mostrar una tarjeta de vista previa para los enlaces a este TiddlyWiki cuando se aloja en línea
-SocialCard/PreviewUrl/Prompt: URL completa para obtener una vista previa de la imagen de este TiddlyWiki
+SocialCard/Hint: Esta información es utilizada por los servicios de redes sociales y mensajería para mostrar una tarjeta de vista previa para los enlaces a este ~TiddlyWiki cuando se aloja en línea
+SocialCard/PreviewUrl/Prompt: URL completa para obtener una vista previa de la imagen de este ~TiddlyWiki
 SocialCard/PreviewUrl/Preview: Imagen de vista previa:
-SocialCard/Url/Prompt: URL completa de este TiddlyWiki
+SocialCard/Url/Prompt: URL completa de este ~TiddlyWiki
 StoryTiddler/Caption: Tiddler de Historia
 StoryTiddler/Hint: Esta cascada de reglas se usa para elegir dinámicamente la plantilla para mostrar un tiddler en el río de la historia.
 StoryView/Caption: Vista
@@ -249,3 +252,6 @@ ViewTemplateSubtitle/Caption: Ver Subtítulo de Plantilla
 ViewTemplateSubtitle/Hint: La plantilla de vista predeterminada utiliza esta regla en cascada para elegir dinámicamente la plantilla para mostrar el subtítulo de un tiddler.
 ViewTemplateTags/Caption: Ver Etiquetas de Plantilla
 ViewTemplateTags/Hint: La plantilla de vista predeterminada utiliza esta regla en cascada para elegir dinámicamente la plantilla para mostrar el área de etiquetas de un tiddler.
+WikiInformation/Caption: Información del Wiki
+WikiInformation/Hint: Esta página resume información general sobre la configuración de este ~TiddlyWiki. Está diseñada para permitir a los usuarios compartir rápidamente aspectos relevantes de la configuración de su ~TiddlyWiki con otros, por ejemplo, al solicitar ayuda en alguno de los foros. No se incluye información privada o personal, y nada se comparte sin ser copiado y pegado explícitamente en otro lugar.
+WikiInformation/Drag/Caption: Arrastra este enlace para copiar esta herramienta a otro wiki

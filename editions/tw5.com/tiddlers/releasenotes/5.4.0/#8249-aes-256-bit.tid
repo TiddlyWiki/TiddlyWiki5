@@ -1,0 +1,25 @@
+change-category: internal
+change-type: security
+created: 20251115012727571
+description: Set AES strength to 256 bit default
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8249
+modified: 20251115014704622
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#8249
+type: text/vnd.tiddlywiki
+
+This PR changes the default ''AES encryption'' setting ''from 128 bit to 256'' bit. 
+
+* Download [[emtpy.html v5.3.8 from the archve|https://tiddlywiki.com/archive/empty/Empty-TiddlyWiki-5.3.8]] which uses AES 128 bit
+* Create some content
+* Save encrypted as eg: ''aes-128.html''
+* Create aes-256.html with TW v5.4.x
+* Create some content
+* Save encrypted as: ''aes-256.html''
+
+''Import decryption test''
+
+* Import ''aes-256.html'' into ''aes-128.html'' -> Decryption and import works
+* Import ''aes-128.html'' into ''aes-256.html'' -> Decryption and import works
