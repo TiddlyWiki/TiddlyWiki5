@@ -14,7 +14,7 @@ Export our filter function
 */
 exports.sortsub = function(source,operator,options) {
 	// Compile the subfilter
-	var filterFn = options.wiki.compileFilter(operator.operands[0]);
+	var filterFn = options.wiki.compileFilter(operator.operand);
 	// Collect the input titles and the corresponding sort keys
 	var inputTitles = [],
 		sortKeys = [];
@@ -34,7 +34,7 @@ exports.sortsub = function(source,operator,options) {
 		indexes[t] = t;
 	}
 	// Sort the indexes
-	var compareFn = $tw.utils.makeCompareFunction(operator.suffix,{defaultType: "string",invert: operator.prefix === "!",locale: operator.operands[1]});
+	var compareFn = $tw.utils.makeCompareFunction(operator.suffix,{defaultType: "string",invert: operator.prefix === "!"});
 	indexes = indexes.sort(function(a,b) {
 		return compareFn(sortKeys[a],sortKeys[b]);
 	});
