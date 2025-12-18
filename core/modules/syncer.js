@@ -424,25 +424,25 @@ Syncer.prototype.handleRefreshEvent = function() {
 Process the next task
 */
 Syncer.prototype.processTaskQueue = function() {
-	var self = this;
 	// Only process a task if the sync adaptor is fully initialised and we're not already performing
 	// a task. If we are already performing a task then we'll dispatch the next one when it completes
 	if((!this.syncadaptor.isReady || this.syncadaptor.isReady()) && this.numTasksInProgress === 0) {
 		// Choose the next task to perform
-		var task = this.chooseNextTask();
+		const task = this.chooseNextTask();
 		// Perform the task if we had one
-		if(typeof task === "object" && task !== null) {
+		if(typeof task === "function") {
 			this.numTasksInProgress += 1;
-			task.run(function(err) {
-				self.numTasksInProgress -= 1;
+			task(err => {
+				this.numTasksInProgress -= 1;
 				if(err) {
-					self.displayError("Sync error while processing " + task.type + " of '" + task.title + "'",err);
-					self.updateDirtyStatus();
-					self.triggerTimeout(self.errorRetryInterval);
+					const [,name] = /(save|load|delete|sync)Task$/.exec(task.name) || [];
+					this.displayError("Sync error while processing " + name + " task", err);
+					this.updateDirtyStatus();
+					this.triggerTimeout(this.errorRetryInterval);
 				} else {
-					self.updateDirtyStatus();
+					this.updateDirtyStatus();
 					// Process the next task
-					self.processTaskQueue.call(self);
+					this.processTaskQueue.call(this);
 				}
 			});
 		} else {
@@ -480,21 +480,21 @@ Returns either:
 * the boolean true if there are pending sync tasks that aren't yet due
 * null if there's no pending sync tasks (just the next poll)
 */
-
+/** @returns {((callback: () => void) => void) | boolean} */
 Syncer.prototype.chooseNextTask = function() {
 	var pending = this.getPendingTitles();
 
 	if(pending.savePending.length){
-		return new SaveAllTiddlersTask(this, pending.savePending);
+		return saveTask.bind(this, pending.savePending);
 	}
 	if(pending.syncServer){
-		return new SyncFromServerTask(this);
+		return syncTask.bind(this);
 	}
 	if(pending.deletePending.length){
-		return new DeleteAllTiddlersTask(this, pending.deletePending);
+		return deleteTask.bind(this, pending.deletePending);
 	}
 	if(pending.loadPending.length){
-		return new LoadAllTiddlersTask(this, pending.loadPending);
+		return loadTask.bind(this, pending.loadPending);
 	}
 	return pending.havePending;
 };
@@ -546,28 +546,17 @@ Syncer.prototype.getPendingTitles = function() {
 	return {havePending: havePending, loadPending: loadPending, savePending: savePending, deletePending: deletePending, syncServer: syncServer};
 };
 
-function SaveAllTiddlersTask(syncer,titles) {
-	this.syncer = syncer;
-	this.titles = titles;
-	this.type = "save";
-}
-
-SaveAllTiddlersTask.prototype.toString = function() {
-	return "SAVE ALL " + this.titles;
-};
-
-SaveAllTiddlersTask.prototype.run = function(callback) {
-	this.syncer.logger.log("Dispatching 'save all' task:",this.titles);
-	var changeCounts = this.titles.reduce((r,title) => { r[title] = this.syncer.wiki.getChangeCount(title); return r; }, {});
-	var tiddlers = this.titles
-		.map(title => this.syncer.wiki.tiddlerExists(title) && this.syncer.wiki.getTiddler(title))
-		.filter(e => e);
+/** @this {Syncer} */
+function saveTask(titles, callback) {
+	this.logger.log("Dispatching 'save' task");
+	var changeCounts = titles.reduce((r, title) => { r[title] = this.wiki.getChangeCount(title); return r; }, {});
+	var tiddlers = titles.map(title => this.wiki.tiddlerExists(title) && this.wiki.getTiddler(title)).filter(e => e);
 	if(!tiddlers.length) return $tw.utils.nextTick(() => { callback(null); });
-	this.do({
-		syncer: this.syncer,
+	const options = {
+		syncer: this,
 		tiddlers: tiddlers,
 		onNext: (title, adaptorInfo, revision) => {
-			this.syncer.tiddlerInfo[title] = {
+			this.tiddlerInfo[title] = {
 				changeCount: changeCounts[title],
 				adaptorInfo: adaptorInfo,
 				revision: revision,
@@ -576,93 +565,64 @@ SaveAllTiddlersTask.prototype.run = function(callback) {
 		},
 		onDone: () => { callback(null); },
 		onError: err => { callback(err); },
-	});
-};
-
-SaveAllTiddlersTask.prototype.do = function (options){
-	if(this.syncer.syncadaptor.saveTiddlers){
-		this.syncer.syncadaptor.saveTiddlers(options);
+	};
+	if(this.syncadaptor.saveTiddlers) {
+		this.syncadaptor.saveTiddlers(options);
 	} else {
 		const tiddler = options.tiddlers[0],
 			title = tiddler.fields.title;
-		this.syncer.syncadaptor.saveTiddler(tiddler,function(err,adaptorInfo,revision) {
+		this.syncadaptor.saveTiddler(tiddler, function (err, adaptorInfo, revision) {
 			if(err) {
 				options.onError(err);
 			} else {
 				options.onNext(title, adaptorInfo, revision);
 				options.onDone();
 			}
-		},{tiddlerInfo: this.syncer.tiddlerInfo[title]});
+		}, { tiddlerInfo: this.tiddlerInfo[title] });
 	}
 };
 
-function DeleteAllTiddlersTask(syncer,titles) {
-	this.syncer = syncer;
-	this.titles = titles;
-	this.type = "delete";
-}
-
-DeleteAllTiddlersTask.prototype.toString = function() {
-	return "DELETE ALL " + this.titles;
-};
-
-DeleteAllTiddlersTask.prototype.run = function(callback) {
-	this.syncer.logger.log("Dispatching 'delete all' task:",this.titles);
-	this.do({
-		syncer: this.syncer,
-		titles: this.titles,
-		onNext: title => {
-			delete this.syncer.tiddlerInfo[title];
-		},
+/** @this {Syncer} */
+function deleteTask(titles, callback) {
+	this.logger.log("Dispatching 'delete' task");
+	const options = {
+		syncer: this,
+		titles,
+		onNext: title => { delete this.tiddlerInfo[title]; },
 		onDone: () => { callback(null); },
 		onError: err => { callback(err); },
-	});
-};
-
-DeleteAllTiddlersTask.prototype.do = function(options){
-	if(this.syncer.syncadaptor.deleteTiddlers){
-		this.syncer.syncadaptor.deleteTiddlers(options);
+	};
+	if(this.syncadaptor.deleteTiddlers) {
+		this.syncadaptor.deleteTiddlers(options);
 	} else {
 		const title = options.titles[0];
-		this.syncer.syncadaptor.deleteTiddler(title,function(err) {
+		this.syncadaptor.deleteTiddler(title, function (err) {
 			if(err) {
 				options.onError(err);
 			} else {
 				options.onNext(title);
 				options.onDone();
 			}
-		},{tiddlerInfo: this.syncer.tiddlerInfo[title]});
+		}, { tiddlerInfo: this.tiddlerInfo[title] });
 	}
 };
 
-function LoadAllTiddlersTask(syncer,titles) {
-	this.syncer = syncer;
-	this.titles = titles;
-	this.type = "load";
-}
-
-LoadAllTiddlersTask.prototype.toString = function() {
-	return "LOAD ALL" + this.titles;
-};
-
-LoadAllTiddlersTask.prototype.run = function(callback) {
-	this.syncer.logger.log("Dispatching 'load all' task:",this.titles);
-	this.syncer.syncadaptor.loadTiddlers({
-		syncer: this.syncer,
-		titles: this.titles,
-		onNext: tiddlerFields => {this.syncer.storeTiddler(tiddlerFields);},
-		onDone: () => {callback(null);},
-		onError: err => {callback(err);},
-	});
-};
-
-LoadAllTiddlersTask.prototype.do = function(options){
-	if(this.syncer.syncadaptor.loadTiddlers){
-		options.titles.forEach(e => {delete this.syncer.titlesToBeLoaded[e];});
-		this.syncer.syncadaptor.loadTiddlers(options);
+/** @this {Syncer} */
+function loadTask(titles, callback) {
+	this.logger.log("Dispatching 'load' task");
+	const options = {
+		syncer: this,
+		titles,
+		onNext: tiddlerFields => { this.storeTiddler(tiddlerFields); },
+		onDone: () => { callback(null); },
+		onError: err => { callback(err); },
+	};
+	if(this.syncadaptor.loadTiddlers) {
+		options.titles.forEach(e => { delete this.titlesToBeLoaded[e]; });
+		this.syncadaptor.loadTiddlers(options);
 	} else {
-		delete this.syncer.titlesToBeLoaded[options.titles[0]];
-		this.syncer.syncadaptor.loadTiddler(options.titles[0],function(err,tiddlerFields) {
+		delete this.titlesToBeLoaded[options.titles[0]];
+		this.syncadaptor.loadTiddler(options.titles[0], function (err, tiddlerFields) {
 			if(err) {
 				options.onError(err);
 			} else {
@@ -673,59 +633,51 @@ LoadAllTiddlersTask.prototype.do = function(options){
 	}
 };
 
-function SyncFromServerTask(syncer) {
-	this.syncer = syncer;
-	this.type = "syncfromserver";
-}
-
-SyncFromServerTask.prototype.toString = function() {
-	return "SYNCFROMSERVER";
-};
-
-SyncFromServerTask.prototype.run = function(callback) {
+/** @this {Syncer} */
+function syncTask(callback) {
 	var self = this;
-	var syncSystemFromServer = (self.syncer.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes" ? true : false);
+	var syncSystemFromServer = (self.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes" ? true : false);
 	var successCallback = function() {
-		self.syncer.forceSyncFromServer = false;
-		self.syncer.timestampLastSyncFromServer = new Date();
+		self.forceSyncFromServer = false;
+		self.timestampLastSyncFromServer = new Date();
 		callback(null);
 	};
-	if(this.syncer.syncadaptor.getUpdatedTiddlers) {
-		this.syncer.syncadaptor.getUpdatedTiddlers(self.syncer,function(err,updates) {
+	if(this.syncadaptor.getUpdatedTiddlers) {
+		this.syncadaptor.getUpdatedTiddlers(self,function(err,updates) {
 			if(err) {
-				self.syncer.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
+				self.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
 				return callback(err);
 			}
 			if(updates) {
 				$tw.utils.each(updates.modifications,function(title) {
-					self.syncer.titlesToBeLoaded[title] = true;
+					self.titlesToBeLoaded[title] = true;
 				});
 				$tw.utils.each(updates.deletions,function(title) {
-					if(syncSystemFromServer || !self.syncer.wiki.isSystemTiddler(title)) {
-						delete self.syncer.tiddlerInfo[title];
-						self.syncer.logger.log("Deleting tiddler missing from server:",title);
-						self.syncer.wiki.deleteTiddler(title);
+					if(syncSystemFromServer || !self.wiki.isSystemTiddler(title)) {
+						delete self.tiddlerInfo[title];
+						self.logger.log("Deleting tiddler missing from server:",title);
+						self.wiki.deleteTiddler(title);
 					}
 				});
 			}
 			return successCallback();
 		});
-	} else if(this.syncer.syncadaptor.getSkinnyTiddlers) {
-		this.syncer.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
+	} else if(this.syncadaptor.getSkinnyTiddlers) {
+		this.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
 			// Check for errors
 			if(err) {
-				self.syncer.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
+				self.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
 				return callback(err);
 			}
 			// Keep track of which tiddlers we already know about have been reported this time
-			var previousTitles = Object.keys(self.syncer.tiddlerInfo);
+			var previousTitles = Object.keys(self.tiddlerInfo);
 			// Process each incoming tiddler
 			for(var t=0; t<tiddlers.length; t++) {
 				// Get the incoming tiddler fields, and the existing tiddler
 				var tiddlerFields = tiddlers[t],
 					incomingRevision = tiddlerFields.revision + "",
-					tiddler = self.syncer.wiki.tiddlerExists(tiddlerFields.title) && self.syncer.wiki.getTiddler(tiddlerFields.title),
-					tiddlerInfo = self.syncer.tiddlerInfo[tiddlerFields.title],
+					tiddler = self.wiki.tiddlerExists(tiddlerFields.title) && self.wiki.getTiddler(tiddlerFields.title),
+					tiddlerInfo = self.tiddlerInfo[tiddlerFields.title],
 					currRevision = tiddlerInfo ? tiddlerInfo.revision : null,
 					indexInPreviousTitles = previousTitles.indexOf(tiddlerFields.title);
 				if(indexInPreviousTitles !== -1) {
@@ -735,22 +687,22 @@ SyncFromServerTask.prototype.run = function(callback) {
 				if(currRevision !== incomingRevision) {
 					// Only load the skinny version if we don't already have a fat version of the tiddler
 					if(!tiddler || tiddler.fields.text === undefined) {
-						self.syncer.storeTiddler(tiddlerFields);
+						self.storeTiddler(tiddlerFields);
 					}
 					// Do a full load of this tiddler
-					self.syncer.titlesToBeLoaded[tiddlerFields.title] = true;
+					self.titlesToBeLoaded[tiddlerFields.title] = true;
 				}
 			}
 			// Delete any tiddlers that were previously reported but missing this time
 			$tw.utils.each(previousTitles,function(title) {
-				if(syncSystemFromServer || !self.syncer.wiki.isSystemTiddler(title)) {
-					delete self.syncer.tiddlerInfo[title];
-					self.syncer.logger.log("Deleting tiddler missing from server:",title);
-					self.syncer.wiki.deleteTiddler(title);
+				if(syncSystemFromServer || !self.wiki.isSystemTiddler(title)) {
+					delete self.tiddlerInfo[title];
+					self.logger.log("Deleting tiddler missing from server:",title);
+					self.wiki.deleteTiddler(title);
 				}
 			});
-			self.syncer.forceSyncFromServer = false;
-			self.syncer.timestampLastSyncFromServer = new Date();
+			self.forceSyncFromServer = false;
+			self.timestampLastSyncFromServer = new Date();
 			return successCallback();
 		});
 	} else {
