@@ -371,7 +371,6 @@ Sort an array of tiddler titles by a specified field
 */
 exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric,isAlphaNumeric,locale) {
 	var self = this;
-	locale = $tw.utils.checkLanguageCode(locale) ? locale : undefined;
 	if(sortField === "title") {
 		if(!isNumeric && !isAlphaNumeric) {
 			const sorter = new Intl.Collator(locale, { sensitivity: isCaseSensitive ? "variant" : "accent" });

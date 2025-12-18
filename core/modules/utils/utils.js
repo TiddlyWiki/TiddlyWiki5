@@ -111,19 +111,6 @@ exports.toTitleCase = function(str) {
 }
 
 /*
-Check whether a language code is supported by Intl
-*/
-exports.checkLanguageCode = lang => {
-	try {
-		Intl.Collator(lang);
-		return true;
-	} catch(e) {
-		console.warn(`Warning: ${lang} is not a valid language code.`);
-		return false;
-	}
-}
-
-/*
 Find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string
 */
@@ -922,7 +909,7 @@ exports.makeCompareFunction = function(type,options = {}) {
 	var isCaseSensitive = (options.isCaseSensitive === false) ? false : true,
 		gt = options.invert ? -1 : +1,
 		lt = options.invert ? +1 : -1,
-		locale = exports.checkLanguageCode(options.locale) ? options.locale : undefined,
+		locale = options.locale,
 		compare = function(a,b) {
 			if(a > b) {
 				return gt ;
