@@ -32,3 +32,17 @@ src="""\function testfunction(one)
 
 <$text text=<<testfunction one={{{ [[re]addprefix[The]] }}}>>/>
 """/>
+
+<$macrocall $name='wikitext-example'
+src="""\define innermacro(one)
+:$one$:$one$:
+\end innermacro
+
+\define mymacro(param)
+|$param$|$param$|
+\end mymacro
+
+<div class=<<mymacro param={{{ [<innermacro one={{$:/palette}}>addprefix[The palette named ]] }}}>>>
+Content
+</div>
+"""/>
