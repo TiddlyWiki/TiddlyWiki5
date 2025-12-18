@@ -262,19 +262,19 @@ tags: $:/tags/Global
 	:else[[margin-top ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
 \end
 
-\function get.styleTop() [<dragStateTiddler>get[start-next-tiddler]match<tiddler>then[calc(-]addsuffix<get.drag.state.tiddler.height>addsuffix[ - (2 * ]addsuffix<get.drag.state.tiddler.margin.bottom>addsuffix[) - 2px)]] :else[<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[top]then[calc(-]addsuffix<get.drag.state.tiddler.height>addsuffix[ - (2 * ]addsuffix<get.drag.state.tiddler.margin.bottom>addsuffix[) - 2px)]] :else[[calc( ]addsuffix[-]addsuffix<styleMarginTop>addsuffix[ - 2px)]]
+\function get.styleTop() [<dragStateTiddler>get[start-next-tiddler]match<tiddler>then[calc(-]addsuffix<get.drag.state.tiddler.height>addsuffix[ - (2 * ]addsuffix<get.drag.state.tiddler.margin.bottom>addsuffix[)]] :else[<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[top]then[calc(-]addsuffix<get.drag.state.tiddler.height>addsuffix[ - (2 * ]addsuffix<get.drag.state.tiddler.margin.bottom>addsuffix[)]] :else[[calc( ]addsuffix[-]addsuffix<styleMarginTop>addsuffix[)]]
 
-\function get.styleBottom() [[calc( ]addsuffix[-]addsuffix<styleMarginBottom>addsuffix[ - 2px)]]
-\function get.styleLeft() [[calc( ]addsuffix[-]addsuffix<stylePaddingLeft>addsuffix[ - 1px)]]
+\function get.styleBottom() [[calc( ]addsuffix[-]addsuffix<styleMarginBottom>addsuffix[)]]
+\function get.styleLeft() [[calc( ]addsuffix[-]addsuffix<stylePaddingLeft>addsuffix[)]]
 
-\function get.styleTopHeight() [<dragStateTiddler>get[start-next-tiddler]match<tiddler>then[calc(50% + ]addsuffix<get.drag.state.tiddler.margin.bottom>addsuffix[ + ]addsuffix<get.drag.state.tiddler.height>addsuffix[ + 2px)]] :else[<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[top]then[calc(50% + (2 * ]addsuffix<get.drag.state.tiddler.margin.bottom>addsuffix[) + ]addsuffix<get.drag.state.tiddler.height>addsuffix[ + 2px)]] :else[[calc(50% + ]addsuffix<styleMarginBottom>addsuffix[ + 2px)]]
+\function get.styleTopHeight() [<dragStateTiddler>get[start-next-tiddler]match<tiddler>then[calc(50% + ]addsuffix<get.drag.state.tiddler.margin.bottom>addsuffix[ + ]addsuffix<get.drag.state.tiddler.height>addsuffix[)]] :else[<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[top]then[calc(50% + (2 * ]addsuffix<get.drag.state.tiddler.margin.bottom>addsuffix[) + ]addsuffix<get.drag.state.tiddler.height>addsuffix[)]] :else[[calc(50% + ]addsuffix<styleMarginBottom>addsuffix[)]]
 
-\function get.styleBottomHeight() [<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[bottom]then[calc(50% + ]addsuffix<get.drag.state.tiddler.height>addsuffix[ + ]addsuffix<get.drag.state.tiddler.margin.bottom>addsuffix[ + 2px)]] :else[[calc(50% + 2px)]]
+\function get.styleBottomHeight() [<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[bottom]then[calc(50% + ]addsuffix<get.drag.state.tiddler.height>addsuffix[ + ]addsuffix<get.drag.state.tiddler.margin.bottom>addsuffix[)]] :else[[50%]]
 
 \function get.styleWidth() [[calc(100% + ]addsuffix<stylePaddingLeft>addsuffix[ + ]addsuffix<stylePaddingRight>addsuffix[)]]
 
-\function get.styleMarginTop() [<dragStateTiddler>get[start-next-tiddler]match<tiddler>then[calc(]addsuffix<get.drag.state.tiddler.height>addsuffix[ + (2 * ]addsuffix<get.drag.state.tiddler.margin.bottom>addsuffix[) + 2px)]] :else[<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[top]then<dragStateTiddler>get[height]addsuffix[px]addprefix[calc(]addsuffix[ + (2 * ]addsuffix<styleMarginBottom>addsuffix[) + 2px)]] :else[[0px]]
-\function get.styleMarginBottom() [<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[bottom]then<dragStateTiddler>get[height]addsuffix[px]addprefix[calc(]addsuffix[ + (2 * ]addsuffix<styleMarginBottom>addsuffix[) + 2px)]] :else[[0px]]
+\function get.styleMarginTop() [<dragStateTiddler>get[start-next-tiddler]match<tiddler>then[calc(]addsuffix<get.drag.state.tiddler.height>addsuffix[ + (2 * ]addsuffix<get.drag.state.tiddler.margin.bottom>addsuffix[))]] :else[<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[top]then<dragStateTiddler>get[height]addsuffix[px]addprefix[calc(]addsuffix[ + (2 * ]addsuffix<styleMarginBottom>addsuffix[))]] :else[[0px]]
+\function get.styleMarginBottom() [<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[bottom]then<dragStateTiddler>get[height]addsuffix[px]addprefix[calc(]addsuffix[ + (2 * ]addsuffix<styleMarginBottom>addsuffix[))]] :else[[0px]]
 
 \function get.draggable.droppable.class() tc-draggable-droppable-qualifier [<qualifiedDragEnterClass>] :and[join[ ]]
 \function get.flexDirection() [<direction>match[vertical]then[row]] [<direction>match[horizontal]then[column]]
@@ -300,7 +300,7 @@ tags: $:/tags/Global
 			style.display="flex"
 			style.position="relative"
 			style.flex-direction=<<get.flexDirection>>
-			style.border="1px dashed gray"
+			style.border="none"
 			style.margin-top=<<get.styleMarginTop>>
 			style.margin-bottom=<<get.styleMarginBottom>>
 			style.transition=<<get.styleTransition>>
@@ -318,7 +318,7 @@ tags: $:/tags/Global
 						<div
 							class="tc-draggable-droppable-drop-top-placeholder"
 							style.position="absolute"
-							style.border="1px solid black"
+							style.border="none"
 							style.top=<<get.styleTop>>
 							style.left=<<get.styleLeft>>
 							style.height=<<get.styleTopHeight>>
@@ -334,7 +334,7 @@ tags: $:/tags/Global
 						<div
 							class="tc-draggable-droppable-drop-bottom-placeholder"
 							style.position="absolute"
-							style.border="1px solid red"
+							style.border="none"
 							style.top="50%"
 							style.left=<<get.styleLeft>>
 							style.height=<<get.styleBottomHeight>>
