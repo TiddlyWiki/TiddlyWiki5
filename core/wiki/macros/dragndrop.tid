@@ -306,7 +306,7 @@ tags: $:/tags/Global
 			style.transition=<<get.styleTransition>>
 		>
 			<$set name="tv-enable-drag-and-drop" value="no">
-				<<content>> - <$text text=<<get.styleTransition>>/>
+				<<content>>
 			</$set>
 			<%if [<dragStateTiddler>get[text]match[yes]] %>
 				<%if [<direction>match[vertical]] %>
