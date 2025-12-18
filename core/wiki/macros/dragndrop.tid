@@ -255,7 +255,9 @@ tags: $:/tags/Global
 
 \function get.styleTransition()
 	[<dragStateTiddler>get[start-next-tiddler]match<tiddler>then[none]]
-	:else[<dragStateTiddler>get[margin]match[top]then<get.tiddler.before.target>match<tiddler>then[margin-top ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom ]addsuffix[0ms linear]]
+	:else[<dragStateTiddler>get[margin]match[top]then<get.tiddler.before.target>match<tiddler>then[margin-top ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom 0ms linear]]
+	:else[<dragStateTiddler>get[margin]match[top]then<get.tiddler.after.target>match<tiddler>then[margin-top 0ms linear, margin-bottom ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
+	:else[<dragStateTiddler>get[margin]match[bottom]then<get.tiddler.before.target>match<tiddler>then[margin-top ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom 0ms linear]]
 	:else[<dragStateTiddler>get[margin]match[bottom]then<get.tiddler.after.target>match<tiddler>then[margin-top 0ms linear, margin-bottom ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
 	:else[<dragStateTiddler>get[margin]match[top]then<dragStateTiddler>get[target]match<tiddler>then[margin-top 0ms linear, margin-bottom ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
 	:else[<dragStateTiddler>get[margin]match[bottom]then<dragStateTiddler>get[target]match<tiddler>then[margin-top ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom ]addsuffix[0ms linear]]
