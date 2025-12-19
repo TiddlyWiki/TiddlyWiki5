@@ -1,6 +1,11 @@
 title: $:/core/ui/PageTemplate/story
 tags: $:/tags/PageTemplate
 
+\procedure content()
+\whitespace trim
+{{||$:/core/ui/StoryTiddlerTemplate}}
+\end
+
 \whitespace trim
 <section class="tc-story-river" role="main">
 
@@ -14,7 +19,11 @@ tags: $:/tags/PageTemplate
 
 </section>
 
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/StoryTiddlerTemplate" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}/>
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}>
+
+<$transclude $variable="make-draggable-droppable" tiddler=<<currentTiddler>> enable={{$:/config/story/dragndrop/enable}} list="$:/StoryList" content=<<content>>/>
+
+</$list>
 
 <section class="story-frontdrop">
 

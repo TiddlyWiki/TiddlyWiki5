@@ -255,12 +255,6 @@ tags: $:/tags/Global
 
 \function get.styleTransition()
 	[<dragStateTiddler>get[start-next-tiddler]match<tiddler>then[none]]
-	:else[<dragStateTiddler>get[margin]match[top]then<get.tiddler.before.target>match<tiddler>then[margin-top ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom 0ms linear]]
-	:else[<dragStateTiddler>get[margin]match[top]then<get.tiddler.after.target>match<tiddler>then[margin-top 0ms linear, margin-bottom ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
-	:else[<dragStateTiddler>get[margin]match[bottom]then<get.tiddler.before.target>match<tiddler>then[margin-top ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom 0ms linear]]
-	:else[<dragStateTiddler>get[margin]match[bottom]then<get.tiddler.after.target>match<tiddler>then[margin-top 0ms linear, margin-bottom ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
-	:else[<dragStateTiddler>get[margin]match[top]then<dragStateTiddler>get[target]match<tiddler>then[margin-top 0ms linear, margin-bottom ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
-	:else[<dragStateTiddler>get[margin]match[bottom]then<dragStateTiddler>get[target]match<tiddler>then[margin-top ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom ]addsuffix[0ms linear]]
 	:else[[margin-top ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
 \end
 
@@ -281,7 +275,7 @@ tags: $:/tags/Global
 \function get.draggable.droppable.class() tc-draggable-droppable-qualifier [<qualifiedDragEnterClass>] :and[join[ ]]
 \function get.flexDirection() [<direction>match[vertical]then[row]] [<direction>match[horizontal]then[column]]
 
-\procedure make-draggable-droppable(tiddler:"",class:"",content:"",list:"",dropActions:"",history:"",dragStateTiddler:"$:/state/tiddlywiki/dragging",direction:"vertical",styleMarginTop:"0px",styleMarginBottom:"0px",stylePaddingLeft:"0px",stylePaddingRight:"0px",styleZIndex:"501",animationDuration:"175",animationCurve:"linear")
+\procedure make-draggable-droppable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragStateTiddler:"$:/state/tiddlywiki/dragging",direction:"vertical",styleMarginTop:"0px",styleMarginBottom:"0px",stylePaddingLeft:"0px",stylePaddingRight:"0px",styleZIndex:"501",animationDuration:"175",animationCurve:"linear")
 \whitespace trim
 <$tiddler tiddler=<<tiddler>>>
 <$let
@@ -291,7 +285,7 @@ tags: $:/tags/Global
 	qualifiedDragEnterClass={{{ [<tiddler>addsuffix<qualfiy>sha256[64]] }}}
 >
 	<$draggable
-		enable=<<yes>>
+		enable=<<enable>>
 		tiddler=<<tiddler>>
 		startactions=<<draggable-droppable-drag-start-actions>>
 		endactions=<<draggable-droppable-drag-end-actions>>
@@ -307,7 +301,7 @@ tags: $:/tags/Global
 			style.margin-bottom=<<get.styleMarginBottom>>
 			style.transition=<<get.styleTransition>>
 		>
-			<$set name="tv-enable-drag-and-drop" value="no">
+			<$set name="tv-enable-drag-and-drop" value={{{ [<enable>match[yes]then[no]] :else[<tv-enable-drag-and-drop>] }}}>
 				<<content>>
 			</$set>
 			<%if [<dragStateTiddler>get[text]match[yes]] %>
@@ -354,13 +348,14 @@ tags: $:/tags/Global
 </$tiddler>
 \end
 
-\procedure draggable-droppable-list(content:"",list:"",dropActions:"",class:"",dragStateTiddler:"$:/state/tiddlywiki/dragging",direction:"vertical",history:"",styleMarginTop:"0px",styleMarginBottom:"0px",stylePaddingLeft:"0px",stylePaddingRight:"0px",styleZIndex:"501",animationDuration:"175",animationCurve:"linear")
+\procedure draggable-droppable-list(content:"",list:"",enable:"yes",dropActions:"",class:"",dragStateTiddler:"$:/state/tiddlywiki/dragging",direction:"vertical",history:"",styleMarginTop:"0px",styleMarginBottom:"0px",stylePaddingLeft:"0px",stylePaddingRight:"0px",styleZIndex:"501",animationDuration:"175",animationCurve:"linear")
 <$list filter="[list<list>]" variable="tid">
 	<$transclude
 		$variable="make-draggable-droppable"
 		tiddler=<<tid>>
 		content=<<content>>
 		list=<<list>>
+		enable=<<enable>>
 		dropActions=<<dropActions>>
 		class=<<class>>
 		dragStateTiddler=<<dragStateTiddler>>
