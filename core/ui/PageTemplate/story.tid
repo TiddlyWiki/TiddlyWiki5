@@ -21,7 +21,7 @@ tags: $:/tags/PageTemplate
 
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}>
 
-<$transclude $variable="make-draggable-droppable" tiddler=<<currentTiddler>> enable={{$:/config/story/dragndrop/enable}} list="$:/StoryList" content=<<content>>/>
+<$transclude $variable="make-draggable-droppable" tiddler=<<currentTiddler>> enable={{$:/config/story/dragndrop/enable}} list="$:/StoryList" content=<<content>> styleMarginBottom="28px" stylePaddingLeft="42px" stylePaddingRight="42px"/>
 
 </$list>
 
