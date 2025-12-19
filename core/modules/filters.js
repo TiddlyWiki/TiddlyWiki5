@@ -228,7 +228,12 @@ exports.getFilterRunPrefixes = function() {
 
 exports.filterTiddlers = function(filterString,widget,source) {
 	var fn = this.compileFilter(filterString);
-	return fn.call(this,source,widget);
+	try {
+		const fnResult = fn.call(this,source,widget);
+		return fnResult;
+	} catch(e) {
+		return [`${$tw.language.getString("Error/Filter")}: ${e}`];
+	}
 };
 
 /*
