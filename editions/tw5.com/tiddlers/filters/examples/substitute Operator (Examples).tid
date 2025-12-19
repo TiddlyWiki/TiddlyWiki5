@@ -1,8 +1,17 @@
 created: 20230614225302905
-modified: 20251021140446753
+modified: 20251219123018071
 tags: [[Operator Examples]] [[substitute Operator]]
 title: substitute Operator (Examples)
 type: text/vnd.tiddlywiki
+
+!! Multi-Valued Parameters
+TODO: Change to #9487 syntax and move to end of tiddler
+
+A single template may be substituted with a number of values to produce a list of output titles:
+
+<<wikitext-example-without-html """\function replacements() [[1st]] [[2nd]] [[3rd]]
+{{{ [[This the the $n$ item]substitute(replacements)] }}}
+""">>
 
 !! Substitute operator parameters
 

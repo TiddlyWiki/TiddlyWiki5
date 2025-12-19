@@ -1,6 +1,6 @@
 caption: substitute
 created: 20230614223551834
-modified: 20251021124124967
+modified: 20251219122307362
 op-input: a [[selection of titles|Title Selection]]
 op-output: the input titles with placeholders for filter expressions, parameter and variables replaced with their corresponding values
 op-parameter: the <<.op substitute>> operator optionally accepts a variable number of parameters, see below for details
@@ -11,17 +11,18 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.3.0">>
 
+!! Parameters
+The <<.op substitute>> operator can have an arbitrary number of parameters. A parameter at position `n` is available within the input titles via the positional placeholder `$n$`.
+
+!! Placeholders
+
 The <<.op substitute>> operator replaces any placeholders in the input titles in the following order:
 
-# filter expressions
-# parameters to the <<.op substitute>> operator
-# variables
+# Filter expressions: `${filter expression}$`<br>The placeholder is replaced by the first result when evaluating the given filter expression.<br>Unmatched placeholders pass through unchanged.
+# Positional parameters: `$n$`<br>The placeholder is replaced by the value of the nth parameter, starting at 1.
+# Variables: `$(name)$`<br>The placeholder is replaced by the value of the variable <<.var name>>.<br>Undefined variables are replaced with an empty string.
 
-|placeholder syntax|description|h
-|`$n$`|Text substitution of a parameter provided to the operator, where n is the position of the parameter starting with 1 for the first parameter.<br>Unmatched placeholders pass through unchanged. |
-|`$(varname)$`|Text substitution of a variable. Undefined variables are replaced with an empty string. |
-|`${ filter expression }$`|Text substitution of the first result of evaluating a filter expression. In other words, if the filter returns multiple titles only the first one will be used. |
-
-<<.tip """Placeholders that contain square bracket characters are not valid filter syntax when used directly in a filter expression. However they can be provided as input to the <$macrocall $name=".op" _="substitute"/> operator as text references or variables""">>
+!!Multi-Valued Variables
+<<.from-version "5.4.0">> The parameters can be [[Multi-Valued Variables]] to provide unique replacements for each input title. In this case, the number of input titles and the number of values in all parameter variables must either be equal or one.
 
 <<.operator-examples "substitute">>
