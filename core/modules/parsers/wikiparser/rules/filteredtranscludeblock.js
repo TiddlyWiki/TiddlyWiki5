@@ -6,10 +6,15 @@ module-type: wikirule
 Wiki text rule for block-level filtered transclusion. For example:
 
 ```
-{{{ [tag[docs]] }}}
-{{{ [tag[docs]] ||TemplateTitle}}}
 ((( [tag[docs]] )))
 ((( [tag[docs]] ||TemplateTitle)))
+```
+
+Original syntax is deprecated and will be changed to output only the first result in a future release:
+
+```
+{{{ [tag[docs]] }}}
+{{{ [tag[docs]] ||TemplateTitle}}}
 ```
 
 \*/
