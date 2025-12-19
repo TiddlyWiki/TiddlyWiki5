@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /*\
 title: $:/core/modules/widgets/action-log.js
 type: application/javascript
@@ -32,7 +33,7 @@ LogWidget.prototype.execute = function(){
 	this.message = this.getAttribute("$$message","debug");
 	this.logAll = this.getAttribute("$$all","no") === "yes" ? true : false;
 	this.filter = this.getAttribute("$$filter");
-}
+};
 
 /*
 Refresh the widget by ensuring our attributes are up to date
@@ -69,10 +70,11 @@ LogWidget.prototype.log = function() {
 	});
 	// Collect values of all variables, using the source text for functions
 	for(var v in this.variables) {
-		var variableInfo = this.getVariableInfo(v);
-		if(variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
-			allVars[v] = variableInfo.text;
+		var variable = this.parentWidget && this.parentWidget.variables[v];
+		if(variable && variable.isFunctionDefinition) {
+			allVars[v] = variable.value;
 		} else {
+			var variableInfo = this.getVariableInfo(v);
 			allVars[v] = variableInfo.resultList.length > 1 ? variableInfo.resultList : variableInfo.text;
 		}
 	}
@@ -94,6 +96,6 @@ LogWidget.prototype.log = function() {
 		console.groupEnd();
 	}
 	console.groupEnd();
-}
+};
 
 exports["action-log"] = LogWidget;
