@@ -23,6 +23,6 @@ The <<.op substitute>> operator replaces any placeholders in the input titles in
 # Variables: `$(name)$`<br>The placeholder is replaced by the value of the variable <<.var name>>.<br>Undefined variables are replaced with an empty string.
 
 !!Multi-Valued Variables
-<<.from-version "5.4.0">> The parameters can be [[Multi-Valued Variables]] to provide unique replacements for each input title. In this case, the number of input titles and the number of values in all parameter variables must either be equal or one.
+<<.from-version "5.4.0">> The parameters can be [[Multi-Valued Variables]] to provide unique replacements for each input title. In this case, the number of input titles and the number of values in all parameter variables must either be equal or one. Single-value inputs or parameters are automatically expanded to the size of the other items.
 
 <<.operator-examples "substitute">>

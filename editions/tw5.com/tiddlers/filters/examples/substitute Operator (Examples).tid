@@ -10,8 +10,19 @@ TODO: Change to #9487 syntax and move to end of tiddler
 A single template may be substituted with a number of values to produce a list of output titles:
 
 <<wikitext-example-without-html """\function replacements() [[1st]] [[2nd]] [[3rd]]
-{{{ [[This the the $n$ item]substitute(replacements)] }}}
+
+{{{ [[This the the $1$ item.]substitute(replacements)] }}}
 """>>
+
+Single-value parameters (here `totalNumber`) are automatically expanded to the size of the input list / other parameters:
+
+<<wikitext-example-without-html """\function templates() [[I am $1$ of $2$.]] [[You are $1$ of $2$.]] [[She is $1$ of $2$.]]
+\function replacements() [[1st]] [[2nd]] [[3rd]]
+\procedure totalNumber() 3
+
+{{{ [(templates)substitute(replacements),<totalNumber>] }}}
+""">>
+
 
 !! Substitute operator parameters
 
