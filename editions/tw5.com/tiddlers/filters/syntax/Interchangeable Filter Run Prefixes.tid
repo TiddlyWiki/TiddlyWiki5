@@ -14,6 +14,7 @@ In technical / logical terms:
 |`-[run]` |`:except[run]` |difference of sets |... AND NOT run |
 |`~[run]` |`:else[run]` |else |... ELSE run |
 |`=[run]` |`:all[run]` |union of sets without de-duplication |... OR run |
+|`=>[run]` |`:let[run]` |<<.from-version "5.4.0">> assign results to a variable |... LET run |
 
 The input of a run is normally a list of all the non-[[shadow|ShadowTiddlers]] tiddler titles in the wiki (in no particular order).<br>But the `+` prefix can change this:
 
