@@ -67,7 +67,6 @@ DraggableWidget.prototype.makeDraggable = function(domNode) {
 	if(this.dragEnable) {
 		$tw.utils.makeDraggable({
 			domNode: domNode,
-			remove: false,
 			dragTiddlerFn: function() {return self.getAttribute("tiddler");},
 			dragFilterFn: function() {return self.getAttribute("filter");},
 			startActions: self.startActions,
