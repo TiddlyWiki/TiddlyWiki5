@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9491
+description: Show loading indicator editing a lazy-loaded tiddler
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9491
+github-contributors: linonetwo
+
+When editing a tiddler that is still being lazy-loaded, the editor now blocks input and put text into draft when loaded.
