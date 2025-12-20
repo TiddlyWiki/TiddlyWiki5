@@ -10,7 +10,7 @@ type: report
 <!-- Add screenshots where needed -->
 
 **Problem Description**
-<!--Describe your problem: A clear and concise description of what your problem is -->
+<!-- Describe your problem: A clear and concise description of what your problem is -->
 
 
 **To Reproduce**
