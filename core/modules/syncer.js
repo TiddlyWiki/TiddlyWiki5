@@ -335,6 +335,11 @@ Syncer.prototype.handleLazyLoadEvent = function(title) {
 	if(!this.syncadaptor.supportsLazyLoading) {
 		return;
 	}
+	// If this is a skinny draft, load its original tiddler instead (the hydrate logic in storeTiddler will update the draft)
+	var tiddler = this.wiki.getTiddler(title);
+	if(tiddler && tiddler.hasField("draft.of") && tiddler.hasField("_is_skinny")) {
+		title = tiddler.fields["draft.of"];
+	}
 	// Don't lazy load the same tiddler twice
 	if(!this.titlesHaveBeenLazyLoaded[title]) {
 		// Don't lazy load if the tiddler isn't included in the sync filter
