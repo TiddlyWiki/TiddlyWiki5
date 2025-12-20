@@ -36,14 +36,14 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create the diff object
 	const editCost = $tw.utils.parseNumber(this.getAttribute("editcost","4"));
-	const diffs = dmp.diffMain(this.getAttribute("source",""),this.getAttribute("dest",""),{ diffEditCost: editCost });
+	const diffs = dmp.diffMain(this.getAttribute("source",""),this.getAttribute("dest",""),{diffEditCost: editCost});
 	// Apply required cleanup
 	switch(this.getAttribute("cleanup","semantic")) {
 		case "none":
 			// No cleanup
 			break;
 		case "efficiency":
-			dmp.diffCleanupEfficiency(diffs);
+			dmp.diffCleanupEfficiency(diffs, {diffEditCost: editCost});
 			break;
 		default: // case "semantic"
 			dmp.diffCleanupSemantic(diffs);
