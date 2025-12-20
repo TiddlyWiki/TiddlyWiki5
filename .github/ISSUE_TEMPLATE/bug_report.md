@@ -13,21 +13,21 @@ type: report
 <!--Describe your problem: A clear and concise description of what your problem is -->
 
 
-**Expected behavior**
-
-As a user,
-<!-- As a developer, -->
-I would expect ...
-
-
 **To Reproduce**
 
 Steps to reproduce the behavior:
 
 1. At https://tiddlywiki.com
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+2. Click on ...
+3. Scroll down to ...
+4. See ...
+
+
+**Expected behavior**
+
+As a user,
+<!-- As a developer, -->
+I would expect ...
 
 
 **TiddlyWiki Configuration**
