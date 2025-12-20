@@ -1,0 +1,15 @@
+title: $:/changenotes/5.4.0/#9507
+created: 20251218204100502
+modified: 20251218204100502
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: usability
+description: Dragndrop procedures for enhanced dragndrop lists
+release: 5.4.0
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9507
+github-contributors: BurningTreeC
+type: text/vnd.tiddlywiki
+
+This pull request extends Tiddlywiki with advanced drag-and-drop procedures.
+
+Lists can be expanded using drag-and-drop, and the drag-and-drop experience feels more natural.

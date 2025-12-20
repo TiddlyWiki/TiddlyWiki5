@@ -57,6 +57,12 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	// Insert the node into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
+	this.makeDraggable(domNode);
+	this.domNodes.push(domNode);
+};
+
+DraggableWidget.prototype.makeDraggable = function(domNode) {
+	var self = this;
 	// Add event handlers
 	if(this.dragEnable) {
 		$tw.utils.makeDraggable({
@@ -69,8 +75,11 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 			widget: this,
 			selector: self.dragHandleSelector
 		});
+	} else if(this.dragStartListenerReference && this.dragEndListenerReference) {
+		domNode.removeEventListener("dragstart",this.dragStartListenerReference,false);
+		domNode.removeEventListener("dragend",this.dragEndListenerReference,false);
+		domNode.removeAttribute("draggable");
 	}
-	this.domNodes.push(domNode);
 };
 
 /*
@@ -111,10 +120,17 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DraggableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tag || changedAttributes.selector || changedAttributes.dragimagetype || changedAttributes.enable || changedAttributes.startactions || changedAttributes.endactions) {
+	if(changedAttributes.tag || changedAttributes.selector || changedAttributes.dragimagetype || changedAttributes.startactions || changedAttributes.endactions) {
 		this.refreshSelf();
 		return true;
 	} else {
+		this.dragEnable = this.getAttribute("enable","yes") === "yes";
+		this.makeDraggable(this.domNodes[0]);
+		if(!this.dragHandleSelector && this.dragEnable && (this.domNodes[0].classList && !this.domNodes[0].classList.contains("tc-draggable"))) {
+			this.domNodes[0].classList.add("tc-draggable");
+		} else if(!this.dragHandleSelector && !this.dragEnable && (this.domNodes[0].classList && this.domNodes[0].classList.contains("tc-draggable"))) {
+			this.domNodes[0].classList.remove("tc-draggable");
+		}
 		if(changedAttributes["class"]) {
 			this.updateDomNodeClasses();
 		}

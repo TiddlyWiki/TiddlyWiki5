@@ -50,7 +50,8 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 			{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
 			{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
 			{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
-			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"}
+			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"},
+			{name: "dragend", handlerObject: this, handlerMethod: "handleDragLeaveEvent"}
 		]);
 	} else {
 		$tw.utils.addClass(this.domNode,this.disabledClass);
@@ -69,6 +70,11 @@ DroppableWidget.prototype.enterDrag = function(event) {
 	}
 	// If we're entering for the first time we need to apply highlighting
 	$tw.utils.addClass(this.domNodes[0],"tc-dragover");
+	// Invoke any enter actions
+	if(this.droppableEnterActions) {
+		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+		this.invokeActionString(this.droppableEnterActions,this,event,{modifier: modifierKey});
+	}
 };
 
 DroppableWidget.prototype.leaveDrag = function(event) {
@@ -81,6 +87,11 @@ DroppableWidget.prototype.leaveDrag = function(event) {
 		this.currentlyEntered = [];
 		if(this.domNodes[0]) {
 			$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+		}
+		// Invoke any leave actions
+		if(this.droppableLeaveActions) {
+			var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+			this.invokeActionString(this.droppableLeaveActions,this,event,{modifier: modifierKey});
 		}
 	}
 };
@@ -106,7 +117,20 @@ DroppableWidget.prototype.handleDragOverEvent  = function(event) {
 	return false;
 };
 
-DroppableWidget.prototype.handleDragLeaveEvent  = function(event) {
+DroppableWidget.prototype.handleDragEndEvent = function(event) {
+	if(this.domNodes[0]) {
+		$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+	}
+	this.currentlyEntered = [];
+	// Invoke any end actions
+	if(this.droppableEndActions) {
+		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+		this.invokeActionString(this.droppableEndActions,this,event,{modifier: modifierKey});
+	}
+	return false;
+};
+
+DroppableWidget.prototype.handleDragLeaveEvent = function(event) {
 	this.leaveDrag(event);
 	return false;
 };
@@ -166,6 +190,9 @@ Compute the internal state of the widget
 DroppableWidget.prototype.execute = function() {
 	this.droppableActions = this.getAttribute("actions");
 	this.droppableListActions = this.getAttribute("listActions");
+	this.droppableEnterActions = this.getAttribute("dragenteractions");
+	this.droppableLeaveActions = this.getAttribute("dragleaveactions");
+	this.droppableEndActions = this.getAttribute("dragendactions");
 	this.droppableEffect = this.getAttribute("effect","copy");
 	this.droppableTag = this.getAttribute("tag");
 	this.droppableEnable = (this.getAttribute("enable") || "yes") === "yes";

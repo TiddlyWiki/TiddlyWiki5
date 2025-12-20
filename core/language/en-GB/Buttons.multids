@@ -193,6 +193,7 @@ Subscript/Caption: subscript
 Subscript/Hint: Apply subscript formatting to selection
 Superscript/Caption: superscript
 Superscript/Hint: Apply superscript formatting to selection
+ToggleDragnDrop/Hint: Toggle drag-and-drop of the tiddlers in the story river
 ToggleSidebar/Hint: Toggle the sidebar visibility
 Transcludify/Caption: transclusion
 Transcludify/Hint: Wrap selection in curly brackets
