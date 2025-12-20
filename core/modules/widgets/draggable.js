@@ -127,9 +127,9 @@ DraggableWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		this.dragEnable = this.getAttribute("enable","yes") === "yes";
 		this.makeDraggable(this.domNodes[0]);
-		if(!this.dragHandleSelector && this.dragEnable && !this.domNodes[0].classList.contains("tc-draggable")) {
+		if(!this.dragHandleSelector && this.dragEnable && (this.domNodes[0].classList && !this.domNodes[0].classList.contains("tc-draggable"))) {
 			this.domNodes[0].classList.add("tc-draggable");
-		} else if(!this.dragHandleSelector && !this.dragEnable && this.domNodes[0].classList.contains("tc-draggable")) {
+		} else if(!this.dragHandleSelector && !this.dragEnable && (this.domNodes[0].classList && this.domNodes[0].classList.contains("tc-draggable"))) {
 			this.domNodes[0].classList.remove("tc-draggable");
 		}
 		if(changedAttributes["class"]) {
