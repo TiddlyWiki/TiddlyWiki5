@@ -75,11 +75,13 @@ Previously, this would have to be accomplished using the `format`, `join` and `e
 
 ```
 <$let titleList={{{ [tag[Learning]format:titlelist[]join[ ]] }}}
-	  howtoTitleList={{{ [enlist<titleList>prefix[How to]format:titlelist[]join[ ]] }}}
-	  exampleTitleList={{{ [enlist<titleList>search[Example]format:titlelist[]join[ ]] }}} >
+	  howtoTitleList={{{ [enlist:raw<titleList>prefix[How to]format:titlelist[]join[ ]] }}}
+	  exampleTitleList={{{ [enlist:raw<titleList>search[Example]format:titlelist[]join[ ]] }}} >
 	...
 </$let>
 ```
+<<.note """The <<.olink title>> operator does not [[de-duplicate|Dominant Append]] and therefore corresponds to <<.olink enlist>> with the `raw` suffix. If you need de-duplication append the <<.olink unique>> operator as in `[<titleList>unique[]]`""">>
+
 
 !! `intersection` Operator
 
