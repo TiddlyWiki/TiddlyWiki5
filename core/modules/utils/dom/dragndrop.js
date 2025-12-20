@@ -27,7 +27,7 @@ exports.makeDraggable = function(options) {
 	if(!options.selector && ((domNode.tagName || "").toLowerCase() !== "a")) {
 		domNode.setAttribute("draggable","true");
 	}
-	var dragStartHandlerFunction = function(event) {
+	var dragStartHandler = function(event) {
 		if(event.dataTransfer === undefined) {
 			return false;
 		}
@@ -111,7 +111,7 @@ exports.makeDraggable = function(options) {
 		return false;
 	};
 
-	var dragEndHandlerFunction = function(event) {
+	var dragEndHandler = function(event) {
 		if((options.selector && $tw.utils.domMatchesSelector(event.target,options.selector)) || event.target === domNode) {
 			// Collect the tiddlers being dragged
 			var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
@@ -143,11 +143,11 @@ exports.makeDraggable = function(options) {
 	};
 
 	// Add event handlers
-	options.widget.dragStartListenerReference = dragStartHandlerFunction;
-	options.widget.dragEndListenerReference = dragEndHandlerFunction;
+	options.widget.dragStartListenerReference = dragStartHandler;
+	options.widget.dragEndListenerReference = dragEndHandler;
 	$tw.utils.addEventListeners(domNode,[
-		{name: "dragstart", handlerFunction: dragStartHandlerFunction},
-		{name: "dragend", handlerFunction: dragEndHandlerFunction}
+		{name: "dragstart", handlerFunction: dragStartHandler},
+		{name: "dragend", handlerFunction: dragEndHandler}
 	]);
 };
 
