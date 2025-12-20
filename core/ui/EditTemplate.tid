@@ -47,11 +47,9 @@ title: $:/core/ui/EditTemplate
 <$keyboard key="((cancel-edit-tiddler))" actions=<<cancel-delete-tiddler-actions "cancel">> tag="div">
 <$keyboard key="((save-tiddler))" actions=<<save-tiddler-actions>> tag="div">
 <%if [<currentTiddler>has:field[_is_skinny]] %>
-	<!-- Trigger lazy-loading of the underlying tiddler text (hidden) -->
+	<!-- Trigger lazy-loading of the draft itself (syncer will fallback to original if draft doesn't exist on server) -->
 	<div hidden>
-		<$tiddler tiddler=<<originalTiddler>>>
-			{{||$:/core/ui/ViewTemplate/body/default}}
-		</$tiddler>
+		{{||$:/core/ui/ViewTemplate/body/default}}
 	</div>
 	<div class="tc-tiddler-lazy-loading" />
 <%else%>
