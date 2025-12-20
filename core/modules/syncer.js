@@ -354,6 +354,31 @@ Syncer.prototype.handleLazyLoadEvent = function(title) {
 };
 
 /*
+Hydrate a skinny draft from its original tiddler.
+Called when a draft doesn't exist on server or has no content.
+*/
+Syncer.prototype.enqueueDraftHydration = function(draftTitle,draftTiddler) {
+	var originalTitle = draftTiddler.fields["draft.of"];
+	var originalTiddler = this.wiki.getTiddler(originalTitle);
+	// If original is already loaded, hydrate immediately
+	if(originalTiddler && originalTiddler.fields.text !== undefined) {
+		this.wiki.addTiddler(new $tw.Tiddler(originalTiddler,{
+			title: draftTitle,
+			"draft.title": draftTiddler.fields["draft.title"],
+			"draft.of": draftTiddler.fields["draft.of"]
+		}));
+		this.titlesHaveBeenLazyLoaded[draftTitle] = true;
+	} else {
+		// Original not loaded yet - mark draft for hydration when original loads
+		this.draftsFallenBackToOriginal[draftTitle] = true;
+		if(!this.titlesHaveBeenLazyLoaded[originalTitle]) {
+			this.titlesToBeLoaded[originalTitle] = true;
+			this.titlesHaveBeenLazyLoaded[originalTitle] = true;
+		}
+	}
+};
+
+/*
 Dispay a password prompt and allow the user to login
 */
 Syncer.prototype.handleLoginEvent = function() {
@@ -624,61 +649,30 @@ LoadTiddlerTask.prototype.run = function(callback) {
 	var self = this;
 	this.syncer.logger.log("Dispatching 'load' task:",this.title);
 	this.syncer.syncadaptor.loadTiddler(this.title,function(err,tiddlerFields) {
-		// Check if this was a skinny draft - we need to handle 404 specially
+		// Check if this is a skinny draft that needs special handling
 		var localTiddler = self.syncer.wiki.getTiddler(self.title);
 		var isSkinnyDraft = localTiddler && localTiddler.hasField("_is_skinny") && localTiddler.hasField("draft.of");
 		
-		// For skinny drafts, treat 404 as "draft doesn't exist on server" (not an error)
-		var is404 = err && err.indexOf && err.indexOf("404") !== -1;
-		if(isSkinnyDraft && is404) {
-			// Draft doesn't exist on server, load original tiddler instead
-			var originalTitle = localTiddler.fields["draft.of"];
-			// Check if original tiddler has already been loaded (has text)
-			var originalTiddler = self.syncer.wiki.getTiddler(originalTitle);
-			if(originalTiddler && originalTiddler.fields.text !== undefined) {
-				// Original already loaded, hydrate draft immediately
-				self.syncer.wiki.addTiddler(new $tw.Tiddler(originalTiddler,{
-					title: self.title,
-					"draft.title": localTiddler.fields["draft.title"],
-					"draft.of": localTiddler.fields["draft.of"]
-				}));
-				self.syncer.titlesHaveBeenLazyLoaded[self.title] = true;
-			} else {
-				// Original not loaded yet, mark for hydration when it loads
-				self.syncer.draftsFallenBackToOriginal[self.title] = true;
-				if(!self.syncer.titlesHaveBeenLazyLoaded[originalTitle]) {
-					self.syncer.titlesToBeLoaded[originalTitle] = true;
-					self.syncer.titlesHaveBeenLazyLoaded[originalTitle] = true;
-				}
-			}
-			return callback(null);
-		}
-		
-		// If there's an error, exit without changing any internal state
-		if(err) {
-			return callback(err);
-		}
-		// Check if this was a skinny draft that came back empty (but not 404)
 		if(isSkinnyDraft) {
+			// For skinny drafts, we need to either restore from server or hydrate from original
+			var is404 = err && err.indexOf && err.indexOf("404") !== -1;
 			var draftHasContent = tiddlerFields && tiddlerFields.text;
-			if(!draftHasContent) {
-				// Draft exists but has no content, load original tiddler instead
-				var originalTitle = localTiddler.fields["draft.of"];
-				// Mark this draft as needing hydration from original when original loads
-				self.syncer.draftsFallenBackToOriginal[self.title] = true;
-				if(!self.syncer.titlesHaveBeenLazyLoaded[originalTitle]) {
-					self.syncer.titlesToBeLoaded[originalTitle] = true;
-					self.syncer.titlesHaveBeenLazyLoaded[originalTitle] = true;
-				}
-				// Don't store the empty draft response
+			
+			if(is404 || !draftHasContent) {
+				// Draft doesn't exist on server or is empty - hydrate from original tiddler
+				self.syncer.enqueueDraftHydration(self.title, localTiddler);
 				return callback(null);
 			}
+			// Draft exists with content - fall through to store it normally
+		} else if(err) {
+			// For non-draft tiddlers, propagate errors normally
+			return callback(err);
 		}
-		// Update the info stored about this tiddler
+		
+		// Store the loaded tiddler
 		if(tiddlerFields) {
 			self.syncer.storeTiddler(tiddlerFields);
 		}
-		// Invoke the callback
 		callback(null);
 	});
 };
