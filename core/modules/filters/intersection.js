@@ -1,5 +1,5 @@
 /*\
-title: $:/yaisog/modules/filters/intersection.js
+title: $:/core/modules/filters/intersection.js
 type: application/javascript
 module-type: filteroperator
 
