@@ -292,7 +292,7 @@ exports.compileFilter = function(filterString) {
 						var varTree = $tw.utils.parseFilterVariable(operand.text);
 						var valueList = widgetClass.evaluateVariable(widget, varTree.name, {params: varTree.params, source: source});
 						operand.valueList = valueList.map(function(value) { return value !== undefined ? value : ""; });
-						operand.value = operand.valueList[0];
+						operand.value = operand.valueList[0] || "";
 					} else {
 						operand.value = operand.text;
 						operand.valueList = [operand.value];
