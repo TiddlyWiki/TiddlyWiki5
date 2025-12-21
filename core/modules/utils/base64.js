@@ -27,25 +27,3 @@ function bytesToBase64(bytes) {
 exports.base64EncodeUtf8 = str => bytesToBase64(new TextEncoder().encode(str));
 
 exports.base64DecodeUtf8 = str => new TextDecoder().decode(base64ToBytes(str));
-
-/*
-Decode a base64 string
-*/
-exports.base64Decode = function(string64,binary,urlsafe) {
-	const encoded = urlsafe ? string64.replace(/_/g,"/").replace(/-/g,"+") : string64;
-	if(binary) return exports.atob(encoded);
-	else return exports.base64DecodeUtf8(encoded);
-};
-
-/*
-Encode a string to base64
-*/
-exports.base64Encode = function(string64,binary,urlsafe) {
-	let encoded;
-	if(binary) encoded = exports.btoa(string64);
-	else encoded = exports.base64EncodeUtf8(string64);
-	if(urlsafe) {
-		encoded = encoded.replace(/\+/g,"-").replace(/\//g,"_");
-	}
-	return encoded;
-};

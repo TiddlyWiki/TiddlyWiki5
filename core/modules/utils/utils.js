@@ -764,6 +764,28 @@ exports.sha256 = function(str, options) {
 }
 
 /*
+Decode a base64 string
+*/
+exports.base64Decode = function(string64,binary,urlsafe) {
+	const encoded = urlsafe ? string64.replace(/_/g,"/").replace(/-/g,"+") : string64;
+	if(binary) return $tw.utils.atob(encoded);
+	else return $tw.utils.base64DecodeUtf8(encoded);
+};
+
+/*
+Encode a string to base64
+*/
+exports.base64Encode = function(string64,binary,urlsafe) {
+	let encoded;
+	if(binary) encoded = $tw.utils.btoa(string64);
+	else encoded = $tw.utils.base64EncodeUtf8(string64);
+	if(urlsafe) {
+		encoded = encoded.replace(/\+/g,"-").replace(/\//g,"_");
+	}
+	return encoded;
+};
+
+/*
 Convert a hashmap into a tiddler dictionary format sequence of name:value pairs
 */
 exports.makeTiddlerDictionary = function(data) {
