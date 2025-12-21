@@ -10,45 +10,59 @@ When using the syntax <code>attribute=&#40;&#40;&#40; <em>filter expression</em>
 ! Usage in Widget Attributes
 
 !! LetWidget
-A multi-valued variable can be assigned using the [[LetWidget]]. Multi-valued variables assigned this way can be accessed in subsequent variable assignments using the [[title Operator]]:
+A multi-valued variable can be assigned using the <<.wlink LetWidget>> widget. Multi-valued variables assigned this way can be accessed in subsequent variable assignments using the [[title Operator]]:
 
-```
-<$let titleList=((( [tag[Learning]] ))) howtoTitleList=((( [<titleList>prefix[How to]] ))) >
+<<.example n:"wa-lw-1" eg:"""<$let titleList=((( [tag[Learning]] ))) howtoTitleList=((( [<titleList>prefix[How to]] ))) >
 	((( [<howtoTitleList>] || $:/core/ui/ListItemTemplate )))
 </$let>
-```
+""">>
+
 The example also demonstrates the use of the <code>&#40;&#40;&#40; <em>filter expression</em> &#41;&#41;&#41;</code> syntax in [[Filtered Transclusions|Transclusion in WikiText]] with templates, see below.
 
 !! TranscludeWidget
-The [[TranscludeWidget]] can pass multi-valued variables to [[Procedures]] and [[Functions]]. Macro definitions are not supported.
+The <<.wlink TranscludeWidget>> widget can pass multi-valued variables to [[Procedures]], [[Functions]] and [[Custom Widgets]]. Macro definitions are not supported.
 
 In this example, the variable `itemList` contains a list of items that is accessed inside the procedure using the `title` filter operator:
 
-```
-\procedure outputList(itemList)
-	<$list filter="[<itemList>]" />
+<<.example n:"wa-tw-1" eg:"""\procedure outputList(itemList)
+	<$list filter="[<itemList>]" join=" -- "  />
 \end
 
 <$transclude $variable="outputList" itemList=((( [tag[Learning]] ))) />
-```
+""">>
 
 Or, combined with the LetWidget and an intermediate (multi-valued) variable `items`:
 
-```
-\procedure outputList(itemList)
-	<$list filter="[<itemList>]" />
+<<.example n:"wa-tw-2" eg:"""\procedure outputList(itemList)
+	<$list filter="[<itemList>]" join=" -- " />
 \end
 
 <$let items=((( [tag[Learning]] ))) >
 	<$transclude $variable="outputList" itemList=<<items>> />
 </$let>
-```
+""">>
+
+!! Functions
+
+Directly assigning the output of a [[function|Functions]] via the <code><em>attribute</em>=&lt;&lt;<em>function</em>&gt;&gt;</code> syntax assigns the full result list and works as if <code><em>function</em></code> was a multi-valued variable.
+
+<<.example n:"wa-f-1" eg:"""\function itemFunction(itemTag) [tag<itemTag>]
+
+\procedure outputList(itemList)
+	<$list filter="[<itemList>]" join=" -- " />
+\end
+
+<$transclude $variable="outputList" itemList=<<itemFunction itemTag:Learning>> />
+""">>
+
+<<.note """Until version 5.4.0 this syntax would assign only the first value in the list returned by the function""">>
+
 
 ! Usage in Filter Expressions
 
 Currently, there are only a few [[Filter Operators]] that make use of multi-valued variables.
 
-!! `title` Operator
+!! <<.op title>> Operator
 
 The [[title Operator]] or its short form work with multi-valued variables. If multiple items have been assigned to `titleList` with e.g. the LetWidget, then within a filter run,
 
@@ -64,39 +78,51 @@ will return all items, not just the first.
 
 This is especially useful when working with lists.
 
-```
-<$let titleList=((( [tag[Learning]] )))
+<<.example n:"fe-to-1" eg:"""<$let titleList=((( [tag[Learning]] )))
 	  howtoTitleList=((( [<titleList>prefix[How to]] )))
-	  exampleTitleList=((( [<titleList>search[Example]] ))) >
-	...
+	  exampleTitleList=((( [<titleList>search:title[Example]] ))) >
+	((( [<exampleTitleList>] || $:/core/ui/ListItemTemplate )))
 </$let>
-```
+""">>
+
 Previously, this would have to be accomplished using the `format`, `join` and `enlist` operators:
 
-```
-<$let titleList={{{ [tag[Learning]format:titlelist[]join[ ]] }}}
+<<.example n:"fe-to-2" eg:"""<$let titleList={{{ [tag[Learning]format:titlelist[]join[ ]] }}}
 	  howtoTitleList={{{ [enlist:raw<titleList>prefix[How to]format:titlelist[]join[ ]] }}}
-	  exampleTitleList={{{ [enlist:raw<titleList>search[Example]format:titlelist[]join[ ]] }}} >
-	...
+	  exampleTitleList={{{ [enlist:raw<titleList>search:title[Example]format:titlelist[]join[ ]] }}} >
+	((( [enlist:raw<exampleTitleList>] || $:/core/ui/ListItemTemplate )))
 </$let>
-```
+""">>
+
 <<.note """The <<.olink title>> operator does not [[de-duplicate|Dominant Append]] and therefore corresponds to <<.olink enlist>> with the `raw` suffix. If you need de-duplication append the <<.olink unique>> operator as in `[<titleList>unique[]]`""">>
 
 
-!! `intersection` Operator
+!! <<.op function>> Operator
+
+The <<.olink function>> operator can pass multi-valued parameters to custom functions.
+
+<<.example n:"fe-fo-1" eg:"""\function .combine(colorList) [all[]] :map:flat[<colorList>addprefix<currentTiddler>]
+
+<$let prefixes=((( [[dark-]] [[medium-]] [[light-]] ))) colors=((( [[red]] [[green]] [[blue]] )))>
+    ((( [<prefixes>.combine<colors>] || $:/core/ui/ListItemTemplate )))
+</$let>
+""">>
+
+
+!! <<.op intersection>> Operator
 
 The [[intersection Operator]] will return all items that common to both the input list and the parameter list.
 
-```
-<$let titleList=((( [tag[Learning]] ))) >
-	((( [tag[Cascades]intersection<titleList>] )))
+<<.example n:"fe-io-1" eg:"""<$let titleList=((( [tag[Learning]] ))) >
+	((( [tag[Cascades]intersection<titleList>] || $:/core/ui/ListItemTemplate )))
 </$let>
-```
+""">>
+
 Also compare the [[Intersection Filter Run Prefix]] which will return common items from two filter runs.
 
 !! Listops Operators
 
-To be implemented.
+To be implemented in another PR.
 
 !! `:let` Filter Run Prefix
 
@@ -104,20 +130,42 @@ The [[Let Filter Run Prefix]] and its short form `=>` assign the list of output 
 
 The previous example could be written as
 
-```
-((( [tag[Learning]] :let[[titleList]] [tag[Cascades]intersection<titleList>] )))
-```
+<<.example n:"fe-let-1" eg:"""((( [tag[Learning]] :let[[titleList]] [tag[Cascades]intersection<titleList>] )))
+""">>
+
+
+! Usage in Variable Transclusions
+
+The WikiText syntax for transcluding a [[variable|Variables]]
+
+<pre><code>&lt;$transclude $variable=&lt;&lt;<em>titleList</em>&gt;&gt; /&gt;</code></pre>
+
+and its short form
+
+<pre><code>&lt;&lt;<em>titleList</em>&gt;&gt;</code></pre>
+
+always returns the first item of <code><em>titleList</em></code> if it is a multi-valued variable.
 
 
 ! Usage in Filtered Transclusions
 
-Previous examples have already made extensive usage of the [[Filtered Transclusions|Transclusion in WikiText]] syntax:
+The syntax for [[Filtered Transclusions|Transclusion in WikiText]] 
 
-<pre><code>((( <em>filter expression</em> )))
-((( <em>filter expression</em> || <em>template</em> )))</code></pre>
+<pre><code>&#40;&#40;&#40; <em>filter expression</em> &#41;&#41;&#41;
+&#40;&#40;&#40; <em>filter expression</em> || <em>template</em> &#41;&#41;&#41;</code></pre>
 
-Filtered transclusions -- i.e. not assigned to an attribute as in [[Filtered Attribute Values]] -- using the <code>&#40;&#40;&#40; &#41;&#41;&#41;</code> syntax will always output all items returned by the filter expression.
+will always output all items returned by the filter expression. It is equivalent to
 
-TODO: Mention change in <code>&#123;&#123;&#123; &#125;&#125;&#125;</code> output to single items if implemented.
+<pre><code>&lt;$list filter="<em>filter expression</em>" template="<em>template</em>" /&gt;</code></pre>
 
-TODO: Procedure to find usages of old syntax and to convert to new syntax.
+!! Filtered Transclusions using <<.value """&#123;&#123;&#123; &#125;&#125;&#125;""">>
+<<.deprecated-since 5.4.0>> Filtered transclusions using the syntax
+
+<pre><code>&#123;&#123;&#123; <em>filter expression</em> &#125;&#125;&#125;
+&#123;&#123;&#123; <em>filter expression</em> || <em>template</em> &#125;&#125;&#125;</code></pre>
+
+are currently an alias of the <code>&#40;&#40;&#40; &#41;&#41;&#41;</code> syntax. In a future release they will be changed to output only the first item returned by <code><em>filter expression</em></code>.
+
+Use [[Convert Filtered Transclusion Syntax]] to find usages of the deprecated syntax and to convert them to the new syntax.
+
+TODO: Procedure
