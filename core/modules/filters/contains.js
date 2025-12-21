@@ -4,7 +4,6 @@ type: application/javascript
 module-type: filteroperator
 
 Filter operator for finding values in array fields
-
 \*/
 
 "use strict";
@@ -13,26 +12,54 @@ Filter operator for finding values in array fields
 Export our filter function
 */
 exports.contains = function(source,operator,options) {
-	var results = [],
-		fieldname = operator.suffix || "list";
-	if(operator.prefix === "!") {
-		source(function(tiddler,title) {
-			if(tiddler) {
-				var list = tiddler.getFieldList(fieldname);
-				if(list.indexOf(operator.operand) === -1) {
-					results.push(title);
-				}
-			} else {
+	const results = [];
+	const operands = operator.operands || [];
+	const fieldname = operator.suffix || operands[1] || "list";
+	const flagsString = operands[2] || "";
+	const flags = flagsString.split(",").map(f => f.trim().toLowerCase());
+	const invert = operator.prefix === "!";
+
+	// We parse the first parameter value to get the title or list of titles to check for
+	const operandTitles = flags.includes("list") ? $tw.utils.parseStringArray(operands[0] || "") : [operands[0] || ""];
+
+	// We return the input list (or nothing if inverted) if no value is given, for both literal and list modes
+	if(operandTitles.length === 0 || (operandTitles.length === 1 && operandTitles[0] === "")) {
+		source((tiddler,title) => {
+			if(!invert) {
 				results.push(title);
 			}
 		});
-	} else {
-		source(function(tiddler,title) {
+		return results;
+	}
+
+	if(flags.includes("lookup")) { // We use findListingsOfTiddler lookup if requested
+		const intermediateSets = operandTitles.map(title => new Set(options.wiki.findListingsOfTiddler(title, fieldname)));
+		source((tiddler,title) => {
+			let hasTitle;
+			if(flags.includes("some")) {
+				hasTitle = intermediateSets.some(set => set.has(title));
+			} else {
+				hasTitle = intermediateSets.every(set => set.has(title));
+			}
+			if(hasTitle !== invert) {
+				results.push(title);
+			}
+		});
+	} else { // We use the original algorithm
+		source((tiddler,title) => {
 			if(tiddler) {
-				var list = tiddler.getFieldList(fieldname);
-				if(list.indexOf(operator.operand) !== -1) {
+				const list = tiddler.getFieldList(fieldname);
+				let hasTitle;
+				if(flags.includes("some")) {
+					hasTitle = operandTitles.some(searchTitle => list.indexOf(searchTitle) !== -1);
+				} else {
+					hasTitle = operandTitles.every(searchTitle => list.indexOf(searchTitle) !== -1);
+				}
+				if(hasTitle !== invert) {
 					results.push(title);
 				}
+			} else if(invert) {
+				results.push(title);
 			}
 		});
 	}
