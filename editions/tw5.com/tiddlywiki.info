@@ -47,9 +47,9 @@
 			"--render","$:/core/copyright.txt","license","text/plain"],
 		"tw2": [
 			"--render","TiddlyWiki2ReadMe","tw2/readme.md","text/html"],
-		"staticX": [
+		"staticTestWelcome": [
 			"--render","$:/core/templates/static.template.html","static.html","text/plain",
-			"--render","[[HelloThere]]","[encodeuricomponent[]addprefix[static/]addsuffix[.html]]","text/plain","$:/core/templates/static.tiddler.html",
+			"--render","[[Welcome]]","[encodeuricomponent[]addprefix[static/]addsuffix[.html]]","text/plain","$:/core/templates/static.tiddler.html",
 			"--render","$:/core/templates/static.template.css","static/static.css","text/plain"
 		],
 		"static": [
