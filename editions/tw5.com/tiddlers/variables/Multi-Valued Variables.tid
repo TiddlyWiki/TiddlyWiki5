@@ -48,14 +48,12 @@ Directly assigning the output of a [[function|Functions]] via the <code><em>attr
 
 <<.example n:"wa-f-1" eg:"""\function itemFunction(itemTag) [tag<itemTag>]
 
-\procedure outputList(itemList)
-	<$list filter="[<itemList>]" join=" -- " />
-\end
-
-<$transclude $variable="outputList" itemList=<<itemFunction itemTag:Learning>> />
+<$let itemList=<<itemFunction itemTag:Learning>> >
+    ((( [<itemList>] || $:/core/ui/ListItemTemplate )))
+</$let>
 """>>
 
-<<.note """Until version 5.4.0 this syntax would assign only the first value in the list returned by the function""">>
+<<.note """Until version 5.4.0 this syntax would assign only the first value in the list returned by the function. This can still be achieved using legacy filtered attribute values, e.g. `itemList={{{ [<itemFunction itemTag:Learning>] }}}`.<br>However, all widgets not enhanced to handle multi-valued variables always use only the first value in the list returned by the function. """>>
 
 
 ! Usage in Filter Expressions
