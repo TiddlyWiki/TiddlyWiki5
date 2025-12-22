@@ -42,6 +42,17 @@ Or, combined with the LetWidget and an intermediate (multi-valued) variable `ite
 </$let>
 """>>
 
+!! ListWidget / [[Conditional Shortcut Syntax]]
+
+Within an <<.attr if>> or <<.attr elseif>> clause, the additional variable <<.var conditionList>> contains all results of evaluating the condition.
+
+<<.example n:"wa-cs-1" eg:"""<% if [tag[Learning]butfirst[25]] %>
+	((( [<conditionList>] )))
+<% endif %>
+""">>
+
+The internally generated <<.wlink ListWidget>> widget uses the attribute `listVariable="conditionList"` to set <<.var conditionList>> to the result list. 
+
 !! Functions
 
 Directly assigning the output of a [[function|Functions]] via the <code><em>attribute</em>=&lt;&lt;<em>function</em>&gt;&gt;</code> syntax assigns the full result list and works as if <code><em>function</em></code> was a multi-valued variable.
@@ -58,7 +69,7 @@ Directly assigning the output of a [[function|Functions]] via the <code><em>attr
 
 ! Usage in Filter Expressions
 
-Currently, there are only a few [[Filter Operators]] that make use of multi-valued variables.
+Some [[Filter Operators]] can make use of multi-valued variables.
 
 !! <<.op title>> Operator
 
