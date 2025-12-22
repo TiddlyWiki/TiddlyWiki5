@@ -1,9 +1,9 @@
 title: HelloThumbnail - TiddlyWiki Privacy
 tags: HelloThumbnail
 color: #D5B7EA
-image: TiddlyWiki Privacy Badge.png
+image: TiddlyWiki Privacy Badge
 caption: プライバシーとセキュリティ
 link: TiddlyWiki Privacy and Security
-ribbon-text: NEW
+type: text/vnd.tiddlywiki
 
 注意すれば、~TiddlyWikiは完全にプライベートに使用でき、自分のデバイス以外のものや人を信頼する必要はありません
