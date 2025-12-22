@@ -131,7 +131,7 @@ ListWidget.prototype.getTiddlerList = function() {
 	var limit = $tw.utils.getInt(this.getAttribute("limit",""),undefined);
 	var defaultFilter = "[!is[system]sort[title]]";
 	var results = this.wiki.filterTiddlers(this.getAttribute("filter",defaultFilter),this);
-	// Store full list before applying limit for multi-valued variable support
+	// We store the full list for listVariable support and then apply the limit if specified
 	this.fullList = results.slice();
 	if(limit !== undefined) {
 		if(limit >= 0) {
@@ -235,7 +235,7 @@ ListWidget.prototype.refresh = function(changedTiddlers) {
 		this.storyview.refreshStart(changedTiddlers,changedAttributes);
 	}
 	// Completely refresh if any of our attributes have changed
-	if(changedAttributes.filter || changedAttributes.variable || changedAttributes.counter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.join || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
+	if(changedAttributes.filter || changedAttributes.variable || changedAttributes.listVariable || changedAttributes.counter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.join || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
 		this.refreshSelf();
 		result = true;
 	} else {
@@ -304,9 +304,9 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			this.removeChildDomNodes();
 			this.children = [];
 		}
-		// If we are providing an counter variable then we must refresh the items, otherwise we can rearrange them
+		// If we are providing a counter variable or listVariable then we must refresh the items, otherwise we can rearrange them
 		var hasRefreshed = false,t;
-		if(this.counterName) {
+		if(this.counterName || this.listVariableName) {
 			var mustRefreshOldLast = false;
 			var oldLength = this.children.length;
 			// Cycle through the list and remove and re-insert the first item that has changed, and all the remaining items
