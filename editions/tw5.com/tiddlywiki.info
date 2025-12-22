@@ -48,13 +48,16 @@
 		"tw2": [
 			"--render","TiddlyWiki2ReadMe","tw2/readme.md","text/html"],
 		"staticX": [
-			"--render","$:/core/templates/static.template.html","static.html","text/plain"
+			"--render","$:/core/templates/static.template.html","static.html","text/plain",
+			"--render","[[HelloThere]]","[encodeuricomponent[]addprefix[static/]addsuffix[.html]]","text/plain","$:/core/templates/static.tiddler.html",
+			"--render","$:/core/templates/static.template.css","static/static.css","text/plain"
 		],
 		"static": [
 			"--render","$:/core/templates/static.template.html","static.html","text/plain",
 			"--render","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
 			"--render","[!is[system]]","[encodeuricomponent[]addprefix[static/]addsuffix[.html]]","text/plain","$:/core/templates/static.tiddler.html",
-			"--render","$:/core/templates/static.template.css","static/static.css","text/plain"],
+			"--render","$:/core/templates/static.template.css","static/static.css","text/plain"
+		],
 		"external-js": [
 			"--render","$:/core/save/offline-external-js","[[external-]addsuffix<version>addsuffix[.html]]","text/plain",
 			"--render","$:/core/templates/tiddlywiki5.js","[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]","text/plain"],
