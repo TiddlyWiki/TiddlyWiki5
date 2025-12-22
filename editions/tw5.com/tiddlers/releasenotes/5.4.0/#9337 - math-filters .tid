@@ -1,17 +1,7 @@
-title: $:/changenotes/5.4.0/#9337/compatibility-break/math-filters
+title: $:/changenotes/5.4.0/#9337/impacts/math-filters
 changenote: $:/changenotes/5.4.0/#9337
-created - 20251112152513384
-modified - 20251112152513384
+created: 20251112152513384
+modified: 20251209160312626
 tags: $:/tags/ImpactNote
-description: filter output with empty input changes for some math filter operators
+description: filter output changes for some math filter operators when input list is empty
 impact-type: compatibility-break
-
-These math operators will now output an empty list when the input list is empty:
-
-* sum[] - previously returned 0
-* product[] - previously returned 1
-* maxall[] - previously returned -Infinity
-* minall[] - previously returned Infinity
-* average[] - previously returned NaN
-* variance[] - previously returned NaN
-* standard-deviation[] - previously returned NaN
