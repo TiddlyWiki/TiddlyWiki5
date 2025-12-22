@@ -23,7 +23,15 @@ tags: $:/tags/Macro
       <$set name="excluded" filter="[subfilter<__exclude__>] [<__tag__>]">
         <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
           <li class=<<toc-item-class>>>
-            <$list filter="[all[current]toc-link[no]]" emptyMessage="<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}><<toc-caption>></$link>">
+            <$list filter="[all[current]toc-link[no]]" >
+              <$list-empty><!-- interacitve path -->
+                <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+                  <<toc-caption>>
+                  <%if [<tv-config-static>match[yes]<currentTiddler>tagging[]] %>
+                    <$text text=" ..."/><!-- next level is available -->
+                  <%endif%>
+                </$link>
+              </$list-empty>
               <<toc-caption>>
             </$list>
             <$let _level={{{ [<__level__>subtract[1]] }}}>
