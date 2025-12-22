@@ -1,0 +1,8 @@
+title: $:/language/Help/version
+description: Εμφανίζει τον αριθμό έκδοσης του TiddlyWiki
+
+Εμφανίζει τον αριθμό έκδοσης του  TiddlyWiki.
+
+```
+--version
+```
