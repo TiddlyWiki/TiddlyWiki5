@@ -1,0 +1,14 @@
+title: $:/core/templates/static.tiddler.toc
+code-body: yes
+
+<div class="tc-table-of-contents">
+
+<$transclude $variable="toc" tag=<<storyTiddler>> level="1"/>
+
+</div>
+
+''Back to:''
+
+{{{ [all[current]tags[]!is[system]] }}}
+
+https://tiddlywiki.com/static
