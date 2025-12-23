@@ -351,7 +351,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 				var value = variables[name];
 				if($tw.utils.isArray(value)) {
 					return {
-						text: value[0],
+						text: value[0] || "",
 						resultList: value
 					};
 				} else {
