@@ -387,15 +387,24 @@ Widget.prototype.computeAttributes = function(options) {
 				return;
 			}
 		}
-		var value = self.computeAttribute(attribute);
+		
+		// We compute the attribute as list first and then derive the scalar value from that
+		var valueList = self.computeAttribute(attribute, {asList: true});
+		var value;
+		// For filteredlist, the empty array should become "" for backwards compatibility
+		if(attribute.type === "filteredlist") {
+			value = valueList[0] || "";
+		} else {
+			value = valueList[0];
+		}
+		
 		if(self.attributes[name] !== value) {
 			self.attributes[name] = value;
 			changedAttributes[name] = true;
 		}
-		var valueList = self.computeAttribute(attribute,{asList: true});
-		if(!$tw.utils.isArrayEqual(self.attributeLists[name], valueList)) {
+		if(self.attributeLists[name] === undefined || !$tw.utils.isArrayEqual(self.attributeLists[name], valueList)) {
 			self.attributeLists[name] = valueList;
-			//changedAttributes[name] = true;
+			changedAttributes[name] = true;
 		}
 	});
 	return changedAttributes;
