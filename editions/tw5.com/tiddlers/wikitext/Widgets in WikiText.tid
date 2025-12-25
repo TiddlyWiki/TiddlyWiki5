@@ -28,4 +28,4 @@ See [[HTML in WikiText]] for more details.
 
 The available widgets include:
 
-<<list-links "[tag[Widgets]]">>
+<<list-links "[tag[Widgets]]" class:"multi-columns">>
