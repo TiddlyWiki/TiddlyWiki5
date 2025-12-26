@@ -2735,7 +2735,12 @@ $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 	var args = Array.prototype.slice.call(arguments,1);
 	if($tw.utils.hop($tw.hooks.names,hookName)) {
 		for(var i = 0; i < $tw.hooks.names[hookName].length; i++) {
+			var previousValue = args[0];
 			args[0] = $tw.hooks.names[hookName][i].apply(null,args);
+			// Warn if a hook function forgets return when it is of pipe mode
+			if(args[0] === undefined && previousValue !== undefined) {
+				console.warn("Hook '" + hookName + "' handler at index " + i + " returned undefined. Expected the handler to return the value for the next hook in the chain. Handler function:", $tw.hooks.names[hookName][i].toString().substring(0, 200) + "...");
+			}
 		}
 	}
 	return args[0];
