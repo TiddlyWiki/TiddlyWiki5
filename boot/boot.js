@@ -2739,7 +2739,7 @@ $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 			args[0] = $tw.hooks.names[hookName][i].apply(null,args);
 			// Warn if a hook function forgets return when it is of pipe mode
 			if(args[0] === undefined && previousValue !== undefined) {
-				console.warn("Hook '" + hookName + "' handler at index " + i + " returned undefined. Expected the handler to return the value for the next hook in the chain. Handler function:", $tw.hooks.names[hookName][i].toString().substring(0, 200) + "...");
+				console.warn("Hook '" + hookName + "' handler at index " + i + " returned undefined. Expected the handler to return the value for the next hook in the chain. Handler function:", $tw.hooks.names[hookName][i]);
 			}
 		}
 	}
