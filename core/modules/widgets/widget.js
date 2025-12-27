@@ -391,9 +391,9 @@ Widget.prototype.computeAttributes = function(options) {
 		// We compute the attribute as list first and then derive the scalar value from that
 		var valueList = self.computeAttribute(attribute, {asList: true});
 		var value;
-		// For filteredlist, the empty array should become "" for backwards compatibility
-		if(attribute.type === "filteredlist") {
-			value = valueList[0] || "";
+		// We convert an empty array to "" for backwards compatibility (relevant for filteredlist, macro and string types)
+		if(valueList.length === 0) {
+			value = "";
 		} else {
 			value = valueList[0];
 		}
@@ -450,11 +450,7 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 	} else { // String attribute
 		value = attribute.value;
 		if(options.asList) {
-			if(value === undefined) {
-				value = [];
-			} else {
-				value = [value];
-			}
+			value = [value];
 		}
 	}
 	return value;
