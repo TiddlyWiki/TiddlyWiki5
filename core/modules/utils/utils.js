@@ -49,19 +49,6 @@ exports.warning = function(text) {
 };
 
 /*
-Log a table of name: value pairs
-*/
-exports.logTable = function(data) {
-	if(console.table) {
-		console.table(data);
-	} else {
-		$tw.utils.each(data,function(value,name) {
-			console.log(name + ": " + value);
-		});
-	}
-}
-
-/*
 Return the integer represented by the str (string).
 Return the dflt (default) parameter if str is not a base-10 number.
 */
@@ -77,43 +64,6 @@ exports.replaceString = function(text,search,replace) {
 	return text.replace(search,function() {
 		return replace;
 	});
-};
-
-/*
-Repeats a string
-*/
-exports.repeat = function(str,count) {
-	var result = "";
-	for(var t=0;t<count;t++) {
-		result += str;
-	}
-	return result;
-};
-
-/*
-Check if a string starts with another string
-*/
-exports.startsWith = function(str,search) {
-	return str.substring(0, search.length) === search;
-};
-
-/*
-Check if a string ends with another string
-*/
-exports.endsWith = function(str,search) {
-	return str.substring(str.length - search.length) === search;
-};
-
-/*
-Trim whitespace from the start and end of a string
-Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-javascript
-*/
-exports.trim = function(str) {
-	if(typeof str === "string") {
-		return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-	} else {
-		return str;
-	}
 };
 
 exports.trimPrefix = function(str,unwanted) {
@@ -198,18 +148,6 @@ Return the number of keys in an object
 */
 exports.count = function(object) {
 	return Object.keys(object || {}).length;
-};
-
-/*
-Determine whether an array-item is an object-property
-*/
-exports.hopArray = function(object,array) {
-	for(var i=0; i<array.length; i++) {
-		if($tw.utils.hop(object,array[i])) {
-			return true;
-		}
-	}
-	return false;
 };
 
 /*
@@ -941,44 +879,6 @@ exports.makeDataUri = function(text,type,_canonical_uri) {
 };
 
 /*
-Useful for finding out the fully escaped CSS selector equivalent to a given tag. For example:
-
-$tw.utils.tagToCssSelector("$:/tags/Stylesheet") --> tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet
-*/
-exports.tagToCssSelector = function(tagName) {
-	return "tc-tagged-" + encodeURIComponent(tagName).replace(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^`{\|}~,]/mg,function(c) {
-		return "\\" + c;
-	});
-};
-
-/*
-IE does not have sign function
-*/
-exports.sign = Math.sign || function(x) {
-	x = +x; // convert to a number
-	if(x === 0 || isNaN(x)) {
-		return x;
-	}
-	return x > 0 ? 1 : -1;
-};
-
-/*
-IE does not have an endsWith function
-*/
-exports.strEndsWith = function(str,ending,position) {
-	if(str.endsWith) {
-		return str.endsWith(ending,position);
-	} else {
-		if(typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
-			position = str.length;
-		}
-		position -= ending.length;
-		var lastIndex = str.indexOf(ending, position);
-		return lastIndex !== -1 && lastIndex === position;
-	}
-};
-
-/*
 Return system information useful for debugging
 */
 exports.getSystemInfo = function(str,ending,position) {
@@ -1002,10 +902,6 @@ exports.parseNumber = function(str) {
 
 exports.parseInt = function(str) {
 	return parseInt(str,10) || 0;
-};
-
-exports.stringifyNumber = function(num) {
-	return num + "";
 };
 
 exports.makeCompareFunction = function(type,options) {

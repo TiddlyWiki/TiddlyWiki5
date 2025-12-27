@@ -23,6 +23,7 @@ There is also a utility `serializeAttribute` for a single attribute node, like a
 * Separate serialize handlers for each WikiText rule as `module-type: wikiruleserializer`
 * Test suite with tag `$:/tags/wikitext-serialize-test-spec`
 * It uses each parser's name as rule (`nextMatch.rule.name`), each AST node that needs serialization has a `type` property matching the rule name
+** HTML tags and widgets are handled by the `html` serializer
 
 !! Example Usage
 

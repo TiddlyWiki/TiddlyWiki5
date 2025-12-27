@@ -122,7 +122,7 @@ function CodeMirrorEngine(options) {
 			self.widget.invokeActionString(self.widget.editInputActions,this,event,{actionValue: this.getText()});
 		}
 	});
-	
+
 	this.cm.on("drop",function(cm,event) {
 		if(!self.widget.isFileDropEnabled) {
 			event.stopPropagation(); // Otherwise TW's dropzone widget sees the drop event
@@ -257,7 +257,10 @@ CodeMirrorEngine.prototype.getText = function() {
 Fix the height of textarea to fit content
 */
 CodeMirrorEngine.prototype.fixHeight = function() {
-	if(this.widget.editAutoHeight) {
+	// rows takes precedence
+	if(this.widget.editRows) {
+		this.cm.setSize(null,this.widget.editRows + "em");
+	} else if(this.widget.editAutoHeight) {
 		// Resize to fit
 		this.cm.setSize(null,null);
 	} else {
