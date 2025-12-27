@@ -9,6 +9,8 @@ When using the syntax <code>attribute=&#40;&#40;&#40; <em>filter expression</em>
 
 ! Usage in Widget Attributes
 
+Multi-valued attribute values can only be used in widgets that are able to handle them. In all other widgets, they behave like regular attribute values. 
+
 !! LetWidget
 A multi-valued variable can be assigned using the <<.wlink LetWidget>> widget. Multi-valued variables assigned this way can be accessed in subsequent variable assignments using the [[title Operator]]:
 
@@ -84,6 +86,8 @@ or
 [<titleList>]
 ```
 will return all items, not just the first.
+
+<<.note """In contrast to regular variables which are internally handled as strings, multi-valued variables can be truly empty, in which case `[<titleList>]` yields an empty list instead of a list with an empty item, and a subsequent `is[blank]` or similar check is no longer necessary. The behavior for `[<non-existent>]` to return an empty string in the case of a non-existent variable is not changed.""">>
 
 This is especially useful when working with lists.
 
