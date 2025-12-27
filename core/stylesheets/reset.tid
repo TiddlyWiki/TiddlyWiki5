@@ -1,4 +1,4 @@
-title: $:/themes/tiddlywiki/vanilla/reset
+title: $:/core/stylesheets/reset
 type: text/css
 
 /*! modern-normalize v2.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
