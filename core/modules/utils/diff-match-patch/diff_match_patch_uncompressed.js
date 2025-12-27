@@ -1,5 +1,21 @@
 'use strict';
 
+var __defProp$1 = Object.defineProperty;
+var __getOwnPropSymbols$1 = Object.getOwnPropertySymbols;
+var __hasOwnProp$1 = Object.prototype.hasOwnProperty;
+var __propIsEnum$1 = Object.prototype.propertyIsEnumerable;
+var __defNormalProp$1 = (obj, key, value) => key in obj ? __defProp$1(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues$1 = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp$1.call(b, prop))
+      __defNormalProp$1(a, prop, b[prop]);
+  if (__getOwnPropSymbols$1)
+    for (var prop of __getOwnPropSymbols$1(b)) {
+      if (__propIsEnum$1.call(b, prop))
+        __defNormalProp$1(a, prop, b[prop]);
+    }
+  return a;
+};
 const defaultOptions = /* @__PURE__ */ Object.freeze({
   diffTimeout: 1,
   diffEditCost: 4,
@@ -10,12 +26,9 @@ const defaultOptions = /* @__PURE__ */ Object.freeze({
   matchMaxBits: 32
 });
 function resolveOptions(options) {
-  if (options?.__resolved)
+  if (options == null ? undefined : options.__resolved)
     return options;
-  const resolved = {
-    ...defaultOptions,
-    ...options
-  };
+  const resolved = __spreadValues$1(__spreadValues$1({}, defaultOptions), options);
   Object.defineProperty(resolved, "__resolved", { value: true, enumerable: false });
   return resolved;
 }
@@ -801,7 +814,7 @@ function diffFromDelta(text1, delta) {
       case "+":
         try {
           diffs[diffsLength++] = createDiff(DIFF_INSERT, decodeURI(param));
-        } catch {
+        } catch (e) {
           throw new Error(`Illegal escape in diff_fromDelta: ${param}`);
         }
         break;
@@ -918,6 +931,22 @@ function matchAlphabet(pattern) {
   return s;
 }
 
+var __defProp = Object.defineProperty;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
 function patchAddContext(patch, text, options) {
   if (text.length === 0)
     return;
@@ -946,10 +975,7 @@ function patchAddContext(patch, text, options) {
   patch.length2 += prefix.length + suffix.length;
 }
 function patchMake(a, opt_b, opt_c, options = {}) {
-  const resolved = {
-    ...defaultOptions,
-    ...options
-  };
+  const resolved = __spreadValues(__spreadValues({}, defaultOptions), options);
   let text1, diffs;
   if (typeof a == "string" && typeof opt_b == "string" && typeof opt_c == "undefined") {
     text1 = a;
@@ -1277,7 +1303,7 @@ function patchFromText(textline) {
       let line = "";
       try {
         line = decodeURI(text[textPointer].substring(1));
-      } catch {
+      } catch (e) {
         throw new Error(`Illegal escape in patch_fromText: ${line}`);
       }
       if (sign === "-") {
