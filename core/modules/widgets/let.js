@@ -45,30 +45,36 @@ LetWidget.prototype.computeAttributes = function() {
 	var changedAttributes = {},
 		self = this;
 	this.currentValueFor = Object.create(null);
+
+	// First pass: Stage all values
 	$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(this.parseTreeNode),function(attribute) {
-		var value = self.computeAttribute(attribute,{asList: true}),
-			name = attribute.name;
+		var name = attribute.name;
 		// Now that it's prepped, we're allowed to look this variable up
 		// when defining later variables
-		if(value !== undefined) {
-			self.currentValueFor[name] = value;
-		}
+		self.currentValueFor[name] = self.computeAttribute(attribute,{asList: true});
 	});
-	// Run through again, setting variables and looking for differences
-	$tw.utils.each(this.currentValueFor,function(value,name) {
-		if(!$tw.utils.isArrayEqual(self.attributes[name],value)) {
+
+	// Second pass: Set variables and detect changes
+	$tw.utils.each(this.currentValueFor,function(valueList,name) {
+		var value = valueList[0] || "";
+		if(self.attributes[name] !== value) {
 			self.attributes[name] = value;
-			self.setVariable(name,value);
 			changedAttributes[name] = true;
 		}
+		if(self.attributeLists && !$tw.utils.isArrayEqual(self.attributeLists[name], valueList)) {
+			self.attributeLists[name] = valueList;
+			changedAttributes[name] = true;
+		}
+		self.setVariable(name, valueList);
 	});
+
 	return changedAttributes;
 };
 
 LetWidget.prototype.getVariableInfo = function(name,options) {
 	// Special handling: If this variable exists in this very $let, we can
 	// use it, but only if it's been staged.
-	if ($tw.utils.hop(this.currentValueFor,name)) {
+	if($tw.utils.hop(this.currentValueFor,name)) {
 		var value = this.currentValueFor[name];
 		return {
 			text: value[0] || "",

@@ -37,7 +37,8 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	this.parentWidget = options.parentWidget;
 	this.variables = Object.create(this.parentWidget ? this.parentWidget.variables : null);
 	this.document = options.document;
-	this.attributes = {};
+	this.attributes = Object.create(null);
+	this.attributeLists = Object.create(null);
 	this.children = [];
 	this.domNodes = [];
 	this.eventListeners = {};
@@ -220,7 +221,7 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 		for(var m=0; m<actualParams.length; m++) {
 			if(typeof actualParams[m] !== "string" && actualParams[m].name === paramInfo.name) {
 				paramValue = actualParams[m].value;
-				paramMultiValue = actualParams[m].multiValue || [paramValue]
+				paramMultiValue = actualParams[m].multiValue || [paramValue];
 			}
 		}
 		// If not, use the next available anonymous macro call parameter
@@ -386,9 +387,23 @@ Widget.prototype.computeAttributes = function(options) {
 				return;
 			}
 		}
-		var value = self.computeAttribute(attribute);
+		
+		// We compute the attribute as list first and then derive the scalar value from that
+		var valueList = self.computeAttribute(attribute, {asList: true});
+		var value;
+		// We convert an empty array to "" for backwards compatibility (relevant for filteredlist, macro and string types)
+		if(valueList.length === 0) {
+			value = "";
+		} else {
+			value = valueList[0];
+		}
+		
 		if(self.attributes[name] !== value) {
 			self.attributes[name] = value;
+			changedAttributes[name] = true;
+		}
+		if(self.attributeLists[name] === undefined || !$tw.utils.isArrayEqual(self.attributeLists[name], valueList)) {
+			self.attributeLists[name] = valueList;
 			changedAttributes[name] = true;
 		}
 	});
@@ -403,14 +418,21 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 	options = options || {};
 	var self = this,
 		value;
+	/// We only return a single value from {{{ filter }}}
 	if(attribute.type === "filtered") {
+		value = this.wiki.filterTiddlers(attribute.filter,this)[0] || "";
+		if(options.asList) {
+			value = [value];
+		}
+	// We may return the full list from ((( filter )))
+	} else if(attribute.type === "filteredlist") {
 		value = this.wiki.filterTiddlers(attribute.filter,this);
 		if(!options.asList) {
 			value = value[0] || "";
 		}
 	} else if(attribute.type === "indirect") {
 		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler"));
-		if(value && options.asList) {
+		if(options.asList) {
 			value = [value];
 		}
 	} else if(attribute.type === "macro") {
@@ -428,11 +450,7 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 	} else { // String attribute
 		value = attribute.value;
 		if(options.asList) {
-			if(value === undefined) {
-				value = [];
-			} else {
-				value = [value];
-			}
+			value = [value];
 		}
 	}
 	return value;
@@ -584,9 +602,9 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	var variableDefinitionName = "$" + parseTreeNode.type;
 	if(this.variables[variableDefinitionName]) {
 		var isOverrideable = function() {
-				// Widget is overrideable if its name contains a period, or if it is an existing JS widget and we're not in safe mode
-				return parseTreeNode.type.indexOf(".") !== -1 || (!!self.widgetClasses[parseTreeNode.type] && !$tw.safeMode);
-			};
+			// Widget is overrideable if its name contains a period, or if it is an existing JS widget and we're not in safe mode
+			return parseTreeNode.type.indexOf(".") !== -1 || (!!self.widgetClasses[parseTreeNode.type] && !$tw.safeMode);
+		};
 		if(!parseTreeNode.isNotRemappable && isOverrideable()) { 
 			var variableInfo = this.getVariableInfo(variableDefinitionName,{allowSelfAssigned: true});
 			if(variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.value && variableInfo.srcVariable.isWidgetDefinition) {
@@ -715,7 +733,7 @@ Widget.prototype.dispatchEvent = function(event) {
 		$tw.utils.each(listeners,function(handler) {
 			var propagate;
 			if(typeof handler === "string") {
-				 // If handler is a string, call it as a method on the widget
+				// If handler is a string, call it as a method on the widget
 				propagate = self[handler].call(self,event);
 			} else {
 				// Otherwise call the function handler directly
@@ -758,7 +776,7 @@ Refresh all the children of a widget
 Widget.prototype.refreshChildren = function(changedTiddlers) {
 	var children = this.children,
 		refreshed = false;
-	for (var i = 0; i < children.length; i++) {
+	for(var i = 0; i < children.length; i++) {
 		refreshed = children[i].refresh(changedTiddlers) || refreshed;
 	}
 	return refreshed;
@@ -771,9 +789,9 @@ Widget.prototype.findNextSiblingDomNode = function(startIndex) {
 	// Refer to this widget by its index within its parents children
 	var parent = this.parentWidget,
 		index = startIndex !== undefined ? startIndex : parent.children.indexOf(this);
-if(index === -1) {
-	throw "node not found in parents children";
-}
+	if(index === -1) {
+		throw "node not found in parents children";
+	}
 	// Look for a DOM node in the later siblings
 	while(++index < parent.children.length) {
 		var domNode = parent.children[index].findFirstDomNode();
