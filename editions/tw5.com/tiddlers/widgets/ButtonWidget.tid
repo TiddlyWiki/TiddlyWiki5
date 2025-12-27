@@ -1,6 +1,6 @@
 caption: button
 created: 20131024141900000
-modified: 20250720025737830
+modified: 20251101091926820
 tags: Widgets TriggeringWidgets
 title: ButtonWidget
 type: text/vnd.tiddlywiki
@@ -34,6 +34,7 @@ The content of the `<$button>` widget is displayed within the button.
 |setIndex |An ''index'' to which the new value will be assigned, if the attribute <<.attr setTitle>> is present |
 |setTo |The new value to assign to the TextReference identified in the `set` attribute or the text field / the field specified through <<.attr setField>> / the index specified through <<.attr setIndex>> of the title given through <<.attr setTitle>> |
 |selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the tiddler specified in <<.attr set>> already has the value specified in <<.attr setTo>>  |
+|selectedAria |<<.from-version "5.4.0">> An ARIA attribute to be set to `true` or `false` when <<.attr selectedClass>> is defined. Allowed values are `aria-checked` (default), `aria-selected` and `aria-pressed`  |
 |default |Default value if <<.attr set>> tiddler is missing for testing against <<.attr setTo>> to determine <<.attr selectedClass>> |
 |popup |Title of a state tiddler for a popup that is toggled when the button is clicked. See PopupMechanism for details |
 |popupTitle |Title of a state tiddler for a popup that is toggled when the button is clicked. In difference to the <<.attr popup>> attribute, ''no'' TextReference is used. See PopupMechanism for details |
