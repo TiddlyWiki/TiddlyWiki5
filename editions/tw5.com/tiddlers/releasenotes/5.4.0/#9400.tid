@@ -7,4 +7,4 @@ change-category: filters
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9400
 github-contributors: Leilei332
 
-Add a new parameter for all sort operators and sort filter run prefix to support sorting with a custom locale.
+Add a new parameter for `sort`, `nsort`, `sortan`, `sortcs` and `nsortcs` to support sorting with a custom locale.
