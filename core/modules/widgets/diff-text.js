@@ -9,8 +9,8 @@ Widget to display a diff between two texts
 
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	dmp = require("$:/core/modules/utils/diff-match-patch/diff_match_patch.js");
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const dmp = require("$:/core/modules/utils/diff-match-patch/diff_match_patch.js");
 
 var DiffTextWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -35,19 +35,18 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Create the diff object
-	var dmpObject = new dmp.diff_match_patch();
-		dmpObject.Diff_EditCost = $tw.utils.parseNumber(this.getAttribute("editcost","4"));
-	var	diffs = dmpObject.diff_main(this.getAttribute("source",""),this.getAttribute("dest",""));
+	const editCost = $tw.utils.parseNumber(this.getAttribute("editcost","4"));
+	const diffs = dmp.diffMain(this.getAttribute("source",""),this.getAttribute("dest",""),{diffEditCost: editCost});
 	// Apply required cleanup
 	switch(this.getAttribute("cleanup","semantic")) {
 		case "none":
 			// No cleanup
 			break;
 		case "efficiency":
-			dmpObject.diff_cleanupEfficiency(diffs);
+			dmp.diffCleanupEfficiency(diffs, {diffEditCost: editCost});
 			break;
 		default: // case "semantic"
-			dmpObject.diff_cleanupSemantic(diffs);
+			dmp.diffCleanupSemantic(diffs);
 			break;
 	}
 	// Create the elements
