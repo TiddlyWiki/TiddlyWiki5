@@ -1,0 +1,6 @@
+title: $:/core/startup/secure-context
+tags: $:/tags/StartupAction/Browser
+
+<% if [{$:/info/browser/secure-context}match[no]] %>
+<$action-setfield $tiddler="$:/temp/alerts/secure-context" tags="$:/tags/Alert" text={{$:/language/InsecureContext}}/>
+<% endif %>
