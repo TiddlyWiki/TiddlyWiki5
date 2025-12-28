@@ -40,6 +40,7 @@ SendMessageWidget.prototype.execute = function() {
 	this.actionValues = this.getAttribute("$values");
 	this.actionEventNames = this.getAttribute("$eventNames");
 	this.actionEventValues = this.getAttribute("$eventValues");
+	this.actionEventJson = this.getAttribute("$eventJson");
 };
 
 /*
@@ -88,6 +89,17 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		tiddlerTitle: this.getVariable("currentTiddler"),
 		navigateFromTitle: this.getVariable("storyTiddler")
 	};
+	// Parse and merge $eventJson if present
+	if(this.actionEventJson) {
+		try {
+			var eventData = JSON.parse(this.actionEventJson);
+			$tw.utils.each(eventData,function(value,name) {
+				params[name] = value;
+			});
+		} catch(e) {
+			// Silently ignore invalid JSON
+		}
+	}
 	// Add event names/values pairs if present
 	if(this.actionEventNames && this.actionEventValues) {
 		var eventNames = this.wiki.filterTiddlers(this.actionEventNames,this),
