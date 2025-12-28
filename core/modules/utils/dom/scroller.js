@@ -59,12 +59,12 @@ PageScroller.prototype.getScrollContainer = function(element,srcWindow) {
 };
 
 /*
-Get scroll-margin-top value from element's computed style
+Get scroll-margin value from element's computed style
 */
-PageScroller.prototype.getScrollMarginTop = function(element,srcWindow) {
+PageScroller.prototype.getScrollMargin = function(element,srcWindow,propertyValue) {
 	var style = srcWindow.getComputedStyle(element);
-	var scrollMarginTop = style.getPropertyValue("scroll-margin-top");
-	return parseFloat(scrollMarginTop) || 0;
+	var scrollMargin = style.getPropertyValue(propertyValue);
+	return parseFloat(scrollMargin) || 0;
 };
 
 /*
@@ -94,7 +94,8 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 		duration = $tw.utils.hop(options,"animationDuration") ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
 		srcWindow = element ? element.ownerDocument.defaultView : window,
 		scrollContainer = this.getScrollContainer(element,srcWindow),
-		scrollMarginTop = this.getScrollMarginTop(element,srcWindow);
+		scrollMarginTop = this.getScrollMargin(element,srcWindow,"scroll-margin-top"),
+		scrollMarginLeft = this.getScrollMargin(element,srcWindow,"scroll-margin-left");
 	// Now get ready to scroll the body
 	this.cancelScroll(srcWindow);
 	this.startTime = Date.now();
@@ -111,7 +112,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 				// Position relative to scroll container
 				var containerBounds = scrollContainer.getBoundingClientRect();
 				return {
-					left: clientBounds.left - containerBounds.left + scrollContainer.scrollLeft,
+					left: clientBounds.left - containerBounds.left + scrollContainer.scrollLeft - scrollMarginLeft,
 					top: clientBounds.top - containerBounds.top + scrollContainer.scrollTop - offset - scrollMarginTop,
 					width: clientBounds.width,
 					height: clientBounds.height
