@@ -55,13 +55,23 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 						props["list-" + prefix] = $tw.utils.stringifyList(names);
 						return props;
 					};
+					// Collect event properties for JSON (preserving types)
+					var collectJsonProps = function(obj) {
+						var result = {};
+						$tw.utils.each(obj,function(value,name) {
+							if(["string","boolean","number"].indexOf(typeof value) !== -1) {
+								result[name] = value;
+							}
+						});
+						return result;
+					};
 					var variables = $tw.utils.extend(
 						{},
 						collectProps(event.paramObject,"event-paramObject"),
 						collectProps(event,"event"),
 						{
 							modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event),
-							"json-event": JSON.stringify(event)
+							"json-event": JSON.stringify(collectJsonProps(event))
 						});
 					isActionStringExecuting = true;
 					self.invokeActionString(actions,self,event,variables);
