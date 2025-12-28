@@ -133,6 +133,15 @@ The [[intersection Operator]] will return all items that common to both the inpu
 
 Also compare the [[Intersection Filter Run Prefix]] which will return common items from two filter runs.
 
+!! <<.op getvariable>> Operator
+
+The [[getvariable Operator]] will return return all values from a multi-valued variable. If the variable is an empty list, no output is produced. If the variable does not exist, a list with a single empty item will be output.
+
+<<.example n:"fe-gv-1" eg:"""<$let titleList=((( [tag[Learning]] ))) >
+	((( [[titleList]getvariable[]] || $:/core/ui/ListItemTemplate )))
+</$let>
+""">>
+
 !! Listops Operators
 
 To be implemented in another PR.
