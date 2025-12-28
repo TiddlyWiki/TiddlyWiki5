@@ -63,7 +63,7 @@ $else$
 </$set>
 \end
 
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional
 
 /*
 ** Start with the normalize CSS reset, and then belay some of its effects
@@ -126,6 +126,13 @@ body.tc-body {
 	color: <<colour foreground>>;
 	background-color: <<colour page-background>>;
 	fill: currentColor;
+}
+
+@media (min-width: <<sidebarbreakpoint>>) {
+
+	body.tc-body {
+		overflow: hidden;
+	}
 }
 
 <<if-background-attachment """
@@ -528,6 +535,16 @@ a.tc-tiddlylink-external:hover {
 
 .tc-page-container > .tc-dropzone {
 	min-height: 100vh;
+}
+
+@media (min-width: <<sidebarbreakpoint>>) {
+
+	.tc-page-container > .tc-dropzone {
+		display: flex;
+		height: 100vh;
+		overflow: hidden;
+	}
+
 }
 
 .tc-dropzone {
@@ -1021,39 +1038,73 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		margin: 21px -21px 21px -21px;
 	}
 
+	.tc-sidebar {
+		order: 2;
+		flex-shrink: 0;
+		width: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyright}});
+		height: 100vh;
+		overflow: hidden;
+		outline: none;
+		margin-right: 0;
+		transition: margin-right {{$:/config/AnimationDuration}}ms ease-in-out;
+	}
+
+	<%if [{$:/state/sidebar}match[no]] %>
+
+		.tc-sidebar{
+			margin-right: calc(0px - (100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyright}}));
+		}
+
+	<% endif %>
+
+
+
+	html[dir="rtl"] .tc-sidebar {
+		order: 0;
+		margin-right: auto;
+		margin-left: 0;
+		transition: margin-left {{$:/config/AnimationDuration}}ms ease-in-out;
+	}
+
+	<%if [{$:/state/sidebar}match[no]] %>
+
+		html[dir="rtl"] .tc-sidebar {
+			margin-left: calc(0px - (100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyright}}));
+		}
+
+	<% endif %>
+
+
+
 	.tc-sidebar-scrollable {
-		position: fixed;
-		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
-		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
-		bottom: 0;
-		right: 0;
+		position: relative;
+		top: auto;
+		left: auto;
+		bottom: auto;
+		right: auto;
+		width: 100%;
+		height: 100%;
 		overflow-y: auto;
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
-		margin: 0 0 0 -42px;
+		margin: 0;
 		padding: 71px 0 28px 42px;
 	}
 
-	html[dir="rtl"] .tc-sidebar-scrollable {
-		left: auto;
-		right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
-	}
-
 	.tc-story-river {
+		order: 1;
 		position: relative;
-		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
-		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
-		width: {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}};
+		left: auto;
+		top: auto;
+		width: auto;
+		height: 100vh;
+		overflow-y: scroll;
 		padding: 42px 42px 42px 42px;
+		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+		margin-right: 0;
+		outline: none;
+		flex: 1;
 	}
-
-<<if-no-sidebar "
-
-	.tc-story-river {
-		width: calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
-	}
-
-">>
 
 	.tc-story-river.tc-static-story-river {
 		margin-right: 0;
@@ -1469,24 +1520,28 @@ html body.tc-body.tc-single-tiddler-window {
 
 <<if-fluid-fixed text:"""
 
-	.tc-story-river {
-		padding-right: 0;
-		position: relative;
-		width: auto;
-		left: 0;
-		margin-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
-		margin-right: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+	.tc-sidebar {
+		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
 	}
+
+	<%if [{$:/state/sidebar}match[no]] %>
+
+		.tc-sidebar{
+			margin-right: calc(0px - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}});
+		}
+
+	<% endif %>
+
+	<%if [{$:/state/sidebar}match[no]] %>
+
+		html[dir="rtl"] .tc-sidebar {
+			margin-left: calc(0px - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}});
+		}
+
+	<% endif %>
 
 	.tc-tiddler-frame {
 		width: 100%;
-	}
-
-	.tc-sidebar-scrollable {
-		left: auto;
-		bottom: 0;
-		right: 0;
-		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
 	}
 
 	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
@@ -1497,7 +1552,7 @@ html body.tc-body.tc-single-tiddler-window {
 """ hiddenSidebarText:"""
 
 	.tc-story-river {
-		padding-right: 3em;
+		padding-right: 42px;
 		margin-right: 0;
 	}
 
