@@ -538,7 +538,8 @@ a.tc-tiddlylink-external:hover {
 	.tc-page-container > .tc-dropzone {
 		display: flex;
 		flex: 1;
-		overflow: hidden;
+		overflow-x: clip;
+		overflow-y: hidden;
 	}
 
 }
@@ -1049,40 +1050,24 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	.tc-sidebar {
 		order: 2;
 		flex-shrink: 0;
-		width: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyright}});
+		flex-grow: 0;
+		flex-basis: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyright}});
 		height: 100%;
-		overflow: hidden;
+		overflow: clip;
 		outline: none;
-		margin-right: 0;
-		transition: margin-right {{$:/config/AnimationDuration}}ms ease-in-out;
 	}
-
-	<%if [{$:/state/sidebar}match[no]] %>
-
-		.tc-sidebar{
-			margin-right: calc(0px - (100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyright}}));
-		}
-
-	<% endif %>
-
-
 
 	html[dir="rtl"] .tc-sidebar {
 		order: 0;
-		margin-right: auto;
-		margin-left: 0;
-		transition: margin-left {{$:/config/AnimationDuration}}ms ease-in-out;
 	}
 
 	<%if [{$:/state/sidebar}match[no]] %>
 
-		html[dir="rtl"] .tc-sidebar {
-			margin-left: calc(0px - (100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyright}}));
+		.tc-sidebar {
+			flex-basis: 0;
 		}
 
 	<% endif %>
-
-
 
 	.tc-sidebar-scrollable {
 		position: relative;
@@ -1090,7 +1075,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		left: auto;
 		bottom: auto;
 		right: auto;
-		width: 100%;
+		min-width: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyright}});
 		height: 100%;
 		overflow-y: auto;
 		overflow-x: auto;
@@ -1109,13 +1094,22 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		overflow-y: scroll;
 		padding: 42px 42px 42px 42px;
 		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
-		margin-right: 0;
 		outline: none;
-		flex: 1;
+		flex-grow: 1;
+		flex-shrink: 0;
+		flex-basis: {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}};
+		transition: flex-basis {{$:/config/AnimationDuration}}ms ease-in-out;
 	}
 
+	<%if [{$:/state/sidebar}match[no]] %>
+
+		.tc-story-river {
+			flex-basis: 100vw;
+		}
+
+	<% endif %>
+
 	.tc-story-river.tc-static-story-river {
-		margin-right: 0;
 		padding-right: 42px;
 	}
 
@@ -1212,14 +1206,15 @@ button.tc-btn-invisible.tc-remove-tag-button {
 @media (min-width: <<sidebarbreakpoint>>) {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
-		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
+		width: min({{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}}, 100%);
+		transition: width {{$:/config/AnimationDuration}}ms ease-in-out;
 		border-radius: 2px;
 	}
 
 <<if-no-sidebar "
 
 	.tc-tiddler-frame {
-		width: 100%;
+		width: calc(100vw - 84px);
 	}
 
 ">>
@@ -1529,44 +1524,27 @@ html body.tc-body.tc-single-tiddler-window {
 <<if-fluid-fixed text:"""
 
 	.tc-sidebar {
-		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+		flex-basis: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
 	}
 
 	<%if [{$:/state/sidebar}match[no]] %>
 
-		.tc-sidebar{
-			margin-right: calc(0px - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}});
+		.tc-sidebar {
+			flex-basis: 0;
 		}
 
 	<% endif %>
 
-	<%if [{$:/state/sidebar}match[no]] %>
-
-		html[dir="rtl"] .tc-sidebar {
-			margin-left: calc(0px - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}});
-		}
-
-	<% endif %>
+	.tc-sidebar-scrollable {
+		min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+	}
 
 	.tc-tiddler-frame {
 		width: 100%;
 	}
 
 	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
-		width: 100%;
 		width: calc(100% - 42px);
-	}
-
-""" hiddenSidebarText:"""
-
-	.tc-story-river {
-		padding-right: 42px;
-		margin-right: 0;
-	}
-
-	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
-		width: 100%;
-		width: calc(100% - 84px);
 	}
 
 """>>
