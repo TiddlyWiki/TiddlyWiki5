@@ -1,7 +1,0 @@
-# Enforce LF line endings for text files to ensure consistent tests across platforms
-* text=auto eol=lf
-
-boot/ linguist-generated=false
-**/tiddlywiki.files linguist-language=JSON
-**/tiddlywiki.info linguist-language=JSON
-**/plugin.info linguist-language=JSON
