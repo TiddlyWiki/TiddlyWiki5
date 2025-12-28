@@ -1057,10 +1057,6 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		outline: none;
 	}
 
-	html[dir="rtl"] .tc-sidebar {
-		order: 0;
-	}
-
 	<%if [{$:/state/sidebar}match[no]] %>
 
 		.tc-sidebar {
