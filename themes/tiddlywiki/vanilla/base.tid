@@ -1088,7 +1088,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		width: auto;
 		height: auto;
 		overflow-y: scroll;
-		padding: 42px 42px 42px 42px;
+		padding: 28px 42px 42px 42px;
 		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 		outline: none;
 		flex-grow: 1;
