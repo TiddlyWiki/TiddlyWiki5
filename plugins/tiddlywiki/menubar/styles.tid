@@ -43,12 +43,13 @@ tags: [[$:/tags/Stylesheet]]
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
 nav.tc-menubar {
-	position: fixed;
+	position: relative;
+	flex-shrink: 0;
 	z-index: 850;
 	display: inline-block;
-	top: 0;
-	right: 0;
-	left: 0;
+	top: auto;
+	right: auto;
+	left: auto;
 }
 
 nav.tc-menubar ul.tc-menubar-list {

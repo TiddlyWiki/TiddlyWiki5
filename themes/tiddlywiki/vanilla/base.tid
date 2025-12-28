@@ -533,15 +533,11 @@ a.tc-tiddlylink-external:hover {
 	background-color: <<colour page-background>>;
 }
 
-.tc-page-container > .tc-dropzone {
-	min-height: 100vh;
-}
-
 @media (min-width: <<sidebarbreakpoint>>) {
 
 	.tc-page-container > .tc-dropzone {
 		display: flex;
-		height: 100vh;
+		flex: 1;
 		overflow: hidden;
 	}
 
@@ -890,6 +886,18 @@ button.tc-btn-invisible.tc-remove-tag-button {
 ** Page layout
 */
 
+@media (min-width: <<sidebarbreakpoint>>) {
+
+	.tc-page-container {
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+		overflow: hidden;
+		align-items: stretch;
+	}
+
+}
+
 .tc-topbar {
 	position: fixed;
 	z-index: 1200;
@@ -1042,7 +1050,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		order: 2;
 		flex-shrink: 0;
 		width: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyright}});
-		height: 100vh;
+		height: 100%;
 		overflow: hidden;
 		outline: none;
 		margin-right: 0;
@@ -1097,7 +1105,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		left: auto;
 		top: auto;
 		width: auto;
-		height: 100vh;
+		height: auto;
 		overflow-y: scroll;
 		padding: 42px 42px 42px 42px;
 		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
