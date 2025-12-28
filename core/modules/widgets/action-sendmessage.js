@@ -38,6 +38,8 @@ SendMessageWidget.prototype.execute = function() {
 	this.actionValue = this.getAttribute("$value","");
 	this.actionNames = this.getAttribute("$names");
 	this.actionValues = this.getAttribute("$values");
+	this.actionEventNames = this.getAttribute("$eventNames");
+	this.actionEventValues = this.getAttribute("$eventValues");
 };
 
 /*
@@ -58,7 +60,7 @@ Invoke the action associated with this widget
 SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	// Get the string parameter
 	var param = this.actionParam;
-	// Assemble the parameters as a hashmap
+	// We assemble the parameters as a hashmap
 	var paramObject = Object.create(null);
 	// Add names/values pairs if present
 	if(this.actionNames && this.actionValues) {
@@ -68,7 +70,7 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 			paramObject[name] = values[index] || "";
 		});
 	}
-	// Add raw parameters
+	// Add raw attributes
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) !== "$") {
 			paramObject[name] = attribute;
@@ -78,15 +80,33 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	if(this.actionName) {
 		paramObject[this.actionName] = this.actionValue;
 	}
-	// Dispatch the message
+	// We build the "event" object to dispatch
 	var params = {
-		type: this.actionMessage,
 		param: param,
 		paramObject: paramObject,
 		event: event,
 		tiddlerTitle: this.getVariable("currentTiddler"),
 		navigateFromTitle: this.getVariable("storyTiddler")
 	};
+	// Add event names/values pairs if present
+	if(this.actionEventNames && this.actionEventValues) {
+		var eventNames = this.wiki.filterTiddlers(this.actionEventNames,this),
+			eventValues = this.wiki.filterTiddlers(this.actionEventValues,this);
+		$tw.utils.each(eventNames,function(name,index) {
+			params[name] = eventValues[index] || "";
+		});
+	}
+	// Add raw $event-* attributes
+	$tw.utils.each(this.attributes,function(attribute,name) {
+		if(name.indexOf("$event-") === 0) {
+			params[name.slice(7)] = attribute;
+		}
+	});
+	// $message has priority and overwrites any $event-type that may have been set
+	if(this.actionMessage) {
+		params.type = this.actionMessage;
+	}
+	// Dispatch the message
 	this.dispatchEvent(params);
 	return true; // Action was invoked
 };
