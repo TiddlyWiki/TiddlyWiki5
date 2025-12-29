@@ -28,6 +28,12 @@ exports.startup = function() {
 		return document.activeElement && document.activeElement.tagName === "IFRAME";
 	}
 	
+	// Helper: Check if there's an active text selection
+	function hasTextSelection() {
+		var selection = window.getSelection();
+		return selection && selection.toString().length > 0;
+	}
+	
 	// Wait for DOM to be fully ready
 	function initialize() {
 		var main = document.querySelector(mainSelector);
@@ -75,6 +81,9 @@ exports.startup = function() {
 		// Allow tab if focus is in iframe (editor)
 		if(isFocusInIframe()) return;
 		
+		// Don't trap if there's a text selection
+		if(hasTextSelection()) return;
+		
 		var main = document.querySelector(mainSelector);
 		if(!main) return;
 		
@@ -118,6 +127,9 @@ exports.startup = function() {
 		var main = document.querySelector(mainSelector);
 		if(!main) return;
 		
+		// Don't refocus if there's a text selection
+		if(hasTextSelection()) return;
+		
 		// Don't refocus if clicking in input fields or iframe
 		if(e.target.tagName === "INPUT" || 
 		   e.target.tagName === "TEXTAREA" ||
@@ -127,8 +139,8 @@ exports.startup = function() {
 		}
 		
 		setTimeout(function() {
-			// Don't refocus if focus moved to iframe
-			if(isFocusInIframe()) return;
+			// Don't refocus if focus moved to iframe or text is selected
+			if(isFocusInIframe() || hasTextSelection()) return;
 			main.focus();
 		}, 10);
 	}, true);
