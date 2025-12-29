@@ -1100,8 +1100,8 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	.tc-story-river {
 		order: 1;
 		position: relative;
-		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
-		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+		inset-inline-start: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+		inset-block-start: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 		width: auto;
 		height: auto;
 		overflow-y: scroll;
