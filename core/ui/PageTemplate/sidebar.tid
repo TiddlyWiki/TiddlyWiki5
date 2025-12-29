@@ -6,7 +6,7 @@ tags: $:/tags/PageTemplate
 $:/config/SideBarSegments/Visibility/$(listItem)$
 \end
 
-<aside class="tc-sidebar" tabindex="-1">
+<aside class="tc-sidebar tc-secondary-container" tabindex="-1">
 
 <$scrollable fallthrough="no" class="tc-sidebar-scrollable">
 
