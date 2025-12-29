@@ -4,8 +4,8 @@ description: {{$:/language/PageTemplate/Description}}
 icon: $:/core/images/standard-layout
 code-body: yes
 
-\function tf.page-container-dropzone.classes() [{$:/state/mediaquery/min-width/sidebarbreakpoint}match[no]then[tc-dropzone tc-primary-container tc-page-container-inner]] :else[[tc-dropzone tc-page-container-inner]]
-\function tf.page-container-dropzone.tabindex() [{$:/state/mediaquery/min-width/sidebarbreakpoint}match[no]then[-1]] :else[[]]
+\function tf.primary-container.classes() [{$:/state/mediaquery/min-width/sidebarbreakpoint}match[no]then[tc-primary-container tc-inner-container-wrapper]] :else[[tc-inner-container-wrapper]]
+\function tf.primary-container.tabindex() [{$:/state/mediaquery/min-width/sidebarbreakpoint}match[no]then[-1]] :else[[]]
 \whitespace trim
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 <$vars
@@ -18,13 +18,15 @@ code-body: yes
 	languageTitle={{{ [{$:/language}get[name]] }}}>
 <div class={{{ [all[shadows+tiddlers]tag[$:/tags/ClassFilters/PageTemplate]!is[draft]] :map:flat[subfilter{!!text}] tc-page-container [[tc-page-view-]addsuffix<storyviewTitle>] [[tc-language-]addsuffix<languageTitle>] :and[unique[]join[ ]] }}} >
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+<$dropzone class="tc-dropzone tc-page-container-inner" enable=<<tv-enable-drag-and-drop>>>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate/Outside]!has[draft.of]]" variable="listItem">
 <$transclude tiddler=<<listItem>>/>
 </$list>
-<$dropzone enable=<<tv-enable-drag-and-drop>> class=<<tf.page-container-dropzone.classes>> tabindex=<<tf.page-container-dropzone.tabindex>>>
+<div class=<<tf.primary-container.classes>> tabindex=<<tf.primary-container.tabindex>>>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]]" variable="listItem">
 <$transclude tiddler=<<listItem>>/>
 </$list>
+</div>
 </$dropzone>
 </$navigator>
 </div>

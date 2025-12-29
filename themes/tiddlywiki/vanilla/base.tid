@@ -546,6 +546,10 @@ a.tc-tiddlylink-external:hover {
 @media (min-width: <<sidebarbreakpoint>>) {
 
 	.tc-page-container > .tc-dropzone {
+		min-height: 100vh;
+	}
+
+	.tc-inner-container-wrapper {
 		display: flex;
 		flex: 1;
 		overflow-x: clip;
@@ -556,7 +560,7 @@ a.tc-tiddlylink-external:hover {
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
-	.tc-page-container > .tc-dropzone {
+	.tc-inner-container-wrapper {
 		overflow-y: auto;
 	}
 
@@ -914,7 +918,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 ** Page layout
 */
 
-.tc-page-container {
+.tc-page-container-inner {
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
