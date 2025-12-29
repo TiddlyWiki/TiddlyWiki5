@@ -938,6 +938,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	color: <<colour foreground>>;
 }
 
+@media (min-width: <<sidebarbreakpoint>>) {
+
+	html[dir="rtl"] .tc-show-sidebar-btn svg.tc-image-chevron-left, html[dir="rtl"] .tc-hide-sidebar-btn svg.tc-image-chevron-right {
+		transform: rotate(180deg);
+	}
+
+}
+
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	.tc-show-sidebar-btn svg.tc-image-chevron-left, .tc-hide-sidebar-btn svg.tc-image-chevron-right {
