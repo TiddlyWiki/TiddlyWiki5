@@ -544,6 +544,14 @@ a.tc-tiddlylink-external:hover {
 
 }
 
+@media (max-width: <<sidebarbreakpoint>>) {
+
+	.tc-page-container > .tc-dropzone {
+		overflow-y: auto;
+	}
+
+}
+
 .tc-dropzone {
 	position: relative;
 }
