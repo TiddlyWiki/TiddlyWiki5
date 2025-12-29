@@ -544,7 +544,7 @@ a.tc-tiddlylink-external:hover {
 
 }
 
-@media (max-width: <<sidebarbreakpoint>>) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	.tc-page-container > .tc-dropzone {
 		overflow-y: auto;
@@ -2072,7 +2072,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 /* Make search dropdown visible on small screens. issue #7003 */
-@media (max-width: <<sidebarbreakpoint>>) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	.tc-sidebar-search .tc-block-dropdown-wrapper {
 		position: initial;
