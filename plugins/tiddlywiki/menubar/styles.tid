@@ -33,7 +33,9 @@ nav.tc-menubar ul.tc-menubar-list {
 	position: relative;
 	list-style-type: none;
 	margin: 0;
-	padding: 0 0 0 42px;
+	padding-block: 0;
+	padding-inline-start: 42px;
+	padding-inline-end: 0;
 	background: <<colour background>>;
 	background: <<colour menubar-background>>;
 	<<box-shadow "1px 1px 5px rgba(0, 0, 0, 0.3)">>
