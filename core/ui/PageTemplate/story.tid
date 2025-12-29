@@ -2,7 +2,7 @@ title: $:/core/ui/PageTemplate/story
 tags: $:/tags/PageTemplate
 
 \function tf.story-river.classes() [{$:/state/mediaquery/min-width/sidebarbreakpoint}match[no]then[tc-story-river]] :else[[tc-story-river tc-primary-container]]
-\function tf.story-river.tabindex() [{$:/state/mediaquery/min-width/sidebarbreakpoint}match[yes]then[-1]] :else[[]]
+\function tf.story-river.tabindex() [{$:/state/mediaquery/min-width/sidebarbreakpoint}match[no]then[]] :else[[-1]]
 \whitespace trim
 <section class=<<tf.story-river.classes>> role="main" tabindex=<<tf.story-river.tabindex>>>
 
