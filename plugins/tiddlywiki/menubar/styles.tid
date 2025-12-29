@@ -16,7 +16,7 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .tc-sidebar-scrollable {
-	padding-block-start: 47px;
+	padding-block-start: calc(57px - 1em);
 }
 
 nav.tc-menubar {
