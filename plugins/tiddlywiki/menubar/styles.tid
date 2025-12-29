@@ -41,6 +41,15 @@ nav.tc-menubar ul.tc-menubar-list {
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
+	.tc-story-river {
+		padding-top: 0.5em;
+	}
+	
+	.tc-sidebar-scrollable {
+		margin-top: 0;
+		padding-top: 0;
+	}
+
 	html nav.tc-menubar ul.tc-menubar-list {
 		padding: 0 0 0 8px;
 	}
