@@ -45,7 +45,7 @@ tags: $:/tags/PageTemplate/Outside
 \whitespace trim
 <$list filter="[<tv-config-static>!match[yes]]" variable="ignore">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/toprightbar]] +[limit[1]]" variable="listItem">
-<nav class="tc-menubar tc-secondary-container tc-adjust-top-of-scroll">
+<nav class="tc-menubar tc-secondary-container tc-secondary-container-top tc-adjust-top-of-scroll">
 <div class="tc-menubar-narrow">
 <<menubar-inner narrow>>
 </div>
