@@ -69,7 +69,7 @@ exports.startup = function() {
 		if(!main.hasAttribute("tabindex")) {
 			main.setAttribute("tabindex", "-1");
 		}
-		main.focus();
+		// main.focus(); // don't steal focus from the sidebar-search
 		
 		// Make secondary containers unfocusable
 		var secondaryContainers = document.querySelectorAll(secondarySelector);
