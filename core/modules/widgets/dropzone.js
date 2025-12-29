@@ -36,6 +36,10 @@ DropZoneWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElement("div");
 	this.domNode = domNode;
 	domNode.className = this.dropzoneClass || "tc-dropzone";
+	// Set tabindex if specified
+	if(this.dropzoneTabindex !== undefined) {
+		domNode.setAttribute("tabindex", this.dropzoneTabindex);
+	}
 	// Add event handlers
 	if(this.dropzoneEnable) {
 		$tw.utils.addEventListeners(domNode,[
@@ -308,6 +312,7 @@ DropZoneWidget.prototype.execute = function() {
 	this.actions = this.getAttribute("actions");
 	this.contentTypesFilter = this.getAttribute("contentTypesFilter");
 	this.filesOnly = this.getAttribute("filesOnly","no") === "yes";
+	this.dropzoneTabindex = this.getAttribute("tabindex");
 	// Make child widgets
 	this.makeChildWidgets();
 };
