@@ -1099,13 +1099,12 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	.tc-story-river {
 		order: 1;
 		position: relative;
-		left: auto;
-		top: auto;
+		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 		width: auto;
 		height: auto;
 		overflow-y: scroll;
 		padding: 42px 42px 42px 42px;
-		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 		outline: none;
 		flex-grow: 1;
 		flex-shrink: 0;
@@ -1116,7 +1115,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	<%if [{$:/state/sidebar}match[no]] %>
 
 		.tc-story-river {
-			flex-basis: 100vw;
+			flex-basis: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
 		}
 
 	<% endif %>
@@ -1535,11 +1534,19 @@ html body.tc-body.tc-single-tiddler-window {
 
 <<if-fluid-fixed text:"""
 
+	.tc-story-river {
+		flex-basis: calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+	}
+
 	.tc-sidebar {
 		flex-basis: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
 	}
 
 	<%if [{$:/state/sidebar}match[no]] %>
+
+		.tc-story-river {
+			flex-basis: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+		}
 
 		.tc-sidebar {
 			flex-basis: 0;
