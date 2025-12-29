@@ -20,16 +20,16 @@ exports.startup = function() {
 
 	// Focus main content on startup
 	var main = document.querySelector(mainSelector);
-	if (main) {
+	if(main) {
 		main.focus();
 	}
 
 	// Prevent spacebar scrolling on sidebar container itself
 	document.addEventListener("keydown", function(e) {
-		if (e.key !== " ") return;
+		if(e.key !== " ") return;
 		
 		var sidebar = document.querySelector(sidebarSelector);
-		if (sidebar && e.target === sidebar) {
+		if(sidebar && e.target === sidebar) {
 			e.preventDefault();
 		}
 	});
