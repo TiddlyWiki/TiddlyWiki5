@@ -12,11 +12,11 @@ tags: [[$:/tags/Stylesheet]]
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
 .tc-story-river {
-	padding-top: 28px;
+	padding-block-start: 28px;
 }
 
 .tc-sidebar-scrollable {
-	padding-top: 47px;
+	padding-block-start: 47px;
 }
 
 nav.tc-menubar {
@@ -24,9 +24,9 @@ nav.tc-menubar {
 	flex-shrink: 0;
 	z-index: 850;
 	display: inline-block;
-	top: auto;
-	right: auto;
-	left: auto;
+	inset-block-start: auto;
+	inset-inline-end: auto;
+	inset-inline-start: auto;
 }
 
 nav.tc-menubar ul.tc-menubar-list {
@@ -44,16 +44,18 @@ nav.tc-menubar ul.tc-menubar-list {
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	.tc-story-river {
-		padding-top: 0.5em;
+		padding-block-start: 0.5em;
 	}
 	
 	.tc-sidebar-scrollable {
-		margin-top: 0;
-		padding-top: 0;
+		margin-block-start: 0;
+		padding-block-start: 0;
 	}
 
 	html nav.tc-menubar ul.tc-menubar-list {
-		padding: 0 0 0 8px;
+		padding-block: 0;
+		padding-inline-end: 0;
+		padding-inline-start: 8px;
 	}
 
 }
