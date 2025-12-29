@@ -37,6 +37,30 @@ exports.startup = function() {
 		return selection && selection.toString().length > 0;
 	}
 	
+	// Helper: Save and restore selection while focusing
+	function focusWithSelection(element) {
+		var selection = window.getSelection();
+		var ranges = [];
+		
+		// Save current selection ranges
+		if(selection.rangeCount > 0) {
+			for(var i = 0; i < selection.rangeCount; i++) {
+				ranges.push(selection.getRangeAt(i).cloneRange());
+			}
+		}
+		
+		// Focus the element
+		element.focus();
+		
+		// Restore selection if there was one
+		if(ranges.length > 0) {
+			selection.removeAllRanges();
+			ranges.forEach(function(range) {
+				selection.addRange(range);
+			});
+		}
+	}
+	
 	// Wait for DOM to be fully ready
 	function initialize() {
 		var main = document.querySelector(mainSelector);
@@ -91,7 +115,7 @@ exports.startup = function() {
 		
 		if(focusableElements.length === 0) {
 			e.preventDefault();
-			main.focus();
+			focusWithSelection(main);
 			return;
 		}
 		
@@ -103,7 +127,7 @@ exports.startup = function() {
 		var inMain = activeElement === main || main.contains(activeElement);
 		if(!inMain) {
 			e.preventDefault();
-			main.focus();
+			focusWithSelection(main);
 			return;
 		}
 		
@@ -120,12 +144,34 @@ exports.startup = function() {
 		}
 	});
 	
+	// Pointerup-Handler: Focus main after text selection is complete
+	document.addEventListener("pointerup", function(e) {
+		var main = document.querySelector(mainSelector);
+		if(!main) return;
+		
+		// Don't refocus if in iframe or input fields
+		if(isFocusInIframe()) return;
+		if(e.target.tagName === "INPUT" || 
+		   e.target.tagName === "TEXTAREA" ||
+		   e.target.isContentEditable) {
+			return;
+		}
+		
+		// Small delay to let selection complete
+		setTimeout(function() {
+			// If there's a text selection, focus main while preserving it
+			if(hasTextSelection()) {
+				focusWithSelection(main);
+			}
+		}, 10);
+	}, true);
+	
 	// Click-Handler: Always refocus main after clicks (except in input fields)
 	document.addEventListener("click", function(e) {
 		var main = document.querySelector(mainSelector);
 		if(!main) return;
 		
-		// Don't refocus if there's a text selection
+		// Don't refocus if there's a text selection (handled by pointerup)
 		if(hasTextSelection()) return;
 		
 		// Don't refocus if clicking in input fields or iframe
