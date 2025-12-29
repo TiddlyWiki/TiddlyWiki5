@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/custom/sidebar-focus/startup.js
+title: $:/core/modules/startup/focus-handler.js
 type: application/javascript
 module-type: startup
 Handles focus management and spacebar scrolling for sidebar layout
@@ -13,7 +13,7 @@ exports.synchronous = true;
 
 exports.startup = function() {
 	var mainSelector = ".tc-story-river";
-	var secondarySelector = ".tc-secondary-container";
+	var secondarySelector = ".secondary-container";
 	
 	// Helper: Check if element is in any secondary container
 	function isInSecondary(element) {
@@ -21,6 +21,11 @@ exports.startup = function() {
 		return Array.from(containers).some(function(container) {
 			return container === element || container.contains(element);
 		});
+	}
+	
+	// Helper: Check if focus is in an iframe
+	function isFocusInIframe() {
+		return document.activeElement && document.activeElement.tagName === "IFRAME";
 	}
 	
 	// Wait for DOM to be fully ready
@@ -49,6 +54,9 @@ exports.startup = function() {
 	document.addEventListener("keydown", function(e) {
 		if(e.key !== " ") return;
 		
+		// Allow spacebar if focus is in iframe (editor)
+		if(isFocusInIframe()) return;
+		
 		if(isInSecondary(e.target)) {
 			// Allow spacebar in input fields
 			if(e.target.tagName === "INPUT" || 
@@ -64,11 +72,14 @@ exports.startup = function() {
 	document.addEventListener("keydown", function(e) {
 		if(e.key !== "Tab") return;
 		
+		// Allow tab if focus is in iframe (editor)
+		if(isFocusInIframe()) return;
+		
 		var main = document.querySelector(mainSelector);
 		if(!main) return;
 		
 		var focusableElements = main.querySelectorAll(
-			'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+			'a[href], button, input, textarea, select, details, iframe, [tabindex]:not([tabindex="-1"])'
 		);
 		
 		if(focusableElements.length === 0) {
@@ -107,14 +118,17 @@ exports.startup = function() {
 		var main = document.querySelector(mainSelector);
 		if(!main) return;
 		
-		// Don't refocus if clicking in input fields
+		// Don't refocus if clicking in input fields or iframe
 		if(e.target.tagName === "INPUT" || 
 		   e.target.tagName === "TEXTAREA" ||
+		   e.target.tagName === "IFRAME" ||
 		   e.target.isContentEditable) {
 			return;
 		}
 		
 		setTimeout(function() {
+			// Don't refocus if focus moved to iframe
+			if(isFocusInIframe()) return;
 			main.focus();
 		}, 10);
 	}, true);
