@@ -1016,6 +1016,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	position: relative;
 }
 
+.tc-secondary-container, .tc-secondary-container:focus {
+	outline: none;
+}
+
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	.tc-sidebar-header {
