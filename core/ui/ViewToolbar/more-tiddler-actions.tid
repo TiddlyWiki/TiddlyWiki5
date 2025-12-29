@@ -20,7 +20,7 @@ description: {{$:/language/Buttons/More/Hint}}
 		</span>
 	<%endif%>
 </$button>
-<$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="belowleft" animate="yes">
+<$reveal state=<<qualify "$:/state/popup/more">> type="popup" clamp="right" position="belowleft" animate="yes">
 	<div class="tc-drop-down">
 		<$let tv-config-toolbar-icons="yes" tv-config-toolbar-text="yes" tv-config-toolbar-class="tc-btn-invisible">
 			<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/Buttons/more-tiddler-actions]]"

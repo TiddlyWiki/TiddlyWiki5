@@ -12,7 +12,7 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 <div class="tc-drop-down-wrapper">
 <$set name="state" value=<<qualify "$:/state/popup/themetweaks/backgroundimage">>>
 <$button popup=<<state>> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
-<$reveal state=<<state>> type="popup" position="belowleft" text="" default="" class="tc-popup-keep">
+<$reveal state=<<state>> type="popup" clamp="right" positionAllowNegative="yes" position="belowleft" text="" default="" class="tc-popup-keep" animate="yes">
 <div class="tc-drop-down" style="text-align:center;">
 <$macrocall $name="image-picker" actions="""
 

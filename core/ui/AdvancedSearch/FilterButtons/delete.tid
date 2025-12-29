@@ -8,7 +8,7 @@ tags: $:/tags/AdvancedSearch/FilterButton
 </$button>
 </$reveal>
 
-<$reveal state=<<qualify "$:/state/filterDeleteDropdown">> type="popup" position="belowleft" animate="yes">
+<$reveal state=<<qualify "$:/state/filterDeleteDropdown">> type="popup" clamp="right" positionAllowNegative="yes" position="belowleft" animate="yes">
 <div class="tc-block-dropdown-wrapper">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
 <div class="tc-dropdown-item-plain">
