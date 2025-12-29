@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/startup/focus-handler.js
+title: $:/plugins/custom/sidebar-focus/startup.js
 type: application/javascript
 module-type: startup
 Handles focus management and spacebar scrolling for sidebar layout
@@ -13,41 +13,47 @@ exports.synchronous = true;
 
 exports.startup = function() {
 	var mainSelector = ".tc-story-river";
-	var sidebarSelector = ".tc-sidebar";
+	var secondarySelector = ".tc-secondary-container";
+	
+	// Helper: Check if element is in any secondary container
+	function isInSecondary(element) {
+		var containers = document.querySelectorAll(secondarySelector);
+		return Array.from(containers).some(function(container) {
+			return container === element || container.contains(element);
+		});
+	}
 	
 	// Wait for DOM to be fully ready
 	function initialize() {
 		var main = document.querySelector(mainSelector);
-		var sidebar = document.querySelector(sidebarSelector);
 		
 		if(!main) {
 			setTimeout(initialize, 100);
 			return;
 		}
 		
-		// Make containers focusable
+		// Make main focusable
 		if(!main.hasAttribute("tabindex")) {
 			main.setAttribute("tabindex", "-1");
 		}
 		main.focus();
 		
-		if(sidebar && !sidebar.hasAttribute("tabindex")) {
-			sidebar.setAttribute("tabindex", "-1");
-		}
+		// Make secondary containers unfocusable
+		var secondaryContainers = document.querySelectorAll(secondarySelector);
+		secondaryContainers.forEach(function(element) {
+			element.removeAttribute("tabindex");
+		});
 	}
 	
-	// Handle spacebar scrolling
+	// Handle spacebar scrolling in secondary containers
 	document.addEventListener("keydown", function(e) {
 		if(e.key !== " ") return;
 		
-		var target = e.target;
-		var sidebar = document.querySelector(sidebarSelector);
-		
-		if(sidebar && (target === sidebar || sidebar.contains(target))) {
+		if(isInSecondary(e.target)) {
 			// Allow spacebar in input fields
-			if(target.tagName === "INPUT" || 
-			   target.tagName === "TEXTAREA" || 
-			   target.isContentEditable) {
+			if(e.target.tagName === "INPUT" || 
+			   e.target.tagName === "TEXTAREA" || 
+			   e.target.isContentEditable) {
 				return;
 			}
 			e.preventDefault();
@@ -78,7 +84,6 @@ exports.startup = function() {
 		// Only trap if we're in main
 		var inMain = activeElement === main || main.contains(activeElement);
 		if(!inMain) {
-			// If focus is outside main, bring it back to main
 			e.preventDefault();
 			main.focus();
 			return;
@@ -102,14 +107,13 @@ exports.startup = function() {
 		var main = document.querySelector(mainSelector);
 		if(!main) return;
 		
-		// Don't refocus if clicking in input fields (allow editing in sidebar)
+		// Don't refocus if clicking in input fields
 		if(e.target.tagName === "INPUT" || 
 		   e.target.tagName === "TEXTAREA" ||
 		   e.target.isContentEditable) {
 			return;
 		}
 		
-		// Small delay to allow link/button actions to complete first
 		setTimeout(function() {
 			main.focus();
 		}, 10);
