@@ -41,18 +41,137 @@ exports.startup = function() {
 	function isInteractiveElement(element) {
 		if(!element) return false;
 		
-		var tag = element.tagName;
-		return tag === "INPUT" ||
-		       tag === "TEXTAREA" ||
-		       tag === "SELECT" ||
-		       tag === "BUTTON" ||
-		       tag === "A" ||
-		       tag === "IFRAME" ||
-		       tag === "DETAILS" ||
-		       tag === "SUMMARY" ||
-		       element.isContentEditable ||
-		       element.hasAttribute("contenteditable") ||
-		       (element.hasAttribute("tabindex") && element.getAttribute("tabindex") !== "-1");
+		// Check explicit interactive class first (TiddlyWiki convention)
+		if(element.classList && element.classList.contains("tc-interactive")) {
+			return true;
+		}
+		
+		var tag = element.tagName ? element.tagName.toUpperCase() : "";
+		
+		// Disabled elements are not interactive
+		if(element.hasAttribute("disabled") || element.getAttribute("aria-disabled") === "true") {
+			return false;
+		}
+		
+		// Standard form and interactive elements
+		var interactiveTags = [
+			"INPUT", "TEXTAREA", "SELECT", "BUTTON", "OPTION", "OPTGROUP",
+			"A", "AREA", 
+			"AUDIO", "VIDEO", "TRACK",
+			"DETAILS", "SUMMARY", "DIALOG", "MENU",
+			"IFRAME", "EMBED", "OBJECT",
+			"LABEL", "FIELDSET", "LEGEND",
+			"OUTPUT", "PROGRESS", "METER",
+			"KEYGEN", "DATALIST"
+		];
+		
+		if(interactiveTags.indexOf(tag) !== -1) {
+			// Links need href to be interactive
+			if(tag === "A" && !element.hasAttribute("href")) {
+				return false;
+			}
+			return true;
+		}
+		
+		// Media elements with controls
+		if((tag === "AUDIO" || tag === "VIDEO") && element.hasAttribute("controls")) {
+			return true;
+		}
+		
+		// ContentEditable
+		if(element.isContentEditable || 
+		   element.getAttribute("contenteditable") === "true" ||
+		   element.getAttribute("contenteditable") === "") {
+			return true;
+		}
+		
+		// Tabindex (but not -1)
+		if(element.hasAttribute("tabindex")) {
+			var tabindex = parseInt(element.getAttribute("tabindex"), 10);
+			if(!isNaN(tabindex) && tabindex >= 0) {
+				return true;
+			}
+		}
+		
+		// Draggable
+		if(element.hasAttribute("draggable") && element.getAttribute("draggable") === "true") {
+			return true;
+		}
+		
+		// ARIA roles - ALL interactive and widget roles
+		var role = element.getAttribute("role");
+		if(role) {
+			var interactiveRoles = [
+				// Widget roles
+				"button", "checkbox", "gridcell", "link", "menuitem", 
+				"menuitemcheckbox", "menuitemradio", "option", "radio", 
+				"scrollbar", "searchbox", "slider", "spinbutton", "switch",
+				"tab", "tabpanel", "textbox", "treeitem",
+				
+				// Composite widget roles
+				"combobox", "grid", "listbox", "menu", "menubar", 
+				"radiogroup", "tablist", "tree", "treegrid",
+				
+				// Document structure roles that can be interactive
+				"application", "dialog", "alertdialog", "toolbar",
+				
+				// Landmark roles that might be focusable
+				"navigation", "search", "banner", "complementary",
+				"contentinfo", "form", "main", "region",
+				
+				// Live region roles (when focusable)
+				"alert", "log", "marquee", "status", "timer"
+			];
+			
+			// Check if role matches any interactive role
+			// Role can contain multiple space-separated values
+			var roles = role.split(/\s+/);
+			for(var i = 0; i < roles.length; i++) {
+				if(interactiveRoles.indexOf(roles[i]) !== -1) {
+					return true;
+				}
+			}
+		}
+		
+		// Elements with click handlers (onclick, etc.)
+		if(element.onclick || 
+		   element.hasAttribute("onclick") ||
+		   element.hasAttribute("onmousedown") ||
+		   element.hasAttribute("onmouseup") ||
+		   element.hasAttribute("onkeydown") ||
+		   element.hasAttribute("onkeyup") ||
+		   element.hasAttribute("onkeypress")) {
+			return true;
+		}
+		
+		// SVG interactive elements
+		if(element.namespaceURI === "http://www.w3.org/2000/svg") {
+			var svgInteractiveTags = ["A", "USE"];
+			if(svgInteractiveTags.indexOf(tag) !== -1) {
+				return true;
+			}
+		}
+		
+		// MathML interactive elements (rare, but possible)
+		if(element.namespaceURI === "http://www.w3.org/1998/Math/MathML") {
+			if(element.hasAttribute("href")) {
+				return true;
+			}
+		}
+		
+		// Custom elements (web components) that might be interactive
+		// Check if element is a custom element (contains hyphen)
+		if(tag && tag.indexOf("-") !== -1) {
+			// If it has tabindex >= 0, it's interactive
+			if(element.hasAttribute("tabindex")) {
+				var ti = parseInt(element.getAttribute("tabindex"), 10);
+				if(!isNaN(ti) && ti >= 0) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
 	}
 	
 	// Helper: Save and restore selection while focusing
