@@ -1,0 +1,14 @@
+caption: Description Lists
+created: 20131205160424246
+modified: 20251229110936191
+tags: WikiText
+title: Description Lists in WikiText
+type: text/vnd.tiddlywiki
+
+HTML description lists (<abbr title="also known as">AKA</abbr> definition lists) are created with this syntax:
+
+<<wikitext-example src:"; Term being described
+: Description / Definition of that term
+; Another term
+: Another description / definition
+">>
