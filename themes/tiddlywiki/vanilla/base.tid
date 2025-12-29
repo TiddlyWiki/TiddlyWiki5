@@ -887,16 +887,12 @@ button.tc-btn-invisible.tc-remove-tag-button {
 ** Page layout
 */
 
-@media (min-width: <<sidebarbreakpoint>>) {
-
-	.tc-page-container {
-		display: flex;
-		flex-direction: column;
-		height: 100vh;
-		overflow: hidden;
-		align-items: stretch;
-	}
-
+.tc-page-container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	overflow: hidden;
+	align-items: stretch;
 }
 
 .tc-topbar {
