@@ -1071,6 +1071,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		height: 100%;
 		overflow: clip;
 		outline: none;
+		z-index: 1;
 	}
 
 	<%if [{$:/state/sidebar}match[no]] %>
@@ -1110,6 +1111,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		flex-shrink: 0;
 		flex-basis: {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}};
 		transition: flex-basis {{$:/config/AnimationDuration}}ms ease-in-out;
+		z-index: 2;
 	}
 
 	<%if [{$:/state/sidebar}match[no]] %>
