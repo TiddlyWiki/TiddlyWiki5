@@ -11,6 +11,14 @@ tags: [[$:/tags/Stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
+.tc-story-river {
+	padding-top: 28px;
+}
+
+.tc-sidebar-scrollable {
+	padding-top: 47px;
+}
+
 nav.tc-menubar {
 	position: relative;
 	flex-shrink: 0;
