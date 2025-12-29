@@ -2,18 +2,21 @@
 title: $:/core/modules/startup/focus-handler.js
 type: application/javascript
 module-type: startup
+
 Handles focus management and spacebar scrolling for sidebar layout
+
 \*/
+
 "use strict";
 
-exports.name = "sidebar-focus";
+exports.name = "focus-handler";
 exports.platforms = ["browser"];
-exports.after = ["story"];
+exports.after = ["render"];
 exports.synchronous = true;
 
 exports.startup = function() {
 	var mainSelector = ".tc-story-river";
-	var secondarySelector = ".secondary-container";
+	var secondarySelector = ".tc-secondary-container";
 	
 	// Helper: Check if element is in any secondary container
 	function isInSecondary(element) {
@@ -37,11 +40,6 @@ exports.startup = function() {
 	// Wait for DOM to be fully ready
 	function initialize() {
 		var main = document.querySelector(mainSelector);
-		
-		if(!main) {
-			setTimeout(initialize, 100);
-			return;
-		}
 		
 		// Make main focusable
 		if(!main.hasAttribute("tabindex")) {
