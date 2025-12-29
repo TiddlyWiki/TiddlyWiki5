@@ -88,14 +88,46 @@ LogWidget.prototype.log = function() {
 
 	console.group(this.message);
 	if(dataCount > 0) {
-		$tw.utils.logTable(data);
+		this.logVariables(data);
 	}
 	if(this.logAll || !dataCount) {
 		console.groupCollapsed("All variables");
-		$tw.utils.logTable(allVars);
+		this.logVariables(allVars);
 		console.groupEnd();
 	}
 	console.groupEnd();
+};
+
+/*
+Log variables with multi-valued variables shown in nested groups
+*/
+LogWidget.prototype.logVariables = function(vars) {
+	var tableData = {},
+		multiValuedDetails = [],
+		includesStandardVariables = false;
+	
+	// Build table data, using placeholders for multi-valued variables
+	$tw.utils.each(vars,function(value,name) {
+		if(Array.isArray(value)) {
+			tableData[name] = "[Array: " + value.length + " values (see below)]";
+			multiValuedDetails.push({name: name, values: value});
+		} else {
+			tableData[name] = value;
+			includesStandardVariables = true;
+		}
+	});
+	
+	// Show the main table only if there are standard variables
+	if(includesStandardVariables) {
+		console.table(tableData);
+	}
+	
+	// Show detailed nested groups for multi-valued variables
+	multiValuedDetails.forEach(function(item) {
+		console.groupCollapsed(item.name + " (" + item.values.length + " values)");
+		console.table(item.values);
+		console.groupEnd();
+	});
 };
 
 exports["action-log"] = LogWidget;
