@@ -17,7 +17,7 @@ exports.synchronous = true;
 
 var ENABLED_TITLE = "$:/config/BrowserStorage/Enabled",
 	SAVE_FILTER_TITLE = "$:/config/BrowserStorage/SaveFilter",
-	PERSISTED_STATE_TITLE = "$:/info/browser/storage/persisted";
+	PERSISTED_STATE_TITLE = "$:/state/browser/storage/persisted";
 
 var BrowserStorageUtil = require("$:/plugins/tiddlywiki/browser-storage/util.js").BrowserStorageUtil;
 
