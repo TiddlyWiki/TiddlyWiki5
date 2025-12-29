@@ -4,6 +4,8 @@ description: {{$:/language/PageTemplate/Description}}
 icon: $:/core/images/standard-layout
 code-body: yes
 
+\function tf.page-container-dropzone.classes() [{$:/state/mediaquery/min-width/sidebarbreakpoint}match[no]then[tc-dropzone tc-primary-container tc-page-container-inner]] :else[[tc-dropzone tc-page-container-inner]]
+\function tf.page-container-dropzone.tabindex() [{$:/state/mediaquery/min-width/sidebarbreakpoint}match[no]then[-1]] :else[[]]
 \whitespace trim
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 <$vars
@@ -19,7 +21,7 @@ code-body: yes
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate/Outside]!has[draft.of]]" variable="listItem">
 <$transclude tiddler=<<listItem>>/>
 </$list>
-<$dropzone enable=<<tv-enable-drag-and-drop>> class="tc-dropzone tc-page-container-inner">
+<$dropzone enable=<<tv-enable-drag-and-drop>> class=<<tf.page-container-dropzone.classes>> tabindex=<<tf.page-container-dropzone.tabindex>>>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]]" variable="listItem">
 <$transclude tiddler=<<listItem>>/>
 </$list>
