@@ -1225,7 +1225,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 <<if-no-sidebar "
 
 	.tc-tiddler-frame {
-		width: calc(100vw - 84px);
+		width: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} - 84px);
 	}
 
 ">>
