@@ -1020,6 +1020,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	outline: none;
 }
 
+.tc-secondary-container-top {
+	order: 0;
+}
+
+.tc-secondary-container-bottom {
+	order: 1;
+}
+
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 	.tc-sidebar-header {
