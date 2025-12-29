@@ -15,7 +15,7 @@ exports.after = ["render"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	var mainSelector = ".tc-story-river";
+	var mainSelector = ".tc-primary-container";
 	var secondarySelector = ".tc-secondary-container";
 	
 	// Helper: Check if element is in any secondary container
@@ -35,6 +35,24 @@ exports.startup = function() {
 	function hasTextSelection() {
 		var selection = window.getSelection();
 		return selection && selection.toString().length > 0;
+	}
+	
+	// Helper: Check if element is interactive
+	function isInteractiveElement(element) {
+		if(!element) return false;
+		
+		var tag = element.tagName;
+		return tag === "INPUT" ||
+		       tag === "TEXTAREA" ||
+		       tag === "SELECT" ||
+		       tag === "BUTTON" ||
+		       tag === "A" ||
+		       tag === "IFRAME" ||
+		       tag === "DETAILS" ||
+		       tag === "SUMMARY" ||
+		       element.isContentEditable ||
+		       element.hasAttribute("contenteditable") ||
+		       (element.hasAttribute("tabindex") && element.getAttribute("tabindex") !== "-1");
 	}
 	
 	// Helper: Save and restore selection while focusing
@@ -69,7 +87,7 @@ exports.startup = function() {
 		if(!main.hasAttribute("tabindex")) {
 			main.setAttribute("tabindex", "-1");
 		}
-		
+
 		// don't steal focus from the sidebar-search
 		// main.focus();
 		
@@ -88,10 +106,8 @@ exports.startup = function() {
 		if(isFocusInIframe()) return;
 		
 		if(isInSecondary(e.target)) {
-			// Allow spacebar in input fields
-			if(e.target.tagName === "INPUT" || 
-			   e.target.tagName === "TEXTAREA" || 
-			   e.target.isContentEditable) {
+			// Allow spacebar in interactive elements
+			if(isInteractiveElement(e.target)) {
 				return;
 			}
 			e.preventDefault();
@@ -151,11 +167,8 @@ exports.startup = function() {
 		var main = document.querySelector(mainSelector);
 		if(!main) return;
 		
-		// Don't refocus if in iframe or input fields
-		if(isFocusInIframe()) return;
-		if(e.target.tagName === "INPUT" || 
-		   e.target.tagName === "TEXTAREA" ||
-		   e.target.isContentEditable) {
+		// Don't refocus if in iframe or interactive elements
+		if(isFocusInIframe() || isInteractiveElement(e.target)) {
 			return;
 		}
 		
@@ -168,7 +181,7 @@ exports.startup = function() {
 		}, 10);
 	}, true);
 	
-	// Click-Handler: Always refocus main after clicks (except in input fields)
+	// Click-Handler: Always refocus main after clicks (except in interactive elements)
 	document.addEventListener("click", function(e) {
 		var main = document.querySelector(mainSelector);
 		if(!main) return;
@@ -176,11 +189,8 @@ exports.startup = function() {
 		// Don't refocus if there's a text selection (handled by pointerup)
 		if(hasTextSelection()) return;
 		
-		// Don't refocus if clicking in input fields or iframe
-		if(e.target.tagName === "INPUT" || 
-		   e.target.tagName === "TEXTAREA" ||
-		   e.target.tagName === "IFRAME" ||
-		   e.target.isContentEditable) {
+		// Don't refocus if clicking in interactive elements
+		if(isInteractiveElement(e.target)) {
 			return;
 		}
 		
