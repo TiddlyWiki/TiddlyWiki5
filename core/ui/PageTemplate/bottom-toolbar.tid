@@ -22,7 +22,7 @@ code-body: yes
 </div>
 <div class="tc-bottom-toolbar-item">
 <$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip={{{ [<lingo-base>addsuffix[Home/Hint]get[text]] }}} aria-label={{{ [<lingo-base>addsuffix[Home/Hint]get[text]] }}}>
-<$action-navigate $to={{{ [[$:/DefaultTiddlers]get[text]enlist-input[]first[]] }}}/>
+<$action-navigate $to={{{ [subfilter{$:/DefaultTiddlers}first[]] }}}/>
 {{$:/core/images/home}}
 <span class="tc-bottom-toolbar-label"><<lingo Home/Caption>></span>
 </$button>
