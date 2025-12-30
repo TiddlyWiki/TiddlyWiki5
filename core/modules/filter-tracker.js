@@ -59,14 +59,14 @@ class FilterTracker {
 	}
 
 	processTrackers() {
-		for (const id of this.trackers.keys()) {
+		for(const id of this.trackers.keys()) {
 			this.processTracker(id);
 		}
 	}
 
 	processTracker(id) {
 		const tracker = this.trackers.get(id);
-		if (!tracker) return;
+		if(!tracker) return;
 		const results = [];
 		// Evaluate the filter and remove duplicate results
 		$tw.utils.each(this.wiki.filterTiddlers(tracker.filterString), title => {
@@ -74,13 +74,13 @@ class FilterTracker {
 		});
 		// Process the newly entered results
 		results.forEach(title => {
-			if (!tracker.previousResults.includes(title) && !tracker.resultValues[title] && tracker.fnEnter) {
+			if(!tracker.previousResults.includes(title) && !tracker.resultValues[title] && tracker.fnEnter) {
 				tracker.resultValues[title] = tracker.fnEnter(title) || true;
 			}
 		});
 		// Process the results that have just left
 		tracker.previousResults.forEach(title => {
-			if (!results.includes(title) && tracker.resultValues[title] && tracker.fnLeave) {
+			if(!results.includes(title) && tracker.resultValues[title] && tracker.fnLeave) {
 				tracker.fnLeave(title, tracker.resultValues[title]);
 				delete tracker.resultValues[title];
 			}
@@ -90,13 +90,13 @@ class FilterTracker {
 	}
 
 	processChanges(changes) {
-		for (const tracker of this.trackers.values()) {
+		for(const tracker of this.trackers.values()) {
 			Object.keys(changes).forEach(title => {
-				if (title && tracker.previousResults.includes(title) && tracker.fnChange) {
+				if(title && tracker.previousResults.includes(title) && tracker.fnChange) {
 					tracker.resultValues[title] = tracker.fnChange(title, tracker.resultValues[title]) || tracker.resultValues[title];
 				}
 			});
-			if (tracker.fnProcess) {
+			if(tracker.fnProcess) {
 				tracker.fnProcess(changes);
 			}
 		}
