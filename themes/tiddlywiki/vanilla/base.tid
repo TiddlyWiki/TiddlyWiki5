@@ -1201,6 +1201,15 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	scroll-margin-left: 42px;
 }
 
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+
+	.tc-story-river > .tc-tiddler-frame {
+		scroll-margin-top: .5em;
+		scroll-margin-left: 0;
+	}
+
+}
+
 {{$:/themes/tiddlywiki/vanilla/sticky}}
 
 .tc-tiddler-info {
