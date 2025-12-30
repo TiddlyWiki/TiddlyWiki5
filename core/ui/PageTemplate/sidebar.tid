@@ -6,6 +6,8 @@ tags: $:/tags/PageTemplate
 $:/config/SideBarSegments/Visibility/$(listItem)$
 \end
 
+<aside class="tc-sidebar tc-secondary-container">
+
 <$scrollable fallthrough="no" class="tc-sidebar-scrollable">
 
 <div class="tc-sidebar-header">
@@ -27,3 +29,5 @@ $:/config/SideBarSegments/Visibility/$(listItem)$
 </div>
 
 </$scrollable>
+
+</aside>

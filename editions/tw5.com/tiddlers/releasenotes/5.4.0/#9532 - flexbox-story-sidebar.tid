@@ -1,0 +1,13 @@
+title: $:/changenotes/5.4.0/#9532
+created: 20251229082625621
+modified: 20251229082625621
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: usability
+description: The sidebar moves out of view and into view
+release: 5.4.0
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9532
+github-contributors: BurningTreeC
+type: text/vnd.tiddlywiki
+
+This pull request makes the sidebar move when hiding and showing, rather than jumping.

@@ -20,7 +20,7 @@ color: #bbb
 	<$button popupTitle={{{ [[$:/state/popup/icon/]addsuffix<__title__>] }}} class="tc-btn-invisible tc-btn-dropdown">
 		{{$:/core/images/down-arrow}}
 	</$button>
-	<$reveal stateTitle={{{ [[$:/state/popup/icon/]addsuffix<__title__>] }}} type="popup" position="belowleft" text="" default="">
+	<$reveal stateTitle={{{ [[$:/state/popup/icon/]addsuffix<__title__>] }}} type="popup" clamp="right" positionAllowNegative="yes" position="belowleft" text="" default="">
 		<div class="tc-drop-down">
 			<$linkcatcher actions="""<$action-setfield $tiddler=<<__title__>> icon=<<navigateTo>>/>""">
 				<<iconEditorTab type:"!">>
