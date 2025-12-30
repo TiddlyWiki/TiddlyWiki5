@@ -4,8 +4,8 @@ description: {{$:/language/PageTemplate/Description}}
 icon: $:/core/images/standard-layout
 code-body: yes
 
-\function tf.primary-container.classes() [{$:/state/mediaquery/min-width/sidebarbreakpoint}match[no]then[tc-primary-container tc-inner-container-wrapper]] :else[[tc-inner-container-wrapper]]
-\function tf.primary-container.tabindex() [{$:/state/mediaquery/min-width/sidebarbreakpoint}match[no]then[-1]] :else[[]]
+\function tf.primary-container.classes() [{$:/info/mediaquery/min-width}match[no]then[tc-primary-container tc-inner-container-wrapper]] :else[[tc-inner-container-wrapper]]
+\function tf.primary-container.tabindex() [{$:/info/mediaquery/min-width}match[no]then[-1]] :else[[]]
 \whitespace trim
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 <$vars
