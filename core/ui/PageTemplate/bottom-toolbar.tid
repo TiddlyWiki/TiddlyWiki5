@@ -4,7 +4,7 @@ code-body: yes
 
 \whitespace trim
 \define lingo-base() $:/language/BottomToolbar/
-<nav class="tc-bottom-toolbar" role="navigation" aria-label=<<lingo Hint>>>
+<nav class="tc-bottom-toolbar tc-secondary-container tc-secondary-container-bottom" role="navigation" aria-label=<<lingo Hint>>>
 <div class="tc-bottom-toolbar-inner">
 <div class="tc-bottom-toolbar-item">
 <$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip=<<lingo Back/Hint>> aria-label=<<lingo Back/Hint>>>
