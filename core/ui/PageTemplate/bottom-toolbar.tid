@@ -3,14 +3,18 @@ tags: $:/tags/PageTemplate/Outside
 code-body: yes
 
 \whitespace trim
+\function tf.history.lastjsonindex() [<tv-history-list>get[text]jsonindexes[]last[]subtract[1]]
+\function tf.history.jsonindex(index) [<index>!match[0]then<tv-history-list>get[text]jsonindexes[]before<index>]
+\function tf.history.jsonget(index) [<tv-history-list>get[text]jsonget<index>last[]]
+\function tf.history.getjsonindex() [function[tf.history.jsonindex],<index>]
+\function tf.history.find-non-draft-index(index) [function[tf.history.jsonget],<index>!is[draft]!is[missing]then<index>] :or[function[tf.history.jsonget],<index>is[draft]listed[]match<tv-story-list>then<index>] :else[function[tf.history.find-non-draft],<tf.history.getjsonindex>] :else[[]]
 \define lingo-base() $:/language/BottomToolbar/
-\procedure tooltip-lingo(suffix) {{{ [<lingo-base>addsuffix<suffix>get[text]] }}}
-<nav class="tc-bottom-toolbar tc-secondary-container tc-secondary-container-bottom" role="navigation" aria-label=<<lingo Hint>>>
+<nav class="tc-bottom-toolbar tc-secondary-container tc-secondary-container-bottom" role="navigation" aria-label={{{ [<lingo-base>addsuffix[Hint]get[text]] }}}>
 <div class="tc-bottom-toolbar-inner">
 <div class="tc-bottom-toolbar-item">
-<$let storyTiddler={{{ [<tv-history-list>get[current-tiddler]] }}}>
+<$let lastJSONIndex=<<tf.history.lastjsonindex>> backTiddlerJSONIndex={{{ [function[tf.history.find-non-draft-index],<lastJSONIndex>] }}} backTiddler={{{ [function[tf.history.jsonget],<backTiddlerJSONIndex>] }}}>
 <$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip={{{ [<lingo-base>addsuffix[Back/Hint]get[text]] }}} aria-label={{{ [<lingo-base>addsuffix[Back/Hint]get[text]] }}}>
-<$action-navigate $to={{{ [list[$:/StoryList]before<storyTiddler>] }}}/>
+<$action-navigate $to=<<backTiddler>>/>
 {{$:/core/images/chevron-left}}
 <span class="tc-bottom-toolbar-label"><<lingo Back/Caption>></span>
 </$button>
@@ -42,7 +46,7 @@ code-body: yes
 </div>
 <div class="tc-bottom-toolbar-item">
 <$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip={{{ [<lingo-base>addsuffix[Menu/Hint]get[text]] }}} aria-label={{{ [<lingo-base>addsuffix[Menu/Hint]get[text]] }}}>
-<$action-setfield $tiddler="$:/state/sidebar" text={{{ [{$:/state/sidebar}match[no]then[yes]] :else[[yes]] }}}/>
+<$action-setfield $tiddler="$:/state/sidebar" text={{{ [{$:/state/sidebar}match[no]then[yes]] :else[[no]] }}}/>
 {{$:/core/images/menu-button}}
 <span class="tc-bottom-toolbar-label"><<lingo Menu/Caption>></span>
 </$button>
