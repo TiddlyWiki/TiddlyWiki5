@@ -12,39 +12,39 @@ Initialise $:/info/ tiddlers derived from media queries via
 exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 	if($tw.browser) {
 		// Functions to start and stop tracking a particular media query tracker tiddler
-function track(title) {
-    var result = {},
-        tiddler = $tw.wiki.getTiddler(title);
-    if(tiddler) {
-        var mediaQueryRaw = tiddler.fields["media-query"],
-            infoTiddler = tiddler.fields["info-tiddler"],
-            infoTiddlerAlt = tiddler.fields["info-tiddler-alt"];
-	var parser = $tw.wiki.parseText("text/vnd.tiddlywiki", mediaQueryRaw, {parseAsInline: true});
-	var widgetNode = $tw.wiki.makeWidget(parser, {parentWidget: $tw.rootWidget});
-	var container = $tw.fakeDocument.createElement("div");
-	widgetNode.render(container, null);
-	var mediaQuery = container.textContent.trim();
-        if(mediaQuery && infoTiddler) {
-            // Evaluate and track the media query
-            result.mqList = window.matchMedia(mediaQuery);
-            function getResultTiddlers() {
-                var value = result.mqList.matches ? "yes" : "no",
-                    tiddlers = [];
-                tiddlers.push({title: infoTiddler, text: value});
-                if(infoTiddlerAlt) {
-                    tiddlers.push({title: infoTiddlerAlt, text: value})
-                }
-                return tiddlers;
-            };
-            updateInfoTiddlersCallback(getResultTiddlers());
-            result.handler = function(event) {
-                updateInfoTiddlersCallback(getResultTiddlers());
-            };
-            result.mqList.addEventListener("change",result.handler);
-        }
-    }
-    return result;
-}
+		function track(title) {
+		    var result = {},
+		        tiddler = $tw.wiki.getTiddler(title);
+		    if(tiddler) {
+		        var mediaQueryRaw = tiddler.fields["media-query"],
+		            infoTiddler = tiddler.fields["info-tiddler"],
+		            infoTiddlerAlt = tiddler.fields["info-tiddler-alt"];
+			var parser = $tw.wiki.parseText("text/vnd.tiddlywiki", mediaQueryRaw, {parseAsInline: true});
+			var widgetNode = $tw.wiki.makeWidget(parser, {parentWidget: $tw.rootWidget});
+			var container = $tw.fakeDocument.createElement("div");
+			widgetNode.render(container, null);
+			var mediaQuery = container.textContent.trim();
+		        if(mediaQuery && infoTiddler) {
+		            // Evaluate and track the media query
+		            result.mqList = window.matchMedia(mediaQuery);
+		            function getResultTiddlers() {
+		                var value = result.mqList.matches ? "yes" : "no",
+		                    tiddlers = [];
+		                tiddlers.push({title: infoTiddler, text: value});
+		                if(infoTiddlerAlt) {
+		                    tiddlers.push({title: infoTiddlerAlt, text: value})
+		                }
+		                return tiddlers;
+		            };
+		            updateInfoTiddlersCallback(getResultTiddlers());
+		            result.handler = function(event) {
+		                updateInfoTiddlersCallback(getResultTiddlers());
+		            };
+		            result.mqList.addEventListener("change",result.handler);
+		        }
+		    }
+		    return result;
+		}
 		function untrack(enterValue) {
 			if(enterValue.mqList && enterValue.handler) {
 				enterValue.mqList.removeEventListener("change",enterValue.handler);
