@@ -1,0 +1,96 @@
+title: $:/themes/tiddlywiki/vanilla/bottom-toolbar
+tags: $:/tags/Stylesheet $:/tags/Stylesheet/Static
+code-body: yes
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/* Bottom Toolbar Base */
+.tc-bottom-toolbar {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 801;
+    background: <<colour page-background>>;
+    border-top: 1px solid <<colour tiddler-border>>;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    transform: translateY(0);
+    transition: transform 200ms ease-out;
+}
+
+.tc-bottom-toolbar-inner {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0.25rem 0;
+}
+
+/* Equal-width item containers */
+.tc-bottom-toolbar-item {
+    flex: 1 1 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* Buttons fill their container */
+.tc-bottom-toolbar-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15rem;
+    width: 100%;
+    padding: 0.5rem 0.25rem;
+    border-radius: 0.5rem;
+    color: <<colour sidebar-foreground>>;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+.tc-bottom-toolbar-button:hover,
+.tc-bottom-toolbar-button:focus-visible {
+    background: <<colour sidebar-button-foreground>>;
+}
+
+.tc-bottom-toolbar-button:active {
+    transform: scale(0.95);
+}
+
+.tc-bottom-toolbar-button svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: currentColor;
+}
+
+/* Primary action (New) - slightly emphasized */
+.tc-bottom-toolbar-primary svg {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+/* Labels */
+.tc-bottom-toolbar-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* Hide on wide screens where sidebar is visible */
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+    .tc-bottom-toolbar {
+        display: none;
+    }
+}
+
+/* Accommodate bottom toolbar in story river */
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+    .tc-story-river {
+        padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0));
+    }
+}
+
+/* Hide when keyboard is likely open */
+@media (max-height: 400px) {
+    .tc-bottom-toolbar {
+        transform: translateY(100%);
+    }
+}
