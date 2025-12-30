@@ -13,6 +13,7 @@ Key improvements:
 - Timeout-based fallback to reset state if drag events stop unexpectedly
 - Better handling of edge cases (DOM changes, rapid events, gaps in layouts)
 - Defensive checks for detached nodes and window focus changes
+- Support for filePathPrefix to create _canonical_uri references
 
 \*/
 
@@ -312,6 +313,68 @@ DropZoneWidget.prototype.readFileCallback = function(tiddlerFieldsArray) {
 	}
 };
 
+/*
+Get the content type for a file based on its extension or MIME type
+Returns the type string suitable for TiddlyWiki
+*/
+DropZoneWidget.prototype.getContentTypeForFile = function(file) {
+	var type = file.type;
+	// If browser didn't provide a type, try to determine from extension
+	if(!type) {
+		var extension = file.name.substring(file.name.lastIndexOf(".")).toLowerCase();
+		var typeInfo = $tw.config.fileExtensionInfo[extension];
+		if(typeInfo) {
+			type = typeInfo.type;
+		}
+	}
+	return type || "application/octet-stream";
+};
+
+/*
+Create canonical URI tiddlers from dropped files
+*/
+DropZoneWidget.prototype.createCanonicalUriTiddlers = function(files) {
+	var self = this;
+	var tiddlerFieldsArray = [];
+	
+	$tw.utils.each(files, function(file) {
+		var type = self.getContentTypeForFile(file);
+		var filename = file.name;
+		var title = filename;
+		
+		// Remove extension from title for cleaner names
+		var lastDot = title.lastIndexOf(".");
+		if(lastDot > 0) {
+			title = title.substring(0, lastDot);
+		}
+		
+		// Generate unique title
+		title = self.wiki.generateNewTitle(title);
+		
+		// Build the canonical URI
+		var canonicalUri = self.filePathPrefix;
+		// Ensure proper path separator
+		if(canonicalUri && !canonicalUri.endsWith("/") && !canonicalUri.endsWith("\\")) {
+			canonicalUri += "/";
+		}
+		canonicalUri += filename;
+		
+		var tiddlerFields = {
+			title: title,
+			type: type,
+			_canonical_uri: canonicalUri
+		};
+		
+		if($tw.log.IMPORT) {
+			console.log("Creating canonical URI tiddler:", title, "->", canonicalUri, "type:", type);
+		}
+		
+		tiddlerFieldsArray.push(tiddlerFields);
+	});
+	
+	return tiddlerFieldsArray;
+};
+
 DropZoneWidget.prototype.handleDropEvent = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
@@ -336,10 +399,20 @@ DropZoneWidget.prototype.handleDropEvent = function(event) {
 	var numFiles = 0;
 	// If we have type text/vnd.tiddlywiki then skip trying to import files
 	if(dataTransfer.files && !$tw.utils.dragEventContainsType(event, "text/vnd.tiddler")) {
-		numFiles = this.wiki.readFiles(dataTransfer.files, {
-			callback: readFileCallback,
-			deserializer: this.dropzoneDeserializer
-		});
+		// Check if we should create canonical URI references instead of importing
+		if(this.filePathPrefix) {
+			var tiddlerFieldsArray = this.createCanonicalUriTiddlers(dataTransfer.files);
+			if(tiddlerFieldsArray.length > 0) {
+				readFileCallback(tiddlerFieldsArray);
+				numFiles = dataTransfer.files.length;
+			}
+		} else {
+			// Normal file import behavior
+			numFiles = this.wiki.readFiles(dataTransfer.files, {
+				callback: readFileCallback,
+				deserializer: this.dropzoneDeserializer
+			});
+		}
 	}
 	// Try to import the various data types we understand
 	if(numFiles === 0) {
@@ -402,11 +475,20 @@ DropZoneWidget.prototype.handlePasteEvent = function(event) {
 		for(var t = 0; t < items.length; t++) {
 			var item = items[t];
 			if(item.kind === "file") {
-				// Import any files
-				this.wiki.readFile(item.getAsFile(), {
-					callback: readFileCallback,
-					deserializer: this.dropzoneDeserializer
-				});
+				// Check if we should create canonical URI references
+				if(this.filePathPrefix) {
+					var file = item.getAsFile();
+					var tiddlerFieldsArray = this.createCanonicalUriTiddlers([file]);
+					if(tiddlerFieldsArray.length > 0) {
+						readFileCallback(tiddlerFieldsArray);
+					}
+				} else {
+					// Import any files normally
+					this.wiki.readFile(item.getAsFile(), {
+						callback: readFileCallback,
+						deserializer: this.dropzoneDeserializer
+					});
+				}
 			} else if(item.kind === "string" && !["text/html", "text/plain", "Text"].includes(item.type) && $tw.utils.itemHasValidDataType(item)) {
 				// Try to import the various data types we understand
 				var fallbackTitle = self.wiki.generateNewTitle("Untitled");
@@ -447,6 +529,8 @@ DropZoneWidget.prototype.execute = function() {
 	this.contentTypesFilter = this.getAttribute("contentTypesFilter");
 	this.filesOnly = this.getAttribute("filesOnly", "no") === "yes";
 	this.dropzoneTabindex = this.getAttribute("tabindex");
+	// Canonical URI attribute
+	this.filePathPrefix = this.getAttribute("filePathPrefix");
 	// Make child widgets
 	this.makeChildWidgets();
 };
