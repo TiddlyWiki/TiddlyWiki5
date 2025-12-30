@@ -1,5 +1,5 @@
 title: $:/themes/tiddlywiki/vanilla/bottom-toolbar
-tags: $:/tags/Stylesheet $:/tags/Stylesheet/Static
+tags: $:/tags/Stylesheet
 code-body: yes
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
