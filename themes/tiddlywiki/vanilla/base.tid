@@ -1255,7 +1255,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	margin-left:5px;
 }
 
-.td-tiddler-edit-title .tc-tiddler-controls {
+.tc-tiddler-edit-title .tc-tiddler-controls {
 	margin-top: -10px;
 }
 
