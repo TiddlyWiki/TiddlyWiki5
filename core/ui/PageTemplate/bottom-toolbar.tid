@@ -1,0 +1,46 @@
+title: $:/core/ui/PageTemplate/bottom-toolbar
+tags: $:/tags/PageTemplate/Outside
+code-body: yes
+
+\whitespace trim
+\define lingo-base() $:/language/BottomToolbar/
+<nav class="tc-bottom-toolbar" role="navigation" aria-label=<<lingo Hint>>>
+<div class="tc-bottom-toolbar-inner">
+<div class="tc-bottom-toolbar-item">
+<$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip=<<lingo Back/Hint>> aria-label=<<lingo Back/Hint>>>
+<$action-navigate $to={{{ [list[$:/StoryList]before<storyTiddler>] }}}/>
+{{$:/core/images/chevron-left}}
+<span class="tc-bottom-toolbar-label"><<lingo Back/Caption>></span>
+</$button>
+</div>
+<div class="tc-bottom-toolbar-item">
+<$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip=<<lingo Home/Hint>> aria-label=<<lingo Home/Hint>>>
+<$action-navigate $to={{{ [[$:/DefaultTiddlers]get[text]enlist-input[]first[]] }}}/>
+{{$:/core/images/home}}
+<span class="tc-bottom-toolbar-label"><<lingo Home/Caption>></span>
+</$button>
+</div>
+<div class="tc-bottom-toolbar-item">
+<$button class="tc-bottom-toolbar-button tc-btn-invisible tc-bottom-toolbar-primary" tooltip=<<lingo New/Hint>> aria-label=<<lingo New/Hint>>>
+<$action-sendmessage $message="tm-new-tiddler"/>
+{{$:/core/images/new-button}}
+<span class="tc-bottom-toolbar-label"><<lingo New/Caption>></span>
+</$button>
+</div>
+<div class="tc-bottom-toolbar-item">
+<$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip=<<lingo Search/Hint>> aria-label=<<lingo Search/Hint>>>
+<$action-sendmessage $message="tm-focus-selector" $param=".tc-search input"/>
+<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+{{$:/core/images/search}}
+<span class="tc-bottom-toolbar-label"><<lingo Search/Caption>></span>
+</$button>
+</div>
+<div class="tc-bottom-toolbar-item">
+<$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip=<<lingo Menu/Hint>> aria-label=<<lingo Menu/Hint>>>
+<$action-setfield $tiddler="$:/state/sidebar" text={{{ [{$:/state/sidebar}match[yes]then[no]else[yes]] }}}/>
+{{$:/core/images/menu-button}}
+<span class="tc-bottom-toolbar-label"><<lingo Menu/Caption>></span>
+</$button>
+</div>
+</div>
+</nav>
