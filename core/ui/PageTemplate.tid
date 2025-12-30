@@ -18,7 +18,7 @@ code-body: yes
 	languageTitle={{{ [{$:/language}get[name]] }}}>
 <div class={{{ [all[shadows+tiddlers]tag[$:/tags/ClassFilters/PageTemplate]!is[draft]] :map:flat[subfilter{!!text}] tc-page-container [[tc-page-view-]addsuffix<storyviewTitle>] [[tc-language-]addsuffix<languageTitle>] :and[unique[]join[ ]] }}} >
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
-<$dropzone class="tc-dropzone tc-page-container-inner" enable=<<tv-enable-drag-and-drop>>>
+<$dropzone class="tc-dropzone tc-page-container-inner" enable=<<tv-enable-drag-and-drop>> filePathPrefix={{$:/config/Import/FilePathPrefix}}>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate/Outside]!has[draft.of]]" variable="listItem">
 <$transclude tiddler=<<listItem>>/>
 </$list>
