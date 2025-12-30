@@ -4,40 +4,45 @@ code-body: yes
 
 \whitespace trim
 \define lingo-base() $:/language/BottomToolbar/
+\procedure tooltip-lingo(suffix) {{{ [<lingo-base>addsuffix<suffix>get[text]] }}}
 <nav class="tc-bottom-toolbar tc-secondary-container tc-secondary-container-bottom" role="navigation" aria-label=<<lingo Hint>>>
 <div class="tc-bottom-toolbar-inner">
 <div class="tc-bottom-toolbar-item">
-<$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip=<<lingo Back/Hint>> aria-label=<<lingo Back/Hint>>>
+<$let storyTiddler={{{ [<tv-history-list>get[current-tiddler]] }}}>
+<$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip={{{ [<lingo-base>addsuffix[Back/Hint]get[text]] }}} aria-label={{{ [<lingo-base>addsuffix[Back/Hint]get[text]] }}}>
 <$action-navigate $to={{{ [list[$:/StoryList]before<storyTiddler>] }}}/>
 {{$:/core/images/chevron-left}}
 <span class="tc-bottom-toolbar-label"><<lingo Back/Caption>></span>
 </$button>
+</$let>
 </div>
 <div class="tc-bottom-toolbar-item">
-<$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip=<<lingo Home/Hint>> aria-label=<<lingo Home/Hint>>>
+<$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip={{{ [<lingo-base>addsuffix[Home/Hint]get[text]] }}} aria-label={{{ [<lingo-base>addsuffix[Home/Hint]get[text]] }}}>
 <$action-navigate $to={{{ [[$:/DefaultTiddlers]get[text]enlist-input[]first[]] }}}/>
 {{$:/core/images/home}}
 <span class="tc-bottom-toolbar-label"><<lingo Home/Caption>></span>
 </$button>
 </div>
 <div class="tc-bottom-toolbar-item">
-<$button class="tc-bottom-toolbar-button tc-btn-invisible tc-bottom-toolbar-primary" tooltip=<<lingo New/Hint>> aria-label=<<lingo New/Hint>>>
+<$button class="tc-bottom-toolbar-button tc-btn-invisible tc-bottom-toolbar-primary" tooltip={{{ [<lingo-base>addsuffix[New/Hint]get[text]] }}} aria-label={{{ [<lingo-base>addsuffix[New/Hint]get[text]] }}}>
 <$action-sendmessage $message="tm-new-tiddler"/>
 {{$:/core/images/new-button}}
 <span class="tc-bottom-toolbar-label"><<lingo New/Caption>></span>
 </$button>
 </div>
 <div class="tc-bottom-toolbar-item">
-<$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip=<<lingo Search/Hint>> aria-label=<<lingo Search/Hint>>>
-<$action-sendmessage $message="tm-focus-selector" $param=".tc-search input"/>
+<$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip={{{ [<lingo-base>addsuffix[Search/Hint]get[text]] }}} aria-label={{{ [<lingo-base>addsuffix[Search/Hint]get[text]] }}}>
+<%if [{$:/state/sidebar}!match[yes]] %>
 <$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+<% endif %>
+<$action-sendmessage $message="tm-focus-selector" $param=".tc-search input"/>
 {{$:/core/images/search}}
 <span class="tc-bottom-toolbar-label"><<lingo Search/Caption>></span>
 </$button>
 </div>
 <div class="tc-bottom-toolbar-item">
-<$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip=<<lingo Menu/Hint>> aria-label=<<lingo Menu/Hint>>>
-<$action-setfield $tiddler="$:/state/sidebar" text={{{ [{$:/state/sidebar}match[yes]then[no]else[yes]] }}}/>
+<$button class="tc-bottom-toolbar-button tc-btn-invisible" tooltip={{{ [<lingo-base>addsuffix[Menu/Hint]get[text]] }}} aria-label={{{ [<lingo-base>addsuffix[Menu/Hint]get[text]] }}}>
+<$action-setfield $tiddler="$:/state/sidebar" text={{{ [{$:/state/sidebar}match[no]then[yes]] :else[[yes]] }}}/>
 {{$:/core/images/menu-button}}
 <span class="tc-bottom-toolbar-label"><<lingo Menu/Caption>></span>
 </$button>
