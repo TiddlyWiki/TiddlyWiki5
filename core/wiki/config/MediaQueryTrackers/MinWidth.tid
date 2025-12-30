@@ -1,0 +1,4 @@
+title: $:/core/wiki/config/MediaQueryTrackers/MinWidth
+tags: $:/tags/MediaQueryTracker
+media-query: (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}})
+info-tiddler: $:/info/mediaquery/min-width
