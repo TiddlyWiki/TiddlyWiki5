@@ -441,7 +441,7 @@ exports.parseFilterToHtml = function(filterString) {
 				"=": "all",
 				"=>": "let"
 			}[operation.prefix] || operation.namedPrefix || "";
-			operationHtml.push('<span class="tc-filter-prefix ' + (modifier ? 'tc-filter-prefix-' + modifier : '') + '" title="' + tooltip + '">');
+			operationHtml.push('<span class="tc-filter-prefix tc-filter-small-element ' + (modifier ? 'tc-filter-prefix-' + modifier : '') + '" title="' + tooltip + '">');
 			operationHtml.push(operation.prefix);
 			operationHtml.push('</span>');
 		}
@@ -449,7 +449,7 @@ exports.parseFilterToHtml = function(filterString) {
 			var operator = operation.operators[j];
 			var tooltip = "Operator: '" + operator.operator + "'";
 			operationHtml.push('<span class="tc-filter-operator" title="' + tooltip + '">');
-			operationHtml.push('[');
+			operationHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">[</span>');
 			operationHtml.push('<span class="tc-filter-operator-name" title="Operator Name: ' + operator.operator + '">');
 			operationHtml.push(operator.operator);
 			operationHtml.push('</span>');
@@ -458,14 +458,14 @@ exports.parseFilterToHtml = function(filterString) {
 					var suffixGroup = operator.suffixes[s];
 					if(suffixGroup.length > 0) {
 						operationHtml.push('<span class="tc-filter-suffix-group" title="Suffix Group">');
-						operationHtml.push(':');
+						operationHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">:</span>');
 						for(var e=0; e<suffixGroup.length; e++) {
 							var entry = suffixGroup[e];
 							operationHtml.push('<span class="tc-filter-suffix-entry" title="Suffix Entry: ' + entry + '">');
 							operationHtml.push(entry);
 							operationHtml.push('</span>');
 							if(e < suffixGroup.length - 1) {
-								operationHtml.push(',');
+								operationHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">,</span>');
 							}
 						}
 						operationHtml.push('</span>');
@@ -475,6 +475,8 @@ exports.parseFilterToHtml = function(filterString) {
 			for(var k=0; k<operator.operands.length; k++) {
 				var operand = operator.operands[k];
 				var operandHtml = [];
+				var bracket = operand.indirect ? "{}" : operand.variable ? "<>" : "[]";
+				operationHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">' + bracket[0] + '</span>');
 				if(operand.indirect) {
 					operandHtml.push('<span class="tc-filter-operand tc-filter-operand-indirect" title="Operand (Indirect from Tiddler: ' + operand.text + ')">');
 					operandHtml.push(operand.text);
@@ -488,12 +490,10 @@ exports.parseFilterToHtml = function(filterString) {
 					operandHtml.push(operand.text);
 					operandHtml.push('</span>');
 				}
-				var bracket = operand.indirect ? "{}" : operand.variable ? "<>" : "[]";
-				operationHtml.push(bracket[0]);
 				operationHtml.push(operandHtml.join(""));
-				operationHtml.push(bracket[1]);
+				operationHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">' + bracket[1] + '</span>');
 			}
-			operationHtml.push(']');
+			operationHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">]</span>');
 			operationHtml.push('</span>');
 		}
 		operationHtml.push('</span>');

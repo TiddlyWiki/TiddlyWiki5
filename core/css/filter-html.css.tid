@@ -46,3 +46,32 @@ tags: $:/tags/Stylesheet
 .tc-filter-operand-variable {
     background-color: #d4edda;
 }
+
+.tc-filter-small-element {
+    display: inline-block;
+    padding: 2px 4px;
+    border-radius: 3px;
+    line-height: 1;
+}
+
+.tc-filter-punctuation {
+    color: #999;
+}
+
+/* --- Hover Effects --- */
+
+.tc-filter-prefix:hover,
+.tc-filter-operator-name:hover,
+.tc-filter-suffix-entry:hover,
+.tc-filter-operand:hover,
+.tc-filter-punctuation:hover {
+    background-color: #007bff;
+    color: #fff !important;
+    cursor: default;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+
+.tc-filter-operand-indirect:hover,
+.tc-filter-operand-variable:hover {
+    background-color: #0069d9;
+}
