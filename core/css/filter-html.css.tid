@@ -20,9 +20,17 @@ tags: $:/tags/Stylesheet
     font-weight: bold;
 }
 
-.tc-filter-operator-suffix {
+.tc-filter-suffix-group {
     color: #5a6268;
     font-style: italic;
+    margin-left: 1px;
+}
+
+.tc-filter-suffix-entry {
+    background-color: #e9ecef;
+    padding: 0 3px;
+    border-radius: 3px;
+    font-style: normal;
 }
 
 .tc-filter-operand {

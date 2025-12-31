@@ -453,10 +453,24 @@ exports.parseFilterToHtml = function(filterString) {
 			operationHtml.push('<span class="tc-filter-operator-name" title="Operator Name: ' + operator.operator + '">');
 			operationHtml.push(operator.operator);
 			operationHtml.push('</span>');
-			if(operator.suffix) {
-				operationHtml.push('<span class="tc-filter-operator-suffix" title="Suffix: ' + operator.suffix + '">');
-				operationHtml.push(":" + operator.suffix);
-				operationHtml.push('</span>');
+			if(operator.suffixes) {
+				for(var s=0; s<operator.suffixes.length; s++) {
+					var suffixGroup = operator.suffixes[s];
+					if(suffixGroup.length > 0) {
+						operationHtml.push('<span class="tc-filter-suffix-group" title="Suffix Group">');
+						operationHtml.push(':');
+						for(var e=0; e<suffixGroup.length; e++) {
+							var entry = suffixGroup[e];
+							operationHtml.push('<span class="tc-filter-suffix-entry" title="Suffix Entry: ' + entry + '">');
+							operationHtml.push(entry);
+							operationHtml.push('</span>');
+							if(e < suffixGroup.length - 1) {
+								operationHtml.push(',');
+							}
+						}
+						operationHtml.push('</span>');
+					}
+				}
 			}
 			for(var k=0; k<operator.operands.length; k++) {
 				var operand = operator.operands[k];

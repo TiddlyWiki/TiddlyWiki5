@@ -64,13 +64,25 @@ The function will then iterate through the `operators` array within each `operat
     *   **Tooltip:** "Operator: 'tag' - Filters for tiddlers with the specified tag."
 *   The literal brackets `[` and `]` will be included to maintain the visual structure.
 
-### 4.5. `operator.operator` and `operator.suffix`
+### 4.5. Operator Name and Suffixes
 
-The operator name and its suffixes will be explicitly marked up.
+The rendering will distinguish between the operator name and its structured suffixes. The parser provides a detailed `operator.suffixes` array, which is an array of "suffix groups". Each group is an array of "suffix entries". This structure will be mapped to a nested HTML structure for detailed inspection.
 
-*   For `search:title,caption`:
-    *   **Operator Name HTML:** `<span class="tc-filter-operator-name" title="Operator Name: search">search</span>`
-    *   **Suffix HTML:** `<span class="tc-filter-operator-suffix" title="Suffix: title,caption">:title,caption</span>`
+*   **AST `operator.suffixes` for `:op-purpose,op-output:literal`:** `[['op-purpose', 'op-output'], ['literal']]`
+
+*   **Operator Name HTML:**
+    *   `<span class="tc-filter-operator-name" title="Operator Name: search">search</span>`
+
+*   **Suffixes HTML:** The logic will iterate through the `suffixes` array. Each group will be a `<span>`, and each entry within it will be another `<span>`. The separating colons and commas will be preserved.
+
+    ```html
+    <span class="tc-filter-suffix-group" title="Suffix Group">
+        :<span class="tc-filter-suffix-entry" title="Suffix Entry: op-purpose">op-purpose</span>,<span class="tc-filter-suffix-entry" title="Suffix Entry: op-output">op-output</span>
+    </span>
+    <span class="tc-filter-suffix-group" title="Suffix Group">
+        :<span class="tc-filter-suffix-entry" title="Suffix Entry: literal">literal</span>
+    </span>
+    ```
 
 ### 4.6. `operator.operands` Array
 
@@ -89,7 +101,7 @@ Finally, the operands are rendered. The markup will differ based on the operand 
 ## 5. Example Walkthrough
 
 **Filter String:**
-`[is[current]] +[tag{!!title}]
+`[is[current]] +[tag{!!title}]`
 
 **Simplified AST:**
 ```json
@@ -150,9 +162,17 @@ This CSS would be defined in a separate stylesheet tiddler to make the HTML outp
     font-weight: bold;
 }
 
-.tc-filter-operator-suffix {
+.tc-filter-suffix-group {
     color: #5a6268;
     font-style: italic;
+    margin-left: 1px;
+}
+
+.tc-filter-suffix-entry {
+    background-color: #e9ecef;
+    padding: 0 3px;
+    border-radius: 3px;
+    font-style: normal;
 }
 
 .tc-filter-operand {
