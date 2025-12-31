@@ -1,0 +1,18 @@
+title: $:/changenotes/5.4.0/#9528
+description: Add event parameter manipulation to ActionSendMessageWidget
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9528
+github-contributors: yaisog
+
+Extended the [[ActionSendMessageWidget]] to support forwarding event properties to the dispatched message event object, enabling better event handling integration with MessageCatcherWidget.
+
+New features:
+
+* `$eventJson` attribute: accepts JSON-serialized event data, parsing and merging properties into params with preserved types (boolean, number)
+* `$event-*` attributes: add properties directly to params object (e.g., `$event-type="tm-navigate"` adds `type: "tm-navigate"`)
+* `$eventNames` and `$eventValues`: filter-based property assignment to event object
+
+MessageCatcherWidget now exports a `json-event` variable containing primitive event properties as JSON, preserving types unlike the existing string-based `event-*` variables.
