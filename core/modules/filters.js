@@ -434,18 +434,17 @@ exports.parseFilterToHtml = function(filterString) {
 		var operationSubGenerator = function() {
 			var opHtml = [];
 			$tw.utils.each(operation.operators, function(operator) {
-				var tooltip = "Run: '" + operator.operator + "'";
+				var safeOperator = $tw.utils.htmlEncode(operator.operator),
+					tooltip = "Run: '" + safeOperator + "'";
 				opHtml.push('<span class="tc-filter-operator" title="' + tooltip + '">');
 				opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">[</span>');
-				// NEW LOGIC START: Display operator.prefix if it exists
 				if (operator.prefix) {
 					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element" title="Negated">');
-					opHtml.push(operator.prefix);
+					opHtml.push($tw.utils.htmlEncode(operator.prefix));
 					opHtml.push('</span>');
 				}
-				// NEW LOGIC END
-				opHtml.push('<span class="tc-filter-operator-name" title="Operator Name: ' + operator.operator + '">');
-				opHtml.push(operator.operator);
+				opHtml.push('<span class="tc-filter-operator-name" title="Operator Name: ' + safeOperator + '">');
+				opHtml.push(safeOperator);
 				opHtml.push("</span>");
 
 				if(operator.suffixes) {
@@ -455,7 +454,7 @@ exports.parseFilterToHtml = function(filterString) {
 							opHtml.push('<span class="tc-filter-suffix-group" title="Suffix Group">');
 							opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">:</span>');
 							for(var e=0; e<suffixGroup.length; e++) {
-								var entry = suffixGroup[e];
+								var entry = $tw.utils.htmlEncode(suffixGroup[e]);
 								opHtml.push('<span class="tc-filter-suffix-entry" title="Suffix Entry: ' + entry + '">');
 								opHtml.push(entry);
 								opHtml.push("</span>");
@@ -470,6 +469,7 @@ exports.parseFilterToHtml = function(filterString) {
 
 				for(var k=0; k<operator.operands.length; k++) {
 					var operand = operator.operands[k],
+						safeOperandText = $tw.utils.htmlEncode(operand.text),
 						startBracket, endBracket, title;
 					if(operand.indirect) {
 						startBracket = "{";
@@ -484,23 +484,24 @@ exports.parseFilterToHtml = function(filterString) {
 						endBracket = "]";
 						title = "Operand literal: ";
 					}
-					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element" title="' + title + operand.text + '">' + startBracket + "</span>");
+					var fullTitle = $tw.utils.htmlEncode(title + operand.text);
+					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element" title="' + fullTitle + '">' + startBracket + "</span>");
 					var operandHtml = [];
 					if(operand.indirect) {
-						operandHtml.push('<span class="tc-filter-operand tc-filter-operand-indirect" title="' + title + operand.text + '">');
-						operandHtml.push(operand.text);
+						operandHtml.push('<span class="tc-filter-operand tc-filter-operand-indirect" title="' + fullTitle + '">');
+						operandHtml.push(safeOperandText);
 						operandHtml.push("</span>");
 					} else if(operand.variable) {
-						operandHtml.push('<span class="tc-filter-operand tc-filter-operand-variable" title="' + title + operand.text + '">');
-						operandHtml.push(operand.text);
+						operandHtml.push('<span class="tc-filter-operand tc-filter-operand-variable" title="' + fullTitle + '">');
+						operandHtml.push(safeOperandText);
 						operandHtml.push("</span>");
 					} else {
-						operandHtml.push('<span class="tc-filter-operand" title="' + title + operand.text + '">');
-						operandHtml.push(operand.text);
+						operandHtml.push('<span class="tc-filter-operand" title="' + fullTitle + '">');
+						operandHtml.push(safeOperandText);
 						operandHtml.push("</span>");
 					}
 					opHtml.push(operandHtml.join(""));
-					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element" title="' + title + operand.text + '">' + endBracket + "</span>");
+					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element" title="' + fullTitle + '">' + endBracket + "</span>");
 				}
 				opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">]</span>');
 				opHtml.push("</span>");
