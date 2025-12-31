@@ -1,7 +1,7 @@
 created: 20251231105322351
-modified: 20251231112318469
+modified: 20251231120308000
 tags: 
 title: test-2-operator-suffixes
 type: text/vnd.tiddlywiki
 
-<<filter-html """[all[tiddlers]search:op-purpose,op-output:literal[list of number]] +[addsuffix{!!examples-text}]  -[[abs Operator (Examples)]] "[<}Weird Title{>]""">>
+<<filter-html """[all[tiddlers]search:op-purpose,op-output:literal[list of number]] +[addsuffix{!!examples-text}]  -[[abs Operator (Examples)]] "[<}Weird Title{>]" """>>
