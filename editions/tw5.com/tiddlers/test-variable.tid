@@ -1,0 +1,7 @@
+created: 20251231112117700
+modified: 20251231115706773
+tags: 
+title: test-variable
+type: text/vnd.tiddlywiki
+
+<<filter-html """[<config-title>!text[hide]]""">>

@@ -421,84 +421,122 @@ exports.compileFilter = function(filterString) {
 Parse a filter string and return an HTML representation
 */
 exports.parseFilterToHtml = function(filterString) {
-	var ast = this.parseFilter(filterString);
-	var html = ['<div class="tc-filter">'];
-	for(var i=0; i<ast.length; i++) {
-		var operation = ast[i];
-		var operationHtml = ['<span class="tc-filter-run" title="A filter run, which is a sequence of operators applied to a set of titles.">'];
-		if(operation.prefix) {
-			var tooltip = {
-				"+": "Prefix: 'and' - Intersects the results of this run with the main results.",
-				"-": "Prefix: 'except' - Removes the results of this run from the main results.",
-				"~": "Prefix: 'else' - Unions the results of this run with the main results only if the main results are empty.",
-				"=": "Prefix: 'all' - Unions the results of this run with the main results without deduplication.",
-				"=>": "Prefix: 'let' - Assigns the results of this run to a variable."
-			}[operation.prefix] || "Prefix: " + operation.prefix;
-			var modifier = {
-				"+": "and",
-				"-": "except",
-				"~": "else",
-				"=": "all",
-				"=>": "let"
-			}[operation.prefix] || operation.namedPrefix || "";
-			operationHtml.push('<span class="tc-filter-prefix tc-filter-small-element ' + (modifier ? 'tc-filter-prefix-' + modifier : '') + '" title="' + tooltip + '">');
-			operationHtml.push(operation.prefix);
-			operationHtml.push('</span>');
-		}
-		for(var j=0; j<operation.operators.length; j++) {
-			var operator = operation.operators[j];
-			var tooltip = "Operator: '" + operator.operator + "'";
-			operationHtml.push('<span class="tc-filter-operator" title="' + tooltip + '">');
-			operationHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">[</span>');
-			operationHtml.push('<span class="tc-filter-operator-name" title="Operator Name: ' + operator.operator + '">');
-			operationHtml.push(operator.operator);
-			operationHtml.push('</span>');
-			if(operator.suffixes) {
-				for(var s=0; s<operator.suffixes.length; s++) {
-					var suffixGroup = operator.suffixes[s];
-					if(suffixGroup.length > 0) {
-						operationHtml.push('<span class="tc-filter-suffix-group" title="Suffix Group">');
-						operationHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">:</span>');
-						for(var e=0; e<suffixGroup.length; e++) {
-							var entry = suffixGroup[e];
-							operationHtml.push('<span class="tc-filter-suffix-entry" title="Suffix Entry: ' + entry + '">');
-							operationHtml.push(entry);
-							operationHtml.push('</span>');
-							if(e < suffixGroup.length - 1) {
-								operationHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">,</span>');
+	var filterParseTree;
+	try {
+		filterParseTree = this.parseFilter(filterString);
+	} catch(e) {
+		return "Error parsing filter: " + e;
+	}
+
+	var operationHtmlGenerators = [];
+	$tw.utils.each(filterParseTree, function(operation) {
+		// Create a function that generates the HTML for the operators in this run
+		var operationSubGenerator = function() {
+			var opHtml = [];
+			$tw.utils.each(operation.operators, function(operator) {
+				var tooltip = "Operator: '" + operator.operator + "'";
+				opHtml.push('<span class="tc-filter-operator" title="' + tooltip + '">');
+				opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">[</span>');
+				opHtml.push('<span class="tc-filter-operator-name" title="Operator Name: ' + operator.operator + '">');
+				opHtml.push(operator.operator);
+				opHtml.push('</span>');
+
+				if(operator.suffixes) {
+					for(var s=0; s<operator.suffixes.length; s++) {
+						var suffixGroup = operator.suffixes[s];
+						if(suffixGroup.length > 0) {
+							opHtml.push('<span class="tc-filter-suffix-group" title="Suffix Group">');
+							opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">:</span>');
+							for(var e=0; e<suffixGroup.length; e++) {
+								var entry = suffixGroup[e];
+								opHtml.push('<span class="tc-filter-suffix-entry" title="Suffix Entry: ' + entry + '">');
+								opHtml.push(entry);
+								opHtml.push('</span>');
+								if(e < suffixGroup.length - 1) {
+									opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">,</span>');
+								}
 							}
+							opHtml.push('</span>');
 						}
-						operationHtml.push('</span>');
 					}
 				}
-			}
-			for(var k=0; k<operator.operands.length; k++) {
-				var operand = operator.operands[k];
-				var operandHtml = [];
-				var bracket = operand.indirect ? "{}" : operand.variable ? "<>" : "[]";
-				operationHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">' + bracket[0] + '</span>');
-				if(operand.indirect) {
-					operandHtml.push('<span class="tc-filter-operand tc-filter-operand-indirect" title="Operand (Indirect from Tiddler: ' + operand.text + ')">');
-					operandHtml.push(operand.text);
-					operandHtml.push('</span>');
-				} else if(operand.variable) {
-					operandHtml.push('<span class="tc-filter-operand tc-filter-operand-variable" title="Operand (From Variable: ' + operand.text + ')">');
-					operandHtml.push(operand.text);
-					operandHtml.push('</span>');
-				} else {
-					operandHtml.push('<span class="tc-filter-operand" title="Operand (Literal)">');
-					operandHtml.push(operand.text);
-					operandHtml.push('</span>');
+
+				for(var k=0; k<operator.operands.length; k++) {
+					var operand = operator.operands[k],
+						startBracket, endBracket;
+					if(operand.indirect) {
+						startBracket = "{";
+						endBracket = "}";
+					} else if(operand.variable) {
+						startBracket = "&lt;";
+						endBracket = "&gt;";
+					} else {
+						startBracket = "[";
+						endBracket = "]";
+					}
+					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">' + startBracket + '</span>');
+					
+					var operandHtml = [];
+					if(operand.indirect) {
+						operandHtml.push('<span class="tc-filter-operand tc-filter-operand-indirect" title="Operand (Indirect from Tiddler: ' + operand.text + ')">');
+						operandHtml.push(operand.text);
+						operandHtml.push('</span>');
+					} else if(operand.variable) {
+						operandHtml.push('<span class="tc-filter-operand tc-filter-operand-variable" title="Operand (From Variable: ' + operand.text + ')">');
+						operandHtml.push(operand.text);
+						operandHtml.push('</span>');
+					} else {
+						operandHtml.push('<span class="tc-filter-operand" title="Operand (Literal)">');
+						operandHtml.push(operand.text);
+						operandHtml.push('</span>');
+					}
+					opHtml.push(operandHtml.join(""));
+					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">' + endBracket + '</span>');
 				}
-				operationHtml.push(operandHtml.join(""));
-				operationHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">' + bracket[1] + '</span>');
+				opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">]</span>');
+				opHtml.push('</span>');
+			});
+			return opHtml.join("");
+		};
+
+		// Create a function that wraps the operator HTML with the prefix and run container
+		var runGenerator = (function() {
+			var innerHtml = operationSubGenerator();
+			var runHtml = ['<span class="tc-filter-run" title="A filter run, which is a sequence of operators applied to a set of titles.">'];
+			
+			if(operation.prefix) {
+				var tooltip = {
+					"+": "Prefix: 'and' - Intersects the results of this run with the main results.",
+					"-": "Prefix: 'except' - Removes the results of this run from the main results.",
+					"~": "Prefix: 'else' - Unions the results of this run with the main results only if the main results are empty.",
+					"=": "Prefix: 'all' - Unions the results of this run with the main results without deduplication.",
+					"=>": "Prefix: 'let' - Assigns the results of this run to a variable."
+				}[operation.prefix] || "Prefix: " + operation.prefix;
+				var modifier = {
+					"+": "and",
+					"-": "except",
+					"~": "else",
+					"=": "all",
+					"=>": "let"
+				}[operation.prefix] || operation.namedPrefix || "";
+				runHtml.push('<span class="tc-filter-prefix tc-filter-small-element ' + (modifier ? 'tc-filter-prefix-' + modifier : '') + '" title="' + tooltip + '">');
+				runHtml.push(operation.prefix);
+				runHtml.push('</span>');
 			}
-			operationHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">]</span>');
-			operationHtml.push('</span>');
-		}
-		operationHtml.push('</span>');
-		html.push(operationHtml.join(""));
-	}
+			
+			runHtml.push(innerHtml);
+			runHtml.push('</span>');
+			return function() {
+				return runHtml.join("");
+			};
+		})();
+		operationHtmlGenerators.push(runGenerator);
+	});
+
+	var html = ['<div class="tc-filter">'];
+	$tw.utils.each(operationHtmlGenerators, function(generator) {
+		html.push(generator());
+	});
 	html.push('</div>');
 	return html.join("");
 };
