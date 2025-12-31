@@ -1,0 +1,11 @@
+created: 20251231104734818
+modified: 20251231105320979
+tags: 
+title: New Tiddler
+type: text/vnd.tiddlywiki
+
+<<filter-html "[is[tiddler]] -[[$:/core]] -[[$:/library/sjcl.js]] -[prefix[$:/boot/]] -[prefix[$:/HistoryList]] -[status[pending]plugin-type[import]] -[[$:/isEncrypted]] -[prefix[$:/status/]] -[prefix[$:/state/]] -[prefix[$:/temp/]]">>
+
+
+
+<<filter-html """[<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateBodyFilter]!is[draft]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/body/default]]""">>

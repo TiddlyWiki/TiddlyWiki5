@@ -1,0 +1,40 @@
+title: $:/core/css/filter-html
+type: text/css
+tags: $:/tags/Stylesheet
+
+.tc-filter-run {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin: 0 2px;
+    background-color: #f0f0f0;
+}
+
+.tc-filter-prefix {
+    font-weight: bold;
+    color: #c00;
+}
+
+.tc-filter-operator-name {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.tc-filter-operator-suffix {
+    color: #5a6268;
+    font-style: italic;
+}
+
+.tc-filter-operand {
+    color: #28a745;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+.tc-filter-operand-indirect {
+    background-color: #fff3cd;
+}
+
+.tc-filter-operand-variable {
+    background-color: #d4edda;
+}
