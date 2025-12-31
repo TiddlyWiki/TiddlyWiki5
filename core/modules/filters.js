@@ -434,12 +434,19 @@ exports.parseFilterToHtml = function(filterString) {
 		var operationSubGenerator = function() {
 			var opHtml = [];
 			$tw.utils.each(operation.operators, function(operator) {
-				var tooltip = "Operator: '" + operator.operator + "'";
+				var tooltip = "Run: '" + operator.operator + "'";
 				opHtml.push('<span class="tc-filter-operator" title="' + tooltip + '">');
 				opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">[</span>');
+				// NEW LOGIC START: Display operator.prefix if it exists
+				if (operator.prefix) {
+					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element" title="Negated">');
+					opHtml.push(operator.prefix);
+					opHtml.push('</span>');
+				}
+				// NEW LOGIC END
 				opHtml.push('<span class="tc-filter-operator-name" title="Operator Name: ' + operator.operator + '">');
 				opHtml.push(operator.operator);
-				opHtml.push('</span>');
+				opHtml.push("</span>");
 
 				if(operator.suffixes) {
 					for(var s=0; s<operator.suffixes.length; s++) {
@@ -451,50 +458,52 @@ exports.parseFilterToHtml = function(filterString) {
 								var entry = suffixGroup[e];
 								opHtml.push('<span class="tc-filter-suffix-entry" title="Suffix Entry: ' + entry + '">');
 								opHtml.push(entry);
-								opHtml.push('</span>');
+								opHtml.push("</span>");
 								if(e < suffixGroup.length - 1) {
 									opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">,</span>');
 								}
 							}
-							opHtml.push('</span>');
+							opHtml.push("</span>");
 						}
 					}
 				}
 
 				for(var k=0; k<operator.operands.length; k++) {
 					var operand = operator.operands[k],
-						startBracket, endBracket;
+						startBracket, endBracket, title;
 					if(operand.indirect) {
 						startBracket = "{";
 						endBracket = "}";
+						title = "Operand indirect: ";
 					} else if(operand.variable) {
 						startBracket = "&lt;";
 						endBracket = "&gt;";
+						title = "Operand variable: ";
 					} else {
 						startBracket = "[";
 						endBracket = "]";
+						title = "Operand literal: ";
 					}
-					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">' + startBracket + '</span>');
-					
+					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element" title="' + title + operand.text + '">' + startBracket + "</span>");
 					var operandHtml = [];
 					if(operand.indirect) {
-						operandHtml.push('<span class="tc-filter-operand tc-filter-operand-indirect" title="Operand (Indirect from Tiddler: ' + operand.text + ')">');
+						operandHtml.push('<span class="tc-filter-operand tc-filter-operand-indirect" title="' + title + operand.text + '">');
 						operandHtml.push(operand.text);
-						operandHtml.push('</span>');
+						operandHtml.push("</span>");
 					} else if(operand.variable) {
-						operandHtml.push('<span class="tc-filter-operand tc-filter-operand-variable" title="Operand (From Variable: ' + operand.text + ')">');
+						operandHtml.push('<span class="tc-filter-operand tc-filter-operand-variable" title="' + title + operand.text + '">');
 						operandHtml.push(operand.text);
-						operandHtml.push('</span>');
+						operandHtml.push("</span>");
 					} else {
-						operandHtml.push('<span class="tc-filter-operand" title="Operand (Literal)">');
+						operandHtml.push('<span class="tc-filter-operand" title="' + title + operand.text + '">');
 						operandHtml.push(operand.text);
-						operandHtml.push('</span>');
+						operandHtml.push("</span>");
 					}
 					opHtml.push(operandHtml.join(""));
-					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">' + endBracket + '</span>');
+					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element" title="' + title + operand.text + '">' + endBracket + "</span>");
 				}
 				opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">]</span>');
-				opHtml.push('</span>');
+				opHtml.push("</span>");
 			});
 			return opHtml.join("");
 		};
@@ -521,11 +530,11 @@ exports.parseFilterToHtml = function(filterString) {
 				}[operation.prefix] || operation.namedPrefix || "";
 				runHtml.push('<span class="tc-filter-prefix tc-filter-small-element ' + (modifier ? 'tc-filter-prefix-' + modifier : '') + '" title="' + tooltip + '">');
 				runHtml.push(operation.prefix);
-				runHtml.push('</span>');
+				runHtml.push("</span>");
 			}
 			
 			runHtml.push(innerHtml);
-			runHtml.push('</span>');
+			runHtml.push("</span>");
 			return function() {
 				return runHtml.join("");
 			};
