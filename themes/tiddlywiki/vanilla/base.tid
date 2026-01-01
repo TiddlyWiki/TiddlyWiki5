@@ -176,10 +176,20 @@ code {
 }
 
 blockquote {
-	border-left: 5px solid <<colour blockquote-bar>>;
-	margin-left: 25px;
-	padding-left: 10px;
+	border-inline-start: 5px solid <<colour blockquote-bar>>;
+	<<margin-start 25px>>
+	<<padding-start 10px>>
 	quotes: "\201C""\201D""\2018""\2019";
+}
+
+@supports not (border-inline-start: 1px solid #000000) {
+	blockquote {
+		border-left: 5px solid <<colour blockquote-bar>>;
+	}
+
+	blockquote.tc-big-quote {
+		border-left: none;
+	}
 }
 
 blockquote > div {
@@ -191,9 +201,8 @@ blockquote.tc-big-quote {
 	font-family: Georgia, serif;
 	position: relative;
 	background: <<colour pre-background>>;
-	border-left: none;
-	margin-left: 50px;
-	margin-right: 50px;
+	border-inline-start: none;
+	<<margin-inline 50px>>
 	padding: 10px;
 	border-radius: 8px;
 }
