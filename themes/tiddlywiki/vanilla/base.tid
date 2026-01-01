@@ -1142,6 +1142,17 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 }
 
+.tc-tiddler-info-controls {
+	position: absolute;
+	inset-inline-end: 0;
+}
+
+@supports not (inset-inline-start: 0) {
+	.tc-tiddler-info-controls {
+		right: 0;
+	}
+}
+
 .tc-view-field-table {
 	width: 100%;
 }
