@@ -741,7 +741,7 @@ button svg.tc-image-button, button .tc-image-button img {
 	border: none;
 	width: 100%;
 	width: calc(100% + 2px);
-	margin-left: -43px;
+	<<margin-start -43px>>
 	text-align: center;
 	border-top: 2px solid <<colour tiddler-info-background>>;
 	margin-top: 4px;
@@ -769,7 +769,7 @@ button svg.tc-image-button, button .tc-image-button img {
 	border: none;
 	width: 23px;
 	text-align: center;
-	margin-left: -35px;
+	<<margin-start -35px>>
 	top: 6px;
 	bottom: 6px;
 }
@@ -787,7 +787,7 @@ button svg.tc-image-button, button .tc-image-button img {
 
 	.tc-fold-banner {
 		width: 16px;
-		margin-left: -16px;
+		<<margin-start -16px>>
 		font-size: 0.75em;
 	}
 
