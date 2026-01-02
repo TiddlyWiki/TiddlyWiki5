@@ -1,0 +1,22 @@
+title: Functions/UndefinedParameters
+description: Undefined function parameters
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\function greet(who)
+[[hello ]addsuffix<who>]
+\end
+
+<$text text={{{[function[greet],[world]]}}}/>
+
+<<greet world>>
+
+<$text text={{{[function[greet]]}}}/>
+
+<<greet>>
++
+title: ExpectedResult
+
+hello world<p>hello world</p>hello <p>hello </p>

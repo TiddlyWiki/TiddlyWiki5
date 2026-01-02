@@ -1,0 +1,38 @@
+created: 20140526204527418
+modified: 20241105115108927
+original-modified: 20160610082117953
+tags: Features [[Working with TiddlyWiki]]
+title: KeyboardShortcuts
+ja-title: キーボードショートカット
+type: text/vnd.tiddlywiki
+
+キーボードショートカットは、<<.wlink KeyboardWidget>>ウィジェットや[[キーボードショートカットTiddler|Keyboard Shortcut Tiddler]]で使用できます
+
+<<.tip """<$macrocall $name=".wlink" to="KeyboardWidget"/>ウィジェットを使用すると、`input`や`textarea`フィールド内でショートカットアクセスができるようになります
+<br>
+[[キーボードショートカットTiddler|Keyboard Shortcut Tiddler]]で定義されたショートカットにより、グローバルにショートカットアクセスできるようになります""">>
+
+!!! 独自のショートカットを作成するための詳しい説明については、[[キーボードショートカットの作成方法|How to create keyboard shortcuts]]を参照してください
+
+キーボードショートカットは、テキストエディター内の一般的な編集操作に使用できます: 
+
+* キーボードフォーカスを含むドラフトTiddlerでの変更の確定(デフォルトは<kbd>ctrl-Enter</kbd>)
+* キーボードフォーカスを含むドラフトTiddlerでの変更のキャンセル(デフォルトは<kbd>escape</kbd>)
+* Tiddler編集ツールバーの書式設定操作(ツールチップを参照)
+
+<<.from-version 5.1.18>> : 新しい''グローバル''キーボードショートカット:
+
+|!動作 |!デフォルトショートカット|
+|新しいTiddlerの作成 |<kbd>alt-N</kbd> |
+|新しいジャーナルの作成 |<kbd>alt-J</kbd> |
+|新しい画像の作成 |<kbd>alt-I</kbd> |
+|サイドバー検索をフォーカス |<<.from-version 5.1.20>><kbd>ctrl-shift-F</kbd> |
+|サイドバー表示のトグル |<<.from-version 5.1.20>><kbd>shift-alt-S</kbd> |
+|高度な検索 |<<.from-version 5.1.20>><kbd>ctrl-shift-A</kbd> |
+
+現在のショートカットは、[[コントロールパネル|$:/ControlPanel]] <<.icon $:/core/images/options-button>>の"キーボードショートカット"タブで確認とカスタマイズができます
+
+!! 特殊キー
+
+; エディターでタグの追加
+: <<.from-version 5.1.14>> : 新しいタグ入力で、<kbd>Enter</kbd>を押すとタグが追加されます

@@ -1,0 +1,19 @@
+created: 20241201235746062
+description: Accurate word count
+tags: $:/tags/wiki-test-spec-failing
+title: TestCases/WikifyWidget/WordCount/Fail
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+If a tiddler transclude some content, or use widgets to generate content, filters that try to calculate the word count won’t be accurate: they will instead count the raw text words.
++
+title: Output
+
+Word count = <$count filter="[{lorem}split[ ]!is[blank]]"/>
++
+title: lorem
+text: <$list filter="[range[1],[3]]"><$text text=" word "/></$list>
++
+title: ExpectedResult
+text: <p>Word count = 3</p>

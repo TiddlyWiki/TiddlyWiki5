@@ -1,4 +1,4 @@
-caption: tw5-server
+caption: tw5server
 color: #70c9a0
 community-author: hffqyd
 created: 20230302011710789
@@ -10,27 +10,23 @@ tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving
 title: Saving via a Minimal Web Server
 type: text/vnd.tiddlywiki
 
-A local server for TiddlyWiki5 that saves and backups wikis, inspired by
+A local mini binary server for TiddlyWiki5 that saves and backups wikis and uploads files for TiddlyWiki, inspired by
 [[tw5-server.rb | https://gist.github.com/jimfoltz/ee791c1bdd30ce137bc23cce826096da]].
 
-tw5-server provides features of:
+tw5server provides features of:
 
 * Server for TiddlyWiki5, as well as other files (e.g. images used in TW5 `[img[images/*.png]]`);
 * Easy to save wiki via browsers;
 * Backup wiki in compress format (.gz), to save disk space;
 * Auto clean backups: keep one newest per previous month, keep all backups in current month.
-* Upload files/images to server, for use in tiddlywiki as external links.
-* Offer binary executable for Linux, macos and windows.
+* Upload files/images to server via pressing button or drag-and-drop, for use in tiddlywiki as external links.
+* Offer binary executable for Linux, macos, Android and windows.
 
-Download executable script and binary at the github.com [[tw5-server|https://github.com/hffqyd/tw5-server]].
+Download executable binary at the github.com [[tw5-server|https://github.com/hffqyd/tw5-server]].
 
 ! Usage
 
 ```bash
-# python script:
-python tw5-server.py -p 8000 -d ./ -b backup_dir
-
-# binary file:
 tw5server -a:192.168.0.10 -p:8000 -d:./ -b:backup
 
 -h usage help
@@ -44,6 +40,7 @@ Backups auto-clean strategy:
 Keep all backups in current month, keep only the newest one for previous months.
 ```
 
-In Unix/Linux, just excute `./tw5-server.py` (with `chmod +x tw5-server.py`).
+In Unix/Linux, maybe first `chmod +x tw5server`), then run it.
+For Android version, run it in Termux, or some other terminals.
 
 Then go to http://localhost:8000 (or other address:port specified in command) in your web browser, and click on your wiki html file.

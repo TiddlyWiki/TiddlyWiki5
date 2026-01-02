@@ -6,10 +6,7 @@ module-type: widget
 Browse widget for browsing for files to import
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -42,6 +39,9 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	if(this.tooltip) {
 		domNode.setAttribute("title",this.tooltip);
 	}
+	if(this.tabIndex) {
+		domNode.setAttribute("tabindex", this.tabIndex);
+	}
 	// Nw.js supports "nwsaveas" to force a "save as" dialogue that allows a new or existing file to be selected
 	if(this.nwsaveas) {
 		domNode.setAttribute("nwsaveas",this.nwsaveas);
@@ -55,6 +55,9 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	}
 	if(this.nwdirectory) {
 		domNode.setAttribute("nwdirectory",this.nwdirectory);
+	}
+	if(this.isDisabled === "yes") {
+		domNode.setAttribute("disabled", true);
 	}
 	// Add a click event handler
 	domNode.addEventListener("change",function (event) {
@@ -70,6 +73,11 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 		}
 		return false;
 	},false);
+	// Assign data- attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -89,15 +97,20 @@ BrowseWidget.prototype.execute = function() {
 	this.accept = this.getAttribute("accept");
 	this.webkitdirectory = this.getAttribute("webkitdirectory");
 	this.nwdirectory = this.getAttribute("nwdirectory");
+	this.tabIndex = this.getAttribute("tabindex");
+	this.isDisabled = this.getAttribute("disabled", "no");
 };
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 BrowseWidget.prototype.refresh = function(changedTiddlers) {
+	var changedAttributes = this.computeAttributes();
+	if($tw.utils.count(changedAttributes) > 0) {
+		this.refreshSelf();
+		return true;	
+	}
 	return false;
 };
 
 exports.browse = BrowseWidget;
-
-})();

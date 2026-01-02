@@ -1,0 +1,12 @@
+created: 20170703193252423
+modified: 20241222101154614
+original-modified: 20170703193353918
+tags: OfficialPlugins
+title: Amazon Web Services Plugin
+ja-title: アマゾンウェブサービスプラグイン
+type: text/vnd.tiddlywiki
+
+アマゾンウェブサービスプラグインは、アマゾンウェブサービスで動かすためのいくつかのツールを提供します:
+
+* TiddlyWikiをAWS Lambda関数として実行できるZIPファイル内の単一のJavaScriptファイルとして保存するためのテンプレート。この形式では、TiddlyWikiは、スタンドアロンのHTMLファイル構成と同様に、コードとデータの両方を含む自己完結型の単一ファイルです
+* TiddlyWikiのNode.js構成とLambda構成の両方で、AWSサービスで操作するために使用できるコマンド

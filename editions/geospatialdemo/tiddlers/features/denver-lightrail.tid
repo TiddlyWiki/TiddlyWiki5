@@ -1,0 +1,30 @@
+title: $:/geospatialdemo/features/denver/lightrail
+caption: Denver light rail stops as ~GeoJSON points
+tags: $:/tags/GeoFeature
+type: application/json
+color: red
+
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "popupContent": "18th & California Light Rail Stop"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-104.98999178409576, 39.74683938093904]
+            }
+        },{
+            "type": "Feature",
+            "properties": {
+                "popupContent": "20th & Welton Light Rail Stop"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-104.98689115047453, 39.747924136466565]
+            }
+        }
+    ]
+}

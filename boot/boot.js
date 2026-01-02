@@ -8,6 +8,8 @@ On the server this file is executed directly to boot TiddlyWiki. In the browser,
 
 \*/
 
+/* eslint-disable @stylistic/indent */
+
 var _boot = (function($tw) {
 
 /*jslint node: true, browser: true */
@@ -44,12 +46,8 @@ $tw.utils.hop = function(object,property) {
 	return object ? Object.prototype.hasOwnProperty.call(object,property) : false;
 };
 
-/*
-Determine if a value is an array
-*/
-$tw.utils.isArray = function(value) {
-	return Object.prototype.toString.call(value) == "[object Array]";
-};
+/** @deprecated Use Array.isArray instead  */
+$tw.utils.isArray = value => Array.isArray(value);
 
 /*
 Check if an array is equal by value and by reference.
@@ -128,35 +126,22 @@ $tw.utils.pushTop = function(array,value) {
 	return array;
 };
 
-/*
-Determine if a value is a date
-*/
-$tw.utils.isDate = function(value) {
-	return Object.prototype.toString.call(value) === "[object Date]";
-};
+/** @deprecated Use instanceof Date instead */
+$tw.utils.isDate = value => value instanceof Date;
 
-/*
-Iterate through all the own properties of an object or array. Callback is invoked with (element,title,object)
-*/
+/** @deprecated Use array iterative methods instead */
 $tw.utils.each = function(object,callback) {
-	var next,f,length;
 	if(object) {
-		if(Object.prototype.toString.call(object) == "[object Array]") {
-			for (f=0, length=object.length; f<length; f++) {
-				next = callback(object[f],f,object);
-				if(next === false) {
-					break;
-				}
-		    }
+		if(Array.isArray(object)) {
+			object.every((element,index,array) => {
+				const next = callback(element,index,array);
+				return next !== false;
+			});
 		} else {
-			var keys = Object.keys(object);
-			for (f=0, length=keys.length; f<length; f++) {
-				var key = keys[f];
-				next = callback(object[key],key,object);
-				if(next === false) {
-					break;
-				}
-			}
+			Object.entries(object).every(entry => {
+				const next = callback(entry[1], entry[0], object);
+				return next !== false;
+			});
 		}
 	}
 };
@@ -177,6 +162,7 @@ document: defaults to current document
 eventListeners: array of event listeners (this option won't work until $tw.utils.addEventListeners() has been loaded)
 */
 $tw.utils.domMaker = function(tag,options) {
+	var options = options || {};
 	var doc = options.document || document;
 	var element = doc.createElementNS(options.namespace || "http://www.w3.org/1999/xhtml",tag);
 	if(options["class"]) {
@@ -218,9 +204,34 @@ $tw.utils.error = function(err) {
 			heading = dm("h1",{text: errHeading}),
 			prompt = dm("div",{text: promptMsg, "class": "tc-error-prompt"}),
 			message = dm("div",{text: err, "class":"tc-error-message"}),
-			button = dm("div",{children: [dm("button",{text: ( $tw.language == undefined ? "close" : $tw.language.getString("Buttons/Close/Caption") )})], "class": "tc-error-prompt"}),
-			form = dm("form",{children: [heading,prompt,message,button], "class": "tc-error-form"});
+			closeButton = dm("div",{children: [dm("button",{text: ( $tw.language == undefined ? "close" : $tw.language.getString("Buttons/Close/Caption") )})], "class": "tc-error-prompt"}),
+			downloadButton = dm("div",{children: [dm("button",{text: ( $tw.language == undefined ? "download tiddlers" : $tw.language.getString("Buttons/EmergencyDownload/Caption") )})], "class": "tc-error-prompt"}),
+			form = dm("form",{children: [heading,prompt,downloadButton,message,closeButton], "class": "tc-error-form"});
 		document.body.insertBefore(form,document.body.firstChild);
+		downloadButton.addEventListener("click",function(event) {
+			if($tw && $tw.wiki) {
+				var tiddlers = [];
+				$tw.wiki.each(function(tiddler,title) {
+					tiddlers.push(tiddler.fields);
+				});
+				var link = dm("a"),
+					text = JSON.stringify(tiddlers);
+				if(Blob !== undefined) {
+					var blob = new Blob([text], {type: "application/json"});
+					link.setAttribute("href", URL.createObjectURL(blob));
+				} else {
+					link.setAttribute("href","data:application/json," + encodeURIComponent(text));
+				}
+				link.setAttribute("download","emergency-tiddlers-" + (new Date()) + ".json");
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link);
+			} else {
+				alert("Emergency tiddler download is not available");
+			}
+			event.preventDefault();
+			return false;
+		},true);
 		form.addEventListener("submit",function(event) {
 			document.body.removeChild(form);
 			event.preventDefault();
@@ -249,7 +260,7 @@ Extend an object with the properties from a list of source objects
 $tw.utils.extend = function(object /*, sourceObjectList */) {
 	$tw.utils.each(Array.prototype.slice.call(arguments,1),function(source) {
 		if(source) {
-			for (var p in source) {
+			for(var p in source) {
 				object[p] = source[p];
 			}
 		}
@@ -263,7 +274,7 @@ Fill in any null or undefined properties of an object with the properties from a
 $tw.utils.deepDefaults = function(object /*, sourceObjectList */) {
 	$tw.utils.each(Array.prototype.slice.call(arguments,1),function(source) {
 		if(source) {
-			for (var p in source) {
+			for(var p in source) {
 				if(object[p] === null || object[p] === undefined) {
 					object[p] = source[p];
 				}
@@ -305,32 +316,13 @@ $tw.utils.htmlDecode = function(s) {
 	return s.toString().replace(/&lt;/mg,"<").replace(/&nbsp;/mg,"\xA0").replace(/&gt;/mg,">").replace(/&quot;/mg,"\"").replace(/&amp;/mg,"&");
 };
 
-/*
-Get the browser location.hash. We don't use location.hash because of the way that Firefox auto-urldecodes it (see http://stackoverflow.com/questions/1703552/encoding-of-window-location-hash)
-*/
-$tw.utils.getLocationHash = function() {
-	var href = window.location.href;
-	var idx = href.indexOf('#');
-	if(idx === -1) {
-		return "#";
-	} else if(href.substr(idx + 1,1) === "#" ||  href.substr(idx + 1,3) === "%23") {
-		// Special case: ignore location hash if it itself starts with a #
-		return "#";
-	} else {
-		return href.substring(idx);
-	}
-};
+/** @deprecated Use window.location.hash instead.  */
+$tw.utils.getLocationHash = () => window.location.hash;
 
-/*
-Pad a string to a given length with "0"s. Length defaults to 2
-*/
-$tw.utils.pad = function(value,length) {
-	length = length || 2;
-	var s = value.toString();
-	if(s.length < length) {
-		s = "000000000000000000000000000".substr(0,length - s.length) + s;
-	}
-	return s;
+/** @deprecated Pad a string to a given length with "0"s. Length defaults to 2 */
+$tw.utils.pad = function(value,length = 2) {
+	const s = value.toString();
+	return s.padStart(length, "0");
 };
 
 // Convert a date into UTC YYYYMMDDHHMMSSmmm format
@@ -360,8 +352,8 @@ $tw.utils.parseDate = function(value) {
 				parseInt(value.substr(10,2)||"00",10),
 				parseInt(value.substr(12,2)||"00",10),
 				parseInt(value.substr(14,3)||"000",10)));
-		  d.setUTCFullYear(year); // See https://stackoverflow.com/a/5870822
-		  return d;
+		d.setUTCFullYear(year); // See https://stackoverflow.com/a/5870822
+		return d;
 	} else if($tw.utils.isDate(value)) {
 		return value;
 	} else {
@@ -569,10 +561,22 @@ $tw.utils.getTypeEncoding = function(ext) {
 	return typeInfo ? typeInfo.encoding : "utf8";
 };
 
+var globalCheck =[
+	"  Object.defineProperty(Object.prototype, '__temp__', {",
+	"    get: function () { return this; },",
+	"    configurable: true",
+	"  });",
+	"  if(Object.keys(__temp__).length){",
+	"    console.log(\"Warning: Global assignment detected\",Object.keys(__temp__));",
+	"    delete Object.prototype.__temp__;",
+	"  }",
+	"  delete Object.prototype.__temp__;",
+].join('\n');
+
 /*
 Run code globally with specified context variables in scope
 */
-$tw.utils.evalGlobal = function(code,context,filename) {
+$tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	var contextCopy = $tw.utils.extend(Object.create(null),context);
 	// Get the context variables as a pair of arrays of names and values
 	var contextNames = [], contextValues = [];
@@ -581,25 +585,38 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 		contextValues.push(value);
 	});
 	// Add the code prologue and epilogue
-	code = "(function(" + contextNames.join(",") + ") {(function(){\n" + code + "\n;})();\nreturn exports;\n})\n";
+	code = [
+		"(function(" + contextNames.join(",") + ") {",
+		"  (function(){" + code + "\n;})();\n",
+		(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : "",
+		"\nreturn exports;\n",
+		"})"
+	].join("");
+
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
-		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
+		fn = window["eval"](code + "\n\n//# sourceURL=" + filename); // eslint-disable-line no-eval -- See https://github.com/TiddlyWiki/TiddlyWiki5/issues/6839
 	} else {
-		fn = vm.runInThisContext(code,filename);
+		if(sandbox){
+			fn = vm.runInContext(code,sandbox,filename)
+		} else {
+			fn = vm.runInThisContext(code,filename);
+		}
 	}
 	// Call the function and return the exports
 	return fn.apply(null,contextValues);
 };
-
+$tw.utils.sandbox = !$tw.browser ? vm.createContext({}) : undefined;
 /*
 Run code in a sandbox with only the specified context variables in scope
 */
-$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename) {
-	var sandbox = $tw.utils.extend(Object.create(null),context);
-	vm.runInNewContext(code,sandbox,filename);
-	return sandbox.exports;
+$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename,allowGlobals) {
+	return $tw.utils.evalGlobal(
+		code,context,filename,
+		allowGlobals ? vm.createContext({}) : $tw.utils.sandbox,
+		allowGlobals
+	);
 };
 
 /*
@@ -748,12 +765,13 @@ the password, and to encrypt/decrypt a block of text
 $tw.utils.Crypto = function() {
 	var sjcl = $tw.node ? (global.sjcl || require("./sjcl.js")) : window.sjcl,
 		currentPassword = null,
-		callSjcl = function(method,inputText,password) {
+		callSjcl = function(method,inputText,password,options) {
+			options = options || {};
 			password = password || currentPassword;
 			var outputText;
 			try {
 				if(password) {
-					outputText = sjcl[method](password,inputText);
+					outputText = sjcl[method](password,inputText,options);
 				}
 			} catch(ex) {
 				console.log("Crypto error:" + ex);
@@ -761,6 +779,7 @@ $tw.utils.Crypto = function() {
 			}
 			return outputText;
 		};
+	$tw.sjcl = sjcl;
 	this.setPassword = function(newPassword) {
 		currentPassword = newPassword;
 		this.updateCryptoStateTiddler();
@@ -778,7 +797,8 @@ $tw.utils.Crypto = function() {
 		return !!currentPassword;
 	}
 	this.encrypt = function(text,password) {
-		return callSjcl("encrypt",text,password);
+		// set default ks:256 -- see: http://bitwiseshiftleft.github.io/sjcl/doc/convenience.js.html
+		return callSjcl("encrypt",text,password,{v:1,iter:10000,ks:256,ts:64,mode:"ccm",adata:"",cipher:"aes"});
 	};
 	this.decrypt = function(text,password) {
 		return callSjcl("decrypt",text,password);
@@ -841,8 +861,8 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 	} else {
 		/*
 		CommonJS optional require.main property:
-		 In a browser we offer a fake main module which points back to the boot function
-		 (Theoretically, this may allow TW to eventually load itself as a module in the browser)
+			In a browser we offer a fake main module which points back to the boot function
+			(Theoretically, this may allow TW to eventually load itself as a module in the browser)
 		*/
 		Object.defineProperty(sandbox.require, "main", {
 			value: (typeof(require) !== "undefined") ? require.main : {TiddlyWiki: _boot},
@@ -884,9 +904,9 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				moduleInfo.exports = moduleInfo.definition;
 			}
 		} catch(e) {
-			if (e instanceof SyntaxError) {
+			if(e instanceof SyntaxError) {
 				var line = e.lineNumber || e.line; // Firefox || Safari
-				if (typeof(line) != "undefined" && line !== null) {
+				if(typeof(line) != "undefined" && line !== null) {
 					$tw.utils.error("Syntax error in boot module " + name + ":" + line + ":\n" + e.stack);
 				} else if(!$tw.browser) {
 					// this is the only way to get node.js to display the line at which the syntax error appeared,
@@ -900,7 +920,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				}
 			} else {
 				// line number should be included in e.stack for runtime errors
-				$tw.utils.error("Error executing boot module " + name + ": " + JSON.stringify(e) + "\n\n" + e.stack);
+				$tw.utils.error("Error executing boot module " + name + ": " + String(e) + "\n\n" + e.stack);
 			}
 		}
 	}
@@ -1124,7 +1144,7 @@ $tw.Wiki = function(options) {
 		shadowTiddlerTitles = null,
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
-				shadowTiddlerTitles = Object.keys(shadowTiddlers);
+				shadowTiddlerTitles = Object.keys(shadowTiddlers).sort(function(a,b) {return a.localeCompare(b);});
 			}
 			return shadowTiddlerTitles;
 		},
@@ -1381,7 +1401,7 @@ $tw.Wiki = function(options) {
 			checkTiddler = function(tiddler,title) {
 				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] && (!pluginType || tiddler.fields["plugin-type"] === pluginType)) {
 					var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
-					if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
+					if(title === "$:/core" || title === "$:/core-server" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
 						self.unregisterPluginTiddlers(null,[title]); // Unregister the plugin if it's already registered
 						pluginTiddlers.push(tiddler);
 						registeredTitles.push(tiddler.fields.title);
@@ -1418,17 +1438,15 @@ $tw.Wiki = function(options) {
 	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers
 	this.unpackPluginTiddlers = function() {
 		var self = this;
-		// Sort the plugin titles by the `plugin-priority` field
-		pluginTiddlers.sort(function(a,b) {
-			if("plugin-priority" in a.fields && "plugin-priority" in b.fields) {
-				return a.fields["plugin-priority"] - b.fields["plugin-priority"];
-			} else if("plugin-priority" in a.fields) {
+		// Sort the plugin titles by the `plugin-priority` field, if this field is missing, default to 1
+		pluginTiddlers.sort(function(a, b) {
+			var priorityA = "plugin-priority" in a.fields ? a.fields["plugin-priority"] : 1;
+			var priorityB = "plugin-priority" in b.fields ? b.fields["plugin-priority"] : 1;
+			if (priorityA !== priorityB) {
+				return priorityA - priorityB;
+			} else if (a.fields.title < b.fields.title) {
 				return -1;
-			} else if("plugin-priority" in b.fields) {
-				return +1;
-			} else if(a.fields.title < b.fields.title) {
-				return -1;
-			} else if(a.fields.title === b.fields.title) {
+			} else if (a.fields.title === b.fields.title) {
 				return 0;
 			} else {
 				return +1;
@@ -1480,8 +1498,9 @@ Define all modules stored in ordinary tiddlers
 */
 $tw.Wiki.prototype.defineTiddlerModules = function() {
 	this.each(function(tiddler,title) {
-		if(tiddler.hasField("module-type")) {
-			switch (tiddler.fields.type) {
+		// Modules in draft tiddlers are disabled
+		if(tiddler.hasField("module-type") && (!tiddler.hasField("draft.of"))) {
+			switch(tiddler.fields.type) {
 				case "application/javascript":
 					// We only define modules that haven't already been defined, because in the browser modules in system tiddlers are defined in inline script
 					if(!$tw.utils.hop($tw.modules.titles,tiddler.fields.title)) {
@@ -1507,6 +1526,11 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 	this.eachShadow(function(tiddler,title) {
 		// Don't define the module if it is overidden by an ordinary tiddler
 		if(!self.tiddlerExists(title) && tiddler.hasField("module-type")) {
+			if(tiddler.hasField("draft.of")) {
+				// Report a fundamental problem
+				console.warn(`TiddlyWiki: Plugins should not contain tiddlers with a 'draft.of' field: ${tiddler.fields.title}`);
+				return;
+			}
 			// Define the module
 			$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
 		}
@@ -1852,8 +1876,16 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 		extensionInfo = $tw.utils.getFileExtensionInfo(ext),
 		type = extensionInfo ? extensionInfo.type : null,
 		typeInfo = type ? $tw.config.contentTypeInfo[type] : null,
-		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8"),
-		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
+		fileSize = fs.statSync(filepath).size,
+		data;
+	if(fileSize > $tw.config.maxEditFileSize) {
+		data = "File " + filepath + " not loaded because it is too large";
+		console.log("Warning: " + data);
+		ext = ".txt";
+	} else {
+		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8");
+	}
+	var tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
 		metadata = $tw.loadMetadataForFile(filepath);
 	if(metadata) {
 		if(type === "application/json") {
@@ -1918,22 +1950,41 @@ filepath: pathname of the directory containing the specification file
 $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 	var tiddlers = [];
 	// Read the specification
-	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
+	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"), function(e) {
+		console.log("Warning: tiddlywiki.files in " + filepath + " invalid: " + e.message);
+		return {};
+	});
+
 	// Helper to process a file
-	var processFile = function(filename,isTiddlerFile,fields,isEditableFile) {
+	var processFile = function(filename,isTiddlerFile,fields,isEditableFile,rootPath) {
 		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
 			type = (extInfo || {}).type || fields.type || "text/plain",
 			typeInfo = $tw.config.contentTypeInfo[type] || {},
 			pathname = path.resolve(filepath,filename),
-			text = fs.readFileSync(pathname,typeInfo.encoding || "utf8"),
 			metadata = $tw.loadMetadataForFile(pathname) || {},
-			fileTiddlers;
+			fileTooLarge = false,
+			text, fileTiddlers;
+
+		if("_canonical_uri" in fields) {
+			text = "";
+		} else if(fs.statSync(pathname).size > $tw.config.maxEditFileSize) {
+			var msg = "File " + pathname + " not loaded because it is too large";
+			console.log("Warning: " + msg);
+			fileTooLarge = true;
+			text = isTiddlerFile ? msg : "";
+		} else {
+			text = fs.readFileSync(pathname,typeInfo.encoding || "utf8");
+		}
+
 		if(isTiddlerFile) {
-			fileTiddlers = $tw.wiki.deserializeTiddlers(path.extname(pathname),text,metadata) || [];
+			fileTiddlers = $tw.wiki.deserializeTiddlers(fileTooLarge ? ".txt" : path.extname(pathname),text,metadata) || [];
 		} else {
 			fileTiddlers =  [$tw.utils.extend({text: text},metadata)];
 		}
 		var combinedFields = $tw.utils.extend({},fields,metadata);
+		if(fileTooLarge && isTiddlerFile) {
+			delete combinedFields.type;    // type altered
+		}
 		$tw.utils.each(fileTiddlers,function(tiddler) {
 			$tw.utils.each(combinedFields,function(fieldInfo,name) {
 				if(typeof fieldInfo === "string" || $tw.utils.isArray(fieldInfo)) {
@@ -1941,6 +1992,12 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 				} else {
 					var value = tiddler[name];
 					switch(fieldInfo.source) {
+						case "subdirectories":
+							value = $tw.utils.stringifyList(path.relative(rootPath, filename).split(path.sep).slice(0, -1));
+							break;
+						case "filepath":
+							value = path.relative(rootPath, filename).split(path.sep).join('/');
+							break;
 						case "filename":
 							value = path.basename(filename);
 							break;
@@ -1957,10 +2014,10 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 							value = path.extname(filename);
 							break;
 						case "created":
-							value = new Date(fs.statSync(pathname).birthtime);
+							value = $tw.utils.stringifyDate(new Date(fs.statSync(pathname).birthtime));
 							break;
 						case "modified":
-							value = new Date(fs.statSync(pathname).mtime);
+							value = $tw.utils.stringifyDate(new Date(fs.statSync(pathname).mtime));
 							break;
 					}
 					if(fieldInfo.prefix) {
@@ -1985,7 +2042,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 		arrayOfFiles = arrayOfFiles || [];
 		var files = fs.readdirSync(dirPath);
 		files.forEach(function(file) {
-			if (recurse && fs.statSync(dirPath + path.sep + file).isDirectory()) {
+			if(recurse && fs.statSync(dirPath + path.sep + file).isDirectory()) {
 				arrayOfFiles = getAllFiles(dirPath + path.sep + file, recurse, arrayOfFiles);
 			} else if(fs.statSync(dirPath + path.sep + file).isFile()){
 				arrayOfFiles.push(path.join(dirPath, path.sep, file));
@@ -2002,6 +2059,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 		} else if(tidInfo.suffix) {
 			tidInfo.fields.text = {suffix: tidInfo.suffix};
 		}
+		tidInfo.fields = tidInfo.fields || {};
 		processFile(tidInfo.file,tidInfo.isTiddlerFile,tidInfo.fields);
 	});
 	// Process any listed directories
@@ -2023,7 +2081,8 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 					var thisPath = path.relative(filepath, files[t]),
 					filename = path.basename(thisPath);
 					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
-						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile);
+						dirSpec.fields = dirSpec.fields || {};
+						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile,dirSpec.path);
 					}
 				}
 			} else {
@@ -2048,7 +2107,11 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			console.log("Warning: missing plugin.info file in " + filepath);
 			return null;
 		}
-		var pluginInfo = $tw.utils.parseJSONSafe(fs.readFileSync(infoPath,"utf8"));
+		var pluginInfo = $tw.utils.parseJSONSafe(fs.readFileSync(infoPath,"utf8"),function() {return null;});
+		if(!pluginInfo) {
+			console.log("warning: invalid JSON in plugin.info file at " + infoPath);
+			pluginInfo = {};
+		}
 		// Read the plugin files
 		var pluginFiles = $tw.loadTiddlersFromPath(filepath,excludeRegExp);
 		// Save the plugin tiddlers into the plugin info
@@ -2126,13 +2189,16 @@ Returns an array of search paths
 */
 $tw.getLibraryItemSearchPaths = function(libraryPath,envVar) {
 	var pluginPaths = [path.resolve($tw.boot.corePath,libraryPath)],
+		env;
+	if(envVar) {
 		env = process.env[envVar];
-	if(env) {
-		env.split(path.delimiter).map(function(item) {
-			if(item) {
-				pluginPaths.push(item);
-			}
-		});
+		if(env) {
+			env.split(path.delimiter).map(function(item) {
+				if(item) {
+					pluginPaths.push(item);
+				}
+			});
+		}
 	}
 	return pluginPaths;
 };
@@ -2165,7 +2231,11 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		pluginFields;
 	// Bail if we don't have a wiki info file
 	if(fs.existsSync(wikiInfoPath)) {
-		wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"));
+		wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"),function() {return null;});
+		if(!wikiInfo) {
+			console.log("warning: invalid JSON in tiddlywiki.info file at " + wikiInfoPath);
+			wikiInfo = {};
+		}
 	} else {
 		return null;
 	}
@@ -2214,7 +2284,7 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		}
 		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
 	});
-	if ($tw.boot.wikiPath == wikiPath) {
+	if($tw.boot.wikiPath == wikiPath) {
 		// Save the original tiddler file locations if requested
 		var output = {}, relativePath, fileInfo;
 		for(var title in $tw.boot.files) {
@@ -2275,6 +2345,7 @@ $tw.loadTiddlersNode = function() {
 	});
 	// Load the core tiddlers
 	$tw.wiki.addTiddler($tw.loadPluginFolder($tw.boot.corePath));
+	$tw.wiki.addTiddler($tw.loadPluginFolder($tw.boot.coreServerPath));
 	// Load any extra plugins
 	$tw.utils.each($tw.boot.extraPlugins,function(name) {
 		if(name.charAt(0) === "+") { // Relative path to plugin
@@ -2348,6 +2419,7 @@ $tw.boot.initStartup = function(options) {
 		// System paths and filenames
 		$tw.boot.bootPath = options.bootPath || path.dirname(module.filename);
 		$tw.boot.corePath = path.resolve($tw.boot.bootPath,"../core");
+		$tw.boot.coreServerPath = path.resolve($tw.boot.bootPath,"../core-server");
 		// If there's no arguments then default to `--help`
 		if($tw.boot.argv.length === 0) {
 			$tw.boot.argv = ["--help"];
@@ -2396,25 +2468,32 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("image/webp","base64",".webp",{flags:["image"]});
 	$tw.utils.registerFileType("image/heic","base64",".heic",{flags:["image"]});
 	$tw.utils.registerFileType("image/heif","base64",".heif",{flags:["image"]});
+	$tw.utils.registerFileType("image/avif","base64",".avif",{flags:["image"]});
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
 	$tw.utils.registerFileType("image/vnd.microsoft.icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
-	$tw.utils.registerFileType("application/font-woff","base64",".woff");
-	$tw.utils.registerFileType("application/x-font-ttf","base64",".woff");
-	$tw.utils.registerFileType("application/font-woff2","base64",".woff2");
+	$tw.utils.registerFileType("application/wasm","base64",".wasm");
+	$tw.utils.registerFileType("font/woff","base64",".woff");
+	$tw.utils.registerFileType("font/woff2","base64",".woff2");
+	$tw.utils.registerFileType("font/ttf","base64",".ttf");
+	$tw.utils.registerFileType("font/otf","base64",".otf");
 	$tw.utils.registerFileType("audio/ogg","base64",".ogg");
 	$tw.utils.registerFileType("audio/mp4","base64",[".mp4",".m4a"]);
 	$tw.utils.registerFileType("video/ogg","base64",[".ogm",".ogv",".ogg"]);
 	$tw.utils.registerFileType("video/webm","base64",".webm");
 	$tw.utils.registerFileType("video/mp4","base64",".mp4");
 	$tw.utils.registerFileType("audio/mp3","base64",".mp3");
-	$tw.utils.registerFileType("audio/mpeg","base64");
+	$tw.utils.registerFileType("audio/mpeg","base64",[".mp3",".m2a",".mp2",".mpa",".mpg",".mpga"]);
 	$tw.utils.registerFileType("text/markdown","utf8",[".md",".markdown"],{deserializerType:"text/x-markdown"});
 	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
 	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.wordprocessingml.document","base64",".docx");
+	$tw.utils.registerFileType("application/msword","base64",".doc");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","base64",".xlsx");
+	$tw.utils.registerFileType("application/excel","base64",".xls");
+	$tw.utils.registerFileType("application/vnd.ms-excel","base64",".xls");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.presentationml.presentation","base64",".pptx");
+	$tw.utils.registerFileType("application/mspowerpoint","base64",".ppt");
 	$tw.utils.registerFileType("text/x-bibtex","utf8",".bib",{deserializerType:"application/x-bibtex"});
 	$tw.utils.registerFileType("application/x-bibtex","utf8",".bib");
 	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
@@ -2465,10 +2544,10 @@ $tw.boot.execStartup = function(options){
 	if($tw.safeMode) {
 		$tw.wiki.processSafeMode();
 	}
-	// Register typed modules from the tiddlers we've just loaded
-	$tw.wiki.defineTiddlerModules();
-	// And any modules within plugins
+	// Register typed modules from the tiddlers we've just loaded and any modules within plugins
+	// Tiddlers should appear last so that they may overwrite shadows during module registration
 	$tw.wiki.defineShadowModules();
+	$tw.wiki.defineTiddlerModules();
 	// Make sure the crypto state tiddler is up to date
 	if($tw.crypto) {
 		$tw.crypto.updateCryptoStateTiddler();
@@ -2537,11 +2616,13 @@ $tw.boot.executeNextStartupTask = function(callback) {
 			$tw.boot.log(s.join(" "));
 			// Execute task
 			if(!$tw.utils.hop(task,"synchronous") || task.synchronous) {
-				task.startup();
-				if(task.name) {
-					$tw.boot.executedStartupModules[task.name] = true;
+				const thenable = task.startup();
+				if(thenable && typeof thenable.then === "function"){
+					thenable.then(asyncTaskCallback);
+					return true;
+				} else {
+					return asyncTaskCallback();
 				}
-				return $tw.boot.executeNextStartupTask(callback);
 			} else {
 				task.startup(asyncTaskCallback);
 				return true;
@@ -2563,14 +2644,14 @@ $tw.boot.doesTaskMatchPlatform = function(taskModule) {
 	var platforms = taskModule.platforms;
 	if(platforms) {
 		for(var t=0; t<platforms.length; t++) {
-			switch (platforms[t]) {
+			switch(platforms[t]) {
 				case "browser":
-					if ($tw.browser) {
+					if($tw.browser) {
 						return true;
 					}
 					break;
 				case "node":
-					if ($tw.node) {
+					if($tw.node) {
 						return true;
 					}
 					break;
@@ -2636,12 +2717,24 @@ $tw.hooks.addHook = function(hookName,definition) {
 };
 
 /*
+Delete hooks from the hashmap
+*/
+$tw.hooks.removeHook = function(hookName,definition) {
+	if($tw.utils.hop($tw.hooks.names,hookName)) {
+		var p = $tw.hooks.names[hookName].indexOf(definition);
+		if(p !== -1) {
+			$tw.hooks.names[hookName].splice(p, 1);
+		}
+	}
+};
+
+/*
 Invoke the hook by key
 */
 $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 	var args = Array.prototype.slice.call(arguments,1);
 	if($tw.utils.hop($tw.hooks.names,hookName)) {
-		for (var i = 0; i < $tw.hooks.names[hookName].length; i++) {
+		for(var i = 0; i < $tw.hooks.names[hookName].length; i++) {
 			args[0] = $tw.hooks.names[hookName][i].apply(null,args);
 		}
 	}
@@ -2673,6 +2766,8 @@ if($tw.browser && !$tw.boot.suppressBoot) {
 return $tw;
 
 });
+
+/* eslint-enable @stylistic/indent */
 
 if(typeof(exports) !== "undefined") {
 	exports.TiddlyWiki = _boot;

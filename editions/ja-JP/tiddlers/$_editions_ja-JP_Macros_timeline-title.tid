@@ -1,0 +1,12 @@
+created: 20141212105632762
+modified: 20240929104207215
+original-modified: 20141212105822388
+tags: $:/tags/Macro
+title: $:/editions/ja-JP/Macros/timeline-title
+type: text/vnd.tiddlywiki
+
+\define timeline-title()
+<$view field="ja-title">
+<$view field="title"/>
+</$view>
+\end

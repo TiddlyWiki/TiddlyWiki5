@@ -1,0 +1,20 @@
+title: Widgets/ViewWidget/Parameter/format-data-template
+description: Test view-widget parameters format, date and template
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: input
+modified: 20240920162221000
+
+Some text
++
+title: Output
+
+<!-- This can not be tested atm, since test-server timezone can be different
+<$view tiddler="input" field="modified" format="date"/>
+-->
+<$view tiddler="input" field="modified" format="date" template="[UTC]DDth MMM YYYY at hh12:0mmam"/>
++
+title: ExpectedResult
+
+<p>20th September 2024 at 4:22pm</p>

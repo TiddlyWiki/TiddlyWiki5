@@ -1,11 +1,13 @@
 created: 20150124182304000
-modified: 20150125105243000
-tags: [[Filter Syntax]]
+modified: 20230710074447240
+tags: [[Filter Expression]]
 title: Filter Whitespace
 type: text/vnd.tiddlywiki
 
 <$railroad text="""
+\start none
+\end none
 {( "space" | "tab" | "linefeed" | "return" | "vertical tab" | "formfeed" )}
 """/>
 
-Whitespace characters can appear between each [[run|Filter Run]] of a [[filter expression|Filter Expression]].
+Whitespace characters can appear between each run of a [[filter expression|Filter Expression]].

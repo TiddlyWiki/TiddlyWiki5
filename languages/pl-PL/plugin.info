@@ -2,7 +2,7 @@
 	"title": "$:/languages/pl-PL",
 	"name": "pl-PL",
 	"plugin-type": "language",
-	"description": "Polish (Poland)",
+	"description": "Polski (Polska)",
 	"author": "Maurycy Zarzycki (Evidently Cube)",
 	"core-version": ">=5.2.0"
 }

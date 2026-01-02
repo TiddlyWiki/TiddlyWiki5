@@ -1,0 +1,20 @@
+title: Transclude/CustomWidget/CodeblockOverride-TextParser
+description: Test that overriding codeblock widget does not impact text parser
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\widget $codeblock(code)
+<$transclude $variable="copy-to-clipboard" src=<<code>>/>
+<$genesis $type="$codeblock" $remappable="no" code=<<code>>/>
+\end
+
+\procedure myvariable() hello
+
+<$transclude $variable="myvariable" $type="text/plain" $output="text/plain"/>
++
+title: ExpectedResult
+
+<p>hello</p>

@@ -1,0 +1,58 @@
+caption: Macro Calls
+created: 20150220182252000
+modified: 20230419103154328
+tags: WikiText Macros
+title: Macro Calls
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+This tiddler describes the different ways in which [[macros|Macros]] can be called.
+
+!! Macro Call Transclusion Shortcut
+
+To call a [[macro|Macros]], place `<<`double angle brackets`>>` around the name and any parameter values.
+
+```
+<<mymacro param:"This is the parameter value">>
+```
+
+By default, parameters are listed in the same order as in the macro's definition. A parameter can be labelled with its name and a colon to allow them to be listed in a different order.
+
+If no value is specified for a parameter, the default value given for that parameter in the [[macro definition|Macro Definitions]] is used instead. (If no default value was defined, the parameter is blank).
+
+Each parameter value can be enclosed in `'`single quotes`'`, `"`double quotes`"`, `"""`triple double quotes`"""` or `[[`double square brackets`]]`. Triple double quotes allow a value to contain almost anything. If a value contains no spaces or single or double quotes, it requires no delimiters.
+
+A more formal [[presentation|Macro Call Syntax]] of this syntax is also available.
+
+See some [[examples|Macro Calls in WikiText (Examples)]] and discussion about [[parser modes|WikiText parser mode: macro examples]].
+
+!! Macro Calls with <<.wlink TranscludeWidget>> Widget
+
+The shortcut syntax expands to the <<.wlink TranscludeWidget>> widget with the `$variable` attribute specifying the name of the macro to transclude.
+
+```
+<$transclude $variable="mymacro" param="This is the parameter value"/>
+```
+
+The widget itself offers greater flexibility than the shortcut syntax, including the ability to specify parameter values.
+
+!! Assigning Macro Calls to Attribute Values
+
+The result of a macro can be directly assigned to an attribute of a widget or HTML element. The result of the macro is not wikified, but the [[parameter substitution|Macro Parameter Handling]] is performed.
+
+```
+<div class=<<myclasses "Horizontal">>>
+...
+</div>
+```
+
+!! Using Macro Calls in Filters
+
+Macro calls can be used in filters:
+
+```
+<$list filter="[<mymacro param:'value'>]">
+...
+</$list>
+```

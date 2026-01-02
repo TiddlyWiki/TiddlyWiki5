@@ -1,0 +1,21 @@
+caption: function
+created: 20220909111836951
+modified: 20230419103154328
+op-input: a [[selection of titles|Title Selection]] passed as input to the function <<.place F>>
+op-output: the [[selection of titles|Title Selection]] returned from the function <<.place F>>
+op-parameter: first parameter is the [[function name|Functions]], subsequent parameters are passed to the function by position
+op-parameter-name: F
+op-purpose: apply a [[function|Functions]] to the input list, and return the result
+tags: [[Filter Operators]]
+title: function Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.0">> The <<.op function>> operator applies a named [[function|Functions]] to the input titles, and returns the results from the function. The function is invoked once with all of the input titles (in contrast, the [[filter Operator]] invokes its function separately for each input title).
+
+The first parameter of the <<.op function>> operator specifies the name of the function to be called. Subsequent parameters are passed to the function.
+
+The mapping between the parameters is //positional//, with each consecutive parameter specified in the function call mapped to the corresponding parameter in the function definition. Any parameters that are not provided are given their default values.
+
+<<.tip "Compare with the similar [[filter|filter Operator]] and [[subfilter|subfilter Operator]] operators which take a filter strings as their parameter instead of a named function, and does not permit parameters to be passed">>
+
+<<.operator-examples "function">>

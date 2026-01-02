@@ -6,10 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests various utility functions.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Utility tests", function() {
@@ -46,6 +43,29 @@ describe("Utility tests", function() {
 		expect($tw.utils.base64Encode(booksEmoji)).toBe("8J+Tmg==", "if surrogate pairs are correctly treated as a single code unit then base64 should be 8J+Tmg==");
 		expect($tw.utils.base64Decode("8J+Tmg==")).toBe(booksEmoji);
 		expect($tw.utils.base64Decode($tw.utils.base64Encode(booksEmoji))).toBe(booksEmoji, "should round-trip correctly");
+	});
+
+	it("should handle base64 encoding emojis in URL-safe variant", function() {
+		var booksEmoji = "📚";
+		expect($tw.utils.base64Encode(booksEmoji, false, true)).toBe("8J-Tmg==", "if surrogate pairs are correctly treated as a single code unit then base64 should be 8J+Tmg==");
+		expect($tw.utils.base64Decode("8J-Tmg==", false, true)).toBe(booksEmoji);
+		expect($tw.utils.base64Decode($tw.utils.base64Encode(booksEmoji, false, true), false, true)).toBe(booksEmoji, "should round-trip correctly");
+	});
+
+	it("should handle base64 encoding binary data", function() {
+		var binaryData = "\xff\xfe\xfe\xff";
+		var encoded = $tw.utils.base64Encode(binaryData,true);
+		expect(encoded).toBe("//7+/w==");
+		var decoded = $tw.utils.base64Decode(encoded,true);
+		expect(decoded).toBe(binaryData, "Binary data did not round-trip correctly");
+	});
+
+	it("should handle base64 encoding binary data in URL-safe variant", function() {
+		var binaryData = "\xff\xfe\xfe\xff";
+		var encoded = $tw.utils.base64Encode(binaryData,true,true);
+		expect(encoded).toBe("__7-_w==");
+		var decoded = $tw.utils.base64Decode(encoded,true,true);
+		expect(decoded).toBe(binaryData, "Binary data did not round-trip correctly");
 	});
 
 	it("should handle stringifying a string array", function() {
@@ -187,5 +207,3 @@ describe("Utility tests", function() {
 	});
 
 });
-
-})();

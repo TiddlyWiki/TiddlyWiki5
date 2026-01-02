@@ -6,10 +6,7 @@ module-type: startup
 Miscellaneous startup logic for both the client and server.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -27,6 +24,11 @@ exports.startup = function() {
 	if($tw.browser) {
 		$tw.browser.isIE = (/msie|trident/i.test(navigator.userAgent));
 		$tw.browser.isFirefox = !!document.mozFullScreenEnabled;
+		// 2023-07-21 Edge returns UA below. So we use "isChromeLike"
+		//'mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/114.0.0.0 safari/537.36 edg/114.0.1823.82'
+		$tw.browser.isChromeLike = navigator.userAgent.toLowerCase().indexOf("chrome") > -1;
+		$tw.browser.hasTouch = !!window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+		$tw.browser.isMobileChrome = $tw.browser.isChromeLike && $tw.browser.hasTouch;
 	}
 	// Platform detection
 	$tw.platform = {};
@@ -62,14 +64,6 @@ exports.startup = function() {
 		wiki: $tw.wiki,
 		document: $tw.browser ? document : $tw.fakeDocument
 	});
-	// Execute any startup actions
-	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
-	if($tw.browser) {
-		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");
-	}
-	if($tw.node) {
-		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
-	}
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
 	$tw.languageSwitcher = new $tw.PluginSwitcher({
@@ -83,8 +77,10 @@ exports.startup = function() {
 			if($tw.browser) {
 				var pluginTiddler = $tw.wiki.getTiddler(plugins[0]);
 				if(pluginTiddler) {
+					document.documentElement.setAttribute("lang",pluginTiddler.getFieldString("name"));
 					document.documentElement.setAttribute("dir",pluginTiddler.getFieldString("text-direction") || "auto");
 				} else {
+					document.documentElement.setAttribute("lang","en-GB");
 					document.documentElement.removeAttribute("dir");
 				}
 			}
@@ -109,6 +105,14 @@ exports.startup = function() {
 			handlerObject: $tw.keyboardManager,
 			handlerMethod: "handleKeydownEvent"
 		}]);
+	}
+	// Execute any startup actions
+	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
+	if($tw.browser) {
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");
+	}
+	if($tw.node) {
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
 	}
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
@@ -141,5 +145,3 @@ exports.startup = function() {
 		$tw.anim = new $tw.utils.Animator();
 	}
 };
-
-})();

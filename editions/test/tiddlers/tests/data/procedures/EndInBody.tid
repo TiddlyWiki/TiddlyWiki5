@@ -1,0 +1,16 @@
+title: Procedures/EndInBody
+description: \end line starting with non-whitespace is part of procedure body
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure hello()
+ hello \end
+\end
+
+Out: <<hello>>
++
+title: ExpectedResult
+
+<p>Out:  hello \end</p>

@@ -1,0 +1,68 @@
+caption: 5.1.3
+created: 20141020171015200
+modified: 20150221230151000
+tags: ReleaseNotes
+title: Release 5.1.3
+type: text/vnd.tiddlywiki
+released: 20141020171015200
+description: Journals, ActionWidgets, <<.olink addprefix>> and <<.olink addsuffix>> operators, "includeWikis"
+
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.2...v5.1.3]]//
+
+!! Usability Improvements
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e872f17842809e33eae177980e9ea0650b6a4c03]] "new journal" button; see [[Creating journal tiddlers]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/70984aa39f8a4061162d4e404bfd158e515c7e6e]] "new here" button; see [[Creating and editing tiddlers]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/00cdd04edd49c2bf0e461071c0c7c50f8aab4e42]] "new journal here" button; see [[Creating journal tiddlers]]
+* [[Made|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c6951ee912d1f2717a8c208cbb920e54edf9e5d9]] date format strings be translateable
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/tree/master/languages/ru-RU]] Russian translation
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ef1d5310918dae088ce9361c1682ce0f99cf568a]] confirmation when clearing password
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b7bbcfa05659808c1e51a4f2f5f1d6afbc2ed3a1]] additional prompt when setting password
+* [[Increased|https://github.com/TiddlyWiki/TiddlyWiki5/commit/dc9981322aeb508d5ebac0b691b0d703f8c1995e]] size of the clear search button
+* [[Upgraded|https://github.com/TiddlyWiki/TiddlyWiki5/commit/564457de1c991df15263040d2d5526fa8ae879bb]] to [[KaTeX v0.1.1|https://github.com/Khan/KaTeX/releases/tag/v0.1.1]], with support for several additional LaTeX features
+
+
+!! Hackability Improvements
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/2ffe53f1916e4b746cc6d7e74e8f4ac75c72e38a]] audio "parser" for handling [[Audio]] content
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0dcf54c3b59ed04645928f0ec4ced647e5a0da7f]] support for ActionWidgets
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/65504d5d41e45326ab1b1b6c0c21eea4c9772797]] new <<.olink addprefix>> and <<.olink addsuffix>> operators
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0c8e5380778303cdd3308bed4a15290214841f8b]] support for custom password prompts
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c26bd4c5a872f56c47e9f5cfc3fada468c53ddde]] the <<.mlink list-links>> macro to display ''caption'' field if present
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/12e26009eef5e29140ba1a880ff033428d673630]] ImageWidget to allow percentage width and height to be specified
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/cc576b052e2b05fd93fcb4f3eb8d9ee5278abf3e]] the <<.olink each>> operator to work with missing tiddlers
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5dd6ebff05a3380db2901294b2cfc89c1a0e71bf]] problem with tiddler width in zoomin storyview with the sidebar hidden
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/09b6540998fec6bf1fb14842be8e8c53dbd5c46a]] bug whereby the `tm-home` message wasn't navigating to a tiddler, causing problems in zoomin storyview
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3ca8d7b6cca46ffa424bcf9bdc134da464fc84f4]] problem with jumping toolbar icons under Firefox
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f85b07e70b71d0622a9459e4b04e2027540abda8]] problem with untagged label being incorrectly coloured
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b3dcd7d625ec83701ef3a77f3fb8101af57c154f]] problem with title background colours with the "Sticky Titles" theme
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5211f9c40c874a167174e8c0d439db34189d3329]] problem with subfilter parameter of <<.mlink timeline>> macro
+* [[Exclude|https://groups.google.com/d/topic/tiddlywiki/YPACpXhH9PY/discussion]] search string tiddler from search results
+
+!! Node.js Changes
+
+//These changes are only relevant to people using TiddlyWiki under Node.js//
+
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/63c174d7ed56284e80ad6cd6ae966b81f9181cc9]] ~KaTeX plugin to be able to work under Node.js to generate static HTML
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/49dc5694a391a391264a4473e4f4422e2472a3b3]] "includeWikis" to merge build targets
+* [[Refactored|https://github.com/TiddlyWiki/TiddlyWiki5/issues/969]] the build scripts for tiddlywiki.com into a separate repository at https://github.com/Jermolene/build.jermolene.github.io
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/744245ea3249446fd15f504190efb1d828935d01]] boot kernel to raise an error if a missing wiki folder is specified on the command line
+
+!! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@andrey013|https://github.com/andrey013]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@buggyj|https://github.com/buggyj]]
+* [[@Eucaly|https://github.com/Eucaly]]
+* [[@Evolena|https://github.com/Evolena]]
+* [[@fghhfg|https://github.com/fghhfg]]
+* [[@Marxsal|https://github.com/Marxsal]]
+* [[@pmario|https://github.com/pmario]]
+* [[@simonbaird|https://github.com/simonbaird]]
+* [[@TheDiveO|https://github.com/TheDiveO]]
+* [[@xcazin|https://github.com/xcazin]]

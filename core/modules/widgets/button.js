@@ -6,10 +6,7 @@ module-type: widget
 Button widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -59,15 +56,21 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		$tw.utils.pushTop(classes,"tc-popup-handle");
 	}
 	domNode.className = classes.join(" ");
+	// Assign data- attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
+	this.assignAttributes(domNode,{
+		sourcePrefix: "aria-",
+		destPrefix: "aria-"
+	});
 	// Assign other attributes
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
 	}
 	if(this.tooltip) {
 		domNode.setAttribute("title",this.tooltip);
-	}
-	if(this["aria-label"]) {
-		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
 	if (this.role) {
 		domNode.setAttribute("role", this.role);
@@ -213,7 +216,6 @@ ButtonWidget.prototype.execute = function() {
 	this.setTo = this.getAttribute("setTo");
 	this.popup = this.getAttribute("popup");
 	this.hover = this.getAttribute("hover");
-	this["aria-label"] = this.getAttribute("aria-label");
 	this.role = this.getAttribute("role");
 	this.tooltip = this.getAttribute("tooltip");
 	this.style = this.getAttribute("style");
@@ -250,22 +252,31 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 	//Add new classes from updated class attribute.
 	$tw.utils.pushTop(domNodeClasses,newClasses);
 	this.domNode.className = domNodeClasses.join(" ");
-}
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
+	if(changedAttributes.tooltip || changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributes["class"]) {
-		this.updateDomNodeClasses();
+	} else {
+		if(changedAttributes["class"]) {
+			this.updateDomNodeClasses();
+		}
+		this.assignAttributes(this.domNodes[0],{
+			changedAttributes: changedAttributes,
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
+		this.assignAttributes(this.domNodes[0],{
+			sourcePrefix: "aria-",
+			destPrefix: "aria-"
+		});
 	}
 	return this.refreshChildren(changedTiddlers);
 };
 
 exports.button = ButtonWidget;
-
-})();

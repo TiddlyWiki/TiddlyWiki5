@@ -1,25 +1,34 @@
 created: 20211124151912931
-modified: 20211124170117511
-tags: [[Filter Syntax]] [[Filter Run Prefix]]
+from-version: 5.1.23
+modified: 20230710073305239
+rp-input: the filter output of all previous runs so far
+rp-output: the accumulated single item
+rp-purpose: replaces all filter output so far with a single item by repeatedly applying a filter run to each input title
+tags: [[Named Filter Run Prefix]]
 title: Reduce Filter Run Prefix
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.1.23">>
 
-|''purpose'' |replaces all filter output so far with a single item by repeatedly applying a filter run to each input title |
-|''input'' |all titles from previous filter runs |
-|''output''|the accumulated single item |
+<$railroad text="""
+\start none
+\end none
+( ":reduce" | - )
+[[run|"Filter Run"]]
+"""/>
 
-Each input title from previous runs is passed to this run in turn. The result of each previous call to this run is made available in the next call via the variable named "accumulator". The result of the last call to this run is returned as the output.  A typical use is to add up the values in a given field of each input title.
+
+Each input title from previous runs is passed to this run in turn. The result of each previous call to this run is made available in the next call via the variable named <<.var accumulator>>. The result of the last call to this run is returned as the output.  A typical use is to add up the values in a given field of each input title.
+
+Replaces all filter output so far with a single item by repeatedly applying a formula, as described above, to each input title.
 
 The following variables are available within the filter run:
 
-* ''accumulator'' - the result of the previous filter run
-* ''currentTiddler'' - the input title
-* ''..currentTiddler'' - the value of the variable `currentTiddler` outside the filter run. <<.from-version "5.2.0">>
-* ''index'' - the numeric index of the current list item (with zero being the first item in the list)
-* ''revIndex'' - the reverse numeric index of the current list item (with zero being the last item in the list)
-* ''length'' - the total length of the input list
+* <<.var accumulator>> - the result of the previous filter run
+* <<.var currentTiddler>> - the input title
+* <<.var ..currentTiddler>> - the value of the variable `currentTiddler` outside the filter run. <<.from-version "5.2.0">>
+* <<.var index>> - the numeric index of the current list item (with zero being the first item in the list)
+* <<.var revIndex>> - the reverse numeric index of the current list item (with zero being the last item in the list)
+* <<.var length>> - the total length of the input list
 
 <<.tip "Compare named filter run prefix `:reduce` with [[reduce Operator]] which is used to flatten a list of items down to a single item by repeatedly applying a subfilter.">> 
 
@@ -35,4 +44,4 @@ is equivalent to:
 [tag[shopping]reduce<num-items>]
 ```
 
-[[Examples|Reduce Filter Run Prefix (Examples)]]
+[[Reduce Filter Run Prefix (Examples)]]

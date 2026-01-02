@@ -5,12 +5,12 @@ description: {{$:/language/Buttons/Refresh/Hint}}
 
 \whitespace trim
 <$button message="tm-browser-refresh" tooltip={{$:/language/Buttons/Refresh/Hint}} aria-label={{$:/language/Buttons/Refresh/Caption}} class=<<tv-config-toolbar-class>>>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/refresh-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/Refresh/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>

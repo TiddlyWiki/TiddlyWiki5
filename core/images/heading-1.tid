@@ -1,4 +1,5 @@
 title: $:/core/images/heading-1
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-heading-1 tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M14 30h13.25v30.104H61.7V30h13.25v75.684H61.7V71.552H27.25v34.132H14V30zm70.335 13.78c2.544 0 5.017-.212 7.42-.636 2.403-.424 4.576-1.13 6.52-2.12 1.942-.99 3.603-2.261 4.981-3.816 1.378-1.555 2.28-3.463 2.703-5.724h9.858v74.2h-13.25V53.32H84.335v-9.54z"/></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-heading-1 tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M14 30h13.25v30.104H61.7V30h13.25v75.684H61.7V71.552H27.25v34.132H14V30zm70.335 13.78c2.544 0 5.017-.212 7.42-.636 2.403-.424 4.576-1.13 6.52-2.12 1.942-.99 3.603-2.261 4.981-3.816 1.378-1.555 2.28-3.463 2.703-5.724h9.858v74.2h-13.25V53.32H84.335v-9.54z"/></svg>

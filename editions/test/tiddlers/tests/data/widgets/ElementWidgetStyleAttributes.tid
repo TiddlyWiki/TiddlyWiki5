@@ -1,0 +1,15 @@
+title: Widgets/ElementWidgetStyleAttributes
+description: Element widget should support style.* attributes
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<div class="hello" onclick="clicked" style.color="blue" style.color="red" style.background="yellow">
+TiddlyWiki
+</div>
++
+title: ExpectedResult
+
+<p><div class="hello" style="color:red;background:yellow;">TiddlyWiki</div></p>

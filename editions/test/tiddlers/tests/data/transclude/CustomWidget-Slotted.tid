@@ -1,0 +1,27 @@
+title: Transclude/CustomWidget/Slotted
+description: Custom widget definition
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\widget $my.widget(one:'Jaguar')
+\whitespace trim
+<$text text=<<one>>/>
+<$slot $name="ts-stuff">
+	Whale
+</$slot>
+\end
+<$my.widget one="Dingo">
+	<$fill $name="ts-stuff">
+		Crocodile
+	</$fill>
+</$my.widget>
+<$my.widget one="BumbleBee">
+	Squirrel
+</$my.widget>
++
+title: ExpectedResult
+
+<p>DingoCrocodileBumbleBeeWhale</p>

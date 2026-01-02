@@ -1,0 +1,26 @@
+title: Transclude/Parameterised/Simple
+description: Simple parameterised transclusion
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler='TiddlerOne' one='Ferret'/>
+|
+<$transclude $tiddler='TiddlerOne'/>
+|
+<$transclude $tiddler='TiddlerOne' one='Ferret' $$two="Osprey"/>
+|
+<$transclude $tiddler='TiddlerOne' $$two="Falcon"/>
++
+title: TiddlerOne
+
+\whitespace trim
+<$parameters one='Jaguar' $$two='Piranha'>
+	<$text text=<<one>>/>:<$text text=<<$two>>/>
+</$parameters>
++
+title: ExpectedResult
+
+<p>Ferret:Piranha|Jaguar:Piranha|Ferret:Osprey|Jaguar:Falcon</p>

@@ -1,0 +1,18 @@
+title: Functions/RunawayRecursiveFunctions
+description: Runaway recursive functions
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function .buffalo(p)
+[.buffalo<p>]
+\end
+
+<$text text=<<.buffalo 8>>/>
+
++
+title: ExpectedResult
+
+/**-- Excessive filter recursion --**/

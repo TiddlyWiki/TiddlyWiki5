@@ -4,7 +4,7 @@ type: application/javascript
 tags: [[$:/tags/test-spec]]
 Tests the reduce prefix and filter.
 \*/
-(function(){
+
 
 /* jslint node: true, browser: true */
 /* eslint-env node, browser, jasmine */
@@ -372,13 +372,13 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 	it("should handle the variance operator", function() {
 		expect(parseFloat(wiki.filterTiddlers("[tag[shopping]get[price]variance[]]").join(","))).toBeCloseTo(2.92);
 		expect(parseFloat(wiki.filterTiddlers("[tag[food]get[price]variance[]]").join(","))).toBeCloseTo(3.367);
-		expect(wiki.filterTiddlers(" +[variance[]]").toString()).toBe("NaN");
+		expect(wiki.filterTiddlers(" +[variance[]]").toString()).toBe("");
 	});
 
 	it("should handle the standard-deviation operator", function() {
 		expect(parseFloat(wiki.filterTiddlers("[tag[shopping]get[price]standard-deviation[]]").join(","))).toBeCloseTo(1.71);
 		expect(parseFloat(wiki.filterTiddlers("[tag[food]get[price]standard-deviation[]]").join(","))).toBeCloseTo(1.835);
-		expect(wiki.filterTiddlers(" +[standard-deviation[]]").toString()).toBe("NaN");
+		expect(wiki.filterTiddlers(" +[standard-deviation[]]").toString()).toBe("");
 	});	
 
 	it("should handle the :intersection prefix", function() {
@@ -420,6 +420,8 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string[{!!title}]").join(",")).toBe("cheesecake,Cheesecake,chocolate cake,Chocolate Cake,Persian love cake,Pound cake");
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string:casesensitive[{!!title}]").join(",")).toBe("Cheesecake,Chocolate Cake,Persian love cake,Pound cake,cheesecake,chocolate cake");
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string:casesensitive,reverse[{!!title}]").join(",")).toBe("chocolate cake,cheesecake,Pound cake,Persian love cake,Chocolate Cake,Cheesecake");
+		expect(wiki.filterTiddlers("1.2.0 1.0.0 1.0.5 :sort:version[{!!title}]").join(",")).toBe("1.0.0,1.0.5,1.2.0");
+		expect(wiki.filterTiddlers("1.2.0 1.0.0 1.0.5 :sort:version:reverse[{!!title}]").join(",")).toBe("1.2.0,1.0.5,1.0.0");
 	});
 
 	it("should handle the :map prefix", function() {
@@ -432,6 +434,15 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[shopping]] :map:flat[tags[]]").join(",")).toBe("shopping,food,shopping,food,shopping,dairy,drinks,shopping,dairy");
 		// Prepend the position in the list using the index and length variables
 		expect(wiki.filterTiddlers("[tag[shopping]] :map[get[title]addprefix[-]addprefix<length>addprefix[of]addprefix<index>]").join(",")).toBe("0of4-Brownies,1of4-Chick Peas,2of4-Milk,3of4-Rice Pudding");
+	});
+
+	it("should handle the :then prefix", function() {
+		expect(wiki.filterTiddlers("[[one]] :then[[two]]").join(",")).toBe("two");
+		expect(wiki.filterTiddlers("[[one]] :then[tag[shopping]]").join(",")).toBe("Brownies,Chick Peas,Milk,Rice Pudding");
+		expect(wiki.filterTiddlers("[[one]] [[two]] [[three]] :then[[four]]").join(",")).toBe("four");
+		expect(wiki.filterTiddlers("[[one]] :then[tag[nonexistent]]").join(",")).toBe("one");
+		expect(wiki.filterTiddlers(":then[[two]]").length).toBe(0);
+		expect(wiki.filterTiddlers("[[notatiddler]is[tiddler]] :then[[two]]").length).toBe(0);
 	});
 
 	it("should handle macro parameters for filter run prefixes",function() {
@@ -450,5 +461,3 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers('[tag[shopping]] :reduce[<echo "$(accumulator)$ $(index)$ $(currentTiddler)$,">]',anchorWidget).join(",")).toBe(" 0 Brownies, 1 Chick Peas, 2 Milk, 3 Rice Pudding,");
 	});
 });
-
-})();

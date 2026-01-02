@@ -27,4 +27,4 @@ Block forced inline
 +
 title: ExpectedResult
 
-<div class=" tc-reveal"><p>Block</p></div><div class=" tc-reveal"><p>Block forced block</p></div><span class=" tc-reveal"><p>Block forced inline</p></span><p><span class=" tc-reveal">Inline</span><div class=" tc-reveal">Inline forced block</div><span class=" tc-reveal">Inline forced inline</span></p>
+<div class="tc-reveal"><p>Block</p></div><div class="tc-reveal"><p>Block forced block</p></div><span class="tc-reveal"><p>Block forced inline</p></span><p><span class="tc-reveal">Inline</span><div class="tc-reveal">Inline forced block</div><span class="tc-reveal">Inline forced inline</span></p>

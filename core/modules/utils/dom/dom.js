@@ -6,27 +6,11 @@ module-type: utils
 Various static DOM-related utility functions.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
-/*
-Determines whether element 'a' contains element 'b'
-Code thanks to John Resig, http://ejohn.org/blog/comparing-document-position/
-*/
-exports.domContains = function(a,b) {
-	return a.contains ?
-		a !== b && a.contains(b) :
-		!!(a.compareDocumentPosition(b) & 16);
-};
-
-exports.domMatchesSelector = function(node,selector) {
-	return node.matches ? node.matches(selector) : node.msMatchesSelector(selector);
-};
 
 /*
 Select text in a an input or textarea (setSelectionRange crashes on certain input types)
@@ -49,38 +33,6 @@ exports.setSelectionByPosition = function(node,selectFromStart,selectFromEnd) {
 exports.removeChildren = function(node) {
 	while(node.hasChildNodes()) {
 		node.removeChild(node.firstChild);
-	}
-};
-
-exports.hasClass = function(el,className) {
-	return el && el.hasAttribute && el.hasAttribute("class") && el.getAttribute("class").split(" ").indexOf(className) !== -1;
-};
-
-exports.addClass = function(el,className) {
-	var c = (el.getAttribute("class") || "").split(" ");
-	if(c.indexOf(className) === -1) {
-		c.push(className);
-		el.setAttribute("class",c.join(" "));
-	}
-};
-
-exports.removeClass = function(el,className) {
-	var c = (el.getAttribute("class") || "").split(" "),
-		p = c.indexOf(className);
-	if(p !== -1) {
-		c.splice(p,1);
-		el.setAttribute("class",c.join(" "));
-	}
-};
-
-exports.toggleClass = function(el,className,status) {
-	if(status === undefined) {
-		status = !exports.hasClass(el,className);
-	}
-	if(status) {
-		exports.addClass(el,className);
-	} else {
-		exports.removeClass(el,className);
 	}
 };
 
@@ -270,6 +222,7 @@ Copy plain text to the clipboard on browsers that support it
 */
 exports.copyToClipboard = function(text,options) {
 	options = options || {};
+	text = text || "";
 	var textArea = document.createElement("textarea");
 	textArea.style.position = "fixed";
 	textArea.style.top = 0;
@@ -289,16 +242,14 @@ exports.copyToClipboard = function(text,options) {
 	var succeeded = false;
 	try {
 		succeeded = document.execCommand("copy");
-	} catch (err) {
+	} catch(err) {
 	}
 	if(!options.doNotNotify) {
-		$tw.notifier.display(succeeded ? "$:/language/Notifications/CopiedToClipboard/Succeeded" : "$:/language/Notifications/CopiedToClipboard/Failed");
+		var successNotification = options.successNotification || "$:/language/Notifications/CopiedToClipboard/Succeeded",
+			failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed"
+		$tw.notifier.display(succeeded ? successNotification : failureNotification);
 	}
 	document.body.removeChild(textArea);
-};
-
-exports.getLocationPath = function() {
-	return window.location.toString().split("#")[0];
 };
 
 /*
@@ -313,7 +264,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
 		
-		if(selectedNode.offsetLeft) {
+		if("offsetLeft" in selectedNode) {
 			// Add variables with a (relative and absolute) popup coordinate string for the selected node
 			var nodeRect = {
 				left: selectedNode.offsetLeft,
@@ -324,7 +275,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,nodeRect);
 
 			var absRect = $tw.utils.extend({}, nodeRect);
-			for (var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
+			for(var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
 				absRect.left += currentNode.offsetLeft;
 				absRect.top += currentNode.offsetTop;
 			}
@@ -338,12 +289,12 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		}
 	}
 	
-	if(domNode && domNode.offsetWidth) {
+	if(domNode && ("offsetWidth" in domNode)) {
 		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
 		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
 	}
 
-	if(event && event.clientX && event.clientY) {
+	if(event && ("clientX" in event) && ("clientY" in event)) {
 		if(selectedNode) {
 			// Add variables for event X and Y position relative to selected node
 			selectedNodeRect = selectedNode.getBoundingClientRect();
@@ -365,5 +316,23 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 	return variables;
 };
 
+/*
+Make sure the CSS selector is not invalid
+*/
+exports.querySelectorSafe = function(selector,baseElement) {
+	baseElement = baseElement || document;
+	try {
+		return baseElement.querySelector(selector);
+	} catch(e) {
+		console.log("Invalid selector: ",selector);
+	}
+};
 
-})();
+exports.querySelectorAllSafe = function(selector,baseElement) {
+	baseElement = baseElement || document;
+	try {
+		return baseElement.querySelectorAll(selector);
+	} catch(e) {
+		console.log("Invalid selector: ",selector);
+	}
+};

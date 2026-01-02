@@ -2,7 +2,7 @@ title: $:/core/ui/EditTemplate/body/preview/output
 tags: $:/tags/EditPreview
 caption: {{$:/language/EditTemplate/Body/Preview/Type/Output}}
 
-\import [all[shadows+tiddlers]tag[$:/tags/Macro/View]!has[draft.of]] [all[shadows+tiddlers]tag[$:/tags/Macro/View/Body]!has[draft.of]]
+\import [all[shadows+tiddlers]tag[$:/tags/Macro/View]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Macro/View/Body]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global/View]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global/View/Body]!is[draft]]
 <$set name="tv-tiddler-preview" value="yes">
 
 <$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateBodyFilter]!is[draft]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/body/default]] }}} />

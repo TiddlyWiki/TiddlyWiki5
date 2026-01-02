@@ -1,0 +1,32 @@
+title: ListWidget/WithJoinTemplateInBlockMode
+description: List widget with join template and $list-empty in block mode
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
++
+title: Output
+
+\whitespace trim
+
+\procedure test(filter)
+<$list filter=<<filter>>>
+
+	Item:<<currentTiddler>>
+
+	<$list-empty>
+		None!
+	</$list-empty>
+
+	<$list-join><br></$list-join>
+</$list>
+\end
+
+<<test "1 2 3">>
+
+<<test "">>
+
++
+title: ExpectedResult
+comment: I wish there was a good way to get rid of these extraneous paragraph elements
+
+<p>Item:1</p><p></p><p></p><br><p>Item:2</p><p></p><p></p><br><p>Item:3</p><p></p><p></p>None!

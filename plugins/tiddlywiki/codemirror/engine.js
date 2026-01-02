@@ -6,10 +6,7 @@ module-type: library
 Text editor engine based on a CodeMirror instance
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",
@@ -125,7 +122,7 @@ function CodeMirrorEngine(options) {
 			self.widget.invokeActionString(self.widget.editInputActions,this,event,{actionValue: this.getText()});
 		}
 	});
-	
+
 	this.cm.on("drop",function(cm,event) {
 		if(!self.widget.isFileDropEnabled) {
 			event.stopPropagation(); // Otherwise TW's dropzone widget sees the drop event
@@ -161,7 +158,7 @@ function CodeMirrorEngine(options) {
 			if (cm.state.draggingText && cm.doc.sel.contains(pos) > -1) {
 				cm.state.draggingText(event);
 				// Ensure the editor is re-focused
-				setTimeout(() => cm.display.input.focus(), 20);
+				setTimeout(function() {cm.display.input.focus();}, 20); 
 				return;
 			}
 			try {
@@ -173,13 +170,13 @@ function CodeMirrorEngine(options) {
 					}
 					cm.setCursor(cm.coordsChar({left:event.pageX,top:event.pageY}));
 					if (selected) {
-					 	for (var i = 0; i < selected.length; ++i) {
+						for (var i = 0; i < selected.length; ++i) {
 							replaceRange(cm.doc, "", selected[i].anchor, selected[i].head, "drag");
 						}
 					}
 					cm.replaceSelection(text, "around", "paste");
 					cm.display.input.focus();
-			  }
+				}
 			}
 			catch(e){}
 		}
@@ -260,7 +257,10 @@ CodeMirrorEngine.prototype.getText = function() {
 Fix the height of textarea to fit content
 */
 CodeMirrorEngine.prototype.fixHeight = function() {
-	if(this.widget.editAutoHeight) {
+	// rows takes precedence
+	if(this.widget.editRows) {
+		this.cm.setSize(null,this.widget.editRows + "em");
+	} else if(this.widget.editAutoHeight) {
 		// Resize to fit
 		this.cm.setSize(null,null);
 	} else {
@@ -316,5 +316,3 @@ CodeMirrorEngine.prototype.executeTextOperation = function(operation) {
 };
 
 exports.CodeMirrorEngine = $tw.browser ? CodeMirrorEngine : require("$:/core/modules/editor/engines/simple.js").SimpleEngine;
-
-})();

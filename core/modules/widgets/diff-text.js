@@ -6,10 +6,7 @@ module-type: widget
 Widget to display a diff between two texts
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
@@ -37,27 +34,22 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	// Create the diff
-	var dmpObject = new dmp.diff_match_patch(),
-		mode = this.getAttribute("mode") || "chars",
-		diffs;
-	if(mode === "lines" || mode === "words") {
-	  diffs = diffLineWordMode(this.getAttribute("source"),this.getAttribute("dest"),mode);
-	} else {
-		diffs = dmpObject.diff_main(this.getAttribute("source"),this.getAttribute("dest"));
-		// Apply required cleanup
-		switch(this.getAttribute("cleanup","semantic")) {
-			case "none":
-				// No cleanup
-				break;
-			case "efficiency":
-				dmpObject.diff_cleanupEfficiency(diffs);
-				break;
-			default: // case "semantic"
-				dmpObject.diff_cleanupSemantic(diffs);
-				break;
-		}
-	}	
+	// Create the diff object
+	var dmpObject = new dmp.diff_match_patch();
+		dmpObject.Diff_EditCost = $tw.utils.parseNumber(this.getAttribute("editcost","4"));
+	var	diffs = dmpObject.diff_main(this.getAttribute("source",""),this.getAttribute("dest",""));
+	// Apply required cleanup
+	switch(this.getAttribute("cleanup","semantic")) {
+		case "none":
+			// No cleanup
+			break;
+		case "efficiency":
+			dmpObject.diff_cleanupEfficiency(diffs);
+			break;
+		default: // case "semantic"
+			dmpObject.diff_cleanupSemantic(diffs);
+			break;
+	}
 	// Create the elements
 	var domContainer = this.document.createElement("div"), 
 		domDiff = this.createDiffDom(diffs);
@@ -141,7 +133,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DiffTextWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup || changedAttributes.mode) {
+	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup || changedAttributes.editcost) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -212,5 +204,3 @@ function diffPartsToChars(text1,text2,mode) {
 };
 
 exports["diff-text"] = DiffTextWidget;
-
-})();

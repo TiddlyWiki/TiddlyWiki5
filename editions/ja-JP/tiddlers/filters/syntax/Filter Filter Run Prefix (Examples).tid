@@ -1,0 +1,33 @@
+created: 20211129022707404
+modified: 20250314105437481
+original-modified: 20230305125338118
+tags: [[Filter Filter Run Prefix]]
+title: Filter Filter Run Prefix (Examples)
+ja-title: filterフィルタランプレフィックス(例)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[tag[HelloThere]] :filter[get[text]length[]compare:integer:gteq[1000]]">>
+<<.operator-example 2 "[tag[HelloThere]] :filter[get[text]length[]compare:integer:lteq[2000]]">>
+<<.operator-example 3 "[tag[HelloThere]] :filter[get[text]length[]compare:integer:gteq[1000]] :filter[get[text]length[]compare:integer:lteq[2000]]">>
+<<.operator-example 4 "[tag[Features]] :filter[links[]!is[shadow]is[missing]]">>
+
+<<.operator-example 5 "A B C D E F :filter[<index>remainder[2]compare:integer:eq[0]]" "インプットリストの要素を1つおきに返す">>
+
+
+<<.operator-example 6 "[tag[shopping]] :filter[{!!quantity}compare:integer:gt[4]] :map[addprefix[ ]addprefix{!!quantity}]">>
+<<.operator-example 7 "[tag[shopping]] :filter[{!!quantity}compare:integer:lteq[4]] :map[addprefix[ ]addprefix{!!quantity}]">>
+
+!! フィルタランプレフィックス`:filter`と`:and`/`+`の比較
+
+<<.op :filter>>フィルタランプレフィックスの機能は、<<.op :and>>プレフィックス(エイリアス<<.op +>>)と一部重複しています。上記のフィルタ式にはすべて、次の2 つのプロパティがあることに注意してください: 
+
+# フィルタ式の先頭では、インプットタイトル(つまり、`get[text]length[]`、`links[]`、`<index>remainder[2]`、`{!!quantity}`)が変換されます。
+# フィルタ式の最後では、インプット項目が何らかの条件(つまり`compare`、`is`)を満たす場合にのみアウトプットに送信されます。
+
+<<.op :filter>>プレフィックスの目的はプロパティ#1によってインプットタイトルが変換されるにもかかわらず、元のインプットタイトルを返すことです。こうすることで、"何らかの条件を満たす"チェックを元のインプット以外のものに対して実行できます。一部のフィルタ式でプロパティ#1が必要ない場合は、代わりに<<.op :and>>プレフィックスを使用できます。
+
+| <<.op :filter>> | <<.op :and>> |
+|^<<.operator-example c1.1 "[tag[HelloThere]] :filter[get[text]length[]compare:integer:gteq[1000]]">>|^<<.operator-example c1.2 "[tag[HelloThere]] :and[get[text]length[]compare:integer:gteq[1000]]">>|
+|^<<.operator-example c2.1 "[tag[Features]] :filter[links[]!is[shadow]is[missing]]">>|^<<.operator-example c2.2 "[tag[Features]] :and[links[]!is[shadow]is[missing]]">>|
+|!結果は同じ|<|
+|^<<.operator-example c3.1 "cat can bat bug :filter[suffix[at]minlength[3]]">>|^<<.operator-example c3.2 "cat can bat bug :and[suffix[at]minlength[3]]">>|

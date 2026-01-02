@@ -6,5 +6,5 @@ type: text/vnd.tiddlywiki
 
 TiddlyWiki 5 is now a mature, stable project that is relied upon by many people. Simultaneously, it is rapidly evolving in many directions thanks to the broad community of developers and users. This paradoxical situation is possible because the project strictly maintains backwards compatibility, adding new features alongside the existing ones.
 
-There is no formal roadmap, but quite a few areas that have yet to be fully implemented, such as search and replace, and rich text editing. Current work can be found on ~GitHub at https://github.com/Jermolene/TiddlyWiki5/
+There is no formal roadmap, but quite a few areas that have yet to be fully implemented, such as search and replace, and rich text editing. Current work can be found on ~GitHub at https://github.com/TiddlyWiki/TiddlyWiki5/
 

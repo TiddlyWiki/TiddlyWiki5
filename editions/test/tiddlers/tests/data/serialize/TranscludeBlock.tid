@@ -1,0 +1,21 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/TranscludeBlock
+type: text/vnd.tiddlywiki
+
+{{MyTiddler}}
+
+{{MyTiddler||TemplateTitle}}
+
+{{||TemplateTitle}}
+
+{{MyTiddler|Parameter}}
+
+{{MyTiddler||TemplateTitle|Parameter|SecondParameter}}
+
+{{MyTiddler!!field}}
+
+{{!!field}}
+
+{{MyTiddler##index}}
+
+{{##index}}

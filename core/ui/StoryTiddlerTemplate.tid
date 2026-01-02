@@ -1,3 +1,4 @@
 title: $:/core/ui/StoryTiddlerTemplate
+code-body: yes
 
-<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/StoryTiddlerTemplateFilter]!is[draft]get[text]] :and[!is[blank]else{$:/config/ui/ViewTemplate}] }}} />
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/StoryTiddlerTemplateFilter]!is[draft]get[text]] :and[has[title]else[$:/core/ui/ViewTemplate]] }}} />

@@ -18,7 +18,7 @@ listen 命令使用[[命名的命令参数|NamedCommandParameters]]：
 * ''anon-username'' - 匿名用户的编辑署名
 * ''username'' - 可选的基础验证用户名称
 * ''password'' - 可选的基础验证密码
-* ''authenticated-user-header'' - 可选的标头名称，用于受信任身份验证
+* ''authenticated-user-header'' - 可选的请求标头名称，用于受信任身份验证
 * ''readers'' - 允许读取此维基，以逗号分隔的用户名称的清单
 * ''writers'' - 允许写入此维基，以逗号分隔的用户名称的清单
 * ''csrf-disable'' - 设置为 "yes" 以禁用 CSRF 检查 (默认为 "no")

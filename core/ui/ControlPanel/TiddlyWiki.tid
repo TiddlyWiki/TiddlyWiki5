@@ -1,0 +1,20 @@
+title: $:/core/ui/ControlPanel/Settings/TiddlyWiki
+tags: $:/tags/ControlPanel/SettingsTab
+caption: TiddlyWiki
+list-before:
+
+\define lingo-base() $:/language/ControlPanel/Settings/
+
+<<lingo Hint>>
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Settings]]">
+
+<div class="tc-control-panel-setting" data-setting-title=<<currentTiddler>> >
+
+!!.tc-control-panel-accent <$link><$transclude field="caption"/></$link>
+
+<$transclude/>
+
+</div>
+
+</$list>

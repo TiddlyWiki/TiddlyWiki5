@@ -1,0 +1,12 @@
+created: 20160107223410181
+list: 
+modified: 20241222103257736
+original-modified: 20170228102517666
+tags: OfficialPlugins [[Plugin Editions]]
+title: KaTeX Plugin
+ja-title: KaTeXプラグイン
+type: text/vnd.tiddlywiki
+
+このプラグインは、~LaTeXで書かれた数学表記を表示する機能を追加します
+
+[ext[https://tiddlywiki.com/plugins/tiddlywiki/katex|plugins/tiddlywiki/katex]]を参照してください

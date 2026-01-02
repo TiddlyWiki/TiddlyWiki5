@@ -6,10 +6,7 @@ module-type: command
 --aws command
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var async,
@@ -238,6 +235,3 @@ Command.prototype.subCommands["s3-savetiddlers"] = function() {
 };
 
 exports.Command = Command;
-
-})();
-

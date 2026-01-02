@@ -1,0 +1,20 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: Листа
+Filter/Caption: Филтер
+Filter/Hint: Пребарувај со [[филтер|https://tiddlywiki.com/static/Filters.html]]
+Filter/Matches: //<small><<resultCount>> пронајдени</small>//
+Matches: //<small><<resultCount>> пронајдени</small>//
+Matches/All: Сите резултати:
+Matches/Title: Наслови:
+Search: Пребарувај
+Search/TooShort: Текстот е прекраток за пребарување
+Shadows/Caption: Сенки
+Shadows/Hint: Пребарувај записи кои се сенки
+Shadows/Matches: //<small><<resultCount>> пронајдени</small>//
+Standard/Caption: Стандардно
+Standard/Hint: Пребарувај општи записи
+Standard/Matches: //<small><<resultCount>> пронајдени</small>//
+System/Caption: Системско
+System/Hint: Пребарувај записи кои се системски
+System/Matches: //<small><<resultCount>> пронајдени</small>//

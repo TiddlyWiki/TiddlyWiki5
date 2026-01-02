@@ -1,0 +1,32 @@
+created: 20230608121519758
+modified: 20230608123444591
+tags: [[How to apply custom styles]]
+title: Custom tag pill styles
+type: text/vnd.tiddlywiki
+
+! Attribute: data-tag-title
+
+<<.from-version "5.2.0">> The attribute <<.attr data-tag-title>> was added to tag pills visible in the tiddler view template. 
+
+<<.from-version "5.3.0">> The attribute was added to every tag pill visible in the standard ~TiddlyWiki UI. Especially the edit template tag list, the tag-picker dropdown,  the Right sidebar -> More -> Tags tab and the $:/TagManager
+
+The <<.attr data-tag-title>> HTML attribute only contains the tag-title visible in the tag pill. It can be used to style the tag-pill. 
+
+If you want to style the whole tiddler have a look at: [[Custom styles by data-tiddler-title]]
+
+!! Examples
+
+If you use the following CSS in a new tiddler tagged: `$:/tags/Stylesheet` every tag that starts with a `#` will have a new border radius. So those tags stand out in contrast to the default tags. 
+
+''You have to define both CSS rules'', due to the existing UI structure to catch all tag-pills in the existing TW UI.
+
+```
+[data-tag-title^="#"] .tc-tag-label,
+[data-tag-title^="#"].tc-tag-label {
+   border-radius: 3px;
+}
+```
+
+!! More Possibilities
+
+{{Attribute Selectors}}

@@ -1,8 +1,9 @@
 title: $:/core/templates/server/static.tiddler.html
 
 \whitespace trim
+\define tv-config-static() yes
 \define tv-wikilink-template() $uri_encoded$
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
