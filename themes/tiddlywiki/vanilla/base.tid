@@ -1199,7 +1199,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-title-icon {
 	vertical-align: middle;
-	margin-right: .1em;
+	<<margin-start ".1em">>
 }
 
 .tc-tiddler-title-icon svg {
