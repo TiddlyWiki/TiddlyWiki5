@@ -30,6 +30,7 @@ Basics/Version/Prompt: ~TiddlyWiki version
 Cascades/Caption: Cascades
 Cascades/Hint: These global rules are used to dynamically choose certain templates. The result of the cascade is the result of the first filter in the sequence that returns a result
 Cascades/TagPrompt: Filters tagged <$macrocall $name="tag" tag=<<currentTiddler>>/>
+CoreStylesheets/Hint: This is the rendered result of core stylesheets. They always have lower priority than normal stylesheets.
 EditorTypes/Caption: Editor Types
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: These tiddlers determine which editor is used to edit specific tiddler types.

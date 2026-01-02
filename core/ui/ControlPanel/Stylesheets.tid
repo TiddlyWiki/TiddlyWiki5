@@ -4,6 +4,10 @@ caption: {{$:/language/ControlPanel/Stylesheets/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/
 
+<<lingo CoreStylesheets/Hint>>
+
+<$transclude $tiddler="$:/snippets/peek-stylesheets" filter="[[$:/core]plugintiddlers[]tag[$:/tags/Stylesheet/Core]]"/>
+
 <<lingo Stylesheets/Hint>>
 
 {{$:/snippets/peek-stylesheets}}
