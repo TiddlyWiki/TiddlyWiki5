@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9509
+description: Add core stylesheets mechanism
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9509
+github-contributors: Leilei332
+
+Add core stylesheets mechanism to allow some tiddlers in the core with `$:/tags/Stylesheet/Core` tag has lower priority than normal stylesheets.
