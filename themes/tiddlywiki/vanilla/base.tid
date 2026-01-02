@@ -1199,7 +1199,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-title-icon {
 	vertical-align: middle;
-	<<margin-start ".1em">>
+	<<margin-end ".1em">>
 }
 
 .tc-tiddler-title-icon svg {
@@ -1250,7 +1250,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-tiddler-frame .tc-tiddler-controls {
-	float: right;
+	float: inline-end;
 	padding: 3px; /* make space for outline */
 }
 
@@ -3415,7 +3415,7 @@ span.tc-translink > a:first-child {
 }
 
 .tc-test-case-toolbar {
-	float: right;
+	float: inline-end;
 }
 
 .tc-test-case-toolbar svg {
@@ -3640,10 +3640,10 @@ span.tc-translink > a:first-child {
 /* TODO: Remove the following rule once 2023 baseline is supported */
 @supports not (float: inline-end) {
 	.tc-test-case-toolbar {
-		float: inline-end;
+		float: right;
 	}
 
 	.tc-tiddler-frame .tc-tiddler-controls {
-		float: inline-end;
+		float: right;
 	}
 }
