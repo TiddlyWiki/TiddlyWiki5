@@ -35,9 +35,15 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Create the diff object
-	var dmpObject = new dmp.diff_match_patch();
-		dmpObject.Diff_EditCost = $tw.utils.parseNumber(this.getAttribute("editcost","4"));
-	var	diffs = dmpObject.diff_main(this.getAttribute("source",""),this.getAttribute("dest",""));
+	var dmpObject = new dmp.diff_match_patch(),
+		mode = this.getAttribute("mode") || "chars",
+		diffs;
+	dmpObject.Diff_EditCost = $tw.utils.parseNumber(this.getAttribute("editcost","4"));
+	if(mode === "lines" || mode === "words") {
+		diffs = diffLineWordMode(this.getAttribute("source"),this.getAttribute("dest"),mode);
+	} else {
+		diffs = dmpObject.diff_main(this.getAttribute("source",""),this.getAttribute("dest",""));
+	}
 	// Apply required cleanup
 	switch(this.getAttribute("cleanup","semantic")) {
 		case "none":
@@ -133,7 +139,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DiffTextWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup || changedAttributes.editcost) {
+	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup || changedAttributes.mode || changedAttributes.editcost) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -156,51 +162,51 @@ function diffLineWordMode(text1,text2,mode) {
 function diffPartsToChars(text1,text2,mode) {
 	var lineArray = [];
 	var lineHash = {};
-	lineArray[0] = '';
+	lineArray[0] = "";
 
-    function diff_linesToPartsMunge_(text,mode) {
-        var chars = '';
-        var lineStart = 0;
-        var lineEnd = -1;
-        var lineArrayLength = lineArray.length,
-            regexpResult;
-        var searchRegexp = /\W+/g;
-        while(lineEnd < text.length - 1) {
-	        if(mode === "words") {
-                regexpResult = searchRegexp.exec(text);
-                lineEnd = searchRegexp.lastIndex;
-                if(regexpResult === null) {
-                lineEnd = text.length;
-                }
-                lineEnd = --lineEnd;
-            } else {
-                lineEnd = text.indexOf('\n', lineStart);
-                if(lineEnd == -1) {
-                    lineEnd = text.length - 1;
-                }
-            }
-            var line = text.substring(lineStart, lineEnd + 1);
+	function diff_linesToPartsMunge_(text,mode) {
+		var chars = "";
+		var lineStart = 0;
+		var lineEnd = -1;
+		var lineArrayLength = lineArray.length,
+			regexpResult;
+		var searchRegexp = /\W+/g;
+		while(lineEnd < text.length - 1) {
+			if(mode === "words") {
+				regexpResult = searchRegexp.exec(text);
+				lineEnd = searchRegexp.lastIndex;
+				if(regexpResult === null) {
+					lineEnd = text.length;
+				}
+				lineEnd = --lineEnd;
+			} else {
+				lineEnd = text.indexOf("\n", lineStart);
+				if(lineEnd == -1) {
+					lineEnd = text.length - 1;
+				}
+			}
+			var line = text.substring(lineStart, lineEnd + 1);
 
-            if(lineHash.hasOwnProperty ? lineHash.hasOwnProperty(line) : (lineHash[line] !== undefined)) {
+			if(lineHash.hasOwnProperty ? lineHash.hasOwnProperty(line) : (lineHash[line] !== undefined)) {
 				chars += String.fromCharCode(lineHash[line]);
-            } else {
-                if (lineArrayLength == maxLines) {
-                  line = text.substring(lineStart);
-                  lineEnd = text.length;
-                }
-                chars += String.fromCharCode(lineArrayLength);
-                lineHash[line] = lineArrayLength;
-                lineArray[lineArrayLength++] = line;
-            }
-            lineStart = lineEnd + 1;
-        }
-        return chars;
-    }
-    var maxLines = 40000;
-    var chars1 = diff_linesToPartsMunge_(text1,mode);
-    maxLines = 65535;
-    var chars2 = diff_linesToPartsMunge_(text2,mode);
-    return {chars1: chars1, chars2: chars2, lineArray: lineArray};
+			} else {
+				if(lineArrayLength == maxLines) {
+					line = text.substring(lineStart);
+					lineEnd = text.length;
+				}
+				chars += String.fromCharCode(lineArrayLength);
+				lineHash[line] = lineArrayLength;
+				lineArray[lineArrayLength++] = line;
+			}
+			lineStart = lineEnd + 1;
+		}
+		return chars;
+	}
+	var maxLines = 40000;
+	var chars1 = diff_linesToPartsMunge_(text1,mode);
+	maxLines = 65535;
+	var chars2 = diff_linesToPartsMunge_(text2,mode);
+	return {chars1: chars1, chars2: chars2, lineArray: lineArray};
 };
 
 exports["diff-text"] = DiffTextWidget;
