@@ -182,16 +182,6 @@ blockquote {
 	quotes: "\201C""\201D""\2018""\2019";
 }
 
-@supports not (border-inline-start: 1px solid #000000) {
-	blockquote {
-		border-left: 5px solid <<colour blockquote-bar>>;
-	}
-
-	blockquote.tc-big-quote {
-		border-left: none;
-	}
-}
-
 blockquote > div {
 	margin-top: 1em;
 	margin-bottom: 1em;
@@ -1147,12 +1137,6 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	inset-inline-end: 0;
 }
 
-@supports not (inset-inline-start: 0) {
-	.tc-tiddler-info-controls {
-		right: 0;
-	}
-}
-
 .tc-view-field-table {
 	width: 100%;
 }
@@ -1268,12 +1252,6 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-tiddler-frame .tc-tiddler-controls {
 	float: right;
 	padding: 3px; /* make space for outline */
-}
-
-@supports (float: inline-end) {
-	.tc-tiddler-frame .tc-tiddler-controls {
-		float: inline-end;
-	}
 }
 
 .tc-tiddler-controls .tc-drop-down {
@@ -2254,21 +2232,6 @@ html body.tc-body.tc-single-tiddler-window {
 	border-inline-end: 1px solid <<colour tab-background-selected>>;
 }
 
-@supports not ((border-inline-start: 1px solid #000000) and (border-start-start-radius: 2px)) {
-	.tc-tab-buttons.tc-vertical button {
-		border-left: 1px solid <<colour tab-border>>;
-		border-right: none;
-		border-top-left-radius: 2px;
-		border-bottom-left-radius: 2px;
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
-	}
-
-	.tc-tab-buttons.tc-vertical button.tc-tab-selected {
-		border-right: 1px solid <<colour tab-background-selected>>;
-	}
-}
-
 .tc-tab-divider {
 	border-top: 1px solid <<colour tab-divider>>;
 }
@@ -2290,12 +2253,6 @@ html body.tc-body.tc-single-tiddler-window {
 	-webkit-flex: 1 0 70%;
 	flex: 1 0 70%;
 	overflow: auto;
-}
-
-@supports not (border-inline-start: 1px solid #000000) {
-	.tc-tab-content.tc-vertical {
-		border-left: 1px solid <<colour tab-border>>;
-	}
 }
 
 .tc-sidebar-lists .tc-tab-buttons {
@@ -2514,12 +2471,6 @@ html body.tc-body.tc-single-tiddler-window {
 	top: 7px;
 	inset-inline-end: 7px;
 	line-height: 0;
-}
-
-@supports not (inset-inline-end: 7px) {
-	.tc-alert-toolbar {
-		right: 7px;
-	}
 }
 
 .tc-alert-toolbar svg {
@@ -3467,12 +3418,6 @@ span.tc-translink > a:first-child {
 	float: right;
 }
 
-@supports (float: inline-end) {
-	.tc-test-case-toolbar {
-		float: inline-end;
-	}
-}
-
 .tc-test-case-toolbar svg {
 	color: <<colour tiddler-controls-foreground>>;
 }
@@ -3647,3 +3592,58 @@ span.tc-translink > a:first-child {
 	margin-bottom: 3px;
 }
 
+/* TODO: Remove the following rule once 2020 baseline is supported */
+@supports not (border-inline-start: 1px solid #000000) {
+	blockquote {
+		border-left: 5px solid <<colour blockquote-bar>>;
+	}
+
+	blockquote.tc-big-quote {
+		border-left: none;
+	}
+
+	.tc-tab-buttons.tc-vertical button {
+		border-left: 1px solid <<colour tab-border>>;
+		border-right: none;
+	}
+
+	.tc-tab-buttons.tc-vertical button.tc-tab-selected {
+		border-right: 1px solid <<colour tab-background-selected>>;
+	}
+
+	.tc-tab-content.tc-vertical {
+		border-left: 1px solid <<colour tab-border>>;
+	}
+}
+
+/* TODO: Remove the following rule once 2021 baseline is supported */
+@supports not (border-start-start-radius: 0px) {
+	.tc-tab-buttons.tc-vertical button {
+		border-top-left-radius: 2px;
+		border-bottom-left-radius: 2px;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}
+
+/* TODO: Remove the following rule once 2021 baseline is supported */
+@supports not (inset-inline-start: 0) {
+	.tc-tiddler-info-controls {
+		right: 0;
+	}
+
+	.tc-alert-toolbar {
+		right: 7px;
+	}
+}
+
+/* TODO: Remove the following rule once 2023 baseline is supported */
+@supports not (float: inline-end) {
+	.tc-test-case-toolbar {
+		float: inline-end;
+	}
+
+	.tc-tiddler-frame .tc-tiddler-controls {
+		float: inline-end;
+	}
+}
