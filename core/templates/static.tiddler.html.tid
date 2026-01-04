@@ -23,9 +23,27 @@ title: $:/core/templates/static.tiddler.html
 </head>
 <body class="tc-body">
 `{{$:/StaticBanner||$:/core/templates/html-tiddler}}`
-<section class="tc-story-river tc-static-story-river">
+<section class="tc-story-river">
 `<$view tiddler="$:/core/ui/ViewTemplate" format="htmlwikified"/>`
 </section>
+<div style="overflow: auto;" class="tc-sidebar-scrollable">
+	<div class="tc-sidebar-header">
+		`{{$:/core/ui/SideBarSegments/site-title||$:/core/templates/html-tiddler}}`
+		`{{$:/core/ui/SideBarSegments/site-subtitle||$:/core/templates/html-tiddler}}`
+		<div class="tc-sidebar-lists tc-sidebar-tabs" role="region" aria-label="Sidebar">
+				<div class="tc-tab-content tc-sidebar-tabs-main">
+					<div class="tc-tab-buttons tc-sidebar-tabs-main">
+						<button aria-checked="true" class=" tc-tab-selected" data-tab-title="TableOfContents" role="switch">
+							`<<storyTiddler>> `
+						</button>
+					</div>
+					<div class="tc-tab-divider tc-sidebar-tabs-main"></div>
+					`<$view tiddler="$:/core/templates/static.tiddler.toc" format="htmlwikified" />`
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
 `

@@ -1,3 +1,19 @@
 title: $:/StaticBanner
 
-<div class="tc-static-alert"><div class="tc-static-alert-inner">This page is part of a static HTML representation of the ~TiddlyWiki at https://tiddlywiki.com/</div></div>
+\function tf.url() [[https://tiddlywiki.com/]] [<storyTiddler>!is[system]encodeuricomponent[]] +[join[#]]
+\function tf.urlPlain() [[https://tiddlywiki.com/]] [<storyTiddler>!is[system]] +[join[#]]
+
+<div class="tc-static-alert">
+
+	<div class="tc-static-alert-inner">
+
+		This page is part of a static HTML representation of the ~TiddlyWiki at:
+		<a class="tc-tiddlylink-external" href=<<tf.url>> rel="noopener noreferrer" target="_blank">
+
+			<$text text=<<tf.urlPlain>>/>
+
+		</a>
+
+	</div>
+
+</div>
