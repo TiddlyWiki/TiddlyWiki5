@@ -7,6 +7,8 @@ Base64 utility functions
 
 \*/
 
+"use strict";
+
 /*
 Base64 utility functions that work in either browser or Node.js
 */

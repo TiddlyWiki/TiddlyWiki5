@@ -7,6 +7,8 @@ Base64 UTF-8 utlity functions.
 
 \*/
 
+"use strict";
+
 const{ TextEncoder, TextDecoder } = require("node:util");
 
 exports.btoa = binstr => Buffer.from(binstr, "binary").toString("base64");
