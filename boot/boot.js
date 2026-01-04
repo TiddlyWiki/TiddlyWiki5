@@ -2163,7 +2163,7 @@ $tw.findLibraryItem = function(name,paths) {
 		try {
 			var stats = fs.statSync(path);
 			return stats.isDirectory();
-		} catch {
+		} catch(e) {
 			// Error occurred. Most likely, path does not exist.
 			return false;
 		}
