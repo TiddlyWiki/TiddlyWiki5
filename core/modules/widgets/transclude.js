@@ -148,6 +148,7 @@ Collect string parameters
 TranscludeWidget.prototype.collectStringParameters = function() {
 	var self = this;
 	this.stringParametersByName = Object.create(null);
+	this.listParametersByName = Object.create(null);
 	if(!this.legacyMode) {
 		$tw.utils.each(this.attributes,function(value,name) {
 			if(name.charAt(0) === "$") {
@@ -160,6 +161,13 @@ TranscludeWidget.prototype.collectStringParameters = function() {
 				}
 			}
 			self.stringParametersByName[name] = value;
+			// Store list version if available
+			if(self.attributeLists && self.attributeLists[name]) {
+				self.listParametersByName[name] = self.attributeLists[name];
+			} else {
+				// Fallback: wrap single value in array
+				self.listParametersByName[name] = [value];
+			}
 		});
 	}
 };
@@ -217,13 +225,13 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	} else {
 		// Transcluding a text reference
 		var parserInfo = this.wiki.getTextReferenceParserInfo(
-						this.transcludeTitle,
-						this.transcludeField,
-						this.transcludeIndex,
-						{
-							subTiddler: this.transcludeSubTiddler,
-							defaultType: this.transcludeType
-						});
+			this.transcludeTitle,
+			this.transcludeField,
+			this.transcludeIndex,
+			{
+				subTiddler: this.transcludeSubTiddler,
+				defaultType: this.transcludeType
+			});
 		return {
 			text: parserInfo.text,
 			type: parserInfo.type,
@@ -271,7 +279,7 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 								type: "text",
 								text: this.transcludeFunctionResult
 							}]
-						}
+						};
 					}
 				} else {
 					var cacheKey = (parseAsInline ? "inlineParser" : "blockParser") + (this.transcludeType || "");
@@ -296,14 +304,14 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 							],
 							source: parser.source,
 							type: parser.type
-						}
+						};
 						$tw.utils.each(srcVariable.params,function(param) {
 							var name = param.name;
 							// Parameter names starting with dollar must be escaped to double dollars
 							if(name.charAt(0) === "$") {
 								name = "$" + name;
 							}
-							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"])
+							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"]);
 						});
 					} else if(srcVariable && !srcVariable.isFunctionDefinition) {
 						// For macros and ordinary variables, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
@@ -316,9 +324,9 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 							],
 							source: parser.source,
 							type: parser.type
-						}
+						};
 						$tw.utils.each(variableInfo.params,function(param) {
-							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],"__" + param.name + "__",param.value)
+							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],"__" + param.name + "__",param.value);
 						});
 					}
 				}
@@ -327,14 +335,14 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 	} else {
 		// Transcluding a text reference
 		parser = this.wiki.parseTextReference(
-						this.transcludeTitle,
-						this.transcludeField,
-						this.transcludeIndex,
-						{
-							parseAsInline: parseAsInline,
-							subTiddler: this.transcludeSubTiddler,
-							defaultType: this.transcludeType
-						});
+			this.transcludeTitle,
+			this.transcludeField,
+			this.transcludeIndex,
+			{
+				parseAsInline: parseAsInline,
+				subTiddler: this.transcludeSubTiddler,
+				defaultType: this.transcludeType
+			});
 	}
 	// Return the parse tree
 	return {
@@ -354,7 +362,12 @@ TranscludeWidget.prototype.getOrderedTransclusionParameters = function() {
 	// Collect the parameters
 	for(var name in this.stringParametersByName) {
 		var value = this.stringParametersByName[name];
-		result.push({name: name, value: value});
+		var param = {name: name, value: value};
+		// Add multiValue field when available
+		if(this.listParametersByName && this.listParametersByName[name]) {
+			param.multiValue = this.listParametersByName[name];
+		}
+		result.push(param);
 	}
 	// Sort numerical parameter names first
 	result.sort(function(a,b) {
@@ -380,17 +393,31 @@ TranscludeWidget.prototype.getOrderedTransclusionParameters = function() {
 };
 
 /*
-Fetch the value of a parameter
+Fetch the value of a parameter (returns list array if available, single value otherwise)
 */
 TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaultValue) {
+	// First check if list exists
+	if(this.listParametersByName) {
+		if(name in this.listParametersByName) {
+			return this.listParametersByName[name];
+		} else {
+			var indexName = "" + index;
+			if(indexName in this.listParametersByName) {
+				return this.listParametersByName[indexName];
+			}
+		}
+	}
+
+	// Fall back to single-value lookup
 	if(name in this.stringParametersByName) {
 		return this.stringParametersByName[name];
 	} else {
-		var name = "" + index;
-		if(name in this.stringParametersByName) {
-			return this.stringParametersByName[name];
+		var indexName = "" + index;
+		if(indexName in this.stringParametersByName) {
+			return this.stringParametersByName[indexName];
 		}
 	}
+
 	return defaultValue;
 };
 
@@ -431,7 +458,7 @@ Return whether this transclusion should be visible to the slot widget
 */
 TranscludeWidget.prototype.hasVisibleSlots = function() {
 	return this.getAttribute("$fillignore","no") === "no";
-}
+};
 
 /*
 Compose a string comprising the title, field and/or index to identify this transclusion for recursion detection
@@ -466,7 +493,7 @@ TranscludeWidget.prototype.functionNeedsRefresh = function() {
 	var variableInfo = this.getVariableInfo(this.transcludeVariable,{params: this.getOrderedTransclusionParameters()});
 	var newResult = (variableInfo.resultList ? variableInfo.resultList[0] : variableInfo.text) || "";
 	return oldResult !== newResult;
-}
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering

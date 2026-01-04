@@ -61,8 +61,8 @@ LogWidget.prototype.log = function() {
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		if(name.substring(0,2) !== "$$") {
 			var resultList = self.computeAttribute(attribute,{asList: true});
-			if(resultList.length <= 1) {
-				data[name] = resultList[0] || "";
+			if(resultList.length === 1) {
+				data[name] = resultList[0];
 			} else {
 				data[name] = resultList;
 			}
@@ -75,7 +75,7 @@ LogWidget.prototype.log = function() {
 			allVars[v] = variable.value;
 		} else {
 			var variableInfo = this.getVariableInfo(v);
-			allVars[v] = variableInfo.resultList.length > 1 ? variableInfo.resultList : variableInfo.text;
+			allVars[v] = variableInfo.resultList.length === 1 ? variableInfo.text : variableInfo.resultList;
 		}
 	}
 	if(this.filter) {
@@ -88,14 +88,50 @@ LogWidget.prototype.log = function() {
 
 	console.group(this.message);
 	if(dataCount > 0) {
-		$tw.utils.logTable(data);
+		this.logVariables(data);
 	}
 	if(this.logAll || !dataCount) {
 		console.groupCollapsed("All variables");
-		$tw.utils.logTable(allVars);
+		this.logVariables(allVars);
 		console.groupEnd();
 	}
 	console.groupEnd();
+};
+
+/*
+Log variables with multi-valued variables shown in nested groups
+*/
+LogWidget.prototype.logVariables = function(vars) {
+	var tableData = {},
+		multiValuedDetails = [],
+		includesStandardVariables = false;
+
+	// Build table data, using placeholders for multi-valued variables
+	$tw.utils.each(vars,function(value,name) {
+		if(Array.isArray(value)) {
+			if(value.length === 0) {
+				tableData[name] = "[Array: empty]";
+			} else {
+				tableData[name] = "[Array: " + value.length + " values (see below)]";
+				multiValuedDetails.push({name: name, values: value});
+			}
+		} else {
+			tableData[name] = value;
+			includesStandardVariables = true;
+		}
+	});
+
+	// Show the main table only if there are standard variables
+	if(includesStandardVariables) {
+		console.table(tableData);
+	}
+
+	// Show detailed nested groups for multi-valued variables
+	multiValuedDetails.forEach(function(item) {
+		console.groupCollapsed(item.name + " (" + item.values.length + " values)");
+		console.table(item.values);
+		console.groupEnd();
+	});
 };
 
 exports["action-log"] = LogWidget;
