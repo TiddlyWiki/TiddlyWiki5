@@ -6,7 +6,7 @@ tags: $:/tags/EditTemplate
 \procedure lingo-base() $:/language/EditTemplate/
 
 \procedure tag-body-inner(colour,fallbackTarget,colourA,colourB,icon,tagField:"tags")
-<$let backgroundColor=<<colour>> foregroundColor={{{ [macro[constrastcolour],<colour>,<colourA>,<colourB>] }}}>
+<$let backgroundColor=<<colour>> foregroundColor={{{ [macro[contrastcolour],<colour>,<fallbackTarget>,<colourA>,<colourB>] }}}>
 	<span class="tc-tag-label tc-tag-list-item tc-small-gap-right"
 		data-tag-title=<<currentTiddler>>
 		style=`color:$(foregroundColor)$; background-color:$(backgroundColor)$;`
