@@ -1090,7 +1090,7 @@ Tests the filtering mechanism.
 		});
 		
 		it("should handle the macro operator", () => {
-			expect(wiki.filterTiddlers("[macro[makedatauri],[some example text],[text/plain]]").join("").toBe("data:text/plain,some%20example%20text"));
+			expect(wiki.filterTiddlers("[macro[makedatauri],[some example text],[text/plain]]").join("")).toBe("data:text/plain,some%20example%20text");
 		});
 	
 		it("should parse filter variable parameters", function(){
