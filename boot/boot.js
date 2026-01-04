@@ -2163,19 +2163,19 @@ $tw.findLibraryItem = function(name,paths) {
 		try {
 			var stats = fs.statSync(path);
 			return stats.isDirectory();
-		} catch(e) {
+		} catch {
 			// Error occurred. Most likely, path does not exist.
 			return false;
 		}
 	}
 	do {
 		// First check for a traditional author/plugin directory format
-		pluginPath = path.resolve(paths[pathIndex],"./" + name)
+		pluginPath = path.resolve(paths[pathIndex],"./" + name);
 		if(checkPath(pluginPath)) {
 			return pluginPath;
 		}
 		// For the purpose of supporting NPM's system, or other flat directory structures, we also look for the plugin in an author_plugin format.
-		pluginPath = path.resolve(paths[pathIndex],"./" + compactName)
+		pluginPath = path.resolve(paths[pathIndex],"./" + compactName);
 		if(checkPath(pluginPath)) {
 			return pluginPath;
 		}
