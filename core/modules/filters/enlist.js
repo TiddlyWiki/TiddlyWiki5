@@ -9,10 +9,17 @@ Filter operator returning its operand parsed as a list
 
 "use strict";
 
+var titleOperator = require("$:/core/modules/filters/title.js").title;
+
 /*
 Export our filter function
 */
 exports.enlist = function(source,operator,options) {
+	// We delegate to the title filter if we have a multi-value operand (only for compatibility, may be removed in future)
+	if(operator.multiValueOperands.length !== 1) {
+		return titleOperator(source,operator,options);
+	}
+	
 	var allowDuplicates = false;
 	switch(operator.suffix) {
 		case "raw":
