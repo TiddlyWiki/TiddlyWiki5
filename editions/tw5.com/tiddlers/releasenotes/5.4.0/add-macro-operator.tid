@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9520
+description: Add macro operator
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: filters
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9520
+github-contributors: Leilei332
+
+Added [[macro Operator]] for evaluating javascript macros in filters.

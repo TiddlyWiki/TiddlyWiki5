@@ -1,0 +1,14 @@
+caption: macro
+created: 20260104043647022
+modified: 20260104045136808
+op-input: ignored
+op-output: the result of the javascript macro
+op-parameter: first parameter is the javascript macro, subsequent parameters are passed to the macro by position
+op-purpose: return the result from a javascript macro (with indirect parameters support)
+tags: [[Filter Operators]]
+title: macro Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.4.0">> The <<.op macro>> operator applies a javascript macro to the input titles, and returns the result from the macro. The function is invoked once with all of the input titles.
+
+<<.operator-examples "macro">>
