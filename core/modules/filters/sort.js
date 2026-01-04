@@ -14,31 +14,31 @@ Export our filter function
 */
 exports.sort = function(source,operator,options) {
 	var results = prepare_results(source);
-	options.wiki.sortTiddlers(results,operator.operand || "title",operator.prefix === "!",false,false);
+	options.wiki.sortTiddlers(results,operator.operands[0] || "title",operator.prefix === "!",false,false,undefined,operator.operands[1]);
 	return results;
 };
 
 exports.nsort = function(source,operator,options) {
 	var results = prepare_results(source);
-	options.wiki.sortTiddlers(results,operator.operand || "title",operator.prefix === "!",false,true);
+	options.wiki.sortTiddlers(results,operator.operands[0] || "title",operator.prefix === "!",false,true,undefined,operator.operands[1]);
 	return results;
 };
 
 exports.sortan = function(source, operator, options) {
 	var results = prepare_results(source);
-	options.wiki.sortTiddlers(results, operator.operand || "title", operator.prefix === "!",false,false,true);
+	options.wiki.sortTiddlers(results, operator.operands[0] || "title", operator.prefix === "!",false,false,true,operator.operands[1]);
 	return results;
 };
 
 exports.sortcs = function(source,operator,options) {
 	var results = prepare_results(source);
-	options.wiki.sortTiddlers(results,operator.operand || "title",operator.prefix === "!",true,false);
+	options.wiki.sortTiddlers(results,operator.operands[0] || "title",operator.prefix === "!",true,false,undefined,operator.operands[1]);
 	return results;
 };
 
 exports.nsortcs = function(source,operator,options) {
 	var results = prepare_results(source);
-	options.wiki.sortTiddlers(results,operator.operand || "title",operator.prefix === "!",true,true);
+	options.wiki.sortTiddlers(results,operator.operands[0] || "title",operator.prefix === "!",true,true,undefined,operator.operands[1]);
 	return results;
 };
 
