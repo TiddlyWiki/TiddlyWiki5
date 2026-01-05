@@ -6,10 +6,7 @@ module-type: widget
 Scrollable widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DEBOUNCE_INTERVAL = 100; // Delay after last scroll event before updating the bound tiddler
@@ -184,7 +181,7 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 };
 
 ScrollableWidget.prototype.listenerFunction = function(event) {
-	self = this;
+	var self = this;
 	clearTimeout(this.timeout);
 	this.timeout = setTimeout(function() {
 		var existingTiddler = self.wiki.getTiddler(self.scrollableBind),
@@ -262,5 +259,3 @@ ScrollableWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.scrollable = ScrollableWidget;
-
-})();

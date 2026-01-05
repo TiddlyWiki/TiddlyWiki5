@@ -1,0 +1,16 @@
+description: currentTiddler should be properly set
+tags: $:/tags/wiki-test-spec
+title: TestCases/TestCaseTiddler/currentTiddler
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+currentTiddler variable in Output tiddler should be "Output"
++
+title: Output
+
+<$text text=<<currentTiddler>>>
++
+title: ExpectedResult
+
+<p>Output</p>

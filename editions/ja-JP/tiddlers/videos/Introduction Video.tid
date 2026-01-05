@@ -1,0 +1,15 @@
+created: 20141126153016142
+modified: 20241016105546203
+original-modified: 20141126153016142
+tags: Videos [[Working with TiddlyWiki]]
+title: Introduction Video
+ja-title: 紹介動画
+type: text/vnd.tiddlywiki
+
+この短いプレゼンテーションでは、TiddlyWikiの基本原則を説明します
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KtCUr83XgyE" frameborder="0" allowfullscreen></iframe>
+
+動画の作成に使用されたTiddlyWikiは以下にあります: 
+
+https://tiddlywiki.com/editions/introduction/

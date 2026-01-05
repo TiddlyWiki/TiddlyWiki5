@@ -6,10 +6,7 @@ module-type: global
 Keyboard handling utilities
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var namedKeys = {
@@ -383,5 +380,3 @@ KeyboardManager.prototype.handleShortcutChanges = function(changedTiddlers) {
 };
 
 exports.KeyboardManager = KeyboardManager;
-
-})();

@@ -1,0 +1,32 @@
+caption: Gitサービスへの保存
+color: #29B6F6
+created: 20190408173002622
+delivery: Service
+description: (GitHub, GitLabの)Gitレポジトリへ変更を直接保存
+method: save
+modified: 20241007114518333
+original-modified: 20230723074211772
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows iOS Edge
+title: Saving to a Git service
+ja-title: Gitサービスへの保存
+type: text/vnd.tiddlywiki
+
+TiddlyWikiは、単一ファイル構成でGitHubリポジトリに直接変更を保存できます。
+
+Gitサービスへの保存は、[[$:/ControlPanel]]の''保存''タブの中の''Gitサービスセーバー''タブで構成します。次の設定がサポートされています: 
+
+* ''タイプ'' - (必須) サービスのタイプ (例: GitHub、GitLab)
+* ''ユーザー名'' - (必須) 変更を保存するために使用されるGitサービスアカウントのユーザ名
+* ''パスワード'' - (必須) 指定したアカウントのOAUTHトークンまたは個人アクセストークン。GitHubではパスワード認証が非推奨になっています。許可されている認証方法は、[[API documentation|https://developer.github.com/v3/#authentication]]に記載されています。
+* ''リポジトリ'' - (必須) Gitリポジトリの名前。所有者名とリポジトリ名の両方を指定する必要があります。例: `Jermolene/TiddlyWiki5`
+* ''ブランチ'' - (オプション) Gitリポジトリ内で使用されるブランチ名。デフォルトは、`main`(~GitHub)または、`master`(~GitLab)です。
+* ''パス'' - (オプション) ターゲットファイルのパス。デフォルトは`/`です
+* ''ファイル名'' - (必須) ターケッドファイルのファイル名
+
+注意
+
+* Gitサービストークンやパスワードは、ブラウザのローカルストレージに永続的に保存されます。共有マシンを使用する場合は、必ずパスワードをクリアしてください。認証に個人アクセストークンを使用すると、セキュリティがさらに強化されます。アクセストークンが誤って漏洩した場合、アカウントパスワードをリセットせずに取り消すことができます。
+
+---
+
+~GitHubセーバーの詳細については、[[MohammadのGitHubセーバーチュートリアル|GitHub Saver Tutorial by Mohammad]]を参照してください

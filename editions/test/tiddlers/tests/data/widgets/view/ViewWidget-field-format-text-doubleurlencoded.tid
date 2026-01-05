@@ -1,0 +1,22 @@
+title: Widgets/ViewWidget/Parameter/field-format-doubleurlencoded
+description: Test view-widget parameters tiddler, field and format=*
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: input
+
+Some text > "aaa"
++
+title: Output
+
+<$view tiddler="input" field="text" format="doubleurlencoded"/>
+---
+<$view tiddler="input" field="text"/>
+
++
+title: ExpectedResult
+
+<p>Some%2520text%2520%253E%2520%2522aaa%2522
+—
+Some text &gt; "aaa"
+</p>

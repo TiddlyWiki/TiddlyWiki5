@@ -1,5 +1,5 @@
 created: 20150417155912612
-modified: 20160610082700598
+modified: 20230803044412567
 tags: [[Customise TiddlyWiki]]
 title: Setting a page background image
 type: text/vnd.tiddlywiki
@@ -14,5 +14,5 @@ type: text/vnd.tiddlywiki
 #* ''Cover'' causes the background image to be sized so that it completely covers the page. Some of the image may be clipped
 #* ''Contain'' causes the background image to be sized so that it fits within the page
 
-Note that the palette ''DarkPhotos'' is provided to make the sidebar more readable on dark background images.
+Note that the palette [[DarkPhotos|ColourPalettes]] is provided to make the sidebar more readable on dark background images.
 

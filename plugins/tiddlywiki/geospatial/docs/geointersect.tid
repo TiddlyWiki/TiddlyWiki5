@@ -1,0 +1,20 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/geointersect
+caption: geointersect operator
+tags: $:/tags/GeospatialDocs
+
+!! `geointersect` operator
+
+The `geointersect` operator calculates the intersection between two or more [[GeoJSON Polygon Features|GeoJSON Polygon Feature]].
+
+Each input list item is interpreted as a [[GeoJSON Polygon Feature Collection]] containing polygons.
+
+```
+[geointersect[]]
+```
+
+!! Examples
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geointersect-interactive"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>

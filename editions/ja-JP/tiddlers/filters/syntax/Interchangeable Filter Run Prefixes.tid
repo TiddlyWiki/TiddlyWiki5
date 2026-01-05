@@ -1,0 +1,47 @@
+created: 20230316151518640
+modified: 20250225113139787
+original-modified: 20230327130626715
+tags: [[Filter Run Prefix]]
+title: Interchangeable Filter Run Prefixes
+ja-title: 交換可能なフィルターランプレフィックス
+type: text/vnd.tiddlywiki
+
+!! 交換可能なフィルターランプレフィックス
+
+技術的/論理的な用語で言えば：
+
+|!ラン |!同等の名前付きプレフィックス |!解釈 |!アウトプット |
+|`[run]` |`:or[run]` |重複を排除した和集合 |... OR ラン |
+|`+[run]` |`:and[run]` |フィルタステップの蓄積 |... AND ラン |
+|`-[run]` |`:except[run]` |差集合 |... AND NOT ラン |
+|`~[run]` |`:else[run]` |それ以外 |... ELSE ラン |
+|`=[run]` |`:all[run]` |重複を排除しない和集合 |... OR ラン |
+
+ランのインプットは通常、Wiki内の[[隠し|ShadowTiddlers]]Tiddler以外のすべてのTiddlerタイトルのリストです(順不同)。<br>ただし、`+`プレフィックスによってこれを変更できます: 
+
+|プレフィックス|インプット|h
+|`-`, `~`, `=`, `:intersection` あるいは、無し| 最初の[[フィルタオペレータ|Filter Operators]]によって特に指定されない限り、<$link to="all Operator">`[all[]]`</$link> Tiddlerのタイトル|
+|`+`, `:filter`,  `:map`, `:reduce`,`:sort` |これまでのすべてのランのフィルタアウトプット|
+
+インプットが変化するため、`-`と`+`の両方のプレフィックスが互いに逆の動作をしないことに注意してください。
+
+たとえば、次の2つの例では、`$:/baz`は実際に存在する場合にのみ削除されます: 
+
+* <$link to="is Operator"> `foo bar $:/baz -[is[system]]`</$link>
+* <$link to="prefix Operator">`foo bar $:/baz -[prefix[$:/]]`</$link>
+
+理由を理解するには、両方の最後のランのインプットとその`-`プレフィックスを考慮してください。
+
+存在するかどうかに関係なく、`$:/baz`を削除するには、[[否定のフィルタオペレータ|Filter Operators]]とともに`+`プレフィックスを使用するだけです: 
+
+* <$link to="is Operator">`foo bar $:/baz +[!is[system]]`</$link>
+* <$link to="prefix Operator">`foo bar $:/baz +[!prefix[$:/]]`</$link>
+
+!! +と和集合の違い
+
+`+`と`:intersection`の違いについては[[和集合フィルタランプレフィックス(例)|Intersection Filter Run Prefix (Examples)]]を参照してください。
+
+!! 開発者向け
+
+新しいフィルタランプレフィックスを作成するには、`filterrunprefix`の[[モジュールタイプ|ModuleType]]で
+[[Javascriptモジュール|Modules]]を作成します。

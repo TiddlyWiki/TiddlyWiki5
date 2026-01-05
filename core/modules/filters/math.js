@@ -13,10 +13,7 @@ Note that strings are converted to numbers automatically. Trailing non-digits ar
 * "12kk" converts to 12
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.negate = makeNumericBinaryOperator(
@@ -128,7 +125,7 @@ exports.minall = makeNumericReducingOperator(
 exports.median = makeNumericArrayOperator(
 	function(values) {
 		var len = values.length, median;
-		values.sort();
+		values.sort(function(a,b) {return a-b});
 		if(len % 2) { 
 			// Odd, return the middle number
 			median = values[(len - 1) / 2];
@@ -220,6 +217,10 @@ function makeNumericReducingOperator(fnCalc,initialValue,fnFinal) {
 		source(function(tiddler,title) {
 			result.push($tw.utils.parseNumber(title));
 		});
+		// We return an empty array if there are no input titles
+		if(result.length === 0) {
+			return [];
+		}
 		var value = result.reduce(function(accumulator,currentValue) {
 				return fnCalc(accumulator,currentValue);
 			},initialValue);
@@ -243,5 +244,3 @@ function makeNumericArrayOperator(fnCalc) {
 		return results;
 	};
 };
-
-})();

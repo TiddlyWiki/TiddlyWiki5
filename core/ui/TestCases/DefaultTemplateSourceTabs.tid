@@ -1,0 +1,48 @@
+title: $:/core/ui/testcases/DefaultTemplate/SourceTabs
+
+\whitespace trim
+
+\procedure testcaseNewTitle() $:/temp/testcase/draft-title
+
+\procedure saveActions()
+<$action-setfield $tiddler=<<currentTab>> $field="draft.title" $value=<<newTitle>>/>
+<$action-sendmessage $message="tm-save-tiddler" $param=<<title>> />
+<$action-setfield $tiddler=<<testcase-source-state>> text=<<newTitle>>/>
+<$action-deletetiddler $tiddler=<<testcaseNewTitle>>/>
+\end
+
+\procedure saveButton(title, newTitle)
+<$button class="tc-btn-invisible tc-test-case-save-button tc-small-gap-left" actions=<<saveActions>> disabled={{{ [<testcaseNewTitle>!has[text]then[yes]] }}}>
+{{$:/core/images/done-button}}
+</$button>
+\end
+
+\procedure body()
+<$list filter="[<currentTab>fields[]] -text +[limit[1]]" variable="ignore">
+	<table class="tc-field-table">
+		<tbody>
+			<$list filter="[<currentTab>fields[]sort[]] -text -title title +[putfirst[]]" variable="fieldName">
+				<tr>
+					<td>
+						<$text text=<<fieldName>>/>
+					</td>
+					<td>
+						<%if [<fieldName>match[draft.title]]  %>
+							<$edit-text class="tc-edit-texteditor tc-max-width-80" tiddler=<<testcaseNewTitle>> focus="yes" tag="input"/>
+							<$macrocall $name="saveButton" newTitle={{{ [<testcaseNewTitle>get[text]] }}} title=<<currentTab>>/>
+						<%else%>
+							<$view tiddler=<<currentTab>> field=<<fieldName>>/>
+						<%endif%>
+					</td>
+				</tr>
+			</$list>
+		</tbody>
+	</table>
+</$list>
+<$edit class="tc-edit-texteditor" tiddler=<<currentTab>>/>
+<div class="tc-test-case-footer-toolbar">
+<$macrocall $name="copy-to-clipboard" src={{{ [<currentTab>get[text]] }}}/>
+</div>
+\end
+
+<$transclude $variable="body" $mode="inline"/>

@@ -4,31 +4,30 @@ caption: {{$:/core/images/info-button}} {{$:/language/Buttons/Info/Caption}}
 description: {{$:/language/Buttons/Info/Hint}}
 
 \whitespace trim
-\define button-content()
-\whitespace trim
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+\procedure button-content()
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/info-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/Info/Caption}}/>
 </span>
-</$list>
+<%endif%>
 \end
 <$reveal state="$:/config/TiddlerInfo/Mode" type="match" text="popup">
 <$button popup=<<tiddlerInfoState>> tooltip={{$:/language/Buttons/Info/Hint}} aria-label={{$:/language/Buttons/Info/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
-<$macrocall $name="button-content" mode="inline"/>
+<$transclude $variable="button-content" $mode="inline"/>
 </$button>
 </$reveal>
 <$reveal state="$:/config/TiddlerInfo/Mode" type="match" text="sticky">
 <$reveal state=<<tiddlerInfoState>> type="match" text="" default="">
 <$button set=<<tiddlerInfoState>> setTo="yes" tooltip={{$:/language/Buttons/Info/Hint}} aria-label={{$:/language/Buttons/Info/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
-<$macrocall $name="button-content" mode="inline"/>
+<$transclude $variable="button-content" $mode="inline"/>
 </$button>
 </$reveal>
 <$reveal state=<<tiddlerInfoState>> type="nomatch" text="" default="">
 <$button set=<<tiddlerInfoState>> setTo="" tooltip={{$:/language/Buttons/Info/Hint}} aria-label={{$:/language/Buttons/Info/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
-<$macrocall $name="button-content" mode="inline"/>
+<$transclude $variable="button-content" $mode="inline"/>
 </$button>
 </$reveal>
 </$reveal>

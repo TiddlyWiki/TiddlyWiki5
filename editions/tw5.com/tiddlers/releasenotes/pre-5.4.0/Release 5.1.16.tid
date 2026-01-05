@@ -1,0 +1,157 @@
+caption: 5.1.16
+created: 20171114142602640
+modified: 20180425155658451
+released: 20180425155658451
+tags: ReleaseNotes
+title: Release 5.1.16
+type: text/vnd.tiddlywiki
+description: [[Dynaview Plugin]], import previews, DiffTextWidget, rotate left in bitmap editor, StartupActions
+
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.15...v5.1.16]]//
+
+!! Improved ~CodeMirror Plugins
+
+The ~CodeMirror plugin has undergone a substantial rewrite, with many new improvements:
+
+* Upgrade to ~CodeMirror version v5.37.0
+* Now modularised into:
+** Base plugin: basic lightweight configuration, approximately 240KB
+** Add-on plugins:
+*** Search and Replace
+*** Auto-completion
+*** Fullscreen editing
+*** Auto-close brackets
+*** Auto-close tags
+*** ~SublimeText keymap
+*** Emacs keymap
+*** Vim keymap
+*** Highlighting modes: Javascript, Xml, Html (htmlmixed), Html (htmlembedded), Css, Markdown, X-Tiddlywiki
+* Automatic configuration (the configuration tiddler is not needed anymore)
+*** ~CodeMirror (engine.js) builds the configuration using information within the installed ~CodeMirror plugins
+* New control panel configuration tab:
+** Line numbers
+** Theme:
+*** Editor font family (same as native TiddlyWiki)
+*** Cursor settings
+*** Line wrapping
+** Active line highlighting
+*** Autocompletion on/off (if installed)
+** Keymap
+
+!! Other New and Improved Plugins
+
+* New [[Dynaview Plugin]] makes it possible to build user interfaces that dynamically respond to changes in scrolling or zooming
+* Improved [[Text-Slicer Plugin|Text-Slicer Edition]] with customisable JSON rules
+* Updated [[KaTeX Plugin]] to latest v0.9.0
+
+!! Translation Improvements
+
+New and improved translations:
+
+* New Slovenian translation
+* New Português (Brasil) translation
+* Improved Dutch translation
+* Improved French translation
+* Improved German translation
+* Improved Traditional and Simplified Chinese translations
+** These translations now also reset the minimum search length to one character
+
+!! Privacy Improvements
+
+Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia.org/wiki/General_Data_Protection_Regulation]], we've [[removed all third party cookies from tiddlywiki.com|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3106]].
+
+!! Usability Improvements
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3112]] new DiffTextWidget, and integrated it into the import listing and as a preview pane
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/9e03264ebe141a5dc4d37dcb62f3bbf2f740d983]] selectable previews to the import listing
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3155]] new editor toolbar buttons for wrapping the selection with double square and curly brackets
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3134]] new [[sortan Operator]] for sorting alphanumeric values such as "Apple 6", "Apple 7", "Apple 8", "Apple 9", "Apple 10", "Apple 20", "Apple 30", "Apple 100"
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/da0ffce2d66f16ad14587fbe58b8d7a5c8d36657]] default fonts for readability as advised by [[GitHub|http://markdotto.com/2018/02/07/github-system-fonts/]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3131]] an editor toolbar button for stamping fragments of formulae for the [[KaTeX Plugin]] 
+* [[Simplified|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1c8170463c80a18c0753783aa0b32a0ff2f9028c]] the page scrolling behaviour: navigating to a tiddler now scrolls the top of the tiddler to the top of the viewport
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d2ff164c07788818ded9826c9e3811599272e69c]] [[WidgetMessage: tm-copy-to-clipboard]] and [[also|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1b6a06a4d79ad5c58593a7844e306c25848979ea]] [[copy-to-clipboard Macro]] for copying text directly to the clipboard
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3040]] a hint to the field list dropdown
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3135]] a control panel setting for the default tab in the More sidebar
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3149]] a control panel setting for the titles of new tiddlers
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c0569849d22f99623423d349c0d96ecae11ffbe8]] "rotate left" button to bitmap editor toolbar
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3180]] criteria under which certain editor toolbar buttons are displayed
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3190]] support for a minimum length for the new tag field before the dropdown is shown
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/02529a51d0be47477e62cd52dd5e4989a4993663]] consistency and reusability of the palette, language and theme switchers
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ea763d0eaba7edf928ae247563deb95278504e9f]] support for retaining tab content in the [[tabs Macro]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2703]] support for adding links via the <kbd>enter</kbd> key
+
+!! Hackability Improvements
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/033feda02d7f5cdf27a9393b8229f22219cdab88]] support for comparison operators to the RevealWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1c6942402ee7b6d938f01bad23130ebe75b109f2]] support for StartupActions to execute action widgets at startup
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f4fd5e76f8da8555bb9056725f11e0c0c91649f7]] ServerCommand to allow the port number to be specified as an environment variable
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/28e713caac1582e30b9ab8f7364ac8a564f4ffd7]] screen width/height to [[platform information exposed at startup|InfoMechanism]]
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3167]] DroppableWidget to pass modifier keys in a variable
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3203]] DraggableWidget with actions for drag start and drag end
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7cb54f32c6ee2d98f3f13ddda39f92281d419afd]] a new [[TaskManagementExample (Draggable)]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/460a07ca03a501009530a57352d6bec0e3cf49cd]] new 'Stylesheets' tab to control panel
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b4c7c59d5d1bc5282fcfed58abbf087b9f65b86c]] new 'emptyMessage' parameter to [[list-links Macro]] and [[list-tagged-draggable Macro]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/de4eb5ca89132db136c8f5fb3103f289f25fe98a]] new `th-page-refreshed` hook
+* [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3063]] macro evaluation by making parameters available as variables - see "Parameters as Variables" in [[Macro Definitions in WikiText]]
+* [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3052]] LinkWidget to allow better customisation of CSS classes
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3124]] new "value" suffix for the [[each Operator]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0d354fe57f7424c1751a5c0cf5fbf1203803f3c8]] new ''subtiddler'' attribute to the SetWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/47cdf5513391742c3410bb80b36107ab17b0476d]] new [[subtiddlerfields Operator]] for extracting the fields from tiddlers within plugins
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3182]] ability to trigger actions on unchecking the CheckboxWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2182]] support for a checked class to the RadioWidget
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2982]] the [[is Operator]] to allow multiple types to be specified
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3209]] data attributes to ViewTemplate (see [[Custom data-styles]])
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2988]] new RangeWidget
+
+!! Bug Fixes
+
+* [[Removed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3043]] superfluous list item at the end of list-links-draggable macro
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7e71fcfab80bed9aed4389eea386fb2036cc4a85]] problem with the content area of vertical tabs sometimes overflowing their right hand margin
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3079]] problem with double quotes within the new journal template
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3070]] problem with dragging inside a textarea
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3099]] usage of "default" attribute of SelectWidget when "index" attribute is used
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3093]] problem with crash when dragging over TiddlyWiki on some browsers
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3079]] issue with new journal button
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3164]] problem with ''filter'' and ''value'' attributes of SetWidget
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3190]] problem with numeric operands in the [[Extended Listops Filters]]
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/df1f7e9798b5f6c3d2c3fd82e438cbc9713ade04]] problem with "put" saver and 412 return codes
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3048]] problem with variable references in field values in the edit template
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3219]] behaviour of list-after field so that the tiddler is placed at the end of the list if the list-after field is present but empty 
+
+!! Developer Bug Fixes and Improvements
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1dc764764055243acd07d0c4f480e6e912be6870]] ''plugin-priority'' field to core plugins
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3113]] problems with plugin ordering
+* Several optimisations to the tiddler store:
+** [[Avoiding slow Object.keys calls|https://github.com/TiddlyWiki/TiddlyWiki5/commit/254e1ca7f7a5fe9d2deef72692ada2b7637f34ce]] - saving 50% of some operations
+** [[Optimising the tag filter|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e4b10d42f9480c0505862a93f0b97d1c4270ed65]] - saving 50% on some tag operations
+** [[Minor improvements to tiddler deletion|https://github.com/TiddlyWiki/TiddlyWiki5/commit/358d4165260311446f2b433591762dd667250975]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2990]] support for custom boot paths
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3206]] new navigation hooks: `th-cancelling-tiddler`, `th-new-tiddler` and `th-renaming-tiddler`
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3024]] new hook when the HTTP server starts `th-server-command-post-start`
+
+
+! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@alexhough|https://github.com/alexhough]]
+* [[@anavarre|https://github.com/anavarre]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@BurningTreeC|https://github.com/BurningTreeC]]
+* [[@diego898|https://github.com/diego898]]
+* [[@flibbles|https://github.com/flibbles]]
+* [[@furicle|https://github.com/furicle]]
+* [[@gernert|https://github.com/gernert]]
+* [[@ibnishak|https://github.com/ibnishak]]
+* [[@inmysocks|https://github.com/inmysocks]]
+* [[@Marxsal|https://github.com/Marxsal]]
+* [[@metebalci|https://github.com/metebalci]]
+* [[@mklauber|https://github.com/mklauber]]
+* [[@pmario|https://github.com/pmario]]
+* [[@Skeeve|https://github.com/Skeeve]]
+* [[@TheDiveO|https://github.com/TheDiveO]]
+* [[@tobibeer|https://github.com/tobibeer]]
+* [[@twMat|https://github.com/twMat]]
+* [[@xcazin|https://github.com/xcazin]]
+ 

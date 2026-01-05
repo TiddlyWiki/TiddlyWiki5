@@ -28,6 +28,7 @@ Encryption/ClearPassword/Caption: Verschlüsselung deaktivieren
 Encryption/ClearPassword/Hint: Lösche das Passwort und speichere ohne Verschlüsselung
 Encryption/SetPassword/Caption: Verschlüsselung
 Encryption/SetPassword/Hint: Definiert ein Passwort, um dieses Wiki zu verschlüsseln
+EmergencyDownload/Caption: Speichern aller Tiddler als JSON File
 ExportPage/Caption: Alle exportieren
 ExportPage/Hint: Alle Tiddler exportieren
 ExportTiddler/Caption: Exportieren
@@ -80,6 +81,7 @@ NewMarkdown/Hint: Erstelle einen neuen "Markdown" Tiddler
 NewTiddler/Caption: Neuer Tiddler
 NewTiddler/Hint: Erstelle einen neuen Tiddler
 OpenWindow/Caption: Öffne in neuem Fenster
+OpenControlPanel/Hint: Öffne das Control-Panel
 OpenWindow/Hint: Öffne diesen Tiddler in einem neuen Fenster
 Palette/Caption: Palette
 Palette/Hint: Wähle eine Farbpalette
@@ -103,6 +105,8 @@ ShowSideBar/Caption: Sidebar einblenden
 ShowSideBar/Hint: Sidebar einblenden
 TagManager/Caption: Tag-Manager
 TagManager/Hint: Öffne den Tag-Manager
+TestCaseImport/Caption: importiere Tiddler
+TestCaseImport/Hint: Importiere im Test enthaltene Tiddler
 Timestamp/Caption: Zeitstempel
 Timestamp/Hint: Einstellung, ob Änderungen den Zeitstempel beeinflussen
 Timestamp/On/Caption: Zeitstempel EIN
@@ -130,6 +134,7 @@ Excise/Caption/Replace/Transclusion: Transklusion
 Excise/Caption/Tag: Tagge den neuen Tiddler mit dem Titel des aktuellen Tiddlers
 Excise/Caption/TiddlerExists: Warnung: Tiddler existiert bereits!
 Excise/Hint: Verschiebe den ausgewählten Text in einen neuen Tiddler
+Excise/DefaultTitle: Neuen "Text Verschieben"
 Heading1/Caption: Überschrift 1
 Heading1/Hint: Überschrift 1 auf die Zeilen anwenden, die eine Auswahl enthalten
 Heading2/Caption: Überschrift 2

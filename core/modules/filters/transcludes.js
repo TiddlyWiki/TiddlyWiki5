@@ -6,10 +6,6 @@ module-type: filteroperator
 Filter operator for returning all the transcludes from a tiddler
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -20,7 +16,5 @@ exports.transcludes = function(source,operator,options) {
 	source(function(tiddler,title) {
 		results.pushTop(options.wiki.getTiddlerTranscludes(title));
 	});
-	return results.toArray();
+	return results.makeTiddlerIterator(options.wiki);
 };
-
-})();

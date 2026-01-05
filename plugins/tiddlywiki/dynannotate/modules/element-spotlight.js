@@ -6,10 +6,6 @@ module-type: library
 Manages the element spotlight effect
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function ElementSpotlight() {
@@ -66,7 +62,7 @@ ElementSpotlight.prototype.querySelectorSafe = function(selector) {
 
 ElementSpotlight.prototype.positionSpotlight = function(x,y,innerRadius,outerRadius,opacity) {
 	this.spotlightElement.style.display = "block";
-	this.spotlightElement.style.backgroundImage = "radial-gradient(circle at " + (x / window.innerWidth * 100) + "% " + (y / window.innerHeight * 100) + "%, transparent " + innerRadius + "px, rgba(0, 0, 0, " + opacity + ") " + outerRadius + "px)";
+	this.spotlightElement.style.backgroundImage = "radial-gradient(circle at " + (x / document.documentElement.clientWidth * 100) + "% " + (y / document.documentElement.clientHeight * 100) + "%, transparent " + innerRadius + "px, rgba(0, 0, 0, " + opacity + ") " + outerRadius + "px)";
 };
 
 ElementSpotlight.prototype.easeInOut = function(v) {
@@ -132,5 +128,3 @@ ElementSpotlight.prototype.shineSpotlight = function(selectors) {
 };
 
 exports.ElementSpotlight = ElementSpotlight;
-
-})();

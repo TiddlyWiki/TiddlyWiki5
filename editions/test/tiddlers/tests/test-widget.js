@@ -6,10 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the wikitext rendering pipeline end-to-end. We also need tests that individually test parsers, rendertreenodes etc., but this gets us started.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Widget module", function() {
@@ -144,6 +141,47 @@ describe("Widget module", function() {
 		// Add a tiddler
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "<$transclude tiddler='TiddlerTwo'/>"},
+			{title: "TiddlerTwo", text: "<$transclude tiddler='TiddlerOne'/>"}
+		]);
+		// Test parse tree
+		var parseTreeNode = {type: "widget", children: [
+								{type: "transclude", attributes: {
+										"tiddler": {type: "string", value: "TiddlerOne"}
+									}}
+							]};
+		// Construct the widget node
+		var widgetNode = createWidgetNode(parseTreeNode,wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>");
+	});
+
+	it("should handle single-tiddler recursion with branching nodes", function() {
+		var wiki = new $tw.Wiki();
+		// Add a tiddler
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "<$tiddler tiddler='TiddlerOne'><$transclude /> <$transclude /></$tiddler>"},
+		]);
+		// Test parse tree
+		var parseTreeNode = {type: "widget", children: [
+								{type: "transclude", attributes: {
+										"tiddler": {type: "string", value: "TiddlerOne"}
+									}}
+							]};
+		// Construct the widget node
+		var widgetNode = createWidgetNode(parseTreeNode,wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span> <span class=\"tc-error\">Recursive transclusion error in transclude widget</span>");
+	});
+
+	it("should handle many-tiddler recursion with branching nodes", function() {
+		var wiki = new $tw.Wiki();
+		// Add a tiddler
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "<$transclude tiddler='TiddlerTwo'/> <$transclude tiddler='TiddlerTwo'/>"},
 			{title: "TiddlerTwo", text: "<$transclude tiddler='TiddlerOne'/>"}
 		]);
 		// Test parse tree
@@ -775,6 +813,26 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>Bval</p>");
 	});
 
+	it("should use default $parameters if directly rendered", function() {
+		var wiki = new $tw.Wiki();
+		var text = "<$parameters bee=default $$dollar=bill nothing empty=''>bee=<<bee>>, $dollar=<<$dollar>>, nothing=<<nothing>>, empty=<<empty>></$parameters>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// nothing = true in this attribute form because valueless attributes always equal true.
+		expect(wrapper.innerHTML).toBe("<p>bee=default, $dollar=bill, nothing=true, empty=</p>");
+	});
+
+	it("should use default \\parameters if directly rendered", function() {
+		var wiki = new $tw.Wiki();
+		var text = "\\parameters(bee:default $$dollar:bill nothing)\nbee=<<bee>>, $$dollar=<<$$dollar>>, nothing=<<nothing>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// nothing = true in this attribute form because valueless attributes always equal true.
+		expect(wrapper.innerHTML).toBe("<p>bee=default, $$dollar=bill, nothing=</p>");
+	});
+
 	it("can have more than one macroDef variable imported", function() {
 		var wiki = new $tw.Wiki();
 		wiki.addTiddlers([
@@ -884,4 +942,3 @@ describe("Widget module", function() {
 	});
 });
 
-})();

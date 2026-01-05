@@ -6,10 +6,7 @@ module-type: storyview
 Zooms between individual tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/#easeInOutCubic
@@ -99,6 +96,9 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
 		{zIndex: "500"},
 	]);
+	setTimeout(function() {
+		$tw.utils.removeStyles(targetElement, ["transition", "opacity", "transform", "zIndex"]);
+	}, duration);
 	// Transform the previous tiddler out of the way and then hide it
 	if(prevCurrentTiddler && prevCurrentTiddler !== targetElement) {
 		scale = zoomBounds.width / sourceBounds.width;
@@ -210,6 +210,9 @@ ZoominListView.prototype.remove = function(widget) {
 		{opacity: "0"},
 		{zIndex: "0"}
 	]);
+	setTimeout(function() {
+		$tw.utils.removeStyles(toWidgetDomNode, ["transformOrigin", "transform", "transition", "opacity", "zIndex"]);
+	}, duration);	
 	setTimeout(removeElement,duration);
 	// Now the tiddler we're going back to
 	if(toWidgetDomNode) {
@@ -226,5 +229,3 @@ ZoominListView.prototype.logTextNodeRoot = function(node) {
 };
 
 exports.zoomin = ZoominListView;
-
-})();

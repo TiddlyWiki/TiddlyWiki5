@@ -9,7 +9,7 @@ config: Daten, die in `$tw.config` eingefügt werden.
 filteroperator: Individuelle Funktionen für den Filter-Operator.
 global: Globale Daten, die in `$tw` eingefügt werden.
 info: Veröffentlicht System-Informationen mit dem Pseudo-plugin: [[$:/temp/info-plugin]]
-isfilteroperator: Operanden für den Filter-Operator: ''is''
+isfilteroperator: Parameter für den Filter-Operator: ''is''
 library: Allgemeiner Modultyp, für JavaScript Module.
 macro: Globale Makro-Definitionen in JavaScript.
 parser: Parser für verschiedene Tiddler Typen.

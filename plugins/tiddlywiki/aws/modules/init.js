@@ -6,10 +6,7 @@ module-type: startup
 AWS initialisation
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -33,5 +30,3 @@ exports.startup = function() {
 		logger.alert("The plugin 'tiddlywiki/aws' requires the 'tiddlywiki/jszip' plugin to be installed");
 	}
 };
-
-})();

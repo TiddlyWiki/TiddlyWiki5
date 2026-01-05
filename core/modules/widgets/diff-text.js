@@ -6,14 +6,11 @@ module-type: widget
 Widget to display a diff between two texts
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	dmp = require("$:/core/modules/utils/diff-match-patch/diff_match_patch.js");
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
+const dmp = require("$:/core/modules/utils/diff-match-patch/diff_match_patch.js");
 
 var DiffTextWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -37,19 +34,19 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	// Create the diff
-	var dmpObject = new dmp.diff_match_patch(),
-		diffs = dmpObject.diff_main(this.getAttribute("source",""),this.getAttribute("dest",""));
+	// Create the diff object
+	const editCost = $tw.utils.parseNumber(this.getAttribute("editcost","4"));
+	const diffs = dmp.diffMain(this.getAttribute("source",""),this.getAttribute("dest",""),{diffEditCost: editCost});
 	// Apply required cleanup
 	switch(this.getAttribute("cleanup","semantic")) {
 		case "none":
 			// No cleanup
 			break;
 		case "efficiency":
-			dmpObject.diff_cleanupEfficiency(diffs);
+			dmp.diffCleanupEfficiency(diffs, {diffEditCost: editCost});
 			break;
 		default: // case "semantic"
-			dmpObject.diff_cleanupSemantic(diffs);
+			dmp.diffCleanupSemantic(diffs);
 			break;
 	}
 	// Create the elements
@@ -135,7 +132,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DiffTextWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup) {
+	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup || changedAttributes.editcost) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -144,5 +141,3 @@ DiffTextWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["diff-text"] = DiffTextWidget;
-
-})();

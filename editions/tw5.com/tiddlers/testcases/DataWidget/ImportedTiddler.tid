@@ -1,0 +1,29 @@
+title: TestCases/DataWidget/ImportedTiddler
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Imported tiddler definition
+display-format: plaintext
+
+title: Narrative
+
+Using the data widget to create a tiddler that is a copy of the tiddler "Hello" with the addition of the field "custom" set to "Alpha"
++
+title: Output
+
+<$data $tiddler="Hello" custom="Alpha"/>
++
+title: Hello
+modifier: JoeBloggs
+
+This is the Hello tiddler
++
+title: ExpectedResult
+
+<p>[
+    {
+        "title": "Hello",
+        "modifier": "JoeBloggs",
+        "text": "This is the Hello tiddler",
+        "custom": "Alpha"
+    }
+]</p>

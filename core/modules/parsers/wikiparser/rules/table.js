@@ -6,10 +6,7 @@ module-type: wikirule
 Wiki text block rule for tables.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "table";
@@ -93,11 +90,12 @@ var processRow = function(prevColumns) {
 			}
 			// Check whether this is a heading cell
 			var cell;
+			var start = this.parser.pos;
 			if(chr === "!") {
 				this.parser.pos++;
-				cell = {type: "element", tag: "th", children: []};
+				cell = {type: "element", tag: "th", start: start, children: []};
 			} else {
-				cell = {type: "element", tag: "td", children: []};
+				cell = {type: "element", tag: "td", start: start, children: []};
 			}
 			tree.push(cell);
 			// Record information about this cell
@@ -121,6 +119,7 @@ var processRow = function(prevColumns) {
 			}
 			// Move back to the closing `|`
 			this.parser.pos--;
+			cell.end = this.parser.pos;
 		}
 		col++;
 		cellRegExp.lastIndex = this.parser.pos;
@@ -150,7 +149,7 @@ exports.parse = function() {
 		} else {
 			// Otherwise, create a new row if this one is of a different type
 			if(rowType !== currRowType) {
-				rowContainer = {type: "element", tag: rowContainerTypes[rowType], children: []};
+				rowContainer = {type: "element", tag: rowContainerTypes[rowType], children: [], start: this.parser.pos, end: this.parser.pos};
 				table.children.push(rowContainer);
 				currRowType = rowType;
 			}
@@ -169,19 +168,19 @@ exports.parse = function() {
 				rowContainer.children = this.parser.parseInlineRun(rowTermRegExp,{eatTerminator: true});
 			} else {
 				// Create the row
-				var theRow = {type: "element", tag: "tr", children: []};
+				var theRow = {type: "element", tag: "tr", children: [], start: rowMatch.index};
 				$tw.utils.addClassToParseTreeNode(theRow,rowCount%2 ? "oddRow" : "evenRow");
 				rowContainer.children.push(theRow);
 				// Process the row
 				theRow.children = processRow.call(this,prevColumns);
 				this.parser.pos = rowMatch.index + rowMatch[0].length;
+				theRow.end = this.parser.pos;
 				// Increment the row count
 				rowCount++;
 			}
+			rowContainer.end = this.parser.pos;
 		}
 		rowMatch = rowRegExp.exec(this.parser.source);
 	}
 	return [table];
 };
-
-})();

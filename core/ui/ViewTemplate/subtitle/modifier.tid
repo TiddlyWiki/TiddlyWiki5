@@ -1,4 +1,4 @@
 title: $:/core/ui/ViewTemplate/subtitle/modifier
 tags: $:/tags/ViewTemplate/Subtitle
 
-<$link to={{!!modifier}}/>
+<%if [{!!modifier}!is[blank]] %><$link to={{!!modifier}}/><%endif%>

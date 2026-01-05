@@ -1,0 +1,18 @@
+created: 20220427174702859
+modified: 20241019104110533
+original-modified: 20230922122551197
+tags: [[JSON in TiddlyWiki]] Learning
+title: Constructing JSON tiddlers
+ja-title: JSON Tiddlerの構築
+
+TiddlyWikiでのJSONの使い方の概要については、[[TiddlyWikiでのJSON|JSON in TiddlyWiki]]を参照してください
+
+JSONデータは単なるプレーンテキストであるため、Wikiテキストで生成するためのさまざまな手法が存在します
+
+高いレベルでは、TiddlyWiki独自のTiddler形式でJSONデータを生成する方法がいくつかあります: 
+
+* [[JSONTiddlerウィジェット|JSONTiddlerWidget]]
+* [[jsontiddlerマクロ|jsontiddler Macro]]
+* [[jsontiddlersマクロ|jsontiddlers Macro]]
+
+JSONデータを手動で構築する場合、特殊文字が適切にエスケープされていることを確認するために[[jsonstringifyオペレーター|jsonstringify Operator]]が必要です
