@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for returning the names of the module types in this wiki
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -23,5 +20,3 @@ exports.moduletypes = function(source,operator,options) {
 	results.sort();
 	return results;
 };
-
-})();

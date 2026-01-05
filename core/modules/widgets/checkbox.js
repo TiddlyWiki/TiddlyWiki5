@@ -6,10 +6,7 @@ module-type: widget
 Checkbox widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -47,6 +44,9 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	}
 	if(isChecked === undefined && this.checkboxIndeterminate === "yes") {
 		this.inputDomNode.indeterminate = true;
+	}
+	if(this.tabIndex) {
+		this.inputDomNode.setAttribute("tabindex", this.tabIndex);
 	}
 	if(this.isDisabled === "yes") {
 		this.inputDomNode.setAttribute("disabled",true);
@@ -155,7 +155,7 @@ CheckboxWidget.prototype.getValue = function() {
 		if(this.checkboxTag) {
 			return false;
 		}
-		if(this.checkboxField) {
+		if(this.checkboxField || this.checkboxIndex) {
 			if(this.checkboxDefault === this.checkboxChecked) {
 				return true;
 			}
@@ -306,6 +306,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxClass = this.getAttribute("class","");
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	this.isDisabled = this.getAttribute("disabled","no");
+	this.tabIndex = this.getAttribute();
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -315,7 +316,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.index || changedAttributes.listField || changedAttributes.listIndex || changedAttributes.filter || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes.indeterminate || changedAttributes["class"] || changedAttributes.disabled) {
+	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.index || changedAttributes.listField || changedAttributes.listIndex || changedAttributes.filter || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes.indeterminate || changedAttributes["class"] || changedAttributes.disabled || changedAttributes.tabindex) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -341,6 +342,3 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.checkbox = CheckboxWidget;
-
-})();
-	

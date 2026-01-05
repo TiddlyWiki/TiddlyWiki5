@@ -1,0 +1,22 @@
+created: 20140904090300000
+modified: 20241129111454910
+original-modified: 20211018102355896
+tags: HelloThere
+title: Some of the things you can do with TiddlyWiki
+ja-title: TiddlyWikiでできること
+type: text/vnd.tiddlywiki
+
+* メモを取り、タグとハイパーリンクを使用してメモ間を結びつけます
+* タブ、表、タグベースのリスト、目次を使用して整理します
+* お気に入りのWebサイトをブックマークします(http://giffmex.org/experiments/tidmarks.html の例を参照)
+* タスクと予定を追跡し、複数のタグで整理します([[タスク管理の例|TaskManagementExample]]を参照)
+* レシピ、個人ライブラリ、連絡先、音楽コレクションなど、あらゆるものを蓄積します
+* ブログやウェブサイトを作成します
+* 本を書きます
+* 画像をギャラリーに整理します([[アイコンギャラリー|Icon Gallery]]を参照)
+* ~TiddlyWiki内の情報をオンラインファイル、添付ファイル、Tiddlerファイル、または特定のオンラインTiddlerへのリンクとして他のユーザーと共有します(~TiddlyWikiファイルのTiddlerを別の~TiddlyWikiファイルにクリック&ドラッグして、何が起こるかを確認してください)
+* スケッチを描きます([[Motovun Jack.jpg]] を編集し、画像の上に描画を開始して、何が起こるかを確認してください)
+* Lightboxなどの使い慣れたWebユーザーインターフェイス要素を使用します - [[サンプルウィザード|SampleWizard]]を参照してください
+* スライドショープレゼンテーションを作成します
+* 他の~TiddlyWikiファイルにリンクする中央の~TiddlyWikiファイルを使用して、ローカルやオンラインのナレッジベースをセットアップします(http://recursos.giffmex.org はスペイン語のオンライン例です)
+* Tiddlerをデータとして使用してデータビジュアリゼーションをセットアップします(https://tiddlywiki.com/plugins/tiddlywiki/d3/ でビジュアリゼーションを参照してください)

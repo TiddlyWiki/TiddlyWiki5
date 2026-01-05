@@ -1,0 +1,16 @@
+created: 20140916213421041
+modified: 20241220115009879
+original-modified: 20160702084215576
+tags: Editions
+title: Empty Edition
+ja-title: 空エディション
+type: text/vnd.tiddlywiki
+
+
+TiddlyWikiの"空"エディションはバニラディストリビューションであり、コアコード以外に追加されているプラグインや構成はありません
+
+空のエディションは次からダウンロードできます:
+
+* リンク: [ext[empty.html]]
+* ビルトイン: {{$:/editions/tw5.com/snippets/download-empty-button}}
+ブラウザによっては、ダウンロード開始前にダウンロードを受け入れるかどうかを尋ねられる場合があります

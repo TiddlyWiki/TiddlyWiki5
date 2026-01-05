@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/geodistance
+caption: geodistance operator
+tags: $:/tags/GeospatialDocs
+
+!! `geodistance` operator
+
+The `geodistance` operator calculates the distance between two points in [[GeoJSON Point Feature]] format. The points are specified as two operands. An optional third operand specifies the units as `miles`, `kilometers`, `degrees` or `radians` (defaults to `miles`).
+
+!! Examples
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geodistance"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>

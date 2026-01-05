@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 
 ! Setting Up
 
-# Fork the TiddlyWiki GitHub repository (https://github.com/Jermolene/TiddlyWiki5)
+# Fork the TiddlyWiki GitHub repository (https://github.com/TiddlyWiki/TiddlyWiki5)
 #* If your GitHub username is JoeBloggs, your fork will be https://github.com/JoeBloggs/TiddlyWiki5
 # Create a branch with the name of the translation you intend to create (eg "cy-GB" for "Welsh (United Kingdom)")
 #* IETF language codes: http://www.lingoes.net/en/translator/langcode.htm
@@ -45,4 +45,4 @@ Content of `plugin.info` for Joe Bloggs' Welsh translation:
 
 Sometimes the master en-GB language tiddlers are updated with revised content or new items. The best way to keep track of language-related commits to ~TiddlyWiki5:master is to monitor this RSS/Atom feed:
 
-https://github.com/Jermolene/TiddlyWiki5/commits/master/core/language.atom
+https://github.com/TiddlyWiki/TiddlyWiki5/commits/master/core/language.atom

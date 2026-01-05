@@ -6,10 +6,7 @@ module-type: widget
 Dropzone widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var IMPORT_TITLE = "$:/Import";
@@ -329,5 +326,3 @@ DropZoneWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.dropzone = DropZoneWidget;
-
-})();

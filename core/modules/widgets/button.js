@@ -6,11 +6,10 @@ module-type: widget
 Button widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
+
+const ALLOWED_SELECTED_ARIA_ATTR = ["aria-checked", "aria-selected", "aria-pressed"];
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
@@ -78,9 +77,14 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	var classes = (this["class"]) ? this["class"].split(" ") : [],
 		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
 	if(this.selectedClass) {
-		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
-			$tw.utils.pushTop(classes, this.selectedClass.split(" "));
-			domNode.setAttribute("aria-checked", "true");
+		if((this.set || this.setTitle) && this.setTo) {
+			const selectedAria = ALLOWED_SELECTED_ARIA_ATTR.includes(this.selectedAria) ? this.selectedAria : "aria-checked";
+			if(this.isSelected()) {
+				$tw.utils.pushTop(classes, this.selectedClass.split(" "));
+				domNode.setAttribute(selectedAria, "true");
+			} else {
+				domNode.setAttribute(selectedAria, "false");
+			}
 		}
 		if(isPoppedUp) {
 			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
@@ -97,6 +101,10 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		sourcePrefix: "data-",
 		destPrefix: "data-"
 	});
+	this.assignAttributes(domNode,{
+		sourcePrefix: "aria-",
+		destPrefix: "aria-"
+	});
 	// Assign other attributes
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
@@ -104,10 +112,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this.tooltip) {
 		domNode.setAttribute("title",this.tooltip);
 	}
-	if(this["aria-label"]) {
-		domNode.setAttribute("aria-label",this["aria-label"]);
-	}
-	if(this.role) {
+	if (this.role) {
 		domNode.setAttribute("role", this.role);
 	}
 	if(this.popup || this.popupTitle) {
@@ -251,12 +256,12 @@ ButtonWidget.prototype.execute = function() {
 	this.setTo = this.getAttribute("setTo");
 	this.popup = this.getAttribute("popup");
 	this.hover = this.getAttribute("hover");
-	this["aria-label"] = this.getAttribute("aria-label");
 	this.role = this.getAttribute("role");
 	this.tooltip = this.getAttribute("tooltip");
 	this.style = this.getAttribute("style");
 	this["class"] = this.getAttribute("class","");
 	this.selectedClass = this.getAttribute("selectedClass");
+	this.selectedAria = this.getAttribute("selectedAria");
 	this.defaultSetValue = this.getAttribute("default","");
 	this.buttonTag = this.getAttribute("tag");
 	this.dragTiddler = this.getAttribute("dragTiddler");
@@ -295,7 +300,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
+	if(changedAttributes.tooltip || changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -307,10 +312,12 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 			sourcePrefix: "data-",
 			destPrefix: "data-"
 		});
+		this.assignAttributes(this.domNodes[0],{
+			sourcePrefix: "aria-",
+			destPrefix: "aria-"
+		});
 	}
 	return this.refreshChildren(changedTiddlers);
 };
 
 exports.button = ButtonWidget;
-
-})();

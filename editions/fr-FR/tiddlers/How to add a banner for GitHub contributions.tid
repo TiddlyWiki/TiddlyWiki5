@@ -15,7 +15,7 @@ Si vous utilisez Node.js, vous pouvez répliquer cette fonction pour votre propr
 	}</code></pre>
 # Copiez le tiddler [[$:/ContributionBanner]] vers votre wiki
 # Effectuez les changements suivants<<dp>>
-## Ajuster le lien GitHub https://github.com/Jermolene/TiddlyWiki5/edit/master/editions/tw5.com/tiddlers/ pour le faire pointer vers votre propre répertoire GitHub.
+## Ajuster le lien GitHub https://github.com/TiddlyWiki/TiddlyWiki5/edit/master/editions/tw5.com/tiddlers/ pour le faire pointer vers votre propre répertoire GitHub.
 ## Assurez-vous que le texte commençant par "Can you help us improve this documentation?" est approprié pour vos visiteurs
 ## Remplacez le lien vers [[Améliorer la documentation de TiddlyWiki|Improving TiddlyWiki Documentation]] par un lien vers le tiddler qui contient vos instructions pour votre propre procédure de contributions.
 

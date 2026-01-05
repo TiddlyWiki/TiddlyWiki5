@@ -7,6 +7,7 @@ title: Output
 
 \whitespace trim
 <$transclude $tiddler="Output"/>
+
 +
 title: ExpectedResult
 

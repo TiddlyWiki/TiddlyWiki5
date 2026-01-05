@@ -1,0 +1,17 @@
+created: 20141117000000000
+modified: 20241020105658198
+original-modified: 20170204191253218
+tags: Learning [[Customise TiddlyWiki]]
+title: How to add a new tab to the sidebar
+ja-title: サイドバーに新しいタブを追加する方法
+type: text/vnd.tiddlywiki
+
+サイドバーメニューに新しいタブを作成するには: 
+
+# Tiddlerを作成し、[[システムタグ|SystemTags]]の[[$:/tags/SideBar]]タグでタグ付けします
+#* 目次を作成するには、[[目次マクロ|Table-of-Contents Macros]]を使用して新しいタブTiddlerを設定します。例えば、ここで使用している[[目次|TableOfContents]]を参照してください
+# デフォルトでは、Tiddlerタイトルがタブのタイトルとして使用されますが、`caption`フィールドを使用してオーバーライドできます
+# タブの順序を定義するには、[[タグ付け|Tagging]]で説明したように、`list-after`フィールドや`list-before`フィールドを使用します
+#* 例: `list-after`に[[$:/core/ui/SideBar/Open]]をセットすると、"表示中"タブの直後にサイドバータブが配置されます
+
+タグ`$:/tags/MoreSideBar`を使用すると、同様の方法で"詳しく"タブの下に新しいタブを作成できます

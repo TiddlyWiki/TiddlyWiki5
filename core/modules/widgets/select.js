@@ -16,10 +16,7 @@ Select widget:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -53,6 +50,9 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 	});
 	if(this.selectMultiple) {
 		domNode.setAttribute("multiple","multiple");
+	}
+	if(this.isDisabled === "yes") {
+		domNode.setAttribute("disabled", true);
 	}
 	if(this.selectSize) {
 		domNode.setAttribute("size",this.selectSize);
@@ -173,6 +173,7 @@ SelectWidget.prototype.execute = function() {
 	this.selectTabindex = this.getAttribute("tabindex");
 	this.selectTooltip = this.getAttribute("tooltip");
 	this.selectFocus = this.getAttribute("focus");
+	this.isDisabled = this.getAttribute("disabled","no");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -183,7 +184,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 SelectWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// If we're using a different tiddler/field/index then completely refresh ourselves
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip || changedAttributes.tabindex) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip || changedAttributes.tabindex || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -206,5 +207,3 @@ SelectWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.select = SelectWidget;
-
-})();

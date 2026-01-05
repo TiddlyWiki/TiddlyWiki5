@@ -1,5 +1,5 @@
 created: 20180905075846391
-modified: 20230319130830880
+modified: 20240413045138914
 tags: [[WebServer Guides]]
 title: Using the external JavaScript template
 type: text/vnd.tiddlywiki
@@ -20,7 +20,7 @@ The remaining inefficiency when working in the client server configuration is th
 
 ! Using the external ~JavaScript template with the client-server configuration
 
-The mechanism is activated by setting the [[root-tiddler|WebServer Parameter: root-tiddler]] parameter to `$:/core/save/all-external-js`. This template externalises ~TiddlyWiki's core ~JavaScript into a separate file. For example, the following command will start your server with caching enabled. It will transfer the wiki with two GET requests, and the core can be cached by the browser.
+The mechanism is activated by setting the [[root-tiddler|WebServer Parameter: root-tiddler]] parameter to `$:/core/save/all-external-js`. This template externalises ~TiddlyWiki's core ~JavaScript into a separate file. For example, the following command will [[start your server with caching enabled|WebServer Parameter: use-browser-cache]]. It will transfer the wiki with two GET requests, and the core can be cached by the browser.
 
 ```
 tiddlywiki YOUR_WIKI_FOLDER --listen 'root-tiddler=$:/core/save/all-external-js' use-browser-cache=yes

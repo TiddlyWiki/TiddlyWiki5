@@ -1,5 +1,5 @@
 created: 20131124220600000
-modified: 20140912141637389
+modified: 20241025051111864
 tags: [[TiddlyWiki on Node.js]]
 title: How to build a TiddlyWiki5 from individual tiddlers
 type: text/vnd.tiddlywiki
@@ -14,4 +14,4 @@ First install TiddlyWiki as described in [[Installing TiddlyWiki on Node.js]].
 ##* Alternatively, just copy the `editions/empty` folder from the TiddlyWiki5 repo
 # Create individual TiddlerFiles in the `~/MyWiki/tiddlers` directory
 # Execute the following command from the TiddlyWiki5 root directory to build a TiddlyWiki5 file from the tiddlers:
-## `tiddlywiki ~/MyWiki --rendertiddler $:/core/save/all index.html text/plain`
+## `tiddlywiki ~/MyWiki --render $:/core/save/all index.html text/plain`

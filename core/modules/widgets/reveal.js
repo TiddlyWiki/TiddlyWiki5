@@ -6,10 +6,7 @@ module-type: widget
 Reveal widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -93,6 +90,26 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 			top = this.popup.top + this.popup.height;
 			break;
 	}
+	// if requested, clamp the popup so that it will always be fully inside its parent (the first upstream element with position:relative), as long as the popup is smaller than its parent
+	// if position is absolute then clamping is done to the canvas boundary, since there is no "parent"
+	if(this.clampToParent !== "none") {
+		if(this.popup.absolute) {
+			var parentWidth = window.innerWidth,
+				parentHeight = window.innerHeight;
+		} else {
+			var parentWidth = domNode.offsetParent.offsetWidth,
+				parentHeight = domNode.offsetParent.offsetHeight;
+		}
+		var right = left + domNode.offsetWidth,
+			bottom = top + domNode.offsetHeight;
+		if((this.clampToParent === "both" || this.clampToParent === "right") && right > parentWidth) {
+			left = parentWidth - domNode.offsetWidth;
+		}
+		if((this.clampToParent === "both" || this.clampToParent === "bottom") && bottom > parentHeight) {
+			top = parentHeight - domNode.offsetHeight;
+		}
+		// clamping on left and top sides is taken care of by positionAllowNegative
+	}
 	if(!this.positionAllowNegative) {
 		left = Math.max(0,left);
 		top = Math.max(0,top);
@@ -127,6 +144,7 @@ RevealWidget.prototype.execute = function() {
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
+	this.clampToParent = this.getAttribute("clamp","none");
 	// Compute the title of the state tiddler and read it
 	this.stateTiddlerTitle = this.state;
 	this.stateTitle = this.getAttribute("stateTitle");
@@ -145,7 +163,7 @@ Read the state tiddler
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
 	var state,
-	    defaultState = this["default"];
+		defaultState = this["default"];
 	if(this.stateTitle) {
 		var stateTitleTiddler = this.wiki.getTiddler(this.stateTitle);
 		if(this.stateField) {
@@ -207,7 +225,7 @@ RevealWidget.prototype.readPopupState = function(state) {
 RevealWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-reveal");
-	this.domNode.className = classes.join(" ");
+	this.domNode.className = classes.join(" ").trim();
 };
 
 /*
@@ -256,18 +274,18 @@ RevealWidget.prototype.updateState = function() {
 		this.renderChildren(domNode,null);
 	}
 	// Animate our DOM node
-	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
-		this.positionPopup(domNode);
-		$tw.utils.addClass(domNode,"tc-popup"); // Make sure that clicks don't dismiss popups within the revealed content
-
-	}
 	if(this.isOpen) {
 		domNode.removeAttribute("hidden");
-        $tw.anim.perform(this.openAnimation,domNode);
+		// Position popup after making it visible to ensure correct dimensions
+		if(!domNode.isTiddlyWikiFakeDom && this.type === "popup") {
+			this.positionPopup(domNode);
+			$tw.utils.addClass(domNode,"tc-popup"); // Make sure that clicks don't dismiss popups within the revealed content
+		}
+		$tw.anim.perform(this.openAnimation,domNode);
 	} else {
 		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
 			//make sure that the state hasn't changed during the close animation
-			self.readState()
+			self.readState();
 			if(!self.isOpen) {
 				domNode.setAttribute("hidden","true");
 			}
@@ -276,5 +294,3 @@ RevealWidget.prototype.updateState = function() {
 };
 
 exports.reveal = RevealWidget;
-
-})();

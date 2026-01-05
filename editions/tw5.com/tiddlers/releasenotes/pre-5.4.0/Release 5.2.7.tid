@@ -1,0 +1,26 @@
+caption: 5.2.7
+created: 20230326083239710
+modified: 20230326083239710
+released: 20230326083239710
+tags: ReleaseNotes
+title: Release 5.2.7
+type: text/vnd.tiddlywiki
+description: Bug fix release for v5.2.6
+
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.2.6...v5.2.7]]//
+
+<<.banner-credits
+	credit:"""Congratulations to [[StS|https://talk.tiddlywiki.org/u/StS]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/new-release-banner-competition-for-tiddlywiki-v5-2-6/6403/3]] and the [[voting thread|https://talk.tiddlywiki.org/t/vote-for-the-tiddlywiki-banner-v5-2-6/6469]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/7926af85419ef2f813276a05833598d6d65e2ecd/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
+This is a bug fix release intended to resolve a backwards compatibility issue discovered in v5.2.6. See [[this GitHub ticket|https://github.com/TiddlyWiki/TiddlyWiki5/issues/7371]] for the background.
+
+The issue is that trailing newlines within a macro definitions were being ignored, which affected whether the content were parsed in inline or block mode.
+
+Since v5.2.7 replaces v5.2.6 that was only released for less than a week, here is the [[release note for v5.2.6|Release 5.2.6]].
+
+! Release Note for v5.2.6
+
+{{Release 5.2.6}}

@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator returning its operand parsed as a list
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -38,5 +35,3 @@ exports.enlist = function(source,operator,options) {
 		return list;
 	}
 };
-
-})();

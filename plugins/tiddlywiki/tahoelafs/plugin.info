@@ -1,6 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/tahoelafs",
-	"name": "TahoeLAFS",
-	"description": "Tahoe-LAFS saver",
-	"list": "readme"
-}
