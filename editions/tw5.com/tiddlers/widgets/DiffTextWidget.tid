@@ -27,7 +27,7 @@ The content of the <<.wid diff-text>> widget is displayed immediately before the
 |<<.attr source>> |The source text |
 |<<.attr dest>> |The destination text |
 |<<.attr cleanup>> |Optional post-processing to improve readability (default is <<.value semantic>>) |
-|<<.attr editcost>> |<<.from-version "5.4.0">> Threshold parameter for <<.value efficient>> cleanup mode (default is <<.value 4>>) |
+|<<.attr editcost>> |<<.from-version "5.4.0">> Threshold parameter for <<.value efficiency>> cleanup mode (default is <<.value 4>>) |
 |<<.attr mode>> |<<.from-version "5.4.0">> Specifies the granularity at which differences are computed and displayed (default is <<.value chars>>) |
 
 
@@ -37,8 +37,8 @@ The <<.attr cleanup>> attribute determines which optional post-processing should
 
 * <<.value none>>: No cleanup is performed
 * <<.value semantic>> (default): Optimizes the differences for readability
-* <<.value efficient>>: Optimizes the differences to minimise the number of operations for subsequent processing
-** When using <<.value efficient>> mode, the <<.attr editcost>> parameter controls the cost threshold for the cleanup algorithm, determining how aggressively the diff algorithm merges nearby edits for better human readability (default value is 4).
+* <<.value efficiency>>: Optimizes the differences to minimise the number of operations for subsequent processing
+** When using <<.value efficiency>> mode, the <<.attr editcost>> parameter controls the cost threshold for the cleanup algorithm, determining how aggressively the diff algorithm merges nearby edits for better human readability (default value is 4).
 
 <<.note """Note that in many cases the results will be the same regardless of the cleanup option. See the [[docs|https://github.com/google/diff-match-patch/wiki/API]] of the underlying library for more details""">>
 
