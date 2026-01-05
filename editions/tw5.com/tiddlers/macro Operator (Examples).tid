@@ -1,7 +1,0 @@
-created: 20260104045032090
-modified: 20260104045240842
-tags: [[macro Operator]]
-title: macro Operator (Examples)
-type: text/vnd.tiddlywiki
-
-<<.operator-example 1 "[macro[now],{$:/config/NewJournal/Title}]">>
