@@ -146,9 +146,9 @@ DiffTextWidget.prototype.refresh = function(changedTiddlers) {
 	}
 };
 
-// these two functions are adapted from https://github.com/google/diff-match-patch/wiki/Line-or-Word-Diffs
+// This function is adapted from https://github.com/google/diff-match-patch/wiki/Line-or-Word-Diffs
 function diffLineWordMode(text1,text2,mode,editCost) {
-	var a = diffPartsToChars(text1,text2,mode);
+	var a = $tw.utils.diffPartsToChars(text1,text2,mode);
 	var lineText1 = a.chars1;
 	var lineText2 = a.chars2;
 	var lineArray = a.lineArray;
@@ -156,55 +156,5 @@ function diffLineWordMode(text1,text2,mode,editCost) {
 	dmp.diffCharsToLines(diffs,lineArray);
 	return diffs;
 }
-
-function diffPartsToChars(text1,text2,mode) {
-	var lineArray = [];
-	var lineHash = {};
-	lineArray[0] = "";
-
-	function diff_linesToPartsMunge_(text,mode) {
-		var chars = "";
-		var lineStart = 0;
-		var lineEnd = -1;
-		var lineArrayLength = lineArray.length,
-			regexpResult;
-		var searchRegexp = /\W+/g;
-		while(lineEnd < text.length - 1) {
-			if(mode === "words") {
-				regexpResult = searchRegexp.exec(text);
-				lineEnd = searchRegexp.lastIndex;
-				if(regexpResult === null) {
-					lineEnd = text.length;
-				}
-				lineEnd = --lineEnd;
-			} else {
-				lineEnd = text.indexOf("\n", lineStart);
-				if(lineEnd == -1) {
-					lineEnd = text.length - 1;
-				}
-			}
-			var line = text.substring(lineStart, lineEnd + 1);
-
-			if(lineHash.hasOwnProperty ? lineHash.hasOwnProperty(line) : (lineHash[line] !== undefined)) {
-				chars += String.fromCharCode(lineHash[line]);
-			} else {
-				if(lineArrayLength == maxLines) {
-					line = text.substring(lineStart);
-					lineEnd = text.length;
-				}
-				chars += String.fromCharCode(lineArrayLength);
-				lineHash[line] = lineArrayLength;
-				lineArray[lineArrayLength++] = line;
-			}
-			lineStart = lineEnd + 1;
-		}
-		return chars;
-	}
-	var maxLines = 40000;
-	var chars1 = diff_linesToPartsMunge_(text1,mode);
-	maxLines = 65535;
-	var chars2 = diff_linesToPartsMunge_(text2,mode);
-	return {chars1: chars1, chars2: chars2, lineArray: lineArray};
-};
 
 exports["diff-text"] = DiffTextWidget;
