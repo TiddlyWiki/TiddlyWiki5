@@ -2188,7 +2188,7 @@ $tw.findNpmItem = function(name) {
 					try {
 						var pkg = JSON.parse(fs.readFileSync(pkgJsonPath,"utf8"));
 						if(pkg.tiddlywiki) {
-							for (var pluginName in pkg.tiddlywiki) {
+							for(var pluginName in pkg.tiddlywiki) {
 								pluginMap[pluginName] = path.resolve(modulesDir, files[j], pkg.tiddlywiki[pluginName]);
 							}
 						}
