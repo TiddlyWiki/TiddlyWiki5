@@ -89,13 +89,33 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 			top = this.popup.top + this.popup.height;
 			break;
 	}
+	// if requested, clamp the popup so that it will always be fully inside its parent (the first upstream element with position:relative), as long as the popup is smaller than its parent
+	// if position is absolute then clamping is done to the canvas boundary, since there is no "parent"
+	if(this.clampToParent !== "none") {
+		if(this.popup.absolute) {
+			var parentWidth = window.innerWidth,
+				parentHeight = window.innerHeight;
+		} else {
+			var parentWidth = domNode.offsetParent.offsetWidth,
+				parentHeight = domNode.offsetParent.offsetHeight;
+		}
+		var right = left + domNode.offsetWidth,
+			bottom = top + domNode.offsetHeight;
+		if((this.clampToParent === "both" || this.clampToParent === "right") && right > parentWidth) {
+			left = parentWidth - domNode.offsetWidth;
+		}
+		if((this.clampToParent === "both" || this.clampToParent === "bottom") && bottom > parentHeight) {
+			top = parentHeight - domNode.offsetHeight;
+		}
+		// clamping on left and top sides is taken care of by positionAllowNegative
+	}
 	if(!this.positionAllowNegative) {
 		left = Math.max(0,left);
 		top = Math.max(0,top);
 	}
-	if (this.popup.absolute) {
+	if(this.popup.absolute) {
 		// Traverse the offsetParent chain and correct the offset to make it relative to the parent node.
-		for (var offsetParentDomNode = domNode.offsetParent; offsetParentDomNode; offsetParentDomNode = offsetParentDomNode.offsetParent) {
+		for(var offsetParentDomNode = domNode.offsetParent; offsetParentDomNode; offsetParentDomNode = offsetParentDomNode.offsetParent) {
 			left -= offsetParentDomNode.offsetLeft;
 			top -= offsetParentDomNode.offsetTop;
 		}
@@ -123,6 +143,7 @@ RevealWidget.prototype.execute = function() {
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
+	this.clampToParent = this.getAttribute("clamp","none");
 	// Compute the title of the state tiddler and read it
 	this.stateTiddlerTitle = this.state;
 	this.stateTitle = this.getAttribute("stateTitle");
@@ -141,7 +162,7 @@ Read the state tiddler
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
 	var state,
-	    defaultState = this["default"];
+		defaultState = this["default"];
 	if(this.stateTitle) {
 		var stateTitleTiddler = this.wiki.getTiddler(this.stateTitle);
 		if(this.stateField) {
@@ -263,7 +284,7 @@ RevealWidget.prototype.updateState = function() {
 	} else {
 		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
 			//make sure that the state hasn't changed during the close animation
-			self.readState()
+			self.readState();
 			if(!self.isOpen) {
 				domNode.setAttribute("hidden","true");
 			}
