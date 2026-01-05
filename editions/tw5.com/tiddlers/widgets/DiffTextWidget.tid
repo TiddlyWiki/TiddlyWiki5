@@ -66,7 +66,7 @@ To see the effects of all parameters, use this example:
 |tc-max-width tc-edit-max-width|k
 |<$edit-text tiddler="SampleTiddlerFirst" rows="5"/>|<$edit-text tiddler="SampleTiddlerSecond" rows="5"/>|
 
-<$diff-text source={{SampleTiddlerFirst}} dest={{SampleTiddlerSecond}} cleanup={{{ [{!!cleanup}!is[blank]else[efficient]] }}} editcost={{{ [{!!editcost}!is[blank]else[4]] }}} mode={{{ [{!!mode}!is[blank]else[chars]] }}}/>
+<$diff-text source={{SampleTiddlerFirst}} dest={{SampleTiddlerSecond}} cleanup={{{ [{!!cleanup}!is[blank]else[efficiency]] }}} editcost={{{ [{!!editcost}!is[blank]else[4]] }}} mode={{{ [{!!mode}!is[blank]else[chars]] }}}/>
 
 !! <<.attr mode>>
 <$radio field="mode" value="chars" default="chars" class="tc-small-gap-right"> <<.value chars>></$radio>
@@ -76,7 +76,7 @@ To see the effects of all parameters, use this example:
 !! <<.attr cleanup>>
 <$radio field="cleanup" value="none" class="tc-small-gap-right"> <<.value none>></$radio>
 <$radio field="cleanup" value="semantic" class="tc-small-gap-right"> <<.value semantic>></$radio>
-<$radio field="cleanup" value="efficient" default="efficient"> <<.value efficient>></$radio>
+<$radio field="cleanup" value="efficiency" default="efficiency"> <<.value efficiency>></$radio>
 
 <% if [{!!cleanup}!match[none]!match[semantic]] %>
 

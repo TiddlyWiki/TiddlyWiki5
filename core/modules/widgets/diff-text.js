@@ -39,7 +39,7 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	const mode = this.getAttribute("mode") || "chars";
 	let diffs;
 	if(mode === "lines" || mode === "words") {
-		diffs = diffLineWordMode(this.getAttribute("source",""),this.getAttribute("dest",""),mode);
+		diffs = diffLineWordMode(this.getAttribute("source",""),this.getAttribute("dest",""),mode,editCost);
 	} else {
 		diffs = dmp.diffMain(this.getAttribute("source",""),this.getAttribute("dest",""),{diffEditCost: editCost});
 	}
@@ -147,14 +147,13 @@ DiffTextWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 // these two functions are adapted from https://github.com/google/diff-match-patch/wiki/Line-or-Word-Diffs
-function diffLineWordMode(text1,text2,mode) {
-	var dmpObject = new dmp.diff_match_patch();
+function diffLineWordMode(text1,text2,mode,editCost) {
 	var a = diffPartsToChars(text1,text2,mode);
 	var lineText1 = a.chars1;
 	var lineText2 = a.chars2;
 	var lineArray = a.lineArray;
-	var diffs = dmpObject.diff_main(lineText1,lineText2,false);
-	dmpObject.diff_charsToLines_(diffs,lineArray);
+	var diffs = dmp.diffMain(lineText1,lineText2,{diffEditCost: editCost});
+	dmp.diffCharsToLines(diffs,lineArray);
 	return diffs;
 }
 
