@@ -2159,8 +2159,15 @@ $tw.findLibraryItem = function(name,paths) {
 	var pathIndex = 0;
 	do {
 		var pluginPath = path.resolve(paths[pathIndex],"./" + name)
-		if(fs.existsSync(pluginPath) && fs.statSync(pluginPath).isDirectory()) {
-			return pluginPath;
+		try {
+			// It is faster to try and fail to stat the dir
+			// than to make an extra synchronous "fs" call just
+			// to see if it exists. So try/catch.
+			if(fs.statSync(pluginPath).isDirectory()) {
+				return pluginPath;
+			}
+		} catch(e) {
+			// Failed. Probably didn't exist. Move on.
 		}
 	} while(++pathIndex < paths.length);
 	return null;
