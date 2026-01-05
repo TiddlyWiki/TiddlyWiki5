@@ -2156,32 +2156,12 @@ paths: array of file paths to search for it
 Returns the path of the plugin folder
 */
 $tw.findLibraryItem = function(name,paths) {
-	var pathIndex = 0,
-		compactName = name.replace("/","_"),
-		pluginPath;
-	function checkPath(path) {
-		try {
-			var stats = fs.statSync(path);
-			return stats.isDirectory();
-		} catch(e) {
-			// Error occurred. Most likely, path does not exist.
-			return false;
-		}
-	}
+	var pathIndex = 0;
 	do {
-		// First check for a traditional author/plugin directory format
-		pluginPath = path.resolve(paths[pathIndex],"./" + name);
-		if(checkPath(pluginPath)) {
+		var pluginPath = path.resolve(paths[pathIndex],"./" + name)
+		if(fs.existsSync(pluginPath) && fs.statSync(pluginPath).isDirectory()) {
 			return pluginPath;
 		}
-		// For the purpose of supporting NPM's system, or other flat directory structures, we also look for the plugin in an author_plugin format.
-		pluginPath = path.resolve(paths[pathIndex],"./" + compactName);
-		if(checkPath(pluginPath)) {
-			return pluginPath;
-		}
-		// We interleave searching for these two types to respect the priority of PATH-like environment variables.
-		// I.E. If a compactName plugin shows up with a path earlier than a classical format in TIDDLYWIKI_PLUGIN_PATH, we prefer that.
-
 	} while(++pathIndex < paths.length);
 	return null;
 };
@@ -2204,25 +2184,22 @@ $tw.loadPlugin = function(name,paths) {
 
 /*
 libraryPath: Path of library folder for these plugins (relative to core path)
-envVarForPluginType: Environment variable name for these plugins
+envVar: Environment variable name for these plugins
 Returns an array of search paths
 */
-$tw.getLibraryItemSearchPaths = function(libraryPath,envVarForPluginType) {
-	var pluginPaths = [path.resolve($tw.boot.corePath,libraryPath)];
-	function addToPath(envVar) {
-		if(envVar) {
-			var env = process.env[envVar];
-			if(env) {
-				env.split(path.delimiter).map(function(item) {
-					if(item) {
-						pluginPaths.push(item);
-					}
-				});
-			}
+$tw.getLibraryItemSearchPaths = function(libraryPath,envVar) {
+	var pluginPaths = [path.resolve($tw.boot.corePath,libraryPath)],
+		env;
+	if(envVar) {
+		env = process.env[envVar];
+		if(env) {
+			env.split(path.delimiter).map(function(item) {
+				if(item) {
+					pluginPaths.push(item);
+				}
+			});
 		}
-	};
-	addToPath(envVarForPluginType);
-	addToPath("PATH");
+	}
 	return pluginPaths;
 };
 
