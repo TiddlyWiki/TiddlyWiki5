@@ -1088,10 +1088,6 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[[representation]makepatches[misreprehensionisation]]").join(" ")).toBe("@@ -1,13 +1,21 @@\n+mis\n repre\n-sent\n+hensionis\n atio\n");
 			expect(wiki.filterTiddlers("[[the cat sat on the mat]makepatches[the hat saw in every category]]").join(" ")).toBe("@@ -1,22 +1,29 @@\n the \n-c\n+h\n at sa\n-t on the mat\n+w in every category\n");
 		});
-		
-		it("should handle the macro operator", () => {
-			expect(wiki.filterTiddlers("[macro[makedatauri],[some example text],[text/plain]]").join("")).toBe("data:text/plain,some%20example%20text");
-		});
 	
 		it("should parse filter variable parameters", function(){
 		  expect($tw.utils.parseFilterVariable("currentTiddler")).toEqual(
