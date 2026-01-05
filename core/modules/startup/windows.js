@@ -63,16 +63,24 @@ exports.startup = function() {
 			$tw.eventBus.emit("window:closed",{windowID});
 		},false);
 		// Set up the styles
-		var styleParser = $tw.wiki.parseTiddler("$:/core/ui/RootStylesheet",{parseAsInline: true}),
-			styleWidgetNode = $tw.wiki.makeWidget(styleParser,{document: srcDocument});
-		styleWidgetNode.render(srcDocument.head,null);
+		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
+				document: $tw.fakeDocument,
+				variables: variables,
+				importPageMacros: true}),
+			styleContainer = $tw.fakeDocument.createElement("style");
+		styleWidgetNode.render(styleContainer,null);
+		var styleElement = srcDocument.createElement("style");
+		styleElement.innerHTML = styleContainer.textContent;
+		srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
 			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: variables});
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
-			styleWidgetNode.refresh(changes);
+			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
+				styleElement.innerHTML = styleContainer.textContent;
+			}
 			widgetNode.refresh(changes);
 		};
 		$tw.wiki.addEventListener("change",refreshHandler);
