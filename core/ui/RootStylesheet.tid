@@ -6,6 +6,7 @@ code-body: yes
 <$let currentTiddler={{$:/language}} languageTitle={{!!name}}>
 	<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!is[draft]]">
 		<style type="text/css">
+			<$text text={{{ [<currentTiddler>addprefix[/* ]addsuffix[ */]] }}}/>
 			<$transclude $tiddler=<<currentTiddler>> $output="text/plain" $mode="block"/>
 		</style>
 	</$list>
