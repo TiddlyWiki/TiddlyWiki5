@@ -38,7 +38,7 @@ SendMessageWidget.prototype.execute = function() {
 	this.actionValue = this.getAttribute("$value","");
 	this.actionNames = this.getAttribute("$names");
 	this.actionValues = this.getAttribute("$values");
-	this.actionMessageJson = this.getAttribute("$messageJson");
+	this.actionMessageJson = this.getAttribute("$messageJSON");
 };
 
 /*
