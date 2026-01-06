@@ -60,7 +60,7 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 						var result = {};
 						$tw.utils.each(obj,function(value,name) {
 							var valueType = typeof value;
-							if(value === null || value === undefined || ["string","boolean","number"].indexOf(valueType) !== -1) {
+							if(value === null || ["string","boolean","number"].indexOf(valueType) !== -1) {
 								result[name] = value;
 							} else if(valueType === "object" && value.constructor === Object) {
 								result[name] = collectJsonProps(value);
