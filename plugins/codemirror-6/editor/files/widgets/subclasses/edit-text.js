@@ -18,6 +18,12 @@ Widget subclass for CodeMirror 6 editor (production-ready)
 
 "use strict";
 
+// Only register the subclass in browser environments
+// Node.js builds don't have the base class (edit-codemirror-6) available
+if(!$tw.browser) {
+	return;
+}
+
 exports.baseClass = "edit-codemirror-6";
 
 exports.constructor = function (parseTreeNode, options) {
@@ -496,11 +502,6 @@ exports.prototype.updateStylesheetTagCache = function () {
 // ============================================================================
 
 exports.prototype.render = function (parent, nextSibling) {
-	// CodeMirror 6 requires browser APIs - skip rendering on Node.js
-	if (!$tw.browser) {
-		return;
-	}
-
 	// Call base class render
 	Object.getPrototypeOf(Object.getPrototypeOf(this)).render.call(this, parent, nextSibling);
 
