@@ -2158,7 +2158,7 @@ Returns the path of the plugin folder
 $tw.findLibraryItem = function(name,paths) {
 	var pathIndex = 0;
 	do {
-		var pluginPath = path.resolve(paths[pathIndex],"./" + name)
+		var pluginPath = path.resolve(paths[pathIndex],"./" + name);
 		try {
 			// It is faster to try and fail to stat the dir
 			// than to make an extra synchronous "fs" call just
@@ -2166,7 +2166,8 @@ $tw.findLibraryItem = function(name,paths) {
 			if(fs.statSync(pluginPath).isDirectory()) {
 				return pluginPath;
 			}
-		} catch {
+		} catch(e) {
+			e;
 			// Failed. Probably didn't exist. Move on.
 		}
 	} while(++pathIndex < paths.length);
@@ -2192,11 +2193,13 @@ $tw.findNpmItem = function(name) {
 								pluginMap[pluginName] = path.resolve(modulesDir, files[j], pkg.tiddlywiki[pluginName]);
 							}
 						}
-					} catch {
+					} catch(e) {
+						e;
 						// File likely didn't exist. Move on.
 					}
 				}
-			} catch {
+			} catch(e) {
+				e;
 				// Modules directory likely didn't exist. Also move on.
 			}
 		}
