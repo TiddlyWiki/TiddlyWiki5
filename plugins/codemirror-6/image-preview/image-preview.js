@@ -17,9 +17,9 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 	var CONFIG_TIDDLER = "$:/config/codemirror-6/imagePreview";
 
 	// Match [img[source]] or [img width=x [source]] patterns
-	// - Must start with [img not preceded by a letter
+	// - Must start with [img preceded by start of string, whitespace, or non-letter
 	// - Source cannot contain [ or ] or newlines (prevents matching across lines or into other constructs)
-	var IMG_PATTERN = /(?<![a-zA-Z])\[img(?:\s+[^\[\]\n]+)?\[([^\[\]\n]+)\]\]/g;
+	var IMG_PATTERN = /(?:^|[^a-zA-Z])(\[img(?:\s+[^\[\]\n]+)?\[([^\[\]\n]+)\]\])/g;
 
 	exports.plugin = {
 		name: "image-preview",
@@ -124,10 +124,10 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 				var match;
 				IMG_PATTERN.lastIndex = 0;
 				while((match = IMG_PATTERN.exec(text)) !== null) {
-					var fullMatch = match[0];
-					var src = match[1];
+					var fullMatch = match[1];
+					var src = match[2];
 					// Position after the closing ]]
-					var afterPos = match.index + fullMatch.length;
+					var afterPos = match.index + match[0].length;
 
 					images.push({
 						from: afterPos,
@@ -261,9 +261,9 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 				var match;
 				IMG_PATTERN.lastIndex = 0;
 				while((match = IMG_PATTERN.exec(text)) !== null) {
-					var fullMatch = match[0];
-					var src = match[1];
-					var afterPos = match.index + fullMatch.length;
+					var fullMatch = match[1];
+					var src = match[2];
+					var afterPos = match.index + match[0].length;
 
 					images.push({
 						from: afterPos,

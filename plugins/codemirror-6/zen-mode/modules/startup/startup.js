@@ -29,7 +29,7 @@ exports.startup = function() {
 	try {
 		var editTextModule = require("$:/plugins/tiddlywiki/codemirror-6/widgets/subclasses/edit-text.js");
 
-		if (editTextModule && editTextModule.registry) {
+		if(editTextModule && editTextModule.registry) {
 			editTextModule.registry.register("zenMode", {
 				/**
 				 * Called when an editor widget is rendered
@@ -43,7 +43,7 @@ exports.startup = function() {
 				 */
 				onRefresh: function(widget, changedTiddlers) {
 					// Update theme on overlay if zen mode is active
-					if (zenMode.isActive) {
+					if(zenMode.isActive) {
 						zenMode.updateTheme();
 					}
 				},
@@ -53,7 +53,7 @@ exports.startup = function() {
 				 */
 				onMessage: {
 					"tm-cm6-zen-mode": function(widget, event) {
-						if (widget.engine && widget.engine.domNode) {
+						if(widget.engine && widget.engine.domNode) {
 							zenMode.toggle(widget.engine.domNode, widget.engine);
 						}
 					}

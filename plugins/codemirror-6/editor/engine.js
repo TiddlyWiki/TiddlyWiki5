@@ -74,11 +74,11 @@ function hasWindowTimers() {
 
 // Only input-type elements for focus navigation (not buttons/links)
 var INPUT_SELECTOR = [
-	'textarea:not([disabled])',
+	"textarea:not([disabled])",
 	'input:not([disabled]):not([type="button"]):not([type="submit"]):not([type="reset"])',
-	'select:not([disabled])',
+	"select:not([disabled])",
 	'[contenteditable="true"]'
-].join(', ');
+].join(", ");
 
 /**
  * Get all visible input elements in document order
@@ -548,15 +548,15 @@ function CodeMirrorEngine(options) {
 		extensions.push(
 			this._compartments.spellcheck.of(
 				spellcheckEnabled ?
-				EditorView.contentAttributes.of({
-					spellcheck: "true",
-					lang: spellcheckLang,
-					autocorrect: "on",
-					autocapitalize: "on"
-				}) :
-				EditorView.contentAttributes.of({
-					spellcheck: "false"
-				})
+					EditorView.contentAttributes.of({
+						spellcheck: "true",
+						lang: spellcheckLang,
+						autocorrect: "on",
+						autocapitalize: "on"
+					}) :
+					EditorView.contentAttributes.of({
+						spellcheck: "false"
+					})
 			)
 		);
 	}
@@ -942,8 +942,8 @@ function CodeMirrorEngine(options) {
 
 				// Priority TiddlyWiki shortcuts first
 				if($tw.keyboardManager.handleKeydownEvent(event, {
-						onlyPriority: true
-					})) {
+					onlyPriority: true
+				})) {
 					return true;
 				}
 
@@ -1899,10 +1899,10 @@ CodeMirrorEngine.prototype._applyTextOperation = function(operation) {
 	// Get the operation parameters from main selection
 	var mainCutStart = isNumber(operation.cutStart) ? operation.cutStart :
 		isNumber(operation.selStart) ? operation.selStart :
-		state.selection.main.from;
+			state.selection.main.from;
 	var mainCutEnd = isNumber(operation.cutEnd) ? operation.cutEnd :
 		isNumber(operation.selEnd) ? operation.selEnd :
-		mainCutStart;
+			mainCutStart;
 	var replacement = String(operation.replacement);
 	var mainNewSelStart = isNumber(operation.newSelStart) ? operation.newSelStart : mainCutStart + replacement.length;
 	var mainNewSelEnd = isNumber(operation.newSelEnd) ? operation.newSelEnd : mainNewSelStart;

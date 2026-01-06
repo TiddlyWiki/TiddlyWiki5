@@ -665,7 +665,7 @@ function checkFilterBrackets(text, startPos) {
 		if(char === '"') {
 			i++;
 			while(i < text.length && text[i] !== '"') {
-				if(text[i] === '\\') i++;
+				if(text[i] === "\\") i++;
 				i++;
 			}
 			i++;
@@ -674,7 +674,7 @@ function checkFilterBrackets(text, startPos) {
 		if(char === "'") {
 			i++;
 			while(i < text.length && text[i] !== "'") {
-				if(text[i] === '\\') i++;
+				if(text[i] === "\\") i++;
 				i++;
 			}
 			i++;
@@ -682,9 +682,9 @@ function checkFilterBrackets(text, startPos) {
 		}
 
 		// Check brackets
-		if(char === '[') {
+		if(char === "[") {
 			squareStack.push(startPos + i);
-		} else if(char === ']') {
+		} else if(char === "]") {
 			if(squareStack.length > 0) {
 				squareStack.pop();
 			} else {
@@ -693,9 +693,9 @@ function checkFilterBrackets(text, startPos) {
 					message: "Unexpected ']' in filter"
 				});
 			}
-		} else if(char === '{') {
+		} else if(char === "{") {
 			curlyStack.push(startPos + i);
-		} else if(char === '}') {
+		} else if(char === "}") {
 			if(curlyStack.length > 0) {
 				curlyStack.pop();
 			} else {
@@ -704,10 +704,10 @@ function checkFilterBrackets(text, startPos) {
 					message: "Unexpected '}' in filter"
 				});
 			}
-		} else if(char === '<' && nextChar !== '%' && nextChar !== '!' && nextChar !== '/') {
+		} else if(char === "<" && nextChar !== "%" && nextChar !== "!" && nextChar !== "/") {
 			// < for variables, but not <% or <!-- or </
 			angleStack.push(startPos + i);
-		} else if(char === '>' && text[i - 1] !== '%' && text[i - 1] !== '-') {
+		} else if(char === ">" && text[i - 1] !== "%" && text[i - 1] !== "-") {
 			// > closing variable, but not %> or ->
 			if(angleStack.length > 0) {
 				angleStack.pop();
@@ -947,10 +947,10 @@ function findUnclosedWidgets(tree, state) {
 						// Find the containing structure (skip self - look at parent)
 						var containerLimit = null;
 						var containerType = null;
-						for(var c = containerStack.length - 2; c >= 0; c--) {
-							containerLimit = containerStack[c].insertBefore;
-							containerType = containerStack[c].type;
-							break;
+						var parentIdx = containerStack.length - 2;
+						if(parentIdx >= 0) {
+							containerLimit = containerStack[parentIdx].insertBefore;
+							containerType = containerStack[parentIdx].type;
 						}
 
 						widgetStack.push({
@@ -2016,15 +2016,15 @@ function createTiddlyWikiLinter(view) {
 							// Remove from current position and insert at target position
 							view.dispatch({
 								changes: [{
-										from: deleteStart,
-										to: deleteEnd,
-										insert: ""
-									},
-									{
-										from: adjustedInsertPos,
-										to: adjustedInsertPos,
-										insert: pragmaText + "\n"
-									}
+									from: deleteStart,
+									to: deleteEnd,
+									insert: ""
+								},
+								{
+									from: adjustedInsertPos,
+									to: adjustedInsertPos,
+									insert: pragmaText + "\n"
+								}
 								]
 							});
 						};

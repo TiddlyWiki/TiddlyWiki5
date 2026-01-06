@@ -282,7 +282,7 @@ function getTiddlerPreview(title) {
 
 	if(!tiddler) {
 		return '<div class="cm6-preview-missing">Tiddler not found: <em>' +
-			$tw.utils.htmlEncode(title) + '</em></div>';
+			$tw.utils.htmlEncode(title) + "</em></div>";
 	}
 
 	var fields = tiddler.fields;
@@ -290,7 +290,7 @@ function getTiddlerPreview(title) {
 
 	// Title
 	html += '<div class="cm6-preview-title"><strong>' +
-		$tw.utils.htmlEncode(fields.title) + '</strong></div>';
+		$tw.utils.htmlEncode(fields.title) + "</strong></div>";
 
 	// Tags
 	if(fields.tags) {
@@ -298,15 +298,15 @@ function getTiddlerPreview(title) {
 		if(tags.length > 0) {
 			html += '<div class="cm6-preview-tags">';
 			tags.forEach(function(tag) {
-				html += '<span class="cm6-preview-tag">' + $tw.utils.htmlEncode(tag) + '</span> ';
+				html += '<span class="cm6-preview-tag">' + $tw.utils.htmlEncode(tag) + "</span> ";
 			});
-			html += '</div>';
+			html += "</div>";
 		}
 	}
 
 	// Type indicator
 	if(fields.type && fields.type !== "text/vnd.tiddlywiki") {
-		html += '<div class="cm6-preview-type">' + $tw.utils.htmlEncode(fields.type) + '</div>';
+		html += '<div class="cm6-preview-type">' + $tw.utils.htmlEncode(fields.type) + "</div>";
 	}
 
 	// Text preview
@@ -326,17 +326,17 @@ function getTiddlerPreview(title) {
 			text = $tw.utils.htmlEncode(text);
 			// Convert newlines to <br>
 			text = text.replace(/\n/g, "<br>");
-			html += '<div class="cm6-preview-text">' + text + '</div>';
+			html += '<div class="cm6-preview-text">' + text + "</div>";
 		}
 	}
 
 	// Modified date
 	if(fields.modified) {
 		var date = $tw.utils.formatDateString(fields.modified, "YYYY-0MM-0DD 0hh:0mm");
-		html += '<div class="cm6-preview-meta">Modified: ' + date + '</div>';
+		html += '<div class="cm6-preview-meta">Modified: ' + date + "</div>";
 	}
 
-	html += '</div>';
+	html += "</div>";
 	return html;
 }
 
