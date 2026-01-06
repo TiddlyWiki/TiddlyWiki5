@@ -7,7 +7,6 @@ WebAssembly Text (WAT/WAST) language support for CodeMirror 6
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var langWast = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-wast/lang-wast.js");
@@ -45,7 +44,7 @@ exports.plugin = {
 		return WAST_TYPES.indexOf(type) !== -1;
 	},
 
-	getCompartmentContent: function(context) {
+	getCompartmentContent: function(_context) {
 		return [langWast.wast()];
 	},
 

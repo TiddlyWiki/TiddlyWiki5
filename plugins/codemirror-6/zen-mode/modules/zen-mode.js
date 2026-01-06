@@ -323,7 +323,7 @@ ZenMode.prototype.setupFocusMode = function() {
 	if(focusMode === "none" || !this.engine || !this.engine.view) return;
     
 	var self = this;
-	var view = this.engine.view;
+	var _view = this.engine.view;
     
 	if(focusMode === "sentence" || focusMode === "paragraph") {
 		// Create update listener for sentence/paragraph focus

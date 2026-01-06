@@ -7,7 +7,6 @@ HTML language support for CodeMirror 6
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Use the HTML language from the core lib (already bundled)
@@ -48,7 +47,7 @@ exports.plugin = {
 		return HTML_TYPES.indexOf(type) !== -1;
 	},
 
-	getCompartmentContent: function(context) {
+	getCompartmentContent: function(_context) {
 		return [langHtml.html()];
 	},
 

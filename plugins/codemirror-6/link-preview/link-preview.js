@@ -390,7 +390,7 @@ function handleMouseMove(event, view) {
 	}, HOVER_DELAY);
 }
 
-function handleMouseLeave(event, view) {
+function handleMouseLeave(_event, _view) {
 	if(hoverTimeout) {
 		clearTimeout(hoverTimeout);
 		hoverTimeout = null;
@@ -426,7 +426,7 @@ exports.plugin = {
 		}
 	},
 
-	getExtensions: function(context) {
+	getExtensions: function(_context) {
 		var core = this._core;
 		var EditorView = core.view.EditorView;
 
@@ -438,7 +438,7 @@ exports.plugin = {
 		];
 	},
 
-	extendAPI: function(engine, context) {
+	extendAPI: function(_engine, _context) {
 		return {
 			/**
 			 * Show preview for a specific tiddler at position
@@ -468,7 +468,7 @@ exports.plugin = {
 		};
 	},
 
-	destroy: function(engine) {
+	destroy: function(_engine) {
 		// Clean up tooltip
 		if(tooltipElement && tooltipElement.parentNode) {
 			tooltipElement.parentNode.removeChild(tooltipElement);

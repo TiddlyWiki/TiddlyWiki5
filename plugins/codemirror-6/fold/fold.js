@@ -100,7 +100,7 @@ Supports folding TiddlyWiki5 syntax when lang-tiddlywiki is present:
 			};
 		},
 
-		registerEvents: function(engine, context) {
+		registerEvents: function(engine, _context) {
 			var core = this._core;
 			var foldGutter = (core.language || {}).foldGutter;
 			var self = this;
@@ -120,15 +120,15 @@ Supports folding TiddlyWiki5 syntax when lang-tiddlywiki is present:
 			};
 		},
 
-		extendAPI: function(engine, context) {
+		extendAPI: function(_engine, _context) {
 			var core = this._core;
 			var foldCode = (core.language || {}).foldCode;
 			var unfoldCode = (core.language || {}).unfoldCode;
 			var foldAll = (core.language || {}).foldAll;
 			var unfoldAll = (core.language || {}).unfoldAll;
 			var foldGutter = (core.language || {}).foldGutter;
-			var foldEffect = (core.language || {}).foldEffect;
-			var unfoldEffect = (core.language || {}).unfoldEffect;
+			var _foldEffect = (core.language || {}).foldEffect;
+			var _unfoldEffect = (core.language || {}).unfoldEffect;
 			var foldedRanges = (core.language || {}).foldedRanges;
 			var foldable = (core.language || {}).foldable;
 			var self = this;

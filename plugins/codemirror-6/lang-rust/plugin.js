@@ -7,7 +7,6 @@ Rust language support for CodeMirror 6
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var langRust = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-rust/lang-rust.js");
@@ -45,7 +44,7 @@ exports.plugin = {
 		return RUST_TYPES.indexOf(type) !== -1;
 	},
 
-	getCompartmentContent: function(context) {
+	getCompartmentContent: function(_context) {
 		return [langRust.rust()];
 	},
 

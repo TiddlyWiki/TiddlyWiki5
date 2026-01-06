@@ -34,14 +34,14 @@ exports.startup = function() {
 				/**
 				 * Called when an editor widget is rendered
 				 */
-				onRender: function(widget) {
+				onRender: function(_widget) {
 					// Nothing special needed on render
 				},
 				
 				/**
 				 * Called on widget refresh
 				 */
-				onRefresh: function(widget, changedTiddlers) {
+				onRefresh: function(_widget, _changedTiddlers) {
 					// Update theme on overlay if zen mode is active
 					if(zenMode.isActive) {
 						zenMode.updateTheme();
@@ -52,7 +52,7 @@ exports.startup = function() {
 				 * Message handlers
 				 */
 				onMessage: {
-					"tm-cm6-zen-mode": function(widget, event) {
+					"tm-cm6-zen-mode": function(widget, _event) {
 						if(widget.engine && widget.engine.domNode) {
 							zenMode.toggle(widget.engine.domNode, widget.engine);
 						}
@@ -60,7 +60,7 @@ exports.startup = function() {
 				}
 			});
 		}
-	} catch (e) {
+	} catch (_e) {
 		// Core plugin not loaded yet or registry not available
 	}
 };

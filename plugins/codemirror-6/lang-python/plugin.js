@@ -7,7 +7,6 @@ Python language support for CodeMirror 6
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var langPython = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-python/lang-python.js");
@@ -47,7 +46,7 @@ exports.plugin = {
 		return PYTHON_TYPES.indexOf(type) !== -1;
 	},
 
-	getCompartmentContent: function(context) {
+	getCompartmentContent: function(_context) {
 		return [langPython.python()];
 	},
 

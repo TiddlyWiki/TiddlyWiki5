@@ -124,7 +124,7 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 				var match;
 				IMG_PATTERN.lastIndex = 0;
 				while((match = IMG_PATTERN.exec(text)) !== null) {
-					var fullMatch = match[1];
+					var _fullMatch = match[1];
 					var src = match[2];
 					// Position after the closing ]]
 					var afterPos = match.index + match[0].length;
@@ -261,7 +261,7 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 				var match;
 				IMG_PATTERN.lastIndex = 0;
 				while((match = IMG_PATTERN.exec(text)) !== null) {
-					var fullMatch = match[1];
+					var _fullMatch = match[1];
 					var src = match[2];
 					var afterPos = match.index + match[0].length;
 
@@ -309,7 +309,7 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 			return this._imagePlugin;
 		},
 
-		registerEvents: function(engine, context) {
+		registerEvents: function(engine, _context) {
 			var self = this;
 
 			return {

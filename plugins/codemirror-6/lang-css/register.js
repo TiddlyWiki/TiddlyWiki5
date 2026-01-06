@@ -12,7 +12,6 @@ loaded before TiddlyWiki so nested code highlighting works in code blocks.
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "cm6-lang-css";

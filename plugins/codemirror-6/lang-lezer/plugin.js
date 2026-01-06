@@ -7,7 +7,6 @@ Lezer grammar language support for CodeMirror 6
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var langLezer = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer/lang-lezer.js");
@@ -44,7 +43,7 @@ exports.plugin = {
 		return LEZER_TYPES.indexOf(type) !== -1;
 	},
 
-	getCompartmentContent: function(context) {
+	getCompartmentContent: function(_context) {
 		return [langLezer.lezer()];
 	},
 

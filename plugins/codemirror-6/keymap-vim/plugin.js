@@ -29,7 +29,7 @@ Vim keybindings for CodeMirror 6
 	// Define custom ex commands for TiddlyWiki integration
 	if(vimModule && vimModule.Vim) {
 		// :w - save tiddler without closing (persist draft to original tiddler)
-		vimModule.Vim.defineEx("write", "w", function(cm, params) {
+		vimModule.Vim.defineEx("write", "w", function(cm, _params) {
 			var context = getContextFromCM(cm);
 			var widget = context && context.options && context.options.widget;
 			if(widget && widget.wiki) {
@@ -53,7 +53,7 @@ Vim keybindings for CodeMirror 6
 		});
 
 		// :wq - save and close tiddler
-		vimModule.Vim.defineEx("wq", "wq", function(cm, params) {
+		vimModule.Vim.defineEx("wq", "wq", function(cm, _params) {
 			var context = getContextFromCM(cm);
 			var widget = context && context.options && context.options.widget;
 			if(widget) {
@@ -67,7 +67,7 @@ Vim keybindings for CodeMirror 6
 		});
 
 		// :q - close/cancel tiddler (discard changes)
-		vimModule.Vim.defineEx("quit", "q", function(cm, params) {
+		vimModule.Vim.defineEx("quit", "q", function(cm, _params) {
 			var context = getContextFromCM(cm);
 			var widget = context && context.options && context.options.widget;
 			if(widget) {

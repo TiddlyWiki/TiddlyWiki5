@@ -7,7 +7,6 @@ CSS language support for CodeMirror 6
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var langCss = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-css/lang-css.js");
@@ -46,7 +45,7 @@ exports.plugin = {
 		return CSS_TYPES.indexOf(type) !== -1;
 	},
 
-	getCompartmentContent: function(context) {
+	getCompartmentContent: function(_context) {
 		return [langCss.css()];
 	},
 

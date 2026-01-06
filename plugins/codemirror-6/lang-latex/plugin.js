@@ -7,7 +7,6 @@ LaTeX language support for CodeMirror 6
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var langLatex = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-latex/lang-latex.js");
@@ -93,7 +92,7 @@ exports.plugin = {
 		return LATEX_TYPES.indexOf(type) !== -1;
 	},
 
-	getCompartmentContent: function(context) {
+	getCompartmentContent: function(_context) {
 		return [getLatexSupport(this._core)];
 	},
 

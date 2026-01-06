@@ -304,7 +304,7 @@ function openInNewWindow(title) {
 // Visual Feedback
 // ============================================================================
 
-var currentHighlight = null;
+var _currentHighlight = null;
 
 /**
  * Add underline decoration to clickable link
@@ -316,7 +316,7 @@ function highlightLink(view, from, to) {
 	// Add CSS class to the editor for styling
 	view.dom.classList.add("cm6-ctrl-held");
 
-	currentHighlight = {
+	_currentHighlight = {
 		from: from,
 		to: to
 	};
@@ -329,7 +329,7 @@ function clearHighlight(view) {
 	if(view && view.dom) {
 		view.dom.classList.remove("cm6-ctrl-held");
 	}
-	currentHighlight = null;
+	_currentHighlight = null;
 }
 
 // ============================================================================
@@ -486,7 +486,7 @@ exports.plugin = {
 		];
 	},
 
-	extendAPI: function(engine, context) {
+	extendAPI: function(_engine, _context) {
 		return {
 			/**
 			 * Navigate to tiddler at current cursor position
@@ -534,9 +534,9 @@ exports.plugin = {
 		};
 	},
 
-	destroy: function(engine) {
+	destroy: function(_engine) {
 		ctrlHeld = false;
 		lastMousePos = null;
-		currentHighlight = null;
+		_currentHighlight = null;
 	}
 };

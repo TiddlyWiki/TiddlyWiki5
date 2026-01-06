@@ -7,7 +7,6 @@ Markdown language support for CodeMirror 6
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var langMarkdown = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-markdown/lang-markdown.js");
@@ -47,7 +46,7 @@ exports.plugin = {
 		return MARKDOWN_TYPES.indexOf(type) !== -1;
 	},
 
-	getCompartmentContent: function(context) {
+	getCompartmentContent: function(_context) {
 		return [langMarkdown.markdown()];
 	},
 

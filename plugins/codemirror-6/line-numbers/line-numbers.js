@@ -55,7 +55,7 @@ Line numbers plugin - shows line numbers in the gutter and highlights active lin
 			return extensions;
 		},
 
-		registerEvents: function(engine, context) {
+		registerEvents: function(engine, _context) {
 			var core = this._core;
 			var lineNumbers = (core.view || {}).lineNumbers;
 			var highlightActiveLine = (core.view || {}).highlightActiveLine;
@@ -87,7 +87,7 @@ Line numbers plugin - shows line numbers in the gutter and highlights active lin
 			};
 		},
 
-		extendAPI: function(engine, context) {
+		extendAPI: function(_engine, _context) {
 			var core = this._core;
 			var lineNumbers = (core.view || {}).lineNumbers;
 			var highlightActiveLine = (core.view || {}).highlightActiveLine;

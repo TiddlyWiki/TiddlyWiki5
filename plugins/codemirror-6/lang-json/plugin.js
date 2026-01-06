@@ -7,7 +7,6 @@ JSON language support for CodeMirror 6
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var langJson = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-json/lang-json.js");
@@ -16,7 +15,7 @@ var langJson = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-json/lan
 var lintLib = null;
 try {
 	lintLib = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lint/codemirror-lint.js");
-} catch (e) {
+} catch (_e) {
 	// Lint library not available
 }
 
@@ -55,7 +54,7 @@ exports.plugin = {
 		return JSON_TYPES.indexOf(type) !== -1;
 	},
 
-	getCompartmentContent: function(context) {
+	getCompartmentContent: function(_context) {
 		var extensions = [langJson.json()];
 
 		// Add JSON linting if lint library is available

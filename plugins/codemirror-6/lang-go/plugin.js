@@ -7,7 +7,6 @@ Go language support for CodeMirror 6
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var langGo = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-go/lang-go.js");
@@ -45,7 +44,7 @@ exports.plugin = {
 		return GO_TYPES.indexOf(type) !== -1;
 	},
 
-	getCompartmentContent: function(context) {
+	getCompartmentContent: function(_context) {
 		return [langGo.go()];
 	},
 

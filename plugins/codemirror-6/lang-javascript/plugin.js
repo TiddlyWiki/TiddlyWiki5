@@ -7,7 +7,6 @@ JavaScript/TypeScript language support for CodeMirror 6
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var langJs = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-javascript/lang-javascript.js");

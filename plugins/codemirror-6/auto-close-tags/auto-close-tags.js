@@ -41,7 +41,7 @@ Auto-close tags plugin - automatically inserts closing tags for HTML and TiddlyW
 			this._core = cm6Core;
 		},
 
-		getExtensions: function(context) {
+		getExtensions: function(_context) {
 			var core = this._core;
 			var EditorView = core.view.EditorView;
 			var EditorSelection = core.state.EditorSelection;
@@ -49,7 +49,7 @@ Auto-close tags plugin - automatically inserts closing tags for HTML and TiddlyW
 			var extensions = [];
 
 			// Input handler for auto-closing tags
-			var autoCloseTagsHandler = EditorView.inputHandler.of(function(view, from, to, text, insert) {
+			var autoCloseTagsHandler = EditorView.inputHandler.of(function(view, from, to, text, _insert) {
 				// Only handle ">" character
 				if(text !== ">") return false;
 
@@ -135,7 +135,7 @@ Auto-close tags plugin - automatically inserts closing tags for HTML and TiddlyW
 			extensions.push(autoCloseTagsHandler);
 
 			// Handler for completing closing tags when typing </
-			var closeTagHandler = EditorView.inputHandler.of(function(view, from, to, text, insert) {
+			var closeTagHandler = EditorView.inputHandler.of(function(view, from, to, text, _insert) {
 				// Only handle "/" after "<"
 				if(text !== "/") return false;
 
@@ -205,11 +205,11 @@ Auto-close tags plugin - automatically inserts closing tags for HTML and TiddlyW
 			return extensions;
 		},
 
-		registerEvents: function(engine, context) {
+		registerEvents: function(_engine, _context) {
 			return {};
 		},
 
-		extendAPI: function(engine, context) {
+		extendAPI: function(_engine, _context) {
 			return {};
 		}
 	};

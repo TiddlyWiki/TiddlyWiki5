@@ -24,7 +24,7 @@ Checks for:
 var lintLib = null;
 try {
 	lintLib = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lint/codemirror-lint.js");
-} catch (e) {
+} catch (_e) {
 	// Lint library not available
 }
 
@@ -459,7 +459,7 @@ var _knownFilterOperators = null;
 /**
  * Get known filter operators from TiddlyWiki
  */
-function getKnownFilterOperators() {
+function _getKnownFilterOperators() {
 	if(_knownFilterOperators) return _knownFilterOperators;
 
 	var operators = new Set();
@@ -527,7 +527,7 @@ function getKnownTags() {
 					tags.add(tag);
 				});
 			}
-		} catch (e) {
+		} catch (_e) {
 			// Ignore errors
 		}
 	}
@@ -605,7 +605,7 @@ function findInvalidTagReferences(tree, state) {
  * Check for unmatched brackets in text
  * Returns array of {pos, char, type} for unmatched brackets
  */
-function findUnmatchedBrackets(text, openSeq, closeSeq, startPos) {
+function _findUnmatchedBrackets(text, openSeq, closeSeq, startPos) {
 	var unmatched = [];
 	var stack = [];
 	var i = 0;
@@ -1092,7 +1092,7 @@ function findUnclosedPragmas(text, startPos) {
 		if(openMatch) {
 			var pragmaType = openMatch[1];
 			var pragmaName = openMatch[2];
-			var params = openMatch[3] || "";
+			var _params = openMatch[3] || "";
 			var afterParams = openMatch[4] || "";
 
 			// Single-line definition: has non-whitespace content after the params on the same line
@@ -1787,7 +1787,7 @@ function createTiddlyWikiLinter(view) {
 
 					actions.push({
 						name: actionName,
-						apply: function(view, from, to) {
+						apply: function(view, _from, _to) {
 							view.dispatch({
 								changes: {
 									from: pos,
@@ -1802,12 +1802,12 @@ function createTiddlyWikiLinter(view) {
 					if(!html) {
 						actions.push({
 							name: "Make self-closing",
-							apply: function(view, from, to) {
+							apply: function(view, _from, _to) {
 								// Find the > and replace with />
-								var text = view.state.doc.sliceString(from, to);
+								var text = view.state.doc.sliceString(_from, _to);
 								var closePos = text.lastIndexOf(">");
 								if(closePos !== -1) {
-									var insertPos = from + closePos;
+									var insertPos = _from + closePos;
 									view.dispatch({
 										changes: {
 											from: insertPos,
@@ -1871,7 +1871,7 @@ function createTiddlyWikiLinter(view) {
 						// Insert before parent's \end
 						actions.push({
 							name: "Add \\end " + name + " (before parent)",
-							apply: function(view, from, to) {
+							apply: function(view, _from, _to) {
 								view.dispatch({
 									changes: {
 										from: targetPos,
@@ -1885,7 +1885,7 @@ function createTiddlyWikiLinter(view) {
 						// No specific position - insert at document end
 						actions.push({
 							name: "Add \\end " + name,
-							apply: function(view, from, to) {
+							apply: function(view, _from, _to) {
 								var docLength = view.state.doc.length;
 								view.dispatch({
 									changes: {
@@ -1899,7 +1899,7 @@ function createTiddlyWikiLinter(view) {
 					}
 					actions.push({
 						name: "Add \\end",
-						apply: function(view, from, to) {
+						apply: function(view, _from, _to) {
 							var pos = typeof targetPos === "number" ? targetPos : view.state.doc.length;
 							var prefix = typeof targetPos === "number" ? "" : "\n";
 							view.dispatch({
@@ -1953,7 +1953,7 @@ function createTiddlyWikiLinter(view) {
 				actions: [{
 					name: actionName,
 					apply: (function(targetPos) {
-						return function(view, from, to) {
+						return function(view, from, _to) {
 							var docLength = view.state.doc.length;
 							var startLine = view.state.doc.lineAt(from);
 							var pragmaStart = startLine.from;
@@ -2061,7 +2061,7 @@ function createTiddlyWikiLinter(view) {
 
 					actions.push({
 						name: actionName,
-						apply: function(view, from, to) {
+						apply: function(view, _from, _to) {
 							view.dispatch({
 								changes: {
 									from: pos,
@@ -2106,7 +2106,7 @@ function createTiddlyWikiLinter(view) {
 
 				actions.push({
 					name: actionName,
-					apply: function(view, from, to) {
+					apply: function(view, _from, _to) {
 						view.dispatch({
 							changes: {
 								from: pos,
@@ -2164,7 +2164,7 @@ function createTiddlyWikiLinter(view) {
 				source: "tiddlywiki",
 				actions: [{
 					name: "Remove definition",
-					apply: function(view, from, to) {
+					apply: function(view, _from, _to) {
 						// Find the full pragma block and remove it
 						// This is a simplified version - may need enhancement for multi-line
 						var line = view.state.doc.lineAt(issue.defFrom);
@@ -2331,7 +2331,7 @@ exports.plugin = {
 		return buildLintExtensions(this._core, context);
 	},
 
-	destroy: function(engine) {
+	destroy: function(_engine) {
 		// Clear cache on destroy
 		_knownDefinitions = null;
 	},
@@ -2379,7 +2379,7 @@ exports.plugin = {
 					engine.view.dispatch({
 						effects: compartment.reconfigure(newContent)
 					});
-				} catch (e) {}
+				} catch (_e) {}
 
 				// Clear cache
 				_knownDefinitions = null;
@@ -2408,7 +2408,7 @@ exports.plugin = {
 					engine.view.dispatch({
 						effects: compartment.reconfigure(newContent)
 					});
-				} catch (e) {}
+				} catch (_e) {}
 
 				// Trigger linting after reconfigure
 				if(_forceLinting) {
@@ -2428,7 +2428,7 @@ exports.plugin = {
 		 * Handle tm-cm6-toggle-lint message from toolbar button
 		 * Toggles the per-tiddler lint setting and reconfigures the compartment
 		 */
-		"tm-cm6-toggle-lint": function(widget, event) {
+		"tm-cm6-toggle-lint": function(widget, _event) {
 			if(!widget || !widget.engine || !widget.engine.view) {
 				return;
 			}
@@ -2444,7 +2444,7 @@ exports.plugin = {
 
 			var globalEnabled = isLintEnabled();
 			var perTiddlerDisabled = isLintDisabledForTiddler(tiddlerTitle);
-			var currentlyEnabled = globalEnabled && !perTiddlerDisabled;
+			var _currentlyEnabled = globalEnabled && !perTiddlerDisabled;
 
 			// Toggle the per-tiddler state by creating/deleting the temp tiddler
 			var disableTiddler = "$:/temp/codemirror-6/lint-disabled/" + tiddlerTitle;
@@ -2486,7 +2486,7 @@ exports.plugin = {
 				engine.view.dispatch({
 					effects: compartment.reconfigure(newContent)
 				});
-			} catch (e) {}
+			} catch (_e) {}
 
 			// Clear cache
 			_knownDefinitions = null;

@@ -158,7 +158,7 @@ function getCM6Core() {
 			_coreCache = core;
 			return core;
 		}
-	} catch (e) {
+	} catch (_e) {
 		// Fall through
 	}
 
@@ -238,12 +238,12 @@ function discoverPlugins() {
 					if(isFunction(pluginDef.init)) {
 						try {
 							pluginDef.init(core);
-						} catch (e) {}
+						} catch (_e) {}
 					}
 
 					plugins.push(pluginDef);
 				}
-			} catch (e) {}
+			} catch (_e) {}
 		});
 	} else {}
 
@@ -478,7 +478,7 @@ function CodeMirrorEngine(options) {
 			if(shouldActivate) {
 				this._activePlugins.push(plugin);
 			}
-		} catch (e) {}
+		} catch (_e) {}
 	}
 
 
@@ -722,7 +722,7 @@ function CodeMirrorEngine(options) {
 					}
 					return cursors;
 				},
-				update: function(update, dom) {
+				update: function(update, _dom) {
 					return update.docChanged || update.selectionSet;
 				},
 				"class": "cm-cursorLayer"
@@ -806,7 +806,7 @@ function CodeMirrorEngine(options) {
 		}
 	}];
 	var emptyData = [];
-	extensions.push(EditorState.languageData.of(function(state, pos, side) {
+	extensions.push(EditorState.languageData.of(function(_state, _pos, _side) {
 		var sources = self.getCompletionSources();
 		// Only provide autocomplete if we have sources to offer
 		if(sources.length === 0 && !self._completeAnyWordEnabled) {
@@ -824,7 +824,7 @@ function CodeMirrorEngine(options) {
 		if(isFunction(keymapPlugin.getExtensions)) {
 			try {
 				initialKeymapExtensions = keymapPlugin.getExtensions(context) || [];
-			} catch (e) {}
+			} catch (_e) {}
 		}
 	}
 	this._currentKeymap = initialKeymapId;
@@ -887,7 +887,7 @@ function CodeMirrorEngine(options) {
 					}
 				}
 			}
-		} catch (e) {}
+		} catch (_e) {}
 	}
 
 	// User-provided extensions
@@ -982,21 +982,21 @@ function CodeMirrorEngine(options) {
 				}
 				return false;
 			},
-			drop: function(event, view) {
+			drop: function(event, _view) {
 				if(self._destroyed) return false;
 				if(self.widget && typeof self.widget.handleDropEvent === "function") {
 					return self.widget.handleDropEvent(event);
 				}
 				return false;
 			},
-			paste: function(event, view) {
+			paste: function(event, _view) {
 				if(self._destroyed) return false;
 				if(self.widget && typeof self.widget.handlePasteEvent === "function") {
 					return self.widget.handlePasteEvent(event);
 				}
 				return false;
 			},
-			click: function(event, view) {
+			click: function(event, _view) {
 				if(self._destroyed) return false;
 				if(self.widget && typeof self.widget.handleClickEvent === "function") {
 					return self.widget.handleClickEvent(event);
@@ -1069,7 +1069,7 @@ function CodeMirrorEngine(options) {
 				}
 				registeredEventPlugins[apiPlugin.name] = true;
 			}
-		} catch (e) {}
+		} catch (_e) {}
 	}
 
 	// ========================================================================
@@ -1096,7 +1096,7 @@ function CodeMirrorEngine(options) {
 						}
 					}
 				}
-			} catch (e) {}
+			} catch (_e) {}
 		}
 	}
 
@@ -1166,13 +1166,13 @@ CodeMirrorEngine.prototype._emitNow = function() {
 	if(this._onChange) {
 		try {
 			this._onChange(text);
-		} catch (e) {}
+		} catch (_e) {}
 	}
 
 	if(this.widget && typeof this.widget.saveChanges === "function") {
 		try {
 			this.widget.saveChanges(text);
-		} catch (e) {}
+		} catch (_e) {}
 	}
 };
 
@@ -1184,7 +1184,7 @@ CodeMirrorEngine.prototype._handleBlur = function() {
 	if(this._pendingChange && this._onBlurSave) {
 		try {
 			this._onBlurSave();
-		} catch (e) {}
+		} catch (_e) {}
 	}
 };
 
@@ -1195,7 +1195,7 @@ CodeMirrorEngine.prototype._triggerEvent = function(eventName, data) {
 	for(var i = 0; i < handlers.length; i++) {
 		try {
 			handlers[i].call(this, data);
-		} catch (e) {}
+		} catch (_e) {}
 	}
 };
 
@@ -1233,7 +1233,7 @@ CodeMirrorEngine.prototype._handleSettingsChanged = function(settings) {
 			if(isFunction(keymapPlugin.getExtensions)) {
 				try {
 					newKeymapExtensions = keymapPlugin.getExtensions(this._pluginContext) || [];
-				} catch (e) {}
+				} catch (_e) {}
 			}
 		} else if(newKeymapId === "default") {}
 
@@ -1332,7 +1332,7 @@ CodeMirrorEngine.prototype._handleSettingsChanged = function(settings) {
 						}
 						return cursors;
 					},
-					update: function(update, dom) {
+					update: function(update, _dom) {
 						return update.docChanged || update.selectionSet;
 					},
 					"class": "cm-cursorLayer"
@@ -1514,7 +1514,7 @@ CodeMirrorEngine.prototype.setType = function(newType) {
 
 		try {
 			shouldBeActive = plugin.condition(context);
-		} catch (e) {}
+		} catch (_e) {}
 
 
 		if(wasActive !== shouldBeActive) {
@@ -1534,14 +1534,14 @@ CodeMirrorEngine.prototype.setType = function(newType) {
 						try {
 							newContent = plugin.getCompartmentContent(context) || [];
 							if(!isArray(newContent)) newContent = [newContent];
-						} catch (e) {}
+						} catch (_e) {}
 					} else {
 						// Fallback: try to use getExtensions, but warn about potential issues
 						// This works if the plugin doesn't use compartment.of() in getExtensions()
 						try {
 							newContent = plugin.getExtensions(context) || [];
 							if(!isArray(newContent)) newContent = [newContent];
-						} catch (e) {}
+						} catch (_e) {}
 					}
 				}
 				// else: plugin becoming inactive - newContent stays []
@@ -1627,7 +1627,7 @@ CodeMirrorEngine.prototype.refreshLanguageConditions = function() {
 
 		try {
 			shouldBeActive = plugin.condition(context);
-		} catch (e) {}
+		} catch (_e) {}
 
 		if(wasActive !== shouldBeActive) {
 			var compartmentName = this._findPluginCompartment(plugin);
@@ -1640,12 +1640,12 @@ CodeMirrorEngine.prototype.refreshLanguageConditions = function() {
 						try {
 							newContent = plugin.getCompartmentContent(context) || [];
 							if(!isArray(newContent)) newContent = [newContent];
-						} catch (e) {}
+						} catch (_e) {}
 					} else if(isFunction(plugin.getExtensions)) {
 						try {
 							newContent = plugin.getExtensions(context) || [];
 							if(!isArray(newContent)) newContent = [newContent];
-						} catch (e) {}
+						} catch (_e) {}
 					}
 				}
 
@@ -1820,7 +1820,7 @@ CodeMirrorEngine.prototype.createTextOperation = function(type) {
 CodeMirrorEngine.prototype.executeTextOperation = function(operation) {
 	if(this._destroyed || !operation) return this.getText();
 
-	var self = this;
+	var _self = this;
 	var type = operation.type;
 
 	switch(type) {
@@ -2025,7 +2025,7 @@ CodeMirrorEngine.prototype.destroy = function() {
 		if(isFunction(plugin.destroy)) {
 			try {
 				plugin.destroy(this);
-			} catch (e) {}
+			} catch (_e) {}
 		}
 	}
 
@@ -2036,13 +2036,13 @@ CodeMirrorEngine.prototype.destroy = function() {
 
 	try {
 		if(this.view) this.view.destroy();
-	} catch (e) {}
+	} catch (_e) {}
 
 	try {
 		if(this.domNode && this.domNode.parentNode) {
 			this.domNode.parentNode.removeChild(this.domNode);
 		}
-	} catch (e) {}
+	} catch (_e) {}
 
 	this.view = null;
 	this.domNode = null;
@@ -2073,7 +2073,7 @@ CodeMirrorEngine.prototype.dispatchPluginEvent = function(eventName) {
 		if(isFunction(plugin[eventName])) {
 			try {
 				plugin[eventName].apply(plugin, args);
-			} catch (e) {}
+			} catch (_e) {}
 		}
 	}
 };

@@ -14,7 +14,6 @@ nested code highlighting in fenced code blocks (```css, ```javascript, etc.).
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "cm6-lang-tiddlywiki";
@@ -361,7 +360,7 @@ function getFieldNames() {
 
 	if($tw && $tw.wiki) {
 		// Collect all unique field names from all tiddlers
-		$tw.wiki.each(function(tiddler, title) {
+		$tw.wiki.each(function(tiddler, _title) {
 			if(tiddler && tiddler.fields) {
 				Object.keys(tiddler.fields).forEach(function(field) {
 					fields[field] = true;
@@ -522,7 +521,7 @@ function getStoryViews() {
 	var storyviews = [];
 	var seen = {};
 
-	$tw.modules.forEachModuleOfType("storyview", function(title, mod) {
+	$tw.modules.forEachModuleOfType("storyview", function(title, _mod) {
 		// The storyview name is typically derived from the module title
 		// e.g., "$:/core/modules/storyviews/classic.js" -> "classic"
 		var match = /\/([^\/]+)\.js$/.exec(title);

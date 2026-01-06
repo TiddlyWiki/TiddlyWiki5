@@ -269,7 +269,7 @@ Color picker plugin - shows inline color swatches with click-to-edit functionali
 			return extensions;
 		},
 
-		registerEvents: function(engine, context) {
+		registerEvents: function(engine, _context) {
 			var self = this;
 
 			return {

@@ -301,7 +301,7 @@ exports.plugin = {
 		return [];
 	},
 
-	extendAPI: function(engine, context) {
+	extendAPI: function(_engine, _context) {
 		return {
 			/**
 			 * Get list of user-defined snippets

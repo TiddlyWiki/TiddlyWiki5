@@ -70,7 +70,7 @@ Uses CM6 autocomplete system for proper popup display
 						if(Array.isArray(categoryEmojis)) {
 							EMOJI_DATA = EMOJI_DATA.concat(categoryEmojis);
 						}
-					} catch (parseError) {}
+					} catch (_parseError) {}
 				}
 			});
 
@@ -86,7 +86,7 @@ Uses CM6 autocomplete system for proper popup display
 			// Build search index
 			buildSearchIndex();
 
-		} catch (e) {
+		} catch (_e) {
 			EMOJI_DATA = [];
 			SHORTCODES = {};
 		}
@@ -249,7 +249,7 @@ Uses CM6 autocomplete system for proper popup display
 				}
 				node = node.parent;
 			}
-		} catch (e) {
+		} catch (_e) {
 			// Ignore errors
 		}
 		return false;

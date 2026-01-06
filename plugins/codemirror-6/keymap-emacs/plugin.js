@@ -21,7 +21,7 @@ Emacs-style keybindings for CodeMirror 6
 			this._core = cm6Core;
 		},
 
-		getExtensions: function(context) {
+		getExtensions: function(_context) {
 			// The engine calls this only when emacs keymap is selected
 			var core = this._core;
 			var keymap = (core.view || {}).keymap;

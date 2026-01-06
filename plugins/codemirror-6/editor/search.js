@@ -23,11 +23,11 @@ Search and replace plugin for CodeMirror 6 (built-in)
 			this._core = cm6Core;
 		},
 
-		getExtensions: function(context) {
+		getExtensions: function(_context) {
 			var core = this._core;
 			var extensions = [];
 			var keymap = core.view.keymap;
-			var Prec = core.state.Prec;
+			var _Prec = core.state.Prec;
 
 			// Add search extension
 			if(searchLib.search) {
@@ -97,7 +97,7 @@ Search and replace plugin for CodeMirror 6 (built-in)
 			return extensions;
 		},
 
-		extendAPI: function(engine, context) {
+		extendAPI: function(_engine, _context) {
 			return {
 				openSearch: function() {
 					if(this._destroyed || !searchLib.openSearchPanel) return;

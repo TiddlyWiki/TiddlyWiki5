@@ -7,7 +7,6 @@ SQL language support for CodeMirror 6
 
 \*/
 /*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var langSql = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/lang-sql.js");
@@ -85,7 +84,7 @@ exports.plugin = {
 		var self = this;
 
 		return {
-			settingsChanged: function(settings) {
+			settingsChanged: function(_settings) {
 				if(engine._destroyed) return;
 
 				var compartments = engine._compartments;

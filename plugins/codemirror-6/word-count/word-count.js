@@ -44,7 +44,7 @@ Word count plugin - displays live word, character, and line counts.
 
 		getExtensions: function(context) {
 			var core = this._core;
-			var EditorView = core.view.EditorView;
+			var _EditorView = core.view.EditorView;
 			var showPanel = core.view.showPanel;
 			var extensions = [];
 
@@ -103,7 +103,7 @@ Word count plugin - displays live word, character, and line counts.
 			return extensions;
 		},
 
-		registerEvents: function(engine, context) {
+		registerEvents: function(engine, _context) {
 			var self = this;
 			var core = this._core;
 
