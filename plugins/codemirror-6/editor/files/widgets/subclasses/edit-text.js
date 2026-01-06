@@ -496,6 +496,11 @@ exports.prototype.updateStylesheetTagCache = function () {
 // ============================================================================
 
 exports.prototype.render = function (parent, nextSibling) {
+	// CodeMirror 6 requires browser APIs - skip rendering on Node.js
+	if (!$tw.browser) {
+		return;
+	}
+
 	// Call base class render
 	Object.getPrototypeOf(Object.getPrototypeOf(this)).render.call(this, parent, nextSibling);
 
