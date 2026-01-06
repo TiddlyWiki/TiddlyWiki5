@@ -69,9 +69,11 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 						{},
 						collectProps(event.paramObject,"event-paramObject"),
 						collectProps(event,"event"),
+						collectProps(event.paramObject,"message-paramObject"),
+						collectProps(event,"message"),
 						{
 							modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event),
-							"json-event": JSON.stringify(collectJsonProps(event))
+							"json-message": JSON.stringify(collectJsonProps(event))
 						});
 					isActionStringExecuting = true;
 					self.invokeActionString(actions,self,event,variables);
