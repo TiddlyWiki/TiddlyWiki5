@@ -60,7 +60,7 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	// Get the string parameter
 	var param = this.actionParam;
 	// We assemble the parameters as a hashmap
-	var paramObject = Object.create(null);
+	var paramObject = {};
 	// Add names/values pairs if present
 	if(this.actionNames && this.actionValues) {
 		var names = this.wiki.filterTiddlers(this.actionNames,this),

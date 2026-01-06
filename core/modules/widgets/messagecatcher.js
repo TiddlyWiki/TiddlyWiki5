@@ -55,13 +55,17 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 						props["list-" + prefix] = $tw.utils.stringifyList(names);
 						return props;
 					};
-					// Collect event properties for JSON (preserving types)
+					// Collect event object properties for JSON (recursively, preserving types)
 					var collectJsonProps = function(obj) {
 						var result = {};
 						$tw.utils.each(obj,function(value,name) {
-							if(["string","boolean","number"].indexOf(typeof value) !== -1) {
+							var valueType = typeof value;
+							if(value === null || value === undefined || ["string","boolean","number"].indexOf(valueType) !== -1) {
 								result[name] = value;
+							} else if(valueType === "object" && value.constructor === Object) {
+								result[name] = collectJsonProps(value);
 							}
+							// Non-plain objects (DOM nodes, DOM events, widgets) are not added
 						});
 						return result;
 					};
