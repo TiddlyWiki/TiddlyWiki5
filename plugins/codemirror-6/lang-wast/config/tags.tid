@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lang-wast/tags
+caption: WebAssembly Tags
+description: Tags that trigger WebAssembly Text syntax highlighting
+

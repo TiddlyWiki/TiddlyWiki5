@@ -1,0 +1,8 @@
+title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/Buttons/spellcheck
+tags: $:/tags/EditorToolbar
+caption: {{$:/plugins/BurningTreeC/tiddlywiki-codemirror/icons/spellcheck}} Spellcheck
+description: Toggle spellcheck and select language
+icon: $:/plugins/BurningTreeC/tiddlywiki-codemirror/icons/spellcheck
+condition: [<targetTiddler>has[title]]
+dropdown: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/Spellcheck/Dropdown
+button-classes: cm6-toolbar-btn-spellcheck

@@ -1,0 +1,92 @@
+{
+    "tiddlers": [
+        {
+            "file": "lib/core.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/core.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "lib/codemirror-state.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-state.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "lib/codemirror-view.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-view.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "lib/codemirror-commands.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-commands.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "lib/codemirror-language.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-language.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "lib/codemirror-autocomplete.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-autocomplete.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "lib/codemirror-lang-html.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-lang-html.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "lib/lezer-common.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/lezer-common.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "lib/lezer-highlight.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/lezer-highlight.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "lib/codemirror-search.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-search.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "widgets/subclasses/edit-text.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/widgets/subclasses/edit-text.js",
+                "module-type": "widget-subclass"
+            }
+        }
+    ]
+}

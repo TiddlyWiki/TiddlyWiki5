@@ -1,0 +1,5 @@
+title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/ControlPanel
+tags: $:/tags/ControlPanel/SettingsTab
+caption: CodeMirror 6
+
+<$transclude $variable="tabs" tabsList="[all[tiddlers+shadows]tag[$:/tags/ControlPanel/Settings/CodeMirror]]" default="$:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/ControlPanel/Editor"/>

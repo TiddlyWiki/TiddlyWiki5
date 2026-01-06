@@ -1,0 +1,55 @@
+title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/readme
+
+! CodeMirror 6 Editor
+
+A modern text editor for TiddlyWiki based on [[CodeMirror 6|https://codemirror.net/]].
+
+!! Features
+
+* ''Syntax Highlighting'' - Full TiddlyWiki wikitext highlighting with support for nested languages
+* ''Autocompletion'' - Smart completions for tiddler titles, macros, widgets, filters, and more
+* ''Code Folding'' - Collapse widgets, pragmas, code blocks, and other structures
+* ''Multiple Cursors'' - Edit multiple locations simultaneously
+* ''Search & Replace'' - Powerful search with regex support
+* ''Undo/Redo'' - Full history with unlimited undo levels
+* ''Keyboard Shortcuts'' - Extensive keyboard support for efficient editing
+
+!! Keyboard Shortcuts
+
+|!Shortcut |!Action |
+|`Ctrl+Z` |Undo |
+|`Ctrl+Shift+Z` / `Ctrl+Y` |Redo |
+|`Ctrl+F` |Find |
+|`Ctrl+H` |Find and Replace |
+|`Ctrl+G` |Go to next match |
+|`Ctrl+Shift+G` |Go to previous match |
+|`Ctrl+D` |Select next occurrence |
+|`Ctrl+/` |Toggle line comment |
+|`Tab` |Indent / Accept completion |
+|`Shift+Tab` |Outdent |
+|`Ctrl+Space` |Trigger autocompletion |
+|`Alt+Up` |Move line up |
+|`Alt+Down` |Move line down |
+|`Ctrl+Shift+K` |Delete line |
+
+!! Configuration
+
+Configure the editor via ''Control Panel > Settings > CodeMirror'':
+
+* Theme selection
+* Font size and font family
+* Tab size and indentation
+* Line wrapping
+* Bracket matching
+* Auto-close brackets
+* And many more options
+
+!! Optional Plugins
+
+Extend the editor with additional plugins:
+
+* ''Lint'' - Highlight potential issues in your content
+* ''Vim/Emacs Keymaps'' - Alternative keyboard bindings
+* ''Snippets'' - Custom code snippets with tab stops
+* ''Language Packs'' - Syntax highlighting for JavaScript, CSS, JSON, etc.
+* ''Themes'' - Additional color themes

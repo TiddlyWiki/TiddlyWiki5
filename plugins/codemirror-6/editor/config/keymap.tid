@@ -1,0 +1,8 @@
+title: $:/config/codemirror-6/keymap
+tags: $:/tags/Config/CodeMirror/Editor
+caption: Keymap
+description: Choose the keyboard shortcut style. Vim and Emacs keymaps disable TiddlyWiki formatting shortcuts.
+config-type: keymap-select
+config-category: Keybindings
+default: default
+text: default

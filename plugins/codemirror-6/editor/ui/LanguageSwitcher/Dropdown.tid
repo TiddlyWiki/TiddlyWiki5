@@ -1,0 +1,44 @@
+title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/LanguageSwitcher/Dropdown
+
+\define language-option(type, label)
+<$button class="tc-btn-invisible cm6-language-option" actions=<<set-language-actions>>>
+<$action-sendmessage $message="tm-cm6-set-language" type="$type$"/>
+<$action-deletetiddler $tiddler=<<dropdown-state>>/>
+<$text text="$label$"/>
+</$button>
+\end
+
+<div class="cm6-language-dropdown">
+
+<div class="cm6-language-section">
+<div class="cm6-language-section-title">Wiki</div>
+<<language-option "" "Default (from type)">>
+<<language-option "text/vnd.tiddlywiki" "TiddlyWiki">>
+<<language-option "text/x-markdown" "Markdown">>
+</div>
+
+<div class="cm6-language-section">
+<div class="cm6-language-section-title">Web</div>
+<<language-option "text/html" "HTML">>
+<<language-option "text/css" "CSS">>
+<<language-option "application/javascript" "JavaScript">>
+<<language-option "application/typescript" "TypeScript">>
+<<language-option "text/jsx" "JSX">>
+<<language-option "text/tsx" "TSX">>
+</div>
+
+<div class="cm6-language-section">
+<div class="cm6-language-section-title">Data</div>
+<<language-option "application/json" "JSON">>
+<<language-option "application/x-yaml" "YAML">>
+<<language-option "application/xml" "XML">>
+<<language-option "text/x-sql" "SQL">>
+</div>
+
+<div class="cm6-language-section">
+<div class="cm6-language-section-title">Other</div>
+<<language-option "text/x-python" "Python">>
+<<language-option "text/plain" "Plain Text">>
+</div>
+
+</div>

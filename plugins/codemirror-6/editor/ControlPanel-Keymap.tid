@@ -1,0 +1,31 @@
+title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/ControlPanel/Keymap
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: Keymap
+
+\define keymap-name()
+<$reveal type="match" state="$:/config/codemirror-6/keymap" text="default">Default (VS Code / Sublime)</$reveal><$reveal type="match" state="$:/config/codemirror-6/keymap" text="">Default (VS Code / Sublime)</$reveal><$reveal type="match" state="$:/config/codemirror-6/keymap" text="vim">Vim</$reveal><$reveal type="match" state="$:/config/codemirror-6/keymap" text="emacs">Emacs</$reveal>
+\end
+
+<div class="cm-config-category">
+
+!! Current Keymap: <<keymap-name>>
+
+//Change keymap in the [[Editor|$:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/ControlPanel/Editor]] tab.//
+
+---
+
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/CodeMirror/KeymapTable]]" variable="keymapTable">
+
+<$let keymapName={{{ [<keymapTable>get[name]] }}}>
+
+<%if [{$:/config/codemirror-6/keymap}match<keymapName>] [{$:/config/codemirror-6/keymap}is[blank]then<keymapName>match[default]] %>
+
+<$transclude $tiddler=<<keymapTable>> mode="block"/>
+
+<%endif%>
+
+</$let>
+
+</$list>
+
+</div>

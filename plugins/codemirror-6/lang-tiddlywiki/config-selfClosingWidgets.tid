@@ -1,0 +1,8 @@
+title: $:/config/codemirror-6/selfClosingWidgets
+tags: $:/tags/Config/CodeMirror/Editor
+caption: Self-closing widgets
+description: Additional widgets that auto-close with /> in autocomplete (changes apply immediately). Action widgets always auto-close. Enter widget names separated by spaces.
+config-type: input
+config-category: Autocompletion
+default: $transclude $macrocall $slot $text $image $entity $view $codeblock $count
+text: $transclude $macrocall $slot $text $image $entity $view $codeblock $count

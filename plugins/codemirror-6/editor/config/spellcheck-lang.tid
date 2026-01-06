@@ -1,0 +1,8 @@
+title: $:/config/codemirror-6/spellcheck-lang
+tags: $:/tags/Config/CodeMirror/Editor
+caption: Spellcheck Language
+description: Language for browser spellcheck dictionary
+config-type: text
+config-category: Editing
+default: en
+text: en

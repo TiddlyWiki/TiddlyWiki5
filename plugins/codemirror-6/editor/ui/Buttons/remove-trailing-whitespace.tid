@@ -1,0 +1,8 @@
+title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/Buttons/remove-trailing-whitespace
+tags: $:/tags/EditorToolbar
+caption: {{$:/plugins/BurningTreeC/tiddlywiki-codemirror/icons/remove-trailing-whitespace}} Remove Trailing Whitespace
+description: Remove trailing whitespace from all lines
+icon: $:/plugins/BurningTreeC/tiddlywiki-codemirror/icons/remove-trailing-whitespace
+condition: [<targetTiddler>has[title]]
+
+<$action-sendmessage $message="tm-cm6-remove-trailing-whitespace"/>

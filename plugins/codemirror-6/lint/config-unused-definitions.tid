@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lint/unusedDefinitions
+caption: Unused Definitions
+description: Check for macros/procedures/functions defined but not used in this tiddler
+text: no

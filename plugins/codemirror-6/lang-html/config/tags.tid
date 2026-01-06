@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lang-html/tags
+caption: HTML Tags
+description: Tags that trigger HTML syntax highlighting (one per line)
+

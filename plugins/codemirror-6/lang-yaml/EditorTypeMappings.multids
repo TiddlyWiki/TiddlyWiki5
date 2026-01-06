@@ -1,0 +1,6 @@
+title: $:/config/EditorTypeMappings/
+
+text/x-yaml: codemirror-6
+text/yaml: codemirror-6
+application/x-yaml: codemirror-6
+application/yaml: codemirror-6

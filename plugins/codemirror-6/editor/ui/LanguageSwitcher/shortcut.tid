@@ -1,0 +1,5 @@
+title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/LanguageSwitcher/shortcut
+tags: $:/tags/KeyboardShortcut/CodeMirror
+key: ((cm6-language-switcher))
+
+<$action-sendmessage $message="tm-cm6-show-language-picker"/>

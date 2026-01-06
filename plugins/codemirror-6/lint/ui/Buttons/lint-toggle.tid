@@ -1,0 +1,15 @@
+title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lint/ui/Buttons/lint-toggle
+tags: $:/tags/EditorToolbar
+caption: {{$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lint/icons/lint}} Lint
+description: Toggle linting for this tiddler
+icon: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lint/icons/lint
+custom-icon: yes
+condition: [<targetTiddler>has[title]]
+button-classes: cm6-toolbar-btn-lint
+
+\whitespace trim
+\define lint-disabled-tiddler() $:/temp/codemirror-6/lint-disabled/$(targetTiddler)$
+<span class={{{ [<lint-disabled-tiddler>is[tiddler]then[cm6-lint-disabled]else[cm6-lint-enabled]] }}}>
+	<$transclude $tiddler="$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lint/icons/lint"/>
+</span>
+<$action-sendmessage $message="tm-cm6-toggle-lint"/>

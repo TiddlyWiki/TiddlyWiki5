@@ -1,0 +1,8 @@
+title: $:/config/codemirror-6/bracketMatching
+tags: $:/tags/Config/CodeMirror/Editor
+caption: Highlight matching brackets
+description: Highlights the matching bracket when cursor is next to one
+config-type: checkbox
+config-category: Brackets
+default: yes
+text: yes

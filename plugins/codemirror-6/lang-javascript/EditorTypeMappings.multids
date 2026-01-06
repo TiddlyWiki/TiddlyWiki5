@@ -1,0 +1,11 @@
+title: $:/config/EditorTypeMappings/
+
+application/javascript: codemirror-6
+text/javascript: codemirror-6
+application/x-javascript: codemirror-6
+application/typescript: codemirror-6
+application/x-typescript: codemirror-6
+text/jsx: codemirror-6
+application/jsx: codemirror-6
+text/tsx: codemirror-6
+application/tsx: codemirror-6

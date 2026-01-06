@@ -1,0 +1,8 @@
+title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/Buttons/language-switcher
+tags: $:/tags/EditorToolbar
+caption: {{$:/plugins/BurningTreeC/tiddlywiki-codemirror/icons/language}} Language
+description: Switch editor language mode
+icon: $:/plugins/BurningTreeC/tiddlywiki-codemirror/icons/language
+condition: [<targetTiddler>has[title]]
+dropdown: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/LanguageSwitcher/Dropdown
+button-classes: cm6-toolbar-btn-language
