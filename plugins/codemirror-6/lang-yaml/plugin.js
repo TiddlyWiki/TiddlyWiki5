@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-yaml/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-yaml/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,7 +10,7 @@ YAML language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langYaml = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-yaml/lang-yaml.js");
+var langYaml = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-yaml/lang-yaml.js");
 
 // Content types that activate this plugin
 var YAML_TYPES = [
@@ -21,7 +21,7 @@ var YAML_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-yaml/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-yaml",

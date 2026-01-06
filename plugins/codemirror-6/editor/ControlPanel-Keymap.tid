@@ -1,4 +1,4 @@
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/ControlPanel/Keymap
+title: $:/plugins/tiddlywiki/codemirror-6/ui/ControlPanel/Keymap
 tags: $:/tags/ControlPanel/Settings/CodeMirror
 caption: Keymap
 
@@ -10,7 +10,7 @@ caption: Keymap
 
 !! Current Keymap: <<keymap-name>>
 
-//Change keymap in the [[Editor|$:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/ControlPanel/Editor]] tab.//
+//Change keymap in the [[Editor|$:/plugins/tiddlywiki/codemirror-6/ui/ControlPanel/Editor]] tab.//
 
 ---
 

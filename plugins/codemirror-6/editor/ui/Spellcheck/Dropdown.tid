@@ -1,4 +1,4 @@
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/Spellcheck/Dropdown
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Spellcheck/Dropdown
 
 \define lang-option(code, label)
 <$button class={{{ [{$:/config/codemirror-6/spellcheck-lang}match[$code$]then[tc-btn-invisible cm6-spellcheck-lang-option cm6-selected]else[tc-btn-invisible cm6-spellcheck-lang-option]] }}}>

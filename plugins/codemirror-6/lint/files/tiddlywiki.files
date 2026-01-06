@@ -4,7 +4,7 @@
             "file": "codemirror-lint.js",
             "fields": {
                 "type": "application/javascript",
-                "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lint/codemirror-lint.js",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lint/codemirror-lint.js",
                 "module-type": "library"
             }
         }

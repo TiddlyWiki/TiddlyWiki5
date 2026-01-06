@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/color-picker.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/color-picker.js
 type: application/javascript
 module-type: codemirror6-plugin
 

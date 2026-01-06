@@ -1,4 +1,4 @@
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/Spellcheck/styles
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Spellcheck/styles
 tags: $:/tags/Stylesheet
 
 .cm6-spellcheck-dropdown {

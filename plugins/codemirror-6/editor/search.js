@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/search.js
+title: $:/plugins/tiddlywiki/codemirror-6/search.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -12,7 +12,7 @@ Search and replace plugin for CodeMirror 6 (built-in)
 if (!$tw.browser) return;
 
 // Load the search library
-var searchLib = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-search.js");
+var searchLib = require("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-search.js");
 
 exports.plugin = {
   name: "search",

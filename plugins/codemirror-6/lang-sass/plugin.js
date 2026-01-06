@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-sass/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-sass/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,7 +10,7 @@ Sass/SCSS language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langSass = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-sass/lang-sass.js");
+var langSass = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sass/lang-sass.js");
 
 // Content types that activate this plugin
 var SASS_TYPES = [
@@ -19,7 +19,7 @@ var SASS_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-sass/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-sass",

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/lezer-common.js
+title: $:/plugins/tiddlywiki/codemirror-6/lib/lezer-common.js
 type: application/javascript
 module-type: library
 

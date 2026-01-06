@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/widgets/subclasses/edit-text.js
+title: $:/plugins/tiddlywiki/codemirror-6/widgets/subclasses/edit-text.js
 type: application/javascript
 module-type: widget-subclass
 
@@ -231,7 +231,7 @@ exports.prototype.hideLanguagePicker = function() {
  * Plugins register handlers that get called at various lifecycle points.
  * 
  * Usage from a plugin:
- *   var registry = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/widgets/subclasses/edit-text.js").registry;
+ *   var registry = require("$:/plugins/tiddlywiki/codemirror-6/widgets/subclasses/edit-text.js").registry;
  *   registry.register("zenMode", {
  *       onRender: function(widget) { ... },
  *       onMessage: { "tm-cm6-zen-mode": function(widget, event) { ... } }

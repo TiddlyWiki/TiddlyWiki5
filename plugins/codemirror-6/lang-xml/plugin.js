@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-xml/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,7 +10,7 @@ XML language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langXml = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-xml/lang-xml.js");
+var langXml = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/lang-xml.js");
 
 // Content types that activate this plugin
 var XML_TYPES = [
@@ -20,7 +20,7 @@ var XML_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-xml/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-xml",

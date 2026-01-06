@@ -1,10 +1,10 @@
 {
-    "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/theme-material",
+    "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/theme-material",
     "name": "CodeMirror 6 Material Theme",
     "description": "Material Design theme for CodeMirror 6 (Default, Ocean, Palenight, Darker, Lighter)",
     "version": "0.0.20",
     "plugin-type": "plugin",
-    "dependents": "$:/plugins/BurningTreeC/tiddlywiki-codemirror",
+    "dependents": "$:/plugins/tiddlywiki/codemirror-6",
     "list": "readme styles license",
     "author": "BurningTreeC",
     "source": "https://github.com/BurningTreeC/tiddlywiki-codemirror",

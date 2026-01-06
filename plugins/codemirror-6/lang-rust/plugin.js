@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-rust/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-rust/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,7 +10,7 @@ Rust language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langRust = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-rust/lang-rust.js");
+var langRust = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-rust/lang-rust.js");
 
 // Content types that activate this plugin
 var RUST_TYPES = [
@@ -19,7 +19,7 @@ var RUST_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-rust/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-rust",

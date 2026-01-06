@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/keymap-vim/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/keymap-vim/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -11,7 +11,7 @@ Vim keybindings for CodeMirror 6
 
 if (!$tw.browser) return;
 
-var vimModule = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/keymap-vim/codemirror-vim.js");
+var vimModule = require("$:/plugins/tiddlywiki/codemirror-6/plugins/keymap-vim/codemirror-vim.js");
 
 var ESCAPE_CONSUMED_TIDDLER = "$:/temp/codemirror-6/vim-escape-consumed";
 

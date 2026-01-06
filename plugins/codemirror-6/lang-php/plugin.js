@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-php/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-php/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,7 +10,7 @@ PHP language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langPhp = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-php/lang-php.js");
+var langPhp = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-php/lang-php.js");
 
 // Content types that activate this plugin
 var PHP_TYPES = [
@@ -20,7 +20,7 @@ var PHP_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-php/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-php",

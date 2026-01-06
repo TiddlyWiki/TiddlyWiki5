@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/auto-close-tags/auto-close-tags.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/auto-close-tags/auto-close-tags.js
 type: application/javascript
 module-type: codemirror6-plugin
 

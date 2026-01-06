@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/core.js
+title: $:/plugins/tiddlywiki/codemirror-6/lib/core.js
 type: application/javascript
 module-type: library
 
@@ -28,23 +28,23 @@ function safeRequire(title) {
 	}
 }
 
-var state = safeRequire("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-state.js");
-var view = safeRequire("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-view.js");
-var commands = safeRequire("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-commands.js");
-var language = safeRequire("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-language.js");
-var autocomplete = safeRequire("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-autocomplete.js");
+var state = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-state.js");
+var view = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-view.js");
+var commands = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-commands.js");
+var language = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-language.js");
+var autocomplete = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-autocomplete.js");
 
-var langHtml = safeRequire("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/codemirror-lang-html.js");
+var langHtml = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-lang-html.js");
 
 // Lezer
-var lezerCommon = safeRequire("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/lezer-common.js");
-var lezerHighlight = safeRequire("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/lezer-highlight.js");
+var lezerCommon = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/lezer-common.js");
+var lezerHighlight = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/lezer-highlight.js");
 
 // Basic validation: engine expects state + view at minimum
 if (!state || !view) {
 	throw new Error(
 		"library-core.js: Missing CM6 core modules. " +
-		"Expected at least codemirror-state.js and codemirror-view.js under $:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/."
+		"Expected at least codemirror-state.js and codemirror-view.js under $:/plugins/tiddlywiki/codemirror-6/lib/."
 	);
 }
 
@@ -78,7 +78,7 @@ var registeredLanguages = [];
  * @param {LanguageDescription} langDesc - A LanguageDescription from @codemirror/language
  *
  * Example usage in a language plugin:
- *   var core = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/core.js");
+ *   var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
  *   var langJs = require("$:/plugins/.../lang-javascript.js");
  *   core.registerLanguage(core.language.LanguageDescription.of({
  *     name: "JavaScript",

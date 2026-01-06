@@ -1,4 +1,4 @@
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lint/styles
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lint/styles
 tags: $:/tags/Stylesheet
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-cpp/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-cpp/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,7 +10,7 @@ C/C++ language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langCpp = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-cpp/lang-cpp.js");
+var langCpp = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-cpp/lang-cpp.js");
 
 // Content types that activate this plugin
 var CPP_TYPES = [
@@ -23,7 +23,7 @@ var CPP_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-cpp/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-cpp",

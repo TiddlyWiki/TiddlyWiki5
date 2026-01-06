@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/fold.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/fold.js
 type: application/javascript
 module-type: codemirror6-plugin
 

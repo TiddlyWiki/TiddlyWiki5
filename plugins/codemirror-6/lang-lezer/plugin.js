@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-lezer/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,7 +10,7 @@ Lezer grammar language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langLezer = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-lezer/lang-lezer.js");
+var langLezer = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer/lang-lezer.js");
 
 // Content types that activate this plugin
 var LEZER_TYPES = [
@@ -18,7 +18,7 @@ var LEZER_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-lezer/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-lezer",

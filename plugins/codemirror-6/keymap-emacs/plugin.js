@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/keymap-emacs/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/keymap-emacs/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 

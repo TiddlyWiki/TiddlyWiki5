@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/zen-mode/modules/zen-mode.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/zen-mode/modules/zen-mode.js
 type: application/javascript
 module-type: library
 

@@ -1,4 +1,4 @@
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/LanguageSwitcher/styles
+title: $:/plugins/tiddlywiki/codemirror-6/ui/LanguageSwitcher/styles
 tags: $:/tags/Stylesheet
 
 .cm6-language-dropdown {

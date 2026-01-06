@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-json/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-json/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,12 +10,12 @@ JSON language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langJson = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-json/lang-json.js");
+var langJson = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-json/lang-json.js");
 
 // Try to load lint library (may not be available if lint plugin not installed)
 var lintLib = null;
 try {
-	lintLib = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lint/codemirror-lint.js");
+	lintLib = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lint/codemirror-lint.js");
 } catch (e) {
 	// Lint library not available
 }
@@ -27,7 +27,7 @@ var JSON_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-json/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-json",

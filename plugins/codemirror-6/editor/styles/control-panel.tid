@@ -1,4 +1,4 @@
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/styles/control-panel
+title: $:/plugins/tiddlywiki/codemirror-6/styles/control-panel
 tags: $:/tags/Stylesheet
 
 .cm-config-category {

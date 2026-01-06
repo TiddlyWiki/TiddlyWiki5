@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-go/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-go/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,7 +10,7 @@ Go language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langGo = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-go/lang-go.js");
+var langGo = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-go/lang-go.js");
 
 // Content types that activate this plugin
 var GO_TYPES = [
@@ -19,7 +19,7 @@ var GO_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-go/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-go",

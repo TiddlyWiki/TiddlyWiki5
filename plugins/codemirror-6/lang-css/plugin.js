@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-css/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-css/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,7 +10,7 @@ CSS language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langCss = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-css/lang-css.js");
+var langCss = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-css/lang-css.js");
 
 // Content types that activate this plugin
 var CSS_TYPES = [
@@ -18,7 +18,7 @@ var CSS_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-css/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-css",

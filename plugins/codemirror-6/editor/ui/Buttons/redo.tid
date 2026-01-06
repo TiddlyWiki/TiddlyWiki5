@@ -1,8 +1,8 @@
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/Buttons/redo
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Buttons/redo
 tags: $:/tags/EditorToolbar
-caption: {{$:/plugins/BurningTreeC/tiddlywiki-codemirror/icons/redo}} Redo
+caption: {{$:/plugins/tiddlywiki/codemirror-6/icons/redo}} Redo
 description: Redo the last undone change
-icon: $:/plugins/BurningTreeC/tiddlywiki-codemirror/icons/redo
+icon: $:/plugins/tiddlywiki/codemirror-6/icons/redo
 condition: [<targetTiddler>has[title]]
 
 <$action-sendmessage $message="tm-cm6-redo"/>

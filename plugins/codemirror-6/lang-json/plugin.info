@@ -1,10 +1,10 @@
 {
-    "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-json",
+    "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-json",
     "name": "CodeMirror 6 JSON Language",
     "description": "JSON syntax highlighting for CodeMirror 6 code blocks",
     "version": "0.0.20",
     "plugin-type": "plugin",
-    "dependents": "$:/plugins/BurningTreeC/tiddlywiki-codemirror",
+    "dependents": "$:/plugins/tiddlywiki/codemirror-6",
     "list": "readme license",
     "core-version": ">=5.3.0",
     "author": "BurningTreeC"

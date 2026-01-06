@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/line-numbers/line-numbers.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/line-numbers/line-numbers.js
 type: application/javascript
 module-type: codemirror6-plugin
 

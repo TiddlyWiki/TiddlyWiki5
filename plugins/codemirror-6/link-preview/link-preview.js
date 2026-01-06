@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/link-preview.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/link-preview.js
 type: application/javascript
 module-type: codemirror6-plugin
 

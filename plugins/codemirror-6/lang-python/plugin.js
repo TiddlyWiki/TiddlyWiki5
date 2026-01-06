@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-python/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-python/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,7 +10,7 @@ Python language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langPython = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-python/lang-python.js");
+var langPython = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-python/lang-python.js");
 
 // Content types that activate this plugin
 var PYTHON_TYPES = [
@@ -19,7 +19,7 @@ var PYTHON_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-python/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-python",

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/word-count.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/word-count.js
 type: application/javascript
 module-type: codemirror6-plugin
 

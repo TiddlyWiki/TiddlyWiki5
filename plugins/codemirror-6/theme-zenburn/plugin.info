@@ -1,10 +1,10 @@
 {
-    "title": "$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/theme-zenburn",
+    "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/theme-zenburn",
     "name": "CodeMirror 6 Zenburn Theme",
     "description": "Zenburn low-contrast theme for CodeMirror 6 (Default, High Contrast)",
     "version": "0.0.20",
     "plugin-type": "plugin",
-    "dependents": "$:/plugins/BurningTreeC/tiddlywiki-codemirror",
+    "dependents": "$:/plugins/tiddlywiki/codemirror-6",
     "list": "readme styles license",
     "author": "BurningTreeC",
     "source": "https://github.com/BurningTreeC/tiddlywiki-codemirror",

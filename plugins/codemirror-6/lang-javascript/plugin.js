@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-javascript/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-javascript/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,7 +10,7 @@ JavaScript/TypeScript language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langJs = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-javascript/lang-javascript.js");
+var langJs = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-javascript/lang-javascript.js");
 
 // Content types that activate this plugin
 var JS_TYPES = [
@@ -37,7 +37,7 @@ var TSX_TYPES = [
 var ALL_TYPES = JS_TYPES.concat(TS_TYPES, JSX_TYPES, TSX_TYPES);
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-javascript/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-javascript",

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/emoji-picker/emoji-picker.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/emoji-picker/emoji-picker.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -17,7 +17,7 @@ if (!$tw.browser) return;
 // Configuration
 // ============================================================
 
-var PLUGIN_BASE = "$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/emoji-picker";
+var PLUGIN_BASE = "$:/plugins/tiddlywiki/codemirror-6/plugins/emoji-picker";
 
 var CONFIG = {
   categoryTiddlers: [

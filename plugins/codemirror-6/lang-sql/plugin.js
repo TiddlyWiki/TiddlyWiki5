@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-sql/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -10,7 +10,7 @@ SQL language support for CodeMirror 6
 /*global $tw: false */
 "use strict";
 
-var langSql = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-sql/lang-sql.js");
+var langSql = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/lang-sql.js");
 
 // Content types that activate this plugin
 var SQL_TYPES = [
@@ -19,7 +19,7 @@ var SQL_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-sql/tags";
-var hasConfiguredTag = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/utils.js").hasConfiguredTag;
+var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 // Map config values to dialect objects
 var DIALECTS = {

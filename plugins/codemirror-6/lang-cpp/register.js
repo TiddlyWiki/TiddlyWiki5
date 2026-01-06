@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-cpp/register.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-cpp/register.js
 type: application/javascript
 module-type: startup
 
@@ -21,8 +21,8 @@ exports.before = ["render"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	var core = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/core.js");
-	var langCpp = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-cpp/lang-cpp.js");
+	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+	var langCpp = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-cpp/lang-cpp.js");
 
 	if (!core || !core.registerLanguage || !langCpp) {
 		return;

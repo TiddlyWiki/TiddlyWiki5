@@ -1,4 +1,4 @@
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/keymap-vim/config
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/keymap-vim/config
 tags: $:/tags/Config/CodeMirror/Keymap
 caption: Vim
 description: Full Vim emulation with normal, insert, visual, and command modes

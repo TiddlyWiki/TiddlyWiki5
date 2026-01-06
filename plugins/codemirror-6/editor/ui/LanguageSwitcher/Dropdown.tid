@@ -1,4 +1,4 @@
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/ui/LanguageSwitcher/Dropdown
+title: $:/plugins/tiddlywiki/codemirror-6/ui/LanguageSwitcher/Dropdown
 
 \define language-option(type, label)
 <$button class="tc-btn-invisible cm6-language-option" actions=<<set-language-actions>>>

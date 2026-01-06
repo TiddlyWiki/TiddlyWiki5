@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/edit-codemirror.js
+title: $:/plugins/tiddlywiki/codemirror-6/edit-codemirror.js
 type: application/javascript
 module-type: widget
 
@@ -12,7 +12,7 @@ Edit-codemirror widget
 "use strict";
 
 var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTextWidgetFactory,
-	CodeMirrorEngine = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/engine.js").CodeMirrorEngine;
+	CodeMirrorEngine = require("$:/plugins/tiddlywiki/codemirror-6/engine.js").CodeMirrorEngine;
 
 exports["edit-codemirror-6"] = editTextWidgetFactory(CodeMirrorEngine,CodeMirrorEngine);
 

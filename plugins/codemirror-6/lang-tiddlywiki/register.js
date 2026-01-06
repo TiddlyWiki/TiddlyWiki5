@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-tiddlywiki/register.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-tiddlywiki/register.js
 type: application/javascript
 module-type: startup
 
@@ -629,8 +629,8 @@ function getVariableNames() {
 // ============================================================================
 
 exports.startup = function() {
-	var core = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/core.js");
-	var langTw = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-tiddlywiki/lang-tiddlywiki.js");
+	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+	var langTw = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-tiddlywiki/lang-tiddlywiki.js");
 
 	if (!core || !core.registerLanguage || !langTw || !langTw.tiddlywiki) {
 		return;

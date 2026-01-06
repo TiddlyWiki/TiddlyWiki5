@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/click-navigate.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/click-navigate.js
 type: application/javascript
 module-type: codemirror6-plugin
 

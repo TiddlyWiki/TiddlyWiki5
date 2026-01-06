@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-sql/register.js
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/register.js
 type: application/javascript
 module-type: startup
 
@@ -21,8 +21,8 @@ exports.before = ["render"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	var core = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/lib/core.js");
-	var langSql = require("$:/plugins/BurningTreeC/tiddlywiki-codemirror/plugins/lang-sql/lang-sql.js");
+	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+	var langSql = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/lang-sql.js");
 
 	if (!core || !core.registerLanguage || !langSql) {
 		return;
