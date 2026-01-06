@@ -63,9 +63,12 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 							if(value === null || ["string","boolean","number"].indexOf(valueType) !== -1) {
 								result[name] = value;
 							} else if(valueType === "object" && value.constructor === Object) {
-								result[name] = collectJsonProps(value);
+								var processedObject = collectJsonProps(value);
+								if(Object.keys(processedObject).length > 0) {
+									result[name] = processedObject;
+								}
 							}
-							// Non-plain objects (DOM nodes, DOM events, widgets) are not added
+						// Non-plain objects (DOM nodes, DOM events, widgets) and empty objects are not added
 						});
 						return result;
 					};
