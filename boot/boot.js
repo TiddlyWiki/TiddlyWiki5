@@ -2166,7 +2166,7 @@ $tw.findLibraryItem = function(name,paths) {
 			if(fs.statSync(pluginPath).isDirectory()) {
 				return pluginPath;
 			}
-		} catch(e) {
+		} catch {
 			// Failed. Probably didn't exist. Move on.
 		}
 	} while(++pathIndex < paths.length);
@@ -2176,7 +2176,7 @@ $tw.findLibraryItem = function(name,paths) {
 $tw.findNpmItem = function(name) {
 	if(!$tw.npmMap) {
 		var pluginMap = Object.create(null);
-		var searchPaths = require.resolve.paths('') || [];
+		var searchPaths = require.resolve.paths("") || [];
 		// We go in reverse order, so that higher priority npm paths will
 		// override lower priority ones as we go.
 		for(var i = searchPaths.length-1; i >= 0; i--) {
@@ -2192,11 +2192,11 @@ $tw.findNpmItem = function(name) {
 								pluginMap[pluginName] = path.resolve(modulesDir, files[j], pkg.tiddlywiki[pluginName]);
 							}
 						}
-					} catch(e) {
+					} catch {
 						// File likely didn't exist. Move on.
 					}
 				}
-			} catch(e) {
+			} catch {
 				// Modules directory likely didn't exist. Also move on.
 			}
 		}
