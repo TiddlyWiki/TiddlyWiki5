@@ -7,7 +7,9 @@
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",
 		"tiddlywiki/railroad",
-		"tiddlywiki/tour"
+		"tiddlywiki/tour",
+		"codemirror-6/editor",
+		"codemirror-6/lang-tiddlywiki"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

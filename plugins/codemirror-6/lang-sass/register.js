@@ -24,7 +24,7 @@ exports.startup = function() {
 	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	var langSass = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sass/lang-sass.js");
 
-	if (!core || !core.registerLanguage || !langSass) {
+	if(!core || !core.registerLanguage || !langSass) {
 		return;
 	}
 
@@ -43,6 +43,8 @@ exports.startup = function() {
 		name: "Sass",
 		alias: ["sass"],
 		extensions: ["sass"],
-		support: langSass.sass({ indented: true })
+		support: langSass.sass({
+			indented: true
+		})
 	}));
 };

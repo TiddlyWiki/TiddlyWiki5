@@ -35,9 +35,9 @@ var TIDDLER_TITLE_NODES = {
 // Filter operators whose operand is a tiddler title or text reference
 // Based on TiddlyWiki5/core/modules/filters/
 var TIDDLER_TITLE_OPERATORS = {
-	"title": true,  // operand is tiddler title
-	"tag": true,    // operand is tag name (= tiddler title)
-	"list": true    // operand is text reference (tiddler!!field or tiddler##index)
+	"title": true, // operand is tiddler title
+	"tag": true, // operand is tag name (= tiddler title)
+	"list": true // operand is text reference (tiddler!!field or tiddler##index)
 };
 
 /**
@@ -46,7 +46,7 @@ var TIDDLER_TITLE_OPERATORS = {
  */
 function isCamelCaseEnabled(wiki) {
 	wiki = wiki || $tw.wiki;
-	if (!wiki) return true; // Default to enabled
+	if(!wiki) return true; // Default to enabled
 	var config = wiki.getTiddlerText("$:/config/WikiParserRules/Inline/wikilink", "enable");
 	return config !== "disable";
 }
@@ -56,11 +56,11 @@ function isCamelCaseEnabled(wiki) {
  */
 function getFilterOperatorName(state, operandNode) {
 	var parent = operandNode.parent;
-	if (!parent || parent.name !== "FilterOperator") return null;
+	if(!parent || parent.name !== "FilterOperator") return null;
 
 	// Find the FilterOperatorName sibling
-	for (var child = parent.firstChild; child; child = child.nextSibling) {
-		if (child.name === "FilterOperatorName") {
+	for(var child = parent.firstChild; child; child = child.nextSibling) {
+		if(child.name === "FilterOperatorName") {
 			var opName = state.doc.sliceString(child.from, child.to);
 			// Remove negation prefix and any suffix (e.g., "!tag:strict" -> "tag")
 			opName = opName.replace(/^!/, "").split(":")[0];
@@ -78,34 +78,34 @@ function getFilterOperatorName(state, operandNode) {
  * Extract link target and type from position in document using syntax tree
  */
 function getLinkAtPos(state, pos) {
-	if (!_syntaxTree) return null;
+	if(!_syntaxTree) return null;
 
 	var tree = _syntaxTree(state);
-	if (!tree) return null;
+	if(!tree) return null;
 
 	var node = tree.resolveInner(pos, 0);
-	if (!node) return null;
+	if(!node) return null;
 
 	// Walk up the tree to find a tiddler title node
 	var current = node;
-	while (current) {
+	while(current) {
 		var nodeType = TIDDLER_TITLE_NODES[current.name];
-		if (nodeType) {
+		if(nodeType) {
 			var target = state.doc.sliceString(current.from, current.to);
 
 			// For LinkText, check if parent is WikiLink and has no LinkTarget sibling
-			if (current.name === "LinkText") {
+			if(current.name === "LinkText") {
 				var parent = current.parent;
-				if (parent && parent.name === "WikiLink") {
+				if(parent && parent.name === "WikiLink") {
 					// Check if there's a LinkTarget sibling
 					var hasTarget = false;
-					for (var child = parent.firstChild; child; child = child.nextSibling) {
-						if (child.name === "LinkTarget") {
+					for(var child = parent.firstChild; child; child = child.nextSibling) {
+						if(child.name === "LinkTarget") {
 							hasTarget = true;
 							break;
 						}
 					}
-					if (hasTarget) {
+					if(hasTarget) {
 						// LinkText is display text, not the target - skip
 						current = current.parent;
 						continue;
@@ -114,24 +114,24 @@ function getLinkAtPos(state, pos) {
 			}
 
 			// For CamelCaseLink, check if wikilinks are enabled
-			if (current.name === "CamelCaseLink") {
-				if (!isCamelCaseEnabled()) {
+			if(current.name === "CamelCaseLink") {
+				if(!isCamelCaseEnabled()) {
 					current = current.parent;
 					continue;
 				}
 			}
 
 			// For FilterTextRef, extract just the tiddler title (before !! or ##)
-			if (current.name === "FilterTextRef" || current.name === "FilterTextRefTarget") {
+			if(current.name === "FilterTextRef" || current.name === "FilterTextRefTarget") {
 				// Get content without braces
 				var content = target;
-				if (content.startsWith("{") && content.endsWith("}")) {
+				if(content.startsWith("{") && content.endsWith("}")) {
 					content = content.slice(1, -1);
 				}
 				// Extract tiddler title (before !! or ##)
 				var sepIdx = content.indexOf("!!");
-				if (sepIdx === -1) sepIdx = content.indexOf("##");
-				if (sepIdx > 0) {
+				if(sepIdx === -1) sepIdx = content.indexOf("##");
+				if(sepIdx > 0) {
 					target = content.substring(0, sepIdx);
 				} else {
 					target = content;
@@ -148,22 +148,22 @@ function getLinkAtPos(state, pos) {
 		}
 
 		// Check for filter operand - only if operator takes tiddler titles
-		if (current.name === "FilterOperand") {
+		if(current.name === "FilterOperand") {
 			var opName = getFilterOperatorName(state, current);
-			if (opName && TIDDLER_TITLE_OPERATORS[opName]) {
+			if(opName && TIDDLER_TITLE_OPERATORS[opName]) {
 				var target = state.doc.sliceString(current.from, current.to);
 				// Remove quotes if present
-				if ((target.startsWith("\"") && target.endsWith("\"")) ||
+				if((target.startsWith("\"") && target.endsWith("\"")) ||
 					(target.startsWith("'") && target.endsWith("'")) ||
 					(target.startsWith("[") && target.endsWith("]")) ||
 					(target.startsWith("{") && target.endsWith("}"))) {
 					target = target.slice(1, -1);
 				}
 				// For list operator, extract tiddler title from text reference
-				if (opName === "list") {
+				if(opName === "list") {
 					var sepIdx = target.indexOf("!!");
-					if (sepIdx === -1) sepIdx = target.indexOf("##");
-					if (sepIdx > 0) {
+					if(sepIdx === -1) sepIdx = target.indexOf("##");
+					if(sepIdx > 0) {
 						target = target.substring(0, sepIdx);
 					}
 				}
@@ -179,13 +179,13 @@ function getLinkAtPos(state, pos) {
 		}
 
 		// Check for macro name
-		if (current.name === "MacroName") {
+		if(current.name === "MacroName") {
 			var macroName = state.doc.sliceString(current.from, current.to);
 			var defTiddler = findMacroDefinition(macroName);
-			if (defTiddler) {
+			if(defTiddler) {
 				// Find the parent MacroCall for bounds
 				var macroCall = current.parent;
-				while (macroCall && macroCall.name !== "MacroCall") {
+				while(macroCall && macroCall.name !== "MacroCall") {
 					macroCall = macroCall.parent;
 				}
 				return {
@@ -199,15 +199,15 @@ function getLinkAtPos(state, pos) {
 		}
 
 		// Check for widget name
-		if (current.name === "WidgetName") {
+		if(current.name === "WidgetName") {
 			var widgetName = state.doc.sliceString(current.from, current.to);
 			// Remove $ prefix if present
-			if (widgetName.startsWith("$")) {
+			if(widgetName.startsWith("$")) {
 				widgetName = widgetName.slice(1);
 			}
 			// Find the parent widget tag for bounds
 			var widgetTag = current.parent;
-			while (widgetTag && !widgetTag.name.includes("Widget")) {
+			while(widgetTag && !widgetTag.name.includes("Widget")) {
 				widgetTag = widgetTag.parent;
 			}
 			return {
@@ -229,32 +229,32 @@ function getLinkAtPos(state, pos) {
  * Find tiddler that defines a macro
  */
 function findMacroDefinition(macroName) {
-	if (!$tw || !$tw.wiki) return null;
-	
+	if(!$tw || !$tw.wiki) return null;
+
 	// Search in shadows first (core macros)
 	var shadows = $tw.wiki.filterTiddlers("[all[shadows]has[text]]");
-	for (var i = 0; i < shadows.length; i++) {
+	for(var i = 0; i < shadows.length; i++) {
 		var tiddler = $tw.wiki.getTiddler(shadows[i]);
-		if (tiddler && tiddler.fields.text) {
+		if(tiddler && tiddler.fields.text) {
 			var regex = new RegExp("\\\\define\\s+" + macroName + "\\s*\\(");
-			if (regex.test(tiddler.fields.text)) {
+			if(regex.test(tiddler.fields.text)) {
 				return shadows[i];
 			}
 		}
 	}
-	
+
 	// Search in regular tiddlers
 	var tiddlers = $tw.wiki.filterTiddlers("[all[tiddlers]has[text]]");
-	for (var i = 0; i < tiddlers.length; i++) {
+	for(var i = 0; i < tiddlers.length; i++) {
 		var tiddler = $tw.wiki.getTiddler(tiddlers[i]);
-		if (tiddler && tiddler.fields.text) {
+		if(tiddler && tiddler.fields.text) {
 			var regex = new RegExp("\\\\define\\s+" + macroName + "\\s*\\(");
-			if (regex.test(tiddler.fields.text)) {
+			if(regex.test(tiddler.fields.text)) {
 				return tiddlers[i];
 			}
 		}
 	}
-	
+
 	return null;
 }
 
@@ -267,23 +267,23 @@ function findMacroDefinition(macroName) {
  */
 function navigateToTiddler(title, options) {
 	options = options || {};
-	
-	if (!$tw || !$tw.wiki) return;
-	
+
+	if(!$tw || !$tw.wiki) return;
+
 	// Use TiddlyWiki's navigation mechanism
 	var event = {
 		type: "tm-navigate",
 		navigateTo: title,
 		navigateFromTitle: options.fromTitle
 	};
-	
+
 	// If we have a widget, use its dispatch
-	if (options.widget && options.widget.dispatchEvent) {
+	if(options.widget && options.widget.dispatchEvent) {
 		options.widget.dispatchEvent(event);
 	} else {
 		// Fallback: dispatch to root widget
 		var rootWidget = $tw.rootWidget;
-		if (rootWidget && rootWidget.dispatchEvent) {
+		if(rootWidget && rootWidget.dispatchEvent) {
 			rootWidget.dispatchEvent(event);
 		}
 	}
@@ -293,8 +293,8 @@ function navigateToTiddler(title, options) {
  * Open tiddler in new window/tab
  */
 function openInNewWindow(title) {
-	if (!$tw) return;
-	
+	if(!$tw) return;
+
 	// Create permalink
 	var permalink = "#" + encodeURIComponent(title);
 	window.open(window.location.pathname + permalink, "_blank");
@@ -312,18 +312,21 @@ var currentHighlight = null;
 function highlightLink(view, from, to) {
 	// Remove existing highlight
 	clearHighlight(view);
-	
+
 	// Add CSS class to the editor for styling
 	view.dom.classList.add("cm6-ctrl-held");
-	
-	currentHighlight = { from: from, to: to };
+
+	currentHighlight = {
+		from: from,
+		to: to
+	};
 }
 
 /**
  * Remove highlight
  */
 function clearHighlight(view) {
-	if (view && view.dom) {
+	if(view && view.dom) {
 		view.dom.classList.remove("cm6-ctrl-held");
 	}
 	currentHighlight = null;
@@ -337,15 +340,15 @@ var ctrlHeld = false;
 var lastMousePos = null;
 
 function handleKeyDown(event, view) {
-	if (event.key === "Control" || event.key === "Meta") {
+	if(event.key === "Control" || event.key === "Meta") {
 		ctrlHeld = true;
-		
+
 		// If we have a mouse position, check for link
-		if (lastMousePos) {
+		if(lastMousePos) {
 			var pos = view.posAtCoords(lastMousePos);
-			if (pos !== null) {
+			if(pos !== null) {
 				var link = getLinkAtPos(view.state, pos);
-				if (link) {
+				if(link) {
 					highlightLink(view, link.from, link.to);
 				}
 			}
@@ -354,25 +357,28 @@ function handleKeyDown(event, view) {
 }
 
 function handleKeyUp(event, view) {
-	if (event.key === "Control" || event.key === "Meta") {
+	if(event.key === "Control" || event.key === "Meta") {
 		ctrlHeld = false;
 		clearHighlight(view);
 	}
 }
 
 function handleMouseMove(event, view) {
-	lastMousePos = { x: event.clientX, y: event.clientY };
-	
-	if (!ctrlHeld) return;
-	
+	lastMousePos = {
+		x: event.clientX,
+		y: event.clientY
+	};
+
+	if(!ctrlHeld) return;
+
 	var pos = view.posAtCoords(lastMousePos);
-	if (pos === null) {
+	if(pos === null) {
 		clearHighlight(view);
 		return;
 	}
-	
+
 	var link = getLinkAtPos(view.state, pos);
-	if (link) {
+	if(link) {
 		highlightLink(view, link.from, link.to);
 		view.dom.style.cursor = "pointer";
 	} else {
@@ -390,23 +396,26 @@ function handleMouseLeave(event, view) {
 function handleClick(event, view) {
 	// Check for Ctrl+Click (Cmd+Click on Mac)
 	var ctrlKey = event.ctrlKey || event.metaKey;
-	if (!ctrlKey) return false;
-	
-	var pos = view.posAtCoords({ x: event.clientX, y: event.clientY });
-	if (pos === null) return false;
-	
+	if(!ctrlKey) return false;
+
+	var pos = view.posAtCoords({
+		x: event.clientX,
+		y: event.clientY
+	});
+	if(pos === null) return false;
+
 	var link = getLinkAtPos(view.state, pos);
-	if (!link) return false;
-	
+	if(!link) return false;
+
 	// Prevent default click behavior
 	event.preventDefault();
-	
+
 	// Get widget from engine
 	var engine = view._cm6Engine;
 	var widget = engine ? engine.widget : null;
-	
+
 	// Navigate based on link type
-	if (event.shiftKey) {
+	if(event.shiftKey) {
 		// Shift+Ctrl+Click opens in new window
 		openInNewWindow(link.target);
 	} else {
@@ -415,10 +424,10 @@ function handleClick(event, view) {
 			fromTitle: engine && engine._pluginContext ? engine._pluginContext.tiddlerTitle : null
 		});
 	}
-	
+
 	// Clear highlight
 	clearHighlight(view);
-	
+
 	return true;
 }
 
@@ -439,26 +448,26 @@ exports.plugin = {
 	// Only load for TiddlyWiki content when enabled
 	condition: function(context) {
 		var type = context.tiddlerType;
-		if (context.options.clickNavigate === false) return false;
+		if(context.options.clickNavigate === false) return false;
 		// Check config tiddler
 		var wiki = context.options && context.options.widget && context.options.widget.wiki;
 		var enabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/clickNavigate", "yes");
-		if (enabled !== "yes") return false;
+		if(enabled !== "yes") return false;
 		return !type || type === "" || type === "text/vnd.tiddlywiki" || type === "text/x-tiddlywiki";
 	},
 
 	init: function(cm6Core) {
 		this._core = cm6Core;
 		// Store syntaxTree function for link detection
-		if (cm6Core.language && cm6Core.language.syntaxTree) {
+		if(cm6Core.language && cm6Core.language.syntaxTree) {
 			_syntaxTree = cm6Core.language.syntaxTree;
 		}
 	},
-	
+
 	getExtensions: function(context) {
 		var core = this._core;
 		var EditorView = core.view.EditorView;
-		
+
 		return [
 			EditorView.domEventHandlers({
 				keydown: handleKeyDown,
@@ -470,42 +479,42 @@ exports.plugin = {
 			}),
 			// Store engine reference on view for click handler
 			EditorView.updateListener.of(function(update) {
-				if (!update.view._cm6Engine && context.engine) {
+				if(!update.view._cm6Engine && context.engine) {
 					update.view._cm6Engine = context.engine;
 				}
 			})
 		];
 	},
-	
+
 	extendAPI: function(engine, context) {
 		return {
 			/**
 			 * Navigate to tiddler at current cursor position
 			 */
 			navigateToLinkAtCursor: function() {
-				if (this._destroyed) return false;
-				
+				if(this._destroyed) return false;
+
 				var pos = this.view.state.selection.main.head;
 				var link = getLinkAtPos(this.view.state, pos);
-				if (!link) return false;
-				
+				if(!link) return false;
+
 				navigateToTiddler(link.target, {
 					widget: this.widget,
 					fromTitle: this._pluginContext ? this._pluginContext.tiddlerTitle : null
 				});
 				return true;
 			},
-			
+
 			/**
 			 * Get link information at cursor
 			 */
 			getLinkInfoAtCursor: function() {
-				if (this._destroyed) return null;
-				
+				if(this._destroyed) return null;
+
 				var pos = this.view.state.selection.main.head;
 				return getLinkAtPos(this.view.state, pos);
 			},
-			
+
 			/**
 			 * Navigate to specific tiddler
 			 */
@@ -515,7 +524,7 @@ exports.plugin = {
 					fromTitle: this._pluginContext ? this._pluginContext.tiddlerTitle : null
 				});
 			},
-			
+
 			/**
 			 * Open tiddler in new window
 			 */
@@ -524,7 +533,7 @@ exports.plugin = {
 			}
 		};
 	},
-	
+
 	destroy: function(engine) {
 		ctrlHeld = false;
 		lastMousePos = null;

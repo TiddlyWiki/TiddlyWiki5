@@ -24,7 +24,7 @@ exports.startup = function() {
 	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	var langYaml = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-yaml/lang-yaml.js");
 
-	if (!core || !core.registerLanguage || !langYaml) {
+	if(!core || !core.registerLanguage || !langYaml) {
 		return;
 	}
 

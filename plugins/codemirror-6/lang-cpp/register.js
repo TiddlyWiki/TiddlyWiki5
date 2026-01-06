@@ -24,7 +24,7 @@ exports.startup = function() {
 	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	var langCpp = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-cpp/lang-cpp.js");
 
-	if (!core || !core.registerLanguage || !langCpp) {
+	if(!core || !core.registerLanguage || !langCpp) {
 		return;
 	}
 

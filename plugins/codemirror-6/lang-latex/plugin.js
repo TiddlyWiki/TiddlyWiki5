@@ -28,7 +28,7 @@ var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").ha
 var _latexSupport = null;
 
 function getLatexSupport(core) {
-	if (_latexSupport) return _latexSupport;
+	if(_latexSupport) return _latexSupport;
 
 	// Use latexLanguage directly (without latex() which includes autocompletion with override)
 	// The override option in latex() replaces ALL completion sources, breaking other languages.
@@ -38,23 +38,27 @@ function getLatexSupport(core) {
 	var latexCompletionSource = langLatex.latexCompletionSource;
 	var autocompletion = cmAutocomplete.autocompletion;
 
-	if (LanguageSupport && latexLanguage) {
+	if(LanguageSupport && latexLanguage) {
 		// Create LanguageSupport with LaTeX completions scoped to LaTeX content
 		var support = [];
 
 		// Add LaTeX-specific completions via languageData (not override)
 		// latexCompletionSource is a factory: latexCompletionSource(autoCloseTagsEnabled) => CompletionSource
-		if (latexCompletionSource) {
+		if(latexCompletionSource) {
 			// Call the factory to get the actual completion source
 			var actualSource = latexCompletionSource(false);
-			support.push(latexLanguage.data.of({ autocomplete: actualSource }));
+			support.push(latexLanguage.data.of({
+				autocomplete: actualSource
+			}));
 		}
 
 		// Add autocompletion extension - needed for pure LaTeX tiddlers where
 		// TiddlyWiki plugin isn't active. For TiddlyWiki content, the TiddlyWiki
 		// plugin provides autocompletion, but this plugin won't be active then.
-		if (autocompletion) {
-			support.push(autocompletion({ activateOnTyping: true }));
+		if(autocompletion) {
+			support.push(autocompletion({
+				activateOnTyping: true
+			}));
 		}
 
 		_latexSupport = new LanguageSupport(latexLanguage, support);
@@ -82,7 +86,7 @@ exports.plugin = {
 	},
 
 	condition: function(context) {
-		if (hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
 			return true;
 		}
 		var type = context.tiddlerType;
@@ -95,7 +99,7 @@ exports.plugin = {
 
 	getExtensions: function(context) {
 		var compartments = context.engine._compartments;
-		if (compartments.latexLanguage) {
+		if(compartments.latexLanguage) {
 			return [compartments.latexLanguage.of(this.getCompartmentContent(context))];
 		}
 		return this.getCompartmentContent(context);

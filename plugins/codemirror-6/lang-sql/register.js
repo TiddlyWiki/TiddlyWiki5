@@ -24,7 +24,7 @@ exports.startup = function() {
 	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	var langSql = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/lang-sql.js");
 
-	if (!core || !core.registerLanguage || !langSql) {
+	if(!core || !core.registerLanguage || !langSql) {
 		return;
 	}
 
@@ -43,7 +43,9 @@ exports.startup = function() {
 		name: "MySQL",
 		alias: ["mysql"],
 		extensions: [],
-		support: langSql.sql({ dialect: langSql.MySQL })
+		support: langSql.sql({
+			dialect: langSql.MySQL
+		})
 	}));
 
 	// Register PostgreSQL
@@ -51,7 +53,9 @@ exports.startup = function() {
 		name: "PostgreSQL",
 		alias: ["postgresql", "postgres", "pgsql"],
 		extensions: [],
-		support: langSql.sql({ dialect: langSql.PostgreSQL })
+		support: langSql.sql({
+			dialect: langSql.PostgreSQL
+		})
 	}));
 
 	// Register SQLite
@@ -59,6 +63,8 @@ exports.startup = function() {
 		name: "SQLite",
 		alias: ["sqlite"],
 		extensions: [],
-		support: langSql.sql({ dialect: langSql.SQLite })
+		support: langSql.sql({
+			dialect: langSql.SQLite
+		})
 	}));
 };

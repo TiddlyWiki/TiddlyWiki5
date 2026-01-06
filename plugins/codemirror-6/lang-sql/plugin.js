@@ -51,7 +51,7 @@ exports.plugin = {
 
 	condition: function(context) {
 		// Tag-based override takes precedence
-		if (hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
 			return true;
 		}
 		// Fall back to content type check
@@ -67,12 +67,14 @@ exports.plugin = {
 
 	getCompartmentContent: function(context) {
 		var dialect = this.getDialect(context);
-		return [langSql.sql({ dialect: dialect })];
+		return [langSql.sql({
+			dialect: dialect
+		})];
 	},
 
 	getExtensions: function(context) {
 		var compartments = context.engine._compartments;
-		if (compartments.sqlLanguage) {
+		if(compartments.sqlLanguage) {
 			return [compartments.sqlLanguage.of(this.getCompartmentContent(context))];
 		}
 		return this.getCompartmentContent(context);
@@ -84,10 +86,10 @@ exports.plugin = {
 
 		return {
 			settingsChanged: function(settings) {
-				if (engine._destroyed) return;
+				if(engine._destroyed) return;
 
 				var compartments = engine._compartments;
-				if (compartments.sqlLanguage && engine.view) {
+				if(compartments.sqlLanguage && engine.view) {
 					var newContent = self.getCompartmentContent(context);
 					engine.view.dispatch({
 						effects: compartments.sqlLanguage.reconfigure(newContent)

@@ -47,7 +47,7 @@ exports.plugin = {
 
 	condition: function(context) {
 		// Tag-based override takes precedence
-		if (hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
 			return true;
 		}
 		// Fall back to content type check
@@ -59,9 +59,9 @@ exports.plugin = {
 		var extensions = [langJson.json()];
 
 		// Add JSON linting if lint library is available
-		if (lintLib && lintLib.linter && langJson.jsonParseLinter) {
+		if(lintLib && lintLib.linter && langJson.jsonParseLinter) {
 			extensions.push(lintLib.linter(langJson.jsonParseLinter()));
-			if (lintLib.lintGutter) {
+			if(lintLib.lintGutter) {
 				extensions.push(lintLib.lintGutter());
 			}
 		}
@@ -71,7 +71,7 @@ exports.plugin = {
 
 	getExtensions: function(context) {
 		var compartments = context.engine._compartments;
-		if (compartments.jsonLanguage) {
+		if(compartments.jsonLanguage) {
 			return [compartments.jsonLanguage.of(this.getCompartmentContent(context))];
 		}
 		return this.getCompartmentContent(context);

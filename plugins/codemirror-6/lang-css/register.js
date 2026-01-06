@@ -24,7 +24,7 @@ exports.startup = function() {
 	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	var langCss = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-css/lang-css.js");
 
-	if (!core || !core.registerLanguage || !langCss) {
+	if(!core || !core.registerLanguage || !langCss) {
 		return;
 	}
 

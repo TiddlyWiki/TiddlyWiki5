@@ -24,7 +24,7 @@ exports.startup = function() {
 	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	var langLatex = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-latex/lang-latex.js");
 
-	if (!core || !core.registerLanguage || !langLatex) {
+	if(!core || !core.registerLanguage || !langLatex) {
 		return;
 	}
 
@@ -37,14 +37,16 @@ exports.startup = function() {
 	// which would override ALL completion sources in the editor.
 	// Instead, we register completions via languageData which scopes them to LaTeX content only.
 	var latexSupport;
-	if (LanguageSupport && latexLanguage) {
+	if(LanguageSupport && latexLanguage) {
 		var support = [];
 		// Add LaTeX-specific completions via languageData (not override)
 		// latexCompletionSource is a factory: latexCompletionSource(autoCloseTagsEnabled) => CompletionSource
-		if (latexCompletionSource) {
+		if(latexCompletionSource) {
 			// Call the factory to get the actual completion source
 			var actualSource = latexCompletionSource(false);
-			support.push(latexLanguage.data.of({ autocomplete: actualSource }));
+			support.push(latexLanguage.data.of({
+				autocomplete: actualSource
+			}));
 		}
 		latexSupport = new LanguageSupport(latexLanguage, support);
 	} else {

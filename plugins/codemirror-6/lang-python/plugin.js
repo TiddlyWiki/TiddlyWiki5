@@ -39,7 +39,7 @@ exports.plugin = {
 
 	condition: function(context) {
 		// Tag-based override takes precedence
-		if (hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
 			return true;
 		}
 		// Fall back to content type check
@@ -53,7 +53,7 @@ exports.plugin = {
 
 	getExtensions: function(context) {
 		var compartments = context.engine._compartments;
-		if (compartments.pythonLanguage) {
+		if(compartments.pythonLanguage) {
 			return [compartments.pythonLanguage.of(this.getCompartmentContent(context))];
 		}
 		return this.getCompartmentContent(context);

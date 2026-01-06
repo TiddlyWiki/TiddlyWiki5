@@ -18,20 +18,20 @@ Shared utilities for CodeMirror 6 language plugins
  */
 exports.hasConfiguredTag = function(context, configTiddler) {
 	var wiki = context.options && context.options.widget && context.options.widget.wiki;
-	if (!wiki) return false;
+	if(!wiki) return false;
 
 	var tagsText = wiki.getTiddlerText(configTiddler, "");
-	if (!tagsText.trim()) return false;
+	if(!tagsText.trim()) return false;
 
 	// Use filterTiddlers to resolve the tiddler list
 	var configuredTags = wiki.filterTiddlers(tagsText);
-	if (!configuredTags || configuredTags.length === 0) return false;
+	if(!configuredTags || configuredTags.length === 0) return false;
 
 	var tiddlerTags = context.tiddlerFields && context.tiddlerFields.tags;
-	if (!tiddlerTags || !Array.isArray(tiddlerTags)) return false;
+	if(!tiddlerTags || !Array.isArray(tiddlerTags)) return false;
 
-	for (var i = 0; i < configuredTags.length; i++) {
-		if (tiddlerTags.indexOf(configuredTags[i]) !== -1) {
+	for(var i = 0; i < configuredTags.length; i++) {
+		if(tiddlerTags.indexOf(configuredTags[i]) !== -1) {
 			return true;
 		}
 	}

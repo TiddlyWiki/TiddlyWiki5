@@ -39,7 +39,7 @@ exports.plugin = {
 	},
 
 	condition: function(context) {
-		if (hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
 			return true;
 		}
 		var type = context.tiddlerType;
@@ -52,7 +52,7 @@ exports.plugin = {
 
 	getExtensions: function(context) {
 		var compartments = context.engine._compartments;
-		if (compartments.phpLanguage) {
+		if(compartments.phpLanguage) {
 			return [compartments.phpLanguage.of(this.getCompartmentContent(context))];
 		}
 		return this.getCompartmentContent(context);

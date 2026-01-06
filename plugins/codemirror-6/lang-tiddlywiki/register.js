@@ -24,11 +24,11 @@ exports.name = "cm6-lang-tiddlywiki";
 (function() {
 	var baseDeps = ["startup"];
 
-	if ($tw && $tw.modules && $tw.modules.forEachModuleOfType) {
+	if($tw && $tw.modules && $tw.modules.forEachModuleOfType) {
 		$tw.modules.forEachModuleOfType("startup", function(title, mod) {
-			if (mod.name &&
-			    mod.name.indexOf("cm6-lang-") === 0 &&
-			    mod.name !== "cm6-lang-tiddlywiki") {
+			if(mod.name &&
+				mod.name.indexOf("cm6-lang-") === 0 &&
+				mod.name !== "cm6-lang-tiddlywiki") {
 				baseDeps.push(mod.name);
 			}
 		});
@@ -105,12 +105,12 @@ function clearCache() {
  */
 function getImageTiddlerTitles() {
 	var now = Date.now();
-	if (_cache.imageTiddlers && (now - _cache.imageTiddlersTime) < CACHE_TTL) {
+	if(_cache.imageTiddlers && (now - _cache.imageTiddlersTime) < CACHE_TTL) {
 		return _cache.imageTiddlers;
 	}
 
 	var titles = [];
-	if ($tw && $tw.wiki) {
+	if($tw && $tw.wiki) {
 		titles = $tw.wiki.filterTiddlers("[all[tiddlers+shadows]is[image]]");
 	}
 
@@ -127,13 +127,13 @@ function getImageTiddlerTitles() {
  */
 function getTiddlerTitles(wiki) {
 	var now = Date.now();
-	if (_cache.tiddlers && (now - _cache.tiddlersTime) < CACHE_TTL) {
+	if(_cache.tiddlers && (now - _cache.tiddlersTime) < CACHE_TTL) {
 		return _cache.tiddlers;
 	}
 
 	wiki = wiki || $tw.wiki;
 	var titles = [];
-	if (wiki) {
+	if(wiki) {
 		// Get all tiddlers and shadow tiddlers, non-system first then system
 		titles = wiki.filterTiddlers("[all[tiddlers+shadows]!is[system]sort[title]] [all[tiddlers+shadows]is[system]sort[title]]");
 	}
@@ -148,7 +148,7 @@ function getTiddlerTitles(wiki) {
  * Returns simple string array
  */
 function getMacroNames() {
-	if (_cache.macros) return _cache.macros;
+	if(_cache.macros) return _cache.macros;
 
 	var macros = [];
 	var seen = {};
@@ -156,7 +156,7 @@ function getMacroNames() {
 	// Also build parameter map for getMacroParams
 	_cache.macroParams = {};
 
-	if ($tw && $tw.wiki) {
+	if($tw && $tw.wiki) {
 		// Get tiddlers tagged with $:/tags/Macro or $:/tags/Global
 		var defTiddlers = $tw.wiki.filterTiddlers(
 			"[all[tiddlers+shadows]tag[$:/tags/Macro]] [all[tiddlers+shadows]tag[$:/tags/Global]]"
@@ -164,23 +164,23 @@ function getMacroNames() {
 
 		defTiddlers.forEach(function(title) {
 			var tiddler = $tw.wiki.getTiddler(title);
-			if (tiddler) {
+			if(tiddler) {
 				var text = tiddler.fields.text || "";
 
 				// Match \define name(params), \procedure name(params), \function name(params), \widget name(params)
 				var regex = /\\(define|procedure|function|widget)\s+([^\s(]+)\s*\(([^)]*)\)/g;
 				var match;
-				while ((match = regex.exec(text)) !== null) {
+				while((match = regex.exec(text)) !== null) {
 					var name = match[2];
 					var paramsStr = match[3];
 
-					if (!seen[name]) {
+					if(!seen[name]) {
 						seen[name] = true;
 						macros.push(name);
 
 						// Parse parameters
 						var params = [];
-						if (paramsStr.trim()) {
+						if(paramsStr.trim()) {
 							params = paramsStr.split(",").map(function(p) {
 								var paramMatch = p.trim().match(/^([^\s:]+)(?::(.*))?$/);
 								return paramMatch ? paramMatch[1] : p.trim();
@@ -192,9 +192,9 @@ function getMacroNames() {
 
 				// Also match definitions without parentheses (no params)
 				var noParamsRegex = /\\(define|procedure|function|widget)\s+([^\s(]+)\s*$/gm;
-				while ((match = noParamsRegex.exec(text)) !== null) {
+				while((match = noParamsRegex.exec(text)) !== null) {
 					var name = match[2];
-					if (!seen[name]) {
+					if(!seen[name]) {
 						seen[name] = true;
 						macros.push(name);
 						_cache.macroParams[name] = [];
@@ -204,14 +204,14 @@ function getMacroNames() {
 		});
 
 		// Also add global macros from $tw.macros
-		if ($tw.macros) {
+		if($tw.macros) {
 			Object.keys($tw.macros).forEach(function(name) {
-				if (!seen[name]) {
+				if(!seen[name]) {
 					seen[name] = true;
 					macros.push(name);
 					var macro = $tw.macros[name];
 					var params = [];
-					if (macro.params) {
+					if(macro.params) {
 						params = macro.params.map(function(p) {
 							return p.name;
 						});
@@ -232,7 +232,7 @@ function getMacroNames() {
  */
 function getMacroParams(macroName) {
 	// Ensure cache is populated
-	if (!_cache.macros) {
+	if(!_cache.macros) {
 		getMacroNames();
 	}
 	var params = _cache.macroParams ? _cache.macroParams[macroName] : null;
@@ -244,17 +244,17 @@ function getMacroParams(macroName) {
  * Returns simple string array
  */
 function getWidgetNames() {
-	if (_cache.widgets) return _cache.widgets;
+	if(_cache.widgets) return _cache.widgets;
 
 	var widgets = [];
 	var seen = {};
 
 	// Discover all widgets from JavaScript modules using TiddlyWiki's API
 	$tw.modules.forEachModuleOfType("widget", function(title, mod) {
-		for (var exportName in mod) {
-			if (mod.hasOwnProperty(exportName) && typeof mod[exportName] === "function") {
+		for(var exportName in mod) {
+			if(mod.hasOwnProperty(exportName) && typeof mod[exportName] === "function") {
 				var name = "$" + exportName;
-				if (!seen[name]) {
+				if(!seen[name]) {
 					seen[name] = true;
 					widgets.push(name);
 				}
@@ -263,19 +263,19 @@ function getWidgetNames() {
 	});
 
 	// Add custom widgets defined via \widget pragma in wiki
-	if ($tw && $tw.wiki) {
+	if($tw && $tw.wiki) {
 		var customWidgets = $tw.wiki.filterTiddlers(
 			"[all[tiddlers+shadows]tag[$:/tags/Global]] [all[tiddlers+shadows]tag[$:/tags/Macro]]"
 		);
 		customWidgets.forEach(function(title) {
 			var tiddler = $tw.wiki.getTiddler(title);
-			if (tiddler) {
+			if(tiddler) {
 				var text = tiddler.fields.text || "";
 				var regex = /\\widget\s+\$?([^\s(]+)/g;
 				var match;
-				while ((match = regex.exec(text)) !== null) {
+				while((match = regex.exec(text)) !== null) {
 					var name = "$" + match[1].replace(/^\$/, "");
-					if (!seen[name]) {
+					if(!seen[name]) {
 						seen[name] = true;
 						widgets.push(name);
 					}
@@ -296,7 +296,7 @@ function getWidgetNames() {
  * Returns simple string array
  */
 function getFilterOperators() {
-	if (_cache.operators) return _cache.operators;
+	if(_cache.operators) return _cache.operators;
 
 	var operators = [
 		// Core operators from TiddlyWiki
@@ -325,9 +325,9 @@ function getFilterOperators() {
 	];
 
 	// Add custom operators from $tw.wiki.filterOperators
-	if ($tw && $tw.wiki && $tw.wiki.filterOperators) {
+	if($tw && $tw.wiki && $tw.wiki.filterOperators) {
 		Object.keys($tw.wiki.filterOperators).forEach(function(op) {
-			if (operators.indexOf(op) === -1) {
+			if(operators.indexOf(op) === -1) {
 				operators.push(op);
 			}
 		});
@@ -343,7 +343,7 @@ function getFilterOperators() {
  */
 function getFieldNames() {
 	var now = Date.now();
-	if (_cache.fields && (now - _cache.fieldsTime) < CACHE_TTL) {
+	if(_cache.fields && (now - _cache.fieldsTime) < CACHE_TTL) {
 		return _cache.fields;
 	}
 
@@ -355,12 +355,14 @@ function getFieldNames() {
 		"draft.of", "draft.title", "plugin-type", "plugin-priority", "color",
 		"icon", "library", "source", "code-body", "throttle.refresh"
 	];
-	coreFields.forEach(function(f) { fields[f] = true; });
+	coreFields.forEach(function(f) {
+		fields[f] = true;
+	});
 
-	if ($tw && $tw.wiki) {
+	if($tw && $tw.wiki) {
 		// Collect all unique field names from all tiddlers
 		$tw.wiki.each(function(tiddler, title) {
-			if (tiddler && tiddler.fields) {
+			if(tiddler && tiddler.fields) {
 				Object.keys(tiddler.fields).forEach(function(field) {
 					fields[field] = true;
 				});
@@ -380,12 +382,12 @@ function getFieldNames() {
  * @returns {string[]} Array of field names that exist on this tiddler
  */
 function getTiddlerFields(tiddlerTitle) {
-	if (!$tw || !$tw.wiki || !tiddlerTitle) {
+	if(!$tw || !$tw.wiki || !tiddlerTitle) {
 		return [];
 	}
 
 	var tiddler = $tw.wiki.getTiddler(tiddlerTitle);
-	if (!tiddler || !tiddler.fields) {
+	if(!tiddler || !tiddler.fields) {
 		return [];
 	}
 
@@ -400,7 +402,7 @@ function getTiddlerFields(tiddlerTitle) {
  * @returns {string[]} Array of index names (keys from the tiddler's data)
  */
 function getTiddlerIndexes(tiddlerTitle) {
-	if (!$tw || !$tw.wiki || !tiddlerTitle) {
+	if(!$tw || !$tw.wiki || !tiddlerTitle) {
 		return [];
 	}
 
@@ -408,16 +410,18 @@ function getTiddlerIndexes(tiddlerTitle) {
 	// This handles application/json, application/x-tiddler-dictionary, etc.
 	var data = $tw.wiki.getTiddlerDataCached(tiddlerTitle, undefined);
 
-	if (!data) {
+	if(!data) {
 		return [];
 	}
 
 	// Return keys for objects, numeric indexes for arrays
-	if (Array.isArray(data)) {
-		return data.map(function(_, i) { return String(i); });
+	if(Array.isArray(data)) {
+		return data.map(function(_, i) {
+			return String(i);
+		});
 	}
 
-	if (typeof data === "object") {
+	if(typeof data === "object") {
 		return Object.keys(data).sort();
 	}
 
@@ -430,12 +434,12 @@ function getTiddlerIndexes(tiddlerTitle) {
  */
 function getTagNames() {
 	var now = Date.now();
-	if (_cache.tags && (now - _cache.tagsTime) < CACHE_TTL) {
+	if(_cache.tags && (now - _cache.tagsTime) < CACHE_TTL) {
 		return _cache.tags;
 	}
 
 	var tags = [];
-	if ($tw && $tw.wiki) {
+	if($tw && $tw.wiki) {
 		// Use TiddlyWiki's built-in method to get all tags
 		var tagMap = $tw.wiki.getTagMap();
 		tags = Object.keys(tagMap).sort();
@@ -452,14 +456,14 @@ function getTagNames() {
  */
 function getFunctionNames() {
 	var now = Date.now();
-	if (_cache.functions && (now - _cache.functionsTime) < CACHE_TTL) {
+	if(_cache.functions && (now - _cache.functionsTime) < CACHE_TTL) {
 		return _cache.functions;
 	}
 
 	var functions = [];
 	var seen = {};
 
-	if ($tw && $tw.wiki) {
+	if($tw && $tw.wiki) {
 		// Get tiddlers that might contain function definitions
 		var defTiddlers = $tw.wiki.filterTiddlers(
 			"[all[tiddlers+shadows]tag[$:/tags/Macro]] [all[tiddlers+shadows]tag[$:/tags/Global]]"
@@ -467,15 +471,15 @@ function getFunctionNames() {
 
 		defTiddlers.forEach(function(title) {
 			var tiddler = $tw.wiki.getTiddler(title);
-			if (tiddler) {
+			if(tiddler) {
 				var text = tiddler.fields.text || "";
 
 				// Match \function name or \function name(params)
 				var regex = /\\function\s+([^\s(]+)/g;
 				var match;
-				while ((match = regex.exec(text)) !== null) {
+				while((match = regex.exec(text)) !== null) {
 					var name = match[1];
-					if (!seen[name]) {
+					if(!seen[name]) {
 						seen[name] = true;
 						functions.push(name);
 					}
@@ -484,16 +488,16 @@ function getFunctionNames() {
 		});
 
 		// Also check $tw.wiki.getTiddlerText for function definitions in shadow tiddlers
-		if ($tw.wiki.shadowTiddlers) {
+		if($tw.wiki.shadowTiddlers) {
 			Object.keys($tw.wiki.shadowTiddlers).forEach(function(title) {
 				var shadowInfo = $tw.wiki.shadowTiddlers[title];
-				if (shadowInfo && shadowInfo.tiddler && shadowInfo.tiddler.fields) {
+				if(shadowInfo && shadowInfo.tiddler && shadowInfo.tiddler.fields) {
 					var text = shadowInfo.tiddler.fields.text || "";
 					var regex = /\\function\s+([^\s(]+)/g;
 					var match;
-					while ((match = regex.exec(text)) !== null) {
+					while((match = regex.exec(text)) !== null) {
 						var name = match[1];
-						if (!seen[name]) {
+						if(!seen[name]) {
 							seen[name] = true;
 							functions.push(name);
 						}
@@ -513,7 +517,7 @@ function getFunctionNames() {
  * Returns simple string array
  */
 function getStoryViews() {
-	if (_cache.storyViews) return _cache.storyViews;
+	if(_cache.storyViews) return _cache.storyViews;
 
 	var storyviews = [];
 	var seen = {};
@@ -522,9 +526,9 @@ function getStoryViews() {
 		// The storyview name is typically derived from the module title
 		// e.g., "$:/core/modules/storyviews/classic.js" -> "classic"
 		var match = /\/([^\/]+)\.js$/.exec(title);
-		if (match) {
+		if(match) {
 			var name = match[1];
-			if (!seen[name]) {
+			if(!seen[name]) {
 				seen[name] = true;
 				storyviews.push(name);
 			}
@@ -540,16 +544,16 @@ function getStoryViews() {
  * Returns simple string array of MIME types
  */
 function getDeserializers() {
-	if (_cache.deserializers) return _cache.deserializers;
+	if(_cache.deserializers) return _cache.deserializers;
 
 	var deserializers = [];
 	var seen = {};
 
 	$tw.modules.forEachModuleOfType("tiddlerdeserializer", function(title, mod) {
 		// Each deserializer module exports functions keyed by MIME type
-		for (var mimeType in mod) {
-			if (mod.hasOwnProperty(mimeType) && typeof mod[mimeType] === "function") {
-				if (!seen[mimeType]) {
+		for(var mimeType in mod) {
+			if(mod.hasOwnProperty(mimeType) && typeof mod[mimeType] === "function") {
+				if(!seen[mimeType]) {
 					seen[mimeType] = true;
 					deserializers.push(mimeType);
 				}
@@ -567,14 +571,14 @@ function getDeserializers() {
  */
 function getVariableNames() {
 	var now = Date.now();
-	if (_cache.variables && (now - _cache.variablesTime) < CACHE_TTL) {
+	if(_cache.variables && (now - _cache.variablesTime) < CACHE_TTL) {
 		return _cache.variables;
 	}
 
 	var variables = [];
 	var seen = {};
 
-	if ($tw && $tw.wiki) {
+	if($tw && $tw.wiki) {
 		// Get tiddlers that might contain variable definitions
 		var defTiddlers = $tw.wiki.filterTiddlers(
 			"[all[tiddlers+shadows]tag[$:/tags/Macro]] [all[tiddlers+shadows]tag[$:/tags/Global]]"
@@ -582,15 +586,15 @@ function getVariableNames() {
 
 		defTiddlers.forEach(function(title) {
 			var tiddler = $tw.wiki.getTiddler(title);
-			if (tiddler) {
+			if(tiddler) {
 				var text = tiddler.fields.text || "";
 
 				// Match \define, \procedure, \function, \widget
 				var regex = /\\(define|procedure|function|widget)\s+([^\s(]+)/g;
 				var match;
-				while ((match = regex.exec(text)) !== null) {
+				while((match = regex.exec(text)) !== null) {
 					var name = match[2];
-					if (!seen[name]) {
+					if(!seen[name]) {
 						seen[name] = true;
 						variables.push(name);
 					}
@@ -599,9 +603,9 @@ function getVariableNames() {
 		});
 
 		// Add global variables from $tw.macros
-		if ($tw.macros) {
+		if($tw.macros) {
 			Object.keys($tw.macros).forEach(function(name) {
-				if (!seen[name]) {
+				if(!seen[name]) {
 					seen[name] = true;
 					variables.push(name);
 				}
@@ -609,9 +613,9 @@ function getVariableNames() {
 		}
 
 		// Add global procedures from wiki
-		if ($tw.wiki.globalProcedures) {
+		if($tw.wiki.globalProcedures) {
 			Object.keys($tw.wiki.globalProcedures).forEach(function(name) {
-				if (!seen[name]) {
+				if(!seen[name]) {
 					seen[name] = true;
 					variables.push(name);
 				}
@@ -632,7 +636,7 @@ exports.startup = function() {
 	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	var langTw = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-tiddlywiki/lang-tiddlywiki.js");
 
-	if (!core || !core.registerLanguage || !langTw || !langTw.tiddlywiki) {
+	if(!core || !core.registerLanguage || !langTw || !langTw.tiddlywiki) {
 		return;
 	}
 
@@ -641,15 +645,19 @@ exports.startup = function() {
 	// Callback to get self-closing widgets config (cached with TTL for live updates)
 	function getSelfClosingWidgets() {
 		var now = Date.now();
-		if (_cache.selfClosingWidgets && (now - _cache.selfClosingWidgetsTime) < CACHE_TTL) {
+		if(_cache.selfClosingWidgets && (now - _cache.selfClosingWidgetsTime) < CACHE_TTL) {
 			return _cache.selfClosingWidgets;
 		}
 
 		var text = $tw.wiki.getTiddlerText("$:/config/codemirror-6/selfClosingWidgets", "");
 		var widgets = text
 			.split(/[\s,]+/)
-			.map(function(w) { return w.trim(); })
-			.filter(function(w) { return w.length > 0; });
+			.map(function(w) {
+				return w.trim();
+			})
+			.filter(function(w) {
+				return w.length > 0;
+			});
 
 		_cache.selfClosingWidgets = widgets;
 		_cache.selfClosingWidgetsTime = now;
@@ -668,9 +676,9 @@ exports.startup = function() {
 		var seen = {};
 		var match;
 
-		while ((match = attrRegex.exec(source)) !== null) {
+		while((match = attrRegex.exec(source)) !== null) {
 			var attrName = match[1];
-			if (!seen[attrName]) {
+			if(!seen[attrName]) {
 				seen[attrName] = true;
 				attrs.push(attrName);
 			}
@@ -685,7 +693,7 @@ exports.startup = function() {
 	 */
 	function getWidgetAttributes(widgetName) {
 		// Check cache first
-		if (widgetAttributesCache.hasOwnProperty(widgetName)) {
+		if(widgetAttributesCache.hasOwnProperty(widgetName)) {
 			return widgetAttributesCache[widgetName];
 		}
 
@@ -697,12 +705,12 @@ exports.startup = function() {
 		var seenAttrs = {};
 
 		$tw.modules.forEachModuleOfType("widget", function(title, mod) {
-			if (mod && mod[moduleName]) {
+			if(mod && mod[moduleName]) {
 				var source = $tw.wiki.getTiddlerText(title, "");
-				if (source) {
+				if(source) {
 					var attrs = parseAttributesFromSource(source);
-					for (var i = 0; i < attrs.length; i++) {
-						if (!seenAttrs[attrs[i]]) {
+					for(var i = 0; i < attrs.length; i++) {
+						if(!seenAttrs[attrs[i]]) {
 							seenAttrs[attrs[i]] = true;
 							allAttrs.push(attrs[i]);
 						}
@@ -760,7 +768,7 @@ exports.startup = function() {
 	}));
 
 	// Export cache clear function for external use
-	if (!$tw.CodeMirror) {
+	if(!$tw.CodeMirror) {
 		$tw.CodeMirror = {};
 	}
 	$tw.CodeMirror.clearAutocompleteCache = clearCache;

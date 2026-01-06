@@ -53,7 +53,7 @@ function convertTemplate(template) {
  */
 function loadUserSnippets(wiki) {
 	var now = Date.now();
-	if (_snippetCache && (now - _cacheTime) < CACHE_TTL) {
+	if(_snippetCache && (now - _cacheTime) < CACHE_TTL) {
 		return _snippetCache;
 	}
 
@@ -63,13 +63,13 @@ function loadUserSnippets(wiki) {
 
 	tiddlers.forEach(function(title) {
 		var tiddler = wiki.getTiddler(title);
-		if (!tiddler) return;
+		if(!tiddler) return;
 
 		var fields = tiddler.fields;
 		var trigger = fields.trigger;
 		var template = fields.text;
 
-		if (!trigger || !template) return;
+		if(!trigger || !template) return;
 
 		snippets.push({
 			trigger: trigger,
@@ -103,18 +103,20 @@ function getSnippets(contentType) {
 
 	// Filter by scope if content type is specified
 	var filtered = userSnippets.filter(function(s) {
-		if (!s.scope || !contentType) {
+		if(!s.scope || !contentType) {
 			return true; // No scope restriction
 		}
 		// Support comma-separated scopes
-		var scopes = s.scope.split(",").map(function(sc) { return sc.trim(); });
+		var scopes = s.scope.split(",").map(function(sc) {
+			return sc.trim();
+		});
 		return scopes.indexOf(contentType) !== -1;
 	});
 
 	// Sort by priority (higher first), then alphabetically
 	filtered.sort(function(a, b) {
 		var priorityDiff = (b.priority || 0) - (a.priority || 0);
-		if (priorityDiff !== 0) return priorityDiff;
+		if(priorityDiff !== 0) return priorityDiff;
 		return a.trigger.localeCompare(b.trigger);
 	});
 
@@ -130,7 +132,7 @@ function getSnippets(contentType) {
  * (inside attribute values, code blocks, comments, etc.)
  */
 function isInRestrictedContext(context) {
-	if (!_core || !_core.language || !_core.language.syntaxTree) {
+	if(!_core || !_core.language || !_core.language.syntaxTree) {
 		return false; // Can't check, allow snippets
 	}
 
@@ -140,10 +142,10 @@ function isInRestrictedContext(context) {
 	var node = tree.resolveInner(pos, -1);
 
 	// Walk up the tree to check for restricted contexts
-	while (node && !node.type.isTop) {
+	while(node && !node.type.isTop) {
 		var name = node.name;
 		// Don't show snippets inside these contexts
-		if (name === "AttributeValue" ||
+		if(name === "AttributeValue" ||
 			name === "StringToken" ||
 			name === "FencedCode" ||
 			name === "CodeBlock" ||
@@ -160,12 +162,12 @@ function isInRestrictedContext(context) {
 	var textBefore = state.sliceDoc(Math.max(0, pos - 100), pos);
 	// Check for unclosed attribute value: attr="... or attr='...
 	var attrMatch = /[\w\-$]+\s*=\s*(["'])(?:[^"'\\]|\\.)*$/.exec(textBefore);
-	if (attrMatch) {
+	if(attrMatch) {
 		return true; // Inside an attribute value
 	}
 
 	// Check for transclusion field/index completion context: {{tiddler!! or {{tiddler##
-	if (/\{\{[^{}]*!![^{}]*$/.test(textBefore) || /\{\{[^{}]*##[^{}]*$/.test(textBefore)) {
+	if(/\{\{[^{}]*!![^{}]*$/.test(textBefore) || /\{\{[^{}]*##[^{}]*$/.test(textBefore)) {
 		return true; // Inside transclusion field/index completion
 	}
 
@@ -177,20 +179,20 @@ function isInRestrictedContext(context) {
  */
 function snippetCompletions(context) {
 	// Don't show snippets in restricted contexts (attribute values, code blocks, etc.)
-	if (isInRestrictedContext(context)) {
+	if(isInRestrictedContext(context)) {
 		return null;
 	}
 
 	// Match word-like characters plus special chars used in triggers
 	var word = context.matchBefore(/[\w\-\\$\[<`|]+/);
-	if (!word || word.from === word.to) return null;
+	if(!word || word.from === word.to) return null;
 
 	var prefix = word.text.toLowerCase();
 
 	// Get content type from context if available
 	var contentType = null;
 	// Try to get from engine context
-	if (context.state && context.state.field) {
+	if(context.state && context.state.field) {
 		// Could access content type through state fields if needed
 	}
 
@@ -209,7 +211,7 @@ function snippetCompletions(context) {
 				var mainIndex = view.state.selection.mainIndex;
 				var triggerLen = word.text.length;
 
-				if (_snippetFn && selections.length === 1) {
+				if(_snippetFn && selections.length === 1) {
 					// Single cursor: use CodeMirror's snippet system for Tab navigation
 					_snippetFn(cmTemplate)(view, completion, from, to);
 				} else {
@@ -222,14 +224,24 @@ function snippetCompletions(context) {
 
 					// Build changes for all selections
 					var changes = selections.map(function(range, idx) {
-						if (idx === mainIndex) {
-							return { from: from, to: to, insert: plainText };
+						if(idx === mainIndex) {
+							return {
+								from: from,
+								to: to,
+								insert: plainText
+							};
 						} else {
 							// Other cursors: replace the same trigger length
-							return { from: range.from - triggerLen, to: range.from, insert: plainText };
+							return {
+								from: range.from - triggerLen,
+								to: range.from,
+								insert: plainText
+							};
 						}
 					});
-					view.dispatch({ changes: changes });
+					view.dispatch({
+						changes: changes
+					});
 				}
 			};
 
@@ -243,7 +255,7 @@ function snippetCompletions(context) {
 			};
 		});
 
-	if (options.length === 0) return null;
+	if(options.length === 0) return null;
 
 	return {
 		from: word.from,
@@ -272,7 +284,7 @@ exports.plugin = {
 		this._core = cm6Core;
 		_core = cm6Core;
 		// Load the snippet function from CodeMirror's autocomplete module
-		if (cm6Core.autocomplete && cm6Core.autocomplete.snippet) {
+		if(cm6Core.autocomplete && cm6Core.autocomplete.snippet) {
 			_snippetFn = cm6Core.autocomplete.snippet;
 		}
 	},
@@ -282,7 +294,7 @@ exports.plugin = {
 
 		// Register completion source with the engine
 		// Use lower priority than tw-snippets so user snippets appear first
-		if (engine && engine.registerCompletionSource) {
+		if(engine && engine.registerCompletionSource) {
 			engine.registerCompletionSource(snippetCompletions, 18);
 		}
 
@@ -332,16 +344,16 @@ exports.plugin = {
 			 * Insert a snippet by trigger (handles all selections)
 			 */
 			insertUserSnippet: function(trigger, contentType) {
-				if (this._destroyed) return false;
+				if(this._destroyed) return false;
 
 				var snippets = getSnippets(contentType);
-				for (var i = 0; i < snippets.length; i++) {
-					if (snippets[i].trigger === trigger) {
+				for(var i = 0; i < snippets.length; i++) {
+					if(snippets[i].trigger === trigger) {
 						var s = snippets[i];
 						var view = this.view;
 						var selections = view.state.selection.ranges;
 
-						if (_snippetFn && selections.length === 1) {
+						if(_snippetFn && selections.length === 1) {
 							// Use CodeMirror's snippet system for single cursor
 							var cmTemplate = convertTemplate(s.template);
 							_snippetFn(cmTemplate)(view, null, selections[0].from, selections[0].to);
@@ -353,9 +365,15 @@ exports.plugin = {
 								})
 								.replace(/\$0/g, "");
 							var changes = selections.map(function(range) {
-								return { from: range.from, to: range.to, insert: plainText };
+								return {
+									from: range.from,
+									to: range.to,
+									insert: plainText
+								};
 							});
-							view.dispatch({ changes: changes });
+							view.dispatch({
+								changes: changes
+							});
 						}
 						return true;
 					}

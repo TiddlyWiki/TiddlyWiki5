@@ -7,111 +7,111 @@ Line numbers plugin - shows line numbers in the gutter and highlights active lin
 
 \*/
 (function() {
-"use strict";
+	"use strict";
 
-if (!$tw.browser) return;
+	if(!$tw.browser) return;
 
-exports.plugin = {
-  name: "line-numbers",
-  description: "Line numbers gutter and active line highlighting",
-  priority: 800,
+	exports.plugin = {
+		name: "line-numbers",
+		description: "Line numbers gutter and active line highlighting",
+		priority: 800,
 
-  init: function(cm6Core) {
-    this._core = cm6Core;
-  },
+		init: function(cm6Core) {
+			this._core = cm6Core;
+		},
 
-  registerCompartments: function() {
-    var Compartment = this._core.state.Compartment;
-    return {
-      lineNumbers: new Compartment(),
-      highlightActiveLine: new Compartment()
-    };
-  },
+		registerCompartments: function() {
+			var Compartment = this._core.state.Compartment;
+			return {
+				lineNumbers: new Compartment(),
+				highlightActiveLine: new Compartment()
+			};
+		},
 
-  getExtensions: function(context) {
-    var core = this._core;
-    var engine = context.engine;
-    var compartments = engine._compartments;
-    var extensions = [];
+		getExtensions: function(context) {
+			var core = this._core;
+			var engine = context.engine;
+			var compartments = engine._compartments;
+			var extensions = [];
 
-    var lineNumbers = (core.view || {}).lineNumbers;
-    var highlightActiveLine = (core.view || {}).highlightActiveLine;
-    var highlightActiveLineGutter = (core.view || {}).highlightActiveLineGutter;
+			var lineNumbers = (core.view || {}).lineNumbers;
+			var highlightActiveLine = (core.view || {}).highlightActiveLine;
+			var highlightActiveLineGutter = (core.view || {}).highlightActiveLineGutter;
 
-    // Line numbers - default enabled
-    if (compartments.lineNumbers && lineNumbers) {
-      extensions.push(compartments.lineNumbers.of(lineNumbers()));
-    }
+			// Line numbers - default enabled
+			if(compartments.lineNumbers && lineNumbers) {
+				extensions.push(compartments.lineNumbers.of(lineNumbers()));
+			}
 
-    // Highlight active line - default enabled
-    if (compartments.highlightActiveLine && highlightActiveLine) {
-      var activeLineExts = [highlightActiveLine()];
-      if (highlightActiveLineGutter) {
-        activeLineExts.push(highlightActiveLineGutter());
-      }
-      extensions.push(compartments.highlightActiveLine.of(activeLineExts));
-    }
+			// Highlight active line - default enabled
+			if(compartments.highlightActiveLine && highlightActiveLine) {
+				var activeLineExts = [highlightActiveLine()];
+				if(highlightActiveLineGutter) {
+					activeLineExts.push(highlightActiveLineGutter());
+				}
+				extensions.push(compartments.highlightActiveLine.of(activeLineExts));
+			}
 
-    return extensions;
-  },
+			return extensions;
+		},
 
-  registerEvents: function(engine, context) {
-    var core = this._core;
-    var lineNumbers = (core.view || {}).lineNumbers;
-    var highlightActiveLine = (core.view || {}).highlightActiveLine;
-    var highlightActiveLineGutter = (core.view || {}).highlightActiveLineGutter;
+		registerEvents: function(engine, context) {
+			var core = this._core;
+			var lineNumbers = (core.view || {}).lineNumbers;
+			var highlightActiveLine = (core.view || {}).highlightActiveLine;
+			var highlightActiveLineGutter = (core.view || {}).highlightActiveLineGutter;
 
-    return {
-      settingsChanged: function(settings) {
-        if (engine._destroyed) return;
+			return {
+				settingsChanged: function(settings) {
+					if(engine._destroyed) return;
 
-        // Line numbers
-        if (lineNumbers) {
-          var showLineNumbers = settings.lineNumbers !== false;
-          engine.reconfigure("lineNumbers", showLineNumbers ? lineNumbers() : []);
-        }
+					// Line numbers
+					if(lineNumbers) {
+						var showLineNumbers = settings.lineNumbers !== false;
+						engine.reconfigure("lineNumbers", showLineNumbers ? lineNumbers() : []);
+					}
 
-        // Highlight active line
-        if (highlightActiveLine) {
-          var showActiveLine = settings.highlightActiveLine !== false;
-          var activeLineExts = [];
-          if (showActiveLine) {
-            activeLineExts.push(highlightActiveLine());
-            if (highlightActiveLineGutter) {
-              activeLineExts.push(highlightActiveLineGutter());
-            }
-          }
-          engine.reconfigure("highlightActiveLine", activeLineExts);
-        }
-      }
-    };
-  },
+					// Highlight active line
+					if(highlightActiveLine) {
+						var showActiveLine = settings.highlightActiveLine !== false;
+						var activeLineExts = [];
+						if(showActiveLine) {
+							activeLineExts.push(highlightActiveLine());
+							if(highlightActiveLineGutter) {
+								activeLineExts.push(highlightActiveLineGutter());
+							}
+						}
+						engine.reconfigure("highlightActiveLine", activeLineExts);
+					}
+				}
+			};
+		},
 
-  extendAPI: function(engine, context) {
-    var core = this._core;
-    var lineNumbers = (core.view || {}).lineNumbers;
-    var highlightActiveLine = (core.view || {}).highlightActiveLine;
-    var highlightActiveLineGutter = (core.view || {}).highlightActiveLineGutter;
+		extendAPI: function(engine, context) {
+			var core = this._core;
+			var lineNumbers = (core.view || {}).lineNumbers;
+			var highlightActiveLine = (core.view || {}).highlightActiveLine;
+			var highlightActiveLineGutter = (core.view || {}).highlightActiveLineGutter;
 
-    return {
-      setLineNumbers: function(show) {
-        if (this._destroyed || !lineNumbers) return;
-        this.reconfigure("lineNumbers", show ? lineNumbers() : []);
-      },
+			return {
+				setLineNumbers: function(show) {
+					if(this._destroyed || !lineNumbers) return;
+					this.reconfigure("lineNumbers", show ? lineNumbers() : []);
+				},
 
-      setHighlightActiveLine: function(show) {
-        if (this._destroyed || !highlightActiveLine) return;
-        var exts = [];
-        if (show) {
-          exts.push(highlightActiveLine());
-          if (highlightActiveLineGutter) {
-            exts.push(highlightActiveLineGutter());
-          }
-        }
-        this.reconfigure("highlightActiveLine", exts);
-      }
-    };
-  }
-};
+				setHighlightActiveLine: function(show) {
+					if(this._destroyed || !highlightActiveLine) return;
+					var exts = [];
+					if(show) {
+						exts.push(highlightActiveLine());
+						if(highlightActiveLineGutter) {
+							exts.push(highlightActiveLineGutter());
+						}
+					}
+					this.reconfigure("highlightActiveLine", exts);
+				}
+			};
+		}
+	};
 
 })();

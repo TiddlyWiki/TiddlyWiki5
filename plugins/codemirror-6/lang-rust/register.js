@@ -24,7 +24,7 @@ exports.startup = function() {
 	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	var langRust = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-rust/lang-rust.js");
 
-	if (!core || !core.registerLanguage || !langRust) {
+	if(!core || !core.registerLanguage || !langRust) {
 		return;
 	}
 

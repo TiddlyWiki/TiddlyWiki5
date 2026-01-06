@@ -24,7 +24,7 @@ exports.startup = function() {
 	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	var langLezer = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer/lang-lezer.js");
 
-	if (!core || !core.registerLanguage || !langLezer) {
+	if(!core || !core.registerLanguage || !langLezer) {
 		return;
 	}
 

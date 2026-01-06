@@ -14,5 +14,4 @@ Edit-codemirror widget
 var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTextWidgetFactory,
 	CodeMirrorEngine = require("$:/plugins/tiddlywiki/codemirror-6/engine.js").CodeMirrorEngine;
 
-exports["edit-codemirror-6"] = editTextWidgetFactory(CodeMirrorEngine,CodeMirrorEngine);
-
+exports["edit-codemirror-6"] = editTextWidgetFactory(CodeMirrorEngine, CodeMirrorEngine);

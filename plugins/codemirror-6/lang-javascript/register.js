@@ -24,7 +24,7 @@ exports.startup = function() {
 	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	var langJs = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-javascript/lang-javascript.js");
 
-	if (!core || !core.registerLanguage || !langJs) {
+	if(!core || !core.registerLanguage || !langJs) {
 		return;
 	}
 
@@ -43,7 +43,9 @@ exports.startup = function() {
 		name: "JSX",
 		alias: ["jsx"],
 		extensions: ["jsx"],
-		support: langJs.javascript({ jsx: true })
+		support: langJs.javascript({
+			jsx: true
+		})
 	}));
 
 	// Register TypeScript
@@ -51,7 +53,9 @@ exports.startup = function() {
 		name: "TypeScript",
 		alias: ["ts", "typescript"],
 		extensions: ["ts", "mts", "cts"],
-		support: langJs.javascript({ typescript: true })
+		support: langJs.javascript({
+			typescript: true
+		})
 	}));
 
 	// Register TSX
@@ -59,6 +63,9 @@ exports.startup = function() {
 		name: "TSX",
 		alias: ["tsx"],
 		extensions: ["tsx"],
-		support: langJs.javascript({ jsx: true, typescript: true })
+		support: langJs.javascript({
+			jsx: true,
+			typescript: true
+		})
 	}));
 };

@@ -57,7 +57,7 @@ exports.plugin = {
 
 	condition: function(context) {
 		// Tag-based override takes precedence
-		if (hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
 			return true;
 		}
 		// Fall back to content type check
@@ -69,12 +69,15 @@ exports.plugin = {
 		var type = context.tiddlerType;
 		var isTypescript = TS_TYPES.indexOf(type) !== -1 || TSX_TYPES.indexOf(type) !== -1;
 		var isJsx = JSX_TYPES.indexOf(type) !== -1 || TSX_TYPES.indexOf(type) !== -1;
-		return [langJs.javascript({ typescript: isTypescript, jsx: isJsx })];
+		return [langJs.javascript({
+			typescript: isTypescript,
+			jsx: isJsx
+		})];
 	},
 
 	getExtensions: function(context) {
 		var compartments = context.engine._compartments;
-		if (compartments.javascriptLanguage) {
+		if(compartments.javascriptLanguage) {
 			return [compartments.javascriptLanguage.of(this.getCompartmentContent(context))];
 		}
 		return this.getCompartmentContent(context);
