@@ -1,7 +1,7 @@
 title: $:/core/templates/tiddlywiki5-external-js.html
 
 <$set name="saveTiddlerAndShadowsFilter" filter="[subfilter<saveTiddlerFilter>] [subfilter<saveTiddlerFilter>plugintiddlers[]]">
-<$set name="rawMarkupFilter" filter="[enlist<saveTiddlerAndShadowsFilter>] +[[$:/core]plugintiddlers[]]">
+<$set name="rawMarkupFilter" filter="[enlist<saveTiddlerAndShadowsFilter>] [[$:/core]plugintiddlers[]]">
 `<!doctype html>
 `{{$:/core/templates/MOTW.html}}`<html lang="`<$text text={{{ [{$:/language}get[name]] }}}/>`">
 <head>

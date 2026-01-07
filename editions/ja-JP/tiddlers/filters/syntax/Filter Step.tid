@@ -1,6 +1,6 @@
 created: 20150124182127000
-modified: 20250222110925130
-original-modified: 20230710074414361
+modified: 20251213102731461
+original-modified: 20250731101041336
 tags: [[Filter Run]]
 title: Filter Step
 ja-title: フィルタステップ
@@ -13,10 +13,10 @@ type: text/vnd.tiddlywiki
 <$railroad text="""
 \start none
 \end none
-[:"!"]
+["!"]
 ( / "省略の場合のデフォルト: title" /|:
-( - | :[[<"オペレータ">|"Filter Operators"]] )
-{ [:":" [[<"サフィックス">|"Filter Operators"]] ] } )
+( :[[<"オペレータ">|"Filter Operators"]] )
+[ {":" [: [[<"サフィックス">|"Filter Operators"]] ] }] )
 { [[<"パラメータ">|"Filter Parameter"]] + "," }
 """/>
 

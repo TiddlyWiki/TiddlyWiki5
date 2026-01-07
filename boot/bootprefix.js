@@ -12,6 +12,8 @@ See Boot.js for further details of the boot process.
 
 \*/
 
+/* eslint-disable @stylistic/indent */
+
 var _bootprefix = (function($tw) {
 
 "use strict";
@@ -120,6 +122,8 @@ $tw.preloadHooks = $tw.preloadHooks || [];
 return $tw;
 
 });
+
+/* eslint-enable @stylistic/indent */
 
 if(typeof(exports) === "undefined") {
 	// Set up $tw global for the browser

@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9511
+description: Migrate diff-match-patch library to diff-match-patch-es
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9511
+github-contributors: Leilei332
+
+Migrate the unmaintained [[diff-match-patch|https://github.com/google/diff-match-patch]] library to the maintained and modern fork [[diff-match-patch-es|https://github.com/antfu/diff-match-patch-es]].

@@ -1,25 +1,10 @@
 created: 20150221181835000
-modified: 20230803034031256
+modified: 20251101090648379
 tags: Macros [[Core Macros]]
 title: Stylesheet Macros
 type: text/vnd.tiddlywiki
 
-The following core [[macros|Macros]] make it easy to specify alternative browser-specific properties when constructing a [[stylesheet|Cascading Style Sheets]] tiddler:
-
-;`<<box-shadow shadow>>`
-: for the `x-box-shadow` properties
-;`<<filter filter>>`
-: for the `x-filter` properties
-;`<<transition transition>>`
-: for the `x-transition` properties
-;`<<transform-origin origin>>`
-: for the `x-transition-origin` properties
-;`<<background-linear-gradient gradient>>`
-: for the `x-linear-gradient` values of the `background-image` property
-;`<<column-count columns>>`
-: for the `x-column-count` property
-
-The following macros are documented separately:
+The following stylesheet macros are documented separately:
 
 * <<.mlink colour>>
 * <<.mlink datauri>>
