@@ -183,8 +183,8 @@ describe("Widget module", function() {
 			wiki.addTiddler({title: "TiddlerOne", text: `<$tiddler tiddler='TiddlerOne'><${tag}><$transclude />`});
 			var parseTreeNode = {type: "widget", children: [
 				{type: "transclude", attributes: {
-						"tiddler": {type: "string", value: "TiddlerOne"}
-					}}
+					"tiddler": {type: "string", value: "TiddlerOne"}
+				}}
 			]};
 			// Construct the widget node
 			var widgetNode = createWidgetNode(parseTreeNode,wiki);
