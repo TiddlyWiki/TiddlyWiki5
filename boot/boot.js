@@ -2798,7 +2798,7 @@ $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 $tw.preloadHooks.forEach(function(hook){
 	if(typeof hook !== "object" || typeof hook.name !== "string" || typeof hook.callback !== "function"){
 		console.warn("Invalid hook definition in $tw.preloadHooks", hook);
-	}else{
+	} else {
 		$tw.hooks.addHook(hook.name, hook.callback);
 	}
 });
