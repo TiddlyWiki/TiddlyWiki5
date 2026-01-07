@@ -464,7 +464,18 @@ exports.prototype._buildSettingsSnapshot = function () {
 		// plugin toggles
 		colorPicker: boolConfig(wiki, "$:/config/codemirror-6/colorPicker"),
 		imagePreview: boolConfig(wiki, "$:/config/codemirror-6/imagePreview") && body,
-		wordCount: boolConfig(wiki, "$:/config/codemirror-6/wordCount") && body
+		wordCount: boolConfig(wiki, "$:/config/codemirror-6/wordCount") && body,
+
+		// navigation features
+		linkPreview: boolConfig(wiki, "$:/config/codemirror-6/linkPreview"),
+		clickNavigate: boolConfig(wiki, "$:/config/codemirror-6/clickNavigate"),
+
+		// tag and widget handling
+		autoCloseTags: wiki.getTiddlerText("$:/config/codemirror-6/autoCloseTags", "yes") !== "no",
+
+		// autocompletion sources
+		emojiPicker: boolConfig(wiki, "$:/config/codemirror-6/emojiPicker"),
+		snippets: boolConfig(wiki, "$:/config/codemirror-6/snippets")
 	};
 };
 
@@ -610,7 +621,7 @@ exports.prototype.updateShortcutLists = function (tiddlerList) {
  * Called by the engine's keydown handler
  */
 exports.prototype.handleKeydownEvent = function(event) {
-	// Check each registered shortcut
+	// First check CodeMirror-specific shortcuts ($:/tags/KeyboardShortcut/CodeMirror)
 	for (var i = 0; i < this.shortcutParsedList.length; i++) {
 		var parsed = this.shortcutParsedList[i];
 		if (parsed && $tw.keyboardManager.checkKeyDescriptors(event, parsed)) {
@@ -625,7 +636,10 @@ exports.prototype.handleKeydownEvent = function(event) {
 			}
 		}
 	}
-	return false;
+	// No CodeMirror-specific shortcut matched, delegate to parent class
+	// This handles toolbar shortcuts (Ctrl+B for bold, etc.) by checking
+	// data-tw-keyboard-shortcut attributes on toolbar buttons
+	return Object.getPrototypeOf(Object.getPrototypeOf(this)).handleKeydownEvent.call(this, event);
 };
 
 // ============================================================================

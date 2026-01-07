@@ -22,53 +22,67 @@ var ZenMode = function() {
 	this.editorWrapper = null;
 	this.engine = null;
 	this.wiki = null;
+	this.document = null;
 	this.statsInterval = null;
 	this.focusModeCleanup = null;
+	this.typewriterCleanup = null;
 };
 
 ZenMode.prototype.init = function() {
-	this.createOverlay();
-	this.setupGlobalKeyHandler();
 	this.setupWikiListener();
 };
 
 /**
- * Create the overlay DOM structure
+ * Create the overlay DOM structure (called lazily on first use)
  */
-ZenMode.prototype.createOverlay = function() {
+ZenMode.prototype.createOverlay = function(doc) {
+	if(this.overlay) return; // Already created
+
+	this.document = doc;
+
 	// Main overlay
-	this.overlay = document.createElement("div");
+	this.overlay = doc.createElement("div");
 	this.overlay.className = "cm6-zen-overlay";
-	this.overlay.setAttribute("data-cm6-theme", 
+	this.overlay.setAttribute("data-cm6-theme",
 		$tw.wiki.getTiddlerText("$:/config/codemirror-6/theme", "vanilla"));
-    
+
 	// Close button
-	var closeBtn = document.createElement("button");
+	var closeBtn = doc.createElement("button");
 	closeBtn.className = "cm6-zen-close";
 	closeBtn.setAttribute("title", "Exit Zen Mode (Escape)");
 	closeBtn.innerHTML = "×";
 	closeBtn.addEventListener("click", this.exit.bind(this));
 	this.overlay.appendChild(closeBtn);
-    
+
 	// Editor container
-	this.editorContainer = document.createElement("div");
+	this.editorContainer = doc.createElement("div");
 	this.editorContainer.className = "cm6-zen-editor-container";
 	this.overlay.appendChild(this.editorContainer);
-    
+
 	// Stats bar
-	this.statsBar = document.createElement("div");
+	this.statsBar = doc.createElement("div");
 	this.statsBar.className = "cm6-zen-stats";
 	this.overlay.appendChild(this.statsBar);
-    
+
 	// Click outside to exit (if enabled)
 	this.overlay.addEventListener("click", function(e) {
-		if(e.target === this.overlay && 
+		if(e.target === this.overlay &&
             $tw.wiki.getTiddlerText("$:/config/codemirror-6/zen-mode/exit-on-click", "no") === "yes") {
 			this.exit();
 		}
 	}.bind(this));
-    
-	document.body.appendChild(this.overlay);
+
+	// Escape key handler
+	this.overlay.addEventListener("keydown", function(e) {
+		if(e.key === "Escape" && this.isActive) {
+			e.preventDefault();
+			e.stopPropagation();
+			this.exit();
+		}
+	}.bind(this), true);
+
+	// Append as last child of body
+	doc.body.appendChild(this.overlay);
 };
 
 /**
@@ -81,34 +95,53 @@ ZenMode.prototype.enter = function(editorWrapper, engine) {
 	this.engine = engine;
 	this.wiki = engine && engine.widget && engine.widget.wiki || $tw.wiki;
 
+	// Get document from widget
+	var doc = engine && engine.widget && engine.widget.document || document;
+
+	// Create overlay lazily on first use
+	this.createOverlay(doc);
+
+	// Save current selection before moving the editor
+	var view = engine && engine.view;
+	var savedSelection = view ? view.state.selection : null;
+
 	// Store original position
 	this.originalParent = editorWrapper.parentNode;
 	this.originalNextSibling = editorWrapper.nextSibling;
 
 	// Create placeholder
-	this.placeholder = document.createElement("div");
+	this.placeholder = doc.createElement("div");
 	this.placeholder.className = "cm6-zen-placeholder";
 	this.placeholder.style.display = "none";
 	this.originalParent.insertBefore(this.placeholder, this.originalNextSibling);
 
 	// Move editor into overlay
 	this.editorContainer.appendChild(editorWrapper);
-    
+
 	// Apply settings
 	this.applySettings();
-    
+
 	// Update theme on overlay
 	this.updateTheme();
-    
+
 	// Show overlay
 	this.overlay.classList.add("active");
 	this.isActive = true;
-    
-	// Focus editor
-	if(engine && engine.view) {
-		engine.view.focus();
+
+	// Restore selection and focus after DOM settles
+	if(view) {
+		requestAnimationFrame(function() {
+			// Double RAF ensures layout is complete
+			requestAnimationFrame(function() {
+				// Restore selection
+				if(savedSelection) {
+					view.dispatch({ selection: savedSelection });
+				}
+				view.focus();
+			});
+		});
 	}
-    
+
 	// Start stats updates
 	this.startStatsUpdates();
     
@@ -119,7 +152,7 @@ ZenMode.prototype.enter = function(editorWrapper, engine) {
 	this.wiki.setText("$:/state/codemirror-6/zen-mode", "text", null, "yes");
 
 	// Prevent body scroll
-	document.body.style.overflow = "hidden";
+	this.document.body.style.overflow = "hidden";
 };
 
 /**
@@ -127,19 +160,30 @@ ZenMode.prototype.enter = function(editorWrapper, engine) {
  */
 ZenMode.prototype.exit = function() {
 	if(!this.isActive) return;
-    
+
 	// Stop stats updates
 	this.stopStatsUpdates();
-    
+
 	// Cleanup focus mode
 	if(this.focusModeCleanup) {
 		this.focusModeCleanup();
 		this.focusModeCleanup = null;
 	}
-    
+
+	// Cleanup typewriter mode
+	if(this.typewriterCleanup) {
+		this.typewriterCleanup();
+		this.typewriterCleanup = null;
+	}
+
 	// Hide overlay
 	this.overlay.classList.remove("active");
-    
+
+	// Save engine reference and selection before clearing (needed after transition)
+	var engineToFocus = this.engine;
+	var view = engineToFocus && engineToFocus.view;
+	var savedSelection = view ? view.state.selection : null;
+
 	// Move editor back after transition
 	setTimeout(function() {
 		if(this.editorWrapper && this.originalParent) {
@@ -147,7 +191,7 @@ ZenMode.prototype.exit = function() {
 			if(this.editorWrapper.parentNode === this.editorContainer) {
 				this.editorContainer.removeChild(this.editorWrapper);
 			}
-            
+
 			// Insert back to original position
 			if(this.placeholder && this.placeholder.parentNode) {
 				this.originalParent.insertBefore(this.editorWrapper, this.placeholder);
@@ -156,17 +200,30 @@ ZenMode.prototype.exit = function() {
 				this.originalParent.appendChild(this.editorWrapper);
 			}
 		}
-        
+
 		// Clear classes from container
 		this.editorContainer.className = "cm6-zen-editor-container";
-        
+
 		// Clear references
 		this.editorWrapper = null;
 		this.engine = null;
 		this.originalParent = null;
 		this.originalNextSibling = null;
 		this.placeholder = null;
-        
+
+		// Restore selection and focus after editor is back in place
+		if(view) {
+			requestAnimationFrame(function() {
+				requestAnimationFrame(function() {
+					// Restore selection
+					if(savedSelection) {
+						view.dispatch({ selection: savedSelection });
+					}
+					view.focus();
+				});
+			});
+		}
+
 	}.bind(this), 300);
     
 	this.isActive = false;
@@ -179,7 +236,9 @@ ZenMode.prototype.exit = function() {
 	this.wiki = null;
 
 	// Restore body scroll
-	document.body.style.overflow = "";
+	if(this.document && this.document.body) {
+		this.document.body.style.overflow = "";
+	}
 };
 
 /**
@@ -200,7 +259,8 @@ ZenMode.prototype.applySettings = function() {
 	// Typewriter mode
 	var typewriter = wiki.getTiddlerText("$:/config/codemirror-6/zen-mode/typewriter", "no");
 	this.editorContainer.classList.toggle("typewriter", typewriter === "yes");
-    
+	this.setupTypewriterMode(typewriter === "yes");
+
 	// Focus mode
 	var focusMode = wiki.getTiddlerText("$:/config/codemirror-6/zen-mode/focus-mode", "none");
 	this.editorContainer.classList.remove("focus-line", "focus-sentence", "focus-paragraph");
@@ -211,6 +271,108 @@ ZenMode.prototype.applySettings = function() {
 	// Stats visibility
 	var showStats = wiki.getTiddlerText("$:/config/codemirror-6/zen-mode/show-stats", "yes");
 	this.statsBar.style.display = showStats === "yes" ? "flex" : "none";
+};
+
+/**
+ * Setup typewriter mode - keeps cursor vertically centered
+ */
+ZenMode.prototype.setupTypewriterMode = function(enabled) {
+	// Cleanup previous
+	if(this.typewriterCleanup) {
+		this.typewriterCleanup();
+		this.typewriterCleanup = null;
+	}
+
+	if(!enabled || !this.engine || !this.engine.view) return;
+
+	var self = this;
+	var view = this.engine.view;
+	var lastCursorPos = -1;
+	var scrollTimeout = null;
+
+	// Function to scroll cursor to center (uses RAF to batch DOM operations)
+	var scrollCursorToCenter = function() {
+		if(!self.isActive || !view || !view.dom) return;
+
+		// Batch DOM reads in one frame
+		requestAnimationFrame(function() {
+			if(!self.isActive || !view || !view.dom) return;
+
+			var cursorPos = view.state.selection.main.head;
+
+			// Skip if cursor hasn't moved
+			if(cursorPos === lastCursorPos) return;
+			lastCursorPos = cursorPos;
+
+			var coords = view.coordsAtPos(cursorPos);
+			if(!coords) return;
+
+			var scroller = view.scrollDOM;
+			var scrollerRect = scroller.getBoundingClientRect();
+
+			// Use the vertical center of the cursor line
+			var cursorY = (coords.top + coords.bottom) / 2;
+
+			// Calculate where cursor should be (center of visible scroller area)
+			var targetY = scrollerRect.top + (scrollerRect.height / 2);
+
+			// Calculate how much to scroll
+			var scrollAdjust = cursorY - targetY;
+
+			// Only scroll if significantly off-center (reduces jitter)
+			if(Math.abs(scrollAdjust) > 10) {
+				// Write in next frame to avoid layout thrashing
+				requestAnimationFrame(function() {
+					if(self.isActive && scroller) {
+						scroller.scrollTop += scrollAdjust;
+					}
+				});
+			}
+		});
+	};
+
+	// Debounced scroll handler
+	var scheduleScroll = function() {
+		if(scrollTimeout) {
+			clearTimeout(scrollTimeout);
+		}
+		scrollTimeout = setTimeout(scrollCursorToCenter, 100);
+	};
+
+	// Listen to selection changes via the engine's event system
+	if(this.engine.on) {
+		this.engine.on("selectionChanged", scheduleScroll);
+		this.engine.on("docChanged", scheduleScroll);
+	}
+
+	// Initial scroll to center (immediate, no animation)
+	setTimeout(function() {
+		if(self.isActive && view && view.dom) {
+			var cursorPos = view.state.selection.main.head;
+			var coords = view.coordsAtPos(cursorPos);
+			if(coords) {
+				var scroller = view.scrollDOM;
+				var scrollerRect = scroller.getBoundingClientRect();
+				var cursorY = (coords.top + coords.bottom) / 2;
+				var targetY = scrollerRect.top + (scrollerRect.height / 2);
+				var scrollAdjust = cursorY - targetY;
+				scroller.scrollTop += scrollAdjust;
+				lastCursorPos = cursorPos;
+			}
+		}
+	}, 100);
+
+	// Cleanup function
+	this.typewriterCleanup = function() {
+		if(scrollTimeout) {
+			clearTimeout(scrollTimeout);
+			scrollTimeout = null;
+		}
+		if(self.engine && self.engine.off) {
+			self.engine.off("selectionChanged", scheduleScroll);
+			self.engine.off("docChanged", scheduleScroll);
+		}
+	};
 };
 
 /**
@@ -225,19 +387,6 @@ ZenMode.prototype.updateTheme = function() {
                 wiki.getTiddlerText("$:/config/codemirror-6/theme", "vanilla");
 	}
 	this.overlay.setAttribute("data-cm6-theme", theme);
-};
-
-/**
- * Setup global Escape key handler
- */
-ZenMode.prototype.setupGlobalKeyHandler = function() {
-	document.addEventListener("keydown", function(e) {
-		if(e.key === "Escape" && this.isActive) {
-			e.preventDefault();
-			e.stopPropagation();
-			this.exit();
-		}
-	}.bind(this), true);
 };
 
 /**
@@ -326,17 +475,26 @@ ZenMode.prototype.setupFocusMode = function() {
 	var _view = this.engine.view;
     
 	if(focusMode === "sentence" || focusMode === "paragraph") {
+		// Track last highlighted range to avoid unnecessary updates
+		var lastStart = -1;
+		var lastEnd = -1;
+
 		// Create update listener for sentence/paragraph focus
 		var updateFocus = function() {
-			self.updateFocusHighlight(focusMode);
+			var range = self.getFocusRange(focusMode);
+			if(range && (range.start !== lastStart || range.end !== lastEnd)) {
+				lastStart = range.start;
+				lastEnd = range.end;
+				self.updateFocusHighlight(focusMode, range);
+			}
 		};
-        
+
 		// Initial update
 		updateFocus();
-        
+
 		// Listen to selection changes via polling (simpler than CM6 extension)
 		var pollInterval = setInterval(updateFocus, 100);
-        
+
 		this.focusModeCleanup = function() {
 			clearInterval(pollInterval);
 			self.clearFocusHighlight();
@@ -345,93 +503,87 @@ ZenMode.prototype.setupFocusMode = function() {
 };
 
 /**
- * Update sentence or paragraph highlighting
+ * Get the focus range (start/end line numbers) for the current cursor position
  */
-ZenMode.prototype.updateFocusHighlight = function(mode) {
-	if(!this.engine || !this.engine.view) return;
-    
+ZenMode.prototype.getFocusRange = function(mode) {
+	if(!this.engine || !this.engine.view) return null;
+
 	var view = this.engine.view;
 	var state = view.state;
 	var cursorPos = state.selection.main.head;
 	var doc = state.doc;
-    
-	// Clear previous highlights
-	this.clearFocusHighlight();
-    
+
 	if(mode === "paragraph") {
-		// Find paragraph boundaries (empty lines)
 		var cursorLine = doc.lineAt(cursorPos);
 		var startLine = cursorLine.number;
 		var endLine = cursorLine.number;
-        
+
 		// Find start of paragraph
 		while(startLine > 1) {
 			var prevLine = doc.line(startLine - 1);
 			if(prevLine.text.trim() === "") break;
 			startLine--;
 		}
-        
+
 		// Find end of paragraph
 		while(endLine < doc.lines) {
 			var nextLine = doc.line(endLine + 1);
 			if(nextLine.text.trim() === "") break;
 			endLine++;
 		}
-        
-		// Highlight paragraph lines
-		for(var i = startLine; i <= endLine; i++) {
-			var line = doc.line(i);
-			var lineDOM = view.domAtPos(line.from).node;
-			if(lineDOM) {
-				var lineEl = lineDOM.closest ? lineDOM.closest(".cm-line") : 
-					lineDOM.parentElement && lineDOM.parentElement.closest(".cm-line");
-				if(lineEl) {
-					lineEl.classList.add("cm6-active-paragraph");
-				}
-			}
-		}
+
+		return { start: startLine, end: endLine };
+
 	} else if(mode === "sentence") {
-		// Find sentence boundaries
 		var text = doc.toString();
 		var sentenceEnd = /[.!?]+[\s\n]+|[.!?]+$/g;
 		var sentences = [];
 		var lastEnd = 0;
 		var match;
-        
+
 		while((match = sentenceEnd.exec(text)) !== null) {
 			sentences.push({ start: lastEnd, end: match.index + match[0].length });
 			lastEnd = match.index + match[0].length;
 		}
-        
-		// Add remaining text as last sentence
+
 		if(lastEnd < text.length) {
 			sentences.push({ start: lastEnd, end: text.length });
 		}
-        
-		// Find which sentence contains cursor
-		var currentSentence = null;
+
 		for(var i = 0; i < sentences.length; i++) {
 			if(cursorPos >= sentences[i].start && cursorPos <= sentences[i].end) {
-				currentSentence = sentences[i];
-				break;
+				var startLineNum = doc.lineAt(sentences[i].start).number;
+				var endLineNum = doc.lineAt(Math.max(0, sentences[i].end - 1)).number;
+				return { start: startLineNum, end: endLineNum };
 			}
 		}
-        
-		if(currentSentence) {
-			// Find all lines that contain part of this sentence
-			var startLineNum = doc.lineAt(currentSentence.start).number;
-			var endLineNum = doc.lineAt(Math.max(0, currentSentence.end - 1)).number;
-            
-			for(var i = startLineNum; i <= endLineNum; i++) {
-				var line = doc.line(i);
-				var lineDOM = view.domAtPos(line.from).node;
-				if(lineDOM) {
-					var lineEl = lineDOM.closest ? lineDOM.closest(".cm-line") : 
-						lineDOM.parentElement && lineDOM.parentElement.closest(".cm-line");
-					if(lineEl) {
-						lineEl.classList.add("cm6-active-sentence");
-					}
-				}
+	}
+
+	return null;
+};
+
+/**
+ * Update sentence or paragraph highlighting
+ */
+ZenMode.prototype.updateFocusHighlight = function(mode, range) {
+	if(!this.engine || !this.engine.view || !range) return;
+
+	var view = this.engine.view;
+	var doc = view.state.doc;
+	var className = mode === "paragraph" ? "cm6-active-paragraph" : "cm6-active-sentence";
+
+	// Clear previous highlights
+	this.clearFocusHighlight();
+
+	// Highlight lines in range
+	for(var i = range.start; i <= range.end; i++) {
+		var line = doc.line(i);
+		var lineDOM = view.domAtPos(line.from).node;
+		if(lineDOM) {
+			var lineEl = lineDOM.closest ? lineDOM.closest(".cm-line") :
+				lineDOM.parentElement && lineDOM.parentElement.closest(".cm-line");
+			if(lineEl) {
+				lineEl.classList.add(className);
 			}
 		}
 	}

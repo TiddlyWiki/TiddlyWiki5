@@ -22,6 +22,10 @@ Word count plugin - displays live word, character, and line counts.
 		priority: 50,
 
 		condition: function(context) {
+			// Never enable in simple editors (inputs/textareas)
+			if(context.isSimpleEditor) {
+				return false;
+			}
 			var wiki = context.options && context.options.widget && context.options.widget.wiki;
 			var enabled = wiki && wiki.getTiddlerText(CONFIG_TIDDLER) === "yes";
 			var isBody = context.options && context.options.widget &&
@@ -32,6 +36,7 @@ Word count plugin - displays live word, character, and line counts.
 
 		init: function(cm6Core) {
 			this._core = cm6Core;
+			this._wordCountPanel = null;
 		},
 
 		registerCompartments: function() {
@@ -42,16 +47,17 @@ Word count plugin - displays live word, character, and line counts.
 			};
 		},
 
-		getExtensions: function(context) {
-			var core = this._core;
-			var _EditorView = core.view.EditorView;
-			var showPanel = core.view.showPanel;
-			var extensions = [];
+		// Lazily create and cache the word count panel
+		_getOrCreateWordCountPanel: function() {
+			if(this._wordCountPanel) return this._wordCountPanel;
 
-			if(!showPanel) return extensions;
+			var core = this._core;
+			var showPanel = core.view.showPanel;
+
+			if(!showPanel) return null;
 
 			// Create panel that shows word count
-			var wordCountPanel = showPanel.of(function(view) {
+			this._wordCountPanel = showPanel.of(function(view) {
 				var dom = document.createElement("div");
 				dom.className = "cm-word-count-panel";
 
@@ -64,9 +70,8 @@ Word count plugin - displays live word, character, and line counts.
 
 					// Check if there's a selection
 					var selection = view.state.selection.main;
-					var selectedText = "";
 					if(!selection.empty) {
-						selectedText = view.state.sliceDoc(selection.from, selection.to);
+						var selectedText = view.state.sliceDoc(selection.from, selection.to);
 						var selectedWords = selectedText.trim() ? selectedText.trim().split(/\s+/).length : 0;
 						var selectedChars = selectedText.length;
 						dom.textContent = selectedWords + " / " + words + " words | " +
@@ -88,8 +93,13 @@ Word count plugin - displays live word, character, and line counts.
 				};
 			});
 
-			// Store plugin reference for registerEvents
-			this._wordCountPanel = wordCountPanel;
+			return this._wordCountPanel;
+		},
+
+		getExtensions: function(context) {
+			var extensions = [];
+			var wordCountPanel = this._getOrCreateWordCountPanel();
+			if(!wordCountPanel) return extensions;
 
 			// Wrap in compartment if available
 			var engine = context.engine;
@@ -105,7 +115,6 @@ Word count plugin - displays live word, character, and line counts.
 
 		registerEvents: function(engine, _context) {
 			var self = this;
-			var core = this._core;
 
 			return {
 				settingsChanged: function(settings) {
@@ -113,44 +122,9 @@ Word count plugin - displays live word, character, and line counts.
 
 					if(settings.wordCount !== undefined) {
 						if(settings.wordCount) {
-							// Create the panel if it doesn't exist (plugin started inactive)
-							if(!self._wordCountPanel && core.view.showPanel) {
-								self._wordCountPanel = core.view.showPanel.of(function(view) {
-									var dom = document.createElement("div");
-									dom.className = "cm-word-count-panel";
-
-									function updateCounts() {
-										var text = view.state.doc.toString();
-										var lines = view.state.doc.lines;
-										var chars = text.length;
-										var words = text.trim() ? text.trim().split(/\s+/).length : 0;
-
-										var selection = view.state.selection.main;
-										if(!selection.empty) {
-											var selectedText = view.state.sliceDoc(selection.from, selection.to);
-											var selectedWords = selectedText.trim() ? selectedText.trim().split(/\s+/).length : 0;
-											var selectedChars = selectedText.length;
-											dom.textContent = selectedWords + " / " + words + " words | " +
-												selectedChars + " / " + chars + " chars | " + lines + " lines";
-										} else {
-											dom.textContent = words + " words | " + chars + " chars | " + lines + " lines";
-										}
-									}
-
-									updateCounts();
-
-									return {
-										dom: dom,
-										update: function(update) {
-											if(update.docChanged || update.selectionSet) {
-												updateCounts();
-											}
-										}
-									};
-								});
-							}
-							if(self._wordCountPanel) {
-								engine.reconfigure("wordCount", self._wordCountPanel);
+							var wordCountPanel = self._getOrCreateWordCountPanel();
+							if(wordCountPanel) {
+								engine.reconfigure("wordCount", wordCountPanel);
 							}
 						} else {
 							engine.reconfigure("wordCount", []);

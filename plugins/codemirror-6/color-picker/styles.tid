@@ -1,6 +1,8 @@
 title: $:/plugins/tiddlywiki/codemirror-6/plugins/color-picker/styles
 tags: $:/tags/Stylesheet
 
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
 .cm-color-swatch-wrapper {
     display: inline-block;
     vertical-align: middle;

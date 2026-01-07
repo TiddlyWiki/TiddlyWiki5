@@ -44,6 +44,43 @@ tags: $:/tags/Stylesheet
     font-style: italic;
 }
 
+/* Rendered tiddler body preview - container for flex layout */
+.cm6-preview-body {
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Inner content scaled down for thumbnail view */
+.cm6-preview-body-inner {
+    transform: scale(0.75);
+    transform-origin: top left;
+    width: 133.33%; /* 1 / 0.75 to compensate for scale */
+    word-break: break-word;
+}
+
+/* Constrain images within preview */
+.cm6-preview-body img {
+    max-width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+}
+
+/* Style embedded code */
+.cm6-preview-body pre,
+.cm6-preview-body code {
+    font-size: 11px;
+}
+
+/* Hide edit buttons and other interactive elements in preview */
+.cm6-preview-body .tc-tiddler-controls,
+.cm6-preview-body .tc-edit-texteditor,
+.cm6-preview-body button {
+    display: none;
+}
+
+/* Legacy: raw text fallback */
 .cm6-preview-text {
     font-size: 12px;
     color: var(--color-foreground, #444);

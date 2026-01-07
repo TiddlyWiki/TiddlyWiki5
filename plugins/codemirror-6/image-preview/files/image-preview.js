@@ -27,6 +27,10 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 		priority: 35,
 
 		condition: function(context) {
+			// Never enable in simple editors (inputs/textareas)
+			if(context.isSimpleEditor) {
+				return false;
+			}
 			var wiki = context.options && context.options.widget && context.options.widget.wiki;
 			var enabled = wiki && wiki.getTiddlerText(CONFIG_TIDDLER) === "yes";
 			var isBody = context.options && context.options.widget &&
@@ -37,6 +41,7 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 
 		init: function(cm6Core) {
 			this._core = cm6Core;
+			this._imagePlugin = null;
 		},
 
 		registerCompartments: function() {
@@ -47,14 +52,16 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 			};
 		},
 
-		getExtensions: function(context) {
+		// Lazily create and cache the image plugin
+		_getOrCreateImagePlugin: function() {
+			if(this._imagePlugin) return this._imagePlugin;
+
 			var core = this._core;
 			var ViewPlugin = core.view.ViewPlugin;
 			var Decoration = core.view.Decoration;
 			var WidgetType = core.view.WidgetType;
-			var extensions = [];
 
-			if(!ViewPlugin || !Decoration || !WidgetType) return extensions;
+			if(!ViewPlugin || !Decoration || !WidgetType) return null;
 
 			// Image preview widget
 			function ImagePreviewWidget(src) {
@@ -166,15 +173,20 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 				}
 			};
 
-			// Create ViewPlugin with the class
-			var imagePlugin = ViewPlugin.fromClass(ImagePreviewView, {
+			// Create and cache the ViewPlugin
+			this._imagePlugin = ViewPlugin.fromClass(ImagePreviewView, {
 				decorations: function(v) {
 					return v.decorations;
 				}
 			});
 
-			// Store plugin reference for registerEvents
-			this._imagePlugin = imagePlugin;
+			return this._imagePlugin;
+		},
+
+		getExtensions: function(context) {
+			var extensions = [];
+			var imagePlugin = this._getOrCreateImagePlugin();
+			if(!imagePlugin) return extensions;
 
 			// Wrap in compartment if available
 			var engine = context.engine;
@@ -188,127 +200,6 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 			return extensions;
 		},
 
-		// Helper to create the image plugin (used by both getExtensions and registerEvents)
-		_createImagePlugin: function() {
-			if(this._imagePlugin) return this._imagePlugin;
-
-			var core = this._core;
-			var ViewPlugin = core.view.ViewPlugin;
-			var Decoration = core.view.Decoration;
-			var WidgetType = core.view.WidgetType;
-
-			if(!ViewPlugin || !Decoration || !WidgetType) return null;
-
-			// Image preview widget
-			function ImagePreviewWidget(src) {
-				this.src = src;
-			}
-			ImagePreviewWidget.prototype = Object.create(WidgetType.prototype);
-			ImagePreviewWidget.prototype.constructor = ImagePreviewWidget;
-
-			ImagePreviewWidget.prototype.toDOM = function() {
-				var container = document.createElement("div");
-				container.className = "cm-image-preview";
-
-				var img = document.createElement("img");
-
-				var src = this.src;
-				if(src.match(/^https?:\/\//i)) {
-					img.src = src;
-				} else {
-					var tiddler = $tw.wiki.getTiddler(src);
-					if(tiddler) {
-						var type = tiddler.fields.type || "";
-						if(type.indexOf("image/") === 0) {
-							if(tiddler.fields._canonical_uri) {
-								img.src = tiddler.fields._canonical_uri;
-							} else if(tiddler.fields.text) {
-								img.src = "data:" + type + ";base64," + tiddler.fields.text;
-							}
-						} else {
-							container.textContent = "[Not an image]";
-							return container;
-						}
-					} else {
-						container.className = "cm-image-preview cm-image-preview-missing";
-						container.textContent = "[Image not found: " + src + "]";
-						return container;
-					}
-				}
-
-				img.alt = src;
-				img.addEventListener("error", function() {
-					container.className = "cm-image-preview cm-image-preview-error";
-					container.textContent = "[Failed to load: " + src + "]";
-				});
-
-				container.appendChild(img);
-				return container;
-			};
-
-			ImagePreviewWidget.prototype.eq = function(other) {
-				return other.src === this.src;
-			};
-
-			ImagePreviewWidget.prototype.ignoreEvent = function() {
-				return true;
-			};
-
-			function findImages(doc) {
-				var images = [];
-				var text = doc.toString();
-
-				var match;
-				IMG_PATTERN.lastIndex = 0;
-				while((match = IMG_PATTERN.exec(text)) !== null) {
-					var _fullMatch = match[1];
-					var src = match[2];
-					var afterPos = match.index + match[0].length;
-
-					images.push({
-						from: afterPos,
-						src: src.trim()
-					});
-				}
-
-				return images;
-			}
-
-			function buildDecorations(view) {
-				var widgets = [];
-				var images = findImages(view.state.doc);
-
-				for(var i = 0; i < images.length; i++) {
-					var img = images[i];
-					var deco = Decoration.widget({
-						widget: new ImagePreviewWidget(img.src),
-						side: 1
-					});
-					widgets.push(deco.range(img.from));
-				}
-
-				return Decoration.set(widgets);
-			}
-
-			function ImagePreviewView(view) {
-				this.decorations = buildDecorations(view);
-			}
-
-			ImagePreviewView.prototype.update = function(update) {
-				if(update.docChanged) {
-					this.decorations = buildDecorations(update.view);
-				}
-			};
-
-			this._imagePlugin = ViewPlugin.fromClass(ImagePreviewView, {
-				decorations: function(v) {
-					return v.decorations;
-				}
-			});
-
-			return this._imagePlugin;
-		},
-
 		registerEvents: function(engine, _context) {
 			var self = this;
 
@@ -318,10 +209,9 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 
 					if(settings.imagePreview !== undefined) {
 						if(settings.imagePreview) {
-							// Create the plugin if it doesn't exist (plugin started inactive)
-							var plugin = self._createImagePlugin();
-							if(plugin) {
-								engine.reconfigure("imagePreview", plugin);
+							var imagePlugin = self._getOrCreateImagePlugin();
+							if(imagePlugin) {
+								engine.reconfigure("imagePreview", imagePlugin);
 							}
 						} else {
 							engine.reconfigure("imagePreview", []);

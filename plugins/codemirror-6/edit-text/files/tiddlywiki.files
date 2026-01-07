@@ -1,0 +1,19 @@
+{
+    "tiddlers": [
+        {
+            "file": "edit-text.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/edit-text/edit-text.js",
+                "module-type": "widget"
+            }
+        },{
+            "file": "engine.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/edit-text/engine.js",
+                "module-type": "library"
+            }
+        }
+    ]
+}

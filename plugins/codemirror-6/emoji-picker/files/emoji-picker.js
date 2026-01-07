@@ -365,8 +365,13 @@ Uses CM6 autocomplete system for proper popup display
 			var engine = context.engine;
 
 			// Register completion source with the engine
+			// Pass config tiddler for dynamic enable/disable
 			if(engine && engine.registerCompletionSource) {
-				engine.registerCompletionSource(emojiCompletions, 10);
+				engine.registerCompletionSource(
+					emojiCompletions,
+					10,
+					"$:/config/codemirror-6/emojiPicker"
+				);
 			}
 
 			return [];

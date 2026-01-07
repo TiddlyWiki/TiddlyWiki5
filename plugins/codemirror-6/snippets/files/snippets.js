@@ -294,8 +294,13 @@ exports.plugin = {
 
 		// Register completion source with the engine
 		// Use lower priority than tw-snippets so user snippets appear first
+		// Pass config tiddler for dynamic enable/disable
 		if(engine && engine.registerCompletionSource) {
-			engine.registerCompletionSource(snippetCompletions, 18);
+			engine.registerCompletionSource(
+				snippetCompletions,
+				18,
+				"$:/config/codemirror-6/snippets"
+			);
 		}
 
 		return [];

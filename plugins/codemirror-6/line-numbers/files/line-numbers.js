@@ -16,6 +16,18 @@ Line numbers plugin - shows line numbers in the gutter and highlights active lin
 		description: "Line numbers gutter and active line highlighting",
 		priority: 800,
 
+		condition: function(context) {
+			// Never enable for input mode (single-line editors)
+			if(context.isInputMode) {
+				return false;
+			}
+			// Disabled by default in simple editors (textareas)
+			if(context.isSimpleEditor) {
+				return false;
+			}
+			return true;
+		},
+
 		init: function(cm6Core) {
 			this._core = cm6Core;
 		},

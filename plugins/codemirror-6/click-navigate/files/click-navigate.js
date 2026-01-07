@@ -464,11 +464,22 @@ exports.plugin = {
 		}
 	},
 
-	getExtensions: function(context) {
+	registerCompartments: function() {
+		var core = this._core;
+		var Compartment = core.state.Compartment;
+		return {
+			clickNavigate: new Compartment()
+		};
+	},
+
+	// Lazily create and cache the click-navigate handlers
+	_getOrCreateClickNavigateHandlers: function(context) {
+		if(this._clickNavigateHandlers) return this._clickNavigateHandlers;
+
 		var core = this._core;
 		var EditorView = core.view.EditorView;
 
-		return [
+		this._clickNavigateHandlers = [
 			EditorView.domEventHandlers({
 				keydown: handleKeyDown,
 				keyup: handleKeyUp,
@@ -484,6 +495,47 @@ exports.plugin = {
 				}
 			})
 		];
+
+		return this._clickNavigateHandlers;
+	},
+
+	getExtensions: function(context) {
+		var handlers = this._getOrCreateClickNavigateHandlers(context);
+		if(!handlers || handlers.length === 0) return [];
+
+		// Wrap in compartment if available
+		var engine = context.engine;
+		var compartments = engine && engine._compartments;
+		if(compartments && compartments.clickNavigate) {
+			return [compartments.clickNavigate.of(handlers)];
+		}
+
+		return handlers;
+	},
+
+	registerEvents: function(engine, context) {
+		var self = this;
+
+		return {
+			settingsChanged: function(settings) {
+				if(engine._destroyed) return;
+
+				if(settings.clickNavigate !== undefined) {
+					if(settings.clickNavigate) {
+						var handlers = self._getOrCreateClickNavigateHandlers(context);
+						if(handlers) {
+							engine.reconfigure("clickNavigate", handlers);
+						}
+					} else {
+						engine.reconfigure("clickNavigate", []);
+						// Clear any highlight
+						if(engine.view) {
+							clearHighlight(engine.view);
+						}
+					}
+				}
+			}
+		};
 	},
 
 	extendAPI: function(_engine, _context) {

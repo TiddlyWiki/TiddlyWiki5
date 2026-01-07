@@ -15,6 +15,7 @@ var HOVER_DELAY = 300; // ms before showing preview
 var MAX_PREVIEW_LENGTH = 500;
 
 var _syntaxTree = null;
+var _document = null; // Reference to widget.document
 
 // Node types that contain tiddler titles
 var TIDDLER_TITLE_NODES = {
@@ -71,33 +72,38 @@ function getFilterOperatorName(state, operandNode) {
 var tooltipElement = null;
 var hideTimeout = null;
 var currentTarget = null;
+var contextMenuOpen = false;
 
 function createTooltip() {
 	if(tooltipElement) return tooltipElement;
+	var doc = _document || document;
 
-	tooltipElement = document.createElement("div");
+	tooltipElement = doc.createElement("div");
 	tooltipElement.className = "cm6-tw-link-preview";
 	tooltipElement.style.cssText = [
 		"position: fixed",
 		"z-index: 10000",
 		"max-width: 400px",
 		"max-height: 300px",
-		"overflow: auto",
+		"overflow: hidden",
+		"display: none",
+		"flex-direction: column",
 		"padding: 8px 12px",
 		"background: var(--color-background, #fff)",
 		"border: 1px solid var(--color-border, #ccc)",
 		"border-radius: 4px",
 		"box-shadow: 0 2px 8px rgba(0,0,0,0.15)",
 		"font-size: 13px",
-		"line-height: 1.4",
-		"display: none"
+		"line-height: 1.4"
 	].join(";");
 
-	document.body.appendChild(tooltipElement);
+	doc.body.appendChild(tooltipElement);
 
 	// Hide on mouse leave
 	tooltipElement.addEventListener("mouseleave", function() {
-		hideTooltip();
+		if(!contextMenuOpen) {
+			hideTooltip();
+		}
 	});
 
 	// Keep visible on mouse enter
@@ -108,13 +114,49 @@ function createTooltip() {
 		}
 	});
 
+	// Track context menu state
+	tooltipElement.addEventListener("contextmenu", function() {
+		contextMenuOpen = true;
+	});
+
+	// Close context menu detection - any click closes it
+	doc.addEventListener("click", function() {
+		if(contextMenuOpen) {
+			contextMenuOpen = false;
+		}
+	});
+	doc.addEventListener("contextmenu", function(e) {
+		// If context menu opened outside tooltip, allow hiding
+		if(contextMenuOpen && tooltipElement && !tooltipElement.contains(e.target)) {
+			contextMenuOpen = false;
+		}
+	});
+
 	return tooltipElement;
 }
 
 function showTooltip(content, x, y) {
 	var tooltip = createTooltip();
-	tooltip.innerHTML = content;
-	tooltip.style.display = "block";
+
+	// Clean up previous content and widgets
+	if(tooltip._currentWidget) {
+		// Destroy previous widget tree to prevent memory leaks
+		tooltip._currentWidget = null;
+	}
+	tooltip.innerHTML = "";
+
+	// Handle DOM element (from getTiddlerPreview) or HTML string
+	if(content && content.nodeType === 1) {
+		tooltip.appendChild(content);
+		// Store widget reference for cleanup
+		if(content._previewWidget) {
+			tooltip._currentWidget = content._previewWidget;
+		}
+	} else if(typeof content === "string") {
+		tooltip.innerHTML = content;
+	}
+
+	tooltip.style.display = "flex";
 
 	// Position tooltip
 	var rect = tooltip.getBoundingClientRect();
@@ -144,6 +186,11 @@ function hideTooltip() {
 	hideTimeout = setTimeout(function() {
 		if(tooltipElement) {
 			tooltipElement.style.display = "none";
+			// Clean up widget when hiding
+			if(tooltipElement._currentWidget) {
+				tooltipElement._currentWidget = null;
+			}
+			tooltipElement.innerHTML = "";
 		}
 		currentTarget = null;
 		hideTimeout = null;
@@ -151,11 +198,14 @@ function hideTooltip() {
 }
 
 function scheduleHide() {
+	if(contextMenuOpen) return;
 	if(hideTimeout) {
 		clearTimeout(hideTimeout);
 	}
 	hideTimeout = setTimeout(function() {
-		hideTooltip();
+		if(!contextMenuOpen) {
+			hideTooltip();
+		}
 	}, 200);
 }
 
@@ -262,10 +312,12 @@ function getLinkAtPos(state, pos) {
 }
 
 /**
- * Get tiddler preview HTML
+ * Get tiddler preview by rendering through $:/core/ui/ViewTemplate/body
+ * Returns a DOM element (not HTML string) for proper widget rendering
  */
 function getTiddlerPreview(title) {
 	if(!$tw || !$tw.wiki) return null;
+	var doc = _document || document;
 
 	var tiddler = $tw.wiki.getTiddler(title);
 
@@ -280,64 +332,93 @@ function getTiddlerPreview(title) {
 		}
 	}
 
+	// Create container
+	var container = doc.createElement("div");
+	container.className = "cm6-preview-content";
+	container.style.cssText = "display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden;";
+
 	if(!tiddler) {
-		return '<div class="cm6-preview-missing">Tiddler not found: <em>' +
-			$tw.utils.htmlEncode(title) + "</em></div>";
+		container.className += " cm6-preview-missing";
+		container.innerHTML = 'Tiddler not found: <em>' + $tw.utils.htmlEncode(title) + "</em>";
+		return container;
 	}
 
 	var fields = tiddler.fields;
-	var html = '<div class="cm6-preview-content">';
 
-	// Title
-	html += '<div class="cm6-preview-title"><strong>' +
-		$tw.utils.htmlEncode(fields.title) + "</strong></div>";
+	// Title header
+	var titleDiv = doc.createElement("div");
+	titleDiv.className = "cm6-preview-title";
+	titleDiv.innerHTML = "<strong>" + $tw.utils.htmlEncode(fields.title) + "</strong>";
+	container.appendChild(titleDiv);
 
 	// Tags
 	if(fields.tags) {
 		var tags = $tw.utils.parseStringArray(fields.tags);
 		if(tags.length > 0) {
-			html += '<div class="cm6-preview-tags">';
+			var tagsDiv = doc.createElement("div");
+			tagsDiv.className = "cm6-preview-tags";
 			tags.forEach(function(tag) {
-				html += '<span class="cm6-preview-tag">' + $tw.utils.htmlEncode(tag) + "</span> ";
+				var tagSpan = doc.createElement("span");
+				tagSpan.className = "cm6-preview-tag";
+				tagSpan.textContent = tag;
+				tagsDiv.appendChild(tagSpan);
+				tagsDiv.appendChild(doc.createTextNode(" "));
 			});
-			html += "</div>";
+			container.appendChild(tagsDiv);
 		}
 	}
 
-	// Type indicator
-	if(fields.type && fields.type !== "text/vnd.tiddlywiki") {
-		html += '<div class="cm6-preview-type">' + $tw.utils.htmlEncode(fields.type) + "</div>";
+	// Type indicator for non-wikitext
+	if(fields.type && fields.type !== "text/vnd.tiddlywiki" && fields.type !== "") {
+		var typeDiv = doc.createElement("div");
+		typeDiv.className = "cm6-preview-type";
+		typeDiv.textContent = fields.type;
+		container.appendChild(typeDiv);
 	}
 
-	// Text preview
-	var text = fields.text || "";
-	if(text) {
-		// For images, show the image
-		if(fields.type && fields.type.startsWith("image/")) {
-			var dataUri = "data:" + fields.type + ";base64," + text;
-			html += '<div class="cm6-preview-image"><img src="' + dataUri +
-				'" style="max-width:100%;max-height:150px;"></div>';
-		} else {
-			// Truncate long text
-			if(text.length > MAX_PREVIEW_LENGTH) {
-				text = text.substring(0, MAX_PREVIEW_LENGTH) + "...";
+	// Render body through $:/core/ui/ViewTemplate/body
+	var bodyDiv = doc.createElement("div");
+	bodyDiv.className = "cm6-preview-body";
+	container.appendChild(bodyDiv);
+
+	// Inner wrapper for scaled content (transform doesn't affect layout)
+	var bodyInner = doc.createElement("div");
+	bodyInner.className = "cm6-preview-body-inner";
+	bodyDiv.appendChild(bodyInner);
+
+	try {
+		// Render through ViewTemplate/body for proper formatting
+		var parser = $tw.wiki.parseText("text/vnd.tiddlywiki",
+			"<$transclude tiddler='$:/core/ui/ViewTemplate/body'/>");
+		var widgetNode = $tw.wiki.makeWidget(parser, {
+			document: doc,
+			parentWidget: $tw.rootWidget,
+			variables: {
+				currentTiddler: title
 			}
-			// Basic HTML encoding
-			text = $tw.utils.htmlEncode(text);
-			// Convert newlines to <br>
-			text = text.replace(/\n/g, "<br>");
-			html += '<div class="cm6-preview-text">' + text + "</div>";
+		});
+		widgetNode.render(bodyInner, null);
+
+		// Store widget reference for cleanup
+		container._previewWidget = widgetNode;
+	} catch(e) {
+		// Fallback to raw text if rendering fails
+		var text = fields.text || "";
+		if(text.length > MAX_PREVIEW_LENGTH) {
+			text = text.substring(0, MAX_PREVIEW_LENGTH) + "...";
 		}
+		bodyInner.textContent = text;
 	}
 
 	// Modified date
 	if(fields.modified) {
-		var date = $tw.utils.formatDateString(fields.modified, "YYYY-0MM-0DD 0hh:0mm");
-		html += '<div class="cm6-preview-meta">Modified: ' + date + "</div>";
+		var metaDiv = doc.createElement("div");
+		metaDiv.className = "cm6-preview-meta";
+		metaDiv.textContent = "Modified: " + $tw.utils.formatDateString(fields.modified, "YYYY-0MM-0DD 0hh:0mm");
+		container.appendChild(metaDiv);
 	}
 
-	html += "</div>";
-	return html;
+	return container;
 }
 
 // ============================================================================
@@ -426,16 +507,70 @@ exports.plugin = {
 		}
 	},
 
-	getExtensions: function(_context) {
+	registerCompartments: function() {
+		var core = this._core;
+		var Compartment = core.state.Compartment;
+		return {
+			linkPreview: new Compartment()
+		};
+	},
+
+	// Lazily create and cache the link-preview handlers
+	_getOrCreateLinkPreviewHandlers: function() {
+		if(this._linkPreviewHandlers) return this._linkPreviewHandlers;
+
 		var core = this._core;
 		var EditorView = core.view.EditorView;
 
-		return [
-			EditorView.domEventHandlers({
-				mousemove: handleMouseMove,
-				mouseleave: handleMouseLeave
-			})
-		];
+		this._linkPreviewHandlers = EditorView.domEventHandlers({
+			mousemove: handleMouseMove,
+			mouseleave: handleMouseLeave
+		});
+
+		return this._linkPreviewHandlers;
+	},
+
+	getExtensions: function(context) {
+		// Store widget.document reference for DOM operations
+		var widget = context.options && context.options.widget;
+		if(widget && widget.document) {
+			_document = widget.document;
+		}
+
+		var handlers = this._getOrCreateLinkPreviewHandlers();
+		if(!handlers) return [];
+
+		// Wrap in compartment if available
+		var engine = context.engine;
+		var compartments = engine && engine._compartments;
+		if(compartments && compartments.linkPreview) {
+			return [compartments.linkPreview.of(handlers)];
+		}
+
+		return [handlers];
+	},
+
+	registerEvents: function(engine, _context) {
+		var self = this;
+
+		return {
+			settingsChanged: function(settings) {
+				if(engine._destroyed) return;
+
+				if(settings.linkPreview !== undefined) {
+					if(settings.linkPreview) {
+						var handlers = self._getOrCreateLinkPreviewHandlers();
+						if(handlers) {
+							engine.reconfigure("linkPreview", handlers);
+						}
+					} else {
+						engine.reconfigure("linkPreview", []);
+						// Hide any open tooltip
+						hideTooltip();
+					}
+				}
+			}
+		};
 	},
 
 	extendAPI: function(_engine, _context) {
@@ -482,5 +617,7 @@ exports.plugin = {
 			clearTimeout(hideTimeout);
 			hideTimeout = null;
 		}
+		_document = null;
+		contextMenuOpen = false;
 	}
 };

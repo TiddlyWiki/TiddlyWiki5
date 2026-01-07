@@ -2271,6 +2271,10 @@ exports.plugin = {
 
 	// Only check content type - config-based toggling is handled via compartment
 	condition: function(context) {
+		// Disabled by default in simple editors (inputs/textareas)
+		if(context.isSimpleEditor) {
+			return false;
+		}
 		var type = context.tiddlerType;
 		if(context.options.lint === false) return false;
 		return !type || type === "" || type === "text/vnd.tiddlywiki" || type === "text/x-tiddlywiki";

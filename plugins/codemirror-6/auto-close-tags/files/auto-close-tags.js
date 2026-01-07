@@ -39,14 +39,26 @@ Auto-close tags plugin - automatically inserts closing tags for HTML and TiddlyW
 
 		init: function(cm6Core) {
 			this._core = cm6Core;
+			this._autoCloseTagsHandlers = null;
 		},
 
-		getExtensions: function(_context) {
+		registerCompartments: function() {
+			var core = this._core;
+			var Compartment = core.state.Compartment;
+			return {
+				autoCloseTags: new Compartment()
+			};
+		},
+
+		// Lazily create and cache the auto-close handlers
+		_getOrCreateAutoCloseHandlers: function() {
+			if(this._autoCloseTagsHandlers) return this._autoCloseTagsHandlers;
+
 			var core = this._core;
 			var EditorView = core.view.EditorView;
 			var EditorSelection = core.state.EditorSelection;
 			var syntaxTree = core.language.syntaxTree;
-			var extensions = [];
+			var handlers = [];
 
 			// Input handler for auto-closing tags
 			var autoCloseTagsHandler = EditorView.inputHandler.of(function(view, from, to, text, _insert) {
@@ -132,7 +144,7 @@ Auto-close tags plugin - automatically inserts closing tags for HTML and TiddlyW
 				return true;
 			});
 
-			extensions.push(autoCloseTagsHandler);
+			handlers.push(autoCloseTagsHandler);
 
 			// Handler for completing closing tags when typing </
 			var closeTagHandler = EditorView.inputHandler.of(function(view, from, to, text, _insert) {
@@ -200,13 +212,45 @@ Auto-close tags plugin - automatically inserts closing tags for HTML and TiddlyW
 				return false;
 			});
 
-			extensions.push(closeTagHandler);
+			handlers.push(closeTagHandler);
 
-			return extensions;
+			this._autoCloseTagsHandlers = handlers;
+			return handlers;
 		},
 
-		registerEvents: function(_engine, _context) {
-			return {};
+		getExtensions: function(context) {
+			var handlers = this._getOrCreateAutoCloseHandlers();
+			if(!handlers || handlers.length === 0) return [];
+
+			// Wrap in compartment if available
+			var engine = context.engine;
+			var compartments = engine && engine._compartments;
+			if(compartments && compartments.autoCloseTags) {
+				return [compartments.autoCloseTags.of(handlers)];
+			}
+
+			return handlers;
+		},
+
+		registerEvents: function(engine, _context) {
+			var self = this;
+
+			return {
+				settingsChanged: function(settings) {
+					if(engine._destroyed) return;
+
+					if(settings.autoCloseTags !== undefined) {
+						if(settings.autoCloseTags) {
+							var handlers = self._getOrCreateAutoCloseHandlers();
+							if(handlers) {
+								engine.reconfigure("autoCloseTags", handlers);
+							}
+						} else {
+							engine.reconfigure("autoCloseTags", []);
+						}
+					}
+				}
+			};
 		},
 
 		extendAPI: function(_engine, _context) {

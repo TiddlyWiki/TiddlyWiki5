@@ -7,6 +7,7 @@ Shared utilities for CodeMirror 6 language plugins
 
 \*/
 /*jslint node: true, browser: true */
+
 "use strict";
 
 /**

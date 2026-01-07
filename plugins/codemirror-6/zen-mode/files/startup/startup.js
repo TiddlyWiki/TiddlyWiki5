@@ -19,7 +19,7 @@ exports.synchronous = true;
 
 exports.startup = function() {
 	// Import the zen mode manager
-	var ZenMode = require("$:/plugins/tiddlywiki/codemirror-6/plugins/zen-mode/modules/zen-mode.js");
+	var ZenMode = require("$:/plugins/tiddlywiki/codemirror-6/plugins/zen-mode/zen-mode.js");
 	var zenMode = ZenMode.getZenMode();
 
 	// Store global reference

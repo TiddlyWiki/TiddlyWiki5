@@ -1,0 +1,8 @@
+title: $:/config/codemirror-6/simple-keymap
+tags: $:/tags/Config/CodeMirror/Editor
+caption: Simple Editor Keymap
+description: Choose the keyboard shortcut style for simple editors (inputs/textareas). Leave empty to use the main editor keymap.
+config-type: keymap-select
+config-category: Keybindings
+default:
+text:

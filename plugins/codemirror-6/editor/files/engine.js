@@ -62,6 +62,46 @@ function clamp(n, min, max) {
 	return Math.max(min, Math.min(max, n));
 }
 
+/**
+ * Convert TiddlyWiki shortcut format to CodeMirror format
+ * TW format: "ctrl-shift-Z" (lowercase modifiers)
+ * CM format: "Ctrl-Shift-Z" (PascalCase modifiers)
+ */
+function twShortcutToCM(twShortcut) {
+	if(!twShortcut) return null;
+	// Split by space for multiple shortcuts, take first one
+	var shortcuts = twShortcut.trim().split(/\s+/);
+	if(shortcuts.length === 0) return null;
+
+	var shortcut = shortcuts[0];
+	// Convert each part to proper case
+	return shortcut.split("-").map(function(part) {
+		var lower = part.toLowerCase();
+		if(lower === "ctrl") return "Ctrl";
+		if(lower === "alt") return "Alt";
+		if(lower === "shift") return "Shift";
+		if(lower === "cmd" || lower === "meta" || lower === "mod") return "Mod";
+		// For keys like "enter", "tab", etc., capitalize first letter
+		if(part.length > 1 && /^[a-z]+$/.test(part)) {
+			return part.charAt(0).toUpperCase() + part.slice(1);
+		}
+		return part;
+	}).join("-");
+}
+
+/**
+ * Get a keyboard shortcut from wiki config
+ * Returns the shortcut in CodeMirror format, or the default if not configured
+ */
+function getShortcut(wiki, name, defaultShortcut) {
+	if(!wiki) return defaultShortcut;
+	var configValue = wiki.getTiddlerText("$:/config/shortcuts/cm6-" + name);
+	if(configValue) {
+		return twShortcutToCM(configValue);
+	}
+	return defaultShortcut;
+}
+
 function hasWindowTimers() {
 	return typeof window !== "undefined" &&
 		typeof window.setTimeout === "function" &&
@@ -421,7 +461,9 @@ function CodeMirrorEngine(options) {
 		keymap: new Compartment(),
 		multiCursor: new Compartment(),
 		trailingWhitespace: new Compartment(),
-		spellcheck: new Compartment()
+		spellcheck: new Compartment(),
+		bidi: new Compartment(),
+		autocompletion: new Compartment()
 	};
 
 	// Track registered keymap plugins for dynamic switching
@@ -503,15 +545,21 @@ function CodeMirrorEngine(options) {
 	if(defaultKeymap.length) km = km.concat(defaultKeymap);
 	if(indentWithTab) km.push(indentWithTab);
 
-	// Focus navigation: Ctrl+. to next, Ctrl+Shift+. to previous
-	km.push({
-		key: "Ctrl-.",
-		run: focusNextElement
-	});
-	km.push({
-		key: "Ctrl-Shift-.",
-		run: focusPrevElement
-	});
+	// Focus navigation: configurable shortcuts (default: Ctrl+. / Ctrl+Shift+.)
+	var focusNextKey = getShortcut(wiki, "focus-next", "Ctrl-.");
+	var focusPrevKey = getShortcut(wiki, "focus-prev", "Ctrl-Shift-.");
+	if(focusNextKey) {
+		km.push({
+			key: focusNextKey,
+			run: focusNextElement
+		});
+	}
+	if(focusPrevKey) {
+		km.push({
+			key: focusPrevKey,
+			run: focusPrevElement
+		});
+	}
 
 	if(km.length && cmKeymap) {
 		extensions.push(cmKeymap.of(km));
@@ -730,20 +778,22 @@ function CodeMirrorEngine(options) {
 			multiCursorExtensions.push(secondaryCursorLayer);
 		}
 
-		// Add multi-cursor keybindings (Ctrl+Alt+Arrow for add cursor above/below)
+		// Add multi-cursor keybindings (configurable, default: Ctrl+Alt+Arrow)
 		var addCursorAbove = (core.commands || {}).addCursorAbove;
 		var addCursorBelow = (core.commands || {}).addCursorBelow;
 
 		var multiCursorKeymap = [];
-		if(addCursorAbove) {
+		var addCursorUpKey = getShortcut(wiki, "add-cursor-up", "Ctrl-Alt-ArrowUp");
+		var addCursorDownKey = getShortcut(wiki, "add-cursor-down", "Ctrl-Alt-ArrowDown");
+		if(addCursorAbove && addCursorUpKey) {
 			multiCursorKeymap.push({
-				key: "Ctrl-Alt-ArrowUp",
+				key: addCursorUpKey,
 				run: addCursorAbove
 			});
 		}
-		if(addCursorBelow) {
+		if(addCursorBelow && addCursorDownKey) {
 			multiCursorKeymap.push({
-				key: "Ctrl-Alt-ArrowDown",
+				key: addCursorDownKey,
 				run: addCursorBelow
 			});
 		}
@@ -762,6 +812,16 @@ function CodeMirrorEngine(options) {
 	}
 	extensions.push(this._compartments.trailingWhitespace.of(trailingWhitespaceExtensions));
 
+	// Core: Bidirectional text support (with compartment for dynamic toggle)
+	// Enables automatic per-line text direction detection (RTL/LTR)
+	var bidiEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/bidiPerLine", "no") === "yes";
+	var bidiExtensions = [];
+	var perLineTextDirection = EditorView.perLineTextDirection;
+	if(bidiEnabled && perLineTextDirection) {
+		bidiExtensions.push(perLineTextDirection);
+	}
+	extensions.push(this._compartments.bidi.of(bidiExtensions));
+
 	// Core: Default syntax highlighting (fallback for languages without custom styles)
 	// Uses classHighlighter to add CSS classes (.tok-keyword, .tok-string, etc.)
 	// so themes can style them via CSS
@@ -774,8 +834,7 @@ function CodeMirrorEngine(options) {
 	}
 
 	// Core: Autocompletion sources from engine plugins
-	// NOTE: We do NOT add autocompletion() here - language plugins (like lang-tiddlywiki)
-	// provide that. We only register additional completion sources that get merged in.
+	var autocompletionFn = (core.autocomplete || {}).autocompletion;
 	var completeAnyWord = (core.autocomplete || {}).completeAnyWord;
 
 	// Store completeAnyWord reference and read initial config
@@ -814,6 +873,17 @@ function CodeMirrorEngine(options) {
 		}
 		return cachedAutocompleteData;
 	}));
+
+	// Core: Autocompletion UI (with compartment for dynamic toggle)
+	var autocompletionEnabled = !wiki || wiki.getTiddlerText("$:/config/codemirror-6/autocompletion", "yes") !== "no";
+	var autocompletionExts = [];
+	if(autocompletionEnabled && autocompletionFn) {
+		autocompletionExts.push(autocompletionFn({
+			activateOnTyping: true,
+			maxRenderedOptions: 50
+		}));
+	}
+	extensions.push(this._compartments.autocompletion.of(autocompletionExts));
 
 	// Core: Keymap compartment (for vim/emacs dynamic switching)
 	// Get initial keymap from config and load extensions from matching plugin
@@ -1340,19 +1410,22 @@ CodeMirrorEngine.prototype._handleSettingsChanged = function(settings) {
 				mcExtensions.push(mcSecondaryCursorLayer);
 			}
 
-			// Re-add keybindings
+			// Re-add keybindings (configurable)
 			var mcAddAbove = (core.commands || {}).addCursorAbove;
 			var mcAddBelow = (core.commands || {}).addCursorBelow;
 			var mcKeymap = [];
-			if(mcAddAbove) {
+			var mcWiki = this.widget && this.widget.wiki;
+			var mcAddCursorUpKey = getShortcut(mcWiki, "add-cursor-up", "Ctrl-Alt-ArrowUp");
+			var mcAddCursorDownKey = getShortcut(mcWiki, "add-cursor-down", "Ctrl-Alt-ArrowDown");
+			if(mcAddAbove && mcAddCursorUpKey) {
 				mcKeymap.push({
-					key: "Ctrl-Alt-ArrowUp",
+					key: mcAddCursorUpKey,
 					run: mcAddAbove
 				});
 			}
-			if(mcAddBelow) {
+			if(mcAddBelow && mcAddCursorDownKey) {
 				mcKeymap.push({
-					key: "Ctrl-Alt-ArrowDown",
+					key: mcAddCursorDownKey,
 					run: mcAddBelow
 				});
 			}
@@ -1372,6 +1445,29 @@ CodeMirrorEngine.prototype._handleSettingsChanged = function(settings) {
 			twExtensions.push(highlightTrailingWhitespace());
 		}
 		effects.push(this._compartments.trailingWhitespace.reconfigure(twExtensions));
+	}
+
+	// Bidirectional text support toggle
+	if(settings.bidiPerLine !== undefined && this._compartments.bidi) {
+		var bidiExtensions = [];
+		var EditorView = core.view.EditorView;
+		if(settings.bidiPerLine && EditorView.perLineTextDirection) {
+			bidiExtensions.push(EditorView.perLineTextDirection);
+		}
+		effects.push(this._compartments.bidi.reconfigure(bidiExtensions));
+	}
+
+	// Autocompletion toggle
+	if(settings.autocompletion !== undefined && this._compartments.autocompletion) {
+		var autocompletionExts = [];
+		var autocompletionFn = (core.autocomplete || {}).autocompletion;
+		if(settings.autocompletion && autocompletionFn) {
+			autocompletionExts.push(autocompletionFn({
+				activateOnTyping: true,
+				maxRenderedOptions: 50
+			}));
+		}
+		effects.push(this._compartments.autocompletion.reconfigure(autocompletionExts));
 	}
 
 	// Spellcheck toggle

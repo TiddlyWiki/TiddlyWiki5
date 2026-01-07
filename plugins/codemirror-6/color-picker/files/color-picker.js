@@ -33,6 +33,7 @@ Color picker plugin - shows inline color swatches with click-to-edit functionali
 
 		init: function(cm6Core) {
 			this._core = cm6Core;
+			this._colorPlugin = null;
 		},
 
 		registerCompartments: function() {
@@ -43,14 +44,16 @@ Color picker plugin - shows inline color swatches with click-to-edit functionali
 			};
 		},
 
-		getExtensions: function(context) {
+		// Lazily create and cache the color plugin
+		_getOrCreateColorPlugin: function() {
+			if(this._colorPlugin) return this._colorPlugin;
+
 			var core = this._core;
 			var ViewPlugin = core.view.ViewPlugin;
 			var Decoration = core.view.Decoration;
 			var WidgetType = core.view.WidgetType;
-			var extensions = [];
 
-			if(!ViewPlugin || !Decoration || !WidgetType) return extensions;
+			if(!ViewPlugin || !Decoration || !WidgetType) return null;
 
 			var self = this;
 
@@ -59,11 +62,13 @@ Color picker plugin - shows inline color swatches with click-to-edit functionali
 				this.color = color;
 				this.from = from;
 				this.to = to;
+				this._cleanup = null;
 			}
 			ColorSwatchWidget.prototype = Object.create(WidgetType.prototype);
 			ColorSwatchWidget.prototype.constructor = ColorSwatchWidget;
 
 			ColorSwatchWidget.prototype.toDOM = function(view) {
+				var widgetInstance = this;
 				var wrapper = document.createElement("span");
 				wrapper.className = "cm-color-swatch-wrapper";
 
@@ -86,11 +91,14 @@ Color picker plugin - shows inline color swatches with click-to-edit functionali
 				wrapper.style.position = "relative";
 				wrapper.appendChild(picker);
 
-				picker.addEventListener("input", function() {
+				// Update swatch and document with new color
+				function updateColor() {
 					var newColor = picker.value;
 					var newLength = newColor.length;
-					// Update swatch color immediately for visual feedback
-					swatch.style.backgroundColor = newColor;
+					// Update swatch color with forced repaint for Windows compatibility
+					requestAnimationFrame(function() {
+						swatch.style.backgroundColor = newColor;
+					});
 					// Replace the color at current tracked position
 					view.dispatch({
 						changes: {
@@ -102,18 +110,37 @@ Color picker plugin - shows inline color swatches with click-to-edit functionali
 					// Update tracked position for next input event
 					// The 'to' position changes based on the new color length
 					currentTo = currentFrom + newLength;
-				});
+				}
 
-				// Also handle the swatch click for desktop fallback
-				swatch.addEventListener("click", function(e) {
+				// Handle swatch click for desktop fallback
+				function handleSwatchClick(e) {
 					e.preventDefault();
 					e.stopPropagation();
 					picker.focus();
 					picker.click();
-				});
+				}
+
+				// Listen to both input (real-time) and change (final) events
+				picker.addEventListener("input", updateColor);
+				picker.addEventListener("change", updateColor);
+				swatch.addEventListener("click", handleSwatchClick);
+
+				// Store cleanup function for destroy
+				widgetInstance._cleanup = function() {
+					picker.removeEventListener("input", updateColor);
+					picker.removeEventListener("change", updateColor);
+					swatch.removeEventListener("click", handleSwatchClick);
+				};
 
 				wrapper.appendChild(swatch);
 				return wrapper;
+			};
+
+			ColorSwatchWidget.prototype.destroy = function() {
+				if(this._cleanup) {
+					this._cleanup();
+					this._cleanup = null;
+				}
 			};
 
 			ColorSwatchWidget.prototype.eq = function(other) {
@@ -254,8 +281,15 @@ Color picker plugin - shows inline color swatches with click-to-edit functionali
 				}
 			});
 
-			// Store plugin reference for registerEvents
+			// Cache and return
 			this._colorPlugin = colorPlugin;
+			return colorPlugin;
+		},
+
+		getExtensions: function(context) {
+			var extensions = [];
+			var colorPlugin = this._getOrCreateColorPlugin();
+			if(!colorPlugin) return extensions;
 
 			// Wrap in compartment if available
 			var engine = context.engine;
@@ -277,8 +311,11 @@ Color picker plugin - shows inline color swatches with click-to-edit functionali
 					if(engine._destroyed) return;
 
 					if(settings.colorPicker !== undefined) {
-						if(settings.colorPicker && self._colorPlugin) {
-							engine.reconfigure("colorPicker", self._colorPlugin);
+						if(settings.colorPicker) {
+							var colorPlugin = self._getOrCreateColorPlugin();
+							if(colorPlugin) {
+								engine.reconfigure("colorPicker", colorPlugin);
+							}
 						} else {
 							engine.reconfigure("colorPicker", []);
 						}
