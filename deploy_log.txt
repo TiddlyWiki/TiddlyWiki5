@@ -1,0 +1,192 @@
+6:35:23 AM: build-image version: 235a96ed6c11cbdf942eed7e70e6802956f9b464 (focal)
+6:35:23 AM: buildbot version: 1e2efd5f39281f9b4db1da40e06f3fdd30869001
+6:35:23 AM: Fetching cached dependencies
+6:35:23 AM: Starting to download cache of 233.2MB (Last modified: 2026-01-06 18:11:25 +0000 UTC)
+6:35:24 AM: Finished downloading cache in 489ms
+6:35:24 AM: Starting to extract cache
+6:35:26 AM: Finished extracting cache in 2.32s
+6:35:26 AM: Finished fetching cache in 2.882s
+6:35:26 AM: Starting to prepare the repo for build
+6:35:26 AM: Preparing Git Reference pull/9556/head
+6:35:28 AM: Custom build path detected. Proceeding with the specified path: ''
+6:35:28 AM: Starting to install dependencies
+6:35:28 AM: Started restoring cached mise cache
+6:35:29 AM: Finished restoring cached mise cache
+6:35:29 AM: mise python@3.13.11  install
+6:35:30 AM: mise python@3.13.11  download cpython-3.13.11+20251217-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz
+6:35:30 AM: mise python@3.13.11  extract cpython-3.13.11+20251217-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz
+6:35:30 AM: mise python@3.13.11  python --version
+6:35:30 AM: mise python@3.13.11  Python 3.13.11
+6:35:30 AM: mise python@3.13.11 ✓ installed
+6:35:30 AM: Python version set to 3.13
+6:35:32 AM: Collecting pipenv
+6:35:32 AM:   Downloading pipenv-2026.0.3-py3-none-any.whl.metadata (17 kB)
+6:35:32 AM: Collecting certifi (from pipenv)
+6:35:32 AM:   Downloading certifi-2026.1.4-py3-none-any.whl.metadata (2.5 kB)
+6:35:32 AM: Collecting packaging>=22 (from pipenv)
+6:35:32 AM:   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+6:35:32 AM: Collecting setuptools>=67 (from pipenv)
+6:35:32 AM:   Downloading setuptools-80.9.0-py3-none-any.whl.metadata (6.6 kB)
+6:35:32 AM: Collecting virtualenv>=20.24.2 (from pipenv)
+6:35:32 AM:   Downloading virtualenv-20.35.4-py3-none-any.whl.metadata (4.6 kB)
+6:35:32 AM: Collecting distlib<1,>=0.3.7 (from virtualenv>=20.24.2->pipenv)
+6:35:32 AM:   Downloading distlib-0.4.0-py2.py3-none-any.whl.metadata (5.2 kB)
+6:35:32 AM: Collecting filelock<4,>=3.12.2 (from virtualenv>=20.24.2->pipenv)
+6:35:32 AM:   Downloading filelock-3.20.2-py3-none-any.whl.metadata (2.1 kB)
+6:35:32 AM: Collecting platformdirs<5,>=3.9.1 (from virtualenv>=20.24.2->pipenv)
+6:35:32 AM:   Downloading platformdirs-4.5.1-py3-none-any.whl.metadata (12 kB)
+6:35:32 AM: Downloading pipenv-2026.0.3-py3-none-any.whl (2.4 MB)
+6:35:32 AM:    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.4/2.4 MB 24.6 MB/s  0:00:00
+6:35:32 AM: Downloading packaging-25.0-py3-none-any.whl (66 kB)
+6:35:32 AM: Downloading setuptools-80.9.0-py3-none-any.whl (1.2 MB)
+6:35:32 AM:    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 44.2 MB/s  0:00:00
+6:35:32 AM: Downloading virtualenv-20.35.4-py3-none-any.whl (6.0 MB)
+6:35:32 AM:    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.0/6.0 MB 85.3 MB/s  0:00:00
+6:35:32 AM: Downloading distlib-0.4.0-py2.py3-none-any.whl (469 kB)
+6:35:33 AM: Downloading filelock-3.20.2-py3-none-any.whl (16 kB)
+6:35:33 AM: Downloading platformdirs-4.5.1-py3-none-any.whl (18 kB)
+6:35:33 AM: Downloading certifi-2026.1.4-py3-none-any.whl (152 kB)
+6:35:33 AM: Installing collected packages: distlib, setuptools, platformdirs, packaging, filelock, certifi, virtualenv, pipenv
+6:35:36 AM: Successfully installed certifi-2026.1.4 distlib-0.4.0 filelock-3.20.2 packaging-25.0 pipenv-2026.0.3 platformdirs-4.5.1 setuptools-80.9.0 virtualenv-20.35.4
+6:35:36 AM: Attempting Ruby version 2.7.2, read from environment
+6:35:37 AM: Using Ruby version 2.7.2
+6:35:37 AM: Started restoring cached go cache
+6:35:37 AM: Finished restoring cached go cache
+6:35:37 AM: go version go1.19.13 linux/amd64
+6:35:38 AM: Using PHP version 8.0
+6:35:39 AM: Started restoring cached Node.js version
+6:35:40 AM: Finished restoring cached Node.js version
+6:35:41 AM: v18.20.8 is already installed.
+6:35:41 AM: Now using node v18.20.8 (npm v10.8.2)
+6:35:41 AM: Enabling Node.js Corepack
+6:35:41 AM: Started restoring cached build plugins
+6:35:41 AM: Finished restoring cached build plugins
+6:35:41 AM: Started restoring cached corepack dependencies
+6:35:41 AM: Finished restoring cached corepack dependencies
+6:35:41 AM: No npm workspaces detected
+6:35:41 AM: Started restoring cached node modules
+6:35:41 AM: Finished restoring cached node modules
+6:35:41 AM: Installing npm packages using npm version 10.8.2
+6:35:42 AM: npm warn EBADENGINE Unsupported engine {
+6:35:42 AM: npm warn EBADENGINE   package: 'eslint-plugin-es-x@9.1.0',
+6:35:42 AM: npm warn EBADENGINE   required: { node: '^20.19.0 || >=22.12.0' },
+6:35:42 AM: npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+6:35:42 AM: npm warn EBADENGINE }
+6:35:42 AM: up to date, audited 92 packages in 615ms
+6:35:42 AM: 27 packages are looking for funding
+6:35:42 AM:   run `npm fund` for details
+6:35:42 AM: found 0 vulnerabilities
+6:35:42 AM: npm packages installed
+6:35:43 AM: Successfully installed dependencies
+6:35:43 AM: Detected 0 framework(s)
+6:35:43 AM: Starting build script
+6:35:44 AM: Section completed: initializing
+6:35:45 AM: ​
+6:35:45 AM: Netlify Build                                                 
+6:35:45 AM: ────────────────────────────────────────────────────────────────
+6:35:45 AM: ​
+6:35:45 AM: ❯ Version
+6:35:45 AM:   @netlify/build 35.5.9
+6:35:45 AM: ​
+6:35:45 AM: ❯ Flags
+6:35:45 AM:   accountId: 67227c2fd461532be8cdbf58
+6:35:45 AM:   baseRelDir: true
+6:35:45 AM:   buildId: 695df09a1190d60008ef78a6
+6:35:45 AM:   deployId: 695df09a1190d60008ef78a8
+6:35:45 AM: ​
+6:35:45 AM: ❯ Current directory
+6:35:45 AM:   /opt/build/repo
+6:35:45 AM: ​
+6:35:45 AM: ❯ Config file
+6:35:45 AM:   No config file was defined: using default values.
+6:35:45 AM: ​
+6:35:45 AM: ❯ Context
+6:35:45 AM:   deploy-preview
+6:35:45 AM: ​
+6:35:45 AM: Build command from Netlify app                                
+6:35:45 AM: ────────────────────────────────────────────────────────────────
+6:35:45 AM: ​
+6:35:45 AM: $ ./bin/test.sh && TW5_BUILD_STATIC="0" TW5_BUILD_EDITIONS="0" TW5_BUILD_PLUGIN_DEMOS="0" TW5_BUILD_LANGUAGE_DEMOS="0" TW5_BUILD_PLUGIN_LIBRARY="0" TW5_BUILD_DETAILS="NETLIFY-BUILD|$BRANCH|$COMMIT_REF|$REPOSITORY_URL|$REVIEW_ID|$(date +'%Y%m%d%H%M%S')$(printf '%03d' $(($(date +'%N') / 1000000)))" ./bin/build-site.sh
+6:35:46 AM: Boot log:
+6:35:46 AM:   Startup task: load-modules
+6:35:46 AM:   Startup task: info after: load-modules before: startup
+6:35:46 AM:   Startup task: plugins after: load-modules before: startup
+6:35:46 AM:   Startup task: startup after: load-modules
+6:35:46 AM:   Startup task: story after: startup
+6:35:46 AM:   Startup task: commands platforms: node after: story
+6:35:46 AM: Executing command: version
+6:35:46 AM: 5.4.0-prerelease
+6:35:46 AM: Executing command: rendertiddler $:/core/save/all test.html text/plain
+6:35:46 AM: Executing command: test
+6:35:46 AM: Randomized with seed 79944
+6:35:46 AM: Started
+6:35:55 AM: ..................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................**....................................................................................................................
+6:35:55 AM: Pending:
+6:35:55 AM: 1) Tags Operator tests With no indexers should apply tags ordering in order of creation. TW v5.3.7+
+6:35:55 AM:   Temporarily disabled with xit
+6:35:55 AM: 2) Tags Operator tests With all indexers should apply tags ordering in order of creation. TW v5.3.7+
+6:35:55 AM:   Temporarily disabled with xit
+6:35:55 AM: 1560 specs, 0 failures, 2 pending specs
+6:35:55 AM: Finished in 8.977 seconds
+6:35:55 AM: Randomized with seed 79944 (jasmine --random=true --seed=79944)
+6:35:55 AM: To run the tests in a browser, open editions/test/output/test.html
+6:35:55 AM: Using TW5_BUILD_VERSION as [v5.4.0]
+6:35:55 AM: Using TW5_BUILD_MAIN_EDITION as [./editions/tw5.com]
+6:35:55 AM: Using TW5_BUILD_TIDDLYWIKI as [./tiddlywiki.js]
+6:35:55 AM: Using TW5_BUILD_DETAILS as [NETLIFY-BUILD|pull/9556/head|6cb97ad464841f9454aceb934f88d63960710113|https://github.com/TiddlyWiki/TiddlyWiki5|9556|20260107053555680]
+6:35:55 AM: Using TW5_BUILD_COMMIT as [6cb97ad464841f9454aceb934f88d63960710113]
+6:35:55 AM: Using TW5_BUILD_OUTPUT as [./output]
+6:35:55 AM: Build details: NETLIFY-BUILD|pull/9556/head|6cb97ad464841f9454aceb934f88d63960710113|https://github.com/TiddlyWiki/TiddlyWiki5|9556|20260107053555680
+6:35:55 AM: rm: cannot remove './output/static/*': No such file or directory
+6:35:55 AM: rm: cannot remove './output/dev/static/*': No such file or directory
+6:35:56 AM: 5.4.0-prerelease
+6:36:23 AM: node:internal/modules/cjs/loader:1143
+6:36:23 AM:   throw err;
+6:36:23 AM:   ^
+6:36:23 AM: Error: Cannot find module '$:/plugins/tiddlywiki/codemirror-6/plugins/lang-tiddlywiki/lang-tiddlywiki.js'
+6:36:23 AM: Require stack:
+6:36:23 AM: - /opt/build/repo/boot/boot.js
+6:36:23 AM: - /opt/build/repo/tiddlywiki.js
+6:36:23 AM:     at Module._resolveFilename (node:internal/modules/cjs/loader:1140:15)
+6:36:23 AM:     at Module._load (node:internal/modules/cjs/loader:981:27)
+6:36:23 AM:     at Module.require (node:internal/modules/cjs/loader:1231:19)
+6:36:23 AM:     at require (node:internal/modules/helpers:177:18)
+6:36:23 AM:     at $tw.modules.execute ($:/boot/boot.js:887:11)
+6:36:23 AM:     at require ($:/boot/boot.js:846:24)
+6:36:23 AM:     at exports.startup ($:/plugins/tiddlywiki/codemirror-6/plugins/lang-tiddlywiki/register.js:636:15)
+6:36:23 AM:     at $tw.boot.executeNextStartupTask ($:/boot/boot.js:2619:27)
+6:36:23 AM:     at asyncTaskCallback ($:/boot/boot.js:2598:20)
+6:36:23 AM:     at $tw.Commander.output [as callback] ($:/core/modules/startup/commands.js:26:4) {
+6:36:23 AM:   code: 'MODULE_NOT_FOUND',
+6:36:23 AM:   requireStack: [ '/opt/build/repo/boot/boot.js', '/opt/build/repo/tiddlywiki.js' ]
+6:36:23 AM: }
+6:36:23 AM: Node.js v18.20.8
+6:36:23 AM: ​
+6:36:23 AM: "build.command" failed                                        
+6:36:23 AM: ────────────────────────────────────────────────────────────────
+6:36:23 AM: ​
+6:36:23 AM:   Error message
+6:36:23 AM:   Command failed with exit code 1: ./bin/test.sh && TW5_BUILD_STATIC="0" TW5_BUILD_EDITIONS="0" TW5_BUILD_PLUGIN_DEMOS="0" TW5_BUILD_LANGUAGE_DEMOS="0" TW5_BUILD_PLUGIN_LIBRARY="0" TW5_BUILD_DETAILS="NETLIFY-BUILD|$BRANCH|$COMMIT_REF|$REPOSITORY_URL|$REVIEW_ID|$(date +'%Y%m%d%H%M%S')$(printf '%03d' $(($(date +'%N') / 1000000)))" ./bin/build-site.sh (https://ntl.fyi/exit-code-1)
+6:36:23 AM: ​
+6:36:23 AM:   Error location
+6:36:23 AM:   In Build command from Netlify app:
+6:36:23 AM:   ./bin/test.sh && TW5_BUILD_STATIC="0" TW5_BUILD_EDITIONS="0" TW5_BUILD_PLUGIN_DEMOS="0" TW5_BUILD_LANGUAGE_DEMOS="0" TW5_BUILD_PLUGIN_LIBRARY="0" TW5_BUILD_DETAILS="NETLIFY-BUILD|$BRANCH|$COMMIT_REF|$REPOSITORY_URL|$REVIEW_ID|$(date +'%Y%m%d%H%M%S')$(printf '%03d' $(($(date +'%N') / 1000000)))" ./bin/build-site.sh
+6:36:23 AM: ​
+6:36:23 AM:   Resolved config
+6:36:23 AM:   build:
+6:36:23 AM:     base: /opt/build/repo
+6:36:23 AM:     command: ./bin/test.sh && TW5_BUILD_STATIC="0" TW5_BUILD_EDITIONS="0"
+6:36:23 AM:       TW5_BUILD_PLUGIN_DEMOS="0" TW5_BUILD_LANGUAGE_DEMOS="0"
+6:36:23 AM:       TW5_BUILD_PLUGIN_LIBRARY="0"
+6:36:23 AM:       TW5_BUILD_DETAILS="NETLIFY-BUILD|$BRANCH|$COMMIT_REF|$REPOSITORY_URL|$REVIEW_ID|$(date
+      +'%Y%m%d%H%M%S')$(printf '%03d' $(($(date +'%N') / 1000000)))"
+      ./bin/build-site.sh
+6:36:23 AM:     commandOrigin: ui
+6:36:23 AM:     environment:
+6:36:23 AM:       - REVIEW_ID
+6:36:23 AM:     publish: /opt/build/repo/output
+6:36:23 AM:     publishOrigin: ui
+6:36:24 AM: Failed during stage 'building site': Build script returned non-zero exit code: 2 (https://ntl.fyi/exit-code-2)
+6:36:24 AM: Build failed due to a user error: Build script returned non-zero exit code: 2
+6:36:24 AM: Failing build: Failed to build site
+6:36:24 AM: Finished processing build request in 1m1.18s

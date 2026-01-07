@@ -1,0 +1,12 @@
+{
+    "tiddlers": [
+        {
+            "file": "auto-close-tags.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/auto-close-tags/auto-close-tags.js",
+                "module-type": "codemirror6-plugin"
+            }
+        }
+    ]
+}

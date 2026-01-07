@@ -1,0 +1,12 @@
+{
+    "tiddlers": [
+        {
+            "file": "color-picker.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/color-picker/color-picker.js",
+                "module-type": "codemirror6-plugin"
+            }
+        }
+    ]
+}
