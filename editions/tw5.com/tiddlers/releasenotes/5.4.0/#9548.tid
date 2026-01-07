@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9548
+description: Better infinite transclude recursion handling
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9458
+github-contributors: Flibbles
+
+This introduces and attempt to be far more robust in detecting infinite recursion in transclusion, and to be better about cleaning up the widget tree and reporting it.
