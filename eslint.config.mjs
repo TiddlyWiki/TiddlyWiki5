@@ -294,7 +294,7 @@ js.configs.recommended,
         yoda: "off",
         // temporary rules
         "no-useless-escape": "off",
-        "no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_", "caughtErrorsIgnorePattern": "^_" }],
+        "no-unused-vars": "warn",
         "no-empty": "off",
         "@stylistic/no-extra-semi": "off",
         "no-redeclare": "off",
