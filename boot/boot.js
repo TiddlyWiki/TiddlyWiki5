@@ -2809,10 +2809,10 @@ $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 };
 
 $tw.preloadHooks.forEach(function(hook){
-	if(!Array.isArray(hook) || hook.length !== 2 || typeof hook[0] !== "string" || typeof hook[1] !== "function") {
+	if (typeof hook !== "object" || typeof hook.name !== "string" || typeof hook.callback !== "function") {
 		console.warn("Invalid hook definition in $tw.preloadHooks", hook);
 	} else {
-		$tw.hooks.addHook(hook[0], hook[1]);
+		$tw.hooks.addHook(hook.name, hook.callback);
 	}
 });
 

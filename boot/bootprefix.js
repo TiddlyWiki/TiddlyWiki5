@@ -112,8 +112,8 @@ $tw.preloadTiddlerArray = function(fieldsArray) {
 
 /*
  * External JavaScript can populate this array before calling boot.js in order to preload hooks
- * Each entry should be an array of two elements: the hook name and the hook function
- * Example: $tw.preloadHooks.push(["th-boot-start", function(options) { ... }]);
+ * Each entry should be an object with two properties: the hook to listen for and the callback to call
+ * Example: $tw.preloadHooks.push({ name: "th-boot-start", callback: function(options) { ... }});
  */
 $tw.preloadHooks = $tw.preloadHooks || [];
 
