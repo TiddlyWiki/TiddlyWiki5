@@ -1,0 +1,15 @@
+created: 20181215154811835
+modified: 20241127111942680
+original-modified: 20181215154811835
+tags: [[Hidden Settings]]
+title: Hidden Setting: Template for Save Wiki Button
+ja-title: 隠し設定: Wiki保存ボタンのテンプレート
+type: text/vnd.tiddlywiki
+
+"Wikiを保存します"ページコントロールボタンを使用して保存するときに使用するテンプレートを決定します。
+
+デフォルトは`$:/core/save/all`です。
+
+この設定を変更して、"Wikiを保存します"ボタンをクリックしたときに保存される内容を選択できます。
+
+$:/config/SaveWikiButton/Template

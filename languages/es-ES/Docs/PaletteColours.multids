@@ -65,6 +65,13 @@ sidebar-tab-foreground-selected: Divisor de pestañas de la barra lateral para l
 sidebar-tab-foreground: Primario de la pestaña de la barra lateral
 sidebar-tiddler-link-foreground-hover: Primario enlace tiddler en la barra lateral al pasar por encima
 sidebar-tiddler-link-foreground: Primario enlace tiddler en la barra lateral
+stability-stable: Distintivo para el nivel de estabilidad "estable"
+stability-experimental: Distintivo para el nivel de estabilidad "experimental"
+stability-deprecated: Distintivo para el nivel de estabilidad "obsoleto"
+stability-legacy: Distintivo para el nivel de estabilidad "heredado"
+testcase-accent-level-1: Color de énfasis del caso de prueba sin anidación
+testcase-accent-level-2: Color de énfasis del caso de prueba con anidación de segundo nivel
+testcase-accent-level-3: Color de énfasis del caso de prueba con anidación de tercer nivel o superior
 site-title-foreground: Primario título sitio
 static-alert-foreground: Primario de alerta estática
 tab-background-selected: Fondo de pestaña para pestañas seleccionadas

@@ -1,0 +1,14 @@
+created: 20240811052854726
+modified: 20241116102931084
+original-modified: 20240811053649554
+tags: [[Hidden Settings]]
+title: Hidden Setting: Content to be displayed for empty story
+ja-title: 隠し設定: 空のストーリーに表示されるコンテンツ
+
+ストーリーが空のときにコンテンツを表示するには、$:/config/EmptyStoryMessageを作成し、必要なコンテンツを入力します。
+
+以下は、すべてのTiddlerが閉じられている場合に、GettingStarted Tiddlerを表示します。
+
+```
+{{GettingStarted||$:/core/ui/ViewTemplate}}
+```

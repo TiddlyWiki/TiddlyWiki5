@@ -5,10 +5,16 @@ title: $:/core/ui/ControlPanel/Settings/DefaultSidebarTab
 \define lingo-base() $:/language/ControlPanel/Settings/DefaultSidebarTab/
 \whitespace trim
 
-<$link to="$:/config/DefaultSidebarTab"><<lingo Hint>></$link>
+<$link to="$:/config/DefaultSidebarTab" class="tc-control-panel-item">
+	<<lingo Hint>>
+</$link>
 
-<$select tiddler="$:/config/DefaultSidebarTab">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]">
-<option value=<<currentTiddler>>><$transclude field="caption"><$text text=<<currentTiddler>>/></$transclude></option>
-</$list>
+<$select tiddler="$:/config/DefaultSidebarTab" class="tc-select">
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]">
+		<option value=<<currentTiddler>>>
+			<$transclude field="caption">
+				<$text text=<<currentTiddler>>/>
+			</$transclude>
+		</option>
+	</$list>
 </$select>

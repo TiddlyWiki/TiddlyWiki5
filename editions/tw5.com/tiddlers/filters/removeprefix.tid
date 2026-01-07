@@ -1,15 +1,15 @@
+caption: removeprefix
 created: 20140410103123179
-modified: 20220218023400000
+modified: 20230711082842515
+op-input: a [[selection of titles|Title Selection]]
+op-output: those input titles that start with <<.place S>>, but with those characters discarded
+op-parameter: a string of characters
+op-parameter-name: S
+op-purpose: filter the input titles by how they start, deleting that prefix
+op-suffix: the <<.op removeprefix>> operator uses a rich suffix, see below for details
 tags: [[Filter Operators]] [[String Operators]]
 title: removeprefix Operator
 type: text/vnd.tiddlywiki
-caption: removeprefix
-op-purpose: filter the input titles by how they start, deleting that prefix
-op-input: a [[selection of titles|Title Selection]]
-op-parameter: a string of characters
-op-parameter-name: S
-op-output: those input titles that start with <<.place S>>, but with those characters discarded
-op-suffix: the <<.op removeprefix>> operator uses a rich suffix, see below for details
 
 <<.tip " This filters out input titles that do not start with S. For removing S without filtering out input titles that don't start with S, see [[trim|trim Operator]].">>
 
@@ -18,11 +18,10 @@ op-suffix: the <<.op removeprefix>> operator uses a rich suffix, see below for d
 The <<.op removeprefix>> operator uses an extended syntax that permits multiple flags to be passed:
 
 ```
-[removeprefix:<flag list>[<operand>]]
+[removeprefix:<flag list>[<parameter>]]
 ```
 
 * ''flag list'': a comma delimited list of flags
-* ''operand'': filter operand
 
 The available flags are:
 

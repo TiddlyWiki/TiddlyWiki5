@@ -12,10 +12,7 @@ definition text, including $param$ markers
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "macrodef";
@@ -54,11 +51,12 @@ exports.parse = function() {
 			paramMatch = reParam.exec(paramString);
 		}
 	}
-	// Is this a multiline definition?
-	var reEnd;
+	// Is the remainder of the \define line blank after the parameter close paren?
+	var reEnd,isBlock = true;
 	if(this.match[3]) {
-		// If so, the end of the body is marked with \end
-		reEnd = new RegExp("(\\r?\\n[^\\S\\n\\r]*\\\\end[^\\S\\n\\r]*(?:" + $tw.utils.escapeRegExp(this.match[1]) + ")?(?:$|\\r?\\n))","mg");
+		// If so, it is a multiline definition and the end of the body is marked with \end
+		isBlock = false;
+		reEnd = new RegExp("((?:^|\\r?\\n)[^\\S\\n\\r]*\\\\end[^\\S\\n\\r]*(?:" + $tw.utils.escapeRegExp(this.match[1]) + ")?\\s*?(?:$|\\r?\\n))","mg");
 	} else {
 		// Otherwise, the end of the definition is marked by the end of the line
 		reEnd = /($|\r?\n)/mg;
@@ -82,11 +80,10 @@ exports.parse = function() {
 		attributes: {},
 		children: [],
 		params: params,
-		isMacroDefinition: true
+		isMacroDefinition: true,
+		isBlock: isBlock && !!endMatch
 	}];
 	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"name",this.match[1]);
 	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"value",text);
 	return parseTreeNodes;
 };
-
-})();

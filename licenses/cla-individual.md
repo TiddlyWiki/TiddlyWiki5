@@ -553,3 +553,88 @@ BuckarooBanzay, @BuckarooBanzay, 2023/09/01
 Timur, @T1mL3arn, 2023/10/04
 
 Wang Ke, @Gk0Wk, 2023/10/17
+
+@frittro, 2023/10/27
+
+@etardiff, 2023/12/10
+
+John Long, @drevarr, 2023/12/12
+
+Ed Holsinger, @eschlon, 2024/02/08
+
+Kim I. McKinley, @PotOfCoffee2Go, 2024/03/16
+
+@Jinix6, 2024/03/31
+
+Anders Jarmund, @andjar, 2024/04/05
+
+@sarna, 2024/04/28
+
+Fokzo Kat, @CyberFoxar, 2024/05/20
+
+Andrei Rybak, @rybak, 2024/06/09
+
+@Leilei332, 2024/06/28
+
+@springerspandrel, 2024/06/27
+
+@andrewgoz, 2024/07/10
+
+Michael McDermott, @michaeljmcd, 2024-07-09
+
+@webplusai, 2024/07/23
+
+Val Packett, @valpackett, 2024/07/26
+
+@wolfsprite, 2024/08/09
+
+@JDIGIO0213, 2024/08/29
+
+@IchijikuIchigo, 2024/09/29
+
+JC John Sese Cuneta, @techmagus, 2024/10/07
+
+@zorrox1024, 2024/10/20
+
+John Robinette, @jrbntt, 2024/11/25
+
+@DesignThinkerer, 2024/12/02
+
+Thomas E Tuoti, @well-noted, 2024/12/16
+
+@opn, 2025/01/04
+
+J. Ryan Stinnett, @jryans, 2025/01/04
+
+Galen Huntington, @galenhuntington, 2025/01/19
+
+@Rhys-T, 2025/01/23
+
+@Rumman157, 2025/03/17
+
+@bob.jansen@cultconv.com, 2025/03/22
+
+Matthew Salmon, @matthewsalmon, 2025/04/24
+
+@jbaldus, 2025/05/28
+
+@yogoshell, 2025/06/08
+
+Wu Peiyuan, @s793016, 2025/06/10
+
+Markus Sauermann, @Sauermann, 2025/06/20
+
+@bobjoe12131, 2025/07/01
+
+Ioannis Anthymidis (Ιωάννης Ανθυμίδης), @superuser-does, 2025/07/06
+
+Christian Byron, @CeeBeeTree, 2025/08/05
+
+Frédéric Demers, @bepuzzled, 2025/08/17
+
+@bombur51, 2025/09/28
+
+Joseph Yi, @josephyi, 2025/10/14
+
+Rishu kumar, @rishu-7549, 2025/10/25
+

@@ -1,0 +1,15 @@
+created: 20150619162409306
+modified: 20241128112152516
+original-modified: 20191014091803518
+tags: [[Hidden Settings]]
+title: Hidden Setting: Typing Refresh Delay
+ja-title: 隠し設定: 入力更新の遅延
+type: text/vnd.tiddlywiki
+
+TiddlyWikiは、タイムアウトが経過するまで、ドラフトTiddlerとプレフィックス`$:/temp/volatile/`付きのTiddlerへの変更の処理を延期します(これをスロットリングと呼びます)。このメカニズムは、`throttle.refresh`フィールドを追加することで他のTiddlerに拡張できます。詳細については、RefreshThrottlingを参照してください。
+
+デフォルト値の400ミリ秒は、ほとんどの場合、応答性のバランスが良好ですが、低電力のモバイルデバイスでは必ずしも最適ではありません。
+
+次の値(ミリ秒)を変更することで、タイムアウトを変更できます: 
+
+$:/config/Drafts/TypingTimeout

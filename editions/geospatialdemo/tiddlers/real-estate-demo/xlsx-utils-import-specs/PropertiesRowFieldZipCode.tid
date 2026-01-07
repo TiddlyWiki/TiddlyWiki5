@@ -1,0 +1,7 @@
+import-field-column: Zip Code
+import-field-name: zipcode
+import-field-source: column
+import-spec-role: field
+title: $:/_importspec/RealEstate/PropertiesRow/Field/zipcode
+type: text/vnd.tiddlywiki
+

@@ -43,7 +43,7 @@ Properties within a JSON object are identified by a sequence of indexes. In the 
 
 The following examples assume that this JSON data is contained in a variable called `jsondata`.
 
-The <<.op jsonextract>> operator uses multiple operands to specify the indexes of the property to retrieve. Values are returned as literal JSON strings:
+The <<.op jsonextract>> operator uses multiple parameters to specify the indexes of the property to retrieve. Values are returned as literal JSON strings:
 
 ```
 [<jsondata>jsonextract[a]] --> "one"
@@ -67,7 +67,7 @@ Indexes can be dynamically composed from variables and transclusions:
 [<jsondata>jsonextract<variable>,{!!field},[0]]
 ```
 
-A subtlety is that the special case of a single blank operand is used to identify the root object. Thus:
+A subtlety is that the special case of a single blank parameter is used to identify the root object. Thus:
 
 ```
 [<jsondata>jsonextract[]] --> {"a":"one","b":"","c":"three","d":{"e":"four","f":["five","six",true,false,null],"g":{"x":"max","y":"may","z":"maize"}}}

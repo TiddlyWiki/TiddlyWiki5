@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9454
+description: Ensure rows parameter of edit-text widget takes precedence
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: feature
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9454
+github-contributors: pmario
+
+Edit-text widget rows parameter takes precedence

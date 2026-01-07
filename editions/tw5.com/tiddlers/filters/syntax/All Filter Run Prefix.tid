@@ -1,0 +1,18 @@
+created: 20230316150731234
+from-version: 5.1.23
+modified: 20230711084644541
+rp-input: all titles from previous filter runs
+rp-output: output titles are appended to the output of previous filter runs without de-duplication.
+rp-purpose: union of sets without de-duplication
+tags: [[Named Filter Run Prefix]]
+title: All Filter Run Prefix
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( ":all" | - )
+[[run|"Filter Run"]]
+"""/>
+
+This prefix has an optional [[shortcut syntax|Shortcut Filter Run Prefix]] symbol `=run`

@@ -6,10 +6,7 @@ module-type: startup
 Setup root widget handlers for the messages concerned with opening external browser windows
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -56,32 +53,26 @@ exports.startup = function() {
 			return;
 		}
 		// Initialise the document
-		srcDocument.write("<html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
+		srcDocument.write("<!DOCTYPE html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
 		srcDocument.close();
 		srcDocument.title = windowTitle;
+		$tw.eventBus.emit("window:opened",{windowID, window: srcWindow});
 		srcWindow.addEventListener("beforeunload",function(event) {
 			delete $tw.windows[windowID];
 			$tw.wiki.removeEventListener("change",refreshHandler);
+			$tw.eventBus.emit("window:closed",{windowID});
 		},false);
 		// Set up the styles
-		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
-				document: $tw.fakeDocument,
-				variables: variables,
-				importPageMacros: true}),
-			styleContainer = $tw.fakeDocument.createElement("style");
-		styleWidgetNode.render(styleContainer,null);
-		var styleElement = srcDocument.createElement("style");
-		styleElement.innerHTML = styleContainer.textContent;
-		srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
+		var styleParser = $tw.wiki.parseTiddler("$:/core/ui/RootStylesheet",{parseAsInline: true}),
+			styleWidgetNode = $tw.wiki.makeWidget(styleParser,{document: srcDocument});
+		styleWidgetNode.render(srcDocument.head,null);
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
 			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: variables});
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
-			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
-				styleElement.innerHTML = styleContainer.textContent;
-			}
+			styleWidgetNode.refresh(changes);
 			widgetNode.refresh(changes);
 		};
 		$tw.wiki.addEventListener("change",refreshHandler);
@@ -110,5 +101,3 @@ exports.startup = function() {
 	// Close open windows when unloading main window
 	$tw.addUnloadTask(closeAllWindows);
 };
-
-})();

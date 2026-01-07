@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: ви
+Date/DaySuffix/10: ти
+Date/DaySuffix/11: ти
+Date/DaySuffix/12: ти
+Date/DaySuffix/13: ти
+Date/DaySuffix/14: ти
+Date/DaySuffix/15: ти
+Date/DaySuffix/16: ти
+Date/DaySuffix/17: ти
+Date/DaySuffix/18: ти
+Date/DaySuffix/19: ти
+Date/DaySuffix/2: ри
+Date/DaySuffix/20: ти
+Date/DaySuffix/21: ви
+Date/DaySuffix/22: ри
+Date/DaySuffix/23: ти
+Date/DaySuffix/24: ти
+Date/DaySuffix/25: ти
+Date/DaySuffix/26: ти
+Date/DaySuffix/27: ми
+Date/DaySuffix/28: ми
+Date/DaySuffix/29: ти
+Date/DaySuffix/3: ти
+Date/DaySuffix/30: ти
+Date/DaySuffix/31: ви
+Date/DaySuffix/4: ти
+Date/DaySuffix/5: ти
+Date/DaySuffix/6: ти
+Date/DaySuffix/7: ми
+Date/DaySuffix/8: ми
+Date/DaySuffix/9: ти
+Date/Long/Day/0: Недела
+Date/Long/Day/1: Понеделник
+Date/Long/Day/2: Вторник
+Date/Long/Day/3: Среда
+Date/Long/Day/4: Четврток
+Date/Long/Day/5: Петок
+Date/Long/Day/6: Сабота
+Date/Long/Month/1: Јануари
+Date/Long/Month/10: Октомври
+Date/Long/Month/11: Ноември
+Date/Long/Month/12: Декември
+Date/Long/Month/2: Февруари
+Date/Long/Month/3: Март
+Date/Long/Month/4: Април
+Date/Long/Month/5: Мај
+Date/Long/Month/6: Јуни
+Date/Long/Month/7: Јули
+Date/Long/Month/8: Август
+Date/Long/Month/9: Септември
+Date/Period/am: am
+Date/Period/pm: pm
+Date/Short/Day/0: Нед
+Date/Short/Day/1: Пон
+Date/Short/Day/2: Вто
+Date/Short/Day/3: Сре
+Date/Short/Day/4: Чет
+Date/Short/Day/5: Пет
+Date/Short/Day/6: Саб
+Date/Short/Month/1: Јан
+Date/Short/Month/10: Окт
+Date/Short/Month/11: Ное
+Date/Short/Month/12: Дек
+Date/Short/Month/2: Фев
+Date/Short/Month/3: Мар
+Date/Short/Month/4: Апр
+Date/Short/Month/5: Мај
+Date/Short/Month/6: Јун
+Date/Short/Month/7: Јул
+Date/Short/Month/8: Авг
+Date/Short/Month/9: Сеп
+RelativeDate/Future/Days: <<period>> дена од сега
+RelativeDate/Future/Hours: <<period>> часа од сега
+RelativeDate/Future/Minutes: <<period>> минути од сега
+RelativeDate/Future/Months: <<period>> месеци од сега
+RelativeDate/Future/Second: 1 секунда од сега
+RelativeDate/Future/Seconds: <<period>> секунди од сега
+RelativeDate/Future/Years: <<period>> години од сега
+RelativeDate/Past/Days: пред <<period>> дена
+RelativeDate/Past/Hours: пред <<period>> часа
+RelativeDate/Past/Minutes: пред <<period>> минути
+RelativeDate/Past/Months: пред <<period>> месеци
+RelativeDate/Past/Second: пред 1 секунда
+RelativeDate/Past/Seconds: пред <<period>> секунди
+RelativeDate/Past/Years: пред <<period>> години

@@ -6,10 +6,7 @@ module-type: widget
 Draggable widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -119,7 +116,7 @@ DraggableWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	} else {
 		if(changedAttributes["class"]) {
-			this.assignDomNodeClasses();
+			this.updateDomNodeClasses();
 		}
 		this.assignAttributes(this.domNodes[0],{
 			changedAttributes: changedAttributes,
@@ -131,5 +128,3 @@ DraggableWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.draggable = DraggableWidget;
-
-})();

@@ -6,10 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests various utility functions.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Utility tests", function() {
@@ -210,5 +207,3 @@ describe("Utility tests", function() {
 	});
 
 });
-
-})();

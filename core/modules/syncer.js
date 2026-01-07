@@ -6,10 +6,7 @@ module-type: global
 The syncer tracks changes to the store and synchronises them to a remote data store represented as a "sync adaptor"
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -635,7 +632,7 @@ SyncFromServerTask.prototype.run = function(callback) {
 		callback(null);
 	};
 	if(this.syncer.syncadaptor.getUpdatedTiddlers) {
-		this.syncer.syncadaptor.getUpdatedTiddlers(self,function(err,updates) {
+		this.syncer.syncadaptor.getUpdatedTiddlers(self.syncer,function(err,updates) {
 			if(err) {
 				self.syncer.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
 				return callback(err);
@@ -703,5 +700,3 @@ SyncFromServerTask.prototype.run = function(callback) {
 };
 
 exports.Syncer = Syncer;
-
-})();

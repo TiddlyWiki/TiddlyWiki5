@@ -1,0 +1,18 @@
+created: 20230318135743766
+from-version: 5.1.23
+modified: 20230322140708372
+rp-input: all titles from previous filter runs
+rp-output: output titles are [[dominantly appended|Dominant Append]] to the output of previous filter runs
+rp-purpose: de-duplicated union of tiddler sets
+tags: [[Named Filter Run Prefix]]
+title: Or Filter Run Prefix
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( ":or" | - )
+[[run|"Filter Run Prefix"]]
+"""/>
+
+The :or prefix is equivalent to using no prefix at all. See `run` at [[Shortcut Filter Run Prefix]]

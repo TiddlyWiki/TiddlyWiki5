@@ -1,15 +1,15 @@
 created: 20210519110226889
-modified: 20210519110226889
+modified: 20241021161007731
 tags: [[Other Resources]]
 title: "Grok TiddlyWiki" by Soren Bjornstad
 type: text/vnd.tiddlywiki
 url: https://groktiddlywiki.com/read/
 
-This new textbook from Soren Bjornstad is highly recommended for learning ~TiddlyWiki. The presentation and design are also a first class example of using ~TiddlyWiki.
+Grok ~TiddlyWiki by Soren Bjornstad is an interactive learning environment for TiddlyWiki. It bundles three complementary modes of learning into one TiddlyWiki:
 
-From the site:
-
-> Grok ~TiddlyWiki is a textbook that helps you build a deep, lasting understanding of and proficiency with ~TiddlyWiki through a combination of detailed explanations, practical exercises, and spaced-repetition reviews of prompts called takeaways.
+* It ''explains concepts'' using English text and code examples
+* It ''assigns exercises'' that help you apply and practice what you've learned
+* It ''presents takeaways'', questions about key terms, concepts, or skills, for review as you continue through the book, to help you retain what you've learned over a longer period of time
 
 {{!!url}}
 
