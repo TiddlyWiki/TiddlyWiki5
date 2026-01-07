@@ -115,7 +115,6 @@ tags: $:/tags/Macro
 										<$view field="title"/>
 									</$transclude>
 								</$let>
-								<$view field="title"/>
 							</$link>
 						</$transclude>
 					</$genesis>
