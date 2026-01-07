@@ -4,7 +4,7 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: developer
-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9336
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9336
 github-contributors: Arlen22
 
 This formalizes the idea of a data tiddler inside code. Currently x-tiddler-dictionary and json are supported. Other wire formats can be supported by defining a Javascript module with `module-type: datatiddlerserializer`  which exports the interface shown below.
