@@ -8,9 +8,7 @@ tags: $:/tags/Macro
 		<$genesis $type=<<__subtype__>>>
 			<$link to={{!!title}}>
 				<$let tv-wikilinks="no">
-					<$transclude field=<<__field__>>>
-						<$view field="title"/>
-					</$transclude>
+					<$transclude field=<<__field__>>><$view field="title"/></$transclude>
 				</$let>
 			</$link>
 		</$genesis>
@@ -42,9 +40,7 @@ tags: $:/tags/Macro
 							<$transclude tiddler="""$itemTemplate$""">
 								<$link to={{!!title}}>
 									<$let tv-wikilinks="no">
-										<$transclude field=<<__displayField__>>>
-											<$view field="title"/>
-										</$transclude>
+										<$transclude field=<<__displayField__>>><$view field="title"/></$transclude>
 									</$let>
 								</$link>
 							</$transclude>
@@ -92,7 +88,7 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"",displayField:"")
+\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"",displayField:"caption")
 \whitespace trim
 <span class="tc-tagged-draggable-list">
 	<$set name="tag" value=<<__tag__>>>
@@ -111,11 +107,8 @@ tags: $:/tags/Macro
 						<$transclude tiddler="""$itemTemplate$""">
 							<$link to={{!!title}}>
 								<$let tv-wikilinks="no">
-									<$transclude field=<<__displayField__>>>
-										<$view field="title"/>
-									</$transclude>
+									<$transclude field=<<__displayField__>>><$view field="title"/></$transclude>
 								</$let>
-								<$view field="title"/>
 							</$link>
 						</$transclude>
 					</$genesis>
