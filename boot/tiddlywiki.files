@@ -18,6 +18,13 @@
 			}
 		},
 		{
+			"file": "bootnode.js",
+			"fields": {
+				"title": "$:/boot/bootnode.js",
+				"type": "application/javascript"
+			}
+		},
+		{
 			"file": "bootprefix.js",
 			"fields": {
 				"title": "$:/boot/bootprefix.js",
