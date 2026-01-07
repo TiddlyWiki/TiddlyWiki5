@@ -26,13 +26,13 @@ interface DataTiddlerSerializer {
 }
 ```
 
-This PR also adds a preloadHooks array to bootprefix.js. This allows third party code to add hooks prior boot.js in the browser, the same way preloadTiddlers allows this. Hooks have also been added to the boot sequence. 
+This PR also adds a preloadHooks array to bootprefix.js. This allows third party code to add hooks prior boot.js in the browser, the same way preloadTiddlers allows this. Hooks have also been added to the boot sequence. The array items have the following type.
 
 ```ts
 interface PreloadHooksItem {
     /** the hook to listen for */
     name: string;
     /** the arguments the hook is called with */
-    callback: (..args: any[]) => void;
+    callback: (...args: any[]) => void;
 }
 ```

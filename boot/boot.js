@@ -450,17 +450,17 @@ $tw.utils.parseDataTiddler = function(type, text){
 	var parser = $tw.Wiki.dataTiddlerSerializerModules[type];
 	if(!parser) throw new Error("No data tiddler parser for type " + type);
 	return parser.parse(text);
-}
+};
 
 $tw.utils.stringifyDataTiddler = function(type, data){
 	if(!type) throw new Error("Called stringifyDataTiddler with no type");
 	var parser = $tw.Wiki.dataTiddlerSerializerModules[type];
 	if(!parser) throw new Error("No data tiddler parser for type " + type);
 	return parser.stringify(data);
-}
+};
 $tw.utils.isValidDataTiddlerType = function(type){
 	return !!type && $tw.Wiki.dataTiddlerSerializerModules[type] !== undefined;
-}
+};
 /*
 Resolves a source filepath delimited with `/` relative to a specified absolute root filepath.
 In relative paths, the special folder name `..` refers to immediate parent directory, and the
@@ -2796,9 +2796,9 @@ $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 };
 
 $tw.preloadHooks.forEach(function(hook){
-	if (typeof hook !== "object" || typeof hook.name !== "string" || typeof hook.callback !== "function") {
+	if(typeof hook !== "object" || typeof hook.name !== "string" || typeof hook.callback !== "function"){
 		console.warn("Invalid hook definition in $tw.preloadHooks", hook);
-	} else {
+	}else{
 		$tw.hooks.addHook(hook.name, hook.callback);
 	}
 });
