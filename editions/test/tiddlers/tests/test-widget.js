@@ -182,10 +182,10 @@ describe("Widget module", function() {
 			var wiki = new $tw.Wiki();
 			wiki.addTiddler({title: "TiddlerOne", text: `<$tiddler tiddler='TiddlerOne'><${tag}><$transclude />`});
 			var parseTreeNode = {type: "widget", children: [
-									{type: "transclude", attributes: {
-											"tiddler": {type: "string", value: "TiddlerOne"}
-										}}
-								]};
+				{type: "transclude", attributes: {
+						"tiddler": {type: "string", value: "TiddlerOne"}
+					}}
+			]};
 			// Construct the widget node
 			var widgetNode = createWidgetNode(parseTreeNode,wiki);
 			// Render the widget node to the DOM
@@ -195,7 +195,7 @@ describe("Widget module", function() {
 			// that means the widget containing the bad transclusion
 			// didn't figure out how to clean itself up, and it cloned a bunch.
 			var html = wrapper.innerHTML;
-			expect(html).toContain('Recursive transclusion error in transclude widget');
+			expect(html).toContain("Recursive transclusion error in transclude widget");
 			expect(html.length).toBeLessThan(256, "CONTENTS: " + html);
 		});
 	});
