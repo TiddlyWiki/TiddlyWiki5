@@ -1,3 +1,12 @@
+/*\
+title: $:/boot/bootnode.js
+type: application/javascript
+
+This file contains all boot material used exclusively by the server. None of this content
+gets packed into a tiddlywiki file or sent to a browser.
+
+\*/
+
 module.exports = function($tw) {
 
 var exports = Object.create(null);
