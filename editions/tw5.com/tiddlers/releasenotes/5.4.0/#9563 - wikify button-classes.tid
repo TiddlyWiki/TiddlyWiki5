@@ -1,0 +1,13 @@
+title: $:/changenotes/5.4.0/#9563
+created: 20260106174849522
+modified: 20260106174849522
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: usability
+description: The button-classes of Editor toolbar buttons are now wikified
+release: 5.4.0
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9563
+github-contributors: BurningTreeC
+type: text/vnd.tiddlywiki
+
+This pull request wikifies the `button-classes` field of Editor toolbar buttons, so that for example `filtered transclusions` can be used to add classes conditionally
