@@ -920,17 +920,16 @@ Split text into parts (lines or words) for diff operations
 Adapted from https://github.com/google/diff-match-patch/wiki/Line-or-Word-Diffs
 */
 exports.diffPartsToChars = function(text1,text2,mode) {
-	var lineArray = [];
-	var lineHash = {};
-	lineArray[0] = "";
+	const lineArray = [""];
+	const lineHash = Object.create(null);
 
 	function diff_linesToPartsMunge_(text,mode) {
-		var chars = "";
-		var lineStart = 0;
-		var lineEnd = -1;
-		var lineArrayLength = lineArray.length,
-			regexpResult;
-		var searchRegexp = /\W+/g;
+		let chars = "";
+		let lineStart = 0;
+		let lineEnd = -1;
+		let lineArrayLength = lineArray.length;
+		let regexpResult;
+		const searchRegexp = /\W+/g;
 		while(lineEnd < text.length - 1) {
 			if(mode === "words") {
 				regexpResult = searchRegexp.exec(text);
@@ -941,16 +940,16 @@ exports.diffPartsToChars = function(text1,text2,mode) {
 				lineEnd = --lineEnd;
 			} else {
 				lineEnd = text.indexOf("\n", lineStart);
-				if(lineEnd == -1) {
+				if(lineEnd === -1) {
 					lineEnd = text.length - 1;
 				}
 			}
-			var line = text.substring(lineStart, lineEnd + 1);
+			let line = text.substring(lineStart, lineEnd + 1);
 
-			if(lineHash.hasOwnProperty ? lineHash.hasOwnProperty(line) : (lineHash[line] !== undefined)) {
+			if(line in lineHash) {
 				chars += String.fromCharCode(lineHash[line]);
 			} else {
-				if(lineArrayLength == maxLines) {
+				if(lineArrayLength === maxLines) {
 					line = text.substring(lineStart);
 					lineEnd = text.length;
 				}
@@ -962,9 +961,9 @@ exports.diffPartsToChars = function(text1,text2,mode) {
 		}
 		return chars;
 	}
-	var maxLines = 40000;
-	var chars1 = diff_linesToPartsMunge_(text1,mode);
+	let maxLines = 40000;
+	const chars1 = diff_linesToPartsMunge_(text1,mode);
 	maxLines = 65535;
-	var chars2 = diff_linesToPartsMunge_(text2,mode);
-	return {chars1: chars1, chars2: chars2, lineArray: lineArray};
+	const chars2 = diff_linesToPartsMunge_(text2,mode);
+	return {chars1, chars2, lineArray};
 };
