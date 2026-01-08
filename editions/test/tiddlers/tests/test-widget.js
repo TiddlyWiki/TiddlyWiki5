@@ -177,8 +177,8 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span> <span class=\"tc-error\">Recursive transclusion error in transclude widget</span>");
 	});
 
-	$tw.utils.each(["div","$button","$checkbox"],function(tag) {
-		it(`${tag} widget cleans itself up if children rendering fails`, function() {
+	$tw.utils.each(["div","$button","$checkbox","$diff-text","$draggable","$droppable","dropzone","$eventcatcher","$keyboard","$link","$list filter=x variable=x","$radio","$reveal type=nomatch","$scrollable","$select","$view field=x"],function(tag) {
+		it(`${tag} cleans itself up if children rendering fails`, function() {
 			var wiki = new $tw.Wiki();
 			wiki.addTiddler({title: "TiddlerOne", text: `<$tiddler tiddler='TiddlerOne'><${tag}><$transclude />`});
 			var parseTreeNode = {type: "widget", children: [
