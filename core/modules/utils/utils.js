@@ -9,8 +9,6 @@ Various static utility functions.
 
 "use strict";
 
-var base64utf8 = require("$:/core/modules/utils/base64-utf8/base64-utf8.module.js");
-
 /*
 Display a message, in colour if we're on a terminal
 */
@@ -51,19 +49,6 @@ exports.warning = function(text) {
 };
 
 /*
-Log a table of name: value pairs
-*/
-exports.logTable = function(data) {
-	if(console.table) {
-		console.table(data);
-	} else {
-		$tw.utils.each(data,function(value,name) {
-			console.log(name + ": " + value);
-		});
-	}
-}
-
-/*
 Return the integer represented by the str (string).
 Return the dflt (default) parameter if str is not a base-10 number.
 */
@@ -79,43 +64,6 @@ exports.replaceString = function(text,search,replace) {
 	return text.replace(search,function() {
 		return replace;
 	});
-};
-
-/*
-Repeats a string
-*/
-exports.repeat = function(str,count) {
-	var result = "";
-	for(var t=0;t<count;t++) {
-		result += str;
-	}
-	return result;
-};
-
-/*
-Check if a string starts with another string
-*/
-exports.startsWith = function(str,search) {
-	return str.substring(0, search.length) === search;
-};
-
-/*
-Check if a string ends with another string
-*/
-exports.endsWith = function(str,search) {
-	return str.substring(str.length - search.length) === search;
-};
-
-/*
-Trim whitespace from the start and end of a string
-Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-javascript
-*/
-exports.trim = function(str) {
-	if(typeof str === "string") {
-		return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-	} else {
-		return str;
-	}
 };
 
 exports.trimPrefix = function(str,unwanted) {
@@ -200,18 +148,6 @@ Return the number of keys in an object
 */
 exports.count = function(object) {
 	return Object.keys(object || {}).length;
-};
-
-/*
-Determine whether an array-item is an object-property
-*/
-exports.hopArray = function(object,array) {
-	for(var i=0; i<array.length; i++) {
-		if($tw.utils.hop(object,array[i])) {
-			return true;
-		}
-	}
-	return false;
 };
 
 /*
@@ -828,38 +764,23 @@ exports.sha256 = function(str, options) {
 }
 
 /*
-Base64 utility functions that work in either browser or Node.js
-*/
-if(typeof window !== 'undefined') {
-	exports.btoa = function(binstr) { return window.btoa(binstr); }
-	exports.atob = function(b64) { return window.atob(b64); }
-} else {
-	exports.btoa = function(binstr) {
-		return Buffer.from(binstr, 'binary').toString('base64');
-	}
-	exports.atob = function(b64) {
-		return Buffer.from(b64, 'base64').toString('binary');
-	}
-}
-
-/*
 Decode a base64 string
 */
 exports.base64Decode = function(string64,binary,urlsafe) {
-	var encoded = urlsafe ? string64.replace(/_/g,'/').replace(/-/g,'+') : string64;
-	if(binary) return exports.atob(encoded)
-	else return base64utf8.base64.decode.call(base64utf8,encoded);
+	const encoded = urlsafe ? string64.replace(/_/g,"/").replace(/-/g,"+") : string64;
+	if(binary) return $tw.utils.atob(encoded);
+	else return $tw.utils.base64DecodeUtf8(encoded);
 };
 
 /*
 Encode a string to base64
 */
 exports.base64Encode = function(string64,binary,urlsafe) {
-	var encoded;
-	if(binary) encoded = exports.btoa(string64);
-	else encoded = base64utf8.base64.encode.call(base64utf8,string64);
+	let encoded;
+	if(binary) encoded = $tw.utils.btoa(string64);
+	else encoded = $tw.utils.base64EncodeUtf8(string64);
 	if(urlsafe) {
-		encoded = encoded.replace(/\+/g,'-').replace(/\//g,'_');
+		encoded = encoded.replace(/\+/g,"-").replace(/\//g,"_");
 	}
 	return encoded;
 };
@@ -915,44 +836,6 @@ exports.makeDataUri = function(text,type,_canonical_uri) {
 };
 
 /*
-Useful for finding out the fully escaped CSS selector equivalent to a given tag. For example:
-
-$tw.utils.tagToCssSelector("$:/tags/Stylesheet") --> tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet
-*/
-exports.tagToCssSelector = function(tagName) {
-	return "tc-tagged-" + encodeURIComponent(tagName).replace(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^`{\|}~,]/mg,function(c) {
-		return "\\" + c;
-	});
-};
-
-/*
-IE does not have sign function
-*/
-exports.sign = Math.sign || function(x) {
-	x = +x; // convert to a number
-	if(x === 0 || isNaN(x)) {
-		return x;
-	}
-	return x > 0 ? 1 : -1;
-};
-
-/*
-IE does not have an endsWith function
-*/
-exports.strEndsWith = function(str,ending,position) {
-	if(str.endsWith) {
-		return str.endsWith(ending,position);
-	} else {
-		if(typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
-			position = str.length;
-		}
-		position -= ending.length;
-		var lastIndex = str.indexOf(ending, position);
-		return lastIndex !== -1 && lastIndex === position;
-	}
-};
-
-/*
 Return system information useful for debugging
 */
 exports.getSystemInfo = function(str,ending,position) {
@@ -976,10 +859,6 @@ exports.parseNumber = function(str) {
 
 exports.parseInt = function(str) {
 	return parseInt(str,10) || 0;
-};
-
-exports.stringifyNumber = function(num) {
-	return num + "";
 };
 
 exports.makeCompareFunction = function(type,options) {
@@ -1023,7 +902,7 @@ exports.makeCompareFunction = function(type,options) {
 				return compare(dateA,dateB);
 			},
 			"version": function(a,b) {
-				return $tw.utils.compareVersions(a,b);
+				return compare($tw.utils.compareVersions(a,b),0);
 			},
 			"alphanumeric": function(a,b) {
 				if(!isCaseSensitive) {

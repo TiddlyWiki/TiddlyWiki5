@@ -1,25 +1,35 @@
 title: $:/tw5.com/releases/info/
 
-category-order: translation  plugin usability palette hackability widget filters performance nodejs internal developer 
+category-order: translation  plugin usability theme hackability widget filters performance nodejs internal developer 
 categories/internal/caption: Internal
 categories/translation/caption: Translation
 categories/plugin/caption: Plugin
 categories/widget/caption: Widget
 categories/usability/caption: Usability
-categories/palette/caption: Palette
+categories/theme/caption: Theme
 categories/hackability/caption: Hackability
 categories/nodejs/caption: Node.js
 categories/performance/caption: Performance
 categories/developer/caption: Developer
-change-types/bugfix/caption: BUGFIX
+categories/filters/caption: Filters
+change-types/bugfix/caption: Bugfix
 change-types/bugfix/colour: #ffe246
-change-types/feature/caption: FEATURE
+change-types/feature/caption: Feature
 change-types/feature/colour: #91ba66
-change-types/enhancement/caption: ENHANCEMENT
+change-types/enhancement/caption: Enhancement
 change-types/enhancement/colour: #cba5ff
-change-types/deprecation/caption: DEPRECATION
+change-types/deprecation/caption: Deprecation
 change-types/deprecation/colour: #ff9d6c
-change-types/security/caption: SECURITY
+change-types/security/caption: Security
 change-types/security/colour: #ff6666
-change-types/pluginisation/caption: PLUGINISATION
-change-types/pluginisation/colour: #aaaaaa
+change-types/performance/caption: Performance
+change-types/performance/colour: #c2c7ff
+impact-types/deprecation/caption: Deprecation
+impact-types/deprecation/colour/foreground: #882222
+impact-types/deprecation/colour/background: #ffdddd
+impact-types/compatibility-break/caption: Compatibility Break
+impact-types/compatibility-break/colour/foreground: #228822
+impact-types/compatibility-break/colour/background: #ddffdd
+impact-types/pluginisation/caption: Pluginisation
+impact-types/pluginisation/colour/foreground: #222288
+impact-types/pluginisation/colour/background: #ddddff

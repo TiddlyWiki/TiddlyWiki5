@@ -3,6 +3,7 @@
 		{
 			"path": "../../../../community",
 			"isTiddlerFile": true,
+			"isEditableFile": true,
 			"filesRegExp": "^(?!readme\\.md$)(?!\\.DS_Store$).+",
 			"searchSubdirectories": true
 		}

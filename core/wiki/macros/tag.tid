@@ -3,7 +3,6 @@ tags: $:/tags/Macro
 
 \define tag-pill-styles()
 background-color:$(backgroundColor)$;
-fill:$(foregroundColor)$;
 color:$(foregroundColor)$;
 \end
 

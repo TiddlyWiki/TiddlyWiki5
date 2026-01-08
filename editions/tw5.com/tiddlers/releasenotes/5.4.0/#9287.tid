@@ -4,7 +4,7 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: internal
-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9287
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9287
 github-contributors: Jermolene
 
 Doing so enables us to filter and group changes. For example, we could show all the breaking changes between two releases.
