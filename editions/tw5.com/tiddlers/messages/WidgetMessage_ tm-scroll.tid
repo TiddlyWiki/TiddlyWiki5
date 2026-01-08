@@ -1,8 +1,8 @@
-caption: tm-scroll
-created: 20160425000906330
-modified: 20201014152456174
-tags: Messages
+﻿created: 20160425000906330
 title: WidgetMessage: tm-scroll
+caption: tm-scroll
+modified: 20260106171726826
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The `tm-scroll` message causes the surrounding scrollable container to scroll to the specified DOM node into view. The `tm-scroll` is handled in various places in the core itself, but can also be handled by a [[ScrollableWidget]].

@@ -1,8 +1,8 @@
-caption: tm-edit-text-operation
-created: 20160424211339792
-modified: 20240909083525060
-tags: Messages
+﻿created: 20160424211339792
 title: WidgetMessage: tm-edit-text-operation
+caption: tm-edit-text-operation
+modified: 20260106171726825
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 \define exciseDescription()

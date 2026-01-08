@@ -1,8 +1,8 @@
-caption: tm-edit-bitmap-operation
-created: 20160424204236050
-modified: 20230803045807664
-tags: Messages
+﻿created: 20160424204236050
 title: WidgetMessage: tm-edit-bitmap-operation
+caption: tm-edit-bitmap-operation
+modified: 20260106171726825
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 \define resizeDescription()

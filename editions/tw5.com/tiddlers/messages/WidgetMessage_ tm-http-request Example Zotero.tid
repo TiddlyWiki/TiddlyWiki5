@@ -1,5 +1,7 @@
+﻿created: 20260106171726825
 title: WidgetMessage: tm-http-request Example - Zotero
-tags: $:/tags/Macro $:/tags/Global
+tags: $:/tags/Global [[WidgetMessage: tm-http-request]]
+modified: 20260106172041683
 
 \procedure select-zotero-group()
 Specify the Zotero group ID to import

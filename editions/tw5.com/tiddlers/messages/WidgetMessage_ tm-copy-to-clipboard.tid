@@ -1,8 +1,8 @@
-caption: tm-copy-to-clipboard
-created: 20171215150056004
-modified: 20240523174013095
-tags: Messages
+﻿created: 20171215150056004
 title: WidgetMessage: tm-copy-to-clipboard
+caption: tm-copy-to-clipboard
+modified: 20260106171726825
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The "copy to clipboard" message attempts to copy the specified text to the clipboard. If it succeeds, the tiddler [[$:/language/Notifications/CopiedToClipboard/Succeeded]] is displayed as a notification. If the browser doesn't permit the operation, the tiddler [[$:/language/Notifications/CopiedToClipboard/Failed]] is displayed instead.

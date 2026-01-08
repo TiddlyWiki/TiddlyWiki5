@@ -1,8 +1,8 @@
-caption: tm-fold-other-tiddlers
-created: 20160424232355215
-modified: 20191028113932268
-tags: Messages
+﻿created: 20160424232355215
 title: WidgetMessage: tm-fold-other-tiddlers
+caption: tm-fold-other-tiddlers
+modified: 20260106171726825
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The `tm-fold-other-tiddlers` message folds all tiddlers in the current story list, except the one specified in the `param` parameter. It does so by setting the text of a state tiddler to either "<<.value "show">>" or "<<.value "hide">>", according to the fold state.

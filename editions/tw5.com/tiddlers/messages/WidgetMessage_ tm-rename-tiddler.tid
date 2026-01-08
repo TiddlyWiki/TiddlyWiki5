@@ -1,8 +1,8 @@
-caption: tm-rename-tiddler
-created: 20190909133618113
-modified: 20220219093748993
-tags: Messages navigator-message
+﻿created: 20190909133618113
 title: WidgetMessage: tm-rename-tiddler
+caption: tm-rename-tiddler
+modified: 20260106172358797
+tags: [[NavigatorWidget Message]] [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The `tm-rename-tiddler` message renames a tiddler by deleting it and recreating it with a new title. The rename tiddler message requires the following properties on the `event` object:

@@ -1,8 +1,8 @@
-caption: tm-load-plugin-from-library
-created: 20160424233627001
-modified: 20160424235543975
-tags: Messages
+﻿created: 20160424233627001
 title: WidgetMessage: tm-load-plugin-from-library
+caption: tm-load-plugin-from-library
+modified: 20260106171726825
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The `tm-load-plugin-from-library` message load the specified tiddler or plugin from the specified plugin library.

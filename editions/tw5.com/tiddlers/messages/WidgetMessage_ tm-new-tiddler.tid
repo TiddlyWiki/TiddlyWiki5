@@ -1,8 +1,8 @@
-caption: tm-new-tiddler
-created: 20140226194405353
-modified: 20230723215831560
-tags: Messages navigator-message
+﻿created: 20140226194405353
 title: WidgetMessage: tm-new-tiddler
+caption: tm-new-tiddler
+modified: 20260106172358797
+tags: [[NavigatorWidget Message]] [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The new tiddler message creates a new draft tiddler and adds it to the current story. It requires the following properties on the `event` object:

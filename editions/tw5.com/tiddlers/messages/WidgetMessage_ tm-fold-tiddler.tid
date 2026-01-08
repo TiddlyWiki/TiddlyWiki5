@@ -1,8 +1,8 @@
-caption: tm-fold-tiddler
-created: 20160424232749223
-modified: 20191028113537119
-tags: Messages
+﻿created: 20160424232749223
 title: WidgetMessage: tm-fold-tiddler
+caption: tm-fold-tiddler
+modified: 20260106171726825
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The `tm-fold-tiddler` message toggles the value of a state tiddler. It does so by setting the text of a state tiddler to either "<<.value "show">>" or "<<.value "hide">>", according to the fold state.

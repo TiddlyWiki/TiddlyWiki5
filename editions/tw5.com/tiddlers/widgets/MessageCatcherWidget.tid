@@ -1,46 +1,116 @@
-created: 20210309133636211
-modified: 20211222153049771
-tags: Widgets MessageHandlerWidgets TriggeringWidgets
+﻿created: 20210309133636211
 title: MessageCatcherWidget
+modified: 20260108164954923
+tags: Widgets MessageHandlerWidgets TriggeringWidgets
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
 <<.from-version "5.2.0">>
 
-The message catcher widget traps [[messages|Messages]] dispatched within its child content, and allows invoking a series of ActionWidgets in response to those messages.
+The <<.wid messagecatcher>> widget traps [[messages|Messages]] dispatched within its content and allows invoking ActionWidgets in response to those messages.
+
+<pre><code>&lt;$messagecatcher $<i>message</i>=<i>actions</i> &gt;
+    <em>content</em>
+&lt;/$messagecatcher&gt;
+</code></pre>
+
 
 ! Content and Attributes
 
-The content of the `<$messagecatcher>` widget is displayed normally.
+The content of the <<.wid messagecatcher>> widget is displayed normally.
 
 |!Attribute |!Description |
-|//{any attributes starting with $}// |Each attribute name (excluding the $) specifies the name of a message, and the value specifies the action string to be invoked |
-|type |Name of the message be trapped, for example "tm-scroll" or "tm-navigate". The `type` and `actions` attributes can be useful when the type of event needs to be specified via a variable or text reference |
-|actions |Action string to be invoked when a matching message is trapped. Must be used in conjunction with the `type` attribute |
+|any attributes starting with <<.attr $>> |Each attribute name (excluding the <<.attr $>>) specifies the name of a message to be trapped and the value specifies the actions to be invoked |
+|<<.attr type>> |Name of the message to be trapped |
+|<<.attr actions>> |Actions to be invoked when a message matching <<.attr type>> is trapped |
+
+<<.tip """The <<.attr type>> and <<.attr actions>> attributes can be useful when the type of event needs to be specified via a variable or text reference""">>
+
+<<.tip """Multiple <<.attr $<i>message</i> >> attributes can be used in a single <<.wid messagecatcher>> widget to trap more than one type of message and assign different actions to each.""">>
 
 ! Variables
 
 The message catcher widget sets the following variables within each action string:
 
-|!Variables |!Description |
-|`event-*` |All string-based properties of the `event` object, with the names prefixed with `event-` |
-|`list-event` |A list of the names of each the string-based properties of the `event` object (the names are not prefixed with `event-`) |
-|`event-paramObject-*` |All string-based properties of the `event.paramObject` object, with the names prefixed with `event-paramObject-` |
-|`list-event-paramObject` |A list of the names of each the string-based properties of the `event.paramObject` object (the names are not prefixed with `event-paramObject-`) |
-|`modifier` |For messages that originated with browser events, the modifier keys that were pressed when the event was fired. The possible modifiers are ''normal'' (no modifiers), ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' and ''ctrl-alt-shift'' |
+|!Variable |!Description |
+|<<.var message-*>> |All string, number and boolean properties of the <<.var message>> object, where property names are prefixed with `message-` or `event-`.<br>Numbers and boolean values are converted to strings. |
+|<<.var event-*>><br><<.deprecated-since "5.4.0">> |~|
+|<<.var list-message>> |A list of the names of the string, number and boolean properties of the <<.var message>> object (names in this list are not prefixed with `message-` or `event-`) |
+|<<.var list-event>><br><<.deprecated-since "5.4.0">> |~|
+|<<.var message-paramObject-*>> |All string, number and boolean properties of the <<.var message.paramObject>> object, where property names are prefixed with `message-paramObject-` or `event-paramObject`.<br>Numbers and boolean values are converted to strings. |
+|<<.var event-paramObject-*>><br><<.deprecated-since "5.4.0">> |~|
+|<<.var list-message-paramObject>> |A list of the names of the string, number and boolean properties of the <<.var message.paramObject>> object (names in this list are not prefixed with `message-paramObject-` or `event-paramObject-`) |
+|<<.var list-event-paramObject>><br><<.deprecated-since "5.4.0">> |~|
+|<<.var json-message>> |A JSON string representation of the <<.var message>> object, conserving number and boolean typing, typically used in conjunction with the ActionSendMessageWidget or [[JSON Operators]]. |
+|<<.var modifier>> |For messages that originated with browser events, the modifier keys that were pressed when the event was fired. The possible modifiers are <<.value normal>> (no modifiers), <<.value ctrl>>, <<.value ctrl-alt>>, <<.value ctrl-shift>>, <<.value alt>>, <<.value alt-shift>>, <<.value shift>> and <<.value ctrl-alt-shift>> |
 
-! Example
+<<.tip """The <<.var list->> variables can be used to iterate over all corresponding variables, e.g. `<$list filter="[enlist<list-message>addprefix[message-]]" variable="name">`  """>>
 
-<$macrocall $name="wikitext-example-without-html" src="""
-\define actions()
-<$action-log/>
+!! The <<.var message>> Object
+
+The message object contains all parameters that are part of the message, which can include custom parameters as well as automatically generated ones. The typical structure of the object as generated by the ActionSendMessageWidget is
+
+<pre><code>{
+    type: "<em>$message</em>",
+	tiddlerTitle: <em>currentTiddler</em>,
+	navigateFromTitle: <em>storyTiddler</em>,
+	paramObject: {
+		<em>$name</em>: "<em>$value</em>"
+	}
+}
+</code></pre>
+
+[[Core Messages]] may have a sub- and/or superset of the shown properties.
+
+The <<.wid messagecatcher>> widget allows access to these properties.
+
+! Examples
+
+!! Log-and-forward
+
+Use a <<.wid messagecatcher>> widget to intercept navigation messages and log their <<.param navigateTo>> parameter to collect a permanent navigation record e.g. for a most-clicked items analysis (typically used within the ~PageTemplate):
+
+<pre><code>\procedure log-and-forward()
+    &lt;$action-setfield $tiddler="~$:/NavigationLog" text=&#123;&#123;&#123; [{~$:/NavigationLog}] [&lt;message-navigateTo&gt;] [charcode[13],[10]] +[join[]] &#125;&#125;&#125; /&gt;
+    &lt;$action-sendmessage $messageJSON=<<json-message>> /&gt;
 \end
 
-<$messagecatcher $tm-navigate=<<actions>>>
+&lt;$messagecatcher $tm-navigate="&lt;&lt;log-and-forward&gt;&gt;" &gt;
+    <em>Page Content</em>
+&lt;/$messagecatcher&gt;
+</code></pre>
 
-Click on [[this link]] to fire an action. See the browser JavaScript console for the output
+<<.note """The <<.var actions>> procedure uses the <<.wlink ActionSendMessageWidget>> widget with the <<.var json-message>> variable to pass the message up the widget tree to the closest NavigatorWidget.""">>
 
+!! Send Payload Data
+
+Use a custom message type to send payload data to the invoked actions:
+
+<$macrocall $name="wikitext-example-without-html" src="""
+\procedure actions()
+    <$action-setfield $tiddler="$:/temp/Message-Parameters" text={{{ [<json-message>format:json[4]] }}} />
+    <$action-navigate $to="$:/temp/Message-Parameters" />
+\end
+
+<$messagecatcher $custom-message="<<actions>>" >
+    <$button actions="<$action-sendmessage $message='custom-message' payload='Test' />" >Click me</$button>
 </$messagecatcher>
 """/>
 
+!! Inspect Core Message Parameters
+
+Examine all message parameters that the ButtonWidget attaches to its [[tm-navigate|WidgetMessage: tm-navigate]] message:
+
+<$macrocall $name='wikitext-example-without-html'
+src="""\procedure actions()
+    <$action-setfield $tiddler="$:/temp/Message-Parameters" text={{{ [<json-message>format:json[4]] }}} />
+    <$action-sendmessage $messageJSON=<<json-message>> />
+\end
+
+<$messagecatcher $tm-navigate="<<actions>>" >
+    <$button to="$:/temp/Message-Parameters">Click me</$button>
+</$messagecatcher>
+""" />
+
+<<.note """The <<.var navigateSuppressNavigation>> has the boolean (not string) value <<.value false>>.""">>

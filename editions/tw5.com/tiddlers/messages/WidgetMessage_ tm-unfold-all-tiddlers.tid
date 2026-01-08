@@ -1,8 +1,8 @@
-caption: tm-unfold-all-tiddlers
-created: 20160424233133261
-modified: 20191028113810219
-tags: Messages
+﻿created: 20160424233133261
 title: WidgetMessage: tm-unfold-all-tiddlers
+caption: tm-unfold-all-tiddlers
+modified: 20260106171726826
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The `tm-unfold-all-tiddlers` message unfolds all tiddlers in the current story list. It does so by setting the text of all state tiddlers to: "<<.value "show">>".

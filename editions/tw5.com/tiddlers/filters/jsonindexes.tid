@@ -1,12 +1,12 @@
-created: 20220611104737314
-modified: 20220611104737314
-tags: [[Filter Operators]] [[JSON Operators]]
+﻿created: 20220611104737314
 title: jsonindexes Operator
+modified: 20260107200503680
+tags: [[Filter Operators]] [[JSON Operators]]
 caption: jsonindexes
-op-purpose: retrieve the value of a property from JSON strings
+op-purpose: retrieve the the property names or index names from JSON strings
 op-input: a selection of JSON strings
-op-parameter: one or more indexes of the property to retrieve
-op-output: the values of each of the retrieved properties
+op-parameter: one or more indexes identifying a JSON object or array
+op-output: the names of properties of JSON objects or the names of indexes of JSON arrays
 
 <<.from-version "5.2.4">> See [[JSON in TiddlyWiki]] for background.
 

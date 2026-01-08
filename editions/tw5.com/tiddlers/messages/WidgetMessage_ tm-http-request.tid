@@ -1,8 +1,8 @@
-caption: tm-http-request
-created: 20230429161453032
-modified: 20240614204704401
-tags: Messages
+﻿created: 20230429161453032
 title: WidgetMessage: tm-http-request
+caption: tm-http-request
+modified: 20260106171726825
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The ''tm-http-request'' message is used to make an HTTP request to a server.

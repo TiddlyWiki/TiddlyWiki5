@@ -1,8 +1,8 @@
-caption: tm-fold-all-tiddlers
-created: 20160424230908388
-modified: 20191028113838596
-tags: Messages
+﻿created: 20160424230908388
 title: WidgetMessage: tm-fold-all-tiddlers
+caption: tm-fold-all-tiddlers
+modified: 20260106171726825
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The `tm-fold-all-tiddlers` message folds all tiddlers in the current story list.

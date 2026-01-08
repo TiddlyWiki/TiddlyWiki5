@@ -1,8 +1,8 @@
+﻿title: NavigatorWidget
 caption: navigator
 created: 20131024141900000
-modified: 20211127023932158
+modified: 20260106172358797
 tags: Widgets MessageHandlerWidgets
-title: NavigatorWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
@@ -25,7 +25,7 @@ The navigator widget displays any contained content, and responds to Messages di
 The following [[Messages]] are handled by the navigator widget:
 
 <ul>
-<$list filter="[tag[navigator-message]]">
+<$list filter="[tag[NavigatorWidget Message]]">
 <li>
 <$link/>
 </li>

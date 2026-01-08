@@ -1,10 +1,8 @@
-created: 20240421144407522
-modified: 20240422091247905
-tags: Reference
+﻿created: 20240421144407522
 title: Core Messages
+modified: 20260106172620847
+tags: Reference Messages
 
-{{||Messages}}
+The following [[messages|Messages]] are implemented by the core:
 
-The following widget messages are implemented by the core:
-
-<<list-links filter:"[tag[Messages]]" class:"multi-columns">>
+<<list-links filter:"[tag[Core Messages]]" class:"multi-columns">>
