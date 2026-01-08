@@ -920,15 +920,15 @@ Split text into parts (lines or words) for diff operations
 Adapted from https://github.com/google/diff-match-patch/wiki/Line-or-Word-Diffs
 */
 exports.diffPartsToChars = function(text1,text2,mode) {
-	const lineArray = [""];
-	const lineHash = Object.create(null);
+	const lineArray = [""],
+		lineHash = Object.create(null);
 
 	function diff_linesToPartsMunge_(text,mode) {
-		let chars = "";
-		let lineStart = 0;
-		let lineEnd = -1;
-		let lineArrayLength = lineArray.length;
-		let regexpResult;
+		let chars = "",
+			lineStart = 0,
+			lineEnd = -1,
+			lineArrayLength = lineArray.length,
+			regexpResult;
 		const searchRegexp = /\W+/g;
 		while(lineEnd < text.length - 1) {
 			if(mode === "words") {
