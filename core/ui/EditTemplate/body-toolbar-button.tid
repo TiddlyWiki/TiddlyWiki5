@@ -44,7 +44,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 
 ><$set name=disabled filter={{!!condition-disabled}}><$button
 
-  class={{{ [[tc-btn-invisible ]addsuffix<button-classes>] }}}
+  class={{{ [[tc-btn-invisible ]addsuffix<button-classes>] :and[unique[]] }}}
   tooltip=<<tooltip-text>>
   actions={{!!actions}}
   disabled=<<disabled>>
@@ -71,7 +71,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 ><$set name=disabled filter={{!!condition-disabled}}><$button
 
   popup=<<dropdown-state>>
-  class={{{ [[tc-popup-keep tc-btn-invisible ]addsuffix<button-classes>] }}}
+  class={{{ [[tc-popup-keep tc-btn-invisible ]addsuffix<button-classes>] :and[unique[]] }}}
   selectedClass="tc-selected"
   tooltip=<<tooltip-text>>
   actions={{!!actions}}
