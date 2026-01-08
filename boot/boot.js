@@ -896,7 +896,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				moduleInfo.definition(moduleInfo,moduleInfo.exports,sandbox.require);
 			} else if(typeof moduleInfo.definition === "string") { // String
 				moduleInfo.exports = _exports;
-				$tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
+				$tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.filepath || tiddler.fields.title);
 				if(sandbox.module.exports) {
 					moduleInfo.exports = sandbox.module.exports; //more codemirror workaround
 				}
@@ -2121,6 +2121,9 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			for(var t=0; t<tiddlers.length; t++) {
 				var tiddler= tiddlers[t];
 				if(tiddler.title) {
+					if(typeof process !== "undefined" && process.env.NODE_DEV_PATH_STACKTRACE && tiddlers.length === 1) {
+						tiddler.filepath = pluginFiles[f].filepath;
+					}
 					pluginInfo.tiddlers[tiddler.title] = tiddler;
 				}
 			}
