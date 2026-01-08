@@ -2,6 +2,7 @@
 	"description": "Demo of the CodeMirror 6 plugin",
 	"plugins": [
 		"codemirror-6/editor",
+		"codemirror-6/edit-text",
 		"codemirror-6/auto-close-tags",
 		"codemirror-6/click-navigate",
 		"codemirror-6/color-picker",
