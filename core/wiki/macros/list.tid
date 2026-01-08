@@ -92,7 +92,7 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"",displayField:"")
+\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"",displayField:"caption")
 \whitespace trim
 <span class="tc-tagged-draggable-list">
 	<$set name="tag" value=<<__tag__>>>
