@@ -17,7 +17,6 @@ exports.synchronous = true;
 
 // Default story and history lists
 var PAGE_TITLE_TITLE = "$:/core/wiki/title";
-var PAGE_STYLESHEET_TITLE = "$:/core/ui/PageStylesheet";
 var ROOT_STYLESHEET_TITLE = "$:/core/ui/RootStylesheet";
 var PAGE_TEMPLATE_TITLE = "$:/core/ui/RootTemplate";
 
