@@ -103,7 +103,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 <$set
 
   name="buttonClasses"
-  filter={{!!button-classes}}
+  value={{{ [subfilter{!!button-classes}] }}}
 
 ><<toolbar-button>></$set>
 \end
