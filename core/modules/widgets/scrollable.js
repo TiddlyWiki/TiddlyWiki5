@@ -168,8 +168,8 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 	this.outerDomNode.className = this["class"] || "";
 	// Insert element
 	parent.insertBefore(this.outerDomNode,nextSibling);
-	this.renderChildren(this.innerDomNode,null);
 	this.domNodes.push(this.outerDomNode);
+	this.renderChildren(this.innerDomNode,null);
 	// If the scroll position is bound to a tiddler
 	if(this.scrollableBind) {
 		// After a delay for rendering, scroll to the bound position
