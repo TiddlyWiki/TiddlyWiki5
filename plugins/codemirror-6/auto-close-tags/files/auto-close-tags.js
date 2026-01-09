@@ -6,256 +6,254 @@ module-type: codemirror6-plugin
 Auto-close tags plugin - automatically inserts closing tags for HTML and TiddlyWiki widgets
 
 \*/
-(function() {
-	"use strict";
+"use strict";
 
-	if(!$tw.browser) return;
+if(!$tw.browser) return;
 
-	// HTML void elements that should not be auto-closed
-	var voidElements = new Set([
-		"area", "base", "br", "col", "embed", "hr", "img", "input",
-		"link", "meta", "param", "source", "track", "wbr"
-	]);
+// HTML void elements that should not be auto-closed
+var voidElements = new Set([
+	"area", "base", "br", "col", "embed", "hr", "img", "input",
+	"link", "meta", "param", "source", "track", "wbr"
+]);
 
-	// TiddlyWiki self-closing widgets (no content allowed)
-	var selfClosingWidgets = new Set([
-		"$action-confirm", "$action-createtiddler", "$action-deletetiddler",
-		"$action-deletefield", "$action-listops", "$action-log",
-		"$action-navigate", "$action-popup", "$action-sendmessage",
-		"$action-setfield", "$action-setmultiplefields"
-	]);
+// TiddlyWiki self-closing widgets (no content allowed)
+var selfClosingWidgets = new Set([
+	"$action-confirm", "$action-createtiddler", "$action-deletetiddler",
+	"$action-deletefield", "$action-listops", "$action-log",
+	"$action-navigate", "$action-popup", "$action-sendmessage",
+	"$action-setfield", "$action-setmultiplefields"
+]);
 
-	exports.plugin = {
-		name: "auto-close-tags",
-		description: "Auto-close HTML and TiddlyWiki widget tags",
-		priority: 650,
+exports.plugin = {
+	name: "auto-close-tags",
+	description: "Auto-close HTML and TiddlyWiki widget tags",
+	priority: 650,
 
-		// Load if autoCloseTags option is enabled
-		condition: function(context) {
-			var wiki = context.options && context.options.widget && context.options.widget.wiki;
-			var enabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/autoCloseTags") !== "no";
-			return enabled;
-		},
+	// Load if autoCloseTags option is enabled
+	condition: function(context) {
+		var wiki = context.options && context.options.widget && context.options.widget.wiki;
+		var enabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/autoCloseTags") !== "no";
+		return enabled;
+	},
 
-		init: function(cm6Core) {
-			this._core = cm6Core;
-			this._autoCloseTagsHandlers = null;
-		},
+	init: function(cm6Core) {
+		this._core = cm6Core;
+		this._autoCloseTagsHandlers = null;
+	},
 
-		registerCompartments: function() {
-			var core = this._core;
-			var Compartment = core.state.Compartment;
-			return {
-				autoCloseTags: new Compartment()
-			};
-		},
+	registerCompartments: function() {
+		var core = this._core;
+		var Compartment = core.state.Compartment;
+		return {
+			autoCloseTags: new Compartment()
+		};
+	},
 
-		// Lazily create and cache the auto-close handlers
-		_getOrCreateAutoCloseHandlers: function() {
-			if(this._autoCloseTagsHandlers) return this._autoCloseTagsHandlers;
+	// Lazily create and cache the auto-close handlers
+	_getOrCreateAutoCloseHandlers: function() {
+		if(this._autoCloseTagsHandlers) return this._autoCloseTagsHandlers;
 
-			var core = this._core;
-			var EditorView = core.view.EditorView;
-			var EditorSelection = core.state.EditorSelection;
-			var syntaxTree = core.language.syntaxTree;
-			var handlers = [];
+		var core = this._core;
+		var EditorView = core.view.EditorView;
+		var EditorSelection = core.state.EditorSelection;
+		var syntaxTree = core.language.syntaxTree;
+		var handlers = [];
 
-			// Input handler for auto-closing tags
-			var autoCloseTagsHandler = EditorView.inputHandler.of(function(view, from, to, text, _insert) {
-				// Only handle ">" character
-				if(text !== ">") return false;
+		// Input handler for auto-closing tags
+		var autoCloseTagsHandler = EditorView.inputHandler.of(function(view, from, to, text, _insert) {
+			// Only handle ">" character
+			if(text !== ">") return false;
 
-				var state = view.state;
-				var doc = state.doc;
-				var pos = from;
+			var state = view.state;
+			var doc = state.doc;
+			var pos = from;
 
-				// Check what's before the cursor
-				var lineStart = doc.lineAt(pos).from;
-				var textBefore = doc.sliceString(lineStart, pos);
+			// Check what's before the cursor
+			var lineStart = doc.lineAt(pos).from;
+			var textBefore = doc.sliceString(lineStart, pos);
 
-				// Check if we're completing a self-closing tag (/>)
-				if(textBefore.endsWith("/")) {
-					return false; // Let default handling occur
-				}
+			// Check if we're completing a self-closing tag (/>)
+			if(textBefore.endsWith("/")) {
+				return false; // Let default handling occur
+			}
 
-				// Check if we're inside a macro call (<<macro ...>)
-				// Don't auto-close if this > is closing a macro
-				var lastMacroOpen = textBefore.lastIndexOf("<<");
-				var lastMacroClose = textBefore.lastIndexOf(">>");
-				if(lastMacroOpen > -1 && lastMacroOpen > lastMacroClose) {
-					// We're inside an unclosed macro - don't auto-close
-					return false;
-				}
+			// Check if we're inside a macro call (<<macro ...>)
+			// Don't auto-close if this > is closing a macro
+			var lastMacroOpen = textBefore.lastIndexOf("<<");
+			var lastMacroClose = textBefore.lastIndexOf(">>");
+			if(lastMacroOpen > -1 && lastMacroOpen > lastMacroClose) {
+				// We're inside an unclosed macro - don't auto-close
+				return false;
+			}
 
-				// Look for an opening tag pattern
-				// Match: <tagname or <$widgetname with optional attributes
-				var tagMatch = textBefore.match(/<(\$?[a-zA-Z][a-zA-Z0-9\-\.]*)(?:\s[^>]*)?$/);
-				if(!tagMatch) return false;
+			// Look for an opening tag pattern
+			// Match: <tagname or <$widgetname with optional attributes
+			var tagMatch = textBefore.match(/<(\$?[a-zA-Z][a-zA-Z0-9\-\.]*)(?:\s[^>]*)?$/);
+			if(!tagMatch) return false;
 
-				var tagName = tagMatch[1];
-				var tagNameLower = tagName.toLowerCase();
+			var tagName = tagMatch[1];
+			var tagNameLower = tagName.toLowerCase();
 
-				// Don't auto-close void HTML elements
-				if(voidElements.has(tagNameLower)) {
-					return false;
-				}
+			// Don't auto-close void HTML elements
+			if(voidElements.has(tagNameLower)) {
+				return false;
+			}
 
-				// Don't auto-close known self-closing widgets
-				if(selfClosingWidgets.has(tagNameLower)) {
-					return false;
-				}
+			// Don't auto-close known self-closing widgets
+			if(selfClosingWidgets.has(tagNameLower)) {
+				return false;
+			}
 
-				// Check using syntax tree if available
-				var tree = syntaxTree(state);
-				if(tree) {
-					var node = tree.resolveInner(pos, -1);
-					// Walk up the tree to check context
-					while(node) {
-						var nodeName = node.name;
-						// If we're in an attribute value, don't auto-close
-						if(nodeName === "AttributeValue" || nodeName === "AttributeString") {
-							return false;
-						}
-						// If we're inside a filter expression, don't auto-close
-						// In filters, <variable> is a variable reference, not a tag
-						if(nodeName === "FilterExpression" || nodeName === "FilterRun" ||
-							nodeName === "FilteredTransclusion" || nodeName === "FilteredTransclusionBlock" ||
-							nodeName === "AttributeFiltered") {
-							return false;
-						}
-						node = node.parent;
-					}
-				}
-
-				// Insert > and the closing tag
-				var closingTag = "</" + tagName + ">";
-				var changes = {
-					from: from,
-					to: to,
-					insert: ">" + closingTag
-				};
-
-				view.dispatch({
-					changes: changes,
-					selection: EditorSelection.cursor(from + 1), // Position after >
-					userEvent: "input.complete"
-				});
-
-				return true;
-			});
-
-			handlers.push(autoCloseTagsHandler);
-
-			// Handler for completing closing tags when typing </
-			var closeTagHandler = EditorView.inputHandler.of(function(view, from, to, text, _insert) {
-				// Only handle "/" after "<"
-				if(text !== "/") return false;
-
-				var state = view.state;
-				var doc = state.doc;
-
-				// Check if previous char is "<"
-				if(from === 0 || doc.sliceString(from - 1, from) !== "<") {
-					return false;
-				}
-
-				// Find the nearest unclosed opening tag
-				var tree = syntaxTree(state);
-				if(!tree) return false;
-
-				// Walk up the tree to find an unclosed element
-				var node = tree.resolveInner(from, -1);
-				var unclosedTag = null;
-
-				// Look for parent Element nodes
+			// Check using syntax tree if available
+			var tree = syntaxTree(state);
+			if(tree) {
+				var node = tree.resolveInner(pos, -1);
+				// Walk up the tree to check context
 				while(node) {
-					if(node.name === "Element" || node.name === "InlineWidget" ||
-						node.name === "BlockWidget" || node.name === "HTMLTag" ||
-						node.name === "HTMLBlock") {
-						// Check if this element has a closing tag
-						var lastChild = node.lastChild;
-						if(lastChild && (lastChild.name === "CloseTag" ||
-								lastChild.name === "WidgetEnd" || lastChild.name === "HTMLEndTag" ||
-								lastChild.name === "SelfClosingTag" || lastChild.name === "SelfCloseEndTag")) {
-							// This element is closed, continue looking
-						} else {
-							// Find the tag name
-							var openTag = node.firstChild;
-							if(openTag) {
-								var tagNameNode = openTag.getChild("TagName") ||
-									openTag.getChild("WidgetName");
-								if(tagNameNode) {
-									unclosedTag = doc.sliceString(tagNameNode.from, tagNameNode.to);
-									break;
-								}
-							}
-						}
+					var nodeName = node.name;
+					// If we're in an attribute value, don't auto-close
+					if(nodeName === "AttributeValue" || nodeName === "AttributeString") {
+						return false;
+					}
+					// If we're inside a filter expression, don't auto-close
+					// In filters, <variable> is a variable reference, not a tag
+					if(nodeName === "FilterExpression" || nodeName === "FilterRun" ||
+						nodeName === "FilteredTransclusion" || nodeName === "FilteredTransclusionBlock" ||
+						nodeName === "AttributeFiltered") {
+						return false;
 					}
 					node = node.parent;
 				}
-
-				if(unclosedTag) {
-					// Insert the closing tag
-					var closingText = "/" + unclosedTag + ">";
-					view.dispatch({
-						changes: {
-							from: from,
-							to: to,
-							insert: closingText
-						},
-						selection: EditorSelection.cursor(from + closingText.length),
-						userEvent: "input.complete"
-					});
-					return true;
-				}
-
-				return false;
-			});
-
-			handlers.push(closeTagHandler);
-
-			this._autoCloseTagsHandlers = handlers;
-			return handlers;
-		},
-
-		getExtensions: function(context) {
-			var handlers = this._getOrCreateAutoCloseHandlers();
-			if(!handlers || handlers.length === 0) return [];
-
-			// Wrap in compartment if available
-			var engine = context.engine;
-			var compartments = engine && engine._compartments;
-			if(compartments && compartments.autoCloseTags) {
-				return [compartments.autoCloseTags.of(handlers)];
 			}
 
-			return handlers;
-		},
+			// Insert > and the closing tag
+			var closingTag = "</" + tagName + ">";
+			var changes = {
+				from: from,
+				to: to,
+				insert: ">" + closingTag
+			};
 
-		registerEvents: function(engine, _context) {
-			var self = this;
+			view.dispatch({
+				changes: changes,
+				selection: EditorSelection.cursor(from + 1), // Position after >
+				userEvent: "input.complete"
+			});
 
-			return {
-				settingsChanged: function(settings) {
-					if(engine._destroyed) return;
+			return true;
+		});
 
-					if(settings.autoCloseTags !== undefined) {
-						if(settings.autoCloseTags) {
-							var handlers = self._getOrCreateAutoCloseHandlers();
-							if(handlers) {
-								engine.reconfigure("autoCloseTags", handlers);
+		handlers.push(autoCloseTagsHandler);
+
+		// Handler for completing closing tags when typing </
+		var closeTagHandler = EditorView.inputHandler.of(function(view, from, to, text, _insert) {
+			// Only handle "/" after "<"
+			if(text !== "/") return false;
+
+			var state = view.state;
+			var doc = state.doc;
+
+			// Check if previous char is "<"
+			if(from === 0 || doc.sliceString(from - 1, from) !== "<") {
+				return false;
+			}
+
+			// Find the nearest unclosed opening tag
+			var tree = syntaxTree(state);
+			if(!tree) return false;
+
+			// Walk up the tree to find an unclosed element
+			var node = tree.resolveInner(from, -1);
+			var unclosedTag = null;
+
+			// Look for parent Element nodes
+			while(node) {
+				if(node.name === "Element" || node.name === "InlineWidget" ||
+					node.name === "BlockWidget" || node.name === "HTMLTag" ||
+					node.name === "HTMLBlock") {
+					// Check if this element has a closing tag
+					var lastChild = node.lastChild;
+					if(lastChild && (lastChild.name === "CloseTag" ||
+							lastChild.name === "WidgetEnd" || lastChild.name === "HTMLEndTag" ||
+							lastChild.name === "SelfClosingTag" || lastChild.name === "SelfCloseEndTag")) {
+						// This element is closed, continue looking
+					} else {
+						// Find the tag name
+						var openTag = node.firstChild;
+						if(openTag) {
+							var tagNameNode = openTag.getChild("TagName") ||
+								openTag.getChild("WidgetName");
+							if(tagNameNode) {
+								unclosedTag = doc.sliceString(tagNameNode.from, tagNameNode.to);
+								break;
 							}
-						} else {
-							engine.reconfigure("autoCloseTags", []);
 						}
 					}
 				}
-			};
-		},
+				node = node.parent;
+			}
 
-		extendAPI: function(_engine, _context) {
-			return {};
+			if(unclosedTag) {
+				// Insert the closing tag
+				var closingText = "/" + unclosedTag + ">";
+				view.dispatch({
+					changes: {
+						from: from,
+						to: to,
+						insert: closingText
+					},
+					selection: EditorSelection.cursor(from + closingText.length),
+					userEvent: "input.complete"
+				});
+				return true;
+			}
+
+			return false;
+		});
+
+		handlers.push(closeTagHandler);
+
+		this._autoCloseTagsHandlers = handlers;
+		return handlers;
+	},
+
+	getExtensions: function(context) {
+		var handlers = this._getOrCreateAutoCloseHandlers();
+		if(!handlers || handlers.length === 0) return [];
+
+		// Wrap in compartment if available
+		var engine = context.engine;
+		var compartments = engine && engine._compartments;
+		if(compartments && compartments.autoCloseTags) {
+			return [compartments.autoCloseTags.of(handlers)];
 		}
-	};
 
-})();
+		return handlers;
+	},
+
+	registerEvents: function(engine, _context) {
+		var self = this;
+
+		return {
+			settingsChanged: function(settings) {
+				if(engine._destroyed) return;
+
+				if(settings.autoCloseTags !== undefined) {
+					if(settings.autoCloseTags) {
+						var handlers = self._getOrCreateAutoCloseHandlers();
+						if(handlers) {
+							engine.reconfigure("autoCloseTags", handlers);
+						}
+					} else {
+						engine.reconfigure("autoCloseTags", []);
+					}
+				}
+			}
+		};
+	},
+
+	extendAPI: function(_engine, _context) {
+		return {};
+	}
+};
+

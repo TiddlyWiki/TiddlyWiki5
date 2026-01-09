@@ -225,6 +225,20 @@ type: text/vnd.tiddlywiki
   text-decoration: line-through;
 }
 
+/* Ensure strikethrough applies to nested/adjacent elements */
+.cm-tw-strikethrough .cm-tw-url,
+.cm-tw-strikethrough .cm-tw-wikilink,
+.cm-tw-strikethrough + .cm-tw-url,
+.cm-tw-strikethrough ~ .cm-tw-url {
+  text-decoration: line-through underline;
+  text-decoration-style: solid dotted;
+}
+
+.cm-tw-strikethrough .cm-tw-underline,
+.cm-tw-strikethrough + .cm-tw-underline {
+  text-decoration: line-through underline;
+}
+
 .cm-tw-superscript {
   color: var(--wt-highlight-fg);
   background-color: var(--wt-highlight-bg);

@@ -1,0 +1,9 @@
+title: $:/config/codemirror-6/tabOutsideList
+tags: $:/tags/Config/CodeMirror/Editor
+caption: Tab key (outside lists)
+description: What the Tab key does when the cursor is not inside a list. Inside lists, Tab always adds a list level.
+config-type: select
+config-category: Keybindings
+config-options: [{"value":"indent","label":"Indent line"},{"value":"insertTab","label":"Insert tab character"},{"value":"none","label":"Do nothing"}]
+default: indent
+text: indent
