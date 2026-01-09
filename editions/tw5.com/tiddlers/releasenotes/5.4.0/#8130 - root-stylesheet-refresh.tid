@@ -1,4 +1,4 @@
-title: $:/changenotes/5.4.0/#8130
+title: $:/changenotes/5.4.0/#9554
 created: 20251212171804335
 modified: 20251212171804335
 tags: $:/tags/ChangeNote
@@ -6,12 +6,10 @@ change-type: performance
 change-category: internal
 description: Different Stylesheets are now included as single `<style>` tags in the Header
 release: 5.4.0
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8130
-github-contributors: BurningTreeC
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9554
+github-contributors: BurningTreeC Leilei332
 type: text/vnd.tiddlywiki
 
 Previously, all stylesheets were combined in a single `<style>` tag in the `<head>`.
 
 Now, a separate `<style>` tag is created in the `<head>` for each stylesheet.
-
-As part of these changes, the 'view widget' has also been updated. It can now respond dynamically to changes in the 'wikified' formats as well.
