@@ -97,7 +97,7 @@ exports["jsonset"] = function(source,operator,options) {
 			value = null;
 			break;
 		case "json":
-			value = $tw.utils.parseJSONSafe(value,function() {return undefined;});
+			value = $tw.utils.parseJSONSafe(value, () => {});
 			break;
 		default:
 			// Use value unchanged

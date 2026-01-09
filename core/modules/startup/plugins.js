@@ -31,7 +31,6 @@ exports.startup = function() {
 			if(requiresReload) {
 				requireReloadDueToPluginChange = true;
 			} else if(tiddler) {
-				var pluginType = tiddler.fields["plugin-type"];
 				if($tw.wiki.getTiddlerText(PREFIX_CONFIG_REGISTER_PLUGIN_TYPE + (tiddler.fields["plugin-type"] || ""),"no") === "yes") {
 					changesToProcess.push(title);
 				}
