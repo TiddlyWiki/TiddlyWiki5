@@ -33,4 +33,3 @@ exports.plugin = {
 		return [keymap.of(commands.emacsStyleKeymap)];
 	}
 };
-

@@ -150,4 +150,3 @@ exports.plugin = {
 		};
 	}
 };
-

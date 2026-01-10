@@ -154,7 +154,7 @@ exports.plugin = {
 				engine.view.dispatch({
 					effects: compartment.reconfigure(newContent)
 				});
-			} catch(_e) {}
+			} catch (_e) {}
 		}
 	},
 
@@ -197,7 +197,7 @@ exports.plugin = {
 				engine.view.dispatch({
 					effects: compartment.reconfigure(newContent)
 				});
-			} catch(_e) {}
+			} catch (_e) {}
 		}
 	}
 };

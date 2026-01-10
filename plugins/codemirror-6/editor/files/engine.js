@@ -419,7 +419,7 @@ function buildPluginContext(options, engine, overrideType) {
 			context.tagOverrideWinner = utils.getTagOverrideWinner(context);
 			context.hasTagOverride = context.tagOverrideWinner !== null;
 		}
-	} catch(_e) {}
+	} catch (_e) {}
 
 	return context;
 }
@@ -1806,7 +1806,7 @@ CodeMirrorEngine.prototype.refreshLanguageConditions = function() {
 			this._pluginContext.tagOverrideWinner = utils.getTagOverrideWinner(this._pluginContext);
 			this._pluginContext.hasTagOverride = this._pluginContext.tagOverrideWinner !== null;
 		}
-	} catch(_e) {}
+	} catch (_e) {}
 
 	// Re-evaluate all conditional plugins
 	var effects = [];

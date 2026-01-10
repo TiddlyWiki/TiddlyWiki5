@@ -14,7 +14,7 @@ var WIKITEXT_TYPES = [
 	"text/vnd.tiddlywiki",
 	"text/vnd.tiddlywiki-multiple",
 	"application/x-tiddler-dictionary",
-	""  // Empty type defaults to wikitext
+	"" // Empty type defaults to wikitext
 ];
 
 exports.plugin = {

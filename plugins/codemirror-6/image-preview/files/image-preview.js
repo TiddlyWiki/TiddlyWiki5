@@ -220,4 +220,3 @@ exports.plugin = {
 		};
 	}
 };
-

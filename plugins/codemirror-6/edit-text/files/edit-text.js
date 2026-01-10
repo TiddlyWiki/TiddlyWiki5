@@ -28,7 +28,7 @@ var THEME_TIDDLERS = [
 // Helper to get boolean config
 function boolConfig(wiki, tiddler, defaultVal) {
 	var val = wiki.getTiddlerText(tiddler);
-	if (val === undefined || val === null || val === "") {
+	if(val === undefined || val === null || val === "") {
 		return defaultVal !== false;
 	}
 	return val === "yes";
@@ -36,8 +36,8 @@ function boolConfig(wiki, tiddler, defaultVal) {
 
 // Check if any tiddler in a list changed
 function hopAny(changedTiddlers, list) {
-	for (var i = 0; i < list.length; i++) {
-		if (changedTiddlers[list[i]]) return true;
+	for(var i = 0; i < list.length; i++) {
+		if(changedTiddlers[list[i]]) return true;
 	}
 	return false;
 }
@@ -58,22 +58,22 @@ CM6EditTextWidget.prototype.constructor = CM6EditTextWidget;
  * Get the current theme based on config and palette settings.
  * Supports auto-matching TiddlyWiki palette color-scheme.
  */
-CM6EditTextWidget.prototype._getCurrentTheme = function () {
+CM6EditTextWidget.prototype._getCurrentTheme = function() {
 	var wiki = this.wiki;
 	var autoMatch = wiki.getTiddlerText(
 		"$:/config/codemirror-6/editor/auto-match-palette",
 		"yes"
 	) === "yes";
 
-	if (autoMatch) {
+	if(autoMatch) {
 		var palette = wiki.getTiddler("$:/palette");
 		var colorScheme = palette && palette.fields["color-scheme"];
 		var isDark = colorScheme === "dark";
 
 		return wiki.getTiddlerText(
-			isDark
-				? "$:/config/codemirror-6/editor/theme-dark"
-				: "$:/config/codemirror-6/editor/theme-light",
+			isDark ?
+			"$:/config/codemirror-6/editor/theme-dark" :
+			"$:/config/codemirror-6/editor/theme-light",
 			isDark ? "vanilla-dark" : "vanilla"
 		);
 	}
@@ -84,8 +84,8 @@ CM6EditTextWidget.prototype._getCurrentTheme = function () {
 /**
  * Apply theme directly to DOM via data attribute.
  */
-CM6EditTextWidget.prototype._applyTheme = function () {
-	if (!this.engine || !this.engine.domNode) return;
+CM6EditTextWidget.prototype._applyTheme = function() {
+	if(!this.engine || !this.engine.domNode) return;
 	this.engine.domNode.setAttribute("data-cm6-theme", this._getCurrentTheme());
 };
 
@@ -96,7 +96,7 @@ CM6EditTextWidget.prototype._applyTheme = function () {
 /**
  * Build a settings snapshot from current config tiddlers
  */
-CM6EditTextWidget.prototype._buildSettingsSnapshot = function () {
+CM6EditTextWidget.prototype._buildSettingsSnapshot = function() {
 	var wiki = this.wiki;
 
 	return {
@@ -152,19 +152,19 @@ CM6EditTextWidget.prototype._buildSettingsSnapshot = function () {
 /**
  * Apply settings to the engine
  */
-CM6EditTextWidget.prototype._applyEngineSettings = function () {
+CM6EditTextWidget.prototype._applyEngineSettings = function() {
 	var engine = this.engine;
-	if (!engine) return;
+	if(!engine) return;
 
 	var settings = this._buildSettingsSnapshot();
 
 	// Trigger settingsChanged event on engine
-	if (typeof engine._triggerEvent === "function") {
+	if(typeof engine._triggerEvent === "function") {
 		engine._triggerEvent("settingsChanged", settings);
 	}
 
 	// Also call the handler directly if it exists
-	if (typeof engine._handleSettingsChanged === "function") {
+	if(typeof engine._handleSettingsChanged === "function") {
 		engine._handleSettingsChanged(settings);
 	}
 };
@@ -174,7 +174,7 @@ CM6EditTextWidget.prototype._applyEngineSettings = function () {
 // ============================================================================
 
 var baseRender = BaseEditTextWidget.prototype.render;
-CM6EditTextWidget.prototype.render = function (parent, nextSibling) {
+CM6EditTextWidget.prototype.render = function(parent, nextSibling) {
 	var result = baseRender.call(this, parent, nextSibling);
 	// Apply theme after engine is created
 	this._applyTheme();
@@ -185,23 +185,23 @@ CM6EditTextWidget.prototype.render = function (parent, nextSibling) {
 // Refresh override to handle config changes
 // ============================================================================
 
-CM6EditTextWidget.prototype.refresh = function (changedTiddlers) {
+CM6EditTextWidget.prototype.refresh = function(changedTiddlers) {
 	// Theme changes: apply directly (fast path, DOM only)
-	if (hopAny(changedTiddlers, THEME_TIDDLERS)) {
+	if(hopAny(changedTiddlers, THEME_TIDDLERS)) {
 		this._applyTheme();
 	}
 
 	// Check if any config tiddler changed (for simple engine with settings support)
-	if (this.engine && typeof this.engine._handleSettingsChanged === "function") {
+	if(this.engine && typeof this.engine._handleSettingsChanged === "function") {
 		var settingsChanged = false;
 		var keys = Object.keys(changedTiddlers);
-		for (var i = 0; i < keys.length; i++) {
-			if (keys[i].indexOf("$:/config/codemirror-6/") === 0) {
+		for(var i = 0; i < keys.length; i++) {
+			if(keys[i].indexOf("$:/config/codemirror-6/") === 0) {
 				settingsChanged = true;
 				break;
 			}
 		}
-		if (settingsChanged) {
+		if(settingsChanged) {
 			this._applyEngineSettings();
 		}
 	}

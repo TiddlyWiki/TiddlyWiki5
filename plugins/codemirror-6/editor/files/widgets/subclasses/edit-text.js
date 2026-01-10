@@ -26,7 +26,7 @@ if(!$tw.browser) {
 
 exports.baseClass = "edit-codemirror-6";
 
-exports.constructor = function (parseTreeNode, options) {
+exports.constructor = function(parseTreeNode, options) {
 	this.initialise(parseTreeNode, options);
 };
 
@@ -41,7 +41,7 @@ exports.prototype = {};
 // ============================================================================
 
 exports.prototype.handleUndo = function(event) {
-	if (this.engine && typeof this.engine.undo === "function") {
+	if(this.engine && typeof this.engine.undo === "function") {
 		this.engine.undo();
 		this.engine.focus();
 	}
@@ -49,7 +49,7 @@ exports.prototype.handleUndo = function(event) {
 };
 
 exports.prototype.handleRedo = function(event) {
-	if (this.engine && typeof this.engine.redo === "function") {
+	if(this.engine && typeof this.engine.redo === "function") {
 		this.engine.redo();
 		this.engine.focus();
 	}
@@ -61,19 +61,19 @@ exports.prototype.handleRedo = function(event) {
 // ============================================================================
 
 exports.prototype.handleRemoveTrailingWhitespace = function(event) {
-	if (!this.engine || !this.engine.view) return false;
+	if(!this.engine || !this.engine.view) return false;
 
 	var view = this.engine.view;
 	var doc = view.state.doc;
 	var changes = [];
 
 	// Iterate through all lines and find trailing whitespace
-	for (var i = 1; i <= doc.lines; i++) {
+	for(var i = 1; i <= doc.lines; i++) {
 		var line = doc.line(i);
 		var text = line.text;
 		var trimmed = text.replace(/\s+$/, "");
 
-		if (trimmed.length < text.length) {
+		if(trimmed.length < text.length) {
 			// There's trailing whitespace to remove
 			changes.push({
 				from: line.from + trimmed.length,
@@ -82,8 +82,10 @@ exports.prototype.handleRemoveTrailingWhitespace = function(event) {
 		}
 	}
 
-	if (changes.length > 0) {
-		view.dispatch({ changes: changes });
+	if(changes.length > 0) {
+		view.dispatch({
+			changes: changes
+		});
 	}
 
 	this.engine.focus();
@@ -95,7 +97,7 @@ exports.prototype.handleRemoveTrailingWhitespace = function(event) {
 // ============================================================================
 
 exports.prototype.updateEditorDomNode = function(text) {
-	if (!this.engine) return;
+	if(!this.engine) return;
 	this.engine.setText(text);
 };
 
@@ -104,17 +106,17 @@ exports.prototype.updateEditorDomNode = function(text) {
 // ============================================================================
 
 exports.prototype.handleSetLanguage = function(event) {
-	if (!this.engine) return false;
+	if(!this.engine) return false;
 
 	var newType = event.paramObject ? event.paramObject.type : null;
-	if (newType === undefined || newType === null) return false;
+	if(newType === undefined || newType === null) return false;
 
 	// Check persistence mode from config
 	var persistMode = this.wiki.getTiddlerText("$:/config/codemirror-6/editor/languageSwitcherPersist", "session");
 
-	if (persistMode === "field" && this.editTitle) {
+	if(persistMode === "field" && this.editTitle) {
 		// Save to tiddler field for persistence
-		if (newType === "") {
+		if(newType === "") {
 			// Empty means "use default" - remove the override field
 			this.wiki.setText(this.editTitle, "codemirror-type", null, undefined);
 		} else {
@@ -133,7 +135,7 @@ exports.prototype.handleSetLanguage = function(event) {
 };
 
 exports.prototype.handleShowLanguagePicker = function(event) {
-	if (!this.engine || !this.engine.domNode) return false;
+	if(!this.engine || !this.engine.domNode) return false;
 
 	this.showLanguagePicker();
 	return false;
@@ -152,19 +154,54 @@ exports.prototype.showLanguagePicker = function() {
 	this._languagePicker = picker;
 
 	// Language options
-	var languages = [
-		{ type: "", label: "Default (from type)" },
-		{ type: "text/vnd.tiddlywiki", label: "TiddlyWiki" },
-		{ type: "text/x-markdown", label: "Markdown" },
-		{ type: "text/html", label: "HTML" },
-		{ type: "text/css", label: "CSS" },
-		{ type: "application/javascript", label: "JavaScript" },
-		{ type: "application/typescript", label: "TypeScript" },
-		{ type: "application/json", label: "JSON" },
-		{ type: "application/x-yaml", label: "YAML" },
-		{ type: "application/xml", label: "XML" },
-		{ type: "text/x-python", label: "Python" },
-		{ type: "text/plain", label: "Plain Text" }
+	var languages = [{
+			type: "",
+			label: "Default (from type)"
+		},
+		{
+			type: "text/vnd.tiddlywiki",
+			label: "TiddlyWiki"
+		},
+		{
+			type: "text/x-markdown",
+			label: "Markdown"
+		},
+		{
+			type: "text/html",
+			label: "HTML"
+		},
+		{
+			type: "text/css",
+			label: "CSS"
+		},
+		{
+			type: "application/javascript",
+			label: "JavaScript"
+		},
+		{
+			type: "application/typescript",
+			label: "TypeScript"
+		},
+		{
+			type: "application/json",
+			label: "JSON"
+		},
+		{
+			type: "application/x-yaml",
+			label: "YAML"
+		},
+		{
+			type: "application/xml",
+			label: "XML"
+		},
+		{
+			type: "text/x-python",
+			label: "Python"
+		},
+		{
+			type: "text/plain",
+			label: "Plain Text"
+		}
 	];
 
 	languages.forEach(function(lang) {
@@ -178,8 +215,8 @@ exports.prototype.showLanguagePicker = function() {
 
 			// Check persistence mode
 			var persistMode = self.wiki.getTiddlerText("$:/config/codemirror-6/editor/languageSwitcherPersist", "session");
-			if (persistMode === "field" && self.editTitle) {
-				if (lang.type === "") {
+			if(persistMode === "field" && self.editTitle) {
+				if(lang.type === "") {
 					self.wiki.setText(self.editTitle, "codemirror-type", null, undefined);
 				} else {
 					self.wiki.setText(self.editTitle, "codemirror-type", null, lang.type);
@@ -194,7 +231,7 @@ exports.prototype.showLanguagePicker = function() {
 
 	// Close on Escape
 	picker.addEventListener("keydown", function(e) {
-		if (e.key === "Escape") {
+		if(e.key === "Escape") {
 			self.hideLanguagePicker();
 			self.engine.focus();
 		}
@@ -203,7 +240,7 @@ exports.prototype.showLanguagePicker = function() {
 	// Close on click outside
 	setTimeout(function() {
 		self.document.addEventListener("click", self._pickerClickOutside = function(e) {
-			if (!picker.contains(e.target)) {
+			if(!picker.contains(e.target)) {
 				self.hideLanguagePicker();
 			}
 		});
@@ -214,15 +251,15 @@ exports.prototype.showLanguagePicker = function() {
 
 	// Focus first option
 	var firstBtn = picker.querySelector("button");
-	if (firstBtn) firstBtn.focus();
+	if(firstBtn) firstBtn.focus();
 };
 
 exports.prototype.hideLanguagePicker = function() {
-	if (this._languagePicker) {
+	if(this._languagePicker) {
 		this._languagePicker.remove();
 		this._languagePicker = null;
 	}
-	if (this._pickerClickOutside) {
+	if(this._pickerClickOutside) {
 		this.document.removeEventListener("click", this._pickerClickOutside);
 		this._pickerClickOutside = null;
 	}
@@ -245,7 +282,7 @@ exports.prototype.hideLanguagePicker = function() {
  */
 var pluginRegistry = {
 	_plugins: {},
-	
+
 	/**
 	 * Register a plugin with the widget system
 	 * @param {string} name - Unique plugin identifier
@@ -254,7 +291,7 @@ var pluginRegistry = {
 	register: function(name, handlers) {
 		this._plugins[name] = handlers;
 	},
-	
+
 	/**
 	 * Unregister a plugin
 	 * @param {string} name - Plugin identifier to remove
@@ -262,7 +299,7 @@ var pluginRegistry = {
 	unregister: function(name) {
 		delete this._plugins[name];
 	},
-	
+
 	/**
 	 * Check if a plugin is registered
 	 * @param {string} name - Plugin identifier
@@ -271,7 +308,7 @@ var pluginRegistry = {
 	has: function(name) {
 		return !!this._plugins[name];
 	},
-	
+
 	/**
 	 * Get a registered plugin's handlers
 	 * @param {string} name - Plugin identifier
@@ -280,7 +317,7 @@ var pluginRegistry = {
 	get: function(name) {
 		return this._plugins[name];
 	},
-	
+
 	/**
 	 * Call a lifecycle hook on all registered plugins
 	 * @param {string} hook - Hook name (e.g., "onRender", "onRefresh")
@@ -290,17 +327,16 @@ var pluginRegistry = {
 	callHook: function(hook, widget) {
 		var args = Array.prototype.slice.call(arguments, 1);
 		var pluginNames = Object.keys(this._plugins);
-		for (var i = 0; i < pluginNames.length; i++) {
+		for(var i = 0; i < pluginNames.length; i++) {
 			var plugin = this._plugins[pluginNames[i]];
-			if (plugin && typeof plugin[hook] === "function") {
+			if(plugin && typeof plugin[hook] === "function") {
 				try {
 					plugin[hook].apply(null, args);
-				} catch (e) {
-				}
+				} catch (e) {}
 			}
 		}
 	},
-	
+
 	/**
 	 * Try to handle a message via registered plugins
 	 * @param {string} message - Message type (e.g., "tm-cm6-zen-mode")
@@ -310,14 +346,13 @@ var pluginRegistry = {
 	 */
 	handleMessage: function(message, widget, event) {
 		var pluginNames = Object.keys(this._plugins);
-		for (var i = 0; i < pluginNames.length; i++) {
+		for(var i = 0; i < pluginNames.length; i++) {
 			var plugin = this._plugins[pluginNames[i]];
-			if (plugin && plugin.onMessage && typeof plugin.onMessage[message] === "function") {
+			if(plugin && plugin.onMessage && typeof plugin.onMessage[message] === "function") {
 				try {
 					plugin.onMessage[message](widget, event);
 					return true;
-				} catch (e) {
-				}
+				} catch (e) {}
 			}
 		}
 		return false;
@@ -365,22 +400,22 @@ var THEME_TIDDLERS = [
  * Get the current theme based on config and palette settings.
  * Supports auto-matching TiddlyWiki palette color-scheme.
  */
-exports.prototype._getCurrentTheme = function () {
+exports.prototype._getCurrentTheme = function() {
 	var wiki = this.wiki;
 	var autoMatch = wiki.getTiddlerText(
 		"$:/config/codemirror-6/editor/auto-match-palette",
 		"yes"
 	) === "yes";
 
-	if (autoMatch) {
+	if(autoMatch) {
 		var paletteName = wiki.getTiddlerText("$:/palette");
 		var palette = wiki.getTiddler(paletteName);
 		var isDark = palette && palette.fields["color-scheme"] === "dark";
 
 		return wiki.getTiddlerText(
-			isDark
-				? "$:/config/codemirror-6/editor/theme-dark"
-				: "$:/config/codemirror-6/editor/theme-light",
+			isDark ?
+			"$:/config/codemirror-6/editor/theme-dark" :
+			"$:/config/codemirror-6/editor/theme-light",
 			isDark ? "vanilla-dark" : "vanilla"
 		);
 	}
@@ -392,8 +427,8 @@ exports.prototype._getCurrentTheme = function () {
  * Apply theme directly to DOM (fast path, no engine round-trip).
  * Theme is pure CSS via data attribute, not CM6 state.
  */
-exports.prototype._applyTheme = function () {
-	if (!this.engine || !this.engine.domNode) return;
+exports.prototype._applyTheme = function() {
+	if(!this.engine || !this.engine.domNode) return;
 	this.engine.domNode.setAttribute("data-cm6-theme", this._getCurrentTheme());
 };
 
@@ -405,7 +440,7 @@ exports.prototype._applyTheme = function () {
  * Build a single settings snapshot from wiki config + widget state.
  * This avoids scattered engine toggles and allows plugins to own behavior.
  */
-exports.prototype._buildSettingsSnapshot = function () {
+exports.prototype._buildSettingsSnapshot = function() {
 	var wiki = this.wiki;
 	var body = isMainTextEditorBody(this);
 
@@ -483,19 +518,19 @@ exports.prototype._buildSettingsSnapshot = function () {
  * Apply all config/state-driven engine settings in one place.
  * Triggers both internal engine handlers and plugin event handlers.
  */
-exports.prototype.applyEngineSettings = function () {
+exports.prototype.applyEngineSettings = function() {
 	var engine = this.engine;
-	if (!engine || (engine.isDestroyed && engine.isDestroyed())) return;
+	if(!engine || (engine.isDestroyed && engine.isDestroyed())) return;
 
 	var settings = this._buildSettingsSnapshot();
 
 	// Trigger internal engine handlers (for compartment reconfiguration)
-	if (typeof engine._triggerEvent === "function") {
+	if(typeof engine._triggerEvent === "function") {
 		engine._triggerEvent("settingsChanged", settings);
 	}
 
 	// Also dispatch to plugins
-	if (typeof engine.dispatchPluginEvent === "function") {
+	if(typeof engine.dispatchPluginEvent === "function") {
 		engine.dispatchPluginEvent("settingsChanged", settings);
 	}
 };
@@ -503,7 +538,7 @@ exports.prototype.applyEngineSettings = function () {
 /**
  * Cache whether the edited tiddler is tagged as stylesheet.
  */
-exports.prototype.updateStylesheetTagCache = function () {
+exports.prototype.updateStylesheetTagCache = function() {
 	var editTiddler = this.wiki.getTiddler(this.editTitle);
 	this.hasStylesheetTag = !!(editTiddler && editTiddler.hasTag("$:/tags/Stylesheet"));
 };
@@ -512,7 +547,7 @@ exports.prototype.updateStylesheetTagCache = function () {
 // Lifecycle
 // ============================================================================
 
-exports.prototype.render = function (parent, nextSibling) {
+exports.prototype.render = function(parent, nextSibling) {
 	// Call base class render
 	Object.getPrototypeOf(Object.getPrototypeOf(this)).render.call(this, parent, nextSibling);
 
@@ -540,13 +575,13 @@ exports.prototype.render = function (parent, nextSibling) {
 	this._applyTheme();
 
 	// Store references for plugin access
-	if (this.engine && this.engine.domNode) {
+	if(this.engine && this.engine.domNode) {
 		this.engine.domNode._cm6Engine = this.engine;
 		this.engine.domNode._cm6Widget = this;
-		
+
 		// Store on tiddler frame for external lookup
 		var frame = this.engine.domNode.closest(".tc-tiddler-frame");
-		if (frame) {
+		if(frame) {
 			frame._cm6Widget = this;
 		}
 	}
@@ -558,27 +593,27 @@ exports.prototype.render = function (parent, nextSibling) {
 	this.applyEngineSettings();
 };
 
-exports.prototype.execute = function () {
+exports.prototype.execute = function() {
 	Object.getPrototypeOf(Object.getPrototypeOf(this)).execute.call(this);
 	this.editType = this.getAttribute("type", "");
 };
 
-exports.prototype.getShortcutTiddlerList = function () {
+exports.prototype.getShortcutTiddlerList = function() {
 	return this.wiki.getTiddlersWithTag("$:/tags/KeyboardShortcut/CodeMirror");
 };
 
 /**
  * Detect changes to platform keyboard config tiddlers ($:/config/<platform>/...)
  */
-exports.prototype.detectNewShortcuts = function (changedTiddlers) {
+exports.prototype.detectNewShortcuts = function(changedTiddlers) {
 	var shortcutConfigTiddlers = [];
 	var handled = false;
 
-	$tw.utils.each($tw.keyboardManager.lookupNames, function (platformDescriptor) {
+	$tw.utils.each($tw.keyboardManager.lookupNames, function(platformDescriptor) {
 		var descriptorPrefix = "$:/config/" + platformDescriptor + "/";
-		Object.keys(changedTiddlers).forEach(function (t) {
+		Object.keys(changedTiddlers).forEach(function(t) {
 			var prefix = t.substr(0, t.lastIndexOf("/") + 1);
-			if (prefix === descriptorPrefix) {
+			if(prefix === descriptorPrefix) {
 				shortcutConfigTiddlers.push(t);
 				handled = true;
 			}
@@ -588,7 +623,7 @@ exports.prototype.detectNewShortcuts = function (changedTiddlers) {
 	return handled ? $tw.utils.hopArray(changedTiddlers, shortcutConfigTiddlers) : false;
 };
 
-exports.prototype.updateShortcutLists = function (tiddlerList) {
+exports.prototype.updateShortcutLists = function(tiddlerList) {
 	this.shortcutTiddlers = tiddlerList || [];
 
 	this.shortcutKeysList.length = this.shortcutTiddlers.length;
@@ -596,7 +631,7 @@ exports.prototype.updateShortcutLists = function (tiddlerList) {
 	this.shortcutParsedList.length = this.shortcutTiddlers.length;
 	this.shortcutPriorityList.length = this.shortcutTiddlers.length;
 
-	for (var i = 0; i < this.shortcutTiddlers.length; i++) {
+	for(var i = 0; i < this.shortcutTiddlers.length; i++) {
 		var title = this.shortcutTiddlers[i];
 		var t = this.wiki.getTiddler(title);
 		var fields = (t && t.fields) ? t.fields : {};
@@ -604,9 +639,9 @@ exports.prototype.updateShortcutLists = function (tiddlerList) {
 		this.shortcutKeysList[i] = fields.key !== undefined ? fields.key : undefined;
 		this.shortcutActionList[i] = fields.text;
 
-		this.shortcutParsedList[i] = this.shortcutKeysList[i] !== undefined
-			? $tw.keyboardManager.parseKeyDescriptors(this.shortcutKeysList[i])
-			: undefined;
+		this.shortcutParsedList[i] = this.shortcutKeysList[i] !== undefined ?
+			$tw.keyboardManager.parseKeyDescriptors(this.shortcutKeysList[i]) :
+			undefined;
 
 		this.shortcutPriorityList[i] = fields.priority === "yes";
 	}
@@ -622,12 +657,12 @@ exports.prototype.updateShortcutLists = function (tiddlerList) {
  */
 exports.prototype.handleKeydownEvent = function(event) {
 	// First check CodeMirror-specific shortcuts ($:/tags/KeyboardShortcut/CodeMirror)
-	for (var i = 0; i < this.shortcutParsedList.length; i++) {
+	for(var i = 0; i < this.shortcutParsedList.length; i++) {
 		var parsed = this.shortcutParsedList[i];
-		if (parsed && $tw.keyboardManager.checkKeyDescriptors(event, parsed)) {
+		if(parsed && $tw.keyboardManager.checkKeyDescriptors(event, parsed)) {
 			// Found a match - execute the action
 			var action = this.shortcutActionList[i];
-			if (action) {
+			if(action) {
 				event.preventDefault();
 				event.stopPropagation();
 				// Parse and invoke the action widgets
@@ -649,22 +684,21 @@ exports.prototype.handleKeydownEvent = function(event) {
 /**
  * Handle messages - first check registered plugins, then engine plugins, then fall back to built-in handlers
  */
-exports.prototype.dispatchEvent = function (event) {
+exports.prototype.dispatchEvent = function(event) {
 	// Try plugin registry handlers first
-	if (event.type && pluginRegistry.handleMessage(event.type, this, event)) {
+	if(event.type && pluginRegistry.handleMessage(event.type, this, event)) {
 		return true;
 	}
 
 	// Try engine plugin handlers (codemirror6-plugin modules with onMessage)
-	if (event.type && this.engine && this.engine._activePlugins) {
-		for (var i = 0; i < this.engine._activePlugins.length; i++) {
+	if(event.type && this.engine && this.engine._activePlugins) {
+		for(var i = 0; i < this.engine._activePlugins.length; i++) {
 			var plugin = this.engine._activePlugins[i];
-			if (plugin.onMessage && typeof plugin.onMessage[event.type] === "function") {
+			if(plugin.onMessage && typeof plugin.onMessage[event.type] === "function") {
 				try {
 					plugin.onMessage[event.type](this, event);
 					return true;
-				} catch (e) {
-				}
+				} catch (e) {}
 			}
 		}
 	}
@@ -672,27 +706,27 @@ exports.prototype.dispatchEvent = function (event) {
 	// Check local event listeners (same as Widget.prototype.dispatchEvent)
 	event.widget = event.widget || this;
 	var listeners = this.eventListeners[event.type];
-	if (listeners) {
+	if(listeners) {
 		var self = this;
 		var shouldPropagate = true;
-		$tw.utils.each(listeners, function (handler) {
+		$tw.utils.each(listeners, function(handler) {
 			var propagate;
-			if (typeof handler === "string") {
+			if(typeof handler === "string") {
 				propagate = self[handler].call(self, event);
 			} else {
 				propagate = handler.call(self, event);
 			}
-			if (propagate === false) {
+			if(propagate === false) {
 				shouldPropagate = false;
 			}
 		});
-		if (!shouldPropagate) {
+		if(!shouldPropagate) {
 			return false;
 		}
 	}
 
 	// Dispatch to parent widget
-	if (this.parentWidget) {
+	if(this.parentWidget) {
 		return this.parentWidget.dispatchEvent(event);
 	}
 	return true;
@@ -708,25 +742,25 @@ exports.prototype.dispatchEvent = function (event) {
  * Calls the core texteditoroperation handlers to modify the operation object,
  * then executes via the CM6 engine.
  */
-exports.prototype.handleEditTextOperationMessage = function (event) {
-	if (!this.engine || (this.engine.isDestroyed && this.engine.isDestroyed())) return;
+exports.prototype.handleEditTextOperationMessage = function(event) {
+	if(!this.engine || (this.engine.isDestroyed && this.engine.isDestroyed())) return;
 
 	// Prepare information about the operation
 	var operation = this.engine.createTextOperation();
 
 	// Capture prefix/suffix from event params for multi-cursor support
-	if (event.paramObject) {
-		if (event.paramObject.prefix !== undefined) {
+	if(event.paramObject) {
+		if(event.paramObject.prefix !== undefined) {
 			operation.prefix = event.paramObject.prefix;
 		}
-		if (event.paramObject.suffix !== undefined) {
+		if(event.paramObject.suffix !== undefined) {
 			operation.suffix = event.paramObject.suffix;
 		}
 	}
 
 	// Invoke the handler for the selected operation (e.g., wrap-selection, prefix-lines)
 	var handler = this.editorOperations[event.param];
-	if (handler) {
+	if(handler) {
 		handler.call(this, event, operation);
 	}
 
@@ -742,8 +776,8 @@ exports.prototype.handleEditTextOperationMessage = function (event) {
 // Events / DOM integration
 // ============================================================================
 
-exports.prototype.handlePasteEvent = function (event) {
-	if (event.clipboardData && event.clipboardData.files && event.clipboardData.files.length) {
+exports.prototype.handlePasteEvent = function(event) {
+	if(event.clipboardData && event.clipboardData.files && event.clipboardData.files.length) {
 		event.preventDefault();
 		event.stopPropagation();
 		this.dispatchDOMEvent(this.cloneEvent(event, ["clipboardData"]));
@@ -756,48 +790,48 @@ exports.prototype.handlePasteEvent = function (event) {
 // Refresh (hardened)
 // ============================================================================
 
-exports.prototype.refresh = function (changedTiddlers) {
+exports.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	var wiki = this.wiki;
 
 	// Wrapper class changes
-	if (changedAttributes["class"]) {
-		if (this.engine && typeof this.engine.assignDomNodeClasses === "function") {
+	if(changedAttributes["class"]) {
+		if(this.engine && typeof this.engine.assignDomNodeClasses === "function") {
 			this.engine.assignDomNodeClasses();
 		}
 	}
 
 	// Stylesheet tag change may affect type resolution
 	var editTiddler = wiki.getTiddler(this.editTitle);
-	if (editTiddler) {
+	if(editTiddler) {
 		var newHasStylesheetTag = editTiddler.hasTag("$:/tags/Stylesheet");
-		if (newHasStylesheetTag !== this.hasStylesheetTag) {
+		if(newHasStylesheetTag !== this.hasStylesheetTag) {
 			this.hasStylesheetTag = newHasStylesheetTag;
 			this.applyEngineSettings();
 		}
-	} else if (this.hasStylesheetTag) {
+	} else if(this.hasStylesheetTag) {
 		this.hasStylesheetTag = false;
 		this.applyEngineSettings();
 	}
 
 	// If type attribute changed, re-emit settings (includes tiddlerType)
-	if (changedAttributes.type) {
+	if(changedAttributes.type) {
 		this.editType = this.getAttribute("type", "");
 		this.applyEngineSettings();
 	}
 
 	// Theme changes: apply directly (fast path, DOM only)
-	if (hopAny(changedTiddlers, THEME_TIDDLERS)) {
+	if(hopAny(changedTiddlers, THEME_TIDDLERS)) {
 		this._applyTheme();
 	}
 
 	// Any config/state under these prefixes triggers settingsChanged
 	var settingsChanged = false;
-	Object.keys(changedTiddlers).forEach(function (t) {
-		if (t.indexOf("$:/config/codemirror-6/") === 0) settingsChanged = true;
-		if (t.indexOf("$:/state/codemirror-6/translate/") === 0) settingsChanged = true;
+	Object.keys(changedTiddlers).forEach(function(t) {
+		if(t.indexOf("$:/config/codemirror-6/") === 0) settingsChanged = true;
+		if(t.indexOf("$:/state/codemirror-6/translate/") === 0) settingsChanged = true;
 	});
-	if (settingsChanged) {
+	if(settingsChanged) {
 		this.applyEngineSettings();
 	}
 
@@ -808,11 +842,11 @@ exports.prototype.refresh = function (changedTiddlers) {
 		hopAny(changedTiddlers, newList) ||
 		!!this.detectNewShortcuts(changedTiddlers);
 
-	if (hasShortcutChanged) {
+	if(hasShortcutChanged) {
 		this.updateShortcutLists(newList);
 
 		// Emit a dedicated event so a keymap plugin can rebuild
-		if (this.engine && typeof this.engine.dispatchPluginEvent === "function") {
+		if(this.engine && typeof this.engine.dispatchPluginEvent === "function") {
 			this.engine.dispatchPluginEvent("shortcutsChanged", {
 				keys: this.shortcutKeysList,
 				actions: this.shortcutActionList,
@@ -824,7 +858,7 @@ exports.prototype.refresh = function (changedTiddlers) {
 	}
 
 	// Check for tag changes on the edited tiddler (for tag-based language switching)
-	if (this.editTitle && changedTiddlers[this.editTitle] && this.engine) {
+	if(this.editTitle && changedTiddlers[this.editTitle] && this.engine) {
 		this.engine.refreshLanguageConditions();
 	}
 
@@ -832,7 +866,7 @@ exports.prototype.refresh = function (changedTiddlers) {
 	pluginRegistry.callHook("onRefresh", this, changedTiddlers);
 
 	// Notify engine plugins of refresh (codemirror6-plugin modules)
-	if (this.engine && typeof this.engine.dispatchPluginEvent === "function") {
+	if(this.engine && typeof this.engine.dispatchPluginEvent === "function") {
 		this.engine.dispatchPluginEvent("onRefresh", this, changedTiddlers);
 	}
 

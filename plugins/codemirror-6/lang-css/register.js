@@ -71,14 +71,14 @@ function getPageClasses() {
 							}
 						}
 					}
-				} catch(e) {
+				} catch (e) {
 					// Cross-origin stylesheets may throw errors
 				}
 			}
-		} catch(e) {
+		} catch (e) {
 			// Ignore stylesheet access errors
 		}
-	} catch(e) {
+	} catch (e) {
 		console.warn("Error collecting CSS classes:", e);
 	}
 

@@ -259,4 +259,3 @@ exports.plugin = {
 		};
 	}
 };
-

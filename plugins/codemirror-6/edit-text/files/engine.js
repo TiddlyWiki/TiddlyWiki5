@@ -10,6 +10,8 @@ With syntax highlighting and autocompletion support
 
 "use strict";
 
+if(!$tw.browser) return;
+
 var CORE_LIB_TITLE = "$:/plugins/tiddlywiki/codemirror-6/lib/core.js";
 var PLUGIN_MODULE_TYPE = "codemirror6-plugin";
 

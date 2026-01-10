@@ -20,40 +20,126 @@ var presentationAttrs = [
 ];
 
 // Global attributes available on all elements
-var globalAttrs = [
-	{ name: "id", global: true },
-	{ name: "class", global: true },
-	{ name: "style", global: true },
-	{ name: "transform", global: true },
-	{ name: "tabindex", global: true },
-	{ name: "lang", global: true },
-	{ name: "xml:lang", global: true },
-	{ name: "xml:space", global: true, values: ["default", "preserve"] }
+var globalAttrs = [{
+		name: "id",
+		global: true
+	},
+	{
+		name: "class",
+		global: true
+	},
+	{
+		name: "style",
+		global: true
+	},
+	{
+		name: "transform",
+		global: true
+	},
+	{
+		name: "tabindex",
+		global: true
+	},
+	{
+		name: "lang",
+		global: true
+	},
+	{
+		name: "xml:lang",
+		global: true
+	},
+	{
+		name: "xml:space",
+		global: true,
+		values: ["default", "preserve"]
+	}
 ];
 
 // Presentation attributes with common values
-var presentationAttrSpecs = [
-	{ name: "fill", values: ["none", "currentColor", "inherit", "black", "white", "red", "green", "blue", "transparent"] },
-	{ name: "stroke", values: ["none", "currentColor", "inherit", "black", "white", "red", "green", "blue"] },
-	{ name: "stroke-width", values: ["1", "2", "3", "0.5", "1.5"] },
-	{ name: "stroke-linecap", values: ["butt", "round", "square"] },
-	{ name: "stroke-linejoin", values: ["miter", "round", "bevel"] },
-	{ name: "stroke-dasharray", values: ["none", "5,5", "10,5", "5,10", "3,3"] },
-	{ name: "opacity", values: ["0", "0.25", "0.5", "0.75", "1"] },
-	{ name: "fill-opacity", values: ["0", "0.25", "0.5", "0.75", "1"] },
-	{ name: "stroke-opacity", values: ["0", "0.25", "0.5", "0.75", "1"] },
-	{ name: "fill-rule", values: ["nonzero", "evenodd"] },
-	{ name: "clip-rule", values: ["nonzero", "evenodd"] },
-	{ name: "display", values: ["inline", "block", "none", "inherit"] },
-	{ name: "visibility", values: ["visible", "hidden", "collapse", "inherit"] },
-	{ name: "font-family", values: ["serif", "sans-serif", "monospace", "inherit"] },
-	{ name: "font-size", values: ["8", "10", "12", "14", "16", "18", "24", "32", "inherit"] },
-	{ name: "font-style", values: ["normal", "italic", "oblique", "inherit"] },
-	{ name: "font-weight", values: ["normal", "bold", "lighter", "bolder", "100", "200", "300", "400", "500", "600", "700", "800", "900"] },
-	{ name: "text-anchor", values: ["start", "middle", "end", "inherit"] },
-	{ name: "dominant-baseline", values: ["auto", "middle", "central", "text-top", "text-bottom", "alphabetic", "hanging", "mathematical"] },
-	{ name: "alignment-baseline", values: ["auto", "baseline", "before-edge", "text-before-edge", "middle", "central", "after-edge", "text-after-edge", "ideographic", "alphabetic", "hanging", "mathematical"] },
-	{ name: "text-decoration", values: ["none", "underline", "overline", "line-through"] }
+var presentationAttrSpecs = [{
+		name: "fill",
+		values: ["none", "currentColor", "inherit", "black", "white", "red", "green", "blue", "transparent"]
+	},
+	{
+		name: "stroke",
+		values: ["none", "currentColor", "inherit", "black", "white", "red", "green", "blue"]
+	},
+	{
+		name: "stroke-width",
+		values: ["1", "2", "3", "0.5", "1.5"]
+	},
+	{
+		name: "stroke-linecap",
+		values: ["butt", "round", "square"]
+	},
+	{
+		name: "stroke-linejoin",
+		values: ["miter", "round", "bevel"]
+	},
+	{
+		name: "stroke-dasharray",
+		values: ["none", "5,5", "10,5", "5,10", "3,3"]
+	},
+	{
+		name: "opacity",
+		values: ["0", "0.25", "0.5", "0.75", "1"]
+	},
+	{
+		name: "fill-opacity",
+		values: ["0", "0.25", "0.5", "0.75", "1"]
+	},
+	{
+		name: "stroke-opacity",
+		values: ["0", "0.25", "0.5", "0.75", "1"]
+	},
+	{
+		name: "fill-rule",
+		values: ["nonzero", "evenodd"]
+	},
+	{
+		name: "clip-rule",
+		values: ["nonzero", "evenodd"]
+	},
+	{
+		name: "display",
+		values: ["inline", "block", "none", "inherit"]
+	},
+	{
+		name: "visibility",
+		values: ["visible", "hidden", "collapse", "inherit"]
+	},
+	{
+		name: "font-family",
+		values: ["serif", "sans-serif", "monospace", "inherit"]
+	},
+	{
+		name: "font-size",
+		values: ["8", "10", "12", "14", "16", "18", "24", "32", "inherit"]
+	},
+	{
+		name: "font-style",
+		values: ["normal", "italic", "oblique", "inherit"]
+	},
+	{
+		name: "font-weight",
+		values: ["normal", "bold", "lighter", "bolder", "100", "200", "300", "400", "500", "600", "700", "800", "900"]
+	},
+	{
+		name: "text-anchor",
+		values: ["start", "middle", "end", "inherit"]
+	},
+	{
+		name: "dominant-baseline",
+		values: ["auto", "middle", "central", "text-top", "text-bottom", "alphabetic", "hanging", "mathematical"]
+	},
+	{
+		name: "alignment-baseline",
+		values: ["auto", "baseline", "before-edge", "text-before-edge", "middle", "central", "after-edge", "text-after-edge", "ideographic", "alphabetic", "hanging", "mathematical"]
+	},
+	{
+		name: "text-decoration",
+		values: ["none", "underline", "overline", "line-through"]
+	}
 ];
 
 // Container elements that can contain other elements
@@ -363,53 +449,163 @@ var elements = [
 ];
 
 // Additional attribute specifications with values
-var attributes = globalAttrs.concat(presentationAttrSpecs).concat([
-	{ name: "xmlns", values: ["http://www.w3.org/2000/svg"] },
-	{ name: "xmlns:xlink", values: ["http://www.w3.org/1999/xlink"] },
-	{ name: "version", values: ["1.0", "1.1", "2.0"] },
-	{ name: "preserveAspectRatio", values: [
-		"none",
-		"xMinYMin", "xMidYMin", "xMaxYMin",
-		"xMinYMid", "xMidYMid", "xMaxYMid",
-		"xMinYMax", "xMidYMax", "xMaxYMax",
-		"xMinYMin meet", "xMidYMid meet", "xMaxYMax meet",
-		"xMinYMin slice", "xMidYMid slice", "xMaxYMax slice"
-	]},
-	{ name: "overflow", values: ["visible", "hidden", "scroll", "auto"] },
-	{ name: "gradientUnits", values: ["userSpaceOnUse", "objectBoundingBox"] },
-	{ name: "spreadMethod", values: ["pad", "reflect", "repeat"] },
-	{ name: "clipPathUnits", values: ["userSpaceOnUse", "objectBoundingBox"] },
-	{ name: "maskUnits", values: ["userSpaceOnUse", "objectBoundingBox"] },
-	{ name: "maskContentUnits", values: ["userSpaceOnUse", "objectBoundingBox"] },
-	{ name: "patternUnits", values: ["userSpaceOnUse", "objectBoundingBox"] },
-	{ name: "patternContentUnits", values: ["userSpaceOnUse", "objectBoundingBox"] },
-	{ name: "filterUnits", values: ["userSpaceOnUse", "objectBoundingBox"] },
-	{ name: "primitiveUnits", values: ["userSpaceOnUse", "objectBoundingBox"] },
-	{ name: "markerUnits", values: ["strokeWidth", "userSpaceOnUse"] },
-	{ name: "orient", values: ["auto", "auto-start-reverse", "0", "45", "90", "180", "270"] },
-	{ name: "method", values: ["align", "stretch"] },
-	{ name: "spacing", values: ["auto", "exact"] },
-	{ name: "side", values: ["left", "right"] },
-	{ name: "lengthAdjust", values: ["spacing", "spacingAndGlyphs"] },
-	{ name: "target", values: ["_self", "_parent", "_top", "_blank"] },
-	{ name: "crossorigin", values: ["anonymous", "use-credentials"] },
-	{ name: "decoding", values: ["sync", "async", "auto"] },
+var attributes = globalAttrs.concat(presentationAttrSpecs).concat([{
+		name: "xmlns",
+		values: ["http://www.w3.org/2000/svg"]
+	},
+	{
+		name: "xmlns:xlink",
+		values: ["http://www.w3.org/1999/xlink"]
+	},
+	{
+		name: "version",
+		values: ["1.0", "1.1", "2.0"]
+	},
+	{
+		name: "preserveAspectRatio",
+		values: [
+			"none",
+			"xMinYMin", "xMidYMin", "xMaxYMin",
+			"xMinYMid", "xMidYMid", "xMaxYMid",
+			"xMinYMax", "xMidYMax", "xMaxYMax",
+			"xMinYMin meet", "xMidYMid meet", "xMaxYMax meet",
+			"xMinYMin slice", "xMidYMid slice", "xMaxYMax slice"
+		]
+	},
+	{
+		name: "overflow",
+		values: ["visible", "hidden", "scroll", "auto"]
+	},
+	{
+		name: "gradientUnits",
+		values: ["userSpaceOnUse", "objectBoundingBox"]
+	},
+	{
+		name: "spreadMethod",
+		values: ["pad", "reflect", "repeat"]
+	},
+	{
+		name: "clipPathUnits",
+		values: ["userSpaceOnUse", "objectBoundingBox"]
+	},
+	{
+		name: "maskUnits",
+		values: ["userSpaceOnUse", "objectBoundingBox"]
+	},
+	{
+		name: "maskContentUnits",
+		values: ["userSpaceOnUse", "objectBoundingBox"]
+	},
+	{
+		name: "patternUnits",
+		values: ["userSpaceOnUse", "objectBoundingBox"]
+	},
+	{
+		name: "patternContentUnits",
+		values: ["userSpaceOnUse", "objectBoundingBox"]
+	},
+	{
+		name: "filterUnits",
+		values: ["userSpaceOnUse", "objectBoundingBox"]
+	},
+	{
+		name: "primitiveUnits",
+		values: ["userSpaceOnUse", "objectBoundingBox"]
+	},
+	{
+		name: "markerUnits",
+		values: ["strokeWidth", "userSpaceOnUse"]
+	},
+	{
+		name: "orient",
+		values: ["auto", "auto-start-reverse", "0", "45", "90", "180", "270"]
+	},
+	{
+		name: "method",
+		values: ["align", "stretch"]
+	},
+	{
+		name: "spacing",
+		values: ["auto", "exact"]
+	},
+	{
+		name: "side",
+		values: ["left", "right"]
+	},
+	{
+		name: "lengthAdjust",
+		values: ["spacing", "spacingAndGlyphs"]
+	},
+	{
+		name: "target",
+		values: ["_self", "_parent", "_top", "_blank"]
+	},
+	{
+		name: "crossorigin",
+		values: ["anonymous", "use-credentials"]
+	},
+	{
+		name: "decoding",
+		values: ["sync", "async", "auto"]
+	},
 	// Filter-specific attributes
-	{ name: "in", values: ["SourceGraphic", "SourceAlpha", "BackgroundImage", "BackgroundAlpha", "FillPaint", "StrokePaint"] },
-	{ name: "in2", values: ["SourceGraphic", "SourceAlpha", "BackgroundImage", "BackgroundAlpha", "FillPaint", "StrokePaint"] },
-	{ name: "mode", values: ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"] },
-	{ name: "operator", values: ["over", "in", "out", "atop", "xor", "lighter", "arithmetic", "erode", "dilate"] },
-	{ name: "edgeMode", values: ["duplicate", "wrap", "none"] },
-	{ name: "type", values: ["translate", "scale", "rotate", "skewX", "skewY", "matrix", "saturate", "hueRotate", "luminanceToAlpha", "identity", "table", "discrete", "linear", "gamma", "fractalNoise", "turbulence"] },
-	{ name: "xChannelSelector", values: ["R", "G", "B", "A"] },
-	{ name: "yChannelSelector", values: ["R", "G", "B", "A"] },
-	{ name: "stitchTiles", values: ["stitch", "noStitch"] },
+	{
+		name: "in",
+		values: ["SourceGraphic", "SourceAlpha", "BackgroundImage", "BackgroundAlpha", "FillPaint", "StrokePaint"]
+	},
+	{
+		name: "in2",
+		values: ["SourceGraphic", "SourceAlpha", "BackgroundImage", "BackgroundAlpha", "FillPaint", "StrokePaint"]
+	},
+	{
+		name: "mode",
+		values: ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"]
+	},
+	{
+		name: "operator",
+		values: ["over", "in", "out", "atop", "xor", "lighter", "arithmetic", "erode", "dilate"]
+	},
+	{
+		name: "edgeMode",
+		values: ["duplicate", "wrap", "none"]
+	},
+	{
+		name: "type",
+		values: ["translate", "scale", "rotate", "skewX", "skewY", "matrix", "saturate", "hueRotate", "luminanceToAlpha", "identity", "table", "discrete", "linear", "gamma", "fractalNoise", "turbulence"]
+	},
+	{
+		name: "xChannelSelector",
+		values: ["R", "G", "B", "A"]
+	},
+	{
+		name: "yChannelSelector",
+		values: ["R", "G", "B", "A"]
+	},
+	{
+		name: "stitchTiles",
+		values: ["stitch", "noStitch"]
+	},
 	// Animation attributes
-	{ name: "calcMode", values: ["discrete", "linear", "paced", "spline"] },
-	{ name: "additive", values: ["replace", "sum"] },
-	{ name: "accumulate", values: ["none", "sum"] },
-	{ name: "repeatCount", values: ["indefinite"] },
-	{ name: "rotate", values: ["auto", "auto-reverse", "0", "45", "90", "180", "270"] }
+	{
+		name: "calcMode",
+		values: ["discrete", "linear", "paced", "spline"]
+	},
+	{
+		name: "additive",
+		values: ["replace", "sum"]
+	},
+	{
+		name: "accumulate",
+		values: ["none", "sum"]
+	},
+	{
+		name: "repeatCount",
+		values: ["indefinite"]
+	},
+	{
+		name: "rotate",
+		values: ["auto", "auto-reverse", "0", "45", "90", "180", "270"]
+	}
 ]);
 
 exports.svgElements = elements;

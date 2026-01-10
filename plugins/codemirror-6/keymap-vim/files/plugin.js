@@ -158,4 +158,3 @@ exports.plugin = {
 		return [vimModule.vim(), vimHelper];
 	}
 };
-

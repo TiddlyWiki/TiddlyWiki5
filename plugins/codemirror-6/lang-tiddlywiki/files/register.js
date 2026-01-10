@@ -859,6 +859,11 @@ exports.startup = function() {
 			// Filter operator completion bracket mode (called on each completion)
 			getFilterBracketMode: function() {
 				return $tw.wiki.getTiddlerText("$:/config/codemirror-6/lang-tiddlywiki/filterBracketMode", "smart");
+			},
+
+			// Enter key indent behavior callback (called on each keypress)
+			getEnterIndentBehavior: function() {
+				return $tw.wiki.getTiddlerText("$:/config/codemirror-6/lang-tiddlywiki/enterIndent", "smart");
 			}
 		})
 	}));

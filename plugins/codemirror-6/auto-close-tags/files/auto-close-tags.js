@@ -256,4 +256,3 @@ exports.plugin = {
 		return {};
 	}
 };
-
