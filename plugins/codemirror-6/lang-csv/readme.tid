@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-csv/readme
+
+! CSV Language Support
+
+Provides syntax highlighting for CSV in code blocks.
+
+!! Supported Content
+
+* Fenced code blocks
+* Typed blocks: `$$$.csv` or `$$$text/csv`
+* Tiddlers with type `text/csv`
+
+!! Features
+
+* CSV syntax highlighting with proper field coloring
+* Support for quoted fields and escape sequences

@@ -20,6 +20,7 @@
 		"codemirror-6/keymap-vim",
 		"codemirror-6/lang-cpp",
 		"codemirror-6/lang-css",
+		"codemirror-6/lang-csv",
 		"codemirror-6/lang-go",
 		"codemirror-6/lang-html",
 		"codemirror-6/lang-java",
