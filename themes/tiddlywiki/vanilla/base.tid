@@ -2755,6 +2755,10 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	padding: 3px;
 }
 
+.tc-install-plugin > svg {
+	color: white;
+}
+
 .tc-install-plugin.tc-reinstall-downgrade {
 	background: red;
 }
