@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9565
+description: Add stylesheet wiki information
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9565
+github-contributors: Leilei332
+
+Extend wiki information tool to display stylesheet information.
