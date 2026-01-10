@@ -79,6 +79,7 @@ html body .tc-editor-codemirror6-simple .cm-editor.cm-readonly {
 html body .tc-editor-codemirror6-input {
 	display: inline-block;
 	width: auto;
+	min-width: 20ch; /* Match HTML default size="20" */
 	vertical-align: middle;
 	margin: 0;
 }
@@ -86,6 +87,7 @@ html body .tc-editor-codemirror6-input {
 html body .tc-editor-codemirror6-input .cm-editor {
 	display: inline-block;
 	width: auto;
+	min-width: 100%;
 }
 
 html body .tc-editor-codemirror6-input .cm-scroller {
