@@ -8,9 +8,9 @@ With syntax highlighting and autocompletion support
 
 \*/
 
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
-
-if(!$tw.browser) return;
 
 var CORE_LIB_TITLE = "$:/plugins/tiddlywiki/codemirror-6/lib/core.js";
 var PLUGIN_MODULE_TYPE = "codemirror6-plugin";
@@ -205,6 +205,11 @@ function buildPluginContext(options, engine) {
 function CodeMirrorSimpleEngine(options) {
 	options = options || {};
 	var self = this;
+
+	// Browser check - this engine only works in the browser
+	if(!$tw || !$tw.browser) {
+		throw new Error("CodeMirrorSimpleEngine can only run in the browser.");
+	}
 
 	this.widget = options.widget;
 	this.parentNode = options.parentNode;
