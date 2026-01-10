@@ -156,15 +156,15 @@ html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-co
 	padding: 4px 6px;
 }
 
-/* Sidebar search - full width */
-html body .tc-sidebar-search .tc-editor-codemirror6-input {
-	display: block;
-	width: 100%;
+/* Sidebar search - inline with search button */
+html body .tc-search .tc-editor-codemirror6-input {
+	display: inline-block;
+	width: auto;
 }
 
-html body .tc-sidebar-search .tc-editor-codemirror6-input .cm-editor {
-	display: block;
-	width: 100%;
+html body .tc-search .tc-editor-codemirror6-input .cm-editor {
+	display: inline-block;
+	width: auto;
 }
 
 /* Advanced search - 60% width */
@@ -429,4 +429,18 @@ html body .tc-edit-field-add-value .tc-editor-codemirror6-input .cm-scroller {
 /* Add button keeps its size */
 html body .tc-edit-field-add > .tc-edit-field-add-button {
 	flex: 0 0 auto;
+}
+
+/* ============================================
+   ControlPanel - full width inputs
+   ============================================ */
+
+html body .tc-control-panel .tc-editor-codemirror6-input {
+	display: block;
+	width: 100%;
+}
+
+html body .tc-control-panel .tc-editor-codemirror6-input .cm-editor {
+	display: block;
+	width: 100%;
 }
