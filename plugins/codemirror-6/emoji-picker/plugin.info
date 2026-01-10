@@ -3,7 +3,7 @@
   "name": "Emoji Picker",
   "description": "CodeMirror 6 emoji picker with autocomplete support",
   "author": "TiddlyWiki",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "core-version": ">=5.3.0",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
