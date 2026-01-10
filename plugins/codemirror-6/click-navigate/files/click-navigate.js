@@ -461,6 +461,31 @@ function handleBlur(event, view) {
 	clearHighlight(view);
 }
 
+/**
+ * Handle mousedown to prevent multi-cursor insertion when Ctrl+clicking on links.
+ * CodeMirror adds secondary cursors on mousedown with Ctrl held, so we need to
+ * prevent default here if we're on a navigatable link.
+ */
+function handleMouseDown(event, view) {
+	// Check for Ctrl+Click (Cmd+Click on Mac)
+	var ctrlKey = event.ctrlKey || event.metaKey;
+	if(!ctrlKey) return false;
+
+	var pos = view.posAtCoords({
+		x: event.clientX,
+		y: event.clientY
+	});
+	if(pos === null) return false;
+
+	var link = getLinkAtPos(view.state, pos);
+	if(!link) return false;
+
+	// We're on a navigatable link - prevent default to stop multi-cursor insertion
+	// The actual navigation happens in the click handler
+	event.preventDefault();
+	return true;
+}
+
 // ============================================================================
 // Plugin Definition
 // ============================================================================
@@ -510,6 +535,7 @@ exports.plugin = {
 				keyup: handleKeyUp,
 				mousemove: handleMouseMove,
 				mouseleave: handleMouseLeave,
+				mousedown: handleMouseDown,
 				click: handleClick,
 				blur: handleBlur
 			}),
