@@ -13,7 +13,7 @@ Image preview plugin - shows inline previews of images referenced with [img[]] s
 
 if(!$tw.browser) return;
 
-var CONFIG_TIDDLER = "$:/config/codemirror-6/imagePreview";
+var CONFIG_TIDDLER = "$:/config/codemirror-6/image-preview/enabled";
 
 // Match [img[source]] or [img width=x [source]] patterns
 // - Must start with [img preceded by start of string, whitespace, or non-letter

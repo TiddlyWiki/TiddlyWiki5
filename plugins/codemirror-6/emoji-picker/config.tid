@@ -1,8 +1,0 @@
-title: $:/config/codemirror-6/emojiPicker
-tags: $:/tags/Config/CodeMirror/Editor
-caption: Emoji picker
-description: Show emoji suggestions when typing :shortcode
-config-type: checkbox
-config-category: Autocomplete
-default: yes
-text: yes

@@ -419,7 +419,7 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-editor-codemirror6 .cm-cursorLayer {
-    animation: cm-blink {{$:/config/codemirror-6/cursorBlinkRate}}ms infinite;
+    animation: cm-blink {{$:/config/codemirror-6/editor/cursorBlinkRate}}ms infinite;
 }
 
 /* ============================================================================

@@ -1,8 +1,0 @@
-title: $:/config/codemirror-6/snippets
-tags: $:/tags/Config/CodeMirror/Editor
-caption: Snippets
-description: Enable user-defined code snippets (tagged with $:/tags/CodeMirror/Snippet)
-config-type: checkbox
-config-category: Autocomplete
-default: yes
-text: yes

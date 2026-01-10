@@ -1216,6 +1216,8 @@ function findUnclosedPragmas(text, startPos) {
  * must appear at the top of their scope before any regular content.
  * This applies both at document level AND within pragma bodies.
  *
+ * Comments (<!-- ... -->) are NOT considered content and are ignored.
+ *
  * Example of invalid:
  *   \define outer()
  *   \procedure inner()
@@ -1234,6 +1236,7 @@ function findMisplacedPragmas(text, startPos) {
 	// bodyStartPos is where the pragma's body starts (for quick-fix insertion)
 	var pragmaStack = [];
 	var foundContentAtRoot = false; // Track content at document root level
+	var inMultiLineComment = false; // Track if we're inside a multi-line comment
 
 	// Pragma patterns
 	var pragmaOpenRe = /^\\(define|procedure|function|widget)\s+([^\s(]+)/;
@@ -1246,6 +1249,31 @@ function findMisplacedPragmas(text, startPos) {
 
 		// Skip blank lines
 		if(trimmed === "") {
+			pos += line.length + 1;
+			continue;
+		}
+
+		// Handle multi-line comment tracking
+		if(inMultiLineComment) {
+			// Check if this line ends the comment
+			if(trimmed.indexOf("-->") !== -1) {
+				inMultiLineComment = false;
+			}
+			// Skip this line (it's part of a comment)
+			pos += line.length + 1;
+			continue;
+		}
+
+		// Check for single-line comment (contains both <!-- and -->)
+		if(trimmed.indexOf("<!--") !== -1 && trimmed.indexOf("-->") !== -1) {
+			// Single-line comment - skip it
+			pos += line.length + 1;
+			continue;
+		}
+
+		// Check for start of multi-line comment
+		if(trimmed.indexOf("<!--") !== -1) {
+			inMultiLineComment = true;
 			pos += line.length + 1;
 			continue;
 		}
@@ -2016,15 +2044,15 @@ function createTiddlyWikiLinter(view) {
 							// Remove from current position and insert at target position
 							view.dispatch({
 								changes: [{
-									from: deleteStart,
-									to: deleteEnd,
-									insert: ""
-								},
-								{
-									from: adjustedInsertPos,
-									to: adjustedInsertPos,
-									insert: pragmaText + "\n"
-								}
+										from: deleteStart,
+										to: deleteEnd,
+										insert: ""
+									},
+									{
+										from: adjustedInsertPos,
+										to: adjustedInsertPos,
+										insert: pragmaText + "\n"
+									}
 								]
 							});
 						};
@@ -2222,7 +2250,7 @@ function createTiddlyWikiLinter(view) {
 function isLintEnabled(wiki) {
 	wiki = wiki || $tw.wiki;
 	if(wiki) {
-		var enabled = (wiki.getTiddlerText("$:/config/codemirror-6/lint", "yes") || "").trim();
+		var enabled = (wiki.getTiddlerText("$:/config/codemirror-6/lint/enabled", "yes") || "").trim();
 		return enabled === "yes";
 	}
 	return true;
@@ -2359,7 +2387,7 @@ exports.plugin = {
 		var perTiddlerDisableTiddler = tiddlerTitle ? "$:/temp/codemirror-6/lint-disabled/" + tiddlerTitle : null;
 
 		for(var title in changedTiddlers) {
-			if(title === "$:/config/codemirror-6/lint") {
+			if(title === "$:/config/codemirror-6/lint/enabled") {
 				globalConfigChanged = true;
 				lintConfigChanged = true;
 			} else if(title.indexOf("$:/config/codemirror-6/lint/") === 0) {

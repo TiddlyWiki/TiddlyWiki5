@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/html
+tags: $:/tags/CodeMirror/Language
+name: HTML
+type: text/html
+category: Web
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-html

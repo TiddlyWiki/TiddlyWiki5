@@ -37,11 +37,13 @@ exports.plugin = {
 	},
 
 	condition: function(context) {
-		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
-			return true;
+		// If any tag override is active, only the winning plugin activates
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
 		}
-		var type = context.tiddlerType;
-		return WAST_TYPES.indexOf(type) !== -1;
+		// Normal mode: tag match or type match
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
+		return WAST_TYPES.indexOf(context.tiddlerType) !== -1;
 	},
 
 	getCompartmentContent: function(_context) {

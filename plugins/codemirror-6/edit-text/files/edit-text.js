@@ -18,10 +18,10 @@ var BaseEditTextWidget = editTextWidgetFactory(CodeMirrorEngine, CodeMirrorSimpl
 
 // Theme-related tiddlers to watch for changes
 var THEME_TIDDLERS = [
-	"$:/config/codemirror-6/theme",
-	"$:/config/codemirror-6/theme-light",
-	"$:/config/codemirror-6/theme-dark",
-	"$:/config/codemirror-6/auto-match-palette",
+	"$:/config/codemirror-6/editor/theme",
+	"$:/config/codemirror-6/editor/theme-light",
+	"$:/config/codemirror-6/editor/theme-dark",
+	"$:/config/codemirror-6/editor/auto-match-palette",
 	"$:/palette"
 ];
 
@@ -61,7 +61,7 @@ CM6EditTextWidget.prototype.constructor = CM6EditTextWidget;
 CM6EditTextWidget.prototype._getCurrentTheme = function () {
 	var wiki = this.wiki;
 	var autoMatch = wiki.getTiddlerText(
-		"$:/config/codemirror-6/auto-match-palette",
+		"$:/config/codemirror-6/editor/auto-match-palette",
 		"yes"
 	) === "yes";
 
@@ -72,13 +72,13 @@ CM6EditTextWidget.prototype._getCurrentTheme = function () {
 
 		return wiki.getTiddlerText(
 			isDark
-				? "$:/config/codemirror-6/theme-dark"
-				: "$:/config/codemirror-6/theme-light",
+				? "$:/config/codemirror-6/editor/theme-dark"
+				: "$:/config/codemirror-6/editor/theme-light",
 			isDark ? "vanilla-dark" : "vanilla"
 		);
 	}
 
-	return wiki.getTiddlerText("$:/config/codemirror-6/theme", "vanilla");
+	return wiki.getTiddlerText("$:/config/codemirror-6/editor/theme", "vanilla");
 };
 
 /**
@@ -101,50 +101,51 @@ CM6EditTextWidget.prototype._buildSettingsSnapshot = function () {
 
 	return {
 		// Editing features
-		bracketMatching: boolConfig(wiki, "$:/config/codemirror-6/bracketMatching", true),
-		closeBrackets: boolConfig(wiki, "$:/config/codemirror-6/closeBrackets", true),
+		bracketMatching: boolConfig(wiki, "$:/config/codemirror-6/editor/bracketMatching", true),
+		closeBrackets: boolConfig(wiki, "$:/config/codemirror-6/editor/closeBrackets", true),
 
 		// Spellcheck
-		spellcheck: boolConfig(wiki, "$:/config/codemirror-6/spellcheck", false),
+		spellcheck: boolConfig(wiki, "$:/config/codemirror-6/editor/spellcheck", false),
 
 		// Indentation
 		indent: {
-			indentUnit: wiki.getTiddlerText("$:/config/codemirror-6/indentUnit", "tabs"),
-			indentUnitMultiplier: wiki.getTiddlerText("$:/config/codemirror-6/indentUnitMultiplier", "4")
+			indentUnit: wiki.getTiddlerText("$:/config/codemirror-6/editor/indentUnit", "tabs"),
+			indentUnitMultiplier: wiki.getTiddlerText("$:/config/codemirror-6/editor/indentUnitMultiplier", "4")
 		},
 
-		// Keymap
-		keymap: wiki.getTiddlerText("$:/config/codemirror-6/simple-keymap", "") ||
-			wiki.getTiddlerText("$:/config/codemirror-6/keymap", "default") ||
-			"default",
+		// Keymap settings (engine resolves fallback chain based on mode)
+		keymap: wiki.getTiddlerText("$:/config/codemirror-6/editor/keymap", "default") || "default",
+		simpleKeymap: wiki.getTiddlerText("$:/config/codemirror-6/simple/keymap", ""),
+		simpleKeymapInput: wiki.getTiddlerText("$:/config/codemirror-6/simple/keymap-input", ""),
+		simpleKeymapTextarea: wiki.getTiddlerText("$:/config/codemirror-6/simple/keymap-textarea", ""),
 
 		// Theme (for plugins that might need it)
 		theme: this._getCurrentTheme(),
 
 		// Line numbers and active line (for line-numbers plugin)
-		lineNumbers: boolConfig(wiki, "$:/config/codemirror-6/lineNumbers", true),
-		highlightActiveLine: boolConfig(wiki, "$:/config/codemirror-6/highlightActiveLine", true),
+		lineNumbers: boolConfig(wiki, "$:/config/codemirror-6/editor/lineNumbers", true),
+		highlightActiveLine: boolConfig(wiki, "$:/config/codemirror-6/editor/highlightActiveLine", true),
 
 		// Autocompletion features
-		emojiPicker: boolConfig(wiki, "$:/config/codemirror-6/emojiPicker", true),
-		snippets: boolConfig(wiki, "$:/config/codemirror-6/snippets", true),
-		completeAnyWord: boolConfig(wiki, "$:/config/codemirror-6/completeAnyWord", false),
+		emojiPicker: boolConfig(wiki, "$:/config/codemirror-6/emoji-picker/enabled", true),
+		snippets: boolConfig(wiki, "$:/config/codemirror-6/snippets/enabled", true),
+		completeAnyWord: boolConfig(wiki, "$:/config/codemirror-6/editor/completeAnyWord", false),
 
 		// Visual features
-		colorPicker: boolConfig(wiki, "$:/config/codemirror-6/colorPicker", false),
-		imagePreview: boolConfig(wiki, "$:/config/codemirror-6/imagePreview", false),
-		wordCount: boolConfig(wiki, "$:/config/codemirror-6/wordCount", false),
-		showTrailingWhitespace: boolConfig(wiki, "$:/config/codemirror-6/showTrailingWhitespace", false),
+		colorPicker: boolConfig(wiki, "$:/config/codemirror-6/color-picker/enabled", false),
+		imagePreview: boolConfig(wiki, "$:/config/codemirror-6/image-preview/enabled", false),
+		wordCount: boolConfig(wiki, "$:/config/codemirror-6/word-count/enabled", false),
+		showTrailingWhitespace: boolConfig(wiki, "$:/config/codemirror-6/editor/showTrailingWhitespace", false),
 
 		// Navigation features
-		linkPreview: boolConfig(wiki, "$:/config/codemirror-6/linkPreview", true),
-		clickNavigate: boolConfig(wiki, "$:/config/codemirror-6/clickNavigate", true),
+		linkPreview: boolConfig(wiki, "$:/config/codemirror-6/link-preview/enabled", true),
+		clickNavigate: boolConfig(wiki, "$:/config/codemirror-6/click-navigate/enabled", true),
 
 		// Tag and widget handling
-		autoCloseTags: wiki.getTiddlerText("$:/config/codemirror-6/autoCloseTags", "yes") !== "no",
+		autoCloseTags: wiki.getTiddlerText("$:/config/codemirror-6/auto-close-tags/enabled", "yes") !== "no",
 
 		// Multi-cursor editing
-		multiCursor: boolConfig(wiki, "$:/config/codemirror-6/multiCursor", true)
+		multiCursor: boolConfig(wiki, "$:/config/codemirror-6/editor/multiCursor", true)
 	};
 };
 

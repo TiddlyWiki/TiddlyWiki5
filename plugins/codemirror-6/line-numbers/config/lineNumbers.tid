@@ -1,5 +1,4 @@
-title: $:/config/codemirror-6/lineNumbers
-tags: $:/tags/Config/CodeMirror/Editor
+title: $:/config/codemirror-6/editor/lineNumbers
 caption: Show line numbers
 description: Displays line numbers in the left gutter
 config-type: checkbox

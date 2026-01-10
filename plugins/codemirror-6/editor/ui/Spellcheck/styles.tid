@@ -1,6 +1,8 @@
 title: $:/plugins/tiddlywiki/codemirror-6/ui/Spellcheck/styles
 tags: $:/tags/Stylesheet
 
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
 .cm6-spellcheck-dropdown {
   min-width: 180px;
   padding: 4px 0;

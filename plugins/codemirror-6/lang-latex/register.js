@@ -36,21 +36,35 @@ exports.startup = function() {
 	// which would override ALL completion sources in the editor.
 	// Instead, we register completions via languageData which scopes them to LaTeX content only.
 	var latexSupport;
+	var actualLatexSource;
 	if(LanguageSupport && latexLanguage) {
 		var support = [];
 		// Add LaTeX-specific completions via languageData (not override)
 		// latexCompletionSource is a factory: latexCompletionSource(autoCloseTagsEnabled) => CompletionSource
 		if(latexCompletionSource) {
 			// Call the factory to get the actual completion source
-			var actualSource = latexCompletionSource(false);
+			actualLatexSource = latexCompletionSource(false);
 			support.push(latexLanguage.data.of({
-				autocomplete: actualSource
+				autocomplete: actualLatexSource
 			}));
 		}
 		latexSupport = new LanguageSupport(latexLanguage, support);
 	} else {
 		// Fallback if latexLanguage isn't available
 		latexSupport = langLatex.latex();
+	}
+
+	// Store completion source for use by other modules
+	if(actualLatexSource) {
+		core.latexCompletionSource = actualLatexSource;
+
+		// Register for nested language completion in TiddlyWiki
+		// Uses Language.isActiveAt() for detection
+		core.registerNestedLanguageCompletion({
+			name: "latex",
+			language: latexLanguage,
+			source: actualLatexSource
+		});
 	}
 
 	core.registerLanguage(LanguageDescription.of({

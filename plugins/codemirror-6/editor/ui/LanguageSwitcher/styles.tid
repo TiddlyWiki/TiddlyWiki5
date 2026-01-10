@@ -1,25 +1,22 @@
 title: $:/plugins/tiddlywiki/codemirror-6/ui/LanguageSwitcher/styles
 tags: $:/tags/Stylesheet
 
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
 .cm6-language-dropdown {
-  min-width: 160px;
+  min-width: 180px;
   padding: 4px 0;
-  /* Ensure dropdown contains all children properly */
-  display: flex;
-  flex-direction: column;
 }
 
-.cm6-language-dropdown .cm6-language-section {
+.cm6-language-section {
   padding: 4px 0;
-  display: flex;
-  flex-direction: column;
 }
 
-.cm6-language-dropdown .cm6-language-section:not(:last-child) {
+.cm6-language-section:not(:last-child) {
   border-bottom: 1px solid <<colour tiddler-editor-border>>;
 }
 
-.cm6-language-dropdown .cm6-language-section-title {
+.cm6-language-section-title {
   padding: 4px 12px 2px;
   font-size: 0.85em;
   font-weight: 600;
@@ -28,73 +25,19 @@ tags: $:/tags/Stylesheet
   letter-spacing: 0.5px;
 }
 
-.cm6-language-dropdown .cm6-language-option {
-  display: block !important;
-  width: 100% !important;
+.cm6-language-option {
+  display: block;
+  width: 100%;
   padding: 6px 12px;
   text-align: left;
   border-radius: 0;
-  float: none !important;
 }
 
-.cm6-language-dropdown .cm6-language-option:hover {
+.cm6-language-option:hover {
   background: <<colour tiddler-editor-background>>;
 }
 
-/* Modal styles */
-.cm6-language-modal {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 16px;
-}
-
-.cm6-language-modal-section h3 {
-  margin: 0 0 8px 0;
-  font-size: 0.9em;
-  color: <<colour muted-foreground>>;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.cm6-language-modal-option {
-  display: block;
-  width: 100%;
-  padding: 8px 12px;
-  margin: 2px 0;
-  text-align: left;
-  border-radius: 4px;
-  border: 1px solid <<colour tiddler-editor-border>>;
-}
-
-.cm6-language-modal-option:hover {
-  background: <<colour tiddler-editor-background>>;
-  border-color: <<colour primary>>;
-}
-
-/* Keyboard-triggered picker */
-.cm6-language-picker {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  padding: 8px;
-  background: <<colour tiddler-background>>;
-  border-bottom: 1px solid <<colour tiddler-editor-border>>;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-.cm6-language-picker-option {
-  padding: 6px 12px;
-  border: 1px solid <<colour tiddler-editor-border>>;
-  border-radius: 4px;
-  background: <<colour tiddler-background>>;
-  cursor: pointer;
-  font-size: 0.9em;
-}
-
-.cm6-language-picker-option:hover,
-.cm6-language-picker-option:focus {
+.cm6-language-option.cm6-selected {
   background: <<colour primary>>;
   color: <<colour background>>;
-  border-color: <<colour primary>>;
-  outline: none;
 }

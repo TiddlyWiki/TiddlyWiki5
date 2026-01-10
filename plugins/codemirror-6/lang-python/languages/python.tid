@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/python
+tags: $:/tags/CodeMirror/Language
+name: Python
+type: text/x-python
+category: Programming
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-python

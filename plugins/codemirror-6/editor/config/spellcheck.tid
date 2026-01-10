@@ -1,5 +1,4 @@
-title: $:/config/codemirror-6/spellcheck
-tags: $:/tags/Config/CodeMirror/Editor
+title: $:/config/codemirror-6/editor/spellcheck
 caption: Spellcheck
 description: Enable browser spellcheck (red underlines for misspelled words)
 config-type: checkbox

@@ -10,6 +10,7 @@ CSS language support for CodeMirror 6
 "use strict";
 
 var langCss = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-css/lang-css.js");
+var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 
 // Content types that activate this plugin
 var CSS_TYPES = [
@@ -36,17 +37,23 @@ exports.plugin = {
 	},
 
 	condition: function(context) {
-		// Tag-based override takes precedence
-		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
-			return true;
+		// If any tag override is active, only the winning plugin activates
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
 		}
-		// Fall back to content type check
-		var type = context.tiddlerType;
-		return CSS_TYPES.indexOf(type) !== -1;
+		// Normal mode: tag match or type match
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
+		return CSS_TYPES.indexOf(context.tiddlerType) !== -1;
 	},
 
 	getCompartmentContent: function(_context) {
-		return [langCss.css()];
+		var extensions = [langCss.css()];
+		// Add enhanced CSS completions with page class support
+		// (registered by register.js at startup)
+		if(core.cssCompletionExtension) {
+			extensions.push(core.cssCompletionExtension);
+		}
+		return extensions;
 	},
 
 	getExtensions: function(context) {

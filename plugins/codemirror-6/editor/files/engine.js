@@ -112,74 +112,122 @@ function hasWindowTimers() {
 // Focus Navigation (Ctrl+. / Ctrl+Shift+.)
 // ============================================================================
 
-// Only input-type elements for focus navigation (not buttons/links)
-var INPUT_SELECTOR = [
-	"textarea:not([disabled])",
-	'input:not([disabled]):not([type="button"]):not([type="submit"]):not([type="reset"])',
-	"select:not([disabled])",
-	'[contenteditable="true"]'
+// All focusable elements for focus navigation (respects tabindex)
+var FOCUSABLE_SELECTOR = [
+	'input:not([disabled]):not([tabindex="-1"])',
+	'textarea:not([disabled]):not([tabindex="-1"])',
+	'select:not([disabled]):not([tabindex="-1"])',
+	'button:not([disabled]):not([tabindex="-1"])',
+	'a[href]:not([tabindex="-1"])',
+	'[tabindex]:not([tabindex="-1"]):not([disabled])',
+	'[contenteditable="true"]:not([tabindex="-1"])'
 ].join(", ");
 
 /**
- * Get all visible input elements in document order
+ * Get all visible focusable elements sorted by tabindex (browser tab order)
+ * @param {Document} doc - The document to search in
+ * @returns {Element[]} Array of focusable elements in tab order
  */
-function getInputElements() {
-	return Array.prototype.slice.call(
-		document.querySelectorAll(INPUT_SELECTOR)
+function getFocusableElements(doc) {
+	var allFocusables = Array.prototype.slice.call(
+		doc.querySelectorAll(FOCUSABLE_SELECTOR)
 	).filter(function(el) {
 		// Filter out hidden elements
 		return el.offsetParent !== null;
 	});
-}
 
-/**
- * Focus the next input element after the editor
- */
-function focusNextElement(view) {
-	var elements = getInputElements();
-	var editorDOM = view.dom;
+	// Sort by tabindex (browser order: positive tabindex first in order, then 0/none in DOM order)
+	var withPositiveTabindex = [];
+	var withZeroOrNoTabindex = [];
 
-	// Find the last input element inside the editor
-	var editorIndex = -1;
-	for(var i = 0; i < elements.length; i++) {
-		if(editorDOM.contains(elements[i]) || elements[i] === editorDOM) {
-			editorIndex = i;
+	for(var i = 0; i < allFocusables.length; i++) {
+		var el = allFocusables[i];
+		var ti = parseInt(el.getAttribute("tabindex"), 10);
+		if(ti > 0) {
+			withPositiveTabindex.push({
+				el: el,
+				tabindex: ti
+			});
+		} else {
+			withZeroOrNoTabindex.push(el);
 		}
 	}
 
+	// Sort positive tabindex elements by their tabindex value
+	withPositiveTabindex.sort(function(a, b) {
+		return a.tabindex - b.tabindex;
+	});
+
+	// Build final ordered list: positive tabindex first, then zero/none in DOM order
+	var result = [];
+	for(var j = 0; j < withPositiveTabindex.length; j++) {
+		result.push(withPositiveTabindex[j].el);
+	}
+	for(var k = 0; k < withZeroOrNoTabindex.length; k++) {
+		result.push(withZeroOrNoTabindex[k]);
+	}
+
+	return result;
+}
+
+/**
+ * Find the editor's index in the focusable elements list
+ * @param {Element[]} focusables - Array of focusable elements
+ * @param {Element} editorDOM - The editor's DOM element
+ * @returns {number} Index of the editor, or -1 if not found
+ */
+function findEditorIndex(focusables, editorDOM) {
+	for(var i = 0; i < focusables.length; i++) {
+		if(focusables[i] === editorDOM ||
+			editorDOM.contains(focusables[i]) ||
+			focusables[i].contains(editorDOM)) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+/**
+ * Focus the next focusable element after the editor
+ */
+function focusNextElement(view) {
+	var doc = view.dom.ownerDocument || document;
+	var focusables = getFocusableElements(doc);
+	var editorDOM = view.dom;
+
+	// Find the editor in the focusables list
+	var editorIndex = findEditorIndex(focusables, editorDOM);
+
 	// Focus the next element after the editor
-	if(editorIndex >= 0 && editorIndex < elements.length - 1) {
-		elements[editorIndex + 1].focus();
-	} else if(elements.length > 0) {
+	var nextIndex = editorIndex + 1;
+	if(nextIndex >= 0 && nextIndex < focusables.length) {
+		focusables[nextIndex].focus();
+	} else if(focusables.length > 0) {
 		// Wrap around to first element
-		elements[0].focus();
+		focusables[0].focus();
 	}
 
 	return true;
 }
 
 /**
- * Focus the previous input element before the editor
+ * Focus the previous focusable element before the editor
  */
 function focusPrevElement(view) {
-	var elements = getInputElements();
+	var doc = view.dom.ownerDocument || document;
+	var focusables = getFocusableElements(doc);
 	var editorDOM = view.dom;
 
-	// Find the first input element inside the editor
-	var editorIndex = -1;
-	for(var i = 0; i < elements.length; i++) {
-		if(editorDOM.contains(elements[i]) || elements[i] === editorDOM) {
-			editorIndex = i;
-			break;
-		}
-	}
+	// Find the editor in the focusables list
+	var editorIndex = findEditorIndex(focusables, editorDOM);
 
 	// Focus the previous element before the editor
-	if(editorIndex > 0) {
-		elements[editorIndex - 1].focus();
-	} else if(elements.length > 0) {
+	var prevIndex = editorIndex - 1;
+	if(prevIndex >= 0) {
+		focusables[prevIndex].focus();
+	} else if(focusables.length > 0) {
 		// Wrap around to last element
-		elements[elements.length - 1].focus();
+		focusables[focusables.length - 1].focus();
 	}
 
 	return true;
@@ -258,6 +306,7 @@ function discoverPlugins() {
 	if(_pluginCache) return _pluginCache;
 
 	var plugins = [];
+	var seenPluginNames = {}; // Track plugin names to prevent duplicates
 	var core = getCM6Core();
 
 	// Use TiddlyWiki's official module iteration API
@@ -273,6 +322,14 @@ function discoverPlugins() {
 					pluginDef.name = pluginDef.name || title;
 					pluginDef.priority = isNumber(pluginDef.priority) ? pluginDef.priority : 0;
 					pluginDef._moduleName = title;
+
+					// Check for duplicate plugin names
+					if(seenPluginNames[pluginDef.name]) {
+						console.warn("[engine discoverPlugins] DUPLICATE plugin name detected:", pluginDef.name,
+							"from:", title, "- already registered from:", seenPluginNames[pluginDef.name]);
+						return; // Skip this duplicate
+					}
+					seenPluginNames[pluginDef.name] = title;
 
 					// Call init if present
 					if(isFunction(pluginDef.init)) {
@@ -308,7 +365,8 @@ function buildPluginContext(options, engine, overrideType) {
 		readOnly: !!options.readOnly,
 		cm6Core: getCM6Core(),
 		engine: engine,
-		options: options
+		options: options,
+		hasTagOverride: false // Will be set below if any tag override is active
 	};
 
 	if(options.widget) {
@@ -351,6 +409,17 @@ function buildPluginContext(options, engine, overrideType) {
 	if(overrideType !== undefined) {
 		context.tiddlerType = overrideType;
 	}
+
+	// Check if any language plugin has a tag override for this tiddler
+	// When a tag override is active, type-based language detection is skipped
+	// tagOverrideWinner contains the config tiddler path of the winning plugin
+	try {
+		var utils = require("$:/plugins/tiddlywiki/codemirror-6/utils.js");
+		if(utils && utils.getTagOverrideWinner) {
+			context.tagOverrideWinner = utils.getTagOverrideWinner(context);
+			context.hasTagOverride = context.tagOverrideWinner !== null;
+		}
+	} catch(_e) {}
 
 	return context;
 }
@@ -571,6 +640,16 @@ function CodeMirrorEngine(options) {
 		extensions.push(lineWrapping);
 	}
 
+	// Core: Tooltips configuration - append to document.body to prevent clipping
+	// This affects autocomplete popups, hover tooltips, lint markers, etc.
+	var tooltips = (core.view || {}).tooltips;
+	if(tooltips) {
+		var tooltipParent = this.widget && this.widget.document ? this.widget.document.body : document.body;
+		extensions.push(tooltips({
+			parent: tooltipParent
+		}));
+	}
+
 	// Core: Set tabindex on the editor content element
 	var tabIndex = this.widget && this.widget.editTabIndex;
 	if(tabIndex !== undefined && tabIndex !== null) {
@@ -589,22 +668,22 @@ function CodeMirrorEngine(options) {
 	// Note: Browser spellcheck requires both spellcheck="true" AND a lang attribute
 	// to know which dictionary to use. Without lang, most browsers won't underline words.
 	var wiki = this.widget && this.widget.wiki;
-	var spellcheckEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/spellcheck") === "yes";
+	var spellcheckEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/editor/spellcheck") === "yes";
 	// Get language from spellcheck config, default to "en"
-	var spellcheckLang = (wiki && wiki.getTiddlerText("$:/config/codemirror-6/spellcheck-lang")) || "en";
+	var spellcheckLang = (wiki && wiki.getTiddlerText("$:/config/codemirror-6/editor/spellcheck-lang")) || "en";
 	if(this._compartments.spellcheck) {
 		extensions.push(
 			this._compartments.spellcheck.of(
 				spellcheckEnabled ?
-					EditorView.contentAttributes.of({
-						spellcheck: "true",
-						lang: spellcheckLang,
-						autocorrect: "on",
-						autocapitalize: "on"
-					}) :
-					EditorView.contentAttributes.of({
-						spellcheck: "false"
-					})
+				EditorView.contentAttributes.of({
+					spellcheck: "true",
+					lang: spellcheckLang,
+					autocorrect: "on",
+					autocapitalize: "on"
+				}) :
+				EditorView.contentAttributes.of({
+					spellcheck: "false"
+				})
 			)
 		);
 	}
@@ -704,7 +783,7 @@ function CodeMirrorEngine(options) {
 
 	// Core: Multi-cursor support (with compartment for dynamic toggle)
 	// Get initial setting from config
-	var multiCursorEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/multiCursor", "yes") === "yes";
+	var multiCursorEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/editor/multiCursor", "yes") === "yes";
 	var multiCursorExtensions = [];
 	if(multiCursorEnabled && EditorState.allowMultipleSelections) {
 		multiCursorExtensions.push(EditorState.allowMultipleSelections.of(true));
@@ -804,7 +883,7 @@ function CodeMirrorEngine(options) {
 	extensions.push(this._compartments.multiCursor.of(multiCursorExtensions));
 
 	// Core: Trailing whitespace highlighting (with compartment for dynamic toggle)
-	var trailingWhitespaceEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/showTrailingWhitespace", "no") === "yes";
+	var trailingWhitespaceEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/editor/showTrailingWhitespace", "no") === "yes";
 	var trailingWhitespaceExtensions = [];
 	var highlightTrailingWhitespace = (core.view || {}).highlightTrailingWhitespace;
 	if(trailingWhitespaceEnabled && highlightTrailingWhitespace) {
@@ -814,7 +893,7 @@ function CodeMirrorEngine(options) {
 
 	// Core: Bidirectional text support (with compartment for dynamic toggle)
 	// Enables automatic per-line text direction detection (RTL/LTR)
-	var bidiEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/bidiPerLine", "no") === "yes";
+	var bidiEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/editor/bidiPerLine", "no") === "yes";
 	var bidiExtensions = [];
 	var perLineTextDirection = EditorView.perLineTextDirection;
 	if(bidiEnabled && perLineTextDirection) {
@@ -855,7 +934,9 @@ function CodeMirrorEngine(options) {
 			var sources = self.getCompletionSources();
 			for(var i = 0; i < sources.length; i++) {
 				var result = sources[i](context);
-				if(result) return result;
+				if(result) {
+					return result;
+				}
 			}
 			// completeAnyWord as fallback if enabled
 			if(self._completeAnyWordEnabled && self._completeAnyWord) {
@@ -875,7 +956,7 @@ function CodeMirrorEngine(options) {
 	}));
 
 	// Core: Autocompletion UI (with compartment for dynamic toggle)
-	var autocompletionEnabled = !wiki || wiki.getTiddlerText("$:/config/codemirror-6/autocompletion", "yes") !== "no";
+	var autocompletionEnabled = !wiki || wiki.getTiddlerText("$:/config/codemirror-6/editor/autocompletion", "yes") !== "no";
 	var autocompletionExts = [];
 	if(autocompletionEnabled && autocompletionFn) {
 		autocompletionExts.push(autocompletionFn({
@@ -887,7 +968,7 @@ function CodeMirrorEngine(options) {
 
 	// Core: Keymap compartment (for vim/emacs dynamic switching)
 	// Get initial keymap from config and load extensions from matching plugin
-	var initialKeymapId = wiki && wiki.getTiddlerText("$:/config/codemirror-6/keymap", "default") || "default";
+	var initialKeymapId = wiki && wiki.getTiddlerText("$:/config/codemirror-6/editor/keymap", "default") || "default";
 	var initialKeymapExtensions = [];
 	if(initialKeymapId !== "default" && this._keymapPlugins[initialKeymapId]) {
 		var keymapPlugin = this._keymapPlugins[initialKeymapId];
@@ -1012,8 +1093,8 @@ function CodeMirrorEngine(options) {
 
 				// Priority TiddlyWiki shortcuts first
 				if($tw.keyboardManager.handleKeydownEvent(event, {
-					onlyPriority: true
-				})) {
+						onlyPriority: true
+					})) {
 					return true;
 				}
 
@@ -1080,7 +1161,10 @@ function CodeMirrorEngine(options) {
 	// Create Editor
 	// ========================================================================
 
-	this.domNode = document.createElement("div");
+	// Get document from widget context
+	var ownerDocument = this.widget && this.widget.document ? this.widget.document : document;
+
+	this.domNode = ownerDocument.createElement("div");
 	this.domNode.className = "tc-editor-codemirror6";
 
 	var initialText = isString(options.value) ? options.value : "";
@@ -1211,10 +1295,13 @@ CodeMirrorEngine.prototype._scheduleEmit = function() {
 	var self = this;
 	if(this._destroyed) return;
 
+	// Get window from widget context
+	var win = this.widget && this.widget.document ? this.widget.document.defaultView : window;
+
 	if(this._debounceHandle !== null) {
-		window.clearTimeout(this._debounceHandle);
+		win.clearTimeout(this._debounceHandle);
 	}
-	this._debounceHandle = window.setTimeout(function() {
+	this._debounceHandle = win.setTimeout(function() {
 		self._debounceHandle = null;
 		self._emitNow();
 	}, this._debounceMs);
@@ -1476,7 +1563,7 @@ CodeMirrorEngine.prototype._handleSettingsChanged = function(settings) {
 		var wiki = this.widget && this.widget.wiki;
 		if(settings.spellcheck) {
 			// Get language from spellcheck config, default to "en"
-			var spellcheckLang = (wiki && wiki.getTiddlerText("$:/config/codemirror-6/spellcheck-lang")) || "en";
+			var spellcheckLang = (wiki && wiki.getTiddlerText("$:/config/codemirror-6/editor/spellcheck-lang")) || "en";
 			effects.push(this._compartments.spellcheck.reconfigure(
 				EditorView.contentAttributes.of({
 					spellcheck: "true",
@@ -1622,7 +1709,7 @@ CodeMirrorEngine.prototype.setType = function(newType) {
 
 				if(shouldBeActive) {
 					// Plugin becoming active - get content for compartment
-					// 
+					//
 					// Convention: If plugin has getCompartmentContent(), use it (returns raw content)
 					// Otherwise, we can't properly reconfigure (plugin uses compartment.of internally)
 					//
@@ -1711,6 +1798,15 @@ CodeMirrorEngine.prototype.refreshLanguageConditions = function() {
 
 	// Update context with new tiddler fields
 	this._pluginContext.tiddlerFields = tiddler.fields;
+
+	// Update tag override state for the new tags
+	try {
+		var utils = require("$:/plugins/tiddlywiki/codemirror-6/utils.js");
+		if(utils && utils.getTagOverrideWinner) {
+			this._pluginContext.tagOverrideWinner = utils.getTagOverrideWinner(this._pluginContext);
+			this._pluginContext.hasTagOverride = this._pluginContext.tagOverrideWinner !== null;
+		}
+	} catch(_e) {}
 
 	// Re-evaluate all conditional plugins
 	var effects = [];
@@ -1995,10 +2091,10 @@ CodeMirrorEngine.prototype._applyTextOperation = function(operation) {
 	// Get the operation parameters from main selection
 	var mainCutStart = isNumber(operation.cutStart) ? operation.cutStart :
 		isNumber(operation.selStart) ? operation.selStart :
-			state.selection.main.from;
+		state.selection.main.from;
 	var mainCutEnd = isNumber(operation.cutEnd) ? operation.cutEnd :
 		isNumber(operation.selEnd) ? operation.selEnd :
-			mainCutStart;
+		mainCutStart;
 	var replacement = String(operation.replacement);
 	var mainNewSelStart = isNumber(operation.newSelStart) ? operation.newSelStart : mainCutStart + replacement.length;
 	var mainNewSelEnd = isNumber(operation.newSelEnd) ? operation.newSelEnd : mainNewSelStart;
@@ -2126,7 +2222,8 @@ CodeMirrorEngine.prototype.destroy = function() {
 	}
 
 	if(this._debounceHandle !== null) {
-		window.clearTimeout(this._debounceHandle);
+		var win = this.widget && this.widget.document ? this.widget.document.defaultView : window;
+		win.clearTimeout(this._debounceHandle);
 		this._debounceHandle = null;
 	}
 

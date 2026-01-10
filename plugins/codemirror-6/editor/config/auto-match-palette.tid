@@ -1,5 +1,4 @@
-title: $:/config/codemirror-6/auto-match-palette
-tags: $:/tags/Config/CodeMirror/Editor
+title: $:/config/codemirror-6/editor/auto-match-palette
 caption: Match theme to palette
 description: Automatically switches the editor theme when the TiddlyWiki palette changes
 config-type: checkbox

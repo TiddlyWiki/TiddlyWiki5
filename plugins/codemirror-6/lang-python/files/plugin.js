@@ -10,6 +10,7 @@ Python language support for CodeMirror 6
 "use strict";
 
 var langPython = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-python/lang-python.js");
+var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 
 // Content types that activate this plugin
 var PYTHON_TYPES = [
@@ -37,17 +38,22 @@ exports.plugin = {
 	},
 
 	condition: function(context) {
-		// Tag-based override takes precedence
-		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
-			return true;
+		// If any tag override is active, only the winning plugin activates
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
 		}
-		// Fall back to content type check
-		var type = context.tiddlerType;
-		return PYTHON_TYPES.indexOf(type) !== -1;
+		// Normal mode: tag match or type match
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
+		return PYTHON_TYPES.indexOf(context.tiddlerType) !== -1;
 	},
 
 	getCompartmentContent: function(_context) {
-		return [langPython.python()];
+		var extensions = [langPython.python()];
+		// Add Python completions (registered by register.js at startup)
+		if(core.pythonCompletionExtension) {
+			extensions.push(core.pythonCompletionExtension);
+		}
+		return extensions;
 	},
 
 	getExtensions: function(context) {

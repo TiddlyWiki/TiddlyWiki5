@@ -32,6 +32,11 @@ var TIDDLER_TITLE_NODES = {
 	"ImageSource": "image"
 };
 
+// Node types that contain external URLs
+var EXTERNAL_URL_NODES = {
+	"URLLink": "url"
+};
+
 // Filter operators whose operand is a tiddler title or text reference
 // Based on TiddlyWiki5/core/modules/filters/
 var TIDDLER_TITLE_OPERATORS = {
@@ -144,6 +149,19 @@ function getLinkAtPos(state, pos) {
 				target: target,
 				from: current.from,
 				to: current.to
+			};
+		}
+
+		// Check for external URL nodes
+		var urlType = EXTERNAL_URL_NODES[current.name];
+		if(urlType) {
+			var url = state.doc.sliceString(current.from, current.to);
+			return {
+				type: urlType,
+				target: url,
+				from: current.from,
+				to: current.to,
+				isExternal: true
 			};
 		}
 
@@ -410,6 +428,13 @@ function handleClick(event, view) {
 	// Prevent default click behavior
 	event.preventDefault();
 
+	// Handle external URLs - always open in new browser tab
+	if(link.isExternal) {
+		window.open(link.target, "_blank", "noopener,noreferrer");
+		clearHighlight(view);
+		return true;
+	}
+
 	// Get widget from engine
 	var engine = view._cm6Engine;
 	var widget = engine ? engine.widget : null;
@@ -451,7 +476,7 @@ exports.plugin = {
 		if(context.options.clickNavigate === false) return false;
 		// Check config tiddler
 		var wiki = context.options && context.options.widget && context.options.widget.wiki;
-		var enabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/clickNavigate", "yes");
+		var enabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/click-navigate/enabled", "yes");
 		if(enabled !== "yes") return false;
 		return !type || type === "" || type === "text/vnd.tiddlywiki" || type === "text/x-tiddlywiki";
 	},
@@ -511,6 +536,12 @@ exports.plugin = {
 		}
 
 		return handlers;
+	},
+
+	// Return raw content for compartment reconfiguration (without compartment.of wrapper)
+	getCompartmentContent: function(context) {
+		var handlers = this._getOrCreateClickNavigateHandlers(context);
+		return handlers || [];
 	},
 
 	registerEvents: function(engine, context) {

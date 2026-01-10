@@ -1,0 +1,29 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/toolbars/ControlPanel
+caption: Toolbar Style
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+
+\define toolbar-style-preview()
+<div style="padding: 10px; background: <<colour tiddler-background>>; border: 1px solid <<colour tiddler-editor-border>>; border-radius: 4px; margin-top: 8px;">
+Preview: Select a style to see it applied to the editor toolbar.
+</div>
+\end
+
+! Toolbar Style
+
+Choose a visual style for the editor toolbar buttons:
+
+<$select tiddler="$:/config/codemirror-6/toolbars/style" default="classic">
+<option value="classic">Classic - Default TiddlyWiki style</option>
+<option value="minimal">Minimal - Clean, invisible buttons</option>
+<option value="flat">Flat - Modern flat design</option>
+<option value="outlined">Outlined - Elegant bordered buttons</option>
+<option value="rounded">Rounded - Soft pill-shaped buttons</option>
+<option value="elevated">Elevated - Material design shadows</option>
+<option value="gradient">Gradient - Colorful gradients</option>
+<option value="glass">Glass - Frosted glass effect</option>
+<option value="neon">Neon - Glowing cyberpunk</option>
+<option value="retro">Retro - Vintage 3D buttons</option>
+<option value="brutalist">Brutalist - Bold and stark</option>
+</$select>
+
+Current style: ''<$text text={{$:/config/codemirror-6/toolbars/style}}/>''

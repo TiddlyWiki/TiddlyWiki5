@@ -44,7 +44,7 @@ ZenMode.prototype.createOverlay = function(doc) {
 	this.overlay = doc.createElement("div");
 	this.overlay.className = "cm6-zen-overlay";
 	this.overlay.setAttribute("data-cm6-theme",
-		$tw.wiki.getTiddlerText("$:/config/codemirror-6/theme", "vanilla"));
+		$tw.wiki.getTiddlerText("$:/config/codemirror-6/editor/theme", "vanilla"));
 
 	// Close button
 	var closeBtn = doc.createElement("button");
@@ -67,7 +67,7 @@ ZenMode.prototype.createOverlay = function(doc) {
 	// Click outside to exit (if enabled)
 	this.overlay.addEventListener("click", function(e) {
 		if(e.target === this.overlay &&
-            $tw.wiki.getTiddlerText("$:/config/codemirror-6/zen-mode/exit-on-click", "no") === "yes") {
+			$tw.wiki.getTiddlerText("$:/config/codemirror-6/zen-mode/exit-on-click", "no") === "yes") {
 			this.exit();
 		}
 	}.bind(this));
@@ -135,7 +135,9 @@ ZenMode.prototype.enter = function(editorWrapper, engine) {
 			requestAnimationFrame(function() {
 				// Restore selection
 				if(savedSelection) {
-					view.dispatch({ selection: savedSelection });
+					view.dispatch({
+						selection: savedSelection
+					});
 				}
 				view.focus();
 			});
@@ -144,10 +146,10 @@ ZenMode.prototype.enter = function(editorWrapper, engine) {
 
 	// Start stats updates
 	this.startStatsUpdates();
-    
+
 	// Setup focus mode
 	this.setupFocusMode();
-    
+
 	// Update state tiddler
 	this.wiki.setText("$:/state/codemirror-6/zen-mode", "text", null, "yes");
 
@@ -217,7 +219,9 @@ ZenMode.prototype.exit = function() {
 				requestAnimationFrame(function() {
 					// Restore selection
 					if(savedSelection) {
-						view.dispatch({ selection: savedSelection });
+						view.dispatch({
+							selection: savedSelection
+						});
 					}
 					view.focus();
 				});
@@ -225,7 +229,7 @@ ZenMode.prototype.exit = function() {
 		}
 
 	}.bind(this), 300);
-    
+
 	this.isActive = false;
 
 	// Update state tiddler
@@ -246,16 +250,16 @@ ZenMode.prototype.exit = function() {
  */
 ZenMode.prototype.applySettings = function() {
 	var wiki = this.wiki || $tw.wiki;
-    
+
 	// CSS custom properties
 	var maxWidth = wiki.getTiddlerText("$:/config/codemirror-6/zen-mode/max-width", "700px");
 	var fontSize = wiki.getTiddlerText("$:/config/codemirror-6/zen-mode/font-size", "1.1em");
 	var lineHeight = wiki.getTiddlerText("$:/config/codemirror-6/zen-mode/line-height", "1.8");
-    
+
 	this.overlay.style.setProperty("--zen-max-width", maxWidth);
 	this.overlay.style.setProperty("--zen-font-size", fontSize);
 	this.overlay.style.setProperty("--zen-line-height", lineHeight);
-    
+
 	// Typewriter mode
 	var typewriter = wiki.getTiddlerText("$:/config/codemirror-6/zen-mode/typewriter", "no");
 	this.editorContainer.classList.toggle("typewriter", typewriter === "yes");
@@ -267,7 +271,7 @@ ZenMode.prototype.applySettings = function() {
 	if(focusMode !== "none") {
 		this.editorContainer.classList.add("focus-" + focusMode);
 	}
-    
+
 	// Stats visibility
 	var showStats = wiki.getTiddlerText("$:/config/codemirror-6/zen-mode/show-stats", "yes");
 	this.statsBar.style.display = showStats === "yes" ? "flex" : "none";
@@ -288,89 +292,85 @@ ZenMode.prototype.setupTypewriterMode = function(enabled) {
 	var self = this;
 	var view = this.engine.view;
 	var lastCursorPos = -1;
-	var scrollTimeout = null;
+	var lastScrollTime = 0;
+	var pendingScroll = null;
+	var THROTTLE_MS = 16; // ~60fps for smooth scrolling when holding keys
 
-	// Function to scroll cursor to center (uses RAF to batch DOM operations)
+	// Function to scroll cursor to center
 	var scrollCursorToCenter = function() {
 		if(!self.isActive || !view || !view.dom) return;
 
-		// Batch DOM reads in one frame
-		requestAnimationFrame(function() {
-			if(!self.isActive || !view || !view.dom) return;
+		var cursorPos = view.state.selection.main.head;
 
-			var cursorPos = view.state.selection.main.head;
+		// Skip if cursor hasn't moved
+		if(cursorPos === lastCursorPos) return;
+		lastCursorPos = cursorPos;
 
-			// Skip if cursor hasn't moved
-			if(cursorPos === lastCursorPos) return;
-			lastCursorPos = cursorPos;
+		var coords = view.coordsAtPos(cursorPos);
+		if(!coords) return;
 
-			var coords = view.coordsAtPos(cursorPos);
-			if(!coords) return;
+		var scroller = view.scrollDOM;
+		var scrollerRect = scroller.getBoundingClientRect();
 
-			var scroller = view.scrollDOM;
-			var scrollerRect = scroller.getBoundingClientRect();
+		// Use the vertical center of the cursor line
+		var cursorY = (coords.top + coords.bottom) / 2;
 
-			// Use the vertical center of the cursor line
-			var cursorY = (coords.top + coords.bottom) / 2;
+		// Calculate where cursor should be (center of visible scroller area)
+		var targetY = scrollerRect.top + (scrollerRect.height / 2);
 
-			// Calculate where cursor should be (center of visible scroller area)
-			var targetY = scrollerRect.top + (scrollerRect.height / 2);
+		// Calculate how much to scroll
+		var scrollAdjust = cursorY - targetY;
 
-			// Calculate how much to scroll
-			var scrollAdjust = cursorY - targetY;
-
-			// Only scroll if significantly off-center (reduces jitter)
-			if(Math.abs(scrollAdjust) > 10) {
-				// Write in next frame to avoid layout thrashing
-				requestAnimationFrame(function() {
-					if(self.isActive && scroller) {
-						scroller.scrollTop += scrollAdjust;
-					}
-				});
-			}
-		});
+		// Only scroll if significantly off-center (reduces jitter)
+		if(Math.abs(scrollAdjust) > 5) {
+			scroller.scrollTop += scrollAdjust;
+		}
 	};
 
-	// Debounced scroll handler
-	var scheduleScroll = function() {
-		if(scrollTimeout) {
-			clearTimeout(scrollTimeout);
+	// Throttled scroll handler - executes immediately, then limits frequency
+	var throttledScroll = function() {
+		var now = Date.now();
+		var timeSinceLastScroll = now - lastScrollTime;
+
+		if(timeSinceLastScroll >= THROTTLE_MS) {
+			// Enough time passed - scroll immediately
+			lastScrollTime = now;
+			requestAnimationFrame(scrollCursorToCenter);
+		} else {
+			// Too soon - schedule for later (but only one pending)
+			if(!pendingScroll) {
+				pendingScroll = setTimeout(function() {
+					pendingScroll = null;
+					lastScrollTime = Date.now();
+					requestAnimationFrame(scrollCursorToCenter);
+				}, THROTTLE_MS - timeSinceLastScroll);
+			}
 		}
-		scrollTimeout = setTimeout(scrollCursorToCenter, 100);
 	};
 
 	// Listen to selection changes via the engine's event system
 	if(this.engine.on) {
-		this.engine.on("selectionChanged", scheduleScroll);
-		this.engine.on("docChanged", scheduleScroll);
+		this.engine.on("selectionChanged", throttledScroll);
+		this.engine.on("docChanged", throttledScroll);
 	}
 
-	// Initial scroll to center (immediate, no animation)
+	// Initial scroll to center
 	setTimeout(function() {
 		if(self.isActive && view && view.dom) {
-			var cursorPos = view.state.selection.main.head;
-			var coords = view.coordsAtPos(cursorPos);
-			if(coords) {
-				var scroller = view.scrollDOM;
-				var scrollerRect = scroller.getBoundingClientRect();
-				var cursorY = (coords.top + coords.bottom) / 2;
-				var targetY = scrollerRect.top + (scrollerRect.height / 2);
-				var scrollAdjust = cursorY - targetY;
-				scroller.scrollTop += scrollAdjust;
-				lastCursorPos = cursorPos;
-			}
+			lastCursorPos = -1; // Force scroll
+			scrollCursorToCenter();
 		}
-	}, 100);
+	}, 50);
 
 	// Cleanup function
 	this.typewriterCleanup = function() {
-		if(scrollTimeout) {
-			clearTimeout(scrollTimeout);
-			scrollTimeout = null;
+		if(pendingScroll) {
+			clearTimeout(pendingScroll);
+			pendingScroll = null;
 		}
 		if(self.engine && self.engine.off) {
-			self.engine.off("selectionChanged", scheduleScroll);
-			self.engine.off("docChanged", scheduleScroll);
+			self.engine.off("selectionChanged", throttledScroll);
+			self.engine.off("docChanged", throttledScroll);
 		}
 	};
 };
@@ -384,7 +384,7 @@ ZenMode.prototype.updateTheme = function() {
 	if(this.editorWrapper) {
 		var wiki = this.wiki || $tw.wiki;
 		theme = this.editorWrapper.getAttribute("data-cm6-theme") ||
-                wiki.getTiddlerText("$:/config/codemirror-6/theme", "vanilla");
+			wiki.getTiddlerText("$:/config/codemirror-6/editor/theme", "vanilla");
 	}
 	this.overlay.setAttribute("data-cm6-theme", theme);
 };
@@ -401,15 +401,15 @@ ZenMode.prototype.setupWikiListener = function() {
 		"$:/config/codemirror-6/zen-mode/typewriter",
 		"$:/config/codemirror-6/zen-mode/focus-mode",
 		"$:/config/codemirror-6/zen-mode/show-stats",
-		"$:/config/codemirror-6/theme",
-		"$:/config/codemirror-6/theme-light",
-		"$:/config/codemirror-6/theme-dark",
+		"$:/config/codemirror-6/editor/theme",
+		"$:/config/codemirror-6/editor/theme-light",
+		"$:/config/codemirror-6/editor/theme-dark",
 		"$:/palette"
 	];
-    
+
 	$tw.wiki.addEventListener("change", function(changes) {
 		if(!self.isActive) return;
-        
+
 		for(var i = 0; i < settingsTiddlers.length; i++) {
 			if(changes[settingsTiddlers[i]]) {
 				self.applySettings();
@@ -444,16 +444,16 @@ ZenMode.prototype.stopStatsUpdates = function() {
  */
 ZenMode.prototype.updateStats = function() {
 	if(!this.engine || !this.engine.view) return;
-    
+
 	var text = this.engine.view.state.doc.toString();
 	var words = text.trim() ? text.trim().split(/\s+/).length : 0;
 	var chars = text.length;
 	var readingTime = Math.max(1, Math.round(words / 200));
-    
-	this.statsBar.innerHTML = 
+
+	this.statsBar.innerHTML =
 		"<span>" + words.toLocaleString() + " words</span>" +
-        "<span>" + chars.toLocaleString() + " chars</span>" +
-        "<span>" + readingTime + " min read</span>";
+		"<span>" + chars.toLocaleString() + " chars</span>" +
+		"<span>" + readingTime + " min read</span>";
 };
 
 /**
@@ -465,15 +465,15 @@ ZenMode.prototype.setupFocusMode = function() {
 		this.focusModeCleanup();
 		this.focusModeCleanup = null;
 	}
-    
+
 	var wiki = this.wiki || $tw.wiki;
 	var focusMode = wiki.getTiddlerText("$:/config/codemirror-6/zen-mode/focus-mode", "none");
 
 	if(focusMode === "none" || !this.engine || !this.engine.view) return;
-    
+
 	var self = this;
 	var _view = this.engine.view;
-    
+
 	if(focusMode === "sentence" || focusMode === "paragraph") {
 		// Track last highlighted range to avoid unnecessary updates
 		var lastStart = -1;
@@ -532,7 +532,10 @@ ZenMode.prototype.getFocusRange = function(mode) {
 			endLine++;
 		}
 
-		return { start: startLine, end: endLine };
+		return {
+			start: startLine,
+			end: endLine
+		};
 
 	} else if(mode === "sentence") {
 		var text = doc.toString();
@@ -542,19 +545,28 @@ ZenMode.prototype.getFocusRange = function(mode) {
 		var match;
 
 		while((match = sentenceEnd.exec(text)) !== null) {
-			sentences.push({ start: lastEnd, end: match.index + match[0].length });
+			sentences.push({
+				start: lastEnd,
+				end: match.index + match[0].length
+			});
 			lastEnd = match.index + match[0].length;
 		}
 
 		if(lastEnd < text.length) {
-			sentences.push({ start: lastEnd, end: text.length });
+			sentences.push({
+				start: lastEnd,
+				end: text.length
+			});
 		}
 
 		for(var i = 0; i < sentences.length; i++) {
 			if(cursorPos >= sentences[i].start && cursorPos <= sentences[i].end) {
 				var startLineNum = doc.lineAt(sentences[i].start).number;
 				var endLineNum = doc.lineAt(Math.max(0, sentences[i].end - 1)).number;
-				return { start: startLineNum, end: endLineNum };
+				return {
+					start: startLineNum,
+					end: endLineNum
+				};
 			}
 		}
 	}

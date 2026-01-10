@@ -1,8 +1,0 @@
-title: $:/config/codemirror-6/imagePreview
-tags: $:/tags/Config/CodeMirror/Editor
-caption: Image preview
-description: Show inline preview of images referenced with [img[]] syntax
-config-type: checkbox
-config-category: Display
-default: no
-text: no

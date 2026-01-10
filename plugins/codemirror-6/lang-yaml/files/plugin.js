@@ -39,13 +39,13 @@ exports.plugin = {
 	},
 
 	condition: function(context) {
-		// Tag-based override takes precedence
-		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
-			return true;
+		// If any tag override is active, only the winning plugin activates
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
 		}
-		// Fall back to content type check
-		var type = context.tiddlerType;
-		return YAML_TYPES.indexOf(type) !== -1;
+		// Normal mode: tag match or type match
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
+		return YAML_TYPES.indexOf(context.tiddlerType) !== -1;
 	},
 
 	getCompartmentContent: function(_context) {

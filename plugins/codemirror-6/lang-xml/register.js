@@ -19,9 +19,17 @@ exports.after = ["startup"];
 exports.before = ["render"];
 exports.synchronous = true;
 
+var SVG_COMPLETIONS_CONFIG = "$:/config/codemirror-6/lang-xml/svg-completions";
+
+function isSvgCompletionsEnabled() {
+	var value = $tw.wiki.getTiddlerText(SVG_COMPLETIONS_CONFIG, "yes").trim().toLowerCase();
+	return value === "yes" || value === "true";
+}
+
 exports.startup = function() {
 	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	var langXml = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/lang-xml.js");
+	var svgSchema = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/svg-schema.js");
 
 	if(!core || !core.registerLanguage || !langXml) {
 		return;
@@ -29,11 +37,29 @@ exports.startup = function() {
 
 	var LanguageDescription = core.language.LanguageDescription;
 
-	// Register XML
+	// Register generic XML (without SVG in extensions - SVG gets its own registration)
 	core.registerLanguage(LanguageDescription.of({
 		name: "XML",
 		alias: ["xml"],
-		extensions: ["xml", "xsl", "xsd", "svg"],
+		extensions: ["xml", "xsl", "xsd"],
 		support: langXml.xml()
+	}));
+
+	// Register SVG with schema-based completions if enabled
+	var svgSupport;
+	if(isSvgCompletionsEnabled()) {
+		svgSupport = langXml.xml({
+			elements: svgSchema.svgElements,
+			attributes: svgSchema.svgAttributes
+		});
+	} else {
+		svgSupport = langXml.xml();
+	}
+
+	core.registerLanguage(LanguageDescription.of({
+		name: "SVG",
+		alias: ["svg", "image/svg+xml"],
+		extensions: ["svg"],
+		support: svgSupport
 	}));
 };

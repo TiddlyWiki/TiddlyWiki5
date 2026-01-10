@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/wast
+tags: $:/tags/CodeMirror/Language
+name: WebAssembly
+type: text/x-wast
+category: Other
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-wast

@@ -110,7 +110,7 @@ exports.prototype.handleSetLanguage = function(event) {
 	if (newType === undefined || newType === null) return false;
 
 	// Check persistence mode from config
-	var persistMode = this.wiki.getTiddlerText("$:/config/codemirror-6/languageSwitcherPersist", "session");
+	var persistMode = this.wiki.getTiddlerText("$:/config/codemirror-6/editor/languageSwitcherPersist", "session");
 
 	if (persistMode === "field" && this.editTitle) {
 		// Save to tiddler field for persistence
@@ -177,7 +177,7 @@ exports.prototype.showLanguagePicker = function() {
 			self.engine.setType(lang.type);
 
 			// Check persistence mode
-			var persistMode = self.wiki.getTiddlerText("$:/config/codemirror-6/languageSwitcherPersist", "session");
+			var persistMode = self.wiki.getTiddlerText("$:/config/codemirror-6/editor/languageSwitcherPersist", "session");
 			if (persistMode === "field" && self.editTitle) {
 				if (lang.type === "") {
 					self.wiki.setText(self.editTitle, "codemirror-type", null, undefined);
@@ -350,10 +350,10 @@ function hopAny(changedTiddlers, list) {
 
 // Theme-related tiddlers to watch for changes
 var THEME_TIDDLERS = [
-	"$:/config/codemirror-6/theme",
-	"$:/config/codemirror-6/theme-light",
-	"$:/config/codemirror-6/theme-dark",
-	"$:/config/codemirror-6/auto-match-palette",
+	"$:/config/codemirror-6/editor/theme",
+	"$:/config/codemirror-6/editor/theme-light",
+	"$:/config/codemirror-6/editor/theme-dark",
+	"$:/config/codemirror-6/editor/auto-match-palette",
 	"$:/palette"
 ];
 
@@ -368,7 +368,7 @@ var THEME_TIDDLERS = [
 exports.prototype._getCurrentTheme = function () {
 	var wiki = this.wiki;
 	var autoMatch = wiki.getTiddlerText(
-		"$:/config/codemirror-6/auto-match-palette",
+		"$:/config/codemirror-6/editor/auto-match-palette",
 		"yes"
 	) === "yes";
 
@@ -379,13 +379,13 @@ exports.prototype._getCurrentTheme = function () {
 
 		return wiki.getTiddlerText(
 			isDark
-				? "$:/config/codemirror-6/theme-dark"
-				: "$:/config/codemirror-6/theme-light",
+				? "$:/config/codemirror-6/editor/theme-dark"
+				: "$:/config/codemirror-6/editor/theme-light",
 			isDark ? "vanilla-dark" : "vanilla"
 		);
 	}
 
-	return wiki.getTiddlerText("$:/config/codemirror-6/theme", "vanilla");
+	return wiki.getTiddlerText("$:/config/codemirror-6/editor/theme", "vanilla");
 };
 
 /**
@@ -418,64 +418,64 @@ exports.prototype._buildSettingsSnapshot = function () {
 
 		// UI / editor chrome
 		editorBody: body,
-		lineNumbers: boolConfig(wiki, "$:/config/codemirror-6/lineNumbers") && body,
-		highlightActiveLine: boolConfig(wiki, "$:/config/codemirror-6/highlightActiveLine") && body,
+		lineNumbers: boolConfig(wiki, "$:/config/codemirror-6/editor/lineNumbers") && body,
+		highlightActiveLine: boolConfig(wiki, "$:/config/codemirror-6/editor/highlightActiveLine") && body,
 
 		// text services
-		spellcheck: boolConfig(wiki, "$:/config/codemirror-6/spellcheck"),
-		autocorrect: boolConfig(wiki, "$:/config/codemirror-6/autocorrect"),
+		spellcheck: boolConfig(wiki, "$:/config/codemirror-6/editor/spellcheck"),
+		autocorrect: boolConfig(wiki, "$:/config/codemirror-6/editor/autocorrect"),
 		translate: boolConfig(wiki, "$:/state/codemirror-6/translate/" + this.editTitle),
 
 		// bracket/structure helpers
-		bracketMatching: boolConfig(wiki, "$:/config/codemirror-6/bracketMatching"),
-		closeBrackets: boolConfig(wiki, "$:/config/codemirror-6/closeBrackets"),
+		bracketMatching: boolConfig(wiki, "$:/config/codemirror-6/editor/bracketMatching"),
+		closeBrackets: boolConfig(wiki, "$:/config/codemirror-6/editor/closeBrackets"),
 
 		// code folding
-		foldGutter: boolConfig(wiki, "$:/config/codemirror-6/foldGutter") && body,
+		foldGutter: boolConfig(wiki, "$:/config/codemirror-6/fold/enabled") && body,
 
 		// indentation
 		indent: {
-			indentUnit: wiki.getTiddlerText("$:/config/codemirror-6/indentUnit"),
-			indentUnitMultiplier: wiki.getTiddlerText("$:/config/codemirror-6/indentUnitMultiplier"),
-			indentWithTab: boolConfig(wiki, "$:/config/codemirror-6/indentWithTab")
+			indentUnit: wiki.getTiddlerText("$:/config/codemirror-6/editor/indentUnit"),
+			indentUnitMultiplier: wiki.getTiddlerText("$:/config/codemirror-6/editor/indentUnitMultiplier"),
+			indentWithTab: boolConfig(wiki, "$:/config/codemirror-6/editor/indentWithTab")
 		},
 
 		// autocompletion
 		autocompletion: {
-			selectOnOpen: boolConfig(wiki, "$:/config/codemirror-6/selectOnOpen"),
-			icons: boolConfig(wiki, "$:/config/codemirror-6/autocompleteIcons"),
-			maxRenderedOptions: intConfig(wiki, "$:/config/codemirror-6/maxRenderedOptions", 100),
-			activateOnTyping: boolConfig(wiki, "$:/config/codemirror-6/activateOnTyping"),
-			completeAnyWord: boolConfig(wiki, "$:/config/codemirror-6/completeAnyWord")
+			selectOnOpen: boolConfig(wiki, "$:/config/codemirror-6/editor/selectOnOpen"),
+			icons: boolConfig(wiki, "$:/config/codemirror-6/editor/autocompleteIcons"),
+			maxRenderedOptions: intConfig(wiki, "$:/config/codemirror-6/editor/maxRenderedOptions", 100),
+			activateOnTyping: boolConfig(wiki, "$:/config/codemirror-6/editor/activateOnTyping"),
+			completeAnyWord: boolConfig(wiki, "$:/config/codemirror-6/editor/completeAnyWord")
 		},
 
 		// theme (for plugins that might need it)
 		theme: this._getCurrentTheme(),
 
 		// keymap (vim/emacs/default)
-		keymap: wiki.getTiddlerText("$:/config/codemirror-6/keymap", "default"),
+		keymap: wiki.getTiddlerText("$:/config/codemirror-6/editor/keymap", "default"),
 
 		// multi-cursor support
-		multiCursor: boolConfig(wiki, "$:/config/codemirror-6/multiCursor"),
+		multiCursor: boolConfig(wiki, "$:/config/codemirror-6/editor/multiCursor"),
 
 		// trailing whitespace highlighting
-		showTrailingWhitespace: boolConfig(wiki, "$:/config/codemirror-6/showTrailingWhitespace"),
+		showTrailingWhitespace: boolConfig(wiki, "$:/config/codemirror-6/editor/showTrailingWhitespace"),
 
 		// plugin toggles
-		colorPicker: boolConfig(wiki, "$:/config/codemirror-6/colorPicker"),
-		imagePreview: boolConfig(wiki, "$:/config/codemirror-6/imagePreview") && body,
-		wordCount: boolConfig(wiki, "$:/config/codemirror-6/wordCount") && body,
+		colorPicker: boolConfig(wiki, "$:/config/codemirror-6/color-picker/enabled"),
+		imagePreview: boolConfig(wiki, "$:/config/codemirror-6/image-preview/enabled") && body,
+		wordCount: boolConfig(wiki, "$:/config/codemirror-6/word-count/enabled") && body,
 
 		// navigation features
-		linkPreview: boolConfig(wiki, "$:/config/codemirror-6/linkPreview"),
-		clickNavigate: boolConfig(wiki, "$:/config/codemirror-6/clickNavigate"),
+		linkPreview: boolConfig(wiki, "$:/config/codemirror-6/link-preview/enabled"),
+		clickNavigate: boolConfig(wiki, "$:/config/codemirror-6/click-navigate/enabled"),
 
 		// tag and widget handling
-		autoCloseTags: wiki.getTiddlerText("$:/config/codemirror-6/autoCloseTags", "yes") !== "no",
+		autoCloseTags: wiki.getTiddlerText("$:/config/codemirror-6/auto-close-tags/enabled", "yes") !== "no",
 
 		// autocompletion sources
-		emojiPicker: boolConfig(wiki, "$:/config/codemirror-6/emojiPicker"),
-		snippets: boolConfig(wiki, "$:/config/codemirror-6/snippets")
+		emojiPicker: boolConfig(wiki, "$:/config/codemirror-6/emoji-picker/enabled"),
+		snippets: boolConfig(wiki, "$:/config/codemirror-6/snippets/enabled")
 	};
 };
 

@@ -20,6 +20,6 @@ title: $:/plugins/tiddlywiki/codemirror-6/plugins/toolbars/readme
 
 !! Configuration
 
-Set your preferred style in `$:/config/codemirror-6/toolbar-style`
+Set your preferred style in `$:/config/codemirror-6/toolbars/style`
 
 Or use the Control Panel: ''Settings → CodeMirror → Toolbar Style''

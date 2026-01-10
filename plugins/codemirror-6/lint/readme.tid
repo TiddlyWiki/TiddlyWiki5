@@ -84,4 +84,4 @@ Set any of these to `no` to disable that specific check.
 
 !! Global Enable/Disable
 
-Set `$:/config/codemirror-6/lint` to `no` to disable all linting.
+Set `$:/config/codemirror-6/lint/enabled` to `no` to disable all linting.

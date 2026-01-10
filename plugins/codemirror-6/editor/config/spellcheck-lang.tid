@@ -1,5 +1,4 @@
-title: $:/config/codemirror-6/spellcheck-lang
-tags: $:/tags/Config/CodeMirror/Editor
+title: $:/config/codemirror-6/editor/spellcheck-lang
 caption: Spellcheck Language
 description: Language for browser spellcheck dictionary
 config-type: text

@@ -35,8 +35,12 @@ exports.plugin = {
 	},
 
 	condition: function(context) {
-		var type = context.tiddlerType;
-		return WIKITEXT_TYPES.indexOf(type) !== -1;
+		// If any tag override is active, TiddlyWiki language is disabled
+		// (TiddlyWiki doesn't have a tag config - it's the default language)
+		if(context.hasTagOverride) {
+			return false;
+		}
+		return WIKITEXT_TYPES.indexOf(context.tiddlerType) !== -1;
 	},
 
 	_getLanguageSupport: function() {

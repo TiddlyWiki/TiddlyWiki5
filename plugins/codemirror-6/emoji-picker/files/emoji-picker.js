@@ -344,7 +344,7 @@ exports.plugin = {
 	// Check if enabled in config
 	condition: function(context) {
 		var wiki = context.options && context.options.widget && context.options.widget.wiki;
-		var enabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/emojiPicker", "yes");
+		var enabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/emoji-picker/enabled", "yes");
 		return enabled === "yes";
 	},
 
@@ -369,7 +369,7 @@ exports.plugin = {
 			engine.registerCompletionSource(
 				emojiCompletions,
 				10,
-				"$:/config/codemirror-6/emojiPicker"
+				"$:/config/codemirror-6/emoji-picker/enabled"
 			);
 		}
 

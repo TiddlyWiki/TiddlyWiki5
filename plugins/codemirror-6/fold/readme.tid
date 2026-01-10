@@ -45,7 +45,7 @@ On Mac, use Cmd instead of Ctrl.
 
 Enable or disable the fold gutter via:
 
-* `$:/config/codemirror-6/foldGutter` - show/hide fold gutter
+* `$:/config/codemirror-6/fold/enabled` - show/hide fold gutter
 
 Set to `yes` to enable, `no` to disable.
 

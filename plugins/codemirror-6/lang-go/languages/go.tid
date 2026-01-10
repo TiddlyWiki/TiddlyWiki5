@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/go
+tags: $:/tags/CodeMirror/Language
+name: Go
+type: text/x-go
+category: Programming
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-go

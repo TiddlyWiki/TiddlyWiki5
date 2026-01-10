@@ -3,29 +3,35 @@ tags: $:/tags/Stylesheet
 
 /* ============================================================================
    Vim Mode Styles for CodeMirror 6
+   Applies to both main editor and SimpleEngine inputs/textareas
    ============================================================================ */
 
 /* Block cursor (normal mode) */
 .tc-editor-codemirror6 .cm-fat-cursor,
-.tc-editor-codemirror6 .cm-cursor-primary.cm-fat-cursor {
+.tc-editor-codemirror6 .cm-cursor-primary.cm-fat-cursor,
+.tc-editor-codemirror6-simple .cm-fat-cursor,
+.tc-editor-codemirror6-simple .cm-cursor-primary.cm-fat-cursor {
     background: <<colour primary>> !important;
     border: none !important;
     opacity: 0.8;
 }
 
 /* Unfocused block cursor */
-.tc-editor-codemirror6 .cm-editor:not(.cm-focused) .cm-fat-cursor {
+.tc-editor-codemirror6 .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.tc-editor-codemirror6-simple .cm-editor:not(.cm-focused) .cm-fat-cursor {
     background: <<colour muted-foreground>> !important;
     opacity: 0.5;
 }
 
 /* Vim cursor layer */
-.tc-editor-codemirror6 .cm-vimCursorLayer {
+.tc-editor-codemirror6 .cm-vimCursorLayer,
+.tc-editor-codemirror6-simple .cm-vimCursorLayer {
     z-index: 10;
 }
 
 /* Vim command panel (ex commands like :wq) */
-.tc-editor-codemirror6 .cm-vim-panel {
+.tc-editor-codemirror6 .cm-vim-panel,
+.tc-editor-codemirror6-simple .cm-vim-panel {
     padding: 4px 10px;
     font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
     font-size: 13px;
@@ -34,7 +40,8 @@ tags: $:/tags/Stylesheet
     color: <<colour foreground>>;
 }
 
-.tc-editor-codemirror6 .cm-vim-panel input {
+.tc-editor-codemirror6 .cm-vim-panel input,
+.tc-editor-codemirror6-simple .cm-vim-panel input {
     font-family: inherit;
     font-size: inherit;
     background: <<colour tiddler-editor-background>>;
@@ -45,17 +52,20 @@ tags: $:/tags/Stylesheet
     outline: none;
 }
 
-.tc-editor-codemirror6 .cm-vim-panel input:focus {
+.tc-editor-codemirror6 .cm-vim-panel input:focus,
+.tc-editor-codemirror6-simple .cm-vim-panel input:focus {
     border-color: <<colour primary>>;
 }
 
 /* Vim message display */
-.tc-editor-codemirror6 .cm-vim-message {
+.tc-editor-codemirror6 .cm-vim-message,
+.tc-editor-codemirror6-simple .cm-vim-message {
     color: <<colour foreground>>;
     font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
 }
 
 /* Visual mode selection - enhance visibility */
-.tc-editor-codemirror6 .cm-selectionBackground {
+.tc-editor-codemirror6 .cm-selectionBackground,
+.tc-editor-codemirror6-simple .cm-selectionBackground {
     background: <<colour selection-background>> !important;
 }

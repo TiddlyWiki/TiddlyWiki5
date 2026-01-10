@@ -1,5 +1,4 @@
-title: $:/config/codemirror-6/sql-dialect
-tags: $:/tags/Config/CodeMirror/Editor
+title: $:/config/codemirror-6/lang-sql/dialect
 caption: SQL Dialect
 description: SQL dialect for syntax highlighting and completion
 config-type: select

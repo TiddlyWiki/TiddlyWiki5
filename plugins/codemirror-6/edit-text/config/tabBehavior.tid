@@ -1,0 +1,8 @@
+title: $:/config/codemirror-6/simple/tabBehavior
+caption: Tab Behavior
+description: Controls Tab/Shift-Tab behavior in simple editors. "browser" (default) allows Tab to move focus between fields. "indent" makes Tab insert indentation.
+config-type: select
+config-category: Keybindings
+config-options: [{"value":"browser","label":"Browser (focus navigation)"},{"value":"indent","label":"Indent (CodeMirror)"}]
+default: browser
+text: browser

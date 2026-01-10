@@ -1,5 +1,4 @@
-title: $:/config/codemirror-6/indentUnitMultiplier
-tags: $:/tags/Config/CodeMirror/Editor
+title: $:/config/codemirror-6/editor/indentUnitMultiplier
 caption: Indent size
 description: The visual width of tabs and number of spaces for indentation
 config-type: select

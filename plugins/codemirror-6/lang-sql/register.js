@@ -28,6 +28,30 @@ exports.startup = function() {
 	}
 
 	var LanguageDescription = core.language.LanguageDescription;
+	var LanguageSupport = core.language.LanguageSupport;
+
+	var keywordCompletionSource = langSql.keywordCompletionSource;
+	var schemaCompletionSource = langSql.schemaCompletionSource;
+	var StandardSQL = langSql.StandardSQL;
+
+	// Create completion source combining keyword and schema completions
+	var sqlCompletionSource = function(context) {
+		var keywordResult = keywordCompletionSource(StandardSQL)(context);
+		if(keywordResult) return keywordResult;
+		return null;
+	};
+
+	// Store completion source for use by other modules
+	core.sqlCompletionSource = sqlCompletionSource;
+
+	// Register for nested language completion in TiddlyWiki
+	// Uses Language.isActiveAt() for detection
+	// StandardSQL.language is the Language object for SQL
+	core.registerNestedLanguageCompletion({
+		name: "sql",
+		language: StandardSQL.language,
+		source: sqlCompletionSource
+	});
 
 	// Register SQL (standard)
 	core.registerLanguage(LanguageDescription.of({

@@ -1,5 +1,4 @@
-title: $:/config/codemirror-6/closeBrackets
-tags: $:/tags/Config/CodeMirror/Editor
+title: $:/config/codemirror-6/editor/closeBrackets
 caption: Auto-close brackets and quotes
 description: Automatically inserts closing brackets and quotes when typing
 config-type: checkbox

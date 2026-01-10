@@ -37,7 +37,7 @@ exports.startup = function() {
 				onRender: function(_widget) {
 					// Nothing special needed on render
 				},
-				
+
 				/**
 				 * Called on widget refresh
 				 */
@@ -47,7 +47,7 @@ exports.startup = function() {
 						zenMode.updateTheme();
 					}
 				},
-				
+
 				/**
 				 * Message handlers
 				 */

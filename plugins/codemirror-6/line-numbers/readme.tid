@@ -15,8 +15,8 @@ Displays line numbers in the editor gutter and highlights the active line.
 
 Both features are enabled by default and can be configured via:
 
-* `$:/config/codemirror-6/lineNumbers` — show/hide line numbers
-* `$:/config/codemirror-6/highlightActiveLine` — enable/disable active line highlighting
+* `$:/config/codemirror-6/editor/lineNumbers` — show/hide line numbers
+* `$:/config/codemirror-6/editor/highlightActiveLine` — enable/disable active line highlighting
 
 !! API
 

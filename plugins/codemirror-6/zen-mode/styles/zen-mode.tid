@@ -233,9 +233,10 @@ tags: $:/tags/Stylesheet
   overflow-y: scroll !important;
   height: 100% !important;
   max-height: 100% !important;
-  /* Padding to allow cursor to reach center - calc based on container */
-  padding-top: calc(50% - 0.5em) !important;
-  padding-bottom: calc(50% - 0.5em) !important;
+  /* Padding to allow cursor to reach center - use viewport height for proper centering */
+  /* 50vh ensures first/last line can be centered regardless of document length */
+  padding-top: 50vh !important;
+  padding-bottom: 50vh !important;
   /* GPU acceleration to prevent repaint flickering */
   will-change: scroll-position;
 }

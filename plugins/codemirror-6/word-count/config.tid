@@ -1,8 +1,0 @@
-title: $:/config/codemirror-6/wordCount
-tags: $:/tags/Config/CodeMirror/Editor
-caption: Show word count
-description: Display word, character, and line count at the bottom of the editor
-config-type: checkbox
-config-category: Display
-default: no
-text: no

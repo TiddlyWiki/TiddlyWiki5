@@ -10,6 +10,7 @@ XML language support for CodeMirror 6
 "use strict";
 
 var langXml = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/lang-xml.js");
+var svgSchema = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/svg-schema.js");
 
 // Content types that activate this plugin
 var XML_TYPES = [
@@ -19,7 +20,13 @@ var XML_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-xml/tags";
+var SVG_COMPLETIONS_CONFIG = "$:/config/codemirror-6/lang-xml/svg-completions";
 var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+
+function isSvgCompletionsEnabled() {
+	var value = $tw.wiki.getTiddlerText(SVG_COMPLETIONS_CONFIG, "yes").trim().toLowerCase();
+	return value === "yes" || value === "true";
+}
 
 exports.plugin = {
 	name: "lang-xml",
@@ -38,16 +45,28 @@ exports.plugin = {
 	},
 
 	condition: function(context) {
-		// Tag-based override takes precedence
-		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
-			return true;
+		// If any tag override is active, only the winning plugin activates
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
 		}
-		// Fall back to content type check
-		var type = context.tiddlerType;
-		return XML_TYPES.indexOf(type) !== -1;
+		// Normal mode: tag match or type match
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
+		return XML_TYPES.indexOf(context.tiddlerType) !== -1;
 	},
 
-	getCompartmentContent: function(_context) {
+	getCompartmentContent: function(context) {
+		var type = context.tiddlerType;
+		var isSvg = type === "image/svg+xml";
+
+		// Use SVG schema for SVG files if enabled
+		if(isSvg && isSvgCompletionsEnabled()) {
+			return [langXml.xml({
+				elements: svgSchema.svgElements,
+				attributes: svgSchema.svgAttributes
+			})];
+		}
+
+		// Plain XML without schema
 		return [langXml.xml()];
 	},
 

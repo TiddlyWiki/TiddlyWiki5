@@ -4,7 +4,7 @@ caption: {{$:/plugins/tiddlywiki/codemirror-6/plugins/lint/icons/lint}} Lint
 description: Toggle linting for this tiddler
 icon: $:/plugins/tiddlywiki/codemirror-6/plugins/lint/icons/lint
 custom-icon: yes
-condition: [<targetTiddler>has[title]]
+condition: [<targetTiddler>has[title]!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>type[text/x-tiddlywiki]] [<targetTiddler>type[application/json]] [<targetTiddler>type[text/json]]
 button-classes: cm6-toolbar-btn-lint
 
 \whitespace trim

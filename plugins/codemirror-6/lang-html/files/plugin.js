@@ -11,6 +11,7 @@ HTML language support for CodeMirror 6
 
 // Use the HTML language from the core lib (already bundled)
 var langHtml = require("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-lang-html.js");
+var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 
 // Content types that activate this plugin
 var HTML_TYPES = [
@@ -38,17 +39,22 @@ exports.plugin = {
 	},
 
 	condition: function(context) {
-		// Tag-based override takes precedence
-		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
-			return true;
+		// If any tag override is active, only the winning plugin activates
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
 		}
-		// Fall back to content type check
-		var type = context.tiddlerType;
-		return HTML_TYPES.indexOf(type) !== -1;
+		// Normal mode: tag match or type match
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
+		return HTML_TYPES.indexOf(context.tiddlerType) !== -1;
 	},
 
 	getCompartmentContent: function(_context) {
-		return [langHtml.html()];
+		var extensions = [langHtml.html()];
+		// Add HTML completions (registered by register.js at startup)
+		if(core.htmlCompletionExtension) {
+			extensions.push(core.htmlCompletionExtension);
+		}
+		return extensions;
 	},
 
 	getExtensions: function(context) {

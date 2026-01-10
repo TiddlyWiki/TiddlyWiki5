@@ -1,5 +1,4 @@
-title: $:/config/codemirror-6/languageSwitcherPersist
-tags: $:/tags/Config/CodeMirror/Editor
+title: $:/config/codemirror-6/editor/languageSwitcherPersist
 caption: Language override persistence
 description: How to persist language mode overrides
 config-type: select

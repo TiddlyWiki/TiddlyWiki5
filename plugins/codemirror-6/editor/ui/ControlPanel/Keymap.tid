@@ -1,0 +1,25 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/ControlPanel/Keymap
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: Keymap
+
+<div class="cm-config-category">
+
+|!Keymap |<$select tiddler="$:/config/codemirror-6/editor/keymap" default="default"><option value="default">Default (VS Code / Sublime)</option><$list filter="[all[tiddlers+shadows]tag[$:/tags/Config/CodeMirror/Keymap]sort[caption]]" variable="keymapTiddler"><option value={{{ [<keymapTiddler>get[keymap-id]] }}}><$transclude tiddler=<<keymapTiddler>> field="caption"/></option></$list></$select> |
+
+!! Keyboard Shortcuts
+
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/CodeMirror/KeymapTable]]" variable="keymapTable">
+
+<$let keymapName={{{ [<keymapTable>get[name]] }}}>
+
+<%if [{$:/config/codemirror-6/editor/keymap}match<keymapName>] [{$:/config/codemirror-6/editor/keymap}is[blank]then<keymapName>match[default]] %>
+
+<$transclude $tiddler=<<keymapTable>> mode="block"/>
+
+<%endif%>
+
+</$let>
+
+</$list>
+
+</div>

@@ -1,5 +1,4 @@
-title: $:/config/codemirror-6/autocompletion
-tags: $:/tags/Config/CodeMirror/Editor
+title: $:/config/codemirror-6/editor/autocompletion
 caption: Autocompletion
 description: Enable autocompletion popup for suggestions while typing
 config-type: checkbox

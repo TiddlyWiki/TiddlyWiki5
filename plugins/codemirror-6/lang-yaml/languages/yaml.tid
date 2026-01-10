@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/yaml
+tags: $:/tags/CodeMirror/Language
+name: YAML
+type: application/x-yaml
+category: Data
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-yaml

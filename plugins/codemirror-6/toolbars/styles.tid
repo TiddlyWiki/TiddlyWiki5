@@ -5,7 +5,7 @@ tags: $:/tags/Stylesheet
    Toolbar Styles - Base Setup
    ============================================================================ */
 
-<$list filter="[[$:/config/codemirror-6/toolbar-style]get[text]!match[classic]]" variable="style">
+<$list filter="[[$:/config/codemirror-6/toolbars/style]get[text]!match[classic]]" variable="style">
 
 /* Base styles for all custom toolbar styles */
 .tc-editor-toolbar {

@@ -1,5 +1,4 @@
-title: $:/config/codemirror-6/indentUnit
-tags: $:/tags/Config/CodeMirror/Editor
+title: $:/config/codemirror-6/editor/indentUnit
 caption: Indent with
 description: Choose whether to use tabs or spaces for indentation
 config-type: select

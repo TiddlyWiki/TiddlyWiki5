@@ -10,6 +10,7 @@ Go language support for CodeMirror 6
 "use strict";
 
 var langGo = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-go/lang-go.js");
+var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 
 // Content types that activate this plugin
 var GO_TYPES = [
@@ -37,15 +38,22 @@ exports.plugin = {
 	},
 
 	condition: function(context) {
-		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
-			return true;
+		// If any tag override is active, only the winning plugin activates
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
 		}
-		var type = context.tiddlerType;
-		return GO_TYPES.indexOf(type) !== -1;
+		// Normal mode: tag match or type match
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
+		return GO_TYPES.indexOf(context.tiddlerType) !== -1;
 	},
 
 	getCompartmentContent: function(_context) {
-		return [langGo.go()];
+		var extensions = [langGo.go()];
+		// Add Go completions (registered by register.js at startup)
+		if(core.goCompletionExtension) {
+			extensions.push(core.goCompletionExtension);
+		}
+		return extensions;
 	},
 
 	getExtensions: function(context) {

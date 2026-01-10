@@ -1,5 +1,4 @@
-title: $:/config/codemirror-6/cursorBlinkRate
-tags: $:/tags/Config/CodeMirror/Editor
+title: $:/config/codemirror-6/editor/cursorBlinkRate
 caption: Cursor blink rate
 description: The cursor blink rate in milliseconds. Set to 0 to disable blinking.
 config-type: number

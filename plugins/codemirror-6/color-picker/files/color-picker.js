@@ -13,7 +13,7 @@ Color picker plugin - shows inline color swatches with click-to-edit functionali
 
 if(!$tw.browser) return;
 
-var CONFIG_TIDDLER = "$:/config/codemirror-6/colorPicker";
+var CONFIG_TIDDLER = "$:/config/codemirror-6/color-picker/enabled";
 
 // Color regex patterns
 var HEX_COLOR = /#(?:[0-9a-fA-F]{3}){1,2}(?:[0-9a-fA-F]{2})?\b/g;

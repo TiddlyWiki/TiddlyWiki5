@@ -109,3 +109,49 @@ exports.getLanguages = function() {
 exports.clearLanguages = function() {
 	registeredLanguages = [];
 };
+
+// ============================================================================
+// Nested Language Completion API
+// ============================================================================
+
+// Registered nested language completion sources
+var nestedLanguageCompletions = [];
+
+/**
+ * Register a completion source for a nested language (used in code blocks).
+ * Language plugins should call this during initialization.
+ *
+ * @param {Object} config - Configuration object
+ * @param {string} config.name - Language name (e.g., "javascript", "python")
+ * @param {Language} config.language - Language object with isActiveAt(state, pos) method
+ * @param {Function} config.source - Completion source function(context) => CompletionResult | null
+ *
+ * Example usage:
+ *   core.registerNestedLanguageCompletion({
+ *     name: "javascript",
+ *     language: javascriptLanguage,  // Language object with isActiveAt method
+ *     source: jsCompletionSource
+ *   });
+ */
+exports.registerNestedLanguageCompletion = function(config) {
+	if (config && config.name && config.language && config.source) {
+		// Check for duplicates by name
+		for (var i = 0; i < nestedLanguageCompletions.length; i++) {
+			if (nestedLanguageCompletions[i].name === config.name) {
+				// Replace existing
+				nestedLanguageCompletions[i] = config;
+				return;
+			}
+		}
+		nestedLanguageCompletions.push(config);
+	}
+};
+
+/**
+ * Get all registered nested language completion sources.
+ *
+ * @returns {Array} Array of { name, language, source } objects
+ */
+exports.getNestedLanguageCompletions = function() {
+	return nestedLanguageCompletions.slice(); // Return a copy
+};

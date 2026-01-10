@@ -2,54 +2,87 @@ title: $:/plugins/tiddlywiki/codemirror-6/readme
 
 ! CodeMirror 6 Editor
 
-A modern text editor for TiddlyWiki based on [[CodeMirror 6|https://codemirror.net/]].
+A modern text editor for TiddlyWiki based on [ext[CodeMirror 6|https://codemirror.net/]].
 
-!! Features
+!! Built-in Features
 
-* ''Syntax Highlighting'' - Full TiddlyWiki wikitext highlighting with support for nested languages
-* ''Autocompletion'' - Smart completions for tiddler titles, macros, widgets, filters, and more
-* ''Code Folding'' - Collapse widgets, pragmas, code blocks, and other structures
-* ''Multiple Cursors'' - Edit multiple locations simultaneously
-* ''Search & Replace'' - Powerful search with regex support
-* ''Undo/Redo'' - Full history with unlimited undo levels
-* ''Keyboard Shortcuts'' - Extensive keyboard support for efficient editing
+* ''Syntax Highlighting'' — TiddlyWiki wikitext with nested language support
+* ''Autocompletion'' — tiddler titles, macros, widgets, variables, filters
+* ''Multiple Cursors'' — edit multiple locations simultaneously (Ctrl+Alt+Up/Down)
+* ''Search & Replace'' — regex support, case sensitivity, whole word matching
+* ''Bracket Matching'' — highlight matching brackets and auto-close
+* ''Undo/Redo'' — unlimited history
+* ''Focus Navigation'' — Ctrl+. / Ctrl+Shift+. to move between fields
+* ''Spellcheck'' — browser spellcheck integration (optional)
+
+!! Configuration
+
+Configure via ''Control Panel → Settings → CodeMirror'':
+
+* ''Editor'' — line wrapping, bracket matching, indentation, spellcheck
+* ''Theme'' — color scheme with auto palette matching
+* ''Keymap'' — default, vim, or emacs bindings
+* ''Keyboard Shortcuts'' — customize all shortcuts
+
+!! Companion Plugins
+
+|!Plugin |!Description |
+|''edit-text'' |SimpleEngine — CodeMirror for input fields and textareas |
+|''lang-tiddlywiki'' |TiddlyWiki wikitext parser (required for syntax highlighting) |
+
+!! Feature Plugins
+
+|!Plugin |!Description |
+|''fold'' |Collapse widgets, pragmas, code blocks |
+|''lint'' |Highlight potential issues in wikitext |
+|''snippets'' |Custom code snippets with tab stops |
+|''line-numbers'' |Show line numbers in gutter |
+|''click-navigate'' |Ctrl+click to navigate links |
+|''link-preview'' |Hover preview for wiki links |
+|''image-preview'' |Inline image preview |
+|''color-picker'' |Visual color picker for CSS colors |
+|''emoji-picker'' |Emoji insertion panel |
+|''auto-close-tags'' |Auto-close HTML/widget tags |
+|''word-count'' |Word and character count display |
+|''toolbars'' |Editor toolbar styles |
+|''zen-mode'' |Distraction-free fullscreen writing |
+
+!! Keymap Plugins
+
+|!Plugin |!Description |
+|''keymap-vim'' |Vim keybindings with visual mode, ex commands |
+|''keymap-emacs'' |Emacs keybindings |
+
+!! Language Plugins
+
+Add syntax highlighting for code blocks:
+
+''Web:'' JavaScript, CSS, HTML, JSON, XML, YAML, Markdown, PHP
+
+''Programming:'' Python, Java, C/C++, Rust, Go, SQL
+
+''Other:'' LaTeX, Sass, Lezer, WAST
+
+!! Theme Plugins
+
+Color schemes: Ayu, Catppuccin, Dracula, Everforest, Flexoki, GitHub, Gruvbox, Kanagawa, Material, Monokai, Nord, One, Palenight, Rose Pine, Solarized, Tokyo Night, Zenburn
+
+Most themes include both light and dark variants.
 
 !! Keyboard Shortcuts
 
 |!Shortcut |!Action |
-|`Ctrl+Z` |Undo |
-|`Ctrl+Shift+Z` / `Ctrl+Y` |Redo |
-|`Ctrl+F` |Find |
-|`Ctrl+H` |Find and Replace |
-|`Ctrl+G` |Go to next match |
-|`Ctrl+Shift+G` |Go to previous match |
-|`Ctrl+D` |Select next occurrence |
-|`Ctrl+/` |Toggle line comment |
-|`Tab` |Indent / Accept completion |
-|`Shift+Tab` |Outdent |
-|`Ctrl+Space` |Trigger autocompletion |
-|`Alt+Up` |Move line up |
-|`Alt+Down` |Move line down |
-|`Ctrl+Shift+K` |Delete line |
+|Ctrl+Z |Undo |
+|Ctrl+Shift+Z |Redo |
+|Ctrl+F |Find |
+|Ctrl+H |Find and Replace |
+|Ctrl+D |Select next occurrence |
+|Ctrl+/ |Toggle comment |
+|Ctrl+Alt+Up/Down |Add cursor above/below |
+|Ctrl+. |Focus next field |
+|Ctrl+Shift+. |Focus previous field |
+|Alt+Up/Down |Move line up/down |
+|Tab |Indent / accept completion |
+|Ctrl+Space |Trigger completion |
 
-!! Configuration
-
-Configure the editor via ''Control Panel > Settings > CodeMirror'':
-
-* Theme selection
-* Font size and font family
-* Tab size and indentation
-* Line wrapping
-* Bracket matching
-* Auto-close brackets
-* And many more options
-
-!! Optional Plugins
-
-Extend the editor with additional plugins:
-
-* ''Lint'' - Highlight potential issues in your content
-* ''Vim/Emacs Keymaps'' - Alternative keyboard bindings
-* ''Snippets'' - Custom code snippets with tab stops
-* ''Language Packs'' - Syntax highlighting for JavaScript, CSS, JSON, etc.
-* ''Themes'' - Additional color themes
+Customize shortcuts in ''Control Panel → Settings → CodeMirror → Keyboard Shortcuts''.

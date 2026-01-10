@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/lang-xml/svg-completions
+caption: SVG Completions
+description: Enable schema-based autocompletion for SVG elements and attributes
+config-type: checkbox
+config-category: Languages
+default: yes
+text: yes

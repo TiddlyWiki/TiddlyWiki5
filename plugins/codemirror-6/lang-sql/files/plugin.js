@@ -49,18 +49,18 @@ exports.plugin = {
 	},
 
 	condition: function(context) {
-		// Tag-based override takes precedence
-		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) {
-			return true;
+		// If any tag override is active, only the winning plugin activates
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
 		}
-		// Fall back to content type check
-		var type = context.tiddlerType;
-		return SQL_TYPES.indexOf(type) !== -1;
+		// Normal mode: tag match or type match
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
+		return SQL_TYPES.indexOf(context.tiddlerType) !== -1;
 	},
 
 	getDialect: function(context) {
 		var wiki = context.widget && context.widget.wiki;
-		var dialectName = wiki && wiki.getTiddlerText("$:/config/codemirror-6/sql-dialect", "StandardSQL");
+		var dialectName = wiki && wiki.getTiddlerText("$:/config/codemirror-6/lang-sql/dialect", "StandardSQL");
 		return DIALECTS[dialectName] || langSql.StandardSQL;
 	},
 

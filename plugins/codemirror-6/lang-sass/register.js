@@ -29,12 +29,40 @@ exports.startup = function() {
 
 	var LanguageDescription = core.language.LanguageDescription;
 
+	// Get the language objects from LanguageSupport
+	var scssSupport = langSass.sass();
+	var sassSupport = langSass.sass({
+		indented: true
+	});
+	var scssLanguage = scssSupport.language;
+	var sassLanguageObj = sassSupport.language;
+
+	// Store completion source for use by other modules
+	var sassCompletionSource = langSass.sassCompletionSource;
+	if(sassCompletionSource) {
+		core.sassCompletionSource = sassCompletionSource;
+
+		// Register for nested language completion in TiddlyWiki
+		// Uses Language.isActiveAt() for detection
+		core.registerNestedLanguageCompletion({
+			name: "sass",
+			language: sassLanguageObj,
+			source: sassCompletionSource
+		});
+		// Also register as scss
+		core.registerNestedLanguageCompletion({
+			name: "scss",
+			language: scssLanguage,
+			source: sassCompletionSource
+		});
+	}
+
 	// Register SCSS
 	core.registerLanguage(LanguageDescription.of({
 		name: "SCSS",
 		alias: ["scss"],
 		extensions: ["scss"],
-		support: langSass.sass()
+		support: scssSupport
 	}));
 
 	// Register Sass (indented syntax)
@@ -42,8 +70,6 @@ exports.startup = function() {
 		name: "Sass",
 		alias: ["sass"],
 		extensions: ["sass"],
-		support: langSass.sass({
-			indented: true
-		})
+		support: sassSupport
 	}));
 };

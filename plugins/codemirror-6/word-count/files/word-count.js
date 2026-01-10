@@ -13,7 +13,7 @@ Word count plugin - displays live word, character, and line counts.
 
 if(!$tw.browser) return;
 
-var CONFIG_TIDDLER = "$:/config/codemirror-6/wordCount";
+var CONFIG_TIDDLER = "$:/config/codemirror-6/word-count/enabled";
 
 exports.plugin = {
 	name: "word-count",

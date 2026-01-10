@@ -401,7 +401,7 @@ function getTiddlerPreview(title) {
 
 		// Store widget reference for cleanup
 		container._previewWidget = widgetNode;
-	} catch(e) {
+	} catch (e) {
 		// Fallback to raw text if rendering fails
 		var text = fields.text || "";
 		if(text.length > MAX_PREVIEW_LENGTH) {
@@ -494,7 +494,7 @@ exports.plugin = {
 		if(context.options.linkPreview === false) return false;
 		// Check config tiddler
 		var wiki = context.options && context.options.widget && context.options.widget.wiki;
-		var enabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/linkPreview", "yes");
+		var enabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/link-preview/enabled", "yes");
 		if(enabled !== "yes") return false;
 		return !type || type === "" || type === "text/vnd.tiddlywiki" || type === "text/x-tiddlywiki";
 	},
@@ -548,6 +548,18 @@ exports.plugin = {
 		}
 
 		return [handlers];
+	},
+
+	// Return raw content for compartment reconfiguration (without compartment.of wrapper)
+	getCompartmentContent: function(context) {
+		// Store widget.document reference for DOM operations
+		var widget = context.options && context.options.widget;
+		if(widget && widget.document) {
+			_document = widget.document;
+		}
+
+		var handlers = this._getOrCreateLinkPreviewHandlers();
+		return handlers ? [handlers] : [];
 	},
 
 	registerEvents: function(engine, _context) {

@@ -276,7 +276,7 @@ exports.plugin = {
 	// Check if enabled in config
 	condition: function(context) {
 		var wiki = context.options && context.options.widget && context.options.widget.wiki;
-		var enabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/snippets", "yes");
+		var enabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/snippets/enabled", "yes");
 		return enabled === "yes";
 	},
 
@@ -299,7 +299,7 @@ exports.plugin = {
 			engine.registerCompletionSource(
 				snippetCompletions,
 				18,
-				"$:/config/codemirror-6/snippets"
+				"$:/config/codemirror-6/snippets/enabled"
 			);
 		}
 
