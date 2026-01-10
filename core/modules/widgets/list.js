@@ -84,6 +84,10 @@ ListWidget.prototype.execute = function(changedAttributes) {
 	}
 	// Compose the list elements
 	this.list = this.getTiddlerList();
+	// Set the listVariable if specified
+	if(this.listVariableName && this.fullList) {
+		this.setVariable(this.listVariableName, this.fullList);
+	}
 	var members = [],
 		self = this;
 	// Check for an empty list
@@ -131,8 +135,11 @@ ListWidget.prototype.getTiddlerList = function() {
 	var limit = $tw.utils.getInt(this.getAttribute("limit",""),undefined);
 	var defaultFilter = "[!is[system]sort[title]]";
 	var results = this.wiki.filterTiddlers(this.getAttribute("filter",defaultFilter),this);
-	// We store the full list for listVariable support and then apply the limit if specified
-	this.fullList = results.slice();
+	// We store the full list for listVariable support if needed
+	if(this.listVariableName) {
+		this.fullList = results;
+	}
+	// Apply limit if specified
 	if(limit !== undefined) {
 		if(limit >= 0) {
 			results = results.slice(0,limit);
@@ -214,7 +221,7 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 		}
 	}
 	// Return the list item
-	var parseTreeNode = {type: "listitem", itemTitle: title, variableName: this.variableName, listVariableName: this.listVariableName, fullList: this.fullList, children: templateTree, join: join};
+	var parseTreeNode = {type: "listitem", itemTitle: title, variableName: this.variableName, children: templateTree, join: join};
 	parseTreeNode.isLast = index === this.list.length - 1;
 	if(this.counterName) {
 		parseTreeNode.counter = (index + 1).toString();
@@ -282,6 +289,9 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 	// Get the new list
 	var prevList = this.list;
 	this.list = this.getTiddlerList();
+	if(this.listVariableName && this.fullList) {
+		this.setVariable(this.listVariableName, this.fullList);
+	}
 	// Check for an empty list
 	if(this.list.length === 0) {
 		// Check if it was empty before
@@ -463,10 +473,6 @@ Compute the internal state of the widget
 ListItemWidget.prototype.execute = function() {
 	// Set the current list item title
 	this.setVariable(this.parseTreeNode.variableName,this.parseTreeNode.itemTitle);
-	// Set the multi-valued variable with the full list if listVariable is specified
-	if(this.parseTreeNode.listVariableName && this.parseTreeNode.fullList) {
-		this.setVariable(this.parseTreeNode.listVariableName, this.parseTreeNode.fullList);
-	}
 	if(this.parseTreeNode.counterName) {
 		this.setVariable(this.parseTreeNode.counterName,this.parseTreeNode.counter);
 		this.setVariable(this.parseTreeNode.counterName + "-first",this.parseTreeNode.isFirst ? "yes" : "no");
