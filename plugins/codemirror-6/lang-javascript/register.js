@@ -51,13 +51,13 @@ exports.startup = function() {
 	var scopeCompletionSource = langJs.scopeCompletionSource;
 	var autoCloseTags = langJs.autoCloseTags;
 
-	// Create a merged scope object with globalThis and $tw for scope completion
+	// Create a merged scope object with window globals and $tw for scope completion
 	// This allows completing properties like "console.log", "$tw.wiki", etc.
 	var mergedScope = {};
-	if(typeof globalThis !== "undefined") {
-		Object.keys(globalThis).forEach(function(key) {
+	if(typeof window !== "undefined") {
+		Object.keys(window).forEach(function(key) {
 			try {
-				mergedScope[key] = globalThis[key];
+				mergedScope[key] = window[key];
 			} catch (e) {
 				// Some properties may throw on access
 			}
@@ -110,7 +110,7 @@ exports.startup = function() {
 			}
 		}
 
-		// Get scope completions (globalThis, $tw, and their properties)
+		// Get scope completions (window globals, $tw, and their properties)
 		if(scopeSource) {
 			var scopeResult = scopeSource(context);
 			if(scopeResult && scopeResult.options && scopeResult.options.length > 0) {
