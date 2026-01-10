@@ -334,7 +334,7 @@ html body .tc-edit-tags .tc-editor-codemirror6-input {
 html body .tc-edit-tags .tc-editor-codemirror6-input .cm-editor {
 	display: block;
 	width: 100%;
-	min-width: 350px;
+	min-width: 20ch;
 }
 
 html body .tc-edit-tags .tc-editor-codemirror6-input .cm-scroller {
@@ -385,7 +385,7 @@ html body .tc-edit-field-add-name-wrapper > .tc-keyboard {
 html body .tc-edit-field-add-name-wrapper .tc-editor-codemirror6-input {
 	display: inline-block;
 	width: auto;
-	min-width: 350px;
+	min-width: 20ch;
 }
 
 html body .tc-edit-field-add-name-wrapper .tc-editor-codemirror6-input .cm-editor {
