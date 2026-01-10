@@ -15,10 +15,37 @@ if(!$tw.browser) return;
 
 var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTextWidgetFactory,
 	CodeMirrorEngine = require("$:/plugins/tiddlywiki/codemirror-6/engine.js").CodeMirrorEngine,
-	CodeMirrorSimpleEngine = require("$:/plugins/tiddlywiki/codemirror-6/plugins/edit-text/engine.js").CodeMirrorSimpleEngine;
+	CodeMirrorSimpleEngine = require("$:/plugins/tiddlywiki/codemirror-6/plugins/edit-text/engine.js").CodeMirrorSimpleEngine,
+	SimpleEngine = require("$:/core/modules/editor/engines/simple.js").SimpleEngine;
+
+// Input types that should use CodeMirror (text-based inputs that benefit from syntax highlighting)
+var CM_SUPPORTED_TYPES = {
+	"text": true,
+	"search": true,
+	"": true, // default/unspecified
+	undefined: true
+};
+
+/**
+ * Wrapper engine that delegates to CodeMirrorSimpleEngine for text-based inputs,
+ * but falls back to TiddlyWiki's native SimpleEngine for specialized types
+ * (number, password, email, date, color, range, etc.)
+ */
+function SmartSimpleEngine(options) {
+	var widget = options.widget;
+	var inputType = widget && widget.editType;
+
+	// For types that don't benefit from CodeMirror, use native SimpleEngine
+	if(!CM_SUPPORTED_TYPES[inputType]) {
+		return new SimpleEngine(options);
+	}
+
+	// For text-based types, use CodeMirror
+	return new CodeMirrorSimpleEngine(options);
+}
 
 // Create base widget from factory
-var BaseEditTextWidget = editTextWidgetFactory(CodeMirrorEngine, CodeMirrorSimpleEngine);
+var BaseEditTextWidget = editTextWidgetFactory(CodeMirrorEngine, SmartSimpleEngine);
 
 // Theme-related tiddlers to watch for changes
 var THEME_TIDDLERS = [
