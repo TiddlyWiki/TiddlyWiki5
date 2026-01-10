@@ -7,7 +7,11 @@ Edit-text widget using CodeMirror engine
 With dynamic configuration support for all settings
 
 \*/
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
+
+if(!$tw.browser) return;
 
 var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTextWidgetFactory,
 	CodeMirrorEngine = require("$:/plugins/tiddlywiki/codemirror-6/engine.js").CodeMirrorEngine,
