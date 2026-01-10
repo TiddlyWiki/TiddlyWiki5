@@ -11,9 +11,9 @@ The image parser parses an image into an embeddable HTML element
 
 var ImageParser = function(type,text,options) {
 	var element = {
-			type: "image",
-			attributes: {}
-		};
+		type: "image",
+		attributes: {}
+	};
 	if(options._canonical_uri) {
 		element.attributes.source = {type: "string", value: options._canonical_uri};
 	} else if(text) {
