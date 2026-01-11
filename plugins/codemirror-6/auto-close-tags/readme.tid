@@ -1,0 +1,35 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/auto-close-tags/readme
+
+! Auto Close Tags
+
+This plugin automatically inserts closing tags when you type the `>` character after an opening HTML or TiddlyWiki widget tag.
+
+!! Features
+
+* ''Auto-close on `>`'': When you type `<div>`, the closing `</div>` is automatically inserted
+* ''Widget support'': Works with TiddlyWiki widgets like `<$button>` to `</$button>`
+* ''Smart detection'': Doesn't auto-close:
+** Self-closing tags (when you type `/>`)
+** HTML void elements (`<br>`, `<img>`, `<input>`, etc.)
+** Self-closing action widgets (`<$action-sendmessage>`, etc.)
+* ''Close tag completion'': When you type `</`, the nearest unclosed tag name is inserted
+
+''Note:'' When using autocompletion to insert a tag or widget (e.g., selecting `<$list` from the completion menu), the closing tag is also inserted and the cursor is positioned between the opening and closing tags: `<$list>|</$list>`
+
+!! Configuration
+
+The feature can be enabled or disabled via the CodeMirror settings panel.
+
+!! Examples
+
+```
+<div>|</div>     ← cursor positioned here after typing >
+<$button>|</$button>
+<$list filter="...">|</$list>
+```
+
+Void elements are not auto-closed:
+```
+<br>|            ← no closing tag added
+<img src="...">|
+```

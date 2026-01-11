@@ -1,0 +1,250 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-dracula/styles
+tags: $:/tags/Stylesheet
+
+\rules only macrocallinline macrocallblock conditional
+
+/* ============================================================================
+   Dracula Theme for CodeMirror 6
+   ============================================================================
+   
+   Based on https://draculatheme.com/
+   
+   Dracula is a dark theme known for its distinctive purple/pink palette
+   with cyan and green accents on a dark background.
+   
+   ============================================================================ */
+
+/* ============================================================================
+   Dracula Dark (Primary)
+   ============================================================================ */
+
+.cm6-theme-dracula,
+[data-cm6-theme="dracula"] {
+  /* Base palette - Dracula background tones */
+  --wt-bg: #282a36;
+  --wt-bg-subtle: #343746;
+  --wt-fg: #f8f8f2;
+  --wt-fg-muted: #6272a4;
+  --wt-fg-faint: #44475a;
+  --wt-border: #44475a;
+  --wt-selection: rgba(68, 71, 90, 0.7);
+  --wt-line-highlight: rgba(68, 71, 90, 0.4);
+
+  /* Semantic colors - Dracula palette */
+  --wt-teal: #8be9fd;           /* Cyan - used for widgets */
+  --wt-teal-dim: #6be5fd;
+  --wt-blue: #8be9fd;           /* Cyan for links */
+  --wt-violet: #bd93f9;         /* Purple - transclusions */
+  --wt-cyan: #8be9fd;           /* Cyan - filters */
+  --wt-orange: #ffb86c;         /* Orange - macros */
+  --wt-rose: #ff79c6;           /* Pink - conditionals */
+  --wt-amber: #f1fa8c;          /* Yellow - attributes */
+  --wt-slate: #f8f8f2;          /* Foreground - code */
+  --wt-purple: #bd93f9;         /* Purple - pragmas */
+  --wt-green: #50fa7b;          /* Green - strings */
+  --wt-red: #ff5555;            /* Red - errors */
+
+  /* Formatting */
+  --wt-bold: #f8f8f2;
+  --wt-italic: #f8f8f2;
+  --wt-strike: #6272a4;
+  --wt-underline: #f8f8f2;
+  --wt-heading: #bd93f9;
+
+  /* Code blocks */
+  --wt-code-bg: #44475a;
+  --wt-code-fg: #ff79c6;
+
+  /* Highlight */
+  --wt-highlight-bg: rgba(241, 250, 140, 0.2);
+  --wt-highlight-fg: #f1fa8c;
+
+  /* Comments */
+  --wt-comment: #6272a4;
+  --wt-mark: #44475a;
+}
+
+/* ============================================================================
+   Dracula Light Variant
+   ============================================================================ */
+
+.cm6-theme-dracula-light,
+[data-cm6-theme="dracula-light"] {
+  /* Base palette - Light version */
+  --wt-bg: #f8f8f2;
+  --wt-bg-subtle: #e8e8e2;
+  --wt-fg: #282a36;
+  --wt-fg-muted: #6272a4;
+  --wt-fg-faint: #a4a4a4;
+  --wt-border: #d4d4d4;
+  --wt-selection: rgba(189, 147, 249, 0.25);
+  --wt-line-highlight: rgba(98, 114, 164, 0.1);
+
+  /* Semantic colors - Dracula light adjusted */
+  --wt-teal: #0097a7;           /* Darker cyan */
+  --wt-teal-dim: #00838f;
+  --wt-blue: #0097a7;
+  --wt-violet: #7c3aed;         /* Darker purple */
+  --wt-cyan: #0097a7;
+  --wt-orange: #e65100;         /* Darker orange */
+  --wt-rose: #d81b60;           /* Darker pink */
+  --wt-amber: #827717;          /* Darker yellow */
+  --wt-slate: #282a36;
+  --wt-purple: #7c3aed;
+  --wt-green: #2e7d32;          /* Darker green */
+  --wt-red: #c62828;
+
+  /* Formatting */
+  --wt-bold: #282a36;
+  --wt-italic: #44475a;
+  --wt-strike: #a4a4a4;
+  --wt-underline: #44475a;
+  --wt-heading: #7c3aed;
+
+  /* Code blocks */
+  --wt-code-bg: #e8e8e2;
+  --wt-code-fg: #d81b60;
+
+  /* Highlight */
+  --wt-highlight-bg: rgba(130, 119, 23, 0.15);
+  --wt-highlight-fg: #827717;
+
+  /* Comments */
+  --wt-comment: #6272a4;
+  --wt-mark: #d4d4d4;
+}
+
+/* ============================================================================
+   Dracula Token Overrides
+   ============================================================================ */
+
+.cm6-theme-dracula .tok-string,
+.cm6-theme-dracula .tok-string2,
+[data-cm6-theme="dracula"] .tok-string,
+[data-cm6-theme="dracula"] .tok-string2 {
+  color: #f1fa8c;
+}
+
+.cm6-theme-dracula .tok-keyword,
+[data-cm6-theme="dracula"] .tok-keyword {
+  color: #ff79c6;
+}
+
+.cm6-theme-dracula .tok-function,
+[data-cm6-theme="dracula"] .tok-function {
+  color: #50fa7b;
+}
+
+.cm6-theme-dracula .tok-number,
+[data-cm6-theme="dracula"] .tok-number {
+  color: #bd93f9;
+}
+
+.cm6-theme-dracula .tok-variableName,
+[data-cm6-theme="dracula"] .tok-variableName {
+  color: #f8f8f2;
+}
+
+.cm6-theme-dracula .tok-typeName,
+[data-cm6-theme="dracula"] .tok-typeName {
+  color: #8be9fd;
+  font-style: italic;
+}
+
+/* ============================================================================
+   Editor Chrome - Dracula
+   ============================================================================ */
+
+.cm6-theme-dracula .cm-editor,
+[data-cm6-theme="dracula"] .cm-editor {
+  background-color: #282a36;
+}
+
+.cm6-theme-dracula .cm-editor .cm-cursor,
+[data-cm6-theme="dracula"] .cm-editor .cm-cursor {
+  border-left-color: #f8f8f2;
+}
+
+.cm6-theme-dracula .cm-editor .cm-matchingBracket,
+[data-cm6-theme="dracula"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(139, 233, 253, 0.25);
+  outline: 1px solid #8be9fd;
+}
+
+.cm6-theme-dracula .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="dracula"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #282a36;
+  border-color: #44475a;
+}
+
+.cm6-theme-dracula .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="dracula"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #bd93f9;
+  color: #282a36;
+}
+
+.cm6-theme-dracula .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="dracula"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(40, 42, 54, 0.8);
+}
+
+.cm6-theme-dracula .cm-completionMatchedText,
+[data-cm6-theme="dracula"] .cm-completionMatchedText {
+  color: #50fa7b;
+}
+
+/* ============================================================================
+   Vim Mode - Dark
+   ============================================================================ */
+
+.cm6-theme-dracula .cm-fat-cursor,
+[data-cm6-theme="dracula"] .cm-fat-cursor {
+  background: #f8f8f2 !important;
+}
+
+.cm6-theme-dracula .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="dracula"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #6272a4 !important;
+}
+
+.cm6-theme-dracula .cm-vim-panel,
+[data-cm6-theme="dracula"] .cm-vim-panel {
+  background: #343746;
+  border-color: #44475a;
+  color: #f8f8f2;
+}
+
+.cm6-theme-dracula .cm-vim-panel input,
+[data-cm6-theme="dracula"] .cm-vim-panel input {
+  background: #282a36;
+  color: #f8f8f2;
+  border-color: #44475a;
+}
+
+/* ============================================================================
+   Vim Mode - Light
+   ============================================================================ */
+
+.cm6-theme-dracula-light .cm-fat-cursor,
+[data-cm6-theme="dracula-light"] .cm-fat-cursor {
+  background: #282a36 !important;
+}
+
+.cm6-theme-dracula-light .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="dracula-light"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #a4a4a4 !important;
+}
+
+.cm6-theme-dracula-light .cm-vim-panel,
+[data-cm6-theme="dracula-light"] .cm-vim-panel {
+  background: #e8e8e2;
+  border-color: #d4d4d4;
+  color: #282a36;
+}
+
+.cm6-theme-dracula-light .cm-vim-panel input,
+[data-cm6-theme="dracula-light"] .cm-vim-panel input {
+  background: #f8f8f2;
+  color: #282a36;
+  border-color: #d4d4d4;
+}

@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-kanagawa/readme
+
+! Kanagawa Theme for CodeMirror 6
+
+Inspired by the colors of "The Great Wave off Kanagawa" by Katsushika Hokusai.
+
+Based on [[Kanagawa.nvim|https://github.com/rebelot/kanagawa.nvim]].
+
+!! Variants
+
+* `kanagawa` / `kanagawa-wave` - Default dark with blue tones
+* `kanagawa-dragon` - Darker, more muted variant
+* `kanagawa-lotus` - Light variant
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-kanagawa` | Wave (default) |
+| `cm6-theme-kanagawa-wave` | Same as above |
+| `cm6-theme-kanagawa-dragon` | Dragon (darker) |
+| `cm6-theme-kanagawa-lotus` | Lotus (light) |

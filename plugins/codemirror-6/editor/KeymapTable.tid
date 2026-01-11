@@ -1,0 +1,94 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/ControlPanel/KeymapTable
+tags: $:/tags/CodeMirror/KeymapTable
+name: default
+
+!!! Default Keymap (VS Code / Sublime Style)
+
+!!!! Basic Editing
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+X</td><td>Cut line (when no selection)</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+C</td><td>Copy line (when no selection)</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+V</td><td>Paste</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Z</td><td>Undo</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Shift+Z / Ctrl+Y</td><td>Redo</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+A</td><td>Select all</td></tr>
+<tr><td class="cm-keymap-key">Tab</td><td>Indent / Accept autocomplete</td></tr>
+<tr><td class="cm-keymap-key">Shift+Tab</td><td>Dedent</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+]</td><td>Indent line(s)</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+[</td><td>Dedent line(s)</td></tr>
+<tr><td class="cm-keymap-key">Enter</td><td>Insert line below</td></tr>
+<tr><td class="cm-keymap-key">Backspace</td><td>Delete backward</td></tr>
+<tr><td class="cm-keymap-key">Delete</td><td>Delete forward</td></tr>
+</table>
+
+!!!! Line Operations
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+Shift+K</td><td>Delete line</td></tr>
+<tr><td class="cm-keymap-key">Alt+Up</td><td>Move line up</td></tr>
+<tr><td class="cm-keymap-key">Alt+Down</td><td>Move line down</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Shift+D</td><td>Duplicate line</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Enter</td><td>Insert line below</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Shift+Enter</td><td>Insert line above</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Shift+\</td><td>Go to matching bracket</td></tr>
+</table>
+
+!!!! Selection & Cursors
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+D</td><td>Select word / Add next occurrence</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Shift+L</td><td>Select all occurrences</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+L</td><td>Select line</td></tr>
+<tr><td class="cm-keymap-key">Shift+Alt+Up</td><td>Add cursor above</td></tr>
+<tr><td class="cm-keymap-key">Shift+Alt+Down</td><td>Add cursor below</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+U</td><td>Undo selection</td></tr>
+<tr><td class="cm-keymap-key">Escape</td><td>Collapse to single cursor</td></tr>
+</table>
+
+!!!! Search & Replace
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+F</td><td>Find</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+H</td><td>Find and replace</td></tr>
+<tr><td class="cm-keymap-key">F3 / Ctrl+G</td><td>Find next</td></tr>
+<tr><td class="cm-keymap-key">Shift+F3 / Ctrl+Shift+G</td><td>Find previous</td></tr>
+<tr><td class="cm-keymap-key">Escape</td><td>Close search panel</td></tr>
+</table>
+
+!!!! Navigation
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+G</td><td>Go to line</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Home</td><td>Go to start of document</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+End</td><td>Go to end of document</td></tr>
+<tr><td class="cm-keymap-key">Home</td><td>Go to start of line</td></tr>
+<tr><td class="cm-keymap-key">End</td><td>Go to end of line</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Left</td><td>Word left</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Right</td><td>Word right</td></tr>
+<tr><td class="cm-keymap-key">Page Up</td><td>Page up</td></tr>
+<tr><td class="cm-keymap-key">Page Down</td><td>Page down</td></tr>
+</table>
+
+!!!! Folding
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+Shift+[</td><td>Fold</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Shift+]</td><td>Unfold</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+K Ctrl+0</td><td>Fold all</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+K Ctrl+J</td><td>Unfold all</td></tr>
+</table>
+
+!!!! Comments
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+/</td><td>Toggle line comment</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Shift+A</td><td>Toggle block comment</td></tr>
+</table>

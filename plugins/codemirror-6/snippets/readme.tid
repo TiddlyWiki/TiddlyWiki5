@@ -1,0 +1,72 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/snippets/readme
+
+! User Snippets Plugin
+
+This plugin allows you to define custom code snippets that can be inserted via autocompletion. Snippets support tab-navigatable placeholders for quickly filling in values.
+
+!! Creating a Snippet
+
+Create a tiddler with the tag `$:/tags/CodeMirror/Snippet` and add the following fields:
+
+|!Field |!Required |!Description |
+|`trigger` |Yes |The abbreviation that triggers the snippet (e.g., `mysnip`) |
+|`text` |Yes |The snippet template with placeholders |
+|`caption` |No |Display label in the completion menu (defaults to trigger) |
+|`description` |No |Short description shown in completions |
+|`scope` |No |Content-type filter (e.g., `text/vnd.tiddlywiki`) |
+|`priority` |No |Numeric priority for ordering (higher = first, default: 0) |
+
+!! Placeholder Syntax
+
+Use the following syntax in your snippet templates:
+
+* `${1}` - Tab stop 1 (first position to edit)
+* `${1:placeholder}` - Tab stop with default text
+* `${2:another}` - Tab stop 2 (second position)
+* `$0` - Final cursor position after all tab stops
+
+After inserting a snippet, press Tab to move between placeholders.
+
+!! Example Snippet
+
+Create a tiddler with:
+
+```
+title: $:/snippets/my-list-widget
+tags: $:/tags/CodeMirror/Snippet
+trigger: mylist
+caption: My List Widget
+description: Custom list pattern
+scope: text/vnd.tiddlywiki
+priority: 10
+```
+
+And the text field containing:
+
+```
+<$list filter="${1:[tag[Example]]}">
+  <div class="my-item">
+    <<currentTiddler>>
+    $0
+  </div>
+</$list>
+```
+
+!! Scope Filtering
+
+Use the `scope` field to limit snippets to specific content types:
+
+* `text/vnd.tiddlywiki` - TiddlyWiki wikitext only
+* `application/javascript` - JavaScript files only
+* `text/css` - CSS files only
+
+You can specify multiple scopes separated by commas: `text/vnd.tiddlywiki, text/x-tiddlywiki`
+
+!! API
+
+The plugin extends the editor engine with these methods:
+
+* `engine.getUserSnippets()` - Get list of user-defined snippets
+* `engine.getSnippets(contentType)` - Get snippets (optionally filtered by content type)
+* `engine.clearSnippetCache()` - Clear the cache after modifying snippet tiddlers
+* `engine.insertUserSnippet(trigger, contentType)` - Insert a snippet by trigger

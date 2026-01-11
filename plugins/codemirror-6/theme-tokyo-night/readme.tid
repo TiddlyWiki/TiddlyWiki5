@@ -1,0 +1,22 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-tokyo-night/readme
+
+! Tokyo Night Theme for CodeMirror 6
+
+Modern, elegant theme inspired by Tokyo city lights at night.
+
+Based on [[Tokyo Night|https://github.com/enkia/tokyo-night-vscode-theme]].
+
+!! Variants
+
+* `tokyo-night` / `tokyo` - Default night theme
+* `tokyo-night-storm` - Slightly lighter background
+* `tokyo-night-day` / `tokyo-day` - Light variant
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-tokyo-night` | Night (default) |
+| `cm6-theme-tokyo` | Same as above |
+| `cm6-theme-tokyo-night-storm` | Storm variant |
+| `cm6-theme-tokyo-night-day` | Day (light) |
+| `cm6-theme-tokyo-day` | Same as above |

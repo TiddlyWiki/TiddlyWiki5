@@ -1,0 +1,5 @@
+title: $:/language/Docs/Types/application/x-sql
+description: SQL query
+group: Developer
+group-sort: 2
+name: application/x-sql

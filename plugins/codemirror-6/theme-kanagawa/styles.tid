@@ -1,0 +1,412 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-kanagawa/styles
+tags: $:/tags/Stylesheet
+
+\rules only macrocallinline macrocallblock conditional
+
+/* ============================================================================
+   Kanagawa Theme for CodeMirror 6
+   ============================================================================
+   
+   Based on https://github.com/rebelot/kanagawa.nvim
+   
+   Dark theme inspired by the colors of the famous painting
+   "The Great Wave off Kanagawa" by Katsushika Hokusai.
+   
+   ============================================================================ */
+
+/* ============================================================================
+   Kanagawa Wave (Default Dark)
+   ============================================================================ */
+
+.cm6-theme-kanagawa,
+.cm6-theme-kanagawa-wave,
+[data-cm6-theme="kanagawa"],
+[data-cm6-theme="kanagawa-wave"] {
+  --wt-bg: #1f1f28;             /* sumiInk1 */
+  --wt-bg-subtle: #16161d;      /* sumiInk0 */
+  --wt-fg: #dcd7ba;             /* fujiWhite */
+  --wt-fg-muted: #727169;       /* fujiGray */
+  --wt-fg-faint: #54546d;       /* sumiInk4 */
+  --wt-border: #2a2a37;         /* sumiInk3 */
+  --wt-selection: rgba(73, 73, 95, 0.6);
+  --wt-line-highlight: rgba(42, 42, 55, 0.5);
+
+  --wt-teal: #7fb4ca;           /* springBlue */
+  --wt-teal-dim: #7fb4ca;
+  --wt-blue: #7e9cd8;           /* crystalBlue */
+  --wt-violet: #957fb8;         /* oniViolet */
+  --wt-cyan: #7aa89f;           /* waveAqua2 */
+  --wt-orange: #ffa066;         /* surimiOrange */
+  --wt-rose: #e82424;           /* samuraiRed */
+  --wt-amber: #e6c384;          /* carpYellow */
+  --wt-slate: #c8c093;          /* oldWhite */
+  --wt-purple: #957fb8;         /* oniViolet */
+  --wt-green: #98bb6c;          /* springGreen */
+  --wt-red: #ff5d62;            /* peachRed */
+  --wt-pink: #d27e99;           /* sakuraPink */
+
+  --wt-bold: #dcd7ba;
+  --wt-italic: #dcd7ba;
+  --wt-strike: #727169;
+  --wt-underline: #dcd7ba;
+  --wt-heading: #7e9cd8;
+
+  --wt-code-bg: #16161d;
+  --wt-code-fg: #d27e99;
+
+  --wt-highlight-bg: rgba(230, 195, 132, 0.2);
+  --wt-highlight-fg: #e6c384;
+
+  --wt-comment: #727169;
+  --wt-mark: #2a2a37;
+}
+
+/* ============================================================================
+   Kanagawa Dragon (Darker variant)
+   ============================================================================ */
+
+.cm6-theme-kanagawa-dragon,
+[data-cm6-theme="kanagawa-dragon"] {
+  --wt-bg: #181616;
+  --wt-bg-subtle: #0d0c0c;
+  --wt-fg: #c5c9c5;
+  --wt-fg-muted: #625e5a;
+  --wt-fg-faint: #393836;
+  --wt-border: #282727;
+  --wt-selection: rgba(73, 71, 70, 0.6);
+  --wt-line-highlight: rgba(40, 39, 39, 0.5);
+
+  --wt-teal: #7fb4ca;
+  --wt-teal-dim: #7fb4ca;
+  --wt-blue: #8ba4b0;
+  --wt-violet: #a292a3;
+  --wt-cyan: #8ea4a2;
+  --wt-orange: #b6927b;
+  --wt-rose: #c4746e;
+  --wt-amber: #c4b28a;
+  --wt-slate: #a6a69c;
+  --wt-purple: #a292a3;
+  --wt-green: #87a987;
+  --wt-red: #c4746e;
+  --wt-pink: #a292a3;
+
+  --wt-bold: #c5c9c5;
+  --wt-italic: #c5c9c5;
+  --wt-strike: #625e5a;
+  --wt-underline: #c5c9c5;
+  --wt-heading: #8ba4b0;
+
+  --wt-code-bg: #0d0c0c;
+  --wt-code-fg: #c4746e;
+
+  --wt-highlight-bg: rgba(196, 178, 138, 0.2);
+  --wt-highlight-fg: #c4b28a;
+
+  --wt-comment: #625e5a;
+  --wt-mark: #282727;
+}
+
+/* ============================================================================
+   Kanagawa Lotus (Light)
+   ============================================================================ */
+
+.cm6-theme-kanagawa-lotus,
+[data-cm6-theme="kanagawa-lotus"] {
+  --wt-bg: #f2ecbc;
+  --wt-bg-subtle: #e5ddb0;
+  --wt-fg: #545464;
+  --wt-fg-muted: #8a8980;
+  --wt-fg-faint: #c7c0a9;
+  --wt-border: #d5cea3;
+  --wt-selection: rgba(198, 184, 134, 0.5);
+  --wt-line-highlight: rgba(229, 221, 176, 0.5);
+
+  --wt-teal: #597b75;           /* springBlue */
+  --wt-teal-dim: #597b75;
+  --wt-blue: #4d699b;           /* crystalBlue */
+  --wt-violet: #624c83;         /* oniViolet */
+  --wt-cyan: #5e857a;           /* waveAqua2 */
+  --wt-orange: #cc6d00;         /* surimiOrange */
+  --wt-rose: #d7474b;           /* lotusRed */
+  --wt-amber: #836f4a;          /* carpYellow */
+  --wt-slate: #545464;
+  --wt-purple: #624c83;
+  --wt-green: #6f894e;          /* springGreen */
+  --wt-red: #c84053;
+  --wt-pink: #b35b79;           /* sakuraPink */
+
+  --wt-bold: #545464;
+  --wt-italic: #545464;
+  --wt-strike: #8a8980;
+  --wt-underline: #545464;
+  --wt-heading: #4d699b;
+
+  --wt-code-bg: #e5ddb0;
+  --wt-code-fg: #b35b79;
+
+  --wt-highlight-bg: rgba(131, 111, 74, 0.15);
+  --wt-highlight-fg: #836f4a;
+
+  --wt-comment: #8a8980;
+  --wt-mark: #d5cea3;
+}
+
+/* ============================================================================
+   Token Overrides - Wave/Dragon
+   ============================================================================ */
+
+.cm6-theme-kanagawa .tok-string,
+.cm6-theme-kanagawa-wave .tok-string,
+.cm6-theme-kanagawa-dragon .tok-string,
+[data-cm6-theme="kanagawa"] .tok-string,
+[data-cm6-theme="kanagawa-wave"] .tok-string,
+[data-cm6-theme="kanagawa-dragon"] .tok-string {
+  color: #98bb6c;
+}
+
+.cm6-theme-kanagawa .tok-keyword,
+.cm6-theme-kanagawa-wave .tok-keyword,
+.cm6-theme-kanagawa-dragon .tok-keyword,
+[data-cm6-theme="kanagawa"] .tok-keyword,
+[data-cm6-theme="kanagawa-wave"] .tok-keyword,
+[data-cm6-theme="kanagawa-dragon"] .tok-keyword {
+  color: #957fb8;
+}
+
+.cm6-theme-kanagawa .tok-function,
+.cm6-theme-kanagawa-wave .tok-function,
+.cm6-theme-kanagawa-dragon .tok-function,
+[data-cm6-theme="kanagawa"] .tok-function,
+[data-cm6-theme="kanagawa-wave"] .tok-function,
+[data-cm6-theme="kanagawa-dragon"] .tok-function {
+  color: #7e9cd8;
+}
+
+.cm6-theme-kanagawa .tok-number,
+.cm6-theme-kanagawa-wave .tok-number,
+.cm6-theme-kanagawa-dragon .tok-number,
+[data-cm6-theme="kanagawa"] .tok-number,
+[data-cm6-theme="kanagawa-wave"] .tok-number,
+[data-cm6-theme="kanagawa-dragon"] .tok-number {
+  color: #d27e99;
+}
+
+/* ============================================================================
+   Token Overrides - Lotus
+   ============================================================================ */
+
+.cm6-theme-kanagawa-lotus .tok-string,
+[data-cm6-theme="kanagawa-lotus"] .tok-string {
+  color: #6f894e;
+}
+
+.cm6-theme-kanagawa-lotus .tok-keyword,
+[data-cm6-theme="kanagawa-lotus"] .tok-keyword {
+  color: #624c83;
+}
+
+.cm6-theme-kanagawa-lotus .tok-function,
+[data-cm6-theme="kanagawa-lotus"] .tok-function {
+  color: #4d699b;
+}
+
+.cm6-theme-kanagawa-lotus .tok-number,
+[data-cm6-theme="kanagawa-lotus"] .tok-number {
+  color: #b35b79;
+}
+
+/* ============================================================================
+   Editor Chrome - Wave
+   ============================================================================ */
+
+.cm6-theme-kanagawa .cm-editor,
+.cm6-theme-kanagawa-wave .cm-editor,
+[data-cm6-theme="kanagawa"] .cm-editor,
+[data-cm6-theme="kanagawa-wave"] .cm-editor {
+  background-color: #1f1f28;
+}
+
+.cm6-theme-kanagawa-dragon .cm-editor,
+[data-cm6-theme="kanagawa-dragon"] .cm-editor {
+  background-color: #181616;
+}
+
+.cm6-theme-kanagawa .cm-editor .cm-cursor,
+.cm6-theme-kanagawa-wave .cm-editor .cm-cursor,
+.cm6-theme-kanagawa-dragon .cm-editor .cm-cursor,
+[data-cm6-theme="kanagawa"] .cm-editor .cm-cursor,
+[data-cm6-theme="kanagawa-wave"] .cm-editor .cm-cursor,
+[data-cm6-theme="kanagawa-dragon"] .cm-editor .cm-cursor {
+  border-left-color: #c8c093;
+}
+
+.cm6-theme-kanagawa .cm-editor .cm-matchingBracket,
+.cm6-theme-kanagawa-wave .cm-editor .cm-matchingBracket,
+.cm6-theme-kanagawa-dragon .cm-editor .cm-matchingBracket,
+[data-cm6-theme="kanagawa"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="kanagawa-wave"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="kanagawa-dragon"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(126, 156, 216, 0.25);
+  outline: 1px solid #7e9cd8;
+}
+
+.cm6-theme-kanagawa .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-kanagawa-wave .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-kanagawa-dragon .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="kanagawa"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="kanagawa-wave"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="kanagawa-dragon"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #16161d;
+  border-color: #2a2a37;
+}
+
+.cm6-theme-kanagawa .cm-completionMatchedText,
+.cm6-theme-kanagawa-wave .cm-completionMatchedText,
+.cm6-theme-kanagawa-dragon .cm-completionMatchedText,
+[data-cm6-theme="kanagawa"] .cm-completionMatchedText,
+[data-cm6-theme="kanagawa-wave"] .cm-completionMatchedText,
+[data-cm6-theme="kanagawa-dragon"] .cm-completionMatchedText {
+  color: #7e9cd8;
+}
+
+/* ============================================================================
+   Editor Chrome - Lotus
+   ============================================================================ */
+
+.cm6-theme-kanagawa-lotus .cm-editor,
+[data-cm6-theme="kanagawa-lotus"] .cm-editor {
+  background-color: #f2ecbc;
+}
+
+.cm6-theme-kanagawa-lotus .cm-editor .cm-cursor,
+[data-cm6-theme="kanagawa-lotus"] .cm-editor .cm-cursor {
+  border-left-color: #545464;
+}
+
+.cm6-theme-kanagawa-lotus .cm-editor .cm-gutters,
+[data-cm6-theme="kanagawa-lotus"] .cm-editor .cm-gutters {
+  background-color: #e5ddb0;
+  border-right-color: #d5cea3;
+  color: #8a8980;
+}
+
+.cm6-theme-kanagawa-lotus .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="kanagawa-lotus"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #f2ecbc;
+  border-color: #d5cea3;
+}
+
+.cm6-theme-kanagawa-lotus .cm-completionMatchedText,
+[data-cm6-theme="kanagawa-lotus"] .cm-completionMatchedText {
+  color: #4d699b;
+}
+
+/* ============================================================================
+   Autocomplete Selected - Wave/Dragon
+   ============================================================================ */
+
+.cm6-theme-kanagawa .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-kanagawa-wave .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-kanagawa-dragon .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="kanagawa"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="kanagawa-wave"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="kanagawa-dragon"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #7e9cd8;
+  color: #16161d;
+}
+
+.cm6-theme-kanagawa .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-kanagawa-wave .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-kanagawa-dragon .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="kanagawa"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="kanagawa-wave"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="kanagawa-dragon"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(22, 22, 29, 0.8);
+}
+
+/* ============================================================================
+   Autocomplete Selected - Lotus
+   ============================================================================ */
+
+.cm6-theme-kanagawa-lotus .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="kanagawa-lotus"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #4d699b;
+  color: #f2ecbc;
+}
+
+.cm6-theme-kanagawa-lotus .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="kanagawa-lotus"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(242, 236, 188, 0.8);
+}
+
+/* ============================================================================
+   Vim Mode - Wave/Dragon (Dark)
+   ============================================================================ */
+
+.cm6-theme-kanagawa .cm-fat-cursor,
+.cm6-theme-kanagawa-wave .cm-fat-cursor,
+.cm6-theme-kanagawa-dragon .cm-fat-cursor,
+[data-cm6-theme="kanagawa"] .cm-fat-cursor,
+[data-cm6-theme="kanagawa-wave"] .cm-fat-cursor,
+[data-cm6-theme="kanagawa-dragon"] .cm-fat-cursor {
+  background: #c8c093 !important;
+}
+
+.cm6-theme-kanagawa .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-kanagawa-wave .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-kanagawa-dragon .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="kanagawa"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="kanagawa-wave"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="kanagawa-dragon"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #54546d !important;
+}
+
+.cm6-theme-kanagawa .cm-vim-panel,
+.cm6-theme-kanagawa-wave .cm-vim-panel,
+.cm6-theme-kanagawa-dragon .cm-vim-panel,
+[data-cm6-theme="kanagawa"] .cm-vim-panel,
+[data-cm6-theme="kanagawa-wave"] .cm-vim-panel,
+[data-cm6-theme="kanagawa-dragon"] .cm-vim-panel {
+  background: #16161d;
+  border-color: #2a2a37;
+  color: #dcd7ba;
+}
+
+.cm6-theme-kanagawa .cm-vim-panel input,
+.cm6-theme-kanagawa-wave .cm-vim-panel input,
+.cm6-theme-kanagawa-dragon .cm-vim-panel input,
+[data-cm6-theme="kanagawa"] .cm-vim-panel input,
+[data-cm6-theme="kanagawa-wave"] .cm-vim-panel input,
+[data-cm6-theme="kanagawa-dragon"] .cm-vim-panel input {
+  background: #1f1f28;
+  color: #dcd7ba;
+  border-color: #2a2a37;
+}
+
+/* ============================================================================
+   Vim Mode - Lotus (Light)
+   ============================================================================ */
+
+.cm6-theme-kanagawa-lotus .cm-fat-cursor,
+[data-cm6-theme="kanagawa-lotus"] .cm-fat-cursor {
+  background: #545464 !important;
+}
+
+.cm6-theme-kanagawa-lotus .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="kanagawa-lotus"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #c7c0a9 !important;
+}
+
+.cm6-theme-kanagawa-lotus .cm-vim-panel,
+[data-cm6-theme="kanagawa-lotus"] .cm-vim-panel {
+  background: #e5ddb0;
+  border-color: #d5cea3;
+  color: #545464;
+}
+
+.cm6-theme-kanagawa-lotus .cm-vim-panel input,
+[data-cm6-theme="kanagawa-lotus"] .cm-vim-panel input {
+  background: #f2ecbc;
+  color: #545464;
+  border-color: #d5cea3;
+}

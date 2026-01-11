@@ -1,0 +1,408 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-everforest/styles
+tags: $:/tags/Stylesheet
+
+\rules only macrocallinline macrocallblock conditional
+
+/* ============================================================================
+   Everforest Theme for CodeMirror 6
+   ============================================================================
+   
+   Based on https://github.com/sainnhe/everforest
+   
+   Green-based warm color palette. Designed to be easy on eyes.
+   
+   ============================================================================ */
+
+/* ============================================================================
+   Everforest Dark (Default)
+   ============================================================================ */
+
+.cm6-theme-everforest,
+.cm6-theme-everforest-dark,
+[data-cm6-theme="everforest"],
+[data-cm6-theme="everforest-dark"] {
+  --wt-bg: #2d353b;
+  --wt-bg-subtle: #272e33;
+  --wt-fg: #d3c6aa;
+  --wt-fg-muted: #859289;
+  --wt-fg-faint: #5c6a72;
+  --wt-border: #3d484d;
+  --wt-selection: rgba(68, 83, 87, 0.7);
+  --wt-line-highlight: rgba(61, 72, 77, 0.5);
+
+  --wt-teal: #83c092;           /* Aqua */
+  --wt-teal-dim: #83c092;
+  --wt-blue: #7fbbb3;           /* Blue */
+  --wt-violet: #d699b6;         /* Purple */
+  --wt-cyan: #83c092;           /* Aqua */
+  --wt-orange: #e69875;         /* Orange */
+  --wt-rose: #e67e80;           /* Red */
+  --wt-amber: #dbbc7f;          /* Yellow */
+  --wt-slate: #d3c6aa;
+  --wt-purple: #d699b6;
+  --wt-green: #a7c080;          /* Green */
+  --wt-red: #e67e80;
+
+  --wt-bold: #d3c6aa;
+  --wt-italic: #d3c6aa;
+  --wt-strike: #5c6a72;
+  --wt-underline: #d3c6aa;
+  --wt-heading: #a7c080;
+
+  --wt-code-bg: #272e33;
+  --wt-code-fg: #e67e80;
+
+  --wt-highlight-bg: rgba(219, 188, 127, 0.2);
+  --wt-highlight-fg: #dbbc7f;
+
+  --wt-comment: #859289;
+  --wt-mark: #3d484d;
+}
+
+/* ============================================================================
+   Everforest Dark Hard
+   ============================================================================ */
+
+.cm6-theme-everforest-dark-hard,
+[data-cm6-theme="everforest-dark-hard"] {
+  --wt-bg: #1e2326;
+  --wt-bg-subtle: #272e33;
+  --wt-fg: #d3c6aa;
+  --wt-fg-muted: #859289;
+  --wt-fg-faint: #5c6a72;
+  --wt-border: #2d353b;
+  --wt-selection: rgba(68, 83, 87, 0.7);
+  --wt-line-highlight: rgba(45, 53, 59, 0.5);
+
+  --wt-teal: #83c092;
+  --wt-teal-dim: #83c092;
+  --wt-blue: #7fbbb3;
+  --wt-violet: #d699b6;
+  --wt-cyan: #83c092;
+  --wt-orange: #e69875;
+  --wt-rose: #e67e80;
+  --wt-amber: #dbbc7f;
+  --wt-slate: #d3c6aa;
+  --wt-purple: #d699b6;
+  --wt-green: #a7c080;
+  --wt-red: #e67e80;
+
+  --wt-bold: #d3c6aa;
+  --wt-italic: #d3c6aa;
+  --wt-strike: #5c6a72;
+  --wt-underline: #d3c6aa;
+  --wt-heading: #a7c080;
+
+  --wt-code-bg: #272e33;
+  --wt-code-fg: #e67e80;
+
+  --wt-highlight-bg: rgba(219, 188, 127, 0.2);
+  --wt-highlight-fg: #dbbc7f;
+
+  --wt-comment: #859289;
+  --wt-mark: #2d353b;
+}
+
+/* ============================================================================
+   Everforest Light
+   ============================================================================ */
+
+.cm6-theme-everforest-light,
+[data-cm6-theme="everforest-light"] {
+  --wt-bg: #fdf6e3;
+  --wt-bg-subtle: #f4f0d9;
+  --wt-fg: #5c6a72;
+  --wt-fg-muted: #939f91;
+  --wt-fg-faint: #c9d0c0;
+  --wt-border: #e5dfc5;
+  --wt-selection: rgba(157, 169, 160, 0.3);
+  --wt-line-highlight: rgba(0, 0, 0, 0.03);
+
+  --wt-teal: #35a77c;           /* Aqua */
+  --wt-teal-dim: #35a77c;
+  --wt-blue: #3a94c5;           /* Blue */
+  --wt-violet: #df69ba;         /* Purple */
+  --wt-cyan: #35a77c;
+  --wt-orange: #f57d26;         /* Orange */
+  --wt-rose: #f85552;           /* Red */
+  --wt-amber: #dfa000;          /* Yellow */
+  --wt-slate: #5c6a72;
+  --wt-purple: #df69ba;
+  --wt-green: #8da101;          /* Green */
+  --wt-red: #f85552;
+
+  --wt-bold: #5c6a72;
+  --wt-italic: #5c6a72;
+  --wt-strike: #939f91;
+  --wt-underline: #5c6a72;
+  --wt-heading: #8da101;
+
+  --wt-code-bg: #f4f0d9;
+  --wt-code-fg: #f85552;
+
+  --wt-highlight-bg: rgba(223, 160, 0, 0.15);
+  --wt-highlight-fg: #dfa000;
+
+  --wt-comment: #939f91;
+  --wt-mark: #e5dfc5;
+}
+
+/* ============================================================================
+   Token Overrides - Dark
+   ============================================================================ */
+
+.cm6-theme-everforest .tok-string,
+.cm6-theme-everforest-dark .tok-string,
+.cm6-theme-everforest-dark-hard .tok-string,
+[data-cm6-theme="everforest"] .tok-string,
+[data-cm6-theme="everforest-dark"] .tok-string,
+[data-cm6-theme="everforest-dark-hard"] .tok-string {
+  color: #a7c080;
+}
+
+.cm6-theme-everforest .tok-keyword,
+.cm6-theme-everforest-dark .tok-keyword,
+.cm6-theme-everforest-dark-hard .tok-keyword,
+[data-cm6-theme="everforest"] .tok-keyword,
+[data-cm6-theme="everforest-dark"] .tok-keyword,
+[data-cm6-theme="everforest-dark-hard"] .tok-keyword {
+  color: #e67e80;
+}
+
+.cm6-theme-everforest .tok-function,
+.cm6-theme-everforest-dark .tok-function,
+.cm6-theme-everforest-dark-hard .tok-function,
+[data-cm6-theme="everforest"] .tok-function,
+[data-cm6-theme="everforest-dark"] .tok-function,
+[data-cm6-theme="everforest-dark-hard"] .tok-function {
+  color: #7fbbb3;
+}
+
+.cm6-theme-everforest .tok-number,
+.cm6-theme-everforest-dark .tok-number,
+.cm6-theme-everforest-dark-hard .tok-number,
+[data-cm6-theme="everforest"] .tok-number,
+[data-cm6-theme="everforest-dark"] .tok-number,
+[data-cm6-theme="everforest-dark-hard"] .tok-number {
+  color: #d699b6;
+}
+
+/* ============================================================================
+   Token Overrides - Light
+   ============================================================================ */
+
+.cm6-theme-everforest-light .tok-string,
+[data-cm6-theme="everforest-light"] .tok-string {
+  color: #8da101;
+}
+
+.cm6-theme-everforest-light .tok-keyword,
+[data-cm6-theme="everforest-light"] .tok-keyword {
+  color: #f85552;
+}
+
+.cm6-theme-everforest-light .tok-function,
+[data-cm6-theme="everforest-light"] .tok-function {
+  color: #3a94c5;
+}
+
+.cm6-theme-everforest-light .tok-number,
+[data-cm6-theme="everforest-light"] .tok-number {
+  color: #df69ba;
+}
+
+/* ============================================================================
+   Editor Chrome - Dark
+   ============================================================================ */
+
+.cm6-theme-everforest .cm-editor,
+.cm6-theme-everforest-dark .cm-editor,
+[data-cm6-theme="everforest"] .cm-editor,
+[data-cm6-theme="everforest-dark"] .cm-editor {
+  background-color: #2d353b;
+}
+
+.cm6-theme-everforest-dark-hard .cm-editor,
+[data-cm6-theme="everforest-dark-hard"] .cm-editor {
+  background-color: #1e2326;
+}
+
+.cm6-theme-everforest .cm-editor .cm-cursor,
+.cm6-theme-everforest-dark .cm-editor .cm-cursor,
+.cm6-theme-everforest-dark-hard .cm-editor .cm-cursor,
+[data-cm6-theme="everforest"] .cm-editor .cm-cursor,
+[data-cm6-theme="everforest-dark"] .cm-editor .cm-cursor,
+[data-cm6-theme="everforest-dark-hard"] .cm-editor .cm-cursor {
+  border-left-color: #d3c6aa;
+}
+
+.cm6-theme-everforest .cm-editor .cm-matchingBracket,
+.cm6-theme-everforest-dark .cm-editor .cm-matchingBracket,
+.cm6-theme-everforest-dark-hard .cm-editor .cm-matchingBracket,
+[data-cm6-theme="everforest"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="everforest-dark"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="everforest-dark-hard"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(167, 192, 128, 0.25);
+  outline: 1px solid #a7c080;
+}
+
+.cm6-theme-everforest .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-everforest-dark .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-everforest-dark-hard .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="everforest"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="everforest-dark"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="everforest-dark-hard"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #272e33;
+  border-color: #3d484d;
+}
+
+.cm6-theme-everforest .cm-completionMatchedText,
+.cm6-theme-everforest-dark .cm-completionMatchedText,
+.cm6-theme-everforest-dark-hard .cm-completionMatchedText,
+[data-cm6-theme="everforest"] .cm-completionMatchedText,
+[data-cm6-theme="everforest-dark"] .cm-completionMatchedText,
+[data-cm6-theme="everforest-dark-hard"] .cm-completionMatchedText {
+  color: #a7c080;
+}
+
+/* ============================================================================
+   Editor Chrome - Light
+   ============================================================================ */
+
+.cm6-theme-everforest-light .cm-editor,
+[data-cm6-theme="everforest-light"] .cm-editor {
+  background-color: #fdf6e3;
+}
+
+.cm6-theme-everforest-light .cm-editor .cm-cursor,
+[data-cm6-theme="everforest-light"] .cm-editor .cm-cursor {
+  border-left-color: #5c6a72;
+}
+
+.cm6-theme-everforest-light .cm-editor .cm-gutters,
+[data-cm6-theme="everforest-light"] .cm-editor .cm-gutters {
+  background-color: #f4f0d9;
+  border-right-color: #e5dfc5;
+  color: #939f91;
+}
+
+.cm6-theme-everforest-light .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="everforest-light"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #fdf6e3;
+  border-color: #e5dfc5;
+}
+
+.cm6-theme-everforest-light .cm-completionMatchedText,
+[data-cm6-theme="everforest-light"] .cm-completionMatchedText {
+  color: #8da101;
+}
+
+/* ============================================================================
+   Autocomplete Selected - Dark
+   ============================================================================ */
+
+.cm6-theme-everforest .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-everforest-dark .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-everforest-dark-hard .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="everforest"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="everforest-dark"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="everforest-dark-hard"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #a7c080;
+  color: #1e2326;
+}
+
+.cm6-theme-everforest .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-everforest-dark .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-everforest-dark-hard .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="everforest"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="everforest-dark"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="everforest-dark-hard"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(30, 35, 38, 0.8);
+}
+
+/* ============================================================================
+   Autocomplete Selected - Light
+   ============================================================================ */
+
+.cm6-theme-everforest-light .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="everforest-light"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #8da101;
+  color: #fdf6e3;
+}
+
+.cm6-theme-everforest-light .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="everforest-light"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(253, 246, 227, 0.8);
+}
+
+/* ============================================================================
+   Vim Mode - Dark
+   ============================================================================ */
+
+.cm6-theme-everforest .cm-fat-cursor,
+.cm6-theme-everforest-dark .cm-fat-cursor,
+.cm6-theme-everforest-dark-hard .cm-fat-cursor,
+[data-cm6-theme="everforest"] .cm-fat-cursor,
+[data-cm6-theme="everforest-dark"] .cm-fat-cursor,
+[data-cm6-theme="everforest-dark-hard"] .cm-fat-cursor {
+  background: #d3c6aa !important;
+}
+
+.cm6-theme-everforest .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-everforest-dark .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-everforest-dark-hard .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="everforest"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="everforest-dark"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="everforest-dark-hard"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #5c6a72 !important;
+}
+
+.cm6-theme-everforest .cm-vim-panel,
+.cm6-theme-everforest-dark .cm-vim-panel,
+.cm6-theme-everforest-dark-hard .cm-vim-panel,
+[data-cm6-theme="everforest"] .cm-vim-panel,
+[data-cm6-theme="everforest-dark"] .cm-vim-panel,
+[data-cm6-theme="everforest-dark-hard"] .cm-vim-panel {
+  background: #272e33;
+  border-color: #3d484d;
+  color: #d3c6aa;
+}
+
+.cm6-theme-everforest .cm-vim-panel input,
+.cm6-theme-everforest-dark .cm-vim-panel input,
+.cm6-theme-everforest-dark-hard .cm-vim-panel input,
+[data-cm6-theme="everforest"] .cm-vim-panel input,
+[data-cm6-theme="everforest-dark"] .cm-vim-panel input,
+[data-cm6-theme="everforest-dark-hard"] .cm-vim-panel input {
+  background: #2d353b;
+  color: #d3c6aa;
+  border-color: #3d484d;
+}
+
+/* ============================================================================
+   Vim Mode - Light
+   ============================================================================ */
+
+.cm6-theme-everforest-light .cm-fat-cursor,
+[data-cm6-theme="everforest-light"] .cm-fat-cursor {
+  background: #5c6a72 !important;
+}
+
+.cm6-theme-everforest-light .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="everforest-light"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #c9d0c0 !important;
+}
+
+.cm6-theme-everforest-light .cm-vim-panel,
+[data-cm6-theme="everforest-light"] .cm-vim-panel {
+  background: #f4f0d9;
+  border-color: #e5dfc5;
+  color: #5c6a72;
+}
+
+.cm6-theme-everforest-light .cm-vim-panel input,
+[data-cm6-theme="everforest-light"] .cm-vim-panel input {
+  background: #fdf6e3;
+  color: #5c6a72;
+  border-color: #e5dfc5;
+}

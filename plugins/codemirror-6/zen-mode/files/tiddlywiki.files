@@ -1,0 +1,20 @@
+{
+    "tiddlers": [
+        {
+            "file": "zen-mode.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/zen-mode/zen-mode.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "startup/startup.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/zen-mode/startup.js",
+                "module-type": "startup"
+            }
+        }
+    ]
+}
