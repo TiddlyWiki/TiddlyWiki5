@@ -492,6 +492,39 @@ function buildCallSiteAnalysis(tree, docText) {
 					});
 				}
 			}
+			// Also detect <$macrocall $name="..."> calls
+			else if(node.type.name === "WidgetName") {
+				var widgetName = docText.slice(node.from, node.to).toLowerCase();
+				if(widgetName === "$macrocall") {
+					// Find the $name attribute by looking at sibling Attribute nodes
+					var cursor = node.node.parent ? node.node.parent.cursor() : null;
+					if(cursor) {
+						cursor.firstChild();
+						var firstAttrStart = -1;
+						var lastAttrEnd = -1;
+						do {
+							if(cursor.name === "Attribute") {
+								if(firstAttrStart === -1) firstAttrStart = cursor.from;
+								lastAttrEnd = cursor.to;
+							}
+						} while(cursor.nextSibling());
+
+						if(firstAttrStart !== -1) {
+							var attrs = docText.slice(firstAttrStart, lastAttrEnd);
+							var calledName = extractAttrValue(attrs, "\\$name");
+							if(calledName && callSites[calledName] !== undefined) {
+								var callerDef = getDefinitionAtPosition(node.from);
+								var scopeVars = getVariablesInScope(node.node, docText);
+								callSites[calledName].push({
+									callerDef: callerDef,
+									scopeVars: scopeVars,
+									pos: node.from
+								});
+							}
+						}
+					}
+				}
+			}
 		}
 	});
 
@@ -2223,6 +2256,50 @@ function createTiddlyWikiLinter(view) {
 								message: "Possibly undefined or out-of-scope variable in filter: " + varName,
 								source: "tiddlywiki"
 							});
+						}
+					}
+				}
+			}
+
+			// Check $(variable)$ substitution references
+			if(nodeType === "VariableName" && isRuleEnabled("undefinedMacros")) {
+				// Check if parent is a Variable node ($(variable)$ syntax)
+				var parentNode = node.node.parent;
+				if(parentNode && parentNode.type.name === "Variable") {
+					var varName = text.trim();
+					if(varName) {
+						// Check global definitions first
+						var isGloballyDefined = isDefinitionKnown(varName, "any") ||
+							localDefs.macros.has(varName) ||
+							localDefs.procedures.has(varName) ||
+							localDefs.functions.has(varName) ||
+							builtInVariables.has(varName);
+
+						if(!isGloballyDefined) {
+							// Check scope-aware variable detection
+							var syntaxNode = node.node;
+							var scopeVars = getVariablesInScope(syntaxNode, docText);
+							var isInScope = isVarInScope(varName, scopeVars);
+
+							// If not in direct scope, check call-site reachable scope (dynamic scoping)
+							// $(variable)$ looks back through the call chain for scope
+							if(!isInScope) {
+								var containingDef = callAnalysis.getDefinitionAtPosition(from);
+								if(containingDef) {
+									var reachableScope = getCallSiteReachableScope(containingDef, callAnalysis);
+									isInScope = isVarInScope(varName, reachableScope);
+								}
+							}
+
+							if(!isInScope) {
+								diagnostics.push({
+									from: from,
+									to: to,
+									severity: "info",
+									message: "Possibly undefined or out-of-scope variable substitution: " + varName,
+									source: "tiddlywiki"
+								});
+							}
 						}
 					}
 				}

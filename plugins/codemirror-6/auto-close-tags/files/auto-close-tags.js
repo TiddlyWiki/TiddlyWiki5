@@ -116,15 +116,17 @@ exports.plugin = {
 				// Walk up the tree to check context
 				while(node) {
 					var nodeName = node.name;
-					// If we're in an attribute value, don't auto-close
-					if(nodeName === "AttributeValue" || nodeName === "AttributeString") {
+					// If we're in any attribute value type, don't auto-close
+					if(nodeName === "AttributeValue" || nodeName === "AttributeString" ||
+						nodeName === "AttributeMacro" || nodeName === "AttributeIndirect" ||
+						nodeName === "AttributeSubstituted" || nodeName === "AttributeFiltered" ||
+						nodeName === "AttributeWikitext" || nodeName === "MacroCallMark") {
 						return false;
 					}
 					// If we're inside a filter expression, don't auto-close
 					// In filters, <variable> is a variable reference, not a tag
 					if(nodeName === "FilterExpression" || nodeName === "FilterRun" ||
-						nodeName === "FilteredTransclusion" || nodeName === "FilteredTransclusionBlock" ||
-						nodeName === "AttributeFiltered") {
+						nodeName === "FilteredTransclusion" || nodeName === "FilteredTransclusionBlock") {
 						return false;
 					}
 					node = node.parent;
