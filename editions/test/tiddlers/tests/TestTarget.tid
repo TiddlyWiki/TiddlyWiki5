@@ -1,0 +1,6 @@
+title: TestTarget
+type: text/vnd.tiddlywiki
+
+This is a test target tiddler for testing post-navigate actions.
+
+The title should be focused when navigated to with the focus action.

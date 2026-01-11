@@ -63,6 +63,8 @@ NavigatorWidget.prototype.execute = function() {
 		storyTitle: this.storyTitle,
 		historyTitle: this.historyTitle
 	});
+	// Initialize pending navigate actions array
+	this.pendingNavigateActions = this.pendingNavigateActions || [];
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -72,12 +74,26 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 NavigatorWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
+	var result;
 	if(changedAttributes.story || changedAttributes.history) {
 		this.refreshSelf();
-		return true;
+		result = true;
 	} else {
-		return this.refreshChildren(changedTiddlers);
+		result = this.refreshChildren(changedTiddlers);
 	}
+	// Execute any pending navigate actions after refresh completes
+	// Use setTimeout to ensure DOM is fully updated (needed for tm-focus-selector etc.)
+	if(this.pendingNavigateActions && this.pendingNavigateActions.length > 0) {
+		var self = this;
+		var actionsToExecute = this.pendingNavigateActions.slice();
+		this.pendingNavigateActions = [];
+		setTimeout(function() {
+			actionsToExecute.forEach(function(item) {
+				self.invokeActionString(item.actions, self, item.event, item.variables);
+			});
+		}, 0);
+	}
+	return result;
 };
 
 NavigatorWidget.prototype.getStoryList = function() {
@@ -149,6 +165,15 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 		this.addToStory(event.navigateTo,event.navigateFromTitle);
 		if(!event.navigateSuppressNavigation) {
 			this.addToHistory(event.navigateTo,event.navigateFromClientRect);
+		}
+		// Store post-navigate actions to execute after refresh
+		var actions = event.paramObject && event.paramObject.actions;
+		if(actions) {
+			this.pendingNavigateActions.push({
+				actions: actions,
+				event: event,
+				variables: event.paramObject.variables || {}
+			});
 		}
 	}
 	return false;

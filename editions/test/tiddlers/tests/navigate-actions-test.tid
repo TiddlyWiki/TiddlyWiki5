@@ -1,0 +1,33 @@
+title: Test: Navigate with Post-Navigate Actions
+tags: 
+type: text/vnd.tiddlywiki
+
+This test demonstrates the new post-navigate actions feature.
+
+!! Test 1: Basic navigation with focus action
+
+<$button>
+<$action-navigate $to="TestTarget" $actions="""<$action-sendmessage $message="tm-focus-selector" $param=".tc-tiddler-title"/>"""/>
+Navigate and Focus Title
+</$button>
+
+!! Test 2: Navigation with multiple actions
+
+<$button>
+<$action-navigate $to="TestTarget" $actions="""
+<$action-log $$message="Post-navigate actions executed!"/>
+<$action-sendmessage $message="tm-focus-selector" $param=".tc-tiddler-body"/>
+"""/>
+Navigate and Execute Multiple Actions
+</$button>
+
+!! Test 3: Using tm-navigate message directly
+
+<$button message="tm-navigate" param="TestTarget">
+<$action-setfield $tiddler="$:/temp/navigate-test" text="Action executed after navigate"/>
+Navigate (Direct Message - No Actions Yet)
+</$button>
+
+---
+
+<<.tip "The post-navigate actions are executed after the DOM has been refreshed, making it possible to focus elements that are only available after the navigation refresh.">>
