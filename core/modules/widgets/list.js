@@ -314,9 +314,9 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			this.removeChildDomNodes();
 			this.children = [];
 		}
-		// If we are providing a counter variable or listVariable then we must refresh the items, otherwise we can rearrange them
+		// If we are providing a counter variable then we must refresh the items, otherwise we can rearrange them
 		var hasRefreshed = false,t;
-		if(this.counterName || this.listVariableName) {
+		if(this.counterName) {
 			var mustRefreshOldLast = false;
 			var oldLength = this.children.length;
 			// Cycle through the list and remove and re-insert the first item that has changed, and all the remaining items
