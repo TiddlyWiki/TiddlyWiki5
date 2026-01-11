@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/theme-solarized",
   "name": "CodeMirror 6 Solarized Theme",
   "description": "Solarized color scheme for CodeMirror 6 (dark and light variants)",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme styles license",
