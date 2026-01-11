@@ -81,8 +81,11 @@ function getFilterOperatorName(state, operandNode) {
 
 /**
  * Extract link target and type from position in document using syntax tree
+ * @param {EditorState} state - The editor state
+ * @param {number} pos - Position in document
+ * @param {object} context - Optional context with { tiddlerTitle, engine }
  */
-function getLinkAtPos(state, pos) {
+function getLinkAtPos(state, pos, context) {
 	if(!_syntaxTree) return null;
 
 	var tree = _syntaxTree(state);
@@ -90,6 +93,10 @@ function getLinkAtPos(state, pos) {
 
 	var node = tree.resolveInner(pos, 0);
 	if(!node) return null;
+
+	// Get current tiddler info for local definition detection
+	var currentTitle = context && context.tiddlerTitle;
+	var currentText = state.doc.toString();
 
 	// Walk up the tree to find a tiddler title node
 	var current = node;
@@ -196,19 +203,32 @@ function getLinkAtPos(state, pos) {
 			continue;
 		}
 
-		// Check for macro name
+		// Check for macro name (includes procedures, functions)
 		if(current.name === "MacroName") {
 			var macroName = state.doc.sliceString(current.from, current.to);
-			var defTiddler = findMacroDefinition(macroName);
-			if(defTiddler) {
-				// Find the parent MacroCall for bounds
-				var macroCall = current.parent;
-				while(macroCall && macroCall.name !== "MacroCall") {
-					macroCall = macroCall.parent;
-				}
+			var def = findDefinition(macroName, currentTitle, currentText);
+			// Find the parent MacroCall for bounds
+			var macroCall = current.parent;
+			while(macroCall && macroCall.name !== "MacroCall") {
+				macroCall = macroCall.parent;
+			}
+			if(def) {
+				return {
+					type: def.type, // "define", "procedure", "function", or "widget"
+					target: def.tiddler,
+					macroName: macroName,
+					from: macroCall ? macroCall.from : current.from,
+					to: macroCall ? macroCall.to : current.to,
+					definitionIndex: def.index,
+					isLocal: def.isLocal
+				};
+			}
+			// Check for JavaScript macro module
+			var jsMacroTiddler = findJavaScriptModule("macros", macroName);
+			if(jsMacroTiddler) {
 				return {
 					type: "macro",
-					target: defTiddler,
+					target: jsMacroTiddler,
 					macroName: macroName,
 					from: macroCall ? macroCall.from : current.from,
 					to: macroCall ? macroCall.to : current.to
@@ -219,22 +239,40 @@ function getLinkAtPos(state, pos) {
 		// Check for widget name
 		if(current.name === "WidgetName") {
 			var widgetName = state.doc.sliceString(current.from, current.to);
-			// Remove $ prefix if present
-			if(widgetName.startsWith("$")) {
-				widgetName = widgetName.slice(1);
-			}
 			// Find the parent widget tag for bounds
 			var widgetTag = current.parent;
 			while(widgetTag && !widgetTag.name.includes("Widget")) {
 				widgetTag = widgetTag.parent;
 			}
-			return {
-				type: "widget",
-				target: "$:/core/ui/WidgetInfo/" + widgetName,
-				widgetName: widgetName,
-				from: widgetTag ? widgetTag.from : current.from,
-				to: widgetTag ? widgetTag.to : current.to
-			};
+
+			// First check if it's a custom widget defined with \widget
+			var def = findDefinition(widgetName, currentTitle, currentText);
+			if(def && def.type === "widget") {
+				return {
+					type: "widget",
+					target: def.tiddler,
+					widgetName: widgetName,
+					from: widgetTag ? widgetTag.from : current.from,
+					to: widgetTag ? widgetTag.to : current.to,
+					definitionIndex: def.index,
+					isLocal: def.isLocal
+				};
+			}
+
+			// Check for JavaScript widget module
+			// Remove $ prefix for module name
+			var jsWidgetName = widgetName.startsWith("$") ? widgetName.slice(1) : widgetName;
+			var jsWidgetTiddler = findJavaScriptModule("widgets", jsWidgetName);
+			if(jsWidgetTiddler) {
+				return {
+					type: "widget",
+					target: jsWidgetTiddler,
+					widgetName: widgetName,
+					from: widgetTag ? widgetTag.from : current.from,
+					to: widgetTag ? widgetTag.to : current.to
+				};
+			}
+			// No definition found - don't return a link
 		}
 
 		current = current.parent;
@@ -244,31 +282,151 @@ function getLinkAtPos(state, pos) {
 }
 
 /**
- * Find tiddler that defines a macro
+ * Escape special regex characters in a string
  */
-function findMacroDefinition(macroName) {
+function escapeRegex(str) {
+	return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * Find a JavaScript module tiddler for a widget or macro
+ * @param {string} moduleType - "widgets" or "macros"
+ * @param {string} name - The name of the widget/macro (without $ prefix for widgets)
+ * @returns {string|null} - The tiddler title or null if not found
+ */
+function findJavaScriptModule(moduleType, name) {
 	if(!$tw || !$tw.wiki) return null;
 
-	// Search in shadows first (core macros)
-	var shadows = $tw.wiki.filterTiddlers("[all[shadows]has[text]]");
-	for(var i = 0; i < shadows.length; i++) {
-		var tiddler = $tw.wiki.getTiddler(shadows[i]);
+	try {
+		// Handle widget names - convert to lowercase for matching
+		var moduleName = name.toLowerCase();
+
+		// Search for module tiddlers matching the pattern
+		// module-type is singular: "widget" or "macro"
+		var moduleTypeSingular = moduleType.slice(0, -1);
+		var filter = "[all[tiddlers+shadows]module-type[" + moduleTypeSingular + "]]";
+		var modules = $tw.wiki.filterTiddlers(filter);
+
+		for(var i = 0; i < modules.length; i++) {
+			var title = modules[i];
+
+			// Check if title ends with /{name}.js
+			var titleLower = title.toLowerCase();
+			if(titleLower.endsWith("/" + moduleName + ".js")) {
+				return title;
+			}
+
+			// For hyphenated names, also check without hyphens
+			if(moduleName.indexOf("-") !== -1) {
+				var moduleNameNoHyphens = moduleName.replace(/-/g, "");
+				if(titleLower.endsWith("/" + moduleNameNoHyphens + ".js")) {
+					return title;
+				}
+			}
+		}
+
+		// If title match didn't work, check exports in the module text
+		for(var i = 0; i < modules.length; i++) {
+			var title = modules[i];
+			var tiddler = $tw.wiki.getTiddler(title);
+			if(!tiddler) continue;
+
+			var text = tiddler.fields.text || "";
+			if(!text) continue;
+
+			// For widgets: look for exports.{name} = pattern
+			if(moduleType === "widgets") {
+				if(text.indexOf("exports." + moduleName) !== -1 ||
+					text.indexOf("exports['" + moduleName + "']") !== -1 ||
+					text.indexOf('exports["' + moduleName + '"]') !== -1) {
+					return title;
+				}
+			}
+
+			// For macros: look for exports.name = "macroname" pattern
+			if(moduleType === "macros") {
+				var nameMatch = text.match(/exports\.name\s*=\s*["']([^"']+)["']/);
+				if(nameMatch && nameMatch[1].toLowerCase() === moduleName) {
+					return title;
+				}
+			}
+		}
+	} catch (e) {
+		console.error("findJavaScriptModule error:", e);
+	}
+
+	return null;
+}
+
+/**
+ * Find definition of a macro, procedure, function, or widget
+ * Returns { tiddler, index, type, isLocal } or null
+ *
+ * @param {string} name - The name to find (e.g., "myMacro" or "$myWidget")
+ * @param {string} currentTiddlerTitle - Title of the current tiddler (for local check)
+ * @param {string} currentText - Text of the current tiddler (for local check)
+ */
+function findDefinition(name, currentTiddlerTitle, currentText) {
+	if(!$tw || !$tw.wiki) return null;
+
+	// Build regex that matches \define, \procedure, \function, or \widget
+	// Handle names that might have special regex chars (like $widget.name)
+	var escapedName = escapeRegex(name);
+	var regexPattern = "\\\\(define|procedure|function|widget)\\s+" + escapedName + "(?:\\s*\\(|\\s*$|\\s*\\n)";
+
+	// 1. Check current tiddler first (local definition)
+	if(currentText) {
+		var localRegex = new RegExp(regexPattern, "gm");
+		var match = localRegex.exec(currentText);
+		if(match) {
+			return {
+				tiddler: currentTiddlerTitle,
+				index: match.index,
+				type: match[1],
+				isLocal: true
+			};
+		}
+	}
+
+	// 2. Search in $:/tags/Macro and $:/tags/Global tiddlers first (user definitions)
+	var globalTiddlers = $tw.wiki.filterTiddlers(
+		"[all[tiddlers+shadows]tag[$:/tags/Macro]] [all[tiddlers+shadows]tag[$:/tags/Global]]"
+	);
+	for(var i = 0; i < globalTiddlers.length; i++) {
+		var title = globalTiddlers[i];
+		if(title === currentTiddlerTitle) continue; // Skip current tiddler, already checked
+		var tiddler = $tw.wiki.getTiddler(title);
 		if(tiddler && tiddler.fields.text) {
-			var regex = new RegExp("\\\\define\\s+" + macroName + "\\s*\\(");
-			if(regex.test(tiddler.fields.text)) {
-				return shadows[i];
+			var regex = new RegExp(regexPattern, "gm");
+			var match = regex.exec(tiddler.fields.text);
+			if(match) {
+				return {
+					tiddler: title,
+					index: match.index,
+					type: match[1],
+					isLocal: false
+				};
 			}
 		}
 	}
 
-	// Search in regular tiddlers
-	var tiddlers = $tw.wiki.filterTiddlers("[all[tiddlers]has[text]]");
-	for(var i = 0; i < tiddlers.length; i++) {
-		var tiddler = $tw.wiki.getTiddler(tiddlers[i]);
+	// 3. Search in shadow tiddlers that are tagged $:/tags/Macro or $:/tags/Global (core/plugin definitions)
+	var shadows = $tw.wiki.filterTiddlers(
+		"[all[shadows]tag[$:/tags/Macro]] [all[shadows]tag[$:/tags/Global]]"
+	);
+	for(var i = 0; i < shadows.length; i++) {
+		var title = shadows[i];
+		var tiddler = $tw.wiki.getTiddler(title);
 		if(tiddler && tiddler.fields.text) {
-			var regex = new RegExp("\\\\define\\s+" + macroName + "\\s*\\(");
-			if(regex.test(tiddler.fields.text)) {
-				return tiddlers[i];
+			var regex = new RegExp(regexPattern, "gm");
+			var match = regex.exec(tiddler.fields.text);
+			if(match) {
+				return {
+					tiddler: title,
+					index: match.index,
+					type: match[1],
+					isLocal: false
+				};
 			}
 		}
 	}
@@ -357,6 +515,19 @@ function clearHighlight(view) {
 var ctrlHeld = false;
 var lastMousePos = null;
 
+/**
+ * Get context info from view for getLinkAtPos
+ */
+function getContextFromView(view) {
+	var engine = view._cm6Engine;
+	if(!engine) return null;
+	var pluginContext = engine._pluginContext;
+	return {
+		tiddlerTitle: pluginContext ? pluginContext.tiddlerTitle : null,
+		engine: engine
+	};
+}
+
 function handleKeyDown(event, view) {
 	if(event.key === "Control" || event.key === "Meta") {
 		ctrlHeld = true;
@@ -365,7 +536,8 @@ function handleKeyDown(event, view) {
 		if(lastMousePos) {
 			var pos = view.posAtCoords(lastMousePos);
 			if(pos !== null) {
-				var link = getLinkAtPos(view.state, pos);
+				var context = getContextFromView(view);
+				var link = getLinkAtPos(view.state, pos, context);
 				if(link) {
 					highlightLink(view, link.from, link.to);
 				}
@@ -395,7 +567,8 @@ function handleMouseMove(event, view) {
 		return;
 	}
 
-	var link = getLinkAtPos(view.state, pos);
+	var context = getContextFromView(view);
+	var link = getLinkAtPos(view.state, pos, context);
 	if(link) {
 		highlightLink(view, link.from, link.to);
 		view.dom.style.cursor = "pointer";
@@ -422,7 +595,8 @@ function handleClick(event, view) {
 	});
 	if(pos === null) return false;
 
-	var link = getLinkAtPos(view.state, pos);
+	var context = getContextFromView(view);
+	var link = getLinkAtPos(view.state, pos, context);
 	if(!link) return false;
 
 	// Prevent default click behavior
@@ -431,6 +605,18 @@ function handleClick(event, view) {
 	// Handle external URLs - always open in new browser tab
 	if(link.isExternal) {
 		window.open(link.target, "_blank", "noopener,noreferrer");
+		clearHighlight(view);
+		return true;
+	}
+
+	// Handle local definitions - scroll to definition instead of navigating
+	if(link.isLocal && link.definitionIndex !== undefined) {
+		view.dispatch({
+			selection: {
+				anchor: link.definitionIndex
+			},
+			scrollIntoView: true
+		});
 		clearHighlight(view);
 		return true;
 	}
@@ -477,7 +663,8 @@ function handleMouseDown(event, view) {
 	});
 	if(pos === null) return false;
 
-	var link = getLinkAtPos(view.state, pos);
+	var context = getContextFromView(view);
+	var link = getLinkAtPos(view.state, pos, context);
 	if(!link) return false;
 
 	// We're on a navigatable link - prevent default to stop multi-cursor insertion
@@ -599,13 +786,29 @@ exports.plugin = {
 		return {
 			/**
 			 * Navigate to tiddler at current cursor position
+			 * For local definitions (same tiddler), scrolls to the definition instead
 			 */
 			navigateToLinkAtCursor: function() {
 				if(this._destroyed) return false;
 
 				var pos = this.view.state.selection.main.head;
-				var link = getLinkAtPos(this.view.state, pos);
+				var context = {
+					tiddlerTitle: this._pluginContext ? this._pluginContext.tiddlerTitle : null,
+					engine: this
+				};
+				var link = getLinkAtPos(this.view.state, pos, context);
 				if(!link) return false;
+
+				// Handle local definitions - scroll to definition instead of navigating
+				if(link.isLocal && link.definitionIndex !== undefined) {
+					this.view.dispatch({
+						selection: {
+							anchor: link.definitionIndex
+						},
+						scrollIntoView: true
+					});
+					return true;
+				}
 
 				navigateToTiddler(link.target, {
 					widget: this.widget,
@@ -621,7 +824,11 @@ exports.plugin = {
 				if(this._destroyed) return null;
 
 				var pos = this.view.state.selection.main.head;
-				return getLinkAtPos(this.view.state, pos);
+				var context = {
+					tiddlerTitle: this._pluginContext ? this._pluginContext.tiddlerTitle : null,
+					engine: this
+				};
+				return getLinkAtPos(this.view.state, pos, context);
 			},
 
 			/**
