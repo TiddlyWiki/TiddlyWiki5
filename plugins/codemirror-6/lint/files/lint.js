@@ -73,6 +73,110 @@ var builtInVariables = new Set([
 ]);
 
 // ============================================================================
+// Action Implicit Variables
+// ============================================================================
+
+/**
+ * Map of widgets to the implicit variables they provide within their action attributes.
+ * These variables are available in the scope of the action content and passed to
+ * sub-macro-calls and sub-transclusions.
+ */
+var actionImplicitVariables = {
+	// Drag and drop widgets
+	"$droppable": ["actionTiddler", "actionTiddlerList", "modifier"],
+	"$dropzone": ["actionTiddler", "actionTiddlerList", "modifier"],
+	"$draggable": ["actionTiddler"],
+
+	// Form widgets
+	"$button": ["tv-widgetnode-width", "tv-widgetnode-height"],
+	"$checkbox": ["actionValue"],
+	"$radio": ["actionValue"],
+	"$select": ["actionValue"],
+	"$range": ["actionValue", "actionValueHasChanged"],
+	"$edit-text": ["actionValue"],
+
+	// Event handling widgets
+	"$linkcatcher": ["linkToCatch", "navigateFromTitle", "navigateFromNode", "navigateTo", "navigateFromClientRect", "event"],
+	"$messagecatcher": ["event"],
+	"$eventcatcher": ["event"], // Also has dom-* but those are dynamic
+	"$keyboard": ["event", "modifier"],
+
+	// Other widgets with actions
+	"$list": ["actionValue"]
+};
+
+/**
+ * Map of widgets to their action attribute names.
+ */
+var actionAttributeNames = {
+	"$droppable": ["actions"],
+	"$dropzone": ["actions"],
+	"$draggable": ["startactions", "endactions"],
+	"$button": ["actions"],
+	"$checkbox": ["actions", "checkactions", "uncheckactions"],
+	"$radio": ["actions"],
+	"$select": ["actions"],
+	"$range": ["actions", "actionsStart", "actionsStop"],
+	"$edit-text": ["actions", "inputActions", "refreshActions", "focusActions", "blurActions"],
+	"$linkcatcher": ["actions"],
+	"$messagecatcher": ["actions"],
+	"$eventcatcher": [
+		// New $event syntax
+		"$click", "$dblclick", "$contextmenu",
+		"$mousedown", "$mouseup", "$mouseover", "$mouseout", "$mouseenter", "$mouseleave", "$mousemove",
+		"$pointerdown", "$pointerup", "$pointermove", "$pointerover", "$pointerout", "$pointerenter", "$pointerleave", "$pointercancel",
+		"$dragstart", "$dragend", "$dragenter", "$dragleave", "$dragover", "$drop", "$drag",
+		"$focusin", "$focusout", "$focus", "$blur",
+		"$keydown", "$keyup", "$keypress",
+		"$input", "$change", "$submit",
+		"$touchstart", "$touchend", "$touchmove", "$touchcancel",
+		"$wheel", "$scroll",
+		// Legacy actions-event syntax
+		"actions-click", "actions-dblclick", "actions-contextmenu",
+		"actions-mousedown", "actions-mouseup", "actions-mouseover", "actions-mouseout",
+		"actions-focusin", "actions-focusout",
+		"actions-keydown", "actions-keyup",
+		"actions-input", "actions-change",
+		"actions-dragstart", "actions-dragend", "actions-dragenter", "actions-dragleave", "actions-dragover", "actions-drop",
+		"actions-pointerdown", "actions-pointerup", "actions-pointermove", "actions-pointerover", "actions-pointerout", "actions-pointerenter", "actions-pointerleave", "actions-pointercancel"
+	],
+	"$keyboard": ["actions"],
+	"$list": ["actions", "emptyActions", "historyActions"]
+};
+
+// ============================================================================
+// Widget Tree Scope Variables
+// ============================================================================
+
+/**
+ * Extract variables from the TiddlyWiki widget tree (runtime scope).
+ * This allows the linter to recognize variables set by parent widgets
+ * wrapping the editor, like <$let>, <$set>, <$vars>, etc.
+ *
+ * @param {object} widget - The TiddlyWiki widget containing the editor
+ * @returns {Set<string>} Set of variable names from the widget scope
+ */
+function extractWidgetTreeVariables(widget) {
+	var vars = new Set();
+	if(!widget) return vars;
+
+	var current = widget;
+	while(current) {
+		// Widgets store variables in the 'variables' property
+		if(current.variables) {
+			for(var varName in current.variables) {
+				if(Object.prototype.hasOwnProperty.call(current.variables, varName)) {
+					vars.add(varName);
+				}
+			}
+		}
+		current = current.parentWidget;
+	}
+
+	return vars;
+}
+
+// ============================================================================
 // Scope Detection for Variables
 // ============================================================================
 
@@ -152,11 +256,26 @@ var scopeCreatingWidgets = {
 	},
 	"$parameters": function(attrs) {
 		// <$parameters param1="default" param2> - all attributes are variables
+		// Handles both name=value and bare attribute names
 		var vars = [];
-		var attrRegex = /([a-zA-Z_][\w-]*)\s*=/g;
+		// Match attribute names: either name= or bare names not inside quotes
+		// First, extract all name=value pairs
+		var assignedRegex = /([a-zA-Z_][\w-]*)\s*=/g;
 		var match;
-		while((match = attrRegex.exec(attrs)) !== null) {
+		var assignedNames = new Set();
+		while((match = assignedRegex.exec(attrs)) !== null) {
 			vars.push(match[1]);
+			assignedNames.add(match[1]);
+		}
+		// Then, find bare attribute names (words not followed by =)
+		// Remove quoted strings first to avoid matching names inside quotes
+		var withoutQuotes = attrs.replace(/"[^"]*"|'[^']*'|\[\[[^\]]*\]\]/g, '');
+		var bareRegex = /\b([a-zA-Z_][\w-]*)\b(?!\s*=)/g;
+		while((match = bareRegex.exec(withoutQuotes)) !== null) {
+			// Only add if not already in assigned names
+			if(!assignedNames.has(match[1])) {
+				vars.push(match[1]);
+			}
 		}
 		return vars;
 	},
@@ -331,6 +450,14 @@ function getVariablesInScope(node, docText) {
 			});
 		}
 
+		// Check for Attribute nodes - if it's an action attribute, add action implicit variables
+		if(typeName === "Attribute") {
+			var actionVars = extractActionScopeVariables(current, docText);
+			actionVars.forEach(function(v) {
+				scopeVars.add(v);
+			});
+		}
+
 		// Check for pragma definitions (parameters are in scope within the body)
 		if(typeName === "MacroDefinition" || typeName === "ProcedureDefinition" ||
 			typeName === "FunctionDefinition" || typeName === "WidgetDefinition") {
@@ -355,6 +482,62 @@ function getVariablesInScope(node, docText) {
 		vars: scopeVars,
 		prefixes: scopePrefixes
 	};
+}
+
+/**
+ * Extract action implicit variables when inside an action attribute of a widget.
+ * @param {SyntaxNode} attrNode - The Attribute node
+ * @param {string} docText - Full document text
+ * @returns {string[]} Array of action implicit variables available in this context
+ */
+function extractActionScopeVariables(attrNode, docText) {
+	var vars = [];
+
+	// Get the attribute name
+	var attrName = null;
+	var cursor = attrNode.cursor();
+	cursor.firstChild();
+	do {
+		if(cursor.name === "AttributeName") {
+			attrName = docText.slice(cursor.from, cursor.to);
+			break;
+		}
+	} while(cursor.nextSibling());
+
+	if(!attrName) return vars;
+
+	// Find the parent widget
+	var parent = attrNode.parent;
+	while(parent) {
+		if(parent.type.name === "Widget" || parent.type.name === "InlineWidget") {
+			// Get widget name
+			var widgetName = null;
+			var widgetCursor = parent.cursor();
+			widgetCursor.firstChild();
+			do {
+				if(widgetCursor.name === "WidgetName") {
+					widgetName = docText.slice(widgetCursor.from, widgetCursor.to);
+					break;
+				}
+			} while(widgetCursor.nextSibling());
+
+			if(widgetName) {
+				// Check if this attribute is an action attribute for this widget
+				var actionAttrs = actionAttributeNames[widgetName.toLowerCase()] || actionAttributeNames[widgetName];
+				if(actionAttrs && actionAttrs.indexOf(attrName) !== -1) {
+					// Get the implicit variables for this widget
+					var implicitVars = actionImplicitVariables[widgetName.toLowerCase()] || actionImplicitVariables[widgetName];
+					if(implicitVars) {
+						vars = vars.concat(implicitVars);
+					}
+				}
+			}
+			break;
+		}
+		parent = parent.parent;
+	}
+
+	return vars;
 }
 
 /**
@@ -492,11 +675,11 @@ function buildCallSiteAnalysis(tree, docText) {
 					});
 				}
 			}
-			// Also detect <$macrocall $name="..."> calls
+			// Also detect <$macrocall $name="..."> and <$transclude $variable="..."> calls
 			else if(node.type.name === "WidgetName") {
 				var widgetName = docText.slice(node.from, node.to).toLowerCase();
-				if(widgetName === "$macrocall") {
-					// Find the $name attribute by looking at sibling Attribute nodes
+				if(widgetName === "$macrocall" || widgetName === "$transclude") {
+					// Find the $name or $variable attribute by looking at sibling Attribute nodes
 					var cursor = node.node.parent ? node.node.parent.cursor() : null;
 					if(cursor) {
 						cursor.firstChild();
@@ -511,7 +694,10 @@ function buildCallSiteAnalysis(tree, docText) {
 
 						if(firstAttrStart !== -1) {
 							var attrs = docText.slice(firstAttrStart, lastAttrEnd);
-							var calledName = extractAttrValue(attrs, "\\$name");
+							// Check $name for $macrocall, $variable for $transclude
+							var calledName = widgetName === "$macrocall" ?
+								extractAttrValue(attrs, "\\$name") :
+								extractAttrValue(attrs, "\\$variable");
 							if(calledName && callSites[calledName] !== undefined) {
 								var callerDef = getDefinitionAtPosition(node.from);
 								var scopeVars = getVariablesInScope(node.node, docText);
@@ -2110,14 +2296,19 @@ function findEmptyFilterOperators(tree, state) {
 
 /**
  * Create linter function
+ * @param {EditorView} view - The CodeMirror editor view
+ * @param {Set<string>} widgetScopeVars - Variables from the widget tree scope (parent widgets)
  */
-function createTiddlyWikiLinter(view) {
+function createTiddlyWikiLinter(view, widgetScopeVars) {
 	if(!_syntaxTree) return [];
 
 	var diagnostics = [];
 	var state = view.state;
 	var tree = _syntaxTree(state);
 	var docText = state.doc.toString();
+
+	// Ensure widgetScopeVars is a Set
+	widgetScopeVars = widgetScopeVars || new Set();
 
 	// Get local definitions
 	var localDefs = extractLocalDefinitions(docText);
@@ -2187,11 +2378,15 @@ function createTiddlyWikiLinter(view) {
 			if(nodeType === "MacroName" && isRuleEnabled("undefinedMacros")) {
 				var macroName = text.trim();
 				// Check global definitions first (macros, procedures, functions)
+				// Also check widget tree scope (variables from parent widgets wrapping the editor)
+				// Also check local variables (includes parameters from all definitions in the tiddler)
 				var isGloballyDefined = isDefinitionKnown(macroName, "any") ||
 					localDefs.macros.has(macroName) ||
 					localDefs.procedures.has(macroName) ||
 					localDefs.functions.has(macroName) ||
-					builtInVariables.has(macroName);
+					localDefs.variables.has(macroName) ||
+					builtInVariables.has(macroName) ||
+					widgetScopeVars.has(macroName);
 
 				if(!isGloballyDefined) {
 					// Check scope-aware variable detection
@@ -2226,12 +2421,15 @@ function createTiddlyWikiLinter(view) {
 				// FilterVariable includes the angle brackets, extract the name
 				var varName = text.replace(/^<|>$/g, "").trim();
 				if(varName) {
-					// Check global definitions first
+					// Check global definitions first, plus widget tree scope
+					// Also check local variables (includes parameters from all definitions in the tiddler)
 					var isGloballyDefined = isDefinitionKnown(varName, "any") ||
 						localDefs.macros.has(varName) ||
 						localDefs.procedures.has(varName) ||
 						localDefs.functions.has(varName) ||
-						builtInVariables.has(varName);
+						localDefs.variables.has(varName) ||
+						builtInVariables.has(varName) ||
+						widgetScopeVars.has(varName);
 
 					if(!isGloballyDefined) {
 						// Check scope-aware variable detection
@@ -2268,12 +2466,15 @@ function createTiddlyWikiLinter(view) {
 				if(parentNode && parentNode.type.name === "Variable") {
 					var varName = text.trim();
 					if(varName) {
-						// Check global definitions first
+						// Check global definitions first, plus widget tree scope
+						// Also check local variables (includes parameters from all definitions in the tiddler)
 						var isGloballyDefined = isDefinitionKnown(varName, "any") ||
 							localDefs.macros.has(varName) ||
 							localDefs.procedures.has(varName) ||
 							localDefs.functions.has(varName) ||
-							builtInVariables.has(varName);
+							localDefs.variables.has(varName) ||
+							builtInVariables.has(varName) ||
+							widgetScopeVars.has(varName);
 
 						if(!isGloballyDefined) {
 							// Check scope-aware variable detection
@@ -2334,13 +2535,43 @@ function createTiddlyWikiLinter(view) {
 			// Check filter expressions for bracket issues
 			if(nodeType === "FilterExpression" && isRuleEnabled("filterSyntax")) {
 				var filterIssues = checkFilterBrackets(text, from);
+				var filterEnd = from + text.length;
 				filterIssues.forEach(function(issue) {
+					// Determine the closing bracket based on the message
+					var closingBracket = null;
+					if(issue.message.indexOf("'['") !== -1) {
+						closingBracket = "]";
+					} else if(issue.message.indexOf("'{'") !== -1) {
+						closingBracket = "}";
+					} else if(issue.message.indexOf("'<'") !== -1) {
+						closingBracket = ">";
+					}
+
+					var actions = [];
+					if(closingBracket) {
+						(function(bracket, endPos) {
+							actions.push({
+								name: "Add closing '" + bracket + "'",
+								apply: function(view, _from, _to) {
+									view.dispatch({
+										changes: {
+											from: endPos,
+											to: endPos,
+											insert: bracket
+										}
+									});
+								}
+							});
+						})(closingBracket, filterEnd);
+					}
+
 					diagnostics.push({
 						from: issue.pos,
 						to: issue.pos + 1,
 						severity: "error",
 						message: issue.message,
-						source: "tiddlywiki"
+						source: "tiddlywiki",
+						actions: actions
 					});
 				});
 			}
@@ -2459,16 +2690,69 @@ function createTiddlyWikiLinter(view) {
 						actions.push({
 							name: "Make self-closing",
 							apply: function(view, _from, _to) {
-								// Find the > and replace with />
+								// Find the > that closes the tag (not inside quoted attributes)
+								// Also track bracket stack for unclosed filters
 								var text = view.state.doc.sliceString(_from, _to);
-								var closePos = text.lastIndexOf(">");
+								var closePos = -1;
+								var inQuote = null;
+								var bracketStack = []; // Track [, {, < that need closing
+								var closingChars = {
+									"[": "]",
+									"{": "}",
+									"<": ">"
+								};
+								for(var i = 0; i < text.length; i++) {
+									var ch = text[i];
+									if(inQuote) {
+										if(ch === inQuote) {
+											inQuote = null;
+										} else if(ch === "[" || ch === "{" || ch === "<") {
+											bracketStack.push(ch);
+										} else if(ch === "]" || ch === "}" || ch === ">") {
+											// Pop matching bracket from stack
+											if(bracketStack.length > 0) {
+												var last = bracketStack[bracketStack.length - 1];
+												if(closingChars[last] === ch) {
+													bracketStack.pop();
+												}
+											}
+										}
+									} else {
+										if(ch === '"' || ch === "'") {
+											inQuote = ch;
+										} else if(ch === ">") {
+											closePos = i;
+										}
+									}
+								}
 								if(closePos !== -1) {
+									// Found closing >, insert / before it
 									var insertPos = _from + closePos;
 									view.dispatch({
 										changes: {
 											from: insertPos,
 											to: insertPos,
 											insert: "/"
+										}
+									});
+								} else {
+									// No closing > found, need to add it
+									// Build the insert string: close brackets in reverse order, close quote, self-close tag
+									var insert = "";
+									if(inQuote) {
+										// Add missing closing brackets in reverse order
+										for(var j = bracketStack.length - 1; j >= 0; j--) {
+											insert += closingChars[bracketStack[j]];
+										}
+										insert += inQuote + "/>";
+									} else {
+										insert = "/>";
+									}
+									view.dispatch({
+										changes: {
+											from: _to,
+											to: _to,
+											insert: insert
 										}
 									});
 								}
@@ -2897,13 +3181,30 @@ function isLintDisabledForTiddler(tiddlerTitle, wiki) {
 }
 
 /**
+ * Create a linter function with widget context
+ * @param {object} widget - The TiddlyWiki widget containing the editor
+ * @returns {function} Linter function for CodeMirror
+ */
+function createLinterWithContext(widget) {
+	// Extract widget tree variables once and cache them
+	var widgetScopeVars = extractWidgetTreeVariables(widget);
+
+	return function(view) {
+		return createTiddlyWikiLinter(view, widgetScopeVars);
+	};
+}
+
+/**
  * Build lint extensions array
  */
 function buildLintExtensions(core, context) {
 	var extensions = [];
 
-	// Add linter
-	extensions.push(_linter(createTiddlyWikiLinter, {
+	// Get widget from engine for widget tree scope detection
+	var widget = context.engine && context.engine.widget;
+
+	// Add linter with widget context
+	extensions.push(_linter(createLinterWithContext(widget), {
 		delay: 750 // Debounce linting by 750ms
 	}));
 

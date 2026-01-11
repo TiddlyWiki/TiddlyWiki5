@@ -98,6 +98,9 @@ function getLinkAtPos(state, pos, context) {
 	var currentTitle = context && context.tiddlerTitle;
 	var currentText = state.doc.toString();
 
+	// Build call-site analysis for dynamic scope resolution
+	var callAnalysis = buildCallSiteAnalysis(tree, currentText);
+
 	// Walk up the tree to find a tiddler title node
 	var current = node;
 	while(current) {
@@ -223,6 +226,50 @@ function getLinkAtPos(state, pos, context) {
 					isLocal: def.isLocal
 				};
 			}
+			// Check for parameter definition within enclosing macro/procedure/function
+			// Also handle <<__param__>> syntax by stripping underscores
+			var paramName = macroName;
+			if(paramName.startsWith("__") && paramName.endsWith("__")) {
+				paramName = paramName.slice(2, -2);
+			}
+			var paramDef = findParameterDefinition(paramName, state, pos);
+			if(paramDef) {
+				return {
+					type: "parameter",
+					target: currentTitle,
+					macroName: macroName,
+					from: macroCall ? macroCall.from : current.from,
+					to: macroCall ? macroCall.to : current.to,
+					definitionIndex: paramDef.index,
+					isLocal: true
+				};
+			}
+			// Check for widget-defined variable (e.g., <$set name="varName">, <$list variable="item">)
+			var widgetDef = findWidgetVariableDefinition(macroName, state, pos);
+			if(widgetDef) {
+				return {
+					type: "widget-variable",
+					target: currentTitle,
+					macroName: macroName,
+					from: macroCall ? macroCall.from : current.from,
+					to: macroCall ? macroCall.to : current.to,
+					definitionIndex: widgetDef.index,
+					isLocal: true
+				};
+			}
+			// Check for variable in call-site scope (dynamic scoping across macro calls)
+			var callSiteDef = findVariableInCallSiteScope(macroName, state, pos, callAnalysis);
+			if(callSiteDef) {
+				return {
+					type: "widget-variable",
+					target: currentTitle,
+					macroName: macroName,
+					from: macroCall ? macroCall.from : current.from,
+					to: macroCall ? macroCall.to : current.to,
+					definitionIndex: callSiteDef.index,
+					isLocal: true
+				};
+			}
 			// Check for JavaScript macro module
 			var jsMacroTiddler = findJavaScriptModule("macros", macroName);
 			if(jsMacroTiddler) {
@@ -273,6 +320,153 @@ function getLinkAtPos(state, pos, context) {
 				};
 			}
 			// No definition found - don't return a link
+		}
+
+		// Check for filter variable <variable> or <__param__>
+		if(current.name === "FilterVariable") {
+			// FilterVariable includes angle brackets, extract the name
+			var varText = state.doc.sliceString(current.from, current.to);
+			var varName = varText.replace(/^<|>$/g, "").trim();
+			// Strip __underscores__ if present
+			var paramName = varName;
+			if(paramName.startsWith("__") && paramName.endsWith("__")) {
+				paramName = paramName.slice(2, -2);
+			}
+			var paramDef = findParameterDefinition(paramName, state, pos);
+			if(paramDef) {
+				return {
+					type: "parameter",
+					target: currentTitle,
+					macroName: varName,
+					from: current.from,
+					to: current.to,
+					definitionIndex: paramDef.index,
+					isLocal: true
+				};
+			}
+			// Also check for widget-defined variables
+			var widgetDef = findWidgetVariableDefinition(paramName, state, pos);
+			if(widgetDef) {
+				return {
+					type: "widget-variable",
+					target: currentTitle,
+					macroName: varName,
+					from: current.from,
+					to: current.to,
+					definitionIndex: widgetDef.index,
+					isLocal: true
+				};
+			}
+			// Check call-site scope (dynamic scoping)
+			var callSiteDef = findVariableInCallSiteScope(paramName, state, pos, callAnalysis);
+			if(callSiteDef) {
+				return {
+					type: "widget-variable",
+					target: currentTitle,
+					macroName: varName,
+					from: current.from,
+					to: current.to,
+					definitionIndex: callSiteDef.index,
+					isLocal: true
+				};
+			}
+		}
+
+		// Check for substituted parameter <__param__> (SubstitutedParam node)
+		if(current.name === "SubstitutedParamName") {
+			var varName = state.doc.sliceString(current.from, current.to).trim();
+			// Strip __underscores__ if present
+			var paramName = varName;
+			if(paramName.startsWith("__") && paramName.endsWith("__")) {
+				paramName = paramName.slice(2, -2);
+			}
+			// Get parent SubstitutedParam for bounds
+			var parentNode = current.parent;
+			var paramDef = findParameterDefinition(paramName, state, pos);
+			if(paramDef) {
+				return {
+					type: "parameter",
+					target: currentTitle,
+					macroName: varName,
+					from: parentNode ? parentNode.from : current.from,
+					to: parentNode ? parentNode.to : current.to,
+					definitionIndex: paramDef.index,
+					isLocal: true
+				};
+			}
+			// Also check for widget-defined variables
+			var widgetDef = findWidgetVariableDefinition(paramName, state, pos);
+			if(widgetDef) {
+				return {
+					type: "widget-variable",
+					target: currentTitle,
+					macroName: varName,
+					from: parentNode ? parentNode.from : current.from,
+					to: parentNode ? parentNode.to : current.to,
+					definitionIndex: widgetDef.index,
+					isLocal: true
+				};
+			}
+			// Check call-site scope (dynamic scoping)
+			var callSiteDef = findVariableInCallSiteScope(paramName, state, pos, callAnalysis);
+			if(callSiteDef) {
+				return {
+					type: "widget-variable",
+					target: currentTitle,
+					macroName: varName,
+					from: parentNode ? parentNode.from : current.from,
+					to: parentNode ? parentNode.to : current.to,
+					definitionIndex: callSiteDef.index,
+					isLocal: true
+				};
+			}
+		}
+
+		// Check for $(variable)$ substitution - VariableName inside Variable
+		// Also handles $param$ substitution - VariableName inside Placeholder
+		if(current.name === "VariableName") {
+			var parentNode = current.parent;
+			if(parentNode && (parentNode.name === "Variable" || parentNode.name === "Placeholder")) {
+				var varName = state.doc.sliceString(current.from, current.to).trim();
+				var paramDef = findParameterDefinition(varName, state, pos);
+				if(paramDef) {
+					return {
+						type: "parameter",
+						target: currentTitle,
+						macroName: varName,
+						from: parentNode.from,
+						to: parentNode.to,
+						definitionIndex: paramDef.index,
+						isLocal: true
+					};
+				}
+				// Also check for widget-defined variables
+				var widgetDef = findWidgetVariableDefinition(varName, state, pos);
+				if(widgetDef) {
+					return {
+						type: "widget-variable",
+						target: currentTitle,
+						macroName: varName,
+						from: parentNode.from,
+						to: parentNode.to,
+						definitionIndex: widgetDef.index,
+						isLocal: true
+					};
+				}
+				// Check call-site scope (dynamic scoping)
+				var callSiteDef = findVariableInCallSiteScope(varName, state, pos, callAnalysis);
+				if(callSiteDef) {
+					return {
+						type: "widget-variable",
+						target: currentTitle,
+						macroName: varName,
+						from: parentNode.from,
+						to: parentNode.to,
+						definitionIndex: callSiteDef.index,
+						isLocal: true
+					};
+				}
+			}
 		}
 
 		current = current.parent;
@@ -432,6 +626,429 @@ function findDefinition(name, currentTiddlerTitle, currentText) {
 	}
 
 	return null;
+}
+
+/**
+ * Find a parameter definition within an enclosing macro/procedure/function/widget.
+ * This handles cases like <<param>> inside \define myMacro(param)
+ * Returns { index, type } or null
+ *
+ * @param {string} varName - The variable name to find
+ * @param {EditorState} state - The editor state
+ * @param {number} pos - Current position in document
+ */
+function findParameterDefinition(varName, state, pos) {
+	if(!_syntaxTree) return null;
+
+	var tree = _syntaxTree(state);
+	if(!tree) return null;
+
+	var node = tree.resolveInner(pos, 0);
+
+	// Walk up to find enclosing definition
+	var current = node;
+	while(current) {
+		var defType = current.name;
+		if(defType === "MacroDefinition" || defType === "ProcedureDefinition" ||
+			defType === "FunctionDefinition" || defType === "WidgetDefinition") {
+			// Found an enclosing definition, check its parameters
+			var defText = state.doc.sliceString(current.from, current.to);
+			var firstLineEnd = defText.indexOf('\n');
+			var firstLine = firstLineEnd > 0 ? defText.substring(0, firstLineEnd) : defText;
+
+			// Extract parameters from the first line
+			// Pattern: \define name(param1, param2: default, ...)
+			var paramMatch = firstLine.match(/\(([^)]*)\)/);
+			if(paramMatch) {
+				var paramsStr = paramMatch[1];
+				var params = paramsStr.split(',');
+
+				// Find the parameter and its position
+				var searchPos = 0;
+				for(var i = 0; i < params.length; i++) {
+					var param = params[i];
+					var colonIdx = param.indexOf(':');
+					var paramName = colonIdx > 0 ? param.substring(0, colonIdx).trim() : param.trim();
+
+					if(paramName === varName) {
+						// Find position of this parameter in the params string
+						var paramStartInStr = paramsStr.indexOf(param);
+						// Skip leading whitespace in the param
+						var leadingWs = param.match(/^\s*/)[0].length;
+
+						// Calculate absolute position
+						var parensStart = current.from + firstLine.indexOf('(') + 1;
+						var paramPos = parensStart + paramStartInStr + leadingWs;
+
+						return {
+							index: paramPos,
+							type: "parameter"
+						};
+					}
+				}
+			}
+		}
+		current = current.parent;
+	}
+
+	return null;
+}
+
+// ============================================================================
+// Call-Site Analysis for Dynamic Scope Resolution
+// ============================================================================
+
+/**
+ * Extract definition name from a definition node
+ */
+function extractDefinitionName(defNode, docText) {
+	var text = docText.slice(defNode.from, Math.min(defNode.from + 200, defNode.to));
+	var match = /\\(?:define|procedure|function|widget)\s+([^\s(]+)/.exec(text);
+	return match ? match[1] : null;
+}
+
+/**
+ * Build call-site analysis for dynamic scope resolution
+ */
+function buildCallSiteAnalysis(tree, docText) {
+	var definitions = {};
+	var callSites = {};
+
+	// First pass: collect all definitions
+	tree.iterate({
+		enter: function(node) {
+			var typeName = node.type.name;
+			if(typeName === "MacroDefinition" || typeName === "ProcedureDefinition" ||
+				typeName === "FunctionDefinition" || typeName === "WidgetDefinition") {
+				var name = extractDefinitionName(node.node, docText);
+				if(name) {
+					definitions[name] = {
+						from: node.from,
+						to: node.to,
+						node: node.node
+					};
+					callSites[name] = [];
+				}
+			}
+		}
+	});
+
+	// Helper to find which definition contains a position
+	function getDefinitionAtPosition(pos) {
+		var bestMatch = null;
+		var bestSize = Infinity;
+		for(var name in definitions) {
+			var def = definitions[name];
+			if(pos >= def.from && pos <= def.to) {
+				var size = def.to - def.from;
+				if(size < bestSize) {
+					bestMatch = name;
+					bestSize = size;
+				}
+			}
+		}
+		return bestMatch;
+	}
+
+	// Second pass: collect call sites with their widget scope context
+	tree.iterate({
+		enter: function(node) {
+			if(node.type.name === "MacroName") {
+				var calledName = docText.slice(node.from, node.to).trim();
+				if(callSites[calledName] !== undefined) {
+					var callerDef = getDefinitionAtPosition(node.from);
+					// Collect enclosing widgets at this call site
+					var enclosingWidgets = collectEnclosingWidgets(node.node, docText);
+					callSites[calledName].push({
+						callerDef: callerDef,
+						enclosingWidgets: enclosingWidgets,
+						pos: node.from
+					});
+				}
+			}
+		}
+	});
+
+	return {
+		definitions: definitions,
+		callSites: callSites,
+		getDefinitionAtPosition: getDefinitionAtPosition
+	};
+}
+
+/**
+ * Collect enclosing scope-creating widgets with their variable definitions
+ */
+function collectEnclosingWidgets(node, docText) {
+	var widgets = [];
+	var current = node;
+	while(current) {
+		var isWidget = current.name === "Widget" || current.name === "InlineWidget" ||
+			(current.name && current.name.match && current.name.match(/^Widget\s*\d*$/));
+		if(isWidget) {
+			var widgetText = docText.slice(current.from, current.to);
+			var widgetMatch = widgetText.match(/^<(\$[\w-]+)/);
+			if(widgetMatch) {
+				var widgetType = widgetMatch[1];
+				var scopeType = SCOPE_CREATING_WIDGETS[widgetType];
+				if(scopeType) {
+					// Find end of opening tag (handle quoted attributes)
+					var tagEnd = findOpeningTagEnd(widgetText);
+					var openingTag = widgetText.substring(0, tagEnd);
+					var attrsStart = openingTag.indexOf(widgetType) + widgetType.length;
+					var attrs = openingTag.substring(attrsStart);
+					var vars = extractWidgetVariables(widgetType, attrs, scopeType);
+					if(vars.length > 0) {
+						widgets.push({
+							widgetType: widgetType,
+							widgetFrom: current.from,
+							attrsStart: current.from + attrsStart,
+							attrs: attrs,
+							vars: vars,
+							scopeType: scopeType
+						});
+					}
+				}
+			}
+		}
+		current = current.parent;
+	}
+	return widgets;
+}
+
+/**
+ * Find the end of an opening tag, handling quoted attributes
+ */
+function findOpeningTagEnd(text) {
+	var inSingleQuote = false;
+	var inDoubleQuote = false;
+	for(var i = 0; i < text.length; i++) {
+		var ch = text[i];
+		if(ch === '"' && !inSingleQuote) inDoubleQuote = !inDoubleQuote;
+		else if(ch === "'" && !inDoubleQuote) inSingleQuote = !inSingleQuote;
+		else if(ch === '>' && !inSingleQuote && !inDoubleQuote) return i;
+	}
+	return text.length;
+}
+
+/**
+ * Find variable definition through call-site scope (dynamic scoping)
+ * Returns { index, widgetName } or null
+ */
+function findVariableInCallSiteScope(varName, state, pos, callAnalysis) {
+	if(!callAnalysis) return null;
+
+	// Find which definition we're in
+	var currentDef = callAnalysis.getDefinitionAtPosition(pos);
+	if(!currentDef) return null;
+
+	// Get call sites for this definition
+	var sites = callAnalysis.callSites[currentDef];
+	if(!sites || sites.length === 0) return null;
+
+	// Search through call sites for the variable
+	var visited = new Set();
+	return searchCallSitesForVariable(varName, currentDef, callAnalysis, visited);
+}
+
+/**
+ * Recursively search call sites for a variable definition
+ */
+function searchCallSitesForVariable(varName, defName, callAnalysis, visited) {
+	if(visited.has(defName)) return null; // Cycle detection
+	visited.add(defName);
+
+	var sites = callAnalysis.callSites[defName];
+	if(!sites) return null;
+
+	for(var i = 0; i < sites.length; i++) {
+		var site = sites[i];
+		// Check enclosing widgets at this call site
+		for(var j = 0; j < site.enclosingWidgets.length; j++) {
+			var widget = site.enclosingWidgets[j];
+			if(widget.vars.indexOf(varName) !== -1) {
+				// Found! Return position
+				var varIdx = findVariablePositionInWidget(varName, widget.attrs, widget.scopeType);
+				return {
+					index: widget.attrsStart + varIdx,
+					widgetName: widget.widgetType
+				};
+			}
+		}
+		// If called from another definition, search that too
+		if(site.callerDef) {
+			var found = searchCallSitesForVariable(varName, site.callerDef, callAnalysis, new Set(visited));
+			if(found) return found;
+		}
+	}
+
+	return null;
+}
+
+/**
+ * Widget types that create variable scopes and how to extract variable names.
+ * "all" = all attributes are variable names
+ * string = specific attribute contains the variable name
+ */
+var SCOPE_CREATING_WIDGETS = {
+	"$let": "all",
+	"$vars": "all",
+	"$set": "name",
+	"$setvariable": "name",
+	"$parameters": "all",
+	"$list": "variable", // Also has "counter" attribute
+	"$range": "variable",
+	"$qualify": "name",
+	"$wikify": "name",
+	"$setmultiplevariables": "all",
+	"$droppable": "actions", // Actually sets variables via actions, skip for now
+	"$importvariables": null // Imports from tiddler, complex to handle
+};
+
+// Additional attributes that define variables for specific widgets
+var ADDITIONAL_VARIABLE_ATTRS = {
+	"$list": ["counter", "variable"],
+	"$range": ["variable"]
+};
+
+/**
+ * Find a widget-based variable definition in the enclosing scope.
+ * This handles cases like <<myVar>> where myVar is set by <$let myVar="..."> or <$set name="myVar">
+ * Returns { index, widgetName } or null
+ *
+ * @param {string} varName - The variable name to find
+ * @param {EditorState} state - The editor state
+ * @param {number} pos - Current position in document
+ */
+function findWidgetVariableDefinition(varName, state, pos) {
+	if(!_syntaxTree) return null;
+
+	var tree = _syntaxTree(state);
+	if(!tree) return null;
+
+	var node = tree.resolveInner(pos, 0);
+
+	// Walk up to find enclosing scope-creating widgets
+	var current = node;
+	while(current) {
+		// Check for Widget nodes (Widget, InlineWidget, or Widget with number suffix)
+		if(current.name === "Widget" || current.name === "InlineWidget" ||
+			current.name.match(/^Widget\s*\d*$/)) {
+			// Find the WidgetName child to get the widget type
+			var widgetNameNode = null;
+			var widgetText = state.doc.sliceString(current.from, current.to);
+
+			// Extract widget name from the opening tag
+			var widgetMatch = widgetText.match(/^<(\$[\w-]+)/);
+			if(widgetMatch) {
+				var widgetType = widgetMatch[1];
+				var scopeType = SCOPE_CREATING_WIDGETS[widgetType];
+
+				if(scopeType) {
+					// Extract the opening tag's attributes
+					var tagEndIdx = widgetText.indexOf('>');
+					if(tagEndIdx === -1) tagEndIdx = widgetText.length;
+					var openingTag = widgetText.substring(0, tagEndIdx);
+					var attrsStart = openingTag.indexOf(widgetType) + widgetType.length;
+					var attrs = openingTag.substring(attrsStart);
+
+					var definedVars = extractWidgetVariables(widgetType, attrs, scopeType);
+
+					if(definedVars.indexOf(varName) !== -1) {
+						// Find the position of the variable definition in the widget
+						var varIdx = findVariablePositionInWidget(varName, attrs, scopeType);
+						return {
+							index: current.from + attrsStart + varIdx,
+							widgetName: widgetType
+						};
+					}
+				}
+			}
+		}
+		current = current.parent;
+	}
+
+	return null;
+}
+
+/**
+ * Extract variable names defined by a widget
+ */
+function extractWidgetVariables(widgetType, attrs, scopeType) {
+	var vars = [];
+
+	if(scopeType === "all") {
+		// All attributes are variable names (for $let, $vars, $parameters, $setmultiplevariables)
+		var attrRegex = /([a-zA-Z_][\w-]*)\s*=/g;
+		var match;
+		while((match = attrRegex.exec(attrs)) !== null) {
+			vars.push(match[1]);
+		}
+		// Also handle bare attributes for $parameters
+		if(widgetType === "$parameters") {
+			var withoutQuotes = attrs.replace(/"[^"]*"|'[^']*'|\[\[[^\]]*\]\]/g, '');
+			var bareRegex = /\b([a-zA-Z_][\w-]*)\b(?!\s*=)/g;
+			var assignedNames = new Set(vars);
+			while((match = bareRegex.exec(withoutQuotes)) !== null) {
+				if(!assignedNames.has(match[1])) {
+					vars.push(match[1]);
+				}
+			}
+		}
+	} else if(scopeType) {
+		// Specific attribute contains the variable name
+		var attrName = scopeType;
+		// Match name="value", name='value', or name=value
+		var specificRegex = new RegExp(attrName + '\\s*=\\s*(?:"([^"]*)"|\'([^\']*)\'|([^\\s>]+))', 'i');
+		var match = specificRegex.exec(attrs);
+		if(match) {
+			var value = match[1] || match[2] || match[3];
+			// Skip dynamic values
+			if(value && !/^<<|^\{\{|^\{\{\{|^`/.test(value)) {
+				vars.push(value);
+			}
+		}
+	}
+
+	// Check for additional variable attributes (e.g., $list has both 'variable' and 'counter')
+	var additionalAttrs = ADDITIONAL_VARIABLE_ATTRS[widgetType];
+	if(additionalAttrs) {
+		for(var i = 0; i < additionalAttrs.length; i++) {
+			var attrName = additionalAttrs[i];
+			if(attrName === scopeType) continue; // Already handled
+			var specificRegex = new RegExp(attrName + '\\s*=\\s*(?:"([^"]*)"|\'([^\']*)\'|([^\\s>]+))', 'i');
+			var match = specificRegex.exec(attrs);
+			if(match) {
+				var value = match[1] || match[2] || match[3];
+				if(value && !/^<<|^\{\{|^\{\{\{|^`/.test(value) && vars.indexOf(value) === -1) {
+					vars.push(value);
+				}
+			}
+		}
+	}
+
+	return vars;
+}
+
+/**
+ * Find the position of a variable definition within widget attributes
+ */
+function findVariablePositionInWidget(varName, attrs, scopeType) {
+	if(scopeType === "all") {
+		// Look for varName= or bare varName
+		var regex = new RegExp('\\b' + escapeRegex(varName) + '\\b');
+		var match = regex.exec(attrs);
+		return match ? match.index : 0;
+	} else {
+		// Look for attrName="varName" or attrName=varName
+		var regex = new RegExp(scopeType + '\\s*=\\s*["\']?' + escapeRegex(varName));
+		var match = regex.exec(attrs);
+		if(match) {
+			// Return position of the actual variable name, not the attribute name
+			return match.index + match[0].indexOf(varName);
+		}
+		return 0;
+	}
 }
 
 // ============================================================================
