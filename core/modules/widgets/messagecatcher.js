@@ -56,14 +56,14 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 						return props;
 					};
 					// Collect event object properties for JSON (recursively, preserving types)
-					var collectJsonProps = function(obj) {
-						var result = {};
-						$tw.utils.each(obj,function(value,name) {
-							var valueType = typeof value;
+					const collectJsonProps = obj => {
+						const result = {};
+						$tw.utils.each(obj,(value,name) => {
+							const valueType = typeof value;
 							if(value === null || ["string","boolean","number"].indexOf(valueType) !== -1) {
 								result[name] = value;
 							} else if(valueType === "object" && value.constructor === Object) {
-								var processedObject = collectJsonProps(value);
+								const processedObject = collectJsonProps(value);
 								if(Object.keys(processedObject).length > 0) {
 									result[name] = processedObject;
 								}
@@ -72,7 +72,7 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 						});
 						return result;
 					};
-					var stringifiedProperties;
+					let stringifiedProperties;
 					try {
 						stringifiedProperties = JSON.stringify(collectJsonProps(event));
 					} catch(e) {
