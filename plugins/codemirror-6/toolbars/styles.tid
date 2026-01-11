@@ -43,8 +43,8 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct svg {
-    width: 0.75em;
-    height: 0.75em;
+    width: 1em;
+    height: 1em;
 }
 
 /* Reset dropdown buttons to normal styling */
@@ -93,7 +93,6 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
-    padding: 4px 4px;
     margin-left: -2px;
     border-radius: 0 3px 3px 0;
 }
@@ -138,7 +137,6 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
-    padding: 6px 6px;
     margin-left: -2px;
     border-radius: 0 4px 4px 0;
 }
@@ -186,7 +184,6 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
-    padding: 5px 6px;
     margin-left: -1px;
     border-radius: 0 4px 4px 0;
     border-left: none;
@@ -237,7 +234,6 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
-    padding: 6px 8px;
     margin-left: -4px;
     border-radius: 0 20px 20px 0;
 }
@@ -286,7 +282,6 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
-    padding: 8px 8px;
     margin-left: -2px;
     border-radius: 0 4px 4px 0;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
@@ -335,7 +330,6 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
-    padding: 7px 8px;
     margin-left: -2px;
     border-radius: 0 6px 6px 0;
 }
@@ -392,7 +386,6 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
-    padding: 7px 8px;
     margin-left: -1px;
     border-radius: 0 8px 8px 0;
     border-left: none;
@@ -448,7 +441,6 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
-    padding: 6px 8px;
     margin-left: -2px;
     border-radius: 0 4px 4px 0;
     border-left: none;
@@ -498,7 +490,6 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
-    padding: 4px 6px;
     margin-left: -2px;
     border-radius: 0;
 }
@@ -549,7 +540,6 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
-    padding: 8px 10px;
     margin-left: -3px;
     border-radius: 0;
     border-left: none;

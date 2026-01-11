@@ -353,12 +353,12 @@ html body .tc-edit-tags .tc-add-tag-button {
 }
 
 /* ============================================
-   Field add row - flex layout
+   Field add row - flex layout with wrapping
    ============================================ */
 
 html body .tc-edit-field-add {
 	display: flex;
-	flex-wrap: nowrap;
+	flex-wrap: wrap;
 	align-items: center;
 	gap: 4px;
 }
@@ -398,10 +398,10 @@ html body .tc-edit-field-add-name-wrapper > .tc-btn-dropdown {
 	flex: 0 0 auto;
 }
 
-/* Field value grows to fill available space */
+/* Field value grows to fill available space, wraps when needed */
 html body .tc-edit-field-add > .tc-edit-field-add-value {
-	flex: 1 1 auto;
-	min-width: 0;
+	flex: 1 1 calc(20ch + 3em);
+	min-width: 10ch;
 }
 
 /* Keyboard wrapper inside value needs to be block */
