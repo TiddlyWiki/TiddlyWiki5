@@ -1,8 +1,8 @@
-caption: tm-open-external-window
-created: 20170121182300000
-modified: 20230723220850135
-tags: Messages
+﻿created: 20170121182300000
 title: WidgetMessage: tm-open-external-window
+caption: tm-open-external-window
+modified: 20260106171726826
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.14">>

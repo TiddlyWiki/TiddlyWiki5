@@ -38,6 +38,7 @@ SendMessageWidget.prototype.execute = function() {
 	this.actionValue = this.getAttribute("$value","");
 	this.actionNames = this.getAttribute("$names");
 	this.actionValues = this.getAttribute("$values");
+	this.actionMessageJson = this.getAttribute("$messageJSON");
 };
 
 /*
@@ -58,8 +59,8 @@ Invoke the action associated with this widget
 SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	// Get the string parameter
 	var param = this.actionParam;
-	// Assemble the parameters as a hashmap
-	var paramObject = Object.create(null);
+	// We assemble the parameters as a hashmap
+	var paramObject = {};
 	// Add names/values pairs if present
 	if(this.actionNames && this.actionValues) {
 		var names = this.wiki.filterTiddlers(this.actionNames,this),
@@ -68,7 +69,7 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 			paramObject[name] = values[index] || "";
 		});
 	}
-	// Add raw parameters
+	// Add raw attributes
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) !== "$") {
 			paramObject[name] = attribute;
@@ -78,15 +79,30 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	if(this.actionName) {
 		paramObject[this.actionName] = this.actionValue;
 	}
-	// Dispatch the message
+	// We build the "event" object to dispatch
 	var params = {
-		type: this.actionMessage,
 		param: param,
 		paramObject: paramObject,
 		event: event,
 		tiddlerTitle: this.getVariable("currentTiddler"),
 		navigateFromTitle: this.getVariable("storyTiddler")
 	};
+	// Parse and merge $eventJson if present
+	if(this.actionMessageJson) {
+		try {
+			var messageData = JSON.parse(this.actionMessageJson);
+			$tw.utils.each(messageData,function(value,name) {
+				params[name] = value;
+			});
+		} catch(e) {
+			console.log("$action-sendmessage: ",e);
+		}
+	}
+	// $message has priority and overwrites any $event-type that may have been set
+	if(this.actionMessage) {
+		params.type = this.actionMessage;
+	}
+	// Dispatch the message
 	this.dispatchEvent(params);
 	return true; // Action was invoked
 };

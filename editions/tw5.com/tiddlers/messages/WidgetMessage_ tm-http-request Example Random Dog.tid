@@ -1,5 +1,7 @@
+﻿created: 20260106171726825
 title: WidgetMessage: tm-http-request Example - Random Dog
-tags: $:/tags/Macro $:/tags/Global
+tags: $:/tags/Global [[WidgetMessage: tm-http-request]]
+modified: 20260106172013371
 
 \procedure download-dog(url)
 

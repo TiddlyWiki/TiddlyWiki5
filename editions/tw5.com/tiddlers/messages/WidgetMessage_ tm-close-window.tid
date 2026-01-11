@@ -1,8 +1,8 @@
-caption: tm-close-window
-created: 20220228140417116
-modified: 20230723220539648
-tags: Messages
+﻿created: 20220228140417116
 title: WidgetMessage: tm-close-window
+caption: tm-close-window
+modified: 20260106171726825
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 <<.from-version 5.2.2>>
