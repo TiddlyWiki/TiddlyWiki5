@@ -2105,7 +2105,9 @@ function createTiddlyWikiLinter(view) {
 
 			// Check WikiLinks for missing tiddlers
 			if(nodeType === "LinkTarget" && isRuleEnabled("missingLinks")) {
-				if(!tiddlerExists(text)) {
+				// Skip external URLs (http://, https://, file://, mailto:, etc.)
+				var isExternalLink = /^[a-zA-Z][a-zA-Z0-9+.\-]*:/.test(text);
+				if(!isExternalLink && !tiddlerExists(text)) {
 					diagnostics.push({
 						from: from,
 						to: to,
