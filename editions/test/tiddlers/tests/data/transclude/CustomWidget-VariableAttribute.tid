@@ -1,7 +1,7 @@
 title: Transclude/CustomWidget/VariableAttribute
 description: Custom widget definition using an attribute called $variable
 type: text/vnd.tiddlywiki-multiple
-tags: [[$:/tags/wiki-test-spec]]
+tags:
 
 title: Output
 

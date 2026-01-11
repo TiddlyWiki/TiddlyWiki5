@@ -1,7 +1,7 @@
 title: MultiValuedVariables/Simple
 description: Simple usage of multivalued assignments with the "let" widget
 type: text/vnd.tiddlywiki-multiple
-tags: [[$:/tags/wiki-test-spec]]
+tags:
 
 title: Output
 

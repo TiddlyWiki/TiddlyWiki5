@@ -3,7 +3,7 @@ title: $:/core/modules/parsers/wikiparser/rules/filteredtranscludeblock.js
 type: application/javascript
 module-type: wikirule
 
-Wiki text rule for block-level filtered transclusion. For example:
+Wiki text rule for block-level filtered transclusion using {{{ }}} syntax. For example:
 
 ```
 {{{ [tag[docs]] }}}
@@ -12,6 +12,11 @@ Wiki text rule for block-level filtered transclusion. For example:
 {{{ [tag[docs]] |tooltip||TemplateTitle}}}
 {{{ [tag[docs]] }}width:40;height:50;}.class.class
 ```
+
+Note: tooltip and styles/classes are currentlynot implemented
+
+Note: This syntax is deprecated and will be changed to output only the first result in a future release.
+Please use ((( ))) syntax instead.
 
 \*/
 
