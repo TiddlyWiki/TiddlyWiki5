@@ -72,6 +72,12 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 						});
 						return result;
 					};
+					var stringifiedProperties;
+					try {
+						stringifiedProperties = JSON.stringify(collectJsonProps(event));
+					} catch(e) {
+						stringifiedProperties = "[Unserializable]";
+					}
 					var variables = $tw.utils.extend(
 						{},
 						collectProps(event.paramObject,"event-paramObject"),
@@ -80,7 +86,7 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 						collectProps(event,"message"),
 						{
 							modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event),
-							"json-message": JSON.stringify(collectJsonProps(event))
+							"json-message": stringifiedProperties
 						});
 					isActionStringExecuting = true;
 					self.invokeActionString(actions,self,event,variables);
