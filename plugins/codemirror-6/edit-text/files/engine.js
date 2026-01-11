@@ -507,7 +507,7 @@ function CodeMirrorSimpleEngine(options) {
 	var bidiExtensions = [];
 	var perLineTextDirection = EditorView.perLineTextDirection;
 	if(bidiEnabled && perLineTextDirection) {
-		bidiExtensions.push(perLineTextDirection);
+		bidiExtensions.push(perLineTextDirection.of(true));
 	}
 	extensions.push(this._compartments.bidi.of(bidiExtensions));
 
@@ -1539,7 +1539,7 @@ CodeMirrorSimpleEngine.prototype._handleSettingsChanged = function(settings) {
 		var bidiExtensions = [];
 		var EditorView = core.view.EditorView;
 		if(settings.bidiPerLine && EditorView.perLineTextDirection) {
-			bidiExtensions.push(EditorView.perLineTextDirection);
+			bidiExtensions.push(EditorView.perLineTextDirection.of(true));
 		}
 		effects.push(this._compartments.bidi.reconfigure(bidiExtensions));
 	}
