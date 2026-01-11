@@ -46,7 +46,7 @@ var _Compartment = null;
  */
 function isRuleEnabled(ruleName, wiki) {
 	wiki = wiki || $tw.wiki;
-	if (!wiki) return true;
+	if(!wiki) return true;
 	var config = (wiki.getTiddlerText("$:/config/codemirror-6/lint/" + ruleName, "yes") || "").trim();
 	return config === "yes";
 }
@@ -57,7 +57,7 @@ function isRuleEnabled(ruleName, wiki) {
  */
 function isCamelCaseEnabled(wiki) {
 	wiki = wiki || $tw.wiki;
-	if (!wiki) return true;
+	if(!wiki) return true;
 	var config = wiki.getTiddlerText("$:/config/WikiParserRules/Inline/wikilink", "enable");
 	return config !== "disable";
 }
@@ -88,10 +88,10 @@ function extractAttrValue(attrs, attrName) {
 	// Match quoted values: name="value" or name='value'
 	var quotedRegex = new RegExp(attrName + '\\s*=\\s*["\']([^"\']+)["\']', 'i');
 	var quotedMatch = quotedRegex.exec(attrs);
-	if (quotedMatch) {
+	if(quotedMatch) {
 		var val = quotedMatch[1];
 		// Check if it's a dynamic value inside quotes (shouldn't happen but be safe)
-		if (/^<<|^\{\{|^\{\{\{|^`|^```/.test(val)) return null;
+		if(/^<<|^\{\{|^\{\{\{|^`|^```/.test(val)) return null;
 		return val;
 	}
 
@@ -99,14 +99,14 @@ function extractAttrValue(attrs, attrName) {
 	// This includes: plain values, <<variables>>, {{transclusions}}, {{{filters}}}, `substitutions`, ```substitutions```
 	var unquotedRegex = new RegExp(attrName + '\\s*=\\s*([^\\s>"\']+)', 'i');
 	var unquotedMatch = unquotedRegex.exec(attrs);
-	if (unquotedMatch) {
+	if(unquotedMatch) {
 		var val = unquotedMatch[1];
 		// Dynamic values - can't statically determine the value
-		if (/^<</.test(val)) return null; // <<variable>>
-		if (/^\{\{\{/.test(val)) return null; // {{{filter}}}
-		if (/^\{\{/.test(val)) return null; // {{transclusion}}
-		if (/^```/.test(val)) return null; // ```substitution```
-		if (/^`/.test(val)) return null; // `substitution`
+		if(/^<</.test(val)) return null; // <<variable>>
+		if(/^\{\{\{/.test(val)) return null; // {{{filter}}}
+		if(/^\{\{/.test(val)) return null; // {{transclusion}}
+		if(/^```/.test(val)) return null; // ```substitution```
+		if(/^`/.test(val)) return null; // `substitution`
 		return val;
 	}
 
@@ -135,7 +135,7 @@ var scopeCreatingWidgets = {
 		var vars = [];
 		var attrRegex = /([a-zA-Z_][\w-]*)\s*=/g;
 		var match;
-		while ((match = attrRegex.exec(attrs)) !== null) {
+		while((match = attrRegex.exec(attrs)) !== null) {
 			vars.push(match[1]);
 		}
 		return vars;
@@ -145,7 +145,7 @@ var scopeCreatingWidgets = {
 		var vars = [];
 		var attrRegex = /([a-zA-Z_][\w-]*)\s*=/g;
 		var match;
-		while ((match = attrRegex.exec(attrs)) !== null) {
+		while((match = attrRegex.exec(attrs)) !== null) {
 			vars.push(match[1]);
 		}
 		return vars;
@@ -155,7 +155,7 @@ var scopeCreatingWidgets = {
 		var vars = [];
 		var attrRegex = /([a-zA-Z_][\w-]*)\s*=/g;
 		var match;
-		while ((match = attrRegex.exec(attrs)) !== null) {
+		while((match = attrRegex.exec(attrs)) !== null) {
 			vars.push(match[1]);
 		}
 		return vars;
@@ -165,8 +165,8 @@ var scopeCreatingWidgets = {
 		var vars = [];
 		var varValue = extractAttrValue(attrs, 'variable');
 		var counterValue = extractAttrValue(attrs, 'counter');
-		if (varValue) vars.push(varValue);
-		if (counterValue) vars.push(counterValue);
+		if(varValue) vars.push(varValue);
+		if(counterValue) vars.push(counterValue);
 		return vars;
 	},
 	"$range": function(attrs) {
@@ -235,24 +235,24 @@ function extractWidgetScopeVariables(widgetNode, docText) {
 
 	cursor.firstChild();
 	do {
-		if (cursor.name === "WidgetName") {
+		if(cursor.name === "WidgetName") {
 			widgetName = docText.slice(cursor.from, cursor.to);
-		} else if (cursor.name === "Attribute") {
+		} else if(cursor.name === "Attribute") {
 			// Track range of all Attribute children
-			if (firstAttrStart === -1) {
+			if(firstAttrStart === -1) {
 				firstAttrStart = cursor.from;
 			}
 			lastAttrEnd = cursor.to;
 		}
-	} while (cursor.nextSibling());
+	} while(cursor.nextSibling());
 
-	if (!widgetName || firstAttrStart === -1) return {
+	if(!widgetName || firstAttrStart === -1) return {
 		vars: [],
 		prefixes: []
 	};
 
 	var extractor = scopeCreatingWidgets[widgetName.toLowerCase()];
-	if (!extractor) return {
+	if(!extractor) return {
 		vars: [],
 		prefixes: []
 	};
@@ -261,7 +261,7 @@ function extractWidgetScopeVariables(widgetNode, docText) {
 	var result = extractor(attrs);
 
 	// Normalize: if result is an array, convert to {vars, prefixes} format
-	if (Array.isArray(result)) {
+	if(Array.isArray(result)) {
 		return {
 			vars: result,
 			prefixes: []
@@ -283,20 +283,20 @@ function extractPragmaScopeVariables(pragmaNode, docText) {
 
 	// Match \define/\procedure/\function/\widget name(params)
 	var match = /\\(?:define|procedure|function|widget)\s+[^\s(]+\s*\(([^)]*)\)/.exec(pragmaText);
-	if (match && match[1]) {
+	if(match && match[1]) {
 		var paramsStr = match[1];
 		var paramMatches = paramsStr.matchAll(/([a-zA-Z][a-zA-Z0-9_-]*)/g);
-		for (var paramMatch of paramMatches) {
+		for(var paramMatch of paramMatches) {
 			vars.push(paramMatch[1]);
 		}
 	}
 
 	// Match \parameters pragma
 	var paramsMatch = /\\parameters\s*\(([^)]*)\)/.exec(pragmaText);
-	if (paramsMatch && paramsMatch[1]) {
+	if(paramsMatch && paramsMatch[1]) {
 		var paramsStr = paramsMatch[1];
 		var paramMatches = paramsStr.matchAll(/([a-zA-Z][a-zA-Z0-9_-]*)/g);
-		for (var paramMatch of paramMatches) {
+		for(var paramMatch of paramMatches) {
 			vars.push(paramMatch[1]);
 		}
 	}
@@ -317,22 +317,22 @@ function getVariablesInScope(node, docText) {
 
 	// Walk up the tree to find scope-creating ancestors
 	var current = node;
-	while (current) {
+	while(current) {
 		var typeName = current.type.name;
 
 		// Check for Widget or InlineWidget
-		if (typeName === "Widget" || typeName === "InlineWidget") {
+		if(typeName === "Widget" || typeName === "InlineWidget") {
 			var extracted = extractWidgetScopeVariables(current, docText);
 			extracted.vars.forEach(function(v) {
 				scopeVars.add(v);
 			});
 			extracted.prefixes.forEach(function(p) {
-				if (scopePrefixes.indexOf(p) === -1) scopePrefixes.push(p);
+				if(scopePrefixes.indexOf(p) === -1) scopePrefixes.push(p);
 			});
 		}
 
 		// Check for pragma definitions (parameters are in scope within the body)
-		if (typeName === "MacroDefinition" || typeName === "ProcedureDefinition" ||
+		if(typeName === "MacroDefinition" || typeName === "ProcedureDefinition" ||
 			typeName === "FunctionDefinition" || typeName === "WidgetDefinition") {
 			var vars = extractPragmaScopeVariables(current, docText);
 			vars.forEach(function(v) {
@@ -341,7 +341,7 @@ function getVariablesInScope(node, docText) {
 		}
 
 		// Check for ParametersPragma
-		if (typeName === "ParametersPragma") {
+		if(typeName === "ParametersPragma") {
 			var vars = extractPragmaScopeVariables(current, docText);
 			vars.forEach(function(v) {
 				scopeVars.add(v);
@@ -365,11 +365,11 @@ function getVariablesInScope(node, docText) {
  */
 function isVarInScope(varName, scope) {
 	// Check exact match first
-	if (scope.vars.has(varName)) return true;
+	if(scope.vars.has(varName)) return true;
 
 	// Check prefix matches
-	for (var i = 0; i < scope.prefixes.length; i++) {
-		if (varName.indexOf(scope.prefixes[i]) === 0) {
+	for(var i = 0; i < scope.prefixes.length; i++) {
+		if(varName.indexOf(scope.prefixes[i]) === 0) {
 			return true;
 		}
 	}
@@ -388,22 +388,22 @@ function isVarInScope(varName, scope) {
  */
 function getContainingDefinition(node) {
 	var current = node.parent;
-	while (current) {
+	while(current) {
 		var typeName = current.type.name;
-		if (typeName === "MacroDefinition" || typeName === "ProcedureDefinition" ||
+		if(typeName === "MacroDefinition" || typeName === "ProcedureDefinition" ||
 			typeName === "FunctionDefinition" || typeName === "WidgetDefinition") {
 			// Extract the definition name from the pragma text
 			var cursor = current.cursor();
-			if (cursor.firstChild()) {
+			if(cursor.firstChild()) {
 				do {
-					if (cursor.name === "PragmaName") {
+					if(cursor.name === "PragmaName") {
 						// The definition name follows the pragma keyword
 						// Look for next sibling which should be the name
-						if (cursor.nextSibling() && cursor.name !== "PragmaEnd") {
+						if(cursor.nextSibling() && cursor.name !== "PragmaEnd") {
 							return cursor.node.parent ? null : null; // Skip, name is elsewhere
 						}
 					}
-				} while (cursor.nextSibling());
+				} while(cursor.nextSibling());
 			}
 			// Fallback: extract from text using regex
 			return null; // Will be handled by extractDefinitionName
@@ -443,10 +443,10 @@ function buildCallSiteAnalysis(tree, docText) {
 	tree.iterate({
 		enter: function(node) {
 			var typeName = node.type.name;
-			if (typeName === "MacroDefinition" || typeName === "ProcedureDefinition" ||
+			if(typeName === "MacroDefinition" || typeName === "ProcedureDefinition" ||
 				typeName === "FunctionDefinition" || typeName === "WidgetDefinition") {
 				var name = extractDefinitionName(node.node, docText);
-				if (name) {
+				if(name) {
 					definitions[name] = {
 						from: node.from,
 						to: node.to,
@@ -462,12 +462,12 @@ function buildCallSiteAnalysis(tree, docText) {
 	function getDefinitionAtPosition(pos) {
 		var bestMatch = null;
 		var bestSize = Infinity;
-		for (var name in definitions) {
+		for(var name in definitions) {
 			var def = definitions[name];
-			if (pos >= def.from && pos <= def.to) {
+			if(pos >= def.from && pos <= def.to) {
 				// For nested definitions, return the innermost (smallest range)
 				var size = def.to - def.from;
-				if (size < bestSize) {
+				if(size < bestSize) {
 					bestMatch = name;
 					bestSize = size;
 				}
@@ -479,10 +479,10 @@ function buildCallSiteAnalysis(tree, docText) {
 	// Second pass: collect all call sites with their scope context
 	tree.iterate({
 		enter: function(node) {
-			if (node.type.name === "MacroName") {
+			if(node.type.name === "MacroName") {
 				var calledName = docText.slice(node.from, node.to).trim();
 				// Only track calls to known local definitions
-				if (callSites[calledName] !== undefined) {
+				if(callSites[calledName] !== undefined) {
 					var callerDef = getDefinitionAtPosition(node.from);
 					var scopeVars = getVariablesInScope(node.node, docText);
 					callSites[calledName].push({
@@ -511,8 +511,8 @@ function buildCallSiteAnalysis(tree, docText) {
  * @returns {{vars: Set<string>, prefixes: string[]}} All variables and prefixes potentially in scope
  */
 function getCallSiteReachableScope(defName, callAnalysis, visited) {
-	if (!visited) visited = new Set();
-	if (visited.has(defName)) return {
+	if(!visited) visited = new Set();
+	if(visited.has(defName)) return {
 		vars: new Set(),
 		prefixes: []
 	}; // Cycle detection
@@ -522,14 +522,14 @@ function getCallSiteReachableScope(defName, callAnalysis, visited) {
 	var reachablePrefixes = [];
 	var sites = callAnalysis.callSites[defName];
 
-	if (!sites || sites.length === 0) {
+	if(!sites || sites.length === 0) {
 		return {
 			vars: reachableVars,
 			prefixes: reachablePrefixes
 		};
 	}
 
-	for (var i = 0; i < sites.length; i++) {
+	for(var i = 0; i < sites.length; i++) {
 		var site = sites[i];
 		// Add direct scope variables at this call site
 		// site.scopeVars is now {vars: Set, prefixes: []}
@@ -537,17 +537,17 @@ function getCallSiteReachableScope(defName, callAnalysis, visited) {
 			reachableVars.add(v);
 		});
 		site.scopeVars.prefixes.forEach(function(p) {
-			if (reachablePrefixes.indexOf(p) === -1) reachablePrefixes.push(p);
+			if(reachablePrefixes.indexOf(p) === -1) reachablePrefixes.push(p);
 		});
 
 		// If called from within another definition, recursively get that definition's reachable scope
-		if (site.callerDef) {
+		if(site.callerDef) {
 			var callerScope = getCallSiteReachableScope(site.callerDef, callAnalysis, new Set(visited));
 			callerScope.vars.forEach(function(v) {
 				reachableVars.add(v);
 			});
 			callerScope.prefixes.forEach(function(p) {
-				if (reachablePrefixes.indexOf(p) === -1) reachablePrefixes.push(p);
+				if(reachablePrefixes.indexOf(p) === -1) reachablePrefixes.push(p);
 			});
 		}
 	}
@@ -569,7 +569,7 @@ function getCallSiteReachableScope(defName, callAnalysis, visited) {
  */
 function tiddlerExists(title, wiki) {
 	wiki = wiki || $tw.wiki;
-	if (!wiki) return true;
+	if(!wiki) return true;
 	return wiki.tiddlerExists(title) || wiki.isShadowTiddler(title);
 }
 
@@ -586,9 +586,9 @@ var CACHE_DURATION = 5000; // 5 seconds
  */
 function getKnownDefinitions() {
 	var now = Date.now();
-	if (_knownDefinitions && (now - _definitionsCacheTime) < CACHE_DURATION) {
+	if(_knownDefinitions && (now - _definitionsCacheTime) < CACHE_DURATION) {
 		// Only use cache if it has some widgets (meaning TW was initialized)
-		if (_knownDefinitions.widgets.size > 0) {
+		if(_knownDefinitions.widgets.size > 0) {
 			return _knownDefinitions;
 		}
 	}
@@ -600,17 +600,17 @@ function getKnownDefinitions() {
 		widgets: new Set()
 	};
 
-	if (!$tw) return definitions;
+	if(!$tw) return definitions;
 
 	// Built-in JavaScript macros
-	if ($tw.macros) {
+	if($tw.macros) {
 		Object.keys($tw.macros).forEach(function(name) {
 			definitions.macros.add(name);
 		});
 	}
 
 	// Core widgets from $tw.widgets
-	if ($tw.widgets) {
+	if($tw.widgets) {
 		Object.keys($tw.widgets).forEach(function(name) {
 			// Widgets in $tw.widgets are stored without the $ prefix
 			definitions.widgets.add("$" + name);
@@ -618,11 +618,11 @@ function getKnownDefinitions() {
 	}
 
 	// Also check widget modules using TiddlyWiki's module API
-	if ($tw.modules && $tw.modules.forEachModuleOfType) {
+	if($tw.modules && $tw.modules.forEachModuleOfType) {
 		$tw.modules.forEachModuleOfType("widget", function(title, moduleExports) {
-			if (moduleExports) {
+			if(moduleExports) {
 				Object.keys(moduleExports).forEach(function(exportName) {
-					if (exportName && typeof exportName === "string") {
+					if(exportName && typeof exportName === "string") {
 						// Widgets are exported without $ prefix, add it
 						definitions.widgets.add("$" + exportName);
 					}
@@ -632,47 +632,47 @@ function getKnownDefinitions() {
 	}
 
 	// Scan tiddlers for definitions
-	if ($tw.wiki) {
+	if($tw.wiki) {
 		var tiddlers = $tw.wiki.filterTiddlers("[all[tiddlers+shadows]has[text]]");
 		tiddlers.forEach(function(title) {
 			var tiddler = $tw.wiki.getTiddler(title);
-			if (!tiddler) {
+			if(!tiddler) {
 				// Try shadow
-				if ($tw.wiki.isShadowTiddler(title)) {
+				if($tw.wiki.isShadowTiddler(title)) {
 					var pluginTitle = $tw.wiki.getShadowSource(title);
-					if (pluginTitle) {
+					if(pluginTitle) {
 						var pluginInfo = $tw.wiki.getPluginInfo(pluginTitle);
-						if (pluginInfo && pluginInfo.tiddlers && pluginInfo.tiddlers[title]) {
+						if(pluginInfo && pluginInfo.tiddlers && pluginInfo.tiddlers[title]) {
 							tiddler = new $tw.Tiddler(pluginInfo.tiddlers[title]);
 						}
 					}
 				}
 			}
-			if (!tiddler || !tiddler.fields.text) return;
+			if(!tiddler || !tiddler.fields.text) return;
 
 			var text = tiddler.fields.text;
 
 			// Match \define
 			var defineMatches = text.matchAll(/\\define\s+([^\s(]+)/g);
-			for (var match of defineMatches) {
+			for(var match of defineMatches) {
 				definitions.macros.add(match[1]);
 			}
 
 			// Match \procedure
 			var procMatches = text.matchAll(/\\procedure\s+([^\s(]+)/g);
-			for (var match of procMatches) {
+			for(var match of procMatches) {
 				definitions.procedures.add(match[1]);
 			}
 
 			// Match \function
 			var funcMatches = text.matchAll(/\\function\s+([^\s(]+)/g);
-			for (var match of funcMatches) {
+			for(var match of funcMatches) {
 				definitions.functions.add(match[1]);
 			}
 
 			// Match \widget
 			var widgetMatches = text.matchAll(/\\widget\s+([^\s(]+)/g);
-			for (var match of widgetMatches) {
+			for(var match of widgetMatches) {
 				definitions.widgets.add(match[1]);
 			}
 		});
@@ -690,13 +690,13 @@ function isDefinitionKnown(name, type) {
 	var defs = getKnownDefinitions();
 
 	// Check all types since <<name>> can call any of them
-	if (type === "macro" || type === "any") {
-		if (defs.macros.has(name) || defs.procedures.has(name) || defs.functions.has(name)) {
+	if(type === "macro" || type === "any") {
+		if(defs.macros.has(name) || defs.procedures.has(name) || defs.functions.has(name)) {
 			return true;
 		}
 	}
 
-	if (type === "widget") {
+	if(type === "widget") {
 		// Normalize widget name and check both with and without $ prefix
 		var withDollar = name.startsWith("$") ? name : "$" + name;
 		var withoutDollar = name.startsWith("$") ? name.substring(1) : name;
@@ -724,89 +724,89 @@ function extractLocalDefinitions(text) {
 
 	// Match \define (supports indented pragmas)
 	var defineMatches = text.matchAll(/\\define\s+([^\s(]+)/g);
-	for (var match of defineMatches) {
+	for(var match of defineMatches) {
 		definitions.macros.add(match[1].trim());
 	}
 
 	// Match \procedure (supports indented pragmas)
 	var procMatches = text.matchAll(/\\procedure\s+([^\s(]+)/g);
-	for (var match of procMatches) {
+	for(var match of procMatches) {
 		definitions.procedures.add(match[1].trim());
 	}
 
 	// Match \function (supports indented pragmas)
 	var funcMatches = text.matchAll(/\\function\s+([^\s(]+)/g);
-	for (var match of funcMatches) {
+	for(var match of funcMatches) {
 		definitions.functions.add(match[1].trim());
 	}
 
 	// Match \widget (supports indented pragmas)
 	var widgetMatches = text.matchAll(/\\widget\s+([^\s(]+)/g);
-	for (var match of widgetMatches) {
+	for(var match of widgetMatches) {
 		definitions.widgets.add(match[1].trim());
 	}
 
 	// Match <$set name="varName">, <$setvariable name="varName">, <$qualify name="varName"> - extract name attribute
 	var setMatches = text.matchAll(/<\$(?:set|setvariable|qualify)\s+[^>]*name\s*=\s*["']([^"']+)["']/gi);
-	for (var match of setMatches) {
-		if (match[1]) definitions.variables.add(match[1]);
+	for(var match of setMatches) {
+		if(match[1]) definitions.variables.add(match[1]);
 	}
 
 	// Match <$let varName="value"> - all attributes are variables
 	var letMatches = text.matchAll(/<\$let\s+([^>]+)>/gi);
-	for (var match of letMatches) {
+	for(var match of letMatches) {
 		var attrs = match[1];
 		var attrMatches = attrs.matchAll(/([a-zA-Z_][\w-]*)\s*=/g);
-		for (var attrMatch of attrMatches) {
+		for(var attrMatch of attrMatches) {
 			definitions.variables.add(attrMatch[1]);
 		}
 	}
 
 	// Match <$vars varName="value"> - all attributes are variables
 	var varsMatches = text.matchAll(/<\$vars\s+([^>]+)>/gi);
-	for (var match of varsMatches) {
+	for(var match of varsMatches) {
 		var attrs = match[1];
 		var attrMatches = attrs.matchAll(/([a-zA-Z_][\w-]*)\s*=/g);
-		for (var attrMatch of attrMatches) {
+		for(var attrMatch of attrMatches) {
 			definitions.variables.add(attrMatch[1]);
 		}
 	}
 
 	// Match <$list variable="item" counter="idx"> - extract variable and counter
 	var listMatches = text.matchAll(/<\$list\s+[^>]*(?:variable|counter)\s*=\s*["']([^"']+)["']/gi);
-	for (var match of listMatches) {
-		if (match[1]) definitions.variables.add(match[1]);
+	for(var match of listMatches) {
+		if(match[1]) definitions.variables.add(match[1]);
 	}
 
 	// Match <$range variable="i"> - extract variable attribute
 	var rangeMatches = text.matchAll(/<\$range\s+[^>]*variable\s*=\s*["']([^"']+)["']/gi);
-	for (var match of rangeMatches) {
-		if (match[1]) definitions.variables.add(match[1]);
+	for(var match of rangeMatches) {
+		if(match[1]) definitions.variables.add(match[1]);
 	}
 
 	// Match <$wikify name="html"> - extract name attribute
 	var wikifyMatches = text.matchAll(/<\$wikify\s+[^>]*name\s*=\s*["']([^"']+)["']/gi);
-	for (var match of wikifyMatches) {
-		if (match[1]) definitions.variables.add(match[1]);
+	for(var match of wikifyMatches) {
+		if(match[1]) definitions.variables.add(match[1]);
 	}
 
 	// Match <$parameters> which defines parameter variables
 	var paramWidgetMatches = text.matchAll(/<\$parameters\s+([^>\/]+)/gi);
-	for (var match of paramWidgetMatches) {
+	for(var match of paramWidgetMatches) {
 		var attrs = match[1];
 		var attrMatches = attrs.matchAll(/([a-zA-Z_][\w-]*)\s*=/g);
-		for (var attrMatch of attrMatches) {
+		for(var attrMatch of attrMatches) {
 			definitions.variables.add(attrMatch[1]);
 		}
 	}
 
 	// Match \parameters(param1:"default" param2) pragma - extracts parameter names
 	var paramsPragmaMatches = text.matchAll(/\\parameters\s*\(([^)]*)\)/g);
-	for (var match of paramsPragmaMatches) {
+	for(var match of paramsPragmaMatches) {
 		var paramsStr = match[1];
 		// Parameters can be: name, name:"default", name:<<macro>>
 		var paramMatches = paramsStr.matchAll(/([a-zA-Z][a-zA-Z0-9_-]*)/g);
-		for (var paramMatch of paramMatches) {
+		for(var paramMatch of paramMatches) {
 			definitions.variables.add(paramMatch[1]);
 		}
 	}
@@ -814,12 +814,12 @@ function extractLocalDefinitions(text) {
 	// Extract parameter names from procedure/function/macro definitions
 	// \procedure name(param1, param2:"default")
 	var defWithParamsMatches = text.matchAll(/\\(?:define|procedure|function|widget)\s+[^\s(]+\s*\(([^)]*)\)/g);
-	for (var match of defWithParamsMatches) {
+	for(var match of defWithParamsMatches) {
 		var paramsStr = match[1];
-		if (paramsStr) {
+		if(paramsStr) {
 			// Parameters are comma or space separated, may have defaults
 			var paramMatches = paramsStr.matchAll(/([a-zA-Z][a-zA-Z0-9_-]*)/g);
-			for (var paramMatch of paramMatches) {
+			for(var paramMatch of paramMatches) {
 				definitions.variables.add(paramMatch[1]);
 			}
 		}
@@ -837,7 +837,7 @@ function extractLocalDefinitionsWithPositions(text) {
 	// Match \define, \procedure, \function, \widget with positions
 	var pragmaRe = /\\(define|procedure|function|widget)\s+([^\s(]+)(\([^)]*\))?/g;
 	var match;
-	while ((match = pragmaRe.exec(text)) !== null) {
+	while((match = pragmaRe.exec(text)) !== null) {
 		var type = match[1];
 		var name = match[2];
 		var nameStart = match.index + match[0].indexOf(name);
@@ -863,25 +863,25 @@ function findDefinitionUsages(text) {
 	// Macro calls <<name ...>>
 	var macroCallRe = /<<\s*([^\s>]+)/g;
 	var match;
-	while ((match = macroCallRe.exec(text)) !== null) {
+	while((match = macroCallRe.exec(text)) !== null) {
 		usages.add(match[1]);
 	}
 
 	// Transclusion macro calls {{...||template}}
 	var transclusionRe = /\{\{[^|{}]*\|\|([^}]+)\}\}/g;
-	while ((match = transclusionRe.exec(text)) !== null) {
+	while((match = transclusionRe.exec(text)) !== null) {
 		usages.add(match[1]);
 	}
 
 	// Function calls in filters [function[name]]
 	var filterFuncRe = /\[function\[([^\]]+)\]/g;
-	while ((match = filterFuncRe.exec(text)) !== null) {
+	while((match = filterFuncRe.exec(text)) !== null) {
 		usages.add(match[1]);
 	}
 
 	// Variable references in filters <name>
 	var filterVarRe = /<([a-zA-Z][a-zA-Z0-9_-]*)>/g;
-	while ((match = filterVarRe.exec(text)) !== null) {
+	while((match = filterVarRe.exec(text)) !== null) {
 		usages.add(match[1]);
 	}
 
@@ -897,7 +897,7 @@ function findDuplicateDefinitions(definitions) {
 
 	definitions.forEach(function(def) {
 		var key = def.name;
-		if (seen[key]) {
+		if(seen[key]) {
 			issues.push({
 				from: def.nameFrom,
 				to: def.nameTo,
@@ -920,7 +920,7 @@ function findUnusedDefinitions(definitions, usages) {
 	var issues = [];
 
 	definitions.forEach(function(def) {
-		if (!usages.has(def.name)) {
+		if(!usages.has(def.name)) {
 			issues.push({
 				from: def.nameFrom,
 				to: def.nameTo,
@@ -946,11 +946,11 @@ var _knownFilterOperators = null;
  * Get known filter operators from TiddlyWiki
  */
 function _getKnownFilterOperators() {
-	if (_knownFilterOperators) return _knownFilterOperators;
+	if(_knownFilterOperators) return _knownFilterOperators;
 
 	var operators = new Set();
 
-	if ($tw && $tw.wiki && $tw.wiki.filterOperators) {
+	if($tw && $tw.wiki && $tw.wiki.filterOperators) {
 		Object.keys($tw.wiki.filterOperators).forEach(function(name) {
 			operators.add(name);
 		});
@@ -999,16 +999,16 @@ var TAG_CACHE_DURATION = 5000; // 5 seconds
  */
 function getKnownTags() {
 	var now = Date.now();
-	if (_knownTags && (now - _tagsCacheTime) < TAG_CACHE_DURATION) {
+	if(_knownTags && (now - _tagsCacheTime) < TAG_CACHE_DURATION) {
 		return _knownTags;
 	}
 
 	var tags = new Set();
 
-	if ($tw && $tw.wiki) {
+	if($tw && $tw.wiki) {
 		try {
 			var tagList = $tw.wiki.filterTiddlers("[all[tiddlers+shadows]is[tag]]");
-			if (tagList && Array.isArray(tagList)) {
+			if(tagList && Array.isArray(tagList)) {
 				tagList.forEach(function(tag) {
 					tags.add(tag);
 				});
@@ -1027,7 +1027,7 @@ function getKnownTags() {
  * Check if a tag exists
  */
 function tagExists(tagName) {
-	if (!$tw || !$tw.wiki) return true; // Assume exists if we can't check
+	if(!$tw || !$tw.wiki) return true; // Assume exists if we can't check
 	var knownTags = getKnownTags();
 	return knownTags.has(tagName);
 }
@@ -1042,7 +1042,7 @@ function findInvalidTagReferences(tree, state) {
 	tree.iterate({
 		enter: function(node) {
 			// Look for FilterOperator nodes
-			if (node.type.name === "FilterOperator") {
+			if(node.type.name === "FilterOperator") {
 				var text = state.doc.sliceString(node.from, node.to);
 
 				// Match tag[...] or tagging[...] patterns
@@ -1051,18 +1051,18 @@ function findInvalidTagReferences(tree, state) {
 				var taggingMatch = text.match(/^(!?)tagging(?::[^\[]*)?(\[[^\]]+\])/);
 
 				var match = tagMatch || taggingMatch;
-				if (match) {
+				if(match) {
 					var operatorName = tagMatch ? "tag" : "tagging";
 					var bracketPart = match[2]; // e.g., [TagName]
 					var tagName = bracketPart.slice(1, -1); // Remove [ and ]
 
 					// Skip if empty, variable reference, or text reference
-					if (!tagName || tagName.startsWith("<") || tagName.startsWith("{")) {
+					if(!tagName || tagName.startsWith("<") || tagName.startsWith("{")) {
 						return;
 					}
 
 					// Check if tag exists
-					if (!tagExists(tagName)) {
+					if(!tagExists(tagName)) {
 						// Calculate position of the tag name within the operator
 						var bracketStart = text.indexOf("[");
 						var tagFrom = node.from + bracketStart + 1;
@@ -1098,15 +1098,15 @@ function _findUnmatchedBrackets(text, openSeq, closeSeq, startPos) {
 	var openLen = openSeq.length;
 	var closeLen = closeSeq.length;
 
-	while (i < text.length) {
-		if (text.substring(i, i + openLen) === openSeq) {
+	while(i < text.length) {
+		if(text.substring(i, i + openLen) === openSeq) {
 			stack.push({
 				pos: startPos + i,
 				char: openSeq
 			});
 			i += openLen;
-		} else if (text.substring(i, i + closeLen) === closeSeq) {
-			if (stack.length > 0) {
+		} else if(text.substring(i, i + closeLen) === closeSeq) {
+			if(stack.length > 0) {
 				stack.pop();
 			} else {
 				unmatched.push({
@@ -1143,24 +1143,24 @@ function checkFilterBrackets(text, startPos) {
 	var angleStack = [];
 	var i = 0;
 
-	while (i < text.length) {
+	while(i < text.length) {
 		var char = text[i];
 		var nextChar = text[i + 1] || "";
 
 		// Skip quoted strings
-		if (char === '"') {
+		if(char === '"') {
 			i++;
-			while (i < text.length && text[i] !== '"') {
-				if (text[i] === "\\") i++;
+			while(i < text.length && text[i] !== '"') {
+				if(text[i] === "\\") i++;
 				i++;
 			}
 			i++;
 			continue;
 		}
-		if (char === "'") {
+		if(char === "'") {
 			i++;
-			while (i < text.length && text[i] !== "'") {
-				if (text[i] === "\\") i++;
+			while(i < text.length && text[i] !== "'") {
+				if(text[i] === "\\") i++;
 				i++;
 			}
 			i++;
@@ -1168,10 +1168,10 @@ function checkFilterBrackets(text, startPos) {
 		}
 
 		// Check brackets
-		if (char === "[") {
+		if(char === "[") {
 			squareStack.push(startPos + i);
-		} else if (char === "]") {
-			if (squareStack.length > 0) {
+		} else if(char === "]") {
+			if(squareStack.length > 0) {
 				squareStack.pop();
 			} else {
 				issues.push({
@@ -1179,10 +1179,10 @@ function checkFilterBrackets(text, startPos) {
 					message: "Unexpected ']' in filter"
 				});
 			}
-		} else if (char === "{") {
+		} else if(char === "{") {
 			curlyStack.push(startPos + i);
-		} else if (char === "}") {
-			if (curlyStack.length > 0) {
+		} else if(char === "}") {
+			if(curlyStack.length > 0) {
 				curlyStack.pop();
 			} else {
 				issues.push({
@@ -1190,12 +1190,12 @@ function checkFilterBrackets(text, startPos) {
 					message: "Unexpected '}' in filter"
 				});
 			}
-		} else if (char === "<" && nextChar !== "%" && nextChar !== "!" && nextChar !== "/") {
+		} else if(char === "<" && nextChar !== "%" && nextChar !== "!" && nextChar !== "/") {
 			// < for variables, but not <% or <!-- or </
 			angleStack.push(startPos + i);
-		} else if (char === ">" && text[i - 1] !== "%" && text[i - 1] !== "-") {
+		} else if(char === ">" && text[i - 1] !== "%" && text[i - 1] !== "-") {
 			// > closing variable, but not %> or ->
-			if (angleStack.length > 0) {
+			if(angleStack.length > 0) {
 				angleStack.pop();
 			}
 			// Don't report unmatched > as it could be comparison operator
@@ -1241,10 +1241,10 @@ function findBestInsertPosition(state, afterPos, containerLimit, allTagPositions
 
 	// 1. Look for next empty line after the opening tag
 	var lineAfter = state.doc.lineAt(afterPos);
-	for (var lineNum = lineAfter.number + 1; lineNum <= state.doc.lines; lineNum++) {
+	for(var lineNum = lineAfter.number + 1; lineNum <= state.doc.lines; lineNum++) {
 		var line = state.doc.line(lineNum);
-		if (line.from >= limit) break;
-		if (line.text.trim() === "") {
+		if(line.from >= limit) break;
+		if(line.text.trim() === "") {
 			// Found empty line - insert at start of this line
 			return {
 				pos: line.from,
@@ -1255,15 +1255,15 @@ function findBestInsertPosition(state, afterPos, containerLimit, allTagPositions
 
 	// 2. Look for next tag after the opening tag but before limit
 	var nextTagPos = null;
-	for (var i = 0; i < allTagPositions.length; i++) {
+	for(var i = 0; i < allTagPositions.length; i++) {
 		var tagPos = allTagPositions[i];
-		if (tagPos > afterPos && tagPos < limit) {
-			if (nextTagPos === null || tagPos < nextTagPos) {
+		if(tagPos > afterPos && tagPos < limit) {
+			if(nextTagPos === null || tagPos < nextTagPos) {
 				nextTagPos = tagPos;
 			}
 		}
 	}
-	if (nextTagPos !== null) {
+	if(nextTagPos !== null) {
 		return {
 			pos: nextTagPos,
 			type: "beforeTag"
@@ -1271,7 +1271,7 @@ function findBestInsertPosition(state, afterPos, containerLimit, allTagPositions
 	}
 
 	// 3. Use container limit if available
-	if (typeof containerLimit === "number" && containerLimit < docLength) {
+	if(typeof containerLimit === "number" && containerLimit < docLength) {
 		return {
 			pos: containerLimit,
 			type: "containerEnd"
@@ -1301,35 +1301,35 @@ function findUnclosedWidgets(tree, state) {
 			var nodeType = node.type.name;
 
 			// Collect tag positions for insertion logic
-			if (nodeType === "Widget" || nodeType === "InlineWidget" ||
+			if(nodeType === "Widget" || nodeType === "InlineWidget" ||
 				nodeType === "WidgetEnd" || nodeType === "HTMLBlock" || nodeType === "HTMLTag") {
 				allTagPositions.push(node.from);
 			}
 
 			// Track containing structures
-			if (nodeType === "MacroDefinition" || nodeType === "ProcedureDefinition" ||
+			if(nodeType === "MacroDefinition" || nodeType === "ProcedureDefinition" ||
 				nodeType === "FunctionDefinition" || nodeType === "WidgetDefinition" ||
 				nodeType === "Widget" || nodeType === "InlineWidget" ||
 				nodeType === "HTMLBlock" || nodeType === "HTMLTag" ||
 				nodeType === "ConditionalBlock") {
 				// For pragma definitions, find where to insert (before PragmaEnd)
 				var insertBefore = node.to;
-				if (nodeType.endsWith("Definition")) {
+				if(nodeType.endsWith("Definition")) {
 					// Look for PragmaEnd child
 					var cursor = node.node.cursor();
-					if (cursor.firstChild()) {
+					if(cursor.firstChild()) {
 						do {
-							if (cursor.name === "PragmaEnd") {
+							if(cursor.name === "PragmaEnd") {
 								insertBefore = cursor.from;
 								break;
 							}
-						} while (cursor.nextSibling());
+						} while(cursor.nextSibling());
 					}
-				} else if (nodeType === "ConditionalBlock") {
+				} else if(nodeType === "ConditionalBlock") {
 					// Look for the closing <%endif%>
 					var text = state.doc.sliceString(node.from, node.to);
 					var endifMatch = text.match(/<%\s*endif\s*%>/);
-					if (endifMatch) {
+					if(endifMatch) {
 						insertBefore = node.from + endifMatch.index;
 					}
 				}
@@ -1342,29 +1342,30 @@ function findUnclosedWidgets(tree, state) {
 			}
 
 			// Opening HTML tag (non-self-closing)
-			if (nodeType === "HTMLBlock" || nodeType === "HTMLTag") {
+			if(nodeType === "HTMLBlock" || nodeType === "HTMLTag") {
 				var tagText = state.doc.sliceString(node.from, node.to);
 				// Check if it's a closing tag or self-closing
-				if (!tagText.startsWith("</") && !/>\/\s*$/.test(tagText) && !/\/>\s*$/.test(tagText)) {
+				if(!tagText.startsWith("</") && !/>\/\s*$/.test(tagText) && !/\/>\s*$/.test(tagText)) {
 					// Extract tag name
 					var tagMatch = tagText.match(/^<([a-zA-Z][a-zA-Z0-9]*)/);
-					if (tagMatch) {
+					if(tagMatch) {
 						var tagName = tagMatch[1].toLowerCase();
 						// Skip void elements that don't need closing
 						var voidElements = ["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"];
-						if (voidElements.indexOf(tagName) === -1) {
+						if(voidElements.indexOf(tagName) === -1) {
 							// Check if the tag contains its own closing tag
 							// This happens when the parser successfully matched opening and closing tags
-							var closePattern = new RegExp("</" + tagName + ">\\s*$", "i");
-							if (closePattern.test(tagText)) {
+							// Note: Don't anchor to end - HTMLBlock may include content after the closing tag
+							var closePattern = new RegExp("</" + tagName + ">", "i");
+							if(closePattern.test(tagText)) {
 								// Self-contained tag with matching closing tag - skip
 								return;
 							}
 							// Find containing structure for limit
 							var containerLimit = null;
 							var containerType = null;
-							for (var c = containerStack.length - 1; c >= 0; c--) {
-								if (containerStack[c].from !== node.from) {
+							for(var c = containerStack.length - 1; c >= 0; c--) {
+								if(containerStack[c].from !== node.from) {
 									containerLimit = containerStack[c].insertBefore;
 									containerType = containerStack[c].type;
 									break;
@@ -1384,21 +1385,21 @@ function findUnclosedWidgets(tree, state) {
 			}
 
 			// Closing HTML tag
-			if ((nodeType === "HTMLBlock" || nodeType === "HTMLTag")) {
+			if((nodeType === "HTMLBlock" || nodeType === "HTMLTag")) {
 				var tagText = state.doc.sliceString(node.from, node.to);
 				var closeMatch = tagText.match(/^<\/([a-zA-Z][a-zA-Z0-9]*)>/);
-				if (closeMatch) {
+				if(closeMatch) {
 					var closeName = closeMatch[1].toLowerCase();
 					var foundMatch = false;
-					for (var i = htmlStack.length - 1; i >= 0; i--) {
-						if (htmlStack[i].name === closeName && !htmlStack[i].closed) {
+					for(var i = htmlStack.length - 1; i >= 0; i--) {
+						if(htmlStack[i].name === closeName && !htmlStack[i].closed) {
 							htmlStack[i].closed = true;
 							foundMatch = true;
 							break;
 						}
 					}
 					// Track orphan closing tag (no matching opening tag)
-					if (!foundMatch) {
+					if(!foundMatch) {
 						orphanClosingTags.push({
 							name: closeName,
 							from: node.from,
@@ -1410,31 +1411,31 @@ function findUnclosedWidgets(tree, state) {
 			}
 
 			// Opening widget tag
-			if (nodeType === "Widget" || nodeType === "InlineWidget") {
+			if(nodeType === "Widget" || nodeType === "InlineWidget") {
 				// Find the widget name
 				var nameNode = null;
 				var cursor = node.node.cursor();
-				if (cursor.firstChild()) {
+				if(cursor.firstChild()) {
 					do {
-						if (cursor.name === "WidgetName") {
+						if(cursor.name === "WidgetName") {
 							nameNode = cursor.node;
 							break;
 						}
-					} while (cursor.nextSibling());
+					} while(cursor.nextSibling());
 				}
 
-				if (nameNode) {
+				if(nameNode) {
 					var widgetName = state.doc.sliceString(nameNode.from, nameNode.to);
 					// Check if it's self-closing
 					var tagText = state.doc.sliceString(node.from, node.to);
 					var isSelfClosing = /\/>\s*$/.test(tagText);
 
-					if (!isSelfClosing) {
+					if(!isSelfClosing) {
 						// Find the containing structure (skip self - look at parent)
 						var containerLimit = null;
 						var containerType = null;
 						var parentIdx = containerStack.length - 2;
-						if (parentIdx >= 0) {
+						if(parentIdx >= 0) {
 							containerLimit = containerStack[parentIdx].insertBefore;
 							containerType = containerStack[parentIdx].type;
 						}
@@ -1452,22 +1453,22 @@ function findUnclosedWidgets(tree, state) {
 			}
 
 			// Closing widget tag
-			if (nodeType === "WidgetEnd") {
+			if(nodeType === "WidgetEnd") {
 				var closeText = state.doc.sliceString(node.from, node.to);
 				var closeMatch = closeText.match(/<\/(\$[\w\-\.]+)>/);
-				if (closeMatch) {
+				if(closeMatch) {
 					var closeName = closeMatch[1];
 					var foundMatch = false;
 					// Find matching open tag (search from end)
-					for (var i = widgetStack.length - 1; i >= 0; i--) {
-						if (widgetStack[i].name === closeName && !widgetStack[i].closed) {
+					for(var i = widgetStack.length - 1; i >= 0; i--) {
+						if(widgetStack[i].name === closeName && !widgetStack[i].closed) {
 							widgetStack[i].closed = true;
 							foundMatch = true;
 							break;
 						}
 					}
 					// Track orphan closing tag (no matching opening widget)
-					if (!foundMatch) {
+					if(!foundMatch) {
 						orphanClosingTags.push({
 							name: closeName,
 							from: node.from,
@@ -1481,7 +1482,7 @@ function findUnclosedWidgets(tree, state) {
 		leave: function(node) {
 			var nodeType = node.type.name;
 			// Pop from container stack when leaving
-			if (nodeType === "MacroDefinition" || nodeType === "ProcedureDefinition" ||
+			if(nodeType === "MacroDefinition" || nodeType === "ProcedureDefinition" ||
 				nodeType === "FunctionDefinition" || nodeType === "WidgetDefinition" ||
 				nodeType === "Widget" || nodeType === "InlineWidget" ||
 				nodeType === "HTMLBlock" || nodeType === "HTMLTag" ||
@@ -1493,7 +1494,7 @@ function findUnclosedWidgets(tree, state) {
 
 	// Report unclosed widgets with smart insertion positions
 	widgetStack.forEach(function(widget) {
-		if (!widget.closed) {
+		if(!widget.closed) {
 			var insertInfo = findBestInsertPosition(state, widget.to, widget.containerLimit, allTagPositions);
 			issues.push({
 				from: widget.from,
@@ -1510,7 +1511,7 @@ function findUnclosedWidgets(tree, state) {
 
 	// Report unclosed HTML tags with smart insertion positions
 	htmlStack.forEach(function(tag) {
-		if (!tag.closed) {
+		if(!tag.closed) {
 			var insertInfo = findBestInsertPosition(state, tag.to, tag.containerLimit, allTagPositions);
 			issues.push({
 				from: tag.from,
@@ -1527,7 +1528,7 @@ function findUnclosedWidgets(tree, state) {
 
 	// Report orphan closing tags (closing tags without matching opening tags)
 	orphanClosingTags.forEach(function(tag) {
-		if (tag.isWidget) {
+		if(tag.isWidget) {
 			issues.push({
 				from: tag.from,
 				to: tag.to,
@@ -1536,7 +1537,7 @@ function findUnclosedWidgets(tree, state) {
 				isOrphanClose: true,
 				isWidget: true
 			});
-		} else if (tag.isHTML) {
+		} else if(tag.isHTML) {
 			issues.push({
 				from: tag.from,
 				to: tag.to,
@@ -1568,14 +1569,14 @@ function findUnclosedPragmas(text, startPos) {
 	var lines = text.split("\n");
 	var pos = startPos;
 
-	for (var i = 0; i < lines.length; i++) {
+	for(var i = 0; i < lines.length; i++) {
 		var line = lines[i];
 		var trimmed = line.trim();
 
 		// Match opening pragmas: \define, \procedure, \function, \widget
 		// Pattern: \keyword name(params) [optional inline content]
 		var openMatch = trimmed.match(/^\\(define|procedure|function|widget)\s+([^\s(]+)(\([^)]*\))?(.*)$/);
-		if (openMatch) {
+		if(openMatch) {
 			var pragmaType = openMatch[1];
 			var pragmaName = openMatch[2];
 			var _params = openMatch[3] || "";
@@ -1589,7 +1590,7 @@ function findUnclosedPragmas(text, startPos) {
 			//          \end
 			var isSingleLine = afterParams.trim().length > 0;
 
-			if (!isSingleLine) {
+			if(!isSingleLine) {
 				// Multi-line pragma needs \end
 				pragmaStack.push({
 					type: pragmaType,
@@ -1603,15 +1604,15 @@ function findUnclosedPragmas(text, startPos) {
 
 		// Match closing pragmas
 		var closeMatch = trimmed.match(/^\\end\s*(\S*)/);
-		if (closeMatch) {
+		if(closeMatch) {
 			var endName = closeMatch[1];
 			var endPos = pos + line.indexOf("\\end");
 			var endLength = closeMatch[0].length;
 
-			if (!endName && pragmaStack.length > 0) {
+			if(!endName && pragmaStack.length > 0) {
 				// Bare \end - suggest using named form for clarity
 				var suggestedName = pragmaStack[pragmaStack.length - 1].name;
-				if (pragmaStack.length > 1) {
+				if(pragmaStack.length > 1) {
 					// Ambiguous: multiple pragmas open
 					var openNames = pragmaStack.map(function(p) {
 						return p.name;
@@ -1634,20 +1635,20 @@ function findUnclosedPragmas(text, startPos) {
 				}
 			}
 
-			if (pragmaStack.length > 0) {
+			if(pragmaStack.length > 0) {
 				// Find matching pragma
 				var foundIndex = -1;
-				for (var j = pragmaStack.length - 1; j >= 0; j--) {
-					if (!endName || pragmaStack[j].name === endName) {
+				for(var j = pragmaStack.length - 1; j >= 0; j--) {
+					if(!endName || pragmaStack[j].name === endName) {
 						foundIndex = j;
 						break;
 					}
 				}
 
-				if (foundIndex >= 0) {
+				if(foundIndex >= 0) {
 					// Check for any nested pragmas that weren't closed before this \end
 					// These are pragmas at indices > foundIndex (opened after the one we're closing)
-					for (var k = pragmaStack.length - 1; k > foundIndex; k--) {
+					for(var k = pragmaStack.length - 1; k > foundIndex; k--) {
 						var unclosed = pragmaStack[k];
 						issues.push({
 							from: unclosed.pos,
@@ -1660,7 +1661,7 @@ function findUnclosedPragmas(text, startPos) {
 					}
 					// Remove the matched pragma and all nested ones
 					pragmaStack.splice(foundIndex);
-				} else if (endName) {
+				} else if(endName) {
 					// Named \end but no matching pragma found
 					issues.push({
 						from: endPos,
@@ -1729,20 +1730,20 @@ function findMisplacedPragmas(text, startPos) {
 	var pragmaSimpleRe = /^\\(import|rules|whitespace|parameters)\b/;
 	var pragmaCloseRe = /^\\end\b/;
 
-	for (var i = 0; i < lines.length; i++) {
+	for(var i = 0; i < lines.length; i++) {
 		var line = lines[i];
 		var trimmed = line.trim();
 
 		// Skip blank lines
-		if (trimmed === "") {
+		if(trimmed === "") {
 			pos += line.length + 1;
 			continue;
 		}
 
 		// Handle multi-line comment tracking
-		if (inMultiLineComment) {
+		if(inMultiLineComment) {
 			// Check if this line ends the comment
-			if (trimmed.indexOf("-->") !== -1) {
+			if(trimmed.indexOf("-->") !== -1) {
 				inMultiLineComment = false;
 			}
 			// Skip this line (it's part of a comment)
@@ -1751,22 +1752,22 @@ function findMisplacedPragmas(text, startPos) {
 		}
 
 		// Check for single-line comment (contains both <!-- and -->)
-		if (trimmed.indexOf("<!--") !== -1 && trimmed.indexOf("-->") !== -1) {
+		if(trimmed.indexOf("<!--") !== -1 && trimmed.indexOf("-->") !== -1) {
 			// Single-line comment - skip it
 			pos += line.length + 1;
 			continue;
 		}
 
 		// Check for start of multi-line comment
-		if (trimmed.indexOf("<!--") !== -1) {
+		if(trimmed.indexOf("<!--") !== -1) {
 			inMultiLineComment = true;
 			pos += line.length + 1;
 			continue;
 		}
 
 		// Check for pragma close
-		if (pragmaCloseRe.test(trimmed)) {
-			if (pragmaStack.length > 0) {
+		if(pragmaCloseRe.test(trimmed)) {
+			if(pragmaStack.length > 0) {
 				pragmaStack.pop();
 			}
 			pos += line.length + 1;
@@ -1775,7 +1776,7 @@ function findMisplacedPragmas(text, startPos) {
 
 		// Check for pragma open (multi-line ones)
 		var pragmaOpenMatch = trimmed.match(pragmaOpenRe);
-		if (pragmaOpenMatch) {
+		if(pragmaOpenMatch) {
 			var pragmaType = pragmaOpenMatch[1];
 			var pragmaName = pragmaOpenMatch[2];
 
@@ -1788,7 +1789,7 @@ function findMisplacedPragmas(text, startPos) {
 				pragmaStack[pragmaStack.length - 1].foundContent :
 				foundContentAtRoot;
 
-			if (contentAppearedAtScope) {
+			if(contentAppearedAtScope) {
 				// This pragma appears after content - invalid
 				var containingPragma = pragmaStack.length > 0 ? pragmaStack[pragmaStack.length - 1] : null;
 				var scopeDesc = containingPragma ?
@@ -1802,7 +1803,7 @@ function findMisplacedPragmas(text, startPos) {
 				});
 			}
 
-			if (!isSingleLine) {
+			if(!isSingleLine) {
 				// Body starts after this line (pos + line.length + 1 for the newline)
 				var bodyStart = pos + line.length + 1;
 				pragmaStack.push({
@@ -1818,12 +1819,12 @@ function findMisplacedPragmas(text, startPos) {
 
 		// Check for simple pragmas (single-line only)
 		var pragmaSimpleMatch = trimmed.match(pragmaSimpleRe);
-		if (pragmaSimpleMatch) {
+		if(pragmaSimpleMatch) {
 			var contentAppearedAtScope = pragmaStack.length > 0 ?
 				pragmaStack[pragmaStack.length - 1].foundContent :
 				foundContentAtRoot;
 
-			if (contentAppearedAtScope) {
+			if(contentAppearedAtScope) {
 				var containingPragma = pragmaStack.length > 0 ? pragmaStack[pragmaStack.length - 1] : null;
 				var scopeDesc = containingPragma ?
 					"within \\" + containingPragma.type + " " + containingPragma.name :
@@ -1840,15 +1841,15 @@ function findMisplacedPragmas(text, startPos) {
 		}
 
 		// Line continuation (lone backslash)
-		if (trimmed === "\\") {
+		if(trimmed === "\\") {
 			pos += line.length + 1;
 			continue;
 		}
 
 		// This is regular content - mark that we've found content at current scope
 		// (unless it's another backslash-something that we don't recognize)
-		if (!trimmed.startsWith("\\")) {
-			if (pragmaStack.length > 0) {
+		if(!trimmed.startsWith("\\")) {
+			if(pragmaStack.length > 0) {
 				pragmaStack[pragmaStack.length - 1].foundContent = true;
 			} else {
 				foundContentAtRoot = true;
@@ -1877,14 +1878,14 @@ function findUnclosedConditionals(tree, state) {
 			var nodeType = node.type.name;
 
 			// Check ConditionalBlock nodes for missing <%endif%>
-			if (nodeType === "ConditionalBlock") {
+			if(nodeType === "ConditionalBlock") {
 				var text = state.doc.sliceString(node.from, node.to);
 
 				// Check if block has <%if but no <%endif
 				var hasIf = /<%\s*if\b/.test(text);
 				var hasEndif = /<%\s*endif\s*%>/.test(text);
 
-				if (hasIf && !hasEndif) {
+				if(hasIf && !hasEndif) {
 					// Find the <%if position for the error marker
 					var ifMatch = text.match(/<%\s*if\b[^%]*%>/);
 					var ifFrom = node.from;
@@ -1904,23 +1905,23 @@ function findUnclosedConditionals(tree, state) {
 			}
 
 			// Also check for inline Conditional nodes (<%if%> on single line without block structure)
-			if (nodeType === "Conditional") {
+			if(nodeType === "Conditional") {
 				var text = state.doc.sliceString(node.from, node.to);
 
 				// Only flag <%if that aren't inside a ConditionalBlock
-				if (/<%\s*if\b/.test(text)) {
+				if(/<%\s*if\b/.test(text)) {
 					// Check if parent is ConditionalBlock
 					var parent = node.node.parent;
 					var inBlock = false;
-					while (parent) {
-						if (parent.name === "ConditionalBlock") {
+					while(parent) {
+						if(parent.name === "ConditionalBlock") {
 							inBlock = true;
 							break;
 						}
 						parent = parent.parent;
 					}
 
-					if (!inBlock) {
+					if(!inBlock) {
 						var insertInfo = findBestInsertPosition(state, node.to, docLength, []);
 						issues.push({
 							from: node.from,
@@ -1933,18 +1934,18 @@ function findUnclosedConditionals(tree, state) {
 				}
 
 				// Check for standalone <%endif without <%if
-				if (/<%\s*endif\s*%>/.test(text)) {
+				if(/<%\s*endif\s*%>/.test(text)) {
 					var parent = node.node.parent;
 					var inBlock = false;
-					while (parent) {
-						if (parent.name === "ConditionalBlock") {
+					while(parent) {
+						if(parent.name === "ConditionalBlock") {
 							inBlock = true;
 							break;
 						}
 						parent = parent.parent;
 					}
 
-					if (!inBlock) {
+					if(!inBlock) {
 						issues.push({
 							from: node.from,
 							to: node.to,
@@ -1973,16 +1974,16 @@ function findUnclosedCodeBlocks(state) {
 	var lines = text.split("\n");
 	var pos = 0;
 
-	for (var i = 0; i < lines.length; i++) {
+	for(var i = 0; i < lines.length; i++) {
 		var line = lines[i];
 		var trimmed = line.trim();
 
 		// Check for ``` at start of line
-		if (trimmed.startsWith("```")) {
-			if (stack.length > 0 && trimmed === "```") {
+		if(trimmed.startsWith("```")) {
+			if(stack.length > 0 && trimmed === "```") {
 				// Closing
 				stack.pop();
-			} else if (trimmed.startsWith("```")) {
+			} else if(trimmed.startsWith("```")) {
 				// Opening (possibly with language)
 				stack.push({
 					pos: pos + line.indexOf("```"),
@@ -1993,10 +1994,10 @@ function findUnclosedCodeBlocks(state) {
 		}
 
 		// Check for $$$ typed blocks
-		if (trimmed.startsWith("$$$")) {
-			if (stack.length > 0 && stack[stack.length - 1].type === "$$$" && trimmed === "$$$") {
+		if(trimmed.startsWith("$$$")) {
+			if(stack.length > 0 && stack[stack.length - 1].type === "$$$" && trimmed === "$$$") {
 				stack.pop();
-			} else if (trimmed.startsWith("$$$")) {
+			} else if(trimmed.startsWith("$$$")) {
 				stack.push({
 					pos: pos + line.indexOf("$$$"),
 					lineNum: i,
@@ -2019,9 +2020,9 @@ function findUnclosedCodeBlocks(state) {
 
 		// Look for next empty line after the opening marker
 		var lineAfter = state.doc.lineAt(item.lineEnd);
-		for (var lineNum = lineAfter.number + 1; lineNum <= state.doc.lines; lineNum++) {
+		for(var lineNum = lineAfter.number + 1; lineNum <= state.doc.lines; lineNum++) {
 			var line = state.doc.line(lineNum);
-			if (line.text.trim() === "") {
+			if(line.text.trim() === "") {
 				insertPos = line.from;
 				insertType = "emptyLine";
 				break;
@@ -2053,10 +2054,10 @@ function findEmptyFilterOperators(tree, state) {
 
 	tree.iterate({
 		enter: function(node) {
-			if (node.type.name === "FilterOperator") {
+			if(node.type.name === "FilterOperator") {
 				var text = state.doc.sliceString(node.from, node.to);
 				// Check for empty operator []
-				if (/^\[\s*\]$/.test(text)) {
+				if(/^\[\s*\]$/.test(text)) {
 					issues.push({
 						from: node.from,
 						to: node.to,
@@ -2078,7 +2079,7 @@ function findEmptyFilterOperators(tree, state) {
  * Create linter function
  */
 function createTiddlyWikiLinter(view) {
-	if (!_syntaxTree) return [];
+	if(!_syntaxTree) return [];
 
 	var diagnostics = [];
 	var state = view.state;
@@ -2103,8 +2104,8 @@ function createTiddlyWikiLinter(view) {
 			var text = state.doc.sliceString(from, to);
 
 			// Check WikiLinks for missing tiddlers
-			if (nodeType === "LinkTarget" && isRuleEnabled("missingLinks")) {
-				if (!tiddlerExists(text)) {
+			if(nodeType === "LinkTarget" && isRuleEnabled("missingLinks")) {
+				if(!tiddlerExists(text)) {
 					diagnostics.push({
 						from: from,
 						to: to,
@@ -2116,8 +2117,8 @@ function createTiddlyWikiLinter(view) {
 			}
 
 			// Check CamelCase links
-			if (nodeType === "CamelCaseLink" && isRuleEnabled("missingLinks")) {
-				if (isCamelCaseEnabled() && !tiddlerExists(text)) {
+			if(nodeType === "CamelCaseLink" && isRuleEnabled("missingLinks")) {
+				if(isCamelCaseEnabled() && !tiddlerExists(text)) {
 					diagnostics.push({
 						from: from,
 						to: to,
@@ -2129,14 +2130,14 @@ function createTiddlyWikiLinter(view) {
 			}
 
 			// Check transclusion targets
-			if (nodeType === "TransclusionTarget" && isRuleEnabled("missingLinks")) {
+			if(nodeType === "TransclusionTarget" && isRuleEnabled("missingLinks")) {
 				var tiddlerName = text;
 				var sepIdx = text.indexOf("!!");
-				if (sepIdx === -1) sepIdx = text.indexOf("##");
-				if (sepIdx > 0) {
+				if(sepIdx === -1) sepIdx = text.indexOf("##");
+				if(sepIdx > 0) {
 					tiddlerName = text.substring(0, sepIdx);
 				}
-				if (tiddlerName && !tiddlerExists(tiddlerName)) {
+				if(tiddlerName && !tiddlerExists(tiddlerName)) {
 					diagnostics.push({
 						from: from,
 						to: to,
@@ -2148,7 +2149,7 @@ function createTiddlyWikiLinter(view) {
 			}
 
 			// Check macro calls
-			if (nodeType === "MacroName" && isRuleEnabled("undefinedMacros")) {
+			if(nodeType === "MacroName" && isRuleEnabled("undefinedMacros")) {
 				var macroName = text.trim();
 				// Check global definitions first (macros, procedures, functions)
 				var isGloballyDefined = isDefinitionKnown(macroName, "any") ||
@@ -2157,7 +2158,7 @@ function createTiddlyWikiLinter(view) {
 					localDefs.functions.has(macroName) ||
 					builtInVariables.has(macroName);
 
-				if (!isGloballyDefined) {
+				if(!isGloballyDefined) {
 					// Check scope-aware variable detection
 					// Get the actual SyntaxNode for parent traversal
 					var syntaxNode = node.node;
@@ -2165,15 +2166,15 @@ function createTiddlyWikiLinter(view) {
 					var isInScope = isVarInScope(macroName, scopeVars);
 
 					// If not in direct scope, check call-site reachable scope (dynamic scoping)
-					if (!isInScope) {
+					if(!isInScope) {
 						var containingDef = callAnalysis.getDefinitionAtPosition(from);
-						if (containingDef) {
+						if(containingDef) {
 							var reachableScope = getCallSiteReachableScope(containingDef, callAnalysis);
 							isInScope = isVarInScope(macroName, reachableScope);
 						}
 					}
 
-					if (!isInScope) {
+					if(!isInScope) {
 						diagnostics.push({
 							from: from,
 							to: to,
@@ -2186,10 +2187,10 @@ function createTiddlyWikiLinter(view) {
 			}
 
 			// Check filter variable references <varName>
-			if (nodeType === "FilterVariable" && isRuleEnabled("undefinedMacros")) {
+			if(nodeType === "FilterVariable" && isRuleEnabled("undefinedMacros")) {
 				// FilterVariable includes the angle brackets, extract the name
 				var varName = text.replace(/^<|>$/g, "").trim();
-				if (varName) {
+				if(varName) {
 					// Check global definitions first
 					var isGloballyDefined = isDefinitionKnown(varName, "any") ||
 						localDefs.macros.has(varName) ||
@@ -2197,22 +2198,22 @@ function createTiddlyWikiLinter(view) {
 						localDefs.functions.has(varName) ||
 						builtInVariables.has(varName);
 
-					if (!isGloballyDefined) {
+					if(!isGloballyDefined) {
 						// Check scope-aware variable detection
 						var syntaxNode = node.node;
 						var scopeVars = getVariablesInScope(syntaxNode, docText);
 						var isInScope = isVarInScope(varName, scopeVars);
 
 						// If not in direct scope, check call-site reachable scope (dynamic scoping)
-						if (!isInScope) {
+						if(!isInScope) {
 							var containingDef = callAnalysis.getDefinitionAtPosition(from);
-							if (containingDef) {
+							if(containingDef) {
 								var reachableScope = getCallSiteReachableScope(containingDef, callAnalysis);
 								isInScope = isVarInScope(varName, reachableScope);
 							}
 						}
 
-						if (!isInScope) {
+						if(!isInScope) {
 							diagnostics.push({
 								from: from,
 								to: to,
@@ -2226,7 +2227,7 @@ function createTiddlyWikiLinter(view) {
 			}
 
 			// Check widget names
-			if (nodeType === "WidgetName" && isRuleEnabled("unknownWidgets")) {
+			if(nodeType === "WidgetName" && isRuleEnabled("unknownWidgets")) {
 				var widgetName = text;
 				// Normalize to check both with and without $ prefix
 				var widgetWithDollar = widgetName.startsWith("$") ? widgetName : "$" + widgetName;
@@ -2240,7 +2241,7 @@ function createTiddlyWikiLinter(view) {
 					localDefs.widgets.has(widgetWithDollar) ||
 					localDefs.widgets.has(widgetWithoutDollar);
 
-				if (!isKnown && !isLocallyDefined) {
+				if(!isKnown && !isLocallyDefined) {
 					diagnostics.push({
 						from: from,
 						to: to,
@@ -2252,7 +2253,7 @@ function createTiddlyWikiLinter(view) {
 			}
 
 			// Check filter expressions for bracket issues
-			if (nodeType === "FilterExpression" && isRuleEnabled("filterSyntax")) {
+			if(nodeType === "FilterExpression" && isRuleEnabled("filterSyntax")) {
 				var filterIssues = checkFilterBrackets(text, from);
 				filterIssues.forEach(function(issue) {
 					diagnostics.push({
@@ -2271,7 +2272,7 @@ function createTiddlyWikiLinter(view) {
 	// Empty Filter Operators (with quick-fix)
 	// ========================================
 
-	if (isRuleEnabled("filterSyntax")) {
+	if(isRuleEnabled("filterSyntax")) {
 		var emptyOps = findEmptyFilterOperators(tree, state);
 		emptyOps.forEach(function(issue) {
 			diagnostics.push({
@@ -2300,7 +2301,7 @@ function createTiddlyWikiLinter(view) {
 	// Unclosed Widgets (with quick-fix)
 	// ========================================
 
-	if (isRuleEnabled("unclosedWidgets")) {
+	if(isRuleEnabled("unclosedWidgets")) {
 		var widgetIssues = findUnclosedWidgets(tree, state);
 		widgetIssues.forEach(function(issue) {
 			var tagName = issue.name || "";
@@ -2313,7 +2314,7 @@ function createTiddlyWikiLinter(view) {
 			var actions = [];
 
 			// Handle orphan closing tags (extra closing tags without matching opening)
-			if (issue.isOrphanClose) {
+			if(issue.isOrphanClose) {
 				actions.push({
 					name: "Remove closing tag",
 					apply: function(view, from, to) {
@@ -2321,9 +2322,9 @@ function createTiddlyWikiLinter(view) {
 						var afterTo = to;
 						var docLength = view.state.doc.length;
 						// Check if there's a newline after the tag
-						if (afterTo < docLength) {
+						if(afterTo < docLength) {
 							var nextChar = view.state.doc.sliceString(afterTo, afterTo + 1);
-							if (nextChar === "\n") {
+							if(nextChar === "\n") {
 								afterTo++;
 							}
 						}
@@ -2348,15 +2349,15 @@ function createTiddlyWikiLinter(view) {
 				return; // Skip the normal unclosed tag handling
 			}
 
-			if (tagName) {
+			if(tagName) {
 				(function(name, tag, pos, type, html) {
 					// Describe where it will be inserted based on insertType
 					var actionName = "Add " + tag;
-					if (type === "emptyLine") {
+					if(type === "emptyLine") {
 						actionName = "Add " + tag + " (at empty line)";
-					} else if (type === "beforeTag") {
+					} else if(type === "beforeTag") {
 						actionName = "Add " + tag + " (before next tag)";
-					} else if (type === "containerEnd") {
+					} else if(type === "containerEnd") {
 						actionName = "Add " + tag + " (before container end)";
 					}
 					// "docEnd" just uses the default "Add <tag>"
@@ -2375,14 +2376,14 @@ function createTiddlyWikiLinter(view) {
 					});
 
 					// Only add "Make self-closing" for widgets, not HTML tags
-					if (!html) {
+					if(!html) {
 						actions.push({
 							name: "Make self-closing",
 							apply: function(view, _from, _to) {
 								// Find the > and replace with />
 								var text = view.state.doc.sliceString(_from, _to);
 								var closePos = text.lastIndexOf(">");
-								if (closePos !== -1) {
+								if(closePos !== -1) {
 									var insertPos = _from + closePos;
 									view.dispatch({
 										changes: {
@@ -2413,7 +2414,7 @@ function createTiddlyWikiLinter(view) {
 	// Unclosed Pragmas (with quick-fix)
 	// ========================================
 
-	if (isRuleEnabled("unclosedPragmas")) {
+	if(isRuleEnabled("unclosedPragmas")) {
 		var pragmaIssues = findUnclosedPragmas(docText, 0);
 		pragmaIssues.forEach(function(issue) {
 			var isAmbiguous = issue.message.startsWith("Ambiguous");
@@ -2422,7 +2423,7 @@ function createTiddlyWikiLinter(view) {
 			var insertAt = issue.insertEndAt; // Position to insert \end (before parent's \end)
 
 			var actions = [];
-			if ((isAmbiguous || isBareEndHint) && issue.suggestedName) {
+			if((isAmbiguous || isBareEndHint) && issue.suggestedName) {
 				// Quick-fix: add the name to the bare \end
 				(function(name) {
 					actions.push({
@@ -2440,10 +2441,10 @@ function createTiddlyWikiLinter(view) {
 				})(issue.suggestedName);
 			}
 
-			if (!isAmbiguous && !isBareEndHint && pragmaName) {
+			if(!isAmbiguous && !isBareEndHint && pragmaName) {
 				// Use IIFE to capture insertAt value
 				(function(targetPos, name) {
-					if (typeof targetPos === "number") {
+					if(typeof targetPos === "number") {
 						// Insert before parent's \end
 						actions.push({
 							name: "Add \\end " + name + " (before parent)",
@@ -2493,7 +2494,7 @@ function createTiddlyWikiLinter(view) {
 			// Determine severity: hint for "Bare \end" suggestions, warning for others
 			var severity = issue.isHint ? "hint" : "warning";
 			// Unexpected/unmatched \end is an error
-			if (issue.message.startsWith("Unexpected") || issue.message.startsWith("Unmatched")) {
+			if(issue.message.startsWith("Unexpected") || issue.message.startsWith("Unmatched")) {
 				severity = "error";
 			}
 
@@ -2512,7 +2513,7 @@ function createTiddlyWikiLinter(view) {
 	// Misplaced Pragmas (after content)
 	// ========================================
 
-	if (isRuleEnabled("misplacedPragmas")) {
+	if(isRuleEnabled("misplacedPragmas")) {
 		var misplacedIssues = findMisplacedPragmas(docText, 0);
 		misplacedIssues.forEach(function(issue) {
 			var actionName = issue.containingPragma ?
@@ -2539,32 +2540,32 @@ function createTiddlyWikiLinter(view) {
 							var firstLineText = view.state.doc.sliceString(startLine.from, startLine.to);
 							var multiLineMatch = firstLineText.match(/^\\(define|procedure|function|widget)\s+[^\s(]+(\([^)]*\))?\s*$/);
 
-							if (multiLineMatch) {
+							if(multiLineMatch) {
 								// Multi-line pragma - find the matching \end
 								var searchStart = startLine.to + 1;
 								var depth = 1;
 								var pos = searchStart;
 
 								// Search for matching \end, handling nested pragmas
-								while (pos < docLength && depth > 0) {
+								while(pos < docLength && depth > 0) {
 									var line = view.state.doc.lineAt(pos);
 									var lineText = view.state.doc.sliceString(line.from, line.to).trim();
 
 									// Check for nested pragma open
-									if (/^\\(define|procedure|function|widget)\s+\S+/.test(lineText) &&
+									if(/^\\(define|procedure|function|widget)\s+\S+/.test(lineText) &&
 										!/^\\(define|procedure|function|widget)\s+[^\s(]+(\([^)]*\))?\s+\S/.test(lineText)) {
 										depth++;
 									}
 									// Check for \end
-									else if (/^\\end\b/.test(lineText)) {
+									else if(/^\\end\b/.test(lineText)) {
 										depth--;
-										if (depth === 0) {
+										if(depth === 0) {
 											pragmaEnd = line.to;
 										}
 									}
 
 									pos = line.to + 1;
-									if (pos > docLength) break;
+									if(pos > docLength) break;
 								}
 							}
 
@@ -2580,11 +2581,11 @@ function createTiddlyWikiLinter(view) {
 							var deleteStart = pragmaStart;
 
 							// If removing from end without trailing newline, remove preceding newline
-							if (!hasTrailingNewline && deleteStart > 0) {
+							if(!hasTrailingNewline && deleteStart > 0) {
 								deleteStart = deleteStart - 1;
 							}
 
-							if (deleteStart < targetPos) {
+							if(deleteStart < targetPos) {
 								// Removal is before insert point, adjust for removed length
 								adjustedInsertPos = targetPos - (deleteEnd - deleteStart);
 							}
@@ -2614,7 +2615,7 @@ function createTiddlyWikiLinter(view) {
 	// Unclosed Conditionals (with quick-fix)
 	// ========================================
 
-	if (isRuleEnabled("unclosedConditionals")) {
+	if(isRuleEnabled("unclosedConditionals")) {
 		var condIssues = findUnclosedConditionals(tree, state);
 		condIssues.forEach(function(issue) {
 			var insertAt = issue.insertAt;
@@ -2622,16 +2623,16 @@ function createTiddlyWikiLinter(view) {
 
 			var actions = [];
 			// Only add quick-fix for unclosed <%if, not for unexpected <%endif
-			if (typeof insertAt === "number") {
+			if(typeof insertAt === "number") {
 				// Use IIFE to capture values
 				(function(pos, type) {
 					// Describe where it will be inserted based on insertType
 					var actionName = "Add <%endif%>";
-					if (type === "emptyLine") {
+					if(type === "emptyLine") {
 						actionName = "Add <%endif%> (at empty line)";
-					} else if (type === "beforeTag") {
+					} else if(type === "beforeTag") {
 						actionName = "Add <%endif%> (before next tag)";
-					} else if (type === "containerEnd") {
+					} else if(type === "containerEnd") {
 						actionName = "Add <%endif%> (before container end)";
 					}
 
@@ -2665,7 +2666,7 @@ function createTiddlyWikiLinter(view) {
 	// Unclosed Code Blocks (with quick-fix)
 	// ========================================
 
-	if (isRuleEnabled("unclosedCodeBlocks")) {
+	if(isRuleEnabled("unclosedCodeBlocks")) {
 		var codeIssues = findUnclosedCodeBlocks(state);
 		codeIssues.forEach(function(issue) {
 			var marker = issue.marker || "```";
@@ -2676,7 +2677,7 @@ function createTiddlyWikiLinter(view) {
 			// Use IIFE to capture values
 			(function(m, pos, type) {
 				var actionName = "Add closing " + m;
-				if (type === "emptyLine") {
+				if(type === "emptyLine") {
 					actionName = "Add " + m + " (at empty line)";
 				}
 
@@ -2709,7 +2710,7 @@ function createTiddlyWikiLinter(view) {
 	// Duplicate Definitions
 	// ========================================
 
-	if (isRuleEnabled("duplicateDefinitions")) {
+	if(isRuleEnabled("duplicateDefinitions")) {
 		var defsWithPos = extractLocalDefinitionsWithPositions(docText);
 		var duplicateIssues = findDuplicateDefinitions(defsWithPos);
 		duplicateIssues.forEach(function(issue) {
@@ -2727,7 +2728,7 @@ function createTiddlyWikiLinter(view) {
 	// Unused Definitions
 	// ========================================
 
-	if (isRuleEnabled("unusedDefinitions")) {
+	if(isRuleEnabled("unusedDefinitions")) {
 		var defsWithPos = extractLocalDefinitionsWithPositions(docText);
 		var usages = findDefinitionUsages(docText);
 		var unusedIssues = findUnusedDefinitions(defsWithPos, usages);
@@ -2748,7 +2749,7 @@ function createTiddlyWikiLinter(view) {
 						// Try to find \end
 						var text = view.state.doc.toString();
 						var endMatch = text.slice(issue.defFrom).match(/\\end\s*\S*/);
-						if (endMatch) {
+						if(endMatch) {
 							var endPos = issue.defFrom + endMatch.index + endMatch[0].length;
 							endLine = view.state.doc.lineAt(endPos);
 						}
@@ -2771,7 +2772,7 @@ function createTiddlyWikiLinter(view) {
 	// Invalid Tag References
 	// ========================================
 
-	if (isRuleEnabled("invalidTags")) {
+	if(isRuleEnabled("invalidTags")) {
 		var tagIssues = findInvalidTagReferences(tree, state);
 		tagIssues.forEach(function(issue) {
 			diagnostics.push({
@@ -2797,7 +2798,7 @@ function createTiddlyWikiLinter(view) {
  */
 function isLintEnabled(wiki) {
 	wiki = wiki || $tw.wiki;
-	if (wiki) {
+	if(wiki) {
 		var enabled = (wiki.getTiddlerText("$:/config/codemirror-6/lint/enabled", "yes") || "").trim();
 		return enabled === "yes";
 	}
@@ -2811,7 +2812,7 @@ function isLintEnabled(wiki) {
  */
 function isLintDisabledForTiddler(tiddlerTitle, wiki) {
 	wiki = wiki || $tw.wiki;
-	if (!wiki || !tiddlerTitle) return false;
+	if(!wiki || !tiddlerTitle) return false;
 	// Check for per-tiddler disable via temp tiddler
 	return wiki.tiddlerExists("$:/temp/codemirror-6/lint-disabled/" + tiddlerTitle);
 }
@@ -2828,12 +2829,12 @@ function buildLintExtensions(core, context) {
 	}));
 
 	// Add gutter with lint markers
-	if (_lintGutter && context.options.lintGutter !== false) {
+	if(_lintGutter && context.options.lintGutter !== false) {
 		extensions.push(_lintGutter());
 	}
 
 	// Add keyboard shortcuts for navigating lint issues
-	if (_lintKeymap && core.view && core.view.keymap) {
+	if(_lintKeymap && core.view && core.view.keymap) {
 		extensions.push(core.view.keymap.of(_lintKeymap));
 	}
 
@@ -2848,17 +2849,17 @@ exports.plugin = {
 	// Only check content type - config-based toggling is handled via compartment
 	condition: function(context) {
 		// Disabled by default in simple editors (inputs/textareas)
-		if (context.isSimpleEditor) {
+		if(context.isSimpleEditor) {
 			return false;
 		}
 		var type = context.tiddlerType;
-		if (context.options.lint === false) return false;
+		if(context.options.lint === false) return false;
 		return !type || type === "" || type === "text/vnd.tiddlywiki" || type === "text/x-tiddlywiki";
 	},
 
 	// Register compartment for dynamic enable/disable
 	registerCompartments: function() {
-		if (!_Compartment) return {};
+		if(!_Compartment) return {};
 		return {
 			lint: new _Compartment()
 		};
@@ -2867,32 +2868,32 @@ exports.plugin = {
 	init: function(cm6Core) {
 		this._core = cm6Core;
 		// Store Compartment constructor
-		if (cm6Core.state && cm6Core.state.Compartment) {
+		if(cm6Core.state && cm6Core.state.Compartment) {
 			_Compartment = cm6Core.state.Compartment;
 		}
 		// Store syntaxTree function
-		if (cm6Core.language && cm6Core.language.syntaxTree) {
+		if(cm6Core.language && cm6Core.language.syntaxTree) {
 			_syntaxTree = cm6Core.language.syntaxTree;
 		}
 	},
 
 	getExtensions: function(context) {
-		if (!_linter || !_syntaxTree) return [];
+		if(!_linter || !_syntaxTree) return [];
 
 		// Get compartment from engine (not module-level variable)
 		var compartment = context.engine && context.engine._compartments && context.engine._compartments.lint;
-		if (!compartment) return [];
+		if(!compartment) return [];
 
 		var core = this._core;
 
 		// If globally disabled, return empty compartment
-		if (!isLintEnabled()) {
+		if(!isLintEnabled()) {
 			return [compartment.of([])];
 		}
 
 		// If disabled for this specific tiddler, return empty compartment
 		var tiddlerTitle = context.tiddlerTitle;
-		if (tiddlerTitle && isLintDisabledForTiddler(tiddlerTitle)) {
+		if(tiddlerTitle && isLintDisabledForTiddler(tiddlerTitle)) {
 			return [compartment.of([])];
 		}
 
@@ -2903,11 +2904,11 @@ exports.plugin = {
 
 	// Return raw content for compartment reconfiguration
 	getCompartmentContent: function(context) {
-		if (!_linter || !_syntaxTree) return [];
-		if (!isLintEnabled()) return [];
+		if(!_linter || !_syntaxTree) return [];
+		if(!isLintEnabled()) return [];
 		// Check per-tiddler disable
 		var tiddlerTitle = context.tiddlerTitle;
-		if (tiddlerTitle && isLintDisabledForTiddler(tiddlerTitle)) return [];
+		if(tiddlerTitle && isLintDisabledForTiddler(tiddlerTitle)) return [];
 		return buildLintExtensions(this._core, context);
 	},
 
@@ -2920,7 +2921,7 @@ exports.plugin = {
 	 * Called when tiddlers change - re-lint or reconfigure if lint config changed
 	 */
 	onRefresh: function(widget, changedTiddlers) {
-		if (!widget || !widget.engine || !widget.engine.view) {
+		if(!widget || !widget.engine || !widget.engine.view) {
 			return;
 		}
 
@@ -2934,22 +2935,22 @@ exports.plugin = {
 		var perTiddlerChanged = false;
 		var perTiddlerDisableTiddler = tiddlerTitle ? "$:/temp/codemirror-6/lint-disabled/" + tiddlerTitle : null;
 
-		for (var title in changedTiddlers) {
-			if (title === "$:/config/codemirror-6/lint/enabled") {
+		for(var title in changedTiddlers) {
+			if(title === "$:/config/codemirror-6/lint/enabled") {
 				globalConfigChanged = true;
 				lintConfigChanged = true;
-			} else if (title.indexOf("$:/config/codemirror-6/lint/") === 0) {
+			} else if(title.indexOf("$:/config/codemirror-6/lint/") === 0) {
 				lintConfigChanged = true;
-			} else if (perTiddlerDisableTiddler && title === perTiddlerDisableTiddler) {
+			} else if(perTiddlerDisableTiddler && title === perTiddlerDisableTiddler) {
 				perTiddlerChanged = true;
 			}
 		}
 
-		if (globalConfigChanged || perTiddlerChanged) {
+		if(globalConfigChanged || perTiddlerChanged) {
 			// Global lint toggle or per-tiddler toggle changed - reconfigure compartment
 			var compartment = engine._compartments && engine._compartments.lint;
 
-			if (compartment) {
+			if(compartment) {
 				var globalEnabled = isLintEnabled();
 				var perTiddlerDisabled = tiddlerTitle && isLintDisabledForTiddler(tiddlerTitle);
 				var enabled = globalEnabled && !perTiddlerDisabled;
@@ -2965,21 +2966,21 @@ exports.plugin = {
 				_knownDefinitions = null;
 
 				// If enabling, trigger linting after a short delay to let extensions initialize
-				if (enabled && _forceLinting) {
+				if(enabled && _forceLinting) {
 					setTimeout(function() {
 						_forceLinting(engine.view);
 					}, 50);
 				}
 			}
-		} else if (lintConfigChanged) {
+		} else if(lintConfigChanged) {
 			// Individual rule changed - reconfigure to force fresh linter
 			var compartment = engine._compartments && engine._compartments.lint;
 
-			if (compartment) {
+			if(compartment) {
 				// Check if lint is actually enabled for this tiddler
 				var globalEnabled = isLintEnabled();
 				var perTiddlerDisabled = tiddlerTitle && isLintDisabledForTiddler(tiddlerTitle);
-				if (!globalEnabled || perTiddlerDisabled) return;
+				if(!globalEnabled || perTiddlerDisabled) return;
 
 				var newContent = buildLintExtensions(this._core, context);
 				_knownDefinitions = null;
@@ -2991,7 +2992,7 @@ exports.plugin = {
 				} catch (_e) {}
 
 				// Trigger linting after reconfigure
-				if (_forceLinting) {
+				if(_forceLinting) {
 					setTimeout(function() {
 						_forceLinting(engine.view);
 					}, 50);
@@ -3009,7 +3010,7 @@ exports.plugin = {
 		 * Toggles the per-tiddler lint setting and reconfigures the compartment
 		 */
 		"tm-cm6-toggle-lint": function(widget, _event) {
-			if (!widget || !widget.engine || !widget.engine.view) {
+			if(!widget || !widget.engine || !widget.engine.view) {
 				return;
 			}
 
@@ -3018,7 +3019,7 @@ exports.plugin = {
 			var tiddlerTitle = context.tiddlerTitle;
 			var compartment = engine._compartments && engine._compartments.lint;
 
-			if (!compartment || !tiddlerTitle) {
+			if(!compartment || !tiddlerTitle) {
 				return;
 			}
 
@@ -3028,7 +3029,7 @@ exports.plugin = {
 
 			// Toggle the per-tiddler state by creating/deleting the temp tiddler
 			var disableTiddler = "$:/temp/codemirror-6/lint-disabled/" + tiddlerTitle;
-			if (perTiddlerDisabled) {
+			if(perTiddlerDisabled) {
 				// Currently disabled for this tiddler - delete the temp tiddler to enable
 				$tw.wiki.deleteTiddler(disableTiddler);
 			} else {
@@ -3045,18 +3046,18 @@ exports.plugin = {
 
 			// Get the plugin instance to access _core
 			var lintPlugin = null;
-			if ($tw && $tw.modules) {
+			if($tw && $tw.modules) {
 				var plugins = $tw.modules.types["codemirror6-plugin"];
-				for (var moduleName in plugins) {
+				for(var moduleName in plugins) {
 					var mod = plugins[moduleName];
-					if (mod && mod.plugin && mod.plugin.name === "lint") {
+					if(mod && mod.plugin && mod.plugin.name === "lint") {
 						lintPlugin = mod.plugin;
 						break;
 					}
 				}
 			}
 
-			if (!lintPlugin || !lintPlugin._core) {
+			if(!lintPlugin || !lintPlugin._core) {
 				return;
 			}
 
@@ -3072,7 +3073,7 @@ exports.plugin = {
 			_knownDefinitions = null;
 
 			// If enabling, trigger linting after a short delay
-			if (newEnabled && _forceLinting) {
+			if(newEnabled && _forceLinting) {
 				setTimeout(function() {
 					_forceLinting(engine.view);
 				}, 50);
