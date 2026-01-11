@@ -741,13 +741,27 @@ exports.startup = function() {
 
 	/**
 	 * Callback to get widget attributes by introspecting widget modules
-	 * Parses the widget source code to find getAttribute() calls
+	 * For custom widgets (\widget pragma), uses the macroParams cache.
+	 * For built-in widgets, parses the widget source code to find getAttribute() calls.
 	 * Returns null if introspection fails (to trigger fallback in lang-tiddlywiki)
 	 */
 	function getWidgetAttributes(widgetName) {
 		// Check cache first
 		if(widgetAttributesCache.hasOwnProperty(widgetName)) {
 			return widgetAttributesCache[widgetName];
+		}
+
+		// First check for custom widgets defined with \widget pragma
+		// These are stored in macroParams cache by getMacroNames()
+		if(!_cache.macros) {
+			getMacroNames(); // Populate cache
+		}
+		if(_cache.macroParams && _cache.macroParams[widgetName]) {
+			var customParams = _cache.macroParams[widgetName];
+			if(customParams.length > 0) {
+				widgetAttributesCache[widgetName] = customParams;
+				return customParams;
+			}
 		}
 
 		// Get the widget module name (remove $ prefix for module lookup)
