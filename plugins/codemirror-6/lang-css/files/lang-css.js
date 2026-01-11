@@ -1,1 +1,1315 @@
-"use strict";var e=require("$:/plugins/tiddlywiki/codemirror-6/lib/lezer-common.js"),t=require("$:/plugins/tiddlywiki/codemirror-6/lib/lezer-highlight.js"),s=require("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-language.js");class i{constructor(e,t,s,i,r,a,o,n,l,h=0,O){this.p=e,this.stack=t,this.state=s,this.reducePos=i,this.pos=r,this.score=a,this.buffer=o,this.bufferBase=n,this.curContext=l,this.lookAhead=h,this.parent=O}toString(){return`[${this.stack.filter((e,t)=>t%3==0).concat(this.state)}]@${this.pos}${this.score?"!"+this.score:""}`}static start(e,t,s=0){let a=e.parser.context;return new i(e,[],t,s,s,0,[],0,a?new r(a,a.start):null,0,null)}get context(){return this.curContext?this.curContext.context:null}pushState(e,t){this.stack.push(this.state,t,this.bufferBase+this.buffer.length),this.state=e}reduce(e){var t;let s=e>>19,i=65535&e,{parser:r}=this.p,a=this.reducePos<this.pos-25&&this.setLookAhead(this.pos),o=r.dynamicPrecedence(i);if(o&&(this.score+=o),0==s)return this.pushState(r.getGoto(this.state,i,!0),this.reducePos),i<r.minRepeatTerm&&this.storeNode(i,this.reducePos,this.reducePos,a?8:4,!0),void this.reduceContext(i,this.reducePos);let n=this.stack.length-3*(s-1)-(262144&e?6:0),l=n?this.stack[n-2]:this.p.ranges[0].from,h=this.reducePos-l;h>=2e3&&!(null===(t=this.p.parser.nodeSet.types[i])||void 0===t?void 0:t.isAnonymous)&&(l==this.p.lastBigReductionStart?(this.p.bigReductionCount++,this.p.lastBigReductionSize=h):this.p.lastBigReductionSize<h&&(this.p.bigReductionCount=1,this.p.lastBigReductionStart=l,this.p.lastBigReductionSize=h));let O=n?this.stack[n-1]:0,c=this.bufferBase+this.buffer.length-O;if(i<r.minRepeatTerm||131072&e){let e=r.stateFlag(this.state,1)?this.pos:this.reducePos;this.storeNode(i,l,e,c+4,!0)}if(262144&e)this.state=this.stack[n];else{let e=this.stack[n-3];this.state=r.getGoto(e,i,!0)}for(;this.stack.length>n;)this.stack.pop();this.reduceContext(i,l)}storeNode(e,t,s,i=4,r=!1){if(0==e&&(!this.stack.length||this.stack[this.stack.length-1]<this.buffer.length+this.bufferBase)){let e=this,i=this.buffer.length;if(0==i&&e.parent&&(i=e.bufferBase-e.parent.bufferBase,e=e.parent),i>0&&0==e.buffer[i-4]&&e.buffer[i-1]>-1){if(t==s)return;if(e.buffer[i-2]>=t)return void(e.buffer[i-2]=s)}}if(r&&this.pos!=s){let r=this.buffer.length;if(r>0&&(0!=this.buffer[r-4]||this.buffer[r-1]<0)){let e=!1;for(let t=r;t>0&&this.buffer[t-2]>s;t-=4)if(this.buffer[t-1]>=0){e=!0;break}if(e)for(;r>0&&this.buffer[r-2]>s;)this.buffer[r]=this.buffer[r-4],this.buffer[r+1]=this.buffer[r-3],this.buffer[r+2]=this.buffer[r-2],this.buffer[r+3]=this.buffer[r-1],r-=4,i>4&&(i-=4)}this.buffer[r]=e,this.buffer[r+1]=t,this.buffer[r+2]=s,this.buffer[r+3]=i}else this.buffer.push(e,t,s,i)}shift(e,t,s,i){if(131072&e)this.pushState(65535&e,this.pos);else if(262144&e)this.pos=i,this.shiftContext(t,s),t<=this.p.parser.maxNode&&this.buffer.push(t,s,i,4);else{let r=e,{parser:a}=this.p;this.pos=i,!a.stateFlag(r,1)&&(i>s||t<=a.maxNode)&&(this.reducePos=i),this.pushState(r,Math.min(s,this.reducePos)),this.shiftContext(t,s),t<=a.maxNode&&this.buffer.push(t,s,i,4)}}apply(e,t,s,i){65536&e?this.reduce(e):this.shift(e,t,s,i)}useNode(e,t){let s=this.p.reused.length-1;(s<0||this.p.reused[s]!=e)&&(this.p.reused.push(e),s++);let i=this.pos;this.reducePos=this.pos=i+e.length,this.pushState(t,i),this.buffer.push(s,i,this.reducePos,-1),this.curContext&&this.updateContext(this.curContext.tracker.reuse(this.curContext.context,e,this,this.p.stream.reset(this.pos-e.length)))}split(){let e=this,t=e.buffer.length;for(;t>0&&e.buffer[t-2]>e.reducePos;)t-=4;let s=e.buffer.slice(t),r=e.bufferBase+t;for(;e&&r==e.bufferBase;)e=e.parent;return new i(this.p,this.stack.slice(),this.state,this.reducePos,this.pos,this.score,s,r,this.curContext,this.lookAhead,e)}recoverByDelete(e,t){let s=e<=this.p.parser.maxNode;s&&this.storeNode(e,this.pos,t,4),this.storeNode(0,this.pos,t,s?8:4),this.pos=this.reducePos=t,this.score-=190}canShift(e){for(let t=new a(this);;){let s=this.p.parser.stateSlot(t.state,4)||this.p.parser.hasAction(t.state,e);if(0==s)return!1;if(!(65536&s))return!0;t.reduce(s)}}recoverByInsert(e){if(this.stack.length>=300)return[];let t=this.p.parser.nextStates(this.state);if(t.length>8||this.stack.length>=120){let s=[];for(let i,r=0;r<t.length;r+=2)(i=t[r+1])!=this.state&&this.p.parser.hasAction(i,e)&&s.push(t[r],i);if(this.stack.length<120)for(let e=0;s.length<8&&e<t.length;e+=2){let i=t[e+1];s.some((e,t)=>1&t&&e==i)||s.push(t[e],i)}t=s}let s=[];for(let e=0;e<t.length&&s.length<4;e+=2){let i=t[e+1];if(i==this.state)continue;let r=this.split();r.pushState(i,this.pos),r.storeNode(0,r.pos,r.pos,4,!0),r.shiftContext(t[e],this.pos),r.reducePos=this.pos,r.score-=200,s.push(r)}return s}forceReduce(){let{parser:e}=this.p,t=e.stateSlot(this.state,5);if(!(65536&t))return!1;if(!e.validAction(this.state,t)){let s=t>>19,i=65535&t,r=this.stack.length-3*s;if(r<0||e.getGoto(this.stack[r],i,!1)<0){let e=this.findForcedReduction();if(null==e)return!1;t=e}this.storeNode(0,this.pos,this.pos,4,!0),this.score-=100}return this.reducePos=this.pos,this.reduce(t),!0}findForcedReduction(){let{parser:e}=this.p,t=[],s=(i,r)=>{if(!t.includes(i))return t.push(i),e.allActions(i,t=>{if(393216&t);else if(65536&t){let s=(t>>19)-r;if(s>1){let i=65535&t,r=this.stack.length-3*s;if(r>=0&&e.getGoto(this.stack[r],i,!1)>=0)return s<<19|65536|i}}else{let e=s(t,r+1);if(null!=e)return e}})};return s(this.state,0)}forceAll(){for(;!this.p.parser.stateFlag(this.state,2);)if(!this.forceReduce()){this.storeNode(0,this.pos,this.pos,4,!0);break}return this}get deadEnd(){if(3!=this.stack.length)return!1;let{parser:e}=this.p;return 65535==e.data[e.stateSlot(this.state,1)]&&!e.stateSlot(this.state,4)}restart(){this.storeNode(0,this.pos,this.pos,4,!0),this.state=this.stack[0],this.stack.length=0}sameState(e){if(this.state!=e.state||this.stack.length!=e.stack.length)return!1;for(let t=0;t<this.stack.length;t+=3)if(this.stack[t]!=e.stack[t])return!1;return!0}get parser(){return this.p.parser}dialectEnabled(e){return this.p.parser.dialect.flags[e]}shiftContext(e,t){this.curContext&&this.updateContext(this.curContext.tracker.shift(this.curContext.context,e,this,this.p.stream.reset(t)))}reduceContext(e,t){this.curContext&&this.updateContext(this.curContext.tracker.reduce(this.curContext.context,e,this,this.p.stream.reset(t)))}emitContext(){let e=this.buffer.length-1;(e<0||-3!=this.buffer[e])&&this.buffer.push(this.curContext.hash,this.pos,this.pos,-3)}emitLookAhead(){let e=this.buffer.length-1;(e<0||-4!=this.buffer[e])&&this.buffer.push(this.lookAhead,this.pos,this.pos,-4)}updateContext(e){if(e!=this.curContext.context){let t=new r(this.curContext.tracker,e);t.hash!=this.curContext.hash&&this.emitContext(),this.curContext=t}}setLookAhead(e){return!(e<=this.lookAhead)&&(this.emitLookAhead(),this.lookAhead=e,!0)}close(){this.curContext&&this.curContext.tracker.strict&&this.emitContext(),this.lookAhead>0&&this.emitLookAhead()}}class r{constructor(e,t){this.tracker=e,this.context=t,this.hash=e.strict?e.hash(t):0}}class a{constructor(e){this.start=e,this.state=e.state,this.stack=e.stack,this.base=this.stack.length}reduce(e){let t=65535&e,s=e>>19;0==s?(this.stack==this.start.stack&&(this.stack=this.stack.slice()),this.stack.push(this.state,0,0),this.base+=3):this.base-=3*(s-1);let i=this.start.p.parser.getGoto(this.stack[this.base-3],t,!0);this.state=i}}class o{constructor(e,t,s){this.stack=e,this.pos=t,this.index=s,this.buffer=e.buffer,0==this.index&&this.maybeNext()}static create(e,t=e.bufferBase+e.buffer.length){return new o(e,t,t-e.bufferBase)}maybeNext(){let e=this.stack.parent;null!=e&&(this.index=this.stack.bufferBase-e.bufferBase,this.stack=e,this.buffer=e.buffer)}get id(){return this.buffer[this.index-4]}get start(){return this.buffer[this.index-3]}get end(){return this.buffer[this.index-2]}get size(){return this.buffer[this.index-1]}next(){this.index-=4,this.pos-=4,0==this.index&&this.maybeNext()}fork(){return new o(this.stack,this.pos,this.index)}}function n(e,t=Uint16Array){if("string"!=typeof e)return e;let s=null;for(let i=0,r=0;i<e.length;){let a=0;for(;;){let t=e.charCodeAt(i++),s=!1;if(126==t){a=65535;break}t>=92&&t--,t>=34&&t--;let r=t-32;if(r>=46&&(r-=46,s=!0),a+=r,s)break;a*=46}s?s[r++]=a:s=new t(a)}return s}class l{constructor(){this.start=-1,this.value=-1,this.end=-1,this.extended=-1,this.lookAhead=0,this.mask=0,this.context=0}}const h=new l;class O{constructor(e,t){this.input=e,this.ranges=t,this.chunk="",this.chunkOff=0,this.chunk2="",this.chunk2Pos=0,this.next=-1,this.token=h,this.rangeIndex=0,this.pos=this.chunkPos=t[0].from,this.range=t[0],this.end=t[t.length-1].to,this.readNext()}resolveOffset(e,t){let s=this.range,i=this.rangeIndex,r=this.pos+e;for(;r<s.from;){if(!i)return null;let e=this.ranges[--i];r-=s.from-e.to,s=e}for(;t<0?r>s.to:r>=s.to;){if(i==this.ranges.length-1)return null;let e=this.ranges[++i];r+=e.from-s.to,s=e}return r}clipPos(e){if(e>=this.range.from&&e<this.range.to)return e;for(let t of this.ranges)if(t.to>e)return Math.max(e,t.from);return this.end}peek(e){let t,s,i=this.chunkOff+e;if(i>=0&&i<this.chunk.length)t=this.pos+e,s=this.chunk.charCodeAt(i);else{let i=this.resolveOffset(e,1);if(null==i)return-1;if(t=i,t>=this.chunk2Pos&&t<this.chunk2Pos+this.chunk2.length)s=this.chunk2.charCodeAt(t-this.chunk2Pos);else{let e=this.rangeIndex,i=this.range;for(;i.to<=t;)i=this.ranges[++e];this.chunk2=this.input.chunk(this.chunk2Pos=t),t+this.chunk2.length>i.to&&(this.chunk2=this.chunk2.slice(0,i.to-t)),s=this.chunk2.charCodeAt(0)}}return t>=this.token.lookAhead&&(this.token.lookAhead=t+1),s}acceptToken(e,t=0){let s=t?this.resolveOffset(t,-1):this.pos;if(null==s||s<this.token.start)throw new RangeError("Token end out of bounds");this.token.value=e,this.token.end=s}acceptTokenTo(e,t){this.token.value=e,this.token.end=t}getChunk(){if(this.pos>=this.chunk2Pos&&this.pos<this.chunk2Pos+this.chunk2.length){let{chunk:e,chunkPos:t}=this;this.chunk=this.chunk2,this.chunkPos=this.chunk2Pos,this.chunk2=e,this.chunk2Pos=t,this.chunkOff=this.pos-this.chunkPos}else{this.chunk2=this.chunk,this.chunk2Pos=this.chunkPos;let e=this.input.chunk(this.pos),t=this.pos+e.length;this.chunk=t>this.range.to?e.slice(0,this.range.to-this.pos):e,this.chunkPos=this.pos,this.chunkOff=0}}readNext(){return this.chunkOff>=this.chunk.length&&(this.getChunk(),this.chunkOff==this.chunk.length)?this.next=-1:this.next=this.chunk.charCodeAt(this.chunkOff)}advance(e=1){for(this.chunkOff+=e;this.pos+e>=this.range.to;){if(this.rangeIndex==this.ranges.length-1)return this.setDone();e-=this.range.to-this.pos,this.range=this.ranges[++this.rangeIndex],this.pos=this.range.from}return this.pos+=e,this.pos>=this.token.lookAhead&&(this.token.lookAhead=this.pos+1),this.readNext()}setDone(){return this.pos=this.chunkPos=this.end,this.range=this.ranges[this.rangeIndex=this.ranges.length-1],this.chunk="",this.next=-1}reset(e,t){if(t?(this.token=t,t.start=e,t.lookAhead=e+1,t.value=t.extended=-1):this.token=h,this.pos!=e){if(this.pos=e,e==this.end)return this.setDone(),this;for(;e<this.range.from;)this.range=this.ranges[--this.rangeIndex];for(;e>=this.range.to;)this.range=this.ranges[++this.rangeIndex];e>=this.chunkPos&&e<this.chunkPos+this.chunk.length?this.chunkOff=e-this.chunkPos:(this.chunk="",this.chunkOff=0),this.readNext()}return this}read(e,t){if(e>=this.chunkPos&&t<=this.chunkPos+this.chunk.length)return this.chunk.slice(e-this.chunkPos,t-this.chunkPos);if(e>=this.chunk2Pos&&t<=this.chunk2Pos+this.chunk2.length)return this.chunk2.slice(e-this.chunk2Pos,t-this.chunk2Pos);if(e>=this.range.from&&t<=this.range.to)return this.input.read(e,t);let s="";for(let i of this.ranges){if(i.from>=t)break;i.to>e&&(s+=this.input.read(Math.max(i.from,e),Math.min(i.to,t)))}return s}}class c{constructor(e,t){this.data=e,this.id=t}token(e,t){let{parser:s}=t.p;p(this.data,e,t,this.id,s.data,s.tokenPrecTable)}}c.prototype.contextual=c.prototype.fallback=c.prototype.extend=!1;class d{constructor(e,t,s){this.precTable=t,this.elseToken=s,this.data="string"==typeof e?n(e):e}token(e,t){let s=e.pos,i=0;for(;;){let s=e.next<0,r=e.resolveOffset(1,1);if(p(this.data,e,t,0,this.data,this.precTable),e.token.value>-1)break;if(null==this.elseToken)return;if(s||i++,null==r)break;e.reset(r,e.token)}i&&(e.reset(s,e.token),e.acceptToken(this.elseToken,i))}}d.prototype.contextual=c.prototype.fallback=c.prototype.extend=!1;class u{constructor(e,t={}){this.token=e,this.contextual=!!t.contextual,this.fallback=!!t.fallback,this.extend=!!t.extend}}function p(e,t,s,i,r,a){let o=0,n=1<<i,{dialect:l}=s.p.parser;e:for(;0!=(n&e[o]);){let s=e[o+1];for(let i=o+3;i<s;i+=2)if((e[i+1]&n)>0){let s=e[i];if(l.allows(s)&&(-1==t.token.value||t.token.value==s||Q(s,t.token.value,r,a))){t.acceptToken(s);break}}let i=t.next,h=0,O=e[o+2];if(!(t.next<0&&O>h&&65535==e[s+3*O-3])){for(;h<O;){let r=h+O>>1,a=s+r+(r<<1),n=e[a],l=e[a+1]||65536;if(i<n)O=r;else{if(!(i>=l)){o=e[a+2],t.advance();continue e}h=r+1}}break}o=e[s+3*O-1]}}function f(e,t,s){for(let i,r=t;65535!=(i=e[r]);r++)if(i==s)return r-t;return-1}function Q(e,t,s,i){let r=f(s,i,t);return r<0||f(s,i,e)<r}const g="undefined"!=typeof process&&process.env&&/\bparse\b/.test(process.env.LOG);let m=null;function k(t,s,i){let r=t.cursor(e.IterMode.IncludeAnonymous);for(r.moveTo(s);;)if(!(i<0?r.childBefore(s):r.childAfter(s)))for(;;){if((i<0?r.to<s:r.from>s)&&!r.type.isError)return i<0?Math.max(0,Math.min(r.to-1,s-25)):Math.min(t.length,Math.max(r.from+1,s+25));if(i<0?r.prevSibling():r.nextSibling())break;if(!r.parent())return i<0?0:t.length}}class S{constructor(e,t){this.fragments=e,this.nodeSet=t,this.i=0,this.fragment=null,this.safeFrom=-1,this.safeTo=-1,this.trees=[],this.start=[],this.index=[],this.nextFragment()}nextFragment(){let e=this.fragment=this.i==this.fragments.length?null:this.fragments[this.i++];if(e){for(this.safeFrom=e.openStart?k(e.tree,e.from+e.offset,1)-e.offset:e.from,this.safeTo=e.openEnd?k(e.tree,e.to+e.offset,-1)-e.offset:e.to;this.trees.length;)this.trees.pop(),this.start.pop(),this.index.pop();this.trees.push(e.tree),this.start.push(-e.offset),this.index.push(0),this.nextStart=this.safeFrom}else this.nextStart=1e9}nodeAt(t){if(t<this.nextStart)return null;for(;this.fragment&&this.safeTo<=t;)this.nextFragment();if(!this.fragment)return null;for(;;){let s=this.trees.length-1;if(s<0)return this.nextFragment(),null;let i=this.trees[s],r=this.index[s];if(r==i.children.length){this.trees.pop(),this.start.pop(),this.index.pop();continue}let a=i.children[r],o=this.start[s]+i.positions[r];if(o>t)return this.nextStart=o,null;if(a instanceof e.Tree){if(o==t){if(o<this.safeFrom)return null;let t=o+a.length;if(t<=this.safeTo){let s=a.prop(e.NodeProp.lookAhead);if(!s||t+s<this.fragment.to)return a}}this.index[s]++,o+a.length>=Math.max(this.safeFrom,t)&&(this.trees.push(a),this.start.push(o),this.index.push(0))}else this.index[s]++,this.nextStart=o+a.length}}}class b{constructor(e,t){this.stream=t,this.tokens=[],this.mainToken=null,this.actions=[],this.tokens=e.tokenizers.map(e=>new l)}getActions(e){let t=0,s=null,{parser:i}=e.p,{tokenizers:r}=i,a=i.stateSlot(e.state,3),o=e.curContext?e.curContext.hash:0,n=0;for(let i=0;i<r.length;i++){if(!(1<<i&a))continue;let l=r[i],h=this.tokens[i];if((!s||l.fallback)&&((l.contextual||h.start!=e.pos||h.mask!=a||h.context!=o)&&(this.updateCachedToken(h,l,e),h.mask=a,h.context=o),h.lookAhead>h.end+25&&(n=Math.max(h.lookAhead,n)),0!=h.value)){let i=t;if(h.extended>-1&&(t=this.addActions(e,h.extended,h.end,t)),t=this.addActions(e,h.value,h.end,t),!l.extend&&(s=h,t>i))break}}for(;this.actions.length>t;)this.actions.pop();return n&&e.setLookAhead(n),s||e.pos!=this.stream.end||(s=new l,s.value=e.p.parser.eofTerm,s.start=s.end=e.pos,t=this.addActions(e,s.value,s.end,t)),this.mainToken=s,this.actions}getMainToken(e){if(this.mainToken)return this.mainToken;let t=new l,{pos:s,p:i}=e;return t.start=s,t.end=Math.min(s+1,i.stream.end),t.value=s==i.stream.end?i.parser.eofTerm:0,t}updateCachedToken(e,t,s){let i=this.stream.clipPos(s.pos);if(t.token(this.stream.reset(i,e),s),e.value>-1){let{parser:t}=s.p;for(let i=0;i<t.specialized.length;i++)if(t.specialized[i]==e.value){let r=t.specializers[i](this.stream.read(e.start,e.end),s);if(r>=0&&s.p.parser.dialect.allows(r>>1)){1&r?e.extended=r>>1:e.value=r>>1;break}}}else e.value=0,e.end=this.stream.clipPos(i+1)}putAction(e,t,s,i){for(let t=0;t<i;t+=3)if(this.actions[t]==e)return i;return this.actions[i++]=e,this.actions[i++]=t,this.actions[i++]=s,i}addActions(e,t,s,i){let{state:r}=e,{parser:a}=e.p,{data:o}=a;for(let e=0;e<2;e++)for(let n=a.stateSlot(r,e?2:1);;n+=3){if(65535==o[n]){if(1!=o[n+1]){0==i&&2==o[n+1]&&(i=this.putAction(v(o,n+2),t,s,i));break}n=v(o,n+2)}o[n]==t&&(i=this.putAction(v(o,n+1),t,s,i))}return i}}class P{constructor(e,t,s,r){this.parser=e,this.input=t,this.ranges=r,this.recovering=0,this.nextStackID=9812,this.minStackPos=0,this.reused=[],this.stoppedAt=null,this.lastBigReductionStart=-1,this.lastBigReductionSize=0,this.bigReductionCount=0,this.stream=new O(t,r),this.tokens=new b(e,this.stream),this.topTerm=e.top[1];let{from:a}=r[0];this.stacks=[i.start(this,e.top[0],a)],this.fragments=s.length&&this.stream.end-a>4*e.bufferLength?new S(s,e.nodeSet):null}get parsedPos(){return this.minStackPos}advance(){let e,t,s=this.stacks,i=this.minStackPos,r=this.stacks=[];if(this.bigReductionCount>300&&1==s.length){let[e]=s;for(;e.forceReduce()&&e.stack.length&&e.stack[e.stack.length-2]>=this.lastBigReductionStart;);this.bigReductionCount=this.lastBigReductionSize=0}for(let a=0;a<s.length;a++){let o=s[a];for(;;){if(this.tokens.mainToken=null,o.pos>i)r.push(o);else{if(this.advanceStack(o,r,s))continue;{e||(e=[],t=[]),e.push(o);let s=this.tokens.getMainToken(o);t.push(s.value,s.end)}}break}}if(!r.length){let t=e&&function(e){let t=null;for(let s of e){let e=s.p.stoppedAt;(s.pos==s.p.stream.end||null!=e&&s.pos>e)&&s.p.parser.stateFlag(s.state,2)&&(!t||t.score<s.score)&&(t=s)}return t}(e);if(t)return g&&console.log("Finish with "+this.stackID(t)),this.stackToTree(t);if(this.parser.strict)throw g&&e&&console.log("Stuck with token "+(this.tokens.mainToken?this.parser.getName(this.tokens.mainToken.value):"none")),new SyntaxError("No parse at "+i);this.recovering||(this.recovering=5)}if(this.recovering&&e){let s=null!=this.stoppedAt&&e[0].pos>this.stoppedAt?e[0]:this.runRecovery(e,t,r);if(s)return g&&console.log("Force-finish "+this.stackID(s)),this.stackToTree(s.forceAll())}if(this.recovering){let e=1==this.recovering?1:3*this.recovering;if(r.length>e)for(r.sort((e,t)=>t.score-e.score);r.length>e;)r.pop();r.some(e=>e.reducePos>i)&&this.recovering--}else if(r.length>1){e:for(let e=0;e<r.length-1;e++){let t=r[e];for(let s=e+1;s<r.length;s++){let i=r[s];if(t.sameState(i)||t.buffer.length>500&&i.buffer.length>500){if(!((t.score-i.score||t.buffer.length-i.buffer.length)>0)){r.splice(e--,1);continue e}r.splice(s--,1)}}}r.length>12&&(r.sort((e,t)=>t.score-e.score),r.splice(12,r.length-12))}this.minStackPos=r[0].pos;for(let e=1;e<r.length;e++)r[e].pos<this.minStackPos&&(this.minStackPos=r[e].pos);return null}stopAt(e){if(null!=this.stoppedAt&&this.stoppedAt<e)throw new RangeError("Can't move stoppedAt forward");this.stoppedAt=e}advanceStack(t,s,i){let r=t.pos,{parser:a}=this,o=g?this.stackID(t)+" -> ":"";if(null!=this.stoppedAt&&r>this.stoppedAt)return t.forceReduce()?t:null;if(this.fragments){let s=t.curContext&&t.curContext.tracker.strict,i=s?t.curContext.hash:0;for(let n=this.fragments.nodeAt(r);n;){let r=this.parser.nodeSet.types[n.type.id]==n.type?a.getGoto(t.state,n.type.id):-1;if(r>-1&&n.length&&(!s||(n.prop(e.NodeProp.contextHash)||0)==i))return t.useNode(n,r),g&&console.log(o+this.stackID(t)+` (via reuse of ${a.getName(n.type.id)})`),!0;if(!(n instanceof e.Tree)||0==n.children.length||n.positions[0]>0)break;let l=n.children[0];if(!(l instanceof e.Tree&&0==n.positions[0]))break;n=l}}let n=a.stateSlot(t.state,4);if(n>0)return t.reduce(n),g&&console.log(o+this.stackID(t)+` (via always-reduce ${a.getName(65535&n)})`),!0;if(t.stack.length>=8400)for(;t.stack.length>6e3&&t.forceReduce(););let l=this.tokens.getActions(t);for(let e=0;e<l.length;){let n=l[e++],h=l[e++],O=l[e++],c=e==l.length||!i,d=c?t:t.split(),u=this.tokens.mainToken;if(d.apply(n,h,u?u.start:d.pos,O),g&&console.log(o+this.stackID(d)+` (via ${65536&n?`reduce of ${a.getName(65535&n)}`:"shift"} for ${a.getName(h)} @ ${r}${d==t?"":", split"})`),c)return!0;d.pos>r?s.push(d):i.push(d)}return!1}advanceFully(e,t){let s=e.pos;for(;;){if(!this.advanceStack(e,null,null))return!1;if(e.pos>s)return y(e,t),!0}}runRecovery(e,t,s){let i=null,r=!1;for(let a=0;a<e.length;a++){let o=e[a],n=t[a<<1],l=t[1+(a<<1)],h=g?this.stackID(o)+" -> ":"";if(o.deadEnd){if(r)continue;if(r=!0,o.restart(),g&&console.log(h+this.stackID(o)+" (restarted)"),this.advanceFully(o,s))continue}let O=o.split(),c=h;for(let e=0;e<10&&O.forceReduce();e++){if(g&&console.log(c+this.stackID(O)+" (via force-reduce)"),this.advanceFully(O,s))break;g&&(c=this.stackID(O)+" -> ")}for(let e of o.recoverByInsert(n))g&&console.log(h+this.stackID(e)+" (via recover-insert)"),this.advanceFully(e,s);this.stream.end>o.pos?(l==o.pos&&(l++,n=0),o.recoverByDelete(n,l),g&&console.log(h+this.stackID(o)+` (via recover-delete ${this.parser.getName(n)})`),y(o,s)):(!i||i.score<O.score)&&(i=O)}return i}stackToTree(t){return t.close(),e.Tree.build({buffer:o.create(t),nodeSet:this.parser.nodeSet,topID:this.topTerm,maxBufferLength:this.parser.bufferLength,reused:this.reused,start:this.ranges[0].from,length:t.pos-this.ranges[0].from,minRepeatType:this.parser.minRepeatTerm})}stackID(e){let t=(m||(m=new WeakMap)).get(e);return t||m.set(e,t=String.fromCodePoint(this.nextStackID++)),t+e}}function y(e,t){for(let s=0;s<t.length;s++){let i=t[s];if(i.pos==e.pos&&i.sameState(e))return void(t[s].score<e.score&&(t[s]=e))}t.push(e)}class x{constructor(e,t,s){this.source=e,this.flags=t,this.disabled=s}allows(e){return!this.disabled||0==this.disabled[e]}}class $ extends e.Parser{constructor(t){if(super(),this.wrappers=[],14!=t.version)throw new RangeError(`Parser version (${t.version}) doesn't match runtime version (14)`);let s=t.nodeNames.split(" ");this.minRepeatTerm=s.length;for(let e=0;e<t.repeatNodeCount;e++)s.push("");let i=Object.keys(t.topRules).map(e=>t.topRules[e][1]),r=[];for(let e=0;e<s.length;e++)r.push([]);function a(e,t,s){r[e].push([t,t.deserialize(String(s))])}if(t.nodeProps)for(let s of t.nodeProps){let t=s[0];"string"==typeof t&&(t=e.NodeProp[t]);for(let e=1;e<s.length;){let i=s[e++];if(i>=0)a(i,t,s[e++]);else{let r=s[e+-i];for(let o=-i;o>0;o--)a(s[e++],t,r);e++}}}this.nodeSet=new e.NodeSet(s.map((s,a)=>e.NodeType.define({name:a>=this.minRepeatTerm?void 0:s,id:a,props:r[a],top:i.indexOf(a)>-1,error:0==a,skipped:t.skippedNodes&&t.skippedNodes.indexOf(a)>-1}))),t.propSources&&(this.nodeSet=this.nodeSet.extend(...t.propSources)),this.strict=!1,this.bufferLength=e.DefaultBufferLength;let o=n(t.tokenData);this.context=t.context,this.specializerSpecs=t.specialized||[],this.specialized=new Uint16Array(this.specializerSpecs.length);for(let e=0;e<this.specializerSpecs.length;e++)this.specialized[e]=this.specializerSpecs[e].term;this.specializers=this.specializerSpecs.map(z),this.states=n(t.states,Uint32Array),this.data=n(t.stateData),this.goto=n(t.goto),this.maxTerm=t.maxTerm,this.tokenizers=t.tokenizers.map(e=>"number"==typeof e?new c(o,e):e),this.topRules=t.topRules,this.dialects=t.dialects||{},this.dynamicPrecedences=t.dynamicPrecedences||null,this.tokenPrecTable=t.tokenPrec,this.termNames=t.termNames||null,this.maxNode=this.nodeSet.types.length-1,this.dialect=this.parseDialect(),this.top=this.topRules[Object.keys(this.topRules)[0]]}createParse(e,t,s){let i=new P(this,e,t,s);for(let r of this.wrappers)i=r(i,e,t,s);return i}getGoto(e,t,s=!1){let i=this.goto;if(t>=i[0])return-1;for(let r=i[t+1];;){let t=i[r++],a=1&t,o=i[r++];if(a&&s)return o;for(let s=r+(t>>1);r<s;r++)if(i[r]==e)return o;if(a)return-1}}hasAction(e,t){let s=this.data;for(let i=0;i<2;i++)for(let r,a=this.stateSlot(e,i?2:1);;a+=3){if(65535==(r=s[a])){if(1!=s[a+1]){if(2==s[a+1])return v(s,a+2);break}r=s[a=v(s,a+2)]}if(r==t||0==r)return v(s,a+1)}return 0}stateSlot(e,t){return this.states[6*e+t]}stateFlag(e,t){return(this.stateSlot(e,0)&t)>0}validAction(e,t){return!!this.allActions(e,e=>e==t||null)}allActions(e,t){let s=this.stateSlot(e,4),i=s?t(s):void 0;for(let s=this.stateSlot(e,1);null==i;s+=3){if(65535==this.data[s]){if(1!=this.data[s+1])break;s=v(this.data,s+2)}i=t(v(this.data,s+1))}return i}nextStates(e){let t=[];for(let s=this.stateSlot(e,1);;s+=3){if(65535==this.data[s]){if(1!=this.data[s+1])break;s=v(this.data,s+2)}if(!(1&this.data[s+2])){let e=this.data[s+1];t.some((t,s)=>1&s&&t==e)||t.push(this.data[s],e)}}return t}configure(e){let t=Object.assign(Object.create($.prototype),this);if(e.props&&(t.nodeSet=this.nodeSet.extend(...e.props)),e.top){let s=this.topRules[e.top];if(!s)throw new RangeError(`Invalid top rule name ${e.top}`);t.top=s}return e.tokenizers&&(t.tokenizers=this.tokenizers.map(t=>{let s=e.tokenizers.find(e=>e.from==t);return s?s.to:t})),e.specializers&&(t.specializers=this.specializers.slice(),t.specializerSpecs=this.specializerSpecs.map((s,i)=>{let r=e.specializers.find(e=>e.from==s.external);if(!r)return s;let a=Object.assign(Object.assign({},s),{external:r.to});return t.specializers[i]=z(a),a})),e.contextTracker&&(t.context=e.contextTracker),e.dialect&&(t.dialect=this.parseDialect(e.dialect)),null!=e.strict&&(t.strict=e.strict),e.wrap&&(t.wrappers=t.wrappers.concat(e.wrap)),null!=e.bufferLength&&(t.bufferLength=e.bufferLength),t}hasWrappers(){return this.wrappers.length>0}getName(e){return this.termNames?this.termNames[e]:String(e<=this.maxNode&&this.nodeSet.types[e].name||e)}get eofTerm(){return this.maxNode+1}get topNode(){return this.nodeSet.types[this.top[1]]}dynamicPrecedence(e){let t=this.dynamicPrecedences;return null==t?0:t[e]||0}parseDialect(e){let t=Object.keys(this.dialects),s=t.map(()=>!1);if(e)for(let i of e.split(" ")){let e=t.indexOf(i);e>=0&&(s[e]=!0)}let i=null;for(let e=0;e<t.length;e++)if(!s[e])for(let s,r=this.dialects[t[e]];65535!=(s=this.data[r++]);)(i||(i=new Uint8Array(this.maxTerm+1)))[s]=1;return new x(e,s,i)}static deserialize(e){return new $(e)}}function v(e,t){return e[t]|e[t+1]<<16}function z(e){if(e.external){let t=e.extend?1:0;return(s,i)=>e.external(s,i)<<1|t}return e.get}const X=[9,10,11,12,13,32,133,160,5760,8192,8193,8194,8195,8196,8197,8198,8199,8200,8201,8202,8232,8233,8239,8287,12288];function w(e){return e>=65&&e<=90||e>=97&&e<=122||e>=161}function T(e){return e>=48&&e<=57}function Y(e){return T(e)||e>=97&&e<=102||e>=65&&e<=70}const R=(e,t,s)=>(i,r)=>{for(let a=!1,o=0,n=0;;n++){let{next:l}=i;if(w(l)||45==l||95==l||a&&T(l))!a&&(45!=l||n>0)&&(a=!0),o===n&&45==l&&o++,i.advance();else{if(92!=l||10==i.peek(1)){a&&i.acceptToken(2==o&&r.canShift(2)?t:40==l?s:e);break}if(i.advance(),Y(i.next)){do{i.advance()}while(Y(i.next));32==i.next&&i.advance()}else i.next>-1&&i.advance();a=!0}}},C=new u(R(123,2,124)),j=new u(R(125,3,4)),q=new u(e=>{if(X.includes(e.peek(-1))){let{next:t}=e;(w(t)||95==t||35==t||46==t||42==t||91==t||58==t&&w(e.peek(1))||45==t||38==t)&&e.acceptToken(122)}}),G=new u(e=>{if(!X.includes(e.peek(-1))){let{next:t}=e;if(37==t&&(e.advance(),e.acceptToken(1)),w(t)){do{e.advance()}while(w(e.next)||T(e.next));e.acceptToken(1)}}}),N=t.styleTags({"AtKeyword import charset namespace keyframes media supports":t.tags.definitionKeyword,"from to selector":t.tags.keyword,NamespaceName:t.tags.namespace,KeyframeName:t.tags.labelName,KeyframeRangeName:t.tags.operatorKeyword,TagName:t.tags.tagName,ClassName:t.tags.className,PseudoClassName:t.tags.constant(t.tags.className),IdName:t.tags.labelName,"FeatureName PropertyName":t.tags.propertyName,AttributeName:t.tags.attributeName,NumberLiteral:t.tags.number,KeywordQuery:t.tags.keyword,UnaryQueryOp:t.tags.operatorKeyword,"CallTag ValueName":t.tags.atom,VariableName:t.tags.variableName,Callee:t.tags.operatorKeyword,Unit:t.tags.unit,"UniversalSelector NestingSelector":t.tags.definitionOperator,"MatchOp CompareOp":t.tags.compareOperator,"ChildOp SiblingOp, LogicOp":t.tags.logicOperator,BinOp:t.tags.arithmeticOperator,Important:t.tags.modifier,Comment:t.tags.blockComment,ColorLiteral:t.tags.color,"ParenthesizedContent StringLiteral":t.tags.string,":":t.tags.punctuation,"PseudoOp #":t.tags.derefOperator,"; ,":t.tags.separator,"( )":t.tags.paren,"[ ]":t.tags.squareBracket,"{ }":t.tags.brace}),E={__proto__:null,lang:38,"nth-child":38,"nth-last-child":38,"nth-of-type":38,"nth-last-of-type":38,dir:38,"host-context":38,if:84,url:124,"url-prefix":124,domain:124,regexp:124},A={__proto__:null,or:98,and:98,not:106,only:106,layer:170},I={__proto__:null,selector:112,layer:166},U={__proto__:null,"@import":162,"@media":174,"@charset":178,"@namespace":182,"@keyframes":188,"@supports":200,"@scope":204},F={__proto__:null,to:207},D=$.deserialize({version:14,states:"EbQYQdOOO#qQdOOP#xO`OOOOQP'#Cf'#CfOOQP'#Ce'#CeO#}QdO'#ChO$nQaO'#CcO$xQdO'#CkO%TQdO'#DpO%YQdO'#DrO%_QdO'#DuO%_QdO'#DxOOQP'#FV'#FVO&eQhO'#EhOOQS'#FU'#FUOOQS'#Ek'#EkQYQdOOO&lQdO'#EOO&PQhO'#EUO&lQdO'#EWO'aQdO'#EYO'lQdO'#E]O'tQhO'#EcO(VQdO'#EeO(bQaO'#CfO)VQ`O'#D{O)[Q`O'#F`O)gQdO'#F`QOQ`OOP)qO&jO'#CaPOOO)C@t)C@tOOQP'#Cj'#CjOOQP,59S,59SO#}QdO,59SO)|QdO,59VO%TQdO,5:[O%YQdO,5:^O%_QdO,5:aO%_QdO,5:cO%_QdO,5:dO%_QdO'#ErO*XQ`O,58}O*aQdO'#DzOOQS,58},58}OOQP'#Cn'#CnOOQO'#Dn'#DnOOQP,59V,59VO*hQ`O,59VO*mQ`O,59VOOQP'#Dq'#DqOOQP,5:[,5:[OOQO'#Ds'#DsO*rQpO,5:^O+]QaO,5:aO+sQaO,5:dOOQW'#DZ'#DZO,ZQhO'#DdO,xQhO'#FaO'tQhO'#DbO-WQ`O'#DhOOQW'#F['#F[O-]Q`O,5;SO-eQ`O'#DeOOQS-E8i-E8iOOQ['#Cs'#CsO-jQdO'#CtO.QQdO'#CzO.hQdO'#C}O/OQ!pO'#DPO1RQ!jO,5:jOOQO'#DU'#DUO*mQ`O'#DTO1cQ!nO'#FXO3`Q`O'#DVO3eQ`O'#DkOOQ['#FX'#FXO-`Q`O,5:pO3jQ!bO,5:rOOQS'#E['#E[O3rQ`O,5:tO3wQdO,5:tOOQO'#E_'#E_O4PQ`O,5:wO4UQhO,5:}O%_QdO'#DgOOQS,5;P,5;PO-eQ`O,5;PO4^QdO,5;PO4fQdO,5:gO4vQdO'#EtO5TQ`O,5;zO5TQ`O,5;zPOOO'#Ej'#EjP5`O&jO,58{POOO,58{,58{OOQP1G.n1G.nOOQP1G.q1G.qO*hQ`O1G.qO*mQ`O1G.qOOQP1G/v1G/vO5kQpO1G/xO5sQaO1G/{O6ZQaO1G/}O6qQaO1G0OO7XQaO,5;^OOQO-E8p-E8pOOQS1G.i1G.iO7cQ`O,5:fO7hQdO'#DoO7oQdO'#CrOOQP1G/x1G/xO&lQdO1G/xO7vQ!jO'#DZO8UQ!bO,59vO8^QhO,5:OOOQO'#F]'#F]O8XQ!bO,59zO'tQhO,59xO8fQhO'#EvO8sQ`O,5;{O9OQhO,59|O9uQhO'#DiOOQW,5:S,5:SOOQS1G0n1G0nOOQW,5:P,5:PO9|Q!fO'#FYOOQS'#FY'#FYOOQS'#Em'#EmO;^QdO,59`OOQ[,59`,59`O;tQdO,59fOOQ[,59f,59fO<[QdO,59iOOQ[,59i,59iOOQ[,59k,59kO&lQdO,59mO<rQhO'#EQOOQW'#EQ'#EQO=WQ`O1G0UO1[QhO1G0UOOQ[,59o,59oO'tQhO'#DXOOQ[,59q,59qO=]Q#tO,5:VOOQS1G0[1G0[OOQS1G0^1G0^OOQS1G0`1G0`O=hQ`O1G0`O=mQdO'#E`OOQS1G0c1G0cOOQS1G0i1G0iO=xQaO,5:RO-`Q`O1G0kOOQS1G0k1G0kO-eQ`O1G0kO>PQ!fO1G0ROOQO1G0R1G0ROOQO,5;`,5;`O>gQdO,5;`OOQO-E8r-E8rO>tQ`O1G1fPOOO-E8h-E8hPOOO1G.g1G.gOOQP7+$]7+$]OOQP7+%d7+%dO&lQdO7+%dOOQS1G0Q1G0QO?PQaO'#F_O?ZQ`O,5:ZO?`Q!fO'#ElO@^QdO'#FWO@hQ`O,59^O@mQ!bO7+%dO&lQdO1G/bO@uQhO1G/fOOQW1G/j1G/jOOQW1G/d1G/dOAWQhO,5;bOOQO-E8t-E8tOAfQhO'#DZOAtQhO'#F^OBPQ`O'#F^OBUQ`O,5:TOOQS-E8k-E8kOOQ[1G.z1G.zOOQ[1G/Q1G/QOOQ[1G/T1G/TOOQ[1G/X1G/XOBZQdO,5:lOOQS7+%p7+%pOB`Q`O7+%pOBeQhO'#DYOBmQ`O,59sO'tQhO,59sOOQ[1G/q1G/qOBuQ`O1G/qOOQS7+%z7+%zOBzQbO'#DPOOQO'#Eb'#EbOCYQ`O'#EaOOQO'#Ea'#EaOCeQ`O'#EwOCmQdO,5:zOOQS,5:z,5:zOOQ[1G/m1G/mOOQS7+&V7+&VO-`Q`O7+&VOCxQ!fO'#EsO&lQdO'#EsOEPQdO7+%mOOQO7+%m7+%mOOQO1G0z1G0zOEdQ!bO<<IOOElQdO'#EqOEvQ`O,5;yOOQP1G/u1G/uOOQS-E8j-E8jOFOQdO'#EpOFYQ`O,5;rOOQ]1G.x1G.xOOQP<<IO<<IOOFbQdO7+$|OOQO'#D]'#D]OFiQ!bO7+%QOFqQhO'#EoOF{Q`O,5;xO&lQdO,5;xOOQW1G/o1G/oOOQO'#ES'#ESOGTQ`O1G0WOOQS<<I[<<I[O&lQdO,59tOGnQhO1G/_OOQ[1G/_1G/_OGuQ`O1G/_OOQW-E8l-E8lOOQ[7+%]7+%]OOQO,5:{,5:{O=pQdO'#ExOCeQ`O,5;cOOQS,5;c,5;cOOQS-E8u-E8uOOQS1G0f1G0fOOQS<<Iq<<IqOG}Q!fO,5;_OOQS-E8q-E8qOOQO<<IX<<IXOOQPAN>jAN>jOIUQaO,5;]OOQO-E8o-E8oOI`QdO,5;[OOQO-E8n-E8nOOQW<<Hh<<HhOOQW<<Hl<<HlOIjQhO<<HlOI{QhO,5;ZOJWQ`O,5;ZOOQO-E8m-E8mOJ]QdO1G1dOBZQdO'#EuOJgQ`O7+%rOOQW7+%r7+%rOJoQ!bO1G/`OOQ[7+$y7+$yOJzQhO7+$yPKRQ`O'#EnOOQO,5;d,5;dOOQO-E8v-E8vOOQS1G0}1G0}OKWQ`OAN>WO&lQdO1G0uOK]Q`O7+'OOOQO,5;a,5;aOOQO-E8s-E8sOOQW<<I^<<I^OOQ[<<He<<HePOQW,5;Y,5;YOOQWG23rG23rOKeQdO7+&a",stateData:"Kx~O#sOS#tQQ~OW[OZ[O]TO`VOaVOi]OjWOmXO!jYO!mZO!saO!ybO!{cO!}dO#QeO#WfO#YgO#oRO~OQiOW[OZ[O]TO`VOaVOi]OjWOmXO!jYO!mZO!saO!ybO!{cO!}dO#QeO#WfO#YgO#ohO~O#m$SP~P!dO#tmO~O#ooO~O]qO`rOarOjsOmtO!juO!mwO#nvO~OpzO!^xO~P$SOc!QO#o|O#p}O~O#o!RO~O#o!TO~OW[OZ[O]TO`VOaVOjWOmXO!jYO!mZO#oRO~OS!]Oe!YO!V![O!Y!`O#q!XOp$TP~Ok$TP~P&POQ!jOe!cOm!dOp!eOr!mOt!mOz!kO!`!lO#o!bO#p!hO#}!fO~Ot!qO!`!lO#o!pO~Ot!sO#o!sO~OS!]Oe!YO!V![O!Y!`O#q!XO~Oe!vOpzO#Z!xO~O]YX`YX`!pXaYXjYXmYXpYX!^YX!jYX!mYX#nYX~O`!zO~Ok!{O#m$SXo$SX~O#m$SXo$SX~P!dO#u#OO#v#OO#w#QO~Oc#UO#o|O#p}O~OpzO!^xO~Oo$SP~P!dOe#`O~Oe#aO~Ol#bO!h#cO~O]qO`rOarOjsOmtO~Op!ia!^!ia!j!ia!m!ia#n!iad!ia~P*zOp!la!^!la!j!la!m!la#n!lad!la~P*zOR#gOS!]Oe!YOr#gOt#gO!V![O!Y!`O#q#dO#}!fO~O!R#iO!^#jOk$TXp$TX~Oe#mO~Ok#oOpzO~Oe!vO~O]#rO`#rOd#uOi#rOj#rOk#rO~P&lO]#rO`#rOi#rOj#rOk#rOl#wO~P&lO]#rO`#rOi#rOj#rOk#rOo#yO~P&lOP#zOSsXesXksXvsX!VsX!YsX!usX!wsX#qsX!TsXQsX]sX`sXdsXisXjsXmsXpsXrsXtsXzsX!`sX#osX#psX#}sXlsXosX!^sX!qsX#msX~Ov#{O!u#|O!w#}Ok$TP~P'tOe#aOS#{Xk#{Xv#{X!V#{X!Y#{X!u#{X!w#{X#q#{XQ#{X]#{X`#{Xd#{Xi#{Xj#{Xm#{Xp#{Xr#{Xt#{Xz#{X!`#{X#o#{X#p#{X#}#{Xl#{Xo#{X!^#{X!q#{X#m#{X~Oe$RO~Oe$TO~Ok$VOv#{O~Ok$WO~Ot$XO!`!lO~Op$YO~OpzO!R#iO~OpzO#Z$`O~O!q$bOk!oa#m!oao!oa~P&lOk#hX#m#hXo#hX~P!dOk!{O#m$Sao$Sa~O#u#OO#v#OO#w$hO~Ol$jO!h$kO~Op!ii!^!ii!j!ii!m!ii#n!iid!ii~P*zOp!ki!^!ki!j!ki!m!ki#n!kid!ki~P*zOp!li!^!li!j!li!m!li#n!lid!li~P*zOp#fa!^#fa~P$SOo$lO~Od$RP~P%_Od#zP~P&lO`!PXd}X!R}X!T!PX~O`$sO!T$tO~Od$uO!R#iO~Ok#jXp#jX!^#jX~P'tO!^#jOk$Tap$Ta~O!R#iOk!Uap!Ua!^!Uad!Ua`!Ua~OS!]Oe!YO!V![O!Y!`O#q$yO~Od$QP~P9dOv#{OQ#|X]#|X`#|Xd#|Xe#|Xi#|Xj#|Xk#|Xm#|Xp#|Xr#|Xt#|Xz#|X!`#|X#o#|X#p#|X#}#|Xl#|Xo#|X~O]#rO`#rOd%OOi#rOj#rOk#rO~P&lO]#rO`#rOi#rOj#rOk#rOl%PO~P&lO]#rO`#rOi#rOj#rOk#rOo%QO~P&lOe%SOS!tXk!tX!V!tX!Y!tX#q!tX~Ok%TO~Od%YOt%ZO!a%ZO~Ok%[O~Oo%cO#o%^O#}%]O~Od%dO~P$SOv#{O!^%hO!q%jOk!oi#m!oio!oi~P&lOk#ha#m#hao#ha~P!dOk!{O#m$Sio$Si~O!^%mOd$RX~P$SOd%oO~Ov#{OQ#`Xd#`Xe#`Xm#`Xp#`Xr#`Xt#`Xz#`X!^#`X!`#`X#o#`X#p#`X#}#`X~O!^%qOd#zX~P&lOd%sO~Ol%tOv#{O~OR#gOr#gOt#gO#q%vO#}!fO~O!R#iOk#jap#ja!^#ja~O`!PXd}X!R}X!^}X~O!R#iO!^%xOd$QX~O`%zO~Od%{O~O#o%|O~Ok&OO~O`&PO!R#iO~Od&ROk&QO~Od&UO~OP#zOpsX!^sXdsX~O#}%]Op#TX!^#TX~OpzO!^&WO~Oo&[O#o%^O#}%]O~Ov#{OQ#gXe#gXk#gXm#gXp#gXr#gXt#gXz#gX!^#gX!`#gX!q#gX#m#gX#o#gX#p#gX#}#gXo#gX~O!^%hO!q&`Ok!oq#m!oqo!oq~P&lOl&aOv#{O~Od#eX!^#eX~P%_O!^%mOd$Ra~Od#dX!^#dX~P&lO!^%qOd#za~Od&fO~P&lOd&gO!T&hO~Od#cX!^#cX~P9dO!^%xOd$Qa~O]&mOd&oO~OS#bae#ba!V#ba!Y#ba#q#ba~Od&qO~PG]Od&qOk&rO~Ov#{OQ#gae#gak#gam#gap#gar#gat#gaz#ga!^#ga!`#ga!q#ga#m#ga#o#ga#p#ga#}#gao#ga~Od#ea!^#ea~P$SOd#da!^#da~P&lOR#gOr#gOt#gO#q%vO#}%]O~O!R#iOd#ca!^#ca~O`&xO~O!^%xOd$Qi~P&lO]&mOd&|O~Ov#{Od|ik|i~Od&}O~PG]Ok'OO~Od'PO~O!^%xOd$Qq~Od#cq!^#cq~P&lO#s!a#t#}]#}v!m~",goto:"2h$UPPPPP$VP$YP$c$uP$cP%X$cPP%_PPP%e%o%oPPPPP%oPP%oP&]P%oP%o'W%oP't'w'}'}(^'}P'}P'}P'}'}P(m'}(yP(|PP)p)v$c)|$c*SP$cP$c$cP*Y*{+YP$YP+aP+dP$YP$YP$YP+j$YP+m+p+s+z$YP$YPP$YP,P,V,f,|-[-b-l-r-x.O.U.`.f.l.rPPPPPPPPPPP.x/R/w/z0|P1U1u2O2R2U2[RnQ_^OP`kz!{$dq[OPYZ`kuvwxz!v!{#`$d%mqSOPYZ`kuvwxz!v!{#`$d%mQpTR#RqQ!OVR#SrQ#S!QS$Q!i!jR$i#U!V!mac!c!d!e!z#a#c#t#v#x#{$a$k$p$s%h%i%q%u%z&P&d&l&x'Q!U!mac!c!d!e!z#a#c#t#v#x#{$a$k$p$s%h%i%q%u%z&P&d&l&x'QU#g!Y$t&hU%`$Y%b&WR&V%_!V!iac!c!d!e!z#a#c#t#v#x#{$a$k$p$s%h%i%q%u%z&P&d&l&x'QR$S!kQ%W$RR&S%Xk!^]bf!Y![!g#i#j#m$P$R%X%xQ#e!YQ${#mQ%w$tQ&j%xR&w&hQ!ygQ#p!`Q$^!xR%f$`R#n!]!U!mac!c!d!e!z#a#c#t#v#x#{$a$k$p$s%h%i%q%u%z&P&d&l&x'QQ!qdR$X!rQ!PVR#TrQ#S!PR$i#TQ!SWR#VsQ!UXR#WtQ{UQ!wgQ#^yQ#o!_Q$U!nQ$[!uQ$_!yQ%e$^Q&Y%aQ&]%fR&v&XSjPzQ!}kQ$c!{R%k$dZiPkz!{$dR$P!gQ%}%SR&z&mR!rdR!teR$Z!tS%a$Y%bR&t&WV%_$Y%b&WQ#PmR$g#PQ`OSkPzU!a`k$dR$d!{Q$p#aY%p$p%u&d&l'QQ%u$sQ&d%qQ&l%zR'Q&xQ#t!cQ#v!dQ#x!eV$}#t#v#xQ%X$RR&T%XQ%y$zS&k%y&yR&y&lQ%r$pR&e%rQ%n$mR&c%nQyUR#]yQ%i$aR&_%iQ!|jS$e!|$fR$f!}Q&n%}R&{&nQ#k!ZR$x#kQ%b$YR&Z%bQ&X%aR&u&X__OP`kz!{$d^UOP`kz!{$dQ!VYQ!WZQ#XuQ#YvQ#ZwQ#[xQ$]!vQ$m#`R&b%mR$q#aQ!gaQ!oc[#q!c!d!e#t#v#xQ$a!zd$o#a$p$s%q%u%z&d&l&x'QQ$r#cQ%R#{S%g$a%iQ%l$kQ&^%hR&p&P]#s!c!d!e#t#v#xW!Z]b!g$PQ!ufQ#f!YQ#l![Q$v#iQ$w#jQ$z#mS%V$R%XR&i%xQ#h!YQ%w$tR&w&hR$|#mR$n#`QlPR#_zQ!_]Q!nbQ$O!gR%U$P",nodeNames:"⚠ Unit VariableName VariableName QueryCallee Comment StyleSheet RuleSet UniversalSelector TagSelector TagName NestingSelector ClassSelector . ClassName PseudoClassSelector : :: PseudoClassName PseudoClassName ) ( ArgList ValueName ParenthesizedValue AtKeyword # ; ] [ BracketedValue } { BracedValue ColorLiteral NumberLiteral StringLiteral BinaryExpression BinOp CallExpression Callee IfExpression if ArgList IfBranch KeywordQuery FeatureQuery FeatureName BinaryQuery LogicOp ComparisonQuery CompareOp UnaryQuery UnaryQueryOp ParenthesizedQuery SelectorQuery selector ParenthesizedSelector CallQuery ArgList , CallLiteral CallTag ParenthesizedContent PseudoClassName ArgList IdSelector IdName AttributeSelector AttributeName MatchOp ChildSelector ChildOp DescendantSelector SiblingSelector SiblingOp Block Declaration PropertyName Important ImportStatement import Layer layer LayerName layer MediaStatement media CharsetStatement charset NamespaceStatement namespace NamespaceName KeyframesStatement keyframes KeyframeName KeyframeList KeyframeSelector KeyframeRangeName SupportsStatement supports ScopeStatement scope to AtRule Styles",maxTerm:143,nodeProps:[["isolate",-2,5,36,""],["openedBy",20,"(",28,"[",31,"{"],["closedBy",21,")",29,"]",32,"}"]],propSources:[N],skippedNodes:[0,5,106],repeatNodeCount:15,tokenData:"JQ~R!YOX$qX^%i^p$qpq%iqr({rs-ust/itu6Wuv$qvw7Qwx7cxy9Qyz9cz{9h{|:R|}>t}!O?V!O!P?t!P!Q@]!Q![AU![!]BP!]!^B{!^!_C^!_!`DY!`!aDm!a!b$q!b!cEn!c!}$q!}#OG{#O#P$q#P#QH^#Q#R6W#R#o$q#o#pHo#p#q6W#q#rIQ#r#sIc#s#y$q#y#z%i#z$f$q$f$g%i$g#BY$q#BY#BZ%i#BZ$IS$q$IS$I_%i$I_$I|$q$I|$JO%i$JO$JT$q$JT$JU%i$JU$KV$q$KV$KW%i$KW&FU$q&FU&FV%i&FV;'S$q;'S;=`Iz<%lO$q`$tSOy%Qz;'S%Q;'S;=`%c<%lO%Q`%VS!a`Oy%Qz;'S%Q;'S;=`%c<%lO%Q`%fP;=`<%l%Q~%nh#s~OX%QX^'Y^p%Qpq'Yqy%Qz#y%Q#y#z'Y#z$f%Q$f$g'Y$g#BY%Q#BY#BZ'Y#BZ$IS%Q$IS$I_'Y$I_$I|%Q$I|$JO'Y$JO$JT%Q$JT$JU'Y$JU$KV%Q$KV$KW'Y$KW&FU%Q&FU&FV'Y&FV;'S%Q;'S;=`%c<%lO%Q~'ah#s~!a`OX%QX^'Y^p%Qpq'Yqy%Qz#y%Q#y#z'Y#z$f%Q$f$g'Y$g#BY%Q#BY#BZ'Y#BZ$IS%Q$IS$I_'Y$I_$I|%Q$I|$JO'Y$JO$JT%Q$JT$JU'Y$JU$KV%Q$KV$KW'Y$KW&FU%Q&FU&FV'Y&FV;'S%Q;'S;=`%c<%lO%Qj)OUOy%Qz#]%Q#]#^)b#^;'S%Q;'S;=`%c<%lO%Qj)gU!a`Oy%Qz#a%Q#a#b)y#b;'S%Q;'S;=`%c<%lO%Qj*OU!a`Oy%Qz#d%Q#d#e*b#e;'S%Q;'S;=`%c<%lO%Qj*gU!a`Oy%Qz#c%Q#c#d*y#d;'S%Q;'S;=`%c<%lO%Qj+OU!a`Oy%Qz#f%Q#f#g+b#g;'S%Q;'S;=`%c<%lO%Qj+gU!a`Oy%Qz#h%Q#h#i+y#i;'S%Q;'S;=`%c<%lO%Qj,OU!a`Oy%Qz#T%Q#T#U,b#U;'S%Q;'S;=`%c<%lO%Qj,gU!a`Oy%Qz#b%Q#b#c,y#c;'S%Q;'S;=`%c<%lO%Qj-OU!a`Oy%Qz#h%Q#h#i-b#i;'S%Q;'S;=`%c<%lO%Qj-iS!qY!a`Oy%Qz;'S%Q;'S;=`%c<%lO%Q~-xWOY-uZr-urs.bs#O-u#O#P.g#P;'S-u;'S;=`/c<%lO-u~.gOt~~.jRO;'S-u;'S;=`.s;=`O-u~.vXOY-uZr-urs.bs#O-u#O#P.g#P;'S-u;'S;=`/c;=`<%l-u<%lO-u~/fP;=`<%l-uj/nYjYOy%Qz!Q%Q!Q![0^![!c%Q!c!i0^!i#T%Q#T#Z0^#Z;'S%Q;'S;=`%c<%lO%Qj0cY!a`Oy%Qz!Q%Q!Q![1R![!c%Q!c!i1R!i#T%Q#T#Z1R#Z;'S%Q;'S;=`%c<%lO%Qj1WY!a`Oy%Qz!Q%Q!Q![1v![!c%Q!c!i1v!i#T%Q#T#Z1v#Z;'S%Q;'S;=`%c<%lO%Qj1}YrY!a`Oy%Qz!Q%Q!Q![2m![!c%Q!c!i2m!i#T%Q#T#Z2m#Z;'S%Q;'S;=`%c<%lO%Qj2tYrY!a`Oy%Qz!Q%Q!Q![3d![!c%Q!c!i3d!i#T%Q#T#Z3d#Z;'S%Q;'S;=`%c<%lO%Qj3iY!a`Oy%Qz!Q%Q!Q![4X![!c%Q!c!i4X!i#T%Q#T#Z4X#Z;'S%Q;'S;=`%c<%lO%Qj4`YrY!a`Oy%Qz!Q%Q!Q![5O![!c%Q!c!i5O!i#T%Q#T#Z5O#Z;'S%Q;'S;=`%c<%lO%Qj5TY!a`Oy%Qz!Q%Q!Q![5s![!c%Q!c!i5s!i#T%Q#T#Z5s#Z;'S%Q;'S;=`%c<%lO%Qj5zSrY!a`Oy%Qz;'S%Q;'S;=`%c<%lO%Qd6ZUOy%Qz!_%Q!_!`6m!`;'S%Q;'S;=`%c<%lO%Qd6tS!hS!a`Oy%Qz;'S%Q;'S;=`%c<%lO%Qb7VSZQOy%Qz;'S%Q;'S;=`%c<%lO%Q~7fWOY7cZw7cwx.bx#O7c#O#P8O#P;'S7c;'S;=`8z<%lO7c~8RRO;'S7c;'S;=`8[;=`O7c~8_XOY7cZw7cwx.bx#O7c#O#P8O#P;'S7c;'S;=`8z;=`<%l7c<%lO7c~8}P;=`<%l7cj9VSeYOy%Qz;'S%Q;'S;=`%c<%lO%Q~9hOd~n9oUWQvWOy%Qz!_%Q!_!`6m!`;'S%Q;'S;=`%c<%lO%Qj:YWvW!mQOy%Qz!O%Q!O!P:r!P!Q%Q!Q![=w![;'S%Q;'S;=`%c<%lO%Qj:wU!a`Oy%Qz!Q%Q!Q![;Z![;'S%Q;'S;=`%c<%lO%Qj;bY!a`#}YOy%Qz!Q%Q!Q![;Z![!g%Q!g!h<Q!h#X%Q#X#Y<Q#Y;'S%Q;'S;=`%c<%lO%Qj<VY!a`Oy%Qz{%Q{|<u|}%Q}!O<u!O!Q%Q!Q![=^![;'S%Q;'S;=`%c<%lO%Qj<zU!a`Oy%Qz!Q%Q!Q![=^![;'S%Q;'S;=`%c<%lO%Qj=eU!a`#}YOy%Qz!Q%Q!Q![=^![;'S%Q;'S;=`%c<%lO%Qj>O[!a`#}YOy%Qz!O%Q!O!P;Z!P!Q%Q!Q![=w![!g%Q!g!h<Q!h#X%Q#X#Y<Q#Y;'S%Q;'S;=`%c<%lO%Qj>yS!^YOy%Qz;'S%Q;'S;=`%c<%lO%Qj?[WvWOy%Qz!O%Q!O!P:r!P!Q%Q!Q![=w![;'S%Q;'S;=`%c<%lO%Qj?yU]YOy%Qz!Q%Q!Q![;Z![;'S%Q;'S;=`%c<%lO%Q~@bTvWOy%Qz{@q{;'S%Q;'S;=`%c<%lO%Q~@xS!a`#t~Oy%Qz;'S%Q;'S;=`%c<%lO%QjAZ[#}YOy%Qz!O%Q!O!P;Z!P!Q%Q!Q![=w![!g%Q!g!h<Q!h#X%Q#X#Y<Q#Y;'S%Q;'S;=`%c<%lO%QjBUU`YOy%Qz![%Q![!]Bh!];'S%Q;'S;=`%c<%lO%QbBoSaQ!a`Oy%Qz;'S%Q;'S;=`%c<%lO%QjCQSkYOy%Qz;'S%Q;'S;=`%c<%lO%QhCcU!TWOy%Qz!_%Q!_!`Cu!`;'S%Q;'S;=`%c<%lO%QhC|S!TW!a`Oy%Qz;'S%Q;'S;=`%c<%lO%QlDaS!TW!hSOy%Qz;'S%Q;'S;=`%c<%lO%QjDtV!jQ!TWOy%Qz!_%Q!_!`Cu!`!aEZ!a;'S%Q;'S;=`%c<%lO%QbEbS!jQ!a`Oy%Qz;'S%Q;'S;=`%c<%lO%QjEqYOy%Qz}%Q}!OFa!O!c%Q!c!}GO!}#T%Q#T#oGO#o;'S%Q;'S;=`%c<%lO%QjFfW!a`Oy%Qz!c%Q!c!}GO!}#T%Q#T#oGO#o;'S%Q;'S;=`%c<%lO%QjGV[iY!a`Oy%Qz}%Q}!OGO!O!Q%Q!Q![GO![!c%Q!c!}GO!}#T%Q#T#oGO#o;'S%Q;'S;=`%c<%lO%QjHQSmYOy%Qz;'S%Q;'S;=`%c<%lO%QnHcSl^Oy%Qz;'S%Q;'S;=`%c<%lO%QjHtSpYOy%Qz;'S%Q;'S;=`%c<%lO%QjIVSoYOy%Qz;'S%Q;'S;=`%c<%lO%QfIhU!mQOy%Qz!_%Q!_!`6m!`;'S%Q;'S;=`%c<%lO%Q`I}P;=`<%l$q",tokenizers:[q,G,C,j,1,2,3,4,new d("m~RRYZ[z{a~~g~aO#v~~dP!P!Qg~lO#w~~",28,129)],topRules:{StyleSheet:[0,6],Styles:[1,105]},specialized:[{term:124,get:e=>E[e]||-1},{term:125,get:e=>A[e]||-1},{term:4,get:e=>I[e]||-1},{term:25,get:e=>U[e]||-1},{term:123,get:e=>F[e]||-1}],tokenPrec:1963});let Z=null;function V(){if(!Z&&"object"==typeof document&&document.body){let{style:e}=document.body,t=[],s=new Set;for(let i in e)"cssText"!=i&&"cssFloat"!=i&&"string"==typeof e[i]&&(/[A-Z]/.test(i)&&(i=i.replace(/[A-Z]/g,e=>"-"+e.toLowerCase())),s.has(i)||(t.push(i),s.add(i)));Z=t.sort().map(e=>({type:"property",label:e,apply:e+": "}))}return Z||[]}const B=["active","after","any-link","autofill","backdrop","before","checked","cue","default","defined","disabled","empty","enabled","file-selector-button","first","first-child","first-letter","first-line","first-of-type","focus","focus-visible","focus-within","fullscreen","has","host","host-context","hover","in-range","indeterminate","invalid","is","lang","last-child","last-of-type","left","link","marker","modal","not","nth-child","nth-last-child","nth-last-of-type","nth-of-type","only-child","only-of-type","optional","out-of-range","part","placeholder","placeholder-shown","read-only","read-write","required","right","root","scope","selection","slotted","target","target-text","valid","visited","where"].map(e=>({type:"class",label:e})),W=["above","absolute","activeborder","additive","activecaption","after-white-space","ahead","alias","all","all-scroll","alphabetic","alternate","always","antialiased","appworkspace","asterisks","attr","auto","auto-flow","avoid","avoid-column","avoid-page","avoid-region","axis-pan","background","backwards","baseline","below","bidi-override","blink","block","block-axis","bold","bolder","border","border-box","both","bottom","break","break-all","break-word","bullets","button","button-bevel","buttonface","buttonhighlight","buttonshadow","buttontext","calc","capitalize","caps-lock-indicator","caption","captiontext","caret","cell","center","checkbox","circle","cjk-decimal","clear","clip","close-quote","col-resize","collapse","color","color-burn","color-dodge","column","column-reverse","compact","condensed","contain","content","contents","content-box","context-menu","continuous","copy","counter","counters","cover","crop","cross","crosshair","currentcolor","cursive","cyclic","darken","dashed","decimal","decimal-leading-zero","default","default-button","dense","destination-atop","destination-in","destination-out","destination-over","difference","disc","discard","disclosure-closed","disclosure-open","document","dot-dash","dot-dot-dash","dotted","double","down","e-resize","ease","ease-in","ease-in-out","ease-out","element","ellipse","ellipsis","embed","end","ethiopic-abegede-gez","ethiopic-halehame-aa-er","ethiopic-halehame-gez","ew-resize","exclusion","expanded","extends","extra-condensed","extra-expanded","fantasy","fast","fill","fill-box","fixed","flat","flex","flex-end","flex-start","footnotes","forwards","from","geometricPrecision","graytext","grid","groove","hand","hard-light","help","hidden","hide","higher","highlight","highlighttext","horizontal","hsl","hsla","hue","icon","ignore","inactiveborder","inactivecaption","inactivecaptiontext","infinite","infobackground","infotext","inherit","initial","inline","inline-axis","inline-block","inline-flex","inline-grid","inline-table","inset","inside","intrinsic","invert","italic","justify","keep-all","landscape","large","larger","left","level","lighter","lighten","line-through","linear","linear-gradient","lines","list-item","listbox","listitem","local","logical","loud","lower","lower-hexadecimal","lower-latin","lower-norwegian","lowercase","ltr","luminosity","manipulation","match","matrix","matrix3d","medium","menu","menutext","message-box","middle","min-intrinsic","mix","monospace","move","multiple","multiple_mask_images","multiply","n-resize","narrower","ne-resize","nesw-resize","no-close-quote","no-drop","no-open-quote","no-repeat","none","normal","not-allowed","nowrap","ns-resize","numbers","numeric","nw-resize","nwse-resize","oblique","opacity","open-quote","optimizeLegibility","optimizeSpeed","outset","outside","outside-shape","overlay","overline","padding","padding-box","painted","page","paused","perspective","pinch-zoom","plus-darker","plus-lighter","pointer","polygon","portrait","pre","pre-line","pre-wrap","preserve-3d","progress","push-button","radial-gradient","radio","read-only","read-write","read-write-plaintext-only","rectangle","region","relative","repeat","repeating-linear-gradient","repeating-radial-gradient","repeat-x","repeat-y","reset","reverse","rgb","rgba","ridge","right","rotate","rotate3d","rotateX","rotateY","rotateZ","round","row","row-resize","row-reverse","rtl","run-in","running","s-resize","sans-serif","saturation","scale","scale3d","scaleX","scaleY","scaleZ","screen","scroll","scrollbar","scroll-position","se-resize","self-start","self-end","semi-condensed","semi-expanded","separate","serif","show","single","skew","skewX","skewY","skip-white-space","slide","slider-horizontal","slider-vertical","sliderthumb-horizontal","sliderthumb-vertical","slow","small","small-caps","small-caption","smaller","soft-light","solid","source-atop","source-in","source-out","source-over","space","space-around","space-between","space-evenly","spell-out","square","start","static","status-bar","stretch","stroke","stroke-box","sub","subpixel-antialiased","svg_masks","super","sw-resize","symbolic","symbols","system-ui","table","table-caption","table-cell","table-column","table-column-group","table-footer-group","table-header-group","table-row","table-row-group","text","text-bottom","text-top","textarea","textfield","thick","thin","threeddarkshadow","threedface","threedhighlight","threedlightshadow","threedshadow","to","top","transform","translate","translate3d","translateX","translateY","translateZ","transparent","ultra-condensed","ultra-expanded","underline","unidirectional-pan","unset","up","upper-latin","uppercase","url","var","vertical","vertical-text","view-box","visible","visibleFill","visiblePainted","visibleStroke","visual","w-resize","wait","wave","wider","window","windowframe","windowtext","words","wrap","wrap-reverse","x-large","x-small","xor","xx-large","xx-small"].map(e=>({type:"keyword",label:e})).concat(["aliceblue","antiquewhite","aqua","aquamarine","azure","beige","bisque","black","blanchedalmond","blue","blueviolet","brown","burlywood","cadetblue","chartreuse","chocolate","coral","cornflowerblue","cornsilk","crimson","cyan","darkblue","darkcyan","darkgoldenrod","darkgray","darkgreen","darkkhaki","darkmagenta","darkolivegreen","darkorange","darkorchid","darkred","darksalmon","darkseagreen","darkslateblue","darkslategray","darkturquoise","darkviolet","deeppink","deepskyblue","dimgray","dodgerblue","firebrick","floralwhite","forestgreen","fuchsia","gainsboro","ghostwhite","gold","goldenrod","gray","grey","green","greenyellow","honeydew","hotpink","indianred","indigo","ivory","khaki","lavender","lavenderblush","lawngreen","lemonchiffon","lightblue","lightcoral","lightcyan","lightgoldenrodyellow","lightgray","lightgreen","lightpink","lightsalmon","lightseagreen","lightskyblue","lightslategray","lightsteelblue","lightyellow","lime","limegreen","linen","magenta","maroon","mediumaquamarine","mediumblue","mediumorchid","mediumpurple","mediumseagreen","mediumslateblue","mediumspringgreen","mediumturquoise","mediumvioletred","midnightblue","mintcream","mistyrose","moccasin","navajowhite","navy","oldlace","olive","olivedrab","orange","orangered","orchid","palegoldenrod","palegreen","paleturquoise","palevioletred","papayawhip","peachpuff","peru","pink","plum","powderblue","purple","rebeccapurple","red","rosybrown","royalblue","saddlebrown","salmon","sandybrown","seagreen","seashell","sienna","silver","skyblue","slateblue","slategray","snow","springgreen","steelblue","tan","teal","thistle","tomato","turquoise","violet","wheat","white","whitesmoke","yellow","yellowgreen"].map(e=>({type:"constant",label:e}))),_=["a","abbr","address","article","aside","b","bdi","bdo","blockquote","body","br","button","canvas","caption","cite","code","col","colgroup","dd","del","details","dfn","dialog","div","dl","dt","em","figcaption","figure","footer","form","header","hgroup","h1","h2","h3","h4","h5","h6","hr","html","i","iframe","img","input","ins","kbd","label","legend","li","main","meter","nav","ol","output","p","pre","ruby","section","select","small","source","span","strong","sub","summary","sup","table","tbody","td","template","textarea","tfoot","th","thead","tr","u","ul"].map(e=>({type:"type",label:e})),L=["@charset","@color-profile","@container","@counter-style","@font-face","@font-feature-values","@font-palette-values","@import","@keyframes","@layer","@media","@namespace","@page","@position-try","@property","@scope","@starting-style","@supports","@view-transition"].map(e=>({type:"keyword",label:e})),K=/^(\w[\w-]*|-\w[\w-]*|)$/,J=/^-(-[\w-]*)?$/;const M=new e.NodeWeakMap,H=["Declaration"];function ee(e){for(let t=e;;){if(t.type.isTop)return t;if(!(t=t.parent))return e}}function te(t,s,i){if(s.to-s.from>4096){let r=M.get(s);if(r)return r;let a=[],o=new Set,n=s.cursor(e.IterMode.IncludeAnonymous);if(n.firstChild())do{for(let e of te(t,n.node,i))o.has(e.label)||(o.add(e.label),a.push(e))}while(n.nextSibling());return M.set(s,a),a}{let e=[],r=new Set;return s.cursor().iterate(s=>{var a;if(i(s)&&s.matchContext(H)&&":"==(null===(a=s.node.nextSibling)||void 0===a?void 0:a.name)){let i=t.sliceString(s.from,s.to);r.has(i)||(r.add(i),e.push({label:i,type:"variable"}))}}),e}}const se=e=>t=>{let{state:i,pos:r}=t,a=s.syntaxTree(i).resolveInner(r,-1),o=a.type.isError&&a.from==a.to-1&&"-"==i.doc.sliceString(a.from,a.to);if("PropertyName"==a.name||(o||"TagName"==a.name)&&/^(Block|Styles)$/.test(a.resolve(a.to).name))return{from:a.from,options:V(),validFor:K};if("ValueName"==a.name)return{from:a.from,options:W,validFor:K};if("PseudoClassName"==a.name)return{from:a.from,options:B,validFor:K};if(e(a)||(t.explicit||o)&&function(e,t){var s;if(("("==e.name||e.type.isError)&&(e=e.parent||e),"ArgList"!=e.name)return!1;let i=null===(s=e.parent)||void 0===s?void 0:s.firstChild;return"Callee"==(null==i?void 0:i.name)&&"var"==t.sliceString(i.from,i.to)}(a,i.doc))return{from:e(a)||o?a.from:r,options:te(i.doc,ee(a),e),validFor:J};if("TagName"==a.name){for(let{parent:e}=a;e;e=e.parent)if("Block"==e.name)return{from:a.from,options:V(),validFor:K};return{from:a.from,options:_,validFor:K}}if("AtKeyword"==a.name)return{from:a.from,options:L,validFor:K};if(!t.explicit)return null;let n=a.resolve(r),l=n.childBefore(r);return l&&":"==l.name&&"PseudoClassSelector"==n.name?{from:r,options:B,validFor:K}:l&&":"==l.name&&"Declaration"==n.name||"ArgList"==n.name?{from:r,options:W,validFor:K}:"Block"==n.name||"Styles"==n.name?{from:r,options:V(),validFor:K}:null},ie=se(e=>"VariableName"==e.name),re=s.LRLanguage.define({name:"css",parser:D.configure({props:[s.indentNodeProp.add({Declaration:s.continuedIndent()}),s.foldNodeProp.add({"Block KeyframeList":s.foldInside})]}),languageData:{commentTokens:{block:{open:"/*",close:"*/"}},indentOnInput:/^\s*\}$/,wordChars:"-"}});exports.css=function(){return new s.LanguageSupport(re,re.data.of({autocomplete:ie}))},exports.cssCompletionSource=ie,exports.cssLanguage=re,exports.defineCSSCompletionSource=se;
+"use strict";
+var e = require("$:/plugins/tiddlywiki/codemirror-6/lib/lezer-common.js"),
+	t = require("$:/plugins/tiddlywiki/codemirror-6/lib/lezer-highlight.js"),
+	s = require("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-language.js");
+class i {
+	constructor(e, t, s, i, r, a, o, n, l, h = 0, O) {
+		this.p = e, this.stack = t, this.state = s, this.reducePos = i, this.pos = r, this.score = a, this.buffer = o, this.bufferBase = n, this.curContext = l, this.lookAhead = h, this.parent = O
+	}
+	toString() {
+		return `[${this.stack.filter((e,t)=>t%3==0).concat(this.state)}]@${this.pos}${this.score?"!"+this.score:""}`
+	}
+	static start(e, t, s = 0) {
+		let a = e.parser.context;
+		return new i(e, [], t, s, s, 0, [], 0, a ? new r(a, a.start) : null, 0, null)
+	}
+	get context() {
+		return this.curContext ? this.curContext.context : null
+	}
+	pushState(e, t) {
+		this.stack.push(this.state, t, this.bufferBase + this.buffer.length), this.state = e
+	}
+	reduce(e) {
+		var t;
+		let s = e >> 19,
+			i = 65535 & e,
+			{
+				parser: r
+			} = this.p,
+			a = this.reducePos < this.pos - 25 && this.setLookAhead(this.pos),
+			o = r.dynamicPrecedence(i);
+		if(o && (this.score += o), 0 == s) return this.pushState(r.getGoto(this.state, i, !0), this.reducePos), i < r.minRepeatTerm && this.storeNode(i, this.reducePos, this.reducePos, a ? 8 : 4, !0), void this.reduceContext(i, this.reducePos);
+		let n = this.stack.length - 3 * (s - 1) - (262144 & e ? 6 : 0),
+			l = n ? this.stack[n - 2] : this.p.ranges[0].from,
+			h = this.reducePos - l;
+		h >= 2e3 && !(null === (t = this.p.parser.nodeSet.types[i]) || void 0 === t ? void 0 : t.isAnonymous) && (l == this.p.lastBigReductionStart ? (this.p.bigReductionCount++, this.p.lastBigReductionSize = h) : this.p.lastBigReductionSize < h && (this.p.bigReductionCount = 1, this.p.lastBigReductionStart = l, this.p.lastBigReductionSize = h));
+		let O = n ? this.stack[n - 1] : 0,
+			c = this.bufferBase + this.buffer.length - O;
+		if(i < r.minRepeatTerm || 131072 & e) {
+			let e = r.stateFlag(this.state, 1) ? this.pos : this.reducePos;
+			this.storeNode(i, l, e, c + 4, !0)
+		}
+		if(262144 & e) this.state = this.stack[n];
+		else {
+			let e = this.stack[n - 3];
+			this.state = r.getGoto(e, i, !0)
+		}
+		for(; this.stack.length > n;) this.stack.pop();
+		this.reduceContext(i, l)
+	}
+	storeNode(e, t, s, i = 4, r = !1) {
+		if(0 == e && (!this.stack.length || this.stack[this.stack.length - 1] < this.buffer.length + this.bufferBase)) {
+			let e = this,
+				i = this.buffer.length;
+			if(0 == i && e.parent && (i = e.bufferBase - e.parent.bufferBase, e = e.parent), i > 0 && 0 == e.buffer[i - 4] && e.buffer[i - 1] > -1) {
+				if(t == s) return;
+				if(e.buffer[i - 2] >= t) return void(e.buffer[i - 2] = s)
+			}
+		}
+		if(r && this.pos != s) {
+			let r = this.buffer.length;
+			if(r > 0 && (0 != this.buffer[r - 4] || this.buffer[r - 1] < 0)) {
+				let e = !1;
+				for(let t = r; t > 0 && this.buffer[t - 2] > s; t -= 4)
+					if(this.buffer[t - 1] >= 0) {
+						e = !0;
+						break
+					} if(e)
+					for(; r > 0 && this.buffer[r - 2] > s;) this.buffer[r] = this.buffer[r - 4], this.buffer[r + 1] = this.buffer[r - 3], this.buffer[r + 2] = this.buffer[r - 2], this.buffer[r + 3] = this.buffer[r - 1], r -= 4, i > 4 && (i -= 4)
+			}
+			this.buffer[r] = e, this.buffer[r + 1] = t, this.buffer[r + 2] = s, this.buffer[r + 3] = i
+		} else this.buffer.push(e, t, s, i)
+	}
+	shift(e, t, s, i) {
+		if(131072 & e) this.pushState(65535 & e, this.pos);
+		else if(262144 & e) this.pos = i, this.shiftContext(t, s), t <= this.p.parser.maxNode && this.buffer.push(t, s, i, 4);
+		else {
+			let r = e,
+				{
+					parser: a
+				} = this.p;
+			this.pos = i, !a.stateFlag(r, 1) && (i > s || t <= a.maxNode) && (this.reducePos = i), this.pushState(r, Math.min(s, this.reducePos)), this.shiftContext(t, s), t <= a.maxNode && this.buffer.push(t, s, i, 4)
+		}
+	}
+	apply(e, t, s, i) {
+		65536 & e ? this.reduce(e) : this.shift(e, t, s, i)
+	}
+	useNode(e, t) {
+		let s = this.p.reused.length - 1;
+		(s < 0 || this.p.reused[s] != e) && (this.p.reused.push(e), s++);
+		let i = this.pos;
+		this.reducePos = this.pos = i + e.length, this.pushState(t, i), this.buffer.push(s, i, this.reducePos, -1), this.curContext && this.updateContext(this.curContext.tracker.reuse(this.curContext.context, e, this, this.p.stream.reset(this.pos - e.length)))
+	}
+	split() {
+		let e = this,
+			t = e.buffer.length;
+		for(; t > 0 && e.buffer[t - 2] > e.reducePos;) t -= 4;
+		let s = e.buffer.slice(t),
+			r = e.bufferBase + t;
+		for(; e && r == e.bufferBase;) e = e.parent;
+		return new i(this.p, this.stack.slice(), this.state, this.reducePos, this.pos, this.score, s, r, this.curContext, this.lookAhead, e)
+	}
+	recoverByDelete(e, t) {
+		let s = e <= this.p.parser.maxNode;
+		s && this.storeNode(e, this.pos, t, 4), this.storeNode(0, this.pos, t, s ? 8 : 4), this.pos = this.reducePos = t, this.score -= 190
+	}
+	canShift(e) {
+		for(let t = new a(this);;) {
+			let s = this.p.parser.stateSlot(t.state, 4) || this.p.parser.hasAction(t.state, e);
+			if(0 == s) return !1;
+			if(!(65536 & s)) return !0;
+			t.reduce(s)
+		}
+	}
+	recoverByInsert(e) {
+		if(this.stack.length >= 300) return [];
+		let t = this.p.parser.nextStates(this.state);
+		if(t.length > 8 || this.stack.length >= 120) {
+			let s = [];
+			for(let i, r = 0; r < t.length; r += 2)(i = t[r + 1]) != this.state && this.p.parser.hasAction(i, e) && s.push(t[r], i);
+			if(this.stack.length < 120)
+				for(let e = 0; s.length < 8 && e < t.length; e += 2) {
+					let i = t[e + 1];
+					s.some((e, t) => 1 & t && e == i) || s.push(t[e], i)
+				}
+			t = s
+		}
+		let s = [];
+		for(let e = 0; e < t.length && s.length < 4; e += 2) {
+			let i = t[e + 1];
+			if(i == this.state) continue;
+			let r = this.split();
+			r.pushState(i, this.pos), r.storeNode(0, r.pos, r.pos, 4, !0), r.shiftContext(t[e], this.pos), r.reducePos = this.pos, r.score -= 200, s.push(r)
+		}
+		return s
+	}
+	forceReduce() {
+		let {
+			parser: e
+		} = this.p, t = e.stateSlot(this.state, 5);
+		if(!(65536 & t)) return !1;
+		if(!e.validAction(this.state, t)) {
+			let s = t >> 19,
+				i = 65535 & t,
+				r = this.stack.length - 3 * s;
+			if(r < 0 || e.getGoto(this.stack[r], i, !1) < 0) {
+				let e = this.findForcedReduction();
+				if(null == e) return !1;
+				t = e
+			}
+			this.storeNode(0, this.pos, this.pos, 4, !0), this.score -= 100
+		}
+		return this.reducePos = this.pos, this.reduce(t), !0
+	}
+	findForcedReduction() {
+		let {
+			parser: e
+		} = this.p, t = [], s = (i, r) => {
+			if(!t.includes(i)) return t.push(i), e.allActions(i, t => {
+				if(393216 & t);
+				else if(65536 & t) {
+					let s = (t >> 19) - r;
+					if(s > 1) {
+						let i = 65535 & t,
+							r = this.stack.length - 3 * s;
+						if(r >= 0 && e.getGoto(this.stack[r], i, !1) >= 0) return s << 19 | 65536 | i
+					}
+				} else {
+					let e = s(t, r + 1);
+					if(null != e) return e
+				}
+			})
+		};
+		return s(this.state, 0)
+	}
+	forceAll() {
+		for(; !this.p.parser.stateFlag(this.state, 2);)
+			if(!this.forceReduce()) {
+				this.storeNode(0, this.pos, this.pos, 4, !0);
+				break
+			} return this
+	}
+	get deadEnd() {
+		if(3 != this.stack.length) return !1;
+		let {
+			parser: e
+		} = this.p;
+		return 65535 == e.data[e.stateSlot(this.state, 1)] && !e.stateSlot(this.state, 4)
+	}
+	restart() {
+		this.storeNode(0, this.pos, this.pos, 4, !0), this.state = this.stack[0], this.stack.length = 0
+	}
+	sameState(e) {
+		if(this.state != e.state || this.stack.length != e.stack.length) return !1;
+		for(let t = 0; t < this.stack.length; t += 3)
+			if(this.stack[t] != e.stack[t]) return !1;
+		return !0
+	}
+	get parser() {
+		return this.p.parser
+	}
+	dialectEnabled(e) {
+		return this.p.parser.dialect.flags[e]
+	}
+	shiftContext(e, t) {
+		this.curContext && this.updateContext(this.curContext.tracker.shift(this.curContext.context, e, this, this.p.stream.reset(t)))
+	}
+	reduceContext(e, t) {
+		this.curContext && this.updateContext(this.curContext.tracker.reduce(this.curContext.context, e, this, this.p.stream.reset(t)))
+	}
+	emitContext() {
+		let e = this.buffer.length - 1;
+		(e < 0 || -3 != this.buffer[e]) && this.buffer.push(this.curContext.hash, this.pos, this.pos, -3)
+	}
+	emitLookAhead() {
+		let e = this.buffer.length - 1;
+		(e < 0 || -4 != this.buffer[e]) && this.buffer.push(this.lookAhead, this.pos, this.pos, -4)
+	}
+	updateContext(e) {
+		if(e != this.curContext.context) {
+			let t = new r(this.curContext.tracker, e);
+			t.hash != this.curContext.hash && this.emitContext(), this.curContext = t
+		}
+	}
+	setLookAhead(e) {
+		return !(e <= this.lookAhead) && (this.emitLookAhead(), this.lookAhead = e, !0)
+	}
+	close() {
+		this.curContext && this.curContext.tracker.strict && this.emitContext(), this.lookAhead > 0 && this.emitLookAhead()
+	}
+}
+class r {
+	constructor(e, t) {
+		this.tracker = e, this.context = t, this.hash = e.strict ? e.hash(t) : 0
+	}
+}
+class a {
+	constructor(e) {
+		this.start = e, this.state = e.state, this.stack = e.stack, this.base = this.stack.length
+	}
+	reduce(e) {
+		let t = 65535 & e,
+			s = e >> 19;
+		0 == s ? (this.stack == this.start.stack && (this.stack = this.stack.slice()), this.stack.push(this.state, 0, 0), this.base += 3) : this.base -= 3 * (s - 1);
+		let i = this.start.p.parser.getGoto(this.stack[this.base - 3], t, !0);
+		this.state = i
+	}
+}
+class o {
+	constructor(e, t, s) {
+		this.stack = e, this.pos = t, this.index = s, this.buffer = e.buffer, 0 == this.index && this.maybeNext()
+	}
+	static create(e, t = e.bufferBase + e.buffer.length) {
+		return new o(e, t, t - e.bufferBase)
+	}
+	maybeNext() {
+		let e = this.stack.parent;
+		null != e && (this.index = this.stack.bufferBase - e.bufferBase, this.stack = e, this.buffer = e.buffer)
+	}
+	get id() {
+		return this.buffer[this.index - 4]
+	}
+	get start() {
+		return this.buffer[this.index - 3]
+	}
+	get end() {
+		return this.buffer[this.index - 2]
+	}
+	get size() {
+		return this.buffer[this.index - 1]
+	}
+	next() {
+		this.index -= 4, this.pos -= 4, 0 == this.index && this.maybeNext()
+	}
+	fork() {
+		return new o(this.stack, this.pos, this.index)
+	}
+}
+
+function n(e, t = Uint16Array) {
+	if("string" != typeof e) return e;
+	let s = null;
+	for(let i = 0, r = 0; i < e.length;) {
+		let a = 0;
+		for(;;) {
+			let t = e.charCodeAt(i++),
+				s = !1;
+			if(126 == t) {
+				a = 65535;
+				break
+			}
+			t >= 92 && t--, t >= 34 && t--;
+			let r = t - 32;
+			if(r >= 46 && (r -= 46, s = !0), a += r, s) break;
+			a *= 46
+		}
+		s ? s[r++] = a : s = new t(a)
+	}
+	return s
+}
+class l {
+	constructor() {
+		this.start = -1, this.value = -1, this.end = -1, this.extended = -1, this.lookAhead = 0, this.mask = 0, this.context = 0
+	}
+}
+const h = new l;
+class O {
+	constructor(e, t) {
+		this.input = e, this.ranges = t, this.chunk = "", this.chunkOff = 0, this.chunk2 = "", this.chunk2Pos = 0, this.next = -1, this.token = h, this.rangeIndex = 0, this.pos = this.chunkPos = t[0].from, this.range = t[0], this.end = t[t.length - 1].to, this.readNext()
+	}
+	resolveOffset(e, t) {
+		let s = this.range,
+			i = this.rangeIndex,
+			r = this.pos + e;
+		for(; r < s.from;) {
+			if(!i) return null;
+			let e = this.ranges[--i];
+			r -= s.from - e.to, s = e
+		}
+		for(; t < 0 ? r > s.to : r >= s.to;) {
+			if(i == this.ranges.length - 1) return null;
+			let e = this.ranges[++i];
+			r += e.from - s.to, s = e
+		}
+		return r
+	}
+	clipPos(e) {
+		if(e >= this.range.from && e < this.range.to) return e;
+		for(let t of this.ranges)
+			if(t.to > e) return Math.max(e, t.from);
+		return this.end
+	}
+	peek(e) {
+		let t, s, i = this.chunkOff + e;
+		if(i >= 0 && i < this.chunk.length) t = this.pos + e, s = this.chunk.charCodeAt(i);
+		else {
+			let i = this.resolveOffset(e, 1);
+			if(null == i) return -1;
+			if(t = i, t >= this.chunk2Pos && t < this.chunk2Pos + this.chunk2.length) s = this.chunk2.charCodeAt(t - this.chunk2Pos);
+			else {
+				let e = this.rangeIndex,
+					i = this.range;
+				for(; i.to <= t;) i = this.ranges[++e];
+				this.chunk2 = this.input.chunk(this.chunk2Pos = t), t + this.chunk2.length > i.to && (this.chunk2 = this.chunk2.slice(0, i.to - t)), s = this.chunk2.charCodeAt(0)
+			}
+		}
+		return t >= this.token.lookAhead && (this.token.lookAhead = t + 1), s
+	}
+	acceptToken(e, t = 0) {
+		let s = t ? this.resolveOffset(t, -1) : this.pos;
+		if(null == s || s < this.token.start) throw new RangeError("Token end out of bounds");
+		this.token.value = e, this.token.end = s
+	}
+	acceptTokenTo(e, t) {
+		this.token.value = e, this.token.end = t
+	}
+	getChunk() {
+		if(this.pos >= this.chunk2Pos && this.pos < this.chunk2Pos + this.chunk2.length) {
+			let {
+				chunk: e,
+				chunkPos: t
+			} = this;
+			this.chunk = this.chunk2, this.chunkPos = this.chunk2Pos, this.chunk2 = e, this.chunk2Pos = t, this.chunkOff = this.pos - this.chunkPos
+		} else {
+			this.chunk2 = this.chunk, this.chunk2Pos = this.chunkPos;
+			let e = this.input.chunk(this.pos),
+				t = this.pos + e.length;
+			this.chunk = t > this.range.to ? e.slice(0, this.range.to - this.pos) : e, this.chunkPos = this.pos, this.chunkOff = 0
+		}
+	}
+	readNext() {
+		return this.chunkOff >= this.chunk.length && (this.getChunk(), this.chunkOff == this.chunk.length) ? this.next = -1 : this.next = this.chunk.charCodeAt(this.chunkOff)
+	}
+	advance(e = 1) {
+		for(this.chunkOff += e; this.pos + e >= this.range.to;) {
+			if(this.rangeIndex == this.ranges.length - 1) return this.setDone();
+			e -= this.range.to - this.pos, this.range = this.ranges[++this.rangeIndex], this.pos = this.range.from
+		}
+		return this.pos += e, this.pos >= this.token.lookAhead && (this.token.lookAhead = this.pos + 1), this.readNext()
+	}
+	setDone() {
+		return this.pos = this.chunkPos = this.end, this.range = this.ranges[this.rangeIndex = this.ranges.length - 1], this.chunk = "", this.next = -1
+	}
+	reset(e, t) {
+		if(t ? (this.token = t, t.start = e, t.lookAhead = e + 1, t.value = t.extended = -1) : this.token = h, this.pos != e) {
+			if(this.pos = e, e == this.end) return this.setDone(), this;
+			for(; e < this.range.from;) this.range = this.ranges[--this.rangeIndex];
+			for(; e >= this.range.to;) this.range = this.ranges[++this.rangeIndex];
+			e >= this.chunkPos && e < this.chunkPos + this.chunk.length ? this.chunkOff = e - this.chunkPos : (this.chunk = "", this.chunkOff = 0), this.readNext()
+		}
+		return this
+	}
+	read(e, t) {
+		if(e >= this.chunkPos && t <= this.chunkPos + this.chunk.length) return this.chunk.slice(e - this.chunkPos, t - this.chunkPos);
+		if(e >= this.chunk2Pos && t <= this.chunk2Pos + this.chunk2.length) return this.chunk2.slice(e - this.chunk2Pos, t - this.chunk2Pos);
+		if(e >= this.range.from && t <= this.range.to) return this.input.read(e, t);
+		let s = "";
+		for(let i of this.ranges) {
+			if(i.from >= t) break;
+			i.to > e && (s += this.input.read(Math.max(i.from, e), Math.min(i.to, t)))
+		}
+		return s
+	}
+}
+class c {
+	constructor(e, t) {
+		this.data = e, this.id = t
+	}
+	token(e, t) {
+		let {
+			parser: s
+		} = t.p;
+		p(this.data, e, t, this.id, s.data, s.tokenPrecTable)
+	}
+}
+c.prototype.contextual = c.prototype.fallback = c.prototype.extend = !1;
+class d {
+	constructor(e, t, s) {
+		this.precTable = t, this.elseToken = s, this.data = "string" == typeof e ? n(e) : e
+	}
+	token(e, t) {
+		let s = e.pos,
+			i = 0;
+		for(;;) {
+			let s = e.next < 0,
+				r = e.resolveOffset(1, 1);
+			if(p(this.data, e, t, 0, this.data, this.precTable), e.token.value > -1) break;
+			if(null == this.elseToken) return;
+			if(s || i++, null == r) break;
+			e.reset(r, e.token)
+		}
+		i && (e.reset(s, e.token), e.acceptToken(this.elseToken, i))
+	}
+}
+d.prototype.contextual = c.prototype.fallback = c.prototype.extend = !1;
+class u {
+	constructor(e, t = {}) {
+		this.token = e, this.contextual = !!t.contextual, this.fallback = !!t.fallback, this.extend = !!t.extend
+	}
+}
+
+function p(e, t, s, i, r, a) {
+	let o = 0,
+		n = 1 << i,
+		{
+			dialect: l
+		} = s.p.parser;
+	e: for(; 0 != (n & e[o]);) {
+		let s = e[o + 1];
+		for(let i = o + 3; i < s; i += 2)
+			if((e[i + 1] & n) > 0) {
+				let s = e[i];
+				if(l.allows(s) && (-1 == t.token.value || t.token.value == s || Q(s, t.token.value, r, a))) {
+					t.acceptToken(s);
+					break
+				}
+			} let i = t.next,
+			h = 0,
+			O = e[o + 2];
+		if(!(t.next < 0 && O > h && 65535 == e[s + 3 * O - 3])) {
+			for(; h < O;) {
+				let r = h + O >> 1,
+					a = s + r + (r << 1),
+					n = e[a],
+					l = e[a + 1] || 65536;
+				if(i < n) O = r;
+				else {
+					if(!(i >= l)) {
+						o = e[a + 2], t.advance();
+						continue e
+					}
+					h = r + 1
+				}
+			}
+			break
+		}
+		o = e[s + 3 * O - 1]
+	}
+}
+
+function f(e, t, s) {
+	for(let i, r = t; 65535 != (i = e[r]); r++)
+		if(i == s) return r - t;
+	return -1
+}
+
+function Q(e, t, s, i) {
+	let r = f(s, i, t);
+	return r < 0 || f(s, i, e) < r
+}
+const g = "undefined" != typeof process && process.env && /\bparse\b/.test(process.env.LOG);
+let m = null;
+
+function k(t, s, i) {
+	let r = t.cursor(e.IterMode.IncludeAnonymous);
+	for(r.moveTo(s);;)
+		if(!(i < 0 ? r.childBefore(s) : r.childAfter(s)))
+			for(;;) {
+				if((i < 0 ? r.to < s : r.from > s) && !r.type.isError) return i < 0 ? Math.max(0, Math.min(r.to - 1, s - 25)) : Math.min(t.length, Math.max(r.from + 1, s + 25));
+				if(i < 0 ? r.prevSibling() : r.nextSibling()) break;
+				if(!r.parent()) return i < 0 ? 0 : t.length
+			}
+}
+class S {
+	constructor(e, t) {
+		this.fragments = e, this.nodeSet = t, this.i = 0, this.fragment = null, this.safeFrom = -1, this.safeTo = -1, this.trees = [], this.start = [], this.index = [], this.nextFragment()
+	}
+	nextFragment() {
+		let e = this.fragment = this.i == this.fragments.length ? null : this.fragments[this.i++];
+		if(e) {
+			for(this.safeFrom = e.openStart ? k(e.tree, e.from + e.offset, 1) - e.offset : e.from, this.safeTo = e.openEnd ? k(e.tree, e.to + e.offset, -1) - e.offset : e.to; this.trees.length;) this.trees.pop(), this.start.pop(), this.index.pop();
+			this.trees.push(e.tree), this.start.push(-e.offset), this.index.push(0), this.nextStart = this.safeFrom
+		} else this.nextStart = 1e9
+	}
+	nodeAt(t) {
+		if(t < this.nextStart) return null;
+		for(; this.fragment && this.safeTo <= t;) this.nextFragment();
+		if(!this.fragment) return null;
+		for(;;) {
+			let s = this.trees.length - 1;
+			if(s < 0) return this.nextFragment(), null;
+			let i = this.trees[s],
+				r = this.index[s];
+			if(r == i.children.length) {
+				this.trees.pop(), this.start.pop(), this.index.pop();
+				continue
+			}
+			let a = i.children[r],
+				o = this.start[s] + i.positions[r];
+			if(o > t) return this.nextStart = o, null;
+			if(a instanceof e.Tree) {
+				if(o == t) {
+					if(o < this.safeFrom) return null;
+					let t = o + a.length;
+					if(t <= this.safeTo) {
+						let s = a.prop(e.NodeProp.lookAhead);
+						if(!s || t + s < this.fragment.to) return a
+					}
+				}
+				this.index[s]++, o + a.length >= Math.max(this.safeFrom, t) && (this.trees.push(a), this.start.push(o), this.index.push(0))
+			} else this.index[s]++, this.nextStart = o + a.length
+		}
+	}
+}
+class b {
+	constructor(e, t) {
+		this.stream = t, this.tokens = [], this.mainToken = null, this.actions = [], this.tokens = e.tokenizers.map(e => new l)
+	}
+	getActions(e) {
+		let t = 0,
+			s = null,
+			{
+				parser: i
+			} = e.p,
+			{
+				tokenizers: r
+			} = i,
+			a = i.stateSlot(e.state, 3),
+			o = e.curContext ? e.curContext.hash : 0,
+			n = 0;
+		for(let i = 0; i < r.length; i++) {
+			if(!(1 << i & a)) continue;
+			let l = r[i],
+				h = this.tokens[i];
+			if((!s || l.fallback) && ((l.contextual || h.start != e.pos || h.mask != a || h.context != o) && (this.updateCachedToken(h, l, e), h.mask = a, h.context = o), h.lookAhead > h.end + 25 && (n = Math.max(h.lookAhead, n)), 0 != h.value)) {
+				let i = t;
+				if(h.extended > -1 && (t = this.addActions(e, h.extended, h.end, t)), t = this.addActions(e, h.value, h.end, t), !l.extend && (s = h, t > i)) break
+			}
+		}
+		for(; this.actions.length > t;) this.actions.pop();
+		return n && e.setLookAhead(n), s || e.pos != this.stream.end || (s = new l, s.value = e.p.parser.eofTerm, s.start = s.end = e.pos, t = this.addActions(e, s.value, s.end, t)), this.mainToken = s, this.actions
+	}
+	getMainToken(e) {
+		if(this.mainToken) return this.mainToken;
+		let t = new l,
+			{
+				pos: s,
+				p: i
+			} = e;
+		return t.start = s, t.end = Math.min(s + 1, i.stream.end), t.value = s == i.stream.end ? i.parser.eofTerm : 0, t
+	}
+	updateCachedToken(e, t, s) {
+		let i = this.stream.clipPos(s.pos);
+		if(t.token(this.stream.reset(i, e), s), e.value > -1) {
+			let {
+				parser: t
+			} = s.p;
+			for(let i = 0; i < t.specialized.length; i++)
+				if(t.specialized[i] == e.value) {
+					let r = t.specializers[i](this.stream.read(e.start, e.end), s);
+					if(r >= 0 && s.p.parser.dialect.allows(r >> 1)) {
+						1 & r ? e.extended = r >> 1 : e.value = r >> 1;
+						break
+					}
+				}
+		} else e.value = 0, e.end = this.stream.clipPos(i + 1)
+	}
+	putAction(e, t, s, i) {
+		for(let t = 0; t < i; t += 3)
+			if(this.actions[t] == e) return i;
+		return this.actions[i++] = e, this.actions[i++] = t, this.actions[i++] = s, i
+	}
+	addActions(e, t, s, i) {
+		let {
+			state: r
+		} = e, {
+			parser: a
+		} = e.p, {
+			data: o
+		} = a;
+		for(let e = 0; e < 2; e++)
+			for(let n = a.stateSlot(r, e ? 2 : 1);; n += 3) {
+				if(65535 == o[n]) {
+					if(1 != o[n + 1]) {
+						0 == i && 2 == o[n + 1] && (i = this.putAction(v(o, n + 2), t, s, i));
+						break
+					}
+					n = v(o, n + 2)
+				}
+				o[n] == t && (i = this.putAction(v(o, n + 1), t, s, i))
+			}
+		return i
+	}
+}
+class P {
+	constructor(e, t, s, r) {
+		this.parser = e, this.input = t, this.ranges = r, this.recovering = 0, this.nextStackID = 9812, this.minStackPos = 0, this.reused = [], this.stoppedAt = null, this.lastBigReductionStart = -1, this.lastBigReductionSize = 0, this.bigReductionCount = 0, this.stream = new O(t, r), this.tokens = new b(e, this.stream), this.topTerm = e.top[1];
+		let {
+			from: a
+		} = r[0];
+		this.stacks = [i.start(this, e.top[0], a)], this.fragments = s.length && this.stream.end - a > 4 * e.bufferLength ? new S(s, e.nodeSet) : null
+	}
+	get parsedPos() {
+		return this.minStackPos
+	}
+	advance() {
+		let e, t, s = this.stacks,
+			i = this.minStackPos,
+			r = this.stacks = [];
+		if(this.bigReductionCount > 300 && 1 == s.length) {
+			let [e] = s;
+			for(; e.forceReduce() && e.stack.length && e.stack[e.stack.length - 2] >= this.lastBigReductionStart;);
+			this.bigReductionCount = this.lastBigReductionSize = 0
+		}
+		for(let a = 0; a < s.length; a++) {
+			let o = s[a];
+			for(;;) {
+				if(this.tokens.mainToken = null, o.pos > i) r.push(o);
+				else {
+					if(this.advanceStack(o, r, s)) continue;
+					{
+						e || (e = [], t = []), e.push(o);
+						let s = this.tokens.getMainToken(o);
+						t.push(s.value, s.end)
+					}
+				}
+				break
+			}
+		}
+		if(!r.length) {
+			let t = e && function(e) {
+				let t = null;
+				for(let s of e) {
+					let e = s.p.stoppedAt;
+					(s.pos == s.p.stream.end || null != e && s.pos > e) && s.p.parser.stateFlag(s.state, 2) && (!t || t.score < s.score) && (t = s)
+				}
+				return t
+			}(e);
+			if(t) return g && console.log("Finish with " + this.stackID(t)), this.stackToTree(t);
+			if(this.parser.strict) throw g && e && console.log("Stuck with token " + (this.tokens.mainToken ? this.parser.getName(this.tokens.mainToken.value) : "none")), new SyntaxError("No parse at " + i);
+			this.recovering || (this.recovering = 5)
+		}
+		if(this.recovering && e) {
+			let s = null != this.stoppedAt && e[0].pos > this.stoppedAt ? e[0] : this.runRecovery(e, t, r);
+			if(s) return g && console.log("Force-finish " + this.stackID(s)), this.stackToTree(s.forceAll())
+		}
+		if(this.recovering) {
+			let e = 1 == this.recovering ? 1 : 3 * this.recovering;
+			if(r.length > e)
+				for(r.sort((e, t) => t.score - e.score); r.length > e;) r.pop();
+			r.some(e => e.reducePos > i) && this.recovering--
+		} else if(r.length > 1) {
+			e: for(let e = 0; e < r.length - 1; e++) {
+				let t = r[e];
+				for(let s = e + 1; s < r.length; s++) {
+					let i = r[s];
+					if(t.sameState(i) || t.buffer.length > 500 && i.buffer.length > 500) {
+						if(!((t.score - i.score || t.buffer.length - i.buffer.length) > 0)) {
+							r.splice(e--, 1);
+							continue e
+						}
+						r.splice(s--, 1)
+					}
+				}
+			}
+			r.length > 12 && (r.sort((e, t) => t.score - e.score), r.splice(12, r.length - 12))
+		}
+		this.minStackPos = r[0].pos;
+		for(let e = 1; e < r.length; e++) r[e].pos < this.minStackPos && (this.minStackPos = r[e].pos);
+		return null
+	}
+	stopAt(e) {
+		if(null != this.stoppedAt && this.stoppedAt < e) throw new RangeError("Can't move stoppedAt forward");
+		this.stoppedAt = e
+	}
+	advanceStack(t, s, i) {
+		let r = t.pos,
+			{
+				parser: a
+			} = this,
+			o = g ? this.stackID(t) + " -> " : "";
+		if(null != this.stoppedAt && r > this.stoppedAt) return t.forceReduce() ? t : null;
+		if(this.fragments) {
+			let s = t.curContext && t.curContext.tracker.strict,
+				i = s ? t.curContext.hash : 0;
+			for(let n = this.fragments.nodeAt(r); n;) {
+				let r = this.parser.nodeSet.types[n.type.id] == n.type ? a.getGoto(t.state, n.type.id) : -1;
+				if(r > -1 && n.length && (!s || (n.prop(e.NodeProp.contextHash) || 0) == i)) return t.useNode(n, r), g && console.log(o + this.stackID(t) + ` (via reuse of ${a.getName(n.type.id)})`), !0;
+				if(!(n instanceof e.Tree) || 0 == n.children.length || n.positions[0] > 0) break;
+				let l = n.children[0];
+				if(!(l instanceof e.Tree && 0 == n.positions[0])) break;
+				n = l
+			}
+		}
+		let n = a.stateSlot(t.state, 4);
+		if(n > 0) return t.reduce(n), g && console.log(o + this.stackID(t) + ` (via always-reduce ${a.getName(65535&n)})`), !0;
+		if(t.stack.length >= 8400)
+			for(; t.stack.length > 6e3 && t.forceReduce(););
+		let l = this.tokens.getActions(t);
+		for(let e = 0; e < l.length;) {
+			let n = l[e++],
+				h = l[e++],
+				O = l[e++],
+				c = e == l.length || !i,
+				d = c ? t : t.split(),
+				u = this.tokens.mainToken;
+			if(d.apply(n, h, u ? u.start : d.pos, O), g && console.log(o + this.stackID(d) + ` (via ${65536&n?`reduce of ${a.getName(65535&n)}`:"shift"} for ${a.getName(h)} @ ${r}${d==t?"":", split"})`), c) return !0;
+			d.pos > r ? s.push(d) : i.push(d)
+		}
+		return !1
+	}
+	advanceFully(e, t) {
+		let s = e.pos;
+		for(;;) {
+			if(!this.advanceStack(e, null, null)) return !1;
+			if(e.pos > s) return y(e, t), !0
+		}
+	}
+	runRecovery(e, t, s) {
+		let i = null,
+			r = !1;
+		for(let a = 0; a < e.length; a++) {
+			let o = e[a],
+				n = t[a << 1],
+				l = t[1 + (a << 1)],
+				h = g ? this.stackID(o) + " -> " : "";
+			if(o.deadEnd) {
+				if(r) continue;
+				if(r = !0, o.restart(), g && console.log(h + this.stackID(o) + " (restarted)"), this.advanceFully(o, s)) continue
+			}
+			let O = o.split(),
+				c = h;
+			for(let e = 0; e < 10 && O.forceReduce(); e++) {
+				if(g && console.log(c + this.stackID(O) + " (via force-reduce)"), this.advanceFully(O, s)) break;
+				g && (c = this.stackID(O) + " -> ")
+			}
+			for(let e of o.recoverByInsert(n)) g && console.log(h + this.stackID(e) + " (via recover-insert)"), this.advanceFully(e, s);
+			this.stream.end > o.pos ? (l == o.pos && (l++, n = 0), o.recoverByDelete(n, l), g && console.log(h + this.stackID(o) + ` (via recover-delete ${this.parser.getName(n)})`), y(o, s)) : (!i || i.score < O.score) && (i = O)
+		}
+		return i
+	}
+	stackToTree(t) {
+		return t.close(), e.Tree.build({
+			buffer: o.create(t),
+			nodeSet: this.parser.nodeSet,
+			topID: this.topTerm,
+			maxBufferLength: this.parser.bufferLength,
+			reused: this.reused,
+			start: this.ranges[0].from,
+			length: t.pos - this.ranges[0].from,
+			minRepeatType: this.parser.minRepeatTerm
+		})
+	}
+	stackID(e) {
+		let t = (m || (m = new WeakMap)).get(e);
+		return t || m.set(e, t = String.fromCodePoint(this.nextStackID++)), t + e
+	}
+}
+
+function y(e, t) {
+	for(let s = 0; s < t.length; s++) {
+		let i = t[s];
+		if(i.pos == e.pos && i.sameState(e)) return void(t[s].score < e.score && (t[s] = e))
+	}
+	t.push(e)
+}
+class x {
+	constructor(e, t, s) {
+		this.source = e, this.flags = t, this.disabled = s
+	}
+	allows(e) {
+		return !this.disabled || 0 == this.disabled[e]
+	}
+}
+class $ extends e.Parser {
+	constructor(t) {
+		if(super(), this.wrappers = [], 14 != t.version) throw new RangeError(`Parser version (${t.version}) doesn't match runtime version (14)`);
+		let s = t.nodeNames.split(" ");
+		this.minRepeatTerm = s.length;
+		for(let e = 0; e < t.repeatNodeCount; e++) s.push("");
+		let i = Object.keys(t.topRules).map(e => t.topRules[e][1]),
+			r = [];
+		for(let e = 0; e < s.length; e++) r.push([]);
+
+		function a(e, t, s) {
+			r[e].push([t, t.deserialize(String(s))])
+		}
+		if(t.nodeProps)
+			for(let s of t.nodeProps) {
+				let t = s[0];
+				"string" == typeof t && (t = e.NodeProp[t]);
+				for(let e = 1; e < s.length;) {
+					let i = s[e++];
+					if(i >= 0) a(i, t, s[e++]);
+					else {
+						let r = s[e + -i];
+						for(let o = -i; o > 0; o--) a(s[e++], t, r);
+						e++
+					}
+				}
+			}
+		this.nodeSet = new e.NodeSet(s.map((s, a) => e.NodeType.define({
+			name: a >= this.minRepeatTerm ? void 0 : s,
+			id: a,
+			props: r[a],
+			top: i.indexOf(a) > -1,
+			error: 0 == a,
+			skipped: t.skippedNodes && t.skippedNodes.indexOf(a) > -1
+		}))), t.propSources && (this.nodeSet = this.nodeSet.extend(...t.propSources)), this.strict = !1, this.bufferLength = e.DefaultBufferLength;
+		let o = n(t.tokenData);
+		this.context = t.context, this.specializerSpecs = t.specialized || [], this.specialized = new Uint16Array(this.specializerSpecs.length);
+		for(let e = 0; e < this.specializerSpecs.length; e++) this.specialized[e] = this.specializerSpecs[e].term;
+		this.specializers = this.specializerSpecs.map(z), this.states = n(t.states, Uint32Array), this.data = n(t.stateData), this.goto = n(t.goto), this.maxTerm = t.maxTerm, this.tokenizers = t.tokenizers.map(e => "number" == typeof e ? new c(o, e) : e), this.topRules = t.topRules, this.dialects = t.dialects || {}, this.dynamicPrecedences = t.dynamicPrecedences || null, this.tokenPrecTable = t.tokenPrec, this.termNames = t.termNames || null, this.maxNode = this.nodeSet.types.length - 1, this.dialect = this.parseDialect(), this.top = this.topRules[Object.keys(this.topRules)[0]]
+	}
+	createParse(e, t, s) {
+		let i = new P(this, e, t, s);
+		for(let r of this.wrappers) i = r(i, e, t, s);
+		return i
+	}
+	getGoto(e, t, s = !1) {
+		let i = this.goto;
+		if(t >= i[0]) return -1;
+		for(let r = i[t + 1];;) {
+			let t = i[r++],
+				a = 1 & t,
+				o = i[r++];
+			if(a && s) return o;
+			for(let s = r + (t >> 1); r < s; r++)
+				if(i[r] == e) return o;
+			if(a) return -1
+		}
+	}
+	hasAction(e, t) {
+		let s = this.data;
+		for(let i = 0; i < 2; i++)
+			for(let r, a = this.stateSlot(e, i ? 2 : 1);; a += 3) {
+				if(65535 == (r = s[a])) {
+					if(1 != s[a + 1]) {
+						if(2 == s[a + 1]) return v(s, a + 2);
+						break
+					}
+					r = s[a = v(s, a + 2)]
+				}
+				if(r == t || 0 == r) return v(s, a + 1)
+			}
+		return 0
+	}
+	stateSlot(e, t) {
+		return this.states[6 * e + t]
+	}
+	stateFlag(e, t) {
+		return (this.stateSlot(e, 0) & t) > 0
+	}
+	validAction(e, t) {
+		return !!this.allActions(e, e => e == t || null)
+	}
+	allActions(e, t) {
+		let s = this.stateSlot(e, 4),
+			i = s ? t(s) : void 0;
+		for(let s = this.stateSlot(e, 1); null == i; s += 3) {
+			if(65535 == this.data[s]) {
+				if(1 != this.data[s + 1]) break;
+				s = v(this.data, s + 2)
+			}
+			i = t(v(this.data, s + 1))
+		}
+		return i
+	}
+	nextStates(e) {
+		let t = [];
+		for(let s = this.stateSlot(e, 1);; s += 3) {
+			if(65535 == this.data[s]) {
+				if(1 != this.data[s + 1]) break;
+				s = v(this.data, s + 2)
+			}
+			if(!(1 & this.data[s + 2])) {
+				let e = this.data[s + 1];
+				t.some((t, s) => 1 & s && t == e) || t.push(this.data[s], e)
+			}
+		}
+		return t
+	}
+	configure(e) {
+		let t = Object.assign(Object.create($.prototype), this);
+		if(e.props && (t.nodeSet = this.nodeSet.extend(...e.props)), e.top) {
+			let s = this.topRules[e.top];
+			if(!s) throw new RangeError(`Invalid top rule name ${e.top}`);
+			t.top = s
+		}
+		return e.tokenizers && (t.tokenizers = this.tokenizers.map(t => {
+			let s = e.tokenizers.find(e => e.from == t);
+			return s ? s.to : t
+		})), e.specializers && (t.specializers = this.specializers.slice(), t.specializerSpecs = this.specializerSpecs.map((s, i) => {
+			let r = e.specializers.find(e => e.from == s.external);
+			if(!r) return s;
+			let a = Object.assign(Object.assign({}, s), {
+				external: r.to
+			});
+			return t.specializers[i] = z(a), a
+		})), e.contextTracker && (t.context = e.contextTracker), e.dialect && (t.dialect = this.parseDialect(e.dialect)), null != e.strict && (t.strict = e.strict), e.wrap && (t.wrappers = t.wrappers.concat(e.wrap)), null != e.bufferLength && (t.bufferLength = e.bufferLength), t
+	}
+	hasWrappers() {
+		return this.wrappers.length > 0
+	}
+	getName(e) {
+		return this.termNames ? this.termNames[e] : String(e <= this.maxNode && this.nodeSet.types[e].name || e)
+	}
+	get eofTerm() {
+		return this.maxNode + 1
+	}
+	get topNode() {
+		return this.nodeSet.types[this.top[1]]
+	}
+	dynamicPrecedence(e) {
+		let t = this.dynamicPrecedences;
+		return null == t ? 0 : t[e] || 0
+	}
+	parseDialect(e) {
+		let t = Object.keys(this.dialects),
+			s = t.map(() => !1);
+		if(e)
+			for(let i of e.split(" ")) {
+				let e = t.indexOf(i);
+				e >= 0 && (s[e] = !0)
+			}
+		let i = null;
+		for(let e = 0; e < t.length; e++)
+			if(!s[e])
+				for(let s, r = this.dialects[t[e]]; 65535 != (s = this.data[r++]);)(i || (i = new Uint8Array(this.maxTerm + 1)))[s] = 1;
+		return new x(e, s, i)
+	}
+	static deserialize(e) {
+		return new $(e)
+	}
+}
+
+function v(e, t) {
+	return e[t] | e[t + 1] << 16
+}
+
+function z(e) {
+	if(e.external) {
+		let t = e.extend ? 1 : 0;
+		return (s, i) => e.external(s, i) << 1 | t
+	}
+	return e.get
+}
+const X = [9, 10, 11, 12, 13, 32, 133, 160, 5760, 8192, 8193, 8194, 8195, 8196, 8197, 8198, 8199, 8200, 8201, 8202, 8232, 8233, 8239, 8287, 12288];
+
+function w(e) {
+	return e >= 65 && e <= 90 || e >= 97 && e <= 122 || e >= 161
+}
+
+function T(e) {
+	return e >= 48 && e <= 57
+}
+
+function Y(e) {
+	return T(e) || e >= 97 && e <= 102 || e >= 65 && e <= 70
+}
+const R = (e, t, s) => (i, r) => {
+		for(let a = !1, o = 0, n = 0;; n++) {
+			let {
+				next: l
+			} = i;
+			if(w(l) || 45 == l || 95 == l || a && T(l)) !a && (45 != l || n > 0) && (a = !0), o === n && 45 == l && o++, i.advance();
+			else {
+				if(92 != l || 10 == i.peek(1)) {
+					a && i.acceptToken(2 == o && r.canShift(2) ? t : 40 == l ? s : e);
+					break
+				}
+				if(i.advance(), Y(i.next)) {
+					do {
+						i.advance()
+					} while(Y(i.next));
+					32 == i.next && i.advance()
+				} else i.next > -1 && i.advance();
+				a = !0
+			}
+		}
+	},
+	C = new u(R(123, 2, 124)),
+	j = new u(R(125, 3, 4)),
+	q = new u(e => {
+		if(X.includes(e.peek(-1))) {
+			let {
+				next: t
+			} = e;
+			(w(t) || 95 == t || 35 == t || 46 == t || 42 == t || 91 == t || 58 == t && w(e.peek(1)) || 45 == t || 38 == t) && e.acceptToken(122)
+		}
+	}),
+	G = new u(e => {
+		if(!X.includes(e.peek(-1))) {
+			let {
+				next: t
+			} = e;
+			if(37 == t && (e.advance(), e.acceptToken(1)), w(t)) {
+				do {
+					e.advance()
+				} while(w(e.next) || T(e.next));
+				e.acceptToken(1)
+			}
+		}
+	}),
+	N = t.styleTags({
+		"AtKeyword import charset namespace keyframes media supports": t.tags.definitionKeyword,
+		"from to selector": t.tags.keyword,
+		NamespaceName: t.tags.namespace,
+		KeyframeName: t.tags.labelName,
+		KeyframeRangeName: t.tags.operatorKeyword,
+		TagName: t.tags.tagName,
+		ClassName: t.tags.className,
+		PseudoClassName: t.tags.constant(t.tags.className),
+		IdName: t.tags.labelName,
+		"FeatureName PropertyName": t.tags.propertyName,
+		AttributeName: t.tags.attributeName,
+		NumberLiteral: t.tags.number,
+		KeywordQuery: t.tags.keyword,
+		UnaryQueryOp: t.tags.operatorKeyword,
+		"CallTag ValueName": t.tags.atom,
+		VariableName: t.tags.variableName,
+		Callee: t.tags.operatorKeyword,
+		Unit: t.tags.unit,
+		"UniversalSelector NestingSelector": t.tags.definitionOperator,
+		"MatchOp CompareOp": t.tags.compareOperator,
+		"ChildOp SiblingOp, LogicOp": t.tags.logicOperator,
+		BinOp: t.tags.arithmeticOperator,
+		Important: t.tags.modifier,
+		Comment: t.tags.blockComment,
+		ColorLiteral: t.tags.color,
+		"ParenthesizedContent StringLiteral": t.tags.string,
+		":": t.tags.punctuation,
+		"PseudoOp #": t.tags.derefOperator,
+		"; ,": t.tags.separator,
+		"( )": t.tags.paren,
+		"[ ]": t.tags.squareBracket,
+		"{ }": t.tags.brace
+	}),
+	E = {
+		__proto__: null,
+		lang: 38,
+		"nth-child": 38,
+		"nth-last-child": 38,
+		"nth-of-type": 38,
+		"nth-last-of-type": 38,
+		dir: 38,
+		"host-context": 38,
+		if: 84,
+		url: 124,
+		"url-prefix": 124,
+		domain: 124,
+		regexp: 124
+	},
+	A = {
+		__proto__: null,
+		or: 98,
+		and: 98,
+		not: 106,
+		only: 106,
+		layer: 170
+	},
+	I = {
+		__proto__: null,
+		selector: 112,
+		layer: 166
+	},
+	U = {
+		__proto__: null,
+		"@import": 162,
+		"@media": 174,
+		"@charset": 178,
+		"@namespace": 182,
+		"@keyframes": 188,
+		"@supports": 200,
+		"@scope": 204
+	},
+	F = {
+		__proto__: null,
+		to: 207
+	},
+	D = $.deserialize({
+		version: 14,
+		states: "EbQYQdOOO#qQdOOP#xO`OOOOQP'#Cf'#CfOOQP'#Ce'#CeO#}QdO'#ChO$nQaO'#CcO$xQdO'#CkO%TQdO'#DpO%YQdO'#DrO%_QdO'#DuO%_QdO'#DxOOQP'#FV'#FVO&eQhO'#EhOOQS'#FU'#FUOOQS'#Ek'#EkQYQdOOO&lQdO'#EOO&PQhO'#EUO&lQdO'#EWO'aQdO'#EYO'lQdO'#E]O'tQhO'#EcO(VQdO'#EeO(bQaO'#CfO)VQ`O'#D{O)[Q`O'#F`O)gQdO'#F`QOQ`OOP)qO&jO'#CaPOOO)C@t)C@tOOQP'#Cj'#CjOOQP,59S,59SO#}QdO,59SO)|QdO,59VO%TQdO,5:[O%YQdO,5:^O%_QdO,5:aO%_QdO,5:cO%_QdO,5:dO%_QdO'#ErO*XQ`O,58}O*aQdO'#DzOOQS,58},58}OOQP'#Cn'#CnOOQO'#Dn'#DnOOQP,59V,59VO*hQ`O,59VO*mQ`O,59VOOQP'#Dq'#DqOOQP,5:[,5:[OOQO'#Ds'#DsO*rQpO,5:^O+]QaO,5:aO+sQaO,5:dOOQW'#DZ'#DZO,ZQhO'#DdO,xQhO'#FaO'tQhO'#DbO-WQ`O'#DhOOQW'#F['#F[O-]Q`O,5;SO-eQ`O'#DeOOQS-E8i-E8iOOQ['#Cs'#CsO-jQdO'#CtO.QQdO'#CzO.hQdO'#C}O/OQ!pO'#DPO1RQ!jO,5:jOOQO'#DU'#DUO*mQ`O'#DTO1cQ!nO'#FXO3`Q`O'#DVO3eQ`O'#DkOOQ['#FX'#FXO-`Q`O,5:pO3jQ!bO,5:rOOQS'#E['#E[O3rQ`O,5:tO3wQdO,5:tOOQO'#E_'#E_O4PQ`O,5:wO4UQhO,5:}O%_QdO'#DgOOQS,5;P,5;PO-eQ`O,5;PO4^QdO,5;PO4fQdO,5:gO4vQdO'#EtO5TQ`O,5;zO5TQ`O,5;zPOOO'#Ej'#EjP5`O&jO,58{POOO,58{,58{OOQP1G.n1G.nOOQP1G.q1G.qO*hQ`O1G.qO*mQ`O1G.qOOQP1G/v1G/vO5kQpO1G/xO5sQaO1G/{O6ZQaO1G/}O6qQaO1G0OO7XQaO,5;^OOQO-E8p-E8pOOQS1G.i1G.iO7cQ`O,5:fO7hQdO'#DoO7oQdO'#CrOOQP1G/x1G/xO&lQdO1G/xO7vQ!jO'#DZO8UQ!bO,59vO8^QhO,5:OOOQO'#F]'#F]O8XQ!bO,59zO'tQhO,59xO8fQhO'#EvO8sQ`O,5;{O9OQhO,59|O9uQhO'#DiOOQW,5:S,5:SOOQS1G0n1G0nOOQW,5:P,5:PO9|Q!fO'#FYOOQS'#FY'#FYOOQS'#Em'#EmO;^QdO,59`OOQ[,59`,59`O;tQdO,59fOOQ[,59f,59fO<[QdO,59iOOQ[,59i,59iOOQ[,59k,59kO&lQdO,59mO<rQhO'#EQOOQW'#EQ'#EQO=WQ`O1G0UO1[QhO1G0UOOQ[,59o,59oO'tQhO'#DXOOQ[,59q,59qO=]Q#tO,5:VOOQS1G0[1G0[OOQS1G0^1G0^OOQS1G0`1G0`O=hQ`O1G0`O=mQdO'#E`OOQS1G0c1G0cOOQS1G0i1G0iO=xQaO,5:RO-`Q`O1G0kOOQS1G0k1G0kO-eQ`O1G0kO>PQ!fO1G0ROOQO1G0R1G0ROOQO,5;`,5;`O>gQdO,5;`OOQO-E8r-E8rO>tQ`O1G1fPOOO-E8h-E8hPOOO1G.g1G.gOOQP7+$]7+$]OOQP7+%d7+%dO&lQdO7+%dOOQS1G0Q1G0QO?PQaO'#F_O?ZQ`O,5:ZO?`Q!fO'#ElO@^QdO'#FWO@hQ`O,59^O@mQ!bO7+%dO&lQdO1G/bO@uQhO1G/fOOQW1G/j1G/jOOQW1G/d1G/dOAWQhO,5;bOOQO-E8t-E8tOAfQhO'#DZOAtQhO'#F^OBPQ`O'#F^OBUQ`O,5:TOOQS-E8k-E8kOOQ[1G.z1G.zOOQ[1G/Q1G/QOOQ[1G/T1G/TOOQ[1G/X1G/XOBZQdO,5:lOOQS7+%p7+%pOB`Q`O7+%pOBeQhO'#DYOBmQ`O,59sO'tQhO,59sOOQ[1G/q1G/qOBuQ`O1G/qOOQS7+%z7+%zOBzQbO'#DPOOQO'#Eb'#EbOCYQ`O'#EaOOQO'#Ea'#EaOCeQ`O'#EwOCmQdO,5:zOOQS,5:z,5:zOOQ[1G/m1G/mOOQS7+&V7+&VO-`Q`O7+&VOCxQ!fO'#EsO&lQdO'#EsOEPQdO7+%mOOQO7+%m7+%mOOQO1G0z1G0zOEdQ!bO<<IOOElQdO'#EqOEvQ`O,5;yOOQP1G/u1G/uOOQS-E8j-E8jOFOQdO'#EpOFYQ`O,5;rOOQ]1G.x1G.xOOQP<<IO<<IOOFbQdO7+$|OOQO'#D]'#D]OFiQ!bO7+%QOFqQhO'#EoOF{Q`O,5;xO&lQdO,5;xOOQW1G/o1G/oOOQO'#ES'#ESOGTQ`O1G0WOOQS<<I[<<I[O&lQdO,59tOGnQhO1G/_OOQ[1G/_1G/_OGuQ`O1G/_OOQW-E8l-E8lOOQ[7+%]7+%]OOQO,5:{,5:{O=pQdO'#ExOCeQ`O,5;cOOQS,5;c,5;cOOQS-E8u-E8uOOQS1G0f1G0fOOQS<<Iq<<IqOG}Q!fO,5;_OOQS-E8q-E8qOOQO<<IX<<IXOOQPAN>jAN>jOIUQaO,5;]OOQO-E8o-E8oOI`QdO,5;[OOQO-E8n-E8nOOQW<<Hh<<HhOOQW<<Hl<<HlOIjQhO<<HlOI{QhO,5;ZOJWQ`O,5;ZOOQO-E8m-E8mOJ]QdO1G1dOBZQdO'#EuOJgQ`O7+%rOOQW7+%r7+%rOJoQ!bO1G/`OOQ[7+$y7+$yOJzQhO7+$yPKRQ`O'#EnOOQO,5;d,5;dOOQO-E8v-E8vOOQS1G0}1G0}OKWQ`OAN>WO&lQdO1G0uOK]Q`O7+'OOOQO,5;a,5;aOOQO-E8s-E8sOOQW<<I^<<I^OOQ[<<He<<HePOQW,5;Y,5;YOOQWG23rG23rOKeQdO7+&a",
+		stateData: "Kx~O#sOS#tQQ~OW[OZ[O]TO`VOaVOi]OjWOmXO!jYO!mZO!saO!ybO!{cO!}dO#QeO#WfO#YgO#oRO~OQiOW[OZ[O]TO`VOaVOi]OjWOmXO!jYO!mZO!saO!ybO!{cO!}dO#QeO#WfO#YgO#ohO~O#m$SP~P!dO#tmO~O#ooO~O]qO`rOarOjsOmtO!juO!mwO#nvO~OpzO!^xO~P$SOc!QO#o|O#p}O~O#o!RO~O#o!TO~OW[OZ[O]TO`VOaVOjWOmXO!jYO!mZO#oRO~OS!]Oe!YO!V![O!Y!`O#q!XOp$TP~Ok$TP~P&POQ!jOe!cOm!dOp!eOr!mOt!mOz!kO!`!lO#o!bO#p!hO#}!fO~Ot!qO!`!lO#o!pO~Ot!sO#o!sO~OS!]Oe!YO!V![O!Y!`O#q!XO~Oe!vOpzO#Z!xO~O]YX`YX`!pXaYXjYXmYXpYX!^YX!jYX!mYX#nYX~O`!zO~Ok!{O#m$SXo$SX~O#m$SXo$SX~P!dO#u#OO#v#OO#w#QO~Oc#UO#o|O#p}O~OpzO!^xO~Oo$SP~P!dOe#`O~Oe#aO~Ol#bO!h#cO~O]qO`rOarOjsOmtO~Op!ia!^!ia!j!ia!m!ia#n!iad!ia~P*zOp!la!^!la!j!la!m!la#n!lad!la~P*zOR#gOS!]Oe!YOr#gOt#gO!V![O!Y!`O#q#dO#}!fO~O!R#iO!^#jOk$TXp$TX~Oe#mO~Ok#oOpzO~Oe!vO~O]#rO`#rOd#uOi#rOj#rOk#rO~P&lO]#rO`#rOi#rOj#rOk#rOl#wO~P&lO]#rO`#rOi#rOj#rOk#rOo#yO~P&lOP#zOSsXesXksXvsX!VsX!YsX!usX!wsX#qsX!TsXQsX]sX`sXdsXisXjsXmsXpsXrsXtsXzsX!`sX#osX#psX#}sXlsXosX!^sX!qsX#msX~Ov#{O!u#|O!w#}Ok$TP~P'tOe#aOS#{Xk#{Xv#{X!V#{X!Y#{X!u#{X!w#{X#q#{XQ#{X]#{X`#{Xd#{Xi#{Xj#{Xm#{Xp#{Xr#{Xt#{Xz#{X!`#{X#o#{X#p#{X#}#{Xl#{Xo#{X!^#{X!q#{X#m#{X~Oe$RO~Oe$TO~Ok$VOv#{O~Ok$WO~Ot$XO!`!lO~Op$YO~OpzO!R#iO~OpzO#Z$`O~O!q$bOk!oa#m!oao!oa~P&lOk#hX#m#hXo#hX~P!dOk!{O#m$Sao$Sa~O#u#OO#v#OO#w$hO~Ol$jO!h$kO~Op!ii!^!ii!j!ii!m!ii#n!iid!ii~P*zOp!ki!^!ki!j!ki!m!ki#n!kid!ki~P*zOp!li!^!li!j!li!m!li#n!lid!li~P*zOp#fa!^#fa~P$SOo$lO~Od$RP~P%_Od#zP~P&lO`!PXd}X!R}X!T!PX~O`$sO!T$tO~Od$uO!R#iO~Ok#jXp#jX!^#jX~P'tO!^#jOk$Tap$Ta~O!R#iOk!Uap!Ua!^!Uad!Ua`!Ua~OS!]Oe!YO!V![O!Y!`O#q$yO~Od$QP~P9dOv#{OQ#|X]#|X`#|Xd#|Xe#|Xi#|Xj#|Xk#|Xm#|Xp#|Xr#|Xt#|Xz#|X!`#|X#o#|X#p#|X#}#|Xl#|Xo#|X~O]#rO`#rOd%OOi#rOj#rOk#rO~P&lO]#rO`#rOi#rOj#rOk#rOl%PO~P&lO]#rO`#rOi#rOj#rOk#rOo%QO~P&lOe%SOS!tXk!tX!V!tX!Y!tX#q!tX~Ok%TO~Od%YOt%ZO!a%ZO~Ok%[O~Oo%cO#o%^O#}%]O~Od%dO~P$SOv#{O!^%hO!q%jOk!oi#m!oio!oi~P&lOk#ha#m#hao#ha~P!dOk!{O#m$Sio$Si~O!^%mOd$RX~P$SOd%oO~Ov#{OQ#`Xd#`Xe#`Xm#`Xp#`Xr#`Xt#`Xz#`X!^#`X!`#`X#o#`X#p#`X#}#`X~O!^%qOd#zX~P&lOd%sO~Ol%tOv#{O~OR#gOr#gOt#gO#q%vO#}!fO~O!R#iOk#jap#ja!^#ja~O`!PXd}X!R}X!^}X~O!R#iO!^%xOd$QX~O`%zO~Od%{O~O#o%|O~Ok&OO~O`&PO!R#iO~Od&ROk&QO~Od&UO~OP#zOpsX!^sXdsX~O#}%]Op#TX!^#TX~OpzO!^&WO~Oo&[O#o%^O#}%]O~Ov#{OQ#gXe#gXk#gXm#gXp#gXr#gXt#gXz#gX!^#gX!`#gX!q#gX#m#gX#o#gX#p#gX#}#gXo#gX~O!^%hO!q&`Ok!oq#m!oqo!oq~P&lOl&aOv#{O~Od#eX!^#eX~P%_O!^%mOd$Ra~Od#dX!^#dX~P&lO!^%qOd#za~Od&fO~P&lOd&gO!T&hO~Od#cX!^#cX~P9dO!^%xOd$Qa~O]&mOd&oO~OS#bae#ba!V#ba!Y#ba#q#ba~Od&qO~PG]Od&qOk&rO~Ov#{OQ#gae#gak#gam#gap#gar#gat#gaz#ga!^#ga!`#ga!q#ga#m#ga#o#ga#p#ga#}#gao#ga~Od#ea!^#ea~P$SOd#da!^#da~P&lOR#gOr#gOt#gO#q%vO#}%]O~O!R#iOd#ca!^#ca~O`&xO~O!^%xOd$Qi~P&lO]&mOd&|O~Ov#{Od|ik|i~Od&}O~PG]Ok'OO~Od'PO~O!^%xOd$Qq~Od#cq!^#cq~P&lO#s!a#t#}]#}v!m~",
+		goto: "2h$UPPPPP$VP$YP$c$uP$cP%X$cPP%_PPP%e%o%oPPPPP%oPP%oP&]P%oP%o'W%oP't'w'}'}(^'}P'}P'}P'}'}P(m'}(yP(|PP)p)v$c)|$c*SP$cP$c$cP*Y*{+YP$YP+aP+dP$YP$YP$YP+j$YP+m+p+s+z$YP$YPP$YP,P,V,f,|-[-b-l-r-x.O.U.`.f.l.rPPPPPPPPPPP.x/R/w/z0|P1U1u2O2R2U2[RnQ_^OP`kz!{$dq[OPYZ`kuvwxz!v!{#`$d%mqSOPYZ`kuvwxz!v!{#`$d%mQpTR#RqQ!OVR#SrQ#S!QS$Q!i!jR$i#U!V!mac!c!d!e!z#a#c#t#v#x#{$a$k$p$s%h%i%q%u%z&P&d&l&x'Q!U!mac!c!d!e!z#a#c#t#v#x#{$a$k$p$s%h%i%q%u%z&P&d&l&x'QU#g!Y$t&hU%`$Y%b&WR&V%_!V!iac!c!d!e!z#a#c#t#v#x#{$a$k$p$s%h%i%q%u%z&P&d&l&x'QR$S!kQ%W$RR&S%Xk!^]bf!Y![!g#i#j#m$P$R%X%xQ#e!YQ${#mQ%w$tQ&j%xR&w&hQ!ygQ#p!`Q$^!xR%f$`R#n!]!U!mac!c!d!e!z#a#c#t#v#x#{$a$k$p$s%h%i%q%u%z&P&d&l&x'QQ!qdR$X!rQ!PVR#TrQ#S!PR$i#TQ!SWR#VsQ!UXR#WtQ{UQ!wgQ#^yQ#o!_Q$U!nQ$[!uQ$_!yQ%e$^Q&Y%aQ&]%fR&v&XSjPzQ!}kQ$c!{R%k$dZiPkz!{$dR$P!gQ%}%SR&z&mR!rdR!teR$Z!tS%a$Y%bR&t&WV%_$Y%b&WQ#PmR$g#PQ`OSkPzU!a`k$dR$d!{Q$p#aY%p$p%u&d&l'QQ%u$sQ&d%qQ&l%zR'Q&xQ#t!cQ#v!dQ#x!eV$}#t#v#xQ%X$RR&T%XQ%y$zS&k%y&yR&y&lQ%r$pR&e%rQ%n$mR&c%nQyUR#]yQ%i$aR&_%iQ!|jS$e!|$fR$f!}Q&n%}R&{&nQ#k!ZR$x#kQ%b$YR&Z%bQ&X%aR&u&X__OP`kz!{$d^UOP`kz!{$dQ!VYQ!WZQ#XuQ#YvQ#ZwQ#[xQ$]!vQ$m#`R&b%mR$q#aQ!gaQ!oc[#q!c!d!e#t#v#xQ$a!zd$o#a$p$s%q%u%z&d&l&x'QQ$r#cQ%R#{S%g$a%iQ%l$kQ&^%hR&p&P]#s!c!d!e#t#v#xW!Z]b!g$PQ!ufQ#f!YQ#l![Q$v#iQ$w#jQ$z#mS%V$R%XR&i%xQ#h!YQ%w$tR&w&hR$|#mR$n#`QlPR#_zQ!_]Q!nbQ$O!gR%U$P",
+		nodeNames: "⚠ Unit VariableName VariableName QueryCallee Comment StyleSheet RuleSet UniversalSelector TagSelector TagName NestingSelector ClassSelector . ClassName PseudoClassSelector : :: PseudoClassName PseudoClassName ) ( ArgList ValueName ParenthesizedValue AtKeyword # ; ] [ BracketedValue } { BracedValue ColorLiteral NumberLiteral StringLiteral BinaryExpression BinOp CallExpression Callee IfExpression if ArgList IfBranch KeywordQuery FeatureQuery FeatureName BinaryQuery LogicOp ComparisonQuery CompareOp UnaryQuery UnaryQueryOp ParenthesizedQuery SelectorQuery selector ParenthesizedSelector CallQuery ArgList , CallLiteral CallTag ParenthesizedContent PseudoClassName ArgList IdSelector IdName AttributeSelector AttributeName MatchOp ChildSelector ChildOp DescendantSelector SiblingSelector SiblingOp Block Declaration PropertyName Important ImportStatement import Layer layer LayerName layer MediaStatement media CharsetStatement charset NamespaceStatement namespace NamespaceName KeyframesStatement keyframes KeyframeName KeyframeList KeyframeSelector KeyframeRangeName SupportsStatement supports ScopeStatement scope to AtRule Styles",
+		maxTerm: 143,
+		nodeProps: [
+			["isolate", -2, 5, 36, ""],
+			["openedBy", 20, "(", 28, "[", 31, "{"],
+			["closedBy", 21, ")", 29, "]", 32, "}"]
+		],
+		propSources: [N],
+		skippedNodes: [0, 5, 106],
+		repeatNodeCount: 15,
+		tokenData: "JQ~R!YOX$qX^%i^p$qpq%iqr({rs-ust/itu6Wuv$qvw7Qwx7cxy9Qyz9cz{9h{|:R|}>t}!O?V!O!P?t!P!Q@]!Q![AU![!]BP!]!^B{!^!_C^!_!`DY!`!aDm!a!b$q!b!cEn!c!}$q!}#OG{#O#P$q#P#QH^#Q#R6W#R#o$q#o#pHo#p#q6W#q#rIQ#r#sIc#s#y$q#y#z%i#z$f$q$f$g%i$g#BY$q#BY#BZ%i#BZ$IS$q$IS$I_%i$I_$I|$q$I|$JO%i$JO$JT$q$JT$JU%i$JU$KV$q$KV$KW%i$KW&FU$q&FU&FV%i&FV;'S$q;'S;=`Iz<%lO$q`$tSOy%Qz;'S%Q;'S;=`%c<%lO%Q`%VS!a`Oy%Qz;'S%Q;'S;=`%c<%lO%Q`%fP;=`<%l%Q~%nh#s~OX%QX^'Y^p%Qpq'Yqy%Qz#y%Q#y#z'Y#z$f%Q$f$g'Y$g#BY%Q#BY#BZ'Y#BZ$IS%Q$IS$I_'Y$I_$I|%Q$I|$JO'Y$JO$JT%Q$JT$JU'Y$JU$KV%Q$KV$KW'Y$KW&FU%Q&FU&FV'Y&FV;'S%Q;'S;=`%c<%lO%Q~'ah#s~!a`OX%QX^'Y^p%Qpq'Yqy%Qz#y%Q#y#z'Y#z$f%Q$f$g'Y$g#BY%Q#BY#BZ'Y#BZ$IS%Q$IS$I_'Y$I_$I|%Q$I|$JO'Y$JO$JT%Q$JT$JU'Y$JU$KV%Q$KV$KW'Y$KW&FU%Q&FU&FV'Y&FV;'S%Q;'S;=`%c<%lO%Qj)OUOy%Qz#]%Q#]#^)b#^;'S%Q;'S;=`%c<%lO%Qj)gU!a`Oy%Qz#a%Q#a#b)y#b;'S%Q;'S;=`%c<%lO%Qj*OU!a`Oy%Qz#d%Q#d#e*b#e;'S%Q;'S;=`%c<%lO%Qj*gU!a`Oy%Qz#c%Q#c#d*y#d;'S%Q;'S;=`%c<%lO%Qj+OU!a`Oy%Qz#f%Q#f#g+b#g;'S%Q;'S;=`%c<%lO%Qj+gU!a`Oy%Qz#h%Q#h#i+y#i;'S%Q;'S;=`%c<%lO%Qj,OU!a`Oy%Qz#T%Q#T#U,b#U;'S%Q;'S;=`%c<%lO%Qj,gU!a`Oy%Qz#b%Q#b#c,y#c;'S%Q;'S;=`%c<%lO%Qj-OU!a`Oy%Qz#h%Q#h#i-b#i;'S%Q;'S;=`%c<%lO%Qj-iS!qY!a`Oy%Qz;'S%Q;'S;=`%c<%lO%Q~-xWOY-uZr-urs.bs#O-u#O#P.g#P;'S-u;'S;=`/c<%lO-u~.gOt~~.jRO;'S-u;'S;=`.s;=`O-u~.vXOY-uZr-urs.bs#O-u#O#P.g#P;'S-u;'S;=`/c;=`<%l-u<%lO-u~/fP;=`<%l-uj/nYjYOy%Qz!Q%Q!Q![0^![!c%Q!c!i0^!i#T%Q#T#Z0^#Z;'S%Q;'S;=`%c<%lO%Qj0cY!a`Oy%Qz!Q%Q!Q![1R![!c%Q!c!i1R!i#T%Q#T#Z1R#Z;'S%Q;'S;=`%c<%lO%Qj1WY!a`Oy%Qz!Q%Q!Q![1v![!c%Q!c!i1v!i#T%Q#T#Z1v#Z;'S%Q;'S;=`%c<%lO%Qj1}YrY!a`Oy%Qz!Q%Q!Q![2m![!c%Q!c!i2m!i#T%Q#T#Z2m#Z;'S%Q;'S;=`%c<%lO%Qj2tYrY!a`Oy%Qz!Q%Q!Q![3d![!c%Q!c!i3d!i#T%Q#T#Z3d#Z;'S%Q;'S;=`%c<%lO%Qj3iY!a`Oy%Qz!Q%Q!Q![4X![!c%Q!c!i4X!i#T%Q#T#Z4X#Z;'S%Q;'S;=`%c<%lO%Qj4`YrY!a`Oy%Qz!Q%Q!Q![5O![!c%Q!c!i5O!i#T%Q#T#Z5O#Z;'S%Q;'S;=`%c<%lO%Qj5TY!a`Oy%Qz!Q%Q!Q![5s![!c%Q!c!i5s!i#T%Q#T#Z5s#Z;'S%Q;'S;=`%c<%lO%Qj5zSrY!a`Oy%Qz;'S%Q;'S;=`%c<%lO%Qd6ZUOy%Qz!_%Q!_!`6m!`;'S%Q;'S;=`%c<%lO%Qd6tS!hS!a`Oy%Qz;'S%Q;'S;=`%c<%lO%Qb7VSZQOy%Qz;'S%Q;'S;=`%c<%lO%Q~7fWOY7cZw7cwx.bx#O7c#O#P8O#P;'S7c;'S;=`8z<%lO7c~8RRO;'S7c;'S;=`8[;=`O7c~8_XOY7cZw7cwx.bx#O7c#O#P8O#P;'S7c;'S;=`8z;=`<%l7c<%lO7c~8}P;=`<%l7cj9VSeYOy%Qz;'S%Q;'S;=`%c<%lO%Q~9hOd~n9oUWQvWOy%Qz!_%Q!_!`6m!`;'S%Q;'S;=`%c<%lO%Qj:YWvW!mQOy%Qz!O%Q!O!P:r!P!Q%Q!Q![=w![;'S%Q;'S;=`%c<%lO%Qj:wU!a`Oy%Qz!Q%Q!Q![;Z![;'S%Q;'S;=`%c<%lO%Qj;bY!a`#}YOy%Qz!Q%Q!Q![;Z![!g%Q!g!h<Q!h#X%Q#X#Y<Q#Y;'S%Q;'S;=`%c<%lO%Qj<VY!a`Oy%Qz{%Q{|<u|}%Q}!O<u!O!Q%Q!Q![=^![;'S%Q;'S;=`%c<%lO%Qj<zU!a`Oy%Qz!Q%Q!Q![=^![;'S%Q;'S;=`%c<%lO%Qj=eU!a`#}YOy%Qz!Q%Q!Q![=^![;'S%Q;'S;=`%c<%lO%Qj>O[!a`#}YOy%Qz!O%Q!O!P;Z!P!Q%Q!Q![=w![!g%Q!g!h<Q!h#X%Q#X#Y<Q#Y;'S%Q;'S;=`%c<%lO%Qj>yS!^YOy%Qz;'S%Q;'S;=`%c<%lO%Qj?[WvWOy%Qz!O%Q!O!P:r!P!Q%Q!Q![=w![;'S%Q;'S;=`%c<%lO%Qj?yU]YOy%Qz!Q%Q!Q![;Z![;'S%Q;'S;=`%c<%lO%Q~@bTvWOy%Qz{@q{;'S%Q;'S;=`%c<%lO%Q~@xS!a`#t~Oy%Qz;'S%Q;'S;=`%c<%lO%QjAZ[#}YOy%Qz!O%Q!O!P;Z!P!Q%Q!Q![=w![!g%Q!g!h<Q!h#X%Q#X#Y<Q#Y;'S%Q;'S;=`%c<%lO%QjBUU`YOy%Qz![%Q![!]Bh!];'S%Q;'S;=`%c<%lO%QbBoSaQ!a`Oy%Qz;'S%Q;'S;=`%c<%lO%QjCQSkYOy%Qz;'S%Q;'S;=`%c<%lO%QhCcU!TWOy%Qz!_%Q!_!`Cu!`;'S%Q;'S;=`%c<%lO%QhC|S!TW!a`Oy%Qz;'S%Q;'S;=`%c<%lO%QlDaS!TW!hSOy%Qz;'S%Q;'S;=`%c<%lO%QjDtV!jQ!TWOy%Qz!_%Q!_!`Cu!`!aEZ!a;'S%Q;'S;=`%c<%lO%QbEbS!jQ!a`Oy%Qz;'S%Q;'S;=`%c<%lO%QjEqYOy%Qz}%Q}!OFa!O!c%Q!c!}GO!}#T%Q#T#oGO#o;'S%Q;'S;=`%c<%lO%QjFfW!a`Oy%Qz!c%Q!c!}GO!}#T%Q#T#oGO#o;'S%Q;'S;=`%c<%lO%QjGV[iY!a`Oy%Qz}%Q}!OGO!O!Q%Q!Q![GO![!c%Q!c!}GO!}#T%Q#T#oGO#o;'S%Q;'S;=`%c<%lO%QjHQSmYOy%Qz;'S%Q;'S;=`%c<%lO%QnHcSl^Oy%Qz;'S%Q;'S;=`%c<%lO%QjHtSpYOy%Qz;'S%Q;'S;=`%c<%lO%QjIVSoYOy%Qz;'S%Q;'S;=`%c<%lO%QfIhU!mQOy%Qz!_%Q!_!`6m!`;'S%Q;'S;=`%c<%lO%Q`I}P;=`<%l$q",
+		tokenizers: [q, G, C, j, 1, 2, 3, 4, new d("m~RRYZ[z{a~~g~aO#v~~dP!P!Qg~lO#w~~", 28, 129)],
+		topRules: {
+			StyleSheet: [0, 6],
+			Styles: [1, 105]
+		},
+		specialized: [{
+			term: 124,
+			get: e => E[e] || -1
+		}, {
+			term: 125,
+			get: e => A[e] || -1
+		}, {
+			term: 4,
+			get: e => I[e] || -1
+		}, {
+			term: 25,
+			get: e => U[e] || -1
+		}, {
+			term: 123,
+			get: e => F[e] || -1
+		}],
+		tokenPrec: 1963
+	});
+let Z = null;
+
+function V() {
+	if(!Z && "object" == typeof document && document.body) {
+		let {
+			style: e
+		} = document.body, t = [], s = new Set;
+		for(let i in e) "cssText" != i && "cssFloat" != i && "string" == typeof e[i] && (/[A-Z]/.test(i) && (i = i.replace(/[A-Z]/g, e => "-" + e.toLowerCase())), s.has(i) || (t.push(i), s.add(i)));
+		Z = t.sort().map(e => ({
+			type: "property",
+			label: e,
+			apply: e + ": "
+		}))
+	}
+	return Z || []
+}
+const B = ["active", "after", "any-link", "autofill", "backdrop", "before", "checked", "cue", "default", "defined", "disabled", "empty", "enabled", "file-selector-button", "first", "first-child", "first-letter", "first-line", "first-of-type", "focus", "focus-visible", "focus-within", "fullscreen", "has", "host", "host-context", "hover", "in-range", "indeterminate", "invalid", "is", "lang", "last-child", "last-of-type", "left", "link", "marker", "modal", "not", "nth-child", "nth-last-child", "nth-last-of-type", "nth-of-type", "only-child", "only-of-type", "optional", "out-of-range", "part", "placeholder", "placeholder-shown", "read-only", "read-write", "required", "right", "root", "scope", "selection", "slotted", "target", "target-text", "valid", "visited", "where"].map(e => ({
+		type: "class",
+		label: e
+	})),
+	W = ["above", "absolute", "activeborder", "additive", "activecaption", "after-white-space", "ahead", "alias", "all", "all-scroll", "alphabetic", "alternate", "always", "antialiased", "appworkspace", "asterisks", "attr", "auto", "auto-flow", "avoid", "avoid-column", "avoid-page", "avoid-region", "axis-pan", "background", "backwards", "baseline", "below", "bidi-override", "blink", "block", "block-axis", "bold", "bolder", "border", "border-box", "both", "bottom", "break", "break-all", "break-word", "bullets", "button", "button-bevel", "buttonface", "buttonhighlight", "buttonshadow", "buttontext", "calc", "capitalize", "caps-lock-indicator", "caption", "captiontext", "caret", "cell", "center", "checkbox", "circle", "cjk-decimal", "clear", "clip", "close-quote", "col-resize", "collapse", "color", "color-burn", "color-dodge", "column", "column-reverse", "compact", "condensed", "contain", "content", "contents", "content-box", "context-menu", "continuous", "copy", "counter", "counters", "cover", "crop", "cross", "crosshair", "currentcolor", "cursive", "cyclic", "darken", "dashed", "decimal", "decimal-leading-zero", "default", "default-button", "dense", "destination-atop", "destination-in", "destination-out", "destination-over", "difference", "disc", "discard", "disclosure-closed", "disclosure-open", "document", "dot-dash", "dot-dot-dash", "dotted", "double", "down", "e-resize", "ease", "ease-in", "ease-in-out", "ease-out", "element", "ellipse", "ellipsis", "embed", "end", "ethiopic-abegede-gez", "ethiopic-halehame-aa-er", "ethiopic-halehame-gez", "ew-resize", "exclusion", "expanded", "extends", "extra-condensed", "extra-expanded", "fantasy", "fast", "fill", "fill-box", "fixed", "flat", "flex", "flex-end", "flex-start", "footnotes", "forwards", "from", "geometricPrecision", "graytext", "grid", "groove", "hand", "hard-light", "help", "hidden", "hide", "higher", "highlight", "highlighttext", "horizontal", "hsl", "hsla", "hue", "icon", "ignore", "inactiveborder", "inactivecaption", "inactivecaptiontext", "infinite", "infobackground", "infotext", "inherit", "initial", "inline", "inline-axis", "inline-block", "inline-flex", "inline-grid", "inline-table", "inset", "inside", "intrinsic", "invert", "italic", "justify", "keep-all", "landscape", "large", "larger", "left", "level", "lighter", "lighten", "line-through", "linear", "linear-gradient", "lines", "list-item", "listbox", "listitem", "local", "logical", "loud", "lower", "lower-hexadecimal", "lower-latin", "lower-norwegian", "lowercase", "ltr", "luminosity", "manipulation", "match", "matrix", "matrix3d", "medium", "menu", "menutext", "message-box", "middle", "min-intrinsic", "mix", "monospace", "move", "multiple", "multiple_mask_images", "multiply", "n-resize", "narrower", "ne-resize", "nesw-resize", "no-close-quote", "no-drop", "no-open-quote", "no-repeat", "none", "normal", "not-allowed", "nowrap", "ns-resize", "numbers", "numeric", "nw-resize", "nwse-resize", "oblique", "opacity", "open-quote", "optimizeLegibility", "optimizeSpeed", "outset", "outside", "outside-shape", "overlay", "overline", "padding", "padding-box", "painted", "page", "paused", "perspective", "pinch-zoom", "plus-darker", "plus-lighter", "pointer", "polygon", "portrait", "pre", "pre-line", "pre-wrap", "preserve-3d", "progress", "push-button", "radial-gradient", "radio", "read-only", "read-write", "read-write-plaintext-only", "rectangle", "region", "relative", "repeat", "repeating-linear-gradient", "repeating-radial-gradient", "repeat-x", "repeat-y", "reset", "reverse", "rgb", "rgba", "ridge", "right", "rotate", "rotate3d", "rotateX", "rotateY", "rotateZ", "round", "row", "row-resize", "row-reverse", "rtl", "run-in", "running", "s-resize", "sans-serif", "saturation", "scale", "scale3d", "scaleX", "scaleY", "scaleZ", "screen", "scroll", "scrollbar", "scroll-position", "se-resize", "self-start", "self-end", "semi-condensed", "semi-expanded", "separate", "serif", "show", "single", "skew", "skewX", "skewY", "skip-white-space", "slide", "slider-horizontal", "slider-vertical", "sliderthumb-horizontal", "sliderthumb-vertical", "slow", "small", "small-caps", "small-caption", "smaller", "soft-light", "solid", "source-atop", "source-in", "source-out", "source-over", "space", "space-around", "space-between", "space-evenly", "spell-out", "square", "start", "static", "status-bar", "stretch", "stroke", "stroke-box", "sub", "subpixel-antialiased", "svg_masks", "super", "sw-resize", "symbolic", "symbols", "system-ui", "table", "table-caption", "table-cell", "table-column", "table-column-group", "table-footer-group", "table-header-group", "table-row", "table-row-group", "text", "text-bottom", "text-top", "textarea", "textfield", "thick", "thin", "threeddarkshadow", "threedface", "threedhighlight", "threedlightshadow", "threedshadow", "to", "top", "transform", "translate", "translate3d", "translateX", "translateY", "translateZ", "transparent", "ultra-condensed", "ultra-expanded", "underline", "unidirectional-pan", "unset", "up", "upper-latin", "uppercase", "url", "var", "vertical", "vertical-text", "view-box", "visible", "visibleFill", "visiblePainted", "visibleStroke", "visual", "w-resize", "wait", "wave", "wider", "window", "windowframe", "windowtext", "words", "wrap", "wrap-reverse", "x-large", "x-small", "xor", "xx-large", "xx-small"].map(e => ({
+		type: "keyword",
+		label: e
+	})).concat(["aliceblue", "antiquewhite", "aqua", "aquamarine", "azure", "beige", "bisque", "black", "blanchedalmond", "blue", "blueviolet", "brown", "burlywood", "cadetblue", "chartreuse", "chocolate", "coral", "cornflowerblue", "cornsilk", "crimson", "cyan", "darkblue", "darkcyan", "darkgoldenrod", "darkgray", "darkgreen", "darkkhaki", "darkmagenta", "darkolivegreen", "darkorange", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dodgerblue", "firebrick", "floralwhite", "forestgreen", "fuchsia", "gainsboro", "ghostwhite", "gold", "goldenrod", "gray", "grey", "green", "greenyellow", "honeydew", "hotpink", "indianred", "indigo", "ivory", "khaki", "lavender", "lavenderblush", "lawngreen", "lemonchiffon", "lightblue", "lightcoral", "lightcyan", "lightgoldenrodyellow", "lightgray", "lightgreen", "lightpink", "lightsalmon", "lightseagreen", "lightskyblue", "lightslategray", "lightsteelblue", "lightyellow", "lime", "limegreen", "linen", "magenta", "maroon", "mediumaquamarine", "mediumblue", "mediumorchid", "mediumpurple", "mediumseagreen", "mediumslateblue", "mediumspringgreen", "mediumturquoise", "mediumvioletred", "midnightblue", "mintcream", "mistyrose", "moccasin", "navajowhite", "navy", "oldlace", "olive", "olivedrab", "orange", "orangered", "orchid", "palegoldenrod", "palegreen", "paleturquoise", "palevioletred", "papayawhip", "peachpuff", "peru", "pink", "plum", "powderblue", "purple", "rebeccapurple", "red", "rosybrown", "royalblue", "saddlebrown", "salmon", "sandybrown", "seagreen", "seashell", "sienna", "silver", "skyblue", "slateblue", "slategray", "snow", "springgreen", "steelblue", "tan", "teal", "thistle", "tomato", "turquoise", "violet", "wheat", "white", "whitesmoke", "yellow", "yellowgreen"].map(e => ({
+		type: "constant",
+		label: e
+	}))),
+	_ = ["a", "abbr", "address", "article", "aside", "b", "bdi", "bdo", "blockquote", "body", "br", "button", "canvas", "caption", "cite", "code", "col", "colgroup", "dd", "del", "details", "dfn", "dialog", "div", "dl", "dt", "em", "figcaption", "figure", "footer", "form", "header", "hgroup", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "html", "i", "iframe", "img", "input", "ins", "kbd", "label", "legend", "li", "main", "meter", "nav", "ol", "output", "p", "pre", "ruby", "section", "select", "small", "source", "span", "strong", "sub", "summary", "sup", "table", "tbody", "td", "template", "textarea", "tfoot", "th", "thead", "tr", "u", "ul"].map(e => ({
+		type: "type",
+		label: e
+	})),
+	L = ["@charset", "@color-profile", "@container", "@counter-style", "@font-face", "@font-feature-values", "@font-palette-values", "@import", "@keyframes", "@layer", "@media", "@namespace", "@page", "@position-try", "@property", "@scope", "@starting-style", "@supports", "@view-transition"].map(e => ({
+		type: "keyword",
+		label: e
+	})),
+	K = /^(\w[\w-]*|-\w[\w-]*|)$/,
+	J = /^-(-[\w-]*)?$/;
+const M = new e.NodeWeakMap,
+	H = ["Declaration"];
+
+function ee(e) {
+	for(let t = e;;) {
+		if(t.type.isTop) return t;
+		if(!(t = t.parent)) return e
+	}
+}
+
+function te(t, s, i) {
+	if(s.to - s.from > 4096) {
+		let r = M.get(s);
+		if(r) return r;
+		let a = [],
+			o = new Set,
+			n = s.cursor(e.IterMode.IncludeAnonymous);
+		if(n.firstChild())
+			do {
+				for(let e of te(t, n.node, i)) o.has(e.label) || (o.add(e.label), a.push(e))
+			} while(n.nextSibling());
+		return M.set(s, a), a
+	} {
+		let e = [],
+			r = new Set;
+		return s.cursor().iterate(s => {
+			var a;
+			if(i(s) && s.matchContext(H) && ":" == (null === (a = s.node.nextSibling) || void 0 === a ? void 0 : a.name)) {
+				let i = t.sliceString(s.from, s.to);
+				r.has(i) || (r.add(i), e.push({
+					label: i,
+					type: "variable"
+				}))
+			}
+		}), e
+	}
+}
+const se = e => t => {
+		let {
+			state: i,
+			pos: r
+		} = t, a = s.syntaxTree(i).resolveInner(r, -1), o = a.type.isError && a.from == a.to - 1 && "-" == i.doc.sliceString(a.from, a.to);
+		if("PropertyName" == a.name || (o || "TagName" == a.name) && /^(Block|Styles)$/.test(a.resolve(a.to).name)) return {
+			from: a.from,
+			options: V(),
+			validFor: K
+		};
+		if("ValueName" == a.name) return {
+			from: a.from,
+			options: W,
+			validFor: K
+		};
+		if("PseudoClassName" == a.name) return {
+			from: a.from,
+			options: B,
+			validFor: K
+		};
+		if(e(a) || (t.explicit || o) && function(e, t) {
+				var s;
+				if(("(" == e.name || e.type.isError) && (e = e.parent || e), "ArgList" != e.name) return !1;
+				let i = null === (s = e.parent) || void 0 === s ? void 0 : s.firstChild;
+				return "Callee" == (null == i ? void 0 : i.name) && "var" == t.sliceString(i.from, i.to)
+			}(a, i.doc)) return {
+			from: e(a) || o ? a.from : r,
+			options: te(i.doc, ee(a), e),
+			validFor: J
+		};
+		if("TagName" == a.name) {
+			for(let {
+					parent: e
+				} = a; e; e = e.parent)
+				if("Block" == e.name) return {
+					from: a.from,
+					options: V(),
+					validFor: K
+				};
+			return {
+				from: a.from,
+				options: _,
+				validFor: K
+			}
+		}
+		if("AtKeyword" == a.name) return {
+			from: a.from,
+			options: L,
+			validFor: K
+		};
+		if(!t.explicit) return null;
+		let n = a.resolve(r),
+			l = n.childBefore(r);
+		return l && ":" == l.name && "PseudoClassSelector" == n.name ? {
+			from: r,
+			options: B,
+			validFor: K
+		} : l && ":" == l.name && "Declaration" == n.name || "ArgList" == n.name ? {
+			from: r,
+			options: W,
+			validFor: K
+		} : "Block" == n.name || "Styles" == n.name ? {
+			from: r,
+			options: V(),
+			validFor: K
+		} : null
+	},
+	ie = se(e => "VariableName" == e.name),
+	re = s.LRLanguage.define({
+		name: "css",
+		parser: D.configure({
+			props: [s.indentNodeProp.add({
+				Declaration: s.continuedIndent()
+			}), s.foldNodeProp.add({
+				"Block KeyframeList": s.foldInside
+			})]
+		}),
+		languageData: {
+			commentTokens: {
+				block: {
+					open: "/*",
+					close: "*/"
+				}
+			},
+			indentOnInput: /^\s*\}$/,
+			wordChars: "-"
+		}
+	});
+exports.css = function() {
+	return new s.LanguageSupport(re, re.data.of({
+		autocomplete: ie
+	}))
+}, exports.cssCompletionSource = ie, exports.cssLanguage = re, exports.defineCSSCompletionSource = se;

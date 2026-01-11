@@ -29,14 +29,14 @@ exports.startup = function() {
 		return;
 	}
 
-	if (!core || !core.registerLanguage) {
+	if(!core || !core.registerLanguage) {
 		return;
 	}
 
 	// Discover all codemirror6-plugin modules and call registerLanguage if present
 	// IMPORTANT: lang-tiddlywiki must be called LAST because it needs all other
 	// languages to be registered first (for nested code block highlighting)
-	if ($tw && $tw.modules && typeof $tw.modules.forEachModuleOfType === "function") {
+	if($tw && $tw.modules && typeof $tw.modules.forEachModuleOfType === "function") {
 		var tiddlywikiPlugin = null;
 		var tiddlywikiTitle = null;
 
@@ -45,9 +45,9 @@ exports.startup = function() {
 			try {
 				var pluginDef = pluginModule.default || pluginModule.plugin || pluginModule;
 
-				if (pluginDef && typeof pluginDef.registerLanguage === "function") {
+				if(pluginDef && typeof pluginDef.registerLanguage === "function") {
 					// Defer lang-tiddlywiki to run last
-					if (pluginDef.name === "lang-tiddlywiki") {
+					if(pluginDef.name === "lang-tiddlywiki") {
 						tiddlywikiPlugin = pluginDef;
 						tiddlywikiTitle = title;
 					} else {
@@ -60,7 +60,7 @@ exports.startup = function() {
 		});
 
 		// Second pass: register lang-tiddlywiki last
-		if (tiddlywikiPlugin) {
+		if(tiddlywikiPlugin) {
 			try {
 				tiddlywikiPlugin.registerLanguage(core);
 			} catch (e) {

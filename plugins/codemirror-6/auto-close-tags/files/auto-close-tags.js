@@ -18,10 +18,15 @@ var voidElements = new Set([
 
 // TiddlyWiki self-closing widgets (no content allowed)
 var selfClosingWidgets = new Set([
+	// Action widgets
 	"$action-confirm", "$action-createtiddler", "$action-deletetiddler",
 	"$action-deletefield", "$action-listops", "$action-log",
 	"$action-navigate", "$action-popup", "$action-sendmessage",
-	"$action-setfield", "$action-setmultiplefields"
+	"$action-setfield", "$action-setmultiplefields",
+	// Widgets that don't process children
+	"$audio", "$codeblock", "$count", "$data", "$edit-text",
+	"$encrypt", "$entity", "$error", "$image", "$jsontiddler",
+	"$raw", "$text"
 ]);
 
 exports.plugin = {
