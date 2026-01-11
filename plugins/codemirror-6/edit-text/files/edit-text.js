@@ -73,172 +73,170 @@ function hopAny(changedTiddlers, list) {
 	return false;
 }
 
-// Subclass to add config change handling
-function CM6EditTextWidget(parseTreeNode, options) {
-	BaseEditTextWidget.call(this, parseTreeNode, options);
-}
-
-CM6EditTextWidget.prototype = Object.create(BaseEditTextWidget.prototype);
-CM6EditTextWidget.prototype.constructor = CM6EditTextWidget;
-
-// ============================================================================
-// Theme management
-// ============================================================================
-
-/**
- * Get the current theme based on config and palette settings.
- * Supports auto-matching TiddlyWiki palette color-scheme.
- */
-CM6EditTextWidget.prototype._getCurrentTheme = function() {
-	var wiki = this.wiki;
-	var autoMatch = wiki.getTiddlerText(
-		"$:/config/codemirror-6/editor/auto-match-palette",
-		"yes"
-	) === "yes";
-
-	if(autoMatch) {
-		var palette = wiki.getTiddler("$:/palette");
-		var colorScheme = palette && palette.fields["color-scheme"];
-		var isDark = colorScheme === "dark";
-
-		return wiki.getTiddlerText(
-			isDark ?
-			"$:/config/codemirror-6/editor/theme-dark" :
-			"$:/config/codemirror-6/editor/theme-light",
-			isDark ? "vanilla-dark" : "vanilla"
-		);
+// Subclass using ES6 class syntax to add config change handling
+class CM6EditTextWidget extends BaseEditTextWidget {
+	constructor(parseTreeNode, options) {
+		super(parseTreeNode, options);
 	}
 
-	return wiki.getTiddlerText("$:/config/codemirror-6/editor/theme", "vanilla");
-};
+	// ============================================================================
+	// Theme management
+	// ============================================================================
 
-/**
- * Apply theme directly to DOM via data attribute.
- */
-CM6EditTextWidget.prototype._applyTheme = function() {
-	if(!this.engine || !this.engine.domNode) return;
-	this.engine.domNode.setAttribute("data-cm6-theme", this._getCurrentTheme());
-};
+	/**
+	 * Get the current theme based on config and palette settings.
+	 * Supports auto-matching TiddlyWiki palette color-scheme.
+	 */
+	_getCurrentTheme() {
+		var wiki = this.wiki;
+		var autoMatch = wiki.getTiddlerText(
+			"$:/config/codemirror-6/editor/auto-match-palette",
+			"yes"
+		) === "yes";
 
-// ============================================================================
-// Settings management
-// ============================================================================
+		if(autoMatch) {
+			var palette = wiki.getTiddler("$:/palette");
+			var colorScheme = palette && palette.fields["color-scheme"];
+			var isDark = colorScheme === "dark";
 
-/**
- * Build a settings snapshot from current config tiddlers
- */
-CM6EditTextWidget.prototype._buildSettingsSnapshot = function() {
-	var wiki = this.wiki;
+			return wiki.getTiddlerText(
+				isDark ?
+				"$:/config/codemirror-6/editor/theme-dark" :
+				"$:/config/codemirror-6/editor/theme-light",
+				isDark ? "vanilla-dark" : "vanilla"
+			);
+		}
 
-	return {
-		// Editing features
-		bracketMatching: boolConfig(wiki, "$:/config/codemirror-6/editor/bracketMatching", true),
-		closeBrackets: boolConfig(wiki, "$:/config/codemirror-6/editor/closeBrackets", true),
-
-		// Spellcheck
-		spellcheck: boolConfig(wiki, "$:/config/codemirror-6/editor/spellcheck", false),
-
-		// Indentation
-		indent: {
-			indentUnit: wiki.getTiddlerText("$:/config/codemirror-6/editor/indentUnit", "tabs"),
-			indentUnitMultiplier: wiki.getTiddlerText("$:/config/codemirror-6/editor/indentUnitMultiplier", "4")
-		},
-
-		// Keymap settings (engine resolves fallback chain based on mode)
-		keymap: wiki.getTiddlerText("$:/config/codemirror-6/editor/keymap", "default") || "default",
-		simpleKeymap: wiki.getTiddlerText("$:/config/codemirror-6/simple/keymap", ""),
-		simpleKeymapInput: wiki.getTiddlerText("$:/config/codemirror-6/simple/keymap-input", ""),
-		simpleKeymapTextarea: wiki.getTiddlerText("$:/config/codemirror-6/simple/keymap-textarea", ""),
-
-		// Theme (for plugins that might need it)
-		theme: this._getCurrentTheme(),
-
-		// Line numbers and active line (for line-numbers plugin)
-		lineNumbers: boolConfig(wiki, "$:/config/codemirror-6/editor/lineNumbers", true),
-		highlightActiveLine: boolConfig(wiki, "$:/config/codemirror-6/editor/highlightActiveLine", true),
-
-		// Autocompletion features
-		emojiPicker: boolConfig(wiki, "$:/config/codemirror-6/emoji-picker/enabled", true),
-		snippets: boolConfig(wiki, "$:/config/codemirror-6/snippets/enabled", true),
-		completeAnyWord: boolConfig(wiki, "$:/config/codemirror-6/editor/completeAnyWord", false),
-
-		// Visual features
-		colorPicker: boolConfig(wiki, "$:/config/codemirror-6/color-picker/enabled", false),
-		imagePreview: boolConfig(wiki, "$:/config/codemirror-6/image-preview/enabled", false),
-		wordCount: boolConfig(wiki, "$:/config/codemirror-6/word-count/enabled", false),
-		showTrailingWhitespace: boolConfig(wiki, "$:/config/codemirror-6/editor/showTrailingWhitespace", false),
-
-		// Navigation features
-		linkPreview: boolConfig(wiki, "$:/config/codemirror-6/link-preview/enabled", true),
-		clickNavigate: boolConfig(wiki, "$:/config/codemirror-6/click-navigate/enabled", true),
-
-		// Tag and widget handling
-		autoCloseTags: wiki.getTiddlerText("$:/config/codemirror-6/auto-close-tags/enabled", "yes") !== "no",
-
-		// Multi-cursor editing
-		multiCursor: boolConfig(wiki, "$:/config/codemirror-6/editor/multiCursor", true)
-	};
-};
-
-/**
- * Apply settings to the engine
- */
-CM6EditTextWidget.prototype._applyEngineSettings = function() {
-	var engine = this.engine;
-	if(!engine) return;
-
-	var settings = this._buildSettingsSnapshot();
-
-	// Trigger settingsChanged event on engine
-	if(typeof engine._triggerEvent === "function") {
-		engine._triggerEvent("settingsChanged", settings);
+		return wiki.getTiddlerText("$:/config/codemirror-6/editor/theme", "vanilla");
 	}
 
-	// Also call the handler directly if it exists
-	if(typeof engine._handleSettingsChanged === "function") {
-		engine._handleSettingsChanged(settings);
+	/**
+	 * Apply theme directly to DOM via data attribute.
+	 */
+	_applyTheme() {
+		if(!this.engine || !this.engine.domNode) return;
+		this.engine.domNode.setAttribute("data-cm6-theme", this._getCurrentTheme());
 	}
-};
 
-// ============================================================================
-// Render override to apply theme on creation
-// ============================================================================
+	// ============================================================================
+	// Settings management
+	// ============================================================================
 
-var baseRender = BaseEditTextWidget.prototype.render;
-CM6EditTextWidget.prototype.render = function(parent, nextSibling) {
-	var result = baseRender.call(this, parent, nextSibling);
-	// Apply theme after engine is created
-	this._applyTheme();
-	return result;
-};
+	/**
+	 * Build a settings snapshot from current config tiddlers
+	 */
+	_buildSettingsSnapshot() {
+		var wiki = this.wiki;
 
-// ============================================================================
-// Refresh override to handle config changes
-// ============================================================================
+		return {
+			// Editing features
+			bracketMatching: boolConfig(wiki, "$:/config/codemirror-6/editor/bracketMatching", true),
+			closeBrackets: boolConfig(wiki, "$:/config/codemirror-6/editor/closeBrackets", true),
 
-CM6EditTextWidget.prototype.refresh = function(changedTiddlers) {
-	// Theme changes: apply directly (fast path, DOM only)
-	if(hopAny(changedTiddlers, THEME_TIDDLERS)) {
+			// Spellcheck
+			spellcheck: boolConfig(wiki, "$:/config/codemirror-6/editor/spellcheck", false),
+
+			// Indentation
+			indent: {
+				indentUnit: wiki.getTiddlerText("$:/config/codemirror-6/editor/indentUnit", "tabs"),
+				indentUnitMultiplier: wiki.getTiddlerText("$:/config/codemirror-6/editor/indentUnitMultiplier", "4")
+			},
+
+			// Keymap settings (engine resolves fallback chain based on mode)
+			keymap: wiki.getTiddlerText("$:/config/codemirror-6/editor/keymap", "default") || "default",
+			simpleKeymap: wiki.getTiddlerText("$:/config/codemirror-6/simple/keymap", ""),
+			simpleKeymapInput: wiki.getTiddlerText("$:/config/codemirror-6/simple/keymap-input", ""),
+			simpleKeymapTextarea: wiki.getTiddlerText("$:/config/codemirror-6/simple/keymap-textarea", ""),
+
+			// Theme (for plugins that might need it)
+			theme: this._getCurrentTheme(),
+
+			// Line numbers and active line (for line-numbers plugin)
+			lineNumbers: boolConfig(wiki, "$:/config/codemirror-6/editor/lineNumbers", true),
+			highlightActiveLine: boolConfig(wiki, "$:/config/codemirror-6/editor/highlightActiveLine", true),
+
+			// Autocompletion features
+			emojiPicker: boolConfig(wiki, "$:/config/codemirror-6/emoji-picker/enabled", true),
+			snippets: boolConfig(wiki, "$:/config/codemirror-6/snippets/enabled", true),
+			completeAnyWord: boolConfig(wiki, "$:/config/codemirror-6/editor/completeAnyWord", false),
+
+			// Visual features
+			colorPicker: boolConfig(wiki, "$:/config/codemirror-6/color-picker/enabled", false),
+			imagePreview: boolConfig(wiki, "$:/config/codemirror-6/image-preview/enabled", false),
+			wordCount: boolConfig(wiki, "$:/config/codemirror-6/word-count/enabled", false),
+			showTrailingWhitespace: boolConfig(wiki, "$:/config/codemirror-6/editor/showTrailingWhitespace", false),
+
+			// Navigation features
+			linkPreview: boolConfig(wiki, "$:/config/codemirror-6/link-preview/enabled", true),
+			clickNavigate: boolConfig(wiki, "$:/config/codemirror-6/click-navigate/enabled", true),
+
+			// Tag and widget handling
+			autoCloseTags: wiki.getTiddlerText("$:/config/codemirror-6/auto-close-tags/enabled", "yes") !== "no",
+
+			// Multi-cursor editing
+			multiCursor: boolConfig(wiki, "$:/config/codemirror-6/editor/multiCursor", true)
+		};
+	}
+
+	/**
+	 * Apply settings to the engine
+	 */
+	_applyEngineSettings() {
+		var engine = this.engine;
+		if(!engine) return;
+
+		var settings = this._buildSettingsSnapshot();
+
+		// Trigger settingsChanged event on engine
+		if(typeof engine._triggerEvent === "function") {
+			engine._triggerEvent("settingsChanged", settings);
+		}
+
+		// Also call the handler directly if it exists
+		if(typeof engine._handleSettingsChanged === "function") {
+			engine._handleSettingsChanged(settings);
+		}
+	}
+
+	// ============================================================================
+	// Render override to apply theme on creation
+	// ============================================================================
+
+	render(parent, nextSibling) {
+		var result = super.render(parent, nextSibling);
+		// Apply theme after engine is created
 		this._applyTheme();
+		return result;
 	}
 
-	// Check if any config tiddler changed (for simple engine with settings support)
-	if(this.engine && typeof this.engine._handleSettingsChanged === "function") {
-		var settingsChanged = false;
-		var keys = Object.keys(changedTiddlers);
-		for(var i = 0; i < keys.length; i++) {
-			if(keys[i].indexOf("$:/config/codemirror-6/") === 0) {
-				settingsChanged = true;
-				break;
+	// ============================================================================
+	// Refresh override to handle config changes
+	// ============================================================================
+
+	refresh(changedTiddlers) {
+		// Theme changes: apply directly (fast path, DOM only)
+		if(hopAny(changedTiddlers, THEME_TIDDLERS)) {
+			this._applyTheme();
+		}
+
+		// Check if any config tiddler changed (for simple engine with settings support)
+		if(this.engine && typeof this.engine._handleSettingsChanged === "function") {
+			var settingsChanged = false;
+			var keys = Object.keys(changedTiddlers);
+			for(var i = 0; i < keys.length; i++) {
+				if(keys[i].indexOf("$:/config/codemirror-6/") === 0) {
+					settingsChanged = true;
+					break;
+				}
+			}
+			if(settingsChanged) {
+				this._applyEngineSettings();
 			}
 		}
-		if(settingsChanged) {
-			this._applyEngineSettings();
-		}
-	}
 
-	// Call parent refresh
-	return BaseEditTextWidget.prototype.refresh.call(this, changedTiddlers);
-};
+		// Call parent refresh
+		return super.refresh(changedTiddlers);
+	}
+}
 
 exports["edit-text"] = CM6EditTextWidget;

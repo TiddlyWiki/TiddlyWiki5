@@ -62,65 +62,66 @@ exports.plugin = {
 
 		if(!ViewPlugin || !Decoration || !WidgetType) return null;
 
-		// Image preview widget
-		function ImagePreviewWidget(src) {
-			this.src = src;
-		}
-		ImagePreviewWidget.prototype = Object.create(WidgetType.prototype);
-		ImagePreviewWidget.prototype.constructor = ImagePreviewWidget;
-
-		ImagePreviewWidget.prototype.toDOM = function() {
-			var container = document.createElement("div");
-			container.className = "cm-image-preview";
-
-			var img = document.createElement("img");
-
-			// Check if it's a tiddler title or external URL
-			var src = this.src;
-			if(src.match(/^https?:\/\//i)) {
-				// External URL
-				img.src = src;
-			} else {
-				// Tiddler reference
-				var tiddler = $tw.wiki.getTiddler(src);
-				if(tiddler) {
-					var type = tiddler.fields.type || "";
-					if(type.indexOf("image/") === 0) {
-						// Image tiddler - get canonical URI or base64
-						if(tiddler.fields._canonical_uri) {
-							img.src = tiddler.fields._canonical_uri;
-						} else if(tiddler.fields.text) {
-							img.src = "data:" + type + ";base64," + tiddler.fields.text;
-						}
-					} else {
-						// Not an image
-						container.textContent = "[Not an image]";
-						return container;
-					}
-				} else {
-					container.className = "cm-image-preview cm-image-preview-missing";
-					container.textContent = "[Image not found: " + src + "]";
-					return container;
-				}
+		// Image preview widget using ES6 class syntax
+		class ImagePreviewWidget extends WidgetType {
+			constructor(src) {
+				super();
+				this.src = src;
 			}
 
-			img.alt = src;
-			img.addEventListener("error", function() {
-				container.className = "cm-image-preview cm-image-preview-error";
-				container.textContent = "[Failed to load: " + src + "]";
-			});
+			toDOM() {
+				var container = document.createElement("div");
+				container.className = "cm-image-preview";
 
-			container.appendChild(img);
-			return container;
-		};
+				var img = document.createElement("img");
 
-		ImagePreviewWidget.prototype.eq = function(other) {
-			return other.src === this.src;
-		};
+				// Check if it's a tiddler title or external URL
+				var src = this.src;
+				if(src.match(/^https?:\/\//i)) {
+					// External URL
+					img.src = src;
+				} else {
+					// Tiddler reference
+					var tiddler = $tw.wiki.getTiddler(src);
+					if(tiddler) {
+						var type = tiddler.fields.type || "";
+						if(type.indexOf("image/") === 0) {
+							// Image tiddler - get canonical URI or base64
+							if(tiddler.fields._canonical_uri) {
+								img.src = tiddler.fields._canonical_uri;
+							} else if(tiddler.fields.text) {
+								img.src = "data:" + type + ";base64," + tiddler.fields.text;
+							}
+						} else {
+							// Not an image
+							container.textContent = "[Not an image]";
+							return container;
+						}
+					} else {
+						container.className = "cm-image-preview cm-image-preview-missing";
+						container.textContent = "[Image not found: " + src + "]";
+						return container;
+					}
+				}
 
-		ImagePreviewWidget.prototype.ignoreEvent = function() {
-			return true;
-		};
+				img.alt = src;
+				img.addEventListener("error", function() {
+					container.className = "cm-image-preview cm-image-preview-error";
+					container.textContent = "[Failed to load: " + src + "]";
+				});
+
+				container.appendChild(img);
+				return container;
+			}
+
+			eq(other) {
+				return other.src === this.src;
+			}
+
+			ignoreEvent() {
+				return true;
+			}
+		}
 
 		// Find image references in document
 		function findImages(doc) {
@@ -161,16 +162,18 @@ exports.plugin = {
 			return Decoration.set(widgets);
 		}
 
-		// Define the class properly with prototype methods
-		function ImagePreviewView(view) {
-			this.decorations = buildDecorations(view);
-		}
-
-		ImagePreviewView.prototype.update = function(update) {
-			if(update.docChanged) {
-				this.decorations = buildDecorations(update.view);
+		// ImagePreviewView class for ViewPlugin
+		class ImagePreviewView {
+			constructor(view) {
+				this.decorations = buildDecorations(view);
 			}
-		};
+
+			update(update) {
+				if(update.docChanged) {
+					this.decorations = buildDecorations(update.view);
+				}
+			}
+		}
 
 		// Create and cache the ViewPlugin
 		this._imagePlugin = ViewPlugin.fromClass(ImagePreviewView, {

@@ -56,99 +56,100 @@ exports.plugin = {
 
 		var self = this;
 
-		// Color swatch widget
-		function ColorSwatchWidget(color, from, to) {
-			this.color = color;
-			this.from = from;
-			this.to = to;
-			this._cleanup = null;
-		}
-		ColorSwatchWidget.prototype = Object.create(WidgetType.prototype);
-		ColorSwatchWidget.prototype.constructor = ColorSwatchWidget;
-
-		ColorSwatchWidget.prototype.toDOM = function(view) {
-			var widgetInstance = this;
-			var wrapper = document.createElement("span");
-			wrapper.className = "cm-color-swatch-wrapper";
-
-			var swatch = document.createElement("span");
-			swatch.className = "cm-color-swatch";
-			swatch.style.backgroundColor = this.color;
-			swatch.title = "Click to edit color: " + this.color;
-
-			var currentFrom = this.from;
-			var currentTo = this.to;
-
-			// For mobile compatibility, we create an always-present but hidden color input
-			// that responds to direct touch/click events
-			var picker = document.createElement("input");
-			picker.type = "color";
-			picker.className = "cm-color-picker-input";
-			picker.value = self._toHex(this.color);
-			// Position it over the swatch so touch events hit it directly
-			picker.style.cssText = "position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;border:none;padding:0;";
-			wrapper.style.position = "relative";
-			wrapper.appendChild(picker);
-
-			// Update swatch and document with new color
-			function updateColor() {
-				var newColor = picker.value;
-				var newLength = newColor.length;
-				// Update swatch color with forced repaint for Windows compatibility
-				requestAnimationFrame(function() {
-					swatch.style.backgroundColor = newColor;
-				});
-				// Replace the color at current tracked position
-				view.dispatch({
-					changes: {
-						from: currentFrom,
-						to: currentTo,
-						insert: newColor
-					}
-				});
-				// Update tracked position for next input event
-				// The 'to' position changes based on the new color length
-				currentTo = currentFrom + newLength;
-			}
-
-			// Handle swatch click for desktop fallback
-			function handleSwatchClick(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				picker.focus();
-				picker.click();
-			}
-
-			// Listen to both input (real-time) and change (final) events
-			picker.addEventListener("input", updateColor);
-			picker.addEventListener("change", updateColor);
-			swatch.addEventListener("click", handleSwatchClick);
-
-			// Store cleanup function for destroy
-			widgetInstance._cleanup = function() {
-				picker.removeEventListener("input", updateColor);
-				picker.removeEventListener("change", updateColor);
-				swatch.removeEventListener("click", handleSwatchClick);
-			};
-
-			wrapper.appendChild(swatch);
-			return wrapper;
-		};
-
-		ColorSwatchWidget.prototype.destroy = function() {
-			if(this._cleanup) {
-				this._cleanup();
+		// Color swatch widget using ES6 class syntax
+		class ColorSwatchWidget extends WidgetType {
+			constructor(color, from, to) {
+				super();
+				this.color = color;
+				this.from = from;
+				this.to = to;
 				this._cleanup = null;
 			}
-		};
 
-		ColorSwatchWidget.prototype.eq = function(other) {
-			return other.color === this.color && other.from === this.from && other.to === this.to;
-		};
+			toDOM(view) {
+				var widgetInstance = this;
+				var wrapper = document.createElement("span");
+				wrapper.className = "cm-color-swatch-wrapper";
 
-		ColorSwatchWidget.prototype.ignoreEvent = function() {
-			return false;
-		};
+				var swatch = document.createElement("span");
+				swatch.className = "cm-color-swatch";
+				swatch.style.backgroundColor = this.color;
+				swatch.title = "Click to edit color: " + this.color;
+
+				var currentFrom = this.from;
+				var currentTo = this.to;
+
+				// For mobile compatibility, we create an always-present but hidden color input
+				// that responds to direct touch/click events
+				var picker = document.createElement("input");
+				picker.type = "color";
+				picker.className = "cm-color-picker-input";
+				picker.value = self._toHex(this.color);
+				// Position it over the swatch so touch events hit it directly
+				picker.style.cssText = "position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;border:none;padding:0;";
+				wrapper.style.position = "relative";
+				wrapper.appendChild(picker);
+
+				// Update swatch and document with new color
+				function updateColor() {
+					var newColor = picker.value;
+					var newLength = newColor.length;
+					// Update swatch color with forced repaint for Windows compatibility
+					requestAnimationFrame(function() {
+						swatch.style.backgroundColor = newColor;
+					});
+					// Replace the color at current tracked position
+					view.dispatch({
+						changes: {
+							from: currentFrom,
+							to: currentTo,
+							insert: newColor
+						}
+					});
+					// Update tracked position for next input event
+					// The 'to' position changes based on the new color length
+					currentTo = currentFrom + newLength;
+				}
+
+				// Handle swatch click for desktop fallback
+				function handleSwatchClick(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					picker.focus();
+					picker.click();
+				}
+
+				// Listen to both input (real-time) and change (final) events
+				picker.addEventListener("input", updateColor);
+				picker.addEventListener("change", updateColor);
+				swatch.addEventListener("click", handleSwatchClick);
+
+				// Store cleanup function for destroy
+				widgetInstance._cleanup = function() {
+					picker.removeEventListener("input", updateColor);
+					picker.removeEventListener("change", updateColor);
+					swatch.removeEventListener("click", handleSwatchClick);
+				};
+
+				wrapper.appendChild(swatch);
+				return wrapper;
+			}
+
+			destroy() {
+				if(this._cleanup) {
+					this._cleanup();
+					this._cleanup = null;
+				}
+			}
+
+			eq(other) {
+				return other.color === this.color && other.from === this.from && other.to === this.to;
+			}
+
+			ignoreEvent() {
+				return false;
+			}
+		}
 
 		// Convert color to hex for the color picker
 		this._toHex = function(color) {
@@ -262,16 +263,18 @@ exports.plugin = {
 			return Decoration.set(widgets);
 		}
 
-		// Define the class properly with prototype methods
-		function ColorPickerView(view) {
-			this.decorations = buildDecorations(view);
-		}
-
-		ColorPickerView.prototype.update = function(update) {
-			if(update.docChanged || update.viewportChanged) {
-				this.decorations = buildDecorations(update.view);
+		// ColorPickerView class for ViewPlugin
+		class ColorPickerView {
+			constructor(view) {
+				this.decorations = buildDecorations(view);
 			}
-		};
+
+			update(update) {
+				if(update.docChanged || update.viewportChanged) {
+					this.decorations = buildDecorations(update.view);
+				}
+			}
+		}
 
 		// Create ViewPlugin with the class
 		var colorPlugin = ViewPlugin.fromClass(ColorPickerView, {
