@@ -3,7 +3,7 @@
   "name": "Image Preview",
   "description": "Inline preview of images referenced in the editor",
   "author": "TiddlyWiki",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "core-version": ">=5.3.0",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",

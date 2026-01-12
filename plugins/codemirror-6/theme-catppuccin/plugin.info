@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/theme-catppuccin",
   "name": "CodeMirror 6 Catppuccin Theme",
   "description": "Catppuccin pastel theme for CodeMirror 6 (Latte, Frappé, Macchiato, Mocha)",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme styles license",
