@@ -4,7 +4,7 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: usability
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9248
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9248 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9575
 github-contributors: Leilei332
 
 
