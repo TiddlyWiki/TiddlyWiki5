@@ -7,7 +7,6 @@ This widget allows defining multiple variables at once, while allowing
 the later variables to depend upon the earlier ones.
 
 ```
-\define helloworld() Hello world!
 <$let currentTiddler="target" value={{!!value}} currentTiddler="different">
   {{!!value}} will be different from <<value>>
 </$let>
@@ -56,7 +55,7 @@ LetWidget.prototype.computeAttributes = function() {
 	});
 	// Run through again, setting variables and looking for differences
 	$tw.utils.each(this.currentValueFor,function(value,name) {
-		if(!$tw.utils.isArrayEqual(self.attributes[name],value)) {
+		if(self.attributes[name] === undefined || !$tw.utils.isArrayEqual(self.attributes[name],value)) {
 			self.attributes[name] = value;
 			self.setVariable(name,value);
 			changedAttributes[name] = true;
@@ -68,7 +67,7 @@ LetWidget.prototype.computeAttributes = function() {
 LetWidget.prototype.getVariableInfo = function(name,options) {
 	// Special handling: If this variable exists in this very $let, we can
 	// use it, but only if it's been staged.
-	if ($tw.utils.hop(this.currentValueFor,name)) {
+	if($tw.utils.hop(this.currentValueFor,name)) {
 		var value = this.currentValueFor[name];
 		return {
 			text: value[0] || "",
