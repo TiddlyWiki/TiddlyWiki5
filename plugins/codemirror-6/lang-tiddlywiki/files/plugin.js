@@ -318,6 +318,14 @@ function getFilterOperators() {
 		});
 	}
 
+	// Add functions (can be called directly as filter operators)
+	var functions = getFunctionNames();
+	functions.forEach(function(fn) {
+		if(operators.indexOf(fn) === -1) {
+			operators.push(fn);
+		}
+	});
+
 	_cache.operators = operators;
 	return operators;
 }
@@ -887,6 +895,13 @@ exports.plugin = {
 	init: function(cm6Core) {
 		this._core = cm6Core;
 		this._support = null;
+		// Register the language with completions
+		registerLanguage(cm6Core);
+		// Export cache clear function for external use
+		if(!$tw.CodeMirror) {
+			$tw.CodeMirror = {};
+		}
+		$tw.CodeMirror.clearAutocompleteCache = clearCache;
 	},
 
 	registerCompartments: function() {

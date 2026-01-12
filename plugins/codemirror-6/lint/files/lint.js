@@ -2379,12 +2379,12 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 				var macroName = text.trim();
 				// Check global definitions first (macros, procedures, functions)
 				// Also check widget tree scope (variables from parent widgets wrapping the editor)
-				// Also check local variables (includes parameters from all definitions in the tiddler)
+				// Note: localDefs.variables is NOT checked here because those are scoped variables
+				// that must be validated via getVariablesInScope and getCallSiteReachableScope
 				var isGloballyDefined = isDefinitionKnown(macroName, "any") ||
 					localDefs.macros.has(macroName) ||
 					localDefs.procedures.has(macroName) ||
 					localDefs.functions.has(macroName) ||
-					localDefs.variables.has(macroName) ||
 					builtInVariables.has(macroName) ||
 					widgetScopeVars.has(macroName);
 
@@ -2422,12 +2422,12 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 				var varName = text.replace(/^<|>$/g, "").trim();
 				if(varName) {
 					// Check global definitions first, plus widget tree scope
-					// Also check local variables (includes parameters from all definitions in the tiddler)
+					// Note: localDefs.variables is NOT checked here because those are scoped variables
+					// that must be validated via getVariablesInScope and getCallSiteReachableScope
 					var isGloballyDefined = isDefinitionKnown(varName, "any") ||
 						localDefs.macros.has(varName) ||
 						localDefs.procedures.has(varName) ||
 						localDefs.functions.has(varName) ||
-						localDefs.variables.has(varName) ||
 						builtInVariables.has(varName) ||
 						widgetScopeVars.has(varName);
 
@@ -2467,12 +2467,12 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 					var varName = text.trim();
 					if(varName) {
 						// Check global definitions first, plus widget tree scope
-						// Also check local variables (includes parameters from all definitions in the tiddler)
+						// Note: localDefs.variables is NOT checked here because those are scoped variables
+						// that must be validated via getVariablesInScope and getCallSiteReachableScope
 						var isGloballyDefined = isDefinitionKnown(varName, "any") ||
 							localDefs.macros.has(varName) ||
 							localDefs.procedures.has(varName) ||
 							localDefs.functions.has(varName) ||
-							localDefs.variables.has(varName) ||
 							builtInVariables.has(varName) ||
 							widgetScopeVars.has(varName);
 
@@ -2502,6 +2502,67 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 								});
 							}
 						}
+					}
+				}
+			}
+
+			// Check $param$ placeholders in \define macros
+			if(nodeType === "Placeholder" && isRuleEnabled("undefinedMacros")) {
+				// Find the VariableName child to get the parameter name
+				var paramName = null;
+				var cursor = node.node.cursor();
+				if(cursor.firstChild()) {
+					do {
+						if(cursor.name === "VariableName") {
+							paramName = state.doc.sliceString(cursor.from, cursor.to);
+							break;
+						}
+					} while(cursor.nextSibling());
+				}
+
+				if(paramName) {
+					// Find the containing MacroDefinition (if any)
+					var containingMacro = null;
+					var parent = node.node.parent;
+					while(parent) {
+						if(parent.type.name === "MacroDefinition") {
+							containingMacro = parent;
+							break;
+						}
+						// Stop at other definition types - $param$ is only valid in \define
+						if(parent.type.name === "ProcedureDefinition" ||
+							parent.type.name === "FunctionDefinition" ||
+							parent.type.name === "WidgetDefinition") {
+							break;
+						}
+						parent = parent.parent;
+					}
+
+					if(containingMacro) {
+						// Extract valid parameters from the containing macro
+						var validParams = extractPragmaScopeVariables(containingMacro, docText);
+						var validParamsSet = new Set(validParams);
+
+						// Check if the placeholder name is valid
+						if(!validParamsSet.has(paramName) && !builtInVariables.has(paramName)) {
+							diagnostics.push({
+								from: from,
+								to: to,
+								severity: "error",
+								message: "Unknown parameter \"$" + paramName + "$\". Available: " +
+									(validParams.length > 0 ? validParams.join(", ") : "(none)"),
+								source: "tiddlywiki"
+							});
+						}
+					} else {
+						// $param$ used outside of \define - this is invalid
+						diagnostics.push({
+							from: from,
+							to: to,
+							severity: "error",
+							message: "Placeholder \"$" + paramName + "$\" can only be used inside \\define macros",
+							source: "tiddlywiki"
+						});
 					}
 				}
 			}
@@ -2604,6 +2665,41 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 					}
 				}]
 			});
+		});
+	}
+
+	// ========================================
+	// Unknown Filter Operators/Functions
+	// ========================================
+
+	if(isRuleEnabled("filterSyntax")) {
+		var knownOperators = _getKnownFilterOperators();
+		tree.iterate({
+			enter: function(node) {
+				if(node.type.name === "FilterOperatorName") {
+					var opName = docText.slice(node.from, node.to).trim();
+					// Skip empty names
+					if(!opName) return;
+					// Skip negation prefix
+					if(opName.startsWith("!")) {
+						opName = opName.substring(1);
+					}
+					// Skip if it's a known filter operator
+					if(knownOperators.has(opName)) return;
+					// Skip if it's a known function (globally defined)
+					if(isDefinitionKnown(opName, "any")) return;
+					// Skip if it's a locally defined function
+					if(localDefs.functions.has(opName)) return;
+					// Unknown operator/function
+					diagnostics.push({
+						from: node.from,
+						to: node.to,
+						severity: "warning",
+						message: "Unknown filter operator or function: " + opName,
+						source: "tiddlywiki"
+					});
+				}
+			}
 		});
 	}
 

@@ -9,14 +9,6 @@
             }
         },
         {
-            "file": "register.js",
-            "fields": {
-                "type": "application/javascript",
-                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-tiddlywiki/register.js",
-                "module-type": "startup"
-            }
-        },
-        {
             "file": "plugin.js",
             "fields": {
                 "type": "application/javascript",

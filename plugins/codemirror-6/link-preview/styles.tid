@@ -7,6 +7,9 @@ tags: $:/tags/Stylesheet
 
 .cm6-tw-link-preview {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+    background: <<colour tiddler-background>>;
+    border: 1px solid <<colour tiddler-border>>;
+    color: <<colour foreground>>;
 }
 
 .cm6-preview-content {
@@ -17,8 +20,8 @@ tags: $:/tags/Stylesheet
 
 .cm6-preview-title {
     font-size: 14px;
-    color: var(--color-foreground, #333);
-    border-bottom: 1px solid var(--color-border, #ddd);
+    color: <<colour foreground>>;
+    border-bottom: 1px solid <<colour tiddler-border>>;
     padding-bottom: 4px;
     margin-bottom: 2px;
 }
@@ -33,14 +36,14 @@ tags: $:/tags/Stylesheet
     display: inline-block;
     padding: 1px 6px;
     font-size: 11px;
-    background: var(--color-tag-background, #e8e8e8);
-    color: var(--color-tag-foreground, #555);
+    background: <<colour tag-background>>;
+    color: <<colour tag-foreground>>;
     border-radius: 3px;
 }
 
 .cm6-preview-type {
     font-size: 11px;
-    color: var(--color-muted-foreground, #888);
+    color: <<colour muted-foreground>>;
     font-style: italic;
 }
 
@@ -83,7 +86,7 @@ tags: $:/tags/Stylesheet
 /* Legacy: raw text fallback */
 .cm6-preview-text {
     font-size: 12px;
-    color: var(--color-foreground, #444);
+    color: <<colour foreground>>;
     line-height: 1.5;
     max-height: 150px;
     overflow-y: auto;
@@ -100,13 +103,13 @@ tags: $:/tags/Stylesheet
 
 .cm6-preview-meta {
     font-size: 10px;
-    color: var(--color-muted-foreground, #999);
-    border-top: 1px solid var(--color-border, #eee);
+    color: <<colour muted-foreground>>;
+    border-top: 1px solid <<colour tiddler-border>>;
     padding-top: 4px;
     margin-top: 2px;
 }
 
 .cm6-preview-missing {
-    color: var(--color-warning, #c44);
+    color: <<colour alert-highlight>>;
     font-style: italic;
 }

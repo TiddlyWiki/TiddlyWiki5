@@ -89,8 +89,6 @@ function createTooltip() {
 		"display: none",
 		"flex-direction: column",
 		"padding: 8px 12px",
-		"background: var(--color-background, #fff)",
-		"border: 1px solid var(--color-border, #ccc)",
 		"border-radius: 4px",
 		"box-shadow: 0 2px 8px rgba(0,0,0,0.15)",
 		"font-size: 13px",
