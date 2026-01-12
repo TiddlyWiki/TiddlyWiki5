@@ -3409,6 +3409,7 @@ exports.plugin = {
 		var lintConfigChanged = false;
 		var globalConfigChanged = false;
 		var perTiddlerChanged = false;
+		var contentTiddlerChanged = false;
 		var perTiddlerDisableTiddler = tiddlerTitle ? "$:/temp/codemirror-6/lint-disabled/" + tiddlerTitle : null;
 
 		for(var title in changedTiddlers) {
@@ -3419,6 +3420,14 @@ exports.plugin = {
 				lintConfigChanged = true;
 			} else if(perTiddlerDisableTiddler && title === perTiddlerDisableTiddler) {
 				perTiddlerChanged = true;
+			} else {
+				// Check if it's a draft tiddler (has draft.of field)
+				var tiddler = $tw.wiki.getTiddler(title);
+				var isDraft = tiddler && tiddler.fields["draft.of"];
+				if(!isDraft) {
+					// A non-draft tiddler changed - may affect missing links lint
+					contentTiddlerChanged = true;
+				}
 			}
 		}
 
@@ -3473,6 +3482,11 @@ exports.plugin = {
 						_forceLinting(engine.view);
 					}, 50);
 				}
+			}
+		} else if(contentTiddlerChanged) {
+			// A tiddler was created/deleted/modified - re-lint to update missing links
+			if(_forceLinting && isLintEnabled() && isRuleEnabled("missingLinks")) {
+				_forceLinting(engine.view);
 			}
 		}
 	},
