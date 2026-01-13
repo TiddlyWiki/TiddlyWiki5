@@ -2159,9 +2159,9 @@ Returns the path of the plugin folder using methods registed in boot.node.js
 */
 $tw.findLibraryItem = function(name,paths) {
 	var pluginPath;
-	for (var locator in pluginLocators) {
+	for(var locator in pluginLocators) {
 		pluginPath = pluginLocators[locator](name,paths);
-		if (pluginPath) {
+		if(pluginPath) {
 			return pluginPath;
 		}
 	}

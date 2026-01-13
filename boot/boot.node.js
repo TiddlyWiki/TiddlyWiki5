@@ -36,7 +36,7 @@ if(process.env.npm_lifecycle_event) {
 	// It appears we're running as an npm script.
 	// We'll add to exports a method which will search
 	// in possible npm locations.
-	exports.findPluginInNPM = function(name,paths) {
+	exports.findPluginInNPM = function(name) {
 		return getNpmMap()[name];
 	};
 }
@@ -50,7 +50,7 @@ function getNpmMap() {
 	if(!npmMap) {
 		npmMap = Object.create(null);
 		var cwd = process.cwd();
-		var searchPaths = require('module')._nodeModulePaths(cwd);
+		var searchPaths = require("module")._nodeModulePaths(cwd);
 		// We go in reverse order, so that higher priority npm paths will
 		// override lower priority ones as we go.
 		for(var i = searchPaths.length-1; i >= 0; i--) {
