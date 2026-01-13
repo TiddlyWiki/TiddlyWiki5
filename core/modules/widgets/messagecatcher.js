@@ -55,29 +55,6 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 						props["list-" + prefix] = $tw.utils.stringifyList(names);
 						return props;
 					};
-					// Collect event object properties for JSON (recursively, preserving types)
-					const collectJsonProps = obj => {
-						const result = {};
-						$tw.utils.each(obj,(value,name) => {
-							const valueType = typeof value;
-							if(value === null || ["string","boolean","number"].indexOf(valueType) !== -1) {
-								result[name] = value;
-							} else if(valueType === "object" && value.constructor === Object) {
-								const processedObject = collectJsonProps(value);
-								if(Object.keys(processedObject).length > 0) {
-									result[name] = processedObject;
-								}
-							}
-						// Non-plain objects (DOM nodes, DOM events, widgets) and empty objects are not added
-						});
-						return result;
-					};
-					let stringifiedProperties;
-					try {
-						stringifiedProperties = JSON.stringify(collectJsonProps(event));
-					} catch(e) {
-						stringifiedProperties = "[Unserializable]";
-					}
 					var variables = $tw.utils.extend(
 						{},
 						collectProps(event.paramObject,"event-paramObject"),
@@ -86,7 +63,7 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 						collectProps(event,"message"),
 						{
 							modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event),
-							"json-message": stringifiedProperties
+							"json-message": JSON.stringify($tw.utils.copyObjectPropertiesSafe(event,{excludeProperties: ["event"]}))
 						});
 					isActionStringExecuting = true;
 					self.invokeActionString(actions,self,event,variables);

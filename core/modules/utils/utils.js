@@ -55,7 +55,7 @@ Return the dflt (default) parameter if str is not a base-10 number.
 exports.getInt = function(str,deflt) {
 	var i = parseInt(str,10);
 	return isNaN(i) ? deflt : i;
-}
+};
 
 /*
 Repeatedly replaces a substring within a string. Like String.prototype.replace, but without any of the default special handling of $ sequences in the replace string
@@ -69,12 +69,12 @@ exports.replaceString = function(text,search,replace) {
 exports.trimPrefix = function(str,unwanted) {
 	if(typeof str === "string" && typeof unwanted === "string") {
 		if(unwanted === "") {
-			return str.replace(/^\s\s*/, '');
+			return str.replace(/^\s\s*/, "");
 		} else {
 			// Safely regexp-escape the unwanted text
-			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
-			var regex = new RegExp('^(' + unwanted + ')+');
-			return str.replace(regex, '');
+			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, "\\$&");
+			var regex = new RegExp("^(" + unwanted + ")+");
+			return str.replace(regex, "");
 		}
 	} else {
 		return str;
@@ -84,12 +84,12 @@ exports.trimPrefix = function(str,unwanted) {
 exports.trimSuffix = function(str,unwanted) {
 	if(typeof str === "string" && typeof unwanted === "string") {
 		if(unwanted === "") {
-			return str.replace(/\s\s*$/, '');
+			return str.replace(/\s\s*$/, "");
 		} else {
 			// Safely regexp-escape the unwanted text
-			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
-			var regex = new RegExp('(' + unwanted + ')+$');
-			return str.replace(regex, '');
+			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, "\\$&");
+			var regex = new RegExp("(" + unwanted + ")+$");
+			return str.replace(regex, "");
 		}
 	} else {
 		return str;
@@ -101,14 +101,14 @@ Convert a string to sentence case (ie capitalise first letter)
 */
 exports.toSentenceCase = function(str) {
 	return (str || "").replace(/^\S/, function(c) {return c.toUpperCase();});
-}
+};
 
 /*
 Convert a string to title case (ie capitalise each initial letter)
 */
 exports.toTitleCase = function(str) {
 	return (str || "").replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
-}
+};
 
 /*
 Find the line break preceding a given position in a string
@@ -222,6 +222,62 @@ exports.extendDeepCopy = function(object,extendedProperties) {
 			result[t] = $tw.utils.deepCopy(extendedProperties[t]);
 		}
 	}
+	return result;
+};
+
+exports.copyObjectPropertiesSafe = function(object,options) {
+	options = options || {};
+	const excludeProperties = options.excludeProperties || [];
+	const seen = new Set();
+  
+	const isDOMElement = value => value instanceof Node || value instanceof Window;
+  
+	const safeCopy = (obj, path = "") => {
+		//skip circular references
+		if(seen.has(obj)) {
+			return undefined;
+		}
+		//skip functions
+		if(typeof obj !== "object" || obj === null) {
+			return obj;
+		}
+		//skip DOM elements
+		if(isDOMElement(obj)) {
+			return undefined;
+		}
+		//skip widgets (have parseTreeNode and are not plain objects)
+		if(obj.parseTreeNode !== undefined && obj.constructor !== Object) {
+			return undefined;
+		}
+		//copy each element of the array
+		if(Array.isArray(obj)) {
+			return obj.map(item => safeCopy(item, path))
+				.filter(item => item !== undefined);
+		}
+
+		seen.add(obj);
+		const copy = {};
+		for(const key in obj) {
+			// Build the full path for this property
+			const fullPath = path ? `${path}.${key}` : key;
+			// Skip if this exact path is excluded
+			if(excludeProperties.includes(fullPath)) {
+				continue;
+			}
+			try {
+				const value = safeCopy(obj[key], fullPath);
+				if(value !== undefined) {
+					copy[key] = value;
+				}
+			} catch(e) {
+				// Skip unserializable items
+			}
+		}
+		return copy;
+	};
+
+	const result = safeCopy(object);
+	seen.clear();
 	return result;
 };
 
@@ -358,8 +414,8 @@ exports.formatDateString = function(date,template) {
 			}],
 			[/^TZD/, function() {
 				var tz = date.getTimezoneOffset(),
-				atz = Math.abs(tz);
-				return (tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60)) + ':' + $tw.utils.pad(atz % 60);
+					atz = Math.abs(tz);
+				return (tz < 0 ? "+" : "-") + $tw.utils.pad(Math.floor(atz / 60)) + ":" + $tw.utils.pad(atz % 60);
 			}],
 			[/^wYY/, function() {
 				return $tw.utils.pad($tw.utils.getYearForWeekNo(date) - 2000);
@@ -568,9 +624,9 @@ exports.unescapeLineBreaks = function(s) {
 exports.escape = function(ch) {
 	var charCode = ch.charCodeAt(0);
 	if(charCode <= 0xFF) {
-		return '\\x' + $tw.utils.pad(charCode.toString(16).toUpperCase());
+		return "\\x" + $tw.utils.pad(charCode.toString(16).toUpperCase());
 	} else {
-		return '\\u' + $tw.utils.pad(charCode.toString(16).toUpperCase(),4);
+		return "\\u" + $tw.utils.pad(charCode.toString(16).toUpperCase(),4);
 	}
 };
 
@@ -587,11 +643,11 @@ exports.stringify = function(s, rawUnicode) {
 	*/
 	var regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
 	return (s || "")
-		.replace(/\\/g, '\\\\')            // backslash
+		.replace(/\\/g, "\\\\")            // backslash
 		.replace(/"/g, '\\"')              // double quote character
 		.replace(/'/g, "\\'")              // single quote character
-		.replace(/\r/g, '\\r')             // carriage return
-		.replace(/\n/g, '\\n')             // line feed
+		.replace(/\r/g, "\\r")             // carriage return
+		.replace(/\n/g, "\\n")             // line feed
 		.replace(regex, exports.escape);   // non-ASCII characters
 };
 
@@ -601,15 +657,15 @@ exports.jsonStringify = function(s, rawUnicode) {
 	// See http://www.json.org/
 	var regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
 	return (s || "")
-		.replace(/\\/g, '\\\\')            // backslash
+		.replace(/\\/g, "\\\\")            // backslash
 		.replace(/"/g, '\\"')              // double quote character
-		.replace(/\r/g, '\\r')             // carriage return
-		.replace(/\n/g, '\\n')             // line feed
-		.replace(/\x08/g, '\\b')           // backspace
-		.replace(/\x0c/g, '\\f')           // formfeed
-		.replace(/\t/g, '\\t')             // tab
+		.replace(/\r/g, "\\r")             // carriage return
+		.replace(/\n/g, "\\n")             // line feed
+		.replace(/\x08/g, "\\b")           // backspace
+		.replace(/\x0c/g, "\\f")           // formfeed
+		.replace(/\t/g, "\\t")             // tab
 		.replace(regex,function(s) {
-			return '\\u' + $tw.utils.pad(s.charCodeAt(0).toString(16).toUpperCase(),4);
+			return "\\u" + $tw.utils.pad(s.charCodeAt(0).toString(16).toUpperCase(),4);
 		}); // non-ASCII characters
 };
 
@@ -617,7 +673,7 @@ exports.jsonStringify = function(s, rawUnicode) {
 Escape the RegExp special characters with a preceding backslash
 */
 exports.escapeRegExp = function(s) {
-    return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, '\\$&');
+	return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, "\\$&");
 };
 
 /*
@@ -700,7 +756,7 @@ exports.parseTextReference = function(textRef) {
 		}
 	} else {
 		// If we couldn't parse it
-		result.title = textRef
+		result.title = textRef;
 	}
 	return result;
 };
@@ -759,9 +815,9 @@ Cryptographic hash function as used by sha256 filter operator
 options.length .. number of characters returned defaults to 64
 */
 exports.sha256 = function(str, options) {
-	options = options || {}
+	options = options || {};
 	return $tw.sjcl.codec.hex.fromBits($tw.sjcl.hash.sha256.hash(str)).substr(0,options.length || 64);
-}
+};
 
 /*
 Decode a base64 string
