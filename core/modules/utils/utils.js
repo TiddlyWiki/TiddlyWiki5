@@ -225,6 +225,16 @@ exports.extendDeepCopy = function(object,extendedProperties) {
 	return result;
 };
 
+/*
+Safely copy object properties, filtering out circular references, DOM elements, 
+widgets, and functions.
+	object: the object to copy
+	options: optional object with the following property:
+		excludeProperties: array of property paths to exclude from the copy
+			- Top-level exclusions: ["propertyName"]
+			- Nested exclusions: ["parent.child", "parent.grandchild.property"]
+Returns a new object with safely copied properties
+*/
 exports.copyObjectPropertiesSafe = function(object,options) {
 	options = options || {};
 	const excludeProperties = options.excludeProperties || [];
