@@ -80,26 +80,31 @@ var builtInVariables = new Set([
  * Map of widgets to the implicit variables they provide within their action attributes.
  * These variables are available in the scope of the action content and passed to
  * sub-macro-calls and sub-transclusions.
+ *
+ * Based on actual TiddlyWiki widget source code - see core/modules/widgets/*.js
+ * Only includes widgets that actually pass variables to invokeActionString.
  */
 var actionImplicitVariables = {
-	// Drag and drop widgets
+	// Drag and drop widgets (see droppable.js, draggable.js)
 	"$droppable": ["actionTiddler", "actionTiddlerList", "modifier"],
 	"$dropzone": ["actionTiddler", "actionTiddlerList", "modifier"],
 	"$draggable": ["actionTiddler"],
 
-	// Form widgets
-	"$button": ["tv-widgetnode-width", "tv-widgetnode-height"],
-	"$checkbox": ["actionValue"],
+	// Form widgets (see button.js, radio.js, range.js)
+	// $button only provides modifier
+	"$button": ["modifier"],
+	// $checkbox does NOT pass any variables to invokeActionString
+	// $radio passes actionValue
 	"$radio": ["actionValue"],
-	"$select": ["actionValue"],
+	// $select does NOT pass any variables to invokeActionString
+	// $range passes actionValue and actionValueHasChanged
 	"$range": ["actionValue", "actionValueHasChanged"],
-	"$edit-text": ["actionValue"],
 
-	// Event handling widgets
-	"$linkcatcher": ["linkToCatch", "navigateFromTitle", "navigateFromNode", "navigateTo", "navigateFromClientRect", "event"],
-	"$messagecatcher": ["event"],
+	// Event handling widgets (see linkcatcher.js, messagecatcher.js, eventcatcher.js, keyboard.js)
+	"$linkcatcher": ["navigateTo", "modifier"],
+	"$messagecatcher": ["modifier", "event-*", "event-paramObject-*", "list-event", "list-event-paramObject"],
 	"$eventcatcher": [
-		"dom-*", // All DOM attributes with dom- prefix
+		"dom-*", // All DOM attributes with dom- prefix (from collectDOMVariables)
 		"modifier",
 		"event-mousebutton",
 		"event-type",
@@ -119,25 +124,20 @@ var actionImplicitVariables = {
 		"event-fromviewport-posx",
 		"event-fromviewport-posy"
 	],
-	"$keyboard": ["event", "modifier"],
-
-	// Other widgets with actions
-	"$list": ["actionValue"]
+	"$keyboard": ["modifier", "event-key-descriptor"]
 };
 
 /**
  * Map of widgets to their action attribute names.
+ * Only includes widgets that actually provide implicit variables.
  */
 var actionAttributeNames = {
 	"$droppable": ["actions"],
 	"$dropzone": ["actions"],
 	"$draggable": ["startactions", "endactions"],
 	"$button": ["actions"],
-	"$checkbox": ["actions", "checkactions", "uncheckactions"],
 	"$radio": ["actions"],
-	"$select": ["actions"],
 	"$range": ["actions", "actionsStart", "actionsStop"],
-	"$edit-text": ["actions", "inputActions", "refreshActions", "focusActions", "blurActions"],
 	"$linkcatcher": ["actions"],
 	"$messagecatcher": ["actions"],
 	"$eventcatcher": [
@@ -160,8 +160,7 @@ var actionAttributeNames = {
 		"actions-dragstart", "actions-dragend", "actions-dragenter", "actions-dragleave", "actions-dragover", "actions-drop",
 		"actions-pointerdown", "actions-pointerup", "actions-pointermove", "actions-pointerover", "actions-pointerout", "actions-pointerenter", "actions-pointerleave", "actions-pointercancel"
 	],
-	"$keyboard": ["actions"],
-	"$list": ["actions", "emptyActions", "historyActions"]
+	"$keyboard": ["actions"]
 };
 
 // ============================================================================
@@ -506,55 +505,71 @@ function getVariablesInScope(node, docText) {
 
 /**
  * Extract action implicit variables when inside an action attribute of a widget.
- * @param {SyntaxNode} attrNode - The Attribute node
+ * Walks up the tree to find ALL enclosing action attributes and accumulates their variables,
+ * because in TiddlyWiki action variables from outer widgets are inherited by nested widgets.
+ * @param {SyntaxNode} node - Starting node to walk up from
  * @param {string} docText - Full document text
  * @returns {string[]} Array of action implicit variables available in this context
  */
-function extractActionScopeVariables(attrNode, docText) {
+function extractActionScopeVariables(node, docText) {
 	var vars = [];
+	var seenVars = {};
 
-	// Get the attribute name
-	var attrName = null;
-	var cursor = attrNode.cursor();
-	cursor.firstChild();
-	do {
-		if(cursor.name === "AttributeName") {
-			attrName = docText.slice(cursor.from, cursor.to);
-			break;
-		}
-	} while(cursor.nextSibling());
-
-	if(!attrName) return vars;
-
-	// Find the parent widget
-	var parent = attrNode.parent;
-	while(parent) {
-		if(parent.type.name === "Widget" || parent.type.name === "InlineWidget") {
-			// Get widget name
-			var widgetName = null;
-			var widgetCursor = parent.cursor();
-			widgetCursor.firstChild();
+	// Walk up looking for Attribute nodes - accumulate ALL action contexts
+	var current = node;
+	while(current) {
+		if(current.type.name === "Attribute") {
+			// Get the attribute name
+			var attrName = null;
+			var cursor = current.cursor();
+			cursor.firstChild();
 			do {
-				if(widgetCursor.name === "WidgetName") {
-					widgetName = docText.slice(widgetCursor.from, widgetCursor.to);
+				if(cursor.name === "AttributeName") {
+					attrName = docText.slice(cursor.from, cursor.to);
 					break;
 				}
-			} while(widgetCursor.nextSibling());
+			} while(cursor.nextSibling());
 
-			if(widgetName) {
-				// Check if this attribute is an action attribute for this widget
-				var actionAttrs = actionAttributeNames[widgetName.toLowerCase()] || actionAttributeNames[widgetName];
-				if(actionAttrs && actionAttrs.indexOf(attrName) !== -1) {
-					// Get the implicit variables for this widget
-					var implicitVars = actionImplicitVariables[widgetName.toLowerCase()] || actionImplicitVariables[widgetName];
-					if(implicitVars) {
-						vars = vars.concat(implicitVars);
+			if(attrName) {
+				// Find the parent widget
+				var parent = current.parent;
+				while(parent) {
+					if(parent.type.name === "Widget" || parent.type.name === "InlineWidget") {
+						// Get widget name
+						var widgetName = null;
+						var widgetCursor = parent.cursor();
+						widgetCursor.firstChild();
+						do {
+							if(widgetCursor.name === "WidgetName") {
+								widgetName = docText.slice(widgetCursor.from, widgetCursor.to);
+								break;
+							}
+						} while(widgetCursor.nextSibling());
+
+						if(widgetName) {
+							// Check if this attribute is an action attribute for this widget
+							var actionAttrs = actionAttributeNames[widgetName.toLowerCase()] || actionAttributeNames[widgetName];
+							if(actionAttrs && actionAttrs.indexOf(attrName) !== -1) {
+								// Get the implicit variables for this widget
+								var implicitVars = actionImplicitVariables[widgetName.toLowerCase()] || actionImplicitVariables[widgetName];
+								if(implicitVars) {
+									for(var i = 0; i < implicitVars.length; i++) {
+										var v = implicitVars[i];
+										if(!seenVars[v]) {
+											seenVars[v] = true;
+											vars.push(v);
+										}
+									}
+								}
+							}
+						}
+						break;
 					}
+					parent = parent.parent;
 				}
 			}
-			break;
 		}
-		parent = parent.parent;
+		current = current.parent;
 	}
 
 	return vars;
