@@ -3,7 +3,7 @@
   "name": "Link Preview",
   "description": "Show tiddler preview on hover over links",
   "author": "TiddlyWiki",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "core-version": ">=5.3.0",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",

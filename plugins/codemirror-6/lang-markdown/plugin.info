@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-markdown",
   "name": "CodeMirror 6 Markdown Language",
   "description": "Markdown syntax highlighting for CodeMirror 6 code blocks",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme license",
