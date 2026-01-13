@@ -23,6 +23,71 @@ tags: $:/tags/Stylesheet
 .cm-tw-superscript { vertical-align: super; font-size: 0.8em; }
 .cm-tw-subscript { vertical-align: sub; font-size: 0.8em; }
 
+/* Nested formatting - ensure text-decoration propagates to nested elements */
+/* Handles both: same element (.a.b) and nested elements (.a .b) */
+/* (text-decoration doesn't inherit in CSS, so we explicitly apply it) */
+.cm-tw-strikethrough.cm-tw-wikilink,
+.cm-tw-strikethrough.cm-tw-extlink,
+.cm-tw-strikethrough.cm-tw-url,
+.cm-tw-strikethrough.cm-tw-linktext,
+.cm-tw-strikethrough.cm-tw-linktarget,
+.cm-tw-strikethrough.cm-tw-transclusion,
+.cm-tw-strikethrough.cm-tw-macrocall,
+.cm-tw-strikethrough.cm-tw-variable,
+.cm-tw-strikethrough.cm-tw-widget,
+.cm-tw-strikethrough.cm-tw-code,
+.cm-tw-strikethrough.cm-tw-bold,
+.cm-tw-strikethrough.cm-tw-italic,
+.cm-tw-strikethrough .cm-tw-wikilink,
+.cm-tw-strikethrough .cm-tw-extlink,
+.cm-tw-strikethrough .cm-tw-url,
+.cm-tw-strikethrough .cm-tw-linktext,
+.cm-tw-strikethrough .cm-tw-linktarget,
+.cm-tw-strikethrough .cm-tw-transclusion,
+.cm-tw-strikethrough .cm-tw-macrocall,
+.cm-tw-strikethrough .cm-tw-variable,
+.cm-tw-strikethrough .cm-tw-widget,
+.cm-tw-strikethrough .cm-tw-code,
+.cm-tw-strikethrough .cm-tw-bold,
+.cm-tw-strikethrough .cm-tw-italic {
+  text-decoration: line-through;
+}
+
+.cm-tw-underline.cm-tw-wikilink,
+.cm-tw-underline.cm-tw-extlink,
+.cm-tw-underline.cm-tw-linktext,
+.cm-tw-underline.cm-tw-linktarget,
+.cm-tw-underline.cm-tw-transclusion,
+.cm-tw-underline.cm-tw-macrocall,
+.cm-tw-underline.cm-tw-variable,
+.cm-tw-underline.cm-tw-widget,
+.cm-tw-underline.cm-tw-code,
+.cm-tw-underline.cm-tw-bold,
+.cm-tw-underline.cm-tw-italic,
+.cm-tw-underline.cm-tw-strikethrough,
+.cm-tw-underline .cm-tw-wikilink,
+.cm-tw-underline .cm-tw-extlink,
+.cm-tw-underline .cm-tw-linktext,
+.cm-tw-underline .cm-tw-linktarget,
+.cm-tw-underline .cm-tw-transclusion,
+.cm-tw-underline .cm-tw-macrocall,
+.cm-tw-underline .cm-tw-variable,
+.cm-tw-underline .cm-tw-widget,
+.cm-tw-underline .cm-tw-code,
+.cm-tw-underline .cm-tw-bold,
+.cm-tw-underline .cm-tw-italic,
+.cm-tw-underline .cm-tw-strikethrough {
+  text-decoration: underline;
+}
+
+/* Combined underline + strikethrough */
+.cm-tw-strikethrough.cm-tw-underline,
+.cm-tw-strikethrough .cm-tw-underline,
+.cm-tw-underline .cm-tw-strikethrough,
+.cm-tw-underline.cm-tw-strikethrough {
+  text-decoration: line-through underline;
+}
+
 /* Links */
 .cm-tw-wikilink { color: <<colour tiddler-link-foreground>>; }
 .cm-tw-extlink { color: <<colour external-link-foreground>>; }
@@ -94,6 +159,12 @@ tags: $:/tags/Stylesheet
 /* Escape and special chars */
 .cm-tw-escape { color: #aa5500; }
 .cm-tw-entity { color: #aa5500; }
+
+/* Invalid/error syntax */
+.cm-tw-invalid {
+    color: <<colour alert-highlight>>;
+    text-decoration: wavy underline <<colour alert-highlight>>;
+}
 
 /* Processing instructions / marks */
 .cm-tw-processinginstruction { color: <<colour muted-foreground>>; }

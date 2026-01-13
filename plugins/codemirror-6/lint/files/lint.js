@@ -98,7 +98,27 @@ var actionImplicitVariables = {
 	// Event handling widgets
 	"$linkcatcher": ["linkToCatch", "navigateFromTitle", "navigateFromNode", "navigateTo", "navigateFromClientRect", "event"],
 	"$messagecatcher": ["event"],
-	"$eventcatcher": ["event"], // Also has dom-* but those are dynamic
+	"$eventcatcher": [
+		"dom-*", // All DOM attributes with dom- prefix
+		"modifier",
+		"event-mousebutton",
+		"event-type",
+		"event-detail-*", // Properties in event.detail with event-detail- prefix
+		"tv-popup-coords",
+		"tv-popup-abs-coords",
+		"tv-widgetnode-width",
+		"tv-widgetnode-height",
+		"tv-selectednode-posx",
+		"tv-selectednode-posy",
+		"tv-selectednode-width",
+		"tv-selectednode-height",
+		"event-fromselected-posx",
+		"event-fromselected-posy",
+		"event-fromcatcher-posx",
+		"event-fromcatcher-posy",
+		"event-fromviewport-posx",
+		"event-fromviewport-posy"
+	],
 	"$keyboard": ["event", "modifier"],
 
 	// Other widgets with actions
@@ -846,6 +866,16 @@ function getKnownDefinitions() {
 						definitions.widgets.add("$" + exportName);
 					}
 				});
+			}
+		});
+		// Also check widget-subclass modules (e.g., $log is a subclass of $action-log)
+		$tw.modules.forEachModuleOfType("widget-subclass", function(title, moduleExports) {
+			if(moduleExports) {
+				// Widget-subclass modules export: name (widget name), baseClass (parent widget)
+				var widgetName = moduleExports.name || moduleExports.baseClass;
+				if(widgetName && typeof widgetName === "string") {
+					definitions.widgets.add("$" + widgetName);
+				}
 			}
 		});
 	}
@@ -1714,6 +1744,11 @@ function findUnclosedWidgets(tree, state) {
 	// Report unclosed widgets with smart insertion positions
 	widgetStack.forEach(function(widget) {
 		if(!widget.closed) {
+			// Skip unclosed warning for incomplete widgets like "<$ " (name is just "$")
+			// These already get "Undefined widget ''" warning
+			if(widget.name === "$") {
+				return;
+			}
 			var insertInfo = findBestInsertPosition(state, widget.to, widget.containerLimit, allTagPositions);
 			issues.push({
 				from: widget.from,
@@ -2460,10 +2495,53 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 			}
 
 			// Check $(variable)$ substitution references
+			// Note: $(variable)$ syntax is ONLY valid inside \define blocks
 			if(nodeType === "VariableName" && isRuleEnabled("undefinedMacros")) {
 				// Check if parent is a Variable node ($(variable)$ syntax)
 				var parentNode = node.node.parent;
 				if(parentNode && parentNode.type.name === "Variable") {
+					// First, check if we're inside a \define block
+					// $(variable)$ is only valid in \define, not \procedure, \function, \widget
+					var containingDefine = null;
+					var invalidContext = null;
+					var checkParent = node.node.parent;
+					while(checkParent) {
+						if(checkParent.type.name === "MacroDefinition") {
+							containingDefine = checkParent;
+							break;
+						}
+						// If inside \procedure, \function, or \widget - that's invalid
+						if(checkParent.type.name === "ProcedureDefinition") {
+							invalidContext = "\\procedure";
+							break;
+						}
+						if(checkParent.type.name === "FunctionDefinition") {
+							invalidContext = "\\function";
+							break;
+						}
+						if(checkParent.type.name === "WidgetDefinition") {
+							invalidContext = "\\widget";
+							break;
+						}
+						checkParent = checkParent.parent;
+					}
+
+					// Warn if $(variable)$ is used outside \define
+					if(!containingDefine) {
+						var message = invalidContext ?
+							"$(variable)$ substitution is not valid in " + invalidContext + " (only in \\define)" :
+							"$(variable)$ substitution is only valid inside \\define macros";
+						diagnostics.push({
+							from: parentNode.from,
+							to: parentNode.to,
+							severity: "warning",
+							message: message,
+							source: "tiddlywiki"
+						});
+						// Skip further checks for this node (return from iterate callback)
+						return;
+					}
+
 					var varName = text.trim();
 					if(varName) {
 						// Check global definitions first, plus widget tree scope
@@ -2587,16 +2665,29 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 						from: from,
 						to: to,
 						severity: "info",
-						message: "Unknown widget: " + text,
+						message: "Undefined widget '" + widgetWithoutDollar + "'",
 						source: "tiddlywiki"
 					});
 				}
 			}
 
+			// Check for InvalidWidget nodes (<$ followed by space - invalid widget syntax)
+			if(nodeType === "InvalidWidget" && isRuleEnabled("unknownWidgets")) {
+				diagnostics.push({
+					from: from,
+					to: to,
+					severity: "info",
+					message: "Undefined widget ''",
+					source: "tiddlywiki"
+				});
+			}
+
 			// Check filter expressions for bracket issues
 			if(nodeType === "FilterExpression" && isRuleEnabled("filterSyntax")) {
 				var filterIssues = checkFilterBrackets(text, from);
-				var filterEnd = from + text.length;
+				// Insert closing bracket at end of actual content (before trailing whitespace)
+				var trimmedLength = text.trimEnd().length;
+				var filterEnd = from + trimmedLength;
 				filterIssues.forEach(function(issue) {
 					// Determine the closing bracket based on the message
 					var closingBracket = null;
@@ -3486,7 +3577,12 @@ exports.plugin = {
 		} else if(contentTiddlerChanged) {
 			// A tiddler was created/deleted/modified - re-lint to update missing links
 			if(_forceLinting && isLintEnabled() && isRuleEnabled("missingLinks")) {
-				_forceLinting(engine.view);
+				// Use setTimeout to ensure the wiki state is fully updated
+				setTimeout(function() {
+					if(engine.view) {
+						_forceLinting(engine.view);
+					}
+				}, 100);
 			}
 		}
 	},

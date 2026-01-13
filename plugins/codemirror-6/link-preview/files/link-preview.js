@@ -336,9 +336,8 @@ function getTiddlerPreview(title) {
 	container.style.cssText = "display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden;";
 
 	if(!tiddler) {
-		container.className += " cm6-preview-missing";
-		container.innerHTML = 'Tiddler not found: <em>' + $tw.utils.htmlEncode(title) + "</em>";
-		return container;
+		// Don't show preview for missing tiddlers
+		return null;
 	}
 
 	var fields = tiddler.fields;
@@ -629,5 +628,23 @@ exports.plugin = {
 		}
 		_document = null;
 		contextMenuOpen = false;
+	},
+
+	/**
+	 * Called when tiddlers change - refresh preview if currently displayed tiddler changed
+	 */
+	onRefresh: function(_widget, changedTiddlers) {
+		// If tooltip is visible and the displayed tiddler changed, refresh it
+		if(currentTarget && tooltipElement && tooltipElement.parentNode) {
+			if(changedTiddlers[currentTarget]) {
+				// The currently displayed tiddler changed - refresh preview
+				var preview = getTiddlerPreview(currentTarget);
+				if(preview) {
+					// Get current position from tooltip
+					var rect = tooltipElement.getBoundingClientRect();
+					showTooltip(preview, rect.left, rect.top);
+				}
+			}
+		}
 	}
 };

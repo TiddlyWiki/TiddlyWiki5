@@ -429,3 +429,568 @@ tags: $:/tags/Stylesheet
   color: #262626;
   border-color: #d0d0d0;
 }
+
+/* ============================================================================
+   TiddlyWiki Syntax - Font Weight & Style Variations
+   ============================================================================
+
+   In a greyscale theme, font-weight is crucial for visual hierarchy:
+   - Bold (700): Structural elements (pragmas, widget names, headings)
+   - Semi-bold (600): Important syntax (macros, transclusions, links)
+   - Medium (500): Secondary syntax (attributes, filters)
+   - Normal (400): Content text
+   - Light (300): De-emphasized (comments, marks)
+
+   ============================================================================ */
+
+/* --- Dark Theme TiddlyWiki Overrides --- */
+
+/* Pragmas - bold, prominent */
+.cm6-theme-greyscale-dark .cm-tw-pragma,
+.cm6-theme-greyscale-dark .cm-tw-pragma-keyword,
+.cm6-theme-greyscale-dark .cm-tw-define,
+.cm6-theme-greyscale-dark .cm-tw-procedure,
+.cm6-theme-greyscale-dark .cm-tw-function,
+.cm6-theme-greyscale .cm-tw-pragma,
+.cm6-theme-greyscale .cm-tw-pragma-keyword,
+.cm6-theme-greyscale .cm-tw-define,
+.cm6-theme-greyscale .cm-tw-procedure,
+.cm6-theme-greyscale .cm-tw-function,
+[data-cm6-theme="greyscale-dark"] .cm-tw-pragma,
+[data-cm6-theme="greyscale-dark"] .cm-tw-pragma-keyword,
+[data-cm6-theme="greyscale-dark"] .cm-tw-define,
+[data-cm6-theme="greyscale-dark"] .cm-tw-procedure,
+[data-cm6-theme="greyscale-dark"] .cm-tw-function,
+[data-cm6-theme="greyscale"] .cm-tw-pragma,
+[data-cm6-theme="greyscale"] .cm-tw-pragma-keyword,
+[data-cm6-theme="greyscale"] .cm-tw-define,
+[data-cm6-theme="greyscale"] .cm-tw-procedure,
+[data-cm6-theme="greyscale"] .cm-tw-function {
+  font-weight: 700;
+  color: #e8e8e8;
+}
+
+.cm6-theme-greyscale-dark .cm-tw-pragma-name,
+.cm6-theme-greyscale .cm-tw-pragma-name,
+[data-cm6-theme="greyscale-dark"] .cm-tw-pragma-name,
+[data-cm6-theme="greyscale"] .cm-tw-pragma-name {
+  font-weight: 600;
+  color: #d0d0d0;
+}
+
+/* Conditionals */
+.cm6-theme-greyscale-dark .cm-tw-conditional,
+.cm6-theme-greyscale .cm-tw-conditional,
+[data-cm6-theme="greyscale-dark"] .cm-tw-conditional,
+[data-cm6-theme="greyscale"] .cm-tw-conditional {
+  font-weight: 700;
+  color: #c8c8c8;
+}
+
+/* Widgets - semi-bold */
+.cm6-theme-greyscale-dark .cm-tw-widget,
+.cm6-theme-greyscale-dark .cm-tw-widget-name,
+.cm6-theme-greyscale .cm-tw-widget,
+.cm6-theme-greyscale .cm-tw-widget-name,
+[data-cm6-theme="greyscale-dark"] .cm-tw-widget,
+[data-cm6-theme="greyscale-dark"] .cm-tw-widget-name,
+[data-cm6-theme="greyscale"] .cm-tw-widget,
+[data-cm6-theme="greyscale"] .cm-tw-widget-name {
+  font-weight: 600;
+  color: #d4d4d4;
+}
+
+/* Macros - semi-bold */
+.cm6-theme-greyscale-dark .cm-tw-macrocall,
+.cm6-theme-greyscale-dark .cm-tw-macroname,
+.cm6-theme-greyscale .cm-tw-macrocall,
+.cm6-theme-greyscale .cm-tw-macroname,
+[data-cm6-theme="greyscale-dark"] .cm-tw-macrocall,
+[data-cm6-theme="greyscale-dark"] .cm-tw-macroname,
+[data-cm6-theme="greyscale"] .cm-tw-macrocall,
+[data-cm6-theme="greyscale"] .cm-tw-macroname {
+  font-weight: 600;
+  color: #c8c8c8;
+}
+
+/* Transclusions - medium weight */
+.cm6-theme-greyscale-dark .cm-tw-transclusion,
+.cm6-theme-greyscale .cm-tw-transclusion,
+[data-cm6-theme="greyscale-dark"] .cm-tw-transclusion,
+[data-cm6-theme="greyscale"] .cm-tw-transclusion {
+  font-weight: 500;
+  color: #b8b8b8;
+}
+
+.cm6-theme-greyscale-dark .cm-tw-filteredtransclusion,
+.cm6-theme-greyscale .cm-tw-filteredtransclusion,
+[data-cm6-theme="greyscale-dark"] .cm-tw-filteredtransclusion,
+[data-cm6-theme="greyscale"] .cm-tw-filteredtransclusion {
+  font-weight: 500;
+  color: #b0b0b0;
+}
+
+/* Links - semi-bold with underline for distinction */
+.cm6-theme-greyscale-dark .cm-tw-wikilink,
+.cm6-theme-greyscale .cm-tw-wikilink,
+[data-cm6-theme="greyscale-dark"] .cm-tw-wikilink,
+[data-cm6-theme="greyscale"] .cm-tw-wikilink {
+  font-weight: 600;
+  color: #c0c0c0;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+}
+
+.cm6-theme-greyscale-dark .cm-tw-extlink,
+.cm6-theme-greyscale .cm-tw-extlink,
+[data-cm6-theme="greyscale-dark"] .cm-tw-extlink,
+[data-cm6-theme="greyscale"] .cm-tw-extlink {
+  font-weight: 500;
+  color: #a8a8a8;
+  text-decoration: underline;
+}
+
+.cm6-theme-greyscale-dark .cm-tw-linktext,
+.cm6-theme-greyscale .cm-tw-linktext,
+[data-cm6-theme="greyscale-dark"] .cm-tw-linktext,
+[data-cm6-theme="greyscale"] .cm-tw-linktext {
+  font-weight: 500;
+}
+
+.cm6-theme-greyscale-dark .cm-tw-linktarget,
+.cm6-theme-greyscale .cm-tw-linktarget,
+[data-cm6-theme="greyscale-dark"] .cm-tw-linktarget,
+[data-cm6-theme="greyscale"] .cm-tw-linktarget {
+  font-weight: 400;
+  color: #808080;
+}
+
+/* Variables - medium weight */
+.cm6-theme-greyscale-dark .cm-tw-variable,
+.cm6-theme-greyscale .cm-tw-variable,
+[data-cm6-theme="greyscale-dark"] .cm-tw-variable,
+[data-cm6-theme="greyscale"] .cm-tw-variable {
+  font-weight: 500;
+  color: #b8b8b8;
+}
+
+/* Attributes - medium weight */
+.cm6-theme-greyscale-dark .cm-tw-attribute,
+.cm6-theme-greyscale .cm-tw-attribute,
+[data-cm6-theme="greyscale-dark"] .cm-tw-attribute,
+[data-cm6-theme="greyscale"] .cm-tw-attribute {
+  font-weight: 500;
+  color: #a0a0a0;
+}
+
+.cm6-theme-greyscale-dark .cm-tw-attribute-value,
+.cm6-theme-greyscale .cm-tw-attribute-value,
+[data-cm6-theme="greyscale-dark"] .cm-tw-attribute-value,
+[data-cm6-theme="greyscale"] .cm-tw-attribute-value {
+  font-weight: 400;
+  color: #909090;
+}
+
+/* Filters */
+.cm6-theme-greyscale-dark .cm-tw-filter,
+.cm6-theme-greyscale-dark .cm-tw-filterop,
+.cm6-theme-greyscale .cm-tw-filter,
+.cm6-theme-greyscale .cm-tw-filterop,
+[data-cm6-theme="greyscale-dark"] .cm-tw-filter,
+[data-cm6-theme="greyscale-dark"] .cm-tw-filterop,
+[data-cm6-theme="greyscale"] .cm-tw-filter,
+[data-cm6-theme="greyscale"] .cm-tw-filterop {
+  font-weight: 500;
+  color: #a8a8a8;
+}
+
+.cm6-theme-greyscale-dark .cm-tw-filterbracket,
+.cm6-theme-greyscale .cm-tw-filterbracket,
+[data-cm6-theme="greyscale-dark"] .cm-tw-filterbracket,
+[data-cm6-theme="greyscale"] .cm-tw-filterbracket {
+  font-weight: 600;
+  color: #909090;
+}
+
+/* List markers - bold for structure */
+.cm6-theme-greyscale-dark .cm-tw-listmark,
+.cm6-theme-greyscale .cm-tw-listmark,
+[data-cm6-theme="greyscale-dark"] .cm-tw-listmark,
+[data-cm6-theme="greyscale"] .cm-tw-listmark {
+  font-weight: 700;
+  color: #c0c0c0;
+}
+
+/* Table structure */
+.cm6-theme-greyscale-dark .cm-tw-tabledelim,
+.cm6-theme-greyscale .cm-tw-tabledelim,
+[data-cm6-theme="greyscale-dark"] .cm-tw-tabledelim,
+[data-cm6-theme="greyscale"] .cm-tw-tabledelim {
+  font-weight: 600;
+  color: #707070;
+}
+
+.cm6-theme-greyscale-dark .cm-tw-tableheader,
+.cm6-theme-greyscale .cm-tw-tableheader,
+[data-cm6-theme="greyscale-dark"] .cm-tw-tableheader,
+[data-cm6-theme="greyscale"] .cm-tw-tableheader {
+  font-weight: 700;
+  color: #d0d0d0;
+}
+
+/* Block quotes - italic */
+.cm6-theme-greyscale-dark .cm-tw-blockquote,
+.cm6-theme-greyscale .cm-tw-blockquote,
+[data-cm6-theme="greyscale-dark"] .cm-tw-blockquote,
+[data-cm6-theme="greyscale"] .cm-tw-blockquote {
+  font-style: italic;
+  color: #909090;
+}
+
+.cm6-theme-greyscale-dark .cm-tw-quotemark,
+.cm6-theme-greyscale .cm-tw-quotemark,
+[data-cm6-theme="greyscale-dark"] .cm-tw-quotemark,
+[data-cm6-theme="greyscale"] .cm-tw-quotemark {
+  font-weight: 600;
+  color: #606060;
+}
+
+/* Horizontal rule */
+.cm6-theme-greyscale-dark .cm-tw-hr,
+.cm6-theme-greyscale .cm-tw-hr,
+[data-cm6-theme="greyscale-dark"] .cm-tw-hr,
+[data-cm6-theme="greyscale"] .cm-tw-hr {
+  font-weight: 700;
+  color: #505050;
+}
+
+/* Code */
+.cm6-theme-greyscale-dark .cm-tw-code,
+.cm6-theme-greyscale .cm-tw-code,
+[data-cm6-theme="greyscale-dark"] .cm-tw-code,
+[data-cm6-theme="greyscale"] .cm-tw-code {
+  font-weight: 400;
+  color: #a0a0a0;
+}
+
+.cm6-theme-greyscale-dark .cm-tw-codeinfo,
+.cm6-theme-greyscale .cm-tw-codeinfo,
+[data-cm6-theme="greyscale-dark"] .cm-tw-codeinfo,
+[data-cm6-theme="greyscale"] .cm-tw-codeinfo {
+  font-weight: 400;
+  font-style: italic;
+  color: #707070;
+}
+
+.cm6-theme-greyscale-dark .cm-tw-codemark,
+.cm6-theme-greyscale .cm-tw-codemark,
+[data-cm6-theme="greyscale-dark"] .cm-tw-codemark,
+[data-cm6-theme="greyscale"] .cm-tw-codemark {
+  font-weight: 600;
+  color: #606060;
+}
+
+/* Comments - light, italic */
+.cm6-theme-greyscale-dark .cm-tw-comment,
+.cm6-theme-greyscale .cm-tw-comment,
+[data-cm6-theme="greyscale-dark"] .cm-tw-comment,
+[data-cm6-theme="greyscale"] .cm-tw-comment {
+  font-weight: 300;
+  font-style: italic;
+  color: #606060;
+}
+
+/* Marks and processing */
+.cm6-theme-greyscale-dark .cm-tw-mark,
+.cm6-theme-greyscale-dark .cm-tw-processinginstruction,
+.cm6-theme-greyscale .cm-tw-mark,
+.cm6-theme-greyscale .cm-tw-processinginstruction,
+[data-cm6-theme="greyscale-dark"] .cm-tw-mark,
+[data-cm6-theme="greyscale-dark"] .cm-tw-processinginstruction,
+[data-cm6-theme="greyscale"] .cm-tw-mark,
+[data-cm6-theme="greyscale"] .cm-tw-processinginstruction {
+  font-weight: 300;
+  color: #505050;
+}
+
+/* Escape sequences */
+.cm6-theme-greyscale-dark .cm-tw-escape,
+.cm6-theme-greyscale-dark .cm-tw-entity,
+.cm6-theme-greyscale .cm-tw-escape,
+.cm6-theme-greyscale .cm-tw-entity,
+[data-cm6-theme="greyscale-dark"] .cm-tw-escape,
+[data-cm6-theme="greyscale-dark"] .cm-tw-entity,
+[data-cm6-theme="greyscale"] .cm-tw-escape,
+[data-cm6-theme="greyscale"] .cm-tw-entity {
+  font-weight: 500;
+  color: #888888;
+}
+
+/* Errors - bold for visibility */
+.cm6-theme-greyscale-dark .cm-tw-invalid,
+.cm6-theme-greyscale .cm-tw-invalid,
+[data-cm6-theme="greyscale-dark"] .cm-tw-invalid,
+[data-cm6-theme="greyscale"] .cm-tw-invalid {
+  font-weight: 600;
+}
+
+/* Field/param references */
+.cm6-theme-greyscale-dark .cm-tw-field-ref,
+.cm6-theme-greyscale .cm-tw-field-ref,
+[data-cm6-theme="greyscale-dark"] .cm-tw-field-ref,
+[data-cm6-theme="greyscale"] .cm-tw-field-ref {
+  font-weight: 500;
+  color: #a0a0a0;
+}
+
+.cm6-theme-greyscale-dark .cm-tw-param-ref,
+.cm6-theme-greyscale .cm-tw-param-ref,
+[data-cm6-theme="greyscale-dark"] .cm-tw-param-ref,
+[data-cm6-theme="greyscale"] .cm-tw-param-ref {
+  font-weight: 500;
+  color: #b0b0b0;
+}
+
+/* Highlight */
+.cm6-theme-greyscale-dark .cm-tw-highlight,
+.cm6-theme-greyscale .cm-tw-highlight,
+[data-cm6-theme="greyscale-dark"] .cm-tw-highlight,
+[data-cm6-theme="greyscale"] .cm-tw-highlight {
+  font-weight: 500;
+}
+
+/* --- Light Theme TiddlyWiki Overrides --- */
+
+/* Pragmas - bold, prominent */
+.cm6-theme-greyscale-light .cm-tw-pragma,
+.cm6-theme-greyscale-light .cm-tw-pragma-keyword,
+.cm6-theme-greyscale-light .cm-tw-define,
+.cm6-theme-greyscale-light .cm-tw-procedure,
+.cm6-theme-greyscale-light .cm-tw-function,
+[data-cm6-theme="greyscale-light"] .cm-tw-pragma,
+[data-cm6-theme="greyscale-light"] .cm-tw-pragma-keyword,
+[data-cm6-theme="greyscale-light"] .cm-tw-define,
+[data-cm6-theme="greyscale-light"] .cm-tw-procedure,
+[data-cm6-theme="greyscale-light"] .cm-tw-function {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.cm6-theme-greyscale-light .cm-tw-pragma-name,
+[data-cm6-theme="greyscale-light"] .cm-tw-pragma-name {
+  font-weight: 600;
+  color: #2a2a2a;
+}
+
+/* Conditionals */
+.cm6-theme-greyscale-light .cm-tw-conditional,
+[data-cm6-theme="greyscale-light"] .cm-tw-conditional {
+  font-weight: 700;
+  color: #333333;
+}
+
+/* Widgets - semi-bold */
+.cm6-theme-greyscale-light .cm-tw-widget,
+.cm6-theme-greyscale-light .cm-tw-widget-name,
+[data-cm6-theme="greyscale-light"] .cm-tw-widget,
+[data-cm6-theme="greyscale-light"] .cm-tw-widget-name {
+  font-weight: 600;
+  color: #2a2a2a;
+}
+
+/* Macros - semi-bold */
+.cm6-theme-greyscale-light .cm-tw-macrocall,
+.cm6-theme-greyscale-light .cm-tw-macroname,
+[data-cm6-theme="greyscale-light"] .cm-tw-macrocall,
+[data-cm6-theme="greyscale-light"] .cm-tw-macroname {
+  font-weight: 600;
+  color: #333333;
+}
+
+/* Transclusions - medium weight */
+.cm6-theme-greyscale-light .cm-tw-transclusion,
+[data-cm6-theme="greyscale-light"] .cm-tw-transclusion {
+  font-weight: 500;
+  color: #444444;
+}
+
+.cm6-theme-greyscale-light .cm-tw-filteredtransclusion,
+[data-cm6-theme="greyscale-light"] .cm-tw-filteredtransclusion {
+  font-weight: 500;
+  color: #4a4a4a;
+}
+
+/* Links - semi-bold with underline for distinction */
+.cm6-theme-greyscale-light .cm-tw-wikilink,
+[data-cm6-theme="greyscale-light"] .cm-tw-wikilink {
+  font-weight: 600;
+  color: #3a3a3a;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+}
+
+.cm6-theme-greyscale-light .cm-tw-extlink,
+[data-cm6-theme="greyscale-light"] .cm-tw-extlink {
+  font-weight: 500;
+  color: #505050;
+  text-decoration: underline;
+}
+
+.cm6-theme-greyscale-light .cm-tw-linktext,
+[data-cm6-theme="greyscale-light"] .cm-tw-linktext {
+  font-weight: 500;
+}
+
+.cm6-theme-greyscale-light .cm-tw-linktarget,
+[data-cm6-theme="greyscale-light"] .cm-tw-linktarget {
+  font-weight: 400;
+  color: #707070;
+}
+
+/* Variables - medium weight */
+.cm6-theme-greyscale-light .cm-tw-variable,
+[data-cm6-theme="greyscale-light"] .cm-tw-variable {
+  font-weight: 500;
+  color: #404040;
+}
+
+/* Attributes - medium weight */
+.cm6-theme-greyscale-light .cm-tw-attribute,
+[data-cm6-theme="greyscale-light"] .cm-tw-attribute {
+  font-weight: 500;
+  color: #505050;
+}
+
+.cm6-theme-greyscale-light .cm-tw-attribute-value,
+[data-cm6-theme="greyscale-light"] .cm-tw-attribute-value {
+  font-weight: 400;
+  color: #606060;
+}
+
+/* Filters */
+.cm6-theme-greyscale-light .cm-tw-filter,
+.cm6-theme-greyscale-light .cm-tw-filterop,
+[data-cm6-theme="greyscale-light"] .cm-tw-filter,
+[data-cm6-theme="greyscale-light"] .cm-tw-filterop {
+  font-weight: 500;
+  color: #484848;
+}
+
+.cm6-theme-greyscale-light .cm-tw-filterbracket,
+[data-cm6-theme="greyscale-light"] .cm-tw-filterbracket {
+  font-weight: 600;
+  color: #606060;
+}
+
+/* List markers - bold for structure */
+.cm6-theme-greyscale-light .cm-tw-listmark,
+[data-cm6-theme="greyscale-light"] .cm-tw-listmark {
+  font-weight: 700;
+  color: #3a3a3a;
+}
+
+/* Table structure */
+.cm6-theme-greyscale-light .cm-tw-tabledelim,
+[data-cm6-theme="greyscale-light"] .cm-tw-tabledelim {
+  font-weight: 600;
+  color: #808080;
+}
+
+.cm6-theme-greyscale-light .cm-tw-tableheader,
+[data-cm6-theme="greyscale-light"] .cm-tw-tableheader {
+  font-weight: 700;
+  color: #2a2a2a;
+}
+
+/* Block quotes - italic */
+.cm6-theme-greyscale-light .cm-tw-blockquote,
+[data-cm6-theme="greyscale-light"] .cm-tw-blockquote {
+  font-style: italic;
+  color: #606060;
+}
+
+.cm6-theme-greyscale-light .cm-tw-quotemark,
+[data-cm6-theme="greyscale-light"] .cm-tw-quotemark {
+  font-weight: 600;
+  color: #909090;
+}
+
+/* Horizontal rule */
+.cm6-theme-greyscale-light .cm-tw-hr,
+[data-cm6-theme="greyscale-light"] .cm-tw-hr {
+  font-weight: 700;
+  color: #a0a0a0;
+}
+
+/* Code */
+.cm6-theme-greyscale-light .cm-tw-code,
+[data-cm6-theme="greyscale-light"] .cm-tw-code {
+  font-weight: 400;
+  color: #505050;
+}
+
+.cm6-theme-greyscale-light .cm-tw-codeinfo,
+[data-cm6-theme="greyscale-light"] .cm-tw-codeinfo {
+  font-weight: 400;
+  font-style: italic;
+  color: #808080;
+}
+
+.cm6-theme-greyscale-light .cm-tw-codemark,
+[data-cm6-theme="greyscale-light"] .cm-tw-codemark {
+  font-weight: 600;
+  color: #909090;
+}
+
+/* Comments - light, italic */
+.cm6-theme-greyscale-light .cm-tw-comment,
+[data-cm6-theme="greyscale-light"] .cm-tw-comment {
+  font-weight: 300;
+  font-style: italic;
+  color: #909090;
+}
+
+/* Marks and processing */
+.cm6-theme-greyscale-light .cm-tw-mark,
+.cm6-theme-greyscale-light .cm-tw-processinginstruction,
+[data-cm6-theme="greyscale-light"] .cm-tw-mark,
+[data-cm6-theme="greyscale-light"] .cm-tw-processinginstruction {
+  font-weight: 300;
+  color: #a0a0a0;
+}
+
+/* Escape sequences */
+.cm6-theme-greyscale-light .cm-tw-escape,
+.cm6-theme-greyscale-light .cm-tw-entity,
+[data-cm6-theme="greyscale-light"] .cm-tw-escape,
+[data-cm6-theme="greyscale-light"] .cm-tw-entity {
+  font-weight: 500;
+  color: #686868;
+}
+
+/* Errors - bold for visibility */
+.cm6-theme-greyscale-light .cm-tw-invalid,
+[data-cm6-theme="greyscale-light"] .cm-tw-invalid {
+  font-weight: 600;
+}
+
+/* Field/param references */
+.cm6-theme-greyscale-light .cm-tw-field-ref,
+[data-cm6-theme="greyscale-light"] .cm-tw-field-ref {
+  font-weight: 500;
+  color: #505050;
+}
+
+.cm6-theme-greyscale-light .cm-tw-param-ref,
+[data-cm6-theme="greyscale-light"] .cm-tw-param-ref {
+  font-weight: 500;
+  color: #454545;
+}
+
+/* Highlight */
+.cm6-theme-greyscale-light .cm-tw-highlight,
+[data-cm6-theme="greyscale-light"] .cm-tw-highlight {
+  font-weight: 500;
+}

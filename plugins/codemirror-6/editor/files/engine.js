@@ -753,6 +753,190 @@ class CodeMirrorEngine {
 			}));
 		}
 
+		// Custom: Auto-close $( → $()$ for TiddlyWiki variable substitution
+		// MUST be before closeBrackets so it gets first chance to handle (
+		if(EditorView.inputHandler) {
+			extensions.push(EditorView.inputHandler.of(function(view, from, to, text) {
+				// Only handle ( insertion
+				if(text !== "(") return false;
+
+				// Check if $ is before the cursor
+				var charBefore = view.state.sliceDoc(Math.max(0, from - 1), from);
+				if(charBefore !== "$") return false;
+
+				// Check what's after the cursor
+				var textAfter = view.state.sliceDoc(from, from + 2);
+
+				var insert;
+				var cursorPos;
+
+				if(textAfter.indexOf(")$") === 0) {
+					// Already has )$ - just insert (
+					insert = "(";
+					cursorPos = from + 1;
+				} else if(textAfter.indexOf(")") === 0) {
+					// Has ) but not $ - insert ( and add $ after the )
+					view.dispatch({
+						changes: [{
+								from: from,
+								to: from,
+								insert: "("
+							},
+							{
+								from: from + 1,
+								to: from + 1,
+								insert: "$"
+							}
+						],
+						selection: {
+							anchor: from + 1
+						}
+					});
+					return true;
+				} else {
+					// No ) after cursor - insert ()$
+					insert = "()$";
+					cursorPos = from + 1;
+				}
+
+				view.dispatch({
+					changes: {
+						from: from,
+						to: from,
+						insert: insert
+					},
+					selection: {
+						anchor: cursorPos
+					}
+				});
+				return true;
+			}));
+		}
+
+		// Trigger completion when typing inside $(...) variable substitution context
+		// BUT only when inside a \define block ($(variable)$ is NOT valid in \procedure, \function, \widget)
+		if(EditorView.inputHandler) {
+			extensions.push(EditorView.inputHandler.of(function(view, from, _to, text) {
+				// Only trigger on word characters (variable names)
+				if(!/^\w$/.test(text)) return false;
+
+				var textBefore = view.state.sliceDoc(Math.max(0, from - 20), from);
+				// Check if we're inside $( ... pattern (with optional partial name)
+				if(!/\$\([\w]*$/.test(textBefore)) return false;
+
+				// Check what's after cursor - should be ) or )$ or empty
+				var textAfter = view.state.sliceDoc(from, Math.min(view.state.doc.length, from + 3));
+				if(textAfter && textAfter.indexOf(")") !== 0 && textAfter.indexOf(")$") !== 0) {
+					return false;
+				}
+
+				// Check if we're inside a \define block (NOT \procedure, \function, \widget)
+				// $(variable)$ substitution is ONLY valid in \define macros
+				var docText = view.state.doc.toString();
+				var cursorPos = from;
+
+				// Find the enclosing pragma - must be \define for $(...)$ to be valid
+				var isInDefine = false;
+				var pragmaRegex = /^\\(define|procedure|function|widget)\s+([^\s(]+)/gm;
+				var match;
+
+				while((match = pragmaRegex.exec(docText)) !== null) {
+					var pragmaStart = match.index;
+					var pragmaType = match[1];
+					var pragmaName = match[2];
+
+					// Only \define supports $(variable)$ substitution
+					if(pragmaType !== "define") continue;
+
+					// Find the end of this pragma
+					var lineEnd = docText.indexOf("\n", pragmaStart);
+					if(lineEnd === -1) lineEnd = docText.length;
+
+					var lineText = docText.slice(pragmaStart, lineEnd);
+
+					// Check if it's a multi-line pragma (has \end)
+					var endMarker = "\\end";
+					var endPos;
+
+					// Look for matching \end (either generic or named)
+					var searchStart = lineEnd + 1;
+					var endRegex = new RegExp("^\\\\end(?:\\s+" + pragmaName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")?\\s*$", "gm");
+					endRegex.lastIndex = searchStart;
+					var endMatch = endRegex.exec(docText);
+
+					if(endMatch) {
+						endPos = endMatch.index + endMatch[0].length;
+					} else {
+						// Single-line pragma - content is between ) and end of line
+						endPos = lineEnd;
+					}
+
+					// Check if cursor is within this pragma body
+					if(cursorPos > pragmaStart && cursorPos <= endPos) {
+						isInDefine = true;
+						break;
+					}
+				}
+
+				if(!isInDefine) {
+					return false; // Not in a \define block, don't trigger completion
+				}
+
+				// Let the character be inserted normally, then trigger completion
+				var startCompletion = (core.autocomplete || {}).startCompletion;
+				var completionStatus = (core.autocomplete || {}).completionStatus;
+
+				if(startCompletion && completionStatus) {
+					setTimeout(function() {
+						if(completionStatus(view.state) === null) {
+							startCompletion(view);
+						}
+					}, 10);
+				}
+
+				return false; // Don't prevent default - let character be inserted
+			}));
+		}
+
+		// Trigger completion when typing [ in ambiguous contexts
+		// This enables filter/img/ext completion suggestions
+		if(EditorView.inputHandler) {
+			extensions.push(EditorView.inputHandler.of(function(view, from, _to, text) {
+				// Only trigger on [ character
+				if(text !== "[") return false;
+
+				var textBefore = view.state.sliceDoc(Math.max(0, from - 50), from);
+
+				// Don't trigger if:
+				// - Already inside a filter operand: [operator[here
+				// - Starting a wiki link: [[
+				// - Inside transclusion/macro context
+				if(/\[[\w\-:!]+\[[^\]]*$/.test(textBefore)) return false;
+				if(/\[$/.test(textBefore)) return false; // Would create [[
+				if(/\{\{[^}]*$/.test(textBefore)) return false; // Inside transclusion
+				if(/<<[^>]*$/.test(textBefore)) return false; // Inside macro
+
+				// Don't trigger in known filter contexts - let filterOperatorCompletion handle those
+				if(/\{\{\{[^}]*$/.test(textBefore)) return false;
+				if(/<%(?:if|elseif)\s+[^%]*$/.test(textBefore)) return false;
+				if(/filter\s*=\s*["'][^"']*$/.test(textBefore)) return false;
+
+				// Let the [ be inserted, then trigger completion
+				var startCompletion = (core.autocomplete || {}).startCompletion;
+				var completionStatus = (core.autocomplete || {}).completionStatus;
+
+				if(startCompletion && completionStatus) {
+					setTimeout(function() {
+						if(completionStatus(view.state) === null) {
+							startCompletion(view);
+						}
+					}, 10);
+				}
+
+				return false; // Don't prevent default - let [ be inserted
+			}));
+		}
+
 		// Core: Close brackets (with compartment for dynamic toggle)
 		// Include curly/typographic quotes and German-style quotes in addition to defaults
 		var closeBrackets = (core.autocomplete || {}).closeBrackets;

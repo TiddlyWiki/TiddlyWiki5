@@ -105,6 +105,18 @@ function getImageTiddlerTitles() {
 }
 
 /**
+ * Check if a tiddler is a draft (has draft.of field)
+ * Not cached since draft status can change frequently
+ * @param {string} title - The tiddler title to check
+ * @returns {boolean} True if the tiddler is a draft
+ */
+function isDraftTiddler(title) {
+	if(!$tw || !$tw.wiki || !title) return false;
+	var tiddler = $tw.wiki.getTiddler(title);
+	return !!(tiddler && tiddler.fields["draft.of"]);
+}
+
+/**
  * Get all tiddler titles including shadow tiddlers (cached)
  * Returns simple string array for use with language-support.ts
  * Sorted with non-system tiddlers first, then system tiddlers
@@ -243,6 +255,18 @@ function getWidgetNames() {
 					seen[name] = true;
 					widgets.push(name);
 				}
+			}
+		}
+	});
+
+	// Also discover widget-subclass modules (e.g., $log is a subclass of $action-log)
+	$tw.modules.forEachModuleOfType("widget-subclass", function(title, mod) {
+		var widgetName = mod.name || mod.baseClass;
+		if(widgetName && typeof widgetName === "string") {
+			var name = "$" + widgetName;
+			if(!seen[name]) {
+				seen[name] = true;
+				widgets.push(name);
 			}
 		}
 	});
@@ -752,17 +776,42 @@ function registerLanguage(core) {
 		var allAttrs = [];
 		var seenAttrs = {};
 
+		// Helper to add attributes from a source
+		function addAttrsFromSource(source) {
+			if(source) {
+				var attrs = parseAttributesFromSource(source);
+				for(var i = 0; i < attrs.length; i++) {
+					if(!seenAttrs[attrs[i]]) {
+						seenAttrs[attrs[i]] = true;
+						allAttrs.push(attrs[i]);
+					}
+				}
+			}
+		}
+
+		// Check regular widget modules
 		$tw.modules.forEachModuleOfType("widget", function(title, mod) {
 			if(mod && mod[moduleName]) {
 				var source = $tw.wiki.getTiddlerText(title, "");
-				if(source) {
-					var attrs = parseAttributesFromSource(source);
-					for(var i = 0; i < attrs.length; i++) {
-						if(!seenAttrs[attrs[i]]) {
-							seenAttrs[attrs[i]] = true;
-							allAttrs.push(attrs[i]);
+				addAttrsFromSource(source);
+			}
+		});
+
+		// Check widget-subclass modules (e.g., $log is a subclass of $action-log)
+		$tw.modules.forEachModuleOfType("widget-subclass", function(title, mod) {
+			var subclassName = mod.name || mod.baseClass;
+			if(subclassName === moduleName) {
+				// Found the widget-subclass module
+				var source = $tw.wiki.getTiddlerText(title, "");
+				addAttrsFromSource(source);
+				// Also get attributes from the base class
+				if(mod.baseClass) {
+					$tw.modules.forEachModuleOfType("widget", function(baseTitle, baseMod) {
+						if(baseMod && baseMod[mod.baseClass]) {
+							var baseSource = $tw.wiki.getTiddlerText(baseTitle, "");
+							addAttrsFromSource(baseSource);
 						}
-					}
+					});
 				}
 			}
 		});
@@ -815,6 +864,7 @@ function registerLanguage(core) {
 
 			// Completion callbacks - provide TiddlyWiki data to the parser
 			getTiddlerTitles: getTiddlerTitles,
+			isDraftTiddler: isDraftTiddler,
 			getImageTiddlerTitles: getImageTiddlerTitles,
 			getMacroNames: getMacroNames,
 			getMacroParams: getMacroParams,

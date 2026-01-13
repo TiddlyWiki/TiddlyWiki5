@@ -1116,11 +1116,12 @@ function highlightLink(view, from, to) {
 }
 
 /**
- * Remove highlight
+ * Remove highlight and reset cursor
  */
 function clearHighlight(view) {
 	if(view && view.dom) {
 		view.dom.classList.remove("cm6-ctrl-held");
+		view.dom.style.cursor = "";
 	}
 	_currentHighlight = null;
 }
@@ -1191,14 +1192,12 @@ function handleMouseMove(event, view) {
 		view.dom.style.cursor = "pointer";
 	} else {
 		clearHighlight(view);
-		view.dom.style.cursor = "";
 	}
 }
 
 function handleMouseLeave(event, view) {
 	lastMousePos = null;
 	clearHighlight(view);
-	view.dom.style.cursor = "";
 }
 
 function handleClick(event, view) {
