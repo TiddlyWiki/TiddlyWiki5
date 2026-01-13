@@ -90,7 +90,10 @@ NavigatorWidget.prototype.refresh = function(changedTiddlers) {
 		var delay = parseInt(this.wiki.getTiddlerText("$:/config/AnimationDuration","0"),10) || 0;
 		setTimeout(function() {
 			actionsToExecute.forEach(function(item) {
-				self.invokeActionString(item.actions, self, item.event, item.variables);
+				// We invoke the actions on the widget that sent the tm-navigate message
+				// This ensures proper variable evaluation and message propagation
+				var contextWidget = item.event.navigateFromNode || item.event.widget || self;
+				contextWidget.invokeActionString(item.actions, contextWidget, item.event, item.variables);
 			});
 		}, delay);
 	}
