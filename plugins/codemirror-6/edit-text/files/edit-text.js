@@ -5,6 +5,7 @@ module-type: widget
 
 Edit-text widget using CodeMirror engine
 With dynamic configuration support for all settings
+Falls back to FramedEngine/SimpleEngine if CodeMirror is not available
 
 \*/
 /*jslint node: true, browser: true */
@@ -14,9 +15,32 @@ With dynamic configuration support for all settings
 if(!$tw.browser) return;
 
 var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTextWidgetFactory,
-	CodeMirrorEngine = require("$:/plugins/tiddlywiki/codemirror-6/engine.js").CodeMirrorEngine,
-	CodeMirrorSimpleEngine = require("$:/plugins/tiddlywiki/codemirror-6/plugins/edit-text/engine.js").CodeMirrorSimpleEngine,
-	SimpleEngine = require("$:/core/modules/editor/engines/simple.js").SimpleEngine;
+	SimpleEngine = require("$:/core/modules/editor/engines/simple.js").SimpleEngine,
+	FramedEngine = require("$:/core/modules/editor/engines/framed.js").FramedEngine;
+
+// Try to load CodeMirror engines
+var CodeMirrorEngine = null,
+	CodeMirrorSimpleEngine = null,
+	useCodeMirror = false;
+
+try {
+	CodeMirrorEngine = require("$:/plugins/tiddlywiki/codemirror-6/engine.js").CodeMirrorEngine;
+	CodeMirrorSimpleEngine = require("$:/plugins/tiddlywiki/codemirror-6/plugins/edit-text/engine.js").CodeMirrorSimpleEngine;
+	useCodeMirror = !!(CodeMirrorEngine && CodeMirrorSimpleEngine);
+} catch(e) {
+	// CodeMirror not available, will use fallback
+	console.log("CodeMirror 6 engine not available, falling back to FramedEngine/SimpleEngine");
+}
+
+// If CodeMirror is not available, use native TiddlyWiki engines and exit early
+if(!useCodeMirror) {
+	exports["edit-text"] = editTextWidgetFactory(FramedEngine, SimpleEngine);
+	return;
+}
+
+// ============================================================================
+// CodeMirror is available - set up full CM6 widget
+// ============================================================================
 
 // Input types that should use CodeMirror (text-based inputs that benefit from syntax highlighting)
 var CM_SUPPORTED_TYPES = {
