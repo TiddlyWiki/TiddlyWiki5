@@ -9,6 +9,16 @@ JavaScript/TypeScript/JSX/TSX language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
+// Dependency check - exit early if core editor plugin is not available
+var hasConfiguredTag;
+try {
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!hasConfiguredTag) return;
+
 // Content types that activate this plugin
 var JS_TYPES = [
 	"application/javascript",
@@ -34,7 +44,6 @@ var TSX_TYPES = [
 var ALL_TYPES = JS_TYPES.concat(TS_TYPES, JSX_TYPES, TSX_TYPES);
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-javascript/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 // Get the correct LanguageSupport based on content type
 // NOTE: We don't return completion extension here - it's created fresh in getExtensions

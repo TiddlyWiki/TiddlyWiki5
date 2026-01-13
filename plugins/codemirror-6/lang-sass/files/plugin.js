@@ -9,7 +9,16 @@ Sass/SCSS language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langSass = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sass/lang-sass.js");
+// Dependency check - exit early if core editor plugin is not available
+var langSass, hasConfiguredTag;
+try {
+	langSass = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sass/lang-sass.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langSass || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var SASS_TYPES = [
@@ -18,7 +27,6 @@ var SASS_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-sass/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-sass",

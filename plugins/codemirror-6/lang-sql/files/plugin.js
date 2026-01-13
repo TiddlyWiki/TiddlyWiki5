@@ -9,7 +9,16 @@ SQL language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langSql = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/lang-sql.js");
+// Dependency check - exit early if core editor plugin is not available
+var langSql, hasConfiguredTag;
+try {
+	langSql = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/lang-sql.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langSql || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var SQL_TYPES = [
@@ -18,7 +27,6 @@ var SQL_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-sql/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 // Map config values to dialect objects
 var DIALECTS = {

@@ -9,8 +9,17 @@ LaTeX language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langLatex = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-latex/lang-latex.js");
-var cmAutocomplete = require("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-autocomplete.js");
+// Dependency check - exit early if core editor plugin is not available
+var langLatex, cmAutocomplete, hasConfiguredTag;
+try {
+	langLatex = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-latex/lang-latex.js");
+	cmAutocomplete = require("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-autocomplete.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langLatex || !cmAutocomplete || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var LATEX_TYPES = [
@@ -21,7 +30,6 @@ var LATEX_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-latex/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 // Cache the LanguageSupport for LaTeX with properly scoped autocompletion
 var _latexSupport = null;

@@ -9,7 +9,16 @@ PHP language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langPhp = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-php/lang-php.js");
+// Dependency check - exit early if core editor plugin is not available
+var langPhp, hasConfiguredTag;
+try {
+	langPhp = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-php/lang-php.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langPhp || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var PHP_TYPES = [
@@ -19,7 +28,6 @@ var PHP_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-php/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-php",

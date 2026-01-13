@@ -9,7 +9,16 @@ Lezer grammar language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langLezer = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer/lang-lezer.js");
+// Dependency check - exit early if core editor plugin is not available
+var langLezer, hasConfiguredTag;
+try {
+	langLezer = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer/lang-lezer.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langLezer || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var LEZER_TYPES = [
@@ -17,7 +26,6 @@ var LEZER_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-lezer/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-lezer",

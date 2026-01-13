@@ -9,7 +9,16 @@ C/C++ language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langCpp = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-cpp/lang-cpp.js");
+// Dependency check - exit early if core editor plugin is not available
+var langCpp, hasConfiguredTag;
+try {
+	langCpp = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-cpp/lang-cpp.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langCpp || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var CPP_TYPES = [
@@ -22,7 +31,6 @@ var CPP_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-cpp/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-cpp",

@@ -9,7 +9,16 @@ CSV language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langCsv = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-csv/lang-csv.js");
+// Dependency check - exit early if core editor plugin is not available
+var langCsv, hasConfiguredTag;
+try {
+	langCsv = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-csv/lang-csv.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langCsv || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var CSV_TYPES = [
@@ -17,7 +26,6 @@ var CSV_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-csv/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-csv",

@@ -9,7 +9,16 @@ Java language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langJava = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-java/lang-java.js");
+// Dependency check - exit early if core editor plugin is not available
+var langJava, hasConfiguredTag;
+try {
+	langJava = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-java/lang-java.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langJava || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var JAVA_TYPES = [
@@ -18,7 +27,6 @@ var JAVA_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-java/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-java",

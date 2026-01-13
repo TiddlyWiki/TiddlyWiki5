@@ -146,6 +146,32 @@ exports.plugin = {
 			isSearchOpen: function() {
 				if(this._destroyed || !searchLib.searchPanelOpen) return false;
 				return searchLib.searchPanelOpen(this.view.state);
+			},
+
+			toggleSearch: function() {
+				if(this._destroyed) return;
+				if(searchLib.searchPanelOpen && searchLib.searchPanelOpen(this.view.state)) {
+					if(searchLib.closeSearchPanel) searchLib.closeSearchPanel(this.view);
+				} else {
+					if(searchLib.openSearchPanel) searchLib.openSearchPanel(this.view);
+				}
+			},
+
+			isGotoLineOpen: function() {
+				if(this._destroyed) return false;
+				return !!this.view.dom.querySelector(".cm-gotoLine");
+			},
+
+			toggleGotoLine: function() {
+				if(this._destroyed) return;
+				var gotoLinePanel = this.view.dom.querySelector(".cm-gotoLine");
+				if(gotoLinePanel) {
+					// Close it by clicking the close button
+					var closeBtn = gotoLinePanel.querySelector("button[name=close]");
+					if(closeBtn) closeBtn.click();
+				} else {
+					if(searchLib.gotoLine) searchLib.gotoLine(this.view);
+				}
 			}
 		};
 	}

@@ -57,6 +57,24 @@ exports.prototype.handleRedo = function(event) {
 };
 
 // ============================================================================
+// Search and Goto Line handlers
+// ============================================================================
+
+exports.prototype.handleToggleSearch = function(event) {
+	if(this.engine && typeof this.engine.toggleSearch === "function") {
+		this.engine.toggleSearch();
+	}
+	return false; // Don't propagate
+};
+
+exports.prototype.handleToggleGotoLine = function(event) {
+	if(this.engine && typeof this.engine.toggleGotoLine === "function") {
+		this.engine.toggleGotoLine();
+	}
+	return false; // Don't propagate
+};
+
+// ============================================================================
 // Remove Trailing Whitespace handler
 // ============================================================================
 
@@ -496,6 +514,9 @@ exports.prototype._buildSettingsSnapshot = function() {
 		// trailing whitespace highlighting
 		showTrailingWhitespace: boolConfig(wiki, "$:/config/codemirror-6/editor/showTrailingWhitespace"),
 
+		// bidirectional text support
+		bidiPerLine: boolConfig(wiki, "$:/config/codemirror-6/editor/bidiPerLine"),
+
 		// plugin toggles
 		colorPicker: boolConfig(wiki, "$:/config/codemirror-6/color-picker/enabled"),
 		imagePreview: boolConfig(wiki, "$:/config/codemirror-6/image-preview/enabled") && body,
@@ -557,6 +578,8 @@ exports.prototype.render = function(parent, nextSibling) {
 	this.addEventListener("tm-cm6-remove-trailing-whitespace", "handleRemoveTrailingWhitespace");
 	this.addEventListener("tm-cm6-set-language", "handleSetLanguage");
 	this.addEventListener("tm-cm6-show-language-picker", "handleShowLanguagePicker");
+	this.addEventListener("tm-cm6-toggle-search", "handleToggleSearch");
+	this.addEventListener("tm-cm6-toggle-goto-line", "handleToggleGotoLine");
 
 	// Init shortcut caches
 	this.shortcutKeysList = [];

@@ -9,8 +9,17 @@ Python language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langPython = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-python/lang-python.js");
-var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+// Dependency check - exit early if core editor plugin is not available
+var langPython, core, hasConfiguredTag;
+try {
+	langPython = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-python/lang-python.js");
+	core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langPython || !core || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var PYTHON_TYPES = [
@@ -19,7 +28,6 @@ var PYTHON_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-python/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-python",

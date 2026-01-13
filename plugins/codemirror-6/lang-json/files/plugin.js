@@ -9,7 +9,16 @@ JSON language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langJson = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-json/lang-json.js");
+// Dependency check - exit early if core editor plugin is not available
+var langJson, hasConfiguredTag;
+try {
+	langJson = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-json/lang-json.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langJson || !hasConfiguredTag) return;
 
 // Try to load lint library (may not be available if lint plugin not installed)
 var lintLib = null;
@@ -27,7 +36,6 @@ var JSON_TYPES = [
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-json/tags";
 var LINT_ENABLED_CONFIG = "$:/config/codemirror-6/lint/enabled";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 /**
  * Check if linting is globally enabled

@@ -1087,6 +1087,83 @@ class CodeMirrorEngine {
 		var perLineTextDirection = EditorView.perLineTextDirection;
 		if(bidiEnabled && perLineTextDirection) {
 			bidiExtensions.push(perLineTextDirection.of(true));
+
+			// Bidi isolation for syntax elements (only when bidi is enabled)
+			// Registers decorated ranges with bidiIsolatedRanges so CodeMirror's bidiSpans()
+			// correctly handles mixed RTL/LTR content in links, widgets, macros, etc.
+			var syntaxTree = (core.language || {}).syntaxTree;
+			var ViewPlugin = (core.view || {}).ViewPlugin;
+			var Decoration = (core.view || {}).Decoration;
+			var RangeSetBuilder = (core.state || {}).RangeSetBuilder;
+
+			if(syntaxTree && ViewPlugin && Decoration && RangeSetBuilder && EditorView.bidiIsolatedRanges) {
+				// Node types that should be bidi-isolated (syntax elements with potentially different direction)
+				var bidiIsolateNodes = {
+					// Links
+					"WikiLink": true,
+					"ExtLink": true,
+					"Image": true,
+					"URL": true,
+					// Transclusions
+					"Transclusion": true,
+					"FilteredTransclusion": true,
+					"TransclusionBlock": true,
+					"FilteredTransclusionBlock": true,
+					// Macros
+					"MacroCall": true,
+					"MacroCallBlock": true,
+					// Widgets
+					"Widget": true,
+					// Code
+					"InlineCode": true,
+					// Variables
+					"Variable": true
+				};
+
+				// Mark decoration with bidiIsolate: null (auto-detect direction from content)
+				var bidiIsolateMark = Decoration.mark({
+					bidiIsolate: null
+				});
+
+				// ViewPlugin that builds bidi isolation decorations from the syntax tree
+				var BidiIsolatePlugin = ViewPlugin.fromClass(class {
+					constructor(view) {
+						this.decorations = this.buildDecorations(view);
+					}
+
+					buildDecorations(view) {
+						var builder = new RangeSetBuilder();
+						var tree = syntaxTree(view.state);
+
+						tree.iterate({
+							enter: function(node) {
+								if(bidiIsolateNodes[node.name]) {
+									builder.add(node.from, node.to, bidiIsolateMark);
+								}
+							}
+						});
+
+						return builder.finish();
+					}
+
+					update(update) {
+						if(update.docChanged || update.viewportChanged) {
+							this.decorations = this.buildDecorations(update.view);
+						}
+					}
+				}, {
+					decorations: function(v) {
+						return v.decorations;
+					}
+				});
+
+				// Register the plugin's decorations as bidi isolated ranges
+				bidiExtensions.push(BidiIsolatePlugin);
+				bidiExtensions.push(EditorView.bidiIsolatedRanges.of(function(view) {
+					var plugin = view.plugin(BidiIsolatePlugin);
+					return plugin ? plugin.decorations : Decoration.none;
+				}));
+			}
 		}
 		extensions.push(this._compartments.bidi.of(bidiExtensions));
 
@@ -1733,6 +1810,66 @@ class CodeMirrorEngine {
 			var EditorView = core.view.EditorView;
 			if(settings.bidiPerLine && EditorView.perLineTextDirection) {
 				bidiExtensions.push(EditorView.perLineTextDirection.of(true));
+
+				// Bidi isolation for syntax elements (only when bidi is enabled)
+				var syntaxTree = (core.language || {}).syntaxTree;
+				var ViewPlugin = (core.view || {}).ViewPlugin;
+				var Decoration = (core.view || {}).Decoration;
+				var RangeSetBuilder = (core.state || {}).RangeSetBuilder;
+
+				if(syntaxTree && ViewPlugin && Decoration && RangeSetBuilder && EditorView.bidiIsolatedRanges) {
+					var bidiIsolateNodes = {
+						"WikiLink": true,
+						"ExtLink": true,
+						"Image": true,
+						"URL": true,
+						"Transclusion": true,
+						"FilteredTransclusion": true,
+						"TransclusionBlock": true,
+						"FilteredTransclusionBlock": true,
+						"MacroCall": true,
+						"MacroCallBlock": true,
+						"Widget": true,
+						"InlineCode": true,
+						"Variable": true
+					};
+
+					var bidiIsolateMark = Decoration.mark({
+						bidiIsolate: null
+					});
+
+					var BidiIsolatePlugin = ViewPlugin.fromClass(class {
+						constructor(view) {
+							this.decorations = this.buildDecorations(view);
+						}
+						buildDecorations(view) {
+							var builder = new RangeSetBuilder();
+							syntaxTree(view.state).iterate({
+								enter: function(node) {
+									if(bidiIsolateNodes[node.name]) {
+										builder.add(node.from, node.to, bidiIsolateMark);
+									}
+								}
+							});
+							return builder.finish();
+						}
+						update(update) {
+							if(update.docChanged || update.viewportChanged) {
+								this.decorations = this.buildDecorations(update.view);
+							}
+						}
+					}, {
+						decorations: function(v) {
+							return v.decorations;
+						}
+					});
+
+					bidiExtensions.push(BidiIsolatePlugin);
+					bidiExtensions.push(EditorView.bidiIsolatedRanges.of(function(view) {
+						var plugin = view.plugin(BidiIsolatePlugin);
+						return plugin ? plugin.decorations : Decoration.none;
+					}));
+				}
 			}
 			effects.push(this._compartments.bidi.reconfigure(bidiExtensions));
 		}

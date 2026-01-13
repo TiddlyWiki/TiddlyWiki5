@@ -9,8 +9,17 @@ Go language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langGo = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-go/lang-go.js");
-var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+// Dependency check - exit early if core editor plugin is not available
+var langGo, core, hasConfiguredTag;
+try {
+	langGo = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-go/lang-go.js");
+	core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langGo || !core || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var GO_TYPES = [
@@ -19,7 +28,6 @@ var GO_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-go/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-go",

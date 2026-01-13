@@ -834,18 +834,31 @@ class CodeMirrorSimpleEngine {
 				EditorState.transactionFilter.of(function(tr) {
 					if(!tr.docChanged) return tr;
 
-					var newDoc = tr.newDoc.toString();
-					if(newDoc.indexOf("\n") === -1 && newDoc.indexOf("\r") === -1) {
-						return tr;
-					}
+					// Check if any inserted text contains newlines
+					var hasNewlines = false;
+					tr.changes.iterChanges(function(fromA, toA, fromB, toB, inserted) {
+						if(inserted.toString().indexOf("\n") !== -1 || inserted.toString().indexOf("\r") !== -1) {
+							hasNewlines = true;
+						}
+					});
 
-					var cleaned = newDoc.replace(/[\r\n]+/g, " ");
-					return {
-						changes: {
-							from: 0,
-							to: tr.newDoc.length,
+					if(!hasNewlines) return tr;
+
+					// Build new changes with newlines stripped from inserted text
+					// The from/to positions are relative to the original document (tr.startState.doc)
+					var newChanges = [];
+					tr.changes.iterChanges(function(fromA, toA, fromB, toB, inserted) {
+						var text = inserted.toString();
+						var cleaned = text.replace(/[\r\n]+/g, " ");
+						newChanges.push({
+							from: fromA,
+							to: toA,
 							insert: cleaned
-						},
+						});
+					});
+
+					return {
+						changes: newChanges,
 						selection: tr.selection
 					};
 				})

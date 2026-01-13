@@ -9,7 +9,16 @@ Markdown language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langMarkdown = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-markdown/lang-markdown.js");
+// Dependency check - exit early if core editor plugin is not available
+var langMarkdown, hasConfiguredTag;
+try {
+	langMarkdown = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-markdown/lang-markdown.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langMarkdown || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var MARKDOWN_TYPES = [
@@ -18,7 +27,6 @@ var MARKDOWN_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-markdown/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-markdown",

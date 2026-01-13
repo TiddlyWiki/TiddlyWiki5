@@ -9,8 +9,17 @@ XML language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-var langXml = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/lang-xml.js");
-var svgSchema = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/svg-schema.js");
+// Dependency check - exit early if core editor plugin is not available
+var langXml, svgSchema, hasConfiguredTag;
+try {
+	langXml = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/lang-xml.js");
+	svgSchema = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/svg-schema.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langXml || !svgSchema || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var XML_TYPES = [
@@ -21,7 +30,6 @@ var XML_TYPES = [
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-xml/tags";
 var SVG_COMPLETIONS_CONFIG = "$:/config/codemirror-6/lang-xml/svg-completions";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 function isSvgCompletionsEnabled() {
 	var value = $tw.wiki.getTiddlerText(SVG_COMPLETIONS_CONFIG, "yes").trim().toLowerCase();

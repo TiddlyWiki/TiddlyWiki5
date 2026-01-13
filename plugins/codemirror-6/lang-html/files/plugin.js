@@ -9,9 +9,18 @@ HTML language support for CodeMirror 6
 /*jslint node: true, browser: true */
 "use strict";
 
-// Use the HTML language from the core lib (already bundled)
-var langHtml = require("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-lang-html.js");
-var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+// Dependency check - exit early if core editor plugin is not available
+var langHtml, core, hasConfiguredTag;
+try {
+	// Use the HTML language from the core lib (already bundled)
+	langHtml = require("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-lang-html.js");
+	core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
+} catch (e) {
+	return;
+}
+
+if(!langHtml || !core || !hasConfiguredTag) return;
 
 // Content types that activate this plugin
 var HTML_TYPES = [
@@ -20,7 +29,6 @@ var HTML_TYPES = [
 ];
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-html/tags";
-var hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 
 exports.plugin = {
 	name: "lang-html",
