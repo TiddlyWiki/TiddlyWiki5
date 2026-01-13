@@ -2150,62 +2150,22 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 	}
 };
 
+var pluginLocators = require("./boot.node.js");
+
 /*
 name: Name of the plugin to find
 paths: array of file paths to search for it
-Returns the path of the plugin folder
+Returns the path of the plugin folder using methods registed in boot.node.js
 */
 $tw.findLibraryItem = function(name,paths) {
-	var pathIndex = 0;
-	do {
-		var pluginPath = path.resolve(paths[pathIndex],"./" + name);
-		try {
-			// It is faster to try and fail to stat the dir
-			// than to make an extra synchronous "fs" call just
-			// to see if it exists. So try/catch.
-			if(fs.statSync(pluginPath).isDirectory()) {
-				return pluginPath;
-			}
-		} catch(e) {
-			e;
-			// Failed. Probably didn't exist. Move on.
+	var pluginPath;
+	for (var locator in pluginLocators) {
+		pluginPath = pluginLocators[locator](name,paths);
+		if (pluginPath) {
+			return pluginPath;
 		}
-	} while(++pathIndex < paths.length);
-	return null;
-};
-
-$tw.findNpmItem = function(name) {
-	if(!$tw.npmMap) {
-		var pluginMap = Object.create(null);
-		var searchPaths = require.resolve.paths("") || [];
-		// We go in reverse order, so that higher priority npm paths will
-		// override lower priority ones as we go.
-		for(var i = searchPaths.length-1; i >= 0; i--) {
-			var modulesDir = searchPaths[i];
-			try {
-				var files = fs.readdirSync(modulesDir);
-				for(var j = 0; j < files.length; j++) {
-					var pkgJsonPath = path.resolve(modulesDir, files[j], "package.json");
-					try {
-						var pkg = JSON.parse(fs.readFileSync(pkgJsonPath,"utf8"));
-						if(pkg.tiddlywiki) {
-							for(var pluginName in pkg.tiddlywiki) {
-								pluginMap[pluginName] = path.resolve(modulesDir, files[j], pkg.tiddlywiki[pluginName]);
-							}
-						}
-					} catch(e) {
-						e;
-						// File likely didn't exist. Move on.
-					}
-				}
-			} catch(e) {
-				e;
-				// Modules directory likely didn't exist. Also move on.
-			}
-		}
-		$tw.npmMap = pluginMap;
 	}
-	return $tw.npmMap[name];
+	return null;
 };
 
 /*
@@ -2213,7 +2173,7 @@ name: Name of the plugin to load
 paths: array of file paths to search for it
 */
 $tw.loadPlugin = function(name,paths) {
-	var pluginPath = $tw.findLibraryItem(name,paths) || $tw.findNpmItem(name);
+	var pluginPath = $tw.findLibraryItem(name,paths);
 	if(pluginPath) {
 		var pluginFields = $tw.loadPluginFolder(pluginPath);
 		if(pluginFields) {
