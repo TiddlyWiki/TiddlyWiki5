@@ -82,16 +82,17 @@ NavigatorWidget.prototype.refresh = function(changedTiddlers) {
 		result = this.refreshChildren(changedTiddlers);
 	}
 	// Execute any pending navigate actions after refresh completes
-	// Use setTimeout to ensure DOM is fully updated (needed for tm-focus-selector etc.)
+	// Use setTimeout to ensure DOM is fully updated and animations have finished (needed for tm-focus-selector etc.)
 	if(this.pendingNavigateActions && this.pendingNavigateActions.length > 0) {
 		var self = this;
 		var actionsToExecute = this.pendingNavigateActions.slice();
 		this.pendingNavigateActions = [];
+		var delay = parseInt(this.wiki.getTiddlerText("$:/config/AnimationDuration","0"),10) || 0;
 		setTimeout(function() {
 			actionsToExecute.forEach(function(item) {
 				self.invokeActionString(item.actions, self, item.event, item.variables);
 			});
-		}, 0);
+		}, delay);
 	}
 	return result;
 };
@@ -260,11 +261,11 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	}
 	// Seek confirmation
 	if(((originalTitle && this.wiki.getTiddler(originalTitle)) || (tiddler && ((tiddler.fields.text || "") !== ""))) && !win.confirm($tw.language.getString(
-				"ConfirmDeleteTiddler",
-				{variables:
+		"ConfirmDeleteTiddler",
+		{variables:
 					{title: confirmationTitle}
-				}
-			))) {
+		}
+	))) {
 		return false;
 	}
 	// Delete the original tiddler
@@ -304,17 +305,17 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 	// Save the initial value of the draft tiddler
 	draftTitle = this.generateDraftTitle(targetTitle);
 	var draftTiddler = new $tw.Tiddler({
-				text: "",
-			},
-			tiddler,
-			{
-				title: draftTitle,
-				"draft.title": targetTitle,
-				"draft.of": targetTitle
-			},
-			this.wiki.getModificationFields(),
-			tiddler === null || tiddler === undefined ? defaultFields : {}
-		);
+		text: "",
+	},
+	tiddler,
+	{
+		title: draftTitle,
+		"draft.title": targetTitle,
+		"draft.of": targetTitle
+	},
+	this.wiki.getModificationFields(),
+	tiddler === null || tiddler === undefined ? defaultFields : {}
+	);
 	this.wiki.addTiddler(draftTiddler);
 	return draftTiddler;
 };
@@ -491,20 +492,20 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	}
 	// Save the draft tiddler
 	var draftTiddler = new $tw.Tiddler({
-			text: "",
-			"draft.title": title
-		},
-		templateTiddler,
-		additionalFields,
-		this.wiki.getCreationFields(),
-		existingTiddler,
-		filteredAdditionalFields,
-		{
-			title: draftTitle,
-			"draft.of": title,
-			// If template or additionalFields have "tags" even if empty a tags field will be created.
-			tags: ((mergedTags.length > 0) || templateHasTags || additionalFieldsHasTags) ? mergedTags : undefined
-		},this.wiki.getModificationFields());
+		text: "",
+		"draft.title": title
+	},
+	templateTiddler,
+	additionalFields,
+	this.wiki.getCreationFields(),
+	existingTiddler,
+	filteredAdditionalFields,
+	{
+		title: draftTitle,
+		"draft.of": title,
+		// If template or additionalFields have "tags" even if empty a tags field will be created.
+		tags: ((mergedTags.length > 0) || templateHasTags || additionalFieldsHasTags) ? mergedTags : undefined
+	},this.wiki.getModificationFields());
 	this.wiki.addTiddler(draftTiddler);
 	// Update the story to insert the new draft at the top and remove any existing tiddler
 	if(storyList && storyList.indexOf(draftTitle) === -1) {
