@@ -1,8 +1,8 @@
-caption: tm-notify
-created: 20140811112304772
-modified: 20230723220728382
-tags: Messages
+﻿created: 20140811112304772
 title: WidgetMessage: tm-notify
+caption: tm-notify
+modified: 20260106171726826
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The notify message briefly displays a specified tiddler as a small alert in the upper right corner of the page. It requires the following properties on the `event` object:
