@@ -49,7 +49,8 @@ Returns an object mapping plugin names to absolute filepaths.
 function getNpmMap() {
 	if(!npmMap) {
 		npmMap = Object.create(null);
-		var searchPaths = require.resolve.paths("") || [];
+		var cwd = process.cwd();
+		var searchPaths = require('module')._nodeModulePaths(cwd);
 		// We go in reverse order, so that higher priority npm paths will
 		// override lower priority ones as we go.
 		for(var i = searchPaths.length-1; i >= 0; i--) {
