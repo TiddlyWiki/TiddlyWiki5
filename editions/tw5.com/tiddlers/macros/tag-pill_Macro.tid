@@ -14,7 +14,7 @@ The <<.def tag-pill>> [[macro|Macros]] generates a static tag pill showing a spe
 
 ; element-tag
 : The element name to be used for the pill (defaults to HTML element SPAN).
-:  If an ''actions'' parameter is used it needs to be set to `$button`
+:  If an ''actions'' parameter is used the element-tag needs to be set to `$button`
 
 ; element-attributes
 : Additional attributes for the element specified in ''element-tag'' 
