@@ -1,0 +1,30 @@
+caption: http2
+created: 20251109000000000
+modified: 20251109000000000
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: http2
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.4.0">> The [[web server configuration parameter|WebServer Parameters]] ''http2'' determines whether the server uses the HTTP/2 protocol when TLS certificates are available.
+
+When set to "yes" (the default), the server will use HTTP/2 with automatic HTTP/1.1 fallback support. When set to "no", the server will use HTTPS with HTTP/1.1 only. See [[Using HTTP/2]].
+
+!! Default Value
+
+```
+yes
+```
+
+!! Examples
+
+Enable HTTP/2 (default behavior when certificates are configured):
+
+```
+tiddlywiki mywiki --listen tls-key=key.pem tls-cert=server.crt http2=yes
+```
+
+Disable HTTP/2 and use HTTP/1.1 over TLS:
+
+```
+tiddlywiki mywiki --listen tls-key=key.pem tls-cert=server.crt http2=no
+```
