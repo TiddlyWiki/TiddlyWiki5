@@ -111,6 +111,80 @@ exports.prototype.handleRemoveTrailingWhitespace = function(event) {
 };
 
 // ============================================================================
+// Spaces to Tabs handler
+// ============================================================================
+
+exports.prototype.handleSpacesToTabs = function(event) {
+	if(!this.engine || !this.engine.view) return false;
+
+	var view = this.engine.view;
+	var doc = view.state.doc;
+	var changes = [];
+
+	// Get the configured tab size (indent unit multiplier)
+	var tabSize = 4; // default
+	var wiki = this.wiki;
+	if(wiki) {
+		var configuredSize = wiki.getTiddlerText("$:/config/codemirror-6/editor/indentUnitMultiplier");
+		if(configuredSize) {
+			var parsed = parseInt(configuredSize, 10);
+			if(isFinite(parsed) && parsed > 0 && parsed <= 16) {
+				tabSize = parsed;
+			}
+		}
+	}
+
+	// Iterate through all lines and convert leading spaces to tabs
+	for(var i = 1; i <= doc.lines; i++) {
+		var line = doc.line(i);
+		var text = line.text;
+
+		// Find leading whitespace
+		var leadingMatch = /^[ \t]*/.exec(text);
+		if(!leadingMatch || leadingMatch[0].length === 0) continue;
+
+		var leading = leadingMatch[0];
+
+		// Skip if no spaces in leading whitespace
+		if(leading.indexOf(" ") === -1) continue;
+
+		// Calculate the visual column width of the leading whitespace
+		var column = 0;
+		for(var j = 0; j < leading.length; j++) {
+			if(leading[j] === "\t") {
+				// Tab advances to next tab stop
+				column = Math.floor(column / tabSize) * tabSize + tabSize;
+			} else {
+				column++;
+			}
+		}
+
+		// Convert to tabs: each tabSize columns = 1 tab
+		var numTabs = Math.floor(column / tabSize);
+		var remainingSpaces = column % tabSize;
+		var newLeading = "\t".repeat(numTabs) + " ".repeat(remainingSpaces);
+
+		// Only change if different
+		if(newLeading !== leading) {
+			changes.push({
+				from: line.from,
+				to: line.from + leading.length,
+				insert: newLeading
+			});
+		}
+	}
+
+	if(changes.length > 0) {
+		view.dispatch({
+			changes: changes
+		});
+	}
+
+	this.engine.focus();
+	return false; // Don't propagate
+};
+
+// ============================================================================
 // Override updateEditorDomNode to not reset language on every refresh
 // ============================================================================
 
@@ -162,6 +236,7 @@ exports.prototype.handleShowLanguagePicker = function(event) {
 exports.prototype.showLanguagePicker = function() {
 	var self = this;
 	var domNode = this.engine.domNode;
+	var wiki = this.wiki;
 
 	// Remove existing picker if any
 	this.hideLanguagePicker();
@@ -171,56 +246,44 @@ exports.prototype.showLanguagePicker = function() {
 	picker.className = "cm6-language-picker";
 	this._languagePicker = picker;
 
-	// Language options
+	// Build language options dynamically from installed language plugins
 	var languages = [{
-			type: "",
-			label: "Default (from type)"
-		},
-		{
-			type: "text/vnd.tiddlywiki",
-			label: "TiddlyWiki"
-		},
-		{
-			type: "text/x-markdown",
-			label: "Markdown"
-		},
-		{
-			type: "text/html",
-			label: "HTML"
-		},
-		{
-			type: "text/css",
-			label: "CSS"
-		},
-		{
-			type: "application/javascript",
-			label: "JavaScript"
-		},
-		{
-			type: "application/typescript",
-			label: "TypeScript"
-		},
-		{
-			type: "application/json",
-			label: "JSON"
-		},
-		{
-			type: "application/x-yaml",
-			label: "YAML"
-		},
-		{
-			type: "application/xml",
-			label: "XML"
-		},
-		{
-			type: "text/x-python",
-			label: "Python"
-		},
-		{
-			type: "text/plain",
-			label: "Plain Text"
+		type: "",
+		label: "Default (from type)",
+		sortOrder: -1
+	}];
+
+	// Get all language tiddlers
+	var langTiddlers = wiki.filterTiddlers("[all[tiddlers+shadows]tag[$:/tags/CodeMirror/Language]]");
+	langTiddlers.forEach(function(title) {
+		var tiddler = wiki.getTiddler(title);
+		if(!tiddler) return;
+
+		var pluginField = tiddler.fields.plugin;
+
+		// Check if language is available:
+		// - No plugin required (plugin field is blank/undefined)
+		// - Or plugin exists as shadow or regular tiddler
+		var isAvailable = !pluginField ||
+			wiki.tiddlerExists(pluginField) ||
+			wiki.isShadowTiddler(pluginField);
+
+		if(isAvailable) {
+			languages.push({
+				type: tiddler.fields.type || "",
+				label: tiddler.fields.name || title,
+				sortOrder: parseInt(tiddler.fields["sort-order"], 10) || 0
+			});
 		}
-	];
+	});
+
+	// Sort by sort-order, then by label
+	languages.sort(function(a, b) {
+		if(a.sortOrder !== b.sortOrder) {
+			return a.sortOrder - b.sortOrder;
+		}
+		return a.label.localeCompare(b.label);
+	});
 
 	languages.forEach(function(lang) {
 		var btn = document.createElement("button");
@@ -576,6 +639,7 @@ exports.prototype.render = function(parent, nextSibling) {
 	this.addEventListener("tm-cm6-undo", "handleUndo");
 	this.addEventListener("tm-cm6-redo", "handleRedo");
 	this.addEventListener("tm-cm6-remove-trailing-whitespace", "handleRemoveTrailingWhitespace");
+	this.addEventListener("tm-cm6-spaces-to-tabs", "handleSpacesToTabs");
 	this.addEventListener("tm-cm6-set-language", "handleSetLanguage");
 	this.addEventListener("tm-cm6-show-language-picker", "handleShowLanguagePicker");
 	this.addEventListener("tm-cm6-toggle-search", "handleToggleSearch");

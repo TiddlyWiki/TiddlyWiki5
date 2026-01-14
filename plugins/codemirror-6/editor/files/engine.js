@@ -33,6 +33,7 @@ var PLUGIN_MODULE_TYPE = "codemirror6-plugin";
 
 var _pluginCache = null;
 var _coreCache = null;
+var _plainTextLanguage = null;
 
 // ============================================================================
 // Utility Functions
@@ -265,6 +266,66 @@ function getCM6Core() {
 		"CM6 core library not found. Provide " + CORE_LIB_TITLE +
 		" exporting {state, view, commands, history, ...}."
 	);
+}
+
+/**
+ * Get or create a "plain text" language with no syntax highlighting.
+ * This is used when switching away from a language to clear highlighting.
+ * @returns {Language|null} A Language that produces no syntax tokens
+ */
+function getPlainTextLanguage() {
+	if(_plainTextLanguage) return _plainTextLanguage;
+
+	var core = getCM6Core();
+	var Language = core.language && core.language.Language;
+	var defineLanguageFacet = core.language && core.language.defineLanguageFacet;
+	var NodeType = core.lezerCommon && core.lezerCommon.NodeType;
+	var Tree = core.lezerCommon && core.lezerCommon.Tree;
+
+	if(!Language || !defineLanguageFacet || !NodeType || !Tree) {
+		return null;
+	}
+
+	// Create a minimal parser that produces an empty tree (just Document node)
+	var docType = NodeType.define({
+		id: 0,
+		name: "Document",
+		top: true
+	});
+
+	// Implement the Parser interface with startParse method
+	var plainParser = {
+		startParse: function(input, fragments, ranges) {
+			// Calculate total length from ranges or input
+			var length = 0;
+			if(ranges && ranges.length > 0) {
+				for(var i = 0; i < ranges.length; i++) {
+					length = Math.max(length, ranges[i].to);
+				}
+			} else {
+				length = input.length;
+			}
+
+			// Create the final tree immediately
+			var tree = new Tree(docType, [], [], length);
+
+			// Return a PartialParse that is already done
+			return {
+				stoppedAt: null,
+				parsedPos: length,
+				stopAt: function() {},
+				advance: function() {
+					return tree;
+				}
+			};
+		}
+	};
+
+	// Create the Language
+	var facet = defineLanguageFacet();
+	_plainTextLanguage = new Language(facet, plainParser, [], "plaintext");
+
+	return _plainTextLanguage;
 }
 
 // ============================================================================
@@ -1282,10 +1343,19 @@ class CodeMirrorEngine {
 								extensions = extensions.concat(pluginExts);
 							}
 						} else {
-							// Plugin is NOT active - add empty compartment placeholder
+							// Plugin is NOT active - add placeholder compartment
 							// This allows reconfiguration later when type changes
 							if(compartmentName && this._compartments[compartmentName]) {
-								extensions.push(this._compartments[compartmentName].of([]));
+								// For language plugins (compartment name ends with "Language"),
+								// use plain text language to ensure no syntax highlighting
+								var compartmentContent = [];
+								if(compartmentName.slice(-8) === "Language") {
+									var plainLang = getPlainTextLanguage();
+									if(plainLang) {
+										compartmentContent = [plainLang];
+									}
+								}
+								extensions.push(this._compartments[compartmentName].of(compartmentContent));
 							}
 						}
 					} else if(hasConditionJ && !hasCompartment) {
@@ -2056,8 +2126,18 @@ class CodeMirrorEngine {
 								if(!isArray(newContent)) newContent = [newContent];
 							} catch (_e) {}
 						}
+					} else {
+						// Plugin becoming inactive
+						// For language plugins, use plain text language to clear syntax highlighting
+						// Just using [] would leave the old syntax tree cached
+						if(compartmentName.slice(-8) === "Language") {
+							var plainLang = getPlainTextLanguage();
+							if(plainLang) {
+								newContent = [plainLang];
+							}
+						}
+						// Non-language plugins get empty array (already set above)
 					}
-					// else: plugin becoming inactive - newContent stays []
 
 					effects.push(
 						this._compartments[compartmentName].reconfigure(newContent)
@@ -2169,6 +2249,16 @@ class CodeMirrorEngine {
 								if(!isArray(newContent)) newContent = [newContent];
 							} catch (_e) {}
 						}
+					} else {
+						// Plugin becoming inactive
+						// For language plugins, use plain text language to clear syntax highlighting
+						if(compartmentName.slice(-8) === "Language") {
+							var plainLang = getPlainTextLanguage();
+							if(plainLang) {
+								newContent = [plainLang];
+							}
+						}
+						// Non-language plugins get empty array (already set above)
 					}
 
 					effects.push(
