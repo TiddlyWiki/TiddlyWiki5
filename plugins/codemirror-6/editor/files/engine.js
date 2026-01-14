@@ -1149,12 +1149,47 @@ class CodeMirrorEngine {
 		if(bidiEnabled && perLineTextDirection) {
 			bidiExtensions.push(perLineTextDirection.of(true));
 
+			// Auto line direction: adds dir="auto" attribute to each line
+			// This enables the browser to auto-detect text direction per line
+			var ViewPlugin = (core.view || {}).ViewPlugin;
+			var Decoration = (core.view || {}).Decoration;
+
+			if(ViewPlugin && Decoration) {
+				var dirAutoDecoration = Decoration.line({
+					attributes: {
+						dir: "auto"
+					}
+				});
+
+				var AutoLineDirPlugin = ViewPlugin.define(function(view) {
+					return {
+						deco: buildViewportLineDeco(view, dirAutoDecoration),
+						update: function(update) {
+							if(update.docChanged || update.viewportChanged || update.heightChanged) {
+								this.deco = buildViewportLineDeco(update.view, dirAutoDecoration);
+							}
+						}
+					};
+				}, {
+					decorations: function(plugin) {
+						return plugin.deco;
+					}
+				});
+
+				function buildViewportLineDeco(view, deco) {
+					var ranges = view.viewportLineBlocks.map(function(lineBlock) {
+						return deco.range(lineBlock.from);
+					});
+					return Decoration.set(ranges);
+				}
+
+				bidiExtensions.push(AutoLineDirPlugin);
+			}
+
 			// Bidi isolation for syntax elements (only when bidi is enabled)
 			// Registers decorated ranges with bidiIsolatedRanges so CodeMirror's bidiSpans()
 			// correctly handles mixed RTL/LTR content in links, widgets, macros, etc.
 			var syntaxTree = (core.language || {}).syntaxTree;
-			var ViewPlugin = (core.view || {}).ViewPlugin;
-			var Decoration = (core.view || {}).Decoration;
 			var RangeSetBuilder = (core.state || {}).RangeSetBuilder;
 
 			if(syntaxTree && ViewPlugin && Decoration && RangeSetBuilder && EditorView.bidiIsolatedRanges) {
@@ -1881,10 +1916,44 @@ class CodeMirrorEngine {
 			if(settings.bidiPerLine && EditorView.perLineTextDirection) {
 				bidiExtensions.push(EditorView.perLineTextDirection.of(true));
 
-				// Bidi isolation for syntax elements (only when bidi is enabled)
-				var syntaxTree = (core.language || {}).syntaxTree;
+				// Auto line direction: adds dir="auto" attribute to each line
 				var ViewPlugin = (core.view || {}).ViewPlugin;
 				var Decoration = (core.view || {}).Decoration;
+
+				if(ViewPlugin && Decoration) {
+					var dirAutoDecoration = Decoration.line({
+						attributes: {
+							dir: "auto"
+						}
+					});
+
+					var AutoLineDirPlugin = ViewPlugin.define(function(view) {
+						return {
+							deco: buildViewportLineDeco(view, dirAutoDecoration),
+							update: function(update) {
+								if(update.docChanged || update.viewportChanged || update.heightChanged) {
+									this.deco = buildViewportLineDeco(update.view, dirAutoDecoration);
+								}
+							}
+						};
+					}, {
+						decorations: function(plugin) {
+							return plugin.deco;
+						}
+					});
+
+					function buildViewportLineDeco(view, deco) {
+						var ranges = view.viewportLineBlocks.map(function(lineBlock) {
+							return deco.range(lineBlock.from);
+						});
+						return Decoration.set(ranges);
+					}
+
+					bidiExtensions.push(AutoLineDirPlugin);
+				}
+
+				// Bidi isolation for syntax elements (only when bidi is enabled)
+				var syntaxTree = (core.language || {}).syntaxTree;
 				var RangeSetBuilder = (core.state || {}).RangeSetBuilder;
 
 				if(syntaxTree && ViewPlugin && Decoration && RangeSetBuilder && EditorView.bidiIsolatedRanges) {
