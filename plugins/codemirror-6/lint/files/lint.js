@@ -1985,6 +1985,55 @@ function findUnclosedWidgets(tree, state) {
 				}
 			}
 
+			// Standalone closing HTML tag (HTMLEndTag node)
+			// Skip if this is a child of an HTMLBlock/HTMLTag with the same tag name
+			// (those are properly matched closing tags handled by the parent)
+			if(nodeType === "HTMLEndTag") {
+				// Extract tag name from TagName child
+				var closeName = null;
+				var cursor = node.node.cursor();
+				if(cursor.firstChild()) {
+					do {
+						if(cursor.name === "TagName") {
+							closeName = state.doc.sliceString(cursor.from, cursor.to).toLowerCase();
+							break;
+						}
+					} while(cursor.nextSibling());
+				}
+				if(closeName) {
+					// Check if this HTMLEndTag is part of a self-contained parent block
+					// by checking if the parent HTMLBlock/HTMLTag contains a matching opening tag
+					var parent = node.node.parent;
+					if(parent && (parent.name === "HTMLBlock" || parent.name === "HTMLTag")) {
+						var parentText = state.doc.sliceString(parent.from, parent.to);
+						// Check if parent starts with opening tag of same name
+						var openingTagPattern = new RegExp("^<" + closeName + "(\\s|>|/>)", "i");
+						if(openingTagPattern.test(parentText)) {
+							// This is a properly matched closing tag - skip
+							return;
+						}
+					}
+					// Check against htmlStack for orphan detection
+					var foundMatch = false;
+					for(var i = htmlStack.length - 1; i >= 0; i--) {
+						if(htmlStack[i].name === closeName && !htmlStack[i].closed) {
+							htmlStack[i].closed = true;
+							foundMatch = true;
+							break;
+						}
+					}
+					// Track orphan closing tag (no matching opening tag)
+					if(!foundMatch) {
+						orphanClosingTags.push({
+							name: closeName,
+							from: node.from,
+							to: node.to,
+							isHTML: true
+						});
+					}
+				}
+			}
+
 			// Opening widget tag
 			if(nodeType === "Widget" || nodeType === "InlineWidget") {
 				// Find the widget name and check if opening tag is complete
