@@ -203,6 +203,69 @@ function hasWindowTimers() {
 }
 
 // ============================================================================
+// VS Code-style Keymap (for default keymap)
+// ============================================================================
+
+/**
+ * Build VS Code-style keybindings not included in CodeMirror's defaultKeymap.
+ * Only used when keymap setting is "default" (not vim/emacs).
+ */
+function buildVSCodeKeymap(core) {
+	var commands = core.commands || {};
+	var km = [];
+
+	// Line operations
+	if(commands.copyLineDown) km.push({
+		key: "Ctrl-Shift-d",
+		run: commands.copyLineDown
+	});
+	if(commands.copyLineUp) km.push({
+		key: "Ctrl-Shift-Alt-d",
+		run: commands.copyLineUp
+	});
+	if(commands.deleteLine) km.push({
+		key: "Ctrl-Shift-k",
+		run: commands.deleteLine
+	});
+	if(commands.moveLineUp) km.push({
+		key: "Alt-ArrowUp",
+		run: commands.moveLineUp
+	});
+	if(commands.moveLineDown) km.push({
+		key: "Alt-ArrowDown",
+		run: commands.moveLineDown
+	});
+	if(commands.insertBlankLine) km.push({
+		key: "Ctrl-Enter",
+		run: commands.insertBlankLine
+	});
+
+	// Selection
+	if(commands.selectLine) km.push({
+		key: "Ctrl-l",
+		run: commands.selectLine
+	});
+
+	// Navigation
+	if(commands.cursorMatchingBracket) km.push({
+		key: "Ctrl-Shift-\\",
+		run: commands.cursorMatchingBracket
+	});
+
+	// Comments
+	if(commands.toggleComment) km.push({
+		key: "Ctrl-/",
+		run: commands.toggleComment
+	});
+	if(commands.toggleBlockComment) km.push({
+		key: "Ctrl-Shift-a",
+		run: commands.toggleBlockComment
+	});
+
+	return km;
+}
+
+// ============================================================================
 // Menubar Height Tracking (for sticky search panel)
 // ============================================================================
 
@@ -1468,6 +1531,13 @@ class CodeMirrorEngine {
 					initialKeymapExtensions = keymapPlugin.getExtensions(context) || [];
 				} catch (_e) {}
 			}
+		} else if(initialKeymapId === "default" && cmKeymap) {
+			// Add VS Code-style shortcuts for the default keymap
+			// These are not included in CodeMirror's defaultKeymap
+			var vsCodeKeymap = buildVSCodeKeymap(core);
+			if(vsCodeKeymap.length) {
+				initialKeymapExtensions.push(cmKeymap.of(vsCodeKeymap));
+			}
 		}
 		this._currentKeymap = initialKeymapId;
 		extensions.push(this._compartments.keymap.of(initialKeymapExtensions));
@@ -1895,7 +1965,16 @@ class CodeMirrorEngine {
 						newKeymapExtensions = keymapPlugin.getExtensions(this._pluginContext) || [];
 					} catch (_e) {}
 				}
-			} else if(newKeymapId === "default") {}
+			} else if(newKeymapId === "default") {
+				// Add VS Code-style shortcuts for the default keymap
+				var cmKeymap = (core.view || {}).keymap;
+				if(cmKeymap) {
+					var vsCodeKm = buildVSCodeKeymap(core);
+					if(vsCodeKm.length) {
+						newKeymapExtensions.push(cmKeymap.of(vsCodeKm));
+					}
+				}
+			}
 
 			this._currentKeymap = newKeymapId;
 			effects.push(this._compartments.keymap.reconfigure(newKeymapExtensions));

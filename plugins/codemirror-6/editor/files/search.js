@@ -102,7 +102,9 @@ function createGotoLinePanel(view, editorWrapper) {
 		var pos = lineInfo.from + Math.min(column - 1, lineInfo.length);
 
 		view.dispatch({
-			selection: { anchor: pos },
+			selection: {
+				anchor: pos
+			},
 			scrollIntoView: true
 		});
 
@@ -195,9 +197,14 @@ exports.plugin = {
 				}
 				return false;
 			};
-			extensions.push(Prec.highest(keymap.of([
-				{ key: "Mod-g", run: gotoLineCommand },
-				{ key: "Ctrl-Alt-g", run: gotoLineCommand }
+			extensions.push(Prec.highest(keymap.of([{
+					key: "Mod-g",
+					run: gotoLineCommand
+				},
+				{
+					key: "Ctrl-Alt-g",
+					run: gotoLineCommand
+				}
 			])));
 		}
 

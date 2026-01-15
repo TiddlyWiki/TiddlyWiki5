@@ -2165,7 +2165,11 @@ function findUnclosedPragmas(text, startPos) {
 	var issues = [];
 	// Stack of contexts: each context has { pragmaStack, isIsolated, quoteType }
 	// The root context is not isolated
-	var contextStack = [{ pragmaStack: [], isIsolated: false, quoteType: null }];
+	var contextStack = [{
+		pragmaStack: [],
+		isIsolated: false,
+		quoteType: null
+	}];
 
 	var lines = text.split("\n");
 	var pos = startPos;
@@ -2214,7 +2218,11 @@ function findUnclosedPragmas(text, startPos) {
 				contextStack.pop();
 			} else if(afterTriple.indexOf('"""') === -1) {
 				// Entering triple-quoted context (and it doesn't close on same line)
-				contextStack.push({ pragmaStack: [], isIsolated: true, quoteType: '"""' });
+				contextStack.push({
+					pragmaStack: [],
+					isIsolated: true,
+					quoteType: '"""'
+				});
 			}
 			// If triple quotes open and close on same line, treat content as isolated but don't track
 		}
@@ -2223,7 +2231,11 @@ function findUnclosedPragmas(text, startPos) {
 		// This is tricky because ' is also used in contractions
 		// We only enter single-quote context for clear attribute patterns
 		if(singleQuoteAttrIdx !== -1 && !currentContext().isIsolated) {
-			contextStack.push({ pragmaStack: [], isIsolated: true, quoteType: "'" });
+			contextStack.push({
+				pragmaStack: [],
+				isIsolated: true,
+				quoteType: "'"
+			});
 		} else if(currentContext().quoteType === "'" && line.indexOf("'") !== -1) {
 			// Check if this closes the single-quoted attribute
 			// Look for closing ' that's followed by whitespace, / or >
@@ -2567,14 +2579,14 @@ function areConditionalsBalanced(text) {
 
 	// Count all <%if opens
 	var ifMatch;
-	while ((ifMatch = ifRe.exec(text)) !== null) {
+	while((ifMatch = ifRe.exec(text)) !== null) {
 		depth++;
 	}
 
 	// Count all <%endif closes
 	var endifMatch;
 	var endifCount = 0;
-	while ((endifMatch = endifRe.exec(text)) !== null) {
+	while((endifMatch = endifRe.exec(text)) !== null) {
 		endifCount++;
 	}
 
@@ -3219,7 +3231,10 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 									/^\s*\$name\s*=/i.test(attrText) :
 									/^\s*\$variable\s*=/i.test(attrText);
 								if(attrNameMatch) {
-									attrNode = { from: cursor.from, to: cursor.to };
+									attrNode = {
+										from: cursor.from,
+										to: cursor.to
+									};
 								}
 							}
 						} while(cursor.nextSibling());
