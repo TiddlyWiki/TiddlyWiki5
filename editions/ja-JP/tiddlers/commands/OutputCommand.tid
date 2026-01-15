@@ -1,0 +1,10 @@
+created: 20140425085548209
+modified: 20260115111503921
+original-modified: 20140425085738745
+tags: Commands
+title: OutputCommand
+ja-title: Outputコマンド
+type: text/vnd.tiddlywiki
+caption: output
+
+{{$:/language/Help/output}}
