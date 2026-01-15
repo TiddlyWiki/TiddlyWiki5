@@ -37,6 +37,7 @@ Highlight potential issues in your TiddlyWiki content as you type.
 
 !! Structural Issues
 
+<<render-lint-option "$:/config/codemirror-6/lint/incompleteTags">>
 <<render-lint-option "$:/config/codemirror-6/lint/unclosedWidgets">>
 <<render-lint-option "$:/config/codemirror-6/lint/unclosedPragmas">>
 <<render-lint-option "$:/config/codemirror-6/lint/misplacedPragmas">>

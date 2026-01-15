@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/theme-palenight",
   "name": "CodeMirror 6 Palenight Theme",
   "description": "Palenight elegant purple/blue theme for CodeMirror 6 (Default, Italic)",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme styles license",

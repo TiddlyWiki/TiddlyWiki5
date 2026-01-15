@@ -196,6 +196,298 @@ function extractWidgetTreeVariables(widget) {
 }
 
 // ============================================================================
+// Self-Closing Tags
+// ============================================================================
+
+/**
+ * HTML void elements that don't need closing tags
+ */
+var voidHTMLElements = new Set([
+	"area", "base", "br", "col", "embed", "hr", "img", "input",
+	"link", "meta", "param", "source", "track", "wbr"
+]);
+
+/**
+ * TiddlyWiki widgets that are typically self-closing (action widgets, etc.)
+ */
+var selfClosingWidgets = new Set([
+	"$action-confirm", "$action-createtiddler", "$action-deletefield",
+	"$action-deletetiddler", "$action-listops", "$action-log",
+	"$action-navigate", "$action-popup", "$action-sendmessage",
+	"$action-setfield", "$action-setmultiplefields", "$importvariables"
+]);
+
+// ============================================================================
+// Smart Tag Scanning for Auto-Close Detection
+// ============================================================================
+
+/**
+ * Scan text to find if there's a matching closing tag at depth 0.
+ * Skips protected contexts: code blocks, comments, quotes, macros, filters, etc.
+ *
+ * @param {string} text - Text to scan (should start after the opening tag)
+ * @param {string} tagName - The tag name to look for
+ * @param {boolean} caseSensitive - Whether to match case-sensitively (true for widgets)
+ * @returns {boolean} True if there's a matching closing tag that would close this tag
+ */
+function hasMatchingClosingTag(text, tagName, caseSensitive) {
+	var len = text.length;
+	var pos = 0;
+	var depth = 0;
+
+	var tagMatches = function(name) {
+		return caseSensitive ? name === tagName : name.toLowerCase() === tagName.toLowerCase();
+	};
+
+	while(pos < len) {
+		var ch = text[pos];
+
+		// Skip fenced code blocks ``` ... ```
+		if(ch === '`' && text[pos + 1] === '`' && text[pos + 2] === '`') {
+			pos += 3;
+			while(pos < len && !(text[pos] === '`' && text[pos + 1] === '`' && text[pos + 2] === '`')) pos++;
+			pos += 3;
+			continue;
+		}
+
+		// Skip typed blocks $$$ ... $$$
+		if(ch === '$' && text[pos + 1] === '$' && text[pos + 2] === '$') {
+			pos += 3;
+			while(pos < len && !(text[pos] === '$' && text[pos + 1] === '$' && text[pos + 2] === '$')) pos++;
+			pos += 3;
+			continue;
+		}
+
+		// Skip HTML comments <!-- ... -->
+		if(ch === '<' && text[pos + 1] === '!' && text[pos + 2] === '-' && text[pos + 3] === '-') {
+			pos += 4;
+			while(pos < len && !(text[pos] === '-' && text[pos + 1] === '-' && text[pos + 2] === '>')) pos++;
+			pos += 3;
+			continue;
+		}
+
+		// Skip triple-quoted strings """ ... """
+		if(ch === '"' && text[pos + 1] === '"' && text[pos + 2] === '"') {
+			pos += 3;
+			while(pos < len && !(text[pos] === '"' && text[pos + 1] === '"' && text[pos + 2] === '"')) pos++;
+			pos += 3;
+			continue;
+		}
+
+		// Skip macros <<...>>
+		if(ch === '<' && text[pos + 1] === '<') {
+			pos += 2;
+			var macroDepth = 1;
+			while(pos < len && macroDepth > 0) {
+				if(text[pos] === '<' && text[pos + 1] === '<') {
+					macroDepth++;
+					pos += 2;
+				} else if(text[pos] === '>' && text[pos + 1] === '>') {
+					macroDepth--;
+					pos += 2;
+				} else pos++;
+			}
+			continue;
+		}
+
+		// Skip filtered transclusions {{{...}}}
+		if(ch === '{' && text[pos + 1] === '{' && text[pos + 2] === '{') {
+			pos += 3;
+			while(pos < len && !(text[pos] === '}' && text[pos + 1] === '}' && text[pos + 2] === '}')) pos++;
+			pos += 3;
+			continue;
+		}
+
+		// Skip transclusions {{...}}
+		if(ch === '{' && text[pos + 1] === '{') {
+			pos += 2;
+			while(pos < len && !(text[pos] === '}' && text[pos + 1] === '}')) pos++;
+			pos += 2;
+			continue;
+		}
+
+		// Skip substituted strings `...` (single backtick, not triple)
+		if(ch === '`' && text[pos + 1] !== '`') {
+			pos++;
+			while(pos < len && text[pos] !== '`') pos++;
+			pos++;
+			continue;
+		}
+
+		// Check for closing tag </tagname>
+		if(ch === '<' && text[pos + 1] === '/') {
+			pos += 2;
+			// Read tag name
+			var closeName = "";
+			while(pos < len && /[a-zA-Z0-9\-_$.]/.test(text[pos])) {
+				closeName += text[pos];
+				pos++;
+			}
+			// Skip whitespace
+			while(pos < len && /\s/.test(text[pos])) pos++;
+			// Check for >
+			if(text[pos] === '>' && tagMatches(closeName)) {
+				if(depth === 0) {
+					// Found closing tag at depth 0 - belongs to our opening tag
+					return true;
+				}
+				depth--;
+			}
+			pos++;
+			continue;
+		}
+
+		// Check for opening tag <tagname
+		if(ch === '<' && /[a-zA-Z$]/.test(text[pos + 1])) {
+			pos++;
+			// Read tag name
+			var openName = "";
+			while(pos < len && /[a-zA-Z0-9\-_$.]/.test(text[pos])) {
+				openName += text[pos];
+				pos++;
+			}
+			// Check if this matches our tag name
+			if(tagMatches(openName)) {
+				// Need to determine if this is a self-closing tag or opening tag
+				var isSelfClosing = false;
+				var foundEnd = false;
+				while(pos < len && !foundEnd) {
+					var sch = text[pos];
+					// Skip triple-quoted strings
+					if(sch === '"' && text[pos + 1] === '"' && text[pos + 2] === '"') {
+						pos += 3;
+						while(pos < len && !(text[pos] === '"' && text[pos + 1] === '"' && text[pos + 2] === '"')) pos++;
+						pos += 3;
+						continue;
+					}
+					// Skip quoted strings
+					if(sch === '"' || sch === "'") {
+						var quote = sch;
+						pos++;
+						while(pos < len && text[pos] !== quote) {
+							if(text[pos] === '\\') pos++;
+							pos++;
+						}
+						pos++;
+						continue;
+					}
+					// Skip macros in attributes
+					if(sch === '<' && text[pos + 1] === '<') {
+						pos += 2;
+						var md = 1;
+						while(pos < len && md > 0) {
+							if(text[pos] === '<' && text[pos + 1] === '<') {
+								md++;
+								pos += 2;
+							} else if(text[pos] === '>' && text[pos + 1] === '>') {
+								md--;
+								pos += 2;
+							} else pos++;
+						}
+						continue;
+					}
+					// Skip filtered transclusions in attributes
+					if(sch === '{' && text[pos + 1] === '{' && text[pos + 2] === '{') {
+						pos += 3;
+						while(pos < len && !(text[pos] === '}' && text[pos + 1] === '}' && text[pos + 2] === '}')) pos++;
+						pos += 3;
+						continue;
+					}
+					// Skip transclusions in attributes
+					if(sch === '{' && text[pos + 1] === '{') {
+						pos += 2;
+						while(pos < len && !(text[pos] === '}' && text[pos + 1] === '}')) pos++;
+						pos += 2;
+						continue;
+					}
+					// Skip backtick strings in attributes
+					if(sch === '`') {
+						if(text[pos + 1] === '`' && text[pos + 2] === '`') {
+							pos += 3;
+							while(pos < len && !(text[pos] === '`' && text[pos + 1] === '`' && text[pos + 2] === '`')) pos++;
+							pos += 3;
+						} else {
+							pos++;
+							while(pos < len && text[pos] !== '`') pos++;
+							pos++;
+						}
+						continue;
+					}
+					// Found end of tag
+					if(sch === '/' && text[pos + 1] === '>') {
+						isSelfClosing = true;
+						foundEnd = true;
+						pos += 2;
+					} else if(sch === '>') {
+						foundEnd = true;
+						pos++;
+					} else {
+						pos++;
+					}
+				}
+				// Only count as opening tag if not self-closing
+				if(foundEnd && !isSelfClosing) {
+					depth++;
+				}
+			}
+			continue;
+		}
+
+		pos++;
+	}
+
+	// No matching closing tag found at depth 0
+	return false;
+}
+
+/**
+ * Check if a tag is self-closing (void HTML element or action widget)
+ * @param {string} tagName - The tag name (with $ prefix for widgets)
+ * @param {boolean} isWidget - Whether this is a widget
+ * @returns {boolean} True if the tag is self-closing
+ */
+function isSelfClosingTag(tagName, isWidget) {
+	if(isWidget) {
+		return selfClosingWidgets.has(tagName) || selfClosingWidgets.has("$" + tagName);
+	} else {
+		return voidHTMLElements.has(tagName.toLowerCase());
+	}
+}
+
+/**
+ * Check if a position in the document is inside an attribute value
+ * (quoted strings, macros, filters, transclusions in tag attributes)
+ * @param {object} tree - The syntax tree
+ * @param {number} pos - Position to check
+ * @returns {boolean} True if inside an attribute value
+ */
+function isInsideAttributeValue(tree, pos) {
+	var node = tree.resolveInner(pos, 0);
+	while(node && !node.type.isTop) {
+		var name = node.type.name;
+		// Check for various attribute value node types
+		if(name === "AttributeValue" ||
+			name === "AttributeString" ||
+			name === "AttributeQuoted" ||
+			name === "MacroAttributeValue" ||
+			name === "FilteredTransclusionAttributeValue" ||
+			name === "TransclusionAttributeValue" ||
+			name === "SubstitutedAttributeValue") {
+			return true;
+		}
+		// Also check if inside a code block or comment
+		if(name === "FencedCode" ||
+			name === "CodeBlock" ||
+			name === "TypedBlock" ||
+			name === "CommentBlock") {
+			return true;
+		}
+		node = node.parent;
+	}
+	return false;
+}
+
+// ============================================================================
 // Scope Detection for Variables
 // ============================================================================
 
@@ -1625,6 +1917,25 @@ function findUnclosedWidgets(tree, state) {
 								// Self-contained tag with matching closing tag - skip
 								return;
 							}
+							// Check if opening tag is complete (has closing >)
+							// Incomplete tags like <div class="test" (missing >) shouldn't match with sibling closing tags
+							var hasOpeningTagClose = false;
+							var htmlCursor = node.node.cursor();
+							if(htmlCursor.firstChild()) {
+								do {
+									if(htmlCursor.name === "TagMark") {
+										var htmlMarkText = state.doc.sliceString(htmlCursor.from, htmlCursor.to);
+										if(htmlMarkText === ">") {
+											hasOpeningTagClose = true;
+											break;
+										}
+									}
+								} while(htmlCursor.nextSibling());
+							}
+							// Skip incomplete opening tags
+							if(!hasOpeningTagClose) {
+								return; // Don't add to htmlStack
+							}
 							// Find containing structure for limit
 							var containerLimit = null;
 							var containerType = null;
@@ -1676,14 +1987,22 @@ function findUnclosedWidgets(tree, state) {
 
 			// Opening widget tag
 			if(nodeType === "Widget" || nodeType === "InlineWidget") {
-				// Find the widget name
+				// Find the widget name and check if opening tag is complete
 				var nameNode = null;
+				var hasOpeningTagClose = false; // Track if we have a closing > for the opening tag
 				var cursor = node.node.cursor();
 				if(cursor.firstChild()) {
 					do {
 						if(cursor.name === "WidgetName") {
 							nameNode = cursor.node;
-							break;
+						}
+						// Check for TagMark that closes the opening tag (the > after attributes)
+						// This distinguishes complete <$widget attr="val"> from incomplete <$widget attr="val"
+						if(cursor.name === "TagMark") {
+							var markText = state.doc.sliceString(cursor.from, cursor.to);
+							if(markText === ">") {
+								hasOpeningTagClose = true;
+							}
 						}
 					} while(cursor.nextSibling());
 				}
@@ -1693,6 +2012,12 @@ function findUnclosedWidgets(tree, state) {
 					// Check if it's self-closing
 					var tagText = state.doc.sliceString(node.from, node.to);
 					var isSelfClosing = /\/>\s*$/.test(tagText);
+
+					// Skip incomplete widgets (missing > on opening tag)
+					// They already get parsed errors and shouldn't match with sibling closing tags
+					if(!hasOpeningTagClose && !isSelfClosing) {
+						return; // Don't add to widgetStack
+					}
 
 					if(!isSelfClosing) {
 						// Find the containing structure (skip self - look at parent)
@@ -1831,20 +2156,100 @@ function findUnclosedWidgets(tree, state) {
  * Single-line pragmas like `\define foo() content` don't need \end
  * Multi-line pragmas (where content is on following lines) need \end
  * Warns when \end without a name is used with multiple open pragmas (ambiguous)
+ *
+ * Note: Content inside triple-quoted (""") and single-quoted (') attribute values
+ * is treated as isolated parsing contexts. Pragmas inside these contexts are
+ * validated separately - they should not affect or be affected by the outer document.
  */
 function findUnclosedPragmas(text, startPos) {
 	var issues = [];
-	var pragmaStack = [];
+	// Stack of contexts: each context has { pragmaStack, isIsolated, quoteType }
+	// The root context is not isolated
+	var contextStack = [{ pragmaStack: [], isIsolated: false, quoteType: null }];
+
 	var lines = text.split("\n");
 	var pos = startPos;
+
+	// Helper to get current context
+	function currentContext() {
+		return contextStack[contextStack.length - 1];
+	}
+
+	// Helper to get current pragma stack
+	function currentPragmaStack() {
+		return currentContext().pragmaStack;
+	}
 
 	for(var i = 0; i < lines.length; i++) {
 		var line = lines[i];
 		var trimmed = line.trim();
 
+		// Check for entering/exiting isolated contexts (""" or ')
+		// Triple quotes first since they're longer
+		var tripleQuoteIdx = line.indexOf('"""');
+		var singleQuoteAttrIdx = -1;
+		// Look for attribute='value' pattern where value might span multiple lines
+		var attrMatch = line.match(/\s(\w+)='([^']*)$/);
+		if(attrMatch && line.indexOf("'''") === -1) {
+			// Starting a single-quoted attribute that doesn't end on this line
+			singleQuoteAttrIdx = line.indexOf("='") + 2;
+		}
+
+		// Handle triple-quoted strings
+		if(tripleQuoteIdx !== -1) {
+			var afterTriple = line.substring(tripleQuoteIdx + 3);
+			if(currentContext().quoteType === '"""') {
+				// Exiting triple-quoted context
+				// Check for unclosed pragmas in the isolated context
+				var isolatedStack = currentPragmaStack();
+				isolatedStack.forEach(function(pragma) {
+					issues.push({
+						from: pragma.pos,
+						to: pragma.lineEnd,
+						message: "Unclosed \\" + pragma.type + ": " + pragma.name + " (missing \\end) in attribute value",
+						pragmaName: pragma.name,
+						pragmaType: pragma.type
+					});
+				});
+				contextStack.pop();
+			} else if(afterTriple.indexOf('"""') === -1) {
+				// Entering triple-quoted context (and it doesn't close on same line)
+				contextStack.push({ pragmaStack: [], isIsolated: true, quoteType: '"""' });
+			}
+			// If triple quotes open and close on same line, treat content as isolated but don't track
+		}
+
+		// Handle single-quoted attribute values that span lines
+		// This is tricky because ' is also used in contractions
+		// We only enter single-quote context for clear attribute patterns
+		if(singleQuoteAttrIdx !== -1 && !currentContext().isIsolated) {
+			contextStack.push({ pragmaStack: [], isIsolated: true, quoteType: "'" });
+		} else if(currentContext().quoteType === "'" && line.indexOf("'") !== -1) {
+			// Check if this closes the single-quoted attribute
+			// Look for closing ' that's followed by whitespace, / or >
+			var closingQuoteMatch = line.match(/'[\s/>]/);
+			if(closingQuoteMatch || line.endsWith("'")) {
+				var isolatedStack = currentPragmaStack();
+				isolatedStack.forEach(function(pragma) {
+					issues.push({
+						from: pragma.pos,
+						to: pragma.lineEnd,
+						message: "Unclosed \\" + pragma.type + ": " + pragma.name + " (missing \\end) in attribute value",
+						pragmaName: pragma.name,
+						pragmaType: pragma.type
+					});
+				});
+				contextStack.pop();
+			}
+		}
+
 		// Match opening pragmas: \define, \procedure, \function, \widget
 		// Pattern: \keyword name(params) [optional inline content]
-		var openMatch = trimmed.match(/^\\(define|procedure|function|widget)\s+([^\s(]+)(\([^)]*\))?(.*)$/);
+		// In isolated contexts, also match pragmas that aren't at line start
+		var pragmaPattern = currentContext().isIsolated ?
+			/\\(define|procedure|function|widget)\s+([^\s(]+)(\([^)]*\))?(.*)$/ :
+			/^\\(define|procedure|function|widget)\s+([^\s(]+)(\([^)]*\))?(.*)$/;
+		var openMatch = trimmed.match(pragmaPattern);
 		if(openMatch) {
 			var pragmaType = openMatch[1];
 			var pragmaName = openMatch[2];
@@ -1861,7 +2266,7 @@ function findUnclosedPragmas(text, startPos) {
 
 			if(!isSingleLine) {
 				// Multi-line pragma needs \end
-				pragmaStack.push({
+				currentPragmaStack().push({
 					type: pragmaType,
 					name: pragmaName,
 					pos: pos,
@@ -1872,35 +2277,43 @@ function findUnclosedPragmas(text, startPos) {
 		}
 
 		// Match closing pragmas
-		var closeMatch = trimmed.match(/^\\end\s*(\S*)/);
+		// In isolated contexts, also match \end that isn't at line start
+		var endPattern = currentContext().isIsolated ?
+			/\\end\s*(\S*)/ :
+			/^\\end\s*(\S*)/;
+		var closeMatch = trimmed.match(endPattern);
 		if(closeMatch) {
 			var endName = closeMatch[1];
 			var endPos = pos + line.indexOf("\\end");
 			var endLength = closeMatch[0].length;
+			var pragmaStack = currentPragmaStack();
 
 			if(!endName && pragmaStack.length > 0) {
 				// Bare \end - suggest using named form for clarity
-				var suggestedName = pragmaStack[pragmaStack.length - 1].name;
-				if(pragmaStack.length > 1) {
-					// Ambiguous: multiple pragmas open
-					var openNames = pragmaStack.map(function(p) {
-						return p.name;
-					}).join(", ");
-					issues.push({
-						from: endPos,
-						to: endPos + endLength,
-						message: "Ambiguous \\end: multiple pragmas open (" + openNames + "). Use \\end " + suggestedName + " to be explicit.",
-						suggestedName: suggestedName
-					});
-				} else {
-					// Single pragma open - hint to use named form
-					issues.push({
-						from: endPos,
-						to: endPos + endLength,
-						message: "Bare \\end closes " + suggestedName + ". Consider using \\end " + suggestedName + " for clarity.",
-						suggestedName: suggestedName,
-						isHint: true
-					});
+				// Skip this hint for isolated contexts to reduce noise
+				if(!currentContext().isIsolated) {
+					var suggestedName = pragmaStack[pragmaStack.length - 1].name;
+					if(pragmaStack.length > 1) {
+						// Ambiguous: multiple pragmas open
+						var openNames = pragmaStack.map(function(p) {
+							return p.name;
+						}).join(", ");
+						issues.push({
+							from: endPos,
+							to: endPos + endLength,
+							message: "Ambiguous \\end: multiple pragmas open (" + openNames + "). Use \\end " + suggestedName + " to be explicit.",
+							suggestedName: suggestedName
+						});
+					} else {
+						// Single pragma open - hint to use named form
+						issues.push({
+							from: endPos,
+							to: endPos + endLength,
+							message: "Bare \\end closes " + suggestedName + ". Consider using \\end " + suggestedName + " for clarity.",
+							suggestedName: suggestedName,
+							isHint: true
+						});
+					}
 				}
 			}
 
@@ -1919,10 +2332,11 @@ function findUnclosedPragmas(text, startPos) {
 					// These are pragmas at indices > foundIndex (opened after the one we're closing)
 					for(var k = pragmaStack.length - 1; k > foundIndex; k--) {
 						var unclosed = pragmaStack[k];
+						var msgSuffix = currentContext().isIsolated ? " in attribute value" : "";
 						issues.push({
 							from: unclosed.pos,
 							to: unclosed.lineEnd,
-							message: "Unclosed \\" + unclosed.type + ": " + unclosed.name + " (not closed before \\end " + (endName || pragmaStack[foundIndex].name) + ")",
+							message: "Unclosed \\" + unclosed.type + ": " + unclosed.name + " (not closed before \\end " + (endName || pragmaStack[foundIndex].name) + ")" + msgSuffix,
 							pragmaName: unclosed.name,
 							pragmaType: unclosed.type,
 							insertEndAt: endPos // Insert \end before the parent's \end
@@ -1932,35 +2346,42 @@ function findUnclosedPragmas(text, startPos) {
 					pragmaStack.splice(foundIndex);
 				} else if(endName) {
 					// Named \end but no matching pragma found
+					var msgSuffix = currentContext().isIsolated ? " in attribute value" : "";
 					issues.push({
 						from: endPos,
 						to: endPos + endLength,
-						message: "Unmatched \\end " + endName + ": no open pragma with this name"
+						message: "Unmatched \\end " + endName + ": no open pragma with this name" + msgSuffix
 					});
 				}
 			} else {
 				// Stack is empty - this \end has nothing to close
-				issues.push({
-					from: endPos,
-					to: endPos + endLength,
-					message: "Unexpected \\end" + (endName ? " " + endName : "") + ": no open pragma to close"
-				});
+				// In isolated contexts, this is expected if pragmas were balanced
+				if(!currentContext().isIsolated) {
+					issues.push({
+						from: endPos,
+						to: endPos + endLength,
+						message: "Unexpected \\end" + (endName ? " " + endName : "") + ": no open pragma to close"
+					});
+				}
 			}
 		}
 
 		pos += line.length + 1; // +1 for newline
 	}
 
-	// Report unclosed pragmas
-	pragmaStack.forEach(function(pragma) {
-		issues.push({
-			from: pragma.pos,
-			to: pragma.lineEnd,
-			message: "Unclosed \\" + pragma.type + ": " + pragma.name + " (missing \\end)",
-			pragmaName: pragma.name,
-			pragmaType: pragma.type
+	// Report unclosed pragmas in the root context
+	// (Isolated contexts are checked when they're closed)
+	if(contextStack.length === 1) {
+		currentPragmaStack().forEach(function(pragma) {
+			issues.push({
+				from: pragma.pos,
+				to: pragma.lineEnd,
+				message: "Unclosed \\" + pragma.type + ": " + pragma.name + " (missing \\end)",
+				pragmaName: pragma.name,
+				pragmaType: pragma.type
+			});
 		});
-	});
+	}
 
 	return issues;
 }
@@ -2136,7 +2557,50 @@ function findMisplacedPragmas(text, startPos) {
 // ============================================================================
 
 /**
+ * Check if conditionals are balanced within a given text
+ * Returns true if <%if%> and <%endif%> are properly balanced
+ */
+function areConditionalsBalanced(text) {
+	var depth = 0;
+	var ifRe = /<%\s*if\b/g;
+	var endifRe = /<%\s*endif\s*%>/g;
+
+	// Count all <%if opens
+	var ifMatch;
+	while ((ifMatch = ifRe.exec(text)) !== null) {
+		depth++;
+	}
+
+	// Count all <%endif closes
+	var endifMatch;
+	var endifCount = 0;
+	while ((endifMatch = endifRe.exec(text)) !== null) {
+		endifCount++;
+	}
+
+	return depth === endifCount;
+}
+
+/**
+ * Find the enclosing AttributeString node if any
+ * Returns the node or null if not inside an attribute string
+ */
+function findEnclosingAttributeString(node) {
+	var current = node.parent;
+	while(current) {
+		if(current.name === "AttributeString" || current.name === "AttributeQuoted") {
+			return current;
+		}
+		current = current.parent;
+	}
+	return null;
+}
+
+/**
  * Find unclosed conditional blocks with smart insertion positions
+ *
+ * Note: Conditionals inside attribute values (triple-quoted or single-quoted)
+ * are treated as isolated parsing contexts and checked for balance separately.
  */
 function findUnclosedConditionals(tree, state) {
 	var issues = [];
@@ -2145,6 +2609,12 @@ function findUnclosedConditionals(tree, state) {
 	tree.iterate({
 		enter: function(node) {
 			var nodeType = node.type.name;
+
+			// Skip nodes inside attribute values - they're isolated parsing contexts
+			// We'll check them separately below
+			if(isInsideAttributeValue(tree, node.from)) {
+				return;
+			}
 
 			// Check ConditionalBlock nodes for missing <%endif%>
 			if(nodeType === "ConditionalBlock") {
@@ -2177,49 +2647,70 @@ function findUnclosedConditionals(tree, state) {
 			if(nodeType === "Conditional") {
 				var text = state.doc.sliceString(node.from, node.to);
 
-				// Only flag <%if that aren't inside a ConditionalBlock
-				if(/<%\s*if\b/.test(text)) {
-					// Check if parent is ConditionalBlock
-					var parent = node.node.parent;
-					var inBlock = false;
-					while(parent) {
-						if(parent.name === "ConditionalBlock") {
-							inBlock = true;
-							break;
-						}
-						parent = parent.parent;
+				// Check if inside a ConditionalBlock
+				var parent = node.node.parent;
+				var inBlock = false;
+				while(parent) {
+					if(parent.name === "ConditionalBlock") {
+						inBlock = true;
+						break;
 					}
+					parent = parent.parent;
+				}
 
-					if(!inBlock) {
-						var insertInfo = findBestInsertPosition(state, node.to, docLength, []);
-						issues.push({
-							from: node.from,
-							to: node.to,
-							message: "Unclosed <%if (missing <%endif%>)",
-							insertAt: insertInfo.pos,
-							insertType: insertInfo.type
-						});
-					}
+				// If inside a ConditionalBlock, the block-level check handles it
+				if(inBlock) {
+					return;
+				}
+
+				// Not in any block - check for issues
+				if(/<%\s*if\b/.test(text)) {
+					var insertInfo = findBestInsertPosition(state, node.to, docLength, []);
+					issues.push({
+						from: node.from,
+						to: node.to,
+						message: "Unclosed <%if (missing <%endif%>)",
+						insertAt: insertInfo.pos,
+						insertType: insertInfo.type
+					});
 				}
 
 				// Check for standalone <%endif without <%if
 				if(/<%\s*endif\s*%>/.test(text)) {
-					var parent = node.node.parent;
-					var inBlock = false;
-					while(parent) {
-						if(parent.name === "ConditionalBlock") {
-							inBlock = true;
-							break;
-						}
-						parent = parent.parent;
-					}
+					issues.push({
+						from: node.from,
+						to: node.to,
+						message: "Unexpected <%endif%> without matching <%if"
+					});
+				}
+			}
+		}
+	});
 
-					if(!inBlock) {
-						issues.push({
-							from: node.from,
-							to: node.to,
-							message: "Unexpected <%endif%> without matching <%if"
-						});
+	// Check conditional balance inside attribute values (isolated contexts)
+	// Find all AttributeString nodes and check their content
+	tree.iterate({
+		enter: function(node) {
+			if(node.type.name === "AttributeString" || node.type.name === "AttributeQuoted") {
+				var attrText = state.doc.sliceString(node.from, node.to);
+				// Only check if there are conditionals in this attribute
+				if(/<%\s*(if|endif)\b/.test(attrText)) {
+					if(!areConditionalsBalanced(attrText)) {
+						var hasMoreIfs = (attrText.match(/<%\s*if\b/g) || []).length >
+							(attrText.match(/<%\s*endif\s*%>/g) || []).length;
+						if(hasMoreIfs) {
+							issues.push({
+								from: node.from,
+								to: node.to,
+								message: "Unclosed <%if (missing <%endif%>) in attribute value"
+							});
+						} else {
+							issues.push({
+								from: node.from,
+								to: node.to,
+								message: "Unexpected <%endif%> without matching <%if in attribute value"
+							});
+						}
 					}
 				}
 			}
@@ -2510,51 +3001,71 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 			}
 
 			// Check $(variable)$ substitution references
-			// Note: $(variable)$ syntax is ONLY valid inside \define blocks
+			// Note: $(variable)$ syntax is ONLY valid inside \define blocks OR substituted attributes
 			if(nodeType === "VariableName" && isRuleEnabled("undefinedMacros")) {
 				// Check if parent is a Variable node ($(variable)$ syntax)
 				var parentNode = node.node.parent;
 				if(parentNode && parentNode.type.name === "Variable") {
-					// First, check if we're inside a \define block
-					// $(variable)$ is only valid in \define, not \procedure, \function, \widget
-					var containingDefine = null;
-					var invalidContext = null;
-					var checkParent = node.node.parent;
-					while(checkParent) {
-						if(checkParent.type.name === "MacroDefinition") {
-							containingDefine = checkParent;
+					// First, check if we're inside a substituted attribute (backticks)
+					// $(variable)$ is ALWAYS valid inside attr=`...` because it's processed
+					// by the widget at render time, not by macro substitution
+					var insideSubstitutedAttr = false;
+					var attrCheckParent = node.node.parent;
+					while(attrCheckParent) {
+						if(attrCheckParent.type.name === "AttributeSubstituted") {
+							insideSubstitutedAttr = true;
 							break;
 						}
-						// If inside \procedure, \function, or \widget - that's invalid
-						if(checkParent.type.name === "ProcedureDefinition") {
-							invalidContext = "\\procedure";
+						// Don't check beyond the attribute level
+						if(attrCheckParent.type.name === "Attribute") {
 							break;
 						}
-						if(checkParent.type.name === "FunctionDefinition") {
-							invalidContext = "\\function";
-							break;
-						}
-						if(checkParent.type.name === "WidgetDefinition") {
-							invalidContext = "\\widget";
-							break;
-						}
-						checkParent = checkParent.parent;
+						attrCheckParent = attrCheckParent.parent;
 					}
 
-					// Warn if $(variable)$ is used outside \define
-					if(!containingDefine) {
-						var message = invalidContext ?
-							"$(variable)$ substitution is not valid in " + invalidContext + " (only in \\define)" :
-							"$(variable)$ substitution is only valid inside \\define macros";
-						diagnostics.push({
-							from: parentNode.from,
-							to: parentNode.to,
-							severity: "warning",
-							message: message,
-							source: "tiddlywiki"
-						});
-						// Skip further checks for this node (return from iterate callback)
-						return;
+					// Skip the \define check if inside substituted attribute
+					if(!insideSubstitutedAttr) {
+						// Check if we're inside a \define block
+						// $(variable)$ is only valid in \define, not \procedure, \function, \widget
+						var containingDefine = null;
+						var invalidContext = null;
+						var checkParent = node.node.parent;
+						while(checkParent) {
+							if(checkParent.type.name === "MacroDefinition") {
+								containingDefine = checkParent;
+								break;
+							}
+							// If inside \procedure, \function, or \widget - that's invalid
+							if(checkParent.type.name === "ProcedureDefinition") {
+								invalidContext = "\\procedure";
+								break;
+							}
+							if(checkParent.type.name === "FunctionDefinition") {
+								invalidContext = "\\function";
+								break;
+							}
+							if(checkParent.type.name === "WidgetDefinition") {
+								invalidContext = "\\widget";
+								break;
+							}
+							checkParent = checkParent.parent;
+						}
+
+						// Warn if $(variable)$ is used outside \define (and not in substituted attr)
+						if(!containingDefine) {
+							var message = invalidContext ?
+								"$(variable)$ substitution is not valid in " + invalidContext + " (only in \\define)" :
+								"$(variable)$ substitution is only valid inside \\define macros";
+							diagnostics.push({
+								from: parentNode.from,
+								to: parentNode.to,
+								severity: "warning",
+								message: message,
+								source: "tiddlywiki"
+							});
+							// Skip further checks for this node (return from iterate callback)
+							return;
+						}
 					}
 
 					var varName = text.trim();
@@ -2684,6 +3195,79 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 						source: "tiddlywiki"
 					});
 				}
+
+				// Check $macrocall $name and $transclude $variable for undefined macros/variables
+				if(isRuleEnabled("undefinedMacros") && (widgetName.toLowerCase() === "$macrocall" || widgetName.toLowerCase() === "$transclude")) {
+					var isMacrocall = widgetName.toLowerCase() === "$macrocall";
+					var attrToFind = isMacrocall ? "\\$name" : "\\$variable";
+
+					// Find the parent widget node and extract attributes
+					var widgetNode = node.node.parent;
+					if(widgetNode) {
+						var cursor = widgetNode.cursor();
+						cursor.firstChild();
+						var firstAttrStart = -1;
+						var lastAttrEnd = -1;
+						var attrNode = null;
+						do {
+							if(cursor.name === "Attribute") {
+								if(firstAttrStart === -1) firstAttrStart = cursor.from;
+								lastAttrEnd = cursor.to;
+								// Check if this is the $name or $variable attribute
+								var attrText = docText.slice(cursor.from, cursor.to);
+								var attrNameMatch = isMacrocall ?
+									/^\s*\$name\s*=/i.test(attrText) :
+									/^\s*\$variable\s*=/i.test(attrText);
+								if(attrNameMatch) {
+									attrNode = { from: cursor.from, to: cursor.to };
+								}
+							}
+						} while(cursor.nextSibling());
+
+						if(firstAttrStart !== -1 && attrNode) {
+							var attrs = docText.slice(firstAttrStart, lastAttrEnd);
+							var calledName = extractAttrValue(attrs, attrToFind);
+
+							if(calledName) {
+								// Check if the macro/variable is defined
+								var isDefined = isDefinitionKnown(calledName, "any") ||
+									localDefs.macros.has(calledName) ||
+									localDefs.procedures.has(calledName) ||
+									localDefs.functions.has(calledName) ||
+									builtInVariables.has(calledName) ||
+									widgetScopeVars.has(calledName);
+
+								if(!isDefined) {
+									// Check scope-aware variable detection
+									var syntaxNode = node.node;
+									var scopeVars = getVariablesInScope(syntaxNode, docText);
+									var isInScope = isVarInScope(calledName, scopeVars);
+
+									// If not in direct scope, check call-site reachable scope (dynamic scoping)
+									if(!isInScope) {
+										var containingDef = callAnalysis.getDefinitionAtPosition(from);
+										if(containingDef) {
+											var reachableScope = getCallSiteReachableScope(containingDef, callAnalysis);
+											isInScope = isVarInScope(calledName, reachableScope);
+										}
+									}
+
+									if(!isInScope) {
+										// Find the actual attribute value position for better error location
+										var msgType = isMacrocall ? "macro/procedure/function" : "variable";
+										diagnostics.push({
+											from: attrNode.from,
+											to: attrNode.to,
+											severity: "info",
+											message: "Possibly undefined " + msgType + ": " + calledName,
+											source: "tiddlywiki"
+										});
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 
 			// Check for InvalidWidget nodes (<$ followed by space - invalid widget syntax)
@@ -2789,6 +3373,12 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 					// Skip negation prefix
 					if(opName.startsWith("!")) {
 						opName = opName.substring(1);
+					}
+					// Strip suffixes (e.g., search:all:anchored -> search)
+					// Suffixes are flags/modifiers after the base operator name
+					var colonIndex = opName.indexOf(":");
+					if(colonIndex > 0) {
+						opName = opName.substring(0, colonIndex);
 					}
 					// Skip if it's a known filter operator
 					if(knownOperators.has(opName)) return;
@@ -2981,6 +3571,11 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 
 	if(isRuleEnabled("unclosedPragmas")) {
 		var pragmaIssues = findUnclosedPragmas(docText, 0);
+		// Filter out issues that are inside attribute values (e.g., src='...\end...')
+		// These are wikitext strings that will be processed later, not actual pragmas
+		pragmaIssues = pragmaIssues.filter(function(issue) {
+			return !isInsideAttributeValue(tree, issue.from);
+		});
 		pragmaIssues.forEach(function(issue) {
 			var isAmbiguous = issue.message.startsWith("Ambiguous");
 			var isBareEndHint = issue.message.startsWith("Bare \\end");
@@ -3182,6 +3777,10 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 
 	if(isRuleEnabled("unclosedConditionals")) {
 		var condIssues = findUnclosedConditionals(tree, state);
+		// Filter out issues inside attribute values (they are isolated parsing contexts)
+		condIssues = condIssues.filter(function(issue) {
+			return !isInsideAttributeValue(tree, issue.from);
+		});
 		condIssues.forEach(function(issue) {
 			var insertAt = issue.insertAt;
 			var insertType = issue.insertType;
@@ -3268,6 +3867,135 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 				source: "tiddlywiki",
 				actions: actions
 			});
+		});
+	}
+
+	// ========================================
+	// Incomplete Tags (missing closing >)
+	// ========================================
+
+	if(isRuleEnabled("incompleteTags")) {
+		tree.iterate({
+			enter: function(node) {
+				var nodeType = node.type.name;
+				if(nodeType === "IncompleteWidget" ||
+					nodeType === "IncompleteHTMLTag" ||
+					nodeType === "IncompleteHTMLBlock") {
+					// Find the tag name for a better error message
+					var tagName = "";
+					var cursor = node.node.cursor();
+					if(cursor.firstChild()) {
+						do {
+							if(cursor.name === "WidgetName" || cursor.name === "TagName") {
+								tagName = state.doc.sliceString(cursor.from, cursor.to);
+								break;
+							}
+						} while(cursor.nextSibling());
+					}
+
+					var isWidget = nodeType === "IncompleteWidget";
+					var message = isWidget ?
+						"Incomplete widget: <" + tagName + " is missing closing '>'" :
+						"Incomplete HTML tag: <" + tagName + " is missing closing '>'";
+
+					// Build actions for completing the tag
+					var actions = [];
+					var nodeEnd = node.to;
+					var textAfterNode = state.doc.sliceString(nodeEnd, state.doc.length);
+
+					// Check if this is a self-closing tag type
+					var isSelfClosingType = isSelfClosingTag(tagName, isWidget);
+
+					// Check if there's already a matching closing tag in the document
+					var hasExistingClose = hasMatchingClosingTag(textAfterNode, tagName, isWidget);
+
+					if(isSelfClosingType) {
+						// Self-closing tags: offer to make self-closing
+						actions.push({
+							name: "Make self-closing",
+							apply: function(view, from, to) {
+								view.dispatch({
+									changes: {
+										from: to,
+										to: to,
+										insert: "/>"
+									}
+								});
+							}
+						});
+					} else if(hasExistingClose) {
+						// Has matching closing tag: just add >
+						actions.push({
+							name: "Add closing '>'",
+							apply: function(view, from, to) {
+								view.dispatch({
+									changes: {
+										from: to,
+										to: to,
+										insert: ">"
+									}
+								});
+							}
+						});
+					} else {
+						// No matching closing tag: add > and closing tag
+						var closingTagText = "</" + tagName + ">";
+						actions.push({
+							name: "Complete tag",
+							apply: function(view, from, to) {
+								view.dispatch({
+									changes: {
+										from: to,
+										to: to,
+										insert: ">" + closingTagText
+									},
+									selection: {
+										anchor: to + 1
+									}
+								});
+							}
+						});
+						// Also offer just adding > in case user wants to add closing tag elsewhere
+						actions.push({
+							name: "Add '>' only",
+							apply: function(view, from, to) {
+								view.dispatch({
+									changes: {
+										from: to,
+										to: to,
+										insert: ">"
+									}
+								});
+							}
+						});
+					}
+
+					// For widgets, always offer make self-closing as alternative
+					if(isWidget && !isSelfClosingType) {
+						actions.push({
+							name: "Make self-closing",
+							apply: function(view, from, to) {
+								view.dispatch({
+									changes: {
+										from: to,
+										to: to,
+										insert: "/>"
+									}
+								});
+							}
+						});
+					}
+
+					diagnostics.push({
+						from: node.from,
+						to: node.to,
+						severity: "error",
+						message: message,
+						source: "tiddlywiki",
+						actions: actions
+					});
+				}
+			}
 		});
 	}
 

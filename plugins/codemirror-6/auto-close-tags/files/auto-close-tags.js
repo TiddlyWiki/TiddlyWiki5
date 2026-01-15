@@ -82,63 +82,339 @@ exports.plugin = {
 				return false; // Let default handling occur
 			}
 
-			// Check if we're inside a macro call (<<macro ...>)
-			// Don't auto-close if this > is closing a macro
-			var lastMacroOpen = textBefore.lastIndexOf("<<");
-			var lastMacroClose = textBefore.lastIndexOf(">>");
-			if(lastMacroOpen > -1 && lastMacroOpen > lastMacroClose) {
-				// We're inside an unclosed macro - don't auto-close
+			// Check if we're completing a macro close (>>)
+			// If text ends with single > (not >>) and there's an unclosed <<, we're typing second > of >>
+			if(textBefore.endsWith(">") && !textBefore.endsWith(">>")) {
+				// Check if there's an unclosed << before this >
+				var lastMacroOpen = textBefore.lastIndexOf("<<");
+				var lastMacroClose = textBefore.lastIndexOf(">>");
+				if(lastMacroOpen > lastMacroClose) {
+					// There's an unclosed macro - this > completes the >>
+					return false;
+				}
+			}
+
+			// Check if we're inside an unclosed filter or macro context
+			// This handles cases where the parser couldn't properly nest the <tag
+			// inside the filter (e.g., {{{ [tag<tag or <<macro<tag)
+			var textBeforeFull = doc.sliceString(0, pos);
+			var filterBrackets = 0;
+			var squareBrackets = 0;
+			var macroBrackets = 0;
+			var inQuote = false;
+			var quoteChar = null;
+
+			for(var i = 0; i < textBeforeFull.length; i++) {
+				var ch = textBeforeFull[i];
+				var next = textBeforeFull[i + 1] || "";
+				var next2 = textBeforeFull[i + 2] || "";
+
+				// Track quoted strings
+				if(!inQuote && (ch === '"' || ch === "'")) {
+					inQuote = true;
+					quoteChar = ch;
+					continue;
+				}
+				if(inQuote && ch === quoteChar && textBeforeFull[i - 1] !== "\\") {
+					inQuote = false;
+					quoteChar = null;
+					continue;
+				}
+				if(inQuote) continue;
+
+				// Track {{{ }}} filtered transclusion brackets
+				if(ch === "{" && next === "{" && next2 === "{") {
+					filterBrackets++;
+					i += 2;
+					continue;
+				}
+				if(ch === "}" && next === "}" && next2 === "}") {
+					filterBrackets--;
+					i += 2;
+					continue;
+				}
+
+				// Track [ ] filter brackets (only when inside {{{ or in filter context)
+				if(filterBrackets > 0) {
+					if(ch === "[") {
+						squareBrackets++;
+						continue;
+					}
+					if(ch === "]") {
+						squareBrackets--;
+						continue;
+					}
+				}
+
+				// Track << >> macro brackets
+				if(ch === "<" && next === "<") {
+					macroBrackets++;
+					i++;
+					continue;
+				}
+				if(ch === ">" && next === ">") {
+					macroBrackets--;
+					i++;
+					continue;
+				}
+			}
+
+			// If we're inside unclosed filter/macro context, don't auto-close
+			// The > is likely closing a filter variable like <tag> not an HTML tag
+			if(filterBrackets > 0 || squareBrackets > 0 || macroBrackets > 0) {
 				return false;
 			}
 
-			// Look for an opening tag pattern
-			// Match: <tagname or <$widgetname with optional attributes
-			var tagMatch = textBefore.match(/<(\$?[a-zA-Z][a-zA-Z0-9\-\.]*)(?:\s[^>]*)?$/);
-			if(!tagMatch) return false;
+			// Use the syntax tree to detect incomplete widget/HTML tags
+			var tree = syntaxTree(state);
+			if(!tree) return false;
 
-			var tagName = tagMatch[1];
+			var node = tree.resolveInner(pos, -1);
+
+			// Walk up to find an incomplete Widget or HTMLTag
+			var tagNode = null;
+			var tagName = null;
+			var isWidget = false;
+			var current = node;
+
+			while(current) {
+				var nodeName = current.name;
+
+				// If we're inside a macro call, don't auto-close
+				if(nodeName === "MacroCall" || nodeName === "MacroCallBlock") {
+					// Check if the macro is unclosed (no closing >>)
+					var hasClose = false;
+					var cursor = current.cursor();
+					if(cursor.firstChild()) {
+						do {
+							if(cursor.name === "MacroCallMark") {
+								var markText = doc.sliceString(cursor.from, cursor.to);
+								if(markText === ">>") {
+									hasClose = true;
+								}
+							}
+						} while(cursor.nextSibling());
+					}
+					if(!hasClose) {
+						return false;
+					}
+				}
+
+				// Check for Widget or InlineWidget
+				if(nodeName === "Widget" || nodeName === "InlineWidget" || nodeName === "BlockWidget") {
+					// Check if this widget has a closing TagMark ">"
+					var hasClosingMark = false;
+					var widgetNameNode = null;
+					var cursor = current.cursor();
+					if(cursor.firstChild()) {
+						do {
+							if(cursor.name === "WidgetName") {
+								widgetNameNode = cursor.node;
+							}
+							if(cursor.name === "TagMark") {
+								var markText = doc.sliceString(cursor.from, cursor.to);
+								if(markText === ">") {
+									hasClosingMark = true;
+								}
+							}
+						} while(cursor.nextSibling());
+					}
+
+					if(!hasClosingMark && widgetNameNode) {
+						tagNode = current;
+						tagName = doc.sliceString(widgetNameNode.from, widgetNameNode.to);
+						isWidget = true;
+						break;
+					}
+				}
+
+				// Check for HTML tags
+				if(nodeName === "HTMLTag" || nodeName === "HTMLBlock") {
+					// Check if this tag has a closing TagMark ">"
+					var hasClosingMark = false;
+					var tagNameNode = null;
+					var cursor = current.cursor();
+					if(cursor.firstChild()) {
+						do {
+							if(cursor.name === "TagName") {
+								tagNameNode = cursor.node;
+							}
+							if(cursor.name === "TagMark") {
+								var markText = doc.sliceString(cursor.from, cursor.to);
+								if(markText === ">") {
+									hasClosingMark = true;
+								}
+							}
+						} while(cursor.nextSibling());
+					}
+
+					if(!hasClosingMark && tagNameNode) {
+						tagNode = current;
+						tagName = doc.sliceString(tagNameNode.from, tagNameNode.to);
+						isWidget = false;
+						break;
+					}
+				}
+
+				current = current.parent;
+			}
+
+			// No incomplete tag found
+			if(!tagNode || !tagName) {
+				return false;
+			}
+
 			var tagNameLower = tagName.toLowerCase();
 
 			// Don't auto-close void HTML elements
-			if(voidElements.has(tagNameLower)) {
+			if(!isWidget && voidElements.has(tagNameLower)) {
 				return false;
 			}
 
 			// Don't auto-close known self-closing widgets
-			if(selfClosingWidgets.has(tagNameLower)) {
+			if(isWidget && selfClosingWidgets.has(tagNameLower)) {
 				return false;
 			}
 
-			// Check using syntax tree if available
-			var tree = syntaxTree(state);
-			if(tree) {
-				var node = tree.resolveInner(pos, -1);
-				// Walk up the tree to check context
-				while(node) {
-					var nodeName = node.name;
-					// If we're in any attribute value type, don't auto-close
-					if(nodeName === "AttributeValue" || nodeName === "AttributeString" ||
-						nodeName === "AttributeMacro" || nodeName === "AttributeIndirect" ||
-						nodeName === "AttributeSubstituted" || nodeName === "AttributeFiltered" ||
-						nodeName === "AttributeWikitext" || nodeName === "MacroCallMark") {
-						return false;
-					}
-					// If we're inside a filter expression, don't auto-close
-					// In filters, <variable> is a variable reference, not a tag
-					if(nodeName === "FilterExpression" || nodeName === "FilterRun" ||
-						nodeName === "FilteredTransclusion" || nodeName === "FilteredTransclusionBlock") {
-						return false;
-					}
-					node = node.parent;
-				}
-			}
-
-			// Insert > and the closing tag
+			// Check if there's already a balanced closing tag using the syntax tree
+			// Look for WidgetEnd or HTMLEndTag nodes with matching names
 			var closingTag = "</" + tagName + ">";
+			var hasBalancedClose = false;
+
+			// Walk the syntax tree to find all closing tags with this name after our position
+			// and track balance with any nested opening tags
+			var balance = 0;
+			var nameToMatch = isWidget ? tagName : tagName.toLowerCase();
+			var tagNodeFrom = tagNode.from;
+			var tagNodeTo = tagNode.to;
+
+			tree.iterate({
+				from: to,
+				enter: function(nodeRef) {
+					var nodeName = nodeRef.name;
+
+					// Skip the incomplete widget/tag we're closing (it would falsely increment balance)
+					if(nodeRef.from === tagNodeFrom && nodeRef.to === tagNodeTo) {
+						return;
+					}
+
+					// Check for opening tags of the same type
+					// Only count COMPLETE tags (those that have a closing TagMark ">")
+					if(isWidget && (nodeName === "Widget" || nodeName === "InlineWidget" || nodeName === "BlockWidget")) {
+						// Skip if this node started before our position (likely the parent we're closing)
+						if(nodeRef.from < to) {
+							return;
+						}
+						// Look for WidgetName child and check if complete
+						var cursor = nodeRef.node.cursor();
+						var hasClosingMark = false;
+						var matchedName = false;
+						if(cursor.firstChild()) {
+							do {
+								if(cursor.name === "WidgetName") {
+									var widgetName = doc.sliceString(cursor.from, cursor.to);
+									if(widgetName === nameToMatch) {
+										matchedName = true;
+									}
+								}
+								if(cursor.name === "TagMark") {
+									var markText = doc.sliceString(cursor.from, cursor.to);
+									if(markText === ">") {
+										hasClosingMark = true;
+									}
+								}
+								if(cursor.name === "SelfCloseEndTag") {
+									// Self-closing, don't count
+									return;
+								}
+							} while(cursor.nextSibling());
+						}
+						// Only count complete widgets with matching name
+						if(matchedName && hasClosingMark) {
+							balance++;
+						}
+					} else if(!isWidget && (nodeName === "HTMLTag" || nodeName === "HTMLBlock")) {
+						// Skip if this node started before our position
+						if(nodeRef.from < to) {
+							return;
+						}
+						// Look for TagName child and check if complete
+						var cursor = nodeRef.node.cursor();
+						var hasClosingMark = false;
+						var matchedName = false;
+						if(cursor.firstChild()) {
+							do {
+								if(cursor.name === "TagName") {
+									var htmlTagName = doc.sliceString(cursor.from, cursor.to).toLowerCase();
+									if(htmlTagName === nameToMatch) {
+										matchedName = true;
+									}
+								}
+								if(cursor.name === "TagMark") {
+									var markText = doc.sliceString(cursor.from, cursor.to);
+									if(markText === ">") {
+										hasClosingMark = true;
+									}
+								}
+								if(cursor.name === "SelfCloseEndTag") {
+									// Self-closing, don't count
+									return;
+								}
+							} while(cursor.nextSibling());
+						}
+						// Only count complete tags with matching name
+						if(matchedName && hasClosingMark) {
+							balance++;
+						}
+					}
+
+					// Check for closing tags
+					if(nodeName === "WidgetEnd" && isWidget) {
+						var cursor = nodeRef.node.cursor();
+						if(cursor.firstChild()) {
+							do {
+								if(cursor.name === "WidgetName") {
+									var widgetName = doc.sliceString(cursor.from, cursor.to);
+									if(widgetName === nameToMatch) {
+										if(balance === 0) {
+											// Found unmatched closing tag
+											hasBalancedClose = true;
+											return false; // Stop iteration
+										}
+										balance--;
+									}
+									break;
+								}
+							} while(cursor.nextSibling());
+						}
+					} else if(nodeName === "HTMLEndTag" && !isWidget) {
+						var cursor = nodeRef.node.cursor();
+						if(cursor.firstChild()) {
+							do {
+								if(cursor.name === "TagName") {
+									var htmlTagName = doc.sliceString(cursor.from, cursor.to).toLowerCase();
+									if(htmlTagName === nameToMatch) {
+										if(balance === 0) {
+											// Found unmatched closing tag
+											hasBalancedClose = true;
+											return false; // Stop iteration
+										}
+										balance--;
+									}
+									break;
+								}
+							} while(cursor.nextSibling());
+						}
+					}
+				}
+			});
+
+			// Insert > and optionally the closing tag (if not already balanced)
+			var insertText = hasBalancedClose ? ">" : (">" + closingTag);
 			var changes = {
 				from: from,
 				to: to,
-				insert: ">" + closingTag
+				insert: insertText
 			};
 
 			view.dispatch({

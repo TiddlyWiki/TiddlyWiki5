@@ -18,6 +18,95 @@ var PLUGIN_MODULE_TYPE = "codemirror6-plugin";
 var _coreCache = null;
 var _pluginCache = null;
 
+// Stateless extension caches - these are identical across all SimpleEngine instances
+var _historyExtension = null;
+var _historyKeymapExtension = null;
+var _bracketMatchingExtension = null;
+var _closeBracketsExtension = null;
+var _closeBracketsKeymapExtension = null;
+var _syntaxHighlightingExtension = null;
+var _defaultKeymapExtension = null;
+
+/**
+ * Get or create cached stateless extensions for SimpleEngine.
+ * These extensions don't vary between instances and can be safely shared.
+ */
+function getCachedExtensions() {
+	var core = getCM6Core();
+	var cmKeymap = core.view.keymap;
+
+	// History extension (undo/redo)
+	if(!_historyExtension) {
+		var history = (core.commands || {}).history;
+		if(history) {
+			_historyExtension = history();
+		}
+	}
+
+	// History keymap
+	if(!_historyKeymapExtension && cmKeymap) {
+		var historyKeymap = (core.commands || {}).historyKeymap;
+		if(historyKeymap) {
+			_historyKeymapExtension = cmKeymap.of(historyKeymap);
+		}
+	}
+
+	// Bracket matching
+	if(!_bracketMatchingExtension) {
+		var bracketMatching = (core.language || {}).bracketMatching;
+		if(bracketMatching) {
+			_bracketMatchingExtension = bracketMatching();
+		}
+	}
+
+	// Close brackets with TiddlyWiki-specific config
+	if(!_closeBracketsExtension) {
+		var closeBrackets = (core.autocomplete || {}).closeBrackets;
+		if(closeBrackets) {
+			_closeBracketsExtension = closeBrackets({
+				brackets: ["()", "[]", "{}", "''", '""', "``", "\u201c\u201d", "\u2018\u2019", "\u201e\u201d", "\u201a\u2019"]
+			});
+		}
+	}
+
+	// Close brackets keymap
+	if(!_closeBracketsKeymapExtension && cmKeymap) {
+		var closeBracketsKeymap = (core.autocomplete || {}).closeBracketsKeymap;
+		if(closeBracketsKeymap) {
+			_closeBracketsKeymapExtension = cmKeymap.of(closeBracketsKeymap);
+		}
+	}
+
+	// Syntax highlighting with class highlighter
+	if(!_syntaxHighlightingExtension) {
+		var syntaxHighlighting = (core.language || {}).syntaxHighlighting;
+		var classHighlighter = (core.lezerHighlight || {}).classHighlighter;
+		if(syntaxHighlighting && classHighlighter) {
+			_syntaxHighlightingExtension = syntaxHighlighting(classHighlighter, {
+				fallback: true
+			});
+		}
+	}
+
+	// Default keymap
+	if(!_defaultKeymapExtension && cmKeymap) {
+		var defaultKeymap = (core.commands || {}).defaultKeymap || [];
+		if(defaultKeymap.length) {
+			_defaultKeymapExtension = cmKeymap.of(defaultKeymap);
+		}
+	}
+
+	return {
+		history: _historyExtension,
+		historyKeymap: _historyKeymapExtension,
+		bracketMatching: _bracketMatchingExtension,
+		closeBrackets: _closeBracketsExtension,
+		closeBracketsKeymap: _closeBracketsKeymapExtension,
+		syntaxHighlighting: _syntaxHighlightingExtension,
+		defaultKeymap: _defaultKeymapExtension
+	};
+}
+
 // ============================================================================
 // Utility Functions
 // ============================================================================
@@ -307,6 +396,9 @@ class CodeMirrorSimpleEngine {
 		// Core Extensions
 		// ========================================================================
 
+		// Get cached stateless extensions (shared across all instances)
+		var cached = getCachedExtensions();
+
 		// Get wiki reference for config lookups
 		var wiki = (this.widget && this.widget.wiki) || null;
 
@@ -324,49 +416,36 @@ class CodeMirrorSimpleEngine {
 			}));
 		}
 
-		// History (undo/redo)
-		var history = (core.commands || {}).history;
-		var historyKeymap = (core.commands || {}).historyKeymap;
-		if(history) {
-			extensions.push(history());
-			if(historyKeymap && cmKeymap) {
-				extensions.push(cmKeymap.of(historyKeymap));
-			}
+		// History (undo/redo) - cached
+		if(cached.history) {
+			extensions.push(cached.history);
+		}
+		if(cached.historyKeymap) {
+			extensions.push(cached.historyKeymap);
 		}
 
-		// Default keymap
-		var defaultKeymap = (core.commands || {}).defaultKeymap || [];
-		if(defaultKeymap.length && cmKeymap) {
-			extensions.push(cmKeymap.of(defaultKeymap));
+		// Default keymap - cached
+		if(cached.defaultKeymap) {
+			extensions.push(cached.defaultKeymap);
 		}
 
-		// Syntax highlighting (class-based for CSS theming)
-		var syntaxHighlighting = (core.language || {}).syntaxHighlighting;
-		var classHighlighter = (core.lezerHighlight || {}).classHighlighter;
-		if(syntaxHighlighting && classHighlighter) {
-			extensions.push(syntaxHighlighting(classHighlighter, {
-				fallback: true
-			}));
+		// Syntax highlighting (class-based for CSS theming) - cached
+		if(cached.syntaxHighlighting) {
+			extensions.push(cached.syntaxHighlighting);
 		}
 
-		// Bracket matching (configurable via compartment)
-		var bracketMatching = (core.language || {}).bracketMatching;
-		if(bracketMatching) {
+		// Bracket matching (cached extension, compartment for dynamic toggle)
+		if(cached.bracketMatching) {
 			var bmEnabled = !wiki || wiki.getTiddlerText("$:/config/codemirror-6/editor/bracketMatching", "yes") === "yes";
-			extensions.push(this._compartments.bracketMatching.of(bmEnabled ? bracketMatching() : []));
+			extensions.push(this._compartments.bracketMatching.of(bmEnabled ? cached.bracketMatching : []));
 		}
 
-		// Close brackets (configurable via compartment)
-		var closeBrackets = (core.autocomplete || {}).closeBrackets;
-		var closeBracketsKeymap = (core.autocomplete || {}).closeBracketsKeymap;
-		if(closeBrackets) {
+		// Close brackets (cached extension, compartment for dynamic toggle)
+		if(cached.closeBrackets) {
 			var cbEnabled = !wiki || wiki.getTiddlerText("$:/config/codemirror-6/editor/closeBrackets", "yes") === "yes";
-			var cbConfig = {
-				brackets: ["()", "[]", "{}", "''", '""', "``", "\u201c\u201d", "\u2018\u2019", "\u201e\u201d", "\u201a\u2019"]
-			};
-			var cbExtensions = cbEnabled ? [closeBrackets(cbConfig)] : [];
-			if(cbEnabled && closeBracketsKeymap && cmKeymap) {
-				cbExtensions.push(cmKeymap.of(closeBracketsKeymap));
+			var cbExtensions = cbEnabled ? [cached.closeBrackets] : [];
+			if(cbEnabled && cached.closeBracketsKeymap) {
+				cbExtensions.push(cached.closeBracketsKeymap);
 			}
 			extensions.push(this._compartments.closeBrackets.of(cbExtensions));
 		}
@@ -1447,27 +1526,21 @@ class CodeMirrorSimpleEngine {
 
 		var core = this.cm;
 		var effects = [];
+		var cached = getCachedExtensions();
 
-		// Bracket matching
-		var bracketMatching = (core.language || {}).bracketMatching;
-		if(bracketMatching && this._compartments.bracketMatching && settings.bracketMatching !== undefined) {
-			var bmContent = settings.bracketMatching ? bracketMatching() : [];
+		// Bracket matching (use cached extension)
+		if(cached.bracketMatching && this._compartments.bracketMatching && settings.bracketMatching !== undefined) {
+			var bmContent = settings.bracketMatching ? cached.bracketMatching : [];
 			effects.push(this._compartments.bracketMatching.reconfigure(bmContent));
 		}
 
-		// Close brackets
-		var closeBrackets = (core.autocomplete || {}).closeBrackets;
-		var closeBracketsKeymap = (core.autocomplete || {}).closeBracketsKeymap;
-		var cmKeymap = core.view.keymap;
-		if(closeBrackets && this._compartments.closeBrackets && settings.closeBrackets !== undefined) {
-			var cbConfig = {
-				brackets: ["()", "[]", "{}", "''", '""', "``", "\u201c\u201d", "\u2018\u2019", "\u201e\u201d", "\u201a\u2019"]
-			};
+		// Close brackets (use cached extensions)
+		if(cached.closeBrackets && this._compartments.closeBrackets && settings.closeBrackets !== undefined) {
 			var cbExtensions = [];
 			if(settings.closeBrackets) {
-				cbExtensions.push(closeBrackets(cbConfig));
-				if(closeBracketsKeymap && cmKeymap) {
-					cbExtensions.push(cmKeymap.of(closeBracketsKeymap));
+				cbExtensions.push(cached.closeBrackets);
+				if(cached.closeBracketsKeymap) {
+					cbExtensions.push(cached.closeBracketsKeymap);
 				}
 			}
 			effects.push(this._compartments.closeBrackets.reconfigure(cbExtensions));

@@ -380,13 +380,38 @@ class ZenMode {
 	 * Update overlay theme attribute
 	 */
 	updateTheme() {
-		// Get current theme from engine's DOM or config
+		// Get current theme from engine's domNode (where _applyTheme sets it)
+		// This properly respects auto-match-palette settings
 		var theme = "vanilla";
-		if(this.editorWrapper) {
-			var wiki = this.wiki || $tw.wiki;
-			theme = this.editorWrapper.getAttribute("data-cm6-theme") ||
-				wiki.getTiddlerText("$:/config/codemirror-6/editor/theme", "vanilla");
+
+		// First try: engine.domNode has the resolved theme (includes auto-match-palette logic)
+		if(this.engine && this.engine.domNode) {
+			theme = this.engine.domNode.getAttribute("data-cm6-theme") || theme;
 		}
+		// Second try: editorWrapper might have it in some cases
+		else if(this.editorWrapper) {
+			theme = this.editorWrapper.getAttribute("data-cm6-theme") || theme;
+		}
+
+		// Final fallback: replicate auto-match-palette logic ourselves
+		if(theme === "vanilla") {
+			var wiki = this.wiki || $tw.wiki;
+			var autoMatch = wiki.getTiddlerText(
+				"$:/config/codemirror-6/editor/auto-match-palette",
+				"yes"
+			) === "yes";
+
+			if(autoMatch) {
+				var paletteName = wiki.getTiddlerText("$:/palette");
+				var palette = wiki.getTiddler(paletteName);
+				var isDark = palette && palette.fields["color-scheme"] === "dark";
+				var themeKey = isDark ? "theme-dark" : "theme-light";
+				theme = wiki.getTiddlerText("$:/config/codemirror-6/editor/" + themeKey, "vanilla");
+			} else {
+				theme = wiki.getTiddlerText("$:/config/codemirror-6/editor/theme", "vanilla");
+			}
+		}
+
 		this.overlay.setAttribute("data-cm6-theme", theme);
 	}
 

@@ -886,13 +886,16 @@ function registerLanguage(core) {
 			// These are provided by the lang-css plugin if available
 			// Use dynamic getters since lang-css may load after lang-tiddlywiki
 			getPageClasses: function() {
-				return core.getPageClasses ? core.getPageClasses() : null;
+				return core.getPageClasses ? core.getPageClasses() : [];
 			},
 			getCSSProperties: function() {
-				return core.getCSSProperties ? core.getCSSProperties() : null;
+				return core.getCSSProperties ? core.getCSSProperties() : [];
 			},
 			getCSSValues: function() {
-				return core.getCSSValues ? core.getCSSValues() : null;
+				return core.getCSSValues ? core.getCSSValues() : [];
+			},
+			getCSSValuesForProperty: function(propertyName) {
+				return core.getCSSValuesForProperty ? core.getCSSValuesForProperty(propertyName) : [];
 			},
 
 			// Enable all completions

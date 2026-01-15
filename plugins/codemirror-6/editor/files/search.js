@@ -13,6 +13,137 @@ if(!$tw.browser) return;
 // Load the search library
 var searchLib = require("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-search.js");
 
+// ============================================================================
+// Custom Goto Line Panel (with proper Escape handling)
+// ============================================================================
+
+/**
+ * Create and manage a custom goto-line panel
+ */
+function createGotoLinePanel(view, editorWrapper) {
+	// Check if panel already exists
+	var existing = editorWrapper.querySelector(".cm-panel.cm-gotoLine");
+	if(existing) {
+		existing.querySelector("input").focus();
+		existing.querySelector("input").select();
+		return;
+	}
+
+	// Create panel
+	var panel = document.createElement("div");
+	panel.className = "cm-panel cm-gotoLine";
+
+	var label = document.createElement("label");
+	label.textContent = "Go to line: ";
+
+	var input = document.createElement("input");
+	input.type = "text";
+	input.setAttribute("aria-label", "Line number");
+	input.placeholder = "1:1";
+
+	var goBtn = document.createElement("button");
+	goBtn.className = "cm-button";
+	goBtn.textContent = "Go";
+
+	var closeBtn = document.createElement("button");
+	closeBtn.name = "close";
+	closeBtn.setAttribute("aria-label", "Close");
+	closeBtn.textContent = "×";
+
+	label.appendChild(input);
+	panel.appendChild(label);
+	panel.appendChild(goBtn);
+	panel.appendChild(closeBtn);
+
+	// Find or create bottom panels container
+	var panelsBottom = editorWrapper.querySelector(".cm-panels-bottom");
+	if(!panelsBottom) {
+		panelsBottom = document.createElement("div");
+		panelsBottom.className = "cm-panels cm-panels-bottom";
+		var editor = editorWrapper.querySelector(".cm-editor");
+		if(editor) {
+			editor.appendChild(panelsBottom);
+		} else {
+			editorWrapper.appendChild(panelsBottom);
+		}
+	}
+	panelsBottom.appendChild(panel);
+
+	// Function to close the panel
+	function closePanel() {
+		if(panel.parentNode) {
+			panel.parentNode.removeChild(panel);
+		}
+		view.focus();
+	}
+
+	// Function to go to line
+	function gotoLine() {
+		var value = input.value.trim();
+		if(!value) {
+			closePanel();
+			return;
+		}
+
+		var match = /^(\d+)(?::(\d+))?$/.exec(value);
+		if(!match) {
+			closePanel();
+			return;
+		}
+
+		var line = parseInt(match[1], 10);
+		var column = match[2] ? parseInt(match[2], 10) : 1;
+
+		var doc = view.state.doc;
+		if(line < 1) line = 1;
+		if(line > doc.lines) line = doc.lines;
+
+		var lineInfo = doc.line(line);
+		var pos = lineInfo.from + Math.min(column - 1, lineInfo.length);
+
+		view.dispatch({
+			selection: { anchor: pos },
+			scrollIntoView: true
+		});
+
+		closePanel();
+	}
+
+	// Event handlers
+	input.addEventListener("keydown", function(e) {
+		if(e.key === "Escape") {
+			e.preventDefault();
+			e.stopPropagation();
+			e.stopImmediatePropagation();
+			closePanel();
+		} else if(e.key === "Enter") {
+			e.preventDefault();
+			gotoLine();
+		}
+	}, true);
+
+	goBtn.addEventListener("click", function(e) {
+		e.preventDefault();
+		gotoLine();
+	});
+
+	closeBtn.addEventListener("click", function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		closePanel();
+	});
+
+	// Focus the input
+	setTimeout(function() {
+		input.focus();
+	}, 0);
+
+	return {
+		close: closePanel,
+		panel: panel
+	};
+}
+
 exports.plugin = {
 	name: "search",
 	description: "Search and replace functionality",
@@ -40,12 +171,34 @@ exports.plugin = {
 			extensions.push(searchLib.highlightSelectionMatches());
 		}
 
-		// Add search keymap (without Escape - we handle it separately)
+		// Add search keymap (without Escape and gotoLine - we handle them separately)
 		if(keymap && searchLib.searchKeymap) {
 			var filteredKeymap = searchLib.searchKeymap.filter(function(binding) {
-				return binding.key !== "Escape";
+				// Filter out Escape (we handle it in capture phase) and gotoLine bindings (we use our custom panel)
+				var key = binding.key;
+				if(key === "Escape") return false;
+				if(key === "Mod-g" || key === "Ctrl-Alt-g" || key === "Alt-g") return false;
+				return true;
 			});
 			extensions.push(keymap.of(filteredKeymap));
+		}
+
+		// Add our custom gotoLine keymap binding with high precedence (Mod-g and Ctrl-Alt-g)
+		var Prec = core.state.Prec;
+		if(keymap && Prec) {
+			var gotoLineCommand = function(view) {
+				// Find the editor wrapper (domNode) from the view
+				var editorWrapper = view.dom.closest(".tc-editor-codemirror6");
+				if(editorWrapper) {
+					createGotoLinePanel(view, editorWrapper);
+					return true;
+				}
+				return false;
+			};
+			extensions.push(Prec.highest(keymap.of([
+				{ key: "Mod-g", run: gotoLineCommand },
+				{ key: "Ctrl-Alt-g", run: gotoLineCommand }
+			])));
 		}
 
 		// Store reference for Escape handler
@@ -66,19 +219,6 @@ exports.plugin = {
 							return;
 						}
 
-						// Check if goto line panel is open
-						var gotoLinePanel = view.dom.querySelector(".cm-gotoLine");
-						if(gotoLinePanel) {
-							// Find and click the close button, or simulate escape on the input
-							var closeBtn = gotoLinePanel.querySelector("button[name=close]");
-							if(closeBtn) {
-								closeBtn.click();
-								event.preventDefault();
-								event.stopPropagation();
-								event.stopImmediatePropagation();
-								return;
-							}
-						}
 					}
 				};
 
@@ -139,8 +279,17 @@ exports.plugin = {
 			},
 
 			gotoLine: function() {
-				if(this._destroyed || !searchLib.gotoLine) return;
-				searchLib.gotoLine(this.view);
+				if(this._destroyed) return;
+				createGotoLinePanel(this.view, this.domNode);
+			},
+
+			closeGotoLine: function() {
+				if(this._destroyed) return;
+				var gotoLinePanel = this.domNode.querySelector(".cm-panel.cm-gotoLine");
+				if(gotoLinePanel) {
+					var closeBtn = gotoLinePanel.querySelector("button[name=close]");
+					if(closeBtn) closeBtn.click();
+				}
 			},
 
 			isSearchOpen: function() {
@@ -159,18 +308,17 @@ exports.plugin = {
 
 			isGotoLineOpen: function() {
 				if(this._destroyed) return false;
-				return !!this.view.dom.querySelector(".cm-gotoLine");
+				return !!this.domNode.querySelector(".cm-panel.cm-gotoLine");
 			},
 
 			toggleGotoLine: function() {
 				if(this._destroyed) return;
-				var gotoLinePanel = this.view.dom.querySelector(".cm-gotoLine");
+				var gotoLinePanel = this.domNode.querySelector(".cm-panel.cm-gotoLine");
 				if(gotoLinePanel) {
-					// Close it by clicking the close button
 					var closeBtn = gotoLinePanel.querySelector("button[name=close]");
 					if(closeBtn) closeBtn.click();
 				} else {
-					if(searchLib.gotoLine) searchLib.gotoLine(this.view);
+					createGotoLinePanel(this.view, this.domNode);
 				}
 			}
 		};

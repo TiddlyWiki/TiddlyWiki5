@@ -23,7 +23,7 @@ tags: $:/tags/Stylesheet
 
 .tc-editor-codemirror6 .cm-content {
     padding: 8px;
-    caret-color: <<colour foreground>>;
+    caret-color: transparent;
 }
 
 .tc-editor-codemirror6 .cm-focused {
@@ -168,6 +168,14 @@ tags: $:/tags/Stylesheet
 /* ============================================================================
    Search Panel
    ============================================================================ */
+
+.cm-panels-top {
+    /* Make the panel container sticky */
+    position: sticky;
+    /* Use CSS custom property for top offset (set by JS based on menubar height) */
+    top: var(--tc-menubar-height, 0px);
+    z-index: 100;
+}
 
 .cm-search {
     background: <<colour tiddler-background>>;
@@ -315,28 +323,31 @@ tags: $:/tags/Stylesheet
 
 .cm-gotoLine {
     background: <<colour tiddler-background>>;
-    border-bottom: 1px solid <<colour tiddler-editor-border>>;
-    padding: 14px 16px;
+    border-top: 1px solid <<colour tiddler-editor-border>>;
+    padding: 6px 12px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 16px;
+    gap: 8px;
+    font-size: 13px;
 }
 
 .cm-gotoLine label {
     color: <<colour foreground>>;
-    font-size: 16px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .cm-gotoLine input {
-    padding: 10px 14px;
+    padding: 4px 8px;
     border: 1px solid <<colour tiddler-editor-border>>;
-    border-radius: 4px;
+    border-radius: 3px;
     background-color: <<colour tiddler-editor-background>>;
     color: <<colour foreground>>;
     color-scheme: light dark;
-    font-size: 16px;
-    width: 140px;
+    font-size: 13px;
+    width: 80px;
     outline: none;
     -webkit-appearance: none;
     appearance: none;
@@ -347,12 +358,12 @@ tags: $:/tags/Stylesheet
 }
 
 .cm-gotoLine button {
-    padding: 8px 16px;
+    padding: 4px 10px;
     background: <<colour button-background>>;
     border: 1px solid <<colour button-border>>;
-    border-radius: 4px;
+    border-radius: 3px;
     color: <<colour button-foreground>>;
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
 }
 
@@ -360,6 +371,20 @@ tags: $:/tags/Stylesheet
     background: <<colour primary>>;
     border-color: <<colour primary>>;
     color: <<colour background>>;
+}
+
+.cm-gotoLine button[name="close"] {
+    margin-left: auto;
+    padding: 2px 6px;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    color: <<colour muted-foreground>>;
+}
+
+.cm-gotoLine button[name="close"]:hover {
+    color: <<colour foreground>>;
+    background: transparent;
 }
 
 /* ============================================================================
@@ -387,15 +412,18 @@ tags: $:/tags/Stylesheet
 
 .tc-editor-codemirror6 .cm-cursor {
     position: absolute;
-    border-left: 2px solid <<colour foreground>>;
-    margin-left: -1px;
-    margin-top: -3px;
-    padding-bottom: 2px;
+    border-left-width: 2px;
+    border-left-style: solid;
+    margin-left: 0;
+    margin-top: 0;
+    padding-bottom: 0;
     pointer-events: none;
 }
 
-.tc-editor-codemirror6 .cm-cursor-secondary {
-    border-left-color: <<colour primary>>;
+/* High-contrast cursor when near/between brackets */
+.tc-editor-codemirror6:has(.cm-matchingBracket) .cm-cursor,
+.tc-editor-codemirror6:has(.cm-nonmatchingBracket) .cm-cursor {
+    border-left-color: #ff6600 !important;
 }
 
 /* Secondary selection background (for multi-cursor selections) */
@@ -407,15 +435,15 @@ tags: $:/tags/Stylesheet
 }
 
 @keyframes cm-blink {
-    0% {}
-    50% { border-color: transparent; }
-    100% {}
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 @keyframes cm-blink2 {
-    0% {}
-    50% { border-color: transparent; }
-    100% {}
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 .tc-editor-codemirror6 .cm-cursorLayer {

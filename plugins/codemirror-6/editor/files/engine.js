@@ -35,6 +35,99 @@ var _pluginCache = null;
 var _coreCache = null;
 var _plainTextLanguage = null;
 
+// Stateless extension caches - these are identical across all editor instances
+var _historyExtension = null;
+var _historyKeymapExtension = null;
+var _bracketMatchingExtension = null;
+var _closeBracketsExtension = null;
+var _closeBracketsKeymapExtension = null;
+var _syntaxHighlightingExtension = null;
+var _defaultKeymapExtension = null;
+
+/**
+ * Get or create cached stateless extensions.
+ * These extensions don't vary between instances and can be safely shared.
+ */
+function getCachedExtensions() {
+	var core = getCM6Core();
+	var cmKeymap = core.view.keymap;
+
+	// History extension (undo/redo)
+	if(!_historyExtension) {
+		var history = (core.commands || {}).history;
+		if(history) {
+			_historyExtension = history();
+		}
+	}
+
+	// History keymap
+	if(!_historyKeymapExtension && cmKeymap) {
+		var historyKeymap = (core.commands || {}).historyKeymap;
+		if(historyKeymap) {
+			_historyKeymapExtension = cmKeymap.of(historyKeymap);
+		}
+	}
+
+	// Bracket matching
+	if(!_bracketMatchingExtension) {
+		var bracketMatching = (core.language || {}).bracketMatching;
+		if(bracketMatching) {
+			_bracketMatchingExtension = bracketMatching();
+		}
+	}
+
+	// Close brackets with TiddlyWiki-specific config
+	if(!_closeBracketsExtension) {
+		var closeBrackets = (core.autocomplete || {}).closeBrackets;
+		if(closeBrackets) {
+			_closeBracketsExtension = closeBrackets({
+				brackets: ["()", "[]", "{}", "''", '""', "``", "\u201c\u201d", "\u2018\u2019", "\u201e\u201d", "\u201a\u2019"]
+			});
+		}
+	}
+
+	// Close brackets keymap
+	if(!_closeBracketsKeymapExtension && cmKeymap) {
+		var closeBracketsKeymap = (core.autocomplete || {}).closeBracketsKeymap;
+		if(closeBracketsKeymap) {
+			_closeBracketsKeymapExtension = cmKeymap.of(closeBracketsKeymap);
+		}
+	}
+
+	// Syntax highlighting with class highlighter
+	if(!_syntaxHighlightingExtension) {
+		var syntaxHighlighting = (core.language || {}).syntaxHighlighting;
+		var classHighlighter = (core.lezerHighlight || {}).classHighlighter;
+		if(syntaxHighlighting && classHighlighter) {
+			_syntaxHighlightingExtension = syntaxHighlighting(classHighlighter, {
+				fallback: true
+			});
+		}
+	}
+
+	// Default keymap (without focus navigation - that needs wiki reference)
+	if(!_defaultKeymapExtension && cmKeymap) {
+		var defaultKeymap = (core.commands || {}).defaultKeymap || [];
+		var indentWithTab = (core.commands || {}).indentWithTab;
+		var km = [];
+		if(defaultKeymap.length) km = km.concat(defaultKeymap);
+		if(indentWithTab) km.push(indentWithTab);
+		if(km.length) {
+			_defaultKeymapExtension = cmKeymap.of(km);
+		}
+	}
+
+	return {
+		history: _historyExtension,
+		historyKeymap: _historyKeymapExtension,
+		bracketMatching: _bracketMatchingExtension,
+		closeBrackets: _closeBracketsExtension,
+		closeBracketsKeymap: _closeBracketsKeymapExtension,
+		syntaxHighlighting: _syntaxHighlightingExtension,
+		defaultKeymap: _defaultKeymapExtension
+	};
+}
+
 // ============================================================================
 // Utility Functions
 // ============================================================================
@@ -107,6 +200,59 @@ function hasWindowTimers() {
 	return typeof window !== "undefined" &&
 		typeof window.setTimeout === "function" &&
 		typeof window.clearTimeout === "function";
+}
+
+// ============================================================================
+// Menubar Height Tracking (for sticky search panel)
+// ============================================================================
+
+var _menubarObserver = null;
+var _menubarHeightSet = false;
+
+/**
+ * Detect and track the TiddlyWiki menubar height for sticky panel positioning.
+ * Sets --tc-menubar-height CSS custom property on document root.
+ * Only accounts for menubar height if it's fixed/sticky (overlapping content).
+ * Uses ResizeObserver if available to track dynamic changes.
+ */
+function setupMenubarHeightTracking(doc) {
+	if(!doc || _menubarHeightSet) return;
+
+	var menubar = doc.querySelector(".tc-adjust-top-of-scroll");
+	if(!menubar) {
+		// No menubar found, set to 0
+		doc.documentElement.style.setProperty("--tc-menubar-height", "0px");
+		_menubarHeightSet = true;
+		return;
+	}
+
+	// Function to update the CSS variable
+	function updateMenubarHeight() {
+		// Only account for menubar if it's fixed, sticky, or absolute (overlapping content)
+		var computedStyle = doc.defaultView.getComputedStyle(menubar);
+		var position = computedStyle.position;
+		var isOverlapping = position === "fixed" || position === "sticky" || position === "absolute";
+
+		if(isOverlapping) {
+			var height = menubar.getBoundingClientRect().height;
+			doc.documentElement.style.setProperty("--tc-menubar-height", height + "px");
+		} else {
+			// Menubar is in normal flow (flex, static, relative), no offset needed
+			doc.documentElement.style.setProperty("--tc-menubar-height", "0px");
+		}
+	}
+
+	// Initial update
+	updateMenubarHeight();
+	_menubarHeightSet = true;
+
+	// Set up ResizeObserver if available and not already set up
+	if(!_menubarObserver && typeof ResizeObserver !== "undefined") {
+		_menubarObserver = new ResizeObserver(function() {
+			updateMenubarHeight();
+		});
+		_menubarObserver.observe(menubar);
+	}
 }
 
 // ============================================================================
@@ -661,6 +807,9 @@ class CodeMirrorEngine {
 
 		var extensions = [];
 
+		// Get cached stateless extensions (shared across all instances)
+		var cached = getCachedExtensions();
+
 		// Core: Read-only compartment
 		extensions.push(
 			this._compartments.readOnly.of(
@@ -668,32 +817,29 @@ class CodeMirrorEngine {
 			)
 		);
 
-		// Core: Basic keymap + focus navigation
-		var defaultKeymap = (core.commands || {}).defaultKeymap || [];
-		var indentWithTab = (core.commands || {}).indentWithTab;
+		// Core: Basic keymap (cached) + focus navigation (instance-specific)
+		if(cached.defaultKeymap) {
+			extensions.push(cached.defaultKeymap);
+		}
 
-		var km = [];
-		if(defaultKeymap.length) km = km.concat(defaultKeymap);
-		if(indentWithTab) km.push(indentWithTab);
-
-		// Focus navigation: configurable shortcuts (default: Ctrl+. / Ctrl+Shift+.)
+		// Focus navigation: configurable shortcuts (instance-specific, depends on wiki)
 		var focusNextKey = getShortcut(wiki, "focus-next", "Ctrl-.");
 		var focusPrevKey = getShortcut(wiki, "focus-prev", "Ctrl-Shift-.");
+		var focusNavKeymap = [];
 		if(focusNextKey) {
-			km.push({
+			focusNavKeymap.push({
 				key: focusNextKey,
 				run: focusNextElement
 			});
 		}
 		if(focusPrevKey) {
-			km.push({
+			focusNavKeymap.push({
 				key: focusPrevKey,
 				run: focusPrevElement
 			});
 		}
-
-		if(km.length && cmKeymap) {
-			extensions.push(cmKeymap.of(km));
+		if(focusNavKeymap.length && cmKeymap) {
+			extensions.push(cmKeymap.of(focusNavKeymap));
 		}
 
 		// Core: Line wrapping
@@ -750,20 +896,17 @@ class CodeMirrorEngine {
 			);
 		}
 
-		// Core: Undo/redo history
-		var history = (core.commands || {}).history;
-		var historyKeymap = (core.commands || {}).historyKeymap;
-		if(history) {
-			extensions.push(history());
-			if(historyKeymap && cmKeymap) {
-				extensions.push(cmKeymap.of(historyKeymap));
-			}
+		// Core: Undo/redo history (cached)
+		if(cached.history) {
+			extensions.push(cached.history);
+		}
+		if(cached.historyKeymap) {
+			extensions.push(cached.historyKeymap);
 		}
 
-		// Core: Bracket matching (with compartment for dynamic toggle)
-		var bracketMatching = (core.language || {}).bracketMatching;
-		if(bracketMatching && this._compartments.bracketMatching) {
-			extensions.push(this._compartments.bracketMatching.of(bracketMatching()));
+		// Core: Bracket matching (cached extension, compartment for dynamic toggle)
+		if(cached.bracketMatching && this._compartments.bracketMatching) {
+			extensions.push(this._compartments.bracketMatching.of(cached.bracketMatching));
 		}
 
 		// Custom: Auto-close triple braces {{{ → {{{  }}}
@@ -998,22 +1141,12 @@ class CodeMirrorEngine {
 			}));
 		}
 
-		// Core: Close brackets (with compartment for dynamic toggle)
-		// Include curly/typographic quotes and German-style quotes in addition to defaults
-		var closeBrackets = (core.autocomplete || {}).closeBrackets;
-		var closeBracketsKeymap = (core.autocomplete || {}).closeBracketsKeymap;
-		var closeBracketsConfig = {
-			// Each entry is a 2-char string: opening + closing bracket
-			// Standard: () [] {} '' "" ``
-			// Curly quotes: "" ''
-			// German quotes: „" ‚'
-			brackets: ["()", "[]", "{}", "''", '""', "``", "\u201c\u201d", "\u2018\u2019", "\u201e\u201d", "\u201a\u2019"]
-		};
-		if(closeBrackets && this._compartments.closeBrackets) {
-			extensions.push(this._compartments.closeBrackets.of(closeBrackets(closeBracketsConfig)));
-			if(closeBracketsKeymap && cmKeymap) {
-				extensions.push(cmKeymap.of(closeBracketsKeymap));
-			}
+		// Core: Close brackets (cached extension, compartment for dynamic toggle)
+		if(cached.closeBrackets && this._compartments.closeBrackets) {
+			extensions.push(this._compartments.closeBrackets.of(cached.closeBrackets));
+		}
+		if(cached.closeBracketsKeymap) {
+			extensions.push(cached.closeBracketsKeymap);
 		}
 
 		// Core: Indent unit (with compartment for dynamic config)
@@ -1027,6 +1160,41 @@ class CodeMirrorEngine {
 			extensions.push(this._compartments.tabSize.of(EditorState.tabSize.of(4))); // Default: 4
 		}
 
+		// Core: Cursor layer (always present - draws primary cursor to enable synced blinking)
+		var ViewPlugin = (core.view || {}).ViewPlugin;
+		var Decoration = (core.view || {}).Decoration;
+		var layer = (core.view || {}).layer;
+		var RectangleMarker = (core.view || {}).RectangleMarker;
+		var EditorSelection = (core.state || {}).EditorSelection;
+
+		if(layer && RectangleMarker && EditorSelection) {
+			// Create a cursor layer for all cursors (primary and secondary)
+			var cursorLayer = layer({
+				above: true,
+				markers: function(view) {
+					var state = view.state;
+					var cursors = [];
+					for(var i = 0; i < state.selection.ranges.length; i++) {
+						var r = state.selection.ranges[i];
+						var isPrimary = r === state.selection.main;
+						var cursorClass = isPrimary ? "cm-cursor cm-cursor-primary" : "cm-cursor cm-cursor-secondary";
+						// Draw cursor for this range
+						var cursor = r.empty ? r : EditorSelection.cursor(r.head, r.head > r.anchor ? -1 : 1);
+						var pieces = RectangleMarker.forRange(view, cursorClass, cursor);
+						for(var j = 0; j < pieces.length; j++) {
+							cursors.push(pieces[j]);
+						}
+					}
+					return cursors;
+				},
+				update: function(update, _dom) {
+					return update.docChanged || update.selectionSet;
+				},
+				"class": "cm-cursorLayer"
+			});
+			extensions.push(cursorLayer);
+		}
+
 		// Core: Multi-cursor support (with compartment for dynamic toggle)
 		// Get initial setting from config
 		var multiCursorEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/editor/multiCursor", "yes") === "yes";
@@ -1034,15 +1202,8 @@ class CodeMirrorEngine {
 		if(multiCursorEnabled && EditorState.allowMultipleSelections) {
 			multiCursorExtensions.push(EditorState.allowMultipleSelections.of(true));
 
-			// Custom rendering for secondary cursors and selections
-			// Uses native browser selection for primary, custom rendering for secondary
-			var ViewPlugin = (core.view || {}).ViewPlugin;
-			var Decoration = (core.view || {}).Decoration;
-			var layer = (core.view || {}).layer;
-			var RectangleMarker = (core.view || {}).RectangleMarker;
-			var EditorSelection = (core.state || {}).EditorSelection;
-
-			if(ViewPlugin && Decoration && layer && RectangleMarker && EditorSelection) {
+			// Custom rendering for secondary selections
+			if(ViewPlugin && Decoration && EditorSelection) {
 				// Decoration for secondary selections (highlights only actual text, not empty lines)
 				var secondarySelectionMark = Decoration.mark({
 					class: "cm-selectionBackground-secondary"
@@ -1079,32 +1240,6 @@ class CodeMirrorEngine {
 						return v.decorations;
 					}
 				}));
-
-				// Create a cursor-only layer for secondary cursors
-				var secondaryCursorLayer = layer({
-					above: true,
-					markers: function(view) {
-						var state = view.state;
-						var cursors = [];
-						for(var i = 0; i < state.selection.ranges.length; i++) {
-							var r = state.selection.ranges[i];
-							// Skip the primary selection - let native cursor handle it
-							if(r === state.selection.main) continue;
-							// Draw cursor for this range
-							var cursor = r.empty ? r : EditorSelection.cursor(r.head, r.head > r.anchor ? -1 : 1);
-							var pieces = RectangleMarker.forRange(view, "cm-cursor cm-cursor-secondary", cursor);
-							for(var j = 0; j < pieces.length; j++) {
-								cursors.push(pieces[j]);
-							}
-						}
-						return cursors;
-					},
-					update: function(update, _dom) {
-						return update.docChanged || update.selectionSet;
-					},
-					"class": "cm-cursorLayer"
-				});
-				multiCursorExtensions.push(secondaryCursorLayer);
 			}
 
 			// Add multi-cursor keybindings (configurable, default: Ctrl+Alt+Arrow)
@@ -1263,15 +1398,9 @@ class CodeMirrorEngine {
 		}
 		extensions.push(this._compartments.bidi.of(bidiExtensions));
 
-		// Core: Default syntax highlighting (fallback for languages without custom styles)
-		// Uses classHighlighter to add CSS classes (.tok-keyword, .tok-string, etc.)
-		// so themes can style them via CSS
-		var syntaxHighlighting = (core.language || {}).syntaxHighlighting;
-		var classHighlighter = (core.lezerHighlight || {}).classHighlighter;
-		if(syntaxHighlighting && classHighlighter) {
-			extensions.push(syntaxHighlighting(classHighlighter, {
-				fallback: true
-			}));
+		// Core: Default syntax highlighting (cached - fallback for languages without custom styles)
+		if(cached.syntaxHighlighting) {
+			extensions.push(cached.syntaxHighlighting);
 		}
 
 		// Core: Autocompletion sources from engine plugins
@@ -1561,6 +1690,14 @@ class CodeMirrorEngine {
 		}
 
 		// ========================================================================
+		// Menubar Height Detection (for sticky search panel)
+		// ========================================================================
+
+		// Detect and track the TiddlyWiki menubar height for sticky panel positioning
+		var ownerDoc = this.widget && this.widget.document ? this.widget.document : document;
+		setupMenubarHeightTracking(ownerDoc);
+
+		// ========================================================================
 		// Extend API from Active Plugins
 		// ========================================================================
 
@@ -1732,22 +1869,17 @@ class CodeMirrorEngine {
 
 		var core = this.cm;
 		var effects = [];
+		var cached = getCachedExtensions();
 
-		// Bracket matching
-		var bracketMatching = (core.language || {}).bracketMatching;
-		if(bracketMatching && this._compartments.bracketMatching) {
-			var bmContent = settings.bracketMatching ? bracketMatching() : [];
+		// Bracket matching (use cached extension)
+		if(cached.bracketMatching && this._compartments.bracketMatching) {
+			var bmContent = settings.bracketMatching ? cached.bracketMatching : [];
 			effects.push(this._compartments.bracketMatching.reconfigure(bmContent));
 		}
 
-		// Close brackets (with curly/typographic quotes and German quotes)
-		var closeBrackets = (core.autocomplete || {}).closeBrackets;
-		if(closeBrackets && this._compartments.closeBrackets) {
-			var cbConfig = {
-				// Each entry is a 2-char string: opening + closing bracket
-				brackets: ["()", "[]", "{}", "''", '""', "``", "\u201c\u201d", "\u2018\u2019", "\u201e\u201d", "\u201a\u2019"]
-			};
-			var cbContent = settings.closeBrackets ? closeBrackets(cbConfig) : [];
+		// Close brackets (use cached extension)
+		if(cached.closeBrackets && this._compartments.closeBrackets) {
+			var cbContent = settings.closeBrackets ? cached.closeBrackets : [];
 			effects.push(this._compartments.closeBrackets.reconfigure(cbContent));
 		}
 
@@ -1807,14 +1939,11 @@ class CodeMirrorEngine {
 			if(mcEnabled && core.state.EditorState.allowMultipleSelections) {
 				mcExtensions.push(core.state.EditorState.allowMultipleSelections.of(true));
 
-				// Custom rendering for secondary cursors and selections
+				// Custom rendering for secondary selections
 				var mcViewPlugin = (core.view || {}).ViewPlugin;
 				var mcDecoration = (core.view || {}).Decoration;
-				var mcLayer = (core.view || {}).layer;
-				var mcRectMarker = (core.view || {}).RectangleMarker;
-				var mcEditorSel = (core.state || {}).EditorSelection;
 
-				if(mcViewPlugin && mcDecoration && mcLayer && mcRectMarker && mcEditorSel) {
+				if(mcViewPlugin && mcDecoration) {
 					// Secondary selection highlighting
 					var mcSelMark = mcDecoration.mark({
 						class: "cm-selectionBackground-secondary"
@@ -1846,30 +1975,6 @@ class CodeMirrorEngine {
 							return v.decorations;
 						}
 					}));
-
-					// Secondary cursor layer
-					var mcSecondaryCursorLayer = mcLayer({
-						above: true,
-						markers: function(view) {
-							var state = view.state;
-							var cursors = [];
-							for(var i = 0; i < state.selection.ranges.length; i++) {
-								var r = state.selection.ranges[i];
-								if(r === state.selection.main) continue;
-								var cursor = r.empty ? r : mcEditorSel.cursor(r.head, r.head > r.anchor ? -1 : 1);
-								var pieces = mcRectMarker.forRange(view, "cm-cursor cm-cursor-secondary", cursor);
-								for(var j = 0; j < pieces.length; j++) {
-									cursors.push(pieces[j]);
-								}
-							}
-							return cursors;
-						},
-						update: function(update, _dom) {
-							return update.docChanged || update.selectionSet;
-						},
-						"class": "cm-cursorLayer"
-					});
-					mcExtensions.push(mcSecondaryCursorLayer);
 				}
 
 				// Re-add keybindings (configurable)

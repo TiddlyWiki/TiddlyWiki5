@@ -162,6 +162,10 @@ exports.startup = function() {
 	core.cssCompletionExtension = cssCompletionExt;
 	core.cssCompletionSource = enhancedCssCompletionSource;
 	core.getPageClasses = getPageClasses; // Export for other modules
+	// Export CSS properties and values from the wrapper module for style.* completion
+	core.getCSSProperties = langCss.getCSSProperties;
+	core.getCSSValues = langCss.getCSSValues;
+	core.getCSSValuesForProperty = langCss.getCSSValuesForProperty;
 
 	// Register for nested language completion in TiddlyWiki
 	// Uses Language.isActiveAt() for detection

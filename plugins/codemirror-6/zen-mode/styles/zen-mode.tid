@@ -25,7 +25,7 @@ tags: $:/tags/Stylesheet
   position: fixed;
   inset: 0;
   z-index: 10000;
-  background: var(--zen-bg, #1a1a1a);
+  background: #1a1a1a; /* Fallback - overridden by [data-cm6-theme] rule */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,6 +72,9 @@ tags: $:/tags/Stylesheet
   min-height: 0;
   display: flex;
   flex-direction: column;
+  /* Override base editor styles - let overlay background show through */
+  background: transparent !important;
+  border: none !important;
 }
 
 .cm6-zen-editor-container .cm-editor {
@@ -113,7 +116,7 @@ tags: $:/tags/Stylesheet
   height: 44px;
   border: none;
   background: transparent;
-  color: var(--zen-fg-muted, #555);
+  color: var(--wt-fg-muted, #555);
   font-size: 1.75rem;
   font-weight: 300;
   cursor: pointer;
@@ -126,7 +129,7 @@ tags: $:/tags/Stylesheet
 }
 
 .cm6-zen-close:hover {
-  color: var(--zen-fg, #aaa);
+  color: var(--wt-fg, #aaa);
   background: rgba(128, 128, 128, 0.15);
 }
 
@@ -143,7 +146,7 @@ tags: $:/tags/Stylesheet
   bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--zen-fg, #d4d4d4);
+  color: var(--wt-fg, #d4d4d4);
   font-size: 0.85rem;
   font-family: system-ui, -apple-system, sans-serif;
   display: flex;
@@ -260,55 +263,25 @@ tags: $:/tags/Stylesheet
    Theme Integration
    ============================================================================ */
 
-/* Inherit from active CodeMirror theme */
-[data-cm6-theme] .cm6-zen-overlay {
-  --zen-bg: var(--wt-bg, #1a1a1a);
-  --zen-fg: var(--wt-fg, #d4d4d4);
-  --zen-fg-muted: var(--wt-fg-muted, #666);
+/*
+ * For themed overlays (gruvbox-dark, etc.), the theme stylesheet sets --wt-bg
+ * directly on [data-cm6-theme="X"] which matches our overlay element.
+ * We use those variables for background and text colors.
+ *
+ * For vanilla themes, there's no explicit [data-cm6-theme="vanilla"] rule,
+ * so we use the inherited --wt-bg from :root (set by wikitext-styles.tid).
+ */
+.cm6-zen-overlay[data-cm6-theme] {
+  /* Read theme colors - set by theme stylesheets on [data-cm6-theme="X"] */
+  background: var(--wt-bg, #1a1a1a);
+  color: var(--wt-fg, #d4d4d4);
 }
 
-/* Light theme adjustments */
-[data-cm6-theme="vanilla"] .cm6-zen-overlay,
-[data-cm6-theme="one-light"] .cm6-zen-overlay,
-[data-cm6-theme="github"] .cm6-zen-overlay,
-[data-cm6-theme="solarized-light"] .cm6-zen-overlay,
-[data-cm6-theme="catppuccin-latte"] .cm6-zen-overlay,
-[data-cm6-theme="rose-pine-dawn"] .cm6-zen-overlay,
-[data-cm6-theme="tokyo-day"] .cm6-zen-overlay,
-[data-cm6-theme="gruvbox-light"] .cm6-zen-overlay,
-[data-cm6-theme="gruvbox-light-hard"] .cm6-zen-overlay,
-[data-cm6-theme="everforest-light"] .cm6-zen-overlay,
-[data-cm6-theme="ayu-light"] .cm6-zen-overlay,
-[data-cm6-theme="material-lighter"] .cm6-zen-overlay,
-[data-cm6-theme="flexoki-light"] .cm6-zen-overlay,
-[data-cm6-theme="kanagawa-lotus"] .cm6-zen-overlay,
-[data-cm6-theme="monokai-light"] .cm6-zen-overlay {
-  --zen-bg: var(--wt-bg, #fafafa);
-  --zen-fg: var(--wt-fg, #333);
-  --zen-fg-muted: var(--wt-fg-muted, #999);
-}
-
-/* Vignette for light themes - invert */
-[data-cm6-theme="vanilla"] .cm6-zen-overlay::before,
-[data-cm6-theme="one-light"] .cm6-zen-overlay::before,
-[data-cm6-theme="github"] .cm6-zen-overlay::before,
-[data-cm6-theme="solarized-light"] .cm6-zen-overlay::before,
-[data-cm6-theme="catppuccin-latte"] .cm6-zen-overlay::before,
-[data-cm6-theme="rose-pine-dawn"] .cm6-zen-overlay::before,
-[data-cm6-theme="tokyo-day"] .cm6-zen-overlay::before,
-[data-cm6-theme="gruvbox-light"] .cm6-zen-overlay::before,
-[data-cm6-theme="gruvbox-light-hard"] .cm6-zen-overlay::before,
-[data-cm6-theme="everforest-light"] .cm6-zen-overlay::before,
-[data-cm6-theme="ayu-light"] .cm6-zen-overlay::before,
-[data-cm6-theme="material-lighter"] .cm6-zen-overlay::before,
-[data-cm6-theme="flexoki-light"] .cm6-zen-overlay::before,
-[data-cm6-theme="kanagawa-lotus"] .cm6-zen-overlay::before,
-[data-cm6-theme="monokai-light"] .cm6-zen-overlay::before {
-  background: radial-gradient(
-    ellipse at center,
-    transparent 60%,
-    rgba(0, 0, 0, 0.06) 100%
-  );
+/* Vanilla dark theme - explicitly handle since there's no [data-cm6-theme="vanilla-dark"] rule */
+.cm6-zen-overlay[data-cm6-theme="vanilla-dark"] {
+  --wt-bg: #1e1e1e;
+  --wt-fg: #d4d4d4;
+  --wt-fg-muted: #808080;
 }
 
 /* ============================================================================

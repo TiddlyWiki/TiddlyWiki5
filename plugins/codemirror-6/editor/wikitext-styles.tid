@@ -497,7 +497,7 @@ type: text/vnd.tiddlywiki
 
 .cm-editor .cm-content {
   padding: 10px 0;
-  caret-color: var(--wt-blue);
+  caret-color: transparent;
 }
 
 .cm-editor .cm-line {
@@ -523,8 +523,6 @@ type: text/vnd.tiddlywiki
 .cm-editor .cm-cursor {
   border-left-color: var(--wt-blue);
   border-left-width: 2px;
-  /* Add shadow for visibility against bracket highlights */
-  box-shadow: 0 0 0 1px var(--wt-bg), 0 0 2px 1px var(--wt-blue);
 }
 
 /* Gutters */
