@@ -31,7 +31,7 @@ exports.startup = function () {
 		var position = computedStyle.position;
 		var isOverlapping = position === "fixed" || position === "sticky" || position === "absolute";
 
-		if (isOverlapping) {
+		if(isOverlapping) {
 			var height = menubar.getBoundingClientRect().height;
 			document.documentElement.style.setProperty("--tc-menubar-height", height + "px");
 		} else {
