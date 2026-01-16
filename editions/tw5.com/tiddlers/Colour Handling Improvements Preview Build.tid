@@ -31,7 +31,7 @@ modified: 20250204130756749
 The following features are required for the new colour handling system, but are general purpose, and may be cherry picked for earlier merging:
 
 * [[Background Actions]]
-* MediaQueryTrackerMechanism
+* [[Media Query Tracker Mechanism]]
 * [[changecount Operator]]
 * [[Apply Filter Run Prefix]]
 

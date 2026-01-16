@@ -19,7 +19,7 @@ op-output: the values of the interpolated colours
 </$list>
 \end interpolate-example
 
-<<.from-version "5.4.0">> See [[Colour Palettes]] for background.
+<<.from-version "5.4.0">> See ColourPalettes for background.
 
 The <<.op colour-interpolate>> operator is used to interpolate colour values in a chosen colour space. It uses an extended syntax that permits multiple additional parameters to be passed:
 

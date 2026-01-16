@@ -9,7 +9,7 @@ op-suffix: "l", "c" or "h" to indicate which component of the colour to modify
 op-parameter: value of the property to modify
 op-output: the values of the modified colours
 
-<<.from-version "5.4.0">> See [[Colour Palettes]] for background.
+<<.from-version "5.4.0">> See ColourPalettes for background.
 
 The <<.op colour-set-oklch>> operator is used to manipulate colour values in the [[OKLCH|https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch]] colour space. The OKLCH colour space expresses colours as three numbers:
 
