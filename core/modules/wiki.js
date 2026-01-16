@@ -1663,15 +1663,17 @@ exports.addToStory = function(title,fromTitle,storyTitle,options) {
 Generate a title for the draft of a given tiddler
 */
 exports.generateDraftTitle = function(title) {
-	var c = 0,
-		draftTitle,
-		username = this.getTiddlerText("$:/status/UserName"),
+	let c = 0,
+		draftTitle;
+	const username = this.getTiddlerText("$:/status/UserName"),
 		draftBaseTitle = $tw.language.getRawString("DraftTitle"),
 		draftAuthor = $tw.language.getRawString("DraftAuthor"),
-		draftNumber = $tw.language.getRawString("DraftNumber"),
 		attribution = username ? draftAuthor.replace("$1$",username) : "";
 	do {
-		draftTitle = draftBaseTitle.replace("$1$", (c ? draftNumber.replace(draftNumber, "$1$") : "")).replace("$2$", title).replace("$3$",attribution);
+		draftTitle = draftBaseTitle.replace("$1$", title).replace("$2$",attribution);
+		if(c) {
+			draftTitle = draftTitle.concat(" ", (c + 1).toString());
+		}
 		c++;
 	} while(this.tiddlerExists(draftTitle));
 	return draftTitle;
