@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#8891
+description: Draft title internationalization
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8891
+github-contributors: Leilei332
+
+The title of the draft tiddler is now translatable.
