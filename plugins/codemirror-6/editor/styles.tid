@@ -176,9 +176,8 @@ tags: $:/tags/Stylesheet
 .tc-editor-codemirror6 .cm-panels-top {
     /* Make the panel container sticky below the tiddler title */
     position: sticky;
-    /* Top offset = menubar height + tiddler title height (set by JS in search.js) */
-    /* Fallback of 52px assumes ~52px title height when no menubar */
-    top: var(--cm-panels-top-offset, 52px);
+    /* Top offset set by JS in search.js when sticky titles are enabled */
+    top: var(--cm-panels-top-offset, 0px);
     /* Below sticky tiddler titles (z-index: 500) but above editor content */
     z-index: 499;
     /* Ensure the panel has a background so content doesn't show through */

@@ -251,8 +251,11 @@ exports.plugin = {
 					// Only apply offset when sticky titles are enabled
 					if(!isStickyTitlesEnabled()) {
 						// Reset to default when sticky titles are disabled
+						editorWrapper.style.removeProperty("--cm-panels-top-offset");
+						view.dom.style.removeProperty("--cm-panels-top-offset");
 						var panelsTop = view.dom.querySelector(".cm-panels-top");
 						if(panelsTop) {
+							panelsTop.style.removeProperty("--cm-panels-top-offset");
 							panelsTop.style.top = "";
 						}
 						return;
