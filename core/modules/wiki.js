@@ -1666,9 +1666,9 @@ exports.generateDraftTitle = function(title) {
 	let c = 0,
 		draftTitle;
 	const username = this.getTiddlerText("$:/status/UserName"),
-		draftBaseTitle = $tw.language.getRawString("DraftTitle"),
-		draftAuthor = $tw.language.getRawString("DraftAuthor"),
-		attribution = username ? draftAuthor.replace("$1$",username) : "";
+		draftBaseTitle = $tw.language.getRawString("Draft/Title"),
+		draftAttribution = $tw.language.getRawString("Draft/Attribution"),
+		attribution = username ? draftAttribution.replace("$1$",username) : "";
 	do {
 		draftTitle = draftBaseTitle.replace("$1$", title).replace("$2$",attribution);
 		if(c) {
