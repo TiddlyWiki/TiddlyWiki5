@@ -20,7 +20,7 @@ exports.startup = function () {
 	var menubar = document.querySelector(".tc-menubar.tc-adjust-top-of-scroll");
 	if(!menubar) {
 		// No menubar found, set to 0
-		document.documentElement.style.setProperty("--tc-menubar-height","0px");
+		document.documentElement.style.setProperty("--tv-menubar-height","0px");
 		return;
 	}
 
@@ -33,10 +33,10 @@ exports.startup = function () {
 
 		if(isOverlapping) {
 			var height = menubar.getBoundingClientRect().height;
-			document.documentElement.style.setProperty("--tc-menubar-height", height + "px");
+			document.documentElement.style.setProperty("--tv-menubar-height", height + "px");
 		} else {
 			// Menubar is in normal flow, no offset needed
-			document.documentElement.style.setProperty("--tc-menubar-height","0px");
+			document.documentElement.style.setProperty("--tv-menubar-height","0px");
 		}
 	}
 
