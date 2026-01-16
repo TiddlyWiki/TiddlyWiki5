@@ -11,9 +11,13 @@ tags: $:/tags/ViewTemplate
 				storyview="pop"
 				variable="listItem"
 			>
-				<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
-					<$transclude tiddler=<<listItem>>/>
-				</$set>
+				<$let condition={{{ [<listItem>get[condition]] }}}>
+					<%if [<condition>!is[blank]] :and[<currentTiddler>subfilter<condition>limit[1]] :else[<condition>is[blank]then[true]] %>
+						<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
+							<$transclude tiddler=<<listItem>>/>
+						</$set>
+					<%endif%>
+				</$let>
 			</$list>
 		</span>
 		<$set name="tv-wikilinks" value={{$:/config/Tiddlers/TitleLinks}}>

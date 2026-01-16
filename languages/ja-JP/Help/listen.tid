@@ -1,0 +1,34 @@
+title: $:/language/Help/listen
+description: TiddlyWikiへのHTTPサーバーインターフェースを提供
+
+HTTP経由でWikiを提供します。
+
+listenコマンドは[[名前付きコマンドパラメータ|NamedCommandParameters]]を使用します:
+
+```
+--listen [<name>=<value>]...
+```
+
+すべてのパラメータはオプションで、安全なデフォルトが設定されており、任意の順序で指定できます。認識されるパラメータは以下のとおりです:
+
+* ''host'' - サービスを提供するオプションのホスト名 (デフォルトは"127.0.0.1"または"localhost")
+* ''path-prefix'' - パスのオプションのプレフィックス
+* ''port'' - listenするポート番号。数値以外の値は、システム環境変数として解釈され、ポート番号を抽出します (デフォルトは"8080")
+* ''credentials'' - 資格情報CSVファイルのパス名 (Wikiフォルダからの相対パス)
+* ''anon-username'' - 匿名ユーザーが編集する際に署名するユーザー名
+* ''username'' - 基本認証用のオプションのユーザー名
+* ''password'' - 基本認証用のオプションのパスワード
+* ''authenticated-user-header'' - 信頼された認証で使用されるリクエストヘッダーのオプションの名前
+* ''readers'' - このWikiから読み取りを許可されているプリンシパルのコンマ区切りリスト
+* ''writers'' - このWikiへの書き込みを許可されているプリンシパルのコンマ区切りリスト
+* ''csrf-disable'' - CSRFチェックを無効にするには"yes"に設定 (デフォルトは "no")
+* ''root-tiddler'' -ルートで提供するTiddler (デフォルトは"$:/core/save/all")
+* ''root-render-type'' - ルートTiddlerをレンダリングするコンテンツタイプ (デフォルトは "text/plain")
+* ''root-serve-type'' - ルートTiddlerが提供されるコンテンツタイプ (デフォルトは "text/html")
+* ''tls-cert'' - pathname of TLS certificate file (relative to wiki folder)
+* ''tls-key'' - TLS鍵ファイルのパス名 (Wikiフォルダからの相対パス)
+* ''debug-level'' - オプションのデバッグレベル。リクエストの詳細を表示するには"debug"に設定 (デフォルトは"none")
+* ''gzip'' - 一部の HTTP エンドポイント用にgzip圧縮を有効にするには"yes"に設定 (デフォルトは"no")
+* ''use-browser-cache'' - 帯域幅の節約のためにブラウザが応答をキャッシュできるようにするには"yes"に設定 (デフォルトは"no")
+
+インスタンスをローカルネットワークに公開する方法、およびセキュリティ上の懸念事項については、TiddlyWiki.comのWebServer Tiddler を参照してください。
