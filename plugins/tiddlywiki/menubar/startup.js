@@ -16,42 +16,58 @@ exports.synchronous = true;
 
 var menubarObserver = null;
 
-exports.startup = function () {
-	var menubar = document.querySelector(".tc-menubar.tc-adjust-top-of-scroll");
-	if(!menubar) {
-		// No menubar found, set to 0
-		document.documentElement.style.setProperty("--tv-menubar-height","0px");
-		return;
-	}
+exports.startup = function() {
+	var menubarObserver = null;
+	var isTracking = false;
 
-	// Function to update the CSS variable
-	function updateMenubarHeight() {
-		// Only account for menubar if it's fixed, sticky, or absolute (overlapping content)
+	function updateMenubarHeight(menubar) {
 		var computedStyle = window.getComputedStyle(menubar);
 		var position = computedStyle.position;
 		var isOverlapping = position === "fixed" || position === "sticky" || position === "absolute";
-
 		if(isOverlapping) {
 			var height = menubar.getBoundingClientRect().height;
 			document.documentElement.style.setProperty("--tv-menubar-height", height + "px");
 		} else {
-			// Menubar is in normal flow, no offset needed
-			document.documentElement.style.setProperty("--tv-menubar-height","0px");
+			document.documentElement.style.setProperty("--tv-menubar-height", "0px");
 		}
 	}
 
-	// Initial update
-	updateMenubarHeight();
-
-	// Set up ResizeObserver to track menubar size changes
-	if(typeof ResizeObserver !== "undefined" && !menubarObserver) {
-		menubarObserver = new ResizeObserver(function () {
-			updateMenubarHeight();
+	function setupMenubarTracking(menubar) {
+		if(isTracking) return;
+		isTracking = true;
+		
+		updateMenubarHeight(menubar);
+		
+		if(typeof ResizeObserver !== "undefined") {
+			menubarObserver = new ResizeObserver(function() {
+				updateMenubarHeight(menubar);
+			});
+			menubarObserver.observe(menubar);
+		}
+		
+		window.addEventListener("resize", function() {
+			updateMenubarHeight(menubar);
 		});
-		menubarObserver.observe(menubar);
 	}
 
-	// Also update on window resize as fallback
-	window.addEventListener("resize",updateMenubarHeight);
-};
+	function checkForMenubar() {
+		var menubar = document.querySelector(".tc-menubar.tc-adjust-top-of-scroll");
+		if(menubar) {
+			setupMenubarTracking(menubar);
+		} else {
+			document.documentElement.style.setProperty("--tv-menubar-height", "0px");
+		}
+	}
 
+	// Initial check
+	checkForMenubar();
+
+	// Re-check after wiki changes (DOM updates after refresh cycle)
+	if(!isTracking) {
+		$tw.wiki.addEventListener("change", function() {
+			if(!isTracking) {
+				$tw.utils.nextTick(checkForMenubar);
+			}
+		});
+	}
+};
