@@ -1900,21 +1900,31 @@ function findUnclosedWidgets(tree, state) {
 			// Opening HTML tag (non-self-closing)
 			if(nodeType === "HTMLBlock" || nodeType === "HTMLTag") {
 				var tagText = state.doc.sliceString(node.from, node.to);
-				// Check if it's a closing tag or self-closing
-				if(!tagText.startsWith("</") && !/>\/\s*$/.test(tagText) && !/\/>\s*$/.test(tagText)) {
-					// Extract tag name
-					var tagMatch = tagText.match(/^<([a-zA-Z][a-zA-Z0-9]*)/);
+				// Check if it's a closing tag or self-closing (allow leading whitespace for block-level tags)
+				var trimmedTagText = tagText.trimStart();
+				if(!trimmedTagText.startsWith("</") && !/\/>\s*$/.test(trimmedTagText)) {
+					// Extract tag name (allow leading whitespace for block-level tags)
+					var tagMatch = tagText.match(/^\s*<([a-zA-Z][a-zA-Z0-9]*)/);
 					if(tagMatch) {
 						var tagName = tagMatch[1].toLowerCase();
 						// Skip void elements that don't need closing
 						var voidElements = ["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"];
 						if(voidElements.indexOf(tagName) === -1) {
-							// Check if the tag contains its own closing tag
-							// This happens when the parser successfully matched opening and closing tags
-							// Note: Don't anchor to end - HTMLBlock may include content after the closing tag
-							var closePattern = new RegExp("</" + tagName + ">", "i");
-							if(closePattern.test(tagText)) {
-								// Self-contained tag with matching closing tag - skip
+							// Count opening and closing tags to detect if block is properly balanced
+							// This handles cases like <div>hello</div></div> where there's an orphan closing tag
+							var openPattern = new RegExp("<" + tagName + "(?:\\s|>|/>)", "gi");
+							var closePattern = new RegExp("</" + tagName + ">", "gi");
+							var openCount = (tagText.match(openPattern) || []).length;
+							var closeCount = (tagText.match(closePattern) || []).length;
+
+							if(closeCount >= openCount && openCount > 0) {
+								// Block contains at least as many closing tags as opening - the opening is matched
+								// Don't add to htmlStack
+								if(closeCount === openCount) {
+									// Perfectly balanced - skip iterating children entirely
+									return false;
+								}
+								// More closing than opening - there are orphans, continue iteration but don't add to stack
 								return;
 							}
 							// Check if opening tag is complete (has closing >)
@@ -1959,10 +1969,11 @@ function findUnclosedWidgets(tree, state) {
 				}
 			}
 
-			// Closing HTML tag
+			// Closing HTML tag (standalone closing tag as block)
 			if((nodeType === "HTMLBlock" || nodeType === "HTMLTag")) {
 				var tagText = state.doc.sliceString(node.from, node.to);
-				var closeMatch = tagText.match(/^<\/([a-zA-Z][a-zA-Z0-9]*)>/);
+				// Allow leading whitespace for block-level tags
+				var closeMatch = tagText.match(/^\s*<\/([a-zA-Z][a-zA-Z0-9]*)>/);
 				if(closeMatch) {
 					var closeName = closeMatch[1].toLowerCase();
 					var foundMatch = false;
@@ -2006,11 +2017,23 @@ function findUnclosedWidgets(tree, state) {
 					var parent = node.node.parent;
 					if(parent && (parent.name === "HTMLBlock" || parent.name === "HTMLTag")) {
 						var parentText = state.doc.sliceString(parent.from, parent.to);
-						// Check if parent starts with opening tag of same name
-						var openingTagPattern = new RegExp("^<" + closeName + "(\\s|>|/>)", "i");
+						// Check if parent starts with opening tag of same name (allow leading whitespace)
+						var openingTagPattern = new RegExp("^\\s*<" + closeName + "(\\s|>|/>)", "i");
 						if(openingTagPattern.test(parentText)) {
-							// This is a properly matched closing tag - skip
-							return;
+							// Count opening tags in parent
+							var openPattern = new RegExp("<" + closeName + "(?:\\s|>|/>)", "gi");
+							var openCount = (parentText.match(openPattern) || []).length;
+
+							// Count closing tags that come BEFORE this node's position (within the parent)
+							var textBeforeNode = state.doc.sliceString(parent.from, node.from);
+							var closePattern = new RegExp("</" + closeName + ">", "gi");
+							var closeCountBefore = (textBeforeNode.match(closePattern) || []).length;
+
+							// If we haven't used up all opening tags yet, this closing tag matches one
+							if(closeCountBefore < openCount) {
+								return; // This is a properly matched closing tag - skip
+							}
+							// Otherwise, this is an orphan - fall through to orphan detection
 						}
 					}
 					// Check against htmlStack for orphan detection
@@ -3484,20 +3507,33 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 				actions.push({
 					name: "Remove closing tag",
 					apply: function(view, from, to) {
-						// Remove the closing tag and any trailing whitespace/newline
-						var afterTo = to;
 						var docLength = view.state.doc.length;
-						// Check if there's a newline after the tag
-						if(afterTo < docLength) {
-							var nextChar = view.state.doc.sliceString(afterTo, afterTo + 1);
-							if(nextChar === "\n") {
-								afterTo++;
+						var line = view.state.doc.lineAt(from);
+						var lineText = view.state.doc.sliceString(line.from, line.to);
+
+						// Check if the tag is the only non-whitespace content on the line
+						var tagText = view.state.doc.sliceString(from, to);
+						var textWithoutTag = lineText.replace(tagText, "");
+						var isOnlyContentOnLine = textWithoutTag.trim() === "";
+
+						var removeFrom = from;
+						var removeTo = to;
+
+						if(isOnlyContentOnLine) {
+							// Tag is alone on line - remove the whole line including newline
+							removeFrom = line.from;
+							removeTo = Math.min(line.to + 1, docLength);
+							// If this is the last line (no newline after), also remove preceding newline if exists
+							if(line.to === docLength && line.from > 0) {
+								removeFrom = line.from - 1; // Include preceding newline
 							}
 						}
+						// Otherwise just remove the tag itself (from, to)
+
 						view.dispatch({
 							changes: {
-								from: from,
-								to: afterTo,
+								from: removeFrom,
+								to: removeTo,
 								insert: ""
 							}
 						});
@@ -4090,38 +4126,72 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 		var usages = findDefinitionUsages(docText);
 		var unusedIssues = findUnusedDefinitions(defsWithPos, usages);
 		unusedIssues.forEach(function(issue) {
-			diagnostics.push({
-				from: issue.from,
-				to: issue.to,
-				severity: "hint",
-				message: issue.message,
-				source: "tiddlywiki",
-				actions: [{
-					name: "Remove definition",
-					apply: function(view, _from, _to) {
-						// Find the full pragma block and remove it
-						// This is a simplified version - may need enhancement for multi-line
-						var line = view.state.doc.lineAt(issue.defFrom);
-						var endLine = line;
-						// Try to find \end
-						var text = view.state.doc.toString();
-						var endMatch = text.slice(issue.defFrom).match(/\\end\s*\S*/);
-						if(endMatch) {
-							var endPos = issue.defFrom + endMatch.index + endMatch[0].length;
-							endLine = view.state.doc.lineAt(endPos);
-						}
-						// Don't exceed document length
-						var deleteEnd = Math.min(endLine.to + 1, view.state.doc.length);
-						view.dispatch({
-							changes: {
-								from: line.from,
-								to: deleteEnd,
-								insert: ""
+			// Capture values in IIFE to ensure closure works correctly
+			(function(defFrom, defTo) {
+				diagnostics.push({
+					from: issue.from,
+					to: issue.to,
+					severity: "hint",
+					message: issue.message,
+					source: "tiddlywiki",
+					actions: [{
+						name: "Remove definition",
+						apply: function(view, _from, _to) {
+							// Find the full pragma block and remove it
+							var docLength = view.state.doc.length;
+							var startLine = view.state.doc.lineAt(defFrom);
+							var endLine = startLine;
+
+							// Check if this is a multi-line pragma (ends with just the pragma name, no body on same line)
+							var startLineText = view.state.doc.sliceString(startLine.from, startLine.to);
+							var isMultiLine = /^\\(define|procedure|function|widget)\s+[^\s(]+(\([^)]*\))?\s*$/.test(startLineText);
+
+							if(isMultiLine) {
+								// Find the matching \end, handling nested pragmas
+								var depth = 1;
+								var pos = startLine.to + 1;
+								while(pos < docLength && depth > 0) {
+									var line = view.state.doc.lineAt(pos);
+									var lineText = view.state.doc.sliceString(line.from, line.to).trim();
+
+									// Check for nested pragma open
+									if(/^\\(define|procedure|function|widget)\s+\S+/.test(lineText) &&
+										!/^\\(define|procedure|function|widget)\s+[^\s(]+(\([^)]*\))?\s+\S/.test(lineText)) {
+										depth++;
+									}
+									// Check for \end
+									else if(/^\\end\b/.test(lineText)) {
+										depth--;
+										if(depth === 0) {
+											endLine = line;
+										}
+									}
+
+									pos = line.to + 1;
+								}
 							}
-						});
-					}
-				}]
-			});
+
+							// Calculate deletion range
+							var deleteFrom = startLine.from;
+							var deleteTo = Math.min(endLine.to + 1, docLength);
+
+							// If this is the last line with no newline, remove preceding newline instead
+							if(endLine.to === docLength && deleteFrom > 0) {
+								deleteFrom = startLine.from - 1;
+								deleteTo = docLength;
+							}
+
+							view.dispatch({
+								changes: {
+									from: deleteFrom,
+									to: deleteTo,
+									insert: ""
+								}
+							});
+						}
+					}]
+				});
+			})(issue.defFrom, issue.defTo);
 		});
 	}
 

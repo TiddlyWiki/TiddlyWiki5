@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql",
   "name": "CodeMirror 6 SQL Language",
   "description": "SQL syntax highlighting for CodeMirror 6 code blocks",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme license",

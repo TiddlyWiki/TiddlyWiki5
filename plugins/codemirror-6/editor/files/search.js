@@ -211,7 +211,7 @@ exports.plugin = {
 		// Store reference for Escape handler
 		var searchLibRef = searchLib;
 
-		// Use ViewPlugin to add capturing event listener for Escape
+		// Use ViewPlugin to add capturing event listener for Escape and manage panel positioning
 		var ViewPlugin = core.view.ViewPlugin;
 		if(ViewPlugin) {
 			extensions.push(ViewPlugin.define(function(view) {
@@ -225,16 +225,105 @@ exports.plugin = {
 							event.stopImmediatePropagation();
 							return;
 						}
-
+					}
+					// When search is opened (Ctrl+F / Cmd+F), update panel position after it's created
+					if(event.key === "f" && (event.ctrlKey || event.metaKey)) {
+						setTimeout(updatePanelTopOffset, 0);
 					}
 				};
 
 				// Add listener in capture phase to intercept before TiddlyWiki
 				view.dom.addEventListener("keydown", handler, true);
 
+				// --- Calculate and set the top offset for sticky panel positioning ---
+				// The search panel should stick below the tiddler title when sticky titles are enabled
+
+				var editorWrapper = view.dom.closest(".tc-editor-codemirror6");
+				var STICKY_TITLES_CONFIG = "$:/themes/tiddlywiki/vanilla/options/stickytitles";
+
+				function isStickyTitlesEnabled() {
+					return $tw.wiki.getTiddlerText(STICKY_TITLES_CONFIG, "no") === "yes";
+				}
+
+				function updatePanelTopOffset() {
+					if(!editorWrapper) return;
+
+					// Only apply offset when sticky titles are enabled
+					if(!isStickyTitlesEnabled()) {
+						// Reset to default when sticky titles are disabled
+						var panelsTop = view.dom.querySelector(".cm-panels-top");
+						if(panelsTop) {
+							panelsTop.style.top = "";
+						}
+						return;
+					}
+
+					var tiddlerFrame = editorWrapper.closest(".tc-tiddler-frame");
+					if(!tiddlerFrame) return;
+
+					var titleBar = tiddlerFrame.querySelector(".tc-tiddler-title");
+					var titleHeight = 0;
+					var titleTop = 0;
+
+					if(titleBar) {
+						var titleStyle = getComputedStyle(titleBar);
+						titleTop = parseFloat(titleStyle.top) || 0;
+						titleHeight = titleBar.offsetHeight + titleTop;
+					}
+
+					// Get menubar height from CSS custom property
+					var menubarHeight = 0;
+					var computedStyle = getComputedStyle(document.documentElement);
+					var menubarVar = computedStyle.getPropertyValue("--tc-menubar-height");
+					if(menubarVar) {
+						menubarHeight = parseFloat(menubarVar) || 0;
+					}
+
+					var topOffset = menubarHeight + titleHeight;
+
+					// Set on wrapper, editor, and panels-top directly
+					editorWrapper.style.setProperty("--cm-panels-top-offset", topOffset + "px");
+					view.dom.style.setProperty("--cm-panels-top-offset", topOffset + "px");
+
+					// Also set directly on panels-top if it exists
+					var panelsTop = view.dom.querySelector(".cm-panels-top");
+					if(panelsTop) {
+						panelsTop.style.setProperty("--cm-panels-top-offset", topOffset + "px");
+						panelsTop.style.top = topOffset + "px";
+					}
+				}
+
+				// Set initial value after a short delay to ensure DOM is ready
+				setTimeout(updatePanelTopOffset, 0);
+
+				// Update on window resize (title height might change)
+				var resizeHandler = function() {
+					updatePanelTopOffset();
+				};
+				window.addEventListener("resize", resizeHandler);
+
+				// Also update on scroll
+				var scrollHandler = function() {
+					updatePanelTopOffset();
+				};
+				window.addEventListener("scroll", scrollHandler, {
+					passive: true
+				});
+
+				// Listen for changes to sticky titles config
+				var wikiChangeHandler = function(changes) {
+					if(changes[STICKY_TITLES_CONFIG]) {
+						updatePanelTopOffset();
+					}
+				};
+				$tw.wiki.addEventListener("change", wikiChangeHandler);
+
 				return {
 					destroy: function() {
 						view.dom.removeEventListener("keydown", handler, true);
+						window.removeEventListener("resize", resizeHandler);
+						window.removeEventListener("scroll", scrollHandler);
+						$tw.wiki.removeEventListener("change", wikiChangeHandler);
 					}
 				};
 			}));

@@ -1,12 +1,12 @@
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/keymap-vim/license
-type: text/plain
+title: $:/plugins/tiddlywiki/codemirror-6/licenses/theme-template
 
-MIT License
+<pre><code>MIT License
 
-Copyright (c) 2020-2024 Yunchi Luo <mightyguava@gmail.com>
-Copyright (c) 2024-2026 TiddlyWiki Contributors
+Color palette based on <<theme-name>> (<<theme-url>>)
+by <<theme-author>>, licensed under MIT.
 
-This plugin bundles code from @replit/codemirror-vim.
+CodeMirror 6 CSS implementation:
+Copyright (c) 2024-2026 Simon Huber
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,3 +25,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+</code></pre>

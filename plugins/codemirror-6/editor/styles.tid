@@ -13,12 +13,16 @@ tags: $:/tags/Stylesheet
     border: 1px solid <<colour tiddler-editor-border>>;
     border-radius: 3px;
     background: <<colour tiddler-editor-background>>;
+    /* Allow sticky positioning to work through this element */
+    overflow: visible;
 }
 
 .tc-editor-codemirror6 .cm-editor {
     height: {{{ [[$:/config/TextEditor/EditorHeight/Mode]get[text]match[fixed]then{$:/config/TextEditor/EditorHeight/Height}] :else[[100%]] }}};
     font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
     font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
+    /* Allow sticky positioning to work through this element */
+    overflow: visible !important;
 }
 
 .tc-editor-codemirror6 .cm-content {
@@ -169,12 +173,16 @@ tags: $:/tags/Stylesheet
    Search Panel
    ============================================================================ */
 
-.cm-panels-top {
-    /* Make the panel container sticky */
+.tc-editor-codemirror6 .cm-panels-top {
+    /* Make the panel container sticky below the tiddler title */
     position: sticky;
-    /* Use CSS custom property for top offset (set by JS based on menubar height) */
-    top: var(--tc-menubar-height, 0px);
-    z-index: 100;
+    /* Top offset = menubar height + tiddler title height (set by JS in search.js) */
+    /* Fallback of 52px assumes ~52px title height when no menubar */
+    top: var(--cm-panels-top-offset, 52px);
+    /* Below sticky tiddler titles (z-index: 500) but above editor content */
+    z-index: 499;
+    /* Ensure the panel has a background so content doesn't show through */
+    background: <<colour tiddler-background>>;
 }
 
 .cm-search {

@@ -1,3 +1,7 @@
 title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-solarized/license
 
-{{$:/plugins/tiddlywiki/codemirror-6/licenses/mit}}
+\define theme-name() Solarized
+\define theme-url() https://ethanschoonover.com/solarized
+\define theme-author() Ethan Schoonover
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}
