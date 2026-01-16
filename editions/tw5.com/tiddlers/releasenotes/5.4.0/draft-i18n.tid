@@ -7,4 +7,7 @@ change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8891
 github-contributors: Leilei332
 
-The title of the draft tiddler is now translatable.
+The title of the draft tiddler is now translatable. These new language strings are provided:
+
+* `$:/language/Draft/Title` The title template of a draft tiddler, defaults to `Draft of '$1$' $2$`. `$1$` represents the title of the new tiddler, `$2$` represents the attribution to be added if the username is set. The title is trimed so that there will be no extra spaces when username is not set.
+* `$:/language/Draft/Attribution` The template of the attribution to be added, defaults to `by $1$`. `$1$` represents the username.
