@@ -14,6 +14,17 @@ Falls back to FramedEngine/SimpleEngine if CodeMirror is not available
 
 if(!$tw.browser) return;
 
+// Check if another CodeMirror engine is already registered
+var hasExistingCM = false;
+$tw.modules.forEachModuleOfType("widget", function(title, module) {
+	if(module["edit-codemirror"] || module["edit-codemirror-6"]) {
+		hasExistingCM = true;
+	}
+});
+if(hasExistingCM) {
+	return;
+}
+
 var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTextWidgetFactory,
 	SimpleEngine = require("$:/core/modules/editor/engines/simple.js").SimpleEngine,
 	FramedEngine = require("$:/core/modules/editor/engines/framed.js").FramedEngine;
