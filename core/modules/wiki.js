@@ -1676,7 +1676,7 @@ exports.generateDraftTitle = function(title) {
 		}
 		c++;
 	} while(this.tiddlerExists(draftTitle));
-	return draftTitle;
+	return draftTitle.trim();
 };
 
 /*
