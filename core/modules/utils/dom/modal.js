@@ -89,12 +89,12 @@ Modal.prototype.display = function(title, options = {}) {
 	templateWidgetNode.render(dialog,null);
 	
 	// Set up the refresh handler
-	const refreshHandler = (changes) => {
+	const refreshHandler = changes => {
 		templateWidgetNode.refresh(changes,dialog,null);
 	};
 	this.wiki.addEventListener("change",refreshHandler);
 	// Add the close event handler
-	const closeHandler = (event) => {
+	const closeHandler = event => {
 		// Remove our refresh handler
 		this.wiki.removeEventListener("change",refreshHandler);
 		// Decrease the modal count and adjust the body class
@@ -111,7 +111,7 @@ Modal.prototype.display = function(title, options = {}) {
 	templateWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	// Whether to close the modal dialog when the backdrop (area outside the modal) is clicked
 	if(variables["$mask-closable"] !== "no") {
-		dialog.addEventListener("click", (event) => {
+		dialog.addEventListener("click", event => {
 			// Close if clicking on the dialog backdrop (not its contents)
 			if(event.target === dialog) {
 				closeHandler(event);

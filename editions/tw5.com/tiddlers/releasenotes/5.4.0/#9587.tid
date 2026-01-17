@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9587
+description: Update modals functionality
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9587
+github-contributors: yaisog
+
+This is a major update of how modals work. More details will be added before a merge.
