@@ -1667,16 +1667,19 @@ exports.generateDraftTitle = function(title) {
 		draftTitle;
 	const username = this.getTiddlerText("$:/status/UserName"),
 		draftBaseTitle = $tw.language.getRawString("Draft/Title"),
-		draftAttribution = $tw.language.getRawString("Draft/Attribution"),
-		attribution = username ? draftAttribution.replace("$1$",username) : "";
+		draftAttribution = $tw.language.getRawString("Draft/Attribution");
 	do {
-		draftTitle = draftBaseTitle.replace("$1$", title).replace("$2$",attribution);
+		if(username) {
+			draftTitle = this.getSubstitutedText(draftAttribution, undefined, {substitutions: [{name: "1", value: title}, {name: "2", value: username}]});
+		} else {
+			draftTitle = this.getSubstitutedText(draftBaseTitle, undefined, {substitutions: [{name: "1", value: title}]});
+		}
 		if(c) {
 			draftTitle = draftTitle.concat(" ", (c + 1).toString());
 		}
 		c++;
 	} while(this.tiddlerExists(draftTitle));
-	return draftTitle.trim();
+	return draftTitle;
 };
 
 /*

@@ -1,4 +1,4 @@
 title: $:/language/Draft/
 
-Attribution: by $1$
-Title: Draft of '$1$' $2$
+Attribution: Draft of '$1$' by $2$
+Title: Draft of '$1$'
