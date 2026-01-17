@@ -11,3 +11,5 @@ The title of the draft tiddler is now translatable. These new language strings a
 
 * `$:/language/Draft/Title` The title template of a draft tiddler without attribution, defaults to `Draft of '$1$'`. `$1$` represents the title of the new tiddler.
 * `$:/language/Draft/Attribution` The template of the attribution to be added, defaults to `Draft of '$1$' by $2$`. `$1$` represents the title of the new tiddler, `$2$` represents the username.
+
+The translators plugin is also updated.
