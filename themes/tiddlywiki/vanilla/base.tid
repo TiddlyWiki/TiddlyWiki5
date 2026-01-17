@@ -2045,29 +2045,7 @@ html body.tc-body.tc-single-tiddler-window {
 ** Modals
 */
 
-.tc-modal-wrapper {
-	position: fixed;
-	overflow: auto;
-	overflow-y: scroll;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 900;
-}
-
-.tc-modal-backdrop {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 1000;
-	background-color: <<colour modal-backdrop>>;
-}
-
 .tc-modal {
-	z-index: 1100;
 	background-color: <<colour modal-background>>;
 	border: 1px solid <<colour modal-border>>;
 }
@@ -2075,14 +2053,10 @@ html body.tc-body.tc-single-tiddler-window {
 @media (max-width: 55em) {
 	.tc-modal {
 		position: fixed;
-		top: 1em;
-		left: 1em;
-		right: 1em;
 	}
 
 	.tc-modal-body {
 		overflow-y: auto;
-		max-height: 400px;
 		max-height: 60vh;
 	}
 }
@@ -2090,14 +2064,11 @@ html body.tc-body.tc-single-tiddler-window {
 @media (min-width: 55em) {
 	.tc-modal {
 		position: fixed;
-		top: 2em;
-		left: 25%;
 		width: 50%;
 	}
 
 	.tc-modal-body {
 		overflow-y: auto;
-		max-height: 400px;
 		max-height: 60vh;
 	}
 }

@@ -19,6 +19,6 @@ Note that the footer and subtitle fields are not limited to plain text, and wiki
 
 Modals are displayed with the [[WidgetMessage: tm-modal]].
 
-<$button message="tm-modal" param="SampleWizard">Open demo modal</$button>
+<$button message="tm-modal" param="SampleModal1">Open demo modal</$button>
 
 <<.tip """<$macrocall $name=".from-version" version="5.2.4"/> allow using "mask-closable" field""">>
