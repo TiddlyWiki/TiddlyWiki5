@@ -32,7 +32,7 @@ exports.parseCSSColorObject = function(colourString) {
 	var c = null;
 	try {
 		c = new Color(colourString);
-	} catch(e) {
+	} catch() {
 		// Return null if there is an error
 	}
 	return c;

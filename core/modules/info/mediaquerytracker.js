@@ -27,12 +27,12 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 							tiddlers = [];
 						tiddlers.push({title: infoTiddler, text: value});
 						if(infoTiddlerAlt) {
-							tiddlers.push({title: infoTiddlerAlt, text: value})
+							tiddlers.push({title: infoTiddlerAlt, text: value});
 						}
 						return tiddlers;
 					};
 					updateInfoTiddlersCallback(getResultTiddlers());
-					result.handler = function(event) {
+					result.handler = function() {
 						updateInfoTiddlersCallback(getResultTiddlers());
 					};
 					result.mqList.addEventListener("change",result.handler);

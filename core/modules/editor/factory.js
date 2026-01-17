@@ -220,7 +220,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
 			this.refreshSelf();
 			return true;
-		} else if (changedAttributes["default"] || changedTiddlers[this.editRefreshTitle] || changedTiddlers[this.editTitle]) {
+		} else if(changedAttributes["default"] || changedTiddlers[this.editRefreshTitle] || changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
 		}

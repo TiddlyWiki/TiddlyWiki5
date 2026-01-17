@@ -13,15 +13,15 @@ var Color = require("$:/core/modules/utils/dom/color.js").Color,
 	colourSpacesList = Object.keys(Color.spaces),
 	hueAdjustersList = ["raw","increasing","decreasing","longer","shorter"];
 
-exports["colour-lighten"] = makeSerialColourOperator(function (colour, operator, options) {
+exports["colour-lighten"] = makeSerialColourOperator(function (colour, operator) {
 	return colour.lighten($tw.utils.parseNumber(operator.operand)).display().toString();
 });
 
-exports["colour-darken"] = makeSerialColourOperator(function (colour, operator, options) {
+exports["colour-darken"] = makeSerialColourOperator(function (colour, operator) {
 	return colour.darken($tw.utils.parseNumber(operator.operand)).display().toString();
 });
 
-exports["colour-get-oklch"] = makeSerialColourOperator(function (colour, operator, options) {
+exports["colour-get-oklch"] = makeSerialColourOperator(function (colour, operator) {
 	var prop = ((operator.suffixes || [])[0] || ["l"])[0];
 	if(["l","c","h"].indexOf(prop) !== -1) {
 		colour = colour.oklch[prop];
@@ -29,7 +29,7 @@ exports["colour-get-oklch"] = makeSerialColourOperator(function (colour, operato
 	return colour.toString();
 });
 
-exports["colour-set-oklch"] = makeSerialColourOperator(function (colour, operator, options) {
+exports["colour-set-oklch"] = makeSerialColourOperator(function (colour, operator) {
 	var prop = ((operator.suffixes || [])[0] || ["l"])[0];
 	if(["l","c","h"].indexOf(prop) !== -1) {
 		colour.oklch[prop] = $tw.utils.parseNumber(operator.operand);
@@ -37,12 +37,12 @@ exports["colour-set-oklch"] = makeSerialColourOperator(function (colour, operato
 	return colour.display().toString();
 });
 
-exports["colour-set-alpha"] = makeSerialColourOperator(function (colour, operator, options) {
+exports["colour-set-alpha"] = makeSerialColourOperator(function (colour, operator) {
 	colour.alpha = $tw.utils.parseNumber(operator.operand);
 	return colour.display().toString();
 });
 
-exports["colour-contrast"] = makeParallelColourOperator(function (colours, operator, options) {
+exports["colour-contrast"] = makeParallelColourOperator(function (colours, operator) {
 	var colourContrasts = [];
 	$tw.utils.each(colours,function(colour,index) {
 		if(!colour) {
