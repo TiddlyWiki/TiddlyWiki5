@@ -14,8 +14,6 @@ exports.platforms = ["browser"];
 exports.after = ["startup"];
 exports.synchronous = true;
 
-var menubarObserver = null;
-
 exports.startup = function() {
 	var menubarObserver = null;
 	var isTracking = false;
