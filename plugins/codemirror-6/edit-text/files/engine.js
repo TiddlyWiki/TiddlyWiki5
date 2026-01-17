@@ -1073,10 +1073,14 @@ class CodeMirrorSimpleEngine {
 					paste: function(event, view) {
 						// Stop propagation to prevent TiddlyWiki's global import handler from triggering
 						event.stopPropagation();
-						if(self.widget && typeof self.widget.handlePasteEvent === "function") {
-							return self.widget.handlePasteEvent(event);
+						// Only call widget's paste handler if there are files to import
+						if(event.clipboardData && event.clipboardData.files && event.clipboardData.files.length > 0) {
+							if(self.widget && typeof self.widget.handlePasteEvent === "function") {
+								self.widget.handlePasteEvent(event);
+								return true; // We handled the file paste
+							}
 						}
-						return false;
+						return false; // Let CodeMirror handle text paste
 					},
 					dragenter: function(event, view) {
 						if(self.widget && typeof self.widget.handleDragEnterEvent === "function") {
