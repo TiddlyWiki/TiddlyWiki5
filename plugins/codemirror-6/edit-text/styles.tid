@@ -26,7 +26,7 @@ html body .tc-editor-codemirror6-simple .cm-scroller {
 }
 
 html body .tc-editor-codemirror6-simple .cm-content {
-	caret-color: <<colour foreground>>;
+	caret-color: transparent;
 	padding: 4px 6px;
 }
 
