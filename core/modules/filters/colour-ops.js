@@ -80,7 +80,7 @@ exports["colour-best-contrast"] = makeParallelColourOperator(function (colours, 
 	}
 });
 
-exports["colour-interpolate"] = function(source,operator,options) {
+exports["colour-interpolate"] = function(source,operator) {
 	// Get the colour space suffix
 	var space = ((((operator.suffixes || [])[0] || ["srgb"])[0]) || "").toLowerCase();
 	if(colourSpacesList.indexOf(space) === -1) {
