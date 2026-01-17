@@ -248,9 +248,32 @@ exports.plugin = {
 				function updatePanelTopOffset() {
 					if(!editorWrapper) return;
 
-					// Only apply offset when sticky titles are enabled
-					if(!isStickyTitlesEnabled()) {
-						// Reset to default when sticky titles are disabled
+					// Get menubar height from CSS custom property (always considered)
+					var menubarHeight = 0;
+					var computedStyle = getComputedStyle(document.documentElement);
+					var menubarVar = computedStyle.getPropertyValue("--tv-menubar-height");
+					if(menubarVar) {
+						menubarHeight = parseFloat(menubarVar) || 0;
+					}
+
+					// Get title bar height only when sticky titles are enabled
+					var titleHeight = 0;
+					if(isStickyTitlesEnabled()) {
+						var tiddlerFrame = editorWrapper.closest(".tc-tiddler-frame");
+						if(tiddlerFrame) {
+							var titleBar = tiddlerFrame.querySelector(".tc-tiddler-title");
+							if(titleBar) {
+								var titleStyle = getComputedStyle(titleBar);
+								var titleTop = parseFloat(titleStyle.top) || 0;
+								titleHeight = titleBar.offsetHeight + titleTop;
+							}
+						}
+					}
+
+					var topOffset = menubarHeight + titleHeight;
+
+					// If no offset needed, reset to defaults
+					if(topOffset === 0) {
 						editorWrapper.style.removeProperty("--cm-panels-top-offset");
 						view.dom.style.removeProperty("--cm-panels-top-offset");
 						var panelsTop = view.dom.querySelector(".cm-panels-top");
@@ -260,29 +283,6 @@ exports.plugin = {
 						}
 						return;
 					}
-
-					var tiddlerFrame = editorWrapper.closest(".tc-tiddler-frame");
-					if(!tiddlerFrame) return;
-
-					var titleBar = tiddlerFrame.querySelector(".tc-tiddler-title");
-					var titleHeight = 0;
-					var titleTop = 0;
-
-					if(titleBar) {
-						var titleStyle = getComputedStyle(titleBar);
-						titleTop = parseFloat(titleStyle.top) || 0;
-						titleHeight = titleBar.offsetHeight + titleTop;
-					}
-
-					// Get menubar height from CSS custom property
-					var menubarHeight = 0;
-					var computedStyle = getComputedStyle(document.documentElement);
-					var menubarVar = computedStyle.getPropertyValue("--tc-menubar-height");
-					if(menubarVar) {
-						menubarHeight = parseFloat(menubarVar) || 0;
-					}
-
-					var topOffset = menubarHeight + titleHeight;
 
 					// Set on wrapper, editor, and panels-top directly
 					editorWrapper.style.setProperty("--cm-panels-top-offset", topOffset + "px");

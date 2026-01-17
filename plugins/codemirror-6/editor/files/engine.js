@@ -274,7 +274,7 @@ var _menubarHeightSet = false;
 
 /**
  * Detect and track the TiddlyWiki menubar height for sticky panel positioning.
- * Sets --tc-menubar-height CSS custom property on document root.
+ * Sets --tv-menubar-height CSS custom property on document root.
  * Only accounts for menubar height if it's fixed/sticky (overlapping content).
  * Uses ResizeObserver if available to track dynamic changes.
  */
@@ -284,7 +284,7 @@ function setupMenubarHeightTracking(doc) {
 	var menubar = doc.querySelector(".tc-adjust-top-of-scroll");
 	if(!menubar) {
 		// No menubar found, set to 0
-		doc.documentElement.style.setProperty("--tc-menubar-height", "0px");
+		doc.documentElement.style.setProperty("--tv-menubar-height", "0px");
 		_menubarHeightSet = true;
 		return;
 	}
@@ -298,10 +298,10 @@ function setupMenubarHeightTracking(doc) {
 
 		if(isOverlapping) {
 			var height = menubar.getBoundingClientRect().height;
-			doc.documentElement.style.setProperty("--tc-menubar-height", height + "px");
+			doc.documentElement.style.setProperty("--tv-menubar-height", height + "px");
 		} else {
 			// Menubar is in normal flow (flex, static, relative), no offset needed
-			doc.documentElement.style.setProperty("--tc-menubar-height", "0px");
+			doc.documentElement.style.setProperty("--tv-menubar-height", "0px");
 		}
 	}
 
