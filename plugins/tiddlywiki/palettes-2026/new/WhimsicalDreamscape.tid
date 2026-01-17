@@ -71,7 +71,7 @@ sidebar-tab-border: <<colour sidebar-tab-background>>
 sidebar-tab-divider: <<colour sidebar-tab-border>>
 sidebar-tab-foreground-selected: <<colour foreground>>
 sidebar-tab-foreground: <<colour foreground>>
-sidebar-tiddler-link-foreground-hover: <<colour sidebar-tiddler-link-foreground>>88
+sidebar-tiddler-link-foreground-hover: [colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
 sidebar-tiddler-link-foreground: <<colour tiddler-link-foreground>>
 site-title-foreground: <<colour tiddler-background>>
 static-alert-foreground: <<colour muted-foreground>>
@@ -95,7 +95,7 @@ tiddler-controls-foreground: <<colour primary>>
 tiddler-editor-background: #edefee
 tiddler-editor-border-image: #ffffff
 tiddler-editor-border: #D5D7D6
-tiddler-editor-fields-even: <<colour tiddler-controls-foreground>>88
+tiddler-editor-fields-even: [colour[tiddler-controls-foreground]colour-set-alpha[0.5]]
 tiddler-editor-fields-odd: 
 tiddler-info-background: #f0f0f0
 tiddler-info-border: <<colour tiddler-info-background>>

@@ -71,7 +71,7 @@ sidebar-tab-border: <<colour tab-border>>
 sidebar-tab-divider: <<colour sidebar-tab-border>>
 sidebar-tab-foreground-selected: <<colour foreground>>
 sidebar-tab-foreground: <<colour foreground>>
-sidebar-tiddler-link-foreground-hover: <<colour sidebar-tiddler-link-foreground>>88
+sidebar-tiddler-link-foreground-hover: [colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
 sidebar-tiddler-link-foreground: #E886B1
 site-title-foreground: #96A199
 static-alert-foreground: <<colour muted-foreground>>

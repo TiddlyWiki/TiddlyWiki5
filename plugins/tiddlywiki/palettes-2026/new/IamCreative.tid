@@ -95,7 +95,7 @@ tiddler-controls-foreground: #A0AEAF
 tiddler-editor-background: #e9ebe6
 tiddler-editor-border-image: #ffffff
 tiddler-editor-border: #D2D4CF
-tiddler-editor-fields-even: <<colour tiddler-controls-foreground>>88
+tiddler-editor-fields-even: [colour[tiddler-controls-foreground]colour-set-alpha[0.5]]
 tiddler-editor-fields-odd: 
 tiddler-info-background: <<colour tiddler-editor-background>>
 tiddler-info-border: <<colour tiddler-info-background>>
