@@ -326,6 +326,7 @@ class CodeMirrorSimpleEngine {
 			indentUnit: new Compartment(),
 			tabSize: new Compartment(),
 			trailingWhitespace: new Compartment(),
+			whitespace: new Compartment(),
 			multiCursor: new Compartment(),
 			bidi: new Compartment(),
 			autocompletion: new Compartment(),
@@ -486,9 +487,48 @@ class CodeMirrorSimpleEngine {
 			extensions.push(this._compartments.trailingWhitespace.of(trailingExts));
 		}
 
+		// All whitespace highlighting (configurable via compartment)
+		var highlightWhitespace = (core.view || {}).highlightWhitespace;
+		if(highlightWhitespace) {
+			var wsEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/editor/showWhitespace", "no") === "yes";
+			var wsExts = wsEnabled ? [highlightWhitespace()] : [];
+			extensions.push(this._compartments.whitespace.of(wsExts));
+		}
+
+		// Cursor layer (always present - draws all cursors to enable synced blinking)
+		var layer = (core.view || {}).layer;
+		var RectangleMarker = (core.view || {}).RectangleMarker;
+		var EditorSelection = (core.state || {}).EditorSelection;
+
+		if(layer && RectangleMarker && EditorSelection) {
+			// Create a cursor layer for all cursors (primary and secondary)
+			var cursorLayer = layer({
+				above: true,
+				markers: function(view) {
+					var state = view.state;
+					var cursors = [];
+					for(var i = 0; i < state.selection.ranges.length; i++) {
+						var r = state.selection.ranges[i];
+						var isPrimary = r === state.selection.main;
+						var cursorClass = isPrimary ? "cm-cursor cm-cursor-primary" : "cm-cursor cm-cursor-secondary";
+						// Draw cursor for this range
+						var cursor = r.empty ? r : EditorSelection.cursor(r.head, r.head > r.anchor ? -1 : 1);
+						var pieces = RectangleMarker.forRange(view, cursorClass, cursor);
+						for(var j = 0; j < pieces.length; j++) {
+							cursors.push(pieces[j]);
+						}
+					}
+					return cursors;
+				},
+				update: function(update, _dom) {
+					return update.docChanged || update.selectionSet;
+				},
+				"class": "cm-cursorLayer"
+			});
+			extensions.push(cursorLayer);
+		}
+
 		// Multi-cursor editing (configurable via compartment)
-		// Uses native browser selection for PRIMARY cursor/selection (proper text contrast)
-		// Uses custom rendering for SECONDARY cursors/selections only
 		var multiCursorEnabled = !wiki || wiki.getTiddlerText("$:/config/codemirror-6/editor/multiCursor", "yes") !== "no";
 		var multiCursorExts = [];
 		if(multiCursorEnabled) {
@@ -497,15 +537,12 @@ class CodeMirrorSimpleEngine {
 				multiCursorExts.push(EditorState.allowMultipleSelections.of(true));
 			}
 
-			// Custom rendering for secondary cursors and selections
-			// Uses native browser selection for primary, custom rendering for secondary
+			// Custom rendering for secondary selections
+			// Note: All cursors are rendered by the cursor layer above
 			var ViewPlugin = (core.view || {}).ViewPlugin;
 			var Decoration = (core.view || {}).Decoration;
-			var layer = (core.view || {}).layer;
-			var RectangleMarker = (core.view || {}).RectangleMarker;
-			var EditorSelection = (core.state || {}).EditorSelection;
 
-			if(ViewPlugin && Decoration && layer && RectangleMarker && EditorSelection) {
+			if(ViewPlugin && Decoration) {
 				// Decoration for secondary selections (highlights only actual text, not empty lines)
 				var secondarySelectionMark = Decoration.mark({
 					class: "cm-selectionBackground-secondary"
@@ -542,32 +579,30 @@ class CodeMirrorSimpleEngine {
 						return v.decorations;
 					}
 				}));
+			}
 
-				// Create a cursor-only layer for secondary cursors
-				var secondaryCursorLayer = layer({
-					above: true,
-					markers: function(view) {
-						var state = view.state;
-						var cursors = [];
-						for(var i = 0; i < state.selection.ranges.length; i++) {
-							var r = state.selection.ranges[i];
-							// Skip the primary selection - let native cursor handle it
-							if(r === state.selection.main) continue;
-							// Draw cursor for this range
-							var cursor = r.empty ? r : EditorSelection.cursor(r.head, r.head > r.anchor ? -1 : 1);
-							var pieces = RectangleMarker.forRange(view, "cm-cursor cm-cursor-secondary", cursor);
-							for(var j = 0; j < pieces.length; j++) {
-								cursors.push(pieces[j]);
-							}
-						}
-						return cursors;
-					},
-					update: function(update, _dom) {
-						return update.docChanged || update.selectionSet;
-					},
-					"class": "cm-cursorLayer"
-				});
-				multiCursorExts.push(secondaryCursorLayer);
+			// Add multi-cursor keybindings only for textarea mode (multi-line)
+			if(!this.isInputMode) {
+				var addCursorAbove = (core.commands || {}).addCursorAbove;
+				var addCursorBelow = (core.commands || {}).addCursorBelow;
+				var cmKeymap = (core.view || {}).keymap;
+
+				var multiCursorKeymap = [];
+				if(addCursorAbove) {
+					multiCursorKeymap.push({
+						key: "Ctrl-Alt-ArrowUp",
+						run: addCursorAbove
+					});
+				}
+				if(addCursorBelow) {
+					multiCursorKeymap.push({
+						key: "Ctrl-Alt-ArrowDown",
+						run: addCursorBelow
+					});
+				}
+				if(multiCursorKeymap.length && cmKeymap) {
+					multiCursorExts.push(cmKeymap.of(multiCursorKeymap));
+				}
 			}
 
 			// Add rectangular selection keymap
@@ -1036,6 +1071,8 @@ class CodeMirrorSimpleEngine {
 						return false;
 					},
 					paste: function(event, view) {
+						// Stop propagation to prevent TiddlyWiki's global import handler from triggering
+						event.stopPropagation();
 						if(self.widget && typeof self.widget.handlePasteEvent === "function") {
 							return self.widget.handlePasteEvent(event);
 						}
@@ -1063,6 +1100,23 @@ class CodeMirrorSimpleEngine {
 						if(self.widget && typeof self.widget.handleDragEndEvent === "function") {
 							return self.widget.handleDragEndEvent(event);
 						}
+						return false;
+					}
+				})
+			);
+		}
+
+		// ========================================================================
+		// Paste Event - Stop Propagation
+		// ========================================================================
+
+		// Always stop paste event propagation to prevent TiddlyWiki's global import handler
+		// This is separate from the file drop handler which may not be enabled
+		if(!this._isFileDropEnabled || !this.widget) {
+			extensions.push(
+				EditorView.domEventHandlers({
+					paste: function(event, view) {
+						event.stopPropagation();
 						return false;
 					}
 				})
@@ -1619,6 +1673,16 @@ class CodeMirrorSimpleEngine {
 				trailingExts.push(highlightTrailingWhitespace());
 			}
 			effects.push(this._compartments.trailingWhitespace.reconfigure(trailingExts));
+		}
+
+		// All whitespace highlighting
+		if(settings.showWhitespace !== undefined && this._compartments.whitespace) {
+			var highlightWhitespace = (core.view || {}).highlightWhitespace;
+			var wsExts = [];
+			if(settings.showWhitespace && highlightWhitespace) {
+				wsExts.push(highlightWhitespace());
+			}
+			effects.push(this._compartments.whitespace.reconfigure(wsExts));
 		}
 
 		// Multi-cursor editing

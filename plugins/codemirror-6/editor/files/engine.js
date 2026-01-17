@@ -799,6 +799,7 @@ class CodeMirrorEngine {
 			keymap: new Compartment(),
 			multiCursor: new Compartment(),
 			trailingWhitespace: new Compartment(),
+			whitespace: new Compartment(),
 			spellcheck: new Compartment(),
 			bidi: new Compartment(),
 			autocompletion: new Compartment()
@@ -1337,6 +1338,15 @@ class CodeMirrorEngine {
 		}
 		extensions.push(this._compartments.trailingWhitespace.of(trailingWhitespaceExtensions));
 
+		// Core: All whitespace highlighting (with compartment for dynamic toggle)
+		var whitespaceEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/editor/showWhitespace", "no") === "yes";
+		var whitespaceExtensions = [];
+		var highlightWhitespace = (core.view || {}).highlightWhitespace;
+		if(whitespaceEnabled && highlightWhitespace) {
+			whitespaceExtensions.push(highlightWhitespace());
+		}
+		extensions.push(this._compartments.whitespace.of(whitespaceExtensions));
+
 		// Core: Bidirectional text support (with compartment for dynamic toggle)
 		// Enables automatic per-line text direction detection (RTL/LTR)
 		var bidiEnabled = wiki && wiki.getTiddlerText("$:/config/codemirror-6/editor/bidiPerLine", "no") === "yes";
@@ -1718,6 +1728,8 @@ class CodeMirrorEngine {
 				},
 				paste: function(event, _view) {
 					if(self._destroyed) return false;
+					// Stop propagation to prevent TiddlyWiki's global import handler from triggering
+					event.stopPropagation();
 					if(self.widget && typeof self.widget.handlePasteEvent === "function") {
 						return self.widget.handlePasteEvent(event);
 					}
@@ -2097,6 +2109,17 @@ class CodeMirrorEngine {
 				twExtensions.push(highlightTrailingWhitespace());
 			}
 			effects.push(this._compartments.trailingWhitespace.reconfigure(twExtensions));
+		}
+
+		// All whitespace highlighting toggle
+		if(settings.showWhitespace !== undefined && this._compartments.whitespace) {
+			var wsEnabled = settings.showWhitespace;
+			var wsExtensions = [];
+			var highlightWhitespace = (core.view || {}).highlightWhitespace;
+			if(wsEnabled && highlightWhitespace) {
+				wsExtensions.push(highlightWhitespace());
+			}
+			effects.push(this._compartments.whitespace.reconfigure(wsExtensions));
 		}
 
 		// Bidirectional text support toggle

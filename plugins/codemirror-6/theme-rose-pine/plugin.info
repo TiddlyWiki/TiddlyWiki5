@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/theme-rose-pine",
   "name": "CodeMirror 6 Rosé Pine Theme",
   "description": "Rosé Pine theme for CodeMirror 6 (Main, Moon, Dawn variants)",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme license",

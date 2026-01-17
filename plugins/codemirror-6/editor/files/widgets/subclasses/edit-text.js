@@ -577,6 +577,9 @@ exports.prototype._buildSettingsSnapshot = function() {
 		// trailing whitespace highlighting
 		showTrailingWhitespace: boolConfig(wiki, "$:/config/codemirror-6/editor/showTrailingWhitespace"),
 
+		// all whitespace highlighting
+		showWhitespace: boolConfig(wiki, "$:/config/codemirror-6/editor/showWhitespace"),
+
 		// bidirectional text support
 		bidiPerLine: boolConfig(wiki, "$:/config/codemirror-6/editor/bidiPerLine"),
 

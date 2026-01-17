@@ -199,6 +199,7 @@ class CM6EditTextWidget extends BaseEditTextWidget {
 			imagePreview: boolConfig(wiki, "$:/config/codemirror-6/image-preview/enabled", false),
 			wordCount: boolConfig(wiki, "$:/config/codemirror-6/word-count/enabled", false),
 			showTrailingWhitespace: boolConfig(wiki, "$:/config/codemirror-6/editor/showTrailingWhitespace", false),
+			showWhitespace: boolConfig(wiki, "$:/config/codemirror-6/editor/showWhitespace", false),
 
 			// Navigation features
 			linkPreview: boolConfig(wiki, "$:/config/codemirror-6/link-preview/enabled", true),
