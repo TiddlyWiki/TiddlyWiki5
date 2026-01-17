@@ -1,6 +1,6 @@
 title: $:/changenotes/5.4.0/#8702
 description: Colour handling improvements
-release: 5.4.0-disabled because this PR is not yet merged
+release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: hackability
