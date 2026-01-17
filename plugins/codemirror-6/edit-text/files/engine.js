@@ -337,6 +337,7 @@ class CodeMirrorSimpleEngine {
 		this._tabBehavior = "browser"; // "browser" (default) or "indent"
 		this._completionSources = [];
 		this._eventHandlers = {};
+		this._destroyed = false;
 
 		var extensions = [];
 
@@ -1833,6 +1834,64 @@ class CodeMirrorSimpleEngine {
 		// Trigger settingsChanged event for all registered plugin handlers
 		// Plugins handle their own compartments via registerEvents
 		this._triggerEvent("settingsChanged", settings);
+	}
+
+	// ========================================================================
+	// Destruction / Cleanup
+	// ========================================================================
+
+	/**
+	 * Destroy the editor and clean up all resources.
+	 * This prevents memory leaks when the editor is removed from the DOM.
+	 */
+	destroy() {
+		if(this._destroyed) return;
+		this._destroyed = true;
+
+		// Call destroy on all active plugins
+		for(var i = 0; i < this._activePlugins.length; i++) {
+			var plugin = this._activePlugins[i];
+			if(isFunction(plugin.destroy)) {
+				try {
+					plugin.destroy(this);
+				} catch (_e) {}
+			}
+		}
+
+		// Destroy the CodeMirror view
+		try {
+			if(this.view) this.view.destroy();
+		} catch (_e) {}
+
+		// Remove DOM node
+		try {
+			if(this.domNode && this.domNode.parentNode) {
+				this.domNode.parentNode.removeChild(this.domNode);
+			}
+		} catch (_e) {}
+
+		// Nullify references to allow garbage collection
+		this.view = null;
+		this.domNode = null;
+		this.widget = null;
+		this.parentNode = null;
+		this.nextSibling = null;
+		this.options = null;
+		this.cm = null;
+		this._compartments = null;
+		this._eventHandlers = null;
+		this._activePlugins = null;
+		this._keymapPlugins = null;
+		this._completionSources = null;
+		this._pluginContext = null;
+	}
+
+	/**
+	 * Check if this engine has been destroyed.
+	 * @returns {boolean} True if destroyed
+	 */
+	isDestroyed() {
+		return this._destroyed;
 	}
 }
 
