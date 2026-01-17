@@ -32,7 +32,7 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 						return tiddlers;
 					};
 					updateInfoTiddlersCallback(getResultTiddlers());
-					result.handler = function() {
+					result.handler = function(event) {
 						updateInfoTiddlersCallback(getResultTiddlers());
 					};
 					result.mqList.addEventListener("change",result.handler);

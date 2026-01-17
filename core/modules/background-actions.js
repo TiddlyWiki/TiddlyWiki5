@@ -75,7 +75,7 @@ class BackgroundActionTracker {
 			filterString: this.trackFilter,
 			fnEnter: () => { this.hasChanged = true; },
 			fnLeave: () => { this.hasChanged = true; },
-			fnProcess: () => {
+			fnProcess: changes => {
 				if(this.hasChanged) {
 					this.hasChanged = false;
 					console.log("Processing background action", this.title);

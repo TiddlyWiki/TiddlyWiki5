@@ -33,8 +33,7 @@ exports.parseCSSColorObject = function(colourString) {
 	try {
 		c = new Color(colourString);
 	} catch(e) {
-		// Keep the linter happy
-		e;
+		// Return null if there is an error
 	}
 	return c;
 };
