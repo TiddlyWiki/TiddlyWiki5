@@ -1,7 +1,7 @@
 {
 	"tiddlers": [
 		{
-			"file": "color.global.min.v0.5.2.js",
+			"file": "color.global.min.v0.6.1.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/core/modules/utils/dom/color.js",
