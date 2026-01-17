@@ -41,6 +41,7 @@ var _historyKeymapExtension = null;
 var _bracketMatchingExtension = null;
 var _closeBracketsExtension = null;
 var _closeBracketsKeymapExtension = null;
+var _completionKeymapExtension = null;
 var _syntaxHighlightingExtension = null;
 var _defaultKeymapExtension = null;
 
@@ -94,6 +95,14 @@ function getCachedExtensions() {
 		}
 	}
 
+	// Completion keymap (Tab/Enter to accept completions)
+	if(!_completionKeymapExtension && cmKeymap) {
+		var completionKeymap = (core.autocomplete || {}).completionKeymap;
+		if(completionKeymap) {
+			_completionKeymapExtension = cmKeymap.of(completionKeymap);
+		}
+	}
+
 	// Syntax highlighting with class highlighter
 	if(!_syntaxHighlightingExtension) {
 		var syntaxHighlighting = (core.language || {}).syntaxHighlighting;
@@ -123,6 +132,7 @@ function getCachedExtensions() {
 		bracketMatching: _bracketMatchingExtension,
 		closeBrackets: _closeBracketsExtension,
 		closeBracketsKeymap: _closeBracketsKeymapExtension,
+		completionKeymap: _completionKeymapExtension,
 		syntaxHighlighting: _syntaxHighlightingExtension,
 		defaultKeymap: _defaultKeymapExtension
 	};
@@ -825,6 +835,29 @@ class CodeMirrorEngine {
 				EditorState.readOnly.of(!!options.readOnly)
 			)
 		);
+
+		// Core: Tab key handler for autocompletion
+		// Uses Prec.highest to ensure Tab accepts completion before indentWithTab runs
+		var Prec = (core.state || {}).Prec;
+		var acceptCompletion = (core.autocomplete || {}).acceptCompletion;
+		var completionStatus = (core.autocomplete || {}).completionStatus;
+		if(Prec && cmKeymap && acceptCompletion && completionStatus) {
+			extensions.push(Prec.highest(cmKeymap.of([{
+				key: "Tab",
+				run: function(view) {
+					// Only accept if completion popup is active
+					if(completionStatus(view.state) === "active") {
+						return acceptCompletion(view);
+					}
+					return false; // Let other handlers (indentWithTab) handle it
+				}
+			}])));
+		}
+
+		// Core: Completion keymap (Enter to accept, Escape to close, arrows to navigate)
+		if(cached.completionKeymap) {
+			extensions.push(cached.completionKeymap);
+		}
 
 		// Core: Basic keymap (cached) + focus navigation (instance-specific)
 		if(cached.defaultKeymap) {

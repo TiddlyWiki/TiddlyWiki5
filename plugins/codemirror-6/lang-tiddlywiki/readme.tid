@@ -116,24 +116,12 @@ The linter checks for:
 
 Enable lint gutter with `lintGutter: true`.
 
-!! Keyboard Shortcuts
+!! Smart Editing
 
-|!Shortcut |!Action |
-|Mod-b |Toggle bold |
-|Mod-i |Toggle italic |
-|Mod-u |Toggle underline |
-|Mod-` |Toggle inline code |
-|Mod-k |Insert wiki link |
-|Mod-Shift-k |Insert transclusion |
-|Mod-1 to Mod-6 |Set heading level |
-|Mod-0 |Remove heading |
-|Mod-Shift-8 |Toggle bullet list |
-|Mod-Shift-7 |Toggle numbered list |
-|Mod-Shift-c |Insert code block |
-|Tab |Expand snippet (if at trigger) |
-|Mod-f |Open search |
-|Mod-z |Undo |
-|Mod-Shift-z |Redo |
+* ''Enter'' — continues list markers and indentation on new lines
+* ''Backspace'' — smart deletion of markup (e.g., removes list marker when at start of list item)
+
+Formatting shortcuts (bold, italic, links, etc.) are handled by the TiddlyWiki editor toolbar.
 
 !! Engine Options
 

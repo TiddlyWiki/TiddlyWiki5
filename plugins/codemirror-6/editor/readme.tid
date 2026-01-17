@@ -21,7 +21,7 @@ Configure via ''Control Panel → Settings → CodeMirror'':
 
 * ''Editor'' — line wrapping, bracket matching, indentation, spellcheck
 * ''Theme'' — color scheme with auto palette matching
-* ''Keymap'' — default, vim, or emacs bindings
+* ''Keymap'' — VSCode (default), vim, or emacs bindings
 * ''Keyboard Shortcuts'' — customize all shortcuts
 
 !! Companion Plugins
@@ -73,7 +73,7 @@ Most themes include both light and dark variants.
 
 |!Shortcut |!Action |
 |Ctrl+Z |Undo |
-|Ctrl+Shift+Z |Redo |
+|Ctrl+Y |Redo |
 |Ctrl+F |Find |
 |Ctrl+H |Find and Replace |
 |Ctrl+D |Select next occurrence |
