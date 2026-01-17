@@ -10,7 +10,7 @@ tags: $:/tags/Macro
 <$list filter="[<consolidatedPalette>indexes[]sort[]]" variable="colour-name">
 	<$let filter-text={{{ [<consolidatedPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] }}}>
 		<!-- Note the join, needed to cope with palette entries containing spaces -->
-		<$action-setfield $tiddler=<<outputPalette>> $index=<<colour-name>> $value={{{ [subfilter<filter-text>join[ ]] [<colour-name>addprefix[/* ]addsuffix[ */]] +[join[ ]] }}}/>
+		<$action-setfield $tiddler=<<outputPalette>> $index=<<colour-name>> $value={{{ [subfilter<filter-text>join[ ]] +[join[ ]] }}}/>
 	</$let>
 </$list>
 \end actions-compile-palette-filtered
