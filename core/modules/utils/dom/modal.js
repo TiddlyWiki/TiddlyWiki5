@@ -35,17 +35,8 @@ Modal.prototype.display = function(title, options = {}) {
 	if(!tiddler) {
 		return;
 	}
-	// Create the variables - start with variables from the source widget
-	const variables = {};
-	// Collect variables from the source widget (the origin of the tm-modal message)
-	if(options.event && options.event.widget && options.event.widget.variables) {
-		// Copy all variables from the calling widget
-		for(let varName in options.event.widget.variables) {
-			variables[varName] = options.event.widget.variables[varName].value;
-		}
-	}
-	// Override with specific variables for modals
-	$tw.utils.extend(variables, {
+	// Create variables to override - currentTiddler and any from options.variables
+	const variables = $tw.utils.extend({
 		currentTiddler: title
 	}, options.variables);
 
@@ -84,7 +75,7 @@ Modal.prototype.display = function(title, options = {}) {
 	const navigatorWidgetNode = new navigator.navigator(navigatorTree, {
 		wiki: this.wiki,
 		document: this.srcDocument,
-		parentWidget: $tw.rootWidget
+		parentWidget: options.event && options.event.widget ? options.event.widget : $tw.rootWidget
 	});
 	navigatorWidgetNode.render(dialog,null);
 
