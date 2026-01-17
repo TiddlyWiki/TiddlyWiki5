@@ -290,10 +290,12 @@ js.configs.recommended,
         "@stylistic/wrap-iife": "off",
         "@stylistic/wrap-regex": "off",
         "@stylistic/yield-star-spacing": "error",
-        yoda: "off",
-        // temporary rules
+        "yoda": "off",
         "no-useless-escape": "off",
-        "no-unused-vars": "warn",
+        "no-unused-vars": ["warn", {
+            "args": "none",
+            "caughtErrors": "none"
+        }],
         "no-empty": "off",
         "@stylistic/no-extra-semi": "off",
         "no-redeclare": "off",
