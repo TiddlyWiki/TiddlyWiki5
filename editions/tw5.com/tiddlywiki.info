@@ -8,6 +8,7 @@
 		"tiddlywiki/menubar",
 		"tiddlywiki/railroad",
 		"tiddlywiki/tour",
+		"tiddlywiki/plugin-combiner",
 		"codemirror-6/editor",
 		"codemirror-6/edit-text",
 		"codemirror-6/auto-close-tags",
