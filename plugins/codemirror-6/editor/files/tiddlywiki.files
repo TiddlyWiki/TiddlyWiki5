@@ -103,6 +103,14 @@
                 "title": "$:/plugins/tiddlywiki/codemirror-6/search.js",
                 "module-type": "codemirror6-plugin"
             }
+        },
+        {
+            "file": "startup/menubar-height.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/startup/menubar-height.js",
+                "module-type": "startup"
+            }
         }
     ]
 }

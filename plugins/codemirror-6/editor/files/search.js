@@ -248,51 +248,46 @@ exports.plugin = {
 				function updatePanelTopOffset() {
 					if(!editorWrapper) return;
 
-					// Get menubar height from CSS custom property (always considered)
-					var menubarHeight = 0;
-					var computedStyle = getComputedStyle(document.documentElement);
-					var menubarVar = computedStyle.getPropertyValue("--tv-menubar-height");
-					if(menubarVar) {
-						menubarHeight = parseFloat(menubarVar) || 0;
-					}
-
 					// Get title bar height only when sticky titles are enabled
+					// Note: Menubar height is handled via CSS calc() with --tv-menubar-height
+					// We only need the title bar's actual height, not its top offset (which includes menubar)
 					var titleHeight = 0;
 					if(isStickyTitlesEnabled()) {
 						var tiddlerFrame = editorWrapper.closest(".tc-tiddler-frame");
 						if(tiddlerFrame) {
 							var titleBar = tiddlerFrame.querySelector(".tc-tiddler-title");
 							if(titleBar) {
-								var titleStyle = getComputedStyle(titleBar);
-								var titleTop = parseFloat(titleStyle.top) || 0;
-								titleHeight = titleBar.offsetHeight + titleTop;
+								titleHeight = titleBar.offsetHeight;
 							}
 						}
 					}
 
-					var topOffset = menubarHeight + titleHeight;
+					// Set --cm-panels-top-offset for sticky title height (CSS handles menubar via --tv-menubar-height)
+					var panelsTop = view.dom.querySelector(".cm-panels-top");
 
-					// If no offset needed, reset to defaults
-					if(topOffset === 0) {
+					// Always remove inline top style (CodeMirror sets top:0px) so our CSS calc() works
+					if(panelsTop) {
+						panelsTop.style.removeProperty("top");
+					}
+
+					if(titleHeight === 0) {
+						// No sticky title offset needed - remove CSS variable, let CSS defaults handle it
 						editorWrapper.style.removeProperty("--cm-panels-top-offset");
 						view.dom.style.removeProperty("--cm-panels-top-offset");
-						var panelsTop = view.dom.querySelector(".cm-panels-top");
 						if(panelsTop) {
 							panelsTop.style.removeProperty("--cm-panels-top-offset");
-							panelsTop.style.top = "";
 						}
 						return;
 					}
 
-					// Set on wrapper, editor, and panels-top directly
+					var topOffset = titleHeight;
+
+					// Set CSS variable for title offset (menubar offset handled in CSS)
 					editorWrapper.style.setProperty("--cm-panels-top-offset", topOffset + "px");
 					view.dom.style.setProperty("--cm-panels-top-offset", topOffset + "px");
 
-					// Also set directly on panels-top if it exists
-					var panelsTop = view.dom.querySelector(".cm-panels-top");
 					if(panelsTop) {
 						panelsTop.style.setProperty("--cm-panels-top-offset", topOffset + "px");
-						panelsTop.style.top = topOffset + "px";
 					}
 				}
 

@@ -176,8 +176,8 @@ tags: $:/tags/Stylesheet
 .tc-editor-codemirror6 .cm-panels-top {
     /* Make the panel container sticky below the tiddler title */
     position: sticky;
-    /* Top offset set by JS in search.js when sticky titles are enabled */
-    top: var(--cm-panels-top-offset, 0px);
+    /* Top offset: menubar height (set by JS) + title offset (set by JS for sticky titles) */
+    top: calc(var(--tv-menubar-height, 0px) + var(--cm-panels-top-offset, 0px));
     /* Below sticky tiddler titles (z-index: 500) but above editor content */
     z-index: 499;
     /* Ensure the panel has a background so content doesn't show through */
@@ -510,3 +510,16 @@ tags: $:/tags/Stylesheet
     background-color: rgba(255, 0, 0, 0.3);
     border-radius: 2px;
 }
+
+/* ============================================================================
+   Sticky Tiddler Titles (menubar offset)
+   ============================================================================ */
+
+/* Adjust sticky tiddler titles to account for fixed menubar */
+<%if [{$:/themes/tiddlywiki/vanilla/options/stickytitles}match[yes]] %>
+
+.tc-tiddler-title {
+    top: var(--tv-menubar-height, 0px);
+}
+
+<%endif%>

@@ -266,59 +266,6 @@ function buildVSCodeKeymap(core) {
 }
 
 // ============================================================================
-// Menubar Height Tracking (for sticky search panel)
-// ============================================================================
-
-var _menubarObserver = null;
-var _menubarHeightSet = false;
-
-/**
- * Detect and track the TiddlyWiki menubar height for sticky panel positioning.
- * Sets --tv-menubar-height CSS custom property on document root.
- * Only accounts for menubar height if it's fixed/sticky (overlapping content).
- * Uses ResizeObserver if available to track dynamic changes.
- */
-function setupMenubarHeightTracking(doc) {
-	if(!doc || _menubarHeightSet) return;
-
-	var menubar = doc.querySelector(".tc-adjust-top-of-scroll");
-	if(!menubar) {
-		// No menubar found, set to 0
-		doc.documentElement.style.setProperty("--tv-menubar-height", "0px");
-		_menubarHeightSet = true;
-		return;
-	}
-
-	// Function to update the CSS variable
-	function updateMenubarHeight() {
-		// Only account for menubar if it's fixed, sticky, or absolute (overlapping content)
-		var computedStyle = doc.defaultView.getComputedStyle(menubar);
-		var position = computedStyle.position;
-		var isOverlapping = position === "fixed" || position === "sticky" || position === "absolute";
-
-		if(isOverlapping) {
-			var height = menubar.getBoundingClientRect().height;
-			doc.documentElement.style.setProperty("--tv-menubar-height", height + "px");
-		} else {
-			// Menubar is in normal flow (flex, static, relative), no offset needed
-			doc.documentElement.style.setProperty("--tv-menubar-height", "0px");
-		}
-	}
-
-	// Initial update
-	updateMenubarHeight();
-	_menubarHeightSet = true;
-
-	// Set up ResizeObserver if available and not already set up
-	if(!_menubarObserver && typeof ResizeObserver !== "undefined") {
-		_menubarObserver = new ResizeObserver(function() {
-			updateMenubarHeight();
-		});
-		_menubarObserver.observe(menubar);
-	}
-}
-
-// ============================================================================
 // Focus Navigation (Ctrl+. / Ctrl+Shift+.)
 // ============================================================================
 
@@ -1776,14 +1723,6 @@ class CodeMirrorEngine {
 		if(this.widget && this.widget.domNodes) {
 			this.widget.domNodes.push(this.domNode);
 		}
-
-		// ========================================================================
-		// Menubar Height Detection (for sticky search panel)
-		// ========================================================================
-
-		// Detect and track the TiddlyWiki menubar height for sticky panel positioning
-		var ownerDoc = this.widget && this.widget.document ? this.widget.document : document;
-		setupMenubarHeightTracking(ownerDoc);
 
 		// ========================================================================
 		// Extend API from Active Plugins
