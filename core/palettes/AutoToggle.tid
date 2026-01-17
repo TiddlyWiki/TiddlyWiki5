@@ -7,4 +7,4 @@ color-scheme: [{$:/info/browser/darkmode}!match[yes]then[light]else[dark]]
 settings: $:/palettes/AutoToggle/Settings
 palette-import@light: $:/palettes/TwentyTwenties
 palette-import@dark: $:/palettes/TwentyTwentiesDark
-category: 2025
+category: 2026
