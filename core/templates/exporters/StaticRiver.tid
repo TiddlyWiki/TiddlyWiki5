@@ -22,9 +22,7 @@ extension: .html
 <div id="styleArea">
 {{$:/boot/boot.css||$:/core/templates/css-tiddler}}
 </div>
-<style type="text/css">
-{{$:/core/ui/PageStylesheet||$:/core/templates/wikified-tiddler}}
-</style>
+{{$:/core/ui/RootStylesheet||$:/core/templates/wikified-tiddler}}
 </head>
 <body class="tc-body">
 {{$:/StaticBanner||$:/core/templates/html-tiddler}}
