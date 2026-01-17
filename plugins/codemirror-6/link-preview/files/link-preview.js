@@ -37,6 +37,14 @@ var TIDDLER_TITLE_OPERATORS = {
 	"list": true // operand is text reference (tiddler!!field or tiddler##index)
 };
 
+// Widget attributes that contain tiddler titles
+var TIDDLER_TITLE_WIDGET_ATTRS = {
+	"$link": ["to"],
+	"$tiddler": ["tiddler"],
+	"$transclude": ["tiddler"],
+	"$image": ["source"]
+};
+
 /**
  * Check if CamelCase wikilinks are enabled
  */
@@ -63,6 +71,67 @@ function getFilterOperatorName(state, operandNode) {
 		}
 	}
 	return null;
+}
+
+/**
+ * Get widget and attribute info for an AttributeValue node
+ * Returns { widgetName, attrName } or null
+ */
+function getWidgetAttributeInfo(valueNode) {
+	// Walk up to find the Attribute node
+	var current = valueNode.parent;
+	var attrName = null;
+
+	while(current) {
+		// Look for Attribute node with AttributeName child
+		if(current.name === "Attribute" || current.name === "WidgetAttribute") {
+			// Find the AttributeName child
+			for(var child = current.firstChild; child; child = child.nextSibling) {
+				if(child.name === "AttributeName") {
+					attrName = child;
+					break;
+				}
+			}
+			break;
+		}
+		current = current.parent;
+	}
+
+	if(!attrName) return null;
+
+	// Continue walking up to find the Widget node
+	while(current) {
+		if(current.name === "Widget" || current.name === "InlineWidget" ||
+			current.name === "SelfClosingWidget" || current.name === "HTMLOpenTag" ||
+			(current.name && current.name.match && current.name.match(/^Widget/))) {
+			// Find the WidgetName or TagName child
+			for(var child = current.firstChild; child; child = child.nextSibling) {
+				if(child.name === "WidgetName" || child.name === "TagName") {
+					return {
+						widgetNameNode: child,
+						attrNameNode: attrName
+					};
+				}
+			}
+			break;
+		}
+		current = current.parent;
+	}
+
+	return null;
+}
+
+/**
+ * Get widget and attribute info with text values
+ */
+function getWidgetAttributeInfoWithText(state, valueNode) {
+	var info = getWidgetAttributeInfo(valueNode);
+	if(!info) return null;
+
+	return {
+		widgetName: state.doc.sliceString(info.widgetNameNode.from, info.widgetNameNode.to),
+		attrName: state.doc.sliceString(info.attrNameNode.from, info.attrNameNode.to)
+	};
 }
 
 // ============================================================================
@@ -277,10 +346,11 @@ function getLinkAtPos(state, pos) {
 			return target;
 		}
 
-		// Check for filter operand - only if operator takes tiddler titles
+		// Check for filter operand - title shortcut [[title]] or operators that take tiddler titles
 		if(current.name === "FilterOperand") {
 			var opName = getFilterOperatorName(state, current);
-			if(opName && TIDDLER_TITLE_OPERATORS[opName]) {
+			// Handle: 1) title shortcut [[title]] (no operator), 2) operators that take tiddler titles
+			if(!opName || TIDDLER_TITLE_OPERATORS[opName]) {
 				var target = state.doc.sliceString(current.from, current.to);
 				// Remove quotes if present
 				if((target.startsWith("\"") && target.endsWith("\"")) ||
@@ -301,6 +371,23 @@ function getLinkAtPos(state, pos) {
 			}
 			current = current.parent;
 			continue;
+		}
+
+		// Check for widget attribute values that contain tiddler titles (e.g., <$link to="Title">)
+		if(current.name === "AttributeValue" || current.name === "AttributeValueContent") {
+			var attrInfo = getWidgetAttributeInfoWithText(state, current);
+			if(attrInfo && TIDDLER_TITLE_WIDGET_ATTRS[attrInfo.widgetName]) {
+				var validAttrs = TIDDLER_TITLE_WIDGET_ATTRS[attrInfo.widgetName];
+				if(validAttrs.indexOf(attrInfo.attrName) !== -1) {
+					var target = state.doc.sliceString(current.from, current.to);
+					// Remove quotes if present
+					if((target.startsWith("\"") && target.endsWith("\"")) ||
+						(target.startsWith("'") && target.endsWith("'"))) {
+						target = target.slice(1, -1);
+					}
+					return target;
+				}
+			}
 		}
 
 		current = current.parent;
