@@ -530,6 +530,7 @@ function extractAttrValue(attrs, attrName) {
 
 /**
  * Widget types that create variable scopes and how to extract their variables
+ * (Legacy version using text extraction - kept for backwards compatibility)
  */
 var scopeCreatingWidgets = {
 	"$set": function(attrs) {
@@ -650,45 +651,199 @@ var scopeCreatingWidgets = {
 };
 
 /**
+ * Widget types that create variable scopes - syntax tree based version
+ * attrMap is { attrName (lowercase): value (or null if dynamic) }
+ */
+var scopeCreatingWidgetsFromAttrMap = {
+	"$set": function(attrMap) {
+		var value = attrMap['name'];
+		return value ? [value] : [];
+	},
+	"$setvariable": function(attrMap) {
+		var value = attrMap['name'];
+		return value ? [value] : [];
+	},
+	"$qualify": function(attrMap) {
+		var value = attrMap['name'];
+		return value ? [value] : [];
+	},
+	"$let": function(attrMap) {
+		// All attributes are variable names
+		var vars = [];
+		for(var key in attrMap) {
+			if(attrMap.hasOwnProperty(key)) {
+				vars.push(key);
+			}
+		}
+		return vars;
+	},
+	"$vars": function(attrMap) {
+		// All attributes are variable names
+		var vars = [];
+		for(var key in attrMap) {
+			if(attrMap.hasOwnProperty(key)) {
+				vars.push(key);
+			}
+		}
+		return vars;
+	},
+	"$parameters": function(attrMap) {
+		// All attributes are parameter names (which become variables)
+		var vars = [];
+		for(var key in attrMap) {
+			if(attrMap.hasOwnProperty(key)) {
+				vars.push(key);
+			}
+		}
+		return vars;
+	},
+	"$list": function(attrMap) {
+		var vars = [];
+		if(attrMap['variable']) vars.push(attrMap['variable']);
+		if(attrMap['counter']) vars.push(attrMap['counter']);
+		return vars;
+	},
+	"$range": function(attrMap) {
+		var value = attrMap['variable'];
+		return value ? [value] : [];
+	},
+	"$wikify": function(attrMap) {
+		var value = attrMap['name'];
+		return value ? [value] : [];
+	},
+	"$keyboard": function(attrMap) {
+		return ["event-key", "event-code", "event-key-descriptor", "modifier"];
+	},
+	"$eventcatcher": function(attrMap) {
+		return {
+			vars: [
+				"modifier",
+				"event-mousebutton",
+				"event-type",
+				"tv-popup-coords",
+				"tv-popup-abs-coords",
+				"tv-widgetnode-width",
+				"tv-widgetnode-height",
+				"tv-selectednode-posx",
+				"tv-selectednode-posy",
+				"tv-selectednode-width",
+				"tv-selectednode-height",
+				"event-fromselected-posx",
+				"event-fromselected-posy",
+				"event-fromcatcher-posx",
+				"event-fromcatcher-posy",
+				"event-fromviewport-posx",
+				"event-fromviewport-posy"
+			],
+			prefixes: ["dom-", "event-detail-"]
+		};
+	},
+	"$messagecatcher": function(attrMap) {
+		return {
+			vars: ["list-event", "list-event-paramObject", "modifier"],
+			prefixes: ["event-", "event-paramObject-"]
+		};
+	}
+};
+
+/**
+ * Extract attribute value from a single Attribute syntax node
+ * @param {TreeCursor} attrCursor - Cursor positioned at an Attribute node
+ * @param {string} docText - Full document text
+ * @returns {{name: string, value: string|null}} Attribute name and value (null if dynamic)
+ */
+function extractSingleAttrValue(attrCursor, docText) {
+	var name = null;
+	var value = null;
+
+	// Save cursor position
+	var attrNode = attrCursor.node;
+	var innerCursor = attrNode.cursor();
+
+	if(!innerCursor.firstChild()) {
+		return {
+			name: null,
+			value: null
+		};
+	}
+
+	do {
+		if(innerCursor.name === "AttributeName") {
+			name = docText.slice(innerCursor.from, innerCursor.to);
+		} else if(innerCursor.name === "AttributeString" ||
+			innerCursor.name === "AttributeValue") {
+			// Simple string value - extract text, removing quotes if present
+			var rawValue = docText.slice(innerCursor.from, innerCursor.to);
+			// Remove surrounding quotes
+			if((rawValue.startsWith('"') && rawValue.endsWith('"')) ||
+				(rawValue.startsWith("'") && rawValue.endsWith("'"))) {
+				value = rawValue.slice(1, -1);
+			} else {
+				value = rawValue;
+			}
+		} else if(innerCursor.name === "AttributeIndirect" ||
+			innerCursor.name === "AttributeFiltered" ||
+			innerCursor.name === "AttributeSubstituted" ||
+			innerCursor.name === "AttributeVariable") {
+			// Dynamic value - can't statically determine
+			value = null;
+		}
+	} while(innerCursor.nextSibling());
+
+	return {
+		name: name,
+		value: value
+	};
+}
+
+/**
  * Extract variables defined by a widget node
  * @param {SyntaxNode} widgetNode - Widget or InlineWidget node
  * @param {string} docText - Full document text
  * @returns {{vars: string[], prefixes: string[]}} Object with variable names and prefixes
  */
 function extractWidgetScopeVariables(widgetNode, docText) {
-	// Find WidgetName child to get the widget type
-	// Note: Attributes are individual "Attribute" children, not wrapped in TagAttributes
+	// Find WidgetName and collect attributes from syntax tree
 	var cursor = widgetNode.cursor();
 	var widgetName = null;
-	var firstAttrStart = -1;
-	var lastAttrEnd = -1;
+	var attrMap = {}; // Map of attribute name (lowercase) -> value
 
-	cursor.firstChild();
+	if(!cursor.firstChild()) {
+		return {
+			vars: [],
+			prefixes: []
+		};
+	}
+
 	do {
 		if(cursor.name === "WidgetName") {
 			widgetName = docText.slice(cursor.from, cursor.to);
 		} else if(cursor.name === "Attribute") {
-			// Track range of all Attribute children
-			if(firstAttrStart === -1) {
-				firstAttrStart = cursor.from;
+			// Extract attribute name and value from syntax tree
+			var attr = extractSingleAttrValue(cursor, docText);
+			if(attr.name) {
+				attrMap[attr.name.toLowerCase()] = attr.value;
 			}
-			lastAttrEnd = cursor.to;
 		}
 	} while(cursor.nextSibling());
 
-	if(!widgetName || firstAttrStart === -1) return {
-		vars: [],
-		prefixes: []
-	};
+	if(!widgetName) {
+		return {
+			vars: [],
+			prefixes: []
+		};
+	}
 
-	var extractor = scopeCreatingWidgets[widgetName.toLowerCase()];
-	if(!extractor) return {
-		vars: [],
-		prefixes: []
-	};
+	// Get extractor for this widget type
+	var extractor = scopeCreatingWidgetsFromAttrMap[widgetName.toLowerCase()];
+	if(!extractor) {
+		return {
+			vars: [],
+			prefixes: []
+		};
+	}
 
-	var attrs = docText.slice(firstAttrStart, lastAttrEnd);
-	var result = extractor(attrs);
+	var result = extractor(attrMap);
 
 	// Normalize: if result is an array, convert to {vars, prefixes} format
 	if(Array.isArray(result)) {
@@ -741,6 +896,73 @@ function extractPragmaScopeVariables(pragmaNode, docText) {
  * @param {string} docText - Full document text
  * @returns {{vars: Set<string>, prefixes: string[]}} Object with variable names and prefixes in scope
  */
+/**
+ * Check if a node position is inside an inline conditional block.
+ * For inline parsing, <%if%> and <%endif%> are sibling Conditional nodes.
+ * This checks if the node is positioned between a <%if%> and matching <%endif%>.
+ * @param {SyntaxNode} node - The node to check
+ * @param {string} docText - Full document text
+ * @returns {boolean} True if inside an inline conditional
+ */
+function isInsideInlineConditional(node, docText) {
+	var nodePos = node.from;
+	var parent = node.parent;
+	if(!parent) return false;
+
+	// Collect all Conditional siblings
+	var conditionals = [];
+	var cursor = parent.cursor();
+	if(cursor.firstChild()) {
+		do {
+			if(cursor.name === "Conditional") {
+				var text = docText.slice(cursor.from, cursor.to);
+				var type = null;
+				if(/<%\s*if\b/.test(text)) type = "if";
+				else if(/<%\s*endif\s*%>/.test(text)) type = "endif";
+				if(type) {
+					conditionals.push({
+						type: type,
+						from: cursor.from,
+						to: cursor.to
+					});
+				}
+			}
+		} while(cursor.nextSibling());
+	}
+
+	// Sort by position
+	conditionals.sort(function(a, b) {
+		return a.from - b.from;
+	});
+
+	// Check if nodePos is between an <%if%> and matching <%endif%>
+	var depth = 0;
+	var lastIfStart = -1;
+	for(var i = 0; i < conditionals.length; i++) {
+		var cond = conditionals[i];
+		if(cond.type === "if") {
+			if(depth === 0) lastIfStart = cond.to;
+			depth++;
+		} else if(cond.type === "endif") {
+			depth--;
+			if(depth === 0 && lastIfStart !== -1) {
+				// Check if nodePos is between this <%if%> and <%endif%>
+				if(nodePos > lastIfStart && nodePos < cond.from) {
+					return true;
+				}
+				lastIfStart = -1;
+			}
+		}
+	}
+
+	// Also check if we're after an unmatched <%if%> (still typing)
+	if(depth > 0 && lastIfStart !== -1 && nodePos > lastIfStart) {
+		return true;
+	}
+
+	return false;
+}
+
 function getVariablesInScope(node, docText) {
 	var scopeVars = new Set();
 	var scopePrefixes = [];
@@ -784,6 +1006,16 @@ function getVariablesInScope(node, docText) {
 			vars.forEach(function(v) {
 				scopeVars.add(v);
 			});
+		}
+
+		// Check for ConditionalBlock (<%if%> provides "condition" variable)
+		if(typeName === "ConditionalBlock") {
+			scopeVars.add("condition");
+		}
+
+		// Check for inline conditional siblings (Conditional nodes are siblings, not parents)
+		if(isInsideInlineConditional(current, docText)) {
+			scopeVars.add("condition");
 		}
 
 		current = current.parent;
@@ -1919,12 +2151,9 @@ function findUnclosedWidgets(tree, state) {
 
 							if(closeCount >= openCount && openCount > 0) {
 								// Block contains at least as many closing tags as opening - the opening is matched
-								// Don't add to htmlStack
-								if(closeCount === openCount) {
-									// Perfectly balanced - skip iterating children entirely
-									return false;
-								}
-								// More closing than opening - there are orphans, continue iteration but don't add to stack
+								// Don't add to htmlStack, but DO continue iterating children
+								// because children may contain orphan closing tags for OTHER tag types
+								// (e.g., an orphan </$set> inside a balanced <span>...</span>)
 								return;
 							}
 							// Check if opening tag is complete (has closing >)
@@ -2119,23 +2348,66 @@ function findUnclosedWidgets(tree, state) {
 				var closeMatch = closeText.match(/<\/(\$[\w\-\.]+)>/);
 				if(closeMatch) {
 					var closeName = closeMatch[1];
-					var foundMatch = false;
-					// Find matching open tag (search from end)
-					for(var i = widgetStack.length - 1; i >= 0; i--) {
-						if(widgetStack[i].name === closeName && !widgetStack[i].closed) {
-							widgetStack[i].closed = true;
-							foundMatch = true;
+
+					// Check if this WidgetEnd is properly paired using tree structure.
+					// A closing tag is properly paired ONLY if its immediate Widget/InlineWidget
+					// ancestor has a matching name. Walking up further would incorrectly match
+					// orphan closing tags with outer widgets they shouldn't close.
+					var isProperlyPairedByTree = false;
+					var ancestor = node.node.parent;
+					while(ancestor) {
+						// Stop at definition boundaries
+						if(ancestor.type.name === "MacroDefinition" || ancestor.type.name === "ProcedureDefinition" ||
+							ancestor.type.name === "FunctionDefinition" || ancestor.type.name === "WidgetDefinition") {
 							break;
 						}
+						if(ancestor.type.name === "Widget" || ancestor.type.name === "InlineWidget") {
+							// Check if this widget has matching name
+							var ancestorCursor = ancestor.cursor();
+							if(ancestorCursor.firstChild()) {
+								do {
+									if(ancestorCursor.name === "WidgetName") {
+										var ancestorWidgetName = state.doc.sliceString(ancestorCursor.from, ancestorCursor.to);
+										if(ancestorWidgetName === closeName) {
+											isProperlyPairedByTree = true;
+										}
+										break;
+									}
+								} while(ancestorCursor.nextSibling());
+							}
+							// Stop at first Widget/InlineWidget - only check immediate parent widget
+							break;
+						}
+						ancestor = ancestor.parent;
 					}
-					// Track orphan closing tag (no matching opening widget)
-					if(!foundMatch) {
+
+					// Tree-based check is authoritative for determining if a closing tag is
+					// properly paired. If the parent widget name doesn't match, it's an orphan.
+					if(isProperlyPairedByTree) {
+						// Properly paired - mark the corresponding stack entry as closed
+						for(var i = widgetStack.length - 1; i >= 0; i--) {
+							if(widgetStack[i].name === closeName && !widgetStack[i].closed) {
+								widgetStack[i].closed = true;
+								break;
+							}
+						}
+					} else {
+						// Not properly paired according to tree structure.
+						// This is an orphan/misplaced closing tag.
 						orphanClosingTags.push({
 							name: closeName,
 							from: node.from,
 							to: node.to,
 							isWidget: true
 						});
+						// Also mark any matching stack entry as closed to prevent
+						// false "unclosed widget" reports (the parser may have paired them)
+						for(var i = widgetStack.length - 1; i >= 0; i--) {
+							if(widgetStack[i].name === closeName && !widgetStack[i].closed) {
+								widgetStack[i].closed = true;
+								break;
+							}
+						}
 					}
 				}
 			}
@@ -2727,49 +2999,89 @@ function findUnclosedConditionals(tree, state) {
 				}
 			}
 
-			// Also check for inline Conditional nodes (<%if%> on single line without block structure)
-			if(nodeType === "Conditional") {
-				var text = state.doc.sliceString(node.from, node.to);
+		}
+	});
 
-				// Check if inside a ConditionalBlock
-				var parent = node.node.parent;
-				var inBlock = false;
-				while(parent) {
-					if(parent.name === "ConditionalBlock") {
-						inBlock = true;
-						break;
-					}
-					parent = parent.parent;
-				}
+	// Check inline Conditional nodes (<%if%>, <%elseif%>, <%else%>, <%endif%> in inline mode)
+	// These need to be matched as pairs since they're not grouped into ConditionalBlock
+	var inlineConditionals = [];
+	tree.iterate({
+		enter: function(node) {
+			if(node.type.name !== "Conditional") return;
 
-				// If inside a ConditionalBlock, the block-level check handles it
-				if(inBlock) {
-					return;
-				}
+			// Skip if inside attribute values
+			if(isInsideAttributeValue(tree, node.from)) return;
 
-				// Not in any block - check for issues
-				if(/<%\s*if\b/.test(text)) {
-					var insertInfo = findBestInsertPosition(state, node.to, docLength, []);
-					issues.push({
-						from: node.from,
-						to: node.to,
-						message: "Unclosed <%if (missing <%endif%>)",
-						insertAt: insertInfo.pos,
-						insertType: insertInfo.type
-					});
+			// Check if inside a ConditionalBlock
+			var parent = node.node.parent;
+			var inBlock = false;
+			while(parent) {
+				if(parent.name === "ConditionalBlock") {
+					inBlock = true;
+					break;
 				}
+				parent = parent.parent;
+			}
 
-				// Check for standalone <%endif without <%if
-				if(/<%\s*endif\s*%>/.test(text)) {
-					issues.push({
-						from: node.from,
-						to: node.to,
-						message: "Unexpected <%endif%> without matching <%if"
-					});
-				}
+			// If inside a ConditionalBlock, the block-level check handles it
+			if(inBlock) return;
+
+			var text = state.doc.sliceString(node.from, node.to);
+			var type = null;
+			if(/<%\s*if\b/.test(text)) type = "if";
+			else if(/<%\s*elseif\b/.test(text)) type = "elseif";
+			else if(/<%\s*else\s*%>/.test(text)) type = "else";
+			else if(/<%\s*endif\s*%>/.test(text)) type = "endif";
+
+			if(type) {
+				inlineConditionals.push({
+					type: type,
+					from: node.from,
+					to: node.to
+				});
 			}
 		}
 	});
+
+	// Match inline conditionals using depth tracking
+	// Sort by position
+	inlineConditionals.sort(function(a, b) {
+		return a.from - b.from;
+	});
+
+	var ifStack = []; // Stack of unmatched <%if%> nodes
+	for(var i = 0; i < inlineConditionals.length; i++) {
+		var cond = inlineConditionals[i];
+		if(cond.type === "if") {
+			ifStack.push(cond);
+		} else if(cond.type === "endif") {
+			if(ifStack.length > 0) {
+				// Matched - pop the last <%if%>
+				ifStack.pop();
+			} else {
+				// Unmatched <%endif%>
+				issues.push({
+					from: cond.from,
+					to: cond.to,
+					message: "Unexpected <%endif%> without matching <%if"
+				});
+			}
+		}
+		// <%elseif%> and <%else%> don't affect the stack - they're inside existing if blocks
+	}
+
+	// Any remaining items in ifStack are unmatched <%if%>
+	for(var j = 0; j < ifStack.length; j++) {
+		var unclosedIf = ifStack[j];
+		var insertInfo = findBestInsertPosition(state, unclosedIf.to, docLength, []);
+		issues.push({
+			from: unclosedIf.from,
+			to: unclosedIf.to,
+			message: "Unclosed <%if (missing <%endif%>)",
+			insertAt: insertInfo.pos,
+			insertType: insertInfo.type
+		});
+	}
 
 	// Check conditional balance inside attribute values (isolated contexts)
 	// Find all AttributeString nodes and check their content

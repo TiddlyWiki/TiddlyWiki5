@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/theme-everforest",
   "name": "CodeMirror 6 Everforest Theme",
   "description": "Everforest green color scheme for CodeMirror 6 (Dark, Dark Hard, Light)",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme license",

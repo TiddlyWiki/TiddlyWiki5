@@ -546,7 +546,7 @@ function findJavaScriptModule(moduleType, name) {
 			}
 		}
 	} catch (e) {
-		console.error("findJavaScriptModule error:", e);
+		// Silently ignore errors
 	}
 
 	return null;
@@ -1152,7 +1152,13 @@ function handleKeyDown(event, view) {
 
 		// If we have a mouse position, check for link
 		if(lastMousePos) {
-			var pos = view.posAtCoords(lastMousePos);
+			var pos;
+			try {
+				pos = view.posAtCoords(lastMousePos);
+			} catch (e) {
+				// posAtCoords can throw if view structure is inconsistent
+				return;
+			}
 			if(pos !== null) {
 				var context = getContextFromView(view);
 				var link = getLinkAtPos(view.state, pos, context);
@@ -1179,7 +1185,14 @@ function handleMouseMove(event, view) {
 
 	if(!ctrlHeld) return;
 
-	var pos = view.posAtCoords(lastMousePos);
+	var pos;
+	try {
+		pos = view.posAtCoords(lastMousePos);
+	} catch (e) {
+		// posAtCoords can throw if view structure is inconsistent
+		clearHighlight(view);
+		return;
+	}
 	if(pos === null) {
 		clearHighlight(view);
 		return;
@@ -1205,10 +1218,16 @@ function handleClick(event, view) {
 	var ctrlKey = event.ctrlKey || event.metaKey;
 	if(!ctrlKey) return false;
 
-	var pos = view.posAtCoords({
-		x: event.clientX,
-		y: event.clientY
-	});
+	var pos;
+	try {
+		pos = view.posAtCoords({
+			x: event.clientX,
+			y: event.clientY
+		});
+	} catch (e) {
+		// posAtCoords can throw if view structure is inconsistent
+		return false;
+	}
 	if(pos === null) return false;
 
 	var context = getContextFromView(view);
@@ -1273,10 +1292,16 @@ function handleMouseDown(event, view) {
 	var ctrlKey = event.ctrlKey || event.metaKey;
 	if(!ctrlKey) return false;
 
-	var pos = view.posAtCoords({
-		x: event.clientX,
-		y: event.clientY
-	});
+	var pos;
+	try {
+		pos = view.posAtCoords({
+			x: event.clientX,
+			y: event.clientY
+		});
+	} catch (e) {
+		// posAtCoords can throw if view structure is inconsistent
+		return false;
+	}
 	if(pos === null) return false;
 
 	var context = getContextFromView(view);

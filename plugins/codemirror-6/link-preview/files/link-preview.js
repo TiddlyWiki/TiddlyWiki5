@@ -432,10 +432,18 @@ function handleMouseMove(event, view) {
 	}
 
 	// Get position from coordinates
-	var pos = view.posAtCoords({
-		x: event.clientX,
-		y: event.clientY
-	});
+	var pos;
+	try {
+		pos = view.posAtCoords({
+			x: event.clientX,
+			y: event.clientY
+		});
+	} catch (e) {
+		// posAtCoords can throw "Invalid child in posBefore" if the view
+		// structure is inconsistent during hover checking
+		scheduleHide();
+		return;
+	}
 	if(pos === null) {
 		scheduleHide();
 		return;

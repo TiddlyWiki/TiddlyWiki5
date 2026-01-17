@@ -134,7 +134,8 @@ exports.plugin = {
 		var completionSource = core.javascriptCompletionSource;
 		if(completionSource && context.engine && context.engine.registerCompletionSource) {
 			// Register with engine's completion system instead of language data
-			context.engine.registerCompletionSource(completionSource, 50);
+			// Pass plugin reference so it can be unregistered when plugin becomes inactive
+			context.engine.registerCompletionSource(completionSource, 50, this);
 		} else {
 			// Fallback: use the data.of extension
 			var completionExt = core.javascriptCompletionExtension;

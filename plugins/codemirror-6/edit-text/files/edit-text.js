@@ -40,7 +40,6 @@ try {
 	useCodeMirror = !!(CodeMirrorEngine && CodeMirrorSimpleEngine);
 } catch (e) {
 	// CodeMirror not available, will use fallback
-	console.log("CodeMirror 6 engine not available, falling back to FramedEngine/SimpleEngine");
 }
 
 // If CodeMirror is not available, use native TiddlyWiki engines and exit early

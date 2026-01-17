@@ -595,8 +595,6 @@ function discoverPlugins() {
 
 					// Check for duplicate plugin names
 					if(seenPluginNames[pluginDef.name]) {
-						console.warn("[engine discoverPlugins] DUPLICATE plugin name detected:", pluginDef.name,
-							"from:", title, "- already registered from:", seenPluginNames[pluginDef.name]);
 						return; // Skip this duplicate
 					}
 					seenPluginNames[pluginDef.name] = title;
@@ -1580,16 +1578,7 @@ class CodeMirrorEngine {
 							// Plugin is NOT active - add placeholder compartment
 							// This allows reconfiguration later when type changes
 							if(compartmentName && this._compartments[compartmentName]) {
-								// For language plugins (compartment name ends with "Language"),
-								// use plain text language to ensure no syntax highlighting
-								var compartmentContent = [];
-								if(compartmentName.slice(-8) === "Language") {
-									var plainLang = getPlainTextLanguage();
-									if(plainLang) {
-										compartmentContent = [plainLang];
-									}
-								}
-								extensions.push(this._compartments[compartmentName].of(compartmentContent));
+								extensions.push(this._compartments[compartmentName].of([]));
 							}
 						}
 					} else if(hasConditionJ && !hasCompartment) {
@@ -1609,6 +1598,23 @@ class CodeMirrorEngine {
 					}
 				}
 			} catch (_e) {}
+		}
+
+		// Check if any language plugin is active
+		// If not, add plainTextLanguage as a fallback to prevent undefined syntax tree behavior
+		var hasActiveLanguagePlugin = false;
+		for(var k = 0; k < this._activePlugins.length; k++) {
+			var activePlugin = this._activePlugins[k];
+			if(activePlugin.name && activePlugin.name.indexOf("lang-") === 0) {
+				hasActiveLanguagePlugin = true;
+				break;
+			}
+		}
+		if(!hasActiveLanguagePlugin) {
+			var fallbackLang = getPlainTextLanguage();
+			if(fallbackLang) {
+				extensions.push(fallbackLang);
+			}
 		}
 
 		// User-provided extensions
@@ -2404,6 +2410,8 @@ class CodeMirrorEngine {
 				} else if(!shouldBeActive && wasActive) {
 					var idx = this._activePlugins.indexOf(plugin);
 					if(idx >= 0) this._activePlugins.splice(idx, 1);
+					// Unregister any completion sources owned by this plugin
+					this.unregisterCompletionSourcesForPlugin(plugin);
 				}
 			}
 		}
@@ -2430,8 +2438,8 @@ class CodeMirrorEngine {
 	}
 
 	/**
-	 * Refresh language plugins based on current tiddler state (tags, fields)
-	 * Call this when the tiddler being edited has changed (e.g., tags added/removed)
+	 * Refresh language plugins based on current tiddler state (tags, fields, type)
+	 * Call this when the tiddler being edited has changed (e.g., tags added/removed, type changed)
 	 */
 	refreshLanguageConditions() {
 		if(this._destroyed) return;
@@ -2445,6 +2453,18 @@ class CodeMirrorEngine {
 
 		var tiddler = wiki.getTiddler(tiddlerTitle);
 		if(!tiddler) return;
+
+		// Check if type has changed (check codemirror-type field first, then type field)
+		var newType = tiddler.fields["codemirror-type"] || tiddler.fields.type || "";
+		var oldType = this._currentType || "";
+
+		if(newType !== oldType) {
+			// Type changed - trigger full language switch
+			this.setType(newType);
+			// Update context fields after type change
+			this._pluginContext.tiddlerFields = tiddler.fields;
+			return;
+		}
 
 		// Check if tags have actually changed
 		var oldTags = this._pluginContext.tiddlerFields && this._pluginContext.tiddlerFields.tags;
@@ -2526,6 +2546,8 @@ class CodeMirrorEngine {
 				} else if(!shouldBeActive && wasActive) {
 					var idx = this._activePlugins.indexOf(plugin);
 					if(idx >= 0) this._activePlugins.splice(idx, 1);
+					// Unregister any completion sources owned by this plugin
+					this.unregisterCompletionSourcesForPlugin(plugin);
 				}
 			}
 		}
@@ -2613,19 +2635,53 @@ class CodeMirrorEngine {
 	 * Register a completion source for use by the autocomplete system
 	 * @param {Function} source - A CM6 completion source function
 	 * @param {number} priority - Higher priority sources are tried first (default: 0)
+	 * @param {Object} plugin - Optional plugin that owns this source (for automatic cleanup)
 	 */
-	registerCompletionSource(source, priority) {
+	registerCompletionSource(source, priority, plugin) {
 		if(!isFunction(source)) return;
+
+		// Check if already registered (same source and plugin)
+		for(var i = 0; i < this._completionSources.length; i++) {
+			if(this._completionSources[i].source === source) {
+				return; // Already registered
+			}
+		}
 
 		this._completionSources.push({
 			source: source,
-			priority: priority || 0
+			priority: priority || 0,
+			plugin: plugin || null
 		});
 
 		// Sort by priority descending
 		this._completionSources.sort(function(a, b) {
 			return b.priority - a.priority;
 		});
+	}
+
+	/**
+	 * Unregister a completion source
+	 * @param {Function} source - The completion source to unregister
+	 */
+	unregisterCompletionSource(source) {
+		for(var i = this._completionSources.length - 1; i >= 0; i--) {
+			if(this._completionSources[i].source === source) {
+				this._completionSources.splice(i, 1);
+			}
+		}
+	}
+
+	/**
+	 * Unregister all completion sources owned by a specific plugin
+	 * @param {Object} plugin - The plugin whose sources should be unregistered
+	 */
+	unregisterCompletionSourcesForPlugin(plugin) {
+		if(!plugin) return;
+		for(var i = this._completionSources.length - 1; i >= 0; i--) {
+			if(this._completionSources[i].plugin === plugin) {
+				this._completionSources.splice(i, 1);
+			}
+		}
 	}
 
 	/**

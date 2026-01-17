@@ -79,7 +79,7 @@ function getPageClasses() {
 			// Ignore stylesheet access errors
 		}
 	} catch (e) {
-		console.warn("Error collecting CSS classes:", e);
+		// Silently ignore errors
 	}
 
 	_classCache.classes = Object.keys(classSet).sort();

@@ -528,7 +528,7 @@ exports.prototype._buildSettingsSnapshot = function() {
 	return {
 		// identity/context
 		tiddlerTitle: this.editTitle,
-		tiddlerType: this.editType || "",
+		tiddlerType: this.editType || undefined, // Only override if explicitly set, else let engine read from tiddler
 		hasStylesheetTag: !!this.hasStylesheetTag,
 		readOnly: !!this.isDisabled || this.getAttribute("readonly", "no") === "yes",
 
