@@ -225,6 +225,17 @@ function showTooltip(content, x, y) {
 
 	tooltip.style.display = "flex";
 
+	// Adjust body height to account for CSS scale(0.75) transform
+	// The inner content is rendered at 133.33% width then scaled to 75%,
+	// so we need to set the container height to 75% of the inner's layout height
+	var bodyInner = tooltip.querySelector(".cm6-preview-body-inner");
+	if(bodyInner) {
+		var bodyDiv = bodyInner.parentNode;
+		if(bodyDiv) {
+			bodyDiv.style.height = (bodyInner.offsetHeight * 0.75) + "px";
+		}
+	}
+
 	// Position tooltip
 	var rect = tooltip.getBoundingClientRect();
 	var viewWidth = window.innerWidth;
