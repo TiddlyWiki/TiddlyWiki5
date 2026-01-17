@@ -105,7 +105,7 @@ muted-foreground: [tf.interpolate-colours[base-paper],[base-ink],[0.3]]
 network-activity-foreground: #448844
 notification-background: [tf.colour[base-tertiary]colour-set-oklch:l[0.9]]
 notification-border: [tf.colour[base-tertiary]colour-set-oklch:l[0.2]]
-page-background: [tf.colour[base-background]] /* mopthing */
+page-background: [tf.colour[base-background]]
 pre-background: [tf.interpolate-colours[base-paper],[base-tertiary],[0.1]]
 pre-border: [tf.interpolate-colours[base-paper],[base-tertiary],[0.6]]
 primary: [tf.colour[base-primary]]
