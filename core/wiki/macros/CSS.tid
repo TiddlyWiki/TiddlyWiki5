@@ -150,7 +150,7 @@ tags: $:/tags/Macro
 \end tf.check-colour-contrast
 
 \function tf.interpolate-colours(paletteEntryA,paletteEntryB,weight)
-[function[colour],<paletteEntryA>] [function[colour],<paletteEntryB>] :apply[<weight>colour-interpolate:oklch<$1>,<$2>]
+[function[colour],<paletteEntryA>] =>colourA [function[colour],<paletteEntryB>] =>colourB [<weight>colour-interpolate:oklch<colourA>,<colourB>]
 \end tf.interpolate-colours
 
 \procedure datauri(title)

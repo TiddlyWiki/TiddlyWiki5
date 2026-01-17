@@ -24,4 +24,3 @@ To make all of these new features possible, this PR also includes some useful ne
 * Several new filter operators for manipulating colour values. The underlying functionality comes from the [[color.js|https://colorjs.io/]] library
 * New media query tracking mechanism that can track the results of any CSS media query (not just dark mode), storing the results in a shadow `$:/info/...` tiddler
 * New `changecount` filter operator
-* New `:apply` filter run prefix (to be replaced by the `:let` filter run prefix in [[#8972|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8972]]))
