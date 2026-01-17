@@ -42,7 +42,7 @@ exports["colour-set-alpha"] = makeSerialColourOperator(function (colour, operato
 	return colour.display().toString();
 });
 
-exports["colour-contrast"] = makeParallelColourOperator(function (colours, operator) {
+exports["colour-contrast"] = makeParallelColourOperator(function (colours) {
 	var colourContrasts = [];
 	$tw.utils.each(colours,function(colour,index) {
 		if(!colour) {
