@@ -6,6 +6,7 @@ module-type: utils
 Custom errors for TiddlyWiki.
 
 \*/
+
 function TranscludeRecursionError() {
 	Error.apply(this,arguments);
 	this.signatures = Object.create(null);
