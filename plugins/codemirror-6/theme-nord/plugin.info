@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/theme-nord",
   "name": "CodeMirror 6 Nord Theme",
   "description": "Nord color scheme for CodeMirror 6 (dark and light variants)",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme license",

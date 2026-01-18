@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/theme-monokai",
   "name": "CodeMirror 6 Monokai Theme",
   "description": "Classic Monokai theme for CodeMirror 6 (Dark, Pro, Light variants)",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme license",

@@ -667,35 +667,17 @@ var scopeCreatingWidgetsFromAttrMap = {
 		var value = attrMap['name'];
 		return value ? [value] : [];
 	},
-	"$let": function(attrMap) {
-		// All attributes are variable names
-		var vars = [];
-		for(var key in attrMap) {
-			if(attrMap.hasOwnProperty(key)) {
-				vars.push(key);
-			}
-		}
-		return vars;
+	"$let": function(attrMap, attrOriginalNames) {
+		// All attributes are variable names - use original names to preserve case
+		return attrOriginalNames ? attrOriginalNames.slice() : [];
 	},
-	"$vars": function(attrMap) {
-		// All attributes are variable names
-		var vars = [];
-		for(var key in attrMap) {
-			if(attrMap.hasOwnProperty(key)) {
-				vars.push(key);
-			}
-		}
-		return vars;
+	"$vars": function(attrMap, attrOriginalNames) {
+		// All attributes are variable names - use original names to preserve case
+		return attrOriginalNames ? attrOriginalNames.slice() : [];
 	},
-	"$parameters": function(attrMap) {
-		// All attributes are parameter names (which become variables)
-		var vars = [];
-		for(var key in attrMap) {
-			if(attrMap.hasOwnProperty(key)) {
-				vars.push(key);
-			}
-		}
-		return vars;
+	"$parameters": function(attrMap, attrOriginalNames) {
+		// All attributes are parameter names (which become variables) - use original names to preserve case
+		return attrOriginalNames ? attrOriginalNames.slice() : [];
 	},
 	"$list": function(attrMap) {
 		var vars = [];
@@ -806,7 +788,8 @@ function extractWidgetScopeVariables(widgetNode, docText) {
 	// Find WidgetName and collect attributes from syntax tree
 	var cursor = widgetNode.cursor();
 	var widgetName = null;
-	var attrMap = {}; // Map of attribute name (lowercase) -> value
+	var attrMap = {}; // Map of attribute name (lowercase) -> value (for attribute lookup)
+	var attrOriginalNames = []; // Original attribute names with preserved case (for $let/$vars/$parameters)
 
 	if(!cursor.firstChild()) {
 		return {
@@ -822,7 +805,10 @@ function extractWidgetScopeVariables(widgetNode, docText) {
 			// Extract attribute name and value from syntax tree
 			var attr = extractSingleAttrValue(cursor, docText);
 			if(attr.name) {
+				// Store lowercase for widgets that look up specific attribute names (like 'name', 'variable')
 				attrMap[attr.name.toLowerCase()] = attr.value;
+				// Keep original names for $let/$vars/$parameters which use attr names as variable names
+				attrOriginalNames.push(attr.name);
 			}
 		}
 	} while(cursor.nextSibling());
@@ -843,7 +829,7 @@ function extractWidgetScopeVariables(widgetNode, docText) {
 		};
 	}
 
-	var result = extractor(attrMap);
+	var result = extractor(attrMap, attrOriginalNames);
 
 	// Normalize: if result is an array, convert to {vars, prefixes} format
 	if(Array.isArray(result)) {

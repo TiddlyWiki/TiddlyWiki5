@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/theme-material",
   "name": "CodeMirror 6 Material Theme",
   "description": "Material Design theme for CodeMirror 6 (Default, Ocean, Palenight, Darker, Lighter)",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme license",
