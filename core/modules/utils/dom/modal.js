@@ -43,20 +43,31 @@ class Modal {
 			currentTiddler: title
 		}, options.variables);
 
+		// Get navigator-specific variables from source widget if not already provided
+		const sourceWidget = options.event && options.event.widget ? options.event.widget : null;
+		if(sourceWidget) {
+			if(!variables["tv-story-list"] && sourceWidget.variables["tv-story-list"]) {
+				variables["tv-story-list"] = sourceWidget.variables["tv-story-list"].value;
+			}
+			if(!variables["tv-history-list"] && sourceWidget.variables["tv-history-list"]) {
+				variables["tv-history-list"] = sourceWidget.variables["tv-history-list"].value;
+			}
+		}
+
 		// Branch to appropriate implementation
-		// Allow forcing legacy mode via $forceLegacy parameter for testing
-		const useLegacy = variables["$forceLegacy"] === "yes";
+		// Allow forcing legacy mode via forceLegacy parameter for testing
+		const useLegacy = variables["forceLegacy"] === "yes";
 		if(this.supportsDialog && !useLegacy) {
-			this.displayWithDialog(title, options, variables);
+			this.displayWithDialog(title, options, variables, sourceWidget);
 		} else {
-			this.displayWithDiv(title, options, variables);
+			this.displayWithDiv(title, options, variables, sourceWidget);
 		}
 	}
 
 	/*
 	Display modal using native <dialog> element (modern browsers)
 	*/
-	displayWithDialog(title, options, variables) {
+	displayWithDialog(title, options, variables, sourceWidget) {
 
 		// Create the dialog element
 		const dialog = this.srcDocument.createElement("dialog");
@@ -66,12 +77,10 @@ class Modal {
 		this.adjustPageClass();
 	
 		// Add classes
-		$tw.utils.addClass(dialog,"tc-modal");
-		if(variables["$class"]) {
-			$tw.utils.addClass(dialog,variables["$class"]);
+		$tw.utils.addClass(dialog,"tc-modal-dialog");
+		if(variables["class"]) {
+			$tw.utils.addClass(dialog, variables["class"]);
 		}
-
-		// Create the navigator widget with story template transcluded inside
 		const navigatorTree = {
 			"type": "navigator",
 			"attributes": {
@@ -93,7 +102,7 @@ class Modal {
 		const navigatorWidgetNode = new navigator.navigator(navigatorTree, {
 			wiki: this.wiki,
 			document: this.srcDocument,
-			parentWidget: options.event && options.event.widget ? options.event.widget : $tw.rootWidget
+			parentWidget: sourceWidget || $tw.rootWidget
 		});
 		navigatorWidgetNode.render(dialog,null);
 
@@ -101,8 +110,12 @@ class Modal {
 		const templateWidgetNode = this.wiki.makeTranscludeWidget("$:/core/ui/StoryTiddlerTemplate",{
 			parentWidget: navigatorWidgetNode,
 			document: this.srcDocument,
-			variables,
 			importPageMacros: true
+		});
+		
+		// Set passed variables to override any inherited from source widget
+		$tw.utils.each(variables, function(value, name) {
+			templateWidgetNode.setVariable(name, value);
 		});
 		templateWidgetNode.render(dialog,null);
 	
@@ -128,7 +141,7 @@ class Modal {
 		};
 		templateWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 		// Whether to close the modal dialog when the backdrop (area outside the modal) is clicked
-		if(variables["$maskClosable"] !== "no") {
+		if(variables["maskClosable"] !== "no") {
 			dialog.addEventListener("click", event => {
 			// Close if clicking on the dialog backdrop (not its contents)
 				if(event.target === dialog) {
@@ -145,8 +158,19 @@ class Modal {
 	/*
 	Display modal using div-based approach (legacy browsers)
 	*/
-	displayWithDiv(title, options, variables) {
-		const duration = $tw.utils.getAnimationDuration();
+	displayWithDiv(title, options, variables, sourceWidget) {
+
+		// Collect all variables from source widget (walking up the widget tree)
+		// Exclude any that are already in passed variables to avoid overriding them
+		const sourceVariableObjects = {};
+		if(sourceWidget) {
+			for(var name in sourceWidget.variables) {
+				if(!variables[name]) {
+					sourceVariableObjects[name] = sourceWidget.variables[name];
+				}
+			}
+
+		}
 
 		// Create the wrapper divs
 		const wrapper = this.srcDocument.createElement("div");
@@ -159,8 +183,8 @@ class Modal {
 		
 		// Add classes
 		$tw.utils.addClass(wrapper, "tc-modal-wrapper");
-		if(variables["$class"]) {
-			$tw.utils.addClass(wrapper, variables["$class"]);
+		if(variables["class"]) {
+			$tw.utils.addClass(wrapper, variables["class"]);
 		}
 		$tw.utils.addClass(modalBackdrop, "tc-modal-backdrop");
 		$tw.utils.addClass(modalWrapper, "tc-modal");
@@ -191,7 +215,7 @@ class Modal {
 		const navigatorWidgetNode = new navigator.navigator(navigatorTree, {
 			wiki: this.wiki,
 			document: this.srcDocument,
-			parentWidget: options.event && options.event.widget ? options.event.widget : $tw.rootWidget
+			parentWidget: $tw.rootWidget
 		});
 		navigatorWidgetNode.render(modalWrapper, null);
 
@@ -199,8 +223,28 @@ class Modal {
 		const templateWidgetNode = this.wiki.makeTranscludeWidget("$:/core/ui/StoryTiddlerTemplate", {
 			parentWidget: navigatorWidgetNode,
 			document: this.srcDocument,
-			variables,
 			importPageMacros: true
+		});
+		
+		// Copy all variables from source widget (using pre-collected variable objects)
+		$tw.utils.each(sourceVariableObjects, function(variable, name) {
+			templateWidgetNode.setVariable(
+				name,
+				variable.value,
+				variable.params,
+				variable.isMacroDefinition,
+				{
+					isFunctionDefinition: variable.isFunctionDefinition,
+					isProcedureDefinition: variable.isProcedureDefinition,
+					isWidgetDefinition: variable.isWidgetDefinition,
+					configTrimWhiteSpace: variable.configTrimWhiteSpace
+				}
+			);
+		});
+		
+		// Set passed variables, overriding any from source widget
+		$tw.utils.each(variables, function(value, name) {
+			templateWidgetNode.setVariable(name, value);
 		});
 		templateWidgetNode.render(modalWrapper, null);
 		
@@ -217,44 +261,22 @@ class Modal {
 			// Decrease the modal count and adjust the body class
 			this.modalCount--;
 			this.adjustPageClass();
-			// Fade out the backdrop
-			$tw.utils.forceLayout(modalBackdrop);
-			$tw.utils.setStyle(modalBackdrop, [
-				{opacity: "0"}
-			]);
-			// Set up an event for the transition end
-			this.srcWindow.setTimeout(() => {
-				if(wrapper.parentNode) {
-					// Remove the modal message from the DOM
-					this.srcDocument.body.removeChild(wrapper);
-				}
-			}, duration);
+			// Remove the modal from the DOM
+			if(wrapper.parentNode) {
+				this.srcDocument.body.removeChild(wrapper);
+			}
 			// Don't let anyone else handle the tm-close-tiddler message
 			return false;
 		};
 		templateWidgetNode.addEventListener("tm-close-tiddler", closeHandler, false);
 		
 		// Whether to close the modal dialog when the backdrop is clicked
-		if(variables["$maskClosable"] !== "no") {
+		if(variables["maskClosable"] !== "no") {
 			modalBackdrop.addEventListener("click", closeHandler, false);
 		}
 		
-		// Set the initial styles for the message
-		$tw.utils.setStyle(modalBackdrop, [
-			{opacity: "0"}
-		]);
-		// Put the message into the document
+		// Add the modal to the document
 		this.srcDocument.body.appendChild(wrapper);
-		// Set up animation for the backdrop fade-in
-		$tw.utils.setStyle(modalBackdrop, [
-			{transition: "opacity " + duration + "ms ease-out"}
-		]);
-		// Force layout
-		$tw.utils.forceLayout(modalBackdrop);
-		// Set final animated style
-		$tw.utils.setStyle(modalBackdrop, [
-			{opacity: "0.7"}
-		]);
 	}
 
 	adjustPageClass() {

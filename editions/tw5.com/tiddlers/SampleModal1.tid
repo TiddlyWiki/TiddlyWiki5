@@ -7,3 +7,5 @@ type: text/vnd.tiddlywiki
 This is a modal wizard dialogue, stored in the tiddler SampleModal1.
 
 {{Motovun Jack.jpg}}
+
+<$log />

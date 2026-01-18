@@ -2045,14 +2045,66 @@ html body.tc-body.tc-single-tiddler-window {
 ** Modals
 */
 
+.tc-modal-dialog {
+	border: 1px solid <<colour modal-border>>;
+	background-color: <<colour modal-background>>;
+	max-width: 90vw;
+	max-height: 90vh;
+	padding: 1em;
+}
+
+.tc-modal-dialog::backdrop {
+	background-color: <<colour modal-backdrop>>;
+	opacity: 0.7;
+}
+
+@media (max-width: 55em) {
+	.tc-modal-dialog {
+		width: calc(100vw - 2em);
+	}
+}
+
+@media (min-width: 55em) {
+	.tc-modal-dialog {
+		width: 50vw;
+	}
+}
+
+.tc-modal-wrapper {
+	position: fixed;
+	overflow: auto;
+	overflow-y: scroll;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 900;
+}
+
+.tc-modal-backdrop {
+	background-color: <<colour modal-backdrop>>;
+	bottom: 0;
+	left: 0;
+	opacity: 0.7;
+	overflow: hidden;
+	position: fixed;
+	right: 0;
+	top: 0;
+}
+
 .tc-modal {
 	background-color: <<colour modal-background>>;
 	border: 1px solid <<colour modal-border>>;
+	padding: 1em;
+	z-index: 1100;
 }
 
 @media (max-width: 55em) {
 	.tc-modal {
 		position: fixed;
+		top: 1em;
+		left: 1em;
+		right: 1em;
 	}
 
 	.tc-modal-body {
@@ -2064,6 +2116,8 @@ html body.tc-body.tc-single-tiddler-window {
 @media (min-width: 55em) {
 	.tc-modal {
 		position: fixed;
+		top: 2em;
+		left: 25%;
 		width: 50%;
 	}
 
@@ -2071,33 +2125,6 @@ html body.tc-body.tc-single-tiddler-window {
 		overflow-y: auto;
 		max-height: 60vh;
 	}
-}
-
-.tc-modal-header {
-	padding: 9px 15px;
-	border-bottom: 1px solid <<colour modal-header-border>>;
-}
-
-.tc-modal-header h3 {
-	margin: 0;
-	line-height: 30px;
-}
-
-.tc-modal-header img, .tc-modal-header svg {
-	width: 1em;
-	height: 1em;
-}
-
-.tc-modal-body {
-	padding: 15px;
-}
-
-.tc-modal-footer {
-	padding: 14px 15px 15px;
-	margin-bottom: 0;
-	text-align: right;
-	background-color: <<colour modal-footer-background>>;
-	border-top: 1px solid <<colour modal-footer-border>>;
 }
 
 .tc-modal-prevent-scroll {

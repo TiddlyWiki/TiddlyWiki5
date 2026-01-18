@@ -4,6 +4,10 @@ tags: Features
 title: Modals
 type: text/vnd.tiddlywiki
 
+\procedure actions()
+<$action-sendmessage $message="tm-modal" $param="SampleModal1" forceLegacy="yes" />
+\end
+
 Modals (or "wizards") fade the main TiddlyWiki window to display an isolated tiddler that must be explicitly dismissed by the user.
 
 The tiddler to be displayed can contain the following optional fields that are used to customise the modal:
@@ -19,6 +23,8 @@ Note that the footer and subtitle fields are not limited to plain text, and wiki
 
 Modals are displayed with the [[WidgetMessage: tm-modal]].
 
-<$button message="tm-modal" param="SampleModal1">Open demo modal</$button>
+<$button message="tm-modal" param="SampleModal1">Open display modal</$button> (if supported by browser)
+
+<$button actions="<<actions>>">Open legacy modal</$button>
 
 <<.tip """<$macrocall $name=".from-version" version="5.2.4"/> allow using "mask-closable" field""">>
