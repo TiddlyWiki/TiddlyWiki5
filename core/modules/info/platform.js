@@ -42,6 +42,8 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
  		});
 		// Language
 		infoTiddlerFields.push({title: "$:/info/browser/language", text: navigator.language || ""});
+		// Secure context
+		infoTiddlerFields.push({title: "$:/info/browser/secure-context", text: window.isSecureContext ? "yes" : "no"});
 	}
 	return infoTiddlerFields;
 };
