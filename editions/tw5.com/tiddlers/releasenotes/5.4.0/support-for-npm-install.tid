@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9549
+description: Support for installing TiddlyWiki plugins through NPM
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9549
+github-contributors: Flibbles
+
+Support for installing plugins through NPM by introducing a "tiddlywiki" section that can go in package.json files. This will allow `npm install` to install necessary plugins, and they will automatically be available to tiddlywiki.info files without any extra steps.
