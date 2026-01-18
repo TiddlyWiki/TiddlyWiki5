@@ -17,7 +17,7 @@ class Modal {
 		this.wiki = wiki;
 		this.modalCount = 0;
 		// Detect if browser supports <dialog> element
-		this.supportsDialog = typeof HTMLDialogElement !== 'undefined';
+		this.supportsDialog = typeof HTMLDialogElement !== "undefined";
 	}
 
 	/*
@@ -44,7 +44,9 @@ class Modal {
 		}, options.variables);
 
 		// Branch to appropriate implementation
-		if(this.supportsDialog) {
+		// Allow forcing legacy mode via $forceLegacy parameter for testing
+		const useLegacy = variables["$forceLegacy"] === "yes";
+		if(this.supportsDialog && !useLegacy) {
 			this.displayWithDialog(title, options, variables);
 		} else {
 			this.displayWithDiv(title, options, variables);
@@ -126,7 +128,7 @@ class Modal {
 		};
 		templateWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 		// Whether to close the modal dialog when the backdrop (area outside the modal) is clicked
-		if(variables["$mask-closable"] !== "no") {
+		if(variables["$maskClosable"] !== "no") {
 			dialog.addEventListener("click", event => {
 			// Close if clicking on the dialog backdrop (not its contents)
 				if(event.target === dialog) {
@@ -233,7 +235,7 @@ class Modal {
 		templateWidgetNode.addEventListener("tm-close-tiddler", closeHandler, false);
 		
 		// Whether to close the modal dialog when the backdrop is clicked
-		if(variables["$mask-closable"] !== "no") {
+		if(variables["$maskClosable"] !== "no") {
 			modalBackdrop.addEventListener("click", closeHandler, false);
 		}
 		
