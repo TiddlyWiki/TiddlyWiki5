@@ -2150,6 +2150,10 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 	}
 };
 
+/*
+The file boot.node.js should not be accessed anywhere except for here.
+It's part of ongoing development for npm node_module and is subject to change.
+*/
 var pluginLocators = require("./boot.node.js");
 
 /*
