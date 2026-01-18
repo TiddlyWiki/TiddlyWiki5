@@ -7,7 +7,9 @@
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",
 		"tiddlywiki/railroad",
-		"tiddlywiki/tour"
+		"tiddlywiki/tour",
+		"tiddlywiki/palettes-legacy",
+		"tiddlywiki/palettes-2026"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

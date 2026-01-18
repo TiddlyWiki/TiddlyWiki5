@@ -31,7 +31,7 @@ function FramedEngine(options) {
 	this.parentNode.insertBefore(this.iframeNode,this.nextSibling);
 	this.iframeDoc = this.iframeNode.contentWindow.document;
 	// (Firefox requires us to put some empty content in the iframe)
-	var paletteTitle = this.widget.wiki.getTiddlerText("$:/palette");
+	var paletteTitle = this.widget.wiki.getTiddlerText("$:/palette/palette-colours");
 	var colorScheme = (this.widget.wiki.getTiddler(paletteTitle) || {fields: {}}).fields["color-scheme"] || "light";
 	this.iframeDoc.open();
 	this.iframeDoc.write("<!DOCTYPE html><html><head><meta name='color-scheme' content='" + colorScheme + "'></head><body></body></html>");
