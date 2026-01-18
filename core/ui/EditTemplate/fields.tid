@@ -10,7 +10,7 @@ tags: $:/tags/EditTemplate
 \procedure focus-new-field-input() <$action-sendmessage $message="tm-focus-selector" $param=`[data-tiddler-title="$(storyTiddler)$"] .tc-edit-field-add-name-wrapper input` />
 
 \procedure new-field-actions()
-	<$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldNameTiddler>get[text]] :map[<tf.get-field-value-tiddler-filter>get[text]] }}}/>
+	<$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
 	<$action-deletetiddler $filter="[prefix[$:/temp/NewFieldValue]prefix<newFieldValueTiddlerPrefix>]"/>
 	<<delete-state-tiddlers>>
 	<<focus-new-field-input>>
@@ -21,21 +21,17 @@ tags: $:/tags/EditTemplate
 	<<focus-new-field-input>>
 \end
 
-\procedure cancel-search-actions-inner()	
-	<%if [<storeTitle>has[text]] [<newFieldNameTiddler>has[text]] %>
-		<<delete-state-tiddlers>>	
-	<%else%>
-		<<cancel-delete-tiddler-actions 'cancel'>>
-	<%endif%>
-\end
-
 \procedure cancel-search-actions()
 	<$let userInput={{{ [<storeTitle>get[text]] }}}>
 		<%if [<newFieldNameTiddler>get[text]!match<userInput>] %>
 			<$action-setfield $tiddler=<<newFieldNameTiddler>> text=<<userInput>>/>
 			<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 		<%else%>
-			<<cancel-search-actions-inner>>
+			<%if [<storeTitle>has[text]] [<newFieldNameTiddler>has[text]] %>
+				<<delete-state-tiddlers>>	
+			<%else%>
+				<<cancel-delete-tiddler-actions 'cancel'>>
+			<%endif%>
 		<%endif%>
 	</$let>
 \end
@@ -52,8 +48,6 @@ tags: $:/tags/EditTemplate
 	<%endif%>
 \end
 
-\function tf.get-field-value-tiddler-filter() [<tf.get-field-editor>sha256[16]addprefix[/]addprefix<newFieldValueTiddlerPrefix>]
-
 \function tf.config-filter() [lookup:show[$:/config/EditTemplateFields/Visibility/]!match[hide]]
 
 \function tf.field-cascade()
@@ -69,6 +63,7 @@ tags: $:/tags/EditTemplate
 \end
 
 \function tf.primary-list-exceptions() created creator draft.of draft.title modified modifier tags text title type
+
 
 <$let newFieldValueTiddlerPrefix={{{ [<newFieldValueTiddlerPrefix>!is[blank]else<qualify "$:/temp/NewFieldValue">] }}} >
 	<div class="tc-edit-fields">
@@ -170,13 +165,14 @@ tags: $:/tags/EditTemplate
 						</div>
 					</$reveal>
 				</div>
-				<$let currentTiddler=<<tf.get-field-value-tiddler-filter>>
-					currentField="text"
-					currentFieldName={{{ [<newFieldNameTiddler>get[text]] }}}
+				<$let currentFieldName={{{ [<newFieldNameTiddler>get[text]] }}}
+					fieldEditor=<<tf.get-field-editor>>
+					newFieldValueTiddler={{{ [<newFieldValueTiddlerPrefix>] [[/]] [<fieldEditor>sha256[16]] :and[join[]] }}}
+					currentTiddler=<<newFieldValueTiddler>>
 				>
 					<span class="tc-edit-field-add-value tc-small-gap-right">
 						<$keyboard key="((add-field))" actions="<<new-field-actions>>">
-							<$transclude $tiddler=<<tf.get-field-editor>> />
+							<$transclude $tiddler=<<fieldEditor>> />
 						</$keyboard>
 					</span>
 					<span class="tc-edit-field-add-button">
