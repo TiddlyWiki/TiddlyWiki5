@@ -9,245 +9,286 @@ Modal message mechanism
 
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
-var navigator = require("$:/core/modules/widgets/navigator.js");
+const widget = require("$:/core/modules/widgets/widget.js");
+const navigator = require("$:/core/modules/widgets/navigator.js");
 
-var Modal = function(wiki) {
-	this.wiki = wiki;
-	this.modalCount = 0;
-};
+class Modal {
+	constructor(wiki) {
+		this.wiki = wiki;
+		this.modalCount = 0;
+		// Detect if browser supports <dialog> element
+		this.supportsDialog = typeof HTMLDialogElement !== "undefined";
+	}
 
-/*
-Display a modal dialogue
-	title: Title of tiddler to display
-	options: see below
-Options include:
-	downloadLink: Text of a big download link to include
-	event: widget event
-	variables: from event.paramObject
-*/
-Modal.prototype.display = function(title,options) {
-	options = options || {};
-	this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
+	/*
+	Display a modal dialogue
+		title: Title of tiddler to display
+		options: see below
+	Options include:
+		event: widget event
+		variables: from event.paramObject
+	*/
+	display(title, options = {}) {
+		this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
 				options.variables.rootwindow === "yes") ? document :
-				(options.event && options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
-	this.srcWindow = this.srcDocument.defaultView;
-	var self = this,
-		refreshHandler,
-		duration = $tw.utils.getAnimationDuration(),
-		tiddler = this.wiki.getTiddler(title);
-	// Don't do anything if the tiddler doesn't exist
-	if(!tiddler) {
-		return;
-	}
-	// Create the variables
-	var variables = $tw.utils.extend({
-			currentTiddler: title,
-			"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
-			"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "")
-		},options.variables);
+			(options.event && options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
+		this.srcWindow = this.srcDocument.defaultView;
+		const tiddler = this.wiki.getTiddler(title);
+		// Don't do anything if the tiddler doesn't exist
+		if(!tiddler) {
+			return;
+		}
+		// Create variables to override - currentTiddler and any from options.variables
+		const variables = $tw.utils.extend({
+			currentTiddler: title
+		}, options.variables);
 
-	// Create the wrapper divs
-	var wrapper = this.srcDocument.createElement("div"),
-		modalBackdrop = this.srcDocument.createElement("div"),
-		modalWrapper = this.srcDocument.createElement("div"),
-		modalHeader = this.srcDocument.createElement("div"),
-		headerTitle = this.srcDocument.createElement("h3"),
-		modalBody = this.srcDocument.createElement("div"),
-		modalLink = this.srcDocument.createElement("a"),
-		modalFooter = this.srcDocument.createElement("div"),
-		modalFooterHelp = this.srcDocument.createElement("span"),
-		modalFooterButtons = this.srcDocument.createElement("span");
-	// Up the modal count and adjust the body class
-	this.modalCount++;
-	this.adjustPageClass();
-	// Add classes
-	$tw.utils.addClass(wrapper,"tc-modal-wrapper");
-	if(tiddler.fields && tiddler.fields.class) {
-		$tw.utils.addClass(wrapper,tiddler.fields.class);
-	}
-	$tw.utils.addClass(modalBackdrop,"tc-modal-backdrop");
-	$tw.utils.addClass(modalWrapper,"tc-modal");
-	$tw.utils.addClass(modalHeader,"tc-modal-header");
-	$tw.utils.addClass(modalBody,"tc-modal-body");
-	$tw.utils.addClass(modalFooter,"tc-modal-footer");
-	// Join them together
-	wrapper.appendChild(modalBackdrop);
-	wrapper.appendChild(modalWrapper);
-	modalHeader.appendChild(headerTitle);
-	modalWrapper.appendChild(modalHeader);
-	modalWrapper.appendChild(modalBody);
-	modalFooter.appendChild(modalFooterHelp);
-	modalFooter.appendChild(modalFooterButtons);
-	modalWrapper.appendChild(modalFooter);
-	var navigatorTree = {
-		"type": "navigator",
-		"attributes": {
-			"story": {
-				"name": "story",
-				"type": "string",
-				"value": variables["tv-story-list"]
-			},
-			"history": {
-				"name": "history",
-				"type": "string",
-				"value": variables["tv-history-list"]
+		// Get navigator-specific variables from source widget if not already provided
+		const sourceWidget = options.event && options.event.widget ? options.event.widget : null;
+		if(sourceWidget) {
+			if(!variables["tv-story-list"] && sourceWidget.variables["tv-story-list"]) {
+				variables["tv-story-list"] = sourceWidget.variables["tv-story-list"].value;
 			}
-		},
-		"tag": "$navigator",
-		"isBlock": true,
-		"children": []
-	};
-	var navigatorWidgetNode = new navigator.navigator(navigatorTree, {
-		wiki: this.wiki,
-		document : this.srcDocument,
-		parentWidget: $tw.rootWidget
-	});
-	navigatorWidgetNode.render(modalBody,null);
+			if(!variables["tv-history-list"] && sourceWidget.variables["tv-history-list"]) {
+				variables["tv-history-list"] = sourceWidget.variables["tv-history-list"].value;
+			}
+		}
 
-	// Render the title of the message
-	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
-		field: "subtitle",
-		mode: "inline",
-		children: [{
-			type: "text",
-			attributes: {
-				text: {
-					type: "string",
-					value: title
-		}}}],
-		parentWidget: navigatorWidgetNode,
-		document: this.srcDocument,
-		variables: variables,
-		importPageMacros: true
-	});
-	headerWidgetNode.render(headerTitle,null);
-	// Render the body of the message
-	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
-		parentWidget: navigatorWidgetNode,
-		document: this.srcDocument,
-		variables: variables,
-		importPageMacros: true
-	});
+		// Branch to appropriate implementation
+		// Allow forcing legacy mode via forceLegacy parameter for testing
+		const useLegacy = variables["forceLegacy"] === "yes";
+		if(this.supportsDialog && !useLegacy) {
+			this.displayWithDialog(title, options, variables, sourceWidget);
+		} else {
+			this.displayWithDiv(title, options, variables, sourceWidget);
+		}
+	}
 
-	bodyWidgetNode.render(modalBody,null);
-	// Setup the link if present
-	if(options.downloadLink) {
-		modalLink.href = options.downloadLink;
-		modalLink.appendChild(this.srcDocument.createTextNode("Right-click to save changes"));
-		modalBody.appendChild(modalLink);
-	}
-	// Render the footer of the message
-	if(tiddler.fields && tiddler.fields.help) {
-		var link = this.srcDocument.createElement("a");
-		link.setAttribute("href",tiddler.fields.help);
-		link.setAttribute("target","_blank");
-		link.setAttribute("rel","noopener noreferrer");
-		link.setAttribute("class","tc-tiddlylink-external");
-		link.appendChild(this.srcDocument.createTextNode("Help"));
-		modalFooterHelp.appendChild(link);
-		modalFooterHelp.style.float = "left";
-	}
-	var footerWidgetNode = this.wiki.makeTranscludeWidget(title,{
-		field: "footer",
-		mode: "inline",
-		children: [{
-			type: "button",
-			attributes: {
-				message: {
-					type: "string",
-					value: "tm-close-tiddler"
+	/*
+	Display modal using native <dialog> element (modern browsers)
+	*/
+	displayWithDialog(title, options, variables, sourceWidget) {
+
+		// Create the dialog element
+		const dialog = this.srcDocument.createElement("dialog");
+	
+		// Up the modal count and adjust the body class
+		this.modalCount++;
+		this.adjustPageClass();
+	
+		// Add classes
+		$tw.utils.addClass(dialog,"tc-modal-dialog");
+		if(variables["class"]) {
+			$tw.utils.addClass(dialog, variables["class"]);
+		}
+		const navigatorTree = {
+			"type": "navigator",
+			"attributes": {
+				"story": {
+					"name": "story",
+					"type": "string",
+					"value": variables["tv-story-list"]
+				},
+				"history": {
+					"name": "history",
+					"type": "string",
+					"value": variables["tv-history-list"]
 				}
 			},
-			children: [{
-				type: "text",
-				attributes: {
-					text: {
-						type: "string",
-						value: $tw.language.getString("Buttons/Close/Caption")
-			}}}
-		]}],
-		parentWidget: navigatorWidgetNode,
-		document: this.srcDocument,
-		variables: variables,
-		importPageMacros: true
-	});
-	footerWidgetNode.render(modalFooterButtons,null);
-	// Set up the refresh handler
-	refreshHandler = function(changes) {
-		headerWidgetNode.refresh(changes,modalHeader,null);
-		bodyWidgetNode.refresh(changes,modalBody,null);
-		footerWidgetNode.refresh(changes,modalFooterButtons,null);
-	};
-	this.wiki.addEventListener("change",refreshHandler);
-	// Add the close event handler
-	var closeHandler = function(event) {
-		// Remove our refresh handler
-		self.wiki.removeEventListener("change",refreshHandler);
-		// Decrease the modal count and adjust the body class
-		self.modalCount--;
-		self.adjustPageClass();
-		// Force layout and animate the modal message away
-		$tw.utils.forceLayout(modalBackdrop);
-		$tw.utils.forceLayout(modalWrapper);
-		$tw.utils.setStyle(modalBackdrop,[
-			{opacity: "0"}
-		]);
-		$tw.utils.setStyle(modalWrapper,[
-			{transform: "translateY(" + self.srcWindow.innerHeight + "px)"}
-		]);
-		// Set up an event for the transition end
-		self.srcWindow.setTimeout(function() {
-			if(wrapper.parentNode) {
-				// Remove the modal message from the DOM
-				self.srcDocument.body.removeChild(wrapper);
-			}
-		},duration);
-		// Don't let anyone else handle the tm-close-tiddler message
-		return false;
-	};
-	headerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
-	bodyWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
-	footerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
-	// Whether to close the modal dialog when the mask (area outside the modal) is clicked
-	if(tiddler.fields && (tiddler.fields["mask-closable"] === "yes" || tiddler.fields["mask-closable"] === "true" || tiddler.fields["mask-closable"] === "" || "mask-closable" in tiddler.fields === false)) {
-		modalBackdrop.addEventListener("click",closeHandler,false);
-	}
-	// Set the initial styles for the message
-	$tw.utils.setStyle(modalBackdrop,[
-		{opacity: "0"}
-	]);
-	$tw.utils.setStyle(modalWrapper,[
-		{transformOrigin: "0% 0%"},
-		{transform: "translateY(" + (-this.srcWindow.innerHeight) + "px)"}
-	]);
-	// Put the message into the document
-	this.srcDocument.body.appendChild(wrapper);
-	// Set up animation for the styles
-	$tw.utils.setStyle(modalBackdrop,[
-		{transition: "opacity " + duration + "ms ease-out"}
-	]);
-	$tw.utils.setStyle(modalWrapper,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out"}
-	]);
-	// Force layout
-	$tw.utils.forceLayout(modalBackdrop);
-	$tw.utils.forceLayout(modalWrapper);
-	// Set final animated styles
-	$tw.utils.setStyle(modalBackdrop,[
-		{opacity: "0.7"}
-	]);
-	$tw.utils.setStyle(modalWrapper,[
-		{transform: "translateY(0px)"}
-	]);
-};
+			"tag": "$navigator",
+			"isBlock": true,
+			"children": []
+		};
+		const navigatorWidgetNode = new navigator.navigator(navigatorTree, {
+			wiki: this.wiki,
+			document: this.srcDocument,
+			parentWidget: sourceWidget || $tw.rootWidget
+		});
+		navigatorWidgetNode.render(dialog,null);
 
-Modal.prototype.adjustPageClass = function() {
-	var windowContainer = $tw.pageContainer ? ($tw.pageContainer === this.srcDocument.body.firstChild ? $tw.pageContainer : this.srcDocument.body.firstChild) : null;
-	if(windowContainer) {
-		$tw.utils.toggleClass(windowContainer,"tc-modal-displayed",this.modalCount > 0);
+		// Render the modal content using the story template
+		const templateWidgetNode = this.wiki.makeTranscludeWidget("$:/core/ui/StoryTiddlerTemplate",{
+			parentWidget: navigatorWidgetNode,
+			document: this.srcDocument,
+			importPageMacros: true
+		});
+		
+		// Set passed variables to override any inherited from source widget
+		$tw.utils.each(variables, function(value, name) {
+			templateWidgetNode.setVariable(name, value);
+		});
+		templateWidgetNode.render(dialog,null);
+	
+		// Set up the refresh handler
+		const refreshHandler = changes => {
+			templateWidgetNode.refresh(changes,dialog,null);
+		};
+		this.wiki.addEventListener("change",refreshHandler);
+		// Add the close event handler
+		const closeHandler = event => {
+		// Remove our refresh handler
+			this.wiki.removeEventListener("change",refreshHandler);
+			// Decrease the modal count and adjust the body class
+			this.modalCount--;
+			this.adjustPageClass();
+			// Close and remove the dialog
+			dialog.close();
+			if(dialog.parentNode) {
+				this.srcDocument.body.removeChild(dialog);
+			}
+			// Don't let anyone else handle the tm-close-tiddler message
+			return false;
+		};
+		templateWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
+		// Whether to close the modal dialog when the backdrop (area outside the modal) is clicked
+		if(variables["maskClosable"] !== "no") {
+			dialog.addEventListener("click", event => {
+			// Close if clicking on the dialog backdrop (not its contents)
+				if(event.target === dialog) {
+					closeHandler(event);
+				}
+			}, false);
+		}
+		// Add the dialog to the document
+		this.srcDocument.body.appendChild(dialog);
+		// Show the modal dialog using the native API
+		dialog.showModal();
 	}
-	$tw.utils.toggleClass(this.srcDocument.body,"tc-modal-prevent-scroll",this.modalCount > 0);
-};
+
+	/*
+	Display modal using div-based approach (legacy browsers)
+	*/
+	displayWithDiv(title, options, variables, sourceWidget) {
+
+		// Collect all variables from source widget (walking up the widget tree)
+		// Exclude any that are already in passed variables to avoid overriding them
+		const sourceVariableObjects = {};
+		if(sourceWidget) {
+			for(var name in sourceWidget.variables) {
+				if(!variables[name]) {
+					sourceVariableObjects[name] = sourceWidget.variables[name];
+				}
+			}
+
+		}
+
+		// Create the wrapper divs
+		const wrapper = this.srcDocument.createElement("div");
+		const modalBackdrop = this.srcDocument.createElement("div");
+		const modalWrapper = this.srcDocument.createElement("div");
+		
+		// Up the modal count and adjust the body class
+		this.modalCount++;
+		this.adjustPageClass();
+		
+		// Add classes
+		$tw.utils.addClass(wrapper, "tc-modal-wrapper");
+		if(variables["class"]) {
+			$tw.utils.addClass(wrapper, variables["class"]);
+		}
+		$tw.utils.addClass(modalBackdrop, "tc-modal-backdrop");
+		$tw.utils.addClass(modalWrapper, "tc-modal");
+		
+		// Join them together
+		wrapper.appendChild(modalBackdrop);
+		wrapper.appendChild(modalWrapper);
+		
+		// Create the navigator widget
+		const navigatorTree = {
+			"type": "navigator",
+			"attributes": {
+				"story": {
+					"name": "story",
+					"type": "string",
+					"value": variables["tv-story-list"]
+				},
+				"history": {
+					"name": "history",
+					"type": "string",
+					"value": variables["tv-history-list"]
+				}
+			},
+			"tag": "$navigator",
+			"isBlock": true,
+			"children": []
+		};
+		const navigatorWidgetNode = new navigator.navigator(navigatorTree, {
+			wiki: this.wiki,
+			document: this.srcDocument,
+			parentWidget: $tw.rootWidget
+		});
+		navigatorWidgetNode.render(modalWrapper, null);
+
+		// Render the modal content using the story template
+		const templateWidgetNode = this.wiki.makeTranscludeWidget("$:/core/ui/StoryTiddlerTemplate", {
+			parentWidget: navigatorWidgetNode,
+			document: this.srcDocument,
+			importPageMacros: true
+		});
+		
+		// Copy all variables from source widget (using pre-collected variable objects)
+		$tw.utils.each(sourceVariableObjects, function(variable, name) {
+			templateWidgetNode.setVariable(
+				name,
+				variable.value,
+				variable.params,
+				variable.isMacroDefinition,
+				{
+					isFunctionDefinition: variable.isFunctionDefinition,
+					isProcedureDefinition: variable.isProcedureDefinition,
+					isWidgetDefinition: variable.isWidgetDefinition,
+					configTrimWhiteSpace: variable.configTrimWhiteSpace
+				}
+			);
+		});
+		
+		// Set passed variables, overriding any from source widget
+		$tw.utils.each(variables, function(value, name) {
+			templateWidgetNode.setVariable(name, value);
+		});
+		templateWidgetNode.render(modalWrapper, null);
+		
+		// Set up the refresh handler
+		const refreshHandler = changes => {
+			templateWidgetNode.refresh(changes, modalWrapper, null);
+		};
+		this.wiki.addEventListener("change", refreshHandler);
+		
+		// Add the close event handler
+		const closeHandler = event => {
+			// Remove our refresh handler
+			this.wiki.removeEventListener("change", refreshHandler);
+			// Decrease the modal count and adjust the body class
+			this.modalCount--;
+			this.adjustPageClass();
+			// Remove the modal from the DOM
+			if(wrapper.parentNode) {
+				this.srcDocument.body.removeChild(wrapper);
+			}
+			// Don't let anyone else handle the tm-close-tiddler message
+			return false;
+		};
+		templateWidgetNode.addEventListener("tm-close-tiddler", closeHandler, false);
+		
+		// Whether to close the modal dialog when the backdrop is clicked
+		if(variables["maskClosable"] !== "no") {
+			modalBackdrop.addEventListener("click", closeHandler, false);
+		}
+		
+		// Add the modal to the document
+		this.srcDocument.body.appendChild(wrapper);
+	}
+
+	adjustPageClass() {
+		const windowContainer = $tw.pageContainer ? ($tw.pageContainer === this.srcDocument.body.firstChild ? $tw.pageContainer : this.srcDocument.body.firstChild) : null;
+		if(windowContainer) {
+			$tw.utils.toggleClass(windowContainer,"tc-modal-displayed",this.modalCount > 0);
+		}
+		// Only apply tc-modal-prevent-scroll for div-based modals (dialog handles this natively)
+		if(!this.supportsDialog) {
+			$tw.utils.toggleClass(this.srcDocument.body,"tc-modal-prevent-scroll",this.modalCount > 0);
+		}
+	}
+}
 
 exports.Modal = Modal;
