@@ -28,7 +28,7 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .tc-page-controls button svg, .tc-tiddler-controls button svg, .tc-topbar button svg {
-	transition: fill 150ms ease-in-out;
+	transition: color 150ms ease-in-out;
 }
 
 .tc-tiddler-controls button.tc-selected,
