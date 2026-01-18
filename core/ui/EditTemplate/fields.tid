@@ -87,10 +87,10 @@ tags: $:/tags/EditTemplate
 							</td>
 							<td class="tc-edit-field-remove">
 								<$button actions="<<delete-field-actions>>"
-										aria-label={{$:/language/EditTemplate/Field/Remove/Caption}}
-										class="tc-btn-invisible"
-										tooltip={{$:/language/EditTemplate/Field/Remove/Hint}}
-										>
+									aria-label={{$:/language/EditTemplate/Field/Remove/Caption}}
+									class="tc-btn-invisible"
+									tooltip={{$:/language/EditTemplate/Field/Remove/Hint}}
+								>
 									{{$:/core/images/delete-button}}
 								</$button>
 							</td>
@@ -109,26 +109,26 @@ tags: $:/tags/EditTemplate
 			<$let refreshTitle=<<qualify "$:/temp/fieldname/refresh">> storeTitle=<<newFieldNameInputTiddler>> searchListState=<<newFieldNameSelectionTiddler>>>
 				<div class="tc-edit-field-add-name-wrapper">
 					<$transclude $variable="keyboard-driven-input"
-							cancelPopups="yes"
-							class="tc-edit-texteditor tc-popup-handle"
-							configTiddlerFilter="[[$:/config/EditMode/fieldname-filter]]"
-							default=""
-							focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] :else[[false]] }}}
-							tag="input"
-							focusPopup=<<qualify "$:/state/popup/field-dropdown">>
-							inputCancelActions=<<cancel-search-actions>>
-							placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}}
-							refreshTitle=<<refreshTitle>>
-							selectionStateTitle=<<searchListState>>
-							storeTitle=<<storeTitle>>
-							tabindex={{$:/config/EditTabIndex}}
-							tiddler=<<newFieldNameTiddler>>
-							/>
+						cancelPopups="yes"
+						class="tc-edit-texteditor tc-popup-handle"
+						configTiddlerFilter="[[$:/config/EditMode/fieldname-filter]]"
+						default=""
+						focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] :else[[false]] }}}
+						focusPopup=<<qualify "$:/state/popup/field-dropdown">>
+						inputCancelActions=<<cancel-search-actions>>
+						placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}}
+						refreshTitle=<<refreshTitle>>
+						selectionStateTitle=<<searchListState>>
+						storeTitle=<<storeTitle>>
+						tag="input"
+						tabindex={{$:/config/EditTabIndex}}
+						tiddler=<<newFieldNameTiddler>>
+					/>
 					<$button aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}
-							class="tc-btn-invisible tc-btn-dropdown tc-small-gap"
-							popup=<<qualify "$:/state/popup/field-dropdown">>
-							tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}}
-							>
+						class="tc-btn-invisible tc-btn-dropdown tc-small-gap"
+						popup=<<qualify "$:/state/popup/field-dropdown">>
+						tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}}
+					>
 						{{$:/core/images/down-arrow}}
 					</$button>
 					<$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="">
@@ -170,11 +170,10 @@ tags: $:/tags/EditTemplate
 						</div>
 					</$reveal>
 				</div>
-				<$let currentTiddlerCSSescaped={{{ [<currentTiddler>escapecss[]] }}}
-						currentTiddler=<<tf.get-field-value-tiddler-filter>>
-						currentField="text"
-						currentFieldName={{{ [<newFieldNameTiddler>get[text]] }}}
-						>
+				<$let currentTiddler=<<tf.get-field-value-tiddler-filter>>
+					currentField="text"
+					currentFieldName={{{ [<newFieldNameTiddler>get[text]] }}}
+				>
 					<span class="tc-edit-field-add-value tc-small-gap-right">
 						<$keyboard key="((add-field))" actions="<<new-field-actions>>">
 							<$transclude $tiddler=<<tf.get-field-editor>> />
