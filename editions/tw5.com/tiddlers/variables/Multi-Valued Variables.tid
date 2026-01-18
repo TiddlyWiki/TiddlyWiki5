@@ -1,75 +1,193 @@
 title: Multi-Valued Variables
 created: 20250307212252946
-modified: 20250307212252946
+modified: 20251208154218915
 tags: Concepts Variables
 
-<<.from-version "5.4.0">> In ordinary usage, [[variables|Variables]] contain a single snippet of text. With the introduction of multi-valued variables. it is now possible to store a list of multiple values in a single variable. When accessed in the usual way, only the first value is returned, but using round brackets instead of angle brackets around the variable name allows access to the complete list of the values. This makes multi-valued variables largely invisible unless you specifically need to use them.
+<<.from-version "5.4.0">> In ordinary usage, [[Filtered Attribute Values]] using the filtered transclusion syntax <code>attribute=&#123;&#123;&#123; <em>filter expression</em> &#125;&#125;&#125;</code> will only assign the first item if a list is returned by <code><em>filter expression</em></code>.
 
-! Setting Multi-Valued Variables
+When using the syntax <code>attribute=&#40;&#40;&#40; <em>filter expression</em> &#41;&#41;&#41;</code> to assign the output of a filter expression to an attribute, instead all filter results are assigned. Note, however, that only some widgets can actually make use of attribute lists, see below. All others will keep using the first item in the list.
 
-Generally, all the methods for setting variables implicitly set multi-valued variables, with the exception of the [[Set Widget|Set Widget]].
+! Usage in Widget Attributes
+
+Multi-valued attribute values can only be used in widgets that are able to handle them. In all other widgets, they behave like regular attribute values. 
 
 !! LetWidget
+A multi-valued variable can be assigned using the <<.wlink LetWidget>> widget. Multi-valued variables assigned this way can be accessed in subsequent variable assignments using the [[title Operator]]:
 
-The <<.wid let>> widget allows multi-valued variables to be set in one operation, each to the complete list of results obtained from evaluating an attribute that is defined via a filtered transclusion. For example:
-
-```
-<$let
-	varname={{{ [all[tiddlers]sort[]] }}}
->
-```
-
-The <<.wid let>> widget also allows the complete list of return values from a function to be assigned to a multi-valued variable. For example:
-
-```
-<$let
-	varname=<<my.func>>
->
-```
-
-!! [[Let Filter Run Prefix]]
-
-The `:let` filter run prefix (or its shortcut syntax `=>`) assigns the complete list of results of a filter run to a multi-valued variable.
-
-! Retrieving Multi-Valued Variables
-
-!! [[title Operator]]
-
-The simplest way to retrieve the complete list of values stored in a multi-valued variable is to use the [[title Operator]]. For example:
-
-```
-[title(varname)]
-```
-
-Because `title` is the default operator when the operator name is missing from a filter step, the following example is equivalent to the previous one:
-
-```
-[(varname)]
-```
-
-!! Multi-valued Parameters for Filter Operators
-
-Certain filter operators can accept multi-valued parameters:
-
-* [[function Operator]]
-* [[title Operator]]
-
-For example:
-
-```
-\function myfunc(tiddlers) [(tiddlers)sort[]]
-
-<$let varname={{{ [all[tiddlers]limit[50]] }}}> 
-<$text text={{{ [function[myfunc],(varname)] +[join[-]] }}}/>
+<<.example n:"wa-lw-1" eg:"""<$let titleList=((( [tag[Learning]] ))) howtoTitleList=((( [<titleList>prefix[How to]] ))) >
+	((( [<howtoTitleList>] || $:/core/ui/ListItemTemplate )))
 </$let>
-```
+""">>
 
-! Examples
+The example also demonstrates the use of the <code>&#40;&#40;&#40; <em>filter expression</em> &#41;&#41;&#41;</code> syntax in [[Filtered Transclusions|Transclusion in WikiText]] with templates, see below.
 
-For example:
+!! TranscludeWidget
+The <<.wlink TranscludeWidget>> widget can pass multi-valued variables to [[Procedures]], [[Functions]] and [[Custom Widgets]]. Macro definitions are not supported.
 
-```
-<$let varname={{{ [all[tiddlers]sort[]] }}}>
-<$text text={{{ [(varname)] +[join[-]] }}}/>
+In this example, the variable `itemList` contains a list of items that is accessed inside the procedure using the `title` filter operator:
+
+<<.example n:"wa-tw-1" eg:"""\procedure outputList(itemList)
+	<$list filter="[<itemList>]" join=" -- "  />
+\end
+
+<$transclude $variable="outputList" itemList=((( [tag[Learning]] ))) />
+""">>
+
+Or, combined with the LetWidget and an intermediate (multi-valued) variable `items`:
+
+<<.example n:"wa-tw-2" eg:"""\procedure outputList(itemList)
+	<$list filter="[<itemList>]" join=" -- " />
+\end
+
+<$let items=((( [tag[Learning]] ))) >
+	<$transclude $variable="outputList" itemList=<<items>> />
 </$let>
+""">>
+
+!! ListWidget / [[Conditional Shortcut Syntax]]
+
+Within an <<.attr if>> or <<.attr elseif>> clause, the additional variable <<.var conditionList>> contains all results of evaluating the condition.
+
+<<.example n:"wa-cs-1" eg:"""<% if [tag[Learning]butfirst[25]] %>
+	((( [<conditionList>] )))
+<% endif %>
+""">>
+
+The internally generated <<.wlink ListWidget>> widget uses the attribute `listVariable="conditionList"` to set <<.var conditionList>> to the result list. 
+
+!! Functions
+
+Directly assigning the output of a [[function|Functions]] via the <code><em>attribute</em>=&lt;&lt;<em>function</em>&gt;&gt;</code> syntax assigns the full result list and works as if <code><em>function</em></code> was a multi-valued variable.
+
+<<.example n:"wa-f-1" eg:"""\function itemFunction(itemTag) [tag<itemTag>]
+
+<$let itemList=<<itemFunction itemTag:Learning>> >
+    ((( [<itemList>] || $:/core/ui/ListItemTemplate )))
+</$let>
+""">>
+
+<<.note """Until version 5.4.0 this syntax would assign only the first value in the list returned by the function. This can still be achieved using legacy filtered attribute values, e.g. `itemList={{{ [<itemFunction itemTag:Learning>] }}}`.<br>However, all widgets not enhanced to handle multi-valued variables always use only the first value in the list returned by the function. """>>
+
+
+! Usage in Filter Expressions
+
+Some [[Filter Operators]] can make use of multi-valued variables.
+
+!! <<.op title>> Operator
+
+The [[title Operator]] or its short form work with multi-valued variables. If multiple items have been assigned to `titleList` with e.g. the LetWidget, then within a filter run,
+
 ```
+[title<titleList>]
+```
+or
+
+```
+[<titleList>]
+```
+will return all items, not just the first.
+
+<<.note """In contrast to regular variables which are internally handled as strings, multi-valued variables can be truly empty, in which case `[<titleList>]` yields an empty list instead of a list with an empty item, and a subsequent `is[blank]` or similar check is no longer necessary. The behavior for `[<non-existent>]` to return an empty string in the case of a non-existent variable is not changed.""">>
+
+This is especially useful when working with lists.
+
+<<.example n:"fe-to-1" eg:"""<$let titleList=((( [tag[Learning]] )))
+	  howtoTitleList=((( [<titleList>prefix[How to]] )))
+	  exampleTitleList=((( [<titleList>search:title[Example]] ))) >
+	((( [<exampleTitleList>] || $:/core/ui/ListItemTemplate )))
+</$let>
+""">>
+
+Previously, this would have to be accomplished using the `format`, `join` and `enlist` operators:
+
+<<.example n:"fe-to-2" eg:"""<$let titleList={{{ [tag[Learning]format:titlelist[]join[ ]] }}}
+	  howtoTitleList={{{ [enlist:raw<titleList>prefix[How to]format:titlelist[]join[ ]] }}}
+	  exampleTitleList={{{ [enlist:raw<titleList>search:title[Example]format:titlelist[]join[ ]] }}} >
+	((( [enlist:raw<exampleTitleList>] || $:/core/ui/ListItemTemplate )))
+</$let>
+""">>
+
+<<.note """The <<.olink title>> operator does not [[de-duplicate|Dominant Append]] and therefore corresponds to <<.olink enlist>> with the `raw` suffix. If you need de-duplication append the <<.olink unique>> operator as in `[<titleList>unique[]]`""">>
+
+
+!! <<.op function>> Operator
+
+The <<.olink function>> operator can pass multi-valued parameters to custom functions.
+
+<<.example n:"fe-fo-1" eg:"""\function .combine(colorList) [all[]] :map:flat[<colorList>addprefix<currentTiddler>]
+
+<$let prefixes=((( [[dark-]] [[medium-]] [[light-]] ))) colors=((( [[red]] [[green]] [[blue]] )))>
+    ((( [<prefixes>.combine<colors>] || $:/core/ui/ListItemTemplate )))
+</$let>
+""">>
+
+
+!! <<.op intersection>> Operator
+
+The [[intersection Operator]] will return all items that common to both the input list and the parameter list.
+
+<<.example n:"fe-io-1" eg:"""<$let titleList=((( [tag[Learning]] ))) >
+	((( [tag[Cascades]intersection<titleList>] || $:/core/ui/ListItemTemplate )))
+</$let>
+""">>
+
+Also compare the [[Intersection Filter Run Prefix]] which will return common items from two filter runs.
+
+!! <<.op getvariable>> Operator
+
+The [[getvariable Operator]] will return return all values from a multi-valued variable. If the variable is an empty list, no output is produced. If the variable does not exist, a list with a single empty item will be output.
+
+<<.example n:"fe-gv-1" eg:"""<$let titleList=((( [tag[Learning]] ))) >
+	((( [[titleList]getvariable[]] || $:/core/ui/ListItemTemplate )))
+</$let>
+""">>
+
+!! Listops Operators
+
+To be implemented in another PR.
+
+!! `:let` Filter Run Prefix
+
+The [[Let Filter Run Prefix]] and its short form `=>` assign the list of output titles from previous filter runs to a variable whose name is determined by the output of its filter run. The variable will always be a multi-valued variable, but it will only be available to subsequent filter runs within the same filter expression.
+
+The previous example could be written as
+
+<<.example n:"fe-let-1" eg:"""((( [tag[Learning]] :let[[titleList]] [tag[Cascades]intersection<titleList>] )))
+""">>
+
+
+! Usage in Variable Transclusions
+
+The WikiText syntax for transcluding a [[variable|Variables]]
+
+<pre><code>&lt;$transclude $variable=&lt;&lt;<em>titleList</em>&gt;&gt; /&gt;</code></pre>
+
+and its short form
+
+<pre><code>&lt;&lt;<em>titleList</em>&gt;&gt;</code></pre>
+
+always returns the first item of <code><em>titleList</em></code> if it is a multi-valued variable.
+
+
+! Usage in Filtered Transclusions
+
+The syntax for [[Filtered Transclusions|Transclusion in WikiText]] 
+
+<pre><code>&#40;&#40;&#40; <em>filter expression</em> &#41;&#41;&#41;
+&#40;&#40;&#40; <em>filter expression</em> || <em>template</em> &#41;&#41;&#41;</code></pre>
+
+will always output all items returned by the filter expression. It is equivalent to
+
+<pre><code>&lt;$list filter="<em>filter expression</em>" template="<em>template</em>" /&gt;</code></pre>
+
+!! Filtered Transclusions using <<.value """&#123;&#123;&#123; &#125;&#125;&#125;""">>
+<<.deprecated-since 5.4.0>> Filtered transclusions using the syntax
+
+<pre><code>&#123;&#123;&#123; <em>filter expression</em> &#125;&#125;&#125;
+&#123;&#123;&#123; <em>filter expression</em> || <em>template</em> &#125;&#125;&#125;</code></pre>
+
+are currently an alias of the <code>&#40;&#40;&#40; &#41;&#41;&#41;</code> syntax. In a future release they will be changed to output only the first item returned by <code><em>filter expression</em></code>.
+
+Use [[Convert Filtered Transclusion Syntax]] to find usages of the deprecated syntax and to convert them to the new syntax.
+
+TODO: Procedure

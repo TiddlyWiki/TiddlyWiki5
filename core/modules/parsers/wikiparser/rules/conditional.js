@@ -72,6 +72,7 @@ exports.parseIfClause = function(filterCondition) {
 	};
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"filter",filterCondition);
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"variable","condition");
+	$tw.utils.addAttributeToParseTreeNode(listWidget,"listVariable","conditionList");
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"limit","1");
 	// Check for an immediately following double linebreak
 	var hasLineBreak = !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
@@ -95,7 +96,7 @@ exports.parseIfClause = function(filterCondition) {
 			hasLineBreak = !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 			// If we found an else then we need to parse the body looking for the endif
 			var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>",
-			ex;
+				ex;
 			if(hasLineBreak) {
 				ex = this.parser.parseBlocksTerminatedExtended(reEndString);
 			} else {

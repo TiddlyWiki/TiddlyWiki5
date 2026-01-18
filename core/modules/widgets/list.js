@@ -35,7 +35,7 @@ ListWidget.prototype.initialise = function(parseTreeNode,options) {
 	// Now look for <$list-template> and <$list-empty> widgets as immediate child widgets
 	// This is safe to do during initialization because parse trees never change after creation
 	this.findExplicitTemplates();
-}
+};
 
 /*
 Render this widget into the DOM
@@ -74,6 +74,7 @@ ListWidget.prototype.execute = function(changedAttributes) {
 	this.template = this.getAttribute("template");
 	this.editTemplate = this.getAttribute("editTemplate");
 	this.variableName = this.getAttribute("variable","currentTiddler");
+	this.listVariableName = this.getAttribute("listVariable");
 	this.counterName = this.getAttribute("counter");
 	this.storyViewName = this.getAttribute("storyview");
 	this.historyTitle = this.getAttribute("history");
@@ -83,6 +84,10 @@ ListWidget.prototype.execute = function(changedAttributes) {
 	}
 	// Compose the list elements
 	this.list = this.getTiddlerList();
+	// Set the listVariable if specified
+	if(this.listVariableName && this.fullList) {
+		this.setVariable(this.listVariableName, this.fullList);
+	}
 	var members = [],
 		self = this;
 	// Check for an empty list
@@ -124,12 +129,17 @@ ListWidget.prototype.findExplicitTemplates = function() {
 		return foundInlineTemplate;
 	};
 	this.hasTemplateInBody = searchChildren(this.parseTreeNode.children);
-}
+};
 
 ListWidget.prototype.getTiddlerList = function() {
 	var limit = $tw.utils.getInt(this.getAttribute("limit",""),undefined);
 	var defaultFilter = "[!is[system]sort[title]]";
 	var results = this.wiki.filterTiddlers(this.getAttribute("filter",defaultFilter),this);
+	// We store the full list for listVariable support if needed
+	if(this.listVariableName) {
+		this.fullList = results;
+	}
+	// Apply limit if specified
 	if(limit !== undefined) {
 		if(limit >= 0) {
 			results = results.slice(0,limit);
@@ -166,7 +176,7 @@ ListWidget.prototype.makeJoinTemplate = function() {
 	var parser,
 		join = this.getAttribute("join","");
 	if(join) {
-		parser = this.wiki.parseText("text/vnd.tiddlywiki",join,{parseAsInline:true})
+		parser = this.wiki.parseText("text/vnd.tiddlywiki",join,{parseAsInline:true});
 		if(parser) {
 			return parser.tree;
 		} else {
@@ -232,7 +242,7 @@ ListWidget.prototype.refresh = function(changedTiddlers) {
 		this.storyview.refreshStart(changedTiddlers,changedAttributes);
 	}
 	// Completely refresh if any of our attributes have changed
-	if(changedAttributes.filter || changedAttributes.variable || changedAttributes.counter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.join || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
+	if(changedAttributes.filter || changedAttributes.variable || changedAttributes.listVariable || changedAttributes.counter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.join || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
 		this.refreshSelf();
 		result = true;
 	} else {
@@ -279,6 +289,9 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 	// Get the new list
 	var prevList = this.list;
 	this.list = this.getTiddlerList();
+	if(this.listVariableName && this.fullList) {
+		this.setVariable(this.listVariableName, this.fullList);
+	}
 	// Check for an empty list
 	if(this.list.length === 0) {
 		// Check if it was empty before
@@ -301,7 +314,7 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			this.removeChildDomNodes();
 			this.children = [];
 		}
-		// If we are providing an counter variable then we must refresh the items, otherwise we can rearrange them
+		// If we are providing a counter variable then we must refresh the items, otherwise we can rearrange them
 		var hasRefreshed = false,t;
 		if(this.counterName) {
 			var mustRefreshOldLast = false;
@@ -339,9 +352,9 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			var mustRecreateLastItem = false;
 			if(this.join && this.join.length) {
 				if(this.children.length !== this.list.length) {
-						mustRecreateLastItem = true;
+					mustRecreateLastItem = true;
 				} else if(prevList[prevList.length-1] !== this.list[this.list.length-1]) {
-						mustRecreateLastItem = true;
+					mustRecreateLastItem = true;
 				}
 			}
 			var isLast = false, wasLast = false;
@@ -472,7 +485,7 @@ ListItemWidget.prototype.execute = function() {
 		children = children.slice(0);
 		$tw.utils.each(join,function(joinNode) {
 			children.push(joinNode);
-		})
+		});
 	}
 	// Construct the child widgets
 	this.makeChildWidgets(children);
@@ -495,8 +508,8 @@ var ListTemplateWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 ListTemplateWidget.prototype = new Widget();
-ListTemplateWidget.prototype.render = function() {}
-ListTemplateWidget.prototype.refresh = function() { return false; }
+ListTemplateWidget.prototype.render = function() {};
+ListTemplateWidget.prototype.refresh = function() { return false; };
 
 exports["list-template"] = ListTemplateWidget;
 
@@ -505,8 +518,8 @@ var ListEmptyWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 ListEmptyWidget.prototype = new Widget();
-ListEmptyWidget.prototype.render = function() {}
-ListEmptyWidget.prototype.refresh = function() { return false; }
+ListEmptyWidget.prototype.render = function() {};
+ListEmptyWidget.prototype.refresh = function() { return false; };
 
 exports["list-empty"] = ListEmptyWidget;
 
@@ -515,7 +528,7 @@ var ListJoinWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 ListJoinWidget.prototype = new Widget();
-ListJoinWidget.prototype.render = function() {}
-ListJoinWidget.prototype.refresh = function() { return false; }
+ListJoinWidget.prototype.render = function() {};
+ListJoinWidget.prototype.refresh = function() { return false; };
 
 exports["list-join"] = ListJoinWidget;
