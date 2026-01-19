@@ -230,8 +230,8 @@ exports.getFilterRunPrefixes = function() {
 	return this.filterRunPrefixes;
 }
 
-exports.filterTiddlers = function(filterString,widget,source) {
-	var fn = this.compileFilter(filterString);
+exports.filterTiddlers = function(filterString,widget,source,options) {
+	var fn = this.compileFilter(filterString,options);
 	try {
 		const fnResult = fn.call(this,source,widget);
 		return fnResult;
@@ -244,8 +244,11 @@ exports.filterTiddlers = function(filterString,widget,source) {
 Compile a filter into a function with the signature fn(source,widget) where:
 source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
 widget: an optional widget node for retrieving the current tiddler etc.
+options: optional hashmap of options
+	options.defaultFilterRunPrefix: the default filter run prefix to use when none is specified
 */
-exports.compileFilter = function(filterString) {
+exports.compileFilter = function(filterString,options) {
+	var defaultFilterRunPrefix = options?.defaultFilterRunPrefix || "or";
 	if(!this.filterCache) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
@@ -354,7 +357,7 @@ exports.compileFilter = function(filterString) {
 			var options = {wiki: self, suffixes: operation.suffixes || []};
 			switch(operation.prefix || "") {
 				case "": // No prefix means that the operation is unioned into the result
-					return filterRunPrefixes["or"](operationSubFunction, options);
+					return filterRunPrefixes[defaultFilterRunPrefix](operationSubFunction, options);
 				case "=": // The results of the operation are pushed into the result without deduplication
 					return filterRunPrefixes["all"](operationSubFunction, options);
 				case "-": // The results of this operation are removed from the main result
