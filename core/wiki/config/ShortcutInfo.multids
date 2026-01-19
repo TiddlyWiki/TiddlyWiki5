@@ -44,6 +44,7 @@ stamp: {{$:/language/Buttons/Stamp/Hint}}
 strikethrough: {{$:/language/Buttons/Strikethrough/Hint}}
 subscript: {{$:/language/Buttons/Subscript/Hint}}
 superscript: {{$:/language/Buttons/Superscript/Hint}}
+toggle-dragndrop: {{$:/language/Buttons/ToggleDragnDrop/Hint}}
 toggle-sidebar: {{$:/language/Buttons/ToggleSidebar/Hint}}
 transcludify: {{$:/language/Buttons/Transcludify/Hint}}
 underline: {{$:/language/Buttons/Underline/Hint}}

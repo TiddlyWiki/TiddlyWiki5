@@ -1,0 +1,9 @@
+title: $:/core/ui/KeyboardShortcuts/toggle-dragndrop
+tags: $:/tags/KeyboardShortcut
+key: ((toggle-dragndrop))
+
+<%if [{$:/config/story/dragndrop/enable}match[no]] %>
+    <$action-setfield $tiddler="$:/config/story/dragndrop/enable" text="yes"/>
+<% else %>
+    <$action-setfield $tiddler="$:/config/story/dragndrop/enable" text="no"/>
+<% endif %>
