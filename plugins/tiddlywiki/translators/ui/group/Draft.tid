@@ -1,0 +1,27 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Draft
+caption: Draft
+tags: $:/tags/TranslationGroup
+
+\procedure translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/Draft/]]
++[sort[title]]
+\end
+\procedure shortenTitle()
+[all[current]removeprefix[$:/language/Draft/]]
+\end
+\function draft.title(title) [{$:/language/Draft/Title}substitute<title>]
+\function draft.attribution(title,attribution) [{$:/language/Draft/Attribution}substitute<title>,<attribution>]
+
+! Draft
+
+Template for the title of draft tiddlers.
+
+* `$1$` represents the title of the tiddler
+* `$2$` represents the username
+
+Substitution result:
+
+<$codeblock code={{{ [draft.title[Motovun Jack]] }}}/>
+<$codeblock code={{{ [draft.attribution[Motovun Jack],[jermolene]] }}}/>
+
+<<translatableStringEditor>>

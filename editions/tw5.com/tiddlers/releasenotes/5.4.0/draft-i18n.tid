@@ -1,0 +1,15 @@
+title: $:/changenotes/5.4.0/#8891
+description: Draft title internationalization
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8891
+github-contributors: Leilei332
+
+The title of the draft tiddler is now translatable. These new language strings are provided:
+
+* `$:/language/Draft/Title` The title template of a draft tiddler without attribution, defaults to `Draft of '$1$'`. `$1$` represents the title of the new tiddler.
+* `$:/language/Draft/Attribution` The template of the attribution to be added, defaults to `Draft of '$1$' by $2$`. `$1$` represents the title of the new tiddler, `$2$` represents the username.
+
+The translators plugin is also updated.
