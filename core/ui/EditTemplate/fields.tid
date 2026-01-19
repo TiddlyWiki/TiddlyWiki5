@@ -10,7 +10,7 @@ tags: $:/tags/EditTemplate
 \procedure focus-new-field-input() <$action-sendmessage $message="tm-focus-selector" $param=`[data-tiddler-title="$(storyTiddler)$"] .tc-edit-field-add-name-wrapper input` />
 
 \procedure new-field-actions()
-	<$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
+	<$action-setfield $tiddler=<<storyTiddler>> $field={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}} />
 	<$action-deletetiddler $filter="[prefix[$:/temp/NewFieldValue]prefix<newFieldValueTiddlerPrefix>]"/>
 	<<delete-state-tiddlers>>
 	<<focus-new-field-input>>
@@ -98,81 +98,79 @@ tags: $:/tags/EditTemplate
 		</table>
 	</div>
 							
-	<$fieldmangler>
-		<div class="tc-edit-field-add">
-			<em class="tc-edit tc-small-gap-right">
-				<<lingo Fields/Add/Prompt>>
-			</em>
-			<$let refreshTitle=<<qualify "$:/temp/fieldname/refresh">>
-				storeTitle=<<newFieldNameInputTiddler>>
-				searchListState=<<newFieldNameSelectionTiddler>>
-			>
-				<div class="tc-edit-field-add-name-wrapper">
-					<$transclude $variable="keyboard-driven-input"
-						cancelPopups="yes"
-						class="tc-edit-texteditor tc-popup-handle"
-						configTiddlerFilter="[[$:/config/EditMode/fieldname-filter]]"
-						default=""
-						focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] :else[[false]] }}}
-						focusPopup=<<qualify "$:/state/popup/field-dropdown">>
-						inputCancelActions=<<cancel-search-actions>>
-						placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}}
-						refreshTitle=<<refreshTitle>>
-						selectionStateTitle=<<searchListState>>
-						storeTitle=<<storeTitle>>
-						tag="input"
-						tabindex={{$:/config/EditTabIndex}}
-						tiddler=<<newFieldNameTiddler>>
-					/>
-					<$button aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}
-						class="tc-btn-invisible tc-btn-dropdown tc-small-gap"
-						popup=<<qualify "$:/state/popup/field-dropdown">>
-						tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}}
-					>
-						{{$:/core/images/down-arrow}}
-					</$button>
-					<$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="" tag="div" class="tc-block-dropdown tc-edit-type-dropdown">
-						<$let tv-show-missing-links="yes">
-							<$linkcatcher to=<<newFieldNameTiddler>>>
-								<div class="tc-dropdown-item">
-									<<lingo Fields/Add/Dropdown/User>>
-								</div>
-								<$let newFieldName={{{ [<storeTitle>get[text]] }}}
-									primaryListFields={{{ [!is[shadow]!is[system]fields[]format:titlelist[]join[ ]] }}}
-								>
-									<$list filter="[enlist<primaryListFields>search:title<newFieldName>sort[]] :except[tf.primary-list-exceptions[]]" variable="currentField">
-										<$link to=<<currentField>> class=<<tf.list-selection-class "-primaryList">> >
-											<$text text=<<currentField>>/>
-										</$link>
-									</$list>
-									<div class="tc-dropdown-item">
-										<<lingo Fields/Add/Dropdown/System>>
-									</div>
-									<$list filter="[fields[]search:title<newFieldName>!enlist<primaryListFields>sort[]]" variable="currentField">
-										<$link to=<<currentField>> class=<<tf.list-selection-class "-secondaryList">>>
-											<$text text=<<currentField>>/>
-										</$link>
-									</$list>
-								</$let>
-							</$linkcatcher>
-						</$let>
-					</$reveal>
-				</div>
-				<$let currentFieldName={{{ [<newFieldNameTiddler>get[text]] }}}
-					fieldEditor=<<tf.get-field-editor>>
-					newFieldValueTiddler={{{ [<newFieldValueTiddlerPrefix>] [[/]] [<fieldEditor>sha256[16]] :and[join[]] }}}
-					currentTiddler=<<newFieldValueTiddler>>
+	<div class="tc-edit-field-add">
+		<em class="tc-edit tc-small-gap-right">
+			<<lingo Fields/Add/Prompt>>
+		</em>
+		<$let refreshTitle=<<qualify "$:/temp/fieldname/refresh">>
+			storeTitle=<<newFieldNameInputTiddler>>
+			searchListState=<<newFieldNameSelectionTiddler>>
+		>
+			<div class="tc-edit-field-add-name-wrapper">
+				<$transclude $variable="keyboard-driven-input"
+					cancelPopups="yes"
+					class="tc-edit-texteditor tc-popup-handle"
+					configTiddlerFilter="[[$:/config/EditMode/fieldname-filter]]"
+					default=""
+					focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] :else[[false]] }}}
+					focusPopup=<<qualify "$:/state/popup/field-dropdown">>
+					inputCancelActions=<<cancel-search-actions>>
+					placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}}
+					refreshTitle=<<refreshTitle>>
+					selectionStateTitle=<<searchListState>>
+					storeTitle=<<storeTitle>>
+					tag="input"
+					tabindex={{$:/config/EditTabIndex}}
+					tiddler=<<newFieldNameTiddler>>
+				/>
+				<$button aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}
+					class="tc-btn-invisible tc-btn-dropdown tc-small-gap"
+					popup=<<qualify "$:/state/popup/field-dropdown">>
+					tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}}
 				>
-					<span class="tc-edit-field-add-value tc-small-gap-right">
-						<$keyboard key="((add-field))" actions="<<new-field-actions>>">
-							<$transclude $tiddler=<<fieldEditor>> />
-						</$keyboard>
-					</span>
-					<span class="tc-edit-field-add-button">
-						<$transclude $variable="new-field"/>
-					</span>
-				</$let>
+					{{$:/core/images/down-arrow}}
+				</$button>
+				<$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="" tag="div" class="tc-block-dropdown tc-edit-type-dropdown">
+					<$let tv-show-missing-links="yes">
+						<$linkcatcher to=<<newFieldNameTiddler>>>
+							<div class="tc-dropdown-item">
+								<<lingo Fields/Add/Dropdown/User>>
+							</div>
+							<$let newFieldName={{{ [<storeTitle>get[text]] }}}
+								primaryListFields={{{ [!is[shadow]!is[system]fields[]format:titlelist[]join[ ]] }}}
+							>
+								<$list filter="[enlist<primaryListFields>search:title<newFieldName>sort[]] :except[tf.primary-list-exceptions[]]" variable="currentField">
+									<$link to=<<currentField>> class=<<tf.list-selection-class "-primaryList">> >
+										<$text text=<<currentField>>/>
+									</$link>
+								</$list>
+								<div class="tc-dropdown-item">
+									<<lingo Fields/Add/Dropdown/System>>
+								</div>
+								<$list filter="[fields[]search:title<newFieldName>!enlist<primaryListFields>sort[]]" variable="currentField">
+									<$link to=<<currentField>> class=<<tf.list-selection-class "-secondaryList">>>
+										<$text text=<<currentField>>/>
+									</$link>
+								</$list>
+							</$let>
+						</$linkcatcher>
+					</$let>
+				</$reveal>
+			</div>
+			<$let currentFieldName={{{ [<newFieldNameTiddler>get[text]] }}}
+				fieldEditor=<<tf.get-field-editor>>
+				newFieldValueTiddler={{{ [<newFieldValueTiddlerPrefix>] [[/]] [<fieldEditor>sha256[16]] :and[join[]] }}}
+				currentTiddler=<<newFieldValueTiddler>>
+			>
+				<span class="tc-edit-field-add-value tc-small-gap-right">
+					<$keyboard key="((add-field))" actions="<<new-field-actions>>">
+						<$transclude $tiddler=<<fieldEditor>> />
+					</$keyboard>
+				</span>
+				<span class="tc-edit-field-add-button">
+					<$transclude $variable="new-field"/>
+				</span>
 			</$let>
-		</div>
-	</$fieldmangler>
+		</$let>
+	</div>
 </$let>
