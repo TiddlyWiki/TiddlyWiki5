@@ -3,14 +3,14 @@ tags: $:/tags/Macro
 
 \procedure actions-compile-palette-filtered(consolidatedPalette,outputPalette)
 <!-- Note the join, needed to cope with palette entries containing spaces -->
-\function tf.colour(name) [<consolidatedPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :map[subfilter<currentTiddler>join[ ]]
+\function tf.colour(name) [<consolidatedPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :map[subfilter:all<currentTiddler>join[ ]]
 \function colour(name) [tf.colour<name>]
 \function color(name) [tf.colour<name>]
 <!-- Make the colour function use the input palette -->
 <$list filter="[<consolidatedPalette>indexes[]sort[]]" variable="colour-name">
 	<$let filter-text={{{ [<consolidatedPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] }}}>
 		<!-- Note the join, needed to cope with palette entries containing spaces -->
-		<$action-setfield $tiddler=<<outputPalette>> $index=<<colour-name>> $value={{{ [subfilter<filter-text>join[ ]] +[join[ ]] }}}/>
+		<$action-setfield $tiddler=<<outputPalette>> $index=<<colour-name>> $value={{{ [subfilter:all<filter-text>join[ ]] +[join[ ]] }}}/>
 	</$let>
 </$list>
 \end actions-compile-palette-filtered
@@ -51,7 +51,7 @@ tags: $:/tags/Macro
 	<!-- Compute the current scheme -->
 	<$let
 		color-scheme-filter={{{ [<inputPalette>get[color-scheme]] :else[[light]] }}}
-		scheme={{{ [subfilter<color-scheme-filter>] }}}
+		scheme={{{ [subfilter:all<color-scheme-filter>] }}}
 	>
 		<!-- Clear the consolidated palette that stores the result of flattening the chain of imported input palettes -->
 		<$action-deletetiddler $tiddler=<<consolidatedPalette>>/>
@@ -118,7 +118,7 @@ tags: $:/tags/Macro
 
 	<!-- Note the join, needed to cope with palette entries containing spaces -->
 	\function tf.colour(name)
-	[function[colour-inner-get-palette-entry],<name>,<paletteTitle>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter<currentTiddler>join[ ]]
+	[function[colour-inner-get-palette-entry],<name>,<paletteTitle>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter:all<currentTiddler>join[ ]]
 	\end tf.colour
 
 	\function colour(name)
@@ -131,7 +131,7 @@ tags: $:/tags/Macro
 
 	<$let
 		color-scheme-filter={{{ [<paletteTitle>get[color-scheme]] :else[[light]] }}}
-		scheme={{{ [subfilter<color-scheme-filter>] }}}
+		scheme={{{ [subfilter:all<color-scheme-filter>] }}}
 	>
 		<$slot $name="ts-raw"/>
 	</$let>
