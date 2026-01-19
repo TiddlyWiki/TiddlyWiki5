@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-json",
   "name": "CodeMirror 6 JSON Language",
   "description": "JSON syntax highlighting for CodeMirror 6 code blocks",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme license",
