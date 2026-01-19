@@ -1,0 +1,525 @@
+title: $:/plugins/tiddlywiki/codemirror-6/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional
+
+/* CodeMirror 6 Editor - Base Styles */
+
+/* ============================================================================
+   Base Editor
+   ============================================================================ */
+
+.tc-editor-codemirror6 {
+    border: 1px solid <<colour tiddler-editor-border>>;
+    border-radius: 3px;
+    background: <<colour tiddler-editor-background>>;
+    /* Allow sticky positioning to work through this element */
+    overflow: visible;
+}
+
+.tc-editor-codemirror6 .cm-editor {
+    height: {{{ [[$:/config/TextEditor/EditorHeight/Mode]get[text]match[fixed]then{$:/config/TextEditor/EditorHeight/Height}] :else[[100%]] }}};
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
+    font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
+    /* Allow sticky positioning to work through this element */
+    overflow: visible !important;
+}
+
+.tc-editor-codemirror6 .cm-content {
+    padding: 8px;
+    caret-color: transparent;
+}
+
+.tc-editor-codemirror6 .cm-focused {
+    outline: none;
+}
+
+.tc-editor-codemirror6 .cm-scroller {
+    overflow: auto;
+}
+
+/* Line numbers */
+.tc-editor-codemirror6 .cm-gutters {
+    background: <<colour page-background>>;
+    border-right: 1px solid <<colour tiddler-editor-border>>;
+    color: <<colour muted-foreground>>;
+}
+
+/* Active line */
+.tc-editor-codemirror6 .cm-activeLine {
+    background: rgba(128, 128, 128, 0.08);
+}
+
+.tc-editor-codemirror6 .cm-activeLineGutter {
+    background: rgba(128, 128, 128, 0.12);
+}
+
+/* Selection */
+.tc-editor-codemirror6 .cm-selectionBackground,
+.tc-editor-codemirror6 .cm-selectionBackground * {
+    background: HighLight;
+    background: <<colour selection-background>> !important;
+    color: HighlightText !important;
+}
+
+.tc-editor-codemirror6 .cm-focused .cm-selectionBackground,
+.tc-editor-codemirror6 .cm-focused .cm-selectionBackground * {
+    background: HighLight;
+    background: <<colour selection-background>> !important;
+    color: HighlightText !important;
+}
+
+/* Ensure selected text has consistent color regardless of formatting */
+.tc-editor-codemirror6 .cm-line ::selection {
+    background: <<colour selection-background>> !important;
+    color: HighlightText !important;
+}
+
+.tc-editor-codemirror6 .cm-line *::selection {
+    background: <<colour selection-background>> !important;
+    color: HighlightText !important;
+}
+
+.tc-editor-codemirror6 .cm-line::-moz-selection {
+    background: <<colour selection-background>> !important;
+    color: HighlightText !important;
+}
+
+.tc-editor-codemirror6 .cm-line *::-moz-selection {
+    background: <<colour selection-background>> !important;
+    color: HighlightText !important;
+}
+
+/* ============================================================================
+   Autocomplete Popup
+   ============================================================================ */
+
+.cm-tooltip-autocomplete {
+    background: <<colour dropdown-background>> !important;
+    border: 1px solid <<colour dropdown-border>> !important;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 10000;
+}
+
+.cm-tooltip-autocomplete ul {
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/fontfamily}};
+    font-size: 13px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.cm-tooltip-autocomplete li {
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+}
+
+.cm-tooltip-autocomplete li[aria-selected] {
+    background: <<colour primary>> !important;
+    color: <<colour background>> !important;
+}
+
+.cm-tooltip-autocomplete li[aria-selected] .cm-completionLabel,
+.cm-tooltip-autocomplete li[aria-selected] .cm-completionDetail,
+.cm-tooltip-autocomplete li[aria-selected] .cm-completionIcon,
+.cm-tooltip-autocomplete li[aria-selected] .cm-completionMatchedText {
+    color: <<colour background>> !important;
+}
+
+.cm-tooltip-autocomplete .cm-completionLabel {
+    flex: 1;
+    color: <<colour foreground>>;
+}
+
+.cm-tooltip-autocomplete .cm-completionDetail {
+    font-size: 0.85em;
+    color: <<colour muted-foreground>>;
+    margin-left: 8px;
+}
+
+/* Completion icons */
+.cm-tooltip-autocomplete .cm-completionIcon {
+    width: 1.5em;
+    text-align: center;
+    padding-right: 4px;
+    color: <<colour muted-foreground>>;
+}
+
+/* ============================================================================
+   Panel Inputs (override CodeMirror's white background)
+   ============================================================================ */
+
+.tc-editor-codemirror6 .cm-textfield {
+    background-color: <<colour tiddler-editor-background>> !important;
+    color: <<colour foreground>>;
+    border-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-editor-codemirror6 .cm-button {
+    background-image: none !important;
+    background-color: <<colour button-background>>;
+    border: 1px solid <<colour button-border>>;
+    color: <<colour button-foreground>>;
+}
+
+.tc-editor-codemirror6 .cm-button:hover {
+    background-color: <<colour primary>>;
+    border-color: <<colour primary>>;
+    color: <<colour background>>;
+}
+
+/* ============================================================================
+   Search Panel
+   ============================================================================ */
+
+.tc-editor-codemirror6 .cm-panels-top {
+    /* Make the panel container sticky below the tiddler title */
+    position: sticky;
+    /* Top offset: menubar height (set by JS) + title offset (set by JS for sticky titles) */
+    top: calc(var(--tv-menubar-height, 0px) + var(--cm-panels-top-offset, 0px));
+    /* Below sticky tiddler titles (z-index: 500) but above editor content */
+    z-index: 499;
+    /* Ensure the panel has a background so content doesn't show through */
+    background: <<colour tiddler-background>>;
+}
+
+.cm-search {
+    background: <<colour tiddler-background>>;
+    border-bottom: 1px solid <<colour tiddler-editor-border>>;
+    padding: 12px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/fontfamily}};
+    font-size: 15px;
+}
+
+.cm-search br {
+    display: none;
+}
+
+.cm-search label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: <<colour foreground>>;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cm-search label input[type="checkbox"] {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+}
+
+.cm-search input[type="text"],
+.cm-search input[type="search"] {
+    padding: 8px 12px;
+    border: 1px solid <<colour tiddler-editor-border>>;
+    border-radius: 4px;
+    background-color: <<colour tiddler-editor-background>>;
+    color: <<colour foreground>>;
+    color-scheme: light dark;
+    font-size: 15px;
+    min-width: 220px;
+    outline: none;
+    transition: border-color 0.15s ease;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.cm-search input[type="text"]:focus,
+.cm-search input[type="search"]:focus {
+    border-color: <<colour primary>>;
+}
+
+.cm-search input[type="text"]::placeholder,
+.cm-search input[type="search"]::placeholder {
+    color: <<colour muted-foreground>>;
+}
+
+.cm-search button {
+    padding: 8px 16px;
+    background: <<colour button-background>>;
+    border: 1px solid <<colour button-border>>;
+    border-radius: 4px;
+    color: <<colour button-foreground>>;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.cm-search button:hover {
+    background: <<colour primary>>;
+    border-color: <<colour primary>>;
+    color: <<colour background>>;
+}
+
+.cm-search button:active {
+    transform: translateY(1px);
+}
+
+.cm-search button[name="close"] {
+    background: transparent;
+    border: none;
+    padding: 6px 10px;
+    font-size: 20px;
+    color: <<colour muted-foreground>>;
+    line-height: 1;
+}
+
+.cm-search button[name="close"]:hover {
+    color: <<colour foreground>>;
+    background: transparent;
+}
+
+/* Search matches highlight */
+.cm-searchMatch {
+    background: rgba(255, 200, 0, 0.35);
+    border-radius: 2px;
+}
+
+.cm-searchMatch-selected {
+    background: rgba(255, 150, 0, 0.5);
+}
+
+/* Highlight selection matches */
+.cm-selectionMatch {
+    background: rgba(100, 200, 255, 0.25);
+    border-radius: 2px;
+}
+
+/* ============================================================================
+   Fold Gutter
+   ============================================================================ */
+
+.cm-foldGutter {
+    width: 1.2em;
+}
+
+.cm-foldGutter span {
+    cursor: pointer;
+    color: <<colour muted-foreground>>;
+    font-size: 0.9em;
+}
+
+.cm-foldGutter span:hover {
+    color: <<colour foreground>>;
+}
+
+.cm-foldPlaceholder {
+    background: <<colour code-background>>;
+    border: 1px solid <<colour tiddler-editor-border>>;
+    border-radius: 3px;
+    padding: 0 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    color: <<colour muted-foreground>>;
+}
+
+.cm-foldPlaceholder:hover {
+    background: <<colour tab-background>>;
+}
+
+/* ============================================================================
+   Goto Line Panel
+   ============================================================================ */
+
+.cm-gotoLine {
+    background: <<colour tiddler-background>>;
+    border-top: 1px solid <<colour tiddler-editor-border>>;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.cm-gotoLine label {
+    color: <<colour foreground>>;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cm-gotoLine input {
+    padding: 4px 8px;
+    border: 1px solid <<colour tiddler-editor-border>>;
+    border-radius: 3px;
+    background-color: <<colour tiddler-editor-background>>;
+    color: <<colour foreground>>;
+    color-scheme: light dark;
+    font-size: 13px;
+    width: 80px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.cm-gotoLine input:focus {
+    border-color: <<colour primary>>;
+}
+
+.cm-gotoLine button {
+    padding: 4px 10px;
+    background: <<colour button-background>>;
+    border: 1px solid <<colour button-border>>;
+    border-radius: 3px;
+    color: <<colour button-foreground>>;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.cm-gotoLine button:hover {
+    background: <<colour primary>>;
+    border-color: <<colour primary>>;
+    color: <<colour background>>;
+}
+
+.cm-gotoLine button[name="close"] {
+    margin-left: auto;
+    padding: 2px 6px;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    color: <<colour muted-foreground>>;
+}
+
+.cm-gotoLine button[name="close"]:hover {
+    color: <<colour foreground>>;
+    background: transparent;
+}
+
+/* ============================================================================
+   Bracket Matching
+   ============================================================================ */
+
+.cm-matchingBracket {
+    background: rgba(100, 200, 100, 0.3);
+    outline: 1px solid rgba(100, 200, 100, 0.5);
+}
+
+.cm-nonmatchingBracket {
+    background: rgba(200, 100, 100, 0.3);
+    outline: 1px solid rgba(200, 100, 100, 0.5);
+}
+
+/* ============================================================================
+   Multi-cursor Support
+   ============================================================================ */
+
+.tc-editor-codemirror6 .cm-cursorLayer {
+    pointer-events: none;
+    z-index: 200;
+}
+
+.tc-editor-codemirror6 .cm-cursor {
+    position: absolute;
+    border-left-width: 2px;
+    border-left-style: solid;
+    margin-left: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    pointer-events: none;
+}
+
+/* High-contrast cursor when near/between brackets */
+.tc-editor-codemirror6:has(.cm-matchingBracket) .cm-cursor,
+.tc-editor-codemirror6:has(.cm-nonmatchingBracket) .cm-cursor {
+    border-left-color: #ff6600 !important;
+}
+
+/* Secondary selection background (for multi-cursor selections) */
+.tc-editor-codemirror6 .cm-selectionBackground-secondary,
+.tc-editor-codemirror6 .cm-selectionBackground-secondary * {
+    background: HighLight;
+    background: <<colour selection-background>>;
+    color: HighlightText !important;
+}
+
+@keyframes cm-blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes cm-blink2 {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.tc-editor-codemirror6 .cm-cursorLayer {
+    animation: cm-blink {{$:/config/codemirror-6/editor/cursorBlinkRate}}ms infinite;
+}
+
+/* ============================================================================
+   Editor Preview Panel
+   ============================================================================ */
+
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-tiddler-preview-preview {
+    border: 1px solid <<colour tiddler-editor-border>>;
+    border-radius: 3px;
+    background: <<colour tiddler-editor-background>>;
+    padding: 8px;
+    margin-top: 0;
+    margin-bottom: 1px;
+}
+
+/* ============================================================================
+   ControlPanel - Keymap Reference
+   ============================================================================ */
+
+.cm-keymap-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+.cm-keymap-table th,
+.cm-keymap-table td {
+    border: 1px solid <<colour table-border>>;
+    padding: 0.4em 0.8em;
+    text-align: left;
+}
+
+.cm-keymap-table th {
+    background: <<colour table-header-background>>;
+    font-weight: bold;
+}
+
+.cm-keymap-table tr:nth-child(even) {
+    background: <<colour table-header-background>>;
+}
+
+.cm-keymap-key {
+    font-family: monospace;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* ============================================================================
+   Trailing Whitespace
+   ============================================================================ */
+
+.tc-editor-codemirror6 .cm-trailingSpace {
+    background-color: rgba(255, 0, 0, 0.3);
+    border-radius: 2px;
+}
+
+/* ============================================================================
+   Sticky Tiddler Titles (menubar offset)
+   ============================================================================ */
+
+/* Adjust sticky tiddler titles to account for fixed menubar */
+<%if [{$:/themes/tiddlywiki/vanilla/options/stickytitles}match[yes]] %>
+
+.tc-tiddler-title {
+    top: var(--tv-menubar-height, 0px);
+}
+
+<%endif%>

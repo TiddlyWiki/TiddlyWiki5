@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-rose-pine/readme
+
+! Rosé Pine Theme for CodeMirror 6
+
+All natural pine, faux fur and a bit of soho vibes.
+
+Based on [[Rosé Pine|https://rosepinetheme.com/]].
+
+!! Variants
+
+* `rose-pine` / `rose-pine-main` - Default dark
+* `rose-pine-moon` - Slightly lighter dark
+* `rose-pine-dawn` - Light variant
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-rose-pine` | Main (default) |
+| `cm6-theme-rose-pine-main` | Same as above |
+| `cm6-theme-rose-pine-moon` | Moon variant |
+| `cm6-theme-rose-pine-dawn` | Dawn (light) |

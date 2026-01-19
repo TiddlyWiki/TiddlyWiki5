@@ -1,0 +1,26 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/color-picker/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.cm-color-swatch-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.cm-color-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    vertical-align: middle;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.cm-color-swatch:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}

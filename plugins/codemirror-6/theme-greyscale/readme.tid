@@ -1,0 +1,25 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-greyscale/readme
+
+! Greyscale Theme
+
+A minimalist greyscale colour scheme for CodeMirror 6. All syntax highlighting uses only shades of grey, creating a distraction-free writing and coding environment.
+
+!! Variants
+
+* ''Greyscale Dark'' - Dark background with light grey text
+* ''Greyscale Light'' - Light background with dark grey text
+
+!! Design Philosophy
+
+This theme intentionally avoids colour to:
+
+* Reduce visual noise and distractions
+* Provide a neutral, print-like appearance
+* Be accessible for users with colour vision deficiencies
+* Work well in any context without clashing with surrounding colours
+
+Syntax elements are distinguished through:
+
+* Different shades of grey (lightness)
+* Font weight (bold for keywords)
+* Font style (italic for comments)

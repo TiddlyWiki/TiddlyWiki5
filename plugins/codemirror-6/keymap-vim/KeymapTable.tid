@@ -1,0 +1,112 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/keymap-vim/KeymapTable
+tags: $:/tags/CodeMirror/KeymapTable
+name: vim
+
+!!! Vim Keymap
+
+!!!! Mode Switching
+
+<table class="cm-keymap-table">
+<tr><th>Key</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">i</td><td>Insert mode (before cursor)</td></tr>
+<tr><td class="cm-keymap-key">a</td><td>Insert mode (after cursor)</td></tr>
+<tr><td class="cm-keymap-key">I</td><td>Insert at line start</td></tr>
+<tr><td class="cm-keymap-key">A</td><td>Insert at line end</td></tr>
+<tr><td class="cm-keymap-key">o</td><td>Open line below</td></tr>
+<tr><td class="cm-keymap-key">O</td><td>Open line above</td></tr>
+<tr><td class="cm-keymap-key">v</td><td>Visual mode (character)</td></tr>
+<tr><td class="cm-keymap-key">V</td><td>Visual mode (line)</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+V</td><td>Visual block mode</td></tr>
+<tr><td class="cm-keymap-key">Escape</td><td>Return to normal mode</td></tr>
+<tr><td class="cm-keymap-key">:</td><td>Command mode</td></tr>
+</table>
+
+!!!! Motion (Normal Mode)
+
+<table class="cm-keymap-table">
+<tr><th>Key</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">h, j, k, l</td><td>Left, down, up, right</td></tr>
+<tr><td class="cm-keymap-key">w</td><td>Next word start</td></tr>
+<tr><td class="cm-keymap-key">W</td><td>Next WORD start</td></tr>
+<tr><td class="cm-keymap-key">e</td><td>Next word end</td></tr>
+<tr><td class="cm-keymap-key">E</td><td>Next WORD end</td></tr>
+<tr><td class="cm-keymap-key">b</td><td>Previous word start</td></tr>
+<tr><td class="cm-keymap-key">B</td><td>Previous WORD start</td></tr>
+<tr><td class="cm-keymap-key">0</td><td>Line start</td></tr>
+<tr><td class="cm-keymap-key">^</td><td>First non-blank</td></tr>
+<tr><td class="cm-keymap-key">$</td><td>Line end</td></tr>
+<tr><td class="cm-keymap-key">gg</td><td>Document start</td></tr>
+<tr><td class="cm-keymap-key">G</td><td>Document end</td></tr>
+<tr><td class="cm-keymap-key">{number}G</td><td>Go to line</td></tr>
+<tr><td class="cm-keymap-key">%</td><td>Matching bracket</td></tr>
+<tr><td class="cm-keymap-key">f{char}</td><td>Find char forward</td></tr>
+<tr><td class="cm-keymap-key">F{char}</td><td>Find char backward</td></tr>
+<tr><td class="cm-keymap-key">t{char}</td><td>Till char forward</td></tr>
+<tr><td class="cm-keymap-key">T{char}</td><td>Till char backward</td></tr>
+<tr><td class="cm-keymap-key">;</td><td>Repeat f/F/t/T</td></tr>
+<tr><td class="cm-keymap-key">,</td><td>Repeat f/F/t/T reversed</td></tr>
+</table>
+
+!!!! Editing (Normal Mode)
+
+<table class="cm-keymap-table">
+<tr><th>Key</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">x</td><td>Delete character</td></tr>
+<tr><td class="cm-keymap-key">X</td><td>Delete character before</td></tr>
+<tr><td class="cm-keymap-key">r{char}</td><td>Replace character</td></tr>
+<tr><td class="cm-keymap-key">R</td><td>Replace mode</td></tr>
+<tr><td class="cm-keymap-key">s</td><td>Substitute character</td></tr>
+<tr><td class="cm-keymap-key">S / cc</td><td>Substitute line</td></tr>
+<tr><td class="cm-keymap-key">d{motion}</td><td>Delete</td></tr>
+<tr><td class="cm-keymap-key">dd</td><td>Delete line</td></tr>
+<tr><td class="cm-keymap-key">D</td><td>Delete to end of line</td></tr>
+<tr><td class="cm-keymap-key">c{motion}</td><td>Change</td></tr>
+<tr><td class="cm-keymap-key">C</td><td>Change to end of line</td></tr>
+<tr><td class="cm-keymap-key">y{motion}</td><td>Yank (copy)</td></tr>
+<tr><td class="cm-keymap-key">yy / Y</td><td>Yank line</td></tr>
+<tr><td class="cm-keymap-key">p</td><td>Paste after</td></tr>
+<tr><td class="cm-keymap-key">P</td><td>Paste before</td></tr>
+<tr><td class="cm-keymap-key">J</td><td>Join lines</td></tr>
+<tr><td class="cm-keymap-key">u</td><td>Undo</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+R</td><td>Redo</td></tr>
+<tr><td class="cm-keymap-key">.</td><td>Repeat last change</td></tr>
+</table>
+
+!!!! Text Objects (in Visual mode or with operators)
+
+<table class="cm-keymap-table">
+<tr><th>Key</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">iw / aw</td><td>Inner/around word</td></tr>
+<tr><td class="cm-keymap-key">iW / aW</td><td>Inner/around WORD</td></tr>
+<tr><td class="cm-keymap-key">i" / a"</td><td>Inner/around double quotes</td></tr>
+<tr><td class="cm-keymap-key">i' / a'</td><td>Inner/around single quotes</td></tr>
+<tr><td class="cm-keymap-key">i( / a( / ib / ab</td><td>Inner/around parentheses</td></tr>
+<tr><td class="cm-keymap-key">i[ / a[</td><td>Inner/around brackets</td></tr>
+<tr><td class="cm-keymap-key">i{ / a{ / iB / aB</td><td>Inner/around braces</td></tr>
+<tr><td class="cm-keymap-key">i< / a<</td><td>Inner/around angle brackets</td></tr>
+<tr><td class="cm-keymap-key">it / at</td><td>Inner/around tags</td></tr>
+</table>
+
+!!!! Search
+
+<table class="cm-keymap-table">
+<tr><th>Key</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">/{pattern}</td><td>Search forward</td></tr>
+<tr><td class="cm-keymap-key">?{pattern}</td><td>Search backward</td></tr>
+<tr><td class="cm-keymap-key">n</td><td>Next match</td></tr>
+<tr><td class="cm-keymap-key">N</td><td>Previous match</td></tr>
+<tr><td class="cm-keymap-key">*</td><td>Search word under cursor (forward)</td></tr>
+<tr><td class="cm-keymap-key">#</td><td>Search word under cursor (backward)</td></tr>
+</table>
+
+!!!! Ex Commands
+
+<table class="cm-keymap-table">
+<tr><th>Command</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">:w</td><td>Save (triggers TiddlyWiki save)</td></tr>
+<tr><td class="cm-keymap-key">:q</td><td>Close editor</td></tr>
+<tr><td class="cm-keymap-key">:wq</td><td>Save and close</td></tr>
+<tr><td class="cm-keymap-key">:{number}</td><td>Go to line</td></tr>
+<tr><td class="cm-keymap-key">:%s/old/new/g</td><td>Replace all occurrences</td></tr>
+<tr><td class="cm-keymap-key">:noh</td><td>Clear search highlight</td></tr>
+</table>

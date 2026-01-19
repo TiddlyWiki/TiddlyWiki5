@@ -1,0 +1,4 @@
+title: $:/config/EditorTypeMappings/
+
+text/x-markdown: codemirror-6
+text/markdown: codemirror-6

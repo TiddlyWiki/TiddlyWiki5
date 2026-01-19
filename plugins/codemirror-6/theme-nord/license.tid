@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-nord/license
+
+\define theme-name() Nord
+\define theme-url() https://www.nordtheme.com
+\define theme-author() Arctic Ice Studio
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

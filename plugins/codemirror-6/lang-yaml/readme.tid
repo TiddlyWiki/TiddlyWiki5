@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-yaml/readme
+
+! YAML Language Support
+
+Provides syntax highlighting for YAML in code blocks.
+
+!! Supported Content
+
+* Fenced code blocks: ```` ```yaml ```` or ```` ```yml ````
+* Typed blocks: `$$$.yaml` or `$$$.yml`
+
+!! Features
+
+* YAML syntax highlighting with key-value coloring
+* String, number, and boolean literal recognition
+* Comment highlighting

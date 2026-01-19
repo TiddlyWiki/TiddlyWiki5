@@ -1,0 +1,280 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-zenburn/styles
+tags: $:/tags/Stylesheet
+
+\rules only macrocallinline macrocallblock conditional
+
+/* ============================================================================
+   Zenburn Theme for CodeMirror 6
+   ============================================================================
+   
+   Based on https://github.com/jnurmine/Zenburn
+   
+   Low-contrast color scheme originally designed for Vim.
+   Easy on the eyes, nostalgic for old-school developers.
+   
+   ============================================================================ */
+
+/* ============================================================================
+   Zenburn (Default)
+   ============================================================================ */
+
+.cm6-theme-zenburn,
+[data-cm6-theme="zenburn"] {
+  --wt-bg: #3f3f3f;
+  --wt-bg-subtle: #383838;
+  --wt-fg: #dcdccc;
+  --wt-fg-muted: #7f9f7f;
+  --wt-fg-faint: #5f5f5f;
+  --wt-border: #4f4f4f;
+  --wt-selection: rgba(114, 159, 207, 0.3);
+  --wt-line-highlight: rgba(0, 0, 0, 0.15);
+
+  --wt-teal: #8cd0d3;           /* Cyan */
+  --wt-teal-dim: #8cd0d3;
+  --wt-blue: #94bff3;           /* Blue */
+  --wt-violet: #dc8cc3;         /* Magenta */
+  --wt-cyan: #93e0e3;           /* Bright cyan */
+  --wt-orange: #dfaf8f;         /* Orange */
+  --wt-rose: #cc9393;           /* Red (muted) */
+  --wt-amber: #f0dfaf;          /* Yellow */
+  --wt-slate: #dcdccc;
+  --wt-purple: #dc8cc3;
+  --wt-green: #7f9f7f;          /* Green (muted) */
+  --wt-red: #cc9393;
+
+  --wt-bold: #ffffef;
+  --wt-italic: #dcdccc;
+  --wt-strike: #6f6f6f;
+  --wt-underline: #dcdccc;
+  --wt-heading: #8cd0d3;
+
+  --wt-code-bg: #383838;
+  --wt-code-fg: #cc9393;
+
+  --wt-highlight-bg: rgba(240, 223, 175, 0.2);
+  --wt-highlight-fg: #f0dfaf;
+
+  --wt-comment: #7f9f7f;
+  --wt-mark: #4f4f4f;
+}
+
+/* ============================================================================
+   Zenburn High Contrast
+   ============================================================================ */
+
+.cm6-theme-zenburn-high,
+[data-cm6-theme="zenburn-high"] {
+  --wt-bg: #2b2b2b;
+  --wt-bg-subtle: #242424;
+  --wt-fg: #ededdd;
+  --wt-fg-muted: #8faf8f;
+  --wt-fg-faint: #5f5f5f;
+  --wt-border: #454545;
+  --wt-selection: rgba(114, 159, 207, 0.35);
+  --wt-line-highlight: rgba(0, 0, 0, 0.2);
+
+  --wt-teal: #9ce0e3;
+  --wt-teal-dim: #9ce0e3;
+  --wt-blue: #a4cfff;
+  --wt-violet: #ec9cd3;
+  --wt-cyan: #a3f0f3;
+  --wt-orange: #efbf9f;
+  --wt-rose: #dca3a3;
+  --wt-amber: #ffffbf;
+  --wt-slate: #ededdd;
+  --wt-purple: #ec9cd3;
+  --wt-green: #8faf8f;
+  --wt-red: #dca3a3;
+
+  --wt-bold: #ffffff;
+  --wt-italic: #ededdd;
+  --wt-strike: #6f6f6f;
+  --wt-underline: #ededdd;
+  --wt-heading: #9ce0e3;
+
+  --wt-code-bg: #242424;
+  --wt-code-fg: #dca3a3;
+
+  --wt-highlight-bg: rgba(255, 255, 191, 0.2);
+  --wt-highlight-fg: #ffffbf;
+
+  --wt-comment: #8faf8f;
+  --wt-mark: #454545;
+}
+
+/* ============================================================================
+   Token Overrides
+   ============================================================================ */
+
+.cm6-theme-zenburn .tok-string,
+.cm6-theme-zenburn-high .tok-string,
+[data-cm6-theme="zenburn"] .tok-string,
+[data-cm6-theme="zenburn-high"] .tok-string {
+  color: #cc9393;
+}
+
+.cm6-theme-zenburn .tok-keyword,
+.cm6-theme-zenburn-high .tok-keyword,
+[data-cm6-theme="zenburn"] .tok-keyword,
+[data-cm6-theme="zenburn-high"] .tok-keyword {
+  color: #f0dfaf;
+  font-weight: bold;
+}
+
+.cm6-theme-zenburn .tok-function,
+.cm6-theme-zenburn-high .tok-function,
+[data-cm6-theme="zenburn"] .tok-function,
+[data-cm6-theme="zenburn-high"] .tok-function {
+  color: #8cd0d3;
+}
+
+.cm6-theme-zenburn .tok-number,
+.cm6-theme-zenburn-high .tok-number,
+[data-cm6-theme="zenburn"] .tok-number,
+[data-cm6-theme="zenburn-high"] .tok-number {
+  color: #8cd0d3;
+}
+
+.cm6-theme-zenburn .tok-typeName,
+.cm6-theme-zenburn-high .tok-typeName,
+[data-cm6-theme="zenburn"] .tok-typeName,
+[data-cm6-theme="zenburn-high"] .tok-typeName {
+  color: #7cb8bb;
+}
+
+.cm6-theme-zenburn .tok-variableName,
+.cm6-theme-zenburn-high .tok-variableName,
+[data-cm6-theme="zenburn"] .tok-variableName,
+[data-cm6-theme="zenburn-high"] .tok-variableName {
+  color: #dcdccc;
+}
+
+.cm6-theme-zenburn .tok-propertyName,
+.cm6-theme-zenburn-high .tok-propertyName,
+[data-cm6-theme="zenburn"] .tok-propertyName,
+[data-cm6-theme="zenburn-high"] .tok-propertyName {
+  color: #dfaf8f;
+}
+
+/* ============================================================================
+   Editor Chrome
+   ============================================================================ */
+
+.cm6-theme-zenburn .cm-editor,
+[data-cm6-theme="zenburn"] .cm-editor {
+  background-color: #3f3f3f;
+}
+
+.cm6-theme-zenburn-high .cm-editor,
+[data-cm6-theme="zenburn-high"] .cm-editor {
+  background-color: #2b2b2b;
+}
+
+.cm6-theme-zenburn .cm-editor .cm-cursor,
+.cm6-theme-zenburn-high .cm-editor .cm-cursor,
+[data-cm6-theme="zenburn"] .cm-editor .cm-cursor,
+[data-cm6-theme="zenburn-high"] .cm-editor .cm-cursor {
+  border-left-color: #dcdccc;
+}
+
+.cm6-theme-zenburn .cm-editor .cm-gutters,
+.cm6-theme-zenburn-high .cm-editor .cm-gutters,
+[data-cm6-theme="zenburn"] .cm-editor .cm-gutters,
+[data-cm6-theme="zenburn-high"] .cm-editor .cm-gutters {
+  background-color: #3a3a3a;
+  border-right-color: #4f4f4f;
+  color: #7f7f7f;
+}
+
+.cm6-theme-zenburn .cm-editor .cm-matchingBracket,
+.cm6-theme-zenburn-high .cm-editor .cm-matchingBracket,
+[data-cm6-theme="zenburn"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="zenburn-high"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(140, 208, 211, 0.3);
+  outline: 1px solid #8cd0d3;
+}
+
+.cm6-theme-zenburn .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-zenburn-high .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="zenburn"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="zenburn-high"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #3a3a3a;
+  border-color: #4f4f4f;
+}
+
+.cm6-theme-zenburn .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-zenburn-high .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="zenburn"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="zenburn-high"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #8cd0d3;
+  color: #2b2b2b;
+}
+
+.cm6-theme-zenburn .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-zenburn-high .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="zenburn"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="zenburn-high"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(43, 43, 43, 0.8);
+}
+
+.cm6-theme-zenburn .cm-completionMatchedText,
+.cm6-theme-zenburn-high .cm-completionMatchedText,
+[data-cm6-theme="zenburn"] .cm-completionMatchedText,
+[data-cm6-theme="zenburn-high"] .cm-completionMatchedText {
+  color: #8cd0d3;
+}
+
+/* ============================================================================
+   Search
+   ============================================================================ */
+
+.cm6-theme-zenburn .cm-searchMatch,
+.cm6-theme-zenburn-high .cm-searchMatch,
+[data-cm6-theme="zenburn"] .cm-searchMatch,
+[data-cm6-theme="zenburn-high"] .cm-searchMatch {
+  background-color: rgba(240, 223, 175, 0.3);
+}
+
+.cm6-theme-zenburn .cm-searchMatch.cm-searchMatch-selected,
+.cm6-theme-zenburn-high .cm-searchMatch.cm-searchMatch-selected,
+[data-cm6-theme="zenburn"] .cm-searchMatch.cm-searchMatch-selected,
+[data-cm6-theme="zenburn-high"] .cm-searchMatch.cm-searchMatch-selected {
+  background-color: rgba(240, 223, 175, 0.5);
+  outline: 1px solid #f0dfaf;
+}
+
+/* ============================================================================
+   Vim Mode
+   ============================================================================ */
+
+.cm6-theme-zenburn .cm-fat-cursor,
+.cm6-theme-zenburn-high .cm-fat-cursor,
+[data-cm6-theme="zenburn"] .cm-fat-cursor,
+[data-cm6-theme="zenburn-high"] .cm-fat-cursor {
+  background: #dcdccc !important;
+}
+
+.cm6-theme-zenburn .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-zenburn-high .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="zenburn"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="zenburn-high"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #5f5f5f !important;
+}
+
+.cm6-theme-zenburn .cm-vim-panel,
+.cm6-theme-zenburn-high .cm-vim-panel,
+[data-cm6-theme="zenburn"] .cm-vim-panel,
+[data-cm6-theme="zenburn-high"] .cm-vim-panel {
+  background: #383838;
+  border-color: #4f4f4f;
+  color: #dcdccc;
+}
+
+.cm6-theme-zenburn .cm-vim-panel input,
+.cm6-theme-zenburn-high .cm-vim-panel input,
+[data-cm6-theme="zenburn"] .cm-vim-panel input,
+[data-cm6-theme="zenburn-high"] .cm-vim-panel input {
+  background: #3f3f3f;
+  color: #dcdccc;
+  border-color: #4f4f4f;
+}

@@ -1,0 +1,28 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/image-preview/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.cm-image-preview {
+    display: block;
+    padding: 8px;
+    margin: 4px 0;
+    background: <<colour tiddler-background>>;
+    border: 1px solid <<colour tiddler-border>>;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.cm-image-preview img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 2px;
+}
+
+.cm-image-preview-missing,
+.cm-image-preview-error {
+    color: <<colour alert-highlight>>;
+    font-style: italic;
+    padding: 12px;
+    font-size: 0.9em;
+}

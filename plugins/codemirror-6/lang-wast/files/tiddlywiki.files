@@ -1,0 +1,20 @@
+{
+    "tiddlers": [
+        {
+            "file": "lang-wast.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-wast/lang-wast.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "plugin.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-wast/plugin.js",
+                "module-type": "codemirror6-plugin"
+            }
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-javascript/readme
+
+! JavaScript Language Support
+
+Provides syntax highlighting for JavaScript and TypeScript in code blocks.
+
+!! Supported Content
+
+* Fenced code blocks: ```` ```javascript ```` or ```` ```js ````
+* Typed blocks: `$$$.js` or `$$$application/javascript`
+* `<script>` tags in HTML
+* Tiddlers with type `application/javascript`
+
+!! Features
+
+* Full JavaScript/TypeScript syntax highlighting
+* Bracket matching
+* Code folding for functions, classes, and blocks

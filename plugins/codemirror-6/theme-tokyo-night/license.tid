@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-tokyo-night/license
+
+\define theme-name() Tokyo Night
+\define theme-url() https://github.com/enkia/tokyo-night-vscode-theme
+\define theme-author() enkia
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

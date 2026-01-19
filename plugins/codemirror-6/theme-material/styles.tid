@@ -1,0 +1,563 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-material/styles
+tags: $:/tags/Stylesheet
+
+\rules only macrocallinline macrocallblock conditional
+
+/* ============================================================================
+   Material Theme for CodeMirror 6
+   ============================================================================
+   
+   Based on https://github.com/material-theme/vsc-material-theme
+   
+   Google Material Design inspired colors.
+   Variants: Default, Ocean, Palenight, Darker, Lighter
+   
+   ============================================================================ */
+
+/* ============================================================================
+   Material Default (Dark)
+   ============================================================================ */
+
+.cm6-theme-material,
+.cm6-theme-material-default,
+[data-cm6-theme="material"],
+[data-cm6-theme="material-default"] {
+  --wt-bg: #263238;
+  --wt-bg-subtle: #1e272c;
+  --wt-fg: #eeffff;
+  --wt-fg-muted: #546e7a;
+  --wt-fg-faint: #37474f;
+  --wt-border: #37474f;
+  --wt-selection: rgba(128, 203, 196, 0.2);
+  --wt-line-highlight: rgba(0, 0, 0, 0.15);
+
+  --wt-teal: #80cbc4;           /* Cyan */
+  --wt-teal-dim: #80cbc4;
+  --wt-blue: #82aaff;           /* Blue */
+  --wt-violet: #c792ea;         /* Purple */
+  --wt-cyan: #89ddff;           /* Cyan light */
+  --wt-orange: #f78c6c;         /* Orange */
+  --wt-rose: #ff5370;           /* Red */
+  --wt-amber: #ffcb6b;          /* Yellow */
+  --wt-slate: #eeffff;
+  --wt-purple: #c792ea;
+  --wt-green: #c3e88d;          /* Green */
+  --wt-red: #ff5370;
+
+  --wt-bold: #eeffff;
+  --wt-italic: #eeffff;
+  --wt-strike: #546e7a;
+  --wt-underline: #eeffff;
+  --wt-heading: #82aaff;
+
+  --wt-code-bg: #1e272c;
+  --wt-code-fg: #ff5370;
+
+  --wt-highlight-bg: rgba(255, 203, 107, 0.2);
+  --wt-highlight-fg: #ffcb6b;
+
+  --wt-comment: #546e7a;
+  --wt-mark: #37474f;
+}
+
+/* ============================================================================
+   Material Ocean
+   ============================================================================ */
+
+.cm6-theme-material-ocean,
+[data-cm6-theme="material-ocean"] {
+  --wt-bg: #0f111a;
+  --wt-bg-subtle: #090b10;
+  --wt-fg: #8f93a2;
+  --wt-fg-muted: #464b5d;
+  --wt-fg-faint: #2f3344;
+  --wt-border: #1f2233;
+  --wt-selection: rgba(113, 124, 180, 0.2);
+  --wt-line-highlight: rgba(0, 0, 0, 0.2);
+
+  --wt-teal: #80cbc4;
+  --wt-teal-dim: #80cbc4;
+  --wt-blue: #82aaff;
+  --wt-violet: #c792ea;
+  --wt-cyan: #89ddff;
+  --wt-orange: #f78c6c;
+  --wt-rose: #ff5370;
+  --wt-amber: #ffcb6b;
+  --wt-slate: #8f93a2;
+  --wt-purple: #c792ea;
+  --wt-green: #c3e88d;
+  --wt-red: #ff5370;
+
+  --wt-bold: #d0d0d0;
+  --wt-italic: #8f93a2;
+  --wt-strike: #464b5d;
+  --wt-underline: #8f93a2;
+  --wt-heading: #82aaff;
+
+  --wt-code-bg: #090b10;
+  --wt-code-fg: #ff5370;
+
+  --wt-highlight-bg: rgba(255, 203, 107, 0.15);
+  --wt-highlight-fg: #ffcb6b;
+
+  --wt-comment: #464b5d;
+  --wt-mark: #1f2233;
+}
+
+/* ============================================================================
+   Material Palenight
+   ============================================================================ */
+
+.cm6-theme-material-palenight,
+[data-cm6-theme="material-palenight"] {
+  --wt-bg: #292d3e;
+  --wt-bg-subtle: #1b1e2b;
+  --wt-fg: #a6accd;
+  --wt-fg-muted: #676e95;
+  --wt-fg-faint: #4e5579;
+  --wt-border: #3a3f58;
+  --wt-selection: rgba(113, 124, 180, 0.2);
+  --wt-line-highlight: rgba(0, 0, 0, 0.15);
+
+  --wt-teal: #80cbc4;
+  --wt-teal-dim: #80cbc4;
+  --wt-blue: #82aaff;
+  --wt-violet: #c792ea;
+  --wt-cyan: #89ddff;
+  --wt-orange: #f78c6c;
+  --wt-rose: #ff5370;
+  --wt-amber: #ffcb6b;
+  --wt-slate: #a6accd;
+  --wt-purple: #c792ea;
+  --wt-green: #c3e88d;
+  --wt-red: #ff5370;
+
+  --wt-bold: #d0d0d0;
+  --wt-italic: #a6accd;
+  --wt-strike: #676e95;
+  --wt-underline: #a6accd;
+  --wt-heading: #82aaff;
+
+  --wt-code-bg: #1b1e2b;
+  --wt-code-fg: #ff5370;
+
+  --wt-highlight-bg: rgba(255, 203, 107, 0.15);
+  --wt-highlight-fg: #ffcb6b;
+
+  --wt-comment: #676e95;
+  --wt-mark: #3a3f58;
+}
+
+/* ============================================================================
+   Material Darker
+   ============================================================================ */
+
+.cm6-theme-material-darker,
+[data-cm6-theme="material-darker"] {
+  --wt-bg: #212121;
+  --wt-bg-subtle: #1a1a1a;
+  --wt-fg: #eeffff;
+  --wt-fg-muted: #545454;
+  --wt-fg-faint: #3a3a3a;
+  --wt-border: #2c2c2c;
+  --wt-selection: rgba(128, 203, 196, 0.2);
+  --wt-line-highlight: rgba(0, 0, 0, 0.2);
+
+  --wt-teal: #80cbc4;
+  --wt-teal-dim: #80cbc4;
+  --wt-blue: #82aaff;
+  --wt-violet: #c792ea;
+  --wt-cyan: #89ddff;
+  --wt-orange: #f78c6c;
+  --wt-rose: #ff5370;
+  --wt-amber: #ffcb6b;
+  --wt-slate: #eeffff;
+  --wt-purple: #c792ea;
+  --wt-green: #c3e88d;
+  --wt-red: #ff5370;
+
+  --wt-bold: #eeffff;
+  --wt-italic: #eeffff;
+  --wt-strike: #545454;
+  --wt-underline: #eeffff;
+  --wt-heading: #82aaff;
+
+  --wt-code-bg: #1a1a1a;
+  --wt-code-fg: #ff5370;
+
+  --wt-highlight-bg: rgba(255, 203, 107, 0.2);
+  --wt-highlight-fg: #ffcb6b;
+
+  --wt-comment: #545454;
+  --wt-mark: #2c2c2c;
+}
+
+/* ============================================================================
+   Material Lighter
+   ============================================================================ */
+
+.cm6-theme-material-lighter,
+[data-cm6-theme="material-lighter"] {
+  --wt-bg: #fafafa;
+  --wt-bg-subtle: #f5f5f5;
+  --wt-fg: #546e7a;
+  --wt-fg-muted: #90a4ae;
+  --wt-fg-faint: #cfd8dc;
+  --wt-border: #e7eaec;
+  --wt-selection: rgba(128, 203, 196, 0.3);
+  --wt-line-highlight: rgba(0, 0, 0, 0.03);
+
+  --wt-teal: #39adb5;           /* Cyan */
+  --wt-teal-dim: #39adb5;
+  --wt-blue: #6182b8;           /* Blue */
+  --wt-violet: #7c4dff;         /* Purple */
+  --wt-cyan: #39adb5;
+  --wt-orange: #f76d47;         /* Orange */
+  --wt-rose: #e53935;           /* Red */
+  --wt-amber: #e2931d;          /* Yellow */
+  --wt-slate: #546e7a;
+  --wt-purple: #7c4dff;
+  --wt-green: #91b859;          /* Green */
+  --wt-red: #e53935;
+
+  --wt-bold: #546e7a;
+  --wt-italic: #546e7a;
+  --wt-strike: #90a4ae;
+  --wt-underline: #546e7a;
+  --wt-heading: #6182b8;
+
+  --wt-code-bg: #f5f5f5;
+  --wt-code-fg: #e53935;
+
+  --wt-highlight-bg: rgba(226, 147, 29, 0.15);
+  --wt-highlight-fg: #e2931d;
+
+  --wt-comment: #90a4ae;
+  --wt-mark: #e7eaec;
+}
+
+/* ============================================================================
+   Token Overrides - Dark Variants
+   ============================================================================ */
+
+.cm6-theme-material .tok-string,
+.cm6-theme-material-default .tok-string,
+.cm6-theme-material-ocean .tok-string,
+.cm6-theme-material-palenight .tok-string,
+.cm6-theme-material-darker .tok-string,
+[data-cm6-theme="material"] .tok-string,
+[data-cm6-theme="material-default"] .tok-string,
+[data-cm6-theme="material-ocean"] .tok-string,
+[data-cm6-theme="material-palenight"] .tok-string,
+[data-cm6-theme="material-darker"] .tok-string {
+  color: #c3e88d;
+}
+
+.cm6-theme-material .tok-keyword,
+.cm6-theme-material-default .tok-keyword,
+.cm6-theme-material-ocean .tok-keyword,
+.cm6-theme-material-palenight .tok-keyword,
+.cm6-theme-material-darker .tok-keyword,
+[data-cm6-theme="material"] .tok-keyword,
+[data-cm6-theme="material-default"] .tok-keyword,
+[data-cm6-theme="material-ocean"] .tok-keyword,
+[data-cm6-theme="material-palenight"] .tok-keyword,
+[data-cm6-theme="material-darker"] .tok-keyword {
+  color: #c792ea;
+}
+
+.cm6-theme-material .tok-function,
+.cm6-theme-material-default .tok-function,
+.cm6-theme-material-ocean .tok-function,
+.cm6-theme-material-palenight .tok-function,
+.cm6-theme-material-darker .tok-function,
+[data-cm6-theme="material"] .tok-function,
+[data-cm6-theme="material-default"] .tok-function,
+[data-cm6-theme="material-ocean"] .tok-function,
+[data-cm6-theme="material-palenight"] .tok-function,
+[data-cm6-theme="material-darker"] .tok-function {
+  color: #82aaff;
+}
+
+.cm6-theme-material .tok-number,
+.cm6-theme-material-default .tok-number,
+.cm6-theme-material-ocean .tok-number,
+.cm6-theme-material-palenight .tok-number,
+.cm6-theme-material-darker .tok-number,
+[data-cm6-theme="material"] .tok-number,
+[data-cm6-theme="material-default"] .tok-number,
+[data-cm6-theme="material-ocean"] .tok-number,
+[data-cm6-theme="material-palenight"] .tok-number,
+[data-cm6-theme="material-darker"] .tok-number {
+  color: #f78c6c;
+}
+
+/* ============================================================================
+   Token Overrides - Lighter
+   ============================================================================ */
+
+.cm6-theme-material-lighter .tok-string,
+[data-cm6-theme="material-lighter"] .tok-string {
+  color: #91b859;
+}
+
+.cm6-theme-material-lighter .tok-keyword,
+[data-cm6-theme="material-lighter"] .tok-keyword {
+  color: #7c4dff;
+}
+
+.cm6-theme-material-lighter .tok-function,
+[data-cm6-theme="material-lighter"] .tok-function {
+  color: #6182b8;
+}
+
+.cm6-theme-material-lighter .tok-number,
+[data-cm6-theme="material-lighter"] .tok-number {
+  color: #f76d47;
+}
+
+/* ============================================================================
+   Editor Chrome - Dark Variants
+   ============================================================================ */
+
+.cm6-theme-material .cm-editor,
+.cm6-theme-material-default .cm-editor,
+[data-cm6-theme="material"] .cm-editor,
+[data-cm6-theme="material-default"] .cm-editor {
+  background-color: #263238;
+}
+
+.cm6-theme-material-ocean .cm-editor,
+[data-cm6-theme="material-ocean"] .cm-editor {
+  background-color: #0f111a;
+}
+
+.cm6-theme-material-palenight .cm-editor,
+[data-cm6-theme="material-palenight"] .cm-editor {
+  background-color: #292d3e;
+}
+
+.cm6-theme-material-darker .cm-editor,
+[data-cm6-theme="material-darker"] .cm-editor {
+  background-color: #212121;
+}
+
+.cm6-theme-material .cm-editor .cm-cursor,
+.cm6-theme-material-default .cm-editor .cm-cursor,
+.cm6-theme-material-ocean .cm-editor .cm-cursor,
+.cm6-theme-material-palenight .cm-editor .cm-cursor,
+.cm6-theme-material-darker .cm-editor .cm-cursor,
+[data-cm6-theme="material"] .cm-editor .cm-cursor,
+[data-cm6-theme="material-default"] .cm-editor .cm-cursor,
+[data-cm6-theme="material-ocean"] .cm-editor .cm-cursor,
+[data-cm6-theme="material-palenight"] .cm-editor .cm-cursor,
+[data-cm6-theme="material-darker"] .cm-editor .cm-cursor {
+  border-left-color: #ffcc00;
+}
+
+.cm6-theme-material .cm-editor .cm-matchingBracket,
+.cm6-theme-material-default .cm-editor .cm-matchingBracket,
+.cm6-theme-material-ocean .cm-editor .cm-matchingBracket,
+.cm6-theme-material-palenight .cm-editor .cm-matchingBracket,
+.cm6-theme-material-darker .cm-editor .cm-matchingBracket,
+[data-cm6-theme="material"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="material-default"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="material-ocean"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="material-palenight"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="material-darker"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(128, 203, 196, 0.25);
+  outline: 1px solid #80cbc4;
+}
+
+.cm6-theme-material .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-material-default .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-material-ocean .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-material-palenight .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-material-darker .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="material"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="material-default"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="material-ocean"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="material-palenight"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="material-darker"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #1e272c;
+  border-color: #37474f;
+}
+
+.cm6-theme-material .cm-completionMatchedText,
+.cm6-theme-material-default .cm-completionMatchedText,
+.cm6-theme-material-ocean .cm-completionMatchedText,
+.cm6-theme-material-palenight .cm-completionMatchedText,
+.cm6-theme-material-darker .cm-completionMatchedText,
+[data-cm6-theme="material"] .cm-completionMatchedText,
+[data-cm6-theme="material-default"] .cm-completionMatchedText,
+[data-cm6-theme="material-ocean"] .cm-completionMatchedText,
+[data-cm6-theme="material-palenight"] .cm-completionMatchedText,
+[data-cm6-theme="material-darker"] .cm-completionMatchedText {
+  color: #80cbc4;
+}
+
+/* ============================================================================
+   Editor Chrome - Lighter
+   ============================================================================ */
+
+.cm6-theme-material-lighter .cm-editor,
+[data-cm6-theme="material-lighter"] .cm-editor {
+  background-color: #fafafa;
+}
+
+.cm6-theme-material-lighter .cm-editor .cm-cursor,
+[data-cm6-theme="material-lighter"] .cm-editor .cm-cursor {
+  border-left-color: #39adb5;
+}
+
+.cm6-theme-material-lighter .cm-editor .cm-gutters,
+[data-cm6-theme="material-lighter"] .cm-editor .cm-gutters {
+  background-color: #fafafa;
+  border-right-color: #e7eaec;
+  color: #90a4ae;
+}
+
+.cm6-theme-material-lighter .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="material-lighter"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #ffffff;
+  border-color: #e7eaec;
+}
+
+.cm6-theme-material-lighter .cm-completionMatchedText,
+[data-cm6-theme="material-lighter"] .cm-completionMatchedText {
+  color: #39adb5;
+}
+
+/* ============================================================================
+   Autocomplete Selected - Dark Variants
+   ============================================================================ */
+
+.cm6-theme-material .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-material-default .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-material-ocean .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-material-palenight .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-material-darker .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="material"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="material-default"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="material-ocean"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="material-palenight"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="material-darker"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #82aaff;
+  color: #1e272c;
+}
+
+.cm6-theme-material .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-material-default .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-material-ocean .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-material-palenight .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-material-darker .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="material"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="material-default"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="material-ocean"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="material-palenight"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="material-darker"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(30, 39, 44, 0.8);
+}
+
+/* ============================================================================
+   Autocomplete Selected - Lighter
+   ============================================================================ */
+
+.cm6-theme-material-lighter .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="material-lighter"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #6182b8;
+  color: #fafafa;
+}
+
+.cm6-theme-material-lighter .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="material-lighter"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(250, 250, 250, 0.8);
+}
+
+/* ============================================================================
+   Vim Mode - Dark Variants
+   ============================================================================ */
+
+.cm6-theme-material .cm-fat-cursor,
+.cm6-theme-material-default .cm-fat-cursor,
+.cm6-theme-material-ocean .cm-fat-cursor,
+.cm6-theme-material-palenight .cm-fat-cursor,
+.cm6-theme-material-darker .cm-fat-cursor,
+[data-cm6-theme="material"] .cm-fat-cursor,
+[data-cm6-theme="material-default"] .cm-fat-cursor,
+[data-cm6-theme="material-ocean"] .cm-fat-cursor,
+[data-cm6-theme="material-palenight"] .cm-fat-cursor,
+[data-cm6-theme="material-darker"] .cm-fat-cursor {
+  background: #ffcc00 !important;
+}
+
+.cm6-theme-material .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-material-default .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-material-ocean .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-material-palenight .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-material-darker .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="material"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="material-default"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="material-ocean"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="material-palenight"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="material-darker"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #546e7a !important;
+}
+
+.cm6-theme-material .cm-vim-panel,
+.cm6-theme-material-default .cm-vim-panel,
+.cm6-theme-material-ocean .cm-vim-panel,
+.cm6-theme-material-palenight .cm-vim-panel,
+.cm6-theme-material-darker .cm-vim-panel,
+[data-cm6-theme="material"] .cm-vim-panel,
+[data-cm6-theme="material-default"] .cm-vim-panel,
+[data-cm6-theme="material-ocean"] .cm-vim-panel,
+[data-cm6-theme="material-palenight"] .cm-vim-panel,
+[data-cm6-theme="material-darker"] .cm-vim-panel {
+  background: #1e272c;
+  border-color: #37474f;
+  color: #eeffff;
+}
+
+.cm6-theme-material .cm-vim-panel input,
+.cm6-theme-material-default .cm-vim-panel input,
+.cm6-theme-material-ocean .cm-vim-panel input,
+.cm6-theme-material-palenight .cm-vim-panel input,
+.cm6-theme-material-darker .cm-vim-panel input,
+[data-cm6-theme="material"] .cm-vim-panel input,
+[data-cm6-theme="material-default"] .cm-vim-panel input,
+[data-cm6-theme="material-ocean"] .cm-vim-panel input,
+[data-cm6-theme="material-palenight"] .cm-vim-panel input,
+[data-cm6-theme="material-darker"] .cm-vim-panel input {
+  background: #263238;
+  color: #eeffff;
+  border-color: #37474f;
+}
+
+/* ============================================================================
+   Vim Mode - Lighter
+   ============================================================================ */
+
+.cm6-theme-material-lighter .cm-fat-cursor,
+[data-cm6-theme="material-lighter"] .cm-fat-cursor {
+  background: #39adb5 !important;
+}
+
+.cm6-theme-material-lighter .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="material-lighter"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #cfd8dc !important;
+}
+
+.cm6-theme-material-lighter .cm-vim-panel,
+[data-cm6-theme="material-lighter"] .cm-vim-panel {
+  background: #f5f5f5;
+  border-color: #e7eaec;
+  color: #546e7a;
+}
+
+.cm6-theme-material-lighter .cm-vim-panel input,
+[data-cm6-theme="material-lighter"] .cm-vim-panel input {
+  background: #fafafa;
+  color: #546e7a;
+  border-color: #e7eaec;
+}

@@ -1,0 +1,25 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-material/readme
+
+! Material Theme for CodeMirror 6
+
+Google Material Design inspired colors.
+
+Based on [[Material Theme|https://github.com/material-theme/vsc-material-theme]].
+
+!! Variants
+
+* `material` / `material-default` - Default dark
+* `material-ocean` - Deep dark blue
+* `material-palenight` - Purple-tinted dark
+* `material-darker` - Pure dark
+* `material-lighter` - Light variant
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-material` | Default (default) |
+| `cm6-theme-material-default` | Same as above |
+| `cm6-theme-material-ocean` | Ocean |
+| `cm6-theme-material-palenight` | Palenight |
+| `cm6-theme-material-darker` | Darker |
+| `cm6-theme-material-lighter` | Lighter |

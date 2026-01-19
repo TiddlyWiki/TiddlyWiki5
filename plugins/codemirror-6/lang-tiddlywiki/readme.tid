@@ -1,0 +1,231 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-tiddlywiki/readme
+type: text/vnd.tiddlywiki
+
+! CodeMirror 6 TiddlyWiki Editor
+
+A modern, modular CodeMirror 6 editor for TiddlyWiki5 with extensive plugin support.
+
+!! Features
+
+* Full TiddlyWiki5 wikitext syntax highlighting
+* Modular plugin architecture
+* Autocomplete for tiddlers, macros, widgets, and fields
+* Link preview on hover
+* Ctrl+Click navigation to tiddlers
+* Code snippets with Tab expansion
+* Wikitext linting and validation
+* TiddlyWiki toolbar integration
+* Code folding
+* Search and replace
+* Bracket matching
+
+!! Plugin Architecture
+
+The editor uses `module-type: codemirror6-plugin` for all extensions. Each plugin can:
+
+* Add API methods to the engine
+* Register compartments for dynamic configuration
+* Provide CodeMirror extensions
+* Handle events
+
+!! Built-in Plugins
+
+!!! Core Plugins
+
+|!Plugin |!Priority |!Description |
+|`core-features` |1000 |History, selection, cursor, document manipulation, scrolling |
+|`syntax` |900 |Bracket matching, indentation, syntax tree access |
+|`search` |800 |Search/replace panel, find next/previous |
+|`fold` |700 |Code folding, fold gutter |
+|`autocomplete` |600 |Completion framework, close brackets |
+
+!!! TiddlyWiki Plugins
+
+|!Plugin |!Priority |!Description |
+|`lang-tiddlywiki` |900 |TiddlyWiki wikitext parsing, highlighting, and autocompletion |
+|`tw-snippets` |540 |Code templates with Tab expansion |
+|`tw-click-navigate` |450 |Ctrl+Click to open tiddlers |
+|`tw-link-preview` |400 |Hover preview for links and transclusions |
+|`tw-lint` |300 |Wikitext validation and error checking |
+|`tw-toolbar` |200 |TiddlyWiki editor toolbar integration |
+
+!! TiddlyWiki Autocomplete
+
+The `lang-tiddlywiki` language support provides intelligent completions:
+
+|!Trigger |!Completions |
+|`[[` |Tiddler titles |
+|`{{` |Tiddler titles (transclusion) |
+|`<<` |Macro names |
+|`<$` |Widget names |
+|`[tag[` |Tag names |
+|`!!` after `{{tiddler` |Field names |
+|`[` in filter |Filter operators |
+
+!! Snippets
+
+Type abbreviation + Tab to expand. Examples:
+
+|!Trigger |!Expands To |
+|`\def` |`\define macroname(params)...\end` |
+|`\proc` |`\procedure name(params)...\end` |
+|`$list` |`<$list filter="...">...</$list>` |
+|`$button` |`<$button message="...">...</$button>` |
+|`$reveal` |`<$reveal type="..." state="...">...</$reveal>` |
+|`<<<` |Block quote |
+|<code>```</code> |Code block |
+|`|table` |Table template |
+|`btn-toggle` |Toggle button pattern |
+|`popup` |Popup button pattern |
+
+!! Ctrl+Click Navigation
+
+Hold Ctrl (Cmd on Mac) and click on:
+
+* `[[WikiLinks]]` - Opens the tiddler
+* `{{Transclusions}}` - Opens the tiddler
+* `<<macros>>` - Opens the defining tiddler
+* `<$widgets>` - Opens widget documentation
+* CamelCaseLinks - Opens if tiddler exists
+
+Shift+Ctrl+Click opens in a new window.
+
+!! Link Preview
+
+Hover over links to see a preview containing:
+
+* Tiddler title
+* Tags
+* Content type
+* Text preview or image
+* Modified date
+
+Disable with `linkPreview: false` in engine options.
+
+!! Linting
+
+The linter checks for:
+
+* Unmatched brackets (`[[`, `{{`, `<<`, etc.)
+* Unclosed widgets
+* Invalid widget names
+* Broken internal links
+* Unclosed formatting
+* Filter syntax errors
+* Pragma placement
+
+Enable lint gutter with `lintGutter: true`.
+
+!! Smart Editing
+
+* ''Enter'' — continues list markers and indentation on new lines
+* ''Backspace'' — smart deletion of markup (e.g., removes list marker when at start of list item)
+
+Formatting shortcuts (bold, italic, links, etc.) are handled by the TiddlyWiki editor toolbar.
+
+!! Engine Options
+
+```javascript
+new CodeMirrorEngine({
+    // DOM
+    parentNode: element,
+    widget: editWidget,
+    
+    // Content
+    value: "initial text",
+    tiddlerTitle: "MyTiddler",
+    tiddlerType: "text/vnd.tiddlywiki",
+    
+    // Features
+    readOnly: false,
+    lineNumbers: true,
+    lineWrapping: true,
+    foldGutter: true,
+    highlightActiveLine: true,
+    bracketMatching: true,
+    closeBrackets: true,
+    autocompletion: true,
+    search: true,
+    
+    // TiddlyWiki features
+    linkPreview: true,
+    clickNavigate: true,
+    snippets: true,
+    lint: true,
+    lintGutter: true,
+    lintLinks: true,
+    toolbar: true,
+    
+    // Callbacks
+    onChange: function(text) { },
+    onBlurSave: function() { }
+});
+```
+
+!! API Reference
+
+!!! Document Methods
+
+* `getText()` - Get document text
+* `setText(text)` - Set document text
+* `getLine(n)` - Get line n (1-based)
+* `getLineCount()` - Number of lines
+* `getRange(from, to)` - Get text range
+* `replaceRange(from, to, text)` - Replace range
+* `insert(text, pos)` - Insert at position
+
+!!! Selection Methods
+
+* `getSelection()` - Get selection info
+* `setSelection(anchor, head)` - Set selection
+* `getCursor()` - Get cursor position
+* `setCursor(pos)` - Set cursor position
+* `selectAll()` - Select all
+* `replaceSelection(text)` - Replace selection
+
+!!! History Methods
+
+* `undo()` / `redo()` - History navigation
+* `canUndo()` / `canRedo()` - Check history state
+
+!!! TiddlyWiki Methods
+
+* `toggleBold()`, `toggleItalic()`, etc. - Formatting
+* `insertWikiLink()`, `insertTransclusion()` - Links
+* `setHeading(level)`, `removeHeading()` - Headings
+* `navigateToTiddler(title)` - Navigation
+* `insertSnippet(template)` - Snippets
+* `lint()` - Force lint check
+
+!! Creating Custom Plugins
+
+```javascript
+/*\
+title: $:/plugins/me/myplugin.js
+module-type: codemirror6-plugin
+\*/
+exports.plugin = {
+    name: "my-plugin",
+    priority: 500,
+    
+    condition: function(context) {
+        return context.tiddlerType === "text/vnd.tiddlywiki";
+    },
+    
+    getExtensions: function(context) {
+        return [/* CM6 extensions */];
+    },
+    
+    extendAPI: function(engine, context) {
+        return {
+            myMethod: function() {
+                return this.getText();
+            }
+        };
+    }
+};
+```
+
+!! License
+
+MIT License

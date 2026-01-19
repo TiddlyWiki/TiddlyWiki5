@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/readme
+
+! XML Language Support
+
+Provides syntax highlighting for XML and SVG in code blocks.
+
+!! Supported Content
+
+* Fenced code blocks: ```` ```xml ```` or ```` ```svg ````
+* Typed blocks: `$$$.xml` or `$$$.svg`
+* Tiddlers with type `text/xml` or `image/svg+xml`
+
+!! Features
+
+* XML/SVG syntax highlighting with tag and attribute coloring
+* Bracket matching for tags
+* Code folding for nested elements

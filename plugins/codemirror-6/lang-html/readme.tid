@@ -1,0 +1,18 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-html/readme
+
+! HTML Language Support
+
+Provides syntax highlighting for HTML in code blocks.
+
+!! Supported Content
+
+* Fenced code blocks: ```` ```html ```` or ```` ```htm ````
+* Typed blocks: `$$$.html` or `$$$text/html`
+* Tiddlers with type `text/html`
+
+!! Features
+
+* Full HTML syntax highlighting with tag and attribute coloring
+* Nested CSS in `<style>` tags
+* Nested JavaScript in `<script>` tags
+* Bracket matching and code folding

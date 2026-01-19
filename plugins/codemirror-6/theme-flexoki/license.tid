@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-flexoki/license
+
+\define theme-name() Flexoki
+\define theme-url() https://stephango.com/flexoki
+\define theme-author() Steph Ango
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

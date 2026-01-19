@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-json/readme
+
+! JSON Language Support
+
+Provides syntax highlighting for JSON in code blocks.
+
+!! Supported Content
+
+* Fenced code blocks: ```` ```json ````
+* Typed blocks: `$$$.json` or `$$$application/json`
+* Tiddlers with type `application/json`
+
+!! Features
+
+* JSON syntax highlighting with proper string, number, and keyword coloring
+* Bracket matching for objects and arrays
+* Code folding for nested structures

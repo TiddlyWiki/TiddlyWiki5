@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/lezer
+tags: $:/tags/CodeMirror/Language
+name: Lezer Grammar
+type: text/x-lezer
+category: Other
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer

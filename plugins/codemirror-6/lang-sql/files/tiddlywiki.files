@@ -1,0 +1,20 @@
+{
+    "tiddlers": [
+        {
+            "file": "lang-sql.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/lang-sql.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "plugin.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/plugin.js",
+                "module-type": "codemirror6-plugin"
+            }
+        }
+    ]
+}
