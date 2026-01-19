@@ -64,6 +64,8 @@ tags: $:/tags/EditTemplate
 
 \function tf.primary-list-exceptions() created creator draft.of draft.title modified modifier tags text title type
 
+\function tf.list-selection-class(listSuffix) [<searchListState>get[text]removesuffix<listSuffix>match<currentField>then[tc-list-item-selected]]
+
 
 <$let newFieldValueTiddlerPrefix={{{ [<newFieldValueTiddlerPrefix>!is[blank]else<qualify "$:/temp/NewFieldValue">] }}} >
 	<div class="tc-edit-fields">
@@ -101,7 +103,10 @@ tags: $:/tags/EditTemplate
 			<em class="tc-edit tc-small-gap-right">
 				<<lingo Fields/Add/Prompt>>
 			</em>
-			<$let refreshTitle=<<qualify "$:/temp/fieldname/refresh">> storeTitle=<<newFieldNameInputTiddler>> searchListState=<<newFieldNameSelectionTiddler>>>
+			<$let refreshTitle=<<qualify "$:/temp/fieldname/refresh">>
+				storeTitle=<<newFieldNameInputTiddler>>
+				searchListState=<<newFieldNameSelectionTiddler>>
+			>
 				<div class="tc-edit-field-add-name-wrapper">
 					<$transclude $variable="keyboard-driven-input"
 						cancelPopups="yes"
@@ -126,43 +131,31 @@ tags: $:/tags/EditTemplate
 					>
 						{{$:/core/images/down-arrow}}
 					</$button>
-					<$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="">
-						<div class="tc-block-dropdown tc-edit-type-dropdown">
-							<$let tv-show-missing-links="yes">
-								<$linkcatcher to=<<newFieldNameTiddler>>>
+					<$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="" tag="div" class="tc-block-dropdown tc-edit-type-dropdown">
+						<$let tv-show-missing-links="yes">
+							<$linkcatcher to=<<newFieldNameTiddler>>>
+								<div class="tc-dropdown-item">
+									<<lingo Fields/Add/Dropdown/User>>
+								</div>
+								<$let newFieldName={{{ [<storeTitle>get[text]] }}}
+									primaryListFields={{{ [!is[shadow]!is[system]fields[]format:titlelist[]join[ ]] }}}
+								>
+									<$list filter="[enlist<primaryListFields>search:title<newFieldName>sort[]] :except[tf.primary-list-exceptions[]]" variable="currentField">
+										<$link to=<<currentField>> class=<<tf.list-selection-class "-primaryList">> >
+											<$text text=<<currentField>>/>
+										</$link>
+									</$list>
 									<div class="tc-dropdown-item">
-										<<lingo Fields/Add/Dropdown/User>>
+										<<lingo Fields/Add/Dropdown/System>>
 									</div>
-									<$let newFieldName={{{ [<storeTitle>get[text]] }}}>
-										<$list filter="[!is[shadow]!is[system]fields[]search:title<newFieldName>sort[]] :except[tf.primary-list-exceptions[]]" variable="currentField">
-											<%if [<currentField>addsuffix[-primaryList]] :except[<searchListState>get[text]] %>
-												<$link to=<<currentField>>>
-													<$text text=<<currentField>>/>
-												</$link>
-											<%else%>
-												<$link to=<<currentField>> class="tc-list-item-selected">
-													<$text text=<<currentField>>/>
-												</$link>
-											<%endif%>
-										</$list>
-										<div class="tc-dropdown-item">
-											<<lingo Fields/Add/Dropdown/System>>
-										</div>
-										<$list filter="[fields[]search:title<newFieldName>sort[]] :except[!is[shadow]!is[system]fields[]]" variable="currentField">
-											<%if [<currentField>addsuffix[-secondaryList]] :except[<searchListState>get[text]] %>
-												<$link to=<<currentField>>>
-													<$text text=<<currentField>>/>
-												</$link>
-											<%else%>
-												<$link to=<<currentField>> class="tc-list-item-selected">
-													<$text text=<<currentField>>/>
-												</$link>
-											<%endif%>
-										</$list>
-									</$let>
-								</$linkcatcher>
-							</$let>
-						</div>
+									<$list filter="[fields[]search:title<newFieldName>!enlist<primaryListFields>sort[]]" variable="currentField">
+										<$link to=<<currentField>> class=<<tf.list-selection-class "-secondaryList">>>
+											<$text text=<<currentField>>/>
+										</$link>
+									</$list>
+								</$let>
+							</$linkcatcher>
+						</$let>
 					</$reveal>
 				</div>
 				<$let currentFieldName={{{ [<newFieldNameTiddler>get[text]] }}}
