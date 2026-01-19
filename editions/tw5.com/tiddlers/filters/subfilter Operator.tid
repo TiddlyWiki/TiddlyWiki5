@@ -27,3 +27,5 @@ type: text/vnd.tiddlywiki
 The <<.op subfilter>> operator will act as a [[constructor|Selection Constructors]] whenever the filter defined by its parameter is a [[constructor|Selection Constructors]]. Otherwise, it will act as a [[modifier|Selection Constructors]].
 
 <<.operator-examples "subfilter">>
+
+it is not propogated into further subfilters
