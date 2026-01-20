@@ -241,7 +241,7 @@ exports.filterTiddlers = function(filterString,widget,source,options) {
 };
 
 /*
-Compile a filter into a function with the signature fn(source,widget) where:
+Compile a filter into a function with the signature fn(source,widget,options) where:
 source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
 widget: an optional widget node for retrieving the current tiddler etc.
 options: optional hashmap of options
