@@ -1122,15 +1122,16 @@ Parse a block of text of a specified MIME type
 Options include:
 	substitutions: an optional array of substitutions
 */
-exports.getSubstitutedText = function(text,widget,options) {
+exports.getSubstitutedText = function(text,thisWidget,options) {
 	options = options || {};
 	text = text || "";
 	var self = this,
+		widgetClass = widget.widget,
 		substitutions = options.substitutions || [],
 		output;
 	// Evaluate embedded filters and substitute with first result
 	output = text.replace(/\$\{([\S\s]+?)\}\$/g, function(match,filter) {
-		return self.filterTiddlers(filter,widget)[0] || "";
+		return self.filterTiddlers(filter,thisWidget)[0] || "";
 	});
 	// Process any substitutions provided in options
 	$tw.utils.each(substitutions,function(substitute) {
@@ -1138,7 +1139,8 @@ exports.getSubstitutedText = function(text,widget,options) {
 	});
 	// Substitute any variable references with their values
 	return output.replace(/\$\((.+?)\)\$/g, function(match,varname) {
-		return widget.getVariable(varname,{defaultValue: ""});
+		//return thisWidget.getVariable(varname,{defaultValue: ""});
+		return widgetClass.evaluateVariable(thisWidget,varname, {defaultValue: ""})[0];
 	});
 };
 
