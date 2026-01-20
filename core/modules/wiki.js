@@ -1139,7 +1139,6 @@ exports.getSubstitutedText = function(text,thisWidget,options) {
 	});
 	// Substitute any variable references with their values
 	return output.replace(/\$\((.+?)\)\$/g, function(match,varname) {
-		//return thisWidget.getVariable(varname,{defaultValue: ""});
 		return widgetClass.evaluateVariable(thisWidget,varname, {defaultValue: ""})[0];
 	});
 };
