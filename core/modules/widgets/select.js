@@ -125,7 +125,7 @@ SelectWidget.prototype.setSelectValue = function() {
 				values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
 		for(var i=0; i < select.children.length; i++){
 			child=select.children[i];
-			if (child.children.length === 0){
+			if(child.children.length === 0){
 				child.selected = values.indexOf(child.value) !== -1
 			} else {
 				// grouped options
