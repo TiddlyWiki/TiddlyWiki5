@@ -116,6 +116,7 @@ tags: $:/tags/EditTemplate
 					default=""
 					focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] :else[[false]] }}}
 					focusPopup=<<qualify "$:/state/popup/field-dropdown">>
+					inputAcceptVariantActions=<<save-tiddler-actions>>
 					inputCancelActions=<<cancel-search-actions>>
 					placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}}
 					refreshTitle=<<refreshTitle>>
