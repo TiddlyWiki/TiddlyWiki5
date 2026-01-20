@@ -255,7 +255,7 @@ options: optional hashmap of options
 	options.defaultFilterRunPrefix: the default filter run prefix to use when none is specified
 */
 exports.compileFilter = function(filterString,options) {
-	var defaultFilterRunPrefix = options?.defaultFilterRunPrefix || "or";
+	var defaultFilterRunPrefix = (options || {}).defaultFilterRunPrefix || "or";
 	var cacheKey = filterString + '|' + defaultFilterRunPrefix;
 	if(!this.filterCache) {
 		this.filterCache = Object.create(null);
