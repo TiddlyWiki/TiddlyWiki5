@@ -258,7 +258,7 @@ Collect DOM variables
 exports.collectDOMVariables = function(selectedNode,domNode,event){
 	const vars={};
 
-	const addRectVars=(prefix,{left,top,width,height}) => {
+	const addRectVars = (prefix,{left,top,width,height}) => {
 		vars[`${prefix}-posx`] = `${left}`;
 		vars[`${prefix}-posy`] = `${top}`;
 		vars[`${prefix}-width`] = `${width}`;
@@ -267,7 +267,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event){
 
 	if(selectedNode) {
 		for(const{name,value} of selectedNode.attributes) {
-			vars[`dom-${name}`]=`${value}`;
+			vars[`dom-${name}`] = `${value}`;
 		}
 
 		if("offsetLeft"in selectedNode) {
@@ -288,7 +288,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event){
 	}
 
 	if(domNode && "offsetWidth" in domNode) {
-		// Eidget node size
+		// Widget node size
 		vars["tv-widgetnode-width"] = `${domNode.offsetWidth}`;
 		vars["tv-widgetnode-height"] = `${domNode.offsetHeight}`;
 	}
