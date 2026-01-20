@@ -14,7 +14,7 @@ Export our filter function
 */
 exports.subfilter = function(source,operator,options) {
 	var suffixes = operator.suffixes || [],
-		defaultFilterRunPrefix = (suffixes[0] || [])[0] || "or";
+		defaultFilterRunPrefix = (suffixes[0] || [options.defaultFilterRunPrefix] || [])[0] || "or";
 	var list = options.wiki.filterTiddlers(operator.operand,options.widget,source,{defaultFilterRunPrefix});
 	if(operator.prefix === "!") {
 		var results = [];

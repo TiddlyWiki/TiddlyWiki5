@@ -146,14 +146,16 @@ exports.parseFilter = function(filterString) {
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
 		// Groups:
-		// 1 - entire filter run prefix
-		// 2 - filter run prefix itself
-		// 3 - filter run prefix suffixes
-		// 4 - opening square bracket following filter run prefix
-		// 5 - double quoted string following filter run prefix
-		// 6 - single quoted string following filter run prefix
-		// 7 - anything except for whitespace and square brackets
-		operandRegExp = /((?:\+|\-|~|(?:=>?)|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
+		// 1 - pragma
+		// 2 - pragma suffix
+		// 3 - entire filter run prefix
+		// 4 - filter run prefix name
+		// 5 - filter run prefix suffixes
+		// 6 - opening square bracket following filter run prefix
+		// 7 - double quoted string following filter run prefix
+		// 8 - single quoted string following filter run prefix
+		// 9 - anything except for whitespace and square brackets
+		operandRegExp = /(?:::(\w+)(?:\:(\w+))?(?=\s|$)|((?:\+|\-|~|(?:=>?)|:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+)))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
@@ -170,18 +172,23 @@ exports.parseFilter = function(filterString) {
 			};
 			match = operandRegExp.exec(filterString);
 			if(match && match.index === p) {
-				// If there is a filter run prefix
 				if(match[1]) {
-					operation.prefix = match[1];
+					// If there is a filter run prefix
+					operation.pragma = match[1];
+					operation.suffix = match[2];
+					p = p + operation.pragma.length;
+				} else if(match[3]) {
+					// If there is a filter run prefix
+					operation.prefix = match[3];
 					p = p + operation.prefix.length;
 					// Name for named prefixes
-					if(match[2]) {
-						operation.namedPrefix = match[2];
+					if(match[4]) {
+						operation.namedPrefix = match[4];
 					}
 					// Suffixes for filter run prefix
-					if(match[3]) {
+					if(match[5]) {
 						operation.suffixes = [];
-						$tw.utils.each(match[3].split(":"),function(subsuffix) {
+						$tw.utils.each(match[5].split(":"),function(subsuffix) {
 							operation.suffixes.push([]);
 							$tw.utils.each(subsuffix.split(","),function(entry) {
 								entry = $tw.utils.trim(entry);
@@ -193,7 +200,7 @@ exports.parseFilter = function(filterString) {
 					}
 				}
 				// Opening square bracket
-				if(match[4]) {
+				if(match[6]) {
 					p = parseFilterOperation(operation.operators,filterString,p);
 				} else {
 					p = match.index + match[0].length;
@@ -203,9 +210,9 @@ exports.parseFilter = function(filterString) {
 				p = parseFilterOperation(operation.operators,filterString,p);
 			}
 			// Quoted strings and unquoted title
-			if(match[5] || match[6] || match[7]) { // Double quoted string, single quoted string or unquoted title
+			if(match[7] || match[8] || match[9]) { // Double quoted string, single quoted string or unquoted title
 				operation.operators.push(
-					{operator: "title", operands: [{text: match[5] || match[6] || match[7]}]}
+					{operator: "title", operands: [{text: match[7] || match[8] || match[9]}]}
 				);
 			}
 			results.push(operation);
@@ -334,7 +341,8 @@ exports.compileFilter = function(filterString,options) {
 					regexp: operator.regexp
 				},{
 					wiki: self,
-					widget: widget
+					widget: widget,
+					defaultFilterRunPrefix: defaultFilterRunPrefix
 				});
 				if($tw.utils.isArray(results)) {
 					accumulator = self.makeTiddlerIterator(results);
@@ -355,29 +363,45 @@ exports.compileFilter = function(filterString,options) {
 		var filterRunPrefixes = self.getFilterRunPrefixes();
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
-			var options = {wiki: self, suffixes: operation.suffixes || []};
-			switch(operation.prefix || "") {
-				case "": // No prefix means that the operation is unioned into the result
-					return filterRunPrefixes[defaultFilterRunPrefix](operationSubFunction, options);
-				case "=": // The results of the operation are pushed into the result without deduplication
-					return filterRunPrefixes["all"](operationSubFunction, options);
-				case "-": // The results of this operation are removed from the main result
-					return filterRunPrefixes["except"](operationSubFunction, options);
-				case "+": // This operation is applied to the main results so far
-					return filterRunPrefixes["and"](operationSubFunction, options);
-				case "~": // This operation is unioned into the result only if the main result so far is empty
-					return filterRunPrefixes["else"](operationSubFunction, options);
-				case "=>": // This operation is applied to the main results so far, and the results are assigned to a variable
-					return filterRunPrefixes["let"](operationSubFunction, options);
-				default: 
-					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
-						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
-					} else {
+			if(operation.pragma) {
+				switch(operation.pragma) {
+					case "defaultprefix":
+						defaultFilterRunPrefix = operation.suffix || "or";
+						break;
+					default:
 						return function(results,source,widget) {
 							results.clear();
 							results.push($tw.language.getString("Error/FilterRunPrefix"));
 						};
-					}
+				}
+				return function(results,source,widget) {
+					// Dummy response
+				};
+			} else {
+				var options = {wiki: self, suffixes: operation.suffixes || []};
+				switch(operation.prefix || "") {
+					case "": // Use the default filter run prefix if none is specified
+						return filterRunPrefixes[defaultFilterRunPrefix](operationSubFunction, options);
+					case "=": // The results of the operation are pushed into the result without deduplication
+						return filterRunPrefixes["all"](operationSubFunction, options);
+					case "-": // The results of this operation are removed from the main result
+						return filterRunPrefixes["except"](operationSubFunction, options);
+					case "+": // This operation is applied to the main results so far
+						return filterRunPrefixes["and"](operationSubFunction, options);
+					case "~": // This operation is unioned into the result only if the main result so far is empty
+						return filterRunPrefixes["else"](operationSubFunction, options);
+					case "=>": // This operation is applied to the main results so far, and the results are assigned to a variable
+						return filterRunPrefixes["let"](operationSubFunction, options);
+					default: 
+						if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
+							return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
+						} else {
+							return function(results,source,widget) {
+								results.clear();
+								results.push($tw.language.getString("Error/FilterRunPrefix"));
+							};
+						}
+				}
 			}
 		})());
 	});
