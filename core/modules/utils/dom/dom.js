@@ -256,65 +256,63 @@ exports.copyToClipboard = function(text,options) {
 Collect DOM variables
 */
 exports.collectDOMVariables = function(selectedNode,domNode,event) {
-	var variables = {},
-	    selectedNodeRect,
-	    domNodeRect;
+	const vars = {};
+
+	const addAttr = node => {
+		for(const { name,value } of node.attributes) {
+			vars[`dom-${name}`] = `${value}`;
+		}
+	};
+
+	const addRectVars = (prefix, { left, top, width, height }) => {
+		vars[`${prefix}-posx`] = `${left}`;
+		vars[`${prefix}-posy`] = `${top}`;
+		vars[`${prefix}-width`] = `${width}`;
+		vars[`${prefix}-height`] = `${height}`;
+	};
+
 	if(selectedNode) {
-		$tw.utils.each(selectedNode.attributes,function(attribute) {
-			variables["dom-" + attribute.name] = attribute.value.toString();
-		});
-		
+		addAttr(selectedNode);
+
 		if("offsetLeft" in selectedNode) {
-			// Add variables with a (relative and absolute) popup coordinate string for the selected node
-			var nodeRect = {
+			const rect = {
 				left: selectedNode.offsetLeft,
 				top: selectedNode.offsetTop,
 				width: selectedNode.offsetWidth,
 				height: selectedNode.offsetHeight
 			};
-			variables["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,nodeRect);
-
-			var absRect = $tw.utils.extend({}, nodeRect);
-			for(var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
-				absRect.left += currentNode.offsetLeft;
-				absRect.top += currentNode.offsetTop;
-			}
-			variables["tv-popup-abs-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csAbsolute,absRect);
-
-			// Add variables for offset of selected node
-			variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
-			variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
-			variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
-			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
+			vars["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,rect);
+			vars["tv-popup-abs-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csAbsolute,$tw.utils.getBoundingPageRect(selectedNode));
+			addRectVars("tv-selectednode",rect);
 		}
 	}
-	
-	if(domNode && ("offsetWidth" in domNode)) {
-		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
-		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
+
+	if(domNode && "offsetWidth" in domNode) {
+		addRectVars("tv-widgetnode", { left: 0,top: 0,width: domNode.offsetWidth,height: domNode.offsetHeight });
 	}
 
-	if(event && ("clientX" in event) && ("clientY" in event)) {
+	if(event && "clientX" in event && "clientY" in event) {
+		const addEventVars = (prefix,node) => {
+			const { left, top } = node.getBoundingClientRect();
+			vars[`${prefix}-posx`] = `${event.clientX - left}`;
+			vars[`${prefix}-posy`] = `${event.clientY - top}`;
+		};
+
 		if(selectedNode) {
-			// Add variables for event X and Y position relative to selected node
-			selectedNodeRect = selectedNode.getBoundingClientRect();
-			variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
-			variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
-		}
-		
-		if(domNode) {
-			// Add variables for event X and Y position relative to event catcher node
-			domNodeRect = domNode.getBoundingClientRect();
-			variables["event-fromcatcher-posx"] = (event.clientX - domNodeRect.left).toString();
-			variables["event-fromcatcher-posy"] = (event.clientY - domNodeRect.top).toString();
+			addEventVars("event-fromselected",selectedNode);
 		}
 
-		// Add variables for event X and Y position relative to the viewport
-		variables["event-fromviewport-posx"] = event.clientX.toString();
-		variables["event-fromviewport-posy"] = event.clientY.toString();
+		if(domNode) {
+			addEventVars("event-fromcatcher",domNode);
+		}
+
+		vars["event-fromviewport-posx"] = `${event.clientX}`;
+		vars["event-fromviewport-posy"] = `${event.clientY}`;
 	}
-	return variables;
+
+	return vars;
 };
+
 
 /*
 Make sure the CSS selector is not invalid
