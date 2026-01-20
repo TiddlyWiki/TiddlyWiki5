@@ -258,12 +258,6 @@ Collect DOM variables
 exports.collectDOMVariables = function(selectedNode,domNode,event){
 	const vars={};
 
-	const addAttr = node => {
-		for(const{name,value}of node.attributes) {
-			vars[`dom-${name}`]=`${value}`;
-		}
-	};
-
 	const addRectVars=(prefix,{left,top,width,height}) => {
 		vars[`${prefix}-posx`] = `${left}`;
 		vars[`${prefix}-posy`] = `${top}`;
@@ -272,15 +266,17 @@ exports.collectDOMVariables = function(selectedNode,domNode,event){
 	};
 
 	if(selectedNode) {
-		addAttr(selectedNode);
+		for(const{name,value} of selectedNode.attributes) {
+			vars[`dom-${name}`]=`${value}`;
+		}
 
 		if("offsetLeft"in selectedNode) {
 			// Add variables with a (relative and absolute) popup coordinate string for the selected node
 			const rect={
-				left : selectedNode.offsetLeft,
-				top : selectedNode.offsetTop,
-				width : selectedNode.offsetWidth,
-				height : selectedNode.offsetHeight
+				left: selectedNode.offsetLeft,
+				top: selectedNode.offsetTop,
+				width: selectedNode.offsetWidth,
+				height: selectedNode.offsetHeight
 			};
 			vars["tv-popup-coords"]=Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,rect);
 
@@ -298,9 +294,8 @@ exports.collectDOMVariables = function(selectedNode,domNode,event){
 	}
 
 	if(event && ("clientX" in event) && ("clientY" in event)) {
-		// Helper to add event X/Y relative to a node
 		const addEventVars = (prefix,node) => {
-			const {left, top} = node.getBoundingClientRect();
+			const{left, top} = node.getBoundingClientRect();
 			vars[`${prefix}-posx`] = `${event.clientX-left}`;
 			vars[`${prefix}-posy`] = `${event.clientY-top}`;
 		};
