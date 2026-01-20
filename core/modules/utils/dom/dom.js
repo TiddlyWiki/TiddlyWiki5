@@ -255,16 +255,16 @@ exports.copyToClipboard = function(text,options) {
 /*
 Collect DOM variables
 */
-exports.collectDOMVariables = function(selectedNode,domNode,event) {
-	const vars = {};
+exports.collectDOMVariables = function(selectedNode,domNode,event){
+	const vars={};
 
 	const addAttr = node => {
-		for(const { name,value } of node.attributes) {
-			vars[`dom-${name}`] = `${value}`;
+		for(const{name,value}of node.attributes) {
+			vars[`dom-${name}`]=`${value}`;
 		}
 	};
 
-	const addRectVars = (prefix, { left, top, width, height }) => {
+	const addRectVars=(prefix,{left,top,width,height}) => {
 		vars[`${prefix}-posx`] = `${left}`;
 		vars[`${prefix}-posy`] = `${top}`;
 		vars[`${prefix}-width`] = `${width}`;
@@ -274,45 +274,54 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 	if(selectedNode) {
 		addAttr(selectedNode);
 
-		if("offsetLeft" in selectedNode) {
-			const rect = {
-				left: selectedNode.offsetLeft,
-				top: selectedNode.offsetTop,
-				width: selectedNode.offsetWidth,
-				height: selectedNode.offsetHeight
+		if("offsetLeft"in selectedNode) {
+			// Add variables with a (relative and absolute) popup coordinate string for the selected node
+			const rect={
+				left : selectedNode.offsetLeft,
+				top : selectedNode.offsetTop,
+				width : selectedNode.offsetWidth,
+				height : selectedNode.offsetHeight
 			};
-			vars["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,rect);
-			vars["tv-popup-abs-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csAbsolute,$tw.utils.getBoundingPageRect(selectedNode));
+			vars["tv-popup-coords"]=Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,rect);
+
+			vars["tv-popup-abs-coords"]=Popup.buildCoordinates(Popup.coordinatePrefix.csAbsolute,$tw.utils.getBoundingPageRect(selectedNode));
+
+			// Add variables for offset of selected node
 			addRectVars("tv-selectednode",rect);
 		}
 	}
 
 	if(domNode && "offsetWidth" in domNode) {
-		addRectVars("tv-widgetnode", { left: 0,top: 0,width: domNode.offsetWidth,height: domNode.offsetHeight });
+		// Add variables for widget node size
+		vars["tv-widgetnode-width"]=`${domNode.offsetWidth}`;
+		vars["tv-widgetnode-height"]=`${domNode.offsetHeight}`;
 	}
 
-	if(event && "clientX" in event && "clientY" in event) {
+	if(event && ("clientX" in event) && ("clientY" in event)) {
+		// Helper to add event X/Y relative to a node
 		const addEventVars = (prefix,node) => {
-			const { left, top } = node.getBoundingClientRect();
-			vars[`${prefix}-posx`] = `${event.clientX - left}`;
-			vars[`${prefix}-posy`] = `${event.clientY - top}`;
+			const {left, top} = node.getBoundingClientRect();
+			vars[`${prefix}-posx`] = `${event.clientX-left}`;
+			vars[`${prefix}-posy`] = `${event.clientY-top}`;
 		};
 
 		if(selectedNode) {
+			// Add variables for event position relative to selected node
 			addEventVars("event-fromselected",selectedNode);
 		}
 
 		if(domNode) {
+			// Add variables for event position relative to event catcher node
 			addEventVars("event-fromcatcher",domNode);
 		}
 
+		// Add variables for event position relative to the viewport
 		vars["event-fromviewport-posx"] = `${event.clientX}`;
 		vars["event-fromviewport-posy"] = `${event.clientY}`;
 	}
 
 	return vars;
 };
-
 
 /*
 Make sure the CSS selector is not invalid
