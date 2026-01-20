@@ -271,26 +271,26 @@ exports.collectDOMVariables = function(selectedNode,domNode,event){
 		}
 
 		if("offsetLeft"in selectedNode) {
-			// Add variables with a (relative and absolute) popup coordinate string for the selected node
+			// Relative and absolute popup coordinate string for the selected node
 			const rect={
 				left: selectedNode.offsetLeft,
 				top: selectedNode.offsetTop,
 				width: selectedNode.offsetWidth,
 				height: selectedNode.offsetHeight
 			};
-			vars["tv-popup-coords"]=Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,rect);
+			vars["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,rect);
 
-			vars["tv-popup-abs-coords"]=Popup.buildCoordinates(Popup.coordinatePrefix.csAbsolute,$tw.utils.getBoundingPageRect(selectedNode));
+			vars["tv-popup-abs-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csAbsolute,$tw.utils.getBoundingPageRect(selectedNode));
 
-			// Add variables for offset of selected node
+			// Offset of selected node
 			addRectVars("tv-selectednode",rect);
 		}
 	}
 
 	if(domNode && "offsetWidth" in domNode) {
-		// Add variables for widget node size
-		vars["tv-widgetnode-width"]=`${domNode.offsetWidth}`;
-		vars["tv-widgetnode-height"]=`${domNode.offsetHeight}`;
+		// Eidget node size
+		vars["tv-widgetnode-width"] = `${domNode.offsetWidth}`;
+		vars["tv-widgetnode-height"] = `${domNode.offsetHeight}`;
 	}
 
 	if(event && ("clientX" in event) && ("clientY" in event)) {
@@ -301,16 +301,16 @@ exports.collectDOMVariables = function(selectedNode,domNode,event){
 		};
 
 		if(selectedNode) {
-			// Add variables for event position relative to selected node
+			// Event position relative to selected node
 			addEventVars("event-fromselected",selectedNode);
 		}
 
 		if(domNode) {
-			// Add variables for event position relative to event catcher node
+			// Event position relative to event catcher node
 			addEventVars("event-fromcatcher",domNode);
 		}
 
-		// Add variables for event position relative to the viewport
+		// Event position relative to the viewport
 		vars["event-fromviewport-posx"] = `${event.clientX}`;
 		vars["event-fromviewport-posy"] = `${event.clientY}`;
 	}
