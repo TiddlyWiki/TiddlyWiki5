@@ -69,6 +69,7 @@ tags: $:/tags/EditTemplate
 
 <$let newFieldValueTiddlerPrefix={{{ [<newFieldValueTiddlerPrefix>!is[blank]else<qualify "$:/temp/NewFieldValue">] }}} >
 	<div class="tc-edit-fields">
+		<!-- table of user fields of the current tiddler -->
 		<table class=`tc-edit-fields ${ [all[current]fields[]] :filter[tf.config-filter[]] :and[count[]match[0]then[tc-edit-fields-small]] }$`>
 			<tbody>
 				<$list filter="[all[current]fields[]] :and[sort[title]]" variable="currentField" storyview="pop">
@@ -97,7 +98,8 @@ tags: $:/tags/EditTemplate
 			</tbody>
 		</table>
 	</div>
-							
+	
+	<!-- input control for new field name with selection dropdown -->
 	<div class="tc-edit-field-add">
 		<em class="tc-edit tc-small-gap-right">
 			<<lingo Fields/Add/Prompt>>
@@ -109,7 +111,7 @@ tags: $:/tags/EditTemplate
 			<div class="tc-edit-field-add-name-wrapper">
 				<$transclude $variable="keyboard-driven-input"
 					cancelPopups="yes"
-					class="tc-edit-texteditor tc-popup-handle"
+					class=`tc-edit-texteditor tc-popup-handle ${ [<newFieldNameTiddler>get[text]] :intersection[<storyTiddler>fields[]] :then[[tc-edit-field-exists]] }$`
 					configTiddlerFilter="[[$:/config/EditMode/fieldname-filter]]"
 					default=""
 					focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] :else[[false]] }}}
@@ -157,6 +159,8 @@ tags: $:/tags/EditTemplate
 					</$let>
 				</$reveal>
 			</div>
+
+			<!-- input control for new field content -->
 			<$let currentFieldName={{{ [<newFieldNameTiddler>get[text]] }}}
 				fieldEditor=<<tf.get-field-editor>>
 				newFieldValueTiddler={{{ [<newFieldValueTiddlerPrefix>] [[/]] [<fieldEditor>sha256[16]] :and[join[]] }}}
