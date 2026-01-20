@@ -62,8 +62,8 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var paramObject = Object.create(null);
 	// Add names/values pairs if present
 	if(this.actionNames && this.actionValues) {
-		var names = this.wiki.filterTiddlers(this.actionNames,this),
-			values = this.wiki.filterTiddlers(this.actionValues,this);
+		var names = this.wiki.filterTiddlers(this.actionNames,this,{defaultFilterRunPrefix: "all"}),
+			values = this.wiki.filterTiddlers(this.actionValues,this,{defaultFilterRunPrefix: "all"});
 		$tw.utils.each(names,function(name,index) {
 			paramObject[name] = values[index] || "";
 		});

@@ -49,8 +49,8 @@ SetMultipleVariablesWidget.prototype.setVariables = function() {
     this.variableNames = [];
     this.variableValues = [];
     if(filterNames && filterValues) {
-        this.variableNames = this.wiki.filterTiddlers(filterNames,this);
-        this.variableValues = this.wiki.filterTiddlers(filterValues,this);
+        this.variableNames = this.wiki.filterTiddlers(filterNames,this,{defaultFilterRunPrefix: "all"});
+        this.variableValues = this.wiki.filterTiddlers(filterValues,this,{defaultFilterRunPrefix: "all"});
         $tw.utils.each(this.variableNames,function(varname,index) {
             self.setVariable(varname,self.variableValues[index]);
         });
@@ -63,8 +63,8 @@ Refresh the widget by ensuring our attributes are up to date
 SetMultipleVariablesWidget.prototype.refresh = function(changedTiddlers) {
     var filterNames = this.getAttribute("$names",""),
         filterValues = this.getAttribute("$values",""),
-        variableNames = this.wiki.filterTiddlers(filterNames,this),
-        variableValues = this.wiki.filterTiddlers(filterValues,this);
+        variableNames = this.wiki.filterTiddlers(filterNames,this,{defaultFilterRunPrefix: "all"}),
+        variableValues = this.wiki.filterTiddlers(filterValues,this,{defaultFilterRunPrefix: "all"});
     if(!$tw.utils.isArrayEqual(this.variableNames,variableNames) || !$tw.utils.isArrayEqual(this.variableValues,variableValues)) {
         this.refreshSelf();
         return true;
