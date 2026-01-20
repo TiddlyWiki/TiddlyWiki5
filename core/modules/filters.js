@@ -249,12 +249,13 @@ options: optional hashmap of options
 */
 exports.compileFilter = function(filterString,options) {
 	var defaultFilterRunPrefix = options?.defaultFilterRunPrefix || "or";
+	var cacheKey = filterString + '|' + defaultFilterRunPrefix;
 	if(!this.filterCache) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
-	if(this.filterCache[filterString] !== undefined) {
-		return this.filterCache[filterString];
+	if(this.filterCache[cacheKey] !== undefined) {
+		return this.filterCache[cacheKey];
 	}
 	var filterParseTree;
 	try {
@@ -415,7 +416,7 @@ exports.compileFilter = function(filterString,options) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
-	this.filterCache[filterString] = fnMeasured;
+	this.filterCache[cacheKey] = fnMeasured;
 	this.filterCacheCount++;
 	return fnMeasured;
 };
