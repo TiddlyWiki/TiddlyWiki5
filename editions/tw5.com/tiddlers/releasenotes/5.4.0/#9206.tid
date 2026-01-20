@@ -1,0 +1,11 @@
+change-category: nodejs
+change-type: feature
+created: 20260120154012282
+description: Allows server routes to be prioritized via ordering.
+github-contributors: saqimtiaz
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9206
+modified: 20260120154424464
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9206
+type: text/vnd.tiddlywiki

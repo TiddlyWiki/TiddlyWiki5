@@ -1,0 +1,11 @@
+change-category: hackability
+change-type: feature
+created: 20260120154445701
+description: Adds info tiddlers for viewport dimensions that are updated on window resize.
+github-contributors: saqimtiaz
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9260
+modified: 20260120154525238
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9260
+type: text/vnd.tiddlywiki
