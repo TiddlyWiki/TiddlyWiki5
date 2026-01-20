@@ -256,7 +256,7 @@ options: optional hashmap of options
 */
 exports.compileFilter = function(filterString,options) {
 	var defaultFilterRunPrefix = (options || {}).defaultFilterRunPrefix || "or";
-	var cacheKey = filterString + '|' + defaultFilterRunPrefix;
+	var cacheKey = filterString + "|" + defaultFilterRunPrefix;
 	if(!this.filterCache) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
