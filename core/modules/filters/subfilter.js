@@ -13,9 +13,7 @@ Filter operator returning its operand evaluated as a filter
 Export our filter function
 */
 exports.subfilter = function(source,operator,options) {
-	var suffixes = operator.suffixes || [],
-		defaultFilterRunPrefix = (suffixes[0] || [])[0] || "or";
-	var list = options.wiki.filterTiddlers(operator.operand,options.widget,source,{defaultFilterRunPrefix});
+	var list = options.wiki.filterTiddlers(operator.operand,options.widget,source);
 	if(operator.prefix === "!") {
 		var results = [];
 		source(function(tiddler,title) {
