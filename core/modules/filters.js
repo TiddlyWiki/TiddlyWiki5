@@ -173,7 +173,7 @@ exports.parseFilter = function(filterString) {
 			match = operandRegExp.exec(filterString);
 			if(match && match.index === p) {
 				if(match[1]) {
-					// If there is a filter run prefix
+					// If there is a filter pragma
 					operation.pragma = match[1];
 					operation.suffix = match[2];
 					p = p + operation.pragma.length;
