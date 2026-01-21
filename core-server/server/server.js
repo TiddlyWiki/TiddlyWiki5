@@ -16,7 +16,8 @@ if($tw.node) {
 		path = require("path"),
 		querystring = require("querystring"),
 		crypto = require("crypto"),
-		zlib = require("zlib");
+		zlib = require("zlib"),
+		http2 = require("http2");
 }
 
 /*
@@ -31,6 +32,7 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
+	
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -41,13 +43,23 @@ function Server(options) {
 		}
 	}
 	// Setup the default required plugins
-	this.requiredPlugins = this.get("required-plugins").split(',');
+	this.requiredPlugins = this.get("required-plugins").split(",");
 	// Initialise CSRF
 	this.csrfDisable = this.get("csrf-disable") === "yes";
 	// Initialize Gzip compression
 	this.enableGzip = this.get("gzip") === "yes";
 	// Initialize browser-caching
 	this.enableBrowserCache = this.get("use-browser-cache") === "yes";
+	// Initialize connection tracking (for diagnostics and testing)
+	this.enableConnectionTracking = this.get("connection-tracking") === "yes";
+	if(this.enableConnectionTracking) {
+		this.connectionStats = {
+			http1Connections: 0,
+			http2Sessions: 0,
+			activeConnections: new Set(),
+			activeSessions: new Set()
+		};
+	}
 	// Initialise authorization
 	var authorizedUserName;
 	if(this.get("username") && this.get("password")) {
@@ -62,7 +74,7 @@ function Server(options) {
 		writers: (this.get("writers") || authorizedUserName).split(",").map($tw.utils.trim)
 	}
 	if(this.get("admin") || authorizedUserName !== "(anon)") {
-		this.authorizationPrincipals["admin"] = (this.get("admin") || authorizedUserName).split(',').map($tw.utils.trim)
+		this.authorizationPrincipals["admin"] = (this.get("admin") || authorizedUserName).split(",").map($tw.utils.trim)
 	}
 	// Load and initialise authenticators
 	$tw.modules.forEachModuleOfType("authenticator", function(title,authenticatorDefinition) {
@@ -82,18 +94,48 @@ function Server(options) {
 	// Initialise the http vs https
 	this.listenOptions = null;
 	this.protocol = "http";
+	this.useHttp2 = false;
+	this.useH2c = false;
 	var tlsKeyFilepath = this.get("tls-key"),
 		tlsCertFilepath = this.get("tls-cert"),
-		tlsPassphrase = this.get("tls-passphrase");
+		tlsPassphrase = this.get("tls-passphrase"),
+		enableHttp2 = this.get("http2") === "yes",
+		enableH2c = this.get("h2c") === "yes",
+		warningText = null;
 	if(tlsCertFilepath && tlsKeyFilepath) {
 		this.listenOptions = {
 			key: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsKeyFilepath),"utf8"),
 			cert: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsCertFilepath),"utf8"),
-			passphrase: tlsPassphrase || ''
+			passphrase: tlsPassphrase || ""
 		};
-		this.protocol = "https";
+		// Enable HTTP/2 if requested
+		if(enableHttp2) {
+			this.protocol = "https";
+			this.useHttp2 = true;
+			this.listenOptions.allowHTTP1 = true; // Allow HTTP/1.1 fallback
+		} else {
+			this.protocol = "https";
+		}
+	} else if(enableH2c) {
+		// HTTP/2 Cleartext (h2c) - for internal networks or behind reverse proxy
+		this.protocol = "http";
+		this.useH2c = true;
+		warningText = "Warning: Using HTTP/2 Cleartext (h2c). This should only be used in trusted networks or behind a reverse proxy.";
+	} else if(enableHttp2) {
+		// http2=yes but no TLS certificates - fall back to HTTP/1.1
+		this.protocol = "http";
+		warningText = "Warning: HTTP/2 requires TLS certificates (tls-key and tls-cert). Use h2c=yes for unencrypted HTTP/2 in trusted networks. Falling back to HTTP/1.1";
 	}
-	this.transport = require(this.protocol);
+	// Output warning if needed
+	if(warningText && this.get("debug-level") !== "none") {
+		$tw.utils.warning(warningText);
+	}
+	// Set the transport module
+	if(this.useHttp2 || this.useH2c) {
+		this.transport = http2;
+	} else {
+		this.transport = require(this.protocol);
+	}
 	// Name the server and init the boot state
 	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
@@ -114,7 +156,7 @@ encoding: the encoding of the data to send (passed to the end method of the resp
 */
 function sendResponse(request,response,statusCode,headers,data,encoding) {
 	if(this.enableBrowserCache && (statusCode == 200)) {
-		var hash = crypto.createHash('md5');
+		var hash = crypto.createHash("md5");
 		// Put everything into the hash that could change and invalidate the data that
 		// the browser already stored. The headers the data and the encoding.
 		hash.update(data);
@@ -183,7 +225,13 @@ Server.prototype.defaultVariables = {
 	"system-tiddler-render-template": "$:/core/templates/wikified-tiddler",
 	"debug-level": "none",
 	"gzip": "no",
-	"use-browser-cache": "no"
+	"use-browser-cache": "no",
+	"connection-tracking": "no",
+	// HTTP/2 is enabled by default when TLS certificates are available
+	// Without TLS certificates, the server will fall back to HTTP/1.1 (with a warning)
+	// Use "h2c=yes" for HTTP/2 Cleartext (unencrypted) in trusted networks
+	"http2": "yes",
+	"h2c": "no"
 };
 
 Server.prototype.get = function(name) {
@@ -345,34 +393,113 @@ Server.prototype.listen = function(port,host,prefix) {
 	if(parseInt(port,10).toString() !== port) {
 		port = process.env[port] || 8080;
 	}
+	// Prevent warning on test
+	function logIfNotSuppressed(message, color) {
+		if(self.get("debug-level") !== "none") {
+			if(color) {
+				$tw.utils.log(message, color);
+			} else {
+				$tw.utils.warning(message);
+			}
+		}
+	}
 	// Warn if required plugins are missing
 	var missing = [];
-	for (var index=0; index<this.requiredPlugins.length; index++) {
-		if (!this.wiki.getTiddler(this.requiredPlugins[index])) {
+	for(var index=0; index<this.requiredPlugins.length; index++) {
+		if(!this.wiki.getTiddler(this.requiredPlugins[index])) {
 			missing.push(this.requiredPlugins[index]);
 		}
 	}
 	if(missing.length > 0) {
 		var error = "Warning: Plugin(s) required for client-server operation are missing.\n"+
 			"\""+ missing.join("\", \"")+"\"";
-		$tw.utils.warning(error);
+		logIfNotSuppressed(error);
 	}
+	
+	// Helper function to setup connection tracking
+	// When enableConnectionTracking is true, this attaches listeners to track:
+	// - HTTP/2: session events for multiplexing analysis
+	// - HTTP/1.1: connection events for connection pooling analysis
+	function setupConnectionTracking(server, isHttp2) {
+		if(!self.enableConnectionTracking) {
+			return;
+		}
+		if(isHttp2) {
+			// Track HTTP/2 sessions
+			server.on("session", function(session) {
+				self.connectionStats.http2Sessions++;
+				self.connectionStats.activeSessions.add(session);
+				session.on("close", function() {
+					self.connectionStats.activeSessions.delete(session);
+				});
+			});
+		} else {
+			// Track HTTP/1.1 connections
+			server.on("connection", function(socket) {
+				self.connectionStats.http1Connections++;
+				self.connectionStats.activeConnections.add(socket);
+				socket.on("close", function() {
+					self.connectionStats.activeConnections.delete(socket);
+				});
+			});
+		}
+	}
+	
 	// Create the server
 	var server;
-	if(this.listenOptions) {
+	if(this.useHttp2) {
+		// Create HTTP/2 secure server
+		server = this.transport.createSecureServer(this.listenOptions,this.requestHandler.bind(this));
+		setupConnectionTracking(server, true);
+		logIfNotSuppressed("HTTP/2 enabled with ALPN protocol negotiation", "green");
+	} else if(this.useH2c) {
+		// Create HTTP/2 Cleartext server
+		server = this.transport.createServer(this.requestHandler.bind(this));
+		setupConnectionTracking(server, true);
+		logIfNotSuppressed("HTTP/2 Cleartext (h2c) enabled - suitable for reverse proxy setups", "yellow");
+	} else if(this.listenOptions) {
 		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
+		setupConnectionTracking(server, false);
 	} else {
 		server = this.transport.createServer(this.requestHandler.bind(this));
+		setupConnectionTracking(server, false);
 	}
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
 	server.on("listening",function() {
 		var address = server.address(),
-			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix;
-		$tw.utils.log("Serving on " + url,"brown/orange");
-		$tw.utils.log("(press ctrl-C to exit)","red");
+			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix,
+			protocolInfo = self.useHttp2 ? " (HTTP/2)" : self.useH2c ? " (HTTP/2 Cleartext)" : "";
+		logIfNotSuppressed("Serving on " + url + protocolInfo, "brown/orange");
+		logIfNotSuppressed("(press ctrl-C to exit)", "red");
 	});
 	// Listen
 	return server.listen(port,host);
+};
+
+Server.prototype.getConnectionStats = function() {
+	if(!this.enableConnectionTracking) {
+		return null;
+	}
+	return {
+		// Total HTTP/1.1 connections created
+		http1Connections: this.connectionStats.http1Connections,
+		// Total HTTP/2 sessions created
+		http2Sessions: this.connectionStats.http2Sessions,
+		// Number of currently active HTTP/1.1 connections
+		activeConnections: this.connectionStats.activeConnections.size,
+		// Number of currently active HTTP/2 sessions
+		activeSessions: this.connectionStats.activeSessions.size
+	};
+};
+
+Server.prototype.resetConnectionStats = function() {
+	if(!this.enableConnectionTracking) {
+		return;
+	}
+	this.connectionStats.http1Connections = 0;
+	this.connectionStats.http2Sessions = 0;
+	this.connectionStats.activeConnections.clear();
+	this.connectionStats.activeSessions.clear();
 };
 
 exports.Server = Server;
