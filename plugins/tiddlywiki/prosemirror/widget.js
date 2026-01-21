@@ -105,18 +105,17 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 		}
 	});
 	
-	// Mark paste events with twEditor flag to prevent TiddlyWiki import dialog
-	container.addEventListener("paste", function(event) {
-		event.twEditor = true;
-		// Use capture phase to ensure it runs before other handlers
-	}, true);
-
-	// Prevent global key handlers (browser/TiddlyWiki) from hijacking editor shortcuts
-	container.addEventListener("keydown", function(event) {
-		// Do not preventDefault so ProseMirror can handle text input normally
+	// Mark events with twEditor and stop propagation so TiddlyWiki/document handlers
+	// don't hijack shortcuts or show the import dialog. Attach to the editor DOM in
+	// bubble phase so ProseMirror gets first dibs on handling the event.
+	this.view.dom.addEventListener("paste", function(event) {
 		event.twEditor = true;
 		event.stopPropagation();
-	}, true);
+	});
+	this.view.dom.addEventListener("keydown", function(event) {
+		event.twEditor = true;
+		event.stopPropagation();
+	});
 	container.setAttribute("data-tw-prosemirror-keycapture", "yes");
 
 	// Add a centered "Add new line" button below the editor.
@@ -167,6 +166,103 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 			if(!addLineWrap.isConnected) {
 				const host = this.view && this.view.dom && this.view.dom.parentNode;
 				(host || outerWrap).appendChild(addLineWrap);
+			}
+
+			// Sync list indentation with the active TiddlyWiki theme.
+			// Rendered lists (ol/ul) typically use padding-left; our ProseMirror lists use a
+			// margin-left on each list item, so we expose the theme value via CSS variable.
+			const styleHost = (this.view && this.view.dom && this.view.dom.parentNode) || container || outerWrap;
+			if(styleHost && !styleHost.__pmListIndentSet) {
+				const hostBody = (styleHost.closest && styleHost.closest(".tc-tiddler-body")) || (outerWrap.closest && outerWrap.closest(".tc-tiddler-body")) || outerWrap.parentNode;
+				if(hostBody && hostBody.appendChild) {
+					const probeTextIndentPx = tagName => {
+						const wrapper = document.createElement("div");
+						wrapper.style.position = "absolute";
+						wrapper.style.visibility = "hidden";
+						wrapper.style.pointerEvents = "none";
+						wrapper.style.left = "0";
+						wrapper.style.top = "0";
+						wrapper.style.margin = "0";
+						wrapper.style.padding = "0";
+						wrapper.style.border = "0";
+						wrapper.style.width = "1000px";
+						wrapper.style.overflow = "hidden";
+
+						const p = document.createElement("p");
+						p.textContent = "X";
+						p.style.margin = "0";
+						p.style.padding = "0";
+
+						const list = document.createElement(tagName);
+						list.style.margin = "0";
+						const li = document.createElement("li");
+						li.textContent = "X";
+						list.appendChild(li);
+
+						wrapper.appendChild(p);
+						wrapper.appendChild(list);
+						hostBody.appendChild(wrapper);
+
+						const rangeLeft = textNode => {
+							if(!textNode) return null;
+							const r = document.createRange();
+							r.setStart(textNode, 0);
+							r.setEnd(textNode, 1);
+							const rect = r.getClientRects()[0];
+							return rect ? rect.left : null;
+						};
+
+						const pLeft = rangeLeft(p.firstChild);
+						const liLeft = rangeLeft(li.firstChild);
+						wrapper.remove();
+						if(pLeft == null || liLeft == null) return 0;
+						return liLeft - pLeft;
+					};
+
+					const olIndentPx = probeTextIndentPx("ol");
+					const ulIndentPx = probeTextIndentPx("ul");
+					const chosenIndentPx = Math.max(olIndentPx || 0, ulIndentPx || 0, 40);
+					const chosenIndent = `${chosenIndentPx}px`;
+					styleHost.style.setProperty("--pm-list-indent", chosenIndent);
+					styleHost.__pmListIndentSet = true;
+
+					// Sync vertical gap between distinct list blocks (e.g. bullet list then ordered list)
+					if(!styleHost.__pmListBlockGapSet) {
+						const probeListBlockGapPx = () => {
+							const wrapper = document.createElement("div");
+							wrapper.style.position = "absolute";
+							wrapper.style.visibility = "hidden";
+							wrapper.style.pointerEvents = "none";
+							wrapper.style.left = "0";
+							wrapper.style.top = "0";
+							wrapper.style.margin = "0";
+							wrapper.style.padding = "0";
+							wrapper.style.border = "0";
+							wrapper.style.width = "1000px";
+							wrapper.style.overflow = "hidden";
+
+							const ul = document.createElement("ul");
+							ul.appendChild(document.createElement("li")).textContent = "X";
+							const ol = document.createElement("ol");
+							ol.appendChild(document.createElement("li")).textContent = "X";
+
+							wrapper.appendChild(ul);
+							wrapper.appendChild(ol);
+							hostBody.appendChild(wrapper);
+
+							const ulRect = ul.getBoundingClientRect();
+							const olRect = ol.getBoundingClientRect();
+							wrapper.remove();
+							if(!ulRect || !olRect) return null;
+							return Math.max(0, olRect.top - ulRect.bottom);
+						};
+
+						const gapPx = probeListBlockGapPx();
+						const chosenGapPx = typeof gapPx === "number" && Number.isFinite(gapPx) ? gapPx : 15;
+						styleHost.style.setProperty("--pm-list-block-gap", `${chosenGapPx}px`);
+						styleHost.__pmListBlockGapSet = true;
+					}
+				}
 			}
 		} catch (e) {
 			// ignore

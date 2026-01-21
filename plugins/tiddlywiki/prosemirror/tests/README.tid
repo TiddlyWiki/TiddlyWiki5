@@ -17,8 +17,10 @@ Playwright tests load a local file page: ''editions/test/output/test.html''.
 From the repo root (build the HTML only):
 
 ```shell
-node ./tiddlywiki.js ./editions/test --verbose --rendertiddler '$:/core/save/all' ./output/test.html text/plain
+node ./tiddlywiki.js ./editions/test --verbose --rendertiddler '$:/core/save/all' test.html text/plain
 ```
+
+Note: do not pass an output path that already includes `editions/test/output/...` here, because TiddlyWiki writes into the edition output folder and you can accidentally create nested paths like `editions/test/output/editions/test/output/test.html`.
 
 If you changed any ProseMirror plugin/editor code (for example [plugins/tiddlywiki/prosemirror/widget.js](plugins/tiddlywiki/prosemirror/widget.js)), you must re-run the build command above so the browser page picks up the changes.
 

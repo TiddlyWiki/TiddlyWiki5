@@ -159,14 +159,13 @@ test.describe("ProseMirror Editor - Basic Editing", () => {
 		const container = editor.locator('xpath=ancestor::div[contains(@class,"tc-prosemirror-container")]').first();
 		const keyCapture = await container.getAttribute("data-tw-prosemirror-keycapture");
 		if(keyCapture !== "yes") {
-			await editor.evaluate((el) => {
-				const root = el.closest('.tc-prosemirror-container');
-				if(root && !root.__twKeyCaptureInstalled) {
-					root.addEventListener('keydown', (event) => {
+			await editor.evaluate(el => {
+				if(el && !el.__twKeyCaptureInstalled) {
+					el.addEventListener("keydown", event => {
 						event.twEditor = true;
 						event.stopPropagation();
-					}, true);
-					root.__twKeyCaptureInstalled = true;
+					});
+					el.__twKeyCaptureInstalled = true;
 				}
 			});
 		}
@@ -187,14 +186,13 @@ test.describe("ProseMirror Editor - Basic Editing", () => {
 		const container = editor.locator('xpath=ancestor::div[contains(@class,"tc-prosemirror-container")]').first();
 		const keyCapture = await container.getAttribute("data-tw-prosemirror-keycapture");
 		if(keyCapture !== "yes") {
-			await editor.evaluate((el) => {
-				const root = el.closest('.tc-prosemirror-container');
-				if(root && !root.__twKeyCaptureInstalled) {
-					root.addEventListener('keydown', (event) => {
+			await editor.evaluate(el => {
+				if(el && !el.__twKeyCaptureInstalled) {
+					el.addEventListener("keydown", event => {
 						event.twEditor = true;
 						event.stopPropagation();
-					}, true);
-					root.__twKeyCaptureInstalled = true;
+					});
+					el.__twKeyCaptureInstalled = true;
 				}
 			});
 		}
@@ -261,8 +259,8 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		
 		const widgetBlock = page.locator(".pm-widget-block-nodeview").first();
 		await expect(widgetBlock).toBeVisible({ timeout: 2000 });
+		await widgetBlock.hover();
 		
-		// Click edit button
 		const editBtn = widgetBlock.locator(".pm-widget-block-nodeview-edit").first();
 		await editBtn.click();
 		
@@ -279,6 +277,7 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		
 		const widgetBlock = page.locator(".pm-widget-block-nodeview").first();
 		await expect(widgetBlock).toBeVisible({ timeout: 2000 });
+		await widgetBlock.hover();
 		
 		// Delete button should be hidden initially
 		const deleteBtn = widgetBlock.locator(".pm-widget-block-nodeview-delete");
@@ -299,6 +298,7 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		
 		const widgetBlock = page.locator(".pm-widget-block-nodeview");
 		await expect(widgetBlock).toBeVisible({ timeout: 2000 });
+		await widgetBlock.hover();
 		
 		// Enter edit mode
 		const editBtn = widgetBlock.locator(".pm-widget-block-nodeview-edit").first();
@@ -323,8 +323,7 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		
 		const widgetBlock = page.locator(".pm-widget-block-nodeview");
 		await expect(widgetBlock).toBeVisible({ timeout: 2000 });
-		
-		// Enter edit mode
+		await widgetBlock.hover();
 		const editBtn = widgetBlock.locator(".pm-widget-block-nodeview-edit").first();
 		await editBtn.click();
 		
@@ -339,7 +338,6 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 	test("should support multiple widget syntaxes", async ({ page }) => {
 		const editor = await setupProseMirrorTest(page);
 		await clearEditor(editor);
-		
 		// Type different widget syntaxes
 		await page.keyboard.type("<<now>>");
 		await expect(page.locator(".pm-widget-block-nodeview").first()).toBeVisible({ timeout: 2000 });
@@ -357,7 +355,6 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		const editor = await setupProseMirrorTest(page);
 		await clearEditor(editor);
 		await pastePlainText(editor, '<<now "YYYY-MM-DD">>');
-		
 		// Should render as block
 		const widgetBlock = page.locator(".pm-widget-block-nodeview");
 		await expect(widgetBlock).toBeVisible({ timeout: 2000 });
@@ -379,6 +376,7 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 
 		await expect(editor).toContainText("After widget");
 	});
+
 });
 
 test.describe("ProseMirror Editor - Lists", () => {
@@ -393,13 +391,165 @@ test.describe("ProseMirror Editor - Lists", () => {
 		await expect(list.locator(".list-content")).toContainText("Item 1");
 	});
 
+	test("should not add extra paragraph margins inside list items", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page);
+		await clearEditor(editor);
+		await page.keyboard.type("* Item 1");
+
+		const list = editor.locator(".prosemirror-flat-list").first();
+		const p = list.locator(".list-content > p").first();
+		await expect(p).toBeVisible();
+		await expect(p).toHaveCSS("margin-top", "0px");
+		await expect(p).toHaveCSS("margin-bottom", "0px");
+	});
+
+	test("should match rendered list indentation and line spacing", async ({ page }) => {
+		await loadTestPage(page);
+		const demoTitle = "$:/plugins/tiddlywiki/prosemirror";
+			const exampleTitle = "$:/plugins/tiddlywiki/prosemirror/example";
+
+			await page.evaluate(({ demoTitle, exampleTitle }) => {
+			// Ensure list-links has deterministic data in the test edition
+			$tw.wiki.addTiddler({ title: "Compose ballad", tags: "task", text: "" });
+			$tw.wiki.addTiddler({ title: "Get the Ring", tags: "task", text: "" });
+			$tw.wiki.addTiddler({ title: "Go to Mordor", tags: "task", text: "" });
+			$tw.wiki.addTiddler({ title: "Kill the Dragon", tags: "task", text: "" });
+			$tw.wiki.addTiddler({ title: "Make the beds", tags: "task", text: "" });
+
+				// Inject list-links into the demo's example tiddler so both editor and rendered view include it
+				$tw.wiki.addTiddler({
+					title: exampleTitle,
+					type: "text/vnd.tiddlywiki",
+					text: [
+						"# asdf",
+						"# asdf",
+						"",
+						"* This is an unordered list",
+						"* It has two items",
+						"",
+						"# This is a numbered list",
+						"## With a subitem",
+						"## With second subitem",
+						"# And a third item",
+						"",
+						"<<list-links \"[tag[task]sort[title]]\">>"
+					].join("\n")
+				});
+
+			const storyList = $tw.wiki.getTiddlerList("$:/StoryList");
+			if(storyList.indexOf(demoTitle) === -1) {
+				storyList.unshift(demoTitle);
+				$tw.wiki.addTiddler({ title: "$:/StoryList", list: storyList });
+			}
+				window.location.hash = "#" + encodeURIComponent(demoTitle);
+			}, { demoTitle, exampleTitle });
+
+		const frame = page.locator(`.tc-tiddler-frame[data-tiddler-title="${demoTitle}"]`).first();
+		await expect(frame).toBeVisible({ timeout: 10000 });
+		await expect(frame.locator(".tc-prosemirror-container .ProseMirror").first()).toBeVisible({ timeout: 10000 });
+			// Wait until rendered (non-editor) list-links output is present
+			await frame.locator('xpath=.//a[normalize-space(.)="Compose ballad" and not(ancestor::*[contains(@class,"tc-prosemirror-container")])]').first().waitFor({ timeout: 10000 });
+
+		const metrics = await page.evaluate(({ demoTitle }) => {
+			const frame = document.querySelector(`.tc-tiddler-frame[data-tiddler-title="${demoTitle}"]`);
+			const body = frame && frame.querySelector(".tc-tiddler-body");
+			const editorRoot = frame && frame.querySelector(".tc-prosemirror-container .ProseMirror");
+			if(!frame || !body || !editorRoot) return { ok: false };
+
+			const findTextMatch = (root, needle, excludeSelector) => {
+				const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+				let n;
+				while((n = walker.nextNode())) {
+					const el = n.parentElement;
+					if(excludeSelector && el && el.closest(excludeSelector)) {
+						continue;
+					}
+					const value = n.nodeValue || "";
+					const idx = value.indexOf(needle);
+					if(idx !== -1) return { node: n, idx };
+				}
+				return null;
+			};
+
+			const rangeLeft = match => {
+				if(!match) return null;
+				const n = match.node;
+				const r = document.createRange();
+				r.setStart(n, match.idx);
+				r.setEnd(n, Math.min(n.nodeValue.length, match.idx + 1));
+				const rect = r.getClientRects()[0];
+				return rect ? rect.left : null;
+			};
+
+			const itemTop = (match, selector) => {
+				if(!match) return null;
+				const el = match.node.parentElement;
+				const item = el && el.closest(selector);
+				return item ? item.getBoundingClientRect().top : null;
+			};
+			const itemBottom = (match, selector) => {
+				if(!match) return null;
+				const el = match.node.parentElement;
+				const item = el && el.closest(selector);
+				return item ? item.getBoundingClientRect().bottom : null;
+			};
+
+			const sampleTexts = {
+				ul1: "This is an unordered list",
+				ul2: "It has two items",
+				ol1: "This is a numbered list",
+				ol2: "And a third item",
+				link: "Compose ballad"
+			};
+
+			const out = { ok: true, textStart: {}, gaps: {} };
+			for(const[key, text] of Object.entries(sampleTexts)) {
+				const eNode = findTextMatch(editorRoot, text);
+				const rNode = findTextMatch(body, text, ".tc-prosemirror-container,textarea");
+				out.textStart[key] = {
+					editorX: rangeLeft(eNode),
+					renderedX: rangeLeft(rNode)
+				};
+			}
+
+			const eUl1 = findTextMatch(editorRoot, sampleTexts.ul1);
+			const eUl2 = findTextMatch(editorRoot, sampleTexts.ul2);
+			const eOl1 = findTextMatch(editorRoot, sampleTexts.ol1);
+			const rUl1 = findTextMatch(body, sampleTexts.ul1, ".tc-prosemirror-container,textarea");
+			const rUl2 = findTextMatch(body, sampleTexts.ul2, ".tc-prosemirror-container,textarea");
+			const rOl1 = findTextMatch(body, sampleTexts.ol1, ".tc-prosemirror-container,textarea");
+			out.gaps.ul = {
+				editor: itemTop(eUl2, ".prosemirror-flat-list") - itemTop(eUl1, ".prosemirror-flat-list"),
+				rendered: itemTop(rUl2, "li") - itemTop(rUl1, "li")
+			};
+			out.gaps.listSwitch = {
+				editor: itemTop(eOl1, ".prosemirror-flat-list") - itemBottom(eUl2, ".prosemirror-flat-list"),
+				rendered: itemTop(rOl1, "li") - itemBottom(rUl2, "li")
+			};
+
+			return out;
+		}, { demoTitle });
+
+		expect(metrics.ok).toBeTruthy();
+
+		for(const key of Object.keys(metrics.textStart)) {
+			const{ editorX, renderedX } = metrics.textStart[key];
+			expect(editorX, `${key}: editorX`).not.toBeNull();
+			expect(renderedX, `${key}: renderedX`).not.toBeNull();
+			expect(Math.abs(editorX - renderedX), `${key}: |editorX-renderedX|`).toBeLessThanOrEqual(1);
+		}
+
+		expect(Math.abs(metrics.gaps.ul.editor - metrics.gaps.ul.rendered)).toBeLessThanOrEqual(1);
+		expect(Math.abs(metrics.gaps.listSwitch.editor - metrics.gaps.listSwitch.rendered)).toBeLessThanOrEqual(1);
+	});
+
 	test("should support list indentation with Tab", async ({ page }) => {
 		const editor = await setupProseMirrorTest(page);
 		await clearEditor(editor);
 		await page.keyboard.type("* Item 1");
 		await page.keyboard.press("Enter");
 		await page.keyboard.type("Item 2");
-		await page.keyboard.press("Tab");
+		await editor.press("Tab");
 		
 		// Nested list should appear inside the parent list-content
 		const nestedList = editor.locator(".prosemirror-flat-list .prosemirror-flat-list");
@@ -412,8 +562,8 @@ test.describe("ProseMirror Editor - Lists", () => {
 		await page.keyboard.type("* Item 1");
 		await page.keyboard.press("Enter");
 		await page.keyboard.type("Item 2");
-		await page.keyboard.press("Tab");
-		await page.keyboard.press("Shift+Tab");
+		await editor.press("Tab");
+		await editor.press("Shift+Tab");
 		
 		// After dedent, there should be no nested list and both items should be present
 		const lists = editor.locator(".prosemirror-flat-list");
@@ -439,6 +589,7 @@ test.describe("ProseMirror Editor - Headings", () => {
 		const editor = await setupProseMirrorTest(page);
 		await clearEditor(editor);
 		
+		/* eslint-disable no-await-in-loop */
 		for(let level = 1; level <= 6; level++) {
 			if(level > 1) {
 				await page.keyboard.press("Enter");
@@ -449,6 +600,7 @@ test.describe("ProseMirror Editor - Headings", () => {
 			const heading = editor.locator(`h${level}`);
 			await expect(heading).toContainText(`Heading ${level}`);
 		}
+		/* eslint-enable no-await-in-loop */
 	});
 });
 

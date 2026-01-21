@@ -1,13 +1,39 @@
 /* src/style.css */
+.tc-prosemirror-container .ProseMirror {
+  counter-reset: prosemirror-flat-list-counter;
+}
+
+/* Each list-content acts as a list container for nested lists */
+.list-content {
+  counter-reset: prosemirror-flat-list-counter;
+}
+
 .prosemirror-flat-list {
   padding: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: 32px;
-  margin-bottom: 0;
+  margin: 0;
+  /* Match typical browser default ul/ol indentation (≈40px) for visual parity
+  with TiddlyWiki-rendered lists below the editor. */
+  margin-left: var(--pm-list-indent, 40px);
   position: relative;
   display: list-item;
   list-style: none;
+}
+
+/* Match the vertical separation between distinct list blocks in rendered output.
+In flat-list, separate lists can appear as adjacent list-item blocks with
+different kinds (e.g. bullet list followed by ordered list). */
+.prosemirror-flat-list[data-list-kind=bullet] + .prosemirror-flat-list[data-list-kind=ordered],
+.prosemirror-flat-list[data-list-kind=ordered] + .prosemirror-flat-list[data-list-kind=bullet] {
+  margin-top: var(--pm-list-block-gap, 15px);
+}
+
+/* In ProseMirror we wrap list item text in <p>. Browser default margins on <p>
+create extra vertical gaps between list items compared to rendered TW lists. */
+.prosemirror-flat-list > .list-content > p,
+.prosemirror-flat-list > .list-content > p.pm-paragraph-normal {
+  margin-block: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .prosemirror-flat-list.ProseMirror-selectednode {
   outline: none;
@@ -15,7 +41,7 @@
 .prosemirror-flat-list.ProseMirror-selectednode:after {
   content: "";
   position: absolute;
-  left: -32px;
+  left: calc(-1 * var(--pm-list-indent, 40px));
   right: -2px;
   top: -2px;
   bottom: -2px;
@@ -25,38 +51,40 @@
 .prosemirror-flat-list[data-list-kind=bullet] {
   list-style: disc;
 }
+
+/* Match browser/TiddlyWiki defaults for nested UL markers:
+   depth 1: disc, depth 2: circle, depth 3: square (then repeats) */
+.prosemirror-flat-list .prosemirror-flat-list[data-list-kind=bullet] {
+  list-style-type: circle;
+}
+.prosemirror-flat-list .prosemirror-flat-list .prosemirror-flat-list[data-list-kind=bullet] {
+  list-style-type: square;
+}
+.prosemirror-flat-list .prosemirror-flat-list .prosemirror-flat-list .prosemirror-flat-list[data-list-kind=bullet] {
+  list-style-type: disc;
+}
+
+/* Scope ordered-list numbering to each list-content container so nested/mixed ordered
+lists start at 1 and increment correctly within that sub-list. */
+.list-content {
+  counter-reset: prosemirror-flat-list-counter;
+}
 .prosemirror-flat-list[data-list-kind=ordered] {
+  list-style: decimal;
   counter-increment: prosemirror-flat-list-counter;
 }
 .prosemirror-flat-list[data-list-kind=ordered] > * {
   contain: style;
 }
-.prosemirror-flat-list[data-list-kind=ordered]::before {
-  position: absolute;
-  right: 100%;
+.prosemirror-flat-list[data-list-kind=ordered]::marker {
   font-variant-numeric: tabular-nums;
   content: counter(prosemirror-flat-list-counter, decimal) ". ";
-}
-.prosemirror-flat-list[data-list-kind=ordered]:first-child,
-:not(.prosemirror-flat-list[data-list-kind=ordered]) + .prosemirror-flat-list[data-list-kind=ordered] {
-  counter-reset: prosemirror-flat-list-counter;
-}
-@supports (counter-set: prosemirror-flat-list-counter 1) {
-  [data-list-order]:is(.prosemirror-flat-list[data-list-kind=ordered]:first-child, :not(.prosemirror-flat-list[data-list-kind=ordered]) + .prosemirror-flat-list[data-list-kind=ordered]) {
-    counter-set: prosemirror-flat-list-counter var(--prosemirror-flat-list-order);
-  }
-}
-@supports not (counter-set: prosemirror-flat-list-counter 1) {
-  [data-list-order]:is(.prosemirror-flat-list[data-list-kind=ordered]:first-child, :not(.prosemirror-flat-list[data-list-kind=ordered]) + .prosemirror-flat-list[data-list-kind=ordered]) {
-    counter-increment: prosemirror-flat-list-counter var(--prosemirror-flat-list-order);
-  }
 }
 .prosemirror-flat-list[data-list-kind=task] > .list-marker {
   position: absolute;
   right: 100%;
   text-align: center;
-  width: 1.5em;
-  width: 1lh;
+  width: var(--pm-list-indent, 40px);
 }
 .prosemirror-flat-list[data-list-kind=task] > .list-marker,
 .prosemirror-flat-list[data-list-kind=task] > .list-marker * {
@@ -66,8 +94,7 @@
   position: absolute;
   right: 100%;
   text-align: center;
-  width: 1.5em;
-  width: 1lh;
+  width: var(--pm-list-indent, 40px);
 }
 .prosemirror-flat-list[data-list-kind=toggle] > .list-marker::before {
   content: "\23f7";
