@@ -133,18 +133,35 @@ $tw.utils.isDate = value => value instanceof Date;
 $tw.utils.each = function(object,callback) {
 	if(object) {
 		if(Array.isArray(object)) {
-			object.every((element,index,array) => {
-				const next = callback(element,index,array);
-				return next !== false;
-			});
+			for(const [index, element] of object.entries()){
+				const next = callback(element,index,object);
+				if(next === false) return;
+			}
 		} else {
-			Object.entries(object).every(entry => {
-				const next = callback(entry[1], entry[0], object);
-				return next !== false;
-			});
+			for(const [index, element] of Object.entries(object)){
+				const next = callback(element,index,object);
+				if(next === false) return;
+			}
 		}
 	}
 };
+
+/** @deprecated Use for...of loops instead. */
+$tw.utils.eachAsync = async function(object,callback) {
+	if(object) {
+		if(Array.isArray(object)) {
+			for(const [index, element] of object.entries()){
+				const next = await callback(element,index,object);
+				if(next === false) return;
+			}
+		} else {
+			for(const [index, element] of Object.entries(object)){
+				const next = await callback(element,index,object);
+				if(next === false) return;
+			}
+		}
+	}
+}
 
 /*
 Helper for making DOM elements
@@ -2774,4 +2791,5 @@ if(typeof(exports) !== "undefined") {
 } else {
 	_boot(window.$tw);
 }
+
 //# sourceURL=$:/boot/boot.js
