@@ -25,9 +25,10 @@
   ],
   "devDependencies": {
     "@eslint/js": "9.36.0",
+    "@playwright/test": "^1.57.0",
+    "@stylistic/eslint-plugin": "5.4.0",
     "eslint": "9.36.0",
     "eslint-plugin-es-x": "9.1.0",
-    "@stylistic/eslint-plugin": "5.4.0",
     "globals": "16.4.0"
   },
   "license": "BSD",
@@ -37,6 +38,11 @@
   "scripts": {
     "dev": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
     "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
+    "test:e2e": "playwright test",
+    "test:prosemirror": "playwright test plugins/tiddlywiki/prosemirror/tests",
+    "test:prosemirror:smoke": "playwright test plugins/tiddlywiki/prosemirror/tests/smoke.spec.js",
+    "test:prosemirror:headed": "playwright test plugins/tiddlywiki/prosemirror/tests --headed",
+    "test:prosemirror:debug": "playwright test plugins/tiddlywiki/prosemirror/tests --debug",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:check": "eslint . --fix-dry-run"

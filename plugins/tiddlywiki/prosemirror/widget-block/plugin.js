@@ -17,6 +17,19 @@ const WidgetBlockNodeView = require("$:/plugins/tiddlywiki/prosemirror/widget-bl
 const utils = require("$:/plugins/tiddlywiki/prosemirror/widget-block/utils.js");
 const parseWidget = utils.parseWidget;
 
+function isWidgetBlocksEnabled(wiki) {
+	try {
+		const sourceWiki = wiki || (typeof $tw !== "undefined" && $tw.wiki);
+		if(!sourceWiki) {
+			return true;
+		}
+		const value = (sourceWiki.getTiddlerText("$:/config/prosemirror/enable-widget-blocks", "yes") || "yes").trim();
+		return value !== "no";
+	} catch(e) {
+		return true;
+	}
+}
+
 /**
  * Create plugin that adds node views for widget blocks
  */
@@ -26,22 +39,11 @@ function createWidgetBlockNodeViewPlugin(parentWidget) {
 		props: {
 			nodeViews: {
 				paragraph(node, view, getPos) {
-					const text = node.textContent.trim();
-					
-					// Debug: log all paragraphs
-					if(console && console.log) {
-						console.log("[WidgetBlockNodeView] Checking paragraph:", text);
+					if(!isWidgetBlocksEnabled()) {
+						return null;
 					}
-					
-					const widget = parseWidget(text);
-					
-					if(widget) {
-						if(console && console.log) {
-							console.log("[WidgetBlockNodeView] Widget detected:", widget);
-						}
-						return new WidgetBlockNodeView(node, view, getPos, parentWidget);
-					}
-					return null; // Use default rendering
+					// Always return our custom node view (it can switch modes on update)
+					return new WidgetBlockNodeView(node, view, getPos, parentWidget);
 				}
 			}
 		}
@@ -60,6 +62,9 @@ function createWidgetBlockPlugin() {
 				return DecorationSet.empty;
 			},
 			apply(tr, set, oldState, newState) {
+				if(!isWidgetBlocksEnabled()) {
+					return DecorationSet.empty;
+				}
 				// Rebuild decorations when document changes
 				const decorations = [];
 				newState.doc.descendants((node, pos) => {

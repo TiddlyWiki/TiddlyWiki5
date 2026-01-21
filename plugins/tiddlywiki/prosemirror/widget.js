@@ -16,6 +16,7 @@ const EditorState = require("prosemirror-state").EditorState;
 const EditorView = require("prosemirror-view").EditorView;
 const Schema = require("prosemirror-model").Schema;
 const DOMParser = require("prosemirror-model").DOMParser;
+const TextSelection = require("prosemirror-state").TextSelection;
 const basicSchema = require("prosemirror-schema-basic").schema;
 const createListPlugins = require("prosemirror-flat-list").createListPlugins;
 const createListSpec = require("prosemirror-flat-list").createListSpec;
@@ -23,6 +24,8 @@ const listKeymap = require("prosemirror-flat-list").listKeymap;
 const exampleSetup = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js").exampleSetup;
 const keymap = require("prosemirror-keymap").keymap;
 const inputRules = require("prosemirror-inputrules").inputRules;
+const buildInputRules = require("$:/plugins/tiddlywiki/prosemirror/setup/inputrules.js").buildInputRules;
+const placeholderPlugin = require("$:/plugins/tiddlywiki/prosemirror/setup/placeholder.js").placeholderPlugin;
 const SlashMenuPlugin = require("$:/plugins/tiddlywiki/prosemirror/slash-menu.js").SlashMenuPlugin;
 const SlashMenuUI = require("$:/plugins/tiddlywiki/prosemirror/slash-menu-ui.js").SlashMenuUI;
 const getAllMenuElements = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js").getAllMenuElements;
@@ -53,9 +56,18 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	const initialWikiAst = $tw.wiki.parseText(null, initialText).tree;
 	const doc = wikiAstToProseMirrorAst(initialWikiAst);
 
+	const outerWrap = $tw.utils.domMaker("div", {
+		class: "tc-prosemirror-wrapper"
+	});
+
 	const container = $tw.utils.domMaker("div", {
 		class: "tc-prosemirror-container"
 	});
+	const mount = $tw.utils.domMaker("div", {
+		class: "tc-prosemirror-mount"
+	});
+	container.appendChild(mount);
+	outerWrap.appendChild(container);
 	
 	const schema = new Schema({
 		nodes: basicSchema.spec.nodes.append({ list: createListSpec() }),
@@ -67,7 +79,7 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 
 	const allMenuElements = getAllMenuElements(this.wiki, schema);
 
-	this.view = new EditorView(container, {
+	this.view = new EditorView(mount, {
 		state: EditorState.create({
 			// doc: schema.node("doc", null, [schema.node("paragraph")]),
 			doc: schema.nodeFromJSON(doc),
@@ -76,6 +88,10 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 					triggerCodes: ["Slash", "Backslash"] // Support both / (、) and \ keys
 				}),
 				listKeymapPlugin,
+				buildInputRules(schema),
+				placeholderPlugin({
+					text: this.wiki.getTiddlerText("$:/config/prosemirror/placeholder", "Type / for commands")
+				}),
 				createWidgetBlockPlugin(),
 				createWidgetBlockNodeViewPlugin(this)
 			]
@@ -94,14 +110,68 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 		event.twEditor = true;
 		// Use capture phase to ensure it runs before other handlers
 	}, true);
+
+	// Prevent global key handlers (browser/TiddlyWiki) from hijacking editor shortcuts
+	container.addEventListener("keydown", function(event) {
+		// Do not preventDefault so ProseMirror can handle text input normally
+		event.twEditor = true;
+		event.stopPropagation();
+	}, true);
+	container.setAttribute("data-tw-prosemirror-keycapture", "yes");
+
+	// Add a centered "Add new line" button below the editor.
+	// This helps when the last block is a widget nodeview that is not directly editable.
+	const addLineWrap = $tw.utils.domMaker("div", {
+		class: "tc-prosemirror-addline"
+	});
+	const addLineBtn = $tw.utils.domMaker("button", {
+		class: "tc-prosemirror-addline-btn",
+		text: "添加新行"
+	});
+	addLineBtn.setAttribute("type", "button");
+	addLineBtn.setAttribute("contenteditable", "false");
+	addLineBtn.addEventListener("mousedown", function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+	}, true);
+	addLineBtn.addEventListener("click", () => {
+		const view = this.view;
+		if(!view) {
+			return;
+		}
+		const state = view.state;
+		const endPos = state.doc.content.size;
+		const para = state.schema.nodes.paragraph && state.schema.nodes.paragraph.createAndFill();
+		if(!para) {
+			view.focus();
+			return;
+		}
+		let tr = state.tr.insert(endPos, para);
+		tr = tr.setSelection(TextSelection.atEnd(tr.doc));
+		view.dispatch(tr.scrollIntoView());
+		view.focus();
+	});
+	addLineWrap.appendChild(addLineBtn);
 	
 	// Initialize SlashMenu UI
 	this.slashMenuUI = new SlashMenuUI(this.view, {
 		clickable: true
 	});
 		
-	parent.insertBefore(container,nextSibling);
-	this.domNodes.push(container);
+	parent.insertBefore(outerWrap,nextSibling);
+	this.domNodes.push(outerWrap);
+
+	// Attach after mount so prosemirror-menu has wrapped the editor DOM.
+	setTimeout(() => {
+		try {
+			if(!addLineWrap.isConnected) {
+				const host = this.view && this.view.dom && this.view.dom.parentNode;
+				(host || outerWrap).appendChild(addLineWrap);
+			}
+		} catch (e) {
+			// ignore
+		}
+	}, 0);
 };
 
 ProsemirrorWidget.prototype.saveEditorContent = function() {
