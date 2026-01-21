@@ -49,11 +49,8 @@ PluginSwitcher.prototype.switchPlugins = function() {
 			var tiddler = self.wiki.getTiddler(title);
 			if(tiddler && tiddler.isPlugin() && plugins.indexOf(title) === -1) {
 				plugins.push(title);
-				var pluginInfo = $tw.utils.parseJSONSafe(self.wiki.getTiddlerText(title)),
-					dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
-				$tw.utils.each(dependents,function(title) {
-					accumulatePlugin(title);
-				});
+				var dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
+				$tw.utils.each(dependents,title => { accumulatePlugin(title); });
 			}
 		};
 	accumulatePlugin(selectedPluginTitle);
