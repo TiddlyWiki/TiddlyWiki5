@@ -1670,9 +1670,10 @@ exports.generateDraftTitle = function(title) {
 		draftAttribution = $tw.language.getRawString("Draft/Attribution");
 	do {
 		if(username) {
-			draftTitle = this.getSubstitutedText(draftAttribution, undefined, {substitutions: [{name: "1", value: title}, {name: "2", value: username}]});
+			//draftTitle = this.getSubstitutedText(draftAttribution, undefined, {substitutions: [{name: "1", value: title}, {name: "2", value: username}]});
+			draftTitle = this.renderText("text/plain", "", draftAttribution, {variables: {"draft-title": title}});
 		} else {
-			draftTitle = this.getSubstitutedText(draftBaseTitle, undefined, {substitutions: [{name: "1", value: title}]});
+			draftTitle = this.renderText("text/plain", "", draftBaseTitle, {variables: {"draft-title": title}});
 		}
 		if(c) {
 			draftTitle = draftTitle.concat(" ", (c + 1).toString());

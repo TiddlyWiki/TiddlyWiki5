@@ -1,4 +1,4 @@
 title: $:/language/Draft/
 
-Attribution: $2$撰写的“$1$”的草稿
-Title: “$1$”的草稿
+Attribution: {{$:/status/UserName}}撰写的“<<draft-title>>”的草稿
+Title: “<<draft-title>>”的草稿
