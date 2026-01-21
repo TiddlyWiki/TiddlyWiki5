@@ -371,7 +371,7 @@ exports.compileFilter = function(filterString,options) {
 					default:
 						return function(results,source,widget) {
 							results.clear();
-							results.push($tw.language.getString("Error/FilterRunPrefix"));
+							results.push($tw.language.getString("Error/FilterPragma"));
 						};
 				}
 				return function(results,source,widget) {
