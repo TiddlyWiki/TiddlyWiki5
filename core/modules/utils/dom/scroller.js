@@ -61,12 +61,34 @@ PageScroller.prototype.handleEvent = function(event) {
 };
 
 /*
+Find the scrollable parent of an element
+*/
+PageScroller.prototype.findScrollableParent = function(element) {
+	if(!element) {
+		return window;
+	}
+	var parent = element.parentElement;
+	while(parent) {
+		var overflowY = window.getComputedStyle(parent).overflowY;
+		var isScrollable = overflowY === "auto" || overflowY === "scroll";
+		if(isScrollable && parent.scrollHeight > parent.clientHeight) {
+			return parent;
+		}
+		parent = parent.parentElement;
+	}
+	return window;
+};
+
+/*
 Handle a scroll event hitting the page document
 */
 PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	var self = this,
 		duration = $tw.utils.hop(options,"animationDuration") ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
 		srcWindow = element ? element.ownerDocument.defaultView : window;
+	// Find the scrollable parent
+	var scrollContainer = this.findScrollableParent(element);
+	var isWindowScroll = scrollContainer === window || scrollContainer === srcWindow;
 	// Now get ready to scroll the body
 	this.cancelScroll(srcWindow);
 	this.startTime = Date.now();
@@ -76,16 +98,46 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	if(toolbar) {
 		offset = toolbar.offsetHeight;
 	}
+	// Get the scroll-margin-top and scroll-margin-left values from the element
+	var scrollMarginTop = 0, scrollMarginLeft = 0;
+	if(element) {
+		var computedStyle = srcWindow.getComputedStyle(element);
+		var marginTop = computedStyle.getPropertyValue("scroll-margin-top");
+		if(marginTop) {
+			scrollMarginTop = parseFloat(marginTop) || 0;
+		}
+		var marginLeft = computedStyle.getPropertyValue("scroll-margin-left");
+		if(marginLeft) {
+			scrollMarginLeft = parseFloat(marginLeft) || 0;
+		}
+	}
 	// Get the client bounds of the element and adjust by the scroll position
 	var getBounds = function() {
 			var clientBounds = typeof callback === 'function' ? callback() : element.getBoundingClientRect(),
+				scrollPosition;
+			
+			if(isWindowScroll) {
 				scrollPosition = $tw.utils.getScrollPosition(srcWindow);
-			return {
-				left: clientBounds.left + scrollPosition.x,
-				top: clientBounds.top + scrollPosition.y - offset,
-				width: clientBounds.width,
-				height: clientBounds.height
-			};
+				return {
+					left: clientBounds.left + scrollPosition.x - scrollMarginLeft,
+					top: clientBounds.top + scrollPosition.y - offset - scrollMarginTop,
+					width: clientBounds.width,
+					height: clientBounds.height
+				};
+			} else {
+				// For container scroll, calculate position relative to container
+				var containerBounds = scrollContainer.getBoundingClientRect();
+				scrollPosition = {
+					x: scrollContainer.scrollLeft,
+					y: scrollContainer.scrollTop
+				};
+				return {
+					left: clientBounds.left - containerBounds.left + scrollPosition.x - scrollMarginLeft,
+					top: clientBounds.top - containerBounds.top + scrollPosition.y - offset - scrollMarginTop,
+					width: clientBounds.width,
+					height: clientBounds.height
+				};
+			}
 		},
 		// We'll consider the horizontal and vertical scroll directions separately via this function
 		// targetPos/targetSize - position and size of the target element
@@ -111,11 +163,30 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 				t = 1;
 			}
 			t = $tw.utils.slowInSlowOut(t);
-			var scrollPosition = $tw.utils.getScrollPosition(srcWindow),
-				bounds = getBounds(),
-				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,srcWindow.innerWidth),
-				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,srcWindow.innerHeight);
-			srcWindow.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
+			var scrollPosition, bounds, endX, endY, viewportWidth, viewportHeight;
+			
+			if(isWindowScroll) {
+				scrollPosition = $tw.utils.getScrollPosition(srcWindow);
+				bounds = getBounds();
+				viewportWidth = srcWindow.innerWidth;
+				viewportHeight = srcWindow.innerHeight;
+				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,viewportWidth);
+				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,viewportHeight);
+				srcWindow.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
+			} else {
+				scrollPosition = {
+					x: scrollContainer.scrollLeft,
+					y: scrollContainer.scrollTop
+				};
+				bounds = getBounds();
+				viewportWidth = scrollContainer.clientWidth;
+				viewportHeight = scrollContainer.clientHeight;
+				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,viewportWidth);
+				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,viewportHeight);
+				scrollContainer.scrollLeft = scrollPosition.x + (endX - scrollPosition.x) * t;
+				scrollContainer.scrollTop = scrollPosition.y + (endY - scrollPosition.y) * t;
+			}
+			
 			if(t < 1) {
 				self.idRequestFrame = self.requestAnimationFrame.call(srcWindow,drawFrame);
 			}
