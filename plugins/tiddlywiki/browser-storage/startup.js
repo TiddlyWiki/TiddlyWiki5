@@ -26,16 +26,15 @@ exports.startup = function() {
 
 	// Compute our prefix for local storage keys
 	var prefix = "tw5#" + window.location.pathname + "#";
-	// Make a logger
-	var logger = new $tw.utils.Logger("browser-storage",{
-			colour: "cyan"
-		});
 	// Add browserStorage object to $tw
 	$tw.browserStorage = new BrowserStorageUtil($tw.wiki,{
 		enabledTitle: ENABLED_TITLE,
-		prefix: prefix,
-		logger: logger
+		prefix: prefix
 	});
+	// Add a logger
+	$tw.browserStorage.logger = new $tw.utils.Logger("browser-storage",{
+			colour: "green"
+		});
 	// Function to compile the filter
 	var filterFn,
 		compileFilter = function() {
@@ -60,9 +59,16 @@ exports.startup = function() {
 		},
 		requestPersistence = function() {
 			setPersistedState("requested");
+			$tw.browserStorage.logger.info("Show user request for browser PERSISTED storage");
 			navigator.storage.persist().then(function(persisted) {
-				console.log("Request for persisted storage " + (persisted ? "granted" : "denied"));
-				setPersistedState(persisted ? "granted" : "denied");
+				if(persisted) {
+					$tw.browserStorage.logger.info("User GRANTED access to browser PERSISTED storage");
+					setPersistedState("granted");
+				}
+				else {
+					$tw.browserStorage.logger.info("User DENIED access to persisted storage. Storage MAY BE CLEARED by the UA under storage pressure.");
+					setPersistedState("denied");
+				}
 			});
 		},
 		persistPermissionRequested = false,
