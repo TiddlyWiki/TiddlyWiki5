@@ -12,6 +12,8 @@ Node view for rendering widget blocks in ProseMirror
 const utils = require("$:/plugins/tiddlywiki/prosemirror/widget-block/utils.js");
 const parseWidget = utils.parseWidget;
 
+const DEBUG = typeof window !== "undefined" && !!window.__TW_PROSEMIRROR_DEBUG__;
+
 /**
  * Custom node view for widget blocks
  * This renders the paragraph node as a widget block if it contains widget syntax
@@ -42,13 +44,13 @@ class WidgetBlockNodeView {
 
 		const text = this.node.textContent.trim();
 		
-		if(console && console.log) {
+		if(DEBUG && console && console.log) {
 			console.log("[WidgetBlockNodeView] Creating DOM for text:", text);
 		}
 		
 		const widget = parseWidget(text);
 		
-		if(console && console.log) {
+		if(DEBUG && console && console.log) {
 			console.log("[WidgetBlockNodeView] Parsed widget:", widget);
 		}
 
@@ -138,8 +140,10 @@ class WidgetBlockNodeView {
 				return false;
 			}, true);
 
-			buttonContainer.appendChild(settingsBtn);
+			// Put delete first and edit/save last so edit/save stays rightmost
+			// when the delete button becomes visible in edit mode.
 			buttonContainer.appendChild(deleteBtn);
+			buttonContainer.appendChild(settingsBtn);
 			header.appendChild(title);
 			header.appendChild(buttonContainer);
 			container.appendChild(header);
@@ -163,9 +167,19 @@ class WidgetBlockNodeView {
 			// Setting contentDOM tells ProseMirror to manage the content,
 			// but we want full control over rendering
 		} else {
-			// Not a widget, just show paragraph normally
-			container.className = "pm-paragraph-normal";
-			this.contentDOM = container;
+			// Not a widget: render as a normal paragraph.
+			// Important: this must be a <p> to match the schema and preserve editor behavior
+			// (marks, input rules like lists, etc).
+			const p = document.createElement("p");
+			p.className = "pm-paragraph-normal";
+			this.dom = p;
+			this.contentDOM = p;
+			this.widgetInfo = null;
+			this.widgetContent = null;
+			this.header = null;
+			this.settingsBtn = null;
+			this.deleteBtn = null;
+			return;
 		}
 
 		this.dom = container;
@@ -438,19 +452,37 @@ class WidgetBlockNodeView {
 		if(node.type !== this.node.type) {
 			return false;
 		}
+		
+		const oldText = this.node.textContent.trim();
+		const newText = node.textContent.trim();
+		
+		// Update node reference
 		this.node = node;
 		
-		const newText = node.textContent.trim();
 		const newWidget = parseWidget(newText);
-		const oldWidget = this.widgetInfo;
+		const oldWidget = this.widgetInfo; // Rely on property set in createDOM/update
+		
+		const isOldWidget = !!oldWidget;
+		const isNewWidget = !!newWidget;
 
-		// If widget changed, recreate the DOM
-		if((newWidget !== null) !== (oldWidget !== null) ||
-		   (newWidget && oldWidget && newWidget.rawText !== oldWidget.rawText)) {
-			this.createDOM();
+		// Mode change: return false to force re-creation
+		if(isOldWidget !== isNewWidget) {
+			return false;
 		}
 
-		this.updateContent();
+		// Widget -> Widget update
+		if(isNewWidget) {
+			// If text changed, update our internal model
+			// Note: ProseMirror handles valid updates to contentDOM if exposed
+			if(newText !== oldText) {
+				this.widgetInfo = newWidget;
+				this.updateContent();
+			}
+			return true;
+		}
+
+		// Text -> Text update
+		// ProseMirror handles contentDOM update
 		return true;
 	}
 

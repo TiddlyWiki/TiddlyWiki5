@@ -16,10 +16,36 @@ const prosemirrorModel = require("prosemirror-model");
 
 const mac = typeof navigator != "undefined" ? /Mac|iP(hone|[oa]d)/.test(navigator.platform) : false;
 
+/**
+ * Get keyboard shortcut from config, with fallback to default
+ * @param {string} action - The action name (e.g., "bold", "italic")
+ * @param {string} defaultKey - The default key binding
+ * @returns {string|null} - The configured key binding, or null if disabled
+ */
+function getShortcut(action, defaultKey) {
+	const configTiddler = "$:/config/prosemirror/shortcuts/" + action;
+	const customKey = $tw.wiki.getTiddlerText(configTiddler, "").trim();
+	
+	// If custom key is explicitly set to "none", disable the shortcut
+	if(customKey === "none") {
+		return null;
+	}
+	
+	// Use custom key if provided, otherwise use default
+	return customKey || defaultKey;
+}
+
 function buildKeymap(schema, mapKeys) {
 	const keys = {};
 	let type;
-	const bind = (key, cmd) => {
+	const bind = (action, defaultKey, cmd) => {
+		let key = getShortcut(action, defaultKey);
+		
+		// Skip if disabled
+		if(key === null) {
+			return;
+		}
+		
 		if(mapKeys) {
 			const mapped = mapKeys[key];
 			if(mapped === false) {
@@ -32,33 +58,45 @@ function buildKeymap(schema, mapKeys) {
 		keys[key] = cmd;
 	};
 
-	bind("Mod-z", prosemirrorHistory.undo);
-	bind("Shift-Mod-z", prosemirrorHistory.redo);
-	bind("Backspace", prosemirrorInputrules.undoInputRule);
-	if(!mac) bind("Mod-y", prosemirrorHistory.redo);
+	bind("undo", "Mod-z", prosemirrorHistory.undo);
+	bind("redo", "Shift-Mod-z", prosemirrorHistory.redo);
+	bind("undo-input", "Backspace", prosemirrorInputrules.undoInputRule);
+	if(!mac) {
+		bind("redo-alt", "Mod-y", prosemirrorHistory.redo);
+	}
 
-	bind("Alt-ArrowUp", prosemirrorCommands.joinUp);
-	bind("Alt-ArrowDown", prosemirrorCommands.joinDown);
-	bind("Mod-BracketLeft", prosemirrorCommands.lift);
-	bind("Escape", prosemirrorCommands.selectParentNode);
+	bind("join-up", "Alt-ArrowUp", prosemirrorCommands.joinUp);
+	bind("join-down", "Alt-ArrowDown", prosemirrorCommands.joinDown);
+	bind("lift", "Mod-BracketLeft", prosemirrorCommands.lift);
+	bind("select-parent", "Escape", prosemirrorCommands.selectParentNode);
 
 	type = schema.marks.strong;
 	if(type) {
-		bind("Mod-b", prosemirrorCommands.toggleMark(type));
-		bind("Mod-B", prosemirrorCommands.toggleMark(type));
+		const boldCmd = prosemirrorCommands.toggleMark(type);
+		bind("bold", "Mod-b", boldCmd);
+		// Also bind uppercase variant
+		const upperKey = getShortcut("bold", "Mod-b");
+		if(upperKey && upperKey !== "none") {
+			keys[upperKey.replace("b", "B")] = boldCmd;
+		}
 	}
 	type = schema.marks.em;
 	if(type) {
-		bind("Mod-i", prosemirrorCommands.toggleMark(type));
-		bind("Mod-I", prosemirrorCommands.toggleMark(type));
+		const italicCmd = prosemirrorCommands.toggleMark(type);
+		bind("italic", "Mod-i", italicCmd);
+		// Also bind uppercase variant
+		const upperKey = getShortcut("italic", "Mod-i");
+		if(upperKey && upperKey !== "none") {
+			keys[upperKey.replace("i", "I")] = italicCmd;
+		}
 	}
 	type = schema.marks.code;
 	if(type) {
-		bind("Mod-`", prosemirrorCommands.toggleMark(type));
+		bind("code", "Mod-`", prosemirrorCommands.toggleMark(type));
 	}
 	type = schema.nodes.blockquote;
 	if(type) {
-		bind("Ctrl->", prosemirrorCommands.wrapIn(type));
+		bind("blockquote", "Ctrl->", prosemirrorCommands.wrapIn(type));
 	}
 	type = schema.nodes.hard_break;
 	if(type) {
@@ -69,35 +107,41 @@ function buildKeymap(schema, mapKeys) {
 			}
 			return true;
 		});
-		bind("Mod-Enter", cmd);
-		bind("Shift-Enter", cmd);
+		bind("hardbreak", "Mod-Enter", cmd);
+		const shiftEnterKey = getShortcut("hardbreak-shift", "Shift-Enter");
+		if(shiftEnterKey && shiftEnterKey !== "none") {
+			keys[shiftEnterKey] = cmd;
+		}
 		if(mac) {
-			bind("Ctrl-Enter", cmd);
+			const ctrlEnterKey = getShortcut("hardbreak-ctrl", "Ctrl-Enter");
+			if(ctrlEnterKey && ctrlEnterKey !== "none") {
+				keys[ctrlEnterKey] = cmd;
+			}
 		}
 	}
 	type = schema.nodes.list;
 	if(type) {
-		bind("Shift-Tab", prosemirrorFlatList.createDedentListCommand(type));
-		bind("Tab", prosemirrorFlatList.createIndentListCommand(type));
+		bind("dedent", "Shift-Tab", prosemirrorFlatList.createDedentListCommand(type));
+		bind("indent", "Tab", prosemirrorFlatList.createIndentListCommand(type));
 	}
 	type = schema.nodes.paragraph;
 	if(type) {
-		bind("Shift-Ctrl-0", prosemirrorCommands.setBlockType(type));
+		bind("paragraph", "Shift-Ctrl-0", prosemirrorCommands.setBlockType(type));
 	}
 	type = schema.nodes.code_block;
 	if(type) {
-		bind("Shift-Ctrl-\\", prosemirrorCommands.setBlockType(type));
+		bind("codeblock", "Shift-Ctrl-\\", prosemirrorCommands.setBlockType(type));
 	}
 	type = schema.nodes.heading;
 	if(type) {
 		for(let i = 1; i <= 6; i++) {
-			bind("Shift-Ctrl-" + i, prosemirrorCommands.setBlockType(type, {level: i}));
+			bind("heading" + i, "Shift-Ctrl-" + i, prosemirrorCommands.setBlockType(type, {level: i}));
 		}
 	}
 	type = schema.nodes.horizontal_rule;
 	if(type) {
 		const hr = type;
-		bind("Mod-_", (state, dispatch) => {
+		bind("hr", "Mod-_", (state, dispatch) => {
 			if(dispatch) {
 				dispatch(state.tr.replaceSelectionWith(hr.create()).scrollIntoView());
 			}

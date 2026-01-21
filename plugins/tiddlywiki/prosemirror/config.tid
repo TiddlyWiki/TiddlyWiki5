@@ -1,0 +1,37 @@
+title: $:/plugins/tiddlywiki/prosemirror/config
+tags: $:/tags/ControlPanel/SettingsTab
+caption: ProseMirror
+
+! ProseMirror Editor Configuration
+
+!! Keyboard Shortcuts
+
+Customize keyboard shortcuts for the ProseMirror editor. Leave blank to use default, or enter `none` to disable a shortcut.
+
+|!Action |!Default |!Custom Shortcut |
+|Bold |`Mod-b` or `Mod-B` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/bold" default="" tag="input" placeholder="Mod-b"/> |
+|Italic |`Mod-i` or `Mod-I` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/italic" default="" tag="input" placeholder="Mod-i"/> |
+|Code |`Mod-\`` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/code" default="" tag="input" placeholder="Mod-`"/> |
+|Hard Break |`Mod-Enter` or `Shift-Enter` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/hardbreak" default="" tag="input" placeholder="Mod-Enter"/> |
+|Blockquote |`Ctrl->` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/blockquote" default="" tag="input" placeholder="Ctrl->"/> |
+|Undo |`Mod-z` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/undo" default="" tag="input" placeholder="Mod-z"/> |
+|Redo |`Shift-Mod-z` (Mac: also `Mod-y`) |<$edit-text tiddler="$:/config/prosemirror/shortcuts/redo" default="" tag="input" placeholder="Shift-Mod-z"/> |
+|Heading 1 |`Shift-Ctrl-1` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/heading1" default="" tag="input" placeholder="Shift-Ctrl-1"/> |
+|Heading 2 |`Shift-Ctrl-2` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/heading2" default="" tag="input" placeholder="Shift-Ctrl-2"/> |
+|Heading 3 |`Shift-Ctrl-3` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/heading3" default="" tag="input" placeholder="Shift-Ctrl-3"/> |
+|Heading 4 |`Shift-Ctrl-4` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/heading4" default="" tag="input" placeholder="Shift-Ctrl-4"/> |
+|Heading 5 |`Shift-Ctrl-5` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/heading5" default="" tag="input" placeholder="Shift-Ctrl-5"/> |
+|Heading 6 |`Shift-Ctrl-6` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/heading6" default="" tag="input" placeholder="Shift-Ctrl-6"/> |
+|Paragraph |`Shift-Ctrl-0` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/paragraph" default="" tag="input" placeholder="Shift-Ctrl-0"/> |
+|Code Block |`Shift-Ctrl-\` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/codeblock" default="" tag="input" placeholder="Shift-Ctrl-\"/> |
+|Horizontal Rule |`Mod-_` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/hr" default="" tag="input" placeholder="Mod-_"/> |
+|Indent List |`Tab` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/indent" default="" tag="input" placeholder="Tab"/> |
+|Dedent List |`Shift-Tab` |<$edit-text tiddler="$:/config/prosemirror/shortcuts/dedent" default="" tag="input" placeholder="Shift-Tab"/> |
+
+''Note:'' `Mod` means `Ctrl` on Windows/Linux and `Cmd` on Mac.
+
+!! Widget Block Settings
+
+|!Setting |!Value |
+|Enable Widget Block Rendering |<$checkbox tiddler="$:/config/prosemirror/enable-widget-blocks" field="text" checked="yes" unchecked="no" default="yes"> Enable</$checkbox> |
+|Auto-focus on Edit |<$checkbox tiddler="$:/config/prosemirror/widget-block/auto-focus" field="text" checked="yes" unchecked="no" default="yes"> Enable</$checkbox> |

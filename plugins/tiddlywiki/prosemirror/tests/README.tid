@@ -1,0 +1,133 @@
+title: $:/plugins/tiddlywiki/prosemirror/tests/README
+type: text/vnd.tiddlywiki
+
+! ProseMirror (WYSIWYG) Editor Tests
+
+This folder contains Playwright tests for the ProseMirror-based WYSIWYG editor.
+
+!! Files
+
+* ''prosemirror.spec.js'': integration tests (UI interactions, editor behavior)
+* ''utils.spec.js'': unit tests (helpers, parsers, configuration reading)
+
+!! Prerequisite (build test.html)
+
+Playwright tests load a local file page: ''editions/test/output/test.html''.
+
+From the repo root (build the HTML only):
+
+```shell
+node ./tiddlywiki.js ./editions/test --verbose --rendertiddler '$:/core/save/all' ./output/test.html text/plain
+```
+
+If you changed any ProseMirror plugin/editor code (for example [plugins/tiddlywiki/prosemirror/widget.js](plugins/tiddlywiki/prosemirror/widget.js)), you must re-run the build command above so the browser page picks up the changes.
+
+!! Run ProseMirror Playwright tests (shell commands)
+
+From the repo root:
+
+* Run all ProseMirror Playwright tests
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests
+```
+
+* Chromium only (fastest for CI/local)
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests --project=chromium
+```
+
+* Run a single file
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js
+```
+
+* Run a single group/test (name grep)
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "Widget Blocks"
+```
+
+!! Fast suites (recommended)
+
+These are short, focused runs for day-to-day development and AI-assisted changes.
+
+* Basic editing + formatting (typing, bold/italic, undo/redo)
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "ProseMirror Editor - Basic Editing" --project=chromium --workers=1
+```
+
+* Widget blocks (detect/render/edit/save/delete + paste)
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "ProseMirror Editor - Widget Blocks" --project=chromium --workers=1
+```
+
+* Lists (create + indent/dedent)
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "ProseMirror Editor - Lists" --project=chromium --workers=1
+```
+
+* Headings (H1-H6)
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "ProseMirror Editor - Headings" --project=chromium --workers=1
+```
+
+* Configuration (shortcuts + widget-block enable/disable)
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "ProseMirror Editor - Configuration" --project=chromium --workers=1
+```
+
+* Integration (save/load + paste does not open import dialog)
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "ProseMirror Editor - Integration" --project=chromium --workers=1
+```
+
+* UI mode (interactive debugging)
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests --ui
+```
+
+* Headed mode (watch it run)
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests --headed
+```
+
+* Trace recording (diagnose flaky failures)
+
+```shell
+npx playwright test plugins/tiddlywiki/prosemirror/tests --trace on
+```
+
+!! Manual development workflow
+
+During normal development, you can open the built page in a browser and navigate to:
+
+* ''$:/plugins/tiddlywiki/prosemirror/readme''
+
+That tiddler embeds the editor instance used for day-to-day manual testing.
+
+!! Coverage goals
+
+* Basic editing: typing, undo/redo
+* Formatting: bold/italic/inline code
+* Widget Blocks: detect/render/edit/save/delete/config toggles
+* Lists: creation + indent/dedent (prosemirror-flat-list)
+* Headings: H1-H6 shortcuts
+* Integration: content saved back to a tiddler; paste events flagged to avoid the import dialog
+
+!! AI-friendly conventions
+
+* ''Determinism'': always clear editor content at the start of each test.
+* ''Stable selectors'': list assertions should use `.prosemirror-flat-list` structure, not `ul/li`.
+* ''Paste tests'': avoid OS clipboard permissions; inject paste data via DOM events.
+* ''Config tests'': write `$:/config/prosemirror/*` tiddlers before constructing the editor.
