@@ -176,7 +176,7 @@ exports.parseFilter = function(filterString) {
 					// If there is a filter pragma
 					operation.pragma = match[1];
 					operation.suffix = match[2];
-					p = p + operation.pragma.length;
+					p = match.index + match[0].length;
 				} else if(match[3]) {
 					// If there is a filter run prefix
 					operation.prefix = match[3];
