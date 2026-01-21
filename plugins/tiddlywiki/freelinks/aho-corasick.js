@@ -3,8 +3,7 @@ title: $:/core/modules/utils/aho-corasick.js
 type: application/javascript
 module-type: utils
 
-Optimized Aho-Corasick string matching algorithm implementation with enhanced performance
-and error handling for TiddlyWiki freelinking functionality.
+Optimized Aho-Corasick string matching algorithm implementation with enhanced performance and error handling for TiddlyWiki freelinking functionality.
 
 Useage:
 
@@ -39,7 +38,7 @@ Notes
  Word Boundary: Enabling useWordBoundary ensures more precise matches, ideal for link detection scenarios.
  Compatibility: Ensure compatibility with other TiddlyWiki modules (e.g., wikiparser.js) when processing WikiText.
  Debugging: Use getStats() to inspect the trie structure's size and ensure it does not overload browser memory.
-
+ 
 \*/
 
 "use strict";
@@ -111,14 +110,9 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 				var failureLink = (fail && fail[char]) ? fail[char] : root;
 				this.failure[child] = failureLink;
 				
-				var failureOutput = this.failure[child];
-				if(failureOutput && failureOutput.$) {
-					if(!child.$) {
-						child.$ = [];
-					}
-					child.$.push.apply(child.$, failureOutput.$);
-				}
-				
+				// Do not merge outputs from failure links during build
+				// Instead, collect matches dynamically by traversing failure links during search				
+
 				queue.push(child);
 			}
 		}
@@ -143,6 +137,7 @@ AhoCorasick.prototype.search = function(text, useWordBoundary) {
 		var char = text[i];
 		var transitionCount = 0;
 		
+		// Follow failure links to find a valid transition
 		while(node && !node[char] && node !== this.trie && transitionCount < this.maxFailureDepth) {
 			node = this.failure[node] || this.trie;
 			transitionCount++;
@@ -157,15 +152,30 @@ AhoCorasick.prototype.search = function(text, useWordBoundary) {
 			}
 		}
 		
+		// Traverse the current node and its failure link chain to gather all patterns
 		var currentNode = node;
 		var collectCount = 0;
+		var visitedNodes = new Set();
+		
 		while(currentNode && collectCount < 10) {
+			// Prevent infinite loops
+			if(visitedNodes.has(currentNode)) {
+				break;
+			}
+			visitedNodes.add(currentNode);
+			
+			// Only collect outputs from the current node (not merged ones)
 			if(currentNode.$) {
 				var outputs = currentNode.$;
 				for(var j = 0; j < outputs.length && matches.length < maxMatches; j++) {
 					var output = outputs[j];
 					var matchStart = i - output.length + 1;
 					var matchEnd = i + 1;
+					
+					var matchedText = text.substring(matchStart, matchEnd);
+					if(matchedText !== output.pattern) {
+						continue;
+					}
 					
 					if(useWordBoundary && !this.isWordBoundaryMatch(text, matchStart, matchEnd)) {
 						continue;
@@ -179,6 +189,7 @@ AhoCorasick.prototype.search = function(text, useWordBoundary) {
 					});
 				}
 			}
+			
 			currentNode = this.failure[currentNode];
 			if(currentNode === this.trie) break;
 			collectCount++;

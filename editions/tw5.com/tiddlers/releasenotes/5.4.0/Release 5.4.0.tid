@@ -6,8 +6,12 @@ title: Release 5.4.0
 type: text/vnd.tiddlywiki
 description: Under development
 
-\define release-introduction()
-Release v5.4.0 includes major improvements in a number of areas. See the [[project plan|https://github.com/orgs/TiddlyWiki/projects/4]] for more details.
+\procedure release-introduction()
+Release v5.4.0 is an important release because it deliberately and forensically loosens backwards compatibility where needed to allow significant new features and fundamental improvements to be made.
+
+''Please note that this release note is not yet fully completed, please see the change history on ~GitHub for the full list of changes included in this release.''
+
+See the [[project plan|https://github.com/orgs/TiddlyWiki/projects/4]] for full details.
 \end release-introduction
 
 <<releasenote 5.4.0>>

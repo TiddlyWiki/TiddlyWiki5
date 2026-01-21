@@ -1,12 +1,12 @@
 created: 20140908114400000
-modified: 20250730154331065
+modified: 20251122174540932
 tags: About
 title: History of TiddlyWiki
 type: text/vnd.tiddlywiki
 
+Gathering the history of ~TiddlyWiki. This is an ongoing project. Contributions and reminiscences are welcome.
 
-Here is a brief history of TiddlyWiki, its origins and its evolution since it was first released on 20th September 2004. Contributions and reminiscences are welcome.
-
-* [[The Story of TiddlyWiki]] – a personal account of the story of TiddlyWiki, its origins and evolution
-* [[TiddlyWiki Anniversaries]] – relive the celebrations of TiddlyWiki's major anniversaries
-* [[Filter Syntax History]] – gives a brief history of the evolution of the filter syntax in TiddlyWiki5
+* [[The Story of TiddlyWiki]] – A personal account from [[@Jermolene]] of the story of TiddlyWiki, its origins and evolution
+* https://github.com/TiddlyWiki/LaunchArchive – Blog posts and tweets from TiddlyWiki's launch in 2004
+* [[TiddlyWiki Anniversaries]] – Relive the celebrations of TiddlyWiki's major anniversaries
+* [[Filter Syntax History]] – A brief history of the evolution of the filter syntax in TiddlyWiki5
