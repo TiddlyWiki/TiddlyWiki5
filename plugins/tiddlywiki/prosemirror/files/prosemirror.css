@@ -2,6 +2,43 @@
   position: relative;
 }
 
+.ProseMirror.tw-prosemirror-empty::before {
+  content: attr(data-placeholder);
+  color: var(--tc-muted-foreground, #6b6b6b);
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+.tc-prosemirror-addline {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 0;
+}
+
+.tc-prosemirror-mount {
+  /* Mount point for the ProseMirror-menubar wrapper and editor */
+}
+
+.tc-prosemirror-wrapper {
+  display: block;
+}
+
+.tc-prosemirror-addline-btn {
+  background: transparent;
+  border: 1px dashed rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font: inherit;
+  color: rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+}
+
+.tc-prosemirror-addline-btn:hover {
+  border-color: rgba(0, 0, 0, 0.45);
+  color: rgba(0, 0, 0, 0.85);
+}
+
 .ProseMirror {
   word-wrap: break-word;
   white-space: pre-wrap;

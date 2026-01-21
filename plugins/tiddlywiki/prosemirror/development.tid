@@ -1,5 +1,7 @@
 title: $:/plugins/tiddlywiki/prosemirror/development
 
+!! Dependencies
+
 Downloaded from JsDelivr CDN (like `https://cdn.jsdelivr.net/npm/prosemirror-state@latest/dist/index.cjs` and store as `prosemirror-state.js`):
 
 * [ext[prosemirror-state|https://cdn.jsdelivr.net/npm/prosemirror-state@latest/dist/index.cjs]]: v1.4.3
@@ -26,3 +28,74 @@ Downloaded from JsDelivr CDN (like `https://cdn.jsdelivr.net/npm/prosemirror-sta
 * [ext[rope-sequence|https://cdn.jsdelivr.net/npm/rope-sequence@latest/dist/index.cjs]]: v1.3.4
 * [ext[prosemirror-safari-ime-span|https://cdn.jsdelivr.net/npm/prosemirror-safari-ime-span@latest/dist/index.cjs]]: v1.0.2
 * [ext[prosemirror-slash-menu|https://cdn.jsdelivr.net/npm/prosemirror-slash-menu@latest/dist/index.js]]: v0.4.5
+
+!! Implementations
+
+!!! Configuration System
+
+ProseMirror editor settings can be customized through the [[Control Panel|$:/plugins/tiddlywiki/prosemirror/config]].
+
+''Keyboard Shortcuts:''
+
+* All keyboard shortcuts are configurable via `$:/config/prosemirror/shortcuts/` tiddlers
+* Each action (bold, italic, undo, etc.) has its own config tiddler
+* Set to `none` to disable a shortcut
+* Leave empty to use default
+* `setup/keymap.js` reads configs via `getShortcut()` function
+* Supports both lowercase and uppercase variants (e.g., Mod-b and Mod-B for bold)
+
+''Widget Block Settings:''
+
+* `$:/config/prosemirror/enable-widget-blocks` - Enable/disable widget block rendering
+* `$:/config/prosemirror/widget-block/auto-focus` - Auto-focus textarea in edit mode
+
+!!! Widget Block System
+
+The widget block system provides WYSIWYG rendering for TiddlyWiki widget syntax within the ProseMirror editor.
+
+''Architecture:''
+
+* `widget-block/utils.js` - Widget syntax parser and recognizer
+* `widget-block/nodeview.js` - Custom NodeView implementation for widget rendering
+* `widget-block/plugin.js` - ProseMirror plugins for decoration and node views
+* `widget-block/styles.css` - Visual styling for widget blocks
+
+''Features Implemented:''
+
+* Widget syntax detection using regex pattern `<<widgetName attributes>>`
+* Real-time conversion of typed/pasted widget syntax to visual blocks
+* Custom NodeView with editable content area
+* Edit mode with textarea for modifying widget source
+* Delete button (visible only in edit mode)
+* Visual indicators (blue border, gradient header)
+* Integration with TiddlyWiki's widget rendering system
+* Prevention of import dialog on paste events (sets `event.twEditor = true`)
+
+''AST Integration:''
+
+* `ast/to-prosemirror.js` - `transclude()` function converts widget nodes to paragraphs with widget syntax
+* `ast/from-prosemirror.js` - `paragraph()` function detects widget syntax and converts to transclude nodes
+* Uses unified `parseWidget()` utility from `widget-block/utils.js`
+
+''Planned Enhancements:''
+
+* Support for more widget types (procedures, functions, transcludes)
+* Drag and drop reordering of widget blocks
+* Keyboard shortcuts for widget operations
+* Widget parameter autocomplete
+* Live preview updates on parameter changes
+* Widget template library
+
+!! Testing
+
+Comprehensive Playwright tests are available in `plugins/tiddlywiki/prosemirror/tests/`:
+
+* `prosemirror.spec.js` - Integration tests for all editor features
+* `utils.spec.js` - Unit tests for utility functions
+
+Run tests with `pnpm test` or `npx playwright test plugins/tiddlywiki/prosemirror/tests`
+
+See `plugins/tiddlywiki/prosemirror/tests/README.md` for detailed testing documentation.
+
+!! Other Features
+
