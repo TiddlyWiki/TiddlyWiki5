@@ -1,0 +1,39 @@
+title: BrowserPopStateWidget
+tags: Widgets
+type: text/vnd.tiddlywiki
+
+The browser popstate widget listens for browser back/forward button events and dispatches `tm-navigate` messages to navigate to tiddlers stored in the browser history. It should be placed inside a NavigatorWidget.
+
+! Content and Attributes
+
+The widget has no attributes and can contain child widgets that will be rendered normally.
+
+! Usage
+
+Place the `<$browserpopstate>` widget inside your NavigatorWidget, typically near the root of your story view:
+
+```
+<$navigator story="$:/StoryList" history="$:/HistoryList">
+  <$browserpopstate/>
+  <!-- Your story river and other content here -->
+</$navigator>
+```
+
+The widget will:
+
+* Listen for browser `popstate` events (triggered when users click back/forward buttons)
+* Dispatch `tm-navigate` messages that bubble up to the parent NavigatorWidget
+* Automatically clean up event listeners when removed
+
+! Important Notes
+
+* The URL will not change when navigating tiddlers or using browser buttons
+* Use with the ActionPushStateWidget to add tiddlers to browser history
+* Only one `<$browserpopstate>` widget should be active per navigator context
+* The widget properly cleans up its event listener when removed from the DOM
+
+! See Also
+
+* ActionPushStateWidget
+* NavigatorWidget
+* WidgetMessage: tm-navigate
