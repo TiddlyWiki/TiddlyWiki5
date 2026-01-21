@@ -12,6 +12,7 @@ Link widget
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var LinkWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 
