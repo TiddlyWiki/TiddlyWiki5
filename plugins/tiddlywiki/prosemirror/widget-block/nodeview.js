@@ -153,6 +153,7 @@ class WidgetBlockNodeView {
 			content.className = "pm-widget-block-nodeview-content";
 			content.contentEditable = "false"; // Prevent ProseMirror from editing widget content
 			container.appendChild(content);
+			container.classList.add("pm-widget-block-nodeview-widget");
 
 			this.widgetInfo = widget;
 			this.widgetContent = content; // Use a different property name, not contentDOM
@@ -311,6 +312,9 @@ class WidgetBlockNodeView {
 		}
 		
 		this.isEditMode = !this.isEditMode;
+		if(this.dom) {
+			this.dom.classList.toggle("pm-widget-block-editing", !!this.isEditMode);
+		}
 		
 		if(console && console.log) {
 			console.log("[WidgetBlockNodeView] New mode:", this.isEditMode);
@@ -402,6 +406,9 @@ class WidgetBlockNodeView {
 		
 		// Switch back to view mode
 		this.isEditMode = false;
+		if(this.dom) {
+			this.dom.classList.remove("pm-widget-block-editing");
+		}
 		if(this.settingsBtn) {
 			// Restore edit icon
 			const editIconTiddler = $tw.wiki.getTiddler("$:/core/images/edit-button");
