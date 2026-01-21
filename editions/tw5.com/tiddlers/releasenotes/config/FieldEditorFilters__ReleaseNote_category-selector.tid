@@ -1,0 +1,5 @@
+title: $:/config/FieldEditorFilters//ReleaseNote/category-selector
+list-before: $:/config/FieldEditorFilters/default
+tags: $:/tags/FieldEditorFilter
+
+[suffix[change-category]then[$:/config/EditTemplateFields/ReleaseNote/change-category]]
