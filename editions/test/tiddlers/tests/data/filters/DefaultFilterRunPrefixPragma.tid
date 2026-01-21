@@ -13,7 +13,9 @@ title: Output
 
 (<$text text={{{ 1 1 ::defaultprefix:all 1 1 +[join[X]] }}}/>)
 
+(<$text text={{{ ::nonexistent X }}}/>)
+
 +
 title: ExpectedResult
 
-<p>(1X1X1Y1)</p><p>(1X1X1)</p>
+<p>(1X1X1Y1)</p><p>(1X1X1)</p><p>(Filter Error: Unknown pragma for filter)</p>
