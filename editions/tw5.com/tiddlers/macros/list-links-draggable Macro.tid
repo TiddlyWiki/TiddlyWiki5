@@ -10,7 +10,7 @@ The <<.def list-links-draggable>> [[macro|Macros]] renders the ListField of a ti
 !! Parameters
 
 ;tiddler
-: The title of the tiddler containing the list
+: The title of the tiddler containing the list (must be provided as doers not default to currentTiddler)
 ;field
 : The name of the field containing the list (defaults to `list`)
 ;emptyMessage
