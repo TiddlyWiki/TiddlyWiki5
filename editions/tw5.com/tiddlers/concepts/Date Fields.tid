@@ -1,5 +1,5 @@
 created: 20150117190213631
-modified: 20230226144641763
+modified: 20251225215015507
 tags: Concepts
 title: Date Fields
 type: text/vnd.tiddlywiki
@@ -28,4 +28,5 @@ As an example, the <<.field created>> field of this tiddler has the value <<.val
 Dates can be [[converted to other formats|DateFormat]] for display:
 
 <$macrocall $name="wikitext-example-without-html"
-src="""<$view field="created" format="date" template="DDD DDth MMM YYYY"/>""">
+src="""<$view field="created" format="date" template="DDD DDth MMM YYYY"/>"""/>
+

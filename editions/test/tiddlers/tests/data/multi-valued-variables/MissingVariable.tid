@@ -1,0 +1,12 @@
+title: MultiValuedVariables/MissingVariable
+description: Using multivalued operands with a missing variable
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$text text={{{ [(varname)] }}}/>
++
+title: ExpectedResult
+
+<p></p>
