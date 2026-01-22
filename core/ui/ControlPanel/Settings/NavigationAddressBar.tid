@@ -17,10 +17,6 @@ caption: {{$:/language/ControlPanel/Settings/NavigationAddressBar/Caption}}
 	<span class="tc-tiny-gap-left"><<lingo Permalink/Description>></span>
 </$radio>
 
-<$radio tiddler="$:/config/Navigation/UpdateAddressBar" value="pushstate">
-	<span class="tc-tiny-gap-left">Include target tiddler in browser history without changing URL</span>
-</$radio>
-
 <$radio tiddler="$:/config/Navigation/UpdateAddressBar" value="no">
 	<span class="tc-tiny-gap-left"><<lingo No/Description>></span>
 </$radio>
