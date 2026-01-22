@@ -23,7 +23,9 @@ type: text/vnd.tiddlywiki-html
 <div id="styleArea">
 {{$:/boot/boot.css||$:/core/templates/css-tiddler}}
 </div>
-{{$:/core/ui/RootStylesheet||$:/core/templates/wikified-tiddler}}
+<style type="text/css">
+{{$:/core/ui/PageStylesheet||$:/core/templates/wikified-tiddler}}
+</style>
 </head>
 <body class="tc-body">
 {{$:/StaticBanner||$:/core/templates/html-tiddler}}

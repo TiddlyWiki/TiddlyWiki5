@@ -104,7 +104,7 @@ js.configs.recommended,
         "init-declarations": "off",
         "@stylistic/jsx-quotes": "error",
         "@stylistic/key-spacing": "off",
-        "@stylistic/keyword-spacing": ["error", {
+        "@stylistic/keyword-spacing": ["warn", {
             before: true,
             after: false,
             overrides: {
@@ -114,6 +114,7 @@ js.configs.recommended,
                 return: { after: true },
                 throw: { after: true },
                 try: { after: true },
+                const: { after: true }
             },
         }],
         "@stylistic/line-comment-position": "off",
