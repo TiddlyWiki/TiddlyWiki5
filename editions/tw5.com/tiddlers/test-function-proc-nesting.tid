@@ -1,0 +1,19 @@
+created: 20240206144717937
+modified: 20240208172046352
+tags: testTOC
+title: test-function-proc-nesting
+type: text/vnd.tiddlywiki
+
+\procedure p-test()
+<<inner>> -- <<aaa>>
+\end
+
+\procedure outer(aaa:xxx)
+\function inner() asdf
+
+<<p-test>>
+
+\end
+
+
+<<outer>>

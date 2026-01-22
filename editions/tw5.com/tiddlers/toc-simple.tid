@@ -1,0 +1,76 @@
+created: 20250922111233334
+import-compound: $:/spec/toc-simple
+modified: 20250922131156164
+tags: $:/tags/wiki-test-spec simple
+title: toc-simple
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents with 3 levels
+* The "root" elements are ''tagged Contents'' 
+
+{{example-overview}}
+
++
+title: Description
+
+Simple TOC
++
+title: ctrl-click-info
+
+* Clicking the chevron expands the list
+
+* <kbd>CTRL</kbd> - ''clicking'' the chevron ''expands the full list'' and creates all necessary state tiddlers
+
+{{example-overview}}
+
++
+title: example-overview
+
+An overview about all toc examples can be found in the ''toc-examples-overview'' tiddler in the main wiki.
+
++
+title: aa
+tags: Contents
+
+Link to [[aa-aa]]
+
++
+title: aa-aa
+tags: aa
+
+Link to [[bb]]
+
++
+title: bb
+tags: Contents
+
+Link to [[bb-bb]]
+
++
+title: bb-bb
+tags: bb
+
+Link to [[bb-bb-bb]]
+
++
+title: bb-bb-bb
+tags: bb-bb
+
+Link to [[cc]]
+
+
++
+title: cc
+tags: Contents
+
+Link to [[aa]]
+
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>
