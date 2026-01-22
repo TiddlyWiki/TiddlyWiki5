@@ -22,7 +22,7 @@ var DEFAULT_HISTORY_TITLE = "$:/HistoryList";
 var DEFAULT_TIDDLERS_TITLE = "$:/DefaultTiddlers";
 
 // Config
-var CONFIG_UPDATE_ADDRESS_BAR = "$:/config/Navigation/UpdateAddressBar"; // Can be "no", "permalink", "permaview", "pushstate"
+var CONFIG_UPDATE_ADDRESS_BAR = "$:/config/Navigation/UpdateAddressBar"; // Can be "no", "permalink", "permaview"
 var CONFIG_UPDATE_HISTORY = "$:/config/Navigation/UpdateHistory"; // Can be "yes" or "no"
 var CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD = "$:/config/Navigation/Permalinkview/CopyToClipboard"; // Can be "yes" (default) or "no"
 var CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR = "$:/config/Navigation/Permalinkview/UpdateAddressBar"; // Can be "yes" (default) or "no"
@@ -56,37 +56,19 @@ exports.startup = function() {
 				}
 			}
 		},false);
-		// Listen for browser popstate events (back/forward buttons)
+		// Listen for browser popstate events (back/forward buttons) and navigate to the tiddler from browser history
 		window.addEventListener("popstate",function(event) {
 			if(event.state && event.state.tiddler) {
-				// Navigate to the tiddler from browser history
-				var storyList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE);
-				if(storyList.indexOf(event.state.tiddler) === -1) {
-					// Add tiddler to story if not already present
-					storyList.push(event.state.tiddler);
-					$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
-				}
-				// Update TiddlyWiki's internal history to match browser history
-				// Use a flag to prevent this from triggering another pushState
 				var story = new $tw.Story({
 					wiki: $tw.wiki,
 					storyTitle: DEFAULT_STORY_TITLE,
 					historyTitle: DEFAULT_HISTORY_TITLE
 				});
+				// Prevent this navigation from triggering another browser history entry
 				$tw.skipNextPushState = true;
-				story.addToHistory(event.state.tiddler);
+				story.navigateTiddler(event.state.tiddler);
 			}
 		},false);
-		// Warn before leaving when using pushstate (prevents accidentally leaving via back button)
-		$tw.addUnloadTask(function(event) {
-			var updateMode = $tw.wiki.getTiddlerText(CONFIG_UPDATE_ADDRESS_BAR,"permaview").trim();
-			// Only warn if using pushstate AND wiki is not dirty (to avoid duplicate warnings)
-			if(updateMode === "pushstate" && !($tw.wiki.isDirty && $tw.wiki.isDirty())) {
-				var confirmationMessage = "Leave this wiki?";
-				event.returnValue = confirmationMessage; // Gecko
-				return confirmationMessage;
-			}
-		});
 		// Listen for the tm-browser-refresh message
 		$tw.rootWidget.addEventListener("tm-browser-refresh",function(event) {
 			window.location.reload(true);
@@ -205,8 +187,8 @@ function openStartupTiddlers(options) {
 
 /*
 options: See below
-options.updateAddressBar: "permalink", "permaview", "pushstate" or "no" (defaults to "permaview")
-options.updateHistory: "yes" or "no" (defaults to "no")
+options.updateAddressBar: "permalink", "permaview" or "no" (defaults to "permaview")
+options.updateHistory: "yes" or "no" (defaults to "no"). When "yes" with updateAddressBar="no", uses browser history API
 options.copyToClipboard: "permalink", "permaview" or "no" (defaults to "no")
 options.targetTiddler: optional title of target tiddler for permalink
 options.successNotification: optional title of tiddler to use as the notification in case of success
@@ -237,8 +219,8 @@ function updateLocationHash(options) {
 		case "permaview":
 			$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
 			break;
-		case "pushstate":
-			// Use pushState to add to browser history without changing URL
+		case "no":
+			// Handle browser history when address bar is not updated but history tracking is enabled
 			if(targetTiddler && window.history && options.updateHistory === "yes") {
 				// Skip pushState if we're handling a popstate event
 				if(!$tw.skipNextPushState) {
@@ -260,7 +242,7 @@ function updateLocationHash(options) {
 					$tw.skipNextPushState = false;
 				}
 			}
-			return; // Exit early, no need to update location hash
+			break;
 	}
 	// Copy URL to the clipboard
 	var url = "";
