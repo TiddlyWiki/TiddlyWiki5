@@ -1,6 +1,4 @@
 title: $:/core/stylesheets/custom-properties
-tags: [[$:/tags/Stylesheet]]
-list-before: 
 
 \rules only transcludeinline macrocallinline html transcludeblock
 
