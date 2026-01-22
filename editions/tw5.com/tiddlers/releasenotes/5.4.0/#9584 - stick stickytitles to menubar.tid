@@ -1,0 +1,13 @@
+title: $:/changenotes/5.4.0/#9584
+created: 20260116062202184
+modified: 20260116062202184
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: usability
+description: The sticky tiddler titles account for the menubar
+release: 5.4.0
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9584
+github-contributors: BurningTreeC
+type: text/vnd.tiddlywiki
+
+This change makes the sticky tiddler titles stick to the menubar if present instead of sticking to the top of the document and being hidden by the menubar
