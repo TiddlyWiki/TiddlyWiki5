@@ -1,0 +1,10 @@
+code-body: yes
+created: 20260122104927211
+modified: 20260122105058103
+tags: 
+title: $:/_tw5.com/css-var
+type: text/vnd.tiddlywiki
+
+|!Data type | {{!!data-type}} |
+
+<$transclude $mode="block"/>
