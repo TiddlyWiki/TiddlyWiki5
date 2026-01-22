@@ -177,6 +177,9 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span> <span class=\"tc-error\">Recursive transclusion error in transclude widget</span>");
 	});
 
+	// Do NOT use a for-of or for-in here. Each jasmine test must be
+	// defined in its own function context, or the `tag` variable will
+	// end up being the same value for all iterations of the test. 
 	$tw.utils.each(["div","$button","$checkbox","$diff-text","$draggable","$droppable","dropzone","$eventcatcher","$keyboard","$link","$list filter=x variable=x","$radio","$reveal type=nomatch","$scrollable","$select","$view field=x"],function(tag) {
 		it(`${tag} cleans itself up if children rendering fails`, function() {
 			var wiki = new $tw.Wiki();
