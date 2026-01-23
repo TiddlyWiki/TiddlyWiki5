@@ -76,7 +76,6 @@ EventWidget.prototype.cacheEventListeners = function() {
 	this._captureActiveListeners = Object.create(null);
 	this._dynamicOnlyEvents = ["pointerup","pointercancel","pointermove"];
 
-
 	const clearPointerCapture = event => {
 		if(Number.isInteger(this._capturePointerId)) {
 			this.stopPointerCapture(this._capturePointerId);
@@ -91,7 +90,7 @@ EventWidget.prototype.cacheEventListeners = function() {
 				this.domNode.addEventListener(dt, listener, false);
 			}
 		});
-	}
+	};
 
 	// Dynamic pointer capture listeners
 	if(this.pointerCaptureMode === "dynamic") {
@@ -214,7 +213,7 @@ EventWidget.prototype.handleEvent = function(event, type, selectedNode) {
 };
 
 EventWidget.prototype.startPointerCapture = function(pointerId, captureTarget) {
-    // Start capture only if none active; pointerId can be 0 so use Number.isInteger test
+    // Start capture only if none active; pointerId can be 0 
     if(!Number.isInteger(this._capturePointerId) && this.domNode && this.domNode.setPointerCapture) {
         this.domNode.setPointerCapture(pointerId);
         this._capturePointerId = pointerId;
