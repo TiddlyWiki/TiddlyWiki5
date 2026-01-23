@@ -245,19 +245,35 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		
 		// Look for image node in parse tree
 		let imageNode = null;
-		if(parseTree && parseTree.tree && parseTree.tree.length > 0) {
-			// Check first child
-			const first = parseTree.tree[0];
-			if(first.type === "image") {
-				imageNode = first;
-			} else if(first.children && first.children.length > 0) {
-				// Check children
-				for(let child of first.children) {
-					if(child.type === "image") {
-						imageNode = child;
-						break;
-					}
+		
+		function findImageNode(node) {
+			if(!node) return null;
+			
+			// Check if this is an image shortcut syntax
+			if(node.type === "image") {
+				return node;
+			}
+			
+			// Check if this is a $image widget (element type with tag="$image")
+			if(node.type === "element" && node.tag === "$image") {
+				return node;
+			}
+			
+			// Recursively search children
+			if(node.children && node.children.length > 0) {
+				for(let child of node.children) {
+					const found = findImageNode(child);
+					if(found) return found;
 				}
+			}
+			
+			return null;
+		}
+		
+		if(parseTree && parseTree.tree && parseTree.tree.length > 0) {
+			for(let node of parseTree.tree) {
+				imageNode = findImageNode(node);
+				if(imageNode) break;
 			}
 		}
 		
