@@ -16,4 +16,4 @@ This is a paragraph
 +
 title: ExpectedResult
 
-<div class="my-class">This is a paragraph</div>
+<div class="my-class" data-element-mapping-from="p">This is a paragraph</div>
