@@ -213,12 +213,12 @@ EventWidget.prototype.handleEvent = function(event, type, selectedNode) {
 };
 
 EventWidget.prototype.startPointerCapture = function(pointerId, captureTarget) {
-    // Start capture only if none active; pointerId can be 0 
-    if(!Number.isInteger(this._capturePointerId) && this.domNode && this.domNode.setPointerCapture) {
-        this.domNode.setPointerCapture(pointerId);
-        this._capturePointerId = pointerId;
-        this._captureTarget = captureTarget;
-    }
+	// Start capture only if none active; pointerId can be 0 
+	if(!Number.isInteger(this._capturePointerId) && this.domNode && this.domNode.setPointerCapture) {
+		this.domNode.setPointerCapture(pointerId);
+		this._capturePointerId = pointerId;
+		this._captureTarget = captureTarget;
+	}
 };
 
 EventWidget.prototype.stopPointerCapture = function(pointerId) {
@@ -258,10 +258,10 @@ EventWidget.prototype.cleanupDynamicListeners = function() {
 Remove all listeners
 */
 EventWidget.prototype.removeAllListeners = function() {
-    if(Number.isInteger(this._capturePointerId)) {
-        this.stopPointerCapture(this._capturePointerId);
-    }
-    const domNode = this.domNode;
+	if(Number.isInteger(this._capturePointerId)) {
+		this.stopPointerCapture(this._capturePointerId);
+	}
+	const domNode = this.domNode;
 	Object.keys(this._eventListeners || {}).forEach(type => {
 		domNode.removeEventListener(type, this._eventListeners[type], false);
 	});
