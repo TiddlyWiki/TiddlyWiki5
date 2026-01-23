@@ -623,6 +623,239 @@ test.describe("ProseMirror Editor - Slash Menu", () => {
 	});
 });
 
+test.describe("ProseMirror Editor - Images", () => {
+	const imageTitle = "Motovun Jack.jpg";
+	const svgText = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"24\"><rect width=\"32\" height=\"24\" fill=\"#22c55e\"/></svg>";
+
+	function imageTiddlerFields() {
+		return {
+			title: imageTitle,
+			type: "image/svg+xml",
+			text: svgText
+		};
+	}
+
+	test("should render [img[...]] and <$image .../> as images", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: [
+				"[img[Motovun Jack.jpg]]",
+				"",
+				"<$image source=\"Motovun Jack.jpg\" />"
+			].join("\n"),
+			configTiddlers: [imageTiddlerFields()]
+		});
+
+		const imgs = editor.locator("img");
+		const editorImgs = editor.locator(`img[data-tw-source=\"${imageTitle}\"]`);
+		await expect(editorImgs).toHaveCount(2);
+
+		// Ensure the src is a data: URI (so it renders offline/in CI)
+		const firstSrc = await editorImgs.first().getAttribute("src");
+		expect(firstSrc).toContain("data:image/svg+xml");
+	});
+
+	test("should convert pasted image syntax into an image node and allow deletion", async ({ page }) => {
+		const exampleTitle = "$:/plugins/tiddlywiki/prosemirror/example";
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "",
+			configTiddlers: [imageTiddlerFields()]
+		});
+		await clearEditor(editor);
+
+		await pastePlainText(editor, "[img[Motovun Jack.jpg]]");
+		const img = editor.locator(`img[data-tw-source=\"${imageTitle}\"]`).first();
+		await expect(img).toBeVisible({ timeout: 5000 });
+
+		// Wait for debounced save and verify wikitext contains the shortcut
+		await page.waitForTimeout(600);
+		const saved1 = await page.evaluate(title => $tw.wiki.getTiddlerText(title, ""), exampleTitle);
+		expect(saved1).toContain("[img[Motovun Jack.jpg]]");
+
+		// Delete content (including the image) and confirm save updated
+		await editor.click();
+		await editor.press("Control+A");
+		await editor.press("Backspace");
+		await expect(editor.locator(`img[data-tw-source=\"${imageTitle}\"]`)).toHaveCount(0);
+		await page.waitForTimeout(600);
+		const saved2 = await page.evaluate(title => $tw.wiki.getTiddlerText(title, ""), exampleTitle);
+		expect(saved2).not.toContain("Motovun Jack.jpg");
+	});
+
+	test("should open built-in image picker and replace selected image", async ({ page }) => {
+		const exampleTitle = "$:/plugins/tiddlywiki/prosemirror/example";
+		const imageTitle = "Motovun Jack.jpg";
+		const svgText = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"24\"><rect width=\"32\" height=\"24\" fill=\"#22c55e\"/></svg>";
+
+		// Provide at least two images so the picker has a choice
+		const tiddlers = [
+			{ title: imageTitle, type: "image/svg+xml", text: svgText },
+			{ title: "Second Image.svg", type: "image/svg+xml", text: "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"24\"><rect width=\"32\" height=\"24\" fill=\"#3b82f6\"/></svg>" }
+		];
+
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "[img[Motovun Jack.jpg]]",
+			configTiddlers: tiddlers
+		});
+
+		const img = editor.locator(`img[data-tw-source=\"${imageTitle}\"]`).first();
+		await expect(img).toBeVisible({ timeout: 5000 });
+
+		// Click image to ensure node selection, then click the nodeview edit button
+		await img.click();
+		const editBtn = editor.locator(".pm-image-nodeview .pm-image-nodeview-btn").first();
+		await expect(editBtn).toBeVisible();
+		
+		// Check edit button has icon (SVG)
+		const btnHTML = await editBtn.innerHTML();
+		expect(btnHTML).toContain("<svg");
+		
+		await editBtn.click();
+
+		// Should enter edit mode with textarea and picker
+		const textarea = editor.locator(".pm-image-nodeview .pm-image-nodeview-editor").first();
+		await expect(textarea).toBeVisible();
+		await expect(textarea).toHaveValue("[img[Motovun Jack.jpg]]");
+		
+		// Should show delete and save buttons
+		const deleteBtn = editor.locator(".pm-image-nodeview .pm-image-nodeview-delete").first();
+		const saveBtn = editor.locator(".pm-image-nodeview .pm-image-nodeview-save").first();
+		await expect(deleteBtn).toBeVisible();
+		await expect(saveBtn).toBeVisible();
+
+		// Picker panel should appear below the textarea
+		const picker = editor.locator(".pm-image-nodeview .pm-image-nodeview-picker").first();
+		await expect(picker).toBeVisible();
+
+		// Choose a different image from the built-in image picker
+		const choice = picker.locator(".tc-image-chooser a[title=\"Second Image.svg\"]").first();
+		await expect(choice).toBeVisible({ timeout: 5000 });
+		await choice.click();
+
+		// Image node should now reference the new title and textarea should update
+		await expect(textarea).toHaveValue("[img[Second Image.svg]]");
+		
+		// Should exit edit mode after selection
+		await expect(textarea).not.toBeVisible({ timeout: 2000 });
+		await expect(editor.locator('img[data-tw-source="Second Image.svg"]')).toHaveCount(1);
+
+		// Wait for debounced save and verify wikitext updated
+		await page.waitForTimeout(600);
+		const saved = await page.evaluate(title => $tw.wiki.getTiddlerText(title, ""), exampleTitle);
+		expect(saved).toContain("Second Image.svg");
+		expect(saved).not.toContain("Motovun Jack.jpg");
+	});
+	
+	test("should support <$image> widget syntax editing", async ({ page }) => {
+		const exampleTitle = "$:/plugins/tiddlywiki/prosemirror/example";
+		const tiddlers = [
+			{ title: "Motovun Jack.jpg", type: "image/svg+xml", text: "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"24\"><rect width=\"32\" height=\"24\" fill=\"#22c55e\"/></svg>" },
+			{ title: "Another.svg", type: "image/svg+xml", text: "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"24\"><rect width=\"32\" height=\"24\" fill=\"#ff0000\"/></svg>" }
+		];
+
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "<$image source=\"Motovun Jack.jpg\"/>",
+			configTiddlers: tiddlers
+		});
+
+		const img = editor.locator(`img[data-tw-source="Motovun Jack.jpg"]`).first();
+		await expect(img).toBeVisible({ timeout: 5000 });
+		
+		await img.click();
+		const editBtn = editor.locator(".pm-image-nodeview .pm-image-nodeview-edit").first();
+		await editBtn.click();
+
+		const textarea = editor.locator(".pm-image-nodeview .pm-image-nodeview-editor").first();
+		await expect(textarea).toBeVisible();
+		await expect(textarea).toHaveValue("<$image source=\"Motovun Jack.jpg\"/>");
+		
+		const picker = editor.locator(".pm-image-nodeview .pm-image-nodeview-picker").first();
+		const choice = picker.locator(".tc-image-chooser a[title=\"Another.svg\"]").first();
+		await choice.click();
+		
+		// Should update to new image
+		await expect(editor.locator('img[data-tw-source="Another.svg"]')).toHaveCount(1);
+		
+		await page.waitForTimeout(600);
+		const saved = await page.evaluate(title => $tw.wiki.getTiddlerText(title, ""), exampleTitle);
+		expect(saved).toContain("<$image source=\"Another.svg\"/>");
+	});
+
+	test("should preserve width and height attributes", async ({ page }) => {
+		const tiddlers = [
+			{ title: "Test.svg", type: "image/svg+xml", text: "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"200\" height=\"150\"><rect width=\"200\" height=\"150\" fill=\"#3b82f6\"/></svg>" }
+		];
+
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "[img width=100 height=80 [Test.svg]]",
+			configTiddlers: tiddlers
+		});
+
+		// Check that width and height attributes are applied to the DOM
+		const img = editor.locator('img[data-tw-source="Test.svg"]').first();
+		await expect(img).toBeVisible({ timeout: 5000 });
+		await expect(img).toHaveAttribute('width', '100');
+		await expect(img).toHaveAttribute('height', '80');
+		
+		// Verify round-trip
+		const exampleTitle = "$:/plugins/tiddlywiki/prosemirror/example";
+		await page.waitForTimeout(600);
+		const saved = await page.evaluate(title => $tw.wiki.getTiddlerText(title, ""), exampleTitle);
+		expect(saved).toContain("width=100");
+		expect(saved).toContain("height=80");
+	});
+
+	test("should preserve width and height when using image picker in edit mode", async ({ page }) => {
+		const tiddlers = [
+			{ title: "Image1.svg", type: "image/svg+xml", text: "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"200\" height=\"150\"><rect width=\"200\" height=\"150\" fill=\"#3b82f6\"/></svg>" },
+			{ title: "Image2.svg", type: "image/svg+xml", text: "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"#ef4444\"/></svg>" }
+		];
+
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "[img width=120 height=90 [Image1.svg]]",
+			configTiddlers: tiddlers
+		});
+
+		// Click on the image to select it
+		const img = editor.locator('img[data-tw-source="Image1.svg"]').first();
+		await expect(img).toBeVisible({ timeout: 5000 });
+		await img.click();
+
+		// Click edit button to enter edit mode
+		const editBtn = editor.locator(".pm-image-nodeview-edit").first();
+		await editBtn.click();
+
+		// Verify textarea shows width and height
+		const textarea = editor.locator(".pm-image-nodeview-editor").first();
+		await expect(textarea).toBeVisible();
+		await expect(textarea).toHaveValue('[img width="120" height="90" [Image1.svg]]');
+
+		// Click on a different image in the picker
+		const picker = editor.locator(".pm-image-nodeview-picker").first();
+		const choice = picker.locator(".tc-image-chooser a[title=\"Image2.svg\"]").first();
+		await expect(choice).toBeVisible({ timeout: 5000 });
+		await choice.click();
+
+		// Verify textarea now shows Image2.svg but keeps width and height
+		await expect(textarea).toHaveValue('[img width="120" height="90" [Image2.svg]]');
+
+		// Click save button
+		const saveBtn = editor.locator(".pm-image-nodeview-save").first();
+		await saveBtn.click();
+
+		// Verify the image changed and dimensions are preserved
+		await expect(editor.locator('img[data-tw-source="Image2.svg"]')).toBeVisible({ timeout: 2000 });
+		
+		// Verify round-trip
+		const exampleTitle = "$:/plugins/tiddlywiki/prosemirror/example";
+		await page.waitForTimeout(600);
+		const saved = await page.evaluate(title => $tw.wiki.getTiddlerText(title, ""), exampleTitle);
+		expect(saved).toContain("width=\"120\"");
+		expect(saved).toContain("height=\"90\"");
+		expect(saved).toContain("Image2.svg");
+		expect(saved).not.toContain("Image1.svg");
+	});
+});
+
 test.describe("ProseMirror Editor - Headings", () => {
 	test("should create heading with keyboard shortcut", async ({ page }) => {
 		const editor = await setupProseMirrorTest(page);

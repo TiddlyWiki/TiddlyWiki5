@@ -1,0 +1,196 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/image/styles.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+Styles for inline image node UI in ProseMirror editor
+
+\*/
+
+/* Lower menubar z-index so image nodeview headers don't get covered */
+.ProseMirror-menubar {
+	z-index: 5 !important;
+}
+
+.pm-image-nodeview {
+	position: relative;
+	display: inline-block;
+	vertical-align: baseline;
+	max-width: 100%;
+	line-height: 0;
+	z-index: 20;
+}
+
+.pm-image-nodeview-content {
+	display: block;
+}
+
+.pm-image-nodeview-editor {
+	display: block;
+	width: 100%;
+	padding: 8px;
+	margin-top: 4px;
+	font-family: monospace;
+	font-size: 14px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: vertical;
+	box-sizing: border-box;
+}
+
+.pm-image-nodeview-picker {
+	margin-top: 8px;
+	padding: 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background: #f9f9f9;
+}
+
+.pm-image-nodeview-picker-body {
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+.pm-image-nodeview:hover,
+.pm-image-nodeview.selected {
+	z-index: 100;
+}
+
+.pm-image-nodeview-img {
+	display: block;
+	border-radius: 4px;
+	/* Don't use height: auto as it conflicts with explicit height attribute */
+}
+
+/* Apply max-width only when no explicit dimensions are set */
+.pm-image-nodeview-img:not([width]):not([height]) {
+	max-width: 100%;
+	height: auto;
+}
+
+.pm-image-nodeview:hover,
+.pm-image-nodeview.selected {
+	outline: 2px solid #2589D8;
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+.pm-image-nodeview-header {
+	position: absolute;
+	top: -30px;
+	right: 0;
+	background: linear-gradient(90deg, #2589D8 0%, #1E6BA8 100%);
+	color: white;
+	padding: 4px 8px;
+	display: flex;
+	gap: 8px;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 12px;
+	font-weight: bold;
+	user-select: none;
+	border-radius: 999px;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 1000;
+	line-height: 1;
+}
+
+.pm-image-nodeview:hover .pm-image-nodeview-header,
+.pm-image-nodeview.selected .pm-image-nodeview-header {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.pm-image-nodeview-title {
+	font-family: monospace;
+	max-width: 240px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.pm-image-nodeview-buttons {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.pm-image-nodeview-btn {
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	color: white;
+	padding: 4px 6px;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: background 0.2s;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+}
+
+.pm-image-nodeview-btn:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.pm-image-nodeview-btn svg {
+	width: 16px;
+	height: 16px;
+	fill: currentColor;
+}
+
+.tc-prosemirror-imagepicker {
+	margin-top: 8px;
+	padding: 8px;
+	border: 1px solid rgba(0,0,0,0.12);
+	border-radius: 6px;
+	background: rgba(0,0,0,0.02);
+}
+
+.tc-prosemirror-imagepicker-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	margin-bottom: 6px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.tc-prosemirror-imagepicker-title {
+	font-family: monospace;
+	opacity: 0.85;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.tc-prosemirror-imagepicker-close {
+	border: 1px solid rgba(0,0,0,0.2);
+	background: white;
+	border-radius: 4px;
+	padding: 2px 6px;
+	cursor: pointer;
+}
+
+.pm-image-resize-handle {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 12px;
+	height: 12px;
+	background: #2589D8;
+	border: 2px solid white;
+	border-radius: 50%;
+	cursor: nwse-resize;
+	opacity: 0;
+	transition: opacity 0.2s;
+	z-index: 1001;
+}
+
+.pm-image-nodeview:hover .pm-image-resize-handle,
+.pm-image-nodeview.selected .pm-image-resize-handle {
+	opacity: 1;
+}

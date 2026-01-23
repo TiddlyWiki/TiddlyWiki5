@@ -272,6 +272,14 @@ function codeblock(context, node) {
 	};
 }
 
+function image(context, node) {
+	const getImageAttrsFromWikiAstImageNode = require("$:/plugins/tiddlywiki/prosemirror/image/utils.js").getImageAttrsFromWikiAstImageNode;
+	return {
+		type: "image",
+		attrs: getImageAttrsFromWikiAstImageNode(node)
+	};
+}
+
 /**
  * Handle transclude nodes (widgets, macros, procedures)
  * Convert them to paragraphs with the original widget syntax
@@ -323,6 +331,7 @@ const builders = {
 	element: element,
 	text: text,
 	codeblock: codeblock,
+	image: image,
 	transclude: transclude
 };
 
@@ -343,6 +352,14 @@ function wikiAstToProsemirrorAst(node, options) {
 	}
 	context.level = 0;
 	const result = convertNodes(context, Array.isArray(node) ? node : [node]);
+	// ProseMirror's basic schema requires doc.content to be block+.
+	// Ensure we always return at least one empty paragraph for empty source.
+	if(!result || result.length === 0) {
+		return {
+			type: "doc",
+			content: [{ type: "paragraph" }]
+		};
+	}
 	
 	// Wrap in a doc if needed
 	if(result.length > 0 && result[0].type !== "doc") {
