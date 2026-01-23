@@ -46,6 +46,10 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	var mappedTag = this.getVariable("tv-map-" + this.tag);
 	if(mappedTag) {
 		this.tag = mappedTag.trim();
+		var mappedClass = this.getVariable("tv-map-" + this.tag + "-class");
+		if(mappedClass) {
+			this.setAttribute("class",mappedClass.trim() + (this.getAttribute("class") ? " " + this.getAttribute("class") : ""));
+		}
 	}
 	// Select the namespace for the tag
 	var XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml",
