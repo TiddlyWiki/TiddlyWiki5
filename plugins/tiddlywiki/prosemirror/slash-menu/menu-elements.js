@@ -8,6 +8,9 @@ Exports functions to get all menu elements for SlashMenu (default + snippets)
 
 "use strict";
 
+const parseWidget = require("$:/plugins/tiddlywiki/prosemirror/widget-block/utils.js").parseWidget;
+const scheduleEnterWidgetBlockEditModeNearSelection = require("$:/plugins/tiddlywiki/prosemirror/widget-block/actions.js").scheduleEnterWidgetBlockEditModeNearSelection;
+
 function getSnippetMenuElements(wiki) {
 	return wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]]")
 		.map(title => {
@@ -29,6 +32,12 @@ function getSnippetMenuElements(wiki) {
 					const selection = view.state.selection;
 					const tr = view.state.tr.insertText(snippetText, selection.from, selection.to);
 					view.dispatch(tr);
+					// If this snippet is a widget invocation, immediately enter edit mode for the
+					// resulting widget block to match Notion-like flow.
+					const widget = parseWidget((snippetText || "").trim());
+					if(widget) {
+						scheduleEnterWidgetBlockEditModeNearSelection(view, { expectedWidgetName: widget.widgetName });
+					}
 					return true;
 				}
 			};
