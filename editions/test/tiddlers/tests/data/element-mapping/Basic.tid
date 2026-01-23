@@ -1,0 +1,18 @@
+title: ElementMapping/Basic
+description: Mapping one element to another
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+<!-- Map <p> to <div> -->
+\define tv-map-p() div
+
+This is a paragraph
+
++
+title: ExpectedResult
+
+<div>This is a paragraph</div>

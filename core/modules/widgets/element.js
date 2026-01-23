@@ -42,6 +42,11 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 		headingLevel = Math.min(Math.max(headingLevel + 1 + baseLevel,1),6);
 		this.tag = "h" + headingLevel;
 	}
+	// Check for element mapping
+	var mappedTag = this.getVariable("tv-map-" + this.tag);
+	if(mappedTag) {
+		this.tag = mappedTag.trim();
+	}
 	// Select the namespace for the tag
 	var XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml",
 		tagNamespaces = {
