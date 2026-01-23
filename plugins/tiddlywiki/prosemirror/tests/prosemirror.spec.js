@@ -74,11 +74,8 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 		await page.evaluate(({readmeTitle, exampleTitle, initialText, configTiddlers}) => {
 			// Optional config tiddlers must be created before the editor widget is instantiated
 			for(const t of configTiddlers) {
-				$tw.wiki.addTiddler({
-					title: t.title,
-					text: t.text,
-					type: t.type
-				});
+				// Allow passing arbitrary fields (e.g. tags/caption) for test setup
+				$tw.wiki.addTiddler(t);
 			}
 
 			// The readme's <$edit-prosemirror> edits this fixed example tiddler
@@ -106,11 +103,7 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 	const harnessTitle = `Harness_${tiddlerTitle}`;
 	await page.evaluate(({tiddlerTitle, harnessTitle, initialText, configTiddlers}) => {
 		for(const t of configTiddlers) {
-			$tw.wiki.addTiddler({
-				title: t.title,
-				text: t.text,
-				type: t.type
-			});
+			$tw.wiki.addTiddler(t);
 		}
 
 		$tw.wiki.addTiddler({
@@ -571,6 +564,62 @@ test.describe("ProseMirror Editor - Lists", () => {
 		await expect(editor.locator(".prosemirror-flat-list .prosemirror-flat-list")).toHaveCount(0);
 		await expect(lists.nth(0).locator(".list-content")).toContainText("Item 1");
 		await expect(lists.nth(1).locator(".list-content")).toContainText("Item 2");
+	});
+});
+
+test.describe("ProseMirror Editor - Slash Menu", () => {
+	test("should open, filter, and execute slash menu", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page);
+		await clearEditor(editor);
+		await editor.click();
+
+		// Open menu with '/'
+		await editor.press("Slash");
+
+		const menu = page.locator(".tw-slash-menu-root").filter({ hasText: "Block Type" }).first();
+		await expect(menu).toBeVisible({ timeout: 5000 });
+		await expect(menu.locator(".tw-slash-menu-content")).toBeVisible();
+
+		// Filter items
+		await page.keyboard.type("code");
+		await expect(menu.locator(".tw-slash-menu-filter")).toContainText("code");
+		await expect(menu.locator(".tw-slash-menu-item-label", { hasText: "Turn into codeblock" }).first()).toBeVisible();
+
+		// Execute selected item
+		await page.keyboard.press("Enter");
+		await expect(menu).toBeHidden({ timeout: 5000 });
+
+		// Confirm document changed
+		await expect(editor.locator("pre")).toHaveCount(1);
+	});
+
+	test("should enter edit mode after inserting widget snippet", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			configTiddlers: [
+				{
+					title: "$:/tests/prosemirror/snippets/now",
+					caption: "Now widget",
+					tags: ["$:/tags/TextEditor/Snippet"],
+					text: "<<now>>",
+					type: "text/vnd.tiddlywiki"
+				}
+			]
+		});
+		await clearEditor(editor);
+		await editor.click();
+
+		// Open and filter to the snippet
+		await editor.press("Slash");
+		await page.keyboard.type("Now widget");
+		await page.keyboard.press("Enter");
+
+		// Widget block should appear and immediately be in edit mode with textarea focused.
+		const widgetBlock = page.locator(".pm-widget-block-nodeview.pm-widget-block-nodeview-widget").first();
+		await expect(widgetBlock).toBeVisible({ timeout: 5000 });
+		await expect(widgetBlock).toHaveClass(/pm-widget-block-editing/, { timeout: 5000 });
+		const textarea = widgetBlock.locator("textarea.pm-widget-block-nodeview-editor");
+		await expect(textarea).toBeVisible({ timeout: 5000 });
+		await expect(textarea).toHaveValue("<<now>>");
 	});
 });
 

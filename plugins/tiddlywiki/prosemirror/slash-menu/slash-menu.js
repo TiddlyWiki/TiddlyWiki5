@@ -39,11 +39,22 @@ function createSlashMenuPlugin(menuElements, options) {
 
 	const allIgnoredKeys = defaultIgnoredKeys.concat(ignoredKeys);
 
+	const getFirstSelectableId = (elements, fallback) => {
+		for(let i = 0; i < elements.length; i++) {
+			const el = elements[i];
+			if(el && el.type !== "group") {
+				return el.id;
+			}
+		}
+		return fallback != null ? fallback : null;
+	};
+
+	const initialFlattened = flattenMenuElementsWithGroup(menuElements);
 	const initialState = {
-		selected: menuElements.length > 0 ? menuElements[0].id : null,
+		selected: getFirstSelectableId(initialFlattened, menuElements.length > 0 ? menuElements[0].id : null),
 		open: false,
 		filter: "",
-		filteredElements: flattenMenuElementsWithGroup(menuElements),
+		filteredElements: initialFlattened,
 		elements: menuElements,
 		ignoredKeys: allIgnoredKeys
 	};
@@ -312,6 +323,7 @@ function createSlashMenuPlugin(menuElements, options) {
 							}
 						}
 						newState.open = true;
+						newState.selected = getFirstSelectableId(newState.filteredElements, newState.selected);
 						return newState;
 					}
 					case SlashMetaTypes.close: {
@@ -346,7 +358,7 @@ function createSlashMenuPlugin(menuElements, options) {
 					}
 					case SlashMetaTypes.inputChange: {
 						const newElements = meta.filter ? getFilteredItems(state, meta.filter) : flattenMenuElementsWithGroup(initialState.elements);
-						const selectedId = newElements[0] ? newElements[0].id : state.selected;
+						const selectedId = getFirstSelectableId(newElements, state.selected);
 						newState = {};
 						for(const key in state) {
 							if(state.hasOwnProperty(key)) {
