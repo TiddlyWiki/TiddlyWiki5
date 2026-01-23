@@ -39,7 +39,6 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	this.domNode = domNode;
 	// Assign classes
 	this.assignDomNodeClasses();
-	this._lastPointerId = null;
 	// Add our event handlers
 	this.toggleListeners();
 	// Insert element
@@ -77,14 +76,30 @@ EventWidget.prototype.cacheEventListeners = function() {
 	this._captureActiveListeners = Object.create(null);
 	this._dynamicOnlyEvents = ["pointerup","pointercancel","pointermove"];
 
+
+	const clearPointerCapture = event => {
+		if(Number.isInteger(this._capturePointerId)) {
+			this.stopPointerCapture(this._capturePointerId);
+		}
+	};
+
+	const attachDynamicOnlyListeners = () => {
+		this._dynamicOnlyEvents.forEach(dt => {
+			const listener = this._eventListeners[dt];
+			if(listener) {
+				this._captureActiveListeners[dt] = listener;
+				this.domNode.addEventListener(dt, listener, false);
+			}
+		});
+	}
+
 	// Dynamic pointer capture listeners
 	if(this.pointerCaptureMode === "dynamic") {
 		["pointerup","pointercancel"].forEach(type => {
 			this._eventListeners[type] = event => {
 				const selectedNode = this.checkEvent(event, type);
-				if(this._lastPointerId !== null && selectedNode) {
-					this.stopPointerCapture(event.pointerId);
-					this._captureTarget = null;
+				if(selectedNode) {
+					clearPointerCapture(event);
 				}
 				// Remove dynamic-only listeners
 				this.cleanupDynamicListeners();
@@ -105,28 +120,17 @@ EventWidget.prototype.cacheEventListeners = function() {
 					return false;
 				}
 				// Handle pointer capture for pointerdown
-				if(selectedNode && type === "pointerdown") {
+				if(type === "pointerdown") {
 					if(this.pointerCaptureMode !== "no") {
-						this._captureTarget = event.target;
-						this.startPointerCapture(event.pointerId);
+						this.startPointerCapture(event.pointerId, event.target);
 					}
 
 					if(this.pointerCaptureMode === "dynamic") {
-						this._dynamicOnlyEvents.forEach(dt => {
-							const listener = this._eventListeners[dt];
-							if(listener) {
-								this._captureActiveListeners[dt] = listener;
-								this.domNode.addEventListener(dt, listener, false);
-							}
-						});
+						attachDynamicOnlyListeners();
 					}
-				} else if(selectedNode && (type === "pointerup" || type === "pointercancel")) {
-					if(this._lastPointerId  !== null) {
-						this.stopPointerCapture(event.pointerId);
-						this._captureTarget = null;
-					}
+				} else if(type === "pointerup" || type === "pointercancel") {
+					clearPointerCapture(event);
 				}
-
 				return this.handleEvent(event, type, selectedNode);
 			};
 		}
@@ -138,17 +142,16 @@ Check if an event qualifies and return the matching selected node
 */
 EventWidget.prototype.checkEvent = function(event, type) {
 	let selectedNode = event.target;
+	const domNode = this.domNode;
 
 	if(this._captureTarget && event.pointerId !== undefined) {
 		// Use captureTarget only if it’s still attached to the DOM
 		if(document.contains(this._captureTarget)) {
 			selectedNode = this._captureTarget;
 		} else {
-			// Fallback: clear stale reference
-			this._captureTarget = null;
-			this.stopPointerCapture(this._lastPointerId);
-			selectedNode = this.domNode;
-			return null;
+			// Clear stale reference
+			this.stopPointerCapture(this._capturePointerId);
+			selectedNode = event.target;
 		}
 	}
 
@@ -158,14 +161,14 @@ EventWidget.prototype.checkEvent = function(event, type) {
 	const selector = this.getAttribute("selector"),
 		matchSelector = this.getAttribute("matchSelector");
 
-	if(matchSelector && !$tw.utils.domMatchesSelector(selectedNode, matchSelector)) {
+	if(matchSelector && !selectedNode.matches(matchSelector)) {
 		return null;
 	}
 	if(selector) {
-		while(!$tw.utils.domMatchesSelector(selectedNode, selector) && selectedNode !== this.domNode) {
+		while(!selectedNode.matches(selector) && selectedNode !== domNode) {
 			selectedNode = selectedNode.parentNode;
 		}
-		if(selectedNode === this.domNode) {
+		if(selectedNode === domNode) {
 			return null;
 		}
 	}
@@ -202,7 +205,7 @@ EventWidget.prototype.handleEvent = function(event, type, selectedNode) {
 		}
 		this.invokeActionString(actions, this, event, variables);
 	}
-	if((actions && stopPropagation==="onaction") || stopPropagation==="always") {
+	if((actions && stopPropagation === "onaction") || stopPropagation === "always") {
 		event.preventDefault();
 		event.stopPropagation();
 		return true;
@@ -210,18 +213,21 @@ EventWidget.prototype.handleEvent = function(event, type, selectedNode) {
 	return false;
 };
 
-EventWidget.prototype.startPointerCapture = function(pointerId) {
-	if(this._lastPointerId === null && this.domNode && this.domNode.setPointerCapture) {
-		this.domNode.setPointerCapture(pointerId);
-		this._lastPointerId = pointerId;
-	}
+EventWidget.prototype.startPointerCapture = function(pointerId, captureTarget) {
+    // Start capture only if none active; pointerId can be 0 so use Number.isInteger test
+    if(!Number.isInteger(this._capturePointerId) && this.domNode && this.domNode.setPointerCapture) {
+        this.domNode.setPointerCapture(pointerId);
+        this._capturePointerId = pointerId;
+        this._captureTarget = captureTarget;
+    }
 };
 
 EventWidget.prototype.stopPointerCapture = function(pointerId) {
 	if(this.domNode && this.domNode.hasPointerCapture && this.domNode.hasPointerCapture(pointerId)) {
 		this.domNode.releasePointerCapture(pointerId);
 	}
-	this._lastPointerId = null;
+	this._capturePointerId = undefined;
+	this._captureTarget = undefined;
 };
 
 /*
@@ -253,10 +259,10 @@ EventWidget.prototype.cleanupDynamicListeners = function() {
 Remove all listeners
 */
 EventWidget.prototype.removeAllListeners = function() {
-	if(this._lastPointerId !== null) {
-		this.stopPointerCapture(this._lastPointerId);
-	}
-	const domNode = this.domNode;
+    if(Number.isInteger(this._capturePointerId)) {
+        this.stopPointerCapture(this._capturePointerId);
+    }
+    const domNode = this.domNode;
 	Object.keys(this._eventListeners || {}).forEach(type => {
 		domNode.removeEventListener(type, this._eventListeners[type], false);
 	});
