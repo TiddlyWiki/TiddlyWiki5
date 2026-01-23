@@ -24,6 +24,7 @@ var DEFAULT_TIDDLERS_TITLE = "$:/DefaultTiddlers";
 // Config
 var CONFIG_UPDATE_ADDRESS_BAR = "$:/config/Navigation/UpdateAddressBar"; // Can be "no", "permalink", "permaview"
 var CONFIG_UPDATE_HISTORY = "$:/config/Navigation/UpdateHistory"; // Can be "yes" or "no"
+var CONFIG_HISTORY_BACKSTOP_TIDDLER = "$:/config/Navigation/HistoryBackstopTiddler"; // Tiddler to show at the beginning of history stack
 var CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD = "$:/config/Navigation/Permalinkview/CopyToClipboard"; // Can be "yes" (default) or "no"
 var CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR = "$:/config/Navigation/Permalinkview/UpdateAddressBar"; // Can be "yes" (default) or "no"
 
@@ -37,6 +38,24 @@ exports.startup = function() {
 		disableHistory: $tw.boot.disableStartupNavigation
 	});
 	if($tw.browser) {
+		// Initialize browser history if using browser history navigation
+		var updateHistory = $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim();
+		var updateAddressBar = $tw.wiki.getTiddlerText(CONFIG_UPDATE_ADDRESS_BAR,"permaview").trim();
+		if(updateHistory === "yes" && updateAddressBar === "no" && window.history) {
+			// Disable automatic scroll restoration to prevent scroll position jumps when navigating history
+			if(window.history.scrollRestoration) {
+				window.history.scrollRestoration = "manual";
+			}
+			var backstopTiddler = $tw.wiki.getTiddlerText(CONFIG_HISTORY_BACKSTOP_TIDDLER,"").trim();
+			if(backstopTiddler && ($tw.wiki.isShadowTiddler(backstopTiddler) || $tw.wiki.tiddlerExists(backstopTiddler))) {
+				// Replace the initial state with the boundary tiddler
+				window.history.replaceState(
+					{ tiddler: backstopTiddler },
+					"",
+					window.location.href
+				);
+			}
+		}
 		// Set up location hash update
 		$tw.wiki.addEventListener("change",function(changes) {
 			if($tw.utils.hop(changes,DEFAULT_STORY_TITLE) || $tw.utils.hop(changes,DEFAULT_HISTORY_TITLE)) {
@@ -64,9 +83,9 @@ exports.startup = function() {
 					storyTitle: DEFAULT_STORY_TITLE,
 					historyTitle: DEFAULT_HISTORY_TITLE
 				});
-				// Prevent this navigation from triggering another browser history entry
+				// Prevent this navigation action from triggering another browser history entry
 				$tw.skipNextPushState = true;
-				story.navigateTiddler(event.state.tiddler);
+				story.navigateTiddler(event.state.tiddler,null,null);
 			}
 		},false);
 		// Listen for the tm-browser-refresh message
@@ -188,7 +207,7 @@ function openStartupTiddlers(options) {
 /*
 options: See below
 options.updateAddressBar: "permalink", "permaview" or "no" (defaults to "permaview")
-options.updateHistory: "yes" or "no" (defaults to "no"). When "yes" with updateAddressBar="no", uses browser history API
+options.updateHistory: "yes" or "no" (defaults to "no")
 options.copyToClipboard: "permalink", "permaview" or "no" (defaults to "no")
 options.targetTiddler: optional title of target tiddler for permalink
 options.successNotification: optional title of tiddler to use as the notification in case of success
@@ -224,14 +243,12 @@ function updateLocationHash(options) {
 			if(targetTiddler && window.history && options.updateHistory === "yes") {
 				// Skip pushState if we're handling a popstate event
 				if(!$tw.skipNextPushState) {
-					// Replace initial history state if it has no tiddler, otherwise push
-					if(!history.state || !history.state.tiddler) {
-						window.history.replaceState(
-							{ tiddler: targetTiddler },
-							"",
-							window.location.href
-						);
-					} else {
+					// Don't add draft tiddlers to browser history
+					var tiddler = $tw.wiki.getTiddler(targetTiddler);
+					var isDraft = tiddler && tiddler.isDraft();
+					// Don't add if it's the same as the current state (e.g. when saving drafts)
+					var isSameAsCurrent = history.state && history.state.tiddler === targetTiddler;
+					if(!isDraft && !isSameAsCurrent) {
 						window.history.pushState(
 							{ tiddler: targetTiddler },
 							"",
