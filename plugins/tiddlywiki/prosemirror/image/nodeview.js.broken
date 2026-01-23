@@ -1,0 +1,252 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/image/nodeview.js
+type: application/javascript
+module-type: library
+
+Image node view for ProseMirror
+
+\*/
+
+"use strict";
+
+const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/base-source-editable-nodeview.js").BaseSourceEditableNodeView;
+
+class ImageNodeView extends BaseSourceEditableNodeView {
+	constructor(node, view, getPos, parentWidget) {
+		super(node, view, getPos, parentWidget);
+		
+		this.img = null;
+		this.imagePickerWrap = null;
+		this._nodeViewId = null;
+		
+		this.createDOM();
+	}
+
+	createDOM() {
+		if(typeof console !== "undefined") console.log("[ImageNodeView] createDOM called");
+		const wrap = document.createElement("span");
+		wrap.className = "pm-image-nodeview";
+		wrap.draggable = false;
+
+		// Create header with title and buttons
+		const header = this.createHeader(this.node.attrs.twSource || "Image");
+		if(typeof console !== "undefined") console.log("[ImageNodeView] header created:", header);
+
+		// Create content container to hold image, textarea, and picker
+		const contentContainer = document.createElement("div");
+		contentContainer.className = "pm-image-nodeview-content";
+
+		const img = document.createElement("img");
+		img.className = "pm-image-nodeview-img";
+		img.draggable = false;
+		img.setAttribute("src", this.node.attrs.src || "");
+		if(this.node.attrs.alt) {
+			img.setAttribute("alt", this.node.attrs.alt);
+		}
+		if(this.node.attrs.title) {
+			img.setAttribute("title", this.node.attrs.title);
+		}
+		if(this.node.attrs.twSource) {
+			img.setAttribute("data-tw-source", this.node.attrs.twSource);
+		}
+		if(this.node.attrs.twKind) {
+			img.setAttribute("data-tw-kind", this.node.attrs.twKind);
+		}
+
+		contentContainer.appendChild(img);
+		wrap.appendChild(header);
+		wrap.appendChild(contentContainer);
+		if(typeof console !== "undefined") console.log("[ImageNodeView] wrap structure:", wrap.outerHTML);
+
+		this.dom = wrap;
+		this.img = img;
+		this.contentContainer = contentContainer;
+	}
+
+	updateTitle() {
+		if(this._titleEl) {
+			this._titleEl.textContent = this.node.attrs.twSource || "Image";
+		}
+		if(this.img) {
+			this.img.setAttribute("src", this.node.attrs.src || "");
+			if(this.node.attrs.alt) {
+				this.img.setAttribute("alt", this.node.attrs.alt);
+			} else {
+				this.img.removeAttribute("alt");
+			}
+			if(this.node.attrs.title) {
+				this.img.setAttribute("title", this.node.attrs.title);
+			} else {
+				this.img.removeAttribute("title");
+			}
+			if(this.node.attrs.twSource) {
+				this.img.setAttribute("data-tw-source", this.node.attrs.twSource);
+			} else {
+				this.img.removeAttribute("data-tw-source");
+			}
+			if(this.node.attrs.twKind) {
+				this.img.setAttribute("data-tw-kind", this.node.attrs.twKind);
+			} else {
+				this.img.removeAttribute("data-tw-kind");
+			}
+		}
+	}
+
+	renderEditMode() { if(typeof console !== "undefined") console.log("[ImageNodeView] renderEditMode called, contentContainer:", this.contentContainer);
+		if(!this.contentContainer) return;
+		
+		// Clear content
+		this.contentContainer.innerHTML = "";
+		
+		// Add image back
+		this.contentContainer.appendChild(this.img);
+		
+		// Create textarea for editing image wikitext
+		const twSource = this.node.attrs.twSource || "";
+		const twKind = this.node.attrs.twKind || "image";
+		let initialValue;
+		if(twKind === "image") {
+			initialValue = `[img[${twSource}]]`;
+		} else {
+			initialValue = `<$image source="${twSource}"/>`;
+		}
+		
+		const textarea = this.createEditTextarea(initialValue, 2);
+		this.contentContainer.appendChild(textarea);
+		
+		// Render image picker below textarea
+		this.renderImagePicker();
+		
+		// Focus textarea
+		setTimeout(() => textarea.focus(), 0);
+	}
+
+	renderViewMode() {
+		if(!this.contentContainer) return;
+		
+		// Clear content
+		this.contentContainer.innerHTML = "";
+		
+		// Add image back
+		this.contentContainer.appendChild(this.img);
+		
+		// Remove image picker
+		if(this.imagePickerWrap && this.imagePickerWrap.parentNode) {
+			this.imagePickerWrap.parentNode.removeChild(this.imagePickerWrap);
+		}
+		this.imagePickerWrap = null;
+		this.editTextarea = null;
+	}
+
+	renderImagePicker() {
+		// Create container for image picker
+		const pickerWrap = document.createElement("div");
+		pickerWrap.className = "pm-image-picker-wrap pm-image-nodeview-picker";
+		
+		const pickerBody = document.createElement("div");
+		pickerBody.className = "pm-image-picker-body";
+		pickerWrap.appendChild(pickerBody);
+		
+		this.contentContainer.appendChild(pickerWrap);
+		this.imagePickerWrap = pickerWrap;
+
+		// Render TW image picker widget
+		if(this.parentWidget) {
+			const pickerWikitext = [
+				'<$button class="pm-image-picker-button">',
+				'Choose Image',
+				'<$action-sendmessage $message="tm-prosemirror-image-picked-nodeview" nodeViewId="' + this.getNodeViewId() + '"/>',
+				'</$button>'
+			].join('\n');
+			const pickerTree = this.parentWidget.wiki.parseText("text/vnd.tiddlywiki", pickerWikitext).tree;
+			const WidgetBase = require("$:/core/modules/widgets/widget.js").widget;
+			this.imagePickerWidget = new WidgetBase({
+				type: "widget",
+				children: pickerTree
+			}, {
+				parentWidget: this.parentWidget,
+				document: document,
+				wiki: this.parentWidget.wiki
+			});
+			this.imagePickerWidget.render(pickerBody, null);
+		}
+	}
+
+	getNodeViewId() {
+		if(!this._nodeViewId) {
+			this._nodeViewId = "img-nv-" + Math.random().toString(36).substr(2, 9);
+		}
+		return this._nodeViewId;
+	}
+
+	saveEdit(newText) {
+		// Parse image syntax
+		const imgMatch = newText.match(/\[img\[([^\]]+)\]\]/);
+		const widgetMatch = newText.match(/<\$image\s+source="([^"]+)"/);
+		
+		let newSource = null;
+		let newKind = null;
+		
+		if(imgMatch) {
+			newSource = imgMatch[1];
+			newKind = "image";
+		} else if(widgetMatch) {
+			newSource = widgetMatch[1];
+			newKind = "widget";
+		}
+		
+		if(newSource) {
+			const pos = this.getPos();
+			if(typeof pos !== "number") {
+				this.isEditMode = false;
+				this.toggleEditMode();
+				return;
+			}
+			
+			// Compute new src using utils
+			const computeImageSrc = require("$:/plugins/tiddlywiki/prosemirror/image/utils.js").computeImageSrc;
+			const newSrc = computeImageSrc(newSource);
+			
+			// Update node attributes
+			const tr = this.view.state.tr.setNodeMarkup(pos, null, {
+				src: newSrc,
+				twSource: newSource,
+				twKind: newKind,
+				alt: this.node.attrs.alt,
+				title: this.node.attrs.title
+			});
+			this.view.dispatch(tr);
+			
+			this.isEditMode = false;
+			this.toggleEditMode();
+		} else {
+			// Invalid format, just close
+			this.isEditMode = false;
+			this.toggleEditMode();
+		}
+	}
+
+	handleImagePicked(imageName) {
+		if(!this.editTextarea) return;
+		
+		// Replace the content of the textarea with the picked image
+		const twKind = this.node.attrs.twKind || "image";
+		if(twKind === "image") {
+			this.editTextarea.value = `[img[${imageName}]]`;
+		} else {
+			this.editTextarea.value = `<$image source="${imageName}"/>`;
+		}
+	}
+
+	// Override class names
+	getHeaderClass() { return "pm-image-nodeview-header"; }
+	getTitleClass() { return "pm-image-nodeview-title"; }
+	getButtonsClass() { return "pm-image-nodeview-buttons"; }
+	getDeleteButtonClass() { return "pm-image-nodeview-btn pm-image-nodeview-delete"; }
+	getEditButtonClass() { return "pm-image-nodeview-btn pm-image-nodeview-edit"; }
+	getSaveButtonClass() { return "pm-image-nodeview-btn pm-image-nodeview-save"; }
+	getEditorClass() { return "pm-image-nodeview-editor"; }
+}
+
+exports.ImageNodeView = ImageNodeView;
+

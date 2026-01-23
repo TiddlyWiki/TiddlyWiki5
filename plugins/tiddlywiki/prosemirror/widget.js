@@ -31,11 +31,18 @@ const SlashMenuUI = require("$:/plugins/tiddlywiki/prosemirror/slash-menu-ui.js"
 const getAllMenuElements = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js").getAllMenuElements;
 const createWidgetBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/widget-block/plugin.js").createWidgetBlockPlugin;
 const createWidgetBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/widget-block/plugin.js").createWidgetBlockNodeViewPlugin;
+const createImageBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/image-block/plugin.js").createImageBlockPlugin;
+const createImageNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/image/plugin.js").createImageNodeViewPlugin;
+const computeImageSrc = require("$:/plugins/tiddlywiki/prosemirror/image/utils.js").computeImageSrc;
+
+const NodeSelection = require("prosemirror-state").NodeSelection;
 
 const ProsemirrorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 	// indicate the change is triggered by the widget itself
 	this.saveLock = false;
+	this.imagePickerOpen = false;
+	this.imagePickerInitialized = false;
 };
 
 /*
@@ -68,9 +75,92 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	});
 	container.appendChild(mount);
 	outerWrap.appendChild(container);
+
+	// Image picker panel (hidden by default; shown when an image is selected)
+	const imagePickerWrap = $tw.utils.domMaker("div", {
+		class: "tc-prosemirror-imagepicker"
+	});
+	imagePickerWrap.style.display = "none";
+	const imagePickerHeader = $tw.utils.domMaker("div", {
+		class: "tc-prosemirror-imagepicker-header"
+	});
+	const imagePickerTitle = $tw.utils.domMaker("div", {
+		class: "tc-prosemirror-imagepicker-title",
+		text: "Image"
+	});
+	const imagePickerClose = $tw.utils.domMaker("button", {
+		class: "tc-prosemirror-imagepicker-close",
+		text: "关闭"
+	});
+	imagePickerClose.setAttribute("type", "button");
+	imagePickerClose.addEventListener("click", e => {
+		e.preventDefault();
+		e.stopPropagation();
+		this.closeImagePicker();
+	});
+	imagePickerHeader.appendChild(imagePickerTitle);
+	imagePickerHeader.appendChild(imagePickerClose);
+	imagePickerWrap.appendChild(imagePickerHeader);
+	const imagePickerBody = $tw.utils.domMaker("div", {
+		class: "tc-prosemirror-imagepicker-body"
+	});
+	imagePickerWrap.appendChild(imagePickerBody);
+	outerWrap.appendChild(imagePickerWrap);
+	this.imagePickerWrap = imagePickerWrap;
+	this.imagePickerTitle = imagePickerTitle;
+	// Hide picker initially
+	imagePickerWrap.style.display = "none";
 	
+	const baseNodes = basicSchema.spec.nodes.append({ list: createListSpec() });
+	const baseImageSpec = basicSchema.spec.nodes.get("image");
+	const nodes = baseNodes.update("image", Object.assign({}, baseImageSpec, {
+		attrs: Object.assign({}, baseImageSpec && baseImageSpec.attrs, {
+			width: { default: null },
+			height: { default: null },
+			twSource: { default: null },
+			twKind: { default: "shortcut" },
+			twTooltip: { default: null }
+		}),
+		toDOM: node => {
+			const attrs = {
+				src: node.attrs.src,
+				alt: node.attrs.alt,
+				title: node.attrs.title
+			};
+			if(node.attrs.width) {
+				attrs.width = node.attrs.width;
+			}
+			if(node.attrs.height) {
+				attrs.height = node.attrs.height;
+			}
+			if(node.attrs.twSource) {
+				attrs["data-tw-source"] = node.attrs.twSource;
+			}
+			if(node.attrs.twKind) {
+				attrs["data-tw-kind"] = node.attrs.twKind;
+			}
+			if(node.attrs.twTooltip) {
+				attrs["data-tw-tooltip"] = node.attrs.twTooltip;
+			}
+			return ["img", attrs];
+		},
+		parseDOM: [{
+			tag: "img[src]",
+			getAttrs: dom => ({
+				src: dom.getAttribute("src"),
+				title: dom.getAttribute("title"),
+				alt: dom.getAttribute("alt"),
+				width: dom.getAttribute("width") || null,
+				height: dom.getAttribute("height") || null,
+				twSource: dom.getAttribute("data-tw-source") || null,
+				twKind: dom.getAttribute("data-tw-kind") || "shortcut",
+				twTooltip: dom.getAttribute("data-tw-tooltip") || null
+			})
+		}]
+	}));
+
 	const schema = new Schema({
-		nodes: basicSchema.spec.nodes.append({ list: createListSpec() }),
+		nodes: nodes,
 		marks: basicSchema.spec.marks
 	});
 	
@@ -87,6 +177,8 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 				SlashMenuPlugin(allMenuElements, {
 					triggerCodes: ["Slash", "Backslash"] // Support both / (、) and \ keys
 				}),
+				createImageBlockPlugin(),
+				createImageNodeViewPlugin(this),
 				listKeymapPlugin,
 				buildInputRules(schema),
 				placeholderPlugin({
@@ -101,6 +193,9 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 		dispatchTransaction: transaction => {
 			const newState = this.view.state.apply(transaction);
 			this.view.updateState(newState);
+			if(this.imagePickerOpen) {
+				this.updateImagePickerFromSelection();
+			}
 			this.debouncedSaveEditorContent();
 		}
 	});
@@ -156,9 +251,40 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	this.slashMenuUI = new SlashMenuUI(this.view, {
 		clickable: true
 	});
+
+	// Listen for selection from the embedded image picker
+	this.addEventListener("tm-prosemirror-image-picked", "handleProseMirrorImagePicked");
+	this.addEventListener("tm-prosemirror-image-picked-nodeview", "handleProseMirrorImagePickedNodeView");
 		
 	parent.insertBefore(outerWrap,nextSibling);
 	this.domNodes.push(outerWrap);
+
+	// Render the built-in TiddlyWiki image picker into our panel
+	try {
+		const pickerWikitext = [
+			"<$macrocall $name=\"image-picker\" actions=\"\"\"",
+			"<$action-sendmessage $message=\"tm-prosemirror-image-picked\" imageTitle=<<imageTitle>>/>",
+			"\"\"\"/>"
+		].join("\n");
+		const pickerTree = this.wiki.parseText("text/vnd.tiddlywiki", pickerWikitext).tree;
+		const WidgetBase = require("$:/core/modules/widgets/widget.js").widget;
+		this.imagePickerWidget = new WidgetBase({
+			type: "element",
+			tag: "div",
+			children: pickerTree
+		}, {
+			wiki: this.wiki,
+			parentWidget: this,
+			document: this.document
+		});
+		this.imagePickerWidget.render(imagePickerBody, null);
+		this.children.push(this.imagePickerWidget);
+	} catch(e) {
+		// ignore
+	}
+	
+	// Ensure picker is hidden after widget renders (widget may modify styles)
+	imagePickerWrap.style.display = "none";
 
 	// Attach after mount so prosemirror-menu has wrapped the editor DOM.
 	setTimeout(() => {
@@ -268,6 +394,98 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 			// ignore
 		}
 	}, 0);
+};
+
+ProsemirrorWidget.prototype.getSelectedImageInfo = function() {
+	if(!this.view || !this.view.state) {
+		return null;
+	}
+	const sel = this.view.state.selection;
+	if(sel && sel instanceof NodeSelection && sel.node && sel.node.type && sel.node.type.name === "image") {
+		return {
+			pos: sel.from,
+			node: sel.node
+		};
+	}
+	return null;
+};
+
+ProsemirrorWidget.prototype.openImagePicker = function() {
+	this.imagePickerOpen = true;
+	this.updateImagePickerFromSelection();
+};
+
+ProsemirrorWidget.prototype.closeImagePicker = function() {
+	this.imagePickerOpen = false;
+	this.updateImagePickerFromSelection();
+};
+
+ProsemirrorWidget.prototype.updateImagePickerFromSelection = function() {
+	if(!this.imagePickerWrap) {
+		return;
+	}
+	const info = this.getSelectedImageInfo();
+	if(!this.imagePickerOpen || !info) {
+		this.imagePickerWrap.style.display = "none";
+		this.imagePickerOpen = false;
+		return;
+	}
+	this.imagePickerWrap.style.display = "block";
+	const src = (info.node.attrs && info.node.attrs.twSource) || (info.node.attrs && info.node.attrs.src) || "";
+	if(this.imagePickerTitle) {
+		this.imagePickerTitle.textContent = "替换图片: " + src;
+	}
+};
+
+ProsemirrorWidget.prototype.handleProseMirrorImagePicked = function(event) {
+	const pickedTitle = event && event.paramObject && event.paramObject.imageTitle;
+	if(!pickedTitle || !this.view) {
+		return true;
+	}
+	const info = this.getSelectedImageInfo();
+	if(!info) {
+		return true;
+	}
+	const oldAttrs = info.node.attrs || {};
+	const schema = this.view.state.schema;
+	const imageType = schema.nodes.image;
+	if(!imageType) {
+		return true;
+	}
+	const newAttrs = Object.assign({}, oldAttrs, {
+		twSource: pickedTitle,
+		src: computeImageSrc(pickedTitle, this.wiki)
+	});
+	const newNode = imageType.create(newAttrs);
+	let tr = this.view.state.tr.replaceWith(info.pos, info.pos + info.node.nodeSize, newNode);
+	tr = tr.setSelection(NodeSelection.create(tr.doc, info.pos));
+	this.view.dispatch(tr.scrollIntoView());
+	this.view.focus();
+	return false;
+};
+
+ProsemirrorWidget.prototype.handleProseMirrorImagePickedNodeView = function(event) {
+	const nodeviewId = event.paramObject && event.paramObject.nodeviewId || event.paramObject && event.paramObject.nodeViewId;
+	const pickedTitle = event.paramObject && event.paramObject.imageTitle;
+	if(!nodeviewId || !pickedTitle || !this.view) {
+		return true;
+	}
+	
+	// Find the nodeview by ID using DOM
+	const imageNodeViewEls = this.view.dom.querySelectorAll(".pm-image-nodeview");
+	
+	for(let el of imageNodeViewEls) {
+		// Get the nodeView directly from the DOM element (stored in createDOM)
+		const nodeview = el._imageNodeView;
+		if(nodeview && typeof nodeview._getNodeViewId === "function" && nodeview._getNodeViewId() === nodeviewId) {
+			if(typeof nodeview.handleImagePicked === "function") {
+				nodeview.handleImagePicked(pickedTitle);
+				return false;
+			}
+		}
+	}
+	
+	return true;
 };
 
 ProsemirrorWidget.prototype.saveEditorContent = function() {
