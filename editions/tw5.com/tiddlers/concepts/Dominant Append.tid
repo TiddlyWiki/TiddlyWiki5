@@ -4,6 +4,8 @@ tags: Filters
 title: Dominant Append
 type: text/vnd.tiddlywiki
 
+TODO:docs-default-prefix-for-subfilter: Description and link to new escape hatches
+
 [[Filters]] manipulate [[sets of titles|Title Selection]] in which no title may appear more than once. Furthermore, they often need to append one such set to another.
 
 This is done in such a way that, if a title would be duplicated, the earlier copy of that title is discarded. The titles being appended are dominant.

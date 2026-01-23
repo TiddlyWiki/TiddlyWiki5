@@ -12,6 +12,8 @@ tags: [[Filter Operators]] [[Negatable Operators]]
 title: filter Operator
 type: text/vnd.tiddlywiki
 
+TODO:docs-default-prefix-for-subfilter: Description of new parameter
+
 <<.from-version "5.1.23">> The <<.op filter>> operator runs a subfilter for each input title, and returns those input titles for which the subfilter returns a non-empty result (in other words the result is not an empty list). The results of the subfilter are thrown away.
 
 Simple filter operations can be concatenated together directly (eg `[tag[HelloThere]search[po]]`) but this doesn't work when the filtering operations require intermediate results to be computed. The <<.op filter>> operator can be used to filter on an intermediate result which is discarded. To take the same example but to also filter by those tiddlers whose text field is longer than 1000 characters:
