@@ -1665,16 +1665,9 @@ Generate a title for the draft of a given tiddler
 exports.generateDraftTitle = function(title) {
 	let c = 0,
 		draftTitle;
-	const username = this.getTiddlerText("$:/status/UserName"),
-		draftBaseTitle = $tw.language.getRawString("Draft/Title"),
-		draftAttribution = $tw.language.getRawString("Draft/Attribution");
+	const username = this.getTiddlerText("$:/status/UserName");
 	do {
-		if(username) {
-			//draftTitle = this.getSubstitutedText(draftAttribution, undefined, {substitutions: [{name: "1", value: title}, {name: "2", value: username}]});
-			draftTitle = this.renderText("text/plain", "", draftAttribution, {variables: {"draft-title": title}});
-		} else {
-			draftTitle = this.renderText("text/plain", "", draftBaseTitle, {variables: {"draft-title": title}});
-		}
+		draftTitle = username ? $tw.language.getString("Draft/Attribution", {variables: {"draft-title": title}}) : $tw.language.getString("Draft/Title", {variables: {"draft-title": title}});
 		if(c) {
 			draftTitle = draftTitle.concat(" ", (c + 1).toString());
 		}
