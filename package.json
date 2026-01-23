@@ -29,14 +29,15 @@
     "@stylistic/eslint-plugin": "5.4.0",
     "eslint": "9.36.0",
     "eslint-plugin-es-x": "9.1.0",
-    "globals": "16.4.0"
+    "globals": "16.4.0",
+    "nodemon": "^3.1.11"
   },
   "license": "BSD",
   "engines": {
     "node": ">=0.8.2"
   },
   "scripts": {
-    "dev": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
+    "dev": "nodemon --watch plugins --watch core --ext js,css,tid,json --exec \"node ./tiddlywiki.js ./editions/tw5.com-server --listen\"",
     "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
     "test:e2e": "playwright test",
     "test:prosemirror": "playwright test plugins/tiddlywiki/prosemirror/tests",
