@@ -731,10 +731,7 @@ test.describe("ProseMirror Editor - Images", () => {
 		await expect(choice).toBeVisible({ timeout: 5000 });
 		await choice.click();
 
-		// Image node should now reference the new title and textarea should update
-		await expect(textarea).toHaveValue("[img[Second Image.svg]]");
-		
-		// Should exit edit mode after selection
+		// Should auto-save and exit edit mode after selection
 		await expect(textarea).not.toBeVisible({ timeout: 2000 });
 		await expect(editor.locator('img[data-tw-source="Second Image.svg"]')).toHaveCount(1);
 
@@ -835,12 +832,7 @@ test.describe("ProseMirror Editor - Images", () => {
 		await expect(choice).toBeVisible({ timeout: 5000 });
 		await choice.click();
 
-		// Verify textarea now shows Image2.svg but keeps width and height
-		await expect(textarea).toHaveValue('[img width="120" height="90" [Image2.svg]]');
-
-		// Click save button
-		const saveBtn = editor.locator(".pm-image-nodeview-save").first();
-		await saveBtn.click();
+		// Should auto-save and exit edit mode, no need to click save button
 
 		// Verify the image changed and dimensions are preserved
 		await expect(editor.locator('img[data-tw-source="Image2.svg"]')).toBeVisible({ timeout: 2000 });
