@@ -10,11 +10,11 @@ Tests markdown to wikitext conversion.
 const DataWidget = require("$:/core/modules/widgets/data.js").data;
 
 describe("Markdown to Wikitext conversion tests", function() {
-  // Check if markdown conversion is available
-  if(!$tw.utils.markdownTextToWikiAST) {
-    pending("Markdown conversion not available (markdown plugin may not be installed)");
-    return;
-  }
+	// Check if markdown conversion is available
+	if(!$tw.utils.markdownTextToWikiAST) {
+		pending("Markdown conversion not available (markdown plugin may not be installed)");
+		return;
+	}
 	const cases = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/markdown-to-wikitext-test-spec]]");
 	$tw.utils.each(cases, function(title) {
 		it("should convert markdown to wikitext correctly for " + title, function() {
