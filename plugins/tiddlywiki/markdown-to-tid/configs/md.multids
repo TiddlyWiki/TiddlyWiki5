@@ -1,0 +1,4 @@
+title: $:/config/markdown-to-tid/
+type: text/vnd.tiddlywiki
+
+convert-markdown-on-import: no

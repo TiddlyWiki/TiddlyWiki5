@@ -1,10 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/rules/strong.js
+title: $:/plugins/tiddlywiki/markdown-to-tid/markdown/rules/strong.js
 type: application/javascript
 module-type: mdast-to-wikiast-rule
 
 Handler for markdown strong/bold tokens
-
 \*/
 
 "use strict";

@@ -1,47 +1,46 @@
 /*\
-title: $:/plugins/tiddlywiki/wikitext-serialize/markdown/rules/strong.js
+title: $:/plugins/tiddlywiki/markdown-to-tid/markdown/rules/strikethrough.js
 type: application/javascript
 module-type: mdast-to-wikiast-rule
 
-Handler for markdown strong/bold tokens
-
+Handler for markdown strikethrough tokens
 \*/
 
 "use strict";
 
-exports.strong_open = {
-	type: "strong_open",
+exports.s_open = {
+	type: "s_open",
 	handler: function(token, context) {
 	// Find the matching close tag
 		var closeIdx = context.index + 1;
 		var depth = 1;
 		while(closeIdx < context.tokens.length && depth > 0) {
-			if(context.tokens[closeIdx].type === "strong_open") {
+			if(context.tokens[closeIdx].type === "s_open") {
 				depth++;
 			}
-			if(context.tokens[closeIdx].type === "strong_close") {
+			if(context.tokens[closeIdx].type === "s_close") {
 				depth--;
 			}
 			closeIdx++;
 		}
 	
 		// Process the content between open and close
-		var strongChildren = context.processInlineTokens(context.tokens.slice(context.index + 1, closeIdx - 1));
+		var sChildren = context.processInlineTokens(context.tokens.slice(context.index + 1, closeIdx - 1));
 	
 		// Update context index to skip processed tokens
 		context.skipTo = closeIdx - 1;
 	
 		return {
 			type: "element",
-			tag: "strong",
+			tag: "strike",
 			orderedAttributes: [],
-			children: strongChildren,
-			rule: "bold"
+			children: sChildren,
+			rule: "strikethrough"
 		};
 	}
 };
 
-exports.strong_close = {
-	type: "strong_close",
+exports.s_close = {
+	type: "s_close",
 	isCloseToken: true
 };

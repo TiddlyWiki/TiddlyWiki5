@@ -2,6 +2,7 @@
 	"description": "TiddlyWiki core tests",
 	"plugins": [
 		"tiddlywiki/jasmine",
+		"tiddlywiki/markdown-to-tid",
 		"tiddlywiki/wikitext-serialize",
 		"tiddlywiki/markdown",
 		"tiddlywiki/geospatial"

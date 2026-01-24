@@ -54,7 +54,7 @@ exports.serialize = function (tree,serialize) {
 								result.push(markerPrefix + currentMarker + classAttr + " " + content.join("").trim());
 								content = [];
 							}
-							result.push(serializeList(subNode, markerPrefix + currentMarker).trim())
+							result.push(serializeList(subNode, markerPrefix + currentMarker).trim());
 						} else {
 							content.push(serialize(subNode)) ;
 						}
