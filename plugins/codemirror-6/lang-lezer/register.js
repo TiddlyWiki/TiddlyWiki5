@@ -20,8 +20,13 @@ exports.before = ["render"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-	var langLezer = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer/lang-lezer.js");
+	var core, langLezer;
+	try {
+		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+		langLezer = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer/lang-lezer.js");
+	} catch (e) {
+		return;
+	}
 
 	if(!core || !core.registerLanguage || !langLezer) {
 		return;

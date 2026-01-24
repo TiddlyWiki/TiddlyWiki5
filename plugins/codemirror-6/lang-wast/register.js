@@ -20,8 +20,13 @@ exports.before = ["render"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-	var langWast = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-wast/lang-wast.js");
+	var core, langWast;
+	try {
+		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+		langWast = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-wast/lang-wast.js");
+	} catch (e) {
+		return;
+	}
 
 	if(!core || !core.registerLanguage || !langWast) {
 		return;

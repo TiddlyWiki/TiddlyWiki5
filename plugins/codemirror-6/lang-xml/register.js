@@ -27,9 +27,14 @@ function isSvgCompletionsEnabled() {
 }
 
 exports.startup = function() {
-	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-	var langXml = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/lang-xml.js");
-	var svgSchema = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/svg-schema.js");
+	var core, langXml, svgSchema;
+	try {
+		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+		langXml = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/lang-xml.js");
+		svgSchema = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/svg-schema.js");
+	} catch (e) {
+		return;
+	}
 
 	if(!core || !core.registerLanguage || !langXml) {
 		return;

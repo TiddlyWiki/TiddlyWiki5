@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-cpp",
   "name": "CodeMirror 6 C/C++ Language",
   "description": "C/C++ syntax highlighting for CodeMirror 6",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme license",

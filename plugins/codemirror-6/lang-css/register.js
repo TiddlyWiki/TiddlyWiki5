@@ -132,8 +132,13 @@ function createPageClassCompletionSource(cssCompletionSource) {
 }
 
 exports.startup = function() {
-	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-	var langCss = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-css/lang-css.js");
+	var core, langCss;
+	try {
+		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+		langCss = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-css/lang-css.js");
+	} catch (e) {
+		return;
+	}
 
 	if(!core || !core.registerLanguage || !langCss) {
 		return;

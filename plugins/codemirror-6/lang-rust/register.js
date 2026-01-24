@@ -20,8 +20,13 @@ exports.before = ["render"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-	var langRust = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-rust/lang-rust.js");
+	var core, langRust;
+	try {
+		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+		langRust = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-rust/lang-rust.js");
+	} catch (e) {
+		return;
+	}
 
 	if(!core || !core.registerLanguage || !langRust) {
 		return;

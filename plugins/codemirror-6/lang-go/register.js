@@ -20,8 +20,13 @@ exports.before = ["render"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-	var langGo = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-go/lang-go.js");
+	var core, langGo;
+	try {
+		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+		langGo = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-go/lang-go.js");
+	} catch (e) {
+		return;
+	}
 
 	if(!core || !core.registerLanguage || !langGo) {
 		return;

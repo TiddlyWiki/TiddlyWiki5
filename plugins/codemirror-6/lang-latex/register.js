@@ -20,8 +20,13 @@ exports.before = ["render"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	var core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-	var langLatex = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-latex/lang-latex.js");
+	var core, langLatex;
+	try {
+		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
+		langLatex = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-latex/lang-latex.js");
+	} catch (e) {
+		return;
+	}
 
 	if(!core || !core.registerLanguage || !langLatex) {
 		return;
