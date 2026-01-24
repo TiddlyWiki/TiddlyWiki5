@@ -15,7 +15,18 @@ tags: $:/tags/Macro
 </span>
 \end
 
-\define toc-body(tag,sort:"",itemClassFilter,exclude,path,level:10)
+\define toc-level-indicator()
+\whitespace trim
+<%if [<__level__>compare:number:gt[0]]%>
+  <%if [<currentTiddler>tagging[]] %>
+    <span class="tc-tiny-gap-left">{{$:/core/images/new-button}}</span>
+  <%else%>
+    <span class="tc-tiny-gap-left">{{$:/core/images/blank}}</span>
+  <%endif%>
+<% endif %>
+\end
+
+\define toc-body(tag,sort:"",itemClassFilter,exclude,path,level)
 \whitespace trim
 <ol class="tc-toc">
   <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[subfilter<__exclude__>]""">
@@ -24,19 +35,23 @@ tags: $:/tags/Macro
         <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
           <li class=<<toc-item-class>>>
             <$list filter="[all[current]toc-link[no]]" >
-              <$list-empty><!-- interacitve path -->
+              <$list-empty>
+                <!-- link to target-field or currentTiddler -->
                 <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+                  <<toc-level-indicator>>
                   <<toc-caption>>
-                  <%if [<tv-config-static>match[yes]<currentTiddler>tagging[]] %>
-                    <$text text=" ..."/><!-- next level is available -->
-                  <%endif%>
                 </$link>
               </$list-empty>
+              <!-- toc-link = no -->
+              <<toc-level-indicator>>
               <<toc-caption>>
             </$list>
             <$let _level={{{ [<__level__>subtract[1]] }}}>
-              <%if [<_level>compare:number:gt[0]] %>
+              <%if [<_level>compare:number:gt[0]]%>
                 <$macrocall $name="toc-body" tag=<<item>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<excluded>> path=<<path>> level=<<_level>>/>
+              <%elseif [<_level>match[-1]]%>
+                <!-- show full toc, no level defined -->
+                <$macrocall $name="toc-body" tag=<<item>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<excluded>> path=<<path>>/>
               <%endif%>
             </$let>
           </li>
