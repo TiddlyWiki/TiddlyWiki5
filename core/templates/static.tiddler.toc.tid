@@ -7,8 +7,8 @@ code-body: yes
 
 </div>
 
-''Back to:''
+''{{$:/language/SideBar/Contents/BackTo}}''
 
 {{{ [all[current]tags[]!is[system]] }}}
 
-https://tiddlywiki.com/static
+<!-- https://tiddlywiki.com/static -->
