@@ -596,7 +596,7 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
-		fn = window["eval"](code + "\n\n//# sourceURL=" + filename); // eslint-disable-line no-eval -- See https://github.com/TiddlyWiki/TiddlyWiki5/issues/6839
+		fn = Function("return " + code + "\n\n//# sourceURL=" + filename)();
 	} else {
 		if(sandbox){
 			fn = vm.runInContext(code,sandbox,filename)
