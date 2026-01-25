@@ -13,10 +13,6 @@ It is $param$
 -
 <$text text=<<mamacromamacro param={{{ [[a]addprefix[b]] }}}>>/>
 -
-<$text text=<<mamacromamacro param={{{ [[b]addprefix[a]] }}}>>/>
--
-<$text text=<<mamacromamacro {{{ [[b]addprefix[a]] }}}>>/>
--
 <$text text=<<mamacromamacro param>>/>
 
 +
@@ -25,10 +21,6 @@ title: ExpectedResult
 <p>It is red
 -
 It is ba
--
-It is ab
--
-It is ab
 -
 It is param
 </p>

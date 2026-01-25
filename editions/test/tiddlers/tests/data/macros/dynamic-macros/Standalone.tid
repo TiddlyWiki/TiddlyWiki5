@@ -15,10 +15,9 @@ It is $one$ and $two$ or <<__one__>> and <<__two__>>.
 
 <<mamacro one={{{ [[b]addprefix[a]] }}}>>
 
-<<mamacro {{{ [[b]addprefix[a]] }}}>>
 
 <<mamacro one>>
 +
 title: ExpectedResult
 
-<p>It is red and green or red and green.</p><p>It is ab and green or ab and green.</p><p>It is ab and green or ab and green.</p><p>It is one and green or one and green.</p>
+<p>It is red and green or red and green.</p><p>It is ab and green or ab and green.</p><p>It is one and green or one and green.</p>

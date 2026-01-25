@@ -287,7 +287,7 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 	var nameToken = $tw.utils.parseTokenRegExp(source,pos,reAttributeName),
 		namePos = nameToken && $tw.utils.skipWhiteSpace(source,nameToken.end),
 		separatorToken = nameToken && $tw.utils.parseTokenRegExp(source,namePos,/=|:/g),
-		isNewStyleSeparator = true; // If there is no separator then we allow new style values
+		isNewStyleSeparator = false; // If there is no separator then we don't allow new style values
 	// If we have a name and a separator then we have a named attribute
 	if(nameToken && separatorToken) {
 		node.name = nameToken.match[1];
