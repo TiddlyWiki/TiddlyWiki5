@@ -11,7 +11,7 @@ It is $param$
 
 <$text text=<<mamacromamacro>>/>
 -
-<$text text=<<mamacromamacro param:{{{ [[a]addprefix[b]] }}}>>/>
+<$text text=<<mamacromamacro param={{{ [[a]addprefix[b]] }}}>>/>
 -
 <$text text=<<mamacromamacro param={{{ [[b]addprefix[a]] }}}>>/>
 -

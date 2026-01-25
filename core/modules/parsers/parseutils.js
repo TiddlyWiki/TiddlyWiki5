@@ -286,13 +286,15 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 	// Get the attribute name and the separator token
 	var nameToken = $tw.utils.parseTokenRegExp(source,pos,reAttributeName),
 		namePos = nameToken && $tw.utils.skipWhiteSpace(source,nameToken.end),
-		separatorToken = nameToken && $tw.utils.parseTokenRegExp(source,namePos,/=|:/g);
+		separatorToken = nameToken && $tw.utils.parseTokenRegExp(source,namePos,/=|:/g),
+		isNewStyleSeparator = true; // If there is no separator then we allow new style values
 	// If we have a name and a separator then we have a named attribute
 	if(nameToken && separatorToken) {
 		node.name = nameToken.match[1];
 		// key value separator is `=` or `:`
 		node.assignmentOperator = separatorToken.match[0];
 		pos = separatorToken.end;
+		isNewStyleSeparator = (node.assignmentOperator === "=");
 	}
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
@@ -307,14 +309,14 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 	} else {
 		// Look for a filtered value
 		var filteredValue = $tw.utils.parseTokenRegExp(source,pos,reFilteredValue);
-		if(filteredValue) {
+		if(filteredValue && isNewStyleSeparator) {
 			pos = filteredValue.end;
 			node.type = "filtered";
 			node.filter = filteredValue.match[1];
 		} else {
 			// Look for an indirect value
 			var indirectValue = $tw.utils.parseTokenRegExp(source,pos,reIndirectValue);
-			if(indirectValue) {
+			if(indirectValue && isNewStyleSeparator) {
 				pos = indirectValue.end;
 				node.type = "indirect";
 				node.textReference = indirectValue.match[1];
@@ -328,13 +330,13 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 				} else {
 					// Look for a macro invocation value
 					var macroInvocation = $tw.utils.parseMacroInvocationAsTransclusion(source,pos);
-					if(macroInvocation) {
+					if(macroInvocation && isNewStyleSeparator) {
 						pos = macroInvocation.end;
 						node.type = "macro";
 						node.value = macroInvocation;
 					} else {
 						var substitutedValue = $tw.utils.parseTokenRegExp(source,pos,reSubstitutedValue);
-						if(substitutedValue) {
+						if(substitutedValue && isNewStyleSeparator) {
 							pos = substitutedValue.end;
 							node.type = "substituted";
 							node.rawValue = substitutedValue.match[1] || substitutedValue.match[2];
