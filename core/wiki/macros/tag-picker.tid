@@ -21,7 +21,7 @@ second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>
 
 <!-- clean up temporary tiddlers, so the next "pick" starts with a clean input -->
 <!-- This could probably be optimized / removed if we would use different temp-tiddlers
-	(future improvement because keeping track is comlex for humans)
+	(future improvement because keeping track is complex for humans)
 -->
 \procedure delete-tag-state-tiddlers()
 <$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
@@ -111,6 +111,7 @@ The second ESC tries to close the "draft tiddler"
 				refreshTitle=<<refreshTitle>>
 				selectionStateTitle=<<tagSelectionState>>
 				inputAcceptActions=<<add-tag-actions>>
+				inputAcceptVariantActions=<<save-tiddler-actions>>
 				inputCancelActions=<<clear-tags-actions>>
 				tag="input"
 				placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}}

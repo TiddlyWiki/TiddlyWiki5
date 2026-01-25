@@ -14,7 +14,7 @@ first-search-filter: [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]sort[d
 <$fieldmangler>
 <$transclude $variable="keyboard-driven-input" tiddler=<<currentTiddler>> storeTitle=<<typeInputTiddler>> refreshTitle=<<refreshTitle>>
 	selectionStateTitle=<<typeSelectionTiddler>> field="type" tag="input" default="" placeholder={{$:/language/EditTemplate/Type/Placeholder}}
-	focusPopup=<<qualify "$:/state/popup/type-dropdown">> class="tc-edit-typeeditor tc-edit-texteditor tc-popup-handle"
+	focusPopup=<<qualify "$:/state/popup/type-dropdown">> class="tc-edit-typeeditor tc-edit-texteditor tc-popup-handle tc-keep-focus"
 	tabindex={{$:/config/EditTabIndex}}
 	focus={{{ [{!!draft.of}is[tiddler]then{$:/config/AutoFocusEdit}match[type]then[true]] :else[{$:/config/AutoFocus}match[type]then[true]] :else[[false]] }}}
 	cancelPopups="yes" configTiddlerFilter="[[$:/core/ui/EditTemplate/type]]"

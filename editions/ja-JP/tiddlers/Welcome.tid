@@ -1,0 +1,10 @@
+list: HelloThere [[Quick Start]] [[Find Out More]] [[TiddlyWiki on the Web]] [[Testimonials and Reviews]] GettingStarted Community
+tags: TableOfContents
+title: Welcome
+ja-title: ようこそ
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="HelloThere"/>
+
+''詳細については、トピックを選択してください:''
+<div class="tc-table-of-contents"><<toc-selective-expandable "Welcome">></div>

@@ -1,0 +1,38 @@
+title: $:/changenotes/5.4.0/#8258
+description: Add ability to serialize WikiText AST nodes back to wikitext strings
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: feature
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8258
+github-contributors: linonetwo
+
+This PR introduces a new utility `$tw.utils.serializeWikitextParseTree()` that can convert WikiText Abstract Syntax Tree (AST) nodes back into wikitext strings.
+
+There is also a utility `serializeAttribute` for a single attribute node, like an attribute of a widget.
+
+!! Use Cases
+
+* Programmatically manipulating wikitext content by modifying the AST, and use this to write it back
+* Building WYSIWYG editors
+* Creating wikitext formatters and linters
+
+!! Implementation
+
+* New core plugin `tiddlywiki/wikitext-serialize` containing most of the logic
+* Separate serialize handlers for each WikiText rule as `module-type: wikiruleserializer`
+* Test suite with tag `$:/tags/wikitext-serialize-test-spec`
+* It uses each parser's name as rule (`nextMatch.rule.name`), each AST node that needs serialization has a `type` property matching the rule name
+** HTML tags and widgets are handled by the `html` serializer
+
+!! Example Usage
+
+```javascript
+// Parse a tiddler's wikitext to AST
+var parseTree = $tw.wiki.parseTiddler("MyTiddler").tree;
+
+// Serialize AST back to wikitext string
+var wikitextString = $tw.utils.serializeWikitextParseTree(parseTree).trimEnd();
+```
+
+This feature offers new tools for JS plugin developers. It is not a user-facing change.

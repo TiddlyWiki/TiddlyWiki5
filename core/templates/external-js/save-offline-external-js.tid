@@ -3,7 +3,7 @@ title: $:/core/save/offline-external-js
 \whitespace trim
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 \define saveTiddlerFilter()
-[is[tiddler]] -[prefix[$:/state/popup/]] -[prefix[$:/temp/]] -[prefix[$:/HistoryList]] -[status[pending]plugin-type[import]] -[[$:/core]] -[[$:/plugins/tiddlywiki/filesystem]] -[[$:/plugins/tiddlywiki/tiddlyweb]] -[[$:/boot/boot.css]] -[is[system]type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] +[sort[title]] $(publishFilter)$
+[is[tiddler]] -[prefix[$:/state/popup/]] -[prefix[$:/temp/]] -[prefix[$:/HistoryList]] -[status[pending]plugin-type[import]] -[[$:/core]] -[[$:/plugins/tiddlywiki/filesystem]] -[[$:/plugins/tiddlywiki/tiddlyweb]] -[[$:/boot/boot.css]] -[is[system]type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[has[plugin-type]field:platform[server]] +[sort[title]] $(publishFilter)$
 \end
 \define defaultCoreURL() tiddlywikicore-$(version)$.js
 <$let coreURL={{{ [[coreURL]is[variable]then<coreURL>else<defaultCoreURL>] }}}>

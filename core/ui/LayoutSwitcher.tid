@@ -3,27 +3,26 @@ tags: $:/tags/ControlPanel/Appearance
 caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
 
 \whitespace trim
+\function layout.filter() [all[current]field:title[$:/core/ui/PageTemplate]]
+\function layout.empty.filter() [all[current]field:title{$:/layout}]
+
 <$linkcatcher to="$:/layout">
-<div class="tc-chooser">
+<div class="tc-chooser" role="listbox">
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/Layout]] [[$:/core/ui/PageTemplate]] +[!is[draft]sort[name]]">
-<$list
-	filter="[{$:/layout}!has[text]]"
-	variable="ignore"
-	emptyMessage="""\whitespace trim
-		<$set name="cls" filter="[all[current]field:title{$:/layout}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
-		<div class=<<cls>>>
-		<$link to={{!!title}}>
-		''<$transclude tiddler={{{ [<currentTiddler>get[icon]] }}}/><$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
-		</$link></div></$set>
-""">
-<$set name="cls" filter="[all[current]field:title[$:/core/ui/PageTemplate]]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
-<div class=<<cls>>>
-<$link to={{!!title}}>
-''<$transclude tiddler={{{ [<currentTiddler>get[icon]] }}}/><$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
-</$link>
-</div>
-</$set>
-</$list>
+	<$list filter="[{$:/layout}!has[text]]" variable="ignore">
+		<$list-empty>
+			<div class={{{ [layout.empty.filter[]then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}}>
+				<$link to={{!!title}} role="option" aria-selected={{{ [layout.empty.filter[]then[true]else[false]] }}}>
+					''<$transclude tiddler={{{ [<currentTiddler>get[icon]] }}}/><$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
+				</$link>
+			</div>
+		</$list-empty>
+		<div class={{{ [layout.filter[]then[tc-chooser-item tc-chosen]else[tc-chooser-item]] }}}>
+			<$link to={{!!title}} role="option" aria-selected={{{ [layout.filter[]then[true]else[false]] }}}>
+				''<$transclude tiddler={{{ [<currentTiddler>get[icon]] }}}/><$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
+			</$link>
+		</div>
+	</$list>
 </$list>
 </div>
 </$linkcatcher>
