@@ -865,7 +865,7 @@ Widget.prototype.removeLocalDomNodes = function() {
 		}
 	});
 	this.domNodes = [];
-}
+};
 
 /*
 Invoke the action widgets that are descendents of the current widget.
