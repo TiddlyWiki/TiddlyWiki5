@@ -37,6 +37,7 @@ Object.defineProperty(TW_Node.prototype, 'TEXT_NODE', {
 var TW_TextNode = function(text) {
 	bumpSequenceNumber(this);
 	this.textContent = text + "";
+	this.children = [];
 };
 
 Object.setPrototypeOf(TW_TextNode.prototype,TW_Node.prototype);
