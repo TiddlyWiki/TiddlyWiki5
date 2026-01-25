@@ -1,5 +1,5 @@
 created: 20201123113532200
-modified: 20260125124203548
+modified: 20260125202715594
 tags: Widgets TriggeringWidgets
 title: EventCatcherWidget
 type: text/vnd.tiddlywiki
@@ -87,8 +87,8 @@ The following variables are made available to the actions:
 |`dom-*` |All DOM attributes of the node matching the given selector are made available as variables, with the prefix `dom-` |
 |`modifier` |The [[modifier Variable]] contains the Modifier Key held during the event |
 |`event-mousebutton` |The mouse button (if any) used to trigger the event (can be "left", "right" or "middle") <<.infoBox """This property is only reliable for events caused by pressing or releasing mouse buttons. It is not reliable for mouseenter, mouseleave, mouseover, mouseout, or mousemove. More details at: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button""">> |
-|`event-type` |The type property of the JavaScript event |
-|`event-detail-*` |Any properties in the detail attribute of the event are made available with the prefix `event-detail-` |
+|`event-type` |The type property of the JavaScript event. <<.deprecated-since 5.4.0>> Removed in favour of `eventJSON`|
+|`event-detail-*` |Any properties in the detail attribute of the event are made available with the prefix `event-detail-`. <<.deprecated-since 5.4.0>> Removed in favour of `eventJSON` |
 |`tv-popup-coords` |A relative coordinate string that can be used with the ActionPopupWidget |
 |`tv-popup-abs-coords` |<<.from-version "5.2.4">> An absolute coordinate string that can be used with the ActionPopupWidget |
 |`tv-widgetnode-width` |<<.from-version "5.2.3">> `offsetWidth` of the DOM node created by the eventcatcher widget |
@@ -103,6 +103,7 @@ The following variables are made available to the actions:
 |`event-fromcatcher-posy` |`y` position of the event relative to the event catcher DOM node |
 |`event-fromviewport-posx` |<<.from-version "5.2.0">> `x` position of the event relative to the viewport |
 |`event-fromviewport-posy` |<<.from-version "5.2.0">> `y` position of the event relative to the viewport |
+|`eventJSON`|<<.from-version "5.4.0">>A stringified JSON object containing string-safe copies of the event’s own properties. Can be accessed using the [[jsonget Operator]]. |
 
 ! Example
 

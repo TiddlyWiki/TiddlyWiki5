@@ -181,29 +181,27 @@ EventWidget.prototype.handleEvent = function(event, type, selectedNode) {
 	if(!selectedNode) {
 		return false;
 	}
-
 	let actions = this.getAttribute("$"+type),
-		stopPropagation = this.getAttribute("stopPropagation","onaction"),
-		variables = {};
+		stopPropagation = this.getAttribute("stopPropagation","onaction");
 
 	if(actions) {
-		variables = $tw.utils.collectDOMVariables(selectedNode, this.domNode, event);
-		variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
-		const mouseButtonMap = {0:"left",1:"middle",2:"right"};
-		variables["event-mousebutton"] = "button" in event ? mouseButtonMap[event.button] : undefined;
-		variables["event-type"] = event.type.toString();
-		if(typeof event.detail === "object" && !!event.detail) {
-			$tw.utils.each(event.detail,(detailValue,detail) => {
-				variables["event-detail-"+detail] = detailValue.toString();
-			});
-		} else if(!!event.detail) {
-			variables["event-detail"] = event.detail.toString();
-		}
-		if(event.animationName) {
-			variables["event-animationName"] = event.animationName;
+		let variables = $tw.utils.extend(
+			{},
+			$tw.utils.collectDOMVariables(selectedNode, this.domNode, event),
+			{
+				"eventJSON": JSON.stringify($tw.utils.copyObjectPropertiesSafe(event)),
+				"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event),
+				"event-type": event.type.toString()
+			}
+		);
+
+		if("button" in event) {
+			const mouseButtonMap = {0:"left",1:"middle",2:"right"};
+			variables["event-mousebutton"] = mouseButtonMap[event.button];
 		}
 		this.invokeActionString(actions, this, event, variables);
 	}
+
 	if((actions && stopPropagation === "onaction") || stopPropagation === "always") {
 		event.preventDefault();
 		event.stopPropagation();
