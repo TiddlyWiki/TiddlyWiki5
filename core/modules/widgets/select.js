@@ -122,15 +122,15 @@ SelectWidget.prototype.setSelectValue = function() {
 		value = value === undefined ? "" : value;
 		var select = this.getSelectDomNode();
 		var child,
-				values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
+			values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
 		for(var i=0; i < select.children.length; i++){
 			child=select.children[i];
 			if(child.children.length === 0){
-				child.selected = values.indexOf(child.value) !== -1
+				child.selected = values.indexOf(child.value) !== -1;
 			} else {
 				// grouped options
 				for(var y=0; y < child.children.length; y++){
-					child.children[y].selected = values.indexOf(child.children[y].value) !== -1
+					child.children[y].selected = values.indexOf(child.children[y].value) !== -1;
 				}
 			}
 		}
