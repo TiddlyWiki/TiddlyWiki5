@@ -1,5 +1,5 @@
 created: 20240310165023000
-modified: 20240310172648116
+modified: 20260125212303316
 tags: [[Procedure Syntax]]
 title: Procedure Call Syntax
 type: text/vnd.tiddlywiki
@@ -23,7 +23,15 @@ Each ''individual'' <<.place param-value>> has the following syntax:
 <$railroad text="""
 \start none
 \end none
-[: param-name [:[[whitespace|"Filter Whitespace"]]] ":" [:[[whitespace|"Filter Whitespace"]]] ] value [: [[whitespace|"Filter Whitespace"]] ]
+(
+value
+|
+param-name [:space] (
+":" [:space] value [: space]
+|
+"=" [:space] new-value [: space]
+)
+)
 """/>
 
 * The <<.place param-name>> is a sequence of letters (`A`--`Z`, `a`--`z`), digits (`0`--`9`), hyphens (`-`) and underscores (`_`).
@@ -31,3 +39,5 @@ Each ''individual'' <<.place param-value>> has the following syntax:
 * The <<.place value>> is specified as follows:
 
 <$railroad text={{$:/editions/tw5.com/railroad/macro-parameter-value}}/>
+
+* <<.from-version 5.4.0>> The <<.place new-value>> can either be a plain <<.place value>> or a full <<.place procedure-name>> call, allowing for dynamic parameter values.
