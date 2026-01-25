@@ -160,7 +160,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 			});
 			// Parameters are an array of {name:, value:, multivalue:} pairs (name and multivalue are optional)
 			$tw.utils.each(params,function(param) {
-				if(param.multiValue) {
+				if(param.multiValue.length) {
 					variables[param.name] = param.multiValue;
 				} else {
 					variables[param.name] = param.value || "";
