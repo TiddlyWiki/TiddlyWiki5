@@ -82,8 +82,8 @@ SelectWidget.prototype.handleChangeEvent = function(event) {
 	if(this.selectMultiple == false) {
 		var value = this.getSelectDomNode().value;
 	} else {
-		var value = this.getSelectValues();
-		value = $tw.utils.stringifyList(value);
+		var value = this.getSelectValues()
+				value = $tw.utils.stringifyList(value);
 	}
 	this.wiki.setText(this.selectTitle,this.selectField,this.selectIndex,value);
 	// Trigger actions
@@ -118,7 +118,7 @@ SelectWidget.prototype.setSelectValue = function() {
 		}
 	}
 	// Assign it to the select element if it's different than the current value
-	if(this.selectMultiple) {
+	if (this.selectMultiple) {
 		value = value === undefined ? "" : value;
 		var select = this.getSelectDomNode();
 		var child,
@@ -156,14 +156,14 @@ SelectWidget.prototype.getSelectValues = function() {
 	select = this.getSelectDomNode();
 	result = [];
 	options = select && select.options;
-	for(var i=0; i<options.length; i++) {
+	for (var i=0; i<options.length; i++) {
 		opt = options[i];
-		if(opt.selected) {
+		if (opt.selected) {
 			result.push(opt.value || opt.text);
 		}
 	}
 	return result;
-};
+}
 
 /*
 Compute the internal state of the widget
@@ -192,7 +192,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 SelectWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// If we're using a different tiddler/field/index then completely refresh ourselves
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip || changedAttributes.default || changedAttributes.tabindex || changedAttributes.disabled) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip || changedAttributes.tabindex || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
 	} else {
