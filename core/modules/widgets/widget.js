@@ -789,6 +789,12 @@ Widget.prototype.destroy = function(options) {
 	// Destroy children first
 	this.destroyChildren({removeDOMNodes: removeChildDOMNodes});
 	this.children = [];
+	
+	// Call custom cleanup method if implemented
+	if(typeof this.onDestroy === "function") {
+		this.onDestroy();
+	}
+	
 	// Remove our DOM nodes if needed
 	if(removeDOMNodes) {
 		this.removeLocalDomNodes();	
