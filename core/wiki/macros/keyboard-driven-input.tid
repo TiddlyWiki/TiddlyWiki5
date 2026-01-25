@@ -120,11 +120,21 @@ tags: $:/tags/Macro
 
 \procedure keyboard-driven-input(tiddler,storeTitle,field:"text",index:"",tag:"input",type,focus:"",inputAcceptActions,inputAcceptVariantActions,inputCancelActions,placeholder:"",default:"",class,focusPopup,rows,minHeight,tabindex,size,autoHeight,filterMinLength:"0",refreshTitle,selectionStateTitle,cancelPopups:"",configTiddlerFilter,firstSearchFilterField:"first-search-filter",secondSearchFilterField:"second-search-filter")
 \whitespace trim
-<$keyboard key="((input-accept))" actions=<<inputAcceptActions>>>
-<$keyboard key="((input-accept-variant))" actions=<<inputAcceptVariantActions>>>
-<$keyboard key="((input-up))" actions=<<input-next-actions-before>>>
-<$keyboard key="((input-down))" actions=<<input-next-actions-after>>>
-<$keyboard key="((input-cancel))" actions=<<inputCancelActions>>>
+\procedure keyboard-driven-input-actions()
+<%if [<event-key-descriptor>match[((input-accept))]] %>
+<<inputAcceptActions>>
+<%elseif [<event-key-descriptor>match[((input-accept-variant))]] %>
+<<inputAcceptVariantActions>>
+<%elseif [<event-key-descriptor>match[((input-up))]] %>
+<<input-next-actions-before>>
+<%elseif [<event-key-descriptor>match[((input-down))]] %>
+<<input-next-actions-after>>
+<%elseif [<event-key-descriptor>match[((input-cancel))]] %>
+<<inputCancelActions>>
+<%endif%>
+\end keyboard-driven-input-actions
+
+<$keyboard key="((input-accept)) ((input-accept-variant)) ((input-up)) ((input-down)) ((input-cancel))" actions=<<keyboard-driven-input-actions>>>
 	<$edit-text
 		tiddler=<<tiddler>> field=<<field>> index=<<index>>
 		inputActions=<<keyboard-input-actions>> tag=<<tag>> class=<<class>>
@@ -134,8 +144,4 @@ tags: $:/tags/Macro
 		refreshTitle=<<refreshTitle>> cancelPopups=<<cancelPopups>>
 	/>
 </$keyboard>
-</$keyboard>
-</$keyboard>
-</$keyboard>
-</$keyboard>
-\end
+\end keyboard-driven-input

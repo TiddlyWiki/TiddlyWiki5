@@ -37,8 +37,6 @@ title: $:/core/ui/ImportListing
 
 \define suppressedField() suppressed-$(payloadTiddler)$
 
-\define newImportTitleTiddler() $:/temp/NewImportTitle-$(payloadTiddler)$
-
 \define previewPopupState() $(currentTiddler)$!!popup-$(payloadTiddler)$
 
 \define renameFieldState() $(currentTiddler)$!!state-rename-$(payloadTiddler)$
@@ -51,6 +49,27 @@ title: $:/core/ui/ImportListing
 \end
 
 \whitespace trim
+<$let importJson={{{ [{$:/Import}] }}}>
+	<$let importTitles={{{ [<importJson>jsonindexes[tiddlers]] }}}>
+		<$let importTypes={{{ [(importTitles)] :map[<importJson>jsonget[tiddlers],<currentTiddler>,[type]] }}}>
+			<$let anyMatch={{{ [all[shadows+tiddlers]tag[$:/tags/ImportOptions]get[condition]] :map[(importTypes)subfilter<currentTiddler>] +[!is[blank]limit[1]] }}}>
+				<%if [<anyMatch>!is[blank]] %>
+					<div class="tc-import-option">
+						<$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportOptions]]" variable="importOption">
+							<$let condition={{{ [<importOption>get[condition]] }}}>
+								<$let hasMatch={{{ [(importTypes)subfilter<condition>limit[1]] }}}>
+									<%if [<hasMatch>!is[blank]] %>
+										<$transclude tiddler=<<importOption>>/>
+									<%endif%>
+								</$let>
+							</$let>
+						</$list>
+					</div>
+				<%endif%>
+			</$let>
+		</$let>
+	</$let>
+</$let>
 <div class="tc-table-wrapper">
 <table class="tc-import-table">
 <tbody>
@@ -102,19 +121,7 @@ title: $:/core/ui/ImportListing
 <$reveal type="match" state=<<renameFieldState>> text="yes" tag="tr">
 	<td colspan="3">
 		<div class="tc-flex">
-			<$edit-text tiddler=<<newImportTitleTiddler>>  default={{{[subfilter<payloadTitleFilter>]}}} tag="input" class="tc-import-rename tc-flex-grow-1"/>
-			<span class="tc-small-gap-left">
-				<$button  class="tc-btn-invisible" set=<<renameFieldState>> setTo="no" tooltip={{{[<lingo-base>addsuffix[Listing/Rename/CancelRename]get[text]]}}}>
-					{{$:/core/images/close-button}}
-					<$action-deletetiddler $tiddler=<<newImportTitleTiddler>>/>
-				</$button>
-				<span class="tc-small-gap-right"/>
-			</span>
-			<$button  class="tc-btn-invisible" set=<<renameFieldState>> setTo="no" tooltip={{{[<lingo-base>addsuffix[Listing/Rename/ConfirmRename]get[text]]}}}>
-				{{$:/core/images/done-button}}
-				<$action-setfield $field=<<renameField>> $value={{{[<newImportTitleTiddler>get[text]minlength[1]else<payloadTiddler>]}}} />
-				<$action-deletetiddler $tiddler=<<newImportTitleTiddler>>/>
-			</$button>
+			<$edit-text field=<<renameField>> default={{{[<payloadTiddler>]}}} tag="input" class="tc-import-rename tc-flex-grow-1"/>
 		</div>
 	</td>
 </$reveal>

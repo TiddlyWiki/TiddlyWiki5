@@ -1,0 +1,8 @@
+title: $:/language/Help/deletetiddlers
+description: Tiddlerのグループを削除
+
+フィルターによって識別されたTiddlerのグループを削除します。
+
+```
+--deletetiddlers <filter>
+```

@@ -1,7 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/cecily",
-	"name": "Cecily",
-	"description": "Zoomable storyview (Cecily)",
-	"list": "readme",
-	"stability": "STABILITY_0_DEPRECATED"
-}

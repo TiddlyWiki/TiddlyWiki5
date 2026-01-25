@@ -1,0 +1,38 @@
+title: $:/language/Help/fetch
+description: URLのWikiからTiddler一式を取得
+
+HTTP/HTTPS経由で1つ以上のファイルを取得し、フィルターに一致するTiddler一式をインポートします。オプションで、受信したタイトルを変換できます。
+
+```
+--fetch file <url> <import-filter> <transform-filter>
+--fetch files <url-filter> <import-filter> <transform-filter>
+--fetch raw-file <url> <transform-filter>
+--fetch raw-files <url-filter> <transform-filter>
+```
+
+"file"および"files"バリエーションは、指定されたファイルを取得し、その中のTiddler一式をインポートしようとします（ファイルをブラウザウィンドウにドラッグした場合と同じ処理です）。"raw-file"および"raw-files"バリエーションは、指定されたファイルを取得し、インポートロジックを適用せずに、生のファイルデータをTiddlerに保存します。
+
+"file"および"raw-file"バリエーションでは、1 つのファイルのみが取得され、最初のパラメータは読み込むファイルのURLになります。
+
+"files"および"raw-files"バリエーションでは、複数のファイルが取得され、最初のパラメータは読み込む対象のファイルのURLリストを生成するフィルターです。例えば、"remote-server"タグが付けられ、"url"フィールドを持つTiddlerのセットが指定された場合、フィルター`[tag[remote-server]get[url]]`は、有効なすべてのURLを取得します。
+
+"file"および"files"バリエーションの場合、`<import-filter>` パラメータはインポートするTiddlerを決定するフィルターを指定します。指定されていない場合は、デフォルトで`[all[tiddlers]]`になります。
+
+すべてのバリエーションにおいて、`<transform-filter>` パラメータはインポートされたTiddlerのタイトルを変換するオプションフィルターを指定します。例えば、`[addprefix[$:/myimports/]]`は、各タイトルに`$:/myimports/` プレフィックスを追加します。
+
+`--fetch` コマンドの前に`--verbose`を付けると、インポートの進行状況が出力されます。
+
+TiddlyWikiは、すでにロードされているプラ​​グインの古いバージョンを取得しないことに注意してください。
+
+次の例では、https://tiddlywiki.com からシステム以外のすべてのTiddlerを取得し、JSON ファイルに保存します: 
+
+```
+tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+```
+
+以下の例では、tiddlywiki.com から"favicon"ファイルを取得し、"output.ico"というファイルに保存します。中間のTiddler "Icon Tiddler"は"--fetch"コマンドで引用符で囲まれていますが、これはデフォルトのタイトルを置き換えるための変換フィルタとして使用されているためです。一方、"-- savetiddler"コマンドでは、タイトルとして直接使用されているため引用符は付いていません。
+
+```
+tiddlywiki --verbose --fetch raw-file "https://tiddlywiki.com/favicon.ico" "[[Icon Tiddler]]" --savetiddler "Icon Tiddler" output.ico
+```
+
