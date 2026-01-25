@@ -717,9 +717,9 @@ Widget.prototype.findNextSiblingDomNode = function(startIndex) {
 	// Refer to this widget by its index within its parents children
 	var parent = this.parentWidget,
 		index = startIndex !== undefined ? startIndex : parent.children.indexOf(this);
-if(index === -1) {
-	throw "node not found in parents children";
-}
+	if(index === -1) {
+		throw "node not found in parents children";
+	}
 	// Look for a DOM node in the later siblings
 	while(++index < parent.children.length) {
 		var domNode = parent.children[index].findFirstDomNode();
