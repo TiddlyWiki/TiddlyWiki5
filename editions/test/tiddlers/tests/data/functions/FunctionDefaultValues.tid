@@ -8,7 +8,7 @@ title: Output
 \whitespace trim
 \function .test(prefix:Default) [[ Content]addprefix<prefix>]
 
-{{{ [.test[Special]] }}},{{{ [.test[]] }}}
+<$text text={{{ [.test[Special]] }}}/>,<$text text={{{ [.test[]] }}}/>
 
 +
 title: ExpectedResult
