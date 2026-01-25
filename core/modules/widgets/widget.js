@@ -762,7 +762,7 @@ options include:
 	removeDOMNodes: boolean (default true)
 */
 Widget.prototype.destroyChildren = function(options) {
-	$tw.utils.each(this.children, function(childWidget) {
+	$tw.utils.each(this.children,function(childWidget) {
 		childWidget.destroy(options);
 	});
 };
