@@ -777,7 +777,7 @@ Widget.prototype.removeChildDomNodes = function() {
 /*
 Default destroy
 options include:
-	removeDOMNodes: boolean (default true)
+ removeDOMNodes: boolean (default true)
 */
 Widget.prototype.destroy = function(options) {
 	const { removeDOMNodes = true } = options || {};
