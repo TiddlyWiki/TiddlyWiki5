@@ -1,0 +1,17 @@
+change-category: nodejs
+change-type: feature
+created: 20260120154012282
+description: Allows server routes to be prioritized via ordering.
+github-contributors: saqimtiaz
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9206
+modified: 20260120160656948
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9206
+type: text/vnd.tiddlywiki
+
+This PR adds support for an info property to server route module exports. The info object may include a priority field, which determines the route’s order of precedence.
+
+Priorities are numeric and follow a descending order: routes with higher priority values are processed first, similar to how saver modules are prioritized.
+
+To maintain backward compatibility with existing code, any module that omits info or info.priority is assigned a default priority of 100. Core server routes have been updated to explicitly use this default value of 100.

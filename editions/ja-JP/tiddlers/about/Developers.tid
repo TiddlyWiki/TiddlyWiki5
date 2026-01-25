@@ -1,0 +1,13 @@
+created: 20150412191004348
+modified: 20251208113458455
+original-modified: 20251022153208584
+tags: Community Reference
+title: Developers
+ja-title: 開発者
+type: text/vnd.tiddlywiki
+
+* [[tiddlywiki.com/dev|https://tiddlywiki.com/dev]]は公式の開発者ドキュメントです
+* [[GitHubでの開発|https://github.com/TiddlyWiki/TiddlyWiki5]]に参加する
+* [[GitHubディスカッション|https://github.com/TiddlyWiki/TiddlyWiki5/discussions]]はQ&Aとオープンな形式のディスカッションです
+* [[GitHubイシュー|https://github.com/TiddlyWiki/TiddlyWiki5/issues]]は、バグレポートを作成し、具体的で実現可能な新しいアイデアを提案するためのものです
+* プロジェクトに貢献する方法についてのガイドラインについては、[[貢献|Contributing]]を参照してください

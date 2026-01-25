@@ -102,7 +102,7 @@ List of Contributors
 
 The below-signed are contributors to a code repository that is part of the project named "TiddlyWiki5". Each below-signed contributor has read, understand and agrees to the terms above in the section within this document entitled "TiddlyWiki5 Entity Contributor License Agreement" as of **the date** beside his or her **real name**, **GitHub account name** and **Entity name**.
 
-eg: Jeremy Ruston, @Jermolene for Federatial Limited, 2011/11/22
+eg: Jeremy Ruston, @Jermolene for Intertwingled Innovations Limited, 2011/11/22
 
 ## Contributors
 
@@ -111,3 +111,5 @@ Jeremy Ruston, @Jermolene for Federatial Limited, 2011/11/22
 Google Inc, 2015/12/21
 
 Brooks Boyd, @MidnightLightning for MidnightDesign, LLC 2019/03/21
+
+Jeremy Ruston, @Jermolene for Intertwingled Innovations Limited, 2024/07/26

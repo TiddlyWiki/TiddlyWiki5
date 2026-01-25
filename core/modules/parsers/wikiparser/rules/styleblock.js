@@ -26,10 +26,7 @@ This is a paragraph
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "styleblock";
@@ -67,7 +64,8 @@ exports.parse = function() {
 			$tw.utils.addAttributeToParseTreeNode(tree[t],"style",styles.join(""));
 		}
 	}
-	return tree;
+	return [{
+		type: "void",
+		children: tree
+	}]
 };
-
-})();

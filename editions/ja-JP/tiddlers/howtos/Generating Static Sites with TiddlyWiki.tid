@@ -1,0 +1,37 @@
+created: 20130828190200000
+modified: 20250120105549696
+original-modified: 20241008031135403
+tags: [[TiddlyWiki on Node.js]]
+title: Generating Static Sites with TiddlyWiki
+ja-title: TiddlyWikiで静的サイトを生成する
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5は、JavaScriptを必要としないTiddlyWikiの静的HTML表現を生成できます。このプロセスでは、ローカルシステムのNode.jsにTiddlyWikiがインストールされている必要があります。詳細については、[[Node.jsにTiddlyWikiをインストールする|Installing TiddlyWiki on Node.js]]を参照してください。
+
+静的HTMLの生成方法には多くの柔軟性があります。次のシナリオはすべて https://tiddlywiki.com で説明されています。
+
+! WikiスナップショットとTiddlerスナップショット
+
+https://tiddlywiki.com/static.html で、メインのTiddlyWikiサイトの静的な表現を見ることができます。このファイルは、現在のDefaultTiddlersの静的スナップショットです。このファイルにリンクされているすべてのTiddlerは、個々のTiddlerの静的スナップショットを指す`/static/HelloThere.html`形式のURLによって参照されます。TiddlerのHTMLファイルは、`static.css`スタイルシートファイルを参照します。
+
+次のコマンドは、TiddlyWiki5サイトの静的バージョンのサンプルを生成するために使用されます:
+
+```sh
+tiddlywiki wikipath --render '[!is[system]]' '[encodeuricomponent[]addprefix[static/]addsuffix[.html]]' text/plain $:/core/templates/static.tiddler.html
+tiddlywiki wikipath --render $:/core/templates/static.template.html static.html text/plain
+tiddlywiki wikipath --render $:/core/templates/static.template.css static/static.css text/plain
+```
+
+最初のRenderCommandは、フィルタ`[!is[system]]`を使用してすべての個別の非システムTiddlerのHTML表現を生成し、次のフィルタ`[encodeuricomponent[]addprefix[static/]addsufixx[.html]]`は各タイトルにURIエンコーディングを適用し、プレフィックス`static/`を追加して、最後にサフィックス`.html`を追加します。2番目のRenderCommandは、DefaultTiddlersの静的バージョンを`static.html`に保存し、最後のRenderCommandはスタイルシートを保存します。(すべてのファイルは、Wikiフォルダの`output`フォルダに配置されます)。
+
+! 内部リンク付きWikiスナップショット
+
+Tiddlerの静的表現を含み、標準のHTMLアンカーリンクを使用してそれらの間を移動する単一のHTMLファイルを作成することも可能です。
+
+例: https://tiddlywiki.com/alltiddlers.html
+
+この例は次のコマンドによって構築できます: 
+
+```
+--render $:/core/templates/alltiddlers.template.html alltiddlers.html text/plain
+```

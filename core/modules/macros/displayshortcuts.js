@@ -6,10 +6,7 @@ module-type: macro
 Macro to display a list of keyboard shortcuts in human readable form. Notably, it resolves named shortcuts like `((bold))` to the underlying keystrokes.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -41,5 +38,3 @@ exports.run = function(shortcuts,prefix,separator,suffix) {
 		return "";
 	}
 };
-
-})();

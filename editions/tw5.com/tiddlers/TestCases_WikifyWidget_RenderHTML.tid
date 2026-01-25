@@ -1,0 +1,28 @@
+created: 20241201235747500
+description: Exporting rendered html
+tags: $:/tags/wiki-test-spec
+title: TestCases/WikifyWidget/RenderHTML
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+You can use <<.wid wikify>> to copy your wikitext as a formated HTML.
++
+title: Output
+
+<$wikify name="code" text={{code}} output="html">
+
+<$codeblock code=<<code>> />
+
+<$macrocall $name="copy-to-clipboard" src=<<code>>/>
+
+</$wikify>
++
+title: code
+text: 
+
+!! A nice list
+
+* Item 1
+* Item 2
+* Item 3

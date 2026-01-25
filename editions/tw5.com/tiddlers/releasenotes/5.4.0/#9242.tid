@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9242
+description: Deprecate CSS macros supported in 2017 baseline
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: deprecation
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9242
+github-contributors: Leilei332
+
+Mark CSS macros supported in 2017 baseline as deprecated. They are moved to [[$:/core/macros/deprecated]] now.

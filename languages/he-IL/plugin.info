@@ -2,7 +2,7 @@
 	"title": "$:/languages/he-IL",
 	"name": "he-IL",
 	"plugin-type": "language",
-	"description": "Hebrew (Israel)",
+	"description": "עברית (ישראל)",
 	"author": "DoronTzur",
 	"core-version": ">=5.0.0",
 	"text-direction": "rtl"

@@ -1,0 +1,35 @@
+caption: Tiddloid and Tiddloid Lite
+color: #FF8A65
+community-author: donmor
+created: 20130825161400000
+delivery: App
+description: ローカルのストレージデバイスに変更を保存するAndroidアプリ
+method: save
+modified: 20241005111430352
+original-modified: 20200507103926292
+tags: Saving Android [[Standalone App]]
+title: Saving on Android
+ja-title: Androidでの保存
+type: text/vnd.tiddlywiki
+url: https://github.com/donmor/Tiddloid
+
+TiddloidとTiddloid Liteアプリは、TiddlyWikiのHTMLファイルを編集し、変更を保存できるAndroid アプリです。
+
+* 詳細については[[Tiddloid|https://github.com/donmor/Tiddloid]] [[Tiddloid Lite|https://github.com/donmor/TiddloidLite]]をご覧ください。
+* APKファイルをダウンロード: [[Tiddloid|https://github.com/donmor/Tiddloid/releases]], [[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]]
+
+!!! 特徴
+
+* インターネットから最新版をダウンロードして新しい~TiddlyWikiを作成します
+* デバイス/内部ストレージに保存されている既存の~TiddlyWikiをインポートします。([[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]]は外部SDカードもサポートします)
+* インターネットから興味深い~Tiddlywikiをフォークします(TW5のみサポート)
+* TiddlyWikiを検出します
+* ローカルに保存された~TiddlyWikiは、アプリにインポートされた~TiddlyWikiへの変更を保存すると同時に更新されます。
+* デスクトップTiddlyWikiセーバーであるTiddlyDesktopと互換性のあるバックアップシステムです
+* Androidのホームページ上に、既存の~TiddlyWikiへのショートカットを作成します
+* [[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]]はGDriveや~OneDriveなどのクラウドストレージをサポートしています
+
+!!! 注意
+
+* Tiddloid Liteは、Android Q以降を実行しているデバイスをサポートしています。また、TiddloidはGDriveや~OneDriveなどのクラウドストレージもサポートしており、TiddlyWikiClassicとの互換性を維持しています。TiddloidとTiddloid Liteの違いの詳細については、[[Tiddloidのホームページ|https://github.com/donmor/Tiddloid]]をご覧ください。
+* インポートするファイルの拡張子は、`.html`か`.htm`である必要があります。

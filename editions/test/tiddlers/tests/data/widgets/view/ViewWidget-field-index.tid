@@ -1,0 +1,28 @@
+title: Widgets/ViewWidget/Parameter/field-index
+description: Test view-widget parameters index type=application/json and type=application/x-tiddler-dictionary
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: input
+type: application/x-tiddler-dictionary
+
+01: value 01
+02: value 02
++
+title: input-json
+type: application/json
+
+{
+	"01": "value 01",
+	"02": "value 02"
+}
++
+title: Output
+
+<$view tiddler="input-json" index="01"/>
+
+<$view tiddler="input" index="02"/>
++
+title: ExpectedResult
+
+value 01<p>value 02</p>

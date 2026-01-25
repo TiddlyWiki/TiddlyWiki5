@@ -1,0 +1,55 @@
+title: Release Notes and Changes Internals
+
+! Release Notes
+
+Release notes describe the changes in a release, and the impact of those changes.
+
+Release note fields:
+
+* `caption` - the plain version number (eg `5.4.0`)
+* `created` - in DateFormat
+* `modified` - in DateFormat
+* `released` - in DateFormat -- only present if the release has been published
+* `tags` - must include `ReleaseNotes`
+* `title` - the title of the release note (eg `Release 5.4.0`)
+* `description` - a brief description of the release
+* `text` - see below
+
+The text of the release note should consist of the definition of a variable `release-introduction` followed by the invocation of the `releasenote` procedure. For example:
+
+```
+\define release-introduction()
+Release v5.4.0 includes major improvements in a number of areas. See the [[project plan|https://github.com/orgs/TiddlyWiki/projects/4]] for more details.
+\end release-introduction
+
+<<releasenote 5.4.0>>
+```
+
+! Change Notes
+
+Change notes describe a discrete change within a release. Change note fields:
+
+* `title` - by convention titles are formed `$:/changenotes/<version>/<unique identifier>`. The unique identifier is typically the primary GitHub PR or issue like `#1234` or a GitHub commit ID such as `98f850609d29bc36ded83f90c0d5be231649254b`
+* `tags` - must include `$:/tags/ChangeNote`
+* `change-type` - the type of change as a single string; see [[here|Release Notes and Changes]] for valid values
+* `change-category` - the category of the change; see [[here|Release Notes and Changes]] for valid values
+* `text` - full description of the change
+* `description` - brief description of the change
+* `release` - the release with which this change note is associated (eg `5.4.0`)
+* `github-links` - a list of the ~GitHub links associated with this change
+* `github-contributors` - a list of the ~GitHub handles of the developers responsible for the PR/commits
+
+! Impact Notes
+
+Impact notes describe the impact of a particular change. There can be multiple impact notes for a given change.
+
+Impact note fields:
+
+* `title` - by convention, the title of the associated change note with `/deprecations/` and a unique ID appended `$:/changenotes/5.4.0/#8702/deprecations/darkmode-info-tiddler`
+* `changenote` - the title of the associated change note
+* `created` - in DateFormat
+* `modified` - in DateFormat
+* `tags` - must include `$:/tags/ImpactNote`
+* `description` - a brief description of the impact
+* `impact-type` - the type of impact; see [[here|Release Notes and Changes]] for valid values
+* `text` - description of the impact if required

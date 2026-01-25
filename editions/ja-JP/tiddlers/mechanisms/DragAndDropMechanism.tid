@@ -1,0 +1,27 @@
+created: 20170328161210552
+modified: 20241209110151828
+original-modified: 20170406085836682
+tags: [[Importing Tiddlers]] [[Drag and Drop]] Mechanisms
+title: DragAndDropMechanism
+ja-title: ドラッグアンドドロップのメカニズム
+type: text/vnd.tiddlywiki
+
+このTiddlerでは、~TiddlyWikiでドラッグアンドドロップ機能を実装するために使用される内部メカニズムについて説明します。機能の一般的な説明については、[[ドラッグアンドドロップ|Drag and Drop]]を参照してください。
+
+<<.warning """
+~TiddlyWikiは[[標準のHTML 5 ドラッグアンドドロップAPI|https://www.w3.org/TR/2010/WD-html5-20101019/dnd.html]]を使用します。ただし、この領域はブラウザ間の互換性の問題で悪名高いです。そのため、機能の一部は必ずしもすべてのブラウザで動作するとは限りません。特に、
+""">>
+
+次のウィジェットはドラッグアンドドロップ機能に関係します: 
+
+* DraggableWidgetは、ドラッグのための1つ以上のTiddlerを表すドラッグ可能な要素を作成します。
+** ButtonWidgetとLinkWidgetはDraggableWidgetの機能を組み込んでいます
+* DroppableWidgetは、カスタマイズ可能なアクションをトリガーするためにドラッグできるTiddlerに領域を作成します。
+* DropzoneWidgetは、ファイルから、または別のブラウザウィンドウからドラッグアンドドロップして外部Tiddlerをインポートします。
+
+ドラッグアンドドロップ操作の一般的な順序は次のとおりです:
+
+# ユーザーは、DraggableWidget、ButtonWidget、LinkWidgetなどのドラッグ可能な要素上でポインターをクリックダウンしてドラッグします。
+# ドラッグ可能な要素は、クリックが離されるまでマウスポインタとともに移動します。
+# DroppableWidgetなどのドロップ可能な要素の上にポインターを移動すると、アイテムがドロップ可能であることを示すハイライトが表示されます。
+# ドロップ可能な要素でドラッグが終了すると、設定されたアクションが実行されます。

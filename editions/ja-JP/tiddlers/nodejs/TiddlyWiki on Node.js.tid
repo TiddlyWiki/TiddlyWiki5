@@ -1,0 +1,24 @@
+created: 20131129094353704
+modified: 20241227105025118
+original-modified: 20220617114433107
+tags: Platforms
+title: TiddlyWiki on Node.js
+ja-title: Node.js上のTiddlyWiki
+type: text/vnd.tiddlywiki
+
+\rules except wikilink
+
+[[Node.js]]でTiddlyWikiを実行すると、単一ファイルバージョンに比べていくつかの重要な利点が得られます: 
+
+* 個々のTiddlerは別々のファイルに保存され、必要に応じて整理できます。
+
+* 共有コンテンツと独自コンテンツのさまざまな組み合わせをブレンドした複数のWikiを構築する機能
+
+* スマートフォンやタブレットを含むあらゆる最新ブラウザでコンテンツを編集できます
+
+<<.warning """Node.js上のTiddlyWikiは現在、実行中にファイルシステム経由でTiddlerファイルを直接変更することをサポートしていないことに注意してください。変更を有効にするには、サーバーを再起動する必要があります。実行中の Wikiを編集するには、HTTPやJavaScript APIを使用することをお勧めします。""">>
+
+
+詳細については、以下を参照してください: 
+
+<<list-links "[tag[TiddlyWiki on Node.js]]">>

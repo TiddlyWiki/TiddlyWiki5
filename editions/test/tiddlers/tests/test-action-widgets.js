@@ -6,7 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the action widgets.
 
 \*/
-(function(){
+
 
 /* jslint node: true, browser: true */
 /* eslint-env node, browser, jasmine */
@@ -94,5 +94,3 @@ it("should handle the action-listops widget", function() {
 
 });
 
-})();
-	

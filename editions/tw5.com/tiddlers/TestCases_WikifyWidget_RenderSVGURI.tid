@@ -1,0 +1,48 @@
+created: 20241206225533517
+description: Rendering parameterised SVG for use in stylesheets
+tags: $:/tags/wiki-test-spec
+title: TestCases/WikifyWidget/RenderSVGURI
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+The core svg icons use a parameter widget, making their use in stylesheets impossible without wikify.
++
+title: Output
+
+* https://tiddlywiki.com/
+* [[TW5|http://tiddlywiki.com/]]
+* [[Mail me|mailto:me@where.net]]
+* [[Open file|file:///c:/users/me/index.html]]
+
+<style>{{Stylesheet}}</style>
++
+title: Stylesheet
+
+\rules except dash
+\procedure link-icon(protocol,img)
+<$tiddler tiddler=<<img>> >
+  <$wikify name="svg" text={{!!text}} mode="inline" output="html">
+    <$text text=`
+      [href*="$(protocol)$"]{
+        --mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg">$(svg)$</svg>');
+      }
+    `/>
+  </$wikify>
+</$tiddler>
+\end
+
+.tc-tiddlylink-external:after{
+  width:.7rem;
+  aspect-ratio:1;
+  background:currentColor;
+  display: inline-block;
+  mask: center / contain no-repeat var(--mask);
+  margin-inline:.5ch;
+  content:"";
+}
+
+<<link-icon "http:" "$:/core/images/open-window">>
+<<link-icon "https:" "$:/core/images/locked-padlock">>
+<<link-icon "mailto:" "$:/core/images/mail">>
+<<link-icon "file:" "$:/core/images/file">>

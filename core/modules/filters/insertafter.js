@@ -6,10 +6,7 @@ module-type: filteroperator
 Insert an item after another item in a list
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -42,5 +39,3 @@ exports.insertafter = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

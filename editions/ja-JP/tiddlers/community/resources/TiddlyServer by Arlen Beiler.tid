@@ -1,0 +1,30 @@
+caption: ~TiddlyServer
+color: #f06292
+community-author: Arlen Beiler
+created: 20171109171415540
+delivery: DIY
+description: TiddlyWikiのNode.jsサーバーの拡張
+method: sync
+modified: 20241012120223000
+original-modified: 20210106151027596
+tags: Linux Mac Windows Saving [[Other Resources]]
+title: TiddlyServer by Arlen Beiler
+ja-title: Arlen BeilerによるTiddlyServer
+type: text/vnd.tiddlywiki
+url: https://github.com/Arlen22/TiddlyServer
+
+TiddlyWikiのNode.js構成の拡張で、静的添付ファイルのサポートと複数のWikiを同時に操作するためのサポートが追加されます。
+
+{{!!url}}
+
+<<<
+TiddlyServer 2.0は、NodeJS上のTiddlyWikiのサーバーコマンドを取得し、それを静的ファイルサーバーに追加します。つまり、単一のTiddlyWikiファイルを提供するのと同じ方法で、任意のTiddlyWikiデータフォルダーを読み込んで提供できます。
+
+ただし、ファイルやフォルダーを1か所からだけで提供する必要はありません。ハードドライブ上の複数の任意の場所(文字通り、NodeJSがstat、readdir、readFileを実行できる場所)から提供できます。仮想フォルダー(Apacheではエイリアス、Expressではマウントと呼ばれます)に整理することもできます。
+
+もちろん、重要な点は、ファイルを見るだけでなく、実際に編集できることです。単一ファイルのTiddlyWikiはput saverを使用しますが、これはインデックスページに含まれるブックマークレットを使用してパッチを適用する必要があります。この手順については、以下の「注意すべき点」という見出しの下にあります。
+
+そしてもちろん、node tiddlywiki.js data --serverを実行するのと同じように、データフォルダーtiddlywikisを編集できます。ただし、(例: http://localhost/personal/notes/) で見つけたパスで実行することを除きます。データフォルダーは好きなだけいくつでも開くことができ、競合することはありません(ただし、それぞれメモリを消費します)。
+
+データフォルダーには、Wiki全体ではなく、個々のTiddlerが保存されます。コアとプラグインも保存されないため、ディスク容量が少なくて済みます。つまり、特にインターネット経由では、保存がはるかに速くなります。また、すぐに(10秒以内で)保存され、下書きも保存されます。
+<<<

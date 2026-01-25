@@ -1,0 +1,151 @@
+caption: 5.1.10
+created: 20160107231609312
+modified: 20160107231609312
+tags: ReleaseNotes
+title: Release 5.1.10
+type: text/vnd.tiddlywiki
+released: 20160107231609312
+description: Text slicer, fold/unfold, performance optimisations, translations, external text tiddlers
+
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.9...v5.1.10]]//
+
+! Major Improvements
+
+!! Performance Optimisations
+
+This release includes several low-level performance optimisations that should improve speed and responsiveness in many common operations.
+
+* [[Caching the results of parsing a tiddler|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b0cb17cd83dde89753ec159e27c920a7bf22bee1]]
+* [[Loop optimisations|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c6e48ebc2db4af895f5b3935b3f575b8aab292fe]]
+* [[Tiddler iteration optimisations|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8f63e2a959a7ac44533ae2b6192716ee17a1ce93]]
+* [[State qualifier generation|https://github.com/TiddlyWiki/TiddlyWiki5/commit/848a7f4e744c8f4dcb4ec88a0e99c4ae6aac25e5]]
+* [[Caching data tiddlers|https://github.com/TiddlyWiki/TiddlyWiki5/commit/32f6d7f1b01474b82debcbdd5d76c49c59303265]]
+* [[Removed expensive visual effects|https://github.com/TiddlyWiki/TiddlyWiki5/commit/4f5cf4597abb08af787b62c2e2ee1b8c667dad1e]]
+
+There is a new setting in the control panel to enable performance instrumentation, making it much easier to measure and improve performance issues.
+
+!! New Editions
+
+Three new editions of TiddlyWiki are included in this release. These can be used as starting points for creating your own wiki for several purposes:
+
+* The [[Résumé Builder Edition]] by @inmysocks is a custom edition to guide you through the process of using TiddlyWiki to create a good looking résumé (or curriculum vitæ)
+* The [[Blog Edition]] provides tools for using TiddlyWiki under Node.js to create a static HTML blog that can be published on GitHub pages (or similar)
+* The [[Text-Slicer Edition]] is a custom edition with tools to help advanced users slice longer texts up into individual tiddlers.
+
+!! External Text Tiddlers
+
+Limited support for tiddlers stored in external `.tid` files:
+
+* standalone TiddlyWiki HTML files with external text tiddlers can be built under Node.js
+* wikis with external text tiddlers can be worked with in the browser, automatically lazily loading the content of external text tiddlers when it is first referenced
+** saving changes in the browser doesn't work as expected: if edited, the external text tiddler is replaced with an ordinary tiddler
+** lazy loading of external text tiddlers doesn't work in Chrome when viewing the TiddlyWiki HTML file on a ''file:'' URI; it works OK in Firefox
+** lazy loading works on an HTTP URI on all browsers as long as the target file is either stored on the same domain or is served by a [[server that supports CORS|https://en.wikipedia.org/wiki/Cross-origin_resource_sharing]]
+
+See [[Alice in Wonderland]] for an example. Try opening it without a network connection.
+
+!! New "Tight" Theme
+
+A new theme called "Tight" uses reduced padding, margins and font-sizes to pack as much text as possible:
+
+<$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/tight"/>
+Try it out
+</$button> <$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
+Revert
+</$button>
+
+! Other Improvements
+
+!! Translation Improvements
+
+* Added Swedish translation by @Superdos
+* Added Korean (Korean Republic) translation by @araname
+* Improved Catalan, Chinese, Danish, Dutch, French, German, Italian, Russian and Spanish translations
+
+!! Usability Improvements
+
+* [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e6529af04e004b59093921f74758ac7132e1b19d]] the tiddler editor to accept new fields and tags when clicking confirm, without having to click "Add tag" or "Add field"
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5d43cd740863be188e43fd49893dc8dddcd5b937]] new ''fold'' and ''fold others'' buttons to the tiddler toolbar to temporarily hide the body of a tiddler, and also [[added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ac08dc2e35d99eb563ab8c4449ce1fcfe30f3bf7]] new ''fold all'' and ''unfold all'' page buttons
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d5e690a06d523a2047eaf9b623b633bb72c18af9]] ability to disable individual WikiText parser rules (see the ''Advanced'' tab of $:/ControlPanel). Also [[added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/58188cf8053bef87dbe97e4b05cdba67f75c615d]] a simple setting for disabling automatic linking of ~CamelCase words
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/2cb6400773096b02b71c1851fb0fac5dfefbbd6f]] support for automatically linked system tiddler titles to include digits and underscore
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/2c9b1ae2579f8d2452c60217aa3e153a29d32d1f]] warning when trying to use plugins designed for TiddlyWiki Classic
+* Upgraded to version v8.8.0 of highlight.js for the [[Highlight Plugin]]
+* [[Removed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/1981]] the need to manually confirm deleting alerts
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2147]] optional tooltips to [[tabs Macro]]
+
+!! Hackability Improvements
+
+* Updated to KaTeX v0.5.1, with [[several new features|https://github.com/Khan/KaTeX/releases]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e0aacc84d5f084ff7a53153c590fbff3d24f2e2c]] `publishFilter` to default save template
+* [[Allow|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7dddc925ae93725552b98bc348a07572895da96c]] ''delete'' button to be used in the tiddler view-mode toolbar
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/742161675421a942051abed01cb47c0394f4db6d]] a new [[hidden setting for keyboard shortcuts|Hidden Setting: Keyboard Shortcuts]]
+* [[Update|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e5cd8313a0d1a4a3dea17457a8a883675243b9c7]] ActionSetFieldWidget to allow timestamp to be preserved
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/fdce67399d175a9911df908981b83ac3edfb1142]] option to suppress navigation for edit/cancel/save
+* [[Enhance|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5176f008f0bc15751e36933c95ae299c1ee5971a]] SaveTiddlersCommand with do not delete option
+* [[Enhance|https://github.com/TiddlyWiki/TiddlyWiki5/commit/4ccdaf3fafda2f1d0766ed69c68d030a7db2bbc6]] RenderTiddlerCommand with template option
+* [[Extend|https://github.com/TiddlyWiki/TiddlyWiki5/commit/51d771a07493f91c32145b69e4f5534724416d2e]] tm-open-window to pass variables
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7b8928886bf101b0cf4a8cc2d2dd2e576ec1c8d8]] new utility method `$tw.utils.tagToCssSelector(tagName)` for converting tag titles into a form suitable for matching the `tc-tagged-*` [[classes generated by TiddlyWiki|How to apply custom styles by tag]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/99df9f46f7cc4c1d3aa0320347f9b6c1bc458c60]] support for tiddlers containing mp4 videos
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/fd997c45814e6bb5b576137bf62bad5575b0a28c]] the ActionSetFieldWidget to enable it to be used to delete a field or indexed property
+* [[Made|https://github.com/TiddlyWiki/TiddlyWiki5/commit/746aab2cf6bbe3c1905efd5caf80e40e23b914b0]] the tw5.com documentation available as a plugin and an [[edition|https://tiddlywiki.com/editions/tw5.com-docs/index.html]], simplifying some scenarios for re-using it
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0035a0046315ee0203b1adfb75efdbb0e854a7f6]] rendering of "More" sidebar tab gradients in the "Snow White" theme
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/33563d01baed4b4092fc834eb6a1df55e1671418]] option in [[control panel|$:/ControlPanel]] to enable the display of detailed performance instrumentation in the browser developer console
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/bc0cbf907063ccd484da7d56c8e42cf5e90489b8]] a LazyLoading template for all non-system tiddlers
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/issues/1984]] handling of TiddlerLinks in Markdown tiddlers
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2004]] FieldManglerWidget to create the target tiddler if it does not exist
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2049]] KeyboardWidget to trigger ActionWidgets
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2074]] SelectWidget to support multiple selections
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/1909]] new [[days Operator]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/231d0a3dc8385fcb2173436754f00f464d7b018e]] official plugin wrappers for the JavaScript libraries [[async.js|https://github.com/caolan/async]] and [[JSZip|https://stuk.github.io/jszip/]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2037]] new ActionListopsWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/791f97983e8bbbbb209cf0e7068f858dfd2d38eb]] ''rows'' attribute to EditTextWidget
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/issues/1882]] problem introduced in 5.1.9 with processing `tiddlywiki.info` files
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3fbf29093b32c00941b0c03951250de7c0cc8d6f]] problem with invisible icons in $:/AdvancedSearch
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/862e358b57fde74595420e7948bf44fdadf690dc]] check for required plugins in ServerCommand
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/709126dd643207adab725569c214f8617c28fbeb]] problem with queueing change events for deleting non-existent tiddlers
+* [[Ensure|https://github.com/TiddlyWiki/TiddlyWiki5/commit/85553609b10ccc813662c867d4043e5df78efcec]] EditTextWidget fixes height even if refresh isn't required
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8a763e9d838fcb571d12c4175952cd4e15e95e00]] the gradient on the sidebar tabs divider
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/6add992bf2e9cedd077c74c3471758bbe9d6e1b2]] problem with tiddler titles such as `$:/templates/something` being erroneously classed as `$:/temp` tiddlers, and so excluded from syncing
+* [[Switched|https://github.com/TiddlyWiki/TiddlyWiki5/commit/acbf87657b6c88719148266100b91a61e29a0546]] to absolute date format in tiddler subtitles
+
+!! Node.js Improvements
+
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/dc020276b07fd0ec365c13000eb868a87a3376b9]] problem with the filesystem adaptor saving new image files as base64-encoded .tid files instead of as native binary files with an accompanying `.meta` file
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/803d70225a2ce1f1f7992e493bbaf7a78b15c04d]] `tiddlywiki.files` support in TiddlyWikiFolders to allow directories to be loaded recursively, as well as individual files
+
+!! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@afeldspar|https://github.com/afeldspar]]
+* [[@araname|https://github.com/araname]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@danielo515|https://github.com/danielo515]]
+* [[@Drakor|https://github.com/Drakor]]
+* [[@erwanm|https://github.com/erwanm]]
+* [[@felixhayashi|https://github.com/felixhayashi]]
+* [[@Evolena|https://github.com/Evolena]]
+* [[@hegart-dmishiv|https://github.com/hegart-dmishiv]]
+* [[@idoine|https://github.com/idoine]]
+* [[@inmysocks|https://github.com/inmysocks]]
+* [[@IreneKnapp|https://github.com/IreneKnapp]]
+* [[@gernert|https://github.com/gernert]]
+* [[@kixam|https://github.com/kixam]]
+* [[@Marxsal|https://github.com/Marxsal]]
+* [[@matabele|https://github.com/matabele]]
+* [[@mklauber|https://github.com/mklauber]]
+* [[@nameanyone|https://github.com/nameanyone]]
+* [[@pmario|https://github.com/pmario]]
+* [[@senevoldsen90|https://github.com/senevoldsen90]]
+* [[@Spangenhelm|https://github.com/Spangenhelm]]
+* [[@spelufo|https://github.com/spelufo]]
+* [[@SuperDOS|https://github.com/SuperDOS]]
+* [[@tgrosinger|https://github.com/tgrosinger]]
+* [[@tobibeer|https://github.com/tobibeer]]
+* [[@xcazin|https://github.com/xcazin]]
+* [[@zahlman|https://github.com/zahlman]]

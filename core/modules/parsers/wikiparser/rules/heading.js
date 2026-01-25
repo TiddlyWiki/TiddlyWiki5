@@ -6,10 +6,7 @@ module-type: wikirule
 Wiki text block rule for headings
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "heading";
@@ -30,17 +27,18 @@ exports.parse = function() {
 	// Move past the !s
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse any classes, whitespace and then the heading itself
+	var classStart = this.parser.pos;
 	var classes = this.parser.parseClasses();
+	var classEnd = this.parser.pos;
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	var tree = this.parser.parseInlineRun(/(\r?\n)/mg);
 	// Return the heading
 	return [{
 		type: "element",
-		tag: "h" + headingLevel, 
+		tag: "h" + headingLevel,
 		attributes: {
-			"class": {type: "string", value: classes.join(" ")}
+			"class": {type: "string", value: classes.join(" "), start: classStart, end: classEnd}
 		},
 		children: tree
 	}];
 };
-})();

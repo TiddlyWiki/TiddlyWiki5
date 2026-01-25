@@ -3,5 +3,6 @@
 	"name": "CodeMirror Show Trailing Space",
 	"description": "Show trailing space in CodeMirror",
 	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
 }

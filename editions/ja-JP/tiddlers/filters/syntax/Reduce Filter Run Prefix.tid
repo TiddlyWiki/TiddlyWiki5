@@ -1,0 +1,49 @@
+created: 20211124151912931
+from-version: 5.1.23
+modified: 20250417105804821
+original-modified: 20230710073305239
+rp-input: 前回のフィルタランからのすべてのフィルタアウトプット
+rp-output: 累積された単一アイテム
+rp-purpose: 各インプットタイトルにフィルタランを繰り返し適用して、前回までのすべてのフィルタアウトプットを単一の項目に置き換え
+tags: [[Named Filter Run Prefix]]
+title: Reduce Filter Run Prefix
+ja-title: reduceフィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+
+<$railroad text="""
+\start none
+\end none
+( ":reduce" | - )
+[["ラン"|"Filter Run"]]
+"""/>
+
+
+前回のランからの各インプットタイトルは、順番にこのランに渡されます。このランへの以前の呼び出しの結果は、変数<<.var accumulator>>を介して次の呼び出しで使用できます。このランへの最後の呼び出しの結果がアウトプットとして返されます。典型的な使用法は、各インプットタイトルの特定のフィールドの値を合計することです。
+
+上記のように、数式を各インプットタイトルに繰り返し適用して、これまでのすべてのフィルタアウトプットを1つの項目に置き換えます。
+
+フィルタラン内では、次の変数を使用できます:
+
+* <<.var accumulator>> - 前回のフィルタランの結果
+* <<.var currentTiddler>> - インプットタイトル
+* <<.var ..currentTiddler>> - フィルタラン外での変数`currentTiddler`の値。 <<.from-version "5.2.0">>
+* <<.var index>> - 現在のリスト項目の数値インデックス(リストの最初の項目は0)
+* <<.var revIndex>> - 現在のリスト項目の逆の数値インデックス(リストの最後の項目は0)
+* <<.var length>> - インプットリストの長さの合計
+
+<<.tip "名前付きフィルタランプレフィックス`:reduce`を、サブフィルタを繰り返し適用して項目リストを1つの項目に平坦化するために使用される[[reduceオペレータ|reduce Operator]]`:reduce`と比べてください。">> 
+
+```
+[tag[shopping]] :reduce[get[quantity]add<accumulator>]
+```
+
+は以下と同等です:
+
+```
+\define num-items() [get[quantity]add<accumulator>]
+
+[tag[shopping]reduce<num-items>]
+```
+
+[[reduceフィルタランプレフィックス(例)|Reduce Filter Run Prefix (Examples)]]

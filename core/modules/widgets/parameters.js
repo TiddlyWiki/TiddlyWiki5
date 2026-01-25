@@ -6,10 +6,7 @@ module-type: widget
 Widget for definition of transclusion parameters
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
@@ -74,6 +71,18 @@ ParametersWidget.prototype.execute = function() {
 				self.setVariable(variableName,getValue(name));
 			}
 		});
+	} else {
+		// There is no parent transclude. i.e. direct rendering.
+		// We use default values only.
+		$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(self.parseTreeNode),function(attr,index) {
+			var name = attr.name;
+			// If the attribute name starts with $$ then reduce to a single dollar
+			if(name.substr(0,2) === "$$") {
+				name = name.substr(1);
+			}
+			var value = self.getAttribute(attr.name,"");
+			self.setVariable(name,value);
+		});
 	}
 	// Construct the child widgets
 	this.makeChildWidgets();
@@ -92,5 +101,3 @@ ParametersWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.parameters = ParametersWidget;
-
-})();
