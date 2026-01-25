@@ -4,6 +4,8 @@ tags: [[Filter Expression]]
 title: Filter Run Prefix
 type: text/vnd.tiddlywiki
 
+TODO:docs-default-prefix-for-subfilter: Link to how the default filter run prefix can be specified
+
 There are 2 types of filter run prefixes that are interchangeable; [[named prefixes|Named Filter Run Prefix]] and [[shortcut prefixes|Shortcut Filter Run Prefix]]. 
 
 <$railroad text="""

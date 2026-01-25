@@ -72,8 +72,8 @@ GenesisWidget.prototype.execute = function() {
 	this.attributeNames = [];
 	this.attributeValues = [];
 	if(this.genesisNames && this.genesisValues) {
-		this.attributeNames = this.wiki.filterTiddlers(self.genesisNames,this);
-		this.attributeValues = this.wiki.filterTiddlers(self.genesisValues,this);
+		this.attributeNames = this.wiki.filterTiddlers(self.genesisNames,this,{defaultFilterRunPrefix: "all"});
+		this.attributeValues = this.wiki.filterTiddlers(self.genesisValues,this,{defaultFilterRunPrefix: "all"});
 		$tw.utils.each(this.attributeNames,function(varname,index) {
 			$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],varname,self.attributeValues[index] || "");
 		});
@@ -103,8 +103,8 @@ GenesisWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes(),
 		filterNames = this.getAttribute("$names",""),
 		filterValues = this.getAttribute("$values",""),
-		attributeNames = this.wiki.filterTiddlers(filterNames,this),
-		attributeValues = this.wiki.filterTiddlers(filterValues,this);
+		attributeNames = this.wiki.filterTiddlers(filterNames,this,{defaultFilterRunPrefix: "all"}),
+		attributeValues = this.wiki.filterTiddlers(filterValues,this,{defaultFilterRunPrefix: "all"});
 	if($tw.utils.count(changedAttributes) > 0 || !$tw.utils.isArrayEqual(this.attributeNames,attributeNames) || !$tw.utils.isArrayEqual(this.attributeValues,attributeValues)) {
 		this.refreshSelf();
 		return true;

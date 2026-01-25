@@ -13,7 +13,9 @@ Filter operator returning those input titles that pass a subfilter
 Export our filter function
 */
 exports.filter = function(source,operator,options) {
-	var filterFn = options.wiki.compileFilter(operator.operand),
+	var suffixes = operator.suffixes || [],
+		defaultFilterRunPrefix = (suffixes[0] || [options.defaultFilterRunPrefix] || [])[0] || "or",
+		filterFn = options.wiki.compileFilter(operator.operand,{defaultFilterRunPrefix}),
 		results = [],
 		target = operator.prefix !== "!";
 	source(function(tiddler,title) {

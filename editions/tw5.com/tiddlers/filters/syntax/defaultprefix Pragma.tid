@@ -1,0 +1,13 @@
+created: 20260122212128206
+modified: 20260122212128206
+tags: [[Filter Pragma]]
+title: defaultprefix Filter Pragma
+type: text/vnd.tiddlywiki
+
+TODO:docs-default-prefix-for-subfilter: Purpose and docs of new pragma
+
+A <<.def "defaultprefix filter pragma">> is used to set the default [[Filter Run Prefix]] for the remainder of the filter expression. This allows users to control deduplication behavior without having to specify prefixes for each individual operation.
+
+Any of the [[named prefixes|Named Filter Run Prefix]] can be specified as the default prefix, but `all` is the most commonly used value to disable deduplication.
+
+
