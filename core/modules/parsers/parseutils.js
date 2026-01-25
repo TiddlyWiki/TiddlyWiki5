@@ -114,7 +114,7 @@ exports.parseStringLiteral = function(source,pos) {
 		node.value = match[1] !== undefined ? match[1] :(
 			match[2] !== undefined ? match[2] : (
 				match[3] !== undefined ? match[3] : match[4]
-					));
+			));
 		node.end = pos + match[0].length;
 		return node;
 	} else {
@@ -209,11 +209,11 @@ Look for a macro invocation. Returns null if not found, or {type: "transclude", 
 exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 // console.log("parseMacroInvocationAsTransclusion",source,pos);
 	var node = {
-			type: "transclude",
-			start: pos,
-			attributes: {},
-			orderedAttributes: []
-		};
+		type: "transclude",
+		start: pos,
+		attributes: {},
+		orderedAttributes: []
+	};
 	// Define our regexps
 	var reVarName = /([^\s>"'=:]+)/g;
 	// Skip whitespace
