@@ -266,7 +266,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		assignVar(name,JSON.stringify(obj));
 	};
 	const getBoundingRect = node => node.getBoundingClientRect && node.getBoundingClientRect();
-	const assignOffsetAndPopupRect = (node) => {
+	const assignOffsetAndPopupRect = node => {
 		if(!node || !("offsetLeft" in node)) {
 			return;
 		}
