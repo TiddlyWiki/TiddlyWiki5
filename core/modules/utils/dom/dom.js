@@ -260,24 +260,13 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		selectedNodeRect,
 		domNodeRect;
 
-	const assignVar = (name,value) => {
-		variables[name] = value.toString();
+	const assignVar = (name,value) => variables[name] = value.toString();
+	const assignJSONVariable = (name,obj) => {
+		obj = $tw.utils.copyObjectPropertiesSafe(obj);
+		assignVar(name,JSON.stringify(obj));
 	};
-
-	const assignRectVariables = (prefix,rect) => {
-		["left", "top", "width", "height"].forEach(prop => {
-			assignVar(prefix + "-" + prop, rect[prop]);
-		});
-	};
-
-	const getBoundingRect = (node) => { 
-		if(node && typeof node.getBoundingClientRect === "function") {
-			return node.getBoundingClientRect();
-		}
-		return null;
-	};
-
-	function assignOffsetAndPopupRect(node,prefix) {
+	const getBoundingRect = node => node.getBoundingClientRect? node.getBoundingClientRect() : null;
+	const assignOffsetAndPopupRect = (node,prefix) => {
 		if(!node || !("offsetLeft" in node)) {
 			return;
 		}
@@ -309,22 +298,18 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		assignOffsetAndPopupRect(selectedNode,"tv-selectednode");
 		selectedNodeRect = getBoundingRect(selectedNode);
 		if(selectedNodeRect) {
-			assignRectVariables("tv-selectednode-client",selectedNodeRect);
+			assignJSONVariable("tv-selectednode-rect",selectedNodeRect);
 		}
 	}
 
 	// --- Widget node ---
 	if(domNode && ("offsetWidth" in domNode)) {
-		assignRectVariables("tv-widgetnode",{
-			left: 0,
-			top: 0,
-			width: domNode.offsetWidth,
-			height: domNode.offsetHeight
-		});
+		assignVar("tv-widgetnode-width", domNode.offsetWidth);
+		assignVar("tv-widgetnode-height", domNode.offsetHeight);
 
 		domNodeRect = getBoundingRect(domNode);
 		if(domNodeRect) {
-			assignRectVariables("tv-widgetnode-client",domNodeRect);
+			assignJSONVariable("tv-widgetnode-rect",domNodeRect);
 		}
 	}
 
