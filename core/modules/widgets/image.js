@@ -126,12 +126,8 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 		$tw.utils.addClass(domNode,"tc-image-loaded");
 		if(this.loadedActions) {
 			var variables = $tw.utils.collectDOMVariables(domNode,null,event);
-			variables["image-natural-width"] = domNode.naturalWidth.toString();
-			variables["image-natural-height"] = domNode.naturalHeight.toString();
-			variables["window-content-width"] = window.innerWidth.toString();
-			variables["window-content-height"] = window.innerHeight.toString();
-			//this might be an excellent place to collect DOM node properties TODO:
-			//variables["dom-properties"] = $tw.utils.copyObjectPropertiesSafe(domNode);
+			variables["img-natural-width"] = domNode.naturalWidth.toString();
+			variables["img-natural-height"] = domNode.naturalHeight.toString();
 			self.invokeActionString(self.loadedActions,self,event,variables);		
 		}
 	},false);
