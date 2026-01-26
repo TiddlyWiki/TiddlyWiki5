@@ -316,8 +316,25 @@ $tw.utils.htmlDecode = function(s) {
 	return s.toString().replace(/&lt;/mg,"<").replace(/&nbsp;/mg,"\xA0").replace(/&gt;/mg,">").replace(/&quot;/mg,"\"").replace(/&amp;/mg,"&");
 };
 
-/** @deprecated Use window.location.hash instead.  */
-$tw.utils.getLocationHash = () => window.location.hash;
+/*
+Get the browser location.hash. We don't use location.hash because of the way that Firefox auto-urldecodes it (see http://stackoverflow.com/questions/1703552/encoding-of-window-location-hash)
+*/
+$tw.utils.getLocationHash = function() {
+	const href = window.location.href,
+		idx = href.indexOf("#");
+
+	if(idx === -1) {
+		return "#";
+	}
+
+	const afterHash = href.substring(idx + 1);
+	if(afterHash.startsWith("#") || afterHash.startsWith("%23")) {
+		// Special case: ignore location hash if it itself starts with a #
+		return "#";
+	}
+	return href.substring(idx);
+};
+
 
 /** @deprecated Pad a string to a given length with "0"s. Length defaults to 2 */
 $tw.utils.pad = function(value,length = 2) {
