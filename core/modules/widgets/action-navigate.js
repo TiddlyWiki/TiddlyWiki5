@@ -34,6 +34,7 @@ Compute the internal state of the widget
 NavigateWidget.prototype.execute = function() {
 	this.actionTo = this.getAttribute("$to");
 	this.actionScroll = this.getAttribute("$scroll");
+	this.actionActions = this.getAttribute("$actions");
 };
 
 /*
@@ -41,7 +42,7 @@ Refresh the widget by ensuring our attributes are up to date
 */
 NavigateWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["$to"] || changedAttributes["$scroll"]) {
+	if(changedAttributes["$to"] || changedAttributes["$scroll"] || changedAttributes["$actions"]) {
 		this.refreshSelf();
 		return true;
 	}
@@ -78,7 +79,10 @@ NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		ctrlKey: event.ctrlKey,
 		altKey: event.altKey,
 		shiftKey: event.shiftKey,
-		event: event
+		event: event,
+		paramObject: {
+			actions: this.actionActions
+		}
 	});
 	return true; // Action was invoked
 };

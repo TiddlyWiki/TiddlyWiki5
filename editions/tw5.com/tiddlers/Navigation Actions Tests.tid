@@ -1,0 +1,13 @@
+created: 20260113164017104
+modified: 20260113183019240
+tags: 
+title: Navigation Actions Tests
+
+\procedure scroll-to-top()
+    <$action-sendmessage $message="tm-scroll" selector='.tc-story-river' />
+\end
+
+<$button actions="""<$action-navigate $to="HelloThere" $actions="<<scroll-to-top>>" />""" >navigate-procedure</$button>
+<$button actions="""<$action-navigate $to="HelloThere" $actions="<$action-sendmessage $message='tm-scroll' selector='.tc-story-river' />" />""" >navigate-sendmessage</$button>
+
+<$button actions="<<scroll-to-top>>" >scroll-test</$button>

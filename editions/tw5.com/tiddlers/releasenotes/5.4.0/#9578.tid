@@ -1,0 +1,21 @@
+title: $:/changenotes/5.4.0/#9578
+description: Add post-navigate actions support to tm-navigate message
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9578
+github-contributors: yaisog
+
+The `tm-navigate` message now supports executing WikiText action strings after the navigation refresh has completed. This enables actions that require the DOM to be fully updated, such as focusing UI elements that are only available after the navigation.
+
+!! Implementation
+
+The navigator widget now:
+
+* Accepts an `actions` parameter in the `event.paramObject` containing a WikiText action string
+* Queues these actions during `handleNavigateEvent`
+* Executes them after the refresh cycle completes, using a `setTimeout` delay based on `$:/config/AnimationDuration` to ensure the DOM is fully updated and animations have finished
+* Invokes actions in the context of the widget that sent the tm-navigate message, ensuring proper variable/procedure evaluation and message propagation
+
+The action-navigate widget has been extended with a new `$actions` attribute that passes the action string to the navigator.
