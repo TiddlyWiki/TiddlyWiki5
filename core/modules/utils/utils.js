@@ -980,3 +980,56 @@ exports.makeCompareFunction = function(type,options) {
 		};
 	return (types[type] || types[options.defaultType] || types.number);
 };
+
+/*
+Split text into parts (lines or words) for diff operations
+Adapted from https://github.com/google/diff-match-patch/wiki/Line-or-Word-Diffs
+*/
+exports.diffPartsToChars = function(text1,text2,mode) {
+	const lineArray = [""],
+		lineHash = Object.create(null);
+
+	function diff_linesToPartsMunge_(text,mode) {
+		let chars = "",
+			lineStart = 0,
+			lineEnd = -1,
+			lineArrayLength = lineArray.length,
+			regexpResult;
+		const searchRegexp = /\W+/g;
+		while(lineEnd < text.length - 1) {
+			if(mode === "words") {
+				regexpResult = searchRegexp.exec(text);
+				lineEnd = searchRegexp.lastIndex;
+				if(regexpResult === null) {
+					lineEnd = text.length;
+				}
+				lineEnd = --lineEnd;
+			} else {
+				lineEnd = text.indexOf("\n", lineStart);
+				if(lineEnd === -1) {
+					lineEnd = text.length - 1;
+				}
+			}
+			let line = text.substring(lineStart, lineEnd + 1);
+
+			if(line in lineHash) {
+				chars += String.fromCharCode(lineHash[line]);
+			} else {
+				if(lineArrayLength === maxLines) {
+					line = text.substring(lineStart);
+					lineEnd = text.length;
+				}
+				chars += String.fromCharCode(lineArrayLength);
+				lineHash[line] = lineArrayLength;
+				lineArray[lineArrayLength++] = line;
+			}
+			lineStart = lineEnd + 1;
+		}
+		return chars;
+	}
+	let maxLines = 40000;
+	const chars1 = diff_linesToPartsMunge_(text1,mode);
+	maxLines = 65535;
+	const chars2 = diff_linesToPartsMunge_(text2,mode);
+	return {chars1, chars2, lineArray};
+};
