@@ -1,8 +1,8 @@
-caption: tm-full-screen
-created: 20140811112400855
-modified: 20180814215126941
-tags: Messages
+﻿created: 20140811112400855
 title: WidgetMessage: tm-full-screen
+caption: tm-full-screen
+modified: 20260106171726825
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The fullscreen message is used to enter, exit or toggle the "fullscreen" mode of the browser, if it supports it. It uses the following properties on the `event` object:

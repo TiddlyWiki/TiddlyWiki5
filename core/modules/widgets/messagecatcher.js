@@ -59,8 +59,11 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 						{},
 						collectProps(event.paramObject,"event-paramObject"),
 						collectProps(event,"event"),
+						collectProps(event.paramObject,"message-paramObject"),
+						collectProps(event,"message"),
 						{
-							modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event)
+							modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event),
+							"json-message": JSON.stringify($tw.utils.copyObjectPropertiesSafe(event,{excludeProperties: ["event"]}))
 						});
 					isActionStringExecuting = true;
 					self.invokeActionString(actions,self,event,variables);
@@ -69,7 +72,7 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 				}
 			);
 		}
-	}
+	};
 	// Add the main event handler
 	addEventHandler(this.getAttribute("type"),this.getAttribute("actions"));
 	// Add any other event handlers

@@ -1,8 +1,8 @@
-caption: tm-relink-tiddler
-created: 20220219093748993
-modified: 20220219093748993
-tags: Messages navigator-message
+﻿created: 20220219093748993
 title: WidgetMessage: tm-relink-tiddler
+caption: tm-relink-tiddler
+modified: 20260106172358797
+tags: [[NavigatorWidget Message]] [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 <<.from-version "5.2.2">> The `tm-relink-tiddler` message relinks a tiddler by deleting it and recreating it with a new title. Unlike the [[WidgetMessage: tm-rename-tiddler]] message, this message does not rename the tiddler, it just relinks the references to it.

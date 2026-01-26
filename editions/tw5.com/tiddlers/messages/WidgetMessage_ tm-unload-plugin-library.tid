@@ -1,8 +1,8 @@
-caption: tm-unload-plugin-library
-created: 20191004112527669
-modified: 20191004113621714
-tags: Messages
+﻿created: 20191004112527669
 title: WidgetMessage: tm-unload-plugin-library
+caption: tm-unload-plugin-library
+modified: 20260106171726826
+tags: [[Core Messages]]
 type: text/vnd.tiddlywiki
 
 The `tm-unload-plugin-library` message unloads the specified plugin library and deletes associated temporary tiddlers.

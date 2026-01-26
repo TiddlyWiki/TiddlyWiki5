@@ -225,6 +225,72 @@ exports.extendDeepCopy = function(object,extendedProperties) {
 	return result;
 };
 
+/*
+Safely copy object properties, filtering out circular references, DOM elements, 
+widgets, and functions.
+	object: the object to copy
+	options: optional object with the following property:
+		excludeProperties: array of property paths to exclude from the copy
+			- Top-level exclusions: ["propertyName"]
+			- Nested exclusions: ["parent.child", "parent.grandchild.property"]
+Returns a new object with safely copied properties
+*/
+exports.copyObjectPropertiesSafe = function(object,options) {
+	options = options || {};
+	const excludeProperties = options.excludeProperties || [];
+	const seen = new Set();
+  
+	const isDOMElement = value => value instanceof Node || value instanceof Window;
+  
+	const safeCopy = (obj, path = "") => {
+		//skip circular references
+		if(seen.has(obj)) {
+			return undefined;
+		}
+		//skip functions
+		if(typeof obj !== "object" || obj === null) {
+			return obj;
+		}
+		//skip DOM elements
+		if(isDOMElement(obj)) {
+			return undefined;
+		}
+		//skip widgets (have parseTreeNode and are not plain objects)
+		if(obj.parseTreeNode !== undefined && obj.constructor !== Object) {
+			return undefined;
+		}
+		//copy each element of the array
+		if(Array.isArray(obj)) {
+			return obj.map(item => safeCopy(item, path))
+				.filter(item => item !== undefined);
+		}
+
+		seen.add(obj);
+		const copy = {};
+		for(const key in obj) {
+			// Build the full path for this property
+			const fullPath = path ? `${path}.${key}` : key;
+			// Skip if this exact path is excluded
+			if(excludeProperties.includes(fullPath)) {
+				continue;
+			}
+			try {
+				const value = safeCopy(obj[key], fullPath);
+				if(value !== undefined) {
+					copy[key] = value;
+				}
+			} catch(e) {
+				// Skip unserializable items
+			}
+		}
+		return copy;
+	};
+
+	const result = safeCopy(object);
+	seen.clear();
+	return result;
+};
+
 exports.deepFreeze = function deepFreeze(object) {
 	var property, key;
 	if(object) {
