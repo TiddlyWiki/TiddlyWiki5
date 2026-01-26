@@ -1,10 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/wikitext-serialize/utils/parsetree.js
+title: $:/plugins/tiddlywiki/markdown-to-tid/utils/parsetree.js
 type: application/javascript
 module-type: utils
 
 Parse tree utility functions.
-
 \*/
 
 "use strict";
@@ -92,3 +91,9 @@ exports.serializeAttribute = function(node,options) {
 	}
 	return attributeString;
 };
+
+// Export to global $tw.utils
+if($tw && $tw.utils) {
+	$tw.utils.serializeWikitextParseTree = exports.serializeWikitextParseTree;
+	$tw.utils.serializeAttribute = exports.serializeAttribute;
+}

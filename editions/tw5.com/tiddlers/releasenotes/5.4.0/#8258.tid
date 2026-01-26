@@ -16,6 +16,7 @@ There is also a utility `serializeAttribute` for a single attribute node, like a
 * Programmatically manipulating wikitext content by modifying the AST, and use this to write it back
 * Building WYSIWYG editors
 * Creating wikitext formatters and linters
+* Converting Markdown to WikiText
 
 !! Implementation
 
@@ -24,6 +25,7 @@ There is also a utility `serializeAttribute` for a single attribute node, like a
 * Test suite with tag `$:/tags/wikitext-serialize-test-spec`
 * It uses each parser's name as rule (`nextMatch.rule.name`), each AST node that needs serialization has a `type` property matching the rule name
 ** HTML tags and widgets are handled by the `html` serializer
+* Optional markdown-to-wikitext conversion module
 
 !! Example Usage
 
@@ -34,5 +36,7 @@ var parseTree = $tw.wiki.parseTiddler("MyTiddler").tree;
 // Serialize AST back to wikitext string
 var wikitextString = $tw.utils.serializeWikitextParseTree(parseTree).trimEnd();
 ```
+
+See the [[plugin readme|$:/plugins/tiddlywiki/wikitext-serialize/readme]] for full documentation.
 
 This feature offers new tools for JS plugin developers. It is not a user-facing change.
