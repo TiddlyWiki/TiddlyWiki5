@@ -45,7 +45,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create element
 	// Determine what type of image it is
-	var tag = "img", src = "",
+	var tag = "img", src = "", self = this,
 		tiddler = this.wiki.getTiddler(this.imageSource);
 	if(!tiddler) {
 		// The source isn't the title of a tiddler, so we'll assume it's a URL
@@ -124,7 +124,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	domNode.addEventListener("load",function(event) {
 		$tw.utils.removeClass(domNode,"tc-image-loading");
 		$tw.utils.addClass(domNode,"tc-image-loaded");
-		if(this.loadedActions) {
+		if(self.loadedActions) {
 			var variables = $tw.utils.collectDOMVariables(domNode,null,event);
 			variables["img-natural-width"] = domNode.naturalWidth.toString();
 			variables["img-natural-height"] = domNode.naturalHeight.toString();
