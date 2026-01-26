@@ -256,63 +256,101 @@ exports.copyToClipboard = function(text,options) {
 Collect DOM variables
 */
 exports.collectDOMVariables = function(selectedNode,domNode,event) {
-	var variables = {},
-	    selectedNodeRect,
-	    domNodeRect;
-	if(selectedNode) {
-		$tw.utils.each(selectedNode.attributes,function(attribute) {
-			variables["dom-" + attribute.name] = attribute.value.toString();
+	let variables = {},
+		selectedNodeRect,
+		domNodeRect;
+
+	const assignVar = (name,value) => {
+		variables[name] = value.toString();
+	};
+
+	const assignRectVariables = (prefix,rect) => {
+		["left", "top", "width", "height"].forEach(prop => {
+			assignVar(prefix + "-" + prop, rect[prop]);
 		});
-		
-		if("offsetLeft" in selectedNode) {
-			// Add variables with a (relative and absolute) popup coordinate string for the selected node
-			var nodeRect = {
-				left: selectedNode.offsetLeft,
-				top: selectedNode.offsetTop,
-				width: selectedNode.offsetWidth,
-				height: selectedNode.offsetHeight
-			};
-			variables["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,nodeRect);
+	};
 
-			var absRect = $tw.utils.extend({}, nodeRect);
-			for(var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
-				absRect.left += currentNode.offsetLeft;
-				absRect.top += currentNode.offsetTop;
-			}
-			variables["tv-popup-abs-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csAbsolute,absRect);
+	const getBoundingRect = (node) => { 
+		if(node && typeof node.getBoundingClientRect === "function") {
+			return node.getBoundingClientRect();
+		}
+		return null;
+	};
 
-			// Add variables for offset of selected node
-			variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
-			variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
-			variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
-			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
+	function assignOffsetAndPopupRect(node,prefix) {
+		if(!node || !("offsetLeft" in node)) {
+			return;
+		}
+		const offsetRect = {
+			left: node.offsetLeft,
+			top: node.offsetTop,
+			width: node.offsetWidth,
+			height: node.offsetHeight
+		};
+
+		const absRect = $tw.utils.extend({}, offsetRect);
+		for(let current = node.offsetParent; current; current = current.offsetParent) {
+			absRect.left += current.offsetLeft;
+			absRect.top += current.offsetTop;
+		}
+		assignVar("tv-popup-coords",Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent, offsetRect));
+		assignVar("tv-popup-abs-coords",Popup.buildCoordinates(Popup.coordinatePrefix.csAbsolute, absRect));
+		assignVar("tv-selectednode-posx",node.offsetLeft);
+		assignVar("tv-selectednode-posy",node.offsetTop);
+		assignVar("tv-selectednode-width",node.offsetWidth);
+		assignVar("tv-selectednode-height",node.offsetHeight);
+	}
+
+	// --- Selected node ---
+	if(selectedNode) {
+		for(const attr of selectedNode.attributes) {
+			assignVar("dom-" + attr.name,attr.value);
+		}
+		assignOffsetAndPopupRect(selectedNode,"tv-selectednode");
+		selectedNodeRect = getBoundingRect(selectedNode);
+		if(selectedNodeRect) {
+			assignRectVariables("tv-selectednode-client",selectedNodeRect);
 		}
 	}
-	
+
+	// --- Widget node ---
 	if(domNode && ("offsetWidth" in domNode)) {
-		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
-		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
+		assignRectVariables("tv-widgetnode",{
+			left: 0,
+			top: 0,
+			width: domNode.offsetWidth,
+			height: domNode.offsetHeight
+		});
+
+		domNodeRect = getBoundingRect(domNode);
+		if(domNodeRect) {
+			assignRectVariables("tv-widgetnode-client",domNodeRect);
+		}
 	}
 
+	// --- Event-relative coordinates ---
 	if(event && ("clientX" in event) && ("clientY" in event)) {
-		if(selectedNode) {
-			// Add variables for event X and Y position relative to selected node
-			selectedNodeRect = selectedNode.getBoundingClientRect();
-			variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
-			variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
-		}
-		
-		if(domNode) {
-			// Add variables for event X and Y position relative to event catcher node
-			domNodeRect = domNode.getBoundingClientRect();
-			variables["event-fromcatcher-posx"] = (event.clientX - domNodeRect.left).toString();
-			variables["event-fromcatcher-posy"] = (event.clientY - domNodeRect.top).toString();
+		if(selectedNodeRect) {
+			assignVar("event-fromselected-posx",event.clientX - selectedNodeRect.left);
+			assignVar("event-fromselected-posy",event.clientY - selectedNodeRect.top);
 		}
 
-		// Add variables for event X and Y position relative to the viewport
-		variables["event-fromviewport-posx"] = event.clientX.toString();
-		variables["event-fromviewport-posy"] = event.clientY.toString();
+		if(domNodeRect) {
+			assignVar("event-fromcatcher-posx",event.clientX - domNodeRect.left);
+			assignVar("event-fromcatcher-posy",event.clientY - domNodeRect.top);
+		}
+		assignVar("event-fromviewport-posx",event.clientX);
+		assignVar("event-fromviewport-posy",event.clientY);
 	}
+
+	// --- Scroll position ---
+	const scrollWindow = (selectedNode || domNode).ownerDocument.defaultView;
+	if(scrollWindow) {
+		const scroll = $tw.utils.getScrollPosition(scrollWindow);
+		assignVar("tv-scroll-posx",scroll.x);
+		assignVar("tv-scroll-posy",scroll.y);
+	}
+
 	return variables;
 };
 
