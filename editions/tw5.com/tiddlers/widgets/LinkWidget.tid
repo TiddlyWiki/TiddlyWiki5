@@ -1,6 +1,6 @@
 caption: link
 created: 20131024141900000
-modified: 20250720025154474
+modified: 20260125213634107
 tags: Widgets
 title: LinkWidget
 type: text/vnd.tiddlywiki
@@ -27,6 +27,8 @@ The content of the link widget is rendered within the `<a>` tag representing the
 |data-* |<<.from-version "5.3.2">> Optional [[data attributes|https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes]] to be assigned to the HTML element |
 |style.* |<<.from-version "5.3.2">> Optional [[CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference]] to be assigned to the HTML element |
 |aria-* |<<.from-version "5.4.0">> Optional [[ARIA attributes|https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes]] to be assigned to the HTML element |
+|startactions |<<.from-version "5.4.0">> Optional action string that gets invoked when ''dragging starts'' |
+|endactions |<<.from-version "5.4.0">> Optional action string that gets invoked when ''dragging ends'' |
 
 The draggable functionality is equivalent to using the DraggableWidget with the ''tiddler'' attribute set to the link target.
 
