@@ -4,8 +4,8 @@ tags: Mechanisms
 title: InfoMechanism
 type: text/vnd.tiddlywiki
 
-\define example(name)
-<$transclude tiddler="""$:/info/url/$name$""" mode="inline"/>
+\procedure example(name)
+<$text text={{{ [[$:/info/url/]addsuffix<name>get[text]] }}} />
 \end
 
 System tiddlers in the namespace `$:/info/` are used to expose information about the system (including the current browser) so that WikiText applications can adapt themselves to available features.
@@ -19,6 +19,8 @@ System tiddlers in the namespace `$:/info/` are used to expose information about
 |[[$:/info/browser/language]] |<<.from-version "5.1.20">> Language as reported by browser (note that some browsers report two character codes such as `en` while others report full codes such as `en-GB`) |
 |[[$:/info/browser/screen/width]] |Screen width in pixels |
 |[[$:/info/browser/screen/height]] |Screen height in pixels |
+|[[$:/info/browser/darkmode]] |<<.from-version "5.4.0">> Is dark mode preferred? ("yes" or "no") |
+|[[$:/info/darkmode]] |<<.deprecated-since "5.4.0">> Alias for  $:/info/browser/darkmode |
 |`$:/info/browser/window/*` |<<.from-version "5.4.0">> Tiddlers reporting window dimensions, updated when the windows are resized |
 |[[$:/info/node]] |Running under [[Node.js]]? ("yes" or "no") |
 |[[$:/info/url/full]] |<<.from-version "5.1.14">> Full URL of wiki (eg, ''<<example full>>'') |

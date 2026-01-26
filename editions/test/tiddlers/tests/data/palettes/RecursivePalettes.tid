@@ -1,0 +1,61 @@
+
+title: Operators/Palettes/RecursivePalettes
+description: Palettes that import each other in a circular toop
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
++<<colour page-background>>
++<<colour background>>
++<<colour custom>>
++<<colour foreground>>
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+MyPalette
++
+title: MyPalette
+name: My Palette
+description: My custom palette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+palette-import: MyOtherPalette
+color-scheme: light
+
+page-background: <<colour custom>>
+custom: #f4e4d4
++
+title: MyOtherPalette
+name: My Other Palette
+description: My other custom palette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+palette-import: MyFurtherPalette
+color-scheme: light
+
+page-background: #d4e4f4
+background: red
++
+title: MyFurtherPalette
+name: My Further Palette
+description: My further custom palette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+xpalette-import: MyPalette
+color-scheme: light
+
+foreground: green
++
+title: ExpectedResult
+
+<p>+#f4e4d4
++red
++#f4e4d4
++green</p>
