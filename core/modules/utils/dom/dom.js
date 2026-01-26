@@ -265,8 +265,8 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		obj = $tw.utils.copyObjectPropertiesSafe(obj);
 		assignVar(name,JSON.stringify(obj));
 	};
-	const getBoundingRect = node => node.getBoundingClientRect? node.getBoundingClientRect() : null;
-	const assignOffsetAndPopupRect = (node,prefix) => {
+	const getBoundingRect = node => node.getBoundingClientRect && node.getBoundingClientRect();
+	const assignOffsetAndPopupRect = (node) => {
 		if(!node || !("offsetLeft" in node)) {
 			return;
 		}
@@ -288,9 +288,8 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		assignVar("tv-selectednode-posy",node.offsetTop);
 		assignVar("tv-selectednode-width",node.offsetWidth);
 		assignVar("tv-selectednode-height",node.offsetHeight);
-	}
+	};
 
-	// --- Selected node ---
 	if(selectedNode) {
 		for(const attr of selectedNode.attributes) {
 			assignVar("dom-" + attr.name,attr.value);
@@ -302,7 +301,6 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		}
 	}
 
-	// --- Widget node ---
 	if(domNode && ("offsetWidth" in domNode)) {
 		assignVar("tv-widgetnode-width", domNode.offsetWidth);
 		assignVar("tv-widgetnode-height", domNode.offsetHeight);
@@ -313,7 +311,6 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		}
 	}
 
-	// --- Event-relative coordinates ---
 	if(event && ("clientX" in event) && ("clientY" in event)) {
 		if(selectedNodeRect) {
 			assignVar("event-fromselected-posx",event.clientX - selectedNodeRect.left);
@@ -328,14 +325,12 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		assignVar("event-fromviewport-posy",event.clientY);
 	}
 
-	// --- Scroll position ---
 	const scrollWindow = (selectedNode || domNode).ownerDocument.defaultView;
 	if(scrollWindow) {
 		const scroll = $tw.utils.getScrollPosition(scrollWindow);
 		assignVar("tv-scroll-posx",scroll.x);
 		assignVar("tv-scroll-posy",scroll.y);
 	}
-
 	return variables;
 };
 
