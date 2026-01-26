@@ -1,9 +1,9 @@
 {
 	"tiddlers": [
 		{
-			"file": "../../../tw5.com/tiddlers/images/New Release Banner.png",
+			"file": "../../../tw5.com/tiddlers/images/New Release Banner.webp",
 			"fields": {
-				"type": "image/jpeg",
+				"type": "image/webp",
 				"title": "New Release Banner",
 				"tags": "picture"
 			}

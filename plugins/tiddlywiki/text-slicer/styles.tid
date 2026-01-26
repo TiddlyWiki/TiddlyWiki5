@@ -96,7 +96,7 @@ div.tc-edit-template-document-tiddler-heading a:hover {
 
 .tc-view-template-document-tiddler-heading-icon svg,
 .tc-edit-template-document-tiddler-heading-icon svg {
-	fill: <<colour background>>;	
+	color: <<colour background>>;	
 }
 
 .tc-view-template-document-tiddler {
