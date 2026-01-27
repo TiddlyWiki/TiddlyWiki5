@@ -24,6 +24,7 @@ var DEFAULT_TIDDLERS_TITLE = "$:/DefaultTiddlers";
 // Config
 var CONFIG_UPDATE_ADDRESS_BAR = "$:/config/Navigation/UpdateAddressBar"; // Can be "no", "permalink", "permaview"
 var CONFIG_UPDATE_HISTORY = "$:/config/Navigation/UpdateHistory"; // Can be "yes" or "no"
+var CONFIG_HISTORY_BACKSTOP_TIDDLER = "$:/config/Navigation/HistoryBackstopTiddler"; // Tiddler to show at the beginning of history stack
 var CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD = "$:/config/Navigation/Permalinkview/CopyToClipboard"; // Can be "yes" (default) or "no"
 var CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR = "$:/config/Navigation/Permalinkview/UpdateAddressBar"; // Can be "yes" (default) or "no"
 
@@ -37,6 +38,24 @@ exports.startup = function() {
 		disableHistory: $tw.boot.disableStartupNavigation
 	});
 	if($tw.browser) {
+		// Initialize browser history if using browser history navigation
+		const updateHistory = $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim();
+		const updateAddressBar = $tw.wiki.getTiddlerText(CONFIG_UPDATE_ADDRESS_BAR,"permaview").trim();
+		if(updateHistory === "yes" && updateAddressBar === "no" && window.history) {
+			// Disable automatic scroll restoration to prevent scroll position jumps when navigating history
+			if(window.history.scrollRestoration) {
+				window.history.scrollRestoration = "manual";
+			}
+			const backstopTiddler = $tw.wiki.getTiddlerText(CONFIG_HISTORY_BACKSTOP_TIDDLER,"").trim();
+			if(backstopTiddler && ($tw.wiki.isShadowTiddler(backstopTiddler) || $tw.wiki.tiddlerExists(backstopTiddler))) {
+				// Replace the initial state with the boundary tiddler
+				window.history.replaceState(
+					{ tiddler: backstopTiddler },
+					"",
+					window.location.href
+				);
+			}
+		}
 		// Set up location hash update
 		$tw.wiki.addEventListener("change",function(changes) {
 			if($tw.utils.hop(changes,DEFAULT_STORY_TITLE) || $tw.utils.hop(changes,DEFAULT_HISTORY_TITLE)) {
@@ -46,6 +65,37 @@ exports.startup = function() {
 				});
 			}
 		});
+		// Set up browser history management when address bar is not updated
+		$tw.wiki.addEventListener("change",changes => {
+			if($tw.utils.hop(changes,DEFAULT_HISTORY_TITLE)) {
+				const updateHistory = $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim();
+				const updateAddressBar = $tw.wiki.getTiddlerText(CONFIG_UPDATE_ADDRESS_BAR,"permaview").trim();
+				if(updateHistory === "yes" && updateAddressBar === "no" && window.history) {
+					// Skip pushState if we're handling a popstate event
+					if(!$tw.skipNextPushState) {
+						// The target tiddler is the one at the top of the history stack
+						const historyList = $tw.wiki.getTiddlerData(DEFAULT_HISTORY_TITLE,[]);
+						if(historyList.length > 0) {
+							const targetTiddler = historyList[historyList.length - 1].title;
+							// Don't add draft tiddlers to browser history
+							const tiddler = $tw.wiki.getTiddler(targetTiddler);
+							const isDraft = tiddler && tiddler.isDraft();
+							// Don't add if it's the same as the current state (e.g. when saving drafts)
+							const isSameAsCurrent = history.state && history.state.tiddler === targetTiddler;
+							if(!isDraft && !isSameAsCurrent) {
+								window.history.pushState(
+									{ tiddler: targetTiddler },
+									"",
+									window.location.href
+								);
+							}
+						}
+					} else {
+						$tw.skipNextPushState = false;
+					}
+				}
+			}
+		});
 		// Listen for changes to the browser location hash
 		window.addEventListener("hashchange",function() {
 			var hash = $tw.utils.getLocationHash();
@@ -53,6 +103,35 @@ exports.startup = function() {
 				$tw.locationHash = hash;
 				if(hash !== "#") {
 					openStartupTiddlers({defaultToCurrentStory: true});
+				}
+			}
+		},false);
+		// Listen for browser popstate events (back/forward buttons) and navigate to the tiddler from browser history
+		window.addEventListener("popstate",event => {
+			if(event.state && event.state.tiddler) {
+				const backstopTiddler = $tw.wiki.getTiddlerText(CONFIG_HISTORY_BACKSTOP_TIDDLER,"").trim();
+				const isBackstop = backstopTiddler && event.state.tiddler === backstopTiddler;
+				let actionsExecuted = false;
+				
+				// Execute tagged actions if we're navigating to the history backstop
+				if(isBackstop) {
+					const taggedTiddlers = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/HistoryEndActions]!has[draft.of]]");
+					if(taggedTiddlers.length > 0) {
+						$tw.rootWidget.invokeActionsByTag("$:/tags/HistoryEndActions",event);
+						actionsExecuted = true;
+					}
+				}
+				
+				// Navigate to the tiddler if we're not at the backstop or if no actions were executed
+				if(!isBackstop || !actionsExecuted) {
+					const story = new $tw.Story({
+						wiki: $tw.wiki,
+						storyTitle: DEFAULT_STORY_TITLE,
+						historyTitle: DEFAULT_HISTORY_TITLE
+					});
+					// Prevent this navigation action from triggering another browser history entry
+					$tw.skipNextPushState = true;
+					story.navigateTiddler(event.state.tiddler,null,null);
 				}
 			}
 		},false);

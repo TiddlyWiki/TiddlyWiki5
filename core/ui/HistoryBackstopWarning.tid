@@ -1,0 +1,22 @@
+title: $:/core/ui/HistoryBackstopWarning
+tags: 
+
+<style>
+    .tc-tiddler-frame .tc-history-warning {
+        width: 100%;
+        text-align: center;
+        padding: 3em 3em 3em 3em;
+        background: <<colour alert-background>>;
+        border: 1px solid <<colour alert-border>>;
+    }
+</style>
+
+<div class="tc-history-warning">
+
+!! Beginning of Navigation History
+
+You have reached the beginning of this wiki session's navigation history. 
+
+Pressing the back button again will navigate away from this wiki.
+
+</div>

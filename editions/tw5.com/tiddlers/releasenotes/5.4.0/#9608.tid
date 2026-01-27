@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9608
+description: Enable browser navigation without changing location hash
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9608
+github-contributors: yaisog
+
+Adds the ability to use browser //Back// and //Forward// buttons without using `permalink` or `permaview` location hash update modes.
