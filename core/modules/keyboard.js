@@ -9,130 +9,87 @@ Keyboard handling utilities
 
 "use strict";
 
-var namedKeys = {
-	"cancel": 3,
-	"help": 6,
-	"backspace": 8,
-	"tab": 9,
-	"clear": 12,
-	"return": 13,
-	"enter": 13,
-	"pause": 19,
-	"escape": 27,
-	"space": 32,
-	"page_up": 33,
-	"page_down": 34,
-	"end": 35,
-	"home": 36,
-	"left": 37,
-	"up": 38,
-	"right": 39,
-	"down": 40,
-	"printscreen": 44,
-	"insert": 45,
-	"delete": 46,
-	"0": 48,
-	"1": 49,
-	"2": 50,
-	"3": 51,
-	"4": 52,
-	"5": 53,
-	"6": 54,
-	"7": 55,
-	"8": 56,
-	"9": 57,
-	"firefoxsemicolon": 59,
-	"firefoxequals": 61,
-	"a": 65,
-	"b": 66,
-	"c": 67,
-	"d": 68,
-	"e": 69,
-	"f": 70,
-	"g": 71,
-	"h": 72,
-	"i": 73,
-	"j": 74,
-	"k": 75,
-	"l": 76,
-	"m": 77,
-	"n": 78,
-	"o": 79,
-	"p": 80,
-	"q": 81,
-	"r": 82,
-	"s": 83,
-	"t": 84,
-	"u": 85,
-	"v": 86,
-	"w": 87,
-	"x": 88,
-	"y": 89,
-	"z": 90,
-	"numpad0": 96,
-	"numpad1": 97,
-	"numpad2": 98,
-	"numpad3": 99,
-	"numpad4": 100,
-	"numpad5": 101,
-	"numpad6": 102,
-	"numpad7": 103,
-	"numpad8": 104,
-	"numpad9": 105,
-	"multiply": 106,
-	"add": 107,
-	"separator": 108,
-	"subtract": 109,
-	"decimal": 110,
-	"divide": 111,
-	"f1": 112,
-	"f2": 113,
-	"f3": 114,
-	"f4": 115,
-	"f5": 116,
-	"f6": 117,
-	"f7": 118,
-	"f8": 119,
-	"f9": 120,
-	"f10": 121,
-	"f11": 122,
-	"f12": 123,
-	"f13": 124,
-	"f14": 125,
-	"f15": 126,
-	"f16": 127,
-	"f17": 128,
-	"f18": 129,
-	"f19": 130,
-	"f20": 131,
-	"f21": 132,
-	"f22": 133,
-	"f23": 134,
-	"f24": 135,
-	"firefoxminus": 173,
-	"semicolon": 186,
-	"equals": 187,
-	"comma": 188,
-	"dash": 189,
-	"period": 190,
-	"slash": 191,
-	"backquote": 192,
-	"openbracket": 219,
-	"backslash": 220,
-	"closebracket": 221,
-	"quote": 222
+// Mapping of normalized key names to event.key values
+// Only includes keys that need special mapping
+var keyMap = {
+	"cancel": "Cancel",
+	"help": "Help",
+	"backspace": "Backspace",
+	"tab": "Tab",
+	"clear": "Clear",
+	"return": "Enter",
+	"enter": "Enter",
+	"pause": "Pause",
+	"escape": "Escape",
+	"space": " ",
+	"page_up": "PageUp",
+	"page_down": "PageDown",
+	"end": "End",
+	"home": "Home",
+	"left": "ArrowLeft",
+	"up": "ArrowUp",
+	"right": "ArrowRight",
+	"down": "ArrowDown",
+	"printscreen": "PrintScreen",
+	"insert": "Insert",
+	"delete": "Delete",
+	"multiply": "*",
+	"add": "+",
+	"separator": "Separator",
+	"subtract": "-",
+	"decimal": ".",
+	"divide": "/",
+	"f1": "F1",
+	"f2": "F2",
+	"f3": "F3",
+	"f4": "F4",
+	"f5": "F5",
+	"f6": "F6",
+	"f7": "F7",
+	"f8": "F8",
+	"f9": "F9",
+	"f10": "F10",
+	"f11": "F11",
+	"f12": "F12",
+	"f13": "F13",
+	"f14": "F14",
+	"f15": "F15",
+	"f16": "F16",
+	"f17": "F17",
+	"f18": "F18",
+	"f19": "F19",
+	"f20": "F20",
+	"f21": "F21",
+	"f22": "F22",
+	"f23": "F23",
+	"f24": "F24",
+	"firefoxminus": "-",
+	"semicolon": ";",
+	"equals": "=",
+	"comma": ",",
+	"dash": "-",
+	"minus": "-",
+	"period": ".",
+	"slash": "/",
+	"backquote": "`",
+	"openbracket": "[",
+	"backslash": "\\",
+	"closebracket": "]",
+	"quote": "'"
 };
+
+// Create reverse mapping for display names
+var reverseKeyMap = {};
+$tw.utils.each(keyMap, function(key, name) {
+	reverseKeyMap[key] = name.charAt(0).toUpperCase() + name.slice(1);
+});
 
 function KeyboardManager(options) {
 	var self = this;
 	options = options || "";
-	// Save the named key hashmap
-	this.namedKeys = namedKeys;
-	// Create a reverse mapping of code to keyname
-	this.keyNames = [];
-	$tw.utils.each(namedKeys,function(keyCode,name) {
-		self.keyNames[keyCode] = name.substr(0,1).toUpperCase() + name.substr(1);
-	});
+	// Save the key mappings
+	this.keyMap = keyMap;
+	this.reverseKeyMap = reverseKeyMap;
 	// Save the platform-specific name of the "meta" key
 	this.metaKeyName = $tw.platform.isMac ? "cmd-" : "win-";
 	this.shortcutKeysList = [], // Stores the shortcut-key descriptors
@@ -150,24 +107,24 @@ function KeyboardManager(options) {
 }
 
 /*
-Return an array of keycodes for the modifier keys ctrl, shift, alt, meta
+Return an array of modifier key names
 */
 KeyboardManager.prototype.getModifierKeys = function() {
 	return [
-		16, // Shift
-		17, // Ctrl
-		18, // Alt
-		20, // CAPS LOCK
-		91, // Meta (left)
-		93, // Meta (right)
-		224 // Meta (Firefox)
-	]
+		"Shift",
+		"Control",
+		"Alt",
+		"CapsLock",
+		"Meta",
+		"OS", // Some browsers use "OS" instead of "Meta"
+		"Win" // Some browsers use "Win" for Windows key
+	];
 };
 
 /*
 Parses a key descriptor into the structure:
 {
-	keyCode: numeric keycode
+	key: string key value
 	shiftKey: boolean
 	altKey: boolean
 	ctrlKey: boolean
@@ -180,15 +137,14 @@ Key descriptors have the following format:
 KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor,options) {
 	var components = keyDescriptor.split(/\+|\-/),
 		info = {
-			keyCode: 0,
+			key: "",
 			shiftKey: false,
 			altKey: false,
 			ctrlKey: false,
 			metaKey: false
 		};
 	for(var t=0; t<components.length; t++) {
-		var s = components[t].toLowerCase(),
-			c = s.charCodeAt(0);
+		var s = components[t].toLowerCase();
 		// Look for modifier keys
 		if(s === "ctrl") {
 			info.ctrlKey = true;
@@ -198,16 +154,20 @@ KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor,options) {
 			info.altKey = true;
 		} else if(s === "meta" || s === "cmd" || s === "win") {
 			info.metaKey = true;
-		}
-		// Replace named keys with their code
-		if(this.namedKeys[s]) {
-			info.keyCode = this.namedKeys[s];
+		} else {
+			// Map the key name to event.key value
+			if(this.keyMap[s]) {
+				info.key = this.keyMap[s];
+			} else {
+				// For unmapped keys (like single letters and numbers), use as-is
+				info.key = s;
+			}
 		}
 	}
-	if(options.keyDescriptor) {
+	if(options && options.keyDescriptor) {
 		info.keyDescriptor = options.keyDescriptor;
 	}
-	if(info.keyCode) {
+	if(info.key) {
 		return info;
 	} else {
 		return null;
@@ -258,23 +218,42 @@ KeyboardManager.prototype.getPrintableShortcuts = function(keyInfoArray) {
 		result = [];
 	$tw.utils.each(keyInfoArray,function(keyInfo) {
 		if(keyInfo) {
+			// Use reverse map for special keys, otherwise capitalize first letter
+			var keyName = self.reverseKeyMap[keyInfo.key] || 
+				(keyInfo.key.length === 1 ? keyInfo.key.toUpperCase() : keyInfo.key);
+			
 			result.push((keyInfo.ctrlKey ? "ctrl-" : "") + 
 				   (keyInfo.shiftKey ? "shift-" : "") + 
 				   (keyInfo.altKey ? "alt-" : "") + 
 				   (keyInfo.metaKey ? self.metaKeyName : "") + 
-				   (self.keyNames[keyInfo.keyCode]));
+				   keyName);
 		}
 	});
 	return result;
 }
 
 KeyboardManager.prototype.checkKeyDescriptor = function(event,keyInfo) {
-	return keyInfo &&
-			event.keyCode === keyInfo.keyCode && 
-			event.shiftKey === keyInfo.shiftKey && 
-			event.altKey === keyInfo.altKey && 
-			event.ctrlKey === keyInfo.ctrlKey && 
+	if (!keyInfo) return false;
+	
+	// Normalize the event key for comparison
+	var eventKey = event.key;
+	var compareKey = keyInfo.key;
+	
+	// Handle case sensitivity for letters
+	if (keyInfo.key.length === 1 && /[a-z]/i.test(keyInfo.key)) {
+		// For single letters, compare case-insensitively
+		return eventKey.toLowerCase() === compareKey.toLowerCase() &&
+			event.shiftKey === keyInfo.shiftKey &&
+			event.altKey === keyInfo.altKey &&
+			event.ctrlKey === keyInfo.ctrlKey &&
 			event.metaKey === keyInfo.metaKey;
+	}
+	
+	return eventKey === compareKey &&
+		event.shiftKey === keyInfo.shiftKey &&
+		event.altKey === keyInfo.altKey &&
+		event.ctrlKey === keyInfo.ctrlKey &&
+		event.metaKey === keyInfo.metaKey;
 };
 
 KeyboardManager.prototype.checkKeyDescriptors = function(event,keyInfoArray) {
