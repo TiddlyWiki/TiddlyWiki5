@@ -232,3 +232,4 @@ LinkWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.link = LinkWidget;
+

@@ -293,3 +293,4 @@ RevealWidget.prototype.updateState = function() {
 };
 
 exports.reveal = RevealWidget;
+

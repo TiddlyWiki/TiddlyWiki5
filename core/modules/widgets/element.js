@@ -100,3 +100,4 @@ ElementWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.element = ElementWidget;
+

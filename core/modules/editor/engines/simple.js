@@ -170,3 +170,4 @@ SimpleEngine.prototype.executeTextOperation = function(operation) {
 };
 
 exports.SimpleEngine = SimpleEngine;
+

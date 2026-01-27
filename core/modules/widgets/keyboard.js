@@ -132,3 +132,4 @@ KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.keyboard = KeyboardWidget;
+

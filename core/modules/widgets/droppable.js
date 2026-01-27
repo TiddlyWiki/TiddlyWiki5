@@ -203,3 +203,4 @@ DroppableWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.droppable = DroppableWidget;
+

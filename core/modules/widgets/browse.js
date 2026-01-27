@@ -114,3 +114,4 @@ BrowseWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.browse = BrowseWidget;
+

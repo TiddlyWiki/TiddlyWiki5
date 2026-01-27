@@ -128,3 +128,4 @@ DraggableWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.draggable = DraggableWidget;
+
