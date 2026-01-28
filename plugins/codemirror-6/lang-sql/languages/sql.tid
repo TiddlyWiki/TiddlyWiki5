@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/sql
+tags: $:/tags/CodeMirror/Language
+name: SQL
+type: text/x-sql
+category: Data
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql

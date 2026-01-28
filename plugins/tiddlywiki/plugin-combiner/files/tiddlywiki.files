@@ -1,0 +1,12 @@
+{
+    "tiddlers": [
+        {
+            "file": "plugin-combiner.js",
+            "fields": {
+                "title": "$:/plugins/tiddlywiki/plugin-combiner/modules/widgets/plugin-combiner.js",
+                "type": "application/javascript",
+                "module-type": "widget"
+            }
+        }
+    ]
+}

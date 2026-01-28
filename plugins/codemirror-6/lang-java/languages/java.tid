@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/java
+tags: $:/tags/CodeMirror/Language
+name: Java
+type: text/x-java
+category: Programming
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-java

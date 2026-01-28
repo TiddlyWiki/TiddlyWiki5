@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/json
+tags: $:/tags/CodeMirror/Language
+name: JSON
+type: application/json
+category: Data
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-json

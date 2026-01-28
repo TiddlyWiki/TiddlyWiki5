@@ -1,0 +1,34 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/click-navigate/readme
+
+! Click Navigate Plugin
+
+This plugin enables Ctrl+Click (Cmd+Click on Mac) navigation in the CodeMirror 6 editor.
+
+!! Features
+
+* ''Ctrl+Click'' (or ''Cmd+Click'' on Mac) on a link to navigate to that tiddler
+* ''Shift+Ctrl+Click'' to open the tiddler in a new browser window/tab
+* Visual feedback when Ctrl/Cmd is held - clickable links are underlined
+* Cursor changes to pointer when hovering over navigable links
+
+!! Supported Link Types
+
+* ''WikiLinks'': `[[Target]]` or `[[Display Text|Target]]`
+* ''Transclusions'': `{{Target}}` or `{{Target!!field}}`
+* ''Images'': `[img[source]]` or `[img[tooltip|source]]`
+* ''CamelCase Links'': Automatically detected if the tiddler exists
+* ''Macros'': `<<macroname>>` - navigates to the tiddler defining the macro
+* ''Widgets'': `<$widgetname>` - navigates to widget documentation
+
+!! Configuration
+
+The plugin can be disabled by setting `clickNavigate: false` in the editor options.
+
+!! API Methods
+
+When this plugin is active, the following methods are available on the editor engine:
+
+* `navigateToLinkAtCursor()` - Navigate to the link under the cursor
+* `getLinkInfoAtCursor()` - Get information about the link under the cursor
+* `navigateToTiddler(title)` - Navigate to a specific tiddler
+* `openTiddlerInNewWindow(title)` - Open a tiddler in a new window

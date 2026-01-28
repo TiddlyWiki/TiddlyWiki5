@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/css
+tags: $:/tags/CodeMirror/Language
+name: CSS
+type: text/css
+category: Web
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-css

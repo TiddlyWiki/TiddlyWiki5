@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-markdown/readme
+
+! Markdown Language Support
+
+Provides syntax highlighting for Markdown in code blocks and tiddlers.
+
+!! Supported Content
+
+* Fenced code blocks: ```` ```markdown ```` or ```` ```md ````
+* Typed blocks: `$$$.md` or `$$$text/x-markdown`
+* Tiddlers with type `text/x-markdown`
+
+!! Features
+
+* Markdown syntax highlighting including headings, lists, links, and emphasis
+* Code block highlighting within Markdown
+* Nested language support for fenced code blocks

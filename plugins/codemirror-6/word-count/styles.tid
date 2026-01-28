@@ -1,0 +1,18 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/word-count/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.cm-word-count-panel {
+    padding: 4px 10px;
+    font-size: 12px;
+    color: <<colour muted-foreground>>;
+    background: <<colour page-background>>;
+    border-top: 1px solid <<colour tiddler-border>>;
+    text-align: right;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.cm-panels-bottom {
+    border-top: none;
+}

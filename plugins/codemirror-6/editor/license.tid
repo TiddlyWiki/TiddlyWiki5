@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/codemirror-6/license
+
+This plugin bundles CodeMirror and Lezer libraries:
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/mit}}
+
+---
+
+TiddlyWiki integration code:
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/bsd3}}
+
+---
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/lucide}}

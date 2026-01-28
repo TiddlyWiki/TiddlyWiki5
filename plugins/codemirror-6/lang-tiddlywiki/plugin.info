@@ -1,0 +1,13 @@
+{
+  "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-tiddlywiki",
+  "name": "CodeMirror 6 TiddlyWiki Language",
+  "description": "TiddlyWiki5 syntax highlighting and language support for CodeMirror 6",
+  "version": "0.0.36",
+  "plugin-type": "plugin",
+  "dependents": "$:/plugins/tiddlywiki/codemirror-6",
+  "list": "readme license",
+  "core-version": ">=5.3.0",
+  "author": "TiddlyWiki",
+  "source": "https://github.com/TiddlyWiki/lang-tiddlywiki",
+  "stability": "STABILITY_1_EXPERIMENTAL"
+}

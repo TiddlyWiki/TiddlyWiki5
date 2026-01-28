@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-one/license
+
+\define theme-name() One Dark
+\define theme-url() https://github.com/atom/one-dark-syntax
+\define theme-author() GitHub/Atom
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

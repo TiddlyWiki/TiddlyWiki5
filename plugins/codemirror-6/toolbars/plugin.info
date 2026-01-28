@@ -1,0 +1,12 @@
+{
+  "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/toolbars",
+  "name": "Toolbar Styles",
+  "description": "10 different toolbar button styles from elegant to fancy",
+  "author": "TiddlyWiki",
+  "version": "0.0.36",
+  "core-version": ">=5.3.0",
+  "plugin-type": "plugin",
+  "dependents": "$:/plugins/tiddlywiki/codemirror-6",
+  "list": "readme license",
+  "stability": "STABILITY_1_EXPERIMENTAL"
+}
