@@ -1,0 +1,10 @@
+caption: save
+created: 20170919131738203
+modified: 20260115112431945
+original-modified: 20170919131813069
+tags: Commands
+title: SaveCommand
+ja-title: Saveコマンド
+type: text/vnd.tiddlywiki
+
+{{$:/language/Help/save}}
