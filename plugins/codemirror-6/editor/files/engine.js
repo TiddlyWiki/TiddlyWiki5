@@ -42,7 +42,6 @@ var _bracketMatchingExtension = null;
 var _closeBracketsExtension = null;
 var _closeBracketsKeymapExtension = null;
 var _completionKeymapExtension = null;
-var _snippetKeymapExtension = null;
 var _syntaxHighlightingExtension = null;
 var _defaultKeymapExtension = null;
 
@@ -104,13 +103,9 @@ function getCachedExtensions() {
 		}
 	}
 
-	// Snippet keymap (Tab/Shift-Tab to navigate between snippet placeholders)
-	if(!_snippetKeymapExtension && cmKeymap) {
-		var snippetKeymap = (core.autocomplete || {}).snippetKeymap;
-		if(snippetKeymap) {
-			_snippetKeymapExtension = cmKeymap.of(snippetKeymap);
-		}
-	}
+	// NOTE: Snippet keymap (Tab/Shift-Tab) is NOT added manually here.
+	// CodeMirror automatically adds it via StateEffect.appendConfig when a snippet is applied.
+	// The snippetKeymap export is a Facet for customization, not a keymap array.
 
 	// Syntax highlighting with class highlighter
 	if(!_syntaxHighlightingExtension) {
@@ -142,7 +137,6 @@ function getCachedExtensions() {
 		closeBrackets: _closeBracketsExtension,
 		closeBracketsKeymap: _closeBracketsKeymapExtension,
 		completionKeymap: _completionKeymapExtension,
-		snippetKeymap: _snippetKeymapExtension,
 		syntaxHighlighting: _syntaxHighlightingExtension,
 		defaultKeymap: _defaultKeymapExtension
 	};
@@ -846,22 +840,40 @@ class CodeMirrorEngine {
 			)
 		);
 
-		// Core: Tab key handler for autocompletion
-		// Uses Prec.highest to ensure Tab accepts completion before indentWithTab runs
+		// Core: Tab/Shift-Tab key handler for completion and snippet navigation
+		// Uses Prec.highest to ensure these run before indentWithTab
 		var Prec = (core.state || {}).Prec;
 		var acceptCompletion = (core.autocomplete || {}).acceptCompletion;
 		var completionStatus = (core.autocomplete || {}).completionStatus;
+		var nextSnippetField = (core.autocomplete || {}).nextSnippetField;
+		var prevSnippetField = (core.autocomplete || {}).prevSnippetField;
 		if(Prec && cmKeymap && acceptCompletion && completionStatus) {
-			extensions.push(Prec.highest(cmKeymap.of([{
-				key: "Tab",
-				run: function(view) {
-					// Only accept if completion popup is active
-					if(completionStatus(view.state) === "active") {
-						return acceptCompletion(view);
+			extensions.push(Prec.highest(cmKeymap.of([
+				{
+					key: "Tab",
+					run: function(view) {
+						// First: accept completion if popup is active
+						if(completionStatus(view.state) === "active") {
+							return acceptCompletion(view);
+						}
+						// Second: navigate to next snippet field if in a snippet
+						if(nextSnippetField) {
+							return nextSnippetField(view);
+						}
+						return false; // Let other handlers (indentWithTab) handle it
 					}
-					return false; // Let other handlers (indentWithTab) handle it
+				},
+				{
+					key: "Shift-Tab",
+					run: function(view) {
+						// Navigate to previous snippet field if in a snippet
+						if(prevSnippetField) {
+							return prevSnippetField(view);
+						}
+						return false; // Let other handlers handle it
+					}
 				}
-			}])));
+			])));
 		}
 
 		// Core: Completion keymap (Enter to accept, Escape to close, arrows to navigate)
@@ -869,11 +881,8 @@ class CodeMirrorEngine {
 			extensions.push(cached.completionKeymap);
 		}
 
-		// Core: Snippet keymap (Tab/Shift-Tab to navigate between snippet placeholders)
-		// Must be before defaultKeymap so Tab checks for snippets before indentWithTab
-		if(cached.snippetKeymap) {
-			extensions.push(cached.snippetKeymap);
-		}
+		// NOTE: Snippet keymap (Tab/Shift-Tab) is added automatically by CodeMirror
+		// when a snippet is applied via StateEffect.appendConfig.
 
 		// Core: Basic keymap (cached) + focus navigation (instance-specific)
 		if(cached.defaultKeymap) {
