@@ -42,6 +42,7 @@ var _bracketMatchingExtension = null;
 var _closeBracketsExtension = null;
 var _closeBracketsKeymapExtension = null;
 var _completionKeymapExtension = null;
+var _snippetKeymapExtension = null;
 var _syntaxHighlightingExtension = null;
 var _defaultKeymapExtension = null;
 
@@ -103,6 +104,14 @@ function getCachedExtensions() {
 		}
 	}
 
+	// Snippet keymap (Tab/Shift-Tab to navigate between snippet placeholders)
+	if(!_snippetKeymapExtension && cmKeymap) {
+		var snippetKeymap = (core.autocomplete || {}).snippetKeymap;
+		if(snippetKeymap) {
+			_snippetKeymapExtension = cmKeymap.of(snippetKeymap);
+		}
+	}
+
 	// Syntax highlighting with class highlighter
 	if(!_syntaxHighlightingExtension) {
 		var syntaxHighlighting = (core.language || {}).syntaxHighlighting;
@@ -133,6 +142,7 @@ function getCachedExtensions() {
 		closeBrackets: _closeBracketsExtension,
 		closeBracketsKeymap: _closeBracketsKeymapExtension,
 		completionKeymap: _completionKeymapExtension,
+		snippetKeymap: _snippetKeymapExtension,
 		syntaxHighlighting: _syntaxHighlightingExtension,
 		defaultKeymap: _defaultKeymapExtension
 	};
@@ -857,6 +867,12 @@ class CodeMirrorEngine {
 		// Core: Completion keymap (Enter to accept, Escape to close, arrows to navigate)
 		if(cached.completionKeymap) {
 			extensions.push(cached.completionKeymap);
+		}
+
+		// Core: Snippet keymap (Tab/Shift-Tab to navigate between snippet placeholders)
+		// Must be before defaultKeymap so Tab checks for snippets before indentWithTab
+		if(cached.snippetKeymap) {
+			extensions.push(cached.snippetKeymap);
 		}
 
 		// Core: Basic keymap (cached) + focus navigation (instance-specific)
