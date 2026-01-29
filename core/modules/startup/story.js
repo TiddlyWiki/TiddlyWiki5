@@ -77,14 +77,16 @@ exports.startup = function() {
 						const historyList = $tw.wiki.getTiddlerData(DEFAULT_HISTORY_TITLE,[]);
 						if(historyList.length > 0) {
 							const targetTiddler = historyList[historyList.length - 1].title;
-							// Don't add draft tiddlers to browser history
 							const tiddler = $tw.wiki.getTiddler(targetTiddler);
-							const isDraft = tiddler && tiddler.isDraft();
+							// For drafts, store the base tiddler title instead of the draft title
+							const tiddlerForHistory = tiddler && tiddler.isDraft() 
+								? (tiddler.fields["draft.of"] || targetTiddler)
+								: targetTiddler;
 							// Don't add if it's the same as the current state (e.g. when saving drafts)
-							const isSameAsCurrent = history.state && history.state.tiddler === targetTiddler;
-							if(!isDraft && !isSameAsCurrent) {
+							const isSameAsCurrent = history.state && history.state.tiddler === tiddlerForHistory;
+							if(!isSameAsCurrent) {
 								window.history.pushState(
-									{ tiddler: targetTiddler },
+									{ tiddler: tiddlerForHistory },
 									"",
 									window.location.href
 								);
@@ -124,6 +126,12 @@ exports.startup = function() {
 				
 				// Navigate to the tiddler if we're not at the backstop or if no actions were executed
 				if(!isBackstop || !actionsExecuted) {
+					let targetTiddler = event.state.tiddler;
+					// Check if a draft of this tiddler exists and navigate to it instead
+					const draftTiddlers = $tw.wiki.filterTiddlers(`[field:draft.of[${targetTiddler}]]`);
+					if(draftTiddlers.length > 0) {
+						targetTiddler = draftTiddlers[0];
+					}
 					const story = new $tw.Story({
 						wiki: $tw.wiki,
 						storyTitle: DEFAULT_STORY_TITLE,
@@ -131,7 +139,7 @@ exports.startup = function() {
 					});
 					// Prevent this navigation action from triggering another browser history entry
 					$tw.skipNextPushState = true;
-					story.navigateTiddler(event.state.tiddler,null,null);
+					story.navigateTiddler(targetTiddler,null,null);
 				}
 			}
 		},false);
