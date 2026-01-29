@@ -1,0 +1,8 @@
+changenote: $:/changenotes/5.4.0/#9259
+created: 20260120154817011
+description: Deprecated events and actons-* attributes from the eventcatcher widget
+impact-type: deprecation
+modified: 20260120154900978
+tags: $:/tags/ImpactNote
+title: $:/changenotes/5.4.0/#9259/impacts/deprecate-eventcatcher-attributes
+type: text/vnd.tiddlywiki
