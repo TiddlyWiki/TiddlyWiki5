@@ -25,4 +25,6 @@ title: $:/core/stylesheets/custom-properties
 	--tp-tiddler-width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
 	--tp-sidebar-breakpoint: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}};
 	--tp-sidebar-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+
+	--tp-animation-duration: {{{ [{$:/config/AnimationDuration}addsuffix[ms]] }}};
 }
