@@ -55,6 +55,13 @@ function SimpleEngine(options) {
 	if(this.widget.isDisabled === "yes") {
 		this.domNode.setAttribute("disabled",true);
 	}
+	if(this.widget.role) {
+		this.domNode.setAttribute("role",this.widget.role);
+	}
+	this.widget.assignAttributes(this.domNode,{
+		sourcePrefix: "aria-",
+		destPrefix: "aria-"
+	});
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
