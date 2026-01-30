@@ -29,8 +29,9 @@ class Modal {
 		variables: from event.paramObject
 	*/
 	display(title, options = {}) {
-		this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
-				options.variables.rootwindow === "yes") ? document :
+		const useRootWindow = options.variables && (options.variables.rootwindow === "true" ||
+				options.variables.rootwindow === "yes");
+		this.srcDocument = useRootWindow ? document :
 			(options.event && options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
 		this.srcWindow = this.srcDocument.defaultView;
 		const tiddler = this.wiki.getTiddler(title);
@@ -58,16 +59,16 @@ class Modal {
 		// Allow forcing legacy mode via forceLegacy parameter for testing
 		const useLegacy = variables["forceLegacy"] === "yes";
 		if(this.supportsDialog && !useLegacy) {
-			this.displayWithDialog(title, options, variables, sourceWidget);
+			this.displayWithDialog(title, options, variables, sourceWidget, useRootWindow);
 		} else {
-			this.displayWithDiv(title, options, variables, sourceWidget);
+			this.displayWithDiv(title, options, variables, sourceWidget, useRootWindow);
 		}
 	}
 
 	/*
 	Display modal using native <dialog> element (modern browsers)
 	*/
-	displayWithDialog(title, options, variables, sourceWidget) {
+	displayWithDialog(title, options, variables, sourceWidget, useRootWindow) {
 
 		// Create the dialog element
 		const dialog = this.srcDocument.createElement("dialog");
@@ -102,7 +103,7 @@ class Modal {
 		const navigatorWidgetNode = new navigator.navigator(navigatorTree, {
 			wiki: this.wiki,
 			document: this.srcDocument,
-			parentWidget: sourceWidget || $tw.rootWidget
+			parentWidget: useRootWindow ? $tw.rootWidget : (sourceWidget || $tw.rootWidget)
 		});
 		navigatorWidgetNode.render(dialog,null);
 
@@ -158,7 +159,7 @@ class Modal {
 	/*
 	Display modal using div-based approach (legacy browsers)
 	*/
-	displayWithDiv(title, options, variables, sourceWidget) {
+	displayWithDiv(title, options, variables, sourceWidget, useRootWindow) {
 
 		// Collect all variables from source widget (walking up the widget tree)
 		// Exclude any that are already in passed variables to avoid overriding them
@@ -215,7 +216,7 @@ class Modal {
 		const navigatorWidgetNode = new navigator.navigator(navigatorTree, {
 			wiki: this.wiki,
 			document: this.srcDocument,
-			parentWidget: $tw.rootWidget
+			parentWidget: useRootWindow ? $tw.rootWidget : (sourceWidget || $tw.rootWidget)
 		});
 		navigatorWidgetNode.render(modalWrapper, null);
 
