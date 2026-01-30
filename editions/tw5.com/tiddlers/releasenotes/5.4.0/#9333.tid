@@ -24,25 +24,26 @@ Adds `--tpc-*` (for palettes colors) and `--tp-*` (for CSS settings) [[custom CS
 ```
 
 ```
-/* Old way to get and process CSS settings with wikitext and filters */
-\define sidebarbreakpoint-minus-one()
-<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
-\end
-
-@media (max-width: <<sidebarbreakpoint-minus-one>>) {
-	.tc-tiddler-frame {
-		box-shadow: none;
-	}
+/* Old way to get CSS settings with transclusion */
+.tc-sidebar-header {
+	padding: 14px;
+	min-height: 32px;
+	margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+	transition:  min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
 }
 ```
 
 ```css
-/* New way to get and process CSS settings with CSS functions */
-@media (max-width: calc(var(--tp-sidebar-breakpoint) - 1px)) {
-	.tc-tiddler-frame {
-		box-shadow: none;
-	}
+/* New way to get CSS settings */
+.tc-sidebar-header {
+	padding: 14px;
+	min-height: 32px;
+	margin-top: var(--tp-story-top);
+	transition: min-height var(--tp-animation-duration) ease-in-out, padding-top var(--tp-animation-duration) ease-in-out, padding-bottom var(--tp-animation-duration) ease-in-out;
 }
 ```
 
-See [[Writing stylesheets in vanilla CSS]] and [[Core CSS Variables]] for details.
+See:  
+
+* [[Writing stylesheets in vanilla CSS]] and [[Core CSS Variables]] for details.  
+* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/var  
