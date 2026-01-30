@@ -26,24 +26,22 @@ Since v5.4.0, theme developers can use the following CSS to get the palette colo
 See [[Core CSS Variables]] for the available CSS variables. Before v5.4.0, theme developers have to use macros with filters to get and process theme settings:
 
 ```
-\define sidebarbreakpoint-minus-one()
-<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
-\end
-
-@media (max-width: <<sidebarbreakpoint-minus-one>>) {
-	.tc-tiddler-frame {
-		box-shadow: none;
-	}
+.tc-sidebar-header {
+	padding: 14px;
+	min-height: 32px;
+	margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+	transition:  min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
 }
 ```
 
-Since v5.4.0, the `$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint` setting is also available as the CSS variable `--tp-sidebar-breakpoint`, so theme developers can use the following code:
+Since v5.4.0, the theme settings are also available as the CSS variables, so theme developers can use the following code:
 
 ```css
-@media (max-width: calc(var(--tp-sidebar-breakpoint) - 1px)) {
-	.tc-tiddler-frame {
-		box-shadow: none;
-	}
+.tc-sidebar-header {
+	padding: 14px;
+	min-height: 32px;
+	margin-top: var(--tp-story-top);
+	transition: min-height var(--tp-animation-duration) ease-in-out, padding-top var(--tp-animation-duration) ease-in-out, padding-bottom var(--tp-animation-duration) ease-in-out;
 }
 ```
 
