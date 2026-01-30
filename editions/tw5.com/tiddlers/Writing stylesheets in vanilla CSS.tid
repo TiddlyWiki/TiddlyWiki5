@@ -1,5 +1,5 @@
 created: 20251108075645447
-modified: 20251108081036094
+modified: 20260130070615267
 title: Writing stylesheets in vanilla CSS
 type: text/vnd.tiddlywiki
 
@@ -23,9 +23,7 @@ Since v5.4.0, theme developers can use the following CSS to get the palette colo
 ```
 
 ! Getting and processing Tiddlywiki CSS settings
-These core CSS properties can be used in the stylesheet:
-
-<!-- TODO: Add documention about available CSS settings -->
+See [[Core CSS Variables]] for the available CSS variables. Before v5.4.0, theme developers have to use macros with filters to get and process theme settings:
 
 ```
 \define sidebarbreakpoint-minus-one()
@@ -39,6 +37,8 @@ These core CSS properties can be used in the stylesheet:
 }
 ```
 
+Since v5.4.0, the `$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint` setting is also available as the CSS variable `--tp-sidebar-breakpoint`, so theme developers can use the following code:
+
 ```css
 @media (max-width: calc(var(--tp-sidebar-breakpoint) - 1px)) {
 	.tc-tiddler-frame {
@@ -46,3 +46,5 @@ These core CSS properties can be used in the stylesheet:
 	}
 }
 ```
+
+Compared to processing with filters, using the [[calc CSS function|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/calc]] can also process values with unit other than `px` (like `em`).
