@@ -1,0 +1,7 @@
+created: 20260130065558913
+modified: 20260130065746707
+tags: [[Core CSS Variables]]
+title: --tp-tiddler-width CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-tiddler-width` CSS variable represents the tiddler width within the story river.
