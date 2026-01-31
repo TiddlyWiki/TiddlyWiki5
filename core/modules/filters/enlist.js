@@ -16,6 +16,8 @@ exports.enlist = function(source,operator,options) {
 	var allowDuplicates = false;
 	switch(operator.suffix) {
 		case "raw":
+			// Intentional fallthrough
+		case "all":
 			allowDuplicates = true;
 			break;
 		case "dedupe":
