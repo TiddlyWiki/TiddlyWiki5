@@ -241,20 +241,25 @@ function makeNumericBinaryOperatorWithMultiValue(fnCalc) {
 		
 		// Get the operand list (should be first operand for these binary operators)
 		const operandList = operator.multiValueOperands[0];
-		
+	
+		// Expand singular input to match operand length (following substitute.js pattern)
+		if(inputTitles.length === 1 && operandList.length > 1) {
+			inputTitles = Array(operandList.length).fill(inputTitles[0]);
+		}
+	
 		// Check if operand count matches input count
 		if(operandList.length === inputTitles.length) {
-			// Item-by-item operation: nth input with nth operand
+		// Item-by-item operation: nth input with nth operand
 			for(let i = 0; i < inputTitles.length; i++) {
 				const inputNum = $tw.utils.parseNumber(inputTitles[i]);
 				const operandNum = $tw.utils.parseNumber(operandList[i]);
 				result.push($tw.utils.stringifyNumber(fnCalc(inputNum, operandNum)));
 			}
 		} else {
-			// Return error if counts don't match (following substitute.js pattern)
+		// Return error if counts don't match (following substitute.js pattern)
 			return [operator.operator + " error: Operand list length (" + operandList.length + ") must match input length (" + inputTitles.length + ") or be singular."];
 		}
-		
+	
 		return result;
 	};
 };
