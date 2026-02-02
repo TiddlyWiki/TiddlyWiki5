@@ -1,78 +1,77 @@
 created: 20140919155729620
-modified: 20240624102502089
+modified: 20250923075218102
 tags: Macros [[Core Macros]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
 
-~TiddlyWiki provides several macros for generating a tree of tiddler links by analysing [[tags|Tagging]]:
+~TiddlyWiki provides several macros for generating a tree of tiddler links by analysing tiddler [[tagging|Tagging]]. The table of contents is generated as a HTML ordered list. The `<ol>` elements always have the class `tc-toc`. Expandable trees have the additional class `tc-toc-expandable`. Selectively expandable trees (including those in the two-panel browser) have `tc-toc-selective-expandable`.
 
-; <<.var toc>>
-: A simple tree
+To make a table of contents appear in the sidebar, see [[How to add a new tab to the sidebar]].
 
-; <<.var toc-expandable>>
-: A tree in which all the branches can be expanded and collapsed
+!! Macros
 
-; <<.var toc-selective-expandable>>
-: A tree in which the non-empty branches can be expanded and collapsed
+|Macro |Description |h
+|''toc'' |A simple tree |
+|''toc-expandable'' |A tree in which all the branches can be expanded and collapsed |
+|''toc-selective-expandable'' |A tree in which the non-empty branches can be expanded and collapsed |
+|''toc-tabbed-internal-nav'' |A two-panel browser:<br>- On the left, a selectively expandable tree that behaves like a set of vertical tabs.<br>- On the right, the content of whichever tiddler the user selects in the tree|
+|''toc-tabbed-external-nav'' |~|
 
-; <<.var toc-tabbed-internal-nav>> and <<.var toc-tabbed-external-nav>>
-: A two-panel browser:
-:* on the left, a selectively expandable tree that behaves like a set of vertical tabs
-:* on the right, the content of whichever tiddler the user selects in the tree
+!!! Differences
 
 The difference between the last two has to do with what happens when the user clicks a link in the right-hand panel:
 
-; <<.var toc-tabbed-internal-nav>>
+; toc-tabbed-internal-nav
 : The target tiddler appears in the right-hand panel, replacing the tiddler that contained the link
 
-; <<.var toc-tabbed-external-nav>>
-: The target tiddler appears in the normal way (which depends on the user's configured storyview)
+; toc-tabbed-external-nav
+: The target tiddler appears in the normal way in the story river, which depends on the user's configured storyview
 
-!! Structure
+
+!! Common Macro Parameters
+
+These parameters are ''used by all'' toc-macros.
+
+|Parameter |Description |h
+|''tag'' |The root tag that identifies the top level of the tree |
+|''sort'' |An optional extra [[filter step|Filter Step]], e.g. `sort[title]`. See more info below. |
+|''exclude'' |This optional parameter can be used to exclude tiddlers from the TOC list |
+|''captionField'' |default: `caption`. Expects a field-name.If set it uses this field instead of the caption-field.<br>If the field is empty, or does not exists, it tries to use "caption" or falls back to the "tiddler-title". See more info below. |
+|''tagField''|Uses any “tag-like” field instead of the “tags” field to create the “tag-like” tree.<br>tagField takes precedence over parentField. |
+|''parentField''|Instead of using tags, the toc tree is built using “parent” fields. There is no default, but usually it will be "parent". This function uses the same filter behaviour as the tocP plugin. |
+|''itemTemplate''|Expects a: template tiddler-title. By default toc macros use the `toc-defaultItemTemplate` procedure, which is specific to toc-macros.If itemTemplate is set, it uses the content of the template tiddler to display a toc node. If itemTemplate is used captionField is set to `text`.<br>''Important:'' If the toc-itemTemplate field is set in the current node it will take precedence over the macro parameter |
+
+
+; sort
+:The sort parameter is substituted into a single [[filter expression|Filter Expression]] like this. For backwards compatibility it is done as follows:
+
+:> ``<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] -[<tag>] -[subfilter<exclude>]`>``
+
+; exclude <<.from-version "5.3.0">>
+: This optional parameter can be used to exclude tiddlers from the TOC list. It allows a [[Title List]] or a <<.olink subfilter>>. Eg: `exclude:"HelloThere [[Title with spaces]]"` or `exclude:"[has[excludeTOC]]"`. Where the former will exclude two tiddlers and the later would exclude every tiddler that has a field <<.field excludeTOC>> independent of its value.<br>''Be aware'' that eg: `[prefix[H]]` is a shortcut for `[all[tiddlers]prefix[H]]`, which can have a performance impact, if used carelessly. So use $:/AdvancedSearch -> ''Filters'' tab to test the <<.param exclude>> parameter
+
+
+!! Additional Tabbed TOC Parameters
+
+`toc-tabbed-internal-nav` and `toc-tabbed-external-nav` take additional parameters:
+
+|Parameter |Descriptoin |h
+|''selectedTiddler'' |The title of the [[state tiddler|StateMechanism]] for noting the currently selected tiddler, defaulting to `$:/temp/toc/selectedTiddler`. It is recommended that this be a [[system tiddler|SystemTiddlers]] |
+|''unselectedText'' |The text to display when no tiddler is selected in the tree |
+|''missingText'' |The text to display if the selected tiddler doesn't exist |
+|''template'' |Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the selected tiddler into the right-hand panel |
+
+!! Tiddler Fields
 
 The top level of the tree consists of the tiddlers that carry a particular tag, known as the <<.def "root tag">>. Tiddlers tagged with any of those make up the next level down, and so on.
 
 At each level, the tiddlers can be [[ordered|Order of Tagged Tiddlers]] by means of the <<.field list>> field of the parent tag tiddler. They can also be ordered by the macro's <<.param sort>> parameter.
 
-The tree displays the <<.field caption>> field of a tiddler if it has one, or the tiddler's title otherwise.
-
-Each tiddler in the tree is normally displayed as a link. To suppress this, give the tiddler a <<.field toc-link>> field with the the value <<.value no>>. In the [[examples|Table-of-Contents Macros (Examples)]], the SecondThree tiddler is set up like this. Clicking such a tiddler in the tree causes its branch to expand or collapse.
-
-<<.from-version "5.1.23">> By default, the links open the tiddlers making up the table of contents. Alternatively, if the tiddler contains a <<.field target>> field then its contents will be used as the target of the link.
-
-The table of contents is generated as an HTML ordered list. The `<ol>` elements always have the class `tc-toc`. Expandable trees have the additional class `tc-toc-expandable`. Selectively expandable trees (including those in the two-panel browser) have `tc-toc-selective-expandable`.
-
-To make a table of contents appear in the sidebar, see [[How to add a new tab to the sidebar]].
-
-!! Parameters
-
-; tag
-: The root tag that identifies the top level of the tree
-: <<.from-version "5.3.5">> If the <<.param tag>> parameter is "missing" or "an empty" string, the <<.var curretTiddler>> variable is used
-
-; sort
-: An optional extra [[filter step|Filter Step]], e.g. `sort[title]`
-
-These two parameters are combined into a single [[filter expression|Filter Expression]] like this:
-
-> `[tag[$tag$]$sort$]`
-
-<<.var toc-tabbed-internal-nav>> and <<.var toc-tabbed-external-nav>> take additional parameters:
-
-; selectedTiddler
-: The title of the [[state tiddler|StateMechanism]] for noting the currently selected tiddler, defaulting to `$:/temp/toc/selectedTiddler`. It is recommended that this be a [[system tiddler|SystemTiddlers]]
-
-; unselectedText
-: The text to display when no tiddler is selected in the tree
-
-; missingText
-: The text to display if the selected tiddler doesn't exist
-
-; template
-: Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the selected tiddler into the right-hand panel
-
-; exclude <<.from-version "5.3.0">>
-: This optional parameter can be used to exclude tiddlers from the TOC list. It allows a [[Title List]] or a <<.olink subfilter>>. Eg: `exclude:"HelloThere [[Title with spaces]]"` or `exclude:"[has[excludeTOC]]"`. Where the former will exclude two tiddlers and the later would exclude every tiddler that has a field <<.field excludeTOC>> independent of its value.<br>''Be aware'' that eg: `[prefix[H]]` is a shortcut for `[all[tiddlers]prefix[H]]`, which can have a performance impact, if used carelessly. So use $:/AdvancedSearch -> ''Filters'' tab to test the <<.param exclude>> parameter
+|Field |Description |h
+|''caption'' |The tree displays the <<.field caption>> field of a tiddler if it has one, or the tiddler's <<.field title>> otherwise. |
+|''toc-link'' |Each tiddler in the tree is normally displayed as a link. To suppress this, give the tiddler a <<.field toc-link>> field with the the value <<.value no>>. In the [[examples|Table-of-Contents Macros (Examples)]], the SecondThree tiddler is set up like this. Clicking such a tiddler in the tree causes its branch to expand or collapse. |
+|''target'' |<<.from-version "5.1.23">> By default, the links open the tiddlers making up the table of contents. Alternatively, if the tiddler contains a <<.field target>> field then its contents will be used as the target of the link.|
+|''toc-tooltip'' |<<.from-version "5.4.0">> Will be used to show a tooltip about the node on mouse hover |
 
 !! Custom Icons
 
@@ -93,8 +92,8 @@ The default settings can be overwritten in your code using the define-pragma or 
 ''Define new icons using a pragma''
 
 ```
-\define toc-open-icon() $:/core/images/fold-button
-\define toc-closed-icon() $:/core/images/folder
+\procedure toc-open-icon() $:/core/images/fold-button
+\procedure toc-closed-icon() $:/core/images/folder
 ...
 ```
 
@@ -108,4 +107,5 @@ The default settings can be overwritten in your code using the define-pragma or 
 
 !! Examples
 
-Learn more at [[Examples|Table-of-Contents Macros (Examples)]]
+Learn more at [[Standard Examples|Table-of-Contents Macros (Examples)]]
+Learn much more at: [[Advanced Examples|Table-of-Contents Macros (Advanced Examples)]]

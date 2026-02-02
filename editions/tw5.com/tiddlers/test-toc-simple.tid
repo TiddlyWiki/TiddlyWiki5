@@ -1,0 +1,11 @@
+created: 20240201200126315
+modified: 20240208172106818
+tags: testTOC
+title: test-toc-simple
+type: text/vnd.tiddlywiki
+
+This test includes a toc ''tag:'' `root`, which can be used as a reference, since the "simple" toc-macro does ''not'' use any of the *-expandable tocs. 
+
+<div class="tc-table-of-contents">
+<<toc tag:"root" >>
+</div>

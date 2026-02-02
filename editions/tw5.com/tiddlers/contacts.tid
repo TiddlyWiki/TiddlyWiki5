@@ -1,0 +1,13 @@
+created: 20240204014534832
+modified: 20240208142611510
+tags: root
+title: contacts
+toc-include: [tag[person]sort[last-name]]
+toc-includeX: [tag[person]sort[last-name]]
+type: text/vnd.tiddlywiki
+
+\import [[b b]]
+
+* this tiddler contains `toc-include`: <code>{{!!toc-include}}</code>
+
+<<list-fields>>

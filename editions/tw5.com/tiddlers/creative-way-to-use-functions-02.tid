@@ -1,0 +1,24 @@
+created: 20240202094222684
+modified: 20240202103555585
+tags: 
+title: creative-way-to-use-functions-02
+type: text/vnd.tiddlywiki
+
+\function f.taggedList(test, tag) [<test>] [tag<tag>limit[3]]
+\function f.opFields() [fields[]prefix[op]] -[[text]] -[[title]]
+
+<$list filter="[function[f.taggedList],[non existing Title],[Filter Operators]]">
+<table class="tc-max-width">
+	<tbody>
+		<tr>
+			<th colspan=2><$link/></th>
+		</tr>
+		<$list filter="[<currentTiddler>function[f.opFields]]" variable=fieldname>
+			<tr>
+				<td><<fieldname>></td><td><$transclude $field=<<fieldname>>/></td>
+			</tr>
+		</$list>
+	</tbody>
+</table>
+</$list>
+

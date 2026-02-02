@@ -1,0 +1,76 @@
+created: 20250923083011345
+import-compound: toc-simple $:/spec/toc-param-parentField
+modified: 20250924112721192
+tags: $:/tags/wiki-test-spec param
+title: toc-param-parentField
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents to show the use of different parameters
+
+* The "root" element is `parent: Contents`
+
+* The macro-call uses the ''parentField'' to define a tree structure
+
+* Using a parent field is fundamentally different to using tags -> ''There can only be one!''
+
+* The field-name can be ''any name''.
+
+{{example-overview}}
+
++
+title: Description
+
+TOC Macro Parameter "parentField"
+
++
+title: aa-aa
+tags: aa
+tag-like: dd
+parent: gg
+
+Tiddlers can belong to different TOC structures 
+
++
+title: gg
+parent: Contents
+
+Link to [[gg-gg]]
+
++
+title: gg-gg
+parent: gg
+
+Link to [[hh]]
+
++
+title: hh
+parent: Contents
+
+Link to [[hh-hh]]
+
++
+title: hh-hh
+parent: hh
+
+Link to [[hh-hh-hh]]
+
++
+title: hh-hh-hh
+parent: hh-hh
+
+Link to [[ii]]
+
++
+title: ii
+parent: Contents
+
+Link to [[gg]]
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents" parentField:"parent">>
+</div>

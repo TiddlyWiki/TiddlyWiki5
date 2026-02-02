@@ -1,0 +1,76 @@
+created: 20250923081739017
+import-compound: toc-simple $:/spec/toc-param-tagField
+modified: 20250924105725076
+tags: $:/tags/wiki-test-spec param
+title: toc-param-tagField
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple TOC to show the use of different parameters
+
+* The "root" elements are ''tagged: Contents''
+
+* The macro-call uses the ''tagField'' parameter to use a different field than tags
+
+** We also call this a ''tag-like'' field, since it should behave similar to tags
+
+* The field-name can be ''any name''
+
+{{example-overview}}
+
++
+title: Description
+
+TOC Macro Parameter "tagField"
++
+title: aa-aa
+tags: aa
+tag-like: dd ee-ee-ee
+
+Tiddlers can belong to different TOC structures 
+
++
+title: dd
+tag-like: Contents
+
+Link to [[dd-dd]]
+
++
+title: dd-dd
+tag-like: dd
+
+Link to [[ee]]
+
++
+title: ee
+tag-like: Contents
+
+Link to [[ee-ee]]
+
++
+title: ee-ee
+tag-like: ee
+
+Link to [[ee-ee-ee]]
+
++
+title: ee-ee-ee
+tag-like: ee-ee
+
+Link to [[ff]]
+
+
++
+title: ff
+tag-like: Contents
+
+Link to [[dd]]
+
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents" tagField:"tag-like">>
+</div>

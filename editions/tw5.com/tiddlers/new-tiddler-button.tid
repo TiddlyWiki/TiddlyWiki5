@@ -1,0 +1,22 @@
+created: 20240730081443212
+modified: 20250922192427643
+tags: $:/tags/wiki-test-spec
+title: new-tiddler-button
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This code tests ''action-sendmessage'' with `tm-new-tiddler`
+
++
+title: Description
+
+Test New Tiddler Button
++
+title: Output
+
+<$button>
+<$action-sendmessage $message="tm-new-tiddler" />
+<$action-navigate $to={{{ [<tv-history-list>get[current-tiddler]] }}}/>
+Create a new tiddler
+</$button>

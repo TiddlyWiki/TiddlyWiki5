@@ -1,0 +1,10 @@
+author: Mario Pietsch
+core-version: >=5.2.1
+dependents: 
+description: Parent Based - Table of Contents
+list: readme license history
+name: tocP
+plugin-type: plugin
+title: $:/plugins/wikilabs/tocP
+type: application/json
+version: 0.3.2

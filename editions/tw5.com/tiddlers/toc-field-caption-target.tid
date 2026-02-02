@@ -1,0 +1,35 @@
+created: 20250922190709217
+import-compound: toc-simple $:/spec/toc-field-caption-target
+modified: 20250924111908219
+tags: $:/tags/wiki-test-spec field
+title: toc-field-caption-target
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents with 3 levels
+* The "root" elements are ''tagged Contents''
+* The tiddler [[aa-aa]] contains a field: `caption: aa-aa -> cc`, which is shown as the link text
+* The [[aa-aa]] tiddler contains a field: `target: cc` so clicking the link opens the ''cc'' tiddler instead of `aa-aa`
+
+{{example-overview}}
+
++
+title: Description
+
+Simple TOC with Caption and Target Fields
+
++
+title: aa-aa
+tags: aa
+target: cc
+caption: aa-aa -> cc
+
+Link to [[bb]]
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>

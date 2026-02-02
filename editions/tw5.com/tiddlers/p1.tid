@@ -1,0 +1,23 @@
+created: 20240206191418698
+modified: 20240208142654874
+parent: root
+parentField: dad
+tags: 
+title: p1
+toc-include: p1 p2 aaa
+toc-includeX: [has<parentField>!has[draft.of]] :filter[get<parentField>match<tag>]
+type: text/vnd.tiddlywiki
+
+\import [[b b]]
+
+* p1 toc-inlucdes itself for recursion detection testing
+* toc-include also has: <code>{{!!toc-include}}</code> for CTRL-click testing on p2 -> It should expand the whole path
+* tiddler [[aaa]] is a "tagLike" field so it ''cannot'' be shown with expand chevron -> That's intended
+
+---
+
+p1 has a special toc-include field: <code><$view field=toc-include /></code>
+
+It's intended to add  a second `parentField: dad`, which DOES NOT WORK ATM
+
+<<list-fields>>

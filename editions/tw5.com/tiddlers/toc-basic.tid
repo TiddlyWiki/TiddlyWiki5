@@ -1,0 +1,10 @@
+created: 20240201132228945
+modified: 20240201145229473
+tags: 
+title: toc-basic
+type: text/vnd.tiddlywiki
+
+<div class="tc-table-of-contents" >
+<<toc "Contents" sort:"sort[title]" exclude:FirstOneX>>
+</div>
+

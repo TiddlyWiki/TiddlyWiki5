@@ -1,0 +1,12 @@
+created: 20240201200204741
+modified: 20240201204212302
+tags: 
+title: toggle-global
+type: text/vnd.tiddlywiki
+
+\define xyyyx()
+<$action-deletetiddler $tiddler="_/state/popup/toc/useGlobal"/>
+\end
+<$checkbox tiddler="_/state/popup/toc/useGlobal" field="text" checked="yes" unchecked="no" default="no" uncheckactions=<<xx>>> Use TOC global state</$checkbox>
+
+[[_/state/popup/toc/useGlobal]]

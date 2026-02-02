@@ -1,0 +1,35 @@
+created: 20250923072105209
+import-compound: toc-simple $:/spec/toc-field-toc-tooltip
+modified: 20250924110301190
+tags: $:/tags/wiki-test-spec field
+title: toc-field-toc-tooltip
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents to show node-fields
+
+* The "root" elements are ''tagged Contents''
+
+* Tiddler [[aa-aa]] has a `tooltip` field
+
+{{example-overview}}
+
++
+title: Description
+
+Field TOC with a tooltip Field
++
+title: aa-aa
+tags: aa
+caption: aa-aa -> tooltip
+toc-tooltip: Tooltip in the toc-tooltip field
+
+Link to [[bb]]
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>

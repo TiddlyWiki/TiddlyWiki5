@@ -1,0 +1,35 @@
+created: 20250924103631937
+import-compound: toc-simple $:/spec/toc-advanced-selective-expandable-toc-link-no
+modified: 20250924104926621
+tags: $:/tags/wiki-test-spec advanced
+title: toc-advanced-selectiv-expandable-toc-link-no
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple expandable list
+
+* Every element which has at least 1 child shows a chevron
+
+* All paths are expanded as long as `tv-toc-expanded() yes` is defined.
+
+* The ''bb-bb'' tiddler contains a field: `toc-link: no`, that's why it is muted
+
++
+title: Description
+
+Advanced TOC Selective Expandable "toc-link: no"
++
+title: bb-bb
+tags: bb
+toc-link: no
+
++
+title: Output
+
+\define tv-toc-expand() yes
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"Contents">>
+</div>
+

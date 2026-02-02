@@ -1,0 +1,11 @@
+author: Mario Pietsch
+core-version: >=5.3.3
+dependents: 
+description: Internal links are added to tabs if selected
+icon: $:/plugins/wikilabs/link-to-tabs/icon
+list: readme settings license history
+name: Link to Tabs
+plugin-type: plugin
+title: $:/plugins/wikilabs/link-to-tabs
+type: application/json
+version: 3.0.0
