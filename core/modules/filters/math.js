@@ -215,7 +215,7 @@ function makeNumericBinaryOperatorWithMultiValue(fnCalc) {
 		var result = [];
 		
 		// Check if we have multi-value operands
-		const hasMultiValueOperands = operator.multiValueOperands && operator.multiValueOperands.some(operand => Array.isArray(operand) && operand.length !== 1);
+		const hasMultiValueOperands = operator.multiValueOperands.some(operand => Array.isArray(operand) && operand.length !== 1);
 		
 		if(!hasMultiValueOperands) {
 			// Use the original simple operation for speed

@@ -12,7 +12,7 @@ Filter operator for substituting variables and embedded filter expressions with 
 exports.substitute = function(source, operator, options) {
 	const results = [];
 
-	const hasMultiValueOperands = operator.multiValueOperands && operator.multiValueOperands.some(operand => Array.isArray(operand) && operand.length !== 1);
+	const hasMultiValueOperands = operator.multiValueOperands.some(operand => Array.isArray(operand) && operand.length !== 1);
 
 	if(!hasMultiValueOperands) {
 		// We use the original simple substitution without list processing for speed
