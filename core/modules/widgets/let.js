@@ -7,7 +7,6 @@ This widget allows defining multiple variables at once, while allowing
 the later variables to depend upon the earlier ones.
 
 ```
-\define helloworld() Hello world!
 <$let currentTiddler="target" value={{!!value}} currentTiddler="different">
   {{!!value}} will be different from <<value>>
 </$let>
