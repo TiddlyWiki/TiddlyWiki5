@@ -30,7 +30,6 @@ matchTiddlerTemplate={{{ [<currentTiddler>]:cascade[all[shadows+tiddlers]tag<tag
 </td>
 <td>
 <$link to=<<matchFilterTiddler>> ><<matchFilterTiddler>></$link>
-<$codeblock code={{{ [<matchFilterTiddler>get[text]] }}} />
 </td>
 <td>
 <$button class="tc-btn-invisible" to=<<matchTiddlerTemplate>> >
@@ -44,3 +43,4 @@ matchTiddlerTemplate={{{ [<currentTiddler>]:cascade[all[shadows+tiddlers]tag<tag
 </table>
 
 </$let>
+
