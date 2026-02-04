@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9600
+description: Fix Ctrl-Enter not working in EditTemplate tag name input
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9600
+github-contributors: yaisog
+
+The tag name input now calls `<<save-tiddler-actions>>` from the EditTemplate when Ctrl-Enter (or whichever key is assigned to input-accept-variant) is pressed.
