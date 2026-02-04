@@ -38,3 +38,4 @@ Follow these instructions when using TiddlyWiki with a client-server Node.js con
 
 <$macrocall $name=".note" _="An overview of working with plugins can be found at [[Plugins]].<br>Also see: [[Installing custom plugins on Node.js]]."/>
 
+<<.tip "You can find the sourcecode on GitHub at https://github.com/TiddlyWiki/TiddlyWiki5">>
