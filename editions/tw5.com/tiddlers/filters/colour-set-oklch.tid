@@ -1,0 +1,34 @@
+created: 20241117161528913
+modified: 20241117161528913
+tags: [[Filter Operators]] [[Colour Operators]]
+title: colour-set-oklch Operator
+caption: colour-set-oklch
+op-purpose: manipulate colour values in the OKLCH colour space
+op-input: a selection of colour values
+op-suffix: "l", "c" or "h" to indicate which component of the colour to modify
+op-parameter: value of the property to modify
+op-output: the values of the modified colours
+
+<<.from-version "5.4.0">> See ColourPalettes for background.
+
+The <<.op colour-set-oklch>> operator is used to manipulate colour values in the [[OKLCH|https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch]] colour space. The OKLCH colour space expresses colours as three numbers:
+
+|!Id |!Name |!Range |
+|l |Lightness |0 – 1 |
+|c |Chroma |0 – 0.4 |
+|h |Hue |0 – 360 |
+
+The advantage of the OKLCH space is that it is perceptually uniform, meaning that equal changes in the numbers correspond to equal changes in the perceived colour.
+
+For example, this filter expression will alter the lightness of the current page background colour to 0.1:
+
+```
+[function[colour],[page-background]colour-set-oklch:l[0.1]]
+```
+
+See also the following related operators:
+
+* <<.olink colour-get-oklch>> to retrieve a component of a colour value in the OKLCH colour space
+* <<.olink colour-lighten>> to lighten a colour value
+* <<.olink colour-darken>> to lighten a colour value
+

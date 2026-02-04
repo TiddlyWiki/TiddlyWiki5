@@ -56,10 +56,10 @@ Invoke the action associated with this widget
 */
 SetMultipleFieldsWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var tiddler = this.wiki.getTiddler(this.actionTiddler),
-		names, values = this.wiki.filterTiddlers(this.actionValues,this);
+		names, values = this.wiki.filterTiddlers(this.actionValues,this,{defaultFilterRunPrefix: "all"});
 	if(this.actionFields) {
 		var additions = {};
-		names = this.wiki.filterTiddlers(this.actionFields,this);
+		names = this.wiki.filterTiddlers(this.actionFields,this,{defaultFilterRunPrefix: "all"});
 		$tw.utils.each(names,function(fieldname,index) {
 			additions[fieldname] = values[index] || "";
 		});
@@ -68,7 +68,7 @@ SetMultipleFieldsWidget.prototype.invokeAction = function(triggeringWidget,event
 		this.wiki.addTiddler(new $tw.Tiddler(creationFields,tiddler,{title: this.actionTiddler},modificationFields,additions));
 	} else if(this.actionIndexes) {
 		var data = this.wiki.getTiddlerData(this.actionTiddler,Object.create(null));
-		names = this.wiki.filterTiddlers(this.actionIndexes,this);
+		names = this.wiki.filterTiddlers(this.actionIndexes,this,{defaultFilterRunPrefix: "all"});
 		$tw.utils.each(names,function(name,index) {
 			data[name] = values[index] || "";
 		});

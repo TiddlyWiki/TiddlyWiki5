@@ -44,9 +44,9 @@ color:$(foregroundColor)$;
 	tag=<<__tag__>>
 	icon=<<__icon__>>
 	colour=<<__colour__>>
-	fallbackTarget={{$palette$##tag-background}}
-	colourA={{$palette$##foreground}}
-	colourB={{$palette$##background}}
+	fallbackTarget=<<colour tag-background>>
+	colourA=<<colour foreground>>
+	colourB=<<colour background>>
 	element-tag=<<__element-tag__>>
 	element-attributes=<<__element-attributes__>>
 	actions=<<__actions__>>
@@ -61,7 +61,6 @@ color:$(foregroundColor)$;
 			tag=<<currentTiddler>>
 			icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
 			colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
-			palette={{$:/palette}}
 			element-tag="$button"
 			element-attributes="""popup=<<qualify "$:/state/popup/tag">> dragFilter="[all[current]tagging[]]" tag='span'"""
 			prefix=<<prefix>>

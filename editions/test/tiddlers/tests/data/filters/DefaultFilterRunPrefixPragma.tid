@@ -1,0 +1,21 @@
+title: Filters/DefaultFilterRunPrefixPragma
+description: Test Default Filter Run Prefix Pragma
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+\procedure mysubfilter() 1 1 +[join[Y]]
+
+(<$text text={{{ ::defaultprefix:all 1 1 [subfilter<mysubfilter>] +[join[X]] }}}/>)
+
+(<$text text={{{ 1 1 ::defaultprefix:all 1 1 +[join[X]] }}}/>)
+
+(<$text text={{{ ::nonexistent X }}}/>)
+
++
+title: ExpectedResult
+
+<p>(1X1X1Y1)</p><p>(1X1X1)</p><p>(Filter Error: Unknown filter pragma)</p>

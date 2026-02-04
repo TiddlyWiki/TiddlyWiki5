@@ -1,0 +1,45 @@
+
+title: Operators/Palettes/BasicLookup
+description: Basic palette lookups
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<colour page-background>>
+<<colour background>>
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+MyPalette
++
+title: MyPalette
+name: My Palette
+description: My custom palette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+palette-import: MyOtherPalette
+color-scheme: light
+
+page-background: <<colour custom>>
+custom: #f4e4d4
++
+title: MyOtherPalette
+name: My Other Palette
+description: My other custom palette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+
+page-background: #d4e4f4
+background: red
++
+title: ExpectedResult
+
+<p>#f4e4d4</p><p>red</p>

@@ -1,0 +1,19 @@
+title: $:/palettes/AutoToggle/Settings
+
+\procedure set-imported-palette(field)
+<$select field=<<field>>>
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]] -[<currentTiddler>]">
+		<option value=<<currentTiddler>>><$view field="name"><$view field="title"/></$view></option>
+	</$list>
+</$select>
+\end set-imported-palette
+
+This palette can be used to automatically switch between two palettes based on the browser's dark mode setting.
+
+<$tiddler tiddler={{$:/palette}}>
+
+Light palette: <<set-imported-palette field:"palette-import@light">>
+
+Dark palette: <<set-imported-palette field:"palette-import@dark">>
+
+</$tiddler>
