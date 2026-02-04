@@ -859,11 +859,11 @@ Widget.prototype.destroy = function(options) {
 Remove any DOM nodes created by this widget 
 */
 Widget.prototype.removeLocalDomNodes = function() {
-	$tw.utils.each(this.domNodes, function(domNode) {
+	for(const domNode of this.domNodes) {
 		if(domNode.parentNode) {
 			domNode.parentNode.removeChild(domNode);
 		}
-	});
+	}
 	this.domNodes = [];
 };
 
