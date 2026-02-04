@@ -74,7 +74,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 	// Get the scroll container and register the current scroll position
 	var container = $tw.utils.getScrollContainer(domNode),
 		scrollTop = container.scrollTop;
-    // Measure the specified minimum height
+	// Measure the specified minimum height
 	domNode.style.height = minHeight;
 	var measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
 	// Set its height to auto so that it snaps to the correct height
@@ -144,7 +144,7 @@ exports.getPassword = function(name) {
 Force layout of a dom node and its descendents
 */
 exports.forceLayout = function(element) {
-	var dummy = element.offsetWidth;
+	// var dummy = element.offsetWidth;
 };
 
 /*
@@ -246,7 +246,7 @@ exports.copyToClipboard = function(text,options) {
 	}
 	if(!options.doNotNotify) {
 		var successNotification = options.successNotification || "$:/language/Notifications/CopiedToClipboard/Succeeded",
-			failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed"
+			failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed";
 		$tw.notifier.display(succeeded ? successNotification : failureNotification);
 	}
 	document.body.removeChild(textArea);
@@ -257,8 +257,8 @@ Collect DOM variables
 */
 exports.collectDOMVariables = function(selectedNode,domNode,event) {
 	var variables = {},
-	    selectedNodeRect,
-	    domNodeRect;
+		selectedNodeRect,
+		domNodeRect;
 	if(selectedNode) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
@@ -335,4 +335,41 @@ exports.querySelectorAllSafe = function(selector,baseElement) {
 	} catch(e) {
 		console.log("Invalid selector: ",selector);
 	}
+};
+
+/*
+Sanitize HTML tag- and custom web component names
+	Check function parameters for invalid character ranges up to \uFFFF. This detects problems in a range JS RegExp can handle
+	We assume that everything out of js RegExp-range is valid, which is OK for \u10000-\uEFFFF according to the spec
+	Unicode overview: https://symbl.cc/en/unicode-table/
+*/
+exports.makeTagNameSafe = function(tag,defaultTag) {
+	// Early exit for common standard tags
+	var tagLower = (tag || "").toLowerCase();
+	if($tw.config.htmlStandardElements.indexOf(tagLower) !== -1) {
+		return tag;
+	}
+	// Web-components spec see: https://html.spec.whatwg.org/#valid-custom-element-name
+	var regxSanitizeChars = new RegExp($tw.config.htmlCustomPrimitives.sanitizePCENChar,"mg");
+	var sanitizedDefaultTag = defaultTag.replace(regxSanitizeChars,"") || "SPAN";
+
+	tag = tag || sanitizedDefaultTag;
+
+	// Sanitize inputs. If empty use default
+	var result = tag.replace(regxSanitizeChars,"") || sanitizedDefaultTag;
+
+	// Custom elements have to have a hyphen in the name and have to be lower case
+	result = (result.includes("-")) ? result.toLowerCase() : result;
+	// Check for unsafe tag and unsafe defaultTag
+	if($tw.config.htmlUnsafeElements.includes(result.toLowerCase())) {
+		result = ($tw.config.htmlUnsafeElements.includes(sanitizedDefaultTag.toLowerCase())) ? "safe-" + sanitizedDefaultTag : sanitizedDefaultTag;
+	}
+	// Check for forbidden tag names according to spec and log info to help users. See: $:/core/modules/config.js
+	if($tw.config.htmlForbiddenTags.includes(result.toLowerCase())) {
+		if($tw.browser) {
+			console.warn("TiddlyWiki: Forbidden custom element \"" + result + "\" See: https://html.spec.whatwg.org/#valid-custom-element-name");
+		}
+		result = "safe-" + result;
+	}
+	return result;
 };

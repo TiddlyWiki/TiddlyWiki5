@@ -62,9 +62,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	var self = this;
 	// Sanitise the specified tag
 	var tag = this.linkTag;
-	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
-		tag = "a";
-	}
+	tag = $tw.utils.makeTagNameSafe(tag,"a");
 	// Create our element
 	var namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"}),
 		domNode = this.document.createElementNS(namespace,tag);
@@ -86,7 +84,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			classes.push(this.linkClasses);
 		}
 	} else if(this.overrideClasses !== "") {
-		classes.push(this.overrideClasses)
+		classes.push(this.overrideClasses);
 	}
 	if(classes.length > 0) {
 		domNode.setAttribute("class",classes.join(" "));
@@ -97,7 +95,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	if(wikilinkTransformFilter) {
 		// Use the filter to construct the href
 		wikiLinkText = this.wiki.filterTiddlers(wikilinkTransformFilter,this,function(iterator) {
-			iterator(self.wiki.getTiddler(self.to),self.to)
+			iterator(self.wiki.getTiddler(self.to),self.to);
 		})[0];
 	} else {
 		// Expand the tv-wikilink-template variable to construct the href
@@ -121,12 +119,12 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	var tooltipWikiText = this.tooltip || this.getVariable("tv-wikilink-tooltip");
 	if(tooltipWikiText) {
 		var tooltipText = this.wiki.renderText("text/plain","text/vnd.tiddlywiki",tooltipWikiText,{
-				parseAsInline: true,
-				variables: {
-					currentTiddler: this.to
-				},
-				parentWidget: this
-			});
+			parseAsInline: true,
+			variables: {
+				currentTiddler: this.to
+			},
+			parentWidget: this
+		});
 		domNode.setAttribute("title",tooltipText);
 	}
 	if(this.role) {
@@ -135,7 +133,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	this.assignAttributes(domNode,{
 		sourcePrefix: "aria-",
 		destPrefix: "aria-"
-	})
+	});
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"},

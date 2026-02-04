@@ -24,16 +24,13 @@ KeyboardWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 KeyboardWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
 	var tag = this.parseTreeNode.isBlock ? "div" : "span";
-	if(this.tag && $tw.config.htmlUnsafeElements.indexOf(this.tag) === -1) {
-		tag = this.tag;
-	}
+	tag = $tw.utils.makeTagNameSafe(this.tag,tag);
 	// Create element
 	var domNode = this.document.createElement(tag);
 	// Assign classes
@@ -50,7 +47,7 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 };
 
 KeyboardWidget.prototype.handleChangeEvent = function(event) {
-	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+	if($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
 		return true;
 	}
 
@@ -59,10 +56,10 @@ KeyboardWidget.prototype.handleChangeEvent = function(event) {
 		var handled = this.invokeActions(this,event);
 		if(this.actions) {
 			var variables = {
-					"event-key": event.key,
-					"event-code": event.code,
-					"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event)
-				};
+				"event-key": event.key,
+				"event-code": event.code,
+				"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event)
+			};
 			if(keyInfo.keyDescriptor) {
 				variables["event-key-descriptor"] = keyInfo.keyDescriptor;
 			}
@@ -76,7 +73,7 @@ KeyboardWidget.prototype.handleChangeEvent = function(event) {
 		return true;
 	}
 	return false;
-}
+};
 
 KeyboardWidget.prototype.dispatchMessage = function(event) {
 	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler")});
