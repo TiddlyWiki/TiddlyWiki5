@@ -10,5 +10,3 @@ code-body: yes
 ''{{$:/language/SideBar/Contents/BackTo}}''
 
 {{{ [all[current]tags[]!is[system]] }}}
-
-<!-- https://tiddlywiki.com/static -->
