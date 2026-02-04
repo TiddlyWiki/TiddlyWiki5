@@ -1,0 +1,11 @@
+created: 20260122212128206
+modified: 20260122212128206
+tags: [[Filter Expression]]
+title: Filter Pragma
+type: text/vnd.tiddlywiki
+
+TODO:docs-default-prefix-for-subfilter: High level pragma docs & railroad diagram
+
+A <<.def "filter pragma">> is a special instruction embedded within a filter expression that affects the behavior of subsequent filter operations. Filter pragmas are similar to wikitext pragmas and are used to control aspects of filter evaluation. They do not appear at the start of a filter, but can be placed between other filter runs.
+
+The `::defaultprefix` pragma sets the default filter run prefix for the remainder of the filter expression. This allows users to control deduplication behavior without having to specify prefixes for each individual operation.

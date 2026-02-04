@@ -58,7 +58,7 @@ exports.split = makeStringBinaryOperator(
 );
 
 exports["enlist-input"] = makeStringBinaryOperator(
-	function(a,o,s) {return $tw.utils.parseStringArray("" + a,(s === "raw"));}
+	function(a,o,s) {return $tw.utils.parseStringArray("" + a,(s === "raw" || s === "all"));}
 );
 
 exports.join = makeStringReducingOperator(

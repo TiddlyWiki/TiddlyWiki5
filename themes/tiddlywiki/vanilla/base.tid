@@ -941,6 +941,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	width: 60%;
 }
 
+.tc-advanced-search .tc-advanced-search-options input {
+	width: auto;
+}
+
 .tc-search a svg {
 	width: 1.2em;
 	height: 1.2em;

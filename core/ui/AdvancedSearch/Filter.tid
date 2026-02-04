@@ -96,13 +96,24 @@ caption: {{$:/language/Search/Filter/Caption}}
 	</$list>
 </div>
 
+<div class="tc-advanced-search-options">
+	<$checkbox tiddler="$:/config/Search/AllowDuplicates" field="text" checked="yes" unchecked="no" default="yes">
+		<$text text=" "/><<lingo Filter/AllowDuplicates>>
+	</$checkbox>
+</div>
+
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="" tag="div" class="tc-search-results">
-	<$set name="resultCount" value="<$count filter={{$:/temp/advancedsearch}}/>">
+	<$let
+		filter-allow-duplicates="::defaultprefix:all [subfilter{$:/temp/advancedsearch}]"
+		filter-deduplicate="::defaultprefix:or [subfilter{$:/temp/advancedsearch}]"
+		currentFilter={{{ [{$:/config/Search/AllowDuplicates}match[yes]then<filter-allow-duplicates>else<filter-deduplicate>] }}}
+		resultCount={{{ [subfilter<currentFilter>count[]] }}}
+	>
 		<p><<lingo Filter/Matches>></p>
-		<$list filter={{$:/temp/advancedsearch}}>
+		<$list filter="[subfilter<currentFilter>]">
 			<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] :and[then[]else[tc-list-item-selected]] }}}>
 				<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 			</span>
 		</$list>
-	</$set>
+	</$let>
 </$reveal>
