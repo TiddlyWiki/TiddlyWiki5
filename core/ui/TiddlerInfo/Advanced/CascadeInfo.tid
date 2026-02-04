@@ -8,7 +8,7 @@ tags: $:/tags/TiddlerInfo/Advanced
 
 <table style="text-align:center;" class="tc-max-width">
 <thead>
-<$list filter="[[ViewTemplate]] [[Active Filter Condition]] [[Template]]" variable="heading">
+<$list filter="[[View]] [[Active Filter Condition]] [[Template]]" variable="heading">
 <th><<heading>></th>
 </$list>
 </thead>
@@ -42,4 +42,5 @@ matchTiddlerTemplate={{{ [<currentTiddler>]:cascade[all[shadows+tiddlers]tag<tag
 </tr>
 </$list>
 </table>
+
 </$let>
