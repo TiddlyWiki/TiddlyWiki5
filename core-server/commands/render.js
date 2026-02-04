@@ -22,12 +22,12 @@ Render individual tiddlers and save the results to the specified files
 		this.callback = callback;
 	};
 	
-	Command.prototype.execute = function() {
+	Command.prototype.execute = async function() {
 		if(this.params.length < 1) {
 			return "Missing tiddler filter";
 		}
 		var self = this,
-			fs = require("fs"),
+			fs = require("fs/promises"),
 			path = require("path"),
 			wiki = this.commander.wiki,
 			tiddlerFilter = this.params[0],
@@ -41,7 +41,7 @@ Render individual tiddlers and save the results to the specified files
 				variables[variableList[0]] = variableList[1];
 				variableList = variableList.slice(2);
 			}
-		$tw.utils.each(tiddlers,function(title) {
+		await $tw.utils.eachAsync(tiddlers,async function(title) {
 			var filenameResults = wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]));
 			if(filenameResults.length > 0) {
 				var filepath = path.resolve(self.commander.outputPath,filenameResults[0]);
@@ -54,7 +54,7 @@ Render individual tiddlers and save the results to the specified files
 				widgetNode.render(container,null);
 				var text = type === "text/html" ? container.innerHTML : container.textContent;
 				$tw.utils.createFileDirectories(filepath);
-				fs.writeFileSync(filepath,text,"utf8");
+				await fs.writeFile(filepath,text,"utf8");
 			} else {
 				console.log("Not rendering \"" + title + "\" because the filename filter returned an empty result");
 			}
