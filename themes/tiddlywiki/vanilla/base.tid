@@ -1270,6 +1270,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	margin-left:5px;
 }
 
+.tc-tiddler-edit-title .tc-tiddler-controls {
+	margin-top: -10px;
+}
+
+.tc-tiddler-edit-title .tc-tiddler-controls > span > button {
+	vertical-align: super;
+}
+
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img,
 .tc-search button svg, .tc-search a svg {
 	color: <<colour tiddler-controls-foreground>>;
