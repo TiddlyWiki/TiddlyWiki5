@@ -1,7 +1,7 @@
-title: $:/changenotes/5.4.0/#9462
+title: $:/changenotes/5.5.0/#9462
 description: Add button and import option to convert Markdown tiddlers to WikiText
 tags: $:/tags/ChangeNote
-release: 5.4.0
+release: 5.5.0
 change-type: feature
 change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9462
