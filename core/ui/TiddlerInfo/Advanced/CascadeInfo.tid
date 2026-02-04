@@ -1,0 +1,45 @@
+title: $:/core/ui/TiddlerInfo/Advanced/CascadeInfo
+tags: $:/tags/TiddlerInfo/Advanced
+
+\define lingo-base() $:/language/TiddlerInfo/Advanced/CascadeInfo/
+<$let infoTiddler=<<currentTiddler>>>
+
+''<<lingo Heading>>''
+
+<table style="text-align:center;" class="tc-max-width">
+<thead>
+<$list filter="[[ViewTemplate]] [[Active Filter Condition]] [[Template]]" variable="heading">
+<th><<heading>></th>
+</$list>
+</thead>
+<$list filter="[[$:/tags/ViewTemplate]tagging[]]" variable="ViewTemplate">
+<tr>
+<$let
+view={{{ [<ViewTemplate>get[caption]]:else[<ViewTemplate>]+[split[/]last[]] }}}
+tagFilter=`$:/tags/ViewTemplate${ [<view>titlecase[]] }$Filter`
+defaultTemplate=`$:/core/ui/ViewTemplate/$(view)$/default`
+matchFilterTiddler={{{ [all[shadows+tiddlers]tag<tagFilter>!is[draft]]:filter[<storyTiddler>subfilter{!!text}]+[first[]] }}}
+matchFilter={{{ [<matchFilterTiddler>get[text]] }}}
+matchTiddlerTemplate={{{ [<currentTiddler>]:cascade[all[shadows+tiddlers]tag<tagFilter>!is[draft]get[text]]:and[!is[blank]else<defaultTemplate>]}}}
+>
+<%if [<defaultTemplate>get[title]] %>
+<td>
+<$link to=<<ViewTemplate>> >
+<<view>>
+</$link>
+</td>
+<td>
+<$link to=<<matchFilterTiddler>> ><<matchFilterTiddler>></$link>
+<$codeblock code={{{ [<matchFilterTiddler>get[text]] }}} />
+</td>
+<td>
+<$button class="tc-btn-invisible" to=<<matchTiddlerTemplate>> >
+{{$:/core/images/file}}
+</$button>
+</td>
+<%endif%>
+</$let>
+</tr>
+</$list>
+</table>
+</$let>
