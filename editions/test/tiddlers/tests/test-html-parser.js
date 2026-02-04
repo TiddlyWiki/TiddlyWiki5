@@ -235,11 +235,307 @@ describe("HTML tag new parser tests", function() {
 		expect(parser.parseTag("< $mytag attrib1='something' attrib2=else thing>",0)).toEqual(
 			null
 		);
-		expect(parser.parseTag("<$mytag attrib3=<<myMacro one:two three:'four and five'>>>",0)).toEqual(
-			{ type : "mytag", start : 0, attributes : { attrib3 : { type : "macro", start : 7, name : "attrib3", value : { type : "macrocall", start : 16, params : [ { type : "macro-parameter", start : 25, value : "two", name : "one", end : 33 }, { type : "macro-parameter", start : 33, value : "four and five", name : "three", end : 55 } ], name : "myMacro", end : 57 }, end : 57 } }, orderedAttributes: [ { type : "macro", start : 7, name : "attrib3", value : { type : "macrocall", start : 16, params : [ { type : "macro-parameter", start : 25, value : "two", name : "one", end : 33 }, { type : "macro-parameter", start : 33, value : "four and five", name : "three", end : 55 } ], name : "myMacro", end : 57 }, end : 57 } ], tag : "$mytag", end : 58 }
+		expect(parser.parseTag("<$mytag attrib3=<<myMacro one:two three:'four and five'>>>", 0)).toEqual(
+			{
+				"type": "mytag",
+				"start": 0,
+				"attributes": {
+					"attrib3": {
+						"start": 7,
+						"name": "attrib3",
+						"type": "macro",
+						"value": {
+							"type": "transclude",
+							"start": 16,
+							"attributes": {
+								"$variable": {
+									"name": "$variable",
+									"type": "string",
+									"value": "myMacro"
+								},
+								"one": {
+									"start": 25,
+									"name": "one",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "two",
+									"end": 33
+								},
+								"three": {
+									"start": 33,
+									"name": "three",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "four and five",
+									"quoted": true,
+									"end": 55
+								}
+							},
+							"orderedAttributes": [
+								{
+									"name": "$variable",
+									"type": "string",
+									"value": "myMacro"
+								},
+								{
+									"start": 25,
+									"name": "one",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "two",
+									"end": 33
+								},
+								{
+									"start": 33,
+									"name": "three",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "four and five",
+									"quoted": true,
+									"end": 55
+								}
+							],
+							"end": 57
+						},
+						"end": 57
+					}
+				},
+				"orderedAttributes": [
+					{
+						"start": 7,
+						"name": "attrib3",
+						"type": "macro",
+						"value": {
+							"type": "transclude",
+							"start": 16,
+							"attributes": {
+								"$variable": {
+									"name": "$variable",
+									"type": "string",
+									"value": "myMacro"
+								},
+								"one": {
+									"start": 25,
+									"name": "one",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "two",
+									"end": 33
+								},
+								"three": {
+									"start": 33,
+									"name": "three",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "four and five",
+									"quoted": true,
+									"end": 55
+								}
+							},
+							"orderedAttributes": [
+								{
+									"name": "$variable",
+									"type": "string",
+									"value": "myMacro"
+								},
+								{
+									"start": 25,
+									"name": "one",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "two",
+									"end": 33
+								},
+								{
+									"start": 33,
+									"name": "three",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "four and five",
+									"quoted": true,
+									"end": 55
+								}
+							],
+							"end": 57
+						},
+						"end": 57
+					}
+				],
+				"tag": "$mytag",
+				"end": 58
+			}
 		);
 		expect(parser.parseTag("<$mytag attrib1='something' attrib2=else thing attrib3=<<myMacro one:two three:'four and five'>>>",0)).toEqual(
-			{ type : "mytag", start : 0, attributes : { attrib1 : { type : "string", start : 7, name : "attrib1", value : "something", end : 27 }, attrib2 : { type : "string", start : 27, name : "attrib2", value : "else", end : 40 }, thing : { type : "string", start : 40, name : "thing", value : "true", end : 47 }, attrib3 : { type : "macro", start : 47, name : "attrib3", value : { type : "macrocall", start : 55, params : [ { type : "macro-parameter", start : 64, value : "two", name : "one", end : 72 }, { type : "macro-parameter", start : 72, value : "four and five", name : "three", end : 94 } ], name : "myMacro", end : 96 }, end : 96 } }, orderedAttributes: [ { type : "string", start : 7, name : "attrib1", value : "something", end : 27 }, { type : "string", start : 27, name : "attrib2", value : "else", end : 40 }, { type : "string", start : 40, name : "thing", value : "true", end : 47 }, { type : "macro", start : 47, name : "attrib3", value : { type : "macrocall", start : 55, params : [ { type : "macro-parameter", start : 64, value : "two", name : "one", end : 72 }, { type : "macro-parameter", start : 72, value : "four and five", name : "three", end : 94 } ], name : "myMacro", end : 96 }, end : 96 } ], tag : "$mytag", end : 97 }
+			{
+				"type": "mytag",
+				"start": 0,
+				"attributes": {
+					"attrib1": {
+						"start": 7,
+						"name": "attrib1",
+						"type": "string",
+						"value": "something",
+						"end": 27
+					},
+					"attrib2": {
+						"start": 27,
+						"name": "attrib2",
+						"type": "string",
+						"value": "else",
+						"end": 40
+					},
+					"thing": {
+						"start": 40,
+						"name": "thing",
+						"type": "string",
+						"value": "true",
+						"end": 47
+					},
+					"attrib3": {
+						"start": 47,
+						"name": "attrib3",
+						"type": "macro",
+						"value": {
+							"type": "transclude",
+							"start": 55,
+							"attributes": {
+								"$variable": {
+									"name": "$variable",
+									"type": "string",
+									"value": "myMacro"
+								},
+								"one": {
+									"start": 64,
+									"name": "one",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "two",
+									"end": 72
+								},
+								"three": {
+									"start": 72,
+									"name": "three",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "four and five",
+									"quoted": true,
+									"end": 94
+								}
+							},
+							"orderedAttributes": [
+								{
+									"name": "$variable",
+									"type": "string",
+									"value": "myMacro"
+								},
+								{
+									"start": 64,
+									"name": "one",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "two",
+									"end": 72
+								},
+								{
+									"start": 72,
+									"name": "three",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "four and five",
+									"quoted": true,
+									"end": 94
+								}
+							],
+							"end": 96
+						},
+						"end": 96
+					}
+				},
+				"orderedAttributes": [
+					{
+						"start": 7,
+						"name": "attrib1",
+						"type": "string",
+						"value": "something",
+						"end": 27
+					},
+					{
+						"start": 27,
+						"name": "attrib2",
+						"type": "string",
+						"value": "else",
+						"end": 40
+					},
+					{
+						"start": 40,
+						"name": "thing",
+						"type": "string",
+						"value": "true",
+						"end": 47
+					},
+					{
+						"start": 47,
+						"name": "attrib3",
+						"type": "macro",
+						"value": {
+							"type": "transclude",
+							"start": 55,
+							"attributes": {
+								"$variable": {
+									"name": "$variable",
+									"type": "string",
+									"value": "myMacro"
+								},
+								"one": {
+									"start": 64,
+									"name": "one",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "two",
+									"end": 72
+								},
+								"three": {
+									"start": 72,
+									"name": "three",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "four and five",
+									"quoted": true,
+									"end": 94
+								}
+							},
+							"orderedAttributes": [
+								{
+									"name": "$variable",
+									"type": "string",
+									"value": "myMacro"
+								},
+								{
+									"start": 64,
+									"name": "one",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "two",
+									"end": 72
+								},
+								{
+									"start": 72,
+									"name": "three",
+									"assignmentOperator": ":",
+									"type": "string",
+									"value": "four and five",
+									"quoted": true,
+									"end": 94
+								}
+							],
+							"end": 96
+						},
+						"end": 96
+					}
+				],
+				"tag": "$mytag",
+				"end": 97
+			}
 		);
 	});
 

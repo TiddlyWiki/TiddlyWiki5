@@ -1,0 +1,16 @@
+title: Functions/FunctionDefaultValues
+description: Use defaults for missing parameters in functions in filters
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function .test(prefix:Default) [[ Content]addprefix<prefix>]
+
+<$text text={{{ [.test[Special]] }}}/>,<$text text={{{ [.test[]] }}}/>
+
++
+title: ExpectedResult
+
+<p>Special Content,Default Content</p>

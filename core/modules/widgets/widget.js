@@ -160,7 +160,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 			});
 			// Parameters are an array of {name:, value:, multivalue:} pairs (name and multivalue are optional)
 			$tw.utils.each(params,function(param) {
-				if(param.multiValue) {
+				if(param.multiValue && param.multiValue.length) {
 					variables[param.name] = param.multiValue;
 				} else {
 					variables[param.name] = param.value || "";
@@ -233,8 +233,10 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 			paramMultiValue = typeof param === "string" ? [param] : (param.multiValue || [paramValue]);
 		}
 		// If we've still not got a value, use the default, if any
-		paramValue = paramValue || paramInfo["default"] || "";
-		paramMultiValue = paramMultiValue || [paramValue];
+		if(!paramValue) {
+			paramValue = paramInfo["default"] || "";
+			paramMultiValue = [paramValue];
+		}
 		// Store the parameter name and value
 		results.push({name: paramInfo.name, value: paramValue, multiValue: paramMultiValue});
 	}
@@ -414,7 +416,21 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 			value = [value];
 		}
 	} else if(attribute.type === "macro") {
-		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
+		// Get the macro name
+		var macroName = attribute.value.attributes["$variable"].value;
+		// Collect macro parameters
+		var params = [];
+		$tw.utils.each(attribute.value.orderedAttributes,function(attr) {
+			var param = {
+				value: self.computeAttribute(attr)
+			};
+			if(attr.name && !attr.isPositional) {
+				param.name = attr.name;
+			}
+			params.push(param);
+		});
+		// Invoke the macro
+		var variableInfo = this.getVariableInfo(macroName,{params: params});
 		if(options.asList) {
 			value = variableInfo.resultList;
 		} else {
