@@ -33,7 +33,7 @@ parametre.nom [: [:espace] ":" [:espace] defaut ]
 
 La valeur par <<.place défaut>> d'un paramètre est spécifiée comme suit<<:>>
 
-<$railroad text={{$:/editions/tw5.com/railroad/macro-parameter-value}}/>
+<$railroad text={{$:/editions/tw5.com/railroad/call-parameter-value}}/>
 
 La définition de la <<.place suite>> se fait comme suit<<:>>
 

@@ -1,0 +1,8 @@
+caption: --tp-story-width
+created: 20260130065510314
+modified: 20260130065552027
+tags: [[Core CSS Variables]]
+title: --tp-story-width CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-story-width` CSS variable represents the overall width of the story river.

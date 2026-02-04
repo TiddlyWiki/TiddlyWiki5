@@ -21,7 +21,7 @@ The <<.def list-tagged-draggable>> [[macro|Macros]] renders the tiddlers with a 
 ; emptyMessage
 : Optional wikitext to display if there are no tiddlers with the specified tag
 
-; displayField
+; displayField <<.from-version 5.4.0>>
 : Optional name of the field to display when the list is rendered. Defaults to `title` field
 
 ; startactions <<.from-version "5.4.0">>

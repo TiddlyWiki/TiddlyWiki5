@@ -18,7 +18,7 @@ exports.serialize = function (node) {
 	if(node.orderedAttributes) {
 		node.orderedAttributes.forEach(function (attribute) {
 			if(attribute.name !== "$variable") {
-				result += " " + $tw.utils.serializeAttribute(attribute,{assignmentSymbol:":"});
+				result += " " + $tw.utils.serializeAttribute(attribute);
 			}
 		});
 	}

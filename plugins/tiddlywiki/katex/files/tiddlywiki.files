@@ -2,11 +2,11 @@
 	"directories": [
 		{
 			"path": "./fonts/",
-			"filesRegExp": "^.*\\.woff$",
+			"filesRegExp": "^.*\\.woff2$",
 			"isTiddlerFile": false,
 			"fields": {
 				"title": {"source": "filename", "prefix": "$:/plugins/tiddlywiki/katex/fonts/"},
-				"type": "font/woff"
+				"type": "font/woff2"
 			}
 		}
 	],
