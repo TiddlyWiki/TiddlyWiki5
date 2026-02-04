@@ -114,7 +114,7 @@ tags: $:/tags/EditTemplate
 					class=`tc-edit-texteditor tc-popup-handle ${ [<newFieldNameTiddler>get[text]] :intersection[<storyTiddler>fields[]] :then[[tc-edit-field-exists]] }$`
 					configTiddlerFilter="[[$:/config/EditMode/fieldname-filter]]"
 					default=""
-					focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] :else[[false]] }}}
+					focus={{{ [{!!draft.of}is[tiddler]then{$:/config/AutoFocusEdit}match[fields]then[true]] :else[{$:/config/AutoFocus}match[fields]then[true]] :else[[false]] }}}
 					focusPopup=<<qualify "$:/state/popup/field-dropdown">>
 					inputAcceptVariantActions=<<save-tiddler-actions>>
 					inputCancelActions=<<cancel-search-actions>>
