@@ -42,8 +42,8 @@ PasswordWidget.prototype.render = function(parent,nextSibling) {
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 };
 
 PasswordWidget.prototype.handleChangeEvent = function(event) {

@@ -8,7 +8,7 @@ title: $:/core/ui/EditTemplate/body/editor
   class="tc-edit-texteditor tc-edit-texteditor-body"
   placeholder={{$:/language/EditTemplate/Body/Placeholder}}
   tabindex={{$:/config/EditTabIndex}}
-  focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}
+  focus={{{ [{!!draft.of}is[tiddler]then{$:/config/AutoFocusEdit}match[text]then[true]] ~[{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}
   cancelPopups="yes"
   fileDrop={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}}
 

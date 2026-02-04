@@ -106,8 +106,8 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	});
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 };
 
 /*
@@ -130,7 +130,7 @@ EventWidget.prototype.execute = function() {
 EventWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-eventcatcher");
-	this.domNode.className = classes.join(" ");
+	this.domNode.className = classes.join(" ").trim();
 };
 
 /*

@@ -34,7 +34,7 @@ function FramedEngine(options) {
 	var paletteTitle = this.widget.wiki.getTiddlerText("$:/palette");
 	var colorScheme = (this.widget.wiki.getTiddler(paletteTitle) || {fields: {}}).fields["color-scheme"] || "light";
 	this.iframeDoc.open();
-	this.iframeDoc.write("<meta name='color-scheme' content='" + colorScheme + "'>");
+	this.iframeDoc.write("<!DOCTYPE html><html><head><meta name='color-scheme' content='" + colorScheme + "'></head><body></body></html>");
 	this.iframeDoc.close();
 	// Style the iframe
 	this.iframeNode.className = this.dummyTextArea.className;
@@ -156,8 +156,8 @@ Fix the height of textarea to fit content
 FramedEngine.prototype.fixHeight = function() {
 	// Make sure styles are updated
 	this.copyStyles();
-	// Adjust height
-	if(this.widget.editTag === "textarea") {
+	// If .editRows is initialised, it takes precedence
+	if(this.widget.editTag === "textarea" && !this.widget.editRows) {
 		if(this.widget.editAutoHeight) {
 			if(this.domNode && !this.domNode.isTiddlyWikiFakeDom) {
 				var newHeight = $tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);

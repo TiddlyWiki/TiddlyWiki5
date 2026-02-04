@@ -45,8 +45,8 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	]);
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 };
 
 KeyboardWidget.prototype.handleChangeEvent = function(event) {
@@ -110,7 +110,7 @@ KeyboardWidget.prototype.execute = function() {
 KeyboardWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-keyboard");
-	this.domNode.className = classes.join(" ");
+	this.domNode.className = classes.join(" ").trim();
 };
 
 /*

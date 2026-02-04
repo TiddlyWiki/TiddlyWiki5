@@ -18,6 +18,9 @@ The <<.def list-tagged-draggable>> [[macro|Macros]] renders the tiddlers with a 
 ;emptyMessage
 : Optional wikitext to display if there are no tiddlers with the specified tag
 
+;displayField  
+: <<.from-version 5.4.0>> Optional name of the field to display when the list is rendered. Defaults to `title` field.
+
 Note that the [[ordering|Order of Tagged Tiddlers]] is accomplished by assigning a new list to the `list` field of the tag tiddler. Any `list-before` or `list-after` fields on any of the other tiddlers carrying the tag are also removed to ensure the `list` field is respected.
 
 If the `itemTemplate` parameter is not provided then the list items are rendered as simple links. Within the `itemTemplate`, the [[currentTiddler Variable]] refers to the current list item.

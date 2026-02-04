@@ -1,6 +1,6 @@
 caption: substitute
 created: 20230614223551834
-modified: 20230615173049692
+modified: 20251021124124967
 op-input: a [[selection of titles|Title Selection]]
 op-output: the input titles with placeholders for filter expressions, parameter and variables replaced with their corresponding values
 op-parameter: the <<.op substitute>> operator optionally accepts a variable number of parameters, see below for details
@@ -18,7 +18,7 @@ The <<.op substitute>> operator replaces any placeholders in the input titles in
 # variables
 
 |placeholder syntax|description|h
-|`$n$`|Text substitution of a parameter provided to the operator, where n is the position of the parameter starting with 1 for the first parameter. Unmatched placeholders pass through unchanged. |
+|`$n$`|Text substitution of a parameter provided to the operator, where n is the position of the parameter starting with 1 for the first parameter.<br>Unmatched placeholders pass through unchanged. |
 |`$(varname)$`|Text substitution of a variable. Undefined variables are replaced with an empty string. |
 |`${ filter expression }$`|Text substitution of the first result of evaluating a filter expression. In other words, if the filter returns multiple titles only the first one will be used. |
 

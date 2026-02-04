@@ -1,0 +1,11 @@
+created: 20251108075028089
+modified: 20260130070027124
+tags: Reference
+title: Core CSS Variables
+type: text/vnd.tiddlywiki
+
+<<.from-version 5.4.0>> Tiddlywiki CSS variable definitions starts with `--tp-*` and `--tpc-*`. They are mainly used to [[Write stylesheets in vanilla CSS|Writing stylesheets in vanilla CSS]]. These prefixes ''are reserved'' for Tiddlywiki, so it should not be used for user defined CSS variables. It is also not recommended to override these core CSS variables.
+
+Core CSS variables are defined in [[$:/core/stylesheets/custom-properties]].
+
+<<list-links "[tag[Core CSS Variables]]" class:"multi-columns">>

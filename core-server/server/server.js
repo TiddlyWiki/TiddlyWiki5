@@ -42,6 +42,8 @@ function Server(options) {
 	}
 	// Setup the default required plugins
 	this.requiredPlugins = this.get("required-plugins").split(',');
+	// Initialise CORS
+	this.corsEnable = this.get("cors-enable") === "yes";
 	// Initialise CSRF
 	this.csrfDisable = this.get("csrf-disable") === "yes";
 	// Initialize Gzip compression
@@ -261,6 +263,13 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.urlInfo = url.parse(request.url);
 	state.queryParameters = querystring.parse(state.urlInfo.query);
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
+	// Enable CORS
+	if(this.corsEnable) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Headers", "*");
+		response.setHeader("Access-Control-Allow-Methods", "*");
+		response.setHeader("Access-Control-Expose-Headers", "*");
+	}
 	state.sendResponse = sendResponse.bind(self,request,response);
 	// Get the principals authorized to access this resource
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
@@ -282,6 +291,12 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Authorize with the authenticated username
 	if(!this.isAuthorized(state.authorizationType,state.authenticatedUsername)) {
 		response.writeHead(401,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
+		response.end();
+		return;
+	}
+	// Reply to OPTIONS
+	if(this.corsEnable && request.method === "OPTIONS") {
+		response.writeHead(204);
 		response.end();
 		return;
 	}

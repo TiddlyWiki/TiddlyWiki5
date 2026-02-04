@@ -15,7 +15,7 @@ Common characteristics of such block mode WikiText:
 |!~WikiText|!Punctuation|
 |[[Block Quotes in WikiText]] |Multi-line block quotes are enclosed by lines containing only the text `<<<`; single line block quotes are also possible.|
 |[[Code Blocks in WikiText]]|Enclosed by lines containing only the text <code>&#96;&#96;&#96;</code>|
-|[[Definitions in WikiText]]|Each term is on its own line and each definition is on its own line.|
+|[[Description Lists in WikiText]]|Each term is on its own line and each definition is on its own line.|
 |[[Hard Linebreaks in WikiText]]|Enclosed by lines containing only the text `"""`.|
 |[[Headings in WikiText]]|Entire line starting with `!`.|
 |[[Horizontal Rules in WikiText]]|A line containing only the text `---`.|
@@ -27,7 +27,7 @@ Common characteristics of such block mode WikiText:
 
 The above WikiText types are only recognised in ''block mode''. However, the text <<.em enclosed>> by most of them will be parsed in ''inline mode'' ([[Block Quotes in WikiText]] and [[Styles and Classes in WikiText]] are the two exceptions in which the parser will continue in ''block mode''). While in ''inline mode'' the parser may encounter something which moves it to ''block mode'' (see [[WikiText parser mode transitions]]).
 
-At the end of the terminating line, the parser will return to ''block mode''. 
+At the end of the terminating line, the parser will return to ''block mode''.
 <<.tip 'Note: [[Hard Linebreaks in WikiText]] require an extra blank line after the trailing `"""` before the parser will return to <strong>block mode</strong>.'>>
 
 If the punctuation for the above types of WikiText is encountered while the parser is in ''inline mode'', it will be //ignored// and output as-is.
