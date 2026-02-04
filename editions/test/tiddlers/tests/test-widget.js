@@ -177,6 +177,32 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span> <span class=\"tc-error\">Recursive transclusion error in transclude widget</span>");
 	});
 
+	// Do NOT use a for-of or for-in here. Each jasmine test must be
+	// defined in its own function context, or the `tag` variable will
+	// end up being the same value for all iterations of the test. 
+	$tw.utils.each(["div","$button","$checkbox","$diff-text","$draggable","$droppable","dropzone","$eventcatcher","$keyboard","$link","$list filter=x variable=x","$radio","$reveal type=nomatch","$scrollable","$select","$view field=x"],function(tag) {
+		it(`${tag} cleans itself up if children rendering fails`, function() {
+			var wiki = new $tw.Wiki();
+			wiki.addTiddler({title: "TiddlerOne", text: `<$tiddler tiddler='TiddlerOne'><${tag}><$transclude />`});
+			var parseTreeNode = {type: "widget", children: [
+				{type: "transclude", attributes: {
+					"tiddler": {type: "string", value: "TiddlerOne"}
+				}}
+			]};
+			// Construct the widget node
+			var widgetNode = createWidgetNode(parseTreeNode,wiki);
+			// Render the widget node to the DOM
+			var wrapper = renderWidgetNode(widgetNode);
+			// We don't actually care exactly what the HTML contains,
+			// only that it's reasonably sized. If it's super large,
+			// that means the widget containing the bad transclusion
+			// didn't figure out how to clean itself up, and it cloned a bunch.
+			var html = wrapper.innerHTML;
+			expect(html).toContain("Recursive transclusion error in transclude widget");
+			expect(html.length).toBeLessThan(256, "CONTENTS: " + html);
+		});
+	});
+
 	it("should handle many-tiddler recursion with branching nodes", function() {
 		var wiki = new $tw.Wiki();
 		// Add a tiddler
