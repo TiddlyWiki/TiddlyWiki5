@@ -2168,18 +2168,24 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 };
 
 /*
+The file boot.node.js should not be accessed anywhere except for here.
+It's part of ongoing development for npm node_module and is subject to change.
+*/
+var pluginLocators = require("./boot.node.js");
+
+/*
 name: Name of the plugin to find
 paths: array of file paths to search for it
-Returns the path of the plugin folder
+Returns the path of the plugin folder using methods registed in boot.node.js
 */
 $tw.findLibraryItem = function(name,paths) {
-	var pathIndex = 0;
-	do {
-		var pluginPath = path.resolve(paths[pathIndex],"./" + name)
-		if(fs.existsSync(pluginPath) && fs.statSync(pluginPath).isDirectory()) {
+	var pluginPath;
+	for(var locator in pluginLocators) {
+		pluginPath = pluginLocators[locator](name,paths);
+		if(pluginPath) {
 			return pluginPath;
 		}
-	} while(++pathIndex < paths.length);
+	}
 	return null;
 };
 
