@@ -17,9 +17,9 @@ The <<.def list-tagged-draggable>> [[macro|Macros]] renders the tiddlers with a 
 : Optional title of a tiddler to use as the template for rendering list items
 ;emptyMessage
 : Optional wikitext to display if there are no tiddlers with the specified tag
-Here’s a corrected and polished version of your sentence in clear, standard English:
+
 ;displayField  
-: Optional name of the field to display when the list is rendered. Defaults to `title` field.
+: <<.from-version 5.4.0>> Optional name of the field to display when the list is rendered. Defaults to `title` field.
 
 Note that the [[ordering|Order of Tagged Tiddlers]] is accomplished by assigning a new list to the `list` field of the tag tiddler. Any `list-before` or `list-after` fields on any of the other tiddlers carrying the tag are also removed to ensure the `list` field is respected.
 
