@@ -29,7 +29,13 @@ exports.startup = function() {
 	$tw.modules.applyMethods("wikimethod",$tw.Wiki.prototype);
 	$tw.wiki.addIndexersToWiki();
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
-	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
+	$tw.functions = Object.assign($tw.modules.getModulesByTypeAsHashmap("macro"), $tw.modules.getModulesByTypeAsHashmap("function"));
+	// Hook $tw.macros to display a deprecation warning when called
+	function macros_handler(target, prop) {
+		console.warn("Warning: $tw.macros is deprecated, use $tw.functions instead.");
+		return target[prop];
+	}
+	$tw.macros = new Proxy($tw.functions, {get: macros_handler});
 	$tw.wiki.initParsers();
 	if($tw.node) {
 		$tw.Commander.initCommands();
