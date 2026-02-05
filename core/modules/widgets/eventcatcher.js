@@ -140,38 +140,41 @@ EventWidget.prototype.cacheEventListeners = function() {
 Check if an event qualifies and return the matching selected node
 */
 EventWidget.prototype.checkEvent = function(event, type) {
-	let selectedNode = event.target;
 	const domNode = this.domNode;
+	let node = event.target;
 
+	// Use capture target if valid
 	if(this._captureTarget && event.pointerId !== undefined) {
-		// Use captureTarget only if it’s still attached to the DOM
 		if(document.contains(this._captureTarget)) {
-			selectedNode = this._captureTarget;
+			node = this._captureTarget;
 		} else {
 			// Clear stale reference
 			this.stopPointerCapture(this._capturePointerId);
-			selectedNode = event.target;
+			node = event.target;
 		}
 	}
 
-	if(selectedNode.nodeType === 3) {
-		selectedNode = selectedNode.parentNode;
+	if(node && node.nodeType === 3) {
+		node = node.parentNode;
 	}
+	if(!node || node.nodeType !== 1) {
+		return null;
+	}
+
 	const selector = this.getAttribute("selector"),
 		matchSelector = this.getAttribute("matchSelector");
 
-	if(matchSelector && !selectedNode.matches(matchSelector)) {
+	if(matchSelector && !node.matches(matchSelector)) {
 		return null;
 	}
 	if(selector) {
-		while(!selectedNode.matches(selector) && selectedNode !== domNode) {
-			selectedNode = selectedNode.parentNode;
-		}
-		if(selectedNode === domNode) {
+		const match = node.closest(selector);
+		if(!match || match === domNode || !domNode.contains(match)) {
 			return null;
 		}
+		return match;
 	}
-	return selectedNode;
+	return node;
 };
 
 /*
