@@ -6,9 +6,9 @@ tags: $:/tags/TiddlerInfo/Advanced
 
 ''<<lingo Heading>>''
 
-<table style="text-align:center;" class="tc-max-width">
+<table class="tc-max-width">
 <thead>
-<$list filter="[[View]] [[Active Filter Condition]] [[Template]]" variable="heading">
+<$list filter="[[View]] [[Active Cascade Filter]] [[Template]]" variable="heading">
 <th><<heading>></th>
 </$list>
 </thead>
@@ -17,18 +17,18 @@ tags: $:/tags/TiddlerInfo/Advanced
 <$let
 view={{{ [<ViewTemplate>]+[split[/]last[]] }}}
 tagFilter=`$:/tags/ViewTemplate${ [<view>titlecase[]] }$Filter`
-activeFilterTiddler={{{ [all[shadows+tiddlers]tag<tagFilter>!is[draft]]:filter[<storyTiddler>subfilter{!!text}]+[first[]] }}}
-activeFilter={{{ [<activeFilterTiddler>get[text]] }}}
+activeCascadeFilterTiddler={{{ [all[shadows+tiddlers]tag<tagFilter>!is[draft]]:filter[<storyTiddler>subfilter{!!text}]+[first[]] }}}
+activeCascadeFilter={{{ [<activeCascadeFilterTiddler>get[text]] }}}
 activeTemplateTiddler={{{ [<currentTiddler>]:cascade[all[shadows+tiddlers]tag<tagFilter>!is[draft]get[text]] }}}
 >
-<%if [<activeFilterTiddler>!is[blank]] %>
+<%if [<activeCascadeFilterTiddler>!is[blank]]%>
 <td>
 <$link to=<<ViewTemplate>> ><<view>></$link>
 </td>
 <td>
-<$link to=<<activeFilterTiddler>> />
+<$link to=<<activeCascadeFilterTiddler>> />
 </td>
-<td>
+<td style="text-align:center;">
 <$link class="tc-btn-invisible" to=<<activeTemplateTiddler>>><$button class="tc-btn-invisible">{{$:/core/images/file}}</$button></$link>
 </td>
 <%endif%>
