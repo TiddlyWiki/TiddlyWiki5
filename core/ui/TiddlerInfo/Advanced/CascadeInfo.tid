@@ -15,32 +15,24 @@ tags: $:/tags/TiddlerInfo/Advanced
 <$list filter="[[$:/tags/ViewTemplate]tagging[]]" variable="ViewTemplate">
 <tr>
 <$let
-view={{{ [<ViewTemplate>get[caption]]:else[<ViewTemplate>]+[split[/]last[]] }}}
+view={{{ [<ViewTemplate>]+[split[/]last[]] }}}
 tagFilter=`$:/tags/ViewTemplate${ [<view>titlecase[]] }$Filter`
-defaultTemplate=`$:/core/ui/ViewTemplate/$(view)$/default`
-matchFilterTiddler={{{ [all[shadows+tiddlers]tag<tagFilter>!is[draft]]:filter[<storyTiddler>subfilter{!!text}]+[first[]] }}}
-matchFilter={{{ [<matchFilterTiddler>get[text]] }}}
-matchTiddlerTemplate={{{ [<currentTiddler>]:cascade[all[shadows+tiddlers]tag<tagFilter>!is[draft]get[text]]:and[!is[blank]else<defaultTemplate>]}}}
+activeFilterTiddler={{{ [all[shadows+tiddlers]tag<tagFilter>!is[draft]]:filter[<storyTiddler>subfilter{!!text}]+[first[]] }}}
+activeFilter={{{ [<activeFilterTiddler>get[text]] }}}
+activeTemplateTiddler={{{ [<currentTiddler>]:cascade[all[shadows+tiddlers]tag<tagFilter>!is[draft]get[text]] }}}
 >
-<%if [<defaultTemplate>get[title]] %>
+<%if [<activeFilterTiddler>!is[blank]] %>
 <td>
-<$link to=<<ViewTemplate>> >
-<<view>>
-</$link>
+<$link to=<<ViewTemplate>> ><<view>></$link>
 </td>
 <td>
-<$link to=<<matchFilterTiddler>> ><<matchFilterTiddler>></$link>
+<$link to=<<activeFilterTiddler>> />
 </td>
 <td>
-<$button class="tc-btn-invisible" to=<<matchTiddlerTemplate>> >
-{{$:/core/images/file}}
-</$button>
+<$link class="tc-btn-invisible" to=<<activeTemplateTiddler>>><$button class="tc-btn-invisible">{{$:/core/images/file}}</$button></$link>
 </td>
 <%endif%>
 </$let>
 </tr>
 </$list>
 </table>
-
-</$let>
-
