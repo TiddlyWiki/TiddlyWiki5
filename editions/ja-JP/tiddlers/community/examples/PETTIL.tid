@@ -5,7 +5,7 @@ tags: Examples
 title: "PETTIL - Forth for the Commodore PET" by Charlie Hitselberger
 ja-title: Charlie Hitselbergerの"PETTIL - コモドールPET用Forth"
 type: text/vnd.tiddlywiki
-url: http://pettilmobile.com/tw/
+url: http://pettilmobile.com
 
 6502アセンブリ言語で書かれた、[[コモドールPET|https://en.wikipedia.org/wiki/Commodore_PET]]用の高速Forthインタープリタです。プログラムドキュメントを含むTiddlyWikiは、ソースコードから自動的に生成されます。https://github.com/chitselb/pettilを参照してください。
 
