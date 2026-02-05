@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/macros/jsontiddler.js
 type: application/javascript
-module-type: macro
+module-type: function
 
 Macro to output a single tiddler to JSON
 

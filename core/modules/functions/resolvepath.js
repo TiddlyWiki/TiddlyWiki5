@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/macros/resolvepath.js
 type: application/javascript
-module-type: macro
+module-type: function
 
 Resolves a relative path for an absolute rootpath.
 

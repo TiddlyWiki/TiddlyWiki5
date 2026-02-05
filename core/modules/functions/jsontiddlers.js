@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/macros/jsontiddlers.js
 type: application/javascript
-module-type: macro
+module-type: function
 
 Macro to output tiddlers matching a filter to JSON
 

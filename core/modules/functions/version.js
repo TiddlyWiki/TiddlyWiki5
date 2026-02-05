@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/macros/version.js
 type: application/javascript
-module-type: macro
+module-type: function
 
 Macro to return the TiddlyWiki core version number
 

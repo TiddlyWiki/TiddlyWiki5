@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/macros/qualify.js
 type: application/javascript
-module-type: macro
+module-type: function
 
 Macro to qualify a state tiddler title according
 

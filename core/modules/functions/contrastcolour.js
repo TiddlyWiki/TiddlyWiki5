@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/macros/contrastcolour.js
 type: application/javascript
-module-type: macro
+module-type: function
 
 Macro to choose which of two colours has the highest contrast with a base colour
 
