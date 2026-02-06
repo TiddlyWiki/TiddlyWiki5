@@ -1,0 +1,9 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/DynamicMacroMixed
+type: text/vnd.tiddlywiki
+
+<<mymacro static:"value" dynamic={{reference}} filter={{{ [tag[test]] }}}>>
+
+<$macrocall $name="mymacro" static="value" dynamic=<<inner>>/>
+
+<<mymacro `substituted $(var)$`>>

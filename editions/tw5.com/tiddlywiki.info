@@ -2,13 +2,13 @@
 	"description": "Documentation from https://tiddlywiki.com",
 	"plugins": [
 		"tiddlywiki/browser-sniff",
-		"tiddlywiki/railroad",
-		"tiddlywiki/internals",
-		"tiddlywiki/menubar",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
 		"tiddlywiki/tour",
 		"tiddlywiki/dom-to-image"
+		"tiddlywiki/internals",
+		"tiddlywiki/menubar",
+		"tiddlywiki/railroad"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -32,8 +32,7 @@
 			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
 			"--render","$:/core/save/all","index.html","text/plain"],
 		"empty": [
-			"--render","$:/editions/tw5.com/download-empty","empty.html","text/plain",
-			"--render","$:/editions/tw5.com/download-empty","empty.hta","text/plain"],
+			"--render","$:/editions/tw5.com/download-empty","empty.html","text/plain"],
 		"encrypted": [
 			"--password", "password",
 			"--render", "$:/core/save/all", "encrypted.html", "text/plain",

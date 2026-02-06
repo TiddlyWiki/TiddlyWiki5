@@ -1,0 +1,13 @@
+[
+    {
+        "created": "20260125202948362",
+        "text": "",
+        "title": "$:/changenotes/5.4.0/#9609/impacts/event detail variables in eventcatcher",
+        "modified": "20260125203132149",
+        "tags": "$:/tags/ImpactNote",
+        "type": "text/vnd.tiddlywiki",
+        "changenote": "$:/changenotes/5.4.0/#9609",
+        "description": "`event-detail*` variables have been removed in favour of the new `eventJSON` variable",
+        "impact-type": "compatibility-break "
+    }
+]

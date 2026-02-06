@@ -9,6 +9,7 @@ Advanced/ShadowInfo/NotShadow/Hint: The tiddler <$link to=<<infoTiddler>>><$text
 Advanced/ShadowInfo/Shadow/Hint: The tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> is a shadow tiddler
 Advanced/ShadowInfo/Shadow/Source: It is defined in the plugin <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
 Advanced/ShadowInfo/OverriddenShadow/Hint: It is overridden by an ordinary tiddler
+Advanced/CascadeInfo/Heading: Cascade Details
 Fields/Caption: Fields
 List/Caption: List
 List/Empty: This tiddler does not have a list

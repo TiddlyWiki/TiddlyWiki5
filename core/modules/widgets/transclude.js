@@ -6,10 +6,7 @@ module-type: widget
 Transclude widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -35,16 +32,26 @@ TranscludeWidget.prototype.render = function(parent,nextSibling) {
 	} catch(error) {
 		if(error instanceof $tw.utils.TranscludeRecursionError) {
 			// We were infinite looping.
-			// We need to try and abort as much of the loop as we can, so we will keep "throwing" upward until we find a transclusion that has a different signature.
-			// Hopefully that will land us just outside where the loop began. That's where we want to issue an error.
-			// Rendering widgets beneath this point may result in a freezing browser if they explode exponentially.
+			// We need to try and abort as much of the loop as we
+			// can, so we will keep "throwing" upward until we find
+			// a transclusion that has a different signature.
+			// Hopefully that will land us just outside where the
+			// loop began. That's where we want to issue an error.
+			// Rendering widgets beneath this point may result in a
+			// freezing browser if they explode exponentially.
 			var transcludeSignature = this.getVariable("transclusion");
 			if(this.getAncestorCount() > $tw.utils.TranscludeRecursionError.MAX_WIDGET_TREE_DEPTH - 50) {
-				// For the first fifty transcludes we climb up, we simply collect signatures.
-				// We're assuming that those first 50 will likely include all transcludes involved in the loop.
+				// For the first fifty transcludes we climb up,
+				// we simply collect signatures.
+				// We're assuming those first 50 will likely
+				// include all transcludes involved in the loop.
 				error.signatures[transcludeSignature] = true;
 			} else if(!error.signatures[transcludeSignature]) {
-				// Now that we're past the first 50, let's look for the first signature that wasn't in the loop. That'll be where we print the error and resume rendering.
+				// Now that we're past the first 50, look for
+				// the first signature that wasn't in that loop.
+				// That's where we print the error and resume
+				// rendering.
+				this.removeChildDomNodes();
 				this.children = [this.makeChildWidget({type: "error", attributes: {
 					"$message": {type: "string", value: $tw.language.getString("Error/RecursiveTransclusion")}
 				}})];
@@ -101,6 +108,7 @@ TranscludeWidget.prototype.execute = function() {
 	}
 	this.sourceText = target.text;
 	this.parserType = target.type;
+	this._canonical_uri = target._canonical_uri;
 	// Set the legacy transclusion context variables only if we're not transcluding a variable
 	if(!this.transcludeVariable) {
 		var recursionMarker = this.makeRecursionMarker();
@@ -228,7 +236,8 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 						});
 		return {
 			text: parserInfo.text,
-			type: parserInfo.type
+			type: parserInfo.type,
+			_canonical_uri: parserInfo._canonical_uri
 		};
 	}
 };
@@ -455,8 +464,11 @@ TranscludeWidget.prototype.makeRecursionMarker = function() {
 
 TranscludeWidget.prototype.parserNeedsRefresh = function() {
 	// Doesn't need to consider transcluded variables because a parent variable can't change once a widget has been created
-	var parserInfo = this.wiki.getTextReferenceParserInfo(this.transcludeTitle,this.transcludeField,this.transcludeIndex,{subTiddler:this.transcludeSubTiddler});
-	return (this.sourceText === undefined || parserInfo.sourceText !== this.sourceText || parserInfo.parserType !== this.parserType)
+	var parserInfo = this.wiki.getTextReferenceParserInfo(this.transcludeTitle,this.transcludeField,this.transcludeIndex,{
+		subTiddler: this.transcludeSubTiddler,
+		defaultType: this.transcludeType
+	});
+	return (this.sourceText === undefined || parserInfo.sourceText !== this.sourceText || parserInfo.parserType !== this.parserType || parserInfo._canonical_uri !== this._canonical_uri);
 };
 
 TranscludeWidget.prototype.functionNeedsRefresh = function() {
@@ -480,5 +492,3 @@ TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.transclude = TranscludeWidget;
-
-})();

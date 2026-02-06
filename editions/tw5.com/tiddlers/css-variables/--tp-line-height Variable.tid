@@ -1,0 +1,8 @@
+caption: --tp-line-height
+created: 20260122111115266
+modified: 20260130045757204
+tags: [[Core CSS Variables]]
+title: --tp-line-height CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-line-height` CSS variable represents the "Line height" setting in Theme Tweaks.

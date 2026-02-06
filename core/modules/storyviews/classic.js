@@ -6,10 +6,7 @@ module-type: storyview
 Views the story as a linear sequence
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/#easeInOutCubic
@@ -50,16 +47,16 @@ ClassicStoryView.prototype.insert = function(widget) {
 		// Reset the margin once the transition is over
 		setTimeout(function() {
 			$tw.utils.setStyle(targetElement,[
-				{transition: "none"},
 				{marginBottom: ""}
 			]);
+			$tw.utils.removeStyle(targetElement, "transition");
 		},duration);
 		// Set up the initial position of the element
 		$tw.utils.setStyle(targetElement,[
-			{transition: "none"},
 			{marginBottom: (-currHeight) + "px"},
 			{opacity: "0.0"}
 		]);
+		$tw.utils.removeStyle(targetElement, "transition");
 		$tw.utils.forceLayout(targetElement);
 		// Transition to the final position
 		$tw.utils.setStyle(targetElement,[
@@ -67,7 +64,7 @@ ClassicStoryView.prototype.insert = function(widget) {
 						"margin-bottom " + duration + "ms " + easing},
 			{marginBottom: currMarginBottom + "px"},
 			{opacity: "1.0"}
-	]);
+		]);
 	}
 };
 
@@ -97,11 +94,9 @@ ClassicStoryView.prototype.remove = function(widget) {
 		setTimeout(removeElement,duration);
 		// Animate the closure
 		$tw.utils.setStyle(targetElement,[
-			{transition: "none"},
-			{transform: "translateX(0px)"},
 			{marginBottom:  currMarginBottom + "px"},
-			{opacity: "1.0"}
 		]);
+		$tw.utils.removeStyles(targetElement, ["transition", "transform", "opacity"]);
 		$tw.utils.forceLayout(targetElement);
 		$tw.utils.setStyle(targetElement,[
 			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", " +
@@ -117,5 +112,3 @@ ClassicStoryView.prototype.remove = function(widget) {
 };
 
 exports.classic = ClassicStoryView;
-
-})();

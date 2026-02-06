@@ -6,10 +6,7 @@ module-type: widget
 Set a field or index at a given tiddler via radio buttons
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -62,8 +59,8 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.labelDomNode,nextSibling);
-	this.renderChildren(this.spanDomNode,null);
 	this.domNodes.push(this.labelDomNode);
+	this.renderChildren(this.spanDomNode,null);
 };
 
 RadioWidget.prototype.getValue = function() {
@@ -138,5 +135,3 @@ RadioWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.radio = RadioWidget;
-
-})();

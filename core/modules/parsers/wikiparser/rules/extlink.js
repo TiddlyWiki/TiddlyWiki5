@@ -14,10 +14,7 @@ A suppressed external link: ~http://www.tiddlyspace.com/
 External links can be suppressed by preceding them with `~`.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "extlink";
@@ -31,11 +28,11 @@ exports.init = function(parser) {
 
 exports.parse = function() {
 	// Move past the match
-    var start = this.parser.pos;
+	var start = this.parser.pos;
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Create the link unless it is suppressed
 	if(this.match[0].substr(0,1) === "~") {
-		return [{type: "text", text: this.match[0].substr(1)}];
+		return [{type: "text", text: this.match[0].substr(1), start: start, end: this.parser.pos}];
 	} else {
 		return [{
 			type: "element",
@@ -52,5 +49,3 @@ exports.parse = function() {
 		}];
 	}
 };
-
-})();

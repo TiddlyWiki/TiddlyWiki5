@@ -6,10 +6,7 @@ module-type: widget
 Edit-binary widget; placeholder for editing binary tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var BINARY_WARNING_MESSAGE = "$:/core/ui/BinaryWarning";
@@ -103,5 +100,3 @@ EditBinaryWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports["edit-binary"] = EditBinaryWidget;
-
-})();

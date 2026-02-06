@@ -1,10 +1,10 @@
 created: 20130825160900000
-modified: 20241106165307259
+modified: 20250617140259415
 tags: Features [[Working with TiddlyWiki]]
 title: Encryption
 type: text/vnd.tiddlywiki
 
-When used as a single HTML file, TiddlyWiki5 allows content to be encrypted with AES 128 bit encryption in CCM mode using the [[Stanford JavaScript Crypto Library]]. 
+When used as a single HTML file, TiddlyWiki5 allows content to be encrypted with AES 256 bit encryption in CCM mode using the [[Stanford JavaScript Crypto Library]]. 
 
 # Switch to the ''Tools'' tab in the sidebar and look for the button with a padlock icon
 # If the button is labelled <<.icon $:/core/images/unlocked-padlock>> ''set password'' then the current wiki is not encrypted. Clicking the button will prompt for a password that will be used to encrypt subsequent saves
@@ -14,5 +14,5 @@ When used as a single HTML file, TiddlyWiki5 allows content to be encrypted with
 
 Note that TiddlyWiki has two other unrelated features concerned with passwords/encryption:
 
-* The ability to set a password when saving to TiddlySpot. This is done in the "Saving" tab of ''control panel'' <<.icon $:/core/images/options-button>>.
-* The ability to use standard HTTP basic authentication with the [[Node.js|TiddlyWiki on Node.js]] server configuration. This is done on the command line with the ServerCommand. Combined with SSL, this gives the same level of transit encryption as you'd get with online services like Google or Dropbox, but there is no encryption of data on disk
+* The ability to set a password when saving to [[Tiddlyhost]]. This is done in the "Saving" tab of ''control panel'' <<.icon $:/core/images/options-button>>.
+* The ability to use standard HTTP basic authentication with the [[Node.js|TiddlyWiki on Node.js]] server configuration. This is done on the command line with the ListenCommand. Combined with SSL, this gives the same level of transit encryption as you'd get with online services like Google or Dropbox, but there is no encryption of data on disk

@@ -6,10 +6,7 @@ module-type: widget
 Droppable widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -60,8 +57,8 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 	// Stack of outstanding enter/leave events
 	this.currentlyEntered = [];
 };
@@ -180,7 +177,7 @@ DroppableWidget.prototype.execute = function() {
 DroppableWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-droppable");
-	this.domNode.className = classes.join(" ");
+	this.domNode.className = classes.join(" ").trim();
 };
 
 /*
@@ -206,5 +203,3 @@ DroppableWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.droppable = DroppableWidget;
-
-})();

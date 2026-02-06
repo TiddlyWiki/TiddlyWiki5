@@ -6,10 +6,7 @@ module-type: global
 A barebones implementation of DOM interfaces needed by the rendering mechanism.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Sequence number used to enable us to track objects for testing
@@ -40,6 +37,7 @@ Object.defineProperty(TW_Node.prototype, 'TEXT_NODE', {
 var TW_TextNode = function(text) {
 	bumpSequenceNumber(this);
 	this.textContent = text + "";
+	this.children = [];
 };
 
 Object.setPrototypeOf(TW_TextNode.prototype,TW_Node.prototype);
@@ -353,5 +351,3 @@ var document = {
 };
 
 exports.fakeDocument = document;
-
-})();

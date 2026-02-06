@@ -6,10 +6,7 @@ module-type: parser
 Wraps up the markdown-it parser for use as a Parser in TiddlyWiki
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var MarkdownIt = require("./markdown-it");
@@ -216,11 +213,20 @@ MarkdownParser.prototype.md = createMarkdownEngine(markdownOpts,pluginOpts);
 function MarkdownParser(type,text,options) {
 	var env = {}
 	var md = this.md;
-	var mdTree = md.parse(text,env);
-	var textToParse = '<div class="markdown">\n' + md.renderer.render(mdTree,md.options,env) + '</div>';
+	var mdTree, textToParse;
 
-	//console.log(JSON.stringify(mdTree,null,2));
-	//console.log("\n----------------\n" + textToParse);
+	if(options.parseAsInline) {
+		mdTree = md.parseInline(text,env);
+		textToParse = '<span class="markdown">' + md.renderer.render(mdTree,md.options,env) + '</span>';
+	} else {
+		mdTree = md.parse(text,env);
+		textToParse = '<div class="markdown">\n' + md.renderer.render(mdTree,md.options,env) + '</div>';
+	}
+
+	if($tw.log.MARKDOWN) {
+		console.log(JSON.stringify(mdTree,null,2));
+		console.log("\n----------------\n" + textToParse);
+	}
 
 	var wikiParser;
 
@@ -261,4 +267,3 @@ function MarkdownParser(type,text,options) {
 
 exports["text/markdown"] = MarkdownParser;
 exports["text/x-markdown"] = MarkdownParser;
-})();

@@ -1,0 +1,7 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/ExtLink
+type: text/vnd.tiddlywiki
+
+An external link: https://www.tiddlywiki.com/
+
+A suppressed external link: ~http://www.tiddlyspace.com/

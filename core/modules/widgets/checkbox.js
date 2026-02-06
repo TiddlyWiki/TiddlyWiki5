@@ -6,10 +6,7 @@ module-type: widget
 Checkbox widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -67,8 +64,8 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.labelDomNode,nextSibling);
-	this.renderChildren(this.spanDomNode,null);
 	this.domNodes.push(this.labelDomNode);
+	this.renderChildren(this.spanDomNode,null);
 };
 
 CheckboxWidget.prototype.getValue = function() {
@@ -157,7 +154,7 @@ CheckboxWidget.prototype.getValue = function() {
 		if(this.checkboxTag) {
 			return false;
 		}
-		if(this.checkboxField) {
+		if(this.checkboxField || this.checkboxIndex) {
 			if(this.checkboxDefault === this.checkboxChecked) {
 				return true;
 			}
@@ -344,6 +341,3 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.checkbox = CheckboxWidget;
-
-})();
-	

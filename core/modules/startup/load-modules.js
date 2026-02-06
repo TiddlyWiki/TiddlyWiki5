@@ -6,10 +6,7 @@ module-type: startup
 Load core modules
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -34,7 +31,7 @@ exports.startup = function() {
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
 	$tw.wiki.initParsers();
-	$tw.Commander.initCommands();
+	if($tw.node) {
+		$tw.Commander.initCommands();
+	}
 };
-
-})();

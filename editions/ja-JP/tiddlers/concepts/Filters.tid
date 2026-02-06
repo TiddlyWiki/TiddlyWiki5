@@ -1,0 +1,30 @@
+created: 20130827080000000
+list: [[Introduction to filter notation]] [[Filter Syntax]]
+modified: 20250218103107943
+original-modified: 20230710074511095
+tags: Reference Concepts TableOfContents
+title: Filters
+ja-title: フィルタ
+type: text/vnd.tiddlywiki
+
+\define openAdvancedSearch()
+<$action-setfield $tiddler="$:/state/tab--1498284803" text="$:/core/ui/AdvancedSearch/Filter"/>
+<$action-setfield $tiddler="$:/temp/advancedsearch/input" text="[tag[Filters]]"/>
+<$action-setfield $tiddler="$:/temp/advancedsearch" text="[tag[Filters]]"/>
+\end
+
+TiddlyWikiは、レコードがTiddlerであるデータベースと考えることができます。データベースは通常、どのレコードが特定のパターンに一致するかを発見する方法を提供します。~TiddlyWikiでは、これはフィルタを使用して行われます
+
+<<.def フィルタ>>は、その<<.def "アウトプット">>として特定の[[Tiddlerセット|Title Selection]]を選択するための簡潔な表記法です。~TiddlyWikiはフィルタに遭遇するたびにアウトプットを計算します。その後、それらのTiddlerを使って、[[数を数え|CountWidget]]たり、[[リストし|ListWidget]]たりするなど、さらなる処理を行うことができます
+
+次の例では、フィルタを<<.mlink list-links>>マクロに渡します。<<.olink2 tag tag>> <<.word フィルタ>>であるTiddlerのリストを表示します:
+
+<<wikitext-example-without-html """<<list-links "[tag[Filters]]">>""" >>
+
+Wiki内でTiddlerが追加や削除されると、フィルタのアウトプットが変更される可能性があります。~TiddlyWikiは即再計算し、フィルタベースのカウントやリストも自動的に更新します
+
+''さらに詳細:''
+
+* <$linkcatcher message="tm-navigate" actions=<<openAdvancedSearch>> >[[高度な検索|$:/AdvancedSearch]]</$linkcatcher> -- フィルタを簡単に試すことができる<<.advancedsearch-tab Filter>>タブがあります
+
+* [[WikiTextでのフィルタされたトランスクルージョン|Transclusion in WikiText]] -- テキスト内でフィルタ結果を使用したい場合

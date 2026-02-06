@@ -6,9 +6,6 @@ module-type: command
 The command which executes jasmine on the command line for TiddlyWiki5
 
 \*/
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var jasmine = require("./jasmine-plugin.js");

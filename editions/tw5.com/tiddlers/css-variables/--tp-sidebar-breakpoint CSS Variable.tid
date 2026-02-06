@@ -1,0 +1,8 @@
+caption: --tp-sidebar-breakpoint
+created: 20260130065756457
+modified: 20260130065841355
+tags: [[Core CSS Variables]]
+title: --tp-sidebar-breakpoint CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-sidebar-breakpoint` CSS variable represents the minimum page width at which the story river and sidebar will appear side by side.

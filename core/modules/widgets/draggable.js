@@ -6,10 +6,7 @@ module-type: widget
 Draggable widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -59,6 +56,7 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	});
 	// Insert the node into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
+	this.domNodes.push(domNode);
 	this.renderChildren(domNode,null);
 	// Add event handlers
 	if(this.dragEnable) {
@@ -73,7 +71,6 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 			selector: self.dragHandleSelector
 		});
 	}
-	this.domNodes.push(domNode);
 };
 
 /*
@@ -131,5 +128,3 @@ DraggableWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.draggable = DraggableWidget;
-
-})();

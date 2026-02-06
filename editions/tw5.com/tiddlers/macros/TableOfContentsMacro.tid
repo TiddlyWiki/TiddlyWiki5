@@ -1,5 +1,5 @@
 created: 20140919155729620
-modified: 20240624102502089
+modified: 20260124130054271
 tags: Macros [[Core Macros]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
@@ -73,6 +73,9 @@ These two parameters are combined into a single [[filter expression|Filter Expre
 
 ; exclude <<.from-version "5.3.0">>
 : This optional parameter can be used to exclude tiddlers from the TOC list. It allows a [[Title List]] or a <<.olink subfilter>>. Eg: `exclude:"HelloThere [[Title with spaces]]"` or `exclude:"[has[excludeTOC]]"`. Where the former will exclude two tiddlers and the later would exclude every tiddler that has a field <<.field excludeTOC>> independent of its value.<br>''Be aware'' that eg: `[prefix[H]]` is a shortcut for `[all[tiddlers]prefix[H]]`, which can have a performance impact, if used carelessly. So use $:/AdvancedSearch -> ''Filters'' tab to test the <<.param exclude>> parameter
+
+; level <<.from-version "5.4.0">>
+: This optional parameter can be used to define how many toc levels are shown by the toc-macro. By default all levels are shown. 
 
 !! Custom Icons
 

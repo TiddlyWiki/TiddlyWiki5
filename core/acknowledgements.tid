@@ -4,8 +4,5 @@ TiddlyWiki incorporates code from these fine OpenSource projects:
 
 * [[The Stanford Javascript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]]
 * [[The Jasmine JavaScript Test Framework|https://jasmine.github.io/]]
-* [[Normalize.css by Nicolas Gallagher|http://necolas.github.io/normalize.css/]]
-
-And media from these projects:
-
-* World flag icons from [[Wikipedia|http://commons.wikimedia.org/wiki/Category:SVG_flags_by_country]]
+* [[modern-normalize by Sindre Sorhus|https://github.com/sindresorhus/modern-normalize]]
+* [[diff-match-patch-es by antfu|https://github.com/antfu/diff-match-patch-es]]
