@@ -1,5 +1,8 @@
 title: Media Query Tracker Mechanism
 tags: Mechanisms
+created: 20250212154426403
+modified: 20250212154426403
+
 
 <<.from-version "5.4.0">> The media query tracker mechanism allows you to define [[custom CSS media queries|https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries]] to be bound to a specified [[info|InfoMechanism]] tiddler. The info tiddler will be dynamically update to reflect the current state of the media query.
 
