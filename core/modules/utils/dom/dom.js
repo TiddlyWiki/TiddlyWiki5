@@ -141,10 +141,10 @@ exports.getPassword = function(name) {
 };
 
 /*
-Force layout of a dom node and its descendents
+Reading element.offsetWidth, forces layout reflow of a dom node and its descendents
 */
 exports.forceLayout = function(element) {
-	// var dummy = element.offsetWidth;
+	var dummy = element.offsetWidth; // eslint-disable-line
 };
 
 /*
