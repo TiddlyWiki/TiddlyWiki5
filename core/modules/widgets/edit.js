@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/edit.js
 type: application/javascript
 module-type: widget
 
-Edit widget is a meta-widget chooses the appropriate actual editting widget
+Edit widget is a meta-widget chooses the appropriate actual editing widget
 
 \*/
 
