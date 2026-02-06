@@ -1,5 +1,5 @@
 title: $:/core/Filters/StoryList
 tags: $:/tags/Filter
-filter: [list[$:/StoryList]] -$:/AdvancedSearch
+filter: [<tv-story-list>is[variable]then<tv-story-list>else[$:/StoryList]] =>storylist [list<storylist>] -$:/AdvancedSearch
 description: {{$:/language/Filters/StoryList}}
 
