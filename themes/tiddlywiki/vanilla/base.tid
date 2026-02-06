@@ -137,6 +137,11 @@ body.tc-body {
 
 """>>
 
+svg.lucide, svg.icon-tabler-outline {
+	fill: none;
+	stroke: currentColor;
+}
+
 /**
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.
@@ -3344,6 +3349,10 @@ span.tc-translink > a:first-child {
 
 .tc-network-activity-background {
 	fill: <<colour network-activity-foreground>>;
+}
+
+.tc-network-activity-outline {
+	stroke: <<colour network-activity-foreground>>;
 }
 
 /*
