@@ -344,11 +344,15 @@ Sanitize HTML tag- and custom web component names
 	Unicode overview: https://symbl.cc/en/unicode-table/
 */
 exports.makeTagNameSafe = function(tag,defaultTag) {
-	// Early exit for common standard tags
 	var tagLower = (tag || "").toLowerCase();
-	if($tw.config.htmlStandardElements.indexOf(tagLower) !== -1) {
+	// Early exit for common standard, SVG and MathML elements
+	if( $tw.config.htmlStandardElements.includes(tagLower) ||
+		$tw.config.SvgStandardElements.includes(tagLower) ||
+		$tw.config.MathMlElements.includes(tagLower)
+	) {
 		return tag;
 	}
+
 	// Web-components spec see: https://html.spec.whatwg.org/#valid-custom-element-name
 	var regxSanitizeChars = new RegExp($tw.config.htmlCustomPrimitives.sanitizePCENChar,"mg");
 	var sanitizedDefaultTag = defaultTag.replace(regxSanitizeChars,"") || "SPAN";
@@ -363,13 +367,6 @@ exports.makeTagNameSafe = function(tag,defaultTag) {
 	// Check for unsafe tag and unsafe defaultTag
 	if($tw.config.htmlUnsafeElements.includes(result.toLowerCase())) {
 		result = ($tw.config.htmlUnsafeElements.includes(sanitizedDefaultTag.toLowerCase())) ? "safe-" + sanitizedDefaultTag : sanitizedDefaultTag;
-	}
-	// Check for forbidden tag names according to spec and log info to help users. See: $:/core/modules/config.js
-	if($tw.config.htmlForbiddenTags.includes(result.toLowerCase())) {
-		if($tw.browser) {
-			console.warn("TiddlyWiki: Forbidden custom element \"" + result + "\" See: https://html.spec.whatwg.org/#valid-custom-element-name");
-		}
-		result = "safe-" + result;
 	}
 	return result;
 };

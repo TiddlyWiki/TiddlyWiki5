@@ -40,8 +40,8 @@ exports.htmlStandardElements = "a,abbr,address,area,article,aside,audio,b,base,b
 // SVG 1.1 Element list without SCRIPT
 exports.SvgStandardElements = "a,altGlyph,altGlyphDef,altGlyphItem,animate,animateColor,animateMotion,animateTransform,circle,clipPath,color-profile,cursor,defs,desc,ellipse,feBlend,feColorMatrix,feComponentTransfer,feComposite,feConvolveMatrix,feDiffuseLighting,feDisplacementMap,feDistantLight,feFlood,feFuncA,feFuncB,feFuncG,feFuncR,feGaussianBlur,feImage,feMerge,feMergeNode,feMorphology,feOffset,fePointLight,feSpecularLighting,feSpotLight,feTile,feTurbulence,filter,font,font-face,font-face-format,font-face-name,font-face-src,font-face-uri,foreignObject,g,glyph,glyphRef,hkern,image,line,linearGradient,marker,mask,metadata,missing-glyph,mpath,path,pattern,polygon,polyline,radialGradient,rect,set,stop,style,svg,switch,symbol,text,textPath,title,tref,tspan,use,view,vkern".split(",");
 
-// Custom Web Components: https://html.spec.whatwg.org/#valid-custom-element-name
-exports.htmlForbiddenTags = "annotation-xml,color-profile,font-face,font-face-src,font-face-uri,font-face-format,font-face-name,missing-glyph".split(",");
+// MathML elements
+exports.MathMlElements = "annotation,annotation-xml,maction,math,menclose,merror,mfenced,mfrac,mi,mmultiscripts,mn,mo,mover,mpadded,mphantom,mprescripts,mroot,mrow,ms,mspace,msqrt,mstyle,msub,msubsup,msup,mtable,mtd,mtext,mtr,munder,munderover,semantics".split(",");
 
 // (EBNF notation) - PotentialCustomElementName ::= [a-z] (PCENChar)* '-' (PCENChar)*
 // Unicode table with ranges see: https://symbl.cc/en/unicode-table
