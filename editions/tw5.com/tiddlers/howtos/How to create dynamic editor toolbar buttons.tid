@@ -1,5 +1,5 @@
 created: 20201216182347597
-modified: 20211018102328148
+modified: 20260206104319886
 tags: 
 title: How to create dynamic editor toolbar buttons
 type: text/vnd.tiddlywiki
@@ -90,6 +90,9 @@ This tiddler contains all the necessary elements that are important for toolbar 
 
 ; shortcuts
 : This is the [[Keyboard Shortcut Descriptor]] eg: `((temp-bold))`
+
+; button-classes <<.from-version "5.4.0">>
+: Additional CSS classes applied to the created button, definable as a list or filter expression
 
 <<<
 

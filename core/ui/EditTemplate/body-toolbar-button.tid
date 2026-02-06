@@ -103,7 +103,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 <$set
 
   name="buttonClasses"
-  value={{!!button-classes}}
+  value={{{ [subfilter{!!button-classes}] :and[join[ ]] }}}
 
 ><<toolbar-button>></$set>
 \end
