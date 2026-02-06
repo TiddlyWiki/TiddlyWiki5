@@ -32,7 +32,7 @@ The <<.def list-links-draggable>> [[macro|Macros]] renders the ListField of a ti
 : Optional title of a tiddler to use as the template for rendering list items
 
 ;displayField  
-: Optional name of the field to display when the list is rendered. Defaults to the "caption" field; if "caption" is not present, the "title" field is used instead
+: <<.from-version 5.4.0>> Optional name of the field to display when the list is rendered. Defaults to the "caption" field; if "caption" is not present, the "title" field is used instead
 
 
 If the `itemTemplate` parameter is not provided then the list items are rendered as simple links. Within the `itemTemplate`, the [[currentTiddler Variable]] refers to the current list item.

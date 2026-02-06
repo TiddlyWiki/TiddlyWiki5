@@ -1,0 +1,11 @@
+change-category: filters
+change-type: bugfix
+created: 20260120145005984
+description: Fixes a bug with the resolution of functions within the substitute operator, where the function did not have access to variables set in the filter run.
+github-contributors: saqimtiaz
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9598
+modified: 20260120145321774
+release: 5.4.0
+tags: 
+title: $:/changenotes/5.4.0/#9598
+type: text/vnd.tiddlywiki

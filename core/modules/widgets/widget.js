@@ -151,7 +151,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		} else if(variable.isFunctionDefinition) {
 			// Function evaluations
 			params = self.resolveVariableParameters(variable.params,actualParams);
-			var variables = options.variables || Object.create(null);
+			var variables = $tw.utils.extend({},options.variables);
 			// Apply default parameter values
 			$tw.utils.each(variable.params,function(param,index) {
 				if(param["default"]) {
@@ -160,7 +160,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 			});
 			// Parameters are an array of {name:, value:, multivalue:} pairs (name and multivalue are optional)
 			$tw.utils.each(params,function(param) {
-				if(param.multiValue) {
+				if(param.multiValue && param.multiValue.length) {
 					variables[param.name] = param.multiValue;
 				} else {
 					variables[param.name] = param.value || "";
@@ -233,8 +233,10 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 			paramMultiValue = typeof param === "string" ? [param] : (param.multiValue || [paramValue]);
 		}
 		// If we've still not got a value, use the default, if any
-		paramValue = paramValue || paramInfo["default"] || "";
-		paramMultiValue = paramMultiValue || [paramValue];
+		if(!paramValue) {
+			paramValue = paramInfo["default"] || "";
+			paramMultiValue = [paramValue];
+		}
 		// Store the parameter name and value
 		results.push({name: paramInfo.name, value: paramValue, multiValue: paramMultiValue});
 	}
@@ -341,7 +343,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 				}
 			} else {
 				opts = opts || {};
-				opts.variables = variables;
+				opts.variables = $tw.utils.extend({},variables,opts.variables);
 				return self.getVariable(name,opts);
 			};
 		},
@@ -414,7 +416,21 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 			value = [value];
 		}
 	} else if(attribute.type === "macro") {
-		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
+		// Get the macro name
+		var macroName = attribute.value.attributes["$variable"].value;
+		// Collect macro parameters
+		var params = [];
+		$tw.utils.each(attribute.value.orderedAttributes,function(attr) {
+			var param = {
+				value: self.computeAttribute(attr)
+			};
+			if(attr.name && !attr.isPositional) {
+				param.name = attr.name;
+			}
+			params.push(param);
+		});
+		// Invoke the macro
+		var variableInfo = this.getVariableInfo(macroName,{params: params});
 		if(options.asList) {
 			value = variableInfo.resultList;
 		} else {
@@ -771,9 +787,9 @@ Widget.prototype.findNextSiblingDomNode = function(startIndex) {
 	// Refer to this widget by its index within its parents children
 	var parent = this.parentWidget,
 		index = startIndex !== undefined ? startIndex : parent.children.indexOf(this);
-if(index === -1) {
-	throw "node not found in parents children";
-}
+	if(index === -1) {
+		throw "node not found in parents children";
+	}
 	// Look for a DOM node in the later siblings
 	while(++index < parent.children.length) {
 		var domNode = parent.children[index].findFirstDomNode();
@@ -811,21 +827,60 @@ Widget.prototype.findFirstDomNode = function() {
 };
 
 /*
-Remove any DOM nodes created by this widget or its children
+Entry into destroy procedure
+options include:
+	removeDOMNodes: boolean (default true)
+*/
+Widget.prototype.destroyChildren = function(options) {
+	$tw.utils.each(this.children,function(childWidget) {
+		childWidget.destroy(options);
+	});
+};
+
+/*
+Legacy entry into destroy procedure
 */
 Widget.prototype.removeChildDomNodes = function() {
-	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
-	if(this.domNodes.length > 0) {
-		$tw.utils.each(this.domNodes,function(domNode) {
-			domNode.parentNode.removeChild(domNode);
-		});
-		this.domNodes = [];
-	} else {
-		// Otherwise, ask the child widgets to delete their DOM nodes
-		$tw.utils.each(this.children,function(childWidget) {
-			childWidget.removeChildDomNodes();
-		});
+	this.destroy({removeDOMNodes: true});
+};
+
+/*
+Default destroy
+options include:
+- removeDOMNodes: boolean (default true)
+*/
+Widget.prototype.destroy = function(options) {
+	const { removeDOMNodes = true } = options || {};
+	let removeChildDOMNodes = removeDOMNodes;
+	if(removeDOMNodes && this.domNodes.length > 0) {
+		// If this widget will remove its own DOM nodes, children should not remove theirs
+		removeChildDOMNodes = false;
 	}
+	// Destroy children first
+	this.destroyChildren({removeDOMNodes: removeChildDOMNodes});
+	this.children = [];
+	
+	// Call custom cleanup method if implemented
+	if(typeof this.onDestroy === "function") {
+		this.onDestroy();
+	}
+	
+	// Remove our DOM nodes if needed
+	if(removeDOMNodes) {
+		this.removeLocalDomNodes();	
+	}
+};
+
+/*
+Remove any DOM nodes created by this widget 
+*/
+Widget.prototype.removeLocalDomNodes = function() {
+	for(const domNode of this.domNodes) {
+		if(domNode.parentNode) {
+			domNode.parentNode.removeChild(domNode);
+		}
+	}
+	this.domNodes = [];
 };
 
 /*

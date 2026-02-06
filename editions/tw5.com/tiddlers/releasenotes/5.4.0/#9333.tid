@@ -1,0 +1,49 @@
+title: $:/changenotes/5.4.0/#9333
+description: Intergrate Tiddlywiki palette colors and settings to custom CSS properties
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9333
+github-contributors: Leilei332
+
+Adds `--tpc-*` (for palettes colors) and `--tp-*` (for CSS settings) [[custom CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/--*]] to allow writing stylesheets with vanilla CSS, for example:
+
+```
+/* Old way to get a palette color, which requires using wikitext */
+.tag {
+	background: <<colour tag-background>>;
+}
+```
+
+```css
+/* New way to get a palette color without wikitext */
+.tag {
+	background: var(--tp-color-tag-background);
+}
+```
+
+```
+/* Old way to get CSS settings with transclusion */
+.tc-sidebar-header {
+	padding: 14px;
+	min-height: 32px;
+	margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+	transition:  min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
+}
+```
+
+```css
+/* New way to get CSS settings */
+.tc-sidebar-header {
+	padding: 14px;
+	min-height: 32px;
+	margin-top: var(--tp-story-top);
+	transition: min-height var(--tp-animation-duration) ease-in-out, padding-top var(--tp-animation-duration) ease-in-out, padding-bottom var(--tp-animation-duration) ease-in-out;
+}
+```
+
+See:  
+
+* [[Writing stylesheets in vanilla CSS]] and [[Core CSS Variables]] for details.  
+* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/var  

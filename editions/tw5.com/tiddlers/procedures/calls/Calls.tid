@@ -1,0 +1,56 @@
+caption: Calls
+created: 20221007130006705
+modified: 20260125212303316
+tags: WikiText Procedures Functions Macros
+title: Calls
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+This tiddler describes the different ways in which [[procedures|Procedures]], [[functions|Functions]] and [[macros|Macros]] can be called. See [[Call Syntax]] for a formal description of the syntax.
+
+!! Call Transclusion Shortcut
+
+To perform a call, place `<<`double angle brackets`>>` around the callee name and any parameter values.
+
+```
+<<my-procedure param="This is the parameter value">>
+```
+
+By default, parameters are interpreted as being in the same order as in the definition. A parameter value can be labelled with its name and an equals sign to allow them to be listed in a different order.
+
+If no value is specified for a parameter, the default value given for that parameter in the [[procedure definition|Procedure Definitions]], [[function definition|Function Definitions]] or [[macro definition|Macro Definitions]] is used instead. (If no default value was defined, the parameter is blank).
+
+Each parameter value can be enclosed in `'`single quotes`'`, `"`double quotes`"`, `"""`triple double quotes`"""` or `[[`double square brackets`]]`. Triple double quotes allow a value to contain almost anything. If a value contains no spaces or single or double quotes, it requires no delimiters. [[Substituted Attribute Values]] enclosed in single or triple back quotes are also supported.
+
+See the discussion about [[parser modes|WikiText parser mode: macro examples]]
+
+!! Calls with <<.wlink TranscludeWidget>> Widget
+
+The shortcut syntax expands to the <<.wlink TranscludeWidget>> widget with the `$variable` attribute specifying the name of the procedure to transclude.
+
+```
+<$transclude $variable="my-procedure" param="This is the parameter value"/>
+```
+
+The widget itself offers greater flexibility than the shortcut syntax, including the ability to override it with a custom widget.
+
+!! Assigning Results of Calls to Attribute Values
+
+The text returned from a call can be directly assigned to an attribute of a widget or HTML element. The result of the call is not wikified, which means that [[parameter handling|Procedure Parameter Handling]] does not take place.
+
+```
+<div class=<<myclasses>>>
+...
+</div>
+```
+
+!! Using Calls in Filters
+
+Calls can be used in filters. The text is not wikified which again means that the parameters will be ignored.
+
+```
+<$list filter="[<my-procedure>]">
+...
+</$list>
+```

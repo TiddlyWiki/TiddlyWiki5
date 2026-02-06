@@ -50,8 +50,8 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 			destPrefix: "aria-"
 		});
 		parent.insertBefore(domNode,nextSibling);
-		this.renderChildren(domNode,null);
 		this.domNodes.push(domNode);
+		this.renderChildren(domNode,null);
 	}
 };
 
@@ -157,8 +157,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	});
 	// Insert the link into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 };
 
 LinkWidget.prototype.handleClickEvent = function(event) {

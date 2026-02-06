@@ -59,6 +59,8 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	var domContainer = this.document.createElement("div"), 
 		domDiff = this.createDiffDom(diffs);
 	parent.insertBefore(domContainer,nextSibling);
+	// Save our container
+	this.domNodes.push(domContainer);
 	// Set variables
 	this.setVariable("diff-count",diffs.reduce(function(acc,diff) {
 		if(diff[0] !== dmp.DIFF_EQUAL) {
@@ -70,8 +72,6 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(domContainer,null);
 	// Render the diff
 	domContainer.appendChild(domDiff);
-	// Save our container
-	this.domNodes.push(domContainer);
 };
 
 /*

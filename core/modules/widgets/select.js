@@ -63,8 +63,8 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("title",this.selectTooltip);
 	}
 	this.parentDomNode.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 	this.setSelectValue();
 	if(this.selectFocus == "yes") {
 		this.getSelectDomNode().focus();

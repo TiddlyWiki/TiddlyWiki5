@@ -1,0 +1,8 @@
+caption: --tp-font-family
+created: 20260122110741282
+modified: 20260130045301357
+tags: [[Core CSS Variables]]
+title: --tp-font-family CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-font-family` CSS variable represents the "Font family" setting in Theme Tweaks.

@@ -1,0 +1,8 @@
+caption: --tp-body-font-size
+created: 20260122111308483
+modified: 20260130045633904
+tags: [[Core CSS Variables]]
+title: --tp-body-font-size CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-body-font-size` CSS variable represents the "Font size for tiddler body" setting in Theme Tweaks.

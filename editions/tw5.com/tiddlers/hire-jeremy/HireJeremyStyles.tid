@@ -81,7 +81,7 @@ type: text/vnd.tiddlywiki
 }
 
 [data-tiddler-title="Hire the founder of TiddlyWiki"] .tc-btn-big-green svg {
-	fill: #cece86;
+	color: #cece86;
 }
 
 .yellow-note-sidebar-wrapper {

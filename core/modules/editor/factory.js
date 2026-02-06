@@ -48,8 +48,8 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			this.toolbarNode = this.document.createElement("div");
 			this.toolbarNode.className = "tc-editor-toolbar";
 			parent.insertBefore(this.toolbarNode,nextSibling);
-			this.renderChildren(this.toolbarNode,null);
 			this.domNodes.push(this.toolbarNode);
+			this.renderChildren(this.toolbarNode,null);
 		}
 		// Create our element
 		var editInfo = this.getEditInfo(),

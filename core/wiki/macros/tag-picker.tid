@@ -118,7 +118,7 @@ The second ESC tries to close the "draft tiddler"
 				focusPopup=<<tf.tagpicker-dropdown-id>>
 				class="tc-edit-texteditor tc-popup-handle"
 				tabindex=<<tabIndex>>
-				focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] :else[[false]] }}}
+				focus={{{ [{!!draft.of}is[tiddler]then{$:/config/AutoFocusEdit}match[tags]then[true]] :else[{$:/config/AutoFocus}match[tags]then[true]] :else[[false]] }}}
 				filterMinLength={{$:/config/Tags/MinLength}}
 				cancelPopups=<<cancelPopups>>
 				configTiddlerFilter="[[$:/core/macros/tag-picker]]"
