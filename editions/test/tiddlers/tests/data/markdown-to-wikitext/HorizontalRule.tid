@@ -1,0 +1,21 @@
+title: MarkdownToWikitext/HorizontalRule
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/markdown-to-wikitext-test-spec]]
+
++
+title: Markdown
+
+Above the line
+
+---
+
+Below the line
+
++
+title: ExpectedWikitext
+
+Above the line
+
+---
+
+Below the line

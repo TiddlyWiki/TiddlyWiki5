@@ -1,0 +1,15 @@
+title: $:/changenotes/5.5.0/#9462
+description: Add button and import option to convert Markdown tiddlers to WikiText
+tags: $:/tags/ChangeNote
+release: 5.5.0
+change-type: feature
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9462
+github-contributors: linonetwo
+
+* new `action-convert-markdown` widget that converts a Markdown tiddler to WikiText
+** A view toolbar button that uses this widget
+** Add `condition` field support to ViewToolbar buttons
+* Add "Convert Markdown to WikiText on import" option
+** Add import option list to allow register checkboxes on the import options panel
+* Two new editor toolbar buttons for formatting WikiText and md to tid.

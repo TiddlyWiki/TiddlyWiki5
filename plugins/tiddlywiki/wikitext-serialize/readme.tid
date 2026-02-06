@@ -1,0 +1,140 @@
+title: $:/plugins/tiddlywiki/wikitext-serialize/readme
+type: text/vnd.tiddlywiki
+
+! WikiText Serialize Plugin
+
+This plugin provides utilities to serialize WikiText Abstract Syntax Tree (AST) nodes back into wikitext strings.
+
+!! Overview
+
+The plugin enables bidirectional conversion between WikiText strings and their AST representation, allowing programmatic manipulation of WikiText content.
+
+!! Core Utilities
+
+!!! `$tw.utils.serializeWikitextParseTree(tree, options)`
+
+Converts a WikiText AST (parse tree) back into a wikitext string.
+
+* ''Parameters:''
+** `tree` - A parse tree node or array of nodes
+** `options` - Optional configuration object
+* ''Returns:'' A wikitext string
+
+''Example:''
+
+```javascript
+// Parse a tiddler's wikitext to AST
+var parseTree = $tw.wiki.parseTiddler("MyTiddler").tree;
+
+// Serialize AST back to wikitext string
+var wikitextString = $tw.utils.serializeWikitextParseTree(parseTree).trimEnd();
+```
+
+!!! `$tw.utils.serializeAttribute(node, options)`
+
+Serializes a single attribute node (e.g., widget or HTML element attribute).
+
+* ''Parameters:''
+** `node` - An attribute node with `name` and `type` properties
+** `options` - Optional configuration object with `assignmentSymbol` (default: `=`)
+* ''Returns:'' A string representation of the attribute
+
+''Example:''
+
+```javascript
+var attr = {
+	name: "filter",
+	type: "string",
+	value: "[tag[MyTag]]"
+};
+var attrString = $tw.utils.serializeAttribute(attr);
+// Returns: filter="[tag[MyTag]]"
+```
+
+!! Architecture
+
+The plugin uses a modular architecture with separate serializer handlers for each WikiText rule type.
+
+!!! Rule Serializers
+
+Each WikiText parsing rule has a corresponding serializer module with `module-type: wikiruleserializer`. Serializers are located in the `rules/` directory:
+
+* Block rules: `heading`, `list`, `codeblock`, `quoteblock`, `table`, etc.
+* Inline rules: `bold`, `italic`, `strikethrough`, `prettylink`, `image`, etc.
+* Special rules: `html`, `macrocall`, `transclude`, `widget`, etc.
+
+Each serializer exports:
+
+* `name` - The rule name (matches `node.rule` in the AST)
+* `serialize(tree, serialize)` - Function that converts an AST node to wikitext
+
+The `serialize` parameter is a recursive function to serialize child nodes.
+
+!!! Handler Registration
+
+Serializers are automatically registered during parser initialization. The system uses `node.rule` metadata (added by the WikiText parser) to determine which serializer to use.
+
+!! Use Cases
+
+* ''Content Transformation'' - Parse, modify AST, and regenerate WikiText
+* ''WYSIWYG Editors'' - Convert between visual representation and WikiText
+* ''Code Formatters'' - Normalize WikiText formatting
+* ''Linters'' - Analyze and fix WikiText style issues
+* ''Documentation Tools'' - Extract and transform WikiText content
+* ''Migration Tools'' - Convert between different WikiText dialects
+
+!! Markdown to WikiText Conversion
+
+The plugin includes an optional markdown conversion module in the `markdown/` directory that converts Markdown to WikiText using the serialization infrastructure.
+
+See [[Markdown to WikiText Conversion|$:/plugins/tiddlywiki/wikitext-serialize/markdown/readme]] for details.
+
+!!! Editor Toolbar Buttons
+
+Two editor toolbar buttons are provided for WikiText editing:
+
+* ''Convert Markdown'' - Converts selected Markdown text (or the entire tiddler content if nothing is selected) to WikiText. Useful when pasting Markdown content into WikiText tiddlers.
+* ''Format WikiText'' - Reformats and normalizes WikiText by parsing and re-serializing it. This removes unnecessary whitespace and normalizes formatting.
+
+Both buttons appear in the editor toolbar when editing WikiText tiddlers (type `text/vnd.tiddlywiki` or no type specified).
+
+!! Testing
+
+The plugin includes a comprehensive test suite:
+
+* Test tiddlers tagged with `$:/tags/wikitext-serialize-test-spec`
+* Uses `text/vnd.tiddlywiki` format with expected WikiText content
+* Each test verifies that parsing and serializing produces the original text
+* Run tests with: `npm test`
+
+!! API Stability
+
+This plugin is marked as `STABILITY_1_EXPERIMENTAL`. The API may change in future versions as we gather feedback and discover edge cases.
+
+!! Implementation Notes
+
+* The serializer preserves most WikiText formatting but may normalize whitespace in some cases
+* Complex nested structures (e.g., deeply nested lists, tables with macros) are fully supported
+* **The `rule` property is REQUIRED on AST nodes for proper serialization** - without it, nodes will be serialized as HTML or their children will be serialized directly
+* **Special rule values:**
+** `rule: "parseblock"` - For paragraph-like blocks (`<p>` tags) that should be separated by blank lines and have their children serialized directly
+** `rule: "list"` - For list containers (`<ul>`, `<ol>`) that should be serialized as WikiText list syntax
+** `rule: "html"` - For generic HTML elements that should be serialized as HTML tags
+* HTML tags and widgets use the `html` serializer regardless of their specific tag name
+* For markdown-to-wikitext conversion, all generated AST nodes must include the appropriate `rule` property to ensure correct WikiText output
+
+!! Contributing
+
+To add support for a new WikiText rule:
+
+# Create a serializer module in the `rules/` directory
+# Export `name` matching the rule name
+# Implement the `serialize(tree, serialize)` function
+# Add test cases tagged with `$:/tags/wikitext-serialize-test-spec`
+
+For markdown conversion handlers:
+
+# Create a handler module in `markdown/handlers/`
+# Export `type` matching the markdown-it token type
+# Implement the `handler(token, context)` function
+# Add test cases tagged with `$:/tags/markdown-to-wikitext-test-spec`

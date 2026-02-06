@@ -1,0 +1,19 @@
+title: MarkdownToWikitext/NestedList
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/markdown-to-wikitext-test-spec]]
+
++
+title: Markdown
+
+* Item 1
+  * Nested 1.1
+  * Nested 1.2
+* Item 2
+
++
+title: ExpectedWikitext
+
+* Item 1
+** Nested 1.1
+** Nested 1.2
+* Item 2
