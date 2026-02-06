@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/macros/changecount.js
 type: application/javascript
-module-type: macro
+module-type: function
 
 Macro to return the changecount for the current tiddler
 

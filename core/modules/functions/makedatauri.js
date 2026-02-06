@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/macros/makedatauri.js
 type: application/javascript
-module-type: macro
+module-type: function
 
 Macro to convert a string of text to a data URI
 

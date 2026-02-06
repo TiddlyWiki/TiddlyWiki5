@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/macros/displayshortcuts.js
 type: application/javascript
-module-type: macro
+module-type: function
 
 Macro to display a list of keyboard shortcuts in human readable form. Notably, it resolves named shortcuts like `((bold))` to the underlying keystrokes.
 

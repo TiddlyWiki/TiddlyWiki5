@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/macros/unusedtitle.js
 type: application/javascript
-module-type: macro
+module-type: function
 
 Macro to return a new title that is unused in the wiki. It can be given a name as a base.
 \*/
