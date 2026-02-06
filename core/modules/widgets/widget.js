@@ -151,7 +151,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		} else if(variable.isFunctionDefinition) {
 			// Function evaluations
 			params = self.resolveVariableParameters(variable.params,actualParams);
-			var variables = options.variables || Object.create(null);
+			var variables = $tw.utils.extend({},options.variables);
 			// Apply default parameter values
 			$tw.utils.each(variable.params,function(param,index) {
 				if(param["default"]) {
@@ -343,7 +343,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 				}
 			} else {
 				opts = opts || {};
-				opts.variables = variables;
+				opts.variables = $tw.utils.extend({},variables,opts.variables);
 				return self.getVariable(name,opts);
 			};
 		},
