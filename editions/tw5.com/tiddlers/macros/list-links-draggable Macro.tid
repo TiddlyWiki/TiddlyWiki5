@@ -1,6 +1,6 @@
 caption: list-links-draggable
 created: 20170328204925306
-modified: 20260125213129582
+modified: 20260206131823536
 tags: Macros [[Core Macros]]
 title: list-links-draggable Macro
 type: text/vnd.tiddlywiki
@@ -35,11 +35,12 @@ The <<.def list-links-draggable>> [[macro|Macros]] renders the ListField of a ti
 : Optional name of the field to display when the list is rendered. Defaults to the "caption" field; if "caption" is not present, the "title" field is used instead
 
 ; startactions <<.from-version "5.4.0">>
-: Optional action string that gets invoked when link ''dragging starts'' 
+: Optional action string that gets invoked when link ''dragging starts''
+: <<.var actionTiddler>> variable is available in this action
 
 ; endactions <<.from-version "5.4.0">>
 : Optional action string that gets invoked when link ''dragging ends'' 
-
+: <<.var actionTiddler>> variable is available in this action
 
 If the `itemTemplate` parameter is not provided then the list items are rendered as simple links. Within the `itemTemplate`, the [[currentTiddler Variable]] refers to the current list item.
 
