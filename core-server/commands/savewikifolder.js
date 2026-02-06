@@ -101,29 +101,25 @@ WikiFolderMaker.prototype.save = function() {
 			if(self.tiddlersToIgnore.indexOf(title) !== -1) {
 				// Ignore the core plugin and the ephemeral info plugin
 				self.log("Ignoring tiddler: " + title);
-			} else {
-				var type = tiddler.fields.type,
-					pluginType = tiddler.fields["plugin-type"];
-				if(type === "application/json" && pluginType) {
-					// Plugin tiddler
-					var libraryDetails = self.findPluginInLibrary(title);
-					if(libraryDetails) {
-						// A plugin from the core library
-						self.log("Adding built-in plugin: " + libraryDetails.name);
-						newWikiInfo[libraryDetails.type] = newWikiInfo[libraryDetails.type]  || [];
-						$tw.utils.pushTop(newWikiInfo[libraryDetails.type],libraryDetails.name);
-					} else if(self.explodePlugins !== "no") {
-						// A custom plugin
-						self.log("Processing custom plugin: " + title);
-						self.saveCustomPlugin(tiddler);
-					} else if(self.explodePlugins === "no") {
-						self.log("Processing custom plugin to tiddlders folder: " + title);
-						self.saveTiddler("tiddlers", tiddler);
-					}
-				} else {
-					// Ordinary tiddler
-					self.saveTiddler("tiddlers",tiddler);
+			} else if(tiddler.isPlugin()) {
+				// Plugin tiddler
+				var libraryDetails = self.findPluginInLibrary(title);
+				if(libraryDetails) {
+					// A plugin from the core library
+					self.log("Adding built-in plugin: " + libraryDetails.name);
+					newWikiInfo[libraryDetails.type] = newWikiInfo[libraryDetails.type]  || [];
+					$tw.utils.pushTop(newWikiInfo[libraryDetails.type],libraryDetails.name);
+				} else if(self.explodePlugins !== "no") {
+					// A custom plugin
+					self.log("Processing custom plugin: " + title);
+					self.saveCustomPlugin(tiddler);
+				} else if(self.explodePlugins === "no") {
+					self.log("Processing custom plugin to tiddlders folder: " + title);
+					self.saveTiddler("tiddlers", tiddler);
 				}
+			} else {
+				// Ordinary tiddler
+				self.saveTiddler("tiddlers",tiddler);
 			}
 		}
 	});
@@ -164,6 +160,7 @@ WikiFolderMaker.prototype.findPluginInLibrary = function(title) {
 };
 
 WikiFolderMaker.prototype.saveCustomPlugin = function(pluginTiddler) {
+	if(!pluginTiddler.isPlugin()) throw new Error("Tiddler is not a valid plugin");
 	var self = this,
 		pluginTitle = pluginTiddler.fields.title,
 		titleParts = pluginTitle.split("/"),
@@ -173,7 +170,7 @@ WikiFolderMaker.prototype.saveCustomPlugin = function(pluginTiddler) {
 		pluginInfo = pluginTiddler.getFieldStrings({exclude: ["text","type"]});
 	this.saveJSONFile(directory + path.sep + "plugin.info",pluginInfo);
 	self.log("Writing " + directory + path.sep + "plugin.info: " + JSON.stringify(pluginInfo,null,$tw.config.preferences.jsonSpaces));
-	var pluginTiddlers = $tw.utils.parseJSONSafe(pluginTiddler.fields.text).tiddlers; // A hashmap of tiddlers in the plugin
+	var pluginTiddlers = $tw.utils.parseDataTiddler(pluginTiddler.fields.type, pluginTiddler.fields.text).tiddlers;
 	$tw.utils.each(pluginTiddlers,function(tiddler,title) {
 		if(!tiddler.title) {
 			tiddler.title = title;
