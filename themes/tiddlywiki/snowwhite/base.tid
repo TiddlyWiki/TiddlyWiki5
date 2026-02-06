@@ -28,7 +28,7 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .tc-page-controls button svg, .tc-tiddler-controls button svg, .tc-topbar button svg {
-	transition: fill 150ms ease-in-out;
+	transition: color 150ms ease-in-out;
 }
 
 .tc-tiddler-controls button.tc-selected,
@@ -46,7 +46,7 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .tc-tiddler-frame .tc-edit-tags input.tc-edit-texteditor {
-	box-shadow: none
+	box-shadow: none;
 	border: none;
 	outline: none;
 }

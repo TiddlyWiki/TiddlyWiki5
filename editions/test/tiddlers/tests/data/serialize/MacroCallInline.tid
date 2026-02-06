@@ -3,3 +3,5 @@ title: Serialize/MacroCallInline
 type: text/vnd.tiddlywiki
 
 These are macro calls in a line: <<name "value" "value2">> and <<.def "macro calls">> <<alert "primary" "primary alert" width:"60%">>
+
+Testing unquoted parameters: <<john one:val1 two:val2>> and <<test param:value other:"quoted">>.

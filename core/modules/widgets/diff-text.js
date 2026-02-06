@@ -36,7 +36,13 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create the diff object
 	const editCost = $tw.utils.parseNumber(this.getAttribute("editcost","4"));
-	const diffs = dmp.diffMain(this.getAttribute("source",""),this.getAttribute("dest",""),{diffEditCost: editCost});
+	const mode = this.getAttribute("mode") || "chars";
+	let diffs;
+	if(mode === "lines" || mode === "words") {
+		diffs = diffLineWordMode(this.getAttribute("source",""),this.getAttribute("dest",""),mode,editCost);
+	} else {
+		diffs = dmp.diffMain(this.getAttribute("source",""),this.getAttribute("dest",""),{diffEditCost: editCost});
+	}
 	// Apply required cleanup
 	switch(this.getAttribute("cleanup","semantic")) {
 		case "none":
@@ -53,6 +59,8 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	var domContainer = this.document.createElement("div"), 
 		domDiff = this.createDiffDom(diffs);
 	parent.insertBefore(domContainer,nextSibling);
+	// Save our container
+	this.domNodes.push(domContainer);
 	// Set variables
 	this.setVariable("diff-count",diffs.reduce(function(acc,diff) {
 		if(diff[0] !== dmp.DIFF_EQUAL) {
@@ -64,8 +72,6 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(domContainer,null);
 	// Render the diff
 	domContainer.appendChild(domDiff);
-	// Save our container
-	this.domNodes.push(domContainer);
 };
 
 /*
@@ -132,12 +138,23 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DiffTextWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup || changedAttributes.editcost) {
+	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup || changedAttributes.mode || changedAttributes.editcost) {
 		this.refreshSelf();
 		return true;
 	} else {
 		return this.refreshChildren(changedTiddlers);
 	}
 };
+
+// This function is adapted from https://github.com/google/diff-match-patch/wiki/Line-or-Word-Diffs
+function diffLineWordMode(text1,text2,mode,editCost) {
+	var a = $tw.utils.diffPartsToChars(text1,text2,mode);
+	var lineText1 = a.chars1;
+	var lineText2 = a.chars2;
+	var lineArray = a.lineArray;
+	var diffs = dmp.diffMain(lineText1,lineText2,{diffEditCost: editCost});
+	dmp.diffCharsToLines(diffs,lineArray);
+	return diffs;
+}
 
 exports["diff-text"] = DiffTextWidget;

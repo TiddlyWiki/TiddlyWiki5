@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9582
+description: Refactor code for EditTemplate fields
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9582
+github-contributors: yaisog
+
+Refactored the EditTemplate fields.tid template to improve code maintainability and readability

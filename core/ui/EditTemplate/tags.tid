@@ -17,7 +17,7 @@ tags: $:/tags/EditTemplate
 	<$let backgroundColor=<<colour>> >
 		<span class="tc-tag-label tc-tag-list-item tc-small-gap-right"
 			data-tag-title=<<currentTiddler>>
-			style=`color:$(foregroundColor)$; background-color:$(backgroundColor)$;`
+			style=`color:$(foregroundColor)$; background-color:$(backgroundColor)$; --tp-remove-tag-button-color:$(foregroundColor)$`
 		>
 			<$transclude tiddler=<<icon>>/>
 			<$view field="title" format="text"/>

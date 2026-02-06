@@ -7,3 +7,7 @@ type: text/vnd.tiddlywiki
 <<.def "macro calls">>
 
 <<alert "primary" "primary alert" width:"60%">>
+
+<<john one:val1 two:val2 three:"quoted value">>
+
+<<test unquoted:value quoted:"value" number:123>>

@@ -55,7 +55,7 @@ Return the dflt (default) parameter if str is not a base-10 number.
 exports.getInt = function(str,deflt) {
 	var i = parseInt(str,10);
 	return isNaN(i) ? deflt : i;
-}
+};
 
 /*
 Repeatedly replaces a substring within a string. Like String.prototype.replace, but without any of the default special handling of $ sequences in the replace string
@@ -69,12 +69,12 @@ exports.replaceString = function(text,search,replace) {
 exports.trimPrefix = function(str,unwanted) {
 	if(typeof str === "string" && typeof unwanted === "string") {
 		if(unwanted === "") {
-			return str.replace(/^\s\s*/, '');
+			return str.replace(/^\s\s*/, "");
 		} else {
 			// Safely regexp-escape the unwanted text
-			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
-			var regex = new RegExp('^(' + unwanted + ')+');
-			return str.replace(regex, '');
+			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, "\\$&");
+			var regex = new RegExp("^(" + unwanted + ")+");
+			return str.replace(regex, "");
 		}
 	} else {
 		return str;
@@ -84,12 +84,12 @@ exports.trimPrefix = function(str,unwanted) {
 exports.trimSuffix = function(str,unwanted) {
 	if(typeof str === "string" && typeof unwanted === "string") {
 		if(unwanted === "") {
-			return str.replace(/\s\s*$/, '');
+			return str.replace(/\s\s*$/, "");
 		} else {
 			// Safely regexp-escape the unwanted text
-			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
-			var regex = new RegExp('(' + unwanted + ')+$');
-			return str.replace(regex, '');
+			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, "\\$&");
+			var regex = new RegExp("(" + unwanted + ")+$");
+			return str.replace(regex, "");
 		}
 	} else {
 		return str;
@@ -101,14 +101,14 @@ Convert a string to sentence case (ie capitalise first letter)
 */
 exports.toSentenceCase = function(str) {
 	return (str || "").replace(/^\S/, function(c) {return c.toUpperCase();});
-}
+};
 
 /*
 Convert a string to title case (ie capitalise each initial letter)
 */
 exports.toTitleCase = function(str) {
 	return (str || "").replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
-}
+};
 
 /*
 Find the line break preceding a given position in a string
@@ -242,6 +242,53 @@ exports.slowInSlowOut = function(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 };
 
+exports.copyObjectPropertiesSafe = function(object) {
+	const seen = new Set(),
+		isDOMElement = value => value instanceof Node || value instanceof Window;
+
+	function safeCopy(obj) {
+		// skip circular references
+		if(seen.has(obj)) {
+			return undefined;
+		}
+		// primitives and null are safe
+		if(typeof obj !== "object" || obj === null) {
+			return obj;
+		}
+		// skip DOM elements
+		if(isDOMElement(obj)) {
+			return undefined;
+		}
+		// copy arrays, preserving positions
+		if(Array.isArray(obj)) {
+			return obj.map(item => {
+				const value = safeCopy(item);
+				return value === undefined ? null : value;
+			});
+		}
+
+		seen.add(obj);
+		const copy = {};
+		let key,
+			value;
+		for(key in obj) {
+			try {
+				value = safeCopy(obj[key]);
+				if(value !== undefined) {
+					copy[key] = value;
+				}
+			} catch(e) {
+				// silently skip unserializable properties
+			}
+		}
+		return copy;
+	}
+
+	const result = safeCopy(object);
+	seen.clear();
+	return result;
+};
+
 exports.formatTitleString = function(template,options) {
 	var base = options.base || "",
 		separator = options.separator || "",
@@ -358,8 +405,8 @@ exports.formatDateString = function(date,template) {
 			}],
 			[/^TZD/, function() {
 				var tz = date.getTimezoneOffset(),
-				atz = Math.abs(tz);
-				return (tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60)) + ':' + $tw.utils.pad(atz % 60);
+					atz = Math.abs(tz);
+				return (tz < 0 ? "+" : "-") + $tw.utils.pad(Math.floor(atz / 60)) + ":" + $tw.utils.pad(atz % 60);
 			}],
 			[/^wYY/, function() {
 				return $tw.utils.pad($tw.utils.getYearForWeekNo(date) - 2000);
@@ -568,9 +615,9 @@ exports.unescapeLineBreaks = function(s) {
 exports.escape = function(ch) {
 	var charCode = ch.charCodeAt(0);
 	if(charCode <= 0xFF) {
-		return '\\x' + $tw.utils.pad(charCode.toString(16).toUpperCase());
+		return "\\x" + $tw.utils.pad(charCode.toString(16).toUpperCase());
 	} else {
-		return '\\u' + $tw.utils.pad(charCode.toString(16).toUpperCase(),4);
+		return "\\u" + $tw.utils.pad(charCode.toString(16).toUpperCase(),4);
 	}
 };
 
@@ -587,11 +634,11 @@ exports.stringify = function(s, rawUnicode) {
 	*/
 	var regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
 	return (s || "")
-		.replace(/\\/g, '\\\\')            // backslash
+		.replace(/\\/g, "\\\\")            // backslash
 		.replace(/"/g, '\\"')              // double quote character
 		.replace(/'/g, "\\'")              // single quote character
-		.replace(/\r/g, '\\r')             // carriage return
-		.replace(/\n/g, '\\n')             // line feed
+		.replace(/\r/g, "\\r")             // carriage return
+		.replace(/\n/g, "\\n")             // line feed
 		.replace(regex, exports.escape);   // non-ASCII characters
 };
 
@@ -601,15 +648,15 @@ exports.jsonStringify = function(s, rawUnicode) {
 	// See http://www.json.org/
 	var regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
 	return (s || "")
-		.replace(/\\/g, '\\\\')            // backslash
+		.replace(/\\/g, "\\\\")            // backslash
 		.replace(/"/g, '\\"')              // double quote character
-		.replace(/\r/g, '\\r')             // carriage return
-		.replace(/\n/g, '\\n')             // line feed
-		.replace(/\x08/g, '\\b')           // backspace
-		.replace(/\x0c/g, '\\f')           // formfeed
-		.replace(/\t/g, '\\t')             // tab
+		.replace(/\r/g, "\\r")             // carriage return
+		.replace(/\n/g, "\\n")             // line feed
+		.replace(/\x08/g, "\\b")           // backspace
+		.replace(/\x0c/g, "\\f")           // formfeed
+		.replace(/\t/g, "\\t")             // tab
 		.replace(regex,function(s) {
-			return '\\u' + $tw.utils.pad(s.charCodeAt(0).toString(16).toUpperCase(),4);
+			return "\\u" + $tw.utils.pad(s.charCodeAt(0).toString(16).toUpperCase(),4);
 		}); // non-ASCII characters
 };
 
@@ -617,7 +664,7 @@ exports.jsonStringify = function(s, rawUnicode) {
 Escape the RegExp special characters with a preceding backslash
 */
 exports.escapeRegExp = function(s) {
-    return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, '\\$&');
+	return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, "\\$&");
 };
 
 /*
@@ -700,7 +747,7 @@ exports.parseTextReference = function(textRef) {
 		}
 	} else {
 		// If we couldn't parse it
-		result.title = textRef
+		result.title = textRef;
 	}
 	return result;
 };
@@ -759,9 +806,9 @@ Cryptographic hash function as used by sha256 filter operator
 options.length .. number of characters returned defaults to 64
 */
 exports.sha256 = function(str, options) {
-	options = options || {}
+	options = options || {};
 	return $tw.sjcl.codec.hex.fromBits($tw.sjcl.hash.sha256.hash(str)).substr(0,options.length || 64);
-}
+};
 
 /*
 Decode a base64 string
@@ -913,4 +960,57 @@ exports.makeCompareFunction = function(type,options) {
 			}
 		};
 	return (types[type] || types[options.defaultType] || types.number);
+};
+
+/*
+Split text into parts (lines or words) for diff operations
+Adapted from https://github.com/google/diff-match-patch/wiki/Line-or-Word-Diffs
+*/
+exports.diffPartsToChars = function(text1,text2,mode) {
+	const lineArray = [""],
+		lineHash = Object.create(null);
+
+	function diff_linesToPartsMunge_(text,mode) {
+		let chars = "",
+			lineStart = 0,
+			lineEnd = -1,
+			lineArrayLength = lineArray.length,
+			regexpResult;
+		const searchRegexp = /\W+/g;
+		while(lineEnd < text.length - 1) {
+			if(mode === "words") {
+				regexpResult = searchRegexp.exec(text);
+				lineEnd = searchRegexp.lastIndex;
+				if(regexpResult === null) {
+					lineEnd = text.length;
+				}
+				lineEnd = --lineEnd;
+			} else {
+				lineEnd = text.indexOf("\n", lineStart);
+				if(lineEnd === -1) {
+					lineEnd = text.length - 1;
+				}
+			}
+			let line = text.substring(lineStart, lineEnd + 1);
+
+			if(line in lineHash) {
+				chars += String.fromCharCode(lineHash[line]);
+			} else {
+				if(lineArrayLength === maxLines) {
+					line = text.substring(lineStart);
+					lineEnd = text.length;
+				}
+				chars += String.fromCharCode(lineArrayLength);
+				lineHash[line] = lineArrayLength;
+				lineArray[lineArrayLength++] = line;
+			}
+			lineStart = lineEnd + 1;
+		}
+		return chars;
+	}
+	let maxLines = 40000;
+	const chars1 = diff_linesToPartsMunge_(text1,mode);
+	maxLines = 65535;
+	const chars2 = diff_linesToPartsMunge_(text2,mode);
+	return {chars1, chars2, lineArray};
 };

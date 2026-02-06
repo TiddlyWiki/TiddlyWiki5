@@ -33,6 +33,6 @@ Procedures are implemented as a special kind of [[variable|Variables]]. The only
 !! Using Procedures
 
 * [[Procedure Definitions]] describes how to create procedures
-* [[Procedure Calls]] describes how to use procedures
+* [[Calls]] describes how to use procedures
 * [[Procedure Parameter Handling]] describes how procedure parameters work
-* [[Procedure Syntax]] is a formal syntax description using railroad diagrams
+* [[Call Syntax]] is a formal syntax description using railroad diagrams

@@ -2,7 +2,11 @@ title: $:/core/ui/EditTemplate/title
 tags: $:/tags/EditTemplate
 
 \whitespace trim
-<$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus={{{ [{$:/config/AutoFocus}match[title]then[true]] ~[[false]] }}} tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"/>
+<$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor"
+	focus={{{ [{!!draft.of}is[tiddler]then{$:/config/AutoFocusEdit}match[title]then[true]] ~[{$:/config/AutoFocus}match[title]then[true]] ~[[false]] }}}
+	tabindex={{$:/config/EditTabIndex}}
+	cancelPopups="yes"
+/>
 
 <$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
 

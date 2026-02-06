@@ -77,8 +77,8 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	// Allow hooks to manipulate the DOM node. Eg: Add debug info
 	$tw.hooks.invokeHook("th-dom-rendering-element", domNode, this);
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 };
 
 /*
