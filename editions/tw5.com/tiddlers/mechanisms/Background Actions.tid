@@ -1,0 +1,22 @@
+title: Background Actions
+created: 20250212154426403
+modified: 20250212154426403
+tags: Mechanisms
+
+<<.demo-tiddler """
+title: SampleBackgroundAction: Story Change
+tags: $:/tags/BackgroundAction
+track-filter: [list[$:/StoryList]]
+
+<$action-sendmessage $message="tm-notify" $param="SampleBackgroundAction: Story Change" list={{$:/StoryList!!list}}/>
+
+Story List:
+
+<ol>
+<$list filter="[enlist<list>]">
+<li>
+<$text text=<<currentTiddler>>/>
+</li>
+</$list>
+</ol>
+""">>
