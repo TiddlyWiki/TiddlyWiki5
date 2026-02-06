@@ -344,23 +344,24 @@ Sanitize HTML tag- and custom web component names
 	Unicode overview: https://symbl.cc/en/unicode-table/
 */
 exports.makeTagNameSafe = function(tag,defaultTag) {
-	var tagLower = (tag || "").toLowerCase();
-	// Early exit for common standard, SVG and MathML elements
+	const tagLower = (tag || "").toLowerCase();
+
 	if( $tw.config.htmlStandardElements.includes(tagLower) ||
 		$tw.config.SvgStandardElements.includes(tagLower) ||
 		$tw.config.MathMlElements.includes(tagLower)
 	) {
+		// Return early for standard HTML, SVG and MathML elements
 		return tag;
 	}
 
-	// Web-components spec see: https://html.spec.whatwg.org/#valid-custom-element-name
-	var regxSanitizeChars = new RegExp($tw.config.htmlCustomPrimitives.sanitizePCENChar,"mg");
-	var sanitizedDefaultTag = defaultTag.replace(regxSanitizeChars,"") || "SPAN";
+	// Web-components spec 2017 see: https://html.spec.whatwg.org/#valid-custom-element-name
+	const regxSanitizeChars = new RegExp($tw.config.htmlCustomPrimitives.sanitizePCENChar,"mg");
+	const sanitizedDefaultTag = defaultTag.replace(regxSanitizeChars,"") || "SPAN";
 
 	tag = tag || sanitizedDefaultTag;
 
 	// Sanitize inputs. If empty use default
-	var result = tag.replace(regxSanitizeChars,"") || sanitizedDefaultTag;
+	let result = tag.replace(regxSanitizeChars,"") || sanitizedDefaultTag;
 
 	// Custom elements have to have a hyphen in the name and have to be lower case
 	result = (result.includes("-")) ? result.toLowerCase() : result;
