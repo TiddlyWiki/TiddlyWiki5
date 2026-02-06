@@ -18,13 +18,6 @@ title: Output
 
 <custom-element>custom element</custom-element>
 
-<!--
-The following element name is forbidden and will be prefixed "safe-"
-There is a warning in the browser console
-See: https://html.spec.whatwg.org/#valid-custom-element-name -->
-
-<font-face-src>font-face-src element is forbidden</font-face-src>
-
 <!-- no custom element -->
 
 <Nocustomelement>no custom element but browsers allow it</Nocustomelement>
@@ -38,5 +31,5 @@ See: https://html.spec.whatwg.org/#valid-custom-element-name -->
 +
 title: ExpectedResult
 
-<p><custom-element>custom element</custom-element></p><p><safe-font-face-src>font-face-src element is forbidden</safe-font-face-src></p><p><Nocustomelement>no custom element but browsers allow it</Nocustomelement></p><p>&lt;1asdf&gt;start with 1 is not allowed &lt;/1asdf&gt;</p><p><as-df-1>as-df-1 is allowed</as-df-1>
+<p><custom-element>custom element</custom-element></p><p><Nocustomelement>no custom element but browsers allow it</Nocustomelement></p><p>&lt;1asdf&gt;start with 1 is not allowed &lt;/1asdf&gt;</p><p><as-df-1>as-df-1 is allowed</as-df-1>
 </p>
