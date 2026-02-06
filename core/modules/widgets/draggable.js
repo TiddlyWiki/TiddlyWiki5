@@ -35,10 +35,7 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	// Execute our logic
 	this.execute();
 	// Sanitise the specified tag
-	tag = this.draggableTag;
-	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
-		tag = "div";
-	}
+	tag = $tw.utils.makeTagNameSafe(this.draggableTag,"div");
 	// Create our element
 	domNode = this.document.createElement(tag);
 	// Assign classes
@@ -103,8 +100,8 @@ DraggableWidget.prototype.updateDomNodeClasses = function() {
 	});
 	//Add new classes from updated class attribute.
 	$tw.utils.pushTop(domNodeClasses,this.draggableClasses);
-	this.domNodes[0].setAttribute("class",domNodeClasses.join(" "))
-}
+	this.domNodes[0].setAttribute("class",domNodeClasses.join(" "));
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
