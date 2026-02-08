@@ -1,0 +1,82 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/emoji-picker/styles
+tags: $:/tags/Stylesheet
+
+\rules only macrocallinline macrocallblock
+
+/* Emoji Picker Container */
+.cm-emoji-picker {
+  position: absolute;
+  z-index: 1000;
+  background: <<colour background>>;
+  border: 1px solid <<colour muted-foreground>>;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  max-height: 300px;
+  min-width: 280px;
+  max-width: 400px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.cm-emoji-picker-list {
+  overflow-y: auto;
+  max-height: 296px;
+}
+
+/* Emoji Item */
+.cm-emoji-picker-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  cursor: pointer;
+  gap: 10px;
+  border-bottom: 1px solid <<colour table-border>>;
+}
+
+.cm-emoji-picker-item:last-child {
+  border-bottom: none;
+}
+
+.cm-emoji-picker-item:hover,
+.cm-emoji-picker-item.selected {
+  background: <<colour primary>>;
+  color: <<colour background>>;
+}
+
+.cm-emoji-picker-item.selected .cm-emoji-picker-desc {
+  color: <<colour background>>;
+  opacity: 0.8;
+}
+
+/* Emoji Character */
+.cm-emoji-picker-emoji {
+  font-size: 1.4em;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Shortcode Name */
+.cm-emoji-picker-name {
+  font-family: monospace;
+  font-size: 0.9em;
+  flex-shrink: 0;
+}
+
+/* Description */
+.cm-emoji-picker-desc {
+  font-size: 0.85em;
+  color: <<colour muted-foreground>>;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Empty/Hint States */
+.cm-emoji-picker-empty,
+.cm-emoji-picker-hint {
+  padding: 12px 16px;
+  color: <<colour muted-foreground>>;
+  font-style: italic;
+  text-align: center;
+}

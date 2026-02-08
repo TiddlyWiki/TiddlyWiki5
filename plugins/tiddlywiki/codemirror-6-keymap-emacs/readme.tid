@@ -1,0 +1,34 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/keymap-emacs/readme
+
+! Emacs Keymap Plugin
+
+This plugin adds Emacs-style keybindings to the CodeMirror 6 editor.
+
+!! Keybindings
+
+* `Ctrl-B` - Move character left
+* `Ctrl-F` - Move character right
+* `Ctrl-P` - Move line up
+* `Ctrl-N` - Move line down
+* `Ctrl-A` - Move to line start
+* `Ctrl-E` - Move to line end
+* `Ctrl-D` - Delete character forward
+* `Ctrl-H` - Delete character backward
+* `Ctrl-K` - Kill to end of line
+* `Ctrl-O` - Open line (insert newline after cursor)
+* `Ctrl-T` - Transpose characters
+* `Ctrl-V` - Page down
+* `Alt-V` - Page up
+* `Alt-F` - Move word forward
+* `Alt-B` - Move word backward
+* `Alt-D` - Delete word forward
+* `Alt-<` - Go to document start
+* `Alt->` - Go to document end
+
+!! Usage
+
+Install and enable the plugin. The editor will use Emacs-style keybindings.
+
+!! Important
+
+When this plugin is enabled, the TiddlyWiki formatting shortcuts (Ctrl-B for bold, Ctrl-I for italic, etc.) are automatically disabled to avoid conflicts with Emacs keybindings.

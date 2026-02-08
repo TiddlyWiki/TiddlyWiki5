@@ -1,0 +1,320 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/zen-mode/styles/zen-mode
+tags: $:/tags/Stylesheet
+
+\define sidebarbreakpoint()
+<$text text={{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}/>
+\end
+
+\define sidebarbreakpoint-minus-one()
+<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] :else[<sidebarbreakpoint>] }}}/>
+\end
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/* ============================================================================
+   Zen Mode for CodeMirror 6
+   ============================================================================
+   Distraction-free writing environment with focus modes.
+   ============================================================================ */
+
+/* ============================================================================
+   Overlay Container
+   ============================================================================ */
+
+.cm6-zen-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #1a1a1a; /* Fallback - overridden by [data-cm6-theme] rule */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.cm6-zen-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Subtle vignette effect */
+.cm6-zen-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 60%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+}
+
+/* ============================================================================
+   Editor Container
+   ============================================================================ */
+
+.cm6-zen-editor-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 120px);
+  padding: 0 2rem;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cm6-zen-editor-container > .tc-editor-codemirror6 {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  /* Override base editor styles - let overlay background show through */
+  background: transparent !important;
+  border: none !important;
+}
+
+.cm6-zen-editor-container .cm-editor {
+  flex: 1;
+  height: 100%;
+  background: transparent !important;
+  font-size: var(--zen-font-size, 1.1em) !important;
+}
+
+.cm6-zen-editor-container .cm-scroller {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.cm6-zen-editor-container .cm-content {
+  line-height: var(--zen-line-height, 1.8) !important;
+  padding: 3rem 0 !important;
+  max-width: 100%;
+}
+
+/* Hide editor chrome */
+.cm6-zen-editor-container .cm-gutters {
+  display: none !important;
+}
+
+.cm6-zen-editor-container .cm-editor:focus-within {
+  outline: none !important;
+}
+
+/* ============================================================================
+   Close Button
+   ============================================================================ */
+
+.cm6-zen-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: var(--wt-fg-muted, #555);
+  font-size: 1.75rem;
+  font-weight: 300;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: color 0.2s ease, background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.cm6-zen-close:hover {
+  color: var(--wt-fg, #aaa);
+  background: rgba(128, 128, 128, 0.15);
+}
+
+.cm6-zen-close:active {
+  transform: scale(0.95);
+}
+
+/* ============================================================================
+   Stats Bar
+   ============================================================================ */
+
+.cm6-zen-stats {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--wt-fg, #d4d4d4);
+  font-size: 0.85rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  display: flex;
+  gap: 2rem;
+  z-index: 10;
+  padding: 0.5rem 1rem;
+  background: rgba(128, 128, 128, 0.15);
+  border-radius: 1rem;
+}
+
+.cm6-zen-stats span {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ============================================================================
+   Focus Mode: Line
+   ============================================================================ */
+
+.cm6-zen-editor-container.focus-line .cm-line {
+  opacity: 0.35;
+}
+
+.cm6-zen-editor-container.focus-line .cm-line.cm-activeLine {
+  opacity: 1;
+}
+
+.cm6-zen-editor-container.focus-line .cm-line:hover {
+  opacity: 0.6;
+}
+
+/* ============================================================================
+   Focus Mode: Sentence
+   ============================================================================ */
+
+.cm6-zen-editor-container.focus-sentence .cm-line {
+  opacity: 0.35;
+}
+
+.cm6-zen-editor-container.focus-sentence .cm-line.cm-activeLine,
+.cm6-zen-editor-container.focus-sentence .cm-line.cm6-active-sentence {
+  opacity: 1;
+}
+
+.cm6-zen-editor-container.focus-sentence .cm-line:hover {
+  opacity: 0.6;
+}
+
+/* ============================================================================
+   Focus Mode: Paragraph
+   ============================================================================ */
+
+.cm6-zen-editor-container.focus-paragraph .cm-line {
+  opacity: 0.35;
+}
+
+.cm6-zen-editor-container.focus-paragraph .cm-line.cm-activeLine,
+.cm6-zen-editor-container.focus-paragraph .cm-line.cm6-active-paragraph {
+  opacity: 1;
+}
+
+.cm6-zen-editor-container.focus-paragraph .cm-line:hover {
+  opacity: 0.6;
+}
+
+/* ============================================================================
+   Typewriter Mode
+   ============================================================================ */
+
+/* In typewriter mode, expand container to fill viewport */
+.cm6-zen-editor-container.typewriter {
+  height: 100vh;
+  padding-top: 60px;  /* Space for close button */
+  padding-bottom: 60px;  /* Space for stats bar */
+  box-sizing: border-box;
+}
+
+.cm6-zen-editor-container.typewriter .cm-editor {
+  /* Ensure editor has constrained height for scrolling */
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.cm6-zen-editor-container.typewriter .cm-scroller {
+  /* Force scrollbar and constrain height */
+  overflow-y: scroll !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  /* Padding to allow cursor to reach center - use viewport height for proper centering */
+  /* 50vh ensures first/last line can be centered regardless of document length */
+  padding-top: 50vh !important;
+  padding-bottom: 50vh !important;
+  /* GPU acceleration to prevent repaint flickering */
+  will-change: scroll-position;
+}
+
+.cm6-zen-editor-container.typewriter .cm-content {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  /* Ensure content doesn't collapse */
+  min-height: 1em !important;
+  /* Promote to own layer to prevent repaint of lines during scroll */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.cm6-zen-editor-container.typewriter .cm-line {
+  /* Promote each line to own layer */
+  contain: layout style;
+}
+
+/* ============================================================================
+   Theme Integration
+   ============================================================================ */
+
+/*
+ * For themed overlays (gruvbox-dark, etc.), the theme stylesheet sets --wt-bg
+ * directly on [data-cm6-theme="X"] which matches our overlay element.
+ * We use those variables for background and text colors.
+ *
+ * For vanilla themes, there's no explicit [data-cm6-theme="vanilla"] rule,
+ * so we use the inherited --wt-bg from :root (set by wikitext-styles.tid).
+ */
+.cm6-zen-overlay[data-cm6-theme] {
+  /* Read theme colors - set by theme stylesheets on [data-cm6-theme="X"] */
+  background: var(--wt-bg, #1a1a1a);
+  color: var(--wt-fg, #d4d4d4);
+}
+
+/* Vanilla dark theme - explicitly handle since there's no [data-cm6-theme="vanilla-dark"] rule */
+.cm6-zen-overlay[data-cm6-theme="vanilla-dark"] {
+  --wt-bg: #1e1e1e;
+  --wt-fg: #d4d4d4;
+  --wt-fg-muted: #808080;
+}
+
+/* ============================================================================
+   Placeholder for original editor position
+   ============================================================================ */
+
+.cm6-zen-placeholder {
+  display: none;
+}
+
+/* ============================================================================
+   Responsive
+   ============================================================================ */
+
+@media (min-width: <<sidebarbreakpoint>>) {
+  .cm6-zen-editor-container {
+    max-width: {{$:/config/codemirror-6/zen-mode/max-width}};
+  }
+}
+
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+  .cm6-zen-editor-container {
+    padding: 0 1rem;
+    max-width: 100%;
+  }
+
+  .cm6-zen-stats {
+    gap: 1rem;
+    font-size: 0.75rem;
+  }
+
+  .cm6-zen-close {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}

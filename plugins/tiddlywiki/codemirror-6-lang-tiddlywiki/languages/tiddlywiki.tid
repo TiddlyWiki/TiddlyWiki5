@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/tiddlywiki
+tags: $:/tags/CodeMirror/Language
+name: TiddlyWiki
+type: text/vnd.tiddlywiki
+category: Wiki
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-tiddlywiki

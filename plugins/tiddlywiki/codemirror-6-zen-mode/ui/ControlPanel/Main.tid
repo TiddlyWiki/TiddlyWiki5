@@ -1,0 +1,48 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/zen-mode/ui/ControlPanel/ZenMode
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: Zen Mode
+
+! Zen Mode Settings
+
+Distraction-free writing environment.
+
+!! Layout
+
+|!Max width |<$edit-text tiddler="$:/config/codemirror-6/zen-mode/max-width" default="700px" tag="input" size="10"/> |
+|!Font size |<$edit-text tiddler="$:/config/codemirror-6/zen-mode/font-size" default="1.1em" tag="input" size="10"/> |
+|!Line height |<$edit-text tiddler="$:/config/codemirror-6/zen-mode/line-height" default="1.8" tag="input" size="10"/> |
+
+!! Features
+
+<$checkbox tiddler="$:/config/codemirror-6/zen-mode/typewriter" field="text" checked="yes" unchecked="no" default="no"> ''Typewriter mode'' — keep cursor vertically centered</$checkbox>
+
+<$checkbox tiddler="$:/config/codemirror-6/zen-mode/show-stats" field="text" checked="yes" unchecked="no" default="yes"> ''Show statistics'' — word count, character count, reading time</$checkbox>
+
+<$checkbox tiddler="$:/config/codemirror-6/zen-mode/exit-on-click" field="text" checked="yes" unchecked="no" default="no"> ''Click outside to exit'' — click the background to leave Zen Mode</$checkbox>
+
+!! Focus Mode
+
+Dim surrounding text to focus on what you're writing:
+
+<$radio tiddler="$:/config/codemirror-6/zen-mode/focus-mode" value="none" default="none"> ''None'' — no dimming</$radio>
+
+<$radio tiddler="$:/config/codemirror-6/zen-mode/focus-mode" value="line"> ''Line'' — highlight current line only</$radio>
+
+<$radio tiddler="$:/config/codemirror-6/zen-mode/focus-mode" value="sentence"> ''Sentence'' — highlight current sentence</$radio>
+
+<$radio tiddler="$:/config/codemirror-6/zen-mode/focus-mode" value="paragraph"> ''Paragraph'' — highlight current paragraph</$radio>
+
+!! Keyboard Shortcut
+
+Press ''Escape'' to exit Zen Mode at any time.
+
+<$reveal type="nomatch" state="$:/state/codemirror-6/zen-mode" text="yes">
+The toolbar button or keyboard shortcut <kbd>((cm6-zen-mode))</kbd> enters Zen Mode.
+</$reveal>
+
+<$reveal type="match" state="$:/state/codemirror-6/zen-mode" text="yes">
+<$button class="tc-btn-invisible tc-tiddlylink">
+<$action-setfield $tiddler="$:/state/codemirror-6/zen-mode" text="no"/>
+Exit Zen Mode
+</$button>
+</$reveal>

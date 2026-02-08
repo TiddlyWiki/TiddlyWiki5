@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-catppuccin/readme
+
+! Catppuccin Theme for CodeMirror 6
+
+A soothing pastel theme based on [[Catppuccin|https://github.com/catppuccin/catppuccin]].
+
+!! Flavors
+
+* `catppuccin-latte` - Light flavor
+* `catppuccin-frappe` - Medium dark
+* `catppuccin-macchiato` - Dark
+* `catppuccin` / `catppuccin-mocha` - Darkest (default)
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-catppuccin` | Mocha (darkest, default) |
+| `cm6-theme-catppuccin-mocha` | Same as above |
+| `cm6-theme-catppuccin-macchiato` | Dark |
+| `cm6-theme-catppuccin-frappe` | Medium dark |
+| `cm6-theme-catppuccin-latte` | Light |

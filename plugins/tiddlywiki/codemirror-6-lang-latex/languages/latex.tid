@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/latex
+tags: $:/tags/CodeMirror/Language
+name: LaTeX
+type: text/x-latex
+category: Other
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-latex

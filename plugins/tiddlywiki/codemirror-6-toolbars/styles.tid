@@ -1,0 +1,550 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/toolbars/styles
+tags: $:/tags/Stylesheet
+
+/* ============================================================================
+   Toolbar Styles - Base Setup
+   ============================================================================ */
+
+<$list filter="[[$:/config/codemirror-6/toolbars/style]get[text]!match[classic]]" variable="style">
+
+/* Base styles for all custom toolbar styles */
+.tc-editor-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Only style direct toolbar buttons, not dropdown buttons */
+.tc-editor-toolbar > button,
+.tc-editor-toolbar > span > button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    min-width: 0;
+    min-height: 0;
+}
+
+.tc-editor-toolbar > button svg,
+.tc-editor-toolbar > span > button svg {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+}
+
+.tc-editor-toolbar > button svg.cm6-icon,
+.tc-editor-toolbar > span > button svg.cm6-icon {
+    fill: none;
+}
+
+/* Base adjunct button fix for custom styles */
+.tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
+    padding: 2px;
+}
+
+.tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct svg {
+    width: 1em;
+    height: 1em;
+}
+
+/* Reset dropdown buttons to normal styling */
+.tc-editor-toolbar .tc-drop-down button {
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+/* ============================================================================
+   Style: Minimal
+   Clean, invisible buttons with subtle hover
+   ============================================================================ */
+<$list filter="[<style>match[minimal]]">
+.tc-editor-toolbar {
+    background: transparent;
+    border: none;
+    padding: 4px 0;
+    gap: 2px;
+}
+
+.tc-editor-toolbar > button,
+.tc-editor-toolbar > span > button {
+    background: transparent;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 8px;
+    color: <<colour muted-foreground>>;
+    transition: color 0.15s ease;
+}
+
+.tc-editor-toolbar > button:hover,
+.tc-editor-toolbar > span > button:hover {
+    color: <<colour foreground>>;
+    background: transparent;
+}
+
+.tc-editor-toolbar > button:active,
+.tc-editor-toolbar > span > button:active {
+    color: <<colour primary>>;
+}
+
+.tc-editor-toolbar > button svg,
+.tc-editor-toolbar > span > button svg {
+    fill: currentColor;
+}
+
+.tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
+    margin-left: -2px;
+    border-radius: 0 3px 3px 0;
+}
+
+</$list>
+
+/* ============================================================================
+   Style: Flat
+   Modern flat design with subtle backgrounds
+   ============================================================================ */
+<$list filter="[<style>match[flat]]">
+.tc-editor-toolbar {
+    background: <<colour page-background>>;
+    border-bottom: 1px solid <<colour tiddler-editor-border>>;
+    padding: 6px 8px;
+    gap: 4px;
+}
+
+.tc-editor-toolbar > button,
+.tc-editor-toolbar > span > button {
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    color: <<colour foreground>>;
+    transition: background 0.15s ease;
+}
+
+.tc-editor-toolbar > button:hover,
+.tc-editor-toolbar > span > button:hover {
+    background: rgba(128, 128, 128, 0.15);
+}
+
+.tc-editor-toolbar > button:active,
+.tc-editor-toolbar > span > button:active {
+    background: rgba(128, 128, 128, 0.25);
+}
+
+.tc-editor-toolbar > button svg,
+.tc-editor-toolbar > span > button svg {
+    fill: currentColor;
+}
+
+.tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
+    margin-left: -2px;
+    border-radius: 0 4px 4px 0;
+}
+
+</$list>
+
+/* ============================================================================
+   Style: Outlined
+   Elegant outlined buttons
+   ============================================================================ */
+<$list filter="[<style>match[outlined]]">
+.tc-editor-toolbar {
+    background: <<colour tiddler-background>>;
+    border-bottom: 1px solid <<colour tiddler-editor-border>>;
+    padding: 8px;
+    gap: 6px;
+}
+
+.tc-editor-toolbar > button,
+.tc-editor-toolbar > span > button {
+    background: transparent;
+    border: 1px solid <<colour tiddler-editor-border>>;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: <<colour foreground>>;
+    transition: all 0.15s ease;
+}
+
+.tc-editor-toolbar > button:hover,
+.tc-editor-toolbar > span > button:hover {
+    border-color: <<colour primary>>;
+    color: <<colour primary>>;
+}
+
+.tc-editor-toolbar > button:active,
+.tc-editor-toolbar > span > button:active {
+    background: <<colour primary>>;
+    border-color: <<colour primary>>;
+    color: <<colour tiddler-background>>;
+}
+
+.tc-editor-toolbar > button svg,
+.tc-editor-toolbar > span > button svg {
+    fill: currentColor;
+}
+
+.tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
+    margin-left: -1px;
+    border-radius: 0 4px 4px 0;
+    border-left: none;
+}
+
+</$list>
+
+/* ============================================================================
+   Style: Rounded
+   Soft, pill-shaped buttons
+   ============================================================================ */
+<$list filter="[<style>match[rounded]]">
+.tc-editor-toolbar {
+    background: <<colour page-background>>;
+    border-bottom: 1px solid <<colour tiddler-editor-border>>;
+    padding: 8px 12px;
+    gap: 6px;
+}
+
+.tc-editor-toolbar > button,
+.tc-editor-toolbar > span > button {
+    background: <<colour button-background>>;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 14px;
+    color: <<colour button-foreground>>;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.tc-editor-toolbar > button:hover,
+.tc-editor-toolbar > span > button:hover {
+    background: <<colour primary>>;
+    color: <<colour background>>;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.tc-editor-toolbar > button:active,
+.tc-editor-toolbar > span > button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.tc-editor-toolbar > button svg,
+.tc-editor-toolbar > span > button svg {
+    fill: currentColor;
+}
+
+.tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
+    margin-left: -4px;
+    border-radius: 0 20px 20px 0;
+}
+
+</$list>
+
+/* ============================================================================
+   Style: Elevated
+   Material design inspired with shadows
+   ============================================================================ */
+<$list filter="[<style>match[elevated]]">
+.tc-editor-toolbar {
+    background: <<colour tiddler-background>>;
+    border-bottom: none;
+    padding: 10px 12px;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tc-editor-toolbar > button,
+.tc-editor-toolbar > span > button {
+    background: <<colour tiddler-background>>;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: <<colour foreground>>;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+}
+
+.tc-editor-toolbar > button:hover,
+.tc-editor-toolbar > span > button:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
+.tc-editor-toolbar > button:active,
+.tc-editor-toolbar > span > button:active {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    transform: translateY(0);
+}
+
+.tc-editor-toolbar > button svg,
+.tc-editor-toolbar > span > button svg {
+    fill: currentColor;
+}
+
+.tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
+    margin-left: -2px;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+}
+
+</$list>
+
+/* ============================================================================
+   Style: Gradient
+   Colorful gradient backgrounds
+   ============================================================================ */
+<$list filter="[<style>match[gradient]]">
+.tc-editor-toolbar {
+    background: linear-gradient(135deg, <<colour page-background>> 0%, <<colour tiddler-background>> 100%);
+    border-bottom: 1px solid <<colour tiddler-editor-border>>;
+    padding: 10px 12px;
+    gap: 8px;
+}
+
+.tc-editor-toolbar > button,
+.tc-editor-toolbar > span > button {
+    background: linear-gradient(135deg, <<colour primary>> 0%, <<colour primary>> 100%);
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    color: <<colour background>>;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.tc-editor-toolbar > button:hover,
+.tc-editor-toolbar > span > button:hover {
+    background: linear-gradient(135deg, <<colour primary>> 20%, <<colour alert-highlight>> 100%);
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+}
+
+.tc-editor-toolbar > button:active,
+.tc-editor-toolbar > span > button:active {
+    transform: scale(0.98);
+}
+
+.tc-editor-toolbar > button svg,
+.tc-editor-toolbar > span > button svg {
+    fill: currentColor;
+}
+
+.tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
+    margin-left: -2px;
+    border-radius: 0 6px 6px 0;
+}
+
+</$list>
+
+/* ============================================================================
+   Style: Glassmorphism
+   Frosted glass effect
+   ============================================================================ */
+<$list filter="[<style>match[glass]]">
+.tc-editor-toolbar {
+    background: rgba(128, 128, 128, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+    padding: 10px 12px;
+    gap: 8px;
+    position: relative;
+    z-index: 100;
+}
+
+.tc-editor-toolbar .tc-drop-down {
+    z-index: 1000;
+}
+
+.tc-editor-toolbar > button,
+.tc-editor-toolbar > span > button {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 7px 14px;
+    color: <<colour foreground>>;
+    transition: all 0.2s ease;
+}
+
+.tc-editor-toolbar > button:hover,
+.tc-editor-toolbar > span > button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.tc-editor-toolbar > button:active,
+.tc-editor-toolbar > span > button:active {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.tc-editor-toolbar > button svg,
+.tc-editor-toolbar > span > button svg {
+    fill: currentColor;
+}
+
+.tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
+    margin-left: -1px;
+    border-radius: 0 8px 8px 0;
+    border-left: none;
+}
+
+</$list>
+
+/* ============================================================================
+   Style: Neon
+   Glowing neon effect
+   ============================================================================ */
+<$list filter="[<style>match[neon]]">
+.tc-editor-toolbar {
+    background: #1a1a2e;
+    border-bottom: 1px solid #16213e;
+    padding: 12px 14px;
+    gap: 10px;
+}
+
+.tc-editor-toolbar > button,
+.tc-editor-toolbar > span > button {
+    background: transparent;
+    border: 2px solid #00d9ff;
+    border-radius: 4px;
+    padding: 6px 12px;
+    color: #00d9ff;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px #00d9ff;
+}
+
+.tc-editor-toolbar > button:hover,
+.tc-editor-toolbar > span > button:hover {
+    background: #00d9ff;
+    color: #1a1a2e;
+    box-shadow: 0 0 10px #00d9ff, 0 0 20px #00d9ff, 0 0 30px #00d9ff;
+    text-shadow: none;
+}
+
+.tc-editor-toolbar > button:active,
+.tc-editor-toolbar > span > button:active {
+    box-shadow: 0 0 5px #00d9ff, 0 0 10px #00d9ff;
+}
+
+.tc-editor-toolbar > button svg,
+.tc-editor-toolbar > span > button svg {
+    fill: currentColor;
+    filter: drop-shadow(0 0 3px currentColor);
+}
+
+.tc-editor-toolbar > button:hover svg,
+.tc-editor-toolbar > span > button:hover svg {
+    filter: none;
+}
+
+.tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
+    margin-left: -2px;
+    border-radius: 0 4px 4px 0;
+    border-left: none;
+}
+
+</$list>
+
+/* ============================================================================
+   Style: Retro
+   Vintage 3D button style
+   ============================================================================ */
+<$list filter="[<style>match[retro]]">
+.tc-editor-toolbar {
+    background: #c0c0c0;
+    border-bottom: 2px solid #808080;
+    padding: 8px 10px;
+    gap: 6px;
+}
+
+.tc-editor-toolbar > button,
+.tc-editor-toolbar > span > button {
+    background: linear-gradient(180deg, #ffffff 0%, #c0c0c0 50%, #a0a0a0 100%);
+    border: 2px outset #ffffff;
+    border-radius: 0;
+    padding: 4px 10px;
+    color: #000000;
+    font-weight: bold;
+    transition: none;
+    box-shadow: inset -1px -1px 0 #808080, inset 1px 1px 0 #ffffff;
+}
+
+.tc-editor-toolbar > button:hover,
+.tc-editor-toolbar > span > button:hover {
+    background: linear-gradient(180deg, #ffffff 0%, #d0d0d0 50%, #b0b0b0 100%);
+}
+
+.tc-editor-toolbar > button:active,
+.tc-editor-toolbar > span > button:active {
+    border-style: inset;
+    box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #ffffff;
+    padding: 5px 9px 3px 11px;
+}
+
+.tc-editor-toolbar > button svg,
+.tc-editor-toolbar > span > button svg {
+    fill: currentColor;
+}
+
+.tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
+    margin-left: -2px;
+    border-radius: 0;
+}
+
+</$list>
+
+/* ============================================================================
+   Style: Brutalist
+   Bold, stark, attention-grabbing
+   ============================================================================ */
+<$list filter="[<style>match[brutalist]]">
+.tc-editor-toolbar {
+    background: #ffffff;
+    border-bottom: 4px solid #000000;
+    padding: 12px 14px;
+    gap: 8px;
+}
+
+.tc-editor-toolbar > button,
+.tc-editor-toolbar > span > button {
+    background: #ffffff;
+    border: 3px solid #000000;
+    border-radius: 0;
+    padding: 8px 16px;
+    color: #000000;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.1s ease;
+    box-shadow: 4px 4px 0 #000000;
+}
+
+.tc-editor-toolbar > button:hover,
+.tc-editor-toolbar > span > button:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+.tc-editor-toolbar > button:active,
+.tc-editor-toolbar > span > button:active {
+    box-shadow: 2px 2px 0 #000000;
+    transform: translate(2px, 2px);
+}
+
+.tc-editor-toolbar > button svg,
+.tc-editor-toolbar > span > button svg {
+    fill: currentColor;
+}
+
+.tc-editor-toolbar > span > button.tc-text-editor-toolbar-item-adjunct {
+    margin-left: -3px;
+    border-radius: 0;
+    border-left: none;
+}
+
+</$list>
+
+</$list>

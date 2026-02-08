@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-rose-pine/license
+
+\define theme-name() Rosé Pine
+\define theme-url() https://rosepinetheme.com
+\define theme-author() Rosé Pine
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

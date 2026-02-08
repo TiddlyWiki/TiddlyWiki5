@@ -1,0 +1,86 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/fold/styles
+tags: $:/tags/Stylesheet
+
+/* ============================================================================
+   Fold Gutter - TiddlyWiki Style
+   ============================================================================ */
+
+/* Fold gutter column */
+.cm-foldGutter {
+    width: 14px;
+    min-width: 14px;
+    text-align: center;
+}
+
+/* Base styles for fold markers */
+.cm-foldGutter .cm-gutterElement {
+    padding: 0 2px;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Fold marker - open state (can be folded) */
+.cm-foldGutter-open {
+    color: <<colour muted-foreground>>;
+    font-size: 8px;
+    opacity: 0.6;
+    transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.cm-foldGutter-open:hover {
+    color: <<colour primary>>;
+    opacity: 1;
+}
+
+/* Fold marker - closed state (is folded) */
+.cm-foldGutter-closed {
+    color: <<colour primary>>;
+    font-size: 8px;
+    opacity: 0.9;
+    transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.cm-foldGutter-closed:hover {
+    color: <<colour primary>>;
+    opacity: 1;
+}
+
+/* Folded placeholder text */
+.cm-foldPlaceholder {
+    background: <<colour code-background>>;
+    border: 1px solid <<colour tiddler-editor-border>>;
+    border-radius: 3px;
+    padding: 0 4px;
+    margin: 0 2px;
+    color: <<colour muted-foreground>>;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+    font-size: 0.85em;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.cm-foldPlaceholder:hover {
+    background: <<colour tiddler-editor-background>>;
+    border-color: <<colour primary>>;
+    color: <<colour foreground>>;
+}
+
+/* Ensure fold gutter works well with line numbers */
+.cm-lineNumbers + .cm-foldGutter {
+    margin-left: 2px;
+}
+
+/* Dark theme adjustments - when parent has dark background */
+.tc-sidebar-scrollable .cm-foldGutter-open,
+[data-palette="dark"] .cm-foldGutter-open {
+    opacity: 0.5;
+}
+
+[data-palette="dark"] .cm-foldPlaceholder {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,124 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lint/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/* Lint Plugin Styles */
+
+/* Lint gutter markers */
+.cm-lint-marker {
+    width: 0.8em;
+    height: 0.8em;
+    cursor: pointer;
+}
+
+.cm-lint-marker-info {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%234dabf7'/%3E%3Cpath d='M8 5v1M8 7v5' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.cm-lint-marker-warning {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1L1 15h14L8 1z' fill='%23fab005'/%3E%3Cpath d='M8 5v5M8 12v1' stroke='%23333' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* Underline styles for lint diagnostics */
+.cm-lintRange-info {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='3'%3E%3Cpath d='M0 2.5 L2 0.5 L4 2.5 L6 0.5' stroke='%234dabf7' fill='none' stroke-width='1'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: 6px 3px;
+    padding-bottom: 2px;
+}
+
+.cm-lintRange-warning {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='3'%3E%3Cpath d='M0 2.5 L2 0.5 L4 2.5 L6 0.5' stroke='%23fab005' fill='none' stroke-width='1'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: 6px 3px;
+    padding-bottom: 2px;
+}
+
+/* Tooltip styles */
+.cm-tooltip.cm-tooltip-lint {
+    background: var(--color-background, #fff);
+    border: 1px solid var(--color-border, #ccc);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 13px;
+    max-width: 400px;
+}
+
+.cm-diagnostic {
+    padding: 3px 6px;
+    margin: 2px 0;
+}
+
+.cm-diagnostic-info {
+    border-left: 3px solid #4dabf7;
+    padding-left: 8px;
+}
+
+.cm-diagnostic-warning {
+    border-left: 3px solid #fab005;
+    padding-left: 8px;
+}
+
+.cm-diagnostic-error {
+    border-left: 3px solid #fa5252;
+    padding-left: 8px;
+}
+
+/* Lint panel (if shown) */
+.cm-panel.cm-lint-panel {
+    background: var(--color-background, #f8f9fa);
+    border-top: 1px solid var(--color-border, #dee2e6);
+    padding: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.cm-panel.cm-lint-panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.cm-panel.cm-lint-panel li {
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.cm-panel.cm-lint-panel li:hover {
+    background: var(--color-muted-background, #e9ecef);
+}
+
+/* Lint toggle toolbar button */
+.cm6-toolbar-btn-lint {
+    position: relative;
+}
+
+/* When lint is enabled - normal icon appearance */
+.cm6-lint-enabled svg {
+    opacity: 1;
+}
+
+/* When lint is disabled - dimmed appearance with strikethrough */
+.cm6-lint-disabled {
+    position: relative;
+}
+
+.cm6-lint-disabled svg {
+    opacity: 0.4;
+}
+
+.cm6-lint-disabled::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: currentColor;
+    transform: rotate(-45deg);
+    opacity: 0.7;
+}

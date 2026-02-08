@@ -1,0 +1,442 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-tokyo-night/styles
+tags: $:/tags/Stylesheet
+
+\rules only macrocallinline macrocallblock conditional
+
+/* ============================================================================
+   Tokyo Night Theme for CodeMirror 6
+   ============================================================================
+   
+   Based on https://github.com/enkia/tokyo-night-vscode-theme
+   
+   Modern, elegant theme inspired by Tokyo city lights at night.
+   Three variants: Night (default), Storm (darker), Day (light).
+   
+   ============================================================================ */
+
+/* ============================================================================
+   Tokyo Night (Default)
+   ============================================================================ */
+
+.cm6-theme-tokyo-night,
+.cm6-theme-tokyo,
+[data-cm6-theme="tokyo-night"],
+[data-cm6-theme="tokyo"] {
+  --wt-bg: #1a1b26;
+  --wt-bg-subtle: #16161e;
+  --wt-fg: #a9b1d6;
+  --wt-fg-muted: #565f89;
+  --wt-fg-faint: #414868;
+  --wt-border: #292e42;
+  --wt-selection: rgba(40, 52, 91, 0.8);
+  --wt-line-highlight: rgba(41, 46, 66, 0.5);
+
+  --wt-teal: #73daca;           /* Cyan/Teal */
+  --wt-teal-dim: #2ac3de;
+  --wt-blue: #7aa2f7;           /* Blue */
+  --wt-violet: #bb9af7;         /* Purple */
+  --wt-cyan: #7dcfff;           /* Light blue */
+  --wt-orange: #ff9e64;         /* Orange */
+  --wt-rose: #f7768e;           /* Red/Pink */
+  --wt-amber: #e0af68;          /* Yellow */
+  --wt-slate: #c0caf5;
+  --wt-purple: #bb9af7;
+  --wt-green: #9ece6a;          /* Green */
+  --wt-red: #f7768e;
+  --wt-magenta: #ff007c;
+
+  --wt-bold: #c0caf5;
+  --wt-italic: #a9b1d6;
+  --wt-strike: #565f89;
+  --wt-underline: #a9b1d6;
+  --wt-heading: #7aa2f7;
+
+  --wt-code-bg: #16161e;
+  --wt-code-fg: #f7768e;
+
+  --wt-highlight-bg: rgba(224, 175, 104, 0.2);
+  --wt-highlight-fg: #e0af68;
+
+  --wt-comment: #565f89;
+  --wt-mark: #292e42;
+}
+
+/* ============================================================================
+   Tokyo Night Storm (Darker)
+   ============================================================================ */
+
+.cm6-theme-tokyo-night-storm,
+[data-cm6-theme="tokyo-night-storm"] {
+  --wt-bg: #24283b;
+  --wt-bg-subtle: #1f2335;
+  --wt-fg: #a9b1d6;
+  --wt-fg-muted: #565f89;
+  --wt-fg-faint: #414868;
+  --wt-border: #3b4261;
+  --wt-selection: rgba(40, 52, 91, 0.8);
+  --wt-line-highlight: rgba(59, 66, 97, 0.4);
+
+  --wt-teal: #73daca;
+  --wt-teal-dim: #2ac3de;
+  --wt-blue: #7aa2f7;
+  --wt-violet: #bb9af7;
+  --wt-cyan: #7dcfff;
+  --wt-orange: #ff9e64;
+  --wt-rose: #f7768e;
+  --wt-amber: #e0af68;
+  --wt-slate: #c0caf5;
+  --wt-purple: #bb9af7;
+  --wt-green: #9ece6a;
+  --wt-red: #f7768e;
+
+  --wt-bold: #c0caf5;
+  --wt-italic: #a9b1d6;
+  --wt-strike: #565f89;
+  --wt-underline: #a9b1d6;
+  --wt-heading: #7aa2f7;
+
+  --wt-code-bg: #1f2335;
+  --wt-code-fg: #f7768e;
+
+  --wt-highlight-bg: rgba(224, 175, 104, 0.2);
+  --wt-highlight-fg: #e0af68;
+
+  --wt-comment: #565f89;
+  --wt-mark: #3b4261;
+}
+
+/* ============================================================================
+   Tokyo Night Day (Light)
+   ============================================================================ */
+
+.cm6-theme-tokyo-night-day,
+.cm6-theme-tokyo-day,
+[data-cm6-theme="tokyo-night-day"],
+[data-cm6-theme="tokyo-day"] {
+  --wt-bg: #e1e2e7;
+  --wt-bg-subtle: #d5d6db;
+  --wt-fg: #3760bf;
+  --wt-fg-muted: #6172b0;
+  --wt-fg-faint: #9699a3;
+  --wt-border: #c4c5ca;
+  --wt-selection: rgba(55, 96, 191, 0.15);
+  --wt-line-highlight: rgba(213, 214, 219, 0.5);
+
+  --wt-teal: #387068;           /* Darker cyan */
+  --wt-teal-dim: #387068;
+  --wt-blue: #2e7de9;           /* Blue */
+  --wt-violet: #9854f1;         /* Purple */
+  --wt-cyan: #007197;           /* Dark cyan */
+  --wt-orange: #965027;         /* Orange */
+  --wt-rose: #f52a65;           /* Red */
+  --wt-amber: #8c6c3e;          /* Yellow/brown */
+  --wt-slate: #3760bf;
+  --wt-purple: #9854f1;
+  --wt-green: #587539;          /* Green */
+  --wt-red: #f52a65;
+
+  --wt-bold: #343b58;
+  --wt-italic: #3760bf;
+  --wt-strike: #9699a3;
+  --wt-underline: #3760bf;
+  --wt-heading: #2e7de9;
+
+  --wt-code-bg: #d5d6db;
+  --wt-code-fg: #f52a65;
+
+  --wt-highlight-bg: rgba(140, 108, 62, 0.15);
+  --wt-highlight-fg: #8c6c3e;
+
+  --wt-comment: #848cb5;
+  --wt-mark: #c4c5ca;
+}
+
+/* ============================================================================
+   Token Overrides - Night/Storm
+   ============================================================================ */
+
+.cm6-theme-tokyo-night .tok-string,
+.cm6-theme-tokyo .tok-string,
+.cm6-theme-tokyo-night-storm .tok-string,
+[data-cm6-theme="tokyo-night"] .tok-string,
+[data-cm6-theme="tokyo"] .tok-string,
+[data-cm6-theme="tokyo-night-storm"] .tok-string {
+  color: #9ece6a;
+}
+
+.cm6-theme-tokyo-night .tok-keyword,
+.cm6-theme-tokyo .tok-keyword,
+.cm6-theme-tokyo-night-storm .tok-keyword,
+[data-cm6-theme="tokyo-night"] .tok-keyword,
+[data-cm6-theme="tokyo"] .tok-keyword,
+[data-cm6-theme="tokyo-night-storm"] .tok-keyword {
+  color: #bb9af7;
+}
+
+.cm6-theme-tokyo-night .tok-function,
+.cm6-theme-tokyo .tok-function,
+.cm6-theme-tokyo-night-storm .tok-function,
+[data-cm6-theme="tokyo-night"] .tok-function,
+[data-cm6-theme="tokyo"] .tok-function,
+[data-cm6-theme="tokyo-night-storm"] .tok-function {
+  color: #7aa2f7;
+}
+
+.cm6-theme-tokyo-night .tok-number,
+.cm6-theme-tokyo .tok-number,
+.cm6-theme-tokyo-night-storm .tok-number,
+[data-cm6-theme="tokyo-night"] .tok-number,
+[data-cm6-theme="tokyo"] .tok-number,
+[data-cm6-theme="tokyo-night-storm"] .tok-number {
+  color: #ff9e64;
+}
+
+/* ============================================================================
+   Token Overrides - Day
+   ============================================================================ */
+
+.cm6-theme-tokyo-night-day .tok-string,
+.cm6-theme-tokyo-day .tok-string,
+[data-cm6-theme="tokyo-night-day"] .tok-string,
+[data-cm6-theme="tokyo-day"] .tok-string {
+  color: #587539;
+}
+
+.cm6-theme-tokyo-night-day .tok-keyword,
+.cm6-theme-tokyo-day .tok-keyword,
+[data-cm6-theme="tokyo-night-day"] .tok-keyword,
+[data-cm6-theme="tokyo-day"] .tok-keyword {
+  color: #9854f1;
+}
+
+.cm6-theme-tokyo-night-day .tok-function,
+.cm6-theme-tokyo-day .tok-function,
+[data-cm6-theme="tokyo-night-day"] .tok-function,
+[data-cm6-theme="tokyo-day"] .tok-function {
+  color: #2e7de9;
+}
+
+.cm6-theme-tokyo-night-day .tok-number,
+.cm6-theme-tokyo-day .tok-number,
+[data-cm6-theme="tokyo-night-day"] .tok-number,
+[data-cm6-theme="tokyo-day"] .tok-number {
+  color: #965027;
+}
+
+/* ============================================================================
+   Editor Chrome - Night/Storm
+   ============================================================================ */
+
+.cm6-theme-tokyo-night .cm-editor,
+.cm6-theme-tokyo .cm-editor,
+[data-cm6-theme="tokyo-night"] .cm-editor,
+[data-cm6-theme="tokyo"] .cm-editor {
+  background-color: #1a1b26;
+}
+
+.cm6-theme-tokyo-night-storm .cm-editor,
+[data-cm6-theme="tokyo-night-storm"] .cm-editor {
+  background-color: #24283b;
+}
+
+.cm6-theme-tokyo-night .cm-editor .cm-cursor,
+.cm6-theme-tokyo .cm-editor .cm-cursor,
+.cm6-theme-tokyo-night-storm .cm-editor .cm-cursor,
+[data-cm6-theme="tokyo-night"] .cm-editor .cm-cursor,
+[data-cm6-theme="tokyo"] .cm-editor .cm-cursor,
+[data-cm6-theme="tokyo-night-storm"] .cm-editor .cm-cursor {
+  border-left-color: #c0caf5;
+}
+
+.cm6-theme-tokyo-night .cm-editor .cm-matchingBracket,
+.cm6-theme-tokyo .cm-editor .cm-matchingBracket,
+.cm6-theme-tokyo-night-storm .cm-editor .cm-matchingBracket,
+[data-cm6-theme="tokyo-night"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="tokyo"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="tokyo-night-storm"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(122, 162, 247, 0.25);
+  outline: 1px solid #7aa2f7;
+}
+
+.cm6-theme-tokyo-night .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-tokyo .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-tokyo-night-storm .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="tokyo-night"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="tokyo"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="tokyo-night-storm"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #16161e;
+  border-color: #292e42;
+}
+
+.cm6-theme-tokyo-night .cm-completionMatchedText,
+.cm6-theme-tokyo .cm-completionMatchedText,
+.cm6-theme-tokyo-night-storm .cm-completionMatchedText,
+[data-cm6-theme="tokyo-night"] .cm-completionMatchedText,
+[data-cm6-theme="tokyo"] .cm-completionMatchedText,
+[data-cm6-theme="tokyo-night-storm"] .cm-completionMatchedText {
+  color: #7aa2f7;
+}
+
+/* ============================================================================
+   Editor Chrome - Day
+   ============================================================================ */
+
+.cm6-theme-tokyo-night-day .cm-editor,
+.cm6-theme-tokyo-day .cm-editor,
+[data-cm6-theme="tokyo-night-day"] .cm-editor,
+[data-cm6-theme="tokyo-day"] .cm-editor {
+  background-color: #e1e2e7;
+}
+
+.cm6-theme-tokyo-night-day .cm-editor .cm-cursor,
+.cm6-theme-tokyo-day .cm-editor .cm-cursor,
+[data-cm6-theme="tokyo-night-day"] .cm-editor .cm-cursor,
+[data-cm6-theme="tokyo-day"] .cm-editor .cm-cursor {
+  border-left-color: #3760bf;
+}
+
+.cm6-theme-tokyo-night-day .cm-editor .cm-gutters,
+.cm6-theme-tokyo-day .cm-editor .cm-gutters,
+[data-cm6-theme="tokyo-night-day"] .cm-editor .cm-gutters,
+[data-cm6-theme="tokyo-day"] .cm-editor .cm-gutters {
+  background-color: #d5d6db;
+  border-right-color: #c4c5ca;
+  color: #9699a3;
+}
+
+.cm6-theme-tokyo-night-day .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-tokyo-day .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="tokyo-night-day"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="tokyo-day"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #e1e2e7;
+  border-color: #c4c5ca;
+}
+
+.cm6-theme-tokyo-night-day .cm-completionMatchedText,
+.cm6-theme-tokyo-day .cm-completionMatchedText,
+[data-cm6-theme="tokyo-night-day"] .cm-completionMatchedText,
+[data-cm6-theme="tokyo-day"] .cm-completionMatchedText {
+  color: #2e7de9;
+}
+
+/* ============================================================================
+   Autocomplete Selected - Night/Storm
+   ============================================================================ */
+
+.cm6-theme-tokyo-night .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-tokyo .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-tokyo-night-storm .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="tokyo-night"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="tokyo"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="tokyo-night-storm"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #7aa2f7;
+  color: #1a1b26;
+}
+
+.cm6-theme-tokyo-night .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-tokyo .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-tokyo-night-storm .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="tokyo-night"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="tokyo"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="tokyo-night-storm"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(26, 27, 38, 0.8);
+}
+
+/* ============================================================================
+   Autocomplete Selected - Day
+   ============================================================================ */
+
+.cm6-theme-tokyo-night-day .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-tokyo-day .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="tokyo-night-day"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="tokyo-day"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #2e7de9;
+  color: #e1e2e7;
+}
+
+.cm6-theme-tokyo-night-day .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-tokyo-day .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="tokyo-night-day"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="tokyo-day"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(225, 226, 231, 0.8);
+}
+
+/* ============================================================================
+   Vim Mode - Night/Storm (Dark)
+   ============================================================================ */
+
+.cm6-theme-tokyo-night .cm-fat-cursor,
+.cm6-theme-tokyo .cm-fat-cursor,
+.cm6-theme-tokyo-night-storm .cm-fat-cursor,
+[data-cm6-theme="tokyo-night"] .cm-fat-cursor,
+[data-cm6-theme="tokyo"] .cm-fat-cursor,
+[data-cm6-theme="tokyo-night-storm"] .cm-fat-cursor {
+  background: #c0caf5 !important;
+}
+
+.cm6-theme-tokyo-night .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-tokyo .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-tokyo-night-storm .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="tokyo-night"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="tokyo"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="tokyo-night-storm"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #414868 !important;
+}
+
+.cm6-theme-tokyo-night .cm-vim-panel,
+.cm6-theme-tokyo .cm-vim-panel,
+.cm6-theme-tokyo-night-storm .cm-vim-panel,
+[data-cm6-theme="tokyo-night"] .cm-vim-panel,
+[data-cm6-theme="tokyo"] .cm-vim-panel,
+[data-cm6-theme="tokyo-night-storm"] .cm-vim-panel {
+  background: #16161e;
+  border-color: #292e42;
+  color: #a9b1d6;
+}
+
+.cm6-theme-tokyo-night .cm-vim-panel input,
+.cm6-theme-tokyo .cm-vim-panel input,
+.cm6-theme-tokyo-night-storm .cm-vim-panel input,
+[data-cm6-theme="tokyo-night"] .cm-vim-panel input,
+[data-cm6-theme="tokyo"] .cm-vim-panel input,
+[data-cm6-theme="tokyo-night-storm"] .cm-vim-panel input {
+  background: #1a1b26;
+  color: #a9b1d6;
+  border-color: #292e42;
+}
+
+/* ============================================================================
+   Vim Mode - Day (Light)
+   ============================================================================ */
+
+.cm6-theme-tokyo-night-day .cm-fat-cursor,
+.cm6-theme-tokyo-day .cm-fat-cursor,
+[data-cm6-theme="tokyo-night-day"] .cm-fat-cursor,
+[data-cm6-theme="tokyo-day"] .cm-fat-cursor {
+  background: #3760bf !important;
+}
+
+.cm6-theme-tokyo-night-day .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-tokyo-day .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="tokyo-night-day"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="tokyo-day"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #9699a3 !important;
+}
+
+.cm6-theme-tokyo-night-day .cm-vim-panel,
+.cm6-theme-tokyo-day .cm-vim-panel,
+[data-cm6-theme="tokyo-night-day"] .cm-vim-panel,
+[data-cm6-theme="tokyo-day"] .cm-vim-panel {
+  background: #d5d6db;
+  border-color: #c4c5ca;
+  color: #3760bf;
+}
+
+.cm6-theme-tokyo-night-day .cm-vim-panel input,
+.cm6-theme-tokyo-day .cm-vim-panel input,
+[data-cm6-theme="tokyo-night-day"] .cm-vim-panel input,
+[data-cm6-theme="tokyo-day"] .cm-vim-panel input {
+  background: #e1e2e7;
+  color: #3760bf;
+  border-color: #c4c5ca;
+}

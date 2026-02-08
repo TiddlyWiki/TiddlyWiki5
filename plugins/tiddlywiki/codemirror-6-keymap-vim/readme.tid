@@ -1,0 +1,26 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/keymap-vim/readme
+
+! Vim Keymap Plugin
+
+This plugin adds Vim keybindings to the CodeMirror 6 editor.
+
+!! Features
+
+* Full Vim emulation including normal, insert, visual, and command modes
+* Vim status bar showing current mode
+* Common Vim commands and motions
+* Ex commands (`:w`, `:q`, etc.)
+
+!! Usage
+
+Install and enable the plugin. The editor will automatically use Vim keybindings.
+
+The current Vim mode is displayed in the editor status area.
+
+!! Important
+
+When this plugin is enabled, the TiddlyWiki formatting shortcuts (Ctrl-B for bold, Ctrl-I for italic, etc.) are automatically disabled to avoid conflicts with Vim keybindings.
+
+!! Note
+
+This plugin uses the [[replit/codemirror-vim|https://github.com/replit/codemirror-vim]] package.

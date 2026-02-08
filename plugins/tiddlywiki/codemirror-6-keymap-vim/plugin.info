@@ -1,0 +1,12 @@
+{
+  "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/keymap-vim",
+  "name": "Vim Keymap",
+  "description": "Vim keybindings for CodeMirror 6",
+  "author": "TiddlyWiki",
+  "version": "0.0.36",
+  "core-version": ">=5.3.0",
+  "plugin-type": "plugin",
+  "dependents": "$:/plugins/tiddlywiki/codemirror-6",
+  "list": "readme license",
+  "stability": "STABILITY_1_EXPERIMENTAL"
+}

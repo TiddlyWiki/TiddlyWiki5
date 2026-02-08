@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/jsx
+tags: $:/tags/CodeMirror/Language
+name: JSX
+type: text/jsx
+category: Web
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-javascript

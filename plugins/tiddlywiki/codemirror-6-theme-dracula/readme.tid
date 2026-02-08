@@ -1,0 +1,34 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-dracula/readme
+
+! Dracula Theme for CodeMirror 6
+
+A dark theme based on the popular [[Dracula|https://draculatheme.com/]] color scheme.
+
+!! Variants
+
+* `dracula` / `dracula-dark` - Dark purple/pink theme (default)
+* `dracula-light` - Light variant
+
+!! Usage
+
+Add the theme class to your editor container or set the `data-cm6-theme` attribute:
+
+```html
+<div class="cm6-theme-dracula">
+  <!-- editor here -->
+</div>
+```
+
+Or via attribute:
+
+```html
+<div data-cm6-theme="dracula">
+  <!-- editor here -->
+</div>
+```
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-dracula` | Dark Dracula theme |
+| `cm6-theme-dracula-light` | Light Dracula variant |

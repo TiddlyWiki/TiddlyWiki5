@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/php
+tags: $:/tags/CodeMirror/Language
+name: PHP
+type: application/x-httpd-php
+category: Programming
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-php

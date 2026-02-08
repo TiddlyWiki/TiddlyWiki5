@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-github/license
+
+\define theme-name() GitHub Theme
+\define theme-url() https://github.com
+\define theme-author() GitHub Inc
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

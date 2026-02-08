@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-zenburn/license
+
+\define theme-name() Zenburn
+\define theme-url() https://github.com/jnurmine/Zenburn
+\define theme-author() Jani Nurminen
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

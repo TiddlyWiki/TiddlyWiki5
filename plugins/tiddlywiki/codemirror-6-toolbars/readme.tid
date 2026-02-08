@@ -1,0 +1,25 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/toolbars/readme
+
+! Toolbar Styles
+
+10 different styles for the editor toolbar buttons, from elegant to fancy to crazy.
+
+!! Available Styles
+
+|!Style |!Description |
+|`minimal` |Clean, invisible buttons with subtle hover effects |
+|`flat` |Modern flat design with subtle backgrounds (default) |
+|`outlined` |Elegant outlined buttons with border effects |
+|`rounded` |Soft, pill-shaped buttons with shadows |
+|`elevated` |Material design inspired with depth and shadows |
+|`gradient` |Colorful gradient backgrounds |
+|`glass` |Frosted glass effect (glassmorphism) |
+|`neon` |Glowing neon cyberpunk effect |
+|`retro` |Vintage 3D button style (Windows 95 vibes) |
+|`brutalist` |Bold, stark, attention-grabbing design |
+
+!! Configuration
+
+Set your preferred style in `$:/config/codemirror-6/toolbars/style`
+
+Or use the Control Panel: ''Settings → CodeMirror → Toolbar Style''

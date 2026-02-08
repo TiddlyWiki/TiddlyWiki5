@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-ayu/readme
+
+! Ayu Theme for CodeMirror 6
+
+Simple theme with bright colors based on [[Ayu|https://github.com/ayu-theme/ayu-colors]].
+
+!! Variants
+
+* `ayu` / `ayu-dark` - Dark (default)
+* `ayu-mirage` - Medium dark with blue tint
+* `ayu-light` - Light
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-ayu` | Dark (default) |
+| `cm6-theme-ayu-dark` | Same as above |
+| `cm6-theme-ayu-mirage` | Mirage |
+| `cm6-theme-ayu-light` | Light |

@@ -1,0 +1,94 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/fold/readme
+
+! Code Folding for CodeMirror 6
+
+Adds code folding functionality to the editor with full TiddlyWiki5 syntax support.
+
+!! Features
+
+* ''Fold gutter'' - clickable indicators in the left margin
+* ''Heading folding'' - fold sections under headings (H1-H6)
+* ''Block folding'' - fold widgets, HTML blocks, code blocks, and more
+* ''Keyboard shortcuts'' - Ctrl+Shift+[ to fold, Ctrl+Shift+] to unfold
+* ''Configurable'' - enable/disable fold gutter via settings
+
+!! TiddlyWiki Syntax Support
+
+When the `lang-tiddlywiki` plugin is present, folding works with:
+
+|!Element |!Fold Behavior |
+|Headings (! to !!!!!!) |Folds to next heading of same or higher level |
+|Widgets (`<$widget>...</$widget>`) |Folds content between opening and closing tags |
+|HTML blocks (`<div>...</div>`) |Folds content between opening and closing tags |
+|Conditional blocks (`<%if%>...<%endif%>`) |Folds content between if and endif |
+|Macro definitions (`\define`) |Folds content between definition and `\end` |
+|Procedure definitions (`\procedure`) |Folds content between definition and `\end` |
+|Function definitions (`\function`) |Folds content between definition and `\end` |
+|Widget definitions (`\widget`) |Folds content between definition and `\end` |
+|Code blocks (triple backticks) |Folds content between opening and closing fences |
+|Typed blocks (`$$$`) |Folds content between opening and closing markers |
+|Block quotes (`<<<`) |Folds content between opening and closing markers |
+|Tables |Folds rows after the header row |
+|Transclusion blocks |Folds block content |
+|Macro call blocks |Folds block content |
+|Styled blocks (`.class`) |Folds block content |
+
+!! Keyboard Shortcuts
+
+|!Shortcut |!Action |
+|Ctrl+Shift+[ |Fold at cursor |
+|Ctrl+Shift+] |Unfold at cursor |
+
+On Mac, use Cmd instead of Ctrl.
+
+!! Configuration
+
+Enable or disable the fold gutter via:
+
+* `$:/config/codemirror-6/fold/enabled` - show/hide fold gutter
+
+Set to `yes` to enable, `no` to disable.
+
+!! API
+
+The plugin adds the following methods to the engine:
+
+!!! Fold Operations
+
+* `foldAt(pos)` - fold the block at position (or cursor)
+* `unfoldAt(pos)` - unfold the block at position (or cursor)
+* `foldAll()` - fold all foldable regions
+* `unfoldAll()` - unfold all regions
+* `toggleFold(pos)` - toggle fold state at position (or cursor)
+
+!!! Configuration
+
+* `setFoldGutter(show)` - programmatically show/hide fold gutter
+
+!!! Query
+
+* `isFoldable(pos)` - check if line at position is foldable
+* `getFoldedRanges()` - get array of currently folded ranges
+* `getFoldableRange(pos)` - get the foldable range at position
+
+!! Examples
+
+```javascript
+// Fold at cursor position
+engine.foldAt();
+
+// Fold at specific position
+engine.foldAt(100);
+
+// Fold all blocks in document
+engine.foldAll();
+
+// Check if current line is foldable
+if (engine.isFoldable(engine.getCursor())) {
+    engine.toggleFold();
+}
+
+// Get all folded ranges
+var folded = engine.getFoldedRanges();
+console.log("Folded regions:", folded.length);
+```

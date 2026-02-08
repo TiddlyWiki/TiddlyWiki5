@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-palenight/license
+
+\define theme-name() Palenight
+\define theme-url() https://github.com/whizkydee/vscode-palenight-theme
+\define theme-author() Olaolu Olawuyi
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

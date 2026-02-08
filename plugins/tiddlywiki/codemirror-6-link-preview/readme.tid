@@ -1,0 +1,44 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/link-preview/readme
+
+! Link Preview Plugin
+
+This plugin shows a preview tooltip when hovering over links in the CodeMirror 6 editor.
+
+!! Features
+
+* ''Hover Preview'': Hold your mouse over a link to see a preview of the tiddler
+* ''Rich Content'': Preview shows title, tags, content type, and text excerpt
+* ''Image Support'': Image tiddlers display a thumbnail preview
+* ''Smart Positioning'': Tooltip automatically positions to stay within viewport
+
+!! Preview Contents
+
+The preview tooltip displays:
+
+* ''Title'': The tiddler's title in bold
+* ''Tags'': All tags as small badges
+* ''Type'': Content type if not standard wikitext
+* ''Text'': First 500 characters of the tiddler content
+* ''Modified Date'': When the tiddler was last modified
+
+For image tiddlers, a thumbnail of the image is shown instead of text.
+
+!! Supported Link Types
+
+* ''WikiLinks'': `[[Target]]` or `[[Display Text|Target]]`
+* ''Transclusions'': `{{Target}}` or `{{Target!!field}}`
+* ''Images'': `[img[source]]`
+* ''CamelCase Links'': Automatically detected if the tiddler exists
+
+!! Configuration
+
+* The preview appears after a 300ms hover delay
+* The plugin can be disabled by setting `linkPreview: false` in the editor options
+
+!! API Methods
+
+When this plugin is active, the following methods are available on the editor engine:
+
+* `showLinkPreview(title, x, y)` - Show preview for a tiddler at specified position
+* `hideLinkPreview()` - Hide the preview tooltip
+* `getLinkAtCursor()` - Get the link target at the current cursor position

@@ -1,0 +1,301 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-palenight/styles
+tags: $:/tags/Stylesheet
+
+\rules only macrocallinline macrocallblock conditional
+
+/* ============================================================================
+   Palenight Theme for CodeMirror 6
+   ============================================================================
+   
+   Based on https://github.com/whizkydee/vscode-palenight-theme
+   
+   An elegant and juicy material-like theme with purple/blue undertones.
+   Popular standalone version of the palette.
+   
+   ============================================================================ */
+
+/* ============================================================================
+   Palenight (Default)
+   ============================================================================ */
+
+.cm6-theme-palenight,
+[data-cm6-theme="palenight"] {
+  --wt-bg: #292d3e;
+  --wt-bg-subtle: #1b1e2b;
+  --wt-fg: #a6accd;
+  --wt-fg-muted: #676e95;
+  --wt-fg-faint: #4e5579;
+  --wt-border: #3a3f58;
+  --wt-selection: rgba(113, 124, 180, 0.25);
+  --wt-line-highlight: rgba(0, 0, 0, 0.2);
+
+  --wt-teal: #80cbc4;           /* Cyan */
+  --wt-teal-dim: #80cbc4;
+  --wt-blue: #82aaff;           /* Blue */
+  --wt-violet: #c792ea;         /* Purple */
+  --wt-cyan: #89ddff;           /* Light cyan */
+  --wt-orange: #f78c6c;         /* Orange */
+  --wt-rose: #ff5370;           /* Red */
+  --wt-amber: #ffcb6b;          /* Yellow */
+  --wt-slate: #bfc7d5;          /* Light text */
+  --wt-purple: #c792ea;
+  --wt-green: #c3e88d;          /* Green */
+  --wt-red: #ff5370;
+
+  --wt-bold: #d0d0d0;
+  --wt-italic: #a6accd;
+  --wt-strike: #676e95;
+  --wt-underline: #a6accd;
+  --wt-heading: #82aaff;
+
+  --wt-code-bg: #1b1e2b;
+  --wt-code-fg: #ff5370;
+
+  --wt-highlight-bg: rgba(255, 203, 107, 0.15);
+  --wt-highlight-fg: #ffcb6b;
+
+  --wt-comment: #676e95;
+  --wt-mark: #3a3f58;
+}
+
+/* ============================================================================
+   Palenight Italic (With italicized keywords)
+   ============================================================================ */
+
+.cm6-theme-palenight-italic,
+[data-cm6-theme="palenight-italic"] {
+  --wt-bg: #292d3e;
+  --wt-bg-subtle: #1b1e2b;
+  --wt-fg: #a6accd;
+  --wt-fg-muted: #676e95;
+  --wt-fg-faint: #4e5579;
+  --wt-border: #3a3f58;
+  --wt-selection: rgba(113, 124, 180, 0.25);
+  --wt-line-highlight: rgba(0, 0, 0, 0.2);
+
+  --wt-teal: #80cbc4;
+  --wt-teal-dim: #80cbc4;
+  --wt-blue: #82aaff;
+  --wt-violet: #c792ea;
+  --wt-cyan: #89ddff;
+  --wt-orange: #f78c6c;
+  --wt-rose: #ff5370;
+  --wt-amber: #ffcb6b;
+  --wt-slate: #bfc7d5;
+  --wt-purple: #c792ea;
+  --wt-green: #c3e88d;
+  --wt-red: #ff5370;
+
+  --wt-bold: #d0d0d0;
+  --wt-italic: #a6accd;
+  --wt-strike: #676e95;
+  --wt-underline: #a6accd;
+  --wt-heading: #82aaff;
+
+  --wt-code-bg: #1b1e2b;
+  --wt-code-fg: #ff5370;
+
+  --wt-highlight-bg: rgba(255, 203, 107, 0.15);
+  --wt-highlight-fg: #ffcb6b;
+
+  --wt-comment: #676e95;
+  --wt-mark: #3a3f58;
+}
+
+/* Italic variant - italicize keywords */
+.cm6-theme-palenight-italic .tok-keyword,
+[data-cm6-theme="palenight-italic"] .tok-keyword {
+  font-style: italic;
+}
+
+/* ============================================================================
+   Token Overrides
+   ============================================================================ */
+
+.cm6-theme-palenight .tok-string,
+.cm6-theme-palenight-italic .tok-string,
+[data-cm6-theme="palenight"] .tok-string,
+[data-cm6-theme="palenight-italic"] .tok-string {
+  color: #c3e88d;
+}
+
+.cm6-theme-palenight .tok-keyword,
+.cm6-theme-palenight-italic .tok-keyword,
+[data-cm6-theme="palenight"] .tok-keyword,
+[data-cm6-theme="palenight-italic"] .tok-keyword {
+  color: #c792ea;
+}
+
+.cm6-theme-palenight .tok-function,
+.cm6-theme-palenight-italic .tok-function,
+[data-cm6-theme="palenight"] .tok-function,
+[data-cm6-theme="palenight-italic"] .tok-function {
+  color: #82aaff;
+}
+
+.cm6-theme-palenight .tok-number,
+.cm6-theme-palenight-italic .tok-number,
+[data-cm6-theme="palenight"] .tok-number,
+[data-cm6-theme="palenight-italic"] .tok-number {
+  color: #f78c6c;
+}
+
+.cm6-theme-palenight .tok-typeName,
+.cm6-theme-palenight-italic .tok-typeName,
+[data-cm6-theme="palenight"] .tok-typeName,
+[data-cm6-theme="palenight-italic"] .tok-typeName {
+  color: #ffcb6b;
+}
+
+.cm6-theme-palenight .tok-operator,
+.cm6-theme-palenight-italic .tok-operator,
+[data-cm6-theme="palenight"] .tok-operator,
+[data-cm6-theme="palenight-italic"] .tok-operator {
+  color: #89ddff;
+}
+
+.cm6-theme-palenight .tok-variableName,
+.cm6-theme-palenight-italic .tok-variableName,
+[data-cm6-theme="palenight"] .tok-variableName,
+[data-cm6-theme="palenight-italic"] .tok-variableName {
+  color: #bfc7d5;
+}
+
+.cm6-theme-palenight .tok-propertyName,
+.cm6-theme-palenight-italic .tok-propertyName,
+[data-cm6-theme="palenight"] .tok-propertyName,
+[data-cm6-theme="palenight-italic"] .tok-propertyName {
+  color: #80cbc4;
+}
+
+/* ============================================================================
+   Editor Chrome
+   ============================================================================ */
+
+.cm6-theme-palenight .cm-editor,
+.cm6-theme-palenight-italic .cm-editor,
+[data-cm6-theme="palenight"] .cm-editor,
+[data-cm6-theme="palenight-italic"] .cm-editor {
+  background-color: #292d3e;
+}
+
+.cm6-theme-palenight .cm-editor .cm-cursor,
+.cm6-theme-palenight-italic .cm-editor .cm-cursor,
+[data-cm6-theme="palenight"] .cm-editor .cm-cursor,
+[data-cm6-theme="palenight-italic"] .cm-editor .cm-cursor {
+  border-left-color: #ffcc00;
+}
+
+.cm6-theme-palenight .cm-editor .cm-gutters,
+.cm6-theme-palenight-italic .cm-editor .cm-gutters,
+[data-cm6-theme="palenight"] .cm-editor .cm-gutters,
+[data-cm6-theme="palenight-italic"] .cm-editor .cm-gutters {
+  background-color: #292d3e;
+  border-right-color: #3a3f58;
+  color: #4e5579;
+}
+
+.cm6-theme-palenight .cm-editor .cm-matchingBracket,
+.cm6-theme-palenight-italic .cm-editor .cm-matchingBracket,
+[data-cm6-theme="palenight"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="palenight-italic"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(128, 203, 196, 0.25);
+  outline: 1px solid #80cbc4;
+}
+
+.cm6-theme-palenight .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-palenight-italic .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="palenight"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="palenight-italic"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #1b1e2b;
+  border-color: #3a3f58;
+}
+
+.cm6-theme-palenight .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-palenight-italic .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="palenight"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="palenight-italic"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #82aaff;
+  color: #1b1e2b;
+}
+
+.cm6-theme-palenight .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-palenight-italic .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="palenight"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="palenight-italic"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(27, 30, 43, 0.8);
+}
+
+.cm6-theme-palenight .cm-completionMatchedText,
+.cm6-theme-palenight-italic .cm-completionMatchedText,
+[data-cm6-theme="palenight"] .cm-completionMatchedText,
+[data-cm6-theme="palenight-italic"] .cm-completionMatchedText {
+  color: #80cbc4;
+}
+
+/* ============================================================================
+   Search
+   ============================================================================ */
+
+.cm6-theme-palenight .cm-searchMatch,
+.cm6-theme-palenight-italic .cm-searchMatch,
+[data-cm6-theme="palenight"] .cm-searchMatch,
+[data-cm6-theme="palenight-italic"] .cm-searchMatch {
+  background-color: rgba(255, 203, 107, 0.2);
+}
+
+.cm6-theme-palenight .cm-searchMatch.cm-searchMatch-selected,
+.cm6-theme-palenight-italic .cm-searchMatch.cm-searchMatch-selected,
+[data-cm6-theme="palenight"] .cm-searchMatch.cm-searchMatch-selected,
+[data-cm6-theme="palenight-italic"] .cm-searchMatch.cm-searchMatch-selected {
+  background-color: rgba(255, 203, 107, 0.4);
+  outline: 1px solid #ffcb6b;
+}
+
+/* ============================================================================
+   Panels
+   ============================================================================ */
+
+.cm6-theme-palenight .cm-panels,
+.cm6-theme-palenight-italic .cm-panels,
+[data-cm6-theme="palenight"] .cm-panels,
+[data-cm6-theme="palenight-italic"] .cm-panels {
+  background-color: #1b1e2b;
+  border-color: #3a3f58;
+}
+
+/* ============================================================================
+   Vim Mode
+   ============================================================================ */
+
+.cm6-theme-palenight .cm-fat-cursor,
+.cm6-theme-palenight-italic .cm-fat-cursor,
+[data-cm6-theme="palenight"] .cm-fat-cursor,
+[data-cm6-theme="palenight-italic"] .cm-fat-cursor {
+  background: #ffcc00 !important;
+}
+
+.cm6-theme-palenight .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-palenight-italic .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="palenight"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="palenight-italic"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #4e5579 !important;
+}
+
+.cm6-theme-palenight .cm-vim-panel,
+.cm6-theme-palenight-italic .cm-vim-panel,
+[data-cm6-theme="palenight"] .cm-vim-panel,
+[data-cm6-theme="palenight-italic"] .cm-vim-panel {
+  background: #1b1e2b;
+  border-color: #3a3f58;
+  color: #a6accd;
+}
+
+.cm6-theme-palenight .cm-vim-panel input,
+.cm6-theme-palenight-italic .cm-vim-panel input,
+[data-cm6-theme="palenight"] .cm-vim-panel input,
+[data-cm6-theme="palenight-italic"] .cm-vim-panel input {
+  background: #292d3e;
+  color: #a6accd;
+  border-color: #3a3f58;
+}

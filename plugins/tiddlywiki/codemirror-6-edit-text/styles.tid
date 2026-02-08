@@ -1,0 +1,446 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/edit-text/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/* ============================================
+   Base styles - match native input/textarea
+   ============================================ */
+
+html body .tc-editor-codemirror6-simple .cm-editor {
+	color: <<colour foreground>>;
+	background-color: <<colour tiddler-editor-background>>;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	-webkit-appearance: none;
+}
+
+html body .tc-editor-codemirror6-simple .cm-editor.cm-focused {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;
+	border-radius: 0.25em;
+}
+
+html body .tc-editor-codemirror6-simple .cm-scroller {
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/fontfamily}};
+	line-height: 1.3em;
+}
+
+html body .tc-editor-codemirror6-simple .cm-content {
+	caret-color: transparent;
+	padding: 4px 6px;
+}
+
+html body .tc-editor-codemirror6-simple .cm-line {
+	padding: 0;
+}
+
+/* Placeholder styling */
+html body .tc-editor-codemirror6-simple .cm-placeholder {
+	color: <<colour muted-foreground>>;
+	font-style: normal;
+}
+
+/* Selection styling - uses native browser selection for proper text contrast */
+html body .tc-editor-codemirror6-simple .cm-editor .cm-line ::selection {
+	background-color: Highlight;
+	background-color: <<colour primary>>;
+	color: HighlightText;
+}
+
+html body .tc-editor-codemirror6-simple .cm-editor:not(.cm-focused) .cm-content ::selection {
+	background-color: Highlight;
+	background-color: <<colour primary>>;
+	color: HighlightText;
+}
+
+/* Hide gutters, active line for simple mode */
+html body .tc-editor-codemirror6-simple .cm-gutters {
+	display: none;
+}
+
+html body .tc-editor-codemirror6-simple .cm-activeLine,
+html body .tc-editor-codemirror6-simple .cm-activeLineGutter {
+	background: transparent !important;
+}
+
+/* ============================================
+   Disabled state
+   ============================================ */
+
+html body .tc-editor-codemirror6-simple .cm-editor.cm-readonly {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+/* ============================================
+   Input mode - inline like native <input>
+   ============================================ */
+
+html body .tc-editor-codemirror6-input {
+	display: inline-block;
+	width: auto;
+	min-width: 20ch; /* Match HTML default size="20" */
+	vertical-align: middle;
+	margin: 0;
+}
+
+html body .tc-editor-codemirror6-input .cm-editor {
+	display: inline-block;
+	width: auto;
+	min-width: 100%;
+}
+
+html body .tc-editor-codemirror6-input .cm-scroller {
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+html body .tc-editor-codemirror6-input .cm-content {
+	white-space: nowrap;
+}
+
+/* Hide scrollbars */
+html body .tc-editor-codemirror6-input .cm-scroller::-webkit-scrollbar {
+	display: none;
+}
+
+/* ============================================
+   Textarea mode - block like native <textarea>
+   ============================================ */
+
+html body .tc-editor-codemirror6-textarea {
+	display: block;
+	width: 100%;
+	margin: 4px 0;
+}
+
+html body .tc-editor-codemirror6-textarea .cm-editor {
+	display: block;
+}
+
+html body .tc-editor-codemirror6-textarea .cm-scroller {
+	overflow: auto;
+}
+
+/* ============================================
+   BLOCK contexts - inputs that should be full width
+   ============================================ */
+
+/* Title field */
+html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input {
+	display: block;
+	width: 100%;
+}
+
+html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-editor {
+	display: block;
+	width: 100%;
+	border: none;
+	background: transparent;
+}
+
+html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-editor.cm-focused {
+	outline: none;
+}
+
+html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-scroller {
+	font-weight: normal;
+	font-size: 2.35em;
+	line-height: 1.35em;
+	font-family: inherit;
+	white-space: normal;
+}
+
+html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-content {
+	color: <<colour tiddler-title-foreground>>;
+	padding: 4px 6px;
+}
+
+/* Sidebar search - inline with search button */
+html body .tc-search .tc-editor-codemirror6-input {
+	display: inline-block;
+	width: auto;
+}
+
+html body .tc-search .tc-editor-codemirror6-input .cm-editor {
+	display: inline-block;
+	width: auto;
+}
+
+/* Advanced search - 60% width */
+html body .tc-advanced-search .tc-editor-codemirror6-input {
+	display: inline-block;
+	width: 60%;
+}
+
+html body .tc-advanced-search .tc-editor-codemirror6-input .cm-editor {
+	display: block;
+	width: 100%;
+}
+
+/* Field value column - full width within cell */
+html body .tc-edit-field-value .tc-editor-codemirror6-input {
+	display: block;
+	width: 100%;
+}
+
+html body .tc-edit-field-value .tc-editor-codemirror6-input .cm-editor {
+	display: block;
+	width: 100%;
+}
+
+/* Add field value */
+html body .tc-edit-field-add-value .tc-editor-codemirror6-input {
+	display: inline-block;
+}
+
+html body .tc-edit-field-add-value .tc-editor-codemirror6-input .cm-editor {
+	display: block;
+	width: 100%;
+}
+
+/* ============================================
+   INLINE contexts - inputs that stay inline
+   ============================================ */
+
+/* Tag input */
+html body .tc-edit-tags .tc-editor-codemirror6-input,
+html body .tc-edit-add-tag .tc-editor-codemirror6-input {
+	display: inline-block;
+	width: auto;
+	vertical-align: middle;
+}
+
+html body .tc-edit-tags .tc-editor-codemirror6-input .cm-editor,
+html body .tc-edit-add-tag .tc-editor-codemirror6-input .cm-editor {
+	display: inline-block;
+	width: auto;
+}
+
+/* Type field */
+html body .tc-type-selector .tc-editor-codemirror6-input {
+	display: inline-block;
+	width: auto;
+	vertical-align: middle;
+}
+
+html body .tc-type-selector .tc-editor-codemirror6-input .cm-editor {
+	display: inline-block;
+	width: auto;
+}
+
+/* Field name */
+html body .tc-edit-field-name .tc-editor-codemirror6-input,
+html body .tc-edit-field-add-name-wrapper .tc-editor-codemirror6-input {
+	display: inline-block;
+	width: auto;
+	vertical-align: middle;
+}
+
+html body .tc-edit-field-name .tc-editor-codemirror6-input .cm-editor,
+html body .tc-edit-field-add-name-wrapper .tc-editor-codemirror6-input .cm-editor {
+	display: inline-block;
+	width: auto;
+}
+
+/* Field editor padding */
+html body .tc-edit-fields .tc-editor-codemirror6-input .cm-content {
+	padding: 4px 6px;
+}
+
+/* Title field */
+html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input {
+	display: block;
+	width: 100%;
+}
+
+html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-editor {
+	display: block;
+	width: 100%;
+	border: none;
+	background: transparent;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-editor.cm-focused {
+	outline: none;
+}
+
+html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-scroller {
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	white-space: normal;
+}
+
+html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-content {
+	color: <<colour tiddler-title-foreground>>;
+	padding: 4px 6px;
+}
+
+.tc-type-selector-dropdown-wrapper .tc-edit-typeeditor {
+	min-width: 32ch;
+}
+
+/* ============================================
+   Tag editor - flex layout
+   ============================================ */
+
+html body .tc-edit-tags {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px;
+}
+
+/* Existing tags keep their natural size */
+html body .tc-edit-tags > .tc-tag-list-item {
+	flex: 0 0 auto;
+}
+
+/* Add tag section grows to fill available space */
+html body .tc-edit-tags > .tc-edit-add-tag {
+	flex: 1 1 auto;
+	min-width: 150px;
+}
+
+/* Inner UI is also flex */
+html body .tc-edit-tags .tc-edit-add-tag-ui {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+/* Tag name wrapper grows */
+html body .tc-edit-tags .tc-add-tag-name {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+/* Keyboard wrapper needs to be block to allow input to grow */
+html body .tc-edit-tags .tc-add-tag-name .tc-keyboard {
+	display: block;
+	width: 100%;
+}
+
+/* CodeMirror input fills available space */
+html body .tc-edit-tags .tc-editor-codemirror6-input {
+	display: block;
+	width: 100%;
+}
+
+html body .tc-edit-tags .tc-editor-codemirror6-input .cm-editor {
+	display: block;
+	width: 100%;
+	min-width: 20ch;
+}
+
+html body .tc-edit-tags .tc-editor-codemirror6-input .cm-scroller {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+/* Dropdown button stays fixed */
+html body .tc-edit-tags .tc-edit-add-tag-ui > .tc-btn-dropdown {
+	flex: 0 0 auto;
+}
+
+/* Add button stays fixed */
+html body .tc-edit-tags .tc-add-tag-button {
+	flex: 0 0 auto;
+}
+
+/* ============================================
+   Field add row - flex layout with wrapping
+   ============================================ */
+
+html body .tc-edit-field-add {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px;
+}
+
+/* Label keeps its size */
+html body .tc-edit-field-add > em.tc-edit {
+	flex: 0 0 auto;
+	white-space: nowrap;
+}
+
+/* Field name wrapper has fixed width */
+html body .tc-edit-field-add > .tc-edit-field-add-name-wrapper {
+	flex: 0 0 auto;
+	display: inline-flex;
+	align-items: center;
+}
+
+/* Keyboard wrapper inside name wrapper */
+html body .tc-edit-field-add-name-wrapper > .tc-keyboard {
+	display: inline-block;
+}
+
+/* Field name input - fixed width */
+html body .tc-edit-field-add-name-wrapper .tc-editor-codemirror6-input {
+	display: inline-block;
+	width: auto;
+	min-width: 20ch;
+}
+
+html body .tc-edit-field-add-name-wrapper .tc-editor-codemirror6-input .cm-editor {
+	display: inline-block;
+	width: auto;
+}
+
+/* Dropdown button in name wrapper */
+html body .tc-edit-field-add-name-wrapper > .tc-btn-dropdown {
+	flex: 0 0 auto;
+}
+
+/* Field value grows to fill available space, wraps when needed */
+html body .tc-edit-field-add > .tc-edit-field-add-value {
+	flex: 1 1 calc(20ch + 3em);
+	min-width: 10ch;
+}
+
+/* Keyboard wrapper inside value needs to be block */
+html body .tc-edit-field-add-value > .tc-keyboard {
+	display: block;
+	width: 100%;
+}
+
+/* Field value input fills container */
+html body .tc-edit-field-add-value .tc-editor-codemirror6-input {
+	display: block;
+	width: 100%;
+}
+
+html body .tc-edit-field-add-value .tc-editor-codemirror6-input .cm-editor {
+	display: block;
+	width: 100%;
+}
+
+html body .tc-edit-field-add-value .tc-editor-codemirror6-input .cm-scroller {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+/* Add button keeps its size */
+html body .tc-edit-field-add > .tc-edit-field-add-button {
+	flex: 0 0 auto;
+}
+
+/* ============================================
+   ControlPanel - full width inputs
+   ============================================ */
+
+html body .tc-control-panel .tc-editor-codemirror6-input {
+	display: block;
+	width: 100%;
+}
+
+html body .tc-control-panel .tc-editor-codemirror6-input .cm-editor {
+	display: block;
+	width: 100%;
+}

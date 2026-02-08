@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-catppuccin/license
+
+\define theme-name() Catppuccin
+\define theme-url() https://github.com/catppuccin/catppuccin
+\define theme-author() Catppuccin Org
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

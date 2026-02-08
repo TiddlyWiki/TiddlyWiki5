@@ -1,0 +1,41 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-flexoki/readme
+
+! Flexoki Theme for CodeMirror 6
+
+An inky color scheme based on [[Flexoki|https://stephango.com/flexoki]] by Steph Ango.
+
+Designed specifically for reading and writing. Warm, gentle on the eyes, with high readability.
+
+!! Variants
+
+* `flexoki` / `flexoki-dark` - Dark theme with deep black background (default)
+* `flexoki-light` - Light "paper" variant with warm cream background
+
+!! Usage
+
+Add the theme class to your editor container or set the `data-cm6-theme` attribute:
+
+```html
+<div class="cm6-theme-flexoki">
+  <!-- editor here -->
+</div>
+```
+
+Or via attribute:
+
+```html
+<div data-cm6-theme="flexoki-light">
+  <!-- editor here -->
+</div>
+```
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-flexoki` | Dark Flexoki theme |
+| `cm6-theme-flexoki-dark` | Same as above |
+| `cm6-theme-flexoki-light` | Light Flexoki theme (paper) |
+
+!! About Flexoki
+
+Flexoki was created by Steph Ango, the creator of Obsidian. It's specifically designed for long-form reading and writing, with carefully chosen colors that reduce eye strain while maintaining excellent contrast and readability.

@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/csv
+tags: $:/tags/CodeMirror/Language
+name: CSV
+type: text/csv
+category: Data
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-csv

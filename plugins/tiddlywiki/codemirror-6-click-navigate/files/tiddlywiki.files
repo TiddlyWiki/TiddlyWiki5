@@ -1,0 +1,12 @@
+{
+    "tiddlers": [
+        {
+            "file": "click-navigate.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/click-navigate/click-navigate.js",
+                "module-type": "codemirror6-plugin"
+            }
+        }
+    ]
+}

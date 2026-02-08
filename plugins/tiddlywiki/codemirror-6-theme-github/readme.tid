@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-github/readme
+
+! GitHub Theme for CodeMirror 6
+
+GitHub's official code highlighting colors.
+
+!! Variants
+
+* `github` / `github-light` - Light theme (default)
+* `github-dark` - Dark theme
+* `github-dimmed` - Dark with muted colors
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-github` | Light (default) |
+| `cm6-theme-github-light` | Same as above |
+| `cm6-theme-github-dark` | Dark |
+| `cm6-theme-github-dimmed` | Dark dimmed |

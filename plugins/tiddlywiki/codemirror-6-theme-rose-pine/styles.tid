@@ -1,0 +1,409 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-rose-pine/styles
+tags: $:/tags/Stylesheet
+
+\rules only macrocallinline macrocallblock conditional
+
+/* ============================================================================
+   Rosé Pine Theme for CodeMirror 6
+   ============================================================================
+   
+   Based on https://rosepinetheme.com/
+   
+   All natural pine, faux fur and a bit of soho vibes for the classy minimalist.
+   Three variants: Main, Moon, Dawn.
+   
+   ============================================================================ */
+
+/* ============================================================================
+   Rosé Pine Main (Default)
+   ============================================================================ */
+
+.cm6-theme-rose-pine,
+.cm6-theme-rose-pine-main,
+[data-cm6-theme="rose-pine"],
+[data-cm6-theme="rose-pine-main"] {
+  --wt-bg: #191724;             /* Base */
+  --wt-bg-subtle: #1f1d2e;      /* Surface */
+  --wt-fg: #e0def4;             /* Text */
+  --wt-fg-muted: #6e6a86;       /* Muted */
+  --wt-fg-faint: #524f67;       /* Overlay */
+  --wt-border: #26233a;         /* Highlight low */
+  --wt-selection: rgba(111, 108, 139, 0.35);
+  --wt-line-highlight: rgba(38, 35, 58, 0.6);
+
+  --wt-teal: #9ccfd8;           /* Foam */
+  --wt-teal-dim: #9ccfd8;
+  --wt-blue: #9ccfd8;           /* Foam */
+  --wt-violet: #c4a7e7;         /* Iris */
+  --wt-cyan: #9ccfd8;           /* Foam */
+  --wt-orange: #ebbcba;         /* Rose (warm) */
+  --wt-rose: #eb6f92;           /* Love */
+  --wt-amber: #f6c177;          /* Gold */
+  --wt-slate: #e0def4;
+  --wt-purple: #c4a7e7;         /* Iris */
+  --wt-green: #31748f;          /* Pine */
+  --wt-red: #eb6f92;            /* Love */
+
+  --wt-bold: #e0def4;
+  --wt-italic: #e0def4;
+  --wt-strike: #6e6a86;
+  --wt-underline: #e0def4;
+  --wt-heading: #9ccfd8;
+
+  --wt-code-bg: #1f1d2e;
+  --wt-code-fg: #ebbcba;
+
+  --wt-highlight-bg: rgba(246, 193, 119, 0.2);
+  --wt-highlight-fg: #f6c177;
+
+  --wt-comment: #6e6a86;
+  --wt-mark: #26233a;
+}
+
+/* ============================================================================
+   Rosé Pine Moon
+   ============================================================================ */
+
+.cm6-theme-rose-pine-moon,
+[data-cm6-theme="rose-pine-moon"] {
+  --wt-bg: #232136;             /* Base */
+  --wt-bg-subtle: #2a273f;      /* Surface */
+  --wt-fg: #e0def4;             /* Text */
+  --wt-fg-muted: #6e6a86;       /* Muted */
+  --wt-fg-faint: #56526e;       /* Overlay */
+  --wt-border: #393552;         /* Highlight low */
+  --wt-selection: rgba(110, 106, 134, 0.35);
+  --wt-line-highlight: rgba(57, 53, 82, 0.6);
+
+  --wt-teal: #9ccfd8;
+  --wt-teal-dim: #9ccfd8;
+  --wt-blue: #9ccfd8;
+  --wt-violet: #c4a7e7;
+  --wt-cyan: #9ccfd8;
+  --wt-orange: #ea9a97;         /* Rose (slightly different) */
+  --wt-rose: #eb6f92;
+  --wt-amber: #f6c177;
+  --wt-slate: #e0def4;
+  --wt-purple: #c4a7e7;
+  --wt-green: #3e8fb0;          /* Pine */
+  --wt-red: #eb6f92;
+
+  --wt-bold: #e0def4;
+  --wt-italic: #e0def4;
+  --wt-strike: #6e6a86;
+  --wt-underline: #e0def4;
+  --wt-heading: #9ccfd8;
+
+  --wt-code-bg: #2a273f;
+  --wt-code-fg: #ea9a97;
+
+  --wt-highlight-bg: rgba(246, 193, 119, 0.2);
+  --wt-highlight-fg: #f6c177;
+
+  --wt-comment: #6e6a86;
+  --wt-mark: #393552;
+}
+
+/* ============================================================================
+   Rosé Pine Dawn (Light)
+   ============================================================================ */
+
+.cm6-theme-rose-pine-dawn,
+[data-cm6-theme="rose-pine-dawn"] {
+  --wt-bg: #faf4ed;             /* Base */
+  --wt-bg-subtle: #fffaf3;      /* Surface */
+  --wt-fg: #575279;             /* Text */
+  --wt-fg-muted: #9893a5;       /* Muted */
+  --wt-fg-faint: #cecacd;       /* Overlay */
+  --wt-border: #f2e9e1;         /* Highlight low */
+  --wt-selection: rgba(152, 147, 165, 0.2);
+  --wt-line-highlight: rgba(242, 233, 225, 0.5);
+
+  --wt-teal: #286983;           /* Foam (darker) */
+  --wt-teal-dim: #286983;
+  --wt-blue: #286983;
+  --wt-violet: #907aa9;         /* Iris */
+  --wt-cyan: #286983;
+  --wt-orange: #d7827e;         /* Rose */
+  --wt-rose: #b4637a;           /* Love */
+  --wt-amber: #ea9d34;          /* Gold */
+  --wt-slate: #575279;
+  --wt-purple: #907aa9;
+  --wt-green: #56949f;          /* Pine */
+  --wt-red: #b4637a;
+
+  --wt-bold: #575279;
+  --wt-italic: #575279;
+  --wt-strike: #9893a5;
+  --wt-underline: #575279;
+  --wt-heading: #286983;
+
+  --wt-code-bg: #f2e9e1;
+  --wt-code-fg: #b4637a;
+
+  --wt-highlight-bg: rgba(234, 157, 52, 0.15);
+  --wt-highlight-fg: #ea9d34;
+
+  --wt-comment: #9893a5;
+  --wt-mark: #f2e9e1;
+}
+
+/* ============================================================================
+   Token Overrides - Dark
+   ============================================================================ */
+
+.cm6-theme-rose-pine .tok-string,
+.cm6-theme-rose-pine-main .tok-string,
+.cm6-theme-rose-pine-moon .tok-string,
+[data-cm6-theme="rose-pine"] .tok-string,
+[data-cm6-theme="rose-pine-main"] .tok-string,
+[data-cm6-theme="rose-pine-moon"] .tok-string {
+  color: #f6c177;
+}
+
+.cm6-theme-rose-pine .tok-keyword,
+.cm6-theme-rose-pine-main .tok-keyword,
+.cm6-theme-rose-pine-moon .tok-keyword,
+[data-cm6-theme="rose-pine"] .tok-keyword,
+[data-cm6-theme="rose-pine-main"] .tok-keyword,
+[data-cm6-theme="rose-pine-moon"] .tok-keyword {
+  color: #31748f;
+}
+
+.cm6-theme-rose-pine .tok-function,
+.cm6-theme-rose-pine-main .tok-function,
+.cm6-theme-rose-pine-moon .tok-function,
+[data-cm6-theme="rose-pine"] .tok-function,
+[data-cm6-theme="rose-pine-main"] .tok-function,
+[data-cm6-theme="rose-pine-moon"] .tok-function {
+  color: #ebbcba;
+}
+
+.cm6-theme-rose-pine .tok-number,
+.cm6-theme-rose-pine-main .tok-number,
+.cm6-theme-rose-pine-moon .tok-number,
+[data-cm6-theme="rose-pine"] .tok-number,
+[data-cm6-theme="rose-pine-main"] .tok-number,
+[data-cm6-theme="rose-pine-moon"] .tok-number {
+  color: #c4a7e7;
+}
+
+/* ============================================================================
+   Token Overrides - Dawn
+   ============================================================================ */
+
+.cm6-theme-rose-pine-dawn .tok-string,
+[data-cm6-theme="rose-pine-dawn"] .tok-string {
+  color: #ea9d34;
+}
+
+.cm6-theme-rose-pine-dawn .tok-keyword,
+[data-cm6-theme="rose-pine-dawn"] .tok-keyword {
+  color: #286983;
+}
+
+.cm6-theme-rose-pine-dawn .tok-function,
+[data-cm6-theme="rose-pine-dawn"] .tok-function {
+  color: #d7827e;
+}
+
+.cm6-theme-rose-pine-dawn .tok-number,
+[data-cm6-theme="rose-pine-dawn"] .tok-number {
+  color: #907aa9;
+}
+
+/* ============================================================================
+   Editor Chrome - Dark
+   ============================================================================ */
+
+.cm6-theme-rose-pine .cm-editor,
+.cm6-theme-rose-pine-main .cm-editor,
+[data-cm6-theme="rose-pine"] .cm-editor,
+[data-cm6-theme="rose-pine-main"] .cm-editor {
+  background-color: #191724;
+}
+
+.cm6-theme-rose-pine-moon .cm-editor,
+[data-cm6-theme="rose-pine-moon"] .cm-editor {
+  background-color: #232136;
+}
+
+.cm6-theme-rose-pine .cm-editor .cm-cursor,
+.cm6-theme-rose-pine-main .cm-editor .cm-cursor,
+.cm6-theme-rose-pine-moon .cm-editor .cm-cursor,
+[data-cm6-theme="rose-pine"] .cm-editor .cm-cursor,
+[data-cm6-theme="rose-pine-main"] .cm-editor .cm-cursor,
+[data-cm6-theme="rose-pine-moon"] .cm-editor .cm-cursor {
+  border-left-color: #e0def4;
+}
+
+.cm6-theme-rose-pine .cm-editor .cm-matchingBracket,
+.cm6-theme-rose-pine-main .cm-editor .cm-matchingBracket,
+.cm6-theme-rose-pine-moon .cm-editor .cm-matchingBracket,
+[data-cm6-theme="rose-pine"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="rose-pine-main"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="rose-pine-moon"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(156, 207, 216, 0.25);
+  outline: 1px solid #9ccfd8;
+}
+
+.cm6-theme-rose-pine .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-rose-pine-main .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-rose-pine-moon .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="rose-pine"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="rose-pine-main"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="rose-pine-moon"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #1f1d2e;
+  border-color: #26233a;
+}
+
+.cm6-theme-rose-pine .cm-completionMatchedText,
+.cm6-theme-rose-pine-main .cm-completionMatchedText,
+.cm6-theme-rose-pine-moon .cm-completionMatchedText,
+[data-cm6-theme="rose-pine"] .cm-completionMatchedText,
+[data-cm6-theme="rose-pine-main"] .cm-completionMatchedText,
+[data-cm6-theme="rose-pine-moon"] .cm-completionMatchedText {
+  color: #ebbcba;
+}
+
+/* ============================================================================
+   Editor Chrome - Dawn
+   ============================================================================ */
+
+.cm6-theme-rose-pine-dawn .cm-editor,
+[data-cm6-theme="rose-pine-dawn"] .cm-editor {
+  background-color: #faf4ed;
+}
+
+.cm6-theme-rose-pine-dawn .cm-editor .cm-cursor,
+[data-cm6-theme="rose-pine-dawn"] .cm-editor .cm-cursor {
+  border-left-color: #575279;
+}
+
+.cm6-theme-rose-pine-dawn .cm-editor .cm-gutters,
+[data-cm6-theme="rose-pine-dawn"] .cm-editor .cm-gutters {
+  background-color: #fffaf3;
+  border-right-color: #f2e9e1;
+  color: #9893a5;
+}
+
+.cm6-theme-rose-pine-dawn .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="rose-pine-dawn"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #faf4ed;
+  border-color: #f2e9e1;
+}
+
+.cm6-theme-rose-pine-dawn .cm-completionMatchedText,
+[data-cm6-theme="rose-pine-dawn"] .cm-completionMatchedText {
+  color: #d7827e;
+}
+
+/* ============================================================================
+   Autocomplete Selected - Dark
+   ============================================================================ */
+
+.cm6-theme-rose-pine .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-rose-pine-main .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-rose-pine-moon .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="rose-pine"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="rose-pine-main"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="rose-pine-moon"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #c4a7e7;
+  color: #191724;
+}
+
+.cm6-theme-rose-pine .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-rose-pine-main .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-rose-pine-moon .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="rose-pine"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="rose-pine-main"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="rose-pine-moon"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(25, 23, 36, 0.8);
+}
+
+/* ============================================================================
+   Autocomplete Selected - Dawn
+   ============================================================================ */
+
+.cm6-theme-rose-pine-dawn .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="rose-pine-dawn"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #907aa9;
+  color: #faf4ed;
+}
+
+.cm6-theme-rose-pine-dawn .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="rose-pine-dawn"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(250, 244, 237, 0.8);
+}
+
+/* ============================================================================
+   Vim Mode - Main/Moon (Dark)
+   ============================================================================ */
+
+.cm6-theme-rose-pine .cm-fat-cursor,
+.cm6-theme-rose-pine-main .cm-fat-cursor,
+.cm6-theme-rose-pine-moon .cm-fat-cursor,
+[data-cm6-theme="rose-pine"] .cm-fat-cursor,
+[data-cm6-theme="rose-pine-main"] .cm-fat-cursor,
+[data-cm6-theme="rose-pine-moon"] .cm-fat-cursor {
+  background: #e0def4 !important;
+}
+
+.cm6-theme-rose-pine .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-rose-pine-main .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-rose-pine-moon .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="rose-pine"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="rose-pine-main"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="rose-pine-moon"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #524f67 !important;
+}
+
+.cm6-theme-rose-pine .cm-vim-panel,
+.cm6-theme-rose-pine-main .cm-vim-panel,
+.cm6-theme-rose-pine-moon .cm-vim-panel,
+[data-cm6-theme="rose-pine"] .cm-vim-panel,
+[data-cm6-theme="rose-pine-main"] .cm-vim-panel,
+[data-cm6-theme="rose-pine-moon"] .cm-vim-panel {
+  background: #1f1d2e;
+  border-color: #26233a;
+  color: #e0def4;
+}
+
+.cm6-theme-rose-pine .cm-vim-panel input,
+.cm6-theme-rose-pine-main .cm-vim-panel input,
+.cm6-theme-rose-pine-moon .cm-vim-panel input,
+[data-cm6-theme="rose-pine"] .cm-vim-panel input,
+[data-cm6-theme="rose-pine-main"] .cm-vim-panel input,
+[data-cm6-theme="rose-pine-moon"] .cm-vim-panel input {
+  background: #191724;
+  color: #e0def4;
+  border-color: #26233a;
+}
+
+/* ============================================================================
+   Vim Mode - Dawn (Light)
+   ============================================================================ */
+
+.cm6-theme-rose-pine-dawn .cm-fat-cursor,
+[data-cm6-theme="rose-pine-dawn"] .cm-fat-cursor {
+  background: #575279 !important;
+}
+
+.cm6-theme-rose-pine-dawn .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="rose-pine-dawn"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #cecacd !important;
+}
+
+.cm6-theme-rose-pine-dawn .cm-vim-panel,
+[data-cm6-theme="rose-pine-dawn"] .cm-vim-panel {
+  background: #fffaf3;
+  border-color: #f2e9e1;
+  color: #575279;
+}
+
+.cm6-theme-rose-pine-dawn .cm-vim-panel input,
+[data-cm6-theme="rose-pine-dawn"] .cm-vim-panel input {
+  background: #faf4ed;
+  color: #575279;
+  border-color: #f2e9e1;
+}

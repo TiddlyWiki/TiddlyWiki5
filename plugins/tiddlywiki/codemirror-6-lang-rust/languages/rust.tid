@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/rust
+tags: $:/tags/CodeMirror/Language
+name: Rust
+type: text/x-rustsrc
+category: Programming
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-rust

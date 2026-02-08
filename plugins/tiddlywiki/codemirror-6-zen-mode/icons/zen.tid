@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/zen-mode/icons/zen
+tags: $:/tags/Image
+
+<svg class="cm6-icon" viewBox="0 0 22 22" width="22" height="22">
+  <!-- Outer frame corners suggesting fullscreen -->
+  <path d="M3 3h4v1.5H4.5V7H3V3z M15 3h4v4h-1.5V4.5H15V3z M3 15v4h4v-1.5H4.5V15H3z M17.5 17.5V15H19v4h-4v-1.5h2.5z" fill="currentColor" opacity="0.5"/>
+  <!-- Center focus circle -->
+  <circle cx="11" cy="11" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <!-- Inner dot representing cursor/focus -->
+  <circle cx="11" cy="11" r="1.5" fill="currentColor"/>
+</svg>

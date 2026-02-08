@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/image-preview/readme
+
+! Image Preview Plugin
+
+Shows inline previews of images below `[img[]]` references in the editor.
+
+!! Supported References
+
+* Tiddler images: `[img[MyImage]]`
+* External URLs: `[img[https://example.com/image.png]]`
+* With parameters: `[img width=100 [MyImage]]`
+
+!! Features
+
+* Previews appear below the image syntax
+* Shows error message for missing images
+* Maximum preview height of 200px
+
+!! Configuration
+
+Enable/disable via Control Panel > Settings > CodeMirror > Editor > Image preview

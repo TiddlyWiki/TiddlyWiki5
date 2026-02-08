@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/emoji-picker/readme
+
+! Emoji Picker Plugin
+
+Insert emojis into your tiddlers using autocompletion.
+
+!! Usage
+
+Type `:` followed by an emoji name to trigger autocompletion:
+
+* `:smile` - Shows emoji suggestions matching "smile"
+* `:heart` - Shows heart-related emojis
+* `:thumb` - Shows thumbs up/down emojis
+
+Select an emoji from the dropdown to insert it.
+
+!! Configuration
+
+Enable/disable via ''Control Panel > Settings > CodeMirror > Autocompletion > Emoji picker''

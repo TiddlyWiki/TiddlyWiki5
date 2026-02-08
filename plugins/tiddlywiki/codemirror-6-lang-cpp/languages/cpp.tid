@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/cpp
+tags: $:/tags/CodeMirror/Language
+name: C/C++
+type: text/x-c++src
+category: Programming
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-cpp

@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-material/license
+
+\define theme-name() Material Theme
+\define theme-url() https://github.com/material-theme/vsc-material-theme
+\define theme-author() Mattia Astorino
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

@@ -1,0 +1,28 @@
+{
+    "tiddlers": [
+        {
+            "file": "lang-xml.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/lang-xml.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "svg-schema.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/svg-schema.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "plugin.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml/plugin.js",
+                "module-type": "codemirror6-plugin"
+            }
+        }
+    ]
+}

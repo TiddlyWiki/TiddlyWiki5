@@ -1,0 +1,495 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-catppuccin/styles
+tags: $:/tags/Stylesheet
+
+\rules only macrocallinline macrocallblock conditional
+
+/* ============================================================================
+   Catppuccin Theme for CodeMirror 6
+   ============================================================================
+   
+   Based on https://github.com/catppuccin/catppuccin
+   
+   Catppuccin is a community-driven pastel theme with 4 flavors:
+   - Latte (light)
+   - Frappé (medium dark)
+   - Macchiato (dark)
+   - Mocha (darkest)
+   
+   Soothing colors designed to be easy on the eyes.
+   
+   ============================================================================ */
+
+/* ============================================================================
+   Catppuccin Latte (Light)
+   ============================================================================ */
+
+.cm6-theme-catppuccin-latte,
+[data-cm6-theme="catppuccin-latte"] {
+  --wt-bg: #eff1f5;             /* Base */
+  --wt-bg-subtle: #e6e9ef;      /* Mantle */
+  --wt-fg: #4c4f69;             /* Text */
+  --wt-fg-muted: #6c6f85;       /* Subtext0 */
+  --wt-fg-faint: #9ca0b0;       /* Overlay0 */
+  --wt-border: #ccd0da;         /* Surface0 */
+  --wt-selection: rgba(114, 135, 253, 0.2);
+  --wt-line-highlight: rgba(172, 176, 190, 0.15);
+
+  --wt-teal: #179299;           /* Teal */
+  --wt-teal-dim: #179299;
+  --wt-blue: #1e66f5;           /* Blue */
+  --wt-violet: #8839ef;         /* Mauve */
+  --wt-cyan: #04a5e5;           /* Sky */
+  --wt-orange: #fe640b;         /* Peach */
+  --wt-rose: #d20f39;           /* Red */
+  --wt-amber: #df8e1d;          /* Yellow */
+  --wt-slate: #5c5f77;          /* Subtext1 */
+  --wt-purple: #8839ef;         /* Mauve */
+  --wt-green: #40a02b;          /* Green */
+  --wt-red: #d20f39;
+  --wt-pink: #ea76cb;           /* Pink */
+  --wt-lavender: #7287fd;       /* Lavender */
+
+  --wt-bold: #4c4f69;
+  --wt-italic: #5c5f77;
+  --wt-strike: #9ca0b0;
+  --wt-underline: #4c4f69;
+  --wt-heading: #1e66f5;
+
+  --wt-code-bg: #e6e9ef;
+  --wt-code-fg: #ea76cb;
+
+  --wt-highlight-bg: rgba(223, 142, 29, 0.2);
+  --wt-highlight-fg: #df8e1d;
+
+  --wt-comment: #9ca0b0;
+  --wt-mark: #ccd0da;
+}
+
+/* ============================================================================
+   Catppuccin Frappé (Medium Dark)
+   ============================================================================ */
+
+.cm6-theme-catppuccin-frappe,
+[data-cm6-theme="catppuccin-frappe"] {
+  --wt-bg: #303446;             /* Base */
+  --wt-bg-subtle: #292c3c;      /* Mantle */
+  --wt-fg: #c6d0f5;             /* Text */
+  --wt-fg-muted: #a5adce;       /* Subtext0 */
+  --wt-fg-faint: #737994;       /* Overlay0 */
+  --wt-border: #414559;         /* Surface0 */
+  --wt-selection: rgba(186, 187, 241, 0.25);
+  --wt-line-highlight: rgba(65, 69, 89, 0.5);
+
+  --wt-teal: #81c8be;           /* Teal */
+  --wt-teal-dim: #81c8be;
+  --wt-blue: #8caaee;           /* Blue */
+  --wt-violet: #ca9ee6;         /* Mauve */
+  --wt-cyan: #99d1db;           /* Sky */
+  --wt-orange: #ef9f76;         /* Peach */
+  --wt-rose: #e78284;           /* Red */
+  --wt-amber: #e5c890;          /* Yellow */
+  --wt-slate: #b5bfe2;          /* Subtext1 */
+  --wt-purple: #ca9ee6;
+  --wt-green: #a6d189;          /* Green */
+  --wt-red: #e78284;
+  --wt-pink: #f4b8e4;           /* Pink */
+  --wt-lavender: #babbf1;       /* Lavender */
+
+  --wt-bold: #c6d0f5;
+  --wt-italic: #b5bfe2;
+  --wt-strike: #737994;
+  --wt-underline: #c6d0f5;
+  --wt-heading: #8caaee;
+
+  --wt-code-bg: #292c3c;
+  --wt-code-fg: #f4b8e4;
+
+  --wt-highlight-bg: rgba(229, 200, 144, 0.2);
+  --wt-highlight-fg: #e5c890;
+
+  --wt-comment: #737994;
+  --wt-mark: #414559;
+}
+
+/* ============================================================================
+   Catppuccin Macchiato (Dark)
+   ============================================================================ */
+
+.cm6-theme-catppuccin-macchiato,
+[data-cm6-theme="catppuccin-macchiato"] {
+  --wt-bg: #24273a;             /* Base */
+  --wt-bg-subtle: #1e2030;      /* Mantle */
+  --wt-fg: #cad3f5;             /* Text */
+  --wt-fg-muted: #a5adcb;       /* Subtext0 */
+  --wt-fg-faint: #6e738d;       /* Overlay0 */
+  --wt-border: #363a4f;         /* Surface0 */
+  --wt-selection: rgba(183, 189, 248, 0.25);
+  --wt-line-highlight: rgba(54, 58, 79, 0.5);
+
+  --wt-teal: #8bd5ca;           /* Teal */
+  --wt-teal-dim: #8bd5ca;
+  --wt-blue: #8aadf4;           /* Blue */
+  --wt-violet: #c6a0f6;         /* Mauve */
+  --wt-cyan: #91d7e3;           /* Sky */
+  --wt-orange: #f5a97f;         /* Peach */
+  --wt-rose: #ed8796;           /* Red */
+  --wt-amber: #eed49f;          /* Yellow */
+  --wt-slate: #b8c0e0;          /* Subtext1 */
+  --wt-purple: #c6a0f6;
+  --wt-green: #a6da95;          /* Green */
+  --wt-red: #ed8796;
+  --wt-pink: #f5bde6;           /* Pink */
+  --wt-lavender: #b7bdf8;       /* Lavender */
+
+  --wt-bold: #cad3f5;
+  --wt-italic: #b8c0e0;
+  --wt-strike: #6e738d;
+  --wt-underline: #cad3f5;
+  --wt-heading: #8aadf4;
+
+  --wt-code-bg: #1e2030;
+  --wt-code-fg: #f5bde6;
+
+  --wt-highlight-bg: rgba(238, 212, 159, 0.2);
+  --wt-highlight-fg: #eed49f;
+
+  --wt-comment: #6e738d;
+  --wt-mark: #363a4f;
+}
+
+/* ============================================================================
+   Catppuccin Mocha (Darkest) - Default
+   ============================================================================ */
+
+.cm6-theme-catppuccin,
+.cm6-theme-catppuccin-mocha,
+[data-cm6-theme="catppuccin"],
+[data-cm6-theme="catppuccin-mocha"] {
+  --wt-bg: #1e1e2e;             /* Base */
+  --wt-bg-subtle: #181825;      /* Mantle */
+  --wt-fg: #cdd6f4;             /* Text */
+  --wt-fg-muted: #a6adc8;       /* Subtext0 */
+  --wt-fg-faint: #6c7086;       /* Overlay0 */
+  --wt-border: #313244;         /* Surface0 */
+  --wt-selection: rgba(180, 190, 254, 0.25);
+  --wt-line-highlight: rgba(49, 50, 68, 0.5);
+
+  --wt-teal: #94e2d5;           /* Teal */
+  --wt-teal-dim: #94e2d5;
+  --wt-blue: #89b4fa;           /* Blue */
+  --wt-violet: #cba6f7;         /* Mauve */
+  --wt-cyan: #89dceb;           /* Sky */
+  --wt-orange: #fab387;         /* Peach */
+  --wt-rose: #f38ba8;           /* Red */
+  --wt-amber: #f9e2af;          /* Yellow */
+  --wt-slate: #bac2de;          /* Subtext1 */
+  --wt-purple: #cba6f7;
+  --wt-green: #a6e3a1;          /* Green */
+  --wt-red: #f38ba8;
+  --wt-pink: #f5c2e7;           /* Pink */
+  --wt-lavender: #b4befe;       /* Lavender */
+
+  --wt-bold: #cdd6f4;
+  --wt-italic: #bac2de;
+  --wt-strike: #6c7086;
+  --wt-underline: #cdd6f4;
+  --wt-heading: #89b4fa;
+
+  --wt-code-bg: #181825;
+  --wt-code-fg: #f5c2e7;
+
+  --wt-highlight-bg: rgba(249, 226, 175, 0.2);
+  --wt-highlight-fg: #f9e2af;
+
+  --wt-comment: #6c7086;
+  --wt-mark: #313244;
+}
+
+/* ============================================================================
+   Token Overrides - Latte
+   ============================================================================ */
+
+.cm6-theme-catppuccin-latte .tok-string,
+[data-cm6-theme="catppuccin-latte"] .tok-string {
+  color: #40a02b;
+}
+
+.cm6-theme-catppuccin-latte .tok-keyword,
+[data-cm6-theme="catppuccin-latte"] .tok-keyword {
+  color: #8839ef;
+}
+
+.cm6-theme-catppuccin-latte .tok-function,
+[data-cm6-theme="catppuccin-latte"] .tok-function {
+  color: #1e66f5;
+}
+
+.cm6-theme-catppuccin-latte .tok-number,
+[data-cm6-theme="catppuccin-latte"] .tok-number {
+  color: #fe640b;
+}
+
+.cm6-theme-catppuccin-latte .tok-typeName,
+[data-cm6-theme="catppuccin-latte"] .tok-typeName {
+  color: #df8e1d;
+}
+
+/* ============================================================================
+   Token Overrides - Dark Flavors (Frappé, Macchiato, Mocha)
+   ============================================================================ */
+
+.cm6-theme-catppuccin .tok-string,
+.cm6-theme-catppuccin-mocha .tok-string,
+.cm6-theme-catppuccin-macchiato .tok-string,
+.cm6-theme-catppuccin-frappe .tok-string,
+[data-cm6-theme="catppuccin"] .tok-string,
+[data-cm6-theme="catppuccin-mocha"] .tok-string,
+[data-cm6-theme="catppuccin-macchiato"] .tok-string,
+[data-cm6-theme="catppuccin-frappe"] .tok-string {
+  color: #a6e3a1;
+}
+
+.cm6-theme-catppuccin .tok-keyword,
+.cm6-theme-catppuccin-mocha .tok-keyword,
+.cm6-theme-catppuccin-macchiato .tok-keyword,
+.cm6-theme-catppuccin-frappe .tok-keyword,
+[data-cm6-theme="catppuccin"] .tok-keyword,
+[data-cm6-theme="catppuccin-mocha"] .tok-keyword,
+[data-cm6-theme="catppuccin-macchiato"] .tok-keyword,
+[data-cm6-theme="catppuccin-frappe"] .tok-keyword {
+  color: #cba6f7;
+}
+
+.cm6-theme-catppuccin .tok-function,
+.cm6-theme-catppuccin-mocha .tok-function,
+.cm6-theme-catppuccin-macchiato .tok-function,
+.cm6-theme-catppuccin-frappe .tok-function,
+[data-cm6-theme="catppuccin"] .tok-function,
+[data-cm6-theme="catppuccin-mocha"] .tok-function,
+[data-cm6-theme="catppuccin-macchiato"] .tok-function,
+[data-cm6-theme="catppuccin-frappe"] .tok-function {
+  color: #89b4fa;
+}
+
+.cm6-theme-catppuccin .tok-number,
+.cm6-theme-catppuccin-mocha .tok-number,
+.cm6-theme-catppuccin-macchiato .tok-number,
+.cm6-theme-catppuccin-frappe .tok-number,
+[data-cm6-theme="catppuccin"] .tok-number,
+[data-cm6-theme="catppuccin-mocha"] .tok-number,
+[data-cm6-theme="catppuccin-macchiato"] .tok-number,
+[data-cm6-theme="catppuccin-frappe"] .tok-number {
+  color: #fab387;
+}
+
+.cm6-theme-catppuccin .tok-typeName,
+.cm6-theme-catppuccin-mocha .tok-typeName,
+.cm6-theme-catppuccin-macchiato .tok-typeName,
+.cm6-theme-catppuccin-frappe .tok-typeName,
+[data-cm6-theme="catppuccin"] .tok-typeName,
+[data-cm6-theme="catppuccin-mocha"] .tok-typeName,
+[data-cm6-theme="catppuccin-macchiato"] .tok-typeName,
+[data-cm6-theme="catppuccin-frappe"] .tok-typeName {
+  color: #f9e2af;
+}
+
+/* ============================================================================
+   Editor Chrome - Latte
+   ============================================================================ */
+
+.cm6-theme-catppuccin-latte .cm-editor,
+[data-cm6-theme="catppuccin-latte"] .cm-editor {
+  background-color: #eff1f5;
+}
+
+.cm6-theme-catppuccin-latte .cm-editor .cm-cursor,
+[data-cm6-theme="catppuccin-latte"] .cm-editor .cm-cursor {
+  border-left-color: #dc8a78;
+}
+
+.cm6-theme-catppuccin-latte .cm-editor .cm-gutters,
+[data-cm6-theme="catppuccin-latte"] .cm-editor .cm-gutters {
+  background-color: #e6e9ef;
+  border-right-color: #ccd0da;
+  color: #9ca0b0;
+}
+
+.cm6-theme-catppuccin-latte .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="catppuccin-latte"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #e6e9ef;
+  border-color: #ccd0da;
+}
+
+.cm6-theme-catppuccin-latte .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="catppuccin-latte"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #1e66f5;
+  color: #eff1f5;
+}
+
+.cm6-theme-catppuccin-latte .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="catppuccin-latte"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(239, 241, 245, 0.8);
+}
+
+.cm6-theme-catppuccin-latte .cm-completionMatchedText,
+[data-cm6-theme="catppuccin-latte"] .cm-completionMatchedText {
+  color: #1e66f5;
+}
+
+/* ============================================================================
+   Editor Chrome - Dark Flavors
+   ============================================================================ */
+
+.cm6-theme-catppuccin .cm-editor,
+.cm6-theme-catppuccin-mocha .cm-editor,
+[data-cm6-theme="catppuccin"] .cm-editor,
+[data-cm6-theme="catppuccin-mocha"] .cm-editor {
+  background-color: #1e1e2e;
+}
+
+.cm6-theme-catppuccin-macchiato .cm-editor,
+[data-cm6-theme="catppuccin-macchiato"] .cm-editor {
+  background-color: #24273a;
+}
+
+.cm6-theme-catppuccin-frappe .cm-editor,
+[data-cm6-theme="catppuccin-frappe"] .cm-editor {
+  background-color: #303446;
+}
+
+.cm6-theme-catppuccin .cm-editor .cm-cursor,
+.cm6-theme-catppuccin-mocha .cm-editor .cm-cursor,
+.cm6-theme-catppuccin-macchiato .cm-editor .cm-cursor,
+.cm6-theme-catppuccin-frappe .cm-editor .cm-cursor,
+[data-cm6-theme="catppuccin"] .cm-editor .cm-cursor,
+[data-cm6-theme="catppuccin-mocha"] .cm-editor .cm-cursor,
+[data-cm6-theme="catppuccin-macchiato"] .cm-editor .cm-cursor,
+[data-cm6-theme="catppuccin-frappe"] .cm-editor .cm-cursor {
+  border-left-color: #f5e0dc;
+}
+
+.cm6-theme-catppuccin .cm-editor .cm-matchingBracket,
+.cm6-theme-catppuccin-mocha .cm-editor .cm-matchingBracket,
+.cm6-theme-catppuccin-macchiato .cm-editor .cm-matchingBracket,
+.cm6-theme-catppuccin-frappe .cm-editor .cm-matchingBracket,
+[data-cm6-theme="catppuccin"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="catppuccin-mocha"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="catppuccin-macchiato"] .cm-editor .cm-matchingBracket,
+[data-cm6-theme="catppuccin-frappe"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(148, 226, 213, 0.25);
+  outline: 1px solid #94e2d5;
+}
+
+.cm6-theme-catppuccin .cm-tooltip.cm-tooltip-autocomplete,
+.cm6-theme-catppuccin-mocha .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="catppuccin"] .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="catppuccin-mocha"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #181825;
+  border-color: #313244;
+}
+
+.cm6-theme-catppuccin .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+.cm6-theme-catppuccin-mocha .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="catppuccin"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="catppuccin-mocha"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #89b4fa;
+  color: #1e1e2e;
+}
+
+.cm6-theme-catppuccin .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+.cm6-theme-catppuccin-mocha .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="catppuccin"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="catppuccin-mocha"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(30, 30, 46, 0.8);
+}
+
+.cm6-theme-catppuccin .cm-completionMatchedText,
+.cm6-theme-catppuccin-mocha .cm-completionMatchedText,
+.cm6-theme-catppuccin-macchiato .cm-completionMatchedText,
+.cm6-theme-catppuccin-frappe .cm-completionMatchedText,
+[data-cm6-theme="catppuccin"] .cm-completionMatchedText,
+[data-cm6-theme="catppuccin-mocha"] .cm-completionMatchedText,
+[data-cm6-theme="catppuccin-macchiato"] .cm-completionMatchedText,
+[data-cm6-theme="catppuccin-frappe"] .cm-completionMatchedText {
+  color: #89b4fa;
+}
+
+/* ============================================================================
+   Vim Mode - Latte (Light)
+   ============================================================================ */
+
+.cm6-theme-catppuccin-latte .cm-fat-cursor,
+[data-cm6-theme="catppuccin-latte"] .cm-fat-cursor {
+  background: #dc8a78 !important;
+}
+
+.cm6-theme-catppuccin-latte .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="catppuccin-latte"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #9ca0b0 !important;
+}
+
+.cm6-theme-catppuccin-latte .cm-vim-panel,
+[data-cm6-theme="catppuccin-latte"] .cm-vim-panel {
+  background: #e6e9ef;
+  border-color: #ccd0da;
+  color: #4c4f69;
+}
+
+.cm6-theme-catppuccin-latte .cm-vim-panel input,
+[data-cm6-theme="catppuccin-latte"] .cm-vim-panel input {
+  background: #eff1f5;
+  color: #4c4f69;
+  border-color: #ccd0da;
+}
+
+/* ============================================================================
+   Vim Mode - Dark Flavors (Frappe, Macchiato, Mocha)
+   ============================================================================ */
+
+.cm6-theme-catppuccin .cm-fat-cursor,
+.cm6-theme-catppuccin-mocha .cm-fat-cursor,
+.cm6-theme-catppuccin-macchiato .cm-fat-cursor,
+.cm6-theme-catppuccin-frappe .cm-fat-cursor,
+[data-cm6-theme="catppuccin"] .cm-fat-cursor,
+[data-cm6-theme="catppuccin-mocha"] .cm-fat-cursor,
+[data-cm6-theme="catppuccin-macchiato"] .cm-fat-cursor,
+[data-cm6-theme="catppuccin-frappe"] .cm-fat-cursor {
+  background: #f5e0dc !important;
+}
+
+.cm6-theme-catppuccin .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-catppuccin-mocha .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-catppuccin-macchiato .cm-editor:not(.cm-focused) .cm-fat-cursor,
+.cm6-theme-catppuccin-frappe .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="catppuccin"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="catppuccin-mocha"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="catppuccin-macchiato"] .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="catppuccin-frappe"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: #6c7086 !important;
+}
+
+.cm6-theme-catppuccin .cm-vim-panel,
+.cm6-theme-catppuccin-mocha .cm-vim-panel,
+.cm6-theme-catppuccin-macchiato .cm-vim-panel,
+.cm6-theme-catppuccin-frappe .cm-vim-panel,
+[data-cm6-theme="catppuccin"] .cm-vim-panel,
+[data-cm6-theme="catppuccin-mocha"] .cm-vim-panel,
+[data-cm6-theme="catppuccin-macchiato"] .cm-vim-panel,
+[data-cm6-theme="catppuccin-frappe"] .cm-vim-panel {
+  background: #181825;
+  border-color: #313244;
+  color: #cdd6f4;
+}
+
+.cm6-theme-catppuccin .cm-vim-panel input,
+.cm6-theme-catppuccin-mocha .cm-vim-panel input,
+.cm6-theme-catppuccin-macchiato .cm-vim-panel input,
+.cm6-theme-catppuccin-frappe .cm-vim-panel input,
+[data-cm6-theme="catppuccin"] .cm-vim-panel input,
+[data-cm6-theme="catppuccin-mocha"] .cm-vim-panel input,
+[data-cm6-theme="catppuccin-macchiato"] .cm-vim-panel input,
+[data-cm6-theme="catppuccin-frappe"] .cm-vim-panel input {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border-color: #313244;
+}

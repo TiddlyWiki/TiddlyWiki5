@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/color-picker/readme
+
+! Color Picker Plugin
+
+Shows inline color swatches next to color values in the editor. Click a swatch to open a color picker.
+
+!! Supported Color Formats
+
+* Hex colors: `#fff`, `#ffffff`, `#ffffffaa`
+* RGB: `rgb(255, 128, 0)`, `rgba(255, 128, 0, 0.5)`
+* HSL: `hsl(120, 50%, 50%)`, `hsla(120, 50%, 50%, 0.5)`
+
+!! Configuration
+
+Enable/disable via Control Panel > Settings > CodeMirror > Editor > Color picker

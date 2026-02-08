@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/word-count/readme
+
+! Word Count Plugin
+
+Displays a live word, character, and line count panel at the bottom of the editor.
+
+!! Features
+
+* Live word count
+* Character count
+* Line count
+* Selection statistics (shows selected words/chars when text is selected)
+
+!! Configuration
+
+Enable/disable via Control Panel > Settings > CodeMirror > Editor > Show word count

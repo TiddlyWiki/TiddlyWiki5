@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lint/unclosedPragmas
+caption: Unclosed Pragmas
+description: Check for \define/\procedure/\function without \end
+text: yes

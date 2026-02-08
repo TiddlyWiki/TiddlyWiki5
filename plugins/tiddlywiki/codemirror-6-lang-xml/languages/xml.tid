@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/xml
+tags: $:/tags/CodeMirror/Language
+name: XML
+type: application/xml
+category: Data
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-xml

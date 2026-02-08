@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/keymap-emacs/config
+tags: $:/tags/Config/CodeMirror/Keymap
+caption: Emacs
+description: Emacs-style keybindings (Ctrl-A, Ctrl-E, Ctrl-K, etc.)
+keymap-id: emacs

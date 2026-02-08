@@ -1,0 +1,12 @@
+{
+    "tiddlers": [
+        {
+            "file": "link-preview.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/link-preview/link-preview.js",
+                "module-type": "codemirror6-plugin"
+            }
+        }
+    ]
+}

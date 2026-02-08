@@ -1,0 +1,4 @@
+title: $:/config/EditorTypeMappings/
+
+text/html: codemirror-6
+text/xhtml: codemirror-6
