@@ -270,7 +270,7 @@ js.configs.recommended,
         "require-unicode-regexp": "off",
         "@stylistic/rest-spread-spacing": "error",
         "@stylistic/semi": ["error", "always", {
-            "omitLastInOneLineBlock": true
+            "omitLastInOneLineBlock": true,
             "omitLastInOneLineClassBody": true
         }],
         "@stylistic/semi-spacing": "off",
