@@ -27,7 +27,7 @@ exports.findNextMatch = function(startPos) {
 	while((nextStart = source.indexOf("((",nextStart)) >= 0) {
 		if(source.charAt(nextStart + 2) === "(") {
 			// Filter mode: (((filter))) or (((filter||sep)))
-			var match = /^\(\(\((.+?)\)\)\)/s.exec(source.substring(nextStart));
+			var match = /^\(\(\(([\s\S]+?)\)\)\)/.exec(source.substring(nextStart));
 			if(match) {
 				// Check for separator: split on last || before )))
 				var inner = match[1];

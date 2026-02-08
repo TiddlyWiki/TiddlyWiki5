@@ -326,7 +326,7 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 									name: name, type: "macro", isMVV: true, value: mvvNode
 								});
 							} else {
-								$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"])
+								$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"]);
 							}
 						});
 					} else if(srcVariable && !srcVariable.isFunctionDefinition) {
