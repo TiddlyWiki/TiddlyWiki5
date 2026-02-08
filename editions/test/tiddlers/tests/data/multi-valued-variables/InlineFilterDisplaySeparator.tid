@@ -1,0 +1,14 @@
+title: MultiValuedVariables/InlineFilterDisplaySeparator
+description: (((filter||separator))) in inline wikitext displays filter results with custom separator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+((([all[tiddlers]sort[]]||:)))
++
+title: ExpectedResult
+
+<p>$:/core:ExpectedResult:Output</p>
++

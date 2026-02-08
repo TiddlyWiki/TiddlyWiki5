@@ -1,0 +1,16 @@
+title: MultiValuedVariables/InlineDisplay
+description: ((var)) in inline wikitext displays MVV with default comma-space separator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$let items={{{ [all[tiddlers]sort[]] }}}>
+((items))
+</$let>
++
+title: ExpectedResult
+
+<p>$:/core, ExpectedResult, Output</p>
++

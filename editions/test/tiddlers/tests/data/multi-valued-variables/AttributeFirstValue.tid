@@ -1,0 +1,16 @@
+title: MultiValuedVariables/AttributeFirstValue
+description: ((var)) on non-MVV-aware widget attribute returns first value only
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$let items={{{ [all[tiddlers]sort[]] }}}>
+<$text text=((items))/>
+</$let>
++
+title: ExpectedResult
+
+<p>$:/core</p>
++

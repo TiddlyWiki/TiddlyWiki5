@@ -381,19 +381,31 @@ filterFn: only include attributes where filterFn(name) returns true
 Widget.prototype.computeAttributes = function(options) {
 	options = options || {};
 	var changedAttributes = {},
-		self = this;
+		self = this,
+		newMultiValuedAttributes = Object.create(null);
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		if(options.filterFn) {
 			if(!options.filterFn(name)) {
 				return;
 			}
 		}
-		var value = self.computeAttribute(attribute);
-		if(self.attributes[name] !== value) {
+		var value = self.computeAttribute(attribute),
+			multiValue = null;
+		if($tw.utils.isArray(value)) {
+			multiValue = value;
+			newMultiValuedAttributes[name] = multiValue;
+			value = value[0] || "";
+		}
+		var changed = (self.attributes[name] !== value);
+		if(!changed && multiValue && self.multiValuedAttributes) {
+			changed = !$tw.utils.isArrayEqual(self.multiValuedAttributes[name] || [], multiValue);
+		}
+		if(changed) {
 			self.attributes[name] = value;
 			changedAttributes[name] = true;
 		}
 	});
+	this.multiValuedAttributes = newMultiValuedAttributes;
 	return changedAttributes;
 };
 
@@ -431,7 +443,7 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 		});
 		// Invoke the macro
 		var variableInfo = this.getVariableInfo(macroName,{params: params});
-		if(options.asList) {
+		if(options.asList || attribute.isMVV) {
 			value = variableInfo.resultList;
 		} else {
 			value = variableInfo.text;
