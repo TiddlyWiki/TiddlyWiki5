@@ -3,7 +3,7 @@
 .vs/
 .vscode/
 tmp/
-output/
+output*/
 node_modules/
 /test-results/
 /playwright-report/
