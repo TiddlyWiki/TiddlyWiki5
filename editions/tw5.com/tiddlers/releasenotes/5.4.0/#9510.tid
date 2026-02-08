@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9510
+description: Extend substitute filter functionality
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: filters
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9510
+github-contributors: yaisog
+
+The substitute filter operator is extended to support multi-valued parameters, enabling parallel substitutions across multiple input titles.
