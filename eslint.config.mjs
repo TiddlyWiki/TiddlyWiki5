@@ -58,7 +58,9 @@ js.configs.recommended,
         "@stylistic/array-bracket-spacing": "off",
         "array-callback-return": "off",
         "@stylistic/array-element-newline": "off",
-        "arrow-body-style": "error",
+        "arrow-body-style": ["error", "as-needed", {
+            "requireReturnForObjectLiteral": true
+        }],
         "@stylistic/arrow-parens": ["error", "always"],
         "@stylistic/arrow-spacing": ["error", {
             after: true,
