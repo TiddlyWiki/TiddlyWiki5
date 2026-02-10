@@ -1,0 +1,37 @@
+created: 20250208120000000
+modified: 20250208120000000
+tags: WikiText [[Widget Attributes]]
+title: Multi-Valued Variable Attribute Values
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.4.0">> Multi-valued variable attribute values are indicated with double round brackets around the variable name. This passes the complete list of values of a [[multi-valued variable|Multi-Valued Variables]] to the attribute, rather than just the first value.
+
+```
+<$transclude $variable="myproc" items=((myvar))/>
+```
+
+This is the multi-valued counterpart to the [[Variable Attribute Values]] syntax `<<var>>`, which only returns the first value for backwards compatibility. The relationship mirrors the existing convention in filter operands where `<var>` returns a single value and `(var)` returns all values.
+
+! Non-MVV-Aware Attributes
+
+When `((var))` is used on a widget attribute that does not support multi-valued variables (such as the `text` attribute of the TextWidget), only the first value is used:
+
+```
+<$text text=((myvar))/>
+```
+
+! Passing Multi-Valued Variables to Procedures
+
+The primary use case for this syntax is passing multi-valued variables through the `$transclude` pipeline to procedures and functions:
+
+```
+\procedure showItems(itemList)
+<$text text={{{ [(itemList)join[-]] }}}/>
+\end
+
+<$let items={{{ [all[tiddlers]sort[]] }}}>
+<$transclude $variable="showItems" itemList=((items))/>
+</$let>
+```
+
+In this example, the complete list of tiddler titles stored in `items` is passed to the `itemList` parameter of the `showItems` procedure.
