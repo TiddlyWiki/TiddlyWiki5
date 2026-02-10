@@ -43,7 +43,7 @@ Command.prototype.execute = function() {
 		namedParames,
 		tiddlerFilter,
 		options = {};
-	if (regFilter.test(this.params[1])) {  
+	if(regFilter.test(this.params[1])) {
 		namedParames = this.commander.extractNamedParameters(this.params.slice(1));
 		tiddlerFilter = namedParames.filter || "[all[tiddlers]]";
 	} else {
@@ -177,7 +177,7 @@ WikiFolderMaker.prototype.saveCustomPlugin = function(pluginTiddler) {
 	$tw.utils.each(pluginTiddlers,function(tiddler,title) {
 		if(!tiddler.title) {
 			tiddler.title = title;
-		 }
+		}
 		self.saveTiddler(directory,new $tw.Tiddler(tiddler));
 	});
 };

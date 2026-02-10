@@ -10,7 +10,9 @@ Initialise $:/info/browser tiddlers
 "use strict";
 
 exports.getInfoTiddlerFields = function() {
-	var mapBoolean = function(value) {return value ? "yes" : "no";},
+	var mapBoolean = function(value) {
+			return value ? "yes" : "no";
+		},
 		infoTiddlerFields = [];
 	// Basics
 	if($tw.browser) {
@@ -43,7 +45,7 @@ exports.getInfoTiddlerFields = function() {
 				["is/mobile","mobile"]
 			];
 		$tw.browser = $tw.utils.extend($tw.browser, {
-			is: bowser.browser,
+			is: bowser.browser
 		});
 		$tw.utils.each(mappings,function(mapping) {
 			var value = bowser.browser[mapping[1]];

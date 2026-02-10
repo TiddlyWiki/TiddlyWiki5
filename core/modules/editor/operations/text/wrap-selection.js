@@ -44,7 +44,7 @@ exports["wrap-selection"] = function(event,operation) {
 				break;
 		}
 		return result;
-	}
+	};
 
 	function togglePrefixSuffix() {
 		if(o.text.substring(o.selStart - prefix.length, o.selStart + suffix.length) === prefix + suffix) {
@@ -125,7 +125,7 @@ exports["wrap-selection"] = function(event,operation) {
 	} else if(o.text.substring(o.selStart - prefix.length, o.selStart) === prefix &&
 				o.text.substring(o.selEnd, o.selEnd + suffix.length) === suffix) {
 		// Prefix and suffix are present BUT not selected -> remove them
-		removePrefixSuffix({"lenPrefix": prefix.length, "lenSuffix": suffix.length});
+		removePrefixSuffix({lenPrefix: prefix.length, lenSuffix: suffix.length});
 	} else {
 		// Add the prefix and suffix
 		addPrefixSuffix();

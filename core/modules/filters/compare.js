@@ -26,10 +26,22 @@ exports.compare = function(source,operator,options) {
 };
 
 var modes = {
-	"eq": function(value) {return value === 0;},
-	"ne": function(value) {return value !== 0;},
-	"gteq": function(value) {return value >= 0;},
-	"gt": function(value) {return value > 0;},
-	"lteq": function(value) {return value <= 0;},
-	"lt": function(value) {return value < 0;}
-}
+	eq: function(value) {
+		return value === 0;
+	},
+	ne: function(value) {
+		return value !== 0;
+	},
+	gteq: function(value) {
+		return value >= 0;
+	},
+	gt: function(value) {
+		return value > 0;
+	},
+	lteq: function(value) {
+		return value <= 0;
+	},
+	lt: function(value) {
+		return value < 0;
+	}
+};

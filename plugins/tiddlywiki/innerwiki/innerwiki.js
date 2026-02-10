@@ -35,7 +35,7 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 	// Create wrapper
 	this.domWrapper = dm("div",{
 		document: this.document,
-		"class": (this.innerWikiClass || "").split(" ").concat(["tc-innerwiki-wrapper"]).join(" "),
+		class: (this.innerWikiClass || "").split(" ").concat(["tc-innerwiki-wrapper"]).join(" "),
 		style: {
 			overflow: "hidden",
 			position: "relative",
@@ -53,7 +53,7 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 			pointerEvents: "none"
 		},
 		attributes: {
-			"viewBox": "0 0 " + this.innerWikiClipWidth + " " + this.innerWikiClipHeight
+			viewBox: "0 0 " + this.innerWikiClipWidth + " " + this.innerWikiClipHeight
 		}
 	});
 	this.domWrapper.appendChild(this.domSVG);
@@ -63,7 +63,7 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 		// Create iframe
 		this.domIFrame = dm("iframe",{
 			document: this.document,
-			"class": "tc-innerwiki-iframe",
+			class: "tc-innerwiki-iframe",
 			style: {
 				position: "absolute",
 				maxWidth: "none",
@@ -281,7 +281,7 @@ InnerWikiWidget.prototype.refresh = function(changedTiddlers) {
 			this.deleteAnchors();
 			this.createAnchors();
 		}
-		return childrenRefreshed
+		return childrenRefreshed;
 	}
 };
 
@@ -308,7 +308,7 @@ InnerWikiWidget.prototype.saveScreenshot = function(options,callback) {
 		throw "Google Puppeteer not found";
 	}
 	// Take screenshots
-	puppeteer.launch().then(async browser => {
+	puppeteer.launch().then(async (browser) => {
 		// NOTE: Copying Google's sample code by using new fangled promises "await"
 		const page = await browser.newPage();
 		await page.setContent(self.createInnerHTML(),{

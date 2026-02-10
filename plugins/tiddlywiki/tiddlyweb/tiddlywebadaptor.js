@@ -73,7 +73,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			if(err) {
 				return callback(err);
 			}
-			//If Browser-Storage plugin is present, cache pre-loaded tiddlers and add back after sync from server completes 
+			//If Browser-Storage plugin is present, cache pre-loaded tiddlers and add back after sync from server completes
 			if($tw.browserStorage && $tw.browserStorage.isEnabled()) {
 				$tw.browserStorage.cachePreloadTiddlers();
 			}
@@ -119,7 +119,7 @@ TiddlyWebAdaptor.prototype.login = function(username,password,callback) {
 			callback(err);
 		},
 		headers: {
-			"accept": "application/json",
+			accept: "application/json",
 			"X-Requested-With": "TiddlyWiki"
 		}
 	};
@@ -142,7 +142,7 @@ TiddlyWebAdaptor.prototype.logout = function(callback) {
 				callback(err);
 			},
 			headers: {
-				"accept": "application/json",
+				accept: "application/json",
 				"X-Requested-With": "TiddlyWiki"
 			}
 		};
@@ -190,7 +190,7 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 			// Invoke the callback with the skinny tiddlers
 			callback(null,tiddlers);
 			// If Browswer Storage tiddlers were cached on reloading the wiki, add them after sync from server completes in the above callback.
-			if($tw.browserStorage && $tw.browserStorage.isEnabled()) { 
+			if($tw.browserStorage && $tw.browserStorage.isEnabled()) {
 				$tw.browserStorage.addCachedTiddlers();
 			}
 		}
@@ -218,7 +218,7 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			}
 			//If Browser-Storage plugin is present, remove tiddler from local storage after successful sync to the server
 			if($tw.browserStorage && $tw.browserStorage.isEnabled()) {
-				$tw.browserStorage.removeTiddlerFromLocalStorage(tiddler.fields.title)
+				$tw.browserStorage.removeTiddlerFromLocalStorage(tiddler.fields.title);
 			}
 			// Save the details of the new revision of the tiddler
 			var etag = request.getResponseHeader("Etag");
@@ -292,8 +292,8 @@ TiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {
 	if(tiddler) {
 		$tw.utils.each(tiddler.fields,function(fieldValue,fieldName) {
 			var fieldString = fieldName === "tags" ?
-								tiddler.fields.tags :
-								tiddler.getFieldString(fieldName); // Tags must be passed as an array, not a string
+				tiddler.fields.tags :
+				tiddler.getFieldString(fieldName); // Tags must be passed as an array, not a string
 
 			if(knownFields.indexOf(fieldName) !== -1) {
 				// If it's a known field, just copy it across

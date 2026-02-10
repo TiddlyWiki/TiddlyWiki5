@@ -126,14 +126,14 @@ function checkVisibility() {
 			var currValue = $tw.wiki.getTiddlerText(title),
 				newValue = currValue;
 			// Within viewport
-			if(!(elementRect.left > viewportRect.right || 
-								elementRect.right < viewportRect.left || 
+			if(!(elementRect.left > viewportRect.right ||
+								elementRect.right < viewportRect.left ||
 								elementRect.top > viewportRect.bottom ||
 								elementRect.bottom < viewportRect.top)) {
 				newValue = STATE_IN_VIEW;
 			// Near viewport
-			} else if(!(elementRect.left > (viewportRect.right + viewportWidth) || 
-								elementRect.right < (viewportRect.left - viewportWidth) || 
+			} else if(!(elementRect.left > (viewportRect.right + viewportWidth) ||
+								elementRect.right < (viewportRect.left - viewportWidth) ||
 								elementRect.top > (viewportRect.bottom + viewportHeight) ||
 								elementRect.bottom < (viewportRect.top - viewportHeight))) {
 				newValue = STATE_NEAR_VIEW;
@@ -144,7 +144,7 @@ function checkVisibility() {
 				}
 			}
 			if(newValue !== currValue) {
-				$tw.wiki.addTiddler(new $tw.Tiddler({title: title, text: newValue}));				
+				$tw.wiki.addTiddler(new $tw.Tiddler({title: title, text: newValue}));
 			}
 		}
 	});
@@ -157,7 +157,7 @@ function updateAddressBar() {
 			var hash = "#" + encodeURIComponent(top.title) + ":" + encodeURIComponent("[list[$:/StoryList]]");
 			if(title && $tw.locationHash !== hash) {
 				$tw.locationHash = hash;
-				window.location.hash = hash;			
+				window.location.hash = hash;
 			}
 		}
 	}
@@ -188,7 +188,7 @@ function restoreScrollPosition() {
 			json = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY_PREFIX + window.location.pathname));
 		} catch(e) {
 			localStorageHasFailed = true;
-		};		
+		}
 	}
 	return json;
 }
@@ -209,7 +209,7 @@ function scrollToTiddler(tiddlerDetails) {
 			var rect = topmostTiddlerElement.getBoundingClientRect(),
 				scrollY = Math.round(window.scrollY + rect.top + tiddlerDetails.offset);
 			if(scrollY !== window.scrollY) {
-				window.scrollTo(window.scrollX,scrollY);					
+				window.scrollTo(window.scrollX,scrollY);
 			}
 		}
 	}

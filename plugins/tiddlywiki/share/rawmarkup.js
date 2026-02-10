@@ -52,7 +52,7 @@ if(hash && hash.charAt(0) === "#") {
 					return 0;
 				}
 			});
-			// Load the tiddler preview						
+			// Load the tiddler preview
 			var previewWrapper = document.getElementById("startup-warning-preview");
 			for(var index=0; index < tiddlers.length; index++) {
 				var tiddler = tiddlers[index],

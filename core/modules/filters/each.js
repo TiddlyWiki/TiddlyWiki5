@@ -15,8 +15,8 @@ Export our filter function
 */
 exports.each = function(source,operator,options) {
 	var results =[] ,
-	value,values = {},
-	field = operator.operand || "title";
+		value,values = {},
+		field = operator.operand || "title";
 	if(operator.suffix === "value" && field === "title") {
 		source(function(tiddler,title) {
 			if(!$tw.utils.hop(values,title)) {

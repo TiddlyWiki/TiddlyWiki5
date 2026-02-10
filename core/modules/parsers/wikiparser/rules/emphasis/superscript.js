@@ -12,8 +12,8 @@ Wiki text inline rule for emphasis - superscript. For example:
 This wikiparser can be modified using the rules eg:
 
 ```
-\rules except superscript 
-\rules only superscript 
+\rules except superscript
+\rules only superscript
 ```
 
 \*/

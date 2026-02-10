@@ -43,7 +43,6 @@ exports.decryptStoreArea = function(encryptedStoreArea,password) {
 	}
 };
 
-
 /*
 Attempt to extract the tiddlers from an encrypted store area using the current password. If that fails, the user is prompted for a password.
 encryptedStoreArea: text of the TiddlyWiki encrypted store area

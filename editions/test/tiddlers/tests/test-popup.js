@@ -56,4 +56,3 @@ describe("Popup tests", function() {
 		expect(popup.buildCoordinates("dummy", coordinates)).toEqual("(0,0,0,0)");
 	});
 });
-

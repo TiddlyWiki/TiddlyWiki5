@@ -44,7 +44,7 @@ Command.prototype.execute = function() {
 					return self.callback(err);
 				}
 				wiki.addTiddlers(tiddlers);
-				self.callback();	
+				self.callback();
 			}
 		});
 	return null;

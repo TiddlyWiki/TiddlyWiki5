@@ -16,12 +16,12 @@ exports.reduce = function(operationSubFunction,options) {
 				index = 0;
 			results.each(function(title) {
 				var list = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
-					"currentTiddler": "" + title,
+					currentTiddler: "" + title,
 					"..currentTiddler": widget.getVariable("currentTiddler"),
-					"index": "" + index,
-					"revIndex": "" +  (results.length - 1 - index),
-					"length": "" + results.length,
-					"accumulator": "" + accumulator
+					index: "" + index,
+					revIndex: "" +  (results.length - 1 - index),
+					length: "" + results.length,
+					accumulator: "" + accumulator
 				}));
 				if(list.length > 0) {
 					accumulator = "" + list[0];
@@ -31,5 +31,5 @@ exports.reduce = function(operationSubFunction,options) {
 			results.clear();
 			results.push(accumulator);
 		}
-	}
+	};
 };

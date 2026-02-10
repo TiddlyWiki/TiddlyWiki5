@@ -12,8 +12,8 @@ Wiki text inline rule for LaTeX. For example:
 This wikiparser can be modified using the rules eg:
 
 ```
-\rules except latex-parser 
-\rules only latex-parser 
+\rules except latex-parser
+\rules only latex-parser
 ```
 
 \*/
@@ -41,7 +41,7 @@ exports.parse = function() {
 	// Process the text
 	if(match) {
 		text = this.parser.source.substring(this.parser.pos,match.index);
-		displayMode = text.indexOf('\n') != -1;
+		displayMode = text.indexOf("\n") != -1;
 		this.parser.pos = match.index + match[0].length;
 	} else {
 		text = this.parser.source.substr(this.parser.pos);

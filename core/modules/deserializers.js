@@ -143,7 +143,7 @@ var deserializeTiddlerDiv = function(text /* [,fields] */) {
 		for(var f=1; f<arguments.length; f++) {
 			var fields = arguments[f];
 			for(var t in fields) {
-				result[t] = fields[t];		
+				result[t] = fields[t];
 			}
 		}
 	}

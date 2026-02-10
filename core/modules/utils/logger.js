@@ -49,7 +49,7 @@ Logger.prototype.log = function(/* args */) {
 			logMessage[logMessage.length-1] += $tw.utils.terminalColour();
 			return Function.apply.call(console.log, console, logMessage);
 		}
-	} 
+	}
 };
 
 /*
@@ -83,7 +83,7 @@ Logger.prototype.alert = function(/* args */) {
 			$tw.utils.each(existingAlerts,function(title) {
 				var tiddler = $tw.wiki.getTiddler(title);
 				if(tiddler.fields.text === text && tiddler.fields.component === self.componentName && tiddler.fields.modified && (!alertFields || tiddler.fields.modified < alertFields.modified)) {
-						alertFields = $tw.utils.extend({},tiddler.fields);
+					alertFields = $tw.utils.extend({},tiddler.fields);
 				}
 			});
 			if(alertFields) {

@@ -64,7 +64,7 @@ function Slicer(options) {
 	this.parentStack.push({chunk: 0, actions: this.getMatchingSlicerRuleActions("(document)")});
 	this.insertPrecedingChunk({
 		"toc-type": "anchor",
-		"title": this.baseTiddlerTitle + "-anchor-"
+		title: this.baseTiddlerTitle + "-anchor-"
 	});
 	// Set up the parser
 	var sax = require("$:/plugins/tiddlywiki/sax/sax.js");
@@ -129,29 +129,29 @@ Slicer.prototype.testSlicerRuleMatching = function() {
 	var tests = [
 			{
 				test: this.searchSlicerRules("title",[
-						{selector: "title,head,body", rules: true},
-						{selector: "body", rules: true}
-					],[
-						{tag:"head"}
-					]),
+					{selector: "title,head,body", rules: true},
+					{selector: "body", rules: true}
+				],[
+					{tag:"head"}
+				]),
 				result: "title,head,body"
 			},
 			{
 				test: this.searchSlicerRules("body",[
-						{selector: "title,head,body", rules: true},
-						{selector: "body", rules: true}
-					],[
-						{tag:"head"}
-					]),
+					{selector: "title,head,body", rules: true},
+					{selector: "body", rules: true}
+				],[
+					{tag:"head"}
+				]),
 				result: "title,head,body"
 			},
-			{	
+			{
 				test: this.searchSlicerRules("title",[
-						{selector: "head > title", rules: true},
-						{selector: "title", rules: true}
-					],[
-						{tag:"head"}
-					]),
+					{selector: "head > title", rules: true},
+					{selector: "title", rules: true}
+				],[
+					{tag:"head"}
+				]),
 				result: "head > title"
 			}
 		],
@@ -166,46 +166,46 @@ Slicer.prototype.searchSlicerRules = function(name,rules,elementStack) {
 	return rules.find(function(rule) {
 		// Split and trim the selectors for this rule
 		return !!rule.selector.split(",").map(function(selector) {
-				return selector.trim();
+			return selector.trim();
 			// Find the first selector that matches, if any
-			}).find(function(selector) {
-				// Split and trim the parts of the selector
-				var parts = selector.split(" ").map(function(part) {
-					return part.trim();
-				});
-				// * matches any element
-				if(parts.length === 1 && parts[0] === "*") {
-					return true;
-				}
-				// Make a copy of the element stack so that we can be destructive
-				var elements = elementStack.slice(0).concat({tag: name}),
-					nextElementMustBeAtTopOfStack = true,
-					currentPart = parts.length - 1;
-				while(currentPart >= 0) {
-					if(parts[currentPart] === ">") {
-						nextElementMustBeAtTopOfStack = true;
-					} else {
-						if(!nextElementMustBeAtTopOfStack) {
-							while(elements.length > 0 && elements[elements.length - 1].tag !== parts[currentPart]) {
-								elements.pop();
-							}
-						}
-						if(elements.length === 0 || elements[elements.length - 1].tag !== parts[currentPart]) {
-							return false;
-						}
-						elements.pop();
-						nextElementMustBeAtTopOfStack = false;
-					}
-					currentPart--;
-				}
-				return true;
+		}).find(function(selector) {
+			// Split and trim the parts of the selector
+			var parts = selector.split(" ").map(function(part) {
+				return part.trim();
 			});
+				// * matches any element
+			if(parts.length === 1 && parts[0] === "*") {
+				return true;
+			}
+			// Make a copy of the element stack so that we can be destructive
+			var elements = elementStack.slice(0).concat({tag: name}),
+				nextElementMustBeAtTopOfStack = true,
+				currentPart = parts.length - 1;
+			while(currentPart >= 0) {
+				if(parts[currentPart] === ">") {
+					nextElementMustBeAtTopOfStack = true;
+				} else {
+					if(!nextElementMustBeAtTopOfStack) {
+						while(elements.length > 0 && elements[elements.length - 1].tag !== parts[currentPart]) {
+							elements.pop();
+						}
+					}
+					if(elements.length === 0 || elements[elements.length - 1].tag !== parts[currentPart]) {
+						return false;
+					}
+					elements.pop();
+					nextElementMustBeAtTopOfStack = false;
+				}
+				currentPart--;
+			}
+			return true;
 		});
+	});
 };
 
 Slicer.prototype.getBaseTiddlerTitle = function(baseTiddlerTitle) {
 	if(baseTiddlerTitle) {
-		return baseTiddlerTitle		
+		return baseTiddlerTitle;
 	} else {
 		if(this.sourceTiddlerTitle) {
 			return "Sliced up " + this.sourceTiddlerTitle + ":";
@@ -242,13 +242,12 @@ Slicer.prototype.getTiddlerAsHtml = function(tiddler) {
 	return ["<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">","<html xmlns=\"http://www.w3.org/1999/xhtml\">","<head>","</head>","<body>",container.innerHTML,"</body>","</html>"].join("\n");
 };
 
-
 Slicer.prototype.getImmediateParent = function() {
 	return this.parentStack.slice(-1)[0];
 };
 
 Slicer.prototype.onError = function(e) {
-	console.error("Sax error: ", e)
+	console.error("Sax error: ", e);
 	// Try to resume after errors
 	this.sax.error = null;
 	this.sax.resume();
@@ -267,7 +266,7 @@ Slicer.prototype.onOpenTag = function(node) {
 	if(node.attributes.id) {
 		this.insertPrecedingChunk({
 			"toc-type": "anchor",
-			"title": this.baseTiddlerTitle + "-anchor-" + node.attributes.id.value
+			title: this.baseTiddlerTitle + "-anchor-" + node.attributes.id.value
 		});
 	}
 	// Check for an element that should start a new chunk
@@ -318,7 +317,7 @@ Slicer.prototype.onOpenAnchor = function(node) {
 				base = parts[0],
 				hash = parts[1] || "",
 				title = $tw.utils.resolvePath(base,this.baseTiddlerTitle) + "-anchor-" + hash;
-			this.addTextToCurrentChunk("<$link to=\"" + title + "\">");			
+			this.addTextToCurrentChunk("<$link to=\"" + title + "\">");
 		}
 	}
 };
@@ -355,10 +354,10 @@ Slicer.prototype.onCloseTag = function(name) {
 		actions = e.actions,
 		selfClosing = e.isSelfClosing;
 	// Set the caption if required
-// TODO
-// 	if(actions.setCaption) {
-// 		this.chunks[this.currentChunk].caption = this.chunks[this.currentChunk].title;
-// 	}
+	// TODO
+	// 	if(actions.setCaption) {
+	// 		this.chunks[this.currentChunk].caption = this.chunks[this.currentChunk].title;
+	// 	}
 	// Render the tag
 	if(actions.isAnchor) {
 		this.onCloseAnchor(e);
@@ -367,13 +366,13 @@ Slicer.prototype.onCloseTag = function(name) {
 		if(markupInfo) {
 			this.addTextToCurrentChunk(markupInfo.suffix);
 		} else {
-			this.addTextToCurrentChunk("</" + name + ">");			
+			this.addTextToCurrentChunk("</" + name + ">");
 		}
 	}
 	// Check for an element that started a new chunk
 	if(actions.startNewChunk) {
 		if(!actions.mergeNext) {
-			this.currentChunk = null;			
+			this.currentChunk = null;
 		}
 		// If this is a parent and not a heading then also pop it from the parent stack
 		if(actions.isParent && !actions.headingLevel) {
@@ -385,7 +384,9 @@ Slicer.prototype.onCloseTag = function(name) {
 Slicer.prototype.onText = function(text) {
 	var self = this;
 	// Discard the text if we're inside an element with actions.discard set true
-	if(this.elementStack.some(function(e) {return e.actions.discard;})) {
+	if(this.elementStack.some(function(e) {
+		return e.actions.discard;
+	})) {
 		return;
 	}
 	// Optionally escape common character sequences that might be parsed as wikitext
@@ -436,7 +437,7 @@ Slicer.prototype.startNewChunk = function(fields) {
 
 Slicer.prototype.insertPrecedingChunk = function(fields) {
 	if(!fields.title) {
-		throw "Chunks need a title"
+		throw "Chunks need a title";
 	}
 	if(!this.currentChunk) {
 		this.startNewChunk(fields);
@@ -455,7 +456,7 @@ Slicer.prototype.insertPrecedingChunk = function(fields) {
 		// Adjust the current chunk pointer
 		this.currentChunk += 1;
 		// Insert a pointer to the new chunk in the parent
-		parentChunk.list.splice(parentChunk.list.length - 1,0,fields.title);		
+		parentChunk.list.splice(parentChunk.list.length - 1,0,fields.title);
 	}
 };
 

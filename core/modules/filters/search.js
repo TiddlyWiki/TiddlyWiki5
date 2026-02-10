@@ -20,7 +20,7 @@ exports.search = function(source,operator,options) {
 			},
 			excludeFields = false,
 			fieldList = operator.suffixes[0] || [],
-			firstField = fieldList[0] || "", 
+			firstField = fieldList[0] || "",
 			firstChar = firstField.charAt(0),
 			fields;
 		if(firstChar === "-") {

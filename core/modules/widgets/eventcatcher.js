@@ -76,14 +76,14 @@ EventWidget.prototype.cacheEventListeners = function() {
 	this._captureActiveListeners = Object.create(null);
 	this._dynamicOnlyEvents = ["pointerup","pointercancel","pointermove"];
 
-	const clearPointerCapture = event => {
+	const clearPointerCapture = (event) => {
 		if(Number.isInteger(this._capturePointerId)) {
 			this.stopPointerCapture(this._capturePointerId);
 		}
 	};
 
 	const attachDynamicOnlyListeners = () => {
-		this._dynamicOnlyEvents.forEach(dt => {
+		this._dynamicOnlyEvents.forEach((dt) => {
 			const listener = this._eventListeners[dt];
 			if(listener) {
 				this._captureActiveListeners[dt] = listener;
@@ -94,8 +94,8 @@ EventWidget.prototype.cacheEventListeners = function() {
 
 	// Dynamic pointer capture listeners
 	if(this.pointerCaptureMode === "dynamic") {
-		["pointerup","pointercancel"].forEach(type => {
-			this._eventListeners[type] = event => {
+		["pointerup","pointercancel"].forEach((type) => {
+			this._eventListeners[type] = (event) => {
 				const selectedNode = this.checkEvent(event, type);
 				if(selectedNode) {
 					clearPointerCapture(event);
@@ -111,9 +111,9 @@ EventWidget.prototype.cacheEventListeners = function() {
 	}
 
 	// Create any listeners not already defined above
-	this.types.forEach(type => {
+	this.types.forEach((type) => {
 		if(!this._eventListeners[type]) {
-			this._eventListeners[type] = event => {
+			this._eventListeners[type] = (event) => {
 				const selectedNode = this.checkEvent(event, type);
 				if(!selectedNode) {
 					return false;
@@ -192,8 +192,8 @@ EventWidget.prototype.handleEvent = function(event, type, selectedNode) {
 			{},
 			$tw.utils.collectDOMVariables(selectedNode, this.domNode, event),
 			{
-				"eventJSON": JSON.stringify($tw.utils.copyObjectPropertiesSafe(event)),
-				"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event),
+				eventJSON: JSON.stringify($tw.utils.copyObjectPropertiesSafe(event)),
+				modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event),
 				"event-type": event.type.toString()
 			}
 		);
@@ -214,7 +214,7 @@ EventWidget.prototype.handleEvent = function(event, type, selectedNode) {
 };
 
 EventWidget.prototype.startPointerCapture = function(pointerId, captureTarget) {
-	// Start capture only if none active; pointerId can be 0 
+	// Start capture only if none active; pointerId can be 0
 	if(!Number.isInteger(this._capturePointerId) && this.domNode && this.domNode.setPointerCapture) {
 		this.domNode.setPointerCapture(pointerId);
 		this._capturePointerId = pointerId;
@@ -236,7 +236,7 @@ Attach all relevant listeners
 EventWidget.prototype.attachListeners = function() {
 	this.cacheEventListeners();
 	const domNode = this.domNode;
-	Object.keys(this._eventListeners).forEach(type => {
+	Object.keys(this._eventListeners).forEach((type) => {
 		if(this.pointerCaptureMode === "dynamic" && this._dynamicOnlyEvents.includes(type)) {
 			return; //skip dynamic-only events
 		}
@@ -249,7 +249,7 @@ Remove dynamic active listeners
 */
 EventWidget.prototype.cleanupDynamicListeners = function() {
 	const domNode = this.domNode;
-	Object.keys(this._captureActiveListeners || {}).forEach(type => {
+	Object.keys(this._captureActiveListeners || {}).forEach((type) => {
 		domNode.removeEventListener(type, this._captureActiveListeners[type], false);
 	});
 	this._captureActiveListeners = Object.create(null);
@@ -263,7 +263,7 @@ EventWidget.prototype.removeAllListeners = function() {
 		this.stopPointerCapture(this._capturePointerId);
 	}
 	const domNode = this.domNode;
-	Object.keys(this._eventListeners || {}).forEach(type => {
+	Object.keys(this._eventListeners || {}).forEach((type) => {
 		domNode.removeEventListener(type, this._eventListeners[type], false);
 	});
 	this.cleanupDynamicListeners();
@@ -297,7 +297,7 @@ Refresh widget
 EventWidget.prototype.refresh = function(changedTiddlers) {
 	const changedAttributes = this.computeAttributes(),
 		changedKeys = Object.keys(changedAttributes),
-		canUpdateAttributes = changedKeys.every(key => key === "class" || key === "disabled");
+		canUpdateAttributes = changedKeys.every((key) => key === "class" || key === "disabled");
 	if(canUpdateAttributes) {
 		if(changedAttributes["class"]) {
 			this.assignDomNodeClasses();

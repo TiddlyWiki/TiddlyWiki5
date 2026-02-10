@@ -74,7 +74,6 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	callback(null,newInfo);
 };
 
-
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
@@ -158,7 +157,7 @@ FileSystemAdaptor.prototype.removeTiddlerFileInfo = function(title) {
 	// Only delete the tiddler info if we have writable information for the file
 	if(this.boot.files[title]) {
 		delete this.boot.files[title];
-	};
+	}
 };
 
 if(fs) {

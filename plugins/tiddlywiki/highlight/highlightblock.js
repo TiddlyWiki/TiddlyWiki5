@@ -19,7 +19,7 @@ if(hljs.getLanguage !== undefined) {
 	$tw.utils.each($tw.modules.types["highlight"],function(moduleInfo,moduleName) {
 		$tw.utils.evalSandboxed(moduleInfo.definition,{hljs:hljs, exports:{}},moduleName);
 	});
-	
+
 	CodeBlockWidget.prototype.postRender = function() {
 		var domNode = this.domNodes[0],
 			language = this.language,

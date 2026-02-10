@@ -18,7 +18,7 @@ function initSerializers(Parser) {
 			Parser.prototype.serializers[rule] = serialize;
 		});
 	}
-};
+}
 
 /*
 Utility to get the (similarly but not 1:1 equal) original wikitext of a parse tree node or array of nodes.
@@ -93,7 +93,7 @@ exports.serializeAttribute = function(node,options) {
 		if(node.value && typeof node.value === "object") {
 			if(node.value.type === "transclude") {
 				// Handle the transclude-based macro call structure
-				var macroName = node.value.attributes && node.value.attributes["$variable"] ? 
+				var macroName = node.value.attributes && node.value.attributes["$variable"] ?
 					node.value.attributes["$variable"].value : "";
 				if(!macroName) {
 					return null;
@@ -125,7 +125,7 @@ exports.serializeAttribute = function(node,options) {
 			return null;
 		}
 	} else {
-		 // Unsupported type
+		// Unsupported type
 		return null;
 	}
 	return attributeString;

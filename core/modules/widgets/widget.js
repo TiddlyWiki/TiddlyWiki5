@@ -220,7 +220,7 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 		for(var m=0; m<actualParams.length; m++) {
 			if(typeof actualParams[m] !== "string" && actualParams[m].name === paramInfo.name) {
 				paramValue = actualParams[m].value;
-				paramMultiValue = actualParams[m].multiValue || [paramValue]
+				paramMultiValue = actualParams[m].multiValue || [paramValue];
 			}
 		}
 		// If not, use the next available anonymous macro call parameter
@@ -279,8 +279,7 @@ Widget.prototype.evaluateMacroModule = function(name,actualParams,defaultValue) 
 				// Save the parameter
 				args.push(paramValue);
 			}
-		}
-		else for(var i=0; i<actualParams.length; ++i) {
+		} else for(var i=0; i<actualParams.length; ++i) {
 			args.push(actualParams[i].value);
 		}
 		return (macro.run.apply(this,args) || "").toString();
@@ -345,7 +344,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 				opts = opts || {};
 				opts.variables = $tw.utils.extend({},variables,opts.variables);
 				return self.getVariable(name,opts);
-			};
+			}
 		},
 		getVariableInfo: function(name,opts) {
 			if($tw.utils.hop(variables,name)) {
@@ -365,7 +364,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 				opts = opts || {};
 				opts.variables = $tw.utils.extend({},variables,opts.variables);
 				return self.getVariableInfo(name,opts);
-			};
+			}
 		},
 		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables,
 		resolveVariableParameters: self.resolveVariableParameters,
@@ -540,7 +539,7 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 	} else {
 		$tw.utils.each(changedAttributes,function(value,name) {
 			assignAttribute(name,self.getAttribute(name));
-		});	
+		});
 	}
 };
 
@@ -600,10 +599,10 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	var variableDefinitionName = "$" + parseTreeNode.type;
 	if(this.variables[variableDefinitionName]) {
 		var isOverrideable = function() {
-				// Widget is overrideable if its name contains a period, or if it is an existing JS widget and we're not in safe mode
-				return parseTreeNode.type.indexOf(".") !== -1 || (!!self.widgetClasses[parseTreeNode.type] && !$tw.safeMode);
-			};
-		if(!parseTreeNode.isNotRemappable && isOverrideable()) { 
+			// Widget is overrideable if its name contains a period, or if it is an existing JS widget and we're not in safe mode
+			return parseTreeNode.type.indexOf(".") !== -1 || (!!self.widgetClasses[parseTreeNode.type] && !$tw.safeMode);
+		};
+		if(!parseTreeNode.isNotRemappable && isOverrideable()) {
 			var variableInfo = this.getVariableInfo(variableDefinitionName,{allowSelfAssigned: true});
 			if(variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.value && variableInfo.srcVariable.isWidgetDefinition) {
 				var newParseTreeNode = {
@@ -681,7 +680,7 @@ Widget.prototype.renderChildren = function(parent,nextSibling) {
 	var children = this.children;
 	for(var i = 0; i < children.length; i++) {
 		children[i].render(parent,nextSibling);
-	};
+	}
 };
 
 /*
@@ -731,7 +730,7 @@ Widget.prototype.dispatchEvent = function(event) {
 		$tw.utils.each(listeners,function(handler) {
 			var propagate;
 			if(typeof handler === "string") {
-				 // If handler is a string, call it as a method on the widget
+				// If handler is a string, call it as a method on the widget
 				propagate = self[handler].call(self,event);
 			} else {
 				// Otherwise call the function handler directly
@@ -774,7 +773,7 @@ Refresh all the children of a widget
 Widget.prototype.refreshChildren = function(changedTiddlers) {
 	var children = this.children,
 		refreshed = false;
-	for (var i = 0; i < children.length; i++) {
+	for(var i = 0; i < children.length; i++) {
 		refreshed = children[i].refresh(changedTiddlers) || refreshed;
 	}
 	return refreshed;
@@ -850,7 +849,7 @@ options include:
 - removeDOMNodes: boolean (default true)
 */
 Widget.prototype.destroy = function(options) {
-	const { removeDOMNodes = true } = options || {};
+	const {removeDOMNodes = true} = options || {};
 	let removeChildDOMNodes = removeDOMNodes;
 	if(removeDOMNodes && this.domNodes.length > 0) {
 		// If this widget will remove its own DOM nodes, children should not remove theirs
@@ -859,20 +858,20 @@ Widget.prototype.destroy = function(options) {
 	// Destroy children first
 	this.destroyChildren({removeDOMNodes: removeChildDOMNodes});
 	this.children = [];
-	
+
 	// Call custom cleanup method if implemented
 	if(typeof this.onDestroy === "function") {
 		this.onDestroy();
 	}
-	
+
 	// Remove our DOM nodes if needed
 	if(removeDOMNodes) {
-		this.removeLocalDomNodes();	
+		this.removeLocalDomNodes();
 	}
 };
 
 /*
-Remove any DOM nodes created by this widget 
+Remove any DOM nodes created by this widget
 */
 Widget.prototype.removeLocalDomNodes = function() {
 	for(const domNode of this.domNodes) {

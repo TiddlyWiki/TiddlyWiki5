@@ -68,17 +68,17 @@ function loadZipTiddler(title) {
 					base64: true
 				});
 			} catch(e) {
-				console.log("JSZip error: " + e)
+				console.log("JSZip error: " + e);
 			}
 		}
-		return zip;		
+		return zip;
 	});
 }
 
 function saveZipTiddler(title,zip) {
 	var data = zip.generate({
-			type: "base64"
-		});
+		type: "base64"
+	});
 	$tw.wiki.addTiddler({
 		title: title,
 		type: "application/zip",

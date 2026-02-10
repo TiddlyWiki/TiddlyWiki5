@@ -20,11 +20,11 @@ var CsvParser = function(type,text,options) {
 
 	// Table framework
 	this.tree = [{
-		"type": "scrollable", "children": [{
-			"type": "element", "tag": "table", "children": [{
-				"type": "element", "tag": "tbody", "children": []
-			}], "attributes": {
-				"class": {"type": "string", "value": "tc-csv-table"}
+		type: "scrollable", children: [{
+			type: "element", tag: "table", children: [{
+				type: "element", tag: "tbody", children: []
+			}], attributes: {
+				class: {type: "string", value: "tc-csv-table"}
 			}
 		}]
 	}];
@@ -39,13 +39,13 @@ var CsvParser = function(type,text,options) {
 	for(var line=0; line<lines.length; line++) {
 		var columns = lines[line];
 		var row = {
-			"type": "element", "tag": "tr", "children": []
+			type: "element", tag: "tr", children: []
 		};
 		for(var column=0; column<maxColumns; column++) {
 			row.children.push({
-				"type": "element", "tag": tag, "children": [{
-					"type": "text",
-					"text": columns[column] || ''
+				type: "element", tag: tag, children: [{
+					type: "text",
+					text: columns[column] || ""
 				}]
 			});
 		}

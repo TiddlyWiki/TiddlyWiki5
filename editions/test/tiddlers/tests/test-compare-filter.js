@@ -7,7 +7,6 @@ Tests the compare filter.
 
 \*/
 
-
 /* jslint node: true, browser: true */
 /* eslint-env node, browser, jasmine */
 /* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"]*/
@@ -80,4 +79,3 @@ describe("'compare' filter tests", function() {
 	});
 
 });
-

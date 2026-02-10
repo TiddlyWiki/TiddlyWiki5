@@ -59,7 +59,7 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 		{name:"mousedown", handlerObject:this, handlerMethod:"handleMouseDownEvent"},
 		{name:"mouseup",   handlerObject:this, handlerMethod:"handleMouseUpEvent"},
 		{name:"change",    handlerObject:this, handlerMethod:"handleChangeEvent"},
-		{name:"input",     handlerObject:this, handlerMethod:"handleInputEvent"},
+		{name:"input",     handlerObject:this, handlerMethod:"handleInputEvent"}
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.inputDomNode,nextSibling);
@@ -89,28 +89,28 @@ RangeWidget.prototype.getActionVariables = function(options) {
 	var hasChanged = (this.startValue !== this.inputDomNode.value) ? "yes" : "no";
 	// Trigger actions. Use variables = {key:value, key:value ...}
 	// the "value" is needed.
-	return $tw.utils.extend({"actionValue": this.inputDomNode.value, "actionValueHasChanged": hasChanged}, options);
-}
+	return $tw.utils.extend({actionValue: this.inputDomNode.value, actionValueHasChanged: hasChanged}, options);
+};
 
 // actionsStart
 RangeWidget.prototype.handleMouseDownEvent = function(event) {
 	this.handleEvent(event);
 	// Trigger actions
 	if(this.actionsMouseDown) {
-		var variables = this.getActionVariables() // TODO this line will go into the function call below.
+		var variables = this.getActionVariables(); // TODO this line will go into the function call below.
 		this.invokeActionString(this.actionsMouseDown,this,event,variables);
 	}
-}
+};
 
 // actionsStop
 RangeWidget.prototype.handleMouseUpEvent = function(event) {
 	this.handleEvent(event);
 	// Trigger actions
 	if(this.actionsMouseUp) {
-		var variables = this.getActionVariables()
+		var variables = this.getActionVariables();
 		this.invokeActionString(this.actionsMouseUp,this,event,variables);
 	}
-}
+};
 
 RangeWidget.prototype.handleChangeEvent = function(event) {
 	this.handleInputEvent(event);
@@ -121,7 +121,7 @@ RangeWidget.prototype.handleInputEvent = function(event) {
 	// Trigger actions
 	if(this.actionsInput) {
 		// "tiddler" parameter may be missing. See .execute() below
-		var variables = this.getActionVariables({"actionValueHasChanged": "yes"}) // TODO this line will go into the function call below.
+		var variables = this.getActionVariables({actionValueHasChanged: "yes"}); // TODO this line will go into the function call below.
 		this.invokeActionString(this.actionsInput,this,event,variables);
 	}
 };

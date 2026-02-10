@@ -12,10 +12,10 @@ function ElementSpotlight() {
 	this.animationStartTime; // Undefined if no animation is in  progress
 	// Create DOM nodes
 	this.spotlightElement = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotate-spotlight"
+		class: "tc-dynannotate-spotlight"
 	});
 	this.spotlightWrapper = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotate-spotlight-wrapper",
+		class: "tc-dynannotate-spotlight-wrapper",
 		children: [
 			this.spotlightElement
 		]
@@ -52,10 +52,10 @@ ElementSpotlight.prototype.querySelectorSafe = function(selector) {
 		}
 		if(hasHiddenAncestor) {
 			// Remove first entry from targetNodes array
-			targetNodes = [].slice.call(targetNodes, 1); 
+			targetNodes = [].slice.call(targetNodes, 1);
 			didRemoveFirstEntry = true;
 		}
-	} while(didRemoveFirstEntry)
+	} while(didRemoveFirstEntry);
 	// Return the first result
 	return targetNodes[0];
 };

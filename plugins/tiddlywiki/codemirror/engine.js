@@ -10,9 +10,9 @@ Text editor engine based on a CodeMirror instance
 "use strict";
 
 var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",
-HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height",
-CONFIG_FILTER = "[all[shadows+tiddlers]prefix[$:/config/codemirror/]]"
-	
+	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height",
+	CONFIG_FILTER = "[all[shadows+tiddlers]prefix[$:/config/codemirror/]]";
+
 // Install CodeMirror
 if($tw.browser && !window.CodeMirror) {
 
@@ -42,36 +42,36 @@ function getCmConfig() {
 		config = {},
 		configTiddlers = $tw.wiki.filterTiddlers(CONFIG_FILTER);
 
-	if ($tw.utils.isArray(configTiddlers)) {
-		for (var i=0; i<configTiddlers.length; i++) {
+	if($tw.utils.isArray(configTiddlers)) {
+		for(var i=0; i<configTiddlers.length; i++) {
 			tiddler = $tw.wiki.getTiddler(configTiddlers[i]);
-				if (tiddler) {
+			if(tiddler) {
 				element = configTiddlers[i].replace(/\$:\/config\/codemirror\//ig,"");
-					type = (tiddler.fields.type) ? tiddler.fields.type.trim().toLocaleLowerCase() : "string";
-				switch (type) {
+				type = (tiddler.fields.type) ? tiddler.fields.type.trim().toLocaleLowerCase() : "string";
+				switch(type) {
 					case "bool":
-					test = tiddler.fields.text.trim().toLowerCase();
-					value = (test === "true") ? true : false;
-					config[element] = value;
-					break;
+						test = tiddler.fields.text.trim().toLowerCase();
+						value = (test === "true") ? true : false;
+						config[element] = value;
+						break;
 					case "string":
-					value = tiddler.fields.text.trim();
-					config[element] = value;
-					break;
+						value = tiddler.fields.text.trim();
+						config[element] = value;
+						break;
 					case "integer":
-					value = parseInt(tiddler.fields.text.trim(), 10);
-					config[element] = value;
-					break;
+						value = parseInt(tiddler.fields.text.trim(), 10);
+						config[element] = value;
+						break;
 					case "json":
-					value = JSON.parse(tiddler.fields.text.trim());
+						value = JSON.parse(tiddler.fields.text.trim());
 						extend = (tiddler.fields.extend) ? tiddler.fields.extend : element;
 
-					if (config[extend]) {
-						$tw.utils.extend(config[extend], value);
-					} else {
-						config[extend] = value;
-					}
-					break;
+						if(config[extend]) {
+							$tw.utils.extend(config[extend], value);
+						} else {
+							config[extend] = value;
+						}
+						break;
 				}
 			}
 		}
@@ -96,7 +96,7 @@ function CodeMirrorEngine(options) {
 	this.domNode.style.display = "inline-block";
 	this.parentNode.insertBefore(this.domNode,this.nextSibling);
 	this.widget.domNodes.push(this.domNode);
-	
+
 	// Set all cm-plugin defaults
 	// Get the configuration options for the CodeMirror object
 	var config = getCmConfig();
@@ -135,19 +135,22 @@ function CodeMirrorEngine(options) {
 
 			// from https://github.com/codemirror/CodeMirror/blob/master/src/measurement/position_measurement.js#L673
 			function posFromMouse(cm, e, liberal, forRect) {
-				let display = cm.display
-				if (!liberal && e_target(e).getAttribute("cm-not-content") == "true") return null
+				let display = cm.display;
+				if(!liberal && e_target(e).getAttribute("cm-not-content") == "true") return null;
 
-				let x, y, space = display.lineSpace.getBoundingClientRect()
+				let x, y, space = display.lineSpace.getBoundingClientRect();
 				// Fails unpredictably on IE[67] when mouse is dragged around quickly.
-				try { x = e.clientX - space.left; y = e.clientY - space.top }
-				catch (e) { return null }
-				let coords = cm.coordsChar(cm, x, y), line
-				if (forRect && coords.xRel > 0 && (line = cm.getLine(cm.doc, coords.line).text).length == coords.ch) {
-					let colDiff = window.CodeMirror.countColumn(line, line.length, cm.options.tabSize) - line.length
-					coords = window.CodeMirror.Pos(coords.line, Math.max(0, Math.round((x - paddingH(cm.display).left) / charWidth(cm.display)) - colDiff))
+				try {
+					x = e.clientX - space.left; y = e.clientY - space.top;
+				} catch (e) {
+					return null;
 				}
-				return coords
+				let coords = cm.coordsChar(cm, x, y), line;
+				if(forRect && coords.xRel > 0 && (line = cm.getLine(cm.doc, coords.line).text).length == coords.ch) {
+					let colDiff = window.CodeMirror.countColumn(line, line.length, cm.options.tabSize) - line.length;
+					coords = window.CodeMirror.Pos(coords.line, Math.max(0, Math.round((x - paddingH(cm.display).left) / charWidth(cm.display)) - colDiff));
+				}
+				return coords;
 			}
 
 			var pos = posFromMouse(cm,event,true);
@@ -155,43 +158,44 @@ function CodeMirrorEngine(options) {
 				return;
 			}
 			// Don't do a replace if the drop happened inside of the selected text.
-			if (cm.state.draggingText && cm.doc.sel.contains(pos) > -1) {
+			if(cm.state.draggingText && cm.doc.sel.contains(pos) > -1) {
 				cm.state.draggingText(event);
 				// Ensure the editor is re-focused
-				setTimeout(function() {cm.display.input.focus();}, 20); 
+				setTimeout(function() {
+					cm.display.input.focus();
+				}, 20);
 				return;
 			}
 			try {
 				var text = event.dataTransfer.getData("Text");
-				if (text) {
+				if(text) {
 					var selected;
-					if (cm.state.draggingText && !cm.state.draggingText.copy) {
+					if(cm.state.draggingText && !cm.state.draggingText.copy) {
 						selected = cm.listSelections();
 					}
 					cm.setCursor(cm.coordsChar({left:event.pageX,top:event.pageY}));
-					if (selected) {
-						for (var i = 0; i < selected.length; ++i) {
+					if(selected) {
+						for(var i = 0; i < selected.length; ++i) {
 							replaceRange(cm.doc, "", selected[i].anchor, selected[i].head, "drag");
 						}
 					}
 					cm.replaceSelection(text, "around", "paste");
 					cm.display.input.focus();
 				}
-			}
-			catch(e){}
+			} catch(e){}
 		}
 		return false;
 	});
 	this.cm.on("keydown",function(cm,event) {
-		if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+		if($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
 			return true;
 		}
-	
+
 		return self.widget.handleKeydownEvent.call(self.widget,event);
 	});
 	this.cm.on("focus",function(cm,event) {
 		if(self.widget.editCancelPopups) {
-			$tw.popup.cancel(0);	
+			$tw.popup.cancel(0);
 		}
 	});
 	// Add drag and drop event listeners if fileDrop is enabled
@@ -225,7 +229,7 @@ function CodeMirrorEngine(options) {
 			event["twEditor"] = true;
 		});
 	}
-;
+
 }
 
 /*
@@ -275,7 +279,7 @@ Focus the engine node
 */
 CodeMirrorEngine.prototype.focus  = function() {
 	this.cm.focus();
-}
+};
 
 /*
 Create a blank structure representing a text operation
@@ -284,7 +288,7 @@ CodeMirrorEngine.prototype.createTextOperation = function() {
 	var selections = this.cm.listSelections();
 	if(selections.length > 0) {
 		var anchorPos = this.cm.indexFromPos(selections[0].anchor),
-		headPos = this.cm.indexFromPos(selections[0].head);
+			headPos = this.cm.indexFromPos(selections[0].head);
 	}
 	var operation = {
 		text: this.cm.getValue(),

@@ -24,12 +24,12 @@ exports.reduce = function(source,operator,options) {
 	for(var index=0; index<results.length; index++) {
 		var title = results[index],
 			list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),options.widget.makeFakeWidgetWithVariables({
-				"currentTiddler": "" + title,
+				currentTiddler: "" + title,
 				"..currentTiddler": options.widget.getVariable("currentTiddler"),
-				"accumulator": "" + accumulator,
-				"index": "" + index,
-				"revIndex": "" + (results.length - 1 - index),
-				"length": "" + results.length
+				accumulator: "" + accumulator,
+				index: "" + index,
+				revIndex: "" + (results.length - 1 - index),
+				length: "" + results.length
 			}));
 		if(list.length > 0) {
 			accumulator = "" +  list[0];

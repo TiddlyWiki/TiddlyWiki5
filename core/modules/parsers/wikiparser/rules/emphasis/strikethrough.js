@@ -12,8 +12,8 @@ Wiki text inline rule for emphasis - strikethrough. For example:
 This wikiparser can be modified using the rules eg:
 
 ```
-\rules except strikethrough 
-\rules only strikethrough 
+\rules except strikethrough
+\rules only strikethrough
 ```
 
 \*/

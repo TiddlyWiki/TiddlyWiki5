@@ -78,7 +78,7 @@ Commander.prototype.executeNextCommand = function() {
 			commandName = commandName.substr(2); // Trim off the --
 			// Accumulate the parameters to the command
 			var params = [];
-			while(this.nextToken < this.commandTokens.length && 
+			while(this.nextToken < this.commandTokens.length &&
 				this.commandTokens[this.nextToken].substr(0,2) !== "--") {
 				params.push(this.commandTokens[this.nextToken++]);
 			}
@@ -103,7 +103,9 @@ Commander.prototype.executeNextCommand = function() {
 					c = new command.Command(params,this);
 					err = c.execute();
 					if(err && typeof err.then === "function") {
-						err.then(e => { e ? this.callback(e) : this.executeNextCommand(); });
+						err.then((e) => {
+							e ? this.callback(e) : this.executeNextCommand();
+						});
 					} else if(err) {
 						this.callback(err);
 					} else {
@@ -120,7 +122,9 @@ Commander.prototype.executeNextCommand = function() {
 					});
 					err = c.execute();
 					if(err && typeof err.then === "function") {
-						err.then(e => { if(e) this.callback(e); });
+						err.then((e) => {
+							if(e) this.callback(e);
+						});
 					} else if(err) {
 						this.callback(err);
 					}

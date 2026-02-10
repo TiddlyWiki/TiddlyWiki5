@@ -14,21 +14,23 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 			this.updateCallback = updateCallback;
 			this.resizeHandlers = new Map();
 			this.dimensionsInfo = [
-				["outer/width", win => win.outerWidth],
-				["outer/height", win => win.outerHeight],
-				["inner/width", win => win.innerWidth],
-				["inner/height", win => win.innerHeight],
-				["client/width", win => win.document.documentElement.clientWidth],
-				["client/height", win => win.document.documentElement.clientHeight]
+				["outer/width", (win) => win.outerWidth],
+				["outer/height", (win) => win.outerHeight],
+				["inner/width", (win) => win.innerWidth],
+				["inner/height", (win) => win.innerHeight],
+				["client/width", (win) => win.document.documentElement.clientWidth],
+				["client/height", (win) => win.document.documentElement.clientHeight]
 			];
 		}
 
 		buildTiddlers(win,windowId) {
 			const prefix = `$:/info/browser/window/${windowId}/`;
-			return this.dimensionsInfo.map(([suffix, getter]) => ({
-				title: prefix + suffix,
-				text: String(getter(win))
-			}));
+			return this.dimensionsInfo.map(([suffix, getter]) => {
+				return {
+					title: prefix + suffix,
+					text: String(getter(win))
+				};
+			});
 		}
 
 		clearTiddlers(windowId) {

@@ -42,7 +42,7 @@ exports.serialize = function (tree,serialize) {
 					var currentMarker = findMarker(node.tag, child.tag);
 					// Handle class attributes
 					var classAttr = child.attributes && child.attributes.class ? "." + child.attributes.class.value : "";
-					/** 
+					/**
 					 * same level text nodes may be split into multiple children, and separated by deeper list sub-tree.
 					 * We collect same level text nodes into this list, and concat then submit them before enter deeper list.
 					 */
@@ -54,7 +54,7 @@ exports.serialize = function (tree,serialize) {
 								result.push(markerPrefix + currentMarker + classAttr + " " + content.join("").trim());
 								content = [];
 							}
-							result.push(serializeList(subNode, markerPrefix + currentMarker).trim())
+							result.push(serializeList(subNode, markerPrefix + currentMarker).trim());
 						} else {
 							content.push(serialize(subNode)) ;
 						}

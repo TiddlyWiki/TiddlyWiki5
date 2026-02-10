@@ -66,7 +66,7 @@ Command.prototype.fetchFiles = function(options) {
 	// Get the list of URLs
 	var urls;
 	if(options.url) {
-		urls = [options.url]
+		urls = [options.url];
 	} else if(options.urlFilter) {
 		urls = this.commander.wiki.filterTiddlers(options.urlFilter);
 	} else {
@@ -96,30 +96,30 @@ Command.prototype.fetchFile = function(url,options,callback,redirectCount) {
 	var self = this,
 		lib = url.substr(0,8) === "https://" ? require("https") : require("http");
 	lib.get(url).on("response",function(response) {
-	    var type = (response.headers["content-type"] || "").split(";")[0],
-	    	data = [];
-	    self.commander.write("Reading " + url + ": ");
-	    response.on("data",function(chunk) {
-	        data.push(chunk);
-	        self.commander.write(".");
-	    });
-	    response.on("end",function() {
-	        self.commander.write("\n");
-	        if(response.statusCode === 200) {
-		        self.processBody(Buffer.concat(data),type,options,url);
-		        callback(null);
-	        } else {
-	        	if(response.statusCode === 302 || response.statusCode === 303 || response.statusCode === 307) {
-	        		return self.fetchFile(response.headers.location,options,callback,redirectCount + 1);
-	        	} else {
-		        	return callback("Error " + response.statusCode + " retrieving " + url)
-	        	}
-	        }
-	   	});
-	   	response.on("error",function(e) {
+		var type = (response.headers["content-type"] || "").split(";")[0],
+			data = [];
+		self.commander.write("Reading " + url + ": ");
+		response.on("data",function(chunk) {
+			data.push(chunk);
+			self.commander.write(".");
+		});
+		response.on("end",function() {
+			self.commander.write("\n");
+			if(response.statusCode === 200) {
+				self.processBody(Buffer.concat(data),type,options,url);
+				callback(null);
+			} else {
+				if(response.statusCode === 302 || response.statusCode === 303 || response.statusCode === 307) {
+					return self.fetchFile(response.headers.location,options,callback,redirectCount + 1);
+				} else {
+					return callback("Error " + response.statusCode + " retrieving " + url);
+				}
+			}
+		});
+		response.on("error",function(e) {
 			console.log("Error on GET request: " + e);
 			callback(e);
-	   	});
+		});
 	});
 	return null;
 };
@@ -153,18 +153,18 @@ Command.prototype.processBody = function(body,type,options,url) {
 			if(options.transformFilter) {
 				var transformedTitle = (incomingWiki.filterTiddlers(options.transformFilter,null,self.commander.wiki.makeTiddlerIterator([title])) || [""])[0];
 				if(transformedTitle) {
-					self.commander.log("Importing " + title + " as " + transformedTitle)
+					self.commander.log("Importing " + title + " as " + transformedTitle);
 					newTiddler = new $tw.Tiddler(tiddler,{title: transformedTitle});
 				}
 			} else {
-				self.commander.log("Importing " + title)
+				self.commander.log("Importing " + title);
 				newTiddler = tiddler;
 			}
 			self.commander.wiki.importTiddler(newTiddler);
 			count++;
 		}
 	});
-	self.commander.log("Imported " + count + " tiddlers")
+	self.commander.log("Imported " + count + " tiddlers");
 };
 
 exports.Command = Command;

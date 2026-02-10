@@ -197,7 +197,7 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 Handle a keydown event
  */
 FramedEngine.prototype.handleKeydownEvent = function(event) {
-	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+	if($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
 		return true;
 	}
 

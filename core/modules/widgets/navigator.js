@@ -235,11 +235,11 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	}
 	// Seek confirmation
 	if(((originalTitle && this.wiki.getTiddler(originalTitle)) || (tiddler && ((tiddler.fields.text || "") !== ""))) && !win.confirm($tw.language.getString(
-				"ConfirmDeleteTiddler",
-				{variables:
+		"ConfirmDeleteTiddler",
+		{variables:
 					{title: confirmationTitle}
-				}
-			))) {
+		}
+	))) {
 		return false;
 	}
 	// Delete the original tiddler
@@ -253,7 +253,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	// Invoke the hook function and delete this tiddler
 	if(tiddler) {
 		$tw.hooks.invokeHook("th-deleting-tiddler",tiddler);
-		this.wiki.deleteTiddler(title);	
+		this.wiki.deleteTiddler(title);
 	}
 	// Remove the closed tiddler from the story
 	this.removeTitleFromStory(storyList,title);
@@ -275,21 +275,21 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 	// Get the current value of the tiddler we're editing
 	var tiddler = this.wiki.getTiddler(targetTitle);
 	var defaultType = this.wiki.getTiddlerText("$:/config/DefaultMissingType", "").trim();
-	var defaultFields = { type: defaultType };
+	var defaultFields = {type: defaultType};
 	// Save the initial value of the draft tiddler
 	draftTitle = this.generateDraftTitle(targetTitle);
 	var draftTiddler = new $tw.Tiddler({
-				text: "",
-			},
-			tiddler,
-			{
-				title: draftTitle,
-				"draft.title": targetTitle,
-				"draft.of": targetTitle
-			},
-			this.wiki.getModificationFields(),
-			tiddler === null || tiddler === undefined ? defaultFields : {}
-		);
+		text: ""
+	},
+	tiddler,
+	{
+		title: draftTitle,
+		"draft.title": targetTitle,
+		"draft.of": targetTitle
+	},
+	this.wiki.getModificationFields(),
+	tiddler === null || tiddler === undefined ? defaultFields : {}
+	);
 	this.wiki.addTiddler(draftTiddler);
 	return draftTiddler;
 };
@@ -466,20 +466,20 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	}
 	// Save the draft tiddler
 	var draftTiddler = new $tw.Tiddler({
-			text: "",
-			"draft.title": title
-		},
-		templateTiddler,
-		additionalFields,
-		this.wiki.getCreationFields(),
-		existingTiddler,
-		filteredAdditionalFields,
-		{
-			title: draftTitle,
-			"draft.of": title,
-			// If template or additionalFields have "tags" even if empty a tags field will be created.
-			tags: ((mergedTags.length > 0) || templateHasTags || additionalFieldsHasTags) ? mergedTags : undefined
-		},this.wiki.getModificationFields());
+		text: "",
+		"draft.title": title
+	},
+	templateTiddler,
+	additionalFields,
+	this.wiki.getCreationFields(),
+	existingTiddler,
+	filteredAdditionalFields,
+	{
+		title: draftTitle,
+		"draft.of": title,
+		// If template or additionalFields have "tags" even if empty a tags field will be created.
+		tags: ((mergedTags.length > 0) || templateHasTags || additionalFieldsHasTags) ? mergedTags : undefined
+	},this.wiki.getModificationFields());
 	this.wiki.addTiddler(draftTiddler);
 	// Update the story to insert the new draft at the top and remove any existing tiddler
 	if(storyList && storyList.indexOf(draftTitle) === -1) {
@@ -511,7 +511,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 			title: importTitle,
 			type: "application/json",
 			"plugin-type": "import",
-			"status": "pending"
+			status: "pending"
 		}),
 		incomingTiddlers = [];
 	// Process each tiddler
@@ -592,7 +592,7 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	this.wiki.addTiddler(new $tw.Tiddler({
 		title: event.param,
 		text: importReport.join("\n"),
-		"status": "complete"
+		status: "complete"
 	}));
 	// Navigate to the $:/Import tiddler
 	this.addToHistory([event.param]);

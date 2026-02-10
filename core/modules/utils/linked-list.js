@@ -12,7 +12,7 @@ pushTop, which it does with significantly better performance than an array.
 
 function LinkedList() {
 	this.clear();
-};
+}
 
 LinkedList.prototype.clear = function() {
 	// LinkedList performs the duty of both the head and tail node
@@ -59,7 +59,7 @@ LinkedList.prototype.push = function(/* values */) {
 LinkedList.prototype.pushTop = function(value) {
 	var t;
 	if($tw.utils.isArray(value)) {
-		for (t=0; t<value.length; t++) {
+		for(t=0; t<value.length; t++) {
 			_assertString(value[t]);
 		}
 		for(t=0; t<value.length; t++) {
@@ -94,7 +94,9 @@ LinkedList.prototype.each = function(callback) {
 LinkedList.prototype.toArray = function() {
 	var output = new Array(this.length),
 		index = 0;
-	this.each(function(value) { output[index++] = value; });
+	this.each(function(value) {
+		output[index++] = value;
+	});
 	return output;
 };
 
@@ -147,7 +149,7 @@ function _removeOne(list,value) {
 		list.prev.set(value,undefined);
 	}
 	list.length -= 1;
-};
+}
 
 // Sticks the given node onto the end of the list.
 function _linkToEnd(list,value) {
@@ -182,13 +184,13 @@ function _linkToEnd(list,value) {
 		array[array.length-2] = value;
 	}
 	list.length += 1;
-};
+}
 
 function _assertString(value) {
 	if(typeof value !== "string") {
 		throw "Linked List only accepts string values, not " + value;
 	}
-};
+}
 
 var LLMap = function() {
 	this.map = Object.create(null);

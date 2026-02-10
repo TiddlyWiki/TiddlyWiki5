@@ -31,16 +31,16 @@ AudioWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	
+
 	// Create audio element
 	var audioElement = this.document.createElement("audio");
 	audioElement.setAttribute("controls", this.getAttribute("controls", "controls"));
 	audioElement.setAttribute("style", this.getAttribute("style", "width: 100%; object-fit: contain"));
 	audioElement.className = "tw-audio-element";
-	
+
 	// Set source
 	if(this.audioSource) {
-		if (this.audioSource.indexOf("data:") === 0) {
+		if(this.audioSource.indexOf("data:") === 0) {
 			audioElement.setAttribute("src", this.audioSource);
 		} else {
 			var sourceElement = this.document.createElement("source");
@@ -51,7 +51,7 @@ AudioWidget.prototype.render = function(parent,nextSibling) {
 			audioElement.appendChild(sourceElement);
 		}
 	}
-	
+
 	// Insert the audio into the DOM
 	parent.insertBefore(audioElement, nextSibling);
 	this.domNodes.push(audioElement);
@@ -65,7 +65,7 @@ AudioWidget.prototype.execute = function() {
 	this.audioSource = this.getAttribute("src");
 	this.audioType = this.getAttribute("type");
 	this.audioControls = this.getAttribute("controls", "controls");
-	
+
 	// Try to get from tiddler attribute
 	if(!this.audioSource && this.getAttribute("tiddler")) {
 		var tiddlerTitle = this.getAttribute("tiddler");
@@ -80,7 +80,7 @@ AudioWidget.prototype.execute = function() {
 			}
 		}
 	}
-	
+
 	// Make sure we have a tiddler for saving timestamps
 	this.tiddlerTitle = this.getAttribute("tiddler");
 };
@@ -99,5 +99,3 @@ AudioWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.audio = AudioWidget;
-
-

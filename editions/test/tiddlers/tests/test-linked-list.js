@@ -29,32 +29,32 @@ describe("LinkedList class tests", function() {
 	// creates and initializes a new {array, list} pair for testing
 	function newPair(initialArray) {
 		var pair = {array: [], list: new $tw.utils.LinkedList()};
-		if (initialArray) {
+		if(initialArray) {
 			push(pair, initialArray);
 		}
 		return pair;
-	};
+	}
 
 	// pushTops a value or array of values into both the array and linked list.
 	function pushTop(pair, valueOrValues) {
 		pair.list.pushTop(valueOrValues);
 		$tw.utils.pushTop(pair.array, valueOrValues);
 		return pair;
-	};
+	}
 
 	// pushes values into both the array and the linked list.
 	function push(pair, values) {
 		pair.list.push(values);
 		pair.array.push.apply(pair.array, values);
 		return pair;
-	};
+	}
 
 	// operates a remove action on an array and a linked list in parallel.
 	function remove(pair, valueOrValues) {
 		pair.list.remove(valueOrValues);
 		$tw.utils.removeArrayEntries(pair.array, valueOrValues);
 		return pair;
-	};
+	}
 
 	// This returns an array in reverse using a LinkList's prev member. Thus
 	// testing that prev is not corrupt. It doesn't exist in the LinkList module
@@ -75,7 +75,7 @@ describe("LinkedList class tests", function() {
 			}
 		}
 		return array;
-	};
+	}
 
 	// compares an array and a linked list to make sure they match up
 	function compare(pair) {
@@ -86,7 +86,7 @@ describe("LinkedList class tests", function() {
 		// confirming that the list.prev isn't corrupt.
 		expect(toReverseArray(pair.list)).toEqual(forward.reverse());
 		return pair;
-	};
+	}
 
 	it("can pushTop", function() {
 		var pair = newPair(["A", "B", "C"]);
@@ -126,7 +126,7 @@ describe("LinkedList class tests", function() {
 		compare(pushTop(remove(newPair(["A", "A"]), ["A", "A"]), ["B", "A"])); // BA
 
 		// Again, but this time with other values mixed in
-		compare(remove(newPair(["B", "A", "A", "C"]), ["A", "A"])) // BC;
+		compare(remove(newPair(["B", "A", "A", "C"]), ["A", "A"])); // BC;
 		// And again, but this time with value inbetween too.
 		compare(remove(newPair(["B", "A", "X", "Y", "Z", "A", "C"]), ["A", "A"])); // BXYZC
 
@@ -195,10 +195,10 @@ describe("LinkedList class tests", function() {
 		// This actually caused an infinite loop once. So important test here.
 		push(pair, ["A"]);
 		compare(pair); // XYCAA
-		pushTop(pair, "A") // switch those last As
+		pushTop(pair, "A"); // switch those last As
 		compare(pair); // XYCAA
 		remove(pair, ["A", "A"]); // Remove all As, then add them back
-		pushTop(pair, ["A", "A"])
+		pushTop(pair, ["A", "A"]);
 		compare(pair); // XYCAA
 	});
 
@@ -303,4 +303,3 @@ describe("LinkedList class tests", function() {
 		compare(newPair(["A", "A"]));
 	});
 });
-

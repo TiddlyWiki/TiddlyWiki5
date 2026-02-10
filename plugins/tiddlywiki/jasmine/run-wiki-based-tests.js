@@ -86,13 +86,13 @@ describe("Wiki-based tests", function() {
 		$tw.fakeDocument.setSequenceNumber(0);
 		var wrapper = $tw.fakeDocument.createElement("div");
 		widgetNode.render(wrapper,null);
-// console.log(require("util").inspect(wrapper,{depth: 8}));
+		// console.log(require("util").inspect(wrapper,{depth: 8}));
 		return wrapper;
 	}
 
 	function refreshWidgetNode(widgetNode,wrapper) {
 		widgetNode.refresh(widgetNode.wiki.changedTiddlers,wrapper);
-// console.log(require("util").inspect(wrapper,{depth: 8}));
+		// console.log(require("util").inspect(wrapper,{depth: 8}));
 	}
 
 });

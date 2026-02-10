@@ -56,41 +56,41 @@ TextNodeWidget.prototype.render = function(parent,nextSibling) {
 TextNodeWidget.prototype.execute = function() {
 	var self = this,
 		ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}).trim() === "yes";
-	
+
 	var childParseTree = [{
 		type: "plain-text",
 		text: this.getAttribute("text",this.parseTreeNode.text || "")
 	}];
-	
+
 	var text = childParseTree[0].text;
-	
+
 	if(!text || text.length < 2) {
 		this.makeChildWidgets(childParseTree);
 		return;
 	}
-	
-	if(this.getVariable("tv-wikilinks",{defaultValue:"yes"}) !== "no" && 
-	   this.getVariable("tv-freelinks",{defaultValue:"no"}) === "yes" && 
+
+	if(this.getVariable("tv-wikilinks",{defaultValue:"yes"}) !== "no" &&
+	   this.getVariable("tv-freelinks",{defaultValue:"no"}) === "yes" &&
 	   !this.isWithinButtonOrLink()) {
-		
+
 		var currentTiddlerTitle = this.getVariable("currentTiddler") || "";
 		var useWordBoundary = self.wiki.getTiddlerText(WORD_BOUNDARY_TIDDLER, "no") === "yes";
-		
+
 		var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
-		
+
 		this.tiddlerTitleInfo = this.wiki.getGlobalCache(cacheKey, function() {
 			return computeTiddlerTitleInfo(self, ignoreCase);
 		});
-		
+
 		if(this.tiddlerTitleInfo.titles.length > 0) {
 			var newParseTree = this.processTextWithMatches(text, currentTiddlerTitle, ignoreCase, useWordBoundary);
-			if(newParseTree && newParseTree.length > 0 && 
+			if(newParseTree && newParseTree.length > 0 &&
 			   (newParseTree.length > 1 || newParseTree[0].type !== "plain-text")) {
 				childParseTree = newParseTree;
 			}
 		}
 	}
-	
+
 	this.makeChildWidgets(childParseTree);
 };
 
@@ -98,59 +98,59 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 	if(!text || text.length === 0) {
 		return [{type: "plain-text", text: text}];
 	}
-	
+
 	var searchText = ignoreCase ? text.toLowerCase() : text;
 	var matches;
-	
+
 	try {
 		matches = this.tiddlerTitleInfo.ac.search(searchText, useWordBoundary);
 	} catch(e) {
 		return [{type: "plain-text", text: text}];
 	}
-	
+
 	if(!matches || matches.length === 0) {
 		return [{type: "plain-text", text: text}];
 	}
-	
+
 	matches.sort(function(a, b) {
 		if(a.index !== b.index) {
 			return a.index - b.index;
 		}
 		return b.length - a.length;
 	});
-	
+
 	var processedPositions = new FastPositionSet();
 	var validMatches = [];
-	
+
 	for(var i = 0; i < matches.length; i++) {
 		var match = matches[i];
 		var matchStart = match.index;
 		var matchEnd = matchStart + match.length;
-		
+
 		if(matchStart < 0 || matchEnd > text.length) {
 			continue;
 		}
-		
+
 		var matchedTitle = this.tiddlerTitleInfo.titles[match.titleIndex];
-		
-		var titleToCompare = ignoreCase ? 
-			(currentTiddlerTitle ? currentTiddlerTitle.toLowerCase() : "") : 
+
+		var titleToCompare = ignoreCase ?
+			(currentTiddlerTitle ? currentTiddlerTitle.toLowerCase() : "") :
 			currentTiddlerTitle;
-		var matchedTitleToCompare = ignoreCase ? 
-			(matchedTitle ? matchedTitle.toLowerCase() : "") : 
+		var matchedTitleToCompare = ignoreCase ?
+			(matchedTitle ? matchedTitle.toLowerCase() : "") :
 			matchedTitle;
-		
+
 		if(titleToCompare && matchedTitleToCompare === titleToCompare) {
 			continue;
 		}
-		
+
 		var hasOverlap = false;
 		for(var pos = matchStart; pos < matchEnd && !hasOverlap; pos++) {
 			if(processedPositions.has(pos)) {
 				hasOverlap = true;
 			}
 		}
-		
+
 		if(!hasOverlap) {
 			for(var pos = matchStart; pos < matchEnd; pos++) {
 				processedPositions.add(pos);
@@ -158,19 +158,19 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 			validMatches.push(match);
 		}
 	}
-	
+
 	if(validMatches.length === 0) {
 		return [{type: "plain-text", text: text}];
 	}
-	
+
 	var newParseTree = [];
 	var currentPos = 0;
-	
+
 	for(var i = 0; i < validMatches.length; i++) {
 		var match = validMatches[i];
 		var matchStart = match.index;
 		var matchEnd = matchStart + match.length;
-		
+
 		if(matchStart > currentPos) {
 			var beforeText = text.substring(currentPos, matchStart);
 			newParseTree.push({
@@ -178,25 +178,25 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 				text: beforeText
 			});
 		}
-		
+
 		var matchedTitle = this.tiddlerTitleInfo.titles[match.titleIndex];
 		var matchedText = text.substring(matchStart, matchEnd);
-		
+
 		newParseTree.push({
 			type: "link",
 			attributes: {
 				to: {type: "string", value: matchedTitle},
-				"class": {type: "string", value: "tc-freelink"}
+				class: {type: "string", value: "tc-freelink"}
 			},
 			children: [{
 				type: "plain-text",
 				text: matchedText
 			}]
 		});
-		
+
 		currentPos = matchEnd;
 	}
-	
+
 	if(currentPos < text.length) {
 		var remainingText = text.substring(currentPos);
 		newParseTree.push({
@@ -204,26 +204,26 @@ TextNodeWidget.prototype.processTextWithMatches = function(text, currentTiddlerT
 			text: remainingText
 		});
 	}
-	
+
 	return newParseTree;
 };
 
 function computeTiddlerTitleInfo(self, ignoreCase) {
 	var targetFilterText = self.wiki.getTiddlerText(TITLE_TARGET_FILTER),
-		titles = !!targetFilterText ? 
-			self.wiki.filterTiddlers(targetFilterText,$tw.rootWidget) : 
+		titles = !!targetFilterText ?
+			self.wiki.filterTiddlers(targetFilterText,$tw.rootWidget) :
 			self.wiki.allTitles();
-	
+
 	if(!titles || titles.length === 0) {
-		return { 
-			titles: [], 
+		return {
+			titles: [],
 			ac: new AhoCorasick()
 		};
 	}
-	
+
 	var validTitles = [];
 	var ac = new AhoCorasick();
-	
+
 	for(var i = 0; i < titles.length; i++) {
 		var title = titles[i];
 		if(title && title.length > 0 && title.substring(0,3) !== "$:/") {
@@ -233,28 +233,28 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 			}
 		}
 	}
-	
+
 	var sortedTitles = validTitles.sort(function(a,b) {
 		var lenDiff = b.length - a.length;
 		if(lenDiff !== 0) return lenDiff;
 		return a < b ? -1 : a > b ? 1 : 0;
 	});
-	
+
 	for(var i = 0; i < sortedTitles.length; i++) {
 		var title = sortedTitles[i];
 		var pattern = ignoreCase ? title.toLowerCase() : title;
 		ac.addPattern(pattern, i);
 	}
-	
+
 	try {
 		ac.buildFailureLinks();
 	} catch(e) {
-		return { 
-			titles: [], 
+		return {
+			titles: [],
 			ac: new AhoCorasick()
 		};
 	}
-	
+
 	return {
 		titles: sortedTitles,
 		ac: ac
@@ -264,8 +264,8 @@ function computeTiddlerTitleInfo(self, ignoreCase) {
 TextNodeWidget.prototype.isWithinButtonOrLink = function() {
 	var widget = this.parentWidget;
 	while(widget) {
-		if(widget instanceof ButtonWidget || 
-		   widget instanceof LinkWidget || 
+		if(widget instanceof ButtonWidget ||
+		   widget instanceof LinkWidget ||
 		   ((widget instanceof ElementWidget) && widget.parseTreeNode.tag === "a")) {
 			return true;
 		}
@@ -278,27 +278,27 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 	var self = this,
 		changedAttributes = this.computeAttributes(),
 		titlesHaveChanged = false;
-	
+
 	if(changedTiddlers) {
 		$tw.utils.each(changedTiddlers,function(change,title) {
 			if(change.isDeleted) {
 				titlesHaveChanged = true;
 			} else {
-				titlesHaveChanged = titlesHaveChanged || 
-								   !self.tiddlerTitleInfo || 
+				titlesHaveChanged = titlesHaveChanged ||
+								   !self.tiddlerTitleInfo ||
 								   self.tiddlerTitleInfo.titles.indexOf(title) === -1;
 			}
 		});
 	}
-	
-	if(changedAttributes.text || titlesHaveChanged || 
+
+	if(changedAttributes.text || titlesHaveChanged ||
 	   (changedTiddlers && changedTiddlers[WORD_BOUNDARY_TIDDLER])) {
 		if(titlesHaveChanged) {
 			var ignoreCase = self.getVariable("tv-freelinks-ignore-case",{defaultValue:"no"}).trim() === "yes";
 			var cacheKey = "tiddler-title-info-" + (ignoreCase ? "insensitive" : "sensitive");
 			self.wiki.clearCache(cacheKey);
 		}
-		
+
 		this.refreshSelf();
 		return true;
 	} else {

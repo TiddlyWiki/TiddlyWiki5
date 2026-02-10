@@ -32,7 +32,7 @@ function BrowserMessagingSubscriber(options) {
 	this.channel.port1.addEventListener("message",function(event) {
 		if(this.timerID) {
 			clearTimeout(this.timerID);
-			this.timerID = null;		
+			this.timerID = null;
 		}
 		if(event.data) {
 			if(event.data.verb === "SUBSCRIBED") {
@@ -50,7 +50,7 @@ function BrowserMessagingSubscriber(options) {
 	// Set a timer so that if we don't hear from the iframe before a timeout we alert the user
 	this.timerID = setTimeout(function() {
 		if(!self.hasConfirmed) {
-			self.onsubscribe("NO_RESPONSE");				
+			self.onsubscribe("NO_RESPONSE");
 		}
 	},RESPONSE_TIMEOUT);
 	this.channel.port1.start();
@@ -114,7 +114,7 @@ BrowserMessagingPublisher.prototype.close = function() {
 	if(this.port) {
 		this.port.close();
 		this.hostIsListening = false;
-		this.port = null;		
+		this.port = null;
 	}
 };
 

@@ -26,9 +26,9 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		branch = this.wiki.getTiddlerText("$:/GitHub/Branch") || "main",
 		endpoint = this.wiki.getTiddlerText("$:/GitHub/ServerURL") || "https://api.github.com",
 		headers = {
-			"Accept": "application/vnd.github.v3+json",
+			Accept: "application/vnd.github.v3+json",
 			"Content-Type": "application/json;charset=UTF-8",
-			"Authorization": "Basic " + $tw.utils.base64Encode(username + ":" + password),
+			Authorization: "Basic " + $tw.utils.base64Encode(username + ":" + password),
 			"If-None-Match": ""
 		};
 	// Bail if we don't have everything we need

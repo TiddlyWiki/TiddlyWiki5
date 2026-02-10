@@ -16,7 +16,7 @@ var openlocationcode = require("$:/plugins/tiddlywiki/geospatial/openlocationcod
 exports["olc-decode"] = function(source,operator,options) {
 	var olc;
 	try {
-		olc = openlocationcode.decode(operator.operands[0] || "")
+		olc = openlocationcode.decode(operator.operands[0] || "");
 	} catch(e) {
 		return [];
 	}
@@ -44,7 +44,7 @@ exports["olc-encode"] = function(source,operator,options) {
 	try {
 		olc = openlocationcode.encode(lat,long,codelength);
 	} catch(e) {
-		return []
+		return [];
 	}
 	return [olc];
 };

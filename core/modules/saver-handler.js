@@ -32,10 +32,10 @@ function SaverHandler(options) {
 		this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
 		// Count of changes that have not yet been saved
 		var filteredChanges = self.filterFn.call(self.wiki,function(iterator) {
-				$tw.utils.each(self.preloadDirty,function(title) {
-					var tiddler = self.wiki.getTiddler(title);
-					iterator(tiddler,title);
-				});
+			$tw.utils.each(self.preloadDirty,function(title) {
+				var tiddler = self.wiki.getTiddler(title);
+				iterator(tiddler,title);
+			});
 		});
 		this.numChanges = filteredChanges.length;
 		// Listen out for changes to tiddlers
@@ -160,7 +160,7 @@ SaverHandler.prototype.saveWiki = function(options) {
 		return false;
 	}
 	var	variables = options.variables || {},
-		template = (options.template || 
+		template = (options.template ||
 		           wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain",
 		text = wiki.renderTiddler(downloadType,template,options),

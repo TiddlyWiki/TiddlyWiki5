@@ -62,10 +62,10 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 			if(text) {
 				// Render the appropriate element for the image type by looking up the encoding in the content type info
 				var encoding = typeInfo.encoding || "utf8";
-				if (encoding === "base64") {
+				if(encoding === "base64") {
 					// .pdf .png .jpg etc.
 					src = "data:" + deserializerType + ";base64," + text;
-					if (deserializerType === "application/pdf") {
+					if(deserializerType === "application/pdf") {
 						tag = "embed";
 					}
 				} else {
@@ -98,7 +98,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("class",this.imageClass);
 	}
 	if(this.imageUsemap) {
-	    	domNode.setAttribute("usemap",this.imageUsemap);
+		domNode.setAttribute("usemap",this.imageUsemap);
 	}
 	if(this.imageWidth) {
 		domNode.setAttribute("width",this.imageWidth);
@@ -128,7 +128,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 			var variables = $tw.utils.collectDOMVariables(domNode,null,event);
 			variables["img-natural-width"] = domNode.naturalWidth.toString();
 			variables["img-natural-height"] = domNode.naturalHeight.toString();
-			self.invokeActionString(self.loadedActions,self,event,variables);		
+			self.invokeActionString(self.loadedActions,self,event,variables);
 		}
 	},false);
 	domNode.addEventListener("error",function() {
@@ -149,7 +149,7 @@ ImageWidget.prototype.execute = function() {
 	this.imageWidth = this.getAttribute("width");
 	this.imageHeight = this.getAttribute("height");
 	this.imageClass = this.getAttribute("class");
-    	this.imageUsemap = this.getAttribute("usemap");
+	this.imageUsemap = this.getAttribute("usemap");
 	this.imageTooltip = this.getAttribute("tooltip");
 	this.imageAlt = this.getAttribute("alt");
 	this.lazyLoading = this.getAttribute("loading");
@@ -176,8 +176,7 @@ ImageWidget.prototype.refresh = function(changedTiddlers) {
 		if(changedAttributes.height) {
 			this.domNodes[0].setAttribute("height",this.getAttribute("height"));
 		}
-	}
-	else {
+	} else {
 		return false;
 	}
 };

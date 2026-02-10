@@ -9,7 +9,7 @@ module-type: module
 Information about this module:
 rename macros and
 re-jig macro params from tw2 to tw5 style
-new macros created as a result of adapting tw2 should be 
+new macros created as a result of adapting tw2 should be
 prepended "__system" to distinguish them from the actual used name
 */
 var sliceSeparator = "::";
@@ -24,7 +24,7 @@ function getsectionname(title) {
 	}
 	return "";
 }
-function getslicename(title) { 
+function getslicename(title) {
 	if(!title)
 		return "";
 	var pos = title.indexOf(sliceSeparator);
@@ -32,7 +32,7 @@ function getslicename(title) {
 		return title.substr(pos + sliceSeparator.length);
 	}
 	return "";
-};
+}
 function gettiddlername(title) {
 	if(!title)
 		return "";
@@ -65,7 +65,7 @@ var parserparams = function(paramString) {
 		paramMatch = reParam.exec(paramString);
 	}
 	return params;
-}
+};
 var tabshandler = function(paramstring) {
 	var params = parserparams(paramstring);
 	var cookie = params[0].value;
@@ -73,21 +73,21 @@ var tabshandler = function(paramstring) {
 	var t;
 	var tabslist = "";
 	var labelarray = {};
-    var promptarray = {};
+	var promptarray = {};
 	for(t=0; t<numTabs; t++) {
 		var contentName = params[t*3+3].value;
 		tabslist = tabslist+" " + contentName;
 		labelarray[contentName] = params[t*3+1].value;
 		promptarray[contentName] = params[t*3+2].value;
-	} 
+	}
 	//Create a list of names (tiddlers, tiddler/sections, tiddler/slices), and create maps from name -> label and name -> prompt
-	//Use json to implement maps 
+	//Use json to implement maps
 	return '"""'+tabslist +'""" """'+JSON.stringify(promptarray)+'""" """'+JSON.stringify(labelarray)+'""" """'+cookie+'"""';
 };
-var namedapter = {tabs:'__system_tabs'};
+var namedapter = {tabs:"__system_tabs"};
 var paramadapter = {
 	tabs: tabshandler
-}
-exports.name = 'macroadapter';
+};
+exports.name = "macroadapter";
 exports.namedapter = namedapter;
 exports.paramadapter = paramadapter;

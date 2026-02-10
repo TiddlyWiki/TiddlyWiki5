@@ -23,13 +23,13 @@ exports.startup = function() {
 	test_makePathRelative();
 	$tw.hooks.addHook("th-importing-file",function(info) {
 		if(document.location.protocol === "file:" && info.isBinary && info.file.path && $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE,"") === "yes") {
-console.log("Wiki location",document.location.pathname)
-console.log("File location",info.file.path)
+			console.log("Wiki location",document.location.pathname);
+			console.log("File location",info.file.path);
 			info.callback([
 				{
 					title: info.file.name,
 					type: info.type,
-					"_canonical_uri": makePathRelative(
+					_canonical_uri: makePathRelative(
 						info.file.path,
 						document.location.pathname,
 						{
@@ -93,7 +93,7 @@ function makePathRelative(sourcepath,rootpath,options) {
 	// Move up a directory for each directory left in the root
 	for(p = c; p < rootParts.length - 1; p++) {
 		outputParts.push("..");
-	}		
+	}
 	// Add on the remaining parts of the source path
 	for(p = c; p < sourceParts.length; p++) {
 		outputParts.push(sourceParts[p]);
@@ -105,7 +105,7 @@ function test_makePathRelative() {
 	var test = function(sourcepath,rootpath,result,options) {
 		var actualResult = makePathRelative(sourcepath,rootpath,options);
 		if(actualResult !== result) {
-			console.log("makePathRelative test failed: makePathRelative(" + sourcepath + "," + rootpath + "," + JSON.stringify(options) + ") is " + actualResult + " and not equal to " + result);			
+			console.log("makePathRelative test failed: makePathRelative(" + sourcepath + "," + rootpath + "," + JSON.stringify(options) + ") is " + actualResult + " and not equal to " + result);
 		}
 	};
 	test("/Users/me/something/file.png","/Users/you/something/index.html","../../me/something/file.png");

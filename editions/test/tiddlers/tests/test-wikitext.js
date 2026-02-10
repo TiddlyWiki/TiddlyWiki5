@@ -67,4 +67,3 @@ describe("WikiText tests", function() {
 			"some @@background:red;color:white;.myClass 2 style and 1 class@@ text")).toBe('<p>some <span class=" myClass " style="background:red;color:white;">2 style and 1 class</span> text</p>');
 	});
 });
-

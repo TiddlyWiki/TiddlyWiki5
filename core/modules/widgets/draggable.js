@@ -62,8 +62,12 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	if(this.dragEnable) {
 		$tw.utils.makeDraggable({
 			domNode: domNode,
-			dragTiddlerFn: function() {return self.getAttribute("tiddler");},
-			dragFilterFn: function() {return self.getAttribute("filter");},
+			dragTiddlerFn: function() {
+				return self.getAttribute("tiddler");
+			},
+			dragFilterFn: function() {
+				return self.getAttribute("filter");
+			},
 			startActions: self.startActions,
 			endActions: self.endActions,
 			dragImageType: self.dragImageType,
@@ -89,7 +93,6 @@ DraggableWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-
 DraggableWidget.prototype.updateDomNodeClasses = function() {
 	var domNodeClasses = this.domNodes[0].className.split(" "),
 		oldClasses = this.draggableClasses.split(" ");
@@ -103,8 +106,8 @@ DraggableWidget.prototype.updateDomNodeClasses = function() {
 	});
 	//Add new classes from updated class attribute.
 	$tw.utils.pushTop(domNodeClasses,this.draggableClasses);
-	this.domNodes[0].setAttribute("class",domNodeClasses.join(" "))
-}
+	this.domNodes[0].setAttribute("class",domNodeClasses.join(" "));
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering

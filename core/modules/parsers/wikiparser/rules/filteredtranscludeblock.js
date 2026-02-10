@@ -49,7 +49,7 @@ exports.parse = function() {
 	var node = {
 		type: "list",
 		attributes: {
-			filter: {type: "string", value: filter, start: filterStart, end: filterEnd},
+			filter: {type: "string", value: filter, start: filterStart, end: filterEnd}
 		},
 		isBlock: true
 	};

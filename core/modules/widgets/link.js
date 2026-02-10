@@ -138,13 +138,15 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	});
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
-		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"},
+		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"}
 	]);
 	// Make the link draggable if required
 	if(this.draggable === "yes") {
 		$tw.utils.makeDraggable({
 			domNode: domNode,
-			dragTiddlerFn: function() {return self.to;},
+			dragTiddlerFn: function() {
+				return self.to;
+			},
 			startActions: self.startActions,
 			endActions: self.endActions,
 			widget: this
@@ -171,7 +173,7 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		navigateTo: this.to,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,
-		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
+		navigateFromClientRect: {top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
 		navigateFromClientTop: bounds.top,
 		navigateFromClientLeft: bounds.left,

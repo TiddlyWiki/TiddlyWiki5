@@ -10,7 +10,7 @@ Wrapper for `katex.min.js` that provides a `<$latex>` widget. It is also availab
 "use strict";
 
 var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),
-    chemParse = require("$:/plugins/tiddlywiki/katex/mhchem.min.js"),
+	chemParse = require("$:/plugins/tiddlywiki/katex/mhchem.min.js"),
 	Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 katex.macros = {};
@@ -26,8 +26,8 @@ katex.updateMacros = function() {
 			cmd = tid.fields["text"];
 			katex.macros[macro] = cmd;
 		} catch(ex) {// Catch the bad ones
-		};
-	};
+		}
+	}
 };
 
 var KaTeXWidget = function(parseTreeNode,options) {
@@ -85,7 +85,7 @@ KaTeXWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 

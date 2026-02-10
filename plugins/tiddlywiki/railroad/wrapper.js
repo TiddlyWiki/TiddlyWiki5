@@ -101,7 +101,7 @@ RailroadWidget.prototype.patchLinks = function(node) {
 							child.onclick = function(event) {
 								self.dispatchLink(myTarget,event);
 								return false;
-							}
+							};
 						})(target);
 						target = "#" + target;
 					}
@@ -119,7 +119,7 @@ RailroadWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	}
-	return false;	
+	return false;
 };
 
 RailroadWidget.prototype.dispatchLink = function(to,event) {
@@ -130,7 +130,7 @@ RailroadWidget.prototype.dispatchLink = function(to,event) {
 		navigateTo: to,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,
-		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
+		navigateFromClientRect: {top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
 		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1)
 	});

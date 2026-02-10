@@ -63,7 +63,7 @@ ActionListopsWidget.prototype.invokeAction = function(triggeringWidget,
 	if(this.filter) {
 		this.wiki.setText(this.target, field, index, $tw.utils.stringifyList(
 			this.wiki
-			.filterTiddlers(this.filter, this)));
+				.filterTiddlers(this.filter, this)));
 	}
 	if(this.subfilter) {
 		var inputList = this.wiki.getTiddlerList(this.target,field,index),

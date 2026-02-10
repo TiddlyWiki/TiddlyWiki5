@@ -31,13 +31,13 @@ exports.terminalColour = function(colour) {
 };
 
 exports.terminalColourLookup = {
-	"black": "0;30",
-	"red": "0;31",
-	"green": "0;32",
+	black: "0;30",
+	red: "0;31",
+	green: "0;32",
 	"brown/orange": "0;33",
-	"blue": "0;34",
-	"purple": "0;35",
-	"cyan": "0;36",
+	blue: "0;34",
+	purple: "0;35",
+	cyan: "0;36",
 	"light gray": "0;37"
 };
 
@@ -100,14 +100,18 @@ exports.trimSuffix = function(str,unwanted) {
 Convert a string to sentence case (ie capitalise first letter)
 */
 exports.toSentenceCase = function(str) {
-	return (str || "").replace(/^\S/, function(c) {return c.toUpperCase();});
+	return (str || "").replace(/^\S/, function(c) {
+		return c.toUpperCase();
+	});
 };
 
 /*
 Convert a string to title case (ie capitalise each initial letter)
 */
 exports.toTitleCase = function(str) {
-	return (str || "").replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
+	return (str || "").replace(/(^|\s)\S/g, function(c) {
+		return c.toUpperCase();
+	});
 };
 
 /*
@@ -244,7 +248,7 @@ exports.slowInSlowOut = function(t) {
 
 exports.copyObjectPropertiesSafe = function(object) {
 	const seen = new Set(),
-		isDOMElement = value => value instanceof Node || value instanceof Window;
+		isDOMElement = (value) => value instanceof Node || value instanceof Window;
 
 	function safeCopy(obj) {
 		// skip circular references
@@ -261,7 +265,7 @@ exports.copyObjectPropertiesSafe = function(object) {
 		}
 		// copy arrays, preserving positions
 		if(Array.isArray(obj)) {
-			return obj.map(item => {
+			return obj.map((item) => {
 				const value = safeCopy(item);
 				return value === undefined ? null : value;
 			});
@@ -924,20 +928,20 @@ exports.makeCompareFunction = function(type,options) {
 			}
 		},
 		types = {
-			"number": function(a,b) {
+			number: function(a,b) {
 				return compare($tw.utils.parseNumber(a),$tw.utils.parseNumber(b));
 			},
-			"integer": function(a,b) {
+			integer: function(a,b) {
 				return compare($tw.utils.parseInt(a),$tw.utils.parseInt(b));
 			},
-			"string": function(a,b) {
+			string: function(a,b) {
 				if(!isCaseSensitive) {
 					a = a.toLowerCase();
 					b = b.toLowerCase();
 				}
 				return compare("" + a,"" + b);
 			},
-			"date": function(a,b) {
+			date: function(a,b) {
 				var dateA = $tw.utils.parseDate(a),
 					dateB = $tw.utils.parseDate(b);
 				if(!isFinite(dateA)) {
@@ -948,10 +952,10 @@ exports.makeCompareFunction = function(type,options) {
 				}
 				return compare(dateA,dateB);
 			},
-			"version": function(a,b) {
+			version: function(a,b) {
 				return compare($tw.utils.compareVersions(a,b),0);
 			},
-			"alphanumeric": function(a,b) {
+			alphanumeric: function(a,b) {
 				if(!isCaseSensitive) {
 					a = a.toLowerCase();
 					b = b.toLowerCase();

@@ -248,12 +248,12 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 				listContents[oldPos] = value;
 				hasChanged = true;
 			} else {
-				listContents.splice(oldPos, 1)
+				listContents.splice(oldPos, 1);
 				hasChanged = true;
 			}
 		} else {
 			// both were present: just remove the old one, leave new alone
-			listContents.splice(oldPos, 1)
+			listContents.splice(oldPos, 1);
 			hasChanged = true;
 		}
 		if(this.checkboxListField) {

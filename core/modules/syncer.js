@@ -88,8 +88,8 @@ function Syncer(options) {
 		if(filteredChanges.length > 0) {
 			self.processTaskQueue();
 		} else {
-			// Look for deletions of tiddlers we're already syncing	
-			var outstandingDeletion = false
+			// Look for deletions of tiddlers we're already syncing
+			var outstandingDeletion = false;
 			$tw.utils.each(changes,function(change,title,object) {
 				if(change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) {
 					outstandingDeletion = true;
@@ -120,7 +120,7 @@ function Syncer(options) {
 				self.login(username,password,function() {});
 			} else {
 				// No username and password, so we display a prompt
-				self.handleLoginEvent();				
+				self.handleLoginEvent();
 			}
 		});
 		$tw.rootWidget.addEventListener("tm-logout",function() {
@@ -137,7 +137,7 @@ function Syncer(options) {
 	if(!this.disableUI && this.wiki.getTiddlerText(this.titleSyncDisableLazyLoading) !== "yes") {
 		this.wiki.addEventListener("lazyLoad",function(title) {
 			self.handleLazyLoadEvent(title);
-		});		
+		});
 	}
 	// Get the login status
 	this.getStatus(function(err,isLoggedIn) {
@@ -172,8 +172,8 @@ Syncer.prototype.getTiddlerRevision = function(title) {
 	if(this.syncadaptor && this.syncadaptor.getTiddlerRevision) {
 		return this.syncadaptor.getTiddlerRevision(title);
 	} else {
-		return this.wiki.getTiddler(title).fields.revision;	
-	} 
+		return this.wiki.getTiddler(title).fields.revision;
+	}
 };
 
 /*
@@ -298,13 +298,13 @@ Synchronise from the server by reading the skinny tiddler list and queuing up lo
 Syncer.prototype.syncFromServer = function() {
 	if(this.canSyncFromServer()) {
 		this.forceSyncFromServer = true;
-		this.processTaskQueue();	
+		this.processTaskQueue();
 	}
 };
 
 Syncer.prototype.canSyncFromServer = function() {
 	return !!this.syncadaptor.getUpdatedTiddlers || !!this.syncadaptor.getSkinnyTiddlers;
-}
+};
 
 /*
 Force load a tiddler from the server
@@ -530,7 +530,7 @@ function SaveTiddlerTask(syncer,title) {
 
 SaveTiddlerTask.prototype.toString = function() {
 	return "SAVE " + this.title;
-}
+};
 
 SaveTiddlerTask.prototype.run = function(callback) {
 	var self = this,
@@ -568,7 +568,7 @@ function DeleteTiddlerTask(syncer,title) {
 
 DeleteTiddlerTask.prototype.toString = function() {
 	return "DELETE " + this.title;
-}
+};
 
 DeleteTiddlerTask.prototype.run = function(callback) {
 	var self = this;
@@ -595,7 +595,7 @@ function LoadTiddlerTask(syncer,title) {
 
 LoadTiddlerTask.prototype.toString = function() {
 	return "LOAD " + this.title;
-}
+};
 
 LoadTiddlerTask.prototype.run = function(callback) {
 	var self = this;
@@ -621,7 +621,7 @@ function SyncFromServerTask(syncer) {
 
 SyncFromServerTask.prototype.toString = function() {
 	return "SYNCFROMSERVER";
-}
+};
 
 SyncFromServerTask.prototype.run = function(callback) {
 	var self = this;

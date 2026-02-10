@@ -246,7 +246,7 @@ Parser.prototype.parseTerminal = function() {
 	var component = new components.Terminal(this.token.value);
 	// Consume the string literal
 	this.advance();
-    return component;
+	return component;
 };
 
 Parser.prototype.parseTransclusion = function() {
@@ -268,19 +268,19 @@ Parser.prototype.parseTransclusion = function() {
 
 Parser.prototype.parsePragma = function() {
 	// Create a dummy component
-	var component = { isPragma: true };
+	var component = {isPragma: true};
 	// Consume the pragma
 	var pragma = this.token.value;
 	this.advance();
 	// Apply the setting
 	if(pragma === "arrow") {
-		this.options.arrow = this.parseYesNo(pragma);		
+		this.options.arrow = this.parseYesNo(pragma);
 	} else if(pragma === "debug") {
 		this.options.debug = true;
 	} else if(pragma === "start") {
-		this.options.start = this.parseTerminusStyle(pragma);		
+		this.options.start = this.parseTerminusStyle(pragma);
 	} else if(pragma === "end") {
-		this.options.end = this.parseTerminusStyle(pragma);		
+		this.options.end = this.parseTerminusStyle(pragma);
 	} else {
 		throw "Invalid pragma";
 	}
@@ -289,18 +289,18 @@ Parser.prototype.parsePragma = function() {
 
 Parser.prototype.parseYesNo = function(pragma) {
 	return this.parseSetting(["yes","no"],pragma) === "yes";
-}
+};
 
 Parser.prototype.parseTerminusStyle = function(pragma) {
 	return this.parseSetting(["single","double","none"],pragma);
-}
+};
 
 Parser.prototype.parseSetting = function(options,pragma) {
 	if(this.at("name") && options.indexOf(this.token.value) !== -1) {
-		return this.tokenValueEaten();		
+		return this.tokenValueEaten();
 	}
 	throw options.join(" or ") + " expected after \\" + pragma;
-}
+};
 
 /////////////////////////// Token manipulation
 

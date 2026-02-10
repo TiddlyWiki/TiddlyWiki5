@@ -57,7 +57,7 @@ RawWidget.prototype.refresh = function(changedTiddlers) {
 	if(this.blocked) {
 		return this.refreshChildren(changedTiddlers);
 	} else {
-		return false;		
+		return false;
 	}
 };
 

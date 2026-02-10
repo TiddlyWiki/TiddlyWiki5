@@ -30,11 +30,11 @@ Command.prototype.execute = function() {
 	var archivePath = this.params[0];
 	// Load tweets
 	var archiveSource = new $tw.utils.TwitterArchivistSourceNodeJs({
-		archivePath: archivePath
-	}),
-	archivist = new $tw.utils.TwitterArchivist({
-		source: archiveSource
-	});
+			archivePath: archivePath
+		}),
+		archivist = new $tw.utils.TwitterArchivist({
+			source: archiveSource
+		});
 	archivist.loadArchive({
 		wiki: this.commander.wiki
 	}).then(function() {

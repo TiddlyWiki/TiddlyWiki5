@@ -49,24 +49,24 @@ describe("Wiki.parseTextReference tests", function() {
 				text: "Everything in federation",
 				tags: ["two"]
 			},
-			"TiddlerSix": {
+			TiddlerSix: {
 				title: "TiddlerSix",
 				text: "Missing inaction from TiddlerOne",
 				filter: "[[one]] [[a a]] [subfilter{hasList!!list}]",
 				tags: []
 			},
-			"TiddlerSeventh": {
+			TiddlerSeventh: {
 				title: "TiddlerSeventh",
 				text: "",
 				list: "TiddlerOne [[Tiddler Three]] [[a fourth tiddler]] MissingTiddler",
 				tags: ["one"]
 			},
-			"Tiddler8": {
+			Tiddler8: {
 				title: "Tiddler8",
 				text: "Tidd",
 				tags: ["one"],
 				"test-field": "JoeBloggs",
-				"myfield":""
+				myfield:""
 			}
 		}
 	};
@@ -125,4 +125,3 @@ describe("Wiki.parseTextReference tests", function() {
 	});
 
 });
-

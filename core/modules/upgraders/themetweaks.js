@@ -20,16 +20,16 @@ This upgrader copies any values from the old format to the new. The old data tid
 
 var MAPPINGS = {
 	"$:/themes/tiddlywiki/vanilla/metrics": {
-		"fontsize": "$:/themes/tiddlywiki/vanilla/metrics/fontsize",
-		"lineheight": "$:/themes/tiddlywiki/vanilla/metrics/lineheight",
-		"storyleft": "$:/themes/tiddlywiki/vanilla/metrics/storyleft",
-		"storytop": "$:/themes/tiddlywiki/vanilla/metrics/storytop",
-		"storyright": "$:/themes/tiddlywiki/vanilla/metrics/storyright",
-		"storywidth": "$:/themes/tiddlywiki/vanilla/metrics/storywidth",
-		"tiddlerwidth": "$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth"
+		fontsize: "$:/themes/tiddlywiki/vanilla/metrics/fontsize",
+		lineheight: "$:/themes/tiddlywiki/vanilla/metrics/lineheight",
+		storyleft: "$:/themes/tiddlywiki/vanilla/metrics/storyleft",
+		storytop: "$:/themes/tiddlywiki/vanilla/metrics/storytop",
+		storyright: "$:/themes/tiddlywiki/vanilla/metrics/storyright",
+		storywidth: "$:/themes/tiddlywiki/vanilla/metrics/storywidth",
+		tiddlerwidth: "$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth"
 	},
 	"$:/themes/tiddlywiki/vanilla/settings": {
-		"fontfamily": "$:/themes/tiddlywiki/vanilla/settings/fontfamily"
+		fontfamily: "$:/themes/tiddlywiki/vanilla/settings/fontfamily"
 	}
 };
 

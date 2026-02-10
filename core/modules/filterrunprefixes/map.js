@@ -19,21 +19,21 @@ exports.map = function(operationSubFunction,options) {
 			results.clear();
 			$tw.utils.each(inputTitles,function(title) {
 				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
-					"currentTiddler": "" + title,
+					currentTiddler: "" + title,
 					"..currentTiddler": widget.getVariable("currentTiddler",""),
-					"index": "" + index,
-					"revIndex": "" +  (inputTitles.length - 1 - index),
-					"length": "" + inputTitles.length
+					index: "" + index,
+					revIndex: "" +  (inputTitles.length - 1 - index),
+					length: "" + inputTitles.length
 				}));
 				if(filtered.length && flatten) {
 					$tw.utils.each(filtered,function(value) {
 						results.push(value);
-					})
+					});
 				} else {
 					results.push(filtered[0]||"");
 				}
 				++index;
 			});
 		}
-	}
+	};
 };

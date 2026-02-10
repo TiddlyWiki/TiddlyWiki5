@@ -11,7 +11,6 @@ Various static DOM-related utility functions.
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
-
 /*
 Select text in a an input or textarea (setSelectionRange crashes on certain input types)
 */
@@ -74,7 +73,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 	// Get the scroll container and register the current scroll position
 	var container = $tw.utils.getScrollContainer(domNode),
 		scrollTop = container.scrollTop;
-    // Measure the specified minimum height
+	// Measure the specified minimum height
 	domNode.style.height = minHeight;
 	var measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
 	// Set its height to auto so that it snaps to the correct height
@@ -246,7 +245,7 @@ exports.copyToClipboard = function(text,options) {
 	}
 	if(!options.doNotNotify) {
 		var successNotification = options.successNotification || "$:/language/Notifications/CopiedToClipboard/Succeeded",
-			failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed"
+			failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed";
 		$tw.notifier.display(succeeded ? successNotification : failureNotification);
 	}
 	document.body.removeChild(textArea);
@@ -257,13 +256,13 @@ Collect DOM variables
 */
 exports.collectDOMVariables = function(selectedNode,domNode,event) {
 	var variables = {},
-	    selectedNodeRect,
-	    domNodeRect;
+		selectedNodeRect,
+		domNodeRect;
 	if(selectedNode) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
-		
+
 		if("offsetLeft" in selectedNode) {
 			// Add variables with a (relative and absolute) popup coordinate string for the selected node
 			var nodeRect = {
@@ -288,7 +287,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
 		}
 	}
-	
+
 	if(domNode && ("offsetWidth" in domNode)) {
 		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
 		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
@@ -301,7 +300,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
 			variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
 		}
-		
+
 		if(domNode) {
 			// Add variables for event X and Y position relative to event catcher node
 			domNodeRect = domNode.getBoundingClientRect();

@@ -79,7 +79,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this.tooltip) {
 		domNode.setAttribute("title",this.tooltip);
 	}
-	if (this.role) {
+	if(this.role) {
 		domNode.setAttribute("role", this.role);
 	}
 	if(this.popup || this.popupTitle) {
@@ -128,8 +128,12 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this.dragTiddler || this.dragFilter) {
 		$tw.utils.makeDraggable({
 			domNode: domNode,
-			dragTiddlerFn: function() {return self.dragTiddler;},
-			dragFilterFn: function() {return self.dragFilter;},
+			dragTiddlerFn: function() {
+				return self.dragTiddler;
+			},
+			dragFilterFn: function() {
+				return self.dragFilter;
+			},
 			widget: this
 		});
 	}
@@ -151,7 +155,7 @@ ButtonWidget.prototype.getBoundingClientRect = function() {
 };
 
 ButtonWidget.prototype.isSelected = function() {
-    return this.setTitle ? (this.setField ? this.wiki.getTiddler(this.setTitle).getFieldString(this.setField) === this.setTo :
+	return this.setTitle ? (this.setField ? this.wiki.getTiddler(this.setTitle).getFieldString(this.setField) === this.setTo :
 		(this.setIndex ? this.wiki.extractTiddlerDataItem(this.setTitle,this.setIndex) === this.setTo :
 			this.wiki.getTiddlerText(this.setTitle))) || this.defaultSetValue || this.getVariable("currentTiddler") :
 		this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler")) === this.setTo;
@@ -170,7 +174,7 @@ ButtonWidget.prototype.navigateTo = function(event) {
 		navigateTo: this.to,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,
-		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
+		navigateFromClientRect: {top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
 		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1),
 		event: event
@@ -203,7 +207,7 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 ButtonWidget.prototype.setTiddler = function() {
 	if(this.setTitle) {
 		this.setField ? this.wiki.setText(this.setTitle,this.setField,undefined,this.setTo) :
-				(this.setIndex ? this.wiki.setText(this.setTitle,undefined,this.setIndex,this.setTo) :
+			(this.setIndex ? this.wiki.setText(this.setTitle,undefined,this.setIndex,this.setTo) :
 				this.wiki.setText(this.setTitle,"text",undefined,this.setTo));
 	} else {
 		this.wiki.setTextReference(this.set,this.setTo,this.getVariable("currentTiddler"));

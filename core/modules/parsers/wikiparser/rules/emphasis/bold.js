@@ -12,8 +12,8 @@ Wiki text inline rule for emphasis - bold. For example:
 This wikiparser can be modified using the rules eg:
 
 ```
-\rules except bold 
-\rules only bold 
+\rules except bold
+\rules only bold
 ```
 
 \*/

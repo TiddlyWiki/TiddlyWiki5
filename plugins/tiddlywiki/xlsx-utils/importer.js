@@ -23,7 +23,7 @@ var XLSXImporter = function(options) {
 	this.results = [];
 	this.nextAutoTitle = 1;
 	if(JSZip) {
-		this.processWorkbook();		
+		this.processWorkbook();
 	}
 };
 
@@ -34,7 +34,7 @@ XLSXImporter.prototype.getResults = function() {
 XLSXImporter.prototype.processWorkbook = function() {
 	// Read the workbook
 	if(this.filename) {
-		this.workbook = XLSX.readFile(this.filename);	
+		this.workbook = XLSX.readFile(this.filename);
 	} else if(this.text) {
 		this.workbook = XLSX.read(this.text,{type:"base64"});
 	}
@@ -67,7 +67,7 @@ XLSXImporter.prototype.processSheet = function(sheetImportSpecTitle) {
 			if(startRow < endRow) {
 				for(this.row=startRow; this.row<=endRow; this.row++) {
 					// Iterate through the row import specifiers
-					$tw.utils.each(this.sheetImportSpec.fields.list || [],this.processRow.bind(this));					
+					$tw.utils.each(this.sheetImportSpec.fields.list || [],this.processRow.bind(this));
 				}
 			}
 		}
@@ -114,7 +114,7 @@ XLSXImporter.prototype.processRowByColumn = function() {
 		var cell = self.sheet[XLSX.utils.encode_cell({c: self.columnsByName[name], r: self.row})];
 		name = name.toLowerCase();
 		if(cell && cell.w && $tw.utils.isValidFieldName(name)) {
-			self.tiddlerFields[name] = cell.w;		
+			self.tiddlerFields[name] = cell.w;
 		}
 	});
 };
@@ -152,7 +152,7 @@ XLSXImporter.prototype.processField = function(fieldImportSpecTitle) {
 				}
 				break;
 			case "constant":
-				value = fieldImportSpec.fields["import-field-value"]
+				value = fieldImportSpec.fields["import-field-value"];
 				break;
 		}
 		value = (value || "").trim();
@@ -176,12 +176,12 @@ XLSXImporter.prototype.processField = function(fieldImportSpecTitle) {
 				break;
 			case "append":
 				var list = $tw.utils.parseStringArray(this.tiddlerFields[fieldName] || "");
-				$tw.utils.pushTop(list,value)
+				$tw.utils.pushTop(list,value);
 				this.tiddlerFields[fieldName] = list;
 				break;
 		}
 	}
-}
+};
 
 XLSXImporter.prototype.measureSheet = function(sheet) {
 	var sheetRange = XLSX.utils.decode_range(sheet["!ref"]);
@@ -190,7 +190,7 @@ XLSXImporter.prototype.measureSheet = function(sheet) {
 		endRow: Math.max(sheetRange.s.r,sheetRange.e.r),
 		startCol: Math.min(sheetRange.s.c,sheetRange.e.c),
 		endCol: Math.max(sheetRange.s.c,sheetRange.e.c)
-	}
+	};
 };
 
 XLSXImporter.prototype.findColumns = function(sheet,sheetSize,skipRowsTop) {

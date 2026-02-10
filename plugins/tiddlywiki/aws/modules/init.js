@@ -16,7 +16,7 @@ exports.synchronous = true;
 
 exports.startup = function() {
 	var logger = new $tw.utils.Logger("aws");
-		if($tw.node) {
+	if($tw.node) {
 		try {
 			require("aws-sdk");
 		} catch(e) {

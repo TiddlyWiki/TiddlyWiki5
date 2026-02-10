@@ -7,7 +7,6 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 
 \*/
 
-
 "use strict";
 
 var jasmine = require("./jasmine-plugin.js");
@@ -28,7 +27,7 @@ if($tw.browser) {
 		if(!jasmine.testsWereRun()) {
 			process.stdout.write("Jasmine: no \"--test\" command given, so skipping tests\n");
 		}
-	}
+	};
 	// We make this check after the commands are run.
 	exports.after = ["commands"];
 }

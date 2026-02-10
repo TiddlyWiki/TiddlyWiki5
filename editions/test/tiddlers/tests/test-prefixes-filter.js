@@ -5,7 +5,6 @@ tags: [[$:/tags/test-spec]]
 Tests the reduce prefix and filter.
 \*/
 
-
 /* jslint node: true, browser: true */
 /* eslint-env node, browser, jasmine */
 /* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"]*/
@@ -26,47 +25,47 @@ describe("general filter prefix tests", function() {
 		expect($tw.wiki.parseFilter("[[Sparkling water]tags[]] :intersection[[Red wine]tags[]]")).toEqual(
 			[
 				{
-					"prefix": "",
-					"operators": [
+					prefix: "",
+					operators: [
 						{
-							"operator": "title",
-							"operands": [
+							operator: "title",
+							operands: [
 								{
-									"text": "Sparkling water"
+									text: "Sparkling water"
 								}
 							]
 						},
 						{
-							"operator": "tags",
-							"operands": [
+							operator: "tags",
+							operands: [
 								{
-									"text": ""
+									text: ""
 								}
 							]
 						}
 					]
 				},
 				{
-					"prefix": ":intersection",
-					"operators": [
+					prefix: ":intersection",
+					operators: [
 						{
-							"operator": "title",
-							"operands": [
+							operator: "title",
+							operands: [
 								{
-									"text": "Red wine"
+									text: "Red wine"
 								}
 							]
 						},
 						{
-							"operator": "tags",
-							"operands": [
+							operator: "tags",
+							operands: [
 								{
-									"text": ""
+									text: ""
 								}
 							]
 						}
 					],
-					"namedPrefix": "intersection"
+					namedPrefix: "intersection"
 				}
 			]
 		);
@@ -75,19 +74,19 @@ describe("general filter prefix tests", function() {
 		expect($tw.wiki.parseFilter(":reduce[multiply<accumulator>]")).toEqual(
 			[
 				{
-					"prefix": ":reduce",
-					"operators": [
+					prefix: ":reduce",
+					operators: [
 						{
-							"operator": "multiply",
-							"operands": [
+							operator: "multiply",
+							operands: [
 								{
-									"variable": true,
-									"text": "accumulator"
+									variable: true,
+									text: "accumulator"
 								}
 							]
 						}
 					],
-					"namedPrefix": "reduce"
+					namedPrefix: "reduce"
 				}
 			]
 		);
@@ -96,20 +95,20 @@ describe("general filter prefix tests", function() {
 		expect($tw.wiki.parseFilter(":reduce:1[multiply<accumulator>]")).toEqual(
 			[
 				{
-					"prefix": ":reduce:1",
-					"operators": [
+					prefix: ":reduce:1",
+					operators: [
 						{
-							"operator": "multiply",
-							"operands": [
+							operator: "multiply",
+							operands: [
 								{
-									"variable": true,
-									"text": "accumulator"
+									variable: true,
+									text: "accumulator"
 								}
 							]
 						}
 					],
-					"namedPrefix": "reduce",
-					"suffixes": [
+					namedPrefix: "reduce",
+					suffixes: [
 						[
 							"1"
 						]
@@ -122,25 +121,25 @@ describe("general filter prefix tests", function() {
 		expect($tw.wiki.parseFilter(":reduce:1:hello[multiply<accumulator>]")).toEqual(
 			[
 				{
-					"prefix": ":reduce:1:hello",
-					"operators": [
+					prefix: ":reduce:1:hello",
+					operators: [
 						{
-							"operator": "multiply",
-							"operands": [
+							operator: "multiply",
+							operands: [
 								{
-									"variable": true,
-									"text": "accumulator"
+									variable: true,
+									text: "accumulator"
 								}
 							]
 						}
 					],
-					"namedPrefix": "reduce",
-					"suffixes": [
+					namedPrefix: "reduce",
+					suffixes: [
 						[
 							"1"
 						],
 						[
-							"hello",
+							"hello"
 						]
 					]
 				}
@@ -151,51 +150,20 @@ describe("general filter prefix tests", function() {
 		expect($tw.wiki.parseFilter(":reduce:1,one:hello,there[multiply<accumulator>]")).toEqual(
 			[
 				{
-					"prefix": ":reduce:1,one:hello,there",
-					"operators": [
+					prefix: ":reduce:1,one:hello,there",
+					operators: [
 						{
-							"operator": "multiply",
-							"operands": [
+							operator: "multiply",
+							operands: [
 								{
-									"variable": true,
-									"text": "accumulator"
+									variable: true,
+									text: "accumulator"
 								}
 							]
 						}
 					],
-					"namedPrefix": "reduce",
-					"suffixes": [
-						[
-							"1",
-							"one"
-						],
-						[
-							"hello",
-							"there"
-						]
-					]
-				}
-			]
-		);
-		
-		// suffixes with spaces
-		expect($tw.wiki.parseFilter(":reduce: 1, one:hello, there [multiply<accumulator>]")).toEqual(
-			[
-				{
-					"prefix": ":reduce: 1, one:hello, there ",
-					"operators": [
-						{
-							"operator": "multiply",
-							"operands": [
-								{
-									"variable": true,
-									"text": "accumulator"
-								}
-							]
-						}
-					],
-					"namedPrefix": "reduce",
-					"suffixes": [
+					namedPrefix: "reduce",
+					suffixes: [
 						[
 							"1",
 							"one"
@@ -209,7 +177,38 @@ describe("general filter prefix tests", function() {
 			]
 		);
 
-	});	
+		// suffixes with spaces
+		expect($tw.wiki.parseFilter(":reduce: 1, one:hello, there [multiply<accumulator>]")).toEqual(
+			[
+				{
+					prefix: ":reduce: 1, one:hello, there ",
+					operators: [
+						{
+							operator: "multiply",
+							operands: [
+								{
+									variable: true,
+									text: "accumulator"
+								}
+							]
+						}
+					],
+					namedPrefix: "reduce",
+					suffixes: [
+						[
+							"1",
+							"one"
+						],
+						[
+							"hello",
+							"there"
+						]
+					]
+				}
+			]
+		);
+
+	});
 
 });
 
@@ -311,7 +310,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		title: "$:/tags/SecondFilter",
 		list: "$:/filter1 $:/filter2"
 	});
-	
+
 	it("should handle the :cascade filter prefix", function() {
 		expect(wiki.filterTiddlers("[[Rice Pudding]] :cascade[all[shadows+tiddlers]tag[$:/tags/Filter]get[text]]").join(",")).toBe("It is not customary");
 		expect(wiki.filterTiddlers("[[chocolate cake]] :cascade[all[shadows+tiddlers]tag[$:/tags/Filter]get[text]]").join(",")).toBe("It is customary");
@@ -328,7 +327,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		// Empty input should become empty output
 		expect(wiki.filterTiddlers("[tag[non-existent]] :reduce[get[price]multiply{!!quantity}add<accumulator>]").length).toBe(0);
 		expect(wiki.filterTiddlers("[tag[non-existent]] :reduce[get[price]multiply{!!quantity}add<accumulator>] :else[[0]]").join(",")).toBe("0");
-		
+
 		expect(wiki.filterTiddlers("[tag[non-existent]] :reduce:11,22[get[price]multiply{!!quantity}add<accumulator>] :else[[0]]").join(",")).toBe("0");
 
 		expect(wiki.filterTiddlers("[tag[non-existent]] :reduce:11[get[price]multiply{!!quantity}add<accumulator>] :else[[0]]").join(",")).toBe("0");
@@ -336,8 +335,8 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 
 	it("should handle the reduce operator", function() {
 		var widget = require("$:/core/modules/widgets/widget.js");
-		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
-										   { wiki:wiki, document:$tw.document});
+		var rootWidget = new widget.widget({type:"widget", children:[ {type:"widget", children:[]} ]},
+			{wiki:wiki, document:$tw.document});
 		rootWidget.makeChildWidgets();
 		var anchorWidget = rootWidget.children[0];
 		rootWidget.setVariable("add-price","[get[price]multiply{!!quantity}add<accumulator>]");
@@ -368,7 +367,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(parseFloat(wiki.filterTiddlers("[tag[shopping]get[price]median[]]").join(","))).toBeCloseTo(1.99);
 		expect(parseFloat(wiki.filterTiddlers("[tag[food]get[price]median[]]").join(","))).toBeCloseTo(3.155);
 	});
-	
+
 	it("should handle the variance operator", function() {
 		expect(parseFloat(wiki.filterTiddlers("[tag[shopping]get[price]variance[]]").join(","))).toBeCloseTo(2.92);
 		expect(parseFloat(wiki.filterTiddlers("[tag[food]get[price]variance[]]").join(","))).toBeCloseTo(3.367);
@@ -379,7 +378,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(parseFloat(wiki.filterTiddlers("[tag[shopping]get[price]standard-deviation[]]").join(","))).toBeCloseTo(1.71);
 		expect(parseFloat(wiki.filterTiddlers("[tag[food]get[price]standard-deviation[]]").join(","))).toBeCloseTo(1.835);
 		expect(wiki.filterTiddlers(" +[standard-deviation[]]").toString()).toBe("");
-	});	
+	});
 
 	it("should handle the :intersection prefix", function() {
 		expect(wiki.filterTiddlers("[[Sparkling water]tags[]] :intersection[[Red wine]tags[]]").join(",")).toBe("drinks,textexample");
@@ -388,11 +387,11 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[shopping]] :intersection[tag[drinks]]").join(",")).toBe("Milk");
 		expect(wiki.filterTiddlers("[tag[shopping]] :intersection[tag[wine]]").join(",")).toBe("");
 	});
-	
+
 	it("should handle the :filter prefix and filter operator", function() {
 		var widget = require("$:/core/modules/widgets/widget.js");
-		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
-										   { wiki:wiki, document:$tw.document});
+		var rootWidget = new widget.widget({type:"widget", children:[ {type:"widget", children:[]} ]},
+			{wiki:wiki, document:$tw.document});
 		rootWidget.makeChildWidgets();
 		var anchorWidget = rootWidget.children[0];
 		rootWidget.setVariable("larger-than-18","[get[text]length[]compare:integer:gteq[18]]");
@@ -447,8 +446,8 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 
 	it("should handle macro parameters for filter run prefixes",function() {
 		var widget = require("$:/core/modules/widgets/widget.js");
-		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
-										   { wiki:wiki, document:$tw.document});
+		var rootWidget = new widget.widget({type:"widget", children:[ {type:"widget", children:[]} ]},
+			{wiki:wiki, document:$tw.document});
 		rootWidget.makeChildWidgets();
 		var anchorWidget = rootWidget.children[0];
 		rootWidget.setVariable("greet","Hello $name$",[{name:"name"}],true);

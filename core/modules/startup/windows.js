@@ -42,8 +42,7 @@ exports.startup = function() {
 		try {
 			srcWindow = window.open("","external-" + windowID,"scrollbars,width=" + width + ",height=" + height + (top ? ",top=" + top : "" ) + (left ? ",left=" + left : "" )),
 			srcDocument = srcWindow.document;
-		}
-		catch(e) {
+		} catch(e) {
 			return;
 		}
 		$tw.windows[windowID] = srcWindow;
@@ -96,15 +95,15 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-close-window",function(event) {
 		var windowID = event.param,
 			win = $tw.windows[windowID];
-			if(win) {
-				win.close();
-			}
+		if(win) {
+			win.close();
+		}
 	});
 	var closeAllWindows = function() {
 		$tw.utils.each($tw.windows,function(win) {
 			win.close();
 		});
-	}
+	};
 	$tw.rootWidget.addEventListener("tm-close-all-windows",closeAllWindows);
 	// Close open windows when unloading main window
 	$tw.addUnloadTask(closeAllWindows);

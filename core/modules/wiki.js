@@ -204,9 +204,9 @@ exports.generateNewTitle = function(baseTitle,options) {
 		// "count" is important to avoid an endless loop in while(...)!!
 		template = (/\$count:?(\d+)?\$/i.test(template)) ? template : template + "$count$";
 		// .formatTitleString() expects strings as input
-		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c+""});
+		title = $tw.utils.formatTitleString(template,{base:baseTitle,separator:prefix,counter:c+""});
 		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
-			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)+""});
+			title = $tw.utils.formatTitleString(template,{base:baseTitle,separator:prefix,counter:(++c)+""});
 		}
 	} else {
 		if(c > 0) {
@@ -373,12 +373,12 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 	var self = this;
 	if(sortField === "title") {
 		if(!isNumeric && !isAlphaNumeric) {
-			const sorter = new Intl.Collator(locale, { sensitivity: isCaseSensitive ? "variant" : "accent" });
+			const sorter = new Intl.Collator(locale, {sensitivity: isCaseSensitive ? "variant" : "accent"});
 			if(isDescending) {
 				titles.sort((a,b) => sorter.compare(b, a));
 			} else {
 				titles.sort((a,b) => sorter.compare(a, b));
-			}	
+			}
 		} else {
 			titles.sort(function(a,b) {
 				var x,y;
@@ -399,7 +399,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 						}
 					}
 				}
-				const sorter = new Intl.Collator(locale, { numeric: isAlphaNumeric, sensitivity: isAlphaNumeric ? "base" : isCaseSensitive ? "variant" :  "accent" });
+				const sorter = new Intl.Collator(locale, {numeric: isAlphaNumeric, sensitivity: isAlphaNumeric ? "base" : isCaseSensitive ? "variant" :  "accent"});
 				return isDescending ? sorter.compare(b, a) : sorter.compare(a, b);
 			});
 		}
@@ -442,7 +442,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			}
 			a = String(a);
 			b = String(b);
-			const sorter = new Intl.Collator(locale, { numeric: isAlphaNumeric, sensitivity: isAlphaNumeric ? "base" : isCaseSensitive ? "variant" :  "accent" });
+			const sorter = new Intl.Collator(locale, {numeric: isAlphaNumeric, sensitivity: isAlphaNumeric ? "base" : isCaseSensitive ? "variant" :  "accent"});
 			return isDescending ? sorter.compare(b, a) : sorter.compare(a, b);
 		});
 	}
@@ -529,7 +529,6 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 	return backlinks.slice(0);
 };
 
-
 /*
 Return an array of tiddler titles that are directly transcluded within the given parse tree. `title` is the tiddler being parsed, we will ignore its self-referential transclusions, only return
  */
@@ -557,7 +556,7 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 							value = parseTreeNode.attributes.tiddler.value;
 						}
 					} else if(parseTreeNode.attributes.$field && parseTreeNode.attributes.$field.type === "string") {
-						// Empty value (like `<$transclude $field='created'/>`) means self-referential transclusion. 
+						// Empty value (like `<$transclude $field='created'/>`) means self-referential transclusion.
 						value = title;
 					} else if(parseTreeNode.attributes.field && parseTreeNode.attributes.field.type === "string") {
 						// Old usage with Empty value (like `<$transclude field='created'/>`)
@@ -576,7 +575,6 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 	checkParseTree(parseTreeRoot);
 	return transcludes;
 };
-
 
 /*
 Return an array of tiddler titles that are transcluded from the specified tiddler
@@ -1069,7 +1067,7 @@ exports.parseTextReference = function(title,field,index,options) {
 			this.getTiddlerText(title); // Force the tiddler to be lazily loaded
 			return this.parseTiddler(title,options);
 		}
-	} 
+	}
 	parserInfo = this.getTextReferenceParserInfo(title,field,index,options);
 	if(parserInfo.sourceText !== null) {
 		return this.parseText(parserInfo.parserType,parserInfo.sourceText,options);
@@ -1303,7 +1301,7 @@ Options available:
 		literal: searches for literal string
 		whitespace: same as literal except runs of whitespace are treated as a single space
 		regexp: treats the search term as a regular expression
-		words: (default) treats search string as a list of tokens, and matches if all tokens are found, 
+		words: (default) treats search string as a list of tokens, and matches if all tokens are found,
 			regardless of adjacency or ordering
 		some: treats search string as a list of tokens, and matches if at least ONE token is found
 */
@@ -1436,7 +1434,7 @@ exports.search = function(text,options) {
 					}
 				}
 			}
-		};
+		}
 		return notYetFound.length == 0;
 	};
 	// Loop through all the tiddlers doing the search

@@ -130,4 +130,3 @@ describe("Tiddler tests", function() {
 	});
 
 });
-

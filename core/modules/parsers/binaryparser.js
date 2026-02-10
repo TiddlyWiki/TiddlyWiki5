@@ -20,7 +20,7 @@ var BinaryParser = function(type,text,options) {
 		children: [{
 			type: "transclude",
 			attributes: {
-				"$tiddler": {type: "string", value: BINARY_WARNING_MESSAGE}
+				$tiddler: {type: "string", value: BINARY_WARNING_MESSAGE}
 			}
 		}]
 	};
@@ -35,19 +35,19 @@ var BinaryParser = function(type,text,options) {
 		children: [{
 			type: "transclude",
 			attributes: {
-				"$tiddler": {type: "string", value: EXPORT_BUTTON_IMAGE}
+				$tiddler: {type: "string", value: EXPORT_BUTTON_IMAGE}
 			}
 		}]
 	};
 	// Set the link href to external or internal data URI
 	if(options._canonical_uri) {
 		link.attributes.href = {
-			type: "string", 
+			type: "string",
 			value: options._canonical_uri
 		};
 	} else if(text) {
 		link.attributes.href = {
-			type: "string", 
+			type: "string",
 			value: "data:" + type + ";base64," + text
 		};
 	}
@@ -59,7 +59,7 @@ var BinaryParser = function(type,text,options) {
 			class: {type: "string", value: "tc-binary-warning"}
 		},
 		children: [warn, link]
-	}
+	};
 	this.tree = [element];
 	this.source = text;
 	this.type = type;

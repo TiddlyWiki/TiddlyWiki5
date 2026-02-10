@@ -5,7 +5,7 @@ module-type: saver
 
 Handles saving changes via MS FileSystemObject ActiveXObject
 
-Note: Since TiddlyWiki's markup contains the MOTW, the FileSystemObject normally won't be available. 
+Note: Since TiddlyWiki's markup contains the MOTW, the FileSystemObject normally won't be available.
 However, if the wiki is loaded as an .HTA file (Windows HTML Applications) then the FSO can be used.
 
 \*/
@@ -58,7 +58,9 @@ Static method that returns true if this saver is capable of working
 exports.canSave = function(wiki) {
 	try {
 		return (window.location.protocol === "file:") && !!(new ActiveXObject("Scripting.FileSystemObject"));
-	} catch(e) { return false; }
+	} catch(e) {
+		return false;
+	}
 };
 
 /*

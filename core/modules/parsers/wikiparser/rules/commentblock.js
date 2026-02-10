@@ -43,7 +43,6 @@ exports.findNextMatch = function(startPos) {
 	return undefined;
 };
 
-
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.endMatchRegExp.lastIndex;
@@ -51,10 +50,10 @@ exports.parse = function() {
 	var commentStart = this.match.index;
 	var commentEnd = this.endMatch.index + this.endMatch[0].length;
 	return [{
-			type: "void",
-			children: [],
-			text: this.parser.source.slice(commentStart, commentEnd),
-			start: commentStart,
-			end: commentEnd
+		type: "void",
+		children: [],
+		text: this.parser.source.slice(commentStart, commentEnd),
+		start: commentStart,
+		end: commentEnd
 	}];
 };

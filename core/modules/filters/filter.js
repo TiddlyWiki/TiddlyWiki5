@@ -18,7 +18,7 @@ exports.filter = function(source,operator,options) {
 		target = operator.prefix !== "!";
 	source(function(tiddler,title) {
 		var list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),options.widget.makeFakeWidgetWithVariables({
-			"currentTiddler": "" + title,
+			currentTiddler: "" + title,
 			"..currentTiddler": options.widget.getVariable("currentTiddler","")
 		}));
 		if((list.length > 0) === target) {

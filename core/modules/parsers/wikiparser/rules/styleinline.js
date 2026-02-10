@@ -11,7 +11,6 @@ Wiki text inline rule for assigning styles and classes to inline runs. For examp
 @@width:100px;.myClass This is some text with a class and a width@@
 ```
 
-
 \*/
 
 "use strict";

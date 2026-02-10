@@ -15,9 +15,9 @@ describe("Widget module", function() {
 
 	function createWidgetNode(parseTreeNode,wiki) {
 		return new widget.widget(parseTreeNode,{
-				wiki: wiki,
-				document: $tw.fakeDocument
-			});
+			wiki: wiki,
+			document: $tw.fakeDocument
+		});
 	}
 
 	function parseText(text,wiki,options) {
@@ -29,7 +29,7 @@ describe("Widget module", function() {
 		$tw.fakeDocument.setSequenceNumber(0);
 		var wrapper = $tw.fakeDocument.createElement("div");
 		widgetNode.render(wrapper,null);
-// console.log(require("util").inspect(wrapper,{depth: 8}));
+		// console.log(require("util").inspect(wrapper,{depth: 8}));
 		return wrapper;
 	}
 
@@ -41,25 +41,25 @@ describe("Widget module", function() {
 			});
 		}
 		widgetNode.refresh(changedTiddlers,wrapper,null);
-// console.log(require("util").inspect(wrapper,{depth: 8}));
+		// console.log(require("util").inspect(wrapper,{depth: 8}));
 	}
 
 	it("should deal with text nodes and HTML elements", function() {
 		var wiki = new $tw.Wiki();
 		// Test parse tree
 		var parseTreeNode = {type: "widget", children: [
-								{type: "text", text: "A text node"},
-								{type: "element", tag: "div", attributes: {
-										"class": {type: "string", value: "myClass"},
-										"title": {type: "string", value: "myTitle"}
-									}, children: [
-										{type: "text", text: " and the content of a DIV"},
-										{type: "element", tag: "div", children: [
-											{type: "text", text: " and an inner DIV"},
-									]},
-										{type: "text", text: " and back in the outer DIV"}
-								]}
-							]};
+			{type: "text", text: "A text node"},
+			{type: "element", tag: "div", attributes: {
+				class: {type: "string", value: "myClass"},
+				title: {type: "string", value: "myTitle"}
+			}, children: [
+				{type: "text", text: " and the content of a DIV"},
+				{type: "element", tag: "div", children: [
+					{type: "text", text: " and an inner DIV"}
+				]},
+				{type: "text", text: " and back in the outer DIV"}
+			]}
+		]};
 		// Construct the widget node
 		var widgetNode = createWidgetNode(parseTreeNode,wiki);
 		// Render the widget node to the DOM
@@ -84,24 +84,24 @@ describe("Widget module", function() {
 		]);
 		// Test parse tree
 		var parseTreeNode = {type: "widget", children: [
-								{type: "text", text: "A text node"},
-								{type: "element", tag: "div", attributes: {
-										"class": {type: "string", value: "myClass"},
-										"title": {type: "indirect", textReference: "TiddlerOne"}
-									}, children: [
-										{type: "text", text: " and the content of a DIV"},
-										{type: "element", tag: "div", children: [
-											{type: "text", text: " and an inner DIV"},
-									]},
-										{type: "text", text: " and back in the outer DIV"},
-										{type: "transclude", attributes: {
-										"tiddler": {type: "string", value: "TiddlerOne"}
-									}}
-								]},
-								{type: "transclude", attributes: {
-										"tiddler": {type: "string", value: "TiddlerOne"}
-									}}
-							]};
+			{type: "text", text: "A text node"},
+			{type: "element", tag: "div", attributes: {
+				class: {type: "string", value: "myClass"},
+				title: {type: "indirect", textReference: "TiddlerOne"}
+			}, children: [
+				{type: "text", text: " and the content of a DIV"},
+				{type: "element", tag: "div", children: [
+					{type: "text", text: " and an inner DIV"}
+				]},
+				{type: "text", text: " and back in the outer DIV"},
+				{type: "transclude", attributes: {
+					tiddler: {type: "string", value: "TiddlerOne"}
+				}}
+			]},
+			{type: "transclude", attributes: {
+				tiddler: {type: "string", value: "TiddlerOne"}
+			}}
+		]};
 		// Construct the widget node
 		var widgetNode = createWidgetNode(parseTreeNode,wiki);
 		// Render the widget node to the DOM
@@ -145,10 +145,10 @@ describe("Widget module", function() {
 		]);
 		// Test parse tree
 		var parseTreeNode = {type: "widget", children: [
-								{type: "transclude", attributes: {
-										"tiddler": {type: "string", value: "TiddlerOne"}
-									}}
-							]};
+			{type: "transclude", attributes: {
+				tiddler: {type: "string", value: "TiddlerOne"}
+			}}
+		]};
 		// Construct the widget node
 		var widgetNode = createWidgetNode(parseTreeNode,wiki);
 		// Render the widget node to the DOM
@@ -161,14 +161,14 @@ describe("Widget module", function() {
 		var wiki = new $tw.Wiki();
 		// Add a tiddler
 		wiki.addTiddlers([
-			{title: "TiddlerOne", text: "<$tiddler tiddler='TiddlerOne'><$transclude /> <$transclude /></$tiddler>"},
+			{title: "TiddlerOne", text: "<$tiddler tiddler='TiddlerOne'><$transclude /> <$transclude /></$tiddler>"}
 		]);
 		// Test parse tree
 		var parseTreeNode = {type: "widget", children: [
-								{type: "transclude", attributes: {
-										"tiddler": {type: "string", value: "TiddlerOne"}
-									}}
-							]};
+			{type: "transclude", attributes: {
+				tiddler: {type: "string", value: "TiddlerOne"}
+			}}
+		]};
 		// Construct the widget node
 		var widgetNode = createWidgetNode(parseTreeNode,wiki);
 		// Render the widget node to the DOM
@@ -179,14 +179,14 @@ describe("Widget module", function() {
 
 	// Do NOT use a for-of or for-in here. Each jasmine test must be
 	// defined in its own function context, or the `tag` variable will
-	// end up being the same value for all iterations of the test. 
+	// end up being the same value for all iterations of the test.
 	$tw.utils.each(["div","$button","$checkbox","$diff-text","$draggable","$droppable","dropzone","$eventcatcher","$keyboard","$link","$list filter=x variable=x","$radio","$reveal type=nomatch","$scrollable","$select","$view field=x"],function(tag) {
 		it(`${tag} cleans itself up if children rendering fails`, function() {
 			var wiki = new $tw.Wiki();
 			wiki.addTiddler({title: "TiddlerOne", text: `<$tiddler tiddler='TiddlerOne'><${tag}><$transclude />`});
 			var parseTreeNode = {type: "widget", children: [
 				{type: "transclude", attributes: {
-					"tiddler": {type: "string", value: "TiddlerOne"}
+					tiddler: {type: "string", value: "TiddlerOne"}
 				}}
 			]};
 			// Construct the widget node
@@ -212,10 +212,10 @@ describe("Widget module", function() {
 		]);
 		// Test parse tree
 		var parseTreeNode = {type: "widget", children: [
-								{type: "transclude", attributes: {
-										"tiddler": {type: "string", value: "TiddlerOne"}
-									}}
-							]};
+			{type: "transclude", attributes: {
+				tiddler: {type: "string", value: "TiddlerOne"}
+			}}
+		]};
 		// Construct the widget node
 		var widgetNode = createWidgetNode(parseTreeNode,wiki);
 		// Render the widget node to the DOM
@@ -245,7 +245,7 @@ describe("Widget module", function() {
 			{title: "TiddlerThree", text: "TiddlerOne"}
 		]);
 		// Construct the widget node
-		var text = "My <$transclude tiddler='TiddlerTwo'/> is Jolly"
+		var text = "My <$transclude tiddler='TiddlerTwo'/> is Jolly";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
@@ -292,7 +292,7 @@ describe("Widget module", function() {
 			{title: "TiddlerFour", text: "TiddlerTwo"}
 		]);
 		// Construct the widget node
-		var text = "My <$set name='currentTiddler' value={{TiddlerFour}}><$transclude tiddler={{!!title}}/></$set> is Jolly"
+		var text = "My <$set name='currentTiddler' value={{TiddlerFour}}><$transclude tiddler={{!!title}}/></$set> is Jolly";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
@@ -449,7 +449,6 @@ describe("Widget module", function() {
 		expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
 	});
 
-
 	it("should deal with the list widget using a counter variable", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
@@ -601,13 +600,13 @@ describe("Widget module", function() {
 			// Render the widget node to the DOM
 			var wrapper = renderWidgetNode(widgetNode);
 			// Test the rendering
-			expect(wrapper.innerHTML).toBe("<p>" + oldList.split(' ').join(', ') + "</p>");
+			expect(wrapper.innerHTML).toBe("<p>" + oldList.split(" ").join(", ") + "</p>");
 			// Change the list and ensure new rendering is still right
 			wiki.addTiddler({title: "Numbers", text: "", list: newList});
 			refreshWidgetNode(widgetNode,wrapper,["Numbers"]);
-			expect(wrapper.innerHTML).toBe("<p>" + newList.split(' ').join(', ') + "</p>");
-		}
-	}
+			expect(wrapper.innerHTML).toBe("<p>" + newList.split(" ").join(", ") + "</p>");
+		};
+	};
 
 	it("the list widget with join should update correctly when empty list gets one item", testListJoin("", "1"));
 	it("the list widget with join should update correctly when empty list gets two items", testListJoin("", "1 2"));
@@ -640,13 +639,13 @@ describe("Widget module", function() {
 			// Render the widget node to the DOM
 			var wrapper = renderWidgetNode(widgetNode);
 			// Test the rendering
-			expect(wrapper.innerHTML).toBe("<p>" + oldList.split(' ').join(', ') + "</p>");
+			expect(wrapper.innerHTML).toBe("<p>" + oldList.split(" ").join(", ") + "</p>");
 			// Append a number
 			wiki.addTiddler({title: "Numbers", text: "", list: newList});
 			refreshWidgetNode(widgetNode,wrapper,["Numbers"]);
-			expect(wrapper.innerHTML).toBe("<p>" + newList.split(' ').join(', ') + "</p>");
-		}
-	}
+			expect(wrapper.innerHTML).toBe("<p>" + newList.split(" ").join(", ") + "</p>");
+		};
+	};
 
 	it("the list widget with counter-last should update correctly when list is appended", testCounterLast("1 2 3 4", "1 2 3 4 5"));
 	it("the list widget with counter-last should update correctly when last item is removed", testCounterLast("1 2 3 4", "1 2 3"));
@@ -743,7 +742,7 @@ describe("Widget module", function() {
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
-//console.log(require("util").inspect(widgetNode,{depth:8,colors:true}));
+		//console.log(require("util").inspect(widgetNode,{depth:8,colors:true}));
 		// Test the rendering
 		expect(wrapper.innerHTML).toBe("<p>(TiddlerFour)(TiddlerOne)(TiddlerThree)(TiddlerTwo)</p>");
 	});
@@ -829,7 +828,7 @@ describe("Widget module", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
-			{title: "B", text: "<$parameters bee=nothing><$set name='B' value='Bval'>\n\ndummy text</$set></$parameters>"},
+			{title: "B", text: "<$parameters bee=nothing><$set name='B' value='Bval'>\n\ndummy text</$set></$parameters>"}
 		]);
 		var text = "\\import B\n<<B>>";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
@@ -883,7 +882,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		renderWidgetNode(widgetNode);
 		var childNode = widgetNode;
-		while (childNode.children.length > 0) {
+		while(childNode.children.length > 0) {
 			childNode = childNode.children[0];
 		}
 		// First make sure A and B imported
@@ -895,9 +894,9 @@ describe("Widget module", function() {
 		// Then change A and remove B
 		wiki.addTiddler({title: "ABC", text: "\\define A() A2\n<$set name=C value=C2>\n\n</$set>"});
 		wiki.addTiddler({title: "DE", text: "\\define D() D2"});
-		widgetNode.refresh({"ABC": {modified: true}, "DE": {modified: true}});
+		widgetNode.refresh({ABC: {modified: true}, DE: {modified: true}});
 		var childNode = widgetNode;
-		while (childNode.children.length > 0) {
+		while(childNode.children.length > 0) {
 			childNode = childNode.children[0];
 		}
 		// Make sure \import recognized changes and deletions
@@ -932,7 +931,7 @@ describe("Widget module", function() {
 		var parseTreeNode = parseText(text,wiki);
 		// Test the resulting parse tree node, since there is no
 		// rendering which may expose a problem.
-		expect(parseTreeNode.children[0].attributes.filter.value).toBe('[prefix[XXX]]');
+		expect(parseTreeNode.children[0].attributes.filter.value).toBe("[prefix[XXX]]");
 	});
 
 	/** This test reproduces issue #4504.
@@ -952,7 +951,7 @@ describe("Widget module", function() {
 			var widgetNode = createWidgetNode(tree,wiki);
 			var wrapper = renderWidgetNode(widgetNode);
 			return wrapper.innerHTML;
-		};
+		}
 		wiki.addTiddlers([
 			{title: "body", text: "\\import A\n<<qualify this>>"},
 			{title: "A", text: "\\define unused() ignored"}
@@ -967,4 +966,3 @@ describe("Widget module", function() {
 		expect(withA).toBe(withoutA);
 	});
 });
-

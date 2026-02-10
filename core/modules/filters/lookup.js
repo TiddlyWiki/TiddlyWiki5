@@ -7,7 +7,7 @@ Filter operator that looks up values via a title prefix
 
 [lookup:<defaultvalue>:<field OR index>[<prefix>],[<field-name OR index-name>]]
 
-Prepends the prefix to the selected items and returns the specified 
+Prepends the prefix to the selected items and returns the specified
 field or index value. If the 2nd suffix does not exist, it defaults to field.
 If the second operand is missing it defaults to "text" for fields, and "0" for indexes
 
@@ -25,7 +25,7 @@ exports.lookup = function(source,operator,options) {
 		indexSuffix = (suffixes[1] && suffixes[1][0] === "index") ? true : false,
 		target;
 	if(operator.operands.length == 2) {
-		target = operator.operands[1]
+		target = operator.operands[1];
 	} else {
 		target = indexSuffix ? "0": "text";
 	}
