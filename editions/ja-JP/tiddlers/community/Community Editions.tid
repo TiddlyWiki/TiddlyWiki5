@@ -14,7 +14,7 @@ caption: エディション
 
 <div class="tc-link-info-item">
 
-! <$link><$view field="title"/></$link>
+! <$link><$view field="ja-title"><$view field="title"/></$view></$link>
 
 <div class="tc-subtitle"> <$view field="original-modified" format="relativedate"><$view field="modified" format="relativedate"/></$view> の投稿</div>
 
