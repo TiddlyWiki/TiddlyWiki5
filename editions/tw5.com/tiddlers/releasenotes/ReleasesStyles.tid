@@ -43,6 +43,11 @@ type: text/vnd.tiddlywiki
 	flex: 1 1 auto;
 }
 
+.doc-release-section-count {
+	font-weight: normal;
+	opacity: 0.6;
+}
+
 .doc-release-credits {
 	margin: 0.75em 0;
 }
@@ -165,4 +170,15 @@ type: text/vnd.tiddlywiki
 
 .doc-impact-note-change-link {
 	font-weight: 600;
+}
+
+.doc-change-note-description-link {
+	font-weight: inherit;
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-style: dotted;
+}
+
+.doc-change-note-description-link:hover {
+	text-decoration-style: solid;
 }

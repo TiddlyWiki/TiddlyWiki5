@@ -61,3 +61,15 @@ impact-types/pluginisation/plural: Pluginisations
 summary-sections/big-bug-fixes/plural: Big Bug Fixes
 summary-sections/clearing-the-decks/plural: Clearing the Decks
 summary-sections/highlights/plural: Highlights
+summary-sections/highlights/default-state: open
+categories/translation/colour: #7ec8e3
+categories/usability/colour: #f4a261
+categories/hackability/colour: #9b8ec4
+categories/performance/colour: #87ceeb
+categories/widget/colour: #e78ac3
+categories/filters/colour: #8cc56d
+categories/plugin/colour: #f0c674
+categories/theme/colour: #d4a76a
+categories/nodejs/colour: #77bb66
+categories/developer/colour: #6baed6
+categories/internal/colour: #b0b0b0
