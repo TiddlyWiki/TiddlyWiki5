@@ -48,69 +48,259 @@ tags: $:/tags/Global
 </span>
 \end impact-pill
 
-\procedure change-list()
+\procedure release-section-toggle(state)
 \whitespace trim
-<div class="doc-release-note">
-	<$list filter="[enlist{$:/tw5.com/releases/info/category-order}]" variable="category">
-		<%if [tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>] %>
-			<div class="doc-release-note-heading">
-				<h2 class="doc-change-note-category">
-					<$text text={{{ [[$:/tw5.com/releases/info/categories/]addsuffix<category>addsuffix[/caption]get[text]] }}} />
-				</h2>
-			</div>
-			<$list filter="[tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>sort[description]]" variable="change">
-				<div class="doc-change-note-item">
-					<h3 class="doc-change-note-heading">
-						<$link
-							to="Release Notes and Changes"
-							class="doc-link-badge"
-							style.backgroundColor={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/colour]get[text]] }}}
-						>
-							<$text text={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/caption]get[text]] }}}/>
-						</$link> <$transclude $tiddler=<<change>> $field="description" $mode="inline"/></h3>
-					<div class="doc-change-note-info-list">
-						<$list filter="[tag[$:/tags/ImpactNote]] :filter[{!!changenote}match<change>] +[sort[description]]" variable="impact" counter="impactCount">
-							<div class="doc-change-note-info-list-item-caption">
-								<%if [<impactCount>match[1]] %>
-									Impact:
-								<%endif%>
-							</div>
-							<div class="doc-change-note-info-list-item-description">
-								<div class="doc-change-note-info-list-item-description-summary">
-									<$transclude $variable="impact-pill" $mode="inline" impact-type={{{ [<impact>get[impact-type]] }}}/>
-									<$text text=": "/>
-									<$transclude $tiddler=<<impact>> $field="description" $mode="inline"/>
-								</div>
-								<div class="doc-change-note-info-list-item-description-details">
-									<$transclude $tiddler=<<impact>> $field="text" $mode="block"/>
-								</div>
-							</div>
-						</$list>
-						<div class="doc-change-note-info-list-item-caption">
-							<$text text="GitHub: "/>
-						</div>
-						<div class="doc-change-note-info-list-item-description">
-							<$list filter="[<change>get[github-links]enlist-input[]]" variable="link">
-								<a
-									href=<<link>>
-									class="doc-github-link"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									{{$:/core/images/github}}
-								</a>
-							</$list>
-						</div>
-					</div>
-					<div class="doc-change-note-description">
-						<$transclude $tiddler=<<change>> $mode="block"/>
-					</div>
-				</div>
-			</$list>
-		<%endif%>
+<$reveal type="nomatch" state=<<state>> text="open" tag="span">
+	<$action-setfield $tiddler=<<state>> $field="text" $value="open"/>
+	<span class="doc-release-section-toggle">{{$:/core/images/right-arrow}}</span>
+</$reveal>
+<$reveal type="match" state=<<state>> text="open" tag="span">
+	<$action-setfield $tiddler=<<state>> $field="text" $value="close"/>
+	<span class="doc-release-section-toggle">{{$:/core/images/down-arrow}}</span>
+</$reveal>
+\end release-section-toggle
+
+\procedure change-note-type-badge()
+\whitespace trim
+<$link
+	to="Release Notes and Changes"
+	class="doc-link-badge"
+	style.backgroundColor={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/colour]get[text]] }}}
+>
+	<$text text={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/singular]get[text]] }}}/>
+</$link>
+\end change-note-type-badge
+
+\procedure change-note-heading()
+\whitespace trim
+<h3 class="doc-change-note-heading">
+	<<change-note-type-badge>> <$transclude $tiddler=<<change>> $field="description" $mode="inline"/>
+</h3>
+\end change-note-heading
+
+\procedure change-note-impacts()
+\whitespace trim
+<$list filter="[tag[$:/tags/ImpactNote]] :filter[{!!changenote}match<change>] +[sort[description]]" variable="impact" counter="impactCount">
+	<div class="doc-change-note-info-list-item-caption">
+		<%if [<impactCount>match[1]] %>Impact:<%endif%>
+	</div>
+	<div class="doc-change-note-info-list-item-description">
+		<div class="doc-change-note-info-list-item-description-summary">
+			<$transclude $variable="impact-pill" $mode="inline" impact-type={{{ [<impact>get[impact-type]] }}}/>
+			<$text text=": "/>
+			<$transclude $tiddler=<<impact>> $field="description" $mode="inline"/>
+		</div>
+		<div class="doc-change-note-info-list-item-description-details">
+			<$transclude $tiddler=<<impact>> $field="text" $mode="block"/>
+		</div>
+	</div>
+</$list>
+\end change-note-impacts
+
+\procedure change-note-github-links()
+\whitespace trim
+<div class="doc-change-note-info-list-item-caption">
+	<$text text="GitHub: "/>
+</div>
+<div class="doc-change-note-info-list-item-description">
+	<$list filter="[<change>get[github-links]enlist-input[]]" variable="link">
+		<a href=<<link>> class="doc-github-link" target="_blank" rel="noopener noreferrer">
+			{{$:/core/images/github}}
+		</a>
 	</$list>
 </div>
-\end change-list
+\end change-note-github-links
+
+\procedure change-note-info()
+\whitespace trim
+<div class="doc-change-note-info-list">
+	<<change-note-impacts>>
+	<<change-note-github-links>>
+</div>
+\end change-note-info
+
+\procedure change-note-description()
+\whitespace trim
+<div class="doc-change-note-description">
+	<$transclude $tiddler=<<change>> $mode="block"/>
+</div>
+\end change-note-description
+
+\procedure change-note-item()
+\whitespace trim
+<div class="doc-change-note-item">
+	<<change-note-heading>>
+	<<change-note-info>>
+	<<change-note-description>>
+</div>
+\end change-note-item
+
+\procedure change-note-list(filter)
+\whitespace trim
+<$list
+	filter=<<filter>>
+	variable="change"
+	emptyMessage="<div class='doc-change-note-empty'>No curated changes yet.</div>"
+>
+	<<change-note-item>>
+</$list>
+\end change-note-list
+
+\procedure summary-section()
+\whitespace trim
+<$let summaryState={{{ [<release>addprefix[$:/state/release/summary/]addsuffix[/]addsuffix<summary-key>] }}}>
+		<div class="doc-release-section">
+			<$button class="tc-btn-invisible doc-release-section-summary">
+				<$macrocall $name="release-section-toggle" state=<<summaryState>>/>
+				<span class="doc-release-section-summary-text">
+					<$text text={{{ [[$:/tw5.com/releases/info/summary-sections/]addsuffix<summary-key>addsuffix[/plural]get[text]] }}} />
+				</span>
+			</$button>
+			<$reveal type="match" state=<<summaryState>> text="open" tag="div" class="doc-release-section-body">
+				<$let summaryListTiddler="$:/tw5.com/releases/info/summary-lists">
+				<$let summaryListField={{{ [<summary-key>addsuffix[/]addsuffix<release>] }}}>
+					<$let summaryFilter="[<summaryListTiddler>get<summaryListField>enlist-input[]]">
+						<$macrocall $name="change-note-list" filter=<<summaryFilter>>/>
+					</$let>
+				</$let>
+			</$let>
+		</$reveal>
+	</div>
+</$let>
+\end summary-section
+
+\procedure summary-tab()
+\whitespace trim
+<div class="doc-release-summary">
+	<$list filter="[enlist{$:/tw5.com/releases/info/summary-section-order}]" variable="summary-key">
+		<div class="doc-release-summary-section">
+			<$macrocall $name="summary-section"/>
+		</div>
+	</$list>
+</div>
+\end summary-tab
+
+\procedure change-type-section()
+\whitespace trim
+<$let changeTypeState={{{ [<release>addprefix[$:/state/release/change-type/]addsuffix[/]addsuffix<change-type>] }}}>
+		<div class="doc-release-section">
+			<$button class="tc-btn-invisible doc-release-section-summary">
+				<$macrocall $name="release-section-toggle" state=<<changeTypeState>>/>
+				<span class="doc-release-section-summary-text">
+					<$text text={{{ [[$:/tw5.com/releases/info/change-types/]addsuffix<change-type>addsuffix[/plural]get[text]] }}} />
+				</span>
+			</$button>
+		<$reveal type="match" state=<<changeTypeState>> text="open" tag="div" class="doc-release-section-body">
+			<$let typeFilter="[tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-type}match<change-type>] +[sort[description]]">
+				<$macrocall $name="change-note-list" filter=<<typeFilter>>/>
+			</$let>
+		</$reveal>
+	</div>
+</$let>
+\end change-type-section
+
+\procedure change-types-tab()
+\whitespace trim
+<$list filter="[enlist{$:/tw5.com/releases/info/change-type-order}]" variable="change-type">
+	<<change-type-section>>
+</$list>
+\end change-types-tab
+
+\procedure change-category-section()
+\whitespace trim
+<$let changeCategoryState={{{ [<release>addprefix[$:/state/release/change-category/]addsuffix[/]addsuffix<category>] }}}>
+		<div class="doc-release-section">
+			<$button class="tc-btn-invisible doc-release-section-summary">
+				<$macrocall $name="release-section-toggle" state=<<changeCategoryState>>/>
+				<span class="doc-release-section-summary-text">
+					<$text text={{{ [[$:/tw5.com/releases/info/categories/]addsuffix<category>addsuffix[/plural]get[text]] }}} />
+				</span>
+			</$button>
+		<$reveal type="match" state=<<changeCategoryState>> text="open" tag="div" class="doc-release-section-body">
+			<$let categoryFilter="[tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] :filter[{!!change-category}match<category>] +[sort[description]]">
+				<$macrocall $name="change-note-list" filter=<<categoryFilter>>/>
+			</$let>
+		</$reveal>
+	</div>
+</$let>
+\end change-category-section
+
+\procedure change-categories-tab()
+\whitespace trim
+<$list filter="[enlist{$:/tw5.com/releases/info/category-order}]" variable="category">
+	<<change-category-section>>
+</$list>
+\end change-categories-tab
+
+\procedure impact-change-note()
+\whitespace trim
+<$let change={{{ [<impact>get[changenote]] }}}>
+	<<change-note-item>>
+</$let>
+\end impact-change-note
+
+\procedure impact-note-item()
+\whitespace trim
+<div class="doc-impact-note-item">
+	<div class="doc-impact-note-heading">
+		<$transclude $variable="impact-pill" $mode="inline" impact-type={{{ [<impact>get[impact-type]] }}}/>
+		<$text text=": "/>
+		<$transclude $tiddler=<<impact>> $field="description" $mode="inline"/>
+	</div>
+	<div class="doc-impact-note-details">
+		<$transclude $tiddler=<<impact>> $field="text" $mode="block"/>
+	</div>
+	<<impact-change-note>>
+</div>
+\end impact-note-item
+
+\procedure impact-type-section()
+\whitespace trim
+<$let impactTypeState={{{ [<release>addprefix[$:/state/release/impact-type/]addsuffix[/]addsuffix<impact-type>] }}}>
+		<div class="doc-release-section">
+			<$button class="tc-btn-invisible doc-release-section-summary">
+				<$macrocall $name="release-section-toggle" state=<<impactTypeState>>/>
+				<span class="doc-release-section-summary-text">
+					<$text text={{{ [[$:/tw5.com/releases/info/impact-types/]addsuffix<impact-type>addsuffix[/plural]get[text]] }}} />
+				</span>
+			</$button>
+		<$reveal type="match" state=<<impactTypeState>> text="open" tag="div" class="doc-release-section-body">
+			<$list
+				filter="[tag[$:/tags/ImpactNote]] :filter[{!!impact-type}match<impact-type>] :filter[{!!changenote}get[release]match<release>] +[sort[description]]"
+				variable="impact"
+			>
+				<<impact-note-item>>
+			</$list>
+		</$reveal>
+	</div>
+</$let>
+\end impact-type-section
+
+\procedure impacts-tab()
+\whitespace trim
+<$list filter="[enlist{$:/tw5.com/releases/info/impact-type-order}]" variable="impact-type">
+	<<impact-type-section>>
+</$list>
+\end impacts-tab
+
+\procedure credits-tab()
+\whitespace trim
+<div class="doc-release-credits">
+	A warm thank you to the developers who have contributed to this release:
+	<<acknowledgements>>
+</div>
+\end credits-tab
+
+\procedure release-tabs()
+\whitespace trim
+<$macrocall
+	$name="tabs"
+	tabsList="[enlist{$:/tw5.com/releases/info/tab-order}]"
+	default="Summary"
+	class="doc-release-tabs"
+	template="$:/tw5.com/releases/tab-template"
+/>
+\end release-tabs
 
 \procedure acknowledgements()
 <ol class="doc-github-contributors">
@@ -136,21 +326,11 @@ See <<github-release-changes-link>> and [[other releases|TiddlyWiki Releases]].
 
 <<banner-credits>>
 
-! Introduction
-
 <$transclude $variable="release-introduction" $mode="block"/>
 
-! Changes
+! Release Notes
 
-<$transclude $variable="change-list" $mode="inline"/>
-
-<!-- Acknowledgement list -->
-
-! Acknowledgements
-
-A warm thank you to the developers who have contributed to this release:
-
-<<acknowledgements>>
+<<release-tabs>>
 
 </$let>
 \end releasenote
