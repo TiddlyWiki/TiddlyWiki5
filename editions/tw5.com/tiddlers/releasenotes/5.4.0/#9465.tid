@@ -3,7 +3,7 @@ description: Import UI now conditionally displays file-type-specific import opti
 tags: $:/tags/ChangeNote
 release: 5.4.0
 change-type: enhancement
-change-category: hackability
+change-category: usability
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9465
 github-contributors: linonetwo
 

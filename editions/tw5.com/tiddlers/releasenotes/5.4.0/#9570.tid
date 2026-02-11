@@ -5,6 +5,6 @@ tags: $:/tags/ChangeNote
 change-type: bugfix
 change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9570
-github-contributors: jermolene
+github-contributors: Jermolene
 
 Fixes issue whereby transcluding a _canonical_uri tiddler with a missing image did not assign the progress classes `tc-image-loading`, `tc-image-loaded` and `tc-image-error`.
