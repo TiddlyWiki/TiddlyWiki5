@@ -271,13 +271,13 @@ tags: $:/tags/Global
 \procedure impact-note-item()
 \whitespace trim
 <div class="doc-impact-note-item">
-	<div class="doc-impact-note-heading"
+	<h3 class="doc-impact-note-heading"
 		style.backgroundColor={{{ [<impact>get[impact-type]addprefix[$:/tw5.com/releases/info/impact-types/]addsuffix[/colour/background]get[text]] }}}
 	>
 		<$transclude $variable="impact-pill" $mode="inline" impact-type={{{ [<impact>get[impact-type]] }}}/>
 		<$text text=": "/>
 		<%if [<show-tiddler-link>match[yes]] %><$link to=<<impact>> class="doc-change-note-description-link"><$transclude $tiddler=<<impact>> $field="description" $mode="inline"/></$link><%else%><$transclude $tiddler=<<impact>> $field="description" $mode="inline"/><%endif%>
-	</div>
+	</h3>
 	<div class="doc-impact-note-details">
 		<$transclude $tiddler=<<impact>> $field="text" $mode="block"/>
 	</div>
@@ -365,6 +365,10 @@ See <<github-release-changes-link>> and [[other releases|TiddlyWiki Releases]].
 <$transclude $variable="release-introduction" $mode="block"/>
 
 <<release-tabs>>
+
+! Credits
+
+<<credits-tab>>
 
 </$let>
 \end releasenote

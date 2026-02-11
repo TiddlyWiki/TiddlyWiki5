@@ -5,7 +5,7 @@ category-order: translation usability hackability performance widget filters plu
 summary-section-order: highlights big-bug-fixes clearing-the-decks
 change-type-order: feature enhancement performance bugfix deprecation security
 impact-type-order: compatibility-break deprecation pluginisation
-tab-order: [[Summary]] [[Change Types]] [[Change Categories]] [[Impacts]] [[Credits]]
+tab-order: [[Summary]] [[Change Types]] [[Change Categories]] [[Impacts]]
 categories/developer/singular: Developer
 categories/developer/plural: Developer
 categories/filters/singular: Filters

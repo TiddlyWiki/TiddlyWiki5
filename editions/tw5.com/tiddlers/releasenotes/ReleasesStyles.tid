@@ -146,9 +146,13 @@ type: text/vnd.tiddlywiki
 
 .doc-impact-note-heading {
 	font-weight: 600;
-	margin-bottom: 0.25em;
+	margin: 0 0 0.25em 0;
 	padding: 0.25em 0.5em;
 	border-radius: 0.25em;
+}
+
+.doc-impact-note-item > .doc-change-note-item {
+	font-size: 0.9em;
 }
 
 .doc-impact-note-details {
