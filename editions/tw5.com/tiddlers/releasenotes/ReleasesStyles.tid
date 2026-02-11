@@ -147,6 +147,8 @@ type: text/vnd.tiddlywiki
 .doc-impact-note-heading {
 	font-weight: 600;
 	margin-bottom: 0.25em;
+	padding: 0.25em 0.5em;
+	border-radius: 0.25em;
 }
 
 .doc-impact-note-details {

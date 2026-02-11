@@ -84,7 +84,9 @@ tags: $:/tags/Global
 
 \procedure change-note-heading()
 \whitespace trim
-<h3 class="doc-change-note-heading">
+<h3 class="doc-change-note-heading"
+	style.backgroundColor={{{ [<change>get[change-type]addprefix[$:/tw5.com/releases/info/change-types/]addsuffix[/colour]get[text]addsuffix[40]] }}}
+>
 	<%if [<show-type-badge>!match[no]] %><<change-note-type-badge>><%endif%>
 	<%if [<show-category-badge>match[yes]] %><<change-note-category-badge>><%endif%>
 	<%if [<show-tiddler-link>match[yes]] %><$link to=<<change>> class="doc-change-note-description-link"><$transclude $tiddler=<<change>> $field="description" $mode="inline"/></$link><%else%><$transclude $tiddler=<<change>> $field="description" $mode="inline"/><%endif%>
@@ -201,7 +203,9 @@ tags: $:/tags/Global
 \whitespace trim
 <$let changeTypeState={{{ [<release>addprefix[$:/state/release/change-type/]addsuffix[/]addsuffix<change-type>] }}}>
 	<div class="doc-release-section">
-		<$button class="tc-btn-invisible doc-release-section-summary">
+		<$button class="tc-btn-invisible doc-release-section-summary"
+			style.backgroundColor={{{ [[$:/tw5.com/releases/info/change-types/]addsuffix<change-type>addsuffix[/colour]get[text]addsuffix[40]] }}}
+		>
 			<$macrocall $name="release-section-toggle" state=<<changeTypeState>>/>
 			<span class="doc-release-section-summary-text">
 				<$text text={{{ [[$:/tw5.com/releases/info/change-types/]addsuffix<change-type>addsuffix[/plural]get[text]] }}} />
@@ -230,7 +234,9 @@ tags: $:/tags/Global
 \whitespace trim
 <$let changeCategoryState={{{ [<release>addprefix[$:/state/release/change-category/]addsuffix[/]addsuffix<category>] }}}>
 	<div class="doc-release-section">
-		<$button class="tc-btn-invisible doc-release-section-summary">
+		<$button class="tc-btn-invisible doc-release-section-summary"
+			style.backgroundColor={{{ [[$:/tw5.com/releases/info/categories/]addsuffix<category>addsuffix[/colour]get[text]addsuffix[40]] }}}
+		>
 			<$macrocall $name="release-section-toggle" state=<<changeCategoryState>>/>
 			<span class="doc-release-section-summary-text">
 				<$text text={{{ [[$:/tw5.com/releases/info/categories/]addsuffix<category>addsuffix[/plural]get[text]] }}} />
@@ -265,7 +271,9 @@ tags: $:/tags/Global
 \procedure impact-note-item()
 \whitespace trim
 <div class="doc-impact-note-item">
-	<div class="doc-impact-note-heading">
+	<div class="doc-impact-note-heading"
+		style.backgroundColor={{{ [<impact>get[impact-type]addprefix[$:/tw5.com/releases/info/impact-types/]addsuffix[/colour/background]get[text]] }}}
+	>
 		<$transclude $variable="impact-pill" $mode="inline" impact-type={{{ [<impact>get[impact-type]] }}}/>
 		<$text text=": "/>
 		<%if [<show-tiddler-link>match[yes]] %><$link to=<<impact>> class="doc-change-note-description-link"><$transclude $tiddler=<<impact>> $field="description" $mode="inline"/></$link><%else%><$transclude $tiddler=<<impact>> $field="description" $mode="inline"/><%endif%>
@@ -281,7 +289,9 @@ tags: $:/tags/Global
 \whitespace trim
 <$let impactTypeState={{{ [<release>addprefix[$:/state/release/impact-type/]addsuffix[/]addsuffix<impact-type>] }}}>
 	<div class="doc-release-section">
-		<$button class="tc-btn-invisible doc-release-section-summary">
+		<$button class="tc-btn-invisible doc-release-section-summary"
+			style.backgroundColor={{{ [[$:/tw5.com/releases/info/impact-types/]addsuffix<impact-type>addsuffix[/colour/background]get[text]] }}}
+		>
 			<$macrocall $name="release-section-toggle" state=<<impactTypeState>>/>
 			<span class="doc-release-section-summary-text">
 				<$text text={{{ [[$:/tw5.com/releases/info/impact-types/]addsuffix<impact-type>addsuffix[/plural]get[text]] }}} />
