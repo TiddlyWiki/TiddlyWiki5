@@ -1,0 +1,35 @@
+created: 20250603144839000
+modified: 20250603144839000
+tags: [[WebServer API]]
+title: WebServer API: Put File
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.4.0">> Upload or update a [[static file|Using the integrated static file server]].
+
+```
+PUT /files/<pathname>
+```
+
+The body should contain the raw file content (binary or text).
+
+Parameters:
+
+* ''pathname'' - URI encoded path to the file
+
+Headers:
+
+* ''x-requested-with'' - must be set to `TiddlyWiki` in order for the request to succeed, unless [[WebServer Parameter: csrf-disable]] is set to `yes`
+* ''content-type'' - should be set to the appropriate MIME type for the file being uploaded
+
+Response:
+
+* 204 No Content
+*> `Content-Type: text/plain`
+* 403 Forbidden - if the file path attempts to access directories outside the files folder
+* 500 Internal Server Error - if there was an error creating directories or writing the file
+
+Notes:
+
+* The file will be created in the wiki's `files` directory
+* Parent directories will be created automatically if path is like `files/subdir/file.png`
+* Files are stored exactly as uploaded without any processing or validation, no tiddler will be created automatically
