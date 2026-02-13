@@ -1,8 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/markdown-to-tid",
-	"name": "MarkdownToTid",
-	"description": "Convert Markdown to WikiText and tiddlers",
-	"list": "readme",
-	"stability": "STABILITY_1_EXPERIMENTAL",
-	"dependencies": ["$:/plugins/tiddlywiki/wikitext-serialize"]
-}

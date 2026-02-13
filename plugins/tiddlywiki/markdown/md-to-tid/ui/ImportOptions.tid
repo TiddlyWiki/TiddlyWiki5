@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/markdown/md-to-tid/ui/ImportOptions
+tags: $:/tags/ImportOptions
+condition: [match[text/x-markdown]] :or[match[text/markdown]]
+
+\whitespace trim
+<$checkbox
+	tiddler="$:/config/md-to-tid/convert-markdown-on-import"
+	field="text"
+	checked="yes"
+	unchecked="no"
+	default="no"
+>
+	&#32;
+	{{$:/plugins/tiddlywiki/markdown/md-to-tid/language/en-GB/Import/ConvertMarkdown}}
+</$checkbox>
