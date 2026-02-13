@@ -12,7 +12,6 @@ tags: $:/tags/Macro
 <$list filter="[<full-title>removeprefix<__prefix__>]" variable="chunk">
 <span>{{$:/core/images/file}}</span>&#32;<$macrocall $name="leaf-link" full-title=<<full-title>> chunk=<<chunk>>/>
 </$list>
-</$list>
 </li>
 \end
 

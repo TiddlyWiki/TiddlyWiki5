@@ -1,0 +1,34 @@
+title: $:/changenotes/5.4.0/#9002
+description: Allow for custom tabs to be selectively included in plugin info box
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9002
+github-contributors: CeeBeeTree
+
+This enhancement allows developers to selectively add custom tabs into the plugin info box. 
+A new tab is "registered" by creating a tiddler with the necessary fields (see below).
+
+!!Usage
+To use this technque to selectively add your own tabs to other plugins you need to do the following:
+
+* tag a tiddler with the system tag `$:/tags/PluginInfoTab` 
+* add the field `filter` to your tiddler. This field is evaluated as a filter run within the context of the plugin and if it returns a value it is included in that plugins tabs. 
+* add a `caption` field for the tab 
+* add the body of the tab in the `text` field
+
+The filter makes use of a special variable `<pluginTitle>` that contains the title of the current plugin. 
+
+!!Example
+The [[new tree tab|$:/core/ui/PluginInfo/Default/tree-tab]] in the plugin info box has the following fields set 
+
+```
+tags: $:/tags/PluginInfoTab
+caption: tree view
+filter: [<pluginTitle>plugintiddlers[]count[]compare::gteq[15]]
+```
+
+The filter only returns a value if the number of plugin tiddlers for a given plugin is greater than 15.
+In the online documentation there are 6 plugins that meet this criteria where you will see the tab (including [[$:/core]])
+and the remaining 9 that don't show this tab (example [[$:/plugins/tiddlywiki/confetti]])

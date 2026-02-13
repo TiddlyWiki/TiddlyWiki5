@@ -1,5 +1,6 @@
 title: $:/core/ui/Components/plugin-info
 
+
 \define lingo-base() $:/language/ControlPanel/Plugins/
 
 \define popup-state-macro()
@@ -90,8 +91,10 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 						</$reveal>
 					</div>
 				</$list>
-				<$set name="tabsList" filter="[<currentTiddler>list[]] contents">
+				<$set name="externalTabsList" filter="[all[shadows+tiddlers]tag[$:/tags/PluginInfoTab]!is[draft]]  :filter[subfilter{!!filter}] ">
+				<$set name="tabsList" filter="[<currentTiddler>list[]append<externalTabsList>]">
 					<$macrocall $name="tabs" state=<<tabs-state-macro>> tabsList=<<tabsList>> default={{{ [enlist<tabsList>] }}} template="$:/core/ui/PluginInfo"/>
+				</$set>
 				</$set>
 			</div>
 		</div>
