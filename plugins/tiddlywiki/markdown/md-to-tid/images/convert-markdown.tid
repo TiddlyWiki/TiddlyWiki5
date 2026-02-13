@@ -2,7 +2,8 @@ title: $:/plugins/tiddlywiki/markdown/md-to-tid/images/convert-markdown
 tags: $:/tags/Image
 
 \parameters (size:"22pt")
-<svg width=<<size>> height=<<size>> xmlns="http://www.w3.org/2000/svg" class="tc-image-convert-markdown   <circle cx="34.2859" cy="34.2857" r="6.85714" fill="none" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width=<<size>> height=<<size>> xmlns="http://www.w3.org/2000/svg" class="tc-image-convert-markdown tc-image-button" viewBox="0 0 128 128">
+  <circle cx="34.2859" cy="34.2857" r="6.85714" fill="none" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M24.001 44.0002C12.9553 44.0002 4.00098 35.0459 4.00098 24.0002L10.6676 27.3335" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M24.001 4.00021C35.0467 4.00021 44.001 12.9545 44.001 24.0002L37.3343 20.6669" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   <g transform="translate(0,0) scale(0.9)" fill="black">
