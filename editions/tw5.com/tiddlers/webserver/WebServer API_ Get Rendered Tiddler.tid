@@ -14,6 +14,14 @@ Parameters:
 
 * ''title'' - URI encoded title of the tiddler to render
 
+Variables can be passed as URL query parameters to customize the rendering. By default, `currentTiddler` is set to the requested tiddler title, but can be overridden via URL parameters.
+
+Example with variables:
+
+```
+GET /MyTiddler?myVariable=value&currentTiddler=OtherTiddler
+```
+
 Response:
 
 

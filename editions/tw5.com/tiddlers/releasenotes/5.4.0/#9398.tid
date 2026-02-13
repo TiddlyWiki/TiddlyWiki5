@@ -1,0 +1,15 @@
+title: $:/changenotes/5.4.0/#9398
+description: Add server-side POST API routes for filter and action execution
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: nodejs
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9398
+github-contributors: linonetwo
+
+Two new POST WebServer API routes:
+
+* `/recipes/default/filter` - Executes a filter expression with variables on the server
+* `/recipes/default/actions` - Executes action tiddlers on the server
+
+These routes enable moving computational payloads to the server side, improving performance of client.
