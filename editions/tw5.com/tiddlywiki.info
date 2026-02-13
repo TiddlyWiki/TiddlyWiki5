@@ -9,7 +9,6 @@
 		"tiddlywiki/railroad",
 		"tiddlywiki/tour",
 		"tiddlywiki/wikitext-serialize",
-		"tiddlywiki/markdown-to-tid",
 		"tiddlywiki/markdown"
 	],
 	"themes": [
