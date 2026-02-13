@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.1/#9525
+description: Display a warning if Tiddlywiki is running in an insecure context
+release: 5.4.1
+tags: $:/tags/ChangeNote
+change-type: security
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9525
+github-contributors: Leilei332
+
+Also adds [[$:/info/browser/secure-context]] information tiddler.
