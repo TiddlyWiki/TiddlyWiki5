@@ -1,7 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/nodewebkitsaver",
-	"name": "nw.js Saver",
-	"description": "Saver for nw.js",
-	"list": "readme",
-	"stability": "STABILITY_0_DEPRECATED"
-}

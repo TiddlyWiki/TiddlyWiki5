@@ -27,8 +27,7 @@
 			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
 		"empty": [
-			"--rendertiddler","$:/editions/es-ES/download-empty","empty.html","text/plain",
-			"--rendertiddler","$:/editions/es-ES/download-empty","empty.hta","text/plain"],
+			"--rendertiddler","$:/editions/es-ES/download-empty","empty.html","text/plain"],
 		"favicon": [
 			"--savetiddler","$:/favicon.ico","favicon.ico",
 			"--savetiddler","$:/green_favicon.ico","static/favicon.ico"],

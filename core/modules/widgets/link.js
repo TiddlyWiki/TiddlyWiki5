@@ -45,9 +45,13 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 			sourcePrefix: "data-",
 			destPrefix: "data-"
 		});
+		this.assignAttributes(domNode,{
+			sourcePrefix: "aria-",
+			destPrefix: "aria-"
+		});
 		parent.insertBefore(domNode,nextSibling);
-		this.renderChildren(domNode,null);
 		this.domNodes.push(domNode);
+		this.renderChildren(domNode,null);
 	}
 };
 
@@ -82,7 +86,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			classes.push(this.linkClasses);
 		}
 	} else if(this.overrideClasses !== "") {
-		classes.push(this.overrideClasses)
+		classes.push(this.overrideClasses);
 	}
 	if(classes.length > 0) {
 		domNode.setAttribute("class",classes.join(" "));
@@ -93,7 +97,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	if(wikilinkTransformFilter) {
 		// Use the filter to construct the href
 		wikiLinkText = this.wiki.filterTiddlers(wikilinkTransformFilter,this,function(iterator) {
-			iterator(self.wiki.getTiddler(self.to),self.to)
+			iterator(self.wiki.getTiddler(self.to),self.to);
 		})[0];
 	} else {
 		// Expand the tv-wikilink-template variable to construct the href
@@ -117,17 +121,21 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	var tooltipWikiText = this.tooltip || this.getVariable("tv-wikilink-tooltip");
 	if(tooltipWikiText) {
 		var tooltipText = this.wiki.renderText("text/plain","text/vnd.tiddlywiki",tooltipWikiText,{
-				parseAsInline: true,
-				variables: {
-					currentTiddler: this.to
-				},
-				parentWidget: this
-			});
+			parseAsInline: true,
+			variables: {
+				currentTiddler: this.to
+			},
+			parentWidget: this
+		});
 		domNode.setAttribute("title",tooltipText);
 	}
-	if(this["aria-label"]) {
-		domNode.setAttribute("aria-label",this["aria-label"]);
+	if(this.role) {
+		domNode.setAttribute("role",this.role);
 	}
+	this.assignAttributes(domNode,{
+		sourcePrefix: "aria-",
+		destPrefix: "aria-"
+	});
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"},
@@ -137,8 +145,12 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		$tw.utils.makeDraggable({
 			domNode: domNode,
 			dragTiddlerFn: function() {return self.to;},
+			startActions: self.startActions,
+			endActions: self.endActions,
 			widget: this
 		});
+	} else if(this.draggable === "no") {
+		domNode.setAttribute("draggable","false");
 	}
 	// Assign data- attributes
 	this.assignAttributes(domNode,{
@@ -147,8 +159,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	});
 	// Insert the link into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 };
 
 LinkWidget.prototype.handleClickEvent = function(event) {
@@ -188,11 +200,13 @@ LinkWidget.prototype.execute = function() {
 	// Pick up our attributes
 	this.to = this.getAttribute("to",this.getVariable("currentTiddler"));
 	this.tooltip = this.getAttribute("tooltip");
-	this["aria-label"] = this.getAttribute("aria-label");
+	this.role = this.getAttribute("role");
 	this.linkClasses = this.getAttribute("class");
 	this.overrideClasses = this.getAttribute("overrideClass");
 	this.tabIndex = this.getAttribute("tabindex");
 	this.draggable = this.getAttribute("draggable","yes");
+	this.startActions = this.getAttribute("startactions");
+	this.endActions = this.getAttribute("endactions");
 	this.linkTag = this.getAttribute("tag","a");
 	// Determine the link characteristics
 	this.isMissing = !this.wiki.tiddlerExists(this.to);

@@ -1,0 +1,16 @@
+title: $:/changenotes/5.4.0/#8972
+description: Multi-valued variables and let filter run prefix
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8972 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9614 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9645
+github-contributors: Jermolene saqimtiaz
+
+This PR introduces a new filter run prefix `:let` that assigns the result of the filter run to a variable that is made available for the remaining filter runs of the filter expression. It solves the problem that previously it was impossible to compute values for filter operator parameters; parameters could only be a literal string, text reference or variable reference.
+
+This PR also introduces multi-valued variables, the ability to store a list of results in a variable, not just a single string. They can be assigned with the new `:let` filter run prefix, or the existing `<$let>` widget. The full list of values can be retrieved using round brackets instead of the usual angle brackets. In all other contexts only the first item in the list is used as the variable value.
+
+* [[Multi-Valued Variables]]
+* [[Let Filter Run Prefix]]
+* [[LetWidget]]

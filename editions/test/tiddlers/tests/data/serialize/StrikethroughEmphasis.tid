@@ -1,0 +1,5 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/StrikethroughEmphasis
+type: text/vnd.tiddlywiki
+
+This is ~~strikethrough~~ text

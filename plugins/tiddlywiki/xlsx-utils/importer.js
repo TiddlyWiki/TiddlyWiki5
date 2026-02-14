@@ -144,7 +144,7 @@ XLSXImporter.prototype.processField = function(fieldImportSpecTitle) {
 							value = cell.v.toString();
 							break;
 						case "string":
-							// Intentional fall-through
+							// falls through
 						default:
 							value = cell.w;
 							break;

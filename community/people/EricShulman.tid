@@ -1,0 +1,29 @@
+title: @ericshulman
+tags: Community/Person Community/Team/Contributors
+fullname: Eric Shulman
+first-sighting: 2005-06-21
+talk.tiddlywiki.org: ericshulman
+github: ericshulman
+homepage: tiddlytools.com
+email: elsdesign@gmail.com
+avatar: iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAD/ElEQVR42o2Tf2iUdRzH37e7rOa222233bab3mqKU9QihCAi+isKwX/sh5UQhGYQhNAvQowRUoghQWDOIJtQmOY0M92ZmVGm0WbTyZI1Nnft99S1jc3dPT9efffg/bHdLn19Hp4HPjzv9/fz+fL5aE58PwUkjzzFVC4P/G/k6E445Pc+uceeaqnv7Ogd6Rq68PPhrc+vkiERWOLT/+Ib8uQHNiXax3BIM0mC+CEtl2G7X9mIeCV+9Ejrr2MAtgkH14SNBRZXrYYPNF86nsXCkx/8dATAsp0JhknQTYJrTHg5SNI0qMekb+aw8Hr74WCKpNNu/0Kck5ymkRMcZz/1Jv5g2CUFbZYelrbMvlBMonHvJK3JuPsdTQxwExc8XG7SxF7OcxGScP6wRGCG/Asjf39VPydTzbQyRBrXBKToBCP/nQQ9VpIDO6SumU3EjUFLzX766HMG0mIvoJnXEbU47GGXc4TGBs3zWp5Jh7F47omdf56hy9lLIz3gyYfZSQMJztFEH3KEDg+bf1dkzkO9Savks7H9NLqnuEw3MEU314nTwABj/MV2R6y8JL+0wKdM8MtX23aFy04dF5mg08QI6XYsemmzRfiMDP5Mg1emK4ienZxi0p0gBfRwhSHAxgXGGeS6tYUdu6TPA3Ofr3Mfj9Bv4zHMDaCTMcBlnG4cJqx64sagN9Ngw3RJoa5R+MftI8k1Wm7NcSsH6KKPFGBbG1n1srQ+06DWpJ59cRhsGKGbo0wBFpDgNGcBcHGsl9BuSZmjfCRHWnv0BtgOcJVWwAZG2cw+3uErAKacZ6hq32PkGWuNSaxsHgIHxqjje5I4/Ms2dCt+BHpcUT4ai0j5sw22TCea2sCBbz3BOjaRFj+JeAE46IoHxlUmlfrmWuZT+8Ae935fjljDe3zpLdEJxGriLHdFtL8mKC2cbbAgIOXVBemwBhHibZq4xN/0YgPrESsRsiMs+C1zEwwFxqBqs4hY2yhlKeIUab5GLEM8SLlVRslu77jZhEwL/ofKKZ4uknxiiLO0cYFGFpJPMTGiRO0iQqtNrX7NxueTcahqv4/FTpgwFYinOcoxtiLKWEwF+U6Mqv5FuVlWSQHzvBWmKmUqIEg1YiMfIu6lhjKCRK0YkXelwoDmIjztWrCot5KQs5R5zKccIVZQwl3cTaVdQVGnfOkrzFbDuvuJWTVuBcXcQ5iFlFFAmBynlBKKH/f6z06pX6r6pJoSQlaeW2gsighi3na1E6HwNSkUUHbS45FXG7ajhIi68+1cO98qtqqJEHzTW6LbEfUstER1ef2llBKhiGqKW7VGUk6lT7dnmS/gnZMf1KPaoI16VWsrA1KhX3dObo5m9VqQpff/AFTcI4hMzFV+AAAAAElFTkSuQmCC
+
+\define wiki(text,topic) [[$text$|https://en.wikipedia.org/wiki/$topic$]]
+
+''Hello! My name is Eric Shulman''. I am the author of ''[[www.TiddlyTools.com|http://www.TiddlyTools.com]] (Small Tools for Big Ideas! &trade;)'', a popular collection of original plugins, macros, widgets, templates and stylesheets for TiddlyWiki that I have created and shared with the TiddlyWiki community.
+
+<<<
+Think of TiddlyTools as a ''virtual hardware store and "demonstration showroom"'', offering tools, parts and techniques that provide a rich variety of new functionality and feature enhancements to help you ''turn a general-purpose TiddlyWiki "info-house" into a comfortable, custom-built "info-home"''.
+
+The TiddlyWiki core system provides the basic structure and utilities: the foundation, framing, walls, roof, windows/doors, plumbing, heating, and electrical systems. Then, TiddlyTools helps you with all the "finish work": the appliances, fixtures, lighting, cabinets, furniture, paint, wallpaper, carpeting, etc. ''to best suit your specific needs and personal style''.
+<<<
+
+Since the early days of TiddlyWiki (April 2005), I have worked closely with its inventor, [[Jeremy Ruston|https://jermolene.com/]], to help develop and improve TiddlyWiki's core functions. I am also a key contributor and administrator of the online TiddlyWiki [[Discourse|https://talk.TiddlyWiki.org]] and [[GoogleGroups|https://groups.google.com/forum/#!forum/tiddlywiki]] discussion forums, providing ongoing assistance to the worldwide TiddlyWiki community. I have written over 15,000 detailed responses to individual questions posted online.  For several years I was also the lead developer and maintainer of the [[TiddlyWiki Classic|https://classic.tiddlywiki.com/]] codebase.
+
+I was born and raised in suburban Long Island, NY, and attended [[Carnegie Mellon University (CMU)|https://www.cmu.edu/]] in Pittsburgh, PA, where I studied ''Computer Science, Cognitive Psychology, Sociology, Human Factors Design, and Artificial Intelligence''. As an undergraduate at CMU, I was privileged to work with some of the major luminaries in early software research and design, including <<wiki "Herbert Simon" "Herbert_A._Simon">>, <<wiki "Allen Newell" "Allen_Newell">>, <<wiki "James Gosling" "James_Gosling">>, and <<wiki "Raj Reddy" "Raj_Reddy">>. I was also employed in several Computer Science Department research projects, including the development of speech recognition technologies, graphical interface systems, and interactive applications for instruction in physics, art and music. I received a ''Bachelor of Science in "Interactive Systems Design"'' from CMU in 1985.
+
+During my early post-graduate years, I worked for several notable software development companies, including 
+<<wiki "Honeywell Information Systems" "Honeywell#Honeywell_Information_Systems">> and <<wiki "Lotus Software" "Lotus_Software">>. I was an integral member of the <<wiki "1-2-3 spreadsheet" 
+"Lotus_1-2-3">> development team where I helped create the first GUI-based application interfaces for Microsoft Windows and IBM OS/2.
+
+Since 1998, I have been an ''independent design consultant'', living and working in Silicon Valley, where I apply more than 40 years of experience to provide ''analysis, design and software development services'' for commercial companies and not-for-profit organizations, with emphasis on ''information architecture'' and ''interaction/visual design standards'' to improve ease-of-use for new and existing software products and online environments.

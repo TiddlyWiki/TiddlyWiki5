@@ -1,0 +1,17 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/StyleBlock
+type: text/vnd.tiddlywiki
+
+@@background-color:red;
+@@.myClass
+This paragraph will have the CSS class `myClass`.
+
+* The `<ul>` around this list will also have the class `myClass`
+* List item 2
+@@
+
+@@font-size:1.5em;
+@@.coloured-text.coloured-bg
+* Block content
+* With custom style and classes
+@@

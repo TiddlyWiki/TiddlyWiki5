@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 A <<.def filter>> is a pipeline for transforming an <<.def input>> into an <<.def output>>. Both the input and the output are [[ordered sets of titles|Title Selection]] of tiddlers and fields.
 
-Filters are ''expressions'' constructed from smaller building blocks, called ''runs'', which are built using ''steps''. Eeach of which also transforms an input to an output.
+Filters are ''expressions'' constructed from smaller building blocks, called ''runs'', which are built using ''steps''. Each of which also transforms an input to an output.
 
 A filter starts with an empty output. Its runs are processed from left to right, progressively modifying the output.
 

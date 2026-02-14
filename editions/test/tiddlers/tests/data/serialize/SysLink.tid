@@ -1,0 +1,6 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/SysLink
+type: text/vnd.tiddlywiki
+
+$:TiddlerTitle
+~$:TiddlerTitle

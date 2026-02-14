@@ -148,7 +148,7 @@ Settings/AutoSave/Disabled/Description: 不要自动保存变更
 Settings/AutoSave/Enabled/Description: 自动保存变更
 Settings/AutoSave/Hint: 当使用支持的保存模块时，在编辑期间尝试自动保存变更
 Settings/CamelCase/Caption: 驼峰式维基链接
-Settings/CamelCase/Hint: 您可以全域禁用驼峰式短语自动链接。须保存后重新加载，方才生效。
+Settings/CamelCase/Hint: 须保存后重新加载，方才生效。
 Settings/CamelCase/Description: 启用自动驼峰式链接
 Settings/Caption: 设置
 Settings/DefaultSidebarTab/Caption: 默认侧边栏页签

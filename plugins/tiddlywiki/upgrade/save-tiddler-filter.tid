@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/upgrade/save-tiddler-filter
 
 \define saveTiddlerFilter()
-[is[tiddler]] -[[$:/UpgradeLibrary]] -[[$:/plugins/tiddlywiki/upgrade]] -[prefix[$:/state/popup/]] -[[$:/HistoryList]] -[[$:/boot/boot.css]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] +[sort[title]]
+[is[tiddler]] -[[$:/UpgradeLibrary]] -[[$:/plugins/tiddlywiki/upgrade]] -[prefix[$:/state/popup/]] -[[$:/HistoryList]] -[[$:/boot/boot.css]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[has[plugin-type]field:platform[server]] +[sort[title]]
 \end
 {{$:/core/templates/tiddlywiki5.html}}

@@ -11,10 +11,13 @@ The CSV text parser processes CSV files into a table wrapped in a scrollable wid
 
 var CsvParser = function(type,text,options) {
 	// Special handler for tab-delimited files
-	if (type === 'text/tab-delimited-values' && !options.separator) {
+	if(
+		!options.separator &&
+		(type === "text/tab-delimited-values" || type === "text/tab-separated-values")
+	) {
 		options.separator = "\t";
 	}
-	
+
 	// Table framework
 	this.tree = [{
 		"type": "scrollable", "children": [{
@@ -32,7 +35,7 @@ var CsvParser = function(type,text,options) {
 	$tw.utils.each(lines, function(columns) {
 		maxColumns = Math.max(columns.length, maxColumns);
 	});
-	
+
 	for(var line=0; line<lines.length; line++) {
 		var columns = lines[line];
 		var row = {
@@ -55,3 +58,4 @@ var CsvParser = function(type,text,options) {
 
 exports["text/csv"] = CsvParser;
 exports["text/tab-delimited-values"] = CsvParser;
+exports["text/tab-separated-values"] = CsvParser;

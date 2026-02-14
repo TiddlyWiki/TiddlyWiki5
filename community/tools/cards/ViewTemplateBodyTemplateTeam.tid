@@ -1,0 +1,3 @@
+title: $:/tiddlywiki/community/cards/ViewTemplateBodyTemplateTeam
+
+<$transclude $variable="community-card-team" title=<<currentTiddler>>/>

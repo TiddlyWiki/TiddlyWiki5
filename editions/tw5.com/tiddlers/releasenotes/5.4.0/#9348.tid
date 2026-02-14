@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9348
+description: Improve tabs macro accessibility
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9348
+github-contributors: Leilei332
+
+Adds `tablist`, `tabpanel` and `tab` roles to the tabs macro to improve its accessibility. It also adds a `selectedAria` attribute to the button widget.

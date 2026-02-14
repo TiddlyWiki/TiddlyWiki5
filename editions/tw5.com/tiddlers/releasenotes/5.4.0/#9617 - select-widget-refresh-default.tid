@@ -1,0 +1,12 @@
+change-category: usability
+change-type: bugfix
+created: 20260125195754439
+description: Refresh widget if "default" parameter input value is changed
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9217
+modified: 20260125195754439
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9217
+type: text/vnd.tiddlywiki
+

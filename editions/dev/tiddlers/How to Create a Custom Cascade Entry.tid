@@ -1,0 +1,127 @@
+created: 20240802065815656
+modified: 20240802065836064
+title: How to Create a Custom Cascade Entry
+type: text/vnd.tiddlywiki
+
+This guide explains how to add a new [[cascade|https://tiddlywiki.com/#Cascades]] to the ~TiddlyWiki core or your own plugins. This allows third-party plugins to extend the functionality of the core or your plugin.
+
+!! How Cascade Works in the Core
+
+This section explains how the existing WikiText in the core interacts with the new WikiText you’ll add, only for learning purpose. You don’t need to modify the core WikiText when adding a new cascade.
+
+!!! The Default Template as a Fallback
+
+The default behavior in ~TiddlyWiki is defined by [[$:/core/ui/ViewTemplate/tags/default]].
+
+<pre>
+<$view tiddler="$:/core" subtiddler="$:/core/ui/ViewTemplate/tags/default" mode=block format=text/>
+</pre>
+
+!!! Transclusion of the Active Template
+
+[[$:/core/ui/ViewTemplate/tags]] uses a filter expression to find the cascade filter and the view template you’ll add.
+
+<pre>
+<$view tiddler="$:/core" subtiddler="$:/core/ui/ViewTemplate/tags" mode=block format=text/>
+</pre>
+
+The `:cascade` clause collects all tiddlers it finds and uses their filter text sequentially. Most filters won’t return any text and will be skipped. The first filter that returns a tiddler title becomes the result of the `:cascade` clause. If no filters return a result, the fallback default filter will be used.
+
+The `:and[!is[blank]else` clause provides additional fallback protection, though it’s often redundant because a fallback is typically tagged with `$:/tags/ViewTemplateTagsFilter`. However, including fallbacks is a good practice for defensive programming.
+
+!! Adding a New Cascade Entry
+
+This section contains the WikiText you’ll need to add to the core. Modify it to suit your needs instead of copying it directly.
+
+!!! Creating a Control Panel Tab
+
+To create a new tab under [[ControlPanel|$:/ControlPanel]] → Advanced → [[Cascade|$:/core/ui/ControlPanel/Cascades]], use the following code:
+
+[[$:/core/ui/ControlPanel/ViewTemplateTags]] uses a filter expression to find the cascade filter and the view template you’ll add.
+
+<pre>
+<$view tiddler="$:/core" subtiddler="$:/core/ui/ControlPanel/ViewTemplateTags" mode=block format=text/>
+</pre>
+
+Add the following metadata:
+
+```tid
+tags: $:/tags/ControlPanel/Cascades
+caption: {{$:/language/ControlPanel/ViewTemplateTags/Caption}}
+```
+
+!!! Adding a New Language Entry
+
+It’s important to add related language files. Create a file starting with `title: $:/language/ControlPanel/`:
+
+```multid
+title: $:/language/ControlPanel/
+
+ViewTemplateTags/Caption: View Template Tags
+ViewTemplateTags/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the tags area of a tiddler.
+```
+
+!!! Adding Default Configuration
+
+Similar to the language file, add a config file starting with `title: $:/config/ViewTemplateTagsFilters/`. For example:
+
+```tid
+title: $:/config/ViewTemplateTagsFilters/
+tags: $:/tags/ViewTemplateTagsFilter
+
+default: [[$:/core/ui/ViewTemplate/tags/default]]
+```
+
+Different templates may have their own config files. Ensure you’re adding to the correct file or creating a new one if it doesn’t exist.
+
+!! Using the New Cascade
+
+This section provides a simplified example based on a real-world use case. It demonstrates how to override the default template with a custom template.
+
+!!! Your Template
+
+Add the content you want to display conditionally. Update `publisher/plugin-name` to your plugin’s name.
+
+```tid
+code-body: yes
+title: $:/plugins/publisher/plugin-name/EditMode
+
+\whitespace trim
+<$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
+  <div class="tc-tags-wrapper" style="display:flex">
+    <$transclude tiddler="$:/core/ui/EditTemplate/tags"/>
+    <$button class="tc-btn-invisible" style="margin-left:1em;">
+      {{$:/core/images/done-button}}
+      <$action-deletetiddler $tiddler={{{ [[$:/state/edit-view-mode-tags/]addsuffix<storyTiddler>] }}}/>
+    </$button>
+  </div>
+</$reveal>
+```
+
+!!! The Condition
+
+Write a filter that ends with `then[$:/plugins/publisher/plugin-name/EditMode]`.
+
+```tid
+code-body: yes
+tags: $:/tags/ViewTemplateTagsFilter
+title: $:/plugins/publisher/plugin-name/CascadeEditMode
+list-before: $:/config/ViewTemplateTagsFilters/default
+
+[[$:/state/edit-view-mode-tags/]addsuffix<currentTiddler>get[text]compare:string:eq[yes]then[$:/plugins/publisher/plugin-name/EditMode]]
+```
+
+!!! A Button to Trigger the Condition
+
+```tid
+code-body: yes
+tags: $:/tags/ViewTemplate/Tags
+title: $:/plugins/publisher/plugin-name/TriggerEdit
+
+\whitespace trim
+<%if [<storyTiddler>get[tags]!is[blank]] %>
+  <$button class="tc-btn-invisible" set={{{ [[$:/state/edit-view-mode-tags/]addsuffix<storyTiddler>] }}} setTo="yes" tooltip="add tags">
+    {{$:/core/images/new-here-button}}
+  </$button>
+<%endif%>
+```

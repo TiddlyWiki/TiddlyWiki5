@@ -1,37 +1,60 @@
 created: 20230614225302905
-modified: 20230614233448662
+modified: 20251021140446753
 tags: [[Operator Examples]] [[substitute Operator]]
 title: substitute Operator (Examples)
 type: text/vnd.tiddlywiki
 
-\define time() morning
-\define field() modified
+!! Substitute operator parameters
+
+The following example uses a ''function definition'' and a ''function call'' with a ''filter expression''
+
+<<wikitext-example-without-html """\function f.text() [[Hi, I'm $1$ and I live in $2$]substitute[Bugs Bunny],[Rabbit Hole Hill]]
+
+<<f.text>>
+""">>
+
+---
+
+The following example uses a [[filtered transclusion|Transclusion in WikiText]] with a [[filter expression|Filter Syntax]] creating a link and a text output.
+
+<<wikitext-example-without-html """link: {{{ [[Hi, I'm $1$ and I live in $2$]substitute[Bugs Bunny],[Rabbit Hole Hill]] }}}
+
+text: <$text text={{{ [[Hi, I'm $1$ and I live in $2$]substitute[Bugs Bunny],[Rabbit Hole Hill]] }}}/>
+""">>
+
+
+!! Substitute variables and parameters
+
+The following example uses [[variable definitions|Pragma: \procedure]] "name", "address", a ''filtered transclusion'' assigned to a ''text-widget''. The variables "name" and "address" are used as ''substitute parameters''.
+
+<<wikitext-example-without-html """\procedure name() Bugs Bunny
+\procedure address() Rabbit Hole Hill
+
+<$text text={{{ [[Hi, I'm $1$ and I live in $2$]substitute<name>,<address>] }}}/>
+""">>
+
+!! Substitute $(variables)$
+
+The following examples use the variables "name" and "address" and directly substitute the with the [[attribute substitution|Substituted Attribute Values]] syntax. 
+
+<<wikitext-example-without-html """\procedure name() Bugs Bunny
+\procedure address() Rabbit Hole Hill
+
+<$text text=`Hi, I'm $(name)$ and I live in $(address)$`/>
+""">>
+
+!! Substitute a filter expression and a variable
+
+The following example uses a procedure, that defines the text with substitution placeholders. `$(field)$` is defined as a variable. `${ ... }$` is filtered <<.olink2 "substitution placeholder" to:"substitute">>.
+
+<<wikitext-example-without-html """\procedure field() modified
+
 \procedure sentence() This tiddler was last $(field)$ on ${[{!!modified}format:date[DDth MMM YYYY]]}$
-\define name() Bugs Bunny
-\define address() Rabbit Hole Hill
 
-!Substitute <<.op substitute[]>> operator parameters
-<<.operator-example 1 "[[Hi, I'm $1$ and I live in $2$]substitute[Bugs Bunny],[Rabbit Hole Hill]]">>
+<$text text={{{ [<sentence>substitute[]] }}}/>
 
-!Substitute variables
-This example uses the following variables:
+---
 
-* name: <$codeblock code=<<name>>/>
-* address: <$codeblock code=<<address>>/>
+<$text text=`This tiddler was last $(field)$ on ${[{!!modified}format:date[DDth MMM YYYY]]}$`/>
 
-<<.operator-example 2 "[[Hi, I'm $(name)$ and I live in $(address)$]substitute[]]">>
-
-!Substitute variables and operator parameters
-This example uses the following variable:
-
-* time: <$codeblock code=<<time>>/>
-
-<<.operator-example 3 "[[Something in the $(time)$ at $2$ about $1$ ]substitute[Maths],[the Library]]">>
-
-!Substitute a filter expression and a variable
-This example uses the following variables:
-
-* field: <$codeblock code=<<field>>/>
-* sentence: <$codeblock code=<<sentence>>/>
-
-<<.operator-example 4 "[<sentence>substitute[]]">>
+""">>

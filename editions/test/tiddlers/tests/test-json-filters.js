@@ -143,6 +143,33 @@ describe("json filter tests", function() {
 		expect(wiki.filterTiddlers("[{First}jsonset:json[notjson]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
 	});
 
+	it("should support the jsondelete operator", function() {
+		// Delete top-level object property
+		expect(wiki.filterTiddlers("[{First}jsondelete[a]]")).toEqual(['{"b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
+		expect(wiki.filterTiddlers("[{First}jsondelete[b]]")).toEqual(['{"a":"one","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
+		expect(wiki.filterTiddlers("[{First}jsondelete[c]]")).toEqual(['{"a":"one","b":"","d":{"e":"four","f":["five","six",true,false,null]}}']);
+		// Delete nested object property
+		expect(wiki.filterTiddlers("[{First}jsondelete[d],[e]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"f":["five","six",true,false,null]}}']);
+		// Delete array element
+		expect(wiki.filterTiddlers("[{First}jsondelete[d],[f],[0]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["six",true,false,null]}}']);
+		expect(wiki.filterTiddlers("[{First}jsondelete[d],[f],[1]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five",true,false,null]}}']);
+		// Delete using negative array index
+		expect(wiki.filterTiddlers("[{First}jsondelete[d],[f],[-1]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false]}}']);
+		expect(wiki.filterTiddlers("[{First}jsondelete[d],[f],[-2]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,null]}}']);
+		expect(wiki.filterTiddlers("[{First}jsondelete[d],[f],[-5]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["six",true,false,null]}}']);
+		// Delete from array
+		expect(wiki.filterTiddlers("[{Second}jsondelete[0]]")).toEqual(['["deux","trois",["quatre","cinq"]]']);
+		expect(wiki.filterTiddlers("[{Second}jsondelete[1]]")).toEqual(['["une","trois",["quatre","cinq"]]']);
+		expect(wiki.filterTiddlers("[{Second}jsondelete[-1]]")).toEqual(['["une","deux","trois"]']);
+		// Attempting to delete non-existent property should return unchanged
+		expect(wiki.filterTiddlers("[{First}jsondelete[missing-property]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
+		expect(wiki.filterTiddlers("[{First}jsondelete[d],[missing]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
+		// Attempting to delete root should return unchanged
+		expect(wiki.filterTiddlers("[{First}jsondelete[]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
+		// Non-JSON input should return unchanged
+		expect(wiki.filterTiddlers("[{Third}jsondelete[a]]")).toEqual(["This is not JSON"]);
+	});
+
 	it("should support the format:json operator", function() {
 		expect(wiki.filterTiddlers("[{First}format:json[]]")).toEqual(["{\"a\":\"one\",\"b\":\"\",\"c\":1.618,\"d\":{\"e\":\"four\",\"f\":[\"five\",\"six\",true,false,null]}}"]);
 		expect(wiki.filterTiddlers("[{First}format:json[4]]")).toEqual(["{\n    \"a\": \"one\",\n    \"b\": \"\",\n    \"c\": 1.618,\n    \"d\": {\n        \"e\": \"four\",\n        \"f\": [\n            \"five\",\n            \"six\",\n            true,\n            false,\n            null\n        ]\n    }\n}"]);

@@ -1,0 +1,21 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Conditional
+type: text/vnd.tiddlywiki
+
+This is a <%if [{something}] %>Elephant<%elseif [{else}] %>Pelican<%else%>Crocodile<%endif%> <%if [{something}] %>Elephant<%else%>Crocodile<%endif%>
+
+<%if [{$:/info/url/protocol}match[file:]]%>
+  Loaded from a file URI
+<%elseif [{$:/info/url/protocol}match[https:]]%>
+  Loaded from an HTTPS URI
+<%elseif [{$:/info/url/protocol}match[http:]]%>
+  Loaded from an HTTP URI
+<%else%>
+  Loaded from an unknown protocol
+<%endif%>
+
+Plain text in next paragraph.
+
+<%if [{$:/info/url/protocol}match[file:]]%>
+  Hidden.
+<%endif%>

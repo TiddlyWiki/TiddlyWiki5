@@ -4,35 +4,36 @@ tags: Features
 title: DateFormat
 type: text/vnd.tiddlywiki
 
-The default representation of dates is a compact string such as <<.value 20211002153802059>>. The associated template is `[UTC]YYYY0MM0DD0hh0mm0ss0XXX`. For example, the <<.field created>> and <<.field modified>> fields are stored like this.
+The default representation of dates is a compact string such as <<.value "<$view field='modified' format='text'/>">>. The associated template is `[UTC]YYYY0MM0DD0hh0mm0ss0XXX`. For example, the <<.field created>> and <<.field modified>> fields are stored like this.
 
-The display format for this string can be controlled with a template. For example, transcluding the <<.field modified>> field automatically applies a template to display the date as <<.value "Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)">>. A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
+The display format for this string can be controlled with a template. For example, transcluding the <<.field modified>> field automatically applies a template to display the date as "{{!!modified}}". A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
 
 `<$view field=modified format=date template="DDth mmm YYYY 0hh:0mm:0ss" />`
 
 The date string is processed with the following substitutions:
 
 |!Token |!Substituted Value |
+|`[UTC]`|Time-shift the represented date to UTC. Must be at very start of format string |
+|`YYYY` |Full year |
+|`YY` |Two-digit year |
+|`wYYYY` |Full year with respect to week number |
+|`aYYYY` |<<.from-version "5.1.23">> Full year but negative dates are displayed as positive |
+|`wYY` |Two digit year with respect to week number |
+|`{era:BCE||CE}` |<<.from-version "5.1.23">> Displays a different string for years that are negative, zero or positive (see below) |
+|`MMM` |Month in full (e.g. "July") |
+|`mmm` |Short month (e.g. "Jul") |
+|`MM` |Month number |
+|`0MM` |Adds leading zero |
 |`ddddd` |<<.from-version "5.2.0">> Day of year (1 to 365, or 366 for leap years) |
 |`0ddddd` |<<.from-version "5.2.0">> Zero padded day of year (001 to 365, or 366 for leap years) |
-|`DDD` |Day of week in full (eg, "Monday") |
-|`ddd` |Short day of week (eg, "Mon") |
+|`DDD` |Day of week in full (e.g. "Monday") |
+|`ddd` |Short day of week (e.g. "Mon") |
 |`dddd` |<<.from-version "5.2.0">> Weekday number from 1 through 7, beginning with Monday and ending with Sunday |
 |`DD` |Day of month |
 |`0DD` |Adds a leading zero |
 |`DDth` |Adds a suffix |
 |`WW` |ISO-8601 week number of year |
 |`0WW` |Adds a leading zero |
-|`MMM` |Month in full (eg, "July") |
-|`mmm` |Short month (eg, "Jul") |
-|`MM` |Month number |
-|`0MM` |Adds leading zero |
-|`YYYY` |Full year |
-|`YY` |Two digit year |
-|`wYYYY` |Full year with respect to week number |
-|`aYYYY` |<<.from-version "5.1.23">> Full year but negative dates are displayed as positive |
-|`wYY` |Two digit year with respect to week number |
-|`{era:BCE||CE}` |<<.from-version "5.1.23">> Displays a different string for years that are negative, zero or positive (see below) |
 |`hh` |Hours |
 |`0hh` |Adds a leading zero |
 |`hh12` |Hours in 12 hour clock |
@@ -43,12 +44,12 @@ The date string is processed with the following substitutions:
 |`0ss` |Seconds with leading zero |
 |`XXX` |Milliseconds |
 |`0XXX` |Milliseconds with leading zero |
-|`am` or `pm` |Lower case AM/PM indicator |
+|`am` or `pm` |Lower case am/pm indicator |
 |`AM` or `PM` |Upper case AM/PM indicator |
-|`TZD` |Timezone offset |
+|`TZD` |Timezone offset from UTC (e.g. "+01:00", "-05:00"…) |
 |`TIMESTAMP` |<<.from-version "5.2.4">> Number of milliseconds since the [[ECMAScript epoch|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_ecmascript_epoch_and_timestamps]], 1 January 1970. |
 |`\x` |Used to escape a character that would otherwise have special meaning |
-|`[UTC]`|Time-shift the represented date to UTC. Must be at very start of format string|
+
 
 Note that other text is passed through unchanged, allowing commas, colons or other separators to be used.
 

@@ -1,0 +1,68 @@
+created: 20231218192649874
+modified: 20251212092210168
+tags: RevealWidget
+title: RevealWidget (Popup Clamping Example)
+
+<style>
+.container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  width: 600px;
+  height: 500px;
+  overflow: hidden;
+  background-color: #F8F8F8;
+  position: relative;
+  border: 1px solid #888;
+}
+.grid-item {
+    justify-self: center;
+    align-self: center;
+}
+.grid-popup .tc-drop-down {
+	padding: 1em;
+	min-width: 15em;
+}
+</style>
+
+This example demonstrates the use of <<.attr positionAllowNegative>> and <<.attr clamp>> to clamp a popup inside its parent container.
+
+<<.attr clamp>>=<$select tiddler="$:/temp/clamp-demo-active" field="text" default="none">
+<option value="none">none</option>
+<option value="right">right</option>
+<option value="bottom">bottom</option>
+<option value="both">both</option>
+</$select>
+
+<$checkbox tiddler="$:/temp/clamp-demo-allow-negative" field="text" checked="yes" unchecked="no" default="no"> <<.attr positionAllowNegative>></$checkbox>
+
+<<.attr position>>=<$select tiddler="$:/temp/clamp-demo-position" field="text" default="below">
+<option value="left">left</option>
+<option value="above">above</option>
+<option value="aboveleft">aboveleft</option>
+<option value="aboveright">aboveright</option>
+<option value="right">right</option>
+<option value="belowleft">belowleft</option>
+<option value="belowright">belowright</option>
+<option value="below">below</option>
+</$select>
+
+<div class="container">
+	<$list filter="[range[25]]">
+		<div class="grid-item">
+			<$button popup="$:/state/popup-clamping">Pop Me Up</$button>
+		</div>
+	</$list>
+	<$reveal type="popup"
+	         position={{{ [{$:/temp/clamp-demo-position}else[below]] }}}
+			 state="$:/state/popup-clamping"
+			 class="grid-popup"
+			 clamp={{{ [{$:/temp/clamp-demo-active}else[none]] }}}
+			 positionAllowNegative={{{ [{$:/temp/clamp-demo-allow-negative}else[no]] }}}>
+		<div class="tc-drop-down">
+
+		!! This is the popup
+		And this is some text
+		</div>
+	</$reveal>
+</div>

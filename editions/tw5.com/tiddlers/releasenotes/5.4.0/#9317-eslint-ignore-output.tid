@@ -1,0 +1,13 @@
+change-category: nodejs
+change-type: bugfix
+created: 20251115002825127
+description: Add output directory to eslint ignore configuration
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9317
+modified: 20251115011145606
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9317
+type: text/vnd.tiddlywiki
+
+This PR adds the `**/output/**` directory to eslint ignore configuration

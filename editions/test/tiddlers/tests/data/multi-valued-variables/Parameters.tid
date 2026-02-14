@@ -1,0 +1,21 @@
+title: MultiValuedVariables/Parameters
+description: Multi-valued function parameters
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\function myfunc(input) [(input)sort[]]
+
+<$let
+	input={{{ [all[tiddlers]] }}}
+	output={{{ [function[myfunc],(input)] }}}
+>
+<$text text={{{ [(output)] +[join[-]] }}}/>
+</$let>
++
+title: ExpectedResult
+
+<p>
+$:/core-ExpectedResult-Output
+</p>

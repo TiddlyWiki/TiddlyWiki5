@@ -9,7 +9,7 @@ Shortcut prefixes are commonly used by advanced users because they are fast to t
 <$railroad text="""
 \start none
 \end none
-(-|:"+"|"-"|"~"|"=")
+(-|:"+"|"-"|"~"|"="|"=>")
 [[run|"Filter Run"]]
 """/>
 
@@ -23,7 +23,8 @@ If a run has:
 
 * the prefix `~`, if the filter output so far is an empty list then the output titles of the run are [[dominantly appended|Dominant Append]] to the filter's output. If the filter output so far is not an empty list then the run is ignored. <<.from-version "5.1.18">>
 
-* the prefix `=`, output titles are appended to the filter's output without de-duplication. <<.from-version "5.1.20">> 
+* the prefix `=`, output titles are appended to the filter's output without de-duplication. <<.from-version "5.1.20">>
 
+* the prefix `=>`, the input is assigned to the variable named with the output title. <<.from-version "5.4.0">>
 
 {{Interchangeable Filter Run Prefixes}}

@@ -1,0 +1,10 @@
+title: TiddlyWiki People
+modified: 20250909171928024
+created: 20250909171928024
+tags: Community About
+
+Members of the TiddlyWiki community who are involved in the development of TiddlyWiki and the running of the project are invited to [[create a Community Card|Submitting a Community Card]] so that they can be included in project plans and organisation charts. Community Cards can also showcase their interests and activities in the TiddlyWiki community.
+
+{{Community Cards Caveats}}
+
+<<community-card-pill-stack-person personFilter:"[tag[Community/Person]sort[title]]">>

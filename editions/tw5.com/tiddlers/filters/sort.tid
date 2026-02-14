@@ -1,16 +1,22 @@
+caption: sort
 created: 20140410103123179
-modified: 20150203191228000
+modified: 20251227084644651
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: the input, likewise sorted into descending order
+op-output: the input, sorted into ascending order by field <<.field F>>, treating field values as text
+op-parameter: the <<.op sort>> operator accepts 1 or 2 parameters, see below for details
+op-parameter-name: F
+op-purpose: sort the input by text field
 tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Order Operators]] [[Negatable Operators]]
 title: sort Operator
 type: text/vnd.tiddlywiki
-caption: sort
-op-purpose: sort the input by text field
-op-input: a [[selection of titles|Title Selection]]
-op-parameter: the name of a [[field|TiddlerFields]], defaulting to <<.field title>>
-op-parameter-name: F
-op-output: the input, sorted into ascending order by field <<.field F>>, treating field values as text
-op-neg-output: the input, likewise sorted into descending order
 
 The difference between capital and lowercase letters is ignored. Compare <<.olink sortcs>>.
+
+```
+[sort[<field>],[<locale>]]
+```
+* ''field'' : the name of a [[field|TiddlerFields]], defaulting to <<.field title>>
+* ''locale'': (optional). A string with a [[BCP 47 language tag|https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag]]
 
 <<.operator-examples "sort">>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /*\
 title: $:/core/modules/widgets/action-log.js
 type: application/javascript
@@ -32,7 +33,7 @@ LogWidget.prototype.execute = function(){
 	this.message = this.getAttribute("$$message","debug");
 	this.logAll = this.getAttribute("$$all","no") === "yes" ? true : false;
 	this.filter = this.getAttribute("$$filter");
-}
+};
 
 /*
 Refresh the widget by ensuring our attributes are up to date
@@ -51,23 +52,30 @@ LogWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 LogWidget.prototype.log = function() {
-	var data = {},
+	var self = this,
+		data = {}, // Hashmap by attribute name with string or array of string values
 		dataCount,
-		allVars = {},
+		allVars = {}, // Hashmap by variable name with string or array of string values
 		filteredVars;
-
-	$tw.utils.each(this.attributes,function(attribute,name) {
+	// Collect the attributes to be logged
+	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		if(name.substring(0,2) !== "$$") {
-			data[name] = attribute;
+			var resultList = self.computeAttribute(attribute,{asList: true});
+			if(resultList.length <= 1) {
+				data[name] = resultList[0] || "";
+			} else {
+				data[name] = resultList;
+			}
 		}
 	});
-
+	// Collect values of all variables, using the source text for functions
 	for(var v in this.variables) {
 		var variable = this.parentWidget && this.parentWidget.variables[v];
 		if(variable && variable.isFunctionDefinition) {
 			allVars[v] = variable.value;
 		} else {
-			allVars[v]  = this.getVariable(v,{defaultValue:""});
+			var variableInfo = this.getVariableInfo(v);
+			allVars[v] = variableInfo.resultList.length > 1 ? variableInfo.resultList : variableInfo.text;
 		}
 	}
 	if(this.filter) {
@@ -88,6 +96,6 @@ LogWidget.prototype.log = function() {
 		console.groupEnd();
 	}
 	console.groupEnd();
-}
+};
 
 exports["action-log"] = LogWidget;

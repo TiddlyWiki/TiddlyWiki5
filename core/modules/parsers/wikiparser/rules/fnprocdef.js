@@ -6,15 +6,15 @@ module-type: wikirule
 Wiki pragma rule for function, procedure and widget definitions
 
 ```
-\function name(param:defaultvalue,param2:defaultvalue)
+\function name(param:"defaultvalue", param2:"defaultvalue")
 definition text
 \end
 
-\procedure name(param:defaultvalue,param2:defaultvalue)
+\procedure name(param:"defaultvalue", param2:"defaultvalue")
 definition text
 \end
 
-\widget $mywidget(param:defaultvalue,param2:defaultvalue)
+\widget $mywidget(param:"defaultvalue", param2:"defaultvalue")
 definition text
 \end
 ```
@@ -32,7 +32,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\\(function|procedure|widget)\s+([^(\s]+)\((\s*([^)]*))?\)(\s*\r?\n)?/mg;
+	this.matchRegExp = /\\(function|procedure|widget)\s+([^(\s]+)\((\s*([^)]*(?:\)\)[^)]*)*))?\)(\s*\r?\n)?/mg;
 };
 
 /*

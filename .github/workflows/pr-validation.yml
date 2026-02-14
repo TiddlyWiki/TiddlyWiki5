@@ -1,0 +1,37 @@
+name: PR Validation
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+jobs:
+  validate-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Validate PR paths
+    - name: Validate PR Paths
+      uses: TiddlyWiki/cerebrus@v6
+      with:
+        pr_number: ${{ github.event.pull_request.number }}
+        repo: ${{ github.repository }}
+        base_ref: ${{ github.event.pull_request.base.ref }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        mode: rules
+      continue-on-error: true
+    
+    # Step 2: Validate change notes
+    - name: Validate Change Notes
+      uses: TiddlyWiki/cerebrus@v6
+      with:
+        pr_number: ${{ github.event.pull_request.number }}
+        repo: ${{ github.repository }}
+        base_ref: ${{ github.event.pull_request.base.ref }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        mode: changenotes
+      continue-on-error: false
+

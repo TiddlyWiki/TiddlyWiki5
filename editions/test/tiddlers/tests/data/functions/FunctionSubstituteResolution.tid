@@ -1,0 +1,38 @@
+title: Functions/FunctionResolutionInSubstitute
+description: Functions should resolve correctly in the substitute operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+\function getIndex() [<index>add[1]] 
+
+\procedure template-with-var() $(getIndex)$
+
+\procedure template-with-filteredexpression() ${ [<getIndex>] }$
+
+\function test-with-substitute-variable()
+[[abc]split[]] :map[<template-with-var>substitute[]] :and[join[ / ]]
+\end
+
+\function test-with-substitute-filteredexpression()
+[[abc]split[]] :map[<template-with-filteredexpression>substitute[]] :and[join[ / ]]
+\end
+
+\function test-with-function()
+[[abc]split[]] :map[function[getIndex]substitute[]] :and[join[ / ]]
+\end
+
+
+
+<<test-with-substitute-variable>>|
+<<test-with-substitute-filteredexpression>>|
+<<test-with-function>>
+
+
++
+title: ExpectedResult
+
+<p>1 / 2 / 3|1 / 2 / 3|1 / 2 / 3</p>

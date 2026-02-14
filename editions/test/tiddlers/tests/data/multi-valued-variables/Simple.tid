@@ -1,0 +1,17 @@
+title: MultiValuedVariables/Simple
+description: Simple usage of multivalued assignments with the "let" widget
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$let varname={{{ [all[tiddlers]sort[]] }}}
+	varname2=<<varname>>>
+<$text text={{{ [(varname2)] +[join[-]] }}}/>
+</$let>
++
+title: ExpectedResult
+
+<p>
+$:/core-ExpectedResult-Output
+</p>

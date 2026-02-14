@@ -1,7 +1,0 @@
-title: $:/plugins/tiddlywiki/d3/readme
-
-The D3 plugin is a proof-of-concept demo of integration with the D3.js data visualisation framework (http://d3js.org).
-
-It is not currently in a state where it can be used for anything useful.
-
-[[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/d3]]

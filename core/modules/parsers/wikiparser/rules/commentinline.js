@@ -40,6 +40,13 @@ exports.findNextMatch = function(startPos) {
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.endMatchRegExp.lastIndex;
-	// Don't return any elements
-	return [];
+	// Return a node representing the inline comment
+	var commentStart = this.match.index;
+	var commentEnd = this.endMatch.index + this.endMatch[0].length;
+	return [{
+			type: "void",
+			text: this.parser.source.slice(commentStart, commentEnd),
+			start: commentStart,
+			end: commentEnd
+	}];
 };

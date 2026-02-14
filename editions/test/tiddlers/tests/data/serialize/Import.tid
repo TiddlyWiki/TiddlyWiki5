@@ -1,0 +1,6 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Import
+type: text/vnd.tiddlywiki
+
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [[$:/core/ui/PageMacros]]

@@ -3,10 +3,12 @@ title: $:/language/Search/
 Advanced/Matches: //<small><<resultCount>> 件一致</small>//
 DefaultResults/Caption: リスト
 Filter/Caption: フィルタ
-Filter/Hint: [[フィルタ|https://tiddlywiki.com/static/Filters.html]]で検索します。 
+Filter/Hint: [[フィルタ|https://tiddlywiki.com/static/Filters.html]]で検索します。
 Filter/Matches: //<small><<resultCount>> 件一致</small>//
 Matches: //<small><<resultCount>> 件一致</small>//
 Matches/All: すべて一致:
+Matches/NoMatch: //該当なし//
+Matches/NoResult: //検索結果なし//
 Matches/Title: タイトル一致:
 Search: 検索
 Search/TooShort: 検索文が短すぎます

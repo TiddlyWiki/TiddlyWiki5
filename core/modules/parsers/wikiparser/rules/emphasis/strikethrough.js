@@ -39,7 +39,7 @@ exports.parse = function() {
 	// Return the classed span
 	return [{
 		type: "element",
-		tag: "strike",
+		tag: "s",
 		children: tree
 	}];
 };

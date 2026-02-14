@@ -1,0 +1,118 @@
+title: Multi-Valued Variables
+created: 20250307212252946
+modified: 20250307212252946
+tags: Concepts Variables
+
+<<.from-version "5.4.0">> In ordinary usage, [[variables|Variables]] contain a single snippet of text. With the introduction of multi-valued variables. it is now possible to store a list of multiple values in a single variable. When accessed in the usual way, only the first value is returned, but using round brackets instead of angle brackets around the variable name allows access to the complete list of the values. This makes multi-valued variables largely invisible unless you specifically need to use them.
+
+! Setting Multi-Valued Variables
+
+Generally, all the methods for setting variables implicitly set multi-valued variables, with the exception of the [[Set Widget|Set Widget]].
+
+!! LetWidget
+
+The <<.wid let>> widget allows multi-valued variables to be set in one operation, each to the complete list of results obtained from evaluating an attribute that is defined via a filtered transclusion. For example:
+
+```
+<$let
+	varname={{{ [all[tiddlers]sort[]] }}}
+>
+```
+
+The <<.wid let>> widget also allows the complete list of return values from a function to be assigned to a multi-valued variable. For example:
+
+```
+<$let
+	varname=<<my.func>>
+>
+```
+
+!! [[Let Filter Run Prefix]]
+
+The `:let` filter run prefix (or its shortcut syntax `=>`) assigns the complete list of results of a filter run to a multi-valued variable.
+
+! Retrieving Multi-Valued Variables
+
+!! [[title Operator]]
+
+The simplest way to retrieve the complete list of values stored in a multi-valued variable is to use the [[title Operator]]. For example:
+
+```
+[title(varname)]
+```
+
+Because `title` is the default operator when the operator name is missing from a filter step, the following example is equivalent to the previous one:
+
+```
+[(varname)]
+```
+
+!! Multi-valued Parameters for Filter Operators
+
+Certain filter operators can accept multi-valued parameters:
+
+* [[function Operator]]
+* [[title Operator]]
+
+For example:
+
+```
+\function myfunc(tiddlers) [(tiddlers)sort[]]
+
+<$let varname={{{ [all[tiddlers]limit[50]] }}}>
+<$text text={{{ [function[myfunc],(varname)] +[join[-]] }}}/>
+</$let>
+```
+
+!! Passing Multi-Valued Variables to Procedures and Functions
+
+<<.from-version "5.4.0">> Multi-valued variables can be passed to procedures and functions using the `((var))` syntax in [[widget attributes|Multi-Valued Variable Attribute Values]]. This is the multi-valued counterpart of the `<<var>>` syntax:
+
+```
+\procedure showItems(itemList)
+<$text text={{{ [(itemList)join[-]] }}}/>
+\end
+
+<$let items={{{ [all[tiddlers]sort[]] }}}>
+<$transclude $variable="showItems" itemList=((items))/>
+</$let>
+```
+
+The `((var))` syntax can also be used in procedure and function parameter defaults:
+
+```
+\procedure showItems(itemList:((defaults)))
+<$text text={{{ [(itemList)join[-]] }}}/>
+\end
+```
+
+! Displaying Multi-Valued Variables
+
+<<.from-version "5.4.0">> Multi-valued variables can be displayed inline in wikitext using the `((var))` syntax. The values are joined with a comma and space by default:
+
+```
+<$let items={{{ [all[tiddlers]sort[]] }}}>
+((items))
+</$let>
+```
+
+A custom separator can be specified using the `||` delimiter:
+
+```
+((items||:))
+```
+
+A similar syntax with triple round brackets is available for displaying the results of a filter expression:
+
+```
+(((  [all[tiddlers]sort[]]  )))
+(((  [all[tiddlers]sort[]]  ||:  )))
+```
+
+! Examples
+
+```
+<$let varname={{{ [all[tiddlers]sort[]] }}}>
+<$text text={{{ [(varname)] +[join[-]] }}}/>
+</$let>
+```

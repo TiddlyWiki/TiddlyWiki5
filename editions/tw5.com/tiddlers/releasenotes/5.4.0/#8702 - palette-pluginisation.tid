@@ -1,0 +1,9 @@
+title: $:/changenotes/5.4.0/#8702/impacts/palette-pluginisation
+changenote: $:/changenotes/5.4.0/#8702
+created: 20250901000000000
+modified: 20250901000000000
+tags: $:/tags/ImpactNote
+description: Existing colour palettes have been moved to a new "palettes-legacy" plugin
+impact-type: pluginisation
+
+Add the plugin to your wiki in order to continue using the legacy palettes.

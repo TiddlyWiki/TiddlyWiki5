@@ -1,0 +1,18 @@
+title: MultiValuedVariables/NegatedTitle
+description: Multi-valued operands
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$let
+	exclude={{{ $:/core Output }}}
+>
+<$text text={{{ [all[tiddlers]!title(exclude)] +[join[-]] }}}/>
+</$let>
++
+title: ExpectedResult
+
+<p>
+ExpectedResult
+</p>

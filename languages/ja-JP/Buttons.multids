@@ -22,6 +22,8 @@ CopyToClipboard/Caption: クリップボードへコピー
 CopyToClipboard/Hint: このテキストをクリップボードへコピーします
 Delete/Caption: 削除
 Delete/Hint: Tiddler を削除します
+DeleteTiddlers/Caption: Tiddler一式の削除
+DeleteTiddlers/Hint: Tiddler一式を削除します
 Edit/Caption: 編集
 Edit/Hint: この Tiddler を編集します
 EditorHeight/Caption: エディタの縦幅
@@ -43,7 +45,8 @@ Excise/Caption/Replace/Link: リンク
 Excise/Caption/Replace/Macro: マクロ
 Excise/Caption/Replace/Transclusion: 転出
 Excise/Caption/Tag: 新しい Tiddler にこの Tiddler のタイトルをタグ付けします
-Excise/Caption/TiddlerExists: Warning: Tiddler はすでに存在します
+Excise/Caption/TiddlerExists: 警告: Tiddler はすでに存在します
+Excise/DefaultTitle: 新しい切り取り
 Excise/Hint: 選択したテキストを新しいティドラーに切り出します
 ExportPage/Caption: すべてエクスポート
 ExportPage/Hint: すべての Tiddler をエクスポートします
@@ -87,6 +90,8 @@ Italic/Caption: 斜体
 Italic/Hint: 選択範囲に斜体書式を適用します
 Language/Caption: 言語
 Language/Hint: メニューの言語を選択します
+LayoutSwitcher/Caption: レイアウト
+LayoutSwitcher/Hint: レイアウト切り替えを開きます
 LineWidth/Caption: 線の長さ
 LineWidth/Hint: 線画する線の長さを設定します
 Link/Caption: リンク
@@ -105,6 +110,8 @@ MonoLine/Caption: 等幅
 MonoLine/Hint: 選択範囲に等幅の文字書式を適用します
 More/Caption: その他のコマンド
 More/Hint: その他のコマンドを表示します
+NetworkActivity/Caption: ネットワークアクティビティ
+NetworkActivity/Hint: すべてのネットワークアクティビティをキャンセルします
 NewHere/Caption: タグ付き Tiddler の作成
 NewHere/Hint: この Tiddler のタイトルのタグを付けた、新しい Tidder を作成します
 NewImage/Caption: 新しい画像
@@ -119,6 +126,7 @@ NewTiddler/Caption: 新しい Tiddler
 NewTiddler/Hint: 新しい Tiddler を作成します
 Opacity/Caption: 透明度
 Opacity/Hint: ペイントの透明度を設定します
+OpenControlPanel/Hint: この Wiki の設定画面を開きます
 OpenWindow/Caption: 新しいウインドウで開く
 OpenWindow/Hint: 新しいウインドウで Tiddler を開く
 Paint/Caption: ペイント色
@@ -155,10 +163,10 @@ Size/Caption/Height: 縦幅:
 Size/Caption/Resize: 画像のサイズを変更
 Size/Caption/Width: 横幅:
 Size/Hint: 画像サイズの設定
-Stamp/Caption: 自己紹介
-Stamp/Caption/New: 自己紹介を追加します
+Stamp/Caption: スタンプ
+Stamp/Caption/New: 独自のスニペットを追加します
 Stamp/Hint: あらかじめ設定されたスニペットを挿入します
-Stamp/New/Text: スニペットのテキスト (キャプションフィールドに説明的なタイトルを追加することを忘れないでください)
+Stamp/New/Text: スニペットのテキスト (captionフィールドに説明的なタイトルを追加することを忘れないでください)
 Stamp/New/Title: メニューに表示する名前
 StoryView/Caption: Tidder 表示切替
 StoryView/Hint: Tiddler の表示方法を切り替えます
@@ -170,6 +178,8 @@ Superscript/Caption: 上付き文字
 Superscript/Hint: 選択範囲に上付き文字の書式を適用します
 TagManager/Caption: タグの管理
 TagManager/Hint: タグの管理画面を開きます
+TestCaseImport/Caption: Tiddler一式のインポート
+TestCaseImport/Hint: Tiddler一式をインポートします
 Theme/Caption: テーマ
 Theme/Hint: 表示のテーマを選択します
 Timestamp/Caption: タイムスタンプ

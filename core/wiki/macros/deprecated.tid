@@ -1,0 +1,43 @@
+title: $:/core/macros/deprecated
+tags: $:/tags/Macro
+
+<!-- Deprecated Macros -->
+<!-- DO NOT USE THESE MACROS. THEY MAY BE REMOVED AT ANY MOMENT -->
+
+\define box-shadow(shadow)
+``
+		box-shadow: $shadow$;
+``
+\end
+
+\define filter(filter)
+``
+		filter: $filter$;
+``
+\end
+
+\define transition(transition)
+``
+		transition: $transition$;
+``
+\end
+
+\define transform-origin(origin)
+``
+		transform-origin: $origin$;
+``
+\end
+
+\define background-linear-gradient(gradient)
+``
+background-image: linear-gradient($gradient$);
+background-image: -moz-linear-gradient($gradient$);
+background-image: -webkit-linear-gradient($gradient$);
+``
+\end
+
+\define column-count(columns)
+``
+column-count: $columns$;
+``
+\end

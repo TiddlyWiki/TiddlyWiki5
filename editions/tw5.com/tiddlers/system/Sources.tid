@@ -37,7 +37,7 @@ title: $:/editions/tw5.com/TiddlerInfo/Sources
 \end
 
 \procedure make-pr-maker-link()
-<a href={{{ [<currentTiddler>encodeuricomponent[]addprefix[https://saqimtiaz.github.io/tw5-docs-pr-maker/#]] }}}
+<a href={{{ [<currentTiddler>encodeuricomponent[]addprefix[https://edit.tiddlywiki.com/#]] }}}
 	class="tc-tiddlylink-external"
 	target="_blank"
 	rel="noopener noreferrer"

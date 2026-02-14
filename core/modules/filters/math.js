@@ -217,6 +217,10 @@ function makeNumericReducingOperator(fnCalc,initialValue,fnFinal) {
 		source(function(tiddler,title) {
 			result.push($tw.utils.parseNumber(title));
 		});
+		// We return an empty array if there are no input titles
+		if(result.length === 0) {
+			return [];
+		}
 		var value = result.reduce(function(accumulator,currentValue) {
 				return fnCalc(accumulator,currentValue);
 			},initialValue);

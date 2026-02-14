@@ -1,0 +1,8 @@
+title: $:/changenotes/5.4.0/#9119
+description: Use sticky flag to improve regexp search performance
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: performance
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9119
+github-contributors: Leilei332

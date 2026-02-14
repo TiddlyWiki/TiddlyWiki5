@@ -147,7 +147,7 @@ Settings/AutoSave/Disabled/Description: Änderungen NICHT automatisch speichern
 Settings/AutoSave/Enabled/Description: Änderungen automatisch speichern
 Settings/AutoSave/Hint: Änderungen des Wikis automatisch speichern
 Settings/CamelCase/Caption: Camel Case Wiki Links
-Settings/CamelCase/Hint: Hier können Sie die automatische Umwandlung von "~CamelCase Links" einstellen. ''Wichtig:'' Die Seite muss neu geladen werden, damit die Einstellungen wirksam werden.
+Settings/CamelCase/Hint: ''Wichtig:'' Die Seite muss neu geladen werden, damit die Einstellungen wirksam werden.
 Settings/CamelCase/Description: Automatische ~CamelCase Umwandlung aktivieren
 Settings/Caption: Einstellungen
 Settings/EditorToolbar/Caption: Editor Toolbar

@@ -1,0 +1,8 @@
+title: $:/changenotes/5.4.0/#9275
+description: Remove support for Internet Explorer in RangeWidget
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: deprecation
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9275
+github-contributors: Leilei332

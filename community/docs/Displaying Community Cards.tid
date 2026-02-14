@@ -1,0 +1,26 @@
+title: Displaying Community Cards
+tags: [[Community Cards]]
+modified: 20250909171928024
+created: 20250909171928024
+
+!! Cards for people
+
+This is an inline card for <<community-card-pill-person title:"@Jermolene">> and <<community-card-pill-person title:"@ericshulman">> which can be used in the middle of a sentence.
+
+This is a stack of inline cards:
+
+<<community-card-pill-stack-person>>
+
+Here is a full format card:
+
+<<community-card-person title:"@Jermolene">>
+
+This is how the card looks when there is no such person:
+
+<<community-card-person title:"@MissingPerson">>
+
+!! Cards for teams
+
+This is a card for a project team:
+
+<<community-card-team title:"Project Team">>

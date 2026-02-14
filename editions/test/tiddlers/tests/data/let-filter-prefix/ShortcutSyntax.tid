@@ -1,0 +1,12 @@
+title: LetFilterRunPrefix/ShortcutSyntax
+description: Simple usage of "let" filter run prefix
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$text text={{{ [[magpie]] =>varname [<varname>] +[join[-]] }}}/>
++
+title: ExpectedResult
+
+<p>magpie</p>

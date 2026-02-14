@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9313
+description: Set modal's mask-closable attribute to yes by default
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9313
+github-contributors: Leilei332
+
+

@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9400
+description: Add locale support for sort operators
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: filters
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9400
+github-contributors: Leilei332
+
+Add a new parameter for `sort`, `nsort`, `sortan`, `sortcs` and `nsortcs` to support sorting with a custom locale.

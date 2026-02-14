@@ -36,7 +36,6 @@ type: text/vnd.tiddlywiki
 	border-radius: 6px;
 	padding: 0.5em;
 	color: <<colour background>>;
-	fill: <<colour background>>;
 }
 
 .tc-cards.tc-action-card .tc-card-button svg {

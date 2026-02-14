@@ -1,8 +1,9 @@
 created: 20241106165307259
 modified: 20241117170845666
 title: TiddlyWiki Privacy and Security
+type: text/vnd.tiddlywiki
 
-<span class="tc-float-right tc-bordered-image">[img width=200 [TiddlyWiki Privacy Badge.png]]</span>
+<span class="tc-float-right tc-bordered-image">[img width=200 [TiddlyWiki Privacy Badge]]</span>
 ''TiddlyWiki is unique in that ordinary people can use it securely and privately without any special training.''  The key is that ~TiddlyWiki is just a text file, or a folder of files, so everything that you may already know about how to keep your documents and images private can be applied to ~TiddlyWiki.  Also, because your ~TiddlyWiki data is stored in simple text files, you can be confident that it will still be securely accessible in the decades to come.
 
 !! ~TiddlyWiki Configurations

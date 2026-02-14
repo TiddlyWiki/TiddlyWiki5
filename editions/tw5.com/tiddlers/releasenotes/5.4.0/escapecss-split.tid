@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9475
+description: Split escapecss.js into two platforms
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: performance
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9475
+github-contributors: Leilei332
+
+Split [[$:/core/modules/utils/escapecss.js]] for two platforms: one for the browser, the other for Node.js. The `CSS.escape` polyfill is moved to `core-server`.

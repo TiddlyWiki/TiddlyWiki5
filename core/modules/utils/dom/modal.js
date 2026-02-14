@@ -210,7 +210,7 @@ Modal.prototype.display = function(title,options) {
 	bodyWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	footerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	// Whether to close the modal dialog when the mask (area outside the modal) is clicked
-	if(tiddler.fields && (tiddler.fields["mask-closable"] === "yes" || tiddler.fields["mask-closable"] === "true")) {
+	if(tiddler.fields && (tiddler.fields["mask-closable"] === "yes" || tiddler.fields["mask-closable"] === "true" || tiddler.fields["mask-closable"] === "" || "mask-closable" in tiddler.fields === false)) {
 		modalBackdrop.addEventListener("click",closeHandler,false);
 	}
 	// Set the initial styles for the message

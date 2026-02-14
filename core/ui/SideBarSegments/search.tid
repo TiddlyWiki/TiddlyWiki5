@@ -46,13 +46,21 @@ tags: $:/tags/SideBarSegment
 
 \procedure advanced-search-actions() <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search/input}}/><$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/search/input}}/><<delete-state-tiddlers>><$action-navigate $to="$:/AdvancedSearch"/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/><$action-sendmessage $message="tm-focus-selector" $param="""[data-tiddler-title="$:/AdvancedSearch"] .tc-search input""" preventScroll="true"/><$action-deletetiddler $filter="$:/temp/search $:/temp/search/input $:/temp/search/refresh [<searchListState>]"/>
 
+\procedure input-actions()
+<%if [<event-key-descriptor>match[((input-tab-right))]] %>
+<<set-next-input-tab>>
+<%elseif [<event-key-descriptor>match[((input-tab-left))]] %>
+<<set-previous-input-tab>>
+<%elseif [<event-key-descriptor>match[((advanced-search-sidebar))]] %>
+<<advanced-search-actions>>
+<%endif%>
+\end
+
 <div class="tc-sidebar-lists tc-sidebar-search">
 
 <$vars editTiddler="$:/temp/search" searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
 <div class="tc-search">
-<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
-<$keyboard key="((input-tab-left))" actions=<<set-previous-input-tab>>>
-<$keyboard key="((advanced-search-sidebar))" actions=<<advanced-search-actions>>>
+<$keyboard key="((input-tab-right)) ((input-tab-left)) ((advanced-search-sidebar))" actions=<<input-actions>>>
 <form class="tc-form-inline">
 <$transclude $variable="keyboard-driven-input" tiddler=<<editTiddler>> storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
@@ -61,8 +69,6 @@ tags: $:/tags/SideBarSegment
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> cancelPopups="yes" 
 		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] :else[{$:/config/SearchResults/Default}]"/>
 </form>
-</$keyboard>
-</$keyboard>
 </$keyboard>
 <$reveal state=<<searchTiddler>> type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">

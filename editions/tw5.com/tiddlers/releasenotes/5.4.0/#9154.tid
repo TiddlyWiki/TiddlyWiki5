@@ -1,0 +1,8 @@
+title: $:/changenotes/5.4.0/#9154
+description: Allow button widget to use all aria attributes
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9154
+github-contributors: Leilei332

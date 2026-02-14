@@ -6,6 +6,6 @@ type: text/vnd.tiddlywiki
 
 Plain text description can be found at [[Procedures]]
 
-<<list-links filter:"[tag[Procedure Syntax]]">>
+<<list-links filter:"[tag[Call Syntax]]">>
 
 <<.tip "The railroad boxes in the linked tiddlers can be used to navigate.">>

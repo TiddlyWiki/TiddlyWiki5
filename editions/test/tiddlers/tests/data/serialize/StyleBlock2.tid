@@ -1,0 +1,13 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/StyleBlock2
+type: text/vnd.tiddlywiki
+
+@@width:100px;
+@@.myFirstClass.mySecondClass.myThirdClass
+This is a paragraph
+@@
+
+@@background-color:lightcyan;
+* Item one
+* Item two
+@@

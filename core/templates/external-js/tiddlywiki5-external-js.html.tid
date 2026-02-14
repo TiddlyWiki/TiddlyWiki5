@@ -1,12 +1,13 @@
 title: $:/core/templates/tiddlywiki5-external-js.html
 
 <$set name="saveTiddlerAndShadowsFilter" filter="[subfilter<saveTiddlerFilter>] [subfilter<saveTiddlerFilter>plugintiddlers[]]">
+<$set name="rawMarkupFilter" filter="[enlist<saveTiddlerAndShadowsFilter>] [[$:/core]plugintiddlers[]]">
 `<!doctype html>
 `{{$:/core/templates/MOTW.html}}`<html lang="`<$text text={{{ [{$:/language}get[name]] }}}/>`">
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <!--~~ Raw markup for the top of the head section ~~-->
-`{{{ [enlist<saveTiddlerAndShadowsFilter>tag[$:/tags/RawMarkupWikified/TopHead]] ||$:/core/templates/raw-static-tiddler}}}`
+`{{{ [enlist<rawMarkupFilter>tag[$:/tags/RawMarkupWikified/TopHead]] ||$:/core/templates/raw-static-tiddler}}}`
 <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
@@ -22,13 +23,13 @@ title: $:/core/templates/tiddlywiki5-external-js.html
 <!--~~ This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ~~-->
 
 <!--~~ Raw markup ~~-->
-`{{{ [enlist<saveTiddlerAndShadowsFilter>tag[$:/core/wiki/rawmarkup]] ||$:/core/templates/plain-text-tiddler}}}`
-`{{{ [enlist<saveTiddlerAndShadowsFilter>tag[$:/tags/RawMarkup]] ||$:/core/templates/plain-text-tiddler}}}`
-`{{{ [enlist<saveTiddlerAndShadowsFilter>tag[$:/tags/RawMarkupWikified]] ||$:/core/templates/raw-static-tiddler}}}`
+`{{{ [enlist<rawMarkupFilter>tag[$:/core/wiki/rawmarkup]] ||$:/core/templates/plain-text-tiddler}}}`
+`{{{ [enlist<rawMarkupFilter>tag[$:/tags/RawMarkup]] ||$:/core/templates/plain-text-tiddler}}}`
+`{{{ [enlist<rawMarkupFilter>tag[$:/tags/RawMarkupWikified]] ||$:/core/templates/raw-static-tiddler}}}`
 </head>
 <body class="tc-body">
 <!--~~ Raw markup for the top of the body section ~~-->
-`{{{ [enlist<saveTiddlerAndShadowsFilter>tag[$:/tags/RawMarkupWikified/TopBody]] ||$:/core/templates/raw-static-tiddler}}}`
+`{{{ [enlist<rawMarkupFilter>tag[$:/tags/RawMarkupWikified/TopBody]] ||$:/core/templates/raw-static-tiddler}}}`
 <!--~~ Static styles ~~-->
 <div id="styleArea">
 `{{$:/boot/boot.css||$:/core/templates/css-tiddler}}`
@@ -42,9 +43,10 @@ title: $:/core/templates/tiddlywiki5-external-js.html
 <!--~~ Ordinary tiddlers ~~-->
 `{{$:/core/templates/store.area.template.html}}`
 <!--~~ Raw markup for the bottom of the body section ~~-->
-`{{{ [enlist<saveTiddlerAndShadowsFilter>tag[$:/tags/RawMarkupWikified/BottomBody]] ||$:/core/templates/raw-static-tiddler}}}`
+`{{{ [enlist<rawMarkupFilter>tag[$:/tags/RawMarkupWikified/BottomBody]] ||$:/core/templates/raw-static-tiddler}}}`
 <!--~~ Load external JavaScripts ~~-->
 <script src="`{{{ [<coreURL>] }}}`" onerror="alert('Error: Cannot load `{{{ [<coreURL>] }}}`');"></script>
 </body>
 </html>`
+</$set>
 </$set>

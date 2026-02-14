@@ -146,7 +146,7 @@ Settings/AutoSave/Enabled/Description: Salva le modifiche in automatico
 Settings/AutoSave/Hint: Prova a salvare automaticamente le modifiche durante il lavoro se usi un modulo di salvataggio che lo supporta
 Settings/CamelCase/Caption: Wiki Links Camel Case
 Settings/CamelCase/Description: Abilita i link automatici ~CamelCase
-Settings/CamelCase/Hint: Puoi disabilitare globalmente i link automatici delle frasi ~CamelCase. Richiede la ricarica per avere effetto
+Settings/CamelCase/Hint: Richiede la ricarica per avere effetto
 Settings/Caption: Impostazioni
 Settings/DefaultMoreSidebarTab/Caption: Tab predefinito della barra laterale Altro
 Settings/DefaultMoreSidebarTab/Hint: Specifica quale tab della barra laterale Altro è mostrato di default

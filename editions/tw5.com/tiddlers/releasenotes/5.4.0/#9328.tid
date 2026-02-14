@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9328
+description: Migrate most deprecated rules
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9328
+github-contributors: Leilei332
+
+Migrate eslint deprecated rules (except for nodejs related rules). Format related rules are replaced by `@stylistic/eslint-plugin`.

@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9277
+description: Added an option to enable CORS
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9277
+github-contributors: kixam
+
+Added an option to the TiddlyWiki5 server to enable CORS (ie. don't check `same-origin`). It is meant for advanced users, do not use it unless you understand the full consequences.

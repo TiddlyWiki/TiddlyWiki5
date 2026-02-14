@@ -1,0 +1,190 @@
+title: $:/tw5.com/releases/styles
+tags: $:/tags/Stylesheet
+type: text/vnd.tiddlywiki
+
+.doc-release-note {
+}
+
+.tc-tab-set.doc-release-tabs {
+	margin-top: 1rem;
+}
+
+.doc-release-summary-section {
+	margin-bottom: 0.75em;
+}
+
+.doc-release-section {
+	border: 1px solid #e8e8e8;
+	border-radius: 0.5em;
+	margin: 0.75em 0;
+	background: #ffffff;
+}
+
+.doc-release-section-summary {
+	display: flex;
+	align-items: center;
+	padding: 0.5em 0.75em;
+	font-weight: 600;
+	background: #f1f1f1;
+	width: 100%;
+	cursor: pointer;
+	text-align: left;
+	border: none;
+	font-size: inherit;
+	font-family: inherit;
+	border-radius: 0.5em 0.5em 0 0;
+}
+
+.doc-release-section-toggle {
+	margin-right: 0.5em;
+}
+
+.doc-release-section-summary-text {
+	flex: 1 1 auto;
+}
+
+.doc-release-section-count {
+	font-weight: normal;
+	opacity: 0.6;
+}
+
+.doc-release-credits {
+	margin: 0.75em 0;
+}
+
+.doc-release-section-body {
+	padding: 0.5em 0.75em;
+}
+
+.doc-release-note-heading {
+}
+
+.doc-change-note-category, .doc-change-note-heading {
+	font-weight: 600;
+	margin: 0;
+}
+
+.doc-release-note, .doc-release-note-heading, .doc-change-note-type, .doc-change-note-body, .doc-change-note-impacts {
+}
+
+.doc-change-note-item {
+	border: 2px solid #e8e8e8;
+	border-radius: 0.5em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	background: #f9f9f9;
+}
+
+.doc-change-note-item {
+}
+
+.doc-change-note-heading {
+	padding: 0.25em;
+	background: #e8e8e8;
+	color: <<colour foreground>>;
+}
+
+.doc-change-note-heading .doc-link-badge {
+	margin-right: 0.25em;
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+.doc-change-note-github-links {
+	border-top: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.doc-change-note-info-list {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 0.5rem;
+	padding: 0.5rem;
+}
+
+.doc-change-note-info-list-item-caption {
+	text-transform: uppercase;
+	font-size: 0.7em;
+	font-weight: bold;
+	white-space: nowrap;
+	text-align: right;
+}
+
+.doc-change-note-impact-pill-icon {
+}
+
+.doc-change-note-impact-pill-icon svg {
+	width: 1em;
+	height: 1em;
+	vertical-align: middle;
+}
+
+.doc-change-note-info-list-item-description-summary {
+	font-weight: bold;
+	font-size: 0.9em;
+}
+
+.doc-change-note-info-list-item-description-details {
+	font-size: 0.85em;
+	margin-top: 0.25em;
+	padding-left: 1.5em;
+	border-left: 2px solid #e8e8e8;
+}
+
+.doc-change-note-description {
+	padding: 0.25em;
+	background: #ffffff;
+}
+
+.doc-impact-note-item {
+	border: 1px solid #e8e8e8;
+	border-radius: 0.5em;
+	margin: 0.5em 0;
+	padding: 0.5em;
+	background: #f9f9f9;
+}
+
+.doc-impact-note-heading {
+	font-weight: 600;
+	margin: 0 0 0.25em 0;
+	padding: 0.25em 0.5em;
+	border-radius: 0.25em;
+}
+
+.doc-impact-note-item > .doc-change-note-item {
+	font-size: 0.9em;
+}
+
+.doc-impact-note-details {
+	font-size: 0.9em;
+	margin-bottom: 0.5em;
+}
+
+.doc-impact-note-change {
+	display: flex;
+	gap: 0.5em;
+	align-items: baseline;
+	flex-wrap: wrap;
+}
+
+.doc-impact-note-change-caption {
+	text-transform: uppercase;
+	font-size: 0.7em;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+.doc-impact-note-change-link {
+	font-weight: 600;
+}
+
+.doc-change-note-description-link {
+	font-weight: inherit;
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-style: dotted;
+}
+
+.doc-change-note-description-link:hover {
+	text-decoration-style: solid;
+}

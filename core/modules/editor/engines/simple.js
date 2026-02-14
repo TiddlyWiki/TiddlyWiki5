@@ -100,7 +100,8 @@ SimpleEngine.prototype.getText = function() {
 Fix the height of textarea to fit content
 */
 SimpleEngine.prototype.fixHeight = function() {
-	if(this.widget.editTag === "textarea") {
+	// If .editRows is initialised, it takes precedence
+	if((this.widget.editTag === "textarea") && !this.widget.editRows) {
 		if(this.widget.editAutoHeight) {
 			if(this.domNode && !this.domNode.isTiddlyWikiFakeDom) {
 				$tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);

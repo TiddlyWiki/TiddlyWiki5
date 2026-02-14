@@ -1,61 +1,85 @@
 caption: diff-text
 created: 20180316162725329
-modified: 20180316162725329
+modified: 20260102132650194
 tags: Widgets
 title: DiffTextWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-<<.from-version "5.1.16">> The diff text widget analyses the differences between a pair of source and destination text strings and displays the results as highlighted insertions and deletions (similar to the "track changes" function of a word processor). For example:
+<<.from-version "5.1.16">> The diff text widget analyses the differences between a pair of source and destination text strings and displays the results as highlighted insertions and deletions (similar to the "track changes" function of a word processor).
 
-<$diff-text source="Hey Jude, don't make it bad. Take a sad song and make it better. Remember to let her into your heart
-Then you can start to make it better." dest="Hey Jude, don't be afraid. You were made to go out and get her. The minute you let her under your skin. Then you begin to make it better."/>
+```
+<$diff-text source="This is the original text" dest="This is the text to compare to" mode="words>
+    These are the <<diff-count>> differences:
+</$diff-text>
+```
+
+
 
 ! Content and Attributes
 
-!! Content
+The content of the <<.wid diff-text>> widget is displayed immediately before the differences. Within the content, the variable <<.var diff-count>> is available, containing the number of differences found. If the widget has no content then it automatically transcludes the tiddler [[$:/language/Diffs/CountMessage]].
 
-The content of the `<$diff-text>` widget is rendered immediately before the diffs. Within it, the variable `diff-count` is available, containing the number of differences found. If the widget has no content then it automatically transcludes the tiddler [[$:/language/Diffs/CountMessage]].
-
-<<<
-In other words, these three invocations are all equivalent:
-
-```
-<$diff-text source={{FirstTiddler}} dest={{SecondTiddler}}>
-{{$:/language/Diffs/CountMessage}}
-</$diff-text>
-
-<$diff-text source={{FirstTiddler}} dest={{SecondTiddler}}>
-</$diff-text>
-
-<$diff-text source={{FirstTiddler}} dest={{SecondTiddler}}/>
-
-```
-<<<
-
-!! Attributes
+<<.note """The algorithm counts changes as both insertion and deletion, and therefore the number of differences can be higher than expected.""">>
 
 |!Attribute |!Description |
-|source |The source text |
-|dest |The destination text |
-|cleanup |See below |
+|<<.attr source>> |The source text |
+|<<.attr dest>> |The destination text |
+|<<.attr cleanup>> |Optional post-processing to improve readability (default is <<.value semantic>>) |
+|<<.attr editcost>> |<<.from-version "5.4.0">> Threshold parameter for <<.value efficiency>> cleanup mode (default is <<.value 4>>) |
+|<<.attr mode>> |<<.from-version "5.4.0">> Specifies the granularity at which differences are computed and displayed (default is <<.value chars>>) |
 
-The ''cleanup'' attribute determines which optional post-processing should be applied to the diffs:
 
-* ''none'': no cleanup is performed
-* ''semantic'' (default): rewrites the diffs for human readability
-* ''efficient'': rewrites the diffs to minimise the number of operations for subsequent processing 
+!! <<.attr cleanup>> / <<.attr editcost>>
 
-(Note that in many cases the results will be the same regardless of the cleanup option. See the [[docs|https://github.com/google/diff-match-patch/wiki/API]] of the underlying library for more details).
+The <<.attr cleanup>> attribute determines which optional post-processing should be applied to the diffs:
+
+* <<.value none>>: No cleanup is performed
+* <<.value semantic>> (default): Optimizes the differences for readability
+* <<.value efficiency>>: Optimizes the differences to minimise the number of operations for subsequent processing
+** When using <<.value efficiency>> mode, the <<.attr editcost>> parameter controls the cost threshold for the cleanup algorithm, determining how aggressively the diff algorithm merges nearby edits for better human readability (default value is 4).
+
+<<.note """Note that in many cases the results will be the same regardless of the cleanup option. See the [[docs|https://github.com/google/diff-match-patch/wiki/API]] of the underlying library for more details""">>
+
+!! <<.attr mode>>
+
+The <<.attr mode>> attribute determines how differences are computed and displayed:
+
+* <<.value chars>>: Compares differences at the //character level// for precise change detection
+* <<.value words>>: Compares differences at the //word level// for more readable text comparisons
+* <<.value lines>>: Compares differences at the //line level// for better visibility of structural changes
 
 ! Examples
 
-In this example we compare two texts:
+A basic example:
 
-<$macrocall $name='wikitext-example-without-html'
-src="""<$edit-text tiddler="SampleTiddlerFirst"/>
+<<.example n:1 e.g."""<$diff-text source="The quick brown fox jumps" dest="The slick brown fox leaps"/>""">>
 
-<$edit-text tiddler="SampleTiddlerSecond"/>
+In <<.value words>> mode, differences are computed at the words level:
 
-<$diff-text source={{SampleTiddlerFirst}} dest={{SampleTiddlerSecond}}/>"""/>
+<<.example n:2 e.g."""<$diff-text mode="words" source="The quick brown fox jumps" dest="The slick brown fox leaps"/>""">>
+
+
+To see the effects of all parameters, use this example:
+
+|tc-max-width tc-edit-max-width|k
+|<$edit-text tiddler="SampleTiddlerFirst" rows="5"/>|<$edit-text tiddler="SampleTiddlerSecond" rows="5"/>|
+
+<$diff-text source={{SampleTiddlerFirst}} dest={{SampleTiddlerSecond}} cleanup={{{ [{!!cleanup}!is[blank]else[efficiency]] }}} editcost={{{ [{!!editcost}!is[blank]else[4]] }}} mode={{{ [{!!mode}!is[blank]else[chars]] }}}/>
+
+!! <<.attr mode>>
+<$radio field="mode" value="chars" default="chars" class="tc-small-gap-right"> <<.value chars>></$radio>
+<$radio field="mode" value="words" class="tc-small-gap-right"> <<.value words>></$radio>
+<$radio field="mode" value="lines"> <<.value lines>></$radio>
+
+!! <<.attr cleanup>>
+<$radio field="cleanup" value="none" class="tc-small-gap-right"> <<.value none>></$radio>
+<$radio field="cleanup" value="semantic" class="tc-small-gap-right"> <<.value semantic>></$radio>
+<$radio field="cleanup" value="efficiency" default="efficiency"> <<.value efficiency>></$radio>
+
+<% if [{!!cleanup}!match[none]!match[semantic]] %>
+
+!! <<.attr editcost>>: <$transclude $variable=".value" _={{{ [{!!editcost}!is[blank]else[4]] }}} />
+<$range field="editcost" min="1" max="200" default="4" class="tc-max-width" style.max-width="500px" />
+<% endif %>

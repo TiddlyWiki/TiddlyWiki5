@@ -1,0 +1,11 @@
+title: $:/changenotes/5.4.0/#9511/impacts/api
+changenote: $:/changenotes/5.4.0/#9511
+created: 20251220010540143
+modified: 20251220010540143
+tags: $:/tags/ImpactNote
+description: The diff-match-patch-es library uses different APIs
+impact-type: compatibility-break
+
+* Default export and the class constructor has been removed
+* Function name has been unified to camelCase
+* Previous options like Diff_Timeout and Diff_EditCost are now passed as an options object in the arguments if needed

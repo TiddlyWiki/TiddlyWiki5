@@ -1,9 +1,10 @@
 created: 20150403110356105
+lost-url: http://tw5-dev.cibm.de
 modified: 20210106151027470
 tags: [[Community Plugins]]
 title: IndexedDB Plugin by Andreas Abeck
 type: text/vnd.tiddlywiki
-url: http://tw5-dev.cibm.de
+url: https://web.archive.org/web/20180118083556/http://tw5-dev.cibm.de/
 
 A plugin that allows changes to be synchronised with the IndexedDB database that is built-in to most browsers.
 

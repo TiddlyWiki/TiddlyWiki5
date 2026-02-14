@@ -4,7 +4,8 @@ created: 20160216191710789
 delivery: Protocol
 description: SharePointなどの製品で利用できる標準Webプロトコル
 method: save
-modified: 20220615155048712
+modified: 20251214110658333
+original-modified: 20220615155048712
 tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
 title: Saving via WebDAV
 ja-title: WebDAV経由の保存

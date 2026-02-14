@@ -1,0 +1,158 @@
+title: $:/tiddlywiki/community/cards/Styles
+tags: $:/tags/Stylesheet
+
+.tc-community-card {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	border-radius: 8px;
+	width: 100%;
+	margin-bottom: 8px;
+	background: <<colour community-card-background>>;
+	color: <<colour community-card-foreground>>;
+	fill: <<colour community-card-foreground>>;
+	box-shadow: 0 1px 3px 0 <<colour community-card-shadow>>, 0 0 0 1px <<colour community-card-shadow>>;
+	transition: box-shadow 0.3s ease,transform .3s ease;
+}
+
+.tc-community-card:hover {
+	box-shadow: 0 1px 6px 0 <<colour community-card-dark-shadow>>, 0 0 0 1px <<colour community-card-shadow>>;
+	transform: translateY(-2px);
+}
+
+.tc-community-card .tc-community-card-header-link {
+	background-color: <<colour community-card-header-background>>;
+	color: <<colour community-card-header-foreground>>;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+.tc-community-card.tc-community-card-team .tc-community-card-header-link {
+	background: <<colour community-card-team-header-background>>;
+	color: <<colour community-card-team-header-foreground>>;
+	fill: <<colour community-card-team-header-foreground>>;
+}
+
+.tc-community-card .tc-community-card-header-link:hover {
+	text-decoration: none;
+	background-color: <<colour community-card-header-foreground>>;
+	color: <<colour community-card-header-background>>;
+}
+
+.tc-community-card-header {
+	margin: 0;
+	padding: 0.5em;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	line-height: 0;
+}
+
+.tc-community-card-header .tc-community-card-field-text-title {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.tc-community-card-header .tc-community-card-field-image {
+	display: table-row;
+	width: auto;
+	max-width: 100%;
+	margin-right: 12px;
+}
+
+.tc-community-card-info {
+	display: table;
+	width: auto;
+	max-width: 100%;
+	padding: 8px;
+	margin: 0;
+	background-color: <<colour community-card-info-background>>;
+	color: <<colour community-card-info-foreground>>;
+}
+
+.tc-community-card-body {
+	padding: 0 8px;
+}
+
+.tc-community-card .tc-community-card-field-text {
+	display: table-row;
+}
+
+.tc-community-card .tc-community-card-field-text-name,
+.tc-community-card .tc-community-card-field-text-value {
+	display: table-cell;
+	padding: 2px 6px 2px 0;
+	vertical-align: top;
+}
+
+.tc-community-card .tc-community-card-field-text-name {
+	color: <<colour community-card-field-name-foreground>>;
+	white-space: nowrap;
+	text-align: right;
+	padding-right: 8px;
+}
+
+.tc-community-card .tc-community-card-field-text-value {
+	word-break: break-word;
+	font-weight: bold;
+	width: 100%;
+}
+
+a.tc-community-card-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	width: auto;
+	min-width:0;
+	max-width: none;
+	align-self: auto;
+	font-size: 0.9em;
+	line-height: 1;
+	vertical-align: middle;
+	padding: 4px;
+	border-radius: 4px;
+	background: <<colour community-card-header-background>>;
+	color: <<colour community-card-header-foreground>>;
+	fill: <<colour community-card-header-foreground>>;
+	box-shadow: 0 1px 3px 0 <<colour community-card-shadow>>, 0 0 0 1px <<colour community-card-shadow>>;
+	transition: box-shadow 0.3s ease,transform .3s ease;
+}
+
+a.tc-community-card-pill.tc-community-card-pill-vacancy {
+	background: <<colour community-card-vacancy-header-background>>;
+	color: <<colour community-card-vacancy-header-foreground>>;
+	fill: <<colour community-card-vacancy-header-foreground>>;
+}
+
+a.tc-community-card-pill:hover {
+	text-decoration: none;
+	box-shadow: 0 1px 6px 0 <<colour community-card-dark-shadow>>, 0 0 0 1px <<colour community-card-shadow>>;
+	transform: translateY(-2px);
+	background: <<colour community-card-header-foreground>>;
+	color: <<colour community-card-header-background>>;
+	fill: <<colour community-card-header-background>>;
+}
+
+a.tc-community-card-pill .tc-community-card-field-image img,
+a.tc-community-card-pill .tc-community-card-field-image svg {
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+a.tc-community-card-pill .tc-community-card-field-text {
+	display: inline;
+}
+
+.tc-community-card-pill-stack {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 4px;
+	margin: 0;
+	padding: 0;
+}

@@ -1,21 +1,30 @@
 title: $:/language/Docs/ModuleTypes/
 
+allfilteroperator: ''all'' フィルターオペレータのサブオペレータ。
+
 animation: アニメーション。通常は RevealWidget で使用されるモジュール。
+authenticator: 組み込みHTTP サーバーによるリクエスト認証方法を定義します。
+bitmapeditoroperation: ビットマップ エディターのツールバーの操作。
 command: Node.js で実行できるコマンド。
 config: `$tw.config` に格納されるデータ。
 filteroperator: 個々のフィルタ操作用メソッドモジュール。
 global: `$tw` に格納されるグローバルデータ。
+info: [[$:/temp/info-plugin]] 疑似プラグインを介してシステム情報を公開します。
 isfilteroperator: フィルタ ''is'' メソッドのオペランドモジュール。
+library: JavaScript汎用モジュール用の汎用モジュールタイプ。
 macro: JavaScript マクロの定義モジュール。
 parser: 各種 ContentType のパーサモジュール。
+route: 組み込みHTTPサーバーでURLの個々のパターンをどのように処理するかを定義します。
 saver: ファイル保存メソッドモジュール。ブラウザによる差異を吸収する。
 startup: 初回実行ファンクションモジュール。
 storyview: リストウィジェットのアニメーションや振る舞いをカスタマイズするモジュール。
+texteditoroperation: テキストエディターのツールバーの操作。
 tiddlerdeserializer: Tiddler を他の ContentType に変換するモジュール。
 tiddlerfield: 個々の Tiddler フィールドの振る舞いを定義するモジュール。
 tiddlermethod: `$tw.Tiddler` の prototype にメソッドを追加するモジュール。
 upgrader: アップグレードやインポート中に Tiddler のアップグレード処理を追加するモジュール。
 utils: `$tw.utils` にメソッドを追加するモジュール。
+utils-browser: `$tw.utils` にブラウザ固有のメソッドを追加するモジュール。
 utils-node: `$tw.utils` に Node.js 特有のメソッドを追加するモジュール。
 widget: DOM の描画や操作をひとまとめにしたウィジェットモジュール。
 wikimethod: `$tw.Wiki` にメソッドを追加するモジュール。

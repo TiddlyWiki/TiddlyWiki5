@@ -23,6 +23,7 @@ A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expre
 [[<":or"> |"Or Filter Run Prefix"]] |
 [[<":reduce"> |"Reduce Filter Run Prefix"]] |
 [[<":sort">  /"v5.2.0"/ |"Sort Filter Run Prefix"]] |
+[[<":let">  /"v5.4.0"/ |"Let Filter Run Prefix"]] |
 [[<":then">  /"v5.3.0"/ |"Then Filter Run Prefix"]]) [[run|"Filter Run"]]
 """/>
 

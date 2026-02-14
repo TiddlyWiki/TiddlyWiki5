@@ -1,13 +1,11 @@
 created: 20130909151600000
-modified: 20241002113817654
-original-modified: 20210322152237662
+modified: 20251210110939585
+original-modified: 20250909171928024
 tags: TableOfContents Welcome
 title: Community 
 ja-title: コミュニティ
 type: text/vnd.tiddlywiki
 
-<<.tip "最新の有益なリンクが[[コミュニティリンク収集|Community Links Aggregator]]に集められています。">>
+TiddlyWikiコミュニティは、TiddlyWikiをより良くするために協力し、お互いにベストを尽せるよう支援する熱心なユーザーと開発者のグループです。
 
-すべての関連リンクがこれらのエントリに書かれると、メインのtiddlywiki.comサイトからは削除されます。
-
-<<tabs "Forums Latest Tutorials [[Community Editions]] [[Community Plugins]] [[Community Themes]] [[Community Palettes]] [[Other Resources]] Examples Articles Meetups" "Latest">>
+<<tabs "[[TiddlyWiki Project]] [[TiddlyWiki People]] Forums" "TiddlyWiki Project">>

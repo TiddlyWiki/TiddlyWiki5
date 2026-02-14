@@ -21,7 +21,7 @@ tags: $:/tags/Macro
 	style="width:$width$px;height:$height$px;background-color:$background-color$;"
 ></$reveal></div><div
 	class="tc-thumbnail-icon"
-	style="fill:$color$;color:$color$;"
+	style="color:$color$;"
 >$icon$</div><div class="tc-thumbnail-caption">$caption$</div></div></$link>
 \end
 

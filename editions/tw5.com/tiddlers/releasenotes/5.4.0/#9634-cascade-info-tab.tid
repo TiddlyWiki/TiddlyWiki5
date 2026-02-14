@@ -1,0 +1,11 @@
+title: $:/changenotes/5.4.0/#9634
+description: Add "Cascade Details" to the Advanced tab of the Tiddler Info panel
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: enhancement
+change-category: usability
+github-links: https://github.com/Jermolene/TiddlyWiki5/pull/9634 https://github.com/Jermolene/TiddlyWiki5/pull/9643
+github-contributors: DesignThinkerer
+
+
+The Tiddler Info panel's `Advanced` tab now displays the templates and filters used to render the current tiddler.

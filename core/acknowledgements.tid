@@ -5,3 +5,4 @@ TiddlyWiki incorporates code from these fine OpenSource projects:
 * [[The Stanford Javascript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]]
 * [[The Jasmine JavaScript Test Framework|https://jasmine.github.io/]]
 * [[modern-normalize by Sindre Sorhus|https://github.com/sindresorhus/modern-normalize]]
+* [[diff-match-patch-es by antfu|https://github.com/antfu/diff-match-patch-es]]

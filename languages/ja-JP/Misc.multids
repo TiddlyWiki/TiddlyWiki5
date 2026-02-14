@@ -1,22 +1,21 @@
 title: $:/language/
 
-NewJournal/Tags: Journal
-NewJournal/Text: 
-NewJournal/Title: YYYY年MM月DD日(ddd)
-AboveStory/ClassicPlugin/Warning: It looks like you are trying to load a plugin designed for ~TiddlyWiki Classic. Please note that [[these plugins do not work with TiddlyWiki version 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]. ~TiddlyWiki Classic plugins detected:
+AboveStory/ClassicPlugin/Warning: ~TiddlyWiki Classic用に設計されたプラグインを読み込もうとしています。 [[これらのプラグインは TiddlyWiki バージョン 5.xx では動作しません|these plugins do not work with TiddlyWiki version 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]のでご注意ください。検出された~TiddlyWiki Classic プラグイン:
 BinaryWarning/Prompt: この Tiddler にはバイナリデータが含まれています
 ClassicWarning/Hint: この Tiddler はクラシックスタイルの TiddlyWiki フォーマットで書かれています。このフォーマットは TiddlyWiki5 との完全な互換性はありません。詳しくは https://tiddlywiki.com/static/Upgrading.html を参照してください。
 ClassicWarning/Upgrade/Caption: アップグレード
 CloseAll/Button: すべて閉じる
-ColourPicker/Recent: Recent:
-ConfirmAction: Do you wish to proceed?
+ColourPicker/Recent: 最近:
+ConfirmAction: 続行しますか?
 ConfirmCancelTiddler: 本当にこの Tiddler "<$text text=<<title>>/>" の編集内容を取り消しますか？
 ConfirmDeleteTiddler: 本当にこの Tiddler "<$text text=<<title>>/>" を削除しますか？
+ConfirmDeleteTiddlers: <<resultCount>>個のTiddlerを削除しますか？
+
 ConfirmEditShadowTiddler: 隠し Tiddler を編集します。将来のアップグレードで互換性がとれなくなるかもしれません。本当にこの Tiddler "<$text text=<<title>>/>" を編集しますか？
 ConfirmOverwriteTiddler: 本当にこの Tiddler "<$text text=<<title>>/>" を上書きしますか?
 Count: count
 DefaultNewTiddlerTitle: 新しい Tiddler
-Diffs/CountMessage: <<diff-count>> differences
+Diffs/CountMessage: 異なる箇所の数: <<diff-count>>
 DropMessage: ドロップしてください。（止めるには、キャンセルをクリックしてください）
 Encryption/Cancel: キャンセル
 Encryption/ConfirmClearPassword: パスワードを削除すると暗号化も解除されますが、本当にパスワードを削除しますか？
@@ -27,29 +26,31 @@ Encryption/RepeatPassword: パスワードの繰り返し
 Encryption/SetPassword: パスワードを設定
 Encryption/Username: ユーザー名
 Error/Caption: エラー
-Error/Filter: フィルターエラー
-Error/FilterRunPrefix: Filter Error: Unknown prefix for filter run
-Error/FilterSyntax: Syntax error in filter expression
-Error/FormatFilterOperator:Filter Error: Unknown suffix for the 'format' filter operator
-Error/IsFilterOperator: Filter Error: Unknown operand for the 'is' filter operator
-Error/LoadingPluginLibrary: Error loading plugin library
-Error/NetworkErrorAlert: `<h2>''Network Error''</h2>It looks like the connection to the server has been lost. This may indicate a problem with your network connection. Please attempt to restore network connectivity before continuing.<br><br>''Any unsaved changes will be automatically synchronised when connectivity is restored''.`
-Error/PutEditConflict: File changed on server
-Error/PutForbidden: Permission denied
-Error/PutUnauthorized: Authentication required
-Error/RecursiveTransclusion: Recursive transclusion error in transclude widget
-Error/RetrievingSkinny: Error retrieving skinny tiddler list
-Error/SavingToTWEdit: Error saving to TWEdit
-Error/WhileSaving: Error while saving
-Error/XMLHttpRequest: XMLHttpRequest error code
-Exporters/CsvFile: CSV ファイル
-Exporters/JsonFile: JSON ファイル
-Exporters/StaticRiver: 静的 HTML ファイルとして構成される一連の Tiddler
-Exporters/TidFile: ".tid" ファイル
-InternalJavaScriptError/Hint: Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser
-InternalJavaScriptError/Title: Internal JavaScript Error
+Error/DeserializeOperator/MissingOperand: フィルタエラー: 'deserialize'オペレータのオペランドがありません
+Error/DeserializeOperator/UnknownDeserializer: フィルタエラー: 'deserialize'オペレータのオペランドで指定されたデシリアライザが不明です
+Error/Filter: フィルタエラー
+Error/FilterRunPrefix: フィルタエラー: フィルタランのプレフィックスが不明です
+Error/FilterSyntax: フィルタエラー: フィルタ式のシンタックスが間違っています
+Error/FormatFilterOperator: フィルタエラー: 'format'フィルタオペレータのサフィックスが不明です
+Error/IsFilterOperator: フィルタエラー: 'is'フィルタオペレータのオペランドが不明です
+Error/LoadingPluginLibrary: プラグインライブラリの読み込みエラー
+Error/NetworkErrorAlert: `<h2>''ネットワークエラー''</h2>サーバーへの接続が失われたようです。ネットワーク接続に問題がある可能性があります。続行する前に、ネットワーク接続を回復してください。<br><br>''保存されていない変更は、接続が回復すると自動的に同期されます。''`
+Error/PutEditConflict: サーバー上でファイルが変更されました
+Error/PutForbidden: 許可されていません
+Error/PutUnauthorized: 認証が必要です
+Error/RecursiveTransclusion: transcludeウィジェットで、再帰トランスクルージョンのエラーです
+Error/RetrievingSkinny: Skinny Tiddlerリストの取得エラー
+Error/SavingToTWEdit: TWEditへの保存エラー
+Error/WhileSaving: 保存中のエラー
+Error/XMLHttpRequest: XMLHttpRequestエラーコード
+Error/ZoominTextNode: ストーリービューエラー: カスタムコンテナに表示されるTiddlerを操作しようとしたようです。これはおそらく、先頭にテキストまたは空白を含むテンプレートで`$:/tags/StoryTiddlerTemplateFilter`を使用したことが原因です。プラグマ`\whitespace trim`を使用して、Tiddlerのコンテンツ全体が単一のHTML要素で囲まれていることを確認してください。この問題の原因となったテキスト: 
+
+
+InternalJavaScriptError/Hint: 恐縮ですが、ブラウザを更新してTiddlyWikiを再起動することをお勧めします
+InternalJavaScriptError/Title: 内部JavaScriptエラー
 LayoutSwitcher/Description: レイアウト切り替えを開きます
-LazyLoadingWarning: <p>Trying to load external content from ''<$text text={{!!_canonical_uri}}/>''</p><p>If this message doesn't disappear, either the tiddler content type doesn't match the type of the external content, or you may be using a browser that doesn't support external content for wikis loaded as standalone files. See https://tiddlywiki.com/#ExternalText</p>
+LazyLoadingWarning: <p>''<$text text={{!!_canonical_uri}}/>''から外部コンテンツを読み込み中です。このメッセージが消えない場合は、Tiddlerのコンテンツタイプが外部コンテンツのタイプと一致していないか、スタンドアロンファイルとしてWikiに読み込まれた外部コンテンツをサポートしていないブラウザを使用している可能性があります。https://tiddlywiki.com/#ExternalText をご覧ください</p>
+
 LoginToTiddlySpace: TiddlySpace へログイン
 Manager/Controls/FilterByTag/None: (なし)
 Manager/Controls/FilterByTag/Prompt: タグでフィルター:
@@ -69,13 +70,12 @@ Manager/Item/Tags: タグ
 Manager/Item/Tools: ツール
 Manager/Item/WikifiedText: Wikified テキスト
 MissingTiddler/Hint: 未作成の Tiddler "<$text text=<<currentTiddler>>/>" - クリック {{||$:/core/ui/Buttons/edit}} して作成
+NewJournal/Tags: 日誌
+NewJournal/Text: 
+NewJournal/Title: YYYY年MM月DD日(ddd)
 No: いいえ
-Notifications/CopiedToClipboard/Failed: クリップボードのコピーに失敗しました
-Notifications/CopiedToClipboard/Succeeded: クリップボードへコピーしました
-Notifications/Save/Done: Wiki を保存しました
-Notifications/Save/Starting: Wiki を保存します
 OfficialPluginLibrary: 公式 ~TiddlyWiki プラグインライブラリ
-OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
+OfficialPluginLibrary/Hint: tiddlywiki.comにある公式~TiddlyWikiプラグインライブラリ。プラグイン、テーマ、言語パックはコアチームによってメンテナンスされています。
 PageTemplate/Description: 標準 ~TiddlyWiki レイアウト
 PageTemplate/Name: 標準 ~PageTemplate
 PluginReloadWarning: ~JavaScript プラグインの変更を有効にするため、 {{$:/core/ui/Buttons/save-wiki}} 保存して {{$:/core/ui/Buttons/refresh}} 再読み込みしてください
