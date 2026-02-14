@@ -11,8 +11,8 @@ tags: $:/tags/Global
 \procedure DV-SORT-OPTIONS() $:/temp/varSearch/sort
 
 <!-- Filter strings selected by "Sort" dropdown -->
-\procedure DV-RAW-FILTER-STR() [variables:raw<_wlf.dv-type>]
-\procedure DV-FILTER-STR() [variables<_wlf.dv-type>]
+\procedure DV-RAW-FILTER-STR() [variables-wl:raw<_wlf.dv-type>]
+\procedure DV-FILTER-STR() [variables-wl<_wlf.dv-type>]
 
 <!-- State or temp variable base-names -->
 \procedure DV-FOLDED() $:/temp/varFolded
