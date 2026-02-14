@@ -9,6 +9,10 @@ type: text/vnd.tiddlywiki
 
 <div class="tc-table-of-contents">
 
-<<toc-selective-expandable 'TableOfContents'>>
+<%if [<tv-config-static>match[yes]] %>
+<<toc "TableOfContents" level:"2">>
+<%else%>
+<<toc-selective-expandable "TableOfContents">>
+<%endif%>
 
 </div>

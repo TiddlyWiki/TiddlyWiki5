@@ -6,20 +6,22 @@ tags: $:/tags/ViewTemplate
 
 <div class="tc-tiddler-title tc-clearfix">
 	<div class="tc-titlebar">
-		<span class="tc-tiddler-controls">
-			<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] :filter[lookup[$:/config/ViewToolbarButtons/Visibility/]!match[hide]]"
-				storyview="pop"
-				variable="listItem"
-			>
-				<$let condition={{{ [<listItem>get[condition]] }}}>
-					<%if [<condition>!is[blank]] :and[<currentTiddler>subfilter<condition>limit[1]] :else[<condition>is[blank]then[true]] %>
-						<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
-							<$transclude tiddler=<<listItem>>/>
-						</$set>
-					<%endif%>
-				</$let>
-			</$list>
-		</span>
+		<%if [<tv-config-static>!match[yes]] %>
+			<span class="tc-tiddler-controls">
+				<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] :filter[lookup[$:/config/ViewToolbarButtons/Visibility/]!match[hide]]"
+					storyview="pop"
+					variable="listItem"
+				>
+					<$let condition={{{ [<listItem>get[condition]] }}}>
+						<%if [<condition>!is[blank]] :and[<currentTiddler>subfilter<condition>limit[1]] :else[<condition>is[blank]then[true]] %>
+							<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
+								<$transclude tiddler=<<listItem>>/>
+							</$set>
+						<%endif%>
+					</$let>
+				</$list>
+			</span>
+		<%endif%>
 		<$set name="tv-wikilinks" value={{$:/config/Tiddlers/TitleLinks}}>
 			<$link>
 				<$list filter="[<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] +[!is[blank]]"

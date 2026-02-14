@@ -1,0 +1,12 @@
+title: $:/core/templates/static.tiddler.toc
+code-body: yes
+
+<div class="tc-table-of-contents">
+
+<$transclude $variable="toc" tag=<<storyTiddler>> level="1"/>
+
+</div>
+
+''{{$:/language/SideBar/Contents/BackTo}}''
+
+{{{ [all[current]tags[]!is[system]] }}}

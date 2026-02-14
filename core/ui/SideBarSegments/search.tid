@@ -1,5 +1,6 @@
 title: $:/core/ui/SideBarSegments/search
 tags: $:/tags/SideBarSegment
+hide-static: yes
 
 \whitespace trim
 
