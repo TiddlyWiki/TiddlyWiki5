@@ -21,7 +21,7 @@ exports.jsonvariable = function(source,operator,options) {
 	var replacer= "params name value default resultList srcVariable text isFunctionDefinition isProcedureDefinition isWidgetDefinition isMacroDefinition".split(" ");
 	source(function(tiddler,title) {
 		var variable = widget.getVariableInfo(title, {}),
-		text = JSON.stringify(variable,replacer);
+			text = JSON.stringify(variable,replacer);
 		results.push(text || "");
 	});
 	return results;

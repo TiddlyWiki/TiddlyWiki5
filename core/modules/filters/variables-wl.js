@@ -23,10 +23,11 @@ exports["variables-wl"] = function(source,operator,options) {
 		sort,
 		widget = options.widget,
 		included = (operands[0].value) ? operands[0].value : "var fn proc macro widget";
-		// all will overwrite 
-		included = ((included.indexOf("all") !== -1)) ? "var fn proc macro widget" : included;
 
-		// variableTemplate = (operands.length > 1 && operands[1]) ? operands[1].value : "$type$ $name$($params$) $firstLine$";
+	// all will overwrite 
+	included = ((included.indexOf("all") !== -1)) ? "var fn proc macro widget" : included;
+
+	// variableTemplate = (operands.length > 1 && operands[1]) ? operands[1].value : "$type$ $name$($params$) $firstLine$";
 
 	switch(operator.suffix) {
 		case "raw":
