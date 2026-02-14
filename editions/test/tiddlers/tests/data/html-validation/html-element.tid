@@ -1,0 +1,33 @@
+created: 20251030155636804
+description: HTML Element
+modified: 20260127083441993
+tags: $:/tags/wiki-test-spec
+title: html-element
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Handled by: $:/core/modules/widgets/element.js
+
+```
+// Sanitize tag name if needed according to Custom Web-Componenets spec
+this.tag = $tw.utils.makeTagNameSafe(this.tag, "safe-" + this.tag);
+```
++
+title: Output
+
+! test
+
+Some Text
+
+<strong>strong text</strong>
+<STroNG>strong text</STroNG>
+
+<_$>_$ escaped -> no element</_$> but text
+
++
+title: ExpectedResult
+
+<h1 class="">test</h1><p>Some Text</p><p><strong>strong text</strong>
+<STroNG>strong text</STroNG></p><p>&lt;_$&gt;_$ escaped -&gt; no element&lt;/_$&gt; but text
+</p>

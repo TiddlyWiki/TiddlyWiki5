@@ -1,0 +1,35 @@
+created: 20251030152949803
+description: Draggable Widget Tag
+modified: 20260127083436579
+tags: $:/tags/wiki-test-spec
+title: draggable-test
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Handled by: $:/core/modules/widgets/draggable.js
+
+```
+// Sanitise the specified tag
+tag = $tw.utils.makeTagNameSafe(this.draggableTag,"div");
+```
++
+title: Output
+
+<!-- The following code should create a valid button tag -->
+<$draggable>Draggable Text</$draggable>
+
+<!-- Undefined widget -->
+<$draGGable>Draggable Text</$draGGable>
+
+<!-- Valid STRONG tag -->
+<$draggable tag="STRoNG">Draggable Text</$draggable>
+
+<!-- Invalid % tag -> defaultTag="div" -->
+<$draggable tag="%%%">Draggable %%%</$draggable>
+
++
+title: ExpectedResult
+
+<p><div class="tc-draggable" draggable="true">Draggable Text</div></p><p>Undefined widget 'draGGable'</p><p><STRoNG class="tc-draggable" draggable="true">Draggable Text</STRoNG></p><p><div class="tc-draggable" draggable="true">Draggable %%%</div>
+</p>

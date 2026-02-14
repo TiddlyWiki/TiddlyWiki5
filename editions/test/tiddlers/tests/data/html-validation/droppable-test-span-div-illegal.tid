@@ -1,0 +1,29 @@
+created: 20251211133314637
+description: Draggable Widget Tag
+modified: 20260127100554663
+tags: $:/tags/wiki-test-spec
+title: droppable-test-span-div-illegal
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Handled by: $:/core/modules/widgets/droppable.js
+
+```
+var tag = this.parseTreeNode.isBlock ? "div" : "span",
+// snip code 
+tag = $tw.utils.makeTagNameSafe(this.droppableTag,tag);
+```
++
+title: Output
+
+<!-- Illegal tag names should create a SPAN and a DIV element -->
+<$droppable tag="&&DIV">drop DIV here && is filtered out</$droppable>
+<$droppable tag="&">
+
+drop DIV here - use default</$droppable>
++
+title: ExpectedResult
+
+<p><DIV class="tc-droppable">drop DIV here &amp;&amp; is filtered out</DIV>
+<div class="tc-droppable"><p>drop DIV here - use default</p></div></p>
