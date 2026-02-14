@@ -69,6 +69,7 @@ function Syncer(options) {
 	this.readTiddlerInfo();
 	this.titlesToBeLoaded = {}; // Hashmap of titles of tiddlers that need loading from the server
 	this.titlesHaveBeenLazyLoaded = {}; // Hashmap of titles of tiddlers that have already been lazily loaded from the server
+	this.draftsFallenBackToOriginal = {}; // Hashmap of draft titles where server draft was missing/empty, so we should hydrate from original
 	// Timers
 	this.taskTimerId = null; // Timer for task dispatch
 	// Number of outstanding requests
@@ -255,6 +256,24 @@ Syncer.prototype.storeTiddler = function(tiddlerFields) {
 	// Save the tiddler
 	var tiddler = new $tw.Tiddler(tiddlerFields);
 	this.wiki.addTiddler(tiddler);
+	// Handle hydrating skinny drafts
+	if(tiddlerFields && tiddlerFields.text !== undefined) {
+		// Case 1: We just loaded an original tiddler that has a corresponding skinny draft that needs hydrating
+		// Only hydrate if we've already tried to load the draft from server and it was missing/empty
+		var draftTitle = this.wiki.findDraft(tiddlerFields.title),
+			draftTiddler = draftTitle && this.wiki.getTiddler(draftTitle);
+		if(draftTiddler && draftTiddler.hasField("_is_skinny") && this.draftsFallenBackToOriginal[draftTitle]) {
+			// Hydrate draft with content from original tiddler
+			this.wiki.addTiddler(new $tw.Tiddler(tiddler,{
+				title: draftTitle,
+				"draft.title": draftTiddler.fields["draft.title"],
+				"draft.of": draftTiddler.fields["draft.of"]
+			}));
+			this.titlesHaveBeenLazyLoaded[draftTitle] = true;
+			delete this.draftsFallenBackToOriginal[draftTitle];
+		}
+		// Case 2: We just loaded a draft itself (from server) - the addTiddler above already replaced the skinny version
+	}
 	// Save the tiddler revision and changeCount details
 	this.tiddlerInfo[tiddlerFields.title] = {
 		revision: this.getTiddlerRevision(tiddlerFields.title),
@@ -330,6 +349,31 @@ Syncer.prototype.handleLazyLoadEvent = function(title) {
 			this.titlesToBeLoaded[title] = true;
 			this.titlesHaveBeenLazyLoaded[title] = true;
 			this.processTaskQueue();
+		}
+	}
+};
+
+/*
+Hydrate a skinny draft from its original tiddler.
+Called when a draft doesn't exist on server or has no content.
+*/
+Syncer.prototype.enqueueDraftHydration = function(draftTitle,draftTiddler) {
+	var originalTitle = draftTiddler.fields["draft.of"];
+	var originalTiddler = this.wiki.getTiddler(originalTitle);
+	// If original is already loaded, hydrate immediately
+	if(originalTiddler && originalTiddler.fields.text !== undefined) {
+		this.wiki.addTiddler(new $tw.Tiddler(originalTiddler,{
+			title: draftTitle,
+			"draft.title": draftTiddler.fields["draft.title"],
+			"draft.of": draftTiddler.fields["draft.of"]
+		}));
+		this.titlesHaveBeenLazyLoaded[draftTitle] = true;
+	} else {
+		// Original not loaded yet - mark draft for hydration when original loads
+		this.draftsFallenBackToOriginal[draftTitle] = true;
+		if(!this.titlesHaveBeenLazyLoaded[originalTitle]) {
+			this.titlesToBeLoaded[originalTitle] = true;
+			this.titlesHaveBeenLazyLoaded[originalTitle] = true;
 		}
 	}
 };
@@ -486,6 +530,10 @@ Syncer.prototype.chooseNextTask = function() {
 			tiddler = this.wiki.tiddlerExists(title) && this.wiki.getTiddler(title),
 			tiddlerInfo = this.tiddlerInfo[title];
 		if(tiddler) {
+			// Skip saving skinny drafts - they need to load their content first
+			if(tiddler.hasField("_is_skinny")) {
+				continue;
+			}
 			// If the tiddler is not known on the server, or has been modified locally no more recently than the threshold then it needs to be saved to the server
 			var hasChanged = !tiddlerInfo || this.wiki.getChangeCount(title) > tiddlerInfo.changeCount,
 				isReadyToSave = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
@@ -601,15 +649,30 @@ LoadTiddlerTask.prototype.run = function(callback) {
 	var self = this;
 	this.syncer.logger.log("Dispatching 'load' task:",this.title);
 	this.syncer.syncadaptor.loadTiddler(this.title,function(err,tiddlerFields) {
-		// If there's an error, exit without changing any internal state
-		if(err) {
+		// Check if this is a skinny draft that needs special handling
+		var localTiddler = self.syncer.wiki.getTiddler(self.title);
+		var isSkinnyDraft = localTiddler && localTiddler.hasField("_is_skinny") && localTiddler.hasField("draft.of");
+		
+		if(isSkinnyDraft) {
+			// For skinny drafts, we need to either restore from server or hydrate from original
+			var is404 = err && err.indexOf && err.indexOf("404") !== -1;
+			var draftHasContent = tiddlerFields && tiddlerFields.text;
+			
+			if(is404 || !draftHasContent) {
+				// Draft doesn't exist on server or is empty - hydrate from original tiddler
+				self.syncer.enqueueDraftHydration(self.title, localTiddler);
+				return callback(null);
+			}
+			// Draft exists with content - fall through to store it normally
+		} else if(err) {
+			// For non-draft tiddlers, propagate errors normally
 			return callback(err);
 		}
-		// Update the info stored about this tiddler
+		
+		// Store the loaded tiddler
 		if(tiddlerFields) {
 			self.syncer.storeTiddler(tiddlerFields);
 		}
-		// Invoke the callback
 		callback(null);
 	});
 };
