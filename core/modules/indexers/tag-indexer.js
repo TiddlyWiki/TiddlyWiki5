@@ -32,6 +32,19 @@ TagIndexer.prototype.rebuild = function() {
 };
 
 TagIndexer.prototype.update = function(updateDescriptor) {
+	var newTid = updateDescriptor.new.tiddler;
+	var oldTid = updateDescriptor.old.tiddler;
+	var noOldTid = oldTid === undefined;
+
+	// a) new tiddler has no tags && no old tiddler -> or
+	// b) new tiddler has no tags && old tiddler has no tags -> return early!
+	var a=((newTid && newTid.fields && newTid.fields.tags === undefined) && noOldTid),
+		b=((newTid && newTid.fields && newTid.fields.tags === undefined) && (oldTid && oldTid.fields && oldTid.fields.tags === undefined));
+
+	if( a || b ) {
+		return; // early
+	}
+
 	$tw.utils.each(this.subIndexers,function(subIndexer) {
 		subIndexer.update(updateDescriptor);
 	});
@@ -53,6 +66,9 @@ TagSubIndexer.prototype.addIndexMethod = function() {
 TagSubIndexer.prototype.rebuild = function() {
 	var self = this;
 	// Hashmap by tag of array of {isSorted:, titles:[]}
+
+const t0 = $tw.utils.timer();
+
 	this.index = Object.create(null);
 	// Add all the tags
 	this.indexer.wiki[this.iteratorMethod](function(tiddler,title) {
@@ -64,6 +80,9 @@ TagSubIndexer.prototype.rebuild = function() {
 			}
 		});
 	});
+
+console.log("--------------- ", $tw.utils.timer(t0), this.iteratorMethod);
+
 };
 
 TagSubIndexer.prototype.update = function(updateDescriptor) {
