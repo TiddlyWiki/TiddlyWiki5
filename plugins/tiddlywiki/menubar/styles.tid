@@ -40,7 +40,7 @@ tags: [[$:/tags/Stylesheet]]
 </$reveal>
 \end
 
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline conditional
 
 nav.tc-menubar {
 	position: fixed;
@@ -212,3 +212,12 @@ nav.tc-menubar .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 	}
 
 }
+
+/* Adjust sticky tiddler titles to account for fixed menubar */
+<%if [{$:/themes/tiddlywiki/vanilla/options/stickytitles}match[yes]] %>
+
+.tc-tiddler-title {
+	top: var(--tv-menubar-height, 0px);
+}
+
+<%endif%>
