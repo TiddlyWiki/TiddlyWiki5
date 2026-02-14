@@ -154,7 +154,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>");
+		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">1001 - 1 - Recursive transclusion error in transclude widget</span>");
 	});
 
 	it("should handle single-tiddler recursion with branching nodes", function() {
@@ -883,7 +883,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		renderWidgetNode(widgetNode);
 		var childNode = widgetNode;
-		while (childNode.children.length > 0) {
+		while(childNode.children.length > 0) {
 			childNode = childNode.children[0];
 		}
 		// First make sure A and B imported
@@ -897,7 +897,7 @@ describe("Widget module", function() {
 		wiki.addTiddler({title: "DE", text: "\\define D() D2"});
 		widgetNode.refresh({"ABC": {modified: true}, "DE": {modified: true}});
 		var childNode = widgetNode;
-		while (childNode.children.length > 0) {
+		while(childNode.children.length > 0) {
 			childNode = childNode.children[0];
 		}
 		// Make sure \import recognized changes and deletions

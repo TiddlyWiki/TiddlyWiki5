@@ -14,6 +14,7 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
 var RevealWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 

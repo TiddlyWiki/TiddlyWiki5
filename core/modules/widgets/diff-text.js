@@ -13,6 +13,7 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 const dmp = require("$:/core/modules/utils/diff-match-patch/diff_match_patch.js");
 
 var DiffTextWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 
