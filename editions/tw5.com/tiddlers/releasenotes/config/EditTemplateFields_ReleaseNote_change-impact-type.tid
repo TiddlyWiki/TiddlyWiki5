@@ -1,0 +1,13 @@
+title: $:/config/EditTemplateFields/ReleaseNote/change-impact-type
+
+\define options()
+deprecation -- There are features or functionality that should no longer be used in new code
+compatibility-break -- Changes are included that break backwards compatibility
+pluginisation -- Functionality has been moved from the core to a plugin
+\end
+
+<$select tiddler=<<currentTiddler>> field=<<currentField>> class="tc-edit-texteditor tc-edit-fieldeditor" cancelPopups="yes">
+    <$list filter="[<options>splitregexp[\n]sort[title]]">
+        <option value={{{ [<currentTiddler>split[--]nth[]trim[]] }}}><<currentTiddler>></option>
+    </$list>
+</$select>
