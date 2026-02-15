@@ -1,0 +1,24 @@
+created: 20210106183100000
+modified: 20260211110343361
+original-modified: 20220407181245488
+tags: [[Community Plugins]] [[Community Editions]]
+title: Projectify by Nicolas Petton
+ja-title: Nicolas PettonによるProjectify
+type: text/vnd.tiddlywiki
+url: https://github.com/ThaddeusJiang/Projectify
+
+~TiddlyWikiのプロジェクト・~ToDo管理。
+
+{{!!url}}
+
+Projectifyは、[[Todoist|https://todoist.com]]や[[Basecamp|https://basecamp.com]]などの製品にインスパイアされた、
+プロジェクトと~ToDoリストを管理するためのTiddlyWikiプラグインです。
+
+Projectifyの機能:
+
+* タスクや考えを収集するための受信箱
+* タスクをまとめて個別の~ToDoリストに構造化するプロジェクト
+* タスクのスケジューリングのサポート
+* すべてのプロジェクト、受信箱、スケジュールされたタスクをすばやく確認するためのダッシュボード
+
+`注意:` オリジナルのサイト https://projectify.wiki は今は存在しません。提供されているサイトは複製サイトですが、元の作成者によるものではありません。

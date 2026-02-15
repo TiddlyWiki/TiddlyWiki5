@@ -1,0 +1,21 @@
+created: 20160204225047445
+lost-url: http://www.networkworld.com/article/3028098/open-source-tools/tiddlywiki-a-free-open-source-wiki-revisited.html
+modified: 20260211121041100
+original-modified: 20160204225307847
+tags: Articles
+title: "A free, open source wiki revisited" by Mark Gibbs, NetworkWorld
+ja-title: NetworkWorldのMark Gibbsによる"フリーなオープンソースWikiを再度使ってみた"
+type: text/vnd.tiddlywiki
+url: https://web.archive.org/web/20180911094717/http://www.networkworld.com/article/3028098/open-source-tools/tiddlywiki-a-free-open-source-wiki-revisited.html
+
+数年間TiddlyWikiから離れていた人の視点で書かれた興味深い記事:
+
+{{!!url}}
+
+<<<
+随分と昔(実際には2009年1月)、私はTiddlyWikiという“非線形の個人用Webノート“という非常にクールなツールについて書きました。そして今日、私は幽体離脱のような体験をしました: たまたま、その記事を書いたときに始めたTiddlyWikiを見付けましたが、今でも問題なく動作しました!
+
+わずか2～3年も経つと、完璧に動作するコードはもう魔法ですが、7年?!も経ってます。そして、TiddlyWikiがシングルページWebアプリケーションとして書かれており、かつ、2009年当時と現在ではブラウザがいかに異なっているかを考慮すると、TiddlyWikiの古いバージョンが今でも動作するという事実は奇跡としか言いようがありません
+<<<
+
+
