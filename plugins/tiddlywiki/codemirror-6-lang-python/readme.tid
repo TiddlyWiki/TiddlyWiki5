@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-python/readme
+
+! Python Language Support
+
+Provides syntax highlighting for Python in code blocks.
+
+!! Supported Content
+
+* Fenced code blocks: ```` ```python ```` or ```` ```py ````
+* Typed blocks: `$$$.py`
+
+!! Features
+
+* Full Python syntax highlighting
+* Keyword and built-in function recognition
+* String and comment highlighting

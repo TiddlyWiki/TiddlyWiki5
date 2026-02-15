@@ -1,0 +1,62 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lint/ui/ControlPanel
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: Lint
+
+\define render-lint-option(configTiddler)
+<div class="cm-lint-option">
+<$checkbox tiddler=<<__configTiddler__>> field="text" checked="yes" unchecked="no" default="yes">
+<strong><$transclude tiddler=<<__configTiddler__>> field="caption"/></strong>
+</$checkbox>
+<div class="cm-lint-description"><$transclude tiddler=<<__configTiddler__>> field="description"/></div>
+</div>
+\end
+
+! Lint Settings
+
+Highlight potential issues in your TiddlyWiki content as you type.
+
+!! Global
+
+<$checkbox tiddler="$:/config/codemirror-6/lint/enabled" field="text" checked="yes" unchecked="no" default="yes">
+<strong>Enable linting</strong>
+</$checkbox>
+
+<$reveal type="match" state="$:/config/codemirror-6/lint/enabled" text="yes">
+
+!! Missing References
+
+<<render-lint-option "$:/config/codemirror-6/lint/missingLinks">>
+<<render-lint-option "$:/config/codemirror-6/lint/undefinedMacros">>
+<<render-lint-option "$:/config/codemirror-6/lint/unknownWidgets">>
+<<render-lint-option "$:/config/codemirror-6/lint/invalidTags">>
+
+!! Definition Issues
+
+<<render-lint-option "$:/config/codemirror-6/lint/duplicateDefinitions">>
+<<render-lint-option "$:/config/codemirror-6/lint/unusedDefinitions">>
+
+!! Structural Issues
+
+<<render-lint-option "$:/config/codemirror-6/lint/incompleteTags">>
+<<render-lint-option "$:/config/codemirror-6/lint/unclosedWidgets">>
+<<render-lint-option "$:/config/codemirror-6/lint/unclosedPragmas">>
+<<render-lint-option "$:/config/codemirror-6/lint/misplacedPragmas">>
+<<render-lint-option "$:/config/codemirror-6/lint/unclosedConditionals">>
+<<render-lint-option "$:/config/codemirror-6/lint/unclosedCodeBlocks">>
+
+!! Filter Syntax
+
+<<render-lint-option "$:/config/codemirror-6/lint/filterSyntax">>
+
+</$reveal>
+
+<style>
+.cm-lint-option {
+  margin: 0.5em 0;
+}
+.cm-lint-description {
+  margin-left: 1.7em;
+  color: <<colour muted-foreground>>;
+  font-size: 0.9em;
+}
+</style>

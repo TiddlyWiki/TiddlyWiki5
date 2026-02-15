@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-ayu/license
+
+\define theme-name() Ayu
+\define theme-url() https://github.com/ayu-theme/ayu-colors
+\define theme-author() Ike Ku
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Buttons/trailing-whitespace
+tags: $:/tags/EditorToolbar
+caption: {{$:/plugins/tiddlywiki/codemirror-6/icons/trailing-whitespace}} Trailing Whitespace
+description: Toggle trailing whitespace highlighting
+icon: $:/plugins/tiddlywiki/codemirror-6/icons/trailing-whitespace
+condition: [<targetTiddler>]
+button-classes: [{$:/config/codemirror-6/editor/showTrailingWhitespace}match[yes]then[cm6-toolbar-btn-trailing-whitespace tc-selected]] :else[[cm6-toolbar-btn-trailing-whitespace]]
+
+<%if [{$:/config/codemirror-6/editor/showTrailingWhitespace}match[yes]] %>
+<$action-setfield $tiddler="$:/config/codemirror-6/editor/showTrailingWhitespace" text="no"/>
+<%else%>
+<$action-setfield $tiddler="$:/config/codemirror-6/editor/showTrailingWhitespace" text="yes"/>
+<%endif%>

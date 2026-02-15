@@ -1,0 +1,13 @@
+{
+  "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/theme-flexoki",
+  "name": "CodeMirror 6 Flexoki Theme",
+  "description": "Flexoki color scheme for CodeMirror 6 (dark and light variants)",
+  "version": "0.0.36",
+  "plugin-type": "plugin",
+  "dependents": "$:/plugins/tiddlywiki/codemirror-6",
+  "list": "readme license",
+  "author": "TiddlyWiki",
+  "source": "https://github.com/TiddlyWiki/tiddlywiki-codemirror",
+  "core-version": ">=5.3.0",
+  "stability": "STABILITY_1_EXPERIMENTAL"
+}

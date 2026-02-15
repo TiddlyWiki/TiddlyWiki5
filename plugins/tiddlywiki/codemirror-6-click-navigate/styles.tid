@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/click-navigate/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/* Click Navigate Plugin Styles */
+
+/* When Ctrl/Cmd is held, show pointer cursor on links */
+.cm6-ctrl-held .cm-content {
+    cursor: pointer;
+}
+
+/* Underline effect for clickable links when Ctrl is held */
+.cm6-ctrl-held .cm-tw-wikilink-text,
+.cm6-ctrl-held .cm-tw-transclusion-target,
+.cm6-ctrl-held .cm-tw-camelcase,
+.cm6-ctrl-held .cm-tw-macro-name,
+.cm6-ctrl-held .cm-tw-widget-name {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}

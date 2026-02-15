@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-monokai/readme
+
+! Monokai Theme for CodeMirror 6
+
+Classic Sublime Text theme. Bold, high contrast, beloved by many.
+
+!! Variants
+
+* `monokai` / `monokai-dark` - Classic dark (default)
+* `monokai-pro` - Monokai Pro colors
+* `monokai-light` - Light variant
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-monokai` | Classic dark (default) |
+| `cm6-theme-monokai-dark` | Same as above |
+| `cm6-theme-monokai-pro` | Monokai Pro |
+| `cm6-theme-monokai-light` | Light variant |

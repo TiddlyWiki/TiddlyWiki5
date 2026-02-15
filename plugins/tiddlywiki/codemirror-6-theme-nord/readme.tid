@@ -1,0 +1,37 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-nord/readme
+
+! Nord Theme for CodeMirror 6
+
+An arctic, bluish color palette based on [[Nord|https://www.nordtheme.com/]].
+
+Clean, minimal, and elegant with a dark polar night and bright snow storm variant.
+
+!! Variants
+
+* `nord` / `nord-dark` - Dark polar night theme (default)
+* `nord-light` - Light snow storm variant
+
+!! Usage
+
+Add the theme class to your editor container or set the `data-cm6-theme` attribute:
+
+```html
+<div class="cm6-theme-nord">
+  <!-- editor here -->
+</div>
+```
+
+Or via attribute:
+
+```html
+<div data-cm6-theme="nord-light">
+  <!-- editor here -->
+</div>
+```
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-nord` | Dark Nord theme (Polar Night) |
+| `cm6-theme-nord-dark` | Same as above |
+| `cm6-theme-nord-light` | Light Nord theme (Snow Storm) |

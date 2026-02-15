@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/markdown
+tags: $:/tags/CodeMirror/Language
+name: Markdown
+type: text/x-markdown
+category: Wiki
+plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-markdown

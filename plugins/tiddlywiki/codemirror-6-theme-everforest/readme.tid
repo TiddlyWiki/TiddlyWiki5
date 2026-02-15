@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-everforest/readme
+
+! Everforest Theme for CodeMirror 6
+
+Green-based warm color palette based on [[Everforest|https://github.com/sainnhe/everforest]].
+
+Designed to be easy on the eyes with nature-inspired colors.
+
+!! Variants
+
+* `everforest` / `everforest-dark` - Dark (default)
+* `everforest-dark-hard` - Higher contrast dark
+* `everforest-light` - Light
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-everforest` | Dark (default) |
+| `cm6-theme-everforest-dark` | Same as above |
+| `cm6-theme-everforest-dark-hard` | Dark hard |
+| `cm6-theme-everforest-light` | Light |

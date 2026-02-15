@@ -1,0 +1,18 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-css/readme
+
+! CSS Language Support
+
+Provides syntax highlighting for CSS in code blocks.
+
+!! Supported Content
+
+* Fenced code blocks: ```` ```css ````
+* Typed blocks: `$$$.css` or `$$$text/css`
+* `<style>` tags in HTML
+* Tiddlers with type `text/css`
+
+!! Features
+
+* Full CSS syntax highlighting including selectors, properties, and values
+* Bracket matching
+* Code folding for rule blocks

@@ -1,0 +1,85 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/keymap-emacs/KeymapTable
+tags: $:/tags/CodeMirror/KeymapTable
+name: emacs
+
+!!! Emacs Keymap
+
+!!!! Cursor Movement
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+F</td><td>Forward one character</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+B</td><td>Backward one character</td></tr>
+<tr><td class="cm-keymap-key">Alt+F</td><td>Forward one word</td></tr>
+<tr><td class="cm-keymap-key">Alt+B</td><td>Backward one word</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+N</td><td>Next line</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+P</td><td>Previous line</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+A</td><td>Beginning of line</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+E</td><td>End of line</td></tr>
+<tr><td class="cm-keymap-key">Alt+<</td><td>Beginning of buffer</td></tr>
+<tr><td class="cm-keymap-key">Alt+></td><td>End of buffer</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+V</td><td>Page down</td></tr>
+<tr><td class="cm-keymap-key">Alt+V</td><td>Page up</td></tr>
+<tr><td class="cm-keymap-key">Alt+G G</td><td>Go to line</td></tr>
+</table>
+
+!!!! Editing
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+D</td><td>Delete character forward</td></tr>
+<tr><td class="cm-keymap-key">Backspace</td><td>Delete character backward</td></tr>
+<tr><td class="cm-keymap-key">Alt+D</td><td>Delete word forward</td></tr>
+<tr><td class="cm-keymap-key">Alt+Backspace</td><td>Delete word backward</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+K</td><td>Kill to end of line</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Shift+Backspace</td><td>Kill to start of line</td></tr>
+<tr><td class="cm-keymap-key">Alt+K</td><td>Kill to end of sentence</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+W</td><td>Kill region</td></tr>
+<tr><td class="cm-keymap-key">Alt+W</td><td>Copy region</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Y</td><td>Yank (paste)</td></tr>
+<tr><td class="cm-keymap-key">Alt+Y</td><td>Yank pop (cycle kill ring)</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+O</td><td>Open line</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+J</td><td>New line and indent</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+T</td><td>Transpose characters</td></tr>
+<tr><td class="cm-keymap-key">Alt+T</td><td>Transpose words</td></tr>
+<tr><td class="cm-keymap-key">Alt+U</td><td>Uppercase word</td></tr>
+<tr><td class="cm-keymap-key">Alt+L</td><td>Lowercase word</td></tr>
+<tr><td class="cm-keymap-key">Alt+C</td><td>Capitalize word</td></tr>
+</table>
+
+!!!! Selection (Mark)
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+Space</td><td>Set mark</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+X Ctrl+X</td><td>Exchange point and mark</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+X H</td><td>Select all</td></tr>
+</table>
+
+!!!! Search
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+S</td><td>Incremental search forward</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+R</td><td>Incremental search backward</td></tr>
+<tr><td class="cm-keymap-key">Alt+%</td><td>Query replace</td></tr>
+</table>
+
+!!!! Undo/Redo
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+/</td><td>Undo</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+X U</td><td>Undo</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+Shift+/</td><td>Redo</td></tr>
+</table>
+
+!!!! Other
+
+<table class="cm-keymap-table">
+<tr><th>Shortcut</th><th>Action</th></tr>
+<tr><td class="cm-keymap-key">Ctrl+G</td><td>Cancel / Keyboard quit</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+X Ctrl+S</td><td>Save</td></tr>
+<tr><td class="cm-keymap-key">Ctrl+L</td><td>Recenter screen</td></tr>
+<tr><td class="cm-keymap-key">Alt+;</td><td>Toggle comment</td></tr>
+</table>

@@ -1,0 +1,39 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/zen-mode/readme
+
+! Zen Mode for CodeMirror 6
+
+Distraction-free writing environment for focused editing.
+
+!! Features
+
+* ''Fullscreen overlay'' — editor fills the viewport, hides TiddlyWiki chrome
+* ''Centered content'' — comfortable max-width for readability
+* ''Focus modes'' — dim surrounding text (line, sentence, or paragraph)
+* ''Typewriter mode'' — keep cursor vertically centered
+* ''Live statistics'' — word count, character count, reading time
+* ''Theme integration'' — inherits your active CodeMirror theme
+* ''Smooth transitions'' — fade in/out animations
+
+!! Usage
+
+Click the Zen Mode button in the editor toolbar, or use the keyboard shortcut:
+
+* ''Ctrl+Shift+Z'' (default, configurable)
+
+!! Exit Zen Mode
+
+* Press ''Escape''
+* Click the ''×'' close button
+* Click outside the editor (if enabled in settings)
+
+!! Focus Modes
+
+|!Mode |!Description |
+|None |No dimming |
+|Line |Highlight current line only |
+|Sentence |Highlight current sentence |
+|Paragraph |Highlight current paragraph |
+
+!! Settings
+
+Configure Zen Mode in ''Control Panel → Settings → CodeMirror → Zen Mode''

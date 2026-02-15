@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-github/themes/github
+tags: $:/tags/CodeMirrorTheme
+name: GitHub Light
+family: GitHub
+value: github
+color-scheme: light

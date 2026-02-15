@@ -1,0 +1,5 @@
+title: $:/config/EditorTypeMappings/
+
+application/json: codemirror-6
+text/json: codemirror-6
+application/x-tiddler-dictionary: codemirror-6

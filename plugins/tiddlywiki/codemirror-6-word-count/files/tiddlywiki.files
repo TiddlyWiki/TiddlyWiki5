@@ -1,0 +1,12 @@
+{
+    "tiddlers": [
+        {
+            "file": "word-count.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/word-count/word-count.js",
+                "module-type": "codemirror6-plugin"
+            }
+        }
+    ]
+}

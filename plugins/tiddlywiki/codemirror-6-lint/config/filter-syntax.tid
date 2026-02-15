@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lint/filterSyntax
+caption: Filter Syntax
+description: Check for unbalanced brackets in filters
+text: yes

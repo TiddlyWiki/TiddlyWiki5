@@ -1,0 +1,36 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-solarized/readme
+
+! Solarized Theme for CodeMirror 6
+
+A precision color scheme based on [[Solarized|https://ethanschoonover.com/solarized/]] by Ethan Schoonover.
+
+Both light and dark modes use the same carefully selected accent colors against warm gray bases.
+
+!! Variants
+
+* `solarized-dark` - Dark variant with blue-gray background
+* `solarized-light` - Light variant with cream background
+
+!! Usage
+
+Add the theme class to your editor container or set the `data-cm6-theme` attribute:
+
+```html
+<div class="cm6-theme-solarized-dark">
+  <!-- editor here -->
+</div>
+```
+
+Or via attribute:
+
+```html
+<div data-cm6-theme="solarized-light">
+  <!-- editor here -->
+</div>
+```
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-solarized-dark` | Dark Solarized theme |
+| `cm6-theme-solarized-light` | Light Solarized theme |

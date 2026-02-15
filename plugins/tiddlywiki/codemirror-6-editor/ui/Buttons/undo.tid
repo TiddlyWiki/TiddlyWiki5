@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Buttons/undo
+tags: $:/tags/EditorToolbar
+caption: {{$:/plugins/tiddlywiki/codemirror-6/icons/undo}} Undo
+description: Undo the last change
+icon: $:/plugins/tiddlywiki/codemirror-6/icons/undo
+condition: [<targetTiddler>]
+
+<$action-sendmessage $message="tm-cm6-undo"/>

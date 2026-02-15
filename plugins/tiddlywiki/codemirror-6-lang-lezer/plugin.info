@@ -1,0 +1,12 @@
+{
+  "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer",
+  "name": "CodeMirror 6 Lezer Language",
+  "description": "Lezer grammar syntax highlighting for CodeMirror 6",
+  "version": "0.0.36",
+  "plugin-type": "plugin",
+  "dependents": "$:/plugins/tiddlywiki/codemirror-6",
+  "list": "readme license",
+  "core-version": ">=5.3.0",
+  "author": "TiddlyWiki",
+  "stability": "STABILITY_1_EXPERIMENTAL"
+}

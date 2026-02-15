@@ -1,0 +1,53 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/edit-text/readme
+
+! SimpleEngine for CodeMirror 6
+
+Replaces TiddlyWiki's native `<input>` and `<textarea>` elements with CodeMirror 6 editors, bringing syntax highlighting, autocompletion, and vim/emacs keybindings to all text inputs.
+
+!! Features
+
+* ''Syntax highlighting'' — TiddlyWiki wikitext highlighting in all inputs
+* ''Autocompletion'' — tiddler titles, macros, and variables
+* ''Keymap support'' — use vim or emacs bindings in inputs
+* ''Bracket matching'' — highlight matching brackets
+* ''Close brackets'' — auto-close quotes and brackets
+* ''Spellcheck integration'' — browser spellcheck support
+* ''Multi-cursor editing'' — same as main editor
+
+!! How It Works
+
+When installed, this plugin automatically replaces:
+
+* `<$edit-text tag="input">` — single-line inputs (search, tag picker, title field)
+* `<$edit-text tag="textarea">` — multi-line textareas
+
+The original element behavior is preserved, including focus handling, placeholder text, and keyboard navigation.
+
+!! Tab Key Behavior
+
+By default, Tab/Shift-Tab navigate between fields (browser behavior). This can be changed to indent/outdent in settings.
+
+|!Setting |!Behavior |
+|Browser (default) |Tab moves focus to next field |
+|Indent |Tab inserts indentation |
+
+!! Keymap Configuration
+
+SimpleEngine has its own keymap settings with a fallback chain:
+
+# Mode-specific: `input` or `textarea` keymap setting
+# SimpleEngine default keymap
+# Main editor keymap
+
+This allows different keymaps for inputs vs textareas if desired.
+
+!! Settings
+
+Configure in ''Control Panel → Settings → CodeMirror → Editor Settings'' under the SimpleEngine section.
+
+!! Technical Notes
+
+* Uses the same plugin system as the main editor
+* Shares configuration with main editor where appropriate
+* Input mode filters out newlines (single-line only)
+* Supports `editFocusPopup` for dropdown integration

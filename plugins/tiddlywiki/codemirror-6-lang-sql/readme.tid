@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/readme
+
+! SQL Language Support
+
+Provides syntax highlighting for SQL in code blocks.
+
+!! Supported Content
+
+* Fenced code blocks: ```` ```sql ````
+* Typed blocks: `$$$.sql`
+
+!! Features
+
+* SQL syntax highlighting with keyword recognition
+* String and number literal coloring
+* Comment highlighting

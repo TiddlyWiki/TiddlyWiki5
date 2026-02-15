@@ -1,0 +1,41 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-gruvbox/readme
+
+! Gruvbox Theme for CodeMirror 6
+
+A retro groove color scheme based on [[Gruvbox|https://github.com/morhetz/gruvbox]].
+
+Warm, earthy tones designed for reduced eye strain with carefully crafted contrast.
+
+!! Variants
+
+* `gruvbox` / `gruvbox-dark` - Dark theme (default)
+* `gruvbox-dark-hard` - Dark with higher contrast (#1d2021 background)
+* `gruvbox-light` - Light theme
+* `gruvbox-light-hard` - Light with higher contrast (#f9f5d7 background)
+
+!! Usage
+
+Add the theme class to your editor container or set the `data-cm6-theme` attribute:
+
+```html
+<div class="cm6-theme-gruvbox">
+  <!-- editor here -->
+</div>
+```
+
+Or via attribute:
+
+```html
+<div data-cm6-theme="gruvbox-light">
+  <!-- editor here -->
+</div>
+```
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-gruvbox` | Dark Gruvbox theme |
+| `cm6-theme-gruvbox-dark` | Same as above |
+| `cm6-theme-gruvbox-dark-hard` | Dark with higher contrast |
+| `cm6-theme-gruvbox-light` | Light Gruvbox theme |
+| `cm6-theme-gruvbox-light-hard` | Light with higher contrast |

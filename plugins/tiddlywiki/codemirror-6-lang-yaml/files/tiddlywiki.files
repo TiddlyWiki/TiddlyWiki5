@@ -1,0 +1,20 @@
+{
+    "tiddlers": [
+        {
+            "file": "lang-yaml.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-yaml/lang-yaml.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "plugin.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-yaml/plugin.js",
+                "module-type": "codemirror6-plugin"
+            }
+        }
+    ]
+}

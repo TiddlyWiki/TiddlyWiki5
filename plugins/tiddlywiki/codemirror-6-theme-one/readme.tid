@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-one/readme
+
+! One Dark / One Light Theme for CodeMirror 6
+
+Based on [[Atom's One Dark|https://github.com/atom/one-dark-syntax]] theme.
+
+!! Variants
+
+* `one` / `one-dark` - Dark theme (default)
+* `one-light` - Light theme
+
+!! Available Theme Classes
+
+| !Class | !Description |
+| `cm6-theme-one` | One Dark (default) |
+| `cm6-theme-one-dark` | Same as above |
+| `cm6-theme-one-light` | One Light |

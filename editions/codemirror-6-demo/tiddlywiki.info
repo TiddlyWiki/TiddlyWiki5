@@ -1,0 +1,71 @@
+{
+	"description": "Demo of the CodeMirror 6 plugin",
+	"plugins": [
+		"codemirror-6/editor",
+		"codemirror-6/edit-text",
+		"codemirror-6/auto-close-tags",
+		"codemirror-6/click-navigate",
+		"codemirror-6/color-picker",
+		"codemirror-6/emoji-picker",
+		"codemirror-6/fold",
+		"codemirror-6/image-preview",
+		"codemirror-6/keymap-emacs",
+		"codemirror-6/keymap-vim",
+		"codemirror-6/lang-cpp",
+		"codemirror-6/lang-css",
+		"codemirror-6/lang-go",
+		"codemirror-6/lang-html",
+		"codemirror-6/lang-java",
+		"codemirror-6/lang-javascript",
+		"codemirror-6/lang-json",
+		"codemirror-6/lang-latex",
+		"codemirror-6/lang-lezer",
+		"codemirror-6/lang-markdown",
+		"codemirror-6/lang-php",
+		"codemirror-6/lang-python",
+		"codemirror-6/lang-rust",
+		"codemirror-6/lang-sass",
+		"codemirror-6/lang-sql",
+		"codemirror-6/lang-tiddlywiki",
+		"codemirror-6/lang-wast",
+		"codemirror-6/lang-xml",
+		"codemirror-6/lang-yaml",
+		"codemirror-6/line-numbers",
+		"codemirror-6/link-preview",
+		"codemirror-6/lint",
+		"codemirror-6/snippets",
+		"codemirror-6/theme-ayu",
+		"codemirror-6/theme-catppuccin",
+		"codemirror-6/theme-dracula",
+		"codemirror-6/theme-everforest",
+		"codemirror-6/theme-flexoki",
+		"codemirror-6/theme-github",
+		"codemirror-6/theme-greyscale",
+		"codemirror-6/theme-gruvbox",
+		"codemirror-6/theme-kanagawa",
+		"codemirror-6/theme-material",
+		"codemirror-6/theme-monokai",
+		"codemirror-6/theme-nord",
+		"codemirror-6/theme-one",
+		"codemirror-6/theme-palenight",
+		"codemirror-6/theme-rose-pine",
+		"codemirror-6/theme-solarized",
+		"codemirror-6/theme-tokyo-night",
+		"codemirror-6/theme-zenburn",
+		"codemirror-6/toolbars",
+		"codemirror-6/word-count",
+		"codemirror-6/zen-mode"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","codemirror-6-demo.html","text/plain"
+		],
+		"external": [
+			"--render","$:/core/save/all-external-js","codemirror-6-demo.html","text/plain"
+		]
+	}
+}

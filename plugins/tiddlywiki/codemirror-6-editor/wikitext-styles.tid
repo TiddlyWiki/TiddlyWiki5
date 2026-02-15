@@ -1,0 +1,657 @@
+title: $:/plugins/tiddlywiki/codemirror-6/wikitext-styles
+tags: $:/tags/Stylesheet
+type: text/vnd.tiddlywiki
+
+\rules only macrocallinline macrocallblock conditional
+
+/* ============================================================================
+   WikiText Syntax Highlighting for CodeMirror 6
+   ============================================================================
+
+   Default theme based on TiddlyWiki's Vanilla palette.
+   Clean, unobtrusive, and native to TiddlyWiki.
+
+   Theme plugins can override these CSS variables to create custom themes.
+
+   ============================================================================ */
+
+/* ============================================================================
+   Light Theme (Default - matches TW5 Vanilla)
+   ============================================================================ */
+
+:root {
+  /* Base palette - from TW5 Vanilla */
+  --wt-bg: #ffffff;
+  --wt-bg-subtle: #f4f4f4;
+  --wt-fg: #333333;
+  --wt-fg-muted: #666666;
+  --wt-fg-faint: #888888;
+  --wt-border: #cccccc;
+  --wt-selection: rgba(87, 120, 216, 0.25);
+  --wt-line-highlight: rgba(0, 0, 0, 0.04);
+
+  /* Semantic colors - derived from TW5 palette */
+  --wt-teal: #2a9d8f;           /* Widgets - complementary teal */
+  --wt-teal-dim: #40b4a6;
+  --wt-blue: #5778d8;           /* TW primary - links */
+  --wt-violet: #6f5cc4;         /* Transclusions */
+  --wt-cyan: #2596be;           /* Filters */
+  --wt-orange: #d68a00;         /* Macros - derived from tag gold */
+  --wt-rose: #c94c64;           /* Conditionals */
+  --wt-amber: #b8860b;          /* Attributes - dark goldenrod */
+  --wt-slate: #555555;          /* Code text */
+  --wt-purple: #6f5cc4;         /* Pragmas */
+  --wt-green: #2e8b57;          /* Strings - sea green */
+  --wt-red: #c0392b;            /* Errors */
+
+  /* Formatting */
+  --wt-bold: #1a1a1a;
+  --wt-italic: #333333;
+  --wt-strike: #888888;
+  --wt-underline: #333333;
+  --wt-heading: #182955;        /* TW title color */
+
+  /* Code blocks - from TW5 */
+  --wt-code-bg: #f7f7f9;
+  --wt-code-fg: #dd1144;        /* TW code-foreground */
+
+  /* Highlight */
+  --wt-highlight-bg: rgba(255, 255, 0, 0.3);
+  --wt-highlight-fg: #333333;
+
+  /* Comments */
+  --wt-comment: #6a737d;
+}
+
+/* ============================================================================
+   Dark Theme
+   ============================================================================ */
+
+<%if [[$:/palette]get[text]get[color-scheme]match[dark]] %>
+
+:root {
+  /* Base palette - dark */
+  --wt-bg: #1e1e1e;
+  --wt-bg-subtle: #2d2d2d;
+  --wt-fg: #d4d4d4;
+  --wt-fg-muted: #808080;
+  --wt-fg-faint: #555555;
+  --wt-border: #3d3d3d;
+  --wt-selection: rgba(87, 120, 216, 0.35);
+  --wt-line-highlight: rgba(255, 255, 255, 0.04);
+
+  /* Semantic colors - brightened for dark bg */
+  --wt-teal: #4ec9b0;
+  --wt-teal-dim: #3db39e;
+  --wt-blue: #6b8ceb;
+  --wt-violet: #b4a7f5;
+  --wt-cyan: #4fc1e9;
+  --wt-orange: #e9b563;
+  --wt-rose: #f48fb1;
+  --wt-amber: #ffd54f;
+  --wt-slate: #b0b0b0;
+  --wt-purple: #b4a7f5;
+  --wt-green: #81c784;
+  --wt-red: #ef5350;
+
+  /* Formatting */
+  --wt-bold: #ffffff;
+  --wt-italic: #d4d4d4;
+  --wt-strike: #666666;
+  --wt-underline: #d4d4d4;
+  --wt-heading: #6b8ceb;
+
+  /* Code blocks */
+  --wt-code-bg: #2d2d2d;
+  --wt-code-fg: #f48fb1;
+
+  /* Highlight */
+  --wt-highlight-bg: rgba(255, 213, 79, 0.25);
+  --wt-highlight-fg: #ffd54f;
+
+  /* Comments */
+  --wt-comment: #6a9955;
+}
+
+<% endif %>
+
+/* Dark palette fallback */
+.tc-body.tc-dark,
+[data-palette="dark"] {
+  --wt-bg: #1e1e1e;
+  --wt-bg-subtle: #2d2d2d;
+  --wt-fg: #d4d4d4;
+  --wt-fg-muted: #808080;
+  --wt-fg-faint: #555555;
+  --wt-border: #3d3d3d;
+  --wt-selection: rgba(87, 120, 216, 0.35);
+  --wt-line-highlight: rgba(255, 255, 255, 0.04);
+
+  --wt-teal: #4ec9b0;
+  --wt-teal-dim: #3db39e;
+  --wt-blue: #6b8ceb;
+  --wt-violet: #b4a7f5;
+  --wt-cyan: #4fc1e9;
+  --wt-orange: #e9b563;
+  --wt-rose: #f48fb1;
+  --wt-amber: #ffd54f;
+  --wt-slate: #b0b0b0;
+  --wt-purple: #b4a7f5;
+  --wt-green: #81c784;
+  --wt-red: #ef5350;
+
+  --wt-bold: #ffffff;
+  --wt-italic: #d4d4d4;
+  --wt-strike: #666666;
+  --wt-underline: #d4d4d4;
+  --wt-heading: #6b8ceb;
+
+  --wt-code-bg: #2d2d2d;
+  --wt-code-fg: #f48fb1;
+  --wt-highlight-bg: rgba(255, 213, 79, 0.25);
+  --wt-highlight-fg: #ffd54f;
+  --wt-comment: #6a9955;
+}
+
+/* ============================================================================
+   TiddlyWiki Syntax Classes
+   ============================================================================ */
+
+/* --- Headings --- */
+.cm-tw-heading1 {
+  color: var(--wt-heading);
+  font-weight: 700;
+  font-size: 1.5em;
+  line-height: 1.3;
+}
+
+.cm-tw-heading2 {
+  color: var(--wt-heading);
+  font-weight: 600;
+  font-size: 1.35em;
+  line-height: 1.3;
+}
+
+.cm-tw-heading3 {
+  color: var(--wt-heading);
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+.cm-tw-heading4 {
+  color: var(--wt-heading);
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.cm-tw-heading5 {
+  color: var(--wt-heading);
+  font-weight: 600;
+  font-size: 1.05em;
+}
+
+.cm-tw-heading6 {
+  color: var(--wt-heading);
+  font-weight: 600;
+}
+
+.cm-tw-tableheader {
+  color: var(--wt-heading);
+  font-weight: 600;
+}
+
+/* --- Text Formatting ---
+   Minimal color changes - let the formatting speak for itself */
+
+.cm-tw-bold {
+  color: var(--wt-bold);
+  font-weight: 700;
+}
+
+.cm-tw-italic {
+  color: var(--wt-italic);
+  font-style: italic;
+}
+
+.cm-tw-underline {
+  color: var(--wt-underline);
+  text-decoration: underline;
+  text-decoration-color: var(--wt-fg-muted);
+  text-underline-offset: 2px;
+}
+
+.cm-tw-strikethrough {
+  color: var(--wt-strike);
+  text-decoration: line-through;
+}
+
+/* Ensure strikethrough applies to nested/adjacent elements */
+.cm-tw-strikethrough .cm-tw-url,
+.cm-tw-strikethrough .cm-tw-wikilink,
+.cm-tw-strikethrough + .cm-tw-url,
+.cm-tw-strikethrough ~ .cm-tw-url {
+  text-decoration: line-through underline;
+  text-decoration-style: solid dotted;
+}
+
+.cm-tw-strikethrough .cm-tw-underline,
+.cm-tw-strikethrough + .cm-tw-underline {
+  text-decoration: line-through underline;
+}
+
+.cm-tw-superscript {
+  color: var(--wt-highlight-fg);
+  background-color: var(--wt-highlight-bg);
+  border-radius: 2px;
+  padding: 0 3px;
+}
+
+/* --- Code --- */
+.cm-tw-code {
+  color: var(--wt-code-fg);
+  background-color: var(--wt-code-bg);
+  border: 1px solid var(--wt-border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.cm-tw-codeinfo {
+  color: var(--wt-purple);
+  font-style: italic;
+}
+
+/* --- Links & References --- */
+.cm-tw-wikilink {
+  color: var(--wt-blue);
+}
+
+.cm-tw-url {
+  color: var(--wt-cyan);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+}
+
+.cm-tw-linktext {
+  color: var(--wt-blue);
+}
+
+/* --- Transclusions & Dynamic Content --- */
+.cm-tw-transclusion {
+  color: var(--wt-violet);
+}
+
+.cm-tw-field-ref {
+  color: var(--wt-violet);
+  font-style: italic;
+}
+
+.cm-tw-filter {
+  color: var(--wt-cyan);
+}
+
+.cm-tw-regexp {
+  color: var(--wt-rose);
+}
+
+.cm-tw-macrocall {
+  color: var(--wt-orange);
+  font-weight: 500;
+}
+
+.cm-tw-variable {
+  color: var(--wt-orange);
+}
+
+/* --- Widgets & HTML ---
+   TiddlyWiki's signature teal color */
+
+.cm-tw-widget {
+  color: var(--wt-teal);
+  font-weight: 500;
+}
+
+.cm-tw-attribute {
+  color: var(--wt-amber);
+}
+
+.cm-tw-attribute-value {
+  color: var(--wt-cyan);
+}
+
+/* --- Lists & Block Elements --- */
+.cm-tw-list {
+  color: var(--wt-fg-muted);
+}
+
+.cm-tw-blockquote {
+  color: var(--wt-fg-muted);
+  font-style: italic;
+}
+
+.cm-tw-hr {
+  color: var(--wt-border);
+}
+
+/* --- Pragmas & Definitions --- */
+.cm-tw-pragma {
+  color: var(--wt-purple);
+}
+
+.cm-tw-pragma-keyword {
+  color: var(--wt-purple);
+  font-weight: 600;
+}
+
+.cm-tw-conditional {
+  color: var(--wt-rose);
+  font-weight: 600;
+}
+
+/* --- Special Characters & Marks --- */
+.cm-tw-escape {
+  color: var(--wt-slate);
+}
+
+.cm-tw-entity {
+  color: var(--wt-cyan);
+}
+
+.cm-tw-mark {
+  color: var(--wt-fg-muted);
+}
+
+.cm-tw-comment {
+  color: var(--wt-comment);
+  font-style: italic;
+}
+
+/* ============================================================================
+   CodeMirror Token Classes (for nested languages)
+   ============================================================================ */
+
+/* Keywords */
+.tok-keyword { color: var(--wt-rose); }
+.tok-controlKeyword { color: var(--wt-rose); font-weight: 600; }
+.tok-definitionKeyword { color: var(--wt-purple); }
+.tok-operatorKeyword { color: var(--wt-rose); }
+.tok-modifier { color: var(--wt-purple); }
+
+/* Literals */
+.tok-string,
+.tok-string2 { color: var(--wt-green); }
+.tok-character { color: var(--wt-green); }
+.tok-number,
+.tok-integer,
+.tok-float { color: var(--wt-violet); }
+.tok-bool { color: var(--wt-orange); }
+.tok-null { color: var(--wt-fg-muted); }
+.tok-atom { color: var(--wt-violet); }
+.tok-regexp { color: var(--wt-rose); }
+.tok-escape { color: var(--wt-orange); }
+
+/* Names & Identifiers */
+.tok-variableName { color: var(--wt-blue); }
+.tok-variableName.tok-definition { color: var(--wt-blue); font-weight: 600; }
+.tok-variableName.tok-special { color: var(--wt-orange); }
+.tok-propertyName { color: var(--wt-cyan); }
+.tok-typeName,
+.tok-namespace,
+.tok-className { color: var(--wt-amber); }
+.tok-macroName { color: var(--wt-orange); }
+.tok-labelName { color: var(--wt-purple); }
+.tok-name { color: var(--wt-fg); }
+
+/* Functions */
+.tok-function,
+.tok-function.tok-variableName { color: var(--wt-blue); }
+
+/* Comments */
+.tok-comment,
+.tok-lineComment,
+.tok-blockComment,
+.tok-docComment {
+  color: var(--wt-comment);
+  font-style: italic;
+}
+
+/* Operators & Punctuation */
+.tok-operator,
+.tok-arithmeticOperator,
+.tok-logicOperator,
+.tok-bitwiseOperator,
+.tok-compareOperator,
+.tok-updateOperator,
+.tok-definitionOperator { color: var(--wt-fg-muted); }
+
+.tok-punctuation,
+.tok-separator,
+.tok-bracket,
+.tok-angleBracket,
+.tok-squareBracket,
+.tok-paren,
+.tok-brace { color: var(--wt-fg-muted); }
+
+/* HTML/XML */
+.tok-tagName { color: var(--wt-teal); }
+.tok-attributeName { color: var(--wt-amber); }
+.tok-attributeValue { color: var(--wt-cyan); }
+
+/* CSS */
+.tok-selector { color: var(--wt-teal); }
+.tok-unit { color: var(--wt-violet); }
+.tok-color { color: var(--wt-orange); }
+
+/* URLs & Links */
+.tok-url {
+  color: var(--wt-cyan);
+  text-decoration: underline;
+}
+.tok-link { color: var(--wt-blue); }
+
+/* Markdown / Content */
+.tok-heading { color: var(--wt-heading); font-weight: 600; }
+.tok-heading1 { color: var(--wt-heading); font-weight: 700; font-size: 1.5em; }
+.tok-heading2 { color: var(--wt-heading); font-weight: 600; font-size: 1.35em; }
+.tok-heading3 { color: var(--wt-heading); font-weight: 600; font-size: 1.2em; }
+.tok-emphasis { font-style: italic; }
+.tok-strong { font-weight: 700; }
+.tok-strikethrough { text-decoration: line-through; color: var(--wt-strike); }
+.tok-monospace { font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace; }
+.tok-quote { color: var(--wt-fg-muted); font-style: italic; }
+.tok-list { color: var(--wt-fg-muted); }
+
+/* Meta & Special */
+.tok-meta,
+.tok-annotation,
+.tok-processingInstruction,
+.tok-documentMeta { color: var(--wt-purple); }
+.tok-contentSeparator { color: var(--wt-fg-faint); }
+
+/* Errors & Changes */
+.tok-invalid { color: var(--wt-rose); text-decoration: wavy underline; }
+.tok-inserted { color: var(--wt-teal); }
+.tok-deleted { color: var(--wt-rose); }
+.tok-changed { color: var(--wt-amber); }
+
+/* Special tokens */
+.tok-self { color: var(--wt-violet); }
+.tok-constant { color: var(--wt-violet); }
+
+/* ============================================================================
+   Editor Chrome
+   ============================================================================ */
+
+.cm-editor {
+  color: var(--wt-fg);
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cm-editor .cm-scroller {
+  font-family: inherit;
+}
+
+.cm-editor .cm-content {
+  padding: 10px 0;
+  caret-color: transparent;
+}
+
+.cm-editor .cm-line {
+  padding: 0 10px;
+}
+
+.cm-editor .cm-activeLine {
+  background-color: var(--wt-line-highlight);
+}
+
+.cm-editor .cm-activeLineGutter {
+  background-color: var(--wt-line-highlight);
+}
+
+.cm-editor .cm-selectionBackground {
+  background-color: var(--wt-selection) !important;
+}
+
+.cm-editor.cm-focused .cm-selectionBackground {
+  background-color: var(--wt-selection) !important;
+}
+
+.cm-editor .cm-cursor {
+  border-left-color: var(--wt-blue);
+  border-left-width: 2px;
+}
+
+/* Gutters */
+.cm-editor .cm-gutters {
+  background-color: var(--wt-bg-subtle);
+  border-right: 1px solid var(--wt-border);
+  color: var(--wt-fg-faint);
+}
+
+.cm-editor .cm-lineNumbers .cm-gutterElement {
+  padding: 0 12px 0 16px;
+  min-width: 40px;
+}
+
+/* Matching Brackets */
+.cm-editor .cm-matchingBracket {
+  background-color: rgba(87, 120, 216, 0.2);
+  outline: 1px solid var(--wt-blue);
+  border-radius: 2px;
+}
+
+.cm-editor .cm-nonmatchingBracket {
+  background-color: rgba(201, 76, 100, 0.2);
+  outline: 1px solid var(--wt-rose);
+  border-radius: 2px;
+}
+
+/* ============================================================================
+   Autocomplete
+   ============================================================================ */
+
+.cm-tooltip.cm-tooltip-autocomplete {
+  background-color: var(--wt-bg);
+  border: 1px solid var(--wt-border);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.cm-tooltip.cm-tooltip-autocomplete > ul {
+  font-family: inherit;
+  max-height: 280px;
+}
+
+.cm-tooltip.cm-tooltip-autocomplete > ul > li {
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  color: var(--wt-fg);
+}
+
+.cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: var(--wt-blue);
+  color: #ffffff;
+}
+
+.cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.cm-completionIcon {
+  margin-right: 8px;
+  opacity: 0.6;
+}
+
+.cm-completionLabel {
+  flex: 1;
+}
+
+.cm-completionMatchedText {
+  color: var(--wt-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionMatchedText {
+  color: #ffffff;
+}
+
+.cm-completionDetail {
+  color: var(--wt-fg-muted);
+  font-size: 0.85em;
+  margin-left: 12px;
+}
+
+/* ============================================================================
+   Fold Markers
+   ============================================================================ */
+
+.cm-editor .cm-foldPlaceholder {
+  background-color: var(--wt-bg-subtle);
+  border: none;
+  color: var(--wt-fg-muted);
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+/* ============================================================================
+   Search & Panels
+   ============================================================================ */
+
+.cm-panels {
+  background-color: var(--wt-bg-subtle);
+  border-bottom: 1px solid var(--wt-border);
+}
+
+.cm-searchMatch {
+  background-color: rgba(255, 255, 0, 0.4);
+  border-radius: 2px;
+}
+
+.cm-searchMatch.cm-searchMatch-selected {
+  background-color: rgba(255, 228, 118, 0.7);
+  outline: 1px solid #b99e2f;
+}
+
+/* ============================================================================
+   Tooltips
+   ============================================================================ */
+
+.cm-tooltip {
+  background-color: var(--wt-bg);
+  border: 1px solid var(--wt-border);
+  border-radius: 6px;
+  color: var(--wt-fg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.cm-tooltip-hover {
+  padding: 6px 10px;
+}

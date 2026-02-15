@@ -1,0 +1,87 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/lint/readme
+
+! Lint Plugin
+
+This plugin highlights potential issues in your TiddlyWiki content as you type.
+
+!! How It Works
+
+* ''Gutter Markers'' - Icons appear in the left gutter next to lines with issues
+* ''Underlines'' - Squiggly underlines highlight the problematic text
+* ''Tooltips'' - Hover over underlined text or gutter markers to see the message
+* ''Keyboard Navigation'' - Press `F8` to jump to next issue, `Shift+F8` for previous
+* ''Quick Fixes'' - Click on an issue to see available automatic fixes
+
+!! Checks Performed
+
+!!! Missing References (warning)
+
+* ''WikiLinks'' - `[[Missing Tiddler]]` to non-existent tiddlers
+* ''CamelCase Links'' - When CamelCase linking is enabled
+* ''Transclusions'' - `{{Missing Tiddler}}` to non-existent tiddlers
+
+!!! Undefined Definitions (info)
+
+* ''Macros'' - `<<unknownMacro>>` calls that may not be defined
+* ''Widgets'' - `<$unknownWidget>` not found in registered widgets
+
+!!! Definition Issues
+
+* ''Duplicate Definitions'' (warning) - Same name defined multiple times in one tiddler
+* ''Unused Definitions'' (hint) - Macros/procedures/functions defined but never used locally
+
+!!! Structural Issues
+
+* ''Unclosed Widgets'' (warning) - `<$button>` without `</$button>`
+* ''Unclosed Pragmas'' (warning) - `\define` without `\end` (multi-line only; single-line like `\define foo() bar` is valid)
+* ''Ambiguous \\end'' (warning) - `\end` without name when multiple pragmas are open (e.g., nested `\define` inside `\procedure`)
+* ''Misplaced Pragmas'' (error) - `\define` appearing after content instead of at top
+* ''Unclosed Conditionals'' (error) - `<%if` without `<%endif`
+* ''Unclosed Code Blocks'' (error) - ` ``` ` without closing
+
+!!! Filter Syntax (error/warning)
+
+* ''Unbalanced Brackets'' - Unclosed `[`, `{`, or `<` in filters
+* ''Empty Operators'' - Empty filter operators `[]`
+
+!! Quick Fixes
+
+Many issues include automatic fix actions. Click on the issue marker to see available fixes:
+
+* ''Add closing tag'' - Adds missing `</$widget>` or `\end`
+* ''Make self-closing'' - Converts `<$widget>` to `<$widget/>`
+* ''Remove empty operator'' - Removes empty `[]` from filters
+* ''Move to top of...'' - Moves misplaced pragma to the top of the tiddler (or containing pragma when nested)
+* ''Add <%endif%>'' - Closes unclosed conditional blocks
+* ''Add closing ``` '' - Closes unclosed code blocks
+* ''Remove definition'' - Removes unused macro/procedure definitions
+
+!! Severity Levels
+
+* ''Error'' (red) - Syntax errors that will likely cause problems
+* ''Warning'' (yellow) - Issues that may cause unexpected behavior
+* ''Info'' (blue) - Suggestions and possibly undefined references
+* ''Hint'' (grey) - Style suggestions like unused definitions
+
+!! Configuration
+
+Each lint rule can be enabled/disabled individually:
+
+|!Config Tiddler |!Description |!Default |
+|`$:/config/codemirror-6/lint/missingLinks` |Check for missing tiddlers |yes |
+|`$:/config/codemirror-6/lint/undefinedMacros` |Check for undefined macros |yes |
+|`$:/config/codemirror-6/lint/unknownWidgets` |Check for unknown widgets |yes |
+|`$:/config/codemirror-6/lint/filterSyntax` |Check filter bracket balance |yes |
+|`$:/config/codemirror-6/lint/unclosedWidgets` |Check for unclosed widgets |yes |
+|`$:/config/codemirror-6/lint/unclosedPragmas` |Check for unclosed pragmas |yes |
+|`$:/config/codemirror-6/lint/misplacedPragmas` |Check for pragmas after content |yes |
+|`$:/config/codemirror-6/lint/unclosedConditionals` |Check for unclosed <%if blocks |yes |
+|`$:/config/codemirror-6/lint/unclosedCodeBlocks` |Check for unclosed code blocks |yes |
+|`$:/config/codemirror-6/lint/duplicateDefinitions` |Check for duplicate definitions |yes |
+|`$:/config/codemirror-6/lint/unusedDefinitions` |Check for unused definitions |no |
+
+Set any of these to `no` to disable that specific check.
+
+!! Global Enable/Disable
+
+Set `$:/config/codemirror-6/lint/enabled` to `no` to disable all linting.

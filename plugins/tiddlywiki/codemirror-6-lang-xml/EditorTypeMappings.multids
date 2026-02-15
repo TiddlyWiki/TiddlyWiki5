@@ -1,0 +1,5 @@
+title: $:/config/EditorTypeMappings/
+
+text/xml: codemirror-6
+application/xml: codemirror-6
+image/svg+xml: codemirror-6

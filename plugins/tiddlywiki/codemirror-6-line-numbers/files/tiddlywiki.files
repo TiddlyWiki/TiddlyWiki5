@@ -1,0 +1,12 @@
+{
+    "tiddlers": [
+        {
+            "file": "line-numbers.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/line-numbers/line-numbers.js",
+                "module-type": "codemirror6-plugin"
+            }
+        }
+    ]
+}

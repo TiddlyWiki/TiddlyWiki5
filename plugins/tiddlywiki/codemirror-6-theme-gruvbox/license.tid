@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-gruvbox/license
+
+\define theme-name() Gruvbox
+\define theme-url() https://github.com/morhetz/gruvbox
+\define theme-author() Pavel Pertsev (morhetz)
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

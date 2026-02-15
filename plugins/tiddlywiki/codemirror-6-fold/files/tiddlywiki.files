@@ -1,0 +1,12 @@
+{
+    "tiddlers": [
+        {
+            "file": "fold.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/fold/fold.js",
+                "module-type": "codemirror6-plugin"
+            }
+        }
+    ]
+}

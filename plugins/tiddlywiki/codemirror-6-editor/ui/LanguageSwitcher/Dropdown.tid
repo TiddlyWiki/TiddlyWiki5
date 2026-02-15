@@ -1,0 +1,34 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/LanguageSwitcher/Dropdown
+
+\define language-option()
+<$button class="tc-btn-invisible cm6-language-option">
+<$action-sendmessage $message="tm-cm6-set-language" type={{{ [<lang>get[type]] }}}/>
+<$action-deletetiddler $tiddler=<<dropdown-state>>/>
+<$text text={{{ [<lang>get[name]] }}}/>
+</$button>
+\end
+
+\define render-category(category)
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/CodeMirror/Language]category[$category$]] :filter[get[plugin]is[blank]] [all[tiddlers+shadows]tag[$:/tags/CodeMirror/Language]category[$category$]] :filter[get[plugin]is[shadow]] [all[tiddlers+shadows]tag[$:/tags/CodeMirror/Language]category[$category$]] :filter[get[plugin]is[tiddler]] +[unique[]nsort[sort-order]sort[name]]" variable="lang">
+<<language-option>>
+</$list>
+\end
+
+\define render-section(category)
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/CodeMirror/Language]category[$category$]] :filter[get[plugin]is[blank]] [all[tiddlers+shadows]tag[$:/tags/CodeMirror/Language]category[$category$]] :filter[get[plugin]is[shadow]] [all[tiddlers+shadows]tag[$:/tags/CodeMirror/Language]category[$category$]] :filter[get[plugin]is[tiddler]] +[limit[1]]" variable="ignore">
+<div class="cm6-language-section">
+<div class="cm6-language-section-title">$category$</div>
+<<render-category "$category$">>
+</div>
+</$list>
+\end
+
+<div class="cm6-language-dropdown">
+
+<<render-section "Wiki">>
+<<render-section "Web">>
+<<render-section "Data">>
+<<render-section "Programming">>
+<<render-section "Other">>
+
+</div>

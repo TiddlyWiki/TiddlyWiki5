@@ -1,0 +1,26 @@
+title: $:/plugins/tiddlywiki/codemirror-6/plugins/line-numbers/readme
+
+! Line Numbers for CodeMirror 6
+
+Displays line numbers in the editor gutter and highlights the active line.
+
+!! Features
+
+* ''Line numbers'' — shows line numbers in the left gutter
+* ''Active line highlighting'' — highlights the current line
+* ''Active gutter highlighting'' — highlights the line number of the current line
+* ''Configurable'' — enable/disable each feature independently
+
+!! Configuration
+
+Both features are enabled by default and can be configured via:
+
+* `$:/config/codemirror-6/editor/lineNumbers` — show/hide line numbers
+* `$:/config/codemirror-6/editor/highlightActiveLine` — enable/disable active line highlighting
+
+!! API
+
+The plugin adds the following methods to the engine:
+
+* `setLineNumbers(show)` — programmatically show/hide line numbers
+* `setHighlightActiveLine(show)` — programmatically enable/disable active line highlighting
