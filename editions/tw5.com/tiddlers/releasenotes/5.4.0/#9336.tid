@@ -1,0 +1,38 @@
+title: $:/changenotes/5.4.0/#9336
+description: Formalize data tiddlers and add preloadHooks array
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9336
+github-contributors: Arlen22
+
+This formalizes the idea of a data tiddler inside code. Currently x-tiddler-dictionary and json are supported. Other wire formats can be supported by defining a Javascript module with `module-type: datatiddlerserializer`  which exports the interface shown below.
+
+Due to the nature of TiddlyWiki code, async code is not supported. The parsed or stringified result must be returned sync'ly. 
+
+By definition and current practice, not all data tiddler types can serialize all javascript types. However, a type must be able to parse what it stringifies and stringify what it parses. Repeated turns must not lose additional information beyond the first stringify or parse. 
+
+TiddlyWiki does not expect data tiddler types to be interchangable. It is assumed that the user or designer will determine the preferred type to use. Certain types may be interchangable but that is considered external to serialization. 
+
+```ts
+interface DataTiddlerSerializer {
+    /** The name of the data type. */
+    name: string;
+    /** Parse a string into a Javascript value. */
+    parse: (text: string) => any;
+    /** Stringify a Javascript value. */
+    stringify: (data: any) => string;
+}
+```
+
+This PR also adds a preloadHooks array to bootprefix.js. This allows third party code to add hooks prior boot.js in the browser, the same way preloadTiddlers allows this. Hooks have also been added to the boot sequence. The array items have the following type.
+
+```ts
+interface PreloadHooksItem {
+    /** the hook to listen for */
+    name: string;
+    /** the arguments the hook is called with */
+    callback: (...args: any[]) => void;
+}
+```

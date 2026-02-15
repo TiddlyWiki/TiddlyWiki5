@@ -20,6 +20,13 @@ var BLOCKED_PLUGINS = {
 	}
 };
 
+/**
+ * Upgrade the specified tiddlers to their latest versions
+ * @param {import("tiddlywiki").Wiki} wiki The wiki to which the tiddler is being imported
+ * @param {string[]} titles The titles of the tiddlers to be imported
+ * @param {Record<string, Record<string, string>>} tiddlers The tiddlers to be imported
+ * @returns {Object} An object containing messages about the upgrade process
+ */
 exports.upgrade = function(wiki,titles,tiddlers) {
 	var self = this,
 		messages = {},
@@ -36,9 +43,11 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 	$tw.utils.each(titles,function(title) {
 		var incomingTiddler = tiddlers[title];
 		// Check if we're dealing with a plugin
-		if(incomingTiddler && incomingTiddler["plugin-type"]) {
+		if(incomingTiddler && incomingTiddler["plugin-type"] && $tw.utils.isValidDataTiddlerType(incomingTiddler.type)) {
 			// Check whether the plugin contains JS modules
-			var requiresReload = wiki.doesPluginInfoRequireReload($tw.utils.parseJSONSafe(incomingTiddler.text)) ? (wiki.getTiddlerText("$:/language/ControlPanel/Plugins/PluginWillRequireReload") + " ") : "";
+			var requiresReload = wiki.doesPluginInfoRequireReload($tw.utils.parseDataTiddler(incomingTiddler.type, incomingTiddler.text))
+				? (wiki.getTiddlerText("$:/language/ControlPanel/Plugins/PluginWillRequireReload") + " ")
+				: "";
 			messages[title] = requiresReload;
 			if(incomingTiddler.version) {
 				// Upgrade the incoming plugin if it is in the upgrade library
