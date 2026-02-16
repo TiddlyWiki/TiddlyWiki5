@@ -333,19 +333,24 @@ Widget.prototype.makeFakeWidgetWithVariables = function(vars = {}) {
 	const self = this;
 
 	const fakeWidget = {
-		getVariableInfo(name, opts = {}) {
-			if (name in vars) {
+		getVariableInfo(name,opts = {}) {
+			if(name in vars) {
 				const value = vars[name];
 				return Array.isArray(value)
 					? { text: value[0], resultList: value }
 					: { text: value, resultList: [value] };
 			}
+			// Ensure opts is always an object
+			if(typeof opts !== "object" || opts === null) {
+				opts = {};
+			}
+
 			opts.variables = Object.assign({}, vars, opts.variables || {});
 			return self.getVariableInfo(name, opts);
 		},
 
 
-		getVariable(name, opts) {
+		getVariable(name,opts) {
 			return this.getVariableInfo(name, opts).text;
 		},
 
