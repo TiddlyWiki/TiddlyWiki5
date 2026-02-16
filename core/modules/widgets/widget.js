@@ -340,7 +340,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(vars = {}) {
 					? { text: value[0], resultList: value }
 					: { text: value, resultList: [value] };
 			}
-			opts.variables = { ...vars, ...(opts.variables || {}) };
+			opts.variables = Object.assign({}, vars, opts.variables || {});
 			return self.getVariableInfo(name, opts);
 		},
 
