@@ -377,6 +377,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 Compute the current values of the attributes of the widget. Returns a hashmap of the names of the attributes that have changed.
 Options include:
 filterFn: only include attributes where filterFn(name) returns true
+asList: boolean if true returns results as an array instead of a single value
 */
 Widget.prototype.computeAttributes = function(options) {
 	options = options || {};
@@ -389,7 +390,7 @@ Widget.prototype.computeAttributes = function(options) {
 				return;
 			}
 		}
-		var value = self.computeAttribute(attribute),
+		var value = self.computeAttribute(attribute,options),
 			multiValue = null;
 		if($tw.utils.isArray(value)) {
 			multiValue = value;

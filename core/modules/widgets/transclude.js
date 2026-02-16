@@ -25,7 +25,7 @@ Render this widget into the DOM
 */
 TranscludeWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
-	this.computeAttributes();
+	this.computeAttributes({asList: true});
 	this.execute();
 	try {
 		this.renderChildren(parent,nextSibling);
