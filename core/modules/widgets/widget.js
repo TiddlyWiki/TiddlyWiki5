@@ -201,34 +201,6 @@ Widget.prototype.getVariable = function(name,options) {
 };
 
 /*
-Returns an array of all defined variables
-*/
-Widget.prototype.enumerateVariables = function(options) {
-	const names = new Set();
-
-	if(options && options.allowSelfAssigned) {
-		// Only self variables
-		if(this.variables) {
-			for(const name in this.variables) {
-				names.add(name);
-			}
-		}
-	} else if(this.parentWidget) {
-		const parent = this.parentWidget;
-		if(parent.variables) {
-			for(const name in parent.variables) {
-				names.add(name);
-			}
-		} else if(typeof parent.enumerateVariables === "function") {
-			// Fake widget: delegate exactly once
-			parent.enumerateVariables(options).forEach(n => names.add(n));
-		}
-	}
-
-	return [...names].sort();
-};
-
-/*
 Maps actual parameters onto formal parameters, returning an array of {name:,value:} objects
 formalParams - Array of {name:,default:} (default value is optional)
 actualParams - Array of string values or {name:,value:,multiValue} (name and multiValue is optional)
@@ -357,58 +329,42 @@ Widget.prototype.getStateQualifier = function(name) {
 /*
 Make a fake widget with specified variables, suitable for variable lookup in filters. Each variable can be a string or an array of strings
 */
-Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
-	var self = this,
-		variables = variables || {};
-	return {
-		getVariable: function(name,opts) {
-			if($tw.utils.hop(variables,name)) {
-				var value = variables[name];
-				if($tw.utils.isArray(value)) {
-					return value[0];
-				} else {
-					return value;
-				}
-			} else {
-				opts = opts || {};
-				opts.variables = $tw.utils.extend({},variables,opts.variables);
-				return self.getVariable(name,opts);
-			};
-		},
-		getVariableInfo: function(name,opts) {
-			if($tw.utils.hop(variables,name)) {
-				var value = variables[name];
-				if($tw.utils.isArray(value)) {
-					return {
-						text: value[0],
-						resultList: value
-					};
-				} else {
-					return {
-						text: value,
-						resultList: [value]
-					};
-				}
-			} else {
-				opts = opts || {};
-				opts.variables = $tw.utils.extend({},variables,opts.variables);
-				return self.getVariableInfo(name,opts);
-			};
+Widget.prototype.makeFakeWidgetWithVariables = function(vars = {}) {
+	const self = this;
+
+	const fakeWidget = {
+		getVariableInfo(name, opts = {}) {
+			if (name in vars) {
+				const value = vars[name];
+				return Array.isArray(value)
+					? { text: value[0], resultList: value }
+					: { text: value, resultList: [value] };
+			}
+			opts.variables = { ...vars, ...(opts.variables || {}) };
+			return self.getVariableInfo(name, opts);
 		},
 
-		enumerateVariables: function(opts) {
-			const names = new Set([
-				...Object.keys(variables),
-				...(typeof self.enumerateVariables === "function" ? self.enumerateVariables(opts) : [])
-			]);
 
-			return [...names].sort();
+		getVariable(name, opts) {
+			return this.getVariableInfo(name, opts).text;
 		},
 
-		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables,
 		resolveVariableParameters: self.resolveVariableParameters,
-		wiki: self.wiki
+		wiki: self.wiki,
+		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables,
+
+		get variables() {
+			// Merge parent vars via prototype-like delegation
+			return Object.create(self.variables || {}, 
+				Object.keys(vars).reduce((acc, key) => {
+					acc[key] = { value: vars[key], enumerable: true, configurable: true };
+					return acc;
+				}, {})
+			);
+		}
 	};
+
+	return fakeWidget;
 };
 
 /*
