@@ -13,6 +13,12 @@ var TEST_WIKI_TIDDLER_FILTER = "[all[tiddlers+shadows]type[text/vnd.tiddlywiki-m
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
+// List any wikitext tests that you want to debug here
+// Code can then check for the value of $tw.debugWikiTextTests to decide whether to trigger the debugger
+var debugTitles = [
+	// "MultiValuedVariables/TranscludeParameterDirectly"
+];
+
 describe("Wiki-based tests", function() {
 
 	// Step through the test tiddlers
@@ -39,6 +45,10 @@ describe("Wiki-based tests", function() {
 				throw "Missing 'Output' tiddler";
 			}
 			if(wiki.tiddlerExists("ExpectedResult")) {
+				// Set the debug flag if this is one of the tests we're interested in
+				if(debugTitles.indexOf(title) !== -1) {
+					$tw.debugWikiTextTests = true;
+				}
 				// Construct the widget node
 				var text = "{{Output}}\n\n";
 				var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
@@ -51,6 +61,8 @@ describe("Wiki-based tests", function() {
 					widgetNode.invokeActionString(wiki.getTiddlerText("Actions"));
 					refreshWidgetNode(widgetNode,wrapper);
 				}
+				// Clear the debug flag
+				$tw.debugWikiTextTests = false;
 				// Test the rendering
 				expect(wrapper.innerHTML).toBe(wiki.getTiddlerText("ExpectedResult"));
 			}
