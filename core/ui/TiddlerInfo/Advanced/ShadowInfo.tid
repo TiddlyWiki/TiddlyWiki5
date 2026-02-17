@@ -1,36 +1,77 @@
 title: $:/core/ui/TiddlerInfo/Advanced/ShadowInfo
 tags: $:/tags/TiddlerInfo/Advanced
 
-\define lingo-base() $:/language/TiddlerInfo/Advanced/ShadowInfo/
-<$set name="infoTiddler" value=<<currentTiddler>>>
+\function pluginTiddler() [<currentTiddler>shadowsource[]]
 
-''<<lingo Heading>>''
+\function is.overriden()
+	[<currentTiddler>is[shadow]is[tiddler]]
+\end is.overriden
 
-<$list filter="[all[current]!is[shadow]]">
+\function get.destField(subTiddler,field)
+	[<subTiddler>get<field>]
+\end get.destField
 
-<<lingo NotShadow/Hint>>
+\function get.sourceField(subTiddler,field)
+	[<subTiddler>shadowsource[]get[text]jsonget[tiddlers],<subTiddler>,<field>]
+\end get.sourceField
 
-</$list>
+\function get.sourceFields(subTiddler)
+	[<subTiddler>shadowsource[]]
+	:map:flat[<subTiddler>subtiddlerfields{!!title}]
+\end get.sourceFields
 
-<$list filter="[all[current]is[shadow]]">
+\function has.diff(subTiddler,field)
+	[get.destField<subTiddler>,<field>else[]]
+	:filter[get.sourceField<subTiddler>,<field>else[]!match{!!title}]
+\end has.diff
 
-<<lingo Shadow/Hint>>
+\function diff.fields(subTiddler)
+	[get.sourceFields<subTiddler>]
+	[<subTiddler>fields:exclude[created creator modified modifier]]
+	:filter[has.diff<subTiddler>,{!!title}]
+\end diff.fields
 
-<$list filter="[all[current]shadowsource[]]">
+<$tiddler tiddler="$:/SiteTitle">
 
-<$set name="pluginTiddler" value=<<currentTiddler>>>
+<$let 
+	lingo-base="$:/language/TiddlerInfo/Advanced/ShadowInfo/"
+	infoTiddler=<<currentTiddler>>
+>
 
-<<lingo Shadow/Source>>
-</$set>
+	''<<lingo Heading>>''
 
-</$list>
+	<%if [function[pluginTiddler]] %>
 
-<$list filter="[all[current]is[shadow]is[tiddler]]">
+		<<lingo Shadow/Hint>>
 
-<<lingo OverriddenShadow/Hint>>
+		<<lingo Shadow/Source>>
 
-</$list>
+	<%if [function[is.overriden]] %>
 
+		<<lingo OverriddenShadow/Hint>>
 
-</$list>
-</$set>
+		<table class="tc-diff-tiddlers">
+			<tbody>
+				<$list filter="[diff.fields<infoTiddler>]" variable=field>
+					<tr>
+						<th><$text text=<<field>> /></th>
+						<td>
+							<$diff-text
+								source={{{ [get.sourceField<infoTiddler>,<field>] }}}
+								dest={{{ [get.destField<infoTiddler>,<field>] }}}
+							/>
+						</td>
+					</tr>
+				</$list>
+			</tbody>
+		</table>
+
+	<%endif%>
+
+	<%else%>
+
+        <<lingo NotShadow/Hint>>
+
+	<%endif%>
+
+</$let>
