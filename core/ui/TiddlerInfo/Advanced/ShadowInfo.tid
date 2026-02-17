@@ -31,8 +31,6 @@ tags: $:/tags/TiddlerInfo/Advanced
 	:filter[has.diff<subTiddler>,{!!title}]
 \end diff.fields
 
-<$tiddler tiddler="$:/SiteTitle">
-
 <$let 
 	lingo-base="$:/language/TiddlerInfo/Advanced/ShadowInfo/"
 	infoTiddler=<<currentTiddler>>
