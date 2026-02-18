@@ -1,11 +1,42 @@
 caption: tm-scroll
 created: 20160425000906330
-modified: 20201014152456174
+modified: 20250809084836027
 tags: Messages
 title: WidgetMessage: tm-scroll
 type: text/vnd.tiddlywiki
 
+\procedure example-content()
+\procedure openingBracket() [
+\procedure closingBracket() ]
+\procedure quote() "
+\function tf.navigate-to-css-escaped() [<navigateTo>escapecss[]]
+\procedure linkcatcher-actions()
+<$action-sendmessage $message="tm-scroll" selector={{{ [[.tc-scrollable-container-example-scroll-container ]addsuffix<openingBracket>addsuffix[data-tiddler-title=]addsuffix<quote>addsuffix<tf.navigate-to-css-escaped>addsuffix<quote>addsuffix<closingBracket>addsuffix[.tc-tiddler-frame]] }}}/>
+\end linkcatcher-actions
+
+<div class="tc-scrollable-container-example" style="height: 75vh; border: 1px solid #ccc; display: flex;">
+<div style="width: 25%; overflow: auto;">
+<$linkcatcher actions=<<linkcatcher-actions>>>
+{{$:/core/ui/SideBar/Recent}}
+</$linkcatcher>
+</div>
+<div class="tc-scrollable-container-example-scroll-container" style="width: 75%; overflow: auto; padding: 1rem;">
+<$list filter="[all[tiddlers]!is[system]!sort[modified]limit{$:/config/RecentLimit}] -[<currentTiddler>]" storyview="classic" template="$:/core/ui/ViewTemplate"/>
+</div>
+</div>
+\end example-content
+
 The `tm-scroll` message causes the surrounding scrollable container to scroll to the specified DOM node into view. The `tm-scroll` is handled in various places in the core itself, but can also be handled by a [[ScrollableWidget]].
+
+The core scroller implementation (`$:/core/modules/utils/dom/scroller.js`) provides intelligent scrolling behavior that:
+
+* Automatically detects the nearest scrollable parent container (elements with `overflow: auto` or `overflow: scroll`)
+* Falls back to window scrolling if no scrollable parent is found
+* Respects CSS `scroll-margin-top` property on target elements for proper spacing
+* Accounts for fixed toolbars with class `tc-adjust-top-of-scroll` to prevent content being hidden
+* Uses smooth animation with configurable duration via the `slowInSlowOut` easing function
+* Supports both window-level and container-level scrolling with proper coordinate calculations
+* Snaps to top/left edges when scrolling within 50 pixels of them for cleaner positioning
 
 |!Name |!Description |
 |target |Target DOM node the scrollable container should scroll to (note that this parameter can only be set via JavaScript code) |
@@ -13,3 +44,16 @@ The `tm-scroll` message causes the surrounding scrollable container to scroll to
 |animationDuration |<<.from-version "5.2.2">> Optional number specifying the animation duration in milliseconds for the scrolling. Defaults to the [[global animation duration|$:/config/AnimationDuration]]. |
 
 <<.tip "Set `animationDuration` to `0` to scroll without animation">>
+
+!! Implementation Details
+
+The scroller uses `requestAnimationFrame` for smooth scrolling performance and provides methods to:
+
+* Check if scrolling is currently in progress via `isScrolling()`
+* Cancel an in-progress scroll animation via `cancelScroll()`
+* Handle both direct element references and CSS selector-based targeting
+
+Here's an example how <<.from-version "5.4.0">> the `tm-scroll` message can be used to scroll any scrollable container<br>
+When clicking any of the links within the left pane you can observe that the container at the right scrolls to the navigated element
+
+<$transclude $variable=".example" n="1" eg=<<example-content>>/>
