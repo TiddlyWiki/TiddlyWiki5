@@ -12,7 +12,6 @@ Serve tiddlers over http
 if($tw.node) {
 	var util = require("util"),
 		fs = require("fs"),
-		url = require("url"),
 		path = require("path"),
 		querystring = require("querystring"),
 		crypto = require("crypto"),
@@ -260,7 +259,23 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.wiki = options.wiki || self.wiki;
 	state.boot = options.boot || self.boot;
 	state.server = self;
-	state.urlInfo = url.parse(request.url);
+	var parsedRequestUrl;
+	try {
+		parsedRequestUrl = new URL(request.url, this.boot.origin || this.protocol + "://" + this.get("host") + ":" + this.get("port"));
+	} catch(err) {
+		if(self.get("debug-level") !== "none") {
+			console.log("Invalid request URL:",request.url,err.message);
+		}
+		response.writeHead(400,"Invalid request URL");
+		response.end();
+		return;
+	}
+	state.urlInfo = {
+		pathname: parsedRequestUrl.pathname,
+		query: parsedRequestUrl.search.slice(1),
+		search: parsedRequestUrl.search,
+		hash: parsedRequestUrl.hash
+	};
 	state.queryParameters = querystring.parse(state.urlInfo.query);
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
 	// Enable CORS
