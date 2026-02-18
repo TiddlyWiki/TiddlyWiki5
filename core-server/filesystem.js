@@ -10,6 +10,7 @@ File system utilities
 "use strict";
 
 var fs = require("fs"),
+	fsp = require("fs/promises"),
 	path = require("path");
 
 /*
@@ -181,21 +182,12 @@ exports.isDirectoryEmpty = function(dirPath) {
 Recursively delete a tree of empty directories
 */
 exports.deleteEmptyDirs = function(dirpath,callback) {
-	var self = this;
-	fs.readdir(dirpath,function(err,files) {
-		if(err) {
-			return callback(err);
-		}
-		if(files.length > 0) {
-			return callback(null);
-		}
-		fs.rmdir(dirpath,function(err) {
-			if(err) {
-				return callback(err);
-			}
-			self.deleteEmptyDirs(path.dirname(dirpath),callback);
-		});
-	});
+	return Promise.resolve().then(async () => {
+		const files = await fsp.readdir(dirpath)//,function(err,files) {
+		if(files.length > 0) return null
+		await fsp.rmdir(dirpath);
+		await exports.deleteEmptyDirs(path.dirname(dirpath),callback);
+	}).then(e => (callback && callback(null, e), e), err => (callback && callback(err), err));
 };
 
 /*
@@ -416,39 +408,25 @@ Save a tiddler to a file described by the fileInfo:
 	hasMetaFile: true if the file also has a companion .meta file
 */
 exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
-	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
-	if(fileInfo.hasMetaFile) {
-		// Save the tiddler as a separate body and meta file
-		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
-		fs.writeFile(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding,function(err) {
-			if(err) {
-				return callback(err);
-			}
-			fs.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8",function(err) {
-				if(err) {
-					return callback(err);
-				}
-				return callback(null,fileInfo);
-			});
-		});
-	} else {
-		// Save the tiddler as a self contained templated file
-		if(fileInfo.type === "application/x-tiddler") {
-			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8",function(err) {
-				if(err) {
-					return callback(err);
-				}
-				return callback(null,fileInfo);
-			});
+	return Promise.resolve().then(async () => {
+		$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
+		if(fileInfo.hasMetaFile) {
+			// Save the tiddler as a separate body and meta file
+			var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
+			await fsp.writeFile(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding);
+			await fsp.writeFile(fileInfo.filepath + ".meta",tiddler.getFieldStringBlock({exclude: ["text","bag"]}),"utf8");
+			return fileInfo;
 		} else {
-			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8",function(err) {
-				if(err) {
-					return callback(err);
-				}
-				return callback(null,fileInfo);
-			});
+			// Save the tiddler as a self contained templated file
+			if(fileInfo.type === "application/x-tiddler") {
+				await fsp.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8");
+				return fileInfo;
+			} else {
+				await fsp.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8");
+				return fileInfo;
+			}
 		}
-	}
+	}).then(e => (callback && callback(null, e), e), err => (callback && callback(err), err));
 };
 
 /*
@@ -479,39 +457,25 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 Delete a file described by the fileInfo if it exits
 */
 exports.deleteTiddlerFile = function(fileInfo,callback) {
-	//Only attempt to delete files that exist on disk
-	if(!fileInfo.filepath || !fs.existsSync(fileInfo.filepath)) {
-		//For some reason, the tiddler is only in memory or we can't modify the file at this path
-		$tw.syncer.displayError("Server deleteTiddlerFile task failed for filepath: "+fileInfo.filepath);
-		return callback(null,fileInfo);
-	}
-	// Delete the file
-	fs.unlink(fileInfo.filepath,function(err) {
-		if(err) {
-			return callback(err);
+	return Promise.resolve().then(async () => {
+		//Only attempt to delete files that exist on disk
+		if(!fileInfo.filepath || !fs.existsSync(fileInfo.filepath)) {
+			//For some reason, the tiddler is only in memory or we can't modify the file at this path
+			$tw.syncer.displayError("Server deleteTiddlerFile task failed for filepath: "+fileInfo.filepath);
+			return fileInfo;
 		}
+		// Delete the file
+		await fsp.unlink(fileInfo.filepath);
 		// Delete the metafile if present
 		if(fileInfo.hasMetaFile && fs.existsSync(fileInfo.filepath + ".meta")) {
-			fs.unlink(fileInfo.filepath + ".meta",function(err) {
-				if(err) {
-					return callback(err);
-				}
-				return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err) {
-					if(err) {
-						return callback(err);
-					}
-					return callback(null,fileInfo);
-				});
-			});
+			await fsp.unlink(fileInfo.filepath + ".meta");
+			await $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath));
+			return fileInfo;
 		} else {
-			return $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),function(err) {
-				if(err) {
-					return callback(err);
-				}
-				return callback(null,fileInfo);
-			});
+			await $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath));
+			return fileInfo;
 		}
-	});
+	}).then(e => (callback && callback(null, e), e), err => (callback && callback(err), err));
 };
 
 /*
@@ -520,23 +484,24 @@ Cleanup old files on disk, by comparing the options values:
 	bootInfo from $tw.boot.files
 */
 exports.cleanupTiddlerFiles = function(options,callback) {
-	var adaptorInfo = options.adaptorInfo || {},
-	bootInfo = options.bootInfo || {},
-	title = options.title || "undefined";
-	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
-		$tw.utils.deleteTiddlerFile(adaptorInfo,function(err) {
+	return Promise.resolve().then(async () => {
+		var adaptorInfo = options.adaptorInfo || {},
+		bootInfo = options.bootInfo || {},
+		title = options.title || "undefined";
+		if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
+			const err = await $tw.utils.deleteTiddlerFile(adaptorInfo).then(() => {}, e => e)
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the previous file on disk, should fail gracefully
 					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: \""+title+"\"",err);
-					return callback(null,bootInfo);
+					return bootInfo;
 				} else {
-					return callback(err);
+					throw err;
 				}
 			}
-			return callback(null,bootInfo);
-		});
-	} else {
-		return callback(null,bootInfo);
-	}
+			return bootInfo;
+		} else {
+			return bootInfo;
+		}
+	}).then(e => (callback && callback(null, e), e), err => (callback && callback(err), err));
 };

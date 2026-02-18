@@ -1,0 +1,16 @@
+title: $:/changenotes/5.4.0/#9502
+description: Make a couple commands promise-based
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9502
+github-contributors: Arlen22
+
+Add an `eachAsync` function which does exactly what the name suggests. It awaits the callback function before calling it with the next item, so it's not `Promise.all(arr.map(...))`.
+
+Convert the following commands to use async/await: version, import, render, save, savetiddler, savetiddlers, saveLibraryTiddlers. 
+
+version includes extra comments explaining the behavior of commands.
+
+convert several filesystem utils which have callbacks to return a promise in addition to calling the callback. 

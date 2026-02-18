@@ -22,12 +22,12 @@ var Command = function(params,commander,callback) {
 	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = async function() {
 	if(this.params.length < 1) {
 		return "Missing filename";
 	}
 	var self = this,
-		fs = require("fs"),
+		fs = require("fs/promises"),
 		path = require("path"),
 		wiki = this.commander.wiki,
 		filter = this.params[0],
@@ -38,12 +38,12 @@ Command.prototype.execute = function() {
 		$tw.utils.deleteDirectory(pathname);
 	}
 	$tw.utils.createDirectory(pathname);
-	$tw.utils.each(tiddlers,function(title) {
+	await $tw.utils.eachAsync(tiddlers,async function(title) {
 		var tiddler = self.commander.wiki.getTiddler(title),
 			type = tiddler.fields.type || "text/vnd.tiddlywiki",
 			contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"},
 			filename = path.resolve(pathname,$tw.utils.encodeURIComponentExtended(title));
-		fs.writeFileSync(filename,tiddler.fields.text || "",contentTypeInfo.encoding);
+		await fs.writeFile(filename,tiddler.fields.text || "",contentTypeInfo.encoding);
 	});
 	return null;
 };

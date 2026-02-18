@@ -24,18 +24,17 @@ exports.info = {
 	synchronous: true
 };
 
-var Command = function(params,commander,callback) {
+var Command = function(params,commander) {
 	this.params = params;
 	this.commander = commander;
-	this.callback = callback;
 };
 
-Command.prototype.execute = function() {
+Command.prototype.execute = async function() {
 	if(this.params.length < 2) {
 		return "Missing filename";
 	}
 	var self = this,
-		fs = require("fs"),
+		fs = require("fs/promises"),
 		path = require("path"),
 		containerTitle = this.params[0],
 		filter = this.params[1],
@@ -59,12 +58,12 @@ Command.prototype.execute = function() {
 	}
 	// Iterate through the plugins
 	var skinnyList = [];
-	$tw.utils.each(filteredPluginList,function(title) {
+	await $tw.utils.eachAsync(filteredPluginList,async function(title) {
 		var tiddler = containerData.tiddlers[title];
 		// Save each JSON file and collect the skinny data
 		var pathname = path.resolve(self.commander.outputPath,basepath + $tw.utils.encodeURIComponentExtended(title) + ".json");
 		$tw.utils.createFileDirectories(pathname);
-		fs.writeFileSync(pathname,JSON.stringify(tiddler),"utf8");
+		await fs.writeFile(pathname,JSON.stringify(tiddler),"utf8");
 		// Collect the skinny list data
 		var pluginTiddlers = $tw.utils.parseJSONSafe(tiddler.text),
 			readmeContent = (pluginTiddlers.tiddlers[title + "/readme"] || {}).text,

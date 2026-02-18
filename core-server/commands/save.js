@@ -20,7 +20,7 @@ Saves individual tiddlers in their raw text or binary format to the specified fi
 		this.callback = callback;
 	};
 	
-	Command.prototype.execute = function() {
+	Command.prototype.execute = async function() {
 		if(this.params.length < 1) {
 			return "Missing filename filter";
 		}
@@ -32,7 +32,7 @@ Saves individual tiddlers in their raw text or binary format to the specified fi
 			tiddlerFilter = this.params[0],
 			filenameFilter = this.params[1] || "[is[tiddler]]",
 			tiddlers = wiki.filterTiddlers(tiddlerFilter);
-		$tw.utils.each(tiddlers,function(title) {
+		await $tw.utils.eachAsync(tiddlers,async function(title) {
 			if(!result) {
 				var tiddler = self.commander.wiki.getTiddler(title);
 				if(tiddler) {
@@ -48,7 +48,7 @@ Saves individual tiddlers in their raw text or binary format to the specified fi
 						console.log("Saving \"" + title + "\" to \"" + fileInfo.filepath + "\"");
 					}
 					try {
-						$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);
+						await $tw.utils.saveTiddlerToFile(tiddler,fileInfo);
 					} catch (err) {
 						result = "Error saving tiddler \"" + title + "\", to file: \"" + fileInfo.filepath + "\"";
 					}
